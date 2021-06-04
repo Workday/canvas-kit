@@ -39,13 +39,7 @@ const formInputs = ['input', 'select', 'textarea'];
 
 // list of modifier keys commonly used with the mouse and
 // can be safely ignored to prevent false keyboard detection
-const ignoreMap = [
-  16, // shift
-  17, // control
-  18, // alt
-  91, // Windows key / left Apple cmd
-  93, // Windows menu / right Apple cmd
-];
+const ignoreKeys = ['Shift', 'Control', 'Alt', 'Meta', 'OS'];
 
 // mapping of events to input types
 export const inputEventMap = {
@@ -269,7 +263,8 @@ export class InputProvider extends React.Component<InputProviderProps> {
     if (this.isBuffering) {
       return;
     }
-    const eventKey = 'which' in event ? event.which : undefined;
+
+    const eventKey = 'key' in event ? event.key : undefined;
     const eventType = event.type as keyof typeof inputEventMap;
     let value = inputEventMap[eventType];
 
@@ -277,7 +272,7 @@ export class InputProvider extends React.Component<InputProviderProps> {
       value = getPointerType(event as React.PointerEvent);
     }
 
-    const ignoreMatch = eventKey ? ignoreMap.indexOf(eventKey) === -1 : undefined;
+    const ignoreMatch = eventKey ? ignoreKeys.indexOf(eventKey) === -1 : undefined;
 
     const shouldUpdate =
       (value === InputType.Keyboard && eventKey && ignoreMatch) ||

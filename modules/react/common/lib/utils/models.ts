@@ -38,10 +38,10 @@ type ToGuardConfig<
 type ToCallbackConfig<
   TState extends Record<string, any>,
   TEvents extends IEvent,
-  TGuardMap extends Record<string, keyof TEvents>
+  TCallbackMap extends Record<string, keyof TEvents>
 > = {
-  [K in keyof TGuardMap]: (event: {
-    data: Parameters<TEvents[TGuardMap[K]]>[0];
+  [K in keyof TCallbackMap]: (event: {
+    data: Parameters<TEvents[TCallbackMap[K]]>[0];
     /**
      * Callbacks are called during the `setState` phase in React. This means the state has not
      * resolved yet. This is a good time to add more `setState` calls which will be added to React's
@@ -156,34 +156,74 @@ export const useEventMap = <
     return keys(eventsRef.current).reduce((result, key) => {
       result[key] = (data => {
         // Invoke the configured guard if there is one
-        const guardFn = keys(eventMapRef.current.guards || {}).find(k => {
-          return (eventMapRef.current.guards || {})[k] === key;
-        });
+        if (!(eventsRef.current[key] as any)._wrapped) {
+          const guardFn = keys(eventMapRef.current.guards || {}).find(k => {
+            return (eventMapRef.current.guards || {})[k] === key;
+          });
 
-        if (
-          guardFn &&
-          configRef.current?.[guardFn] &&
-          //@ts-ignore Typescript doesn't like that the call signatures are different
-          !configRef.current[guardFn]({data, state: stateRef.current})
-        ) {
-          return;
+          if (
+            guardFn &&
+            configRef.current?.[guardFn] &&
+            //@ts-ignore Typescript doesn't like that the call signatures are different
+            !configRef.current[guardFn]({data, state: stateRef.current})
+          ) {
+            return;
+          }
         }
 
         // call the event (setter)
         eventsRef.current[key](data);
 
-        // Invoke the configured callback if there is one
-        const callbackFn = keys(eventMapRef.current.callbacks || {}).find(k => {
-          return (eventMapRef.current.callbacks || {})[k] === key;
-        });
+        if (!(eventsRef.current[key] as any)._wrapped) {
+          // Invoke the configured callback if there is one
+          const callbackFn = keys(eventMapRef.current.callbacks || {}).find(k => {
+            return (eventMapRef.current.callbacks || {})[k] === key;
+          });
 
-        if (callbackFn && configRef.current?.[callbackFn]) {
-          //@ts-ignore Typescript doesn't like that the call signatures are different
-          configRef.current[callbackFn]({data, prevState: stateRef.current});
+          if (callbackFn && configRef.current?.[callbackFn]) {
+            //@ts-ignore Typescript doesn't like that the call signatures are different
+            configRef.current[callbackFn]({data, prevState: stateRef.current});
+          }
         }
       }) as TEvents[keyof TEvents]; // this cast keeps Typescript happy
+
+      // Mark this function has been wrapped so we can detect wrapped events and not call guards and callbacks multiple times
+      (result[key] as any)._wrapped = true;
       return result;
     }, {} as TEvents);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 };
+
+type EventCreator = {[key: string]: {bivarianceHack(...args: any[]): object}['bivarianceHack']};
+type ToEvent<TEvents extends EventCreator> = {
+  [K in keyof TEvents]: (data: ReturnType<TEvents[K]>) => void;
+};
+
+// use this?
+export const createEvents = <TEvents extends EventCreator>(events: TEvents) => <
+  TGuardMap extends Record<string, keyof TEvents>,
+  TCallbackMap extends Record<string, keyof TEvents>
+>(
+  config?: Partial<EventMap<ToEvent<TEvents>, TGuardMap, TCallbackMap>>
+) => {
+  return {events, eventMap: config as EventMap<ToEvent<TEvents>, TGuardMap, TCallbackMap>};
+};
+
+// const disclosureEvents = createEvents({
+//   show(event: Event | React.SyntheticEvent) {
+//     return {event};
+//   },
+// })({
+//   callbacks: {
+//     onShow: 'show',
+//   },
+//   guards: {
+//     shouldShow: 'show',
+//   },
+// });
+
+// useDisclosureModel({
+//   onShow({data, prevState})
+// });
+
+// <Tabs calbacks={ show: () => {}}

@@ -80,7 +80,7 @@ export const SecondaryButton = createComponent('button')({
 });
 
 export const getSecondaryButtonColors = (
-  variant: 'outline' | 'inverse' | undefined,
+  variant: 'inverse' | undefined,
   theme: EmotionCanvasTheme
 ): ButtonColors => {
   const {

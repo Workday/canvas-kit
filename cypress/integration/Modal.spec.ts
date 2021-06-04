@@ -1,9 +1,5 @@
 import * as h from '../helpers';
 
-function getModalTargetButton() {
-  return cy.findByRole('button', {name: 'Delete Item'});
-}
-
 describe('Modal', () => {
   before(() => {
     h.stories.visit();
@@ -21,26 +17,26 @@ describe('Modal', () => {
 
       context('when button is focused', () => {
         beforeEach(() => {
-          getModalTargetButton().focus();
+          cy.findByRole('button', {name: 'Delete Item'}).focus();
         });
 
         it('should be the focused item on the page', () => {
-          getModalTargetButton().should('have.focus');
+          cy.findByRole('button', {name: 'Delete Item'}).should('have.focus');
         });
       });
 
       context('when the target button is clicked', () => {
         beforeEach(() => {
-          getModalTargetButton().click();
+          cy.findByRole('button', {name: 'Delete Item'}).click();
         });
 
         it('should open the modal', () => {
-          cy.findByLabelText('Delete Item').should('be.visible');
+          cy.findByRole('dialog', {name: 'Delete Item'}).should('be.visible');
         });
 
         it('should place the portal as a child of the body element', () => {
           cy.get('body').then($body => {
-            cy.findByLabelText('Delete Item')
+            cy.findByRole('dialog', {name: 'Delete Item'})
               .pipe(h.modal.getOverlay)
               .parent()
               .should($el => {
@@ -50,7 +46,7 @@ describe('Modal', () => {
         });
 
         it('should hide non-modal content from assistive technology', () => {
-          cy.findByLabelText('Delete Item')
+          cy.findByRole('dialog', {name: 'Delete Item'})
             .pipe(h.modal.getOverlay)
             .siblings()
             .should($siblings => {
@@ -66,25 +62,29 @@ describe('Modal', () => {
 
         context('the modal', () => {
           it('should have a the role of dialog', () => {
-            cy.findByLabelText('Delete Item').should('have.attr', 'role', 'dialog');
+            cy.findByRole('dialog', {name: 'Delete Item'}).should('have.attr', 'role', 'dialog');
           });
 
           it('should have an aria-labelledby attribute', () => {
-            cy.findByLabelText('Delete Item').should('have.attr', 'aria-labelledby');
+            cy.findByRole('dialog', {name: 'Delete Item'}).should('have.attr', 'aria-labelledby');
           });
 
           it('should have an aria-modal=true', () => {
-            cy.findByLabelText('Delete Item').should('have.attr', 'aria-modal', 'true');
+            cy.findByRole('dialog', {name: 'Delete Item'}).should(
+              'have.attr',
+              'aria-modal',
+              'true'
+            );
           });
 
           it('should contain the title', () => {
-            cy.findByLabelText('Delete Item')
+            cy.findByRole('dialog', {name: 'Delete Item'})
               .pipe(h.modal.getTitle)
               .should('contain', 'Delete Item');
           });
 
           it('should be labelled by the title element', () => {
-            cy.findByLabelText('Delete Item').should($modal => {
+            cy.findByRole('dialog', {name: 'Delete Item'}).should($modal => {
               const labelId = $modal.attr('aria-labelledby');
               const titleId = h.modal.getTitle($modal).attr('id');
 
@@ -93,8 +93,8 @@ describe('Modal', () => {
           });
 
           it('should transfer focus to the x icon element', () => {
-            cy.findByLabelText('Delete Item')
-              .pipe(h.modal.getCloseButton)
+            cy.findByRole('dialog', {name: 'Delete Item'})
+              .findByRole('button', {name: 'Close'})
               .should('have.focus');
           });
 
@@ -104,8 +104,8 @@ describe('Modal', () => {
               .tab()
               .should('contain', 'Cancel')
               .tab();
-            cy.findByLabelText('Delete Item')
-              .pipe(h.modal.getCloseButton)
+            cy.findByRole('dialog', {name: 'Delete Item'})
+              .findByRole('button', {name: 'Close'})
               .should('have.focus');
           });
         });
@@ -113,27 +113,25 @@ describe('Modal', () => {
         context('when clicking inside the modal', () => {
           beforeEach(() => {
             // click somewhere on the modal where there shouldn't be a close target
-            cy.findByLabelText('Delete Item').click('top');
+            cy.findByRole('dialog', {name: 'Delete Item'}).click('top');
           });
 
           it('should not close the modal', () => {
-            cy.findByLabelText('Delete Item').should('be.visible');
+            cy.findByRole('dialog', {name: 'Delete Item'}).should('be.visible');
           });
         });
 
         context('when the close button is clicked', () => {
           beforeEach(() => {
-            cy.findByLabelText('Delete Item')
-              .pipe(h.modal.getCloseButton)
-              .click();
+            cy.findByRole('button', {name: 'Close'}).click();
           });
 
           it('should close the modal', () => {
-            cy.findByLabelText('Delete Item').should('not.be.visible');
+            cy.findByRole('dialog', {name: 'Delete Item'}).should('not.be.visible');
           });
 
           it('should transfer focus back to the target button', () => {
-            cy.contains('Delete Item').should('have.focus');
+            cy.findByRole('button', {name: 'Delete Item'}).should('have.focus');
           });
         });
 
@@ -145,7 +143,7 @@ describe('Modal', () => {
           });
 
           it('should close the modal', () => {
-            cy.findByLabelText('Delete Item').should('not.be.visible');
+            cy.findByRole('dialog', {name: 'Delete Item'}).should('not.be.visible');
           });
         });
 
@@ -155,7 +153,7 @@ describe('Modal', () => {
           });
 
           it('should close the modal', () => {
-            cy.findByLabelText('Delete Item').should('not.be.visible');
+            cy.findByRole('dialog', {name: 'Delete Item'}).should('not.be.visible');
           });
         });
       });
@@ -164,16 +162,16 @@ describe('Modal', () => {
 
   context(`given the 'With Tooltips' story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Components/Popups/Modal/React', 'With Tooltips');
+      h.stories.load('Testing/React/Popups/Modal', 'With Tooltips');
     });
 
     context('when the modal is open', () => {
       beforeEach(() => {
-        cy.findByText('Delete Item').click();
+        cy.findByText('Open Modal').click();
       });
 
       it('should open the modal', () => {
-        cy.findByRole('dialog', {name: 'Delete Item'}).should('be.visible');
+        cy.findByRole('dialog', {name: 'Open Modal'}).should('be.visible');
       });
 
       context(`when the 'Cancel' button is focused`, () => {
@@ -195,25 +193,25 @@ describe('Modal', () => {
           });
 
           it(`should close the modal`, () => {
-            cy.findByRole('dialog', {name: 'Delete Item'}).should('not.be.visible');
+            cy.findByRole('dialog', {name: 'Open Modal'}).should('not.be.visible');
           });
         });
       });
 
-      context(`when the 'Open Popup to reach Delete button' button is clicked`, () => {
+      context(`when the 'Hidable Popup' button is clicked`, () => {
         beforeEach(() => {
-          cy.findByText('Open Popup to reach Delete button').click();
+          cy.findByText('Hidable Popup').click();
         });
 
-        it(`should open the 'Really Delete' popup`, () => {
-          cy.findByRole('dialog', {name: 'Really Delete'}).should('be.visible');
+        it(`should open the 'Hidable Popup' popup`, () => {
+          cy.findByRole('dialog', {name: 'Hidable Popup'}).should('be.visible');
         });
 
-        context(`when the 'Delete' button is focused`, () => {
+        context(`when the 'OK' button is focused`, () => {
           beforeEach(() => {
-            cy.findByRole('button', {name: 'Delete'}).focus();
+            cy.findByRole('button', {name: 'OK'}).focus();
           });
-          it(`should open the 'Delete' tooltip`, () => {
+          it(`should open the 'OK' tooltip`, () => {
             cy.findByRole('tooltip', {name: 'Really, Really, Really, Really, Really sure'}).should(
               'be.visible'
             );
@@ -224,18 +222,18 @@ describe('Modal', () => {
               cy.get('body').click('top');
             });
 
-            it(`should close the 'Delete' tooltip`, () => {
+            it(`should close the 'OK' tooltip`, () => {
               cy.findByRole('tooltip', {
                 name: 'Really, Really, Really, Really, Really sure',
               }).should('not.be.visible');
             });
 
-            it(`should close the 'Really Delete' popup`, () => {
-              cy.findByRole('dialog', {name: 'Really Delete'}).should('not.be.visible');
+            it(`should close the 'Hidable Popup' popup`, () => {
+              cy.findByRole('dialog', {name: 'Hidable Popup'}).should('not.be.visible');
             });
 
             it(`should keep the modal open`, () => {
-              cy.findByRole('dialog', {name: 'Delete Item'}).should('be.visible');
+              cy.findByRole('dialog', {name: 'Open Modal'}).should('be.visible');
             });
           });
         });
@@ -246,15 +244,15 @@ describe('Modal', () => {
           cy.findByText('Non-hidable Popup').click();
         });
 
-        it(`should open the 'Does Not Hide On Click Outside' popup`, () => {
-          cy.findByRole('dialog', {name: 'Does Not Hide On Click Outside'}).should('be.visible');
+        it(`should open the 'Non-hidable Popup' popup`, () => {
+          cy.findByRole('dialog', {name: 'Non-hidable Popup'}).should('be.visible');
         });
 
-        context(`when the 'Delete' button is focused`, () => {
+        context(`when the 'OK' button is focused`, () => {
           beforeEach(() => {
-            cy.findByRole('button', {name: 'Delete'}).focus();
+            cy.findByRole('button', {name: 'OK'}).focus();
           });
-          it(`should open the 'Delete' tooltip`, () => {
+          it(`should open the 'OK' tooltip`, () => {
             cy.findByRole('tooltip', {name: 'Really, Really, Really, Really, Really sure'}).should(
               'be.visible'
             );
@@ -265,18 +263,15 @@ describe('Modal', () => {
               cy.get('body').click('top');
             });
 
-            it(`should not close the 'Does Not Hide On Click Outside' popup`, () => {
-              cy.findByRole('dialog', {name: 'Does Not Hide On Click Outside'}).should(
-                'be.visible'
-              );
+            it(`should not close the 'Non-hidable Popup' popup`, () => {
+              cy.findByRole('dialog', {name: 'Non-hidable Popup'}).should('be.visible');
             });
 
             it(`should close the modal`, () => {
-              cy.findByRole('dialog', {name: 'Delete Item'}).should('not.be.visible');
+              cy.findByRole('dialog', {name: 'Non-hidable'}).should('not.be.visible');
             });
 
-            // TODO: Manually, this test case works, but cypress click on body does not close the tooltip.
-            it.skip(`should close the 'Delete' tooltip`, () => {
+            it(`should close the 'OK' tooltip`, () => {
               cy.findByRole('tooltip', {
                 name: 'Really, Really, Really, Really, Really sure',
               }).should('not.be.visible');
@@ -309,7 +304,7 @@ describe('Modal', () => {
           .tab()
           .should('have.attr', 'value', 'email')
           .tab()
-          .should('have.attr', 'data-close', 'close')
+          .should('have.attr', 'aria-label', 'Close')
           .tab();
       });
     });
@@ -326,26 +321,26 @@ describe('Modal', () => {
 
     context('when button is focused', () => {
       beforeEach(() => {
-        getModalTargetButton().focus();
+        cy.findByRole('button', {name: 'Delete Item'}).focus();
       });
 
       it('should be the focused item on the page', () => {
-        getModalTargetButton().should('have.focus');
+        cy.findByRole('button', {name: 'Delete Item'}).should('have.focus');
       });
     });
 
     context('when the target button is clicked', () => {
       beforeEach(() => {
-        getModalTargetButton().click();
+        cy.findByRole('button', {name: 'Delete Item'}).click();
       });
 
       it('should open the modal', () => {
-        cy.findByLabelText('Delete Item').should('be.visible');
+        cy.findByRole('dialog', {name: 'Delete Item'}).should('be.visible');
       });
 
       it('should place the portal as a child of the body element', () => {
         cy.get('body').then($body => {
-          cy.findByLabelText('Delete Item')
+          cy.findByRole('dialog', {name: 'Delete Item'})
             .pipe(h.modal.getOverlay)
             .parent()
             .should($el => {
@@ -355,7 +350,7 @@ describe('Modal', () => {
       });
 
       it('should hide non-modal content from assistive technology', () => {
-        cy.findByLabelText('Delete Item')
+        cy.findByRole('dialog', {name: 'Delete Item'})
           .pipe(h.modal.getOverlay)
           .siblings()
           .should($siblings => {
@@ -370,38 +365,32 @@ describe('Modal', () => {
       });
 
       it('should transfer focus to the header element', () => {
-        cy.findByLabelText('Delete Item')
+        cy.findByRole('dialog', {name: 'Delete Item'})
           .pipe(h.modal.getTitle)
           .should('have.focus');
       });
 
-      it('should not show a focus ring on the header', () => {
-        cy.findByLabelText('Delete Item')
-          .pipe(h.modal.getTitle)
-          .should('have.css', 'outlineStyle', 'none');
-      });
-
       context('the modal', () => {
         it('should have a the role of dialog', () => {
-          cy.findByLabelText('Delete Item').should('have.attr', 'role', 'dialog');
+          cy.findByRole('dialog', {name: 'Delete Item'}).should('have.attr', 'role', 'dialog');
         });
 
         it('should have an aria-labelledby attribute', () => {
-          cy.findByLabelText('Delete Item').should('have.attr', 'aria-labelledby');
+          cy.findByRole('dialog', {name: 'Delete Item'}).should('have.attr', 'aria-labelledby');
         });
 
         it('should have an aria-modal=true', () => {
-          cy.findByLabelText('Delete Item').should('have.attr', 'aria-modal', 'true');
+          cy.findByRole('dialog', {name: 'Delete Item'}).should('have.attr', 'aria-modal', 'true');
         });
 
         it('should contain the title', () => {
-          cy.findByLabelText('Delete Item')
+          cy.findByRole('dialog', {name: 'Delete Item'})
             .pipe(h.modal.getTitle)
             .should('contain', 'Delete Item');
         });
 
         it('should be labelled by the title element', () => {
-          cy.findByLabelText('Delete Item').should($modal => {
+          cy.findByRole('dialog', {name: 'Delete Item'}).should($modal => {
             const labelId = $modal.attr('aria-labelledby');
             const titleId = h.modal.getTitle($modal).attr('id');
 
@@ -410,13 +399,13 @@ describe('Modal', () => {
         });
 
         it('should transfer focus to the header element', () => {
-          cy.findByLabelText('Delete Item')
+          cy.findByRole('dialog', {name: 'Delete Item'})
             .pipe(h.modal.getTitle)
             .should('have.focus');
         });
 
         it('should trap focus inside the modal element', () => {
-          cy.findByLabelText('Delete Item')
+          cy.findByRole('dialog', {name: 'Delete Item'})
             .pipe(h.modal.getTitle)
             .should('have.focus');
           cy.tab()
@@ -436,7 +425,7 @@ describe('Modal', () => {
         });
 
         it('should not close the modal', () => {
-          cy.findByLabelText('Delete Item').should('be.visible');
+          cy.findByRole('dialog', {name: 'Delete Item'}).should('be.visible');
         });
       });
 
@@ -446,7 +435,7 @@ describe('Modal', () => {
         });
 
         it('should not close the modal', () => {
-          cy.findByLabelText('Delete Item').should('be.visible');
+          cy.findByRole('dialog', {name: 'Delete Item'}).should('be.visible');
         });
       });
     });
@@ -459,44 +448,44 @@ describe('Modal', () => {
 
     context('when button is focused', () => {
       beforeEach(() => {
-        getModalTargetButton().focus();
+        cy.findByRole('button', {name: 'Delete Item'}).focus();
       });
 
       it('should be the focused item on the page', () => {
-        getModalTargetButton().should('have.focus');
+        cy.findByRole('button', {name: 'Delete Item'}).should('have.focus');
       });
     });
 
     context('when the target button is clicked', () => {
       beforeEach(() => {
-        getModalTargetButton().click();
+        cy.findByRole('button', {name: 'Delete Item'}).click();
       });
 
       it('should open the modal', () => {
-        cy.findByLabelText('Delete Item').should('be.visible');
+        cy.findByRole('dialog', {name: 'Delete Item'}).should('be.visible');
       });
 
       context('the modal', () => {
         it('should have a the role of dialog', () => {
-          cy.findByLabelText('Delete Item').should('have.attr', 'role', 'dialog');
+          cy.findByRole('dialog', {name: 'Delete Item'}).should('have.attr', 'role', 'dialog');
         });
 
         it('should have an aria-labelledby attribute', () => {
-          cy.findByLabelText('Delete Item').should('have.attr', 'aria-labelledby');
+          cy.findByRole('dialog', {name: 'Delete Item'}).should('have.attr', 'aria-labelledby');
         });
 
         it('should have an aria-modal=true', () => {
-          cy.findByLabelText('Delete Item').should('have.attr', 'aria-modal', 'true');
+          cy.findByRole('dialog', {name: 'Delete Item'}).should('have.attr', 'aria-modal', 'true');
         });
 
         it('should contain the title', () => {
-          cy.findByLabelText('Delete Item')
+          cy.findByRole('dialog', {name: 'Delete Item'})
             .pipe(h.modal.getTitle)
             .should('contain', 'Delete Item');
         });
 
         it('should be labelled by the title element', () => {
-          cy.findByLabelText('Delete Item').should($modal => {
+          cy.findByRole('dialog', {name: 'Delete Item'}).should($modal => {
             const labelId = $modal.attr('aria-labelledby');
             const titleId = h.modal.getTitle($modal).attr('id');
 
@@ -527,7 +516,7 @@ describe('Modal', () => {
         });
 
         it('should not close the modal', () => {
-          cy.findByLabelText('Delete Item').should('be.visible');
+          cy.findByRole('dialog', {name: 'Delete Item'}).should('be.visible');
         });
       });
 
@@ -537,7 +526,7 @@ describe('Modal', () => {
         });
 
         it('should not close the modal', () => {
-          cy.findByLabelText('Delete Item').should('be.visible');
+          cy.findByRole('dialog', {name: 'Delete Item'}).should('be.visible');
         });
       });
     });
@@ -570,7 +559,7 @@ describe('Modal', () => {
         });
 
         it('should not close the first modal', () => {
-          cy.findByLabelText('Delete Item').should('exist');
+          cy.findByRole('dialog', {name: 'Delete Item'}).should('exist');
         });
       });
 
@@ -584,7 +573,7 @@ describe('Modal', () => {
         });
 
         it('should not close the first modal', () => {
-          cy.findByLabelText('Delete Item').should('exist');
+          cy.findByRole('dialog', {name: 'Delete Item'}).should('exist');
         });
       });
     });
@@ -615,7 +604,7 @@ describe('Modal', () => {
         });
 
         it('should not close the modal', () => {
-          cy.findByLabelText('Delete Item').should('exist');
+          cy.findByRole('dialog', {name: 'Delete Item'}).should('exist');
         });
       });
     });

@@ -1,5 +1,8 @@
 import * as axe from 'axe-core';
 
+// @ts-ignore There are no type definitions for this import
+import * as supports from 'ally.js/supports/supports';
+
 declare global {
   interface Window {
     axe: typeof axe;
@@ -15,8 +18,24 @@ Cypress.Commands.add('injectAxe', () => {
   });
 });
 
+// Needed for https://github.com/Bkucera/cypress-plugin-tab/issues/46
+Cypress.Commands.overwrite('visit', (originalFn, url, options = {}) => {
+  if (typeof url === 'object') {
+    // eslint-disable-next-line no-param-reassign
+    url = options.url;
+  }
+
+  return originalFn(url, {
+    ...options,
+    onBeforeLoad(win: Window) {
+      options.onBeforeLoad?.(win);
+      supports(); // prime the ally.js supports cache so it doesn't mess with the cypress-plugin-tab
+    },
+  });
+});
+
 // Add better logging to cy.tab
-Cypress.Commands.overwrite('tab', (originalFn, subject) => {
+Cypress.Commands.overwrite('tab', (originalFn, subject, options) => {
   const prevSubject = cy.$$(subject || (cy as any).state('window').document.activeElement);
 
   const log = Cypress.log({
@@ -30,7 +49,9 @@ Cypress.Commands.overwrite('tab', (originalFn, subject) => {
 
   log.snapshot('before', {next: 'after'});
 
-  return Cypress.Promise.try(() => originalFn(subject))
+  return Cypress.Promise.try(() => {
+    return originalFn(subject, options);
+  })
     .then(value => {
       log.set('$el', value).snapshot();
       return Cypress.$(value);

@@ -76,6 +76,10 @@ module.exports = (modulePath, name, description, prerelease, category) => {
       path: 'spec/tsconfig.json',
       contents: tsconfig.spec(`../${rootPath}`),
     },
+    tsconfigStories: {
+      path: 'stories/tsconfig.json',
+      contents: tsconfig.stories(`../${rootPath}`),
+    },
   };
 
   writeModuleFiles(files, modulePath);

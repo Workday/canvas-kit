@@ -109,7 +109,7 @@ class SearchWithAutoComplete extends React.Component<
     return (
       <SearchBar
         autocompleteItems={Array.apply(null, Array(this.state.currentText.length))
-          .map((x: any, i: string) => autocompleteResult(i))
+          .map((_, i) => autocompleteResult(String(i)))
           .splice(0, 5)}
         isCollapsed={boolean('isCollapsed', false)}
         onInputChange={this.autocompleteCallback}

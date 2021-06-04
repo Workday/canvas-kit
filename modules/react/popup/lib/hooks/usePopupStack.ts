@@ -29,16 +29,13 @@ import {useLocalRef} from '@workday/canvas-kit-react/common';
  * detection.
  *
  * @example
- * const [open, setOpen] = React.useState(false)
- * const stackRef = usePopupStack()
- *
- * const closePopup = () => {
- *   setOpen(false)
- * }
+ * // must be part of a component life-cycle. Use `Popup.Popper` otherwise.
+ * const model = usePopupModel({visibility: 'visible'})
+ * usePopupStack(model.state.stackRef)
  *
  * // add some popup functionality
- * useCloseOnOutsideClick(stackRef, closePopup)
- * useCloseOnEscape(stackRef, closePopup)
+ * useCloseOnOutsideClick(model)
+ * useCloseOnEscape(model)
  */
 export const usePopupStack = <E extends HTMLElement>(
   ref?: React.Ref<E>,

@@ -7,7 +7,7 @@ import uuid from 'uuid/v4';
 import {setupIcon, uploadCloudIcon, userIcon, extLinkIcon} from '@workday/canvas-system-icons-web';
 import {Popper} from '@workday/canvas-kit-react/popup';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import {ButtonProps, SecondaryButton} from '@workday/canvas-kit-react/button';
+import {SecondaryButton} from '@workday/canvas-kit-react/button';
 
 import Menu from '../lib/Menu';
 import MenuItem, {MenuItemProps} from '../lib/MenuItem';

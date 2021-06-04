@@ -3,7 +3,8 @@ import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 
-import {Card} from '../../card';
+import {Card} from '@workday/canvas-kit-react/card';
+
 import Layout from '../index';
 import README from '../README.md';
 
@@ -16,7 +17,7 @@ storiesOf('Components/Containers/Layout/React', module)
       <div>
         <Layout gutter={0}>
           <Layout.Column spacing={0}>
-            <Card heading="Full Page Layout with no gutter & spacing" />
+            <Card />
           </Layout.Column>
         </Layout>
       </div>
@@ -24,7 +25,7 @@ storiesOf('Components/Containers/Layout/React', module)
       <div>
         <Layout>
           <Layout.Column>
-            <Card heading="Full Page Layout with gutter & spacing " />
+            <Card />
           </Layout.Column>
         </Layout>
       </div>
@@ -32,7 +33,7 @@ storiesOf('Components/Containers/Layout/React', module)
       <div>
         <Layout capWidth={true}>
           <Layout.Column>
-            <Card heading="Full Page Layout with max width" />
+            <Card />
           </Layout.Column>
         </Layout>
       </div>
@@ -44,40 +45,40 @@ storiesOf('Components/Containers/Layout/React', module)
       <div>
         <Layout>
           <Layout.Column>
-            <Card heading="Column 1" />
+            <Card />
           </Layout.Column>
         </Layout>
         <Layout>
           <Layout.Column>
-            <Card heading="Column 1" />
+            <Card />
           </Layout.Column>
           <Layout.Column>
-            <Card heading="Column 2" />
-          </Layout.Column>
-        </Layout>
-        <Layout>
-          <Layout.Column>
-            <Card heading="Column 1" />
-          </Layout.Column>
-          <Layout.Column>
-            <Card heading="Column 2" />
-          </Layout.Column>
-          <Layout.Column>
-            <Card heading="Column 3" />
+            <Card />
           </Layout.Column>
         </Layout>
         <Layout>
           <Layout.Column>
-            <Card heading="Column 1" />
+            <Card />
           </Layout.Column>
           <Layout.Column>
-            <Card heading="Column 2" />
+            <Card />
           </Layout.Column>
           <Layout.Column>
-            <Card heading="Column 3" />
+            <Card />
+          </Layout.Column>
+        </Layout>
+        <Layout>
+          <Layout.Column>
+            <Card />
           </Layout.Column>
           <Layout.Column>
-            <Card heading="Column 4" />
+            <Card />
+          </Layout.Column>
+          <Layout.Column>
+            <Card />
+          </Layout.Column>
+          <Layout.Column>
+            <Card />
           </Layout.Column>
         </Layout>
       </div>
@@ -85,10 +86,10 @@ storiesOf('Components/Containers/Layout/React', module)
       <div>
         <Layout>
           <Layout.Column columns={4}>
-            <Card heading="4 Columns" />
+            <Card />
           </Layout.Column>
           <Layout.Column columns={8}>
-            <Card heading="8 Columns" />
+            <Card />
           </Layout.Column>
         </Layout>
       </div>
@@ -96,10 +97,10 @@ storiesOf('Components/Containers/Layout/React', module)
       <div>
         <Layout>
           <Layout.Column width={'400px'}>
-            <Card heading="400px Fixed Width" />
+            <Card />
           </Layout.Column>
           <Layout.Column>
-            <Card heading="Responsive Column" />
+            <Card />
           </Layout.Column>
         </Layout>
       </div>
@@ -107,13 +108,13 @@ storiesOf('Components/Containers/Layout/React', module)
       <div>
         <Layout spacing={60}>
           <Layout.Column spacing={0}>
-            <Card heading="Custom Spacing (0px)" />
+            <Card />
           </Layout.Column>
           <Layout.Column>
-            <Card heading="Custom Spacing (60px)" />
+            <Card />
           </Layout.Column>
           <Layout.Column>
-            <Card heading="Custom Spacing (60px)" />
+            <Card />
           </Layout.Column>
         </Layout>
       </div>

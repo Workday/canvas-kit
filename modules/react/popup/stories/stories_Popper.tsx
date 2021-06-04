@@ -2,13 +2,9 @@
 import * as React from 'react';
 import withReadme from 'storybook-readme/with-readme';
 
-import {PrimaryButton} from '@workday/canvas-kit-react/button';
-import {
-  Popup,
-  Popper,
-  useCloseOnEscape,
-  useCloseOnOutsideClick,
-} from '@workday/canvas-kit-react/popup';
+import {PrimaryButton, SecondaryButton} from '@workday/canvas-kit-react/button';
+import {Popper} from '@workday/canvas-kit-react/popup';
+import {Card} from '@workday/canvas-kit-react/card';
 
 import README from '../README.md';
 
@@ -28,18 +24,19 @@ export const PopperStory = () => {
   const onClickButton = () => setOpen(!open);
   const onClose = () => setOpen(false);
 
-  useCloseOnOutsideClick(popupRef, onClose);
-  useCloseOnEscape(popupRef, onClose);
-
   return (
     <div style={{display: 'flex', justifyContent: 'center'}}>
       <PrimaryButton ref={buttonRef} onClick={onClickButton}>
         Toggle Popup
       </PrimaryButton>
-      <Popper placement={'bottom'} open={open} anchorElement={buttonRef.current!} ref={popupRef}>
-        <Popup width={400} heading={'Popper Example'} handleClose={onClose}>
-          <h3>Welcome to your popup positioned by Popper!</h3>
-        </Popup>
+      <Popper placement="bottom" open={open} anchorElement={buttonRef.current!} ref={popupRef}>
+        <Card>
+          <Card.Heading>Popper Example</Card.Heading>
+          <Card.Body>
+            <p>A card positioned by Popper!</p>
+            <SecondaryButton onClick={onClose}>Close</SecondaryButton>
+          </Card.Body>
+        </Card>
       </Popper>
     </div>
   );

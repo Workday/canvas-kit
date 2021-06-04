@@ -1,5 +1,4 @@
 import * as React from 'react';
-import {PopupPadding} from '@workday/canvas-kit-react/popup';
 import ModalContent, {ModalContentProps} from './ModalContent';
 
 export enum ModalWidth {
@@ -7,8 +6,7 @@ export enum ModalWidth {
   m = '800px',
 }
 
-export interface ModalProps extends Omit<ModalContentProps, 'padding' | 'width' | 'container'> {
-  padding?: PopupPadding;
+export interface ModalProps extends Omit<ModalContentProps, 'width' | 'container'> {
   width?: ModalWidth;
   container?: HTMLElement;
   /**
@@ -20,17 +18,15 @@ export interface ModalProps extends Omit<ModalContentProps, 'padding' | 'width' 
 
 const Modal = ({
   open = false,
-  padding = PopupPadding.l,
   width = ModalWidth.s,
   container,
   ...modalContentProps
 }: ModalProps): JSX.Element | null =>
   // Only render if on the client and `open` is `true`
   open && typeof window !== 'undefined' ? (
-    <ModalContent container={container} padding={padding} width={width} {...modalContentProps} />
+    <ModalContent container={container} width={width} {...modalContentProps} />
   ) : null;
 
-Modal.Padding = PopupPadding;
 Modal.Width = ModalWidth;
 
 export default Modal;
@@ -54,10 +50,12 @@ export default Modal;
  * }
  */
 export function useModal() {
+  const ref = React.useRef<HTMLButtonElement>(null);
   const [open, setOpen] = React.useState(false);
 
   return {
     targetProps: {
+      ref,
       onClick() {
         setOpen(true);
       },
@@ -66,6 +64,7 @@ export function useModal() {
       setOpen(false);
     },
     modalProps: {
+      targetRef: ref,
       open,
       handleClose() {
         setOpen(false);

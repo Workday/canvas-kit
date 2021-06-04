@@ -7,6 +7,8 @@ import {
   Popper,
   useCloseOnEscape,
   useCloseOnOutsideClick,
+  usePopupModel,
+  useReturnFocus,
 } from '@workday/canvas-kit-react/popup';
 import {colors, borderRadius, inputColors} from '@workday/canvas-kit-react/tokens';
 
@@ -27,13 +29,9 @@ interface SelectMenuProps
    */
   menuRef?: React.RefObject<HTMLUListElement>;
   /**
-   * The function called when the Escape key is pressed while the SelectMenu is the topmost element in the stack.
+   * The function called when the menu is closed.
    */
-  onCloseOnEscape?: () => void;
-  /**
-   * The function called when a click occurs outside the SelectMenu while it's the topmost element in the stack.
-   */
-  onCloseOnOutsideClick?: () => void;
+  onClose?: () => void;
   /**
    * The placement of the SelectMenu relative to its corresponding button.
    * @default 'bottom'
@@ -229,15 +227,18 @@ const SelectMenu = ({
   children,
   error,
   menuRef,
-  onCloseOnEscape,
-  onCloseOnOutsideClick,
+  onClose,
   placement = 'bottom',
   shouldAutoFlip = true,
   shouldAutoFocus = true,
   visibility = 'closed',
   ...elemProps
 }: SelectMenuProps) => {
-  const popupRef = React.useRef<HTMLDivElement>(null);
+  const model = usePopupModel({
+    initialVisibility: 'visible',
+    returnFocusRef: buttonRef,
+    onHide: onClose,
+  });
 
   const [width, setWidth] = useState(0);
 
@@ -267,8 +268,9 @@ const SelectMenu = ({
     };
   }, [handleWidthChange]);
 
-  useCloseOnEscape(popupRef, () => onCloseOnEscape?.());
-  useCloseOnOutsideClick(popupRef, () => onCloseOnOutsideClick?.());
+  useCloseOnEscape(model);
+  useCloseOnOutsideClick(model);
+  useReturnFocus(model);
 
   return (
     <Popper
@@ -280,7 +282,7 @@ const SelectMenu = ({
         shouldAutoFlip,
         shouldAutoFocus,
       })}
-      ref={popupRef}
+      ref={model.state.stackRef}
     >
       <Menu error={error} visibility={visibility} width={width}>
         <MenuList error={error} ref={menuRef} role="listbox" tabIndex={-1} {...elemProps}>

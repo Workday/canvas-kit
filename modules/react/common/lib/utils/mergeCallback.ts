@@ -14,8 +14,8 @@
 export function mergeCallback<T extends Function>(callback1: T, callback2?: Function): T {
   if (callback2) {
     return (((...args: any[]) => {
-      callback2?.apply(null, args);
       callback1.apply(null, args);
+      callback2.apply(null, args);
     }) as any) as T;
   } else {
     return callback1;

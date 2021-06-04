@@ -10,7 +10,7 @@ import {Meta} from '@storybook/addon-docs/blocks';
 > components, and you retain access to all the semantic elements of the higher level component.
 
 - [Container component](#container-components)
-- [Sub-components](#sub-components)
+- [Subcomponents](#subcomponents)
 - [Shared model (optional, advanced)](#models)
 - [Behavior hooks (optional, advanced)](#behavior-hooks)
 
@@ -44,7 +44,7 @@ Compound component:
 </Tabs>
 ```
 
-In this example, `Tabs` is the container component and `Tabs.List` is a sub-component.
+In this example, `Tabs` is the container component and `Tabs.List` is a subcomponent.
 
 Some compound components might not contain state or behavior. An example might be an `IconButton`
 which is a button that contains an icon. It might be a compound component only for styling purposes,
@@ -65,7 +65,7 @@ has a container component that represents a `role=nav` element. The `Tabs` conta
 however, does not contain a semantic element.
 
 If a compound component contains any state or behavior, it will also provide a shared model to
-sub-components via [React context](https://reactjs.org/docs/context.html). A container component
+subcomponents via [React context](https://reactjs.org/docs/context.html). A container component
 takes props for either the model or configuration for the model. In the `Tabs` compound component
 example, it might look like this:
 
@@ -80,10 +80,10 @@ const Tabs = ({children, model, ...config}) => {
 };
 ```
 
-## Sub-components
+## Subcomponents
 
-A sub-component typically follows ARIA roles. For the `Tabs` example, these are the `tablist`,
-`tab`, and `tabpanel` roles. A sub-component provides direct access to semantic or key elements of a
+A subcomponent typically follows ARIA roles. For the `Tabs` example, these are the `tablist`,
+`tab`, and `tabpanel` roles. A subcomponent provides direct access to semantic or key elements of a
 compound component. In the `IconButton` example, the icon is not semantic and might be hidden from
 screen readers while the `IconButton.Text` content is instead used for a tooltip and as the
 accessible name while being visibly hidden.
@@ -369,7 +369,7 @@ charge of maintaining a current cursor position of the tab list. The `Tabs.List`
 cursor to allow keyboard navigation of the tabs. The `TabsModel` also maintains the currently active
 tab to ensure the correct `TabPanel` is visible. The `TabsModel` is also using a `ListModel` to
 maintain a list of tab panels. The `TabsModel` is in charge of composing all this and providing data
-and events to the `Tabs` compound component - coordination state between sub-components.
+and events to the `Tabs` compound component - coordination state between subcomponents.
 
 Many other components like `Select`, `Breadcrumbs`, or dropdown menus can also use the `ListModel`
 and/or the `CursorModel`. These models could be thought of as abstract models where they do not
@@ -399,15 +399,15 @@ type Guard<EventData, State> = ({data: EventData, state: State}) => boolean;
 
 ### What is a Behavior Hook?
 
-A behavior hook usually applies to a sub-component and describes attributes that are applied to a
-sub-component's element (i.e. `aria-labelledby`, or `onClick`). A behavior hook takes in the model
+A behavior hook usually applies to a subcomponent and describes attributes that are applied to a
+subcomponent's element (i.e. `aria-labelledby`, or `onClick`). A behavior hook takes in the model
 and developer-defined DOM attributes and return a merged object of attributes.
 `(Model, HTMLAttributs) => HTMLAttributes`.
 
 ### Why Behavior Hooks?
 
 A behavior hook allows us to more easily reuse functionality between components with similar
-sub-components. They also provide another layer of composition to compound components.
+subcomponents. They also provide another layer of composition to compound components.
 
 For example, the `CursorModel` contains the model's internal state and events, but doesn't handle
 external DOM events directly. The behavior hook is the glue between the model and DOM elements. A
@@ -444,8 +444,8 @@ const useKeyboardCursor = ({state, events}, elemProps = {}) => {
 
 ## Putting it all together
 
-In the `Tabs` component example, there isn't a `Cursor` component. The `Tab.List` sub-component uses
-the `CursorModel` and the `useRovingFocus` behavior hook to produce the desired sub-component. It
+In the `Tabs` component example, there isn't a `Cursor` component. The `Tab.List` subcomponent uses
+the `CursorModel` and the `useRovingFocus` behavior hook to produce the desired subcomponent. It
 looks something like this:
 
 ```tsx

@@ -35,9 +35,16 @@ const spec = rootPath => `
 }
 `;
 
+const stories = rootPath => `
+{
+  "extends": "${rootPath}/tsconfig.stories.json",
+}
+`;
+
 module.exports = {
   default: tsconfig,
   cjs,
   es6,
   spec,
+  stories,
 };

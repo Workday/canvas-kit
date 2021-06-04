@@ -4,11 +4,19 @@ import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 import {ColorInput} from '@workday/canvas-kit-react/color-picker';
 import {colors} from '@workday/canvas-kit-react/tokens';
-import {Popper, Popup, PopupPadding} from '@workday/canvas-kit-react/popup';
+import {
+  Popup,
+  usePopupModel,
+  useCloseOnOutsideClick,
+  useCloseOnEscape,
+  useInitialFocus,
+  useReturnFocus,
+} from '@workday/canvas-kit-react/popup';
 import {IconButton} from '@workday/canvas-kit-react/button';
 import {bgColorIcon} from '@workday/canvas-system-icons-web';
 import {ColorPicker} from '@workday/canvas-kit-preview-react/color-picker';
 import README from '../README.md';
+import {changeFocus} from '@workday/canvas-kit-react/common';
 
 // eslint-disable-next-line no-empty-function
 const noop = () => {};
@@ -18,59 +26,68 @@ storiesOf('Preview/Color Picker/React', module)
   .addDecorator(withReadme(README))
   .add('Default', () => <ColorPicker onColorChange={noop} />)
   .add('Icon Button Popup', () => {
-    const [isOpen, setOpen] = React.useState(false);
+    const model = usePopupModel();
     const [color, setColor] = React.useState('');
-    const ref = React.useRef(null);
 
-    const toggleOpen = () => setOpen(!isOpen);
+    useCloseOnOutsideClick(model);
+    useCloseOnEscape(model);
+    useInitialFocus(model);
+    useReturnFocus(model);
 
     const handleSubmit = React.useCallback(
       (submitColor: string) => {
         setColor(submitColor.toUpperCase());
-        setOpen(false);
+        model.events.hide();
+        changeFocus(model.state.targetRef.current);
       },
-      [setOpen]
+      [model.events, model.state.targetRef]
     );
 
     return (
-      <>
-        <IconButton
+      <Popup model={model}>
+        <Popup.Target
+          as={IconButton}
           icon={bgColorIcon}
           aria-label="Select Background Color"
-          ref={ref}
           variant="squareFilled"
-          onClick={toggleOpen}
         />
-        <Popper placement={'bottom-start'} open={isOpen} anchorElement={ref.current!}>
-          <Popup style={{marginTop: 8}} padding={PopupPadding.s}>
-            <ColorPicker
-              resetColor={colors.blueberry400}
-              resetLabel={'Reset'}
-              showCustomHexInput={true}
-              onColorChange={handleSubmit}
-              onColorReset={() => handleSubmit(colors.blueberry400)}
-              onSubmitClick={toggleOpen}
-              value={color}
-            />
-          </Popup>
-        </Popper>
-      </>
+        <Popup.Popper>
+          <Popup.Card marginTop="xxs" padding="s">
+            <Popup.Body>
+              <ColorPicker
+                resetColor={colors.blueberry400}
+                resetLabel={'Reset'}
+                showCustomHexInput={true}
+                onColorChange={handleSubmit}
+                onColorReset={() => handleSubmit(colors.blueberry400)}
+                onSubmitClick={event => model.events.hide({event})}
+                value={color}
+              />
+            </Popup.Body>
+          </Popup.Card>
+        </Popup.Popper>
+      </Popup>
     );
   })
   .add('Color Input Popup', () => {
     const defaultColor = colors.blueberry400;
-    const [isOpen, setOpen] = React.useState(false);
+
     const [color, setColor] = React.useState(defaultColor);
     const [colorInputValidColor, setColorInputValidColor] = React.useState(defaultColor);
     const [colorInputValue, setColorInputValue] = React.useState(defaultColor);
-    const inputRef = React.useRef<HTMLInputElement>(null);
-    const popupRef = React.useRef<HTMLDivElement>(null);
+    const model = usePopupModel();
+
+    useCloseOnOutsideClick(model);
+    useCloseOnEscape(model);
+    useInitialFocus(model);
+    useReturnFocus(model);
 
     const resetColor = () => {
       setColor(defaultColor);
       setColorInputValue(defaultColor);
       setColorInputValidColor(defaultColor);
-      setOpen(false);
+      model.events.hide();
+      changeFocus(model.state.targetRef.current);
     };
 
     const colorSet = [
@@ -94,14 +111,19 @@ storiesOf('Preview/Color Picker/React', module)
     ];
 
     const onBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-      if (!popupRef.current || !popupRef.current.contains(e.relatedTarget as Node)) {
-        setOpen(false);
+      console.log('blur', e.currentTarget, e.relatedTarget, model.state.stackRef.current);
+      if (
+        !model.state.stackRef.current ||
+        !model.state.stackRef.current.contains(e.relatedTarget as Node)
+      ) {
+        // model.events.hide();
       }
     };
 
     return (
-      <>
-        <ColorInput
+      <Popup model={model}>
+        <Popup.Target
+          as={ColorInput}
           onChange={e => setColorInputValue(e.target.value)}
           onValidColorChange={color => {
             setColorInputValidColor(color.toUpperCase());
@@ -109,32 +131,28 @@ storiesOf('Preview/Color Picker/React', module)
           }}
           value={colorInputValue}
           showCheck={colorInputValidColor === color || colorInputValue === color}
-          onFocus={() => setOpen(true)}
-          onClick={() => setOpen(true)}
+          onFocus={event => model.events.show({event})}
           onBlur={onBlur}
-          ref={inputRef}
         />
-        <Popper
-          placement={'bottom-start'}
-          open={isOpen}
-          anchorElement={inputRef.current!}
-          ref={popupRef}
-        >
-          <Popup style={{marginTop: 8}} padding={PopupPadding.s}>
-            <ColorPicker
-              resetColor={colors.blueberry400}
-              resetLabel={'Reset'}
-              onColorChange={color => {
-                setColorInputValue(color.toUpperCase());
-                setColor(color.toUpperCase());
-                setOpen(false);
-              }}
-              onColorReset={resetColor}
-              value={color}
-              colorSet={colorSet}
-            />
-          </Popup>
-        </Popper>
-      </>
+        <Popup.Popper>
+          <Popup.Card style={{marginTop: 8}} padding="s">
+            <Popup.Body>
+              <ColorPicker
+                resetColor={colors.blueberry400}
+                resetLabel={'Reset'}
+                onColorChange={color => {
+                  setColorInputValue(color.toUpperCase());
+                  setColor(color.toUpperCase());
+                  model.events.hide();
+                  model.state.targetRef.current?.focus();
+                }}
+                onColorReset={resetColor}
+                value={color}
+                colorSet={colorSet}
+              />
+            </Popup.Body>
+          </Popup.Card>
+        </Popup.Popper>
+      </Popup>
     );
   });

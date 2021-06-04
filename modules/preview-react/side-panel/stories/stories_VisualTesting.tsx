@@ -48,7 +48,7 @@ export const SidePanelStates = () => (
     >
       {props => (
         <div style={{height: 480}}>
-          <SidePanel {...props}>
+          <SidePanel {...props} touched={false}>
             <SidePanel.ToggleButton aria-label="toggle button" />
           </SidePanel>
         </div>

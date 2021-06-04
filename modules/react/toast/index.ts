@@ -1,4 +1,4 @@
-import Toast from './lib/Toast';
+import {Toast} from './lib/Toast';
 
 export default Toast;
 export {Toast};

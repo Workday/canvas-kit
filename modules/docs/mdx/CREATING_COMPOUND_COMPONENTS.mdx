@@ -418,7 +418,11 @@ export const DisclosureTarget = createComponent('button')({
       <Element
         ref={ref}
         onClick={() => {
-          model.events.toggle();
+          if (model.state.visible) {
+            model.events.hide();
+          } else {
+            model.events.show();
+          }
         }}
         {...elemProps}
       >
@@ -693,7 +697,7 @@ export const useHidden = ({state}: DisclosureModel, elemProps: {}) => {
 };
 ```
 
-The `Disclosure.Content` sub-component can now be updated to use this hook:
+The `Disclosure.Content` subcomponent can now be updated to use this hook:
 
 ```tsx
 // DisclosureContent.tsx
