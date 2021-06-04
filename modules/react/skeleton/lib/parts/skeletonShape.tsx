@@ -5,7 +5,7 @@ import canvas from '@workday/canvas-kit-react/tokens';
 
 const BOTTOM_MARGIN = 16;
 
-export interface SkeletonShapeProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface SkeletonShapeProps {
   /**
    *  The width of the shape in `px` or `%`.
    * @default 100%

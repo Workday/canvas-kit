@@ -6,7 +6,7 @@ import canvas from '@workday/canvas-kit-react/tokens';
 import SkeletonShape from './skeletonShape';
 import {TEXT_BORDER_RADIUS} from './utils';
 
-export interface SkeletonHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface SkeletonHeaderProps {
   /**
    * The background color of the skeleton
    * @default soap200

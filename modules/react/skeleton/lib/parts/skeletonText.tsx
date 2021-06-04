@@ -9,7 +9,7 @@ const TextContainer = styled('div')<StyledType>({
   marginBottom: canvas.space.m,
 });
 
-export interface SkeletonTextProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface SkeletonTextProps {
   /**
    * The number of "lines" that SkeletonText will display. If there is more than one line, the last line will have a width of `60%`.
    * @default 2
