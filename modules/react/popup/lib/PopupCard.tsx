@@ -73,14 +73,13 @@ export const PopupCard = createComponent('div')({
     Element
   ) => {
     const localModel = useModelContext(PopupModelContext, model);
-    const props = usePopupCard(localModel, elemProps);
+    const props = usePopupCard(localModel, elemProps, ref);
     const transformOrigin = React.useMemo(() => {
       return getTransformFromPlacement(localModel.state.placement || 'bottom');
     }, [localModel.state.placement]);
 
     return (
       <StyledPopupCard
-        ref={ref}
         as={Element}
         transformOrigin={transformOrigin}
         depth={depth}
