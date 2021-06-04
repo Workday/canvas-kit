@@ -2,7 +2,7 @@ import React from 'react';
 
 import {PopupStack} from '@workday/canvas-kit-popup-stack';
 
-import {PopupModel} from '../usePopupModel';
+import {PopupModel} from './usePopupModel';
 
 /**
  * Registers global detection of the Escape key. It will only call the PopupModel's `hide` event if the

@@ -1,7 +1,7 @@
 import React from 'react';
 import {PopupStack} from '@workday/canvas-kit-popup-stack';
 
-import {PopupModel} from '../usePopupModel';
+import {PopupModel} from './usePopupModel';
 
 /**
  * This hook will bring an element to the top of the stack when any element inside the provided

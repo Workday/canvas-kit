@@ -1,5 +1,5 @@
 import React from 'react';
-import {PopupModel} from '../usePopupModel';
+import {PopupModel} from './usePopupModel';
 
 /**
  * This hook will hide all sibling elements from assistive technology. Very useful for modal

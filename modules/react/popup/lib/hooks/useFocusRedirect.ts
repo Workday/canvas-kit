@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {PopupModel} from '../usePopupModel';
+import {PopupModel} from './usePopupModel';
 import {getFirstFocusableElement, getLastFocusableElement} from '@workday/canvas-kit-react/common';
 
 /**

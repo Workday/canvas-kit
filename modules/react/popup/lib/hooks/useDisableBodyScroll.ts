@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {PopupModel} from '../usePopupModel';
+import {PopupModel} from './usePopupModel';
 
 /**
  * Disables body scroll by adding `overflow: hidden` to the body element. This effectively prevents

@@ -2,7 +2,7 @@ import React from 'react';
 
 import {changeFocus, assert, getFirstFocusableElement} from '@workday/canvas-kit-react/common';
 
-import {PopupModel} from '../usePopupModel';
+import {PopupModel} from './usePopupModel';
 
 /**
  * Moves focus within the popup when the popup becomes visible. This is useful for keyboard and

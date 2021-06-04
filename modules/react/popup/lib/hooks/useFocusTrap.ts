@@ -1,7 +1,7 @@
 import React from 'react';
 import tabTrappingKey from 'focus-trap-js';
 
-import {PopupModel} from '../usePopupModel';
+import {PopupModel} from './usePopupModel';
 
 /**
  * "Trap" or "loop" focus within a provided `stackRef` element. This is required for accessibility

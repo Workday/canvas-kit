@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {PopupModel} from '../usePopupModel';
+import {PopupModel} from './usePopupModel';
 import {changeFocus} from '@workday/canvas-kit-react/common';
 
 /**
