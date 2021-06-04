@@ -4,121 +4,237 @@ import {Meta} from '@storybook/addon-docs/blocks';
 
 # Canvas Kit 5.0 Migration Guide
 
-Below are the breaking changes made in Canvas Kit v5. Please reach out if you have any questions
-about the update.
+Below are the breaking changes made in Canvas Kit v5. Please
+[reach out](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) if you have
+any questions about the update.
 
+- [Codemod](#codemod)
 - [General Changes](#general-changes)
-  - [Canvas Kit CSS Maintenance Mode](#canvas-kit-css-maintenance-mode)
-  - [Codemod](#codemod)
-  - [Rename Core and Labs Core Modules to Tokens](#rename-core-and-labs-core-modules-to-tokens)
   - [Slash Imports](#slash-imports)
-  - [Space Tokens](#space-tokens)
-  - [Compound Components](#compound-components) -
-    [Canvas Kit Preview & Component Promotions](#canvas-kit-preview-component-promotions)
-- [Breaking Component Changes](#breaking-component-changes)
-  - [Input Ref Forwarding](#input-ref-forwarding)
+  - [Canvas Kit Preview](#canvas-kit-preview)
+  - [Canvas Kit CSS Maintenance Mode](#canvas-kit-css-maintenance-mode)
+- [Component Changes](#component-changes)
+  - [Component Promotions](#component-promotions)
+  - [Core](#core)
+  - [Tokens](#tokens)
   - [Button](#button)
   - [Card](#card)
-  - [InputProvider](#inputprovider)
+  - [Inputs](#inputs)
   - [Tabs](#tabs)
-  - [Labs Space Style Function](#-labs-space-style-function)
-  - [Border Radius Zero Token](#border-radius-zero-token)
 
-## General Changes
+## Codemod
 
-### Canvas Kit CSS Maintenance Mode
-
-Due to the infrequent use of our CSS modules, they will be going into maintenance mode in Canvas Kit
-v5. We will still support `@workday/canvas-kit-css` with bug fixes and significant visual updates,
-but it generally won't be receiving new components, additional features, etc. This will allow us to
-provide more focused support, and dedicate our efforts to making bigger and better improvements to
-our most used components: Canvas Kit React. If you have questions or concerns, please
-[let us know](https://github.com/Workday/canvas-kit/issues/new?labels=&template=question.md).
-
-### Codemod
-
-We've provided a [new codemod package](./modules/codemod) that you can use to update the majority of
-the v5 breaking code changes. Simply run:
+We've introduced a [new codemod package](./modules/codemod) you can use to automatically update your
+code to work with a majority of the breaking changes in the migration from Canvas Kit v4 to v5.
+Simply run:
 
 ```sh
 > npx @workday/canvas-kit-codemod v5 [path]
 ```
 
-> Note: This codemod only work on .js, .jsx, .ts, and .tsx extensions. You may need to make some
-> manual changes in other file types (.json, .mdx, .md, etc.).
+> Note: This codemod only works on `.js`, `.jsx`, `.ts`, and `.tsx` extensions. You may need to make
+> some manual changes in other file types (`.json`, `.mdx`, `.md`, etc.).
 
 > Note: You may need to run your linter after executing the codemod, as it's resulting formatting
 > (spacing, quotes, etc.) may not match your project's styling.
 
-Breaking changes accounted for by this codemod will be marked with a 🤖.
+**Breaking changes accounted for by this codemod will be marked with a 🤖.**
 
-Please [let us know](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) if
-you have any troubles or missed use cases with this codemod. The `@workday/canvas-kit-codemod`
-package will help us maintain additional codemod transforms to make future migrations easier.
+Please verify all changes made by the codemod, and
+[let us know](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) if you
+encounter any issues or use cases that we've missed. The `@workday/canvas-kit-codemod` package will
+help us maintain additional codemod transforms to make future migrations easier.
 
-### Rename Core and Labs Core Modules to Tokens
-
-The distinction between our core and common packages is often unclear and creates confusion around
-what should be imported from where. To help alleviate this and better align with our design
-taxonomy, we're renaming our `core` packages to `tokens`. We are also removing the `type` default
-\export the labs core package in favor of named imports. These changes are listed below; all of
-which are handled by the v5 codemod.
-
-#### Automatic Updates
-
-- 🤖 Core import statements
-- e.g. `import { space } from '@workday/canvas-kit-react/core';` becomes
-  `import { space } from '@workday/canvas-kit-react/tokens';`
-- 🤖 Labs core import statements
-- e.g. `import { type } from '@workday/canvas-kit-labs-react/core';` becomes
-  `import { type } from '@workday/canvas-kit-labs-react/tokens';`
-- 🤖 Labs core default type import
-- e.g. `import type from '@workday/canvas-kit-labs-react/core';` becomes
-  `import { type } from '@workday/canvas-kit-labs-react/tokens';`
+## General Changes
 
 ### Slash Imports
 
-We have moved from a separate module for every component to a slash imports system. All of our react
-components are now bundled under three packages:
+Rather than having a separate module for each component, we've moved to a slash imports system. All
+of our React components are now bundled in one of three modules:
 
 - `@workday/canvas-kit-react`
 - `@workday/canvas-kit-labs-react`
 - `@workday/canvas-kit-preview-react`
 
-Due to this change, imports will need to be updated. For example:
+> Note: See [Canvas Kit Preview](#canvas-kit-preview) for more information about the new
+> `@workday/canvas-kit-preview-react` module.
+
+Consequently, you'll need to update your import statements:
 
 ```tsx
-// before
-import canvas from '@workday/canvas-kit-react';
-import Button from '@workday/canvas-kit-react-button';
+// v4
+import {TextInput} from '@workday/canvas-kit-react-text-input';
 
-// after
-import canvas from '@workday/canvas-kit-react/tokens';
-import {Button} from '@workday/canvas-kit-react/button';
+// v5
+import {TextInput} from '@workday/canvas-kit-react/text-input';
 ```
 
-This change is covered by the codemod, but it doesn't currently run on files that don't use the
-`.js`, `.jsx`, `.ts`, and `.tsx` extensions. Those files will have to be updated manually.
+🤖 The codemod will update import statements to use the new slash imports syntax.
 
-### Space Tokens
+Recall that the codemod only works on `.js`, `.jsx`, `.ts`, and `.tsx` extensions. Other file types
+will need to be updated manually.
 
-To better align with our design taxonomy, we are renaming our space tokens in our core package. We
-will also no longer rely on `@workday/canvas-space-web` to supply our space values. Instead, we are
-keeping the values in canvas-kit. We also took the opportunity to improve the space types (which
-were too generic) and JSDoc hints.
+### Canvas Kit Preview
 
-The codemod will handle _almost all_ of these changes with a few possible exceptions that will be
-noted in [Manual Updates](#manual-updates) below.
+Due to the broad range of stability in [Canvas Kit Labs](../../labs-react)
+(`@workday/canvas-kit-labs-react`), we've introduced a new module called
+[Canvas Kit Preview](../../preview-react) (`@workday/canvas-kit-preview-react`) to provide consumers
+with more clarity and confidence when uptaking experimental and upcoming components. The components
+in Preview have had a full design and accessibility review and are approved for use in product.
+Their functionality and design are set, but their APIs and/or underlying architecture are still
+subject to change.
+
+Preview serves as a staging ground for components that are ready to use, but may not be up to the
+high code standards upheld in the Main `@workday/canvas-kit-react` module. Think of Labs as a space
+for alpha components and Preview as a space for beta components.
+
+We've promoted several components from Labs to Preview in v5. See
+[Component Promotions](#component-promotions) for more details.
+
+### Canvas Kit CSS Maintenance Mode
+
+Due to the infrequent use of our CSS modules, we've placed them in maintenance mode in v5. Although
+we'll continue to support `@workday/canvas-kit-css` with bug fixes and significant visual updates,
+it most likely won't be receiving new components or additional features. This will allow us to
+provide more focused support and to dedicate our efforts to making bigger and better improvements to
+our most used components: Canvas Kit React. If you have questions or concerns, please
+[let us know](https://github.com/Workday/canvas-kit/issues/new?labels=&template=question.md).
+
+## Component Changes
+
+### Component Promotions
+
+#### Promotions from Labs to Preview
+
+The following components were promoted from Labs to the new Preview module:
+
+- Breadcrumbs
+- Color Picker
+- Core `type` > Tokens `type`
+- Menu
+- Select
+- Side Panel
+
+You'll need to update your imports for promoted components (this is _not_ handled by the codemod):
 
 ```tsx
-// before
-import { spacing, spacingNumbers CanvasSpacingValue } from '@workday/canvas-kit-react-core';
+// v4
+import {Breadcrumbs} from '@workday/canvas-kit-labs-react-breadcrumbs';
 
-// after
-import { space, spaceNumbers, CanvasSpaceValues } from '@workday/canvas-kit-react/tokens';
+// v5
+import {Breadcrumbs} from '@workday/canvas-kit-preview-react/breadcrumbs';
 ```
 
-This table describes each update:
+#### Promotions from Labs to Main
+
+Generally, a component will begin in Labs before it's promoted to Preview and eventually to Main
+(although there is no guarantee a component will advance out of Labs). Given that Preview was just
+introduced in v5, however, we believe that a few components have incubated long enough in Labs and
+are ready for Main. The following components have been promoted straight from Labs to Main:
+
+- Pagination
+- Tabs
+
+These imports will need to be updated manually as well (this is _not_ handled by the codemod):
+
+```tsx
+// v4
+import {Pagination} from '@workday/canvas-kit-labs-react-pagination';
+
+// v5
+import {Pagination} from '@workday/canvas-kit-react/pagination';
+```
+
+### Core
+
+#### Rename Core to Tokens
+
+The distinction between our core and common packages is often unclear and creates confusion around
+what should be imported from where. To help alleviate this and better align with our design
+taxonomy, we've renamed our `core` modules in both Main and Labs to `tokens`. We've also removed the
+`type` default export in the Labs core package in favor of named imports. These changes are listed
+below, all of which are handled by the v5 codemod.
+
+##### Automatic Updates
+
+- 🤖 Rename Main `core` import statements to `tokens`
+
+  ```tsx
+  // v4
+  import {colors} from '@workday/canvas-kit-react-core';
+
+  // v5
+  import {colors} from '@workday/canvas-kit-react/tokens';
+  ```
+
+- 🤖 Rename Labs `core` import statements to `tokens`
+
+  ```tsx
+  // v4
+  import {type} from '@workday/canvas-kit-labs-react-core';
+
+  // v5
+  import {type} from '@workday/canvas-kit-labs-react/tokens';
+  ```
+
+- 🤖 Replace default `type` import in Labs `core` with named import
+
+  ```tsx
+  // v4
+  import type from '@workday/canvas-kit-labs-react-core';
+
+  // v5
+  import {type} from '@workday/canvas-kit-labs-react/tokens';
+  ```
+
+#### Input Provider
+
+The `InputProvider` wrapper component (used to provide CSS-referencable data attributes for the
+user's current input method) has been moved from `@workday/canvas-kit-react-core` to
+`@workday/canvas-kit-react/common`. After renaming our `core` package to `tokens`, it no longer made
+sense in this location.
+
+```tsx
+// v4
+import {InputProvider} from '@workday/canvas-kit-react-core';
+
+// v5
+import {InputProvider} from '@workday/canvas-kit-react/common';
+```
+
+🤖 The codemod will update your `InputProvider` imports.
+
+#### Space Style Function
+
+The `space` style function in Labs `core` (now Labs `tokens`) has been removed. Please use `Box`
+instead. For example:
+
+```tsx
+// v4
+import {spaceNumbers} from '@workday/canvas-kit-react-core';
+import {space} from '@workday/canvas-kit-labs-react-core';
+// A styled div with space props
+const Box = styled('div')(space);
+
+<Box p={spaceNumbers.xl}>Ye Olde SpaceBox</Box>;
+
+// v5
+import {Box} from '@workday/canvas-kit-labs-react/common';
+
+// You can also use `padding={spaceNumbers.xl}` or `padding={space.xl}`
+<Box padding="xl">New Box</Box>;
+```
+
+### Tokens
+
+#### Space
+
+To better align with our design taxonomy, we've renamed our space tokens in our `tokens` package
+(formerly in `core`). Instead of relying on `@workday/canvas-space-web` to supply our space values,
+we're now keeping those values in canvas-kit. We've also taken the opportunity to improve the space
+types (which were too generic) and their JSDoc hints.
+
+The following table describes each update:
 
 | Before                | After                     | Change Description               |
 | --------------------- | ------------------------- | -------------------------------- |
@@ -129,86 +245,295 @@ This table describes each update:
 | `CanvasSpacingNumber` | `CanvasSpaceNumbers`      | name change and improved types\* |
 | `n/a`                 | `CanvasSpaceNumberValues` | new type!                        |
 
-\* Before the types were too generic and not very useful. They now better reflect the values they
+\* Before, the types were too generic and not very useful. They now better reflect the values they
 represent.
 
-#### Automatic Updates
+The codemod will handle _almost all_ of these changes with a few possible exceptions noted in
+[Manual Updates](#manual-updates) below.
 
-- 🤖 Token imports: `spacing`, `spacingNumbers`
-  - e.g. `import { spacing, spacingNumbers }` becomes `import { space, spaceNumbers }`
-- 🤖 Type imports: `CanvasSpacing`, `CanvasSpacingValue`, `CanvasSpacingNumber`
-  - e.g. `import { CanvasSpacing, CanvasSpacingValue, CanvasSpacingNumber }` becomes
-    `import { CanvasSpace, CanvasSpaceValues, CanvasSpaceNumbers }`
-- 🤖 Token expressions
-  - e.g. `const iconPadding = spacing.s;` becomes `const iconPadding = space.s`
-- 🤖 Type expressions
-  - e.g. `const getSpace = (value: CanvasSpacingValue) => ( spacing[value] )` becomes
-    `const getSpace = (value: CanvasSpaceValue) => ( space[value] )`
-- 🤖 Token properties
-  - e.g. `const iconPadding = canvas.spacing.s;` becomes `const iconPadding = canvas.space.s`
+##### Automatic Updates
 
-#### Manual Updates
+- 🤖 Rename `spacing` and `spacingNumbers` imports.
 
-As previously mentioned, the codemod should handle the vast majority of these updates. But there are
-potentially a few changes that will need to be made manually. There may be more beyond what's listed
-below, but these were the most common issues found in our investigation.
+  ```tsx
+  // v4
+  import {spacing, spacingNumbers} from '@workday/canvas-kit-react-core';
+
+  // v5
+  import {space, spaceNumbers} from '@workday/canvas-kit-react/tokens';
+  ```
+
+- 🤖 Rename `CanvasSpacing`, `CanvasSpacingValue`, and `CanvasSpacingNumber` imports.
+
+  ```tsx
+  // v4
+  import {
+    CanvasSpacing,
+    CanvasSpacingValue,
+    CanvasSpacingNumber,
+  } from '@workday/canvas-kit-react-core';
+
+  // v5
+  import {
+    CanvasSpace,
+    CanvasSpaceValues,
+    CanvasSpaceNumbers,
+  } from '@workday/canvas-kit-react/tokens';
+  ```
+
+- 🤖 Update token expressions.
+
+  ```tsx
+  // v4
+  const iconPadding = spacing.s;
+
+  // v5
+  const iconPadding = space.s;
+  ```
+
+- 🤖 Update type expressions.
+
+  ```tsx
+  // v4
+  const getSpace = (value: CanvasSpacingValue) => spacing[value];
+
+  // v5
+  const getSpace = (value: CanvasSpaceValue) => space[value];
+  ```
+
+- 🤖 Update token properties.
+
+  ```tsx
+  // v4
+  const iconPadding = canvas.spacing.s;
+
+  // v5
+  const iconPadding = canvas.space.s;
+  ```
+
+##### Manual Updates
+
+As previously mentioned, the codemod should handle the vast majority of these updates. However,
+there are potentially a few changes that will need to be made manually. There may be more beyond
+what's listed below, but these were the most common issues found in our investigation.
 
 - Usage outside of `.js`, `.jsx`, `.ts`, and `.tsx` files
   - e.g. referencing `spacing` in documentation (`.md` files)
 - Usage in code comments or JSDoc comments
   - e.g. `// spacing.s = 16px`
-- Re-declararation `space` or `spaceNumbers` in the same files = e.g. importing or declaring a new
-  `space` or `spaceNumbers` variable will prevent the codemod from updating the file
+- Re-declararation `space` or `spaceNumbers` in the same files
+  - e.g. importing or declaring a new `space` or `spaceNumbers` variable will prevent the codemod
+    from updating the file
 - Aliasing existing variables as `spacing` or `spaceNumbers`
-  - e.g. `import { spacingNumbers as spacing }` will prevent the codemod from updating the file
+  - e.g. `import {spacingNumbers as spacing}` will prevent the codemod from updating the file
 
-### Compound Components
+#### Border Radius
 
-Components are transitioning to [Compound Components](./COMPOUND_COMPONENTS.md)
+We've updated the border radius `zero` token value from `0` to `"0px"` for consistency given that
+all other border radius tokens use string pixel values. We highly doubt this change will cause any
+issues, but because the value's type is different, this is technically a breaking change.
 
-- Components will support [forwarded refs](https://reactjs.org/docs/forwarding-refs.html)
-- The corresponding tag of a component can be changed with the `as` prop
+```tsx
+// v4
+import {borderRadius} from '@workday/canvas-kit-react-core';
 
-### Canvas Kit Preview & Component Promotions
+console.log(borderRadius.zero); // returns `0`
 
-Due to the broad range of stability in Canvas Kit Labs (`@workday/canvas-kit-labs-react`), we are
-introducing a new module called "Canvas Kit Preview" (`@workday/canvas-kit-preview-react`) to
-provide consumers with more clarity and confidence when uptaking experimental and upcoming
-components. The components in Canvas Kit Preview have had a full design and accessibility review,
-and are approved for use in product. Their functionality and design are set, but the API's and/or
-underlying architecture could still be subject to change. This bundle serves as a staging ground for
-components that are ready to use, but may not be up to the high code standards upheld in the main
-`@workday/canvas-kit-react` bundle. For more info, check out the
-[Canvis Kit Preview README](../../preview-react/README.md).
+// v5
+import {borderRadius} from '@workday/canvas-kit-react/tokens';
 
-Generally, Canvas Kit Preview components were originally in [Canvas Kit Labs](../../labs-react) and
-have been promoted. Essentially, Canvas Kit Labs is for alpha components and Canvas Kit Preview is
-for beta components.
+console.log(borderRadius.zero); // returns "0px"
+```
 
-We have promoted several components that were previously in Canvas Kit Labs into Canvas Kit Preview
-and our main `@workday/canvas-kit-react` module:
+### Button
 
-#### `@workday/canvas-kit-preview-react`
+#### Recategorization
 
-- Breadcrumbs
-- Color Picker
-- Core `type` > Tokens `type`
-- Menu
-- Select
-- Side Panel
+There has been common confusion around the large number of buttons Canvas supports and when each
+should be used. To improve the usability of our design system, we've been working to recategorize
+and simplify our button offering. To align with the recent changes in our Figma libraries, we've
+reorganized our buttons, renaming a few and removing others.
 
-#### `@workday/canvas-kit-react`
+The majority of button use cases have been simplified into three different components:
+`PrimaryButton`, `SecondaryButton`, and `TertiaryButton`, each level representing its emphasis and
+hierarchy in a UI. We hope this makes your usage of our buttons more intentional and clear. We've
+provided a codemod to make these changes automatically.
 
-- Pagination
-- Tabs
+**Renamed:**
 
-## Breaking Component Changes
+- 🤖 `Button` has been split into `PrimaryButton` and `SecondaryButton` (depending on the `variant`
+  prop).
+- 🤖 `OutlineButton` (`secondary`) is now `SecondaryButton`. For accessibility reasons, the
+  "outline" styling is the new styling for our secondary buttons.
+- 🤖 `OutlineButton` (`inverse`) is now `SecondaryButton` with an `inverse` variant.
+- 🤖 `TextButton` is now `TertiaryButton`.
 
-### Input Ref Forwarding
+**Removed:**
 
-All input components in the main package now support
-[ref forwarding](https://reactjs.org/docs/forwarding-refs.html) using the standard `ref` attribute.
-This includes:
+- 🤖 `HighlightButton`. Use `SecondaryButton` instead.
+- 🤖 `OutlineButton` with `primary` variant. Use `PrimaryButton` or `SecondaryButton` instead. The
+  codemod will replace with `SecondaryButton`.
+- 🤖 `DropdownButton`. This can be achieved simply using `PrimaryButton` or `SecondaryButton` with
+  an `icon` prop and `iconPosition="right"`.
+
+To see examples of code in v4 versus v5, see our
+[codemod tests](../../codemod/lib/v5/spec/recategorizeButtons.spec.ts).
+
+#### Exports
+
+We've changed some of the Button module's export behavior:
+
+- 🤖 The `beta_Button` export was removed. The codemod will rename the import to `Button` instead,
+  preserving local renaming if it exists.
+
+  ```tsx
+  // v4
+  import {beta_Button as Button} from '@workday/canvas-kit-react-button';
+
+  // v5
+  import {SecondaryButton} from '@workday/canvas-kit-react/button';
+  ```
+
+- 🤖 The default export was removed. The codemod will change default imports to named imports.
+
+  ```tsx
+  // v4
+  import Button from '@workday/canvas-kit-react-button';
+
+  // v5
+  import {SecondaryButton} from '@workday/canvas-kit-react/button';
+  ```
+
+#### Enums
+
+Enums have been removed from all buttons in favor of string literals.
+
+🤖 The codemod will rewrite any usages of an enum to the string literal. If you used an enum as a
+type, the codemod will expand to a union of string literals. You could change the union manually
+instead to be something like `SecondaryButtonProps['variant']` if you prefer not to duplicate the
+union of string literals.
+
+```tsx
+// v4
+<Button size={Button.Size.Large} />;
+interface Props {
+  size: ButtonSize;
+}
+
+// v5
+<SecondaryButton size="large" />;
+interface Props {
+  size: 'small' | 'medium' | 'large';
+}
+```
+
+#### createComponent
+
+Buttons now use the `createComponent` utility from the `common` module which forwards `ref` and
+allows `as` to change the underlying element.
+
+```tsx
+// v4
+<Button buttonRef={ref} />;
+
+// v5
+<SecondaryButton ref={ref} />;
+```
+
+🤖 The codemod will update all buttons to use `ref` instead of `buttonRef`.
+
+Button prop interfaces no longer extend directly from
+`React.ButtonHTMLAttributes<HTMLButtonElement>`. `createComponent` returns a component that
+determines the element interface via the `as` prop. This is why Button props no longer contain an
+element interface directly. If you extend from a Button prop interface, or have code that uses a
+Button prop interface and accesses properties like `onClick`, you'll need to provide the button
+attribute yourself in order to avoid TypeScript issues (this doesn't affect runtime). This is not
+code-moddable since intent cannot be pre-determined.
+
+```tsx
+interface MyButtonProps extends ButtonProps {}
+
+// onClick no longer exists in `ButtonProps`, so TypeScript will complain about onClick not
+// existing in `MyButtonProps` (`onClick` does exist as a prop on `<Button>`, however)
+const MyButton = ({children, onClick}: MyButtonProps) => (
+  <Button onClick={onClick}>{children}</Button>
+);
+
+// After
+interface MyButtonProps extends ButtonProps, React.ButtonHTMLAttributes<HTMLButtonElement> {}
+
+// After (alternate fix)
+interface MyButtonProps extends ButtonProps {
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+}
+```
+
+### Card
+
+Card is now a [compound component](./COMPOUND_COMPONENTS.mdx) composed of a `Card.Body` and an
+optional `Card.Heading`. This allows direct access to the heading and body elements.
+
+```tsx
+// v4
+<Card header="Card Title" headerId="header-id">
+  Card Body
+</Card>
+
+// v5
+<Card>
+  <Card.Heading id="header-id">Card Title</Card.Heading>
+  <Card.Body>Card Body</Card.Body>
+</Card>
+```
+
+🤖 The codemod will attempt to rewrite your JSX to match the new API. Based on what we've seen of
+how Card has been used, the codemod should handle most of your use cases. It will work if you rename
+`Card` in the import or style the Card using `styled(Card)`:
+
+```tsx
+// Handled by the codemod
+
+// Default import
+import Card from '@workday/canvas-kit-react-card'
+
+<Card header="Card Title">Card Body</Card>
+
+// Renamed import
+import {Card as CanvasCard} from '@workday/canvas-kit-react-card'
+
+<CanvasCard header="Card Title">Card Body</CanvasCard>
+
+// Styled card
+import {Card} from '@workday/canvas-kit-react-card'
+
+const StyledCard = styled(Card)(styles)
+
+<StyledCard header="Card Title">Card Body</StyledCard>
+```
+
+However, the codemod will _not_ work in cases where `header` or `headerId` are spreaded as props or
+if you're importing a re-exported Canvas Kit Card:
+
+```tsx
+// NOT handled by the codemod
+
+// Spread props
+import {Card} from '@workday-canvas-kit-card'
+
+const props = {
+  header: 'Card Title'
+}
+<Card {...props}>Card Body</Card>
+
+// Re-exporting
+import {Card} from './Card' // where `Card` is a re-exported Canvas Kit `Card`
+```
+
+### Inputs
+
+All input components in the Main package now support
+[ref forwarding](https://reactjs.org/docs/forwarding-refs.html) through use of the `createComponent`
+utility from the `common` module. This includes:
 
 - Checkbox
 - Color Input
@@ -225,13 +550,15 @@ forwarding.
 Most of these input components previously supported an `inputRef` prop that could be used to obtain
 a ref to the component's underlying input element. For example, in v4, if you wanted to obtain a ref
 to a Text Input's underlying `<input type="text" />` element, you could pass a ref to the component
-using `inputRef`. In v5, you'll need to use `ref` instead of `inputRef` (or run the codemod 🤖):
+using `inputRef`. In v5, you'll need to use `ref` instead of `inputRef`:
 
 ```tsx
 const ref = React.useRef(null);
-// before
+
+// v4
 <TextInput inputRef={ref} />;
-// after
+
+// v5
 <TextInput ref={ref} />;
 ```
 
@@ -248,9 +575,9 @@ Input component prop interfaces no longer extend directly from their underlying 
 `createComponent` returns a component that determines the element interface via the `as` prop. This
 is why input component props no longer contain an element interface directly. If you extend from an
 input component prop interface, or have code that uses an input component prop interface and
-accesses properties like `onClick`, you'll have to provide the input attribute yourself. This is not
-code-moddable since intent cannot be pre-determined. This will not effect runtime, but only
-TypeScript.
+accesses properties like `onClick`, you'll need to provide the input attribute yourself in order to
+avoid TypeScript issues (this doesn't affect runtime). This is not code-moddable since intent cannot
+be pre-determined.
 
 ```tsx
 interface MyTextInputProps extends TextInputProps {}
@@ -283,227 +610,14 @@ instance of the entire component
 ([source](https://reactjs.org/docs/refs-and-the-dom.html#accessing-refs)) rather than the underlying
 HTML element represented by the component. This is no longer the case in v5.
 
-### Button
-
-#### Recategorization
-
-There has been common confusion around the large number of buttons Canvas supports and when each
-should be used. To improve the usability of our design system, we have been working to recategorize
-and simplify our button offering. To align with the changes recently made in our Figma libraries, we
-have reorganized our buttons, renaming a few and removing some others. The majority of button use
-cases have been simplified into three different components: `PrimaryButton`, `SecondaryButton`, and
-`TertiaryButton`, each level representing its emphasis and hierarchy in a UI. We hope this makes
-your usage of our buttons more intentional and clear. We have provided a codemod to make all of
-these changes automatic updates. In addition, the `SecondaryButton` now uses the "outline" styling
-by default for improved accessibility.
-
-**Renamed:**
-
-- 🤖 `Button` has been split into `PrimaryButton` and `SecondaryButton` (depending on the `variant`
-  prop).
-- 🤖 `OutlineButton` (`secondary`) is now `SecondaryButton`. For accessibility reasons, the
-  `outline` styling is the new styling for our secondary buttons.
-- 🤖 `OutlineButton` (`inverse`) is now `SecondaryButton` with an `inverse` variant.
-- 🤖 `TextButton` is now `TertiaryButton`.
-
-**Removed:**
-
-- 🤖 `HighlightButton`. Use `SecondaryButton` instead.
-- 🤖 `OutlineButton` with `primary` variant. Use `PrimaryButton` or `SecondaryButton` instead. The
-  codemod will replace with `SecondaryButton`.
-- 🤖 `DropdownButton`. This can be achieved simply using `PrimaryButton` or `SecondaryButton` with
-  an `icon` prop and `iconPosition="right"`.
-
-To see examples of the before and after code, have a look at our
-[codemod tests](../../codemod/lib/v5/spec/recategorizeButtons.spec.ts).
-
-#### Exports
-
-Additionally, we have changed some of the button module's export behavior:
-
-- 🤖 `beta_Button` export was removed. The codemod will rename the import to `Button` instead,
-  preserving local renaming if it exists.
-  ```tsx
-  // before
-  import {beta_Button as Button} from '@workday/canvas-kit-react-button';
-  // after
-  import {SecondaryButton} from '@workday/canvas-kit-react-button';
-  ```
-- 🤖 The default export was removed. The codemod will change default imports to named imports.
-  ```tsx
-  // before
-  import Button from '@workday/canvas-kit-react-button';
-  // after
-  import {SecondaryButton} from '@workday/canvas-kit-react-button';
-  ```
-- 🤖 Enums have been removed from all buttons. String literals are used instead. The codemod will
-  write any usages of an enum to the string literal. If you used an enum as a type, the codemod will
-  expand to a union of string literals. You could change the union manually instead to be something
-  like `SecondaryButtonProps['variant']` if you prefer not to duplicate the union of string
-  literals.
-  ```tsx
-  // before
-  <Button size={Button.Size.Large} />;
-  interface Props {
-    size: ButtonSize;
-  }
-  // after
-  <SecondaryButton size="large" />;
-  interface Props {
-    size: 'small' | 'medium' | 'large';
-  }
-  ```
-- Buttons now use `createComponent` utility from the `common` module which now forwards `ref` and
-  allows `as` to change the underlying element.
-
-  - 🤖 `buttonRef` was renamed to `ref` provided by `createComponent`. `buttonRef` is no longer
-    valid. The codemod will rewrite all instances of `buttonRef` to `ref` for any JSX element that
-    is a Button import from Canvas-Kit.
-    ```tsx
-    // before
-    <Button buttonRef={ref}>
-    // after
-    <Button ref={ref}>
-    ```
-  - Button prop interfaces no longer extend directly from the
-    `React.ButtonHTMLAttributes<HTMLButtonElement>`. `createComponent` returns a component that
-    determines the element interface via the `as` prop. This is why Button props no longer contain
-    an element interface directly. If you extend from a Button prop interface, or have code that
-    uses a Button prop interface and accesses properties like `onClick`, you'll have to provide the
-    button attribute yourself. This is not code-moddable since intent cannot be pre-determined. This
-    will not effect runtime, but only Typescript.
-
-    ```tsx
-    // before
-    interface MyButtonProps extends ButtonProps {}
-
-    // onClick no longer exists on `ButtonProps`, but does exist as a prop in `<Button>`
-    const MyButton = ({children, onClick}: MyButtonProps) => (
-      <Button onClick={onClick}>{children}</Button>
-    );
-
-    // after
-    interface MyButtonProps extends ButtonProps, React.ButtonHTMLAttributes<HTMLButtonElement> {}
-
-    // OR
-    interface MyButtonProps extends ButtonProps {
-      onClick?: React.MouseEventHandler<HTMLButtonElement>;
-    }
-    ```
-
-### Card
-
-🤖 `Card` is now a compound component. The card is now composed of a `Card.Body` and an optional
-`Card.Heading`. This allows direct access to the header and body elements.
-
-```tsx
-// before
-<Card header="Card Title" headerId="header-id">
-  Card Body
-</Card>
-
-// after
-<Card>
-  <Card.Heading id="header-id">Card Title</Card.Heading>
-  <Card.Body>Card Body</Card.Body>
-</Card>
-```
-
-The codemod will do its best to rewrite the JSX to match the new API. It will work if you rename
-`Card` in the import or use style via `styled(Card)`. It will not work in cases where `header` or
-`headerId` are used in a spread props. Here's some examples:
-
-```tsx
-// WORKS
-
-// default import
-import Card from '@workday/canvas-kit-react-card'
-
-<Card header="Card Title">Card Body</Card>
-
-// renamed import
-import { Card as CanvasCard } from '@workday/canvas-kit-react-card'
-
-<CanvasCard header="Card Title">Card Body</CanvasCard>
-
-// styled card
-import {Card} from '@workday/canvas-kit-react-card'
-
-const StyleCard = styled(Card)(styles)
-
-<StyledCard header="Card Title">Card Body</StyledCard>
-
-// DOES NOT WORK
-
-// spread props
-import {Card} from '@workday-canvas-kit-card'
-
-const props = {
-  header: 'Card Title'
-}
-<Card {...props}>Card Body</Card>
-
-// re-exporting
-import {Card} from './Card' // where `Card` is a re-exported Canvas `Card`
-```
-
-This codemod should handle most of what we've seen in code that uses Canvas Kit cards already.
-
-### InputProvider
-
-The `InputProvider` wrapper component (used to provide css-referencable data attributes for the
-users current input method) has been moved. After renaming our `core` package to `tokens`, it no
-longer made sense in this location.
-
-- 🤖 `InputProvider` moved from `@workday/canvas-kit-react-core` to
-  `@workday/canvas-kit-react/common`.
-
 ### Tabs
+
+In addition to [promoting Tabs](#promotions-from-labs-to-main) out of Labs and into the Main module,
+we've made a few updates to the component in v5:
 
 - `onTabsChange` is now `onActivateTab` and the signature is now:
   ```tsx
   function onActivateTab({data: {tab: string}, state: TabsState}): void;
   ```
-- The `<Tabs>` component no longer accepts the `currentTab` property. The Tabs uses a model now. See
-  story for more details
-- As noted above, Tabs has been promoted out of Canvas Kit Labs. You can now import directly from
-  `@workday/canvas-kit-react/tabs`.
-
-### Labs Space Style Function
-
-The `space` style function in the `/labs-react/token` (formerly `labs/core`) has been removed.
-Please opt to use `Box` instead. Below is an example:
-
-```tsx
-// before
-import {spaceNumbers} from '@workday/canvas-kit-react-core';
-import {space} from '@workday/canvas-kit-labs-react-core';
-// A styled div with space props
-const Box = styled('div')(space);
-
-<Box p={spaceNumbers.xl}>Ye Olde SpaceBox</Box>;
-
-// after
-import {Box} from '@workday/canvas-kit/labs-react/common';
-
-// You can also use `padding={spaceNumbers.xl}` or `padding={space.xl}`
-<Box padding="xl">New Box</Box>;
-```
-
-## Border Radius Zero Token
-
-The border radius zero token value was updated from `0` to `"0px"` for consistency; all other border
-radius tokens use string pixel values. We highly doubt this change will cause any issues, but
-because the value's type is different, this is technically a breaking change.
-
-```tsx
-// before
-import {borderRadius} from '@workday/canvas-kit-react/tokens';
-
-console.log(borderRadius.zero); // returns `0`
-
-// after
-import {borderRadius} from '@workday/canvas-kit-react/tokens';
-
-console.log(borderRadius.zero); // returns "0px"
-```
+- The `Tabs` component no longer accepts the `currentTab` property. Tabs uses a model now. See the
+  component documentation for more details.
