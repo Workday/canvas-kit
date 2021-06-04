@@ -19,6 +19,10 @@ export const Simple = () => {
   useInitialFocus(model);
   useReturnFocus(model);
 
+  const handleDelete = () => {
+    console.log('Delete Item');
+  };
+
   return (
     <Popup model={model}>
       <Popup.Target as={DeleteButton}>Delete Item</Popup.Target>
@@ -30,7 +34,9 @@ export const Simple = () => {
             <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
 
             <HStack spacing="s">
-              <Popup.CloseButton as={DeleteButton}>Delete</Popup.CloseButton>
+              <Popup.CloseButton as={DeleteButton} onClick={handleDelete}>
+                Delete
+              </Popup.CloseButton>
               <Popup.CloseButton>Cancel</Popup.CloseButton>
             </HStack>
           </Popup.Body>

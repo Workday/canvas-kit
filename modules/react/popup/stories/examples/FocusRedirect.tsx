@@ -21,6 +21,10 @@ export const FocusRedirect = () => {
   useReturnFocus(model);
   useFocusRedirect(model);
 
+  const handleDelete = () => {
+    console.log('Delete Item');
+  };
+
   const popupId = 'popup-test-id';
   const visible = model.state.visibility !== 'hidden';
   React.useLayoutEffect(() => {
@@ -42,7 +46,9 @@ export const FocusRedirect = () => {
               <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
             </Popup.Body>
             <HStack spacing="s">
-              <Popup.CloseButton as={DeleteButton}>Delete</Popup.CloseButton>
+              <Popup.CloseButton as={DeleteButton} onClick={handleDelete}>
+                Delete
+              </Popup.CloseButton>
               <Popup.CloseButton>Cancel</Popup.CloseButton>
             </HStack>
           </Popup.Card>

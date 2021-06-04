@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 import {DeleteButton, SecondaryButton} from '@workday/canvas-kit-react/button';
 import {useMount} from '@workday/canvas-kit-react/common';
-
+import {HStack} from '@workday/canvas-kit-labs-react/layout';
 import {
   Popup,
   useCloseOnOutsideClick,
@@ -148,5 +148,39 @@ export const MixedPopupTypes = () => {
         </div>
       </Window>
     </div>
+  );
+};
+
+export const PopupWithNonHidablePopup = () => {
+  const popup1 = usePopupModel();
+  const popup2 = usePopupModel();
+
+  useCloseOnOutsideClick(popup1);
+  useCloseOnEscape(popup1);
+
+  return (
+    <HStack spacing="s">
+      <Popup model={popup1}>
+        <Popup.Target>Open Popup 1</Popup.Target>
+        <Popup.Popper>
+          <Popup.Card aria-label="Popup 1">
+            <Popup.CloseIcon aria-label="Close" size="small" />
+            <Popup.Body>
+              <p>Contents of Popup 1</p>
+              <Popup.Target model={popup2}>Open Popup 2</Popup.Target>
+            </Popup.Body>
+          </Popup.Card>
+        </Popup.Popper>
+      </Popup>
+      <Popup model={popup2}>
+        <Popup.Popper>
+          <Popup.Card aria-label="Popup 1">
+            <Popup.CloseIcon aria-label="Close" size="small" />
+            <Popup.Heading>Popup 2 (Not hidable on outside click)</Popup.Heading>
+            <Popup.Body>Contents of Popup 2</Popup.Body>
+          </Popup.Card>
+        </Popup.Popper>
+      </Popup>
+    </HStack>
   );
 };
