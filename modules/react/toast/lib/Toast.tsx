@@ -1,13 +1,14 @@
 import * as React from 'react';
-import {Popup, PopupPadding} from '@workday/canvas-kit-react/popup';
+import styled from '@emotion/styled';
+
+import {Popup} from '@workday/canvas-kit-react/popup';
 import {space, colors, type, CanvasColor} from '@workday/canvas-kit-react/tokens';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {checkIcon} from '@workday/canvas-system-icons-web';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {TransformOrigin} from '@workday/canvas-kit-react/common';
-import styled from '@emotion/styled';
+import {createComponent, ExtractProps} from '@workday/canvas-kit-react/common';
 
-export interface ToastProps {
+export interface ToastProps extends ExtractProps<typeof Popup.Card> {
   /**
    * The icon of the Toast.
    * @default checkIcon
@@ -34,11 +35,6 @@ export interface ToastProps {
    * The text of the Toast action.
    */
   actionText?: string;
-  /**
-   * The origin from which the Toast will animate.
-   * @default {horizontal: 'center', vertical: 'top'}
-   */
-  transformOrigin?: TransformOrigin;
 }
 const toastWidth = 360;
 
@@ -72,40 +68,45 @@ const Message = styled('div')({
   wordWrap: 'break-word', // Needed for IE11
 });
 
-export default class Toast extends React.Component<ToastProps> {
-  public render() {
-    const {
-      icon = checkIcon as CanvasSystemIcon, // needed for TS2742 - https://github.com/microsoft/TypeScript/issues/29808
+export const Toast = createComponent('div')({
+  displayName: 'Toast',
+  Component: (
+    {
+      icon = checkIcon, // needed for TS2742 - https://github.com/microsoft/TypeScript/issues/29808
       iconColor = colors.greenApple400,
-      transformOrigin,
       onClose,
       onActionClick,
       actionText,
+      children,
       ...elemProps
-    } = this.props;
-
+    }: ToastProps,
+    ref,
+    Element
+  ) => {
     const isInteractive = onClose || onActionClick;
 
     return (
-      <Popup
+      <Popup.Card
+        ref={ref}
+        as={Element}
         width={toastWidth}
-        transformOrigin={transformOrigin}
-        padding={PopupPadding.s}
-        handleClose={onClose}
-        closeIconSize="small"
+        padding="s"
         role={isInteractive ? 'dialog' : 'status'}
         aria-live={isInteractive ? 'off' : 'polite'}
         aria-atomic={!isInteractive}
         {...elemProps}
       >
-        <ToastContentContainer onClose={onClose}>
-          {icon && <ToastSystemIcon color={iconColor} colorHover={iconColor} icon={icon} />}
-          <Message>
-            {this.props.children}
-            {onActionClick && <ActionButton onClick={onActionClick}>{actionText}</ActionButton>}
-          </Message>
-        </ToastContentContainer>
-      </Popup>
+        {onClose && <Popup.CloseIcon aria-label="Close" onClick={onClose} size="small" />}
+        <Popup.Body>
+          <ToastContentContainer onClose={onClose}>
+            {icon && <ToastSystemIcon color={iconColor} colorHover={iconColor} icon={icon} />}
+            <Message>
+              {children}
+              {onActionClick && <ActionButton onClick={onActionClick}>{actionText}</ActionButton>}
+            </Message>
+          </ToastContentContainer>
+        </Popup.Body>
+      </Popup.Card>
     );
-  }
-}
+  },
+});

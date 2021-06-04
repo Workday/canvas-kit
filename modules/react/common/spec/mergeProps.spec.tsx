@@ -45,6 +45,26 @@ describe('mergeProps', () => {
     expect(sourceSpy).toHaveBeenCalledWith({event: 'foo'});
   });
 
+  it('should target callback before source callback', () => {
+    const executionOrder = [] as number[];
+    const targetSpy = jest.fn(() => {
+      executionOrder.push(1);
+    });
+    const sourceSpy = jest.fn(() => {
+      executionOrder.push(2);
+    });
+    const target = {
+      onClick: targetSpy,
+    };
+    const source = {
+      onClick: sourceSpy,
+    };
+
+    const mergedProps = mergeProps(target, source);
+    mergedProps.onClick();
+    expect(executionOrder).toEqual([1, 2]); // simple, but effective way to guarantee order
+  });
+
   it('should not overwrite a callback with undefined', () => {
     const targetSpy = jest.fn();
     const target = {

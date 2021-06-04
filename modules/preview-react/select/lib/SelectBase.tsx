@@ -1,5 +1,4 @@
 import React, {useLayoutEffect} from 'react';
-import uuid from 'uuid/v4';
 
 import {
   GrowthBehavior,
@@ -8,6 +7,7 @@ import {
   Themeable,
   errorRing,
   styled,
+  useUniqueId,
 } from '@workday/canvas-kit-react/common';
 import {
   colors,
@@ -129,13 +129,9 @@ export interface SelectBaseProps extends CoreSelectBaseProps, StyledType {
    */
   onKeyDown?: (event: React.KeyboardEvent<HTMLElement>) => void;
   /**
-   * The function called when the Escape key is pressed while the SelectBase menu is the topmost element in the stack.
+   * The function called when the menu is closed.
    */
-  onMenuCloseOnEscape?: () => void;
-  /**
-   * The function called when a click occurs outside the SelectBase menu while the menu is the topmost element in the stack.
-   */
-  onMenuCloseOnOutsideClick?: () => void;
+  onClose?: () => void;
   /**
    * The function called when an option in the SelectBase is selected via a click or a keyboard shortcut. The `index` passed to the callback function represents the index of the option which was selected.
    */
@@ -284,8 +280,7 @@ const SelectBase = ({
   menuVisibility = 'closed',
   onChange,
   onKeyDown,
-  onMenuCloseOnEscape,
-  onMenuCloseOnOutsideClick,
+  onClose,
   onOptionSelection,
   options,
   renderOption = defaultRenderOption,
@@ -297,10 +292,7 @@ const SelectBase = ({
 }: SelectBaseProps) => {
   const focusedOptionRef = React.useRef<HTMLLIElement>(null);
 
-  // Generate a stable ID for the menu (https://codesandbox.io/s/p2ndq).
-  // We prefix the ID with an "a" to ensure it's a valid IDREF
-  // (https://www.w3.org/TR/xmlschema11-2/#IDREF).
-  const [menuId] = React.useState(() => `a${uuid()}`);
+  const menuId = useUniqueId();
 
   const renderOptions = (renderOption: RenderOptionFunction) => {
     const selectedOptionIndex = getCorrectedIndexByValue(options, value);
@@ -440,8 +432,7 @@ const SelectBase = ({
           error={error}
           menuRef={menuRef}
           onKeyDown={onKeyDown}
-          onCloseOnEscape={onMenuCloseOnEscape}
-          onCloseOnOutsideClick={onMenuCloseOnOutsideClick}
+          onClose={onClose}
           placement={menuPlacement}
           shouldAutoFlip={shouldMenuAutoFlip}
           shouldAutoFocus={shouldMenuAutoFocus}

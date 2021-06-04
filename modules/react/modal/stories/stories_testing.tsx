@@ -5,11 +5,12 @@ import {Modal, useModal} from '@workday/canvas-kit-react/modal';
 import {DeleteButton, SecondaryButton} from '@workday/canvas-kit-react/button';
 import {
   Popup,
-  Popper,
-  usePopup,
   useCloseOnOutsideClick,
   useCloseOnEscape,
+  usePopupModel,
 } from '@workday/canvas-kit-react/popup';
+import {HStack} from '@workday/canvas-kit-labs-react/layout';
+import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 
 export default {
   title: 'Testing/React/Popups/Modal',
@@ -24,23 +25,11 @@ export default {
 export * from './stories_VisualTesting';
 
 export const AccessibilityTest = () => {
-  const [open, setOpen] = React.useState(false);
-  const ref = React.useRef<HTMLButtonElement>(null);
-  const openModal = () => {
-    setOpen(true);
-  };
-  const closeModal = () => {
-    setOpen(false);
-    if (ref.current) {
-      ref.current.focus();
-    }
-  };
+  const {targetProps, modalProps, closeModal} = useModal();
 
   return (
     <>
-      <DeleteButton ref={ref} onClick={openModal}>
-        Delete Item
-      </DeleteButton>
+      <DeleteButton {...targetProps}>Delete Item</DeleteButton>
       <p>The content below should be hidden from assistive technology while the modal is open.</p>
       <p>
         <a href="#">Link</a>
@@ -84,12 +73,12 @@ export const AccessibilityTest = () => {
       <div>
         <iframe title="iframe test" src="https://workday.com/" width="300" height="300"></iframe>
       </div>
-      <Modal data-testid="TestModal" heading="Delete Item" open={open} handleClose={closeModal}>
+      <Modal data-testid="TestModal" heading="Delete Item" {...modalProps}>
         <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
-        <DeleteButton style={{marginRight: '16px'}} onClick={closeModal}>
-          Delete
-        </DeleteButton>
-        <SecondaryButton onClick={closeModal}>Cancel</SecondaryButton>
+        <HStack spacing="s">
+          <DeleteButton onClick={closeModal}>Delete</DeleteButton>
+          <SecondaryButton onClick={closeModal}>Cancel</SecondaryButton>
+        </HStack>
       </Modal>
     </>
   );
@@ -102,24 +91,25 @@ export const StackedModals = () => {
   return (
     <>
       <DeleteButton {...modal1.targetProps}>Delete Item</DeleteButton>
-      <Modal heading={'Delete Item'} {...modal1.modalProps}>
+      <Modal heading="Delete Item" {...modal1.modalProps}>
         <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
-        <DeleteButton style={{marginRight: '16px'}} {...modal2.targetProps}>
-          Yes, Delete
-        </DeleteButton>
-        <SecondaryButton onClick={modal1.closeModal}>Cancel</SecondaryButton>
-        <Modal heading={'Really Delete Item'} {...modal2.modalProps}>
+        <HStack spacing="s">
+          <DeleteButton {...modal2.targetProps}>Yes, Delete</DeleteButton>
+          <SecondaryButton onClick={modal1.closeModal}>Cancel</SecondaryButton>
+        </HStack>
+        <Modal heading="Really Delete Item" {...modal2.modalProps}>
           <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
-          <DeleteButton
-            style={{marginRight: '16px'}}
-            onClick={() => {
-              modal1.closeModal();
-              modal2.closeModal();
-            }}
-          >
-            Yes, Really Delete
-          </DeleteButton>
-          <SecondaryButton onClick={modal2.closeModal}>Cancel</SecondaryButton>
+          <HStack spacing="s">
+            <DeleteButton
+              onClick={() => {
+                modal1.closeModal();
+                modal2.closeModal();
+              }}
+            >
+              Yes, Really Delete
+            </DeleteButton>
+            <SecondaryButton onClick={modal2.closeModal}>Cancel</SecondaryButton>
+          </HStack>
         </Modal>
       </Modal>
     </>
@@ -128,36 +118,103 @@ export const StackedModals = () => {
 
 export const ModalWithPopup = () => {
   const modal = useModal();
-  const popup = usePopup();
+  const popup = usePopupModel();
 
-  useCloseOnOutsideClick(popup.popperProps.ref, popup.closePopup);
-  useCloseOnEscape(popup.popperProps.ref, popup.closePopup);
+  useCloseOnOutsideClick(popup);
+  useCloseOnEscape(popup);
 
   return (
     <>
       <DeleteButton {...modal.targetProps}>Delete Item</DeleteButton>
-      <Modal heading={'Delete Item'} {...modal.modalProps}>
+      <Modal heading="Delete Item" {...modal.modalProps}>
         <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
-        <DeleteButton style={{marginRight: '16px'}} {...popup.targetProps}>
-          Yes, Delete
-        </DeleteButton>
-        <SecondaryButton onClick={modal.closeModal}>Cancel</SecondaryButton>
-        <Popper {...popup.popperProps}>
-          <Popup heading={'Really Delete Item'} handleClose={popup.closePopup}>
-            <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
-            <DeleteButton
-              style={{marginRight: '16px'}}
-              onClick={() => {
-                modal.closeModal();
-                popup.closePopup();
-              }}
-            >
-              Yes, Really Delete
-            </DeleteButton>
-            <SecondaryButton onClick={popup.closePopup}>Cancel</SecondaryButton>
-          </Popup>
-        </Popper>
+        <Popup model={popup}>
+          <HStack spacing="s">
+            <Popup.Target as={DeleteButton}>Yes, Delete</Popup.Target>
+            <Popup.CloseButton>Cancel</Popup.CloseButton>
+          </HStack>
+          <Popup.Popper>
+            <Popup.Card>
+              <Popup.CloseIcon aria-label="Close" />
+              <Popup.Heading>Really Delete Item</Popup.Heading>
+              <Popup.Body>
+                <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
+                <HStack spacing="s">
+                  <Popup.CloseButton
+                    as={DeleteButton}
+                    onClick={() => {
+                      modal.closeModal();
+                    }}
+                  >
+                    Yes, Really Delete
+                  </Popup.CloseButton>
+                  <Popup.CloseButton>Cancel</Popup.CloseButton>
+                </HStack>
+              </Popup.Body>
+            </Popup.Card>
+          </Popup.Popper>
+        </Popup>
       </Modal>
+    </>
+  );
+};
+
+export const WithTooltips = () => {
+  const {targetProps, modalProps, closeModal} = useModal();
+  const popup1 = usePopupModel();
+  const popup2 = usePopupModel();
+
+  useCloseOnOutsideClick(popup1);
+
+  return (
+    <>
+      <SecondaryButton {...targetProps}>Open Modal</SecondaryButton>
+      <Modal heading="Open Modal" {...modalProps} width={Modal.Width.m}>
+        <p>Open a hidable and non-hidable popups</p>
+        <HStack spacing="s">
+          <Popup.Target model={popup1}>Hidable Popup</Popup.Target>
+          <Popup.Target model={popup2}>Non-hidable Popup</Popup.Target>
+          <Tooltip title="Not so sure" type="muted">
+            <SecondaryButton onClick={closeModal}>Cancel</SecondaryButton>
+          </Tooltip>
+        </HStack>
+      </Modal>
+      <Popup model={popup1}>
+        <Popup.Popper>
+          <Popup.Card>
+            <Popup.CloseIcon aria-label="Close" />
+            <Popup.Heading>Hidable Popup</Popup.Heading>
+            <Popup.Body>
+              <p>Pressing 'OK' will close the modal</p>
+              <Tooltip
+                placement="left"
+                title="Really, Really, Really, Really, Really sure"
+                type="muted"
+              >
+                <Popup.CloseButton onClick={closeModal}>OK</Popup.CloseButton>
+              </Tooltip>
+            </Popup.Body>
+          </Popup.Card>
+        </Popup.Popper>
+      </Popup>
+      <Popup model={popup2}>
+        <Popup.Popper>
+          <Popup.Card>
+            <Popup.CloseIcon aria-label="Close" />
+            <Popup.Heading>Non-hidable Popup</Popup.Heading>
+            <Popup.Body>
+              <p>Pressing 'OK' will close the modal</p>
+              <Tooltip
+                placement="left"
+                title="Really, Really, Really, Really, Really sure"
+                type="muted"
+              >
+                <Popup.CloseButton onClick={closeModal}>OK</Popup.CloseButton>
+              </Tooltip>
+            </Popup.Body>
+          </Popup.Card>
+        </Popup.Popper>
+      </Popup>
     </>
   );
 };

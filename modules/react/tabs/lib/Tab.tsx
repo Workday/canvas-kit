@@ -10,7 +10,6 @@ import {
   StyledType,
   useLocalRef,
   useModelContext,
-  composeHooks,
 } from '@workday/canvas-kit-react/common';
 
 import {TabsModelContext} from './Tabs';
@@ -129,7 +128,7 @@ const StyledButton = styled('button')<{isSelected: boolean} & StyledType>(
 const useTab = (
   model: TabsModel,
   elemProps: {index?: number; name?: string} = {},
-  ref: React.Ref<unknown> = null
+  ref: React.Ref<HTMLButtonElement>
 ) => {
   const {localRef, elementRef} = useLocalRef(ref);
 
@@ -152,7 +151,7 @@ const useTab = (
       isSelected: isSelected,
       ref: elementRef,
     },
-    elemProps
+    useRovingFocusItem(model, elemProps)
   );
 };
 
@@ -161,7 +160,7 @@ export const Tab = createComponent('button')({
   Component: ({model, children, ...elemProps}: TabProps, ref, Element) => {
     const localModel = useModelContext(TabsModelContext, model);
 
-    const props = composeHooks(useRovingFocusItem, useTab)(localModel, elemProps, ref);
+    const props = useTab(localModel, elemProps, ref);
 
     return (
       <StyledButton type="button" role="tab" as={Element} {...props}>

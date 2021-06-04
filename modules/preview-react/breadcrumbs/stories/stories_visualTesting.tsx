@@ -169,7 +169,7 @@ const TableRenderer = ({listItems, currentItem, direction = ContentDirection.LTR
 const DropdownMenuRenderer = ({items, direction = ContentDirection.LTR}) => {
   const activeItemRef = React.useRef();
   const ref = React.useRef();
-  const {dropdownMenuProps} = useDropdown(activeItemRef, ref, items);
+  const {dropdownMenuProps} = useDropdown(activeItemRef, items);
   return (
     <CanvasProvider theme={{canvas: {direction}}}>
       <StaticStates>

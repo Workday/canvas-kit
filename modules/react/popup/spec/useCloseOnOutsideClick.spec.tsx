@@ -1,13 +1,20 @@
 import {renderHook} from '@testing-library/react-hooks';
-import {useCloseOnOutsideClick} from '../lib/useCloseOnOutsideClick';
+import {useCloseOnOutsideClick, usePopupModel, PopupModel} from '@workday/canvas-kit-react/popup';
 
 describe('useCloseOnOutsideClick', () => {
   it('should add "data-behavior-click-outside-close=topmost" attribute', () => {
-    const ref = {current: document.createElement('div')};
-    const onClose = jest.fn();
+    let model: PopupModel;
+    renderHook(() => {
+      model = usePopupModel({initialVisibility: 'visible'});
+      (model.state.stackRef as React.MutableRefObject<
+        HTMLDivElement
+      >).current = document.createElement('div');
+      useCloseOnOutsideClick(model);
+    });
 
-    renderHook(() => useCloseOnOutsideClick(ref, onClose));
-
-    expect(ref.current).toHaveAttribute('data-behavior-click-outside-close', 'topmost');
+    expect(model.state.stackRef.current).toHaveAttribute(
+      'data-behavior-click-outside-close',
+      'topmost'
+    );
   });
 });

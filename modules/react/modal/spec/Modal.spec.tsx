@@ -18,7 +18,7 @@ describe('Modal', () => {
     expect(handleClose).toHaveBeenCalledTimes(1);
   });
 
-  test('Modal should spread extra props', () => {
+  test('should spread extra props', () => {
     renderModal({['data-propspread']: 'test'});
     expect(screen.getByRole('dialog').parentElement.parentElement).toHaveAttribute(
       'data-propspread',
@@ -26,13 +26,13 @@ describe('Modal', () => {
     );
   });
 
-  test('Modal should forward closeButtonAriaLabel prop to Popup', () => {
+  test('should forward closeButtonAriaLabel prop to Popup', () => {
     const closeButtonAriaLabel = 'close button aria label';
     renderModal({closeButtonAriaLabel});
     expect(screen.getByRole('button')).toHaveAttribute('aria-label', closeButtonAriaLabel);
   });
 
-  test('Modal should add `data-behavior-click-outside-close=topmost` to stack element', () => {
+  test('should add `data-behavior-click-outside-close=topmost` to stack element', () => {
     renderModal();
     expect(
       screen.getByRole('dialog').closest('[data-behavior-click-outside-close]')

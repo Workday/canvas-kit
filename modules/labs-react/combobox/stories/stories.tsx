@@ -26,7 +26,7 @@ const autocompleteResult = (
 
 const simpleAutoComplete = (count: number, showDisabledItems, total = 5) =>
   Array.apply(null, Array(count))
-    .map((_: ReactElement, i: number) => autocompleteResult(i, showDisabledItems && i === 0))
+    .map((_, i) => autocompleteResult(i, showDisabledItems && i === 0))
     .splice(0, total);
 
 const groupOfResults = (

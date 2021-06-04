@@ -1,16 +1,14 @@
 /// <reference path="../../../../typings.d.ts" />
-/** @jsx jsx */
-import {jsx} from '@emotion/core';
 import React from 'react';
 
 import {StaticStates} from '@workday/canvas-kit-preview-react/tokens';
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
 
-import {space} from '@workday/canvas-kit-react/tokens';
 import {Tabs, useTabsModel} from '@workday/canvas-kit-react/tabs';
 
 import {Simple} from './examples/Simple';
 import {RightToLeft} from './examples/RightToLeft';
+import {Box} from '@workday/canvas-kit-labs-react/common';
 
 const fontDelay = 150; // best guess for the font delay to prevent incorrect Chromatic regressions
 
@@ -44,9 +42,9 @@ export const TabStates = withSnapshotsEnabled(() => {
           <Tabs.Item className="hover">Hover</Tabs.Item>
           <Tabs.Item disabled>Disabled</Tabs.Item>
         </Tabs.List>
-        <div css={{marginTop: space.m}}>
+        <Box marginTop="m">
           <Tabs.Panel name="second">Visual states of the Tab items</Tabs.Panel>
-        </div>
+        </Box>
       </Tabs>
     </StaticStates>
   ) : (

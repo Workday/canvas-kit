@@ -1,6 +1,10 @@
 import * as React from 'react';
 import uuid from 'uuid/v4';
-import {useCloseOnEscape, useAlwaysCloseOnOutsideClick} from '@workday/canvas-kit-react/popup';
+import {
+  useCloseOnEscape,
+  useAlwaysCloseOnOutsideClick,
+  usePopupModel,
+} from '@workday/canvas-kit-react/popup';
 
 const useIntentTimer = (fn: Function, waitMs: number = 0): {start(): void; clear(): void} => {
   const timer = React.useRef() as React.MutableRefObject<number | undefined>;
@@ -74,19 +78,14 @@ export function useTooltip<T extends HTMLElement = HTMLElement>({
   titleText?: string;
 } = {}) {
   const mouseDownRef = React.useRef(false); // use to prevent newly focused from making tooltip flash
-  const [isOpen, setOpen] = React.useState(false);
+  const popupModel = usePopupModel();
   const [anchorElement, setAnchorElement] = React.useState<T | null>(null);
   const [id] = React.useState(() => uuid());
-  const ref = React.useRef<HTMLDivElement>(null);
 
-  const closeTooltip = () => {
-    setOpen(false);
-  };
-
-  const intentTimer = useIntentTimer(closeTooltip, 100);
+  const intentTimer = useIntentTimer(popupModel.events.hide, 100);
 
   const onOpen = () => {
-    setOpen(true);
+    popupModel.events.show();
     intentTimer.clear();
   };
 
@@ -106,18 +105,20 @@ export function useTooltip<T extends HTMLElement = HTMLElement>({
   const onMouseDown = (event: React.MouseEvent<HTMLElement>) => {
     mouseDownRef.current = true;
     if (isInteractiveElement(event.currentTarget)) {
-      closeTooltip();
+      popupModel.events.hide();
     }
   };
 
-  useCloseOnEscape(ref, closeTooltip);
-  useAlwaysCloseOnOutsideClick(ref, closeTooltip);
+  useCloseOnEscape(popupModel);
+  useAlwaysCloseOnOutsideClick(popupModel);
+
+  const visible = popupModel.state.visibility !== 'hidden';
 
   return {
     /** Mix these properties into the target element. **Must be an Element** */
     targetProps: {
       // extra description of the target element for assistive technology
-      'aria-describedby': type === 'describe' && isOpen ? id : undefined,
+      'aria-describedby': type === 'describe' && visible ? id : undefined,
       // This will replace the accessible name of the target element
       'aria-label': type === 'label' ? titleText : undefined,
       onMouseEnter: onOpenFromTarget,
@@ -128,13 +129,13 @@ export function useTooltip<T extends HTMLElement = HTMLElement>({
     },
     /** Mix these properties into the `Popper` component */
     popperProps: {
-      open: isOpen,
+      open: visible,
       anchorElement,
-      ref,
+      ref: popupModel.state.stackRef,
     },
     /** Mix these properties into the `TooltipContainer` component */
     tooltipProps: {
-      id: type === 'describe' && isOpen ? id : undefined,
+      id: type === 'describe' && visible ? id : undefined,
       role: 'tooltip',
       onMouseEnter: onOpen,
       onMouseLeave: intentTimer.start,
