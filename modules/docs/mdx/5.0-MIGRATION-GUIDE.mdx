@@ -12,6 +12,7 @@ any questions about the update.
 - [General Changes](#general-changes)
   - [Slash Imports](#slash-imports)
   - [Canvas Kit Preview](#canvas-kit-preview)
+  - [Type Deprecations and Hierarchy Updates](#type-deprecations-and-hierarchy-updates)
   - [Canvas Kit CSS Maintenance Mode](#canvas-kit-css-maintenance-mode)
 - [Component Changes](#component-changes)
   - [Component Promotions](#component-promotions)
@@ -95,6 +96,210 @@ for alpha components and Preview as a space for beta components.
 We've promoted several components from Labs to Preview in v5. See
 [Component Promotions](#component-promotions) for more details.
 
+### Type Deprecations and Hierarchy Updates
+
+Canvas Kit v4 supported two type hierarchies, `beta` and `legacy` in
+`@workday/canvas-kit-labs-react-core` and `@workday/canvas-kit-react-core` respectively. However, v5
+replaces those with a new, responsive type hierarchy in `@workday/canvas-kit-react-core`. We are
+also deprecating and updating our type variants. The v5 codemod handles almost all of these changes
+for you. That said, you'll want to review the transformation and your UI to ensure everything was
+updated as you expect.
+
+The new type tokens introduce a few major changes:
+
+- Introducing
+  [rem values](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Values_and_units#ems_and_rems)
+- Creating new `type` object structure
+- Adding new type properties (`fonts`, `fontSizes`, and `fontWeights`)
+- Updating and replacing variants
+
+#### Introducing Rem Values
+
+The new type 
+
+#### New Type Object Structure
+
+The `beta` and `legacy` type object structure was fairly flat, provided many levels in the type
+hierarchy, and quite a few variants. While none of these are bad attributes, we found in our
+research that they created a large amount of confusion. It was unclear for designers and engineers
+when to use many of the tokens provided. We restructured the object to help users make more sense of
+it. The tokens are divided into three main categories:
+
+- `levels` (the type hierarchy)
+- `properties` (`fonts`, `fontSizes`, and `fontWeights`)
+- `variants` (modifiers for type styles)
+
+##### Levels
+
+Type `levels` contain our new type hierarchy. When applying type styles, we recommend using these
+tokens first. Each size applies `fontFamily`, `fontSize`, `fontWeight`, `lineHeight`,
+`letterSpacing`, and `color` styles for you, so you can create consistent type quickly and easily.
+Instead of the previous flat structure, the type hierarchy is now organized in five levels:
+
+- `display` (used in large heroes and images, not typically used in product applications)
+- `title` (used for large page titles)
+- `heading` (used for headings and large text)
+- `body` (used for standard body text)
+- `subtext` (used for small subtext content or in tight spaces)
+
+And each level has three sizes: `small`, `medium`, and `large`. This organization allows the
+hierarchy to be more flexible and provide better guidance for usage. Below is an example:
+
+```tsx
+// v4
+import {type} from '@workday/canvas-kit-labs-react-core';
+
+const headingStyles = type.h2;
+const smallBodyStyles = type.body2;
+
+// v5
+import {type} from '@workday/canvas-kit-react/tokens';
+
+const headingStyles = type.levels.heading.large;
+const smallBodyStyles = type.levels.subtext.large;
+```
+
+##### Properties
+
+Most often you will want to reach for `levels`, but sometimes you only need one or two type values
+for styling. Previously, you had to use the hierarchy to apply these values, which is clunky and
+implicit. For example, using: `fontSize: type.h2.fontSize,` when all you really want is the token
+for `24px`. Type `properties` give you an atomic-level of control when you want to explicitly set a
+particular value. Here's an example using `fonts`, `fontSizes`, and `fontWeights`.
+
+> _Note:_ `fontSizes` keys are in pixel values as a convenient reference, but the values are the
+> base-16 rem equivalent. E.g. `fontSizes[12]` returns `0.75rem`.
+
+```tsx
+import {type} from '@workday/canvas-kit-react/tokens';
+
+const boldTextStyles = {
+  fontFamily: type.properties.fonts.normal, // 'Roboto'
+  fontSize: type.properties.fontSizes[16], // 1rem (16px)
+  fontWeight: type.properties.bold, // 700
+};
+
+const mediumMonoStyles = {
+  fontFamily: type.properties.fonts.monospace, // 'Roboto Mono'
+  fontSize: type.properties.fontSizes[12], // 0.75rem (12px)
+  fontWeight: type.properties.medium, // 500
+};
+```
+
+##### Variants
+
+__Supported Variants__
+
+We're also reducing and simplifying our `variants`. In v5 we will only support:
+
+- `error` (used for making errors more visible)
+- `hint` (used for help text and secondary content)
+- `inverse` (used for any text on a dark or colored background)
+
+> _Note:_ The `variant` key has been renamed to `variants` to be consistent with our other key
+> names.
+
+```tsx
+//v4
+import {type} from '@workday/canvas-kit-labs-react-core';
+
+const errorStyles = type.variant.error;
+const hintStyles = type.variant.hint;
+const inverseStyles = type.variant.inverse;
+
+// v5
+import {type} from '@workday/canvas-kit-react/tokens';
+
+const errorStyles = type.variants.error;
+const hintStyles = type.variants.hint;
+const inverseStyles = type.variants.inverse;
+```
+
+__Deprecated Variants__
+
+There are also a handful of deprecated variants:
+
+- `button`
+- `caps`
+- `label`
+- `link`
+- `mono`
+
+With the exception of `link`, which is discussed further below, all of these variants can be
+supported with `properties` and other styles. Below is an example of the translation neeed for each:
+
+```tsx
+//v4
+import {type} from '@workday/canvas-kit-labs-react-core';
+
+// button variant styles
+const buttonStyles = type.variant.button;
+// caps variant styles
+const capsStyles = type.variant.caps;
+// label variant styles
+const labelStyles = type.variant.label;
+// mono variant styles
+const monoStyles = type.variant.mono;
+
+// v5
+import {type} from '@workday/canvas-kit-labs-react/tokens';
+
+// button variant styles
+const buttonStyles = {fontWeight: type.properties.fontWeights.bold};
+// caps variant styles
+const capsStyles = {
+  fontWeight: type.properties.fontWeights.medium,
+  textTransform: 'uppercase',
+};
+// label variant styles
+const labelStyles = {fontWeight: type.properties.fontWeights.medium};
+// mono variant styles
+const monoStyles = {fontFamily: type.properties.fonts.monospace};
+```
+
+__Link Variant__
+
+
+
+```tsx
+const linkStyles = type.variant.link;
+```
+
+#### Automatic Updates
+
+- 🤖 Type Hierarchy Updates
+
+All type hierarchy updates are handled by the codemod. The tables below will help you understand the
+changes and provide a reference as you review your UI. Most teams are using the `beta` type tokens
+in `@workday/canvas-kit-labs-react-core`, but some are using the `legacy` type in
+`@workday/canvas-kit-labs-react-core`.
+
+| Beta Type (px)  | Resposive Type (rem)                      |
+| --------------- | ----------------------------------------- |
+| `brand1` (56px) | `levels.title.large` ( 3.5rem \ 56px)     |
+| `brand2` (48px) | `levels.title.medium` ( 3rem \ 48px)      |
+| `h1` (40px)     | `levels.title.small` ( 2.5rem \ 40px)     |
+| `h2` (32px)     | `levels.heading.large` ( 2rem \ 32px)     |
+| `h3` (24px)     | `levels.heading.small` ( 1.5rem \ 24px)   |
+| `h4` (20px)     | `levels.body.large` ( 1.25rem \ 20px)     |
+| `h5` (20px)     | `levels.body.large` ( 1.25rem \ 20px)     |
+| `body` (16px)   | `levels.body.small` ( 1rem \ 16px)        |
+| `body2` (14px)  | `levels.subtext.large` ( 0.875rem \ 14px) |
+| `small` (13px)  | `levels.subtext.medium` ( 0.75rem \ 12px) |
+
+| Legacy Type (px)  | Resposive Type (rem)                     |
+| ----------------- | ---------------------------------------- |
+| `dataViz1` (56px) | `levels.title.large` (3.5rem \ 56px)     |
+| `dataViz2` (34px) | `levels.heading.large` (2rem \ 32px)     |
+| `h1` (28px)       | `levels.heading.medium` (1.75rem \ 28px) |
+| `h2` (24px)       | `levels.heading.small` (1.5rem \ 24px)   |
+| `h3` (20px)       | `levels.body.large` (1.25rem,) \ 20px    |
+| `h4` (16px)       | `levels.body.small` (1rem \ 16px)        |
+| `h5` (16px)       | `levels.body.small` (1rem \ 16px)        |
+| `body` (14px)     | `levels.subtext.large` (0.875rem \ 14px) |
+| `body2` (13px)    | `levels.subtext.small` (0.75rem \ 12px)  |
+| `small` (12px)    | `levels.subtext.small` (0.75rem \ 12px)  |
+
 ### Canvas Kit CSS Maintenance Mode
 
 Due to the infrequent use of our CSS modules, we've placed them in maintenance mode in v5. Although
@@ -114,7 +319,6 @@ The following components were promoted from Labs to the new Preview module:
 
 - Breadcrumbs
 - Color Picker
-- Core `type` > Tokens `type`
 - Menu
 - Select
 - Side Panel
@@ -151,13 +355,73 @@ import {Pagination} from '@workday/canvas-kit-react/pagination';
 
 ### Core
 
+#### Remove Labs Core
+
+The Labs `core` package has been removed. The few utilities in that package were either promoted,
+deprecated, or found a better home in another package. These changes are listed below, most of which
+are handled by the v5 codemod.
+
+##### Automatic Updates
+
+- 🤖 Move `StaticStates` component to Main `common`
+
+We use `StaticStates` internally for our visual regression tests. It didn't really make sense to
+live in `core`, and it's stable enough to move to Main, so it now lives in `common`.
+
+```tsx
+// v4
+import {StaticStates} from '@workday/canvas-kit-labs-react-core';
+
+// v5
+import {StaticStates} from '@workday/canvas-kit-react/common';
+```
+
+- 🤖 Move `type` tokens to Main `tokens` (formerly `core`)
+
+This change is described in more detail in the [Type Section](#type), but suffice to say all `type`
+imports will be automatically migrated to the Main `token` package by the codemod.
+
+```tsx
+// v4
+import {type} from '@workday/canvas-kit-labs-react-core';
+
+// v5
+import {type} from '@workday/canvas-kit-react/tokens';
+```
+
+##### Manual Updates
+
+- Deprecate `space` in favor of `Box`
+
+The `space` function was a handy little utility that you could apply to `styled()` components to add
+space style props. However, with the addition of `Box` it is no longer needed. `Box` provides
+`space` style props and much more. While this is a manual migration, the process is fairly
+straight-forward. One important note: The `space` props were a shorthand version of what `Box`
+provides: `pt` maps to `paddingTop`, `mr` maps to `marginRight`, and so on. You can see this in the
+example below.
+
+```tsx
+// v4
+import {spaceNumbers} from '@workday/canvas-kit-react-core';
+import {space} from '@workday/canvas-kit-labs-react-core';
+
+// A styled div with space props
+const Box = styled('div')(space);
+
+const Card = () => <Box p={spaceNumbers.s}>Hello!</Box>;
+
+// v5
+import {Box} from '@workday/canvas-kit-labs-react/common';
+
+const Card = () => <Box padding="s">Hello!</Box>;
+```
+
 #### Rename Core to Tokens
 
 The distinction between our core and common packages is often unclear and creates confusion around
 what should be imported from where. To help alleviate this and better align with our design
-taxonomy, we've renamed our `core` modules in both Main and Labs to `tokens`. We've also removed the
-`type` default export in the Labs core package in favor of named imports. These changes are listed
-below, all of which are handled by the v5 codemod.
+taxonomy, we've renamed our Main `core` module to `tokens`. These changes are listed below, all of
+which are handled by the v5 codemod.
 
 ##### Automatic Updates
 
@@ -169,26 +433,6 @@ below, all of which are handled by the v5 codemod.
 
   // v5
   import {colors} from '@workday/canvas-kit-react/tokens';
-  ```
-
-- 🤖 Rename Labs `core` import statements to `tokens`
-
-  ```tsx
-  // v4
-  import {type} from '@workday/canvas-kit-labs-react-core';
-
-  // v5
-  import {type} from '@workday/canvas-kit-labs-react/tokens';
-  ```
-
-- 🤖 Replace default `type` import in Labs `core` with named import
-
-  ```tsx
-  // v4
-  import type from '@workday/canvas-kit-labs-react-core';
-
-  // v5
-  import {type} from '@workday/canvas-kit-labs-react/tokens';
   ```
 
 #### Input Provider
@@ -207,27 +451,6 @@ import {InputProvider} from '@workday/canvas-kit-react/common';
 ```
 
 🤖 The codemod will update your `InputProvider` imports.
-
-#### Space Style Function
-
-The `space` style function in Labs `core` (now Labs `tokens`) has been removed. Please use `Box`
-instead. For example:
-
-```tsx
-// v4
-import {spaceNumbers} from '@workday/canvas-kit-react-core';
-import {space} from '@workday/canvas-kit-labs-react-core';
-// A styled div with space props
-const Box = styled('div')(space);
-
-<Box p={spaceNumbers.xl}>Ye Olde SpaceBox</Box>;
-
-// v5
-import {Box} from '@workday/canvas-kit-labs-react/common';
-
-// You can also use `padding={spaceNumbers.xl}` or `padding={space.xl}`
-<Box padding="xl">New Box</Box>;
-```
 
 ### Tokens
 
@@ -252,8 +475,9 @@ The following table describes each update:
 \* Before, the types were too generic and not very useful. They now better reflect the values they
 represent.
 
-The codemod will handle _almost all_ of these changes with a few possible exceptions noted in
-[Manual Updates](#manual-updates) below.
+The codemod will handle _almost all of_ of these changes with a The v5 codemod handles aew possible
+exceptions not. for you. That said, you'll want to review your UI to ensure everything was updated
+as you expect. [Manual Updates](#manual-updates) below.
 
 ##### Automatic Updates
 
