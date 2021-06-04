@@ -9,6 +9,8 @@ import {
   useCloseOnEscape,
   usePopupModel,
 } from '@workday/canvas-kit-react/popup';
+import {HStack} from '@workday/canvas-kit-labs-react/layout';
+import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 
 export default {
   title: 'Testing/React/Popups/Modal',
@@ -151,6 +153,70 @@ export const ModalWithPopup = () => {
           </Popup.Popper>
         </Popup>
       </Modal>
+    </>
+  );
+};
+
+export const WithTooltips = () => {
+  const {targetProps, modalProps, closeModal} = useModal();
+  const popup1 = usePopupModel();
+  const popup2 = usePopupModel();
+
+  useCloseOnOutsideClick(popup1);
+
+  return (
+    <>
+      <DeleteButton {...targetProps}>Delete Item</DeleteButton>
+      <Modal heading={'Delete Item'} {...modalProps} width={Modal.Width.m}>
+        <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
+        <HStack spacing="s">
+          <Popup.Target model={popup1}>Hidable Popup</Popup.Target>
+          <Popup.Target model={popup2}>Non-hidable Popup</Popup.Target>
+          <Tooltip title={'Not so sure'} type={'muted'}>
+            <SecondaryButton onClick={closeModal}>Cancel</SecondaryButton>
+          </Tooltip>
+        </HStack>
+      </Modal>
+      <Popup model={popup1}>
+        <Popup.Popper>
+          <Popup.Card>
+            <Popup.CloseIcon aria-label="Close" />
+            <Popup.Heading>Really Delete</Popup.Heading>
+            <Popup.Body>
+              <p>Pressing 'Delete' will close the modal</p>
+              <Tooltip
+                placement="left"
+                title={'Really, Really, Really, Really, Really sure'}
+                type={'muted'}
+              >
+                <Popup.CloseButton as={DeleteButton} onClick={closeModal}>
+                  Delete
+                </Popup.CloseButton>
+              </Tooltip>
+            </Popup.Body>
+          </Popup.Card>
+        </Popup.Popper>
+      </Popup>
+      <Popup model={popup2}>
+        <Popup.Popper>
+          <Popup.Card>
+            <Popup.CloseIcon aria-label="Close" />
+            <Popup.Heading>Does Not Hide On Click Outside</Popup.Heading>
+            <Popup.Body>
+              <p>Pressing 'Delete' will close the modal</p>
+              <Tooltip
+                placement="left"
+                title={'Really, Really, Really, Really, Really sure'}
+                type={'muted'}
+              >
+                <Popup.CloseButton as={DeleteButton} onClick={closeModal}>
+                  Delete
+                </Popup.CloseButton>
+              </Tooltip>
+            </Popup.Body>
+          </Popup.Card>
+        </Popup.Popper>
+      </Popup>
     </>
   );
 };

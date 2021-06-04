@@ -47,27 +47,3 @@ export const Popup = createComponent('div')({
     CloseButton: PopupCloseButton,
   },
 });
-
-/**
- * Convenience hook around popups. Most popups are non-modal dialogs with a single target and toggle
- * when the target button is clicked. Additional popup features like `useCloseOnOutsideClick` need
- * to be added manually.
- * @deprecated
- */
-export const usePopup = (config: PopupModelConfig = {}) => {
-  const model = usePopupModel(config);
-  const popperProps = usePopupPopper(model);
-  const targetProps = usePopupTarget(model);
-  const closePopup = React.useCallback(
-    (event: React.SyntheticEvent) => model.events.hide({event}),
-    [model.events]
-  );
-
-  return {
-    targetProps,
-    popperProps,
-    closePopup,
-    stackRef: model.state.stackRef,
-    model,
-  };
-};

@@ -230,49 +230,5 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
       }
     });
 
-  /**
-   * Convert Popup hooks if possible - only if `usePopup` was used. It is too nuanced otherwise
-   */
-  if (importMap.usePopup) {
-    root.find(j.VariableDeclarator, {init: {callee: {name: 'usePopup'}}}).forEach(nodePath => {
-      if (nodePath.value.id.type === 'ObjectPattern') {
-        // add `model` to the object list
-        nodePath.value.id.properties.push(
-          j.property.from({
-            kind: 'init',
-            key: j.identifier('model'),
-            value: j.identifier('model'),
-            shorthand: true,
-          })
-        );
-      }
-    });
-
-    const popupHooks = [
-      'useAlwaysCloseOnOutsideClick',
-      'useAssistiveHideSiblings',
-      'useBringToTopOnClick',
-      'useCloseOnOutsideClick',
-      'useCloseOnEscape',
-      'useFocusTrap',
-    ];
-    root.find(j.CallExpression, (node: CallExpression) => {
-      if (
-        node.callee.type === 'Identifier' &&
-        popupHooks.includes(node.callee.name) &&
-        // first argument is 'stackRef'
-        ((node.arguments[0]?.type === 'Identifier' && node.arguments[0].name === 'stackRef') ||
-          // first argument is 'popperProps.ref'
-          (node.arguments[0]?.type === 'MemberExpression' &&
-            node.arguments[0].object.type === 'Identifier' &&
-            node.arguments[0].object.name === 'popperProps' &&
-            node.arguments[0].property.type === 'Identifier' &&
-            node.arguments[0].property.name === 'ref'))
-      ) {
-        node.arguments = [j.identifier('model')];
-      }
-    });
-  }
-
   return root.toSource();
 }

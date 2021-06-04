@@ -14,8 +14,6 @@ import {
   useBringToTopOnClick,
   useInitialFocus,
   useReturnFocus,
-  Popper,
-  usePopup,
 } from '@workday/canvas-kit-react/popup';
 
 export default {

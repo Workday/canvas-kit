@@ -8,11 +8,9 @@ import {FormField} from '@workday/canvas-kit-react/form-field';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {Modal, useModal} from '@workday/canvas-kit-react/modal';
 import {Radio, RadioGroup} from '@workday/canvas-kit-react/radio';
-import {Tooltip} from '@workday/canvas-kit-react/tooltip';
+import {HStack} from '@workday/canvas-kit-labs-react';
 
 import README from '../README.md';
-
-import {Popup, useCloseOnOutsideClick, usePopupModel} from '@workday/canvas-kit-react/popup';
 
 export default {
   title: 'Components/Popups/Modal/React',
@@ -28,69 +26,11 @@ export const Default = () => {
       <DeleteButton {...targetProps}>Delete Item</DeleteButton>
       <Modal heading={'Delete Item'} {...modalProps}>
         <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
-        <DeleteButton style={{marginRight: '16px'}} onClick={closeModal}>
-          Delete
-        </DeleteButton>
-        <SecondaryButton onClick={closeModal}>Cancel</SecondaryButton>
-      </Modal>
-    </>
-  );
-};
-
-export const WithTooltips = () => {
-  const {targetProps, modalProps, closeModal} = useModal();
-  const popup1 = usePopupModel();
-  const popup2 = usePopupModel();
-
-  useCloseOnOutsideClick(popup1);
-
-  return (
-    <>
-      <DeleteButton {...targetProps}>Delete Item</DeleteButton>
-      <Modal heading={'Delete Item'} {...modalProps}>
-        <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
-        <Popup.Target model={popup1}>Open Popup to reach Delete button</Popup.Target>
-        <Popup.Target model={popup2}>Non-hidable Popup</Popup.Target>
-        <Tooltip title={'Not so sure'} type={'muted'}>
+        <HStack spacing="s">
+          <DeleteButton onClick={closeModal}>Delete</DeleteButton>
           <SecondaryButton onClick={closeModal}>Cancel</SecondaryButton>
-        </Tooltip>
+        </HStack>
       </Modal>
-      <Popup.Popper model={popup1}>
-        <Popup.Card model={popup1}>
-          <Popup.CloseIcon model={popup1} aria-label="Close" />
-          <Popup.Heading model={popup1}>Really Delete</Popup.Heading>
-          <Popup.Body>
-            Pressing 'Delete' will close the modal
-            <Tooltip
-              placement="left"
-              title={'Really, Really, Really, Really, Really sure'}
-              type={'muted'}
-            >
-              <DeleteButton style={{marginRight: '16px'}} onClick={closeModal}>
-                Delete
-              </DeleteButton>
-            </Tooltip>
-          </Popup.Body>
-        </Popup.Card>
-      </Popup.Popper>
-      <Popup.Popper model={popup2}>
-        <Popup.Card model={popup2}>
-          <Popup.CloseIcon model={popup2} aria-label="Close" />
-          <Popup.Heading model={popup2}>Does Not Hide On Click Outside</Popup.Heading>
-          <Popup.Body>
-            Pressing 'Delete' will close the modal
-            <Tooltip
-              placement="left"
-              title={'Really, Really, Really, Really, Really sure'}
-              type={'muted'}
-            >
-              <DeleteButton style={{marginRight: '16px'}} onClick={closeModal}>
-                Delete
-              </DeleteButton>
-            </Tooltip>
-          </Popup.Body>
-        </Popup.Card>
-      </Popup.Popper>
     </>
   );
 };
@@ -116,10 +56,10 @@ export const WithoutHook = () => {
 
       <Modal heading="Delete Item" open={open} handleClose={closeModal} targetRef={ref}>
         <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
-        <DeleteButton style={{marginRight: '16px'}} onClick={closeModal}>
-          Delete
-        </DeleteButton>
-        <SecondaryButton onClick={closeModal}>Cancel</SecondaryButton>
+        <HStack spacing="s">
+          <DeleteButton onClick={closeModal}>Delete</DeleteButton>
+          <SecondaryButton onClick={closeModal}>Cancel</SecondaryButton>
+        </HStack>
       </Modal>
     </>
   );
@@ -155,10 +95,10 @@ export const WithoutCloseIcon = () => {
       <DeleteButton {...targetProps}>Delete Item</DeleteButton>
       <Modal heading={'Delete Item'} {...modalProps} handleClose={undefined}>
         <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
-        <DeleteButton style={{marginRight: '16px'}} onClick={closeModal}>
-          Delete
-        </DeleteButton>
-        <SecondaryButton onClick={closeModal}>Cancel</SecondaryButton>
+        <HStack spacing="s">
+          <DeleteButton onClick={closeModal}>Delete</DeleteButton>
+          <SecondaryButton onClick={closeModal}>Cancel</SecondaryButton>
+        </HStack>
       </Modal>
     </>
   );
@@ -177,10 +117,12 @@ export const CustomFocus = () => {
         <FormField label="Item name">
           <TextInput ref={ref} value={value} onChange={e => setValue(e.currentTarget.value)} />
         </FormField>
-        <DeleteButton style={{marginRight: '16px'}} onClick={closeModal}>
-          Delete
-        </DeleteButton>
-        <SecondaryButton onClick={closeModal}>Cancel</SecondaryButton>
+        <HStack spacing="s">
+          <DeleteButton style={{marginRight: '16px'}} onClick={closeModal}>
+            Delete
+          </DeleteButton>
+          <SecondaryButton onClick={closeModal}>Cancel</SecondaryButton>
+        </HStack>
       </Modal>
     </>
   );
