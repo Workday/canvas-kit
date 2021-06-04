@@ -3,10 +3,10 @@ import * as React from 'react';
 import {Card} from '@workday/canvas-kit-react/card';
 import {createComponent, useDefaultModel} from '@workday/canvas-kit-react/common';
 
-import {PopupModel, usePopupModel, PopupModelConfig} from './usePopupModel';
+import {PopupModel, usePopupModel} from './usePopupModel';
 import {PopupCard} from './PopupCard';
-import {PopupTarget, usePopupTarget} from './PopupTarget';
-import {PopupPopper, usePopupPopper} from './PopupPopper';
+import {PopupTarget} from './PopupTarget';
+import {PopupPopper} from './PopupPopper';
 import {PopupHeading} from './PopupHeading';
 import {PopupCloseIcon} from './PopupCloseIcon';
 import {PopupCloseButton} from './PopupCloseButton';

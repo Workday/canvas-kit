@@ -5,7 +5,6 @@ import {
   JSXElement,
   JSXAttribute,
   JSXSpreadAttribute,
-  CallExpression,
   ImportSpecifier,
 } from 'jscodeshift';
 
