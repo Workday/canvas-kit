@@ -3,22 +3,13 @@ import * as React from 'react';
 import {Card} from '@workday/canvas-kit-react/card';
 import {createComponent, useDefaultModel} from '@workday/canvas-kit-react/common';
 
-import {PopupModel, usePopupModel} from './usePopupModel';
+import {PopupModel, usePopupModel, PopupModelContext} from './hooks';
 import {PopupCard} from './PopupCard';
 import {PopupTarget} from './PopupTarget';
 import {PopupPopper} from './PopupPopper';
 import {PopupHeading} from './PopupHeading';
 import {PopupCloseIcon} from './PopupCloseIcon';
 import {PopupCloseButton} from './PopupCloseButton';
-
-// eslint-disable-next-line no-empty-function
-const noop = () => {};
-
-// create enough of a model to use `Popup.Card` without a `Popup` container component.
-export const PopupModelContext = React.createContext<PopupModel>({
-  state: {},
-  events: {show: noop, hide: noop},
-} as any);
 
 export interface PopupProps {
   /**

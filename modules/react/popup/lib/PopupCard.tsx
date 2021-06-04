@@ -9,20 +9,14 @@ import {
   getTranslateFromOrigin,
   createComponent,
   StyledType,
-  mergeProps,
   useModelContext,
   ExtractProps,
 } from '@workday/canvas-kit-react/common';
 
-import {PopupModel} from './usePopupModel';
-import {PopupModelContext} from './Popup';
 import {getTransformFromPlacement} from './getTransformFromPlacement';
+import {usePopupCard, PopupModel, PopupModelContext} from './hooks';
 
 export interface PopupCardProps extends ExtractProps<typeof Card> {
-  /**
-   * The width of the Popup.
-   */
-  width?: number | string;
   /**
    * Optionally pass a model directly to this component. Default is to implicitly use the same
    * model as the container component which uses React context. Only use this for advanced use-cases
@@ -70,16 +64,6 @@ const StyledPopupCard = styled(Card)<
     };
   }
 );
-
-const usePopupCard = ({state}: PopupModel, elemProps = {}) => {
-  return mergeProps(
-    {
-      role: 'dialog',
-      'aria-labelledby': state.id,
-    },
-    elemProps
-  );
-};
 
 export const PopupCard = createComponent('div')({
   displayName: 'Popup.Card',

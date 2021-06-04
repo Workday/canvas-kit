@@ -1,15 +1,10 @@
 import * as React from 'react';
 
-import {
-  createComponent,
-  useModelContext,
-  createHook,
-  useForkRef,
-} from '@workday/canvas-kit-react/common';
+import {createComponent, useModelContext} from '@workday/canvas-kit-react/common';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
 
 import {PopupModel} from '@workday/canvas-kit-react/popup';
-import {PopupModelContext} from './Popup';
+import {usePopupTarget, PopupModelContext} from './hooks';
 
 export interface PopupTargetProps {
   /**
@@ -19,20 +14,6 @@ export interface PopupTargetProps {
   model?: PopupModel;
   children?: React.ReactNode;
 }
-
-export const usePopupTarget = createHook(({events, state}: PopupModel, ref) => {
-  const elementRef = useForkRef(ref, state.targetRef);
-  return {
-    ref: elementRef,
-    onClick: (event: React.MouseEvent) => {
-      if (state.visibility !== 'hidden') {
-        events.hide({event});
-      } else {
-        events.show({event});
-      }
-    },
-  };
-});
 
 export const PopupTarget = createComponent(SecondaryButton)({
   displayName: 'Popup.Target',

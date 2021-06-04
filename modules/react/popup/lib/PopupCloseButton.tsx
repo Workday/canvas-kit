@@ -1,10 +1,9 @@
 import * as React from 'react';
 
-import {createComponent, useModelContext, createHook} from '@workday/canvas-kit-react/common';
+import {createComponent, useModelContext} from '@workday/canvas-kit-react/common';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
 
-import {PopupModel} from './usePopupModel';
-import {PopupModelContext} from './Popup';
+import {usePopupCloseButton, PopupModel, PopupModelContext} from './hooks';
 
 export interface PopupCloseButtonProps {
   /**
@@ -14,14 +13,6 @@ export interface PopupCloseButtonProps {
   model?: PopupModel;
   children?: React.ReactNode;
 }
-
-export const usePopupCloseButton = createHook(({events, state}: PopupModel) => {
-  return {
-    onClick: (event: React.MouseEvent) => {
-      events.hide({event});
-    },
-  };
-});
 
 export const PopupCloseButton = createComponent(SecondaryButton)({
   displayName: 'Popup.CloseButton',

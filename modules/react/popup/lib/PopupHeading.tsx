@@ -1,10 +1,9 @@
 import * as React from 'react';
 
-import {createComponent, useModelContext, createHook} from '@workday/canvas-kit-react/common';
+import {createComponent, useModelContext} from '@workday/canvas-kit-react/common';
 import {Card} from '@workday/canvas-kit-react/card';
 
-import {PopupModel} from './usePopupModel';
-import {PopupModelContext} from './Popup';
+import {usePopupHeading, PopupModel, PopupModelContext} from './hooks';
 
 export interface PopupHeadingProps {
   /**
@@ -14,12 +13,6 @@ export interface PopupHeadingProps {
   model?: PopupModel;
   children?: React.ReactNode;
 }
-
-export const usePopupHeading = createHook(({state}: PopupModel) => {
-  return {
-    id: state.id,
-  };
-});
 
 export const PopupHeading = createComponent('h2')({
   displayName: 'Popup.Heading',

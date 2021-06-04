@@ -115,3 +115,12 @@ export const usePopupModel = (config: PopupModelConfig = {}): PopupModel => {
     events,
   };
 };
+
+// eslint-disable-next-line no-empty-function
+const noop = () => {};
+
+// create enough of a model to use `Popup.Card` without a `Popup` container component.
+export const PopupModelContext = React.createContext<PopupModel>({
+  state: {},
+  events: {show: noop, hide: noop},
+} as any);
