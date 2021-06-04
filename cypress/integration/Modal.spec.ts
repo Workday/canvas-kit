@@ -162,16 +162,16 @@ describe('Modal', () => {
 
   context(`given the 'With Tooltips' story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Components/Popups/Modal/React', 'With Tooltips');
+      h.stories.load('Testing/React/Popups/Modal', 'With Tooltips');
     });
 
     context('when the modal is open', () => {
       beforeEach(() => {
-        cy.findByText('Delete Item').click();
+        cy.findByText('Open Modal').click();
       });
 
       it('should open the modal', () => {
-        cy.findByRole('dialog', {name: 'Delete Item'}).should('be.visible');
+        cy.findByRole('dialog', {name: 'Open Modal'}).should('be.visible');
       });
 
       context(`when the 'Cancel' button is focused`, () => {
@@ -193,25 +193,25 @@ describe('Modal', () => {
           });
 
           it(`should close the modal`, () => {
-            cy.findByRole('dialog', {name: 'Delete Item'}).should('not.be.visible');
+            cy.findByRole('dialog', {name: 'Open Modal'}).should('not.be.visible');
           });
         });
       });
 
-      context(`when the 'Open Popup to reach Delete button' button is clicked`, () => {
+      context(`when the 'Hidable Popup' button is clicked`, () => {
         beforeEach(() => {
-          cy.findByText('Open Popup to reach Delete button').click();
+          cy.findByText('Hidable Popup').click();
         });
 
-        it(`should open the 'Really Delete' popup`, () => {
-          cy.findByRole('dialog', {name: 'Really Delete'}).should('be.visible');
+        it(`should open the 'Hidable Popup' popup`, () => {
+          cy.findByRole('dialog', {name: 'Hidable Popup'}).should('be.visible');
         });
 
-        context(`when the 'Delete' button is focused`, () => {
+        context(`when the 'OK' button is focused`, () => {
           beforeEach(() => {
-            cy.findByRole('button', {name: 'Delete'}).focus();
+            cy.findByRole('button', {name: 'OK'}).focus();
           });
-          it(`should open the 'Delete' tooltip`, () => {
+          it(`should open the 'OK' tooltip`, () => {
             cy.findByRole('tooltip', {name: 'Really, Really, Really, Really, Really sure'}).should(
               'be.visible'
             );
@@ -222,18 +222,18 @@ describe('Modal', () => {
               cy.get('body').click('top');
             });
 
-            it(`should close the 'Delete' tooltip`, () => {
+            it(`should close the 'OK' tooltip`, () => {
               cy.findByRole('tooltip', {
                 name: 'Really, Really, Really, Really, Really sure',
               }).should('not.be.visible');
             });
 
-            it(`should close the 'Really Delete' popup`, () => {
-              cy.findByRole('dialog', {name: 'Really Delete'}).should('not.be.visible');
+            it(`should close the 'Hidable Popup' popup`, () => {
+              cy.findByRole('dialog', {name: 'Hidable Popup'}).should('not.be.visible');
             });
 
             it(`should keep the modal open`, () => {
-              cy.findByRole('dialog', {name: 'Delete Item'}).should('be.visible');
+              cy.findByRole('dialog', {name: 'Open Modal'}).should('be.visible');
             });
           });
         });
@@ -244,15 +244,15 @@ describe('Modal', () => {
           cy.findByText('Non-hidable Popup').click();
         });
 
-        it(`should open the 'Does Not Hide On Click Outside' popup`, () => {
-          cy.findByRole('dialog', {name: 'Does Not Hide On Click Outside'}).should('be.visible');
+        it(`should open the 'Non-hidable Popup' popup`, () => {
+          cy.findByRole('dialog', {name: 'Non-hidable Popup'}).should('be.visible');
         });
 
-        context(`when the 'Delete' button is focused`, () => {
+        context(`when the 'OK' button is focused`, () => {
           beforeEach(() => {
-            cy.findByRole('button', {name: 'Delete'}).focus();
+            cy.findByRole('button', {name: 'OK'}).focus();
           });
-          it(`should open the 'Delete' tooltip`, () => {
+          it(`should open the 'OK' tooltip`, () => {
             cy.findByRole('tooltip', {name: 'Really, Really, Really, Really, Really sure'}).should(
               'be.visible'
             );
@@ -263,17 +263,15 @@ describe('Modal', () => {
               cy.get('body').click('top');
             });
 
-            it(`should not close the 'Does Not Hide On Click Outside' popup`, () => {
-              cy.findByRole('dialog', {name: 'Does Not Hide On Click Outside'}).should(
-                'be.visible'
-              );
+            it(`should not close the 'Non-hidable Popup' popup`, () => {
+              cy.findByRole('dialog', {name: 'Non-hidable Popup'}).should('be.visible');
             });
 
             it(`should close the modal`, () => {
-              cy.findByRole('dialog', {name: 'Delete Item'}).should('not.be.visible');
+              cy.findByRole('dialog', {name: 'Non-hidable'}).should('not.be.visible');
             });
 
-            it(`should close the 'Delete' tooltip`, () => {
+            it(`should close the 'OK' tooltip`, () => {
               cy.findByRole('tooltip', {
                 name: 'Really, Really, Really, Really, Really sure',
               }).should('not.be.visible');

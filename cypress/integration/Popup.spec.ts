@@ -97,41 +97,60 @@ describe('Popup', () => {
         it('should close Popup 1', () => {
           cy.findByRole('dialog', {name: 'Popup 1'}).should('not.exist');
         });
+      });
+    });
+  });
 
-        context('then Open Popup 3 button is clicked', () => {
-          const Popup3Title = 'Popup 3 (Not hidable on outside click)';
+  context(
+    'given the [Testing/React/Popups/Popup, PopupWithNonHidablePopup] example is rendered',
+    () => {
+      beforeEach(() => {
+        h.stories.load('Testing/React/Popups/Popup', 'PopupWithNonHidablePopup');
+      });
+
+      context('when Open Popup 1 button is clicked', () => {
+        beforeEach(() => {
+          cy.findByRole('button', {name: 'Open Popup 1'}).click();
+        });
+
+        it('should open Popup 1', () => {
+          cy.findByRole('dialog', {name: 'Popup 1'}).should('be.visible');
+        });
+
+        context('then Open Popup 2 button is clicked', () => {
+          const Popup3Title = 'Popup 2 (Not hidable on outside click)';
           beforeEach(() => {
-            cy.findByText('Open Popup 3').click();
+            cy.findByText('Open Popup 2').click();
           });
 
-          it('should open Popup 3 in front of Popup 2', () => {
+          it('should open Popup 2 in front of Popup 1', () => {
             cy.findByRole('dialog', {name: Popup3Title}).should('be.visible');
-            cy.findByRole('dialog', {name: 'Popup 2'}).should('be.visible');
+            cy.findByRole('dialog', {name: 'Popup 1'}).should('be.visible');
 
             cy.findByRole('dialog', {name: Popup3Title}).should(
-              h.popup.beOnTopOfLabelledByText('Popup 2')
+              h.popup.beOnTopOfLabelledByText('Popup 1')
             );
           });
 
-          context('then the close button in Popup 3 is clicked', () => {
+          context('then the close button in Popup 2 is clicked', () => {
             beforeEach(() => {
               cy.findByRole('dialog', {name: Popup3Title})
                 .findByRole('button', {name: 'Close'})
                 .click();
             });
 
-            it('should close Popup 3', () => {
+            it('should close Popup 2', () => {
               cy.findByRole('dialog', {name: Popup3Title}).should('not.exist');
             });
 
-            it('should not close Popup 2', () => {
-              cy.findByRole('dialog', {name: 'Popup 2'}).should('be.visible');
+            it('should not close Popup 1', () => {
+              cy.findByRole('dialog', {name: 'Popup 1'}).should('be.visible');
             });
           });
         });
       });
-    });
-  });
+    }
+  );
 
   context('given the [Testing/React/Popups/Popup, MixedPopupTypes] story is rendered', () => {
     beforeEach(() => {
@@ -307,65 +326,6 @@ describe('Popup', () => {
             it('should NOT close the "Delete Item" popup', () => {
               cy.findByRole('dialog', {name: 'Delete Item'}).should('be.visible');
             });
-          });
-        });
-      });
-    });
-  });
-
-  context('given the [Components/Popups/Popup/React, FocusRedirect] story is rendered', () => {
-    beforeEach(() => {
-      h.stories.load('Components/Popups/Popup/React', 'FocusRedirect');
-    });
-
-    it('should not have any axe errors', () => {
-      cy.checkA11y();
-    });
-
-    context('when the "Delete Item" button is clicked', () => {
-      beforeEach(() => {
-        cy.findByRole('button', {name: 'Delete Item'}).click();
-      });
-
-      it('should open the popup', () => {
-        cy.findByRole('dialog', {name: 'Delete Item'}).should('be.visible');
-      });
-
-      it('should focus on the close icon button', () => {
-        cy.findByRole('button', {name: 'Close'}).should('have.focus');
-      });
-
-      context('when Shift+Tab keys are pressed', () => {
-        beforeEach(() => {
-          cy.tab({shift: true});
-        });
-
-        it('should hide the popup', () => {
-          cy.findByRole('dialog', {name: 'Delete Item'}).should('not.be.visible');
-        });
-
-        it('should transfer focus back to the "Delete Item" button', () => {
-          cy.findByRole('button', {name: 'Delete Item'}).should('have.focus');
-        });
-      });
-
-      context('when the "Cancel" button is focused', () => {
-        beforeEach(() => {
-          cy.findByRole('button', {name: 'Cancel'}).focus();
-        });
-
-        context('when the Tab key is pressed', () => {
-          beforeEach(() => {
-            cy.tab();
-          });
-
-          it('should hide the popup', () => {
-            cy.findByRole('dialog', {name: 'Delete Item'}).should('not.be.visible');
-          });
-
-          it('should focus on the "Next Focusable Button"', () => {
-            cy.focused();
-            cy.findByRole('button', {name: 'Next Focusable Button'}).should('have.focus');
           });
         });
       });
