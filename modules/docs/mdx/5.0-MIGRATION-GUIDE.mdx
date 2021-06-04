@@ -46,9 +46,6 @@ Please verify all changes made by the codemod, and
 [let us know](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) if you
 encounter any issues or use cases that we've missed. The `@workday/canvas-kit-codemod` package will
 help us maintain additional codemod transforms to make future migrations easier.
-
-> > > > > > > d1034754cce558ff9aa7b2c1d380fd05ac613236
-
 ## General Changes
 
 ### Slash Imports
@@ -407,45 +404,6 @@ We've changed some of the Button module's export behavior:
   // v5
   import {SecondaryButton} from '@workday/canvas-kit-react/button';
   ```
-
-- Buttons now use `createComponent` utility from the `common` module which now forwards `ref` and
-  allows `as` to change the underlying element.
-
-  - 🤖 `buttonRef` was renamed to `ref` provided by `createComponent`. `buttonRef` is no longer
-    valid. The codemod will rewrite all instances of `buttonRef` to `ref` for any JSX element that
-    is a Button import from Canvas-Kit.
-    ```tsx
-    // before
-    <Button buttonRef={ref}>
-    // after
-    <SecondaryButton ref={ref}>
-    ```
-  - Button prop interfaces no longer extend directly from the
-    `React.ButtonHTMLAttributes<HTMLButtonElement>`. `createComponent` returns a component that
-    determines the element interface via the `as` prop. This is why Button props no longer contain
-    an element interface directly. If you extend from a Button prop interface, or have code that
-    uses a Button prop interface and accesses properties like `onClick`, you'll have to provide the
-    button attribute yourself. This is not code-moddable since intent cannot be pre-determined. This
-    will not effect runtime, but only Typescript.
-
-        ```tsx
-        // before
-        interface MyButtonProps extends ButtonProps {}
-
-        // onClick no longer exists on `ButtonProps`, but does exist as a prop in `<Button>`
-        const MyButton = ({children, onClick}: MyButtonProps) => (
-          <SecondaryButton onClick={onClick}>{children}</Button>
-        );
-
-        // after
-        interface MyButtonProps extends ButtonProps, React.ButtonHTMLAttributes<HTMLButtonElement> {}
-
-        // OR
-        interface MyButtonProps extends ButtonProps {
-          onClick?: React.MouseEventHandler<HTMLButtonElement>;
-        }
-        ```
-
 #### Enums
 
 Enums have been removed from all buttons in favor of string literals.
@@ -666,20 +624,23 @@ we've made a few updates to the component in v5:
 
 ### Popper
 
-Popper used to render an empty `div` element as a child of the element created by the `PopupStack`.
-`ref` and `elemProps` (extra props) applied to that element. Now `ref` applies to the element
-created by the `PopupStack` and `elemProps` don't get applied to anything. The `PopupStack` is not
-React-specific and there is no easy way to spread extra props onto this element like other
-components do. The `ref` still points to that element, so you can add anything extra to that `ref`
-via DOM APIs if necessary. There is no codemod for this change.
+In v4, Popper rendered an empty `div` element as a child of the element created by the `PopupStack`
+and applied `ref` and `elemProps` (extra props) to that `div` element.
+
+We've updated Popper in v5 to instead apply `ref` directly to the element created by the
+`PopupStack`. The `PopupStack` is not React-specific; there is no easy way to spread extra props to
+this element as we do for other components, so we've discarded `elemProps`. If necessary, you can
+still target the element using `ref` and modify it using DOM APIs.
+
+There is no codemod for this change.
 
 ### Popups
 
-`Popup` has transitioned to a compound component, along with all Popup-based behavior hooks. What
-was a `Popup` prior to v5 is now a `Popup.Card` in v5. The target button and `Popper` components
-have been moved to subcomponents of a `Popup`.
+Popup has transitioned to a [compound component](./COMPOUND_COMPONENTS.mdx), along with all
+Popup-based behavior hooks. What was a `Popup` in v4 is now a `Popup.Card` in v5. The target button
+and `Popper` components have also been converted to subcomponents of `Popup`.
 
-**Before**
+#### v4
 
 ```tsx
 import React from 'react';
@@ -725,7 +686,7 @@ export const MyPopup = () => {
 };
 ```
 
-**After**
+#### v5
 
 ```tsx
 import React from 'react';
@@ -774,32 +735,32 @@ export const MyPopup = () => {
 };
 ```
 
-The most notable changes is `Popup` is now a container component that takes a `PopupModel` and has
-several subcomponents like `Popup.Target` and `Popup.CloseButton`. These components are hooked up to
-the `PopupModel` via React context and have access to state and events. `Popup.Card` is what the v4
+Most notably, `Popup` is now a container component that takes a `PopupModel` and has several
+subcomponents like `Popup.Target` and `Popup.CloseButton`. These components are hooked up to the
+`PopupModel` via React context and have access to state and events. `Popup.Card` is what the v4
 `Popup` once was.
 
 All behavior hooks, like `useCloseOnEscape` now take a `model` instead of variable parameters. This
 allowed us to fix some subtle bugs. Using the `PopupModel` means all hooks have access to all Popup
 state and events without passing in many parameters.
 
-#### usePopup
+#### usePopup and usePopupModel
 
-In the above example, `usePopup` has been removed. `usePopupModel` should be used instead. All
+As shown in the example above, `usePopupModel` should now be used instead of `usePopup`. All
 subcomponents have an associated behavior hook. For example, `Popup.Target` uses a hook called
 `usePopupTarget`. If you need to use your own components for any reason, these hooks are available.
-`Popup.Target` and `Popup.CloseButton` do not include any styling. They both use `SecondaryButton`
-as the default component rendered. You can change this via the `as` prop. For example, the following
-will render an unstyled button:
+`Popup.Target` and `Popup.CloseButton` do not include any styling. They both render
+`SecondaryButton` by default. You can change this via the `as` prop. For example, the following will
+render an unstyled button:
 
 ```tsx
 <Popup.Target as="button">Show</Popup.Target>
 ```
 
-Pass a `css` prop, or a styled button instead to have a custom styled button. You could even pass
-`IconButton` if you need an icon button to show a popup instead!
+Pass a `css` prop or a styled button instead to have a custom styled button. You could even pass
+`IconButton` if you need an icon button to show a Popup instead!
 
-If you were using `usePopup`, here's a list of equivalent APIs:
+If you were using `usePopup` before, here's a list of equivalent APIs:
 
 | Before                                                                  | After                                 |
 | ----------------------------------------------------------------------- | ------------------------------------- |
@@ -810,15 +771,14 @@ If you were using `usePopup`, here's a list of equivalent APIs:
 | `popperProps.anchorElement`                                             | `model.state.targetRef.current`       |
 | `targetProps.onClick`                                                   | `usePopupTarget(model).onClick`       |
 
-#### New Focus management
+#### New Focus Management
 
 A common theme we noticed in uses of Popup in the wild was focus management. Developers were
 manually passing a `ref` to the target button element and manually returning focus to it when
-closing a Popup through whatever means it was closed. This use-case should be handled now by a new
-hook: `useReturnFocus`. By default, `useReturnFocus` will return focus to the `targetRef` in the
-model, which is set by `Popup.Target`. This can be overridden via `returnFocusRef` passed to the
-model on creation. This `returnFocusRef` might make some migrations easier if `Popup.Target` cannot
-be used for whatever reason.
+closing the Popup. This use case should now be handled by the new `useReturnFocus` hook. By default,
+`useReturnFocus` will return focus to the `targetRef` in the model, which is set by `Popup.Target`.
+This can be overridden by passing `returnFocusRef` to the model on creation. `returnFocusRef` should
+make your migration easier if `Popup.Target` cannot be used for whatever reason.
 
 ```tsx
 // before
@@ -838,10 +798,10 @@ const model = usePopupModel({
 useReturnFocus(model);
 ```
 
-Another common focus thing to do is to focus something within a popup when the popup is shown. The
-`useInitialFocus` was created for this purpose. `useInitialFocus` will set focus on the first
-focusable element when the popup becomes visible. This behavior can be overridden by setting the
-`initialFocusRef` in the model.
+Another common use case involved focusing something within the Popup when the Popup was shown. The
+`useInitialFocus` hook was created for this purpose. `useInitialFocus` will set focus to the first
+focusable element when the Popup becomes visible. This behavior can be overridden by passing
+`initialFocusRef` to the model.
 
 ```tsx
 // before
@@ -863,18 +823,18 @@ const model = usePopupModel({
 useInitialFocus(model);
 ```
 
-#### Using your own positioning
+#### Managing Positioning
 
-If you use your own positioning and only need to use the original `Popup`, you can use `Popup.Card`
-instead. Without the model and behaviors, the following is equivalent:
+If you'd prefer to manage positioning yourself, you can use `Popup.Card` on its own. Without the
+model and behaviors, the following is equivalent:
 
 ```tsx
-// before
+// v4
 <Popup width={width} handleClose={onClose} heading="Popup Heading">
   Popup Content
 </Popup>
 
-// after
+// v5
 <Popup.Card with={width}>
   <Popup.CloseIcon aria-label="Close" onClick={onClose} />
   <Popup.Heading>Popup Heading</Popup.Heading>
@@ -882,7 +842,7 @@ instead. Without the model and behaviors, the following is equivalent:
 </Popup.Card>
 ```
 
-`Popup.Card` is using `Card`, which is now using `Box`. This means changes to some props:
+`Popup.Card` uses `Card`, which is now using `Box`. Consequently, the following props have changed:
 
 | Before                         | After                                      |
 | ------------------------------ | ------------------------------------------ |
@@ -892,10 +852,10 @@ instead. Without the model and behaviors, the following is equivalent:
 
 #### Transitioning
 
-We noticed Popups were used in 2 different ways: always rendering and conditional rendering.
+We noticed Popups were used in two different ways: always rendering and conditional rendering.
 
 ```tsx
-// always rendering
+// Always rendering
 const MyPopup = () => {
   const targetRef = React.useRef(null)
   const {stackRef, popperProps, targetProps, closePopup} = usePopup()
@@ -920,7 +880,7 @@ const MyPopup = () => {
   )
 }
 
-// conditional rendering
+// Conditional rendering
 const MyOpenPopup = ({onClose, targetRef}) => {
   const {popperProps, closePopup} = usePopup()
 
@@ -959,14 +919,14 @@ const MyPopup = () => {
 }
 ```
 
-The difference between the two is subtle, but when always rendering example, the `usePopup` hook
+The difference between the two is subtle, but in the always rendering example, the `usePopup` hook
 runs on every render. In the conditional rendering example, the `usePopup` hook only runs when
 `MyPopup` renders it. This means hooks like `useCloseOnEscape` need to function properly in both
-cases, but `open` is not passed to the hook. This caused subtle bugs, and now `useCloseOnEscape` is
-passed a `PopupModel` which does have access to the popup's visible state. `useCloseOnEscape` will
-now only run when the popup is visible, but this means the conditional rendering example will have
-to do extra work because the `target` is out of scope of the `MyOpenPopup` component. The following
-is equivalent to the example in v5:
+cases, but `open` is not passed to the hook. This caused subtle bugs. Now, `useCloseOnEscape` is
+passed a `PopupModel` which has access to the popup's visible state. `useCloseOnEscape` will now
+only run when the popup is visible, but this means the conditional rendering example will have to do
+extra work because the `target` is out of scope of the `MyOpenPopup` component. The following is
+equivalent to the example in v5:
 
 ```tsx
 const MyOpenPopup = ({onClose, targetRef}) => {
