@@ -4,11 +4,20 @@ Canvas Kit Tokens contains values and base styles that are shared across the kit
 
 Includes:
 
-- [Colors](#colors)
-- [Border Radius](#border-radius)
-- [Space](#space)
-- [Depth](#depth)
-- [Type](#type)
+- [Canvas Kit Tokens](#canvas-kit-tokens)
+  - [Installation](#installation)
+  - [Colors](#colors)
+    - [Usage](#usage)
+    - [Semantic constants](#semantic-constants)
+  - [Border Radius](#border-radius)
+  - [Space](#space)
+    - [Usage](#usage-1)
+  - [Depth](#depth)
+    - [Usage](#usage-2)
+  - [Type](#type)
+    - [Fonts](#fonts)
+    - [Hierarchy](#hierarchy)
+    - [Usage](#usage-3)
 
 ## Installation
 
@@ -181,41 +190,26 @@ Note that this module sources fonts from the Workday CDN.
 
 ### Hierarchy
 
-Our type module is a combination of hierarchy and variants. The hierarchy has the font size, weight,
-etc. for different levels of type (e.g. `canvas.type.h1`, `canvas.type.body`, etc.). The variants
-(e.g. `canvas.type.variant.label`) are applied to a hierarchy level to achieve certain styling.
-Variants only come their augmenting styles and a base type object is required.
 
-| Hierarchy Levels |
-| ---------------- |
-| `body1`       |
-| `body2`       |
-| `h1`             |
-| `h2`             |
-| `h3`             |
-| `h4`             |
-| `h5`             |
-| `body`           |
-| `body2`          |
-| `small`          |
+| Hierarchy Levels | Description                                           |
+| ---------------- | ----------------------------------------------------- |
+| `display`        | Intended for large heroes and images                  |
+| `title`          | Intended for large page titles                        |
+| `heading`        | Intended for headings and large text                  |
+| `body`           | Intended for standard body text                       |
+| `subtext`        | Intended for small subtext content or in tight spaces |
 
-| Variants  |
-| --------- |
-| `label`   |
-| `button`  |
-| `caps`    |
-| `hint`    |
-| `error`   |
-| `inverse` |
-| `mono`    |
-| `link`    |
+| Properties    | Description                                                      |
+| ------------- | ---------------------------------------------------------------- |
+| `fonts`       | Contains font-family tokens: `normal` and `monospace`            |
+| `fontSizes`   | Contains font-size tokens: keys are in `px`, values are in `rem` |
+| `fontWeights` | Contains font-weight tokens: `regular`, `medium`, and `bold`     |
 
-##### Disclaimer
-
-> A new type hierarchy is in the process of being introduced into our products. You can find more
-> info about it in the [Labs Type](?path=/story/labs-core-react--type) section. We plan to maintain
-> both hierarchies for a short time, but there will be a breaking change when we replace the current
-> one with the new one.
+| Variants  | Description                                       |
+| --------- | ------------------------------------------------- |
+| `error`   | Used for making errors more visible               |
+| `hint`    | Used for help text and secondary content          |
+| `inverse` | Used for any text on a dark or colored background |
 
 ### Usage
 
@@ -225,8 +219,8 @@ If you're working in emotion, you can simply spread the type objects to use thei
 import {type} from '@workday/canvas-kit-react/tokens';
 
 const MyLabel = styled('label')({
-  ...type.body,
-  ...type.variant.label,
+  ...type.levels.subtext.large,
+  fontWeight: type.properties.fontWeights.medium,
 });
 ```
 

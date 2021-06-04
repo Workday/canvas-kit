@@ -105,23 +105,107 @@ also deprecating and updating our type variants. The v5 codemod handles almost a
 for you. That said, you'll want to review the transformation and your UI to ensure everything was
 updated as you expect.
 
+#### Automatic Updates
+
+- 🤖 Type Hierarchy Updates
+
+All type hierarchy updates are handled by the codemod. The tables below will help you understand the
+changes and provide a reference as you review your UI. Most teams are using the `beta` type tokens
+in `@workday/canvas-kit-labs-react-core`, but some are using the `legacy` type in
+`@workday/canvas-kit-labs-react-core`.
+
+| Beta Type (px)  | Resposive Type (rem)                      |
+| --------------- | ----------------------------------------- |
+| `brand1` (56px) | `levels.title.large` ( 3.5rem \ 56px)     |
+| `brand2` (48px) | `levels.title.medium` ( 3rem \ 48px)      |
+| `h1` (40px)     | `levels.title.small` ( 2.5rem \ 40px)     |
+| `h2` (32px)     | `levels.heading.large` ( 2rem \ 32px)     |
+| `h3` (24px)     | `levels.heading.small` ( 1.5rem \ 24px)   |
+| `h4` (20px)     | `levels.body.large` ( 1.25rem \ 20px)     |
+| `h5` (20px)     | `levels.body.large` ( 1.25rem \ 20px)     |
+| `body` (16px)   | `levels.body.small` ( 1rem \ 16px)        |
+| `body2` (14px)  | `levels.subtext.large` ( 0.875rem \ 14px) |
+| `small` (13px)  | `levels.subtext.medium` ( 0.75rem \ 12px) |
+
+| Legacy Type (px)  | Resposive Type (rem)                     |
+| ----------------- | ---------------------------------------- |
+| `dataViz1` (56px) | `levels.title.large` (3.5rem \ 56px)     |
+| `dataViz2` (34px) | `levels.heading.large` (2rem \ 32px)     |
+| `h1` (28px)       | `levels.heading.medium` (1.75rem \ 28px) |
+| `h2` (24px)       | `levels.heading.small` (1.5rem \ 24px)   |
+| `h3` (20px)       | `levels.body.large` (1.25rem,) \ 20px    |
+| `h4` (16px)       | `levels.body.small` (1rem \ 16px)        |
+| `h5` (16px)       | `levels.body.small` (1rem \ 16px)        |
+| `body` (14px)     | `levels.subtext.large` (0.875rem \ 14px) |
+| `body2` (13px)    | `levels.subtext.small` (0.75rem \ 12px)  |
+| `small` (12px)    | `levels.subtext.small` (0.75rem \ 12px)  |
+
+- 🤖 Property Updates
+
+All `fontFamily`, `fontSize`, and `fontWeight` property updates are handled by the codemod.
+
+| CSS Property | Corresponding Token           | Notes                                                           |
+| ------------ | ----------------------------- | --------------------------------------------------------------- |
+| `fontFamily` | `type.properties.fonts`       | `normal` (Roboto) and `monospace` (Roboto Mono) are available   |
+| `fontSize`   | `type.properties.fontSizes`   | please consult the type hierarchies above to map values         |
+| `fontWeight` | `type.properties.fontWeights` | `regular` (400), `medium` (500), and `bold` (700) are available |
+
+- 🤖 Variant Updates
+
+All `variant` updates _except `link`_ are handled by the codemod. Please see the
+[variants](#variants) section below for more information.
+
+| Variant                | Transformation                                                                 | Notes                                   |
+| ---------------------- | ------------------------------------------------------------------------------ | --------------------------------------- |
+| `type.variant.error`   | `type.variants.error`                                                          | name change only                        |
+| `type.variant.hint`    | `type.variants.hint`                                                           | name change only                        |
+| `type.variant.inverse` | `type.variants.inverse`                                                        | name change only                        |
+| `type.variant.button`  | `{fontWieight: type.properties.fontWeights.bold}`                              | variant deprecated, use type properties |
+| `type.variant.caps`    | `{textTransform: 'uppercase', fontWeight: type.properties.fontWeights.medium}` | variant deprecated, use type properties |
+| `type.variant.label`   | `{fontWeight: type.properties.fontWeights.medium}`                             | variant deprecated, use type properties |
+| `type.variant.mono`    | `{fontWeight: type.properties.fonts.monospace}`                                | variant deprecated, use type properties |
+
+#### Manual Updates
+
+There are only two type deprecations not covered by the codemod:
+
+- Type Wrapper components (`H1`-`H5`) have been removed
+- `link` variant has been removed.
+
+##### Type Wrapper Components Migration
+
+To migrate, please refer to the hierachy tables about and use the type hierarchy tokens directly. Detailed usage information is available in the [levels section](#levels).
+
+##### Link Variant Migration
+
+To migrate, please use the `Hyperlink` component instead. Detailed usage information is available in the [variants section](#variants).
+
+#### Type Updates In-Depth Overview
+
 The new type tokens introduce a few major changes:
 
-- Introducing
-  [rem values](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Values_and_units#ems_and_rems)
+- Introducing rem values
 - Creating new `type` object structure
 - Adding new type properties (`fonts`, `fontSizes`, and `fontWeights`)
 - Updating and replacing variants
 
 #### Introducing Rem Values
 
-The new type 
+The new type hierarchy uses `rem` values instead of `px`. This update follows the guidance
+[from the WCAG spec](https://www.w3.org/TR/WCAG21/#resize-text) and provides better support for
+users who rely on zooming. If you'd like to learn more about `rem` and relative units, you can
+review this
+[documentation](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Values_and_units#ems_and_rems).
+
+> **Note:** We are using `16px` as our base font-size for these values. This is a browser standard
+> and also fairly common across Workday. However, _if your body text is set to a value other than
+> `16px`_, you will need to adjust that value for text to render properly.
 
 #### New Type Object Structure
 
-The `beta` and `legacy` type object structure was fairly flat, provided many levels in the type
+The `beta` and `legacy` type object structures were fairly flat, provided many levels in the type
 hierarchy, and quite a few variants. While none of these are bad attributes, we found in our
-research that they created a large amount of confusion. It was unclear for designers and engineers
+research that they created a large amount of confusion. Both designers and engineers were unclear on
 when to use many of the tokens provided. We restructured the object to help users make more sense of
 it. The tokens are divided into three main categories:
 
@@ -188,7 +272,7 @@ const mediumMonoStyles = {
 
 ##### Variants
 
-__Supported Variants__
+**Supported Variants**
 
 We're also reducing and simplifying our `variants`. In v5 we will only support:
 
@@ -196,7 +280,7 @@ We're also reducing and simplifying our `variants`. In v5 we will only support:
 - `hint` (used for help text and secondary content)
 - `inverse` (used for any text on a dark or colored background)
 
-> _Note:_ The `variant` key has been renamed to `variants` to be consistent with our other key
+> **Note:** The `variant` key has been renamed to `variants` to be consistent with our other key
 > names.
 
 ```tsx
@@ -215,7 +299,7 @@ const hintStyles = type.variants.hint;
 const inverseStyles = type.variants.inverse;
 ```
 
-__Deprecated Variants__
+**Deprecated Variants**
 
 There are also a handful of deprecated variants:
 
@@ -257,48 +341,30 @@ const labelStyles = {fontWeight: type.properties.fontWeights.medium};
 const monoStyles = {fontFamily: type.properties.fonts.monospace};
 ```
 
-__Link Variant__
+**Link Variant**
 
-
+The `link` variant is also being deprecated in v5, and users will need to use the `Hyperlink`
+component instead. This is the only manual update needed for the type updates. Below is an example:
 
 ```tsx
-const linkStyles = type.variant.link;
+// v4
+import {type} from '@workday/canvas-kit-labs-react-core';
+
+const Link = styled('a')(
+  type.variant.link,
+);
+
+return (
+  <Link href="https://workday.github.io/canvs-kit">View docs</Link>
+);
+
+// v5
+import {Hyperlink} from '@workday/canvas-kit-labs-react/button';
+
+return (
+  <Hyperlink href="https://workday.github.io/canvs-kit">View docs</Link>
+);
 ```
-
-#### Automatic Updates
-
-- 🤖 Type Hierarchy Updates
-
-All type hierarchy updates are handled by the codemod. The tables below will help you understand the
-changes and provide a reference as you review your UI. Most teams are using the `beta` type tokens
-in `@workday/canvas-kit-labs-react-core`, but some are using the `legacy` type in
-`@workday/canvas-kit-labs-react-core`.
-
-| Beta Type (px)  | Resposive Type (rem)                      |
-| --------------- | ----------------------------------------- |
-| `brand1` (56px) | `levels.title.large` ( 3.5rem \ 56px)     |
-| `brand2` (48px) | `levels.title.medium` ( 3rem \ 48px)      |
-| `h1` (40px)     | `levels.title.small` ( 2.5rem \ 40px)     |
-| `h2` (32px)     | `levels.heading.large` ( 2rem \ 32px)     |
-| `h3` (24px)     | `levels.heading.small` ( 1.5rem \ 24px)   |
-| `h4` (20px)     | `levels.body.large` ( 1.25rem \ 20px)     |
-| `h5` (20px)     | `levels.body.large` ( 1.25rem \ 20px)     |
-| `body` (16px)   | `levels.body.small` ( 1rem \ 16px)        |
-| `body2` (14px)  | `levels.subtext.large` ( 0.875rem \ 14px) |
-| `small` (13px)  | `levels.subtext.medium` ( 0.75rem \ 12px) |
-
-| Legacy Type (px)  | Resposive Type (rem)                     |
-| ----------------- | ---------------------------------------- |
-| `dataViz1` (56px) | `levels.title.large` (3.5rem \ 56px)     |
-| `dataViz2` (34px) | `levels.heading.large` (2rem \ 32px)     |
-| `h1` (28px)       | `levels.heading.medium` (1.75rem \ 28px) |
-| `h2` (24px)       | `levels.heading.small` (1.5rem \ 24px)   |
-| `h3` (20px)       | `levels.body.large` (1.25rem,) \ 20px    |
-| `h4` (16px)       | `levels.body.small` (1rem \ 16px)        |
-| `h5` (16px)       | `levels.body.small` (1rem \ 16px)        |
-| `body` (14px)     | `levels.subtext.large` (0.875rem \ 14px) |
-| `body2` (13px)    | `levels.subtext.small` (0.75rem \ 12px)  |
-| `small` (12px)    | `levels.subtext.small` (0.75rem \ 12px)  |
 
 ### Canvas Kit CSS Maintenance Mode
 
