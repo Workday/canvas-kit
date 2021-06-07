@@ -23,6 +23,7 @@ any questions about the update.
   - [Tabs](#tabs)
   - [Popper](#popper)
   - [Popups](#popups)
+  - [Skeleton](#skeleton)
 
 ## Codemod
 
@@ -968,3 +969,42 @@ const MyPopup = () => {
   )
 }
 ```
+
+### Skeleton
+
+Skeleton was already implemented as a compound component in v4, but we've made changes to its
+imports and to its animation in v5.
+
+The imports for its subcomponents in v4 (`SkeletonHeader`, `SkeletonText`, and `SkeletonShape`) have
+been converted to keys on `Skeleton` in v5 (`Skeleton.Header`, `Skeleton.Text`, and
+`Skeleton.Shape`). You only need to import the `Skeleton` component in v5, and you may still compose
+your own Skeleton using whatever parts you need.
+
+```tsx
+// v4
+import {
+  Skeleton,
+  SkeletonHeader,
+  SkeletonShape,
+  SkeletonText,
+} from '@workday/canvas-kit-react/skeleton';
+const MySkeleton = () => (
+  <Skeleton>
+    <SkeletonHeader />
+    <SkeletonText />
+    <SkeletonShape width={40} height={40} />
+  </Skeleton>
+);
+
+// v5
+import {Skeleton} from '@workday/canvas-kit-react/skeleton';
+const MySkeleton = () => (
+  <Skeleton>
+    <Skeleton.Header />
+    <Skeleton.Text />
+    <Skeleton.Shape width={40} height={40} />
+  </Skeleton>
+);
+
+Additionally, the skeleton animation has been updated from a diagonal sheen, or shimmer, to fading
+the opacity of the entire shape(s) in and out.
