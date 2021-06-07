@@ -4,6 +4,15 @@ import {fontWeights, CanvasFontWeights} from './fontWeights';
 import {levels, CanvasTypeHierarchy} from './levels';
 import {variants, CanvasTypeVariants} from './variants';
 
+export {fontFamily, monoFontFamily} from './fontFamilies';
+
+export type {
+  CanvasTypeProperties,
+  CanvasTypeVariants,
+  CanvasTypeHierarchy,
+};
+
+
 /** ### Canvas Type Properties
  * [View Storybook Docs](https://workday.github.io/canvas-kit/?path=/story/tokens-tokens-react--type)
  *
