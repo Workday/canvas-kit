@@ -975,9 +975,10 @@ const MyPopup = () => {
 Skeleton was already implemented as a compound component in v4, but we've made changes to its
 imports and to its animation in v5.
 
-First, the imports for its subcomponents have been updated to be keys on `Skeleton`, for Header,
-Shape, and Text. You will now always import just `Skeleton` component, and you may still compose your
-own Skeleton using whatever parts you need.
+The imports for its subcomponents in v4 (`SkeletonHeader`, `SkeletonText`, and `SkeletonShape`) have
+been converted to keys on `Skeleton` in v5 (`Skeleton.Header`, `Skeleton.Text`, and
+`Skeleton.Shape`). You only need to import the `Skeleton` component in v5, and you may still compose
+your own Skeleton using whatever parts you need.
 
 ```tsx
 // v4
