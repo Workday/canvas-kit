@@ -1,4 +1,4 @@
-import {fonts, CanvasFonts} from './fonts';
+import {fontFamilies, CanvasFontFamilies} from './fontFamilies';
 import {fontSizes, CanvasFontSizes} from './fontSizes';
 import {fontWeights, CanvasFontWeights} from './fontWeights';
 import {levels, CanvasTypeHierarchy} from './levels';
@@ -12,14 +12,14 @@ import {variants, CanvasTypeVariants} from './variants';
  *
  * The properties are organized in three parts:
  *
- * - `fonts` (font families)
+ * - `fontFamilies`
  * - `fontSizes`
  * - `fontWeights`
  *
  * You can find more detailed information by inspecting individual properties.
  */
 const properties: CanvasTypeProperties = {
-  fonts,
+  fontFamilies,
   fontSizes,
   fontWeights,
 };
@@ -48,7 +48,7 @@ type CanvasTypeProperties = {
    * ---
    * There are two font family tokens:
    *
-   * - `normal`: "Roboto" - what you'll almost always want to choose
+   * - `default`: "Roboto" - what you'll almost always want to choose
    * - `monospace`: "Roboto Mono" - what you'll want for monospace type
    *
    * You can find more detailed information by inspecting individual families.
@@ -57,13 +57,13 @@ type CanvasTypeProperties = {
    * import { type } from '@workday/canvas-kit-react/tokens';
    *
    * const MonospaceText = () => (
-   *   <p css={{fontFamily: type.properties.fonts.monospace}}>
+   *   <p css={{fontFamily: type.properties.fontFamilies.monospace}}>
    *     monospace_text
    *   </p>
    * );
    * ```
    */
-  fonts: CanvasFonts;
+  fontFamilies: CanvasFontFamilies;
   /** ### Font Size Tokens
    * [View Storybook Docs](https://workday.github.io/canvas-kit/)
    *
@@ -159,7 +159,7 @@ export type CanvasTypeTokens = {
    * ---
    * Type properties are organized in three parts:
    *
-   * - `fonts` (font-families)
+   * - `fontFamilies`
    * - `fontSizes`
    * - `fontWeights`
    *

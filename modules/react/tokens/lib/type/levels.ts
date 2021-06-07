@@ -1,6 +1,6 @@
 import {typeColors} from '@workday/canvas-colors-web';
 
-import {CanvasFonts, fonts} from './fonts';
+import {CanvasFontFamilies, fontFamilies} from './fontFamilies';
 import {CanvasFontSizes, fontSizes} from './fontSizes';
 import {CanvasFontWeights, fontWeights} from './fontWeights';
 
@@ -16,7 +16,7 @@ import {CanvasFontWeights, fontWeights} from './fontWeights';
  * - `body`: Intended to be used for standard body text.
  * - `subtext`: Intended to be used for small subtext content or in tight spaces.
  *
- * Each level has three sizes: `small`, `medium`, and `large`.
+ * Each level has three sizes: `large`, `medium`, and `small`.
  *
  * The type hierarchy tokens are recommended for most type usage.
  * These objects handle font sizes, weights, line heights, letter spacing, and color for you,
@@ -37,26 +37,8 @@ import {CanvasFontWeights, fontWeights} from './fontWeights';
  */
 export const levels: CanvasTypeHierarchy = {
   display: {
-    small: {
-      fontFamily: fonts.normal,
-      /** 68px converted to base-16 rem (4.25rem)*/
-      fontSize: fontSizes[68],
-      /** 76px converted to base-16 rem */
-      lineHeight: '4.75rem',
-      fontWeight: fontWeights.bold,
-      color: typeColors.heading,
-    },
-    medium: {
-      fontFamily: fonts.normal,
-      /** 80px converted to base-16 rem (5rem)*/
-      fontSize: fontSizes[80],
-      /** 88px converted to base-16 rem (5.5rem) */
-      lineHeight: '5.5rem',
-      fontWeight: fontWeights.bold,
-      color: typeColors.heading,
-    },
     large: {
-      fontFamily: fonts.normal,
+      fontFamily: fontFamilies.default,
       /** 92px converted to base-16 rem (5.75rem)*/
       fontSize: fontSizes[92],
       /** 100px converted to base-16 rem (6.25rem) */
@@ -64,28 +46,28 @@ export const levels: CanvasTypeHierarchy = {
       fontWeight: fontWeights.bold,
       color: typeColors.heading,
     },
+    medium: {
+      fontFamily: fontFamilies.default,
+      /** 80px converted to base-16 rem (5rem)*/
+      fontSize: fontSizes[80],
+      /** 88px converted to base-16 rem (5.5rem) */
+      lineHeight: '5.5rem',
+      fontWeight: fontWeights.bold,
+      color: typeColors.heading,
+    },
+    small: {
+      fontFamily: fontFamilies.default,
+      /** 68px converted to base-16 rem (4.25rem)*/
+      fontSize: fontSizes[68],
+      /** 76px converted to base-16 rem */
+      lineHeight: '4.75rem',
+      fontWeight: fontWeights.bold,
+      color: typeColors.heading,
+    },
   },
   title: {
-    small: {
-      fontFamily: fonts.normal,
-      /** 40px converted to base-16 rem (2.5rem)*/
-      fontSize: fontSizes[40],
-      /** 48px converted to base-16 rem (3rem) */
-      lineHeight: '3rem',
-      fontWeight: fontWeights.bold,
-      color: typeColors.heading,
-    },
-    medium: {
-      fontFamily: fonts.normal,
-      /** 48px converted to base-16 rem (3rem)*/
-      fontSize: fontSizes[48],
-      /** 56px converted to base-16 rem (3.5rem) */
-      lineHeight: '3.5rem',
-      fontWeight: fontWeights.bold,
-      color: typeColors.heading,
-    },
     large: {
-      fontFamily: fonts.normal,
+      fontFamily: fontFamilies.default,
       /** 56px converted to base-16 rem (3.5rem)*/
       fontSize: fontSizes[56],
       /** 64px converted to base-16 rem (4rem) */
@@ -93,28 +75,28 @@ export const levels: CanvasTypeHierarchy = {
       fontWeight: fontWeights.bold,
       color: typeColors.heading,
     },
+    medium: {
+      fontFamily: fontFamilies.default,
+      /** 48px converted to base-16 rem (3rem)*/
+      fontSize: fontSizes[48],
+      /** 56px converted to base-16 rem (3.5rem) */
+      lineHeight: '3.5rem',
+      fontWeight: fontWeights.bold,
+      color: typeColors.heading,
+    },
+    small: {
+      fontFamily: fontFamilies.default,
+      /** 40px converted to base-16 rem (2.5rem)*/
+      fontSize: fontSizes[40],
+      /** 48px converted to base-16 rem (3rem) */
+      lineHeight: '3rem',
+      fontWeight: fontWeights.bold,
+      color: typeColors.heading,
+    },
   },
   heading: {
-    small: {
-      fontFamily: fonts.normal,
-      /** 24px converted to base-16 rem (1.5rem)*/
-      fontSize: fontSizes[24],
-      /** 32px converted to base-16 rem (2rem) */
-      lineHeight: '2rem',
-      fontWeight: fontWeights.bold,
-      color: typeColors.heading,
-    },
-    medium: {
-      fontFamily: fonts.normal,
-      /** 28px converted to base-16 rem (1.75rem)*/
-      fontSize: fontSizes[28],
-      /** 36px converted to base-16 rem (2.25rem) */
-      lineHeight: '2.25rem',
-      fontWeight: fontWeights.bold,
-      color: typeColors.heading,
-    },
     large: {
-      fontFamily: fonts.normal,
+      fontFamily: fontFamilies.default,
       /** 32px converted to base-16 rem (2rem)*/
       fontSize: fontSizes[32],
       /** 40px converted to base-16 rem (2.5rem) */
@@ -122,32 +104,28 @@ export const levels: CanvasTypeHierarchy = {
       fontWeight: fontWeights.bold,
       color: typeColors.heading,
     },
+    medium: {
+      fontFamily: fontFamilies.default,
+      /** 28px converted to base-16 rem (1.75rem)*/
+      fontSize: fontSizes[28],
+      /** 36px converted to base-16 rem (2.25rem) */
+      lineHeight: '2.25rem',
+      fontWeight: fontWeights.bold,
+      color: typeColors.heading,
+    },
+    small: {
+      fontFamily: fontFamilies.default,
+      /** 24px converted to base-16 rem (1.5rem)*/
+      fontSize: fontSizes[24],
+      /** 32px converted to base-16 rem (2rem) */
+      lineHeight: '2rem',
+      fontWeight: fontWeights.bold,
+      color: typeColors.heading,
+    },
   },
   body: {
-    small: {
-      fontFamily: fonts.normal,
-      /** 16px converted to base-16 rem (1rem)*/
-      fontSize: fontSizes[16],
-      /** 24px converted to base-16 rem (1.5rem) */
-      lineHeight: '1.5rem',
-      /** 0.16px converted to base-16 rem (0.01rem) */
-      letterSpacing: '0.01rem',
-      fontWeight: fontWeights.regular,
-      color: typeColors.body,
-    },
-    medium: {
-      fontFamily: fonts.normal,
-      /** 18px converted to base-16 rem (1.125rem)*/
-      fontSize: fontSizes[18],
-      /** 28px converted to base-16 rem (1.75rem) */
-      lineHeight: '1.75rem',
-      /** 0.16px converted to base-16 rem (0.01rem) */
-      letterSpacing: '0.01rem',
-      fontWeight: fontWeights.regular,
-      color: typeColors.body,
-    },
     large: {
-      fontFamily: fonts.normal,
+      fontFamily: fontFamilies.default,
       /** 20px converted to base-16 rem (1.25rem)*/
       fontSize: fontSizes[20],
       /** 28px converted to base-16 rem (1.75rem) */
@@ -157,21 +135,43 @@ export const levels: CanvasTypeHierarchy = {
       fontWeight: fontWeights.regular,
       color: typeColors.body,
     },
+    medium: {
+      fontFamily: fontFamilies.default,
+      /** 18px converted to base-16 rem (1.125rem)*/
+      fontSize: fontSizes[18],
+      /** 28px converted to base-16 rem (1.75rem) */
+      lineHeight: '1.75rem',
+      /** 0.16px converted to base-16 rem (0.01rem) */
+      letterSpacing: '0.01rem',
+      fontWeight: fontWeights.regular,
+      color: typeColors.body,
+    },
+    small: {
+      fontFamily: fontFamilies.default,
+      /** 16px converted to base-16 rem (1rem)*/
+      fontSize: fontSizes[16],
+      /** 24px converted to base-16 rem (1.5rem) */
+      lineHeight: '1.5rem',
+      /** 0.16px converted to base-16 rem (0.01rem) */
+      letterSpacing: '0.01rem',
+      fontWeight: fontWeights.regular,
+      color: typeColors.body,
+    },
   },
   subtext: {
-    small: {
-      fontFamily: fonts.normal,
-      /** 10px converted to base-16 rem (0.625rem)*/
-      fontSize: fontSizes[10],
-      /** 16px converted to base-16 rem (1rem) */
-      lineHeight: '1rem',
-      /** 0.4px converted to base-16 rem (0.025rem) */
-      letterSpacing: '0.025rem',
+    large: {
+      fontFamily: fontFamilies.default,
+      /** 14px converted to base-16 rem (0.875rem)*/
+      fontSize: fontSizes[14],
+      /** 20px converted to base-16 rem (1.25rem) */
+      lineHeight: '1.25rem',
+      /** 0.24px converted to base-16 rem (0.015rem) */
+      letterSpacing: '0.015rem',
       fontWeight: fontWeights.regular,
       color: typeColors.body,
     },
     medium: {
-      fontFamily: fonts.normal,
+      fontFamily: fontFamilies.default,
       /** 12px converted to base-16 rem (0.75rem)*/
       fontSize: fontSizes[12],
       /** 16px converted to base-16 rem (1rem) */
@@ -181,14 +181,14 @@ export const levels: CanvasTypeHierarchy = {
       fontWeight: fontWeights.regular,
       color: typeColors.body,
     },
-    large: {
-      fontFamily: fonts.normal,
-      /** 14px converted to base-16 rem (0.875rem)*/
-      fontSize: fontSizes[14],
-      /** 20px converted to base-16 rem (1.25rem) */
-      lineHeight: '1.25rem',
-      /** 0.24px converted to base-16 rem (0.015rem) */
-      letterSpacing: '0.015rem',
+    small: {
+      fontFamily: fontFamilies.default,
+      /** 10px converted to base-16 rem (0.625rem)*/
+      fontSize: fontSizes[10],
+      /** 16px converted to base-16 rem (1rem) */
+      lineHeight: '1rem',
+      /** 0.4px converted to base-16 rem (0.025rem) */
+      letterSpacing: '0.025rem',
       fontWeight: fontWeights.regular,
       color: typeColors.body,
     },
@@ -203,9 +203,9 @@ export type CanvasTypeHierarchy = {
    * It has three sizes: `small`, `medium`, and `large`.
    * Here's a quick reference for font-sizes and weights:
    *
-   * - `small`: font-size: 68px (4.25rem), font-weight: bold (700)
-   * - `medium`: font-size: 80px (5rem), font-weight: bold (700)
    * - `large`: font-size: 92px (5.75rem), font-weight: bold (700)
+   * - `medium`: font-size: 80px (5rem), font-weight: bold (700)
+   * - `small`: font-size: 68px (4.25rem), font-weight: bold (700)
    *
    * You can find more detailed styled information by inspecting individual sizes.
    *
@@ -228,9 +228,9 @@ export type CanvasTypeHierarchy = {
    * It has three sizes: `small`, `medium`, and `large`.
    * Here's a quick reference for font-sizes and weights:
    *
-   * - `small`: font-size: 40px (2.5rem), font-weight: bold (700)
-   * - `medium`: font-size: 48px (3rem), font-weight: bold (700)
    * - `large`: font-size: 56px (3/5rem), font-weight: bold (700)
+   * - `medium`: font-size: 48px (3rem), font-weight: bold (700)
+   * - `small`: font-size: 40px (2.5rem), font-weight: bold (700)
    *
    * You can find more detailed styled information by inspecting individual sizes.
    *
@@ -253,9 +253,9 @@ export type CanvasTypeHierarchy = {
    * It has three sizes: `small`, `medium`, and `large`.
    * Here's a quick reference for font-sizes and weights:
    *
-   * - `small`: font-size: 24px (1.5rem), font-weight: bold (700)
-   * - `medium`: font-size: 28px (1.75rem), font-weight: bold (700)
    * - `large`: font-size: 32px (2rem), font-weight: bold (700)
+   * - `medium`: font-size: 28px (1.75rem), font-weight: bold (700)
+   * - `small`: font-size: 24px (1.5rem), font-weight: bold (700)
    *
    * You can find more detailed styled information by inspecting individual sizes.
    *
@@ -278,9 +278,9 @@ export type CanvasTypeHierarchy = {
    * It has three sizes: `small`, `medium`, and `large`.
    * Here's a quick reference for font-sizes and weights:
    *
-   * - `small`: font-size: 16px (1rem), font-weight: regular (400)
-   * - `medium`: font-size: 18px (1.125rem), font-weight: regular (400)
    * - `large`: font-size: 20px (1.25rem), font-weight: regular (400)
+   * - `medium`: font-size: 18px (1.125rem), font-weight: regular (400)
+   * - `small`: font-size: 16px (1rem), font-weight: regular (400)
    *
    * You can find more detailed styled information by inspecting individual sizes.
    *
@@ -303,9 +303,9 @@ export type CanvasTypeHierarchy = {
    * It has three sizes: `small`, `medium`, and `large`.
    * Here's a quick reference for font-sizes and weights:
    *
-   * - `small`: font-size: 10px (0.625rem), font-weight: regular (400)
-   * - `medium`: font-size: 12px (0.75rem), font-weight: regular (400)
    * - `large`: font-size: 14px (0.875rem), font-weight: regular (400)
+   * - `medium`: font-size: 12px (0.75rem), font-weight: regular (400)
+   * - `small`: font-size: 10px (0.625rem), font-weight: regular (400)
    *
    * You can find more detailed styled information by inspecting individual sizes.
    *
@@ -323,26 +323,8 @@ export type CanvasTypeHierarchy = {
 };
 
 type CanvasTypeDisplayLevel = {
-  small: {
-    fontFamily: CanvasFonts['normal'];
-    /** 68px converted to base-16 rem (4.25rem)*/
-    fontSize: CanvasFontSizes[68];
-    /** 76px converted to base-16 rem */
-    lineHeight: '4.75rem';
-    fontWeight: CanvasFontWeights['bold'];
-    color: typeof typeColors.heading;
-  };
-  medium: {
-    fontFamily: CanvasFonts['normal'];
-    /** 80px converted to base-16 rem (5rem)*/
-    fontSize: CanvasFontSizes[80];
-    /** 88px converted to base-16 rem (5.5rem) */
-    lineHeight: '5.5rem';
-    fontWeight: CanvasFontWeights['bold'];
-    color: typeof typeColors.heading;
-  };
   large: {
-    fontFamily: CanvasFonts['normal'];
+    fontFamily: CanvasFontFamilies['default'];
     /** 92px converted to base-16 rem (5.75rem)*/
     fontSize: CanvasFontSizes[92];
     /** 100px converted to base-16 rem (6.25rem) */
@@ -350,29 +332,29 @@ type CanvasTypeDisplayLevel = {
     fontWeight: CanvasFontWeights['bold'];
     color: typeof typeColors.heading;
   };
+  medium: {
+    fontFamily: CanvasFontFamilies['default'];
+    /** 80px converted to base-16 rem (5rem)*/
+    fontSize: CanvasFontSizes[80];
+    /** 88px converted to base-16 rem (5.5rem) */
+    lineHeight: '5.5rem';
+    fontWeight: CanvasFontWeights['bold'];
+    color: typeof typeColors.heading;
+  };
+  small: {
+    fontFamily: CanvasFontFamilies['default'];
+    /** 68px converted to base-16 rem (4.25rem)*/
+    fontSize: CanvasFontSizes[68];
+    /** 76px converted to base-16 rem */
+    lineHeight: '4.75rem';
+    fontWeight: CanvasFontWeights['bold'];
+    color: typeof typeColors.heading;
+  };
 };
 
 type CanvasTypeTitleLevel = {
-  small: {
-    fontFamily: CanvasFonts['normal'];
-    /** 40px converted to base-16 rem (2.5rem)*/
-    fontSize: CanvasFontSizes[40];
-    /** 48px converted to base-16 rem (3rem) */
-    lineHeight: '3rem';
-    fontWeight: CanvasFontWeights['bold'];
-    color: typeof typeColors.heading;
-  };
-  medium: {
-    fontFamily: CanvasFonts['normal'];
-    /** 48px converted to base-16 rem (3rem)*/
-    fontSize: CanvasFontSizes[48];
-    /** 56px converted to base-16 rem (3.5rem) */
-    lineHeight: '3.5rem';
-    fontWeight: CanvasFontWeights['bold'];
-    color: typeof typeColors.heading;
-  };
   large: {
-    fontFamily: CanvasFonts['normal'];
+    fontFamily: CanvasFontFamilies['default'];
     /** 56px converted to base-16 rem (3.5rem)*/
     fontSize: CanvasFontSizes[56];
     /** 64px converted to base-16 rem (4rem) */
@@ -380,29 +362,29 @@ type CanvasTypeTitleLevel = {
     fontWeight: CanvasFontWeights['bold'];
     color: typeof typeColors.heading;
   };
+  medium: {
+    fontFamily: CanvasFontFamilies['default'];
+    /** 48px converted to base-16 rem (3rem)*/
+    fontSize: CanvasFontSizes[48];
+    /** 56px converted to base-16 rem (3.5rem) */
+    lineHeight: '3.5rem';
+    fontWeight: CanvasFontWeights['bold'];
+    color: typeof typeColors.heading;
+  };
+  small: {
+    fontFamily: CanvasFontFamilies['default'];
+    /** 40px converted to base-16 rem (2.5rem)*/
+    fontSize: CanvasFontSizes[40];
+    /** 48px converted to base-16 rem (3rem) */
+    lineHeight: '3rem';
+    fontWeight: CanvasFontWeights['bold'];
+    color: typeof typeColors.heading;
+  };
 };
 
 type CanvasTypeHeadingLevel = {
-  small: {
-    fontFamily: CanvasFonts['normal'];
-    /** 24px converted to base-16 rem (1.5rem)*/
-    fontSize: CanvasFontSizes[24];
-    /** 32px converted to base-16 rem (2rem) */
-    lineHeight: '2rem';
-    fontWeight: CanvasFontWeights['bold'];
-    color: typeof typeColors.heading;
-  };
-  medium: {
-    fontFamily: CanvasFonts['normal'];
-    /** 28px converted to base-16 rem (1.75rem)*/
-    fontSize: CanvasFontSizes[28];
-    /** 36px converted to base-16 rem (2.25rem) */
-    lineHeight: '2.25rem';
-    fontWeight: CanvasFontWeights['bold'];
-    color: typeof typeColors.heading;
-  };
   large: {
-    fontFamily: CanvasFonts['normal'];
+    fontFamily: CanvasFontFamilies['default'];
     /** 32px converted to base-16 rem (2rem)*/
     fontSize: CanvasFontSizes[32];
     /** 40px converted to base-16 rem (2.5rem) */
@@ -410,33 +392,29 @@ type CanvasTypeHeadingLevel = {
     fontWeight: CanvasFontWeights['bold'];
     color: typeof typeColors.heading;
   };
+  medium: {
+    fontFamily: CanvasFontFamilies['default'];
+    /** 28px converted to base-16 rem (1.75rem)*/
+    fontSize: CanvasFontSizes[28];
+    /** 36px converted to base-16 rem (2.25rem) */
+    lineHeight: '2.25rem';
+    fontWeight: CanvasFontWeights['bold'];
+    color: typeof typeColors.heading;
+  };
+  small: {
+    fontFamily: CanvasFontFamilies['default'];
+    /** 24px converted to base-16 rem (1.5rem)*/
+    fontSize: CanvasFontSizes[24];
+    /** 32px converted to base-16 rem (2rem) */
+    lineHeight: '2rem';
+    fontWeight: CanvasFontWeights['bold'];
+    color: typeof typeColors.heading;
+  };
 };
 
 type CanvasTypeBodyLevel = {
-  small: {
-    fontFamily: CanvasFonts['normal'];
-    /** 16px converted to base-16 rem (1rem)*/
-    fontSize: CanvasFontSizes[16];
-    /** 24px converted to base-16 rem (1.5rem) */
-    lineHeight: '1.5rem';
-    /** 0.16px converted to base-16 rem (0.01rem) */
-    letterSpacing: '0.01rem';
-    fontWeight: CanvasFontWeights['regular'];
-    color: typeof typeColors.body;
-  };
-  medium: {
-    fontFamily: CanvasFonts['normal'];
-    /** 18px converted to base-16 rem (1.125rem)*/
-    fontSize: CanvasFontSizes[18];
-    /** 28px converted to base-16 rem (1.75rem) */
-    lineHeight: '1.75rem';
-    /** 0.16px converted to base-16 rem (0.01rem) */
-    letterSpacing: '0.01rem';
-    fontWeight: CanvasFontWeights['regular'];
-    color: typeof typeColors.body;
-  };
   large: {
-    fontFamily: CanvasFonts['normal'];
+    fontFamily: CanvasFontFamilies['default'];
     /** 20px converted to base-16 rem (1.25rem)*/
     fontSize: CanvasFontSizes[20];
     /** 28px converted to base-16 rem (1.75rem) */
@@ -446,22 +424,44 @@ type CanvasTypeBodyLevel = {
     fontWeight: CanvasFontWeights['regular'];
     color: typeof typeColors.body;
   };
+  medium: {
+    fontFamily: CanvasFontFamilies['default'];
+    /** 18px converted to base-16 rem (1.125rem)*/
+    fontSize: CanvasFontSizes[18];
+    /** 28px converted to base-16 rem (1.75rem) */
+    lineHeight: '1.75rem';
+    /** 0.16px converted to base-16 rem (0.01rem) */
+    letterSpacing: '0.01rem';
+    fontWeight: CanvasFontWeights['regular'];
+    color: typeof typeColors.body;
+  };
+  small: {
+    fontFamily: CanvasFontFamilies['default'];
+    /** 16px converted to base-16 rem (1rem)*/
+    fontSize: CanvasFontSizes[16];
+    /** 24px converted to base-16 rem (1.5rem) */
+    lineHeight: '1.5rem';
+    /** 0.16px converted to base-16 rem (0.01rem) */
+    letterSpacing: '0.01rem';
+    fontWeight: CanvasFontWeights['regular'];
+    color: typeof typeColors.body;
+  };
 };
 
 type CanvasTypeSubtextLevel = {
-  small: {
-    fontFamily: CanvasFonts['normal'];
-    /** 10px converted to base-16 rem (0.625rem)*/
-    fontSize: CanvasFontSizes[10];
-    /** 16px converted to base-16 rem (1rem) */
-    lineHeight: '1rem';
-    /** 0.4px converted to base-16 rem (0.025rem) */
-    letterSpacing: '0.025rem';
+  large: {
+    fontFamily: CanvasFontFamilies['default'];
+    /** 14px converted to base-16 rem (0.875rem)*/
+    fontSize: CanvasFontSizes[14];
+    /** 20px converted to base-16 rem (1.25rem) */
+    lineHeight: '1.25rem';
+    /** 0.24px converted to base-16 rem (0.015rem) */
+    letterSpacing: '0.015rem';
     fontWeight: CanvasFontWeights['regular'];
     color: typeof typeColors.body;
   };
   medium: {
-    fontFamily: CanvasFonts['normal'];
+    fontFamily: CanvasFontFamilies['default'];
     /** 12px converted to base-16 rem (0.75rem)*/
     fontSize: CanvasFontSizes[12];
     /** 16px converted to base-16 rem (1rem) */
@@ -471,14 +471,14 @@ type CanvasTypeSubtextLevel = {
     fontWeight: CanvasFontWeights['regular'];
     color: typeof typeColors.body;
   };
-  large: {
-    fontFamily: CanvasFonts['normal'];
-    /** 14px converted to base-16 rem (0.875rem)*/
-    fontSize: CanvasFontSizes[14];
-    /** 20px converted to base-16 rem (1.25rem) */
-    lineHeight: '1.25rem';
-    /** 0.24px converted to base-16 rem (0.015rem) */
-    letterSpacing: '0.015rem';
+  small: {
+    fontFamily: CanvasFontFamilies['default'];
+    /** 10px converted to base-16 rem (0.625rem)*/
+    fontSize: CanvasFontSizes[10];
+    /** 16px converted to base-16 rem (1rem) */
+    lineHeight: '1rem';
+    /** 0.4px converted to base-16 rem (0.025rem) */
+    letterSpacing: '0.025rem';
     fontWeight: CanvasFontWeights['regular'];
     color: typeof typeColors.body;
   };

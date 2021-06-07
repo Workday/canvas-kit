@@ -41,7 +41,7 @@ const anchorVariants = (props: HyperlinkProps) => {
 
 const Anchor = styled('a')<HyperlinkProps & StyledType>(
   {
-    fontFamily: type.properties.fonts.normal,
+    fontFamily: type.properties.fontFamilies.default,
     textDecoration: 'underline',
     color: colors.blueberry400,
     cursor: 'pointer',

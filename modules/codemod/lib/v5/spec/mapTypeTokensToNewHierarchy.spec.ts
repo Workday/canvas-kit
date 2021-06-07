@@ -28,13 +28,13 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
           import canvas from '@workday/canvas-kit-react/tokens';
     
           const headingStyles = {
-            fontFamily: canvas.type.properties.fonts.normal,
+            fontFamily: canvas.type.properties.fontFamilies.default,
             fontSize: canvas.type.properties.fontSizes[24],
             fontWeight: canvas.type.properties.fontWeights.bold,
           };
     
           const bodyStyles = {
-            fontFamily: canvas.type.properties.fonts.normal,
+            fontFamily: canvas.type.properties.fontFamilies.default,
             fontSize: canvas.type.properties.fontSizes[14],
             fontWeight: canvas.type.properties.fontWeights.regular,
           };
@@ -69,12 +69,12 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
           const SectionText = () => (
             <section>
               <h2 css={{
-                fontFamily: canvas.type.properties.fonts.normal,
+                fontFamily: canvas.type.properties.fontFamilies.default,
                 fontSize: canvas.type.properties.fontSizes[24],
                 fontWeight: canvas.type.properties.fontWeights.bold,
               }}>Section Heading</h2>
               <p css={{
-                fontFamily: canvas.type.properties.fonts.normal,
+                fontFamily: canvas.type.properties.fontFamilies.default,
                 fontSize: canvas.type.properties.fontSizes[14],
                 fontWeight: canvas.type.properties.fontWeights.regular,
               }}>This is sample body text.</p>
@@ -100,7 +100,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
           import canvas from '@workday/canvas-kit-react/tokens';
     
           const SectionHeading = styled('h2')({
-            fontFamily: canvas.type.properties.fonts.normal,
+            fontFamily: canvas.type.properties.fontFamilies.default,
             fontSize: canvas.type.properties.fontSizes[24],
             fontWeight: canvas.type.properties.fontWeights.bold,
           });
@@ -629,7 +629,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
             import canvas from '@workday/canvas-kit-react/tokens';
 
             const monoStyles = {
-              fontFamily: canvas.type.properties.fonts.monospace
+              fontFamily: canvas.type.properties.fontFamilies.monospace
             };
           `;
 
@@ -656,11 +656,11 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
             const SectionText = () => (
               <section>
                 <h2 css={{
-                  fontFamily: canvas.type.properties.fonts.monospace
+                  fontFamily: canvas.type.properties.fontFamilies.monospace
                 }}>Section Heading</h2>
                 <p css={{
                   display: 'block',
-                  fontFamily: canvas.type.properties.fonts.monospace
+                  fontFamily: canvas.type.properties.fontFamilies.monospace
                 }}>This is sample body text.</p>
               </section>
             );
@@ -706,13 +706,13 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
           import { type as canvasType } from '@workday/canvas-kit-react/tokens';
     
           const headingStyles = {
-            fontFamily: canvasType.properties.fonts.normal,
+            fontFamily: canvasType.properties.fontFamilies.default,
             fontSize: canvasType.properties.fontSizes[24],
             fontWeight: canvasType.properties.fontWeights.bold,
           };
     
           const bodyStyles = {
-            fontFamily: canvasType.properties.fonts.normal,
+            fontFamily: canvasType.properties.fontFamilies.default,
             fontSize: canvasType.properties.fontSizes[14],
             fontWeight: canvasType.properties.fontWeights.regular,
           };
@@ -747,12 +747,12 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
           const SectionText = () => (
             <section>
               <h2 css={{
-                fontFamily: canvasType.properties.fonts.normal,
+                fontFamily: canvasType.properties.fontFamilies.default,
                 fontSize: canvasType.properties.fontSizes[24],
                 fontWeight: canvasType.properties.fontWeights.bold,
               }}>Section Heading</h2>
               <p css={{
-                fontFamily: canvasType.properties.fonts.normal,
+                fontFamily: canvasType.properties.fontFamilies.default,
                 fontSize: canvasType.properties.fontSizes[14],
                 fontWeight: canvasType.properties.fontWeights.regular,
               }}>This is sample body text.</p>
@@ -778,7 +778,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
           import { type as canvasType } from '@workday/canvas-kit-react/tokens';
     
           const SectionHeading = styled('h2')({
-            fontFamily: canvasType.properties.fonts.normal,
+            fontFamily: canvasType.properties.fontFamilies.default,
             fontSize: canvasType.properties.fontSizes[24],
             fontWeight: canvasType.properties.fontWeights.bold,
           });
@@ -1307,7 +1307,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
             import {type as canvasType} from '@workday/canvas-kit-react/tokens';
 
             const monoStyles = {
-              fontFamily: canvasType.properties.fonts.monospace
+              fontFamily: canvasType.properties.fontFamilies.monospace
             };
           `;
 
@@ -1334,11 +1334,11 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
             const SectionText = () => (
               <section>
                 <h2 css={{
-                  fontFamily: canvasType.properties.fonts.monospace
+                  fontFamily: canvasType.properties.fontFamilies.monospace
                 }}>Section Heading</h2>
                 <p css={{
                   display: 'block',
-                  fontFamily: canvasType.properties.fonts.monospace
+                  fontFamily: canvasType.properties.fontFamilies.monospace
                 }}>This is sample body text.</p>
               </section>
             );
@@ -1384,13 +1384,13 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
           import { type as canvasType } from '@workday/canvas-kit-preview-react/tokens';
     
           const headingStyles = {
-            fontFamily: canvasType.properties.fonts.normal,
+            fontFamily: canvasType.properties.fontFamilies.default,
             fontSize: canvasType.properties.fontSizes[32],
             fontWeight: canvasType.properties.fontWeights.bold,
           };
     
           const bodyStyles = {
-            fontFamily: canvasType.properties.fonts.normal,
+            fontFamily: canvasType.properties.fontFamilies.default,
             fontSize: canvasType.properties.fontSizes[16],
             fontWeight: canvasType.properties.fontWeights.regular,
           };
@@ -1425,12 +1425,12 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
           const SectionText = () => (
             <section>
               <h2 css={{
-                fontFamily: canvasType.properties.fonts.normal,
+                fontFamily: canvasType.properties.fontFamilies.default,
                 fontSize: canvasType.properties.fontSizes[32],
                 fontWeight: canvasType.properties.fontWeights.bold,
               }}>Section Heading</h2>
               <p css={{
-                fontFamily: canvasType.properties.fonts.normal,
+                fontFamily: canvasType.properties.fontFamilies.default,
                 fontSize: canvasType.properties.fontSizes[16],
                 fontWeight: canvasType.properties.fontWeights.regular,
               }}>This is sample body text.</p>
@@ -1456,7 +1456,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
           import { type as canvasType } from '@workday/canvas-kit-preview-react/tokens';
     
           const SectionHeading = styled('h2')({
-            fontFamily: canvasType.properties.fonts.normal,
+            fontFamily: canvasType.properties.fontFamilies.default,
             fontSize: canvasType.properties.fontSizes[32],
             fontWeight: canvasType.properties.fontWeights.bold,
           });
@@ -1985,7 +1985,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
             import {type as canvasType} from '@workday/canvas-kit-preview-react/tokens';
     
             const monoStyles = {
-              fontFamily: canvasType.properties.fonts.monospace
+              fontFamily: canvasType.properties.fontFamilies.monospace
             };
           `;
 
@@ -2012,11 +2012,11 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
             const SectionText = () => (
               <section>
                 <h2 css={{
-                  fontFamily: canvasType.properties.fonts.monospace
+                  fontFamily: canvasType.properties.fontFamilies.monospace
                 }}>Section Heading</h2>
                 <p css={{
                   display: 'block',
-                  fontFamily: canvasType.properties.fonts.monospace
+                  fontFamily: canvasType.properties.fontFamilies.monospace
                 }}>This is sample body text.</p>
               </section>
             );
@@ -2060,7 +2060,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
 //         import canvas from '@workday/canvas-kit-react/tokens';
 
 //         const styles = {
-//           fontFamily: canvas.type.properties.fonts.normal,
+//           fontFamily: canvas.type.properties.fontFamilies.default,
 //           fontSize: canvas.type.properties.fontSizes[14],
 //           fontWeight: canvas.type.properties.fontWeights.regular,
 //           ...canvas.type.levels.subtext.large,
@@ -2089,7 +2089,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
 //         import {space, type} from '@workday/canvas-kit-react/tokens';
 
 //         const Label = styled('span')(
-//           {fontFamily: type.properties.fonts.normal},
+//           {fontFamily: type.properties.fontFamilies.default},
 //           type.levels.subtext.small,
 //           {
 //             fontWeight: type.properties.fontWeights.medium,
@@ -2117,7 +2117,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
 //         import {type} from '@workday/canvas-kit-react/tokens';
 
 //         const styles = {
-//           fontFamily: type.properties.fonts.normal,
+//           fontFamily: type.properties.fontFamilies.default,
 //           display: 'block',
 //         };
 //       `;

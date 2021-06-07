@@ -17,8 +17,8 @@ const legacyTypeLevelsMap = {
   h4: 'levels.body.small',
   h5: 'levels.body.small',
   body: 'levels.subtext.large',
-  body2: 'levels.subtext.small',
-  small: 'levels.subtext.small',
+  body2: 'levels.subtext.medium',
+  small: 'levels.subtext.medium',
 };
 
 const legacyTypeFontSizesMap = {
@@ -119,7 +119,7 @@ export default function transformer(file: FileInfo, api: API) {
       j.identifier(identifierName),
       j.memberExpression(
         j.identifier('properties'),
-        j.memberExpression(j.identifier('fonts'), j.identifier('normal'), false),
+        j.memberExpression(j.identifier('fontFamilies'), j.identifier('default'), false),
         false
       ),
       false
@@ -365,7 +365,7 @@ export default function transformer(file: FileInfo, api: API) {
             j.identifier(importSpecifierName),
             j.memberExpression(
               j.identifier('properties'),
-              j.memberExpression(j.identifier('fonts'), j.identifier('monospace'), false),
+              j.memberExpression(j.identifier('fontFamilies'), j.identifier('monospace'), false),
               false
             ),
             false
@@ -378,7 +378,7 @@ export default function transformer(file: FileInfo, api: API) {
             j.identifier(importSpecifierName),
             j.memberExpression(
               j.identifier('properties'),
-              j.memberExpression(j.identifier('fonts'), j.identifier('monospace'), false),
+              j.memberExpression(j.identifier('fontFamilies'), j.identifier('monospace'), false),
               false
             ),
             false

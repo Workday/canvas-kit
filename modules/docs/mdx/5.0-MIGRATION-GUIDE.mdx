@@ -100,7 +100,7 @@ We've promoted several components from Labs to Preview in v5. See
 
 Canvas Kit v4 supported two type hierarchies, `beta` and `legacy` in
 `@workday/canvas-kit-labs-react-core` and `@workday/canvas-kit-react-core` respectively. However, v5
-replaces those with a new, responsive type hierarchy in `@workday/canvas-kit-react-core`. We are
+replaces those with a new, responsive type hierarchy in `@workday/canvas-kit-react/tokens`. We are
 also deprecating and updating our type variants. The v5 codemod handles almost all of these changes
 for you. That said, you'll want to review the transformation and your UI to ensure everything was
 updated as you expect.
@@ -109,89 +109,91 @@ updated as you expect.
 
 - 🤖 Type Hierarchy Updates
 
-All type hierarchy updates are handled by the codemod. The tables below will help you understand the
-changes and provide a reference as you review your UI. Most teams are using the `beta` type tokens
-in `@workday/canvas-kit-labs-react-core`, but some are using the `legacy` type in
-`@workday/canvas-kit-labs-react-core`.
+  All type hierarchy updates are handled by the codemod. The tables below will help you understand the
+  changes and provide a reference as you review your UI. Most teams are using the `beta` type tokens
+  in `@workday/canvas-kit-labs-react-core`, but some are using the `legacy` type in
+  `@workday/canvas-kit-react-core`.
 
-| Beta Type (px)  | Resposive Type (rem)                      |
-| --------------- | ----------------------------------------- |
-| `brand1` (56px) | `levels.title.large` ( 3.5rem \ 56px)     |
-| `brand2` (48px) | `levels.title.medium` ( 3rem \ 48px)      |
-| `h1` (40px)     | `levels.title.small` ( 2.5rem \ 40px)     |
-| `h2` (32px)     | `levels.heading.large` ( 2rem \ 32px)     |
-| `h3` (24px)     | `levels.heading.small` ( 1.5rem \ 24px)   |
-| `h4` (20px)     | `levels.body.large` ( 1.25rem \ 20px)     |
-| `h5` (20px)     | `levels.body.large` ( 1.25rem \ 20px)     |
-| `body` (16px)   | `levels.body.small` ( 1rem \ 16px)        |
-| `body2` (14px)  | `levels.subtext.large` ( 0.875rem \ 14px) |
-| `small` (13px)  | `levels.subtext.medium` ( 0.75rem \ 12px) |
+  | Beta Type (px)  | Resposive Type (rem)                      |
+  | --------------- | ----------------------------------------- |
+  | `brand1` (56px) | `levels.title.large` ( 3.5rem \ 56px)     |
+  | `brand2` (48px) | `levels.title.medium` ( 3rem \ 48px)      |
+  | `h1` (40px)     | `levels.title.small` ( 2.5rem \ 40px)     |
+  | `h2` (32px)     | `levels.heading.large` ( 2rem \ 32px)     |
+  | `h3` (24px)     | `levels.heading.small` ( 1.5rem \ 24px)   |
+  | `h4` (20px)     | `levels.body.large` ( 1.25rem \ 20px)     |
+  | `h5` (20px)     | `levels.body.large` ( 1.25rem \ 20px)     |
+  | `body` (16px)   | `levels.body.small` ( 1rem \ 16px)        |
+  | `body2` (14px)  | `levels.subtext.large` ( 0.875rem \ 14px) |
+  | `small` (13px)  | `levels.subtext.medium` ( 0.75rem \ 12px) |
 
-| Legacy Type (px)  | Resposive Type (rem)                     |
-| ----------------- | ---------------------------------------- |
-| `dataViz1` (56px) | `levels.title.large` (3.5rem \ 56px)     |
-| `dataViz2` (34px) | `levels.heading.large` (2rem \ 32px)     |
-| `h1` (28px)       | `levels.heading.medium` (1.75rem \ 28px) |
-| `h2` (24px)       | `levels.heading.small` (1.5rem \ 24px)   |
-| `h3` (20px)       | `levels.body.large` (1.25rem,) \ 20px    |
-| `h4` (16px)       | `levels.body.small` (1rem \ 16px)        |
-| `h5` (16px)       | `levels.body.small` (1rem \ 16px)        |
-| `body` (14px)     | `levels.subtext.large` (0.875rem \ 14px) |
-| `body2` (13px)    | `levels.subtext.small` (0.75rem \ 12px)  |
-| `small` (12px)    | `levels.subtext.small` (0.75rem \ 12px)  |
+  | Legacy Type (px)  | Resposive Type (rem)                     |
+  | ----------------- | ---------------------------------------- |
+  | `dataViz1` (56px) | `levels.title.large` (3.5rem \ 56px)     |
+  | `dataViz2` (34px) | `levels.heading.large` (2rem \ 32px)     |
+  | `h1` (28px)       | `levels.heading.medium` (1.75rem \ 28px) |
+  | `h2` (24px)       | `levels.heading.small` (1.5rem \ 24px)   |
+  | `h3` (20px)       | `levels.body.large` (1.25rem,) \ 20px    |
+  | `h4` (16px)       | `levels.body.small` (1rem \ 16px)        |
+  | `h5` (16px)       | `levels.body.small` (1rem \ 16px)        |
+  | `body` (14px)     | `levels.subtext.large` (0.875rem \ 14px) |
+  | `body2` (13px)    | `levels.subtext.medium` (0.75rem \ 12px) |
+  | `small` (12px)    | `levels.subtext.medium` (0.75rem \ 12px) |
 
 - 🤖 Property Updates
 
-All `fontFamily`, `fontSize`, and `fontWeight` property updates are handled by the codemod.
+  All `fontFamily`, `fontSize`, and `fontWeight` property updates are handled by the codemod.
 
-| CSS Property | Corresponding Token           | Notes                                                           |
-| ------------ | ----------------------------- | --------------------------------------------------------------- |
-| `fontFamily` | `type.properties.fonts`       | `normal` (Roboto) and `monospace` (Roboto Mono) are available   |
-| `fontSize`   | `type.properties.fontSizes`   | please consult the type hierarchies above to map values         |
-| `fontWeight` | `type.properties.fontWeights` | `regular` (400), `medium` (500), and `bold` (700) are available |
+  | CSS Property | Corresponding Token            | Notes                                                           |
+  | ------------ | ------------------------------ | --------------------------------------------------------------- |
+  | `fontFamily` | `type.properties.fontFamilies` | `default` (Roboto) and `monospace` (Roboto Mono) are available  |
+  | `fontSize`   | `type.properties.fontSizes`    | please consult the type hierarchies above to map values         |
+  | `fontWeight` | `type.properties.fontWeights`  | `regular` (400), `medium` (500), and `bold` (700) are available |
 
 - 🤖 Variant Updates
 
-All `variant` updates _except `link`_ are handled by the codemod. Please see the
-[variants](#variants) section below for more information.
+  All `variant` updates _except `link`_ are handled by the codemod. Please see the
+  [variants](#variants) section below for more information.
 
-| Variant                | Transformation                                                                 | Notes                                   |
-| ---------------------- | ------------------------------------------------------------------------------ | --------------------------------------- |
-| `type.variant.error`   | `type.variants.error`                                                          | name change only                        |
-| `type.variant.hint`    | `type.variants.hint`                                                           | name change only                        |
-| `type.variant.inverse` | `type.variants.inverse`                                                        | name change only                        |
-| `type.variant.button`  | `{fontWieight: type.properties.fontWeights.bold}`                              | variant deprecated, use type properties |
-| `type.variant.caps`    | `{textTransform: 'uppercase', fontWeight: type.properties.fontWeights.medium}` | variant deprecated, use type properties |
-| `type.variant.label`   | `{fontWeight: type.properties.fontWeights.medium}`                             | variant deprecated, use type properties |
-| `type.variant.mono`    | `{fontWeight: type.properties.fonts.monospace}`                                | variant deprecated, use type properties |
+  | Variant                | Transformation                                                                 | Notes                                   |
+  | ---------------------- | ------------------------------------------------------------------------------ | --------------------------------------- |
+  | `type.variant.error`   | `type.variants.error`                                                          | name change only                        |
+  | `type.variant.hint`    | `type.variants.hint`                                                           | name change only                        |
+  | `type.variant.inverse` | `type.variants.inverse`                                                        | name change only                        |
+  | `type.variant.button`  | `{fontWeight: type.properties.fontWeights.bold}`                               | variant deprecated, use type properties |
+  | `type.variant.caps`    | `{textTransform: 'uppercase', fontWeight: type.properties.fontWeights.medium}` | variant deprecated, use type properties |
+  | `type.variant.label`   | `{fontWeight: type.properties.fontWeights.medium}`                             | variant deprecated, use type properties |
+  | `type.variant.mono`    | `{fontWeight: type.properties.fontFamilies.monospace}`                         | variant deprecated, use type properties |
 
 #### Manual Updates
 
 There are only two type deprecations not covered by the codemod:
 
 - Type Wrapper components (`H1`-`H5`) have been removed
-- `link` variant has been removed.
+- `link` variant has been removed
 
 ##### Type Wrapper Components Migration
 
-To migrate, please refer to the hierachy tables about and use the type hierarchy tokens directly. Detailed usage information is available in the [levels section](#levels).
+To migrate, please refer to the hierachy tables about and use the type hierarchy tokens directly.
+Detailed usage information is available in the [levels section](#levels).
 
 ##### Link Variant Migration
 
-To migrate, please use the `Hyperlink` component instead. Detailed usage information is available in the [variants section](#variants).
+To migrate, please use the `Hyperlink` component instead. Detailed usage information is available in
+the [variants section](#variants).
 
 #### Type Updates In-Depth Overview
 
 The new type tokens introduce a few major changes:
 
-- Introducing rem values
+- Introducing rem units
 - Creating new `type` object structure
-- Adding new type properties (`fonts`, `fontSizes`, and `fontWeights`)
+- Adding new type properties (`fontFamilies`, `fontSizes`, and `fontWeights`)
 - Updating and replacing variants
 
-#### Introducing Rem Values
+#### Introducing Rem Units
 
-The new type hierarchy uses `rem` values instead of `px`. This update follows the guidance
+The new type hierarchy uses `rem` units instead of `px`. This update follows the guidance
 [from the WCAG spec](https://www.w3.org/TR/WCAG21/#resize-text) and provides better support for
 users who rely on zooming. If you'd like to learn more about `rem` and relative units, you can
 review this
@@ -207,10 +209,10 @@ The `beta` and `legacy` type object structures were fairly flat, provided many l
 hierarchy, and quite a few variants. While none of these are bad attributes, we found in our
 research that they created a large amount of confusion. Both designers and engineers were unclear on
 when to use many of the tokens provided. We restructured the object to help users make more sense of
-it. The tokens are divided into three main categories:
+it. The tokens are divided into three main parts:
 
 - `levels` (the type hierarchy)
-- `properties` (`fonts`, `fontSizes`, and `fontWeights`)
+- `properties` (`fontFamilies`, `fontSizes`, and `fontWeights`)
 - `variants` (modifiers for type styles)
 
 ##### Levels
@@ -226,7 +228,7 @@ Instead of the previous flat structure, the type hierarchy is now organized in f
 - `body` (used for standard body text)
 - `subtext` (used for small subtext content or in tight spaces)
 
-And each level has three sizes: `small`, `medium`, and `large`. This organization allows the
+And each level has three sizes: `large`, `medium`, and `small`. This organization allows the
 hierarchy to be more flexible and provide better guidance for usage. Below is an example:
 
 ```tsx
@@ -249,7 +251,7 @@ Most often you will want to reach for `levels`, but sometimes you only need one 
 for styling. Previously, you had to use the hierarchy to apply these values, which is clunky and
 implicit. For example, using: `fontSize: type.h2.fontSize,` when all you really want is the token
 for `24px`. Type `properties` give you an atomic-level of control when you want to explicitly set a
-particular value. Here's an example using `fonts`, `fontSizes`, and `fontWeights`.
+particular value. Here's an example using `fontFamilies`, `fontSizes`, and `fontWeights`.
 
 > _Note:_ `fontSizes` keys are in pixel values as a convenient reference, but the values are the
 > base-16 rem equivalent. E.g. `fontSizes[12]` returns `0.75rem`.
@@ -258,13 +260,13 @@ particular value. Here's an example using `fonts`, `fontSizes`, and `fontWeights
 import {type} from '@workday/canvas-kit-react/tokens';
 
 const boldTextStyles = {
-  fontFamily: type.properties.fonts.normal, // 'Roboto'
+  fontFamily: type.properties.fontFamilies.default, // 'Roboto'
   fontSize: type.properties.fontSizes[16], // 1rem (16px)
   fontWeight: type.properties.bold, // 700
 };
 
 const mediumMonoStyles = {
-  fontFamily: type.properties.fonts.monospace, // 'Roboto Mono'
+  fontFamily: type.properties.fontFamilies.monospace, // 'Roboto Mono'
   fontSize: type.properties.fontSizes[12], // 0.75rem (12px)
   fontWeight: type.properties.medium, // 500
 };
@@ -310,7 +312,8 @@ There are also a handful of deprecated variants:
 - `mono`
 
 With the exception of `link`, which is discussed further below, all of these variants can be
-supported with `properties` and other styles. Below is an example of the translation neeed for each:
+supported with `properties` and other styles. Here are examples of how to translate each deprecated
+variant:
 
 ```tsx
 //v4
@@ -338,13 +341,13 @@ const capsStyles = {
 // label variant styles
 const labelStyles = {fontWeight: type.properties.fontWeights.medium};
 // mono variant styles
-const monoStyles = {fontFamily: type.properties.fonts.monospace};
+const monoStyles = {fontFamily: type.properties.fontFamilies.monospace};
 ```
 
 **Link Variant**
 
-The `link` variant is also being deprecated in v5, and users will need to use the `Hyperlink`
-component instead. This is the only manual update needed for the type updates. Below is an example:
+The `link` variant is also being deprecated in v5. You'll need to use the `Hyperlink` component
+instead. This is the only manual update needed for the type updates. Below is an example:
 
 ```tsx
 // v4
@@ -431,56 +434,58 @@ are handled by the v5 codemod.
 
 - 🤖 Move `StaticStates` component to Main `common`
 
-We use `StaticStates` internally for our visual regression tests. It didn't really make sense to
-live in `core`, and it's stable enough to move to Main, so it now lives in `common`.
+  We use `StaticStates` internally for our visual regression tests. It didn't really make sense to
+  live in `core`, and it's stable enough to move to Main, so it now lives in `common`.
 
-```tsx
-// v4
-import {StaticStates} from '@workday/canvas-kit-labs-react-core';
+  ```tsx
+  // v4
+  import {StaticStates} from '@workday/canvas-kit-labs-react-core';
 
-// v5
-import {StaticStates} from '@workday/canvas-kit-react/common';
-```
+  // v5
+  import {StaticStates} from '@workday/canvas-kit-react/common';
+  ```
 
 - 🤖 Move `type` tokens to Main `tokens` (formerly `core`)
 
-This change is described in more detail in the [Type Section](#type), but suffice to say all `type`
-imports will be automatically migrated to the Main `token` package by the codemod.
+  This change is described in more detail in the [Type Section](#type), but suffice to say all `type`
+  imports will be automatically migrated to the Main `token` package by the codemod.
 
-```tsx
-// v4
-import {type} from '@workday/canvas-kit-labs-react-core';
+  ```tsx
+  // v4
+  import {type} from '@workday/canvas-kit-labs-react-core';
 
-// v5
-import {type} from '@workday/canvas-kit-react/tokens';
-```
+  // v5
+  import {type} from '@workday/canvas-kit-react/tokens';
+  ```
 
 ##### Manual Updates
 
 - Deprecate `space` in favor of `Box`
 
-The `space` function was a handy little utility that you could apply to `styled()` components to add
-space style props. However, with the addition of `Box` it is no longer needed. `Box` provides
-`space` style props and much more. While this is a manual migration, the process is fairly
-straight-forward. One important note: The `space` props were a shorthand version of what `Box`
-provides: `pt` maps to `paddingTop`, `mr` maps to `marginRight`, and so on. You can see this in the
-example below.
+  The `space` function was a handy little utility that you could apply to `styled()` components to add
+  space style props. However, with the addition of `Box` it is no longer needed. `Box` provides
+  `space` style props and much more. While this is a manual migration, the process is fairly
+  straight-forward.
 
-```tsx
-// v4
-import {spaceNumbers} from '@workday/canvas-kit-react-core';
-import {space} from '@workday/canvas-kit-labs-react-core';
+  > **Note:** The `space` props use shorthand prop names for what `Box` provides. For example, `pt`
+  > maps to `paddingTop`, `mr` maps to `marginRight`, and so on. You can see this in the example
+  > below.
 
-// A styled div with space props
-const Box = styled('div')(space);
+  ```tsx
+  // v4
+  import {spaceNumbers} from '@workday/canvas-kit-react-core';
+  import {space} from '@workday/canvas-kit-labs-react-core';
 
-const Card = () => <Box p={spaceNumbers.s}>Hello!</Box>;
+  // A styled div with space props
+  const Box = styled('div')(space);
 
-// v5
-import {Box} from '@workday/canvas-kit-labs-react/common';
+  const Card = () => <Box p={spaceNumbers.s}>Hello!</Box>;
 
-const Card = () => <Box padding="s">Hello!</Box>;
-```
+  // v5
+  import {Box} from '@workday/canvas-kit-labs-react/common';
+
+  const Card = () => <Box padding="s">Hello!</Box>;
+  ```
 
 #### Rename Core to Tokens
 
@@ -541,9 +546,8 @@ The following table describes each update:
 \* Before, the types were too generic and not very useful. They now better reflect the values they
 represent.
 
-The codemod will handle _almost all of_ of these changes with a The v5 codemod handles aew possible
-exceptions not. for you. That said, you'll want to review your UI to ensure everything was updated
-as you expect. [Manual Updates](#manual-updates) below.
+The codemod will handle _almost all_ of these changes for you.That said, you'll want to review your
+UI to ensure everything was updated as you expect. [Manual Updates](#manual-updates) below.
 
 ##### Automatic Updates
 
