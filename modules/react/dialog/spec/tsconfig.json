@@ -1,4 +1,4 @@
 
 {
-  "extends": "../../../../tsconfig.spec.json",
+  "extends": "../../../../tsconfig.spec.json"
 }

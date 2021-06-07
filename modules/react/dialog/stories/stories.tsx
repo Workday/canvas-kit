@@ -13,7 +13,7 @@ export default {
   component: Dialog,
 };
 
-export const Default = () => {
+export const Basic = () => {
   const handleDelete = () => {
     console.log('Deleted item');
   };

@@ -3,7 +3,7 @@ import * as React from 'react';
 import {controlComponent} from '../../../../utils/storybook';
 
 import {colors} from '@workday/canvas-kit-react/tokens';
-import {PrimaryButton, SecondaryButton} from '@workday/canvas-kit-react/button';
+import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {FormField} from '@workday/canvas-kit-react/form-field';
 
 import Select from '../lib/Select';

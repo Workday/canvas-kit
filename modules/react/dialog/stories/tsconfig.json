@@ -1,4 +1,4 @@
 
 {
-  "extends": "../../../../tsconfig.stories.json",
+  "extends": "../../../../tsconfig.stories.json"
 }
