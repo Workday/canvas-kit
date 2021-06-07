@@ -44,29 +44,27 @@ export const Depth = () => (
 
 export const Type = () => (
   <React.Fragment>
-    <h1 css={type.levels.display.large}>Display Large Header</h1>
-    <h1 css={type.levels.display.large}>Data Viz 2 Header</h1>
-    <p css={type.levels.body.medium}>
-      <strong>Body: </strong> Tacos chartreuse raclette single-origin coffee ethical tilde ennui.
-      Magna asymmetrical church-key farm-to-table dreamcatcher nisi iceland photo booth kitsch next
-      level pop-up banh mi quinoa exercitation hella. Raw denim organic enim laboris sustainable.
-      Polaroid occupy typewriter distillery. Kinfolk nisi man braid try-hard raw denim, thundercats
-      salvia intelligentsia jean shorts officia. Heirloom craft beer put a bird on it occaecat
-    </p>
-    <p css={type.levels.subtext.large}>
-      <strong>Body 2: </strong> Tacos chartreuse raclette single-origin coffee ethical tilde ennui.
-      Magna asymmetrical church-key farm-to-table dreamcatcher nisi iceland photo booth kitsch next
-      level pop-up banh mi quinoa exercitation hella. Raw denim organic enim laboris sustainable.
-      Polaroid occupy typewriter distillery. Kinfolk nisi man braid try-hard raw denim, thundercats
-      salvia intelligentsia jean shorts officia. Heirloom craft beer put a bird on it occaecat
-    </p>
-    <p css={type.levels.subtext.medium}>
-      <strong>Small: </strong> Tacos chartreuse raclette single-origin coffee ethical tilde ennui.
-      Magna asymmetrical church-key farm-to-table dreamcatcher nisi iceland photo booth kitsch next
-      level pop-up banh mi quinoa exercitation hella. Raw denim organic enim laboris sustainable.
-      Polaroid occupy typewriter distillery. Kinfolk nisi man braid try-hard raw denim, thundercats
-      salvia intelligentsia jean shorts officia. Heirloom craft beer put a bird on it occaecat
-    </p>
+    <h2>Levels (Hierarchy)</h2>
+    <h3 css={type.levels.display.large}>Display Large Heading</h3>
+    <h3 css={type.levels.display.medium}>Display Medium Heading</h3>
+    <h3 css={type.levels.display.small}>Display Small Heading</h3>
+
+    <h3 css={type.levels.title.large}>Title Large Heading</h3>
+    <h3 css={type.levels.title.medium}>Title Medium Heading</h3>
+    <h3 css={type.levels.title.small}>Title Small Heading</h3>
+
+    <h3 css={type.levels.heading.large}>Heading Large Heading</h3>
+    <h3 css={type.levels.heading.medium}>Heading Medium Heading</h3>
+    <h3 css={type.levels.heading.small}>Heading Small Heading</h3>
+
+    <h3 css={type.levels.body.large}>Body Large Heading</h3>
+    <h3 css={type.levels.body.medium}>Body Medium Heading</h3>
+    <h3 css={type.levels.body.small}>Body Small Heading</h3>
+
+    <h3 css={type.levels.subtext.large}>Subtext Large Heading</h3>
+    <h3 css={type.levels.subtext.medium}>Subtext Medium Heading</h3>
+    <h3 css={type.levels.subtext.small}>Subtext Small Heading</h3>
+
     <hr />
 
     <h3>Variants</h3>
@@ -90,7 +88,7 @@ const Shape = styled('div')<{radius?: string | number; size?: string | number}>(
     flexDirection: 'column',
     '& span': {
       ...type.levels.subtext.large,
-      fontFamily: type.properties.fonts.monospace,
+      fontFamily: type.properties.fontFamilies.monospace,
       display: 'block',
       color: colors.blueberry100,
     },
@@ -110,7 +108,7 @@ const SizeLabel = styled('div')({
   width: 80,
   '& span': {
     ...type.levels.subtext.large,
-    fontFamily: type.properties.fonts.monospace,
+    fontFamily: type.properties.fontFamilies.monospace,
     ...type.variants.hint,
     display: 'block',
   },
@@ -214,7 +212,7 @@ export const Colors = () => (
           return (
             <Swatch bg={(colors as any)[color]} key={color}>
               <span>{level}00</span>
-              <span css={{fontFamily: type.properties.fonts.monospace}}>
+              <span css={{fontFamily: type.properties.fontFamilies.monospace}}>
                 {(colors as any)[color]}
               </span>
             </Swatch>
