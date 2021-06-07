@@ -219,7 +219,7 @@ To use the Canvas Kit font
 
 Canvas Kit v5 introduced `rem` units (instead of `px`) to our type tokens. This update follows the
 guidance [from the WCAG spec](https://www.w3.org/TR/WCAG21/#resize-text) and provides better support
-for users who rely on zooming. If you'd like to learn more about `rem` and relative units, you can
+for users who change their browser's default font size. If you'd like to learn more about `rem` and relative units, you can
 review this
 [documentation](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Values_and_units#ems_and_rems).
 
