@@ -98,7 +98,7 @@ We've promoted several components from Labs to Preview in v5. See
 
 ### Type Deprecations and Hierarchy Updates
 
-Canvas Kit v4 supported two type hierarchies, `beta` and `legacy` in
+Canvas Kit v4 supported two type hierarchies, Beta and Legacy in
 `@workday/canvas-kit-labs-react-core` and `@workday/canvas-kit-react-core` respectively. However, v5
 replaces those with a new, responsive type hierarchy in `@workday/canvas-kit-react/tokens`. We are
 also deprecating and updating our type variants. The v5 codemod handles almost all of these changes
@@ -110,8 +110,8 @@ updated as you expect.
 - 🤖 Type Hierarchy Updates
 
   All type hierarchy updates are handled by the codemod. The tables below will help you understand the
-  changes and provide a reference as you review your UI. Most teams are using the `beta` type tokens
-  in `@workday/canvas-kit-labs-react-core`, but some are using the `legacy` type in
+  changes and provide a reference as you review your UI. Most teams are using the Beta type tokens
+  in `@workday/canvas-kit-labs-react-core`, but some are using the Legacy type in
   `@workday/canvas-kit-react-core`.
 
   | Beta Type (px)  | Resposive Type (rem)                      |
@@ -205,7 +205,7 @@ review this
 
 #### New Type Object Structure
 
-The `beta` and `legacy` type object structures were fairly flat, provided many levels in the type
+The Beta and Legacy type object structures were fairly flat, provided many levels in the type
 hierarchy, and included quite a few variants. While none of these were bad attributes, our research suggested they created a large amount of confusion. Both designers and engineers were unclear on
 when to use many of the tokens provided. We restructured the object to help users make more sense of
 it. The tokens are divided into three main parts:
@@ -219,29 +219,46 @@ it. The tokens are divided into three main parts:
 Type `levels` contain our new type hierarchy. When applying type styles, we recommend using these
 tokens first. Each size applies `fontFamily`, `fontSize`, `fontWeight`, `lineHeight`,
 `letterSpacing`, and `color` styles for you, so you can create consistent type quickly and easily.
-Instead of the previous flat structure, the type hierarchy is now organized in five levels:
+Instead of the previous flat structure, the type hierarchy is now organized in four levels:
 
-- `display` (used in large heroes and images, not typically used in product applications)
 - `title` (used for large page titles)
 - `heading` (used for headings and large text)
 - `body` (used for standard body text)
 - `subtext` (used for small subtext content or in tight spaces)
 
-And each level has three sizes: `large`, `medium`, and `small`. This organization allows the
-hierarchy to be more flexible and provide better guidance for usage. Below is an example:
+And each level has three sizes: `large`, `medium`, and `small`. The previous hierarchy often mapped
+its levels 1:1 with semantic elements. This would often lead to awkward styling, such as this:
 
 ```tsx
 // v4
 import {type} from '@workday/canvas-kit-labs-react-core';
 
-const headingStyles = type.h2;
-const smallBodyStyles = type.body2;
+// Why is an h2 styled with h3 styles? Is this intentional? Is this a mistake? I don't know.
+const PageSection = () => {
+  return (
+    <section>
+      <h2 css={type.h3}>Section Heading</h2>
+      <p css={type.levels.body.small}>Section body text</p>
+    </section>
+  );
+};
+```
 
+But this new organization allows the hierarchy to be more flexible and create less confusion around
+usage. Below is an example:
+
+```tsx
 // v5
 import {type} from '@workday/canvas-kit-react/tokens';
 
-const headingStyles = type.levels.heading.large;
-const smallBodyStyles = type.levels.subtext.large;
+const PageSection = () => {
+  return (
+    <section>
+      <h2 css={type.levels.heading.medium}>Section Heading</h2>
+      <p css={type.levels.body.small}>Section body text</p>
+    </section>
+  );
+};
 ```
 
 ##### Properties
