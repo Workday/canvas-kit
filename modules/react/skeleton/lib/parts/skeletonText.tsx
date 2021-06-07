@@ -1,12 +1,10 @@
 import * as React from 'react';
 
 import {createComponent, styled, StyledType} from '@workday/canvas-kit-react/common';
-import canvas from '@workday/canvas-kit-react/tokens';
-
-import {TEXT_BORDER_RADIUS} from './utils';
+import {borderRadius, colors, space} from '@workday/canvas-kit-react/tokens';
 
 const TextContainer = styled('div')<StyledType>({
-  marginBottom: canvas.space.m,
+  marginBottom: space.m,
 });
 
 export interface SkeletonTextProps {
@@ -31,9 +29,9 @@ const Line = styled('div')<
   return {
     backgroundColor,
     width,
-    borderRadius: TEXT_BORDER_RADIUS,
+    borderRadius: borderRadius.s,
     height: '21px',
-    marginBottom: canvas.space.xs,
+    marginBottom: space.xs,
   };
 });
 
@@ -52,7 +50,7 @@ const createTextLines = (lineCount: number, backgroundColor: string) => {
 const SkeletonText = createComponent('div')({
   displayName: 'Skeleton.Text',
   Component: (
-    {backgroundColor = canvas.colors.soap200, lineCount = 2, ...elemProps}: SkeletonTextProps,
+    {backgroundColor = colors.soap200, lineCount = 2, ...elemProps}: SkeletonTextProps,
     ref,
     Element
   ) =>

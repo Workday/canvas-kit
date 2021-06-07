@@ -1,10 +1,9 @@
 import * as React from 'react';
 
 import {createComponent} from '@workday/canvas-kit-react/common';
-import canvas from '@workday/canvas-kit-react/tokens';
+import {borderRadius, colors} from '@workday/canvas-kit-react/tokens';
 
 import SkeletonShape from './skeletonShape';
-import {TEXT_BORDER_RADIUS} from './utils';
 
 export interface SkeletonHeaderProps {
   /**
@@ -28,7 +27,7 @@ const SkeletonHeader = createComponent('div')({
   displayName: 'Skeleton.Header',
   Component: (
     {
-      backgroundColor = canvas.colors.soap200,
+      backgroundColor = colors.soap200,
       height = '28px',
       width = '100%',
       ...elemProps
@@ -40,7 +39,7 @@ const SkeletonHeader = createComponent('div')({
       ref={ref}
       as={Element}
       backgroundColor={backgroundColor}
-      borderRadius={TEXT_BORDER_RADIUS}
+      borderRadius={borderRadius.s}
       height={height}
       width={width}
       {...elemProps}

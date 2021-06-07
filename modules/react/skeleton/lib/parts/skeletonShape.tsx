@@ -1,9 +1,7 @@
 import * as React from 'react';
 
 import {createComponent, styled, StyledType} from '@workday/canvas-kit-react/common';
-import canvas from '@workday/canvas-kit-react/tokens';
-
-const BOTTOM_MARGIN = 16;
+import {colors, space} from '@workday/canvas-kit-react/tokens';
 
 export interface SkeletonShapeProps {
   /**
@@ -34,7 +32,7 @@ const Shape = styled('div')<SkeletonShapeProps & StyledType>(
     borderRadius,
     height,
     width,
-    marginBottom: BOTTOM_MARGIN,
+    marginBottom: space.s,
   })
 );
 
@@ -42,7 +40,7 @@ const SkeletonShape = createComponent('div')({
   displayName: 'Skeleton.Shape',
   Component: (
     {
-      backgroundColor = canvas.colors.soap200,
+      backgroundColor = colors.soap200,
       borderRadius = 0,
       height = '100%',
       width = '100%',

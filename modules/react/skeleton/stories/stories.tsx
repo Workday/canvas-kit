@@ -16,7 +16,7 @@ import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {Skeleton} from '../index';
 
 import README from '../README.md';
-import canvas from '@workday/canvas-kit-react/tokens';
+import {borderRadius, colors} from '@workday/canvas-kit-react/tokens';
 
 const Container = styled('span')({
   width: '60%',
@@ -114,7 +114,7 @@ storiesOf('Components/Indicators/Skeleton/React', module)
               >
                 <Skeleton>
                   <FlexContainer>
-                    <Skeleton.Shape width={40} height={40} borderRadius={99} />
+                    <Skeleton.Shape width={40} height={40} borderRadius={borderRadius.circle} />
                     <Container>
                       <Skeleton.Header />
                     </Container>
@@ -159,7 +159,7 @@ storiesOf('Components/Indicators/Skeleton/React', module)
             <Skeleton.Shape
               width={number('width', 120)}
               height={number('height', 120)}
-              borderRadius={number('borderRadius', 99)}
+              borderRadius={number('borderRadius', 999)}
             />
           </Skeleton>
         </FlexContainer>
@@ -190,15 +190,15 @@ storiesOf('Components/Indicators/Skeleton/React', module)
             <Skeleton.Shape
               width={40}
               height={40}
-              borderRadius={99}
-              backgroundColor={canvas.colors.berrySmoothie100}
+              borderRadius={borderRadius.circle}
+              backgroundColor={colors.berrySmoothie100}
             />
             <Container>
-              <Skeleton.Header backgroundColor={canvas.colors.cantaloupe100} />
+              <Skeleton.Header backgroundColor={colors.cantaloupe100} />
             </Container>
           </FlexContainer>
           <div>
-            <Skeleton.Text lineCount={3} backgroundColor={canvas.colors.fruitPunch100} />
+            <Skeleton.Text lineCount={3} backgroundColor={colors.fruitPunch100} />
           </div>
         </Skeleton>
       </div>
