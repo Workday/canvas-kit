@@ -981,23 +981,29 @@ own Skeleton using whatever parts you need.
 
 ```tsx
 // v4
-import {Skeleton, SkeletonHeader, SkeletonShape, SkeletonText} from '@workday/canvas-kit-react/skeleton';
-
+import {
+  Skeleton,
+  SkeletonHeader,
+  SkeletonShape,
+  SkeletonText,
+} from '@workday/canvas-kit-react/skeleton';
 const MySkeleton = () => (
   <Skeleton>
     <SkeletonHeader />
+    <SkeletonText />
+    <SkeletonShape width={40} height={40} />
   </Skeleton>
-)
+);
 
 // v5
-import {Skeleton} from '@workday/canvas-kit-react/text-input';
-
+import {Skeleton} from '@workday/canvas-kit-react/skeleton';
 const MySkeleton = () => (
   <Skeleton>
     <Skeleton.Header />
+    <Skeleton.Text />
+    <Skeleton.Shape width={40} height={40} />
   </Skeleton>
-)
-```
+);
 
 Additionally, the skeleton animation has been updated from a diagonal sheen, or shimmer, to fading
 the opacity of the entire shape(s) in and out.
