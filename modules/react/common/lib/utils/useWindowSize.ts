@@ -1,4 +1,5 @@
 import React from 'react';
+import {useMount} from './useMount';
 
 const getFromWindow = <T extends any>(property: string, defaultValue: T): T => {
   if (typeof window !== undefined) {
@@ -15,13 +16,13 @@ export const useWindowSize = (): {width: number; height: number} => {
     setWidth(window.innerWidth);
     setHeight(window.innerHeight);
   };
-  React.useEffect(() => {
+  useMount(() => {
     window.addEventListener('resize', onResize);
 
     return () => {
       window.removeEventListener('resize', onResize);
     };
-  }, []);
+  });
 
   return {width, height};
 };

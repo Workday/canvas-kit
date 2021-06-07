@@ -13,7 +13,6 @@ export const ModalHeading = createComponent('h2')({
     const localModel = useModelContext(PopupModelContext, model);
 
     const props = useModalHeading(localModel, elemProps, ref);
-    console.log('props', ref, props);
     return (
       <Popup.Heading as={Element} {...props}>
         {children}
