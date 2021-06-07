@@ -5,7 +5,7 @@ import {CanvasFontSizes, fontSizes} from './fontSizes';
 import {CanvasFontWeights, fontWeights} from './fontWeights';
 
 /** ### Canvas Type Hierarchy
- * [View Storybook Docs](https://workday.github.io/canvas-kit/)
+ * [View Storybook Docs](https://workday.github.io/canvas-kit/?path=/story/tokens-tokens-react--type)
  *
  * ---
  * The hierarchy is organized into five levels, which correspond to levels defined in Figma.

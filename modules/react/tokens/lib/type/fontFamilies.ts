@@ -14,7 +14,7 @@ export const monoFontFamily =
     : inheritMonoFont || '"Roboto Mono", "Courier New", Courier, monospace';
 
 /** ### Font Family Tokens
- * [View Storybook Docs](https://workday.github.io/canvas-kit/?path=/story/tokens-core-react--type)
+ * [View Storybook Docs](https://workday.github.io/canvas-kit/?path=/story/tokens-tokens-react--type)
  *
  * ---
  * There are two font family tokens:

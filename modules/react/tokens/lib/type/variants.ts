@@ -1,7 +1,7 @@
 import {typeColors, statusColors} from '@workday/canvas-colors-web';
 
 /** ### Canvas Type Variants
- * [View Storybook Docs](https://workday.github.io/canvas-kit/)
+ * [View Storybook Docs](https://workday.github.io/canvas-kit/?path=/story/tokens-tokens-react--type)
  *
  * ---
  * There are three type variants:

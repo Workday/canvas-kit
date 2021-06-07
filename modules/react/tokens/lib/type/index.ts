@@ -5,7 +5,7 @@ import {levels, CanvasTypeHierarchy} from './levels';
 import {variants, CanvasTypeVariants} from './variants';
 
 /** ### Canvas Type Properties
- * [View Storybook Docs](https://workday.github.io/canvas-kit/)
+ * [View Storybook Docs](https://workday.github.io/canvas-kit/?path=/story/tokens-tokens-react--type)
  *
  * ---
  * The type properties provide precise control and are only intended to be used when the type hierarchy tokens are not well-suited for the task.
@@ -26,7 +26,7 @@ const properties: CanvasTypeProperties = {
 
 /**
  * ### Canvas Type Tokens
- * [View Storybook Docs](https://workday.github.io/canvas-kit/)
+ * [View Storybook Docs](https://workday.github.io/canvas-kit/?path=/story/tokens-tokens-react--type)
  *
  * ---
  * Type tokens are separated into three sections:
@@ -43,7 +43,7 @@ export const type: CanvasTypeTokens = {
 
 type CanvasTypeProperties = {
   /** ### Font Family Tokens
-   * [View Storybook Docs](https://workday.github.io/canvas-kit/)
+   * [View Storybook Docs](https://workday.github.io/canvas-kit/?path=/story/tokens-tokens-react--type)
    *
    * ---
    * There are two font family tokens:
@@ -65,7 +65,7 @@ type CanvasTypeProperties = {
    */
   fontFamilies: CanvasFontFamilies;
   /** ### Font Size Tokens
-   * [View Storybook Docs](https://workday.github.io/canvas-kit/)
+   * [View Storybook Docs](https://workday.github.io/canvas-kit/?path=/story/tokens-tokens-react--type)
    *
    * ---
    * There are fifteen font size tokens. Here's a quick reference:
@@ -95,7 +95,7 @@ type CanvasTypeProperties = {
    */
   fontSizes: CanvasFontSizes;
   /** ### Font Weight Tokens
-   * [View Storybook Docs](https://workday.github.io/canvas-kit/)
+   * [View Storybook Docs](https://workday.github.io/canvas-kit/?path=/story/tokens-tokens-react--type)
    *
    * ---
    * There are three font-weight tokens:
@@ -122,7 +122,7 @@ type CanvasTypeProperties = {
 
 export type CanvasTypeTokens = {
   /** ### Canvas Type Hierarchy
-   * [View Storybook Docs](https://workday.github.io/canvas-kit/)
+   * [View Storybook Docs](https://workday.github.io/canvas-kit/?path=/story/tokens-tokens-react--type)
    *
    * ---
    * The hierarchy is organized into five levels, which correspond to levels defined in Figma.
@@ -154,7 +154,7 @@ export type CanvasTypeTokens = {
    */
   levels: CanvasTypeHierarchy;
   /** ### Canvas Type Properties
-   * [View Storybook Docs](https://workday.github.io/canvas-kit/)
+   * [View Storybook Docs](https://workday.github.io/canvas-kit/?path=/story/tokens-tokens-react--type)
    *
    * ---
    * Type properties are organized in three parts:
@@ -170,7 +170,7 @@ export type CanvasTypeTokens = {
    */
   properties: CanvasTypeProperties;
   /** ### Canvas Type Variants
-   * [View Storybook Docs](https://workday.github.io/canvas-kit/)
+   * [View Storybook Docs](https://workday.github.io/canvas-kit/?path=/story/tokens-tokens-react--type)
    *
    * ---
    * There are three type variants:
