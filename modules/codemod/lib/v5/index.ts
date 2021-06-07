@@ -10,8 +10,6 @@ import renameSpacing from './renameSpacing';
 import renameCoreImports from './renameCoreImports';
 // card codemods
 import compoundCard from './compoundCard';
-// popup codemods
-import compoundPopup from './compoundPopup';
 // input provider
 import moveInputProvider from './moveInputProvider';
 // input codemods
@@ -31,7 +29,6 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
     renameCoreImports,
     recategorizeButtons,
     compoundCard,
-    compoundPopup,
     moveInputProvider,
     renameInputRefs,
   ];
