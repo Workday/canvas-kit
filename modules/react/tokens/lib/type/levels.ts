@@ -8,9 +8,8 @@ import {CanvasFontWeights, fontWeights} from './fontWeights';
  * [View Storybook Docs](https://workday.github.io/canvas-kit/?path=/story/tokens-tokens-react--type)
  *
  * ---
- * The hierarchy is organized into five levels, which correspond to levels defined in Figma.
+ * The hierarchy is organized into four levels, which correspond to levels defined in Figma.
  *
- * - `display`: Intended for use in large heroes and images.
  * - `title`: Intended to be used for large page titles.
  * - `heading`: Intended to be used for headings and large text.
  * - `body`: Intended to be used for standard body text.
@@ -36,35 +35,6 @@ import {CanvasFontWeights, fontWeights} from './fontWeights';
  * ```
  */
 export const levels: CanvasTypeHierarchy = {
-  display: {
-    large: {
-      fontFamily: fontFamilies.default,
-      /** 92px converted to base-16 rem (5.75rem)*/
-      fontSize: fontSizes[92],
-      /** 100px converted to base-16 rem (6.25rem) */
-      lineHeight: '6.25rem',
-      fontWeight: fontWeights.bold,
-      color: typeColors.heading,
-    },
-    medium: {
-      fontFamily: fontFamilies.default,
-      /** 80px converted to base-16 rem (5rem)*/
-      fontSize: fontSizes[80],
-      /** 88px converted to base-16 rem (5.5rem) */
-      lineHeight: '5.5rem',
-      fontWeight: fontWeights.bold,
-      color: typeColors.heading,
-    },
-    small: {
-      fontFamily: fontFamilies.default,
-      /** 68px converted to base-16 rem (4.25rem)*/
-      fontSize: fontSizes[68],
-      /** 76px converted to base-16 rem */
-      lineHeight: '4.75rem',
-      fontWeight: fontWeights.bold,
-      color: typeColors.heading,
-    },
-  },
   title: {
     large: {
       fontFamily: fontFamilies.default,
@@ -196,30 +166,6 @@ export const levels: CanvasTypeHierarchy = {
 };
 
 export type CanvasTypeHierarchy = {
-  /** ### Display Type Level
-   *
-   * ---
-   * The `display` level is intended to be used for use in large heroes and images.
-   * It has three sizes: `small`, `medium`, and `large`.
-   * Here's a quick reference for font-sizes and weights:
-   *
-   * - `large`: font-size: 92px (5.75rem), font-weight: bold (700)
-   * - `medium`: font-size: 80px (5rem), font-weight: bold (700)
-   * - `small`: font-size: 68px (4.25rem), font-weight: bold (700)
-   *
-   * You can find more detailed styled information by inspecting individual sizes.
-   *
-   * Below is an example:
-   *
-   * @example
-   * import { type } from '@workday/canvas-kit-labs-react/tokens'
-   *
-   * const Display = () => (
-   *   <h1 css={type.levels.display.medium}>Display Text</h2>
-   * );
-   *
-   */
-  display: CanvasTypeDisplayLevel;
   /** ### Title Type Level
    * [View Storybook Docs](https://github.workday.io/canvas-kit/)
    *
@@ -320,36 +266,6 @@ export type CanvasTypeHierarchy = {
    *
    * */
   subtext: CanvasTypeSubtextLevel;
-};
-
-type CanvasTypeDisplayLevel = {
-  large: {
-    fontFamily: CanvasFontFamilies['default'];
-    /** 92px converted to base-16 rem (5.75rem)*/
-    fontSize: CanvasFontSizes[92];
-    /** 100px converted to base-16 rem (6.25rem) */
-    lineHeight: '6.25rem';
-    fontWeight: CanvasFontWeights['bold'];
-    color: typeof typeColors.heading;
-  };
-  medium: {
-    fontFamily: CanvasFontFamilies['default'];
-    /** 80px converted to base-16 rem (5rem)*/
-    fontSize: CanvasFontSizes[80];
-    /** 88px converted to base-16 rem (5.5rem) */
-    lineHeight: '5.5rem';
-    fontWeight: CanvasFontWeights['bold'];
-    color: typeof typeColors.heading;
-  };
-  small: {
-    fontFamily: CanvasFontFamilies['default'];
-    /** 68px converted to base-16 rem (4.25rem)*/
-    fontSize: CanvasFontSizes[68];
-    /** 76px converted to base-16 rem */
-    lineHeight: '4.75rem';
-    fontWeight: CanvasFontWeights['bold'];
-    color: typeof typeColors.heading;
-  };
 };
 
 type CanvasTypeTitleLevel = {

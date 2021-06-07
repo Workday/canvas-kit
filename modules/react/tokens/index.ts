@@ -12,7 +12,7 @@ import {
   CanvasSpaceNumbers,
   spaceNumbers,
 } from './lib/space';
-import {type} from './lib/type';
+import {type, CanvasTypeTokens} from './lib/type';
 import {CSSProperties} from './lib/types';
 
 const {default: colors, gradients, ...semanticColors} = canvasColorsWeb;
@@ -50,4 +50,5 @@ export type {
   CanvasSpaceValues,
   CanvasSpaceNumberValues,
   CanvasSpaceNumbers,
+  CanvasTypeTokens,
 }

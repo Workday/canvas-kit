@@ -31,7 +31,7 @@ const properties: CanvasTypeProperties = {
  * ---
  * Type tokens are separated into three sections:
  *
- * - `levels` - provide higher-level styles for the Canvas type hierarchy: display, title, heading, body, and subtext
+ * - `levels` - provide higher-level styles for the Canvas type hierarchy: title, heading, body, and subtext
  * - `properties` - provide low-level type properties (font families, sizes, and weights)
  * - `variants` - provide modifiers for text styles (error, hint, and inverse)
  * */
@@ -68,9 +68,9 @@ type CanvasTypeProperties = {
    * [View Storybook Docs](https://workday.github.io/canvas-kit/?path=/story/tokens-tokens-react--type)
    *
    * ---
-   * There are fifteen font size tokens. Here's a quick reference:
+   * There are twelve font size tokens. Here's a quick reference:
    *
-   * `10`, `12`, `14`, `16`, `18`, `20`, `24`, `28`, `32`, `40`, `48`, `56`, `68`, `80`, `92`
+   * `10`, `12`, `14`, `16`, `18`, `20`, `24`, `28`, `32`, `40`, `48`, `56`
    *
    * Each token key corresponds to a pixel value. So if you're looking for a token
    * that matches 16px, you'd grab the `fontSizes[16]` token.
@@ -125,15 +125,14 @@ export type CanvasTypeTokens = {
    * [View Storybook Docs](https://workday.github.io/canvas-kit/?path=/story/tokens-tokens-react--type)
    *
    * ---
-   * The hierarchy is organized into five levels, which correspond to levels defined in Figma.
+   * The hierarchy is organized into four levels, which correspond to levels defined in Figma.
    *
-   * - `display`: Intended for use in large heroes and images.
    * - `title`: Intended to be used for large page titles.
    * - `heading`: Intended to be used for headings and large text.
    * - `body`: Intended to be used for standard body text.
    * - `subtext`: Intended to be used for small subtext content or in tight spaces.
    *
-   * Each level has three sizes: `small`, `medium`, and `large`.
+   * Each level has three sizes: `large`, `medium`, and `small`.
    *
    * The type hierarchy tokens are recommended for most type usage.
    * These objects handle font sizes, weights, line heights, letter spacing, and color for you,

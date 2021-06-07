@@ -1,14 +1,14 @@
 type ValueOf<T> = T[keyof T];
 /** ### Font Size Tokens
  * ---
- * There are fifteen font size tokens. Each token key corresponds to a pixel value.
+ * There are twelve font size tokens. Each token key corresponds to a pixel value.
  * So if you're looking for a token that matches 16px, you'd grab the `fontSizes[16]` token.
  * But it's important to note that the value of each token is converted to base-16 rem.
  *
  * E.g. `fontSizes[16]` returns `'1rem'`
  *
  * Here's a quick reference for all font size tokens:
- * - 10, 12, 14, 16, 18, 20, 24, 28, 32, 40, 48, 56, 68, 80, 92
+ * - 10, 12, 14, 16, 18, 20, 24, 28, 32, 40, 48, 56
  *
  * @example
  * ```tsx
@@ -34,9 +34,6 @@ export const fontSizes: CanvasFontSizes = {
   40: '2.5rem',
   48: '3rem',
   56: '3.5rem',
-  68: '4.25rem',
-  80: '5rem',
-  92: '5.75rem',
 };
 
 export type CanvasFontSizes = {
@@ -64,12 +61,6 @@ export type CanvasFontSizes = {
   48: '3rem';
   /** 56px converted to base-16 rem */
   56: '3.5rem';
-  /** 68px converted to base-16 rem */
-  68: '4.25rem';
-  /** 80px converted to base-16 rem */
-  80: '5rem';
-  /** 92px converted to base-16 rem */
-  92: '5.75rem';
 };
 
 export type CanvasFontSizeValues = ValueOf<CanvasFontSizes>;

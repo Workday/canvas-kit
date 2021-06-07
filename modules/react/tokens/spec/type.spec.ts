@@ -33,44 +33,6 @@ describe('Type Tokens', () => {
     }
   });
 
-  context('when using the display type level', () => {
-    it('should return the correct small size values', () => {
-      const {small} = type.levels.display;
-      const actualFontSizeValue = remToPx(small.fontSize);
-      const expectedFontSizeValue = typeLevelMap.display.small.fontSize;
-
-      const actualLineHeightValue = remToPx(small.lineHeight);
-      const expectedLineHeightValue = typeLevelMap.display.small.lineHeight;
-
-      expect(actualFontSizeValue).toEqual(expectedFontSizeValue);
-      expect(actualLineHeightValue).toEqual(expectedLineHeightValue);
-    });
-
-    it('should return the correct medium size values', () => {
-      const {medium} = type.levels.display;
-      const actualFontSizeValue = remToPx(medium.fontSize);
-      const expectedFontSizeValue = typeLevelMap.display.medium.fontSize;
-
-      const actualLineHeightValue = remToPx(medium.lineHeight);
-      const expectedLineHeightValue = typeLevelMap.display.medium.lineHeight;
-
-      expect(actualFontSizeValue).toEqual(expectedFontSizeValue);
-      expect(actualLineHeightValue).toEqual(expectedLineHeightValue);
-    });
-
-    it('should return the correct medium size values', () => {
-      const {large} = type.levels.display;
-      const actualFontSizeValue = remToPx(large.fontSize);
-      const expectedFontSizeValue = typeLevelMap.display.large.fontSize;
-
-      const actualLineHeightValue = remToPx(large.lineHeight);
-      const expectedLineHeightValue = typeLevelMap.display.large.lineHeight;
-
-      expect(actualFontSizeValue).toEqual(expectedFontSizeValue);
-      expect(actualLineHeightValue).toEqual(expectedLineHeightValue);
-    });
-  });
-
   context('when using the title type level', () => {
     it('should return the correct small size values', () => {
       const {small} = type.levels.title;

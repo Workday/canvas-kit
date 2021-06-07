@@ -45,9 +45,6 @@ export const Depth = () => (
 export const Type = () => (
   <React.Fragment>
     <h2>Levels (Hierarchy)</h2>
-    <h3 css={type.levels.display.large}>Display Large Heading</h3>
-    <h3 css={type.levels.display.medium}>Display Medium Heading</h3>
-    <h3 css={type.levels.display.small}>Display Small Heading</h3>
 
     <h3 css={type.levels.title.large}>Title Large Heading</h3>
     <h3 css={type.levels.title.medium}>Title Medium Heading</h3>

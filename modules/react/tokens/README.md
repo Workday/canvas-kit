@@ -21,7 +21,6 @@ Includes:
     - [Levels (Hierarchy)](#levels-hierarchy)
       - [Usage](#usage-3)
       - [Quick Reference](#quick-reference)
-        - [Display](#display)
         - [Title](#title)
         - [Heading](#heading)
         - [Body](#body)
@@ -243,12 +242,11 @@ and when to combine tokens is key to getting the most out of them.
 Type `levels` contain our type hierarchy. When applying type styles, we recommend using these tokens
 first, as they handle the vast majority of styling for you for most use cases. Each size applies
 `fontFamily`, `fontSize`, `fontWeight`, `lineHeight`, `letterSpacing`, and `color` styles for you,
-so you can create consistent type quickly and easily. The type hierarchy is now organized in five
+so you can create consistent type quickly and easily. The type hierarchy is now organized in four
 levels:
 
 | Hierarchy Levels | Description                                           |
 | ---------------- | ----------------------------------------------------- |
-| `display`        | Intended for large heroes and images                  |
 | `title`          | Intended for large page titles                        |
 | `heading`        | Intended for headings and large text                  |
 | `body`           | Intended for standard body text                       |
@@ -273,16 +271,6 @@ const ContentSection = () => (
 #### Quick Reference
 
 Here's a quick reference guide for the font-sizes and font-weights of each level's sizes:
-
-##### Display
-
-_Intended for large heroes and images_
-
-| Size     | Properties                                               |
-| -------- | -------------------------------------------------------- |
-| `large`  | fontSize: `92px` (`5.75rem`), fontWeight: `bold` (`700`) |
-| `medium` | fontSize: `80px` (`5rem`), fontWeight: `bold` (`700`)    |
-| `small`  | fontSize: `68px` (`4.25rem`), fontWeight: `bold` (`700`) |
 
 ##### Title
 
@@ -384,9 +372,6 @@ Here's a quick reference guide for the values contained in each property:
 | `40`        | `'2.5rem'`    |
 | `48`        | `'3rem'`      |
 | `56`        | `'3.5rem'`    |
-| `68`        | `'4.25rem'`   |
-| `80`        | `'5rem'`      |
-| `92`        | `'5.75rem'`   |
 
 ##### Font Weights
 
