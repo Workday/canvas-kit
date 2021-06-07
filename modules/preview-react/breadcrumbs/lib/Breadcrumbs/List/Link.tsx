@@ -1,12 +1,12 @@
 import React from 'react';
 import {styled} from '@workday/canvas-kit-react/common';
+import {Hyperlink} from '@workday/canvas-kit-react/button';
 import {type} from '@workday/canvas-kit-react/tokens';
 import {TooltipContainer} from '@workday/canvas-kit-react/tooltip';
 import {Popper} from '@workday/canvas-kit-react/popup';
 
 import {useTruncateTooltip} from './hooks';
 import {truncateStyles} from './styles';
-import {Hyperlink} from '@workday/canvas-kit-react/button';
 
 export interface BreadcrumbLinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   /**
@@ -27,7 +27,6 @@ type StyledLinkProps = Pick<BreadcrumbLinkProps, 'maxWidth' | 'href'>;
 
 const StyledLink = styled(Hyperlink)(
   {
-    textAlign: 'left',
     ...type.levels.subtext.large,
   },
   ({maxWidth}: StyledLinkProps) => ({

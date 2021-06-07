@@ -27,7 +27,7 @@ const Container = styled('button')<DeprecatedButtonProps & StyledType>(
   {
     fontFamily: type.properties.fontFamilies.default,
     fontSize: type.properties.fontSizes[14],
-    fontWeight: type.properties.fontWeights.bold,
+    fontWeight: type.properties.fontWeights.medium,
     boxSizing: 'border-box',
     display: 'inline-flex',
     alignItems: 'center',

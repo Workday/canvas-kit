@@ -109,12 +109,12 @@ updated as you expect.
 
 - 🤖 Type Hierarchy Updates
 
-  All type hierarchy updates are handled by the codemod. The tables below will help you understand the
-  changes and provide a reference as you review your UI. Most teams are using the Beta type tokens
-  in `@workday/canvas-kit-labs-react-core`, but some are using the Legacy type in
+  All type hierarchy updates are handled by the codemod. The tables below will help you understand
+  the changes and provide a reference as you review your UI. Most teams are using the Beta type
+  tokens in `@workday/canvas-kit-labs-react-core`, but some are using the Legacy type in
   `@workday/canvas-kit-react-core`.
 
-  | Beta Type (px)  | Resposive Type (rem)                      |
+  | Beta Type (px)  | Responsive Type (rem)                     |
   | --------------- | ----------------------------------------- |
   | `brand1` (56px) | `levels.title.large` ( 3.5rem \ 56px)     |
   | `brand2` (48px) | `levels.title.medium` ( 3rem \ 48px)      |
@@ -127,7 +127,7 @@ updated as you expect.
   | `body2` (14px)  | `levels.subtext.large` ( 0.875rem \ 14px) |
   | `small` (13px)  | `levels.subtext.medium` ( 0.75rem \ 12px) |
 
-  | Legacy Type (px)  | Resposive Type (rem)                     |
+  | Legacy Type (px)  | Responsive Type (rem)                    |
   | ----------------- | ---------------------------------------- |
   | `dataViz1` (56px) | `levels.title.large` (3.5rem \ 56px)     |
   | `dataViz2` (34px) | `levels.heading.large` (2rem \ 32px)     |
@@ -169,7 +169,8 @@ updated as you expect.
 
 ##### TypeScript Type Updates
 
-- `CanvasType` still exists, but the types are quite different and will likely throw errrors if you're relying on them.
+- `CanvasType` still exists, but the types are quite different and will likely throw errrors if
+  you're relying on them.
 - `CanvasTypeVariant` is now `CanvasTypeVariants` and has changed signicantly
 - We added `CanvasTypeHierarchy` (for type levels) and `CanvasTypeProperties` (for type properties)
 
@@ -214,7 +215,8 @@ review this
 #### New Type Object Structure
 
 The Beta and Legacy type object structures were fairly flat, provided many levels in the type
-hierarchy, and included quite a few variants. While none of these were bad attributes, our research suggested they created a large amount of confusion. Both designers and engineers were unclear on
+hierarchy, and included quite a few variants. While none of these were bad attributes, our research
+suggested they created a large amount of confusion. Both designers and engineers were unclear on
 when to use many of the tokens provided. We restructured the object to help users make more sense of
 it. The tokens are divided into three main parts:
 
@@ -471,8 +473,8 @@ are handled by the v5 codemod.
 
 - 🤖 Move `type` tokens to Main `tokens` (formerly `core`)
 
-  This change is described in more detail in the [Type Section](#type), but suffice to say all `type`
-  imports will be automatically migrated to the Main `token` package by the codemod.
+  This change is described in more detail in the [Type Section](#type), but suffice to say all
+  `type` imports will be automatically migrated to the Main `token` package by the codemod.
 
   ```tsx
   // v4
@@ -486,8 +488,8 @@ are handled by the v5 codemod.
 
 - Deprecate `space` in favor of `Box`
 
-  The `space` function was a handy little utility that you could apply to `styled()` components to add
-  space style props. However, with the addition of `Box` it is no longer needed. `Box` provides
+  The `space` function was a handy little utility that you could apply to `styled()` components to
+  add space style props. However, with the addition of `Box` it is no longer needed. `Box` provides
   `space` style props and much more. While this is a manual migration, the process is fairly
   straight-forward.
 
@@ -1461,3 +1463,4 @@ const MySkeleton = () => (
 
 Additionally, the skeleton animation has been updated from a diagonal sheen, or shimmer, to fading
 the opacity of the entire shape(s) in and out.
+```
