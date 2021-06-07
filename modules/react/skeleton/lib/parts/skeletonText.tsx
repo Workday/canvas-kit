@@ -23,8 +23,8 @@ export interface SkeletonTextProps {
 
 const Line = styled('div')<
   {
-    width: number | string;
     backgroundColor: string;
+    width: number | string;
   } & StyledType
 >(({backgroundColor, width}) => {
   return {

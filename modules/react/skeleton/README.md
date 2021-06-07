@@ -1,7 +1,7 @@
 # Canvas Kit Skeleton
 
-A component that renders a skeleton (a placeholder for future content). The skeleton component takes
-in children skeleton components and displays them with an animated sheen to indicate loading.
+A set of compound components that render a skeleton (a placeholder for future content). The skeleton component takes
+in children skeleton components and displays them with an animation to indicate loading.
 
 [> Workday Design Reference](https://design.workday.com/components/indicators/skeleton-loader)
 
@@ -21,10 +21,11 @@ itself by utilizing a visually hidden div.
 ```tsx
 import * as React from 'react';
 import {Skeleton} from '@workday/canvas-kit-react/skeleton';
+import {borderRadius} from '@workday/canvas-kit-react/tokens';
 
 export default () => (
   <Skeleton>
-    <Skeleton.Shape width={50} height={50} borderRadius={99} />
+    <Skeleton.Shape width={50} height={50} borderRadius={borderRadius.circle} />
     <Skeleton.Header />
     <h1>Hello!</h1>
     <Skeleton.Text lineCount={3} />
@@ -99,10 +100,11 @@ the borderRadius, width, and height to make various rectangular and circular sha
 ```tsx
 import * as React from 'react';
 import {Skeleton} from '@workday/canvas-kit-react/skeleton';
+import {borderRadius} from '@workday/canvas-kit-react/tokens';
 
 export default () => (
   <Skeleton>
-    <Skeleton.Shape width={50} height={50} borderRadius={99} />
+    <Skeleton.Shape borderRadius={borderRadius.circle} height={50} width={50} />
   </Skeleton>
 );
 ```
