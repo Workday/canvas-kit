@@ -7,7 +7,7 @@ import withReadme from 'storybook-readme/with-readme';
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
 import {pickForegroundColor} from '@workday/canvas-kit-react/common';
 
-import {colors, type, depth, space, borderRadius} from '..';
+import {colors, type, depth, space, borderRadius} from '@workday/canvas-kit-react/tokens';
 import README from '../README.md';
 
 export default withSnapshotsEnabled({
@@ -75,7 +75,7 @@ export const Type = () => (
 
 const Shape = styled('div')<{radius?: string | number; size?: string | number}>(
   {
-    ...type.levels.heading.small,
+    ...type.levels.body.small,
     margin: space.m,
     background: colors.blueberry400,
     color: colors.frenchVanilla100,
@@ -84,7 +84,7 @@ const Shape = styled('div')<{radius?: string | number; size?: string | number}>(
     justifyContent: 'center',
     flexDirection: 'column',
     '& span': {
-      ...type.levels.subtext.large,
+      ...type.levels.subtext.medium,
       fontFamily: type.properties.fontFamilies.monospace,
       display: 'block',
       color: colors.blueberry100,
@@ -100,7 +100,7 @@ const Shape = styled('div')<{radius?: string | number; size?: string | number}>(
 );
 
 const SizeLabel = styled('div')({
-  ...type.levels.heading.small,
+  ...type.levels.body.small,
   margin: space.s,
   width: 80,
   '& span': {
@@ -170,7 +170,7 @@ const Swatch = styled('li')<{bg: string; primary?: boolean}>(
   },
   ({primary, bg}) =>
     primary && {
-      ...type.levels.heading.medium,
+      ...type.levels.body.large,
       height: space.xxxl,
       paddingTop: space.s,
       paddingBottom: space.s,
