@@ -3,6 +3,68 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 5.0.0 (2021-06-10)
+
+The changes below include the changes made across all 5.0.0 beta and rc versions (`v5.0.0-beta.0 - v5.0.0-rc.0`).
+
+To review the breaking changes made in this release, check out the [v5.0.0 Migration Guide](./modules/docs/mdx/5.0-MIGRATION-GUIDE.md). Use our new [codemod utility](./modules/codemod) to make the update as smooth as possible.
+
+### Components
+
+- fix(common): Remove unintended whitespace around bdo tag in IE11 ([#868](https://github.com/Workday/canvas-kit/pull/868)) [@vibdev](https://github.com/vibdev)
+- feat(common): Spread additional props on CanvasProvider [@NicholasBoll](https://github.com/NicholasBoll)
+- chore(tabs): Convert to a compound component utility functions ([#953](https://github.com/Workday/canvas-kit/pull/953)) [@NicholasBoll](https://github.com/NicholasBoll)
+- feat(tabs): Update Tabs list model to support passing index position ([#990](https://github.com/Workday/canvas-kit/pull/990)) [@omasrii](https://github.com/omasrii)
+- fix: Allow refs to be passed to createComponent components ([#1009](https://github.com/Workday/canvas-kit/pull/1009)) [@NicholasBoll](https://github.com/NicholasBoll)
+- chore: Update spacing tokens + codemod ([#1010](https://github.com/Workday/canvas-kit/pull/1010)) [@alanbsmith](https://github.com/alanbsmith)
+- chore: Refactor Button to use createComponent ([#1017](https://github.com/Workday/canvas-kit/pull/1017)) [@NicholasBoll](https://github.com/NicholasBoll)
+- chore: Rename core packages to tokens and add codemod ([#1020](https://github.com/Workday/canvas-kit/pull/1020)) [@alanbsmith](https://github.com/alanbsmith)
+- chore(card): Convert to a Compound Component and create codemod ([#1028](https://github.com/Workday/canvas-kit/pull/1028)) [@NicholasBoll](https://github.com/NicholasBoll)
+- fix(tabs): Fix aria-selected for unselected tabs ([#1033](https://github.com/Workday/canvas-kit/pull/1033)) [@angadkaflay](https://github.com/angadkaflay)
+- ci: Fix Tooltip flaky visual test ([#1035](https://github.com/Workday/canvas-kit/pull/1035)) [@NicholasBoll](https://github.com/NicholasBoll)
+- fix(tooltip): Allow aria-label pass-through in muted tooltips ([#1037](https://github.com/Workday/canvas-kit/pull/1037)) [@NicholasBoll](https://github.com/NicholasBoll)
+- docs: Add better documentation to the `as` prop ([#1046](https://github.com/Workday/canvas-kit/pull/1046)) [@NicholasBoll](https://github.com/NicholasBoll)
+- docs(tabs): Update single tabs panel example ([#1047](https://github.com/Workday/canvas-kit/pull/1047)) [@NicholasBoll](https://github.com/NicholasBoll)
+- docs: Update Create Compound Component docs ([#1048](https://github.com/Workday/canvas-kit/pull/1048)) [@NicholasBoll](https://github.com/NicholasBoll)
+- fix(popup): Allow popups to be owners of each other ([#1054](https://github.com/Workday/canvas-kit/pull/1054)) [@csongnguyen](https://github.com/csongnguyen)
+- fix(combobox): Fix Combobox RTL issue ([#1064](https://github.com/Workday/canvas-kit/pull/1064)) [@alanbsmith](https://github.com/alanbsmith)
+- refactor(button): Button recategorization ([#1034](https://github.com/Workday/canvas-kit/pull/1034)) [@anicholls](https://github.com/anicholls)
+- fix(popup): Allow tooltips to close alongside modals on click outside ([#1074](https://github.com/Workday/canvas-kit/pull/1074)) [@csongnguyen](https://github.com/csongnguyen)
+- refactor: Move InputProvider from tokens to common ([#1076](https://github.com/Workday/canvas-kit/pull/1076)) [@anicholls](https://github.com/anicholls)
+- feat(common): Add Box Component ([#1027](https://github.com/Workday/canvas-kit/pull/1027)) [@alanbsmith](https://github.com/alanbsmith)
+- feat(comboxbox):Added default maxHeight to autocomplete container ([#1079](https://github.com/Workday/canvas-kit/pull/1079)) [@sraj](https://github.com/sraj)
+- feat: Forward refs for input components ([#1068](https://github.com/Workday/canvas-kit/pull/1068)) [@jamesfan](https://github.com/jamesfan)
+- feat(checkbox): Add aria-checked for accessibility and testability ([#1045](https://github.com/Workday/canvas-kit/pull/1045)) [@svagi](https://github.com/svagi)
+- docs: Popup accessible example ([#1056](https://github.com/Workday/canvas-kit/pull/1056)) [@csongnguyen](https://github.com/csongnguyen)
+- chore: Upgrade Card to use Box ([#1086](https://github.com/Workday/canvas-kit/pull/1086)) [@NicholasBoll](https://github.com/NicholasBoll)
+- refactor(popup): Convert Popup to a compound component ([#1065](https://github.com/Workday/canvas-kit/pull/1065)) [@NicholasBoll](https://github.com/NicholasBoll)
+- fix(skeleton): Change skeleton animation to fade in and out ([#1084](https://github.com/Workday/canvas-kit/pull/1084)) [@willklein](https://github.com/willklein)
+- fix: Refactor/modal compound component ([#1091](https://github.com/Workday/canvas-kit/pull/1091)) [@NicholasBoll](https://github.com/NicholasBoll)
+- feat: Remove Preview/Tokens & Upgrade CKR Labs Type Hierarchy ([#1078](https://github.com/Workday/canvas-kit/pull/1078)) [@alanbsmith](https://github.com/alanbsmith)
+- fix: Fix type upgrade issues ([#1098](https://github.com/Workday/canvas-kit/pull/1098)) [@alanbsmith](https://github.com/alanbsmith)
+- docs: Update migration and Popup docs ([#1095](https://github.com/Workday/canvas-kit/pull/1095)) [@NicholasBoll](https://github.com/NicholasBoll)
+
+### Infrastructure
+
+- feat: Add compound component utility functions ([#946](https://github.com/Workday/canvas-kit/pull/946)) [@NicholasBoll](https://github.com/NicholasBoll)
+- test: Add verifyComponent test helper and fix test types ([#958](https://github.com/Workday/canvas-kit/pull/958)) [@NicholasBoll](https://github.com/NicholasBoll)
+- docs: Add compound Component Creation Doc ([#950](https://github.com/Workday/canvas-kit/pull/950)) [@NicholasBoll](https://github.com/NicholasBoll)
+- chore: Add slash imports ([#992](https://github.com/Workday/canvas-kit/pull/992)) [@anicholls](https://github.com/anicholls)
+- docs: Relocate supplemental docs to new docs module ([#998](https://github.com/Workday/canvas-kit/pull/998)) [@anicholls](https://github.com/anicholls)
+- chore: Deprecate CKCSS and update migration guide ([#1000](https://github.com/Workday/canvas-kit/pull/1000)) [@anicholls](https://github.com/anicholls)
+- fix: Scope buttonRef codemod to only Button components ([#1022](https://github.com/Workday/canvas-kit/pull/1022)) [@NicholasBoll](https://github.com/NicholasBoll)
+- fix: Fix slash import paths ([#1038](https://github.com/Workday/canvas-kit/pull/1038)) [@NicholasBoll](https://github.com/NicholasBoll)
+- chore: Remove package.json from create component script ([#1039](https://github.com/Workday/canvas-kit/pull/1039)) [@NicholasBoll](https://github.com/NicholasBoll)
+- chore: Bump y18n from 3.2.1 to 3.2.2 ([#1011](https://github.com/Workday/canvas-kit/pull/1011)) [@dependabot](https://github.com/dependabot)
+- chore: Bump elliptic from 6.5.3 to 6.5.4 ([#993](https://github.com/Workday/canvas-kit/pull/993)) [@dependabot](https://github.com/dependabot)
+- ci: Upgrade to node 14 ([#1044](https://github.com/Workday/canvas-kit/pull/1044)) [@NicholasBoll](https://github.com/NicholasBoll)
+- chore: Upgrade storybook to v6.2.9 ([#1055](https://github.com/Workday/canvas-kit/pull/1055)) [@anicholls](https://github.com/anicholls)
+- chore: Bump ssri, ua-parser-js, handlebars, lodash, and hosted-git-info ([#1049](https://github.com/Workday/canvas-kit/pull/1049)) [@dependabot](https://github.com/dependabot)
+- feat: Add Canvas Kit Preview and focus the purpose of CK Labs ([#1069](https://github.com/Workday/canvas-kit/pull/1069)) [@anicholls](https://github.com/anicholls)
+- feat: Add package version in Storybook ([#1082](https://github.com/Workday/canvas-kit/pull/1082)) [@mihaelamiches](https://github.com/mihaelamiches)
+- docs: Review v5 migration guide ([#1089](https://github.com/Workday/canvas-kit/pull/1089)) [@jamesfan](https://github.com/jamesfan)
+- fix: Update canvas-kit-react package.json ([#1099](https://github.com/Workday/canvas-kit/pull/1099)) [@alanbsmith](https://github.com/alanbsmith)
+
 ## 5.0.0-rc.0 (2021-06-07)
 
 ### Components
@@ -22,7 +84,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - refactor(popup): Convert Popup to a compound component ([#1065](https://github.com/Workday/canvas-kit/pull/1065)) [@NicholasBoll](https://github.com/NicholasBoll)
 - fix(skeleton): Change skeleton animation to fade in and out ([#1084](https://github.com/Workday/canvas-kit/pull/1084)) [@willklein](https://github.com/willklein)
 - fix: Refactor/modal compound component ([#1091](https://github.com/Workday/canvas-kit/pull/1091)) [@NicholasBoll](https://github.com/NicholasBoll)
-feat: Remove Preview/Tokens & Upgrade CKR Labs Type Hierarchy ([#1078](https://github.com/Workday/canvas-kit/pull/1078)) [@alanbsmith](https://github.com/alanbsmith)
+- feat: Remove Preview/Tokens & Upgrade CKR Labs Type Hierarchy ([#1078](https://github.com/Workday/canvas-kit/pull/1078)) [@alanbsmith](https://github.com/alanbsmith)
 
 ### Documentation
 
@@ -30,7 +92,7 @@ feat: Remove Preview/Tokens & Upgrade CKR Labs Type Hierarchy ([#1078](https://g
 - docs(tabs): Update single tabs panel example ([#1047](https://github.com/Workday/canvas-kit/pull/1047)) [@NicholasBoll](https://github.com/NicholasBoll)
 - docs: Update Create Compound Component docs ([#1048](https://github.com/Workday/canvas-kit/pull/1048)) [@NicholasBoll](https://github.com/NicholasBoll)
 - docs: Popup accessible example ([#1056](https://github.com/Workday/canvas-kit/pull/1056)) [@csongnguyen](https://github.com/csongnguyen)
-- docs: Review v5 migration guide [@jamesfan](https://github.com/jamesfan)
+- docs: Review v5 migration guide ([#1089](https://github.com/Workday/canvas-kit/pull/1089)) [@jamesfan](https://github.com/jamesfan)
 
 ### Infrastructure
 
@@ -49,6 +111,7 @@ feat: Remove Preview/Tokens & Upgrade CKR Labs Type Hierarchy ([#1078](https://g
 ## 5.0.0-beta.2 (2021-04-26)
 
 ### Components
+
 - chore(card): Convert to a Compound Component and create codemod ([#1028](https://github.com/Workday/canvas-kit/pull/1028)) [@NicholasBoll](https://github.com/NicholasBoll)
 
 ### Infrastructure
