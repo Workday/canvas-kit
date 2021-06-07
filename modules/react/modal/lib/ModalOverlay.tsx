@@ -54,10 +54,6 @@ const CenteringContainer = styled('div')({
   top: 0,
   alignItems: 'center',
   justifyContent: 'center',
-  pointerEvents: 'none',
-  '> *': {
-    pointerEvents: 'auto',
-  },
 });
 
 export const ModalOverlay = createComponent('div')({
@@ -92,6 +88,8 @@ const OpenModalOverlay = createComponent('div')({
     const content = (
       <Container as={Element} {...props}>
         <CenteringContainer
+          // make sure the centering container is an even number of pixels to avoid sub-pixel
+          // inaccuracies due to centering
           style={{width: windowSize.width % 2 === 1 ? 'calc(100vw - 1px)' : '100vw'}}
         >
           {children}
