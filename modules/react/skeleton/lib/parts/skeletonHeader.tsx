@@ -1,27 +1,50 @@
-import canvas from '@workday/canvas-kit-react/tokens';
 import * as React from 'react';
-import SkeletonShape from './skeletonShape';
-import {TEXT_BORDER_RADIUS} from './utils';
 
-export interface SkeletonHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
+import {createComponent} from '@workday/canvas-kit-react/common';
+import {borderRadius, colors} from '@workday/canvas-kit-react/tokens';
+
+import SkeletonShape from './skeletonShape';
+
+export interface SkeletonHeaderProps {
   /**
    * The background color of the skeleton
    * @default soap200
    */
   backgroundColor?: string;
+  /**
+   * The height of the shape in `px` or `%`.
+   * @default 28px
+   */
+  height?: number | string;
+  /**
+   *  The width of the shape in `px` or `%`.
+   * @default 100%
+   */
+  width?: number | string;
 }
 
-export default class SkeletonHeader extends React.Component<SkeletonHeaderProps> {
-  render(): React.ReactNode {
-    const {backgroundColor = canvas.colors.soap200, ...elemProps} = this.props;
+const SkeletonHeader = createComponent('div')({
+  displayName: 'Skeleton.Header',
+  Component: (
+    {
+      backgroundColor = colors.soap200,
+      height = '28px',
+      width = '100%',
+      ...elemProps
+    }: SkeletonHeaderProps,
+    ref,
+    Element
+  ) => (
+    <SkeletonShape
+      ref={ref}
+      as={Element}
+      backgroundColor={backgroundColor}
+      borderRadius={borderRadius.s}
+      height={height}
+      width={width}
+      {...elemProps}
+    />
+  ),
+});
 
-    const lineProps = {
-      backgroundColor,
-      borderRadius: TEXT_BORDER_RADIUS,
-      height: '28px',
-      width: '100%',
-    };
-
-    return <SkeletonShape {...lineProps} {...elemProps} />;
-  }
-}
+export default SkeletonHeader;

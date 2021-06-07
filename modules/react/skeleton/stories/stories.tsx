@@ -13,10 +13,10 @@ import {FormField} from '@workday/canvas-kit-react/form-field';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
 
-import Skeleton, {SkeletonShape, SkeletonText, SkeletonHeader} from '../index';
+import {Skeleton} from '../index';
 
 import README from '../README.md';
-import canvas from '@workday/canvas-kit-react/tokens';
+import {borderRadius, colors} from '@workday/canvas-kit-react/tokens';
 
 const Container = styled('span')({
   width: '60%',
@@ -114,13 +114,13 @@ storiesOf('Components/Indicators/Skeleton/React', module)
               >
                 <Skeleton>
                   <FlexContainer>
-                    <SkeletonShape width={40} height={40} borderRadius={99} />
+                    <Skeleton.Shape width={40} height={40} borderRadius={borderRadius.circle} />
                     <Container>
-                      <SkeletonHeader />
+                      <Skeleton.Header />
                     </Container>
                   </FlexContainer>
                   <div>
-                    <SkeletonText lineCount={3} />
+                    <Skeleton.Text lineCount={3} />
                   </div>
                 </Skeleton>
               </div>
@@ -140,7 +140,7 @@ storiesOf('Components/Indicators/Skeleton/React', module)
           </div>
           <div style={{width: 200}}>
             <Skeleton>
-              <SkeletonHeader />
+              <Skeleton.Header />
             </Skeleton>
           </div>
         </FlexContainer>
@@ -156,10 +156,10 @@ storiesOf('Components/Indicators/Skeleton/React', module)
             <Avatar size={Avatar.Size.xxl}></Avatar>
           </div>
           <Skeleton>
-            <SkeletonShape
+            <Skeleton.Shape
               width={number('width', 120)}
               height={number('height', 120)}
-              borderRadius={number('borderRadius', 99)}
+              borderRadius={number('borderRadius', 999)}
             />
           </Skeleton>
         </FlexContainer>
@@ -176,7 +176,7 @@ storiesOf('Components/Indicators/Skeleton/React', module)
           ullamco laboris nisi ut aliquip ex ea commodo consequat.
         </div>
         <Skeleton>
-          <SkeletonText lineCount={number('lineCount', 2)} />
+          <Skeleton.Text lineCount={number('lineCount', 2)} />
         </Skeleton>
       </div>
     );
@@ -187,18 +187,18 @@ storiesOf('Components/Indicators/Skeleton/React', module)
         <h1>Skeleton Color</h1>
         <Skeleton>
           <FlexContainer>
-            <SkeletonShape
+            <Skeleton.Shape
               width={40}
               height={40}
-              borderRadius={99}
-              backgroundColor={canvas.colors.berrySmoothie100}
+              borderRadius={borderRadius.circle}
+              backgroundColor={colors.berrySmoothie100}
             />
             <Container>
-              <SkeletonHeader backgroundColor={canvas.colors.cantaloupe100} />
+              <Skeleton.Header backgroundColor={colors.cantaloupe100} />
             </Container>
           </FlexContainer>
           <div>
-            <SkeletonText lineCount={3} backgroundColor={canvas.colors.fruitPunch100} />
+            <Skeleton.Text lineCount={3} backgroundColor={colors.fruitPunch100} />
           </div>
         </Skeleton>
       </div>

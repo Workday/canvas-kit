@@ -1,25 +1,10 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import canvas from '@workday/canvas-kit-react/tokens';
 
-export const BOTTOM_MARGIN = 16;
+import {createComponent, StyledType} from '@workday/canvas-kit-react/common';
+import {colors, space} from '@workday/canvas-kit-react/tokens';
 
-const Shape = styled('div')<{
-  width?: number | string;
-  height?: number | string;
-  borderRadius?: number | string;
-  backgroundColor?: string;
-}>(({width, height, borderRadius, backgroundColor}) => {
-  return {
-    width: width ? width : '100%',
-    height: height ? height : '100%',
-    borderRadius: borderRadius ? borderRadius : 0,
-    backgroundColor,
-    marginBottom: BOTTOM_MARGIN,
-  };
-});
-
-export interface SkeletonShapeProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface SkeletonShapeProps {
   /**
    *  The width of the shape in `px` or `%`.
    * @default 100%
@@ -42,24 +27,39 @@ export interface SkeletonShapeProps extends React.HTMLAttributes<HTMLDivElement>
   backgroundColor?: string;
 }
 
-export default class SkeletonShape extends React.Component<SkeletonShapeProps> {
-  render(): React.ReactNode {
-    const {
-      width,
-      height,
-      borderRadius,
-      backgroundColor = canvas.colors.soap200,
-      ...elemProps
-    } = this.props;
+const Shape = styled('div')<SkeletonShapeProps & StyledType>(
+  ({backgroundColor, borderRadius, height, width}) => ({
+    backgroundColor,
+    borderRadius,
+    height,
+    width,
+    marginBottom: space.s,
+  })
+);
 
-    return (
-      <Shape
-        width={width}
-        height={height}
-        borderRadius={borderRadius}
-        backgroundColor={backgroundColor}
-        {...elemProps}
-      />
-    );
-  }
-}
+const SkeletonShape = createComponent('div')({
+  displayName: 'Skeleton.Shape',
+  Component: (
+    {
+      backgroundColor = colors.soap200,
+      borderRadius = 0,
+      height = '100%',
+      width = '100%',
+      ...elemProps
+    }: SkeletonShapeProps,
+    ref,
+    Element
+  ) => (
+    <Shape
+      ref={ref}
+      as={Element}
+      backgroundColor={backgroundColor}
+      borderRadius={borderRadius}
+      height={height}
+      width={width}
+      {...elemProps}
+    />
+  ),
+});
+
+export default SkeletonShape;
