@@ -320,9 +320,9 @@ _Intended for small subtext content or in tight spaces_
 
 | Size     | Properties                                            |
 | -------- | ----------------------------------------------------- |
-| `large`  | fontSize: 14px (0.875rem), font-weight: regular (400) |
-| `medium` | fontSize: 12px (0.75rem), font-weight: regular (400)  |
-| `small`  | fontSize: 10px (0.625rem), font-weight: regular (400) |
+| `large`  | fontSize: `14px` (`0.875rem`), fontWeight: `regular` (`400`) |
+| `medium` | fontSize: `12px` (`0.75rem`), fontWeight: `regular` (`400`)  |
+| `small`  | fontSize: `10px` (`0.625rem`), fontWeight: `regular` (`400`) |
 
 ### Properties
 
