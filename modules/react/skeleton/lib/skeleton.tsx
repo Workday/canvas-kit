@@ -1,12 +1,8 @@
 import * as React from 'react';
 import {keyframes} from '@emotion/core';
+import styled from '@emotion/styled';
 
-import {
-  accessibleHide,
-  createComponent,
-  styled,
-  StyledType,
-} from '@workday/canvas-kit-react/common';
+import {accessibleHide, createComponent, StyledType} from '@workday/canvas-kit-react/common';
 
 import SkeletonHeader from './parts/skeletonHeader';
 import SkeletonShape from './parts/skeletonShape';

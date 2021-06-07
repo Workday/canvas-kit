@@ -1,6 +1,7 @@
 import * as React from 'react';
+import styled from '@emotion/styled';
 
-import {createComponent, styled, StyledType} from '@workday/canvas-kit-react/common';
+import {createComponent, StyledType} from '@workday/canvas-kit-react/common';
 import {colors, space} from '@workday/canvas-kit-react/tokens';
 
 export interface SkeletonShapeProps {
