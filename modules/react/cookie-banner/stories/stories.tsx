@@ -7,8 +7,7 @@ import withReadme from 'storybook-readme/with-readme';
 import {action} from '@storybook/addon-actions';
 import styled from '@emotion/styled';
 
-import {SecondaryButton} from '../../button';
-import {type} from '../../tokens';
+import {Hyperlink, SecondaryButton} from '../../button';
 import CookieBanner from '../index';
 import README from '../README.md';
 
@@ -81,9 +80,9 @@ storiesOf('Components/Indicators/Cookie Banner/React', module)
           notice: (
             <React.Fragment>
               {CookieBanner.DefaultNotice} Please review our{' '}
-              <a href="https://www.workday.com/en-us/privacy.html" target="__blank" css={type.link}>
+              <Hyperlink href="https://www.workday.com/en-us/privacy.html" target="__blank">
                 Privacy Policy
-              </a>
+              </Hyperlink>
               .
             </React.Fragment>
           ),
