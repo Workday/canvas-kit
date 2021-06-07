@@ -167,6 +167,14 @@ updated as you expect.
 
 #### Manual Updates
 
+##### TypeScript Type Updates
+
+- `CanvasType` still exists, but the types are quite different and will likely throw errrors if you're relying on them.
+- `CanvasTypeVariant` is now `CanvasTypeVariants` and has changed signicantly
+- We added `CanvasTypeHierarchy` (for type levels) and `CanvasTypeProperties` (for type properties)
+
+##### Code Deprecations
+
 There are only two type deprecations not covered by the codemod:
 
 - Type Wrapper components (`H1`-`H5`) have been removed

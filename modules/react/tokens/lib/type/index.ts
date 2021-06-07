@@ -44,7 +44,7 @@ const properties: CanvasTypeProperties = {
  * - `properties` - provide low-level type properties (font families, sizes, and weights)
  * - `variants` - provide modifiers for text styles (error, hint, and inverse)
  * */
-export const type: CanvasTypeTokens = {
+export const type: CanvasType = {
   levels,
   properties,
   variants,
@@ -129,7 +129,7 @@ type CanvasTypeProperties = {
   fontWeights: CanvasFontWeights;
 };
 
-export type CanvasTypeTokens = {
+export type CanvasType = {
   /** ### Canvas Type Hierarchy
    * [View Storybook Docs](https://workday.github.io/canvas-kit/?path=/story/tokens-tokens-react--type)
    *
