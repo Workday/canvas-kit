@@ -50,7 +50,7 @@ const SelectModal = () => {
       <Modal.Target>Show Modal</Modal.Target>
       <Modal.Overlay>
         <Modal.Card>
-          <Modal.CloseButton aria-label="Close" />
+          <Modal.CloseIcon aria-label="Close" />
           <Modal.Heading>Modal with Select</Modal.Heading>
           <Modal.Body>
             <p>The menu for this Select should break out of the Modal.</p>
