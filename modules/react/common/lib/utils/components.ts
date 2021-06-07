@@ -391,8 +391,15 @@ export function composeHooks<M extends Model<any, any>, R, P extends {}, O exten
   ...hooks: ((model: M, props: P, ref: React.Ref<R>) => O)[]
 ): BehaviorHook<M, O> {
   return (model, props, ref) => {
-    return hooks.reverse().reduce((props: any, hook) => {
+    const returnProps = [...hooks].reverse().reduce((props: any, hook) => {
       return hook(model, props, props.ref || ref);
     }, props);
+
+    if (!returnProps.hasOwnProperty('ref')) {
+      // This is the weird "incoming ref isn't in props, but outgoing ref is in props" thing
+      returnProps.ref = ref;
+    }
+
+    return returnProps;
   };
 }

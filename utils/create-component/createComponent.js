@@ -56,7 +56,7 @@ inquirer
     const prefix = prerelease ? prerelease + '-' : '';
     const componentPath = path.join(cwd, `modules/${prefix}react/${name}`);
 
-    createComponent(componentPath, createReactComponent, answers, prerelease, prefix);
+    createComponent(componentPath, createReactComponent, answers, prerelease || '', prefix);
 
     console.log('\n');
   })

@@ -5,8 +5,8 @@ describe('Modal', () => {
     h.stories.visit();
   });
 
-  ['Default', 'WithoutHook'].forEach(story => {
-    context(`given the '${story}' story is rendered`, () => {
+  ['Basic'].forEach(story => {
+    context(`given the [Components/Popups/Modal/React, ${story}] story is rendered`, () => {
       beforeEach(() => {
         h.stories.load('Components/Popups/Modal/React', story);
       });
@@ -160,7 +160,7 @@ describe('Modal', () => {
     });
   });
 
-  context(`given the 'With Tooltips' story is rendered`, () => {
+  context(`given the [Testing/React/Popups/Modal, With Tooltips] story is rendered`, () => {
     beforeEach(() => {
       h.stories.load('Testing/React/Popups/Modal', 'With Tooltips');
     });
@@ -282,9 +282,9 @@ describe('Modal', () => {
     });
   });
 
-  context(`given the 'With Radio buttons' story is rendered`, () => {
+  context(`given the [Testing/React/Popups/Modal, With Radio buttons] story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Components/Popups/Modal/React', 'With Radio buttons');
+      h.stories.load('Testing/React/Popups/Modal', 'With Radio buttons');
     });
 
     it('should not have any axe errors', () => {
@@ -310,7 +310,7 @@ describe('Modal', () => {
     });
   });
 
-  context(`given the 'Without close icon' story is rendered`, () => {
+  context(`given the [Components/Popups/Modal/React, Without close icon] story is rendered`, () => {
     beforeEach(() => {
       h.stories.load('Components/Popups/Modal/React', 'Without close icon');
     });
@@ -441,7 +441,7 @@ describe('Modal', () => {
     });
   });
 
-  context(`given the 'Custom focus' story is rendered`, () => {
+  context(`given the [Components/Popups/Modal/React, Custom focus] story is rendered`, () => {
     beforeEach(() => {
       h.stories.load('Components/Popups/Modal/React', 'Custom focus');
     });
@@ -503,6 +503,8 @@ describe('Modal', () => {
             .should('contain', 'Delete')
             .tab()
             .should('contain', 'Cancel')
+            .tab()
+            .should('have.attr', 'aria-label', 'Close')
             .tab();
           cy.findByLabelText('Item name').should('have.focus');
         });
@@ -515,8 +517,8 @@ describe('Modal', () => {
           });
         });
 
-        it('should not close the modal', () => {
-          cy.findByRole('dialog', {name: 'Delete Item'}).should('be.visible');
+        it('should close the modal', () => {
+          cy.findByRole('dialog', {name: 'Delete Item'}).should('not.be.visible');
         });
       });
 
@@ -525,14 +527,14 @@ describe('Modal', () => {
           cy.get('body').click('top');
         });
 
-        it('should not close the modal', () => {
-          cy.findByRole('dialog', {name: 'Delete Item'}).should('be.visible');
+        it('should close the modal', () => {
+          cy.findByRole('dialog', {name: 'Delete Item'}).should('not.be.visible');
         });
       });
     });
   });
 
-  context(`given the 'StackedModals' story is rendered`, () => {
+  context(`given the [Testing/React/Popups/Modal, StackedModals] story is rendered`, () => {
     beforeEach(() => {
       h.stories.load('Testing/React/Popups/Modal', 'StackedModals');
     });
@@ -579,7 +581,7 @@ describe('Modal', () => {
     });
   });
 
-  context(`given the 'ModalWithPopup' story is rendered`, () => {
+  context(`given the [Testing/React/Popups/Modal, ModalWithPopup] story is rendered`, () => {
     beforeEach(() => {
       h.stories.load('Testing/React/Popups/Modal', 'ModalWithPopup');
     });

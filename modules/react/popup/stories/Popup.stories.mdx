@@ -3,7 +3,7 @@ import {Meta} from '@storybook/addon-docs/blocks';
 import {Popup} from '@workday/canvas-kit-react/popup';
 import {Specifications} from '@workday/canvas-kit-docs';
 
-import {Simple} from './examples/Simple';
+import {Basic} from './examples/Basic';
 import {InitialFocus} from './examples/InitialFocus';
 import {MultiplePopups} from './examples/MultiplePopups';
 import {NestedPopups} from './examples/NestedPopups';
@@ -47,7 +47,7 @@ yarn add @workday/canvas-kit-react
 The `Popup` component is a generic compound component that is used to build popup UIs that are not
 already covered by Canvas Kit.
 
-### Simple
+### Basic
 
 The Popup has no pre-defined behaviors built in, therefore the `usePopupModel` must always be used
 to create a new `model`. This `model` is then used by all behavior hooks to apply additional popup
@@ -56,7 +56,7 @@ target element and adds `useCloseOnOutsideClick`, `useCloseOnEscape`, `useInitia
 `useReturnFocus` behaviors. You can read through the [hooks](#hooks) section to learn about all the
 popup behaviors. For accessibility, these behaviors should be included most of the time.
 
-<ExampleCodeBlock code={Simple} />
+<ExampleCodeBlock code={Basic} />
 
 ### Initial focus
 
