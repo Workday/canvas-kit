@@ -3,7 +3,7 @@
 import {jsx} from '@emotion/core';
 import React from 'react';
 import {colors} from '@workday/canvas-kit-react/tokens';
-import {StaticStates} from '@workday/canvas-kit-preview-react/tokens';
+import {StaticStates} from '@workday/canvas-kit-react/common';
 import {ComponentStatesTable, withSnapshotsEnabled} from '../../../../utils/storybook';
 import ColorPicker from '../lib/ColorPicker';
 

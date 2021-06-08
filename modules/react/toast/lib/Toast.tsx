@@ -1,3 +1,5 @@
+/** @jsx jsx */
+import {jsx} from '@emotion/core';
 import * as React from 'react';
 import styled from '@emotion/styled';
 
@@ -7,6 +9,7 @@ import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {checkIcon} from '@workday/canvas-system-icons-web';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {createComponent, ExtractProps} from '@workday/canvas-kit-react/common';
+import {Hyperlink, HyperlinkProps} from '@workday/canvas-kit-react/button';
 
 export interface ToastProps extends ExtractProps<typeof Popup.Card> {
   /**
@@ -42,7 +45,7 @@ const ToastContentContainer = styled('div')<Pick<ToastProps, 'onClose'>>(
   {
     display: 'flex',
     alignItems: 'center',
-    ...type.body2,
+    ...type.levels.subtext.medium,
   },
   ({onClose}) => ({
     marginRight: onClose ? space.m : undefined,
@@ -54,14 +57,21 @@ const ToastSystemIcon = styled(SystemIcon)({
   alignSelf: 'start',
 });
 
-const ActionButton = styled('button')({
-  ...type.body2,
-  ...type.variant.link,
+const actionButtonStyles = {
+  ...type.levels.subtext.medium,
   display: 'block',
   backgroundColor: 'transparent', // To prevent Safari from rendering grey 'buttonface' as bgcolor
   border: 'none',
   marginTop: space.xxxs,
-});
+};
+
+interface ActionButtonProps extends HyperlinkProps {
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+}
+
+const ActionButton = (props: ActionButtonProps) => {
+  return <Hyperlink as="button" css={actionButtonStyles} {...props} />;
+};
 
 const Message = styled('div')({
   wordBreak: 'break-word',

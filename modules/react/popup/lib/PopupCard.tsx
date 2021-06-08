@@ -87,7 +87,7 @@ export const PopupCard = createComponent('div')({
         padding={padding}
         {...props}
       >
-        {children}
+        <Card.Body>{children}</Card.Body>
       </StyledPopupCard>
     );
   },

@@ -167,7 +167,7 @@ const SelectButton = styled('button')<
   Pick<SelectBaseProps, 'error' | 'grow' | 'menuVisibility' | 'theme'> & StyledType
 >(
   {
-    ...type.body,
+    ...type.levels.subtext.large,
     border: `${buttonBorderWidth}px solid ${inputColors.border}`,
     cursor: 'default',
     display: 'block',

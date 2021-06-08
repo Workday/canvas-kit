@@ -20,7 +20,7 @@ const ListItem = styled('li')(
     alignItems: 'center',
     flexDirection: 'column',
     textAlign: 'left',
-    ...type.body,
+    ...type.levels.subtext.large,
   },
 
   ({maxWidth}: CurrentItemProps) => ({

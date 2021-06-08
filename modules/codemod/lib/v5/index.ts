@@ -14,6 +14,10 @@ import compoundCard from './compoundCard';
 import moveInputProvider from './moveInputProvider';
 // input codemods
 import renameInputRefs from './renameInputRefs';
+// type hierarchy codemods
+import mapTypeTokensToNewHierarchy from './mapTypeTokensToNewHierarchy';
+// preview/tokens codemods
+import renamePreviewTokenImports from './renamePreviewTokenImports';
 
 import {API, FileInfo, Options} from 'jscodeshift';
 
@@ -31,6 +35,8 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
     compoundCard,
     moveInputProvider,
     renameInputRefs,
+    mapTypeTokensToNewHierarchy,
+    renamePreviewTokenImports,
   ];
 
   return fixes.reduce((source, fix) => fix({...file, source}, api, options), file.source);

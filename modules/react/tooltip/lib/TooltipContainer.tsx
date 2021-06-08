@@ -47,7 +47,7 @@ const defaultTransformOrigin = {
 
 export const TooltipContainer = styled('div')<TooltipContainerProps>(
   {
-    ...type.body,
+    ...type.levels.subtext.large,
     display: 'inline-flex',
     padding: spaceNumbers.xxs + spaceNumbers.xxxs,
     color: colors.frenchVanilla100,

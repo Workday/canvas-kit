@@ -37,7 +37,7 @@ export interface BannerProps extends Themeable, React.ButtonHTMLAttributes<HTMLB
 
 const BannerWrapper = styled('button')<BannerProps>(
   {
-    ...type.body2,
+    ...type.levels.subtext.medium,
     backgroundColor: colors.cantaloupe400,
     boxSizing: 'border-box',
     color: colors.blackPepper400,

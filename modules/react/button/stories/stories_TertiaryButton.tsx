@@ -4,8 +4,7 @@ import {jsx, CSSObject} from '@emotion/core';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 
-import {colors} from '@workday/canvas-kit-react/tokens';
-import {type} from '@workday/canvas-kit-preview-react/tokens';
+import {colors, type} from '@workday/canvas-kit-react/tokens';
 import {editIcon, arrowRightIcon} from '@workday/canvas-system-icons-web';
 
 import {Hyperlink, TertiaryButton} from '@workday/canvas-kit-react/button';
@@ -108,12 +107,17 @@ storiesOf('Components/Buttons/Button/React/Tertiary', module)
   .add('Hyperlink', () => (
     <div className="story">
       <h3>Default</h3>
-      <div css={type.body}>
+      <div css={type.levels.body.small}>
         Here is a <Hyperlink>Link</Hyperlink> to something
       </div>
       <h3>Inverse</h3>
       <div
-        css={{...blueBackground, ...type.body, display: 'block', color: colors.frenchVanilla100}}
+        css={{
+          ...blueBackground,
+          ...type.levels.body.small,
+          display: 'block',
+          color: colors.frenchVanilla100,
+        }}
       >
         Here is a <Hyperlink variant="inverse">Link</Hyperlink> to something
       </div>

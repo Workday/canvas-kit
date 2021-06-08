@@ -46,7 +46,7 @@ export interface SelectProps extends Themeable, GrowthBehavior {
 
 const StyledSelect = styled('select')<SelectProps & StyledType>(
   {
-    ...type.body,
+    ...type.levels.subtext.large,
     border: `1px solid ${inputColors.border}`,
     display: 'block',
     backgroundColor: inputColors.background,

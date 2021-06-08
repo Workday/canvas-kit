@@ -1,6 +1,6 @@
 /// <reference path="../../../../../typings.d.ts" />
 import * as React from 'react';
-import {StaticStates} from '@workday/canvas-kit-preview-react/tokens';
+import {StaticStates} from '@workday/canvas-kit-react/common';
 import {
   ComponentStatesTable,
   permutateProps,

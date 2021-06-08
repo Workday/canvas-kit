@@ -52,7 +52,7 @@ const Container = styled('div')<Pick<PageHeaderProps, 'breakpoint' | 'capWidth'>
 );
 
 const Title = styled('h2')({
-  ...type.h1,
+  ...type.levels.heading.medium,
   color: colors.frenchVanilla100,
   padding: `${space.xs} 0`,
   margin: 0,

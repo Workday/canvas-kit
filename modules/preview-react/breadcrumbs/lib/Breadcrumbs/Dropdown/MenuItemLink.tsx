@@ -10,7 +10,7 @@ interface DropdownMenuItemLinkProps extends React.HTMLAttributes<HTMLAnchorEleme
 }
 
 const MenuItemLink = styled('a')({
-  ...type.body,
+  ...type.levels.subtext.large,
   boxSizing: 'border-box',
   textAlign: 'left',
   color: colors.blackPepper300,

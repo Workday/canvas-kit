@@ -227,7 +227,7 @@ const RadioCheck = styled('div')<Pick<RadioProps, 'checked'>>(
 
 const RadioLabel = styled('label')<{disabled?: boolean}>(
   {
-    ...canvas.type.body,
+    ...canvas.type.levels.subtext.large,
     paddingLeft: radioLabelDistance,
   },
   ({disabled}) => (disabled ? {color: inputColors.disabled.text} : {cursor: 'pointer'})

@@ -6,8 +6,8 @@ import {
   iconColors,
   typeColors,
   space,
+  type,
 } from '@workday/canvas-kit-react/tokens';
-import {type} from '@workday/canvas-kit-preview-react/tokens';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {SystemIcon, SystemIconProps} from '@workday/canvas-kit-react/icon';
 
@@ -57,7 +57,7 @@ export interface MenuItemProps extends React.LiHTMLAttributes<HTMLLIElement> {
 
 const Item = styled('li')<Pick<MenuItemProps, 'isDisabled' | 'isFocused'>>(
   {
-    ...type.body2,
+    ...type.levels.subtext.large,
     padding: `${space.xxs} ${space.s}`,
     height: space.xl,
     boxSizing: 'border-box',

@@ -1,12 +1,24 @@
 import * as React from 'react';
 import {Flex, FlexProps} from '@workday/canvas-kit-labs-react/layout';
 import {Box} from '@workday/canvas-kit-labs-react/common';
-import {type} from '@workday/canvas-kit-preview-react/tokens';
+import {type} from '@workday/canvas-kit-react/tokens';
 
 // temporary placeholder until type components are added to canvas-kit
-const H3 = props => <h3 style={{...type.h4, ...type.variant.inverse, margin: 0}} {...props} />;
+const H3 = props => (
+  <h3
+    style={{
+      ...type.levels.body.large,
+      ...type.variants.inverse,
+      margin: 0,
+      fontWeight: type.properties.fontWeights.bold,
+    }}
+    {...props}
+  />
+);
 
-const Body = props => <p style={{...type.body, ...type.variant.inverse, margin: 0}} {...props} />;
+const Body = props => (
+  <p style={{...type.levels.body.small, ...type.variants.inverse, margin: 0}} {...props} />
+);
 
 const Card = ({children, ...props}: FlexProps) => (
   <Flex

@@ -3,7 +3,7 @@ import {css, jsx} from '@emotion/core';
 import * as React from 'react';
 import styled from '@emotion/styled';
 import {colors, commonColors, type, space} from '@workday/canvas-kit-react/tokens';
-import {PrimaryButton} from '@workday/canvas-kit-react/button';
+import {Hyperlink, HyperlinkProps, PrimaryButton} from '@workday/canvas-kit-react/button';
 
 export interface CookieBannerProps {
   /**
@@ -36,7 +36,7 @@ export interface CookieBannerProps {
 }
 
 const Banner = styled('div')(
-  type.body2,
+  type.levels.subtext.medium,
   {
     backgroundColor: commonColors.background,
     borderTop: `1px solid ${colors.soap400}`,
@@ -75,7 +75,7 @@ const rowStyle = css({
   display: 'flex',
 });
 
-const CookieSettings = styled('button')(type.body2, type.link, {
+const cookieSettingsStyles = css({
   marginRight: space.s,
   border: 0,
   fontWeight: 500,
@@ -85,6 +85,14 @@ const CookieSettings = styled('button')(type.body2, type.link, {
   height: '0%',
   alignSelf: 'center',
 });
+
+interface CookieSettingsProps extends HyperlinkProps {
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+}
+
+const CookieSettings = (props: CookieSettingsProps) => {
+  return <Hyperlink as="button" css={cookieSettingsStyles} {...props} />;
+};
 
 export default class CookieBanner extends React.Component<CookieBannerProps> {
   public static DefaultNotice =

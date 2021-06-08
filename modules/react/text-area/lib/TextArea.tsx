@@ -53,7 +53,7 @@ export enum TextAreaResizeDirection {
 
 const StyledTextArea = styled('textarea')<TextAreaProps & StyledType>(
   ({theme, error}) => ({
-    ...type.body,
+    ...type.levels.subtext.large,
     border: `1px solid ${inputColors.border}`,
     display: 'block',
     backgroundColor: inputColors.background,

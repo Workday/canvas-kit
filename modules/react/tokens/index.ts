@@ -12,7 +12,14 @@ import {
   CanvasSpaceNumbers,
   spaceNumbers,
 } from './lib/space';
-import {type, CanvasType, fontFamily, monoFontFamily, CanvasTypeVariant} from './lib/type';
+import {type,
+  fontFamily,
+  monoFontFamily,
+  CanvasType,
+  CanvasTypeProperties,
+  CanvasTypeVariants,
+  CanvasTypeHierarchy,
+} from './lib/type';
 import {CSSProperties} from './lib/types';
 
 const {default: colors, gradients, ...semanticColors} = canvasColorsWeb;
@@ -26,7 +33,6 @@ const canvas = {
   ...semanticColors,
 };
 
-export * from './lib/TypeWrappers';
 export * from '@workday/canvas-colors-web';
 export {
   borderRadius,
@@ -56,5 +62,7 @@ export type {
   CanvasSpaceNumberValues,
   CanvasSpaceNumbers,
   CanvasType,
-  CanvasTypeVariant,
+  CanvasTypeProperties,
+  CanvasTypeVariants,
+  CanvasTypeHierarchy,
 }

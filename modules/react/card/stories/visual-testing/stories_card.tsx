@@ -1,7 +1,7 @@
 /// <reference path="../../../../../typings.d.ts" />
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
-import {StaticStates} from '@workday/canvas-kit-preview-react/tokens';
+import {StaticStates} from '@workday/canvas-kit-react/common';
 import {ComponentStatesTable, withSnapshotsEnabled} from '../../../../../utils/storybook';
 
 import {Card} from '@workday/canvas-kit-react/card';

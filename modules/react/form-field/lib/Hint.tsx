@@ -20,13 +20,15 @@ export interface HintProps extends Themeable, React.HTMLAttributes<HTMLParagraph
 }
 
 const Label = styled('span')<Pick<HintProps, 'error'>>(
-  type.body2,
-  type.variant.label,
+  type.levels.subtext.medium,
+  {
+    fontWeight: type.properties.fontWeights.medium,
+  },
   ({error, theme}) => error === ErrorType.Error && {color: theme.canvas.palette.error.main}
 );
 
 const Message = styled('p')<Pick<HintProps, 'error'>>(
-  type.body2,
+  type.levels.subtext.medium,
   {
     margin: `${space.xxs} 0 0`,
     width: '100%',

@@ -273,7 +273,7 @@ const IndeterminateBox = styled('div')(
 
 const CheckboxLabel = styled('label')<{disabled?: boolean}>(
   {
-    ...canvas.type.body,
+    ...canvas.type.levels.subtext.large,
     paddingLeft: checkboxLabelDistance,
   },
   ({disabled}) => (disabled ? {color: inputColors.disabled.text} : {cursor: 'pointer'})

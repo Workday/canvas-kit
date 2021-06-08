@@ -24,7 +24,7 @@ const Container = styled('button')({
   height: space.l,
   margin: `-${space.xxs} -${space.s} ${space.xxs}`,
   padding: `0px ${space.s}`,
-  ...type.body2,
+  ...type.levels.subtext.medium,
   whiteSpace: 'nowrap',
   border: 'none',
   outline: 'none',

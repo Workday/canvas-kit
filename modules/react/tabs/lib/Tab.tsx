@@ -65,8 +65,8 @@ export interface TabProps {
 
 const StyledButton = styled('button')<{isSelected: boolean} & StyledType>(
   {
-    ...type.body,
-    ...type.variant.button,
+    ...type.levels.subtext.large,
+    fontWeight: type.properties.fontWeights.bold,
     border: 'none',
     backgroundColor: 'transparent',
     flex: '0 0 auto',
@@ -79,18 +79,23 @@ const StyledButton = styled('button')<{isSelected: boolean} & StyledType>(
     marginLeft: `${space.xxxs}`,
     borderRadius: `${borderRadius.m} ${borderRadius.m} 0px 0px`,
     transition: 'background 150ms ease, color 150ms ease',
+
     '&:first-of-type': {
       marginLeft: 0,
     },
+
     ...hideMouseFocus,
+
     '&:hover, &:focus': {
       backgroundColor: colors.soap200,
       color: colors.blackPepper400,
     },
+
     '&:focus': {
       outline: `none`,
       ...focusRing({inset: 'outer', width: 0, separation: 2}),
     },
+
     '&:disabled': {
       color: colors.licorice100,
       '&:hover': {

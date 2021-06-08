@@ -12,7 +12,7 @@ export interface CardHeadingProps {
   children?: React.ReactNode;
 }
 
-const Heading = styled('h3')<StyledType>(type.h3, {
+const Heading = styled('h3')<StyledType>(type.levels.body.large, {
   marginBottom: space.m,
   marginTop: 0,
 });

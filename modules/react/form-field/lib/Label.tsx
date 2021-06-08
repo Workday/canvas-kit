@@ -38,8 +38,8 @@ export interface LabelProps extends FormFieldLabelPositionBehavior {
 
 const labelStyles = [
   {
-    ...type.body,
-    ...type.variant.label,
+    ...type.levels.subtext.large,
+    fontWeight: type.properties.fontWeights.medium,
     padding: 0,
   },
   ({labelPosition, accessibleHide}: Pick<LabelProps, 'labelPosition' | 'accessibleHide'>) => {

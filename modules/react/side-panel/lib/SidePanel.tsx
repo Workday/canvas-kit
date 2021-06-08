@@ -79,7 +79,7 @@ export enum SidePanelBackgroundColor {
 const closedWidth = space.xxl;
 
 const Header = styled('h2')({
-  ...type.h2,
+  ...type.levels.heading.small,
   marginTop: space.zero,
 });
 

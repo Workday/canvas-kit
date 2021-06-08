@@ -2,7 +2,6 @@
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
 import * as React from 'react';
-import {StaticStates} from '@workday/canvas-kit-preview-react/tokens';
 import {
   ComponentStatesTable,
   withSnapshotsEnabled,
@@ -11,7 +10,7 @@ import {
 import {playCircleIcon} from '@workday/canvas-system-icons-web';
 import {ToolbarIconButton} from '@workday/canvas-kit-react/button';
 import {Container, stateTableColumnProps} from './utils';
-import {PartialEmotionCanvasTheme} from '@workday/canvas-kit-react/common';
+import {PartialEmotionCanvasTheme, StaticStates} from '@workday/canvas-kit-react/common';
 
 export default withSnapshotsEnabled({
   title: 'Testing/React/Buttons/Button/Toolbar Icon Button',

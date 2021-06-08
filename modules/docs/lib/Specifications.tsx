@@ -85,20 +85,18 @@ export const Specifications = ({file, name}: SpecificationsProps) => {
 
     const [, first, kind, name, last] = matches;
 
-    return (
-      <>
-        {first.replace(/given /i, '')}
-        <Hyperlink
-          href={`${storybookBaseUrl}?path=/story/${toId(
-            kind,
-            name.replace('DefaultStory', 'Default Story')
-          )}`}
-        >
-          {name.replace('DefaultStory', 'Default')}
-        </Hyperlink>
-        {last}
-      </>
-    );
+    return <>
+      {first.replace(/given /i, '')}
+      <Hyperlink
+        href={`${storybookBaseUrl}?path=/story/${toId(
+          kind,
+          name.replace('DefaultStory', 'Default Story')
+        )}`}
+      >
+        {name.replace('DefaultStory', 'Default')}
+      </Hyperlink>
+      {last}
+    </>;
   };
 
   return block.type === 'describe' ? (

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {type} from '@workday/canvas-kit-preview-react/tokens';
+import {CSSObject} from '@emotion/core';
 import {
   focusRing,
   useTheme,
@@ -7,7 +7,7 @@ import {
   EmotionCanvasTheme,
   createComponent,
 } from '@workday/canvas-kit-react/common';
-import {colors, space, borderRadius} from '@workday/canvas-kit-react/tokens';
+import {colors, space, type, borderRadius} from '@workday/canvas-kit-react/tokens';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {ButtonColors} from './types';
 import {ButtonContainer, ButtonLabelIcon, ButtonLabel} from './parts';
@@ -150,17 +150,17 @@ export const TertiaryButton = createComponent('button')({
     Element
   ) => {
     // Note: We don't use ButtonLabel because the label styles differ from other button types
-    const allContainerStyles = allCaps
+    const allContainerStyles: CSSObject = allCaps
       ? {
           ...containerStyles,
-          ...type.variant.caps,
-          ...type.variant.button,
-          fontSize: size === 'medium' ? type.body.fontSize : undefined,
+          textTransform: 'uppercase',
+          fontWeight: type.properties.fontWeights.bold,
+          fontSize: size === 'medium' ? type.properties.fontSizes[16] : undefined,
           letterSpacing: '.5px',
         }
       : {
           ...containerStyles,
-          fontSize: size === 'medium' ? type.body.fontSize : undefined,
+          fontSize: size === 'medium' ? type.properties.fontSizes[14] : undefined,
         };
 
     return (

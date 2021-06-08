@@ -25,7 +25,7 @@ const StyledTextInput = styled('input')<
   Pick<TextInputProps, 'error' | 'grow' | 'width' | 'theme'> & StyledType
 >(
   {
-    ...type.body,
+    ...type.levels.subtext.large,
     border: `1px solid ${inputColors.border}`,
     display: 'block',
     backgroundColor: inputColors.background,

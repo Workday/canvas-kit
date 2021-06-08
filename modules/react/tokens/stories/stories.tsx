@@ -7,7 +7,7 @@ import withReadme from 'storybook-readme/with-readme';
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
 import {pickForegroundColor} from '@workday/canvas-kit-react/common';
 
-import {colors, type, depth, space, borderRadius, H1, H2, H3, H4, H5} from '..';
+import {colors, type, depth, space, borderRadius} from '@workday/canvas-kit-react/tokens';
 import README from '../README.md';
 
 export default withSnapshotsEnabled({
@@ -44,57 +44,38 @@ export const Depth = () => (
 
 export const Type = () => (
   <React.Fragment>
-    <h1 css={type.dataViz1}>Data Viz 1 Header</h1>
-    <h1 css={type.dataViz2}>Data Viz 2 Header</h1>
-    <H1>H1 Header</H1>
-    <H2>H2 Header</H2>
-    <H3>H3 Header</H3>
-    <H4>H4 Header</H4>
-    <H5>H5 Header</H5>
-    <p css={type.body}>
-      <strong>Body: </strong> Tacos chartreuse raclette single-origin coffee ethical tilde ennui.
-      Magna asymmetrical church-key farm-to-table dreamcatcher nisi iceland photo booth kitsch next
-      level pop-up banh mi quinoa exercitation hella. Raw denim organic enim laboris sustainable.
-      Polaroid occupy typewriter distillery. Kinfolk nisi man braid try-hard raw denim, thundercats
-      salvia intelligentsia jean shorts officia. Heirloom craft beer put a bird on it occaecat
-    </p>
-    <p css={type.body2}>
-      <strong>Body 2: </strong> Tacos chartreuse raclette single-origin coffee ethical tilde ennui.
-      Magna asymmetrical church-key farm-to-table dreamcatcher nisi iceland photo booth kitsch next
-      level pop-up banh mi quinoa exercitation hella. Raw denim organic enim laboris sustainable.
-      Polaroid occupy typewriter distillery. Kinfolk nisi man braid try-hard raw denim, thundercats
-      salvia intelligentsia jean shorts officia. Heirloom craft beer put a bird on it occaecat
-    </p>
-    <p css={type.small}>
-      <strong>Small: </strong> Tacos chartreuse raclette single-origin coffee ethical tilde ennui.
-      Magna asymmetrical church-key farm-to-table dreamcatcher nisi iceland photo booth kitsch next
-      level pop-up banh mi quinoa exercitation hella. Raw denim organic enim laboris sustainable.
-      Polaroid occupy typewriter distillery. Kinfolk nisi man braid try-hard raw denim, thundercats
-      salvia intelligentsia jean shorts officia. Heirloom craft beer put a bird on it occaecat
-    </p>
+    <h2>Levels (Hierarchy)</h2>
+
+    <h3 css={type.levels.title.large}>Title Large Heading</h3>
+    <h3 css={type.levels.title.medium}>Title Medium Heading</h3>
+    <h3 css={type.levels.title.small}>Title Small Heading</h3>
+
+    <h3 css={type.levels.heading.large}>Heading Large Heading</h3>
+    <h3 css={type.levels.heading.medium}>Heading Medium Heading</h3>
+    <h3 css={type.levels.heading.small}>Heading Small Heading</h3>
+
+    <h3 css={type.levels.body.large}>Body Large Heading</h3>
+    <h3 css={type.levels.body.medium}>Body Medium Heading</h3>
+    <h3 css={type.levels.body.small}>Body Small Heading</h3>
+
+    <h3 css={type.levels.subtext.large}>Subtext Large Heading</h3>
+    <h3 css={type.levels.subtext.medium}>Subtext Medium Heading</h3>
+    <h3 css={type.levels.subtext.small}>Subtext Small Heading</h3>
+
     <hr />
 
-    <H3>Variants</H3>
-    <div css={{...type.body, '& > *': {display: 'block', margin: '4px 0'}}}>
-      <span css={type.variant.button}>Button Text</span>
-      <span css={type.variant.caps}>Caps Text</span>
-      <label css={type.variant.label}>Label Text</label>
-      <span css={type.variant.hint}>Hint Text</span>
-      <span css={type.variant.error}>Error Text</span>
-      <div>
-        <a href="#" css={type.variant.link}>
-          Link Text
-        </a>
-      </div>
-      <span css={[type.variant.inverse, inverseStyle]}>Inverse Text</span>
-      <span css={type.variant.mono}>Mono Text</span>
+    <h3>Variants</h3>
+    <div css={{...type.levels.body.medium, '& > *': {display: 'block', margin: '4px 0'}}}>
+      <span css={type.variants.error}>Error Text</span>
+      <span css={type.variants.hint}>Hint Text</span>
+      <span css={[type.variants.inverse, inverseStyle]}>Inverse Text</span>
     </div>
   </React.Fragment>
 );
 
 const Shape = styled('div')<{radius?: string | number; size?: string | number}>(
   {
-    ...type.h4,
+    ...type.levels.body.small,
     margin: space.m,
     background: colors.blueberry400,
     color: colors.frenchVanilla100,
@@ -103,8 +84,8 @@ const Shape = styled('div')<{radius?: string | number; size?: string | number}>(
     justifyContent: 'center',
     flexDirection: 'column',
     '& span': {
-      ...type.body2,
-      ...type.variant.mono,
+      ...type.levels.subtext.medium,
+      fontFamily: type.properties.fontFamilies.monospace,
       display: 'block',
       color: colors.blueberry100,
     },
@@ -119,13 +100,13 @@ const Shape = styled('div')<{radius?: string | number; size?: string | number}>(
 );
 
 const SizeLabel = styled('div')({
-  ...type.h4,
+  ...type.levels.body.small,
   margin: space.s,
   width: 80,
   '& span': {
-    ...type.body2,
-    ...type.variant.mono,
-    ...type.variant.hint,
+    ...type.levels.subtext.large,
+    fontFamily: type.properties.fontFamilies.monospace,
+    ...type.variants.hint,
     display: 'block',
   },
 });
@@ -179,7 +160,7 @@ const Palette = styled('ul')({
 
 const Swatch = styled('li')<{bg: string; primary?: boolean}>(
   {
-    ...type.body,
+    ...type.levels.body.medium,
     fontWeight: 700,
     padding: `0 ${space.m}`,
     height: space.xl,
@@ -189,7 +170,7 @@ const Swatch = styled('li')<{bg: string; primary?: boolean}>(
   },
   ({primary, bg}) =>
     primary && {
-      ...type.h3,
+      ...type.levels.body.large,
       height: space.xxxl,
       paddingTop: space.s,
       paddingBottom: space.s,
@@ -228,7 +209,9 @@ export const Colors = () => (
           return (
             <Swatch bg={(colors as any)[color]} key={color}>
               <span>{level}00</span>
-              <span css={type.variant.mono}>{(colors as any)[color]}</span>
+              <span css={{fontFamily: type.properties.fontFamilies.monospace}}>
+                {(colors as any)[color]}
+              </span>
             </Swatch>
           );
         })}

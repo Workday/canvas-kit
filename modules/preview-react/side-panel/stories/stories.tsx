@@ -5,8 +5,7 @@ import withReadme from 'storybook-readme/with-readme';
 import {jsx} from '@emotion/core';
 import {SidePanel, useSidePanel} from '@workday/canvas-kit-preview-react/side-panel';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
-import {colors, depth} from '@workday/canvas-kit-react/tokens';
-import {type} from '@workday/canvas-kit-preview-react/tokens';
+import {colors, depth, type} from '@workday/canvas-kit-react/tokens';
 import {AccentIcon} from '@workday/canvas-kit-react/icon';
 import {rocketIcon} from '@workday/canvas-accent-icons-web';
 import {plusIcon} from '@workday/canvas-system-icons-web';
@@ -40,7 +39,14 @@ export const Default = () => {
             }}
           >
             <AccentIcon style={{marginRight: 16}} icon={rocketIcon} />
-            <h3 {...labelProps} style={{...type.h4, color: colors.licorice500}}>
+            <h3
+              {...labelProps}
+              style={{
+                ...type.levels.body.large,
+                color: colors.licorice500,
+                fontWeight: type.properties.fontWeights.bold,
+              }}
+            >
               Tasks Panel
             </h3>
           </div>

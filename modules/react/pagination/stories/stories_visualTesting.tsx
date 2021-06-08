@@ -1,8 +1,7 @@
 /// <reference path="../../../../typings.d.ts" />
 import React from 'react';
 import withReadme from 'storybook-readme/with-readme';
-import {ContentDirection} from '@workday/canvas-kit-react/common';
-import {StaticStates} from '@workday/canvas-kit-preview-react/tokens';
+import {ContentDirection, StaticStates} from '@workday/canvas-kit-react/common';
 
 import {ComponentStatesTable, withSnapshotsEnabled} from '../../../../utils/storybook';
 
