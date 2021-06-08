@@ -11,7 +11,7 @@ export interface GoToLabelProps extends React.LabelHTMLAttributes<HTMLLabelEleme
 }
 
 const labelStyles = css({
-  ...type.body,
+  ...type.levels.subtext.large,
   color: typeColors.hint,
   whiteSpace: 'nowrap',
 });

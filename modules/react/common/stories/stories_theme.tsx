@@ -26,7 +26,7 @@ const Palette = styled('ul')({
 });
 const Swatch = styled('li')(
   {
-    ...type.body,
+    ...type.levels.subtext.large,
     padding: `0 ${space.m}`,
     height: space.xl,
     display: 'flex',
@@ -42,11 +42,12 @@ const Swatch = styled('li')(
 );
 const PaletteTitle = styled(Swatch)(
   {
-    ...type.h3,
+    ...type.levels.body.large,
     height: space.xxl,
     paddingBottom: space.s,
     alignItems: 'flex-end',
     textTransform: 'capitalize',
+    fontWeight: type.properties.fontWeights.bold,
   },
   (props: any) => ({
     span: {
@@ -72,12 +73,13 @@ const ThemedComponent = styled('h1')<Themeable>(
       },
     },
   }) => ({
-    ...type.h3,
+    ...type.levels.body.large,
     background: themePrimary.main,
     color: themePrimary.contrast,
     borderRadius: borderRadius.m,
     padding: space.xs,
     display: 'inline-block',
+    fontWeight: type.properties.fontWeights.bold,
   })
 );
 

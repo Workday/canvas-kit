@@ -64,7 +64,7 @@ const HeaderShell = styled('div')<PickRequired<HeaderProps, 'themeColor', 'varia
     display: 'flex',
     alignItems: 'center',
     boxSizing: 'border-box',
-    ...type.body,
+    ...type.levels.subtext.large,
     WebkitFontSmoothing: 'antialiased',
     MozOsxFontSmoothing: 'grayscale',
     position: 'relative',

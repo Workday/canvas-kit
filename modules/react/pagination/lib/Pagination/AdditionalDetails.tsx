@@ -17,7 +17,7 @@ export interface AdditionalDetailsProps extends FlexProps {
 
 // Ideally, these styles would be applied directly to a Text component
 const textStyles = css({
-  ...type.body,
+  ...type.levels.subtext.large,
   color: typeColors.hint,
 });
 

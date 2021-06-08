@@ -2,14 +2,14 @@ import * as React from 'react';
 import {HStack, Stack, Flex} from '@workday/canvas-kit-labs-react/layout';
 import {Box} from '@workday/canvas-kit-labs-react/common';
 import {TertiaryButton} from '@workday/canvas-kit-react/button';
-import {type} from '@workday/canvas-kit-preview-react/tokens';
+import {type} from '@workday/canvas-kit-react/tokens';
 
 const Card = ({heading = '', body = ''}) => (
   <Flex flex={1} flexBasis="auto" depth={2} padding="s" backgroundColor="frenchVanilla100">
     <Stack flexDirection="column" spacing="xs">
-      <h3 style={{...type.h3, margin: 0}}>{heading}</h3>
+      <h3 style={{...type.levels.heading.small, margin: 0}}>{heading}</h3>
       <Box maxWidth={240}>
-        <p style={{...type.body, margin: 0}}>{body}</p>
+        <p style={{...type.levels.body.small, margin: 0}}>{body}</p>
       </Box>
       <Box>
         <TertiaryButton>Add to order</TertiaryButton>

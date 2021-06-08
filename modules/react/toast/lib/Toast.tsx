@@ -45,7 +45,7 @@ const ToastContentContainer = styled('div')<Pick<ToastProps, 'onClose'>>(
   {
     display: 'flex',
     alignItems: 'center',
-    ...type.body2,
+    ...type.levels.subtext.medium,
   },
   ({onClose}) => ({
     marginRight: onClose ? space.m : undefined,

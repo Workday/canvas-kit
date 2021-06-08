@@ -1,8 +1,8 @@
 /// <reference path="../../../../../typings.d.ts" />
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
-import {colors} from '@workday/canvas-kit-react/tokens';
-import {StaticStates, type} from '@workday/canvas-kit-preview-react/tokens';
+import {colors, type} from '@workday/canvas-kit-react/tokens';
+import {StaticStates} from '@workday/canvas-kit-react/common';
 import {
   ComponentStatesTable,
   permutateProps,
@@ -41,7 +41,7 @@ export const HyperlinkStates = () => (
         <Container blue={props.variant === 'inverse'}>
           <div
             css={{
-              ...type.body2,
+              ...type.levels.subtext.large,
               color: props.variant === 'inverse' ? colors.frenchVanilla100 : undefined,
             }}
           >

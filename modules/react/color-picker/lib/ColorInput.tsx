@@ -55,7 +55,8 @@ const CustomHexInput = styled(TextInput)<Pick<ColorInputProps, 'disabled' | 'gro
     boxSizing: 'border-box',
     minWidth: colorInputWidth,
     width: colorInputWidth,
-    ...type.variant.mono,
+    fontFamily: type.properties.fontFamilies.monospace,
+
     '&:focus::placeholder': {
       color: 'transparent',
     },
@@ -91,8 +92,8 @@ const PoundSignPrefix = styled('span')<Pick<ColorInputProps, 'disabled'>>(
   {
     position: 'absolute',
     top: 10,
-    ...type.body,
-    ...type.variant.mono,
+    ...type.levels.subtext.large,
+    fontFamily: type.properties.fontFamilies.monospace,
   },
   ({disabled}) => ({
     color: disabled ? inputColors.disabled.text : undefined,

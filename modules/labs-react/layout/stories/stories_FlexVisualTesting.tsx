@@ -1,10 +1,9 @@
 import React from 'react';
 
-import {StaticStates} from '@workday/canvas-kit-preview-react/tokens';
 import {ComponentStatesTable, withSnapshotsEnabled} from '../../../../utils/storybook';
 
 import {Flex} from '@workday/canvas-kit-labs-react/layout';
-import {ContentDirection} from '@workday/canvas-kit-react/common';
+import {ContentDirection, StaticStates} from '@workday/canvas-kit-react/common';
 
 export default withSnapshotsEnabled({
   title: 'Testing/React/Labs/Layout/Flex',

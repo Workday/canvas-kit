@@ -27,7 +27,7 @@ type StyledLinkProps = Pick<BreadcrumbLinkProps, 'maxWidth' | 'href'>;
 const StyledLink = styled('a')(
   {
     textAlign: 'left',
-    ...type.body,
+    ...type.levels.subtext.large,
     ...type.variant.link,
   },
   ({maxWidth}: StyledLinkProps) => ({

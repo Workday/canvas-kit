@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {styled} from '@workday/canvas-kit-react/common';
-import {type} from '@workday/canvas-kit-preview-react/tokens';
-import canvas from '@workday/canvas-kit-react/tokens';
+import canvas, {type} from '@workday/canvas-kit-react/tokens';
 import {IconButton, IconButtonProps} from '@workday/canvas-kit-react/button';
 
 import {PaginationModel} from './types';
@@ -14,7 +13,7 @@ const toggledStyles = {
 
 const StyledPageButton = styled(IconButton)<{toggled?: boolean}>(
   {
-    ...type.small,
+    ...type.levels.subtext.medium,
   },
   ({toggled}) => {
     return toggled ? toggledStyles : {};

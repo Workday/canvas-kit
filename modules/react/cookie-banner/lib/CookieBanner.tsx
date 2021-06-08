@@ -36,7 +36,7 @@ export interface CookieBannerProps {
 }
 
 const Banner = styled('div')(
-  type.body2,
+  type.levels.subtext.medium,
   {
     backgroundColor: commonColors.background,
     borderTop: `1px solid ${colors.soap400}`,

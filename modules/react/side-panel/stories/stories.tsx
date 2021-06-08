@@ -30,8 +30,9 @@ const ListItem = styled('li')({
   },
 });
 const ListTitle = styled('span')({
-  ...type.h4,
+  ...type.levels.body.small,
   paddingLeft: 24,
+  fontWeight: type.properties.fontWeights.bold,
 });
 const UnorderedList = styled('ul')({
   paddingLeft: 0,

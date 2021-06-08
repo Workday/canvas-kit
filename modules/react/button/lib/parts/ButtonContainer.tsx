@@ -1,8 +1,7 @@
 import * as React from 'react';
 import isPropValid from '@emotion/is-prop-valid';
 import {CSSObject} from '@emotion/core';
-import {type} from '@workday/canvas-kit-preview-react/tokens';
-import {borderRadius, space, spaceNumbers} from '@workday/canvas-kit-react/tokens';
+import {borderRadius, space, spaceNumbers, type} from '@workday/canvas-kit-react/tokens';
 import {
   GrowthBehavior,
   mouseFocusBehavior,
@@ -71,8 +70,8 @@ export const ButtonContainer = styled('button', {
   shouldForwardProp: prop => isPropValid(prop) && prop !== 'size',
 })<ButtonContainerProps & StyledType>(
   {
-    ...type.body2,
-    ...type.variant.button,
+    ...type.levels.subtext.large,
+    fontWeight: type.properties.fontWeights.bold,
     lineHeight: 'normal',
     boxSizing: 'border-box',
     display: 'inline-flex',
@@ -90,13 +89,19 @@ export const ButtonContainer = styled('button', {
     whiteSpace: 'nowrap',
     WebkitFontSmoothing: 'antialiased',
     MozOsxFontSmoothing: 'grayscale',
+
     transition:
       'box-shadow 120ms linear, border 120ms linear, background-color 120ms linear, color 120ms linear',
-    '&:hover:active': {transitionDuration: '40ms'}, // Makes the "down" state of the button happens faster than the hover state, so it animates in correctly.
+
+    // Makes the "down" state of the button happens faster than the hover state, so it animates in correctly.
+    '&:hover:active': {transitionDuration: '40ms'},
+
     '&:disabled, &:disabled:active': {cursor: 'default', boxShadow: 'none'},
+
     '& > *:first-of-type': {
       marginLeft: 0,
     },
+
     '& > *:last-of-type': {
       marginRight: 0,
     },
@@ -105,7 +110,7 @@ export const ButtonContainer = styled('button', {
     switch (size) {
       case 'large':
         return {
-          fontSize: type.body.fontSize,
+          fontSize: type.properties.fontSizes[16],
           minWidth: '112px',
           height: '48px',
           padding: `0 ${space.l}`,

@@ -6,7 +6,7 @@ export const borderWidth = 1;
 export const borderColor = colors.soap400;
 export const cellBorder = `${borderWidth}px solid ${borderColor}`;
 
-const TableComponent = styled('table')(type.body, {
+const TableComponent = styled('table')(type.levels.subtext.large, {
   width: '100%',
   border: cellBorder,
   borderSpacing: 0,

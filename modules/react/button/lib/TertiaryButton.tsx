@@ -160,7 +160,7 @@ export const TertiaryButton = createComponent('button')({
         }
       : {
           ...containerStyles,
-          fontSize: size === 'medium' ? type.body.fontSize : undefined,
+          fontSize: size === 'medium' ? type.properties.fontSizes[14] : undefined,
         };
 
     return (

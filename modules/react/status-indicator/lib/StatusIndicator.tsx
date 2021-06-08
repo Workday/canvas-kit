@@ -32,7 +32,7 @@ export interface StatusIndicatorGenericStyle extends GenericStyle {
 export const statusIndicatorStyles: StatusIndicatorGenericStyle = {
   classname: 'status-indicator',
   styles: {
-    ...type.small,
+    ...type.levels.subtext.medium,
     display: 'inline-flex',
     alignItems: 'center',
     verticalAlign: 'middle',

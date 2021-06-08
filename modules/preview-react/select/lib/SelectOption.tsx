@@ -50,13 +50,13 @@ const activeStyles = (theme: EmotionCanvasTheme): CSSObject => {
 
 const Option = styled('li')<SelectOptionProps>(
   {
-    ...type.body,
+    ...type.levels.subtext.large,
     cursor: 'default',
     // Apply listStyle at the list item style to ensure it's styled properly
     // in Visual Testing States
     listStyle: 'none',
     // In case the content of the option is empty/undefined for some reason
-    minHeight: type.body.lineHeight,
+    minHeight: type.levels.subtext.large.lineHeight,
     textAlign: 'left',
   },
   ({'aria-disabled': disabled, focused, interactive, theme}) => {
