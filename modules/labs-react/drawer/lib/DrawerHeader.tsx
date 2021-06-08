@@ -58,6 +58,7 @@ const HeaderContainer = styled('div')<Pick<DrawerHeaderProps, 'headerColor' | 'b
 const HeaderTitle = styled('h4')<Pick<DrawerHeaderProps, 'inverse'>>(
   {
     ...type.levels.body.small,
+    fontWeight: type.properties.fontWeights.bold,
     whiteSpace: 'nowrap',
     textOverflow: 'ellipsis',
     overflow: 'hidden',
