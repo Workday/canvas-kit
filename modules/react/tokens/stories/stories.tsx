@@ -76,6 +76,7 @@ export const Type = () => (
 const Shape = styled('div')<{radius?: string | number; size?: string | number}>(
   {
     ...type.levels.body.small,
+    fontWeight: type.properties.fontWeights.bold,
     margin: space.m,
     background: colors.blueberry400,
     color: colors.frenchVanilla100,
@@ -101,10 +102,11 @@ const Shape = styled('div')<{radius?: string | number; size?: string | number}>(
 
 const SizeLabel = styled('div')({
   ...type.levels.body.small,
+  fontWeight: type.properties.fontWeights.bold,
   margin: space.s,
   width: 80,
   '& span': {
-    ...type.levels.subtext.large,
+    ...type.levels.subtext.medium,
     fontFamily: type.properties.fontFamilies.monospace,
     ...type.variants.hint,
     display: 'block',
@@ -160,8 +162,8 @@ const Palette = styled('ul')({
 
 const Swatch = styled('li')<{bg: string; primary?: boolean}>(
   {
-    ...type.levels.body.medium,
-    fontWeight: 700,
+    ...type.levels.subtext.large,
+    fontWeight: type.properties.fontWeights.bold,
     padding: `0 ${space.m}`,
     height: space.xl,
     display: 'flex',
@@ -171,6 +173,7 @@ const Swatch = styled('li')<{bg: string; primary?: boolean}>(
   ({primary, bg}) =>
     primary && {
       ...type.levels.body.large,
+      fontWeight: type.properties.fontWeights.bold,
       height: space.xxxl,
       paddingTop: space.s,
       paddingBottom: space.s,
