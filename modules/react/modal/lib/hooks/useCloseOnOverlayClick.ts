@@ -15,8 +15,8 @@ export const useCloseOnOverlayClick = (model: PopupModel, elemProps = {}) => {
         return;
       }
       const elements = PopupStack.getElements()
-        .sort((a, b) => Number(a.style.zIndex) - Number(b.style.zIndex))
-        .filter(e => e.getAttribute('data-behavior-click-outside-close') === 'topmost');
+        .filter(e => e.getAttribute('data-behavior-click-outside-close') === 'topmost')
+        .sort((a, b) => Number(a.style.zIndex) - Number(b.style.zIndex));
       const dialog = model.state.stackRef.current.querySelector<HTMLElement>('[role=dialog]');
 
       // Create a list of parent elements of the dialog to detect overlay clicks

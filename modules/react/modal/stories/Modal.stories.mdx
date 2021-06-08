@@ -42,6 +42,14 @@ behaviors and hand that model to the Modal dialog component.
 
 ### Custom Focus
 
+By default, the Modal makes sure the first focusable element receives focus when the Modal is
+opened. Most of the time, this is the `Modal.CloseIcon` button. If that element isn't present, the
+Modal will use the Modal Heading to make sure screen reader users have focus near the start of the
+Modal's content. This allows screen reader users to discover the Modal's content more naturally
+without having to navigate back up again. Sometimes, it is a better user experience to focus on a
+different element. The following example shows how `initialFocusRef` can be used to change which
+element receives focus when the modal opens.
+
 <ExampleCodeBlock code={CustomFocus} />
 
 ## Specifications
