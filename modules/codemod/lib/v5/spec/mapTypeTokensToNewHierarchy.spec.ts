@@ -10,13 +10,13 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
       it('should properly transform object styles', () => {
         const input = `
           import canvas from '@workday/canvas-kit-react/tokens';
-    
+
           const headingStyles = {
             fontFamily: canvas.type.h2.fontFamily,
             fontSize: canvas.type.h2.fontSize,
             fontWeight: canvas.type.h2.fontWeight,
           };
-    
+
           const bodyStyles = {
             fontFamily: canvas.type.body.fontFamily,
             fontSize: canvas.type.body.fontSize,
@@ -26,13 +26,13 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
 
         const expected = `
           import canvas from '@workday/canvas-kit-react/tokens';
-    
+
           const headingStyles = {
             fontFamily: canvas.type.properties.fontFamilies.default,
             fontSize: canvas.type.properties.fontSizes[24],
             fontWeight: canvas.type.properties.fontWeights.bold,
           };
-    
+
           const bodyStyles = {
             fontFamily: canvas.type.properties.fontFamilies.default,
             fontSize: canvas.type.properties.fontSizes[14],
@@ -46,7 +46,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
       it('should properly transform JSX styles', () => {
         const input = `
           import canvas from '@workday/canvas-kit-react/tokens';
-    
+
           const SectionText = () => (
             <section>
               <h2 css={{
@@ -65,7 +65,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
 
         const expected = `
           import canvas from '@workday/canvas-kit-react/tokens';
-    
+
           const SectionText = () => (
             <section>
               <h2 css={{
@@ -88,7 +88,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
       it('should properly transform styles in the styled function', () => {
         const input = `
           import canvas from '@workday/canvas-kit-react/tokens';
-    
+
           const SectionHeading = styled('h2')({
             fontFamily: canvas.type.h2.fontFamily,
             fontSize: canvas.type.h2.fontSize,
@@ -98,7 +98,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
 
         const expected = `
           import canvas from '@workday/canvas-kit-react/tokens';
-    
+
           const SectionHeading = styled('h2')({
             fontFamily: canvas.type.properties.fontFamilies.default,
             fontSize: canvas.type.properties.fontSizes[24],
@@ -114,11 +114,11 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
       it('should properly transform object styles', () => {
         const input = `
           import canvas from '@workday/canvas-kit-react/tokens';
-    
+
           const headingStyles = {
             ...canvas.type.h2
           };
-    
+
           const bodyStyles = {
             ...canvas.type.body
           };
@@ -126,11 +126,11 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
 
         const expected = `
           import canvas from '@workday/canvas-kit-react/tokens';
-    
+
           const headingStyles = {
             ...canvas.type.levels.heading.small
           };
-    
+
           const bodyStyles = {
             ...canvas.type.levels.subtext.large
           };
@@ -142,7 +142,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
       it('should properly transform JSX styles', () => {
         const input = `
           import canvas from '@workday/canvas-kit-react/tokens';
-    
+
           const SectionText = () => (
             <section>
               <h2 css={{margin: 0, ...canvas.type.h2}}>Section Heading</h2>
@@ -153,7 +153,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
 
         const expected = `
           import canvas from '@workday/canvas-kit-react/tokens';
-    
+
           const SectionText = () => (
             <section>
               <h2 css={{margin: 0, ...canvas.type.levels.heading.small}}>Section Heading</h2>
@@ -168,7 +168,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
       it('should properly transform styles in the styled function', () => {
         const input = `
           import canvas from '@workday/canvas-kit-react/tokens';
-    
+
           const SectionHeading = styled('h2')(
             canvas.type.h2
           );
@@ -176,7 +176,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
 
         const expected = `
           import canvas from '@workday/canvas-kit-react/tokens';
-    
+
           const SectionHeading = styled('h2')(
             canvas.type.levels.heading.small
           );
@@ -688,13 +688,13 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
       it('should properly transform object styles', () => {
         const input = `
           import { type as canvasType } from '@workday/canvas-kit-react/tokens';
-    
+
           const headingStyles = {
             fontFamily: canvasType.h2.fontFamily,
             fontSize: canvasType.h2.fontSize,
             fontWeight: canvasType.h2.fontWeight,
           };
-    
+
           const bodyStyles = {
             fontFamily: canvasType.body.fontFamily,
             fontSize: canvasType.body.fontSize,
@@ -704,13 +704,13 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
 
         const expected = `
           import { type as canvasType } from '@workday/canvas-kit-react/tokens';
-    
+
           const headingStyles = {
             fontFamily: canvasType.properties.fontFamilies.default,
             fontSize: canvasType.properties.fontSizes[24],
             fontWeight: canvasType.properties.fontWeights.bold,
           };
-    
+
           const bodyStyles = {
             fontFamily: canvasType.properties.fontFamilies.default,
             fontSize: canvasType.properties.fontSizes[14],
@@ -724,7 +724,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
       it('should properly transform JSX styles', () => {
         const input = `
           import { type as canvasType } from '@workday/canvas-kit-react/tokens';
-    
+
           const SectionText = () => (
             <section>
               <h2 css={{
@@ -743,7 +743,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
 
         const expected = `
           import { type as canvasType } from '@workday/canvas-kit-react/tokens';
-    
+
           const SectionText = () => (
             <section>
               <h2 css={{
@@ -766,7 +766,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
       it('should properly transform styles in the styled function', () => {
         const input = `
           import { type as canvasType } from '@workday/canvas-kit-react/tokens';
-    
+
           const SectionHeading = styled('h2')({
             fontFamily: canvasType.h2.fontFamily,
             fontSize: canvasType.h2.fontSize,
@@ -776,7 +776,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
 
         const expected = `
           import { type as canvasType } from '@workday/canvas-kit-react/tokens';
-    
+
           const SectionHeading = styled('h2')({
             fontFamily: canvasType.properties.fontFamilies.default,
             fontSize: canvasType.properties.fontSizes[24],
@@ -792,11 +792,11 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
       it('should properly transform object styles', () => {
         const input = `
           import {type as canvasType} from '@workday/canvas-kit-react/tokens';
-    
+
           const headingStyles = {
             ...canvasType.h2
           };
-    
+
           const bodyStyles = {
             ...canvasType.body
           };
@@ -804,11 +804,11 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
 
         const expected = `
           import {type as canvasType} from '@workday/canvas-kit-react/tokens';
-    
+
           const headingStyles = {
             ...canvasType.levels.heading.small
           };
-    
+
           const bodyStyles = {
             ...canvasType.levels.subtext.large
           };
@@ -820,7 +820,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
       it('should properly transform JSX styles', () => {
         const input = `
           import {type as canvasType} from '@workday/canvas-kit-react/tokens';
-    
+
           const SectionText = () => (
             <section>
               <h2 css={{margin: 0, ...canvasType.h2}}>Section Heading</h2>
@@ -831,7 +831,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
 
         const expected = `
           import {type as canvasType} from '@workday/canvas-kit-react/tokens';
-    
+
           const SectionText = () => (
             <section>
               <h2 css={{margin: 0, ...canvasType.levels.heading.small}}>Section Heading</h2>
@@ -846,7 +846,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
       it('should properly transform styles in the styled function', () => {
         const input = `
           import {type as canvasType} from '@workday/canvas-kit-react/tokens';
-    
+
           const SectionHeading = styled('h2')(
             canvasType.h2
           );
@@ -854,7 +854,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
 
         const expected = `
           import {type as canvasType} from '@workday/canvas-kit-react/tokens';
-    
+
           const SectionHeading = styled('h2')(
             canvasType.levels.heading.small
           );
@@ -869,14 +869,14 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
         it('should properly transform object styles', () => {
           const input = `
             import {type as canvasType} from '@workday/canvas-kit-react/tokens';
-    
+
             const errorStyles = {
               ...canvasType.variant.error,
             };
           `;
           const expected = `
             import {type as canvasType} from '@workday/canvas-kit-react/tokens';
-    
+
             const errorStyles = {
               ...canvasType.variants.error,
             };
@@ -888,7 +888,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
         it('should properly transform JSX styles', () => {
           const input = `
             import {type as canvasType} from '@workday/canvas-kit-react/tokens';
-    
+
             const SectionText = () => (
               <section>
                 <h2 css={canvasType.variant.error}>Section Heading</h2>
@@ -898,7 +898,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
           `;
           const expected = `
             import {type as canvasType} from '@workday/canvas-kit-react/tokens';
-    
+
             const SectionText = () => (
               <section>
                 <h2 css={canvasType.variants.error}>Section Heading</h2>
@@ -913,14 +913,14 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
         it('should properly transform styles in the styled function', () => {
           const input = `
             import {type as canvasType} from '@workday/canvas-kit-react/tokens';
-    
+
             const SectionText = styled('section')(
               canvasType.variant.error
             );
           `;
           const expected = `
             import {type as canvasType} from '@workday/canvas-kit-react/tokens';
-    
+
             const SectionText = styled('section')(
               canvasType.variants.error
             );
@@ -934,14 +934,14 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
         it('should properly transform object styles', () => {
           const input = `
             import {type as canvasType} from '@workday/canvas-kit-react/tokens';
-    
+
             const hintStyles = {
               ...canvasType.variant.hint,
             };
           `;
           const expected = `
             import {type as canvasType} from '@workday/canvas-kit-react/tokens';
-    
+
             const hintStyles = {
               ...canvasType.variants.hint,
             };
@@ -953,7 +953,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
         it('should properly transform JSX styles', () => {
           const input = `
             import {type as canvasType} from '@workday/canvas-kit-react/tokens';
-    
+
             const SectionText = () => (
               <section>
                 <h2 css={canvasType.variant.hint}>Section Heading</h2>
@@ -963,7 +963,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
           `;
           const expected = `
             import {type as canvasType} from '@workday/canvas-kit-react/tokens';
-    
+
             const SectionText = () => (
               <section>
                 <h2 css={canvasType.variants.hint}>Section Heading</h2>
@@ -978,14 +978,14 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
         it('should properly transform styles in the styled function', () => {
           const input = `
             import {type as canvasType} from '@workday/canvas-kit-react/tokens';
-    
+
             const SectionText = styled('section')(
               canvasType.variant.hint
             );
           `;
           const expected = `
             import {type as canvasType} from '@workday/canvas-kit-react/tokens';
-    
+
             const SectionText = styled('section')(
               canvasType.variants.hint
             );
@@ -999,14 +999,14 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
         it('should properly transform object styles', () => {
           const input = `
             import {type as canvasType} from '@workday/canvas-kit-react/tokens';
-    
+
             const inverseStyles = {
               ...canvasType.variant.inverse,
             };
           `;
           const expected = `
             import {type as canvasType} from '@workday/canvas-kit-react/tokens';
-    
+
             const inverseStyles = {
               ...canvasType.variants.inverse,
             };
@@ -1018,7 +1018,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
         it('should properly transform JSX styles', () => {
           const input = `
             import {type as canvasType} from '@workday/canvas-kit-react/tokens';
-    
+
             const SectionText = () => (
               <section>
                 <h2 css={canvasType.variant.inverse}>Section Heading</h2>
@@ -1028,7 +1028,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
           `;
           const expected = `
             import {type as canvasType} from '@workday/canvas-kit-react/tokens';
-    
+
             const SectionText = () => (
               <section>
                 <h2 css={canvasType.variants.inverse}>Section Heading</h2>
@@ -1043,14 +1043,14 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
         it('should properly transform styles in the styled function', () => {
           const input = `
             import {type as canvasType} from '@workday/canvas-kit-react/tokens';
-    
+
             const SectionText = styled('section')(
               canvasType.variant.inverse
             );
           `;
           const expected = `
             import {type as canvasType} from '@workday/canvas-kit-react/tokens';
-    
+
             const SectionText = styled('section')(
               canvasType.variants.inverse
             );
@@ -1064,14 +1064,14 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
         it('should properly transform object styles', () => {
           const input = `
             import {type as canvasType} from '@workday/canvas-kit-react/tokens';
-    
+
             const buttonStyles = {
               ...canvasType.variant.button
             };
           `;
           const expected = `
             import {type as canvasType} from '@workday/canvas-kit-react/tokens';
-    
+
             const buttonStyles = {
               fontWeight: canvasType.properties.fontWeights.bold
             };
@@ -1083,7 +1083,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
         it('should properly transform JSX styles', () => {
           const input = `
             import {type as canvasType} from '@workday/canvas-kit-react/tokens';
-    
+
             const Buttons = () => {
               return (
                 <div>
@@ -1098,7 +1098,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
           `;
           const expected = `
             import {type as canvasType} from '@workday/canvas-kit-react/tokens';
-    
+
             const Buttons = () => {
               return (
                 <div>
@@ -1120,14 +1120,14 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
         it('should properly transform styles in the styled function', () => {
           const input = `
             import {type as canvasType} from '@workday/canvas-kit-react/tokens';
-    
+
             const Button = styled('button')(
               canvasType.variant.button
             );
           `;
           const expected = `
             import {type as canvasType} from '@workday/canvas-kit-react/tokens';
-    
+
             const Button = styled('button')(
               {
                 fontWeight: canvasType.properties.fontWeights.bold
@@ -1143,14 +1143,14 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
         it('should properly transform object styles', () => {
           const input = `
             import {type as canvasType} from '@workday/canvas-kit-react/tokens';
-    
+
             const capStyles = {
               ...canvasType.variant.caps
             };
           `;
           const expected = `
             import {type as canvasType} from '@workday/canvas-kit-react/tokens';
-    
+
             const capStyles = {
               fontWeight: canvasType.properties.fontWeights.medium,
               textTransform: "uppercase"
@@ -1163,7 +1163,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
         it('should properly transform JSX styles', () => {
           const input = `
             import {type as canvasType} from '@workday/canvas-kit-react/tokens';
-    
+
             const SectionText = () => (
               <section>
                 <h2 css={canvasType.variant.caps}>Section Heading</h2>
@@ -1173,7 +1173,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
           `;
           const expected = `
             import {type as canvasType} from '@workday/canvas-kit-react/tokens';
-    
+
             const SectionText = () => (
               <section>
                 <h2 css={{
@@ -1195,14 +1195,14 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
         it('should properly transform styles in the styled function', () => {
           const input = `
             import {type as canvasType} from '@workday/canvas-kit-react/tokens';
-    
+
             const CapSection = styled('section')(
               canvasType.variant.caps
             );
           `;
           const expected = `
             import {type as canvasType} from '@workday/canvas-kit-react/tokens';
-    
+
             const CapSection = styled('section')(
               {
                 fontWeight: canvasType.properties.fontWeights.medium,
@@ -1219,14 +1219,14 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
         it('should properly transform object styles', () => {
           const input = `
             import {type as canvasType} from '@workday/canvas-kit-react/tokens';
-    
+
             const labelStyles = {
               ...canvasType.variant.label
             };
           `;
           const expected = `
             import {type as canvasType} from '@workday/canvas-kit-react/tokens';
-    
+
             const labelStyles = {
               fontWeight: canvasType.properties.fontWeights.medium
             };
@@ -1317,7 +1317,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
         it('should properly transform JSX styles', () => {
           const input = `
             import {type as canvasType} from '@workday/canvas-kit-react/tokens';
-    
+
             const SectionText = () => (
               <section>
                 <h2 css={canvasType.variant.mono}>Section Heading</h2>
@@ -1330,7 +1330,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
           `;
           const expected = `
             import {type as canvasType} from '@workday/canvas-kit-react/tokens';
-    
+
             const SectionText = () => (
               <section>
                 <h2 css={{
@@ -1366,13 +1366,13 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
       it('should properly transform object styles', () => {
         const input = `
           import { type as canvasType } from '@workday/canvas-kit-preview-react/tokens';
-    
+
           const headingStyles = {
             fontFamily: canvasType.h2.fontFamily,
             fontSize: canvasType.h2.fontSize,
             fontWeight: canvasType.h2.fontWeight,
           };
-    
+
           const bodyStyles = {
             fontFamily: canvasType.body.fontFamily,
             fontSize: canvasType.body.fontSize,
@@ -1382,13 +1382,13 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
 
         const expected = `
           import { type as canvasType } from '@workday/canvas-kit-preview-react/tokens';
-    
+
           const headingStyles = {
             fontFamily: canvasType.properties.fontFamilies.default,
             fontSize: canvasType.properties.fontSizes[32],
             fontWeight: canvasType.properties.fontWeights.bold,
           };
-    
+
           const bodyStyles = {
             fontFamily: canvasType.properties.fontFamilies.default,
             fontSize: canvasType.properties.fontSizes[16],
@@ -1402,7 +1402,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
       it('should properly transform JSX styles', () => {
         const input = `
           import { type as canvasType } from '@workday/canvas-kit-preview-react/tokens';
-    
+
           const SectionText = () => (
             <section>
               <h2 css={{
@@ -1421,7 +1421,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
 
         const expected = `
           import { type as canvasType } from '@workday/canvas-kit-preview-react/tokens';
-    
+
           const SectionText = () => (
             <section>
               <h2 css={{
@@ -1444,7 +1444,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
       it('should properly transform styles in the styled function', () => {
         const input = `
           import { type as canvasType } from '@workday/canvas-kit-preview-react/tokens';
-    
+
           const SectionHeading = styled('h2')({
             fontFamily: canvasType.h2.fontFamily,
             fontSize: canvasType.h2.fontSize,
@@ -1454,7 +1454,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
 
         const expected = `
           import { type as canvasType } from '@workday/canvas-kit-preview-react/tokens';
-    
+
           const SectionHeading = styled('h2')({
             fontFamily: canvasType.properties.fontFamilies.default,
             fontSize: canvasType.properties.fontSizes[32],
@@ -1470,11 +1470,11 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
       it('should properly transform object styles', () => {
         const input = `
           import {type as canvasType} from '@workday/canvas-kit-preview-react/tokens';
-    
+
           const headingStyles = {
             ...canvasType.h2
           };
-    
+
           const bodyStyles = {
             ...canvasType.body
           };
@@ -1482,11 +1482,11 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
 
         const expected = `
           import {type as canvasType} from '@workday/canvas-kit-preview-react/tokens';
-    
+
           const headingStyles = {
             ...canvasType.levels.heading.large
           };
-    
+
           const bodyStyles = {
             ...canvasType.levels.body.small
           };
@@ -1498,7 +1498,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
       it('should properly transform JSX styles', () => {
         const input = `
           import {type as canvasType} from '@workday/canvas-kit-preview-react/tokens';
-    
+
           const SectionText = () => (
             <section>
               <h2 css={{margin: 0, ...canvasType.h2}}>Section Heading</h2>
@@ -1509,7 +1509,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
 
         const expected = `
           import {type as canvasType} from '@workday/canvas-kit-preview-react/tokens';
-    
+
           const SectionText = () => (
             <section>
               <h2 css={{margin: 0, ...canvasType.levels.heading.large}}>Section Heading</h2>
@@ -1524,7 +1524,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
       it('should properly transform styles in the styled function', () => {
         const input = `
           import {type as canvasType} from '@workday/canvas-kit-preview-react/tokens';
-    
+
           const SectionHeading = styled('h2')(
             canvasType.h2
           );
@@ -1532,9 +1532,73 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
 
         const expected = `
           import {type as canvasType} from '@workday/canvas-kit-preview-react/tokens';
-    
+
           const SectionHeading = styled('h2')(
             canvasType.levels.heading.large
+          );
+        `;
+
+        expectTransform(input, expected);
+      });
+
+      it('should add bold styles to former JSXExpressionContainer headings', () => {
+        const input = `
+          import canvas, {type} from '@workday/canvas-kit-react/tokens';
+
+          const Heading = () => (
+            <div>
+              <h2 css={{...type.h4}}>Section Heading</h2>
+              <h2 css={{...canvas.type.h4}}>Section Heading</h2>
+            </div>
+          );
+        `;
+
+        const expected = `
+          import canvas, {type} from '@workday/canvas-kit-react/tokens';
+
+          const Heading = () => (
+            <div>
+              <h2 css={{
+                ...type.levels.body.small,
+                fontWeight: type.properties.fontWeights.bold
+              }}>Section Heading</h2>
+              <h2 css={{
+                ...canvas.type.levels.body.small,
+                fontWeight: canvas.type.properties.fontWeights.bold
+              }}>Section Heading</h2>
+            </div>
+          );
+        `;
+
+        expectTransform(input, expected);
+      });
+
+      it('should add bold styles to former ObjectExpression headings', () => {
+        const input = `
+          import canvas, {type} from '@workday/canvas-kit-react/tokens';
+
+          const Heading = () => (
+            <div>
+              <h2 css={type.h4}>Section Heading</h2>
+              <h2 css={canvas.type.h4}>Section Heading</h2>
+            </div>
+          );
+        `;
+
+        const expected = `
+          import canvas, {type} from '@workday/canvas-kit-react/tokens';
+
+          const Heading = () => (
+            <div>
+              <h2 css={{
+                ...type.levels.body.small,
+                fontWeight: type.properties.fontWeights.bold
+              }}>Section Heading</h2>
+              <h2 css={{
+                ...canvas.type.levels.body.small,
+                fontWeight: canvas.type.properties.fontWeights.bold
+              }}>Section Heading</h2>
+            </div>
           );
         `;
 
@@ -1547,14 +1611,14 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
         it('should properly transform object styles', () => {
           const input = `
             import {type as canvasType} from '@workday/canvas-kit-preview-react/tokens';
-    
+
             const errorStyles = {
               ...canvasType.variant.error,
             };
           `;
           const expected = `
             import {type as canvasType} from '@workday/canvas-kit-preview-react/tokens';
-    
+
             const errorStyles = {
               ...canvasType.variants.error,
             };
@@ -1566,7 +1630,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
         it('should properly transform JSX styles', () => {
           const input = `
             import {type as canvasType} from '@workday/canvas-kit-preview-react/tokens';
-    
+
             const SectionText = () => (
               <section>
                 <h2 css={canvasType.variant.error}>Section Heading</h2>
@@ -1576,7 +1640,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
           `;
           const expected = `
             import {type as canvasType} from '@workday/canvas-kit-preview-react/tokens';
-    
+
             const SectionText = () => (
               <section>
                 <h2 css={canvasType.variants.error}>Section Heading</h2>
@@ -1591,14 +1655,14 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
         it('should properly transform styles in the styled function', () => {
           const input = `
             import {type as canvasType} from '@workday/canvas-kit-preview-react/tokens';
-    
+
             const SectionText = styled('section')(
               canvasType.variant.error
             );
           `;
           const expected = `
             import {type as canvasType} from '@workday/canvas-kit-preview-react/tokens';
-    
+
             const SectionText = styled('section')(
               canvasType.variants.error
             );
@@ -1612,14 +1676,14 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
         it('should properly transform object styles', () => {
           const input = `
             import {type as canvasType} from '@workday/canvas-kit-preview-react/tokens';
-    
+
             const hintStyles = {
               ...canvasType.variant.hint,
             };
           `;
           const expected = `
             import {type as canvasType} from '@workday/canvas-kit-preview-react/tokens';
-    
+
             const hintStyles = {
               ...canvasType.variants.hint,
             };
@@ -1631,7 +1695,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
         it('should properly transform JSX styles', () => {
           const input = `
             import {type as canvasType} from '@workday/canvas-kit-preview-react/tokens';
-    
+
             const SectionText = () => (
               <section>
                 <h2 css={canvasType.variant.hint}>Section Heading</h2>
@@ -1641,7 +1705,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
           `;
           const expected = `
             import {type as canvasType} from '@workday/canvas-kit-preview-react/tokens';
-    
+
             const SectionText = () => (
               <section>
                 <h2 css={canvasType.variants.hint}>Section Heading</h2>
@@ -1656,14 +1720,14 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
         it('should properly transform styles in the styled function', () => {
           const input = `
             import {type as canvasType} from '@workday/canvas-kit-preview-react/tokens';
-    
+
             const SectionText = styled('section')(
               canvasType.variant.hint
             );
           `;
           const expected = `
             import {type as canvasType} from '@workday/canvas-kit-preview-react/tokens';
-    
+
             const SectionText = styled('section')(
               canvasType.variants.hint
             );
@@ -1677,14 +1741,14 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
         it('should properly transform object styles', () => {
           const input = `
             import {type as canvasType} from '@workday/canvas-kit-preview-react/tokens';
-    
+
             const inverseStyles = {
               ...canvasType.variant.inverse,
             };
           `;
           const expected = `
             import {type as canvasType} from '@workday/canvas-kit-preview-react/tokens';
-    
+
             const inverseStyles = {
               ...canvasType.variants.inverse,
             };
@@ -1696,7 +1760,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
         it('should properly transform JSX styles', () => {
           const input = `
             import {type as canvasType} from '@workday/canvas-kit-preview-react/tokens';
-    
+
             const SectionText = () => (
               <section>
                 <h2 css={canvasType.variant.inverse}>Section Heading</h2>
@@ -1706,7 +1770,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
           `;
           const expected = `
             import {type as canvasType} from '@workday/canvas-kit-preview-react/tokens';
-    
+
             const SectionText = () => (
               <section>
                 <h2 css={canvasType.variants.inverse}>Section Heading</h2>
@@ -1721,14 +1785,14 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
         it('should properly transform styles in the styled function', () => {
           const input = `
             import {type as canvasType} from '@workday/canvas-kit-preview-react/tokens';
-    
+
             const SectionText = styled('section')(
               canvasType.variant.inverse
             );
           `;
           const expected = `
             import {type as canvasType} from '@workday/canvas-kit-preview-react/tokens';
-    
+
             const SectionText = styled('section')(
               canvasType.variants.inverse
             );
@@ -1742,14 +1806,14 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
         it('should properly transform object styles', () => {
           const input = `
             import {type as canvasType} from '@workday/canvas-kit-preview-react/tokens';
-    
+
             const buttonStyles = {
               ...canvasType.variant.button
             };
           `;
           const expected = `
             import {type as canvasType} from '@workday/canvas-kit-preview-react/tokens';
-    
+
             const buttonStyles = {
               fontWeight: canvasType.properties.fontWeights.bold
             };
@@ -1761,7 +1825,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
         it('should properly transform JSX styles', () => {
           const input = `
             import {type as canvasType} from '@workday/canvas-kit-preview-react/tokens';
-    
+
             const Buttons = () => {
               return (
                 <div>
@@ -1776,7 +1840,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
           `;
           const expected = `
             import {type as canvasType} from '@workday/canvas-kit-preview-react/tokens';
-    
+
             const Buttons = () => {
               return (
                 <div>
@@ -1798,14 +1862,14 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
         it('should properly transform styles in the styled function', () => {
           const input = `
             import {type as canvasType} from '@workday/canvas-kit-preview-react/tokens';
-    
+
             const Button = styled('button')(
               canvasType.variant.button
             );
           `;
           const expected = `
             import {type as canvasType} from '@workday/canvas-kit-preview-react/tokens';
-    
+
             const Button = styled('button')(
               {
                 fontWeight: canvasType.properties.fontWeights.bold
@@ -1821,14 +1885,14 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
         it('should properly transform object styles', () => {
           const input = `
             import {type as canvasType} from '@workday/canvas-kit-preview-react/tokens';
-    
+
             const capStyles = {
               ...canvasType.variant.caps
             };
           `;
           const expected = `
             import {type as canvasType} from '@workday/canvas-kit-preview-react/tokens';
-    
+
             const capStyles = {
               fontWeight: canvasType.properties.fontWeights.medium,
               textTransform: "uppercase"
@@ -1841,7 +1905,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
         it('should properly transform JSX styles', () => {
           const input = `
             import {type as canvasType} from '@workday/canvas-kit-preview-react/tokens';
-    
+
             const SectionText = () => (
               <section>
                 <h2 css={canvasType.variant.caps}>Section Heading</h2>
@@ -1851,7 +1915,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
           `;
           const expected = `
             import {type as canvasType} from '@workday/canvas-kit-preview-react/tokens';
-    
+
             const SectionText = () => (
               <section>
                 <h2 css={{
@@ -1873,14 +1937,14 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
         it('should properly transform styles in the styled function', () => {
           const input = `
             import {type as canvasType} from '@workday/canvas-kit-preview-react/tokens';
-    
+
             const CapSection = styled('section')(
               canvasType.variant.caps
             );
           `;
           const expected = `
             import {type as canvasType} from '@workday/canvas-kit-preview-react/tokens';
-    
+
             const CapSection = styled('section')(
               {
                 fontWeight: canvasType.properties.fontWeights.medium,
@@ -1897,14 +1961,14 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
         it('should properly transform object styles', () => {
           const input = `
             import {type as canvasType} from '@workday/canvas-kit-preview-react/tokens';
-    
+
             const labelStyles = {
               ...canvasType.variant.label
             };
           `;
           const expected = `
             import {type as canvasType} from '@workday/canvas-kit-preview-react/tokens';
-    
+
             const labelStyles = {
               fontWeight: canvasType.properties.fontWeights.medium
             };
@@ -1916,7 +1980,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
         it('should properly transform JSX styles', () => {
           const input = `
             import {type as canvasType} from '@workday/canvas-kit-preview-react/tokens';
-    
+
             const Labels = () => {
               return (
                 <div>
@@ -1931,7 +1995,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
           `;
           const expected = `
             import {type as canvasType} from '@workday/canvas-kit-preview-react/tokens';
-    
+
             const Labels = () => {
               return (
                 <div>
@@ -1953,14 +2017,14 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
         it('should properly transform styles in the styled function', () => {
           const input = `
             import {type as canvasType} from '@workday/canvas-kit-preview-react/tokens';
-    
+
             const Label = styled('label')(
               canvasType.variant.label
             );
           `;
           const expected = `
             import {type as canvasType} from '@workday/canvas-kit-preview-react/tokens';
-    
+
             const Label = styled('label')(
               {
                 fontWeight: canvasType.properties.fontWeights.medium
@@ -1976,14 +2040,14 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
         it('should properly transform object styles', () => {
           const input = `
             import {type as canvasType} from '@workday/canvas-kit-preview-react/tokens';
-    
+
             const monoStyles = {
               ...canvasType.variant.mono
             };
           `;
           const expected = `
             import {type as canvasType} from '@workday/canvas-kit-preview-react/tokens';
-    
+
             const monoStyles = {
               fontFamily: canvasType.properties.fontFamilies.monospace
             };
@@ -1995,7 +2059,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
         it('should properly transform JSX styles', () => {
           const input = `
             import {type as canvasType} from '@workday/canvas-kit-preview-react/tokens';
-    
+
             const SectionText = () => (
               <section>
                 <h2 css={canvasType.variant.mono}>Section Heading</h2>
@@ -2008,7 +2072,7 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
           `;
           const expected = `
             import {type as canvasType} from '@workday/canvas-kit-preview-react/tokens';
-    
+
             const SectionText = () => (
               <section>
                 <h2 css={{

@@ -415,6 +415,37 @@ export default function transformer(file: FileInfo, api: API) {
     nodePath.value.property = j.identifier(updatedTypeLevelProperty);
   }
 
+  function updateHeadingFontWeight(
+    nodePath: ASTPath<MemberExpression>,
+    importSpecifierName: string,
+    legacy?: boolean
+  ) {
+    const newFontWeightMemberExpression = j.memberExpression(
+      j.identifier(importSpecifierName),
+      j.memberExpression(
+        j.identifier('properties'),
+        j.memberExpression(j.identifier('fontWeights'), j.identifier('bold'), false),
+        false
+      ),
+      false
+    );
+
+    const fontWeightProperty = j.property(
+      'init',
+      j.identifier('fontWeight'),
+      legacy
+        ? j.memberExpression(j.identifier('canvas'), newFontWeightMemberExpression, false)
+        : newFontWeightMemberExpression
+    );
+    if (nodePath.parent.parent.value.type === 'ObjectExpression') {
+      return nodePath.parent.parent.value.properties.push(fontWeightProperty);
+    } else if (nodePath.parent.value.type === 'JSXExpressionContainer') {
+      return nodePath.replace(
+        j.objectExpression([j.spreadElement(nodePath.value), fontWeightProperty])
+      );
+    }
+  }
+
   // Run only if there are type imports from react/tokens
   if (legacyTypeImportSpecifiers.paths().length) {
     // Iterate over all type import specifiers and transform their corresponding member expressions
@@ -456,7 +487,12 @@ export default function transformer(file: FileInfo, api: API) {
 
           // Handle type hierarchy transformations
           if (identifierName in legacyTypeLevelsMap) {
-            return updateTypeHierarchy(nodePath, identifierName, 'legacy');
+            updateTypeHierarchy(nodePath, identifierName, 'legacy');
+
+            if (identifierName === 'h3' || identifierName === 'h4') {
+              updateHeadingFontWeight(nodePath, importSpecifierName);
+            }
+            return;
           }
 
           return nodePath;
@@ -498,7 +534,12 @@ export default function transformer(file: FileInfo, api: API) {
             }
             // Handle type hierarchy transformations
             if (parentProperty.name in legacyTypeLevelsMap) {
-              return updateTypeHierarchy(nodePath.parent, parentIdentifierName, 'legacy');
+              updateTypeHierarchy(nodePath.parent, parentIdentifierName, 'legacy');
+
+              if (parentIdentifierName === 'h3' || parentIdentifierName === 'h4') {
+                updateHeadingFontWeight(nodePath.parent, 'type', true);
+              }
+              return;
             }
           }
 
@@ -548,7 +589,12 @@ export default function transformer(file: FileInfo, api: API) {
 
           // Handle type hierarchy transformations
           if (identifierName in betaTypeLevelsMap) {
-            return updateTypeHierarchy(nodePath, identifierName, 'beta');
+            updateTypeHierarchy(nodePath, identifierName, 'beta');
+
+            if (identifierName === 'h4') {
+              updateHeadingFontWeight(nodePath, importSpecifierName);
+            }
+            return;
           }
 
           return nodePath;
