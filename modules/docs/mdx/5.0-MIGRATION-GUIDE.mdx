@@ -1376,10 +1376,10 @@ subcomponents. `Modal` looks much like the structure of [Popups](#popups), excep
 `Modal.Overlay` subcomponent instead of a `Popup.Popper` component. The `Modal.Overlay` is the
 component in charge of adding an element to the `PopupStack`.
 
-v5 introduced focus management behaviors like `useInitialFocus` and `useReturnFocus` that was
-originally hard-coded into the `Modal`, but now `Modal` uses the hooks from the `popup` module. We
-noticed some application code that do custom focus management. Most of the special focus management
-code could be removed when using v5 the `Modal`.
+We noticed some application code that do custom focus management. There were some subtle issues like
+#694 (VoiceOver on iOS not returning focus). v5 introduced focus management behaviors like
+`useInitialFocus` and `useReturnFocus` that should work more consistently. Most of the special focus
+management code could be removed when using v5 the `Modal`.
 
 #### useModal and useModalModel
 

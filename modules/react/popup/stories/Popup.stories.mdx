@@ -166,9 +166,9 @@ container component isn't needed.
 ## Popup.Target
 
 A `Popup.Target` is any element that is meant to show the Popup. The default component rendered by
-this component is a `Button` element. You can override this by passing the desired component via
-`as`. Many examples above use `as={DeleteButton}`. If you want to render an `IconButton` instead, do
-`as={IconButton}`. The behavior hook used is called `usePopupTarget`.
+this component is a `SecondaryButton` element. You can override this by passing the desired
+component via `as`. Many examples above use `as={DeleteButton}`. If you want to render an
+`IconButton` instead, use `as={IconButton}`. The behavior hook used is called `usePopupTarget`.
 
 ```tsx
 const model = usePopupModel();
