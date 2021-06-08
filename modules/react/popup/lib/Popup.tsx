@@ -22,7 +22,7 @@ export interface PopupProps {
   model: PopupModel;
 }
 
-export const Popup = createComponent('div')({
+export const Popup = createComponent()({
   displayName: 'Popup',
   Component: ({children, model, ...config}: PopupProps) => {
     const value = useDefaultModel(model, config, usePopupModel);

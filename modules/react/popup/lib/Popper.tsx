@@ -5,7 +5,7 @@ import * as PopperJS from '@popperjs/core';
 export type Placement = PopperJS.Placement;
 export type PopperOptions = PopperJS.Options;
 
-import {usePopupStack} from './hooks/usePopupStack';
+import {usePopupStack} from './hooks';
 
 export interface PopperProps {
   /**

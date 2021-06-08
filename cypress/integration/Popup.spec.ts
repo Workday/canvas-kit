@@ -5,9 +5,9 @@ describe('Popup', () => {
     h.stories.visit();
   });
 
-  context(`given the [Components/Popups/Popup/React, Simple] example is rendered`, () => {
+  context(`given the [Components/Popups/Popup/React, Basic] example is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Components/Popups/Popup/React', 'Simple');
+      h.stories.load('Components/Popups/Popup/React', 'Basic');
     });
 
     context('when the "Delete Item" button is clicked', () => {

@@ -23,6 +23,7 @@ any questions about the update.
   - [Tabs](#tabs)
   - [Popper](#popper)
   - [Popups](#popups)
+  - [Modal](#modal)
   - [Skeleton](#skeleton)
 
 ## Codemod
@@ -970,6 +971,139 @@ const MyPopup = () => {
 }
 ```
 
+### Modal
+
+Modal has transitioned to a [compound component](./COMPOUND_COMPONENTS.mdx). What was `Modal` in v4
+is now `Modal.Card` in v5.
+
+#### v4
+
+```tsx
+import React from 'react';
+
+import {Modal} from '@workday/canvas-kit-react-modal';
+import {DeleteButton, Button} from '@workday/canvas-kit-react-button';
+
+const MyModal = () => {
+  const handleDelete = () => {
+    console.log('Deleted item');
+  };
+
+  const {targetProps, modalProps, closeModal} = useModal();
+
+  return (
+    <>
+      <DeleteButton {...targetProps}>Delete Item</DeleteButton>
+      <Modal heading={'Delete Item'} {...modalProps}>
+        <p>Are you sure you want to delete the item?</p>
+        <DeleteButton
+          style={{marginRight: '16px'}}
+          onClick={() => {
+            closeModal();
+            handleDelete();
+          }}
+        >
+          Delete
+        </DeleteButton>
+        <Button onClick={closeModal} variant={Button.Variant.Secondary}>
+          Cancel
+        </Button>
+      </Modal>
+    </>
+  );
+};
+```
+
+#### v5
+
+```tsx
+import React from 'react';
+
+import {Modal} from '@workday/canvas-kit-react/modal';
+import {DeleteButton} from '@workday/canvas-kit-react/button';
+import {HStack} from '@workday/canvas-kit-labs-react';
+
+const MyModal = () => {
+  const handleDelete = () => {
+    console.log('Deleted item');
+  };
+
+  return (
+    <Modal>
+      <Modal.Target as={DeleteButton}>Delete Item</Modal.Target>
+      <Modal.Overlay>
+        <Modal.Card>
+          <Modal.CloseIcon aria-label="Close" />
+          <Modal.Heading>Delete Item</Modal.Heading>
+          <Modal.Body>
+            <p>Are you sure you want to delete the item?</p>
+            <HStack spacing="s">
+              <Modal.CloseButton as={DeleteButton} onClick={handleDelete}>
+                Delete
+              </Modal.CloseButton>
+              <Modal.CloseButton>Cancel</Modal.CloseButton>
+            </HStack>
+          </Modal.Body>
+        </Modal.Card>
+      </Modal.Overlay>
+    </Modal>
+  );
+};
+```
+
+Most notably, `Modal` is now a container component that takes a `ModalModel` and has several
+subcomponents. `Modal` looks much like the structure of [Popups](#popups), except `Modal` has a
+`Modal.Overlay` subcomponent instead of a `Popup.Popper` component. The `Modal.Overlay` is the
+component in charge of adding an element to the `PopupStack`.
+
+v5 introduced focus management behaviors like `useInitialFocus` and `useReturnFocus` that was
+originally hard-coded into the `Modal`, but now `Modal` uses the hooks from the `popup` module. We
+noticed some application code that do custom focus management. Most of the special focus management
+code could be removed when using v5 the `Modal`.
+
+#### useModal and useModalModel
+
+As shown in the example above, `useModal` has been removed. The `Modal` container component will
+provide a pre-configured `PopupModel` via the `useModalModel` function. In v4, `useModal` returned a
+`closeModal` callback function that you'd call to close the `Modal`. In v5, `Modal.CloseButton`
+takes care of this for you. If you need to close the `Modal` outside a button, you can hoist the
+model and use the model's `hide` event:
+
+```tsx
+// v4
+const {closeModal} = useModal();
+
+// somewhere in your code
+closeModal();
+
+// v5
+const model = useModalModel();
+
+// somewhere in your code
+model.events.hide();
+```
+
+#### handleClose
+
+In v4, `Modal` took a `handleClose` that doubled as a switch to show a close icon and a switch for
+modal closing for the Escape key and clicking outside the `Modal`. In v5, the `Modal.CloseIcon`
+subcomponent controls the rendering of the icon. If you need to disable the Escape key or clicking
+outside the `Modal`, you'll have to create your own `PopupModel` instead and pass that to the
+`Modal` container component.
+
+```tsx
+const model = usePopupModel(); // not `useModalModel`
+
+// disable useCloseOnEscape and useCloseOnOverlayClick
+useInitialFocus(model);
+useReturnFocus(model);
+useFocusTrap(model);
+useAssistiveHideSiblings(model);
+useDisableBodyScroll(model);
+
+return <Modal model={model}>{/* ... */}</Modal>;
+```
+
 ### Skeleton
 
 Skeleton was already implemented as a compound component in v4, but we've made changes to its
@@ -1005,6 +1139,7 @@ const MySkeleton = () => (
     <Skeleton.Shape width={40} height={40} />
   </Skeleton>
 );
+```
 
 Additionally, the skeleton animation has been updated from a diagonal sheen, or shimmer, to fading
 the opacity of the entire shape(s) in and out.

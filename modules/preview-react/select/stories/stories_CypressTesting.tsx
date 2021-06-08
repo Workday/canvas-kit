@@ -3,13 +3,14 @@ import * as React from 'react';
 import {controlComponent} from '../../../../utils/storybook';
 
 import {colors} from '@workday/canvas-kit-react/tokens';
-import {PrimaryButton, SecondaryButton} from '@workday/canvas-kit-react/button';
+import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {FormField} from '@workday/canvas-kit-react/form-field';
-import {Modal, useModal} from '@workday/canvas-kit-react/modal';
 
 import Select from '../lib/Select';
 
 import {manyOptions, options} from './stories';
+import {Modal} from '@workday/canvas-kit-react/modal';
+import {HStack} from '@workday/canvas-kit-labs-react';
 
 export default {
   title: 'Testing/React/Preview/Select/Cypress',
@@ -44,22 +45,26 @@ const Container = ({children, style = {}, ...elemProps}) => {
 };
 
 const SelectModal = () => {
-  const {targetProps, modalProps, closeModal} = useModal();
-
   return (
-    <div>
-      <PrimaryButton {...targetProps}>Show Modal</PrimaryButton>
-      <Modal heading="Modal with Select" {...modalProps}>
-        <p>The menu for this Select should break out of the Modal.</p>
-        <FormField label="Label" inputId="select-modal">
-          {controlComponent(<Select name="city" options={manyOptions} />)}
-        </FormField>
-        <PrimaryButton style={{marginRight: '16px'}} onClick={closeModal}>
-          Submit
-        </PrimaryButton>
-        <SecondaryButton onClick={closeModal}>Cancel</SecondaryButton>
-      </Modal>
-    </div>
+    <Modal>
+      <Modal.Target>Show Modal</Modal.Target>
+      <Modal.Overlay>
+        <Modal.Card>
+          <Modal.CloseIcon aria-label="Close" />
+          <Modal.Heading>Modal with Select</Modal.Heading>
+          <Modal.Body>
+            <p>The menu for this Select should break out of the Modal.</p>
+            <FormField label="Label" inputId="select-modal">
+              {controlComponent(<Select name="city" options={manyOptions} />)}
+            </FormField>
+            <HStack spacing="s">
+              <Modal.CloseButton as={PrimaryButton}>Submit</Modal.CloseButton>
+              <Modal.CloseButton>Cancel</Modal.CloseButton>
+            </HStack>
+          </Modal.Body>
+        </Modal.Card>
+      </Modal.Overlay>
+    </Modal>
   );
 };
 

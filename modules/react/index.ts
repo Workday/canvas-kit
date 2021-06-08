@@ -7,6 +7,7 @@ export * from './checkbox';
 export * from './color-picker';
 export * from './common';
 export * from './cookie-banner';
+export * from './dialog';
 export * from './form-field';
 export * from './icon';
 export * from './layout';

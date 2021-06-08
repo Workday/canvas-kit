@@ -1,0 +1,57 @@
+import {Meta} from '@storybook/addon-docs/blocks';
+
+import {Modal} from '@workday/canvas-kit-react/modal';
+import {Specifications} from '@workday/canvas-kit-docs';
+
+import {Basic} from './examples/Basic';
+import {WithoutCloseIcon} from './examples/WithoutCloseIcon';
+import {CustomFocus} from './examples/CustomFocus';
+
+<Meta title="Components/Popups/Modal/React" component={Modal} />
+
+# Canvas Kit Modal
+
+A Modal component is a type of Dialog that renders a translucent overlay that prevents user
+interaction with the rest of the page. A Modal will render the rest of the page inert until the
+Modal is dismissed. A Modal should be used when the user needs to presented with important
+information that must be interacted with before continuing interaction with the rest of the page.
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-react
+```
+
+## Usage
+
+### Basic
+
+The basic behavior of a modal is to hide all content from all users that is "behind" the modal
+dialog.
+
+<ExampleCodeBlock code={Basic} />
+
+### Without Close Icon
+
+If you wish to remove the close icon button, you can simply omit the `Modal.CloseButton`
+subcomponent. If you have a modal dialog that requires the user to accept instead of dismiss though
+an escape key or clicking outside the modal, you must create a new `PopupModel` without those
+behaviors and hand that model to the Modal dialog component.
+
+<ExampleCodeBlock code={WithoutCloseIcon} />
+
+### Custom Focus
+
+By default, the Modal makes sure the first focusable element receives focus when the Modal is
+opened. Most of the time, this is the `Modal.CloseIcon` button. If that element isn't present, the
+Modal will use the Modal Heading to make sure screen reader users have focus near the start of the
+Modal's content. This allows screen reader users to discover the Modal's content more naturally
+without having to navigate back up again. Sometimes, it is a better user experience to focus on a
+different element. The following example shows how `initialFocusRef` can be used to change which
+element receives focus when the modal opens.
+
+<ExampleCodeBlock code={CustomFocus} />
+
+## Specifications
+
+<Specifications file="Modal.spec.ts" name="Modal" />

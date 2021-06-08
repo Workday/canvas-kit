@@ -1,19 +1,14 @@
 import React from 'react';
 
 import {PopupStack} from '@workday/canvas-kit-popup-stack';
-import {PopupModel} from './usePopupModel';
+import {PopupModel} from '@workday/canvas-kit-react/popup';
 
 /**
  * Registers global listener for all clicks. It will only call the PopupModel's `hide` event if the
- * click happened outside the PopupModel's `state.stackRef` element and its children _and_ the
- * provided `stackRef` element is the topmost element with this behavior applied in the stack. Adds
- * a `data-behavior-click-outside-close="topmost"` attribute to ensure proper functionality.
- *
- * This should be used with popup elements that are dismissible like Modals, non-modal dialogs,
- * dropdown menus, etc. Tooltips and hierarchical menus should use `useAlwaysCloseOnClickOutside`
- * instead.
+ * click happened outside the `[role=dialog]` of an overlay component. The difference between `useCloseOnOutsideClick`
+ * and `useCloseOnOverlayClick` is the Overlay is a child of a `stackRef` element and has a different
  */
-export const useCloseOnOutsideClick = (model: PopupModel, elemProps = {}) => {
+export const useCloseOnOverlayClick = (model: PopupModel, elemProps = {}) => {
   const onClick = React.useCallback(
     (event: MouseEvent) => {
       if (!model.state.stackRef.current) {
@@ -22,13 +17,21 @@ export const useCloseOnOutsideClick = (model: PopupModel, elemProps = {}) => {
       const elements = PopupStack.getElements()
         .filter(e => e.getAttribute('data-behavior-click-outside-close') === 'topmost')
         .sort((a, b) => Number(a.style.zIndex) - Number(b.style.zIndex));
+      const dialog = model.state.stackRef.current.querySelector<HTMLElement>('[role=dialog]');
+
+      // Create a list of parent elements of the dialog to detect overlay clicks
+      const elementsBetweenDialogAnBody: HTMLElement[] = [];
+      let element = dialog;
+      while (element?.parentElement) {
+        elementsBetweenDialogAnBody.push(element.parentElement);
+        element = element?.parentElement || null;
+      }
+
       if (
+        dialog &&
         elements.length &&
         elements[elements.length - 1] === model.state.stackRef.current &&
-        // Use `PopupStack.contains` instead of `ref.current.contains` so that the application can
-        // decide if clicking the target should toggle the popup rather than it toggling implicitly
-        // because the target is outside `ref.current`
-        !PopupStack.contains(model.state.stackRef.current, event.target as HTMLElement)
+        elementsBetweenDialogAnBody.some(element => element === event.target)
       ) {
         model.events.hide({event});
       }

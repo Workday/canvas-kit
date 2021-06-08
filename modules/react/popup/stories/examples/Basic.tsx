@@ -11,7 +11,7 @@ import {
 } from '@workday/canvas-kit-react/popup';
 import {HStack} from '@workday/canvas-kit-labs-react';
 
-export const Simple = () => {
+export const Basic = () => {
   const model = usePopupModel();
 
   useCloseOnOutsideClick(model);
@@ -32,7 +32,6 @@ export const Simple = () => {
           <Popup.Heading>Delete Item</Popup.Heading>
           <Popup.Body>
             <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
-
             <HStack spacing="s">
               <Popup.CloseButton as={DeleteButton} onClick={handleDelete}>
                 Delete

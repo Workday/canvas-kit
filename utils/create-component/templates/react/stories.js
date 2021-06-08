@@ -10,7 +10,7 @@ import React from 'react';
 import withReadme from 'storybook-readme/with-readme';
 
 import {${pascalCaseName}} from '${modulePath}';
-import {Button} from '@workday/canvas-kit-react/button';
+import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import README from '../README.md';
 
 export default {
@@ -21,7 +21,7 @@ export default {
 
 export const Default = () => (
   <${pascalCaseName}>
-    <${pascalCaseName}.Target as={Button}>Toggle</${pascalCaseName}.Target>
+    <${pascalCaseName}.Target as={SecondaryButton}>Toggle</${pascalCaseName}.Target>
     <${pascalCaseName}.Content>Content</${pascalCaseName}.Content>
   </${pascalCaseName}>
 );`;

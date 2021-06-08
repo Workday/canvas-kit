@@ -31,13 +31,13 @@ const es6 = () => `
 
 const spec = rootPath => `
 {
-  "extends": "${rootPath}/tsconfig.spec.json",
+  "extends": "${rootPath}/tsconfig.spec.json"
 }
 `;
 
 const stories = rootPath => `
 {
-  "extends": "${rootPath}/tsconfig.stories.json",
+  "extends": "${rootPath}/tsconfig.stories.json"
 }
 `;
 

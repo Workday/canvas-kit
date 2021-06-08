@@ -10,3 +10,4 @@ export * from './useMount';
 export * from './components';
 export * from './models';
 export * from './elements';
+export * from './useWindowSize';
