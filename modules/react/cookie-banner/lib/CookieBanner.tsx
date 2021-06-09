@@ -84,6 +84,7 @@ const cookieSettingsStyles = css({
   padding: 0,
   height: '0%',
   alignSelf: 'center',
+  backgroundColor: 'transparent', // To prevent Safari from rendering grey 'buttonface' as bgcolor
 });
 
 interface CookieSettingsProps extends HyperlinkProps {

@@ -4,7 +4,7 @@ import * as React from 'react';
 import styled from '@emotion/styled';
 
 import {Popup} from '@workday/canvas-kit-react/popup';
-import {space, colors, type, CanvasColor} from '@workday/canvas-kit-react/tokens';
+import {space, colors, type, CanvasColor, commonColors} from '@workday/canvas-kit-react/tokens';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {checkIcon} from '@workday/canvas-system-icons-web';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
@@ -57,8 +57,10 @@ const ToastSystemIcon = styled(SystemIcon)({
   alignSelf: 'start',
 });
 
+const {color, ...subTextMediumStyles} = type.levels.subtext.medium;
+
 const actionButtonStyles = {
-  ...type.levels.subtext.medium,
+  ...subTextMediumStyles,
   display: 'block',
   backgroundColor: 'transparent', // To prevent Safari from rendering grey 'buttonface' as bgcolor
   border: 'none',
