@@ -25,9 +25,11 @@ export interface BreadcrumbLinkProps extends React.AnchorHTMLAttributes<HTMLAnch
 
 type StyledLinkProps = Pick<BreadcrumbLinkProps, 'maxWidth' | 'href'>;
 
+const {color, ...subtextLargeStyles} = type.levels.subtext.large;
+
 const StyledLink = styled(Hyperlink)(
   {
-    ...type.levels.subtext.large,
+    ...subtextLargeStyles,
   },
   ({maxWidth}: StyledLinkProps) => ({
     ...truncateStyles(maxWidth),
