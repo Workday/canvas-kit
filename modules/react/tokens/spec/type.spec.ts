@@ -134,12 +134,10 @@ describe('Type Tokens', () => {
       const actualLineHeightValue = remToPx(medium.lineHeight);
       const expectedLineHeightValue = typeLevelMap.body.medium.lineHeight;
 
-      const actualLetterSpacingValue = remToPx(medium.letterSpacing);
       const expectedLetterSpacingValue = typeLevelMap.body.medium.letterSpacing;
 
       expect(actualFontSizeValue).toEqual(expectedFontSizeValue);
       expect(actualLineHeightValue).toEqual(expectedLineHeightValue);
-      expect(actualLetterSpacingValue).toEqual(expectedLetterSpacingValue);
     });
 
     it('should return the correct medium size values', () => {
@@ -150,12 +148,10 @@ describe('Type Tokens', () => {
       const actualLineHeightValue = remToPx(large.lineHeight);
       const expectedLineHeightValue = typeLevelMap.body.large.lineHeight;
 
-      const actualLetterSpacingValue = remToPx(large.letterSpacing);
       const expectedLetterSpacingValue = typeLevelMap.body.large.letterSpacing;
 
       expect(actualFontSizeValue).toEqual(expectedFontSizeValue);
       expect(actualLineHeightValue).toEqual(expectedLineHeightValue);
-      expect(actualLetterSpacingValue).toEqual(expectedLetterSpacingValue);
     });
   });
 
