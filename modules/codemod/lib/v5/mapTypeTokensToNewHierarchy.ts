@@ -437,8 +437,12 @@ export default function transformer(file: FileInfo, api: API) {
         ? j.memberExpression(j.identifier('canvas'), newFontWeightMemberExpression, false)
         : newFontWeightMemberExpression
     );
+
     if (nodePath.parent.parent.value.type === 'ObjectExpression') {
       return nodePath.parent.parent.value.properties.push(fontWeightProperty);
+    } else if (nodePath.parent.value.type === 'CallExpression') {
+      const typeArgIndex = nodePath.parent.value.arguments.indexOf(nodePath.value);
+      return nodePath.parent.value.arguments.splice(typeArgIndex + 1, 0, fontWeightProperty);
     } else if (nodePath.parent.value.type === 'JSXExpressionContainer') {
       return nodePath.replace(
         j.objectExpression([j.spreadElement(nodePath.value), fontWeightProperty])

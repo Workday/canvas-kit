@@ -1604,6 +1604,26 @@ describe('Canvas Kit Labs Type Tokens Map Codemod', () => {
 
         expectTransform(input, expected);
       });
+
+      it('should add bold styles to former styled headings', () => {
+        const input = `
+          import canvas, {type} from '@workday/canvas-kit-react/tokens';
+
+          const Heading = styled('h3')(type.h3, {
+            marginBottom: space.m,
+          });
+        `;
+
+        const expected = `
+          import canvas, {type} from '@workday/canvas-kit-react/tokens';
+
+          const Heading = styled('h3')(type.levels.body.large, fontWeight: type.properties.fontWeights.bold, {
+            marginBottom: space.m,
+          });
+        `;
+
+        expectTransform(input, expected);
+      });
     });
 
     context('when transforming type variants', () => {
