@@ -100,8 +100,6 @@ export const levels: CanvasTypeHierarchy = {
       fontSize: fontSizes[20],
       /** 28px converted to base-16 rem (1.75rem) */
       lineHeight: '1.75rem',
-      /** 0.16px converted to base-16 rem (0.01rem) */
-      letterSpacing: '0.01rem',
       fontWeight: fontWeights.regular,
       color: typeColors.body,
     },
@@ -111,8 +109,6 @@ export const levels: CanvasTypeHierarchy = {
       fontSize: fontSizes[18],
       /** 28px converted to base-16 rem (1.75rem) */
       lineHeight: '1.75rem',
-      /** 0.16px converted to base-16 rem (0.01rem) */
-      letterSpacing: '0.01rem',
       fontWeight: fontWeights.regular,
       color: typeColors.body,
     },
@@ -335,8 +331,6 @@ type CanvasTypeBodyLevel = {
     fontSize: CanvasFontSizes[20];
     /** 28px converted to base-16 rem (1.75rem) */
     lineHeight: '1.75rem';
-    /** 0.16px converted to base-16 rem (0.01rem) */
-    letterSpacing: '0.01rem';
     fontWeight: CanvasFontWeights['regular'];
     color: typeof typeColors.body;
   };
@@ -346,8 +340,6 @@ type CanvasTypeBodyLevel = {
     fontSize: CanvasFontSizes[18];
     /** 28px converted to base-16 rem (1.75rem) */
     lineHeight: '1.75rem';
-    /** 0.16px converted to base-16 rem (0.01rem) */
-    letterSpacing: '0.01rem';
     fontWeight: CanvasFontWeights['regular'];
     color: typeof typeColors.body;
   };
