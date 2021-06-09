@@ -52,6 +52,28 @@ element receives focus when the modal opens.
 
 <ExampleCodeBlock code={CustomFocus} />
 
-## Specifications
+## Components
 
-<Specifications file="Modal.spec.ts" name="Modal" />
+### Modal
+
+This component is the container component and does not render any semantic elements. It provides a
+React Context model for the `Modal` subcomponents. If you manually pass a `model` to all
+subcomponents, this container component isn't needed. If you do not pass a `model`, the `Modal`
+container component will build a default one using `useModalModel`. `Modal` is a composition of a
+`Popup` component and has a similar structure to `Popup`.
+
+<ArgsTable of={Modal} />
+
+### Modal.Target
+
+A `Modal.Target` is any element that is meant to show the Modal. The default component rendered by
+this component is a `SecondaryButton` element. You can override this by passing the desired
+component via `as`. Many examples above use `as={DeleteButton}`. If you want to render an
+`IconButton` instead, use `as={IconButton}`. The `Modal.Target` is an alias for `Popup.Target` and
+uses the `usePopupTarget` hook.
+
+### Modal.Overlay
+
+A `Modal.Overlay` is the component that hooks a Modal up to the `PopupStack` as well as the
+semi-transparent overlay commonly used with modals. Internally, the `Modal.Overlay` component uses
+two `div` elements to ensure proper rendering of the `Modal` content.

@@ -45,8 +45,11 @@ Simply run:
 
 **Breaking changes accounted for by this codemod will be marked with a 🤖.**
 
-Please verify all changes made by the codemod, and
-[let us know](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) if you
+**Please verify all changes made by the codemod. As a safety precaution, we recommend committing the
+changes from the codemod as a single isolated commit (separate from other changes) so you can
+rollback more easily if necessary.**
+
+[Let us know](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) if you
 encounter any issues or use cases that we've missed. The `@workday/canvas-kit-codemod` package will
 help us maintain additional codemod transforms to make future migrations easier.
 
@@ -1376,10 +1379,10 @@ subcomponents. `Modal` looks much like the structure of [Popups](#popups), excep
 `Modal.Overlay` subcomponent instead of a `Popup.Popper` component. The `Modal.Overlay` is the
 component in charge of adding an element to the `PopupStack`.
 
-v5 introduced focus management behaviors like `useInitialFocus` and `useReturnFocus` that was
-originally hard-coded into the `Modal`, but now `Modal` uses the hooks from the `popup` module. We
-noticed some application code that do custom focus management. Most of the special focus management
-code could be removed when using v5 the `Modal`.
+We noticed some application code that do custom focus management. There were some subtle issues like
+#694 (VoiceOver on iOS not returning focus). v5 introduced focus management behaviors like
+`useInitialFocus` and `useReturnFocus` that should work more consistently. Most of the special focus
+management code could be removed when using v5 the `Modal`.
 
 #### useModal and useModalModel
 
@@ -1461,6 +1464,5 @@ const MySkeleton = () => (
 );
 ```
 
-Additionally, the skeleton animation has been updated from a diagonal sheen, or shimmer, to fading
+Additionally, the Skeleton animation has been updated from a diagonal sheen, or shimmer, to fading
 the opacity of the entire shape(s) in and out.
-```
