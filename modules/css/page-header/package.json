@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-css-page-header",
-  "version": "5.0.0-rc.0",
+  "version": "5.0.0",
   "description": "The blue header at the top of a page to indicate page title and other details",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -16,7 +16,7 @@
     "url": "http://github.com/Workday/canvas-kit/tree/master/modules/page-header/css"
   },
   "dependencies": {
-    "@workday/canvas-kit-css-core": "^5.0.0-rc.0"
+    "@workday/canvas-kit-css-core": "^5.0.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
