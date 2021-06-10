@@ -1,11 +1,11 @@
 /* eslint-disable no-param-reassign */
 import React from 'react';
 import {toId} from '@storybook/csf';
-import {Table, TableRow} from '@workday/canvas-kit-react-table';
-import {Hyperlink} from '@workday/canvas-kit-react-button';
+import {Table, TableRow} from '@workday/canvas-kit-react/table';
+import {Hyperlink} from '@workday/canvas-kit-react/button';
 
 import {specifications, SpecDescribe, SpecIt} from './specs';
-import { GithubBranch, GithubUrl, StorybookUrl } from './docs'
+import {GithubBranch, GithubUrl, StorybookUrl} from './docs';
 
 export interface SpecificationsProps {
   file: string;
@@ -74,6 +74,10 @@ export const Specifications = ({file, name}: SpecificationsProps) => {
   }
 
   const renderGiven = (input: string) => {
+    if (!input) {
+      return `Could not find a "given". Check the spec file.`;
+    }
+
     const matches = input.match(/(.*)(\[[A-Za-z/\s]+), ([A-Za-z\s]+)\](.*)/);
     if (matches == null) {
       return input;
@@ -81,20 +85,18 @@ export const Specifications = ({file, name}: SpecificationsProps) => {
 
     const [, first, kind, name, last] = matches;
 
-    return (
-      <>
-        {first.replace(/given /i, '')}
-        <Hyperlink
-          href={`${storybookBaseUrl}?path=/story/${toId(
-            kind,
-            name.replace('DefaultStory', 'Default Story')
-          )}`}
-        >
-          {name.replace('DefaultStory', 'Default')}
-        </Hyperlink>
-        {last}
-      </>
-    );
+    return <>
+      {first.replace(/given /i, '')}
+      <Hyperlink
+        href={`${storybookBaseUrl}?path=/story/${toId(
+          kind,
+          name.replace('DefaultStory', 'Default Story')
+        )}`}
+      >
+        {name.replace('DefaultStory', 'Default')}
+      </Hyperlink>
+      {last}
+    </>;
   };
 
   return block.type === 'describe' ? (
@@ -132,9 +134,7 @@ export const Specifications = ({file, name}: SpecificationsProps) => {
         </tbody>
       </Table>
       Source:{' '}
-      <Hyperlink
-        href={`${githubUrl}blob/${githubBranch}/cypress/integration/${file}`}
-      >
+      <Hyperlink href={`${githubUrl}blob/${githubBranch}/cypress/integration/${file}`}>
         {file}
       </Hyperlink>
     </>

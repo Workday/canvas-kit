@@ -1,0 +1,18 @@
+{
+  "extends": "./tsconfig.json",
+  "include": ["./jest/testing-library__jest-dom.d.ts", "./jest/verifyComponent.d.ts", "**/*.spec.tsx", "**/*.spec.ts"],
+  "exclude": ["cypress"],
+  "compilerOptions": {
+    "declaration": false,
+    "declarationMap": false,
+    "noImplicitReturns": false,
+    "noImplicitThis": true,
+    "preserveConstEnums": true,
+    "allowUnreachableCode": false,
+    "noImplicitAny": false,
+    "strictNullChecks": false,
+    "noUnusedLocals": false,
+    "types": ["jest"],
+    "incremental": false
+  }
+}

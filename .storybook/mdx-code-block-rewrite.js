@@ -1,4 +1,3 @@
-const path = require('path');
 const {storyNameFromExport} = require('@storybook/csf');
 
 // This loader replaces example code blocks with Storybook specific tags

@@ -1,0 +1,79 @@
+{
+  "name": "@workday/canvas-kit-react",
+  "version": "5.0.0",
+  "description": "The parent module that contains all Workday Canvas Kit React components",
+  "author": "Workday, Inc. (https://www.workday.com)",
+  "license": "Apache-2.0",
+  "main": "dist/commonjs/index.js",
+  "module": "dist/es6/index.js",
+  "sideEffects": false,
+  "types": "dist/es6/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/Workday/canvas-kit/tree/master/modules/canvas-kit-react"
+  },
+  "files": [
+    "*/package.json",
+    "*/lib/*",
+    "*/index.ts",
+    "dist/",
+    "index.ts",
+    "ts3.5/**/*"
+  ],
+  "typesVersions": {
+    "<=3.5": {
+      "*": [
+        "ts3.5/*"
+      ]
+    }
+  },
+  "scripts": {
+    "watch": "yarn build:es6 -w",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "rimraf dist && rimraf ts3.5 && rimraf .build-info && mkdirp dist && mkdirp ts3.5/dist",
+    "build:cjs": "tsc -p tsconfig.cjs.json",
+    "build:es6": "tsc -p tsconfig.es6.json",
+    "build:rebuild": "npm-run-all clean build",
+    "build:downlevel-dts": "yarn run downlevel-dts dist ts3.5/dist",
+    "build": "npm-run-all --parallel build:cjs build:es6 --sequential build:downlevel-dts",
+    "prepack": "node ../../utils/publish.js pre react",
+    "postpack": "node ../../utils/publish.js post react",
+    "depcheck": "node ../../utils/check-dependencies-exist.js"
+  },
+  "keywords": [
+    "canvas",
+    "canvas-kit",
+    "react",
+    "components",
+    "workday"
+  ],
+  "peerDependencies": {
+    "react": ">= 16.8 < 17"
+  },
+  "dependencies": {
+    "@emotion/core": "^10.0.28",
+    "@emotion/is-prop-valid": "^0.8.2",
+    "@emotion/styled": "^10.0.27",
+    "@popperjs/core": "^2.5.4",
+    "@workday/canvas-colors-web": "^2.0.0",
+    "@workday/canvas-depth-web": "^0.16.4",
+    "@workday/canvas-kit-labs-react": "^5.0.0",
+    "@workday/canvas-kit-popup-stack": "^5.0.0",
+    "@workday/canvas-kit-preview-react": "^5.0.0",
+    "@workday/canvas-system-icons-web": "1.0.41",
+    "@workday/design-assets-types": "^0.2.4",
+    "chroma-js": "^2.1.0",
+    "element-closest": "^3.0.2",
+    "emotion-theming": "^10.0.10",
+    "focus-trap-js": "1.1.0",
+    "lodash": "^4.17.14",
+    "polished": "^2.3.0",
+    "react-innertext": "^1.1.5",
+    "rtl-css-js": "^1.13.1",
+    "uuid": "^3.3.3"
+  },
+  "devDependencies": {
+    "@workday/canvas-accent-icons-web": "^1.0.0",
+    "@workday/canvas-applet-icons-web": "^0.17.50"
+  }
+}

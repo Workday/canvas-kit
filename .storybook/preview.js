@@ -17,7 +17,8 @@ function storySort(a, b) {
     prefix('getting-started', 'a'),
     prefix('tokens-', '1'),
     prefix('components-', '2'),
-    prefix('labs-', '3'),
+    prefix('preview-', '3'),
+    prefix('labs-', '4'),
     prefix('default', 'aa'),
     prefix('visual-testing', 'zz')
   );

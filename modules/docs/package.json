@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-docs",
-  "version": "4.7.0",
+  "version": "5.0.0",
   "description": "Documentation components of Canvas Kit components",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -28,12 +28,13 @@
   "scripts": {
     "watch": "yarn build:es6 -w",
     "clean": "rimraf dist && rimraf ts3.5 && rimraf .build-info && mkdirp dist && mkdirp ts3.5/dist",
+    "build:mdx": "node ./utils/build.js mdx/",
     "build:cjs": "tsc -p tsconfig.cjs.json",
     "build:es6": "tsc -p tsconfig.es6.json",
     "build:rebuild": "npm-run-all clean build",
     "build:specs": "node ./utils/build-specifications.js",
     "build:downlevel-dts": "yarn run downlevel-dts dist ts3.5/dist",
-    "build": "npm-run-all --parallel build:cjs build:es6 --sequential build:specs build:downlevel-dts",
+    "build": "npm-run-all --parallel build:cjs build:es6 build:mdx --sequential build:specs build:downlevel-dts",
     "depcheck": "node ../../utils/check-dependencies-exist.js"
   },
   "publishConfig": {
@@ -48,11 +49,11 @@
   ],
   "dependencies": {
     "@storybook/csf": "0.0.1",
-    "@workday/canvas-kit-react-button": "^4.7.0",
-    "@workday/canvas-kit-react-table": "^4.7.0"
+    "@workday/canvas-kit-react": "^5.0.0"
   },
   "devDependencies": {
     "glob": "^7.1.6",
+    "mkdirp": "^1.0.3",
     "typescript": "^3.8.3"
   }
 }
