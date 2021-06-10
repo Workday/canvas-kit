@@ -82,6 +82,8 @@ import {TextInput} from '@workday/canvas-kit-react/text-input';
 Recall that the codemod only works on `.js`, `.jsx`, `.ts`, and `.tsx` extensions. Other file types
 will need to be updated manually.
 
+---
+
 ### Canvas Kit Preview
 
 Due to the broad range of stability in [Canvas Kit Labs](../../labs-react)
@@ -98,6 +100,8 @@ for alpha components and Preview as a space for beta components.
 
 We've promoted several components from Labs to Preview in v5. See
 [Component Promotions](#component-promotions) for more details.
+
+---
 
 ### Type Deprecations and Hierarchy Updates
 
@@ -410,6 +414,8 @@ const HeadingLink = () => (
 );
 ```
 
+---
+
 ### Canvas Kit CSS Maintenance Mode
 
 Due to the infrequent use of our CSS modules, we've placed them in maintenance mode in v5. Although
@@ -462,6 +468,8 @@ import {Pagination} from '@workday/canvas-kit-labs-react-pagination';
 // v5
 import {Pagination} from '@workday/canvas-kit-react/pagination';
 ```
+
+---
 
 ### Core
 
@@ -563,6 +571,8 @@ import {InputProvider} from '@workday/canvas-kit-react/common';
 ```
 
 🤖 The codemod will update your `InputProvider` imports.
+
+---
 
 ### Tokens
 
@@ -683,6 +693,8 @@ import {borderRadius} from '@workday/canvas-kit-react/tokens';
 
 console.log(borderRadius.zero); // returns "0px"
 ```
+
+---
 
 ### Button
 
@@ -807,6 +819,8 @@ interface MyButtonProps extends ButtonProps {
 }
 ```
 
+---
+
 ### Card
 
 Card is now a [compound component](./COMPOUND_COMPONENTS.mdx) composed of a `Card.Body` and an
@@ -867,6 +881,8 @@ const props = {
 // Re-exporting
 import {Card} from './Card' // where `Card` is a re-exported Canvas Kit `Card`
 ```
+
+---
 
 ### Inputs
 
@@ -949,6 +965,8 @@ instance of the entire component
 ([source](https://reactjs.org/docs/refs-and-the-dom.html#accessing-refs)) rather than the underlying
 HTML element represented by the component. This is no longer the case in v5.
 
+---
+
 ### Tabs
 
 In addition to [promoting Tabs](#promotions-from-labs-to-main) out of Labs and into the Main module,
@@ -961,6 +979,8 @@ we've made a few updates to the component in v5:
 - The `Tabs` component no longer accepts the `currentTab` property. Tabs uses a model now. See the
   component documentation for more details.
 
+---
+
 ### Popper
 
 In v4, Popper rendered an empty `div` element as a child of the element created by the `PopupStack`
@@ -972,6 +992,8 @@ this element as we do for other components, so we've discarded `elemProps`. If n
 still target the element using `ref` and modify it using DOM APIs.
 
 There is no codemod for this change.
+
+---
 
 ### Popups
 
@@ -1306,6 +1328,8 @@ const MyPopup = () => {
 }
 ```
 
+---
+
 ### Modal
 
 Modal has transitioned to a [compound component](./COMPOUND_COMPONENTS.mdx). What was `Modal` in v4
@@ -1438,6 +1462,8 @@ useDisableBodyScroll(model);
 
 return <Modal model={model}>{/* ... */}</Modal>;
 ```
+
+---
 
 ### Skeleton
 
