@@ -47,11 +47,10 @@ const defaultTransformOrigin = {
 
 export const TooltipContainer = styled('div')<TooltipContainerProps>(
   {
-    ...type.levels.subtext.large,
+    ...type.levels.subtext.medium,
     display: 'inline-flex',
     padding: spaceNumbers.xxs + spaceNumbers.xxxs,
     color: colors.frenchVanilla100,
-    fontSize: 13,
     a: {
       color: colors.frenchVanilla100,
       textDecoration: 'underline',

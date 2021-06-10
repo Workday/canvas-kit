@@ -13,7 +13,7 @@ const toggledStyles = {
 
 const StyledPageButton = styled(IconButton)<{toggled?: boolean}>(
   {
-    ...type.levels.subtext.medium,
+    ...type.levels.subtext.large,
   },
   ({toggled}) => {
     return toggled ? toggledStyles : {};

@@ -26,8 +26,8 @@ export interface DeprecatedButtonProps extends GrowthBehavior {
 const Container = styled('button')<DeprecatedButtonProps & StyledType>(
   {
     fontFamily: type.properties.fontFamilies.default,
-    fontSize: type.properties.fontSizes[14],
-    fontWeight: type.properties.fontWeights.medium,
+    fontSize: 14, // hardcoded value to prevent shifting from type changes
+    fontWeight: 500, // hardcoded value to prevent shifting from type changes
     boxSizing: 'border-box',
     display: 'inline-flex',
     alignItems: 'center',
@@ -63,7 +63,7 @@ const Container = styled('button')<DeprecatedButtonProps & StyledType>(
           padding: `0 ${canvas.space.m}`,
           minWidth: '80px',
           maxWidth: '200px',
-          fontSize: type.properties.fontSizes[12],
+          fontSize: 13, // hardcoded value to prevent shifting from type changes
         };
       case 'small':
         return {
@@ -71,7 +71,7 @@ const Container = styled('button')<DeprecatedButtonProps & StyledType>(
           padding: `0 ${canvas.space.xxs}`,
           minWidth: '56px',
           maxWidth: '120px',
-          fontSize: '10px',
+          fontSize: 10, // hardcoded value to prevent shifting from type changes
           lineHeight: 'normal',
         };
     }

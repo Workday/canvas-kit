@@ -45,7 +45,7 @@ const ToastContentContainer = styled('div')<Pick<ToastProps, 'onClose'>>(
   {
     display: 'flex',
     alignItems: 'center',
-    ...type.levels.subtext.medium,
+    ...type.levels.subtext.large,
   },
   ({onClose}) => ({
     marginRight: onClose ? space.m : undefined,
@@ -57,8 +57,10 @@ const ToastSystemIcon = styled(SystemIcon)({
   alignSelf: 'start',
 });
 
+const {color, ...subTextLargeStyles} = type.levels.subtext.large;
+
 const actionButtonStyles = {
-  ...type.levels.subtext.medium,
+  ...subTextLargeStyles,
   display: 'block',
   backgroundColor: 'transparent', // To prevent Safari from rendering grey 'buttonface' as bgcolor
   border: 'none',

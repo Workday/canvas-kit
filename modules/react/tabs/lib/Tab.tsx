@@ -66,7 +66,7 @@ export interface TabProps {
 const StyledButton = styled('button')<{isSelected: boolean} & StyledType>(
   {
     ...type.levels.subtext.large,
-    fontWeight: type.properties.fontWeights.bold,
+    fontWeight: type.properties.fontWeights.medium,
     border: 'none',
     backgroundColor: 'transparent',
     flex: '0 0 auto',

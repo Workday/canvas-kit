@@ -376,25 +376,37 @@ const monoStyles = {fontFamily: type.properties.fontFamilies.monospace};
 **Link Variant**
 
 The `link` variant is also being deprecated in v5. You'll need to use the `Hyperlink` component
-instead. This is the only manual update needed for the type updates. Below is an example:
+instead. This is the only manual update needed for the type updates. Below are some examples:
 
 ```tsx
 // v4
 import {type} from '@workday/canvas-kit-labs-react-core';
 
-const Link = styled('a')(
-  type.variant.link,
-);
+const Link = styled('a')(type.variant.link);
 
-return (
-  <Link href="https://workday.github.io/canvs-kit">View docs</Link>
-);
+return <Link href="https://workday.github.io/canvas-kit">View docs</Link>;
 
 // v5
 import {Hyperlink} from '@workday/canvas-kit-labs-react/button';
 
-return (
-  <Hyperlink href="https://workday.github.io/canvs-kit">View docs</Link>
+return <Hyperlink href="https://workday.github.io/canvas-kit">View docs</Hyperlink>;
+```
+
+> **Note:** If you're mixing styles from type `levels`, you'll need to pull out the `color` style
+> when applying them to `Hyperlink`. Below is an example.
+
+```tsx
+// v5
+import {type} from '@workday/canvas-kit-labs-react/tokens';
+import {Hyperlink} from '@workday/canvas-kit-labs-react/button';
+
+// Remove `color` from type styles to prevent the color from overriding the link color
+const {color, ...headingLargeStyles} = type.levels.heading.large;
+
+const HeadingLink = () => (
+  <Hyperlink css={headingLargeStyles} href="https://workday.github.io/canvas-kit">
+    View docs
+  </Hyperlink>
 );
 ```
 

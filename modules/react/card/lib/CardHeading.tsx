@@ -13,6 +13,7 @@ export interface CardHeadingProps {
 }
 
 const Heading = styled('h3')<StyledType>(type.levels.body.large, {
+  fontWeight: type.properties.fontWeights.bold,
   marginBottom: space.m,
   marginTop: 0,
 });
