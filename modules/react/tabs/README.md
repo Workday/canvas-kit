@@ -1,6 +1,6 @@
 # Canvas Kit React Tabs
 
-`Tabs` is a [Compound Component](../../../../modules/docs/mdx/COMPOUND_COMPONENTS.md).
+`Tabs` is a [Compound Component](../../../../modules/docs/mdx/COMPOUND_COMPONENTS.mdx).
 
 ## Installation
 

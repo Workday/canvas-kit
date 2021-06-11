@@ -7,7 +7,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 The changes below include the changes made across all 5.0.0 beta and rc versions (`v5.0.0-beta.0 - v5.0.0-rc.0`).
 
-To review the breaking changes made in this release, check out the [v5.0.0 Migration Guide](./modules/docs/mdx/5.0-MIGRATION-GUIDE.md). Use our new [codemod utility](./modules/codemod) to make the update as smooth as possible.
+To review the breaking changes made in this release, check out the [v5.0.0 Migration Guide](./modules/docs/mdx/5.0-MIGRATION-GUIDE.mdx). Use our new [codemod utility](./modules/codemod) to make the update as smooth as possible.
 
 ### Components
 
@@ -498,7 +498,7 @@ React.createPortal(contents, stackRef.current)
 
 The changes below are the consolidation of changes made across all 4.0.0 beta versions (`v4.0.0-beta.0-5`).
 
-To review the breaking changes made in this release, check out the [v4.0.0 Migration Guide](./modules/docs/mdx/4.0-MIGRATION-GUIDE.md).
+To review the breaking changes made in this release, check out the [v4.0.0 Migration Guide](./modules/docs/mdx/4.0-MIGRATION-GUIDE.mdx).
 
 ### Infrastructure
 - ci: Release canary builds for prerelease branches ([#481](https://github.com/Workday/canvas-kit/pull/481)) [@anicholls](https://github.com/anicholls)
