@@ -179,7 +179,7 @@ export type CanvasTypeHierarchy = {
    * Below is an example:
    *
    * @example
-   * import { type } from '@workday/canvas-kit-labs-react/tokens'
+   * import { type } from '@workday/canvas-kit-react/tokens'
    *
    * const Title = () => (
    *   <h1 css={type.levels.title.medium}>Title Text</h2>
@@ -204,7 +204,7 @@ export type CanvasTypeHierarchy = {
    * Below is an example:
    *
    * @example
-   * import { type } from '@workday/canvas-kit-labs-react/tokens'
+   * import { type } from '@workday/canvas-kit-react/tokens'
    *
    * const Heading = () => (
    *   <h2 css={type.levels.heading.medium}>Heading Text</h2>
@@ -229,7 +229,7 @@ export type CanvasTypeHierarchy = {
    * Below is an example:
    *
    * @example
-   * import { type } from '@workday/canvas-kit-labs-react/tokens'
+   * import { type } from '@workday/canvas-kit-react/tokens'
    *
    * const Body = () => (
    *   <p css={type.levels.body.medium}>Body text</p>
@@ -254,7 +254,7 @@ export type CanvasTypeHierarchy = {
    * Below is an example:
    *
    * @example
-   * import { type } from '@workday/canvas-kit-labs-react/tokens'
+   * import { type } from '@workday/canvas-kit-react/tokens'
    *
    * const Subtext = () => (
    *   <span css={type.levels.subtext.medium}>subtext</h2>

@@ -13,14 +13,14 @@ the component.
 ## Installation
 
 ```sh
-yarn add @workday/canvas-kit-labs-react
+preview-react add @workday/canvas-kit-preview-react
 ```
 
 ## Usage
 
 ```tsx
 import * as React from 'react';
-import ColorPicker from '@workday/canvas-kit-labs-react/color-picker';
+import ColorPicker from '@workday/canvas-kit-preview-react/color-picker';
 import {colors} from '@workday/canvas-kit-react/tokens';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {Popper, Popup} from '@workday/canvas-kit-react/popup';

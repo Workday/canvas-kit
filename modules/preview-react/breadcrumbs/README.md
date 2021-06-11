@@ -9,7 +9,7 @@ Breadcrumbs provides navigation to previous levels of pages.
 ## Installation
 
 ```sh
-yarn add @workday/canvas-kit-labs-react
+yarn add @workday/canvas-kit-preview-react
 ```
 
 ## Usage
@@ -33,7 +33,7 @@ This component supports
 
 ```tsx
 import React from 'react';
-import Breadcrumbs from '@workday/canvas-kit-labs-react/breadcrumbs';
+import Breadcrumbs from '@workday/canvas-kit-preview-react/breadcrumbs';
 
 const AccountInvoiceBreadcrumbNav = () => {
   return (
@@ -132,7 +132,7 @@ the example.
 
 ```tsx
 import React from 'react';
-import Breadcrumbs from '@workday/canvas-kit-labs-react/breadcrumbs';
+import Breadcrumbs from '@workday/canvas-kit-preview-react/breadcrumbs';
 
 ...
 
@@ -156,7 +156,7 @@ This component supports
 
 ```tsx
 import React from 'react';
-import Breadcrumbs from '@workday/canvas-kit-labs-react/breadcrumbs';
+import Breadcrumbs from '@workday/canvas-kit-preview-react/breadcrumbs';
 
 return <Breadcrumbs.ListItem>{/* breadcrumb link goes here */}</Breadcrumbs.ListItem>;
 ```
@@ -194,7 +194,7 @@ that `onAction` will not block any `onClick` if provided. Let's look at an examp
 import React from 'react';
 // using the history package
 import { createBrowserHistory } from 'history';
-import Breadcrumbs from '@workday/canvas-kit-labs-react/breadcrumbs';
+import Breadcrumbs from '@workday/canvas-kit-preview-react/breadcrumbs';
 
 // this is likely being done at the root of your application and not inside this component.
 const history = createBrowserHistory();
@@ -229,7 +229,7 @@ example:
 
 ```tsx
 import React from 'react';
-import Breadcrumbs from '@workday/canvas-kit-labs-react/breadcrumbs';
+import Breadcrumbs from '@workday/canvas-kit-preview-react/breadcrumbs';
 
 return (
   <Breadcrumbs.Link maxWidth={150} href="/account">
@@ -255,7 +255,7 @@ This component also supports
 
 ```tsx
 import React from 'react';
-import Breadcrumbs from '@workday/canvas-kit-labs-react/breadcrumbs';
+import Breadcrumbs from '@workday/canvas-kit-preview-react/breadcrumbs';
 
 return (
   <Breadcrumbs.CurrentItem>
@@ -273,7 +273,7 @@ example:
 
 ```tsx
 import React from 'react';
-import Breadcrumbs from '@workday/canvas-kit-labs-react/breadcrumbs';
+import Breadcrumbs from '@workday/canvas-kit-preview-react/breadcrumbs';
 
 return (
   <Breadcrumbs.CurrentItem maxWidth={150}>

@@ -17,7 +17,7 @@ at the [Menu Stories](https://workday.github.io/canvas-kit/?path=/story/labs-men
 ## Installation
 
 ```sh
-yarn add @workday/canvas-kit-labs-react
+yarn add @workday/canvas-kit-preview-react
 ```
 
 # Menu
@@ -28,7 +28,7 @@ This component renders Canvas-style menu list.
 
 ```tsx
 import * as React from 'react';
-import {Menu, MenuItem} from '@workday/canvas-kit-labs-react/menu';
+import {Menu, MenuItem} from '@workday/canvas-kit-preview-react/menu';
 import {userIcon} from '@workday/canvas-system-icons-web';
 
 <Menu title="Header" brandUrl="#">
