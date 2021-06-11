@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 5.0.1 (2021-06-11)
+
+### Docs
+
+- docs: Update readme links to use mdx ([#1103](https://github.com/Workday/canvas-kit/pull/1103)) [@jpante](https://github.com/jpante)
+- docs: Update old labs references ([#1105](https://github.com/Workday/canvas-kit/pull/1105)) [@anicholls](https://github.com/anicholls)
+
+### Infrastructure
+
+- build: Remove baseUrl and paths from tsconfig ([#1107](https://github.com/Workday/canvas-kit/pull/1107)) [@anicholls](https://github.com/anicholls)
+- chore: Fix circular dep in preview module ([#1104](https://github.com/Workday/canvas-kit/pull/1104)) [@anicholls](https://github.com/anicholls)
+
 ## 5.0.0 (2021-06-10)
 
 The changes below include the changes made across all 5.0.0 beta and rc versions (`v5.0.0-beta.0 - v5.0.0-rc.0`).
