@@ -5,7 +5,7 @@
 ## Installation
 
 ```sh
-yarn add @workday/canvas-kit-labs-react
+yarn add @workday/canvas-kit-react
 ```
 
 ## Usage
