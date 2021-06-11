@@ -117,7 +117,7 @@ Each module is independently versioned using [Lerna](https://github.com/lerna/le
 ## Developer Documentation
 
 - [Contributing](./modules/docs/mdx/CONTRIBUTING.mdx)
-- [Code of Conduct](./modules/docs/mdx/CODE_OF_CONDUCT.mdx)
+- [Code of Conduct](./modules/docs/mdx/CODE_OF_CONDUCT.md)
 - [Component Status](./modules/docs/mdx/COMPONENT_STATUS.mdx)
 - Migration Guides:
   - [v4.0 Migration Guide](./modules/docs/mdx/4.0-MIGRATION-GUIDE.mdx)
@@ -126,7 +126,7 @@ Each module is independently versioned using [Lerna](https://github.com/lerna/le
   - [API & Pattern Guidelines](./modules/docs/mdx/API_PATTERN_GUIDELINES.mdx)
   - [Compound Components](./modules/docs/mdx/COMPOUND_COMPONENTS.mdx)
   - [Creating Compound Components](./modules/docs/mdx/CREATING_COMPOUND_COMPONENTS.mdx)
-  - [Testing](./modules/docs/mdx/TESTING.md)
+  - [Testing](./modules/docs/mdx/TESTING.mdx)
 
 ## License
 
