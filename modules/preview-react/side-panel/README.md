@@ -9,13 +9,13 @@ A collapsable side panel
 ## Installation
 
 ```sh
-yarn add @workday/canvas-kit-labs-react
+yarn add @workday/canvas-kit-preview-react
 ```
 
 ## Usage
 
 ```tsx
-import SidePanel, {useSidePanel} from '@workday/canvas-kit-labs-react/side-panel';
+import SidePanel, {useSidePanel} from '@workday/canvas-kit-preview-react/side-panel';
 
 /**
  * A SidePanel is made up of three components
