@@ -1,4 +1,15 @@
-import * as canvasColorsWeb from '@workday/canvas-colors-web';
+import {
+  buttonColors,
+  chartingColorOffsets,
+  chartingColors,
+  colors,
+  commonColors,
+  gradients,
+  iconColors,
+  inputColors,
+  statusColors,
+  typeColors,
+} from '@workday/canvas-colors-web';
 
 import {borderRadius, CanvasBorderRadius, CanvasBorderRadiusKeys, CanvasBorderRadiusValues} from './lib/radius';
 import {BrandingColor, CanvasColor} from './lib/colors.types';
@@ -22,15 +33,22 @@ import {type,
 } from './lib/type';
 import {CSSProperties} from './lib/types';
 
-const {default: colors, gradients, ...semanticColors} = canvasColorsWeb;
 const canvas = {
+  buttonColors,
+  chartingColorOffsets,
+  chartingColors,
   colors,
+  commonColors,
   depth,
-  space,
-  type,
   fontFamily,
+  gradients,
+  iconColors,
+  inputColors,
   monoFontFamily,
-  ...semanticColors,
+  space,
+  statusColors,
+  type,
+  typeColors,
 };
 
 export * from '@workday/canvas-colors-web';
