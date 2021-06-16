@@ -350,10 +350,9 @@ export const PopupStack = {
    * @param staleItems the items that will now be handled by the current adapter.
    */
   transferOwnership(staleItems: PopupStackItem[]): void {
-    if (stack._adapter?.transferOwnership) {
-      return stack._adapter.transferOwnership(staleItems);
-    }
-
+    // This only handles the default PopupStack behavior. If you have your own adapter,
+    // it is recommended to override this method to avoid any possible stale popup references
+    // when createAdapter() is called.
     staleItems.forEach(item => {
       stack.items.push(item);
     });
