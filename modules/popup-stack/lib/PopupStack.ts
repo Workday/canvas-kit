@@ -344,6 +344,30 @@ export const PopupStack = {
     }
     return false;
   },
+
+  /**
+   * Converts the given popup stack items over to the adapter calling transferOwnership.
+   * @param staleItems the items that will now be handled by the current adapter.
+   */
+  transferOwnership(staleItems: PopupStackItem[]): void {
+    if (stack._adapter?.transferOwnership) {
+      return stack._adapter.transferOwnership(staleItems);
+    }
+
+    staleItems.forEach(item => {
+      stack.items.push(item);
+    });
+  },
+
+  /**
+   * @returns the list of popup stack items associated with the current adapter.
+   */
+  getPopupStackItems(): PopupStackItem[] {
+    if (stack._adapter?.getPopupStackItems) {
+      return stack._adapter.getPopupStackItems();
+    }
+    return stack.items;
+  },
 };
 
 /**
@@ -359,5 +383,10 @@ export function resetStack() {
  * @param adapter The parts of the PopupStack that we want to override
  */
 export const createAdapter = (adapter: Partial<typeof PopupStack>) => {
+  // If there are any stale popup items that belong to the old adapter, transfer them over to the new adapter to handle.
+  if (adapter && adapter.transferOwnership) {
+    adapter.transferOwnership(PopupStack.getPopupStackItems());
+  }
+
   stack._adapter = adapter;
 };

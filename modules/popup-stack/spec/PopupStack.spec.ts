@@ -1,4 +1,4 @@
-import {PopupStack, PopupStackItem, resetStack, getValue} from '../lib/PopupStack';
+import {PopupStack, PopupStackItem, resetStack, getValue, createAdapter} from '../lib/PopupStack';
 
 describe('PopupStack', () => {
   afterEach(() => {
@@ -144,6 +144,98 @@ describe('PopupStack', () => {
 
       expect(PopupStack.contains(element, eventTarget)).toEqual(false);
     });
+  });
+
+  describe('createAdapter()', () => {
+    let adapterItems: PopupStackItem[] = [];
+
+    const customAdapter = {
+      transferOwnership: (items: PopupStackItem[]) => {
+        if (items) {
+          items.forEach((item, index) => {
+            console.log('transfer item ', index);
+            adapterItems.push(item);
+          });
+        }
+      },
+      getPopupStackItems: () => {
+        return adapterItems;
+      },
+    };
+
+    afterEach(() => {
+      adapterItems = [];
+
+      // Reset the adapter with the default adapter.
+      createAdapter({});
+    });
+
+    describe('without items', () => {
+      it('should not call transfer any items to the new adapter', () => {
+        createAdapter(customAdapter);
+
+        expect(PopupStack.getPopupStackItems().length).toEqual(0);
+      });
+    });
+
+    describe('with items', () => {
+      it('should move item ownership from the old adapter to the new adapter', () => {
+        // Add one popup so it exists in the old adapter.
+        PopupStack.add({
+          element: document.createElement('div'),
+          owner: document.createElement('button'),
+        });
+
+        expect(PopupStack.getPopupStackItems().length).toEqual(1);
+
+        createAdapter(customAdapter);
+
+        expect(PopupStack.getPopupStackItems().length).toEqual(1);
+      });
+    });
+  });
+
+  describe('transferOwnership()', () => {
+    describe('without items', () => {
+      it('should not transfer any items to the new adapter', () => {
+        PopupStack.transferOwnership([]);
+        expect(PopupStack.getPopupStackItems().length).toEqual(0);
+      });
+    });
+
+    describe('with items', () => {
+      it('should move item ownership from the old adapter to the new adapter', () => {
+        PopupStack.transferOwnership([
+          {
+            element: document.createElement('div'),
+            owner: document.createElement('button'),
+          },
+          {
+            element: document.createElement('div'),
+            owner: document.createElement('span'),
+          },
+        ]);
+
+        expect(PopupStack.getPopupStackItems().length).toEqual(2);
+      });
+    });
+  });
+
+  it('getPopupStackItems() should return a list of popup stack items', () => {
+    PopupStack.add({
+      element: document.createElement('div'),
+      owner: document.createElement('input'),
+    });
+    PopupStack.add({
+      element: document.createElement('div'),
+      owner: document.createElement('h2'),
+    });
+    PopupStack.add({
+      element: document.createElement('div'),
+      owner: document.createElement('button'),
+    });
+
+    expect(PopupStack.getPopupStackItems().length).toEqual(3);
   });
 
   describe('defaultGetValue()', () => {
