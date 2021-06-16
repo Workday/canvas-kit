@@ -248,7 +248,7 @@ const Combobox = ({
   );
 
   useEffect(() => {
-    if (initialValue) {
+    if (initialValue !== null && initialValue !== undefined) {
       setInputValue(initialValue);
     }
   }, [initialValue, setInputValue]);
