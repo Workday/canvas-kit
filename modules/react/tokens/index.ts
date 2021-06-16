@@ -41,6 +41,7 @@ const canvas = {
   commonColors,
   depth,
   fontFamily,
+  gradients,
   iconColors,
   inputColors,
   monoFontFamily,
