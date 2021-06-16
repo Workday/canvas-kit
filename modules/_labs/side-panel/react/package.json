@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-labs-react-side-panel",
-  "version": "4.7.0",
+  "version": "4.8.0",
   "description": "A collapsable side panel",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -49,15 +49,15 @@
   "dependencies": {
     "@emotion/core": "^10.0.28",
     "@workday/canvas-accent-icons-web": "^1.0.21",
-    "@workday/canvas-kit-react-button": "^4.7.0",
-    "@workday/canvas-kit-react-common": "^4.7.0",
-    "@workday/canvas-kit-react-core": "^4.7.0",
-    "@workday/canvas-kit-react-icon": "^4.7.0",
+    "@workday/canvas-kit-react-button": "^4.8.0",
+    "@workday/canvas-kit-react-common": "^4.8.0",
+    "@workday/canvas-kit-react-core": "^4.8.0",
+    "@workday/canvas-kit-react-icon": "^4.8.0",
     "@workday/canvas-system-icons-web": "1.0.41"
   },
   "devDependencies": {
-    "@workday/canvas-kit-labs-react-core": "^4.7.0",
-    "@workday/canvas-kit-react-avatar": "^4.7.0"
+    "@workday/canvas-kit-labs-react-core": "^4.8.0",
+    "@workday/canvas-kit-react-avatar": "^4.8.0"
   },
   "peerDependencies": {
     "react": "^16.8 || ^17.0"
