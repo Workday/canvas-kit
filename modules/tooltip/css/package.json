@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-css-tooltip",
-  "version": "4.7.0",
+  "version": "4.8.0",
   "description": "Tooltip CSS for Canvas kit CSS",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -16,7 +16,7 @@
     "url": "http://github.com/Workday/canvas-kit/tree/master/modules/tooltip/css"
   },
   "dependencies": {
-    "@workday/canvas-kit-css-core": "^4.7.0"
+    "@workday/canvas-kit-css-core": "^4.8.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
