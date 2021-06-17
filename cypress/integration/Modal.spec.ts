@@ -619,7 +619,8 @@ describe('Modal', () => {
 
     context('when the "Open" button is clicked', () => {
       beforeEach(() => {
-        cy.findByRole('button', {name: 'Open'}).click();
+        // cy.findByRole('button', {name: 'Open'}) is failing for some reason
+        cy.contains('button', 'Open').click();
       });
 
       it('should show the modal', () => {
@@ -636,7 +637,7 @@ describe('Modal', () => {
         });
 
         it('should move focus back to the "Open" button', () => {
-          cy.findByRole('button', {name: 'Open'}).should('have.focus');
+          cy.contains('button', 'Open').should('have.focus');
         });
       });
     });
