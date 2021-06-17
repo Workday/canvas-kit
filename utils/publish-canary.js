@@ -23,8 +23,8 @@ if (TRAVIS_BRANCH === 'master') {
   distTag = 'next';
 } else if (isPrerelease) {
   distTag = 'prerelease-next';
-  console.error('Prerelease canary builds disabled.');
-  process.exit(0);
+  // console.error('Prerelease canary builds disabled.');
+  // process.exit(0);
 } else {
   console.error('No travis branch provided');
   process.exit(1);
@@ -44,7 +44,7 @@ const slackAnnouncement = attachment => {
         ],
       },
     },
-    (error) => {
+    error => {
       if (error) {
         throw error;
       }
@@ -83,7 +83,7 @@ exec('git diff --name-only HEAD HEAD^')
       `--canary`,
       `--preid ${preid}`,
       `--dist-tag ${distTag}`,
-      preid === 'prerelease' ? 'major' : '',
+      isPrerelease ? 'major' : '',
     ];
 
     return exec(`yarn lerna publish ${lernaFlags.join(' ')}`);
@@ -91,10 +91,7 @@ exec('git diff --name-only HEAD HEAD^')
   .then(({stdout}) => {
     console.log(stdout);
 
-    const regex = new RegExp(
-      `@workday\\/[a-z-]*@(\\d*.\\d*.\\d*-${preid}.\\d*\\+\\w*)`,
-      'g'
-    );
+    const regex = new RegExp(`@workday\\/[a-z-]*@(\\d*.\\d*.\\d*-${preid}.\\d*\\+\\w*)`, 'g');
     data.packages = stdout.match(regex);
     data.version = regex.exec(data.packages[0])[1];
 
@@ -104,7 +101,7 @@ exec('git diff --name-only HEAD HEAD^')
       author_name: `New canary build published (v${data.version})`,
       title: `Merge commit ${data.sha}`,
       title_link: `https://github.com/Workday/canvas-kit/commit/${data.sha}`,
-      text: `\`yarn add @workday/canvas-kit-{module}@${data.version}\`\nor\n\`yarn add @workday/canvas-kit-{module}@next\`\n`,
+      text: `\`yarn add @workday/canvas-kit-{module}@${data.version}\`\nor\n\`yarn add @workday/canvas-kit-{module}@${distTag}\`\n`,
     });
   })
   .catch(err => {

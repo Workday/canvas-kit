@@ -4,12 +4,20 @@ const ts = require('typescript');
 const path = require('path');
 const tsconfigPath = path.join(__dirname, './tsconfig.json');
 
-const propFilter = prop => {
-  if (prop.parent) {
-    return !prop.parent.fileName.includes('node_modules');
+const propFilter = (fileName, prop, component) => {
+  // `PropTables.tsx` files are okay to pass through
+  if (fileName.includes('PropTables.tsx')) {
+    return true;
   }
 
-  return true;
+  if (prop.declarations) {
+    // filter out props that come from node_modules or style props
+    return !prop.declarations.some(
+      d => d.fileName.includes('labs-react/common/lib/utils') || d.fileName.includes('node_modules')
+    );
+  }
+
+  return false;
 };
 
 class DocgenPlugin {
@@ -27,25 +35,38 @@ class DocgenPlugin {
             modulesToProcess.push(module);
           }
         });
-        const tsProgram = ts.createProgram(modulesToProcess.map(v => v.userRequest), {
-          jsx: ts.JsxEmit.React,
-          module: ts.ModuleKind.CommonJS,
-          target: ts.ScriptTarget.Latest,
-        });
+
+        const tsProgram = ts.createProgram(
+          modulesToProcess.map(v => v.userRequest),
+          {
+            jsx: ts.JsxEmit.React,
+            module: ts.ModuleKind.CommonJS,
+            target: ts.ScriptTarget.Latest,
+          }
+        );
         modulesToProcess.forEach(m => processModule(m, tsProgram));
       });
     });
   }
 }
 
-processModule = (module, tsProgram) => {
+const processModule = (module, tsProgram) => {
   if (!module) return;
 
   const componentDocs = docGen
-    .withCustomConfig(tsconfigPath, {propFilter: propFilter})
+    .withCustomConfig(tsconfigPath, {
+      propFilter: (prop, component) => propFilter(module.userRequest, prop, component),
+    })
     .parseWithProgramProvider(module.userRequest, () => tsProgram);
 
   if (!componentDocs.length) return;
+
+  // `as` shows up as required, but it is not. This fixes it
+  componentDocs.forEach(d => {
+    if (d.props.as) {
+      d.props.as.required = false;
+    }
+  });
 
   let source = module._source._value;
   source +=

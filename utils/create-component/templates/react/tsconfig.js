@@ -29,8 +29,22 @@ const es6 = () => `
 }
 `;
 
+const spec = rootPath => `
+{
+  "extends": "${rootPath}/tsconfig.spec.json"
+}
+`;
+
+const stories = rootPath => `
+{
+  "extends": "${rootPath}/tsconfig.stories.json"
+}
+`;
+
 module.exports = {
   default: tsconfig,
   cjs,
   es6,
+  spec,
+  stories,
 };

@@ -1,4 +1,5 @@
 const path = require('path');
+const createCompiler = require('@storybook/addon-docs/mdx-compiler-plugin');
 const DocgenPlugin = require('./docgen-plugin');
 
 const modulesPath = path.resolve(__dirname, '../modules');
@@ -6,7 +7,7 @@ const getSpecifications = require('../modules/docs/utils/get-specifications');
 
 module.exports = {
   stories: [
-    './stories/*.stories.mdx',
+    '../modules/docs/mdx/**/*.mdx',
     '../modules/**/*.stories.mdx',
     '../modules/**/stories*.@(js|jsx|ts|tsx)',
   ],
@@ -21,6 +22,10 @@ module.exports = {
     '@storybook/addon-knobs',
     '@storybook/addon-storysource',
   ],
+  typescript: {
+    check: false,
+    reactDocgen: false, // we'll handle this ourselves
+  },
   webpackFinal: async config => {
     // Get the specifications object and replace with a real object in the spec.ts file
     const specs = await getSpecifications();
@@ -39,6 +44,12 @@ module.exports = {
         },
       ],
     });
+
+    // Update @storybook/addon-docs webpack rules to load all .mdx files in storybook
+    const mdxRule = config.module.rules.find(rule => rule.test.toString() === /\.mdx$/.toString());
+    mdxRule.use.find(loader => loader.loader.includes('@mdx-js')).options['compilers'] = [
+      createCompiler({}),
+    ];
 
     // Convert mdx links to point to github
     config.module.rules.push({

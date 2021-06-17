@@ -4,4 +4,4 @@ modules/canvas-kit-react-core/lib/colors.ts
 .vscode
 .idea
 .travis.yml
-docs
+./docs
