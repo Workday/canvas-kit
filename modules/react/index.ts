@@ -1,6 +1,7 @@
 export * from './action-bar';
 export * from './avatar';
 export * from './badge';
+export * from './banner';
 export * from './button';
 export * from './card';
 export * from './checkbox';
@@ -8,6 +9,7 @@ export * from './color-picker';
 export * from './common';
 export * from './cookie-banner';
 export * from './dialog';
+export * from './disclosure';
 export * from './form-field';
 export * from './icon';
 export * from './layout';
