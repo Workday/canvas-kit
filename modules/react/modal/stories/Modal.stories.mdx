@@ -6,6 +6,7 @@ import {Specifications} from '@workday/canvas-kit-docs';
 import {Basic} from './examples/Basic';
 import {WithoutCloseIcon} from './examples/WithoutCloseIcon';
 import {CustomFocus} from './examples/CustomFocus';
+import {CustomTarget} from './examples/CustomTarget';
 
 <Meta title="Components/Popups/Modal/React" component={Modal} />
 
@@ -51,6 +52,21 @@ different element. The following example shows how `initialFocusRef` can be used
 element receives focus when the modal opens.
 
 <ExampleCodeBlock code={CustomFocus} />
+
+### Custom Target
+
+It is common to have a custom target for your modal. Use the `as` prop to use your custom component.
+The `Modal.Target` element will add `onClick` and `ref` to the provided component. Your provided
+target component must forward the `onClick` to an element for the Modal to open. The `as` will cause
+`Modal.Target` to inherit the interface of your custom target component. This means any props your
+target requires, `Modal.Target` now also requires. The example below has a `MyTarget` component that
+requires a `label` prop.
+
+> **Note**: If your application needs to programmatically open a Modal without the user interacting
+> with the target button first, you'll also need to use `React.forwardRef` in your target component.
+> Without this, the Modal will open at the top-left of the window instead of around the target.
+
+<ExampleCodeBlock code={CustomTarget} />
 
 ## Components
 

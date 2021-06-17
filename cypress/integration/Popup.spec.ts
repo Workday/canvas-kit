@@ -331,4 +331,34 @@ describe('Popup', () => {
       });
     });
   });
+
+  context(`given the [Components/Popups/Popup/React, CustomTarget] example is rendered`, () => {
+    beforeEach(() => {
+      h.stories.load('Components/Popups/Popup/React', 'CustomTarget');
+    });
+
+    context('when the "Open" button is clicked', () => {
+      beforeEach(() => {
+        cy.findByRole('button', {name: 'Open'}).click();
+      });
+
+      it('should show the popup', () => {
+        cy.findByRole('dialog', {name: 'Popup'}).should('be.visible');
+      });
+
+      context('when the "Close" button is clicked', () => {
+        beforeEach(() => {
+          cy.findByRole('button', {name: 'Close'}).click();
+        });
+
+        it('should hide the popup', () => {
+          cy.findByRole('dialog', {name: 'Popup'}).should('not.be.visible');
+        });
+
+        it('should move focus back to the "Open" button', () => {
+          cy.findByRole('button', {name: 'Open'}).should('have.focus');
+        });
+      });
+    });
+  });
 });

@@ -10,6 +10,7 @@ import {NestedPopups} from './examples/NestedPopups';
 import {FocusRedirect} from './examples/FocusRedirect';
 import {FocusTrap} from './examples/FocusTrap';
 import {RTL} from './examples/RTL';
+import {CustomTarget} from './examples/CustomTarget';
 import {PopupModelConfigComponent, PopupStateComponent, PopupEventsComponent} from './PopupModel';
 
 <Meta title="Components/Popups/Popup/React" component={Popup} />
@@ -122,6 +123,21 @@ parameter is props to be merged which will effectively hide both popups. Focus m
 preserved.
 
 <ExampleCodeBlock code={NestedPopups} />
+
+### Custom Target
+
+It is common to have a custom target for your popup. Use the `as` prop to use your custom component.
+The `Popup.Target` element will add `onClick` and `ref` to the provided component. Your provided
+target component must forward the `onClick` to an element for the Popup to open. The `as` will cause
+`Popup.Target` to inherit the interface of your custom target component. This means any props your
+target requires, `Popup.Target` now also requires. The example below has a `MyTarget` component that
+requires a `label` prop.
+
+> **Note**: If your application needs to programmatically open a Popup without the user interacting
+> with the target button first, you'll also need to use `React.forwardRef` in your target component.
+> Without this, the Popup will open at the top-left of the window instead of around the target.
+
+<ExampleCodeBlock code={CustomTarget} />
 
 ### RTL
 
