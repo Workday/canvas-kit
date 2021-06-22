@@ -40,6 +40,15 @@ describe('Combobox', () => {
       expect(screen.getByRole('combobox')).toHaveValue('test');
     });
 
+    it('should pass empty initialValue to input', () => {
+      const screen = renderCombobox({
+        ...defaultProps,
+        initialValue: '',
+      });
+
+      expect(screen.getByRole('combobox')).toHaveValue('');
+    });
+
     it('should render a clear icon when `showClearButton` is `true`', () => {
       const screen = renderCombobox({
         ...defaultProps,
