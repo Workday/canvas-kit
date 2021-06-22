@@ -168,6 +168,34 @@ To review the breaking changes made in this release, check out the [v5.0.0 Migra
 - ci: Update setup-node action and remove custom matcher ([#994](https://github.com/Workday/canvas-kit/pull/994)) [@NicholasBoll](https://github.com/NicholasBoll)
 - ci: Fix canary dist-tag for prerelease canaries in slack message ([#1003](https://github.com/Workday/canvas-kit/pull/1003)) [@anicholls](https://github.com/anicholls)
 
+## v4.8.0 (2021-06-16)
+
+### Components
+
+- feat(checkbox): Add aria-checked for accessibility and testability ([#1045](https://github.com/Workday/canvas-kit/pull/1045)) [@svagi](https://github.com/svagi)
+- feat(comboxbox):Added default maxHeight to autocomplete container ([#1079](https://github.com/Workday/canvas-kit/pull/1079)) [@sraj](https://github.com/sraj)
+- fix(combobox): Fix Combobox RTL issue ([#1064](https://github.com/Workday/canvas-kit/pull/1064)) [@alanbsmith](https://github.com/alanbsmith)
+- fix(popup): Allow popups to be owners of each other ([#1054](https://github.com/Workday/canvas-kit/pull/1054)) [@csongnguyen](https://github.com/csongnguyen)
+- fix(popup): Allow tooltips to close alongside modals on click outside ([#1074](https://github.com/Workday/canvas-kit/pull/1074)) [@csongnguyen](https://github.com/csongnguyen)
+- fix(tabs): Fix aria-selected for unselected tabs ([#1033](https://github.com/Workday/canvas-kit/pull/1033)) [@angadkaflay](https://github.com/angadkaflay)
+- fix(tooltip): Allow aria-label pass-through in muted tooltips ([#1037](https://github.com/Workday/canvas-kit/pull/1037)) [@NicholasBoll](https://github.com/NicholasBoll)
+
+### Docs
+
+- docs: Add better documentation to the `as` prop ([#1046](https://github.com/Workday/canvas-kit/pull/1046)) [@NicholasBoll](https://github.com/NicholasBoll)
+- docs: Popup accessible example ([#1056](https://github.com/Workday/canvas-kit/pull/1056)) [@csongnguyen](https://github.com/csongnguyen)
+
+## Infrastructure
+
+- chore: Bump y18n from 3.2.1 to 3.2.2 ([#1011](https://github.com/Workday/canvas-kit/pull/1011)) [@dependabot](https://github.com/dependabot)
+- chore: Bump elliptic from 6.5.3 to 6.5.4 ([#993](https://github.com/Workday/canvas-kit/pull/993)) [@dependabot](https://github.com/dependabot)
+- chore: Upgrade storybook to v6.2.9 ([#1055](https://github.com/Workday/canvas-kit/pull/1055)) [@anicholls](https://github.com/anicholls)
+- chore: Bump ssri, ua-parser-js, handlebars, lodash, and hosted-git-info ([#1049](https://github.com/Workday/canvas-kit/pull/1049)) [@dependabot](https://github.com/dependabot)
+- ci: Fix font-loading issue by predownloading [@NicholasBoll](https://github.com/NicholasBoll)
+- ci: Fix Tooltip flaky visual test ([#1035](https://github.com/Workday/canvas-kit/pull/1035)) [@NicholasBoll](https://github.com/NicholasBoll)
+- ci: Upgrade to node 14 ([#1044](https://github.com/Workday/canvas-kit/pull/1044)) [@NicholasBoll](https://github.com/NicholasBoll)
+- feat: Add package version in Storybook ([#1082](https://github.com/Workday/canvas-kit/pull/1082)) [@mihaelamiches](https://github.com/mihaelamiches)
+
 ## v4.7.0 (2021-04-12)
 
 ### Components
