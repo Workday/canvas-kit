@@ -3,7 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## 5.0.1 (2021-06-11)
+## v5.0.2 (2021-06-22)
+
+### Components
+
+- feat(combobox): Modify combobox to accept empty string as initialValue ([#1116](https://github.com/workday/canvas-kit/pull/1116)) [@bsaggese14](https://github.com/bsaggese14)
+- fix: Add missing exports for CKR bundle ([#1118](https://github.com/workday/canvas-kit/pull/1118)) [@anicholls](https://github.com/anicholls)
+- fix(tokens): Fixes color token exports ([#1110](https://github.com/workday/canvas-kit/pull/1110)) [@alanbsmith](https://github.com/alanbsmith)
+- fix(popup): Remove ref forwarding requirement in Popup.Target ([#1115](https://github.com/Workday/canvas-kit/pull/1115)) [@NicholasBoll](https://github.com/NicholasBoll)
+
+## 5.0.1 (2021-06-16)
 
 ### Docs
 
