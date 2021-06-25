@@ -90,6 +90,9 @@ Text Input supports [ref forwarding](https://reactjs.org/docs/forwarding-refs.ht
 
 ### Alert
 
+Set the `error` prop of the wrapping Form Field to `FormField.ErrorType.Alert` and provide an
+explanation using the `hintText` prop to set the Text Input to the Alert state.
+
 <ExampleCodeBlock code={Alert} />
 
 The Alert state may be applied directly to the Text Input using the static
@@ -98,6 +101,9 @@ The Alert state may be applied directly to the Text Input using the static
 <ExampleCodeBlock code={AlertStandalone} />
 
 ### Error
+
+Set the `error` prop of the wrapping Form Field to `FormField.ErrorType.Error` and provide an
+explanation using the `hintText` prop to set the Text Input to the Error state.
 
 <ExampleCodeBlock code={Error} />
 

@@ -61,6 +61,9 @@ Switch supports [ref forwarding](https://reactjs.org/docs/forwarding-refs.html).
 
 ### Alert
 
+Set the `error` prop of the wrapping Form Field to `FormField.ErrorType.Alert` and provide an
+explanation using the `hintText` prop to set the Switch to the Alert state.
+
 <ExampleCodeBlock code={Alert} />
 
 The Alert state may be applied directly to the Switch using the static `Switch.ErrorType.Alert`
@@ -69,6 +72,9 @@ value if Form Field is not being used.
 <ExampleCodeBlock code={AlertStandalone} />
 
 ### Error
+
+Set the `error` prop of the wrapping Form Field to `FormField.ErrorType.Error` and provide an
+explanation using the `hintText` prop to set the Switch to the Error state.
 
 <ExampleCodeBlock code={Error} />
 

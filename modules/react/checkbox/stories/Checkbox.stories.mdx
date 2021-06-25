@@ -44,6 +44,9 @@ Checkbox supports [ref forwarding](https://reactjs.org/docs/forwarding-refs.html
 
 ### Alert
 
+Set the `error` prop of the wrapping Form Field to `FormField.ErrorType.Alert` and provide an
+explanation using the `hintText` prop to set the Checkbox to the Alert state.
+
 <ExampleCodeBlock code={Alert} />
 
 The Alert state may be applied directly to the Checkbox using the static `Checkbox.ErrorType.Alert`
@@ -52,6 +55,9 @@ value if Form Field is not being used.
 <ExampleCodeBlock code={AlertStandalone} />
 
 ### Error
+
+Set the `error` prop of the wrapping Form Field to `FormField.ErrorType.Error` and provide an
+explanation using the `hintText` prop to set the Checkbox to the Error state.
 
 <ExampleCodeBlock code={Error} />
 

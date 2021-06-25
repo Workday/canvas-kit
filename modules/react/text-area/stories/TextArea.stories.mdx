@@ -103,6 +103,9 @@ Text Area supports [ref forwarding](https://reactjs.org/docs/forwarding-refs.htm
 
 ### Alert
 
+Set the `error` prop of the wrapping Form Field to `FormField.ErrorType.Alert` and provide an
+explanation using the `hintText` prop to set the Text Area to the Alert state.
+
 <ExampleCodeBlock code={Alert} />
 
 The Alert state may be applied directly to the Text Area using the static `TextArea.ErrorType.Alert`
@@ -111,6 +114,9 @@ value if Form Field is not being used.
 <ExampleCodeBlock code={AlertStandalone} />
 
 ### Error
+
+Set the `error` prop of the wrapping Form Field to `FormField.ErrorType.Error` and provide an
+explanation using the `hintText` prop to set the Text Area to the Error state.
 
 <ExampleCodeBlock code={Error} />
 
