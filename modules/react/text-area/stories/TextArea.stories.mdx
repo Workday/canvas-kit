@@ -1,0 +1,120 @@
+import {Meta} from '@storybook/addon-docs/blocks';
+
+import {TextArea} from '@workday/canvas-kit-react/text-area';
+
+import {Alert} from './examples/Alert';
+import {AlertStandalone} from './examples/AlertStandalone';
+import {Default} from './examples/Default';
+import {Disabled} from './examples/Disabled';
+import {Error} from './examples/Error';
+import {ErrorStandalone} from './examples/ErrorStandalone';
+import {Grow} from './examples/Grow';
+import {GrowStandalone} from './examples/GrowStandalone';
+import {LabelPosition} from './examples/LabelPosition';
+import {Placeholder} from './examples/Placeholder';
+import {RefForwarding} from './examples/RefForwarding';
+import {Required} from './examples/Required';
+import {Resize} from './examples/Resize';
+import {Standalone} from './examples/Standalone';
+
+<Meta title="Components/Inputs/TextArea/React" component={TextArea} />
+
+# Canvas Kit Text Area
+
+Text Areas allow users to enter and edit multiple lines of text.
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-react
+```
+
+## Basic Example
+
+Text Area should be used in tandem with Form Field to meet accessibility standards.
+
+<ExampleCodeBlock code={Default} />
+
+If necessary, Text Area can also be used on its own.
+
+<ExampleCodeBlock code={Standalone} />
+
+## Disabled
+
+Set the `disabled` prop of the Text Area to prevent users from interacting with it.
+
+<ExampleCodeBlock code={Disabled} />
+
+## Placeholder
+
+Set the `placeholder` prop of the Text Input to display a sample of its expected format or value
+before a value has been provided.
+
+<ExampleCodeBlock code={Placeholder} />
+
+## Label Position
+
+Set the `labelPosition` prop of the wrapping Form Field to designate the position of the label
+relative to the Text Area. `labelPosition` accepts the following values:
+
+- `FormField.LabelPosition.Top` (Default)
+- `FormField.LabelPosition.Left`
+
+<ExampleCodeBlock code={LabelPosition} />
+
+## Required
+
+Set the `required` prop of the wrapping Form Field to `true` to indicate that it's required. Labels
+for required fields are suffixed by a red asterisk.
+
+<ExampleCodeBlock code={Required} />
+
+## Grow
+
+Set the `grow` prop of the wrapping Form Field to `true` to configure the Text Area to expand to the
+width of its container.
+
+<ExampleCodeBlock code={Grow} />
+
+The `grow` prop may also be applied directly to the Text Area if Form Field is not being used.
+
+<ExampleCodeBlock code={GrowStandalone} />
+
+## Resize Constraints
+
+Set the `resize` prop of the Text Area to restrict resizing of it to certain dimensions. `resize`
+accepts the following values:
+
+- `TextArea.ResizeDirection.Both` (Default)
+- `TextArea.ResizeDirection.Horizontal`
+- `TextArea.ResizeDirection.None`
+- `TextArea.ResizeDirection.Vertical`
+
+<ExampleCodeBlock code={Resize} />
+
+## Ref Forwarding
+
+Text Area supports [ref forwarding](https://reactjs.org/docs/forwarding-refs.html). It will forward
+`ref` to its underlying `<textarea>` element.
+
+<ExampleCodeBlock code={RefForwarding} />
+
+## Error States
+
+### Alert
+
+<ExampleCodeBlock code={Alert} />
+
+The Alert state may be applied directly to the Text Area using the static `TextArea.ErrorType.Alert`
+value if Form Field is not being used.
+
+<ExampleCodeBlock code={AlertStandalone} />
+
+### Error
+
+<ExampleCodeBlock code={Error} />
+
+The Error state may be applied directly to the Text Area using the static `TextArea.ErrorType.Error`
+value if Form Field is not being used.
+
+<ExampleCodeBlock code={ErrorStandalone} />
