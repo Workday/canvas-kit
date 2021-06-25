@@ -17,7 +17,7 @@ describe('Button', () => {
     it('should render the correct text', () => {
       cy.get('button')
         .first()
-        .should('contain', 'Primary');
+        .should('contain', 'Click Me');
     });
   });
 
@@ -33,7 +33,7 @@ describe('Button', () => {
     it('should render the correct text', () => {
       cy.get('button')
         .first()
-        .should('contain', 'Delete');
+        .should('contain', 'Click Me');
     });
   });
 });
