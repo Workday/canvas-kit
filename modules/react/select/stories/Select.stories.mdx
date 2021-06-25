@@ -1,0 +1,107 @@
+import {Meta} from '@storybook/addon-docs/blocks';
+
+import {Select} from '@workday/canvas-kit-react/select';
+
+import {Alert} from './examples/Alert';
+import {AlertStandalone} from './examples/AlertStandalone';
+import {Default} from './examples/Default';
+import {Disabled} from './examples/Disabled';
+import {DisabledOption} from './examples/DisabledOption';
+import {Error} from './examples/Error';
+import {ErrorStandalone} from './examples/ErrorStandalone';
+import {Grow} from './examples/Grow';
+import {GrowStandalone} from './examples/GrowStandalone';
+import {LabelPosition} from './examples/LabelPosition';
+import {RefForwarding} from './examples/RefForwarding';
+import {Required} from './examples/Required';
+import {Standalone} from './examples/Standalone';
+
+<Meta title="Components/Inputs/Select/React" component={Select} />
+
+# Canvas Kit Select
+
+Select Drop-downs allow users to choose one option from a list of items in a Drop-down Menu.
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-react
+```
+
+## Default Example
+
+Select should be used in tandem with Form Field to meet accessibility standards.
+
+<ExampleCodeBlock code={Default} />
+
+If necessary, Select can also be used on its own.
+
+<ExampleCodeBlock code={Standalone} />
+
+## Disabled
+
+Set the `disabled` prop of the Select to prevent users from interacting with it.
+
+<ExampleCodeBlock code={Disabled} />
+
+You may also set the `disabled` prop of the Select Option to prevent users from selecting that
+Option. Note that the value of a Select may be programmatically set to a disabled Option by setting
+the Select's `value` prop to the value of the disabled Option. The disabled Option, however, will
+remain unselectable by the user.
+
+<ExampleCodeBlock code={DisabledOption} />
+
+## Label Position
+
+Set the `labelPosition` prop of the wrapping Form Field to designate the position of the label
+relative to the Select. `labelPosition` accepts the following values:
+
+- `FormField.LabelPosition.Top` (Default)
+- `FormField.LabelPosition.Left`
+
+<ExampleCodeBlock code={LabelPosition} />
+
+## Required
+
+Set the `required` prop of the wrapping Form Field to `true` to indicate that it's required. Labels
+for required fields are suffixed by a red asterisk.
+
+<ExampleCodeBlock code={Required} />
+
+## Grow
+
+Set the `grow` prop of the wrapping Form Field to `true` to configure the Select to expand to the
+width of its container.
+
+<ExampleCodeBlock code={Grow} />
+
+The `grow` prop may also be applied directly to the Select if Form Field is not being used.
+
+<ExampleCodeBlock code={GrowStandalone} />
+
+## Ref Forwarding
+
+Select supports [ref forwarding](https://reactjs.org/docs/forwarding-refs.html). It will forward
+`ref` to its underlying `<select>` element.
+
+<ExampleCodeBlock code={RefForwarding} />
+
+## Error States
+
+### Alert
+
+<ExampleCodeBlock code={Alert} />
+
+The Alert state may be applied directly to the Select using the static `Select.ErrorType.Alert`
+value if Form Field is not being used.
+
+<ExampleCodeBlock code={AlertStandalone} />
+
+### Error
+
+<ExampleCodeBlock code={Error} />
+
+The Error state may be applied directly to the Select using the static `Select.ErrorType.Error`
+value if Form Field is not being used.
+
+<ExampleCodeBlock code={ErrorStandalone} />
