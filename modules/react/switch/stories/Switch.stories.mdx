@@ -1,0 +1,78 @@
+import {Meta} from '@storybook/addon-docs/blocks';
+
+import {Switch} from '@workday/canvas-kit-react/switch';
+
+import {Alert} from './examples/Alert';
+import {AlertStandalone} from './examples/AlertStandalone';
+import {Default} from './examples/Default';
+import {Disabled} from './examples/Disabled';
+import {Error} from './examples/Error';
+import {ErrorStandalone} from './examples/ErrorStandalone';
+import {LabelPosition} from './examples/LabelPosition';
+import {RefForwarding} from './examples/RefForwarding';
+import {Standalone} from './examples/Standalone';
+
+<Meta title="Components/Inputs/Switch/React" component={Switch} />
+
+# Canvas Kit Switch
+
+Switch is a selection control that is used to switch between two potential states.
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-react
+```
+
+## Default Example
+
+Switch should be used in tandem with Form Field to meet accessibility standards.
+
+<ExampleCodeBlock code={Default} />
+
+If necessary, Switch can also be used on its own.
+
+<ExampleCodeBlock code={Standalone} />
+
+## Disabled
+
+Set the `disabled` prop of the Switch to prevent users from interacting with it.
+
+<ExampleCodeBlock code={Disabled} />
+
+## Label Position
+
+Set the `labelPosition` prop of the wrapping Form Field to designate the position of the label
+relative to the Switch. `labelPosition` accepts the following values:
+
+- `FormField.LabelPosition.Top` (Default)
+- `FormField.LabelPosition.Left`
+
+<ExampleCodeBlock code={LabelPosition} />
+
+## Ref Forwarding
+
+Switch supports [ref forwarding](https://reactjs.org/docs/forwarding-refs.html). It will forward
+`ref` to its underlying `<input type="checkbox">` element.
+
+<ExampleCodeBlock code={RefForwarding} />
+
+## Error States
+
+### Alert
+
+<ExampleCodeBlock code={Alert} />
+
+The Alert state may be applied directly to the Switch using the static `Switch.ErrorType.Alert`
+value if Form Field is not being used.
+
+<ExampleCodeBlock code={AlertStandalone} />
+
+### Error
+
+<ExampleCodeBlock code={Error} />
+
+The Error state may be applied directly to the Switch using the static `Switch.ErrorType.Error`
+value if Form Field is not being used.
+
+<ExampleCodeBlock code={ErrorStandalone} />
