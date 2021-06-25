@@ -1,0 +1,61 @@
+import {Meta} from '@storybook/addon-docs/blocks';
+
+import Checkbox from '@workday/canvas-kit-react/checkbox/lib/Checkbox.tsx';
+
+import {Alert} from './examples/Alert';
+import {AlertStandalone} from './examples/AlertStandalone';
+import {Default} from './examples/Default';
+import {Disabled} from './examples/Disabled';
+import {Error} from './examples/Error';
+import {ErrorStandalone} from './examples/ErrorStandalone';
+import {RefForwarding} from './examples/RefForwarding';
+
+<Meta title="Components/Inputs/Checkbox/React" component={Checkbox} />
+
+# Canvas Kit Checkbox
+
+Checkboxes allow a user to select zero, one, or multiple values from a predefined list of 7 or less
+options.
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-react
+```
+
+## Default Example
+
+<ExampleCodeBlock code={Default} />
+
+## Disabled
+
+Set the `disabled` prop of the Checkbox to prevent users from interacting with it.
+
+<ExampleCodeBlock code={Disabled} />
+
+## Ref Forwarding
+
+Checkbox supports [ref forwarding](https://reactjs.org/docs/forwarding-refs.html). It will forward
+`ref` to its underlying `<input type="checkbox">` element.
+
+<ExampleCodeBlock code={RefForwarding} />
+
+## Error States
+
+### Alert
+
+<ExampleCodeBlock code={Alert} />
+
+The Alert state may be applied directly to the Checkbox using the static `Checkbox.ErrorType.Alert`
+value if Form Field is not being used.
+
+<ExampleCodeBlock code={AlertStandalone} />
+
+### Error
+
+<ExampleCodeBlock code={Error} />
+
+The Error state may be applied directly to the Checkbox using the static `Checkbox.ErrorType.Error`
+value if Form Field is not being used.
+
+<ExampleCodeBlock code={ErrorStandalone} />
