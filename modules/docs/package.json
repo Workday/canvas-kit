@@ -28,7 +28,7 @@
   "scripts": {
     "watch": "yarn build:es6 -w",
     "clean": "rimraf dist && rimraf ts3.5 && rimraf .build-info && mkdirp dist && mkdirp ts3.5/dist",
-    "build:mdx": "node ./utils/build.js mdx/",
+    "build:mdx": "node ./utils/build-mdx.js mdx/",
     "build:cjs": "tsc -p tsconfig.cjs.json",
     "build:es6": "tsc -p tsconfig.es6.json",
     "build:rebuild": "npm-run-all clean build",
@@ -52,6 +52,7 @@
     "@workday/canvas-kit-react": "^5.0.2"
   },
   "devDependencies": {
+    "fs-extra": "^10.0.0",
     "glob": "^7.1.6",
     "mkdirp": "^1.0.3",
     "typescript": "^3.8.3"
