@@ -23,7 +23,7 @@ describe('Button', () => {
 
   context('given delete buttons are rendered', () => {
     beforeEach(() => {
-      h.stories.load('Components/Buttons/Button/React', 'Delete');
+      h.stories.load('Components/Buttons/Button/React', 'DeleteStory');
     });
 
     it('should not have any axe errors', () => {
