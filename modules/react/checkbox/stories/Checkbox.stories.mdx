@@ -8,6 +8,7 @@ import {Default} from './examples/Default';
 import {Disabled} from './examples/Disabled';
 import {Error} from './examples/Error';
 import {ErrorStandalone} from './examples/ErrorStandalone';
+import {Indeterminate} from './examples/Indeterminate';
 import {RefForwarding} from './examples/RefForwarding';
 
 <Meta title="Components/Inputs/Checkbox/React" component={Checkbox} />
@@ -36,6 +37,17 @@ yarn add @workday/canvas-kit-react
 Set the `disabled` prop of the Checkbox to prevent users from interacting with it.
 
 <ExampleCodeBlock code={Disabled} />
+
+## Indeterminate
+
+Set the `indeterminate` prop of the Checkbox to `true` to indicate the Checkbox is neither checked
+nor unchecked.
+
+A common use case for an indeterminate Checkbox is when the value of a parent Checkbox is dependent
+on a number of child Checkboxes. The parent Checkbox is set to the indeterminate state if some (but
+not all) of its children are checked.
+
+<ExampleCodeBlock code={Indeterminate} />
 
 ## Ref Forwarding
 
