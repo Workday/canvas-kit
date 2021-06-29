@@ -1,5 +1,6 @@
 import React from 'react';
 import {Checkbox} from '@workday/canvas-kit-react/checkbox';
+import {FormField} from '@workday/canvas-kit-react/form-field';
 
 export const Default = () => {
   const [checked, setChecked] = React.useState(false);
@@ -8,5 +9,9 @@ export const Default = () => {
     setChecked(event.target.checked);
   };
 
-  return <Checkbox checked={checked} label="I agree to the terms" onChange={handleChange} />;
+  return (
+    <FormField label="Terms">
+      <Checkbox checked={checked} label="I agree to the terms" onChange={handleChange} />
+    </FormField>
+  );
 };

@@ -14,6 +14,7 @@ export const Error = () => {
       error={FormField.ErrorType.Error}
       hintId="hint-error"
       hintText="You must agree to the terms before proceeding"
+      label="Terms"
     >
       <Checkbox checked={checked} label="I agree to the terms" onChange={handleChange} />
     </FormField>

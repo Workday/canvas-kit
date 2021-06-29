@@ -9,7 +9,9 @@ import {Disabled} from './examples/Disabled';
 import {Error} from './examples/Error';
 import {ErrorStandalone} from './examples/ErrorStandalone';
 import {Indeterminate} from './examples/Indeterminate';
+import {LabelPosition} from './examples/LabelPosition';
 import {RefForwarding} from './examples/RefForwarding';
+import {Required} from './examples/Required';
 
 <Meta title="Components/Inputs/Checkbox/React" component={Checkbox} />
 
@@ -30,6 +32,8 @@ yarn add @workday/canvas-kit-react
 
 ## Default Example
 
+Checkbox should be used in tandem with Form Field to meet accessibility standards.
+
 <ExampleCodeBlock code={Default} />
 
 ## Disabled
@@ -48,6 +52,23 @@ on a number of child Checkboxes. The parent Checkbox is set to the indeterminate
 not all) of its children are checked.
 
 <ExampleCodeBlock code={Indeterminate} />
+
+## Label Position
+
+Set the `labelPosition` prop of the wrapping Form Field to designate the position of the label
+relative to the Checkbox. `labelPosition` accepts the following values:
+
+- `FormField.LabelPosition.Top` (Default)
+- `FormField.LabelPosition.Left`
+
+<ExampleCodeBlock code={LabelPosition} />
+
+## Required
+
+Set the `required` prop of the wrapping Form Field to `true` to indicate that it's required. Labels
+for required fields are suffixed by a red asterisk.
+
+<ExampleCodeBlock code={Required} />
 
 ## Ref Forwarding
 
