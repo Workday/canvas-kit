@@ -3,7 +3,7 @@ import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Radio, RadioGroup} from '@workday/canvas-kit-react/radio';
 
 export const Error = () => {
-  const [value, setValue] = React.useState<string | number>('thin');
+  const [value, setValue] = React.useState<string | number>('deep-dish');
 
   const handleChange = (value: string | number) => {
     setValue(value);
