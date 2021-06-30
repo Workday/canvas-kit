@@ -3,19 +3,15 @@ import {Meta} from '@storybook/addon-docs/blocks';
 import {TextArea} from '@workday/canvas-kit-react/text-area';
 
 import {Alert} from './examples/Alert';
-import {AlertStandalone} from './examples/AlertStandalone';
 import {Default} from './examples/Default';
 import {Disabled} from './examples/Disabled';
 import {Error} from './examples/Error';
-import {ErrorStandalone} from './examples/ErrorStandalone';
 import {Grow} from './examples/Grow';
-import {GrowStandalone} from './examples/GrowStandalone';
 import {LabelPosition} from './examples/LabelPosition';
 import {Placeholder} from './examples/Placeholder';
 import {RefForwarding} from './examples/RefForwarding';
 import {Required} from './examples/Required';
 import {Resize} from './examples/Resize';
-import {Standalone} from './examples/Standalone';
 
 <Meta title="Components/Inputs/TextArea/React" component={TextArea} />
 
@@ -38,10 +34,6 @@ yarn add @workday/canvas-kit-react
 Text Area should be used in tandem with Form Field to meet accessibility standards.
 
 <ExampleCodeBlock code={Default} />
-
-If necessary, Text Area can also be used on its own.
-
-<ExampleCodeBlock code={Standalone} />
 
 ## Disabled
 
@@ -82,8 +74,6 @@ width of its container.
 
 The `grow` prop may also be applied directly to the Text Area if Form Field is not being used.
 
-<ExampleCodeBlock code={GrowStandalone} />
-
 ## Resize Constraints
 
 Set the `resize` prop of the Text Area to restrict resizing of it to certain dimensions. `resize`
@@ -112,10 +102,8 @@ explanation using the `hintText` prop to set the Text Area to the Alert state.
 
 <ExampleCodeBlock code={Alert} />
 
-The Alert state may be applied directly to the Text Area using the static `TextArea.ErrorType.Alert`
-value if Form Field is not being used.
-
-<ExampleCodeBlock code={AlertStandalone} />
+The `error` prop may also be applied directly to the Text Area with a value of
+`TextArea.ErrorType.Alert` if Form Field is not being used.
 
 ### Error
 
@@ -124,7 +112,5 @@ explanation using the `hintText` prop to set the Text Area to the Error state.
 
 <ExampleCodeBlock code={Error} />
 
-The Error state may be applied directly to the Text Area using the static `TextArea.ErrorType.Error`
-value if Form Field is not being used.
-
-<ExampleCodeBlock code={ErrorStandalone} />
+The `error` prop may also be applied directly to the Text Area with a value of
+`TextArea.ErrorType.Error` if Form Field is not being used.

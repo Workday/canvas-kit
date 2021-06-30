@@ -3,14 +3,11 @@ import {Meta} from '@storybook/addon-docs/blocks';
 import {Switch} from '@workday/canvas-kit-react/switch';
 
 import {Alert} from './examples/Alert';
-import {AlertStandalone} from './examples/AlertStandalone';
 import {Default} from './examples/Default';
 import {Disabled} from './examples/Disabled';
 import {Error} from './examples/Error';
-import {ErrorStandalone} from './examples/ErrorStandalone';
 import {LabelPosition} from './examples/LabelPosition';
 import {RefForwarding} from './examples/RefForwarding';
-import {Standalone} from './examples/Standalone';
 
 <Meta title="Components/Inputs/Switch/React" component={Switch} />
 
@@ -33,10 +30,6 @@ yarn add @workday/canvas-kit-react
 Switch should be used in tandem with Form Field to meet accessibility standards.
 
 <ExampleCodeBlock code={Default} />
-
-If necessary, Switch can also be used on its own.
-
-<ExampleCodeBlock code={Standalone} />
 
 ## Disabled
 
@@ -70,10 +63,8 @@ explanation using the `hintText` prop to set the Switch to the Alert state.
 
 <ExampleCodeBlock code={Alert} />
 
-The Alert state may be applied directly to the Switch using the static `Switch.ErrorType.Alert`
-value if Form Field is not being used.
-
-<ExampleCodeBlock code={AlertStandalone} />
+The `error` prop may also be applied directly to the Switch with a value of `Switch.ErrorType.Alert`
+if Form Field is not being used.
 
 ### Error
 
@@ -82,7 +73,5 @@ explanation using the `hintText` prop to set the Switch to the Error state.
 
 <ExampleCodeBlock code={Error} />
 
-The Error state may be applied directly to the Switch using the static `Switch.ErrorType.Error`
-value if Form Field is not being used.
-
-<ExampleCodeBlock code={ErrorStandalone} />
+The `error` prop may also be applied directly to the Switch with a value of `Switch.ErrorType.Error`
+if Form Field is not being used.

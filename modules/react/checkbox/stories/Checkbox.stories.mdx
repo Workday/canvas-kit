@@ -3,11 +3,9 @@ import {Meta} from '@storybook/addon-docs/blocks';
 import Checkbox from '@workday/canvas-kit-react/checkbox/lib/Checkbox.tsx';
 
 import {Alert} from './examples/Alert';
-import {AlertStandalone} from './examples/AlertStandalone';
 import {Default} from './examples/Default';
 import {Disabled} from './examples/Disabled';
 import {Error} from './examples/Error';
-import {ErrorStandalone} from './examples/ErrorStandalone';
 import {Indeterminate} from './examples/Indeterminate';
 import {LabelPosition} from './examples/LabelPosition';
 import {RefForwarding} from './examples/RefForwarding';
@@ -86,10 +84,8 @@ explanation using the `hintText` prop to set the Checkbox to the Alert state.
 
 <ExampleCodeBlock code={Alert} />
 
-The Alert state may be applied directly to the Checkbox using the static `Checkbox.ErrorType.Alert`
-value if Form Field is not being used.
-
-<ExampleCodeBlock code={AlertStandalone} />
+The `error` prop may also be applied directly to the Checkbox with a value of
+`Checkbox.ErrorType.Alert` if Form Field is not being used.
 
 ### Error
 
@@ -98,7 +94,5 @@ explanation using the `hintText` prop to set the Checkbox to the Error state.
 
 <ExampleCodeBlock code={Error} />
 
-The Error state may be applied directly to the Checkbox using the static `Checkbox.ErrorType.Error`
-value if Form Field is not being used.
-
-<ExampleCodeBlock code={ErrorStandalone} />
+The `error` prop may also be applied directly to the Checkbox with a value of
+`Checkbox.ErrorType.Error` if Form Field is not being used.

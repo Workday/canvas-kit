@@ -3,18 +3,14 @@ import {Meta} from '@storybook/addon-docs/blocks';
 import {Select} from '@workday/canvas-kit-react/select';
 
 import {Alert} from './examples/Alert';
-import {AlertStandalone} from './examples/AlertStandalone';
 import {Default} from './examples/Default';
 import {Disabled} from './examples/Disabled';
 import {DisabledOption} from './examples/DisabledOption';
 import {Error} from './examples/Error';
-import {ErrorStandalone} from './examples/ErrorStandalone';
 import {Grow} from './examples/Grow';
-import {GrowStandalone} from './examples/GrowStandalone';
 import {LabelPosition} from './examples/LabelPosition';
 import {RefForwarding} from './examples/RefForwarding';
 import {Required} from './examples/Required';
-import {Standalone} from './examples/Standalone';
 
 <Meta title="Components/Inputs/Select/React" component={Select} />
 
@@ -37,10 +33,6 @@ yarn add @workday/canvas-kit-react
 Select should be used in tandem with Form Field to meet accessibility standards.
 
 <ExampleCodeBlock code={Default} />
-
-If necessary, Select can also be used on its own.
-
-<ExampleCodeBlock code={Standalone} />
 
 ## Disabled
 
@@ -81,8 +73,6 @@ width of its container.
 
 The `grow` prop may also be applied directly to the Select if Form Field is not being used.
 
-<ExampleCodeBlock code={GrowStandalone} />
-
 ## Ref Forwarding
 
 Select supports [ref forwarding](https://reactjs.org/docs/forwarding-refs.html). It will forward
@@ -99,10 +89,8 @@ explanation using the `hintText` prop to set the Select to the Alert state.
 
 <ExampleCodeBlock code={Alert} />
 
-The Alert state may be applied directly to the Select using the static `Select.ErrorType.Alert`
-value if Form Field is not being used.
-
-<ExampleCodeBlock code={AlertStandalone} />
+The `error` prop may also be applied directly to the Select with a value of `Select.ErrorType.Alert`
+if Form Field is not being used.
 
 ### Error
 
@@ -111,7 +99,5 @@ explanation using the `hintText` prop to set the Select to the Error state.
 
 <ExampleCodeBlock code={Error} />
 
-The Error state may be applied directly to the Select using the static `Select.ErrorType.Error`
-value if Form Field is not being used.
-
-<ExampleCodeBlock code={ErrorStandalone} />
+The `error` prop may also be applied directly to the Select with a value of `Select.ErrorType.Error`
+if Form Field is not being used.
