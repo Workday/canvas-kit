@@ -17,8 +17,6 @@ import {Required} from './examples/Required';
 
 Radio Buttons allow a user to select one value from a predefined list of 7 or fewer options.
 
-Undocumented props are spread to the underlying `<input type="radio">` element.
-
 [> Workday Design Reference](https://design.workday.com/components/inputs/radio-buttons)
 
 ## Installation
@@ -27,7 +25,9 @@ Undocumented props are spread to the underlying `<input type="radio">` element.
 yarn add @workday/canvas-kit-react
 ```
 
-## Default Example
+## Usage
+
+### Default Example
 
 Radio Buttons are intended to be grouped together using a Radio Group.
 
@@ -37,13 +37,13 @@ to `true` to meet accessibility standards.
 
 <ExampleCodeBlock code={Default} />
 
-## Disabled
+### Disabled
 
 Set the `disabled` prop of the Radio Button to prevent users from interacting with it.
 
 <ExampleCodeBlock code={Disabled} />
 
-## Label Position
+### Label Position
 
 Set the `labelPosition` prop of the wrapping Form Field to designate the position of the label
 relative to the Radio Group. `labelPosition` accepts the following values:
@@ -53,37 +53,37 @@ relative to the Radio Group. `labelPosition` accepts the following values:
 
 <ExampleCodeBlock code={LabelPosition} />
 
-## Required
+### Required
 
 Set the `required` prop of the wrapping Form Field to `true` to indicate that it's required. Labels
 for required fields are suffixed by a red asterisk.
 
 <ExampleCodeBlock code={Required} />
 
-## Radio Buttons with No Values
+### Radio Buttons with No Values
 
 The `value` prop may be omitted from Radio Buttons, in which case the `value` prop of the Radio
 Group should be set using the zero-based index of the selected Radio Button.
 
 <ExampleCodeBlock code={NoValue} />
 
-## Ref Forwarding
+### Ref Forwarding
 
 Radio Button supports [ref forwarding](https://reactjs.org/docs/forwarding-refs.html). It will
 forward `ref` to its underlying `<input type="radio">` element.
 
 <ExampleCodeBlock code={RefForwarding} />
 
-## Error States
+### Error States
 
-### Alert
+#### Alert
 
 Set the `error` prop of the wrapping Form Field to `FormField.ErrorType.Alert` and provide an
 explanation using the `hintText` prop to set the Radio Group to the Alert state.
 
 <ExampleCodeBlock code={Alert} />
 
-### Error
+#### Error
 
 Set the `error` prop of the wrapping Form Field to `FormField.ErrorType.Error` and provide an
 explanation using the `hintText` prop to set the Radio Group to the Error state.
@@ -94,8 +94,12 @@ explanation using the `hintText` prop to set the Radio Group to the Error state.
 
 ### Radio Props
 
+Undocumented props are spread to the underlying `<input type="radio">` element.
+
 <ArgsTable of={Radio} />
 
 ### Radio Group Props
+
+Undocumented props are spread to the outermost container element rendered by Radio Group.
 
 <ArgsTable of={RadioGroup} />

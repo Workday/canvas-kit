@@ -18,8 +18,6 @@ import {Required} from './examples/Required';
 Checkboxes allow a user to select zero, one, or multiple values from a predefined list of 7 or less
 options.
 
-Undocumented props are spread to the underlying `<input type="checkbox">` element.
-
 [> Workday Design Reference](https://design.workday.com/components/inputs/checkboxes)
 
 ## Installation
@@ -28,20 +26,22 @@ Undocumented props are spread to the underlying `<input type="checkbox">` elemen
 yarn add @workday/canvas-kit-react
 ```
 
-## Default Example
+## Usage
+
+### Default Example
 
 Checkbox should be used in tandem with
 [Form Field](/docs/components-inputs-form-field-react--default) to meet accessibility standards.
 
 <ExampleCodeBlock code={Default} />
 
-## Disabled
+### Disabled
 
 Set the `disabled` prop of the Checkbox to prevent users from interacting with it.
 
 <ExampleCodeBlock code={Disabled} />
 
-## Indeterminate
+### Indeterminate
 
 Set the `indeterminate` prop of the Checkbox to `true` to indicate the Checkbox is neither checked
 nor unchecked.
@@ -52,7 +52,7 @@ not all) of its children are checked.
 
 <ExampleCodeBlock code={Indeterminate} />
 
-## Label Position
+### Label Position
 
 Set the `labelPosition` prop of the wrapping Form Field to designate the position of the label
 relative to the Checkbox. `labelPosition` accepts the following values:
@@ -62,23 +62,23 @@ relative to the Checkbox. `labelPosition` accepts the following values:
 
 <ExampleCodeBlock code={LabelPosition} />
 
-## Required
+### Required
 
 Set the `required` prop of the wrapping Form Field to `true` to indicate that it's required. Labels
 for required fields are suffixed by a red asterisk.
 
 <ExampleCodeBlock code={Required} />
 
-## Ref Forwarding
+### Ref Forwarding
 
 Checkbox supports [ref forwarding](https://reactjs.org/docs/forwarding-refs.html). It will forward
 `ref` to its underlying `<input type="checkbox">` element.
 
 <ExampleCodeBlock code={RefForwarding} />
 
-## Error States
+### Error States
 
-### Alert
+#### Alert
 
 Set the `error` prop of the wrapping Form Field to `FormField.ErrorType.Alert` and provide an
 explanation using the `hintText` prop to set the Checkbox to the Alert state.
@@ -88,7 +88,7 @@ explanation using the `hintText` prop to set the Checkbox to the Alert state.
 The `error` prop may also be applied directly to the Checkbox with a value of
 `Checkbox.ErrorType.Alert` if Form Field is not being used.
 
-### Error
+#### Error
 
 Set the `error` prop of the wrapping Form Field to `FormField.ErrorType.Error` and provide an
 explanation using the `hintText` prop to set the Checkbox to the Error state.
@@ -99,5 +99,7 @@ The `error` prop may also be applied directly to the Checkbox with a value of
 `Checkbox.ErrorType.Error` if Form Field is not being used.
 
 ## Props
+
+Undocumented props are spread to the underlying `<input type="checkbox">` element.
 
 <ArgsTable of={Checkbox} />

@@ -19,8 +19,6 @@ import {Resize} from './examples/Resize';
 
 Text Areas allow users to enter and edit multiple lines of text.
 
-Undocumented props are spread to the underlying `<textarea>` element.
-
 [> Workday Design Reference](https://design.workday.com/components/inputs/text-area)
 
 ## Installation
@@ -29,27 +27,29 @@ Undocumented props are spread to the underlying `<textarea>` element.
 yarn add @workday/canvas-kit-react
 ```
 
-## Basic Example
+## Usage
+
+### Default Example
 
 Text Area should be used in tandem with
 [Form Field](/docs/components-inputs-form-field-react--default) to meet accessibility standards.
 
 <ExampleCodeBlock code={Default} />
 
-## Disabled
+### Disabled
 
 Set the `disabled` prop of the Text Area to prevent users from interacting with it.
 
 <ExampleCodeBlock code={Disabled} />
 
-## Placeholder
+### Placeholder
 
 Set the `placeholder` prop of the Text Input to display a sample of its expected format or value
 before a value has been provided.
 
 <ExampleCodeBlock code={Placeholder} />
 
-## Label Position
+### Label Position
 
 Set the `labelPosition` prop of the wrapping Form Field to designate the position of the label
 relative to the Text Area. `labelPosition` accepts the following values:
@@ -59,14 +59,14 @@ relative to the Text Area. `labelPosition` accepts the following values:
 
 <ExampleCodeBlock code={LabelPosition} />
 
-## Required
+### Required
 
 Set the `required` prop of the wrapping Form Field to `true` to indicate that it's required. Labels
 for required fields are suffixed by a red asterisk.
 
 <ExampleCodeBlock code={Required} />
 
-## Grow
+### Grow
 
 Set the `grow` prop of the wrapping Form Field to `true` to configure the Text Area to expand to the
 width of its container.
@@ -75,7 +75,7 @@ width of its container.
 
 The `grow` prop may also be applied directly to the Text Area if Form Field is not being used.
 
-## Resize Constraints
+### Resize Constraints
 
 Set the `resize` prop of the Text Area to restrict resizing of it to certain dimensions. `resize`
 accepts the following values:
@@ -87,16 +87,16 @@ accepts the following values:
 
 <ExampleCodeBlock code={Resize} />
 
-## Ref Forwarding
+### Ref Forwarding
 
 Text Area supports [ref forwarding](https://reactjs.org/docs/forwarding-refs.html). It will forward
 `ref` to its underlying `<textarea>` element.
 
 <ExampleCodeBlock code={RefForwarding} />
 
-## Error States
+### Error States
 
-### Alert
+#### Alert
 
 Set the `error` prop of the wrapping Form Field to `FormField.ErrorType.Alert` and provide an
 explanation using the `hintText` prop to set the Text Area to the Alert state.
@@ -106,7 +106,7 @@ explanation using the `hintText` prop to set the Text Area to the Alert state.
 The `error` prop may also be applied directly to the Text Area with a value of
 `TextArea.ErrorType.Alert` if Form Field is not being used.
 
-### Error
+#### Error
 
 Set the `error` prop of the wrapping Form Field to `FormField.ErrorType.Error` and provide an
 explanation using the `hintText` prop to set the Text Area to the Error state.
@@ -117,5 +117,7 @@ The `error` prop may also be applied directly to the Text Area with a value of
 `TextArea.ErrorType.Error` if Form Field is not being used.
 
 ## Props
+
+Undocumented props are spread to the underlying `<textarea>` element.
 
 <ArgsTable of={TextArea} />

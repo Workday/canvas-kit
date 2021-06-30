@@ -18,12 +18,11 @@ import {Required} from './examples/Required';
 
 Select menus allow users to choose one option from a list of items.
 
-Undocumented props are spread to the underlying `<select>` element.
-
 [> Workday Design Reference](https://design.workday.com/components/inputs/select-drop-down)
 
 > Consider using the [Select in Preview](/docs/preview-select-react-top-label--default) instead. It
 > utilizes a Canvas-styled menu with theming support and a more flexible API for defining options.
+> The Select in Preview will replace this component in the future.
 
 ## Installation
 
@@ -31,14 +30,16 @@ Undocumented props are spread to the underlying `<select>` element.
 yarn add @workday/canvas-kit-react
 ```
 
-## Default Example
+## Usage
+
+### Default Example
 
 Select should be used in tandem with [Form Field](/docs/components-inputs-form-field-react--default)
 to meet accessibility standards.
 
 <ExampleCodeBlock code={Default} />
 
-## Disabled
+### Disabled
 
 Set the `disabled` prop of the Select to prevent users from interacting with it.
 
@@ -51,7 +52,7 @@ remain unselectable by the user.
 
 <ExampleCodeBlock code={DisabledOption} />
 
-## Label Position
+### Label Position
 
 Set the `labelPosition` prop of the wrapping Form Field to designate the position of the label
 relative to the Select. `labelPosition` accepts the following values:
@@ -61,14 +62,14 @@ relative to the Select. `labelPosition` accepts the following values:
 
 <ExampleCodeBlock code={LabelPosition} />
 
-## Required
+### Required
 
 Set the `required` prop of the wrapping Form Field to `true` to indicate that it's required. Labels
 for required fields are suffixed by a red asterisk.
 
 <ExampleCodeBlock code={Required} />
 
-## Grow
+### Grow
 
 Set the `grow` prop of the wrapping Form Field to `true` to configure the Select to expand to the
 width of its container.
@@ -77,16 +78,16 @@ width of its container.
 
 The `grow` prop may also be applied directly to the Select if Form Field is not being used.
 
-## Ref Forwarding
+### Ref Forwarding
 
 Select supports [ref forwarding](https://reactjs.org/docs/forwarding-refs.html). It will forward
 `ref` to its underlying `<select>` element.
 
 <ExampleCodeBlock code={RefForwarding} />
 
-## Error States
+### Error States
 
-### Alert
+#### Alert
 
 Set the `error` prop of the wrapping Form Field to `FormField.ErrorType.Alert` and provide an
 explanation using the `hintText` prop to set the Select to the Alert state.
@@ -96,7 +97,7 @@ explanation using the `hintText` prop to set the Select to the Alert state.
 The `error` prop may also be applied directly to the Select with a value of `Select.ErrorType.Alert`
 if Form Field is not being used.
 
-### Error
+#### Error
 
 Set the `error` prop of the wrapping Form Field to `FormField.ErrorType.Error` and provide an
 explanation using the `hintText` prop to set the Select to the Error state.
@@ -107,5 +108,7 @@ The `error` prop may also be applied directly to the Select with a value of `Sel
 if Form Field is not being used.
 
 ## Props
+
+Undocumented props are spread to the underlying `<select>` element.
 
 <ArgsTable of={Select} />

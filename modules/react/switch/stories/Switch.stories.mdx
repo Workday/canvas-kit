@@ -15,8 +15,6 @@ import {RefForwarding} from './examples/RefForwarding';
 
 Switch is a selection control that is used to switch between two potential states.
 
-Undocumented props are spread to the underlying `<input type="checkbox">` element.
-
 [> Workday Design Reference](https://design.workday.com/components/inputs/switch)
 
 ## Installation
@@ -25,20 +23,22 @@ Undocumented props are spread to the underlying `<input type="checkbox">` elemen
 yarn add @workday/canvas-kit-react
 ```
 
-## Default Example
+## Usage
+
+### Default Example
 
 Switch should be used in tandem with [Form Field](/docs/components-inputs-form-field-react--default)
 to meet accessibility standards.
 
 <ExampleCodeBlock code={Default} />
 
-## Disabled
+### Disabled
 
 Set the `disabled` prop of the Switch to prevent users from interacting with it.
 
 <ExampleCodeBlock code={Disabled} />
 
-## Label Position
+### Label Position
 
 Set the `labelPosition` prop of the wrapping Form Field to designate the position of the label
 relative to the Switch. `labelPosition` accepts the following values:
@@ -48,16 +48,16 @@ relative to the Switch. `labelPosition` accepts the following values:
 
 <ExampleCodeBlock code={LabelPosition} />
 
-## Ref Forwarding
+### Ref Forwarding
 
 Switch supports [ref forwarding](https://reactjs.org/docs/forwarding-refs.html). It will forward
 `ref` to its underlying `<input type="checkbox">` element.
 
 <ExampleCodeBlock code={RefForwarding} />
 
-## Error States
+### Error States
 
-### Alert
+#### Alert
 
 Set the `error` prop of the wrapping Form Field to `FormField.ErrorType.Alert` and provide an
 explanation using the `hintText` prop to set the Switch to the Alert state.
@@ -67,7 +67,7 @@ explanation using the `hintText` prop to set the Switch to the Alert state.
 The `error` prop may also be applied directly to the Switch with a value of `Switch.ErrorType.Alert`
 if Form Field is not being used.
 
-### Error
+#### Error
 
 Set the `error` prop of the wrapping Form Field to `FormField.ErrorType.Error` and provide an
 explanation using the `hintText` prop to set the Switch to the Error state.
@@ -78,5 +78,7 @@ The `error` prop may also be applied directly to the Switch with a value of `Swi
 if Form Field is not being used.
 
 ## Props
+
+Undocumented props are spread to the underlying `<input type="checkbox">` element.
 
 <ArgsTable of={Switch} />
