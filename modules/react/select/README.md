@@ -5,3 +5,8 @@ View the
 on Storybook.
 
 [> Workday Design Reference](https://design.workday.com/components/inputs/select-drop-down)
+
+> Consider using the
+> [Select in Preview](https://workday.github.io/canvas-kit/?path=/docs/preview-select-react-top-label--default)
+> instead. It utilizes a Canvas-styled menu with theming support and a more flexible API for
+> defining options.
