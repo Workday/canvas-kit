@@ -31,8 +31,9 @@ yarn add @workday/canvas-kit-react
 
 ### Basic Example
 
-Checkbox should be used in tandem with
-[Form Field](/docs/components-inputs-form-field-react--default) to meet accessibility standards.
+Checkbox may be used on its own without
+[Form Field](/docs/components-inputs-form-field-react--default) since it includes a `<label>` with a
+`for` attribute referencing the underlying `<input type="checkbox">` element.
 
 <ExampleCodeBlock code={Basic} />
 
@@ -55,7 +56,7 @@ not all) of its children are checked.
 
 ### Label Position
 
-Set the `labelPosition` prop of the wrapping Form Field to designate the position of the label
+If Form Field is being used, set its `labelPosition` prop to designate the position of the label
 relative to the Checkbox. `labelPosition` accepts the following values:
 
 - `FormField.LabelPosition.Top` (Default)
@@ -65,8 +66,8 @@ relative to the Checkbox. `labelPosition` accepts the following values:
 
 ### Required
 
-Set the `required` prop of the wrapping Form Field to `true` to indicate that it's required. Labels
-for required fields are suffixed by a red asterisk.
+Set the `required` prop of a wrapping Form Field to `true` to indicate that the field is required.
+Labels for required fields are suffixed by a red asterisk.
 
 <ExampleCodeBlock code={Required} />
 
@@ -82,7 +83,8 @@ Checkbox supports [ref forwarding](https://reactjs.org/docs/forwarding-refs.html
 #### Alert
 
 Set the `error` prop of the wrapping Form Field to `FormField.ErrorType.Alert` and provide an
-explanation using the `hintText` prop to set the Checkbox to the Alert state.
+explanation using the `hintText` prop to set the Checkbox to the Alert state. You may omit the
+`label` prop on the Form Field.
 
 <ExampleCodeBlock code={Alert} />
 
@@ -92,7 +94,8 @@ The `error` prop may also be applied directly to the Checkbox with a value of
 #### Error
 
 Set the `error` prop of the wrapping Form Field to `FormField.ErrorType.Error` and provide an
-explanation using the `hintText` prop to set the Checkbox to the Error state.
+explanation using the `hintText` prop to set the Checkbox to the Error state. You may omit the
+`label` prop on the Form Field.
 
 <ExampleCodeBlock code={Error} />
 

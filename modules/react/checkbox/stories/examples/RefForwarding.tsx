@@ -1,7 +1,7 @@
 import React from 'react';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {Checkbox} from '@workday/canvas-kit-react/checkbox';
-import {FormField} from '@workday/canvas-kit-react/form-field';
+import {Box} from '@workday/canvas-kit-labs-react/common';
 
 export const RefForwarding = () => {
   const [checked, setChecked] = React.useState(false);
@@ -17,14 +17,14 @@ export const RefForwarding = () => {
 
   return (
     <>
-      <FormField label="Terms">
+      <Box marginBottom="s">
         <Checkbox
           checked={checked}
           label="I agree to the terms"
           onChange={handleChange}
           ref={ref}
         />
-      </FormField>
+      </Box>
       <PrimaryButton onClick={handleClick}>Check Agreement to Terms</PrimaryButton>
     </>
   );
