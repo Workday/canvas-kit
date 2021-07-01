@@ -2,7 +2,7 @@ import React from 'react';
 import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Radio, RadioGroup} from '@workday/canvas-kit-react/radio';
 
-export const Default = () => {
+export const Basic = () => {
   const [value, setValue] = React.useState<string | number>('deep-dish');
 
   const handleChange = (value: string | number) => {

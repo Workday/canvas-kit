@@ -2,7 +2,7 @@ import React from 'react';
 import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Select, SelectOption} from '@workday/canvas-kit-react/select';
 
-export const Default = () => {
+export const Basic = () => {
   const [value, setValue] = React.useState('medium');
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
