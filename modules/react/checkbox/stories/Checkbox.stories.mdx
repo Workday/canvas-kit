@@ -80,27 +80,22 @@ Checkbox supports [ref forwarding](https://reactjs.org/docs/forwarding-refs.html
 
 ### Error States
 
-#### Alert
+Set the `error` prop of the wrapping Form Field to `FormField.ErrorType.Alert` or
+`FormField.ErrorType.Error` to set the Checkbox to the Alert or Error state, respectively. You will
+also need to set the `hintId` and `hintText` props on the Form Field to meet accessibility
+standards. You may wish to omit the `label` prop on the Form Field given that Checkbox already
+includes a label.
 
-Set the `error` prop of the wrapping Form Field to `FormField.ErrorType.Alert` and provide an
-explanation using the `hintText` prop to set the Checkbox to the Alert state. You may omit the
-`label` prop on the Form Field.
+The `error` prop may be applied directly to the Checkbox with a value of `Checkbox.ErrorType.Alert`
+or `Checkbox.ErrorType.Error` if Form Field is not being used.
+
+#### Alert
 
 <ExampleCodeBlock code={Alert} />
 
-The `error` prop may also be applied directly to the Checkbox with a value of
-`Checkbox.ErrorType.Alert` if Form Field is not being used.
-
 #### Error
 
-Set the `error` prop of the wrapping Form Field to `FormField.ErrorType.Error` and provide an
-explanation using the `hintText` prop to set the Checkbox to the Error state. You may omit the
-`label` prop on the Form Field.
-
 <ExampleCodeBlock code={Error} />
-
-The `error` prop may also be applied directly to the Checkbox with a value of
-`Checkbox.ErrorType.Error` if Form Field is not being used.
 
 ## Props
 

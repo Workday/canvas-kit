@@ -56,8 +56,8 @@ relative to the Radio Group. `labelPosition` accepts the following values:
 
 ### Required
 
-Set the `required` prop of the wrapping Form Field to `true` to indicate that it's required. Labels
-for required fields are suffixed by a red asterisk.
+Set the `required` prop of the wrapping Form Field to `true` to indicate that the field is required.
+Labels for required fields are suffixed by a red asterisk.
 
 <ExampleCodeBlock code={Required} />
 
@@ -77,17 +77,16 @@ forward `ref` to its underlying `<input type="radio">` element.
 
 ### Error States
 
-#### Alert
+Set the `error` prop of the wrapping Form Field to `FormField.ErrorType.Alert` or
+`FormField.ErrorType.Error` to set the Radio Group to the Alert or Error state, respectively. You
+will also need to set the `hintId` and `hintText` props on the Form Field to meet accessibility
+standards.
 
-Set the `error` prop of the wrapping Form Field to `FormField.ErrorType.Alert` and provide an
-explanation using the `hintText` prop to set the Radio Group to the Alert state.
+#### Alert
 
 <ExampleCodeBlock code={Alert} />
 
 #### Error
-
-Set the `error` prop of the wrapping Form Field to `FormField.ErrorType.Error` and provide an
-explanation using the `hintText` prop to set the Radio Group to the Error state.
 
 <ExampleCodeBlock code={Error} />
 

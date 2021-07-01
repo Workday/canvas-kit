@@ -58,25 +58,21 @@ Switch supports [ref forwarding](https://reactjs.org/docs/forwarding-refs.html).
 
 ### Error States
 
-#### Alert
+Set the `error` prop of the wrapping Form Field to `FormField.ErrorType.Alert` or
+`FormField.ErrorType.Error` to set the Switch to the Alert or Error state, respectively. You will
+also need to set the `hintId` and `hintText` props on the Form Field to meet accessibility
+standards.
 
-Set the `error` prop of the wrapping Form Field to `FormField.ErrorType.Alert` and provide an
-explanation using the `hintText` prop to set the Switch to the Alert state.
+The `error` prop may be applied directly to the Switch with a value of `Switch.ErrorType.Alert` or
+`Switch.ErrorType.Error` if Form Field is not being used.
+
+#### Alert
 
 <ExampleCodeBlock code={Alert} />
 
-The `error` prop may also be applied directly to the Switch with a value of `Switch.ErrorType.Alert`
-if Form Field is not being used.
-
 #### Error
 
-Set the `error` prop of the wrapping Form Field to `FormField.ErrorType.Error` and provide an
-explanation using the `hintText` prop to set the Switch to the Error state.
-
 <ExampleCodeBlock code={Error} />
-
-The `error` prop may also be applied directly to the Switch with a value of `Switch.ErrorType.Error`
-if Form Field is not being used.
 
 ## Props
 

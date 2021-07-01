@@ -65,8 +65,8 @@ relative to the Select. `labelPosition` accepts the following values:
 
 ### Required
 
-Set the `required` prop of the wrapping Form Field to `true` to indicate that it's required. Labels
-for required fields are suffixed by a red asterisk.
+Set the `required` prop of the wrapping Form Field to `true` to indicate that the field is required.
+Labels for required fields are suffixed by a red asterisk.
 
 <ExampleCodeBlock code={Required} />
 
@@ -88,25 +88,21 @@ Select supports [ref forwarding](https://reactjs.org/docs/forwarding-refs.html).
 
 ### Error States
 
-#### Alert
+Set the `error` prop of the wrapping Form Field to `FormField.ErrorType.Alert` or
+`FormField.ErrorType.Error` to set the Select to the Alert or Error state, respectively. You will
+also need to set the `hintId` and `hintText` props on the Form Field to meet accessibility
+standards.
 
-Set the `error` prop of the wrapping Form Field to `FormField.ErrorType.Alert` and provide an
-explanation using the `hintText` prop to set the Select to the Alert state.
+The `error` prop may be applied directly to the Select with a value of `Select.ErrorType.Alert` or
+`Select.ErrorType.Error` if Form Field is not being used.
+
+#### Alert
 
 <ExampleCodeBlock code={Alert} />
 
-The `error` prop may also be applied directly to the Select with a value of `Select.ErrorType.Alert`
-if Form Field is not being used.
-
 #### Error
 
-Set the `error` prop of the wrapping Form Field to `FormField.ErrorType.Error` and provide an
-explanation using the `hintText` prop to set the Select to the Error state.
-
 <ExampleCodeBlock code={Error} />
-
-The `error` prop may also be applied directly to the Select with a value of `Select.ErrorType.Error`
-if Form Field is not being used.
 
 ## Props
 
