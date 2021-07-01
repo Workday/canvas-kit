@@ -37,7 +37,7 @@ const findEllipsisElement = (element: HTMLElement): HTMLElement | null => {
     return element;
   } else {
     for (let i = 0; i < element.children.length; i++) {
-      const overflowElement = findOverflowElement(element.children[i] as HTMLElement);
+      const overflowElement = findEllipsisElement(element.children[i] as HTMLElement);
       if (overflowElement) {
         return overflowElement;
       }
