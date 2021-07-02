@@ -2,7 +2,7 @@ import React from 'react';
 import {FormField} from '@workday/canvas-kit-react/form-field';
 import {TextArea} from '@workday/canvas-kit-react/text-area';
 
-export const Resize = () => {
+export const ResizeConstraints = () => {
   const [value, setValue] = React.useState('');
 
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {

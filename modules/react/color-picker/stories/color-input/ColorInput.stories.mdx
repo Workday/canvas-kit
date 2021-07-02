@@ -49,6 +49,13 @@ Set the `showCheck` prop of the Color Input to display a check icon in the swatc
 
 <ExampleCodeBlock code={Checked} />
 
+### Ref Forwarding
+
+Color Input supports [ref forwarding](https://reactjs.org/docs/forwarding-refs.html). It will
+forward `ref` to its underlying `<input type="text">` element.
+
+<ExampleCodeBlock code={RefForwarding} />
+
 ### Valid Color Change Callback
 
 Set the `onValidColorChange` prop of the Color Input to set a callback for when a valid hex color is
@@ -58,6 +65,15 @@ The color passed to the callback will be prefixed with a hash and expanded if ne
 example, `03F` would be converted to `#0033FF`.
 
 <ExampleCodeBlock code={ValidColorChange} />
+
+### Grow
+
+Set the `grow` prop of the wrapping Form Field to `true` to configure the Color Input to expand to
+the width of its container.
+
+<ExampleCodeBlock code={Grow} />
+
+The `grow` prop may also be applied directly to the Color Input if Form Field is not being used.
 
 ### Label Position
 
@@ -75,22 +91,6 @@ Set the `required` prop of the wrapping Form Field to `true` to indicate that th
 Labels for required fields are suffixed by a red asterisk.
 
 <ExampleCodeBlock code={Required} />
-
-### Grow
-
-Set the `grow` prop of the wrapping Form Field to `true` to configure the Color Input to expand to
-the width of its container.
-
-<ExampleCodeBlock code={Grow} />
-
-The `grow` prop may also be applied directly to the Color Input if Form Field is not being used.
-
-### Ref Forwarding
-
-Color Input supports [ref forwarding](https://reactjs.org/docs/forwarding-refs.html). It will
-forward `ref` to its underlying `<input type="text">` element.
-
-<ExampleCodeBlock code={RefForwarding} />
 
 ### Error States
 

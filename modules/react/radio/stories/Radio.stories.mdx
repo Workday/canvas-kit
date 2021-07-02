@@ -44,6 +44,20 @@ Set the `disabled` prop of the Radio Button to prevent users from interacting wi
 
 <ExampleCodeBlock code={Disabled} />
 
+### Radio Buttons with No Values
+
+The `value` prop may be omitted from Radio Buttons, in which case the `value` prop of the Radio
+Group should be set using the zero-based index of the selected Radio Button.
+
+<ExampleCodeBlock code={NoValue} />
+
+### Ref Forwarding
+
+Radio Button supports [ref forwarding](https://reactjs.org/docs/forwarding-refs.html). It will
+forward `ref` to its underlying `<input type="radio">` element.
+
+<ExampleCodeBlock code={RefForwarding} />
+
 ### Label Position
 
 Set the `labelPosition` prop of the wrapping Form Field to designate the position of the label
@@ -60,20 +74,6 @@ Set the `required` prop of the wrapping Form Field to `true` to indicate that th
 Labels for required fields are suffixed by a red asterisk.
 
 <ExampleCodeBlock code={Required} />
-
-### Radio Buttons with No Values
-
-The `value` prop may be omitted from Radio Buttons, in which case the `value` prop of the Radio
-Group should be set using the zero-based index of the selected Radio Button.
-
-<ExampleCodeBlock code={NoValue} />
-
-### Ref Forwarding
-
-Radio Button supports [ref forwarding](https://reactjs.org/docs/forwarding-refs.html). It will
-forward `ref` to its underlying `<input type="radio">` element.
-
-<ExampleCodeBlock code={RefForwarding} />
 
 ### Error States
 

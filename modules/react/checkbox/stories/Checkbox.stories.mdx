@@ -54,6 +54,13 @@ not all) of its children are checked.
 
 <ExampleCodeBlock code={Indeterminate} />
 
+### Ref Forwarding
+
+Checkbox supports [ref forwarding](https://reactjs.org/docs/forwarding-refs.html). It will forward
+`ref` to its underlying `<input type="checkbox">` element.
+
+<ExampleCodeBlock code={RefForwarding} />
+
 ### Label Position
 
 If Form Field is being used, set its `labelPosition` prop to designate the position of the label
@@ -70,13 +77,6 @@ Set the `required` prop of a wrapping Form Field to `true` to indicate that the 
 Labels for required fields are suffixed by a red asterisk.
 
 <ExampleCodeBlock code={Required} />
-
-### Ref Forwarding
-
-Checkbox supports [ref forwarding](https://reactjs.org/docs/forwarding-refs.html). It will forward
-`ref` to its underlying `<input type="checkbox">` element.
-
-<ExampleCodeBlock code={RefForwarding} />
 
 ### Error States
 

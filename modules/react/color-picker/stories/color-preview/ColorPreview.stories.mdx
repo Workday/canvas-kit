@@ -27,6 +27,13 @@ yarn add @workday/canvas-kit-react
 
 <ExampleCodeBlock code={Basic} />
 
+### Ref Forwarding
+
+Color Preview supports [ref forwarding](https://reactjs.org/docs/forwarding-refs.html). It will
+forward `ref` to its underlying `<input type="text">` element.
+
+<ExampleCodeBlock code={RefForwarding} />
+
 ### Label Position
 
 If Form Field is being used, set its `labelPosition` prop to designate the position of the label
@@ -36,13 +43,6 @@ relative to the Color Preview. `labelPosition` accepts the following values:
 - `FormField.LabelPosition.Left`
 
 <ExampleCodeBlock code={LabelPosition} />
-
-### Ref Forwarding
-
-Color Preview supports [ref forwarding](https://reactjs.org/docs/forwarding-refs.html). It will
-forward `ref` to its underlying `<input type="text">` element.
-
-<ExampleCodeBlock code={RefForwarding} />
 
 ## Props
 

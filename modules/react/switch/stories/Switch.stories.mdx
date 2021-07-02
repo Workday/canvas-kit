@@ -39,6 +39,13 @@ Set the `disabled` prop of the Switch to prevent users from interacting with it.
 
 <ExampleCodeBlock code={Disabled} />
 
+### Ref Forwarding
+
+Switch supports [ref forwarding](https://reactjs.org/docs/forwarding-refs.html). It will forward
+`ref` to its underlying `<input type="checkbox">` element.
+
+<ExampleCodeBlock code={RefForwarding} />
+
 ### Label Position
 
 Set the `labelPosition` prop of the wrapping Form Field to designate the position of the label
@@ -48,13 +55,6 @@ relative to the Switch. `labelPosition` accepts the following values:
 - `FormField.LabelPosition.Left`
 
 <ExampleCodeBlock code={LabelPosition} />
-
-### Ref Forwarding
-
-Switch supports [ref forwarding](https://reactjs.org/docs/forwarding-refs.html). It will forward
-`ref` to its underlying `<input type="checkbox">` element.
-
-<ExampleCodeBlock code={RefForwarding} />
 
 ### Error States
 
