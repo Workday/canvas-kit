@@ -1,6 +1,6 @@
 import * as h from '../helpers';
 
-describe('Radio Group', () => {
+describe('Radio', () => {
   before(() => {
     h.stories.visit();
   });
