@@ -9,7 +9,7 @@ import {
 import {IconButton} from '@workday/canvas-kit-react/button';
 import {SegmentedControl} from '@workday/canvas-kit-react/segmented-control';
 
-export const Default = () => {
+export const Basic = () => {
   const [value, setValue] = React.useState<string | number>();
   const handleToggle = (selectedValue: string | number) => {
     setValue(selectedValue);

@@ -3,7 +3,7 @@ import {Meta} from '@storybook/addon-docs/blocks';
 import {ActionBar} from '@workday/canvas-kit-react/action-bar';
 import {Specifications} from '@workday/canvas-kit-docs';
 
-import {Default} from './examples/Default';
+import {Basic} from './examples/Basic';
 import {Fixed} from './examples/Fixed';
 
 <Meta title="Components/Buttons/Action Bar/React" component={ActionBar} />
@@ -27,7 +27,7 @@ Here is a basic example of an `ActionBar` with two buttons. Although not require
 aligned followed by secondary buttons. The primary button is on the right only in "progression-based
 UIs" and on mobile devices.
 
-<ExampleCodeBlock code={Default} />
+<ExampleCodeBlock code={Basic} />
 
 ### Fixed
 
@@ -48,10 +48,8 @@ At 575px, responsive styles will take effect:
 > When on a mobile form factor, the button placement should flip to have the primary button on the
 > far right.
 
-## Properties
+## Props
+
+Undocumented props are spread to the underlying container `div` element.
 
 <ArgsTable of={ActionBar} />
-
-## Specifications
-
-<Specifications file="ActionBar.spec.ts" name="ActionBar" />
