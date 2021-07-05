@@ -17,13 +17,13 @@ describe('Button', () => {
     it('should render the correct text', () => {
       cy.get('button')
         .first()
-        .should('contain', 'Primary');
+        .should('contain', 'Click Me');
     });
   });
 
   context('given delete buttons are rendered', () => {
     beforeEach(() => {
-      h.stories.load('Components/Buttons/Button/React', 'Delete');
+      h.stories.load('Components/Buttons/Button/React', 'DeleteStory');
     });
 
     it('should not have any axe errors', () => {
@@ -33,7 +33,7 @@ describe('Button', () => {
     it('should render the correct text', () => {
       cy.get('button')
         .first()
-        .should('contain', 'Delete');
+        .should('contain', 'Click Me');
     });
   });
 });

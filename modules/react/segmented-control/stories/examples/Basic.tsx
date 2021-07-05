@@ -1,8 +1,4 @@
-/// <reference path="../../../../typings.d.ts" />
 import * as React from 'react';
-import {storiesOf} from '@storybook/react';
-import {action} from '@storybook/addon-actions';
-import withReadme from 'storybook-readme/with-readme';
 
 import {
   listViewIcon,
@@ -10,23 +6,13 @@ import {
   deviceTabletIcon,
   percentageIcon,
 } from '@workday/canvas-system-icons-web';
-
 import {IconButton} from '@workday/canvas-kit-react/button';
-import {SegmentedControl} from '../index';
+import {SegmentedControl} from '@workday/canvas-kit-react/segmented-control';
 
-import README from '../README.md';
-
-export default {
-  title: 'Components/Buttons/Segmented Control/React',
-  component: SegmentedControl,
-  decorators: [withReadme(README)],
-};
-
-export const Default = () => {
+export const Basic = () => {
   const [value, setValue] = React.useState<string | number>();
   const handleToggle = (selectedValue: string | number) => {
     setValue(selectedValue);
-    action('Segmented Control selection change')(selectedValue);
   };
 
   return (
@@ -35,8 +21,7 @@ export const Default = () => {
         icon={listViewIcon}
         value="list-view"
         aria-label="List View"
-        // Note: For some reason this action call causes a delay in storybook
-        onClick={e => action('Existing IconButton onClick callback')(e)}
+        onClick={e => console.log('Existing IconButton onClick callback')}
       />
       <IconButton
         icon={worksheetsIcon}

@@ -1,0 +1,71 @@
+import {Meta, Story} from '@storybook/addon-docs/blocks';
+
+import {
+  PrimaryButton,
+  SecondaryButton,
+  TertiaryButton,
+  DeleteButton,
+} from '@workday/canvas-kit-react/button';
+import {Specifications} from '@workday/canvas-kit-docs';
+
+import {Primary} from './examples/Primary';
+import {Secondary} from './examples/Secondary';
+import {Tertiary} from './examples/Tertiary';
+import {Delete} from './examples/Delete';
+
+<Meta title="Components/Buttons/Button/React" />
+
+# Canvas Kit Button
+
+Clickable button elements that extend the native `<button>` element with Canvas styling.
+
+[> Workday Design Reference](https://design.workday.com/components/buttons/buttons)
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-react
+```
+
+## Usage
+
+### PrimaryButton
+
+Here is a basic example of a Primary Button. Buttons can be customized with several props to change
+the size, add an icon, etc.
+
+Undocumented props are spread to the underlying `button` element.
+
+<ExampleCodeBlock code={Primary} />
+
+#### Props
+
+<ArgsTable of={PrimaryButton} />
+
+### SecondaryButton
+
+<ExampleCodeBlock code={Secondary} />
+
+#### Props
+
+<ArgsTable of={SecondaryButton} />
+
+### TertiaryButton
+
+<ExampleCodeBlock code={Tertiary} />
+
+#### Props
+
+<ArgsTable of={TertiaryButton} />
+
+### DeleteButton
+
+<ExampleCodeBlock code={Delete} />
+
+#### Props
+
+<ArgsTable of={DeleteButton} />
+
+## Specifications
+
+<Specifications file="Button.spec.ts" name="Button" />
