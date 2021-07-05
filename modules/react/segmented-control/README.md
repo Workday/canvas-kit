@@ -6,7 +6,7 @@ is a [_controlled_](https://reactjs.org/docs/forms.html#controlled-components) c
 ## Installation
 
 ```sh
-yarn add @workday/canvas-kit-react/segmented-control
+yarn add @workday/canvas-kit-react
 ```
 
 ## Usage
