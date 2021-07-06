@@ -8,7 +8,7 @@ import {TooltipContainer} from './TooltipContainer';
 import {useTooltip} from './useTooltip';
 
 /**
- * Look for an element within the tree for a `text-overflow` CSS property of `ellipsis`.
+ * Look for an element within the tree for an overflow element (auto, scroll, clip, or hidden).
  * This could be the passed element, or a descendant. If no element is found, `null` is returned.
  */
 const findOverflowElement = (element: HTMLElement): HTMLElement | null => {
@@ -31,13 +31,17 @@ const findOverflowElement = (element: HTMLElement): HTMLElement | null => {
   }
 };
 
+/**
+ * Look for an element within the tree for a `text-overflow` CSS property of `ellipsis`.
+ * This could be the passed element, or a descendant. If no element is found, `null` is returned.
+ */
 const findEllipsisElement = (element: HTMLElement): HTMLElement | null => {
   const style = getComputedStyle(element);
   if (style.textOverflow === 'ellipsis' || Number(style.webkitLineClamp) > 0) {
     return element;
   } else {
     for (let i = 0; i < element.children.length; i++) {
-      const overflowElement = findOverflowElement(element.children[i] as HTMLElement);
+      const overflowElement = findEllipsisElement(element.children[i] as HTMLElement);
       if (overflowElement) {
         return overflowElement;
       }
