@@ -171,3 +171,35 @@ export const ModalWithPopup = () => {
     </>
   );
 };
+
+export const IframeTest = () => {
+  const [open, setOpen] = React.useState(false);
+  const buttonRef = React.useRef<HTMLButtonElement>() as React.RefObject<HTMLButtonElement>; // cast to keep buttonRef happy
+  const openModal = () => {
+    setOpen(true);
+  };
+  const closeModal = () => {
+    setOpen(false);
+    if (buttonRef.current) {
+      buttonRef.current.focus();
+    }
+  };
+
+  return (
+    <>
+      <DeleteButton buttonRef={buttonRef} onClick={openModal}>
+        Delete Item
+      </DeleteButton>
+      <Modal data-testid="TestModal" heading="Delete Item" open={open} handleClose={closeModal}>
+        <p>Are you sure you want to delete the item?</p>
+        <DeleteButton style={{marginRight: '16px'}} onClick={closeModal}>
+          Delete
+        </DeleteButton>
+        <Button onClick={closeModal} variant={Button.Variant.Secondary}>
+          Cancel
+        </Button>
+        <iframe srcDoc="<html><body>Hello, <b>world</b>.<button>iframe button 1</button><button>iframe button 2</button></body></html>" />
+      </Modal>
+    </>
+  );
+};

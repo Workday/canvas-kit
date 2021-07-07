@@ -54,7 +54,6 @@
     "@workday/canvas-kit-react-common": "^4.8.0",
     "@workday/canvas-kit-react-core": "^4.8.0",
     "@workday/canvas-system-icons-web": "1.0.41",
-    "focus-trap-js": "1.1.0",
     "uuid": "^3.3.3"
   },
   "devDependencies": {
