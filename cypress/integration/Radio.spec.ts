@@ -1,45 +1,60 @@
 import * as h from '../helpers';
 
-const getRadio = () => {
-  return cy.get(`[type="radio"]`);
-};
-
 describe('Radio', () => {
   before(() => {
     h.stories.visit();
   });
-
-  context(`given the Default story is rendered`, () => {
-    beforeEach(() => {
-      h.stories.load('Components/Inputs/Radio/React/Left Label/Radio', 'Default');
-    });
-
-    it('should pass accessibility checks', () => {
-      cy.checkA11y();
-    });
-
-    context('when clicked', () => {
+  ['Basic', 'Alert', 'Error'].forEach(story => {
+    context(`given the '${story}' story is rendered`, () => {
       beforeEach(() => {
-        cy.findByLabelText('E-mail').click();
+        h.stories.load('Components/Inputs/Radio/React', story);
       });
 
-      it('should be checked', () => {
-        getRadio().should('be.checked');
+      it('should not have any axe errors', () => {
+        cy.checkA11y();
       });
+
+      context(`when the "Gluten Free" radio button is clicked`, () => {
+        beforeEach(() => {
+          cy.findByLabelText('Gluten Free').click();
+        });
+
+        it(`the "Gluten Free" radio button should be checked`, () => {
+          cy.findByLabelText('Gluten Free').should('be.checked');
+        });
+      });
+
+      context(
+        `when clicking the "Gluten Free" radio button and then clicking the "Thin" radio button`,
+        () => {
+          beforeEach(() => {
+            cy.findByLabelText('Gluten Free').click();
+            cy.findByLabelText('Thin').click();
+          });
+
+          it(`the "Gluten Free" radio button should not be checked`, () => {
+            cy.findByLabelText('Gluten Free').should('not.be.checked');
+          });
+
+          it(`the "Thin" radio button should be checked`, () => {
+            cy.findByLabelText('Thin').should('be.checked');
+          });
+        }
+      );
     });
   });
 
   context(`given the 'Disabled' story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Components/Inputs/Radio/React/Left Label/Radio', 'Disabled');
+      h.stories.load('Components/Inputs/Radio/React', 'Disabled');
     });
 
-    it('should pass accessibility checks', () => {
+    it('should not have any axe errors', () => {
       cy.checkA11y();
     });
 
-    it('should be disabled', () => {
-      getRadio().should('be.disabled');
+    it(`the "Gluten Free (Sold Out)" radio button should be disabled`, () => {
+      cy.findByLabelText('Gluten Free (Sold Out)').should('be.disabled');
     });
   });
 });

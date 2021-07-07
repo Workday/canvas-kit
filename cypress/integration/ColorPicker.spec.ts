@@ -7,8 +7,8 @@ const getResetButton = () => cy.contains('button', 'Reset');
 const getSubmitButton = () => cy.findByLabelText('Submit');
 const getSwatch = (color: string) => cy.get(`div[color="${color}"]`);
 
-const colorInputStory = 'Components/Inputs/Color Picker/Color Input/React/Top Label';
-const colorPreviewStory = 'Components/Inputs/Color Picker/Color Preview/React/Top Label';
+const colorInputStory = 'Components/Inputs/Color Picker/Color Input/React';
+const colorPreviewStory = 'Components/Inputs/Color Picker/Color Preview/React';
 const colorPickerStory = 'Preview/Color Picker/React';
 const value = '000000';
 
@@ -16,13 +16,13 @@ describe('ColorInput', () => {
   before(() => {
     h.stories.visit();
   });
-  ['Default', 'Alert', 'Error', 'Checked', 'Grow', 'Grow with Error'].forEach(story => {
+  ['Basic', 'Alert', 'Error', 'Checked', 'Grow'].forEach(story => {
     context(`given the '${story}' story is rendered`, () => {
       beforeEach(() => {
         h.stories.load(colorInputStory, story);
       });
 
-      it('should pass accessibility checks', () => {
+      it('should not have any axe errors', () => {
         cy.checkA11y();
       });
 
@@ -83,7 +83,7 @@ describe('ColorInput', () => {
       h.stories.load(colorInputStory, 'Disabled');
     });
 
-    it('should pass accessibility checks', () => {
+    it('should not have any axe errors', () => {
       cy.checkA11y();
     });
 
@@ -94,12 +94,17 @@ describe('ColorInput', () => {
 });
 
 describe('ColorPreview', () => {
-  beforeEach(() => {
-    h.stories.load(colorPreviewStory, 'Default');
+  before(() => {
+    h.stories.visit();
   });
+  context(`given the 'Basic' story is rendered`, () => {
+    beforeEach(() => {
+      h.stories.load(colorPreviewStory, 'Basic');
+    });
 
-  it('should pass accessibility checks', () => {
-    cy.checkA11y();
+    it('should not have any axe errors', () => {
+      cy.checkA11y();
+    });
   });
 });
 
@@ -116,7 +121,7 @@ describe('ColorPicker', () => {
         getOpenButton().click();
       });
 
-      it('should pass accessibility checks', () => {
+      it('should not have any axe errors', () => {
         cy.checkA11y();
       });
 
@@ -180,7 +185,7 @@ describe('ColorPicker', () => {
         getColorInput().focus();
       });
 
-      it('should pass accessibility checks', () => {
+      it('should not have any axe errors', () => {
         cy.checkA11y();
       });
 

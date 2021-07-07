@@ -1,0 +1,109 @@
+import {Meta} from '@storybook/addon-docs/blocks';
+import {Specifications} from '@workday/canvas-kit-docs';
+
+import {Radio, RadioGroup} from '@workday/canvas-kit-react/radio';
+
+import {Alert} from './examples/Alert';
+import {Basic} from './examples/Basic';
+import {Disabled} from './examples/Disabled';
+import {Error} from './examples/Error';
+import {LabelPosition} from './examples/LabelPosition';
+import {NoValue} from './examples/NoValue';
+import {RefForwarding} from './examples/RefForwarding';
+import {Required} from './examples/Required';
+
+<Meta title="Components/Inputs/Radio/React" component={Radio} />
+
+# Canvas Kit Radio
+
+Radio Buttons allow a user to select one value from a predefined list of 7 or fewer options.
+
+[> Workday Design Reference](https://design.workday.com/components/inputs/radio-buttons)
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-react
+```
+
+## Usage
+
+### Basic Example
+
+Radio Buttons are intended to be grouped together using a Radio Group.
+
+Radio Group should be used in tandem with
+[Form Field](/docs/components-inputs-form-field-react--basic) where the `useFieldset` prop is set to
+`true` to meet accessibility standards.
+
+<ExampleCodeBlock code={Basic} />
+
+### Disabled
+
+Set the `disabled` prop of the Radio Button to prevent users from interacting with it.
+
+<ExampleCodeBlock code={Disabled} />
+
+### Radio Buttons with No Values
+
+The `value` prop may be omitted from Radio Buttons, in which case the `value` prop of the Radio
+Group should be set using the zero-based index of the selected Radio Button.
+
+<ExampleCodeBlock code={NoValue} />
+
+### Ref Forwarding
+
+Radio Button supports [ref forwarding](https://reactjs.org/docs/forwarding-refs.html). It will
+forward `ref` to its underlying `<input type="radio">` element.
+
+<ExampleCodeBlock code={RefForwarding} />
+
+### Label Position
+
+Set the `labelPosition` prop of the wrapping Form Field to designate the position of the label
+relative to the Radio Group. `labelPosition` accepts the following values:
+
+- `FormField.LabelPosition.Top` (Default)
+- `FormField.LabelPosition.Left`
+
+<ExampleCodeBlock code={LabelPosition} />
+
+### Required
+
+Set the `required` prop of the wrapping Form Field to `true` to indicate that the field is required.
+Labels for required fields are suffixed by a red asterisk.
+
+<ExampleCodeBlock code={Required} />
+
+### Error States
+
+Set the `error` prop of the wrapping Form Field to `FormField.ErrorType.Alert` or
+`FormField.ErrorType.Error` to set the Radio Group to the Alert or Error state, respectively. You
+will also need to set the `hintId` and `hintText` props on the Form Field to meet accessibility
+standards.
+
+#### Alert
+
+<ExampleCodeBlock code={Alert} />
+
+#### Error
+
+<ExampleCodeBlock code={Error} />
+
+## Props
+
+### Radio Props
+
+Undocumented props are spread to the underlying `<input type="radio">` element.
+
+<ArgsTable of={Radio} />
+
+### Radio Group Props
+
+Undocumented props are spread to the outermost container element rendered by Radio Group.
+
+<ArgsTable of={RadioGroup} />
+
+## Specifications
+
+<Specifications file="Radio.spec.ts" name="Radio" />

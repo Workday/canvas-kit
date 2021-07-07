@@ -1,0 +1,108 @@
+import {Meta} from '@storybook/addon-docs/blocks';
+import {Specifications} from '@workday/canvas-kit-docs';
+
+import Checkbox from '@workday/canvas-kit-react/checkbox/lib/Checkbox.tsx';
+
+import {Alert} from './examples/Alert';
+import {Basic} from './examples/Basic';
+import {Disabled} from './examples/Disabled';
+import {Error} from './examples/Error';
+import {Indeterminate} from './examples/Indeterminate';
+import {LabelPosition} from './examples/LabelPosition';
+import {RefForwarding} from './examples/RefForwarding';
+import {Required} from './examples/Required';
+
+<Meta title="Components/Inputs/Checkbox/React" component={Checkbox} />
+
+# Canvas Kit Checkbox
+
+Checkboxes allow a user to select zero, one, or multiple values from a predefined list of 7 or less
+options.
+
+[> Workday Design Reference](https://design.workday.com/components/inputs/checkboxes)
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-react
+```
+
+## Usage
+
+### Basic Example
+
+Checkbox may be used on its own without
+[Form Field](/docs/components-inputs-form-field-react--basic) since it includes a `<label>` with a
+`for` attribute referencing the underlying `<input type="checkbox">` element.
+
+<ExampleCodeBlock code={Basic} />
+
+### Disabled
+
+Set the `disabled` prop of the Checkbox to prevent users from interacting with it.
+
+<ExampleCodeBlock code={Disabled} />
+
+### Indeterminate
+
+Set the `indeterminate` prop of the Checkbox to `true` to indicate the Checkbox is neither checked
+nor unchecked.
+
+A common use case for an indeterminate Checkbox is when the value of a parent Checkbox is dependent
+on a number of child Checkboxes. The parent Checkbox is set to the indeterminate state if some (but
+not all) of its children are checked.
+
+<ExampleCodeBlock code={Indeterminate} />
+
+### Ref Forwarding
+
+Checkbox supports [ref forwarding](https://reactjs.org/docs/forwarding-refs.html). It will forward
+`ref` to its underlying `<input type="checkbox">` element.
+
+<ExampleCodeBlock code={RefForwarding} />
+
+### Label Position
+
+If Form Field is being used, set its `labelPosition` prop to designate the position of the label
+relative to the Checkbox. `labelPosition` accepts the following values:
+
+- `FormField.LabelPosition.Top` (Default)
+- `FormField.LabelPosition.Left`
+
+<ExampleCodeBlock code={LabelPosition} />
+
+### Required
+
+Set the `required` prop of a wrapping Form Field to `true` to indicate that the field is required.
+Labels for required fields are suffixed by a red asterisk.
+
+<ExampleCodeBlock code={Required} />
+
+### Error States
+
+Set the `error` prop of the wrapping Form Field to `FormField.ErrorType.Alert` or
+`FormField.ErrorType.Error` to set the Checkbox to the Alert or Error state, respectively. You will
+also need to set the `hintId` and `hintText` props on the Form Field to meet accessibility
+standards. You may wish to omit the `label` prop on the Form Field given that Checkbox already
+includes a label.
+
+The `error` prop may be applied directly to the Checkbox with a value of `Checkbox.ErrorType.Alert`
+or `Checkbox.ErrorType.Error` if Form Field is not being used.
+
+#### Alert
+
+<ExampleCodeBlock code={Alert} />
+
+#### Error
+
+<ExampleCodeBlock code={Error} />
+
+## Props
+
+Undocumented props are spread to the underlying `<input type="checkbox">` element.
+
+<ArgsTable of={Checkbox} />
+
+## Specifications
+
+<Specifications file="Checkbox.spec.ts" name="Checkbox" />
