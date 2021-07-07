@@ -118,7 +118,7 @@ export const DropdownMenu = ({
       case 'Enter':
         event.preventDefault();
         if (item.onAction) {
-          item.onAction(item);
+          item.onAction(item.link);
           resetFocus();
           break;
         }
