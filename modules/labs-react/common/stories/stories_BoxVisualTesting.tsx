@@ -1,8 +1,8 @@
 import React from 'react';
 
-import {ComponentStatesTable, withSnapshotsEnabled} from '../../../../utils/storybook';
+import {withSnapshotsEnabled} from '../../../../utils/storybook';
 
-import {Box} from '@workday/canvas-kit-labs-react/common';
+import {Box, ComponentStatesTable} from '@workday/canvas-kit-labs-react/common';
 import {ContentDirection} from '@workday/canvas-kit-react/common';
 
 export default withSnapshotsEnabled({

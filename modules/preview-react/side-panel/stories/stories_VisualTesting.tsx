@@ -2,11 +2,8 @@
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
 import {StaticStates} from '@workday/canvas-kit-react/common';
-import {
-  ComponentStatesTable,
-  permutateProps,
-  withSnapshotsEnabled,
-} from '../../../../utils/storybook';
+import {ComponentStatesTable, permutateProps} from '@workday/canvas-kit-labs-react/common';
+import {withSnapshotsEnabled} from '../../../../utils/storybook';
 import SidePanel from '../index';
 
 export default withSnapshotsEnabled({

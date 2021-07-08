@@ -2,12 +2,8 @@
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
 import * as React from 'react';
-import {
-  ComponentStatesTable,
-  permutateProps,
-  withSnapshotsEnabled,
-  customColorTheme,
-} from '../../../../../utils/storybook';
+import {ComponentStatesTable, permutateProps} from '@workday/canvas-kit-labs-react/common';
+import {withSnapshotsEnabled, customColorTheme} from '../../../../../utils/storybook';
 import {playCircleIcon} from '@workday/canvas-system-icons-web';
 import {IconButton} from '@workday/canvas-kit-react/button';
 import {Container, IconButtonGrid, stateTableColumnProps} from './utils';

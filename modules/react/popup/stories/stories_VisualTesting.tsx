@@ -3,7 +3,8 @@ import React from 'react';
 
 import {CanvasProvider, ContentDirection, StaticStates} from '@workday/canvas-kit-react/common';
 
-import {ComponentStatesTable, withSnapshotsEnabled} from '../../../../utils/storybook';
+import {ComponentStatesTable} from '@workday/canvas-kit-labs-react/common';
+import {withSnapshotsEnabled} from '../../../../utils/storybook';
 
 import {Popup} from '@workday/canvas-kit-react/popup';
 

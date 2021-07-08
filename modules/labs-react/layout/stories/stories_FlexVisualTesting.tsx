@@ -1,6 +1,7 @@
 import React from 'react';
 
-import {ComponentStatesTable, withSnapshotsEnabled} from '../../../../utils/storybook';
+import {ComponentStatesTable} from '@workday/canvas-kit-labs-react/common';
+import {withSnapshotsEnabled} from '../../../../utils/storybook';
 
 import {Flex} from '@workday/canvas-kit-labs-react/layout';
 import {ContentDirection, StaticStates} from '@workday/canvas-kit-react/common';

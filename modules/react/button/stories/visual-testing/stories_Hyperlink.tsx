@@ -3,11 +3,8 @@
 import {jsx} from '@emotion/core';
 import {colors, type} from '@workday/canvas-kit-react/tokens';
 import {StaticStates} from '@workday/canvas-kit-react/common';
-import {
-  ComponentStatesTable,
-  permutateProps,
-  withSnapshotsEnabled,
-} from '../../../../../utils/storybook';
+import {ComponentStatesTable, permutateProps} from '@workday/canvas-kit-labs-react/common';
+import {withSnapshotsEnabled} from '../../../../../utils/storybook';
 import {Hyperlink} from '@workday/canvas-kit-react/button';
 import {Container} from './utils';
 

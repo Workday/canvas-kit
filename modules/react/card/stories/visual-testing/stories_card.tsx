@@ -2,7 +2,8 @@
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
 import {StaticStates} from '@workday/canvas-kit-react/common';
-import {ComponentStatesTable, withSnapshotsEnabled} from '../../../../../utils/storybook';
+import {ComponentStatesTable} from '@workday/canvas-kit-labs-react/common';
+import {withSnapshotsEnabled} from '../../../../../utils/storybook';
 
 import {Card} from '@workday/canvas-kit-react/card';
 
