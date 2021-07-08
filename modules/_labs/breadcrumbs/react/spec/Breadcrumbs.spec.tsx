@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {fireEvent, render, screen} from '@testing-library/react';
-import {Breadcrumbs} from '@workday/canvas-kit-labs-react-breadcrumbs';
+import {Breadcrumbs} from '../lib/Breadcrumbs';
 const context = describe;
 
 describe('Breadcrumbs', () => {
