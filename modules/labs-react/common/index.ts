@@ -6,3 +6,5 @@ export {FlexItemStyleProps} from './lib/utils/flexItem';
 export {LayoutStyleProps} from './lib/utils/layout';
 export {PositionStyleProps} from './lib/utils/position';
 export {SpaceStyleProps} from './lib/utils/space';
+export {ComponentStatesTable} from './lib/storybook-utils/ComponentStatesTable';
+export {permutateProps} from './lib/storybook-utils/permutateProps';

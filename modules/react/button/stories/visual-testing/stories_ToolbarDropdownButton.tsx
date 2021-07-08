@@ -2,11 +2,8 @@
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
 import * as React from 'react';
-import {
-  ComponentStatesTable,
-  withSnapshotsEnabled,
-  customColorTheme,
-} from '../../../../../utils/storybook';
+import {ComponentStatesTable} from '@workday/canvas-kit-labs-react/common';
+import {withSnapshotsEnabled, customColorTheme} from '../../../../../utils/storybook';
 import {playCircleIcon} from '@workday/canvas-system-icons-web';
 import {ToolbarDropdownButton} from '@workday/canvas-kit-react/button';
 import {Container, stateTableColumnProps} from './utils';

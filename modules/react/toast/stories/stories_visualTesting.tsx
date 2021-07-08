@@ -6,7 +6,8 @@ import {action} from '@storybook/addon-actions';
 import {exclamationCircleIcon} from '@workday/canvas-system-icons-web';
 import {Toast} from '@workday/canvas-kit-react/toast';
 
-import {ComponentStatesTable, withSnapshotsEnabled} from '../../../../utils/storybook';
+import {ComponentStatesTable} from '@workday/canvas-kit-labs-react/common';
+import {withSnapshotsEnabled} from '../../../../utils/storybook';
 
 export default withSnapshotsEnabled({
   title: 'Testing/React/Popups/Toast',

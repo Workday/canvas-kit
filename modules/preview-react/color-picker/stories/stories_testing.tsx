@@ -4,7 +4,8 @@ import {jsx} from '@emotion/core';
 import React from 'react';
 import {colors} from '@workday/canvas-kit-react/tokens';
 import {StaticStates} from '@workday/canvas-kit-react/common';
-import {ComponentStatesTable, withSnapshotsEnabled} from '../../../../utils/storybook';
+import {ComponentStatesTable} from '@workday/canvas-kit-labs-react/common';
+import {withSnapshotsEnabled} from '../../../../utils/storybook';
 import ColorPicker from '../lib/ColorPicker';
 
 export default {
