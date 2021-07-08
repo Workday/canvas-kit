@@ -16,7 +16,7 @@ Cypress.Commands.add('injectAxe', () => {
 });
 
 // Add better logging to cy.tab
-Cypress.Commands.overwrite('tab', (originalFn, subject) => {
+Cypress.Commands.overwrite('tab', (originalFn, subject, options) => {
   const prevSubject = cy.$$(subject || (cy as any).state('window').document.activeElement);
 
   const log = Cypress.log({
@@ -30,7 +30,7 @@ Cypress.Commands.overwrite('tab', (originalFn, subject) => {
 
   log.snapshot('before', {next: 'after'});
 
-  return Cypress.Promise.try(() => originalFn(subject))
+  return Cypress.Promise.try(() => originalFn(subject, options))
     .then(value => {
       log.set('$el', value).snapshot();
       return Cypress.$(value);
