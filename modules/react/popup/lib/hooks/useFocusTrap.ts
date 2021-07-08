@@ -1,5 +1,5 @@
 import React from 'react';
-import tabTrappingKey from 'focus-trap-js';
+import tabTrappingKey from './focus-trap-js';
 
 import {PopupModel} from './usePopupModel';
 
