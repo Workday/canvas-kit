@@ -1,3 +1,5 @@
+import {PropCombination, PropDeclaration, Props, PropsDeclaration} from './propTypes';
+
 export const permutateProps = (
   allProps: PropsDeclaration,
   filter?: (props: Props) => boolean,

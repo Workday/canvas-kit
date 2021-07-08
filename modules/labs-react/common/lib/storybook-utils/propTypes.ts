@@ -1,15 +1,15 @@
-type PropDeclaration = {
+export type PropDeclaration = {
   value: any;
   label: string;
 };
 
-type PropsDeclaration = {[key: string]: PropDeclaration[]};
+export type PropsDeclaration = {[key: string]: PropDeclaration[]};
 
-type Props = {
+export type Props = {
   [key: string]: any;
 };
 
-type PropCombination = {
+export type PropCombination = {
   label: string;
   props: Props;
 };

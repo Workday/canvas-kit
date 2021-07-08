@@ -1,5 +1,6 @@
 import React from 'react';
 import {styled} from '@workday/canvas-kit-react/common';
+import {PropCombination, Props} from './propTypes';
 
 /**
  * A helper to generate a table of all possible states for component visual testing.
