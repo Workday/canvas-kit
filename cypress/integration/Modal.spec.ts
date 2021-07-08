@@ -642,4 +642,49 @@ describe('Modal', () => {
       });
     });
   });
+
+  context(`given the 'Iframe Test' story is rendered`, () => {
+    beforeEach(() => {
+      h.stories.load('Testing/React/Popups/Modal', 'Iframe Test');
+    });
+
+    context('when the modal is opened', () => {
+      beforeEach(() => {
+        cy.contains('button', 'Delete Item').click();
+      });
+
+      context('when Shift + Tab key is pressed', () => {
+        beforeEach(() => {
+          cy.focused().tab({shift: true});
+        });
+
+        it('should focus in the iframe', () => {
+          cy.get('iframe').should('have.focus');
+        });
+
+        it('should focus on the last button in the iframe', () => {
+          cy.get('iframe')
+            .its('0.contentDocument.body')
+            .then(cy.wrap)
+            .contains('button', 'iframe button 2')
+            .should('have.focus');
+        });
+
+        // skipping because the cy.tab plugin isn't capable of starting inside an iframe. We have to test this manually
+        context.skip('when the Tab key is pressed', () => {
+          beforeEach(() => {
+            cy.get('iframe')
+              .its('0.contentDocument.body')
+              .then(cy.wrap)
+              .focused()
+              .tab();
+          });
+
+          it('should focus on the close button', () => {
+            cy.findByRole('button', {name: 'Close'}).should('have.focus');
+          });
+        });
+      });
+    });
+  });
 });

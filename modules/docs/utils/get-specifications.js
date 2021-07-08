@@ -35,6 +35,7 @@ function getSpecifications() {
               cb();
               children = childrenBefore;
             };
+            describe.skip = noop;
             const context = describe;
 
             const it = name => {
