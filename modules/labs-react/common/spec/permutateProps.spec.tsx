@@ -1,4 +1,4 @@
-import {permutateProps} from '../lib/storybook-utils/permutatePropsutils/permutateProps';
+import {permutateProps} from '../lib/storybook-utils/permutateProps';
 import {ErrorType} from '@workday/canvas-kit-react/common';
 
 describe('Component States Table', () => {
