@@ -14,6 +14,9 @@ stages:
 - name: trunk
   if: (branch = master OR branch =~ /^prerelease\//) AND type != pull_request
 
+- name: support
+  if: (branch =~ /^support\//) AND type != pull_request
+
 - name: tag
   if: branch =~ /^v\d+\.\d+(\.\d+)?(-\S*)?$/ AND tag IS present
 
@@ -59,6 +62,14 @@ jobs:
         github_token: "$GH_STORYBOOK_TOKEN"
         on:
           branch: master
+
+  - stage: support
+    deploy:
+      - provider: script
+        script: npm config set //registry.npmjs.org/:_authToken=$NPM_PUBLISH_TOKEN && node utils/publish-canary.js
+        skip_cleanup: true
+        on:
+          all_branches: true
 
 env:
   global:
