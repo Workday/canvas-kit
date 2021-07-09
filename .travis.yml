@@ -14,8 +14,14 @@ stages:
 - name: trunk
   if: (branch = master OR branch =~ /^prerelease\//) AND type != pull_request
 
-- name: tag
-  if: branch =~ /^v\d+\.\d+(\.\d+)?(-\S*)?$/ AND tag IS present
+- name: support
+  if: branch =~ /^support\// AND type != pull_request
+
+- name: release
+  if: tag =~ /^v\d+\.\d+(\.\d+)?(-\S*)?$/ AND tag IS present
+
+- name: support-release
+  if: branch =~ /^support\// AND tag =~ /^v\d+\.\d+(\.\d+)?(-\S*)?$/ AND tag IS present
 
 before_install:
   - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.15.2
@@ -26,12 +32,22 @@ install:
 
 jobs:
   include:
-  - stage: tag
+  - stage: release
     script:
       - yarn build
     deploy:
       provider: script
       script: npm config set //registry.npmjs.org/:_authToken=$NPM_PUBLISH_TOKEN && yarn lerna publish from-package --yes --pre-dist-tag prerelease
+      skip_cleanup: true
+      on:
+        tags: true
+
+  - stage: support-release
+    script:
+      - yarn build
+    deploy:
+      provider: script
+      script: npm config set //registry.npmjs.org/:_authToken=$NPM_PUBLISH_TOKEN && yarn lerna publish from-package --yes --dist-tag support
       skip_cleanup: true
       on:
         tags: true
@@ -59,6 +75,14 @@ jobs:
         github_token: "$GH_STORYBOOK_TOKEN"
         on:
           branch: master
+
+  - stage: support
+    deploy:
+      - provider: script
+        script: npm config set //registry.npmjs.org/:_authToken=$NPM_PUBLISH_TOKEN && node utils/publish-canary.js
+        skip_cleanup: true
+        on:
+          all_branches: true
 
 env:
   global:
