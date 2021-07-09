@@ -93,8 +93,9 @@ export type ExtractProps<
       ? P // if `TElement` was `never`, return only the inferred props `P`
       : TElement extends undefined // else test if TElement was defined
       ? ExtractHTMLAttributes<JSX.IntrinsicElements[E]> & P // `TElement` wasn't explicitly defined, so let's fall back to the inferred element's HTML attribute interface + props `P`
-      : // @ts-ignore TS thinks `TElement` cannot be an index type because of the `undefined`, but we've already ensured that can't happen, so we'll ignore that error
-        ExtractHTMLAttributes<JSX.IntrinsicElements[TElement]> & P // `TElement` was defined, so we'll return the HTML attribute interface + inferred `P` props
+      // TS thinks `TElement` cannot be an index type because of the `undefined`, but we've already ensured that can't happen, so we'll ignore that error
+      // @ts-ignore
+      : ExtractHTMLAttributes<JSX.IntrinsicElements[TElement]> & P // `TElement` was defined, so we'll return the HTML attribute interface + inferred `P` props
     : P // E isn't in JSX.IntrinsicElements, we don't know what it is, so return the inferred props `P`
   : TComponent extends Component<infer P> // test if `TComponent` is a `Component`, while inferring props `P`
   ? P // it was a `Component`, return inferred props `P`
