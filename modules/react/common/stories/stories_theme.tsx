@@ -7,7 +7,7 @@ import withReadme from 'storybook-readme/with-readme';
 import {CanvasProvider} from '../index';
 import {CanvasTheme, CanvasThemePalette, Themeable} from '../lib/theming';
 import README from '../lib/theming/README.md';
-import {H1, colors, type, space, borderRadius} from '@workday/canvas-kit-react/tokens';
+import {colors, type, space, borderRadius} from '@workday/canvas-kit-react/tokens';
 import {useTheme} from '@workday/canvas-kit-react/common';
 
 const Palettes = styled('div')({
@@ -26,7 +26,7 @@ const Palette = styled('ul')({
 });
 const Swatch = styled('li')(
   {
-    ...type.body,
+    ...type.levels.subtext.large,
     padding: `0 ${space.m}`,
     height: space.xl,
     display: 'flex',
@@ -42,11 +42,12 @@ const Swatch = styled('li')(
 );
 const PaletteTitle = styled(Swatch)(
   {
-    ...type.h3,
+    ...type.levels.body.large,
     height: space.xxl,
     paddingBottom: space.s,
     alignItems: 'flex-end',
     textTransform: 'capitalize',
+    fontWeight: type.properties.fontWeights.bold,
   },
   (props: any) => ({
     span: {
@@ -72,12 +73,13 @@ const ThemedComponent = styled('h1')<Themeable>(
       },
     },
   }) => ({
-    ...type.h3,
+    ...type.levels.body.large,
     background: themePrimary.main,
     color: themePrimary.contrast,
     borderRadius: borderRadius.m,
     padding: space.xs,
     display: 'inline-block',
+    fontWeight: type.properties.fontWeights.bold,
   })
 );
 
@@ -97,7 +99,7 @@ const ThemeDemo = (props: any) => {
   const theme = useTheme();
   return (
     <div>
-      <H1>Default Canvas Theme</H1>
+      <h1 css={type.levels.heading.medium}>Default Canvas Theme</h1>
       <Palettes>
         {Object.keys(theme.canvas.palette).map(name => {
           const palette = theme.canvas.palette[name as Palette] as CanvasThemePalette;
@@ -118,7 +120,7 @@ const ThemeDemo = (props: any) => {
         })}
       </Palettes>
       <hr style={{margin: '80px 0'}} />
-      <H1>Custom Theme</H1>
+      <h1 css={type.levels.heading.medium}>Custom Theme</h1>
       <CanvasProvider theme={customTheme}>
         <ThemedComponent>Themed Component</ThemedComponent>
       </CanvasProvider>

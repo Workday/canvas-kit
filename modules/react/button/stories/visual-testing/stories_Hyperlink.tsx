@@ -1,13 +1,10 @@
 /// <reference path="../../../../../typings.d.ts" />
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
-import {colors} from '@workday/canvas-kit-react/tokens';
-import {StaticStates, type} from '@workday/canvas-kit-labs-react/tokens';
-import {
-  ComponentStatesTable,
-  permutateProps,
-  withSnapshotsEnabled,
-} from '../../../../../utils/storybook';
+import {colors, type} from '@workday/canvas-kit-react/tokens';
+import {StaticStates} from '@workday/canvas-kit-react/common';
+import {ComponentStatesTable, permutateProps} from '@workday/canvas-kit-labs-react/common';
+import {withSnapshotsEnabled} from '../../../../../utils/storybook';
 import {Hyperlink} from '@workday/canvas-kit-react/button';
 import {Container} from './utils';
 
@@ -41,7 +38,7 @@ export const HyperlinkStates = () => (
         <Container blue={props.variant === 'inverse'}>
           <div
             css={{
-              ...type.body2,
+              ...type.levels.subtext.large,
               color: props.variant === 'inverse' ? colors.frenchVanilla100 : undefined,
             }}
           >

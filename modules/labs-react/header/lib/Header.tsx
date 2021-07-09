@@ -5,7 +5,7 @@ import {borderRadius, space, type} from '@workday/canvas-kit-react/tokens';
 import {DubLogoTitle, WorkdayLogoTitle} from './parts';
 import {themes} from './shared/themes';
 import {HeaderHeight, HeaderTheme, HeaderVariant} from './shared/types';
-import {IconButton, IconButtonProps} from '@workday/canvas-kit-react/button';
+import {Hyperlink, IconButton, IconButtonProps} from '@workday/canvas-kit-react/button';
 import {SystemIcon, SystemIconProps} from '@workday/canvas-kit-react/icon';
 import {justifyIcon} from '@workday/canvas-system-icons-web';
 import {PickRequired} from '@workday/canvas-kit-react/common';
@@ -64,7 +64,7 @@ const HeaderShell = styled('div')<PickRequired<HeaderProps, 'themeColor', 'varia
     display: 'flex',
     alignItems: 'center',
     boxSizing: 'border-box',
-    ...type.body,
+    ...type.levels.subtext.large,
     WebkitFontSmoothing: 'antialiased',
     MozOsxFontSmoothing: 'grayscale',
     position: 'relative',
@@ -87,9 +87,7 @@ const BrandSlot = styled('div')(
   })
 );
 
-const BrandLink = styled('a')({
-  ...type.link,
-
+const BrandLink = styled(Hyperlink)({
   '&:hover': {
     textDecoration: 'none',
   },

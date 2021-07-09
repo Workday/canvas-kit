@@ -60,6 +60,7 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
         const header = attributes.find(findAttribute('heading')) as JSXAttribute | undefined;
         const id = attributes.find(findAttribute('headingId')) as JSXAttribute | undefined;
         const children = nodePath.value.children;
+        const depth = attributes.find(findAttribute('depth')) as JSXAttribute | undefined;
 
         // remove these attributes from the list - we'll add them as sub components
         nodePath.value.openingElement.attributes = attributes.filter(item => {
@@ -72,6 +73,18 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
           }
           return true;
         });
+
+        // Convert depth from `depth={depth[2]}` to `depth={2}`
+        if (
+          depth &&
+          depth.value &&
+          depth.value.type === 'JSXExpressionContainer' &&
+          depth.value.expression.type === 'MemberExpression' &&
+          depth.value.expression.object.type === 'Identifier' &&
+          depth.value.expression.property.type === 'NumericLiteral'
+        ) {
+          depth.value.expression = depth.value.expression.property;
+        }
 
         const CardHeadingJSX = j.jsxMemberExpression(
           j.jsxIdentifier(importMap.Card),

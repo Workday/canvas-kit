@@ -4,19 +4,19 @@ const getSelect = () => {
   return cy.get(`select`);
 };
 
-const selectedValue = 'mail';
+const selectedValue = 'medium';
 
 describe('Select', () => {
   before(() => {
     h.stories.visit();
   });
-  ['Plain', 'Alert', 'Error'].forEach(story => {
+  ['Basic', 'Alert', 'Error'].forEach(story => {
     context(`given the '${story}' story is rendered`, () => {
       beforeEach(() => {
-        h.stories.load('Components/Inputs/Select/React/Top Label', story);
+        h.stories.load('Components/Inputs/Select/React', story);
       });
 
-      it('should pass accessibility checks', () => {
+      it('should not have any axe errors', () => {
         cy.checkA11y();
       });
 
@@ -38,10 +38,10 @@ describe('Select', () => {
 
   context(`given the 'Disabled' story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Components/Inputs/Select/React/Top Label', 'Disabled');
+      h.stories.load('Components/Inputs/Select/React', 'Disabled');
     });
 
-    it('should pass accessibility checks', () => {
+    it('should not have any axe errors', () => {
       cy.checkA11y();
     });
 

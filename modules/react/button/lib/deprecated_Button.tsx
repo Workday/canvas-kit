@@ -25,9 +25,9 @@ export interface DeprecatedButtonProps extends GrowthBehavior {
 
 const Container = styled('button')<DeprecatedButtonProps & StyledType>(
   {
-    fontFamily: type.body.fontFamily,
-    fontSize: type.body.fontSize,
-    ...type.variant.button,
+    fontFamily: type.properties.fontFamilies.default,
+    fontSize: 14, // hardcoded value to prevent shifting from type changes
+    fontWeight: 500, // hardcoded value to prevent shifting from type changes
     boxSizing: 'border-box',
     display: 'inline-flex',
     alignItems: 'center',
@@ -38,9 +38,13 @@ const Container = styled('button')<DeprecatedButtonProps & StyledType>(
     position: 'relative',
     cursor: 'pointer',
     outline: 'none',
+
     transition:
       'box-shadow 120ms linear, border 120ms linear, background-color 120ms linear, color 120ms linear',
-    '&:hover:active': {transitionDuration: '40ms'}, // Makes the "down" state of the button happens faster than the hover state, so it animates in correctly.
+
+    // Makes the "down" state of the button happens faster than the hover state, so it animates in correctly.
+    '&:hover:active': {transitionDuration: '40ms'},
+
     '&:disabled, &:disabled:active': {cursor: 'default', boxShadow: 'none'},
   },
   ({size}) => {
@@ -59,7 +63,7 @@ const Container = styled('button')<DeprecatedButtonProps & StyledType>(
           padding: `0 ${canvas.space.m}`,
           minWidth: '80px',
           maxWidth: '200px',
-          fontSize: type.body2.fontSize,
+          fontSize: 13, // hardcoded value to prevent shifting from type changes
         };
       case 'small':
         return {
@@ -67,7 +71,7 @@ const Container = styled('button')<DeprecatedButtonProps & StyledType>(
           padding: `0 ${canvas.space.xxs}`,
           minWidth: '56px',
           maxWidth: '120px',
-          fontSize: '10px',
+          fontSize: 10, // hardcoded value to prevent shifting from type changes
           lineHeight: 'normal',
         };
     }

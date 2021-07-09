@@ -12,6 +12,8 @@ describe('Text Area', () => {
     cb.mockReset();
   });
 
+  verifyComponent(TextArea, {});
+
   describe('when rendered with a placeholder', () => {
     it('should render a text area with placeholder', () => {
       const {getByRole} = render(<TextArea onChange={cb} placeholder={placeholder} />);
@@ -37,22 +39,6 @@ describe('Text Area', () => {
     it('should render a disabled text area', () => {
       const {getByRole} = render(<TextArea onChange={cb} disabled={true} />);
       expect(getByRole('textbox')).toBeDisabled();
-    });
-  });
-
-  describe('when rendered with extra, arbitrary props', () => {
-    it('should spread extra props', () => {
-      const attr = 'test';
-      const {getByRole} = render(<TextArea onChange={cb} data-propspread={attr} />);
-      expect(getByRole('textbox')).toHaveAttribute('data-propspread', attr);
-    });
-  });
-
-  describe('when provided an input ref', () => {
-    it('should set the ref to the input element', async () => {
-      const ref: React.RefObject<HTMLTextAreaElement> = React.createRef();
-      const {findByRole} = render(<TextArea inputRef={ref} />);
-      expect(await findByRole('textbox')).toEqual(ref.current);
     });
   });
 

@@ -1,7 +1,7 @@
 # Canvas Kit React Drawer
 
 <a href="https://github.com/Workday/canvas-kit/tree/master/modules/labs-react/README.md">
-  <img src="https://img.shields.io/badge/LABS-beta-orange" alt="LABS: Beta" />
+  <img src="https://img.shields.io/badge/LABS-alpha-orange" alt="LABS: Alpha" />
 </a>  This component is work in progress and currently in pre-release.
 
 ## Installation

@@ -11,8 +11,8 @@ import {mergeCallback} from './mergeCallback';
 export function mergeProps<T extends object, S extends object>(
   targetProps: T,
   sourceProps: S
-): T & S {
-  const returnProps = {...targetProps} as T & S;
+): S & T {
+  const returnProps = {...targetProps} as S & T;
 
   for (const key in sourceProps) {
     if (sourceProps.hasOwnProperty(key)) {

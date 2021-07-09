@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import {colors, space, H4, CanvasColor, typeColors} from '@workday/canvas-kit-react/tokens';
+import {colors, space, type, CanvasColor, typeColors} from '@workday/canvas-kit-react/tokens';
 import {IconButton} from '@workday/canvas-kit-react/button';
 import {xIcon} from '@workday/canvas-system-icons-web';
 
@@ -55,8 +55,10 @@ const HeaderContainer = styled('div')<Pick<DrawerHeaderProps, 'headerColor' | 'b
   })
 );
 
-const HeaderTitle = styled(H4)<Pick<DrawerHeaderProps, 'inverse'>>(
+const HeaderTitle = styled('h4')<Pick<DrawerHeaderProps, 'inverse'>>(
   {
+    ...type.levels.body.small,
+    fontWeight: type.properties.fontWeights.bold,
     whiteSpace: 'nowrap',
     textOverflow: 'ellipsis',
     overflow: 'hidden',

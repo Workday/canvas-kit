@@ -18,7 +18,7 @@
     "noUnusedLocals": true,
     "allowSyntheticDefaultImports": true,
     "types": [],
-    "incremental": true
+    "incremental": true,
   },
   "ts-node": {
     "transpileOnly": true,

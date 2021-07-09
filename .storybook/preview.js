@@ -1,7 +1,7 @@
 import {DocsPage, DocsContainer} from '@storybook/addon-docs/blocks';
 import 'cypress-storybook/react';
 
-import {CanvasProviderDecorator, FontsDecorator} from '../utils/storybook';
+import {CanvasProviderDecorator} from '../utils/storybook';
 import theme from './theme';
 
 /** If the string contains a phrase, prefix it. This is useful for making ordering sections */
@@ -17,8 +17,10 @@ function storySort(a, b) {
     prefix('getting-started', 'a'),
     prefix('tokens-', '1'),
     prefix('components-', '2'),
-    prefix('labs-', '3'),
-    prefix('default', 'aa'),
+    prefix('preview-', '3'),
+    prefix('labs-', '4'),
+    prefix('basic', 'aa'),
+    prefix('default', 'ab'),
     prefix('visual-testing', 'zz')
   );
 
@@ -28,7 +30,7 @@ function storySort(a, b) {
   return left === right ? 0 : left.localeCompare(right);
 }
 
-export const decorators = [FontsDecorator, CanvasProviderDecorator];
+export const decorators = [CanvasProviderDecorator];
 
 export const parameters = {
   options: {

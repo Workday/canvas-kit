@@ -1,12 +1,9 @@
 /// <reference path="../../../../../typings.d.ts" />
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
-import {StaticStates} from '@workday/canvas-kit-labs-react/tokens';
-import {
-  ComponentStatesTable,
-  permutateProps,
-  withSnapshotsEnabled,
-} from '../../../../../utils/storybook';
+import {StaticStates} from '@workday/canvas-kit-react/common';
+import {ComponentStatesTable, permutateProps} from '@workday/canvas-kit-labs-react/common';
+import {withSnapshotsEnabled} from '../../../../../utils/storybook';
 import {deprecated_Button as DeprecatedButton} from '@workday/canvas-kit-react/button';
 import {Container, stateTableColumnProps} from './utils';
 

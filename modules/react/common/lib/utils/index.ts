@@ -1,5 +1,6 @@
 export * from './colorUtils';
 export * from './getTranslateFromOrigin';
+export * from './changeFocus';
 export * from './makeMq';
 export * from './mergeCallback';
 export * from './mergeProps';
@@ -8,3 +9,6 @@ export * from './assert';
 export * from './useMount';
 export * from './components';
 export * from './models';
+export * from './elements';
+export * from './useWindowSize';
+export * from './StaticStates';

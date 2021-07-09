@@ -3,12 +3,9 @@ import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import {action} from '@storybook/addon-actions';
 import withReadme from 'storybook-readme/with-readme';
-import {StaticStates} from '@workday/canvas-kit-labs-react/tokens';
-import {
-  ComponentStatesTable,
-  permutateProps,
-  withSnapshotsEnabled,
-} from '../../../../utils/storybook';
+import {StaticStates} from '@workday/canvas-kit-react/common';
+import {ComponentStatesTable, permutateProps} from '@workday/canvas-kit-labs-react/common';
+import {withSnapshotsEnabled} from '../../../../utils/storybook';
 
 import {
   listViewIcon,

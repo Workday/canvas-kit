@@ -1,9 +1,9 @@
 /// <reference path="../../../../../typings.d.ts" />
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
-import {StaticStates} from '@workday/canvas-kit-labs-react/tokens';
-import {ComponentStatesTable, withSnapshotsEnabled} from '../../../../../utils/storybook';
-import {depth, space} from '@workday/canvas-kit-react/tokens';
+import {StaticStates} from '@workday/canvas-kit-react/common';
+import {ComponentStatesTable} from '@workday/canvas-kit-labs-react/common';
+import {withSnapshotsEnabled} from '../../../../../utils/storybook';
 
 import {Card} from '@workday/canvas-kit-react/card';
 
@@ -22,7 +22,7 @@ export const CardStates = () => (
           label: 'With zero padding',
           props: {
             heading: 'Delete Item',
-            padding: space.zero,
+            padding: 'zero',
           },
         },
         {
@@ -30,7 +30,7 @@ export const CardStates = () => (
           props: {
             heading: 'Delete Item',
 
-            padding: space.s,
+            padding: 's',
           },
         },
 
@@ -38,28 +38,28 @@ export const CardStates = () => (
           label: 'With different depth value 1',
           props: {
             heading: 'Delete Item',
-            depth: depth[1],
+            depth: 1,
           },
         },
         {
           label: 'With different depth value 2',
           props: {
             heading: 'Delete Item',
-            depth: depth[2],
+            depth: 2,
           },
         },
         {
           label: 'With different depth value 3',
           props: {
             heading: 'Delete Item',
-            depth: depth[3],
+            depth: 3,
           },
         },
         {
           label: 'With different depth value 4',
           props: {
             heading: 'Delete Item',
-            depth: depth[4],
+            depth: 4,
           },
         },
         {

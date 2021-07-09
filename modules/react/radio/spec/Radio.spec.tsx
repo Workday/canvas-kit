@@ -8,6 +8,8 @@ describe('Radio', () => {
     cb.mockReset();
   });
 
+  verifyComponent(Radio, {});
+
   describe('when rendered', () => {
     it('should render an input with type=radio', () => {
       const {getByRole} = render(<Radio onChange={cb} />);
@@ -75,25 +77,6 @@ describe('Radio', () => {
 
       expect(getByRole('radio')).toHaveProperty('checked');
       expect(getByRole('radio')).toHaveProperty('id', uniqueId);
-    });
-  });
-
-  describe('when rendered with extra, arbitrary props', () => {
-    it('should spread extra props onto the radio', () => {
-      const attr = 'test';
-      const {getByRole} = render(<Radio data-propspread={attr} onChange={cb} />);
-      expect(getByRole('radio')).toHaveAttribute('data-propspread', attr);
-    });
-  });
-
-  describe('when rendered with an input ref', () => {
-    it('should set the ref to the checkbox input element', () => {
-      const ref = React.createRef<HTMLInputElement>();
-
-      render(<Radio inputRef={ref} onChange={cb} />);
-
-      expect(ref.current).not.toBeNull();
-      expect(ref.current).toHaveAttribute('type', 'radio');
     });
   });
 

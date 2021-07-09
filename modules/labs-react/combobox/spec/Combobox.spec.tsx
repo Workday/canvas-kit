@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Combobox, {ComboboxProps} from '../lib/Combobox';
-import {MenuItem} from '../../menu';
+import {MenuItem} from '@workday/canvas-kit-preview-react/menu';
 import {TextInput} from '../../../react/text-input';
 import {render, fireEvent} from '@testing-library/react';
 
@@ -38,6 +38,15 @@ describe('Combobox', () => {
       });
 
       expect(screen.getByRole('combobox')).toHaveValue('test');
+    });
+
+    it('should pass empty initialValue to input', () => {
+      const screen = renderCombobox({
+        ...defaultProps,
+        initialValue: '',
+      });
+
+      expect(screen.getByRole('combobox')).toHaveValue('');
     });
 
     it('should render a clear icon when `showClearButton` is `true`', () => {
@@ -87,6 +96,18 @@ describe('Combobox', () => {
       fireEvent.focus(screen.getByRole('combobox'));
 
       expect(screen.getByRole('log')).toHaveTextContent('Item count: 2');
+    });
+  });
+
+  describe('when the child input is rendered with a ref', () => {
+    it('should set the ref to the child input element', () => {
+      const ref: React.RefObject<HTMLInputElement> = React.createRef();
+      const screen = render(
+        <Combobox>
+          <TextInput ref={ref} />
+        </Combobox>
+      );
+      expect(screen.getByRole('combobox')).toEqual(ref.current);
     });
   });
 

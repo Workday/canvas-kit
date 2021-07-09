@@ -1,7 +1,7 @@
 /// <reference path="../../../../typings.d.ts" />
 import * as React from 'react';
 
-import {Button} from '@workday/canvas-kit-react/button';
+import {SecondaryButton, PrimaryButton} from '@workday/canvas-kit-react/button';
 import {Popup, Popper, Placement} from '@workday/canvas-kit-react/popup';
 
 export default {
@@ -24,8 +24,8 @@ export const UpdateOptions = () => {
         <p>
           Changing the placement should update the popper, but not recreate the PopperJS instance
         </p>
-        <Button onClick={() => setPlacement('top')}>Top</Button>
-        <Button onClick={() => setPlacement('bottom')}>Bottom</Button>
+        <SecondaryButton onClick={() => setPlacement('top')}>Top</SecondaryButton>
+        <SecondaryButton onClick={() => setPlacement('bottom')}>Bottom</SecondaryButton>
         <div>Placement: {placement}</div>
       </div>
       <div
@@ -37,15 +37,14 @@ export const UpdateOptions = () => {
           alignItems: 'center',
         }}
       >
-        <Button ref={buttonRef} variant="primary">
-          Target element
-        </Button>
+        <PrimaryButton ref={buttonRef}>Target element</PrimaryButton>
         <Popper placement={placement} open={open} anchorElement={buttonRef.current!} ref={popupRef}>
           {({placement}) => {
             return (
-              <Popup width={400} heading={'Positioned Popper element'}>
-                Placement: {placement}
-              </Popup>
+              <Popup.Card width={400}>
+                <Popup.Heading>{'Positioned Popper element'}</Popup.Heading>
+                <Popup.Body>Placement:{placement}</Popup.Body>
+              </Popup.Card>
             );
           }}
         </Popper>

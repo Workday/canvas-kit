@@ -1,14 +1,12 @@
 /// <reference path="../../../../typings.d.ts" />
-/** @jsx jsx */
-import {jsx} from '@emotion/core';
-import {StaticStates} from '@workday/canvas-kit-labs-react/tokens';
-import {depth} from '@workday/canvas-kit-react/tokens';
-import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
-import {action} from '@storybook/addon-actions';
+import React from 'react';
 
-import {ComponentStatesTable, withSnapshotsEnabled} from '../../../../utils/storybook';
-import {Popup} from '../index';
-import {PopupPadding} from '../lib/Popup';
+import {CanvasProvider, ContentDirection, StaticStates} from '@workday/canvas-kit-react/common';
+
+import {ComponentStatesTable} from '@workday/canvas-kit-labs-react/common';
+import {withSnapshotsEnabled} from '../../../../utils/storybook';
+
+import {Popup} from '@workday/canvas-kit-react/popup';
 
 export const PopupStates = withSnapshotsEnabled(() => (
   <StaticStates>
@@ -21,7 +19,7 @@ export const PopupStates = withSnapshotsEnabled(() => (
         {
           label: 'On Close',
           props: {
-            handleClose: action('close button clicked'),
+            hasCloseIcon: true,
           },
         },
         {
@@ -34,16 +32,16 @@ export const PopupStates = withSnapshotsEnabled(() => (
           label: 'With zero padding',
           props: {
             heading: 'Delete Item',
-            handleClose: action('close button clicked'),
-            padding: PopupPadding.zero,
+            hasCloseIcon: true,
+            padding: 'zero',
           },
         },
         {
           label: 'With small padding',
           props: {
             heading: 'Delete Item',
-            handleClose: action('close button clicked'),
-            padding: PopupPadding.s,
+            hasCloseIcon: true,
+            padding: 's',
           },
         },
 
@@ -51,39 +49,39 @@ export const PopupStates = withSnapshotsEnabled(() => (
           label: 'With different depth value 1',
           props: {
             heading: 'Delete Item',
-            handleClose: action('close button clicked'),
-            depth: depth[1],
+            hasCloseIcon: true,
+            depth: 1,
           },
         },
         {
           label: 'With different depth value 2',
           props: {
             heading: 'Delete Item',
-            handleClose: action('close button clicked'),
-            depth: depth[2],
+            hasCloseIcon: true,
+            depth: 2,
           },
         },
         {
           label: 'With different depth value 3',
           props: {
             heading: 'Delete Item',
-            handleClose: action('close button clicked'),
-            depth: depth[3],
+            hasCloseIcon: true,
+            depth: 3,
           },
         },
         {
           label: 'With different depth value 4',
           props: {
             heading: 'Delete Item',
-            handleClose: action('close button clicked'),
-            depth: depth[4],
+            hasCloseIcon: true,
+            depth: 4,
           },
         },
         {
           label: 'With custom width',
           props: {
             heading: 'Delete Item',
-            handleClose: action('close button clicked'),
+            hasCloseIcon: true,
             width: 300,
           },
         },
@@ -91,7 +89,7 @@ export const PopupStates = withSnapshotsEnabled(() => (
           label: 'With small close icon',
           props: {
             heading: 'Delete Item',
-            handleClose: action('close button clicked'),
+            hasCloseIcon: true,
             width: 300,
             closeIconSize: 'small',
           },
@@ -99,10 +97,12 @@ export const PopupStates = withSnapshotsEnabled(() => (
       ]}
       columnProps={[{label: 'Default', props: {}}]}
     >
-      {props => (
-        <Popup transformOrigin={null} {...props}>
-          Your workbook was successfully processed.
-        </Popup>
+      {({heading, hasCloseIcon, closeIconSize, ...props}) => (
+        <Popup.Card style={{animation: 'none'}} {...props}>
+          {hasCloseIcon ? <Popup.CloseIcon aria-label="" size={closeIconSize} /> : null}
+          {heading ? <Popup.Heading>{heading}</Popup.Heading> : null}
+          <Popup.Body>Your workbook was successfully processed.</Popup.Body>
+        </Popup.Card>
       )}
     </ComponentStatesTable>
   </StaticStates>
@@ -117,17 +117,19 @@ export const PopupStatesRTL = withSnapshotsEnabled(() => (
             label: 'With RTL',
             props: {
               heading: 'למחוק פריט',
-              handleClose: action('לחצן סגור לחץ'),
+              hasCloseIcon: true,
               width: 300,
             },
           },
         ]}
         columnProps={[{label: 'Default', props: {}}]}
       >
-        {({body, ...props}) => (
-          <Popup transformOrigin={null} {...props}>
-            האם ברצונך למחוק פריט זה
-          </Popup>
+        {({heading, hasCloseIcon, closeIconSize, ...props}) => (
+          <Popup.Card style={{animation: 'none'}} {...props}>
+            {hasCloseIcon ? <Popup.CloseIcon aria-label="" size={closeIconSize} /> : null}
+            {heading ? <Popup.Heading>{heading}</Popup.Heading> : null}
+            <Popup.Body>האם ברצונך למחוק פריט זה</Popup.Body>
+          </Popup.Card>
         )}
       </ComponentStatesTable>
     </CanvasProvider>

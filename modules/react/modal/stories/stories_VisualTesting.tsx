@@ -1,12 +1,12 @@
 /// <reference path="../../../../typings.d.ts" />
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Button, DeleteButton} from '@workday/canvas-kit-react/button';
+
+import {DeleteButton} from '@workday/canvas-kit-react/button';
+import {Modal, useModalModel} from '@workday/canvas-kit-react/modal';
+
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
-
-import {Modal, ModalWidth} from '@workday/canvas-kit-react/modal';
-
-const noop = () => {}; // eslint-disable-line no-empty-function
+import {HStack} from '@workday/canvas-kit-labs-react/layout';
 
 const TestContent = () => {
   const content = (
@@ -26,17 +26,30 @@ const TestContent = () => {
   return ReactDOM.createPortal(content, document.body);
 };
 
-const TestModal = ({width}: {width: ModalWidth}) => (
-  <>
-    <TestContent />
-    <Modal heading="Delete Item" open={true} handleClose={noop} width={width}>
-      <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
-      <DeleteButton style={{marginRight: '16px'}}>Delete</DeleteButton>
-      <Button>Cancel</Button>
-    </Modal>
-  </>
-);
+const TestModal = () => {
+  const model = useModalModel({
+    initialVisibility: 'visible',
+  });
+  return (
+    <>
+      <TestContent />
+      <Modal model={model}>
+        <Modal.Overlay style={{animation: 'none'}}>
+          <Modal.Card style={{animation: 'none'}}>
+            <Modal.CloseIcon aria-label="Close" />
+            <Modal.Heading>Delete Item</Modal.Heading>
+            <Modal.Body>
+              <p>Are you sure you want to delete the item?</p>
+              <HStack spacing="s">
+                <Modal.CloseButton as={DeleteButton}>Delete</Modal.CloseButton>
+                <Modal.CloseButton>Cancel</Modal.CloseButton>
+              </HStack>
+            </Modal.Body>
+          </Modal.Card>
+        </Modal.Overlay>
+      </Modal>
+    </>
+  );
+};
 
-export const ModalSmallWidth = withSnapshotsEnabled(() => <TestModal width={Modal.Width.s} />);
-
-export const ModalMediumWidth = withSnapshotsEnabled(() => <TestModal width={Modal.Width.m} />);
+export const ModalSmallWidth = withSnapshotsEnabled(() => <TestModal />);

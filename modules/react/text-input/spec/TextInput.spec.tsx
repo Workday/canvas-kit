@@ -12,6 +12,8 @@ describe('Text Input', () => {
     cb.mockReset();
   });
 
+  verifyComponent(TextInput, {});
+
   describe('when rendered', () => {
     it('should render an input with type=text', () => {
       const {getByRole} = render(<TextInput onChange={cb} />);
@@ -44,22 +46,6 @@ describe('Text Input', () => {
     it('should render a disabled text input', () => {
       const {getByRole} = render(<TextInput onChange={cb} disabled={true} />);
       expect(getByRole('textbox')).toBeDisabled();
-    });
-  });
-
-  describe('when rendered with extra, arbitrary props', () => {
-    it('should spread extra props onto the text input', () => {
-      const attr = 'test';
-      const {getByRole} = render(<TextInput onChange={cb} data-propspread={attr} />);
-      expect(getByRole('textbox')).toHaveAttribute('data-propspread', attr);
-    });
-  });
-
-  describe('when provided an input ref', () => {
-    it('should set the ref to the input element', async () => {
-      const ref: React.RefObject<HTMLInputElement> = React.createRef();
-      const {findByRole} = render(<TextInput inputRef={ref} />);
-      expect(await findByRole('textbox')).toEqual(ref.current);
     });
   });
 

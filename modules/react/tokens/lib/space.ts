@@ -19,6 +19,9 @@ export type CanvasSpace = {
   xxxl: '80px';
 };
 
+/** Type for `CanvasSpace` keys */
+export type CanvasSpaceKeys = keyof CanvasSpace;
+
 /** The px values for CanvasSpace (strings) */
 export type CanvasSpaceValues = ValueOf<CanvasSpace>;
 

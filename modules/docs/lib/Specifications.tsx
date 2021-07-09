@@ -1,11 +1,11 @@
 /* eslint-disable no-param-reassign */
 import React from 'react';
 import {toId} from '@storybook/csf';
-import { Table, TableRow } from "@workday/canvas-kit-react/table";
-import { Hyperlink } from "@workday/canvas-kit-react/button";
+import {Table, TableRow} from '@workday/canvas-kit-react/table';
+import {Hyperlink} from '@workday/canvas-kit-react/button';
 
 import {specifications, SpecDescribe, SpecIt} from './specs';
-import { GithubBranch, GithubUrl, StorybookUrl } from './docs'
+import {GithubBranch, GithubUrl, StorybookUrl} from './docs';
 
 export interface SpecificationsProps {
   file: string;
@@ -74,6 +74,10 @@ export const Specifications = ({file, name}: SpecificationsProps) => {
   }
 
   const renderGiven = (input: string) => {
+    if (!input) {
+      return `Could not find a "given". Check the spec file.`;
+    }
+
     const matches = input.match(/(.*)(\[[A-Za-z/\s]+), ([A-Za-z\s]+)\](.*)/);
     if (matches == null) {
       return input;
@@ -130,9 +134,7 @@ export const Specifications = ({file, name}: SpecificationsProps) => {
         </tbody>
       </Table>
       Source:{' '}
-      <Hyperlink
-        href={`${githubUrl}blob/${githubBranch}/cypress/integration/${file}`}
-      >
+      <Hyperlink href={`${githubUrl}blob/${githubBranch}/cypress/integration/${file}`}>
         {file}
       </Hyperlink>
     </>

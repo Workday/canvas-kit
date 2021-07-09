@@ -6,9 +6,9 @@ describe('Tabs', () => {
   });
 
   ['Simple', 'Named Keys'].forEach(story => {
-    context(`given the [Labs/Tabs/React, ${story}] story is rendered`, () => {
+    context(`given the [Components/Containers/Tabs/React, ${story}] story is rendered`, () => {
       beforeEach(() => {
-        h.stories.load('Labs/Tabs/React', story);
+        h.stories.load('Components/Containers/Tabs/React', story);
       });
 
       it('should pass axe checks', () => {
@@ -30,7 +30,7 @@ describe('Tabs', () => {
       });
 
       it('should not have "aria-selected" for the second tab', () => {
-        cy.findByRole('tab', {name: 'Second Tab'}).should('not.have.attr', 'aria-selected');
+        cy.findByRole('tab', {name: 'Second Tab'}).should('have.attr', 'aria-selected', 'false');
       });
 
       it('should not have tabindex on the first tab', () => {
@@ -110,7 +110,11 @@ describe('Tabs', () => {
             });
 
             it('should not have "aria-selected" on the first tab', () => {
-              cy.findByRole('tab', {name: 'First Tab'}).should('not.have.attr', 'aria-selected');
+              cy.findByRole('tab', {name: 'First Tab'}).should(
+                'have.attr',
+                'aria-selected',
+                'false'
+              );
             });
 
             it('should have "aria-selected=true" on the second tab', () => {
@@ -128,7 +132,11 @@ describe('Tabs', () => {
             });
 
             it('should not have "aria-selected" on the first tab', () => {
-              cy.findByRole('tab', {name: 'First Tab'}).should('not.have.attr', 'aria-selected');
+              cy.findByRole('tab', {name: 'First Tab'}).should(
+                'have.attr',
+                'aria-selected',
+                'false'
+              );
             });
 
             it('should have "aria-selected=true" on the second tab', () => {
@@ -217,9 +225,9 @@ describe('Tabs', () => {
     });
   });
 
-  context('given the [Labs/Tabs/React, DisabledTab] story is rendered', () => {
+  context('given the [Components/Containers/Tabs/React, DisabledTab] story is rendered', () => {
     beforeEach(() => {
-      cy.loadStory('Labs/Tabs/React', 'DisabledTab');
+      cy.loadStory('Components/Containers/Tabs/React', 'DisabledTab');
     });
 
     context('when the first tab is active and focused', () => {
@@ -241,9 +249,9 @@ describe('Tabs', () => {
     });
   });
 
-  context('given the [Labs/Tabs/React, DynamicTabs] story is rendered', () => {
+  context('given the [Components/Containers/Tabs/React, DynamicTabs] story is rendered', () => {
     beforeEach(() => {
-      h.stories.load('Labs/Tabs/React', 'DynamicTabs');
+      h.stories.load('Components/Containers/Tabs/React', 'DynamicTabs');
     });
 
     context('when "Add Tab" is clicked', () => {
@@ -364,9 +372,9 @@ describe('Tabs', () => {
     });
   });
 
-  context('given the [Labs/Tabs/React, LeftToRight] story is rendered', () => {
+  context('given the [Components/Containers/Tabs/React, LeftToRight] story is rendered', () => {
     beforeEach(() => {
-      h.stories.load('Labs/Tabs/React', 'RightToLeft');
+      h.stories.load('Components/Containers/Tabs/React', 'RightToLeft');
     });
 
     context('when the first tab is active and focused', () => {
@@ -411,7 +419,7 @@ describe('Tabs', () => {
           });
 
           it('should not have "aria-selected" on the first tab', () => {
-            cy.findByRole('tab', {name: 'ראשון'}).should('not.have.attr', 'aria-selected');
+            cy.findByRole('tab', {name: 'ראשון'}).should('have.attr', 'aria-selected', 'false');
           });
 
           it('should have "aria-selected=true" on the second tab', () => {

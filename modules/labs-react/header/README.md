@@ -1,7 +1,7 @@
 # Canvas Kit Labs React Header
 
 <a href="https://github.com/Workday/canvas-kit/tree/master/modules/labs-react/README.md">
-  <img src="https://img.shields.io/badge/LABS-beta-orange" alt="LABS: Beta" />
+  <img src="https://img.shields.io/badge/LABS-alpha-orange" alt="LABS: Alpha" />
 </a>  This component is work in progress and currently in pre-release.
 
 A set of components to create headers for various Workday applications and sites.
@@ -30,7 +30,7 @@ import {Header} from '@workday/canvas-kit-labs-react/header';
 import {IconButton} from '@workday/canvas-kit-react/button';
 import {Avatar} from '@workday/canvas-kit-react/avatar';
 import {notificationsIcon} from '@workday/canvas-system-icons-web';
-import {Button} from '@workday/canvas-kit-react/button';
+import {PrimaryButton} from '@workday/canvas-kit-react/button';
 
 <Header title="Header" brandUrl="#">
   <nav>
@@ -61,7 +61,7 @@ import {Button} from '@workday/canvas-kit-react/button';
     }}
     altText="Profile"
   />
-  <Button variant="primary">Sign Up</Button>
+  <PrimaryButton>Sign Up</PrimaryButton>
 </Header>;
 ```
 

@@ -1,12 +1,8 @@
 /// <reference path="../../../../../typings.d.ts" />
 import * as React from 'react';
-import {
-  ComponentStatesTable,
-  permutateProps,
-  withSnapshotsEnabled,
-  customColorTheme,
-} from '../../../../../utils/storybook';
-import {StaticStates} from '@workday/canvas-kit-labs-react/tokens';
+import {ComponentStatesTable, permutateProps} from '@workday/canvas-kit-labs-react/common';
+import {withSnapshotsEnabled, customColorTheme} from '../../../../../utils/storybook';
+import {StaticStates} from '@workday/canvas-kit-react/common';
 import {Switch} from '../../../switch';
 
 export default withSnapshotsEnabled({

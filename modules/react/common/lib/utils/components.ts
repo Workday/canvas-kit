@@ -1,4 +1,6 @@
 import React from 'react';
+import {mergeProps} from './mergeProps';
+import {Model} from './models';
 
 /**
  * Adds the `as` to the style interface to support `as` in styled components
@@ -36,13 +38,24 @@ type ExtractRef<T> = T extends undefined // test if T was even passed in
 export type PropsWithAs<P, ElementType extends React.ElementType> = P &
   Omit<React.ComponentProps<ElementType>, 'as' | 'state' | keyof P> & {
     /**
-     * Optional ref. If the component represents and element, this will ref will be a reference to
-     * the real DOM element of the component. If `as` is set to an element, it will be that element.
+     * Optional ref. If the component represents an element, this ref will be a reference to the
+     * real DOM element of the component. If `as` is set to an element, it will be that element.
      * If `as` is a component, the reference will be to that component (or element if the component
      * uses `React.forwardRef`).
      */
     ref?: ExtractRef<ElementType>;
   };
+
+/**
+ * Extract props from any component that was created using `createComponent`.
+ * @example
+ * interface MyProps extends ExtractProps<typeof Card.Body> {}
+ */
+export type ExtractProps<T> = T extends ElementComponent<any, infer P>
+  ? P
+  : T extends Component<infer P>
+  ? P
+  : {};
 
 /**
  * Component type that allows for `as` to change the element or component type.
@@ -72,7 +85,7 @@ interface RefForwardingComponent<T, P = {}> {
   (
     props: React.PropsWithChildren<P> & {as?: React.ReactElement<any>},
     /**
-     * A ref to be forwarded. Pass it along to the root element. If not element was passed, this
+     * A ref to be forwarded. Pass it along to the root element. If no element was passed, this
      * will result in a `never`
      */
     ref: ExtractRef<T>,
@@ -155,6 +168,59 @@ export const createComponent = <T extends React.ElementType | undefined = undefi
 
   return ReturnedComponent;
 };
+
+/**
+ * Factory function to crate a behavior hook with correct generic types. It takes a function that
+ * return props and returns a function that will also require `elemProps` and will call `mergeProps` for
+ * you. If your hook makes use of the `ref`, you will have to also use `useLocalRef` to properly fork
+ * the ref.
+ *
+ * @example
+ * const useMyHook = createHook((model: MyModel, ref) => {
+ *   const { localRef, elementRef } = useLocalRef(ref);
+ *   // do whatever with `localRef` which is a RefObject
+ *
+ *   return {
+ *     onClick: model.events.doSomething,
+ *     ref: elementRef,
+ *   };
+ * });
+ *
+ * // Equivalent to:
+ * const useMyHook = <P extends {}, R>(
+ *   model: MyModel,
+ *   elemProps: P,
+ *   ref: React.Ref<R>
+ * ) => {
+ *   const { localRef, elementRef } = useLocalRef(ref);
+ *   // do whatever with `localRef` which is a RefObject
+ *
+ *   return mergeProps({
+ *     onClick: model.events.doSomething,
+ *     ref: elementRef,
+ *   }, elemProps);
+ * };
+ *
+ * @param fn Function that takes a model and optional ref and returns props
+ */
+export const createHook = <M extends Model<any, any>, PO extends {}, PI extends {}>(
+  fn: (model: M, ref?: React.Ref<any>, elemProps?: PI) => PO
+): BehaviorHook<M, PO> => {
+  return (model, elemProps, ref) => {
+    const props = mergeProps(fn(model, ref, elemProps || ({} as any)), elemProps || ({} as any));
+    if (!props.hasOwnProperty('ref')) {
+      // This is the weird "incoming ref isn't in props, but outgoing ref is in props" thing
+      props.ref = ref;
+    }
+    return props;
+  };
+};
+
+export type BehaviorHook<M extends Model<any, any>, O extends {}> = <P extends {}, R>(
+  model: M,
+  elemProps?: P,
+  ref?: React.Ref<R>
+) => O & P & (R extends HTMLOrSVGElement ? {ref: React.Ref<R>} : {});
 
 function setRef<T>(ref: React.Ref<T> | undefined, value: T): void {
   if (ref) {
@@ -274,17 +340,25 @@ export function useModelContext<T>(context: React.Context<T>, model?: T): T {
  *   return <div id="foo" {...props}>{children}</div>
  * })
  */
-export function composeHooks<M, R, P extends {}, O1 extends {}, O2 extends {}>(
-  hook1: (model: M, props: P, ref: React.Ref<R>) => O1,
-  hook2: (model: M, props: P, ref: React.Ref<R>) => O2
-): (model: M, props: P, ref: React.Ref<R>) => P & O1 & O2;
-export function composeHooks<M, R, P extends {}, O1 extends {}, O2 extends {}, O3 extends {}>(
+export function composeHooks<M extends Model<any, any>, O1 extends {}, P extends {}, O2 extends {}>(
+  hook1: (model: M, props: P, ref: React.Ref<any>) => O1,
+  hook2: (model: M, props: P, ref: React.Ref<any>) => O2
+): BehaviorHook<M, O1 & O2>;
+
+export function composeHooks<
+  M extends Model<any, any>,
+  R,
+  P extends {},
+  O1 extends {},
+  O2 extends {},
+  O3 extends {}
+>(
   hook1: (model: M, props: P, ref: React.Ref<R>) => O1,
   hook2: (model: M, props: P, ref: React.Ref<R>) => O2,
   hook3: (model: M, props: P, ref: React.Ref<R>) => O3
-): (model: M, props: P, ref: React.Ref<R>) => P & O1 & O2 & O3;
+): BehaviorHook<M, O1 & O2 & O3>;
 export function composeHooks<
-  M,
+  M extends Model<any, any>,
   R,
   P extends {},
   O1 extends {},
@@ -296,9 +370,9 @@ export function composeHooks<
   hook2: (model: M, props: P, ref: React.Ref<R>) => O2,
   hook3: (model: M, props: P, ref: React.Ref<R>) => O3,
   hook4: (model: M, props: P, ref: React.Ref<R>) => O4
-): (model: M, props: P, ref: React.Ref<R>) => P & O1 & O2 & O3 & O4;
+): BehaviorHook<M, O1 & O2 & O3 & O4>;
 export function composeHooks<
-  M,
+  M extends Model<any, any>,
   R,
   P extends {},
   O1 extends {},
@@ -312,13 +386,20 @@ export function composeHooks<
   hook3: (model: M, props: P, ref: React.Ref<R>) => O3,
   hook4: (model: M, props: P, ref: React.Ref<R>) => O4,
   hook5: (model: M, props: P, ref: React.Ref<R>) => O5
-): (model: M, props: P, ref: React.Ref<R>) => P & O1 & O2 & O3 & O4 & O5;
-export function composeHooks<M, R, P extends {}, O extends {}>(
+): BehaviorHook<M, O1 & O2 & O3 & O4 & O5>;
+export function composeHooks<M extends Model<any, any>, R, P extends {}, O extends {}>(
   ...hooks: ((model: M, props: P, ref: React.Ref<R>) => O)[]
-): (model: M, props: P, ref: React.Ref<R>) => O {
-  return (model: M, props: P, ref: React.Ref<R>) => {
-    return hooks.reverse().reduce((props: any, hook) => {
+): BehaviorHook<M, O> {
+  return (model, props, ref) => {
+    const returnProps = [...hooks].reverse().reduce((props: any, hook) => {
       return hook(model, props, props.ref || ref);
     }, props);
+
+    if (!returnProps.hasOwnProperty('ref')) {
+      // This is the weird "incoming ref isn't in props, but outgoing ref is in props" thing
+      returnProps.ref = ref;
+    }
+
+    return returnProps;
   };
 }

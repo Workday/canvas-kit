@@ -1,9 +1,8 @@
 import React, {useEffect, useLayoutEffect, useRef, useState, useCallback} from 'react';
-import styled from '@emotion/styled';
 import {CSSObject, jsx, keyframes} from '@emotion/core';
-import {GrowthBehavior} from '@workday/canvas-kit-react/common';
-import {depth, space, commonColors, borderRadius} from '@workday/canvas-kit-react/tokens';
-import {MenuItemProps} from '@workday/canvas-kit-labs-react/menu';
+import {GrowthBehavior, useForkRef, styled, useIsRTL} from '@workday/canvas-kit-react/common';
+import {space, commonColors, borderRadius} from '@workday/canvas-kit-react/tokens';
+import {MenuItemProps} from '@workday/canvas-kit-preview-react/menu';
 import {Card} from '@workday/canvas-kit-react/card';
 import {IconButton, IconButtonProps} from '@workday/canvas-kit-react/button';
 import {xSmallIcon} from '@workday/canvas-system-icons-web';
@@ -106,6 +105,8 @@ const MenuContainer = styled(Card)({
   width: '100%',
   minWidth: 0,
   animation: `${fadeInKeyframes} 200ms ease-out`,
+  maxHeight: 200,
+  overflowY: 'auto',
 });
 
 const ResetButton = styled(IconButton)<{shouldShow: boolean}>(
@@ -184,11 +185,19 @@ const Combobox = ({
   >([]);
   const [announcementText, setAnnouncementText] = useState('');
 
-  // The text input that is wrapped may have a ref already set, if it doesn't we will use our own default.
-  // This default shouldn't be used on it's own, ut we need to declare separately so hooks are always called in the same order.
-  const _defaultInputRef: React.RefObject<HTMLInputElement> = useRef(null);
-  const inputRef: React.RefObject<HTMLInputElement> =
-    (typeof children.props.inputRef !== 'function' && children.props.inputRef) || _defaultInputRef;
+  // Create a ref to the soon-to-be-created TextInput clone for internal use.
+  // Use useForkRef to combine it with the ref already assigned to the original
+  // TextInput (if it exists) to create a single callback ref which can be
+  // forwarded to the TextInput clone.
+  const inputRef: React.RefObject<HTMLInputElement> = useRef(null);
+  // We need access to the original TextInput's ref _property_ (not prop) so we
+  // can combine it with the internal inputRef using useForkRef. ref isn't
+  // listed in the ReactElement interface, but it's there, so we cast children
+  // to satisfy TS.
+  const elementRef = useForkRef(
+    (children as React.ReactElement<TextInputProps> & {ref: React.Ref<HTMLInputElement>}).ref,
+    inputRef
+  );
 
   const comboboxRef: React.RefObject<HTMLDivElement> = useRef(null);
 
@@ -209,6 +218,9 @@ const Combobox = ({
       setAnnouncementText(getStatusText(interactiveAutocompleteItems.length));
     }
   }, [getStatusText, interactiveAutocompleteItems, isOpened]);
+
+  // Used to set the position of the reset button and the padding direction inside the input container
+  const isRTL = useIsRTL();
 
   const setInputValue = useCallback(
     (newValue: string) => {
@@ -244,7 +256,7 @@ const Combobox = ({
   );
 
   useEffect(() => {
-    if (initialValue) {
+    if (initialValue !== null && initialValue !== undefined) {
       setInputValue(initialValue);
     }
   }, [initialValue, setInputValue]);
@@ -404,17 +416,19 @@ const Combobox = ({
   const renderChildren = (inputElement: React.ReactElement<TextInputProps>): React.ReactNode => {
     let cssOverride: CSSObject = {zIndex: 2};
     if (showClearButton) {
+      const paddingDirection = isRTL ? 'paddingLeft' : 'paddingRight';
       cssOverride = {
         ...cssOverride,
-        paddingRight: space.xl,
+        [paddingDirection]: space.xl,
       };
     }
-    const newTextInputProps: Partial<TextInputProps> = {
+    const newTextInputProps: Partial<TextInputProps &
+      React.InputHTMLAttributes<HTMLInputElement> & {ref: React.Ref<HTMLInputElement>}> = {
       type: 'text',
       id: componentId,
       grow: grow,
       value: value,
-      inputRef: inputRef,
+      ref: elementRef,
       'aria-autocomplete': 'list',
       'aria-activedescendant':
         selectedAutocompleteIndex !== null
@@ -455,7 +469,7 @@ const Combobox = ({
           />
         )}
         {showingAutocomplete && autocompleteItems && (
-          <MenuContainer padding={space.zero} depth={depth[1]}>
+          <MenuContainer padding={space.zero} depth={1}>
             <Card.Body>
               <AutocompleteList
                 comboboxId={componentId}

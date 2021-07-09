@@ -4,7 +4,7 @@ const path = require('path');
 /**
  * Add export * from './<MODULE_NAME>' to modules/react/index.ts so that consumers can use.
  */
-module.exports = (componentName, unstable) => {
+module.exports = (componentName, prerelease) => {
   const sortExports = lines => {
     const exportsAsObj = lines
       // Ignore last line in file :)
@@ -25,7 +25,10 @@ module.exports = (componentName, unstable) => {
     return sorted;
   };
 
-  const indexPath = path.join(process.cwd(), `modules/${unstable ? 'labs-' : ''}react/index.ts`);
+  const indexPath = path.join(
+    process.cwd(),
+    `modules/${(prerelease && prerelease + '-') || ''}react/index.ts`
+  );
   const lines = fs.readFileSync(indexPath, 'utf8').split('\n');
 
   // Add our module's export statement then sort

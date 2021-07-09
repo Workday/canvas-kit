@@ -1,0 +1,798 @@
+import {Meta} from '@storybook/addon-docs/blocks';
+
+import {Pagination} from '@workday/canvas-kit-react/pagination';
+import {StepControls} from './examples/StepControls';
+import {CustomRange} from './examples/CustomRange';
+import {JumpControls} from './examples/JumpControls';
+import {GoToForm} from './examples/GoToForm';
+import {ShowAdditionalDetails} from './examples/ShowAdditionalDetails';
+import {HoistedModel} from './examples/HoistedModel';
+import {RTL} from './examples/RTL';
+
+<Meta title="Components/Navigation/Pagination/React" component={Pagination} />
+
+# Canvas Kit Labs React Pagination
+
+`Pagination` is a [Compound Component](../../../docs/mdx/COMPOUND_COMPONENTS.mdx) for handling
+navigation between pages in a range.
+
+## Table of Contents
+
+- [Canvas Kit React Pagination](#canvas-kit-react-pagination)
+  - [Table of Contents](#table-of-contents)
+  - [Installation](#installation)
+  - [Usage](#usage)
+    - [Basic Usage](#basic-usage)
+      - [Pagination with Step Controls](#pagination-with-step-controls)
+      - [Pagination with Jump Controls](#pagination-with-jump-controls)
+      - [Pagination with a GoTo Form](#pagination-with-a-goto-form)
+    - [Advanced Usage](#advanced-usage)
+      - [Hoisted Model Pattern](#hoisted-model-pattern)
+  - [Components](#components)
+    - [Pagination](#pagination)
+      - [Usage](#usage-1)
+      - [Component Props](#component-props)
+    - [Pagination.Controls](#paginationcontrols)
+      - [Usage](#usage-2)
+      - [Component Props](#component-props-1)
+    - [Pagination.JumpToFirstButton](#paginationjumptofirstbutton)
+      - [Usage](#usage-3)
+      - [Component Props](#component-props-2)
+    - [Pagination.StepToPreviousButton](#paginationsteptopreviousbutton)
+      - [Usage](#usage-4)
+      - [Component Props](#component-props-3)
+    - [Pagination.StepToNextButton](#paginationsteptonextbutton)
+      - [Usage](#usage-5)
+      - [Component Props](#component-props-4)
+    - [Pagination.JumpToLastButton](#paginationjumptolastbutton)
+      - [Usage](#usage-6)
+      - [Component Props](#component-props-5)
+    - [Pagination.PageList](#paginationpagelist)
+      - [Usage](#usage-7)
+      - [Component Props](#component-props-6)
+    - [Pagination.PageListItem](#paginationpagelistitem)
+      - [Usage](#usage-8)
+      - [Component Props](#component-props-7)
+    - [Pagination.PageButton](#paginationpagebutton)
+      - [Usage](#usage-9)
+      - [Component Props](#component-props-8)
+    - [Pagination.GoToForm](#paginationgotoform)
+      - [Usage](#usage-10)
+      - [Component Props](#component-props-9)
+    - [Pagination.GoToTextInput](#paginationgototextinput)
+      - [Usage](#usage-11)
+      - [Component Props](#component-props-10)
+    - [Pagination.GoToLabel](#paginationgotolabel)
+      - [Usage](#usage-12)
+      - [Component Props](#component-props-11)
+    - [Pagination.AdditionalDetails](#paginationadditionaldetails)
+      - [Usage](#usage-13)
+      - [Component Props](#component-props-12)
+  - [Models, Hooks, & Utils](#models-hooks--utils)
+    - [PaginationModel](#paginationmodel)
+      - [State](#state)
+      - [Events](#events)
+    - [usePaginationModel Hook](#usepaginationmodel-hook)
+      - [Configuration](#configuration)
+      - [Usage](#usage-14)
+    - [getLastPage](#getlastpage)
+    - [getRangeMin](#getrangemin)
+    - [getRangeMax](#getrangemax)
+    - [getVisibleResultsMin](#getvisibleresultsmin)
+    - [getVisibleResultsMax](#getvisibleresultsmax)
+    - [PaginationContext](#paginationcontext)
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-react
+```
+
+## Usage
+
+`Pagination` is a compound component, meaning it can be put together and used in a variety of
+different ways. We'll first cover [basic usage](#basic-usage) examples followed by
+[advanced usage](#advanced-usage). Each of the examples is intended to be standalone, so you can
+skip to the section that best fits your use case.
+
+These examples are designed to provide copy-and-paste snippets to help you get up and running
+quickly without much explanation. Further detail on individual component props, behavior, and
+accessibility can be found in the [Components](#components) section.
+
+---
+
+### Basic Usage
+
+Below are examples we expect will work for most use cases. Please refer to the
+[Advanced Usage](#advanced-usage) section for details on supporting custom implementations.
+
+#### Step Controls
+
+In this example, the component uses step controls (`Pagination.StepToPreviousButton` and
+`Pagination.StepToNextButton`) that allow you to move to the next page and previous pages.
+
+<ExampleCodeBlock code={StepControls} />
+
+---
+
+#### Jump Controls
+
+This example adds jump controls (`Pagination.JumpToFirstButton` and `Pagination.JumpToLastButton`)
+that allow you to skip to the first and last items in the range.
+
+<ExampleCodeBlock code={JumpControls} />
+
+---
+
+#### GoTo Form
+
+This example adds a form (`Pagination.GoToForm`) that allows you to skip to a specific page within
+the range.
+
+<ExampleCodeBlock code={GoToForm} />
+
+---
+
+#### Additional Details
+
+This example adds a visible section (`Pagination.AdditionalDetails`). It is an `aria-live` region
+that announces the current page update to screen readers. Because of that, it's important to
+**always†** include it in your `Pagination` component.
+
+In the case where you would also have multiple `Pagination` components sharing the same state and
+you'd like to keep the `AdditionalDetails` component on multiple, you will need to set
+`shouldAnnounceToScreenReader` to `false` on all but one component to prevent announcement.
+
+> **†** _The only exception to this rule is when you have multiple `Pagination` components that are
+> sharing the same state and rendered on the page. You can then safely remove all but one of the
+> `AdditionalDetails` sections. This will prevent a screenreader from announcing updates multiple
+> times to a user._
+
+<ExampleCodeBlock code={ShowAdditionalDetails} />
+
+---
+
+#### RTL (Right-to-Left)
+
+This example shows how the component supports right-to-left languages.
+
+<ExampleCodeBlock code={RTL} />
+
+---
+
+#### Custom Range
+
+This example uses a custom range that allows you to control the width of the component.
+
+<ExampleCodeBlock code={CustomRange} />
+
+---
+
+### Advanced Usage
+
+Below are examples for more advanced / custom usage of these components. We expect most people won't
+need to read this section, but if you're needing to go beyond our basic examples or just curious,
+feel free to explore this section. While this section is not exhaustive, it provides additional
+insight into what's possible.
+
+#### Hoisted Model Pattern
+
+If you're unfamiliar with compound components, the pagination model, or the `usePaginationModel`
+hook, we would recommend reviewing the [PaginationModel](#paginationmodel) section first.
+
+If you want the `Pagination` component to handle its state and events internally and hook into page
+change events, the basic usage examples above should be sufficient. However, if you need external
+access to the model, you can use the hoisted model pattern. You can create a model outside of the
+component with the `usePaginationModel` hook.
+
+For this example, we'll create a `Pagination` component that handles 128 total items with 10 items
+per page.
+
+<ExampleCodeBlock code={HoistedModel} />
+
+## Components
+
+### Pagination
+
+The `Pagination` component is a wrapper for a React context provider and `nav` element. Child
+components such as `Pagination.StepToPreviousButton`, `Pagination.PageList`, etc. subscribe to that
+context.
+
+#### Usage
+
+`Pagination` can be used with or without providing a model. For basic usage, you only need to
+provide a configuration as in the example below.
+
+```tsx
+<Pagination
+  aria-label="Pagination"
+  lastPage={100}
+  initialCurrentPage={6}
+  rangeSize={3}
+  onPageChange={pageNumber => console.log(pageNumber)}
+>
+  {/* child components go here */}
+</Pagination>
+```
+
+However, if you'd like to provide a model, you can follow the example below. This is called the
+hoisted model pattern. Note that in this pattern, the only props needed are `model` and
+`aria-label`.
+
+```tsx
+const modelConfig = {
+  lastPage: 100,
+  initialCurrentPage: 6,
+  rangeSize: 3,
+  onPageChange: pageNumber => console.log(pageNumber),
+};
+const model = usePaginationModel(modelConfig);
+
+return (
+  <Pagination aria-label="Pagination" model={model}>
+    {/* child components go here */}
+  </Pagination>
+);
+```
+
+#### Component Props
+
+Given that there are two ways to configure `Pagination`, there are also two props tables. For the
+configuration pattern, follow this table:
+
+| name               | type                           | required?  | default | recommended                              |
+| ------------------ | ------------------------------ | ---------- | ------- | ---------------------------------------- |
+| aria-label         | `string`                       | ✅ `true`  | n/a     | "Pagination" (and translated equivalent) |
+| lastPage           | `number`                       | ✅ `true`  | n/a     | n/a                                      |
+| initialCurrentPage | `number`                       | 🚫 `false` | 1       | n/a                                      |
+| rangeSize          | `number`                       | 🚫 `false` | 5       | n/a                                      |
+| firstPage          | `number`                       | 🚫 `false` | 1       | n/a                                      |
+| onPageChange       | `(pageNumber: number) => void` | 🚫 `false` | n/a     | n/a                                      |
+
+And for the hoisted model pattern, follow this table:
+
+| name       | type              | required? | default | recommended                              |
+| ---------- | ----------------- | --------- | ------- | ---------------------------------------- |
+| aria-label | `string`          | ✅ `true` | n/a     | "Pagination" (and translated equivalent) |
+| model      | `PaginationModel` | ✅ `true` | n/a     | n/a                                      |
+
+This component also supports
+[all native HTMLElement props](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes).
+The `aria-label` prop is required for accessibility. We recommend using `"Pagination"` as seen in
+the example.
+
+---
+
+### Pagination.Controls
+
+`Pagination.Controls` is a styled `div` wrapper that provides proper alignment and spacing between
+elements inside `Pagination`. It does not handle any internal business logic or state.
+
+#### Usage
+
+```tsx
+<Pagination.Controls>{/* child components go here */}</Pagination.Controls>
+```
+
+#### Component Props
+
+This component supports
+[all native HTMLDivElement props](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div#Attributes).
+
+---
+
+### Pagination.JumpToFirstButton
+
+`Pagination.JumpToFirstButton` is an `IconButton` that subscribes to `Pagination`'s context. This
+allows it to know when to disable and set `currentPage` to the first page.
+
+#### Usage
+
+```tsx
+<Pagination.JumpToFirstButton aria-label="First" />
+```
+
+#### Component Props
+
+| name       | type     | required? | default | recommended                         |
+| ---------- | -------- | --------- | ------- | ----------------------------------- |
+| aria-label | `string` | ✅ `true` | n/a     | "First" (and translated equivalent) |
+
+This component also supports all `IconButton` props.
+
+---
+
+### Pagination.StepToPreviousButton
+
+`Pagination.StepToPreviousButton` is an `IconButton` that subscribes to `Pagination`'s context. This
+allows it to know when to disable and decrement the `currentPage`.
+
+#### Usage
+
+```tsx
+<Pagination.StepToPreviousButton aria-label="Previous" />
+```
+
+#### Component Props
+
+| name       | type     | required? | default | recommended                            |
+| ---------- | -------- | --------- | ------- | -------------------------------------- |
+| aria-label | `string` | ✅ `true` | n/a     | "Previous" (and translated equivalent) |
+
+This component also supports all `IconButton` props.
+
+---
+
+### Pagination.StepToNextButton
+
+`Pagination.StepToNextButton` is an `IconButton` that subscribes to `Pagination`'s context. This
+allows it to know when to disable and increment the `currentPage`.
+
+#### Usage
+
+```tsx
+<Pagination.StepToNextButton aria-label="Next" />
+```
+
+#### Component Props
+
+| name       | type     | required? | default | recommended                        |
+| ---------- | -------- | --------- | ------- | ---------------------------------- |
+| aria-label | `string` | ✅ `true` | n/a     | "Next" (and translated equivalent) |
+
+This component also supports all `IconButton` props.
+
+---
+
+### Pagination.JumpToLastButton
+
+`Pagination.JumpToLastButton` is an `IconButton` that subscribes to `Pagination`'s context. This
+allows it to know when to disable and set `currentPage` to the last page.
+
+#### Usage
+
+```tsx
+<Pagination.JumpToLastButton aria-label="Last" />
+```
+
+#### Component Props
+
+| name       | type     | required? | default | recommended                        |
+| ---------- | -------- | --------- | ------- | ---------------------------------- |
+| aria-label | `string` | ✅ `true` | n/a     | "Last" (and translated equivalent) |
+
+This component also supports all `IconButton` props.
+
+---
+
+### Pagination.PageList
+
+`Pagination.PageList` is an ordered list (`ol`) that subscribes to `Pagination`'s context. This
+allows it generate the `range` of page numbers. It also handles spacing between the child elements.
+This component will accept either child elements or functional children (sometimes called the render
+prop pattern). It's likely you'll want to use the functional children, but in the off-chance you
+need a static list of items, this component will support it. The usage section below will provide
+examples of both.
+
+#### Usage
+
+The functional children snippet below will likely be the most common use case.
+
+```tsx
+<Pagination.PageList>
+  {({state}) =>
+    state.range.map(pageNumber => (
+      <Pagination.PageListItem key={pageNumber}>
+        <Pagination.PageButton aria-label={`Page ${pageNumber}`} pageNumber={pageNumber} />
+      </Pagination.PageListItem>
+    ))
+  }
+</Pagination.PageList>
+```
+
+#### Component Props
+
+| name     | type                                                             | required?  | default | recommended |
+| -------- | ---------------------------------------------------------------- | ---------- | ------- | ----------- |
+| children | (model: PaginationModel) => React.ReactNode[] \| React.ReactNode | 🚫 `false` | n/a     | n/a         |
+
+This component also supports
+[all native HTMLOLElement props](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ol#Attributes).
+
+---
+
+### Pagination.PageListItem
+
+`Pagination.PageListItem` is a styled `li` element. It provides a child semantic element for the
+`PageList` component and is important for accessibility. It does not handle any internal business
+logic or state.
+
+#### Usage
+
+```tsx
+<Pagination.PageListItem>{/* child element goes here */}</Pagination.PageListItem>
+```
+
+#### Component Props
+
+This component also supports
+[all native HTMLLIElement props](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/li#Attributes).
+
+---
+
+### Pagination.PageButton
+
+`Pagination.PageButton` is an `IconButton` that subscribes to `Pagination`'s context. This allows it
+to know set the `toggled` styling when it is the current item and update the `currentPage`.
+
+#### Usage
+
+`PageButton` will render the `pageNumber` as its children.
+
+```tsx
+<Pagination.PageButton aria-label="Page 2" pageNumber={2} />
+```
+
+#### Component Props
+
+| name       | type     | required? | default | recommended                                      |
+| ---------- | -------- | --------- | ------- | ------------------------------------------------ |
+| aria-label | `string` | ✅ `true` | n/a     | `Page ${pageNumber}` (and translated equivalent) |
+| pageNumber | `number` | ✅ `true` | n/a     | n/a                                              |
+
+This component also supports all `IconButton` props.
+
+---
+
+### Pagination.GoToForm
+
+`Pagination.GoToForm` is a wrapper for a React context provider and `form` element. Child components
+such as `Pagination.GoToTextInput` and `Pagination.GoToLabel` subscribe to that context to manage
+the form state and behavior as well as update the `currentPage` in the `Pagination` component.
+
+#### Usage
+
+```tsx
+<Pagination.GoToForm>{/* child elements go here */}</Pagination.GoToForm>
+```
+
+#### Component Props
+
+This component supports
+[all native HTMLFormElement props](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form#Attributes).
+
+---
+
+### Pagination.GoToTextInput
+
+#### Usage
+
+```tsx
+<Pagination.GoToTextInput aria-label="Go to page number" />
+```
+
+#### Component Props
+
+| name       | type                 | required?  | default | recommended                                     |
+| ---------- | -------------------- | ---------- | ------- | ----------------------------------------------- |
+| aria-label | `string`             | ✅ `true`  | n/a     | `Go to page number` (and translated equivalent) |
+| value      | `string` \| `number` | 🚫 `false` | ""      | n/a                                             |
+
+This component also supports all `TextInput` props.
+
+---
+
+### Pagination.GoToLabel
+
+`Pagination.GoToLabel` is a styled `label` element that subscribes to the `Pagination` context. This
+allows it to pass the `Pagination` context to child elements.
+
+#### Usage
+
+This component will accept either child elements or functional children (sometimes called the render
+prop pattern). It's likely you'll want to use the functional children, but in the off-chance you
+need static child elements, this component will support it. Examples of both patterns are provided
+below.
+
+**Functional Children**
+
+Use this pattern when you need access to the state in the `Pagination` context for your text.
+
+```tsx
+<Pagination.GoToLabel>{({state}) => `of ${state.lastPage} results`}</Pagination.GoToLabel>
+```
+
+#### Component Props
+
+| name     | type                                                           | required?  | default | recommended |
+| -------- | -------------------------------------------------------------- | ---------- | ------- | ----------- |
+| htmlFor  | `string`                                                       | 🚫 `false` | n/a     | n/a         |
+| children | (model: PaginationModel) => React.ReactNode \| React.ReactNode | 🚫 `false` | n/a     | n/a         |
+
+This component also supports
+[all native HTMLLabelElement props](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label#Attributes).
+
+---
+
+### Pagination.AdditionalDetails
+
+`Pagination.AdditionalDetails` is a styled `div` container that subscribes to the `Pagination`
+context. This allows it to pass the `Pagination` context to child elements. It is also an
+`aria-live` region that announces the current page update to screen readers. Because of that, it's
+important to always\* include it in your `Pagination` component.
+
+_\* The only exception to this rule is when you have multiple `Pagination` components that are
+sharing the same state and rendered on the page. You can then safely remove all but one of the
+`AdditionalDetails` sections. This will prevent a screenreader from announcing updates multiple
+times to a user._
+
+In the case where you would also have multiple `Pagination` components sharing the same state and
+you'd like to keep the `AdditionalDetails` component on multiple, you will need to set
+`shouldAnnounceToScreenReader` to `false` on all but one component to prevent announcement.
+
+#### Usage
+
+This component will accept either child elements or functional children (sometimes called the render
+prop pattern). It's likely you'll want to use the functional children, but in the off-chance you
+need static child elements, this component will support it.
+
+```tsx
+<Pagination.AdditionalDetails>
+  {({state}) =>
+    `${getVisibleResultsMin(state.currentPage, resultCount)}-${getVisibleResultsMax(
+      state.currentPage,
+      resultCount,
+      totalCount
+    )} of ${totalCount} results`
+  }
+</Pagination.AdditionalDetails>
+```
+
+#### Component Props
+
+| name                         | type                                                           | required?  | default | recommended |
+| ---------------------------- | -------------------------------------------------------------- | ---------- | ------- | ----------- |
+| shouldHideDetails            | `boolean`                                                      | 🚫 `false` | false   | n/a         |
+| shouldAnnounceToScreenReader | `boolean`                                                      | 🚫 `false` | true    | n/a         |
+| children                     | (model: PaginationModel) => React.ReactNode \| React.ReactNode | ✅ `true`  | n/a     | n/a         |
+
+## Models, Hooks, & Utils
+
+### PaginationModel
+
+> **Note:** The model and compound component pattern presented here will be updated and solidified
+> in v5 of canvas-kit. While the general concepts are the same, there will be some breaking changes
+> in v5. If you'd like to learn about models and compound components in v5, please refer to
+> [this doc](https://github.com/Workday/canvas-kit/blob/master/COMPOUND_COMPONENTS.mdx).
+
+The `PaginationModel` is the core of the `Pagination` component. That said, if you're using the
+higher-level context API components and following the basic usage guidelines, you shouldn't need to
+know how the model operates to successfully implement the component. But if you have an advanced use
+case or you're feeling curious, this section is for you.
+
+If `Pagination` was stripped of all its markup, attributes, and styling, what would remain is the
+model. The `PaginationModel` is how we describe the state and behavior of the component. You could
+completely swap out the underlying elements, attributes, and styles, and the model would remain the
+same. `PaginationModel` is an object that is composed of two parts: `state` and `events`. The
+model's `state` describes the current state of the component, and `events` are functions that act on
+that state (also called behaviors). Below is an example `Pagination` model:
+
+```tsx
+const paginationModel = {
+  state: {
+    firstPage,
+    currentPage,
+    lastPage,
+    range,
+    rangeSize,
+  },
+  events: {
+    first,
+    last,
+    next,
+    previous,
+    setCurrentPage,
+    goTo,
+  };
+};
+
+```
+
+#### State
+
+The `state` describes the current state of the `Pagination` component. As events are fired, the
+state is updated, and the component will re-render. Below are the `state` keys and descriptions of
+their values:
+
+- `firstPage` - the page number for the first page
+- `currentPage` - the page number for the current page
+- `lastPage` - the page number for the last page (it can also be used as a total page count)
+- `range` - an array of page numbers included in the pagination range
+- `rangeSize` - the size of the pagination range
+
+#### Events
+
+The model's `events` describe behaviors that act on `state`. Below are the `events` keys and
+descriptions of their values:
+
+- `first` - sets the current page to the first page
+- `last` - sets the current page to the last page
+- `next` - increments the current page by 1
+- `previous` - decrements the current page by 1
+- `goTo` - sets the current page to a given page number\* (with safeguards)
+- `setCurrentPage` - sets the current page to a given page number (no safeguards)
+
+\* _`goTo` is very similar to `setCurrentPage`, but it has some built-in safeguards. If the page
+number provided is below the first page (e.g: `0`), `currentPage` will be set to the `firstPage`.
+Similarly, if the number provided is larger than the `lastPage`, it will set `currentPage` to the
+`lastPage`._
+
+---
+
+### usePaginationModel Hook
+
+The `Pagination` model can be created with the `usePaginationModel` hook. Normally `Pagination` will
+create it for you under the hood with the configuration props you provide the component, but you can
+also hoist the model outside of the component depending on your use case.
+
+#### Configuration
+
+The hook configuration is identical to the `Pagination` component configuration. The only value you
+need to provide is `lastPage`, but you can also provide others. The full list is below:
+
+| name                | type                           | required   | default |
+| ------------------- | ------------------------------ | ---------- | ------- |
+| lastPage            | `number`                       | ✅ `true`  | n/a     |
+| firstPage?          | `number`                       | 🚫 `false` | 1       |
+| initialCurrentPage? | `number`                       | 🚫 `false` | n/a     |
+| onPageChange?       | `(pageNumber: number) => void` | 🚫 `false` | n/a     |
+| rangeSize?          | `number`                       | 🚫 `false` | 5       |
+
+#### Usage
+
+Using this hook is fairly straightforward. Create a configuration, pass it to the hook, and it
+returns a model.
+
+```ts
+const paginationConfig = {
+  lastPage: 100,
+  rangeSize: 3,
+  onPageChange: pageNumber => console.log(pageNumber),
+};
+
+const model = usePaginationModel(paginationConfig);
+```
+
+Voilà! Now you can pass the model to `Pagination` like so:
+
+```tsx
+const paginationConfig = {
+  lastPage: 100,
+  rangeSize: 3,
+  onPageChange: pageNumber => console.log(pageNumber),
+};
+
+const model = usePaginationModel(paginationConfig);
+
+return (
+  <Pagination aria-label="Pagination" model={model}>
+    {/* child components go here */}
+  </Pagination>
+);
+```
+
+If you're hoisting the model, it's presumably because you need more access to the model's `state`
+and `events` outside of the component. You could have an external button trigger events to update
+the state, or have another component use the model's state. See the
+[Advanced Usage](#advanced-usage) section for more detailed information.
+
+---
+
+### getLastPage
+
+This function takes the number of results per page and the total count of results and returns the
+last page number. Here's an example:
+
+Given there are 10 results per page, and there are 128 total results, the function will return 13.
+
+```ts
+const resultCount = 10;
+const totalCount = 128;
+const lastPage = getLastPage(resultCount, totalCount); //=> 13
+```
+
+---
+
+### getRangeMin
+
+This function takes the pagination range and returns its minimum value. Here's an example:
+
+Given the pagination range is 1-5, the function will return 1.
+
+```ts
+const range = [1, 2, 3, 4, 5];
+const rangeMin = getRangeMin(range); //=> 1
+```
+
+---
+
+### getRangeMax
+
+This function takes the pagination range and returns its maximum value. Here's an example:
+
+Given the pagination range is 1-5, the function will return 5.
+
+```ts
+const range = [1, 2, 3, 4, 5];
+const rangeMin = getRangeMax(range); //=> 5
+```
+
+---
+
+### getVisibleResultsMin
+
+This function takes the current page, and number of results per page, and returns the minimum value
+for that page. Here's an example:
+
+Given there are 10 results per page, and the current page is 5, the function will return 41.
+
+```ts
+const currentPage = 5;
+const resultCount = 10;
+const pageMin = getVisibleResultsMin(currentPage, resultCount); //=> 41
+```
+
+---
+
+### getVisibleResultsMax
+
+This function takes the current page, number of results per page, and the total number of results,
+and returns the maximum value for that page. Here's an example:
+
+Given there are 10 results per page, the current page is 5, and there are 42 results total, the
+function will return 42.
+
+```ts
+const currentPage = 5;
+const resultCount = 10;
+const totalCount = 42;
+const pageMax = getVisibleResultsMax(currentPage, resultCount, totalCount); //=> 42
+```
+
+---
+
+### PaginationContext
+
+You can also subscribe directly to `PaginationContext`. This is useful if you want to create a new,
+custom subcomponent for your implementation and want it to subscribe to `Pagination`'s context.
+Here's a simple example:
+
+```tsx
+import * as React from 'react';
+import {Pagination, PaginationContext} from '@workday/canvas-kit-react/pagination';
+
+const CustomButton = (props: React.HTMLAttributes<HTMLButtonElement>) => {
+  const model = React.useContext(PaginationContext);
+
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    // if onClick is provided, pass the event along
+    props.onClick?.(e);
+    model.events.goTo(10);
+  };
+
+  return (
+    <button onClick={handleClick} {...props}>
+      Go To Page 10
+    </button>
+  );
+};
+
+export const CustomPagination = () => {
+  return (
+    <Pagination aria-label="Pagination" lastPage={20}>
+      <CustomButton aria-label="Page 10" />
+      {/* other child components go here */}
+    </Pagination>
+  );
+};
+```

@@ -4,19 +4,20 @@ import {render, getByTestId, act} from '@testing-library/react';
 import {Popper} from '../';
 
 describe('Popper', () => {
+  const ref = {current: null};
+
   it('should portal the popper content', () => {
     render(<div data-testid="anchor">Anchor</div>);
     const anchorElement = getByTestId(document.body, 'anchor');
 
     const {container} = render(
-      <Popper anchorElement={anchorElement} data-testid="popper">
+      <Popper anchorElement={anchorElement} ref={ref}>
         Contents
       </Popper>
     );
 
-    const popper = getByTestId(document.body, 'popper');
-
-    expect(container).not.toContainElement(popper);
+    expect(container).not.toContainElement(ref.current);
+    expect(document.body).toContainElement(ref.current);
   });
 
   it('should not portal the popper when `portal` is set to `false`', () => {
@@ -24,34 +25,32 @@ describe('Popper', () => {
     const anchorElement = getByTestId(document.body, 'anchor');
 
     const {container} = render(
-      <Popper anchorElement={anchorElement} data-testid="popper" portal={false}>
-        Contents
+      <Popper anchorElement={anchorElement} portal={false}>
+        <div data-testid="contents">Contents</div>
       </Popper>
     );
 
-    const popper = getByTestId(document.body, 'popper');
-
-    expect(container).toContainElement(popper);
+    expect(container).toContainElement(getByTestId(document.body, 'contents'));
   });
 
   it('should render children', () => {
     const {getByTestId} = render(
-      <Popper anchorElement={document.body} data-testid="popper">
+      <Popper anchorElement={document.body} ref={ref}>
         Contents
       </Popper>
     );
 
-    expect(getByTestId('popper')).toContainHTML('Contents');
+    expect(ref.current).toContainHTML('Contents');
   });
 
   it('should render children as a render prop', () => {
     const {getByTestId} = render(
-      <Popper anchorElement={document.body} data-testid="popper">
+      <Popper anchorElement={document.body} ref={ref}>
         {() => 'Contents'}
       </Popper>
     );
 
-    expect(getByTestId('popper')).toContainHTML('Contents');
+    expect(ref.current).toContainHTML('Contents');
   });
 
   it('should call the children render prop with the placement', () => {
@@ -95,16 +94,6 @@ describe('Popper', () => {
     await act(() => new Promise(requestAnimationFrame));
 
     expect(renderProp).toBeCalledWith({placement: 'top'});
-  });
-
-  it('should forward extra properties to the containing element', () => {
-    const {getByTestId} = render(
-      <Popper anchorElement={document.body} data-testid="popper" data-extra="test">
-        Contents
-      </Popper>
-    );
-
-    expect(getByTestId('popper')).toHaveAttribute('data-extra', 'test');
   });
 
   it('should only create a Popper instance once and only call onFirstUpdate once on rerenders', async () => {

@@ -1,0 +1,111 @@
+import {Meta} from '@storybook/addon-docs/blocks';
+import {Specifications} from '@workday/canvas-kit-docs';
+
+import {TextInput} from '@workday/canvas-kit-react/text-input';
+
+import {Alert} from './examples/Alert';
+import {Basic} from './examples/Basic';
+import {Disabled} from './examples/Disabled';
+import {Error} from './examples/Error';
+import {Grow} from './examples/Grow';
+import {LabelPosition} from './examples/LabelPosition';
+import {Placeholder} from './examples/Placeholder';
+import {RefForwarding} from './examples/RefForwarding';
+import {Required} from './examples/Required';
+
+<Meta title="Components/Inputs/Text Input/React" component={TextInput} />
+
+# Canvas Kit Text Input
+
+Text Inputs allow users to enter words or characters without styling.
+
+[> Workday Design Reference](https://design.workday.com/components/inputs/text-input)
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-react
+```
+
+## Usage
+
+### Basic Example
+
+Text Input should be used in tandem with
+[Form Field](/docs/components-inputs-form-field-react--basic) to meet accessibility standards.
+
+<ExampleCodeBlock code={Basic} />
+
+### Disabled
+
+Set the `disabled` prop of the Text Input to prevent users from interacting with it.
+
+<ExampleCodeBlock code={Disabled} />
+
+### Placeholder
+
+Set the `placeholder` prop of the Text Input to display a sample of its expected format or value
+before a value has been provided.
+
+<ExampleCodeBlock code={Placeholder} />
+
+### Ref Forwarding
+
+Text Input supports [ref forwarding](https://reactjs.org/docs/forwarding-refs.html). It will forward
+`ref` to its underlying `<input type="text">` element.
+
+<ExampleCodeBlock code={RefForwarding} />
+
+### Grow
+
+Set the `grow` prop of the wrapping Form Field to `true` to configure the Text Input to expand to
+the width of its container.
+
+<ExampleCodeBlock code={Grow} />
+
+The `grow` prop may also be applied directly to the Text Input if Form Field is not being used.
+
+### Label Position
+
+Set the `labelPosition` prop of the wrapping Form Field to designate the position of the label
+relative to the Text Input. `labelPosition` accepts the following values:
+
+- `FormField.LabelPosition.Top` (Default)
+- `FormField.LabelPosition.Left`
+
+<ExampleCodeBlock code={LabelPosition} />
+
+### Required
+
+Set the `required` prop of the wrapping Form Field to `true` to indicate that the field is required.
+Labels for required fields are suffixed by a red asterisk.
+
+<ExampleCodeBlock code={Required} />
+
+### Error States
+
+Set the `error` prop of the wrapping Form Field to `FormField.ErrorType.Alert` or
+`FormField.ErrorType.Error` to set the Text Input to the Alert or Error state, respectively. You
+will also need to set the `hintId` and `hintText` props on the Form Field to meet accessibility
+standards.
+
+The `error` prop may be applied directly to the Text Input with a value of
+`TextInput.ErrorType.Alert` or `TextInput.ErrorType.Error` if Form Field is not being used.
+
+#### Alert
+
+<ExampleCodeBlock code={Alert} />
+
+#### Error
+
+<ExampleCodeBlock code={Error} />
+
+## Props
+
+Undocumented props are spread to the underlying `<input type="text">` element.
+
+<ArgsTable of={TextInput} />
+
+## Specifications
+
+<Specifications file="TextInput.spec.ts" name="TextInput" />
