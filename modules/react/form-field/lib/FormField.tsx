@@ -173,7 +173,7 @@ class FormField extends React.Component<FormFieldProps> {
     } = this.props;
 
     const field = (
-      <FormFieldContainer labelPosition={labelPosition} {...elemProps}>
+      <>
         {typeof label === 'string' ? (
           <Label
             labelPosition={labelPosition}
@@ -187,7 +187,6 @@ class FormField extends React.Component<FormFieldProps> {
         ) : (
           label
         )}
-
         <FormFieldInputContainer grow={grow} labelPosition={labelPosition}>
           {React.Children.map(children, this.renderChildren)}
           {hintText && (
@@ -196,10 +195,22 @@ class FormField extends React.Component<FormFieldProps> {
             </Hint>
           )}
         </FormFieldInputContainer>
-      </FormFieldContainer>
+      </>
     );
 
-    return useFieldset ? <FormFieldFieldsetContainer>{field}</FormFieldFieldsetContainer> : field;
+    if (useFieldset) {
+      return (
+        <FormFieldContainer labelPosition={labelPosition} {...elemProps}>
+          <FormFieldFieldsetContainer>{field}</FormFieldFieldsetContainer>
+        </FormFieldContainer>
+      );
+    } else {
+      return (
+        <FormFieldContainer labelPosition={labelPosition} {...elemProps}>
+          {field}
+        </FormFieldContainer>
+      );
+    }
   }
 }
 
