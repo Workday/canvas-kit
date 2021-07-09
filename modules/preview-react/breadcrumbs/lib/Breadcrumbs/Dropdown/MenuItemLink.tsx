@@ -7,6 +7,10 @@ interface DropdownMenuItemLinkProps extends React.HTMLAttributes<HTMLAnchorEleme
    * The href url of the anchor tag
    */
   href: string;
+  /**
+   * A handler function for overriding hard-redirects with links
+   */
+  onAction?: (href: string) => void;
 }
 
 const MenuItemLink = styled('a')({
@@ -32,11 +36,26 @@ const MenuItemLink = styled('a')({
 
 export const DropdownMenuItemLink = forwardRef(
   (
-    {children, href, ...elemProps}: DropdownMenuItemLinkProps,
+    {children, href, onAction, onClick, ...elemProps}: DropdownMenuItemLinkProps,
     ref: React.Ref<HTMLAnchorElement>
   ) => {
+    const handleClick = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+      event.preventDefault();
+      // allow an override to the hard redirect
+      if (onAction) {
+        onAction(href);
+      } else {
+        // default to hard redirecting
+        window.location.href = href;
+      }
+      // don't block the onClick event if it's provided
+      if (onClick) {
+        onClick(event);
+      }
+    };
+
     return (
-      <MenuItemLink ref={ref} href={href} role="menuitem" {...elemProps}>
+      <MenuItemLink ref={ref} href={href} role="menuitem" onClick={handleClick} {...elemProps}>
         {children}
       </MenuItemLink>
     );

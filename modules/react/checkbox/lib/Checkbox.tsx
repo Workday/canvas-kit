@@ -82,7 +82,7 @@ const CheckboxContainer = styled('div')({
 const CheckboxInputWrapper = styled('div')<Pick<CheckboxProps, 'disabled'>>({
   display: 'flex',
   height: checkboxHeight,
-  width: checkboxWidth,
+  minWidth: checkboxWidth,
   marginTop: '3px',
   alignSelf: 'flex-start',
 });
