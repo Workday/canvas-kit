@@ -14,6 +14,9 @@ Includes:
 - [InputProvider](#inputprovider)
 - [Theming](#theming)
 - [Bidirectionality](#bidirectionality)
+- [Component Functions](#component-functions)
+  - [createComponent](#createcomponent)
+  - [ExtractProps](#extractprops)
 
 ## CanvasProvider
 
@@ -237,3 +240,130 @@ Theming documentation has its own README. You can find it [here](./lib/theming/R
 
 Bidirectionality is provided by Theming. You can find Theming documentation
 [here](./lib/theming/README.md#bidirectionality).
+
+## Component Functions
+
+### `createComponent`
+
+`createComponent` is a convenience function that makes it easier to create components that
+[forward refs](https://reactjs.org/docs/forwarding-refs.html) and take an `as` prop. The `as` prop
+allows you to change the default element rendered by the component.
+
+```tsx
+interface MyComponentProps {
+  prop1: string;
+  prop2: number;
+  children: React.ReactNode;
+}
+
+export const MyComponent = createComponent('div')({
+  displayName: 'MyComponent', // the component's name in the React dev tools
+  Component: (({ prop1, prop2, children, ...elemProps }: MyComponentProps), ref, as) => {
+    return <Box as={as} {...elemProps}>{children}</Box>
+  })
+})
+```
+
+Using a component created via `createComponent`:
+
+```tsx
+<MyComponent ref={ref} as="aside">
+  Content
+</MyComponent>
+```
+
+`MyComponent` is returning a type that looks like `ElementComponent<'div', MyComponentProps>`. The
+`'div'` tells you what the default element is of the element component.
+
+Notice that `MyComponentProps` does not extend `React.HTMLAttributes<HTMLDivElement>`. The `as` prop
+changes the interface of the component to match that of the `aside` element which is a
+`React.HTMLAttributes<HTMLElement>`. For this reason, the interface cannot be known statically ahead
+of time. Components using `createComponent` are starting to not export the prop interface. For this
+reason, [ExtractProps](#extractprops) was created.
+
+The first parameter of `createComponent` might not be defined. If this is the case, the type
+returned is a `Component` instead of `ElementComponent`. `Component`s do not have any HTML
+attributes associated with them. This usually means the component doesn't return a real element.
+This is used for compound components that do not require an element for accessibility reasons and
+only provide a common model for the subcomponents.
+
+### `ExtractProps`
+
+`ExtractProps` can be used in place of importing a prop interface directly. If you wish to extend a
+Canvas Kit component by extending it's props, use `ExtractProps`.
+
+```tsx
+interface MyNewComponentProps extends ExtractProps<typeof MyComponent> {
+  foo: string;
+}
+
+const MyNewComponent = ({foo, ...props}: MyNewComponentProps) => {
+  return <MyComponent {...props}>My Content</MyComponent>;
+};
+```
+
+`ExtractProps` will return an type that includes the props of the component passed to it as well as
+any HTML attributes associated with the component. `ExtractProps` takes an optional second argument.
+If the second argument is omitted, like in the example above, the HTML attributes will be extracted
+from the first argument of `createComponent`, which is the default element. In the case of
+`MyComponent`, that would be `'div'`. You can tell by hovering over the `MyComponent` which will
+show the type as `ElementComponent<'div', MyComponentProps>`.
+
+The second argument should be used if you plan to change the base element of the component using the
+`as` prop. This is required because Typescript has no way of knowing what the props will be outside
+an `as` declaration. Here's an example of the `MyNewComponent` that renders `MyComponent` as an
+`aside`.
+
+```tsx
+interface MyNewComponentProps extends ExtractProps<typeof MyComponent, 'aside'> {
+  foo: string;
+}
+
+const MyNewComponent = ({foo, ...props}: MyNewComponentProps) => {
+  return (
+    <MyComponent as="aside" {...props}>
+      My Content
+    </MyComponent>
+  );
+};
+```
+
+Note the `aside` used in both the props interface as well as the `as` in the JSX. This is useful if
+your component uses props that come from the HTML attribute interface of a component, like `onClick`
+that isn't explicitly declared in the original component prop interface like `MyComponentProps`. In
+this example, `onClick` doesn't exist on `MyComponent`, but since `MyComponent` is an
+`ElementComponent`, the `onClick` will be forwarded to the underlying `div` element.
+
+If we inspect the `MyNewComponentProps` type, it will return the following:
+
+```tsx
+React.ClassAttributes<HTMLElement> & React.HTMLAttributes<HTMLElement> & MyComponentProps
+```
+
+`
+
+Inside Canvas Kit components, we use `ExtractProps` when we need to extend from the interfaces of
+other components, but since our components are also dynamic based on the `as` props, we cannot
+declare our HTML attribute interface yet. `ExtractProps` can take `never` as the second parameter
+for this case, which means to only take the declared props of a component and not include the HTML
+attributes.
+
+```tsx
+interface MyNewComponentProps extends ExtractProps<typeof MyComponent, never> {
+  foo: string;
+}
+
+const MyNewComponent = createComponent('aside')(
+  displayName: 'MyNewComponent',
+  Component: (({foo, ...props}: MyNewComponentProps, ref, as) => {
+    return (
+      <MyComponent ref={ref} as={as} {...props}>
+        My Content
+      </MyComponent>
+    );
+  };
+});
+```
+
+If the component is a `Component` and not an `ElementComponent`, only the prop interface will ever
+be returned since there is not HTML attribute interface associated with `Component`.

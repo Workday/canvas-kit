@@ -7,7 +7,7 @@ import {ModalCard} from './ModalCard';
 import {useModalModel} from './hooks';
 import {ModalHeading} from './ModalHeading';
 
-export interface ModalProps extends ExtractProps<typeof Dialog> {}
+export interface ModalProps extends ExtractProps<typeof Dialog, never> {}
 
 export const Modal = createComponent()({
   displayName: 'Modal',
