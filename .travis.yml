@@ -18,7 +18,7 @@ stages:
   if: branch =~ /^support\// AND type != pull_request
 
 - name: release
-  if: tag =~ /^v\d+\.\d+(\.\d+)?(-\S*)?$/ AND tag IS present
+  if: (branch = master OR branch =~ /^prerelease\//) AND tag =~ /^v\d+\.\d+(\.\d+)?(-\S*)?$/ AND tag IS present
 
 - name: support-release
   if: branch =~ /^support\// AND tag =~ /^v\d+\.\d+(\.\d+)?(-\S*)?$/ AND tag IS present
