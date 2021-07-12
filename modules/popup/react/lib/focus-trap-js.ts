@@ -82,7 +82,7 @@ function getAllTabbingElements(parentElem: HTMLElement | Document) {
 function tabTrappingKey(
   event: KeyboardEvent,
   parentElem: HTMLElement | Document,
-  onlyTabbable: HTMLElement[] = []
+  onlyTabbable: HTMLElement[] | null = null
 ) {
   // check if current event keyCode is tab
   if (!event || event.key !== 'Tab') {
