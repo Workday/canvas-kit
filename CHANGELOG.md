@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## v4.8.2 (2021-07-12)
+### Infrastructure
+
+- ci: Add additional check so support releases aren't treated as latest [@anicholls](https://github.com/anicholls)
+- fix: Convert focus-trap-js to TS file to fix module-not-found error ([#1149](https://github.com/Workday/canvas-kit/pull/1149)) [@NicholasBoll](https://github.com/NicholasBoll)
+
 ## v4.8.1 (2021-07-08)
 
 ### Components
@@ -30,7 +36,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - docs: Add better documentation to the `as` prop ([#1046](https://github.com/Workday/canvas-kit/pull/1046)) [@NicholasBoll](https://github.com/NicholasBoll)
 - docs: Popup accessible example ([#1056](https://github.com/Workday/canvas-kit/pull/1056)) [@csongnguyen](https://github.com/csongnguyen)
 
-## Infrastructure
+### Infrastructure
 
 - chore: Bump y18n from 3.2.1 to 3.2.2 ([#1011](https://github.com/Workday/canvas-kit/pull/1011)) [@dependabot](https://github.com/dependabot)
 - chore: Bump elliptic from 6.5.3 to 6.5.4 ([#993](https://github.com/Workday/canvas-kit/pull/993)) [@dependabot](https://github.com/dependabot)
