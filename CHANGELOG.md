@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## v5.0.4 (2021-07-12)
+
+### Components
+
+- feat(common): Add HTML attribute interface to ExtractProps ([#1147](https://github.com/Workday/canvas-kit/pull/1147)) [@NicholasBoll](https://github.com/NicholasBoll)
+
+### Docs
+- docs: Fix changelog issues [@anicholls](https://github.com/anicholls)
+
 ## v4.8.2 (2021-07-12)
 ### Infrastructure
 
