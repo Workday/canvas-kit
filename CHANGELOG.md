@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## v5.0.3 (2021-06-09)
+## v5.0.3 (2021-07-09)
 
 ### Components
 
@@ -19,7 +19,6 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Infrastructure
 
 - build: Pull component mdx + examples into docs module during build ([#1130](https://github.com/Workday/canvas-kit/pull/1130)) [@anicholls](https://github.com/anicholls)[@NicholasBoll](https://github.com/NicholasBoll)
-- Merge branch 'support/v4.x' of https://github.com/Workday/canvas-kit into merge/support/v4.x-into-master [@NicholasBoll](https://github.com/NicholasBoll)
 - feat: Add storybook utils to labs common ([#1136](https://github.com/Workday/canvas-kit/pull/1136)) [@vibdev](https://github.com/vibdev)
 
 ## v5.0.2 (2021-06-22)
@@ -196,7 +195,7 @@ To review the breaking changes made in this release, check out the [v5.0.0 Migra
 - ci: Update setup-node action and remove custom matcher ([#994](https://github.com/Workday/canvas-kit/pull/994)) [@NicholasBoll](https://github.com/NicholasBoll)
 - ci: Fix canary dist-tag for prerelease canaries in slack message ([#1003](https://github.com/Workday/canvas-kit/pull/1003)) [@anicholls](https://github.com/anicholls)
 
-## v4.8.1 (2021-07-08)
+## v4.8.1 (2021-07-09)
 
 ### Components
 
