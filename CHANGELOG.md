@@ -201,7 +201,7 @@ To review the breaking changes made in this release, check out the [v5.0.0 Migra
 - ci: Update setup-node action and remove custom matcher ([#994](https://github.com/Workday/canvas-kit/pull/994)) [@NicholasBoll](https://github.com/NicholasBoll)
 - ci: Fix canary dist-tag for prerelease canaries in slack message ([#1003](https://github.com/Workday/canvas-kit/pull/1003)) [@anicholls](https://github.com/anicholls)
 
-## v4.8.1 (2021-07-09)
+## v4.8.1 (2021-07-08)
 
 ### Components
 
