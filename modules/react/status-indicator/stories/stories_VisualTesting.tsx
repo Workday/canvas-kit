@@ -1,11 +1,8 @@
 /// <reference path="../../../../typings.d.ts" />
 import * as React from 'react';
 import {StaticStates} from '@workday/canvas-kit-react/common';
-import {
-  ComponentStatesTable,
-  permutateProps,
-  withSnapshotsEnabled,
-} from '../../../../utils/storybook';
+import {ComponentStatesTable, permutateProps} from '@workday/canvas-kit-labs-react/common';
+import {withSnapshotsEnabled} from '../../../../utils/storybook';
 
 import {StatusIndicator, StatusIndicatorProps} from '../';
 import {uploadCloudIcon} from '@workday/canvas-system-icons-web';

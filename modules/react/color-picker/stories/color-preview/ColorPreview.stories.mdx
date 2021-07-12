@@ -1,0 +1,55 @@
+import {Meta} from '@storybook/addon-docs/blocks';
+import {Specifications} from '@workday/canvas-kit-docs';
+
+import {ColorPreview} from '@workday/canvas-kit-react/color-picker';
+
+import {Basic} from './examples/Basic';
+import {LabelPosition} from './examples/LabelPosition';
+import {RefForwarding} from './examples/RefForwarding';
+
+<Meta title="Components/Inputs/Color Picker/Color Preview/React" component={ColorPreview} />
+
+# Canvas Kit Color Preview
+
+Color Preview displays a color swatch.
+
+[> Workday Design Reference](https://design.workday.com/components/inputs/color-input)
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-react
+```
+
+## Usage
+
+### Basic Example
+
+<ExampleCodeBlock code={Basic} />
+
+### Ref Forwarding
+
+Color Preview supports [ref forwarding](https://reactjs.org/docs/forwarding-refs.html). It will
+forward `ref` to its underlying `<input type="text">` element.
+
+<ExampleCodeBlock code={RefForwarding} />
+
+### Label Position
+
+If Form Field is being used, set its `labelPosition` prop to designate the position of the label
+relative to the Color Preview. `labelPosition` accepts the following values:
+
+- `FormField.LabelPosition.Top` (Default)
+- `FormField.LabelPosition.Left`
+
+<ExampleCodeBlock code={LabelPosition} />
+
+## Props
+
+Undocumented props are spread to the underlying `<input type="text">` element.
+
+<ArgsTable of={ColorPreview} />
+
+## Specifications
+
+<Specifications file="ColorPicker.spec.ts" name="ColorPreview" />

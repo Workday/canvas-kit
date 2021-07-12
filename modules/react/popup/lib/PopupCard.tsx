@@ -16,7 +16,7 @@ import {
 import {getTransformFromPlacement} from './getTransformFromPlacement';
 import {usePopupCard, PopupModel, PopupModelContext} from './hooks';
 
-export interface PopupCardProps extends ExtractProps<typeof Card> {
+export interface PopupCardProps extends ExtractProps<typeof Card, never> {
   /**
    * Optionally pass a model directly to this component. Default is to implicitly use the same
    * model as the container component which uses React context. Only use this for advanced use-cases

@@ -2,7 +2,8 @@
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
 import {StaticStates} from '@workday/canvas-kit-react/common';
-import {ComponentStatesTable, withSnapshotsEnabled} from '../../../../utils/storybook';
+import {ComponentStatesTable} from '@workday/canvas-kit-labs-react/common';
+import {withSnapshotsEnabled} from '../../../../utils/storybook';
 import {uploadCloudIcon, extLinkIcon, userIcon} from '@workday/canvas-system-icons-web';
 import {Menu, MenuItem, MenuItemProps} from '../index';
 

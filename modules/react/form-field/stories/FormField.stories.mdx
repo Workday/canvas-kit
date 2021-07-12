@@ -1,0 +1,131 @@
+import {Meta} from '@storybook/addon-docs/blocks';
+import {Specifications} from '@workday/canvas-kit-docs';
+
+import FormField from '@workday/canvas-kit-react/form-field';
+
+import {Alert} from './examples/Alert.tsx';
+import {AlertLabel} from './examples/AlertLabel.tsx';
+import {Basic} from './examples/Basic.tsx';
+import {CustomInputId} from './examples/CustomInputId.tsx';
+import {Error} from './examples/Error.tsx';
+import {ErrorLabel} from './examples/ErrorLabel.tsx';
+import {GroupingInputs} from './examples/GroupingInputs.tsx';
+import {Grow} from './examples/Grow.tsx';
+import {Hint} from './examples/Hint.tsx';
+import {LabelPosition} from './examples/LabelPosition.tsx';
+import {Required} from './examples/Required.tsx';
+
+<Meta title="Components/Inputs/Form Field/React" component={FormField} />
+
+# Canvas Kit Form Field
+
+Form Field allows users to wrap input components to make them accessible and adds complementary
+labels and error messages.
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-react
+```
+
+## Usage
+
+### Basic Example
+
+Form Field should be used in tandem with most Canvas Kit input components to ensure they meet
+accessibility standards.
+
+Here's an example of Form Field being used with
+[Text Input](/docs/components-inputs-text-input-react--basic).
+
+<ExampleCodeBlock code={Basic} />
+
+### Custom Input id
+
+Form Field will automatically generate an HTML `id` for its input element to link it to the
+correponding label. Alternatively, you may set the `inputId` prop of the Form Field to specify a
+custom `id` for the input element.
+
+<ExampleCodeBlock code={CustomInputId} />
+
+### Grouping Inputs
+
+Set the `useFieldset` prop of the Form Field to `true` to indicate that it includes multiple input
+components. In this case, the Form Field will use
+[the method prescribed by the WAI](https://www.w3.org/WAI/tutorials/forms/grouping/) and render
+itself using a `fieldset` and a `legend`.
+
+`useFieldset` must be set to `true` when wrapping a
+[Radio Group](/docs/components-inputs-radio-react--basic) since Radio Groups contain multiple Radio
+Buttons.
+
+<ExampleCodeBlock code={GroupingInputs} />
+
+### Grow
+
+Set the `grow` prop of the Form Field to `true` to configure it (including the wrapped input
+component) to expand to the width of its container.
+
+<ExampleCodeBlock code={Grow} />
+
+### Hint
+
+Set the `hintText` prop of the Form Field to display a short message below the input component.
+
+<ExampleCodeBlock code={Hint} />
+
+### Label Position
+
+Set the `labelPosition` prop of the Form Field to designate the position of the label relative to
+the input component. `labelPosition` accepts the following values:
+
+- `FormField.LabelPosition.Top` (Default)
+- `FormField.LabelPosition.Left`
+
+<ExampleCodeBlock code={LabelPosition} />
+
+### Required
+
+Set the `required` prop of the Form Field to `true` to indicate that the field is required. Labels
+for required fields are suffixed by a red asterisk.
+
+<ExampleCodeBlock code={Required} />
+
+### Error States
+
+Set the `error` prop of the Form Field to indicate it has an error. `error` accepts the following
+values:
+
+- `FormField.ErrorType.Alert`
+- `FormField.ErrorType.Error`
+
+The `hintText` and `hintId` props of the Form Field are required if `error` is defined. Set
+`hintText` to the error message you would like to display and `hintId` to the HTML `id` you would
+like to assign to that message (`hintId` is used to link the error message to its corresponding
+input element to meet accessibility standards).
+
+#### Alert
+
+<ExampleCodeBlock code={Alert} />
+
+Set the `alertLabel` prop of the Form Field to override the default "Alert" prefix of the hint. This is generally only used for translations.
+
+<ExampleCodeBlock code={AlertLabel} />
+
+#### Error
+
+<ExampleCodeBlock code={Error} />
+
+Set the `errorLabel` prop of the Form Field to override the default "Error" prefix of the hint. This is generally only used for translations.
+
+<ExampleCodeBlock code={ErrorLabel} />
+
+## Props
+
+Undocumented props are spread to the outermost container element rendered by Form Field.
+
+<ArgsTable of={FormField} />
+
+## Specifications
+
+<Specifications file="FormField.spec.ts" name="Form Field" />

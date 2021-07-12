@@ -3,5 +3,5 @@ export interface Breadcrumb extends React.HTMLAttributes<HTMLAnchorElement> {
   link: string;
   text: string;
   width: number;
-  onAction?: (item: Breadcrumb) => void;
+  onAction?: (href: string) => void;
 }

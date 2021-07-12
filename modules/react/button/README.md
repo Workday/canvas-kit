@@ -396,7 +396,6 @@ Default: `undefined`
 ```tsx
 import * as React from 'react';
 import {IconButton} from '@workday/canvas-kit-react/button';
-import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {activityStreamIcon} from '@workday/canvas-system-icons-web';
 
 <IconButton icon={activityStreamIcon} aria-label="Activity Stream" />;

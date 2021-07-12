@@ -39,7 +39,6 @@ export const CollapsibleList = ({
   // behaviors
   const {shouldCollapseList} = useCollapse(listRef, maxWidth);
   const {collapsedItems, collapsedItemIndices} = useBuildCollapsedList(listRef, children, maxWidth);
-
   const {rootItem, collapsibleItems, currentItem} = parseListItems(children);
   console.log(collapsedItems, collapsedItemIndices);
   return (
