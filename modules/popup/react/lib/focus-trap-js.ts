@@ -33,6 +33,9 @@ function isNotRadioOrTabbableRadio(node: HTMLInputElement) {
     return true;
   }
   const radioScope = node.form || node.ownerDocument;
+  if (!radioScope) {
+    return false;
+  }
   const radioSet = radioScope.querySelectorAll<HTMLInputElement>(
     'input[type="radio"][name="' + node.name + '"]'
   );
@@ -79,7 +82,7 @@ function getAllTabbingElements(parentElem: HTMLElement | Document) {
 function tabTrappingKey(
   event: KeyboardEvent,
   parentElem: HTMLElement | Document,
-  onlyTabbable: HTMLElement[]
+  onlyTabbable: HTMLElement[] = []
 ) {
   // check if current event keyCode is tab
   if (!event || event.key !== 'Tab') {
@@ -133,4 +136,5 @@ function isContentEditable(node: HTMLElement) {
 }
 
 tabTrappingKey.isNotRadioOrTabbableRadio = isNotRadioOrTabbableRadio;
-module.exports = tabTrappingKey;
+
+export {tabTrappingKey};
