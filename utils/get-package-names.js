@@ -23,7 +23,7 @@ function getPackages(context) {
     .then(files => files.filter(dirent => dirent.isDirectory()).map(dirent => dirent.name))
     .then(files => scopes.concat(files))
     .then(files => files.map(file => file.replace(/^(_.+)|(labs)/, '')).filter(name => name))
-    .then(files => JSON.stringify(files))
+    .then(files => JSON.stringify(files).replace(/"/g, ''))
     .then(console.log);
 }
 
