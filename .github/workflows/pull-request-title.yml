@@ -11,6 +11,8 @@ jobs:
   main:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
+
       - name: Get Package Scopes
         id: scope-vars
         run: echo "::set-output name=scopes::$(node utils/get-package-names.js)"
