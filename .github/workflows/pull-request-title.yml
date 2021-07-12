@@ -17,6 +17,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          scopes: $(node ./utils/get-package-names.js)
+          scopes: ${{node ./utils/get-package-names.js}}
           subjectPattern: ^[A-Z].+$
 
