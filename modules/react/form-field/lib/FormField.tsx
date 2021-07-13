@@ -66,11 +66,14 @@ export interface FormFieldErrorBehavior {
 }
 
 // Use a fieldset element for accessible radio groups
-const FormFieldFieldsetContainer = styled('fieldset')<FormFieldLabelPositionBehavior>({
-  padding: 0,
-  margin: 0,
-  border: 0,
-});
+const FormFieldFieldsetContainer = styled('fieldset')<FormFieldLabelPositionBehavior>(
+  ({labelPosition}) => ({
+    display: labelPosition === FormFieldLabelPosition.Left ? 'flex' : undefined,
+    padding: 0,
+    margin: 0,
+    border: 0,
+  })
+);
 
 const FormFieldContainer = styled('div')<FormFieldLabelPositionBehavior>(({labelPosition}) => {
   if (labelPosition === FormFieldLabelPosition.Left) {
@@ -173,7 +176,7 @@ class FormField extends React.Component<FormFieldProps> {
     } = this.props;
 
     const field = (
-      <FormFieldContainer labelPosition={labelPosition} {...elemProps}>
+      <>
         {typeof label === 'string' ? (
           <Label
             labelPosition={labelPosition}
@@ -187,7 +190,6 @@ class FormField extends React.Component<FormFieldProps> {
         ) : (
           label
         )}
-
         <FormFieldInputContainer grow={grow} labelPosition={labelPosition}>
           {React.Children.map(children, this.renderChildren)}
           {hintText && (
@@ -196,10 +198,24 @@ class FormField extends React.Component<FormFieldProps> {
             </Hint>
           )}
         </FormFieldInputContainer>
-      </FormFieldContainer>
+      </>
     );
 
-    return useFieldset ? <FormFieldFieldsetContainer>{field}</FormFieldFieldsetContainer> : field;
+    if (useFieldset) {
+      return (
+        <FormFieldContainer labelPosition={labelPosition} {...elemProps}>
+          <FormFieldFieldsetContainer labelPosition={labelPosition}>
+            {field}
+          </FormFieldFieldsetContainer>
+        </FormFieldContainer>
+      );
+    } else {
+      return (
+        <FormFieldContainer labelPosition={labelPosition} {...elemProps}>
+          {field}
+        </FormFieldContainer>
+      );
+    }
   }
 }
 
