@@ -68,7 +68,7 @@
     "lodash": "^4.17.14",
     "polished": "^2.3.0",
     "react-innertext": "^1.1.5",
-    "rtl-css-js": "^1.13.1",
+    "rtl-css-js": "^1.14.1",
     "uuid": "^3.3.3"
   },
   "devDependencies": {
