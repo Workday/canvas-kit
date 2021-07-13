@@ -1,13 +1,18 @@
 import React from 'react';
 
 import {createComponent, useDefaultModel} from '@workday/canvas-kit-react/common';
-import {Popup, PopupModelContext, PopupModel} from '@workday/canvas-kit-react/popup';
+import {
+  Popup,
+  PopupModelContext,
+  PopupModel,
+  PopupModelConfig,
+} from '@workday/canvas-kit-react/popup';
 
 import {DialogPopper} from './DialogPopper';
 import {DialogCard} from './DialogCard';
 import {useDialogModel} from './hooks';
 
-export interface DialogProps {
+export interface DialogProps extends PopupModelConfig {
   /**
    * The contents of the Dialog. Can be `Dialog` children or any valid elements.
    */
