@@ -66,12 +66,14 @@ export interface FormFieldErrorBehavior {
 }
 
 // Use a fieldset element for accessible radio groups
-const FormFieldFieldsetContainer = styled('fieldset')<FormFieldLabelPositionBehavior>({
-  display: 'flex',
-  padding: 0,
-  margin: 0,
-  border: 0,
-});
+const FormFieldFieldsetContainer = styled('fieldset')<FormFieldLabelPositionBehavior>(
+  ({labelPosition}) => ({
+    display: labelPosition === FormFieldLabelPosition.Left ? 'flex' : undefined,
+    padding: 0,
+    margin: 0,
+    border: 0,
+  })
+);
 
 const FormFieldContainer = styled('div')<FormFieldLabelPositionBehavior>(({labelPosition}) => {
   if (labelPosition === FormFieldLabelPosition.Left) {
@@ -202,7 +204,9 @@ class FormField extends React.Component<FormFieldProps> {
     if (useFieldset) {
       return (
         <FormFieldContainer labelPosition={labelPosition} {...elemProps}>
-          <FormFieldFieldsetContainer>{field}</FormFieldFieldsetContainer>
+          <FormFieldFieldsetContainer labelPosition={labelPosition}>
+            {field}
+          </FormFieldFieldsetContainer>
         </FormFieldContainer>
       );
     } else {
