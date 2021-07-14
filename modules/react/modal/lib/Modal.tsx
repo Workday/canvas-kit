@@ -7,7 +7,10 @@ import {ModalCard} from './ModalCard';
 import {useModalModel} from './hooks';
 import {ModalHeading} from './ModalHeading';
 
-export interface ModalProps extends ExtractProps<typeof Dialog, never> {}
+export interface ModalProps extends ExtractProps<typeof Dialog, never> {
+  /** The contents of the Modal. Can be `Modal` subcomponents or any valid elements. */
+  children: React.ReactNode;
+}
 
 export const Modal = createComponent()({
   displayName: 'Modal',

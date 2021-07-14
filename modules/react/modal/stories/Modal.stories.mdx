@@ -88,8 +88,16 @@ component via `as`. Many examples above use `as={DeleteButton}`. If you want to 
 `IconButton` instead, use `as={IconButton}`. The `Modal.Target` is an alias for `Popup.Target` and
 uses the `usePopupTarget` hook.
 
+<ArgsTable of={Modal.Target} />
+
 ### Modal.Overlay
 
 A `Modal.Overlay` is the component that hooks a Modal up to the `PopupStack` as well as the
 semi-transparent overlay commonly used with modals. Internally, the `Modal.Overlay` component uses
 two `div` elements to ensure proper rendering of the `Modal` content.
+
+<ArgsTable of={Modal.Overlay} />
+
+## Specifications
+
+<Specifications file="Modal.spec.ts" name="Modal" />
