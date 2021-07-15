@@ -1,12 +1,12 @@
-/// <reference path="../../../../typings.d.ts" />
 import React from 'react';
 import ReactDOM from 'react-dom';
 
 import {DeleteButton} from '@workday/canvas-kit-react/button';
 import {Modal, useModalModel} from '@workday/canvas-kit-react/modal';
+import {ContentDirection, CanvasProvider} from '@workday/canvas-kit-react/common';
+import {HStack} from '@workday/canvas-kit-labs-react/layout';
 
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
-import {HStack} from '@workday/canvas-kit-labs-react/layout';
 
 const TestContent = () => {
   const content = (
@@ -53,3 +53,22 @@ const TestModal = () => {
 };
 
 export const ModalSmallWidth = withSnapshotsEnabled(() => <TestModal />);
+
+export const ModalRTL = withSnapshotsEnabled(() => {
+  const model = useModalModel({
+    initialVisibility: 'visible',
+  });
+  return (
+    <CanvasProvider theme={{canvas: {direction: ContentDirection.RTL}}}>
+      <Modal model={model}>
+        <Modal.Overlay style={{animation: 'none'}}>
+          <Modal.Card style={{animation: 'none'}} width={300}>
+            <Modal.CloseIcon aria-label="" />
+            <Modal.Heading>למחוק פריט</Modal.Heading>
+            <Modal.Body>האם ברצונך למחוק פריט זה</Modal.Body>
+          </Modal.Card>
+        </Modal.Overlay>
+      </Modal>
+    </CanvasProvider>
+  );
+});
