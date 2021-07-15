@@ -4,7 +4,7 @@ import {storiesOf} from '@storybook/react';
 import {action} from '@storybook/addon-actions';
 import withReadme from 'storybook-readme/with-readme';
 import uuid from 'uuid/v4';
-import {setupIcon, uploadCloudIcon, userIcon, extLinkIcon} from '@workday/canvas-system-icons-web';
+import {setupIcon, uploadCloudIcon, taskContactIcon} from '@workday/canvas-system-icons-web';
 import {Popper} from '@workday/canvas-kit-react/popup';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
@@ -31,7 +31,7 @@ const createMenuItems = (hasIcons?: boolean): StoryMenuItemProps[] => {
     {
       text: `Third Item (disabled)`,
       icon: hasIcons ? uploadCloudIcon : undefined,
-      secondaryIcon: hasIcons ? extLinkIcon : undefined,
+      secondaryIcon: hasIcons ? taskContactIcon : undefined,
       isDisabled: true,
     },
     {
@@ -42,12 +42,12 @@ const createMenuItems = (hasIcons?: boolean): StoryMenuItemProps[] => {
           Fourth Item (<b>with markup</b>)
         </em>
       ),
-      icon: hasIcons ? userIcon : undefined,
+      icon: hasIcons ? taskContactIcon : undefined,
       'aria-label': hasIcons ? `I am a label for screen readers` : undefined,
     },
     {
       text: `Fifth Item (with divider)`,
-      icon: hasIcons ? userIcon : undefined,
+      icon: hasIcons ? taskContactIcon : undefined,
       hasDivider: true,
     },
   ];
