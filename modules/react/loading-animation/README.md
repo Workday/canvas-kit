@@ -1,36 +1,7 @@
-# Canvas Kit CSS Loading Animation
+# Canvas Kit Loading Animation
 
-A component that renders a loading animation.
+View the
+[documentation for Loading Animation](https://workday.github.io/canvas-kit/?path=/docs/components-indicators-loading-animation-react--basic)
+on Storybook.
 
 [> Workday Design Reference](https://design.workday.com/components/indicators/loading-animation)
-
-## Installation
-
-```sh
-yarn add @workday/canvas-kit-react
-```
-
-# LoadingDots
-
-## Usage
-
-```tsx
-import * as React from 'react';
-import {LoadingDots} from '@workday/canvas-kit-react/loading-animation';
-
-<LoadingDots />;
-```
-
-## Static Properties
-
-> None
-
-## Component Props
-
-### Required
-
-> None
-
-### Optional
-
-> None
