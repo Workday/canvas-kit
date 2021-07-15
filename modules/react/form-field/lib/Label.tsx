@@ -78,6 +78,7 @@ const RequiredAstrisk = styled('abbr')({
 const LegendComponent = styled('legend')<LabelProps>(...labelStyles, ({labelPosition}) => ({
   width: labelPosition === Label.Position.Top ? '100%' : undefined,
   float: labelPosition === Label.Position.Left ? 'left' : undefined,
+  minHeight: labelPosition === Label.Position.Left ? '40px' : undefined,
 }));
 const LabelComponent = styled('label')<LabelProps>(...labelStyles);
 
