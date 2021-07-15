@@ -34,21 +34,31 @@ together.
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
 import {ComponentStyles, useThemeRTL} from '@workday/canvas-kit-labs-react/common';
+import {space} from '@workday/canvas-kit-react/tokens';
 const styles: ComponentStyles = {
   panel: {
-    margin: '8px',
+    // `themeRTL` will transform this to `marginRight` when the direction is `RTL`
+    marginLeft: space.xxs,
   },
   top: {
-    top: '8px',
-  },
-  red: {
-    color: 'red',
+    top: space.xxs,
   },
 };
-export const HelloWorld = () => {
-  const {themeRTL} = useThemeRTL();
+export const HelloWorld = ({backgroundImagePath}) => {
+  const {themeRTL, theme} = useThemeRTL();
+
+  const panelStyles = {
+    ...styles.panel,
+    color: theme.canvas.palette.neutral.main,
+  };
+
+  const backgroundStyles = {
+    // `themeRTL` will transform this to `url(${backgroundImagePath}) right top` when the direction is `RTL`
+    background: `url(${backgroundImagePath}) left top`,
+  };
+
   return (
-    <div css={themeRTL(styles.panel, styles.top)} style={themeRTL(styles.red)}>
+    <div css={themeRTL(panelStyles, styles.top)} style={themeRTL(backgroundStyles)}>
       Hello World
     </div>
   );
