@@ -78,7 +78,7 @@ const Item = styled('li')<Pick<MenuItemProps, 'isDisabled' | 'isFocused'>>(
         '&:hover': {
           backgroundColor: commonColors.hoverBackground,
           color: colors.blackPepper300,
-          '.wd-icon-fill': {
+          '.wd-icon-fill, .wd-icon-accent, .wd-icon-accent2': {
             fill: iconColors.hover,
           },
         },
@@ -87,17 +87,16 @@ const Item = styled('li')<Pick<MenuItemProps, 'isDisabled' | 'isFocused'>>(
       return {
         color: colors.licorice100,
         cursor: 'default',
-        '&:hover .wd-icon-fill': {
-          fill: iconColors.disabled,
-        },
       };
     } else {
       // Is focused or focused and disabled
       return {
         backgroundColor: isDisabled ? colors.blueberry200 : commonColors.focusBackground,
         color: typeColors.inverse,
-        'span .wd-icon-fill': {
-          fill: iconColors.inverse,
+        '&:hover': {
+          'span .wd-icon-fill, span .wd-icon-accent, span .wd-icon-accent2': {
+            fill: iconColors.inverse,
+          },
         },
         [`[data-whatinput='mouse'] &,
           [data-whatinput='touch'] &,
@@ -106,11 +105,11 @@ const Item = styled('li')<Pick<MenuItemProps, 'isDisabled' | 'isFocused'>>(
           color: colors.blackPepper300,
           '&:hover': {
             backgroundColor: commonColors.hoverBackground,
-            '.wd-icon-fill': {
+            '.wd-icon-fill, .wd-icon-accent, .wd-icon-accent2': {
               fill: iconColors.hover,
             },
           },
-          '.wd-icon-fill': {
+          '.wd-icon-fill, .wd-icon-accent, .wd-icon-accent2': {
             fill: iconColors.standard,
           },
         },
@@ -163,14 +162,19 @@ const setIconProps = (
   if (isDisabled) {
     props = {
       ...props,
-      fillHover: iconColors.disabled,
       fill: iconColors.disabled,
+      fillHover: iconColors.disabled,
+      accent: iconColors.disabled,
+      accentHover: iconColors.disabled,
     };
   }
   if (isFocused) {
     props = {
       ...props,
+      fill: iconColors.inverse,
       fillHover: iconColors.inverse,
+      accent: iconColors.inverse,
+      accentHover: iconColors.inverse,
     };
   }
   return props;
