@@ -38,7 +38,7 @@ function getConfig(tsconfigPath) {
   return options;
 }
 
-// cache the tsProgram for faster updates This prevents JSDoc updates from reflecting in the doc
+// Cache the tsProgram for faster updates This prevents JSDoc updates from reflecting in the doc
 // source, but that already didn't work Creating a new tsProgram takes about 1.5s. Skipping brings
 // down hot reload times from 2s to 500ms. That's worthwhile.
 let tsProgram;
@@ -46,7 +46,7 @@ let moduleCount = 0;
 
 class DocgenPlugin {
   apply(compiler) {
-    const pathRegex = /modules.+\.tsx?/;
+    const pathRegex = /modules.+\.tsx/;
     compiler.hooks.compilation.tap('DocgenPlugin', compilation => {
       compilation.hooks.seal.tap('DocgenPlugin', () => {
         const modulesToProcess = [];
@@ -115,6 +115,6 @@ const processModule = (module, tsProgram) => {
       })
       .substring(module.userRequest.length) +
     '\n';
-  module._source._value = source.replace(/\sswitch\./g, '_Switch.'); // broken for `Switch` component. `switch` is a reserved word in JS
+  module._source._value = source;
 };
 module.exports = DocgenPlugin;
