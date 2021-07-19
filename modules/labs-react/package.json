@@ -61,6 +61,7 @@
     "chroma-js": "^2.1.0",
     "csstype": "^2.6.17",
     "lodash.flatten": "^4.4.0",
+    "rtl-css-js": "^1.14.1",
     "uuid": "^3.3.3"
   },
   "devDependencies": {
