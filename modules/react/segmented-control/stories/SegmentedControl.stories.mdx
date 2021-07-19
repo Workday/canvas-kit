@@ -1,0 +1,35 @@
+import {Meta} from '@storybook/addon-docs/blocks';
+
+import {SegmentedControl} from '@workday/canvas-kit-react/segmented-control';
+import {Specifications} from '@workday/canvas-kit-docs';
+
+import {Basic} from './examples/Basic';
+
+<Meta title="Components/Buttons/Segmented Control/React" component={SegmentedControl} />
+
+# Canvas Kit Segmented Control
+
+A linear set of two or more segments, each of which functions as a mutually exclusive button. This
+is a [_controlled_](https://reactjs.org/docs/forms.html#controlled-components) component.
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-react
+```
+
+## Usage
+
+### Basic Example
+
+Here is a basic example of a Segmented Control with multiple nested `IconButton`s. **Note:** while
+managing state using a unique `value` for each `IconButton` child is encouraged, you can also use
+indexes and omit the `value` field. It is strongly recommended to not mix these two methods.
+
+<ExampleCodeBlock code={Basic} />
+
+## Props
+
+Undocumented props are spread to the underlying container `div` element.
+
+<ArgsTable of={SegmentedControl} />

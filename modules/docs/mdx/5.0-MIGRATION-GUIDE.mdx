@@ -1,0 +1,1506 @@
+import {Meta} from '@storybook/addon-docs/blocks';
+
+<Meta title="Welcome/Migration Guides/v5.0" />
+
+# Canvas Kit 5.0 Migration Guide
+
+Below are the breaking changes made in Canvas Kit v5. Please
+[reach out](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) if you have
+any questions about the update.
+
+- [Codemod](#codemod)
+- [General Changes](#general-changes)
+  - [Slash Imports](#slash-imports)
+  - [Canvas Kit Preview](#canvas-kit-preview)
+  - [Type Deprecations and Hierarchy Updates](#type-deprecations-and-hierarchy-updates)
+  - [Canvas Kit CSS Maintenance Mode](#canvas-kit-css-maintenance-mode)
+- [Component Changes](#component-changes)
+  - [Component Promotions](#component-promotions)
+  - [Core](#core)
+  - [Tokens](#tokens)
+  - [Button](#button)
+  - [Card](#card)
+  - [Inputs](#inputs)
+  - [Tabs](#tabs)
+  - [Popper](#popper)
+  - [Popups](#popups)
+  - [Modal](#modal)
+  - [Skeleton](#skeleton)
+
+## Codemod
+
+We've introduced a [new codemod package](../../codemod) you can use to automatically update your
+code to work with a majority of the breaking changes in the migration from Canvas Kit v4 to v5.
+Simply run:
+
+```sh
+> npx @workday/canvas-kit-codemod v5 [path]
+```
+
+> Note: This codemod only works on `.js`, `.jsx`, `.ts`, and `.tsx` extensions. You may need to make
+> some manual changes in other file types (`.json`, `.mdx`, `.md`, etc.).
+
+> Note: You may need to run your linter after executing the codemod, as it's resulting formatting
+> (spacing, quotes, etc.) may not match your project's styling.
+
+**Breaking changes accounted for by this codemod will be marked with a 🤖.**
+
+**Please verify all changes made by the codemod. As a safety precaution, we recommend committing the
+changes from the codemod as a single isolated commit (separate from other changes) so you can
+rollback more easily if necessary.**
+
+[Let us know](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) if you
+encounter any issues or use cases that we've missed. The `@workday/canvas-kit-codemod` package will
+help us maintain additional codemod transforms to make future migrations easier.
+
+## General Changes
+
+### Slash Imports
+
+Rather than having a separate module for each component, we've moved to a slash imports system. All
+of our React components are now bundled in one of three modules:
+
+- `@workday/canvas-kit-react`
+- `@workday/canvas-kit-labs-react`
+- `@workday/canvas-kit-preview-react`
+
+> Note: See [Canvas Kit Preview](#canvas-kit-preview) for more information about the new
+> `@workday/canvas-kit-preview-react` module.
+
+Consequently, you'll need to update your import statements:
+
+```tsx
+// v4
+import {TextInput} from '@workday/canvas-kit-react-text-input';
+
+// v5
+import {TextInput} from '@workday/canvas-kit-react/text-input';
+```
+
+🤖 The codemod will update import statements to use the new slash imports syntax.
+
+Recall that the codemod only works on `.js`, `.jsx`, `.ts`, and `.tsx` extensions. Other file types
+will need to be updated manually.
+
+---
+
+### Canvas Kit Preview
+
+Due to the broad range of stability in [Canvas Kit Labs](../../labs-react)
+(`@workday/canvas-kit-labs-react`), we've introduced a new module called
+[Canvas Kit Preview](../../preview-react) (`@workday/canvas-kit-preview-react`) to provide consumers
+with more clarity and confidence when uptaking experimental and upcoming components. The components
+in Preview have had a full design and accessibility review and are approved for use in product.
+Their functionality and design are set, but their APIs and/or underlying architecture are still
+subject to change.
+
+Preview serves as a staging ground for components that are ready to use, but may not be up to the
+high code standards upheld in the Main `@workday/canvas-kit-react` module. Think of Labs as a space
+for alpha components and Preview as a space for beta components.
+
+We've promoted several components from Labs to Preview in v5. See
+[Component Promotions](#component-promotions) for more details.
+
+---
+
+### Type Deprecations and Hierarchy Updates
+
+Canvas Kit v4 supported two type hierarchies, Beta and Legacy in
+`@workday/canvas-kit-labs-react-core` and `@workday/canvas-kit-react-core` respectively. However, v5
+replaces those with a new, responsive type hierarchy in `@workday/canvas-kit-react/tokens`. We are
+also deprecating and updating our type variants. The v5 codemod handles almost all of these changes
+for you. That said, you'll want to review the transformation and your UI to ensure everything was
+updated as you expect.
+
+#### Automatic Updates
+
+- 🤖 Type Hierarchy Updates
+
+  All type hierarchy updates are handled by the codemod. The tables below will help you understand
+  the changes and provide a reference as you review your UI. Most teams are using the Beta type
+  tokens in `@workday/canvas-kit-labs-react-core`, but some are using the Legacy type in
+  `@workday/canvas-kit-react-core`.
+
+  | Beta Type (px)  | Responsive Type (rem)                     |
+  | --------------- | ----------------------------------------- |
+  | `brand1` (56px) | `levels.title.large` ( 3.5rem \ 56px)     |
+  | `brand2` (48px) | `levels.title.medium` ( 3rem \ 48px)      |
+  | `h1` (40px)     | `levels.title.small` ( 2.5rem \ 40px)     |
+  | `h2` (32px)     | `levels.heading.large` ( 2rem \ 32px)     |
+  | `h3` (24px)     | `levels.heading.small` ( 1.5rem \ 24px)   |
+  | `h4` (20px)     | `levels.body.large` ( 1.25rem \ 20px)     |
+  | `h5` (20px)     | `levels.body.large` ( 1.25rem \ 20px)     |
+  | `body` (16px)   | `levels.body.small` ( 1rem \ 16px)        |
+  | `body2` (14px)  | `levels.subtext.large` ( 0.875rem \ 14px) |
+  | `small` (13px)  | `levels.subtext.medium` ( 0.75rem \ 12px) |
+
+  | Legacy Type (px)  | Responsive Type (rem)                    |
+  | ----------------- | ---------------------------------------- |
+  | `dataViz1` (56px) | `levels.title.large` (3.5rem \ 56px)     |
+  | `dataViz2` (34px) | `levels.heading.large` (2rem \ 32px)     |
+  | `h1` (28px)       | `levels.heading.medium` (1.75rem \ 28px) |
+  | `h2` (24px)       | `levels.heading.small` (1.5rem \ 24px)   |
+  | `h3` (20px)       | `levels.body.large` (1.25rem,) \ 20px    |
+  | `h4` (16px)       | `levels.body.small` (1rem \ 16px)        |
+  | `h5` (16px)       | `levels.body.small` (1rem \ 16px)        |
+  | `body` (14px)     | `levels.subtext.large` (0.875rem \ 14px) |
+  | `body2` (13px)    | `levels.subtext.medium` (0.75rem \ 12px) |
+  | `small` (12px)    | `levels.subtext.medium` (0.75rem \ 12px) |
+
+- 🤖 Property Updates
+
+  All `fontFamily`, `fontSize`, and `fontWeight` property updates are handled by the codemod.
+
+  | CSS Property | Corresponding Token            | Notes                                                           |
+  | ------------ | ------------------------------ | --------------------------------------------------------------- |
+  | `fontFamily` | `type.properties.fontFamilies` | `default` (Roboto) and `monospace` (Roboto Mono) are available  |
+  | `fontSize`   | `type.properties.fontSizes`    | please consult the type hierarchies above to map values         |
+  | `fontWeight` | `type.properties.fontWeights`  | `regular` (400), `medium` (500), and `bold` (700) are available |
+
+- 🤖 Variant Updates
+
+  All `variant` updates _except `link`_ are handled by the codemod. Please see the
+  [variants](#variants) section below for more information.
+
+  | Variant                | Transformation                                                                 | Notes                                   |
+  | ---------------------- | ------------------------------------------------------------------------------ | --------------------------------------- |
+  | `type.variant.error`   | `type.variants.error`                                                          | name change only                        |
+  | `type.variant.hint`    | `type.variants.hint`                                                           | name change only                        |
+  | `type.variant.inverse` | `type.variants.inverse`                                                        | name change only                        |
+  | `type.variant.button`  | `{fontWeight: type.properties.fontWeights.bold}`                               | variant deprecated, use type properties |
+  | `type.variant.caps`    | `{textTransform: 'uppercase', fontWeight: type.properties.fontWeights.medium}` | variant deprecated, use type properties |
+  | `type.variant.label`   | `{fontWeight: type.properties.fontWeights.medium}`                             | variant deprecated, use type properties |
+  | `type.variant.mono`    | `{fontFamily: type.properties.fontFamilies.monospace}`                         | variant deprecated, use type properties |
+
+#### Manual Updates
+
+##### TypeScript Type Updates
+
+- `CanvasType` still exists, but the types are quite different and will likely throw errors if
+  you're relying on them.
+- `CanvasTypeVariant` is now `CanvasTypeVariants` and has changed signicantly
+- We added `CanvasTypeHierarchy` (for type levels) and `CanvasTypeProperties` (for type properties)
+
+##### Code Deprecations
+
+There are only two type deprecations not covered by the codemod:
+
+- Type Wrapper components (`H1`-`H5`) have been removed
+- `link` variant has been removed
+
+##### Type Wrapper Components Migration
+
+To migrate, please refer to the hierachy tables about and use the type hierarchy tokens directly.
+Detailed usage information is available in the [levels section](#levels).
+
+##### Link Variant Migration
+
+To migrate, please use the `Hyperlink` component instead. Detailed usage information is available in
+the [variants section](#variants).
+
+#### Type Updates In-Depth Overview
+
+The new type tokens introduce a few major changes:
+
+- Introducing rem units
+- Creating a new `type` object structure
+- Adding new type properties (`fontFamilies`, `fontSizes`, and `fontWeights`)
+- Updating and replacing variants
+
+#### Introducing Rem Units
+
+The new type hierarchy uses `rem` units instead of `px`. This update follows the guidance
+[from the WCAG spec](https://www.w3.org/TR/WCAG21/#resize-text) and provides better support for
+users who rely on zooming. If you'd like to learn more about `rem` and relative units, you can
+review this
+[documentation](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Values_and_units#ems_and_rems).
+
+> **Note:** We are using `16px` as our base font-size for these values. This is a browser standard
+> and also fairly common across Workday. However, _if your body text is set to a value other than
+> `16px`_, you will need to adjust that value for text to render properly.
+
+#### New Type Object Structure
+
+The Beta and Legacy type object structures were fairly flat, provided many levels in the type
+hierarchy, and included quite a few variants. While none of these were bad attributes, our research
+suggested they created a large amount of confusion. Both designers and engineers were unclear on
+when to use many of the tokens provided. We restructured the object to help users make more sense of
+it. The tokens are divided into three main parts:
+
+- `levels` (the type hierarchy)
+- `properties` (`fontFamilies`, `fontSizes`, and `fontWeights`)
+- `variants` (modifiers for type styles)
+
+##### Levels
+
+Type `levels` contain our new type hierarchy. When applying type styles, we recommend using these
+tokens first. Each size applies `fontFamily`, `fontSize`, `fontWeight`, `lineHeight`,
+`letterSpacing`, and `color` styles for you, so you can create consistent type quickly and easily.
+Instead of the previous flat structure, the type hierarchy is now organized in four levels:
+
+- `title` (used for large page titles)
+- `heading` (used for headings and large text)
+- `body` (used for standard body text)
+- `subtext` (used for small subtext content or in tight spaces)
+
+And each level has three sizes: `large`, `medium`, and `small`. The previous hierarchy often mapped
+its levels 1:1 with semantic elements. This would often lead to awkward styling, such as this:
+
+```tsx
+// v4
+import {type} from '@workday/canvas-kit-labs-react-core';
+
+// Why is an h2 styled with h3 styles? Is this intentional? Is this a mistake? I don't know.
+const PageSection = () => {
+  return (
+    <section>
+      <h2 css={type.h3}>Section Heading</h2>
+      <p css={type.levels.body.small}>Section body text</p>
+    </section>
+  );
+};
+```
+
+But this new organization allows the hierarchy to be more flexible and create less confusion around
+usage. Below is an example:
+
+```tsx
+// v5
+import {type} from '@workday/canvas-kit-react/tokens';
+
+const PageSection = () => {
+  return (
+    <section>
+      <h2 css={type.levels.heading.medium}>Section Heading</h2>
+      <p css={type.levels.body.small}>Section body text</p>
+    </section>
+  );
+};
+```
+
+##### Properties
+
+Most often you will want to reach for `levels`, but sometimes you only need one or two type values
+for styling. Previously, you had to use the hierarchy to apply these values, which is clunky and
+implicit. For example, using: `fontSize: type.h2.fontSize,` when all you really want is the token
+for `24px`. Type `properties` give you an atomic-level of control when you want to explicitly set a
+particular value. Here's an example using `fontFamilies`, `fontSizes`, and `fontWeights`.
+
+> _Note:_ `fontSizes` keys are in pixel values as a convenient reference, but the values are the
+> base-16 rem equivalent. E.g. `fontSizes[12]` returns `0.75rem`.
+
+```tsx
+import {type} from '@workday/canvas-kit-react/tokens';
+
+const boldTextStyles = {
+  fontFamily: type.properties.fontFamilies.default, // 'Roboto'
+  fontSize: type.properties.fontSizes[16], // 1rem (16px)
+  fontWeight: type.properties.bold, // 700
+};
+
+const mediumMonoStyles = {
+  fontFamily: type.properties.fontFamilies.monospace, // 'Roboto Mono'
+  fontSize: type.properties.fontSizes[12], // 0.75rem (12px)
+  fontWeight: type.properties.medium, // 500
+};
+```
+
+##### Variants
+
+**Supported Variants**
+
+We're also reducing and simplifying our `variants`. In v5 we will only support:
+
+- `error` (used for making errors more visible)
+- `hint` (used for help text and secondary content)
+- `inverse` (used for any text on a dark or colored background)
+
+> **Note:** The `variant` key has been renamed to `variants` to be consistent with our other key
+> names.
+
+```tsx
+//v4
+import {type} from '@workday/canvas-kit-labs-react-core';
+
+const errorStyles = type.variant.error;
+const hintStyles = type.variant.hint;
+const inverseStyles = type.variant.inverse;
+
+// v5
+import {type} from '@workday/canvas-kit-react/tokens';
+
+const errorStyles = type.variants.error;
+const hintStyles = type.variants.hint;
+const inverseStyles = type.variants.inverse;
+```
+
+**Deprecated Variants**
+
+We've deprecated a handful of variants:
+
+- `button`
+- `caps`
+- `label`
+- `link`
+- `mono`
+
+With the exception of `link`, which is discussed further below, all of these variants can be
+supported with `properties` and other styles. Here are examples of how to translate each deprecated
+variant:
+
+```tsx
+//v4
+import {type} from '@workday/canvas-kit-labs-react-core';
+
+// button variant styles
+const buttonStyles = type.variant.button;
+// caps variant styles
+const capsStyles = type.variant.caps;
+// label variant styles
+const labelStyles = type.variant.label;
+// mono variant styles
+const monoStyles = type.variant.mono;
+
+// v5
+import {type} from '@workday/canvas-kit-labs-react/tokens';
+
+// button variant styles
+const buttonStyles = {fontWeight: type.properties.fontWeights.bold};
+// caps variant styles
+const capsStyles = {
+  fontWeight: type.properties.fontWeights.medium,
+  textTransform: 'uppercase',
+};
+// label variant styles
+const labelStyles = {fontWeight: type.properties.fontWeights.medium};
+// mono variant styles
+const monoStyles = {fontFamily: type.properties.fontFamilies.monospace};
+```
+
+**Link Variant**
+
+The `link` variant is also being deprecated in v5. You'll need to use the `Hyperlink` component
+instead. This is the only manual update needed for the type updates. Below are some examples:
+
+```tsx
+// v4
+import {type} from '@workday/canvas-kit-labs-react-core';
+
+const Link = styled('a')(type.variant.link);
+
+return <Link href="https://workday.github.io/canvas-kit">View docs</Link>;
+
+// v5
+import {Hyperlink} from '@workday/canvas-kit-labs-react/button';
+
+return <Hyperlink href="https://workday.github.io/canvas-kit">View docs</Hyperlink>;
+```
+
+> **Note:** If you're mixing styles from type `levels`, you'll need to pull out the `color` style
+> when applying them to `Hyperlink`. Below is an example.
+
+```tsx
+// v5
+import {type} from '@workday/canvas-kit-labs-react/tokens';
+import {Hyperlink} from '@workday/canvas-kit-labs-react/button';
+
+// Remove `color` from type styles to prevent the color from overriding the link color
+const {color, ...headingLargeStyles} = type.levels.heading.large;
+
+const HeadingLink = () => (
+  <Hyperlink css={headingLargeStyles} href="https://workday.github.io/canvas-kit">
+    View docs
+  </Hyperlink>
+);
+```
+
+---
+
+### Canvas Kit CSS Maintenance Mode
+
+Due to the infrequent use of our CSS modules, we've placed them in maintenance mode in v5. Although
+we'll continue to support `@workday/canvas-kit-css` with bug fixes and significant visual updates,
+it most likely won't be receiving new components or additional features. This will allow us to
+provide more focused support and to dedicate our efforts to making bigger and better improvements to
+our most used components: Canvas Kit React. If you have questions or concerns, please
+[let us know](https://github.com/Workday/canvas-kit/issues/new?labels=&template=question.md).
+
+## Component Changes
+
+### Component Promotions
+
+#### Promotions from Labs to Preview
+
+The following components were promoted from Labs to the new Preview module:
+
+- Breadcrumbs
+- Color Picker
+- Menu
+- Select
+- Side Panel
+
+You'll need to update your imports for promoted components (this is _not_ handled by the codemod):
+
+```tsx
+// v4
+import {Breadcrumbs} from '@workday/canvas-kit-labs-react-breadcrumbs';
+
+// v5
+import {Breadcrumbs} from '@workday/canvas-kit-preview-react/breadcrumbs';
+```
+
+#### Promotions from Labs to Main
+
+Generally, a component will begin in Labs before it's promoted to Preview and eventually to Main
+(although there is no guarantee a component will advance out of Labs). Given that Preview was just
+introduced in v5, however, we believe that a few components have incubated long enough in Labs and
+are ready for Main. The following components have been promoted straight from Labs to Main:
+
+- Pagination
+- Tabs
+
+These imports will need to be updated manually as well (this is _not_ handled by the codemod):
+
+```tsx
+// v4
+import {Pagination} from '@workday/canvas-kit-labs-react-pagination';
+
+// v5
+import {Pagination} from '@workday/canvas-kit-react/pagination';
+```
+
+---
+
+### Core
+
+#### Remove Labs Core
+
+The Labs `core` package has been removed. The few utilities in that package were either promoted,
+deprecated, or found a better home in another package. These changes are listed below, most of which
+are handled by the v5 codemod.
+
+##### Automatic Updates
+
+- 🤖 Move `StaticStates` component to Main `common`
+
+  We use `StaticStates` internally for our visual regression tests. It didn't really make sense to
+  live in `core`, and it's stable enough to move to Main, so it now lives in `common`.
+
+  ```tsx
+  // v4
+  import {StaticStates} from '@workday/canvas-kit-labs-react-core';
+
+  // v5
+  import {StaticStates} from '@workday/canvas-kit-react/common';
+  ```
+
+- 🤖 Move `type` tokens to Main `tokens` (formerly `core`)
+
+  This change is described in more detail in the [Type Section](#type), but suffice to say all
+  `type` imports will be automatically migrated to the Main `token` package by the codemod.
+
+  ```tsx
+  // v4
+  import {type} from '@workday/canvas-kit-labs-react-core';
+
+  // v5
+  import {type} from '@workday/canvas-kit-react/tokens';
+  ```
+
+##### Manual Updates
+
+- Deprecate `space` in favor of `Box`
+
+  The `space` function was a handy little utility that you could apply to `styled()` components to
+  add space style props. However, with the addition of `Box` it is no longer needed. `Box` provides
+  `space` style props and much more. While this is a manual migration, the process is fairly
+  straight-forward.
+
+  > **Note:** The `space` props use shorthand prop names for what `Box` provides. For example, `pt`
+  > maps to `paddingTop`, `mr` maps to `marginRight`, and so on. You can see this in the example
+  > below.
+
+  ```tsx
+  // v4
+  import {spaceNumbers} from '@workday/canvas-kit-react-core';
+  import {space} from '@workday/canvas-kit-labs-react-core';
+
+  // A styled div with space props
+  const Box = styled('div')(space);
+
+  const Card = () => <Box p={spaceNumbers.s}>Hello!</Box>;
+
+  // v5
+  import {Box} from '@workday/canvas-kit-labs-react/common';
+
+  const Card = () => <Box padding="s">Hello!</Box>;
+  ```
+
+#### Rename Core to Tokens
+
+The distinction between our core and common packages is often unclear and creates confusion around
+what should be imported from where. To help alleviate this and better align with our design
+taxonomy, we've renamed our Main `core` module to `tokens`. These changes are listed below, all of
+which are handled by the v5 codemod.
+
+##### Automatic Updates
+
+- 🤖 Rename Main `core` import statements to `tokens`
+
+  ```tsx
+  // v4
+  import {colors} from '@workday/canvas-kit-react-core';
+
+  // v5
+  import {colors} from '@workday/canvas-kit-react/tokens';
+  ```
+
+#### Input Provider
+
+The `InputProvider` wrapper component (used to provide CSS-referencable data attributes for the
+user's current input method) has been moved from `@workday/canvas-kit-react-core` to
+`@workday/canvas-kit-react/common`. After renaming our `core` package to `tokens`, it no longer made
+sense in this location.
+
+```tsx
+// v4
+import {InputProvider} from '@workday/canvas-kit-react-core';
+
+// v5
+import {InputProvider} from '@workday/canvas-kit-react/common';
+```
+
+🤖 The codemod will update your `InputProvider` imports.
+
+---
+
+### Tokens
+
+#### Space
+
+To better align with our design taxonomy, we've renamed our space tokens in our `tokens` package
+(formerly in `core`). Instead of relying on `@workday/canvas-space-web` to supply our space values,
+we're now keeping those values in canvas-kit. We've also taken the opportunity to improve the space
+types (which were too generic) and their JSDoc hints.
+
+The following table describes each update:
+
+| Before                | After                     | Change Description               |
+| --------------------- | ------------------------- | -------------------------------- |
+| `spacing`             | `space`                   | name change only                 |
+| `spacingNumbers`      | `spaceNumbers`            | name change only                 |
+| `CanvasSpacing`       | `CanvasSpace`             | name change and improved types\* |
+| `CanvasSpacingValue`  | `CanvasSpaceValues`       | name change only                 |
+| `CanvasSpacingNumber` | `CanvasSpaceNumbers`      | name change and improved types\* |
+| `n/a`                 | `CanvasSpaceNumberValues` | new type!                        |
+
+\* Before, the types were too generic and not very useful. They now better reflect the values they
+represent.
+
+The codemod will handle _almost all_ of these changes for you.That said, you'll want to review your
+UI to ensure everything was updated as you expect. [Manual Updates](#manual-updates) below.
+
+##### Automatic Updates
+
+- 🤖 Rename `spacing` and `spacingNumbers` imports.
+
+  ```tsx
+  // v4
+  import {spacing, spacingNumbers} from '@workday/canvas-kit-react-core';
+
+  // v5
+  import {space, spaceNumbers} from '@workday/canvas-kit-react/tokens';
+  ```
+
+- 🤖 Rename `CanvasSpacing`, `CanvasSpacingValue`, and `CanvasSpacingNumber` imports.
+
+  ```tsx
+  // v4
+  import {
+    CanvasSpacing,
+    CanvasSpacingValue,
+    CanvasSpacingNumber,
+  } from '@workday/canvas-kit-react-core';
+
+  // v5
+  import {
+    CanvasSpace,
+    CanvasSpaceValues,
+    CanvasSpaceNumbers,
+  } from '@workday/canvas-kit-react/tokens';
+  ```
+
+- 🤖 Update token expressions.
+
+  ```tsx
+  // v4
+  const iconPadding = spacing.s;
+
+  // v5
+  const iconPadding = space.s;
+  ```
+
+- 🤖 Update type expressions.
+
+  ```tsx
+  // v4
+  const getSpace = (value: CanvasSpacingValue) => spacing[value];
+
+  // v5
+  const getSpace = (value: CanvasSpaceValue) => space[value];
+  ```
+
+- 🤖 Update token properties.
+
+  ```tsx
+  // v4
+  const iconPadding = canvas.spacing.s;
+
+  // v5
+  const iconPadding = canvas.space.s;
+  ```
+
+##### Manual Updates
+
+As previously mentioned, the codemod should handle the vast majority of these updates. However,
+there are potentially a few changes that will need to be made manually. There may be more beyond
+what's listed below, but these were the most common issues found in our investigation.
+
+- Usage outside of `.js`, `.jsx`, `.ts`, and `.tsx` files
+  - e.g. referencing `spacing` in documentation (`.md` files)
+- Usage in code comments or JSDoc comments
+  - e.g. `// spacing.s = 16px`
+- Re-declararation `space` or `spaceNumbers` in the same files
+  - e.g. importing or declaring a new `space` or `spaceNumbers` variable will prevent the codemod
+    from updating the file
+- Aliasing existing variables as `spacing` or `spaceNumbers`
+  - e.g. `import {spacingNumbers as spacing}` will prevent the codemod from updating the file
+
+#### Border Radius
+
+We've updated the border radius `zero` token value from `0` to `"0px"` for consistency given that
+all other border radius tokens use string pixel values. We highly doubt this change will cause any
+issues, but because the value's type is different, this is technically a breaking change.
+
+```tsx
+// v4
+import {borderRadius} from '@workday/canvas-kit-react-core';
+
+console.log(borderRadius.zero); // returns `0`
+
+// v5
+import {borderRadius} from '@workday/canvas-kit-react/tokens';
+
+console.log(borderRadius.zero); // returns "0px"
+```
+
+---
+
+### Button
+
+#### Recategorization
+
+There has been common confusion around the large number of buttons Canvas supports and when each
+should be used. To improve the usability of our design system, we've been working to recategorize
+and simplify our button offering. To align with the recent changes in our Figma libraries, we've
+reorganized our buttons, renaming a few and removing others.
+
+The majority of button use cases have been simplified into three different components:
+`PrimaryButton`, `SecondaryButton`, and `TertiaryButton`, each level representing its emphasis and
+hierarchy in a UI. We hope this makes your usage of our buttons more intentional and clear. We've
+provided a codemod to make these changes automatically.
+
+**Renamed:**
+
+- 🤖 `Button` has been split into `PrimaryButton` and `SecondaryButton` (depending on the `variant`
+  prop).
+- 🤖 `OutlineButton` (`secondary`) is now `SecondaryButton`. For accessibility reasons, the
+  "outline" styling is the new styling for our secondary buttons.
+- 🤖 `OutlineButton` (`inverse`) is now `SecondaryButton` with an `inverse` variant.
+- 🤖 `TextButton` is now `TertiaryButton`.
+
+**Removed:**
+
+- 🤖 `HighlightButton`. Use `SecondaryButton` instead.
+- 🤖 `OutlineButton` with `primary` variant. Use `PrimaryButton` or `SecondaryButton` instead. The
+  codemod will replace with `SecondaryButton`.
+- 🤖 `DropdownButton`. This can be achieved simply using `PrimaryButton` or `SecondaryButton` with
+  an `icon` prop and `iconPosition="right"`.
+
+To see examples of code in v4 versus v5, see our
+[codemod tests](../../codemod/lib/v5/spec/recategorizeButtons.spec.ts).
+
+#### Exports
+
+We've changed some of the Button module's export behavior:
+
+- 🤖 The `beta_Button` export was removed. The codemod will rename the import to `Button` instead,
+  preserving local renaming if it exists.
+
+  ```tsx
+  // v4
+  import {beta_Button as Button} from '@workday/canvas-kit-react-button';
+
+  // v5
+  import {SecondaryButton} from '@workday/canvas-kit-react/button';
+  ```
+
+- 🤖 The default export was removed. The codemod will change default imports to named imports.
+
+  ```tsx
+  // v4
+  import Button from '@workday/canvas-kit-react-button';
+
+  // v5
+  import {SecondaryButton} from '@workday/canvas-kit-react/button';
+  ```
+
+#### Enums
+
+Enums have been removed from all buttons in favor of string literals.
+
+🤖 The codemod will rewrite any usages of an enum to the string literal. If you used an enum as a
+type, the codemod will expand to a union of string literals. You could change the union manually
+instead to be something like `SecondaryButtonProps['variant']` if you prefer not to duplicate the
+union of string literals.
+
+```tsx
+// v4
+<Button size={Button.Size.Large} />;
+interface Props {
+  size: ButtonSize;
+}
+
+// v5
+<SecondaryButton size="large" />;
+interface Props {
+  size: 'small' | 'medium' | 'large';
+}
+```
+
+#### createComponent
+
+Buttons now use the `createComponent` utility from the `common` module which forwards `ref` and
+allows `as` to change the underlying element.
+
+```tsx
+// v4
+<Button buttonRef={ref} />;
+
+// v5
+<SecondaryButton ref={ref} />;
+```
+
+🤖 The codemod will update all buttons to use `ref` instead of `buttonRef`.
+
+Button prop interfaces no longer extend directly from
+`React.ButtonHTMLAttributes<HTMLButtonElement>`. `createComponent` returns a component that
+determines the element interface via the `as` prop. This is why Button props no longer contain an
+element interface directly. If you extend from a Button prop interface, or have code that uses a
+Button prop interface and accesses properties like `onClick`, you'll need to provide the button
+attribute yourself in order to avoid TypeScript issues (this doesn't affect runtime). This is not
+code-moddable since intent cannot be pre-determined.
+
+```tsx
+interface MyButtonProps extends ButtonProps {}
+
+// onClick no longer exists in `ButtonProps`, so TypeScript will complain about onClick not
+// existing in `MyButtonProps` (`onClick` does exist as a prop on `<Button>`, however)
+const MyButton = ({children, onClick}: MyButtonProps) => (
+  <Button onClick={onClick}>{children}</Button>
+);
+
+// After
+interface MyButtonProps extends ButtonProps, React.ButtonHTMLAttributes<HTMLButtonElement> {}
+
+// After (alternate fix)
+interface MyButtonProps extends ButtonProps {
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+}
+```
+
+---
+
+### Card
+
+Card is now a [compound component](./COMPOUND_COMPONENTS.mdx) composed of a `Card.Body` and an
+optional `Card.Heading`. This allows direct access to the heading and body elements.
+
+```tsx
+// v4
+<Card header="Card Title" headerId="header-id">
+  Card Body
+</Card>
+
+// v5
+<Card>
+  <Card.Heading id="header-id">Card Title</Card.Heading>
+  <Card.Body>Card Body</Card.Body>
+</Card>
+```
+
+🤖 The codemod will attempt to rewrite your JSX to match the new API. Based on what we've seen of
+how Card has been used, the codemod should handle most of your use cases. It will work if you rename
+`Card` in the import or style the Card using `styled(Card)`:
+
+```tsx
+// Handled by the codemod
+
+// Default import
+import Card from '@workday/canvas-kit-react-card'
+
+<Card header="Card Title">Card Body</Card>
+
+// Renamed import
+import {Card as CanvasCard} from '@workday/canvas-kit-react-card'
+
+<CanvasCard header="Card Title">Card Body</CanvasCard>
+
+// Styled card
+import {Card} from '@workday/canvas-kit-react-card'
+
+const StyledCard = styled(Card)(styles)
+
+<StyledCard header="Card Title">Card Body</StyledCard>
+```
+
+However, the codemod will _not_ work in cases where `header` or `headerId` are spreaded as props or
+if you're importing a re-exported Canvas Kit Card:
+
+```tsx
+// NOT handled by the codemod
+
+// Spread props
+import {Card} from '@workday-canvas-kit-card'
+
+const props = {
+  header: 'Card Title'
+}
+<Card {...props}>Card Body</Card>
+
+// Re-exporting
+import {Card} from './Card' // where `Card` is a re-exported Canvas Kit `Card`
+```
+
+---
+
+### Inputs
+
+All input components in the Main package now support
+[ref forwarding](https://reactjs.org/docs/forwarding-refs.html) through use of the `createComponent`
+utility from the `common` module. This includes:
+
+- Checkbox
+- Color Input
+- Color Preview
+- Radio
+- Select
+- Switch
+- Text Input
+- Text Area
+
+Additionally, the Select in Preview (formerly in Labs) has also been updated to support ref
+forwarding.
+
+Most of these input components previously supported an `inputRef` prop that could be used to obtain
+a ref to the component's underlying input element. For example, in v4, if you wanted to obtain a ref
+to a Text Input's underlying `<input type="text" />` element, you could pass a ref to the component
+using `inputRef`. In v5, you'll need to use `ref` instead of `inputRef`:
+
+```tsx
+const ref = React.useRef(null);
+
+// v4
+<TextInput inputRef={ref} />;
+
+// v5
+<TextInput ref={ref} />;
+```
+
+🤖 The codemod will update all input components that previously supported `inputRef` to use `ref`
+instead.
+
+For components that previously supported `inputRef`, `ref` is now forwarded to the same underlying
+element that `inputRef` was applied to previously. Select and Select (Preview) did not support
+`inputRef` in v4, but now support `ref` in v5. See each component's documentation for information on
+which element `ref` is forwarded to for that particular component.
+
+Input component prop interfaces no longer extend directly from their underlying element interface
+(e.g., `TextInputProps` no longer extends from `React.InputHTMLAttributes<HTMLInputElement>`).
+`createComponent` returns a component that determines the element interface via the `as` prop. This
+is why input component props no longer contain an element interface directly. If you extend from an
+input component prop interface, or have code that uses an input component prop interface and
+accesses properties like `onClick`, you'll need to provide the input attribute yourself in order to
+avoid TypeScript issues (this doesn't affect runtime). This is not code-moddable since intent cannot
+be pre-determined.
+
+```tsx
+interface MyTextInputProps extends TextInputProps {}
+
+// onClick no longer exists in `TextInputProps` so TypeScript will complain about onClick not
+// existing in `MyTextInputProps` (onClick does exist as a prop on `<TextInput>`, however)
+const MyTextInput = ({onClick}: MyTextInputProps) => <TextInput onClick={onClick} />;
+
+// Fix
+interface MyTextInputProps extends TextInputProps, React.InputHTMLAttributes<HTMLInputElement> {}
+
+// Alternate fix
+interface MyTextInputProps extends TextInputProps {
+  onClick?: React.MouseEventHandler<HTMLInputElement>;
+}
+```
+
+As a final note, the following input components were previously class components and, thus,
+technically supported the `ref` attribute in v4:
+
+- Color Input
+- Color Preview
+- Select
+- Select (Preview)
+- Text Input
+- Text Area
+
+Passing `ref={ref}` to any of these components in v4 would have set `ref.current` to the mounted
+instance of the entire component
+([source](https://reactjs.org/docs/refs-and-the-dom.html#accessing-refs)) rather than the underlying
+HTML element represented by the component. This is no longer the case in v5.
+
+---
+
+### Tabs
+
+In addition to [promoting Tabs](#promotions-from-labs-to-main) out of Labs and into the Main module,
+we've made a few updates to the component in v5:
+
+- `onTabsChange` is now `onActivateTab` and the signature is now:
+  ```tsx
+  function onActivateTab({data: {tab: string}, state: TabsState}): void;
+  ```
+- The `Tabs` component no longer accepts the `currentTab` property. Tabs uses a model now. See the
+  component documentation for more details.
+
+---
+
+### Popper
+
+In v4, Popper rendered an empty `div` element as a child of the element created by the `PopupStack`
+and applied `ref` and `elemProps` (extra props) to that `div` element.
+
+We've updated Popper in v5 to instead apply `ref` directly to the element created by the
+`PopupStack`. The `PopupStack` is not React-specific; there is no easy way to spread extra props to
+this element as we do for other components, so we've discarded `elemProps`. If necessary, you can
+still target the element using `ref` and modify it using DOM APIs.
+
+There is no codemod for this change.
+
+---
+
+### Popups
+
+Popup has transitioned to a [compound component](./COMPOUND_COMPONENTS.mdx), along with all
+Popup-based behavior hooks. What was a `Popup` in v4 is now a `Popup.Card` in v5. The target button
+and `Popper` components have also been converted to subcomponents of `Popup`.
+
+#### v4
+
+```tsx
+import React from 'react';
+
+import {Button, DeleteButton} from '@workday/canvas-kit-react-button';
+import {
+  Popper,
+  Popup,
+  usePopup,
+  useCloseOnEscape,
+  useCloseOnOutsideClick,
+} from '@workday/canvas-kit-react-popup';
+
+export const MyPopup = () => {
+  const {targetProps, closePopup, popperProps, stackRef} = usePopup();
+
+  useCloseOnOutsideClick(stackRef, closePopup);
+  useCloseOnEscape(stackRef, closePopup);
+
+  const onDeleteClick = () => {
+    closePopup();
+    console.log('Delete');
+  };
+
+  return (
+    <>
+      <DeleteButton {...targetProps}>Delete Item</DeleteButton>
+      <Popper placement={'bottom'} {...popperProps}>
+        <Popup
+          width={400}
+          heading={'Delete Item'}
+          padding={Popup.Padding.s}
+          handleClose={closePopup}
+        >
+          <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
+
+          <DeleteButton onClick={onDeleteClick}>Delete</DeleteButton>
+          <Button onClick={closePopup}>Cancel</Button>
+        </Popup>
+      </Popper>
+    </>
+  );
+};
+```
+
+#### v5
+
+```tsx
+import React from 'react';
+
+import {DeleteButton} from '@workday/canvas-kit-react/button';
+import {
+  Popup,
+  usePopupModel,
+  useCloseOnEscape,
+  useCloseOnOutsideClick,
+  useInitialFocus,
+  useReturnFocus,
+} from '@workday/canvas-kit-react/popup';
+
+export const MyPopup = () => {
+  const model = usePopupModel();
+
+  useCloseOnOutsideClick(model);
+  useCloseOnEscape(model);
+  useInitialFocus(model); // new
+  useReturnFocus(model); // new
+
+  const onDeleteClick = () => {
+    console.log('Delete');
+  };
+
+  return (
+    <Popup model={model}>
+      <Popup.Target as={DeleteButton}>Delete Item</Popup.Target>
+      <Popup.Popper placement={'bottom'}>
+        <Popup.Card width={400} padding="s">
+          <Popup.CloseIcon aria-label="Close" />
+          <Popup.Heading>Delete Item</Popup.Heading>
+          <Popup.Body>
+            <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
+
+            <Popup.CloseButton as={DeleteButton} onClick={onDeleteClick}>
+              Delete
+            </Popup.CloseButton>
+            <Popup.CloseButton>Cancel</Popup.CloseButton>
+          </Popup.Body>
+        </Popup.Card>
+      </Popup.Popper>
+    </Popup>
+  );
+};
+```
+
+Most notably, `Popup` is now a container component that takes a `PopupModel` and has several
+subcomponents like `Popup.Target` and `Popup.CloseButton`. These components are hooked up to the
+`PopupModel` via React context and have access to state and events. `Popup.Card` is what the v4
+`Popup` once was.
+
+All behavior hooks, like `useCloseOnEscape` now take a `model` instead of variable parameters. This
+allowed us to fix some subtle bugs. Using the `PopupModel` means all hooks have access to all Popup
+state and events without passing in many parameters.
+
+#### usePopup and usePopupModel
+
+As shown in the example above, `usePopupModel` should now be used instead of `usePopup`. All
+subcomponents have an associated behavior hook. For example, `Popup.Target` uses a hook called
+`usePopupTarget`. If you need to use your own components for any reason, these hooks are available.
+`Popup.Target` and `Popup.CloseButton` do not include any styling. They both render
+`SecondaryButton` by default. You can change this via the `as` prop. For example, the following will
+render an unstyled button:
+
+```tsx
+<Popup.Target as="button">Show</Popup.Target>
+```
+
+Pass a `css` prop or a styled button instead to have a custom styled button. You could even pass
+`IconButton` if you need an icon button to show a Popup instead!
+
+If you were using `usePopup` before, here's a list of equivalent APIs:
+
+| Before                                                                  | After                                 |
+| ----------------------------------------------------------------------- | ------------------------------------- |
+| `const { popperProps, targetProps, closePopup, stackRef } = usePopup()` | `const model = usePopupModel()`       |
+| `popperProps.open`                                                      | `model.state.visibility !== 'hidden'` |
+| `closePopup()`                                                          | `model.events.hide()`                 |
+| `stackRef` or `popperProps.ref`                                         | `model.state.stackRef`                |
+| `popperProps.anchorElement`                                             | `model.state.targetRef.current`       |
+| `targetProps.onClick`                                                   | `usePopupTarget(model).onClick`       |
+
+#### New Focus Management
+
+A common theme we noticed in uses of Popup in the wild was focus management. Developers were
+manually passing a `ref` to the target button element and manually returning focus to it when
+closing the Popup. This use case should now be handled by the new `useReturnFocus` hook. By default,
+`useReturnFocus` will return focus to the `targetRef` in the model, which is set by `Popup.Target`.
+This can be overridden by passing `returnFocusRef` to the model on creation. `returnFocusRef` should
+make your migration easier if `Popup.Target` cannot be used for whatever reason.
+
+```tsx
+// before
+const {closePopup} = usePopup();
+
+// passed to some event handler
+const closeAndReturnFocus = () => {
+  closePopup();
+  buttonRef.current.focus();
+};
+
+// after
+const model = usePopupModel({
+  returnFocusRef: buttonRef, // only use if you cannot use `Popup.Target`
+});
+
+useReturnFocus(model);
+```
+
+Another common use case involved focusing something within the Popup when the Popup was shown. The
+`useInitialFocus` hook was created for this purpose. `useInitialFocus` will set focus to the first
+focusable element when the Popup becomes visible. This behavior can be overridden by passing
+`initialFocusRef` to the model.
+
+```tsx
+// before
+const {stackRef, popperProps} = usePopup();
+
+useLayoutEffect(() => {
+  if (!open) {
+    return;
+  }
+
+  stackRef.current.querySelector('input,...').focus();
+}, [popperProps.open]);
+
+// after
+const model = usePopupModel({
+  initialFocusRef: someRef, // only use if you want to explicitly focus on something. Could be useful for an input.
+});
+
+useInitialFocus(model);
+```
+
+#### Managing Positioning
+
+If you'd prefer to manage positioning yourself, you can use `Popup.Card` on its own. Without the
+model and behaviors, the following is equivalent:
+
+```tsx
+// v4
+<Popup width={width} handleClose={onClose} heading="Popup Heading">
+  Popup Content
+</Popup>
+
+// v5
+<Popup.Card with={width}>
+  <Popup.CloseIcon aria-label="Close" onClick={onClose} />
+  <Popup.Heading>Popup Heading</Popup.Heading>
+  <Popup.Body>Popup Content</Popup.Body>
+</Popup.Card>
+```
+
+`Popup.Card` uses `Card`, which is now using `Box`. Consequently, the following props have changed:
+
+| Before                         | After                                      |
+| ------------------------------ | ------------------------------------------ |
+| `padding={Popup.Padding.zero}` | `padding="zero"` or `padding={space.zero}` |
+| `depth={depth[0]}`             | `depth={0}`                                |
+| `popupRef={ref}`               | `ref={ref}`                                |
+
+#### Transitioning
+
+We noticed Popups were used in two different ways: always rendering and conditional rendering.
+
+```tsx
+// Always rendering
+const MyPopup = () => {
+  const targetRef = React.useRef(null)
+  const {stackRef, popperProps, targetProps, closePopup} = usePopup()
+
+  const handleClose = () => {
+    closePopup()
+    targetRef.current.focus() // focus back on target
+  }
+
+  useCloseOnEscape(stackRef, handleClose)
+
+  return (
+    <>
+      <button ref={targetRef} {...targetProps}>Open</button>
+      <Popper {...popperProps}>
+        <Popup>
+          {/* content */}
+          <button onClick={handleClose}>Close</button>
+        </Popup>
+      </Popper>
+    </>
+  )
+}
+
+// Conditional rendering
+const MyOpenPopup = ({onClose, targetRef}) => {
+  const {popperProps, closePopup} = usePopup()
+
+  const handleClose = () => {
+    onClose()
+    closePopup()
+    targetRef.current.focus() // focus back on target
+  }
+
+  useCloseOnEscape(stackRef, handleClose)
+
+  return (
+    <Popper {...popperProps}>
+      <Popup>
+        {/* content */}
+        <button onClick={handleClose}>
+      </Popup>
+    </Popper>
+  )
+}
+
+const MyPopup = () => {
+  const targetRef = React.useRef(null)
+  const [open, setOpen] = React.useState(false)
+
+  const onClose = () => {
+    setOpen(false)
+  }
+
+  return (
+    <>
+      <button ref={targetRef} onClick={() => { setOpen(true) }}>
+      {open && <MyOpenPopup onClose={onClose} />}
+    </>
+  )
+}
+```
+
+The difference between the two is subtle, but in the always rendering example, the `usePopup` hook
+runs on every render. In the conditional rendering example, the `usePopup` hook only runs when
+`MyPopup` renders it. This means hooks like `useCloseOnEscape` need to function properly in both
+cases, but `open` is not passed to the hook. This caused subtle bugs. Now, `useCloseOnEscape` is
+passed a `PopupModel` which has access to the popup's visible state. `useCloseOnEscape` will now
+only run when the popup is visible, but this means the conditional rendering example will have to do
+extra work because the `target` is out of scope of the `MyOpenPopup` component. The following is
+equivalent to the example in v5:
+
+```tsx
+const MyOpenPopup = ({onClose, targetRef}) => {
+  const model = usePopupModel({
+    initialVisibility: 'visible', // needed for `useCloseOnEscape` and other hooks
+    returnFocusRef: targetRef, // determines where return focus goes
+  })
+
+  useCloseOnEscape(model)
+  useReturnFocus(model) // handles return focus
+
+  return (
+    <Popup>
+      <Popup.Popper>
+        <Popup.Card>
+          {/* content */}
+          <Popup.CloseButton as="button">Close</Popup.CloseButton>
+        </Popup>
+      </Popper>
+    </Popup>
+  )
+}
+
+const MyPopup = () => {
+  const targetRef = React.useRef(null)
+  const [open, setOpen] = React.useState(false)
+
+  const onClose = () => {
+    setOpen(false)
+  }
+
+  return (
+    <>
+      <button ref={targetRef} onClick={() => { setOpen(true) }}>
+      {open && <MyOpenPopup onClose={onClose} />}
+    </>
+  )
+}
+```
+
+---
+
+### Modal
+
+Modal has transitioned to a [compound component](./COMPOUND_COMPONENTS.mdx). What was `Modal` in v4
+is now `Modal.Card` in v5.
+
+#### v4
+
+```tsx
+import React from 'react';
+
+import {Modal} from '@workday/canvas-kit-react-modal';
+import {DeleteButton, Button} from '@workday/canvas-kit-react-button';
+
+const MyModal = () => {
+  const handleDelete = () => {
+    console.log('Deleted item');
+  };
+
+  const {targetProps, modalProps, closeModal} = useModal();
+
+  return (
+    <>
+      <DeleteButton {...targetProps}>Delete Item</DeleteButton>
+      <Modal heading={'Delete Item'} {...modalProps}>
+        <p>Are you sure you want to delete the item?</p>
+        <DeleteButton
+          style={{marginRight: '16px'}}
+          onClick={() => {
+            closeModal();
+            handleDelete();
+          }}
+        >
+          Delete
+        </DeleteButton>
+        <Button onClick={closeModal} variant={Button.Variant.Secondary}>
+          Cancel
+        </Button>
+      </Modal>
+    </>
+  );
+};
+```
+
+#### v5
+
+```tsx
+import React from 'react';
+
+import {Modal} from '@workday/canvas-kit-react/modal';
+import {DeleteButton} from '@workday/canvas-kit-react/button';
+import {HStack} from '@workday/canvas-kit-labs-react';
+
+const MyModal = () => {
+  const handleDelete = () => {
+    console.log('Deleted item');
+  };
+
+  return (
+    <Modal>
+      <Modal.Target as={DeleteButton}>Delete Item</Modal.Target>
+      <Modal.Overlay>
+        <Modal.Card>
+          <Modal.CloseIcon aria-label="Close" />
+          <Modal.Heading>Delete Item</Modal.Heading>
+          <Modal.Body>
+            <p>Are you sure you want to delete the item?</p>
+            <HStack spacing="s">
+              <Modal.CloseButton as={DeleteButton} onClick={handleDelete}>
+                Delete
+              </Modal.CloseButton>
+              <Modal.CloseButton>Cancel</Modal.CloseButton>
+            </HStack>
+          </Modal.Body>
+        </Modal.Card>
+      </Modal.Overlay>
+    </Modal>
+  );
+};
+```
+
+Most notably, `Modal` is now a container component that takes a `ModalModel` and has several
+subcomponents. `Modal` looks much like the structure of [Popups](#popups), except `Modal` has a
+`Modal.Overlay` subcomponent instead of a `Popup.Popper` component. The `Modal.Overlay` is the
+component in charge of adding an element to the `PopupStack`.
+
+We noticed some application code that do custom focus management. There were some subtle issues like
+#694 (VoiceOver on iOS not returning focus). v5 introduced focus management behaviors like
+`useInitialFocus` and `useReturnFocus` that should work more consistently. Most of the special focus
+management code could be removed when using v5 the `Modal`.
+
+#### useModal and useModalModel
+
+As shown in the example above, `useModal` has been removed. The `Modal` container component will
+provide a pre-configured `PopupModel` via the `useModalModel` function. In v4, `useModal` returned a
+`closeModal` callback function that you'd call to close the `Modal`. In v5, `Modal.CloseButton`
+takes care of this for you. If you need to close the `Modal` outside a button, you can hoist the
+model and use the model's `hide` event:
+
+```tsx
+// v4
+const {closeModal} = useModal();
+
+// somewhere in your code
+closeModal();
+
+// v5
+const model = useModalModel();
+
+// somewhere in your code
+model.events.hide();
+```
+
+#### handleClose
+
+In v4, `Modal` took a `handleClose` that doubled as a switch to show a close icon and a switch for
+modal closing for the Escape key and clicking outside the `Modal`. In v5, the `Modal.CloseIcon`
+subcomponent controls the rendering of the icon. If you need to disable the Escape key or clicking
+outside the `Modal`, you'll have to create your own `PopupModel` instead and pass that to the
+`Modal` container component.
+
+```tsx
+const model = usePopupModel(); // not `useModalModel`
+
+// disable useCloseOnEscape and useCloseOnOverlayClick
+useInitialFocus(model);
+useReturnFocus(model);
+useFocusTrap(model);
+useAssistiveHideSiblings(model);
+useDisableBodyScroll(model);
+
+return <Modal model={model}>{/* ... */}</Modal>;
+```
+
+---
+
+### Skeleton
+
+Skeleton was already implemented as a compound component in v4, but we've made changes to its
+imports and to its animation in v5.
+
+The imports for its subcomponents in v4 (`SkeletonHeader`, `SkeletonText`, and `SkeletonShape`) have
+been converted to keys on `Skeleton` in v5 (`Skeleton.Header`, `Skeleton.Text`, and
+`Skeleton.Shape`). You only need to import the `Skeleton` component in v5, and you may still compose
+your own Skeleton using whatever parts you need.
+
+```tsx
+// v4
+import {
+  Skeleton,
+  SkeletonHeader,
+  SkeletonShape,
+  SkeletonText,
+} from '@workday/canvas-kit-react/skeleton';
+const MySkeleton = () => (
+  <Skeleton>
+    <SkeletonHeader />
+    <SkeletonText />
+    <SkeletonShape width={40} height={40} />
+  </Skeleton>
+);
+
+// v5
+import {Skeleton} from '@workday/canvas-kit-react/skeleton';
+const MySkeleton = () => (
+  <Skeleton>
+    <Skeleton.Header />
+    <Skeleton.Text />
+    <Skeleton.Shape width={40} height={40} />
+  </Skeleton>
+);
+```
+
+Additionally, the Skeleton animation has been updated from a diagonal sheen, or shimmer, to fading
+the opacity of the entire shape(s) in and out.

@@ -8,13 +8,13 @@ describe('Switch', () => {
   before(() => {
     h.stories.visit();
   });
-  ['Default', 'Alert', 'Error'].forEach(story => {
+  ['Basic', 'Alert', 'Error'].forEach(story => {
     context(`given the '${story}' story is rendered`, () => {
       beforeEach(() => {
-        h.stories.load('Components/Inputs/Switch/React/Top Label', story);
+        h.stories.load('Components/Inputs/Switch/React', story);
       });
 
-      it('should pass accessibility checks', () => {
+      it('should not have any axe errors', () => {
         cy.checkA11y();
       });
 
@@ -32,10 +32,10 @@ describe('Switch', () => {
 
   context(`given the 'Disabled' story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Components/Inputs/Switch/React/Top Label', 'Disabled');
+      h.stories.load('Components/Inputs/Switch/React', 'Disabled');
     });
 
-    it('should pass accessibility checks', () => {
+    it('should not have any axe errors', () => {
       cy.checkA11y();
     });
 
