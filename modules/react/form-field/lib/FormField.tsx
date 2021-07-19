@@ -66,14 +66,12 @@ export interface FormFieldErrorBehavior {
 }
 
 // Use a fieldset element for accessible radio groups
-const FormFieldFieldsetContainer = styled('fieldset')<FormFieldLabelPositionBehavior>(
-  ({labelPosition}) => ({
-    display: labelPosition === FormFieldLabelPosition.Left ? 'inline-block' : undefined,
-    padding: 0,
-    margin: 0,
-    border: 0,
-  })
-);
+const FormFieldFieldsetContainer = styled('fieldset')<FormFieldLabelPositionBehavior>({
+  display: 'inline-flex',
+  padding: 0,
+  margin: 0,
+  border: 0,
+});
 
 const FormFieldContainer = styled('div')<FormFieldLabelPositionBehavior>(({labelPosition}) => {
   if (labelPosition === FormFieldLabelPosition.Left) {
