@@ -98,7 +98,7 @@ const AutocompleteList = ({
   } else if (autocompleteItems[0].hasOwnProperty('header')) {
     let itemIndex = 0;
     return (
-      <Autocomplete {...listBoxProps} tabIndex={0}>
+      <Autocomplete {...listBoxProps}>
         {(autocompleteItems as ComboBoxMenuItemGroup[]).map(({header, items}, groupIndex) => {
           const groupLabel = `itemGroup-${componentId}-${groupIndex}`;
           return (
