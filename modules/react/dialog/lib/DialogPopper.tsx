@@ -5,7 +5,7 @@ import {Popup, PopupModelContext, usePopupPopper, Popper} from '@workday/canvas-
 
 import {useDialogPopper} from './hooks';
 
-export interface DialogPopupProps extends ExtractProps<typeof Popup.Popper> {}
+export interface DialogPopupProps extends ExtractProps<typeof Popup.Popper, never> {}
 
 export const DialogPopper = createComponent('div')({
   displayName: 'Dialog.Popper',

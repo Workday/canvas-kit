@@ -14,6 +14,7 @@ const {
 } = process.env;
 
 const isPrerelease = TRAVIS_BRANCH.match(/^prerelease\/v\d*$/g);
+const isSupport = TRAVIS_BRANCH.match(/^support\/v\d*$/g);
 const data = {};
 
 let distTag;
@@ -25,6 +26,8 @@ if (TRAVIS_BRANCH === 'master') {
   distTag = 'prerelease-next';
   // console.error('Prerelease canary builds disabled.');
   // process.exit(0);
+} else if (isSupport) {
+  distTag = 'support-next';
 } else {
   console.error('No travis branch provided');
   process.exit(1);
