@@ -48,7 +48,7 @@ const createTextLines = (lineCount: number, backgroundColor: string) => {
   ));
 };
 
-const SkeletonText = createComponent('div')({
+export const SkeletonText = createComponent('div')({
   displayName: 'Skeleton.Text',
   Component: (
     {backgroundColor = colors.soap200, lineCount = 2, ...elemProps}: SkeletonTextProps,
@@ -61,5 +61,3 @@ const SkeletonText = createComponent('div')({
       </TextContainer>
     ),
 });
-
-export default SkeletonText;

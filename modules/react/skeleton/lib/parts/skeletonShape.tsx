@@ -37,7 +37,7 @@ const Shape = styled('div')<SkeletonShapeProps & StyledType>(
   })
 );
 
-const SkeletonShape = createComponent('div')({
+export const SkeletonShape = createComponent('div')({
   displayName: 'Skeleton.Shape',
   Component: (
     {
@@ -61,5 +61,3 @@ const SkeletonShape = createComponent('div')({
     />
   ),
 });
-
-export default SkeletonShape;

@@ -3,7 +3,7 @@ import * as React from 'react';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {borderRadius, colors} from '@workday/canvas-kit-react/tokens';
 
-import SkeletonShape from './skeletonShape';
+import {SkeletonShape} from './skeletonShape';
 
 export interface SkeletonHeaderProps {
   /**
@@ -23,7 +23,7 @@ export interface SkeletonHeaderProps {
   width?: number | string;
 }
 
-const SkeletonHeader = createComponent('div')({
+export const SkeletonHeader = createComponent('div')({
   displayName: 'Skeleton.Header',
   Component: (
     {
@@ -46,5 +46,3 @@ const SkeletonHeader = createComponent('div')({
     />
   ),
 });
-
-export default SkeletonHeader;
