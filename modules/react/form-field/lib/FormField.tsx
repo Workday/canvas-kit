@@ -68,6 +68,7 @@ export interface FormFieldErrorBehavior {
 // Use a fieldset element for accessible radio groups
 const FormFieldFieldsetContainer = styled('fieldset')<FormFieldLabelPositionBehavior>({
   display: 'inline-flex',
+  // @ts-ignore TS doesn't like duplicate styles, inline-flex is a fallback for display contents
   display: 'contents',
   padding: 0,
   margin: 0,
