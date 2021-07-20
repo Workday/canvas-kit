@@ -2,8 +2,7 @@ import * as React from 'react';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {GenericStyle, PickRequired} from '@workday/canvas-kit-react/common';
-import {borderRadius, colors, type, space} from '@workday/canvas-kit-react/tokens';
-import {CSSObject} from '@emotion/core';
+import {borderRadius, colors, type, space, CSSProperties} from '@workday/canvas-kit-react/tokens';
 import styled from '@emotion/styled';
 
 export enum StatusIndicatorType {
@@ -21,10 +20,10 @@ export enum StatusIndicatorEmphasis {
 }
 
 export interface StatusIndicatorGenericStyle extends GenericStyle {
-  styles: CSSObject & React.CSSProperties;
+  styles: CSSProperties;
   variants: {
     [statusType in StatusIndicatorType]: {
-      [statusEmphasis in StatusIndicatorEmphasis]?: CSSObject & React.CSSProperties;
+      [statusEmphasis in StatusIndicatorEmphasis]?: CSSProperties;
     };
   };
 }
