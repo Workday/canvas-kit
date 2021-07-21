@@ -5,8 +5,8 @@ import {Skeleton} from '@workday/canvas-kit-react/skeleton';
 import {Basic} from './examples/Basic';
 import {Color} from './examples/Color';
 import {Header} from './examples/Header';
-import {NonSkeletonChildren} from './examples/NonSkeletonChildren';
 import {Shape} from './examples/Shape';
+import {Simulation} from './examples/Simulation';
 import {Text} from './examples/Text';
 
 <Meta title="Components/Indicators/Skeleton/React" component={Skeleton} />
@@ -14,8 +14,8 @@ import {Text} from './examples/Text';
 # Canvas Kit Skeleton
 
 A Skeleton is a low-fidelity visual placeholder that represents the loading of interface elements
-before they have displayed on the page. Appearing as a blank version of the page, it mitigates focus
-on the loading process and improves the user’s perceived load time.
+before they have displayed on the page. Appearing as a blank version of the incoming content, it
+mitigates focus on the loading process and improves the user’s perceived load time.
 
 [> Workday Design Reference](https://design.workday.com/components/indicators/skeleton-loader)
 
@@ -33,12 +33,19 @@ Skeleton includes a container component (`Skeleton`) as well as a number of subc
 (`Skeleton.Header`, `Skeleton.Text`, and `Skeleton.Shape`) which can be used as placeholders for
 different types of content.
 
-Here's an example of how Skeleton components can be combined to create a loading placeholder for
-Card content. Press the **Simulate Loading** button to simulate the loading of the content
-(customize the loading time using the **Load Time** field), or check the **Loading** check box to
-force the Skeleton to display.
+Here's an example of how you might compose Skeleton components (along with non-Skeleton components
+such as `Box` and `Flex`) to create a loading placeholder for a piece of content comprised of an
+icon, a heading, and some text.
 
 <ExampleCodeBlock code={Basic} />
+
+And here's an example that simulates how that Skeleton might work in practice.
+
+<ExampleCodeBlock code={Simulation} />
+
+Press the **Simulate Loading** button to simulate the loading of the content (customize the loading
+time using the **Load Time** field), or check the **Loading** check box to force the Skeleton to
+display.
 
 ### Color
 
@@ -46,13 +53,6 @@ All Skeleton subcomponents accept a `backgroundColor` prop which can be used to 
 the subcomponent.
 
 <ExampleCodeBlock code={Color} />
-
-### Non-Skeleton Children
-
-Note that non-Skeleton components can be included as children of the `Skeleton` container component
-if you'd like to customize your Skeleton further.
-
-<ExampleCodeBlock code={NonSkeletonChildren} />
 
 ## Components
 

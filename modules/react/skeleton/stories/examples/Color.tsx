@@ -14,7 +14,7 @@ export const Color = () => {
           borderRadius={borderRadius.circle}
           backgroundColor={colors.berrySmoothie100}
         />
-        <Box marginLeft="xs" width={100}>
+        <Box flex={1} marginLeft="xs">
           <Skeleton.Header backgroundColor={colors.cantaloupe100} />
         </Box>
       </Flex>
