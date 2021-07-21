@@ -5,7 +5,7 @@ import {Popup, PopupModelContext} from '@workday/canvas-kit-react/popup';
 
 import {useDialogCard} from './hooks';
 
-export interface DialogPopupProps extends ExtractProps<typeof Popup.Popper> {}
+export interface DialogPopupProps extends ExtractProps<typeof Popup.Popper, never> {}
 
 export const DialogCard = createComponent('div')({
   displayName: 'Dialog.Card',

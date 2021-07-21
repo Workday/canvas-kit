@@ -15,7 +15,7 @@ import {usePopupCloseButton, PopupModel, PopupModelContext} from './hooks';
 const closeIconSpacing = 11;
 const closeIconSpacingSmall = 9;
 
-export interface PopupCloseIconProps extends ExtractProps<typeof IconButton> {
+export interface PopupCloseIconProps extends ExtractProps<typeof IconButton, never> {
   /**
    * Optionally pass a model directly to this component. Default is to implicitly use the same
    * model as the container component which uses React context. Only use this for advanced use-cases
@@ -23,7 +23,7 @@ export interface PopupCloseIconProps extends ExtractProps<typeof IconButton> {
   model?: PopupModel;
 }
 
-const StyledCloseIcon = styled(IconButton)<StyledType & ExtractProps<typeof IconButton>>(
+const StyledCloseIcon = styled(IconButton)<StyledType & PopupCloseIconProps>(
   {
     position: 'absolute',
   },
