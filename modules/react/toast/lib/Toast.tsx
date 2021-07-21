@@ -11,7 +11,7 @@ import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {createComponent, ExtractProps} from '@workday/canvas-kit-react/common';
 import {Hyperlink, HyperlinkProps} from '@workday/canvas-kit-react/button';
 
-export interface ToastProps extends ExtractProps<typeof Popup.Card> {
+export interface ToastProps extends ExtractProps<typeof Popup.Card, never> {
   /**
    * The icon of the Toast.
    * @default checkIcon

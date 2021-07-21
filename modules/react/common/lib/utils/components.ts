@@ -47,21 +47,66 @@ export type PropsWithAs<P, ElementType extends React.ElementType> = P &
   };
 
 /**
- * Extract props from any component that was created using `createComponent`.
+ * Extracts only the HTML attribute interface from `JSX.IntrinsicElements[E]`. This effectively removes `ref` and `key`
+ * without using `Omit` which makes the returned type more difficult to understand.
+ *
+ * For example:
+ * JSX.IntrinsicElements['button'] // React.ClassAttributes<HTMLButtonElement> & React.ButtonHTMLAttributes<HTMLButtonElement>
+ * ExtractHTMLAttributes<JSX.IntrinsicElements['button']> // React.HTMLButtonAttributes<HTMLButtonElement>
+ */
+type ExtractHTMLAttributes<
+  T extends React.DetailedHTMLProps<any, any>
+> = T extends React.DetailedHTMLProps<infer P, any> ? P : T;
+
+// Prettier messes up comments when `ts-ignore` is involved: https://github.com/prettier/prettier/issues/5411
+// prettier-ignore
+/**
+ * Extract props from any component that was created using `createComponent`. It will return the
+ * HTML attribute interface of the default element used with `createComponent`. If you use `as`, the
+ * HTML attribute interface can change, so you can use an override to the element you wish to use.
+ * You can also disable the HTML attribute by passing `never`:
+ *
+ * - `ExtractProps<typeof Card>`: `React.ClassAttributes<HTMLDivElement> &
+ *   React.HTMLAttributes<HTMLDivElement> & CardProps`
+ * - `ExtractProps<typeof Card, 'aside'>`: `React.ClassAttributes<HTMLElement> &
+ *   React.HTMLAttributes<HTMLElement> & CardProps`
+ * - `ExtractProps<typeof Card, never>`: `CardProps`
+ *
+ * @template TComponent The component you wish to extract props from. Needs 'typeof` in front:
+ * `typeof Card`
+ * @template TElement An optional override of the element that will be used. Define this if you use
+ * an `as` on the component
+ *
  * @example
  * interface MyProps extends ExtractProps<typeof Card.Body> {}
+ *
+ * ExtractProps<typeof Card>; // React.ClassAttributes<HTMLDivElement> & React.HTMLAttributes<HTMLDivElement> & CardProps
+ * ExtractProps<typeof Card, 'aside'>; // React.ClassAttributes<HTMLElement> & React.HTMLAttributes<HTMLElement> & CardProps
+ * ExtractProps<typeof Card, never>; // CardProps
  */
-export type ExtractProps<T> = T extends ElementComponent<any, infer P>
-  ? P
-  : T extends Component<infer P>
-  ? P
-  : {};
+export type ExtractProps<
+  TComponent,
+  TElement extends keyof JSX.IntrinsicElements | undefined | never = undefined
+> = TComponent extends ElementComponent<infer E, infer P> // test if `TComponent` is an `ElementComponent`, while inferring both default element and props associated
+  ? E extends keyof JSX.IntrinsicElements // test if the inferred element `E` is in JSX.IntrinsicElements
+    ? [TElement] extends [never] // test if user passed `never` for the `TElement` override. https://github.com/microsoft/TypeScript/issues/23182
+      ? P // if `TElement` was `never`, return only the inferred props `P`
+      : TElement extends undefined // else test if TElement was defined
+      ? ExtractHTMLAttributes<JSX.IntrinsicElements[E]> & P // `TElement` wasn't explicitly defined, so let's fall back to the inferred element's HTML attribute interface + props `P`
+      // TS thinks `TElement` cannot be an index type because of the `undefined`, but we've already ensured that can't happen, so we'll ignore that error
+      // @ts-ignore
+      : ExtractHTMLAttributes<JSX.IntrinsicElements[TElement]> & P // `TElement` was defined, so we'll return the HTML attribute interface + inferred `P` props
+    : P // E isn't in JSX.IntrinsicElements, we don't know what it is, so return the inferred props `P`
+  : TComponent extends Component<infer P> // test if `TComponent` is a `Component`, while inferring props `P`
+  ? P // it was a `Component`, return inferred props `P`
+  : {}; // `TComponent` does not extend either `ElementComponent` or `Component`, return an empty object
 
 /**
  * Component type that allows for `as` to change the element or component type.
  * Passing `as` will correctly change the allowed interface of the JSX element
  */
 export type ElementComponent<T extends React.ElementType, P> = {
+  __type: 'ElementComponent'; // used internally to distinguish between `ElementComponent` and `Component`
   <ElementType extends React.ElementType>(
     props: PropsWithAs<P, ElementType> & {
       /**
@@ -77,6 +122,7 @@ export type ElementComponent<T extends React.ElementType, P> = {
 };
 
 export type Component<P> = {
+  __type: 'Component'; // used internally to distinguish between `ElementComponent` and `Component`
   (props: P): JSX.Element;
   displayName?: string;
 };
