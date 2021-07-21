@@ -85,6 +85,13 @@ const FormFieldContainer = styled('div')<FormFieldLabelPositionBehavior & FormFi
       };
     }
 
+    if (labelPosition === FormFieldLabelPosition.Left) {
+      return {
+        display: 'flex',
+        marginBottom: space.m,
+      };
+    }
+
     return {
       display: 'block',
       marginBottom: space.m,
