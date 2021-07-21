@@ -66,28 +66,31 @@ export interface FormFieldErrorBehavior {
 }
 
 // Use a fieldset element for accessible radio groups
-const FormFieldFieldsetContainer = styled('fieldset')<FormFieldLabelPositionBehavior>({
-  display: 'inline-flex',
-  // @ts-ignore TS doesn't like duplicate styles, inline-flex is a fallback for display contents
-  display: 'contents',
+const FormFieldFieldsetContainer = styled('fieldset')<
+  GrowthBehavior & FormFieldLabelPositionBehavior
+>(({grow, labelPosition}) => ({
+  display: 'flex',
+  flexGrow: grow ? 1 : undefined,
   padding: 0,
   margin: 0,
+  marginBottom: space.m,
   border: 0,
-});
+}));
 
-const FormFieldContainer = styled('div')<FormFieldLabelPositionBehavior>(({labelPosition}) => {
-  if (labelPosition === FormFieldLabelPosition.Left) {
+const FormFieldContainer = styled('div')<FormFieldLabelPositionBehavior & FormFieldProps>(
+  ({labelPosition, useFieldset}) => {
+    if (useFieldset) {
+      return {
+        display: 'flex',
+      };
+    }
+
     return {
-      display: 'flex',
+      display: 'block',
       marginBottom: space.m,
     };
   }
-
-  return {
-    display: 'block',
-    marginBottom: space.m,
-  };
-});
+);
 
 const FormFieldInputContainer = styled('div')<GrowthBehavior & FormFieldLabelPositionBehavior>(
   ({grow, labelPosition}) => {
@@ -102,6 +105,7 @@ const FormFieldInputContainer = styled('div')<GrowthBehavior & FormFieldLabelPos
       }
 
       return {
+        width: '100%',
         display: 'block',
       };
     }
@@ -203,15 +207,15 @@ class FormField extends React.Component<FormFieldProps> {
 
     if (useFieldset) {
       return (
-        <FormFieldContainer labelPosition={labelPosition} {...elemProps}>
-          <FormFieldFieldsetContainer labelPosition={labelPosition}>
+        <FormFieldContainer useFieldset={useFieldset} labelPosition={labelPosition} {...elemProps}>
+          <FormFieldFieldsetContainer grow={grow} labelPosition={labelPosition}>
             {field}
           </FormFieldFieldsetContainer>
         </FormFieldContainer>
       );
     } else {
       return (
-        <FormFieldContainer labelPosition={labelPosition} {...elemProps}>
+        <FormFieldContainer useFieldset={useFieldset} labelPosition={labelPosition} {...elemProps}>
           {field}
         </FormFieldContainer>
       );
