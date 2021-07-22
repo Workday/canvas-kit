@@ -71,6 +71,7 @@ const FormFieldFieldsetContainer = styled('fieldset')<
 >(({grow, labelPosition}) => {
   if (labelPosition === FormFieldLabelPosition.Top) {
     return {
+      display: 'inline-block',
       flexGrow: grow ? 1 : undefined,
       padding: 0,
       margin: 0,
