@@ -4,11 +4,11 @@ import styled from '@emotion/styled';
 
 import {accessibleHide, createComponent, StyledType} from '@workday/canvas-kit-react/common';
 
-import SkeletonHeader from './parts/skeletonHeader';
-import SkeletonShape from './parts/skeletonShape';
-import SkeletonText from './parts/skeletonText';
+import {SkeletonHeader} from './parts/skeletonHeader';
+import {SkeletonShape} from './parts/skeletonShape';
+import {SkeletonText} from './parts/skeletonText';
 
-interface SkeletonProps {
+export interface SkeletonProps {
   /**
    * For accessibility reasons, `aria-label` is transformed into a text representation
    * (visually hidden, but announced by screen readers) of the loader.
