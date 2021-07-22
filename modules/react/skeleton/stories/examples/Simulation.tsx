@@ -62,9 +62,18 @@ export const Simulation = () => {
 
   return (
     <Box>
+      <Box marginBottom="l">
+        <FormField label="Load Time" labelPosition={FormField.LabelPosition.Left}>
+          <TextInput onChange={onChangeLoadTime} value={loadTime} />
+        </FormField>
+        <FormField label="Loading" labelPosition={FormField.LabelPosition.Left}>
+          <Checkbox checked={loading} onChange={onChangeLoading} />
+        </FormField>
+        <SecondaryButton onClick={resetTimeout}>Simulate Loading</SecondaryButton>
+      </Box>
       <Card>
         <Card.Body>
-          <Box minHeight={140} position="relative">
+          <Box minHeight={180} position="relative">
             {!loading && (
               <Box>
                 <Flex alignItems="center" display="inline-flex" marginBottom="s">
@@ -109,21 +118,12 @@ export const Simulation = () => {
                     <Skeleton.Header />
                   </Box>
                 </Flex>
-                <Skeleton.Text />
+                <Skeleton.Text lineCount={3} />
               </Skeleton>
             </Box>
           </Box>
         </Card.Body>
       </Card>
-      <Box marginTop="m">
-        <FormField label="Load Time" labelPosition={FormField.LabelPosition.Left}>
-          <TextInput onChange={onChangeLoadTime} value={loadTime} />
-        </FormField>
-        <FormField label="Loading" labelPosition={FormField.LabelPosition.Left}>
-          <Checkbox checked={loading} onChange={onChangeLoading} />
-        </FormField>
-        <SecondaryButton onClick={resetTimeout}>Simulate Loading</SecondaryButton>
-      </Box>
     </Box>
   );
 };
