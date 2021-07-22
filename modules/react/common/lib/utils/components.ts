@@ -66,10 +66,8 @@ type ExtractHTMLAttributes<
  * HTML attribute interface can change, so you can use an override to the element you wish to use.
  * You can also disable the HTML attribute by passing `never`:
  *
- * - `ExtractProps<typeof Card>`: `React.ClassAttributes<HTMLDivElement> &
- *   React.HTMLAttributes<HTMLDivElement> & CardProps`
- * - `ExtractProps<typeof Card, 'aside'>`: `React.ClassAttributes<HTMLElement> &
- *   React.HTMLAttributes<HTMLElement> & CardProps`
+ * - `ExtractProps<typeof Card>`: `React.HTMLAttributes<HTMLDivElement> & CardProps`
+ * - `ExtractProps<typeof Card, 'aside'>`: `React.HTMLAttributes<HTMLElement> & CardProps`
  * - `ExtractProps<typeof Card, never>`: `CardProps`
  *
  * @template TComponent The component you wish to extract props from. Needs 'typeof` in front:
