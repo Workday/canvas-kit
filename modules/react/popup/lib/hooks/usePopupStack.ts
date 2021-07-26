@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {PopupStack} from '@workday/canvas-kit-popup-stack';
-import {useLocalRef} from '@workday/canvas-kit-react/common';
+import {useLocalRef, useIsRTL} from '@workday/canvas-kit-react/common';
 
 /**
  * This hook should not be used directly. Use the `Popper` component instead.
@@ -42,6 +42,7 @@ export const usePopupStack = <E extends HTMLElement>(
   target?: HTMLElement | React.RefObject<HTMLElement>
 ): React.RefObject<HTMLElement> => {
   const {elementRef, localRef} = useLocalRef(ref);
+  const isRTL = useIsRTL();
 
   // useState function input ensures we only create a container once.
   const [popupRef] = React.useState(() => {
@@ -69,6 +70,16 @@ export const usePopupStack = <E extends HTMLElement>(
       PopupStack.remove(element);
     };
   }, [localRef, target, popupRef]);
+
+  // The direction will properly follow the theme via React context, but portals lose the `dir`
+  // hierarchy, so we'll add it back here.
+  React.useLayoutEffect(() => {
+    if (isRTL) {
+      localRef.current?.setAttribute('dir', 'rtl');
+    } else {
+      localRef.current?.removeAttribute('dir');
+    }
+  }, [localRef, isRTL]);
 
   return localRef;
 };
