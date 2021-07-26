@@ -108,7 +108,7 @@ export const PopupStates = withSnapshotsEnabled(() => (
   </StaticStates>
 ));
 
-export const PopupStatesRTL = withSnapshotsEnabled(() => {
+export const PopupRTL = withSnapshotsEnabled(() => {
   const model = usePopupModel({
     initialVisibility: 'visible',
   });
