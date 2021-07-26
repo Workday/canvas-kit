@@ -466,6 +466,7 @@ const Combobox = ({
             toggled={undefined}
             onClick={resetSearchInput}
             onBlur={handleBlur}
+            type="button"
           />
         )}
         {showingAutocomplete && autocompleteItems && (
