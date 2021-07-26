@@ -1,0 +1,164 @@
+import {Meta} from '@storybook/addon-docs/blocks';
+
+import {Modal} from '@workday/canvas-kit-react/modal';
+import {Specifications} from '@workday/canvas-kit-docs';
+
+import {Basic} from './examples/Basic';
+import {WithoutCloseIcon} from './examples/WithoutCloseIcon';
+import {CustomFocus} from './examples/CustomFocus';
+import {ReturnFocus} from './examples/ReturnFocus';
+import {CustomTarget} from './examples/CustomTarget';
+
+<Meta title="Components/Popups/Modal/React" component={Modal} />
+
+# Canvas Kit Modal
+
+A Modal component is a type of Dialog that renders a translucent overlay that prevents user
+interaction with the rest of the page. A Modal will render the rest of the page inert until the
+Modal is dismissed. A Modal should be used when the user needs to presented with important
+information that must be interacted with before continuing interaction with the rest of the page.
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-react
+```
+
+## Usage
+
+### Basic
+
+The basic behavior of a modal is to hide all content from all users that is "behind" the modal
+dialog.
+
+<ExampleCodeBlock code={Basic} />
+
+### Without Close Icon
+
+If you wish to remove the close icon button, you can simply omit the `Modal.CloseButton`
+subcomponent. If you have a modal dialog that requires the user to accept instead of dismiss though
+an escape key or clicking outside the modal, you must create a new `PopupModel` without those
+behaviors and hand that model to the Modal dialog component.
+
+<ExampleCodeBlock code={WithoutCloseIcon} />
+
+### Custom Focus
+
+By default, the Modal makes sure the first focusable element receives focus when the Modal is
+opened. Most of the time, this is the `Modal.CloseIcon` button. If that element isn't present, the
+Modal will use the Modal Heading to make sure screen reader users have focus near the start of the
+Modal's content. This allows screen reader users to discover the Modal's content more naturally
+without having to navigate back up again. Sometimes, it is a better user experience to focus on a
+different element. The following example shows how `initialFocusRef` can be used to change which
+element receives focus when the modal opens.
+
+<ExampleCodeBlock code={CustomFocus} />
+
+### Return Focus
+
+By default, the Modal will return focus to the `Modal.Target` element, but it is possible the Modal
+was triggered by an element that won't exist when the modal is closed. An example might be a Modal
+that was opened from an Menu item and the act of opening the Modal also closes the Menu, meaning the
+Menu item can no longer receive focus. The also probably means the `Modal.Target` component might
+not suite your needs. The `Modal.Target` adds both a `ref` and an `onClick`. If you provide a
+`returnFocusRef`, you only need to worry about the `onClick`. If you're using a menu, you might need
+to use a different callback. Calling `model.events.show()` will show the Modal.
+
+<ExampleCodeBlock code={ReturnFocus} />
+
+### Custom Target
+
+It is common to have a custom target for your modal. Use the `as` prop to use your custom component.
+The `Modal.Target` element will add `onClick` and `ref` to the provided component. Your provided
+target component must forward the `onClick` to an element for the Modal to open. The `as` will cause
+`Modal.Target` to inherit the interface of your custom target component. This means any props your
+target requires, `Modal.Target` now also requires. The example below has a `MyTarget` component that
+requires a `label` prop.
+
+> **Note**: If your application needs to programmatically open a Modal without the user interacting
+> with the target button first, you'll also need to use `React.forwardRef` in your target component.
+> Without this, the Modal will open at the top-left of the window instead of around the target.
+
+<ExampleCodeBlock code={CustomTarget} />
+
+## Components
+
+### Modal
+
+This component is the container component and does not render any semantic elements. It provides a
+React Context model for the `Modal` subcomponents. If you manually pass a `model` to all
+subcomponents, this container component isn't needed. If you do not pass a `model`, the `Modal`
+container component will build a default one using `useModalModel`. `Modal` is a composition of a
+`Popup` component and has a similar structure to `Popup`.
+
+<ArgsTable of={Modal} />
+
+### Modal.Target
+
+The `Modal.Target` is any element that is meant to show the Modal. The default component rendered by
+this component is a `SecondaryButton` element. You can override this by passing the desired
+component via `as`. Many examples above use `as={DeleteButton}`. If you want to render an
+`IconButton` instead, use `as={IconButton}`. The `Modal.Target` is an alias for `Popup.Target` and
+uses the `usePopupTarget` hook, which provides a `ref` and an `onClick`. The provided `ref` will be
+used to return focus to this element when the Modal is closed. If the provided component does not
+forward the `ref` to an element, the fallback is to capture an element in the `onClick`. This can be
+overridden by providing a `returnFocusRef` to the model.
+
+<ArgsTable of={Modal.Target} />
+
+### Modal.Overlay
+
+The `Modal.Overlay` is the component that hooks a Modal up to the `PopupStack` as well as the
+semi-transparent overlay commonly used with modals. Internally, the `Modal.Overlay` component uses
+two `div` elements to ensure proper rendering of the `Modal` content. The default element is a `div`
+element and can be changed via the `as` prop.
+
+<ArgsTable of={Modal.Overlay} />
+
+### Modal.Card
+
+The `Modal.Card` is wraps a `Popup.Card` which wraps a `Card`. It is the `role="dialog"` element and
+is uses `useModalCard` behavior hook which sets `aria-modal="true"` and sets the `aria-labelledby`
+that points to the `id` of the `Modal.Heading`. If you don't use a `Modal.Heading`, add an
+`aria-label` instead. The default element is a `div` and can be changed via the `as` prop.
+
+<ArgsTable of={Modal.Card} />
+
+### Modal.Heading
+
+The `Modal.Heading` semantically labels the Modal via adding an `id` that the `Modal.Card` points to
+via `aria-labelledby`. If this component is not used, you must add an `aria-label` to the
+`Modal.Card` to label the Modal for screen reader users. This component uses the `useModalHeading`
+behavior hook which sets an `id` and also does some focus management logic for situations where
+there is no `Modal.CloseIcon` component used. Please use `Modal.Heading` and don't use your own
+unless you also use the `useModalHeading` hook in your component. Consult accessibility if you
+cannot use this component. The default element is an `h2` and can be changed via the `as` prop.
+
+<ArgsTable of={Modal.Heading} />
+
+### Modal.CloseIcon
+
+The `Modal.CloseIcon` is the 'X' icon in the top corner of a Modal. It always requires an
+`aria-label` which must be translated. It uses the `usePopupCloseIcon` which adds an `onClick` that
+will close the Modal. The default component rendered is an `IconButton` can be changed via the `as`.
+All props that `IconButton` takes are also available by default.
+
+<ArgsTable of={Modal.CloseIcon} />
+
+### Modal.CloseButton
+
+The `Modal.CloseButton` is a convenience component that attaches an `onClick` listener to close the
+Modal. It uses the `usePopupCloseButton` behavior hook which adds an `onClick` that calls
+`model.events.hide()`. If you don't use this component, you'll have to add your own `onClick` and
+you'll have to hoist the model. The default component rendered is a `SecondaryButton` and can be
+changed via the `as` prop. This component doesn't contain any styles and will take on the styles of
+the component given to it. For example, `as={DeleteButton}` will render a delete button.
+`as={IconButton}` will render an `IconButton`. If you give it a base element like `as="button"`, you
+are responsible for styling the element. You can add your own `onClick` to perform side effects.
+Your callback will be merged with the `onClick` that closes the Modal.
+
+<ArgsTable of={Modal.CloseButton} />
+
+## Specifications
+
+<Specifications file="Modal.spec.ts" name="Modal" />

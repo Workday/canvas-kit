@@ -12,15 +12,17 @@
     "forceConsistentCasingInFileNames": true,
     "removeComments": true,
     "noImplicitReturns": true,
-    "noImplicitThis": true,
     "preserveConstEnums": true,
     "allowUnreachableCode": false,
-    "noImplicitAny": true,
-    "strictNullChecks": true,
+    "strict": true,
     "noUnusedLocals": true,
     "allowSyntheticDefaultImports": true,
-    "types": ["jest"],
-    "incremental": true
+    "types": [],
+    "incremental": true,
   },
-  "exclude": ["cypress", "node_modules", "modules/**/dist/*", "modules/**/ts-tmp/*", "docs", "modules/**/spec/*", "modules/**/stories/*"]
+  "ts-node": {
+    "transpileOnly": true,
+    "module": "commonjs"
+  },
+  "exclude": ["cypress", "node_modules", "modules/**/dist/*", "modules/**/ts-tmp/*", "docs", "utils/**/spec/*", "modules/**/spec/*", "modules/**/stories/*", "jest/**/*"]
 }

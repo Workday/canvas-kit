@@ -1,0 +1,35 @@
+{
+  "name": "@workday/canvas-kit-css-radio",
+  "version": "5.0.4",
+  "description": "The radio css for canvas-kit-css",
+  "author": "Workday, Inc. (https://www.workday.com)",
+  "license": "Apache-2.0",
+  "files": [
+    "dist",
+    "lib",
+    "index.scss"
+  ],
+  "style": "dist/canvas-kit-css-radio.min.css",
+  "main": "dist/canvas-kit-css-radio.min.css",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/Workday/canvas-kit/tree/master/modules/radio/css"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node ../../../utils/css-build.js index.scss"
+  },
+  "keywords": [
+    "canvas",
+    "canvas-kit",
+    "css",
+    "radio",
+    "scss",
+    "sass",
+    "workday"
+  ],
+  "dependencies": {
+    "@workday/canvas-kit-css-common": "^5.0.4",
+    "@workday/canvas-kit-css-core": "^5.0.4"
+  }
+}

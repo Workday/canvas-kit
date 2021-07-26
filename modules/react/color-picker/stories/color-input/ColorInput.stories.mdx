@@ -1,0 +1,118 @@
+import {Meta} from '@storybook/addon-docs/blocks';
+import {Specifications} from '@workday/canvas-kit-docs';
+
+import {ColorInput} from '@workday/canvas-kit-react/color-picker';
+
+import {Alert} from './examples/Alert';
+import {Basic} from './examples/Basic';
+import {Checked} from './examples/Checked';
+import {Disabled} from './examples/Disabled';
+import {Error} from './examples/Error';
+import {Grow} from './examples/Grow';
+import {LabelPosition} from './examples/LabelPosition';
+import {RefForwarding} from './examples/RefForwarding';
+import {Required} from './examples/Required';
+import {ValidColorChange} from './examples/ValidColorChange';
+
+<Meta title="Components/Inputs/Color Picker/Color Input/React" component={ColorInput} />
+
+# Canvas Kit Color Input
+
+Color Input lets a user specify a color by entering a hexadecimal value into a text field.
+
+[> Workday Design Reference](https://design.workday.com/components/inputs/color-input)
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-react
+```
+
+## Usage
+
+### Basic Example
+
+Color Input should be used in tandem with
+[Form Field](/docs/components-inputs-form-field-react--basic) to meet accessibility standards.
+
+<ExampleCodeBlock code={Basic} />
+
+### Disabled
+
+Set the `disabled` prop of the Color Input to prevent users from interacting with it.
+
+<ExampleCodeBlock code={Disabled} />
+
+### Checked
+
+Set the `showCheck` prop of the Color Input to display a check icon in the swatch.
+
+<ExampleCodeBlock code={Checked} />
+
+### Ref Forwarding
+
+Color Input supports [ref forwarding](https://reactjs.org/docs/forwarding-refs.html). It will
+forward `ref` to its underlying `<input type="text">` element.
+
+<ExampleCodeBlock code={RefForwarding} />
+
+### Valid Color Change Callback
+
+Set the `onValidColorChange` prop of the Color Input to set a callback for when a valid hex color is
+provided.
+
+The color passed to the callback will be prefixed with a hash and expanded if necessary. For
+example, `03F` would be converted to `#0033FF`.
+
+<ExampleCodeBlock code={ValidColorChange} />
+
+### Grow
+
+Set the `grow` prop of the wrapping Form Field to `true` to configure the Color Input to expand to
+the width of its container.
+
+<ExampleCodeBlock code={Grow} />
+
+The `grow` prop may also be applied directly to the Color Input if Form Field is not being used.
+
+### Label Position
+
+Set the `labelPosition` prop of the wrapping Form Field to designate the position of the label
+relative to the Color Input. `labelPosition` accepts the following values:
+
+- `FormField.LabelPosition.Top` (Default)
+- `FormField.LabelPosition.Left`
+
+<ExampleCodeBlock code={LabelPosition} />
+
+### Required
+
+Set the `required` prop of the wrapping Form Field to `true` to indicate that the field is required.
+Labels for required fields are suffixed by a red asterisk.
+
+<ExampleCodeBlock code={Required} />
+
+### Error States
+
+Set the `error` prop of the wrapping Form Field to `FormField.ErrorType.Alert` or
+`FormField.ErrorType.Error` to set the Color Input to the Alert or Error state, respectively. You
+will also need to set the `hintId` and `hintText` props on the Form Field to meet accessibility
+standards.
+
+#### Alert
+
+<ExampleCodeBlock code={Alert} />
+
+#### Error
+
+<ExampleCodeBlock code={Error} />
+
+## Props
+
+Undocumented props are spread to the underlying `<input type="text">` element.
+
+<ArgsTable of={ColorInput} />
+
+## Specifications
+
+<Specifications file="ColorPicker.spec.ts" name="ColorInput" />

@@ -8,13 +8,13 @@ describe('TextInput', () => {
   before(() => {
     h.stories.visit();
   });
-  ['Default', 'Alert', 'Error'].forEach(story => {
+  ['Basic', 'Alert', 'Error'].forEach(story => {
     context(`given the '${story}' story is rendered`, () => {
       beforeEach(() => {
-        h.stories.load('Components/Inputs/Text Input/React/Top Label', story);
+        h.stories.load('Components/Inputs/Text Input/React', story);
       });
 
-      it('should pass accessibility checks', () => {
+      it('should not have any axe errors', () => {
         cy.checkA11y();
       });
 
@@ -30,7 +30,9 @@ describe('TextInput', () => {
 
       context('when text is entered', () => {
         beforeEach(() => {
-          getTextInput().type('Test');
+          getTextInput()
+            .clear()
+            .type('Test');
         });
 
         it('should reflect the text typed', () => {
@@ -42,10 +44,10 @@ describe('TextInput', () => {
 
   context(`given the 'Disabled' story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Components/Inputs/Text Input/React/Top Label', 'Disabled');
+      h.stories.load('Components/Inputs/Text Input/React', 'Disabled');
     });
 
-    it('should pass accessibility checks', () => {
+    it('should not have any axe errors', () => {
       cy.checkA11y();
     });
 
@@ -56,19 +58,21 @@ describe('TextInput', () => {
 
   context(`given the 'Placeholder' story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Components/Inputs/Text Input/React/Top Label', 'With Placeholder');
+      h.stories.load('Components/Inputs/Text Input/React', 'Placeholder');
     });
 
-    it('should pass accessibility checks', () => {
+    it('should not have any axe errors', () => {
       cy.checkA11y();
     });
 
     it('should render a placeholder text', () => {
-      getTextInput().should('have.attr', 'placeholder', 'Placeholder');
+      getTextInput().should('have.attr', 'placeholder', 'user@email.com');
     });
 
     it('should reflect the text typed', () => {
-      getTextInput().type('Test');
+      getTextInput()
+        .clear()
+        .type('Test');
       getTextInput().should('have.value', 'Test');
     });
   });

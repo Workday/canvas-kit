@@ -1,5 +1,5 @@
 import {themes, create} from '@storybook/theming';
-import {commonColors, typeColors, fontFamily} from '../modules/core/react';
+import {commonColors, typeColors, fontFamily} from '../modules/react/tokens';
 import {version} from '../lerna.json';
 
 export default create({

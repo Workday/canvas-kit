@@ -8,13 +8,13 @@ describe('Text Area', () => {
   before(() => {
     h.stories.visit();
   });
-  ['Default', 'Alert', 'Error'].forEach(story => {
+  ['Basic', 'Alert', 'Error'].forEach(story => {
     context(`given the '${story}' story is rendered`, () => {
       beforeEach(() => {
-        h.stories.load('Components/Inputs/TextArea/React/Top Label', story);
+        h.stories.load('Components/Inputs/TextArea/React', story);
       });
 
-      it('should pass accessibility checks', () => {
+      it('should not have any axe errors', () => {
         cy.checkA11y();
       });
 
@@ -30,7 +30,9 @@ describe('Text Area', () => {
 
       context('when text is entered', () => {
         beforeEach(() => {
-          getTextArea().type('Test');
+          getTextArea()
+            .clear()
+            .type('Test');
         });
 
         it('should reflect the text typed', () => {
@@ -42,10 +44,10 @@ describe('Text Area', () => {
 
   context(`given the 'Disabled' story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Components/Inputs/TextArea/React/Top Label', 'Disabled');
+      h.stories.load('Components/Inputs/TextArea/React', 'Disabled');
     });
 
-    it('should pass accessibility checks', () => {
+    it('should not have any axe errors', () => {
       cy.checkA11y();
     });
 
@@ -56,19 +58,21 @@ describe('Text Area', () => {
 
   context(`given the 'Placeholder' story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Components/Inputs/TextArea/React/Top Label', 'With Placeholder');
+      h.stories.load('Components/Inputs/TextArea/React', 'Placeholder');
     });
 
-    it('should pass accessibility checks', () => {
+    it('should not have any axe errors', () => {
       cy.checkA11y();
     });
 
     it('should render a placeholder text', () => {
-      getTextArea().should('have.attr', 'placeholder', 'Placeholder');
+      getTextArea().should('have.attr', 'placeholder', 'Let us know how we did!');
     });
 
     it('should reflect the text typed', () => {
-      getTextArea().type('Test');
+      getTextArea()
+        .clear()
+        .type('Test');
       getTextArea().should('have.value', 'Test');
     });
   });
