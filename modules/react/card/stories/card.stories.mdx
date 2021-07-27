@@ -36,15 +36,18 @@ Card includes a container `Card` component and the following subcomponents: `Car
 
 `Card` extends from [Box](/docs/labs-common-box--as#style-props), so it supports all style props
 that `Box` supports. This includes `depth`, which changes the Card's perceived "height" above the
-page surface by adjusting the box shadow of the Card.
+page surface by adjusting its box shadow. `Card` has a default depth of `2`.
 
-Here's an example of a Card with `depth` set to `inset`.
+Here's an example of a `Card` with a reduced `depth` of `1`.
 
 <ExampleCodeBlock code={Depth} />
 
 ### Padding
 
-Similarly, set the `padding` prop of the Card to adjust its padding.
+Set the `padding` prop of the `Card` (again, supported via `Box`) to adjust its padding. Card has a
+default padding of `l`.
+
+Here's an example of a `Card` with a reduced padding of `xs`.
 
 <ExampleCodeBlock code={Padding} />
 
@@ -68,7 +71,7 @@ Undocumented props are spread to the outermost element rendered by `Card`.
 
 #### Usage
 
-`Card.Heading` is an optional subcomponent that is meant to describe the card. Since `Card` is a
+`Card.Heading` is an optional subcomponent that is meant to describe the Card. Since `Card` is a
 non-semantic presentational component, `Card.Heading` does not automatically have any semantic
 meaning. If your use case requires the Heading to label the Card, you must do so manually.
 
