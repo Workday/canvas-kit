@@ -116,7 +116,7 @@ const SizeLabel = styled('div')({
 export const BorderRadius = () => (
   <React.Fragment>
     {Object.keys(borderRadius).map(size => (
-      <div css={{display: 'flex'}}>
+      <div css={{display: 'flex'}} key={size}>
         <SizeLabel>
           {size}
           <span>({borderRadius[size]})</span>
@@ -130,7 +130,7 @@ export const BorderRadius = () => (
 export const Space = () => (
   <React.Fragment>
     {Object.keys(space).map(size => (
-      <div css={{display: 'flex'}}>
+      <div css={{display: 'flex'}} key={size}>
         <SizeLabel>
           {size}
           <span>({(space as any)[size]})</span>

@@ -1,0 +1,101 @@
+import {Meta} from '@storybook/addon-docs/blocks';
+
+import {Table, TableRow} from '@workday/canvas-kit-react/table';
+
+import {Basic} from './examples/Basic';
+import {RowHeader} from './examples/RowHeader';
+import {RowStates} from './examples/RowStates';
+
+<Meta title="Components/Containers/Table/React" component={Table} />
+
+# Canvas Kit Table
+
+Tables are an efficient way of displaying sets of repeating data with the same structure.
+
+[> Workday Design Reference](https://design.workday.com/components/containers/tables)
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-react
+```
+
+## Usage
+
+### Basic Example
+
+Table includes a container `Table` component and a `TableRow` component. `Table` is a simple wrapper
+of the `<table>` element with Canvas styles. `TableRow` wraps `<tr>` and supports additional props
+to customize the style of the row.
+
+Use `Table` and `TableRow` in conjunction with the standard `<thead>` and `<tbody>` elements to
+create your Table.
+
+<ExampleCodeBlock code={Basic} />
+
+## Components
+
+### Table
+
+#### Usage
+
+`Table` is a simple wrapper of the `<table>` element with Canvas styles. Use it as you would a
+standard `<table>` element.
+
+```tsx
+<Table>
+  <thead>
+    <TableRow header={true}>
+      <th>ID</th>
+      <th>Name</th>
+      ...
+    </TableRow>
+  </thead>
+  <tbody>
+    <TableRow>
+      <td>1</td>
+      <td>Aidan Brown</td>
+      ...
+    </TableRow>
+    ...
+  </tbody>
+</Table>
+```
+
+#### Props
+
+`Table` does not have any documented props. Undocumented props are spread to its underlying
+`<table>` element.
+
+### TableRow
+
+#### Usage
+
+`TableRow` wraps `<tr>` and supports additional props to customize the style of the row. Use it as
+you would a standard `<tr>` element.
+
+Set the `header` prop of the `TableRow` to designate whether or not it contains header elements.
+
+<ExampleCodeBlock code={RowHeader} />
+
+Set the `state` prop of the `TableRow` to display it using one of several different visual states.
+`state` accepts the following values:
+
+- `TableRow.State.Selected`
+- `TableRow.State.Alert`
+- `TableRow.State.InputAlert`
+- `TableRow.State.Error`
+- `TableRow.State.InputError`
+
+<ExampleCodeBlock code={RowStates} />
+
+Use the `Alert` or `Error` states if there's an issue with the entire row as a whole. Use
+`InputAlert` or `InputError` if there are issues with one or more (but not all) cells in the row.
+`InputAlert` and `InputError` are identical to the `Alert` and `Error` states, respectively, except
+they lack a darkened border around the row.
+
+#### Props
+
+Undocumented props are spread to the underlying `<tr>` element.
+
+<ArgsTable of={TableRow} />

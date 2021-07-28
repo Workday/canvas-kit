@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## v5.0.4 (2021-07-12)
+
+### Components
+
+- feat(common): Add HTML attribute interface to ExtractProps ([#1147](https://github.com/Workday/canvas-kit/pull/1147)) [@NicholasBoll](https://github.com/NicholasBoll)
+
+### Docs
+- docs: Fix changelog issues [@anicholls](https://github.com/anicholls)
+
+## v4.8.2 (2021-07-12)
+### Infrastructure
+
+- ci: Add additional check so support releases aren't treated as latest [@anicholls](https://github.com/anicholls)
+- fix: Convert focus-trap-js to TS file to fix module-not-found error ([#1149](https://github.com/Workday/canvas-kit/pull/1149)) [@NicholasBoll](https://github.com/NicholasBoll)
+
 ## v5.0.3 (2021-07-09)
 
 ### Components
@@ -10,7 +25,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - docs: Convert Buttons category stories to use mdx ([#1127](https://github.com/Workday/canvas-kit/pull/1127)) [@anicholls](https://github.com/anicholls)
 - docs: Add MDX docs and examples for Input components ([#1128](https://github.com/Workday/canvas-kit/pull/1128)) [@jamesfan](https://github.com/jamesfan)
 - fix(tooltip): Fix overflow ellipsis detection ([#1132](https://github.com/Workday/canvas-kit/pull/1132)) [@NicholasBoll](https://github.com/NicholasBoll)
-- fix(modal): Fix focus trap when Modal contains an iframe ([#1135](https://github.com/Workday/canvas-kit/pull/1135)) 
+- fix(modal): Fix focus trap when Modal contains an iframe ([#1135](https://github.com/Workday/canvas-kit/pull/1135))
 
 ### Docs
 
@@ -195,7 +210,7 @@ To review the breaking changes made in this release, check out the [v5.0.0 Migra
 - ci: Update setup-node action and remove custom matcher ([#994](https://github.com/Workday/canvas-kit/pull/994)) [@NicholasBoll](https://github.com/NicholasBoll)
 - ci: Fix canary dist-tag for prerelease canaries in slack message ([#1003](https://github.com/Workday/canvas-kit/pull/1003)) [@anicholls](https://github.com/anicholls)
 
-## v4.8.1 (2021-07-09)
+## v4.8.1 (2021-07-08)
 
 ### Components
 
@@ -222,7 +237,7 @@ To review the breaking changes made in this release, check out the [v5.0.0 Migra
 - docs: Add better documentation to the `as` prop ([#1046](https://github.com/Workday/canvas-kit/pull/1046)) [@NicholasBoll](https://github.com/NicholasBoll)
 - docs: Popup accessible example ([#1056](https://github.com/Workday/canvas-kit/pull/1056)) [@csongnguyen](https://github.com/csongnguyen)
 
-## Infrastructure
+### Infrastructure
 
 - chore: Bump y18n from 3.2.1 to 3.2.2 ([#1011](https://github.com/Workday/canvas-kit/pull/1011)) [@dependabot](https://github.com/dependabot)
 - chore: Bump elliptic from 6.5.3 to 6.5.4 ([#993](https://github.com/Workday/canvas-kit/pull/993)) [@dependabot](https://github.com/dependabot)

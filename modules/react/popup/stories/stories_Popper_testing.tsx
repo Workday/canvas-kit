@@ -3,6 +3,8 @@ import * as React from 'react';
 
 import {SecondaryButton, PrimaryButton} from '@workday/canvas-kit-react/button';
 import {Popup, Popper, Placement} from '@workday/canvas-kit-react/popup';
+import {withSnapshotsEnabled} from '../../../../utils/storybook';
+import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
 
 export default {
   title: 'Testing/React/Popups/Popper',
@@ -52,3 +54,15 @@ export const UpdateOptions = () => {
     </>
   );
 };
+
+export const PopperRTL = withSnapshotsEnabled(() => (
+  <CanvasProvider theme={{canvas: {direction: ContentDirection.RTL}}}>
+    <Popper open={true}>
+      <Popup.Card style={{animation: 'none'}} width={300}>
+        <Popup.CloseIcon aria-label="" />
+        <Popup.Heading>למחוק פריט</Popup.Heading>
+        <Popup.Body>האם ברצונך למחוק פריט זה</Popup.Body>
+      </Popup.Card>
+    </Popper>
+  </CanvasProvider>
+));

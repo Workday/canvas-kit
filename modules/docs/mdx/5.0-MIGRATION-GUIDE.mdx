@@ -926,7 +926,7 @@ element that `inputRef` was applied to previously. Select and Select (Preview) d
 which element `ref` is forwarded to for that particular component.
 
 Input component prop interfaces no longer extend directly from their underlying element interface
-(e.g., `TextInputProps` no longer extends from `React.InputHTMLAttributes<HTMLInputElement>`).
+(e.g. `TextInputProps` no longer extends from `React.InputHTMLAttributes<HTMLInputElement>`).
 `createComponent` returns a component that determines the element interface via the `as` prop. This
 is why input component props no longer contain an element interface directly. If you extend from an
 input component prop interface, or have code that uses an input component prop interface and

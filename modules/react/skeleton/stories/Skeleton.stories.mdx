@@ -1,0 +1,126 @@
+import {Meta} from '@storybook/addon-docs/blocks';
+
+import {Skeleton} from '@workday/canvas-kit-react/skeleton';
+
+import {Basic} from './examples/Basic';
+import {Color} from './examples/Color';
+import {Header} from './examples/Header';
+import {Shape} from './examples/Shape';
+import {Simulation} from './examples/Simulation';
+import {Text} from './examples/Text';
+
+<Meta title="Components/Indicators/Skeleton/React" component={Skeleton} />
+
+# Canvas Kit Skeleton
+
+A Skeleton is a low-fidelity visual placeholder that represents the loading of interface elements
+before they have displayed on the page. Appearing as a blank version of the incoming content, it
+mitigates focus on the loading process and improves the user’s perceived load time.
+
+[> Workday Design Reference](https://design.workday.com/components/indicators/skeleton-loader)
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-react
+```
+
+## Usage
+
+### Basic Example
+
+Skeleton includes a container `Skeleton` component and the following subcomponents:
+`Skeleton.Header`, `Skeleton.Text`, and `Skeleton.Shape`. Each subcomponent can be used as a
+placeholder for a particular type of content.
+
+Here's an example of how you might compose Skeleton components (along with non-Skeleton components
+such as `Box` and `Flex`) to create a loading placeholder for a piece of content comprised of an
+icon, a heading, and some text.
+
+<ExampleCodeBlock code={Basic} />
+
+And here's an example that simulates how that Skeleton might work in practice.
+
+<ExampleCodeBlock code={Simulation} />
+
+Press the **Simulate Loading** button to simulate the loading of the content (customize the loading
+time using the **Load Time** field), or check the **Loading** check box to force the Skeleton to
+display.
+
+### Color
+
+All Skeleton subcomponents accept a `backgroundColor` prop which can be used to specify the color of
+the subcomponent. This is generally only recommended to be used for dark or gray backgrounds to
+ensure the Skeleton components are visible.
+
+<ExampleCodeBlock code={Color} />
+
+## Components
+
+### Skeleton
+
+#### Usage
+
+Skeleton subcomponents **must** be wrapped by the `Skeleton` container component.
+
+```tsx
+<Skeleton>
+  <Skeleton.Header />
+  <Skeleton.Text />
+</Skeleton>
+```
+
+`Skeleton` places its children in a container element with `aria-hidden` set to `true` and announces
+itself using a visually hidden element.
+
+#### Props
+
+Undocumented props are spread to the outermost element rendered by `Skeleton`.
+
+<ArgsTable of={Skeleton} />
+
+### Skeleton.Header
+
+#### Usage
+
+`Skeleton.Header` renders a placeholder for header content such as headings.
+
+<ExampleCodeBlock code={Header} />
+
+#### Props
+
+Undocumented props are spread to the outermost element rendered by `Skeleton.Header`.
+
+<ArgsTable of={Skeleton.Header} />
+
+### Skeleton.Text
+
+#### Usage
+
+`Skeleton.Text` renders a placeholder for text content such as paragraphs. Each placeholder line has
+a width of `100%` and a fixed height of `21px`, with the last line having a width of `60%` if there
+are multiple lines.
+
+<ExampleCodeBlock code={Text} />
+
+#### Props
+
+Undocumented props are spread to the outermost element rendered by `Skeleton.Text`.
+
+<ArgsTable of={Skeleton.Text} />
+
+### Skeleton.Shape
+
+#### Usage
+
+`Skeleton.Shape` renders a placeholder for content which can be represented as a shape such as a
+circular icon. Set the `height`, `width`, and `borderRadius` props of the `Skeleton.Shape` to create
+various rectangular and circular shapes.
+
+<ExampleCodeBlock code={Shape} />
+
+#### Props
+
+Undocumented props are spread to the outermost element rendered by `Skeleton.Shape`.
+
+<ArgsTable of={Skeleton.Shape} />

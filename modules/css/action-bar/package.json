@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-css-action-bar",
-  "version": "5.0.3",
+  "version": "5.0.4",
   "description": "Action bar CSS for canvas-kit-css",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -16,8 +16,8 @@
     "url": "http://github.com/Workday/canvas-kit/tree/master/modules/action-bar/css"
   },
   "dependencies": {
-    "@workday/canvas-kit-css-button": "^5.0.3",
-    "@workday/canvas-kit-css-core": "^5.0.3"
+    "@workday/canvas-kit-css-button": "^5.0.4",
+    "@workday/canvas-kit-css-core": "^5.0.4"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

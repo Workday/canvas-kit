@@ -5,7 +5,7 @@ import {Popup, PopupModelContext} from '@workday/canvas-kit-react/popup';
 
 import {useModalHeading} from './hooks';
 
-export interface ModalHeadingProps extends ExtractProps<typeof Popup.Heading> {}
+export interface ModalHeadingProps extends ExtractProps<typeof Popup.Heading, never> {}
 
 export const ModalHeading = createComponent('h2')({
   displayName: 'Modal.Heading',
