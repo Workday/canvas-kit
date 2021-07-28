@@ -29,7 +29,7 @@ of the `<table>` element with Canvas styles. `TableRow` wraps `<tr>` and support
 to customize the style of the row.
 
 Use `Table` and `TableRow` in conjunction with the standard `<thead>` and `<tbody>` elements to
-create your table.
+create your Table.
 
 <ExampleCodeBlock code={Basic} />
 
@@ -89,9 +89,10 @@ Set the `state` prop of the `TableRow` to display it using one of several differ
 
 <ExampleCodeBlock code={RowStates} />
 
-The `InputAlert` and `InputError` states should be used if the error is on the input-level rather
-than the entire row. They are identical to the `Alert` and `Error` states, respectively, except they
-lack a darkened border around the row.
+Use the `Alert` or `Error` states if there's an issue with the entire row as a whole. Use
+`InputAlert` or `InputError` if there are issues with one or more (but not all) cells in the row.
+`InputAlert` and `InputError` are identical to the `Alert` and `Error` states, respectively, except
+they lack a darkened border around the row.
 
 #### Props
 
