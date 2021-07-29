@@ -58,8 +58,6 @@ type ExtractHTMLAttributes<
   T extends React.DetailedHTMLProps<any, any>
 > = T extends React.DetailedHTMLProps<infer P, any> ? P : T;
 
-// Prettier messes up comments when `ts-ignore` is involved: https://github.com/prettier/prettier/issues/5411
-// prettier-ignore
 /**
  * Extract props from any component that was created using `createComponent`. It will return the
  * HTML attribute interface of the default element used with `createComponent`. If you use `as`, the
@@ -78,8 +76,8 @@ type ExtractHTMLAttributes<
  * @example
  * interface MyProps extends ExtractProps<typeof Card.Body> {}
  *
- * ExtractProps<typeof Card>; // React.ClassAttributes<HTMLDivElement> & React.HTMLAttributes<HTMLDivElement> & CardProps
- * ExtractProps<typeof Card, 'aside'>; // React.ClassAttributes<HTMLElement> & React.HTMLAttributes<HTMLElement> & CardProps
+ * ExtractProps<typeof Card>; // React.HTMLAttributes<HTMLDivElement> & CardProps
+ * ExtractProps<typeof Card, 'aside'>; // React.HTMLAttributes<HTMLElement> & CardProps
  * ExtractProps<typeof Card, never>; // CardProps
  */
 export type ExtractProps<
@@ -87,17 +85,17 @@ export type ExtractProps<
   TElement extends keyof JSX.IntrinsicElements | undefined | never = undefined
 > = TComponent extends ElementComponent<infer E, infer P> // test if `TComponent` is an `ElementComponent`, while inferring both default element and props associated
   ? E extends keyof JSX.IntrinsicElements // test if the inferred element `E` is in JSX.IntrinsicElements
-    ? [TElement] extends [never] // test if user passed `never` for the `TElement` override. https://github.com/microsoft/TypeScript/issues/23182
-      ? P // if `TElement` was `never`, return only the inferred props `P`
+    ? TElement extends keyof JSX.IntrinsicElements
+      ? ExtractHTMLAttributes<JSX.IntrinsicElements[TElement]> & P // `TElement` was defined, so we'll return the HTML attribute interface + inferred `P` props
       : TElement extends undefined // else test if TElement was defined
       ? ExtractHTMLAttributes<JSX.IntrinsicElements[E]> & P // `TElement` wasn't explicitly defined, so let's fall back to the inferred element's HTML attribute interface + props `P`
-      // TS thinks `TElement` cannot be an index type because of the `undefined`, but we've already ensured that can't happen, so we'll ignore that error
-      // @ts-ignore
-      : ExtractHTMLAttributes<JSX.IntrinsicElements[TElement]> & P // `TElement` was defined, so we'll return the HTML attribute interface + inferred `P` props
+      : P // `TElement` was `never`, return only the inferred props `P`
     : P // E isn't in JSX.IntrinsicElements, we don't know what it is, so return the inferred props `P`
   : TComponent extends Component<infer P> // test if `TComponent` is a `Component`, while inferring props `P`
   ? P // it was a `Component`, return inferred props `P`
-  : {}; // `TComponent` does not extend either `ElementComponent` or `Component`, return an empty object
+  : TComponent extends React.ComponentType<infer P> // test if `TComponent` is a `React.ComponentType` (class or functional component)
+  ? P // it was a `React.ComponentType`, return inferred props `P`
+  : {}; // We don't know what `TComponent` was, return an empty object
 
 /**
  * Component type that allows for `as` to change the element or component type.
@@ -148,10 +146,11 @@ interface RefForwardingComponent<T, P = {}> {
  * return type is `Component<element, Props>` which looks like `Component<'div', Props>` which is a
  * clean interface that tells you the default element that is used.
  */
-export const createComponent = <T extends React.ElementType | undefined = undefined>(as?: T) => <
-  P,
-  SubComponents = {}
->({
+export const createComponent = <
+  E extends keyof JSX.IntrinsicElements | React.ComponentType | undefined = undefined
+>(
+  as?: E
+) => <P, SubComponents = {}>({
   displayName,
   Component,
   subComponents,
@@ -177,40 +176,46 @@ export const createComponent = <T extends React.ElementType | undefined = undefi
    *   )
    * }
    */
-  Component: RefForwardingComponent<T, P>;
+  Component: RefForwardingComponent<E, P>;
   /**
    * Used in container components
    */
   subComponents?: SubComponents;
-}): (T extends undefined
+}): (E extends undefined
   ? Component<P>
   : ElementComponent<
-      // T is not `undefined` here, but Typescript thinks it could be, so we add another `undefined`
+      // E is not `undefined` here, but Typescript thinks it could be, so we add another `undefined`
       // check and cast to a `React.FC` to match a valid signature for `ElementComponent`.
       // `React.FC` was chosen as the simplest valid interface.
-      T extends undefined ? React.FC : T,
+      E extends undefined ? React.FC : E,
       P
     >) &
   SubComponents => {
-  const ReturnedComponent = React.forwardRef<T, P & {as?: React.ElementType}>(
+  const ReturnedComponent = React.forwardRef<E, P & {as?: React.ElementType}>(
     ({as: asOverride, ...props}, ref) => {
       return Component(
         props as P,
-        // @ts-ignore React considers no passed ref as `null`, Typescript considers this
-        // `undefined`. It works at runtime, so I don't think this is fixable or worth fixing.
-        ref,
-        asOverride || as
+        ref as ExtractRef<E>,
+        // Cast to `any` to avoid: "ts(2345): Type 'undefined' is not assignable to type 'E extends
+        // undefined ? never : E'" I'm not sure I can actually cast to this conditional type and it
+        // doesn't actually matter, so cast to `any` it is.
+        (asOverride || as) as any
       );
     }
-  ) as any;
+  );
 
-  Object.keys(subComponents || {}).forEach((key: any) => {
-    // @ts-ignore Not worth typing correctly
-    ReturnedComponent[key] = subComponents[key];
+  Object.keys(subComponents || {}).forEach(key => {
+    // `ReturnedComponent` is a `React.ForwardRefExoticComponent` which has no additional keys so
+    // we'll cast to `Record<string, any>` for assignment. Note the lack of type checking
+    // properties. Take care when changing the runtime of this function.
+    (ReturnedComponent as Record<string, any>)[key] = (subComponents as Record<string, any>)[key];
   });
   ReturnedComponent.displayName = displayName;
 
-  return ReturnedComponent;
+  // Cast as `any`. We have already specified the return type. Be careful making changes to this
+  // file due to this `any` `ReturnedComponent` is a `React.ForwardRefExoticComponent`, but we want
+  // it to be either an `Component` or `ElementComponent`
+  return ReturnedComponent as any;
 };
 
 /**
