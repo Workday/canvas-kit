@@ -58,14 +58,15 @@ type ExtractHTMLAttributes<
   T extends React.DetailedHTMLProps<any, any>
 > = T extends React.DetailedHTMLProps<infer P, any> ? P : T;
 
+// //prettier-ignore
 /**
  * Extract props from any component that was created using `createComponent`. It will return the
  * HTML attribute interface of the default element used with `createComponent`. If you use `as`, the
  * HTML attribute interface can change, so you can use an override to the element you wish to use.
  * You can also disable the HTML attribute by passing `never`:
  *
- * - `ExtractProps<typeof Card>`: `React.HTMLAttributes<HTMLDivElement> & CardProps`
- * - `ExtractProps<typeof Card, 'aside'>`: `React.HTMLAttributes<HTMLElement> & CardProps`
+ * - `ExtractProps<typeof Card>`: `CardProps & React.HTMLAttributes<HTMLDivElement>`
+ * - `ExtractProps<typeof Card, 'aside'>`: `CardProps & React.HTMLAttributes<HTMLElement>`
  * - `ExtractProps<typeof Card, never>`: `CardProps`
  *
  * @template TComponent The component you wish to extract props from. Needs 'typeof` in front:
@@ -76,21 +77,38 @@ type ExtractHTMLAttributes<
  * @example
  * interface MyProps extends ExtractProps<typeof Card.Body> {}
  *
- * ExtractProps<typeof Card>; // React.HTMLAttributes<HTMLDivElement> & CardProps
- * ExtractProps<typeof Card, 'aside'>; // React.HTMLAttributes<HTMLElement> & CardProps
+ * ExtractProps<typeof Card>; // CardProps & React.HTMLAttributes<HTMLDivElement>
+ * ExtractProps<typeof Card, 'aside'>; // CardProps & React.HTMLAttributes<HTMLElement>
  * ExtractProps<typeof Card, never>; // CardProps
  */
 export type ExtractProps<
   TComponent,
-  TElement extends keyof JSX.IntrinsicElements | undefined | never = undefined
+  TElement extends
+    | keyof JSX.IntrinsicElements
+    | ElementComponent<any, any>
+    | Component<any>
+    | React.ComponentType<any>
+    | undefined
+    | never = undefined
 > = TComponent extends ElementComponent<infer E, infer P> // test if `TComponent` is an `ElementComponent`, while inferring both default element and props associated
-  ? E extends keyof JSX.IntrinsicElements // test if the inferred element `E` is in JSX.IntrinsicElements
-    ? TElement extends keyof JSX.IntrinsicElements
-      ? ExtractHTMLAttributes<JSX.IntrinsicElements[TElement]> & P // `TElement` was defined, so we'll return the HTML attribute interface + inferred `P` props
-      : TElement extends undefined // else test if TElement was defined
-      ? ExtractHTMLAttributes<JSX.IntrinsicElements[E]> & P // `TElement` wasn't explicitly defined, so let's fall back to the inferred element's HTML attribute interface + props `P`
-      : P // `TElement` was `never`, return only the inferred props `P`
-    : P // E isn't in JSX.IntrinsicElements, we don't know what it is, so return the inferred props `P`
+  ? [TElement] extends [never] // test if user passed `never` for the `TElement` override. We have to test `never` first, otherwise TS gets confused and `ExtractProps` will return `never`. https://github.com/microsoft/TypeScript/issues/23182
+    ? P // if `TElement` was `never`, return only the inferred props `P`
+    : TElement extends undefined // else test if TElement was defined
+    ? E extends keyof JSX.IntrinsicElements // test if the inferred element `E` is in `JSX.IntrinsicElements`
+      ? P & ExtractHTMLAttributes<JSX.IntrinsicElements[E]> // `TElement` wasn't explicitly defined, so let's fall back to the inferred element's HTML attribute interface + props `P`
+      : P & ExtractPropsFromComponent<E> // E isn't in `JSX.IntrinsicElements`, return inferred props `P` + props extracted from component `E`. It would be nice to use `ExtractProps` again here, but that creates a circular dependency
+    : TElement extends keyof JSX.IntrinsicElements // `TElement` was defined, test if it is in `JSX.IntrinsicElements`
+    ? P & ExtractHTMLAttributes<JSX.IntrinsicElements[TElement]> // `TElement` is in `JSX.IntrinsicElements`, return inferred props `P` + HTML attributes of `TElement`
+    : P & ExtractPropsFromComponent<TElement> // `TElement` is not in `JSX.IntrinsicElements`, return inferred props `P` + props extracted from component `TElement`. It would be nice to use `ExtractProps` again here, but that creates a circular dependency
+  : ExtractPropsFromComponent<TComponent>; // `TComponent` does not extend `ElementComponent`. Return props extracted from component `TComponent`
+
+// Extract props from a component. This type is only necessary because `ExtractProps` cannot
+// reference itself, creating a circular dependency. Instead, we define this type to allow for at
+// least 1 level of nesting.
+type ExtractPropsFromComponent<TComponent> = TComponent extends ElementComponent<infer E, infer P> // test if `TComponent` is an `ElementComponent`, while inferring both default element and props associated
+  ? E extends keyof JSX.IntrinsicElements // test if the inferred element `E` is in `JSX.IntrinsicElements`
+    ? P & ExtractHTMLAttributes<JSX.IntrinsicElements[E]> // return inferred props `P` + HTML attributes of inferred element `E`
+    : P // `E` wasn't a key of `JSX.IntrinsicElements`, so just return the inferred props `P`
   : TComponent extends Component<infer P> // test if `TComponent` is a `Component`, while inferring props `P`
   ? P // it was a `Component`, return inferred props `P`
   : TComponent extends React.ComponentType<infer P> // test if `TComponent` is a `React.ComponentType` (class or functional component)
@@ -147,7 +165,11 @@ interface RefForwardingComponent<T, P = {}> {
  * clean interface that tells you the default element that is used.
  */
 export const createComponent = <
-  E extends keyof JSX.IntrinsicElements | React.ComponentType | undefined = undefined
+  E extends
+    | keyof JSX.IntrinsicElements
+    | React.ComponentType
+    | ElementComponent<any, any>
+    | undefined = undefined
 >(
   as?: E
 ) => <P, SubComponents = {}>({
