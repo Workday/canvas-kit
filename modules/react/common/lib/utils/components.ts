@@ -58,7 +58,6 @@ type ExtractHTMLAttributes<
   T extends React.DetailedHTMLProps<any, any>
 > = T extends React.DetailedHTMLProps<infer P, any> ? P : T;
 
-// //prettier-ignore
 /**
  * Extract props from any component that was created using `createComponent`. It will return the
  * HTML attribute interface of the default element used with `createComponent`. If you use `as`, the
