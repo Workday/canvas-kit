@@ -12,6 +12,9 @@ import {Primary} from './examples/Primary';
 import {Secondary} from './examples/Secondary';
 import {Tertiary} from './examples/Tertiary';
 import {Delete} from './examples/Delete';
+import {Grow} from './examples/Grow';
+import {Size} from './examples/Size';
+import {Icon} from './examples/Icon';
 
 <Meta title="Components/Buttons/Button/React" />
 
@@ -29,16 +32,34 @@ yarn add @workday/canvas-kit-react
 
 ## Usage
 
+#### Size
+
+Buttons can be three different sizes, `small`, `medium`, and `large` (except for the
+`TertiaryButton` which does not have a `large` size).
+
+<ExampleCodeBlock code={Size} />
+
+#### Icon
+
+All Buttons except for the `DeleteButton` support icons. By default, they are rendered on the left
+of the label, but you can move them to the right with the `iconPosition` prop.
+
+<ExampleCodeBlock code={Icon} />
+
+#### Grow
+
+Buttons will collapse to the width of their content by default. To expand to the width of their
+container, use the `grow` prop.
+
+<ExampleCodeBlock code={Grow} />
+
 ### PrimaryButton
-
-Here is a basic example of a Primary Button. Buttons can be customized with several props to change
-the size, add an icon, etc.
-
-Undocumented props are spread to the underlying `button` element.
 
 <ExampleCodeBlock code={Primary} />
 
 #### Props
+
+Undocumented props are spread to the underlying `button` element.
 
 <ArgsTable of={PrimaryButton} />
 
@@ -48,6 +69,8 @@ Undocumented props are spread to the underlying `button` element.
 
 #### Props
 
+Undocumented props are spread to the underlying `button` element.
+
 <ArgsTable of={SecondaryButton} />
 
 ### TertiaryButton
@@ -56,6 +79,8 @@ Undocumented props are spread to the underlying `button` element.
 
 #### Props
 
+Undocumented props are spread to the underlying `button` element.
+
 <ArgsTable of={TertiaryButton} />
 
 ### DeleteButton
@@ -63,6 +88,8 @@ Undocumented props are spread to the underlying `button` element.
 <ExampleCodeBlock code={Delete} />
 
 #### Props
+
+Undocumented props are spread to the underlying `button` element.
 
 <ArgsTable of={DeleteButton} />
 
