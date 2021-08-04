@@ -93,8 +93,17 @@ const Item = styled('li')<Pick<MenuItemProps, 'isDisabled' | 'isFocused'>>(
       return {
         backgroundColor: isDisabled ? colors.blueberry200 : commonColors.focusBackground,
         color: typeColors.inverse,
+        'span .wd-icon-background ~ .wd-icon-accent, .wd-icon-background ~ .wd-icon-accent2': {
+          fill: isDisabled ? iconColors.disabled : iconColors.active,
+        },
         '&:hover': {
           'span .wd-icon-fill, span .wd-icon-accent, span .wd-icon-accent2': {
+            fill: iconColors.inverse,
+          },
+          'span .wd-icon-background ~ .wd-icon-accent, span .wd-icon-background ~ .wd-icon-accent2': {
+            fill: isDisabled ? iconColors.disabled : iconColors.active,
+          },
+          'span .wd-icon-background': {
             fill: iconColors.inverse,
           },
         },
@@ -103,9 +112,12 @@ const Item = styled('li')<Pick<MenuItemProps, 'isDisabled' | 'isFocused'>>(
           [data-whatinput='pointer'] &`]: {
           backgroundColor: 'inherit',
           color: colors.blackPepper300,
+          'span .wd-icon-background ~ .wd-icon-accent, span .wd-icon-background ~ .wd-icon-accent2': {
+            fill: iconColors.standard,
+          },
           '&:hover': {
             backgroundColor: commonColors.hoverBackground,
-            '.wd-icon-fill, .wd-icon-accent, .wd-icon-accent2': {
+            'span .wd-icon-fill, span .wd-icon-accent, span .wd-icon-accent2': {
               fill: iconColors.hover,
             },
           },
@@ -175,6 +187,7 @@ const setIconProps = (
       fillHover: iconColors.inverse,
       accent: iconColors.inverse,
       accentHover: iconColors.inverse,
+      background: iconColors.inverse,
     };
   }
   return props;
