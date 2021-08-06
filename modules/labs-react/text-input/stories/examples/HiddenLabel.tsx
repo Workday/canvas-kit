@@ -1,6 +1,5 @@
 import React from 'react';
-import {TextInput, useTextInputModel} from '@workday/canvas-kit-labs-react/text-input';
-import {HStack} from '@workday/canvas-kit-labs-react/layout';
+import {TextInput} from '@workday/canvas-kit-labs-react/text-input';
 
 export const HiddenLabel = () => {
   const [value, setValue] = React.useState('');
@@ -9,10 +8,8 @@ export const HiddenLabel = () => {
     setValue(event.target.value);
   };
 
-  const model = useTextInputModel();
-
   return (
-    <TextInput model={model}>
+    <TextInput>
       <TextInput.Label isVisuallyHidden={true}>Email</TextInput.Label>
       <TextInput.Field onChange={handleChange} value={value} />
     </TextInput>

@@ -1,5 +1,5 @@
 import React from 'react';
-import {TextInput, useTextInputModel} from '@workday/canvas-kit-labs-react/text-input';
+import {TextInput} from '@workday/canvas-kit-labs-react/text-input';
 import {HStack} from '@workday/canvas-kit-labs-react/layout';
 
 export const LabelPosition = () => {
@@ -9,11 +9,9 @@ export const LabelPosition = () => {
     setValue(event.target.value);
   };
 
-  const model = useTextInputModel();
-
   return (
     <HStack spacing="l" alignItems="center">
-      <TextInput model={model}>
+      <TextInput>
         <TextInput.Label>Email</TextInput.Label>
         <TextInput.Field onChange={handleChange} value={value} />
       </TextInput>

@@ -1,5 +1,5 @@
 import React from 'react';
-import {TextInput, useTextInputModel} from '@workday/canvas-kit-labs-react/text-input';
+import {TextInput} from '@workday/canvas-kit-labs-react/text-input';
 import {VStack} from '@workday/canvas-kit-labs-react/layout';
 
 export const Password = () => {
@@ -9,13 +9,11 @@ export const Password = () => {
     setValue(event.target.value);
   };
 
-  const model = useTextInputModel();
-
   return (
     <VStack spacing="xxxs" alignItems="flex-start">
-      <TextInput model={model}>
+      <TextInput>
         <TextInput.Label>Password</TextInput.Label>
-        <TextInput.Field onChange={handleChange} value={value} model={model} type="password" />
+        <TextInput.Field onChange={handleChange} value={value} type="password" />
       </TextInput>
     </VStack>
   );
