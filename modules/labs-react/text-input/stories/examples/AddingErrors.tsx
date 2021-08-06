@@ -23,12 +23,10 @@ export const AddingErrors = () => {
   return (
     <VStack spacing="xxxs" alignItems="flex-start">
       <TextInput model={model}>
-        <TextInput.Label>Email</TextInput.Label>
+        <TextInput.Label>A three letter word</TextInput.Label>
         <TextInput.Field onChange={handleChange} value={value} />
         {showHint && (
-          <TextInput.Hint paddingTop={space.xxs}>
-            Input length must be greater than 2
-          </TextInput.Hint>
+          <TextInput.Hint paddingTop={space.xxs}>Word length must be greater than 2</TextInput.Hint>
         )}
       </TextInput>
     </VStack>

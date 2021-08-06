@@ -40,28 +40,30 @@ yarn add @workday/canvas-kit-react
 
 ### Disabled
 
-Set the `disabled` prop of the Text Input to prevent users from interacting with it.
+Set the `disabled` prop of the TextInput.Field to prevent users from interacting with it.
 
 <ExampleCodeBlock code={Disabled} />
 
 ### Placeholder
 
-Set the `placeholder` prop of the Text Input to display a sample of its expected format or value
-before a value has been provided.
+Set the `placeholder` prop of the TextInput.Field to display a sample of its expected format or
+value before a value has been provided.
 
 <ExampleCodeBlock code={Placeholder} />
 
 ### Ref Forwarding
 
-Text Input supports [ref forwarding](https://reactjs.org/docs/forwarding-refs.html). It will forward
+All the TextInput subcomponents support
+[ref forwarding](https://reactjs.org/docs/forwarding-refs.html). e.g. TextInput.Field will forward
 `ref` to its underlying `<input type="text">` element.
 
 <ExampleCodeBlock code={RefForwarding} />
 
 ### Grow
 
-The input container extends from Box so it is easy to extend full width, e.g. setting width prop to
-100%
+There are lots of ways to accomplish this. The TextInput.Field extends from Box so it is easy to
+extend full width, e.g. setting width prop to 100%, or you can wrap the whole TextInput in it a Flex
+and set the growth that way, etc.
 
 <ExampleCodeBlock code={Grow} />
 
@@ -71,7 +73,7 @@ Setting the Label position can be done using HStack or VStack
 
 <ExampleCodeBlock code={LabelPosition} />
 
-### Label Position
+### Visually Hiding The Label
 
 If your label is just for screen reader users you can add the isVisuallyHidden to TextInput.Label
 
