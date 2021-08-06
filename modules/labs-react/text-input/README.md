@@ -4,33 +4,8 @@
   <img src="https://img.shields.io/badge/LABS-alpha-orange" alt="LABS: Alpha" />
 </a>  This component is work in progress and currently in prerelease.
 
-Text Inputs allow users to enter words or characters without styling.
+View the
+[documentation for Text Input](https://workday.github.io/canvas-kit/?path=/docs/labs-text-input-react--basic)
+on Storybook.
 
-## Installation
-
-```sh
-yarn add @workday/canvas-kit-labs-react
-```
-
-## Usage
-
-```tsx
-import * as React from 'react';
-import {TextInput} from '@workday/canvas-kit-labs-react/text-input';
-
-<TextInput />;
-```
-
-## Static Properties
-
-> None
-
-## Component Props
-
-### Required
-
-> None
-
-### Optional
-
-> None
+[> Workday Design Reference](https://design.workday.com/components/inputs/text-input)
