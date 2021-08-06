@@ -29,10 +29,6 @@ const Label = styled('span')<Pick<HintProps, 'error'>>(
 
 const Message = styled('p')<Pick<HintProps, 'error'>>(
   type.levels.subtext.medium,
-  {
-    margin: `${space.xxs} 0 0`,
-    width: '100%',
-  },
   ({error, theme}) => error === ErrorType.Error && {color: theme.canvas.palette.error.main}
 );
 

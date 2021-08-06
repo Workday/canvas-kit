@@ -1,0 +1,118 @@
+import {Meta} from '@storybook/addon-docs/blocks';
+import {Specifications} from '@workday/canvas-kit-docs';
+
+import {TextInput} from '@workday/canvas-kit-labs-react/text-input';
+
+import {Alert} from './examples/Alert';
+import {Basic} from './examples/Basic';
+import {Disabled} from './examples/Disabled';
+import {Error} from './examples/Error';
+import {Grow} from './examples/Grow';
+import {LabelPosition} from './examples/LabelPosition';
+import {Placeholder} from './examples/Placeholder';
+import {RefForwarding} from './examples/RefForwarding';
+import {Required} from './examples/Required';
+import {Password} from './examples/Password';
+import {HiddenLabel} from './examples/HiddenLabel';
+import {ThemedAlert} from './examples/ThemedAlert';
+import {ThemedError} from './examples/ThemedError';
+import {AddingErrors} from './examples/AddingErrors';
+
+<Meta title="Labs/Text Input/React" component={TextInput} />
+
+# Canvas Kit Text Input
+
+Text Inputs allow users to enter words or characters without styling.
+
+[> Workday Design Reference](https://design.workday.com/components/inputs/text-input)
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-react
+```
+
+## Usage
+
+### Basic Example
+
+<ExampleCodeBlock code={Basic} />
+
+### Disabled
+
+Set the `disabled` prop of the Text Input to prevent users from interacting with it.
+
+<ExampleCodeBlock code={Disabled} />
+
+### Placeholder
+
+Set the `placeholder` prop of the Text Input to display a sample of its expected format or value
+before a value has been provided.
+
+<ExampleCodeBlock code={Placeholder} />
+
+### Ref Forwarding
+
+Text Input supports [ref forwarding](https://reactjs.org/docs/forwarding-refs.html). It will forward
+`ref` to its underlying `<input type="text">` element.
+
+<ExampleCodeBlock code={RefForwarding} />
+
+### Grow
+
+The input container extends from Box so it is easy to extend full width, e.g. setting width prop to
+100%
+
+<ExampleCodeBlock code={Grow} />
+
+### Label Position
+
+Setting the Label position can be done using HStack or VStack
+
+<ExampleCodeBlock code={LabelPosition} />
+
+### Label Position
+
+If your label is just for screen reader users you can add the isVisuallyHidden to TextInput.Label
+
+<ExampleCodeBlock code={HiddenLabel} />
+
+### Required
+
+Set the `required` prop TextInput.Field to `true` to indicate that the field is required. You can
+add an red asterisk by adding isRequiredLabel to TextInput.Label.
+
+<ExampleCodeBlock code={Required} />
+
+### Type
+
+Set the `type` prop TextInput.Field to any allowed string, e.g. password to change the input field
+type.
+
+<ExampleCodeBlock code={Password} />
+
+### Error States
+
+Call the `addError` or `addAlert` event from useTextInputModel to set the TextInput to the Error or
+Alert state, respectively. If you have an accompanying hint you can use the TextInput.Hint
+subcomponent.
+
+#### Alert
+
+<ExampleCodeBlock code={Alert} />
+
+#### Error
+
+<ExampleCodeBlock code={Error} />
+
+#### Themed Alert
+
+<ExampleCodeBlock code={ThemedAlert} />
+
+#### Themed Error
+
+<ExampleCodeBlock code={ThemedError} />
+
+#### Adding Errors
+
+<ExampleCodeBlock code={AddingErrors} />
