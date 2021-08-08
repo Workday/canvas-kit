@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {render, fireEvent} from '@testing-library/react';
 import {TextInput} from '../lib/TextInput';
+import {ErrorType} from '@workday/canvas-kit-react/common';
 
 const id = 'Test Text Input';
 const placeholder = 'Test Text Input';
@@ -76,6 +77,84 @@ describe('Text Input', () => {
       );
       fireEvent.change(getByRole('textbox'), {target: {value: 'Test'}});
       expect(cb).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe('when rendered as required', () => {
+    it('should add a required element to the label to indicate that it is required', () => {
+      const required = 'required';
+      const {getByText} = render(
+        <TextInput>
+          <TextInput.Label isRequiredLabel={required}>Test</TextInput.Label>
+        </TextInput>
+      );
+
+      expect(getByText('*')).toHaveAttribute('title', required);
+    });
+  });
+
+  describe('when rendered a hint id', () => {
+    it('the input and hint text should have matching ids for accessibility', () => {
+      const hintId = 'hintId';
+      const hintText = 'Helpful text goes here.';
+      const {container} = render(
+        <TextInput hintId={hintId}>
+          <TextInput.Field />
+          <TextInput.Hint>{hintText}</TextInput.Hint>
+        </TextInput>
+      );
+
+      expect(container.querySelector('p')).toHaveAttribute('id', hintId);
+      expect(container.querySelector('input')).toHaveAttribute('aria-describedby', hintId);
+    });
+  });
+
+  describe('when rendered a input id', () => {
+    it('the input and label should have matching ids for accessibility', () => {
+      const inputId = 'inputId';
+      const {container} = render(
+        <TextInput inputId={inputId}>
+          <TextInput.Label>Test</TextInput.Label>
+          <TextInput.Field />
+        </TextInput>
+      );
+
+      expect(container.querySelector('label')).toHaveAttribute('for', inputId);
+      expect(container.querySelector('input')).toHaveAttribute('id', inputId);
+    });
+  });
+
+  describe('when rendered with an error', () => {
+    it('the input should have aria-invalid for accessibility', () => {
+      const {container} = render(
+        <TextInput initialError={ErrorType.Error}>
+          <TextInput.Field />
+        </TextInput>
+      );
+      expect(container.querySelector('input')).toHaveAttribute('aria-invalid', 'true');
+    });
+  });
+
+  describe('when rendered with an alert', () => {
+    it('the input should not have aria-invalid', () => {
+      const {container} = render(
+        <TextInput initialError={ErrorType.Alert}>
+          <TextInput.Field />
+        </TextInput>
+      );
+      expect(container.querySelector('input')).not.toHaveAttribute('aria-invalid');
+    });
+  });
+
+  describe('when rendered with no inputId', () => {
+    it('the input should have a unique id', () => {
+      const {container} = render(
+        <TextInput>
+          <TextInput.Field />
+        </TextInput>
+      );
+      const uniqueId = container.querySelector('input').getAttribute('id');
+      expect(container.querySelector('input')).toHaveAttribute('id', uniqueId);
     });
   });
 });

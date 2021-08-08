@@ -4,6 +4,7 @@ import {borderRadius, inputColors, spaceNumbers, type} from '@workday/canvas-kit
 import {
   createComponent,
   errorRing,
+  ErrorType,
   ExtractProps,
   styled,
   StyledType,
@@ -81,7 +82,7 @@ export const TextInputField = createComponent('input')({
         as="input"
         hasError={state.hasError}
         theme={theme}
-        aria-invalid={state.hasError ? true : undefined}
+        aria-invalid={state.hasError === ErrorType.Error ? true : undefined}
         aria-describedby={state.hintId}
         id={state.inputId}
         {...elemProps}
