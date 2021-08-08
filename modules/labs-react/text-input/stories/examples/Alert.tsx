@@ -1,5 +1,5 @@
 import React from 'react';
-import {TextInput, useTextInputModel} from '@workday/canvas-kit-labs-react/text-input';
+import {TextInput} from '@workday/canvas-kit-labs-react/text-input';
 import {VStack} from '@workday/canvas-kit-labs-react/layout';
 import {ErrorType} from '@workday/canvas-kit-react/common';
 import {space} from '@workday/canvas-kit-react/tokens';
@@ -11,11 +11,9 @@ export const Alert = () => {
     setValue(event.target.value);
   };
 
-  const model = useTextInputModel({initialError: ErrorType.Alert});
-
   return (
     <VStack spacing="xxxs" alignItems="flex-start">
-      <TextInput model={model}>
+      <TextInput initialError={ErrorType.Alert}>
         <TextInput.Label>Email</TextInput.Label>
         <TextInput.Field onChange={handleChange} value={value} />
         <TextInput.Hint paddingTop={space.xxs}>

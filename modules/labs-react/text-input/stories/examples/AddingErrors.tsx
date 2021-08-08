@@ -5,17 +5,19 @@ import {space} from '@workday/canvas-kit-react/tokens';
 
 export const AddingErrors = () => {
   const [value, setValue] = React.useState('');
-  const [showHint, setShowHint] = React.useState(false);
+  const [hint, setHint] = React.useState('');
 
   const model = useTextInputModel();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.value.length <= 2) {
+    const stringLength = event.target.value.length;
+    if (stringLength !== 3) {
       model.events.addError();
-      setShowHint(true);
+      const hintStart = 'Word length must be';
+      setHint(stringLength < 3 ? `${hintStart} greater than 2` : `${hintStart} less than 4`);
     } else {
       model.events.removeError();
-      setShowHint(false);
+      setHint('');
     }
     setValue(event.target.value);
   };
@@ -25,9 +27,7 @@ export const AddingErrors = () => {
       <TextInput model={model}>
         <TextInput.Label>A three letter word</TextInput.Label>
         <TextInput.Field onChange={handleChange} value={value} />
-        {showHint && (
-          <TextInput.Hint paddingTop={space.xxs}>Word length must be greater than 2</TextInput.Hint>
-        )}
+        <TextInput.Hint paddingTop={space.xxs}>{hint}</TextInput.Hint>
       </TextInput>
     </VStack>
   );

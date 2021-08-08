@@ -1,5 +1,5 @@
 import React from 'react';
-import {TextInput, useTextInputModel} from '@workday/canvas-kit-labs-react/text-input';
+import {TextInput} from '@workday/canvas-kit-labs-react/text-input';
 import {VStack} from '@workday/canvas-kit-labs-react/layout';
 import {
   CanvasProvider,
@@ -14,8 +14,6 @@ export const ThemedError = () => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
   };
-
-  const model = useTextInputModel({initialError: ErrorType.Error});
 
   const theme: PartialEmotionCanvasTheme = {
     canvas: {
@@ -33,10 +31,12 @@ export const ThemedError = () => {
   return (
     <CanvasProvider theme={theme}>
       <VStack spacing="xxxs" alignItems="flex-start">
-        <TextInput model={model}>
+        <TextInput initialError={ErrorType.Error}>
           <TextInput.Label isRequiredLabel="A Valid Email is required">Email</TextInput.Label>
           <TextInput.Field onChange={handleChange} value={value} />
-          <TextInput.Hint paddingTop={space.xxs}>Please enter an email.</TextInput.Hint>
+          <TextInput.Hint paddingTop={space.xxs}>
+            {!value && 'Please enter an email.'}
+          </TextInput.Hint>
         </TextInput>
       </VStack>
     </CanvasProvider>
