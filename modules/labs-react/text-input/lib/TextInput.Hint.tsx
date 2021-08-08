@@ -44,8 +44,8 @@ export const TextInputHint = createComponent('p')({
 
     return (
       <StyledBox
-        ref={ref}
         as={Element}
+        ref={ref}
         hasError={state.hasError}
         theme={theme}
         id={state.hintId}

@@ -3,6 +3,7 @@ import React from 'react';
 import {
   accessibleHide,
   createComponent,
+  ExtractProps,
   styled,
   StyledType,
   Themeable,
@@ -10,11 +11,12 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {type} from '@workday/canvas-kit-react/tokens';
 import {HStack} from '@workday/canvas-kit-labs-react/layout';
+import {Box} from '@workday/canvas-kit-labs-react/common';
 
 import {TextInputModel} from './useTextInputModel';
 import {TextInputModelContext} from './TextInput';
 
-export interface TextInputLabelProps extends Themeable {
+export interface TextInputLabelProps extends ExtractProps<typeof Box, 'label'>, Themeable {
   model?: TextInputModel;
   /**
    * If the field is required, provide the title required label.
@@ -30,11 +32,12 @@ export interface TextInputLabelProps extends Themeable {
   children: React.ReactNode;
 }
 
-const StyledLabel = styled('label')<Pick<TextInputLabelProps, 'isVisuallyHidden'> & StyledType>(
+const StyledBox = styled(Box as typeof TextInputLabel)<
+  Pick<TextInputLabelProps, 'isVisuallyHidden'> & StyledType
+>(
   type.levels.subtext.large,
   {
     fontWeight: type.properties.fontWeights.medium,
-    padding: 0,
     minWidth: '180px',
   },
   ({isVisuallyHidden}) => isVisuallyHidden && accessibleHide
@@ -62,7 +65,8 @@ export const TextInputLabel = createComponent('label')({
     const {state} = useModelContext(TextInputModelContext, model);
 
     return (
-      <StyledLabel
+      <StyledBox
+        as="label"
         ref={ref}
         htmlFor={state.inputId}
         theme={theme}
@@ -73,7 +77,7 @@ export const TextInputLabel = createComponent('label')({
           <span>{children}</span>
           {!!isRequiredLabel && <RequiredAsterisk title={isRequiredLabel}>*</RequiredAsterisk>}
         </HStack>
-      </StyledLabel>
+      </StyledBox>
     );
   },
 });

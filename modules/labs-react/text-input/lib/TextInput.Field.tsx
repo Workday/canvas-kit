@@ -77,9 +77,9 @@ export const TextInputField = createComponent('input')({
 
     return (
       <StyledBox
-        type="text"
-        ref={ref}
         as="input"
+        ref={ref}
+        type="text"
         hasError={state.hasError}
         theme={theme}
         aria-invalid={state.hasError === ErrorType.Error ? true : undefined}
