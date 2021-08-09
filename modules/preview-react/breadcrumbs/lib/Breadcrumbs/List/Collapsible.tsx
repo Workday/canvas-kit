@@ -18,7 +18,9 @@ export interface CollapsibleListProps
   extends React.HTMLAttributes<HTMLUListElement>,
     Pick<DropdownButtonProps, 'buttonIcon'> {
   /**
-   * The accessibility label for the dropdown menu button
+   * The accessibility label for the dropdown menu button.
+   *
+   * Suggested value: "more links"
    */
   buttonAriaLabel: string;
   /**
