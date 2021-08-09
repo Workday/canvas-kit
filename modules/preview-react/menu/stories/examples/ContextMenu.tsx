@@ -8,10 +8,6 @@ export const ContextMenu = () => {
   const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>();
   const [selectedItemIndex, setSelectedItemIndex] = React.useState<number>();
 
-  const handleOpen = () => {
-    setOpened(!isOpen);
-  };
-
   const handleContext = (event: React.MouseEvent<HTMLElement>) => {
     const {currentTarget} = event;
 
