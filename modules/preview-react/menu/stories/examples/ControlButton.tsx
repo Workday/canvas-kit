@@ -73,8 +73,8 @@ export const ControlButton = () => {
         <Popper placement={'bottom-start'} open={isOpen} anchorElement={anchorEl}>
           <div style={{opacity: isOpen ? 1 : 0, display: isOpen ? `initial` : `none`}}>
             <Menu initialSelectedItem={selectedItemIndex} isOpen={isOpen} onClose={handleClose}>
-              <MenuItem>First menu item</MenuItem>
-              <MenuItem>Second menu item</MenuItem>
+              <MenuItem>First Item</MenuItem>
+              <MenuItem>Second Item</MenuItem>
             </Menu>
           </div>
         </Popper>

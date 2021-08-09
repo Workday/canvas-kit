@@ -5,14 +5,15 @@ import {Menu, MenuItem} from '@workday/canvas-kit-preview-react/menu';
 export const Icons = () => {
   return (
     <Menu title="Menu Title">
-      <MenuItem icon={setupIcon}>First menu item</MenuItem>
-      <MenuItem icon={uploadCloudIcon} secondaryIcon={extLinkIcon}>
-        Second menu item
+      <MenuItem icon={uploadCloudIcon}>First Item</MenuItem>
+      <MenuItem icon={setupIcon}>Second Item (with a really really really long label)</MenuItem>
+      <MenuItem isDisabled icon={uploadCloudIcon} secondaryIcon={extLinkIcon}>
+        Third Item
       </MenuItem>
-      <MenuItem isDisabled icon={userIcon}>
-        Third menu item
+      <MenuItem icon={userIcon}></MenuItem>
+      <MenuItem hasDivider icon={userIcon}>
+        Fifth Item (with divider)
       </MenuItem>
-      <MenuItem icon={extLinkIcon}>Fourth menu item</MenuItem>
     </Menu>
   );
 };
