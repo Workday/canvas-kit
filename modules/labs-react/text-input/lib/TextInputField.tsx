@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {borderRadius, inputColors, spaceNumbers, type} from '@workday/canvas-kit-react/tokens';
+import {borderRadius, inputColors, space, type} from '@workday/canvas-kit-react/tokens';
 import {
   createComponent,
   errorRing,
@@ -20,21 +20,12 @@ export interface TextInputFieldProps extends ExtractProps<typeof Box, never>, Th
   model?: TextInputModel;
 }
 
-const StyledBox = styled(Box)<
+const StyledBox = styled(Box as typeof TextInputField)<
   Pick<TextInputFieldProps, 'theme'> & Pick<TextInputModel['state'], 'hasError'> & StyledType
 >(
   {
     ...type.levels.subtext.large,
-    border: `1px solid ${inputColors.border}`,
-    display: 'block',
-    backgroundColor: inputColors.background,
-    borderRadius: borderRadius.m,
-    boxSizing: 'border-box',
-    height: 40,
     transition: '0.2s box-shadow, 0.2s border-color',
-    padding: spaceNumbers.xxs, // Compensate for border
-    margin: 0, // Fix Safari
-    minWidth: '280px',
     '&::placeholder': {
       color: inputColors.placeholder,
     },
@@ -85,6 +76,14 @@ export const TextInputField = createComponent('input')({
         aria-invalid={state.hasError === ErrorType.Error ? true : undefined}
         aria-describedby={state.hintId}
         id={state.inputId}
+        padding={space.xxs}
+        margin={0}
+        minWidth="280px"
+        border={`1px solid ${inputColors.border}`}
+        backgroundColor={inputColors.background}
+        borderRadius={borderRadius.m}
+        display="block"
+        height="40px"
         {...elemProps}
       />
     );

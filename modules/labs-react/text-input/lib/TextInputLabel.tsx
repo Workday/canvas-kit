@@ -38,7 +38,6 @@ const StyledBox = styled(Box as typeof TextInputLabel)<
   type.levels.subtext.large,
   {
     fontWeight: type.properties.fontWeights.medium,
-    minWidth: '180px',
   },
   ({isVisuallyHidden}) => isVisuallyHidden && accessibleHide
 );
@@ -71,6 +70,7 @@ export const TextInputLabel = createComponent('label')({
         htmlFor={state.inputId}
         theme={theme}
         isVisuallyHidden={isVisuallyHidden}
+        minWidth="180px"
         {...elemProps}
       >
         <HStack spacing="xxxs">
