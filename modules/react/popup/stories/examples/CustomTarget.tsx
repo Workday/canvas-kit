@@ -8,14 +8,18 @@ import {
   useInitialFocus,
   useReturnFocus,
 } from '@workday/canvas-kit-react/popup';
+import {useForkRef} from '@workday/canvas-kit-react/common'
 
 interface MyTargetProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   label: string;
 }
 
-const MyTarget = ({label, ...props}: MyTargetProps) => {
-  return <button {...props}>{label}</button>;
-};
+const MyTarget = React.forwardRef(({label, ...props}: MyTargetProps, ref) => {
+  const myRef = React.useRef(ref);
+	const elementRef = useForkRef(ref, myRef);
+
+  return <button {...props} ref={elementRef}>{label}</button>;
+});
 
 export const CustomTarget = () => {
   const model = usePopupModel();
