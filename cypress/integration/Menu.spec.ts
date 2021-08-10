@@ -27,7 +27,7 @@ describe('Menu', () => {
 
   context('given "With Many Items" story is rendered', () => {
     beforeEach(() => {
-      h.stories.load('Preview/Menu/React', 'With Many Items');
+      h.stories.load('Preview/Menu/React', 'Control Button');
     });
 
     it('should not have any axe errors', () => {
