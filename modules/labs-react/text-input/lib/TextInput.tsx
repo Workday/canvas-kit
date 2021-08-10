@@ -3,9 +3,9 @@ import React from 'react';
 import {createComponent, useDefaultModel} from '@workday/canvas-kit-react/common';
 
 import {useTextInputModel, TextInputModel, TextInputModelConfig} from './useTextInputModel';
-import {TextInputField} from './TextInput.Field';
-import {TextInputLabel} from './TextInput.Label';
-import {TextInputHint} from './TextInput.Hint';
+import {TextInputField} from './TextInputField';
+import {TextInputLabel} from './TextInputLabel';
+import {TextInputHint} from './TextInputHint';
 
 export const TextInputModelContext = React.createContext<TextInputModel>({} as any);
 
