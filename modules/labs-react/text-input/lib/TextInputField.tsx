@@ -16,7 +16,7 @@ import {Box} from '@workday/canvas-kit-labs-react/common';
 import {TextInputModelContext} from './TextInput';
 import {TextInputModel} from './useTextInputModel';
 
-export interface TextInputFieldProps extends ExtractProps<typeof Box, 'input'>, Themeable {
+export interface TextInputFieldProps extends ExtractProps<typeof Box, never>, Themeable {
   model?: TextInputModel;
 }
 

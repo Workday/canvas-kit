@@ -14,7 +14,7 @@ import {Box} from '@workday/canvas-kit-labs-react/common';
 import {TextInputModelContext} from './TextInput';
 import {TextInputModel} from './useTextInputModel';
 
-export interface TextInputHintProps extends ExtractProps<typeof Box>, Themeable {
+export interface TextInputHintProps extends ExtractProps<typeof Box, never>, Themeable {
   model?: TextInputModel;
   /**
    * Hint text to show to the user regarding the Error/Alert

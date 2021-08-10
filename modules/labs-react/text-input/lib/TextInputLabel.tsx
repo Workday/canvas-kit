@@ -16,7 +16,7 @@ import {Box} from '@workday/canvas-kit-labs-react/common';
 import {TextInputModel} from './useTextInputModel';
 import {TextInputModelContext} from './TextInput';
 
-export interface TextInputLabelProps extends ExtractProps<typeof Box, 'label'>, Themeable {
+export interface TextInputLabelProps extends ExtractProps<typeof Box, never>, Themeable {
   model?: TextInputModel;
   /**
    * If the field is required, provide the title required label.
