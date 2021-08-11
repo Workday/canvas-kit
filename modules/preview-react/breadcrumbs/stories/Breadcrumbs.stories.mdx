@@ -47,11 +47,8 @@ properly identified. All other accessible attributes are baked into the componen
 `Breadcrumbs.CollapsibleList` is built on top of `Breadcrumbs.List`. It provides additional
 functionality to collapse list items into a dropdown menu at a specified width.
 
-Accessibility is built into Breadcrumbs components in a way that allows you to create an inclusive
-experience with little additional configuration. The only ARIA labels you'll need to add are the
-`aria-label` for `Breadcrumbs.Nav` and the `buttonAriaLabel` for `Breadcrumbs.CollapsibleList`. And
-all links require `href`s to be properly identified. All other accessible attributes are baked into
-the components.
+In addition to adding `aria-label` to `Breadcrumbs.Nav` and identifying all links with an `href`,
+you'll need to add `buttonAriaLabel` to `Breadcrumbs.CollapsibleList`.
 
 <ExampleCodeBlock code={CollapsibleList} />
 
