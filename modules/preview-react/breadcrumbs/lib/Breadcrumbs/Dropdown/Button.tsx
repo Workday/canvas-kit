@@ -13,6 +13,8 @@ export interface DropdownButtonProps extends IconButtonProps {
   'aria-label': string;
   /**
    * The Canvas System Icon for the button
+   *
+   * @default relatedActionsIcon
    */
   buttonIcon?: CanvasSystemIcon;
   /**
