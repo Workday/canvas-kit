@@ -127,7 +127,35 @@ for a fully fledged example.
   menu item exists.
 - Otherwise, focus does not move.
 
-## Menu Component Props
+## Components
+
+### Menu
+
+#### Usage
+
+`Menu` renders a styled `<ul>` element with a role of `menu` and follows the [Active Menu pattern](https://www.w3.org/TR/wai-aria-practices/examples/menu-button/menu-button-actions-active-descendant.html) using `aria-activedescendant`.
+
+#### Props
+
+<ArgsTable of={Menu} />
+
+### MenuItem
+
+#### Usage
+
+`MenuItem` renders a `<li>` element with the correct attributes to ensure it is accessible. If you choose to implement your own custom menu items, be sure to use semantic `<li>` elements with the following attributes:
+
+- `role="menuitem"`
+- `tabindex={-1}`
+- `id`s following this pattern: `${MenuId}-${index}`
+
+#### Props
+
+<ArgsTable of={MenuItem} />
+
+## Specifications
+
+<Specifications file="Menu.spec.ts" name="Menu" />
 
 ### Required
 
