@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Breadcrumbs} from '@workday/canvas-kit-preview-react/breadcrumbs';
 
-export const StandardList = () => {
+export const Basic = () => {
   return (
     <Breadcrumbs.Nav aria-label="breadcrumb">
       <Breadcrumbs.List>
