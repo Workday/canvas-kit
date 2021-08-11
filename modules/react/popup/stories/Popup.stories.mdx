@@ -159,6 +159,12 @@ no UI and will render any children to the `body` element and position around a p
 Prefer using [Popup.Popper](#popuppopper) instead. Use this to make Popups that don't utilize a
 PopupModel or any associate popup [hooks](#hooks).
 
+> **Note:** `Popper` renders any children to a `div` element created by the `PopupStack`. This
+> element is not controlled by React, so any extra element props will _not_ be forwarded. The `ref`
+> will point to the `div` element created by the `PopupStack`, however. In v4, an extra `div`
+> element was rendered and that's where extra props were spread to. In v5+, you can provide your own
+> element if you wish.
+
 ## Popup
 
 This component is a container component that has no semantic element. It provides a React Context
@@ -212,6 +218,11 @@ styled component via the `as` prop.
 A `Popup.Popper` is a [Popper](#popper) component that is hooked up to the `PopupModel`
 automatically. The behavior hook used is called `usePopupPopper`.
 
+> **Note:** `Popup.Popper` renders any children to a `div` element created by the `PopupStack`. This
+> element is not controlled by React, so any extra element props will _not_ be forwarded. The `ref`
+> will point to the `div` element created by the `PopupStack`, however. If you wish to add extra
+> props to an element, add them to the `Popup.Card` instead.
+
 <ArgsTable of={Popup.Popper} />
 
 ## Popup.Card
@@ -243,10 +254,14 @@ A `Popup.Heading` is a wrapper around `Card.Heading` that connect the heading to
 will add an `id` to the element that match the `aria-labelledby` that is applied to the `Popup.Card`
 element for accessibility. The behavior hook used is called `usePopupHeading`.
 
+<ArgsTable of={Popup.Heading} />
+
 ## Popup.Body
 
 A `Popup.Body` is a thin wrapper around `Card.Body` and doesn't actually take a model. It adds
 `body` styling and nothing else.
+
+<ArgsTable of={Popup.Body} />
 
 ## Popup Model
 
