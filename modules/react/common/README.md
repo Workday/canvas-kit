@@ -290,7 +290,7 @@ only provide a common model for the subcomponents.
 ### `ExtractProps`
 
 v5 introduces components that could take an `as` prop, which means the underlying element that is
-rendered can change. Components props that use the `as` prop no longer extend an HTML attribute
+rendered can change. Component props that use the `as` prop no longer extend an HTML attribute
 interface because the interface is determined by the value of the `as` prop.
 
 `ExtractProps` can be used in place of importing a prop interface directly. If you wish to extend a
