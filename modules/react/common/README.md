@@ -341,7 +341,7 @@ this example, `onClick` doesn't exist on `MyComponent`, but since `MyComponent` 
 If we inspect the `MyNewComponentProps` type, it will return the following:
 
 ```tsx
-React.HTMLAttributes<HTMLElement> & MyComponentProps
+MyComponentProps & React.HTMLAttributes<HTMLElement>
 ```
 
 Inside Canvas Kit components, we use `ExtractProps` when we need to extend from the interfaces of
