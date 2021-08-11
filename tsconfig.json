@@ -10,7 +10,7 @@
     "lib": ["es2015", "es2017", "dom"],
     "moduleResolution": "node",
     "forceConsistentCasingInFileNames": true,
-    "removeComments": true,
+    "removeComments": false,
     "noImplicitReturns": true,
     "preserveConstEnums": true,
     "allowUnreachableCode": false,
