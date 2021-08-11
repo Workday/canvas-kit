@@ -13,7 +13,7 @@ export const ContextMenuTarget = createComponent('div')({
     const model = React.useContext(PopupModelContext);
     const elementRef = useForkRef(ref, model.state.targetRef as any);
 
-    const onContextMenu = (event: MouseEvent) => {
+    const onContextMenu = (event: React.MouseEvent) => {
       if (model.state.visibility === 'visible') {
         model.events.hide({event});
       } else if (model.state.visibility === 'hidden') {
