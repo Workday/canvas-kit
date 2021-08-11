@@ -200,10 +200,10 @@ return (
 
 `Breadcrumbs.CurrentItem` is a styled `<li>` element also renders a tooltip if the text is
 truncated. The built-in truncation + tooltip functionality provides an easy-to-use, accessible
-feature for managing the length of link text. By default, the `maxWidth` is set to `350px`, however
-you can adjust this as needed. Normally, this is a non-focusable element. But when truncated, it
-sets the `tabIndex` to `0` to enable the tooltip to appear on keyboard focus. Note that tooltips
-will only render when text is truncated. Here's an example with the `maxWidth` set to `100px`.
+feature for managing the length of link text. The `maxWidth` is set to `350px` by default and can be
+adjusted as needed. Normally, this is a non-focusable element. But when truncated, it sets the
+`tabIndex` to `0` to enable the tooltip to appear on keyboard focus. Note that tooltips will only
+render when text is truncated. Here's an example with the `maxWidth` set to `100px`.
 
 <ExampleCodeBlock code={CurrentItemTruncation} />
 
