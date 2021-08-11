@@ -26,9 +26,9 @@ describe('Breadcrumbs', () => {
   before(() => {
     h.stories.visit();
   });
-  context('given the [Preview/Breadcrumbs/React, Standard List] is rendered', () => {
+  context('given the [Preview/Breadcrumbs/React, Basic] example is rendered', () => {
     beforeEach(() => {
-      h.stories.load('Preview/Breadcrumbs/React', 'StandardList');
+      h.stories.load('Preview/Breadcrumbs/React', 'Basic');
     });
     it('should not have any axe errors', () => {
       cy.checkA11y();
