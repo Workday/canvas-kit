@@ -74,50 +74,6 @@ Below is an example:
 
 <ExampleCodeBlock code={ManyItems} />
 
-## Accessibility
-
-This component implements a actions menu using aria-activedescendant.
-[See the w3 example here](https://www.w3.org/TR/wai-aria-practices/examples/menu-button/menu-button-actions-active-descendant.html).
-If used in conjunction with a menu button you will need to add your own keyboard shortcuts, aria
-attributes, and focus management. See the
-[menu stories](https://workday.github.io/canvas-kit/?path=/story/preview-menu-react--control-button)
-for a fully fledged example.
-
-## Keyboard Shortcuts
-
-### Enter or Space
-
-- Activates the menu item, causing the Last Action textbox to be updated.
-- Closes the menu.
-
-### Escape
-
-- Closes the menu.
-
-### Up Arrow
-
-- Moves focus to the previous menu item.
-- If focus is on the first menu item, moves focus to the last menu item.
-
-### Down Arrow
-
-- Moves focus to the next menu item.
-- If focus is on the last menu item, moves focus to the first menu item.
-
-### Home
-
-- Moves focus to the first menu item.
-
-### End
-
-- Moves focus to the last menu item.
-
-### A-Z / a-z
-
-- Moves focus to the next menu item with a label that starts with the typed character if such an
-  menu item exists.
-- Otherwise, focus does not move.
-
 ## Components
 
 ### Menu
