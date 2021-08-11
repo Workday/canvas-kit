@@ -15,10 +15,7 @@ interface MyTargetProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const MyTarget = React.forwardRef(({label, ...props}: MyTargetProps, ref) => {
-  const myRef = React.useRef(ref);
-	const elementRef = useForkRef(ref, myRef);
-
-  return <button {...props} ref={elementRef}>{label}</button>;
+  return <button {...props} ref={ref}>{label}</button>;
 });
 
 export const CustomTarget = () => {
