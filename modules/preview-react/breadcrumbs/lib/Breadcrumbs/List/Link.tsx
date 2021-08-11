@@ -15,6 +15,8 @@ export interface BreadcrumbLinkProps extends React.AnchorHTMLAttributes<HTMLAnch
   href: string;
   /**
    * The max-width of the link text
+   *
+   * @default 350px
    */
   maxWidth?: number;
   /**
