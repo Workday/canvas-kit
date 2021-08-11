@@ -2,7 +2,7 @@ import {Meta} from '@storybook/addon-docs/blocks';
 import {Breadcrumbs} from '@workday/canvas-kit-preview-react/breadcrumbs';
 import {Specifications} from '@workday/canvas-kit-docs';
 
-import {StandardList} from './examples/StandardList';
+import {Basic} from './examples/Basic';
 import {CollapsibleList} from './examples/CollapsibleList';
 import {RTLCollapsibleList} from './examples/RTL';
 import {CurrentItemTruncation} from './examples/CurrentItemTruncation';
@@ -25,11 +25,7 @@ yarn add @workday/canvas-kit-preview-react
 
 ## Usage
 
-Breadcrumbs is a composable component that provides some flexibility in it's structure. There are
-two main variations: standard list and collapsible list. We'll discuss the standard list first. All
-subcomponents are described in more detail in the [Components](#components) section below.
-
-### Standard List Example
+### Basic Example
 
 `Breadcrumbs.List` is a styled unordered list `<ul>` with no additional behaviors. Use this when you
 are not concerned about collapsing the list of breadcrumb items into a dropdown menu at a specified
@@ -40,9 +36,9 @@ experience with little additional configuration. The only ARIA label you'll need
 `aria-label` for `Breadcrumbs.Nav` as seen in the example. And all links require `href`s to be
 properly identified. All other accessible attributes are baked into the components.
 
-<ExampleCodeBlock code={StandardList} />
+<ExampleCodeBlock code={Basic} />
 
-### Collapsible List Example
+### Collapsible List
 
 `Breadcrumbs.CollapsibleList` is built on top of `Breadcrumbs.List`. It provides additional
 functionality to collapse list items into a dropdown menu at a specified width.
@@ -70,10 +66,10 @@ All you need to supply is the translated text for items and ARIA labels.
 
 #### Props
 
-<ArgsTable of={Breadcrumbs.Nav} />
+This component also supports
+[all native HTMLElement props](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes).
 
-> Note: This component also supports
-> [all native HTMLElement props](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes).
+<ArgsTable of={Breadcrumbs.Nav} />
 
 ---
 
@@ -112,10 +108,10 @@ breadcrumb navigation as consistent as possible.
 
 #### Props
 
-<ArgsTable of={Breadcrumbs.CollapsibleList} />
+This component also supports
+[all native `<ul>` element props](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ul#Attributes).
 
-> Note: This component also supports
-> [all native `<ul>` element props](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ul#Attributes).
+<ArgsTable of={Breadcrumbs.CollapsibleList} />
 
 ---
 
@@ -184,10 +180,10 @@ return (
 
 #### Props
 
-<ArgsTable of={Breadcrumbs.Link} />
+This component also supports
+[all native `<a>` element props](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#Attributes).
 
-> Note: This component also supports
-> [all native `<a>` element props](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#Attributes).
+<ArgsTable of={Breadcrumbs.Link} />
 
 ---
 
@@ -206,10 +202,10 @@ render when text is truncated. Here's an example with the `maxWidth` set to `100
 
 #### Props
 
-<ArgsTable of={Breadcrumbs.CurrentItem} />
+This component also supports
+[all native `<li>` element props](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/li#Attributes).
 
-> Note: This component also supports
-> [all native `<li>` element props](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/li#Attributes).
+<ArgsTable of={Breadcrumbs.CurrentItem} />
 
 ## Specifications
 
