@@ -55,6 +55,14 @@ If you're using a menu button, you will need to add your own keyboard shortcuts,
 
 ### Custom Menu Item
 
+`Menu` renders a styled `<ul>` element with a role of `menu`, and `MenuItem`s are `<li>` elements with the correct attributes to ensure they are accessible. If you choose to implement your own custom menu items, be sure to use semantic `<li>` elements with the following attributes:
+
+- `role="menuitem"`
+- `tabindex={-1}`
+- `id`s following this pattern: `${MenuId}-${index}`
+
+Below is an example:
+
 <ExampleCodeBlock code={CustomMenuItem} />
 
 ### Icons
