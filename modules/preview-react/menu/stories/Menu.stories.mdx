@@ -74,16 +74,6 @@ Below is an example:
 
 <ExampleCodeBlock code={ManyItems} />
 
-## Special Children
-
-### `ul, li`
-
-For a semantic menu, this component will style a child `<ul>` element with a role of `menu`. If you
-implement your own `<MenuItem>` (see
-[menu stories](https://workday.github.io/canvas-kit/?path=/story/preview-menu-react--custom-menu-item)
-for an example), make sure you use a `<li>` with a role of `menuItem`, tabindex of `-1`, and ids
-that follow the pattern `${MenuId}-${index}`.
-
 ## Accessibility
 
 This component implements a actions menu using aria-activedescendant.
