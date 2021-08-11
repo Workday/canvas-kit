@@ -1,44 +1,57 @@
-import React from 'react';
-import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import {Popper} from '@workday/canvas-kit-react/popup';
+import * as React from 'react';
+
+import {styled, CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
+import {type} from '@workday/canvas-kit-react/tokens';
+import {fonts} from '@workday/canvas-kit-react-fonts';
 import {Menu, MenuItem} from '@workday/canvas-kit-preview-react/menu';
+import {
+  Popup,
+  usePopupModel,
+  useAlwaysCloseOnOutsideClick,
+  useCloseOnEscape,
+} from '@workday/canvas-kit-react/popup';
+
+import {ContextMenuTarget} from './ContextMenuTarget';
+
+const Container = styled('div')(...fonts, {
+  ...type.levels.body.small,
+});
 
 export const ContextMenu = () => {
-  const [isOpen, setOpened] = React.useState<boolean | undefined>();
-  const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>();
-  const [selectedItemIndex, setSelectedItemIndex] = React.useState<number>();
-
-  const handleContext = (event: React.MouseEvent<HTMLElement>) => {
-    const {currentTarget} = event;
-
-    setAnchorEl(currentTarget);
-    setOpened(!isOpen);
-    setSelectedItemIndex(0);
-
-    event.preventDefault();
+  const canvasTheme = {
+    canvas: {
+      direction: ContentDirection.LTR,
+    },
   };
 
-  const handleClose = () => {
-    if (!isOpen) {
-      return;
-    }
+  const model = usePopupModel();
 
-    setOpened(false);
-  };
+  useAlwaysCloseOnOutsideClick(model);
+  useCloseOnEscape(model);
 
   return (
-    <ClickAwayListener onClickAway={handleClose}>
-      <div>
-        <div onContextMenu={handleContext}>Right click on this text.</div>
-        <Popper placement={'bottom-start'} open={isOpen} anchorElement={anchorEl}>
-          <div style={{opacity: isOpen ? 1 : 0, display: isOpen ? `initial` : `none`}}>
-            <Menu initialSelectedItem={selectedItemIndex} isOpen={isOpen} onClose={handleClose}>
-              <MenuItem>First Item</MenuItem>
-              <MenuItem>Second Item</MenuItem>
+    <CanvasProvider theme={canvasTheme}>
+      <Container>
+        <Popup model={model}>
+          <ContextMenuTarget style={{display: 'inline'}} tabIndex={0}>
+            Right click on this text (Context menu target)
+          </ContextMenuTarget>
+          <Popup.Popper>
+            <Menu onClose={model.events.hide}>
+              <MenuItem>Back</MenuItem>
+              <MenuItem>Forward</MenuItem>fd
+              <MenuItem>Reload</MenuItem>
+              <MenuItem hasDivider>Bookmark Page</MenuItem>
+              <MenuItem>Save Page As...</MenuItem>
+              <MenuItem>Select All</MenuItem>
+              <MenuItem hasDivider>Take Screenshot</MenuItem>
+              <MenuItem hasDivider>View Page Source</MenuItem>
+              <MenuItem>Inspect Accessibility Properties</MenuItem>
+              <MenuItem>Inspect</MenuItem>
             </Menu>
-          </div>
-        </Popper>
-      </div>
-    </ClickAwayListener>
+          </Popup.Popper>
+        </Popup>
+      </Container>
+    </CanvasProvider>
   );
 };
