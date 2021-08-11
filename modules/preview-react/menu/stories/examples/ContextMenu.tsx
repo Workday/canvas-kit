@@ -32,7 +32,7 @@ export const ContextMenu = () => {
         <Popup.Popper>
           <Menu onClose={model.events.hide}>
             <MenuItem>Back</MenuItem>
-            <MenuItem>Forward</MenuItem>fd
+            <MenuItem>Forward</MenuItem>
             <MenuItem>Reload</MenuItem>
             <MenuItem hasDivider>Bookmark Page</MenuItem>
             <MenuItem>Save Page As...</MenuItem>
