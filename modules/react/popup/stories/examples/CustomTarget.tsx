@@ -8,7 +8,6 @@ import {
   useInitialFocus,
   useReturnFocus,
 } from '@workday/canvas-kit-react/popup';
-import {useForkRef} from '@workday/canvas-kit-react/common'
 
 interface MyTargetProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   label: string;
