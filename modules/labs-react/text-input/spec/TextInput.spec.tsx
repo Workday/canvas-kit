@@ -127,22 +127,11 @@ describe('Text Input', () => {
   describe('when rendered with an error', () => {
     it('the input should have aria-invalid for accessibility', () => {
       const {container} = render(
-        <TextInput initialError={ErrorType.Error}>
+        <TextInput hasError={true}>
           <TextInput.Field />
         </TextInput>
       );
       expect(container.querySelector('input')).toHaveAttribute('aria-invalid', 'true');
-    });
-  });
-
-  describe('when rendered with an alert', () => {
-    it('the input should not have aria-invalid', () => {
-      const {container} = render(
-        <TextInput initialError={ErrorType.Alert}>
-          <TextInput.Field />
-        </TextInput>
-      );
-      expect(container.querySelector('input')).not.toHaveAttribute('aria-invalid');
     });
   });
 

@@ -56,7 +56,7 @@ const StyledBox = styled(Box as typeof TextInputField)<
         boxShadow: `inset 0 0 0 1px ${theme.canvas.palette.common.focusOutline}`,
         outline: 'none',
       },
-      ...errorRing(hasError, theme),
+      ...errorRing(hasError ? ErrorType.Error : undefined, theme),
     };
   }
 );
@@ -73,7 +73,7 @@ export const TextInputField = createComponent('input')({
         type="text"
         hasError={state.hasError}
         theme={theme}
-        aria-invalid={state.hasError === ErrorType.Error ? true : undefined}
+        aria-invalid={state.hasError ? true : undefined}
         aria-describedby={state.hintId}
         id={state.inputId}
         padding={space.xxs}

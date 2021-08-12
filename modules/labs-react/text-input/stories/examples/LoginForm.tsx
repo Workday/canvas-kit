@@ -49,23 +49,10 @@ export const LoginForm = () => {
     },
   });
 
-  React.useEffect(() => {
-    if (formik.touched.email && formik.errors.email) {
-      emailModel.events.addError();
-    } else {
-      emailModel.events.removeError();
-    }
-    if (formik.touched.password && formik.errors.password) {
-      passwordModel.events.addError();
-    } else {
-      passwordModel.events.removeError();
-    }
-  }, [formik.touched, formik.errors, emailModel.events, passwordModel.events]);
-
   return (
     <form onSubmit={formik.handleSubmit} action=".">
       <VStack spacing="xs" alignItems="flex-start">
-        <TextInput model={emailModel}>
+        <TextInput model={emailModel} hasError={formik.touched.email && !!formik.errors.email}>
           <TextInput.Label isRequiredLabel={emailRequired}>Email</TextInput.Label>
           <TextInput.Field
             name="email"
@@ -77,7 +64,10 @@ export const LoginForm = () => {
           />
           <TextInput.Hint>{formik.touched.email && formik.errors.email}</TextInput.Hint>
         </TextInput>
-        <TextInput model={passwordModel}>
+        <TextInput
+          model={passwordModel}
+          hasError={formik.touched.password && !!formik.errors.password}
+        >
           <TextInput.Label isRequiredLabel={passwordRequired}>Password</TextInput.Label>
           <HStack spacing="xxs">
             <TextInput.Field

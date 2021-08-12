@@ -31,7 +31,7 @@ export const ThemedError = () => {
   return (
     <CanvasProvider theme={theme}>
       <VStack spacing="xxxs" alignItems="flex-start">
-        <TextInput initialError={ErrorType.Error}>
+        <TextInput hasError={!value}>
           <TextInput.Label isRequiredLabel="A Valid Email is required">Email</TextInput.Label>
           <TextInput.Field onChange={handleChange} value={value} />
           <TextInput.Hint paddingTop={space.xxs}>

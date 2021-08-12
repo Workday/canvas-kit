@@ -26,7 +26,7 @@ const StyledBox = styled(Box)<
   Pick<TextInputHintProps, 'theme'> & Pick<TextInputModel['state'], 'hasError'> & StyledType
 >(
   type.levels.subtext.medium,
-  ({hasError, theme}) => hasError === ErrorType.Error && {color: theme.canvas.palette.error.main}
+  ({hasError, theme}) => hasError && {color: theme.canvas.palette.error.main}
 );
 
 export const TextInputHint = createComponent('p')({

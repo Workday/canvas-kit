@@ -1,7 +1,6 @@
 import React from 'react';
 import {TextInput} from '@workday/canvas-kit-labs-react/text-input';
 import {VStack} from '@workday/canvas-kit-labs-react/layout';
-import {ErrorType} from '@workday/canvas-kit-react/common';
 import {space} from '@workday/canvas-kit-react/tokens';
 
 export const Error = () => {
@@ -13,7 +12,7 @@ export const Error = () => {
 
   return (
     <VStack spacing="xxxs" alignItems="flex-start">
-      <TextInput initialError={ErrorType.Error}>
+      <TextInput hasError={true}>
         <TextInput.Label>Email</TextInput.Label>
         <TextInput.Field onChange={handleChange} value={value} />
         <TextInput.Hint paddingTop={space.xxs}>

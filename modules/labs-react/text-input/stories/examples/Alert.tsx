@@ -1,7 +1,8 @@
 import React from 'react';
 import {TextInput} from '@workday/canvas-kit-labs-react/text-input';
 import {VStack} from '@workday/canvas-kit-labs-react/layout';
-import {ErrorType} from '@workday/canvas-kit-react/common';
+import {styled} from '@workday/canvas-kit-react/common';
+import {useThemedRing} from '@workday/canvas-kit-labs-react/common';
 import {space} from '@workday/canvas-kit-react/tokens';
 
 export const Alert = () => {
@@ -11,11 +12,17 @@ export const Alert = () => {
     setValue(event.target.value);
   };
 
+  const alertStyles = useThemedRing('alert');
+
+  const StyledField = styled(TextInput.Field)<{hasAlert?: boolean}>(({hasAlert}) =>
+    hasAlert ? {...alertStyles} : {}
+  );
+
   return (
     <VStack spacing="xxxs" alignItems="flex-start">
-      <TextInput initialError={ErrorType.Alert}>
+      <TextInput>
         <TextInput.Label>Email</TextInput.Label>
-        <TextInput.Field onChange={handleChange} value={value} />
+        <StyledField hasAlert={true} onChange={handleChange} value={value} />
         <TextInput.Hint paddingTop={space.xxs}>
           <strong>Alert: </strong>Please enter a valid email.
         </TextInput.Hint>
