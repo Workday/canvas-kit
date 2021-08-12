@@ -1,10 +1,9 @@
 import React from 'react';
-import {Modal} from '@workday/canvas-kit-react/modal';
+import {Modal, useModalModel} from '@workday/canvas-kit-react/modal';
 import {DeleteButton} from '@workday/canvas-kit-react/button';
 import FormField from '@workday/canvas-kit-react/form-field';
 import TextInput from '@workday/canvas-kit-react/text-input';
 import {HStack} from '@workday/canvas-kit-labs-react';
-import {useModalModel} from '../../lib/hooks';
 
 export const CustomFocus = () => {
   const ref = React.useRef<HTMLInputElement>(null);

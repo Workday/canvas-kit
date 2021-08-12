@@ -1,0 +1,62 @@
+import {Meta} from '@storybook/addon-docs/blocks';
+
+import {Banner} from '@workday/canvas-kit-react/banner';
+
+import {ActionText} from './examples/ActionText';
+import {Basic} from './examples/Basic';
+import {Error} from './examples/Error';
+import {Sticky} from './examples/Sticky';
+
+<Meta title="Components/Indicators/Banner/React" component={Banner} />
+
+# Canvas Kit Banner
+
+Banners surface important information and feedback to the user about a task, action, or state.
+
+[> Workday Design Reference](https://design.workday.com/components/indicators/banners)
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-react
+```
+
+## Usage
+
+### Basic Example
+
+<ExampleCodeBlock code={Basic} />
+
+### Error Type
+
+Set the `error` prop of the Banner to designate the severity of the message presented in the banner.
+`error` accepts the following values:
+
+- `Banner.ErrorType.Alert` (Default)
+- `Banner.ErrorType.Error`
+
+<ExampleCodeBlock code={Error} />
+
+### Variant
+
+Banner is available in two variants. `variant` accepts the following values:
+
+- `Banner.Variant.Full` (Default)
+- `Banner.Variant.Sticky`
+
+Use the `Sticky` variant if the Banner is to be displayed along the right edge of the page.
+
+<ExampleCodeBlock code={Sticky} />
+
+#### Action Text
+
+Set the `actionText` prop to customize the text of the link contained in the Banner. `actionText` is
+only available in the `Full` variant and has a default value of `View All`.
+
+<ExampleCodeBlock code={ActionText} />
+
+## Props
+
+Undocumented props are spread to the outermost element rendered by Banner.
+
+<ArgsTable of={Banner} />

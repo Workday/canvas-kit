@@ -4,7 +4,6 @@ import {ActionBar} from '@workday/canvas-kit-react/action-bar';
 import {Specifications} from '@workday/canvas-kit-docs';
 
 import {Basic} from './examples/Basic';
-import {Fixed} from './examples/Fixed';
 
 <Meta title="Components/Buttons/Action Bar/React" component={ActionBar} />
 
@@ -34,7 +33,12 @@ UIs" and on mobile devices.
 The Action Bar generally lives at the bottom of the viewport. If you would like this behavior
 automatically (using `position: fixed`), you can use the `fixed` prop.
 
-<ExampleCodeBlock code={Fixed} />
+```tsx
+<ActionBar fixed={true}>
+  <PrimaryButton>Button</PrimaryButton>
+  <SecondaryButton>Button</SecondaryButton>
+</ActionBar>
+```
 
 ## Responsive Behavior
 

@@ -2,7 +2,8 @@ const docGen = require('react-docgen-typescript');
 const docGenLoader = require('react-docgen-typescript-loader/dist/generateDocgenCodeBlock.js');
 const ts = require('typescript');
 const path = require('path');
-const tsconfigPath = path.join(__dirname, './tsconfig.json');
+const tsconfigPath = path.join(__dirname, '../tsconfig.json');
+const fs = require('fs');
 
 const propFilter = (fileName, prop, component) => {
   // `PropTables.tsx` files are okay to pass through
@@ -20,11 +21,34 @@ const propFilter = (fileName, prop, component) => {
   return false;
 };
 
+function getConfig(tsconfigPath) {
+  const basePath = path.dirname(tsconfigPath);
+  const {config, error} = ts.readConfigFile(tsconfigPath, filename =>
+    fs.readFileSync(filename, 'utf8')
+  );
+
+  const {options, errors} = ts.parseJsonConfigFileContent(
+    config,
+    ts.sys,
+    basePath,
+    {},
+    tsconfigPath
+  );
+
+  return options;
+}
+
+// Cache the tsProgram for faster updates This prevents JSDoc updates from reflecting in the doc
+// source, but that already didn't work Creating a new tsProgram takes about 1.5s. Skipping brings
+// down hot reload times from 2s to 500ms. That's worthwhile.
+let tsProgram;
+let moduleCount = 0;
+
 class DocgenPlugin {
   apply(compiler) {
-    const pathRegex = RegExp(`modules.+\.tsx`);
+    const pathRegex = /modules.+\.tsx/;
     compiler.hooks.compilation.tap('DocgenPlugin', compilation => {
-      compilation.hooks.seal.tap('DocgenPlugin', modules => {
+      compilation.hooks.seal.tap('DocgenPlugin', () => {
         const modulesToProcess = [];
         compilation.modules.forEach(module => {
           // Skip ignored / external modules
@@ -36,14 +60,15 @@ class DocgenPlugin {
           }
         });
 
-        const tsProgram = ts.createProgram(
-          modulesToProcess.map(v => v.userRequest),
-          {
-            jsx: ts.JsxEmit.React,
-            module: ts.ModuleKind.CommonJS,
-            target: ts.ScriptTarget.Latest,
-          }
-        );
+        if (moduleCount !== modulesToProcess.length) {
+          // create a shared TS program of all TS files used by webpack
+          tsProgram = ts.createProgram(
+            modulesToProcess.map(v => v.userRequest),
+            getConfig(tsconfigPath)
+          );
+          moduleCount = modulesToProcess.length;
+        }
+
         modulesToProcess.forEach(m => processModule(m, tsProgram));
       });
     });
@@ -57,6 +82,8 @@ const processModule = (module, tsProgram) => {
     .withCustomConfig(tsconfigPath, {
       propFilter: (prop, component) => propFilter(module.userRequest, prop, component),
     })
+    // Using `parseWithProgramProvider` because `.parse` would create a new TS program with each module
+    // which is much slower
     .parseWithProgramProvider(module.userRequest, () => tsProgram);
 
   if (!componentDocs.length) return;
@@ -65,6 +92,13 @@ const processModule = (module, tsProgram) => {
   componentDocs.forEach(d => {
     if (d.props.as) {
       d.props.as.required = false;
+      // More useful than `ElementType<any>`
+      d.props.as.type.name =
+        '"symbol" | "object" | "small" | "a" | "abbr" | "address" | "area" | "article" | "aside" | "audio" | "b" | "base" | "bdi" | "bdo" | "big" | "blockquote" | "body" | "br" | "button" | ... 156 more ... | React.ComponentType<any>';
+    }
+    if (d.props.ref) {
+      // More useful than default output
+      d.props.ref.type.name = 'React.Ref<any>';
     }
   });
 

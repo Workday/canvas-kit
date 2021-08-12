@@ -1,4 +1,5 @@
 export * from './lib/Box';
+export * from './lib/theming';
 export {BorderStyleProps} from './lib/utils/border';
 export {ColorStyleProps} from './lib/utils/color';
 export {DepthStyleProps} from './lib/utils/depth';
