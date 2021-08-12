@@ -25,7 +25,7 @@ describe('Menu', () => {
     h.stories.visit();
   });
 
-  context('given "With Many Items" story is rendered', () => {
+  context('given the [Preview/Menu/React, Control Button] example is rendered', () => {
     beforeEach(() => {
       h.stories.load('Preview/Menu/React', 'Control Button');
     });
