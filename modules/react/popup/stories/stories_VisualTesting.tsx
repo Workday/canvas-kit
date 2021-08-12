@@ -6,7 +6,7 @@ import {CanvasProvider, ContentDirection, StaticStates} from '@workday/canvas-ki
 import {ComponentStatesTable} from '@workday/canvas-kit-labs-react/common';
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
 
-import {Popup} from '@workday/canvas-kit-react/popup';
+import {Popup, usePopupModel} from '@workday/canvas-kit-react/popup';
 
 export const PopupStates = withSnapshotsEnabled(() => (
   <StaticStates>
@@ -108,30 +108,21 @@ export const PopupStates = withSnapshotsEnabled(() => (
   </StaticStates>
 ));
 
-export const PopupStatesRTL = withSnapshotsEnabled(() => (
-  <StaticStates>
+export const PopupRTL = withSnapshotsEnabled(() => {
+  const model = usePopupModel({
+    initialVisibility: 'visible',
+  });
+  return (
     <CanvasProvider theme={{canvas: {direction: ContentDirection.RTL}}}>
-      <ComponentStatesTable
-        rowProps={[
-          {
-            label: 'With RTL',
-            props: {
-              heading: 'למחוק פריט',
-              hasCloseIcon: true,
-              width: 300,
-            },
-          },
-        ]}
-        columnProps={[{label: 'Default', props: {}}]}
-      >
-        {({heading, hasCloseIcon, closeIconSize, ...props}) => (
-          <Popup.Card style={{animation: 'none'}} {...props}>
-            {hasCloseIcon ? <Popup.CloseIcon aria-label="" size={closeIconSize} /> : null}
-            {heading ? <Popup.Heading>{heading}</Popup.Heading> : null}
+      <Popup model={model}>
+        <Popup.Popper>
+          <Popup.Card style={{animation: 'none'}} width={300}>
+            <Popup.CloseIcon aria-label="" />
+            <Popup.Heading>למחוק פריט</Popup.Heading>
             <Popup.Body>האם ברצונך למחוק פריט זה</Popup.Body>
           </Popup.Card>
-        )}
-      </ComponentStatesTable>
+        </Popup.Popper>
+      </Popup>
     </CanvasProvider>
-  </StaticStates>
-));
+  );
+});

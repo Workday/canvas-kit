@@ -24,7 +24,7 @@ See here for
 
 ```tsx
 import {Combobox} from '@workday/canvas-kit-labs-react/combobox';
-import {MenuItem} from '@workday/canvas-kit-labs-react/menu';
+import {MenuItem} from '@workday/canvas-kit-preview-react/menu';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {FormField} from '@workday/canvas-kit-react/form-field';
 
