@@ -4,9 +4,12 @@ import {Meta} from '@storybook/addon-docs/blocks';
 
 # Building a Compound Component
 
-Refer to the [Compound Component documentation](./COMPOUND_COMPONENTS.mdx) document to learn about what a compound component is.
+Refer to the
+[Compound Component documentation](/getting-started/for-developers/resources/compound-components/)
+document to learn about what a compound component is.
 
-This document will go through building a simplified Disclosure component to help solidify the concepts. We will cover:
+This document will go through building a simplified Disclosure component to help solidify the
+concepts. We will cover:
 
 - [Models](#models)
 - [Container Components](#disclosure-component)
@@ -84,7 +87,8 @@ export const useDisclosureModel = (config: DisclosureConfig = {}) => {
 };
 ```
 
-Models aren't very complicated so far. We have a single `visible` state property and `show` and `hide` events we can send to the model. So far using the model might look like this:
+Models aren't very complicated so far. We have a single `visible` state property and `show` and
+`hide` events we can send to the model. So far using the model might look like this:
 
 ```tsx
 const Test = () => {
@@ -203,9 +207,14 @@ const Test = () => {
 
 You can see it in action here: https://codesandbox.io/s/basic-configurable-disclosure-model-nuteg
 
-That's a lot of extra boilerplate code for actions and callbacks. Our events don't have any data, but if they did, we'd have to keep the event + guard and callback data types in sync. We are also creating the `events` object every render. We could use React refs and `React.useMemo` to decrease extra object creation. Luckily the common module has `createEventMap` and `useEventMap` functions to help us reduce boilerplate and reduce possibility of making mistakes.
+That's a lot of extra boilerplate code for actions and callbacks. Our events don't have any data,
+but if they did, we'd have to keep the event + guard and callback data types in sync. We are also
+creating the `events` object every render. We could use React refs and `React.useMemo` to decrease
+extra object creation. Luckily the common module has `createEventMap` and `useEventMap` functions to
+help us reduce boilerplate and reduce possibility of making mistakes.
 
-First we need to create an event map - a map of guard and callback functions to the events they need to be paired with. We'll use `createEventMap` to do this:
+First we need to create an event map - a map of guard and callback functions to the events they need
+to be paired with. We'll use `createEventMap` to do this:
 
 ```tsx
 import {createEventMap} from '@workday/canvas-kit-react/common';
@@ -222,9 +231,16 @@ const disclosureEventMap = createEventMap<DisclosureEvents>()({
 });
 ```
 
-This part is a little weird: `createEventMap<DisclosureEvents>()({`. The reason for this is a Typescript issue: https://github.com/microsoft/TypeScript/issues/26242. The gist is a function with generics requires the caller to specify none of the generics or all of them. In this case, the only generic that cannot be inferred is the `DisclosureEvents`. Everything else can be inferred. The only way to separate defined generics vs inferred generics is to have separate, chained functions.
+This part is a little weird: `createEventMap<DisclosureEvents>()({`. The reason for this is a
+Typescript issue: https://github.com/microsoft/TypeScript/issues/26242. The gist is a function with
+generics requires the caller to specify none of the generics or all of them. In this case, the only
+generic that cannot be inferred is the `DisclosureEvents`. Everything else can be inferred. The only
+way to separate defined generics vs inferred generics is to have separate, chained functions.
 
-We see that `createEventMap` takes two optional keys: `guards` and `callbacks`. The names of these functions are arbitrary, but should follow the convention of `should*` for guards and `on*` for callbacks. The event name that is passed in is type checked against the `DisclosureEvents` interface.
+We see that `createEventMap` takes two optional keys: `guards` and `callbacks`. The names of these
+functions are arbitrary, but should follow the convention of `should*` for guards and `on*` for
+callbacks. The event name that is passed in is type checked against the `DisclosureEvents`
+interface.
 
 Now that we have an event map, we'll need to use it for our `DisclosureConfig`:
 
@@ -236,9 +252,12 @@ export type DisclosureConfig = {
 } & Partial<ToModelConfig<DisclosureState, DisclosureEvents, typeof disclosureEventMap>>;
 ```
 
-The `ToModelConfig` type takes in our `State` type, `Events` type, and our `EventMap` type (the event map type is extracted from the event map: `typeof disclosureEventMap`). This will give us the proper shape of our config object.
+The `ToModelConfig` type takes in our `State` type, `Events` type, and our `EventMap` type (the
+event map type is extracted from the event map: `typeof disclosureEventMap`). This will give us the
+proper shape of our config object.
 
-The `disclosureEventMap` will also be used to create the `events` object using the `useEventMap` utility hook:
+The `disclosureEventMap` will also be used to create the `events` object using the `useEventMap`
+utility hook:
 
 ```tsx
 const events = useEventMap(disclosureEventMap, state, config, {
@@ -251,13 +270,19 @@ const events = useEventMap(disclosureEventMap, state, config, {
 });
 ```
 
-You can see `useEventMap` takes in our `disclosureEventMap`, `state`, `config` objects as well as a list of event implementations. This is all type checked, decreasing the chances we make a mistake. Also notice we don't need to implement guards and callbacks directly inside our event implementations. `useEventMap` will return an object that has that functionality built right in! Neat!
+You can see `useEventMap` takes in our `disclosureEventMap`, `state`, `config` objects as well as a
+list of event implementations. This is all type checked, decreasing the chances we make a mistake.
+Also notice we don't need to implement guards and callbacks directly inside our event
+implementations. `useEventMap` will return an object that has that functionality built right in!
+Neat!
 
-The full working implementation is here: https://codesandbox.io/s/configurable-disclosure-model-3y5qh
+The full working implementation is here:
+https://codesandbox.io/s/configurable-disclosure-model-3y5qh
 
 ## Components
 
-Now that our model is figured out, we can work on the container component and sub-components. An external API might look something like this:
+Now that our model is figured out, we can work on the container component and sub-components. An
+external API might look something like this:
 
 ```tsx
 <Disclosure>
@@ -266,7 +291,11 @@ Now that our model is figured out, we can work on the container component and su
 </Disclosure>
 ```
 
-The `<Disclosure>` is our container component and will be responsible for creating a `DisclosureModel` if a model isn't passed in. The `<Disclosure.Target>` and `<Disclosure.Content>` components are sub-components with specific functionality built into them. The `Target` controls the visibility of the `Content`. We already created a simplified render function for our model, now let's create the real components.
+The `<Disclosure>` is our container component and will be responsible for creating a
+`DisclosureModel` if a model isn't passed in. The `<Disclosure.Target>` and `<Disclosure.Content>`
+components are sub-components with specific functionality built into them. The `Target` controls the
+visibility of the `Content`. We already created a simplified render function for our model, now
+let's create the real components.
 
 ### Disclosure Component
 
@@ -299,11 +328,17 @@ Disclosure.Target = DisclosureTarget;
 Disclosure.Content = DisclosureContent;
 ```
 
-We can see that the `DisclosureProps` interface extends the `DisclosureConfig` interface. This allows us to pass model config directly to the `<Disclosure>` component. A user of this `<Disclosure>` component might want to register a callback when the `show` event is called, for instance.
+We can see that the `DisclosureProps` interface extends the `DisclosureConfig` interface. This
+allows us to pass model config directly to the `<Disclosure>` component. A user of this
+`<Disclosure>` component might want to register a callback when the `show` event is called, for
+instance.
 
-Next, a React Context object is created to represent the model of the compound component. This context will be used to pass the model to sub-components implicitly. This allows our compound component API to remain clean for consumers of compound components.
+Next, a React Context object is created to represent the model of the compound component. This
+context will be used to pass the model to sub-components implicitly. This allows our compound
+component API to remain clean for consumers of compound components.
 
-In this particular compound component, the container component doesn't have a real element. Accessibility specifications have no `role` for this component, so an element is not required.
+In this particular compound component, the container component doesn't have a real element.
+Accessibility specifications have no `role` for this component, so an element is not required.
 
 Let's go ahead and finish out our sub-components.
 
@@ -337,7 +372,8 @@ export const DisclosureTarget = ({children}: DisclosureTargetProps) => {
 };
 ```
 
-The `DisclosureTarget` component is in charge of the toggle button and it calls the `show` or `hide` event on the model.
+The `DisclosureTarget` component is in charge of the toggle button and it calls the `show` or `hide`
+event on the model.
 
 ### DisclosureContent Component
 
@@ -357,16 +393,33 @@ export const DisclosureContent = ({children}: DisclosureContentProps) => {
 };
 ```
 
-The `DisclosureContent` component is in charge of the content. It uses the `visible` state value to set a `hidden` attribute.
+The `DisclosureContent` component is in charge of the content. It uses the `visible` state value to
+set a `hidden` attribute.
 
-The working example can be found here: https://codesandbox.io/s/configurable-disclosure-model-components-nvhtv
+The working example can be found here:
+https://codesandbox.io/s/configurable-disclosure-model-components-nvhtv
 
-These components are not fully compliant yet. They do not support `ref`, `as`, or extra props as HTML attributes. The boilerplate to supporting all this gets very complicated. For this reason, a `createComponent` utility function was created to support all this out of the box. `createComponent` takes a default `React.ElementType` which can be an element string like `div` or `button` or a component like `Button`. It also takes a config object containing the following:
-- `displayName`: This will be the name of the component when shown by the React Dev tools. By convention, we make that name be the same as typed in a render function. For example `Disclosure.Target` vs `DisclosureTarget`.
-- `Component`: A [forward ref component function](https://reactjs.org/docs/forwarding-refs.html) with an added `Element` property. `Element` is the value passed to the Component's `as` prop. It will default to the provided element.
-- `subComponents`: For container components. A list of sub components to add to the returned component. For example, a sub component called `DisclosureTarget` will be added to the export of `Disclosure` so that the user can import only `Disclosure` and use `Disclosure.Target`. `subComponents` is needed for Typescript because static properties cannot be added to predefined interfaces. `Disclosure.Target = DisclosureTarget` will caused a type error. This property allows the `createComponent` factory function to infer the final interface of the returned component.
+These components are not fully compliant yet. They do not support `ref`, `as`, or extra props as
+HTML attributes. The boilerplate to supporting all this gets very complicated. For this reason, a
+`createComponent` utility function was created to support all this out of the box. `createComponent`
+takes a default `React.ElementType` which can be an element string like `div` or `button` or a
+component like `Button`. It also takes a config object containing the following:
 
-Let's convert the Disclosure example to use the `createComponent` utility function to get this extra functionality:
+- `displayName`: This will be the name of the component when shown by the React Dev tools. By
+  convention, we make that name be the same as typed in a render function. For example
+  `Disclosure.Target` vs `DisclosureTarget`.
+- `Component`: A [forward ref component function](https://reactjs.org/docs/forwarding-refs.html)
+  with an added `Element` property. `Element` is the value passed to the Component's `as` prop. It
+  will default to the provided element.
+- `subComponents`: For container components. A list of sub components to add to the returned
+  component. For example, a sub component called `DisclosureTarget` will be added to the export of
+  `Disclosure` so that the user can import only `Disclosure` and use `Disclosure.Target`.
+  `subComponents` is needed for Typescript because static properties cannot be added to predefined
+  interfaces. `Disclosure.Target = DisclosureTarget` will caused a type error. This property allows
+  the `createComponent` factory function to infer the final interface of the returned component.
+
+Let's convert the Disclosure example to use the `createComponent` utility function to get this extra
+functionality:
 
 ```tsx
 // Disclosure.tsx
@@ -457,9 +510,12 @@ export const DisclosureContent = createComponent('div')({
 });
 ```
 
-The `displayName` of the components helps properly identify the sub-components by their used name. For example `Disclose.Target` instead of `DiscloseTarget`.
+The `displayName` of the components helps properly identify the sub-components by their used name.
+For example `Disclose.Target` instead of `DiscloseTarget`.
 
-The `as` prop is being passed to the 3rd argument in the and we're calling it `Element`. The variable is passed to JSX as `<Element>`. `Element` is capitalized because the JSX parser treats capitalized elements as variables and lower case elements as strings:
+The `as` prop is being passed to the 3rd argument in the and we're calling it `Element`. The
+variable is passed to JSX as `<Element>`. `Element` is capitalized because the JSX parser treats
+capitalized elements as variables and lower case elements as strings:
 
 ```tsx
 () => <Div />;
@@ -472,9 +528,14 @@ The `as` prop is being passed to the 3rd argument in the and we're calling it `E
 
 [Typescript Playground](https://www.typescriptlang.org/play?ssl=2&ssc=14&pln=1&pc=1#code/BQSgBAvAfGA8AiBLAbmA9FAUKSNYBMV0og)
 
-In our example, there are no styles associated with `Target` or `Content` sub-components, so we render `as` as an element. If we were using Emotion's `styled` components, we'd pass the `as` like `<StyledElement as={Element}>`. Using the `as` prop this way retains styles while `<Element>` does not. Use `<Element>` when styling should come from the passed in element and use `<StyledElement as={Element}>` when the component handles styling.
+In our example, there are no styles associated with `Target` or `Content` sub-components, so we
+render `as` as an element. If we were using Emotion's `styled` components, we'd pass the `as` like
+`<StyledElement as={Element}>`. Using the `as` prop this way retains styles while `<Element>` does
+not. Use `<Element>` when styling should come from the passed in element and use
+`<StyledElement as={Element}>` when the component handles styling.
 
-`createComponent` returns a component with a type interface that includes ref forwarding, the `as` prop for changing the underlying element, and additional props the element type normally takes.
+`createComponent` returns a component with a type interface that includes ref forwarding, the `as`
+prop for changing the underlying element, and additional props the element type normally takes.
 
 For example, we can now do the following:
 
@@ -487,13 +548,19 @@ For example, we can now do the following:
 </Disclosure>
 ```
 
-In this example, we added a `data-testid` to the Disclosure `Target` element and rendered the `Content` element as a `section` tag.
+In this example, we added a `data-testid` to the Disclosure `Target` element and rendered the
+`Content` element as a `section` tag.
 
-The full code can be found here: https://codesandbox.io/s/configurable-disclosure-model-components-utility-pk9s6
+The full code can be found here:
+https://codesandbox.io/s/configurable-disclosure-model-components-utility-pk9s6
 
 ## Model Composition
 
-Our example isn't fully accessible yet. The Disclosure target needs a `aria-controls` attribute to tie the target and content in the accessibility tree. This is done by the use of id references (string IDs that starts with a letter). We could add an `id` to our model, but it is extremely common so let's make a new model and compose from it instead. We'll later use this model in a reusable behavioral hook.
+Our example isn't fully accessible yet. The Disclosure target needs a `aria-controls` attribute to
+tie the target and content in the accessibility tree. This is done by the use of id references
+(string IDs that starts with a letter). We could add an `id` to our model, but it is extremely
+common so let's make a new model and compose from it instead. We'll later use this model in a
+reusable behavioral hook.
 
 ```tsx
 // useIDModel.tsx
@@ -524,7 +591,8 @@ export const useIDModel = (config: IDConfig = {}) => {
 };
 ```
 
-This model only provides an `id` since that's all that is needed for id reference functionality. Also later we'll add behavioral hook that will require this model.
+This model only provides an `id` since that's all that is needed for id reference functionality.
+Also later we'll add behavioral hook that will require this model.
 
 Let's update the `DisclosureModel` to compose the `IDModel`:
 
@@ -558,7 +626,8 @@ export const useDisclosureModel = (config: DisclosureConfig = {}) => {
 };
 ```
 
-We can now add `aria-controls` to `DisclosureTarget` and `id` to `DisclosureContent`. We'll also add `aria-expanded` to `DisclosureTarget` to finish off the accessibility specifications:
+We can now add `aria-controls` to `DisclosureTarget` and `id` to `DisclosureContent`. We'll also add
+`aria-expanded` to `DisclosureTarget` to finish off the accessibility specifications:
 
 ```tsx
 // DisclosureTarget.tsx
@@ -607,11 +676,15 @@ return (
 
 Here's the working example now: https://codesandbox.io/s/disclosure-composable-model-9shjn
 
-At this point, we have an accessible disclosure compound component that composes 2 models. But the disclosure pattern is more than just the component level. For example, a tooltip uses the disclosure pattern as well. Let's extract out some behaviors into hooks.
+At this point, we have an accessible disclosure compound component that composes 2 models. But the
+disclosure pattern is more than just the component level. For example, a tooltip uses the disclosure
+pattern as well. Let's extract out some behaviors into hooks.
 
 ## Behavior Hooks
 
-Behavior hooks allow us to reuse pieces of functionality in difference components. For example, the `Tabs` component utilizes a cursor hook for keyboard navigation even though the UI of tabs and the UI of a dropdown menu look very different!
+Behavior hooks allow us to reuse pieces of functionality in difference components. For example, the
+`Tabs` component utilizes a cursor hook for keyboard navigation even though the UI of tabs and the
+UI of a dropdown menu look very different!
 
 We'll build a behavior hook for the `DisclosureTarget` component:
 
@@ -628,7 +701,13 @@ export const useExpandableControls = ({state}: DisclosureModel, elemProps: {}) =
 };
 ```
 
-At this point, we should reiterate that compound components should always merge passed in props properly. If the prop is a primitive prop, it should _override_ the props of the component. If the prop is a callback function like `onClick`, the `style` tag or the `css` prop, they should be merged properly. Luckily, the `common` package has a `mergeProps` utility function that takes care of this for us. Hooks can use an optional 3rd parameter that is a `ref` if they need to fork the ref. We won't get into that here, but it is useful and works with `composeHooks` that is available via the `common` module. Let's refactor the above to use that function:
+At this point, we should reiterate that compound components should always merge passed in props
+properly. If the prop is a primitive prop, it should _override_ the props of the component. If the
+prop is a callback function like `onClick`, the `style` tag or the `css` prop, they should be merged
+properly. Luckily, the `common` package has a `mergeProps` utility function that takes care of this
+for us. Hooks can use an optional 3rd parameter that is a `ref` if they need to fork the ref. We
+won't get into that here, but it is useful and works with `composeHooks` that is available via the
+`common` module. Let's refactor the above to use that function:
 
 ```tsx
 // useExpandableControls.tsx
@@ -646,7 +725,8 @@ export const useExpandableControls = ({state}: DisclosureModel, elemProps: {}) =
 };
 ```
 
-Even though the `useExpandableControls` did not use any special props that need special merging, it is a good habit to use `mergeProps` anytime you define props.
+Even though the `useExpandableControls` did not use any special props that need special merging, it
+is a good habit to use `mergeProps` anytime you define props.
 
 Now we can use the behavior hook in the `DiscloseTarget` component:
 
@@ -678,9 +758,12 @@ return (
 // ...
 ```
 
-We used `mergeProps` for the `onClick`. This way, if the user passes their own `onClick`, their `onClick` will be called in addition to the `onClick` we've defined here. Without this, if the user passes an `onClick`, it will override ours and break functionality. Definitely not what we want!
+We used `mergeProps` for the `onClick`. This way, if the user passes their own `onClick`, their
+`onClick` will be called in addition to the `onClick` we've defined here. Without this, if the user
+passes an `onClick`, it will override ours and break functionality. Definitely not what we want!
 
-We'll also make a `useHidden` behavior hook for the `hidden` attribute on the `Disclosure.Content` element:
+We'll also make a `useHidden` behavior hook for the `hidden` attribute on the `Disclosure.Content`
+element:
 
 ```tsx
 // useHidden.tsx
@@ -714,11 +797,15 @@ return (
 );
 ```
 
-The full code can be found here: https://codesandbox.io/s/disclosure-composable-model-behavior-hooks-iwzl8
+The full code can be found here:
+https://codesandbox.io/s/disclosure-composable-model-behavior-hooks-iwzl8
 
 ## Composing Compound Components
 
-Having composable models, behaviors, and components means we can reuse parts of other compound components. For example, let's make a simple tooltip component that has a target and content, similar to the disclosure component, but behaves differently. A tooltip shows and hides based on mouse and focus events.
+Having composable models, behaviors, and components means we can reuse parts of other compound
+components. For example, let's make a simple tooltip component that has a target and content,
+similar to the disclosure component, but behaves differently. A tooltip shows and hides based on
+mouse and focus events.
 
 Here's a tooltip model composing the disclosure model:
 
@@ -751,7 +838,8 @@ export const useTooltipModel = (config: TooltipConfig = {}) => {
 };
 ```
 
-Not much interesting is happening here. We're not adding additional state or events, but we're removing the `initialVisible` config option from the model.
+Not much interesting is happening here. We're not adding additional state or events, but we're
+removing the `initialVisible` config option from the model.
 
 The final Tooltip compound component API will look something like this when we're done:
 
@@ -793,7 +881,8 @@ export const Tooltip = createComponent()({
 });
 ```
 
-The `Tooltip.Target` component is similar to the `DisclosureTarget` component, but has different behavior. The tooltip triggers on different events. Here's the code:
+The `Tooltip.Target` component is similar to the `DisclosureTarget` component, but has different
+behavior. The tooltip triggers on different events. Here's the code:
 
 ```tsx
 import React from 'react';
@@ -842,9 +931,13 @@ export const TooltipTarget = createComponent('button')({
 });
 ```
 
-The `Tooltip.Target` component also uses the `aria-described` for accessibility. The `state.id` comes from the `IDModel`.
+The `Tooltip.Target` component also uses the `aria-described` for accessibility. The `state.id`
+comes from the `IDModel`.
 
-The `Tooltip.Content` component is similar to the `Disclosure.Content` component, except that it uses a ReactDOM portal to ensure the content appears on top of other content. This example doesn't include a positional library and instead hard-codes positional values. Notice we can reuse our `useHidden` behavior hook in this component!
+The `Tooltip.Content` component is similar to the `Disclosure.Content` component, except that it
+uses a ReactDOM portal to ensure the content appears on top of other content. This example doesn't
+include a positional library and instead hard-codes positional values. Notice we can reuse our
+`useHidden` behavior hook in this component!
 
 ```tsx
 import React from 'react';
@@ -882,7 +975,9 @@ export const TooltipContent = createComponent('div')({
 });
 ```
 
-The tooltip target could be anything. By default it is a `button` element since tooltips need to receive focus. What if we want a tooltip around the disclosure target element without introducing another `button` element? This is where the `as` prop comes in handy:
+The tooltip target could be anything. By default it is a `button` element since tooltips need to
+receive focus. What if we want a tooltip around the disclosure target element without introducing
+another `button` element? This is where the `as` prop comes in handy:
 
 ```tsx
 <Disclosure>
@@ -896,13 +991,19 @@ The tooltip target could be anything. By default it is a `button` element since 
 
 In the example, we can see the `Tooltip.Target` element will be the `Disclosure.Target` element.
 
-Here's the working example: https://codesandbox.io/s/disclosure-composable-model-behavior-hooks-tooltip-df7ht
+Here's the working example:
+https://codesandbox.io/s/disclosure-composable-model-behavior-hooks-tooltip-df7ht
 
 ## Wrap it up
 
-Hopefully, by now, you have a much better idea how compound components work internally and how to create your own. Model composition is a powerful way to create more complex models out of smaller parts. Compound components can be composed to make much more complicated UIs.
+Hopefully, by now, you have a much better idea how compound components work internally and how to
+create your own. Model composition is a powerful way to create more complex models out of smaller
+parts. Compound components can be composed to make much more complicated UIs.
 
-This API seems more verbose, but it is extremely flexible. The nice thing about a compound component API is we can create more terse components out of them. We expect applications to create wrapper components the have a more tightly controlled interface. For example, if we wanted an expandable component with a tooltip baked in, we could create a component API like this:
+This API seems more verbose, but it is extremely flexible. The nice thing about a compound component
+API is we can create more terse components out of them. We expect applications to create wrapper
+components the have a more tightly controlled interface. For example, if we wanted an expandable
+component with a tooltip baked in, we could create a component API like this:
 
 ```tsx
 <Expandable tooltipText="Tooltip!" targetText="Toggle">
@@ -910,7 +1011,8 @@ This API seems more verbose, but it is extremely flexible. The nice thing about 
 </Expandable>
 ```
 
-We'll make an `Expandable` component that abstracts the compound component API for re-use in applications (expandable components are so in these days!):
+We'll make an `Expandable` component that abstracts the compound component API for re-use in
+applications (expandable components are so in these days!):
 
 ```tsx
 // Expandable.tsx
@@ -938,6 +1040,10 @@ export const Expandable = ({tooltipText, targetText, children}: ExpandableProps)
 };
 ```
 
-This configuration API has lost the flexibility of the compound component API, but it is simpler to use. Applications can create these APIs for internal components since they know more about the context that a component will live in. Things like how to do translations, if there's any additional attributes to add (test ids or analytics metadata).
+This configuration API has lost the flexibility of the compound component API, but it is simpler to
+use. Applications can create these APIs for internal components since they know more about the
+context that a component will live in. Things like how to do translations, if there's any additional
+attributes to add (test ids or analytics metadata).
 
-The full working code can be found here: https://codesandbox.io/s/disclosure-composable-model-behavior-hooks-tooltip-wrapped-2u8mk
+The full working code can be found here:
+https://codesandbox.io/s/disclosure-composable-model-behavior-hooks-tooltip-wrapped-2u8mk
