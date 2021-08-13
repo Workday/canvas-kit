@@ -12,6 +12,8 @@ import {plusIcon} from '@workday/canvas-system-icons-web';
 import README from '../README.md';
 import {SidePanelTransitionStates} from '../lib/SidePanel';
 
+import {NewSidePanel} from '../lib/NewSidePanel/SidePanel';
+
 export default {
   title: 'Preview/Side Panel/React',
   decorators: [withReadme(README)],
@@ -200,6 +202,17 @@ export const WithListItems = () => {
           </div>
         )}
       </SidePanel>
+    </div>
+  );
+};
+
+export const CompoundComponent = () => {
+  return (
+    <div style={{display: 'flex', backgroundColor: colors.soap200, height}}>
+      <NewSidePanel id="turtles" labelId="puppies" initialExpanded={true}>
+        <NewSidePanel.ToggleButton />
+        <NewSidePanel.Label as="h3">Tasks Panel</NewSidePanel.Label>
+      </NewSidePanel>
     </div>
   );
 };
