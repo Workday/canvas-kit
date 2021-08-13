@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## v4.8.3 (2021-08-13)
+
+### Components
+
+- fix(combobox): Add type attribute and remove tabindex attribute ([#1172](https://github.com/Workday/canvas-kit/pull/1172)) [@vibdev](https://github.com/vibdev)
+- fix(popup): Fix RTL rendering for popups ([#1183](https://github.com/Workday/canvas-kit/pull/1183)) [@NicholasBoll](https://github.com/NicholasBoll)
+
+### Infrastructure
+
+- ci: Add pull request title check ([#1153](https://github.com/Workday/canvas-kit/pull/1153)) [@NicholasBoll](https://github.com/NicholasBoll)
+- ci: Add forward-merge job [@NicholasBoll](https://github.com/NicholasBoll)
+
 ## v4.8.2 (2021-07-12)
 ### Infrastructure
 

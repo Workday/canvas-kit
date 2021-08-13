@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-react-banner",
-  "version": "4.8.2",
+  "version": "4.8.3",
   "description": "Common Canvas banner component for React",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -48,9 +48,9 @@
     "react": "^16.8 || ^17.0"
   },
   "dependencies": {
-    "@workday/canvas-kit-react-common": "^4.8.2",
-    "@workday/canvas-kit-react-core": "^4.8.2",
-    "@workday/canvas-kit-react-icon": "^4.8.2",
+    "@workday/canvas-kit-react-common": "^4.8.3",
+    "@workday/canvas-kit-react-core": "^4.8.3",
+    "@workday/canvas-kit-react-icon": "^4.8.3",
     "@workday/canvas-system-icons-web": "1.0.41"
   }
 }
