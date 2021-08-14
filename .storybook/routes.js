@@ -1,3 +1,7 @@
+// List of routes The key is the Canvas Site URL The value is the first Storybook example ID. This
+// prevents odd scrolling. This file is used by the `webpack-loader-redirect-mdx-to-github` loader
+// and will rewrite the URL to point to the correct URL for the story. The Storybook key will be
+// rewritten to something like `?path=/docs/${id}`
 const routes = {
   'getting-started/introduction': 'welcome-getting-started--page',
   '/assets/accent-icons/': 'tokens-icon-react--accent-icon',
