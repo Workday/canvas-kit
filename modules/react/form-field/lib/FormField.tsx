@@ -66,25 +66,38 @@ export interface FormFieldErrorBehavior {
 }
 
 // Use a fieldset element for accessible radio groups
-const FormFieldFieldsetContainer = styled('fieldset')<FormFieldLabelPositionBehavior>({
+const FormFieldFieldsetContainer = styled('fieldset')<
+  GrowthBehavior & FormFieldLabelPositionBehavior
+>(({grow, labelPosition}) => ({
+  display: labelPosition === FormFieldLabelPosition.Top ? 'inline-block' : 'flex',
+  flexGrow: grow ? 1 : undefined,
   padding: 0,
-  margin: 0,
   border: 0,
-});
+  margin: 0,
+  marginBottom: space.m,
+}));
 
-const FormFieldContainer = styled('div')<FormFieldLabelPositionBehavior>(({labelPosition}) => {
-  if (labelPosition === FormFieldLabelPosition.Left) {
+const FormFieldContainer = styled('div')<FormFieldLabelPositionBehavior & FormFieldProps>(
+  ({labelPosition, useFieldset}) => {
+    if (useFieldset) {
+      return {
+        display: 'flex',
+      };
+    }
+
+    if (labelPosition === FormFieldLabelPosition.Left) {
+      return {
+        display: 'flex',
+        marginBottom: space.m,
+      };
+    }
+
     return {
-      display: 'flex',
+      display: 'block',
       marginBottom: space.m,
     };
   }
-
-  return {
-    display: 'block',
-    marginBottom: space.m,
-  };
-});
+);
 
 const FormFieldInputContainer = styled('div')<GrowthBehavior & FormFieldLabelPositionBehavior>(
   ({grow, labelPosition}) => {
@@ -99,6 +112,7 @@ const FormFieldInputContainer = styled('div')<GrowthBehavior & FormFieldLabelPos
       }
 
       return {
+        width: '100%',
         display: 'block',
       };
     }
@@ -173,7 +187,7 @@ class FormField extends React.Component<FormFieldProps> {
     } = this.props;
 
     const field = (
-      <FormFieldContainer labelPosition={labelPosition} {...elemProps}>
+      <>
         {typeof label === 'string' ? (
           <Label
             labelPosition={labelPosition}
@@ -187,7 +201,6 @@ class FormField extends React.Component<FormFieldProps> {
         ) : (
           label
         )}
-
         <FormFieldInputContainer grow={grow} labelPosition={labelPosition}>
           {React.Children.map(children, this.renderChildren)}
           {hintText && (
@@ -196,10 +209,24 @@ class FormField extends React.Component<FormFieldProps> {
             </Hint>
           )}
         </FormFieldInputContainer>
-      </FormFieldContainer>
+      </>
     );
 
-    return useFieldset ? <FormFieldFieldsetContainer>{field}</FormFieldFieldsetContainer> : field;
+    if (useFieldset) {
+      return (
+        <FormFieldContainer useFieldset={useFieldset} labelPosition={labelPosition} {...elemProps}>
+          <FormFieldFieldsetContainer grow={grow} labelPosition={labelPosition}>
+            {field}
+          </FormFieldFieldsetContainer>
+        </FormFieldContainer>
+      );
+    } else {
+      return (
+        <FormFieldContainer useFieldset={useFieldset} labelPosition={labelPosition} {...elemProps}>
+          {field}
+        </FormFieldContainer>
+      );
+    }
   }
 }
 
