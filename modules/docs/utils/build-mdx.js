@@ -23,9 +23,12 @@ const sanitizeMdxFile = (inFile, outFile) => {
       return console.error(err);
     }
     const result = data
+      // Remove storybook stuff
       .replace(/import {.*} from '@storybook\/addon-docs\/blocks';/g, '')
       .replace(/<Meta.* \/>\n/g, '')
-      .replace(/^\s+|\s+$/g, '');
+      .replace(/^\s+|\s+$/g, '')
+      // Convert named example import to default
+      .replace(/import {\s?(\w+)\s?} from '\.\/examples/g, "import $1 from './examples");
 
     fs.writeFile(outFile, result, 'utf8', err => {
       if (err) return console.error(err);
@@ -79,7 +82,7 @@ glob(ckrFolder + '/**/*.mdx', {}, (err, files) => {
           fs.readFile(example, 'utf8', (err, data) => {
             fs.writeFileSync(
               example,
-              data.replace(/export const (\w)* =/g, 'export default'),
+              data.replace(/export const (\w)* =/g, 'export default'), // Convert named export to default export
               'utf8'
             );
           });
