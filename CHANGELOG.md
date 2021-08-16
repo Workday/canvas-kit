@@ -3,6 +3,48 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## v5.1.0 (2021-08-16)
+
+### Components
+
+- fix(form-field): Updates legend to be direct child of FieldSet ([#1146](https://github.com/Workday/canvas-kit/pull/1146)) [@sahlhoff](https://github.com/sahlhoff)
+- fix(popup): Fix RTL rendering for popups ([#1183](https://github.com/Workday/canvas-kit/pull/1183)) [@NicholasBoll](https://github.com/NicholasBoll)
+- fix(combobox): Add type attribute and remove tabindex attribute ([#1172](https://github.com/Workday/canvas-kit/pull/1172)) [@vibdev](https://github.com/vibdev)
+- test(popup): Add visual tests for RTL in Modal and Popup ([#1159](https://github.com/Workday/canvas-kit/pull/1159)) [@NicholasBoll](https://github.com/NicholasBoll)
+- fix(menu): Fix Menu item icon colors ([#1157](https://github.com/Workday/canvas-kit/pull/1157)) [@sahlhoff](https://github.com/sahlhoff)
+- fix: Fix changeFocus to take any input and Dialog/Modal to accept model config ([#1154](https://github.com/Workday/canvas-kit/pull/1154)) [@NicholasBoll](https://github.com/NicholasBoll)
+
+### Hooks & Utils
+
+- fix(common): Remove @ts-ignore from ExtractProps ([#1189](https://github.com/Workday/canvas-kit/pull/1189)) [@NicholasBoll](https://github.com/NicholasBoll)
+- feat(common): Add useThemeRTL hook ([#1041](https://github.com/Workday/canvas-kit/pull/1041)) [@vibdev](https://github.com/vibdev)
+
+### Docs
+
+- fix(menu): Update readme to show correct import for menu item ([#1208](https://github.com/Workday/canvas-kit/pull/1208)) [@karapalumbo](https://github.com/karapalumbo)
+- docs: Fix prop tables. Also add spec table to Modal ([#1155](https://github.com/Workday/canvas-kit/pull/1155)) [@NicholasBoll](https://github.com/NicholasBoll)
+- docs: Add MDX docs and examples for Indicator components ([#1169](https://github.com/Workday/canvas-kit/pull/1169)) [@jamesfan](https://github.com/jamesfan)
+- docs: Remove incorrect info on ExtractProps ([#1180](https://github.com/Workday/canvas-kit/pull/1180)) [@NicholasBoll](https://github.com/NicholasBoll)
+- docs: Update MDX doc for Card and add MDX doc and examples for Table ([#1185](https://github.com/Workday/canvas-kit/pull/1185)) [@jamesfan](https://github.com/jamesfan)
+- docs: Update Breadcrumbs stories to mdx ([#1206](https://github.com/Workday/canvas-kit/pull/1206)) [@alanbsmith](https://github.com/alanbsmith)
+- docs(popup): Add Popper note and args table of subcomponents ([#1205](https://github.com/Workday/canvas-kit/pull/1205)) [@NicholasBoll](https://github.com/NicholasBoll)
+- docs: Update common readme ([#1186](https://github.com/Workday/canvas-kit/pull/1186)) [@NicholasBoll](https://github.com/NicholasBoll)
+- docs: Update Breadcrumbs stories from review feedback ([#1210](https://github.com/Workday/canvas-kit/pull/1210)) [@alanbsmith](https://github.com/alanbsmith)
+- docs(popup): Update custom target example to accept ref ([#1209](https://github.com/Workday/canvas-kit/pull/1209)) [@divyanshu023](https://github.com/divyanshu023)
+- docs: Add menu mdx docs ([#1203](https://github.com/Workday/canvas-kit/pull/1203)) [@sahlhoff](https://github.com/sahlhoff)
+- fix: Fix misc. MDX fixes ([#1188](https://github.com/Workday/canvas-kit/pull/1188)) [@anicholls](https://github.com/anicholls)
+- fix: Fix broken link in pagination.stories.mdx ([#1178](https://github.com/Workday/canvas-kit/pull/1178)) [@stuartmccoll](https://github.com/stuartmccoll)
+
+### Infrastructure
+
+- feat: Add comments in DTS files for JSDoc ([#1207](https://github.com/Workday/canvas-kit/pull/1207)) [@NicholasBoll](https://github.com/NicholasBoll)
+- fix: Add support for React 17 in main ([#1182](https://github.com/Workday/canvas-kit/pull/1182)) [@alanbsmith](https://github.com/alanbsmith)
+- chore: Update incorrect prop names ([#1181](https://github.com/Workday/canvas-kit/pull/1181)) [@NicholasBoll](https://github.com/NicholasBoll)
+- ci: Add forward merge job ([#1173](https://github.com/Workday/canvas-kit/pull/1173)) [@NicholasBoll](https://github.com/NicholasBoll)
+- ci: Add pull request title check ([#1153](https://github.com/Workday/canvas-kit/pull/1153)) [@NicholasBoll](https://github.com/NicholasBoll)
+- chore: Bump prismjs from 1.23.0 to 1.24.0 ([#1129](https://github.com/Workday/canvas-kit/pull/1129)) [@dependabot](https://github.com/dependabot)
+- ci: Delete main.yml [@NicholasBoll](https://github.com/NicholasBoll)
+
 ## v4.8.3 (2021-08-13)
 
 ### Components
