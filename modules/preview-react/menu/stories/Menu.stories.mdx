@@ -1,0 +1,110 @@
+import {Meta} from '@storybook/addon-docs/blocks';
+import {Specifications} from '@workday/canvas-kit-docs';
+import {Menu, MenuItem} from '@workday/canvas-kit-preview-react/menu';
+
+import {Basic} from './examples/Basic';
+import {ContextMenu} from './examples/ContextMenu';
+import {ControlButton} from './examples/ControlButton';
+import {CustomMenuItem} from './examples/CustomMenuItem';
+import {Icons} from './examples/Icons';
+import {ManyItems} from './examples/ManyItems';
+
+<Meta title="Preview/Menu/React" component={Menu} />
+
+# Canvas Kit Menu
+
+Menus display a list of options when triggered by an action or UI element like an icon or button.
+
+[> Workday Design Reference](https://design.workday.com/components/popups/menus)
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-preview-react
+```
+
+## Usage
+
+### Basic Example
+
+<ExampleCodeBlock code={Basic} />
+
+`Menu` follows the
+[Actions Menu pattern](https://www.w3.org/TR/wai-aria-practices/examples/menu-button/menu-button-actions-active-descendant.html)
+using `aria-activedescendant`. Below is table of supported keyboard shortcuts and associated
+actions.
+
+| Key                | Action                                                                                                                                           |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `Enter` or `Space` | Activates the menu item and then closes the menu                                                                                                 |
+| `Escape`           | Closes the menu                                                                                                                                  |
+| `Up Arrow`         | Moves focus to the previous menu item – if focus is on first menu item, it moves focus to the last menu item                                     |
+| `Down Arrow`       | Moves focus to the next menu item – if focus is on last menu item, it moves focus to the first menu item                                         |
+| `Home`             | Moves focus to the first menu item                                                                                                               |
+| `End`              | Moves focus to the last menu item                                                                                                                |
+| `A-Z / a-z`        | Moves focus to the next menu item with a label that starts with the typed character if such an menu item exists – otherwise, focus does not move |
+
+If you're using a menu button, you will need to add your own keyboard shortcuts, aria attributes,
+and focus management. See the example below.
+
+<ExampleCodeBlock code={ControlButton} />
+
+### Context Menu
+
+<ExampleCodeBlock code={ContextMenu} />
+
+### Custom Menu Item
+
+`Menu` renders a styled `<ul>` element with a role of `menu`, and `MenuItem`s are `<li>` elements
+with the correct attributes to ensure they are accessible. If you choose to implement your own
+custom menu items, be sure to use semantic `<li>` elements with the following attributes:
+
+- `role="menuitem"`
+- `tabindex={-1}`
+- `id`s following this pattern: `${MenuId}-${index}`
+
+Below is an example:
+
+<ExampleCodeBlock code={CustomMenuItem} />
+
+### Icons
+
+<ExampleCodeBlock code={Icons} />
+
+### Many Items
+
+<ExampleCodeBlock code={ManyItems} />
+
+## Components
+
+### Menu
+
+#### Usage
+
+`Menu` renders a styled `<ul>` element with a role of `menu` and follows the
+[Active Menu pattern](https://www.w3.org/TR/wai-aria-practices/examples/menu-button/menu-button-actions-active-descendant.html)
+using `aria-activedescendant`.
+
+#### Props
+
+<ArgsTable of={Menu} />
+
+### MenuItem
+
+#### Usage
+
+`MenuItem` renders a `<li>` element with the correct attributes to ensure it is accessible. If you
+choose to implement your own custom menu items, be sure to use semantic `<li>` elements with the
+following attributes:
+
+- `role="menuitem"`
+- `tabindex={-1}`
+- `id`s following this pattern: `${MenuId}-${index}`
+
+#### Props
+
+<ArgsTable of={MenuItem} />
+
+## Specifications
+
+<Specifications file="Menu.spec.ts" name="Menu" />

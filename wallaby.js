@@ -5,13 +5,14 @@ module.exports = wallaby => {
     files: [
       'jest.config.js',
       'jest/setupTests.ts',
+      'jest/verifyComponent.tsx',
       'modules/**/*.ts?(x)',
       '!**/*.spec.ts?(x)',
       '!**/*.d.ts',
       '!**/stories*.{ts,tsx,js,jsx}',
       {pattern: 'modules/**/node_modules/**', ignore: true},
     ],
-    tests: ['modules/**/*.spec.ts?(x)'],
+    tests: ['modules/**/*.spec.ts?(x)', 'jest/**/*.spec.ts?(x)'],
 
     env: {
       type: 'node',
@@ -32,10 +33,12 @@ module.exports = wallaby => {
       jestConfig.setupFilesAfterEnv = [`${w.projectCacheDir}/jest/setupTests.js`];
 
       // Tell Jest how to resolve symlinked modules. Without this, Jest will look at source TS files and not at Wallaby's compiled & instrumented files
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
       (jestConfig.moduleNameMapper = {
-        '@workday/canvas-kit-react-([^/]+)(/?.*)': '<rootDir>/modules/$1/react$2',
-        '@workday/canvas-kit-labs-react-([^/]+)(/?.*)': '<rootDir>/modules/_labs/$1/react$2',
-        '@workday/canvas-kit-(?:(?!react|css|labs))([^/]+)(/?.*)': '<rootDir>/modules/$1', // Non react, labs, and css modules
+        '@workday/canvas-kit-react/([^/]+)(/?.*)': '<rootDir>/modules/react/$1/$2',
+        '@workday/canvas-kit-labs-react/([^/]+)(/?.*)': '<rootDir>/modules/labs-react/$1/$2',
+        '@workday/canvas-kit-preview-react/([^/]+)(/?.*)': '<rootDir>/modules/preview-react/$1/$2',
+        '@workday/canvas-kit-(?:(?!react|css|labs|preview))([^/]+)(/?.*)': '<rootDir>/modules/$1', // Non react, labs, preview, and css modules
       }),
         w.testFramework.configure(jestConfig);
     },

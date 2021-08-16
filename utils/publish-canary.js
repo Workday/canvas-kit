@@ -24,6 +24,8 @@ if (TRAVIS_BRANCH === 'master') {
   distTag = 'next';
 } else if (isPrerelease) {
   distTag = 'prerelease-next';
+  // console.error('Prerelease canary builds disabled.');
+  // process.exit(0);
 } else if (isSupport) {
   distTag = 'support-next';
 } else {
@@ -84,7 +86,7 @@ exec('git diff --name-only HEAD HEAD^')
       `--canary`,
       `--preid ${preid}`,
       `--dist-tag ${distTag}`,
-      preid === 'prerelease' ? 'major' : '',
+      isPrerelease ? 'major' : '',
     ];
 
     return exec(`yarn lerna publish ${lernaFlags.join(' ')}`);
@@ -102,7 +104,7 @@ exec('git diff --name-only HEAD HEAD^')
       author_name: `New canary build published (v${data.version})`,
       title: `Merge commit ${data.sha}`,
       title_link: `https://github.com/Workday/canvas-kit/commit/${data.sha}`,
-      text: `\`yarn add @workday/canvas-kit-{module}@${data.version}\`\nor\n\`yarn add @workday/canvas-kit-{module}@next\`\n`,
+      text: `\`yarn add @workday/canvas-kit-{module}@${data.version}\`\nor\n\`yarn add @workday/canvas-kit-{module}@${distTag}\`\n`,
     });
   })
   .catch(err => {

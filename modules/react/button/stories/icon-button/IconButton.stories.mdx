@@ -1,0 +1,74 @@
+import {Meta, Story} from '@storybook/addon-docs/blocks';
+
+import {IconButton} from '@workday/canvas-kit-react/button';
+import {Specifications} from '@workday/canvas-kit-docs';
+
+import {Circle} from './examples/Circle';
+import {CircleFilled} from './examples/CircleFilled';
+import {Inverse} from './examples/Inverse';
+import {InverseFilled} from './examples/InverseFilled';
+import {Plain} from './examples/Plain';
+import {Square} from './examples/Square';
+import {SquareFilled} from './examples/SquareFilled';
+import {Toggleable} from './examples/Toggleable';
+
+<Meta title="Components/Buttons/Button/React/Icon Button" component={IconButton} />
+
+# Canvas Kit Icon Button
+
+Clickable icon button elements that extend the native `<button>` element with Canvas styling.
+
+[> Workday Design Reference](https://design.workday.com/components/buttons/icon-buttons)
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-react
+```
+
+## Usage
+
+Here is a basic example of an Icon Button. Buttons can be customized with several props to change
+the size, variant, etc.
+
+<ExampleCodeBlock code={Circle} />
+
+### Variants
+
+`circle` is the default variant. Below are the other available variants:
+
+#### CircleFilled
+
+<ExampleCodeBlock code={CircleFilled} />
+
+#### Plain
+
+<ExampleCodeBlock code={Plain} />
+
+#### Square
+
+<ExampleCodeBlock code={Square} />
+
+#### SquareFilled
+
+<ExampleCodeBlock code={SquareFilled} />
+
+#### Inverse
+
+<ExampleCodeBlock code={Inverse} />
+
+#### InverseFilled
+
+<ExampleCodeBlock code={InverseFilled} />
+
+### Toggleability
+
+The `toggle` prop can be used to make icon buttons toggleable.
+
+<ExampleCodeBlock code={Toggleable} />
+
+## Props
+
+Undocumented props are spread to the underlying `button` element.
+
+<ArgsTable of={IconButton} />
