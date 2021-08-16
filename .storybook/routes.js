@@ -34,7 +34,7 @@ const routes = {
   '/components/indicators/skeleton/': 'components-indicators-skeleton-react--basic',
   '/components/indicators/status-indicator/': 'components-indicators-status-indicator-react--basic',
   '/components/inputs/text-area/': 'components-inputs-textarea-react--basic',
-  '/components/navigation/breadcrumbs/': 'preview-breadcrumbs-react--default',
+  '/components/navigation/breadcrumbs/': 'preview-breadcrumbs-react--basic',
   '/components/navigation/header/': 'components-navigation-page-header-react--product-page-header',
   '/components/navigation/page-header/': 'labs-header-react--global-header',
   '/components/navigation/pagination/': 'components-navigation-pagination-react--step-controls',
