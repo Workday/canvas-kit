@@ -77,6 +77,14 @@ jobs:
           branch: master
 
   - stage: support
+    script:
+      - >- # Chromatic relies on a built Storybook, so exit early if build-storybook fails
+        yarn build-storybook --quiet &&
+        yarn chromatic --quiet --auto-accept-changes --exit-once-uploaded --storybook-build-dir docs &&
+    after_failure:
+      - node utils/report-failure.js
+    env:
+      - CHROMATIC_APP_CODE="dlpro96xybh"
     deploy:
       - provider: script
         script: npm config set //registry.npmjs.org/:_authToken=$NPM_PUBLISH_TOKEN && node utils/publish-canary.js
