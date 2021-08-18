@@ -1,14 +1,13 @@
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
 import * as React from 'react';
-import styled from '@emotion/styled';
 
 import {Popup} from '@workday/canvas-kit-react/popup';
 import {space, colors, type, CanvasColor} from '@workday/canvas-kit-react/tokens';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {checkIcon} from '@workday/canvas-system-icons-web';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {createComponent, ExtractProps} from '@workday/canvas-kit-react/common';
+import {createComponent, ExtractProps, styled} from '@workday/canvas-kit-react/common';
 import {Hyperlink, HyperlinkProps} from '@workday/canvas-kit-react/button';
 
 export interface ToastProps extends ExtractProps<typeof Popup.Card, never> {
