@@ -52,9 +52,9 @@ const routes = {
   '/getting-started/for-developers/resources/creating-compound-components/':
     'welcome-dev-docs-creating-compound-components--page',
   '/getting-started/for-developers/resources/testing/': 'welcome-dev-docs-testing--page',
-  '/getting-started/for-developers/resources/4.0-migration-guide':
+  '/getting-started/for-developers/resources/4.0-migration-guide/':
     'welcome-migration-guides-v4-0--page',
-  '/getting-started/for-developers/resources/5.0-migration-guide':
+  '/getting-started/for-developers/resources/5.0-migration-guide/':
     'welcome-migration-guides-v5-0--page',
 };
 
