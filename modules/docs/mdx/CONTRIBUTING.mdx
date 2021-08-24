@@ -26,7 +26,8 @@ sections:
 
 At Workday, we are committed to a culture of integrity, innovation, and fun. That culture extends to
 the community that we are building here through Canvas. By participating in it, you are expected to
-uphold this [code of conduct](./CODE_OF_CONDUCT.md) and agree to our CLA.
+uphold this [code of conduct](https://github.com/Workday/canvas-kit/tree/master/CODE_OF_CONDUCT.md)
+and agree to our CLA.
 
 ## Contributor License Agreement
 
@@ -76,11 +77,12 @@ within a single repository.
 Canvas Kit uses [Jest](https://jestjs.io/) and
 [React Testing Library](https://testing-library.com/docs/react-testing-library/intro) to unit test
 our React components. For more information about our testing strategy and how we write unit tests,
-visit our [Testing Readme](./TESTING.mdx)
+visit our [Testing Readme](/getting-started/for-developers/resources/testing/)
 
 Canvas Kit uses [Cypress](https://cypress.io) for UI tests. For info on why we chose Cypress, visit
-[Why Cypress?](./cypress/WHY_CYPRESS.md) For more information about how to write Cypress tests,
-visit [Writing Cypress Tests](./cypress/README.md)
+[Why Cypress?](https://github.com/Workday/canvas-kit/tree/master/cypress/WHY_CYPRESS.md) For more
+information about how to write Cypress tests, visit
+[Writing Cypress Tests](https://github.com/Workday/canvas-kit/tree/master/cypress/README.md)
 
 ### Git Guidelines
 
@@ -167,9 +169,10 @@ fix: Add missing static class variable to IconButton and Avatar
 7.  Begin editing your new React component in `modules/react/<MODULE_NAME>/index.ts`.
 
 If creating a React module, a new compound component will be created. To find out more about
-Compound Components, refer to [Compound Components](./COMPOUND_COMPONENTS.mdx). To find out more
-about creating Compound Components, refer to
-[Creating Compound Components](./CREATING_COMPOUND_COMPONENTS.mdx).
+Compound Components, refer to
+[Compound Components](/getting-started/for-developers/resources/compound-components/). To find out
+more about creating Compound Components, refer to
+[Creating Compound Components](/getting-started/for-developers/resources/creating-compound-components/).
 
 ### Exporting a Module
 
@@ -192,7 +195,8 @@ This will start the unit tests.
 
 ### Code Style Guide
 
-Refer to the [API & Pattern Guidelines](./API_PATTERN_GUIDELINES.mdx).
+Refer to the
+[API & Pattern Guidelines](/getting-started/for-developers/resources/api-pattern-guidelines/).
 
 Rules are enforced using [ESLint](https://eslint.org) and code formatting is provided through
 [Prettier](https://prettier.io).
@@ -207,15 +211,16 @@ Code formatting will occur automatically before `git commit` for files staged us
 While we iterate on a new component's API, functionality and accessibility, sometimes we want to
 make it available to consumers ASAP. If we introduced the component normally, this could result in
 many breaking changes to our codebase. To avoid this, we have introduced
-[Canvas Kit Labs](../../labs-react) as a place to incubate components. If there is a lot of
-debate/discussion/flux happening in your PR and the component is needed right away, it may be moved
-to this location so it can be made available while we iterate on it. Visit the link above for more
-info.
+[Canvas Kit Labs](https://github.com/Workday/canvas-kit/tree/master/modules/labs-react) as a place
+to incubate components. If there is a lot of debate/discussion/flux happening in your PR and the
+component is needed right away, it may be moved to this location so it can be made available while
+we iterate on it. Visit the link above for more info.
 
-[Canvas Kit Preview](../../preview-react) is for components that have had a full design and a11y
-review, and are approved for use in product. The API's and/or underlying architecture could still be
-subject to change, but not without strong communication and migration strategies. Essentially,
-Canvas Kit Labs is for alpha components and Canvas Kit Preview is for beta components.
+[Canvas Kit Preview](https://github.com/Workday/canvas-kit/tree/master/modules/preview-react) is for
+components that have had a full design and a11y review, and are approved for use in product. The
+API's and/or underlying architecture could still be subject to change, but not without strong
+communication and migration strategies. Essentially, Canvas Kit Labs is for alpha components and
+Canvas Kit Preview is for beta components.
 
 ### Editors
 
