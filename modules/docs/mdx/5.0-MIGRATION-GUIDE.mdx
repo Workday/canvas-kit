@@ -29,9 +29,10 @@ any questions about the update.
 
 ## Codemod
 
-We've introduced a [new codemod package](../../codemod) you can use to automatically update your
-code to work with a majority of the breaking changes in the migration from Canvas Kit v4 to v5.
-Simply run:
+We've introduced a
+[new codemod package](https://github.com/Workday/canvas-kit/tree/master/modules/codemod) you can use
+to automatically update your code to work with a majority of the breaking changes in the migration
+from Canvas Kit v4 to v5. Simply run:
 
 ```sh
 > npx @workday/canvas-kit-codemod v5 [path]
@@ -86,13 +87,14 @@ will need to be updated manually.
 
 ### Canvas Kit Preview
 
-Due to the broad range of stability in [Canvas Kit Labs](../../labs-react)
+Due to the broad range of stability in
+[Canvas Kit Labs](https://github.com/Workday/canvas-kit/tree/master/modules/labs-react)
 (`@workday/canvas-kit-labs-react`), we've introduced a new module called
-[Canvas Kit Preview](../../preview-react) (`@workday/canvas-kit-preview-react`) to provide consumers
-with more clarity and confidence when uptaking experimental and upcoming components. The components
-in Preview have had a full design and accessibility review and are approved for use in product.
-Their functionality and design are set, but their APIs and/or underlying architecture are still
-subject to change.
+[Canvas Kit Preview](https://github.com/Workday/canvas-kit/tree/master/modules/preview-react)
+(`@workday/canvas-kit-preview-react`) to provide consumers with more clarity and confidence when
+uptaking experimental and upcoming components. The components in Preview have had a full design and
+accessibility review and are approved for use in product. Their functionality and design are set,
+but their APIs and/or underlying architecture are still subject to change.
 
 Preview serves as a staging ground for components that are ready to use, but may not be up to the
 high code standards upheld in the Main `@workday/canvas-kit-react` module. Think of Labs as a space
@@ -728,7 +730,7 @@ provided a codemod to make these changes automatically.
   an `icon` prop and `iconPosition="right"`.
 
 To see examples of code in v4 versus v5, see our
-[codemod tests](../../codemod/lib/v5/spec/recategorizeButtons.spec.ts).
+[codemod tests](https://github.com/Workday/canvas-kit/tree/master/modules/codemod/lib/v5/spec/recategorizeButtons.spec.ts).
 
 #### Exports
 
@@ -823,8 +825,9 @@ interface MyButtonProps extends ButtonProps {
 
 ### Card
 
-Card is now a [compound component](./COMPOUND_COMPONENTS.mdx) composed of a `Card.Body` and an
-optional `Card.Heading`. This allows direct access to the heading and body elements.
+Card is now a [compound component](/getting-started/for-developers/resources/compound-components/)
+composed of a `Card.Body` and an optional `Card.Heading`. This allows direct access to the heading
+and body elements.
 
 ```tsx
 // v4
@@ -997,7 +1000,8 @@ There is no codemod for this change.
 
 ### Popups
 
-Popup has transitioned to a [compound component](./COMPOUND_COMPONENTS.mdx), along with all
+Popup has transitioned to a
+[compound component](/getting-started/for-developers/resources/compound-components/), along with all
 Popup-based behavior hooks. What was a `Popup` in v4 is now a `Popup.Card` in v5. The target button
 and `Popper` components have also been converted to subcomponents of `Popup`.
 
@@ -1332,8 +1336,9 @@ const MyPopup = () => {
 
 ### Modal
 
-Modal has transitioned to a [compound component](./COMPOUND_COMPONENTS.mdx). What was `Modal` in v4
-is now `Modal.Card` in v5.
+Modal has transitioned to a
+[compound component](/getting-started/for-developers/resources/compound-components/). What was
+`Modal` in v4 is now `Modal.Card` in v5.
 
 #### v4
 

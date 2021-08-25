@@ -21,7 +21,7 @@ module.exports = (name, description, prerelease) => {
 `;
   }
 
-  return `# Canvas Kit React ${titleCaseName}
+  return `# Canvas Kit ${titleCaseName}
 ${prereleaseMsg}
 ${description}
 
