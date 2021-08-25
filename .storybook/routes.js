@@ -16,7 +16,7 @@ const routes = {
   '/components/buttons/action-bar/': 'components-buttons-action-bar-react--basic',
   '/components/buttons/icon-button/': 'components-buttons-button-react-icon-button--circle',
   '/components/containers/card/': 'components-containers-card-react--basic',
-  '/components/containers/side-panel/': 'preview-side-panel-react--default',
+  '/components/containers/side-panel/': 'preview-side-panel-react--basic',
   '/components/containers/table/': 'components-containers-table-react--basic',
   '/components/layout/box/': 'labs-common-box--as',
   '/components/layout/flex/': 'labs-layout-flex--usage',
