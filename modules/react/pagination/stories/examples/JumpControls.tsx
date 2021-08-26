@@ -4,7 +4,7 @@ import {
   getLastPage,
   getVisibleResultsMax,
   getVisibleResultsMin,
-} from '../../lib/Pagination';
+} from '@workday/canvas-kit-react/pagination';
 
 export const JumpControls = () => {
   const resultCount = 10;
