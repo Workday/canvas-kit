@@ -15,6 +15,7 @@ const depCheckOptions = {
     '@storybook/addon-actions',
     '@storybook/addon-knobs',
     'enzyme',
+    'expect-type',
     'react',
     'react-dom',
     'jest-axe',
@@ -93,6 +94,10 @@ function formatErrorMessage(pkgFile, errors) {
               const column = errors[key][file].column;
               const message = errors[key][file].formatted;
 
+              if (!line && !column && !message) {
+                return `${file}\n${errors[key][file]}`;
+              }
+
               return (
                 labelMap[key].color(labelMap[key].label.padEnd(20)) +
                 colors.dim(`  ${line}:${column}  `) +
@@ -140,6 +145,15 @@ function formatErrorMessage(pkgFile, errors) {
 
 const modulePath = process.cwd();
 const packageName = require(path.join(modulePath, 'package.json')).name;
+
+// TODO: Figure out why we need this.
+if (modulePath.endsWith('/modules/react')) {
+  depCheckOptions.ignoreMatches.push('@workday/canvas-kit-react');
+} else if (modulePath.endsWith('/modules/labs-react')) {
+  depCheckOptions.ignoreMatches.push('@workday/canvas-kit-labs-react');
+} else if (modulePath.endsWith('/modules/preview-react')) {
+  depCheckOptions.ignoreMatches.push('@workday/canvas-kit-preview-react');
+}
 
 depCheck(modulePath, depCheckOptions, unused => {
   const errorKeys = Object.keys(unused).filter(key => {

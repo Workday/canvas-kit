@@ -1,0 +1,59 @@
+import {Meta} from '@storybook/addon-docs/blocks';
+
+import {ActionBar} from '@workday/canvas-kit-react/action-bar';
+import {Specifications} from '@workday/canvas-kit-docs';
+
+import {Basic} from './examples/Basic';
+
+<Meta title="Components/Buttons/Action Bar/React" component={ActionBar} />
+
+# Canvas Kit Action Bar
+
+Full width button toolbar fixed to bottom of screen.
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-react
+```
+
+## Usage
+
+### Basic Example
+
+Here is a basic example of an `ActionBar` with two buttons. Although not required,
+[buttons](../../button) are often used in in action bars. The primary action button should be left
+aligned followed by secondary buttons. The primary button is on the right only in "progression-based
+UIs" and on mobile devices.
+
+<ExampleCodeBlock code={Basic} />
+
+### Fixed
+
+The Action Bar generally lives at the bottom of the viewport. If you would like this behavior
+automatically (using `position: fixed`), you can use the `fixed` prop.
+
+```tsx
+<ActionBar fixed={true}>
+  <PrimaryButton>Button</PrimaryButton>
+  <SecondaryButton>Button</SecondaryButton>
+</ActionBar>
+```
+
+## Responsive Behavior
+
+At 575px, responsive styles will take effect:
+
+- Applies a flex box to the buttons
+- Makes single-button groups full width
+- All buttons will become the same width (`flex: 1`).
+- Button order will become reversed, making left-aligned primary buttons right-aligned.
+
+> When on a mobile form factor, the button placement should flip to have the primary button on the
+> far right.
+
+## Props
+
+Undocumented props are spread to the underlying container `div` element.
+
+<ArgsTable of={ActionBar} />

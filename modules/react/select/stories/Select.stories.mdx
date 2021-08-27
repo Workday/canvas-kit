@@ -1,0 +1,115 @@
+import {Meta} from '@storybook/addon-docs/blocks';
+import {Specifications} from '@workday/canvas-kit-docs';
+
+import {Select} from '@workday/canvas-kit-react/select';
+
+import {Alert} from './examples/Alert';
+import {Basic} from './examples/Basic';
+import {Disabled} from './examples/Disabled';
+import {DisabledOption} from './examples/DisabledOption';
+import {Error} from './examples/Error';
+import {Grow} from './examples/Grow';
+import {LabelPosition} from './examples/LabelPosition';
+import {RefForwarding} from './examples/RefForwarding';
+import {Required} from './examples/Required';
+
+<Meta title="Components/Inputs/Select/React" component={Select} />
+
+# Canvas Kit Select
+
+Select menus allow users to choose one option from a list of items.
+
+[> Workday Design Reference](https://design.workday.com/components/inputs/select-drop-down)
+
+> Consider using the [Select in Preview](/components/inputs/select/) instead. It utilizes a
+> Canvas-styled menu with theming support and a more flexible API for defining options. The Select
+> in Preview will replace this component in the future.
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-react
+```
+
+## Usage
+
+### Basic Example
+
+Select should be used in tandem with [Form Field](/components/inputs/form-field/) to meet
+accessibility standards.
+
+<ExampleCodeBlock code={Basic} />
+
+### Disabled
+
+Set the `disabled` prop of the Select to prevent users from interacting with it.
+
+<ExampleCodeBlock code={Disabled} />
+
+You may also set the `disabled` prop of the Select Option to prevent users from selecting that
+Option. Note that the value of a Select may be programmatically set to a disabled Option by setting
+the Select's `value` prop to the value of the disabled Option. The disabled Option, however, will
+remain unselectable by the user.
+
+<ExampleCodeBlock code={DisabledOption} />
+
+### Ref Forwarding
+
+Select supports [ref forwarding](https://reactjs.org/docs/forwarding-refs.html). It will forward
+`ref` to its underlying `<select>` element.
+
+<ExampleCodeBlock code={RefForwarding} />
+
+### Grow
+
+Set the `grow` prop of the wrapping Form Field to `true` to configure the Select to expand to the
+width of its container.
+
+<ExampleCodeBlock code={Grow} />
+
+The `grow` prop may also be applied directly to the Select if Form Field is not being used.
+
+### Label Position
+
+Set the `labelPosition` prop of the wrapping Form Field to designate the position of the label
+relative to the Select. `labelPosition` accepts the following values:
+
+- `FormField.LabelPosition.Top` (Default)
+- `FormField.LabelPosition.Left`
+
+<ExampleCodeBlock code={LabelPosition} />
+
+### Required
+
+Set the `required` prop of the wrapping Form Field to `true` to indicate that the field is required.
+Labels for required fields are suffixed by a red asterisk.
+
+<ExampleCodeBlock code={Required} />
+
+### Error States
+
+Set the `error` prop of the wrapping Form Field to `FormField.ErrorType.Alert` or
+`FormField.ErrorType.Error` to set the Select to the Alert or Error state, respectively. You will
+also need to set the `hintId` and `hintText` props on the Form Field to meet accessibility
+standards.
+
+The `error` prop may be applied directly to the Select with a value of `Select.ErrorType.Alert` or
+`Select.ErrorType.Error` if Form Field is not being used.
+
+#### Alert
+
+<ExampleCodeBlock code={Alert} />
+
+#### Error
+
+<ExampleCodeBlock code={Error} />
+
+## Props
+
+Undocumented props are spread to the underlying `<select>` element.
+
+<ArgsTable of={Select} />
+
+## Specifications
+
+<Specifications file="Select.spec.ts" name="Select" />

@@ -1,0 +1,84 @@
+import {Meta, Story} from '@storybook/addon-docs/blocks';
+
+import {
+  PrimaryButton,
+  SecondaryButton,
+  TertiaryButton,
+  DeleteButton,
+} from '@workday/canvas-kit-react/button';
+import {Specifications} from '@workday/canvas-kit-docs';
+
+import {Primary} from './examples/Primary';
+import {Secondary} from './examples/Secondary';
+import {Tertiary} from './examples/Tertiary';
+import {Delete} from './examples/Delete';
+
+<Meta title="Components/Buttons/Button/React" />
+
+# Canvas Kit Button
+
+Clickable button elements that extend the native `<button>` element with Canvas styling.
+
+[> Workday Design Reference](https://design.workday.com/components/buttons/buttons)
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-react
+```
+
+## Usage
+
+### PrimaryButton
+
+Here is a basic example of a Primary Button. Buttons can be customized with several props to change
+the size, add an icon, etc.
+
+<ExampleCodeBlock code={Primary} />
+
+#### Accessible Use of the `as` Prop
+
+Like many of our components, Buttons accept an `as` prop, which lets you change the underlying
+semantic element - usually an `a` (anchor), or a `button`. This should be done with caution to
+ensure the best accessibility. Generally, `button` elements should be used for actions, and `a`
+(anchor) elements should be used for navigation.
+
+#### Props
+
+Undocumented props are spread to the underlying `button` element.
+
+<ArgsTable of={PrimaryButton} />
+
+### SecondaryButton
+
+<ExampleCodeBlock code={Secondary} />
+
+#### Props
+
+Undocumented props are spread to the underlying `button` element.
+
+<ArgsTable of={SecondaryButton} />
+
+### TertiaryButton
+
+<ExampleCodeBlock code={Tertiary} />
+
+#### Props
+
+Undocumented props are spread to the underlying `button` element.
+
+<ArgsTable of={TertiaryButton} />
+
+### DeleteButton
+
+<ExampleCodeBlock code={Delete} />
+
+#### Props
+
+Undocumented props are spread to the underlying `button` element.
+
+<ArgsTable of={DeleteButton} />
+
+## Specifications
+
+<Specifications file="Button.spec.ts" name="Button" />

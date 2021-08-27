@@ -9,14 +9,16 @@ const path = require('path');
 const inquirer = require('inquirer');
 const glob = require('glob');
 const replaceInFiles = require('replace-in-files');
-const addDependency = require('./create-component/addDependency');
+const addExport = require('./create-component/addExport');
+
+require('colors');
 
 const cwd = process.cwd();
 
 console.log('\nCanvas Kit Component Promoter'.brightBlue.underline.bold);
 
 console.log(
-  '\nThis utility will walk you through promoting a Canvas Kit Labs component to a regular component.'
+  '\nThis utility will walk you through promoting a Canvas Kit Labs or Preview component to a regular component.'
 );
 
 console.log('\nPress ^C at any time to quit.\n'.gray);
@@ -29,47 +31,46 @@ const questions = [
   },
   {
     type: 'list',
+    name: 'prerelease',
+    message: 'Which package are you promoting from?:',
+    choices: ['labs', 'preview'],
+  },
+  {
+    type: 'list',
     name: 'category',
     message: 'What IA category does this component belong in within storybook?:',
     choices: ['Buttons', 'Containers', 'Indicators', 'Inputs', 'Navigation', 'Popups'],
   },
-  {
-    type: 'confirm',
-    name: 'bundle',
-    message: 'Should this be bundled in @workday/canvas-kit-react?:',
-    default: true,
-  },
 ];
 
 inquirer.prompt(questions).then(answers => {
-  const component = answers.name;
+  const {name: component, prerelease, category} = answers;
 
   if (!component) {
     console.log('You must enter a component name');
     process.exit(1);
   }
 
-  const target = 'react';
-  const srcPath = path.join(cwd, `modules/_labs/${component}`);
-  const destPath = path.join(cwd, `modules/${component}`);
+  const prereleaseTitle = prerelease && prerelease.charAt(0).toUpperCase() + prerelease.slice(1);
+  const srcPrefix = prerelease && prerelease + '-';
+  const srcPath = path.join(cwd, `modules/${srcPrefix}react/${component}`);
+  const destPrefix = prerelease === 'labs' ? 'preview-' : '';
+  const destModule = path.join(cwd, `modules/${destPrefix}react/`);
+  const destPath = path.join(destModule, component);
 
-  if (!fs.existsSync(destPath)) {
-    mkdirp.sync(destPath);
-  }
-
-  if (fs.existsSync(`${destPath}/${target}`)) {
+  if (fs.existsSync(`${destPath}`)) {
     console.log(`\n${destPath} already exists. Skipping.`.yellow);
   } else {
     console.log(
-      `\nMoving`.gray +
-        `modules/_labs/${component}/${target}`.cyan +
+      `\nMoving `.gray +
+        `modules/${srcPrefix}react/${component}`.cyan +
         ` > `.gray +
-        `modules/${component}`.cyan
+        `modules/${destPrefix}react/${component}`.cyan
     );
 
-    exec(`git mv ${srcPath}/${target} ${destPath}`)
+    exec(`git mv ${srcPath} ${destModule}`)
       .then(() => {
-        glob(`${destPath}/${target}/**/*`, async (err, files) => {
+        glob(`${destPath}/**/*`, async (err, files) => {
           if (err) {
             console.log('Error', err);
             process.exit(1);
@@ -77,45 +78,50 @@ inquirer.prompt(questions).then(answers => {
 
           try {
             console.log(`Updating file paths and removing labs references\n`.gray);
-            const {
-              changedFiles,
-              countOfMatchesByPaths,
-              replaceInFilesOptions,
-            } = await replaceInFiles({
+            await replaceInFiles({
               files,
-              from: '../../../',
-              to: '../../',
+              from: `@workday/canvas-kit-${srcPrefix}react/${component}`,
+              to: `@workday/canvas-kit-${destPrefix}react/${component}`,
             })
               .pipe({
-                from: `@workday/canvas-kit-labs-${target}-${component}`,
-                to: `@workday/canvas-kit-${target}-${component}`,
+                from: `yarn add @workday/canvas-kit-${srcPrefix}react`,
+                to: `yarn add @workday/canvas-kit-${destPrefix}react`,
               })
               .pipe({
-                from: `modules/_labs/${component}`,
-                to: `modules/${component}`,
+                from: `modules/${srcPrefix}react/${component}`,
+                to: `modules/${destPrefix}react/${component}`,
               })
               .pipe({
-                from: /\n<a href="https:\/\/github.com\/Workday\/canvas-kit\/tree\/master\/modules\/_labs.*\n.*\n.*currently in pre-release.\n\n\n/g,
-                to: '',
+                from: `'${prereleaseTitle}/`,
+                to: `'Components/${category}/`,
               })
               .pipe({
-                from: `storiesOf('Labs/`,
-                to: `storiesOf('Components/${answers.category}/`,
+                from: `'Testing/React/${prereleaseTitle}`,
+                to: `'Testing/React/${category}`,
               });
+
+            if (prerelease === 'labs') {
+              await replaceInFiles({
+                files,
+                from: 'modules/labs-react/README.md',
+                to: 'modules/preview-react/README.md',
+              }).pipe({
+                from: 'img.shields.io/badge/LABS-alpha-orange" alt="LABS: Alpha"',
+                to: 'img.shields.io/badge/PREVIEW-beta-blueviolet" alt="Preview: Beta"',
+              });
+            } else if (prerelease === 'preview') {
+              await replaceInFiles({
+                files,
+                from: /\n<a href=".*modules\/(labs|preview).*(\n.*)*in prerelease\.\n\n\n/g,
+                to: '',
+              });
+            }
           } catch (error) {
             console.log('Error occurred:', error);
           }
 
-          if (answers.bundle) {
-            console.log(`Adding depenency to @workday/canvas-kit-${target}\n`);
-            addDependency(component, target);
-          }
-
-          fs.readdir(srcPath, function(err, files) {
-            if (!files.length) {
-              fs.rmdirSync(srcPath);
-            }
-          });
+          console.log(`Adding depenency to ` + `modules/react/index.ts\n`.brightBlue);
+          addExport(component);
         });
       })
       .catch(err => {

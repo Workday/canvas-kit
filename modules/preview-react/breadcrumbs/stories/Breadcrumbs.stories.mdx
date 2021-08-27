@@ -1,0 +1,212 @@
+import {Meta} from '@storybook/addon-docs/blocks';
+import {Breadcrumbs} from '@workday/canvas-kit-preview-react/breadcrumbs';
+import {Specifications} from '@workday/canvas-kit-docs';
+
+import {Basic} from './examples/Basic';
+import {CollapsibleList} from './examples/CollapsibleList';
+import {RTLCollapsibleList} from './examples/RTL';
+import {CurrentItemTruncation} from './examples/CurrentItemTruncation';
+import {LinkTruncation} from './examples/LinkTruncation';
+
+<Meta title="Preview/Breadcrumbs/React" component={Breadcrumbs} />
+
+# Canvas Kit Breadcrumbs
+
+Breadcrumbs allow users to keep track and maintain awareness of their location as they navigate
+through pages, folders, files, etc.
+
+[> Workday Design Reference](https://design.workday.com/components/navigation/breadcrumbs)
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-preview-react
+```
+
+## Usage
+
+### Basic Example
+
+`Breadcrumbs.List` is a styled unordered list `<ul>` with no additional behaviors. Use this when you
+are not concerned about collapsing the list of breadcrumb items into a dropdown menu at a specified
+width.
+
+Accessibility is built into Breadcrumbs components in a way that allows you to create an inclusive
+experience with little additional configuration. The only ARIA label you'll need to add is the
+`aria-label` for `Breadcrumbs.Nav` as seen in the example. And all links require `href`s to be
+properly identified. All other accessible attributes are baked into the components.
+
+<ExampleCodeBlock code={Basic} />
+
+### Collapsible List
+
+`Breadcrumbs.CollapsibleList` is built on top of `Breadcrumbs.List`. It provides additional
+functionality to collapse list items into a dropdown menu at a specified width.
+
+In addition to adding `aria-label` to `Breadcrumbs.Nav` and identifying all links with an `href`,
+you'll need to add `buttonAriaLabel` to `Breadcrumbs.CollapsibleList`.
+
+<ExampleCodeBlock code={CollapsibleList} />
+
+### Right-to-Left Example
+
+Breadcrumbs has bidirectional support out of the box. That means outside of setting the content
+direction in your application's Canvas theme, you don't need to do anything else to make it work.
+All you need to supply is the translated text for items and ARIA labels.
+
+<ExampleCodeBlock code={RTLCollapsibleList} />
+
+## Components
+
+### Breadcrumbs.Nav
+
+#### Usage
+
+`Breadcrumbs.Nav` a styled `<nav>` element. It has no intrinsic state or behaviors.
+
+#### Props
+
+This component also supports
+[all native HTMLElement props](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes).
+
+<ArgsTable of={Breadcrumbs.Nav} />
+
+---
+
+### Breadcrumbs.List
+
+#### Usage
+
+`Breadcrumbs.List` component is a styled, unordered list (`<ul>`) with no additional behaviors. Use
+this when you're not concerned about collapsing the list of breadcrumb items into a dropdown menu at
+a specified width.
+
+#### Props
+
+`Breadcrumbs.List` has no component-specific props. However, it supports
+[all native `<ul>` element props](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ul#Attributes).
+
+---
+
+### Breadcrumbs.CollapsibleList
+
+#### Usage
+
+`Breadcrumbs.CollapsibleList` is built on top of `Breadcrumbs.List`. It provides additional
+functionality to collapse list items into a dropdown menu at a specified width.
+
+The `maxWidth` prop sets the point to collapse. If the length of the list exceeds that value, items
+will be collapsed into a dropdown menu. Note that the first (root) item and last (current) items in
+the list will never be collapsed.
+
+##### Handling Custom Dropdown Button Icons
+
+By default the icon for the dropdown button is `relatedActionsIcon`. However, you can set this to
+any [Canvas System Icon](https://design.workday.com/tokens/assets/icons/system-icons) with the
+`buttonIcon` prop. Please consult the Canvas team if you decide to do this, as we'd like to keep
+breadcrumb navigation as consistent as possible.
+
+#### Props
+
+This component also supports
+[all native `<ul>` element props](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ul#Attributes).
+
+<ArgsTable of={Breadcrumbs.CollapsibleList} />
+
+---
+
+### Breadcrumbs.ListItem
+
+#### Usage
+
+`Breadcrumbs.ListItem` is a styled `<li>` element that contains a `SystemIcon` separator.
+
+#### Props
+
+`Breadcrumbs.ListItem` has no component-specific props. However, it supports
+[all native `<li>` element props](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/li#Attributes).
+
+---
+
+### Breadcrumbs.Link
+
+#### Usage
+
+`Breadcrumbs.Link` is a styled `<a>` element that also renders a tooltip if the text is truncated.
+The built-in truncation + tooltip functionality provides an easy-to-use, accessible feature for
+managing the length of link text. The `maxWidth` is set to `350px` by default and can be adjusted as
+needed. Note that tooltips will only render when text is truncated. Here's an example with the
+`maxWidth` set to `150px`.
+
+<ExampleCodeBlock code={LinkTruncation} />
+
+##### Handling Redirects
+
+`Breadcrumbs.Link` defaults to redirecting with an `href`, meaning the page will hard-redirect when
+the link is clicked. However, if you're in a single-page application (SPA) environment, you might
+want to use the internal SPA router instead. You can override this hard-redirect with the `onAction`
+prop. Note that `onAction` will not block any `onClick` if provided. Below is an example using the
+`history` package.
+
+```tsx
+import * as React from 'react';
+// using the history package
+import {createBrowserHistory} from 'history';
+import {Breadcrumbs} from '@workday/canvas-kit-preview-react/breadcrumbs';
+
+// this is likely being done at the root of your application and not inside this component.
+const history = createBrowserHistory();
+
+const handleClick = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+  // handle any click side-effects here
+  console.log('click event', event);
+}
+
+const handleRedirect = (href: string) => {
+  // redirect using the internal SPA router
+  history.push(href);
+}
+
+return (
+  <Breadcrumbs.Link
+    href="/account"
+    onAction={handleRedirect}
+    onClick={handleClick}
+  >
+    Account
+  </Breadcrumbs.Link>;
+)
+```
+
+#### Props
+
+This component also supports
+[all native `<a>` element props](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#Attributes).
+
+<ArgsTable of={Breadcrumbs.Link} />
+
+---
+
+### Breadcrumbs.CurrentItem
+
+#### Usage
+
+`Breadcrumbs.CurrentItem` is a styled `<li>` element also renders a tooltip if the text is
+truncated. The built-in truncation + tooltip functionality provides an easy-to-use, accessible
+feature for managing the length of link text. The `maxWidth` is set to `350px` by default and can be
+adjusted as needed. Normally, this is a non-focusable element. But when truncated, it sets the
+`tabIndex` to `0` to enable the tooltip to appear on keyboard focus. Note that tooltips will only
+render when text is truncated. Here's an example with the `maxWidth` set to `100px`.
+
+<ExampleCodeBlock code={CurrentItemTruncation} />
+
+#### Props
+
+This component also supports
+[all native `<li>` element props](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/li#Attributes).
+
+<ArgsTable of={Breadcrumbs.CurrentItem} />
+
+## Specifications
+
+<Specifications file="Breadcrumbs.spec.ts" name="Breadcrumbs" />

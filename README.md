@@ -13,14 +13,14 @@ implement user experiences consistent with
 <a href="https://lerna.js.org">
   <img src="https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg" alt="Maintained with Lerna" />
 </a>
-<a href="./CONTRIBUTING.md">
+<a href="./modules/docs/mdx/CONTRIBUTING.mdx">
   <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs welcome" />
 </a>
 
 ---
 
 **:white_check_mark: For a list of available react modules see
-[Canvas Kit Component Status](./COMPONENT_STATUS.md)**
+[Canvas Kit Component Status](./modules/docs/mdx/COMPONENT_STATUS.mdx)**
 
 ## Getting started
 
@@ -44,9 +44,9 @@ npm install @workday/canvas-kit-react
 
 ```tsx
 import * as React from 'react';
-import {Button} from '@workday/canvas-kit-react';
+import {SecondaryButton} from '@workday/canvas-kit-react';
 
-<Button>Button Label</Button>;
+<SecondaryButton>Button Label</SecondaryButton>;
 ```
 
 ### CSS
@@ -96,8 +96,9 @@ The Canvas Kit core team will take a look and discuss it with you.
 
 ## Contributing
 
-Want to contribute to Canvas Kit React? Please read our [contributing guidelines](./CONTRIBUTING.md)
-to find out more and how to get started.
+Want to contribute to Canvas Kit React? Please read our
+[contributing guidelines](./modules/docs/mdx/CONTRIBUTING.mdx) to find out more and how to get
+started.
 
 ## Open Development
 
@@ -109,9 +110,23 @@ process. Any and all issues are public and available for discussion.
 
 Canvas Kit follows [semantic versioning](https://semver.org/) and is enforced automatically by
 [conventional commits](https://www.conventionalcommits.org/) (see
-["Commit Message Format"](./CONTRIBUTING.md#commit-message-format)).
+["Commit Message Format"](./modules/docs/mdx/CONTRIBUTING.mdx#commit-message-format)).
 
 Each module is independently versioned using [Lerna](https://github.com/lerna/lerna).
+
+## Developer Documentation
+
+- [Contributing](./modules/docs/mdx/CONTRIBUTING.mdx)
+- [Code of Conduct](./modules/docs/mdx/CODE_OF_CONDUCT.md)
+- [Component Status](./modules/docs/mdx/COMPONENT_STATUS.mdx)
+- Migration Guides:
+  - [v4.0 Migration Guide](./modules/docs/mdx/4.0-MIGRATION-GUIDE.mdx)
+  - [v5.0 Migration Guide](./modules/docs/mdx/5.0-MIGRATION-GUIDE.mdx)
+- Code Style / Best Practices:
+  - [API & Pattern Guidelines](./modules/docs/mdx/API_PATTERN_GUIDELINES.mdx)
+  - [Compound Components](./modules/docs/mdx/COMPOUND_COMPONENTS.mdx)
+  - [Creating Compound Components](./modules/docs/mdx/CREATING_COMPOUND_COMPONENTS.mdx)
+  - [Testing](./modules/docs/mdx/TESTING.mdx)
 
 ## License
 

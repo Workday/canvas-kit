@@ -1,0 +1,18 @@
+{
+  "extends": "./tsconfig.json",
+  "include": ["**/*stories*.tsx", "**/*stories*.ts", "**/examples/*.tsx"],
+  "exclude": ["cypress"],
+  "compilerOptions": {
+    "declaration": false,
+    "declarationMap": false,
+    "noImplicitReturns": false,
+    "noImplicitThis": true,
+    "preserveConstEnums": true,
+    "allowUnreachableCode": false,
+    "noImplicitAny": false,
+    "strictNullChecks": false,
+    "noUnusedLocals": false,
+    "types": [],
+    "incremental": false
+  }
+}

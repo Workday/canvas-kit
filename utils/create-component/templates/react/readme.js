@@ -1,43 +1,42 @@
 const getPascalCaseName = require('../../nameUtils').getPascalCaseName;
 const getTitleCaseName = require('../../nameUtils').getTitleCaseName;
 
-module.exports = (name, description, unstable) => {
+module.exports = (name, description, prerelease) => {
   const pascalCaseName = getPascalCaseName(name);
   const titleCaseName = getTitleCaseName(name);
 
-  return `# Canvas Kit React ${titleCaseName}
-${
-  unstable
-    ? `
-<a href="https://github.com/Workday/canvas-kit/tree/master/modules/_labs/README.md">
-  <img src="https://img.shields.io/badge/LABS-beta-orange" alt="LABS: Beta" />
-</a>  This component is work in progress and currently in pre-release.
-`
-    : ''
-}
+  let prereleaseMsg = '';
+
+  if (prerelease === 'labs') {
+    prereleaseMsg = `
+<a href="https://github.com/Workday/canvas-kit/tree/master/modules/labs-react/README.md">
+  <img src="https://img.shields.io/badge/LABS-alpha-orange" alt="LABS: Alpha" />
+</a>  This component is work in progress and currently in prerelease.
+`;
+  } else if (prerelease === 'preview') {
+    prereleaseMsg = `
+<a href="https://github.com/Workday/canvas-kit/tree/master/modules/preview-react/README.md">
+  <img src="https://img.shields.io/badge/PREVIEW-beta-blueviolet" alt="PREVIEW: Beta" />
+</a>  This component is work in progress and currently in prerelease.
+`;
+  }
+
+  return `# Canvas Kit ${titleCaseName}
+${prereleaseMsg}
 ${description}
 
 ## Installation
-${
-  !unstable
-    ? `
-\`\`\`sh
-yarn add @workday/canvas-kit-react
-\`\`\`
 
-or
-`
-    : ''
-}
 \`\`\`sh
-yarn add @workday/canvas-kit${unstable ? '-labs' : ''}-react-${name}
+yarn add @workday/canvas-kit-${prerelease && prerelease + '-'}react
 \`\`\`
 
 ## Usage
 
 \`\`\`tsx
 import * as React from 'react';
-import ${pascalCaseName} from '@workday/canvas-kit${unstable ? '-labs' : ''}-react-${name}';
+import {${pascalCaseName}} from '@workday/canvas-kit-${prerelease &&
+    prerelease + '-'}react/${name}';
 
 <${pascalCaseName} />;
 \`\`\`

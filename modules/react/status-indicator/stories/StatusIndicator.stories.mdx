@@ -1,0 +1,65 @@
+import {Meta} from '@storybook/addon-docs/blocks';
+
+import {StatusIndicator} from '@workday/canvas-kit-react/status-indicator';
+
+import {Basic} from './examples/Basic';
+import {Icon} from './examples/Icon';
+import {Emphasis} from './examples/Emphasis';
+
+<Meta title="Components/Indicators/Status Indicator/React" component={StatusIndicator} />
+
+# Canvas Kit Status Indicator
+
+Status Indicators help the user quickly identify the status of a task, action, or page element.
+
+[> Workday Design Reference](https://design.workday.com/components/indicators/status-indicators)
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-react
+```
+
+## Usage
+
+### Basic Example
+
+<ExampleCodeBlock code={Basic} />
+
+Note that the `type` prop is required (there is no default value). `type` accepts the following
+values:
+
+- `StatusIndicator.Type.Blue`
+- `StatusIndicator.Type.Gray`
+- `StatusIndicator.Type.Green`
+- `StatusIndicator.Type.Orange`
+- `StatusIndicator.Type.Red`
+- `StatusIndicator.Type.Transparent`
+
+While the colors are self-explanatory, the `Transparent` type is intended for use on transparent and
+varied backgrounds (e.g. on top of a thumbnail).
+
+### Emphasis
+
+Set the `emphasis` prop of the Status Indicator to convey varying levels of emphasis. `emphasis`
+accepts the following values:
+
+- `StatusIndicator.Emphasis.High` (Default)
+- `StatusIndicator.Emphasis.Low`
+
+<ExampleCodeBlock code={Emphasis} />
+
+Note that the `High` and `Low` emphasis levels are identical for `Transparent` Status Indicators.
+
+### Icon
+
+Set the `icon` prop of the Status Indicator to a Canvas System Icon to display that icon beside the
+label.
+
+<ExampleCodeBlock code={Icon} />
+
+## Props
+
+Undocumented props are spread to the outermost element rendered by Status Indicator.
+
+<ArgsTable of={StatusIndicator} />

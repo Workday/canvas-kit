@@ -1,8 +1,12 @@
 import {DocsPage, DocsContainer} from '@storybook/addon-docs/blocks';
 import 'cypress-storybook/react';
+import routes from './routes';
 
 import {CanvasProviderDecorator} from '../utils/storybook';
 import theme from './theme';
+
+// set routes on window for testing the validity of the routes
+window.__routes = routes;
 
 /** If the string contains a phrase, prefix it. This is useful for making ordering sections */
 const prefix = (phrase, prefix) => (/** @type {string} */ value) => {
@@ -17,8 +21,10 @@ function storySort(a, b) {
     prefix('getting-started', 'a'),
     prefix('tokens-', '1'),
     prefix('components-', '2'),
-    prefix('labs-', '3'),
-    prefix('default', 'aa'),
+    prefix('preview-', '3'),
+    prefix('labs-', '4'),
+    prefix('basic', 'aa'),
+    prefix('default', 'ab'),
     prefix('visual-testing', 'zz')
   );
 
