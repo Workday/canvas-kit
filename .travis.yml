@@ -18,10 +18,10 @@ stages:
   if: branch =~ /^support\// AND type != pull_request
 
 - name: release
-  if: (branch = master OR branch =~ /^prerelease\//) AND tag =~ /^v\d+\.\d+(\.\d+)?(-\S*)?$/ AND tag IS present
+  if: (branch = master OR branch =~ /^prerelease\//) AND tag =~ /^v\d+\.\d+(\.\d+)?(-\S*)?$/ AND tag IS present AND type != pull_request
 
 - name: support-release
-  if: tag =~ /^v\d+\.\d+(\.\d+)?(-\S*)?$/ AND tag IS present
+  if: branch =~ /^support\// AND tag =~ /^v\d+\.\d+(\.\d+)?(-\S*)?$/ AND tag IS present AND type != pull_request
 
 before_install:
   - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.15.2
