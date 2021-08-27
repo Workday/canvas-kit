@@ -1,0 +1,174 @@
+import {Meta} from '@storybook/addon-docs/blocks';
+import {SidePanel} from '@workday/canvas-kit-preview-react/side-panel';
+import {Specifications} from '@workday/canvas-kit-docs';
+// Examples
+import {Basic} from './examples/Basic';
+import {HiddenName} from './examples/HiddenName';
+import {AlternatePanel} from './examples/Variant';
+import {ExternalControl} from './examples/ExternalControl';
+import {RightOrigin} from './examples/RightOrigin';
+import {AlwaysOpen} from './examples/AlwaysOpen';
+import {OnExpandedChange} from './examples/OnExpandedChange';
+import {OnStateTransition} from './examples/OnStateTransition';
+// Prop Tables
+import {UseSidePanel, Panel, Label, Control} from './examples/PropTables.splitprops.tsx';
+
+<Meta title="Preview/Side Panel/React" component={SidePanel} />
+
+# Canvas Kit Side Panel
+
+`SidePanel` is a collaspible container that anchors to the left or right side of the screen.
+
+[> Workday Design Reference](https://design.workday.com/components/containers/side-panel)
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-preview-react
+```
+
+## Usage
+
+### Basic Example
+
+`SidePanel` is composed of three parts:
+
+- The panel container
+- An accessible name (either on a visible element or hidden)
+- A toggle button to control the expand / collapse states
+
+Bidirectional support is built into `SidePanel`. As seen in the example below, CSS Flexbox flips the
+page layout and the panel's contents. `SidePanel` also has logic to flip the position and direction
+of the `ToggleButton` as well as the direction of the expand / collapse animation. If you're using
+CSS Flexbox for layouts and using the provided components, you shouldn't have to provide any custom
+logic or styling for bidirecitonal support.
+
+<ExampleCodeBlock code={Basic} />
+
+### Hidden Name
+
+`SidePanel` should always have an accessible label. Often this is the heading element with an `id`
+attribute. However, as seen in the example below, you can apply a `hidden` attribute to your label
+if you do not want it to be visible.
+
+<ExampleCodeBlock code={HiddenName} />
+
+### Alternate Variant
+
+`SidePanel` has one variant, `alternate`, which you can supply as a top-level prop.
+
+<ExampleCodeBlock code={AlternatePanel} />
+
+### External Control
+
+Sometimes you'll want to control `SidePanel`'s' expand / collapse behavior from outside the
+component. In that case, you can use the `controlProps` supplied by the `useSidePanel` hook.
+
+<ExampleCodeBlock code={ExternalControl} />
+
+### Right Origin
+
+By default, `SidePanel` uses a `left` origin. This sets the `ToggleButton`'s position and direction
+as well as the direction of the animation. But you can set `SidePanel`'s origin to `"right"` to flip
+these. As with the left-origin panel, all right-origin styles have bidirecitonal support.
+
+<ExampleCodeBlock code={RightOrigin} />
+
+### Always Open
+
+If you do not need `SidePanel`'s' expand / collapse behavior, you can simply omit the `controlProps`
+and `ToggleButton`.
+
+<ExampleCodeBlock code={AlwaysOpen} />
+
+## Components
+
+### SidePanel
+
+#### Usage
+
+The majority of `SidePanel`'s logic and funcitonality lives in this container component. Most of
+this functionality has been described in the examples above, but there a couple specific callbacks
+worth mentioning here.
+
+##### onExpandedChange
+
+The `onExpandedChange` callback is called when the boolean `expanded` state is updated. This is a
+handy way to hook into these updates to trigger side-effects. Below is an example:
+
+<ExampleCodeBlock code={OnExpandedChange} />
+
+##### onStateTransition
+
+While `onExpandedChange` works well for discrete boolean state changes, there may be occasions where
+you also need transition states. In these situations, `onStateTransition` is a better fit. This
+callback it called on all state transitions and returns the current transtion state. This can be one
+of four `SidePanelTransitionStates`, `expanding`, `expanded`, `collapsing`, and `collapsed`. Below
+is an example:
+
+<ExampleCodeBlock code={OnStateTransition} />
+
+#### Props
+
+<ArgsTable of={SidePanel} />
+
+### SidePanel.ToggleButton
+
+#### Usage
+
+`<SidePanel.ToggleButton>` is a control that is meant to toggle between `expanded = true` and
+`expanded = false` states. It must be used within the `SidePanel` component as a child. Use in
+conjunction with `useSidePanel`'s `controlProps`, otherwise it does not come with explicit `onClick`
+handlers.
+
+For accessibility purposes, it must be the first focusable element. We recommend that you keep it as
+the first child of `SidePanel`.
+
+#### Props
+
+This is a standard Canvas Kit `IconButton` and will accept
+[all those props](https://workday.github.io/canvas-kit?path=/docs/components-buttons-button-react-icon-button--circle#props).
+
+## Hooks
+
+### useSidePanel
+
+#### Usage
+
+This hook manages the state and `aria-` attributes for the SidePanel. It takes an optional
+configuration object:
+
+<ArgsTable of={UseSidePanel} />
+
+Below is an example:
+
+```tsx
+import {useSidePanel} from '@workday/canvas-kit-preview-react/side-panel';
+
+const {expanded, setExpaned, panelProps, labelProps, controlProps} = useSidePanel({
+  initialExpanded: false,
+  panelId: 'custom-panel-id',
+  labelId: 'custom-label-id',
+});
+```
+
+#### Props
+
+The hook returns an object containing `expanded`, `setExpanded`, and a props for the panel, label,
+and control.
+
+##### Panel Props
+
+<ArgsTable of={Panel} />
+
+##### Label Props
+
+<ArgsTable of={Label} />
+
+##### Control Props
+
+<ArgsTable of={Control} />
+
+## Specifications
+
+<Specifications file="SidePanelPreview.spec.ts" name="Side Panel" />
