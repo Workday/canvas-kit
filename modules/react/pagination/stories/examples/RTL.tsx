@@ -5,7 +5,7 @@ import {
   getVisibleResultsMax,
   getVisibleResultsMin,
   usePaginationModel,
-} from '../../lib/Pagination';
+} from '@workday/canvas-kit-react/pagination';
 
 import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
 
