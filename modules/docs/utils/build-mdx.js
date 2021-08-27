@@ -65,7 +65,8 @@ glob(ckrFolder + '/**/*.mdx', {}, (err, files) => {
 
   mdxDestinations.forEach((destFile, index) => {
     const sourceMdx = files[index];
-    const sourceExamplesDir = path.join(path.dirname(sourceMdx), 'examples');
+    const storiesDir = path.dirname(sourceMdx);
+    const sourceExamplesDir = path.join(storiesDir, 'examples');
     const destDir = path.dirname(destFile);
 
     fs.mkdirSync(destDir, {recursive: true});
@@ -89,5 +90,10 @@ glob(ckrFolder + '/**/*.mdx', {}, (err, files) => {
         });
       });
     }
+
+    // Copy files that split the props of a Compound Component model.
+    glob(storiesDir + '/*.splitprops.tsx', {}, (err, files) =>
+      files.forEach(file => fse.copySync(file, path.join(destDir, path.basename(file))))
+    );
   });
 });
