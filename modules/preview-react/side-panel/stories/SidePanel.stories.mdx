@@ -11,7 +11,7 @@ import {AlwaysOpen} from './examples/AlwaysOpen';
 import {OnExpandedChange} from './examples/OnExpandedChange';
 import {OnStateTransition} from './examples/OnStateTransition';
 // Prop Tables
-import {UseSidePanel, Panel, Label, Control} from './examples/PropTables';
+import {UseSidePanel, Panel, Label, Control} from './examples/PropTables.splitprops.tsx';
 
 <Meta title="Preview/Side Panel/React" component={SidePanel} />
 
@@ -103,7 +103,8 @@ handy way to hook into these updates to trigger side-effects. Below is an exampl
 While `onExpandedChange` works well for discrete boolean state changes, there may be occasions where
 you also need transition states. In these situations, `onStateTransition` is a better fit. This
 callback it called on all state transitions and returns the current transtion state. This can be one
-of four `SidePanelTransitionStates`, `expanding`, `expanded`, `collapsing`, and `collapsed`. Below is an example:
+of four `SidePanelTransitionStates`, `expanding`, `expanded`, `collapsing`, and `collapsed`. Below
+is an example:
 
 <ExampleCodeBlock code={OnStateTransition} />
 
@@ -142,7 +143,7 @@ configuration object:
 Below is an example:
 
 ```tsx
-import { useSidePanel } from '@workday/canvas-kit-preview-react/side-panel';
+import {useSidePanel} from '@workday/canvas-kit-preview-react/side-panel';
 
 const {expanded, setExpaned, panelProps, labelProps, controlProps} = useSidePanel({
   initialExpanded: false,
