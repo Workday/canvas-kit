@@ -3,14 +3,21 @@
 import * as React from 'react';
 import withReadme from 'storybook-readme/with-readme';
 import {jsx} from '@emotion/core';
-import {SidePanel, useSidePanel} from '@workday/canvas-kit-preview-react/side-panel';
-import {PrimaryButton} from '@workday/canvas-kit-react/button';
-import {colors, depth, type} from '@workday/canvas-kit-react/tokens';
+import {
+  SidePanel,
+  useSidePanel,
+  SidePanelTransitionStates,
+} from '@workday/canvas-kit-preview-react/side-panel';
+import {useThemeRTL, Box} from '@workday/canvas-kit-labs-react/common';
+import {Flex} from '@workday/canvas-kit-labs-react/layout';
+import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
+import {PrimaryButton, SecondaryButton} from '@workday/canvas-kit-react/button';
+import {borderRadius, colors, space, type} from '@workday/canvas-kit-react/tokens';
 import {AccentIcon} from '@workday/canvas-kit-react/icon';
 import {rocketIcon} from '@workday/canvas-accent-icons-web';
 import {plusIcon} from '@workday/canvas-system-icons-web';
+
 import README from '../README.md';
-import {SidePanelTransitionStates} from '../lib/SidePanel';
 
 export default {
   title: 'Preview/Side Panel/React',
@@ -18,41 +25,60 @@ export default {
   component: SidePanel,
 };
 
-const height = `calc(100vh - 80px)`;
+const height = '320px';
 
 export const Default = () => {
+  const [direction, setDirection] = React.useState<ContentDirection>(ContentDirection.LTR);
+  const toggleDirection = () => {
+    if (direction === ContentDirection.LTR) {
+      setDirection(ContentDirection.RTL);
+    } else {
+      setDirection(ContentDirection.LTR);
+    }
+  };
+
+  return (
+    <React.Fragment>
+      <SecondaryButton onClick={toggleDirection}>Toggle Content Direction</SecondaryButton>
+      <CanvasProvider theme={{canvas: {direction}}}>
+        <Flex height={height} margin="xs">
+          <LeftSidePanel />
+        </Flex>
+      </CanvasProvider>
+    </React.Fragment>
+  );
+};
+
+const LeftSidePanel = () => {
   const {expanded, panelProps, labelProps, controlProps} = useSidePanel();
   const [panelState, setPanelState] = React.useState<SidePanelTransitionStates>(
     expanded ? 'expanded' : 'collapsed'
   );
 
+  const {themeRTL} = useThemeRTL();
+  const iconStyles = themeRTL({
+    marginRight: space.s,
+  });
+
   return (
-    <div style={{height}}>
-      <SidePanel {...panelProps} onStateTransition={setPanelState}>
-        <SidePanel.ToggleButton {...controlProps} />
-        {panelState === 'expanded' && (
-          <div
+    <SidePanel {...panelProps} onStateTransition={setPanelState}>
+      <SidePanel.ToggleButton {...controlProps} />
+      {panelState === 'expanded' && (
+        <Flex alignItems="center" paddingY="s" paddingX="xs">
+          <AccentIcon css={iconStyles} icon={rocketIcon} />
+          <h3
+            {...labelProps}
             css={{
-              display: 'flex',
-              alignItems: 'center',
-              padding: `16px 12px`,
+              ...type.levels.body.large,
+              color: colors.licorice500,
+              fontWeight: type.properties.fontWeights.bold,
             }}
           >
-            <AccentIcon style={{marginRight: 16}} icon={rocketIcon} />
-            <h3
-              {...labelProps}
-              style={{
-                ...type.levels.body.large,
-                color: colors.licorice500,
-                fontWeight: type.properties.fontWeights.bold,
-              }}
-            >
-              Tasks Panel
-            </h3>
-          </div>
-        )}
-      </SidePanel>
-    </div>
+            Tasks Panel
+          </h3>
+        </Flex>
+      )}
+    </SidePanel>
   );
 };
 
@@ -60,41 +86,83 @@ export const NoHeaderPermanentlyOpen = () => {
   const {panelProps, labelProps} = useSidePanel();
 
   return (
-    <div style={{height}}>
+    <Flex height={height}>
       <SidePanel {...panelProps}>
         <span hidden {...labelProps}>
           Tasks Panel
         </span>
-        <div style={{padding: '16px 24px'}}>
+        <Flex paddingY="s" paddingX="xs">
           <PrimaryButton size="large" icon={plusIcon}>
             Add New
           </PrimaryButton>
-        </div>
+        </Flex>
       </SidePanel>
-    </div>
+    </Flex>
   );
 };
 
 export const RightSidePanel = () => {
-  const {panelProps, labelProps, controlProps} = useSidePanel({
-    initialExpanded: false,
-    panelId: 'sidepanelid1',
+  const [direction, setDirection] = React.useState<ContentDirection>(ContentDirection.LTR);
+  const toggleDirection = () => {
+    if (direction === ContentDirection.LTR) {
+      setDirection(ContentDirection.RTL);
+    } else {
+      setDirection(ContentDirection.LTR);
+    }
+  };
+
+  return (
+    <React.Fragment>
+      <SecondaryButton onClick={toggleDirection}>Toggle Content Direction</SecondaryButton>
+      <CanvasProvider theme={{canvas: {direction}}}>
+        <Flex height={height} margin="xs">
+          <RightPanel />
+        </Flex>
+      </CanvasProvider>
+    </React.Fragment>
+  );
+};
+
+const RightPanel = () => {
+  const {expanded, panelProps, labelProps, controlProps} = useSidePanel();
+  const [panelState, setPanelState] = React.useState<SidePanelTransitionStates>(
+    expanded ? 'expanded' : 'collapsed'
+  );
+
+  const {themeRTL} = useThemeRTL();
+  const sidePanelStyles = themeRTL({
+    position: 'absolute',
+    right: 0,
+  });
+
+  const iconStyles = themeRTL({
+    marginRight: space.s,
   });
 
   return (
-    <div
-      style={{
-        position: 'relative',
-        height,
-      }}
+    <SidePanel
+      {...panelProps}
+      css={sidePanelStyles}
+      origin="right"
+      onStateTransition={setPanelState}
     >
-      <SidePanel {...panelProps} style={{position: 'absolute', right: 0}} origin="right">
-        <SidePanel.ToggleButton {...controlProps} />
-        <span hidden {...labelProps}>
-          Right Panel
-        </span>
-      </SidePanel>
-    </div>
+      <SidePanel.ToggleButton {...controlProps} />
+      {panelState === 'expanded' && (
+        <Flex justifyContent="flex-end" alignItems="center" paddingY="s" paddingX="xs">
+          <AccentIcon css={iconStyles} icon={rocketIcon} />
+          <h3
+            {...labelProps}
+            css={{
+              ...type.levels.body.large,
+              color: colors.licorice500,
+              fontWeight: type.properties.fontWeights.bold,
+            }}
+          >
+            Right Panel
+          </h3>
+        </Flex>
+      )}
+    </SidePanel>
   );
 };
 
@@ -104,7 +172,7 @@ export const ExternalControl = () => {
     initialExpanded: false,
   });
   return (
-    <div style={{display: 'flex', backgroundColor: colors.soap200, height}}>
+    <Flex backgroundColor="soap200" height={height}>
       <SidePanel
         as="aside"
         {...panelProps}
@@ -121,26 +189,23 @@ export const ExternalControl = () => {
         </span>
       </SidePanel>
       <main>
-        <div
-          style={{
-            position: 'absolute',
-            ...depth[3],
-            borderRadius: 4,
-            marginTop: 24,
-            left: 400,
-            padding: 24,
-            width: 320,
-            textAlign: 'center',
-            backgroundColor: colors.frenchVanilla100,
-          }}
+        <Box
+          position="absolute"
+          depth={3}
+          borderRadius={borderRadius.m}
+          marginTop={space.m}
+          insetInlineStart={400}
+          padding={space.m}
+          width={320}
+          backgroundColor={colors.frenchVanilla100}
         >
           <p>Control from somewhere else</p>
           <PrimaryButton {...controlProps} role="button">
             Toggle Side Panel
           </PrimaryButton>
-        </div>
+        </Box>
       </main>
-    </div>
+    </Flex>
   );
 };
 
@@ -165,28 +230,22 @@ export const WithListItems = () => {
   };
 
   return (
-    <div style={{height: '100vh'}}>
+    <Flex height={height}>
       <SidePanel {...panelProps} onStateTransition={setPanelState}>
         <SidePanel.ToggleButton {...controlProps} />
         {panelState === 'expanded' && (
-          <div
-            style={{
-              display: 'flex',
-              padding: `16px 12px`,
-              flexDirection: 'column',
-            }}
-          >
+          <Flex flexDirection="column" paddingY="s" paddingX="xs">
             <h3 {...labelProps}>Tasks Panel</h3>
-            <ol role="list" style={{listStyle: 'none', margin: 0, padding: 0}}>
+            <Box as="ol" role="list" listStyle="none" margin={0} padding={0}>
               {steps.map(item => {
                 return (
                   <li
                     id={`${item.id}`}
                     onKeyDown={handleItemKeyDown}
                     tabIndex={0}
-                    style={{
+                    css={{
                       fontWeight: currentStep === item.id ? 'bold' : 'normal',
-                      padding: '4px',
+                      padding: space.xxxs,
                       cursor: 'pointer',
                     }}
                     key={item.id}
@@ -196,10 +255,10 @@ export const WithListItems = () => {
                   </li>
                 );
               })}
-            </ol>
-          </div>
+            </Box>
+          </Flex>
         )}
       </SidePanel>
-    </div>
+    </Flex>
   );
 };

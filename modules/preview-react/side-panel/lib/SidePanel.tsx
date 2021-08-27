@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import * as React from 'react';
-import {styled} from '@workday/canvas-kit-react/common';
+import {styled, useIsRTL} from '@workday/canvas-kit-react/common';
 import {css, CSSObject, jsx, keyframes} from '@emotion/core';
 import {IconButton, IconButtonProps} from '@workday/canvas-kit-react/button';
 import {space, colors, depth} from '@workday/canvas-kit-react/tokens';
@@ -218,17 +218,29 @@ const ToggleButton = ({
 }: ToggleButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>) => {
   const context = React.useContext(SidePanelContext);
 
+  const useRTLOrigin = () => {
+    const isRTL = useIsRTL();
+    // if the direction is set to RTl, flip the origin
+    if (isRTL) {
+      return context.origin === 'left' ? 'right' : 'left';
+    }
+    // Otherwise, default to returning the origin
+    return context.origin;
+  };
+
+  const rtlOrigin = useRTLOrigin();
+
   // Note: Depending on the collapsed width, the button could "jump" to it's final position.
   const buttonStyle = css({
     position: 'absolute',
     top: space.m,
-    right: context.state === 'collapsed' ? 0 : context.origin === 'left' ? space.s : undefined,
-    left: context.state === 'collapsed' ? 0 : context.origin === 'right' ? space.s : undefined,
+    right: context.state === 'collapsed' ? 0 : rtlOrigin === 'left' ? space.s : undefined,
+    left: context.state === 'collapsed' ? 0 : rtlOrigin === 'right' ? space.s : undefined,
     margin: context.state === 'collapsed' ? 'auto' : 0, // to override the -8px margin for IconButton.Plain
     transform:
       context.state === 'collapsed' || context.state === 'collapsing'
-        ? `scaleX(${context.origin === 'left' ? '1' : '-1'})`
-        : `scaleX(${context.origin === 'left' ? '-1' : '1'})`,
+        ? `scaleX(${rtlOrigin === 'left' ? '1' : '-1'})`
+        : `scaleX(${rtlOrigin === 'left' ? '-1' : '1'})`,
   });
 
   // @ts-ignore aria-label type error here. The user will decide to use aria-label or aria-labelledby
