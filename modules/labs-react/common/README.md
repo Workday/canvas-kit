@@ -11,7 +11,7 @@ a collection of shared components used across canvas-kit-react
 ## Installation
 
 ```sh
-yarn add @workday/canvas-kit-labs-react/common
+yarn add @workday/canvas-kit-labs-react
 ```
 
 For more detailed information on this component, please refer to the
