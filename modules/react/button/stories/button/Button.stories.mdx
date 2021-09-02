@@ -34,14 +34,11 @@ yarn add @workday/canvas-kit-react
 Here is a basic example of a Primary Button. Buttons can be customized with several props to change
 the size, add an icon, etc.
 
+Primary Buttons are high emphasis. Use once per screen to draw attention to the highest priority
+action. Multiple primary buttons make it confusing for the user to understand what action they
+should take. Not all screens require a Primary Button.
+
 <ExampleCodeBlock code={Primary} />
-
-#### Accessible Use of the `as` Prop
-
-Like many of our components, Buttons accept an `as` prop, which lets you change the underlying
-semantic element - usually an `a` (anchor), or a `button`. This should be done with caution to
-ensure the best accessibility. Generally, `button` elements should be used for actions, and `a`
-(anchor) elements should be used for navigation.
 
 #### Props
 
@@ -50,6 +47,12 @@ Undocumented props are spread to the underlying `button` element.
 <ArgsTable of={PrimaryButton} />
 
 ### SecondaryButton
+
+Secondary Buttons have a medium level of emphasis. Use them for non-critical actions. Secondary
+Buttons can be used on most pages without restrictions and work well for multiple actions of equal
+weight. They can be used in conjunction with a Primary Button or independently.
+
+Use the `inverse` variants on dark or colorful backgrounds.
 
 <ExampleCodeBlock code={Secondary} />
 
@@ -61,6 +64,13 @@ Undocumented props are spread to the underlying `button` element.
 
 ### TertiaryButton
 
+Tertiary Buttons have the lowest emphasis (before Icon Buttons). Use for less important actions that
+the user may not often be looking to do. Tertiary Buttons have lower prominence as its container is
+not visible until it is interacted with. Use Tertiary Buttons for supplemental actions such as “View
+More”, “Read More” or “Select a File”. Tertiary Buttons are frequently used on Cards.
+
+Use the `inverse` variants on dark or colorful backgrounds.
+
 <ExampleCodeBlock code={Tertiary} />
 
 #### Props
@@ -71,6 +81,10 @@ Undocumented props are spread to the underlying `button` element.
 
 ### DeleteButton
 
+Use sparingly for destructive actions that will result in data loss, can’t be undone, or will have
+significant consequences. They commonly appear in confirmation dialogs as the final confirmation
+before deleting.
+
 <ExampleCodeBlock code={Delete} />
 
 #### Props
@@ -78,6 +92,13 @@ Undocumented props are spread to the underlying `button` element.
 Undocumented props are spread to the underlying `button` element.
 
 <ArgsTable of={DeleteButton} />
+
+### Accessible Use of the `as` Prop
+
+Like many of our components, Buttons accept an `as` prop, which lets you change the underlying
+semantic element - usually an `a` (anchor), or a `button`. This should be done with caution to
+ensure the best accessibility. Generally, `button` elements should be used for actions, and `a`
+(anchor) elements should be used for navigation.
 
 ## Specifications
 
