@@ -1,4 +1,4 @@
-import {convertToStaticStates} from '../lib/theming/styled';
+import {convertToStaticStates} from '../lib/utils/StaticStates';
 
 describe('changeToStaticStates', () => {
   it('should convert ":hover" to "&.hover"', () => {

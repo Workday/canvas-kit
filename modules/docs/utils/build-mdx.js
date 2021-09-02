@@ -6,7 +6,7 @@ const glob = require('glob');
 const args = process.argv.slice(2);
 const inputPath = path.resolve(args[0]);
 const distFolder = path.join(__dirname, '../dist');
-const ckrFolder = path.join(__dirname, '../../react');
+const srcFolders = ['react', 'labs-react', 'preview-react'];
 
 if (!inputPath) {
   console.error('You must supply a valid path');
@@ -51,43 +51,56 @@ glob(inputPath + '/**/*.md?(x)', {}, (err, files) => {
 /**
  * Build component files in react module, and copy them into the dist folder of the docs module
  */
-glob(ckrFolder + '/**/*.mdx', {}, (err, files) => {
-  const mdxDestinations = files.map(file => {
-    return path.join(
-      distFolder,
-      'mdx',
-      file
-        .replace(path.join(ckrFolder, '../'), '')
-        .replace('/stories', '')
-        .replace('.stories', '')
-    );
-  });
+srcFolders.forEach(folder => {
+  const srcFolder = path.join(__dirname, '../../', folder);
 
-  mdxDestinations.forEach((destFile, index) => {
-    const sourceMdx = files[index];
-    const sourceExamplesDir = path.join(path.dirname(sourceMdx), 'examples');
-    const destDir = path.dirname(destFile);
+  glob(srcFolder + '/**/*.mdx', {}, (err, files) => {
+    const mdxDestinations = files.map(file => {
+      return path.join(
+        distFolder,
+        'mdx',
+        file
+          .replace(path.join(srcFolder, '../'), '')
+          .replace('/stories', '')
+          .replace('.stories', '')
+      );
+    });
 
-    fs.mkdirSync(destDir, {recursive: true});
-    sanitizeMdxFile(sourceMdx, destFile);
+    mdxDestinations.forEach((destFile, index) => {
+      const sourceMdx = files[index];
+      const storiesDir = path.dirname(sourceMdx);
+      const sourceExamplesDir = path.join(storiesDir, 'examples');
+      const destDir = path.dirname(destFile);
 
-    // Copy examples if they exist
-    if (fs.existsSync(sourceExamplesDir)) {
-      const destExamplesDir = path.join(destDir, 'examples');
-      fse.copySync(sourceExamplesDir, destExamplesDir);
+      fs.mkdirSync(destDir, {recursive: true});
+      sanitizeMdxFile(sourceMdx, destFile);
 
-      // Change exports from named to default
-      glob(destExamplesDir + '/**/*.@(js|jsx|ts|tsx)', {}, (err, examples) => {
-        examples.forEach(example => {
-          fs.readFile(example, 'utf8', (err, data) => {
-            fs.writeFileSync(
-              example,
-              data.replace(/export const (\w)* =/g, 'export default'), // Convert named export to default export
-              'utf8'
-            );
+      // Copy examples if they exist
+      if (fs.existsSync(sourceExamplesDir)) {
+        const destExamplesDir = path.join(destDir, 'examples');
+        fse.copySync(sourceExamplesDir, destExamplesDir);
+
+        // Change exports from named to default
+        glob(destExamplesDir + '/**/*.@(js|jsx|ts|tsx)', {}, (err, examples) => {
+          examples.forEach(example => {
+            // Only convert examples - not splitprops files
+            if (!path.basename(example).includes('.splitprops')) {
+              fs.readFile(example, 'utf8', (err, data) => {
+                fs.writeFileSync(
+                  example,
+                  data.replace(/export const (\w)* =/g, 'export default'), // Convert named export to default export
+                  'utf8'
+                );
+              });
+            }
           });
         });
-      });
-    }
+      }
+
+      // Copy files that split the props of a Compound Component model.
+      glob(storiesDir + '/*.splitprops.tsx', {}, (err, files) =>
+        files.forEach(file => fse.copySync(file, path.join(destDir, path.basename(file))))
+      );
+    });
   });
 });

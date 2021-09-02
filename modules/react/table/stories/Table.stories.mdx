@@ -87,12 +87,18 @@ Set the `state` prop of the `TableRow` to display it using one of several differ
 - `TableRow.State.Error`
 - `TableRow.State.InputError`
 
-<ExampleCodeBlock code={RowStates} />
+| State                       | Purpose                                                                |
+| --------------------------- | ---------------------------------------------------------------------- |
+| `TableRow.State.Alert`      | When there is an issue with the entire row as a whole.                 |
+| `TableRow.State.InputAlert` | When there are issues with one or more (but not all) cells in the row. |
+| `TableRow.State.Error`      | When there is an error with the entire row as a whole.                 |
+| `TableRow.State.InputError` | When there are errors with one or more (but not all) cells in the row. |
+| `TableRow.State.Selected`   | Indicates the selected row to the user.                                |
 
-Use the `Alert` or `Error` states if there's an issue with the entire row as a whole. Use
-`InputAlert` or `InputError` if there are issues with one or more (but not all) cells in the row.
 `InputAlert` and `InputError` are identical to the `Alert` and `Error` states, respectively, except
 they lack a darkened border around the row.
+
+<ExampleCodeBlock code={RowStates} />
 
 #### Props
 

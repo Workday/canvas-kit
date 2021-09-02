@@ -1,12 +1,22 @@
-import {useIsRTL, useTheme} from '@workday/canvas-kit-react/common';
+import {
+  convertToStaticStates,
+  CanvasTheme,
+  useIsRTL,
+  useTheme,
+} from '@workday/canvas-kit-react/common';
 import {CSSProperties} from '@workday/canvas-kit-react/tokens';
 import {useMemo} from 'react';
 import rtlCSSJS from 'rtl-css-js';
 
 export type ComponentStyles = Record<string, CSSProperties>;
+type ThemeWithStaticStates = CanvasTheme & {_staticStates?: boolean};
 
 const getDirectionalStyles = (isRTL: boolean, ...styles: CSSProperties[]) => {
   return isRTL ? rtlCSSJS(styles) : styles;
+};
+
+const getConvertedStyles = (shouldConvert: boolean, styles: CSSProperties): CSSProperties => {
+  return shouldConvert ? convertToStaticStates(styles) ?? styles : styles;
 };
 
 /**
@@ -41,13 +51,19 @@ const getDirectionalStyles = (isRTL: boolean, ...styles: CSSProperties[]) => {
 export function useThemeRTL() {
   const theme = useTheme();
   const direction = useIsRTL(theme);
+  const shouldConvert = (theme.canvas as ThemeWithStaticStates)._staticStates ?? false;
 
   const themeRTL = useMemo(() => {
     return (...cssObject: CSSProperties[]) => {
       const styles = getDirectionalStyles(direction, ...cssObject);
-      return styles.reduce((first, second) => ({...first, ...second}), {}) as CSSProperties;
+      return styles.reduce((first, second) => {
+        const convertedFirst = shouldConvert ? getConvertedStyles(shouldConvert, first) : first;
+        const convertedSecond = shouldConvert ? getConvertedStyles(shouldConvert, second) : second;
+
+        return {...convertedFirst, ...convertedSecond};
+      }, {});
     };
-  }, [direction]);
+  }, [direction, shouldConvert]);
 
   return {themeRTL, theme};
 }

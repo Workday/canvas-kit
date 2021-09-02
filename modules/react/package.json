@@ -66,7 +66,7 @@
     "element-closest": "^3.0.2",
     "emotion-theming": "^10.0.10",
     "lodash": "^4.17.14",
-    "polished": "^2.3.0",
+    "polished": "^4.1.3",
     "react-innertext": "^1.1.5",
     "rtl-css-js": "^1.14.1",
     "uuid": "^3.3.3"

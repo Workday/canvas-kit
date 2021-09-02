@@ -11,7 +11,11 @@ import {FocusRedirect} from './examples/FocusRedirect';
 import {FocusTrap} from './examples/FocusTrap';
 import {RTL} from './examples/RTL';
 import {CustomTarget} from './examples/CustomTarget';
-import {PopupModelConfigComponent, PopupStateComponent, PopupEventsComponent} from './PopupModel';
+import {
+  PopupModelConfigComponent,
+  PopupStateComponent,
+  PopupEventsComponent,
+} from './PopupModel.splitprops.tsx';
 
 <Meta title="Components/Popups/Popup/React" component={Popup} />
 
@@ -37,6 +41,8 @@ source code for our hooks into the `PopupStack` API.
 
 This package comes with everything you need to build Popup UIs.
 
+[Buttons](/components/buttons/button)
+
 ## Installation
 
 ```sh
@@ -45,8 +51,9 @@ yarn add @workday/canvas-kit-react
 
 ## Usage
 
-The `Popup` component is a generic compound component that is used to build popup UIs that are not
-already covered by Canvas Kit.
+The `Popup` component is a generic
+[Compound Component](/getting-started/for-developers/resources/compound-components/) that is used to
+build popup UIs that are not already covered by Canvas Kit.
 
 ### Basic
 

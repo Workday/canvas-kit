@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Toast from '../../index';
+import {Toast} from '@workday/canvas-kit-react/toast';
 
 export const WithCloseButton = () => {
   const handleClose = () => {

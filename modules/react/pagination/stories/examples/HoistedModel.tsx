@@ -5,7 +5,7 @@ import {
   getVisibleResultsMax,
   getVisibleResultsMin,
   usePaginationModel,
-} from '../../lib/Pagination';
+} from '@workday/canvas-kit-react/pagination';
 
 export const HoistedModel = () => {
   const resultCount = 10;
