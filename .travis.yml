@@ -18,7 +18,10 @@ stages:
   if: branch =~ /^support\// AND type != pull_request
 
 - name: release
-  if: tag =~ /^v\d+\.\d+(\.\d+)?(-\S*)?$/
+  if: (branch = master OR branch =~ /^prerelease\//) AND tag =~ /^v\d+\.\d+(\.\d+)?(-\S*)?$/ AND tag IS present AND type != pull_request
+
+- name: support-release
+  if: branch =~ /^support\// AND tag =~ /^v\d+\.\d+(\.\d+)?(-\S*)?$/ AND tag IS present AND type != pull_request
 
 before_install:
   - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.15.2
@@ -74,6 +77,14 @@ jobs:
           branch: master
 
   - stage: support
+    script:
+      - >- # Chromatic relies on a built Storybook, so exit early if build-storybook fails
+        yarn build-storybook --quiet &&
+        yarn chromatic --quiet --auto-accept-changes --exit-once-uploaded --storybook-build-dir docs
+    after_failure:
+      - node utils/report-failure.js
+    env:
+      - CHROMATIC_APP_CODE="dlpro96xybh"
     deploy:
       - provider: script
         script: npm config set //registry.npmjs.org/:_authToken=$NPM_PUBLISH_TOKEN && node utils/publish-canary.js
