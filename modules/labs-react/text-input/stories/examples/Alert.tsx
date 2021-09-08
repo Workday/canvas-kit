@@ -9,7 +9,7 @@ const StyledField = styled(TextInput.Field)<{alertStyles?: CSSProperties}>(
   ({alertStyles}) => alertStyles
 );
 
-export const Alerts = () => {
+export const Alert = () => {
   const [value, setValue] = React.useState('foo');
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

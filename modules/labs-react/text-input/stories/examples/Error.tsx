@@ -3,7 +3,7 @@ import {TextInput} from '@workday/canvas-kit-labs-react/text-input';
 import {VStack} from '@workday/canvas-kit-labs-react/layout';
 import {space} from '@workday/canvas-kit-react/tokens';
 
-export const Errors = () => {
+export const Error = () => {
   const [value, setValue] = React.useState('four');
   const [hint, setHint] = React.useState('');
   const [hasError, setHasError] = React.useState(false);

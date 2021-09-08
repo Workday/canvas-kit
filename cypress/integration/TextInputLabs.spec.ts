@@ -1,7 +1,7 @@
 import * as h from '../helpers';
 
 const getTextInput = () => {
-  return cy.get(`[type="text"]`);
+  return cy.get(`[type="text"], [type="password"]`);
 };
 
 describe('TextInput', () => {
