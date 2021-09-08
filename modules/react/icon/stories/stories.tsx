@@ -39,6 +39,7 @@ storiesOf('Tokens/Icon/React', module)
       </span>
       <br />
       <AccentIcon icon={shieldIcon} size={80} />
+      <AccentIcon icon={shieldIcon} size={80} shouldMirror={true} />
     </div>
   ));
 
@@ -50,6 +51,7 @@ storiesOf('Tokens/Icon/React', module)
       <AppletIcon icon={benefitsIcon} color={AppletIcon.Colors.Pomegranate} />
       <br />
       <AppletIcon icon={benefitsIcon} size={60} />
+      <AppletIcon icon={benefitsIcon} size={60} shouldMirror={true} />
     </div>
   ));
 
@@ -87,7 +89,13 @@ storiesOf('Tokens/Icon/React', module)
       <br />
       <SystemIcon icon={activityStreamIcon} size={48} />
       <SystemIconCircle icon={activityStreamIcon} />
+      <SystemIconCircle icon={activityStreamIcon} shouldMirror={true} />
       <SystemIconCircle icon={activityStreamIcon} background={colors.blueberry400} />
+      <SystemIconCircle
+        icon={activityStreamIcon}
+        background={colors.blueberry400}
+        shouldMirror={true}
+      />
     </div>
   ));
 
@@ -100,6 +108,9 @@ storiesOf('Tokens/Icon/React', module)
       <Graphic src={graphicExample} width={80} />
       <div style={{width: 100}}>
         <Graphic src={graphicExample} grow={true} />
+      </div>
+      <div style={{width: 100}}>
+        <Graphic src={graphicExample} grow={true} shouldMirror={true} />
       </div>
     </div>
   ));

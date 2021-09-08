@@ -14,15 +14,17 @@ export default withSnapshotsEnabled({
   component: ToolbarDropdownButton,
 });
 
+const columnProps = [
+  ...stateTableColumnProps,
+  {label: 'Mirrored Icon ', props: {shouldMirrorIcon: true, disabled: false}},
+];
+
 export const ToolbarDropdownButtonStates = (props: {theme?: PartialEmotionCanvasTheme}) => (
   <React.Fragment>
     <div>
       <h3>Default</h3>
       <StaticStates theme={props.theme}>
-        <ComponentStatesTable
-          rowProps={[{label: 'Default', props: {}}]}
-          columnProps={stateTableColumnProps}
-        >
+        <ComponentStatesTable rowProps={[{label: 'Default', props: {}}]} columnProps={columnProps}>
           {props => (
             <Container>
               <ToolbarDropdownButton

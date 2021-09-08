@@ -15,7 +15,7 @@ export enum SystemIconCircleSize {
   xxl = 120,
 }
 
-export interface SystemIconCircleProps extends Pick<SystemIconProps, 'iconRef'> {
+export interface SystemIconCircleProps extends Pick<SystemIconProps, 'iconRef' | 'shouldMirror'> {
   /**
    * The background color of the SystemIconCircle from `@workday/canvas-colors-web`.
    * @default colors.soap300
@@ -67,6 +67,7 @@ export default class SystemIconCircle extends React.Component<SystemIconCirclePr
       size = SystemIconCircleSize.l,
       icon,
       iconRef,
+      shouldMirror,
       ...elemProps
     } = this.props;
 
@@ -81,6 +82,7 @@ export default class SystemIconCircle extends React.Component<SystemIconCirclePr
           colorHover={iconColor}
           size={iconSize}
           iconRef={iconRef}
+          shouldMirror={shouldMirror}
         />
       </Container>
     );
