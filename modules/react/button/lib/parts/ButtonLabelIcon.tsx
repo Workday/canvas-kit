@@ -21,6 +21,11 @@ export interface ButtonLabelIconProps {
    * @default 'left'
    */
   iconPosition?: 'left' | 'right';
+  /**
+   * If set to `true`, transform the icon's x-axis to mirror the graphic
+   * @default false
+   */
+  shouldMirrorIcon?: boolean;
 }
 
 const ICON_SIZE = 24;
@@ -42,7 +47,13 @@ const ButtonLabelIconStyled = styled('span', {
   })
 );
 
-export const ButtonLabelIcon = ({icon, size, iconPosition, ...elemProps}: ButtonLabelIconProps) => {
+export const ButtonLabelIcon = ({
+  icon,
+  size,
+  iconPosition,
+  shouldMirrorIcon = false,
+  ...elemProps
+}: ButtonLabelIconProps) => {
   /* istanbul ignore next line for coverage */
   if (icon === undefined) {
     return null;
@@ -52,7 +63,7 @@ export const ButtonLabelIcon = ({icon, size, iconPosition, ...elemProps}: Button
 
   return (
     <ButtonLabelIconStyled iconPosition={iconPosition} size={size} {...elemProps}>
-      <SystemIcon size={iconSize} icon={icon} />
+      <SystemIcon size={iconSize} icon={icon} shouldMirror={shouldMirrorIcon} />
     </ButtonLabelIconStyled>
   );
 };

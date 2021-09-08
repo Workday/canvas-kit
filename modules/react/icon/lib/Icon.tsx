@@ -12,7 +12,7 @@ export interface IconProps extends SvgProps {
 
 export default class Icon extends React.Component<IconProps> {
   public render() {
-    const {src, size, styles, type, iconRef, ...elemProps} = this.props;
+    const {src, size, styles, type, iconRef, shouldMirror, ...elemProps} = this.props;
 
     const iconStyles: CSSObject = {...styles};
 
@@ -23,6 +23,15 @@ export default class Icon extends React.Component<IconProps> {
       };
     }
 
-    return <Svg src={src} type={type} {...elemProps} styles={iconStyles} iconRef={iconRef} />;
+    return (
+      <Svg
+        src={src}
+        type={type}
+        shouldMirror={shouldMirror}
+        {...elemProps}
+        styles={iconStyles}
+        iconRef={iconRef}
+      />
+    );
   }
 }
