@@ -18,7 +18,7 @@ import {Error} from './examples/Error';
 import {Alert} from './examples/Alert';
 import {LoginForm} from './examples/LoginForm';
 
-<Meta title="Labs/Text Input/React" component={TextInput} />
+<Meta title="Labs/Inputs/Text Input/React" component={TextInput} />
 
 # Canvas Kit Text Input
 
@@ -29,7 +29,7 @@ Text Inputs allow users to enter words or characters without styling.
 ## Installation
 
 ```sh
-yarn add @workday/canvas-kit-react
+yarn add @workday/canvas-kit-labs-react
 ```
 
 ## Usage
@@ -53,7 +53,7 @@ value before a value has been provided.
 
 ### Required
 
-Set the `isRequired` property property from useTextInputModel to indicate that the field is
+Set the `isRequired` property property from useFormFieldModel to indicate that the field is
 required. This will also add an red asterisk next to your TextInput.Label.
 
 <ExampleCodeBlock code={Required} />
@@ -95,7 +95,7 @@ type.
 
 ### Error States
 
-Use the `hasError` property from useTextInputModel to set the TextInput to the Error state. If you
+Use the `hasError` property from useFormFieldModel to set the TextInput to the Error state. If you
 have an accompanying hint you can use the TextInput.Hint subcomponent.
 
 #### Errors
@@ -123,3 +123,13 @@ Use the `useThemedRing` hook to change the visual state of the input field.
 Login Form using Formik
 
 <ExampleCodeBlock code={LoginForm} />
+
+## Props
+
+Undocumented props are spread to the underlying `<input>` element.
+
+<ArgsTable of={TextInput} />
+
+## Specifications
+
+<Specifications file="TextInput.spec.ts" name="Text Input" />

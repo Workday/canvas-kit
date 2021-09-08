@@ -1,0 +1,109 @@
+import {Meta} from '@storybook/addon-docs/blocks';
+import {Specifications} from '@workday/canvas-kit-docs';
+
+import {TextArea} from '@workday/canvas-kit-labs-react/text-area';
+
+import {Alert} from './examples/Alert';
+import {Basic} from './examples/Basic';
+import {Disabled} from './examples/Disabled';
+import {Error} from './examples/Error';
+import {Grow} from './examples/Grow';
+import {LabelPosition} from './examples/LabelPosition';
+import {Placeholder} from './examples/Placeholder';
+import {RefForwarding} from './examples/RefForwarding';
+import {Required} from './examples/Required';
+import {ResizeConstraints} from './examples/ResizeConstraints';
+
+<Meta title="Labs/Inputs/Text Area/React" component={TextArea} />
+
+# Canvas Kit Text Area
+
+Text Areas allow users to enter and edit multiple lines of text.
+
+[> Workday Design Reference](https://design.workday.com/components/inputs/text-area)
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-labs-react
+```
+
+## Usage
+
+### Basic Example
+
+<ExampleCodeBlock code={Basic} />
+
+### Disabled
+
+Set the `disabled` prop of the Text Area to prevent users from interacting with it.
+
+<ExampleCodeBlock code={Disabled} />
+
+### Placeholder
+
+Set the `placeholder` prop of the Text Area to display a sample of its expected format or value
+before a value has been provided.
+
+<ExampleCodeBlock code={Placeholder} />
+
+### Required
+
+Set the `isRequired` property property from useFormFieldModel to indicate that the field is
+required. This will also add an red asterisk next to your TextArea.Label.
+
+<ExampleCodeBlock code={Required} />
+
+### Ref Forwarding
+
+Text Area supports [ref forwarding](https://reactjs.org/docs/forwarding-refs.html). It will forward
+`ref` to its underlying `<textarea>` element.
+
+<ExampleCodeBlock code={RefForwarding} />
+
+### Resize Constraints
+
+Use the `resize` css attribute to restrict resizing of it to certain dimensions.
+
+<ExampleCodeBlock code={ResizeConstraints} />
+
+### Grow
+
+There are lots of ways to accomplish this. The TextArea.Field extends from Box so it is easy to
+extend full width, e.g. setting width prop to 100%, or you can wrap the whole TextArea in it a Flex
+and set the growth that way, etc.
+
+<ExampleCodeBlock code={Grow} />
+
+### Label Position
+
+Setting the Label position can be done using HStack or VStack
+
+<ExampleCodeBlock code={LabelPosition} />
+
+### Error States
+
+Use the `hasError` property from useTextAreaModel to set the TextArea to the Error state. If you
+have an accompanying hint you can use the TextArea.Hint subcomponent.
+
+#### Error
+
+<ExampleCodeBlock code={Error} />
+
+### Other Visual States
+
+Use the `useThemedRing` hook to change the visual state of the textarea field.
+
+#### Alert
+
+<ExampleCodeBlock code={Alert} />
+
+## Props
+
+Undocumented props are spread to the underlying `<textarea>` element.
+
+<ArgsTable of={TextArea} />
+
+## Specifications
+
+<Specifications file="TextArea.spec.ts" name="Text Area" />

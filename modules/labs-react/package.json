@@ -65,6 +65,7 @@
     "uuid": "^3.3.3"
   },
   "devDependencies": {
+    "@material-ui/core": "^4.9.7",
     "@types/lodash.flatten": "^4.4.6",
     "formik": "^2.2.9",
     "yup": "^0.32.9"
