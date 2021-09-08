@@ -75,9 +75,18 @@ const RequiredAstrisk = styled('abbr')({
 // Used inside the fieldset component instead of a label for accessible radio groups.
 // Extra `width: 100%` style is to help IE11 wrap text properly in a top-positioned
 // FormField's legend element.
-const LegendComponent = styled('legend')<LabelProps>(...labelStyles, ({labelPosition}) => ({
-  width: labelPosition === Label.Position.Top ? '100%' : undefined,
-}));
+const LegendComponent = styled('legend')<LabelProps>(...labelStyles, ({labelPosition}) => {
+  if (labelPosition === Label.Position.Top) {
+    return {
+      width: '100%',
+    };
+  }
+
+  return {
+    float: 'left',
+    width: 'auto',
+  };
+});
 const LabelComponent = styled('label')<LabelProps>(...labelStyles);
 
 class Label extends React.Component<LabelProps> {

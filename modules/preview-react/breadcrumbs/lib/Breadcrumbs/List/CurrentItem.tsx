@@ -10,6 +10,8 @@ import {truncateStyles} from './styles';
 export interface CurrentItemProps extends React.HTMLAttributes<HTMLLIElement> {
   /**
    * The max-width of the text
+   *
+   * @default 350px
    */
   maxWidth?: number;
 }

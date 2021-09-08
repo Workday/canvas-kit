@@ -1,8 +1,7 @@
 import * as React from 'react';
+import {Toast} from '@workday/canvas-kit-react/toast';
 import {exclamationCircleIcon} from '@workday/canvas-system-icons-web';
 import {colors} from '@workday/canvas-kit-react/tokens';
-
-import Toast from '../../index';
 
 export const Error = () => {
   return (

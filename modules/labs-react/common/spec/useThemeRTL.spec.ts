@@ -1,18 +1,17 @@
-import {css} from '@emotion/core';
+import {css, CSSObject} from '@emotion/core';
 import {renderHook} from '@testing-library/react-hooks';
 import {useThemeRTL} from '../lib/theming';
 
 describe('styles', () => {
   describe(`useThemeRLT hook`, () => {
     const LTRTheme = {
-      canvas: {
-        direction: 'ltr',
-      },
+      direction: {direction: 'ltr'},
     };
     const RTLTheme = {
-      canvas: {
-        direction: 'rtl',
-      },
+      direction: {direction: 'rtl'},
+    };
+    const withStaticStates = {
+      _staticStates: true,
     };
     it('should return styles', () => {
       const expectedHeight = `100px`;
@@ -43,7 +42,7 @@ describe('styles', () => {
       beforeEach(() => {
         (window as any).workday = {
           canvas: {
-            theme: LTRTheme.canvas,
+            theme: LTRTheme.direction,
           },
         };
       });
@@ -57,13 +56,26 @@ describe('styles', () => {
         const cssProp = result.current.themeRTL(style);
         expect(cssProp.paddingLeft).toEqual(expectedPadding);
       });
+      it('should NOT convert static states when _staticStates is undefined', () => {
+        const expectedPadding = `10px`;
+        const style = {
+          '&:hover': {
+            paddingLeft: expectedPadding,
+          },
+        };
+
+        const {result} = renderHook(() => useThemeRTL());
+        const cssProp = result.current.themeRTL(style);
+
+        expect((cssProp['&:hover'] as CSSObject).paddingLeft).toEqual(expectedPadding);
+      });
     });
 
     describe('RTL', () => {
       beforeEach(() => {
         (window as any).workday = {
           canvas: {
-            theme: RTLTheme.canvas,
+            theme: RTLTheme.direction,
           },
         };
       });
@@ -87,6 +99,72 @@ describe('styles', () => {
         const {result} = renderHook(() => useThemeRTL());
         const cssProp = result.current.themeRTL(style);
         expect(cssProp.paddingRight).toEqual(expectedPadding);
+      });
+
+      it('should flip and NOT convert static states when _staticStates is undefined', () => {
+        const expectedPadding = `10px`;
+        const style = {
+          '&:hover': {
+            paddingLeft: expectedPadding,
+          },
+        };
+
+        const {result} = renderHook(() => useThemeRTL());
+        const cssProp = result.current.themeRTL(style);
+
+        expect((cssProp['&:hover'] as CSSObject).paddingRight).toEqual(expectedPadding);
+      });
+    });
+
+    describe('LTR Static States', () => {
+      beforeEach(() => {
+        (window as any).workday = {
+          canvas: {
+            theme: {
+              ...LTRTheme.direction,
+              ...withStaticStates,
+            },
+          },
+        };
+      });
+      it('should NOT flip but convert hover styles', () => {
+        const expectedPadding = `10px`;
+        const style = {
+          '&:hover': {
+            paddingLeft: expectedPadding,
+          },
+        };
+
+        const {result} = renderHook(() => useThemeRTL());
+        const cssProp = result.current.themeRTL(style);
+
+        expect((cssProp['&.hover'] as CSSObject).paddingLeft).toEqual(expectedPadding);
+      });
+    });
+
+    describe('RTL Static States', () => {
+      beforeEach(() => {
+        (window as any).workday = {
+          canvas: {
+            theme: {
+              ...RTLTheme.direction,
+              ...withStaticStates,
+            },
+          },
+        };
+      });
+      it('should flip and convert hover styles', () => {
+        const expectedPadding = `10px`;
+        const style = {
+          '&:hover': {
+            paddingLeft: expectedPadding,
+          },
+        };
+
+        const {result} = renderHook(() => useThemeRTL());
+        const cssProp = result.current.themeRTL(style);
+
+        expect((cssProp['&.hover'] as CSSObject).paddingRight).toEqual(expectedPadding);
       });
     });
   });

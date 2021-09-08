@@ -1,32 +1,12 @@
 import {default as emotionStyled, CreateStyled, Interpolation, CSSObject} from '@emotion/styled';
 import {useTheme, EmotionCanvasTheme, ContentDirection} from './index';
 import rtlCSSJS from 'rtl-css-js';
+import {convertToStaticStates} from '../utils/StaticStates';
 
 const noop = (styles: any) => styles;
 
 // Pulled from https://github.com/emotion-js/emotion/blob/master/packages/styled-base/src/utils.js#L6 (not exported)
 type Interpolations = Array<any>;
-
-export const convertToStaticStates = (obj?: CSSObject): CSSObject | undefined => {
-  if (!obj) {
-    return obj;
-  }
-
-  return Object.keys(obj).reduce((result, key) => {
-    const newKey = key
-      .replace(/^:/, '&:') // handle shorthand like ":focus"
-      .replace(/,(\s+):/g, ',$1&:') // handle selectors like ":focus, :hover"
-      .replace(/:(focus|hover|active)/g, '.$1')
-      .replace(
-        /\[data\-whatinput=("|')?(mouse|touch|keyboard|pointer)("|')?]/g,
-        '[data-whatinput="noop"]'
-      );
-    const value =
-      typeof obj[key] === 'object' ? convertToStaticStates(obj[key] as CSSObject) : obj[key];
-    const newObj = {...result, [newKey]: value};
-    return newObj;
-  }, {});
-};
 
 function styled<Props>(node: any) {
   return (...args: Interpolation<Props>[]) => {

@@ -1,6 +1,6 @@
 import SidePanel from './lib/SidePanel';
-import {useSidePanel} from './lib/hooks';
 
 export default SidePanel;
-export {SidePanel, useSidePanel};
+export {SidePanel};
+export * from './lib/hooks';
 export * from './lib/SidePanel';
