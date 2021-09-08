@@ -14,6 +14,11 @@ export default withSnapshotsEnabled({
   component: ToolbarIconButton,
 });
 
+const columnProps = [
+  ...stateTableColumnProps,
+  {label: 'Mirrored Icon ', props: {shouldMirrorIcon: true, disabled: false}},
+];
+
 export const ToolbarIconButtonStates = (props: {theme?: PartialEmotionCanvasTheme}) => (
   <StaticStates theme={props.theme}>
     <ComponentStatesTable
@@ -21,7 +26,7 @@ export const ToolbarIconButtonStates = (props: {theme?: PartialEmotionCanvasThem
         {label: 'Toggled Off', props: {toggled: false}},
         {label: 'Toggled On', props: {toggled: true}},
       ]}
-      columnProps={stateTableColumnProps}
+      columnProps={columnProps}
     >
       {(props: any) => (
         <Container>

@@ -39,6 +39,11 @@ export interface SecondaryButtonProps extends Themeable, GrowthBehavior {
    * @default 'left'
    */
   iconPosition?: 'left' | 'right';
+  /**
+   * If set to `true`, transform the icon's x-axis to mirror the graphic
+   * @default false
+   */
+  shouldMirrorIcon?: boolean;
   children?: React.ReactNode;
 }
 
@@ -54,6 +59,7 @@ export const SecondaryButton = createComponent('button')({
       variant,
       dataLabel,
       icon,
+      shouldMirrorIcon = false,
       children,
       ...elemProps
     }: SecondaryButtonProps,
@@ -68,12 +74,22 @@ export const SecondaryButton = createComponent('button')({
       {...elemProps}
     >
       {icon && size !== 'small' && iconPosition === 'left' && (
-        <ButtonLabelIcon size={size} iconPosition={iconPosition} icon={icon} />
+        <ButtonLabelIcon
+          size={size}
+          iconPosition={iconPosition}
+          icon={icon}
+          shouldMirrorIcon={shouldMirrorIcon}
+        />
       )}
       <ButtonLabel>{children}</ButtonLabel>
       {dataLabel && size !== 'small' && <ButtonLabelData>{dataLabel}</ButtonLabelData>}
       {icon && size !== 'small' && iconPosition === 'right' && (
-        <ButtonLabelIcon size={size} iconPosition={iconPosition} icon={icon} />
+        <ButtonLabelIcon
+          size={size}
+          iconPosition={iconPosition}
+          icon={icon}
+          shouldMirrorIcon={shouldMirrorIcon}
+        />
       )}
     </ButtonContainer>
   ),

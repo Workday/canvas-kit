@@ -7,6 +7,7 @@ import {Circle} from './examples/Circle';
 import {CircleFilled} from './examples/CircleFilled';
 import {Inverse} from './examples/Inverse';
 import {InverseFilled} from './examples/InverseFilled';
+import {MirroredIcon} from './examples/MirroredIcon';
 import {Plain} from './examples/Plain';
 import {Square} from './examples/Square';
 import {SquareFilled} from './examples/SquareFilled';
@@ -78,6 +79,19 @@ InverseFilled Icon Buttons are a higher emphasis version of Inverse, and should 
 backgrounds.
 
 <ExampleCodeBlock code={InverseFilled} />
+
+### Mirroring Icons
+
+Sometimes icons should be mirrored for bidirectional support. Setting the `shouldMirrorIcon` prop to
+`true` will transform the icon's x-axis to mirror the graphic. This is often useful when there is no
+equivalent mirrored icon available. Below is an example of the `unorderedListIcon` being rendered in
+its default state with an icon showing a left-to-right bulleted list. Beside it is the same icon
+that has been mirrored to show a right-to-left bulleted list.
+
+Note that while the `aria-label` text in this example did not need to be updated, if the label
+contains directional descriptors such as "right" and "left," the text should also be updated.
+
+<ExampleCodeBlock code={MirroredIcon} />
 
 ### Toggleability
 
