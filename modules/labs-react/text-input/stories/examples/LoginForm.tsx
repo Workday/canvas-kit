@@ -3,7 +3,7 @@ import React from 'react';
 import {useFormik} from 'formik';
 import * as yup from 'yup';
 
-import {TextInput, useTextInputModel} from '@workday/canvas-kit-labs-react/text-input';
+import {TextInput} from '@workday/canvas-kit-labs-react/text-input';
 import {HStack, VStack} from '@workday/canvas-kit-labs-react/layout';
 import {IconButton, PrimaryButton} from '@workday/canvas-kit-react/button';
 import {visibleIcon, invisibleIcon} from '@workday/canvas-system-icons-web';
@@ -30,13 +30,10 @@ export const LoginForm = () => {
   const [showPassword, setShowPassword] = React.useState(false);
   const passwordId = useUniqueId();
 
-  const emailModel = useTextInputModel();
-  const passwordModel = useTextInputModel({inputId: passwordId});
-
   const formik = useFormik({
     initialValues: {
       email: 'example@baz.com',
-      password: 'foobar',
+      password: 'foobarbaz',
     },
     validationSchema: validationSchema,
     onSubmit: values => {
@@ -52,8 +49,8 @@ export const LoginForm = () => {
   return (
     <form onSubmit={formik.handleSubmit} action=".">
       <VStack spacing="xs" alignItems="flex-start">
-        <TextInput model={emailModel} hasError={formik.touched.email && !!formik.errors.email}>
-          <TextInput.Label isRequiredLabel={emailRequired}>Email</TextInput.Label>
+        <TextInput isRequired={true} hasError={formik.touched.email && !!formik.errors.email}>
+          <TextInput.Label>Email</TextInput.Label>
           <TextInput.Field
             name="email"
             autoComplete="username"
@@ -65,10 +62,11 @@ export const LoginForm = () => {
           <TextInput.Hint>{formik.touched.email && formik.errors.email}</TextInput.Hint>
         </TextInput>
         <TextInput
-          model={passwordModel}
+          inputId={passwordId}
           hasError={formik.touched.password && !!formik.errors.password}
+          isRequired={true}
         >
-          <TextInput.Label isRequiredLabel={passwordRequired}>Password</TextInput.Label>
+          <TextInput.Label>Password</TextInput.Label>
           <HStack spacing="xxs">
             <TextInput.Field
               type={showPassword ? 'text' : 'password'}

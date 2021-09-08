@@ -3,10 +3,8 @@ import {Specifications} from '@workday/canvas-kit-docs';
 
 import {TextInput} from '@workday/canvas-kit-labs-react/text-input';
 
-import {Alert} from './examples/Alert';
 import {Basic} from './examples/Basic';
 import {Disabled} from './examples/Disabled';
-import {Error} from './examples/Error';
 import {Grow} from './examples/Grow';
 import {LabelPosition} from './examples/LabelPosition';
 import {Placeholder} from './examples/Placeholder';
@@ -16,7 +14,8 @@ import {Password} from './examples/Password';
 import {HiddenLabel} from './examples/HiddenLabel';
 import {ThemedAlert} from './examples/ThemedAlert';
 import {ThemedError} from './examples/ThemedError';
-import {AddingErrors} from './examples/AddingErrors';
+import {Errors} from './examples/Errors';
+import {Alerts} from './examples/Alerts';
 import {LoginForm} from './examples/LoginForm';
 
 <Meta title="Labs/Text Input/React" component={TextInput} />
@@ -52,6 +51,13 @@ value before a value has been provided.
 
 <ExampleCodeBlock code={Placeholder} />
 
+### Required
+
+Set the `isRequired` property property from useTextInputModel to indicate that the field is
+required. This will also add an red asterisk next to your TextInput.Label.
+
+<ExampleCodeBlock code={Required} />
+
 ### Ref Forwarding
 
 All the TextInput subcomponents support
@@ -80,13 +86,6 @@ If your label is just for screen reader users you can add the isVisuallyHidden t
 
 <ExampleCodeBlock code={HiddenLabel} />
 
-### Required
-
-Set the `required` prop TextInput.Field to `true` to indicate that the field is required. You can
-add an red asterisk by adding isRequiredLabel to TextInput.Label.
-
-<ExampleCodeBlock code={Required} />
-
 ### Type
 
 Set the `type` prop TextInput.Field to any allowed string, e.g. password to change the input field
@@ -96,29 +95,28 @@ type.
 
 ### Error States
 
-Call the `addError` or `addAlert` event from useTextInputModel to set the TextInput to the Error or
-Alert state, respectively. If you have an accompanying hint you can use the TextInput.Hint
-subcomponent.
+Use the `hasError` property from useTextInputModel to set the TextInput to the Error state. If you
+have an accompanying hint you can use the TextInput.Hint subcomponent.
 
-#### Alert
+#### Errors
 
-<ExampleCodeBlock code={Alert} />
+<ExampleCodeBlock code={Errors} />
 
-#### Error
-
-<ExampleCodeBlock code={Error} />
-
-#### Themed Alert
-
-<ExampleCodeBlock code={ThemedAlert} />
-
-#### Themed Error
+#### Themed Errors
 
 <ExampleCodeBlock code={ThemedError} />
 
-#### Adding Errors
+### Other Visual States
 
-<ExampleCodeBlock code={AddingErrors} />
+Use the `useThemedRing` hook to change the visual state of the input field.
+
+#### Alerts
+
+<ExampleCodeBlock code={Alerts} />
+
+#### Themed Alerts
+
+<ExampleCodeBlock code={ThemedAlert} />
 
 #### Full example
 

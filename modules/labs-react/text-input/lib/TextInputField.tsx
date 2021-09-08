@@ -1,91 +1,75 @@
-import React from 'react';
+/** @jsx jsx */
+import {jsx} from '@emotion/core';
 
-import {borderRadius, inputColors, space, type} from '@workday/canvas-kit-react/tokens';
 import {
-  createComponent,
-  errorRing,
-  ErrorType,
-  ExtractProps,
-  styled,
-  StyledType,
-  Themeable,
-  useModelContext,
-} from '@workday/canvas-kit-react/common';
-import {Box} from '@workday/canvas-kit-labs-react/common';
+  borderRadius,
+  CSSProperties,
+  inputColors,
+  space,
+  type,
+} from '@workday/canvas-kit-react/tokens';
+import {createComponent, ExtractProps, useModelContext} from '@workday/canvas-kit-react/common';
+import {Box, useThemedRing, useThemeRTL} from '@workday/canvas-kit-labs-react/common';
 
 import {TextInputModelContext} from './TextInput';
-import {TextInputModel} from './useTextInputModel';
+import {TextInputModel} from './hooks/useTextInputModel';
+import {useTextInputField} from './hooks/useTextInputField';
 
-export interface TextInputFieldProps extends ExtractProps<typeof Box, never>, Themeable {
+export interface TextInputFieldProps extends ExtractProps<typeof Box, never> {
   model?: TextInputModel;
 }
 
-const StyledBox = styled(Box as typeof TextInputField)<
-  Pick<TextInputFieldProps, 'theme'> & Pick<TextInputModel['state'], 'hasError'> & StyledType
->(
-  {
-    ...type.levels.subtext.large,
-    transition: '0.2s box-shadow, 0.2s border-color',
+const baseStyles: CSSProperties = {
+  ...type.levels.subtext.large,
+  padding: space.xxs,
+  margin: 0,
+  minWidth: '280px',
+  border: `1px solid ${inputColors.border}`,
+  backgroundColor: inputColors.background,
+  borderRadius: borderRadius.m,
+  display: 'block',
+  height: '40px',
+  transition: '0.2s box-shadow, 0.2s border-color',
+  '&::placeholder': {
+    color: inputColors.placeholder,
+  },
+  '&:hover': {
+    borderColor: inputColors.hoverBorder,
+  },
+  '&:focus:not([disabled])': {
+    outline: 'none',
+  },
+  '&:disabled': {
+    backgroundColor: inputColors.disabled.background,
+    borderColor: inputColors.disabled.border,
+    color: inputColors.disabled.text,
     '&::placeholder': {
-      color: inputColors.placeholder,
-    },
-    '&:hover': {
-      borderColor: inputColors.hoverBorder,
-    },
-    '&:focus:not([disabled])': {
-      borderColor: inputColors.focusBorder,
-      boxShadow: `inset 0 0 0 1px ${inputColors.focusBorder}`,
-      outline: 'none',
-    },
-    '&:disabled': {
-      backgroundColor: inputColors.disabled.background,
-      borderColor: inputColors.disabled.border,
       color: inputColors.disabled.text,
-      '&::placeholder': {
-        color: inputColors.disabled.text,
-      },
-    },
-    '::-ms-clear': {
-      display: 'none',
     },
   },
-  ({theme, hasError}) => {
-    return {
-      '&:focus:not([disabled])': {
-        borderColor: theme.canvas.palette.common.focusOutline,
-        boxShadow: `inset 0 0 0 1px ${theme.canvas.palette.common.focusOutline}`,
-        outline: 'none',
-      },
-      ...errorRing(hasError ? ErrorType.Error : undefined, theme),
-    };
-  }
-);
+  '::-ms-clear': {
+    display: 'none',
+  },
+};
 
 export const TextInputField = createComponent('input')({
   displayName: 'TextInput.Field',
-  Component: ({model, theme, ...elemProps}: TextInputFieldProps, ref) => {
-    const {state} = useModelContext(TextInputModelContext, model);
+  Component: ({model, ...elemProps}: TextInputFieldProps, ref) => {
+    const localModel = useModelContext(TextInputModelContext, model);
+    const props = useTextInputField(localModel, elemProps, ref);
 
-    return (
-      <StyledBox
-        as="input"
-        ref={ref}
-        type="text"
-        hasError={state.hasError}
-        theme={theme}
-        aria-invalid={state.hasError ? true : undefined}
-        aria-describedby={state.hintId}
-        id={state.inputId}
-        padding={space.xxs}
-        margin={0}
-        minWidth="280px"
-        border={`1px solid ${inputColors.border}`}
-        backgroundColor={inputColors.background}
-        borderRadius={borderRadius.m}
-        display="block"
-        height="40px"
-        {...elemProps}
-      />
-    );
+    const {themeRTL, theme} = useThemeRTL();
+    const errorRing = useThemedRing('error');
+
+    const focusStyles = localModel.state.hasError
+      ? errorRing
+      : themeRTL({
+          '&:focus:not([disabled])': {
+            borderColor: theme.canvas.palette.common.focusOutline,
+            boxShadow: `inset 0 0 0 1px ${theme.canvas.palette.common.focusOutline}`,
+          },
+        });
+
+    return <Box as="input" css={[themeRTL(baseStyles), focusStyles]} {...props} />;
   },
 });

@@ -1,17 +1,15 @@
 import React from 'react';
-import {TextInput, useTextInputModel} from '@workday/canvas-kit-labs-react/text-input';
+import {TextInput} from '@workday/canvas-kit-labs-react/text-input';
 import {VStack} from '@workday/canvas-kit-labs-react/layout';
 import {space} from '@workday/canvas-kit-react/tokens';
 
-export const AddingErrors = () => {
-  const [value, setValue] = React.useState('');
+export const Errors = () => {
+  const [value, setValue] = React.useState('four');
   const [hint, setHint] = React.useState('');
   const [hasError, setHasError] = React.useState(false);
 
-  const model = useTextInputModel();
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const stringLength = event.target.value.length;
+  const validateInput = (value: string) => {
+    const stringLength = value.length;
     if (stringLength !== 3) {
       setHasError(true);
       const hintStart = 'Word length must be';
@@ -20,12 +18,22 @@ export const AddingErrors = () => {
       setHasError(false);
       setHint('');
     }
+  };
+
+  React.useEffect(() => {
+    validateInput(value);
+    // Only run on load
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    validateInput(event.target.value);
     setValue(event.target.value);
   };
 
   return (
     <VStack spacing="xxxs" alignItems="flex-start">
-      <TextInput model={model} hasError={hasError}>
+      <TextInput hasError={hasError}>
         <TextInput.Label>A three letter word</TextInput.Label>
         <TextInput.Field onChange={handleChange} value={value} />
         <TextInput.Hint paddingTop={space.xxs}>{hint}</TextInput.Hint>

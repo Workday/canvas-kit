@@ -3,7 +3,7 @@ import {TextInput} from '@workday/canvas-kit-labs-react/text-input';
 import {useThemedRing} from '@workday/canvas-kit-labs-react/common';
 import {VStack} from '@workday/canvas-kit-labs-react/layout';
 import {CanvasProvider, PartialEmotionCanvasTheme, styled} from '@workday/canvas-kit-react/common';
-import {colors, space} from '@workday/canvas-kit-react/tokens';
+import {colors, CSSProperties, space} from '@workday/canvas-kit-react/tokens';
 
 export const ThemedAlert = () => {
   const theme: PartialEmotionCanvasTheme = {
@@ -26,6 +26,10 @@ export const ThemedAlert = () => {
   );
 };
 
+const StyledField = styled(TextInput.Field)<{alertStyles?: CSSProperties}>(
+  ({alertStyles}) => alertStyles
+);
+
 const AlertInput = () => {
   const [value, setValue] = React.useState('invalid@email');
 
@@ -35,15 +39,11 @@ const AlertInput = () => {
 
   const alertStyles = useThemedRing('alert');
 
-  const StyledField = styled(TextInput.Field)<{hasAlert?: boolean}>(({hasAlert}) =>
-    hasAlert ? {...alertStyles} : {}
-  );
-
   return (
     <VStack spacing="xxxs" alignItems="flex-start">
       <TextInput>
         <TextInput.Label>Email</TextInput.Label>
-        <StyledField hasAlert={true} onChange={handleChange} value={value} />
+        <StyledField alertStyles={alertStyles} onChange={handleChange} value={value} />
         <TextInput.Hint paddingTop={space.xxs}>Please enter a valid email.</TextInput.Hint>
       </TextInput>
     </VStack>

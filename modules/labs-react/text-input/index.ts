@@ -1,2 +1,2 @@
 export * from './lib/TextInput';
-export * from './lib/useTextInputModel';
+export * from './lib/hooks/useTextInputModel';

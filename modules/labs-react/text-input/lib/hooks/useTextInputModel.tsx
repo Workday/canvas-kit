@@ -10,6 +10,7 @@ type TextInputState = {
   hasError?: boolean;
   inputId?: string;
   hintId?: string;
+  isRequired?: boolean;
 };
 
 type TextInputEvents = {};
@@ -21,11 +22,8 @@ const textInputEventMap = createEventMap<TextInputEvents>()({
   callbacks: {},
 });
 
-export type TextInputModelConfig = {
-  hasError?: boolean;
-  inputId?: string;
-  hintId?: string;
-} & Partial<ToModelConfig<TextInputState, TextInputEvents, typeof textInputEventMap>>;
+export type TextInputModelConfig = TextInputState &
+  Partial<ToModelConfig<TextInputState, TextInputEvents, typeof textInputEventMap>>;
 
 export const useTextInputModel = (config: TextInputModelConfig = {}): TextInputModel => {
   const inputId = useUniqueId(config.inputId);
@@ -33,6 +31,7 @@ export const useTextInputModel = (config: TextInputModelConfig = {}): TextInputM
 
   const state = {
     hasError: config.hasError,
+    isRequired: config.isRequired,
     inputId,
     hintId,
   };

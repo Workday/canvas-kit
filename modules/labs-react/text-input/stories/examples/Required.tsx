@@ -11,9 +11,9 @@ export const Required = () => {
 
   return (
     <VStack spacing="xxxs" alignItems="flex-start">
-      <TextInput>
-        <TextInput.Label isRequiredLabel={'required'}>Email</TextInput.Label>
-        <TextInput.Field onChange={handleChange} value={value} required />
+      <TextInput isRequired={true}>
+        <TextInput.Label>Email</TextInput.Label>
+        <TextInput.Field onChange={handleChange} value={value} />
       </TextInput>
     </VStack>
   );

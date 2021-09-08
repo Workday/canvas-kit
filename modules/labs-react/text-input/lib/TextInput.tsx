@@ -2,7 +2,7 @@ import React from 'react';
 
 import {createComponent, useDefaultModel} from '@workday/canvas-kit-react/common';
 
-import {useTextInputModel, TextInputModel, TextInputModelConfig} from './useTextInputModel';
+import {useTextInputModel, TextInputModel, TextInputModelConfig} from './hooks/useTextInputModel';
 import {TextInputField} from './TextInputField';
 import {TextInputLabel} from './TextInputLabel';
 import {TextInputHint} from './TextInputHint';
@@ -19,9 +19,8 @@ export interface TextInputProps extends TextInputModelConfig {
 
 export const TextInput = createComponent()({
   displayName: 'TextInput',
-  Component: ({children, model, hasError, ...config}: TextInputProps) => {
+  Component: ({children, model, ...config}: TextInputProps) => {
     const value = useDefaultModel(model, config, useTextInputModel);
-    value.state.hasError = hasError;
 
     return (
       <TextInputModelContext.Provider value={value}>{children}</TextInputModelContext.Provider>

@@ -1,20 +1,16 @@
+/** @jsx jsx */
+import {jsx} from '@emotion/core';
 import React from 'react';
 
-import {
-  createComponent,
-  ErrorType,
-  ExtractProps,
-  styled,
-  StyledType,
-  Themeable,
-  useModelContext,
-} from '@workday/canvas-kit-react/common';
-import {space, type} from '@workday/canvas-kit-react/tokens';
-import {Box} from '@workday/canvas-kit-labs-react/common';
-import {TextInputModelContext} from './TextInput';
-import {TextInputModel} from './useTextInputModel';
+import {createComponent, ExtractProps, useModelContext} from '@workday/canvas-kit-react/common';
+import {CSSProperties, space, type} from '@workday/canvas-kit-react/tokens';
+import {Box, useThemeRTL} from '@workday/canvas-kit-labs-react/common';
 
-export interface TextInputHintProps extends ExtractProps<typeof Box, never>, Themeable {
+import {TextInputModelContext} from './TextInput';
+import {TextInputModel} from './hooks/useTextInputModel';
+import {useTextInputHint} from './hooks/useTextInputHint';
+
+export interface TextInputHintProps extends ExtractProps<typeof Box, never> {
   model?: TextInputModel;
   /**
    * Hint text to show to the user regarding the Error/Alert
@@ -22,35 +18,35 @@ export interface TextInputHintProps extends ExtractProps<typeof Box, never>, The
   children?: React.ReactNode;
 }
 
-const StyledBox = styled(Box)<
-  Pick<TextInputHintProps, 'theme'> & Pick<TextInputModel['state'], 'hasError'> & StyledType
->(
-  type.levels.subtext.medium,
-  ({hasError, theme}) => hasError && {color: theme.canvas.palette.error.main}
-);
+const baseStyles: CSSProperties = {
+  ...type.levels.subtext.medium,
+  margin: `${space.xxs} 0 0`,
+  width: '100%',
+};
 
 export const TextInputHint = createComponent('p')({
   displayName: 'TextInput.Hint',
-  Component: ({model, children, theme, ...elemProps}: TextInputHintProps, ref, Element) => {
-    const {state} = useModelContext(TextInputModelContext, model);
+  Component: ({model, children, ...elemProps}: TextInputHintProps, ref, Element) => {
+    const localModel = useModelContext(TextInputModelContext, model);
+    const props = useTextInputHint(localModel, elemProps, ref);
+    const {themeRTL, theme} = useThemeRTL();
+
     if (!children) {
       // If there is no hint text just skip rendering
       return null;
     }
 
     return (
-      <StyledBox
+      <Box
         as={Element}
-        ref={ref}
-        hasError={state.hasError}
-        theme={theme}
-        id={state.hintId}
-        margin={`${space.xxs} 0 0`}
-        width="100%"
-        {...elemProps}
+        css={themeRTL(
+          baseStyles,
+          localModel.state.hasError ? {color: theme.canvas.palette.error.main} : {}
+        )}
+        {...props}
       >
         {children}
-      </StyledBox>
+      </Box>
     );
   },
 });

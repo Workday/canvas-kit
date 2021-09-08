@@ -1,3 +1,4 @@
+import {CSSObject} from '@emotion/core';
 import {useIsRTL, useTheme} from '@workday/canvas-kit-react/common';
 import {CSSProperties} from '@workday/canvas-kit-react/tokens';
 import {useMemo} from 'react';
