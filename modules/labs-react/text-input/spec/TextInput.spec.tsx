@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {render, fireEvent} from '@testing-library/react';
 import {TextInput} from '../lib/TextInput';
-import {ErrorType} from '@workday/canvas-kit-react/common';
 
 const id = 'Test Text Input';
 const placeholder = 'Test Text Input';
@@ -81,15 +80,14 @@ describe('Text Input', () => {
   });
 
   describe('when rendered as required', () => {
-    it('should add a required element to the label to indicate that it is required', () => {
-      const required = 'required';
+    it('should add an asterisk to the label to indicate that it is required', () => {
       const {getByText} = render(
-        <TextInput>
-          <TextInput.Label isRequiredLabel={required}>Test</TextInput.Label>
+        <TextInput isRequired={true}>
+          <TextInput.Label>Test</TextInput.Label>
         </TextInput>
       );
 
-      expect(getByText('*')).toHaveAttribute('title', required);
+      expect(getByText('*')).toHaveAttribute('aria-hidden', 'true');
     });
   });
 
