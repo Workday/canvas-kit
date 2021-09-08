@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## v5.2.0 (2021-09-08)
+
+### Components
+
+- fix(toast): Update to properly render rtl ([#1229](https://github.com/Workday/canvas-kit/pull/1229)) [@JaredWF](https://github.com/JaredWF)
+- fix: Update search bar to properly render rtl ([#1231](https://github.com/Workday/canvas-kit/pull/1231)) [@JaredWF](https://github.com/JaredWF)
+- fix(side-panel): Fix SidePanel RTL support ([#1234](https://github.com/Workday/canvas-kit/pull/1234)) [@alanbsmith](https://github.com/alanbsmith)
+- feat(icon): Add shouldMirror prop to icons ([#1246](https://github.com/Workday/canvas-kit/pull/1246)) [@alanbsmith](https://github.com/alanbsmith)
+
+### Hooks
+
+- feat(labs): Add convertToStaticStates to useThemeRTL ([#1216](https://github.com/Workday/canvas-kit/pull/1216)) [@vibdev](https://github.com/vibdev)
+
+### Docs
+
+- docs: Update inter-linking to match Canvas Site ([#1220](https://github.com/Workday/canvas-kit/pull/1220)) [@NicholasBoll](https://github.com/NicholasBoll)
+- docs: Update SidePanel docs to MDX ([#1236](https://github.com/Workday/canvas-kit/pull/1236)) [@alanbsmith](https://github.com/alanbsmith)
+- docs: Update various issues prevent docs mdx files from being rendered remotely ([#1238](https://github.com/Workday/canvas-kit/pull/1238)) [@anicholls](https://github.com/anicholls)
+- docs: Improve Variant/Type/State docs ([#1243](https://github.com/Workday/canvas-kit/pull/1243)) [@anicholls](https://github.com/anicholls)
+
+### Infrastructure
+
+- chore: Bump path-parse from 1.0.6 to 1.0.7 ([#1211](https://github.com/Workday/canvas-kit/pull/1211)) [@dependabot](https://github.com/dependabot)
+- ci: Add Chromatic baseline to support branches ([#1219](https://github.com/Workday/canvas-kit/pull/1219)) [@NicholasBoll](https://github.com/NicholasBoll)
+- fix: Fix create-component README template ([#1235](https://github.com/Workday/canvas-kit/pull/1235)) [@alanbsmith](https://github.com/alanbsmith)
+- chore(table): Update polished package to fix security warning ([#1242](https://github.com/Workday/canvas-kit/pull/1242)) [@NicholasBoll](https://github.com/NicholasBoll)
+
 ## v5.1.0 (2021-08-16)
 
 ### Components
