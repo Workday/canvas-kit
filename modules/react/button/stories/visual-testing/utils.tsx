@@ -31,7 +31,6 @@ export const stateTableColumnProps = [
   {label: 'Focus Hover ', props: {className: 'focus hover', disabled: false}},
   {label: 'Active ', props: {className: 'active', disabled: false}},
   {label: 'Active Hover ', props: {className: 'active hover', disabled: false}},
-  {label: 'Mirrored Icon ', props: {shouldMirrorIcon: true, disabled: false}},
 ];
 
 const isInverseVariant = (variant: IconButtonProps['variant']) => {
