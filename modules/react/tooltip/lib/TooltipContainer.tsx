@@ -72,9 +72,9 @@ export const TooltipContainer = styled('div')<TooltipContainerProps>(
 
     // offset tooltips by 2 pixels when a keyboard focus ring is detected
     '[data-whatinput=keyboard] &': {
-      padding: spaceNumbers.xxs + spaceNumbers.xxxs + spaceNumbers.xxxs,
+      padding: spaceNumbers.xxs + spaceNumbers.xxxs + 2,
       ':before': {
-        margin: spaceNumbers.xxxs + spaceNumbers.xxxs,
+        margin: spaceNumbers.xxxs + 2,
       },
     },
 
