@@ -67,6 +67,6 @@
   "devDependencies": {
     "@types/lodash.flatten": "^4.4.6",
     "formik": "^2.2.9",
-    "yup": "^0.32.9"
+    "yup": "^0.31.1"
   }
 }
