@@ -11,6 +11,7 @@ import chroma from 'chroma-js';
 import {notificationsIcon, inboxIcon} from '@workday/canvas-system-icons-web';
 
 import {Avatar} from '@workday/canvas-kit-react/avatar';
+import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react';
 import {colors, space, gradients} from '@workday/canvas-kit-react/tokens';
 import {IconButton, PrimaryButton} from '@workday/canvas-kit-react/button';
 import {MenuItem} from '@workday/canvas-kit-preview-react/menu';
@@ -481,20 +482,44 @@ storiesOf('Labs/Header/React', module)
     </div>
   ))
   .add('Search Form', () => (
-    <div css={{display: 'flex', width: '100%'}}>
-      <div css={{flex: 1, background: colors.frenchVanilla100, padding: '12px'}}>
-        <SearchWithAutoComplete
-          css={{marginLeft: space.zero}}
-          searchTheme={SearchBar.Theme.Light}
-          height={48}
-        />
+    <div>
+      <div css={{marginLeft: space.xs}}>LTR</div>
+      <div css={{display: 'flex', width: '100%'}}>
+        <div css={{flex: 1, background: colors.frenchVanilla100, padding: '12px'}}>
+          <SearchWithAutoComplete
+            css={{marginLeft: space.zero}}
+            searchTheme={SearchBar.Theme.Light}
+            height={48}
+          />
+        </div>
+        <div css={{flex: 1, background: colors.blueberry400, marginLeft: space.m, padding: '12px'}}>
+          <SearchWithAutoComplete
+            css={{marginLeft: space.zero}}
+            searchTheme={SearchBar.Theme.Dark}
+            height={48}
+          />
+        </div>
       </div>
-      <div css={{flex: 1, background: colors.blueberry400, marginLeft: space.m, padding: '12px'}}>
-        <SearchWithAutoComplete
-          css={{marginLeft: space.zero}}
-          searchTheme={SearchBar.Theme.Dark}
-          height={48}
-        />
-      </div>
+
+      <div css={{marginLeft: space.xs, marginTop: space.xl}}>RTL</div>
+      <CanvasProvider
+        theme={{canvas: {direction: ContentDirection.RTL}}}
+        css={{display: 'flex', width: '100%'}}
+      >
+        <div css={{flex: 1, background: colors.blueberry400, marginLeft: space.m, padding: '12px'}}>
+          <SearchWithAutoComplete
+            css={{marginLeft: space.zero}}
+            searchTheme={SearchBar.Theme.Dark}
+            height={48}
+          />
+        </div>
+        <div css={{flex: 1, background: colors.frenchVanilla100, padding: '12px'}}>
+          <SearchWithAutoComplete
+            css={{marginLeft: space.zero}}
+            searchTheme={SearchBar.Theme.Light}
+            height={48}
+          />
+        </div>
+      </CanvasProvider>
     </div>
   ));

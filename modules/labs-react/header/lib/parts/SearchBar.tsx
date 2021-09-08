@@ -1,8 +1,7 @@
 import * as React from 'react';
-import styled from '@emotion/styled';
 import {CSSObject} from '@emotion/core';
 import {colors, space, spaceNumbers} from '@workday/canvas-kit-react/tokens';
-import {GrowthBehavior} from '@workday/canvas-kit-react/common';
+import {GrowthBehavior, styled} from '@workday/canvas-kit-react/common';
 import {IconButton, IconButtonProps} from '@workday/canvas-kit-react/button';
 import {searchIcon, xIcon} from '@workday/canvas-system-icons-web';
 import {FormField, FormFieldLabelPosition} from '@workday/canvas-kit-react/form-field';
