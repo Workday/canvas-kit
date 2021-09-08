@@ -14,6 +14,13 @@ const {_: commands, path} = require('yargs')
       describe: 'The path to execute the transform in (recursively).'.gray,
     });
   })
+  .command('v6 [path]', 'Canvas Kit v5 > v6 migration transform'.gray, yargs => {
+    yargs.positional('path', {
+      type: 'string',
+      default: '.',
+      describe: 'The path to execute the transform in (recursively).'.gray,
+    });
+  })
   .demandCommand(1, 'You must provide a transform to apply.'.red.bold)
   .strictCommands()
   .fail((msg, err, yargs) => {
@@ -37,7 +44,7 @@ console.log(transform, path);
 console.log(`\nApplying ${transform} transform to '${path}'\n`.brightBlue);
 
 exec(
-  `jscodeshift -t ${__dirname}/dist/es6/${transform} ${path} --parser=tsx --extensions=js,jsx,ts,tsx --verbose=2`,
+  `jscodeshift -t ${__dirname}/dist/es6/${transform} ${path} --parser=tsx --extensions=js,jsx,ts,tsx`,
   (error, stdout, stderr) => {
     if (error) {
       console.error(`${error}\n`);

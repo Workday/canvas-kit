@@ -3,6 +3,15 @@ import styled from '@emotion/styled';
 import {colors, gradients, space, type} from '@workday/canvas-kit-react/tokens';
 import {IconButton, IconButtonProps} from '@workday/canvas-kit-react/button';
 
+/**
+ * ### Deprecated Page Header Props
+ *
+ * As of Canvas Kit v6, PageHeader is being deprecated
+ * in favor of the Header provided by UI-Platform.
+ * It will be completely removed in v7. Please see the
+ * [migration guide](https://workday.github.io/canvas-kit/?path=/story/welcome-migration-guides-v5-0--page#component-promotions)
+ * for more information.
+ */
 export interface PageHeaderProps {
   /**
    * The text of the PageHeader title.
@@ -68,7 +77,25 @@ const IconList = styled('div')({
   },
 });
 
+/**
+ * ### Deprecated Page Header
+ *
+ * As of Canvas Kit v6, this component is being deprecated
+ * in favor of the Header provided by UI-Platform.
+ * It will be completely removed in v7. Please see the
+ * [migration guide](https://workday.github.io/canvas-kit/?path=/story/welcome-migration-guides-v5-0--page#component-promotions)
+ * for more information.
+ */
 export default class PageHeader extends React.Component<PageHeaderProps> {
+  componentDidMount() {
+    console.warn(
+      `This component is being deprecated and will be removed in Canvas Kit V7.\n
+      Please migrate to the Header component provided by UI-Platform. For more information, please see the V6 migration guide:\n
+      https://workday.github.io/canvas-kit/?path=/story/welcome-migration-guides-v5-0--page#component-promotions
+      `
+    );
+  }
+
   private renderChildren(children: React.ReactNode): React.ReactNode {
     return React.Children.map(children, child => {
       if (!React.isValidElement(child)) {
