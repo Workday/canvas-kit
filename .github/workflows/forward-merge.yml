@@ -14,4 +14,4 @@ jobs:
       - uses: NicholasBoll/action-forward-merge-pr@v1.0.0
         with:
           token: ${{secrets.GITHUB_TOKEN}}
-          branches: support/v4.x+master
+          branches: support/v4.x+master,master+prerelease/v6
