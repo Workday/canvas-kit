@@ -54,7 +54,9 @@ export const appletIconStyles = ({
   };
 };
 
-export interface AppletIconProps extends AppletIconStyles, Pick<IconProps, 'iconRef'> {
+export interface AppletIconProps
+  extends AppletIconStyles,
+    Pick<IconProps, 'iconRef' | 'shouldMirror'> {
   /**
    * The icon to display from `@workday/canvas-applet-icons-web`.
    */
@@ -70,7 +72,7 @@ export default class AppletIcon extends React.Component<AppletIconProps> {
   public static Colors = BrandingColor;
 
   public render() {
-    const {size = 92, icon, color, iconRef, ...elemProps} = this.props;
+    const {size = 92, icon, color, iconRef, shouldMirror, ...elemProps} = this.props;
 
     return (
       <Icon
@@ -79,6 +81,7 @@ export default class AppletIcon extends React.Component<AppletIconProps> {
         styles={appletIconStyles({color})}
         size={size}
         iconRef={iconRef}
+        shouldMirror={shouldMirror}
         {...elemProps}
       />
     );

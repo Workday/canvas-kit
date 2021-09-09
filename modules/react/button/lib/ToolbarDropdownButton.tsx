@@ -48,6 +48,7 @@ export const ToolbarDropdownButton = createComponent('button')({
       // eslint-disable-next-line react-hooks/rules-of-hooks
       theme = useTheme(),
       icon,
+      shouldMirrorIcon = false,
       children,
       ...elemProps
     }: ToolbarDropdownButtonProps,
@@ -63,11 +64,19 @@ export const ToolbarDropdownButton = createComponent('button')({
         {...elemProps}
       >
         {icon ? (
-          <SystemIcon className={'wdc-toolbar-dropdown-btn-custom-icon'} icon={icon} />
+          <SystemIcon
+            className={'wdc-toolbar-dropdown-btn-custom-icon'}
+            icon={icon}
+            shouldMirror={shouldMirrorIcon}
+          />
         ) : (
           children
         )}
-        <SystemIcon className={'wdc-toolbar-dropdown-btn-arrow'} icon={chevronDownSmallIcon} />
+        <SystemIcon
+          className={'wdc-toolbar-dropdown-btn-arrow'}
+          icon={chevronDownSmallIcon}
+          shouldMirror={shouldMirrorIcon}
+        />
       </ButtonContainer>
     );
   },

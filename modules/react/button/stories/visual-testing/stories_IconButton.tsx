@@ -14,6 +14,11 @@ export default withSnapshotsEnabled({
   component: IconButton,
 });
 
+const columnProps = [
+  ...stateTableColumnProps,
+  {label: 'Mirrored Icon ', props: {shouldMirrorIcon: true, disabled: false}},
+];
+
 export const IconButtonStates = (props: {theme?: PartialEmotionCanvasTheme}) => (
   <React.Fragment>
     {[false, true].map(toggled => (
@@ -32,7 +37,7 @@ export const IconButtonStates = (props: {theme?: PartialEmotionCanvasTheme}) => 
                 {value: 'squareFilled', label: 'Square Filled'},
               ],
             })}
-            columnProps={stateTableColumnProps}
+            columnProps={columnProps}
           >
             {props => (
               <Container blue={['inverse', 'inverseFilled'].includes(props.variant)}>

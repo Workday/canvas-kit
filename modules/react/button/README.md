@@ -43,7 +43,7 @@ line-height, etc.).
 
 ---
 
-### `as: React.ElementType`
+#### `as: React.ElementType`
 
 > The alternative container type for the button. If `as="a"` is provided, We use Emotion's special
 > `as` prop to render an `a` tag instead of a `button`.
@@ -69,6 +69,7 @@ Default: `undefined`
 import * as React from 'react';
 import {ToolbarIconButton} from '@workday/canvas-kit-react/button';
 import {activityStreamIcon} from '@workday/canvas-system-icons-web';
+
 <ToolbarIconButton icon={activityStreamIcon} aria-label="Activity Stream" />;
 ```
 
@@ -114,9 +115,17 @@ Default: `undefined`
 
 ---
 
-### `icon: CanvasSystemIcon`
+#### `icon: CanvasSystemIcon`
 
 > The icon of the button. Optional because ToolbarIconButton can also wrap a SystemIcon component.
+
+---
+
+#### `shouldMirrorIcon: boolean`
+
+> If set to `true`, transform the SVG's x-axis to mirror the graphic
+
+Default: `false`
 
 ---
 
@@ -162,6 +171,14 @@ import {activityStreamIcon} from '@workday/canvas-system-icons-web';
 
 > The icon of the button. Optional because ToolbarDropdownButton can also wrap a SystemIcon
 > component.
+
+---
+
+#### `shouldMirrorIcon: boolean`
+
+> If set to `true`, transform the SVG's x-axis to mirror the graphic
+
+Default: `false`
 
 ---
 
