@@ -4,6 +4,21 @@ import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
 import {space} from '@workday/canvas-kit-react/tokens';
 
+const CustomContent = ({...elemProps}) => (
+  <button
+    style={{
+      marginTop: space.xs,
+      maxWidth: 200,
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+      whiteSpace: 'nowrap',
+    }}
+    {...elemProps}
+  >
+    Super Mega Ultra Long Content With Max Width Custom
+  </button>
+);
+
 export const Ellipsis = () => {
   return (
     <React.Fragment>
@@ -27,6 +42,9 @@ export const Ellipsis = () => {
         >
           Super Mega Ultra Long Content With Max Width
         </button>
+      </OverflowTooltip>
+      <OverflowTooltip>
+        <CustomContent />
       </OverflowTooltip>
     </React.Fragment>
   );
