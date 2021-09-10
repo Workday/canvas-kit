@@ -99,15 +99,17 @@ export const OverflowTooltip = ({
   children,
   ...elemProps
 }: OverflowTooltipProps) => {
-  const titleText = innerText(children);
-  const {targetProps, popperProps, tooltipProps} = useTooltip({type: 'label', titleText});
+  const [titleText, setTitleText] = React.useState('');
+  const {targetProps, popperProps, tooltipProps} = useTooltip({type: 'muted'});
 
   const onMouseEnter = (event: React.MouseEvent<HTMLElement>) => {
+    setTitleText(event.currentTarget.innerText);
     if (isOverflowed(event.currentTarget)) {
       targetProps.onMouseEnter(event);
     }
   };
   const onFocus = (event: React.FocusEvent<HTMLElement>) => {
+    setTitleText(event.currentTarget.innerText);
     if (isOverflowed(event.currentTarget)) {
       targetProps.onFocus(event);
     }
