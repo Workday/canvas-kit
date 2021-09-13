@@ -1,4 +1,7 @@
-# Canvas Kit Page Header
+# Canvas Kit Page Header (Deprecated)
+
+> Note: As of Canvas Kit v6, PageHeader is being deprecated in favor of the Header provided by UI-Platform. It will be completely removed in v7. 
+> Please see the [migration guide](https://workday.github.io/canvas-kit/?path=/story/welcome-migration-guides-v6-0--page) for more information.
 
 A Canvas component that displays the header of a specific page within a website or application. It
 is generally used as a sub-header to the main application header
@@ -16,19 +19,19 @@ yarn add @workday/canvas-kit-react
 
 ```tsx
 import * as React from 'react';
-import {PageHeader} from '@workday/canvas-kit-react/page-header';
+import {DeprecatedPageHeader} from '@workday/canvas-kit-react/page-header';
 import {IconButton} from '@workday/canvas-kit-react/button';
 import {exportIcon, fullscreenIcon} from '@workday/canvas-system-icons-web';
 
-<PageHeader title="Product">
+<DeprecatedPageHeader title="Product">
   <IconButton icon={exportIcon} />
   <IconButton icon={fullscreenIcon} />
-</PageHeader>
+</DeprecatedPageHeader>
 
-<PageHeader title="With Cap Width" capWidth={true}>
+<DeprecatedPageHeader title="With Cap Width" capWidth={true}>
   <IconButton icon={exportIcon} />
   <IconButton icon={fullscreenIcon} />
-</PageHeader>
+</DeprecatedPageHeader>
 ```
 
 ## Static Properties

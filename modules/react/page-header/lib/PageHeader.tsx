@@ -9,10 +9,10 @@ import {IconButton, IconButtonProps} from '@workday/canvas-kit-react/button';
  * As of Canvas Kit v6, PageHeader is being deprecated
  * in favor of the Header provided by UI-Platform.
  * It will be completely removed in v7. Please see the
- * [migration guide](https://workday.github.io/canvas-kit/?path=/story/welcome-migration-guides-v5-0--page#component-promotions)
+ * [migration guide](https://workday.github.io/canvas-kit/?path=/story/welcome-migration-guides-v6-0--page)
  * for more information.
  */
-export interface PageHeaderProps {
+export interface DeprecatedPageHeaderProps {
   /**
    * The text of the PageHeader title.
    */
@@ -37,7 +37,7 @@ const Header = styled('header')({
   MozOsxFontSmoothing: 'grayscale',
 });
 
-const Container = styled('div')<Pick<PageHeaderProps, 'breakpoint' | 'capWidth'>>(
+const Container = styled('div')<Pick<DeprecatedPageHeaderProps, 'breakpoint' | 'capWidth'>>(
   {
     display: 'flex',
     alignItems: 'center',
@@ -83,15 +83,15 @@ const IconList = styled('div')({
  * As of Canvas Kit v6, this component is being deprecated
  * in favor of the Header provided by UI-Platform.
  * It will be completely removed in v7. Please see the
- * [migration guide](https://workday.github.io/canvas-kit/?path=/story/welcome-migration-guides-v5-0--page#component-promotions)
+ * [migration guide](https://workday.github.io/canvas-kit/?path=/story/welcome-migration-guides-v6-0--page)
  * for more information.
  */
-export default class PageHeader extends React.Component<PageHeaderProps> {
+export default class DeprecatedPageHeader extends React.Component<DeprecatedPageHeaderProps> {
   componentDidMount() {
     console.warn(
       `This component is being deprecated and will be removed in Canvas Kit V7.\n
       Please migrate to the Header component provided by UI-Platform. For more information, please see the V6 migration guide:\n
-      https://workday.github.io/canvas-kit/?path=/story/welcome-migration-guides-v5-0--page#component-promotions
+      https://workday.github.io/canvas-kit/?path=/story/welcome-migration-guides-v6-0--page
       `
     );
   }
