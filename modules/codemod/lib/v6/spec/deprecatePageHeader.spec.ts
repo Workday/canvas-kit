@@ -14,8 +14,8 @@ describe('Canvas Kit Deprecate PageHeader Codemod', () => {
     });
 
     it('should properly transform named imports from @workday/canvas-kit-react', () => {
-      const input = `import {PageHeader} from '@workday/canvas-kit-react'`;
-      const expected = `import {DeprecatedPageHeader} from '@workday/canvas-kit-react'`;
+      const input = `import {PageHeader, PageHeaderProps} from '@workday/canvas-kit-react'`;
+      const expected = `import {DeprecatedPageHeader, DeprecatedPageHeaderProps} from '@workday/canvas-kit-react'`;
 
       expectTransform(input, expected);
     });

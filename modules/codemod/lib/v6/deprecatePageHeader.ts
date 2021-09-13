@@ -45,6 +45,10 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
           if (specifier.imported.name === 'PageHeader') {
             specifier.imported.name = 'DeprecatedPageHeader';
           }
+          //  `import {PageHeaderProps}` becomes `import {DeprecatedPageHeaderProps}`
+          if (specifier.imported.name === 'PageHeaderProps') {
+            specifier.imported.name = 'DeprecatedPageHeaderProps';
+          }
         }
         return specifier;
       });
@@ -75,7 +79,7 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
       });
     });
 
-  // Transform PageHeaderProp type references
+  // Transform PageHeaderProps type references
   // e.g. `type CustomProps = PageHeaderProps;` becomes `type CustomProps = DeprecatedPageHeaderProps;`
   root
     .find(j.TSTypeReference, {typeName: {type: 'Identifier', name: 'PageHeaderProps'}})
@@ -85,7 +89,7 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
       // return nodePath;
     });
 
-  // Transform PageHeaderProp type interface declaration references
+  // Transform PageHeaderProps type interface declaration references
   // e.g. `interface CustomProps extends PageHeaderProps` becomes `interface CustomProps extends DeprecatedPageHeaderProps`
   root.find(j.TSInterfaceDeclaration).forEach(nodePath => {
     // If the interface is extending PageHeaderProps, transform the extension name to DeprecatedPageHeaderProps
