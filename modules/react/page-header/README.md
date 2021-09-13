@@ -1,7 +1,9 @@
 # Canvas Kit Page Header (Deprecated)
 
-> Note: As of Canvas Kit v6, PageHeader is being deprecated in favor of the Header provided by UI-Platform. It will be completely removed in v7. 
-> Please see the [migration guide](https://workday.github.io/canvas-kit/?path=/story/welcome-migration-guides-v6-0--page) for more information.
+> Note: As of Canvas Kit v6, PageHeader is being soft-deprecated. It will be hard-deprecated
+> (completely removed) in v7. Please see the
+> [migration guide](https://workday.github.io/canvas-kit/?path=/story/welcome-migration-guides-v6-0--page)
+> for more information.
 
 A Canvas component that displays the header of a specific page within a website or application. It
 is generally used as a sub-header to the main application header
