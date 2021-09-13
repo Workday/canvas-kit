@@ -8,7 +8,7 @@ import {action} from '@storybook/addon-actions';
 import styled from '@emotion/styled';
 
 import {Hyperlink, SecondaryButton} from '../../button';
-import CookieBanner from '../index';
+import DeprecatedCookieBanner from '../index';
 import README from '../README.md';
 
 interface Props {
@@ -50,7 +50,7 @@ class BannerContainer extends React.Component<Props, State> {
     return (
       <Container>
         <SecondaryButton onClick={this.reset}>Reset Banner</SecondaryButton>
-        <CookieBanner
+        <DeprecatedCookieBanner
           onAccept={this.onAccept}
           isClosed={this.state.acceptedCookies}
           {...bannerProps}
@@ -61,7 +61,7 @@ class BannerContainer extends React.Component<Props, State> {
 }
 
 storiesOf('Components/Indicators/Cookie Banner/React', module)
-  .addParameters({component: CookieBanner})
+  .addParameters({component: DeprecatedCookieBanner})
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <div className="story">
@@ -79,7 +79,7 @@ storiesOf('Components/Indicators/Cookie Banner/React', module)
           onClickSettings: action('click-settings'),
           notice: (
             <React.Fragment>
-              {CookieBanner.DefaultNotice} Please review our{' '}
+              {DeprecatedCookieBanner.DefaultNotice} Please review our{' '}
               <Hyperlink href="https://www.workday.com/en-us/privacy.html" target="__blank">
                 Privacy Policy
               </Hyperlink>
