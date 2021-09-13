@@ -1,9 +1,9 @@
-import {API, FileInfo, Identifier, ImportDeclaration} from 'jscodeshift';
+import {API, FileInfo, Identifier, ImportDeclaration, Options} from 'jscodeshift';
 
 const mainPackage = '@workday/canvas-kit-react';
 const pageHeaderPackage = '@workday/canvas-kit-react/page-header';
 
-export default function transformer(file: FileInfo, api: API) {
+export default function transformer(file: FileInfo, api: API, options: Options) {
   const j = api.jscodeshift;
 
   const root = j(file.source);
