@@ -6,9 +6,8 @@ import {IconButton, IconButtonProps} from '@workday/canvas-kit-react/button';
 /**
  * ### Deprecated Page Header Props
  *
- * As of Canvas Kit v6, PageHeader is being deprecated
- * in favor of the Header provided by UI-Platform.
- * It will be completely removed in v7. Please see the
+ * As of Canvas Kit v6, PageHeader is being soft-deprecated.
+ * It will be hard-deprecated (completely removed) in v7. Please see the
  * [migration guide](https://workday.github.io/canvas-kit/?path=/story/welcome-migration-guides-v6-0--page)
  * for more information.
  */
@@ -80,9 +79,8 @@ const IconList = styled('div')({
 /**
  * ### Deprecated Page Header
  *
- * As of Canvas Kit v6, this component is being deprecated
- * in favor of the Header provided by UI-Platform.
- * It will be completely removed in v7. Please see the
+ * As of Canvas Kit v6, this component is being soft-deprecated.
+ * It will be hard-deprecated (completely removed) in v7. Please see the
  * [migration guide](https://workday.github.io/canvas-kit/?path=/story/welcome-migration-guides-v6-0--page)
  * for more information.
  */
@@ -90,7 +88,7 @@ export default class DeprecatedPageHeader extends React.Component<DeprecatedPage
   componentDidMount() {
     console.warn(
       `This component is being deprecated and will be removed in Canvas Kit V7.\n
-      Please migrate to the Header component provided by UI-Platform. For more information, please see the V6 migration guide:\n
+      For more information, please see the V6 migration guide:\n
       https://workday.github.io/canvas-kit/?path=/story/welcome-migration-guides-v6-0--page
       `
     );
