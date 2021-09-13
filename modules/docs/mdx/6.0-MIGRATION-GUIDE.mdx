@@ -40,8 +40,72 @@ help us maintain additional codemod transforms to make future migrations easier.
 
 ## Component Deprecations
 
+### Deprecation Types
+
+There are two main deprecation types: soft and hard.
+
+#### Soft Deprecation
+
+During a soft deprecation, a component is still available with its full functionality, but it will
+be renamed with a prefix to indicate its soft-deprecated status. It will also include a console
+warning to announce the deprecation. This warning will only be triggered on the component's initial
+render. Soft-deprecated types or utilities that will also be renamed but will generally have no
+console warning.
+
+#### Hard Deprecation
+
+During a hard deprecation a component or package will no longer be availiable. You will need to
+follow prescribed methods to update or reach out to our team directly.
+
 ### Page Header
 
-We're beginning the deprecation process for `PageHeader` in favor of the `PageHeader` component provided by
-UI-Platform. This component will still be available in v6, but it has been renamed to `DeprecatedPageHeader`
-and log a warning message to the console when initially rendered. We plan to fully remove this component in Canvas Kit v7.
+We are [soft deprecating](#soft-deprecation) `PageHeader`. It has been renamed to
+`DeprecatedPageHeader`. Similarly, `PageHeaderProps` has been renamed to
+`DeprecatedPageHeaderProps`. You can continue to use this component exactly the same as in v5, but
+note that we plan to [hard deprecate](#hard-deprecation) this package in Canvas Kit v7.
+
+Below are two examples:
+
+```tsx
+// v5
+import PageHeader, {PageHeaderProps} from '@workday/canvas-kit-react/page-header';
+
+export const CustomPageHeader = (props: PageHeaderProps) => {
+  return <PageHeader {...props} />;
+};
+
+// v6
+import DeprecatedPageHeader, {
+  DeprecatedPageHeaderProps,
+} from '@workday/canvas-kit-react/page-header';
+
+export const CustomPageHeader = (props: DeprecatedPageHeaderProps) => {
+  return <DeprecatedPageHeader {...props} />;
+};
+```
+
+```tsx
+// v5
+import {PageHeader, PageHeaderProps} from '@workday/canvas-kit-react';
+
+interface CustomPageHeaderProps extends PageHeaderProps {
+  // custom page header props
+}
+
+export const CustomPageHeader = (props: CustomPageHeaderProps) => {
+  return <PageHeader {...props} />;
+};
+
+// v6
+import {DeprecatedPageHeader, DeprecatedPageHeaderProps} from '@workday/canvas-kit-react';
+
+interface CustomPageHeaderProps extends DeprecatedPageHeaderProps {
+  // custom page header props
+}
+
+export const CustomPageHeader = (props: CustomPageHeaderProps) => {
+  return <DeprecatedPageHeader {...props} />;
+};
+```
+
+🤖 These updates will be handled automatically by the codemod.
