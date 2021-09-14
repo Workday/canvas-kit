@@ -1,0 +1,61 @@
+import {Meta} from '@storybook/addon-docs/blocks';
+import {SearchForm} from '@workday/canvas-kit-labs-react/search-form';
+// examples
+import {Basic} from './examples/Basic';
+import {Growth} from './examples/Growth';
+import {RTL} from './examples/RTL';
+import {Theming} from './examples/Theming';
+import {ThemeAttributes} from './examples/PropTables.splitProps';
+
+<Meta title="Labs/Search Form" component={SearchForm} />
+
+# Canvas Kit Search Form
+
+`SearchForm` is a search form that contains a combobox for rendering search results. It's primarily
+intended to be used within a header.
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-labs-react
+```
+
+## Usage
+
+### Basic Example
+
+You will most likely use `SearchForm` within the context of a `Header` component, but it's helpful
+to see its functionality as a standalone component. Below is a basic example that filters results
+based on search input.
+
+<ExampleCodeBlock code={Basic} />
+
+### Growth
+
+If you'd like the `SearchForm` to grow the the width of the container, set the `grow` prop to
+`true`.
+
+<ExampleCodeBlock code={Growth} />
+
+### Theming
+
+The `SearchForm` can be themed to use one of preset `SearchThemes`: `Light`, `Dark`, and
+`Transparent`. Below is an example of `SearchForm` using the `Dark` theme.
+
+<ExampleCodeBlock code={Theming} />
+
+You can also provide more specific theming values by providing specific `SearchThemeAttributes`.
+Below is a table of attributes that can be supplied to `SearchForm`.
+
+<ArgsTable of={ThemeAttributes} />
+
+### RTL (Right-To-Left)
+
+`SearchForm` provides bidirectional support out of the box. You shouldn't need to provide any
+additional configuration.
+
+<ExampleCodeBlock code={RTL} />
+
+## Props
+
+<ArgsTable of={SearchForm} />

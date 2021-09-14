@@ -15,15 +15,8 @@ import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react';
 import {colors, space, gradients} from '@workday/canvas-kit-react/tokens';
 import {IconButton, PrimaryButton} from '@workday/canvas-kit-react/button';
 import {MenuItem} from '@workday/canvas-kit-preview-react/menu';
-import {
-  GlobalHeader,
-  Header,
-  DubLogoTitle,
-  WorkdayLogoTitle,
-  HeaderVariant,
-  SearchBar,
-  SearchBarProps,
-} from '../index';
+import {SearchForm, SearchFormProps} from '@workday/canvas-kit-labs-react/search-form';
+import {GlobalHeader, Header, DubLogoTitle, WorkdayLogoTitle, HeaderVariant} from '../index';
 
 import README from '../README.md';
 import bgImg from '../static/workday-bg.jpg';
@@ -81,7 +74,7 @@ const nav = (
 );
 
 class SearchWithAutoComplete extends React.Component<
-  Partial<SearchBarProps>,
+  Partial<SearchFormProps>,
   {currentText: string}
 > {
   state = {
@@ -108,7 +101,7 @@ class SearchWithAutoComplete extends React.Component<
       </MenuItem>
     );
     return (
-      <SearchBar
+      <SearchForm
         autocompleteItems={Array.apply(null, Array(this.state.currentText.length))
           .map((_, i) => autocompleteResult(String(i)))
           .splice(0, 5)}
@@ -143,7 +136,7 @@ storiesOf('Labs/Header/React', module)
             />
           }
           leftSlot={
-            <SearchBar
+            <SearchForm
               isCollapsed={boolean('isCollapsed', false)}
               onSubmit={handleSearchSubmitTest}
             />
@@ -170,7 +163,7 @@ storiesOf('Labs/Header/React', module)
           brand={<WorkdayLogoTitle variant={HeaderVariant.Global} />}
           menuToggle={<Avatar onClick={handleMenuClickTest} />}
           leftSlot={
-            <SearchBar
+            <SearchForm
               isCollapsed={boolean('isCollapsed', false)}
               onSubmit={handleSearchSubmitTest}
             />
@@ -190,7 +183,7 @@ storiesOf('Labs/Header/React', module)
       <div css={containerStyle}>
         <GlobalHeader
           leftSlot={
-            <SearchBar
+            <SearchForm
               isCollapsed={boolean('isCollapsed', false)}
               onSubmit={handleSearchSubmitTest}
             />
@@ -216,7 +209,7 @@ storiesOf('Labs/Header/React', module)
         <Header
           title="Required"
           leftSlot={
-            <SearchBar
+            <SearchForm
               isCollapsed={boolean('isCollapsed', false)}
               rightAlign={true}
               autocompleteItems={[<MenuItem>Hello</MenuItem>]}
@@ -231,7 +224,7 @@ storiesOf('Labs/Header/React', module)
           title="Icons Only"
           brandUrl="#"
           leftSlot={
-            <SearchBar
+            <SearchForm
               isCollapsed={boolean('isCollapsed', false)}
               onSubmit={handleSearchSubmitTest}
             />
@@ -255,7 +248,7 @@ storiesOf('Labs/Header/React', module)
           themeColor={Header.Theme.Blue}
           brandUrl="#"
           onMenuClick={handleMenuClickTest}
-          leftSlot={<SearchWithAutoComplete searchTheme={SearchBar.Theme.Dark} />}
+          leftSlot={<SearchWithAutoComplete searchTheme={SearchForm.Theme.Dark} />}
           isCollapsed={boolean('isCollapsed', false)}
           css={[{zIndex: 4}]}
         >
@@ -285,7 +278,7 @@ storiesOf('Labs/Header/React', module)
           }
           brandUrl="#"
           leftSlot={
-            <SearchBar
+            <SearchForm
               isCollapsed={boolean('isCollapsed', false)}
               grow={true}
               onSubmit={handleSearchSubmitTest}
@@ -313,7 +306,7 @@ storiesOf('Labs/Header/React', module)
           centeredNav={true}
           brandUrl="#"
           leftSlot={
-            <SearchBar
+            <SearchForm
               isCollapsed={boolean('isCollapsed', false)}
               grow={true}
               onSubmit={handleSearchSubmitTest}
@@ -361,11 +354,11 @@ storiesOf('Labs/Header/React', module)
           themeColor={Header.Theme.Transparent}
           brandUrl="#"
           leftSlot={
-            <SearchBar
+            <SearchForm
               isCollapsed={boolean('isCollapsed', false)}
               grow={true}
               onSubmit={handleSearchSubmitTest}
-              searchTheme={SearchBar.Theme.Dark}
+              searchTheme={SearchForm.Theme.Dark}
             />
           }
           isCollapsed={boolean('isCollapsed', false)}
@@ -479,47 +472,5 @@ storiesOf('Labs/Header/React', module)
           <PrimaryButton>Logout</PrimaryButton>
         </Header>
       </div>
-    </div>
-  ))
-  .add('Search Form', () => (
-    <div>
-      <div css={{marginLeft: space.xs}}>LTR</div>
-      <div css={{display: 'flex', width: '100%'}}>
-        <div css={{flex: 1, background: colors.frenchVanilla100, padding: '12px'}}>
-          <SearchWithAutoComplete
-            css={{marginLeft: space.zero}}
-            searchTheme={SearchBar.Theme.Light}
-            height={48}
-          />
-        </div>
-        <div css={{flex: 1, background: colors.blueberry400, marginLeft: space.m, padding: '12px'}}>
-          <SearchWithAutoComplete
-            css={{marginLeft: space.zero}}
-            searchTheme={SearchBar.Theme.Dark}
-            height={48}
-          />
-        </div>
-      </div>
-
-      <div css={{marginLeft: space.xs, marginTop: space.xl}}>RTL</div>
-      <CanvasProvider
-        theme={{canvas: {direction: ContentDirection.RTL}}}
-        css={{display: 'flex', width: '100%'}}
-      >
-        <div css={{flex: 1, background: colors.blueberry400, marginLeft: space.m, padding: '12px'}}>
-          <SearchWithAutoComplete
-            css={{marginLeft: space.zero}}
-            searchTheme={SearchBar.Theme.Dark}
-            height={48}
-          />
-        </div>
-        <div css={{flex: 1, background: colors.frenchVanilla100, padding: '12px'}}>
-          <SearchWithAutoComplete
-            css={{marginLeft: space.zero}}
-            searchTheme={SearchBar.Theme.Light}
-            height={48}
-          />
-        </div>
-      </CanvasProvider>
     </div>
   ));

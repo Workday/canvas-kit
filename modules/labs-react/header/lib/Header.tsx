@@ -47,7 +47,7 @@ export interface HeaderProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   onMenuClick?: (e: React.MouseEvent) => void;
   /**
-   * The React element to render in the left slot of the Header. This is typically a SearchBar component.
+   * The React element to render in the left slot of the Header. This is typically a SearchForm component.
    */
   leftSlot?: React.ReactElement;
   /**

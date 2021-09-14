@@ -192,6 +192,7 @@ The Global Header (or App Header) is used for Workday applications.
 ```tsx
 import {Avatar} from '@workday/canvas-kit-react/avatar';
 import {GlobalHeader, DubLogoTitle} from '@workday/canvas-kit-labs-react/header';
+import {SearchForm} from '@workday/canvas-kit-labs-react/search-form';
 import {Avatar} from '@workday/canvas-kit-react/avatar';
 import {IconButton} from '@workday/canvas-kit-react/button';
 import {notificationsIcon, inboxIcon} from '@workday/canvas-system-icons-web';
@@ -213,7 +214,7 @@ const openMenu = e => console.log("Menu opened")
   brand={<HeaderBrand />}
   menuToggle={<HeaderAvatar />}
   onMenuClick={openMenu}
-  leftSlot={<SearchBar
+  leftSlot={<SearchForm
     isCollapsed={false}
     grow={true}
     onSubmit={handleSearchSubmit}
@@ -360,144 +361,3 @@ Default: `HeaderTheme.White`
 > The title displayed on the header next to the logo.
 
 Default `''`
-
-# Search Bar
-
-_Intended to be used in conjunction with the `Header` component_
-
-A component that contains a search bar with autocomplete functionality.
-
-## Usage
-
-```tsx
-import {SearchBar} from '@workday/canvas-kit-labs-react/header';
-import {MenuItem} from '@workday/canvas-kit-labs-react/menu';
-
-const handleInputChange = event => console.log('Adjust menu items here');
-const handleSearchSubmit = event => {
-  const query = (event.target as HTMLFormElement).getElementsByTagName('input')[0].value;
-  console.log('Submitted query: ', query);
-};
-
-<SearchBar
-  autocompleteItems={[<MenuItem>Item 1</MenuItem>]}
-  isCollapsed={false}
-  onInputChange={this.autocompleteCallback}
-  placeholder={`Search with Autocomplete`}
-  grow={true}
-  searchTheme={SearchBar.Theme.Dark}
-  onSubmit={handleSearchSubmit}
-/>;
-```
-
-## Static Properties
-
-> None
-
-## Component Props
-
-### Required
-
-#### `onSubmit: React.FormEventHandler<HTMLFormElement>`
-
-> An function that gets called and passed the current input value when the search form is submitted.
-
-### Optional
-
-#### `isCollapsed: boolean`
-
-> True if the search input should be collapsed into a toggle icon (for responsive).
-
----
-
-#### `onInputChange: React.ChangeEventHandler<HTMLInputElement>`
-
-> Callback to listen when the TextInput changes. This is usually used to update the autocomplete
-> items.
-
----
-
-#### `autocompleteItems: React.ReactElement<MenuItemProps>[]`
-
-> An array of MenuItems to show under the search bar.
-
----
-
-#### `searchTheme?: SearchTheme | SearchThemeAttributes`
-
-> The theme of the header the search input is being rendered in. There are 3 build in themes, but
-> the styles are customizable via SearchThemeAttributes.
-
-| Theme       | Description                                                                                              |
-| ----------- | -------------------------------------------------------------------------------------------------------- |
-| Light       | White background with dark-colored text, blue focus ring.                                                |
-| Dark        | Dark semi transparent background with white text. Inverts on focus.                                      |
-| Transparent | Transparent background (intended for light-colored header) with dark text. Also used in collapsed state. |
-
-Default: `SearchTheme.Light`
-
----
-
-#### `placeholder: string`
-
-> Placeholder for search input.
-
-Default: `'Search'`
-
----
-
-#### `initialValue: string;`
-
-> Initial value to set the input to.
-
----
-
-#### `rightAlign: boolean;`
-
-> False if the search input should grow to left align it. True if it should right align.
-
----
-
-#### `inputLabel: string`
-
-> Screenreader label for text input.
-
-Default: `'Search'`
-
----
-
-#### `submitLabel: string`
-
-> Screenreader label for submit button
-
-Default: `'Search'`
-
----
-
-#### `clearButtonAriaLabel: string`
-
-> Screenreader Label for clear button
-
----
-
-#### `openButtonLabel: string`
-
-> Screenreader Label to open collapsed search bar
-
-Default: `'Open Search'`
-
----
-
-#### `closeButtonLabel: string`
-
-> Screenreader Label to close collapsed search bar
-
-Default: `'Cancel'`
-
----
-
-#### `showClearButton: string`
-
-> Show button to clear input field
-
-Default: `true`
