@@ -1,25 +1,34 @@
 <!-- Thank you for your pull request, please provide a brief summary of what this introduces (mandatory). Please point out any code that may be non-obvious to reviewers by using comments. -->
 
-<!-- Make sure that you've linted your files, written and run unit tests, and filled out or updated documentation (README) -->
-
 ## Summary
 
+Fixes: #1234 <!-- For bug fixes, use "Fixes". For new features use "Resolves". This helps link a PR to an issue and will show up in release notes. -->
+
 <!-- Explain the **motivation** for making this change. What existing problem does the pull request solve? -->
+
+<!-- This is the category in the release notes. Common categories are Components, Infrastructure, and Documentation -->
+### Category
+Components
+
+<!-- If your PR includes breaking changes. It is extremely rare to put breaking changes outside a `prerelease/v*` branch. Remove this section if no breaking changes are present -->
+### BREAKING CHANGES
+
+<!-- If your PR includes special notes that should show up in the changelog, add them here. Otherwise remove this section -->
+### Notes
+
+---
+
+<!-- Make sure that you've linted your files, written and run unit tests, and filled out or updated documentation (README) -->
 
 ## Checklist
 
 <!-- Remove items that do not apply. For completed items, change [ ] to [x]. -->
 
-- [ ] branch has been rebased on the latest master commit
 - [ ] tests are changed or added
-- [ ] `yarn test` passes
-- [ ] all (dev)dependencies that the module needs is added to its `package.json`
-- [ ] code has been documented and, if applicable, usage described in README.md
-- [ ] module has been added to `canvas-kit-react` and/or `canvas-kit-css` universal modules, if
-      applicable
+- [ ] code has been documented
 - [ ] design approved final implementation
 - [ ] a11y approved final implementation
-- [ ] code adheres to the [API & Pattern guidelines](../modules/docs/mdx/API_PATTERN_GUIDELINES.mdx)
+- [ ] code adheres to the [API & Pattern guidelines](https://workday.github.io/canvas-kit/?path=/story/welcome-dev-docs-api-pattern-guidelines--page)
 
 ## Additional References
 
