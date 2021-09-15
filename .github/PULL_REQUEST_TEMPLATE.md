@@ -7,14 +7,14 @@ Fixes: #1234 <!-- For bug fixes, use "Fixes". For new features use "Resolves". T
 <!-- Explain the **motivation** for making this change. What existing problem does the pull request solve? Anything in the Summary section will be attached to the squashed commit when this PR is merged. -->
 
 <!-- This is the category in the release notes. Common categories are Components, Infrastructure, and Documentation -->
-### Category
+### Release Category
 Components
+
+### Release Note
+Optional release note message. Anything in this section will show up a "Notes" section in release notes.
 
 ### BREAKING CHANGES
 Optional breaking changes message. If your PR includes breaking changes. It is extremely rare to put breaking changes outside a `prerelease/v*` branch. Anything in this section will show up in release notes. Remove this section if no breaking changes are present.
-
-### Notes
-Optional notes message. Anything in this section will show up in release notes.
 
 ---
 
