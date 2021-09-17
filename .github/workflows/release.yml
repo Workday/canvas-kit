@@ -1,0 +1,179 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - master
+      - support/v*
+  workflow_dispatch: # Allow manual triggering of this job in case of failures
+
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      ## First, we'll checkout the repository. We don't persist credentials because we need a
+      ## Personal Access Token to push on a branch that is protected. See
+      ## https://github.com/cycjimmy/semantic-release-action#basic-usage
+      - uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+          fetch-depth: 0 # Used for conventional commit ranges
+
+      ## This step installs node and sets up several matchers (regex matching for Github
+      ## Annotations). See
+      ## https://github.com/actions/setup-node/blob/25316bbc1f10ac9d8798711f44914b1cf3c4e954/src/main.ts#L58-L65
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 14.x
+
+      ## The caching steps create a cache key based on the OS and hash of the yarn.lock file. A
+      ## cache hit will copy files from Github cache into the `node_modules` and `.cache/cypress`
+      ## folders. A cache hit will skip the cache steps
+      - name: Cache node modules
+        id: yarn-cache
+        uses: actions/cache@v1
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-modules-hash-${{ hashFiles('yarn.lock') }}
+
+      - name: Cache Cypress
+        id: cypress-cache
+        uses: actions/cache/@v1
+        with:
+          path: .cache/cypress
+          key: ${{ runner.os }}-cypress-cache-version-${{ steps.cypress-version.outputs.version }}
+
+      ## If both `node_modules` and `.cache/cypress` were cache hits, we're going to skip the `yarn
+      ## install` step. This effectively saves up to 3m on a cache hit build.
+      - name: Install Packages
+        if:
+          steps.yarn-cache.outputs.cache-hit != 'true' || steps.cypress-cache.outputs.cache-hit !=
+          'true'
+        run: yarn install --production=false
+        env:
+          CYPRESS_CACHE_FOLDER: .cache/cypress
+
+      ## A `yarn bump` will create a commit and a tag. We need to set up the git user to do this.
+      ## We'll make that user be the github-actions user.
+      - name: Config git user
+        run: |
+          git config --global user.name "${{ github.actor }}"
+          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+
+      ## Capture the previous tag and store it for later use
+      - name: Get previous tag
+        id: previous-tag
+        run: echo "::set-output name=tag::$(node -p 'require("./lerna.json").version')"
+
+      ## `github.ref` is in the form of `refs/head/{name}`. This step extracts `{name}` and saves it
+      ## as an output for later use
+      - name: Extract branch name
+        id: extract-branch
+        run: echo "::set-output name=branch::$(echo ${GITHUB_REF#refs/heads/})"
+
+      ## On the master branch, we'll do a patch bump on every commit. This will create a commit with
+      ## the message found in `lerna.json` and a tag of the version. We've disabled pushing in favor
+      ## of a push action to allow a PAT to bypass branch protections (pushing directly on the
+      ## branch).
+      - name: Lerna Bump
+        run: yarn bump --yes --conventional-commits --no-changelog
+
+      ## Capture the new tag and store it for later use
+      - name: Get new tag
+        id: new-tag
+        run: echo "::set-output name=tag::$(node -p 'require("./lerna.json").version')"
+
+      ## Generate a changeset based on rules of the Canvas Kit repository
+      - name: Generate Changeset
+        uses: Workday/canvas-kit-actions/generate-changeset@v1
+        id: changeset
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fromRef: v${{steps.previous-tag.outputs.tag}}
+          toRef: ${{steps.extract-branch.outputs.branch}}
+          tagName: v${{steps.new-tag.outputs.tag}}
+
+      ## We could have gone the route of a lerna changeset plugin, but we would lose access to
+      ## usernames which add a nice human touch to release notes
+      - name: Update Changelog
+        run: node utils/update-changelog.js
+        env:
+          CHANGESET_TITLE: ${{steps.changeset.outputs.title}}
+          CHANGESET_BODY: |
+            ${{steps.changeset.outputs.body}}
+
+      ## So far, the changes to to the workspace have not been committed. We'll commit them now and
+      ## create a tag
+      - name: Commit and add Tag
+        run: |
+          git add . && git commit -m "chore: Release v${{steps.new-tag.outputs.tag}} [skip ci]" && git tag -a v${{steps.new-tag.outputs.tag}} -m "v${{steps.new-tag.outputs.tag}}"
+
+      ## Build for packaging
+      - name: Build
+        run: yarn build
+
+      ## Publish to npm. Must be run after a build
+      - name: Publish
+        run: npm config set //registry.npmjs.org/:_authToken=${{secrets.NPM_CI_PUBLISH_TOKEN}} && yarn lerna publish from-package --yes
+
+      ## Build Storybook and extract component stories for Storybook aggregation. This will be used
+      ## for Chromatic rebaselining and publishing to GH Pages
+      - name: Build Storybook
+        run: |
+          yarn build-storybook --quiet
+          npx sb extract docs docs/stories.json
+
+      ## Push both the commit and tag created by Lerna's version command using a PAT
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.ADMIN_GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
+          tags: true
+
+      ## Create a release on Github. This will trigger an internal Slack message
+      - name: Create Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{steps.new-tag.outputs.tag}}
+          release_name: v${{steps.new-tag.outputs.tag}}
+          body: |
+            ${{steps.changeset.outputs.body}}
+          draft: false
+          prerelease: false
+
+      ## Create a Chromatic baseline auto-accepting changes. Chromatic changes are already accepted
+      ## in PRs, so we don't need to manually approve them here again. This new baseline will be
+      ## used for future PRs. New PRs may show extra Chromatic changes until the "Update Branch"
+      ## button is used in PRs which will pull this new baseline.
+      - name: Update Chromatic Baseline
+        uses: chromaui/action@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          projectToken: ${{ secrets.CHROMATIC_APP_CODE }}
+          storybookBuildDir: docs
+          exitOnceUploaded: true
+          exitZeroOnChanges: true
+          autoAcceptChanges: true
+
+      ## The master branch is used for static Storybook documentation in the `gh-pages` branch.
+      - name: Publish Storybook
+        if: steps.extract-branch.outputs.branch == 'master'
+        uses: JamesIves/github-pages-deploy-action@4.1.5
+        with:
+          branch: gh-pages
+          folder: docs
+
+      ## Notify Slack of any failures
+      - name: Report failures
+        if: ${{ failure() }}
+        run: node utils/report-failure.js
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          TRAVIS_BRANCH: ${{ steps.extract-branch.outputs.branch }}
+          TRAVIS_TEST_RESULT: ${{ job.status }}
+          TRAVIS_BUILD_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
