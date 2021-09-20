@@ -111,7 +111,15 @@ jobs:
         run: |
           git add . && git commit -m "chore: Release v${{steps.new-tag.outputs.tag}} [skip ci]" && git tag -a v${{steps.new-tag.outputs.tag}} -m "v${{steps.new-tag.outputs.tag}}"
 
-      ## Build for packaging
+      ## Build Storybook and extract component stories for Storybook aggregation. This will be used
+      ## for Chromatic rebaselining and publishing to GH Pages. Should be before `yarn build` since
+      ## built assets mess up this command
+      - name: Build Storybook
+        run: |
+          yarn build-storybook --quiet
+          npx sb extract docs docs/stories.json
+
+      ## Build for packaging.
       - name: Build
         run: yarn build
 
@@ -120,13 +128,6 @@ jobs:
         run: yarn lerna publish from-package --yes
         env:
           NODE_AUTH_TOKEN: '${{secrets.NPM_CI_PUBLISH_TOKEN}}'
-
-      ## Build Storybook and extract component stories for Storybook aggregation. This will be used
-      ## for Chromatic rebaselining and publishing to GH Pages
-      - name: Build Storybook
-        run: |
-          yarn build-storybook --quiet
-          npx sb extract docs docs/stories.json
 
       ## Push both the commit and tag created by Lerna's version command using a PAT
       - name: Push changes
