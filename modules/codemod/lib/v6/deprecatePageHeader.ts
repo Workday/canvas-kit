@@ -86,7 +86,6 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
     .forEach(nodePath => {
       const identifier = nodePath.value.typeName as Identifier;
       identifier.name = 'DeprecatedPageHeaderProps';
-      // return nodePath;
     });
 
   // Transform PageHeaderProps type interface declaration references
