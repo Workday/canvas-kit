@@ -116,7 +116,7 @@ jobs:
 
       ## Publish to npm. Must be run after a build
       - name: Publish
-        run: npm config set //registry.npmjs.org/:_authToken=${{secrets.NPM_CI_PUBLISH_TOKEN}} && yarn lerna publish from-package --yes
+        run: npm config set //registry.npmjs.org/:_authToken=${{secrets.NPM_CI_PUBLISH_TOKEN}} && npm whoami && yarn lerna publish from-package --yes
 
       ## Build Storybook and extract component stories for Storybook aggregation. This will be used
       ## for Chromatic rebaselining and publishing to GH Pages
