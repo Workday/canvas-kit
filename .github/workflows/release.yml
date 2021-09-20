@@ -117,7 +117,7 @@ jobs:
 
       ## Publish to npm. Must be run after a build
       - name: Publish
-        run: npm whoami && yarn lerna publish from-package --yes
+        run: yarn lerna publish from-package --yes
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_CI_PUBLISH_TOKEN}}
 
