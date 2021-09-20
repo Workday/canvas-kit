@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v5.2.1](https://github.com/Workday/canvas-kit/releases/tag/v5.2.1) (2021-09-20)
+
+### Components
+
+- fix(tooltip): Fix OverflowTooltip with SVG in IE11 ([#1263](https://github.com/Workday/canvas-kit/pull/1263)) ([@NicholasBoll](https://github.com/NicholasBoll))
+- chore: Update pull request template ([#1268](https://github.com/Workday/canvas-kit/pull/1268)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+### Infrastructure
+
+- ci: Add prefix to forward-merge job ([@NicholasBoll](https://github.com/NicholasBoll))
+- ci: Update forward merge script ([@NicholasBoll](https://github.com/NicholasBoll))
+- ci: Add automation to releases ([#1272](https://github.com/Workday/canvas-kit/pull/1272)) ([@NicholasBoll](https://github.com/NicholasBoll))
+  This commit changes the interaction of contributors to Canvas Kit. All patches will be automatically released. In order to accomplish this, a new pull request link job is run to make sure that all features target a prerelease branch. For example, if you create a new pull request that adds a feature and the current version of Canvas Kit is `v5.2.0`, the target branch should be `prerelease/v5.3` instead of `master`. Don't worry, the pull request lint job will prevent mistakes. Also the Canvas Kit team can help by changing the base branch of your pull requests.
+- ci: Add npm debug information ([@NicholasBoll](https://github.com/NicholasBoll))
+- ci: Fix npm publish for release ([@NicholasBoll](https://github.com/NicholasBoll))
+- ci: Fix npm token ([@NicholasBoll](https://github.com/NicholasBoll))
+- ci: Fix npm publish ([@NicholasBoll](https://github.com/NicholasBoll))
+- ci: Fix build process ([@NicholasBoll](https://github.com/NicholasBoll))
+- ci: Fix push GH token ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## v5.2.0 (2021-09-08)
 
 ### Components
