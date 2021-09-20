@@ -27,6 +27,7 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: 14.x
+          registry-url: 'https://registry.npmjs.org'
 
       ## The caching steps create a cache key based on the OS and hash of the yarn.lock file. A
       ## cache hit will copy files from Github cache into the `node_modules` and `.cache/cypress`
@@ -116,7 +117,9 @@ jobs:
 
       ## Publish to npm. Must be run after a build
       - name: Publish
-        run: npm config set //registry.npmjs.org/:_authToken=${{secrets.NPM_CI_PUBLISH_TOKEN}} && npm whoami && yarn lerna publish from-package --yes
+        run: npm whoami && yarn lerna publish from-package --yes
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_CI_PUBLISH_TOKEN}}
 
       ## Build Storybook and extract component stories for Storybook aggregation. This will be used
       ## for Chromatic rebaselining and publishing to GH Pages
