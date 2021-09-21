@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v5.2.2](https://github.com/Workday/canvas-kit/releases/tag/v5.2.2) (2021-09-21)
+
+### Components
+
+- Fix: Fix PR template to include correct category shield ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v5.2.1](https://github.com/Workday/canvas-kit/releases/tag/v5.2.1) (2021-09-20)
 
 ### Components
