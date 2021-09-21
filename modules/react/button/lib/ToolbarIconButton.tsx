@@ -39,6 +39,7 @@ export const ToolbarIconButton = createComponent('button')({
       theme = useTheme(),
       onToggleChange,
       icon,
+      shouldMirrorIcon = false,
       toggled,
       children,
       ...elemProps
@@ -70,7 +71,7 @@ export const ToolbarIconButton = createComponent('button')({
         aria-pressed={toggled}
         {...elemProps}
       >
-        {icon ? <SystemIcon icon={icon} /> : children}
+        {icon ? <SystemIcon icon={icon} shouldMirror={shouldMirrorIcon} /> : children}
       </ButtonContainer>
     );
   },

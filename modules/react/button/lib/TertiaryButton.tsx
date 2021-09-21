@@ -35,6 +35,11 @@ export interface TertiaryButtonProps extends Themeable {
   /**
    * The capitalization of the text in the button.
    */
+  /**
+   * If set to `true`, transform the icon's x-axis to mirror the graphic
+   * @default false
+   */
+  shouldMirrorIcon?: boolean;
   allCaps?: boolean;
   children?: React.ReactNode;
 }
@@ -143,6 +148,7 @@ export const TertiaryButton = createComponent('button')({
       variant,
       children,
       icon,
+      shouldMirrorIcon = false,
       allCaps,
       ...elemProps
     }: TertiaryButtonProps,
@@ -173,11 +179,21 @@ export const TertiaryButton = createComponent('button')({
         {...elemProps}
       >
         {icon && iconPosition === 'left' && (
-          <ButtonLabelIcon size={size} iconPosition={iconPosition} icon={icon} />
+          <ButtonLabelIcon
+            size={size}
+            iconPosition={iconPosition}
+            icon={icon}
+            shouldMirrorIcon={shouldMirrorIcon}
+          />
         )}
         <ButtonLabel className="wdc-text-button-label">{children}</ButtonLabel>
         {icon && iconPosition === 'right' && (
-          <ButtonLabelIcon size={size} iconPosition={iconPosition} icon={icon} />
+          <ButtonLabelIcon
+            size={size}
+            iconPosition={iconPosition}
+            icon={icon}
+            shouldMirrorIcon={shouldMirrorIcon}
+          />
         )}
       </ButtonContainer>
     );

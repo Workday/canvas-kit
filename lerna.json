@@ -2,13 +2,14 @@
   "packages": [
     "modules/**"
   ],
-  "version": "5.1.0",
+  "version": "5.2.1",
   "npmClient": "yarn",
   "useWorkspaces": true,
   "command": {
     "version": {
       "gitTagVersion": false,
       "push": false,
+      "message": "chore: Release %s [skip ci]",
       "forcePublish": "*"
     },
     "publish": {

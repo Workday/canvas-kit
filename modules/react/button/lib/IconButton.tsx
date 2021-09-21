@@ -44,6 +44,11 @@ export interface IconButtonProps extends Themeable {
    */
   icon?: CanvasSystemIcon;
   /**
+   * If set to `true`, transform the icon's x-axis to mirror the graphic
+   * @default false
+   */
+  shouldMirrorIcon?: boolean;
+  /**
    * The function called when the IconButton toggled state changes.
    */
   onToggleChange?: (toggled: boolean | undefined) => void;
@@ -62,6 +67,7 @@ export const IconButton = createComponent('button')({
       size = 'medium',
       onToggleChange,
       icon,
+      shouldMirrorIcon = false,
       toggled,
       children,
       ...elemProps
@@ -108,7 +114,7 @@ export const IconButton = createComponent('button')({
         aria-pressed={toggled}
         {...elemProps}
       >
-        {icon ? <SystemIcon icon={icon} /> : children}
+        {icon ? <SystemIcon icon={icon} shouldMirror={shouldMirrorIcon} /> : children}
       </ButtonContainer>
     );
   },

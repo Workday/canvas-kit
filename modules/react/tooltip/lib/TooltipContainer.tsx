@@ -49,6 +49,7 @@ export const TooltipContainer = styled('div')<TooltipContainerProps>(
   {
     ...type.levels.subtext.medium,
     display: 'inline-flex',
+    position: 'relative',
     padding: spaceNumbers.xxs + spaceNumbers.xxxs,
     color: colors.frenchVanilla100,
     a: {
@@ -67,6 +68,28 @@ export const TooltipContainer = styled('div')<TooltipContainerProps>(
       left: 0,
       right: 0,
       bottom: 0,
+    },
+
+    // offset tooltips by 2 pixels when a keyboard focus ring is detected
+    '[data-whatinput=keyboard] &': {
+      padding: spaceNumbers.xxs + spaceNumbers.xxxs + 2,
+      ':before': {
+        margin: spaceNumbers.xxxs + 2,
+      },
+    },
+
+    // Fix offsets based on placement
+    '[data-popper-placement="top-start"] &, [data-popper-placement="bottom-start"] &': {
+      left: -spaceNumbers.xxxs,
+    },
+    '[data-popper-placement="top-end"] &, [data-popper-placement="bottom-end"] &': {
+      right: -spaceNumbers.xxxs,
+    },
+    '[data-popper-placement="left-start"] &, [data-popper-placement="right-start"] &': {
+      top: -spaceNumbers.xxxs,
+    },
+    '[data-popper-placement="left-end"] &, [data-popper-placement="right-end"] &': {
+      bottom: -spaceNumbers.xxxs,
     },
   },
   ({transformOrigin = defaultTransformOrigin}) => {
