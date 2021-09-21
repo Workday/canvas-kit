@@ -34,8 +34,6 @@ These examples are designed to provide copy-and-paste snippets to help you get u
 quickly without much explanation. Further detail on individual component props, behavior, and
 accessibility can be found in the [Components](#components) section.
 
----
-
 ### Basic Usage
 
 Below are examples we expect will work for most use cases. Please refer to the
@@ -48,8 +46,6 @@ In this example, the component uses step controls (`Pagination.StepToPreviousBut
 
 <ExampleCodeBlock code={StepControls} />
 
----
-
 #### Jump Controls
 
 This example adds jump controls (`Pagination.JumpToFirstButton` and `Pagination.JumpToLastButton`)
@@ -57,16 +53,12 @@ that allow you to skip to the first and last items in the range.
 
 <ExampleCodeBlock code={JumpControls} />
 
----
-
 #### GoTo Form
 
 This example adds a form (`Pagination.GoToForm`) that allows you to skip to a specific page within
 the range.
 
 <ExampleCodeBlock code={GoToForm} />
-
----
 
 #### Additional Details
 
@@ -85,23 +77,17 @@ you'd like to keep the `AdditionalDetails` component on multiple, you will need 
 
 <ExampleCodeBlock code={ShowAdditionalDetails} />
 
----
-
 #### RTL (Right-to-Left)
 
 This example shows how the component supports right-to-left languages.
 
 <ExampleCodeBlock code={RTL} />
 
----
-
 #### Custom Range
 
 This example uses a custom range that allows you to control the width of the component.
 
 <ExampleCodeBlock code={CustomRange} />
-
----
 
 ### Advanced Usage
 
@@ -196,8 +182,6 @@ This component also supports
 The `aria-label` prop is required for accessibility. We recommend using `"Pagination"` as seen in
 the example.
 
----
-
 ### Pagination.Controls
 
 `Pagination.Controls` is a styled `div` wrapper that provides proper alignment and spacing between
@@ -213,8 +197,6 @@ elements inside `Pagination`. It does not handle any internal business logic or 
 
 This component supports
 [all native HTMLDivElement props](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div#Attributes).
-
----
 
 ### Pagination.JumpToFirstButton
 
@@ -235,8 +217,6 @@ allows it to know when to disable and set `currentPage` to the first page.
 
 This component also supports all `IconButton` props.
 
----
-
 ### Pagination.StepToPreviousButton
 
 `Pagination.StepToPreviousButton` is an `IconButton` that subscribes to `Pagination`'s context. This
@@ -255,8 +235,6 @@ allows it to know when to disable and decrement the `currentPage`.
 | aria-label | `string` | ✅ `true` | n/a     | "Previous" (and translated equivalent) |
 
 This component also supports all `IconButton` props.
-
----
 
 ### Pagination.StepToNextButton
 
@@ -277,8 +255,6 @@ allows it to know when to disable and increment the `currentPage`.
 
 This component also supports all `IconButton` props.
 
----
-
 ### Pagination.JumpToLastButton
 
 `Pagination.JumpToLastButton` is an `IconButton` that subscribes to `Pagination`'s context. This
@@ -297,8 +273,6 @@ allows it to know when to disable and set `currentPage` to the last page.
 | aria-label | `string` | ✅ `true` | n/a     | "Last" (and translated equivalent) |
 
 This component also supports all `IconButton` props.
-
----
 
 ### Pagination.PageList
 
@@ -334,8 +308,6 @@ The functional children snippet below will likely be the most common use case.
 This component also supports
 [all native HTMLOLElement props](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ol#Attributes).
 
----
-
 ### Pagination.PageListItem
 
 `Pagination.PageListItem` is a styled `li` element. It provides a child semantic element for the
@@ -352,8 +324,6 @@ logic or state.
 
 This component also supports
 [all native HTMLLIElement props](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/li#Attributes).
-
----
 
 ### Pagination.PageButton
 
@@ -377,8 +347,6 @@ to know set the `toggled` styling when it is the current item and update the `cu
 
 This component also supports all `IconButton` props.
 
----
-
 ### Pagination.GoToForm
 
 `Pagination.GoToForm` is a wrapper for a React context provider and `form` element. Child components
@@ -396,8 +364,6 @@ the form state and behavior as well as update the `currentPage` in the `Paginati
 This component supports
 [all native HTMLFormElement props](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form#Attributes).
 
----
-
 ### Pagination.GoToTextInput
 
 #### Usage
@@ -414,8 +380,6 @@ This component supports
 | value      | `string` \| `number` | 🚫 `false` | ""      | n/a                                             |
 
 This component also supports all `TextInput` props.
-
----
 
 ### Pagination.GoToLabel
 
@@ -446,8 +410,6 @@ Use this pattern when you need access to the state in the `Pagination` context f
 
 This component also supports
 [all native HTMLLabelElement props](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label#Attributes).
-
----
 
 ### Pagination.AdditionalDetails
 
@@ -562,8 +524,6 @@ number provided is below the first page (e.g: `0`), `currentPage` will be set to
 Similarly, if the number provided is larger than the `lastPage`, it will set `currentPage` to the
 `lastPage`._
 
----
-
 ### usePaginationModel Hook
 
 The `Pagination` model can be created with the `usePaginationModel` hook. Normally `Pagination` will
@@ -621,8 +581,6 @@ and `events` outside of the component. You could have an external button trigger
 the state, or have another component use the model's state. See the
 [Advanced Usage](#advanced-usage) section for more detailed information.
 
----
-
 ### getLastPage
 
 This function takes the number of results per page and the total count of results and returns the
@@ -636,8 +594,6 @@ const totalCount = 128;
 const lastPage = getLastPage(resultCount, totalCount); //=> 13
 ```
 
----
-
 ### getRangeMin
 
 This function takes the pagination range and returns its minimum value. Here's an example:
@@ -649,8 +605,6 @@ const range = [1, 2, 3, 4, 5];
 const rangeMin = getRangeMin(range); //=> 1
 ```
 
----
-
 ### getRangeMax
 
 This function takes the pagination range and returns its maximum value. Here's an example:
@@ -661,8 +615,6 @@ Given the pagination range is 1-5, the function will return 5.
 const range = [1, 2, 3, 4, 5];
 const rangeMin = getRangeMax(range); //=> 5
 ```
-
----
 
 ### getVisibleResultsMin
 
@@ -676,8 +628,6 @@ const currentPage = 5;
 const resultCount = 10;
 const pageMin = getVisibleResultsMin(currentPage, resultCount); //=> 41
 ```
-
----
 
 ### getVisibleResultsMax
 
@@ -693,8 +643,6 @@ const resultCount = 10;
 const totalCount = 42;
 const pageMax = getVisibleResultsMax(currentPage, resultCount, totalCount); //=> 42
 ```
-
----
 
 ### PaginationContext
 
