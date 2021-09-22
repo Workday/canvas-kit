@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v5.2.3](https://github.com/Workday/canvas-kit/releases/tag/v5.2.3) (2021-09-22)
+
+### Components
+
+- fix: Update import of static states when creating labs component ([#1266](https://github.com/Workday/canvas-kit/pull/1266)) ([@mannycarrera4](https://github.com/mannycarrera4))
+
+
 ## [v5.2.2](https://github.com/Workday/canvas-kit/releases/tag/v5.2.2) (2021-09-21)
 
 ### Components
