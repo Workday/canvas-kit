@@ -24,10 +24,10 @@ jobs:
       ## This step installs node and sets up several matchers (regex matching for Github
       ## Annotations). See
       ## https://github.com/actions/setup-node/blob/25316bbc1f10ac9d8798711f44914b1cf3c4e954/src/main.ts#L58-L65
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v2.4.0
         with:
           node-version: 14.x
-          registry-url: 'https://registry.npmjs.org'
+          registry-url: https://registry.npmjs.org
 
       ## The caching steps create a cache key based on the OS and hash of the yarn.lock file. A
       ## cache hit will copy files from Github cache into the `node_modules` and `.cache/cypress`
@@ -111,28 +111,29 @@ jobs:
         run: |
           git add . && git commit -m "chore: Release v${{steps.new-tag.outputs.tag}} [skip ci]" && git tag -a v${{steps.new-tag.outputs.tag}} -m "v${{steps.new-tag.outputs.tag}}"
 
-      ## Build for packaging
-      - name: Build
-        run: yarn build
-
-      ## Publish to npm. Must be run after a build
-      - name: Publish
-        run: yarn lerna publish from-package --yes
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_CI_PUBLISH_TOKEN}}
-
       ## Build Storybook and extract component stories for Storybook aggregation. This will be used
-      ## for Chromatic rebaselining and publishing to GH Pages
+      ## for Chromatic rebaselining and publishing to GH Pages. Should be before `yarn build` since
+      ## built assets mess up this command
       - name: Build Storybook
         run: |
           yarn build-storybook --quiet
           npx sb extract docs docs/stories.json
 
+      ## Build for packaging.
+      - name: Build
+        run: yarn build
+
+      # ## Publish to npm. Must be run after a build
+      - name: Publish
+        run: yarn lerna publish from-package --yes
+        env:
+          NODE_AUTH_TOKEN: '${{secrets.NPM_CI_PUBLISH_TOKEN}}'
+
       ## Push both the commit and tag created by Lerna's version command using a PAT
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
-          github_token: ${{ secrets.ADMIN_GITHUB_TOKEN }}
+          github_token: ${{ secrets.GH_RW_TOKEN }}
           branch: ${{ github.ref }}
           tags: true
 
