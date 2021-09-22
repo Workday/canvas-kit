@@ -2,10 +2,10 @@ name: Enable Automerge
 
 on:
   pull_request_target:
-    types: [ edited, labeled ]
+    types: [ edited, labeled, synchronize ]
 
 jobs:
-  main:
+  enable-automerge:
     if: contains(github.event.pull_request.labels.*.name, 'automerge')
     runs-on: ubuntu-latest
 
