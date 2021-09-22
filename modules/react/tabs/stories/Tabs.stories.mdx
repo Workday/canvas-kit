@@ -40,6 +40,20 @@ yarn add @workday/canvas-kit-react
 
 <ExampleCodeBlock code={Basic} />
 
+### Hoisted Model
+
+By default, the `Tabs` component will create and use its own model. Alternatively, you may create
+and configure a `TabsModel` yourself and pass it in using the `model` prop. "Hoisting" the model
+like so allows direct access to its state and events outside of the `Tabs` component. Create the
+model using the `useTabsModel` hook and configure it with the same configuration props that `Tabs`
+receives. Note that if you pass in a configured model, configuration props passed to the `Tabs`
+component will be ignored.
+
+In this example, we set up external observation of the model state and create an external button to
+trigger an event to change the active tab.
+
+<ExampleCodeBlock code={HoistedModel} />
+
 ### Named Keys
 
 `Tabs.Item` and `Tabs.Panel` both take an optional `name` attribute that is used for the
@@ -67,20 +81,6 @@ focusable element, you may disable this default behavior by setting the `tabInde
 `Tabs.Panel` to `undefined`. This example has a tab panel with a focusable button.
 
 <ExampleCodeBlock code={AlternativeTabStop} />
-
-### Hoisted Model
-
-By default, the `Tabs` component will create and use its own model. Alternatively, you may create
-and configure a `TabsModel` yourself and pass it in using the `model` prop. "Hoisting" the model
-like so allows access to its state and events outside of the `Tabs` component family. Create the
-model using the `useTabsModel` hook and configure it with the same configuration props that `Tabs`
-receives. Note that if you pass in a configured model, configuration props passed to the `Tabs`
-component will be ignored.
-
-In this example, we set up external observation of the model state and create an external button to
-trigger an event to change the active tab.
-
-<ExampleCodeBlock code={HoistedModel} />
 
 ### Single Tab Panel
 
