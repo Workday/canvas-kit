@@ -9,6 +9,11 @@ import {SinglePanel} from './examples/SinglePanel';
 import {AlternativeTabStop} from './examples/AlternativeTabStop';
 import {HoistedModel} from './examples/HoistedModel';
 import {DynamicTabs} from './examples/DynamicTabs';
+import {
+  TabsModelConfigComponent,
+  TabsStateComponent,
+  TabsEventsComponent,
+} from './TabsModel.splitprops.tsx';
 
 <Meta title="Components/Containers/Tabs/React" component={Tabs} />
 
@@ -175,6 +180,72 @@ component.
 #### Props
 
 <PropsTable of={Tabs.Panel} />
+
+## Hooks
+
+### useTabsModel
+
+#### Usage
+
+Creates a `TabsModel` using the provided configuration object.
+
+Use `useTabsModel` if you wish to create a `TabsModel` rather than relying on the `Tabs` component
+to create and use its own model internally. Doing so allows you to access the model's state and
+events directly.
+
+```tsx
+const model = useTabsModel({
+  onActivate({data, prevState}) {
+    console.log('Activated Tab', data, prevState);
+  },
+});
+
+return (
+  <>
+    <Tabs model={model}>
+      <Tabs.List>
+        <Tabs.Item name="first">First Tab</Tabs.Item>
+        <Tabs.Item name="second">Second Tab</Tabs.Item>
+        <Tabs.Item name="third">Third Tab</Tabs.Item>
+      </Tabs.List>
+      <div>
+        <Tabs.Panel name="first">Contents of First Tab</Tabs.Panel>
+        <Tabs.Panel name="second">Contents of Second Tab</Tabs.Panel>
+        <Tabs.Panel name="third">Contents of Third Tab</Tabs.Panel>
+      </div>
+    </Tabs>
+    <SecondaryButton
+      onClick={() => {
+        model.events.activate({tab: 'third'});
+      }}
+    >
+      Activate Third Tab
+    </SecondaryButton>
+  </>
+);
+```
+
+#### Parameters
+
+`useTabsModel` accepts a configuration object with the following properties.
+
+<ArgsTable of={TabsModelConfigComponent} />
+
+#### Return Value
+
+`useTabsModel` returns a `TabsModel` with `state` and `events` properties.
+
+##### State
+
+`state` is an object with the following properties.
+
+<ArgsTable of={TabsStateComponent} />
+
+##### Events
+
+`events` is an object with the following properties.
+
+<ArgsTable of={TabsEventsComponent} />
 
 ## Specifications
 
