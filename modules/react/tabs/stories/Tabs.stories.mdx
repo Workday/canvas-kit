@@ -30,14 +30,16 @@ yarn add @workday/canvas-kit-react
 
 ### Basic Example
 
-In this example, a few tab items and tab panels are set up without any named keys.
+`Tabs` includes a container `Tabs` component and the following subcomponents: `Tabs.List`,
+`Tabs.Item` and `Tabs.Panel`.
 
 <ExampleCodeBlock code={Basic} />
 
 ### Named Keys
 
 `Tabs.Item` and `Tabs.Panel` both take an optional `name` attribute that is used for the
-`onActivate` callback. This example is the same, but with named keys for the tabs and panels.
+`onActivate` callback. This example is identical to the Basic Example, but with named keys for the
+`Tabs.Item` and `Tabs.Panel` subcomponents.
 
 <ExampleCodeBlock code={NamedKeys} />
 
@@ -49,37 +51,40 @@ In this example, a few tab items and tab panels are set up without any named key
 
 ### Disabled Tab
 
-A `Tab.Item` can be disabled by passing `disabled={true}`.
+Set the `disabled` prop of a `Tabs.Item` to `true` to disable it.
 
 <ExampleCodeBlock code={DisabledTab} />
 
 ### Alternative Tab Stop
 
 By default, tab panels are focusable for accessibility. If the contents of a tab panel have a
-focusable element, you may disable this default behavior by setting `tabIndex` to `undefined`. This
-example has a tab panel with a focusable button in the tab panel.
+focusable element, you may disable this default behavior by setting the `tabIndex` prop of
+`Tabs.Panel` to `undefined`. This example has a tab panel with a focusable button.
 
 <ExampleCodeBlock code={AlternativeTabStop} />
 
 ### Hoisted Model
 
-The `Tabs` component takes in an optional `model` property. If not defined, it will create and use
-its own. Hoisting the model allows access to state and events outside the `Tabs` component family.
-You can create a `TabsModel` using the `useTabsModel` hook and configure the model with the same
-configuration that the `Tabs` component receives. If you pass in a configured model, configuration
-properties passed to the `Tabs` component will be ignored.
+By default, the `Tabs` component will create and use its own model. Alternatively, you may create
+and configure a `TabsModel` yourself and pass it in using the `model` prop. "Hoisting" the model
+like so allows access to its state and events outside of the `Tabs` component family. Create the
+model using the `useTabsModel` hook and configure it with the same configuration props that `Tabs`
+receives. Note that if you pass in a configured model, configuration props passed to the `Tabs`
+component will be ignored.
 
-In this example, we'll set up external observation of the `TabsModel` state and set up an external
-button to trigger an event to change the currently active tab.
+In this example, we set up external observation of the model state and create an external button to
+trigger an event to change the active tab.
 
 <ExampleCodeBlock code={HoistedModel} />
 
 ### Single Tab Panel
 
-The compound component patterns allows advanced composition. For example, the tabs can be composed
-to have only a single tab panel using attribute overrides and callbacks. More info about attributes
-and callbacks are in property tables below for each subcomponent. In this example, we'll use a
-Hoisted model and the `activeTab` property of the state to show content of our `contents` object.
+The compound component pattern allows for advanced composition. For example, `Tabs` can be composed
+to have only a single `Tabs.Panel` using attribute overrides and callbacks. More information about
+attributes and callbacks can be found in the prop tables below for each subcomponent.
+
+In this example, we use a hoisted model and the `activeTab` property of the state to show content
+from the `contents` object.
 
 <ExampleCodeBlock code={SinglePanel} />
 
@@ -98,23 +103,21 @@ the end.
 
 #### Usage
 
-The `Tabs` component is the container component that is responsible for creating a `TabsModel` that
-is shared using React context. It does not represent a real element.
+`Tabs` is a container component that is responsible for creating a `TabsModel` and sharing it with
+its children using React context. It does not represent a real element.
 
 ```tsx
 // configuration
-<Tabs onActivate={({ data }) => console.log('Activate tab', data.tab)}>
-  {/* sub components go here */ }
-</Tabs>
+<Tabs onActivate={({data}) => console.log('Activate tab', data.tab)}>
+  {/* subcomponents go here */}
+</Tabs>;
 
 // OR
 
-// model
-const model = useTabsModel(config)
+// hoisted model
+const model = useTabsModel(config);
 
-<Tabs model={model}>
-  {/* sub components go here */ }
-</Tabs>
+<Tabs model={model}>{/* subcomponents go here */}</Tabs>;
 ```
 
 #### Props
@@ -125,14 +128,16 @@ const model = useTabsModel(config)
 
 #### Usage
 
-`Tabs.List` is a `div` element with a `role=tablist`. It is a container for `Tabs.Item` components.
-Any additional attributes provided will be forwared to the dom element.
+`Tabs.List` is a `div` element with a `role=tablist`. It is a container for `Tabs.Item`
+subcomponents.
 
 ```tsx
 <Tabs.List>{/* Tabs.Items go here */}</Tabs.List>
 ```
 
 #### Props
+
+Undocumented props are spread to the underlying `div` element.
 
 <PropsTable of={Tabs.List} />
 
@@ -142,13 +147,15 @@ Any additional attributes provided will be forwared to the dom element.
 
 `Tabs.Item` is a `button` element with a `role=tab`. Each `Tabs.Item` is associated with a
 `Tabs.Panel` either by a `name` attribute or by the position in the list. If a `name` is provided,
-it must match the name passed to the `Tabs.Panel` component.
+it must match the name passed to the corresponding `Tabs.Panel` component.
 
 ```tsx
 <Tabs.Item name="first">First Tab</Tabs.Item>
 ```
 
 #### Props
+
+Undocumented props are spread to the underlying `button` element.
 
 <PropsTable of={Tabs.Item} />
 
@@ -158,7 +165,8 @@ it must match the name passed to the `Tabs.Panel` component.
 
 `Tabs.Panel` is a `div` element with a `role=tabpanel`. It is focusable by default. Each
 `Tabs.Panel` is controlled by a `Tabs.Item` either by a `name` attribute or by the position in the
-list. If a `name` is provided, it must match the name passed to the `Tabs.Item` component.
+list. If a `name` is provided, it must match the name passed to the corresponding `Tabs.Item`
+component.
 
 ```tsx
 <Tabs.Panel name="first">{/* contents of the tab panel */}</Tabs.Panel>
