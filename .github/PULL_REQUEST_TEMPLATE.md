@@ -7,7 +7,7 @@ Fixes: #1234 <!-- For bug fixes, use "Fixes". For new features use "Resolves". T
 <!-- Explain the **motivation** for making this change. What existing problem does the pull request solve? Anything in the Summary section will be attached to the squashed commit when this PR is merged. -->
 
 <!-- This is the category in the release notes. Common categories are Components, Infrastructure, and Documentation -->
-![category](https://img.shields.io/badge/category-Components-blue)
+![category](https://img.shields.io/badge/release_category-Components-blue)
 
 ### Release Note
 Optional release note message. Changelog and release summaries will contain a pull request title. This section will add additional notes under that title. This section is not a summary, but something extra to point out in release notes. An example might be calling out breaking changes in a labs component or minor visual changes that need visual regression updates. Remove this section if no additional release notes are required.
