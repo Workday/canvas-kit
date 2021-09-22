@@ -1,4 +1,4 @@
-name: Add new issues into Backlog project
+name: New Issue
 
 on:
   issues:
