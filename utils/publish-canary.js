@@ -14,10 +14,11 @@ const {
   BUILD_URL = 'https://github.com/Workday/canvas-kit/actions',
 } = process.env;
 
+console.log('GITHUB_REF', GITHUB_REF);
 const branch = GITHUB_REF.replace('refs/heads/', '');
 
-const isPreMajor = branch.match(/^prerelease\/v\d+$/g);
-const isPreMinor = branch.match(/^prerelease\/v\d+\.x$/g);
+const isPreMajor = branch.match(/^prerelease\/major$/g);
+const isPreMinor = branch.match(/^prerelease\/minor$/g);
 const data = {};
 
 let distTag;
