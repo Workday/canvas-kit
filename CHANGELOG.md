@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v5.2.4](https://github.com/Workday/canvas-kit/releases/tag/v5.2.4) (2021-09-23)
+
+### Components
+
+- docs(tabs): Update Tabs MDX to adhere to standardized template [skip ci] ([#1279](https://github.com/Workday/canvas-kit/pull/1279)) ([@jamesfan](https://github.com/jamesfan))
+
+### Infrastructure
+
+- ci: Add automerge job [skip ci] ([@NicholasBoll](https://github.com/NicholasBoll))
+- ci: Update GA job names to help with branch checks [skip ci] ([@NicholasBoll](https://github.com/NicholasBoll))
+- ci: Add prerelease canary builds ([@NicholasBoll](https://github.com/NicholasBoll))
+  This change updates branch names for automated release management. Branch renames are as follows:
+  
+  - `support/v4.x` -> `support`
+  - `prerelease/v5.3` -> `prerelease/minor`
+  - `prerelease/v6` -> `prerelease/major`
+  
+  We renamed the `support` branch which could conflict with local refs. You may need to run the following if you've contributed to Canvas Kit in the past:
+  ```
+  git remote prune upstream
+  ```
+  Change `upstream` to whichever remote `Workday/canvas-kit` belongs to
+
+
 ## [v5.2.3](https://github.com/Workday/canvas-kit/releases/tag/v5.2.3) (2021-09-22)
 
 ### Components
