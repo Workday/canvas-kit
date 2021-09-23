@@ -13,7 +13,7 @@ Fixes: #1234 <!-- For bug fixes, use "Fixes". For new features use "Resolves". T
 Optional release note message. Changelog and release summaries will contain a pull request title. This section will add additional notes under that title. This section is not a summary, but something extra to point out in release notes. An example might be calling out breaking changes in a labs component or minor visual changes that need visual regression updates. Remove this section if no additional release notes are required.
 
 ### BREAKING CHANGES
-Optional breaking changes message. If your PR includes breaking changes. It is extremely rare to put breaking changes outside a `prerelease/v*` branch. Anything in this section will show up in release notes. Remove this section if no breaking changes are present.
+Optional breaking changes message. If your PR includes breaking changes. It is extremely rare to put breaking changes outside a `prerelease/major` branch. Anything in this section will show up in release notes. Remove this section if no breaking changes are present.
 
 ---
 
