@@ -14,6 +14,7 @@ const {
   BUILD_URL = 'https://github.com/Workday/canvas-kit/actions',
 } = process.env;
 
+console.log('GITHUB_REF', GITHUB_REF);
 const branch = GITHUB_REF.replace('refs/heads/', '');
 
 const isPreMajor = branch.match(/^prerelease\/major$/g);
