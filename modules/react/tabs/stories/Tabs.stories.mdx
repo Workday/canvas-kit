@@ -110,21 +110,19 @@ the end.
 its children using React context. It does not represent a real element.
 
 ```tsx
-// configuration
-<Tabs onActivate={({data}) => console.log('Activated tab', data.tab)}>
-  {/* subcomponents go here */}
-</Tabs>;
+// Configuration
+<Tabs onActivate={({data}) => console.log('Activated tab', data.tab)}>{/* Subcomponents */}</Tabs>;
 
 // OR
 
-// hoisted model
+// Hoisted model
 const model = useTabsModel({
   onActivate({data}) {
     console.log('Activated Tab', data.tab);
   },
 });
 
-<Tabs model={model}>{/* subcomponents go here */}</Tabs>;
+<Tabs model={model}>{/* Subcomponents */}</Tabs>;
 ```
 
 #### Props
@@ -142,7 +140,7 @@ Note that if you pass in a `model` configured with `useTabsModel`, configuration
 subcomponents.
 
 ```tsx
-<Tabs.List>{/* Tabs.Items go here */}</Tabs.List>
+<Tabs.List>{/* Tabs.Items */}</Tabs.List>
 ```
 
 #### Props
@@ -179,7 +177,7 @@ list. If a `name` is provided, it must match the name passed to the correspondin
 component.
 
 ```tsx
-<Tabs.Panel name="first">{/* contents of the tab panel */}</Tabs.Panel>
+<Tabs.Panel name="first">{/* Contents of the tab panel */}</Tabs.Panel>
 ```
 
 #### Props
