@@ -2,34 +2,34 @@
 // @ts-check
 'use strict';
 
+// process.env.GITHUB_REF = 'refs/heads/prerelease/v5.3';
+
 const request = require('request');
-const semver = require('semver');
 const {promisify} = require('util');
 const exec = promisify(require('child_process').exec);
 
 const {
   SLACK_WEBHOOK,
-  TRAVIS_BRANCH,
-  TRAVIS_BUILD_URL = 'https://travis-ci.org/Workday/canvas-kit/branches',
+  GITHUB_REF,
+  BUILD_URL = 'https://github.com/Workday/canvas-kit/actions',
 } = process.env;
 
-const isPrerelease = TRAVIS_BRANCH.match(/^prerelease\/v\d*$/g);
-const isSupport = TRAVIS_BRANCH.match(/^support\/v\d*$/g);
+const branch = GITHUB_REF.replace('refs/heads/', '');
+
+const isPreMajor = branch.match(/^prerelease\/v\d+$/g);
+const isPreMinor = branch.match(/^prerelease\/v\d+\.x$/g);
 const data = {};
 
 let distTag;
 let preid;
+let bump;
 
-if (TRAVIS_BRANCH === 'master') {
-  distTag = 'next';
-} else if (isPrerelease) {
+if (isPreMajor) {
   distTag = 'prerelease-next';
-  // console.error('Prerelease canary builds disabled.');
-  // process.exit(0);
-} else if (isSupport) {
-  distTag = 'support-next';
+} else if (isPreMinor) {
+  distTag = 'next';
 } else {
-  console.error('No travis branch provided');
+  console.error('No branch provided');
   process.exit(1);
 }
 
@@ -41,7 +41,7 @@ const slackAnnouncement = attachment => {
         attachments: [
           {
             ...attachment,
-            author_link: TRAVIS_BUILD_URL,
+            author_link: BUILD_URL,
             ts: Date.now(),
           },
         ],
@@ -70,15 +70,43 @@ exec('git diff --name-only HEAD HEAD^')
     return exec(`git describe --abbrev=0`);
   })
   .then(({stdout}) => {
-    const nextReleaseVersion = semver.inc(stdout, 'prerelease', 'beta'); // eg. 4.0.0-beta.3 > 4.0.0-beta.4
-    const nextReleasePreid = nextReleaseVersion.split('-')[1];
-
-    if (isPrerelease && !nextReleasePreid) {
-      console.error('Failed to calculate prerelease canary version. Exiting');
-      process.exit(1);
+    // The last tag will either be a standard version or a prerelease.
+    // A standard version looks like `5.2.3`
+    // A prerelease version looks like `6.0.0-rc.0`
+    // If the last tag is a standard version, we want to use `preminor` or `premajor`
+    // If the last tag was a prerelease version, we want to use `prerelease`
+    // Example for an `isPreMinor`
+    // `v5.2.3` -> (preid:'next') -> `v5.3.0-next.0`
+    // Examples for `isPreMajor`
+    // `v5.2.3` -> (preid:'beta') -> `v6.0.0-alpha.0-next.0`
+    // The following example is a pre major that already had a release in the changelog:
+    // `v6.0.0-rc.0` -> (preid:'next') -> `v6.0.0-rc.1-next.0`
+    const [version, buildId] = stdout.trim().split('-');
+    if (buildId) {
+      // The last tag is a prerelease. The `preid` should include the build portion of the version
+      // number with `-next` at the end. The `bump` amount should be a `prerelease` This branch will
+      // handle the following cases:
+      // `v6.0.0-rc.0` -> `v6.0.0-rc.0-next.n` where the final `n` is number of commits since the `rc.0` tag
+      // `v5.3.0-rc.0` -> `v5.3.0-rc.0-next.n` although prerelease minor versions like this are rare
+      preid = `${buildId}-next`;
+      bump = 'prerelease';
+    } else {
+      // The last tag was a standard release. There is no build portion of the version string. This
+      // branch will handle the following cases:
+      // branch `release/v5.x`
+      // `v5.2.3` -> `v5.3.0-next.n`
+      // branch `release/v6`
+      // `v5.2.3` -> `v6.0.0-beta.n`
+      if (isPreMajor) {
+        // for pre major releases, we'll assume we're going to start with an alpha prerelease
+        preid = 'alpha.0-next';
+        bump = 'premajor';
+      } else {
+        // we'll use `next` for pre minors
+        preid = 'next';
+        bump = 'preminor';
+      }
     }
-
-    preid = isPrerelease ? `${nextReleasePreid}-next` : 'next';
 
     const lernaFlags = [
       `--yes`,
@@ -86,7 +114,7 @@ exec('git diff --name-only HEAD HEAD^')
       `--canary`,
       `--preid ${preid}`,
       `--dist-tag ${distTag}`,
-      isPrerelease ? 'major' : '',
+      bump,
     ];
 
     return exec(`yarn lerna publish ${lernaFlags.join(' ')}`);

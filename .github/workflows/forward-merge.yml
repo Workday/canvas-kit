@@ -2,8 +2,9 @@ name: 'forward-merge'
 on:
   push:
     branches: # List all "from" branches - all branches that should be forward merged
-      - support/*
+      - support
       - master
+      - prerelease/minor
   # Allow manual triggering: This requires you to choose a `ref`. This should be the branch with changes
   workflow_dispatch:
 
@@ -14,5 +15,5 @@ jobs:
       - uses: NicholasBoll/action-forward-merge-pr@v1.1.0
         with:
           token: ${{secrets.GITHUB_TOKEN}}
-          branches: support/v4.x+master,master+prerelease/v6
+          branches: support+master,master+prerelease/minor,prerelease/minor+prerelease/major
           prefix: 'chore: '
