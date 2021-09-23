@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-css-menu",
-  "version": "5.2.4",
+  "version": "5.2.5",
   "description": "Menu CSS for Canvas kit CSS",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -16,7 +16,7 @@
     "url": "http://github.com/Workday/canvas-kit/tree/master/modules/menu/css"
   },
   "dependencies": {
-    "@workday/canvas-kit-css-core": "^5.2.4"
+    "@workday/canvas-kit-css-core": "^5.2.5"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
