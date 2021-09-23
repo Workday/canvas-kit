@@ -2,9 +2,11 @@
 import React from 'react';
 import withReadme from 'storybook-readme/with-readme';
 
-import {Toast, useToastModel} from '@workday/canvas-kit-labs-react/toast';
+import {Toast} from '@workday/canvas-kit-labs-react/toast';
 import {checkIcon} from '@workday/canvas-system-icons-web';
 import {colors} from '@workday/canvas-kit-react/tokens';
+
+import {action} from '@storybook/addon-actions';
 
 import README from '../README.md';
 
@@ -15,14 +17,12 @@ export default {
 };
 
 export const Default = () => {
-  const model = useToastModel({
-    onClose: () => console.log('on close...'),
-  });
-
-  const actionClick = () => console.log('action clicked...');
+  const onClose = () => action('on close clicked');
+  const actionClick = () => action('action clicked');
 
   return (
-    <Toast model={model}>
+    <Toast>
+      <Toast.Close onClose={onClose} />
       <Toast.Content>
         <Toast.Icon icon={checkIcon} iconColor={colors.greenApple400} />
         <Toast.Message>
