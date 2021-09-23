@@ -123,7 +123,7 @@ exec('git diff --name-only HEAD HEAD^')
   .then(({stdout}) => {
     console.log(stdout);
 
-    const regex = new RegExp(`@workday\\/[a-z-]*@(\\d*.\\d*.\\d*-${preid}.\\d*\\+\\w*)`, 'g');
+    const regex = new RegExp(`@workday\\/[a-z-]*@(\\d*.\\d*.\\d*-${preid}.\\d*)`, 'g');
     data.packages = stdout.match(regex);
     data.version = regex.exec(data.packages[0])[1];
 

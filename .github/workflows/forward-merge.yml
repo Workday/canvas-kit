@@ -14,6 +14,6 @@ jobs:
     steps:
       - uses: NicholasBoll/action-forward-merge-pr@v1.1.0
         with:
-          token: ${{secrets.GITHUB_TOKEN}}
+          token: ${{secrets.GH_RW_TOKEN}} # use PAT to force GH Actions to run the PR verify. The regular token will not
           branches: support+master,master+prerelease/minor,prerelease/minor+prerelease/major
           prefix: 'chore: '
