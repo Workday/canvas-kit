@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v5.2.5](https://github.com/Workday/canvas-kit/releases/tag/v5.2.5) (2021-09-23)
+
+### Infrastructure
+
+- ci: Fix canary publish job ([@NicholasBoll](https://github.com/NicholasBoll))
+- ci: Fix canary publish message ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v5.2.4](https://github.com/Workday/canvas-kit/releases/tag/v5.2.4) (2021-09-23)
 
 ### Components
