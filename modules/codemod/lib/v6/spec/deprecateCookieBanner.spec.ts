@@ -8,7 +8,7 @@ describe('Canvas Kit Deprecate CookieBanner Codemod', () => {
   context('when transforming CookieBanner imports', () => {
     it('should ignore non-canvas-kit imports', () => {
       const input = `import {CookieBanner} from '@workday/some-other-library'`;
-      const expected = `import {CookieBanner} from '@workday/some-other-library'`;
+      const expected = input;
 
       expectTransform(input, expected);
     });
