@@ -3,6 +3,38 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v5.2.5](https://github.com/Workday/canvas-kit/releases/tag/v5.2.5) (2021-09-23)
+
+### Infrastructure
+
+- ci: Fix canary publish job ([@NicholasBoll](https://github.com/NicholasBoll))
+- ci: Fix canary publish message ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v5.2.4](https://github.com/Workday/canvas-kit/releases/tag/v5.2.4) (2021-09-23)
+
+### Components
+
+- docs(tabs): Update Tabs MDX to adhere to standardized template [skip ci] ([#1279](https://github.com/Workday/canvas-kit/pull/1279)) ([@jamesfan](https://github.com/jamesfan))
+
+### Infrastructure
+
+- ci: Add automerge job [skip ci] ([@NicholasBoll](https://github.com/NicholasBoll))
+- ci: Update GA job names to help with branch checks [skip ci] ([@NicholasBoll](https://github.com/NicholasBoll))
+- ci: Add prerelease canary builds ([@NicholasBoll](https://github.com/NicholasBoll))
+  This change updates branch names for automated release management. Branch renames are as follows:
+  
+  - `support/v4.x` -> `support`
+  - `prerelease/v5.3` -> `prerelease/minor`
+  - `prerelease/v6` -> `prerelease/major`
+  
+  We renamed the `support` branch which could conflict with local refs. You may need to run the following if you've contributed to Canvas Kit in the past:
+  ```
+  git remote prune upstream
+  ```
+  Change `upstream` to whichever remote `Workday/canvas-kit` belongs to
+
+
 ## [v5.2.3](https://github.com/Workday/canvas-kit/releases/tag/v5.2.3) (2021-09-22)
 
 ### Components
@@ -29,7 +61,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - ci: Add prefix to forward-merge job ([@NicholasBoll](https://github.com/NicholasBoll))
 - ci: Update forward merge script ([@NicholasBoll](https://github.com/NicholasBoll))
 - ci: Add automation to releases ([#1272](https://github.com/Workday/canvas-kit/pull/1272)) ([@NicholasBoll](https://github.com/NicholasBoll))
-  This commit changes the interaction of contributors to Canvas Kit. All patches will be automatically released. In order to accomplish this, a new pull request link job is run to make sure that all features target a prerelease branch. For example, if you create a new pull request that adds a feature and the current version of Canvas Kit is `v5.2.0`, the target branch should be `prerelease/v5.3` instead of `master`. Don't worry, the pull request lint job will prevent mistakes. Also the Canvas Kit team can help by changing the base branch of your pull requests.
+  This commit changes the interaction of contributors to Canvas Kit. All patches will be automatically released. In order to accomplish this, a new pull request link job is run to make sure that all features target a prerelease branch. For example, if you create a new pull request that adds a feature and the current version of Canvas Kit is `v5.2.0`, the target branch should be `prerelease/minor` instead of `master`. Don't worry, the pull request lint job will prevent mistakes. Also the Canvas Kit team can help by changing the base branch of your pull requests.
 - ci: Add npm debug information ([@NicholasBoll](https://github.com/NicholasBoll))
 - ci: Fix npm publish for release ([@NicholasBoll](https://github.com/NicholasBoll))
 - ci: Fix npm token ([@NicholasBoll](https://github.com/NicholasBoll))

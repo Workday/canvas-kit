@@ -4,8 +4,15 @@ on:
   push:
     branches:
       - master
-      - support/v*
+      - support
   workflow_dispatch: # Allow manual triggering of this job in case of failures
+    inputs:
+      preid:
+        description: 'The prerelease id you wish for the manual release. Examples are "alpha", "beta", and "rc"'
+        required: false
+      distTag:
+        description: 'The npm tag this release should be published to. Examples are "prerelease"'
+        required: true
 
 
 jobs:
@@ -123,9 +130,9 @@ jobs:
       - name: Build
         run: yarn build
 
-      # ## Publish to npm. Must be run after a build
+      ## Publish to npm. Must be run after a build
       - name: Publish
-        run: yarn lerna publish from-package --yes
+        run: yarn lerna publish from-package --yes --dist-tag latest
         env:
           NODE_AUTH_TOKEN: '${{secrets.NPM_CI_PUBLISH_TOKEN}}'
 

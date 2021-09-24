@@ -5,7 +5,7 @@ describe('Tabs', () => {
     h.stories.visit();
   });
 
-  ['Simple', 'Named Keys'].forEach(story => {
+  ['Basic', 'Named Keys'].forEach(story => {
     context(`given the [Components/Containers/Tabs/React, ${story}] story is rendered`, () => {
       beforeEach(() => {
         h.stories.load('Components/Containers/Tabs/React', story);
