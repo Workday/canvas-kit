@@ -9,11 +9,20 @@ part of the community. Before you contribute, please take a moment and look thro
 sections:
 
 - [Code of Conduct](#code-of-conduct)
-- [Contributor License Agreement](#contributor-license-agreement)
-- [Contributing Guidelines](#contributing-guidelines)
-  - [How to Contribute](#how-to-contribute)
+- [How to Contribute](#how-to-contribute)
+  - [Communicate on Issues](#communicate-on-issues)
   - [Git Guidelines](#git-guidelines)
-- [Getting Started](#getting-started)
+    - [Branches](#branches)
+    - [Commit Message Format](#commit-message-format)
+    - [Commit Descriptions](#commit-descriptions)
+    - [Pull Requests](#pull-requests)
+  - [Developer Experience](#developer-experience)
+    - [Yarn and Workspaces](#yarn-and-workspaces)
+    - [Storybook](#storybook)
+    - [Testing](#testing)
+    - [Automation on Commit](#automation-on-commit)
+    - [Releases](#releases)
+- [Getting Started Developing](#getting-started-developing)
   - [Creating a Module](#creating-a-module)
   - [Exporting a Module](#exporting-a-module)
   - [Building Modules](#building-modules)
@@ -21,70 +30,40 @@ sections:
   - [Code Style Guide](#code-style-guide)
   - [Canvas Kit Labs & Preview](#canvas-kit-labs-preview)
   - [Editors](#editors)
+- [Contributor License Agreement](#contributor-license-agreement)
 
 ## Code of Conduct
 
 At Workday, we are committed to a culture of integrity, innovation, and fun. That culture extends to
 the community that we are building here through Canvas. By participating in it, you are expected to
-uphold this [code of conduct](https://github.com/Workday/canvas-kit/tree/master/CODE_OF_CONDUCT.md)
-and agree to our CLA.
+uphold this [code of conduct](./CODE_OF_CONDUCT.md) and agree to our
+[Contributor License Agreement](#contributor-license-agreement).
 
-## Contributor License Agreement
-
-Each Contributor (“You”) represents that such You are legally entitled to submit any Contributions
-in accordance with these terms and by posting a Contribution, you represent that each of Your
-Contribution is Your original creation.
-
-You are not expected to provide support for Your Contributions, except to the extent You desire to
-provide support. You may provide support for free, for a fee, or not at all. Unless required by
-applicable law or agreed to in writing, You provide Your Contributions on an "AS IS" BASIS, WITHOUT
-WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied, including, without limitation, any
-warranties or conditions of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A PARTICULAR
-PURPOSE.
-
-## Contributing Guidelines
-
-### How to Contribute
+## How to Contribute
 
 **Don't hesitate to contribute!** Canvas Kit thrives on open discussion and contribution by anyone
-in the Workday community. Contribution doesn't have to be code-based. Anyone can suggest changes to
-things such as documentation, processes, and use cases.
+in the Workday community. Contribution doesn't have to be code-based. Anyone can suggest changes
+things like documentation, processes, and use cases.
 
 If you are contributing code, please take a look at the following sections to familiarize yourself
 with how the Canvas Kit repo is organized and run. This will help streamline the pull request
 process. If you have any questions, please reach out!
 
-If your contribution is visual or UI-based, please ensure you consult with a designer so the
-contribution can be evaluated as an end-to-end process.
+### Communicate on Issues
 
-#### Automation on Commit
-
-Upon commit, [lint-staged](https://github.com/okonet/lint-staged) will run your staged code through
-[Prettier](https://prettier.io) and [eslint](https://eslint.org).
-
-#### Storybook
-
-Canvas Kit uses [Storybook](https://storybook.js.org/) for the component development environment.
-
-#### Yarn and Workspaces
-
-Canvas Kit uses Yarn for package management and takes advantage of its support for
-[Workspaces](https://yarnpkg.com/lang/en/docs/workspaces/) to connect all of its different modules
-within a single repository.
-
-#### Testing
-
-Canvas Kit uses [Jest](https://jestjs.io/) and
-[React Testing Library](https://testing-library.com/docs/react-testing-library/intro) to unit test
-our React components. For more information about our testing strategy and how we write unit tests,
-visit our [Testing Readme](/getting-started/for-developers/resources/testing/)
-
-Canvas Kit uses [Cypress](https://cypress.io) for UI tests. For info on why we chose Cypress, visit
-[Why Cypress?](https://github.com/Workday/canvas-kit/tree/master/cypress/WHY_CYPRESS.md) For more
-information about how to write Cypress tests, visit
-[Writing Cypress Tests](https://github.com/Workday/canvas-kit/tree/master/cypress/README.md)
+- Create or identify [an issue](https://github.com/Workday/canvas-kit/issues) to work on
+- New contributors are recommended to start with a
+  [good first issue](https://github.com/Workday/canvas-kit/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22)
+- Ask our team if the issue is relevant or has attention from other developers
+- Communicate if you'd like to work on the issue
+- Ask questions! You have our support and you will always need more information than what is in the
+  issue.
 
 ### Git Guidelines
+
+All development should happen on a personal fork (including maintainers). Fork the
+[repo](https://github.com/Workday/canvas-kit) to your personal account, and create a feature branch
+for each contribution.
 
 #### Branches
 
@@ -131,18 +110,47 @@ fix: Add missing static class variable to IconButton and Avatar
 
 #### Pull Requests
 
-- All development should happen on a personal fork (including maintainers). This allows us to keep
-  the project tree clean and easy to follow, while ensuring everyone has the same developer
-  experience.
-- Project maintainers are able to push commits to fork PRs, but other contributors will need to open
-  PRs to the personal fork to collaborate with others on a feature.
+- We support creating a Draft Pull Request as soon as you have figured out a working implementation.
+- Please open a pull request from a feature branch on your fork against the master branch on the
+  main repository
 - When a pull request passes all checks and reviews, a core maintainer merges via Squash and Merge
   with a link back to the PR.
 - The branch will automatically be deleted on merge, but its commits and the branch reference are
   still available via the PR.
+- Project maintainers are able to push commits to fork PRs, but other contributors will need to open
+  PRs to the personal fork to collaborate with others on a feature.
 - If you have questions about the above policies, please ask :)
 
-#### Releases
+## Developer Experience
+
+### Yarn and Workspaces
+
+Canvas Kit utilizes Yarn for package management and takes advantage of its support for
+[Workspaces](https://yarnpkg.com/lang/en/docs/workspaces/) to connect all of its different modules
+within a single repository.
+
+### Storybook
+
+Canvas Kit utilizes [Storybook](https://storybook.js.org/) for the component development
+environment.
+
+### Testing
+
+Canvas Kit uses [Jest](https://jestjs.io/) and
+[React Testing Library](https://testing-library.com/docs/react-testing-library/intro) to unit test
+our React components. For more information about our testing strategy and how we write unit tests,
+visit our [Testing Readme](./TESTING.mdx)
+
+Canvas Kit uses [Cypress](https://cypress.io) for UI tests. For info on why we chose Cypress, visit
+[Why Cypress?](./cypress/WHY_CYPRESS.md) For more information about how to write Cypress tests,
+visit [Writing Cypress Tests](./cypress/README.md)
+
+### Automation on Commit
+
+Upon commit, [lint-staged](https://github.com/okonet/lint-staged) will run your staged code through
+[Prettier](https://prettier.io) and [eslint](https://eslint.org).
+
+### Releases
 
 - Releases are prepared by updating package versions with `lerna version`, and updating the
   [changelog](./CHANGELOG.md)
@@ -152,7 +160,7 @@ fix: Add missing static class variable to IconButton and Avatar
 - The GitHub release automatically tags master with the new version, and deploys the new version to
   NPM.
 
-## Getting Started
+## Getting Started Developing
 
 1.  Clone the repository and run `yarn`
 2.  Run `yarn start` to start [Storybook](https://storybook.js.org/)
@@ -169,10 +177,9 @@ fix: Add missing static class variable to IconButton and Avatar
 7.  Begin editing your new React component in `modules/react/<MODULE_NAME>/index.ts`.
 
 If creating a React module, a new compound component will be created. To find out more about
-Compound Components, refer to
-[Compound Components](/getting-started/for-developers/resources/compound-components/). To find out
-more about creating Compound Components, refer to
-[Creating Compound Components](/getting-started/for-developers/resources/creating-compound-components/).
+Compound Components, refer to [Compound Components](./COMPOUND_COMPONENTS.mdx). To find out more
+about creating Compound Components, refer to
+[Creating Compound Components](./CREATING_COMPOUND_COMPONENTS.mdx).
 
 ### Exporting a Module
 
@@ -191,12 +198,11 @@ needed for development.
 
 **`yarn test`**
 
-This will start the unit tests.
+This will start the unit tests and run code coverage.
 
 ### Code Style Guide
 
-Refer to the
-[API & Pattern Guidelines](/getting-started/for-developers/resources/api-pattern-guidelines/).
+Refer to the [API & Pattern Guidelines](./API_PATTERN_GUIDELINES.mdx).
 
 Rules are enforced using [ESLint](https://eslint.org) and code formatting is provided through
 [Prettier](https://prettier.io).
@@ -211,20 +217,19 @@ Code formatting will occur automatically before `git commit` for files staged us
 While we iterate on a new component's API, functionality and accessibility, sometimes we want to
 make it available to consumers ASAP. If we introduced the component normally, this could result in
 many breaking changes to our codebase. To avoid this, we have introduced
-[Canvas Kit Labs](https://github.com/Workday/canvas-kit/tree/master/modules/labs-react) as a place
-to incubate components. If there is a lot of debate/discussion/flux happening in your PR and the
-component is needed right away, it may be moved to this location so it can be made available while
-we iterate on it. Visit the link above for more info.
+[Canvas Kit Labs](../../modules/labs-react) as a place to incubate components. If there is a lot of
+debate/discussion/flux happening in your PR and the component is needed right away, it may be moved
+to this location so it can be made available while we iterate on it. Visit the link above for more
+info.
 
-[Canvas Kit Preview](https://github.com/Workday/canvas-kit/tree/master/modules/preview-react) is for
-components that have had a full design and a11y review, and are approved for use in product. The
-API's and/or underlying architecture could still be subject to change, but not without strong
-communication and migration strategies. Essentially, Canvas Kit Labs is for alpha components and
-Canvas Kit Preview is for beta components.
+[Canvas Kit Preview](../../preview-react) is for components that have had a full design and a11y
+review, and are approved for use in product. The API's and/or underlying architecture could still be
+subject to change, but not without strong communication and migration strategies. Essentially,
+Canvas Kit Labs is for alpha components and Canvas Kit Preview is for beta components.
 
 ### Editors
 
-VSCode is our preferred IDE. Install the Prettier and ESLint plugins for quicker and easier
+Install the Prettier and ESLint plugins for your respective editors for quicker and easier
 formatting.
 
 #### Visual Studio Code
@@ -235,3 +240,32 @@ Install [prettier-vscode](https://github.com/prettier/prettier-vscode) and
 Consider adding the following options:
 
 - [Format on save](https://github.com/prettier/prettier-vscode#format-on-save)
+
+#### Atom
+
+Install [prettier-atom](https://github.com/prettier/prettier-atom) and
+[linter-eslint](https://atom.io/packages/linter-eslint)
+
+#### Emacs
+
+Install [prettier-emacs](https://github.com/prettier/prettier-emacs) and
+[Flycheck](http://www.flycheck.org/)
+
+#### Other Editors
+
+Check [Prettier](https://prettier.io/docs/en/editors.html) and
+[ESLint](https://eslint.org/docs/user-guide/integrations) documentation for additional editor
+plugins.
+
+## Contributor License Agreement
+
+Each Contributor (“You”) represents that such You are legally entitled to submit any Contributions
+in accordance with these terms and by posting a Contribution, you represent that each of Your
+Contribution is Your original creation.
+
+You are not expected to provide support for Your Contributions, except to the extent You desire to
+provide support. You may provide support for free, for a fee, or not at all. Unless required by
+applicable law or agreed to in writing, You provide Your Contributions on an "AS IS" BASIS, WITHOUT
+WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied, including, without limitation, any
+warranties or conditions of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A PARTICULAR
+PURPOSE.
