@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-css-card",
-  "version": "5.2.5",
+  "version": "5.2.6",
   "description": "Card CSS for canvas-kit-css",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -16,7 +16,7 @@
     "url": "http://github.com/Workday/canvas-kit/tree/master/modules/card/css"
   },
   "dependencies": {
-    "@workday/canvas-kit-css-core": "^5.2.5"
+    "@workday/canvas-kit-css-core": "^5.2.6"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
