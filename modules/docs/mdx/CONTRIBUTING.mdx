@@ -182,9 +182,10 @@ Upon commit, [lint-staged](https://github.com/okonet/lint-staged) will run your 
 7.  Begin editing your new React component in `modules/react/<MODULE_NAME>/index.ts`.
 
 If creating a React module, a new compound component will be created. To find out more about
-Compound Components, refer to [Compound Components](./COMPOUND_COMPONENTS.mdx). To find out more
-about creating Compound Components, refer to
-[Creating Compound Components](./CREATING_COMPOUND_COMPONENTS.mdx).
+Compound Components, refer to
+[Compound Components](/getting-started/for-developers/resources/compound-components/). To find out
+more about creating Compound Components, refer to
+[Creating Compound Components](/getting-started/for-developers/resources/creating-compound-components/).
 
 ### Exporting a Module
 
@@ -203,11 +204,12 @@ needed for development.
 
 **`yarn test`**
 
-This will start the unit tests and run code coverage.
+This will start the unit tests.
 
 ### Code Style Guide
 
-Refer to the [API & Pattern Guidelines](./API_PATTERN_GUIDELINES.mdx).
+Refer to the
+[API & Pattern Guidelines](/getting-started/for-developers/resources/api-pattern-guidelines/).
 
 Rules are enforced using [ESLint](https://eslint.org) and code formatting is provided through
 [Prettier](https://prettier.io).
@@ -222,20 +224,21 @@ Code formatting will occur automatically before `git commit` for files staged us
 While we iterate on a new component's API, functionality and accessibility, sometimes we want to
 make it available to consumers ASAP. If we introduced the component normally, this could result in
 many breaking changes to our codebase. To avoid this, we have introduced
-[Canvas Kit Labs](../../modules/labs-react) as a place to incubate components. If there is a lot of
-debate/discussion/flux happening in your PR and the component is needed right away, it may be moved
-to this location so it can be made available while we iterate on it. Visit the link above for more
-info.
+[Canvas Kit Labs](https://github.com/Workday/canvas-kit/tree/master/modules/labs-react) as a place
+to incubate components. If there is a lot of debate/discussion/flux happening in your PR and the
+component is needed right away, it may be moved to this location so it can be made available while
+we iterate on it. Visit the link above for more info.
 
-[Canvas Kit Preview](../../preview-react) is for components that have had a full design and a11y
-review, and are approved for use in product. The API's and/or underlying architecture could still be
-subject to change, but not without strong communication and migration strategies. Essentially,
-Canvas Kit Labs is for alpha components and Canvas Kit Preview is for beta components.
+[Canvas Kit Preview](https://github.com/Workday/canvas-kit/tree/master/modules/preview-react) is for
+components that have had a full design and a11y review, and are approved for use in product. The
+API's and/or underlying architecture could still be subject to change, but not without strong
+communication and migration strategies. Essentially, Canvas Kit Labs is for alpha components and
+Canvas Kit Preview is for beta components.
 
 ### Editors
 
-Install the Prettier and ESLint plugins for your respective editors for quicker and easier
-formatting.
+Visual Studio Code is our preferred IDE. Install the Prettier and ESLint plugins for quicker and
+easier formatting.
 
 #### Visual Studio Code
 
@@ -245,22 +248,6 @@ Install [prettier-vscode](https://github.com/prettier/prettier-vscode) and
 Consider adding the following options:
 
 - [Format on save](https://github.com/prettier/prettier-vscode#format-on-save)
-
-#### Atom
-
-Install [prettier-atom](https://github.com/prettier/prettier-atom) and
-[linter-eslint](https://atom.io/packages/linter-eslint)
-
-#### Emacs
-
-Install [prettier-emacs](https://github.com/prettier/prettier-emacs) and
-[Flycheck](http://www.flycheck.org/)
-
-#### Other Editors
-
-Check [Prettier](https://prettier.io/docs/en/editors.html) and
-[ESLint](https://eslint.org/docs/user-guide/integrations) documentation for additional editor
-plugins.
 
 ## Contributor License Agreement
 
