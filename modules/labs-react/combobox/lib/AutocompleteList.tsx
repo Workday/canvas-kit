@@ -8,8 +8,9 @@ import uuid from 'uuid/v4';
 
 const Autocomplete = styled('ul')({
   margin: 0,
-  maxHeight: 184,
-  overflowY: 'scroll',
+  maxHeight: 200,
+  boxSizing: 'border-box',
+  overflowY: 'auto',
   padding: `${space.xxs} 0`,
 });
 
