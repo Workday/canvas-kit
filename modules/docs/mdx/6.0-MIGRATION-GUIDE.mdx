@@ -10,6 +10,7 @@ any questions about the update.
 
 - [Codemod](#codemod)
 - [Component Deprecations](#component-deprecations)
+  - [CookieBanner](#cookie-banner)
   - [PageHeader](#page-header)
 
 ## Codemod
@@ -58,6 +59,58 @@ warning.
 A hard-deprecated component or package is no longer available. You will need to follow the method
 prescribed in our migration guide to update your application. Please reach out to our team directly
 if you need additional help.
+
+### Cookie Banner
+
+We are [soft deprecating](#soft-deprecation) `CookieBanner`. It has been renamed to
+`DeprecatedCookieBanner`. Similarly, `CookieBannerProps` has been renamed to
+`DeprecatedCookieBannerProps`. You may continue to use this component exactly as you did in v5, but
+note that we plan to [hard-deprecate](#hard-deprecation) it in Canvas Kit v7.
+
+🤖 The codemod will rename `CookieBanner` and `CookieBannerProps` to their deprecated names:
+
+```tsx
+// v5
+import CookieBanner, {CookieBannerProps} from '@workday/canvas-kit-react/cookie-banner';
+
+export const CustomCookieBanner = (props: CookieBannerProps) => {
+  return <CookieBanner notice={CookieBanner.DefaultNotice} {...props} />;
+};
+
+// v6
+import DeprecatedCookieBanner, {
+  DeprecatedCookieBannerProps,
+} from '@workday/canvas-kit-react/cookie-banner';
+
+export const CustomCookieBanner = (props: DeprecatedCookieBannerProps) => {
+  return <DeprecatedCookieBanner notice={DeprecatedCookieBanner.DefaultNotice} {...props} />;
+};
+```
+
+```tsx
+// v5
+import {CookieBanner, CookieBannerProps} from '@workday/canvas-kit-react';
+
+interface CustomCookieBannerProps extends CookieBannerProps {
+  // custom page header props
+}
+
+export const CustomCookieBanner = (props: CustomCookieBannerProps) => {
+  return <CookieBanner notice={CookieBanner.DefaultNotice} {...props} />;
+};
+
+// v6
+import {DeprecatedCookieBanner, DeprecatedCookieBannerProps} from '@workday/canvas-kit-react';
+
+interface CustomCookieBannerProps extends DeprecatedCookieBannerProps {
+  // custom page header props
+}
+
+export const CustomCookieBanner = (props: CustomCookieBannerProps) => {
+  return <DeprecatedCookieBanner notice={DeprecatedCookieBanner.DefaultNotice} {...props} />;
+};
+```
+
 
 ### Page Header
 
