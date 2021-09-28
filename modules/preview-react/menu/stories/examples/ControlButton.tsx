@@ -55,11 +55,11 @@ export const ControlButton = () => {
       >
         Open Menu
       </Popup.Target>
-      <Popup.Popper>
+      <Popup.Popper placement="bottom-start">
         <Menu id={menuId} isOpen={isOpen} onClose={handleMenuClose}>
-          <MenuItem>First Item</MenuItem>
-          <MenuItem>Second Item</MenuItem>
-          <MenuItem>Third Item</MenuItem>
+          <MenuItem>First Menu Item</MenuItem>
+          <MenuItem>Second Menu Item</MenuItem>
+          <MenuItem>Third Menu Item</MenuItem>
         </Menu>
       </Popup.Popper>
     </Popup>
