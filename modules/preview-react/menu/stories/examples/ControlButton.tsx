@@ -5,8 +5,6 @@ import {
   Popup,
   usePopupModel,
   useAlwaysCloseOnOutsideClick,
-  // TODO: Remove if not needed
-  // useCloseOnEscape,
   useReturnFocus,
 } from '@workday/canvas-kit-react/popup';
 
@@ -16,16 +14,11 @@ export const ControlButton = () => {
   const model = usePopupModel();
 
   useAlwaysCloseOnOutsideClick(model);
-  // TODO: Don't need useCloseOnEscape because Menu already handles this
-  // useCloseOnEscape(model);
   useReturnFocus(model);
-
-  // TODO: Add note about useInitialFocus not being necessary since Menu already
-  // is given focus when it appears
 
   const isOpen = model.state.visibility !== 'hidden';
 
-  const handleKeyDown = (event: React.KeyboardEvent): void => {
+  const handleButtonKeyDown = (event: React.KeyboardEvent) => {
     let isShortcut = false;
     if (event.key === `Spacebar` || event.key === ` ` || event.key === `Enter`) {
       isShortcut = true;
@@ -42,13 +35,12 @@ export const ControlButton = () => {
     }
 
     if (isShortcut) {
-      // event.stopPropagation();
-      // TODO: Add comment explaining preventDefault
+      // Prevent ArrowDown and ArrowUp keys from scrolling the entire page
       event.preventDefault();
     }
   };
 
-  const handleClose = () => {
+  const handleMenuClose = () => {
     model.events.hide();
   };
 
@@ -56,7 +48,7 @@ export const ControlButton = () => {
     <Popup model={model}>
       <Popup.Target
         as={SecondaryButton}
-        onKeyDown={handleKeyDown}
+        onKeyDown={handleButtonKeyDown}
         aria-expanded={isOpen}
         aria-haspopup={true}
         aria-controls={isOpen ? menuId : undefined}
@@ -64,7 +56,7 @@ export const ControlButton = () => {
         Open Menu
       </Popup.Target>
       <Popup.Popper>
-        <Menu id={menuId} isOpen={isOpen} onClose={handleClose}>
+        <Menu id={menuId} isOpen={isOpen} onClose={handleMenuClose}>
           <MenuItem>First Item</MenuItem>
           <MenuItem>Second Item</MenuItem>
           <MenuItem>Third Item</MenuItem>
