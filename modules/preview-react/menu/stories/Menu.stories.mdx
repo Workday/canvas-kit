@@ -44,8 +44,11 @@ actions.
 | `End`              | Moves focus to the last menu item                                                                                                                |
 | `A-Z / a-z`        | Moves focus to the next menu item with a label that starts with the typed character if such an menu item exists – otherwise, focus does not move |
 
-If you're using a menu button, you will need to add your own keyboard shortcuts, aria attributes,
-and focus management. See the example below.
+If you're using a menu button, you'll need to add your own keyboard shortcuts, aria attributes, and
+focus management. Note that if you're using [Popup](/components/popups/popup/), you do **not** need
+to use the `useCloseOnEscape` or `useInitialFocus` hooks since `Menu` already handles those
+behaviors internally (`isOpen` must be set properly in order for the `Menu` to receive focus when it
+appears).
 
 <ExampleCodeBlock code={ControlButton} />
 
