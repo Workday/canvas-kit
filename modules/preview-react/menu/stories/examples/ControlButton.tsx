@@ -1,84 +1,75 @@
-import React, {useRef} from 'react';
-import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import {Popper} from '@workday/canvas-kit-react/popup';
+import React from 'react';
 import {Menu, MenuItem} from '@workday/canvas-kit-preview-react/menu';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
-import uuid from 'uuid/v4';
+import {
+  Popup,
+  usePopupModel,
+  useAlwaysCloseOnOutsideClick,
+  // TODO: Remove if not needed
+  // useCloseOnEscape,
+  useReturnFocus,
+} from '@workday/canvas-kit-react/popup';
+
+const menuId = 'control-button-menu';
 
 export const ControlButton = () => {
-  const [isOpen, setOpened] = React.useState<boolean | undefined>();
-  const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>();
-  const [selectedItemIndex, setSelectedItemIndex] = React.useState<number>();
+  const model = usePopupModel();
 
-  const menuId = `menu-controlled-${uuid()}`;
-  const controlButtonId = `${menuId}-button`;
-  const buttonRef = useRef(null);
+  useAlwaysCloseOnOutsideClick(model);
+  // TODO: Don't need useCloseOnEscape because Menu already handles this
+  // useCloseOnEscape(model);
+  useReturnFocus(model);
 
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    const {currentTarget} = event;
+  // TODO: Add note about useInitialFocus not being necessary since Menu already
+  // is given focus when it appears
 
-    setAnchorEl(currentTarget);
-    setOpened(!isOpen);
-  };
+  const isOpen = model.state.visibility !== 'hidden';
 
   const handleKeyDown = (event: React.KeyboardEvent): void => {
     let isShortcut = false;
-    let nextSelectedIndex = 0;
     if (event.key === `Spacebar` || event.key === ` ` || event.key === `Enter`) {
       isShortcut = true;
-      setOpened(!isOpen);
+      if (isOpen) {
+        model.events.hide();
+      }
+      model.events.show();
     } else if (event.key === `ArrowDown`) {
       isShortcut = true;
-      setOpened(true);
+      model.events.show();
     } else if (event.key === `ArrowUp`) {
       isShortcut = true;
-      setOpened(true);
-
-      nextSelectedIndex = -1;
+      model.events.show();
     }
+
     if (isShortcut) {
-      setSelectedItemIndex(nextSelectedIndex);
-      // this.setState({selectedItemIndex: nextSelectedIndex});
-      event.stopPropagation();
+      // event.stopPropagation();
+      // TODO: Add comment explaining preventDefault
       event.preventDefault();
     }
   };
 
   const handleClose = () => {
-    if (!isOpen) {
-      return;
-    }
-
-    setOpened(false);
-
-    if (buttonRef && buttonRef.current) {
-      buttonRef.current.focus();
-    }
+    model.events.hide();
   };
 
   return (
-    <ClickAwayListener onClickAway={handleClose}>
-      <div>
-        <SecondaryButton
-          onClick={handleClick}
-          onKeyDown={handleKeyDown}
-          aria-expanded={!!isOpen}
-          aria-haspopup={true}
-          aria-controls={menuId}
-          id={controlButtonId}
-          ref={buttonRef}
-        >
-          Open Menu
-        </SecondaryButton>
-        <Popper placement={'bottom-start'} open={isOpen} anchorElement={anchorEl}>
-          <div style={{opacity: isOpen ? 1 : 0, display: isOpen ? `initial` : `none`}}>
-            <Menu initialSelectedItem={selectedItemIndex} isOpen={isOpen} onClose={handleClose}>
-              <MenuItem>First Item</MenuItem>
-              <MenuItem>Second Item</MenuItem>
-            </Menu>
-          </div>
-        </Popper>
-      </div>
-    </ClickAwayListener>
+    <Popup model={model}>
+      <Popup.Target
+        as={SecondaryButton}
+        onKeyDown={handleKeyDown}
+        aria-expanded={isOpen}
+        aria-haspopup={true}
+        aria-controls={isOpen ? menuId : undefined}
+      >
+        Open Menu
+      </Popup.Target>
+      <Popup.Popper>
+        <Menu id={menuId} isOpen={isOpen} onClose={handleClose}>
+          <MenuItem>First Item</MenuItem>
+          <MenuItem>Second Item</MenuItem>
+          <MenuItem>Third Item</MenuItem>
+        </Menu>
+      </Popup.Popper>
+    </Popup>
   );
 };
