@@ -7,7 +7,7 @@ export const CustomMenuItem = () => {
     <Menu title="Menu Title">
       <MenuItem>First Item</MenuItem>
       <MenuItem>Second Item</MenuItem>
-      <li role="menuItem" id="customMenu-3" tabIndex={-1} style={{listStyle: 'none'}}>
+      <li role="menuitem" tabIndex={-1} style={{listStyle: 'none'}}>
         Third Item (custom)
       </li>
     </Menu>
