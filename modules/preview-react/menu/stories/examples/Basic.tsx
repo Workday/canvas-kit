@@ -26,12 +26,10 @@ export const Basic = () => {
       isShortcut = true;
       if (isOpen) {
         model.events.hide();
+      } else {
+        model.events.show();
       }
-      model.events.show();
-    } else if (event.key === `ArrowDown`) {
-      isShortcut = true;
-      model.events.show();
-    } else if (event.key === `ArrowUp`) {
+    } else if (event.key === `ArrowDown` || event.key === `ArrowUp`) {
       isShortcut = true;
       model.events.show();
     }

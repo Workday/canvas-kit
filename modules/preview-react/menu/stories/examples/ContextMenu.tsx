@@ -23,7 +23,7 @@ const ContextMenuTarget = createComponent('div')({
         model.events.show({event});
       }
 
-      // prevent the default context menu from showing to avoid double menus
+      // Prevent the default context menu from showing to avoid double menus
       event.preventDefault();
     };
 
