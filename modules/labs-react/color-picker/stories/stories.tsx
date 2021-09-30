@@ -98,3 +98,30 @@ export const Default = () => {
     </>
   );
 };
+
+export const WithColorInput = () => {
+  const colorPickerModel = useColorPickerModel();
+  return (
+    <>
+      <ColorPicker model={colorPickerModel}>
+        <ColorPicker.SwatchBook
+          columnCount={8}
+          style={{marginBottom: '20px'}}
+          colors={defaultColorSet}
+        >
+          {colors => {
+            return colors.map(color => <ColorPicker.SwatchButton key={color} color={color} />);
+          }}
+        </ColorPicker.SwatchBook>
+        <ColorPicker.CustomColorForm label="Custom Color">
+          <ColorPicker.Input />
+          <ColorPicker.SubmitButton aria-label="Submit Custom Color" />
+        </ColorPicker.CustomColorForm>
+      </ColorPicker>
+
+      <ColorPicker>
+        <ColorPicker.Swatch showCheck={false} color={colorPickerModel.state.color} />
+      </ColorPicker>
+    </>
+  );
+};

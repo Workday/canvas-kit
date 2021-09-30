@@ -153,7 +153,7 @@ export default createComponent('input')({
         onValidColorChange(`#${expandHex(value)}`);
       }
     };
-
+    console.warn(state);
     const formattedValue = formatValue(value || state.customColor);
 
     return (

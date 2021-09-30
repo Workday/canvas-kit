@@ -23,11 +23,6 @@ const StyledForm = styled('form')<StyledType>({
 export default createComponent('form')({
   displayName: 'CustomColorForm',
   Component: ({children, label, ...elemProps}: CustomColorFormProps, ref, Element) => {
-    /**
-     * Within the sub components, we use the color picker context,
-     * to make sure it's the same context across sub components instead of a new instance
-     * This context is defined in the wrapping container/component
-     */
     const {state, events} = React.useContext(ColorPickerModelContext);
     return (
       <StyledForm

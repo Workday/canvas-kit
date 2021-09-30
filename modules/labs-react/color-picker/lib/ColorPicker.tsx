@@ -12,7 +12,7 @@ import SwatchRow from './ColorPicker.SwatchRow';
 import SwatchBook from './ColorPicker.SwatchBook';
 import {ColorPickerContent} from './ColorPicker.Content';
 
-export const ColorPickerModelContext = React.createContext<ColorPickerModel>({} as any);
+export const ColorPickerModelContext = React.createContext({} as ColorPickerModel);
 
 export interface ColorPickerProps extends ColorPickerModelConfig {
   model?: ColorPickerModel;
@@ -22,7 +22,8 @@ export interface ColorPickerProps extends ColorPickerModelConfig {
 export const ColorPicker = createComponent()({
   displayName: 'ColorPicker',
   Component: ({children, model, ...config}: ColorPickerProps) => {
-    const value = useDefaultModel(model, config, useColorPickerModel);
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const value = model || useColorPickerModel(config);
 
     return (
       <ColorPickerModelContext.Provider value={value}>{children}</ColorPickerModelContext.Provider>
@@ -33,7 +34,7 @@ export const ColorPicker = createComponent()({
     SwatchRow: SwatchRow,
     SwatchButton: SwatchButton,
     SubmitButton: SubmitButton,
-    Form: CustomColorForm,
+    CustomColorForm: CustomColorForm,
     Input: ColorInput,
     Swatch: Swatch,
     Content: ColorPickerContent,

@@ -91,6 +91,7 @@ export default createComponent('button')({
   displayName: 'SwatchButton',
   Component: ({color, showCheck = false, ...elemProps}: SwatchButtonProps, ref, Element) => {
     const {state, events} = React.useContext(ColorPickerModelContext);
+
     const isSelected = state.color ? color === state.color : false;
     return (
       <SwatchButtonContainer

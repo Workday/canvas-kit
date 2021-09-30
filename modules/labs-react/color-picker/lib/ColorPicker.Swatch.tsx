@@ -58,6 +58,7 @@ export default createComponent('div')({
   displayName: 'Swatch',
   Component: ({color, showCheck = false, ...elemProps}: ColorSwatchProps, ref, Element) => {
     const {state} = React.useContext(ColorPickerModelContext);
+    console.warn(state);
 
     return (
       <StyledContainer
