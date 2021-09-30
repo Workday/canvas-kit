@@ -2,7 +2,7 @@ import * as React from 'react';
 import GlobalHeader from '../lib/GlobalHeader';
 import {shallow} from 'enzyme';
 import Header from '../lib/Header';
-import {SearchBar} from '../lib/parts/SearchBar';
+import {SearchForm} from '@workday/canvas-kit-labs-react/search-form';
 import {DubLogoTitle} from '../lib/parts';
 import {HeaderTheme, HeaderVariant} from '../lib/shared/types';
 
@@ -81,7 +81,7 @@ describe('GlobalHeader', () => {
         brand: <div>Brand</div>,
         menuToggle: <div>MenuToggle</div>,
         onMenuClick: jest.fn(),
-        leftSlot: <SearchBar onSubmit={jest.fn()} />,
+        leftSlot: <SearchForm onSubmit={jest.fn()} />,
         isCollapsed: true,
       };
       const propsHeader2 = {

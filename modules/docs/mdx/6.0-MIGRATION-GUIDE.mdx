@@ -12,6 +12,8 @@ any questions about the update.
 - [Component Deprecations](#component-deprecations)
   - [CookieBanner](#cookie-banner)
   - [PageHeader](#page-header)
+- [Component Migrations](#component-migrations)
+  - [SearchBar](#search-bar)
 
 ## Codemod
 
@@ -111,7 +113,6 @@ export const CustomCookieBanner = (props: CustomCookieBannerProps) => {
 };
 ```
 
-
 ### Page Header
 
 We are [soft-deprecating](#soft-deprecation) `PageHeader`. It has been renamed to
@@ -160,5 +161,56 @@ interface CustomPageHeaderProps extends DeprecatedPageHeaderProps {
 
 export const CustomPageHeader = (props: CustomPageHeaderProps) => {
   return <DeprecatedPageHeader {...props} />;
+};
+```
+
+## Component Migrations
+
+### Search Bar
+
+`SeachBar` is being renamed to `SearchForm` and is moving out of
+`@workday/canvas-kit-labs-react/header` into its own dedicated package,
+`@workday/canvas-kit-labs-react/search-form`. The component has not been modified and you may
+continue to use this component exactly as you did in v5.
+
+🤖 The codemod will handle all these changes automatically:
+
+- Rename import sources
+  - `@workday/canvas-kit-labs-react/header` becomes `@workday/canvas-kit-labs-react/search-form`
+- Rename import specifiers
+  - `SearchBar` becomes `SearchForm`
+  - `SearchBarProps` becomes `SearchFormProps`
+  - `SearchBarState` becomes `SearchFormState`
+- Rename JSX identifiers
+  - `<SearchBar>` becomes `<SearchForm>`
+- Rename type references and interface declarations
+  - `type CustomSearchProps = SearchBarProps;` becomes `type CustomSearchProps = SearchFormProps;`
+  - `interface CustomSearchProps extends SearchBarProps` becomes `interface CustomSearchProps extends SearchFormProps`
+
+```tsx
+// v5
+import {
+  SearchBar,
+  SearchBarProps,
+  SearchBarState,
+  SearchThemeAttributes,
+  SearchTheme,
+} from '@workday/canvas-kit-labs-react/header';
+
+const CustomSearchForm = (props: SearchFormProps) => {
+  return <SearchForm searchTheme={SearchTheme.Dark} {...props} />;
+};
+
+// v6
+import {
+  SearchForm,
+  SearchFormProps,
+  SearchFormState,
+  SearchThemeAttributes,
+  SearchTheme,
+} from '@workday/canvas-kit-labs-react/search-form';
+
+const CustomSearchForm = (props: SearchFormProps) => {
+  return <SearchForm searchTheme={SearchTheme.Dark} {...props} />;
 };
 ```

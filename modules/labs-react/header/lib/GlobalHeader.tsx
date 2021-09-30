@@ -23,7 +23,7 @@ export interface GlobalHeaderProps {
    */
   isCollapsed?: boolean;
   /**
-   * The React element to render in the left slot of the GlobalHeader. This is typically a SearchBar component.
+   * The React element to render in the left slot of the GlobalHeader. This is typically a SearchForm component.
    */
   leftSlot?: React.ReactElement;
 }
