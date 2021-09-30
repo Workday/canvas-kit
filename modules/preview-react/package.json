@@ -60,7 +60,6 @@
     "uuid": "^3.3.3"
   },
   "devDependencies": {
-    "@material-ui/core": "^4.9.7",
     "@workday/canvas-accent-icons-web": "^1.0.0",
     "@workday/canvas-kit-labs-react": "^5.2.6"
   }
