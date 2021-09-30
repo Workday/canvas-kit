@@ -2,9 +2,30 @@ import * as React from 'react';
 import {MenuItem} from '@workday/canvas-kit-preview-react/menu';
 import {SearchForm} from '@workday/canvas-kit-labs-react/search-form';
 import {Flex} from '@workday/canvas-kit-labs-react/layout';
-import {initialWineList} from './helpers';
 
-export const Growth = () => {
+const initialWineList = [
+  'Beaujolais',
+  'Bordeaux',
+  'Cabernet Sauvignon',
+  'Champagne',
+  'Chardonnay',
+  'Chianti',
+  'Malbec',
+  'Merlot',
+  'Pinot Grigio',
+  'Pinot Gris',
+  'Pinot Noir',
+  'Primitivo',
+  'Prosecco',
+  'Riesling',
+  'Rioja',
+  'Rosé',
+  'Sauvignon Blanc',
+  'Syrah',
+  'Zinfandel',
+];
+
+export const Grow = () => {
   const [wineList, setWineList] = React.useState(initialWineList);
   // Tracking the input value for onSubmit
   const [searchInput, setSearchInput] = React.useState('');

@@ -2,12 +2,13 @@ import {Meta} from '@storybook/addon-docs/blocks';
 import {SearchForm} from '@workday/canvas-kit-labs-react/search-form';
 // examples
 import {Basic} from './examples/Basic';
-import {Growth} from './examples/Growth';
+import {CustomTheme} from './examples/CustomTheme';
+import {Grow} from './examples/Grow';
 import {RTL} from './examples/RTL';
 import {Theming} from './examples/Theming';
 import {ThemeAttributes} from './examples/PropTables.splitProps';
 
-<Meta title="Labs/Search Form" component={SearchForm} />
+<Meta title="Labs/React/Search Form" component={SearchForm} />
 
 # Canvas Kit Search Form
 
@@ -30,12 +31,12 @@ based on search input.
 
 <ExampleCodeBlock code={Basic} />
 
-### Growth
+### Grow
 
 If you'd like `SearchForm` to grow to the width of its container, set the `grow` prop to
 `true`.
 
-<ExampleCodeBlock code={Growth} />
+<ExampleCodeBlock code={Grow} />
 
 ### Theming
 
@@ -45,9 +46,13 @@ If you'd like `SearchForm` to grow to the width of its container, set the `grow`
 <ExampleCodeBlock code={Theming} />
 
 You can also provide more specific theming values by providing specific `SearchThemeAttributes`.
-Below is a table of attributes that can be supplied to `SearchForm`.
+
+<ExampleCodeBlock code={CustomTheme} />
+
+Below is a table of attributes that can be supplied to `SearchForm`:
 
 <ArgsTable of={ThemeAttributes} />
+
 
 ### RTL (Right-To-Left)
 
