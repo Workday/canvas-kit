@@ -12,8 +12,14 @@ import {borderRadius, colors, space} from '@workday/canvas-kit-react/tokens';
 import {checkSmallIcon} from '@workday/canvas-system-icons-web';
 import chroma from 'chroma-js';
 import * as React from 'react';
-
+import {SwatchContext} from './ColorPicker.SwatchBook';
 import {ColorPickerModelContext} from './ColorPicker';
+
+const cx = obj => {
+  return Object.keys(obj)
+    .filter(k => obj[k])
+    .join(' ');
+};
 
 export interface SwatchButtonProps {
   /**
@@ -87,20 +93,72 @@ const SwatchButtonContainer = styled('button')<
   })
 );
 
+const intentSwatchStyles = {
+  ...focusRing({separation: 2}),
+};
+
 export default createComponent('button')({
   displayName: 'SwatchButton',
   Component: ({color, showCheck = false, ...elemProps}: SwatchButtonProps, ref, Element) => {
     const {state, events} = React.useContext(ColorPickerModelContext);
 
     const isSelected = state.color ? color === state.color : false;
+
+    const {
+      activeTab,
+      setActiveTab,
+      intentTab,
+      resetIntentTab,
+      setIntentTab,
+      registerTab,
+      unregisterTab,
+    } = React.useContext(SwatchContext);
+    React.useLayoutEffect(() => {
+      registerTab(color);
+      return () => {
+        unregisterTab(color);
+      };
+    }, []);
+
+    const onKeyDown = event => {
+      switch (event.key) {
+        case 'ArrowLeft':
+        case 'Left':
+          setIntentTab(-1);
+          break;
+        case 'ArrowRight':
+        case 'Right':
+          setIntentTab(1);
+          break;
+        case 'Home':
+          setIntentTab('first');
+          break;
+        case 'End':
+          setIntentTab('last');
+          break;
+        case 'Enter':
+        case ' ':
+          console.log('intentTab', intentTab);
+          setActiveTab(intentTab);
+          event.preventDefault(); // prevent clicking this button
+          break;
+        default:
+          break;
+      }
+    };
+
     return (
       <SwatchButtonContainer
+        onKeyDown={onKeyDown}
         ref={ref}
         color={color}
         as={Element}
         showCheck={showCheck || state.color === color}
         isSelected={isSelected}
         onClick={() => events.setColor({color: color})}
+        tabIndex={activeTab === color ? 0 : -1}
+        style={intentTab === color ? intentSwatchStyles : undefined}
+        onBlur={resetIntentTab}
         {...elemProps}
       >
         {showCheck || state.color === color ? (
