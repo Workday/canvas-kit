@@ -6,7 +6,7 @@ import {
   getVisibleResultsMin,
 } from '@workday/canvas-kit-react/pagination';
 
-export const StepControls = () => {
+export const Basic = () => {
   const resultCount = 10;
   const totalCount = 100;
   const lastPage = getLastPage(resultCount, totalCount);

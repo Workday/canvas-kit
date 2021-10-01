@@ -1,7 +1,8 @@
 import {Meta} from '@storybook/addon-docs/blocks';
 
 import {Pagination} from '@workday/canvas-kit-react/pagination';
-import {StepControls} from './examples/StepControls';
+
+import {Basic} from './examples/Basic';
 import {CustomRange} from './examples/CustomRange';
 import {JumpControls} from './examples/JumpControls';
 import {GoToForm} from './examples/GoToForm';
@@ -25,42 +26,44 @@ yarn add @workday/canvas-kit-react
 
 ## Usage
 
-`Pagination` is a compound component, meaning it can be put together and used in a variety of
-different ways. We'll first cover [basic usage](#basic-usage) examples followed by
-[advanced usage](#advanced-usage). Each of the examples is intended to be standalone, so you can
-skip to the section that best fits your use case.
+### Basic Example
 
-These examples are designed to provide copy-and-paste snippets to help you get up and running
-quickly without much explanation. Further detail on individual component props, behavior, and
-accessibility can be found in the [Components](#components) section.
+`Pagination` includes a container `Pagination` component and a number of subcomponents which can be
+composed in a variety of ways.
 
-### Basic Usage
+In this example, we set up a basic `Pagination` component with the default range of 5 pages, as
+well as step controls (`Pagination.StepToPreviousButton` and `Pagination.StepToNextButton`) that
+allow you to move to the next page or the previous page.
 
-Below are examples we expect will work for most use cases. Please refer to the
-[Advanced Usage](#advanced-usage) section for details on supporting custom implementations.
+<ExampleCodeBlock code={Basic} />
 
-#### Step Controls
+### Hoisted Model
 
-In this example, the component uses step controls (`Pagination.StepToPreviousButton` and
-`Pagination.StepToNextButton`) that allow you to move to the next page and previous pages.
+By default, `Pagination` will create and use its own [model](#model) internally. Alternatively, you may
+configure your own model with `usePaginationModel` and pass it to `Pagination` via the `model` prop. This
+pattern is referred to as hoisting the model and provides direct access to its `state` and `events`
+outside of the `Pagination` component.
 
-<ExampleCodeBlock code={StepControls} />
+In this example, we set up external observation of the model state and create an external button to
+trigger an event to change the active page.
 
-#### Jump Controls
+<ExampleCodeBlock code={HoistedModel} />
+
+### Jump Controls
 
 This example adds jump controls (`Pagination.JumpToFirstButton` and `Pagination.JumpToLastButton`)
-that allow you to skip to the first and last items in the range.
+that allow you to skip to the first and last pages in the range.
 
 <ExampleCodeBlock code={JumpControls} />
 
-#### GoTo Form
+### GoTo Form
 
 This example adds a form (`Pagination.GoToForm`) that allows you to skip to a specific page within
 the range.
 
 <ExampleCodeBlock code={GoToForm} />
 
-#### Additional Details
+### Additional Details
 
 This example adds a visible section (`Pagination.AdditionalDetails`). It is an `aria-live` region
 that announces the current page update to screen readers. Because of that, it's important to
@@ -77,39 +80,22 @@ you'd like to keep the `AdditionalDetails` component on multiple, you will need 
 
 <ExampleCodeBlock code={ShowAdditionalDetails} />
 
-#### RTL (Right-to-Left)
+### Right-to-Left (RTL)
 
 This example shows how the component supports right-to-left languages.
 
 <ExampleCodeBlock code={RTL} />
 
-#### Custom Range
+### Custom Range
 
 This example uses a custom range that allows you to control the width of the component.
 
 <ExampleCodeBlock code={CustomRange} />
 
-### Advanced Usage
-
-Below are examples for more advanced / custom usage of these components. We expect most people won't
-need to read this section, but if you're needing to go beyond our basic examples or just curious,
-feel free to explore this section. While this section is not exhaustive, it provides additional
-insight into what's possible.
-
-#### Hoisted Model Pattern
-
-If you're unfamiliar with compound components, the pagination model, or the `usePaginationModel`
-hook, we would recommend reviewing the [PaginationModel](#paginationmodel) section first.
-
-If you want the `Pagination` component to handle its state and events internally and hook into page
-change events, the basic usage examples above should be sufficient. However, if you need external
-access to the model, you can use the hoisted model pattern. You can create a model outside of the
-component with the `usePaginationModel` hook.
-
-For this example, we'll create a `Pagination` component that handles 128 total items with 10 items
-per page.
-
-<ExampleCodeBlock code={HoistedModel} />
+---
+---
+---
+---
 
 ## Components
 
