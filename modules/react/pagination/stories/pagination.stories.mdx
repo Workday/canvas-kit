@@ -46,11 +46,12 @@ you to move to the next page or the previous page.
 
 By default, `Pagination` will create and use its own [model](#model) internally. Alternatively, you
 may configure your own model with `usePaginationModel` and pass it to `Pagination` via the `model`
-prop. This pattern is referred to as hoisting the model and provides direct access to its `state`
-and `events` outside of the `Pagination` component.
+prop. This pattern is referred to as
+[hoisting the model](/getting-started/for-developers/resources/compound-components/#configuring-a-model)
+and provides direct access to its `state` and `events` outside of the `Pagination` component.
 
 In this example, we set up external observation of the model state and create an external button to
-trigger an event to change the active page.
+trigger an event to change the current page.
 
 <ExampleCodeBlock code={HoistedModel} />
 
@@ -105,8 +106,8 @@ object composed of two parts: `state` which describes the current snapshot in ti
 and `events` which describes events that can be sent to the model.
 
 By default, `Pagination` will create and use its own model internally. Alternatively, if you need
-direct access to the model's `state` and `events`, you may configure your own model with
-`usePaginationModel` and pass it to `Pagination` via a pattern called
+direct access to the model's `state` and `events` outside of the `Pagination` component, you may
+configure your own model with `usePaginationModel` and pass it to `Pagination` via a pattern called
 [hoisting the model](/getting-started/for-developers/resources/compound-components/#configuring-a-model).
 
 ```tsx
@@ -490,132 +491,6 @@ need static child elements, this component will support it.
 | children                     | (model: PaginationModel) => React.ReactNode \| React.ReactNode | ✅ `true`  | n/a     | n/a         |
 
 ## Models, Hooks, & Utils
-
-### PaginationModel
-
-> **Note:** The model and compound component pattern presented here will be updated and solidified
-> in v5 of canvas-kit. While the general concepts are the same, there will be some breaking changes
-> in v5. If you'd like to learn about models and compound components in v5, please refer to
-> [this doc](https://github.com/Workday/canvas-kit/blob/master/modules/docs/mdx/COMPOUND_COMPONENTS.mdx).
-
-The `PaginationModel` is the core of the `Pagination` component. That said, if you're using the
-higher-level context API components and following the basic usage guidelines, you shouldn't need to
-know how the model operates to successfully implement the component. But if you have an advanced use
-case or you're feeling curious, this section is for you.
-
-If `Pagination` was stripped of all its markup, attributes, and styling, what would remain is the
-model. The `PaginationModel` is how we describe the state and behavior of the component. You could
-completely swap out the underlying elements, attributes, and styles, and the model would remain the
-same. `PaginationModel` is an object that is composed of two parts: `state` and `events`. The
-model's `state` describes the current state of the component, and `events` are functions that act on
-that state (also called behaviors). Below is an example `Pagination` model:
-
-```tsx
-const paginationModel = {
-  state: {
-    firstPage,
-    currentPage,
-    lastPage,
-    range,
-    rangeSize,
-  },
-  events: {
-    first,
-    last,
-    next,
-    previous,
-    setCurrentPage,
-    goTo,
-  };
-};
-
-```
-
-#### State
-
-The `state` describes the current state of the `Pagination` component. As events are fired, the
-state is updated, and the component will re-render. Below are the `state` keys and descriptions of
-their values:
-
-- `firstPage` - the page number for the first page
-- `currentPage` - the page number for the current page
-- `lastPage` - the page number for the last page (it can also be used as a total page count)
-- `range` - an array of page numbers included in the pagination range
-- `rangeSize` - the size of the pagination range
-
-#### Events
-
-The model's `events` describe behaviors that act on `state`. Below are the `events` keys and
-descriptions of their values:
-
-- `first` - sets the current page to the first page
-- `last` - sets the current page to the last page
-- `next` - increments the current page by 1
-- `previous` - decrements the current page by 1
-- `goTo` - sets the current page to a given page number\* (with safeguards)
-- `setCurrentPage` - sets the current page to a given page number (no safeguards)
-
-\* _`goTo` is very similar to `setCurrentPage`, but it has some built-in safeguards. If the page
-number provided is below the first page (e.g: `0`), `currentPage` will be set to the `firstPage`.
-Similarly, if the number provided is larger than the `lastPage`, it will set `currentPage` to the
-`lastPage`._
-
-### usePaginationModel Hook
-
-The `Pagination` model can be created with the `usePaginationModel` hook. Normally `Pagination` will
-create it for you under the hood with the configuration props you provide the component, but you can
-also hoist the model outside of the component depending on your use case.
-
-#### Configuration
-
-The hook configuration is identical to the `Pagination` component configuration. The only value you
-need to provide is `lastPage`, but you can also provide others. The full list is below:
-
-| name                | type                           | required   | default |
-| ------------------- | ------------------------------ | ---------- | ------- |
-| lastPage            | `number`                       | ✅ `true`  | n/a     |
-| firstPage?          | `number`                       | 🚫 `false` | 1       |
-| initialCurrentPage? | `number`                       | 🚫 `false` | n/a     |
-| onPageChange?       | `(pageNumber: number) => void` | 🚫 `false` | n/a     |
-| rangeSize?          | `number`                       | 🚫 `false` | 5       |
-
-#### Usage
-
-Using this hook is fairly straightforward. Create a configuration, pass it to the hook, and it
-returns a model.
-
-```ts
-const paginationConfig = {
-  lastPage: 100,
-  rangeSize: 3,
-  onPageChange: pageNumber => console.log(pageNumber),
-};
-
-const model = usePaginationModel(paginationConfig);
-```
-
-Voilà! Now you can pass the model to `Pagination` like so:
-
-```tsx
-const paginationConfig = {
-  lastPage: 100,
-  rangeSize: 3,
-  onPageChange: pageNumber => console.log(pageNumber),
-};
-
-const model = usePaginationModel(paginationConfig);
-
-return (
-  <Pagination aria-label="Pagination" model={model}>
-    {/* child components go here */}
-  </Pagination>
-);
-```
-
-If you're hoisting the model, it's presumably because you need more access to the model's `state`
-and `events` outside of the component. You could have an external button trigger events to update
-the state, or have another component use the model's state. See the
-[Advanced Usage](#advanced-usage) section for more detailed information.
 
 ### getLastPage
 
