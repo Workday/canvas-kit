@@ -98,6 +98,344 @@ This example uses a custom range that allows you to control the width of the com
 
 <ExampleCodeBlock code={CustomRange} />
 
+## Components
+
+### Pagination
+
+#### Usage
+
+`Pagination` is a container component rendered with a `<nav>` element that is responsible for
+creating a `PaginationModel` and sharing it with its subcomponents using React context.
+
+```tsx
+<Pagination
+  aria-label="Pagination"
+  lastPage={100}
+  initialCurrentPage={6}
+  rangeSize={3}
+  onPageChange={pageNumber => console.log(pageNumber)}
+>
+  {/* Child components */}
+</Pagination>
+```
+
+Alternatively, you may pass in a model using the hoisted model pattern. Note that in this pattern,
+the only props needed are `model` and `aria-label`.
+
+```tsx
+const model = usePaginationModel({
+  lastPage: 100,
+  initialCurrentPage: 6,
+  rangeSize: 3,
+  onPageChange: pageNumber => console.log(pageNumber),
+});
+
+return (
+  <Pagination aria-label="Pagination" model={model}>
+    {/* Child components */}
+  </Pagination>
+);
+```
+
+#### Props
+
+Undocumented props are spread to the underlying `<nav>` element.
+
+Given that there are two ways to configure `Pagination`, there are also two props tables. For the
+configuration pattern, follow this table:
+
+| name               | type                           | required?  | default | recommended                              |
+| ------------------ | ------------------------------ | ---------- | ------- | ---------------------------------------- |
+| aria-label         | `string`                       | ✅ `true`  | n/a     | "Pagination" (and translated equivalent) |
+| lastPage           | `number`                       | ✅ `true`  | n/a     | n/a                                      |
+| initialCurrentPage | `number`                       | 🚫 `false` | 1       | n/a                                      |
+| rangeSize          | `number`                       | 🚫 `false` | 5       | n/a                                      |
+| firstPage          | `number`                       | 🚫 `false` | 1       | n/a                                      |
+| onPageChange       | `(pageNumber: number) => void` | 🚫 `false` | n/a     | n/a                                      |
+
+And for the hoisted model pattern, follow this table:
+
+| name       | type              | required? | default | recommended                              |
+| ---------- | ----------------- | --------- | ------- | ---------------------------------------- |
+| aria-label | `string`          | ✅ `true` | n/a     | "Pagination" (and translated equivalent) |
+| model      | `PaginationModel` | ✅ `true` | n/a     | n/a                                      |
+
+This component also supports
+[all native HTMLElement props](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes).
+The `aria-label` prop is required for accessibility. We recommend using `"Pagination"` as seen in
+the example.
+
+### Pagination.Controls
+
+#### Usage
+
+`Pagination.Controls` is a styled `<div>` element that provides proper alignment and spacing between
+elements inside `Pagination`. It does not handle any internal business logic or state.
+
+```tsx
+<Pagination.Controls>{/* Child components */}</Pagination.Controls>
+```
+
+#### Props
+
+This component supports
+[all native HTMLDivElement props](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div#Attributes).
+
+### Pagination.JumpToFirstButton
+
+#### Usage
+
+`Pagination.JumpToFirstButton` is an `IconButton` that subscribes to `Pagination`'s context. This
+allows it to know when to disable and set `currentPage` to the first page.
+
+```tsx
+<Pagination.JumpToFirstButton aria-label="First" />
+```
+
+#### Props
+
+| name       | type     | required? | default | recommended                         |
+| ---------- | -------- | --------- | ------- | ----------------------------------- |
+| aria-label | `string` | ✅ `true` | n/a     | "First" (and translated equivalent) |
+
+This component also supports all `IconButton` props.
+
+### Pagination.StepToPreviousButton
+
+#### Usage
+
+`Pagination.StepToPreviousButton` is an `IconButton` that subscribes to `Pagination`'s context. This
+allows it to know when to disable and decrement the `currentPage`.
+
+```tsx
+<Pagination.StepToPreviousButton aria-label="Previous" />
+```
+
+#### Props
+
+| name       | type     | required? | default | recommended                            |
+| ---------- | -------- | --------- | ------- | -------------------------------------- |
+| aria-label | `string` | ✅ `true` | n/a     | "Previous" (and translated equivalent) |
+
+This component also supports all `IconButton` props.
+
+### Pagination.StepToNextButton
+
+#### Usage
+
+`Pagination.StepToNextButton` is an `IconButton` that subscribes to `Pagination`'s context. This
+allows it to know when to disable and increment the `currentPage`.
+
+```tsx
+<Pagination.StepToNextButton aria-label="Next" />
+```
+
+#### Props
+
+| name       | type     | required? | default | recommended                        |
+| ---------- | -------- | --------- | ------- | ---------------------------------- |
+| aria-label | `string` | ✅ `true` | n/a     | "Next" (and translated equivalent) |
+
+This component also supports all `IconButton` props.
+
+### Pagination.JumpToLastButton
+
+#### Usage
+
+`Pagination.JumpToLastButton` is an `IconButton` that subscribes to `Pagination`'s context. This
+allows it to know when to disable and set `currentPage` to the last page.
+
+```tsx
+<Pagination.JumpToLastButton aria-label="Last" />
+```
+
+#### Props
+
+| name       | type     | required? | default | recommended                        |
+| ---------- | -------- | --------- | ------- | ---------------------------------- |
+| aria-label | `string` | ✅ `true` | n/a     | "Last" (and translated equivalent) |
+
+This component also supports all `IconButton` props.
+
+### Pagination.PageList
+
+#### Usage
+
+`Pagination.PageList` is an ordered list (`ol`) that subscribes to `Pagination`'s context. This
+allows it generate the `range` of page numbers. It also handles spacing between the child elements.
+This component will accept either child elements or functional children (sometimes called the render
+prop pattern). It's likely you'll want to use the functional children, but in the off-chance you
+need a static list of items, this component will support it. The usage section below will provide
+examples of both.
+
+The functional children snippet below will likely be the most common use case.
+
+```tsx
+<Pagination.PageList>
+  {({state}) =>
+    state.range.map(pageNumber => (
+      <Pagination.PageListItem key={pageNumber}>
+        <Pagination.PageButton aria-label={`Page ${pageNumber}`} pageNumber={pageNumber} />
+      </Pagination.PageListItem>
+    ))
+  }
+</Pagination.PageList>
+```
+
+#### Props
+
+| name     | type                                                             | required?  | default | recommended |
+| -------- | ---------------------------------------------------------------- | ---------- | ------- | ----------- |
+| children | (model: PaginationModel) => React.ReactNode[] \| React.ReactNode | 🚫 `false` | n/a     | n/a         |
+
+This component also supports
+[all native HTMLOLElement props](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ol#Attributes).
+
+### Pagination.PageListItem
+
+#### Usage
+
+`Pagination.PageListItem` is a styled `li` element. It provides a child semantic element for the
+`PageList` component and is important for accessibility. It does not handle any internal business
+logic or state.
+
+```tsx
+<Pagination.PageListItem>{/* child element goes here */}</Pagination.PageListItem>
+```
+
+#### Props
+
+This component also supports
+[all native HTMLLIElement props](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/li#Attributes).
+
+### Pagination.PageButton
+
+#### Usage
+
+`Pagination.PageButton` is an `IconButton` that subscribes to `Pagination`'s context. This allows it
+to know set the `toggled` styling when it is the current item and update the `currentPage`.
+
+`PageButton` will render the `pageNumber` as its children.
+
+```tsx
+<Pagination.PageButton aria-label="Page 2" pageNumber={2} />
+```
+
+#### Props
+
+| name       | type     | required? | default | recommended                                      |
+| ---------- | -------- | --------- | ------- | ------------------------------------------------ |
+| aria-label | `string` | ✅ `true` | n/a     | `Page ${pageNumber}` (and translated equivalent) |
+| pageNumber | `number` | ✅ `true` | n/a     | n/a                                              |
+
+This component also supports all `IconButton` props.
+
+### Pagination.GoToForm
+
+#### Usage
+
+`Pagination.GoToForm` is a wrapper for a React context provider and `form` element. Child components
+such as `Pagination.GoToTextInput` and `Pagination.GoToLabel` subscribe to that context to manage
+the form state and behavior as well as update the `currentPage` in the `Pagination` component.
+
+```tsx
+<Pagination.GoToForm>{/* child elements go here */}</Pagination.GoToForm>
+```
+
+#### Props
+
+This component supports
+[all native HTMLFormElement props](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form#Attributes).
+
+### Pagination.GoToTextInput
+
+#### Usage
+
+```tsx
+<Pagination.GoToTextInput aria-label="Go to page number" />
+```
+
+#### Props
+
+| name       | type                 | required?  | default | recommended                                     |
+| ---------- | -------------------- | ---------- | ------- | ----------------------------------------------- |
+| aria-label | `string`             | ✅ `true`  | n/a     | `Go to page number` (and translated equivalent) |
+| value      | `string` \| `number` | 🚫 `false` | ""      | n/a                                             |
+
+This component also supports all `TextInput` props.
+
+### Pagination.GoToLabel
+
+#### Usage
+
+`Pagination.GoToLabel` is a styled `label` element that subscribes to the `Pagination` context. This
+allows it to pass the `Pagination` context to child elements.
+
+This component will accept either child elements or functional children (sometimes called the render
+prop pattern). It's likely you'll want to use the functional children, but in the off-chance you
+need static child elements, this component will support it. Examples of both patterns are provided
+below.
+
+**Functional Children**
+
+Use this pattern when you need access to the state in the `Pagination` context for your text.
+
+```tsx
+<Pagination.GoToLabel>{({state}) => `of ${state.lastPage} results`}</Pagination.GoToLabel>
+```
+
+#### Props
+
+| name     | type                                                           | required?  | default | recommended |
+| -------- | -------------------------------------------------------------- | ---------- | ------- | ----------- |
+| htmlFor  | `string`                                                       | 🚫 `false` | n/a     | n/a         |
+| children | (model: PaginationModel) => React.ReactNode \| React.ReactNode | 🚫 `false` | n/a     | n/a         |
+
+This component also supports
+[all native HTMLLabelElement props](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label#Attributes).
+
+### Pagination.AdditionalDetails
+
+#### Usage
+
+`Pagination.AdditionalDetails` is a styled `div` container that subscribes to the `Pagination`
+context. This allows it to pass the `Pagination` context to child elements. It is also an
+`aria-live` region that announces the current page update to screen readers. Because of that, it's
+important to always\* include it in your `Pagination` component.
+
+_\* The only exception to this rule is when you have multiple `Pagination` components that are
+sharing the same state and rendered on the page. You can then safely remove all but one of the
+`AdditionalDetails` sections. This will prevent a screenreader from announcing updates multiple
+times to a user._
+
+In the case where you would also have multiple `Pagination` components sharing the same state and
+you'd like to keep the `AdditionalDetails` component on multiple, you will need to set
+`shouldAnnounceToScreenReader` to `false` on all but one component to prevent announcement.
+
+This component will accept either child elements or functional children (sometimes called the render
+prop pattern). It's likely you'll want to use the functional children, but in the off-chance you
+need static child elements, this component will support it.
+
+```tsx
+<Pagination.AdditionalDetails>
+  {({state}) =>
+    `${getVisibleResultsMin(state.currentPage, resultCount)}-${getVisibleResultsMax(
+      state.currentPage,
+      resultCount,
+      totalCount
+    )} of ${totalCount} results`
+  }
+</Pagination.AdditionalDetails>
+```
+
+#### Props
+
+| name                         | type                                                           | required?  | default | recommended |
+| ---------------------------- | -------------------------------------------------------------- | ---------- | ------- | ----------- |
+| shouldHideDetails            | `boolean`                                                      | 🚫 `false` | false   | n/a         |
+| shouldAnnounceToScreenReader | `boolean`                                                      | 🚫 `false` | true    | n/a         |
+| children                     | (model: PaginationModel) => React.ReactNode \| React.ReactNode | ✅ `true`  | n/a     | n/a         |
+
 ## Model
 
 If `Pagination` was stripped of all its markup, attributes, and styling, what would remain is the
@@ -151,7 +489,7 @@ const model = usePaginationModel({
 });
 
 <Pagination aria-label="Pagination" model={model}>
-  {/* Subcomponents */}
+  {/* Child components */}
 </Pagination>;
 ```
 
@@ -238,353 +576,3 @@ const resultCount = 10;
 const totalCount = 42;
 const pageMax = getVisibleResultsMax(currentPage, resultCount, totalCount); //=> 42
 ```
-
----
-
----
-
----
-
----
-
-## Components
-
-### Pagination
-
-The `Pagination` component is a wrapper for a React context provider and `nav` element. Child
-components such as `Pagination.StepToPreviousButton`, `Pagination.PageList`, etc. subscribe to that
-context.
-
-#### Usage
-
-`Pagination` can be used with or without providing a model. For basic usage, you only need to
-provide a configuration as in the example below.
-
-```tsx
-<Pagination
-  aria-label="Pagination"
-  lastPage={100}
-  initialCurrentPage={6}
-  rangeSize={3}
-  onPageChange={pageNumber => console.log(pageNumber)}
->
-  {/* child components go here */}
-</Pagination>
-```
-
-However, if you'd like to provide a model, you can follow the example below. This is called the
-hoisted model pattern. Note that in this pattern, the only props needed are `model` and
-`aria-label`.
-
-```tsx
-const modelConfig = {
-  lastPage: 100,
-  initialCurrentPage: 6,
-  rangeSize: 3,
-  onPageChange: pageNumber => console.log(pageNumber),
-};
-const model = usePaginationModel(modelConfig);
-
-return (
-  <Pagination aria-label="Pagination" model={model}>
-    {/* child components go here */}
-  </Pagination>
-);
-```
-
-#### Component Props
-
-Given that there are two ways to configure `Pagination`, there are also two props tables. For the
-configuration pattern, follow this table:
-
-| name               | type                           | required?  | default | recommended                              |
-| ------------------ | ------------------------------ | ---------- | ------- | ---------------------------------------- |
-| aria-label         | `string`                       | ✅ `true`  | n/a     | "Pagination" (and translated equivalent) |
-| lastPage           | `number`                       | ✅ `true`  | n/a     | n/a                                      |
-| initialCurrentPage | `number`                       | 🚫 `false` | 1       | n/a                                      |
-| rangeSize          | `number`                       | 🚫 `false` | 5       | n/a                                      |
-| firstPage          | `number`                       | 🚫 `false` | 1       | n/a                                      |
-| onPageChange       | `(pageNumber: number) => void` | 🚫 `false` | n/a     | n/a                                      |
-
-And for the hoisted model pattern, follow this table:
-
-| name       | type              | required? | default | recommended                              |
-| ---------- | ----------------- | --------- | ------- | ---------------------------------------- |
-| aria-label | `string`          | ✅ `true` | n/a     | "Pagination" (and translated equivalent) |
-| model      | `PaginationModel` | ✅ `true` | n/a     | n/a                                      |
-
-This component also supports
-[all native HTMLElement props](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes).
-The `aria-label` prop is required for accessibility. We recommend using `"Pagination"` as seen in
-the example.
-
-### Pagination.Controls
-
-`Pagination.Controls` is a styled `div` wrapper that provides proper alignment and spacing between
-elements inside `Pagination`. It does not handle any internal business logic or state.
-
-#### Usage
-
-```tsx
-<Pagination.Controls>{/* child components go here */}</Pagination.Controls>
-```
-
-#### Component Props
-
-This component supports
-[all native HTMLDivElement props](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div#Attributes).
-
-### Pagination.JumpToFirstButton
-
-`Pagination.JumpToFirstButton` is an `IconButton` that subscribes to `Pagination`'s context. This
-allows it to know when to disable and set `currentPage` to the first page.
-
-#### Usage
-
-```tsx
-<Pagination.JumpToFirstButton aria-label="First" />
-```
-
-#### Component Props
-
-| name       | type     | required? | default | recommended                         |
-| ---------- | -------- | --------- | ------- | ----------------------------------- |
-| aria-label | `string` | ✅ `true` | n/a     | "First" (and translated equivalent) |
-
-This component also supports all `IconButton` props.
-
-### Pagination.StepToPreviousButton
-
-`Pagination.StepToPreviousButton` is an `IconButton` that subscribes to `Pagination`'s context. This
-allows it to know when to disable and decrement the `currentPage`.
-
-#### Usage
-
-```tsx
-<Pagination.StepToPreviousButton aria-label="Previous" />
-```
-
-#### Component Props
-
-| name       | type     | required? | default | recommended                            |
-| ---------- | -------- | --------- | ------- | -------------------------------------- |
-| aria-label | `string` | ✅ `true` | n/a     | "Previous" (and translated equivalent) |
-
-This component also supports all `IconButton` props.
-
-### Pagination.StepToNextButton
-
-`Pagination.StepToNextButton` is an `IconButton` that subscribes to `Pagination`'s context. This
-allows it to know when to disable and increment the `currentPage`.
-
-#### Usage
-
-```tsx
-<Pagination.StepToNextButton aria-label="Next" />
-```
-
-#### Component Props
-
-| name       | type     | required? | default | recommended                        |
-| ---------- | -------- | --------- | ------- | ---------------------------------- |
-| aria-label | `string` | ✅ `true` | n/a     | "Next" (and translated equivalent) |
-
-This component also supports all `IconButton` props.
-
-### Pagination.JumpToLastButton
-
-`Pagination.JumpToLastButton` is an `IconButton` that subscribes to `Pagination`'s context. This
-allows it to know when to disable and set `currentPage` to the last page.
-
-#### Usage
-
-```tsx
-<Pagination.JumpToLastButton aria-label="Last" />
-```
-
-#### Component Props
-
-| name       | type     | required? | default | recommended                        |
-| ---------- | -------- | --------- | ------- | ---------------------------------- |
-| aria-label | `string` | ✅ `true` | n/a     | "Last" (and translated equivalent) |
-
-This component also supports all `IconButton` props.
-
-### Pagination.PageList
-
-`Pagination.PageList` is an ordered list (`ol`) that subscribes to `Pagination`'s context. This
-allows it generate the `range` of page numbers. It also handles spacing between the child elements.
-This component will accept either child elements or functional children (sometimes called the render
-prop pattern). It's likely you'll want to use the functional children, but in the off-chance you
-need a static list of items, this component will support it. The usage section below will provide
-examples of both.
-
-#### Usage
-
-The functional children snippet below will likely be the most common use case.
-
-```tsx
-<Pagination.PageList>
-  {({state}) =>
-    state.range.map(pageNumber => (
-      <Pagination.PageListItem key={pageNumber}>
-        <Pagination.PageButton aria-label={`Page ${pageNumber}`} pageNumber={pageNumber} />
-      </Pagination.PageListItem>
-    ))
-  }
-</Pagination.PageList>
-```
-
-#### Component Props
-
-| name     | type                                                             | required?  | default | recommended |
-| -------- | ---------------------------------------------------------------- | ---------- | ------- | ----------- |
-| children | (model: PaginationModel) => React.ReactNode[] \| React.ReactNode | 🚫 `false` | n/a     | n/a         |
-
-This component also supports
-[all native HTMLOLElement props](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ol#Attributes).
-
-### Pagination.PageListItem
-
-`Pagination.PageListItem` is a styled `li` element. It provides a child semantic element for the
-`PageList` component and is important for accessibility. It does not handle any internal business
-logic or state.
-
-#### Usage
-
-```tsx
-<Pagination.PageListItem>{/* child element goes here */}</Pagination.PageListItem>
-```
-
-#### Component Props
-
-This component also supports
-[all native HTMLLIElement props](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/li#Attributes).
-
-### Pagination.PageButton
-
-`Pagination.PageButton` is an `IconButton` that subscribes to `Pagination`'s context. This allows it
-to know set the `toggled` styling when it is the current item and update the `currentPage`.
-
-#### Usage
-
-`PageButton` will render the `pageNumber` as its children.
-
-```tsx
-<Pagination.PageButton aria-label="Page 2" pageNumber={2} />
-```
-
-#### Component Props
-
-| name       | type     | required? | default | recommended                                      |
-| ---------- | -------- | --------- | ------- | ------------------------------------------------ |
-| aria-label | `string` | ✅ `true` | n/a     | `Page ${pageNumber}` (and translated equivalent) |
-| pageNumber | `number` | ✅ `true` | n/a     | n/a                                              |
-
-This component also supports all `IconButton` props.
-
-### Pagination.GoToForm
-
-`Pagination.GoToForm` is a wrapper for a React context provider and `form` element. Child components
-such as `Pagination.GoToTextInput` and `Pagination.GoToLabel` subscribe to that context to manage
-the form state and behavior as well as update the `currentPage` in the `Pagination` component.
-
-#### Usage
-
-```tsx
-<Pagination.GoToForm>{/* child elements go here */}</Pagination.GoToForm>
-```
-
-#### Component Props
-
-This component supports
-[all native HTMLFormElement props](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form#Attributes).
-
-### Pagination.GoToTextInput
-
-#### Usage
-
-```tsx
-<Pagination.GoToTextInput aria-label="Go to page number" />
-```
-
-#### Component Props
-
-| name       | type                 | required?  | default | recommended                                     |
-| ---------- | -------------------- | ---------- | ------- | ----------------------------------------------- |
-| aria-label | `string`             | ✅ `true`  | n/a     | `Go to page number` (and translated equivalent) |
-| value      | `string` \| `number` | 🚫 `false` | ""      | n/a                                             |
-
-This component also supports all `TextInput` props.
-
-### Pagination.GoToLabel
-
-`Pagination.GoToLabel` is a styled `label` element that subscribes to the `Pagination` context. This
-allows it to pass the `Pagination` context to child elements.
-
-#### Usage
-
-This component will accept either child elements or functional children (sometimes called the render
-prop pattern). It's likely you'll want to use the functional children, but in the off-chance you
-need static child elements, this component will support it. Examples of both patterns are provided
-below.
-
-**Functional Children**
-
-Use this pattern when you need access to the state in the `Pagination` context for your text.
-
-```tsx
-<Pagination.GoToLabel>{({state}) => `of ${state.lastPage} results`}</Pagination.GoToLabel>
-```
-
-#### Component Props
-
-| name     | type                                                           | required?  | default | recommended |
-| -------- | -------------------------------------------------------------- | ---------- | ------- | ----------- |
-| htmlFor  | `string`                                                       | 🚫 `false` | n/a     | n/a         |
-| children | (model: PaginationModel) => React.ReactNode \| React.ReactNode | 🚫 `false` | n/a     | n/a         |
-
-This component also supports
-[all native HTMLLabelElement props](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label#Attributes).
-
-### Pagination.AdditionalDetails
-
-`Pagination.AdditionalDetails` is a styled `div` container that subscribes to the `Pagination`
-context. This allows it to pass the `Pagination` context to child elements. It is also an
-`aria-live` region that announces the current page update to screen readers. Because of that, it's
-important to always\* include it in your `Pagination` component.
-
-_\* The only exception to this rule is when you have multiple `Pagination` components that are
-sharing the same state and rendered on the page. You can then safely remove all but one of the
-`AdditionalDetails` sections. This will prevent a screenreader from announcing updates multiple
-times to a user._
-
-In the case where you would also have multiple `Pagination` components sharing the same state and
-you'd like to keep the `AdditionalDetails` component on multiple, you will need to set
-`shouldAnnounceToScreenReader` to `false` on all but one component to prevent announcement.
-
-#### Usage
-
-This component will accept either child elements or functional children (sometimes called the render
-prop pattern). It's likely you'll want to use the functional children, but in the off-chance you
-need static child elements, this component will support it.
-
-```tsx
-<Pagination.AdditionalDetails>
-  {({state}) =>
-    `${getVisibleResultsMin(state.currentPage, resultCount)}-${getVisibleResultsMax(
-      state.currentPage,
-      resultCount,
-      totalCount
-    )} of ${totalCount} results`
-  }
-</Pagination.AdditionalDetails>
-```
-
-#### Component Props
-
-| name                         | type                                                           | required?  | default | recommended |
-| ---------------------------- | -------------------------------------------------------------- | ---------- | ------- | ----------- |
-| shouldHideDetails            | `boolean`                                                      | 🚫 `false` | false   | n/a         |
-| shouldAnnounceToScreenReader | `boolean`                                                      | 🚫 `false` | true    | n/a         |
-| children                     | (model: PaginationModel) => React.ReactNode \| React.ReactNode | ✅ `true`  | n/a     | n/a         |
