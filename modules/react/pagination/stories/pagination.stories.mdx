@@ -140,6 +140,71 @@ The `PaginationModel` `events` is an object with the following properties.
 
 <ArgsTable of={PaginationEventsComponent} />
 
+## Utilities
+
+### getLastPage
+
+This function takes the number of results per page and the total count of results and returns the
+last page number. Here's an example:
+
+Given there are 10 results per page, and there are 128 total results, the function will return 13.
+
+```ts
+const resultCount = 10;
+const totalCount = 128;
+const lastPage = getLastPage(resultCount, totalCount); //=> 13
+```
+
+### getRangeMin
+
+This function takes the pagination range and returns its minimum value. Here's an example:
+
+Given the pagination range is 1-5, the function will return 1.
+
+```ts
+const range = [1, 2, 3, 4, 5];
+const rangeMin = getRangeMin(range); //=> 1
+```
+
+### getRangeMax
+
+This function takes the pagination range and returns its maximum value. Here's an example:
+
+Given the pagination range is 1-5, the function will return 5.
+
+```ts
+const range = [1, 2, 3, 4, 5];
+const rangeMin = getRangeMax(range); //=> 5
+```
+
+### getVisibleResultsMin
+
+This function takes the current page, and number of results per page, and returns the minimum value
+for that page. Here's an example:
+
+Given there are 10 results per page, and the current page is 5, the function will return 41.
+
+```ts
+const currentPage = 5;
+const resultCount = 10;
+const pageMin = getVisibleResultsMin(currentPage, resultCount); //=> 41
+```
+
+### getVisibleResultsMax
+
+This function takes the current page, number of results per page, and the total number of results,
+and returns the maximum value for that page. Here's an example:
+
+Given there are 10 results per page, the current page is 5, and there are 42 results total, the
+function will return 42.
+
+```ts
+const currentPage = 5;
+const resultCount = 10;
+const totalCount = 42;
+const pageMax = getVisibleResultsMax(currentPage, resultCount, totalCount); //=> 42
+```
+
 ---
 
 ---
@@ -491,69 +556,6 @@ need static child elements, this component will support it.
 | children                     | (model: PaginationModel) => React.ReactNode \| React.ReactNode | ✅ `true`  | n/a     | n/a         |
 
 ## Models, Hooks, & Utils
-
-### getLastPage
-
-This function takes the number of results per page and the total count of results and returns the
-last page number. Here's an example:
-
-Given there are 10 results per page, and there are 128 total results, the function will return 13.
-
-```ts
-const resultCount = 10;
-const totalCount = 128;
-const lastPage = getLastPage(resultCount, totalCount); //=> 13
-```
-
-### getRangeMin
-
-This function takes the pagination range and returns its minimum value. Here's an example:
-
-Given the pagination range is 1-5, the function will return 1.
-
-```ts
-const range = [1, 2, 3, 4, 5];
-const rangeMin = getRangeMin(range); //=> 1
-```
-
-### getRangeMax
-
-This function takes the pagination range and returns its maximum value. Here's an example:
-
-Given the pagination range is 1-5, the function will return 5.
-
-```ts
-const range = [1, 2, 3, 4, 5];
-const rangeMin = getRangeMax(range); //=> 5
-```
-
-### getVisibleResultsMin
-
-This function takes the current page, and number of results per page, and returns the minimum value
-for that page. Here's an example:
-
-Given there are 10 results per page, and the current page is 5, the function will return 41.
-
-```ts
-const currentPage = 5;
-const resultCount = 10;
-const pageMin = getVisibleResultsMin(currentPage, resultCount); //=> 41
-```
-
-### getVisibleResultsMax
-
-This function takes the current page, number of results per page, and the total number of results,
-and returns the maximum value for that page. Here's an example:
-
-Given there are 10 results per page, the current page is 5, and there are 42 results total, the
-function will return 42.
-
-```ts
-const currentPage = 5;
-const resultCount = 10;
-const totalCount = 42;
-const pageMax = getVisibleResultsMax(currentPage, resultCount, totalCount); //=> 42
-```
 
 ### PaginationContext
 
