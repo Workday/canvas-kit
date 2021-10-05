@@ -1,10 +1,10 @@
 import * as React from 'react';
-import GlobalHeader from '../lib/GlobalHeader';
+import DeprecatedGlobalHeader from '../lib/GlobalHeader';
 import {shallow} from 'enzyme';
-import Header from '../lib/Header';
+import DeprecatedHeader from '../lib/Header';
 import {SearchForm} from '@workday/canvas-kit-labs-react/search-form';
-import {DubLogoTitle} from '../lib/parts';
-import {HeaderTheme, HeaderVariant} from '../lib/shared/types';
+import {DeprecatedDubLogoTitle} from '../lib/parts';
+import {DeprecatedHeaderTheme, DeprecatedHeaderVariant} from '../lib/shared/types';
 
 declare global {
   interface Window {
@@ -40,7 +40,7 @@ window.resizeBy = (x: number, y: number) => {
 // @ts-ignore
 window.requestAnimationFrame = cbFn => cbFn();
 
-describe('GlobalHeader', () => {
+describe('DeprecatedGlobalHeader', () => {
   const cb = jest.fn();
   beforeEach(() => {
     window.resizeBy(1280, 1024);
@@ -50,23 +50,25 @@ describe('GlobalHeader', () => {
     cb.mockReset();
   });
 
-  describe('How GlobalHeader children render', () => {
+  describe('How DeprecatedGlobalHeader children render', () => {
     beforeEach(() => {
       window.resizeBy(1280, 1024);
     });
 
     test('Renders non-React child elements as is', () => {
       const text = 'not a react element';
-      const wrapper = shallow<GlobalHeader>(<GlobalHeader>{text}</GlobalHeader>);
+      const wrapper = shallow<DeprecatedGlobalHeader>(
+        <DeprecatedGlobalHeader>{text}</DeprecatedGlobalHeader>
+      );
 
       expect(wrapper.contains(text));
     });
 
     test('Renders a div element as is', () => {
-      const wrapper = shallow<GlobalHeader>(
-        <GlobalHeader>
+      const wrapper = shallow<DeprecatedGlobalHeader>(
+        <DeprecatedGlobalHeader>
           <div>Test</div>
-        </GlobalHeader>
+        </DeprecatedGlobalHeader>
       );
       expect(
         wrapper
@@ -87,19 +89,19 @@ describe('GlobalHeader', () => {
       const propsHeader2 = {
         menuToggle: 'abcde',
         isCollapsed: false,
-        themeColor: HeaderTheme.White,
+        themeColor: DeprecatedHeaderTheme.White,
       };
       const defaultProps = {
-        brand: <DubLogoTitle />,
-        variant: HeaderVariant.Global,
+        brand: <DeprecatedDubLogoTitle />,
+        variant: DeprecatedHeaderVariant.Global,
         children: undefined,
       };
 
-      const childPropsHeader1 = shallow(<GlobalHeader {...propsHeader1} />)
-        .find(Header)
+      const childPropsHeader1 = shallow(<DeprecatedGlobalHeader {...propsHeader1} />)
+        .find(DeprecatedHeader)
         .props();
-      const childPropsHeader2 = shallow(<GlobalHeader {...propsHeader2} />)
-        .find(Header)
+      const childPropsHeader2 = shallow(<DeprecatedGlobalHeader {...propsHeader2} />)
+        .find(DeprecatedHeader)
         .props();
 
       expect(childPropsHeader1).toEqual({...defaultProps, ...propsHeader1});

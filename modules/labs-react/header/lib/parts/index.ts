@@ -1,2 +1,2 @@
-export {DubLogoTitle} from './DubLogoTitle';
-export {WorkdayLogoTitle} from './WorkdayLogoTitle';
+export {DeprecatedDubLogoTitle} from './DubLogoTitle';
+export {DeprecatedWorkdayLogoTitle} from './WorkdayLogoTitle';

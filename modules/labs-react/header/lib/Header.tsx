@@ -2,9 +2,13 @@ import * as React from 'react';
 import {css} from '@emotion/core';
 import styled from '@emotion/styled';
 import {borderRadius, space, type} from '@workday/canvas-kit-react/tokens';
-import {DubLogoTitle, WorkdayLogoTitle} from './parts';
-import {themes} from './shared/themes';
-import {HeaderHeight, HeaderTheme, HeaderVariant} from './shared/types';
+import {DeprecatedDubLogoTitle, DeprecatedWorkdayLogoTitle} from './parts';
+import {deprecatedHeaderThemes} from './shared/themes';
+import {
+  DeprecatedHeaderHeight,
+  DeprecatedHeaderTheme,
+  DeprecatedHeaderVariant,
+} from './shared/types';
 import {Hyperlink, IconButton, IconButtonProps} from '@workday/canvas-kit-react/button';
 import {SystemIcon, SystemIconProps} from '@workday/canvas-kit-react/icon';
 import {justifyIcon} from '@workday/canvas-system-icons-web';
@@ -17,14 +21,14 @@ export interface HeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   menuToggle?: React.ReactNode;
   /**
    * The theme of the Header. Accepts `White`, `Blue`, or `Transparent`.
-   * @default HeaderTheme.White
+   * @default DeprecatedHeaderTheme.White
    */
-  themeColor?: HeaderTheme;
+  themeColor?: DeprecatedHeaderTheme;
   /**
    * The variant of the Header. Accepts `Dub` (small) or `Full` (large).
-   * @default HeaderVariant.Dub
+   * @default DeprecatedHeaderVariant.Dub
    */
-  variant?: HeaderVariant;
+  variant?: DeprecatedHeaderVariant;
   /**
    * The text of the Header title. Not used if `brand` is provided.
    */
@@ -71,10 +75,13 @@ const HeaderShell = styled('div')<PickRequired<HeaderProps, 'themeColor', 'varia
   },
   ({variant, themeColor}) => ({
     // Only the variant Full has a large header, all the other one (Dub, Global) have a small header height
-    height: variant === HeaderVariant.Full ? HeaderHeight.Large : HeaderHeight.Small,
-    background: themes[themeColor].background,
-    ...themes[themeColor].depth,
-    color: themes[themeColor].color,
+    height:
+      variant === DeprecatedHeaderVariant.Full
+        ? DeprecatedHeaderHeight.Large
+        : DeprecatedHeaderHeight.Small,
+    background: deprecatedHeaderThemes[themeColor].background,
+    ...deprecatedHeaderThemes[themeColor].depth,
+    color: deprecatedHeaderThemes[themeColor].color,
   })
 );
 
@@ -98,7 +105,7 @@ const BrandLink = styled(Hyperlink)({
 });
 
 const navStyle = ({themeColor}: PickRequired<HeaderProps, 'themeColor', 'css'>) => {
-  const theme = themes[themeColor];
+  const theme = deprecatedHeaderThemes[themeColor];
 
   return css({
     nav: {
@@ -211,24 +218,31 @@ class Brand extends React.Component<
   Pick<HeaderProps, 'variant' | 'brand' | 'title' | 'themeColor'>
 > {
   render() {
-    const {variant = HeaderVariant.Dub, brand, themeColor = HeaderTheme.White, title} = this.props;
+    const {
+      variant = DeprecatedHeaderVariant.Dub,
+      brand,
+      themeColor = DeprecatedHeaderTheme.White,
+      title,
+    } = this.props;
 
     switch (variant) {
-      case HeaderVariant.Global: {
+      case DeprecatedHeaderVariant.Global: {
         return <span>{brand}</span>;
       }
-      case HeaderVariant.Full: {
+      case DeprecatedHeaderVariant.Full: {
         return (
           <span>
-            {brand || <WorkdayLogoTitle title={title ? title : ''} themeColor={themeColor} />}
+            {brand || (
+              <DeprecatedWorkdayLogoTitle title={title ? title : ''} themeColor={themeColor} />
+            )}
           </span>
         );
       }
-      // HeaderVariant.Dub is default
+      // DeprecatedHeaderVariant.Dub is default
       default: {
         return (
           <span>
-            {brand || <DubLogoTitle title={title ? title : ''} themeColor={themeColor} />}
+            {brand || <DeprecatedDubLogoTitle title={title ? title : ''} themeColor={themeColor} />}
           </span>
         );
       }
@@ -240,7 +254,7 @@ class MenuIconButton extends React.Component<
   Pick<HeaderProps, 'themeColor' | 'menuToggle' | 'onMenuClick'>
 > {
   render() {
-    const {themeColor = HeaderTheme.White, menuToggle, onMenuClick} = this.props;
+    const {themeColor = DeprecatedHeaderTheme.White, menuToggle, onMenuClick} = this.props;
     if (menuToggle) {
       const menuToggleElement = menuToggle as React.ReactElement<any>;
       const onClick = menuToggleElement.props.onClick
@@ -255,7 +269,7 @@ class MenuIconButton extends React.Component<
 
     return (
       <IconButton
-        variant={themeColor === HeaderTheme.White ? 'circle' : 'inverse'}
+        variant={themeColor === DeprecatedHeaderTheme.White ? 'circle' : 'inverse'}
         icon={justifyIcon}
         className={'canvas-header--menu-icon'}
         aria-label="Open Menu"
@@ -265,9 +279,26 @@ class MenuIconButton extends React.Component<
   }
 }
 
+/**
+ * ### Deprecated Header
+ *
+ * As of Canvas Kit v6, this component is being soft-deprecated.
+ * It will be hard-deprecated (completely removed) in v7. Please see the
+ * [migration guide](https://workday.github.io/canvas-kit/?path=/story/welcome-migration-guides-v6-0--page)
+ * for more information.
+ */
 export default class Header extends React.Component<HeaderProps, {}> {
-  static Theme = HeaderTheme;
-  static Variant = HeaderVariant;
+  static Theme = DeprecatedHeaderTheme;
+  static Variant = DeprecatedHeaderVariant;
+
+  componentDidMount() {
+    console.warn(
+      `Header is being deprecated and will be removed in Canvas Kit V7.\n
+      For more information, please see the V6 migration guide:\n
+      https://workday.github.io/canvas-kit/?path=/story/welcome-migration-guides-v6-0--page
+      `
+    );
+  }
 
   /**
    * Helper that recursively maps ReactNodes to their theme-based equivalent.
@@ -293,7 +324,8 @@ export default class Header extends React.Component<HeaderProps, {}> {
       const propsChildren = (child as React.ReactElement<Props>).props.children;
       const singleChild =
         React.Children.count(propsChildren) === 1 && (propsChildren as React.ReactElement<any>);
-      const iconButtonVariant = this.props.themeColor === HeaderTheme.White ? 'circle' : 'inverse';
+      const iconButtonVariant =
+        this.props.themeColor === DeprecatedHeaderTheme.White ? 'circle' : 'inverse';
 
       // Convert old method of SystemIcon into IconButton. If SystemIcon is within a link, make sure it's passed through
       if (child.type === 'a' && singleChild && singleChild.type === SystemIcon) {
@@ -339,8 +371,8 @@ export default class Header extends React.Component<HeaderProps, {}> {
   render() {
     const {
       menuToggle,
-      themeColor = HeaderTheme.White,
-      variant = HeaderVariant.Dub,
+      themeColor = DeprecatedHeaderTheme.White,
+      variant = DeprecatedHeaderVariant.Dub,
       centeredNav,
       title,
       brand,

@@ -1,16 +1,16 @@
-export enum HeaderTheme {
+export enum DeprecatedHeaderTheme {
   White,
   Blue,
   Transparent,
 }
 
-export enum HeaderVariant {
+export enum DeprecatedHeaderVariant {
   Dub,
   Full,
   Global,
 }
 
-export enum HeaderHeight {
+export enum DeprecatedHeaderHeight {
   Small = '64px',
   Large = '80px',
 }
