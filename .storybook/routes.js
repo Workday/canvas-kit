@@ -38,7 +38,7 @@ const routes = {
   '/components/navigation/breadcrumbs/': 'preview-breadcrumbs-react--basic',
   '/components/navigation/header/': 'components-navigation-page-header-react--product-page-header',
   '/components/navigation/page-header/': 'labs-header-react--global-header',
-  '/components/navigation/pagination/': 'components-navigation-pagination-react--step-controls',
+  '/components/navigation/pagination/': 'components-navigation-pagination-react--basic',
   '/components/popups/toast/': 'components-popups-toast-react--with-popper',
   '/components/popups/menu/': 'preview-menu-react--basic',
   '/components/popups/modal/': 'components-popups-modal-react--basic',
