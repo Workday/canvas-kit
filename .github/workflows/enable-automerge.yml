@@ -1,0 +1,16 @@
+name: Enable Automerge
+
+on:
+  pull_request_target:
+    types: [ edited, labeled, synchronize ]
+
+jobs:
+  enable-automerge:
+    if: contains(github.event.pull_request.labels.*.name, 'automerge')
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Enable Automerge
+      uses: Workday/canvas-kit-actions/enable-automerge@v1
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}

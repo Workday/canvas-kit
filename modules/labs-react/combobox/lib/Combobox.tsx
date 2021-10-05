@@ -106,7 +106,6 @@ const MenuContainer = styled(Card)({
   minWidth: 0,
   animation: `${fadeInKeyframes} 200ms ease-out`,
   maxHeight: 200,
-  overflowY: 'auto',
 });
 
 const ResetButton = styled(IconButton)<{shouldShow: boolean}>(

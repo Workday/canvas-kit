@@ -7,8 +7,11 @@ import {ComboBoxMenuItemGroup, getOptionId, listBoxIdPart, getTextFromElement} f
 import uuid from 'uuid/v4';
 
 const Autocomplete = styled('ul')({
-  padding: 0,
-  margin: `${space.xxs} 0`,
+  margin: 0,
+  maxHeight: 200,
+  boxSizing: 'border-box',
+  overflowY: 'auto',
+  padding: `${space.xxs} 0`,
 });
 
 const AccessibleHide = styled('span')(accessibleHide);
