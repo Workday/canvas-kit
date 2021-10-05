@@ -1,9 +1,4 @@
-import {
-  ImportDeclaration,
-  ImportSpecifier,
-  ImportDefaultSpecifier,
-  ImportNamespaceSpecifier,
-} from 'jscodeshift';
+import {ImportSpecifier, ImportDefaultSpecifier, ImportNamespaceSpecifier} from 'jscodeshift';
 
 export type ImportSpecifierArray = (
   | ImportSpecifier
@@ -79,16 +74,12 @@ export function renameImportSpecifiers(importSpecifiers: ImportSpecifier[], rena
  * }
  */
 export function filterImportDefaultSpecifiers(
-  importDeclaration: ImportDeclaration,
+  importSpecifiers: ImportSpecifierArray,
   importNames?: string[]
 ) {
   const filteredSpecifiers = [] as ImportDefaultSpecifier[];
 
-  if (!importDeclaration.specifiers) {
-    return filteredSpecifiers;
-  }
-
-  importDeclaration.specifiers.forEach(specifier => {
+  importSpecifiers.forEach(specifier => {
     if (specifier.type === 'ImportDefaultSpecifier') {
       const localName = specifier.local?.name || '';
       if (importNames && importNames.includes(localName)) {
