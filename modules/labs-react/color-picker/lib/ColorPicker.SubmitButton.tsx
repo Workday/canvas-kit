@@ -8,13 +8,6 @@ export interface SubmitButtonProps extends IconButtonProps {}
 export default createComponent(IconButton)({
   displayName: 'SubmitButton',
   Component: ({...elemProps}: SubmitButtonProps) => {
-    return (
-      <IconButton
-        className="wd-custom-color-submit-btn"
-        variant={'circleFilled'}
-        icon={checkIcon}
-        {...elemProps}
-      ></IconButton>
-    );
+    return <IconButton variant={'circleFilled'} icon={checkIcon} {...elemProps}></IconButton>;
   },
 });

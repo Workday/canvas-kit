@@ -17,12 +17,7 @@ export const SwatchContext = React.createContext({
   setIntentTab: number => {},
   registerTab: name => {},
   unregisterTab: name => {},
-  moreVisible: false,
-  setMoreVisible: () => {},
-  moreWidth: 0,
-  setMoreWidth: () => {},
   tabListRef: {current: null},
-  moreRef: {current: null},
 });
 
 export const SwatchWrapper = ({initialActive = '', children}) => {
@@ -78,14 +73,10 @@ export const SwatchWrapper = ({initialActive = '', children}) => {
             // setActiveTab(tabName);
             setIntentTab(tabName);
           },
-          moreWidth,
-
-          moreVisible,
 
           registerTab,
           unregisterTab,
           tabListRef,
-          moreRef,
         }}
       >
         {children}

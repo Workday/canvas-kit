@@ -6,6 +6,7 @@ import {
   createComponent,
   StyledType,
   pickForegroundColor,
+  useMountLayout,
 } from '@workday/canvas-kit-react/common';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {borderRadius, colors, space} from '@workday/canvas-kit-react/tokens';
@@ -14,12 +15,6 @@ import chroma from 'chroma-js';
 import * as React from 'react';
 import {SwatchContext} from './ColorPicker.SwatchBook';
 import {ColorPickerModelContext} from './ColorPicker';
-
-const cx = obj => {
-  return Object.keys(obj)
-    .filter(k => obj[k])
-    .join(' ');
-};
 
 export interface SwatchButtonProps {
   /**
@@ -104,6 +99,11 @@ export default createComponent('button')({
 
     const isSelected = state.color ? color === state.color : false;
 
+    useMountLayout(() => {
+      events.registerColor({color: color});
+      return () => events.unregisterColor({color: color});
+    });
+
     const {
       activeTab,
       setActiveTab,
@@ -118,7 +118,7 @@ export default createComponent('button')({
       return () => {
         unregisterTab(color);
       };
-    }, []);
+    }, [color, registerTab, unregisterTab]);
 
     const onKeyDown = event => {
       switch (event.key) {

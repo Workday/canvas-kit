@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import {createComponent, StyledType} from '@workday/canvas-kit-react/common';
 import {FormField, FormFieldProps} from '@workday/canvas-kit-react/form-field';
+import {HStack} from '@workday/canvas-kit-labs-react/layout';
 import * as React from 'react';
 
 import {ColorPickerModelContext} from './ColorPicker';
@@ -15,9 +16,6 @@ const StyledForm = styled('form')<StyledType>({
   display: 'flex',
   flexDirection: 'row',
   justifyContent: 'space-between',
-  '.wd-custom-color-submit-btn': {
-    marginLeft: '10px',
-  },
 });
 
 export default createComponent('form')({
@@ -34,7 +32,9 @@ export default createComponent('form')({
         as={Element}
         {...elemProps}
       >
-        <FormField label={label}>{children}</FormField>
+        <FormField label={label}>
+          <HStack spacing="s">{children}</HStack>
+        </FormField>
       </StyledForm>
     );
   },
