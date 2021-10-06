@@ -13,6 +13,7 @@
     "strictNullChecks": false,
     "noUnusedLocals": false,
     "types": [],
-    "incremental": false
+    "incremental": false,
+    "skipLibCheck": true
   }
 }
