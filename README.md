@@ -16,7 +16,8 @@ implement user experiences consistent with
 
 ---
 
-**:white_check_mark: For a list of available react modules see [Canvas Kit Component Status](./modules/docs/mdx/COMPONENT_STATUS.mdx)**
+**:white_check_mark: For a list of available react modules see
+[Canvas Kit Component Status](./modules/docs/mdx/COMPONENT_STATUS.mdx)**
 
 ## Getting started
 
