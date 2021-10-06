@@ -6,7 +6,6 @@ import {Basic} from './examples/Basic';
 import {CustomRange} from './examples/CustomRange';
 import {JumpControls} from './examples/JumpControls';
 import {GoToForm} from './examples/GoToForm';
-import {ShowAdditionalDetails} from './examples/ShowAdditionalDetails';
 import {HoistedModel} from './examples/HoistedModel';
 import {RTL} from './examples/RTL';
 import {
@@ -46,6 +45,13 @@ allow you to move to the previous page or the next page.
 
 <ExampleCodeBlock code={Basic} />
 
+Note that you must include `Pagination.AdditionalDetails` to meet accessibility standards (with one
+exception, see [`Pagination.AdditionalDetails`](#paginationadditionaldetails) for more information).
+It is an `aria-live` region that announces the current page update to screen readers. If you wish to
+prevent it from displaying (as we've done in the remaining examples), you may set its
+`shouldHideDetails` prop to `true`. The visually hidden region will still be accessible to screen
+readers.
+
 ### Hoisted Model
 
 By default, `Pagination` will create and use its own [model](#model) internally. Alternatively, you
@@ -72,23 +78,6 @@ This example adds a form (`Pagination.GoToForm`) that allows you to skip to a sp
 the range.
 
 <ExampleCodeBlock code={GoToForm} />
-
-### Additional Details
-
-This example adds a visible section (`Pagination.AdditionalDetails`). It is an `aria-live` region
-that announces the current page update to screen readers. Because of that, it's important to
-**always†** include it in your `Pagination` component.
-
-In the case where you would also have multiple `Pagination` components sharing the same state and
-you'd like to keep the `AdditionalDetails` component on multiple, you will need to set
-`shouldAnnounceToScreenReader` to `false` on all but one component to prevent announcement.
-
-> **†** _The only exception to this rule is when you have multiple `Pagination` components that are
-> sharing the same state and rendered on the page. You can then safely remove all but one of the
-> `AdditionalDetails` sections. This will prevent a screenreader from announcing updates multiple
-> times to a user._
-
-<ExampleCodeBlock code={ShowAdditionalDetails} />
 
 ### Right-to-Left (RTL)
 
@@ -379,17 +368,22 @@ Undocumented props are spread to the underlying `<label>` element.
 
 `Pagination.AdditionalDetails` is a styled `<div>` element that subscribes to the `Pagination`
 context. This allows it to pass the `Pagination` context to child elements. It is also an
-`aria-live` region that announces the current page update to screen readers. Because of that, it's
-important to always\* include it in your `Pagination` component.
+`aria-live` region that announces the current page update to screen readers.
 
-_\* The only exception to this rule is when you have multiple `Pagination` components that are
-sharing the same state and rendered on the page. You can then safely remove all but one of the
-`AdditionalDetails` sections. This will prevent a screenreader from announcing updates multiple
-times to a user._
+`Pagination.AdditionalDetails` must be included in your `Pagination` component to meet accessibility
+standards (with one exception, see below). If you wish to prevent it from displaying, you may set
+its `shouldHideDetails` prop to `true`. The visually hidden region will still be accessible to
+screen readers.
 
-In the case where you would also have multiple `Pagination` components sharing the same state and
-you'd like to keep the `AdditionalDetails` component on multiple, you will need to set
-`shouldAnnounceToScreenReader` to `false` on all but one component to prevent announcement.
+If you have multiple `Pagination` components sharing the same state and rendered on the same page,
+you may do either of the following to prevent screen readers from announcing the same update
+multiple times:
+
+- Exclude `Pagination.AdditionalDetails` from all but one of the `Pagination` components. This is
+  the one case where you may exclude `Pagination.AdditionalDetails` from a `Pagination` component.
+- Include `Pagination.AdditionalDetails` in every `Pagination` component (i.e., you want it to be
+  visible for every component), but set the `shouldAnnounceToScreenReader` prop to `false` on all
+  but one of them.
 
 This component will accept either child elements or a render prop. In most cases, you'll want to use
 the render prop so you can access the `Pagination` model in order to generate the appropriate text.

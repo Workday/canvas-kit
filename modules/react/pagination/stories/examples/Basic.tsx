@@ -30,7 +30,7 @@ export const Basic = () => {
         </Pagination.PageList>
         <Pagination.StepToNextButton aria-label="Next" />
       </Pagination.Controls>
-      <Pagination.AdditionalDetails shouldHideDetails>
+      <Pagination.AdditionalDetails>
         {({state}) =>
           `${getVisibleResultsMin(state.currentPage, resultCount)}-${getVisibleResultsMax(
             state.currentPage,
