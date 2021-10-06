@@ -65,6 +65,8 @@
     "uuid": "^3.3.3"
   },
   "devDependencies": {
-    "@types/lodash.flatten": "^4.4.6"
+    "@types/lodash.flatten": "^4.4.6",
+    "formik": "^2.2.9",
+    "yup": "^0.31.1"
   }
 }
