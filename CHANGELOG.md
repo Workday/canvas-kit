@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v5.2.7](https://github.com/Workday/canvas-kit/releases/tag/v5.2.7) (2021-09-30)
+
+### Components
+
+- docs(menu): Fix Menu examples to be self-contained and SSR-safe ([#1291](https://github.com/Workday/canvas-kit/pull/1291)) ([@jamesfan](https://github.com/jamesfan))
+
+
 ## [v5.2.6](https://github.com/Workday/canvas-kit/releases/tag/v5.2.6) (2021-09-24)
 
 ### Components
@@ -34,11 +41,11 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - ci: Update GA job names to help with branch checks [skip ci] ([@NicholasBoll](https://github.com/NicholasBoll))
 - ci: Add prerelease canary builds ([@NicholasBoll](https://github.com/NicholasBoll))
   This change updates branch names for automated release management. Branch renames are as follows:
-  
+
   - `support/v4.x` -> `support`
   - `prerelease/v5.3` -> `prerelease/minor`
   - `prerelease/v6` -> `prerelease/major`
-  
+
   We renamed the `support` branch which could conflict with local refs. You may need to run the following if you've contributed to Canvas Kit in the past:
   ```
   git remote prune upstream

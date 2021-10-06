@@ -13,4 +13,4 @@ jobs:
     - name: Enable Automerge
       uses: Workday/canvas-kit-actions/enable-automerge@v1
       with:
-        token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ secrets.GH_RW_TOKEN }}
