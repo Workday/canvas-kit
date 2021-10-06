@@ -8,27 +8,26 @@ import {FormField, FormFieldLabelPosition} from '@workday/canvas-kit-react/form-
 import {Combobox} from '@workday/canvas-kit-labs-react/combobox';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {MenuItemProps} from '@workday/canvas-kit-preview-react/menu';
-import {SearchThemeAttributes, searchThemes} from '../shared/themes';
-import {SearchTheme} from '../shared/types';
+import {SearchThemeAttributes, searchThemes, SearchTheme} from './themes';
 import chroma from 'chroma-js';
 import uuid from 'uuid/v4';
 
-export interface SearchBarProps extends GrowthBehavior, React.FormHTMLAttributes<HTMLFormElement> {
+export interface SearchFormProps extends GrowthBehavior, React.FormHTMLAttributes<HTMLFormElement> {
   /**
-   * The function called when the SearchBar form is submitted. The current input value is passed to the callback function.
+   * The function called when the SearchForm form is submitted. The current input value is passed to the callback function.
    */
   onSubmit: React.FormEventHandler<HTMLFormElement>;
   /**
-   * If true, collapse the SearchBar text input into a toggle icon. Useful for responsive layouts.
+   * If true, collapse the SearchForm text input into a toggle icon. Useful for responsive layouts.
    * @default false
    */
   isCollapsed?: boolean;
   /**
-   * The function called when the SearchBar text input changes.
+   * The function called when the SearchForm text input changes.
    */
   onInputChange?: React.ChangeEventHandler<HTMLInputElement>;
   /**
-   * The autocomplete items of the SearchBar. This array of menu items is shown under the search bar.
+   * The autocomplete items of the SearchForm. This array of menu items is shown under the search bar.
    */
   autocompleteItems?: React.ReactElement<MenuItemProps>[];
   /**
@@ -36,57 +35,57 @@ export interface SearchBarProps extends GrowthBehavior, React.FormHTMLAttributes
    */
   searchTheme?: SearchTheme | SearchThemeAttributes;
   /**
-   * The placeholder text of the SearchBar text input.
+   * The placeholder text of the SearchForm text input.
    * @default Search
    */
   placeholder?: string;
   /**
-   * The initial value of the SearchBar text input.
+   * The initial value of the SearchForm text input.
    */
   initialValue?: string;
   /**
-   * If true, right-align the SearchBar. If false, the text input should grow to left-align the SearchBar.
+   * If true, right-align the SearchForm. If false, the text input should grow to left-align the SearchForm.
    * @default false
    */
   rightAlign?: boolean;
   /**
-   * The screenreader label text for the SearchBar text input.
+   * The screenreader label text for the SearchForm text input.
    * @default Search
    */
   inputLabel?: string;
   /**
-   * The screenreader label text for the SearchBar submit button.
+   * The screenreader label text for the SearchForm submit button.
    * @default Search
    */
   submitAriaLabel?: string;
   /**
-   * The screenreader label text for the SearchBar clear button.
+   * The screenreader label text for the SearchForm clear button.
    * @default Reset Search Form
    */
   clearButtonAriaLabel?: string;
   /**
-   * The screenreader label text for the button to open the collapsed SearchBar.
+   * The screenreader label text for the button to open the collapsed SearchForm.
    * @default Open Search
    */
   openButtonAriaLabel?: string;
   /**
-   * The screenreader label text for the button to close the open SearchBar.
+   * The screenreader label text for the button to close the open SearchForm.
    * @default Cancel
    */
   closeButtonAriaLabel?: string;
   /**
-   * If true, render the SearchBar with a button to clear the text input.
+   * If true, render the SearchForm with a button to clear the text input.
    * @default true
    */
   showClearButton?: boolean;
   /**
-   * Height of the Search Bar in pixels
-   * @default: 40
+   * Height of the Search Form in pixels
+   * @default 40
    */
   height?: number;
 }
 
-export interface SearchBarState {
+export interface SearchFormState {
   showForm: boolean;
   searchQuery: string;
   isFocused: boolean;
@@ -110,8 +109,8 @@ const formCollapsedBackground = colors.frenchVanilla100;
 const maxWidth = 480;
 const minWidth = 120;
 
-const SearchForm = styled('form')<
-  Pick<SearchBarProps, 'isCollapsed' | 'rightAlign' | 'grow'> & Pick<SearchBarState, 'showForm'>
+const StyledSearchForm = styled('form')<
+  Pick<SearchFormProps, 'isCollapsed' | 'rightAlign' | 'grow'> & Pick<SearchFormState, 'showForm'>
 >(
   {
     position: 'relative',
@@ -148,7 +147,7 @@ const SearchForm = styled('form')<
   }
 );
 
-const SearchContainer = styled('div')<Pick<SearchBarProps, 'height'>>(
+const SearchContainer = styled('div')<Pick<SearchFormProps, 'height'>>(
   {
     position: `relative`,
     display: 'flex',
@@ -166,7 +165,7 @@ const SearchCombobox = styled(Combobox)({
   width: `100%`,
 });
 
-const SearchIcon = styled(IconButton)<Pick<SearchBarProps, 'isCollapsed'> & {isHidden: boolean}>(
+const SearchIcon = styled(IconButton)<Pick<SearchFormProps, 'isCollapsed'> & {isHidden: boolean}>(
   ({isCollapsed, isHidden}) => {
     const collapsedSize = 40;
     const size = 32;
@@ -199,7 +198,7 @@ const SearchIcon = styled(IconButton)<Pick<SearchBarProps, 'isCollapsed'> & {isH
 );
 
 const CloseButton = styled(IconButton)<
-  Pick<SearchBarProps, 'isCollapsed'> & Pick<SearchBarState, 'showForm'>
+  Pick<SearchFormProps, 'isCollapsed'> & Pick<SearchFormState, 'showForm'>
 >(({isCollapsed, showForm}) => {
   const collapseStyles: CSSObject =
     isCollapsed && showForm
@@ -222,7 +221,7 @@ const CloseButton = styled(IconButton)<
 });
 
 const SearchField = styled(FormField)<
-  Pick<SearchBarProps, 'isCollapsed' | 'grow' | 'height'> & Pick<SearchBarState, 'showForm'>
+  Pick<SearchFormProps, 'isCollapsed' | 'grow' | 'height'> & Pick<SearchFormState, 'showForm'>
 >(({isCollapsed, showForm, grow, height}) => {
   return {
     display: (isCollapsed && showForm) || !isCollapsed ? 'inline-block' : 'none',
@@ -237,7 +236,7 @@ const SearchField = styled(FormField)<
 });
 
 const SearchInput = styled(TextInput)<
-  Pick<SearchBarProps, 'isCollapsed' | 'grow' | 'height'> & {
+  Pick<SearchFormProps, 'isCollapsed' | 'grow' | 'height'> & {
     inputColors: ReturnType<typeof getInputColors>;
   }
 >(({isCollapsed, inputColors, grow, height}) => {
@@ -289,14 +288,14 @@ const SearchInput = styled(TextInput)<
   };
 });
 
-export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
+export class SearchForm extends React.Component<SearchFormProps, SearchFormState> {
   static Theme = SearchTheme;
 
   private inputRef = React.createRef<HTMLInputElement>();
   private openRef = React.createRef<HTMLButtonElement>();
   private labelId = uuid();
 
-  state: Readonly<SearchBarState> = {
+  state: Readonly<SearchFormState> = {
     showForm: false,
     searchQuery: '',
     isFocused: false,
@@ -352,7 +351,7 @@ export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
     }
   };
 
-  componentDidUpdate(prevProps: SearchBarProps, prevState: SearchBarState) {
+  componentDidUpdate(prevProps: SearchFormProps, prevState: SearchFormState) {
     const showFormToggled = this.state.showForm !== prevState.showForm;
     if (showFormToggled) {
       if (this.state.showForm) {
@@ -413,7 +412,7 @@ export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
     } = this.props;
 
     return (
-      <SearchForm
+      <StyledSearchForm
         role="search"
         action="."
         rightAlign={rightAlign}
@@ -486,7 +485,7 @@ export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
             type="button"
           />
         </SearchContainer>
-      </SearchForm>
+      </StyledSearchForm>
     );
   }
 }

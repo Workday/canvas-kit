@@ -122,6 +122,7 @@ Each module is independently versioned using [Lerna](https://github.com/lerna/le
 - Migration Guides:
   - [v4.0 Migration Guide](./modules/docs/mdx/4.0-MIGRATION-GUIDE.mdx)
   - [v5.0 Migration Guide](./modules/docs/mdx/5.0-MIGRATION-GUIDE.mdx)
+  - [v6.0 Migration Guide](./modules/docs/mdx/6.0-MIGRATION-GUIDE.mdx)
 - Code Style / Best Practices:
   - [API & Pattern Guidelines](./modules/docs/mdx/API_PATTERN_GUIDELINES.mdx)
   - [Compound Components](./modules/docs/mdx/COMPOUND_COMPONENTS.mdx)
