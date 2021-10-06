@@ -3140,6 +3140,16 @@
         "__isArgsStory": false
       }
     },
+    "components-navigation-pagination-react--basic": {
+      "id": "components-navigation-pagination-react--basic",
+      "name": "Basic",
+      "kind": "Components/Navigation/Pagination/React",
+      "story": "Basic",
+      "parameters": {
+        "__id": "components-navigation-pagination-react--basic",
+        "__isArgsStory": false
+      }
+    },
     "components-navigation-pagination-react--custom-range": {
       "id": "components-navigation-pagination-react--custom-range",
       "name": "Custom Range",
@@ -3187,26 +3197,6 @@
       "story": "RTL",
       "parameters": {
         "__id": "components-navigation-pagination-react--rtl",
-        "__isArgsStory": false
-      }
-    },
-    "components-navigation-pagination-react--show-additional-details": {
-      "id": "components-navigation-pagination-react--show-additional-details",
-      "name": "Show Additional Details",
-      "kind": "Components/Navigation/Pagination/React",
-      "story": "Show Additional Details",
-      "parameters": {
-        "__id": "components-navigation-pagination-react--show-additional-details",
-        "__isArgsStory": false
-      }
-    },
-    "components-navigation-pagination-react--step-controls": {
-      "id": "components-navigation-pagination-react--step-controls",
-      "name": "Step Controls",
-      "kind": "Components/Navigation/Pagination/React",
-      "story": "Step Controls",
-      "parameters": {
-        "__id": "components-navigation-pagination-react--step-controls",
         "__isArgsStory": false
       }
     },
