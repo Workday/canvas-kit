@@ -5,7 +5,15 @@ import styled from '@emotion/styled';
 import {colors, commonColors, type, space} from '@workday/canvas-kit-react/tokens';
 import {Hyperlink, HyperlinkProps, PrimaryButton} from '@workday/canvas-kit-react/button';
 
-export interface CookieBannerProps {
+/**
+ * ### Deprecated Cookie Banner Props
+ *
+ * As of Canvas Kit v6, CookieBanner is being soft-deprecated.
+ * It will be hard-deprecated (completely removed) in v7. Please see the
+ * [migration guide](https://workday.github.io/canvas-kit/?path=/story/welcome-migration-guides-v6-0--page)
+ * for more information.
+ */
+export interface DeprecatedCookieBannerProps {
   /**
    * If true, set the CookieBanner to the closed state.
    * @default false
@@ -57,7 +65,7 @@ const Banner = styled('div')(
       padding: `${space.s} 0`,
     },
   },
-  ({isClosed}: Pick<CookieBannerProps, 'isClosed'>) =>
+  ({isClosed}: Pick<DeprecatedCookieBannerProps, 'isClosed'>) =>
     isClosed ? {transform: 'translateY(100%)'} : null
 );
 
@@ -95,13 +103,30 @@ const CookieSettings = (props: CookieSettingsProps) => {
   return <Hyperlink as="button" css={cookieSettingsStyles} {...props} />;
 };
 
-export default class CookieBanner extends React.Component<CookieBannerProps> {
+/**
+ * ### Deprecated Cookie Banner
+ *
+ * As of Canvas Kit v6, this component is being soft-deprecated.
+ * It will be hard-deprecated (completely removed) in v7. Please see the
+ * [migration guide](https://workday.github.io/canvas-kit/?path=/story/welcome-migration-guides-v6-0--page)
+ * for more information.
+ */
+export default class DeprecatedCookieBanner extends React.Component<DeprecatedCookieBannerProps> {
+  componentDidMount() {
+    console.warn(
+      `This component is being deprecated and will be removed in Canvas Kit V7.\n
+      For more information, please see the V6 migration guide:\n
+      https://workday.github.io/canvas-kit/?path=/story/welcome-migration-guides-v6-0--page
+      `
+    );
+  }
+
   public static DefaultNotice =
     'We use cookies to ensure that we give you the best experience on our website. If you continue without changing your settings, we’ll assume that you are willing to receive cookies.';
 
   public render(): React.ReactNode {
     const {
-      notice = CookieBanner.DefaultNotice,
+      notice = DeprecatedCookieBanner.DefaultNotice,
       settingsLabel = 'Cookie Settings',
       isClosed,
       onAccept,

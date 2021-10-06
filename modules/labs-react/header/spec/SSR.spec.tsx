@@ -3,18 +3,18 @@
  */
 import React from 'react';
 import {renderToString} from 'react-dom/server';
-import {Header, GlobalHeader} from '../';
+import {DeprecatedHeader, DeprecatedGlobalHeader} from '../';
 
-describe('Header', () => {
+describe('Deprecated Header', () => {
   it('should render on a server without crashing', () => {
-    const ssrRender = () => renderToString(<Header />);
+    const ssrRender = () => renderToString(<DeprecatedHeader />);
     expect(ssrRender).not.toThrow();
   });
 });
 
-describe('GlobalHeader', () => {
+describe('Deprecated Global Header', () => {
   it('should render on a server without crashing', () => {
-    const ssrRender = () => renderToString(<GlobalHeader />);
+    const ssrRender = () => renderToString(<DeprecatedGlobalHeader />);
     expect(ssrRender).not.toThrow();
   });
 });
