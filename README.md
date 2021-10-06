@@ -7,12 +7,10 @@ implement user experiences consistent with
 <a href="./LICENSE">
   <img src="https://img.shields.io/badge/license-Apache--2.0-blue.svg" alt="Workday Canvas Kit is released under the Apache-2.0 license" />
 </a>
-<a href="https://travis-ci.org/Workday/canvas-kit">
-  <img src="https://travis-ci.com/Workday/canvas-kit.svg?token=oZpr7hcrwxtuCsrBb5dT&branch=master" alt="Travis CI">
-</a>
 <a href="https://lerna.js.org">
   <img src="https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg" alt="Maintained with Lerna" />
 </a>
+[![Release](https://github.com/Workday/canvas-kit/actions/workflows/release.yml/badge.svg)](https://github.com/Workday/canvas-kit/actions/workflows/release.yml)
 <a href="./modules/docs/mdx/CONTRIBUTING.mdx">
   <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs welcome" />
 </a>
@@ -145,4 +143,4 @@ The Workday Canvas Kits are licensed under the Apache 2.0 License.
 
 Visual Testing by [ChromaticQA](https://www.chromaticqa.com/)
 
-Builds by [TravisCI](https://www.chromaticqa.com/)
+Builds by [Github Actions](https://docs.github.com/en/actions)

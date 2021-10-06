@@ -8,7 +8,7 @@ export const ManyItems = () => {
       {'One Two Three Four Five Six Seven Eight Nine Ten Eleven Twelve Thirteen Fourteen Fifteen'
         .split(' ')
         .map(item => {
-          return <MenuItem>Item {item}</MenuItem>;
+          return <MenuItem key={item}>Item {item}</MenuItem>;
         })}
     </Menu>
   );
