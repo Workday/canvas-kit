@@ -25,9 +25,9 @@ describe('Menu', () => {
     h.stories.visit();
   });
 
-  context('given the [Preview/Menu/React, Control Button] example is rendered', () => {
+  context('given the [Preview/Menu/React, Basic] example is rendered', () => {
     beforeEach(() => {
-      h.stories.load('Preview/Menu/React', 'Control Button');
+      h.stories.load('Preview/Menu/React', 'Basic');
     });
 
     it('should not have any axe errors', () => {
