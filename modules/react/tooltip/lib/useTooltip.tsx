@@ -31,7 +31,7 @@ const useIntentTimer = (fn: Function, waitMs: number = 0): {start(): void; clear
   };
 };
 
-const isInteractiveElement = (element: HTMLElement) => {
+const isInteractiveElement = (element: Element) => {
   const tagName = element.tagName.toLowerCase();
   const tabIndex = element.getAttribute('tabindex');
 
@@ -51,7 +51,7 @@ const isInteractiveElement = (element: HTMLElement) => {
  * Convenience hook for creating components with tooltips. It will return an object of properties to mix
  * into a target, popper and tooltip
  */
-export function useTooltip<T extends HTMLElement = HTMLElement>({
+export function useTooltip<T extends Element = Element>({
   type = 'label',
   titleText = '',
 }: {
@@ -89,12 +89,12 @@ export function useTooltip<T extends HTMLElement = HTMLElement>({
     intentTimer.clear();
   };
 
-  const onOpenFromTarget = (event: React.SyntheticEvent<HTMLElement>) => {
+  const onOpenFromTarget = (event: React.SyntheticEvent) => {
     setAnchorElement(event.currentTarget as T);
     onOpen();
   };
 
-  const onFocus = (event: React.FocusEvent<HTMLElement>) => {
+  const onFocus = (event: React.FocusEvent) => {
     if (!mouseDownRef.current) {
       onOpenFromTarget(event);
     }
@@ -102,7 +102,7 @@ export function useTooltip<T extends HTMLElement = HTMLElement>({
     mouseDownRef.current = false;
   };
 
-  const onMouseDown = (event: React.MouseEvent<HTMLElement>) => {
+  const onMouseDown = (event: React.MouseEvent) => {
     mouseDownRef.current = true;
     if (isInteractiveElement(event.currentTarget)) {
       popupModel.events.hide();

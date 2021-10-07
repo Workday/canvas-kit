@@ -1,12 +1,11 @@
 import {API, FileInfo, Options} from 'jscodeshift';
-
-// Future v6 codemods go here!
+// deprecate PageHeader
+import deprecatePageHeader from './deprecatePageHeader';
 
 export default function transformer(file: FileInfo, api: API, options: Options) {
   // These will run in order. If your transform depends on others, place yours after dependent
   // transforms
-  return;
-  //   const fixes = [];
+  const fixes = [deprecatePageHeader];
 
-  //   return fixes.reduce((source, fix) => fix({...file, source}, api, options), file.source);
+  return fixes.reduce((source, fix) => fix({...file, source}, api, options), file.source);
 }

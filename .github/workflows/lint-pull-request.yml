@@ -1,4 +1,4 @@
-name: "Lint PR title"
+name: "Lint PR"
 
 on:
   pull_request_target:
@@ -25,4 +25,8 @@ jobs:
         with:
           scopes: ${{steps.scope-vars.outputs.scopes}}
           subjectPattern: ^[A-Z].+$
+
+      - uses: Workday/canvas-kit-actions/verify-pull-request@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 

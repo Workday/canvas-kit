@@ -1,0 +1,111 @@
+import {Meta} from '@storybook/addon-docs/blocks';
+
+<Meta title="Welcome/Migration Guides/v6.0" />
+
+# Canvas Kit 6.0 Migration Guide
+
+Below are the breaking changes made in Canvas Kit v6. Please
+[reach out](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) if you have
+any questions about the update.
+
+- [Codemod](#codemod)
+- [Component Deprecations](#component-deprecations)
+  - [PageHeader](#page-header)
+
+## Codemod
+
+Please use our [codemod package](https://github.com/Workday/canvas-kit/tree/master/modules/codemod)
+to automatically update your code to work with a majority of the breaking changes in the migration
+from Canvas Kit v5 to v6:
+
+```sh
+> npx @workday/canvas-kit-codemod v6 [path]
+```
+
+> Note: This codemod only works on `.js`, `.jsx`, `.ts`, and `.tsx` extensions. You may need to make
+> some manual changes in other file types (`.json`, `.mdx`, `.md`, etc.).
+
+> Note: You may need to run your linter after executing the codemod, as it's resulting formatting
+> (spacing, quotes, etc.) may not match your project's styling.
+
+**Breaking changes accounted for by this codemod will be marked with a 🤖.**
+
+**Please verify all changes made by the codemod. As a safety precaution, we recommend committing the
+changes from the codemod as a single isolated commit (separate from other changes) so you can
+rollback more easily if necessary.**
+
+[Let us know](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) if you
+encounter any issues or use cases that we've missed. The `@workday/canvas-kit-codemod` package will
+help us maintain additional codemod transforms to make future migrations easier.
+
+## Component Deprecations
+
+### Deprecation Types
+
+There are two types of deprecations: soft and hard.
+
+#### Soft Deprecation
+
+A soft-deprecated component is still available with its full functionality, but it will have been
+renamed with a prefix to indicate its soft-deprecated status. It will also include a console warning
+to announce its deprecation. This warning will only be triggered on the component's initial render.
+
+Soft-deprecated types and utilities will also be renamed but generally will not trigger a console
+warning.
+
+#### Hard Deprecation
+
+A hard-deprecated component or package is no longer available. You will need to follow the method
+prescribed in our migration guide to update your application. Please reach out to our team directly
+if you need additional help.
+
+### Page Header
+
+We are [soft-deprecating](#soft-deprecation) `PageHeader`. It has been renamed to
+`DeprecatedPageHeader`. Similarly, `PageHeaderProps` has been renamed to
+`DeprecatedPageHeaderProps`. You may continue to use this component exactly as you did in v5, but
+note that we plan to [hard-deprecate](#hard-deprecation) it in Canvas Kit v7.
+
+🤖 The codemod will rename `PageHeader` and `PageHeaderProps` to their deprecated names:
+
+```tsx
+// v5
+import PageHeader, {PageHeaderProps} from '@workday/canvas-kit-react/page-header';
+
+export const CustomPageHeader = (props: PageHeaderProps) => {
+  return <PageHeader {...props} />;
+};
+
+// v6
+import DeprecatedPageHeader, {
+  DeprecatedPageHeaderProps,
+} from '@workday/canvas-kit-react/page-header';
+
+export const CustomPageHeader = (props: DeprecatedPageHeaderProps) => {
+  return <DeprecatedPageHeader {...props} />;
+};
+```
+
+```tsx
+// v5
+import {PageHeader, PageHeaderProps} from '@workday/canvas-kit-react';
+
+interface CustomPageHeaderProps extends PageHeaderProps {
+  // custom page header props
+}
+
+export const CustomPageHeader = (props: CustomPageHeaderProps) => {
+  return <PageHeader {...props} />;
+};
+
+// v6
+import {DeprecatedPageHeader, DeprecatedPageHeaderProps} from '@workday/canvas-kit-react';
+
+interface CustomPageHeaderProps extends DeprecatedPageHeaderProps {
+  // custom page header props
+}
+
+export const CustomPageHeader = (props: CustomPageHeaderProps) => {
+  return <DeprecatedPageHeader {...props} />;
+};
+```
