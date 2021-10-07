@@ -30,7 +30,7 @@ export const HoistedModel = () => {
           model.events.activate({tab: 'third'});
         }}
       >
-        Activate third tab
+        Activate Third Tab
       </SecondaryButton>
     </>
   );

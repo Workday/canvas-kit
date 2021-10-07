@@ -20,8 +20,8 @@ import {
 # Canvas Kit Tabs
 
 `Tabs` is a [compound component](/getting-started/for-developers/resources/compound-components/)
-which can be composed in a variety of different ways. It follows the
-[W3 Tabs specification](https://www.w3.org/TR/wai-aria-practices/#tabpanel).
+that allows users to navigate between related views of content while remaining in context of the
+page.
 
 [> Workday Design Reference](https://design.workday.com/components/navigation/tabs)
 
@@ -35,8 +35,11 @@ yarn add @workday/canvas-kit-react
 
 ### Basic Example
 
-`Tabs` includes a container `Tabs` component and the following subcomponents: `Tabs.List`,
-`Tabs.Item` and `Tabs.Panel`.
+`Tabs` includes a container `Tabs` component and the following subcomponents which can be composed
+in a variety of ways: `Tabs.List`, `Tabs.Item` and `Tabs.Panel`. It follows the
+[W3 Tabs specification](https://www.w3.org/TR/wai-aria-practices/#tabpanel).
+
+In this example, we set up a basic `Tabs` component with five tabs.
 
 <ExampleCodeBlock code={Basic} />
 
@@ -44,8 +47,9 @@ yarn add @workday/canvas-kit-react
 
 By default, `Tabs` will create and use its own [model](#model) internally. Alternatively, you may
 configure your own model with `useTabsModel` and pass it to `Tabs` via the `model` prop. This
-pattern is referred to as hoisting the model and provides direct access to its `state` and `events`
-outside of the `Tabs` component.
+pattern is referred to as
+[hoisting the model](/getting-started/for-developers/resources/compound-components/#configuring-a-model)
+and provides direct access to its `state` and `events` outside of the `Tabs` component.
 
 In this example, we set up external observation of the model state and create an external button to
 trigger an event to change the active tab.
@@ -60,9 +64,9 @@ trigger an event to change the active tab.
 
 <ExampleCodeBlock code={NamedKeys} />
 
-### Right-to-Left
+### Right-to-Left (RTL)
 
-`Tabs` supports right-to-left through the theme of the `CanvasProvider`.
+`Tabs` supports right-to-left languages when specified in the `CanvasProvider` `theme`.
 
 <ExampleCodeBlock code={RightToLeft} />
 
@@ -94,9 +98,9 @@ from the `contents` object.
 ### Dynamic Tabs
 
 The `Tabs.Item` component takes in an optional `index` property if you want to specify the position
-of a tab. If not defined, by default it will append tabs to the end. For example, if your tabs are
-stored as an array in the state that can be added to along with a fixed tab that should remain at
-the end.
+of a tab. If not defined, by default it will append tabs to the end. In this example, our tabs are
+stored as an array in the state, and we have a fixed tab at the end that can add new tabs to that
+array.
 
 <ExampleCodeBlock code={DynamicTabs} />
 
@@ -107,22 +111,24 @@ the end.
 #### Usage
 
 `Tabs` is a container component that is responsible for creating a `TabsModel` and sharing it with
-its children using React context. It does not represent a real element.
+its subcomponents using React context. It does not represent a real element.
 
 ```tsx
-// Configuration
-<Tabs onActivate={({data}) => console.log('Activated tab', data.tab)}>{/* Subcomponents */}</Tabs>;
+<Tabs onActivate={({data}) => console.log('Activated tab', data.tab)}>
+  {/* Child components */}
+</Tabs>
+```
 
-// OR
+Alternatively, you may pass in a model using the hoisted model pattern.
 
-// Hoisted model
+```tsx
 const model = useTabsModel({
   onActivate({data}) {
     console.log('Activated Tab', data.tab);
   },
 });
 
-<Tabs model={model}>{/* Subcomponents */}</Tabs>;
+<Tabs model={model}>{/* Child components */}</Tabs>;
 ```
 
 #### Props
@@ -136,8 +142,7 @@ Note that if you pass in a `model` configured with `useTabsModel`, configuration
 
 #### Usage
 
-`Tabs.List` is a `div` element with a `role=tablist`. It is a container for `Tabs.Item`
-subcomponents.
+`Tabs.List` is a `<div role="tablist">` element. It is a container for `Tabs.Item` subcomponents.
 
 ```tsx
 <Tabs.List>{/* Tabs.Items */}</Tabs.List>
@@ -145,7 +150,7 @@ subcomponents.
 
 #### Props
 
-Undocumented props are spread to the underlying `div` element.
+Undocumented props are spread to the underlying `<div>` element.
 
 <ArgsTable of={Tabs.List} />
 
@@ -153,9 +158,9 @@ Undocumented props are spread to the underlying `div` element.
 
 #### Usage
 
-`Tabs.Item` is a `button` element with a `role=tab`. Each `Tabs.Item` is associated with a
-`Tabs.Panel` either by a `name` attribute or by the position in the list. If a `name` is provided,
-it must match the name passed to the corresponding `Tabs.Panel` component.
+`Tabs.Item` is a `<button role="tab">` element. Each `Tabs.Item` is associated with a `Tabs.Panel`
+either by a `name` attribute or by the position in the list. If a `name` is provided, it must match
+the name passed to the corresponding `Tabs.Panel` component.
 
 ```tsx
 <Tabs.Item name="first">First Tab</Tabs.Item>
@@ -171,10 +176,9 @@ Undocumented props are spread to the underlying `button` element.
 
 #### Usage
 
-`Tabs.Panel` is a `div` element with a `role=tabpanel`. It is focusable by default. Each
-`Tabs.Panel` is controlled by a `Tabs.Item` either by a `name` attribute or by the position in the
-list. If a `name` is provided, it must match the name passed to the corresponding `Tabs.Item`
-component.
+`Tabs.Panel` is a `<div role="tabpanel">` element. It is focusable by default. Each `Tabs.Panel` is
+controlled by a `Tabs.Item` either by a `name` attribute or by the position in the list. If a `name`
+is provided, it must match the name passed to the corresponding `Tabs.Item` component.
 
 ```tsx
 <Tabs.Panel name="first">{/* Contents of the tab panel */}</Tabs.Panel>
@@ -182,7 +186,7 @@ component.
 
 #### Props
 
-Undocumented props are spread to the underlying `div` element.
+Undocumented props are spread to the underlying `<div>` element.
 
 <ArgsTable of={Tabs.Panel} />
 
@@ -193,9 +197,10 @@ If `Tabs` was stripped of all its markup, attributes, and styling, what would re
 object composed of two parts: `state` which describes the current snapshot in time of the component
 and `events` which describes events that can be sent to the model.
 
-By default, `Tabs` will create and use its own model internally. Alternatively, if you need direct
-access to the model's `state` and `events`, you may configure your own model with `useTabsModel` and
-pass it to `Tabs` via a pattern called
+By default, `Tabs` will create a model and share it internally with its subcomponents using React
+context. Alternatively, if you need direct access to the model's `state` and `events` outside of the
+`Tabs` component, you may configure your own model with `useTabsModel` and pass it to `Tabs` via a
+pattern called
 [hoisting the model](/getting-started/for-developers/resources/compound-components/#configuring-a-model).
 
 ```tsx
@@ -205,7 +210,7 @@ const model = useTabsModel({
   },
 });
 
-<Tabs model={model}>{/* Subcomponents */}</Tabs>;
+<Tabs model={model}>{/* Child components */}</Tabs>;
 ```
 
 ### Config

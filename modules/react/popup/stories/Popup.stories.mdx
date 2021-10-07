@@ -55,7 +55,7 @@ The `Popup` component is a generic
 [Compound Component](/getting-started/for-developers/resources/compound-components/) that is used to
 build popup UIs that are not already covered by Canvas Kit.
 
-### Basic
+### Basic Example
 
 The Popup has no pre-defined behaviors built in, therefore the `usePopupModel` must always be used
 to create a new `model`. This `model` is then used by all behavior hooks to apply additional popup
@@ -66,7 +66,7 @@ popup behaviors. For accessibility, these behaviors should be included most of t
 
 <ExampleCodeBlock code={Basic} />
 
-### Initial focus
+### Initial Focus
 
 If you want focus to move to a specific element when the popup is opened, set the `initialFocusRef`
 of the model. Check with accessibility before doing this. The following example sets the focus on
@@ -156,7 +156,7 @@ The Popup component automatically handles right-to-left rendering.
 
 ## Components
 
-## Popper
+### Popper
 
 A thin wrapper component around the Popper.js positioning engine. For reference:
 https://popper.js.org/. `Popper` also automatically works with the `PopupStack` system. `Popper` has
@@ -172,7 +172,7 @@ PopupModel or any associate popup [hooks](#hooks).
 > element was rendered and that's where extra props were spread to. In v5+, you can provide your own
 > element if you wish.
 
-## Popup
+### Popup
 
 This component is a container component that has no semantic element. It provides a React Context
 model for all Popup subcomponents. If you manually pass a `model` to all subcomponents, this
@@ -192,7 +192,7 @@ container component isn't needed.
 
 <ArgsTable of={Popup} />
 
-## Popup.Target
+### Popup.Target
 
 A `Popup.Target` is any element that is meant to show the Popup. The default component rendered by
 this component is a `SecondaryButton` element. You can override this by passing the desired
@@ -220,7 +220,7 @@ used, which is `SecondaryButton`. If you don't want any styling, you can do the 
 To add your own styling, you could either add a `css` prop, or make a styled button and pass that
 styled component via the `as` prop.
 
-## Popup.Popper
+### Popup.Popper
 
 A `Popup.Popper` is a [Popper](#popper) component that is hooked up to the `PopupModel`
 automatically. The behavior hook used is called `usePopupPopper`.
@@ -232,7 +232,7 @@ automatically. The behavior hook used is called `usePopupPopper`.
 
 <ArgsTable of={Popup.Popper} />
 
-## Popup.Card
+### Popup.Card
 
 A `Popup.Card` is a wrapper around the `Card` component, but hooked up to a `PopupModel`. By
 default, this element has a `role=dialog` and an `aria-labelledby`. The behavior hook used is called
@@ -240,7 +240,7 @@ default, this element has a `role=dialog` and an `aria-labelledby`. The behavior
 
 <ArgsTable of={Popup.Card} />
 
-## Popup.CloseButton
+### Popup.CloseButton
 
 A `Popup.CloseButton` is a button that will hide a popup. By default, this is a `SecondaryButton`
 component, but `as` can be used to render any button element (i.e `<DeleteButton>` or
@@ -248,14 +248,14 @@ component, but `as` can be used to render any button element (i.e `<DeleteButton
 
 <ArgsTable of={Popup.CloseButton} />
 
-## Popup.CloseIcon
+### Popup.CloseIcon
 
 A `Popup.CloseIcon` is an icon button that is the `X` in the top of a popup. It will hide a popup
 when clicked. The behavior hook used is called `usePopupCloseButton`.
 
 <ArgsTable of={Popup.CloseIcon} />
 
-## Popup.Heading
+### Popup.Heading
 
 A `Popup.Heading` is a wrapper around `Card.Heading` that connect the heading to a `PopupModel`. It
 will add an `id` to the element that match the `aria-labelledby` that is applied to the `Popup.Card`
@@ -263,29 +263,29 @@ element for accessibility. The behavior hook used is called `usePopupHeading`.
 
 <ArgsTable of={Popup.Heading} />
 
-## Popup.Body
+### Popup.Body
 
 A `Popup.Body` is a thin wrapper around `Card.Body` and doesn't actually take a model. It adds
 `body` styling and nothing else.
 
 <ArgsTable of={Popup.Body} />
 
-## Popup Model
+## Model
 
 The PopupModel contains all state and events needed for Popup behaviors and components. It composes
 a `DisclosureModel` for showing and hiding content.
 
-### Popup Model State
+### Config
+
+<ArgsTable of={PopupModelConfigComponent} />
+
+### State
 
 <ArgsTable of={PopupStateComponent} />
 
-### Popup Model Events
+### Events
 
 <ArgsTable of={PopupEventsComponent} />
-
-### Popup Model Config
-
-<ArgsTable of={PopupModelConfigComponent} />
 
 ## Hooks
 
@@ -328,7 +328,7 @@ return (
 );
 ```
 
-## useAssistiveHideSiblings
+### useAssistiveHideSiblings
 
 ```ts
 useAssistiveHideSiblings(model: PopupModel): {}
@@ -344,7 +344,7 @@ VoiceOver for example.
 
 This should be used on popup elements that need to hide content (i.e. Modals).
 
-## useBringToTopOnClick
+### useBringToTopOnClick
 
 ```ts
 useBringToTopOnClick(model: PopupModel): {}
@@ -358,7 +358,7 @@ like a Modal.
 
 This should be used on popup elements that are meant to persist (i.e. Windows).
 
-## useCloseOnEscape
+### useCloseOnEscape
 
 ```ts
 useCloseOnEscape(model: PopupModel): {}
@@ -370,7 +370,7 @@ provided model's `state.stackRef` element is the topmost in the stack.
 This should be used with popup elements that are dismissible like Tooltips, Modals, non-modal
 dialogs, dropdown menus, etc.
 
-## useCloseOnOutsideClick
+### useCloseOnOutsideClick
 
 ```ts
 useCloseOnOutsideClick(model: PopupModel): {}
@@ -385,7 +385,7 @@ This should be used with popup elements that are dismissible like Modals, non-mo
 dropdown menus, etc. Tooltips and hierarchical menus should use `useAlwaysCloseOnClickOutside`
 instead.
 
-## useAlwaysCloseOnOutsideClick
+### useAlwaysCloseOnOutsideClick
 
 ```ts
 useAlwaysCloseOnOutsideClick(model: PopupModel): {}
@@ -399,7 +399,7 @@ stack. This is useful for Tooltips or hierarchical menus. Adds a
 This should be used with popup elements that should close no matter their position in the stack
 (i.e. Tooltips).
 
-## useDisableBodyScroll
+### useDisableBodyScroll
 
 ```ts
 useDisableBodyScroll(model: PopupModel): {}
@@ -411,7 +411,7 @@ page scrolling while the popup is visible.
 This should be used with popup elements that hide all other content and force the user to accept or
 dismiss the popup before continuing (i.e. Modals).
 
-## useFocusRedirect
+### useFocusRedirect
 
 ```ts
 useFocusRedirect(model: PopupModel): {}
@@ -429,7 +429,7 @@ hook does no provide `aria-owns` and this must be provided yourself. Requires
 
 This should be used with non-modal dialogs.
 
-## useFocusTrap
+### useFocusTrap
 
 ```ts
 useFocusTrap(model: PopupModel): {}
@@ -443,7 +443,7 @@ with [useInitialFocus](#useinitialfocus) and [useReturnFocus](#usereturnfocus).
 
 This should be used on popup elements that need to hide content (i.e. Modals).
 
-## useInitialFocus
+### useInitialFocus
 
 Moves focus within the popup when the popup becomes visible. This is useful for keyboard and screen
 reader users alike. This should be used with [useFocusRedirect](#usefocusredirect) or
@@ -452,7 +452,7 @@ reader users alike. This should be used with [useFocusRedirect](#usefocusredirec
 This should be used for popups that have focusable elements inside, like Modals, non-modal dialogs,
 menus, etc.
 
-## useReturnFocus
+### useReturnFocus
 
 Returns focus to the target element when the popup is hidden. This works well with
 [useInitialFocus](#useinitialfocus). This should be used with [useFocusRedirect](#usefocusredirect)
@@ -460,7 +460,7 @@ or [useFocusTrap](#usefocustrap) for a complete focus management solution.
 
 This should ble used on popup elements that use [useInitialFocus](#useinitialfocus).
 
-## usePopupPopper
+### usePopupPopper
 
 ```ts
 usePopupPopper(model: PopupModel, elemProps: {}, ref: React.Ref<any>): {}
@@ -469,7 +469,7 @@ usePopupPopper(model: PopupModel, elemProps: {}, ref: React.Ref<any>): {}
 Adds the necessary props to a `Popper` component. Used by the [Popup.Popper](#popuppopper)
 subcomponent.
 
-## usePopupCard
+### usePopupCard
 
 ```ts
 usePopupCard(model: PopupModel, elemProps: {}, ref: React.Ref<any>): {}
@@ -477,7 +477,7 @@ usePopupCard(model: PopupModel, elemProps: {}, ref: React.Ref<any>): {}
 
 Adds the necessary props to a `Card` component. Used by the [Popup.Card](#popupcard) subcomponent.
 
-## usePopupCloseButton
+### usePopupCloseButton
 
 ```ts
 usePopupCloseButton(model: PopupModel, elemProps: {}, ref: React.Ref<any>): {}
@@ -487,18 +487,16 @@ Adds the necessary props to a close button component. Used by the
 [Popup.CloseButton](#popupclosebutton) subcomponent and [Popup.CloseIcon](#popupcloseicon)
 subcomponent.
 
-````
-
-## usePopupHeading
+### usePopupHeading
 
 ```ts
 usePopupHeading(model: PopupModel, elemProps: {}, ref: React.Ref<any>): {}
-````
+```
 
 Adds the necessary props to a `Heading` component. Used by the [Popup.Heading](#popupheading)
 subcomponent.
 
-## usePopupTarget
+### usePopupTarget
 
 ```ts
 usePopupTarget(model: PopupModel, elemProps: {}, ref: React.Ref<any>): {}
