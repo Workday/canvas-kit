@@ -15,6 +15,8 @@ any questions about the update.
   - [Page Header](#page-header)
 - [Component Migrations](#component-migrations)
   - [Search Bar](#search-bar)
+- [Name Updates](#name-updates)
+  - [Depth Tokens](#depth-tokens)
 
 ## Codemod
 
@@ -297,4 +299,28 @@ import {
 const CustomSearchForm = (props: SearchFormProps) => {
   return <SearchForm searchTheme={SearchTheme.Dark} {...props} />;
 };
+```
+
+## Name Updates
+
+### Depth Tokens
+
+The `CanvasDepthValue` type has been renamed to `CanvasDepthValues` to be more consistent with our
+other token type names, such as `CanvasBorderRadiusValues`, `CanvasSpaceValues`, and
+`CanvasSpaceNumberValues`.
+
+🤖 The codemod will handle this rename transformation automatically:
+
+```ts
+// v5
+import {CanvasDepthValue} from '@workday/canvas-kit-react/tokens';
+
+type CustomDepthValues = CanvasDepthValue;
+interface OtherCustomDepthValues extends CanvasDepthValue {};
+
+// v6
+import {CanvasDepthValue} from '@workday/canvas-kit-react/tokens';
+
+type CustomDepthValues = CanvasDepthValues;
+interface OtherCustomDepthValues extends CanvasDepthValues {};
 ```

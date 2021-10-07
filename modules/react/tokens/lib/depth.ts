@@ -48,7 +48,7 @@ export type CanvasDepth = {
     boxShadow: '0px 4px 8px 0 rgba(0, 0, 0, 0.1)';
   };
   /**
-   * ### Depth 2
+   * ### Depth 3
    * Used for interactive Cards on hover
    *
    * @example
