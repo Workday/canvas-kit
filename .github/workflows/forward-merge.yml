@@ -1,10 +1,8 @@
 name: 'forward-merge'
 on:
-  push:
-    branches: # List all "from" branches - all branches that should be forward merged
-      - support
-      - master
-      - prerelease/minor
+  schedule:
+    # Once a day at 5am
+    - cron: '5 0 * * *'
   # Allow manual triggering: This requires you to choose a `ref`. This should be the branch with changes
   workflow_dispatch:
 
@@ -12,7 +10,7 @@ jobs:
   forward-merge:
     runs-on: ubuntu-latest
     steps:
-      - uses: NicholasBoll/action-forward-merge-pr@v1.1.0
+      - uses: NicholasBoll/action-forward-merge-pr@main
         with:
           token: ${{secrets.GH_RW_TOKEN}} # use PAT to force GH Actions to run the PR verify. The regular token will not
           branches: support+master,master+prerelease/minor,prerelease/minor+prerelease/major
