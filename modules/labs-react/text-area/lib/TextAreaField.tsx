@@ -5,31 +5,36 @@ import {
   borderRadius,
   CSSProperties,
   inputColors,
-  space,
+  spaceNumbers,
   type,
 } from '@workday/canvas-kit-react/tokens';
 import {createComponent, ExtractProps, useModelContext} from '@workday/canvas-kit-react/common';
 import {Box, useThemedRing, useThemeRTL} from '@workday/canvas-kit-labs-react/common';
 
-import {TextInputModelContext} from './TextInput';
+import {TextAreaModelContext} from './TextArea';
 import {FormFieldModel} from '@workday/canvas-kit-labs-react/form-field';
-import {useTextInputField} from './hooks/useTextInputField';
+import {useTextAreaField} from './hooks/useTextAreaField';
 
-export interface TextInputFieldProps extends ExtractProps<typeof Box, never> {
+export interface TextAreaFieldProps extends ExtractProps<typeof Box, never> {
   model?: FormFieldModel;
 }
 
 const baseStyles: CSSProperties = {
   ...type.levels.subtext.large,
-  padding: space.xxs,
-  margin: 0,
-  minWidth: '280px',
   border: `1px solid ${inputColors.border}`,
+  display: 'block',
   backgroundColor: inputColors.background,
   borderRadius: borderRadius.m,
-  display: 'block',
-  height: '40px',
+  boxSizing: 'border-box',
+  minHeight: 64,
+  minWidth: 280,
   transition: '0.2s box-shadow, 0.2s border-color',
+  padding: spaceNumbers.xxs, // Compensate for border
+  margin: 0, // Fix Safari
+  resize: 'both',
+  '&::webkit-resizer': {
+    display: 'none',
+  },
   '&::placeholder': {
     color: inputColors.placeholder,
   },
@@ -47,16 +52,13 @@ const baseStyles: CSSProperties = {
       color: inputColors.disabled.text,
     },
   },
-  '::-ms-clear': {
-    display: 'none',
-  },
 };
 
-export const TextInputField = createComponent('input')({
-  displayName: 'TextInput.Field',
-  Component: ({model, ...elemProps}: TextInputFieldProps, ref) => {
-    const localModel = useModelContext(TextInputModelContext, model);
-    const props = useTextInputField(localModel, elemProps, ref);
+export const TextAreaField = createComponent('textarea')({
+  displayName: 'TextArea.Field',
+  Component: ({model, ...elemProps}: TextAreaFieldProps, ref) => {
+    const localModel = useModelContext(TextAreaModelContext, model);
+    const props = useTextAreaField(localModel, elemProps, ref);
 
     const {themeRTL, theme} = useThemeRTL();
     const errorRing = useThemedRing('error');
@@ -70,6 +72,6 @@ export const TextInputField = createComponent('input')({
           },
         });
 
-    return <Box as="input" css={[themeRTL(baseStyles), focusStyles]} {...props} />;
+    return <Box as="textarea" css={[themeRTL(baseStyles), focusStyles]} {...props} />;
   },
 });

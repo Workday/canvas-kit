@@ -6,26 +6,26 @@ import {
   useUniqueId,
 } from '@workday/canvas-kit-react/common';
 
-type TextInputState = {
+type FormFieldState = {
   hasError?: boolean;
   inputId?: string;
   hintId?: string;
   isRequired?: boolean;
 };
 
-type TextInputEvents = {};
+type FormFieldEvents = {};
 
-export type TextInputModel = Model<TextInputState, TextInputEvents>;
+export type FormFieldModel = Model<FormFieldState, FormFieldEvents>;
 
-const textInputEventMap = createEventMap<TextInputEvents>()({
+const formFieldEventMap = createEventMap<FormFieldEvents>()({
   guards: {},
   callbacks: {},
 });
 
-export type TextInputModelConfig = TextInputState &
-  Partial<ToModelConfig<TextInputState, TextInputEvents, typeof textInputEventMap>>;
+export type FormFieldModelConfig = FormFieldState &
+  Partial<ToModelConfig<FormFieldState, FormFieldEvents, typeof formFieldEventMap>>;
 
-export const useTextInputModel = (config: TextInputModelConfig = {}): TextInputModel => {
+export const useFormFieldModel = (config: FormFieldModelConfig = {}): FormFieldModel => {
   const inputId = useUniqueId(config.inputId);
   const hintId = useUniqueId(config.hintId);
 
@@ -36,7 +36,7 @@ export const useTextInputModel = (config: TextInputModelConfig = {}): TextInputM
     hintId,
   };
 
-  const events = useEventMap(textInputEventMap, state, config, {});
+  const events = useEventMap(formFieldEventMap, state, config, {});
 
   return {
     state,

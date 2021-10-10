@@ -1,0 +1,35 @@
+import {Meta} from '@storybook/addon-docs/blocks';
+import {Specifications} from '@workday/canvas-kit-docs';
+
+import {FormField} from '@workday/canvas-kit-labs-react/form-field';
+
+import {Integrating} from './examples/Integrating';
+import {Custom} from './examples/Custom';
+
+<Meta title="Labs/Inputs/Form Field/React" component={FormField} />
+
+# Canvas Kit Form Field
+
+Form Field allows users to wrap input components to make them accessible. You usually won't want to
+use Form Field directly but instead should use the specific component you need, e.g. `TextInput`.
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-labs-react
+```
+
+## Usage
+
+### Integrating Other Libraries Example
+
+It is easy it work with custom components or third party libraries and get the CKR accessibility
+guarantees by using the `as` prop
+
+<ExampleCodeBlock code={Integrating} />
+
+### Customizing With Behavior Hooks Example
+
+If you need full customization you can use the form field behavior hooks to build your own solution.
+
+<ExampleCodeBlock code={Custom} />
