@@ -6,3 +6,4 @@ export * from './header';
 export * from './layout';
 export * from './text-area';
 export * from './text-input';
+export * from './search-form';
