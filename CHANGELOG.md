@@ -3,6 +3,136 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v5.2.8](https://github.com/Workday/canvas-kit/releases/tag/v5.2.8) (2021-10-07)
+
+### Documentation
+
+- docs: Remove travis badge ([#1299](https://github.com/Workday/canvas-kit/pull/1299)) ([@theiliad](https://github.com/theiliad))
+- docs: Re-order content and fix links ([#1286](https://github.com/Workday/canvas-kit/pull/1286)) ([@willklein](https://github.com/willklein))
+  Improved Contributing Guidelines
+- docs(pagination): Update Pagination MDX to adhere to standardized template ([#1295](https://github.com/Workday/canvas-kit/pull/1295)) ([@jamesfan](https://github.com/jamesfan))
+- docs: Fix miscellaneous content issues with MDX docs ([#1304](https://github.com/Workday/canvas-kit/pull/1304)) ([@jamesfan](https://github.com/jamesfan))
+
+### Infrastructure
+
+- ci: Fix New Issue workflow job ([@NicholasBoll](https://github.com/NicholasBoll))
+- ci: Fix automerge by changing token to PAT ([@NicholasBoll](https://github.com/NicholasBoll))
+- ci: Add support for skip release ([@NicholasBoll](https://github.com/NicholasBoll))
+- ci: Update forward merge job to be once a day ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v5.2.7](https://github.com/Workday/canvas-kit/releases/tag/v5.2.7) (2021-09-30)
+
+### Components
+
+- docs(menu): Fix Menu examples to be self-contained and SSR-safe ([#1291](https://github.com/Workday/canvas-kit/pull/1291)) ([@jamesfan](https://github.com/jamesfan))
+
+
+## [v5.2.6](https://github.com/Workday/canvas-kit/releases/tag/v5.2.6) (2021-09-24)
+
+### Components
+
+- fix(combobox): Add keyboard navigation autoscroll to ComboBox menu ([#1269](https://github.com/Workday/canvas-kit/pull/1269)) ([@BillGeoghegan](https://github.com/BillGeoghegan))
+
+### Infrastructure
+
+- ci: Change forward-merge to use PAT to trigger PR job' ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v5.2.5](https://github.com/Workday/canvas-kit/releases/tag/v5.2.5) (2021-09-23)
+
+### Infrastructure
+
+- ci: Fix canary publish job ([@NicholasBoll](https://github.com/NicholasBoll))
+- ci: Fix canary publish message ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v5.2.4](https://github.com/Workday/canvas-kit/releases/tag/v5.2.4) (2021-09-23)
+
+### Components
+
+- docs(tabs): Update Tabs MDX to adhere to standardized template [skip ci] ([#1279](https://github.com/Workday/canvas-kit/pull/1279)) ([@jamesfan](https://github.com/jamesfan))
+
+### Infrastructure
+
+- ci: Add automerge job [skip ci] ([@NicholasBoll](https://github.com/NicholasBoll))
+- ci: Update GA job names to help with branch checks [skip ci] ([@NicholasBoll](https://github.com/NicholasBoll))
+- ci: Add prerelease canary builds ([@NicholasBoll](https://github.com/NicholasBoll))
+  This change updates branch names for automated release management. Branch renames are as follows:
+  
+  - `support/v4.x` -> `support`
+  - `prerelease/v5.3` -> `prerelease/minor`
+  - `prerelease/v6` -> `prerelease/major`
+  
+  We renamed the `support` branch which could conflict with local refs. You may need to run the following if you've contributed to Canvas Kit in the past:
+  ```
+  git remote prune upstream
+  ```
+  Change `upstream` to whichever remote `Workday/canvas-kit` belongs to
+
+
+## [v5.2.3](https://github.com/Workday/canvas-kit/releases/tag/v5.2.3) (2021-09-22)
+
+### Components
+
+- fix: Update import of static states when creating labs component ([#1266](https://github.com/Workday/canvas-kit/pull/1266)) ([@mannycarrera4](https://github.com/mannycarrera4))
+
+
+## [v5.2.2](https://github.com/Workday/canvas-kit/releases/tag/v5.2.2) (2021-09-21)
+
+### Components
+
+- Fix: Fix PR template to include correct category shield ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v5.2.1](https://github.com/Workday/canvas-kit/releases/tag/v5.2.1) (2021-09-20)
+
+### Components
+
+- fix(tooltip): Fix OverflowTooltip with SVG in IE11 ([#1263](https://github.com/Workday/canvas-kit/pull/1263)) ([@NicholasBoll](https://github.com/NicholasBoll))
+- chore: Update pull request template ([#1268](https://github.com/Workday/canvas-kit/pull/1268)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+### Infrastructure
+
+- ci: Add prefix to forward-merge job ([@NicholasBoll](https://github.com/NicholasBoll))
+- ci: Update forward merge script ([@NicholasBoll](https://github.com/NicholasBoll))
+- ci: Add automation to releases ([#1272](https://github.com/Workday/canvas-kit/pull/1272)) ([@NicholasBoll](https://github.com/NicholasBoll))
+  This commit changes the interaction of contributors to Canvas Kit. All patches will be automatically released. In order to accomplish this, a new pull request link job is run to make sure that all features target a prerelease branch. For example, if you create a new pull request that adds a feature and the current version of Canvas Kit is `v5.2.0`, the target branch should be `prerelease/minor` instead of `master`. Don't worry, the pull request lint job will prevent mistakes. Also the Canvas Kit team can help by changing the base branch of your pull requests.
+- ci: Add npm debug information ([@NicholasBoll](https://github.com/NicholasBoll))
+- ci: Fix npm publish for release ([@NicholasBoll](https://github.com/NicholasBoll))
+- ci: Fix npm token ([@NicholasBoll](https://github.com/NicholasBoll))
+- ci: Fix npm publish ([@NicholasBoll](https://github.com/NicholasBoll))
+- ci: Fix build process ([@NicholasBoll](https://github.com/NicholasBoll))
+- ci: Fix push GH token ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## v5.2.0 (2021-09-08)
+
+### Components
+
+- fix(toast): Update to properly render rtl ([#1229](https://github.com/Workday/canvas-kit/pull/1229)) [@JaredWF](https://github.com/JaredWF)
+- fix: Update search bar to properly render rtl ([#1231](https://github.com/Workday/canvas-kit/pull/1231)) [@JaredWF](https://github.com/JaredWF)
+- fix(side-panel): Fix SidePanel RTL support ([#1234](https://github.com/Workday/canvas-kit/pull/1234)) [@alanbsmith](https://github.com/alanbsmith)
+- feat(icon): Add shouldMirror prop to icons ([#1246](https://github.com/Workday/canvas-kit/pull/1246)) [@alanbsmith](https://github.com/alanbsmith)
+
+### Hooks
+
+- feat(labs): Add convertToStaticStates to useThemeRTL ([#1216](https://github.com/Workday/canvas-kit/pull/1216)) [@vibdev](https://github.com/vibdev)
+
+### Docs
+
+- docs: Update inter-linking to match Canvas Site ([#1220](https://github.com/Workday/canvas-kit/pull/1220)) [@NicholasBoll](https://github.com/NicholasBoll)
+- docs: Update SidePanel docs to MDX ([#1236](https://github.com/Workday/canvas-kit/pull/1236)) [@alanbsmith](https://github.com/alanbsmith)
+- docs: Update various issues prevent docs mdx files from being rendered remotely ([#1238](https://github.com/Workday/canvas-kit/pull/1238)) [@anicholls](https://github.com/anicholls)
+- docs: Improve Variant/Type/State docs ([#1243](https://github.com/Workday/canvas-kit/pull/1243)) [@anicholls](https://github.com/anicholls)
+
+### Infrastructure
+
+- chore: Bump path-parse from 1.0.6 to 1.0.7 ([#1211](https://github.com/Workday/canvas-kit/pull/1211)) [@dependabot](https://github.com/dependabot)
+- ci: Add Chromatic baseline to support branches ([#1219](https://github.com/Workday/canvas-kit/pull/1219)) [@NicholasBoll](https://github.com/NicholasBoll)
+- fix: Fix create-component README template ([#1235](https://github.com/Workday/canvas-kit/pull/1235)) [@alanbsmith](https://github.com/alanbsmith)
+- chore(table): Update polished package to fix security warning ([#1242](https://github.com/Workday/canvas-kit/pull/1242)) [@NicholasBoll](https://github.com/NicholasBoll)
+
 ## v5.1.0 (2021-08-16)
 
 ### Components

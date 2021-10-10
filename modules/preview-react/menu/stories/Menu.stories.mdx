@@ -4,7 +4,6 @@ import {Menu, MenuItem} from '@workday/canvas-kit-preview-react/menu';
 
 import {Basic} from './examples/Basic';
 import {ContextMenu} from './examples/ContextMenu';
-import {ControlButton} from './examples/ControlButton';
 import {CustomMenuItem} from './examples/CustomMenuItem';
 import {Icons} from './examples/Icons';
 import {ManyItems} from './examples/ManyItems';
@@ -13,7 +12,7 @@ import {ManyItems} from './examples/ManyItems';
 
 # Canvas Kit Menu
 
-Menus display a list of options when triggered by an action or UI element like an icon or button.
+`Menu` displays a list of options when triggered by an action or UI element like an icon or button.
 
 [> Workday Design Reference](https://design.workday.com/components/popups/menus)
 
@@ -27,7 +26,14 @@ yarn add @workday/canvas-kit-preview-react
 
 ### Basic Example
 
+`Menu` is typically triggered by an action such as pressing a button. Here's an example of how you
+might implement that behavior using a [`Popup`](/components/popups/popup/).
+
 <ExampleCodeBlock code={Basic} />
+
+`Menu` will automatically assign focus to itself when it appears provided you set the `isOpen` prop
+correctly, so you do **not** need to use the `useInitialFocus` `Popup` hook. You **will**, however,
+need to use `useReturnFocus` to return focus back to the triggering button after closing the `Menu`.
 
 `Menu` follows the
 [Actions Menu pattern](https://www.w3.org/TR/wai-aria-practices/examples/menu-button/menu-button-actions-active-descendant.html)
@@ -44,10 +50,8 @@ actions.
 | `End`              | Moves focus to the last menu item                                                                                                                |
 | `A-Z / a-z`        | Moves focus to the next menu item with a label that starts with the typed character if such an menu item exists – otherwise, focus does not move |
 
-If you're using a menu button, you will need to add your own keyboard shortcuts, aria attributes,
-and focus management. See the example below.
-
-<ExampleCodeBlock code={ControlButton} />
+Note that although `Menu` includes support for keyboard shortcuts for the menu itself, you'll need
+to add your own keyboard handling and aria attributes to the triggering button.
 
 ### Context Menu
 
@@ -61,7 +65,6 @@ custom menu items, be sure to use semantic `<li>` elements with the following at
 
 - `role="menuitem"`
 - `tabindex={-1}`
-- `id`s following this pattern: `${MenuId}-${index}`
 
 Below is an example:
 
@@ -81,11 +84,14 @@ Below is an example:
 
 #### Usage
 
-`Menu` renders a styled `<ul>` element with a role of `menu` and follows the
+`Menu` renders a styled `<ul role="menu">` element within a [`Card`](/components/containers/card/)
+and follows the
 [Active Menu pattern](https://www.w3.org/TR/wai-aria-practices/examples/menu-button/menu-button-actions-active-descendant.html)
 using `aria-activedescendant`.
 
 #### Props
+
+Undocumented props are spread to the underlying `<ul>` element.
 
 <ArgsTable of={Menu} />
 
@@ -93,7 +99,7 @@ using `aria-activedescendant`.
 
 #### Usage
 
-`MenuItem` renders a `<li>` element with the correct attributes to ensure it is accessible. If you
+`MenuItem` renders an `<li>` element with the correct attributes to ensure it is accessible. If you
 choose to implement your own custom menu items, be sure to use semantic `<li>` elements with the
 following attributes:
 
@@ -102,6 +108,8 @@ following attributes:
 - `id`s following this pattern: `${MenuId}-${index}`
 
 #### Props
+
+Undocumented props are spread to the underlying `<li>` element.
 
 <ArgsTable of={MenuItem} />
 

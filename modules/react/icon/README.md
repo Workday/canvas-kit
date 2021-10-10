@@ -34,9 +34,14 @@ import { colors } from '@workday/canvas-kit-react/tokens'
 import { AccentIcon } from '@workday/canvas-kit-react/icon'
 import { shieldIcon } from '@workday/canvas-accent-icons-web'
 
+// Default Accent Icon
 <AccentIcon icon={shieldIcon} />
+// Accent Icon with custom color
 <AccentIcon icon={shieldIcon} color={colors.pomegranate500} />
+// Accent Icon with set size
 <AccentIcon icon={shieldIcon} size={80} />
+// Accent Icon with a mirrored x-axis (helpful for bidirectional support, if needed)
+<AccentIcon icon={shieldIcon} shouldMirror={true} />
 ```
 
 ## Static Properties
@@ -83,6 +88,14 @@ Default: `false`
 
 ---
 
+#### `shouldMirror: boolean`
+
+> If set to `true`, transform the SVG's x-axis to mirror the graphic
+
+Default: `false`
+
+---
+
 # Applet Icons
 
 ## Usage
@@ -93,9 +106,14 @@ Use with `@workday/canvas-applet-icons-web`.
 import { AppletIcon } from '@workday/canvas-kit-react/icon'
 import { benefitsIcon } from '@workday/canvas-applet-icons-web'
 
+// Default Applet Icon
 <AppletIcon icon={benefitsIcon} />
+// Applet Icon with custom color
 <AppletIcon icon={benefitsIcon} color={AppletIcon.Colors.Pomegranate} />
+// Applet Icon with set size
 <AppletIcon icon={benefitsIcon} size={60} />
+// Applet Icon with a mirrored x-axis (helpful for bidirectional support, if needed)
+<AppletIcon icon={benefitsIcon} shouldMirror={true} />
 ```
 
 ## Static Properties
@@ -162,6 +180,14 @@ Default: `92`
 #### `iconRef: React.Ref<HTMLSpanElement>`
 
 > Returns the ref to the rendered icon.
+
+---
+
+#### `shouldMirror: boolean`
+
+> If set to `true`, transform the SVG's x-axis to mirror the graphic
+
+Default: `false`
 
 ---
 
@@ -272,6 +298,14 @@ Default: `'transparent'`
 
 ---
 
+#### `shouldMirror: boolean`
+
+> If set to `true`, transform the SVG's x-axis to mirror the graphic
+
+Default: `false`
+
+---
+
 # System Icon Circle
 
 A system icon with a colored circular background. Icon color will be determined based on contrast
@@ -286,8 +320,12 @@ import { colors } from '@workday/canvas-kit-react/tokens'
 import { SystemIconCircle } from '@workday/canvas-kit-react/icon'
 import { shieldIcon } from '@workday/canvas-accent-icons-web'
 
+// Default System Icon Circle
 <SystemIconCircle icon={shieldIcon} />
+// System Icon Circle with bockground color
 <SystemIconCircle icon={shieldIcon} background={colors.pomegranate500} />
+// System Icon Circle  with a mirrored x-axis (helpful for bidirectional support, if needed)
+<SystemIconCircle icon={shieldIcon} shouldMirror={true} />
 ```
 
 ## Static Properties
@@ -326,6 +364,14 @@ Default: `SystemIconCircleSize.l` (`40`)
 
 ---
 
+#### `shouldMirror: boolean`
+
+> If set to `true`, transform the SVG's x-axis to mirror the graphic
+
+Default: `false`
+
+---
+
 # Graphics
 
 ## Usage
@@ -337,10 +383,16 @@ import { colors } from '@workday/canvas-kit-react/tokens'
 import { Graphic } from '@workday/canvas-kit-react/icon'
 import { badgeAchievementGraphic } from '@workday/canvas-graphics-web'
 
+// Default graphic
 <Graphic src={badgeAchievementGraphic} />
+// Graphic with a set width of 80px
 <Graphic src={badgeAchievementGraphic} width={80}/>
+// Graphic with a set height of 80px
 <Graphic src={badgeAchievementGraphic} height={80}/>
+// Graphic with growth behavior to fit its container
 <Graphic src={badgeAchievementGraphic} grow={true} />
+// Graphic with a mirrored x-axis (helpful for bidirectional support, if needed)
+<Graphic src={badgeAchievementGraphic} shouldMirror={true} />
 ```
 
 ## Static Properties
@@ -394,5 +446,13 @@ Default: `false`
 #### `iconRef: React.Ref<HTMLSpanElement>`
 
 > Returns the ref to the rendered icon.
+
+---
+
+#### `shouldMirror: boolean`
+
+> If set to `true`, transform the SVG's x-axis to mirror the graphic
+
+Default: `false`
 
 ---

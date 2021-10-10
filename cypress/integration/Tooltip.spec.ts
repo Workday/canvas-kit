@@ -221,6 +221,21 @@ describe('Tooltip', () => {
       }
     );
 
+    context(
+      'when the "Super Mega Ultra Long Content With Max Width Custom" button is hovered',
+      () => {
+        beforeEach(() => {
+          cy.findByRole('button', {
+            name: 'Super Mega Ultra Long Content With Max Width Custom',
+          }).trigger('mouseover');
+        });
+
+        it('should show the tooltip', () => {
+          cy.findByRole('tooltip').should('be.visible');
+        });
+      }
+    );
+
     context('when the "Short Content" button is focused', () => {
       beforeEach(() => {
         cy.findByRole('button', {name: 'Short Content'}).focus();
@@ -237,6 +252,21 @@ describe('Tooltip', () => {
         beforeEach(() => {
           cy.findByRole('button', {
             name: 'Super Mega Ultra Long Content With Max Width On The Button',
+          }).focus();
+        });
+
+        it('should show the tooltip', () => {
+          cy.findByRole('tooltip').should('be.visible');
+        });
+      }
+    );
+
+    context(
+      'when the "Super Mega Ultra Long Content With Max Width Custom" button is focused',
+      () => {
+        beforeEach(() => {
+          cy.findByRole('button', {
+            name: 'Super Mega Ultra Long Content With Max Width Custom',
           }).focus();
         });
 
