@@ -5,7 +5,7 @@
 </a>  This component is work in progress and currently in prerelease.
 
 View the
-[documentation for Text Area](https://workday.github.io/canvas-kit/?path=/docs/labs-text-area-react--basic)
+[documentation for Text Area](https://workday.github.io/canvas-kit/?path=/docs/labs-inputs-text-area-react--basic)
 on Storybook.
 
 [> Workday Design Reference](https://design.workday.com/components/areas/text-area)
