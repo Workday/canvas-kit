@@ -12,7 +12,7 @@ import {createComponent, ExtractProps, useModelContext} from '@workday/canvas-ki
 import {useThemedRing, useThemeRTL} from '@workday/canvas-kit-labs-react/common';
 
 import {TextAreaModelContext} from './TextArea';
-import {FormFieldModel, FormField, useFormFieldInput} from '@workday/canvas-kit-labs-react/form-field';
+import {FormFieldModel, FormField} from '@workday/canvas-kit-labs-react/form-field';
 
 export interface TextAreaFieldProps extends ExtractProps<typeof FormField.Input, never> {
   model?: FormFieldModel;

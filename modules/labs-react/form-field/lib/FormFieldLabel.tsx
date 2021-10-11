@@ -3,7 +3,6 @@ import {jsx} from '@emotion/core';
 import React from 'react';
 
 import {
-  accessibleHide,
   createComponent,
   ExtractProps,
   useModelContext,
