@@ -11,7 +11,7 @@ describe('TextInput', () => {
   ['Basic', 'Alert', 'Error'].forEach(story => {
     context(`given the '${story}' story is rendered`, () => {
       beforeEach(() => {
-        h.stories.load('Labs/Text Input/React', story);
+        h.stories.load('Labs/Inputs/Text Input/React', story);
       });
 
       it('should not have any axe errors', () => {
