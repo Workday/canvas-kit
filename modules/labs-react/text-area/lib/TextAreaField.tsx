@@ -9,12 +9,12 @@ import {
   type,
 } from '@workday/canvas-kit-react/tokens';
 import {createComponent, ExtractProps, useModelContext} from '@workday/canvas-kit-react/common';
-import {Box, useThemedRing, useThemeRTL} from '@workday/canvas-kit-labs-react/common';
+import {useThemedRing, useThemeRTL} from '@workday/canvas-kit-labs-react/common';
 
 import {TextAreaModelContext} from './TextArea';
-import {FormFieldModel, useFormFieldInput} from '@workday/canvas-kit-labs-react/form-field';
+import {FormFieldModel, FormField, useFormFieldInput} from '@workday/canvas-kit-labs-react/form-field';
 
-export interface TextAreaFieldProps extends ExtractProps<typeof Box, never> {
+export interface TextAreaFieldProps extends ExtractProps<typeof FormField.Input, never> {
   model?: FormFieldModel;
 }
 
@@ -71,6 +71,6 @@ export const TextAreaField = createComponent('textarea')({
           },
         });
 
-    return <Box as="textarea" css={[themeRTL(baseStyles), focusStyles]} {...props} />;
+    return <FormField.Input as="textarea" css={[themeRTL(baseStyles), focusStyles]} {...props} />;
   },
 });

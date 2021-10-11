@@ -94,31 +94,33 @@ describe('Text Input', () => {
   describe('when rendered a hint id', () => {
     it('the input and hint text should have matching ids for accessibility', () => {
       const hintId = 'hintId';
+      const renderedHintId = `hint-${hintId}`
       const hintText = 'Helpful text goes here.';
       const {container} = render(
-        <TextInput hintId={hintId}>
+        <TextInput id={hintId}>
           <TextInput.Field />
           <TextInput.Hint>{hintText}</TextInput.Hint>
         </TextInput>
       );
 
-      expect(container.querySelector('p')).toHaveAttribute('id', hintId);
-      expect(container.querySelector('input')).toHaveAttribute('aria-describedby', hintId);
+      expect(container.querySelector('p')).toHaveAttribute('id', renderedHintId);
+      expect(container.querySelector('input')).toHaveAttribute('aria-describedby', renderedHintId);
     });
   });
 
   describe('when rendered a input id', () => {
     it('the input and label should have matching ids for accessibility', () => {
       const inputId = 'inputId';
+      const renderedInputId = `input-${inputId}`;
       const {container} = render(
-        <TextInput inputId={inputId}>
+        <TextInput id={inputId}>
           <TextInput.Label>Test</TextInput.Label>
           <TextInput.Field />
         </TextInput>
       );
 
-      expect(container.querySelector('label')).toHaveAttribute('for', inputId);
-      expect(container.querySelector('input')).toHaveAttribute('id', inputId);
+      expect(container.querySelector('label')).toHaveAttribute('for', renderedInputId);
+      expect(container.querySelector('input')).toHaveAttribute('id', renderedInputId);
     });
   });
 

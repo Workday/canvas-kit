@@ -1,5 +1,6 @@
-import {FormFieldHint, FormFieldHintProps} from '../../form-field/lib/FormFieldHint';
+import {ExtractProps} from '@workday/canvas-kit-react/common';
+import {FormField} from '@workday/canvas-kit-labs-react/form-field';
 
-export type TextAreaHintProps = FormFieldHintProps;
+export type TextAreaHintProps = ExtractProps<typeof FormField.Hint, never>;
 
-export const TextAreaHint = FormFieldHint;
+export const TextAreaHint = FormField.Hint;

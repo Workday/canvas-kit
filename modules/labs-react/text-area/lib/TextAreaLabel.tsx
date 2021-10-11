@@ -1,5 +1,6 @@
-import {FormFieldLabel, FormFieldLabelProps} from '../../form-field/lib/FormFieldLabel';
+import {ExtractProps} from '@workday/canvas-kit-react/common';
+import {FormField} from '@workday/canvas-kit-labs-react/form-field';
 
-export type TextAreaLabelProps = FormFieldLabelProps;
+export type TextAreaLabelProps = ExtractProps<typeof FormField.Label, never>;
 
-export const TextAreaLabel = FormFieldLabel;
+export const TextAreaLabel = FormField.Label;
