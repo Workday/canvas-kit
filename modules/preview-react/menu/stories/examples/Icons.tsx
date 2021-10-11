@@ -10,7 +10,7 @@ import {Menu, MenuItem} from '@workday/canvas-kit-preview-react/menu';
 
 export const Icons = () => {
   return (
-    <Menu title="Menu Title">
+    <Menu>
       <MenuItem icon={uploadCloudIcon}>First Item</MenuItem>
       <MenuItem icon={setupIcon}>Second Item (with a really really really long label)</MenuItem>
       <MenuItem isDisabled icon={uploadCloudIcon} secondaryIcon={taskContactIcon}>
