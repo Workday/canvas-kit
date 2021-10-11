@@ -57,7 +57,6 @@ export const TextAreaField = createComponent('textarea')({
   displayName: 'TextArea.Field',
   Component: ({model, ...elemProps}: TextAreaFieldProps, ref) => {
     const localModel = useModelContext(TextAreaModelContext, model);
-    const props = useFormFieldInput(localModel, elemProps, ref);
 
     const {themeRTL, theme} = useThemeRTL();
     const errorRing = useThemedRing('error');
@@ -71,6 +70,6 @@ export const TextAreaField = createComponent('textarea')({
           },
         });
 
-    return <FormField.Input as="textarea" css={[themeRTL(baseStyles), focusStyles]} {...props} />;
+    return <FormField.Input as="textarea" ref={ref} css={[themeRTL(baseStyles), focusStyles]} {...elemProps} />;
   },
 });
