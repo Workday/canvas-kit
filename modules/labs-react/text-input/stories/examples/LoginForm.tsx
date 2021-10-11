@@ -62,7 +62,7 @@ export const LoginForm = () => {
           <TextInput.Hint>{formik.touched.email && formik.errors.email}</TextInput.Hint>
         </TextInput>
         <TextInput
-          inputId={passwordId}
+          id={passwordId}
           hasError={formik.touched.password && !!formik.errors.password}
           isRequired={true}
         >
@@ -81,7 +81,7 @@ export const LoginForm = () => {
               type="button"
               icon={showPassword ? invisibleIcon : visibleIcon}
               aria-label={showPassword ? 'Hide Password' : 'Show Password'}
-              aria-controls={passwordId}
+              aria-controls={`input-${passwordId}`}
               onClick={() => {
                 setShowPassword(state => !state);
                 passwordRef.current.focus();

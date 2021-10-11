@@ -1,9 +1,11 @@
+/** @jsx jsx */
+import { jsx } from '@emotion/core'
 import React from 'react';
 import {TextArea} from '@workday/canvas-kit-labs-react/text-area';
 import {VStack} from '@workday/canvas-kit-labs-react/layout';
 import {styled} from '@workday/canvas-kit-react/common';
 import {useThemedRing} from '@workday/canvas-kit-labs-react/common';
-import {CSSProperties, space} from '@workday/canvas-kit-react/tokens';
+import {CSSProperties, space, statusColors} from '@workday/canvas-kit-react/tokens';
 
 const StyledField = styled(TextArea.Field)<{alertStyles?: CSSProperties}>(
   ({alertStyles}) => alertStyles
@@ -20,6 +22,8 @@ export const Alert = () => {
     value.length < 3 ? 'success' : value.length < 7 ? 'alert' : 'error'
   );
 
+  const hintColor = value.length < 3 ? statusColors.success : value.length < 7 ? statusColors.warning : statusColors.error
+
   return (
     <VStack spacing="xxxs" alignItems="flex-start">
       <TextArea>
@@ -27,7 +31,7 @@ export const Alert = () => {
         <StyledField alertStyles={alertStyles} onChange={handleChange} value={value} />
         <TextArea.Hint paddingTop={space.xxs}>
           <strong>Character Limit: </strong>
-          {10 - value.length} Left
+          <span css={{color: hintColor}}>{10 - value.length} Left</span>
         </TextArea.Hint>
       </TextArea>
     </VStack>

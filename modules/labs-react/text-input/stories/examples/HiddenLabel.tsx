@@ -1,5 +1,8 @@
+/** @jsx jsx */
+import { jsx } from '@emotion/core'
 import React from 'react';
 import {TextInput} from '@workday/canvas-kit-labs-react/text-input';
+import { accessibleHide } from '@workday/canvas-kit-react/common';
 
 export const HiddenLabel = () => {
   const [value, setValue] = React.useState('');
@@ -10,7 +13,7 @@ export const HiddenLabel = () => {
 
   return (
     <TextInput>
-      <TextInput.Label isVisuallyHidden={true}>Email</TextInput.Label>
+      <TextInput.Label css={{...accessibleHide}}>Email</TextInput.Label>
       <TextInput.Field onChange={handleChange} value={value} />
     </TextInput>
   );

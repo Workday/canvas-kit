@@ -3,10 +3,10 @@ import {FormFieldModel} from './useFormFieldModel';
 
 /**
  * Adds the necessary props to a `Label` component.
- * Used by the FormField.Label subcomponent and other input type componenets
+ * Used by the FormField.Label subcomponent and other input type components
  */
 export const useFormFieldLabel = createHook(({state}: FormFieldModel) => {
   return {
-    htmlFor: state.inputId,
+    htmlFor: `input-${state.id}`,
   };
 });

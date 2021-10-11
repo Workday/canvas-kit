@@ -32,7 +32,7 @@ const Input = ({model, ...elementProps}) => {
   const localModel = useModelContext(FormFieldModelContext, model);
   const props = useFormFieldInput(localModel, elementProps);
 
-  return <input type="text" {...props} />;
+  return <input type="text" required={model.state.isRequired ? true : false} {...props} />;
 };
 
 export const Custom = () => {
