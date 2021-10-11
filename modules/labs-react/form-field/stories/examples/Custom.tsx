@@ -32,7 +32,7 @@ const Input = ({model, ...elementProps}) => {
   const localModel = useModelContext(FormFieldModelContext, model);
   const props = useFormFieldInput(localModel, elementProps);
 
-  return <input {...props} />;
+  return <input type="text" {...props} />;
 };
 
 export const Custom = () => {
