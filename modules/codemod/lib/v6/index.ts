@@ -7,6 +7,8 @@ import deprecateCookieBanner from './deprecateCookieBanner';
 import moveAndRenameSearchBar from './moveAndRenameSearchBar';
 // deprecate header imports
 import deprecateHeader from './deprecateHeader';
+// rename CanvasDepthValue
+import renameCanvasDepthValue from './renameCanvasDepthValue';
 
 export default function transformer(file: FileInfo, api: API, options: Options) {
   // These will run in order. If your transform depends on others, place yours after dependent transforms
@@ -16,6 +18,7 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
     moveAndRenameSearchBar,
     // needs to run after `moveAndRenameSearchBar`
     deprecateHeader,
+    renameCanvasDepthValue,
   ];
 
   return fixes.reduce((source, fix) => fix({...file, source}, api, options), file.source);
