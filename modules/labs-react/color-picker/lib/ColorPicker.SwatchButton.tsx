@@ -98,6 +98,7 @@ export default createComponent('button')({
     const {state, events} = React.useContext(ColorPickerModelContext);
 
     const isSelected = state.color ? color === state.color : false;
+    // console.warn(isSelected);
 
     useMountLayout(() => {
       events.registerColor({color: color});
@@ -113,18 +114,18 @@ export default createComponent('button')({
       registerTab,
       unregisterTab,
     } = React.useContext(SwatchContext);
-    React.useLayoutEffect(() => {
-      registerTab(color);
-      return () => {
-        unregisterTab(color);
-      };
-    }, [color, registerTab, unregisterTab]);
+    // React.useLayoutEffect(() => {
+    //   registerTab(color);
+    //   return () => {
+    //     unregisterTab(color);
+    //   };
+    // }, [color, registerTab, unregisterTab]);
 
     const onKeyDown = event => {
       switch (event.key) {
         case 'ArrowLeft':
         case 'Left':
-          setIntentTab(-1);
+          events.previous();
           break;
         case 'ArrowRight':
         case 'Right':
@@ -138,8 +139,10 @@ export default createComponent('button')({
           break;
         case 'Enter':
         case ' ':
-          console.log('intentTab', intentTab);
-          setActiveTab(intentTab);
+          // console.log('intentTab', intentTab);
+          console.warn('state.cursorColor', state.cursorColor);
+          events.setColor({color: state.cursorColor});
+          // setActiveTab(intentTab);
           event.preventDefault(); // prevent clicking this button
           break;
         default:
@@ -157,7 +160,7 @@ export default createComponent('button')({
         isSelected={isSelected}
         onClick={() => events.setColor({color: color})}
         tabIndex={activeTab === color ? 0 : -1}
-        style={intentTab === color ? intentSwatchStyles : undefined}
+        style={{backgroundColor: state.cursorColor === color ? 'orange' : color}}
         onBlur={resetIntentTab}
         {...elemProps}
       >

@@ -43,17 +43,17 @@ export const SwatchWrapper = ({initialActive = '', children}) => {
         value={{
           activeTab,
           setActiveTab: name => {
-            console.warn('set active tab', name);
+            // console.warn('set active tab', name);
             setActiveTab(name);
             events.setColor({color: name});
-            console.warn('NAME', name);
+            // console.warn('NAME', name);
           },
           intentTab,
           resetIntentTab: () => {
             setIntentTab('');
           },
           setIntentTab: value => {
-            console.warn('VALUE', value);
+            // console.warn('VALUE', value);
             let nextIndex;
             if (value === 'first') {
               nextIndex = 0;
