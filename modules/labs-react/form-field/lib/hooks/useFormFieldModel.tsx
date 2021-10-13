@@ -14,11 +14,14 @@ type FormFieldState = {
    */
   hasError?: boolean;
   /**
-   * Optional id for the whole `Form Field`. The `aria-describedby` of the `FormField.Input` / id for `FormField.Hint`
-   * and the `htmlFor` of the `FormField.Label` / id for `FormField.Input` will automatically derived from this value.
-   * If not provided, a unique id will be created.
-   * If you need access to these ids `FormField.Input` will be `input-${id}` and `FormField.Hint` will be `hint-${id}`.
-   * @default useUniqueId()
+   * Optional `id` provided to `FormField`'s subcomponents as HTML attributes:
+   * - `FormField.Input` will set `aria-describedby` to `hint-${id}`
+   * - `FormField.Input` will set `id` to `input-${id}`
+   * - `FormField.Label` will set `htmlFor` to `input-${id}`
+   * - `FormField.Hint` will set `id` to `hint-${id}`
+   *
+   * If a value is not provided, a unique id will be automatically created by `useUniqueId()`.
+   * @default `useUniqueId()`
    */
   id?: string;
   /**

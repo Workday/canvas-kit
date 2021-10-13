@@ -2,7 +2,7 @@ import React from 'react';
 import {TextInput} from '@workday/canvas-kit-labs-react/text-input';
 import {HStack} from '@workday/canvas-kit-labs-react/layout';
 
-export const LabelPosition = () => {
+export const LabelPositionHorizontal = () => {
   const [value, setValue] = React.useState('');
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

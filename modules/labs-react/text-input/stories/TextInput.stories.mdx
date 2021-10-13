@@ -6,7 +6,8 @@ import {TextInput} from '@workday/canvas-kit-labs-react/text-input';
 import {Basic} from './examples/Basic';
 import {Disabled} from './examples/Disabled';
 import {Grow} from './examples/Grow';
-import {LabelPosition} from './examples/LabelPosition';
+import {LabelPositionHorizontal} from './examples/LabelPositionHorizontal';
+import {LabelPositionVertical} from './examples/LabelPositionVertical';
 import {Placeholder} from './examples/Placeholder';
 import {RefForwarding} from './examples/RefForwarding';
 import {Required} from './examples/Required';
@@ -40,21 +41,21 @@ yarn add @workday/canvas-kit-labs-react
 
 ### Disabled
 
-Set the `disabled` prop of the TextInput.Field to prevent users from interacting with it.
+Use `TextInput.Field`s `disabled` prop to prevent users from interacting with it.
 
 <ExampleCodeBlock code={Disabled} />
 
 ### Placeholder
 
-Set the `placeholder` prop of the TextInput.Field to display a sample of its expected format or
-value before a value has been provided.
+Use `TextInput.Field`s `placeholder` prop to display a sample of its expected format or value before
+a value has been provided.
 
 <ExampleCodeBlock code={Placeholder} />
 
 ### Required
 
-Set the `isRequired` property property from useFormFieldModel to indicate that the field is
-required. This will also add an red asterisk next to your TextInput.Label.
+Use `TextInput.Field`'s `isRequired` prop (or use with the `useFormFieldModel` hook) to indicate
+that the field is required. This will also add a red asterisk to `TextInput.Label`.
 
 <ExampleCodeBlock code={Required} />
 
@@ -76,9 +77,15 @@ and set the growth that way, etc.
 
 ### Label Position
 
-Setting the Label position can be done using HStack or VStack
+Use `HStack` or `VStack` to set `TextInput.Label`'s position. Below are examples of both positions:
 
-<ExampleCodeBlock code={LabelPosition} />
+#### Horizontal
+
+<ExampleCodeBlock code={LabelPositionHorizontal} />
+
+#### Vertical
+
+<ExampleCodeBlock code={LabelPositionVertical} />
 
 ### Visually Hiding The Label
 
@@ -89,15 +96,14 @@ If your label is just for screen reader users you can use the accessibleHide uti
 
 ### Type
 
-Set the `type` prop TextInput.Field to any allowed string, e.g. password to change the input field
-type.
+Use `TextInput.Field`'s `type` prop to customize the input type, e.g. `password`, `email`, etc.
 
 <ExampleCodeBlock code={Password} />
 
 ### Error States
 
-Use the `hasError` property from useFormFieldModel to set the TextInput to the Error state. If you
-have an accompanying hint you can use the TextInput.Hint subcomponent.
+Use the `hasError` property from `useFormFieldModel` to set the `TextInput` to the Error state. If
+you have an accompanying hint you can use the TextInput.Hint subcomponent.
 
 #### Errors
 

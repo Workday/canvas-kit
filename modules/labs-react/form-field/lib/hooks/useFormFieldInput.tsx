@@ -3,7 +3,7 @@ import {FormFieldModel} from './useFormFieldModel';
 
 /**
  * Adds the necessary props to an `Input` component.
- * Used by the FormField.input subcomponent and other input type components
+ * Used by the FormField.Input subcomponent and other input type components
  */
 export const useFormFieldInput = createHook(({state}: FormFieldModel) => {
   return {
