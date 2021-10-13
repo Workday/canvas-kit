@@ -6,7 +6,7 @@ import {CanvasSystemIcon} from '@workday/design-assets-types';
 
 export interface ToastIconProps {
   icon: CanvasSystemIcon;
-  iconColor?: CanvasColor | string; // TODO: Fix
+  iconColor?: CanvasColor | string;
 }
 
 const ToastSystemIcon = styled(SystemIcon)({

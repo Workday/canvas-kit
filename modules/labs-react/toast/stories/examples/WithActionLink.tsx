@@ -7,7 +7,7 @@ import {colors} from '@workday/canvas-kit-react/tokens';
 import {action} from '@storybook/addon-actions';
 
 export const WithActionLink = () => {
-  const actionClick = () => action('action button clicked');
+  const handleActionClick = () => action('action button clicked');
 
   return (
     <Toast>
@@ -15,7 +15,7 @@ export const WithActionLink = () => {
         <Toast.Icon icon={checkIcon} iconColor={colors.greenApple400} />
         <Toast.Message>
           Your workbook was successfully processed.
-          <Toast.Action onActionClick={actionClick}>Custom Action</Toast.Action>
+          <Toast.Action onActionClick={handleActionClick}>Custom Action</Toast.Action>
         </Toast.Message>
       </Toast.Content>
     </Toast>

@@ -7,11 +7,11 @@ import {colors} from '@workday/canvas-kit-react/tokens';
 import {action} from '@storybook/addon-actions';
 
 export const WithCloseButton = () => {
-  const onClose = () => action('close button clicked');
+  const handleClose = () => action('close button clicked');
 
   return (
     <Toast>
-      <Toast.Close onClose={onClose} />
+      <Toast.Close onClose={handleClose} />
       <Toast.Content>
         <Toast.Icon icon={checkIcon} iconColor={colors.greenApple400} />
         <Toast.Message>Your workbook was successfully processed.</Toast.Message>
