@@ -7,8 +7,7 @@ import {CSSProperties, space, type} from '@workday/canvas-kit-react/tokens';
 import {Box, useThemeRTL} from '@workday/canvas-kit-labs-react/common';
 
 import {FormFieldModelContext} from './FormField';
-import {FormFieldModel} from './hooks/useFormFieldModel';
-import {useFormFieldHint} from './hooks/useFormFieldHint';
+import {FormFieldModel, useFormFieldHint} from './hooks';
 
 export interface FormFieldHintProps extends ExtractProps<typeof Box, never> {
   model?: FormFieldModel;

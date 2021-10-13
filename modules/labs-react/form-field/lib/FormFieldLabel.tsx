@@ -12,8 +12,7 @@ import {type} from '@workday/canvas-kit-react/tokens';
 import {HStack, StackSpacing} from '@workday/canvas-kit-labs-react/layout';
 
 import {FormFieldModelContext} from './FormField';
-import {FormFieldModel} from './hooks/useFormFieldModel';
-import {useFormFieldLabel} from './hooks/useFormFieldLabel';
+import {FormFieldModel, useFormFieldLabel} from './hooks';
 
 export interface FormFieldLabelProps extends Omit<ExtractProps<typeof HStack, never>, 'spacing'> {
   model?: FormFieldModel;

@@ -4,8 +4,7 @@ import {createComponent, ExtractProps, useModelContext} from '@workday/canvas-ki
 import {Box} from '@workday/canvas-kit-labs-react/common';
 
 import {FormFieldModelContext} from './FormField';
-import {FormFieldModel} from './hooks/useFormFieldModel';
-import {useFormFieldInput} from './hooks/useFormFieldInput';
+import {FormFieldModel, useFormFieldInput} from './hooks';
 
 export interface FormFieldInputProps extends ExtractProps<typeof Box, never> {
   model?: FormFieldModel;

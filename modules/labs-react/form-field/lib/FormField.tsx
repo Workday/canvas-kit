@@ -6,7 +6,7 @@ import {
   useFormFieldModel,
   FormFieldModel,
   FormFieldModelConfig,
-} from '@workday/canvas-kit-labs-react/form-field';
+} from './hooks';
 import {FormFieldInput} from './FormFieldInput';
 import {FormFieldLabel} from './FormFieldLabel';
 import {FormFieldHint} from './FormFieldHint';
