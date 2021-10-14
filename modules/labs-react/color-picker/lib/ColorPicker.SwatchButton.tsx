@@ -13,7 +13,6 @@ import {borderRadius, colors, space} from '@workday/canvas-kit-react/tokens';
 import {checkSmallIcon} from '@workday/canvas-system-icons-web';
 import chroma from 'chroma-js';
 import * as React from 'react';
-import {SwatchContext} from './ColorPicker.SwatchBook';
 import {ColorPickerModelContext} from './ColorPicker';
 
 export interface SwatchButtonProps {
@@ -98,28 +97,11 @@ export default createComponent('button')({
     const {state, events} = React.useContext(ColorPickerModelContext);
 
     const isSelected = state.color ? color === state.color : false;
-    // console.warn(isSelected);
 
     useMountLayout(() => {
       events.registerColor({color: color});
       return () => events.unregisterColor({color: color});
     });
-
-    const {
-      activeTab,
-      setActiveTab,
-      intentTab,
-      resetIntentTab,
-      setIntentTab,
-      registerTab,
-      unregisterTab,
-    } = React.useContext(SwatchContext);
-    // React.useLayoutEffect(() => {
-    //   registerTab(color);
-    //   return () => {
-    //     unregisterTab(color);
-    //   };
-    // }, [color, registerTab, unregisterTab]);
 
     const onKeyDown = event => {
       switch (event.key) {
@@ -129,13 +111,13 @@ export default createComponent('button')({
           break;
         case 'ArrowRight':
         case 'Right':
-          setIntentTab(1);
+          events.next();
           break;
-        case 'Home':
-          setIntentTab('first');
+        case 'ArrowUp':
+          events.up();
           break;
-        case 'End':
-          setIntentTab('last');
+        case 'ArrowDown':
+          events.down();
           break;
         case 'Enter':
         case ' ':
@@ -159,9 +141,8 @@ export default createComponent('button')({
         showCheck={showCheck || state.color === color}
         isSelected={isSelected}
         onClick={() => events.setColor({color: color})}
-        tabIndex={activeTab === color ? 0 : -1}
+        tabIndex={state.cursorColor === color ? 0 : -1}
         style={{backgroundColor: state.cursorColor === color ? 'orange' : color}}
-        onBlur={resetIntentTab}
         {...elemProps}
       >
         {showCheck || state.color === color ? (

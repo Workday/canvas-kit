@@ -12,6 +12,8 @@ type ColorPickerEvents = {
   setColor(data: {color: string}): void;
   setCustomColor(data: {color: string}): void;
   setCursorColor(data: {color: string}): void;
+  up(): void;
+  down(): void;
   next(): void;
   previous(): void;
   registerColor(data: {color: string}): void;
@@ -29,6 +31,8 @@ export const colorPickerEventMap = createEventMap<ColorPickerEvents>()({
     shouldPrevious: 'previous',
     shouldRegisterColor: 'registerColor',
     shouldUnregisterColor: 'unregisterColor',
+    shouldUp: 'up',
+    shouldDown: 'down',
   },
   callbacks: {
     onSetColor: 'setColor',
@@ -38,11 +42,14 @@ export const colorPickerEventMap = createEventMap<ColorPickerEvents>()({
     onPrevious: 'previous',
     onRegisterColor: 'registerColor',
     onUnregisterColor: 'unregisterColor',
+    onUp: 'up',
+    onDown: 'down',
   },
 });
 
 export type ColorPickerModelConfig = {
   initialColor?: string;
+  columnCount?: number;
 } & Partial<ToModelConfig<ColorPickerState, ColorPickerEvents, typeof colorPickerEventMap>>;
 
 export const useColorPickerModel = (config: ColorPickerModelConfig = {}): ColorPickerModel => {
@@ -56,40 +63,43 @@ export const useColorPickerModel = (config: ColorPickerModelConfig = {}): ColorP
     return colors[0];
   };
 
-  const getLast = (colors: string[]) => {
-    return colors[colors.length - 1];
-  };
-
-  const getItem = (color: string, colors: string[]) => {
-    console.warn('get item', color);
-    const swatch = color ? colors.find(swatch => swatch === color) : getFirst(colors); // no id, return first item
-    console.warn('SWATCH', swatch);
-    // assert(item, `Item not found: ${id}`);
-    return swatch;
-  };
-
   const getOffsetItem = (offset: number) => (color: string, colors: string[]) => {
-    // const item = getItem(color, colors);
-
     const currentIndex = colors.findIndex(swatch => swatch === color);
+
     let nextIndex = currentIndex + offset;
     if (nextIndex < 0) {
       nextIndex = colors.length - 1;
     } else if (nextIndex >= colors.length) {
       nextIndex = 0;
     }
-    // const disabledAttribute = items[nextIndex].ref.current?.getAttribute('disabled');
-    // if (disabledAttribute !== null || disabledAttribute === 'false') {
-    //   // The next item is disabled, try again
-    //   return getOffsetItem(offset)(items[nextIndex].id, items);
-    // }
-    console.warn('colors[nextIndex]', colors[nextIndex]);
 
     return colors[nextIndex];
   };
 
+  const getOffsetUpItem = () => (cursorColor: string, colors: string[]) => {
+    const currentIndex = colors.indexOf(cursorColor);
+    const nextIndex = colors.indexOf(colors[currentIndex - 8]);
+    let nextUpIndex = colors[currentIndex - 8];
+    console.warn('nextIndex', nextIndex);
+    if (nextIndex <= 0) {
+      console.warn('in here');
+      console.warn('nextIndex', nextIndex);
+      nextUpIndex = colors[colors.length - nextIndex];
+    }
+
+    return nextUpIndex;
+  };
+
+  const getOffsetDownItem = () => (cursorColor: string, colors: string[]) => {
+    const currentIndex = colors.indexOf(cursorColor);
+
+    return colors[currentIndex + 8];
+  };
+
   const getNext = getOffsetItem(1);
   const getPrevious = getOffsetItem(-1);
+  const getUp = getOffsetUpItem();
+  const getDown = getOffsetDownItem();
 
   const state = {
     color,
@@ -116,11 +126,19 @@ export const useColorPickerModel = (config: ColorPickerModelConfig = {}): ColorP
     },
 
     next() {
-      getOffsetItem(1);
+      setCursorColor(getNext(cursorColor, colors));
     },
 
     previous() {
       setCursorColor(getPrevious(cursorColor, colors));
+    },
+
+    up() {
+      setCursorColor(getUp(cursorColor, colors));
+    },
+
+    down() {
+      setCursorColor(getDown(cursorColor, colors));
     },
 
     setCustomColor(data: {color: string}) {
