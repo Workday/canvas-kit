@@ -26,7 +26,7 @@ type FormFieldState = {
   id?: string;
   /**
    * Optional flag to denote if this field is required. When true the `FormField.Input` will have
-   * `requried` set to true, and an asterisk will be appended to the `FormField.Label`.
+   * `required` set to true, and an asterisk will be appended to the `FormField.Label`.
    * @default false
    */
   isRequired?: boolean;
