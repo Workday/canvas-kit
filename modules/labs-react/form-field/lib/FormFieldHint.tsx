@@ -2,9 +2,9 @@
 import {jsx} from '@emotion/core';
 import React from 'react';
 
-import {createComponent, ExtractProps, useModelContext} from '@workday/canvas-kit-react/common';
-import {CSSProperties, space, type} from '@workday/canvas-kit-react/tokens';
-import {Box, useThemeRTL} from '@workday/canvas-kit-labs-react/common';
+import {createComponent, ExtractProps, useModelContext, useTheme} from '@workday/canvas-kit-react/common';
+import {space, type} from '@workday/canvas-kit-react/tokens';
+import {Box} from '@workday/canvas-kit-labs-react/common';
 
 import {FormFieldModelContext} from './FormField';
 import {FormFieldModel, useFormFieldHint} from './hooks';
@@ -17,18 +17,12 @@ export interface FormFieldHintProps extends ExtractProps<typeof Box, never> {
   children?: React.ReactNode;
 }
 
-const baseStyles: CSSProperties = {
-  ...type.levels.subtext.medium,
-  margin: `${space.xxs} 0 0`,
-  width: '100%',
-};
-
 export const FormFieldHint = createComponent('p')({
   displayName: 'FormField.Hint',
   Component: ({model, children, ...elemProps}: FormFieldHintProps, ref, Element) => {
     const localModel = useModelContext(FormFieldModelContext, model);
     const props = useFormFieldHint(localModel, elemProps, ref);
-    const {themeRTL, theme} = useThemeRTL();
+    const theme = useTheme();
 
     if (!children) {
       // If there is no hint text just skip rendering
@@ -38,10 +32,11 @@ export const FormFieldHint = createComponent('p')({
     return (
       <Box
         as={Element}
-        css={themeRTL(
-          baseStyles,
-          localModel.state.hasError ? {color: theme.canvas.palette.error.main} : {}
-        )}
+        css={{
+          ...type.levels.subtext.medium,
+        }}
+        color={localModel.state.hasError ? theme.canvas.palette.error.main : undefined}
+        marginY={space.xxs}
         {...props}
       >
         {children}

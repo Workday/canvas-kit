@@ -8,8 +8,8 @@ import {
   spaceNumbers,
   type,
 } from '@workday/canvas-kit-react/tokens';
-import {createComponent, ExtractProps, useModelContext} from '@workday/canvas-kit-react/common';
-import {useThemedRing, useThemeRTL} from '@workday/canvas-kit-labs-react/common';
+import {createComponent, ExtractProps, useModelContext, useTheme} from '@workday/canvas-kit-react/common';
+import {useThemedRing} from '@workday/canvas-kit-labs-react/common';
 
 import {TextAreaModelContext} from './TextArea';
 import {FormFieldModel, FormField} from '@workday/canvas-kit-labs-react/form-field';
@@ -20,16 +20,7 @@ export interface TextAreaFieldProps extends ExtractProps<typeof FormField.Input,
 
 const baseStyles: CSSProperties = {
   ...type.levels.subtext.large,
-  border: `1px solid ${inputColors.border}`,
-  display: 'block',
-  backgroundColor: inputColors.background,
-  borderRadius: borderRadius.m,
-  boxSizing: 'border-box',
-  minHeight: 64,
-  minWidth: 280,
   transition: '0.2s box-shadow, 0.2s border-color',
-  padding: spaceNumbers.xxs, // Compensate for border
-  margin: 0, // Fix Safari
   resize: 'both',
   '&::webkit-resizer': {
     display: 'none',
@@ -58,18 +49,32 @@ export const TextAreaField = createComponent('textarea')({
   Component: ({model, ...elemProps}: TextAreaFieldProps, ref) => {
     const localModel = useModelContext(TextAreaModelContext, model);
 
-    const {themeRTL, theme} = useThemeRTL();
+    const theme = useTheme();
     const errorRing = useThemedRing('error');
 
     const focusStyles = localModel.state.hasError
       ? errorRing
-      : themeRTL({
+      : {
           '&:focus:not([disabled])': {
             borderColor: theme.canvas.palette.common.focusOutline,
             boxShadow: `inset 0 0 0 1px ${theme.canvas.palette.common.focusOutline}`,
           },
-        });
+        };
 
-    return <FormField.Input as="textarea" ref={ref} css={[themeRTL(baseStyles), focusStyles]} {...elemProps} />;
+    return (
+      <FormField.Input
+        as="textarea"
+        ref={ref}
+        css={[baseStyles, focusStyles]} {...elemProps}
+        border={`1px solid ${inputColors.border}`}
+        display='block'
+        backgroundColor={inputColors.background}
+        borderRadius={borderRadius.m}
+        minHeight={64}
+        minWidth={280}
+        padding={spaceNumbers.xxs} // Compensate for border
+        margin={0} // Fix Safari
+      />
+    );
   },
 });

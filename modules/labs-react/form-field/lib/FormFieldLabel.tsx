@@ -6,8 +6,9 @@ import {
   createComponent,
   ExtractProps,
   useModelContext,
+  useTheme,
 } from '@workday/canvas-kit-react/common';
-import {ComponentStyles, useThemeRTL} from '@workday/canvas-kit-labs-react/common';
+import {ComponentStyles} from '@workday/canvas-kit-labs-react/common';
 import {type} from '@workday/canvas-kit-react/tokens';
 import {HStack, StackSpacing} from '@workday/canvas-kit-labs-react/layout';
 
@@ -21,7 +22,7 @@ export interface FormFieldLabelProps extends Omit<ExtractProps<typeof HStack, ne
    */
   children: React.ReactNode;
   /**
-   * When input is field, this is spacing between label and asterisk.
+   * When the input is required, this is spacing between label and asterisk.
    * @default xxxs
    */
   spacing?: StackSpacing;
@@ -31,7 +32,6 @@ const styles: ComponentStyles = {
   label: {
     ...type.levels.subtext.large,
     fontWeight: type.properties.fontWeights.medium,
-    minWidth: '180px',
   },
   asterisk: {
     fontSize: type.properties.fontSizes[16],
@@ -45,19 +45,20 @@ export const FormFieldLabel = createComponent('label')({
   Component: ({spacing='xxxs', model, children, ...elemProps}: FormFieldLabelProps, ref) => {
     const localModel = useModelContext(FormFieldModelContext, model);
     const props = useFormFieldLabel(localModel, elemProps, ref);
-    const {themeRTL, theme} = useThemeRTL();
+    const theme = useTheme();
 
     return (
       <HStack
         as="label"
         spacing={spacing}
-        css={themeRTL(styles.label)}
+        css={styles.label}
+        minWidth='180px'
         {...props}
       >
         <span>{children}</span>
         {localModel.state.isRequired && (
           <span
-            css={themeRTL(styles.asterisk, {color: theme.canvas.palette.error.main})}
+            css={[styles.asterisk, {color: theme.canvas.palette.error.main}]}
             aria-hidden="true"
           >
             *
