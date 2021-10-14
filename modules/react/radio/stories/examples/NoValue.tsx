@@ -12,11 +12,11 @@ export const NoValue = () => {
 
   return (
     <>
-      <FormField label="Choose your pizza crust" useFieldset={true}>
+      <FormField label="Choose Your Pizza Crust" useFieldset={true}>
         <RadioGroup name="crust" onChange={handleChange} value={value}>
-          <Radio label="Deep Dish" />
+          <Radio label="Deep dish" />
           <Radio label="Thin" />
-          <Radio label="Gluten Free" />
+          <Radio label="Gluten free" />
           <Radio label="Cauliflower" />
         </RadioGroup>
       </FormField>

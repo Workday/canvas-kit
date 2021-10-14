@@ -17,11 +17,11 @@ export const RefForwarding = () => {
 
   return (
     <>
-      <FormField label="Choose your pizza crust" useFieldset={true}>
+      <FormField label="Choose Your Pizza Crust" useFieldset={true}>
         <RadioGroup name="crust" onChange={handleChange} value={value}>
-          <Radio label="Deep Dish" value="deep-dish" />
+          <Radio label="Deep dish" value="deep-dish" />
           <Radio label="Thin" value="thin" />
-          <Radio label="Gluten Free" ref={glutenFreeRef} value="gluten-free" />
+          <Radio label="Gluten free" ref={glutenFreeRef} value="gluten-free" />
           <Radio label="Cauliflower" value="cauliflower" />
         </RadioGroup>
       </FormField>

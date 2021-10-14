@@ -1,0 +1,90 @@
+name: Canary
+
+on:
+  push:
+    branches:
+      - prerelease/*
+  workflow_dispatch: # Allow manual triggering of this job in case of failures
+
+
+jobs:
+  canary:
+    runs-on: ubuntu-latest
+
+    steps:
+      ## First, we'll checkout the repository. We don't persist credentials because we need a
+      ## Personal Access Token to push on a branch that is protected. See
+      ## https://github.com/cycjimmy/semantic-release-action#basic-usage
+      - uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+          fetch-depth: 0 # Used for conventional commit ranges
+
+      ## This step installs node and sets up several matchers (regex matching for Github
+      ## Annotations). See
+      ## https://github.com/actions/setup-node/blob/25316bbc1f10ac9d8798711f44914b1cf3c4e954/src/main.ts#L58-L65
+      - uses: actions/setup-node@v2.4.0
+        with:
+          node-version: 14.x
+          registry-url: https://registry.npmjs.org
+
+      ## The caching steps create a cache key based on the OS and hash of the yarn.lock file. A
+      ## cache hit will copy files from Github cache into the `node_modules` and `.cache/cypress`
+      ## folders. A cache hit will skip the cache steps
+      - name: Cache node modules
+        id: yarn-cache
+        uses: actions/cache@v1
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-modules-hash-${{ hashFiles('yarn.lock') }}
+
+      - name: Cache Cypress
+        id: cypress-cache
+        uses: actions/cache/@v1
+        with:
+          path: .cache/cypress
+          key: ${{ runner.os }}-cypress-cache-version-${{ steps.cypress-version.outputs.version }}
+
+      ## If both `node_modules` and `.cache/cypress` were cache hits, we're going to skip the `yarn
+      ## install` step. This effectively saves up to 3m on a cache hit build.
+      - name: Install Packages
+        if:
+          steps.yarn-cache.outputs.cache-hit != 'true' || steps.cypress-cache.outputs.cache-hit !=
+          'true'
+        run: yarn install --production=false
+        env:
+          CYPRESS_CACHE_FOLDER: .cache/cypress
+
+      ## Build Storybook and extract component stories for Storybook aggregation. This will be used
+      ## for Chromatic rebaselining and publishing to GH Pages. Should be before `yarn build` since
+      ## built assets mess up this command
+      - name: Build Storybook
+        run: |
+          yarn build-storybook --quiet
+          npx sb extract docs docs/stories.json
+
+      ## Build for packaging.
+      - name: Build
+        run: yarn build
+
+      ## Publish prerelease to npm. Must be run after a build
+      - name: Publish
+        run: node utils/publish-canary.js
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_CI_PUBLISH_TOKEN}}
+          SLACK_WEBHOOK: ${{secrets.SLACK_WEBHOOK}}
+          BUILD_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+      ## Create a Chromatic baseline auto-accepting changes. Chromatic changes are already accepted
+      ## in PRs, so we don't need to manually approve them here again. This new baseline will be
+      ## used for future PRs. New PRs may show extra Chromatic changes until the "Update Branch"
+      ## button is used in PRs which will pull this new baseline.
+      - name: Update Chromatic Baseline
+        uses: chromaui/action@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          projectToken: ${{ secrets.CHROMATIC_APP_CODE }}
+          storybookBuildDir: docs
+          exitOnceUploaded: true
+          exitZeroOnChanges: true
+          autoAcceptChanges: true
