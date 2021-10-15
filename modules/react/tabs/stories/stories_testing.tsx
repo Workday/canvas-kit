@@ -6,7 +6,7 @@ import {withSnapshotsEnabled} from '../../../../utils/storybook';
 
 import {Tabs, useTabsModel} from '@workday/canvas-kit-react/tabs';
 
-import {Simple} from './examples/Simple';
+import {Basic} from './examples/Basic';
 import {RightToLeft} from './examples/RightToLeft';
 import {Box} from '@workday/canvas-kit-labs-react/common';
 
@@ -57,7 +57,7 @@ export const Bidirectionality = withSnapshotsEnabled(() => {
     <>
       <h3>Left-to-right</h3>
       <div>
-        <Simple />
+        <Basic />
       </div>
       <br />
       <h3>Right-to-left</h3>

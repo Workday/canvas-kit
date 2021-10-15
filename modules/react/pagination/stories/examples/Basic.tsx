@@ -6,7 +6,7 @@ import {
   getVisibleResultsMin,
 } from '@workday/canvas-kit-react/pagination';
 
-export const ShowAdditionalDetails = () => {
+export const Basic = () => {
   const resultCount = 10;
   const totalCount = 100;
   const lastPage = getLastPage(resultCount, totalCount);
@@ -16,11 +16,8 @@ export const ShowAdditionalDetails = () => {
       onPageChange={pageNumber => console.log(pageNumber)}
       aria-label="Pagination"
       lastPage={lastPage}
-      rangeSize={3}
-      initialCurrentPage={3}
     >
       <Pagination.Controls>
-        <Pagination.JumpToFirstButton aria-label="First" />
         <Pagination.StepToPreviousButton aria-label="Previous" />
         <Pagination.PageList>
           {({state}) =>
@@ -32,11 +29,6 @@ export const ShowAdditionalDetails = () => {
           }
         </Pagination.PageList>
         <Pagination.StepToNextButton aria-label="Next" />
-        <Pagination.JumpToLastButton aria-label="Last" />
-        <Pagination.GoToForm>
-          <Pagination.GoToTextInput aria-label="Go to page number" />
-          <Pagination.GoToLabel>{() => `of ${totalCount} results`}</Pagination.GoToLabel>
-        </Pagination.GoToForm>
       </Pagination.Controls>
       <Pagination.AdditionalDetails>
         {({state}) =>

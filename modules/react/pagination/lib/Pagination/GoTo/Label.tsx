@@ -7,6 +7,9 @@ import {PaginationModel} from '../types';
 
 export interface GoToLabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> {
   model: PaginationModel;
+  /**
+   * Accepts child elements or a render prop.
+   */
   children?: (model: PaginationModel) => React.ReactNode | React.ReactNode;
 }
 

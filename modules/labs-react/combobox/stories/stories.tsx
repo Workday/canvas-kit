@@ -39,7 +39,7 @@ const groupOfResults = (
       <strong>{groupHeading}</strong>
     </MenuItem>
   ),
-  items: simpleAutoComplete(count, showDisabledItems, 3),
+  items: simpleAutoComplete(count, showDisabledItems, 10),
 });
 
 export const Autocomplete: FC<Omit<ComboboxProps, 'children'> & {
@@ -63,7 +63,7 @@ export const Autocomplete: FC<Omit<ComboboxProps, 'children'> & {
               groupOfResults(groupLength, showDisabledItems, <em>Animals</em>),
               groupOfResults(Math.min(1, groupLength), showDisabledItems, 'Cars'),
             ]
-          : simpleAutoComplete(textLength, showDisabledItems)
+          : simpleAutoComplete(textLength, showDisabledItems, 10)
       }
       onChange={autocompleteCallback}
       showClearButton={showClearButton == null ? true : showClearButton}
