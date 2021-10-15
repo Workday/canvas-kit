@@ -48,6 +48,11 @@ export const defaultCanvasTheme: CanvasTheme = {
       focusOutline: colors.blueberry400,
     },
   },
+  /**
+   * Theme Breakpoints
+   *
+   *
+   */
   breakpoints: {
     values: breakpoints,
     up,

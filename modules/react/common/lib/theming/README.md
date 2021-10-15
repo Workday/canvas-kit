@@ -90,10 +90,10 @@ export const defaultCanvasTheme: CanvasTheme = {
   breakpoints: {
     values: {
       zero: 0,
-      s: 600,
-      m: 960,
-      l: 1280,
-      xl: 1920,
+      s: 320,
+      m: 768,
+      l: 1024,
+      xl: 1440,
     },
     up,
     down,
@@ -243,41 +243,205 @@ variable before falling back to the default theme.
 
 ## Breakpoints
 
-Our breakpoint system is customized within the theme object. `theme.breakpoints.values` contains the
-various widths that our components adjust at:
+Breakpoints are used by media queries to conditionally apply or modify styles based on the viewport
+width. This allows the UI to be responsive to various screen sizes.
+
+### Values
+
+The canvas theme object provides five breakpoint values that correspond to the min-widths of our
+standard screen sizes.
 
 | Name   | Size (px) |
 | ------ | --------- |
 | `zero` | 0         |
-| `s`    | 600       |
-| `m`    | 960       |
-| `l`    | 1280      |
-| `xl`   | 1920      |
+| `s`    | 320       |
+| `m`    | 768       |
+| `l`    | 1024      |
+| `xl`   | 1440      |
+
+And these are our standard screen size ranges:
+
+- `small` (320px - 767px) Used for mobile-sized screens
+- `medium` (768px - 1023px) Used for tablet-sized screens
+- `large` - (1024px - 1439px) Used for laptop and small desktop screens
+- `extra-large` (≥1440px) Used for very large screens
+
+> Note: Some applications may only require a subset of screen sizes and not use all breakpoints.
+
+Our breakpoint system is customized within the theme object. `theme.canvas.breakpoints.values`.
+
+```ts
+import {useTheme} from '@workday/canvas-kit-react/common';
+import {space} from '@workday/canvas-kit-react/tokens';
+
+const {theme} = useTheme();
+const {values} = theme.canvas.breakpoints;
+const styles = {
+  [`@media (min-width: ${values.m}px)`]: {
+    padding: space.s,
+  },
+};
+```
+
+### Functions
 
 There are also several functions to help with generating media queries:
 
-#### `up: (key: BreakpointFnParam) => string`
+- [Up](#Up)
+- [Down](#Down)
+- [Between](#Between)
+- [Only](#Only)
 
-> Returns a media query reflecting your specified size and up. Works with the enum (e.g.
-> BreakpointKey.m) or the string (e.g. 'm'). Example: theme.breakpoints.up(BreakpointKey.m) =>
-> '@media (min-width:960px)'
+#### Up
 
-#### `down: (key: BreakpointFnParam) => string`
+_Returns a media query above the `min-width` for the range of a given breakpoint_
 
-> Returns a media query reflecting your specified size and down. Works with the enum or the string
-> (e.g. 'm'). Example: theme.breakpoints.down(BreakpointKey.m) => '@media (max-width:1279.5px)'
+Given a `start` breakpoint key ("zero", "s", "m", "l", "xl"), this function returns a media query
+(string) using a `min-width`.
 
-#### `between: (start: BreakpointFnParam, end: BreakpointFnParam) => string`
+```ts
+import {useTheme} from '@workday/canvas-kit-react/common';
+import {space} from '@workday/canvas-kit-react/tokens';
 
-> Returns a media query reflecting the sizes between your specified breakpoints. Works with the enum
-> or the string (e.g. 'm'). Example: theme.breakpoints.between(BreakpointKey.m, BreakpointKey.l) =>
-> '@media (min-width:960px) and (max-width:1919.5px)'
+const theme = useTheme();
+const {up} = theme.canvas.breakpoints;
+const mediaQuery = up('l'); // Returns '@media (min-width: 1024px)'
+const styles = {
+  [mediaQuery]: {
+    padding: space.m,
+  },
+};
+```
 
-#### `only: (key: BreakpointFnParam) => string`
+#### Down
 
-> Returns a media query reflecting the size within your specified breakpoint. Works with the enum or
-> the string (e.g. 'm'). Example: theme.breakpointsonly(BreakpointKey.m) => '@media
-> (min-width:960px) and (max-width:1279.5px)'
+_Returns a media query below the `max-width` for the range of a given breakpoint_
+
+Given an `end` breakpoint key ("zero", "s", "m", "l", "xl"), this function returns a media query
+(string) using a `max-width`.
+
+> Note: This function subtracts `0.5px` from the next breakpoint value to prevent collisions. For
+> example, `breakpoints.values.s`, has a `min-width` of `320px`, and the `max-width` is `767.5px`).
+
+If the "xl" breakpoint is provided, this function returns a media query with only a `min-width` of
+`0`, as seen in the second example below.
+
+```ts
+import {useTheme} from '@workday/canvas-kit-react/common';
+import {space} from '@workday/canvas-kit-react/tokens';
+
+const theme = useTheme();
+const {down} = theme.canvas.breakpoints;
+const mediaQuery = down('m'); // Returns '@media (max-width: 1023.5px)'
+const styles = {
+  [mediaQuery]: {
+    padding: space.m,
+  },
+};
+```
+
+This example uses the `xl` breakpoint and only adds a `min-width` of `0` to the media query.
+
+```ts
+import {useTheme} from '@workday/canvas-kit-react/common';
+import {space} from '@workday/canvas-kit-react/tokens';
+
+const theme = useTheme();
+const {down} = theme.canvas.breakpoints;
+const mediaQuery = down('xl'); // Returns '@media (min-width: 0)'
+const styles = {
+  [mediaQuery]: {
+    padding: space.m,
+  },
+};
+```
+
+#### Between
+
+_Returns a media query between two given breakpoints_
+
+Given `start` and `end` breakpoint keys ("zero", "s", "m", "l", "xl"), this function returns a media
+query (string) using a min-width and max-width.
+
+> Note: This function subtracts `0.5px` from the next breakpoint value to prevent collisions. For
+> example, `breakpoints.values.s`, has a `min-width` of `320px`, and the `max-width` is `767.5px`).
+
+If the "xl" breakpoint is provided, this function returns a media query with only a `min-width` of
+`0`, as seen in the second example below.
+
+```ts
+import {useTheme} from '@workday/canvas-kit-react/common';
+import {space} from '@workday/canvas-kit-react/tokens';
+
+const theme = useTheme();
+const {between} = theme.canvas.breakpoints;
+// Returns '@media (min-width: 320px) and (max-width: 1023.5px)'
+const mediaQuery = between('s', 'm');
+const styles = {
+  [mediaQuery]: {
+    padding: space.s,
+  },
+};
+```
+
+This example uses `xl` as the `end` breakpoint and only adds a min-width to the media query.
+
+```ts
+import {useTheme} from '@workday/canvas-kit-react/common';
+import {space} from '@workday/canvas-kit-react/tokens';
+
+const theme = useTheme();
+const {between} = theme.canvas.breakpoints;
+const mediaQuery = between('m', 'xl'); // Returns '@media (min-width: 768px)'
+const styles = {
+  [mediaQuery]: {
+    padding: space.s,
+  },
+};
+```
+
+#### Only
+
+_Returns a media query with a `min-width` and `max-width` for a given breakpoint_
+
+Given a breakpoint key ("zero", "s", "m", "l", "xl"), this function returns a media query (string)
+using a `min-width` and `max-width`.
+
+> Note: This function subtracts `0.5px` from the next breakpoint value to prevent collisions.For
+> example, `breakpoints.values.s`, has a `min-width` of `320px`, and the `max-width` is `767.5px`).
+
+If the "xl" breakpoint is provided, this function returns a media query with only a `min-width` of
+`0`, as seen in the second example below.
+
+```ts
+import {useTheme} from '@workday/canvas-kit-react/common';
+import {space} from '@workday/canvas-kit-react/tokens';
+
+const theme = useTheme();
+const {only} = theme.canvas.breakpoints;
+const mediaQuery = only('s'); // Returns '@media (min-width: 320px) and (max-width: 767.5px)'
+const styles = {
+  [mediaQuery]: {
+    padding: space.s,
+  },
+};
+```
+
+This example uses the `xl` breakpoint and only adds a `min-width` of `0` to the media query.
+
+```ts
+import {useTheme} from '@workday/canvas-kit-react/common';
+import {space} from '@workday/canvas-kit-react/tokens';
+
+const theme = useTheme();
+const {only} = theme.canvas.breakpoints;
+const mediaQuery = only('m', 'xl'); // Returns '@media (min-width: 0px)'
+const styles = {
+  [mediaQuery]: {
+    padding: space.s,
+  },
+};
+```
 
 ## useIsRTL Hook
 
