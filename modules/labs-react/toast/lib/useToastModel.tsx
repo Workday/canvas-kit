@@ -6,8 +6,13 @@ type ToastState = {
   actionButtonExist?: boolean;
 };
 
+export enum ToastButtonType {
+  Close = 'Close',
+  Action = 'Action',
+}
+
 export type ToastEvents = {
-  updateButtonExist(data: {button: string; status: boolean}): void;
+  updateButtonExist(data: {buttonType: ToastButtonType; status: boolean}): void;
 };
 
 export const popupEventMap = createEventMap<ToastEvents>()({
@@ -40,10 +45,10 @@ export const useToastModel = (config: ToastModelConfig = {}): ToastModel => {
   };
 
   const events = useEventMap(popupEventMap, state, config, {
-    updateButtonExist({button, status}) {
-      if (button === 'close') {
+    updateButtonExist({buttonType, status}) {
+      if (buttonType === ToastButtonType.Close) {
         setCloseButtonExist(status);
-      } else if (button === 'action') {
+      } else if (buttonType === ToastButtonType.Action) {
         setActionButtonExist(status);
       }
     },
