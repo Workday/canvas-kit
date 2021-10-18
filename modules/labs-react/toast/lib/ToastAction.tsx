@@ -5,10 +5,7 @@ import React from 'react';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {Hyperlink, HyperlinkProps, space, type} from '@workday/canvas-kit-react';
 
-import {ToastModel} from './useToastModel';
-
 export interface ToastActionProps {
-  model?: ToastModel;
   children: React.ReactNode;
   onActionClick: () => void;
 }
@@ -33,7 +30,7 @@ const ActionButton = (props: ActionButtonProps) => {
 
 export const ToastAction = createComponent('div')({
   displayName: 'Toast.Action',
-  Component: ({children, model, onActionClick, ...elemProps}: ToastActionProps, ref, Element) => {
+  Component: ({children, onActionClick}: ToastActionProps, ref, Element) => {
     return <ActionButton onClick={onActionClick}>{children}</ActionButton>;
   },
 });
