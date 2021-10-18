@@ -4,3 +4,4 @@ export * from './drawer';
 export * from './header';
 export * from './layout';
 export * from './search-form';
+export * from './toast';
