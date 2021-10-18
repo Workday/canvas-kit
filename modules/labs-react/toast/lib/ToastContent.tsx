@@ -1,56 +1,27 @@
+/** @jsx jsx */
+import {jsx} from '@emotion/core';
 import React from 'react';
 
-import {
-  createComponent,
-  ExtractProps,
-  styled,
-  useModelContext,
-} from '@workday/canvas-kit-react/common';
+import {createComponent, styled} from '@workday/canvas-kit-react/common';
+import {Popup, type} from '@workday/canvas-kit-react';
 
-import {ToastModel} from './useToastModel';
-import {Popup, space, ToastProps, type} from '@workday/canvas-kit-react';
-import {ToastModelContext} from './Toast';
-
-export type ToastContentProps = ExtractProps<typeof Popup.Card, never> & {
-  model?: ToastModel;
+export interface ToastContentProps {
   children: React.ReactNode;
-};
+}
 
-const toastWidth = 360;
-
-const ToastContentContainer = styled('div')<Pick<ToastProps, 'onClose'>>(
-  {
-    display: 'flex',
-    alignItems: 'center',
-    ...type.levels.subtext.large,
-  },
-  ({onClose}) => ({
-    marginRight: onClose ? space.m : undefined,
-  })
-);
+const ToastContentContainer = styled('div')({
+  display: 'flex',
+  alignItems: 'center',
+  ...type.levels.subtext.large,
+});
 
 export const ToastContent = createComponent('div')({
   displayName: 'Toast.Content',
-  Component: ({children, model, ...elemProps}: ToastContentProps, ref, Element) => {
-    const {events} = useModelContext(ToastModelContext, model);
-    const isInteractive = true;
-
+  Component: ({children}: ToastContentProps, ref, Element) => {
     return (
-      <Popup.Card
-        ref={ref}
-        as={Element}
-        width={toastWidth}
-        padding="s"
-        role={isInteractive ? 'dialog' : 'status'}
-        aria-live={isInteractive ? 'off' : 'polite'}
-        aria-atomic={!isInteractive}
-        {...elemProps}
-      >
-        {events?.close && (
-          <Popup.CloseIcon aria-label="Close" onClick={events?.close} size="small" />
-        )}
+      <Popup.Body>
         <ToastContentContainer>{children}</ToastContentContainer>
-      </Popup.Card>
+      </Popup.Body>
     );
   },
 });
