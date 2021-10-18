@@ -14,8 +14,10 @@ export interface ToastCloseProps {
 export const ToastClose = createComponent('div')({
   displayName: 'Toast.Close',
   Component: ({onClose, model}: ToastCloseProps, ref, Element) => {
-    const {events} = useModelContext(ToastModelContext, model);
-    events.updateButtonExist({buttonType: ToastButtonType.Close, status: true});
+    const {
+      events: {updateButtonExistState},
+    } = useModelContext(ToastModelContext, model);
+    updateButtonExistState({buttonType: ToastButtonType.Close, status: true});
     return <Popup.CloseIcon aria-label="Close" onClick={onClose} size="small" />;
   },
 });
