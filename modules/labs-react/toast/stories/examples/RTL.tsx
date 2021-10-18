@@ -8,12 +8,12 @@ import {action} from '@storybook/addon-actions';
 import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react';
 
 export const RTL = () => {
-  const onClose = () => action('close button clicked');
+  const handleClose = () => action('close button clicked');
 
   return (
     <CanvasProvider theme={{canvas: {direction: ContentDirection.RTL}}}>
       <Toast>
-        <Toast.Close onClose={onClose} />
+        <Toast.Close onClose={handleClose} />
         <Toast.Content>
           <Toast.Icon icon={checkIcon} iconColor={colors.greenApple400} />
           <Toast.Message>Your workbook was successfully processed.</Toast.Message>
