@@ -11,7 +11,7 @@ import {select, number} from '@storybook/addon-knobs';
 import {colors, type} from '@workday/canvas-kit-react/tokens';
 import README from '../README.md';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
-import {Header} from '@workday/canvas-kit-labs-react/header';
+import {DeprecatedHeader} from '@workday/canvas-kit-labs-react/header';
 import {IconButton, PrimaryButton} from '@workday/canvas-kit-react/button';
 import {Avatar} from '@workday/canvas-kit-react/avatar';
 import {SidePanel} from '@workday/canvas-kit-react/side-panel';
@@ -168,14 +168,14 @@ storiesOf('Components/Containers/Side Panel/React', module)
   .add('Configurable', () => (
     <div className="story">
       <div style={{height: '67vh', position: 'relative'}}>
-        <Header brandUrl="#">
+        <DeprecatedHeader brandUrl="#">
           <Avatar
             onClick={() => {
               alert('clicked avatar');
             }}
           />
           <PrimaryButton>Sign Up</PrimaryButton>
-        </Header>
+        </DeprecatedHeader>
         <SidePanelWrapper />
       </div>
     </div>

@@ -1,8 +1,6 @@
 {
-  "packages": [
-    "modules/**"
-  ],
-  "version": "5.2.8",
+  "packages": ["modules/**"],
+  "version": "5.2.7",
   "npmClient": "yarn",
   "useWorkspaces": true,
   "command": {

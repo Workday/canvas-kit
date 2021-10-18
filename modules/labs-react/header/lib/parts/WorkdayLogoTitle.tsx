@@ -1,6 +1,10 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import {HeaderHeight, HeaderTheme, HeaderVariant} from '../shared/types';
+import {
+  DeprecatedHeaderHeight,
+  DeprecatedHeaderTheme,
+  DeprecatedHeaderVariant,
+} from '../shared/types';
 import {miniWdayLogoBlue, wdayLogoWhite, wdayLogoBlue} from '@workday/canvas-kit-react/common';
 import {colors, space} from '@workday/canvas-kit-react/tokens';
 import chroma from 'chroma-js';
@@ -8,9 +12,9 @@ import chroma from 'chroma-js';
 export type WorkdayLogoTitleProps = {
   /**
    * The theme of the WorkdayLogoTitle. Accepts `White`, `Blue`, or `Transparent`.
-   * @default HeaderTheme.White
+   * @default DeprecatedHeaderTheme.White
    */
-  themeColor?: HeaderTheme;
+  themeColor?: DeprecatedHeaderTheme;
   /**
    * The text of the WorkdayLogoTitle. Not used if `brand` is provided.
    * @default ''
@@ -19,7 +23,7 @@ export type WorkdayLogoTitleProps = {
   /**
    * The variant of the WorkdayLogoTitle.
    */
-  variant?: HeaderVariant;
+  variant?: DeprecatedHeaderVariant;
 };
 
 const LockupContainer = styled('div')({
@@ -33,7 +37,10 @@ const Lockup = styled('div')<WorkdayLogoTitleProps>(
     justifyContent: 'center',
   },
   ({variant}) => ({
-    height: variant === HeaderVariant.Global ? HeaderHeight.Small : HeaderHeight.Large,
+    height:
+      variant === DeprecatedHeaderVariant.Global
+        ? DeprecatedHeaderHeight.Small
+        : DeprecatedHeaderHeight.Large,
   })
 );
 
@@ -49,9 +56,10 @@ const Title = styled('h3')<WorkdayLogoTitleProps>(
     display: 'initial',
   },
   ({themeColor}) => ({
-    color: themeColor === HeaderTheme.White ? colors.blueberry500 : colors.frenchVanilla100,
+    color:
+      themeColor === DeprecatedHeaderTheme.White ? colors.blueberry500 : colors.frenchVanilla100,
     borderLeft: `1px solid ${
-      themeColor === HeaderTheme.White
+      themeColor === DeprecatedHeaderTheme.White
         ? colors.soap400
         : chroma(colors.soap400)
             .alpha(0.4)
@@ -65,9 +73,30 @@ const WorkdayLogo = styled('span')<WorkdayLogoTitleProps>({
   lineHeight: 0,
 });
 
-export class WorkdayLogoTitle extends React.Component<WorkdayLogoTitleProps> {
+/**
+ * ### Deprecated Workday Logo Title
+ *
+ * As of Canvas Kit v6, this component is being soft-deprecated.
+ * It will be hard-deprecated (completely removed) in v7. Please see the
+ * [migration guide](https://workday.github.io/canvas-kit/?path=/story/welcome-migration-guides-v6-0--page)
+ * for more information.
+ */
+export class DeprecatedWorkdayLogoTitle extends React.Component<WorkdayLogoTitleProps> {
+  componentDidMount() {
+    console.warn(
+      `WorkdayLogoTitle is being deprecated and will be removed in Canvas Kit V7.\n
+      For more information, please see the V6 migration guide:\n
+      https://workday.github.io/canvas-kit/?path=/story/welcome-migration-guides-v6-0--page
+      `
+    );
+  }
   public render() {
-    const {themeColor = HeaderTheme.White, title = '', variant, ...elemProps} = this.props;
+    const {
+      themeColor = DeprecatedHeaderTheme.White,
+      title = '',
+      variant,
+      ...elemProps
+    } = this.props;
 
     return (
       <LockupContainer>
@@ -76,8 +105,8 @@ export class WorkdayLogoTitle extends React.Component<WorkdayLogoTitleProps> {
             {...this.props}
             dangerouslySetInnerHTML={{
               __html:
-                themeColor === HeaderTheme.White
-                  ? variant === HeaderVariant.Global
+                themeColor === DeprecatedHeaderTheme.White
+                  ? variant === DeprecatedHeaderVariant.Global
                     ? miniWdayLogoBlue
                     : wdayLogoBlue
                   : wdayLogoWhite,

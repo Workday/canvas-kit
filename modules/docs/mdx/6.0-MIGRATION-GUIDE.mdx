@@ -10,7 +10,13 @@ any questions about the update.
 
 - [Codemod](#codemod)
 - [Component Deprecations](#component-deprecations)
-  - [PageHeader](#page-header)
+  - [Cookie Banner](#cookie-banner)
+  - [Header & Global Header](#header--global-header)
+  - [Page Header](#page-header)
+- [Component Migrations](#component-migrations)
+  - [Search Bar](#search-bar)
+- [Name Updates](#name-updates)
+  - [Depth Tokens](#depth-tokens)
 
 ## Codemod
 
@@ -58,6 +64,139 @@ warning.
 A hard-deprecated component or package is no longer available. You will need to follow the method
 prescribed in our migration guide to update your application. Please reach out to our team directly
 if you need additional help.
+
+### Cookie Banner
+
+We are [soft deprecating](#soft-deprecation) `CookieBanner`. It has been renamed to
+`DeprecatedCookieBanner`. Similarly, `CookieBannerProps` has been renamed to
+`DeprecatedCookieBannerProps`. You may continue to use this component exactly as you did in v5, but
+note that we plan to [hard-deprecate](#hard-deprecation) it in Canvas Kit v7.
+
+🤖 The codemod will rename `CookieBanner` and `CookieBannerProps` to their deprecated names:
+
+```tsx
+// v5
+import CookieBanner, {CookieBannerProps} from '@workday/canvas-kit-react/cookie-banner';
+
+export const CustomCookieBanner = (props: CookieBannerProps) => {
+  return <CookieBanner notice={CookieBanner.DefaultNotice} {...props} />;
+};
+
+// v6
+import DeprecatedCookieBanner, {
+  DeprecatedCookieBannerProps,
+} from '@workday/canvas-kit-react/cookie-banner';
+
+export const CustomCookieBanner = (props: DeprecatedCookieBannerProps) => {
+  return <DeprecatedCookieBanner notice={DeprecatedCookieBanner.DefaultNotice} {...props} />;
+};
+```
+
+```tsx
+// v5
+import {CookieBanner, CookieBannerProps} from '@workday/canvas-kit-react';
+
+interface CustomCookieBannerProps extends CookieBannerProps {
+  // custom page header props
+}
+
+export const CustomCookieBanner = (props: CustomCookieBannerProps) => {
+  return <CookieBanner notice={CookieBanner.DefaultNotice} {...props} />;
+};
+
+// v6
+import {DeprecatedCookieBanner, DeprecatedCookieBannerProps} from '@workday/canvas-kit-react';
+
+interface CustomCookieBannerProps extends DeprecatedCookieBannerProps {
+  // custom page header props
+}
+
+export const CustomCookieBanner = (props: CustomCookieBannerProps) => {
+  return <DeprecatedCookieBanner notice={DeprecatedCookieBanner.DefaultNotice} {...props} />;
+};
+```
+
+### Header & Global Header
+
+We are [soft deprecating](#soft-deprecation) `Header` and `GlobalHeader` and their related exports.
+They has been renamed to `DeprecatedHeader` and `DeprecatedGlobalHeader`, respectively. You may
+continue to use these components exactly as you did in v5, but note that we plan to
+[hard-deprecate](#hard-deprecation) this package in Canvas Kit v7.
+
+> Note: `SearchBar` is not being deprecated but will instead move to its own dedictated package. You
+> can read more [here](#search-bar).
+
+🤖 The codemod will handle all these changes automatically:
+
+- Rename import specifiers
+  - `DubLogoTitle` becomes `DeprecatedDubLogoTitle`
+  - `GlobalHeader` becomes `DeprecatedGlobalHeader`
+  - `Header` becomes `DeprecatedHeader`
+  - `HeaderHeight` becomes `DeprecatedHeaderHeight`
+  - `HeaderTheme` becomes `DeprecatedHeaderTheme`
+  - `HeaderVariant` becomes `DeprecatedHeaderVariant`
+  - `ThemeAttributes` becomes `DeprecatedHeaderThemeAttributes`
+  - `Themes` becomes `DeprecatedHeaderThemes`
+  - `WorkdayLogoTitle` becomes `DeprecatedWorkdayLogoTitle`
+  - `themes` becomes `deprecatedHeaderThemes`
+- Rename JSX identifiers
+  - `<DubLogoTitle>` becomes `<DeprecatedDubLogoTitle>`
+  - `<GlobalHeader>` becomes `<DeprecatedGlobalHeader>`
+  - `<Header>` becomes `<DeprecatedHeader>`
+  - `<WorkdayLogoTitle>` becomes `<DeprecatedWorkdayLogoTitle>`
+- Rename type references and interface declarations
+  - `type CustomHeaderHeight = HeaderHeight;` becomes
+    `type CustomHeaderHeight = DeprecatedHeaderHeight;`
+  - `type CustomHeaderTheme = HeaderTheme;` becomes
+    `type CustomHeaderTheme = DeprecatedHeaderTheme;`
+  - `type CustomHeaderVariant = HeaderVariant;` becomes
+    `type CustomHeaderVariant = DeprecatedHeaderVariant;`
+  - `type CustomThemeAttributes = ThemeAttributes;` becomes
+    `type CustomThemeAttributes = DeprecatedHeaderThemeAttributes;`
+  - `type CustomThemes = Themes;` becomes `type CustomThemes = DeprecatedHeaderThemes;`
+- Rename member expressions
+  - `HeaderHeight.Small` becomes `DeprecatedHeaderHeight.Small`
+  - `HeaderTheme.White` becomes `DeprecatedHeaderTheme.White`
+  - `HeaderVariant.Full` becomes `DeprecatedHeaderVariant.Full`
+  - `themes.Blue` becomes `deprecatedHeaderThemes.Blue`
+  - `Header.Variant.Global` becomes `DeprecatedHeader.Variant.Global`
+
+```tsx
+// v5
+import Header, {DubLogoTitle, GlobalHeader} from '@workday/canvas-kit-labs-react/header';
+
+const CustomGlobalHeader = props => {
+  return (
+    <GlobalHeader
+      brand={
+        <a href="#">
+          <DubLogoTitle themeColor={Header.Theme.White} />
+        </a>
+      }
+      {...props}
+    />
+  );
+};
+
+// v6
+import DeprecatedHeader, {
+  DeprecatedDubLogoTitle,
+  DeprecatedGlobalHeader,
+} from '@workday/canvas-kit-labs-react/header';
+
+const CustomGlobalHeader = props => {
+  return (
+    <DeprecatedGlobalHeader
+      brand={
+        <a href="#">
+          <DeprecatedDubLogoTitle themeColor={DeprecatedHeader.Theme.White} />
+        </a>
+      }
+      {...props}
+    />
+  );
+};
+```
 
 ### Page Header
 
@@ -108,4 +247,80 @@ interface CustomPageHeaderProps extends DeprecatedPageHeaderProps {
 export const CustomPageHeader = (props: CustomPageHeaderProps) => {
   return <DeprecatedPageHeader {...props} />;
 };
+```
+
+## Component Migrations
+
+### Search Bar
+
+`SeachBar` is being renamed to `SearchForm` and is moving out of
+`@workday/canvas-kit-labs-react/header` into its own dedicated package,
+`@workday/canvas-kit-labs-react/search-form`. The component has not been modified and you may
+continue to use this component exactly as you did in v5.
+
+🤖 The codemod will handle all these changes automatically:
+
+- Rename import sources
+  - `@workday/canvas-kit-labs-react/header` becomes `@workday/canvas-kit-labs-react/search-form`
+- Rename import specifiers
+  - `SearchBar` becomes `SearchForm`
+  - `SearchBarProps` becomes `SearchFormProps`
+  - `SearchBarState` becomes `SearchFormState`
+- Rename JSX identifiers
+  - `<SearchBar>` becomes `<SearchForm>`
+- Rename type references and interface declarations
+  - `type CustomSearchProps = SearchBarProps;` becomes `type CustomSearchProps = SearchFormProps;`
+  - `interface CustomSearchProps extends SearchBarProps` becomes
+    `interface CustomSearchProps extends SearchFormProps`
+
+```tsx
+// v5
+import {
+  SearchBar,
+  SearchBarProps,
+  SearchBarState,
+  SearchThemeAttributes,
+  SearchTheme,
+} from '@workday/canvas-kit-labs-react/header';
+
+const CustomSearchForm = (props: SearchFormProps) => {
+  return <SearchForm searchTheme={SearchTheme.Dark} {...props} />;
+};
+
+// v6
+import {
+  SearchForm,
+  SearchFormProps,
+  SearchFormState,
+  SearchThemeAttributes,
+  SearchTheme,
+} from '@workday/canvas-kit-labs-react/search-form';
+
+const CustomSearchForm = (props: SearchFormProps) => {
+  return <SearchForm searchTheme={SearchTheme.Dark} {...props} />;
+};
+```
+
+## Name Updates
+
+### Depth Tokens
+
+The `CanvasDepthValue` type has been renamed to `CanvasDepthValues` to be more consistent with our
+other token type names, such as `CanvasBorderRadiusValues`, `CanvasSpaceValues`, and
+`CanvasSpaceNumberValues`.
+
+🤖 The codemod will handle this rename transformation automatically:
+
+```ts
+// v5
+import {CanvasDepthValue} from '@workday/canvas-kit-react/tokens';
+
+type CustomDepthValues = CanvasDepthValue;
+interface OtherCustomDepthValues extends CanvasDepthValue {};
+
+// v6
+import {CanvasDepthValue} from '@workday/canvas-kit-react/tokens';
+
+type CustomDepthValues = CanvasDepthValues;
+interface OtherCustomDepthValues extends CanvasDepthValues {};
 ```
