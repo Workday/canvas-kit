@@ -4,7 +4,7 @@ import React from 'react';
 
 import {createComponent, useModelContext} from '@workday/canvas-kit-react/common';
 import {Hyperlink, HyperlinkProps, space, type} from '@workday/canvas-kit-react';
-import {ToastModel} from './useToastModel';
+import {ToastButtonType, ToastModel} from './useToastModel';
 import {ToastModelContext} from './Toast';
 
 export interface ToastActionProps {
@@ -35,7 +35,7 @@ export const ToastAction = createComponent('div')({
   displayName: 'Toast.Action',
   Component: ({children, model, onActionClick}: ToastActionProps, ref, Element) => {
     const {events} = useModelContext(ToastModelContext, model);
-    events.updateButtonExist({button: 'action', status: true});
+    events.updateButtonExist({buttonType: ToastButtonType.Action, status: true});
     return <ActionButton onClick={onActionClick}>{children}</ActionButton>;
   },
 });
