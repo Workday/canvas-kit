@@ -34,8 +34,10 @@ const ActionButton = (props: ActionButtonProps) => {
 export const ToastAction = createComponent('div')({
   displayName: 'Toast.Action',
   Component: ({children, model, onActionClick}: ToastActionProps, ref, Element) => {
-    const {events} = useModelContext(ToastModelContext, model);
-    events.updateButtonExist({buttonType: ToastButtonType.Action, status: true});
+    const {
+      events: {updateButtonExistState},
+    } = useModelContext(ToastModelContext, model);
+    updateButtonExistState({buttonType: ToastButtonType.Action, status: true});
     return <ActionButton onClick={onActionClick}>{children}</ActionButton>;
   },
 });
