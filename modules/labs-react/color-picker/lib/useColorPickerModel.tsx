@@ -1,11 +1,12 @@
 import {createEventMap, Model, ToModelConfig, useEventMap} from '@workday/canvas-kit-react/common';
-import React from 'react';
+import React, {useEffect} from 'react';
 
 type ColorPickerState = {
   color: string;
   colors: string[];
   cursorColor: string;
   customColor: string;
+  columnCount: number;
 };
 
 type ColorPickerEvents = {
@@ -53,6 +54,7 @@ export type ColorPickerModelConfig = {
 } & Partial<ToModelConfig<ColorPickerState, ColorPickerEvents, typeof colorPickerEventMap>>;
 
 export const useColorPickerModel = (config: ColorPickerModelConfig = {}): ColorPickerModel => {
+  const [columnCount, setColumnCount] = React.useState(config.columnCount || 8);
   const [color, setColor] = React.useState(config.initialColor || '');
   const [colors, setColors] = React.useState([] as string[]);
   const [cursorColor, setCursorColor] = React.useState('');
@@ -80,11 +82,9 @@ export const useColorPickerModel = (config: ColorPickerModelConfig = {}): ColorP
     const currentIndex = colors.indexOf(cursorColor);
     const nextIndex = colors.indexOf(colors[currentIndex - 8]);
     let nextUpIndex = colors[currentIndex - 8];
-    console.warn('nextIndex', nextIndex);
-    if (nextIndex <= 0) {
-      console.warn('in here');
-      console.warn('nextIndex', nextIndex);
-      nextUpIndex = colors[colors.length - nextIndex];
+    console.warn(currentIndex);
+    if (nextIndex < 0) {
+      nextUpIndex = colors[colors.length - (columnCount - currentIndex)];
     }
 
     return nextUpIndex;
@@ -92,6 +92,10 @@ export const useColorPickerModel = (config: ColorPickerModelConfig = {}): ColorP
 
   const getOffsetDownItem = () => (cursorColor: string, colors: string[]) => {
     const currentIndex = colors.indexOf(cursorColor);
+
+    if (nextIndex > colors.length) {
+      nextUpIndex = colors[colors.length - (columnCount - currentIndex)];
+    }
 
     return colors[currentIndex + 8];
   };
@@ -106,6 +110,7 @@ export const useColorPickerModel = (config: ColorPickerModelConfig = {}): ColorP
     colors,
     customColor,
     cursorColor,
+    columnCount,
   };
 
   const events = useEventMap(colorPickerEventMap, state, config, {

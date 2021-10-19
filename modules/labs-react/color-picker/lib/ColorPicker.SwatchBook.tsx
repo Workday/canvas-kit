@@ -2,12 +2,12 @@ import styled from '@emotion/styled';
 import {createComponent, StyledType} from '@workday/canvas-kit-react/common';
 import {space} from '@workday/canvas-kit-react/tokens';
 import * as React from 'react';
+import {ColorPickerModelContext} from '..';
 
 import SwatchButton, {SwatchButtonProps} from './ColorPicker.SwatchButton';
 
 export interface SwatchBookProps extends React.HtmlHTMLAttributes<HTMLDivElement> {
   colors: string[];
-  columnCount?: number;
   children: (colors: string[]) => React.ReactNode[];
 }
 
@@ -29,10 +29,11 @@ const StyledSwatchBookContainer = styled('div')<StyledType>({
 
 export default createComponent('div')({
   displayName: 'SwatchBook',
-  Component: ({colors, children, columnCount = 8, ...elemProps}: SwatchBookProps, ref, Element) => {
+  Component: ({colors, children, ...elemProps}: SwatchBookProps, ref, Element) => {
+    const {state} = React.useContext(ColorPickerModelContext);
     return (
       <StyledSwatchBookContainer ref={ref} as={Element} {...elemProps}>
-        {setUpTwoDArray(children(colors), columnCount).map((row, index) => {
+        {setUpTwoDArray(children(colors), state.columnCount).map((row, index) => {
           return (
             <div key={index} style={{display: 'flex', flexDirection: 'row'}}>
               {row

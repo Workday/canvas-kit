@@ -103,7 +103,7 @@ export default createComponent('button')({
       return () => events.unregisterColor({color: color});
     });
 
-    const onKeyDown = event => {
+    const onKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>) => {
       switch (event.key) {
         case 'ArrowLeft':
         case 'Left':
@@ -122,7 +122,7 @@ export default createComponent('button')({
         case 'Enter':
         case ' ':
           // console.log('intentTab', intentTab);
-          console.warn('state.cursorColor', state.cursorColor);
+
           events.setColor({color: state.cursorColor});
           // setActiveTab(intentTab);
           event.preventDefault(); // prevent clicking this button
@@ -142,7 +142,7 @@ export default createComponent('button')({
         isSelected={isSelected}
         onClick={() => events.setColor({color: color})}
         tabIndex={state.cursorColor === color ? 0 : -1}
-        style={{backgroundColor: state.cursorColor === color ? 'orange' : color}}
+        style={{boxShadow: state.cursorColor === color ? accessibilityBorder : undefined}}
         {...elemProps}
       >
         {showCheck || state.color === color ? (

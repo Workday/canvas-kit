@@ -82,11 +82,7 @@ export const Default = () => {
   return (
     <>
       <ColorPicker model={model}>
-        <ColorPicker.SwatchBook
-          columnCount={8}
-          style={{marginBottom: '20px'}}
-          colors={defaultColorSet}
-        >
+        <ColorPicker.SwatchBook style={{marginBottom: '20px'}} colors={defaultColorSet}>
           {colors => {
             return colors.map(color => <ColorPicker.SwatchButton key={color} color={color} />);
           }}
@@ -104,11 +100,30 @@ export const WithColorInput = () => {
   return (
     <>
       <ColorPicker model={colorPickerModel}>
-        <ColorPicker.SwatchBook
-          columnCount={8}
-          style={{marginBottom: '20px'}}
-          colors={defaultColorSet}
-        >
+        <ColorPicker.SwatchBook style={{marginBottom: '20px'}} colors={defaultColorSet}>
+          {colors => {
+            return colors.map(color => <ColorPicker.SwatchButton key={color} color={color} />);
+          }}
+        </ColorPicker.SwatchBook>
+        <ColorPicker.CustomColorForm label="Custom Color">
+          <ColorPicker.Input />
+          <ColorPicker.SubmitButton aria-label="Submit Custom Color" />
+        </ColorPicker.CustomColorForm>
+      </ColorPicker>
+
+      <ColorPicker>
+        <ColorPicker.Swatch showCheck={false} color={colorPickerModel.state.color} />
+      </ColorPicker>
+    </>
+  );
+};
+
+export const WithCustomColumnCount = () => {
+  const colorPickerModel = useColorPickerModel({columnCount: 5});
+  return (
+    <>
+      <ColorPicker model={colorPickerModel}>
+        <ColorPicker.SwatchBook style={{marginBottom: '20px'}} colors={defaultColorSet}>
           {colors => {
             return colors.map(color => <ColorPicker.SwatchButton key={color} color={color} />);
           }}
