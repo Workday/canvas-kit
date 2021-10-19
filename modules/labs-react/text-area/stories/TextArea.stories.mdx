@@ -50,7 +50,7 @@ a value has been provided.
 
 ### Required
 
-Use `TextArea.Field`'s `isRequired` prop (or use with the `useFormFieldModel` hook) to indicate that
+Use `TextArea.Field`'s `isRequired` prop (or use with the `useTextAreaModel` hook) to indicate that
 the field is required. This will also add a red asterisk to `TextArea.Label`.
 
 <ExampleCodeBlock code={Required} />
@@ -90,8 +90,8 @@ Use `HStack` or `VStack` to set `TextArea.Label`'s position. Below are examples 
 
 ### Error States
 
-Use the `hasError` property from `useFormFieldModel` to set the `TextArea` to the Error state. If
-you have an accompanying hint you can use the `TextArea.Hint` subcomponent.
+Use the `hasError` property from `useTextAreaModel` to set the `TextArea` to the Error state. If you
+have an accompanying hint you can use the `TextArea.Hint` subcomponent.
 
 <ExampleCodeBlock code={Error} />
 

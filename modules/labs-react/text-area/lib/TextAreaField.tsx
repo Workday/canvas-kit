@@ -10,12 +10,13 @@ import {
 } from '@workday/canvas-kit-react/tokens';
 import {createComponent, ExtractProps, useModelContext, useTheme} from '@workday/canvas-kit-react/common';
 import {useThemedRing} from '@workday/canvas-kit-labs-react/common';
+import {FormField} from '@workday/canvas-kit-labs-react/form-field';
 
 import {TextAreaModelContext} from './TextArea';
-import {FormFieldModel, FormField} from '@workday/canvas-kit-labs-react/form-field';
+import { TextAreaModel } from './hooks';
 
 export interface TextAreaFieldProps extends ExtractProps<typeof FormField.Input, never> {
-  model?: FormFieldModel;
+  model?: TextAreaModel;
 }
 
 const baseStyles: CSSProperties = {
