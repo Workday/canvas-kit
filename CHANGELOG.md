@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v5.2.9](https://github.com/Workday/canvas-kit/releases/tag/v5.2.9) (2021-10-21)
+
+### Components
+
+- Update Licence ([@jpante](https://github.com/jpante))
+
+
 ## [v5.2.8](https://github.com/Workday/canvas-kit/releases/tag/v5.2.8) (2021-10-07)
 
 ### Documentation
