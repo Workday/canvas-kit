@@ -140,3 +140,43 @@ export const WithCustomColumnCount = () => {
     </>
   );
 };
+
+export const WithCustomComponent = () => {
+  const colorPickerModel = useColorPickerModel();
+  const [customColors, setCustomColors] = React.useState([]);
+  const [customColorValue, setCustomColorValue] = React.useState('');
+  const handleCustomColorChange = (e: any) => {
+    setCustomColorValue(e.target.value);
+  };
+  const handleSubmitCustomColor = () => {
+    setCustomColors([...customColors, customColorValue]);
+  };
+  return (
+    <>
+      <ColorPicker model={colorPickerModel}>
+        <ColorPicker.SwatchBook style={{marginBottom: '20px'}} colors={defaultColorSet}>
+          {colors => {
+            return colors.map(color => <ColorPicker.SwatchButton key={color} color={color} />);
+          }}
+        </ColorPicker.SwatchBook>
+
+        <ColorPicker.CustomColorForm label="Custom Color">
+          <ColorPicker.Input onChange={handleCustomColorChange} />
+          <ColorPicker.SubmitButton
+            onClick={handleSubmitCustomColor}
+            aria-label="Submit Custom Color"
+          />
+        </ColorPicker.CustomColorForm>
+        <div>
+          <ColorPicker.SwatchBook colors={customColors}>
+            {customColors => {
+              return customColors.map(color => (
+                <ColorPicker.SwatchButton aria-label={color} key={color} color={`#${color}`} />
+              ));
+            }}
+          </ColorPicker.SwatchBook>
+        </div>
+      </ColorPicker>
+    </>
+  );
+};

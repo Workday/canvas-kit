@@ -82,7 +82,6 @@ export const useColorPickerModel = (config: ColorPickerModelConfig = {}): ColorP
     const currentIndex = colors.indexOf(cursorColor);
     const nextIndex = colors.indexOf(colors[currentIndex - 8]);
     let nextUpIndex = colors[currentIndex - 8];
-    console.warn(currentIndex);
     if (nextIndex < 0) {
       nextUpIndex = colors[colors.length - (columnCount - currentIndex)];
     }
@@ -92,12 +91,16 @@ export const useColorPickerModel = (config: ColorPickerModelConfig = {}): ColorP
 
   const getOffsetDownItem = () => (cursorColor: string, colors: string[]) => {
     const currentIndex = colors.indexOf(cursorColor);
-
-    if (nextIndex > colors.length) {
-      nextUpIndex = colors[colors.length - (columnCount - currentIndex)];
+    const nextIndex = colors.indexOf(colors[currentIndex + 8]);
+    let nextUpIndex = colors[currentIndex + 8];
+    console.warn(nextIndex);
+    console.warn('currentIndex', currentIndex);
+    if (nextIndex < 0) {
+      nextUpIndex = colors[8 - (colors.length - currentIndex)];
+      console.warn('larger', nextUpIndex);
     }
 
-    return colors[currentIndex + 8];
+    return nextUpIndex;
   };
 
   const getNext = getOffsetItem(1);
