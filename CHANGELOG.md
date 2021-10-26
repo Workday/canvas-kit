@@ -66,11 +66,11 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - ci: Update GA job names to help with branch checks [skip ci] ([@NicholasBoll](https://github.com/NicholasBoll))
 - ci: Add prerelease canary builds ([@NicholasBoll](https://github.com/NicholasBoll))
   This change updates branch names for automated release management. Branch renames are as follows:
-  
+
   - `support/v4.x` -> `support`
   - `prerelease/v5.3` -> `prerelease/minor`
   - `prerelease/v6` -> `prerelease/major`
-  
+
   We renamed the `support` branch which could conflict with local refs. You may need to run the following if you've contributed to Canvas Kit in the past:
   ```
   git remote prune upstream
