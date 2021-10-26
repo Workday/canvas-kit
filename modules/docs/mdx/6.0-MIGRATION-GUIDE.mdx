@@ -17,6 +17,8 @@ any questions about the update.
   - [Search Bar](#search-bar)
 - [Name Updates](#name-updates)
   - [Depth Tokens](#depth-tokens)
+- [Theme Breakpoint Updates](#theme-breakpoint-updates)
+  - [Action Bar](#action-bar)
 
 ## Codemod
 
@@ -316,11 +318,49 @@ other token type names, such as `CanvasBorderRadiusValues`, `CanvasSpaceValues`,
 import {CanvasDepthValue} from '@workday/canvas-kit-react/tokens';
 
 type CustomDepthValues = CanvasDepthValue;
-interface OtherCustomDepthValues extends CanvasDepthValue {};
+interface OtherCustomDepthValues extends CanvasDepthValue {}
 
 // v6
 import {CanvasDepthValue} from '@workday/canvas-kit-react/tokens';
 
 type CustomDepthValues = CanvasDepthValues;
-interface OtherCustomDepthValues extends CanvasDepthValues {};
+interface OtherCustomDepthValues extends CanvasDepthValues {}
 ```
+
+## Theme Breakpoint Updates
+
+Our default theme breakpoints have been updated to match the viewport ranges described in our design
+guidelines. We also updated `ActionBar`'s media query to align with this change. Those changes are
+described in [the section below](#action-bar). If you are using these default breakpoints, you will
+need to do visual regression testing to ensure there are no adverse effects to your application's
+layout. If you have questions about this testing, please reach out to our team.
+
+Below is a reference table for the V5 and V6 breakpoint values.
+
+| Breakpoint Name | V5 Value (px) | V6 Value (px) |
+| --------------- | ------------- | ------------- |
+| `zero`          | 0             | 0             |
+| `s`             | 600           | 320           |
+| `m`             | 900           | 768           |
+| `l`             | 1280          | 1024          |
+| `xl`            | 1920          | 1440          |
+
+Also for reference, these are our viewport ranges:
+
+- `small` (320px - 767px) Used for mobile-sized screens
+- `medium` (768px - 1023px) Used for tablet-sized screens
+- `large` - (1024px - 1439px) Used for laptop and small desktop screens
+- `extra-large` (≥1440px) Used for very large screens
+
+### Action Bar
+
+`ActionBar` was updated to use the new breakpoint values. It previously had two media queries with
+`max-width: 575px`. They now use `max-width: 767.5px` – the upper limit of the `small` range. This
+will have two effects for this component:
+
+- Container padding will decrease from `s` (16px) to `xxs` (8px) on all viewports < 768px wide
+  - This was previously happening only on viewports < 576px wide
+- Button order will be reversed on all viewports < 768px wide
+  - This was previously happening only on viewports < 576px wide
+
+These changes in behavior are intentional and expected.
