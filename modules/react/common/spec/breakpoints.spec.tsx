@@ -73,7 +73,7 @@ describe('Breakpoints', () => {
       expect(mediaQuery).toBe('@media (min-width: 320px) and (max-width: 767.5px)');
     });
 
-    context('when using xl as the end breakpoint', () => {
+    context('when using the xl breakpoint', () => {
       it('should only return a media query with only a min-width', () => {
         const mediaQuery = only('xl');
 

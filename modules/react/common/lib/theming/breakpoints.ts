@@ -189,7 +189,7 @@ export function up(key: BreakpointFnParam) {
  * Note: This function subtracts `0.5px` from the next breakpoint value to prevent collisions.
  * For example, `breakpoints.values.s`, has a `min-width` of `320px`, and the `max-width` is `767.5px`).
  *
- * If the "xl" breakpoint is provided, this function returns a media query with only a `min-width` of `0`,
+ * If the `xl` breakpoint is provided, this function returns a media query with only a `min-width` of `0`,
  * as seen in the second example below.
  *
  * @example
@@ -246,7 +246,7 @@ export function down(endKey: BreakpointFnParam) {
  * Note: This function subtracts `0.5px` from the next breakpoint value to prevent collisions.
  * For example, `breakpoints.values.s`, has a `min-width` of `320px`, and the `max-width` is `767.5px`).
  *
- * If the "xl" breakpoint is provided, this function returns a media query with only a `min-width` of `0`,
+ * If the `xl` breakpoint is provided, this function returns a media query with only a `min-width`,
  * as seen in the second example below.
  *
  * @example
@@ -305,7 +305,7 @@ export function between(start: BreakpointFnParam, end: BreakpointFnParam) {
  * Note: This function subtracts `0.5px` from the next breakpoint value to prevent collisions.
  * For example, `breakpoints.values.s`, has a `min-width` of `320px`, and the `max-width` is `767.5px`).
  *
- * If the "xl" breakpoint is provided, this function returns a media query with only a `min-width` of `0`,
+ * If the `xl` breakpoint is provided, this function returns a media query with only a `min-width` of `1440px`,
  * as seen in the second example below.
  *
  * @example
@@ -323,7 +323,7 @@ export function between(start: BreakpointFnParam, end: BreakpointFnParam) {
  * };
  * ```
  *
- * This example uses the `xl` breakpoint and only adds a `min-width` of `0` to the media query.
+ * This example uses the `xl` breakpoint and only adds a `min-width` of `1440px` to the media query.
  * @example
  * ```ts
  * import { useTheme } from '@workday/canvas-kit-react/common';
@@ -331,7 +331,7 @@ export function between(start: BreakpointFnParam, end: BreakpointFnParam) {
  *
  * const theme = useTheme();
  * const { only } = theme.canvas.breakpoints;
- * const mediaQuery = only('m', 'xl'); // Returns '@media (min-width: 0px)'
+ * const mediaQuery = only('xl'); // Returns '@media (min-width: 1440px)'
  * const styles = {
  *   [mediaQuery]: {
  *     padding: space.s,
