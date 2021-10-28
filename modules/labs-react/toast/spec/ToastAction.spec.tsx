@@ -11,12 +11,12 @@ describe('Toast.Action', () => {
     const toastMessage = 'Your workbook was successfully processed.';
     const actionText = 'View more details';
     render(
-      <Toast>
+      <Toast mode="interactive">
         <Toast.Content>
           <Toast.Icon icon={checkIcon} iconColor={colors.greenApple400} />
           <Toast.Message>
             {toastMessage}
-            <Toast.Action onActionClick={cb}>{actionText}</Toast.Action>
+            <Toast.Action onClick={cb}>{actionText}</Toast.Action>
           </Toast.Message>
         </Toast.Content>
       </Toast>
@@ -30,12 +30,12 @@ describe('Toast.Action', () => {
     const actionText = 'View more details';
 
     render(
-      <Toast>
+      <Toast mode="interactive">
         <Toast.Content>
           <Toast.Icon icon={checkIcon} iconColor={colors.greenApple400} />
           <Toast.Message>
             {toastMessage}
-            <Toast.Action onActionClick={cb}>{actionText}</Toast.Action>
+            <Toast.Action onClick={cb}>{actionText}</Toast.Action>
           </Toast.Message>
         </Toast.Content>
       </Toast>

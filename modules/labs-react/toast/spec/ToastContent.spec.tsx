@@ -6,7 +6,7 @@ import {Toast} from '../';
 describe('Toast.Content', () => {
   it('should render children', () => {
     render(
-      <Toast data-testid={'myToastContent'}>
+      <Toast mode="noninteractive" data-testid={'myToastContent'}>
         <Toast.Content>Contents</Toast.Content>
       </Toast>
     );

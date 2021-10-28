@@ -10,12 +10,12 @@ export const WithActionLink = () => {
   const handleActionClick = () => action('action button clicked');
 
   return (
-    <Toast>
+    <Toast mode="interactive">
       <Toast.Content>
         <Toast.Icon icon={checkIcon} iconColor={colors.greenApple400} />
         <Toast.Message>
           Your workbook was successfully processed.
-          <Toast.Action onActionClick={handleActionClick}>Custom Action</Toast.Action>
+          <Toast.Action onClick={handleActionClick}>Custom Action</Toast.Action>
         </Toast.Message>
       </Toast.Content>
     </Toast>

@@ -10,12 +10,12 @@ describe('Toast.Close', () => {
   it('should call the on close callback', () => {
     const toastMessage = 'Your workbook was successfully processed.';
     render(
-      <Toast>
-        <Toast.Close onClose={cb} />
+      <Toast mode="noninteractive">
         <Toast.Content>
           <Toast.Icon icon={checkIcon} iconColor={colors.greenApple400} />
           <Toast.Message>{toastMessage}</Toast.Message>
         </Toast.Content>
+        <Toast.Close aria-label="Close" onClick={cb} />
       </Toast>
     );
     const closeIcon = screen.getByRole('button', {name: 'Close'});

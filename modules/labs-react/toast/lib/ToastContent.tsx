@@ -2,36 +2,26 @@
 import {jsx} from '@emotion/core';
 import React from 'react';
 
-import {createComponent, styled, useModelContext} from '@workday/canvas-kit-react/common';
+import {createComponent, styled} from '@workday/canvas-kit-react/common';
 import {Popup, space, type} from '@workday/canvas-kit-react';
-import {ToastModel} from './useToastModel';
-import {ToastModelContext} from './Toast';
 
 export interface ToastContentProps {
-  model?: ToastModel;
   children: React.ReactNode;
 }
 
-const ToastContentContainer = styled('div')<{closeButtonExist: any}>(
-  {
-    display: 'flex',
-    alignItems: 'center',
-    ...type.levels.subtext.large,
-  },
-  ({closeButtonExist}) => ({
-    marginRight: closeButtonExist ? space.m : undefined,
-  })
-);
+const ToastContentContainer = styled('div')({
+  display: 'flex',
+  alignItems: 'center',
+  padding: space.s,
+  ...type.levels.subtext.large,
+});
 
 export const ToastContent = createComponent('div')({
   displayName: 'Toast.Content',
-  Component: ({children, model}: ToastContentProps, ref, Element) => {
-    const {state} = useModelContext(ToastModelContext, model);
+  Component: ({children}: ToastContentProps, ref, Element) => {
     return (
       <Popup.Body>
-        <ToastContentContainer closeButtonExist={state.closeButtonExist}>
-          {children}
-        </ToastContentContainer>
+        <ToastContentContainer>{children}</ToastContentContainer>
       </Popup.Body>
     );
   },
