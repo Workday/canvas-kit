@@ -69,7 +69,12 @@ export default () => {
 
 ### Optional
 
-> None
+#### `mode: 'noninteractive' | 'interactive'`
+
+> Sets the mode of the toast.
+> Noninteractive toasts do not contain any buttons.
+> Interactive toasts contain buttons user can click and take action.
+> Default is noninteractive.
 
 ---
 
