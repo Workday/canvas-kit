@@ -1,25 +1,13 @@
-import {fireEvent, render, screen} from '@testing-library/react';
+import {render, screen} from '@testing-library/react';
 import {Toast} from '../lib/Toast';
-import {checkIcon} from '@workday/canvas-system-icons-web';
-import {colors} from '@workday/canvas-kit-react/tokens';
 import React from 'react';
+import {usePopupModel} from '@workday/canvas-kit-react';
 
 describe('Toast.Close', () => {
-  const cb = jest.fn();
+  verifyComponent(Toast.Close, {modelFn: usePopupModel});
 
-  it('should call the on close callback', () => {
-    const toastMessage = 'Your workbook was successfully processed.';
-    render(
-      <Toast mode="noninteractive">
-        <Toast.Content>
-          <Toast.Icon icon={checkIcon} iconColor={colors.greenApple400} />
-          <Toast.Message>{toastMessage}</Toast.Message>
-        </Toast.Content>
-        <Toast.Close aria-label="Close" onClick={cb} />
-      </Toast>
-    );
-    const closeIcon = screen.getByRole('button', {name: 'Close'});
-    fireEvent.click(closeIcon);
-    expect(cb).toHaveBeenCalledTimes(1);
+  it('should have a role of "button"', () => {
+    render(<Toast.Close aria-label="Close" />);
+    expect(screen.getByRole('button', {name: 'Close'})).toBeInTheDocument();
   });
 });
