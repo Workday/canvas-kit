@@ -26,15 +26,15 @@ export default () => {
   const handleActionClick = () => console.log('action button clicked');
   
   return (
-    <Toast>
-      <Toast.Close onClose={handleClose} />
+    <Toast mode="interactive">
       <Toast.Content>
         <Toast.Icon icon={checkIcon} iconColor={colors.greenApple400} />
         <Toast.Message>
           Your workbook was successfully processed.
-          <Toast.Action onActionClick={handleActionClick}>Custom Action</Toast.Action>
+          <Toast.Action onClick={handleActionClick}>Custom Action</Toast.Action>
         </Toast.Message>
       </Toast.Content>
+      <Toast.Close aria-label="Close" onClick={handleClose} />
     </Toast>
   );
 };
@@ -80,12 +80,6 @@ export default () => {
 > None
 
 ## Component Props
-
-### Required
-
-#### `onClose: Function`
-
-> A click handler for when the user clicks toast's close button
 
 ### Optional
 
@@ -170,10 +164,6 @@ export default () => {
 #### `children: React.ReactElement<TabProps> | React.ReactElement<TabProps>[]`
 
 > Toast.Action cannot be empty
-
-#### `onActionClick: Function`
-
-> A click handler for when the user clicks toast's action button
 
 ### Optional
 
