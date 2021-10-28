@@ -12,12 +12,12 @@ import styled from '@emotion/styled';
 
 export interface ToastProps extends ExtractProps<typeof Popup.Card, never> {
   /**
-   * Mode of the toast.
+   * Sets the mode of the toast.
    * Noninteractive toasts do not contain any buttons.
    * Interactive toasts contain buttons user can click and take action.
    * @default 'noninteractive'
    */
-  mode: 'noninteractive' | 'interactive';
+  mode?: 'noninteractive' | 'interactive';
   children: React.ReactNode;
 }
 
@@ -29,7 +29,7 @@ const ToastContainer = styled('div')({
 
 export const Toast = createComponent('div')({
   displayName: 'Toast',
-  Component: ({children, mode, ...elemProps}: ToastProps, ref, Element) => {
+  Component: ({children, mode = 'noninteractive', ...elemProps}: ToastProps, ref, Element) => {
     return (
       <Popup.Card
         ref={ref}
