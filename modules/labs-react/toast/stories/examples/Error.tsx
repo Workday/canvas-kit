@@ -5,7 +5,7 @@ import {exclamationCircleIcon} from '@workday/canvas-system-icons-web';
 import {colors} from '@workday/canvas-kit-react/tokens';
 
 export const Error = () => (
-  <Toast>
+  <Toast mode="noninteractive">
     <Toast.Content>
       <Toast.Icon icon={exclamationCircleIcon} iconColor={colors.cinnamon500} />
       <Toast.Message>There was an error with your workbook.</Toast.Message>
