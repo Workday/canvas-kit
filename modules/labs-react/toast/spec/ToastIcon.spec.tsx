@@ -8,7 +8,7 @@ describe('Toast.Icon', () => {
   it('should render a Toast with an icon', () => {
     const toastMessage = 'Your workbook was successfully processed.';
     render(
-      <Toast data-testid={'myToast'}>
+      <Toast mode="noninteractive" data-testid={'myToast'}>
         <Toast.Content>
           <Toast.Icon icon={checkIcon} iconColor={colors.greenApple400} />
           <Toast.Message>{toastMessage}</Toast.Message>

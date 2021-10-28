@@ -5,7 +5,11 @@ import {Toast} from '../';
 
 describe('Toast', () => {
   it('should render children', () => {
-    render(<Toast data-testid={'myToast'}>Contents</Toast>);
+    render(
+      <Toast mode="noninteractive" data-testid={'myToast'}>
+        Contents
+      </Toast>
+    );
 
     expect(screen.getByTestId('myToast')).toContainHTML('Contents');
   });
