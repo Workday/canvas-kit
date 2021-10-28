@@ -2,15 +2,11 @@
 import {jsx} from '@emotion/core';
 import React from 'react';
 
-import {createComponent, useModelContext} from '@workday/canvas-kit-react/common';
+import {createComponent} from '@workday/canvas-kit-react/common';
 import {Hyperlink, HyperlinkProps, space, type} from '@workday/canvas-kit-react';
-import {ToastButtonType, ToastModel} from './useToastModel';
-import {ToastModelContext} from './Toast';
 
 export interface ToastActionProps extends ActionButtonProps {
-  model?: ToastModel;
   children: React.ReactNode;
-  onActionClick: () => void;
 }
 
 interface ActionButtonProps extends HyperlinkProps {
@@ -33,15 +29,7 @@ const ActionButton = (props: ActionButtonProps) => {
 
 export const ToastAction = createComponent('div')({
   displayName: 'Toast.Action',
-  Component: ({children, model, onActionClick, ...elemProps}: ToastActionProps, ref, Element) => {
-    const {
-      events: {updateButtonExistState},
-    } = useModelContext(ToastModelContext, model);
-    updateButtonExistState({buttonType: ToastButtonType.Action, status: true});
-    return (
-      <ActionButton onClick={onActionClick} {...elemProps}>
-        {children}
-      </ActionButton>
-    );
+  Component: ({children, ...elemProps}: ToastActionProps, ref, Element) => {
+    return <ActionButton {...elemProps}>{children}</ActionButton>;
   },
 });

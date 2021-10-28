@@ -1,23 +1,19 @@
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
 
-import {createComponent, useModelContext} from '@workday/canvas-kit-react/common';
-import {IconButtonProps, Popup} from '@workday/canvas-kit-react';
-import {ToastButtonType, ToastModel} from './useToastModel';
-import {ToastModelContext} from './Toast';
+import {createComponent, ExtractProps} from '@workday/canvas-kit-react/common';
+import {Popup} from '@workday/canvas-kit-react';
+import styled from '@emotion/styled';
 
-export interface ToastCloseProps extends Partial<IconButtonProps> {
-  model?: ToastModel;
-  onClose: () => void;
-}
+export interface ToastCloseProps extends ExtractProps<typeof Popup.CloseIcon, never> {}
 
-export const ToastClose = createComponent('div')({
+const PopupCloseIcon = styled(Popup.CloseIcon)({
+  position: 'relative',
+});
+
+export const ToastClose = createComponent('button')({
   displayName: 'Toast.Close',
-  Component: ({onClose, model, ...elemProps}: ToastCloseProps, ref, Element) => {
-    const {
-      events: {updateButtonExistState},
-    } = useModelContext(ToastModelContext, model);
-    updateButtonExistState({buttonType: ToastButtonType.Close, status: true});
-    return <Popup.CloseIcon aria-label="Close" onClick={onClose} size="small" {...elemProps} />;
+  Component: ({...elemProps}: ToastCloseProps, ref, Element) => {
+    return <PopupCloseIcon size="small" {...elemProps} />;
   },
 });
