@@ -1,0 +1,26 @@
+import * as React from 'react';
+
+import {createComponent, ExtractProps, useModelContext} from '@workday/canvas-kit-react/common';
+
+import {usePopupPopper, Popper} from '@workday/canvas-kit-react/popup';
+
+import {MenuModel} from './useMenuModel';
+import {MenuModelContext} from './Menu';
+
+export interface MenuPopperProps<T extends unknown> extends ExtractProps<typeof Popper> {
+  /**
+   * Optionally pass a model directly to this component. Default is to implicitly use the same
+   * model as the container component which uses React context. Only use this for advanced use-cases
+   */
+  model?: MenuModel<T>;
+}
+
+export const MenuPopper = createComponent('div')({
+  displayName: 'Menu.Popper',
+  Component: ({children, model, ...elemProps}: MenuPopperProps<unknown>, ref) => {
+    const localModel = useModelContext(MenuModelContext, model);
+
+    const props = usePopupPopper(localModel, elemProps, ref);
+    return <Popper {...props}>{children}</Popper>;
+  },
+});

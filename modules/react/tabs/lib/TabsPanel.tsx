@@ -5,7 +5,6 @@ import {jsx, css} from '@emotion/core';
 import {
   createComponent,
   mouseFocusBehavior,
-  useLocalRef,
   useModelContext,
   useMountLayout,
 } from '@workday/canvas-kit-react/common';
@@ -35,7 +34,7 @@ export interface TabPanelProps {
    * Optionally pass a model directly to this component. Default is to implicitly use the same
    * model as the container component which uses React context. Only use this for advanced use-cases
    */
-  model?: TabsModel;
+  model?: TabsModel<unknown>;
 }
 
 const styles = css(
@@ -46,17 +45,16 @@ const styles = css(
   })
 );
 
-export const TabPanel = createComponent('div')({
+export const TabsPanel = createComponent('div')({
   displayName: 'Tabs.Panel',
   Component: ({children, name = '', model, ...elemProps}: TabPanelProps, ref, Element) => {
     const {state, events} = useModelContext(TabsModelContext, model);
     const [tabName, setTabName] = React.useState(name);
-    const {localRef, elementRef} = useLocalRef(ref);
 
     useMountLayout(() => {
       const index = state.panelIndexRef.current;
       const tabName = name || String(index);
-      events.registerPanel({item: {id: tabName, ref: localRef}});
+      events.registerPanel({item: {id: tabName, data: {}}});
       setTabName(tabName);
 
       return () => {
@@ -66,10 +64,10 @@ export const TabPanel = createComponent('div')({
 
     return (
       <Element
-        ref={elementRef}
+        ref={ref}
         role="tabpanel"
         css={styles}
-        aria-labelledby={`tab-${state.id}-${tabName}`}
+        aria-labelledby={`${state.id}-${tabName}`}
         hidden={!!tabName && tabName !== state.activeTab}
         id={`tabpanel-${state.id}-${tabName}`}
         tabIndex={0}

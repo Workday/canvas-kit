@@ -1,7 +1,15 @@
 import React from 'react';
-import {Table, TableRow} from '@workday/canvas-kit-react/table';
+import {Table, TableRow as CKTableRow} from '@workday/canvas-kit-react/table';
+import styled from '@emotion/styled';
+import colors from '@workday/canvas-colors-web';
 
 const columns = ['ID', 'Name', 'Position', 'Location'];
+
+const TableRow = styled(CKTableRow)({
+  ':nth-child(odd) td': {
+    background: colors.soap100,
+  },
+});
 
 const rows = [
   [1, 'Aidan Brown', 'Product Manager', 'San Francisco, CA'],

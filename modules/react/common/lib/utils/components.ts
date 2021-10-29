@@ -278,7 +278,7 @@ export const createHook = <M extends Model<any, any>, PO extends {}, PI extends 
 ): BehaviorHook<M, PO> => {
   return (model, elemProps, ref) => {
     const props = mergeProps(fn(model, ref, elemProps || ({} as any)), elemProps || ({} as any));
-    if (!props.hasOwnProperty('ref')) {
+    if (!props.hasOwnProperty('ref') && ref) {
       // This is the weird "incoming ref isn't in props, but outgoing ref is in props" thing
       props.ref = ref;
     }
@@ -286,11 +286,23 @@ export const createHook = <M extends Model<any, any>, PO extends {}, PI extends 
   };
 };
 
-export type BehaviorHook<M extends Model<any, any>, O extends {}> = <P extends {}, R>(
-  model: M,
-  elemProps?: P,
-  ref?: React.Ref<R>
-) => O & P & (R extends HTMLOrSVGElement ? {ref: React.Ref<R>} : {});
+export const subModelHook = <M extends Model<any, any>, SM extends Model<any, any>, O extends {}>(
+  fn: (model: M) => SM,
+  hook: BehaviorHook<SM, O>
+): BehaviorHook<M, O> => {
+  return (model: M, props: any, ref: React.Ref<any>) => {
+    return hook(fn(model), props, ref);
+  };
+};
+
+export type BehaviorHook<M extends Model<any, any>, O extends {}> = {
+  bivarianceHack<P extends {}, R>(
+    model: M,
+    elemProps?: P,
+    ref?: React.Ref<R>
+  ): O & P & (R extends HTMLOrSVGElement ? {ref: React.Ref<R>} : {});
+}['bivarianceHack'];
+// };
 
 function setRef<T>(ref: React.Ref<T> | undefined, value: T): void {
   if (ref) {
@@ -410,9 +422,19 @@ export function useModelContext<T>(context: React.Context<T>, model?: T): T {
  *   return <div id="foo" {...props}>{children}</div>
  * })
  */
-export function composeHooks<M extends Model<any, any>, O1 extends {}, P extends {}, O2 extends {}>(
-  hook1: (model: M, props: P, ref: React.Ref<any>) => O1,
-  hook2: (model: M, props: P, ref: React.Ref<any>) => O2
+// Typescript function parameters are contravariant while return types are covariant. This is a
+// problem when someone hands us a model that correctly extends `Model<any, any>`, but adds extra
+// properties to the model. So `M extends Model<any, any>`. But the `BehaviorHook` is the return
+// type which will reverse the direction which is no longer true: `Model<any, any> extends M`. In
+// order to avoid this issue, we use the `bivarianceHack` found in ReactJS type definitions. This
+// hack forces Typescript to treat `M` as a bivariant allowing extension to go either direction.
+// Normally this would be less type safe, but we're using a generic `M` as a placeholder so there
+// isn't a real issue. Not 100% this is a bug, but the "hack" is a bit messy.
+// https://www.stephanboyer.com/post/132/what-are-covariance-and-contravariance
+// https://stackoverflow.com/questions/52667959/what-is-the-purpose-of-bivariancehack-in-typescript-types/52668133
+export function composeHooks<M extends Model<any, any>, O1 extends {}, O2 extends {}>(
+  hook1: BehaviorHook<M, O1>,
+  hook2: BehaviorHook<M, O2>
 ): BehaviorHook<M, O1 & O2>;
 
 export function composeHooks<
@@ -423,9 +445,9 @@ export function composeHooks<
   O2 extends {},
   O3 extends {}
 >(
-  hook1: (model: M, props: P, ref: React.Ref<R>) => O1,
-  hook2: (model: M, props: P, ref: React.Ref<R>) => O2,
-  hook3: (model: M, props: P, ref: React.Ref<R>) => O3
+  hook1: BehaviorHook<M, O1>,
+  hook2: BehaviorHook<M, O2>,
+  hook3: BehaviorHook<M, O3>
 ): BehaviorHook<M, O1 & O2 & O3>;
 export function composeHooks<
   M extends Model<any, any>,
@@ -436,10 +458,10 @@ export function composeHooks<
   O3 extends {},
   O4 extends {}
 >(
-  hook1: (model: M, props: P, ref: React.Ref<R>) => O1,
-  hook2: (model: M, props: P, ref: React.Ref<R>) => O2,
-  hook3: (model: M, props: P, ref: React.Ref<R>) => O3,
-  hook4: (model: M, props: P, ref: React.Ref<R>) => O4
+  hook1: BehaviorHook<M, O1>,
+  hook2: BehaviorHook<M, O2>,
+  hook3: BehaviorHook<M, O3>,
+  hook4: BehaviorHook<M, O4>
 ): BehaviorHook<M, O1 & O2 & O3 & O4>;
 export function composeHooks<
   M extends Model<any, any>,
@@ -451,11 +473,11 @@ export function composeHooks<
   O4 extends {},
   O5 extends {}
 >(
-  hook1: (model: M, props: P, ref: React.Ref<R>) => O1,
-  hook2: (model: M, props: P, ref: React.Ref<R>) => O2,
-  hook3: (model: M, props: P, ref: React.Ref<R>) => O3,
-  hook4: (model: M, props: P, ref: React.Ref<R>) => O4,
-  hook5: (model: M, props: P, ref: React.Ref<R>) => O5
+  hook1: BehaviorHook<M, O1>,
+  hook2: BehaviorHook<M, O2>,
+  hook3: BehaviorHook<M, O3>,
+  hook4: BehaviorHook<M, O4>,
+  hook5: BehaviorHook<M, O5>
 ): BehaviorHook<M, O1 & O2 & O3 & O4 & O5>;
 export function composeHooks<M extends Model<any, any>, R, P extends {}, O extends {}>(
   ...hooks: ((model: M, props: P, ref: React.Ref<R>) => O)[]
@@ -465,7 +487,7 @@ export function composeHooks<M extends Model<any, any>, R, P extends {}, O exten
       return hook(model, props, props.ref || ref);
     }, props);
 
-    if (!returnProps.hasOwnProperty('ref')) {
+    if (!returnProps.hasOwnProperty('ref') && ref) {
       // This is the weird "incoming ref isn't in props, but outgoing ref is in props" thing
       returnProps.ref = ref;
     }

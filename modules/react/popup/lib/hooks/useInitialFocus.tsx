@@ -24,10 +24,10 @@ export const useInitialFocus = (model: PopupModel, elemProps = {}) => {
         model.state.initialFocusRef?.current ||
         getFirstFocusableElement(model.state.stackRef.current);
 
-      assert(
-        element,
-        'No focusable element was found. Please ensure popup has at least one focusable element'
-      );
+      // assert(
+      //   element,
+      //   'No focusable element was found. Please ensure popup has at least one focusable element'
+      // );
 
       changeFocus(element);
     }

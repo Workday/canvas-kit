@@ -13,13 +13,12 @@ import {
   BaseListModelConfig,
   listEventMap,
   useListModel,
-  Item,
   ListModelConfig,
 } from '../list/useListModel';
 
 export type Orientation = 'horizontal' | 'vertical';
 
-export type CursorState = ListState & {
+export type CursorState<T> = ListState<T> & {
   /** Orientation of the list. This property determines what "next" and "previous" mean. This should
    * be set to match the layout of UI components */
   orientation: Orientation;
@@ -27,7 +26,7 @@ export type CursorState = ListState & {
   cursorId: string;
 };
 
-export type CursorEvents = ListEvents & {
+export type CursorEvents<T> = ListEvents<T> & {
   /** Directly sets the cursor to the list item by its identifier.  */
   goTo(data: {id: string}): void;
   /** Set the cursor to the "next" item in the list. If the end of the list is detected, it will
@@ -42,9 +41,9 @@ export type CursorEvents = ListEvents & {
   last(): void;
 };
 
-export type CursorModel = Model<CursorState, CursorEvents>;
+export type CursorModel<T> = Model<CursorState<T>, CursorEvents<T>>;
 
-export const cursorEventMap = createEventMap<CursorEvents>()({
+export const cursorEventMap = createEventMap<CursorEvents<unknown>>()({
   guards: {
     ...listEventMap.guards,
     /** Should a cursor position be set? Use only in advance use-cases */
@@ -61,7 +60,7 @@ export const cursorEventMap = createEventMap<CursorEvents>()({
   },
 });
 
-export type BaseCursorModelConfig = BaseListModelConfig & {
+export type BaseCursorModelConfig<T> = BaseListModelConfig<T> & {
   /**
    * The orientation of a list of items. Values are either `vertical` or `horizontal`. This value will
    * effect which keys activate progression through a list. For example, `horizontal` will activate with
@@ -69,70 +68,90 @@ export type BaseCursorModelConfig = BaseListModelConfig & {
    * @default 'vertical'
    */
   orientation?: Orientation;
+  /**
+   * Initial cursor position. If not provided, the cursor will point to the first item in the list
+   */
+  initialCursorId?: string;
 };
 
-export type CursorModelConfig = BaseCursorModelConfig &
-  Partial<ToModelConfig<CursorState, CursorEvents, typeof cursorEventMap>>;
+export type CursorModelConfig<T> = BaseCursorModelConfig<T> &
+  Partial<ToModelConfig<CursorState<T>, CursorEvents<T>, typeof cursorEventMap>>;
 
-const getFirst = (items: Item[]): Item => {
-  return items[0];
+export const useCursorNavigation = <T extends unknown>(state: CursorState<T>) => {
+  // refs for performance so that new functions aren't created every render
+  const getIdRef = React.useRef(state.getId);
+  const itemsRef = React.useRef(state.items);
+  const disabledKeysRef = React.useRef(state.disabledKeys);
+
+  itemsRef.current = state.items;
+  disabledKeysRef.current = state.disabledKeys;
+
+  // return a memoized function to prevent recreation of functions every render
+  return React.useMemo(() => {
+    const getFirst = () => itemsRef.current[0];
+    const getLast = () => itemsRef.current[itemsRef.current.length - 1];
+
+    const getItem = (id: string): T => {
+      const item = id ? itemsRef.current.find(item => getIdRef.current(item) === id) : getFirst(); // no id, return first item
+      assert(item, `Item not found: ${id}`);
+      return item;
+    };
+
+    const getOffsetItem = (offset: number) => (id: string, tries = itemsRef.current.length): T => {
+      const items = itemsRef.current;
+      const item = getItem(id);
+
+      const getId = getIdRef.current;
+      const currentIndex = items.findIndex(i => getId(item) === getId(i));
+      let nextIndex = currentIndex + offset;
+      if (nextIndex < 0) {
+        nextIndex = items.length - 1;
+      } else if (nextIndex >= items.length) {
+        nextIndex = 0;
+      }
+
+      if (disabledKeysRef.current.includes(getId(items[nextIndex])) && tries > 0) {
+        // The next item is disabled, try again, but only if we haven't already tried everything.
+        // Avoid an infinite loop with `tries`
+        return getOffsetItem(offset)(getId(items[nextIndex]), tries - 1);
+      }
+
+      return items[nextIndex];
+    };
+
+    const getNext = getOffsetItem(1);
+    const getPrevious = getOffsetItem(-1);
+
+    return {getFirst, getLast, getItem, getNext, getPrevious};
+  }, []);
 };
 
-const getLast = (items: Item[]): Item => {
-  return items[items.length - 1];
-};
-
-export const getItem = (id: string, items: Item[]): Item => {
-  const item = id ? items.find(item => item.id === id) : getFirst(items); // no id, return first item
-  assert(item, `Item not found: ${id}`);
-  return item;
-};
-
-const getOffsetItem = (offset: number) => (id: string, items: Item[]): Item => {
-  const item = getItem(id, items);
-  const currentIndex = items.findIndex(({id}) => item.id === id);
-  let nextIndex = currentIndex + offset;
-  if (nextIndex < 0) {
-    nextIndex = items.length - 1;
-  } else if (nextIndex >= items.length) {
-    nextIndex = 0;
-  }
-
-  const disabledAttribute = items[nextIndex].ref.current?.getAttribute('disabled');
-  if (disabledAttribute !== null || disabledAttribute === 'false') {
-    // The next item is disabled, try again
-    return getOffsetItem(offset)(items[nextIndex].id, items);
-  }
-
-  return items[nextIndex];
-};
-
-export const hasItems = (items: Item[]) => items.some(item => item.ref.current);
-
-export const getNext = getOffsetItem(1);
-export const getPrevious = getOffsetItem(-1);
-
-export const useCursorModel = (config: CursorModelConfig = {}): CursorModel => {
+export const useCursorModel = <T extends unknown>(
+  config: CursorModelConfig<T> = {}
+): CursorModel<T> => {
   const [orientation] = React.useState(config.orientation || 'vertical');
   const [cursorId, setCursorId] = React.useState('');
-  const initialCurrentRef = React.useRef('');
-  const list = useListModel(config as ListModelConfig);
+  const list = useListModel(config as ListModelConfig<T>);
+  const initialCurrentRef = React.useRef(
+    config.initialCursorId || config.items?.length ? list.state.getId(config.items![0]) : ''
+  );
 
   const state = {...list.state, orientation, cursorId};
+  const navigation = useCursorNavigation(state);
 
   const events = useEventMap(cursorEventMap, state, config, {
     ...list.events,
     registerItem(data) {
       // point the cursor at the first item
       if (!initialCurrentRef.current) {
-        initialCurrentRef.current = data.item.id;
+        initialCurrentRef.current = state.getId(data.item);
         setCursorId(initialCurrentRef.current);
       }
       list.events.registerItem(data);
     },
     unregisterItem(data) {
       // move the cursor forward if the the cursor is pointing to an item that is being removed
-      if (state.cursorId === data.id && state.items.some(i => i.ref.current !== null)) {
+      if (state.cursorId === data.id) {
         events.next();
       }
       list.events.unregisterItem(data);
@@ -141,18 +160,19 @@ export const useCursorModel = (config: CursorModelConfig = {}): CursorModel => {
       setCursorId(id);
     },
     next() {
-      setCursorId(getNext(state.cursorId, state.items).id);
+      console.log('next', state);
+      setCursorId(state.getId(navigation.getNext(state.cursorId)));
     },
     previous() {
-      setCursorId(getPrevious(state.cursorId, state.items).id);
+      setCursorId(state.getId(navigation.getPrevious(state.cursorId)));
     },
     first() {
-      setCursorId(getFirst(state.items).id);
+      setCursorId(state.getId(navigation.getFirst()));
     },
     last() {
-      setCursorId(getLast(state.items).id);
+      setCursorId(state.getId(navigation.getLast()));
     },
-  });
+  } as CursorEvents<T>);
 
   return {state, events};
 };

@@ -11,17 +11,19 @@ import {
   StyledType,
   useModelContext,
   ExtractProps,
+  createHook,
 } from '@workday/canvas-kit-react/common';
 
-import {getTransformFromPlacement} from './getTransformFromPlacement';
-import {usePopupCard, PopupModel, PopupModelContext} from './hooks';
+import {getTransformFromPlacement} from '@workday/canvas-kit-react/popup';
+import {MenuModel} from './useMenuModel';
+import {MenuModelContext} from './Menu';
 
-export interface PopupCardProps extends ExtractProps<typeof Card, never> {
+export interface MenuCardProps extends ExtractProps<typeof Card, never> {
   /**
    * Optionally pass a model directly to this component. Default is to implicitly use the same
    * model as the container component which uses React context. Only use this for advanced use-cases
    */
-  model?: PopupModel;
+  model?: MenuModel<unknown>;
   children?: React.ReactNode;
 }
 
@@ -40,7 +42,7 @@ const popupAnimation = (transformOrigin: TransformOrigin) => {
   `;
 };
 
-const StyledPopupCard = styled(Card)<
+const StyledCard = styled(Card)<
   StyledType & {width?: number | string; transformOrigin?: TransformOrigin}
 >(
   type.levels.subtext.large,
@@ -66,30 +68,23 @@ const StyledPopupCard = styled(Card)<
   }
 );
 
-export const PopupCard = createComponent('div')({
-  displayName: 'Popup.Card',
-  Component: (
-    {children, model, padding = 'l', depth = 2, width, ...elemProps}: PopupCardProps,
-    ref,
-    Element
-  ) => {
-    const localModel = useModelContext(PopupModelContext, model);
-    const props = usePopupCard(localModel, elemProps, ref);
+const useMenuCard = createHook((_: MenuModel<unknown>) => {
+  return {};
+});
+
+export const MenuCard = createComponent('div')({
+  displayName: 'Menu.Card',
+  Component: ({children, model, padding = 'zero', ...elemProps}: MenuCardProps, ref, Element) => {
+    const localModel = useModelContext(MenuModelContext, model);
+    const props = useMenuCard(localModel, elemProps, ref);
     const transformOrigin = React.useMemo(() => {
       return getTransformFromPlacement(localModel.state.placement || 'bottom');
     }, [localModel.state.placement]);
 
     return (
-      <StyledPopupCard
-        as={Element}
-        transformOrigin={transformOrigin}
-        depth={depth}
-        width={width}
-        padding={padding}
-        {...props}
-      >
+      <StyledCard as={Element} transformOrigin={transformOrigin} padding={padding} {...props}>
         {children}
-      </StyledPopupCard>
+      </StyledCard>
     );
   },
 });

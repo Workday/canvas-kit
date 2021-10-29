@@ -1,45 +1,52 @@
 import React from 'react';
 
-import {useMountLayout} from '@workday/canvas-kit-react/common';
+import {useMountLayout, createHook} from '@workday/canvas-kit-react/common';
 
 import {ListModel} from './useListModel';
 
 /**
- * Handle list registration. Returns an identifier used to identify this item in the list
- * @param model A ListModel
- * @param localRef A RefObject that will be used to register an item
- * @param id Desired identifier for the List Model. If not provided, it will fall back to the index
- * in the list
- * @param index (Optional) Specify the position of the item if the order is expected to change
+ * Registers an item with a list. It will return elemProps with a `name` which can be used by other
+ * hooks to identify the item in the list.
  */
-export const useRegisterItem = (
-  {state, events}: ListModel,
-  localRef: React.RefObject<any>,
-  id = '',
-  index?: number
-): string => {
-  const [localId, setLocalId] = React.useState(id);
-  const firstRender = React.useRef(true);
+export const useRegisterItem = createHook(
+  (
+    {state, events}: ListModel<unknown>,
+    _?: React.Ref<HTMLElement>,
+    elemProps: {name?: string; index?: number; disabled?: boolean} = {}
+  ) => {
+    const [localId, setLocalId] = React.useState(elemProps.name || '');
+    const firstRender = React.useRef(true);
 
-  React.useLayoutEffect(() => {
-    if (index !== undefined && !firstRender.current) {
-      events.updateItemPosition({id: localId, index});
-    }
-    // we only care about the index changing
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [index]);
+    React.useLayoutEffect(() => {
+      if (elemProps.index !== undefined && !firstRender.current) {
+        events.updateItemPosition({id: localId, index: elemProps.index});
+      }
+      // we only care about the index changing
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [elemProps.index]);
 
-  useMountLayout(() => {
-    const defaultId = state.indexRef.current;
-    const itemId = id || String(defaultId);
-    events.registerItem({item: {id: itemId, ref: localRef}, index});
-    setLocalId(itemId);
-    firstRender.current = false;
+    useMountLayout(() => {
+      const defaultId = state.indexRef.current;
+      const itemId = elemProps.name || String(defaultId);
+      // bail early if item already exists. This happens if items were already provided.
+      if (state.items.find(item => state.getId(item) === elemProps.name)) {
+        return;
+      }
+      events.registerItem({
+        item: {id: itemId, disabled: elemProps.disabled, data: {}},
+        index: elemProps.index,
+      });
+      setLocalId(itemId);
+      firstRender.current = false;
 
-    return () => {
-      events.unregisterItem({id: itemId});
+      return () => {
+        events.unregisterItem({id: itemId});
+      };
+    });
+
+    return {
+      'data-name': localId,
+      name: localId,
     };
-  });
-
-  return localId;
-};
+  }
+);
