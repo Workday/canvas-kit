@@ -5,7 +5,7 @@ import {TextArea} from '@workday/canvas-kit-labs-react/text-area';
 import {VStack} from '@workday/canvas-kit-labs-react/layout';
 import {styled} from '@workday/canvas-kit-react/common';
 import {useThemedRing} from '@workday/canvas-kit-labs-react/common';
-import {CSSProperties, space, statusColors} from '@workday/canvas-kit-react/tokens';
+import {CSSProperties, space, statusColors, colors} from '@workday/canvas-kit-react/tokens';
 
 const StyledField = styled(TextArea.Field)<{alertStyles?: CSSProperties}>(
   ({alertStyles}) => alertStyles
@@ -19,10 +19,10 @@ export const Alert = () => {
   };
 
   const alertStyles = useThemedRing(
-    value.length < 3 ? 'success' : value.length < 7 ? 'alert' : 'error'
+    value.length < 3 ? undefined : value.length < 7 ? 'alert' : 'error'
   );
 
-  const hintColor = value.length < 3 ? statusColors.success : value.length < 7 ? statusColors.warning : statusColors.error
+  const hintColor = value.length < 3 ? colors.greenApple600 : value.length < 7 ? colors.cantaloupe600 : colors.cinnamon500
 
   return (
     <VStack spacing="xxxs" alignItems="flex-start">
