@@ -5,7 +5,7 @@ import {TextArea} from '@workday/canvas-kit-labs-react/text-area';
 import {VStack} from '@workday/canvas-kit-labs-react/layout';
 import {styled} from '@workday/canvas-kit-react/common';
 import {useThemedRing} from '@workday/canvas-kit-labs-react/common';
-import {CSSProperties, space, statusColors, colors} from '@workday/canvas-kit-react/tokens';
+import {CSSProperties, space, colors} from '@workday/canvas-kit-react/tokens';
 
 const StyledField = styled(TextArea.Field)<{alertStyles?: CSSProperties}>(
   ({alertStyles}) => alertStyles
