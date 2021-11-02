@@ -4,7 +4,7 @@ const getTextInput = () => {
   return cy.get(`[type="text"], [type="password"]`);
 };
 
-describe('TextInput', () => {
+describe('Text Input', () => {
   before(() => {
     h.stories.visit();
   });
