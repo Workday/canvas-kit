@@ -63,72 +63,66 @@ export interface TabProps {
   tabIndex?: number;
 }
 
-const StyledButton = styled('button')<{isSelected: boolean} & StyledType>(
-  {
-    ...type.levels.subtext.large,
-    fontWeight: type.properties.fontWeights.medium,
-    border: 'none',
-    backgroundColor: 'transparent',
-    flex: '0 0 auto',
-    maxWidth: '280px',
-    padding: space.s,
-    boxSizing: 'border-box',
-    cursor: 'pointer',
-    color: colors.licorice300,
-    position: 'relative',
-    marginLeft: `${space.xxxs}`,
-    borderRadius: `${borderRadius.m} ${borderRadius.m} 0px 0px`,
-    transition: 'background 150ms ease, color 150ms ease',
+const StyledButton = styled('button')<{isSelected: boolean} & StyledType>({
+  ...type.levels.subtext.large,
+  fontWeight: type.properties.fontWeights.medium,
+  border: 'none',
+  backgroundColor: 'transparent',
+  flex: '0 0 auto',
+  maxWidth: '280px',
+  padding: space.s,
+  boxSizing: 'border-box',
+  cursor: 'pointer',
+  color: colors.licorice300,
+  position: 'relative',
+  marginLeft: `${space.xxxs}`,
+  borderRadius: `${borderRadius.m} ${borderRadius.m} 0px 0px`,
+  transition: 'background 150ms ease, color 150ms ease',
 
-    '&:first-of-type': {
-      marginLeft: 0,
-    },
+  '&:first-of-type': {
+    marginLeft: 0,
+  },
 
-    ...hideMouseFocus,
+  ...hideMouseFocus,
 
-    '&:hover, &:focus': {
-      backgroundColor: colors.soap200,
-      color: colors.blackPepper400,
-    },
+  '&:hover, &:focus': {
+    backgroundColor: colors.soap200,
+    color: colors.blackPepper400,
+  },
 
-    '&:focus': {
-      outline: `none`,
-      ...focusRing({inset: 'outer', width: 0, separation: 2}),
-    },
+  '&:focus': {
+    outline: `none`,
+    ...focusRing({inset: 'outer', width: 0, separation: 2}),
+  },
 
-    '&:disabled': {
-      color: colors.licorice100,
-      '&:hover': {
-        cursor: 'auto',
-        backgroundColor: `transparent`,
-      },
+  '&:disabled': {
+    color: colors.licorice100,
+    '&:hover': {
+      cursor: 'auto',
+      backgroundColor: `transparent`,
     },
   },
-  ({isSelected}) => {
-    if (isSelected) {
-      return {
-        color: colors.blueberry400,
-        cursor: 'default',
-        '&:after': {
-          position: 'absolute',
-          height: space.xxxs,
-          borderRadius: `${borderRadius.m} ${borderRadius.m} 0px 0px`,
-          backgroundColor: colors.blueberry400,
-          bottom: 0,
-          content: `''`,
-          left: 0,
-          marginTop: '-2px',
-          width: '100%',
-        },
-        '&:hover, &:focus': {
-          backgroundColor: `transparent`,
-          color: colors.blueberry400,
-        },
-      };
-    }
-    return {};
-  }
-);
+
+  '&[aria-selected=true]': {
+    color: colors.blueberry400,
+    cursor: 'default',
+    '&:after': {
+      position: 'absolute',
+      height: space.xxxs,
+      borderRadius: `${borderRadius.m} ${borderRadius.m} 0px 0px`,
+      backgroundColor: colors.blueberry400,
+      bottom: 0,
+      content: `''`,
+      left: 0,
+      marginTop: '-2px',
+      width: '100%',
+    },
+    '&:hover, &:focus': {
+      backgroundColor: `transparent`,
+      color: colors.blueberry400,
+    },
+  },
+});
 
 const useTab = (
   model: TabsModel,
