@@ -1,7 +1,7 @@
 import React from 'react';
 import {TextInput} from '@workday/canvas-kit-labs-react/text-input';
 import {VStack} from '@workday/canvas-kit-labs-react/layout';
-import {PrimaryButton} from '@workday/canvas-kit-react/button';
+import {SecondaryButton} from '@workday/canvas-kit-react/button';
 
 export const RefForwarding = () => {
   const [value, setValue] = React.useState('');
@@ -21,7 +21,7 @@ export const RefForwarding = () => {
         <TextInput.Label>Email</TextInput.Label>
         <TextInput.Field onChange={handleChange} value={value} ref={ref} />
       </TextInput>
-      <PrimaryButton onClick={handleClick}>Focus Text Input</PrimaryButton>
+      <SecondaryButton onClick={handleClick}>Focus Text Input</SecondaryButton>
     </VStack>
   );
 };
