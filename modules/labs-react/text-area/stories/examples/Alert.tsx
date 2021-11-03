@@ -19,7 +19,7 @@ export const Alert = () => {
   };
 
   const alertStyles = useThemedRing(
-    value.length < 3 ? undefined : value.length < 7 ? 'alert' : 'error'
+    value.length < 3 ? 'success' : value.length < 7 ? 'alert' : 'error'
   );
 
   const hintColor = value.length < 3 ? colors.greenApple600 : value.length < 7 ? colors.cantaloupe600 : colors.cinnamon500

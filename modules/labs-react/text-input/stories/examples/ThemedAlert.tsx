@@ -13,7 +13,7 @@ export const ThemedAlert = () => {
           focusOutline: colors.grapeSoda300,
         },
         alert: {
-          main: colors.kiwi500,
+          main: colors.kiwi200,
           darkest: colors.kiwi600,
         },
       },

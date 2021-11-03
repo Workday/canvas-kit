@@ -1,6 +1,6 @@
 import {useThemeRTL} from './useThemeRTL';
-import {CanvasThemePalette, EmotionCanvasTheme} from '@workday/canvas-kit-react/common';
-import {colors, CSSProperties, inputColors} from '@workday/canvas-kit-react/tokens';
+import {CanvasThemePalette, defaultCanvasTheme, EmotionCanvasTheme} from '@workday/canvas-kit-react/common';
+import {colors, CSSProperties, inputColors, statusColors} from '@workday/canvas-kit-react/tokens';
 import chroma from 'chroma-js';
 
 type paletteSelection = Exclude<keyof EmotionCanvasTheme['canvas']['palette'], 'common'>;
@@ -14,44 +14,38 @@ const isAccessible = (foreground: string, background: string = colors.frenchVani
 };
 
 const getPaletteColorsFromTheme = (
-  fallbackColors: ContrastColors,
-  palette?: CanvasThemePalette
+  palette: CanvasThemePalette,
+  fallbackColors?: ContrastColors,
 ): ContrastColors => {
-  return palette
-    ? {
-        outer: isAccessible(palette?.main) ? palette?.main : palette?.darkest,
-        inner: palette?.main,
-      }
-    : fallbackColors;
+  return {
+    outer: isAccessible(palette.main) ? palette.main : isAccessible(palette.darkest) ? palette.darkest : fallbackColors?.outer,
+    inner: fallbackColors?.inner ? fallbackColors.inner : palette.main,
+  }
 };
 
 export function getPaletteColors(
   type: paletteSelection,
-  theme?: EmotionCanvasTheme
+  theme: EmotionCanvasTheme
 ): ContrastColors {
-  const palette = theme?.canvas.palette[type];
+  const palette = theme.canvas.palette[type];
 
   switch (type) {
     case 'error': {
-      return getPaletteColorsFromTheme(
-        {
-          outer: inputColors.error.border,
-          inner: inputColors.error.border,
-        },
-        palette
-      );
+      return getPaletteColorsFromTheme(palette, { outer: inputColors.error.border });
     }
     case 'alert': {
-      return getPaletteColorsFromTheme(
-        {
-          outer: colors.cantaloupe600,
-          inner: inputColors.alert.border,
-        },
-        palette
-      );
+      return getPaletteColorsFromTheme(palette, { outer: colors.cantaloupe600 });
+    }
+    case 'success': {
+      return getPaletteColorsFromTheme(palette, {
+        outer: colors.greenApple600,
+        // The theme default for success.main is set to the darkest GreenApple
+        // For our default ring, we need to override it so the inner ring is a bit lighter
+        inner: palette.main === colors.greenApple600 ? statusColors.success : palette.main,
+      });
     }
     default: {
-      return getPaletteColorsFromTheme({}, palette);
+      return getPaletteColorsFromTheme(palette);
     }
   }
 }
