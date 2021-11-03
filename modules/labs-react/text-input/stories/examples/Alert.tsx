@@ -1,13 +1,10 @@
+/** @jsx jsx */
+import {jsx} from '@emotion/core';
 import React from 'react';
 import {TextInput} from '@workday/canvas-kit-labs-react/text-input';
 import {VStack} from '@workday/canvas-kit-labs-react/layout';
-import {styled} from '@workday/canvas-kit-react/common';
 import {useThemedRing} from '@workday/canvas-kit-labs-react/common';
-import {CSSProperties, space} from '@workday/canvas-kit-react/tokens';
-
-const StyledField = styled(TextInput.Field)<{alertStyles?: CSSProperties}>(
-  ({alertStyles}) => alertStyles
-);
+import {space} from '@workday/canvas-kit-react/tokens';
 
 export const Alert = () => {
   const [value, setValue] = React.useState('foo');
@@ -24,8 +21,8 @@ export const Alert = () => {
     <VStack spacing="xxxs" alignItems="flex-start">
       <TextInput>
         <TextInput.Label>Password</TextInput.Label>
-        <StyledField
-          alertStyles={alertStyles}
+        <TextInput.Field
+          css={alertStyles}
           onChange={handleChange}
           value={value}
           type="password"
