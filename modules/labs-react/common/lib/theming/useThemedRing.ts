@@ -1,5 +1,5 @@
 import {useThemeRTL} from './useThemeRTL';
-import {CanvasThemePalette, defaultCanvasTheme, EmotionCanvasTheme} from '@workday/canvas-kit-react/common';
+import {CanvasThemePalette, EmotionCanvasTheme} from '@workday/canvas-kit-react/common';
 import {colors, CSSProperties, inputColors, statusColors} from '@workday/canvas-kit-react/tokens';
 import chroma from 'chroma-js';
 
