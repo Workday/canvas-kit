@@ -1,7 +1,8 @@
 import React from 'react';
-import {TextArea} from '@workday/canvas-kit-labs-react/text-area';
+import {changeFocus} from '@workday/canvas-kit-react/common';
 import {VStack} from '@workday/canvas-kit-labs-react/layout';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
+import {TextArea} from '@workday/canvas-kit-labs-react/text-area';
 
 export const RefForwarding = () => {
   const [value, setValue] = React.useState('');
@@ -12,7 +13,7 @@ export const RefForwarding = () => {
   };
 
   const handleClick = () => {
-    ref.current.focus();
+    changeFocus(ref.current)
   };
 
   return (
