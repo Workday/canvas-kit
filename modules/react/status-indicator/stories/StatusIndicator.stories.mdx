@@ -5,6 +5,7 @@ import {StatusIndicator} from '@workday/canvas-kit-react/status-indicator';
 import {Basic} from './examples/Basic';
 import {Icon} from './examples/Icon';
 import {Emphasis} from './examples/Emphasis';
+import {MaxWidth} from './examples/MaxWidth';
 
 <Meta title="Components/Indicators/Status Indicator/React" component={StatusIndicator} />
 
@@ -56,6 +57,18 @@ Set the `icon` prop of the Status Indicator to a Canvas System Icon to display t
 label.
 
 <ExampleCodeBlock code={Icon} />
+
+### Max Width
+
+By default, the maximum width of a Status Indicator is `200px`. When the text in the StatusIndicator
+exceeds the max width, it will be truncated with an ellipsis. This maxWidth can be customized.
+
+Avoid truncation wherever possible by using shorter text in lozenges.
+
+In the case where truncation is necessary, you should use an `OverflowTooltip`. For the full text to
+be accessible when you do this, you should make the tooltip focusable with `tabIndex`.
+
+<ExampleCodeBlock code={MaxWidth} />
 
 ## Props
 
