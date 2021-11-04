@@ -6,7 +6,6 @@ export const Basic = () => {
   const [value, setValue] = React.useState('');
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log('change', event.target.value)
     setValue(event.target.value);
   };
 
