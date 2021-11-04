@@ -1,7 +1,7 @@
-# Canvas Kit Text Input
+# Canvas Kit Text Area
 
 View the
-[documentation for Text Area](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-text-input-react--basic)
+[documentation for Text Area](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-textarea-react--basic)
 on Storybook.
 
-[> Workday Design Reference](https://design.workday.com/components/inputs/text-input)
+[> Workday Design Reference](https://design.workday.com/components/inputs/text-area)
