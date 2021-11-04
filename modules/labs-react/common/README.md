@@ -67,7 +67,7 @@ export const HelloWorld = ({backgroundImagePath}) => {
 
 ## useThemedRing
 
-This is a way to automatically add themed colors to your inputs. This is helpful when showing alerts to users. It supports `error`, `alert`, and `success` states. It will try and use the corresponding `main` colors from your CanvasThemePalette, however if they do not meet accessibility contrast the outer ring with use the `darkest` color. This hook will also show a `focusOutline` ring when the input is focused.
+This is a way to automatically add themed colors to your inputs. This is helpful when showing alerts to users. It supports `error`, `alert`, and `success` states. It will try and use the corresponding `main` colors from your `CanvasThemePalette`, however if they do not meet accessibility contrast the outer ring with use the `darkest` color. This hook will also show a `focusOutline` ring when the input is focused.
 Note: You should avoid using these colors alone to differentiate alerts, instead use in combination with icons or hint text.
 
 ### Usage
