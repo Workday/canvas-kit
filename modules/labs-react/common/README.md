@@ -76,7 +76,7 @@ Note: You should not rely on these colors alone to differentiate alerts, but use
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
 import React from 'react';
-import {TextInput} from '@workday/canvas-kit-labs-react/text-input';
+import {TextInput} from '@workday/canvas-kit-preview-react/text-input';
 import {useThemedRing} from '@workday/canvas-kit-labs-react/common';
 
 
