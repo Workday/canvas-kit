@@ -17,8 +17,8 @@ export const RefForwarding = () => {
   };
 
   return (
-    <VStack spacing="xxxs" alignItems="flex-start">
-      <TextInput>
+    <VStack spacing='xxxs' alignItems='flex-start'>
+      <TextInput orientation='vertical'>
         <TextInput.Label>Email</TextInput.Label>
         <TextInput.Field onChange={handleChange} value={value} ref={ref} />
       </TextInput>

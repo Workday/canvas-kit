@@ -1,6 +1,5 @@
 import React from 'react';
 import {TextInput} from '@workday/canvas-kit-labs-react/text-input';
-import {VStack} from '@workday/canvas-kit-labs-react/layout';
 
 export const Required = () => {
   const [value, setValue] = React.useState('');
@@ -10,11 +9,9 @@ export const Required = () => {
   };
 
   return (
-    <VStack spacing="xxxs" alignItems="flex-start">
-      <TextInput isRequired={true}>
-        <TextInput.Label>Email</TextInput.Label>
-        <TextInput.Field onChange={handleChange} value={value} />
-      </TextInput>
-    </VStack>
+    <TextInput isRequired={true} orientation='vertical'>
+      <TextInput.Label>Email</TextInput.Label>
+      <TextInput.Field onChange={handleChange} value={value} />
+    </TextInput>
   );
 };

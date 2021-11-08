@@ -2,7 +2,6 @@
 import { jsx } from '@emotion/core'
 import React from 'react';
 import {TextArea} from '@workday/canvas-kit-labs-react/text-area';
-import {VStack} from '@workday/canvas-kit-labs-react/layout';
 import {useThemedRing} from '@workday/canvas-kit-labs-react/common';
 import {space, colors} from '@workday/canvas-kit-react/tokens';
 
@@ -20,15 +19,13 @@ export const Alert = () => {
   const hintColor = value.length < 3 ? colors.greenApple600 : value.length < 7 ? colors.cantaloupe600 : colors.cinnamon500
 
   return (
-    <VStack spacing="xxxs" alignItems="flex-start">
-      <TextArea>
-        <TextArea.Label>Add a comment</TextArea.Label>
-        <TextArea.Field css={alertStyles} onChange={handleChange} value={value} />
-        <TextArea.Hint paddingTop={space.xxs}>
-          <strong>Character Limit: </strong>
-          <span css={{color: hintColor}}>{10 - value.length} Left</span>
-        </TextArea.Hint>
-      </TextArea>
-    </VStack>
+    <TextArea orientation='vertical'>
+      <TextArea.Label>Add a comment</TextArea.Label>
+      <TextArea.Field css={alertStyles} onChange={handleChange} value={value} />
+      <TextArea.Hint paddingTop={space.xxs}>
+        <strong>Character Limit: </strong>
+        <span css={{color: hintColor}}>{10 - value.length} Left</span>
+      </TextArea.Hint>
+    </TextArea>
   );
 };

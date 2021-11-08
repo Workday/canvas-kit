@@ -10,6 +10,7 @@ import {Error} from './examples/Error';
 import {Grow} from './examples/Grow';
 import {LabelPositionVertical} from './examples/LabelPositionVertical';
 import {LabelPositionHorizontal} from './examples/LabelPositionHorizontal';
+import {HiddenLabel} from './examples/HiddenLabel';
 import {Placeholder} from './examples/Placeholder';
 import {RefForwarding} from './examples/RefForwarding';
 import {Required} from './examples/Required';
@@ -71,14 +72,15 @@ Use the `resize` css attribute to restrict resizing of it to certain dimensions.
 ### Grow
 
 There are lots of ways to accomplish this. The `TextArea.Field` extends from Box so it is easy to
-extend full width, e.g. setting width prop to 100%, or you can wrap the whole `TextArea` in a
-`Flex` and set the growth that way, etc.
+extend full width, e.g. setting width prop to 100%, or you can set the `alignItems` prop to
+`stretch` on `TextArea`, etc.
 
 <ExampleCodeBlock code={Grow} />
 
 ### Label Position
 
-Use `HStack` or `VStack` to set `TextArea.Label`'s position. Below are examples of both positions:
+Use the `orientation` property to set `TextArea.Label`'s position. You can override the default
+spacing using the `spacing` prop. Below are examples of both positions:
 
 #### Horizontal
 
@@ -87,6 +89,14 @@ Use `HStack` or `VStack` to set `TextArea.Label`'s position. Below are examples 
 #### Vertical
 
 <ExampleCodeBlock code={LabelPositionVertical} />
+
+### Visually Hiding The Label
+
+If your label is just for screen reader users you can use the `accessibleHide` utility class from
+`@workday/canvas-kit-react/common`. You will likely want to set the `spacing` prop on `TextArea` to
+`zero`.
+
+<ExampleCodeBlock code={HiddenLabel} />
 
 ### Error States
 

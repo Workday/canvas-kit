@@ -1,6 +1,5 @@
 import React from 'react';
 import {TextArea} from '@workday/canvas-kit-labs-react/text-area';
-import {VStack} from '@workday/canvas-kit-labs-react/layout';
 import {styled} from '@workday/canvas-kit-react/common';
 
 const StyledField = styled(TextArea.Field)({
@@ -15,11 +14,9 @@ export const ResizeConstraints = () => {
   };
 
   return (
-    <VStack spacing="xxxs" alignItems="flex-start">
-      <TextArea>
-        <TextArea.Label>Leave a review</TextArea.Label>
-        <StyledField onChange={handleChange} value={value} />
-      </TextArea>
-    </VStack>
+    <TextArea orientation='vertical'>
+      <TextArea.Label>Leave a review</TextArea.Label>
+      <StyledField onChange={handleChange} value={value} />
+    </TextArea>
   );
 };

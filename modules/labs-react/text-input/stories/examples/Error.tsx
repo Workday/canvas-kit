@@ -1,6 +1,5 @@
 import React from 'react';
 import {TextInput} from '@workday/canvas-kit-labs-react/text-input';
-import {VStack} from '@workday/canvas-kit-labs-react/layout';
 import {space} from '@workday/canvas-kit-react/tokens';
 
 export const Error = () => {
@@ -32,12 +31,10 @@ export const Error = () => {
   };
 
   return (
-    <VStack spacing="xxxs" alignItems="flex-start">
-      <TextInput hasError={hasError}>
-        <TextInput.Label>A three letter word</TextInput.Label>
-        <TextInput.Field onChange={handleChange} value={value} />
-        <TextInput.Hint paddingTop={space.xxs}>{hint}</TextInput.Hint>
-      </TextInput>
-    </VStack>
+    <TextInput hasError={hasError} orientation='vertical'>
+      <TextInput.Label>A three letter word</TextInput.Label>
+      <TextInput.Field onChange={handleChange} value={value} />
+      <TextInput.Hint paddingTop={space.xxs}>{hint}</TextInput.Hint>
+    </TextInput>
   );
 };

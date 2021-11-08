@@ -48,8 +48,12 @@ export const LoginForm = () => {
 
   return (
     <form onSubmit={formik.handleSubmit} action=".">
-      <VStack spacing="xs" alignItems="flex-start">
-        <TextInput isRequired={true} hasError={formik.touched.email && !!formik.errors.email}>
+      <VStack spacing='xs' alignItems='flex-start'>
+        <TextInput
+          orientation='vertical'
+          isRequired={true}
+          hasError={formik.touched.email && !!formik.errors.email}
+        >
           <TextInput.Label>Email</TextInput.Label>
           <TextInput.Field
             name="email"
@@ -62,6 +66,7 @@ export const LoginForm = () => {
           <TextInput.Hint>{formik.touched.email && formik.errors.email}</TextInput.Hint>
         </TextInput>
         <TextInput
+          orientation='vertical'
           id={passwordId}
           hasError={formik.touched.password && !!formik.errors.password}
           isRequired={true}

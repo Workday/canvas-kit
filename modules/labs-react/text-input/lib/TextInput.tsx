@@ -1,20 +1,17 @@
 import React from 'react';
 
-import {createComponent, useDefaultModel} from '@workday/canvas-kit-react/common';
-import {FormFieldModelContext} from '@workday/canvas-kit-labs-react/form-field';
+import {createComponent, ExtractProps, useDefaultModel} from '@workday/canvas-kit-react/common';
+import {FormField, FormFieldModelContext, useFormFieldOrientation} from '@workday/canvas-kit-labs-react/form-field';
+import {Stack} from '@workday/canvas-kit-labs-react/layout';
 
-import {
-  useTextInputModel,
-  TextInputModel,
-  TextInputModelConfig,
-} from './hooks/useTextInputModel';
+import {useTextInputModel, TextInputModel} from './hooks';
 import {TextInputField} from './TextInputField';
 import {TextInputLabel} from './TextInputLabel';
 import {TextInputHint} from './TextInputHint';
 
 export const TextInputModelContext = FormFieldModelContext;
 
-export interface TextInputProps extends TextInputModelConfig {
+export interface TextInputProps  extends ExtractProps<typeof FormField, never> {
   model?: TextInputModel;
   /**
    * Children of the Text Input. Should contain a `<TextInput.Field>`, a `<TextInput.Label>` and an optional `<TextInput.Hint>`
@@ -24,11 +21,18 @@ export interface TextInputProps extends TextInputModelConfig {
 
 export const TextInput = createComponent()({
   displayName: 'TextInput',
-  Component: ({children, model, ...config}: TextInputProps) => {
-    const value = useDefaultModel(model, config, useTextInputModel);
+  Component: ({children, model, orientation, ...props}: TextInputProps, ref) => {
+    const {hasError, id, isRequired, ...elemProps} = props
+    const value = useDefaultModel(model, {hasError, id, isRequired}, useTextInputModel);
+
+    const layoutProps = useFormFieldOrientation(orientation)
 
     return (
-      <TextInputModelContext.Provider value={value}>{children}</TextInputModelContext.Provider>
+      <TextInputModelContext.Provider value={value}>
+        <Stack ref={ref} {...layoutProps} {...elemProps}>
+          {children}
+        </Stack>
+      </TextInputModelContext.Provider>
     );
   },
   subComponents: {

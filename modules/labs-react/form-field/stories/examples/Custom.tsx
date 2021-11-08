@@ -4,10 +4,11 @@ import {
   useFormFieldInput,
   useFormFieldLabel,
   useFormFieldModel,
+  useFormFieldOrientation,
   FormFieldModelContext,
 } from '@workday/canvas-kit-labs-react/form-field';
 import {useModelContext} from '@workday/canvas-kit-react/common';
-import {VStack} from '@workday/canvas-kit-labs-react/layout';
+import {Stack} from '@workday/canvas-kit-labs-react/layout';
 
 const Label = ({model, children}) => {
   const localModel = useModelContext(FormFieldModelContext, model);
@@ -44,11 +45,13 @@ export const Custom = () => {
 
   const model = useFormFieldModel({isRequired: true});
 
+  const layoutProps = useFormFieldOrientation('vertical')
+
   return (
-    <VStack spacing="xxxs" alignItems="flex-start">
+    <Stack {...layoutProps}>
       <Label model={model}>My Custom Field</Label>
       <Input model={model} value={value} onChange={handleChange} />
       <Hint model={model}>You can be anything</Hint>
-    </VStack>
+    </Stack>
   );
 };

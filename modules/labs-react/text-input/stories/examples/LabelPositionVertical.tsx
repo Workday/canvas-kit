@@ -1,6 +1,5 @@
 import React from 'react';
 import {TextInput} from '@workday/canvas-kit-labs-react/text-input';
-import {VStack} from '@workday/canvas-kit-labs-react/layout';
 
 export const LabelPositionVertical = () => {
   const [value, setValue] = React.useState('');
@@ -10,11 +9,9 @@ export const LabelPositionVertical = () => {
   };
 
   return (
-    <VStack spacing="xxxs" alignItems="flex-start">
-      <TextInput>
-        <TextInput.Label>Email</TextInput.Label>
-        <TextInput.Field onChange={handleChange} value={value} />
-      </TextInput>
-    </VStack>
+    <TextInput orientation='vertical' spacing='m'>
+      <TextInput.Label>Email</TextInput.Label>
+      <TextInput.Field onChange={handleChange} value={value} />
+    </TextInput>
   );
 };

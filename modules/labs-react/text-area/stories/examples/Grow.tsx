@@ -1,6 +1,5 @@
 import React from 'react';
 import {TextArea} from '@workday/canvas-kit-labs-react/text-area';
-import {VStack} from '@workday/canvas-kit-labs-react/layout';
 
 export const Grow = () => {
   const [value, setValue] = React.useState('');
@@ -10,11 +9,9 @@ export const Grow = () => {
   };
 
   return (
-    <VStack spacing="xxxs">
-      <TextArea>
-        <TextArea.Label>Leave a review</TextArea.Label>
-        <TextArea.Field onChange={handleChange} value={value} />
-      </TextArea>
-    </VStack>
+    <TextArea orientation='vertical' alignItems='stretch'>
+      <TextArea.Label>Leave a review</TextArea.Label>
+      <TextArea.Field onChange={handleChange} value={value} />
+    </TextArea>
   );
 };

@@ -1,16 +1,17 @@
 import React from 'react';
 
-import {createComponent, useDefaultModel} from '@workday/canvas-kit-react/common';
-import { FormFieldModelContext} from '@workday/canvas-kit-labs-react/form-field';
+import {createComponent, ExtractProps, useDefaultModel} from '@workday/canvas-kit-react/common';
+import {FormField, FormFieldModelContext, useFormFieldOrientation} from '@workday/canvas-kit-labs-react/form-field';
+import {Stack} from '@workday/canvas-kit-labs-react/layout';
 
-import { TextAreaModelConfig, TextAreaModel, useTextAreaModel } from './hooks';
+import { TextAreaModel, useTextAreaModel } from './hooks';
 import {TextAreaField} from './TextAreaField';
 import {TextAreaLabel} from './TextAreaLabel';
 import {TextAreaHint} from './TextAreaHint';
 
 export const TextAreaModelContext = FormFieldModelContext;
 
-export interface TextAreaProps extends TextAreaModelConfig {
+export interface TextAreaProps extends ExtractProps<typeof FormField, never> {
   model?: TextAreaModel;
   /**
    * Children of the Text Input. Should contain a `<TextArea.Field>`, a `<TextArea.Label>` and an optional `<TextArea.Hint>`
@@ -20,10 +21,19 @@ export interface TextAreaProps extends TextAreaModelConfig {
 
 export const TextArea = createComponent()({
   displayName: 'TextArea',
-  Component: ({children, model, ...config}: TextAreaProps) => {
-    const value = useDefaultModel(model, config, useTextAreaModel);
+  Component: ({children, model, orientation, ...props}: TextAreaProps, ref) => {
+    const {hasError, id, isRequired, ...elemProps} = props
+    const value = useDefaultModel(model, {hasError, id, isRequired}, useTextAreaModel);
 
-    return <TextAreaModelContext.Provider value={value}>{children}</TextAreaModelContext.Provider>;
+    const layoutProps = useFormFieldOrientation(orientation)
+
+    return (
+      <TextAreaModelContext.Provider value={value}>
+        <Stack ref={ref} {...layoutProps} {...elemProps}>
+          {children}
+        </Stack>
+      </TextAreaModelContext.Provider>
+    );
   },
   subComponents: {
     Field: TextAreaField,

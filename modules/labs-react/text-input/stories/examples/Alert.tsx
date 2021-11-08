@@ -2,7 +2,6 @@
 import {jsx} from '@emotion/core';
 import React from 'react';
 import {TextInput} from '@workday/canvas-kit-labs-react/text-input';
-import {VStack} from '@workday/canvas-kit-labs-react/layout';
 import {useThemedRing} from '@workday/canvas-kit-labs-react/common';
 import {space} from '@workday/canvas-kit-react/tokens';
 
@@ -18,26 +17,24 @@ export const Alert = () => {
   );
 
   return (
-    <VStack spacing="xxxs" alignItems="flex-start">
-      <TextInput>
-        <TextInput.Label>Password</TextInput.Label>
-        <TextInput.Field
-          css={alertStyles}
-          onChange={handleChange}
-          value={value}
-          type="password"
-        />
-        <TextInput.Hint paddingTop={space.xxs}>
-          <strong>Password Strength: </strong>
-          {value.length < 3 ? (
-            <span>Weak</span>
-          ) : value.length < 5 ? (
-            <span>Average</span>
-          ) : (
-            <span>Strong</span>
-          )}
-        </TextInput.Hint>
-      </TextInput>
-    </VStack>
+    <TextInput orientation='vertical'>
+      <TextInput.Label>Password</TextInput.Label>
+      <TextInput.Field
+        css={alertStyles}
+        onChange={handleChange}
+        value={value}
+        type="password"
+      />
+      <TextInput.Hint paddingTop={space.xxs}>
+        <strong>Password Strength: </strong>
+        {value.length < 3 ? (
+          <span>Weak</span>
+        ) : value.length < 5 ? (
+          <span>Average</span>
+        ) : (
+          <span>Strong</span>
+        )}
+      </TextInput.Hint>
+    </TextInput>
   );
 };

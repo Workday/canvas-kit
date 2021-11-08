@@ -1,6 +1,5 @@
 import React from 'react';
 import {TextInput} from '@workday/canvas-kit-labs-react/text-input';
-import {VStack} from '@workday/canvas-kit-labs-react/layout';
 import {CanvasProvider, PartialEmotionCanvasTheme} from '@workday/canvas-kit-react/common';
 import {colors, space} from '@workday/canvas-kit-react/tokens';
 
@@ -26,15 +25,13 @@ export const ThemedError = () => {
 
   return (
     <CanvasProvider theme={theme}>
-      <VStack spacing="xxxs" alignItems="flex-start">
-        <TextInput hasError={!value} isRequired={true}>
-          <TextInput.Label>Email</TextInput.Label>
-          <TextInput.Field onChange={handleChange} value={value} />
-          <TextInput.Hint paddingTop={space.xxs}>
-            {!value && 'Please enter an email.'}
-          </TextInput.Hint>
-        </TextInput>
-      </VStack>
+      <TextInput hasError={!value} isRequired={true} orientation='vertical'>
+        <TextInput.Label>Email</TextInput.Label>
+        <TextInput.Field onChange={handleChange} value={value} />
+        <TextInput.Hint paddingTop={space.xxs}>
+          {!value && 'Please enter an email.'}
+        </TextInput.Hint>
+      </TextInput>
     </CanvasProvider>
   );
 };

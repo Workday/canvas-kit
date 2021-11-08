@@ -12,7 +12,7 @@ export const HiddenLabel = () => {
   };
 
   return (
-    <TextInput>
+    <TextInput orientation='vertical' spacing='zero'>
       <TextInput.Label css={{...accessibleHide}}>Email</TextInput.Label>
       <TextInput.Field onChange={handleChange} value={value} />
     </TextInput>
