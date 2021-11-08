@@ -3,6 +3,7 @@ import React from 'react';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
 import {space} from '@workday/canvas-kit-react/tokens';
+import {resetIcon} from '@workday/canvas-system-icons-web';
 
 const CustomContent = ({...elemProps}) => (
   <button
@@ -28,6 +29,11 @@ export const Ellipsis = () => {
       <OverflowTooltip>
         <SecondaryButton style={{maxWidth: 200}}>
           Super Mega Ultra Long Content With Max Width On The Button
+        </SecondaryButton>
+      </OverflowTooltip>
+      <OverflowTooltip>
+        <SecondaryButton icon={resetIcon} style={{maxWidth: 200}}>
+          Super Mega Ultra Long Content With Max Width On The Button with Icon
         </SecondaryButton>
       </OverflowTooltip>
       <OverflowTooltip>
