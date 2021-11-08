@@ -21,7 +21,7 @@ export interface ButtonContainerProps
    * The size of the Button.
    * @default 'medium'
    */
-  size?: 'small' | 'medium' | 'large';
+  size?: 'extraSmall' | 'small' | 'medium' | 'large';
   /**
    * The ref to the button that the styled component renders.
    */
@@ -96,7 +96,7 @@ export const ButtonContainer = styled('button', {
     // Makes the "down" state of the button happens faster than the hover state, so it animates in correctly.
     '&:hover:active': {transitionDuration: '40ms'},
 
-    '&:disabled, &:disabled:active': {cursor: 'default', boxShadow: 'none'},
+    '&:disabled, &:disabled:active': {cursor: 'default', boxShadow: 'none', opacity: 0.4},
 
     '& > *:first-of-type': {
       marginLeft: 0,
@@ -110,12 +110,12 @@ export const ButtonContainer = styled('button', {
     switch (size) {
       case 'large':
         return {
-          fontSize: type.properties.fontSizes[16],
+          ...type.levels.body.small,
           minWidth: '112px',
           height: '48px',
           padding: `0 ${space.l}`,
           '& > * ': {
-            margin: `0 ${spaceNumbers.xs / 2}px`,
+            margin: `0 ${spaceNumbers.xxs / 2}px`,
           },
         };
       case 'medium':
@@ -133,6 +133,14 @@ export const ButtonContainer = styled('button', {
           minWidth: '80px',
           height: space.l,
           padding: `0 ${space.s}`,
+          '& > * ': {
+            margin: `0 ${spaceNumbers.xxxs / 2}px`,
+          },
+        };
+      case 'extraSmall':
+        return {
+          height: space.m,
+          padding: `0 ${space.xs}`,
           '& > * ': {
             margin: `0 ${spaceNumbers.xxxs / 2}px`,
           },

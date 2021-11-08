@@ -6,17 +6,23 @@ import {
   Themeable,
   EmotionCanvasTheme,
   createComponent,
+  focusRing,
 } from '@workday/canvas-kit-react/common';
+import {colors} from '@workday/canvas-kit-react/tokens';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {ButtonColors} from './types';
 import {ButtonContainer, ButtonLabel, ButtonLabelData, ButtonLabelIcon} from './parts';
 
 export interface PrimaryButtonProps extends Themeable, GrowthBehavior {
   /**
+   * The variant of the SecondaryButton.
+   * @default undefined
+   */
+  variant?: 'inverse';
+  /**
    * The size of the Button.
    * @default 'medium'
    */
-  size?: 'small' | 'medium' | 'large';
+  size?: 'extraSmall' | 'small' | 'medium' | 'large';
   /**
    * The data label of the Button.
    * Note: not displayed at `small` size
@@ -40,6 +46,9 @@ export interface PrimaryButtonProps extends Themeable, GrowthBehavior {
   children?: React.ReactNode;
 }
 
+// Button sizes where data labels are enabled
+const dataLabelSizes = ['medium', 'large'];
+
 export const PrimaryButton = createComponent('button')({
   displayName: 'PrimaryButton',
   Component: (
@@ -49,6 +58,7 @@ export const PrimaryButton = createComponent('button')({
       theme = useTheme(),
       size = 'medium',
       iconPosition = 'left',
+      variant,
       dataLabel,
       icon,
       shouldMirrorIcon = false,
@@ -61,11 +71,11 @@ export const PrimaryButton = createComponent('button')({
     <ButtonContainer
       ref={ref}
       as={Element}
-      colors={getPrimaryButtonColors(theme)}
+      colors={getPrimaryButtonColors(variant, theme)}
       size={size}
       {...elemProps}
     >
-      {icon && size !== 'small' && iconPosition === 'left' && (
+      {icon && iconPosition === 'left' && (
         <ButtonLabelIcon
           size={size}
           iconPosition={iconPosition}
@@ -74,8 +84,8 @@ export const PrimaryButton = createComponent('button')({
         />
       )}
       <ButtonLabel>{children}</ButtonLabel>
-      {dataLabel && size !== 'small' && <ButtonLabelData>{dataLabel}</ButtonLabelData>}
-      {icon && size !== 'small' && iconPosition === 'right' && (
+      {dataLabel && dataLabelSizes.includes(size) && <ButtonLabelData>{dataLabel}</ButtonLabelData>}
+      {icon && iconPosition === 'right' && (
         <ButtonLabelIcon
           size={size}
           iconPosition={iconPosition}
@@ -87,26 +97,81 @@ export const PrimaryButton = createComponent('button')({
   ),
 });
 
-export const getPrimaryButtonColors = ({
-  canvas: {
-    palette: {primary: themePrimary},
-  },
-}: EmotionCanvasTheme): ButtonColors => ({
-  default: {
-    background: themePrimary.main,
-    icon: themePrimary.contrast,
-    label: themePrimary.contrast,
-  },
-  hover: {
-    background: themePrimary.dark,
-  },
-  active: {
-    background: themePrimary.darkest,
-  },
-  focus: {
-    background: themePrimary.main,
-  },
-  disabled: {
-    background: themePrimary.light,
-  },
-});
+export const getPrimaryButtonColors = (
+  variant: 'inverse' | undefined,
+  theme: EmotionCanvasTheme
+) => {
+  const {
+    canvas: {
+      palette: {primary: themePrimary},
+    },
+  } = theme;
+
+  switch (variant) {
+    case undefined:
+    default:
+      return {
+        default: {
+          background: themePrimary.main,
+          icon: themePrimary.contrast,
+          label: themePrimary.contrast,
+        },
+        hover: {
+          background: themePrimary.dark,
+        },
+        active: {
+          background: themePrimary.darkest,
+        },
+        focus: {
+          background: themePrimary.main,
+        },
+        disabled: {
+          background: themePrimary.main,
+        },
+      };
+
+    case 'inverse':
+      return {
+        default: {
+          background: colors.frenchVanilla100,
+          icon: colors.blackPepper400,
+          label: colors.blackPepper400,
+          labelData: colors.blackPepper400,
+        },
+        hover: {
+          background: colors.soap300,
+          icon: colors.blackPepper500,
+          label: colors.blackPepper500,
+          labelData: colors.blackPepper500,
+        },
+        active: {
+          background: colors.soap300,
+          icon: colors.blackPepper500,
+          label: colors.blackPepper500,
+          labelData: colors.blackPepper500,
+        },
+        focus: {
+          background: colors.frenchVanilla100,
+          border: colors.blackPepper400,
+          icon: colors.blackPepper400,
+          label: colors.blackPepper400,
+          labelData: colors.blackPepper400,
+          focusRing: focusRing(
+            {
+              separation: 1,
+              innerColor: colors.blackPepper500,
+              outerColor: colors.frenchVanilla100,
+            },
+            theme
+          ),
+        },
+        // Identical to inverse 'default' styles. ButtonContainer will set opacity to 40%
+        disabled: {
+          background: colors.frenchVanilla100,
+          icon: colors.blackPepper400,
+          label: colors.blackPepper400,
+          labelData: colors.blackPepper400,
+        },
+      };
+  }
+};

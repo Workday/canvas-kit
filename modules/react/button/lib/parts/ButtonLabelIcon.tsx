@@ -5,12 +5,15 @@ import isPropValid from '@emotion/is-prop-valid';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {styled} from '@workday/canvas-kit-react/common';
 
+type ButtonSizes = 'extraSmall' | 'small' | 'medium' | 'large';
+
 export interface ButtonLabelIconProps {
   /**
-   * The size of the Button.
+   * There are four button sizes: `extraSmall`, `small`, `medium`, and `large`.
+   *
    * @default 'medium'
    */
-  size?: 'small' | 'medium' | 'large';
+  size?: ButtonSizes;
   /**
    * The icon of the Button.
    * Note: not displayed at `small` size
@@ -28,8 +31,29 @@ export interface ButtonLabelIconProps {
   shouldMirrorIcon?: boolean;
 }
 
-const ICON_SIZE = 24;
-const SMALL_ICON_SIZE = 20;
+const iconSizes: Record<ButtonSizes, number> = {
+  extraSmall: 18,
+  small: 20,
+  medium: 20,
+  large: 24,
+};
+
+const getIconPositionStyles = ({iconPosition, size}: ButtonLabelIconProps) => {
+  // Adjust margin values for visual balance, large buttons require 8px
+  const balancingMargin = size === 'large' ? space.xxs : space.xxxs;
+  // iconPosition can only be "right", "left", or undefined (defaults to "left")
+  if (iconPosition === 'right') {
+    return {
+      marginLeft: undefined,
+      marginRight: `-${balancingMargin} !important`,
+    };
+  } else {
+    return {
+      marginLeft: `-${balancingMargin} !important`,
+      marginRight: undefined,
+    };
+  }
+};
 
 const ButtonLabelIconStyled = styled('span', {
   shouldForwardProp: prop => isPropValid(prop) && prop !== 'size',
@@ -38,13 +62,10 @@ const ButtonLabelIconStyled = styled('span', {
     display: 'inline-block',
   },
   ({size}) => ({
-    width: size === 'small' ? SMALL_ICON_SIZE : ICON_SIZE,
-    height: size === 'small' ? SMALL_ICON_SIZE : ICON_SIZE,
+    width: size ? iconSizes[size] : iconSizes.medium,
+    height: size ? iconSizes[size] : iconSizes.medium,
   }),
-  ({iconPosition}) => ({
-    marginLeft: iconPosition === 'right' ? undefined : `-${space.xxxs} !important`,
-    marginRight: iconPosition === 'right' ? `-${space.xxxs} !important` : undefined,
-  })
+  getIconPositionStyles
 );
 
 export const ButtonLabelIcon = ({
@@ -54,12 +75,11 @@ export const ButtonLabelIcon = ({
   shouldMirrorIcon = false,
   ...elemProps
 }: ButtonLabelIconProps) => {
-  /* istanbul ignore next line for coverage */
   if (icon === undefined) {
     return null;
   }
 
-  const iconSize = size === 'small' ? SMALL_ICON_SIZE : undefined;
+  const iconSize = size ? iconSizes[size] : undefined;
 
   return (
     <ButtonLabelIconStyled iconPosition={iconPosition} size={size} {...elemProps}>

@@ -17,7 +17,12 @@ export const PrimaryButtonStates = (props: {theme?: PartialEmotionCanvasTheme}) 
   <StaticStates theme={props.theme}>
     <ComponentStatesTable
       rowProps={permutateProps({
+        variant: [
+          {value: undefined, label: ''},
+          {value: 'inverse', label: 'Inverse'},
+        ],
         size: [
+          {value: 'extraSmall', label: 'Extra Small'},
           {value: 'small', label: 'Small'},
           {value: 'medium', label: 'Medium'},
           {value: 'large', label: 'Large'},
@@ -38,7 +43,7 @@ export const PrimaryButtonStates = (props: {theme?: PartialEmotionCanvasTheme}) 
       columnProps={stateTableColumnProps}
     >
       {props => (
-        <Container>
+        <Container blue={props.variant === 'inverse'}>
           <PrimaryButton {...props}>Test</PrimaryButton>
         </Container>
       )}
