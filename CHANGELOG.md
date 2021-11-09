@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v5.2.10](https://github.com/Workday/canvas-kit/releases/tag/v5.2.10) (2021-11-03)
+
+### Components
+
+- fix(tabs): Allow consumers to style the selected tab ([#1327](https://github.com/Workday/canvas-kit/pull/1327)) ([@sachinmorajkar](https://github.com/sachinmorajkar))
+
+
 ## [v5.2.9](https://github.com/Workday/canvas-kit/releases/tag/v5.2.9) (2021-10-21)
 
 ### Components
