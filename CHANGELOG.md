@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v5.2.11](https://github.com/Workday/canvas-kit/releases/tag/v5.2.11) (2021-11-09)
+
+### Components
+
+- fix(tooltip): Fix findEllipsisElement IE11 ([#1330](https://github.com/Workday/canvas-kit/pull/1330)) ([@alorek](https://github.com/alorek))
+
+
 ## [v5.2.10](https://github.com/Workday/canvas-kit/releases/tag/v5.2.10) (2021-11-03)
 
 ### Components
