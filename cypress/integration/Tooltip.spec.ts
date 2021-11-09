@@ -302,4 +302,19 @@ describe('Tooltip', () => {
       });
     });
   });
+  context('given the [Testing/React/Popups/Tooltip, Overflow] example is rendered', () => {
+    beforeEach(() => {
+      h.stories.load('Testing/React/Popups/Tooltip', 'Overflow');
+    });
+
+    context('when the = button is hovered', () => {
+      beforeEach(() => {
+        cy.findByTestId('overflow-tooltip').trigger('mouseover');
+      });
+
+      it('should open the tooltip', () => {
+        cy.findByRole('tooltip').should('be.visible');
+      });
+    });
+  });
 });
