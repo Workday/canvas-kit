@@ -26,6 +26,12 @@ any questions about the update.
     - [Primary Medium](#primary-medium)
     - [Primary Small](#primary-small)
     - [Primary Extra Small](#primary-extra-small)
+  - [Secondary Button](#secondary-button)
+    - [Secondary Disabled](#secondary-disabled)
+    - [Secondary Large](#secondary-large)
+    - [Secondary Medium](#secondary-medium)
+    - [Secondary Small](#secondary-small)
+    - [Secondary Extra Small](#secondary-extra-small)
 
 ## Codemod
 
@@ -428,4 +434,28 @@ We now support icons for small `PrimaryButton`s. The icons are `20px` x `20xpx`.
 #### Primary Extra Small
 
 We added a new size, `extraSmall` to our `PrimaryButton`s. These are particularly helpful for use
+cases where you have dense UI or tight layout constraints such as tables.
+
+### Secondary Button
+
+#### Secondary Large
+
+The padding for large `SecondaryButton`s has been slightly adjusted for more visual balance and to
+take up a bit less layout space. Specifically we:
+
+- decreased the space between the button icon and text from `12px` to `8px`
+- decreased the space between the button container and the icon from `28px` to `24px`
+
+#### Secondary Medium
+
+The icon size for medium `SecondaryButton`s has been decreased from `24px` to `20px`, but the overall
+height of the button will remain the same.
+
+#### Secondary Small
+
+We now support icons for small `SecondaryButton`s. The icons are `20px` x `20xpx`.
+
+#### Secondary Extra Small
+
+We added a new size, `extraSmall` to our `SecondaryButton`s. These are particularly helpful for use
 cases where you have dense UI or tight layout constraints such as tables.
