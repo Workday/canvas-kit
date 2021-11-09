@@ -5160,6 +5160,16 @@
         "__isArgsStory": false
       }
     },
+    "testing-react-popups-tooltip--overflow": {
+      "id": "testing-react-popups-tooltip--overflow",
+      "name": "Overflow",
+      "kind": "Testing/React/Popups/Tooltip",
+      "story": "Overflow",
+      "parameters": {
+        "__id": "testing-react-popups-tooltip--overflow",
+        "__isArgsStory": false
+      }
+    },
     "testing-react-popups-tooltip--placements": {
       "id": "testing-react-popups-tooltip--placements",
       "name": "Placements",
