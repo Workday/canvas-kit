@@ -142,6 +142,8 @@ export const ButtonContainer = styled('button', {
         };
       case 'extraSmall':
         return {
+          ...type.levels.subtext.medium,
+          fontWeight: type.properties.fontWeights.bold,
           height: space.m,
           padding: `0 ${space.xs}`,
           '& > * ': {

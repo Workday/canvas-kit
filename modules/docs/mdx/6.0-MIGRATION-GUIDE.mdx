@@ -32,6 +32,12 @@ any questions about the update.
     - [Secondary Medium](#secondary-medium)
     - [Secondary Small](#secondary-small)
     - [Secondary Extra Small](#secondary-extra-small)
+  - [Tertiary Button](#tertiary-button)
+    - [Tertiary Default](#tertiary-default)
+    - [Tertiary Disabled](#tertiary-disabled)
+    - [Tertiary Medium](#tertiary-medium)
+    - [Tertiary Small](#tertiary-small)
+    - [Tertiary Extra Small](#tertiary-extra-small)
 
 ## Codemod
 
@@ -448,8 +454,8 @@ take up a bit less layout space. Specifically we:
 
 #### Secondary Medium
 
-The icon size for medium `SecondaryButton`s has been decreased from `24px` to `20px`, but the overall
-height of the button will remain the same.
+The icon size for medium `SecondaryButton`s has been decreased from `24px` to `20px`, but the
+overall height of the button will remain the same.
 
 #### Secondary Small
 
@@ -458,4 +464,37 @@ We now support icons for small `SecondaryButton`s. The icons are `20px` x `20xpx
 #### Secondary Extra Small
 
 We added a new size, `extraSmall` to our `SecondaryButton`s. These are particularly helpful for use
+cases where you have dense UI or tight layout constraints such as tables.
+
+### Tertiary Button
+
+#### Tertiary Default
+
+We added an underline to the button text for all states to help distinguish it from the
+`SecondaryButton` and create more visual consistency.
+
+#### Tertiary Disabled
+
+As with our other buttons, we updated the disabled state to set the entire button to 40% opacity.
+They were previously using our light theme color at 50% opacity for icons and text.
+
+#### Tertiary Medium
+
+The medium `TertiaryButton` now uses our new type hierarchy and adjusted the padding, but the
+overall size of the button will stay the same. Specifically, we:
+
+- decreased the space between the button icon and text from `8px` to `4px`
+
+#### Tertiary Small
+
+The small `TertiaryButton` now uses our new type hierarchy and adjusted the padding, but the overall
+size of the button will stay the same. Specifically, we:
+
+- decreased the space between the button icon and text from `8px` to `4px`
+- increased the container padding outside the button text when an icon is present from `8px` to
+  `12px`
+
+#### Tertiary Extra Small
+
+We added a new size, `extraSmall` to our `TertiaryButton`s. These are particularly helpful for use
 cases where you have dense UI or tight layout constraints such as tables.
