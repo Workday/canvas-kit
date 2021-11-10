@@ -10,15 +10,17 @@ implement user experiences consistent with
 <a href="https://lerna.js.org">
   <img src="https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg" alt="Maintained with Lerna" />
 </a>
-[![Release](https://github.com/Workday/canvas-kit/actions/workflows/release.yml/badge.svg)](https://github.com/Workday/canvas-kit/actions/workflows/release.yml)
+<a href="https://github.com/Workday/canvas-kit/actions/workflows/release.yml">
+  <img alt="Release" src="https://github.com/Workday/canvas-kit/actions/workflows/release.yml/badge.svg">
+</a>
 <a href="./modules/docs/mdx/CONTRIBUTING.mdx">
   <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs welcome" />
 </a>
 
 ---
 
-**:white_check_mark: For a list of available react modules see
-[Canvas Kit Component Status](./modules/docs/mdx/COMPONENT_STATUS.mdx)**
+_For a list of available react modules see
+[Canvas Kit Component Status](./modules/docs/mdx/COMPONENT_STATUS.mdx)_
 
 ## Getting started
 
@@ -111,6 +113,23 @@ Canvas Kit follows [semantic versioning](https://semver.org/) and is enforced au
 ["Commit Message Format"](./modules/docs/mdx/CONTRIBUTING.mdx#commit-message-format)).
 
 Each module is independently versioned using [Lerna](https://github.com/lerna/lerna).
+
+## Version Support
+
+At any given time, we support three major versions of Canvas Kit: previous, current, and next. Each
+of these have different levels of support.
+
+The previous major version is stable for production and will receive patch updates as needed, but there
+will be no new features added. Patch releases are automatically deployed upon merge by GitHub
+Actions.
+
+The current major version is also stable and receives new feature and patch updates. Patch releases are
+automatically deployed upon merge by GitHub Actions, and minor releases are manually deployed at the
+end of each sprint.
+
+The next major version is typically an unstable environment and has major breaking changes. You are
+welcome to pull this version down for local development and experimentation, but we generally
+recommend against using it in production until the first stable version has been released.
 
 ## Developer Documentation
 
