@@ -54,6 +54,8 @@ const isInteractiveElement = (element: Element) => {
 export function useTooltip<T extends Element = Element>({
   type = 'label',
   titleText = '',
+  showDelay = 500,
+  hideDelay = 100,
 }: {
   /**
    * Determines the tooltip type for accessibility.
@@ -76,16 +78,29 @@ export function useTooltip<T extends Element = Element>({
    * The content of the `aria-label` if `type` is `label.
    */
   titleText?: string;
+  /**
+   * Amount of time (in ms) to delay before showing the tooltip
+   */
+  showDelay?: number;
+  /**
+   * Amount of time (in ms) to delay before hiding the tooltip
+   */
+  hideDelay?: number;
 } = {}) {
   const mouseDownRef = React.useRef(false); // use to prevent newly focused from making tooltip flash
   const popupModel = usePopupModel();
   const [anchorElement, setAnchorElement] = React.useState<T | null>(null);
   const [id] = React.useState(() => uuid());
+  const intentTimer = useIntentTimer(popupModel.events.hide, hideDelay);
+  const intentTimerShow = useIntentTimer(popupModel.events.show, showDelay);
 
-  const intentTimer = useIntentTimer(popupModel.events.hide, 100);
+  const onHide = () => {
+    intentTimer.start();
+    intentTimerShow.clear();
+  };
 
   const onOpen = () => {
-    popupModel.events.show();
+    intentTimerShow.start();
     intentTimer.clear();
   };
 
@@ -122,10 +137,10 @@ export function useTooltip<T extends Element = Element>({
       // This will replace the accessible name of the target element
       'aria-label': type === 'label' ? titleText : undefined,
       onMouseEnter: onOpenFromTarget,
-      onMouseLeave: intentTimer.start,
+      onMouseLeave: onHide,
       onMouseDown,
       onFocus,
-      onBlur: intentTimer.start,
+      onBlur: onHide,
     },
     /** Mix these properties into the `Popper` component */
     popperProps: {
@@ -138,7 +153,7 @@ export function useTooltip<T extends Element = Element>({
       id: type === 'describe' && visible ? id : undefined,
       role: 'tooltip',
       onMouseEnter: onOpen,
-      onMouseLeave: intentTimer.start,
+      onMouseLeave: onHide,
     },
   };
 }
