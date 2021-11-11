@@ -25,6 +25,7 @@ describe('useTooltip with type="label"', () => {
 });
 
 describe('useTooltip with type="describe"', () => {
+  jest.useFakeTimers();
   it('should add aria attributes to correlate the target and the tooltip', () => {
     const {getByText, getByRole} = render(<TooltipWithHook type="describe" />);
 
@@ -32,9 +33,11 @@ describe('useTooltip with type="describe"', () => {
     const tooltip = getByRole('tooltip');
 
     fireEvent.mouseOver(target); // assign the ID to the tooltip
+    jest.advanceTimersByTime(500); // advance the timer by the amount of delay time
 
     expect(tooltip).toHaveAttribute('id');
     const id = tooltip.getAttribute('id');
     expect(target).toHaveAttribute('aria-describedby', id);
   });
+  jest.clearAllTimers();
 });
