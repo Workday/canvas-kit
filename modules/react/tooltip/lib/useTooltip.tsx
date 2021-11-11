@@ -91,17 +91,17 @@ export function useTooltip<T extends Element = Element>({
   const popupModel = usePopupModel();
   const [anchorElement, setAnchorElement] = React.useState<T | null>(null);
   const [id] = React.useState(() => uuid());
-  const intentTimer = useIntentTimer(popupModel.events.hide, hideDelay);
+  const intentTimerHide = useIntentTimer(popupModel.events.hide, hideDelay);
   const intentTimerShow = useIntentTimer(popupModel.events.show, showDelay);
 
   const onHide = () => {
-    intentTimer.start();
+    intentTimerHide.start();
     intentTimerShow.clear();
   };
 
   const onOpen = () => {
     intentTimerShow.start();
-    intentTimer.clear();
+    intentTimerHide.clear();
   };
 
   const onOpenFromTarget = (event: React.SyntheticEvent) => {
