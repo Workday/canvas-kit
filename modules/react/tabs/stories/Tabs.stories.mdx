@@ -6,6 +6,7 @@ import {NamedKeys} from './examples/NamedKeys';
 import {RightToLeft} from './examples/RightToLeft';
 import {OverflowTabs} from './examples/OverflowTabs';
 import {DisabledTab} from './examples/DisabledTab';
+import {Icons} from './examples/Icons';
 import {SinglePanel} from './examples/SinglePanel';
 import {AlternativeTabStop} from './examples/AlternativeTabStop';
 import {HoistedModel} from './examples/HoistedModel';
@@ -67,19 +68,23 @@ trigger an event to change the active tab.
 
 <ExampleCodeBlock code={RightToLeft} />
 
-<<<<<<< Updated upstream
-### Disabled Tab
-=======
-#### Overflow Tabs
+### Overflow Tabs
 
 <ExampleCodeBlock code={OverflowTabs} />
 
-#### Disabled Tab
->>>>>>> Stashed changes
+### Disabled Tab
 
 Set the `disabled` prop of a `Tabs.Item` to `true` to disable it.
 
 <ExampleCodeBlock code={DisabledTab} />
+
+### Tab Icons
+
+Tabs can have icons. You must set `hasIcon` on the `Tabs.Item` and use the `Icon` and `Text`
+subcomponent. The `hasIcon` changes the `Tabs.Item` to change where overflow detection is from the
+`Tabs.Item` element to the `Tabs.Item.Text` element.
+
+<ExampleCodeBlock code={Icons} />
 
 ### Alternative Tab Stop
 
