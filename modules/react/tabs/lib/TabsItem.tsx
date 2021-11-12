@@ -84,7 +84,7 @@ export interface TabsItemProps extends ExtractProps<typeof Box, never> {
 }
 
 export const StyledTabItem = styled(Box.as('button'))<StyledType & {hasIcon?: boolean}>(
-  {
+  ({theme}) => ({
     ...type.levels.subtext.large,
     '& > *:not(style) ~ *:not(style)': {
       marginLeft: space.xxs,
@@ -106,9 +106,19 @@ export const StyledTabItem = styled(Box.as('button'))<StyledType & {hasIcon?: bo
 
     ...hideMouseFocus,
 
+    '.wd-icon-background ~ .wd-icon-accent, .wd-icon-background ~ .wd-icon-accent2': {
+      fill: iconColors.active,
+    },
+
     '&:hover, &:focus': {
       backgroundColor: colors.soap200,
       color: colors.blackPepper400,
+      '.wd-icon-fill, .wd-icon-accent, .wd-icon-accent2': {
+        fill: iconColors.hover,
+      },
+      '.wd-icon-background ~ .wd-icon-accent, .wd-icon-background ~ .wd-icon-accent2': {
+        fill: iconColors.active,
+      },
     },
 
     '&:focus': {
@@ -131,13 +141,16 @@ export const StyledTabItem = styled(Box.as('button'))<StyledType & {hasIcon?: bo
     },
 
     '&[aria-selected=true]': {
-      color: colors.blueberry400,
+      color: theme.canvas.palette.primary.main,
       cursor: 'default',
+      '.wd-icon-fill, .wd-icon-accent, .wd-icon-accent2': {
+        fill: theme.canvas.palette.primary.main,
+      },
       '&:after': {
         position: 'absolute',
         height: space.xxxs,
         borderRadius: `${borderRadius.m} ${borderRadius.m} 0px 0px`,
-        backgroundColor: colors.blueberry400,
+        backgroundColor: theme.canvas.palette.primary.main,
         bottom: 0,
         content: `''`,
         left: 0,
@@ -146,10 +159,10 @@ export const StyledTabItem = styled(Box.as('button'))<StyledType & {hasIcon?: bo
       },
       '&:hover, &:focus': {
         backgroundColor: `transparent`,
-        color: colors.blueberry400,
+        color: theme.canvas.palette.primary.main,
       },
     },
-  },
+  }),
   ({hasIcon}) => {
     if (hasIcon) {
       return {

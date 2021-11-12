@@ -52,7 +52,7 @@ export const TabStates = withSnapshotsEnabled(() => {
             props.hasIcon ? (
               <Tabs.Item {...props}>
                 <Tabs.Item.Icon icon={setupIcon} />
-                <Tabs.Item.Text>Icon Tab</Tabs.Item.Text>
+                <Tabs.Item.Text>Icon</Tabs.Item.Text>
               </Tabs.Item>
             ) : (
               <Tabs.Item {...props}>Tab</Tabs.Item>

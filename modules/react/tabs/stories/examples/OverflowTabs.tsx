@@ -23,7 +23,7 @@ export const OverflowTabs = () => {
           <Tabs.Item.Text>Second Tab Tab Tab Tab Tab Tab Tab Tab Tab Tab</Tabs.Item.Text>
         </>
       ),
-      disabled: true,
+      disabled: false,
       contents: 'Contents of Second Tab',
     },
     {
