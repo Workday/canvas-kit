@@ -40,6 +40,7 @@ export const MenuList = createComponent('div')({
         marginY="zero"
         marginX="xxs"
         spacing="zero"
+        overflowY="auto"
         flexDirection={localModel.state.orientation === 'vertical' ? 'column' : 'row'}
         {...props}
       >

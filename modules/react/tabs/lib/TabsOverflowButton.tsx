@@ -43,7 +43,7 @@ export const TabsOverflowButton = createComponent('button')({
   },
 });
 
-const useTabsOverflowButton = composeHooks(
+export const useTabsOverflowButton = composeHooks(
   createHook(
     (model: TabsModel, _?: React.Ref<HTMLButtonElement>, elemProps: {name?: string} = {}) => {
       return {

@@ -48,6 +48,8 @@ const StyledCard = styled(Card)<
   type.levels.subtext.large,
   {
     position: 'relative',
+    display: 'flex',
+    flexDirection: 'column',
   },
   ({transformOrigin}) => {
     if (transformOrigin == null) {

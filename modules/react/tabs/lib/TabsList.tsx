@@ -27,7 +27,7 @@ export interface TabListProps<T = unknown> extends Partial<ExtractProps<typeof S
    * model as the container component which uses React context. Only use this for advanced use-cases.
    */
   model?: TabsModel<T>;
-  overflowButton?: () => React.ReactNode;
+  overflowButton?: React.ReactNode;
 }
 
 function useRenderItems<T>(
@@ -48,7 +48,7 @@ export const TabsList = createComponent('div')({
   displayName: 'Tabs.List',
   Component: ({children, model, overflowButton, ...elemProps}: TabListProps, ref, Element) => {
     const localModel = useModelContext(TabsModelContext, model);
-    const props = useTabList(localModel, elemProps, ref);
+    const props = useTabsList(localModel, elemProps, ref);
 
     return (
       <Stack
@@ -60,13 +60,13 @@ export const TabsList = createComponent('div')({
         {...props}
       >
         {useRenderItems(localModel, children)}
-        {overflowButton?.()}
+        {overflowButton}
       </Stack>
     );
   },
 });
 
-export const useTabList = composeHooks(
+export const useTabsList = composeHooks(
   createHook((_: TabsModel) => {
     return {role: 'tablist'};
   }),
