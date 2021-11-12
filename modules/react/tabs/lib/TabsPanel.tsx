@@ -48,7 +48,11 @@ export const TabsPanel = createComponent('div')({
 
     const props = useTabsPanel(localModel, elemProps, ref);
 
-    return <StyledTabsPanel {...props}>{children}</StyledTabsPanel>;
+    return (
+      <StyledTabsPanel as={Element} {...props}>
+        {children}
+      </StyledTabsPanel>
+    );
   },
 });
 
