@@ -8,6 +8,7 @@ import {
   createHook,
   ExtractProps,
   hideMouseFocus,
+  StyledType,
 } from '@workday/canvas-kit-react/common';
 import {Box} from '@workday/canvas-kit-labs-react/common';
 
@@ -39,7 +40,7 @@ export interface TabPanelProps<T = unknown> extends ExtractProps<typeof Box, nev
   model?: TabsModel<T>;
 }
 
-const StyledTabsPanel = styled(Box)(hideMouseFocus);
+const StyledTabsPanel = styled(Box)<StyledType>(hideMouseFocus);
 
 export const TabsPanel = createComponent('div')({
   displayName: 'Tabs.Panel',
