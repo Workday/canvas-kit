@@ -5,10 +5,9 @@ import {
   useEventMap,
   useUniqueId,
 } from '@workday/canvas-kit-react/common';
-
-import {Orientation} from './cursor/useCursorModel';
-import {defaultGetId, ListEvents, ListState, useListModel} from './list/useListModel';
-import {MenuModel, MenuModelConfig, useMenuModel} from './menu/useMenuModel';
+import {Orientation} from './cursor';
+import {defaultGetId, ListEvents, ListState, useListModel} from './list';
+import {MenuModel, MenuModelConfig, useMenuModel} from './menu';
 import {
   overflowEventMap,
   OverflowEvents,

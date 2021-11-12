@@ -1,6 +1,7 @@
 import React from 'react';
 
 import {createHook, useMountLayout, useLocalRef} from '@workday/canvas-kit-react/common';
+
 import {OverflowModel} from './useOverflowModel';
 
 // use a hidden style instead of `hidden` attribute for measurement purposes. `hidden` elements have no dimensions
@@ -34,6 +35,7 @@ export const useOverflowTarget = createHook(
     return {
       ref: elementRef,
       'aria-hidden': isHidden,
+      tabIndex: -1,
       style: isHidden ? hiddenStyle : {},
     };
   }

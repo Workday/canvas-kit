@@ -7,7 +7,6 @@ import {
   useModelContext,
 } from '@workday/canvas-kit-react/common';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
-
 import {usePopupTarget} from '@workday/canvas-kit-react/popup';
 
 import {MenuModel} from './useMenuModel';

@@ -4,7 +4,7 @@ import {createHook, useForkRef, useResizeObserver} from '@workday/canvas-kit-rea
 
 import {OverflowModel} from './useOverflowModel';
 
-export const useMeasureOverflowContainer = createHook(
+export const useOverflowMeasureContainer = createHook(
   (model: OverflowModel, ref?: React.Ref<HTMLElement>) => {
     const localRef = React.useRef(null);
     const {ref: resizeRef} = useResizeObserver({

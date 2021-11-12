@@ -10,21 +10,20 @@ import {
   useModelContext,
   createHook,
   composeHooks,
-  useMountLayout,
-  useLocalRef,
   ExtractProps,
   ellipsisStyles,
   EllipsisText,
 } from '@workday/canvas-kit-react/common';
-
-import {TabsModelContext} from './Tabs';
-import {TabsModel} from './useTabsModel';
+import {Box} from '@workday/canvas-kit-labs-react/common';
+import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
+import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {useListRegisterItem} from './list';
 import {useRovingFocus} from './cursor';
 import {isSelected, useSelectionItem} from './selection';
-import {OverflowModel} from './overflow';
-import {OverflowTooltip, SystemIcon} from '../..';
-import {Box} from '@workday/canvas-kit-labs-react/common';
+import {useOverflowMeasureItem} from './overflow';
+
+import {TabsModelContext} from './Tabs';
+import {TabsModel} from './useTabsModel';
 export interface TabsItemProps extends ExtractProps<typeof Box, never> {
   /**
    * Optionally pass index to tab item. This should be done if `Tabs.Item` components were created
@@ -174,43 +173,6 @@ export const StyledTabItem = styled(Box.as('button'))<StyledType & {hasIcon?: bo
   }
 );
 
-const hiddenStyles = {
-  position: 'absolute',
-  left: -99999,
-} as const;
-
-const useMeasureOverflowItem = createHook(
-  (model: OverflowModel, ref?: React.Ref<HTMLElement>, elemProps: {name?: string} = {}) => {
-    const {elementRef, localRef} = useLocalRef(ref);
-    const name = elemProps.name || '';
-
-    useMountLayout(() => {
-      if (localRef.current) {
-        const styles = getComputedStyle(localRef.current);
-        model.events.addItemWidth({
-          id: name,
-          width:
-            localRef.current.offsetWidth +
-            parseFloat(styles.marginLeft) +
-            parseFloat(styles.marginRight),
-        });
-      }
-
-      return () => {
-        model.events.removeItemWidth({id: name});
-      };
-    });
-
-    const hidden = model.state.hiddenKeys.includes(name);
-
-    return {
-      ref: elementRef,
-      'aria-hidden': hidden || undefined,
-      style: hidden ? hiddenStyles : {},
-    };
-  }
-);
-
 export const TabsItem = createComponent('button')({
   displayName: 'Tabs.Item',
   Component: ({model, children, ...elemProps}: TabsItemProps, ref, Element) => {
@@ -249,7 +211,7 @@ export const useTabsItem = composeHooks(
     }
   ),
   useSelectionItem,
-  useMeasureOverflowItem,
+  useOverflowMeasureItem,
   useRovingFocus,
   useListRegisterItem
 );

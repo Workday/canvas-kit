@@ -1,6 +1,5 @@
 import React from 'react';
 import {createEventMap, ToModelConfig, useEventMap} from '@workday/canvas-kit-react/common';
-
 import {
   CursorState,
   CursorEvents,

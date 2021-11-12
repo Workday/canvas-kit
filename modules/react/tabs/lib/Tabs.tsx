@@ -1,6 +1,7 @@
 import React from 'react';
 
 import {createComponent, useDefaultModel} from '@workday/canvas-kit-react/common';
+import {Menu} from './menu';
 
 import {TabsItem} from './TabsItem';
 import {TabsList} from './TabsList';
@@ -8,7 +9,6 @@ import {TabsPanel} from './TabsPanel';
 import {useTabsModel, TabsModel, TabsModelConfig} from './useTabsModel';
 import {TabsOverflowButton} from './TabsOverflowButton';
 import {TabsMenuPopper} from './TabsMenuPopper';
-import {Menu} from './menu';
 import {TabsPanels} from './TabsPanels';
 
 export const TabsModelContext = React.createContext<TabsModel>({} as any);

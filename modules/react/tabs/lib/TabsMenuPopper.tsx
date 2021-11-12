@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import {createComponent, ExtractProps, useModelContext} from '@workday/canvas-kit-react/common';
-
 import {usePopupPopper, Popper} from '@workday/canvas-kit-react/popup';
 
 import {TabsModelContext} from './Tabs';

@@ -1,6 +1,6 @@
 import React from 'react';
-import {createEventMap, ToModelConfig, useEventMap} from '@workday/canvas-kit-react/common';
 
+import {createEventMap, ToModelConfig, useEventMap} from '@workday/canvas-kit-react/common';
 import {
   SelectionState,
   SelectionEvents,

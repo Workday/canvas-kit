@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from '@emotion/styled';
 
 import {
   createComponent,
@@ -8,11 +9,10 @@ import {
   ExtractProps,
   hideMouseFocus,
 } from '@workday/canvas-kit-react/common';
+import {Box} from '@workday/canvas-kit-labs-react/common';
 
 import {TabsModelContext} from './Tabs';
 import {TabsModel} from './useTabsModel';
-import {Box} from '@workday/canvas-kit-labs-react/common';
-import styled from '@emotion/styled';
 
 export interface TabPanelProps<T = unknown> extends ExtractProps<typeof Box, never> {
   /**

@@ -9,12 +9,12 @@ import {
   subModelHook,
 } from '@workday/canvas-kit-react/common';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
+import {useOverflowTarget} from './overflow';
+import {useMenuTarget} from './menu';
 
 import {TabsModelContext} from './Tabs';
 import {TabsModel} from './useTabsModel';
 import {StyledTabItem} from './TabsItem';
-import {useOverflowTarget} from './overflow';
-import {useMenuTarget} from './menu/MenuTarget';
 
 export interface OverflowButtonProps {
   /**

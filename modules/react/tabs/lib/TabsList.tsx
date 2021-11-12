@@ -9,12 +9,12 @@ import {
   useModelContext,
 } from '@workday/canvas-kit-react/common';
 import {Stack} from '@workday/canvas-kit-labs-react/layout';
+import {useOverflowMeasureContainer} from './overflow';
+import {ListModel} from './list';
+import {useResetCursorOnBlur} from './selection';
 
 import {TabsModelContext} from './Tabs';
-import {useResetCursorOnBlur} from './selection';
 import {TabsModel} from './useTabsModel';
-import {useMeasureOverflowContainer} from './overflow/useMeasureContainer';
-import {ListModel} from './list';
 
 // Use `Partial` here to make `spacing` optional
 export interface TabListProps<T = unknown> extends Partial<ExtractProps<typeof Stack, never>> {
@@ -70,6 +70,6 @@ export const useTabsList = composeHooks(
   createHook((_: TabsModel) => {
     return {role: 'tablist'};
   }),
-  useMeasureOverflowContainer,
+  useOverflowMeasureContainer,
   useResetCursorOnBlur
 );

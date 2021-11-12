@@ -13,8 +13,8 @@ import {
   ExtractProps,
   createHook,
 } from '@workday/canvas-kit-react/common';
-
 import {getTransformFromPlacement} from '@workday/canvas-kit-react/popup';
+
 import {MenuModel} from './useMenuModel';
 import {MenuModelContext} from './Menu';
 
