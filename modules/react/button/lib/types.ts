@@ -20,3 +20,13 @@ export interface ButtonColors {
   };
   disabled: ButtonStateColors;
 }
+
+/**
+ * There are four button sizes: `extraSmall`, `small`, `medium`, and `large`.
+ * If no size is provided, it will default to `medium`.
+ *
+ * @default 'medium'
+ */
+export type ButtonSizes = 'extraSmall' | 'small' | 'medium' | 'large';
+
+export type IconPositions = 'left' | 'right';

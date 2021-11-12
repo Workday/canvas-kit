@@ -4,10 +4,10 @@ import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {HStack} from '@workday/canvas-kit-labs-react/layout';
 import {plusIcon} from '@workday/canvas-system-icons-web';
 
-export const Primary = () => (
-  <HStack spacing="s" padding="s">
-    <PrimaryButton>Primary</PrimaryButton>
-    <PrimaryButton icon={plusIcon} iconPosition="right">
+export const PrimaryInverse = () => (
+  <HStack spacing="s" backgroundColor="blueberry400" padding="s">
+    <PrimaryButton variant="inverse">Primary</PrimaryButton>
+    <PrimaryButton icon={plusIcon} iconPosition="right" variant="inverse">
       Primary
     </PrimaryButton>
   </HStack>
