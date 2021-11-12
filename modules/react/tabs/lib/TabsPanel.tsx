@@ -42,23 +42,9 @@ export interface TabPanelProps<T = unknown> extends ExtractProps<typeof Box, nev
 
 const StyledTabsPanel = styled(Box)<StyledType>(hideMouseFocus);
 
-export const TabsPanel = createComponent('div')({
-  displayName: 'Tabs.Panel',
-  Component: ({children, name = '', model, ...elemProps}: TabPanelProps, ref, Element) => {
-    const localModel = useModelContext(TabsModelContext, model);
-
-    const props = useTabsPanel(localModel, elemProps, ref);
-
-    return (
-      <StyledTabsPanel as={Element} {...props}>
-        {children}
-      </StyledTabsPanel>
-    );
-  },
-});
-
 export const useTabsPanel = createHook(
   ({state, events}: TabsModel, _?: React.Ref<HTMLElement>, elemProps: {name?: string} = {}) => {
+    const name = elemProps.name;
     const [tabName, setTabName] = React.useState(elemProps.name || '');
 
     useMountLayout(() => {
@@ -81,3 +67,18 @@ export const useTabsPanel = createHook(
     };
   }
 );
+
+export const TabsPanel = createComponent('div')({
+  displayName: 'Tabs.Panel',
+  Component: ({children, model, ...elemProps}: TabPanelProps, ref, Element) => {
+    const localModel = useModelContext(TabsModelContext, model);
+
+    const props = useTabsPanel(localModel, elemProps, ref);
+
+    return (
+      <StyledTabsPanel as={Element} {...props}>
+        {children}
+      </StyledTabsPanel>
+    );
+  },
+});
