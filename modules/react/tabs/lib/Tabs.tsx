@@ -9,10 +9,12 @@ import {useTabsModel, TabsModel, TabsModelConfig} from './useTabsModel';
 import {TabsOverflowButton} from './TabsOverflowButton';
 import {TabsMenuPopper} from './TabsMenuPopper';
 import {Menu} from './menu';
+import {TabsPanels} from './TabsPanels';
 
 export const TabsModelContext = React.createContext<TabsModel>({} as any);
 
-export interface TabsProps<T> extends TabsModelConfig<T> {
+// use `T = any` here because there's no way to pass generics to a compound component...
+export interface TabsProps<T = any> extends TabsModelConfig<T> {
   /**
    * The contents of the Tabs. Can be `Tabs` children or any valid elements.
    */
@@ -27,7 +29,7 @@ export interface TabsProps<T> extends TabsModelConfig<T> {
 
 export const Tabs = createComponent()({
   displayName: 'Tabs',
-  Component: ({children, model, ...config}: TabsProps<any>) => {
+  Component: ({children, model, ...config}: TabsProps) => {
     const value = useDefaultModel(model, config, useTabsModel);
 
     return (
@@ -40,6 +42,7 @@ export const Tabs = createComponent()({
     List: TabsList,
     Item: TabsItem,
     Panel: TabsPanel,
+    Panels: TabsPanels,
     OverflowButton: TabsOverflowButton,
     MenuPopper: TabsMenuPopper,
     /**

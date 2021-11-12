@@ -1,5 +1,5 @@
 import React from 'react';
-import {useIsRTL, useMount, createHook} from '@workday/canvas-kit-react/common';
+import {useIsRTL, createHook} from '@workday/canvas-kit-react/common';
 
 import {CursorModel, useCursorNavigation} from './useCursorModel';
 

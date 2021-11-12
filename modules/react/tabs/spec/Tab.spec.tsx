@@ -22,7 +22,6 @@ describe('Tab', () => {
         <Tabs.Item>First Tab</Tabs.Item>
       </Tabs>
     );
-    screen.debug(); //?
     expect(screen.getByRole('tab')).toHaveTextContent('First Tab');
   });
 });

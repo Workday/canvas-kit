@@ -11,9 +11,9 @@ import {
 import {Stack} from '@workday/canvas-kit-labs-react/layout';
 
 import {TabsModelContext} from './Tabs';
-import {useResetCursorOnBlur} from './hooks';
+import {useResetCursorOnBlur} from './selection';
 import {TabsModel} from './useTabsModel';
-import {useMeasureOverflowContainer} from './overflow/hooks/useMeasureContainer';
+import {useMeasureOverflowContainer} from './overflow/useMeasureContainer';
 import {ListModel} from './list';
 
 // Use `Partial` here to make `spacing` optional
@@ -30,24 +30,11 @@ export interface TabListProps<T = unknown> extends Partial<ExtractProps<typeof S
   overflowButton?: () => React.ReactNode;
 }
 
-export const useTabList = composeHooks(
-  createHook((model: TabsModel) => {
-    return {role: 'tablist'};
-  }),
-  useMeasureOverflowContainer,
-  useResetCursorOnBlur
-);
-
 function useRenderItems<T>(
   model: ListModel<T>,
   children: ((item: T) => React.ReactNode) | React.ReactNode
 ) {
   const items = React.useMemo(() => {
-    console.log(
-      'calculating items',
-      typeof children === 'function' ? model.state.items.map(item => children(item)) : null,
-      model.state.items
-    );
     return typeof children === 'function' ? model.state.items.map(item => children(item)) : null;
     // If we added `children` as a dependency, this memo would be useless. If the user wants the
     // item to rerender, the item and items array needs to be updated.
@@ -78,3 +65,11 @@ export const TabsList = createComponent('div')({
     );
   },
 });
+
+export const useTabList = composeHooks(
+  createHook((_: TabsModel) => {
+    return {role: 'tablist'};
+  }),
+  useMeasureOverflowContainer,
+  useResetCursorOnBlur
+);

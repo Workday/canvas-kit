@@ -66,10 +66,6 @@ const StyledCard = styled(Card)<
   }
 );
 
-const useMenuCard = createHook((_: MenuModel) => {
-  return {};
-});
-
 export const MenuCard = createComponent('div')({
   displayName: 'Menu.Card',
   Component: ({children, model, padding = 'zero', ...elemProps}: MenuCardProps, ref, Element) => {
@@ -91,4 +87,8 @@ export const MenuCard = createComponent('div')({
       </StyledCard>
     );
   },
+});
+
+export const useMenuCard = createHook((_: MenuModel) => {
+  return {};
 });

@@ -1,13 +1,13 @@
 import React from 'react';
 import {createHook} from '@workday/canvas-kit-react/common';
 
-import {orientationKeyMap} from './cursor/hooks';
-import {TabsModel} from './useTabsModel';
+import {orientationKeyMap} from '../cursor';
+import {SelectionModel} from './useSelectionModel';
 
 /**
- * Reset the cursor to the active tab when the tab list looses focus
+ * Reset the cursor to the selected item when the list looses focus
  */
-export const useResetCursorOnBlur = createHook(({state, events}: TabsModel) => {
+export const useResetCursorOnBlur = createHook(({state, events}: SelectionModel) => {
   const programmaticFocusRef = React.useRef(false);
   return {
     onKeyDown(event: React.KeyboardEvent) {

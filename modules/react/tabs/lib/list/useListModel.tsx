@@ -107,7 +107,6 @@ export const useListModel = <T extends unknown>(config: ListModelConfig<T> = {})
   const id = useUniqueId(config.id);
   const indexRef = React.useRef(0);
   const [items, setItems] = React.useState(config.items || []);
-  console.log('calc items', config.items, items);
   const getId = config.getId || defaultGetId;
 
   const state = {

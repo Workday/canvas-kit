@@ -12,7 +12,7 @@ import {
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
 
-import {useRegisterItem} from '../list';
+import {useListRegisterItem} from '../list';
 import {useRovingFocus} from '../cursor';
 import {MenuModel} from './useMenuModel';
 import {MenuModelContext} from './Menu';
@@ -145,17 +145,6 @@ const StyledItem = styled(Box.as('li'))<StyledType & {hasIcon?: boolean}>(
   }
 );
 
-const useMenuItem = composeHooks(
-  createHook((model: MenuModel, _?: React.Ref<any>, elemProps: {name?: string} = {}) => {
-    return {
-      role: 'menuitem',
-    };
-  }),
-  useSelectionItem,
-  useRovingFocus,
-  useRegisterItem
-);
-
 export const MenuItem = createComponent('button')({
   displayName: 'Menu.Item',
   Component: ({model, children, ...elemProps}: MenuItemProps, ref, Element) => {
@@ -176,3 +165,14 @@ export const MenuItem = createComponent('button')({
     Text: styled('span')({}),
   },
 });
+
+export const useMenuItem = composeHooks(
+  createHook((model: MenuModel, _?: React.Ref<any>, elemProps: {name?: string} = {}) => {
+    return {
+      role: 'menuitem',
+    };
+  }),
+  useSelectionItem,
+  useRovingFocus,
+  useListRegisterItem
+);

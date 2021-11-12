@@ -20,7 +20,7 @@ export const MenuPopper = createComponent('div')({
   Component: ({children, model, ...elemProps}: MenuPopperProps, ref) => {
     const localModel = useModelContext(MenuModelContext, model);
 
-    const props = usePopupPopper(localModel, elemProps, ref);
+    const props = useMenuPopper(localModel, elemProps, ref);
     return (
       <Popper placement="bottom-start" {...props}>
         {children}
@@ -28,3 +28,5 @@ export const MenuPopper = createComponent('div')({
     );
   },
 });
+
+export const useMenuPopper = usePopupPopper;

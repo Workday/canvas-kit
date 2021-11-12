@@ -20,7 +20,9 @@ export const TabsMenuPopper = createComponent('div')({
   Component: ({children, model, ...elemProps}: MenuPopperProps, ref) => {
     const localModel = useModelContext(TabsModelContext, model);
 
-    const props = usePopupPopper(localModel.menu, elemProps, ref);
+    const props = useTabsMenuPopper(localModel.menu, elemProps, ref);
     return <Popper {...props}>{children}</Popper>;
   },
 });
+
+export const useTabsMenuPopper = usePopupPopper;

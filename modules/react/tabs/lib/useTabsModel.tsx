@@ -126,6 +126,7 @@ export const useTabsModel = <T extends unknown>(config: TabsModelConfig<T> = {})
 
   const overflowItems = React.useMemo(
     () => (items ? items.filter(item => state.hiddenKeys.includes(getId(item))) : undefined),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [state.hiddenKeys, items]
   );
 

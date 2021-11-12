@@ -8,7 +8,7 @@ import {ListModel} from './useListModel';
  * Registers an item with a list. It will return elemProps with a `name` which can be used by other
  * hooks to identify the item in the list.
  */
-export const useRegisterItem = createHook(
+export const useListRegisterItem = createHook(
   (
     {state, events, getId}: ListModel,
     _?: React.Ref<HTMLElement>,
@@ -18,7 +18,6 @@ export const useRegisterItem = createHook(
     const firstRender = React.useRef(true);
 
     React.useLayoutEffect(() => {
-      console.log('calc', elemProps.index);
       if (elemProps.index !== undefined && !firstRender.current) {
         events.updateItemPosition({id: localId, index: elemProps.index});
       }
@@ -33,7 +32,6 @@ export const useRegisterItem = createHook(
       if (state.items.find(item => getId(item) === elemProps.name)) {
         return;
       }
-      console.log('calc', 'register item');
       events.registerItem({
         item: {id: itemId, disabled: elemProps.disabled, data: {}},
         index: elemProps.index,

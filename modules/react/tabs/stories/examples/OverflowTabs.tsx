@@ -1,5 +1,4 @@
 import React from 'react';
-import {space} from '@workday/canvas-kit-react/tokens';
 
 import {Tabs, useTabsModel} from '@workday/canvas-kit-react/tabs';
 import {setupIcon} from '@workday/canvas-system-icons-web';
@@ -20,7 +19,7 @@ export const OverflowTabs = () => {
       hasIcon: true,
       text: (
         <>
-          <Tabs.Item.Icon icon={setupIcon} />{' '}
+          <Tabs.Item.Icon icon={setupIcon} />
           <Tabs.Item.Text>Second Tab Tab Tab Tab Tab Tab Tab Tab Tab Tab</Tabs.Item.Text>
         </>
       ),
@@ -70,23 +69,13 @@ export const OverflowTabs = () => {
           </Tabs.Menu.List>
         </Tabs.Menu.Card>
       </Tabs.Menu.Popper>
-      <div style={{marginTop: space.m}}>
-        <Tabs.Panel name="first">Contents of First Tab</Tabs.Panel>
-        <Tabs.Panel name="second">Contents of Second Tab</Tabs.Panel>
-        <Tabs.Panel name="third">Contents of Third Tab</Tabs.Panel>
-        <Tabs.Panel name="fourth">Contents of Fourth Tab</Tabs.Panel>
-        <Tabs.Panel name="fifth">Contents of Fifth Tab</Tabs.Panel>
-        <Tabs.Panel name="sixth">Contents of Sixth Tab</Tabs.Panel>
-        <Tabs.Panel name="seventh">Contents of Seventh Tab</Tabs.Panel>
-      </div>
+      <Tabs.Panels>
+        {(item: MyTabItem) => (
+          <Tabs.Panel marginTop="m" name={item.id}>
+            {item.contents}
+          </Tabs.Panel>
+        )}
+      </Tabs.Panels>
     </Tabs>
   );
 };
-
-// <Tabs.Item>Tab Name</Tabs.Item>
-
-// <Tabs.Item hasIcon>
-//   <SystemIcon />
-//   <EllipsisText>FooBar</EllipsisText>
-//   <SystemIcon />
-// </Tabs.Item>

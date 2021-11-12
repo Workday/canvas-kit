@@ -19,7 +19,7 @@ import {
 
 import {TabsModelContext} from './Tabs';
 import {TabsModel} from './useTabsModel';
-import {useRegisterItem} from './list';
+import {useListRegisterItem} from './list';
 import {useRovingFocus} from './cursor';
 import {isSelected, useSelectionItem} from './selection';
 import {OverflowModel} from './overflow';
@@ -151,7 +151,6 @@ export const StyledTabItem = styled(Box.as('button'))<StyledType & {hasIcon?: bo
     },
   },
   ({hasIcon}) => {
-    console.log('hasIcon', hasIcon);
     if (hasIcon) {
       return {
         display: 'flex',
@@ -199,6 +198,27 @@ const useMeasureOverflowItem = createHook(
   }
 );
 
+export const TabsItem = createComponent('button')({
+  displayName: 'Tabs.Item',
+  Component: ({model, children, ...elemProps}: TabsItemProps, ref, Element) => {
+    const localModel = useModelContext(TabsModelContext, model);
+
+    const props = useTabsItem(localModel, elemProps, ref);
+
+    return (
+      <OverflowTooltip>
+        <StyledTabItem as={Element} {...props}>
+          {children}
+        </StyledTabItem>
+      </OverflowTooltip>
+    );
+  },
+  subComponents: {
+    Icon: SystemIcon,
+    Text: EllipsisText,
+  },
+});
+
 export const useTabsItem = composeHooks(
   createHook(
     (model: TabsModel, _?: React.Ref<HTMLButtonElement>, elemProps: {name?: string} = {}) => {
@@ -218,27 +238,5 @@ export const useTabsItem = composeHooks(
   useSelectionItem,
   useMeasureOverflowItem,
   useRovingFocus,
-  useRegisterItem
+  useListRegisterItem
 );
-
-export const TabsItem = createComponent('button')({
-  displayName: 'Tabs.Item',
-  Component: ({model, children, ...elemProps}: TabsItemProps, ref, Element) => {
-    const localModel = useModelContext(TabsModelContext, model);
-
-    const props = useTabsItem(localModel, elemProps, ref);
-    console.log('children', children);
-
-    return (
-      <OverflowTooltip>
-        <StyledTabItem as={Element} {...props}>
-          {children}
-        </StyledTabItem>
-      </OverflowTooltip>
-    );
-  },
-  subComponents: {
-    Icon: SystemIcon,
-    Text: EllipsisText,
-  },
-});

@@ -7,10 +7,10 @@ import {
   createHook,
   ExtractProps,
 } from '@workday/canvas-kit-react/common';
+import {Stack} from '@workday/canvas-kit-labs-react/layout';
 
 import {MenuModel} from './useMenuModel';
 import {MenuModelContext} from './Menu';
-import {Stack} from '@workday/canvas-kit-labs-react/layout';
 
 export interface MenuListProps<T = unknown> extends Partial<ExtractProps<typeof Stack, never>> {
   /**
@@ -23,13 +23,6 @@ export interface MenuListProps<T = unknown> extends Partial<ExtractProps<typeof 
    */
   model?: MenuModel<T>;
 }
-
-const useMenuList = createHook((model: MenuModel) => {
-  return {
-    role: 'menu',
-    'aria-labelledby': model.state.id,
-  };
-});
 
 export const MenuList = createComponent('div')({
   displayName: 'Menu.List',
@@ -56,4 +49,11 @@ export const MenuList = createComponent('div')({
       </Stack>
     );
   },
+});
+
+export const useMenuList = createHook((model: MenuModel) => {
+  return {
+    role: 'menu',
+    'aria-labelledby': model.state.id,
+  };
 });

@@ -301,6 +301,16 @@ export const subModelHook = <M extends Model<any, any>, SM extends Model<any, an
   };
 };
 
+// Typescript function parameters are contravariant while return types are covariant. This is a
+// problem when someone hands us a model that correctly extends `Model<any, any>`, but adds extra
+// properties to the model. So `M extends Model<any, any>`. But the `BehaviorHook` is the return
+// type which will reverse the direction which is no longer true: `Model<any, any> extends M`. In
+// order to avoid this issue, we use the `bivarianceHack` found in ReactJS type definitions. This
+// hack forces Typescript to treat `M` as a bivariant allowing extension to go either direction.
+// Normally this would be less type safe, but we're using a generic `M` as a placeholder so there
+// isn't a real issue. Not 100% this is a bug, but the "hack" is a bit messy.
+// https://www.stephanboyer.com/post/132/what-are-covariance-and-contravariance
+// https://stackoverflow.com/questions/52667959/what-is-the-purpose-of-bivariancehack-in-typescript-types/52668133
 export type BehaviorHook<M extends Model<any, any>, O extends {}> = {
   bivarianceHack<P extends {}, R>(
     model: M,
@@ -308,7 +318,6 @@ export type BehaviorHook<M extends Model<any, any>, O extends {}> = {
     ref?: React.Ref<R>
   ): O & P & (R extends HTMLOrSVGElement ? {ref: React.Ref<R>} : {});
 }['bivarianceHack'];
-// };
 
 function setRef<T>(ref: React.Ref<T> | undefined, value: T): void {
   if (ref) {
@@ -428,16 +437,6 @@ export function useModelContext<T>(context: React.Context<T>, model?: T): T {
  *   return <div id="foo" {...props}>{children}</div>
  * })
  */
-// Typescript function parameters are contravariant while return types are covariant. This is a
-// problem when someone hands us a model that correctly extends `Model<any, any>`, but adds extra
-// properties to the model. So `M extends Model<any, any>`. But the `BehaviorHook` is the return
-// type which will reverse the direction which is no longer true: `Model<any, any> extends M`. In
-// order to avoid this issue, we use the `bivarianceHack` found in ReactJS type definitions. This
-// hack forces Typescript to treat `M` as a bivariant allowing extension to go either direction.
-// Normally this would be less type safe, but we're using a generic `M` as a placeholder so there
-// isn't a real issue. Not 100% this is a bug, but the "hack" is a bit messy.
-// https://www.stephanboyer.com/post/132/what-are-covariance-and-contravariance
-// https://stackoverflow.com/questions/52667959/what-is-the-purpose-of-bivariancehack-in-typescript-types/52668133
 export function composeHooks<M extends Model<any, any>, O1 extends {}, O2 extends {}>(
   hook1: BehaviorHook<M, O1>,
   hook2: BehaviorHook<M, O2>

@@ -9,7 +9,7 @@ import {
   SelectionModelConfig,
   selectionEventMap,
   SelectionModel,
-} from '../../selection';
+} from '../selection';
 
 export type OverflowState<T = unknown> = SelectionState<T> & {
   containerWidth: number;
@@ -116,7 +116,6 @@ export const useOverflowModel = <T extends unknown>(
   // Cursors skip over disabled keys, but know nothing of hidden keys. We'll go ahead and disable
   // hidden keys as well
   const nonInteractiveKeys = (config.nonInteractiveKeys || []).concat(hiddenKeys);
-  console.log('useOverflowModel nonInteractiveKeys', nonInteractiveKeys);
 
   const model = useSelectionModel({...(config as SelectionModelConfig<T>), nonInteractiveKeys});
 
@@ -127,19 +126,6 @@ export const useOverflowModel = <T extends unknown>(
     containerWidth,
     overflowTargetWidth,
   };
-
-  // console.log(
-  //   'widths',
-  //   state.itemWidthCache,
-  //   state.containerWidth,
-  //   state.overflowTargetWidth,
-  //   Object.keys(state.itemWidthCache).filter(key => !hiddenKeys.includes(key)),
-
-  //   Object.values(state.itemWidthCache).reduce(
-  //     (acc, width) => acc + width,
-  //     state.overflowTargetWidth
-  //   )
-  // );
 
   const events = useEventMap(overflowEventMap, state, config, {
     ...model.events,

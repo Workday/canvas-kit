@@ -22,12 +22,22 @@ export interface MenuTargetProps<T = unknown> {
   children?: React.ReactNode;
 }
 
+export const MenuTarget = createComponent(SecondaryButton)({
+  displayName: 'Menu.Target',
+  Component: ({children, model, ...elemProps}: MenuTargetProps, ref, Element) => {
+    const localModel = useModelContext(MenuModelContext, model);
+
+    const props = useMenuTarget(localModel, elemProps, ref);
+
+    return <Element {...props}>{children}</Element>;
+  },
+});
+
 export const useMenuTarget = composeHooks(
   createHook((model: MenuModel) => {
     return {
       id: model.state.id,
       onKeyDown(event: React.KeyboardEvent) {
-        console.log('down', event.key);
         // eslint-disable-next-line default-case
         switch (event.key) {
           case 'Down':
@@ -41,14 +51,3 @@ export const useMenuTarget = composeHooks(
   }),
   usePopupTarget
 );
-
-export const MenuTarget = createComponent(SecondaryButton)({
-  displayName: 'Menu.Target',
-  Component: ({children, model, ...elemProps}: MenuTargetProps, ref, Element) => {
-    const localModel = useModelContext(MenuModelContext, model);
-
-    const props = useMenuTarget(localModel, elemProps, ref);
-
-    return <Element {...props}>{children}</Element>;
-  },
-});

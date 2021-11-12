@@ -1,18 +1,20 @@
-/** @jsx jsx */
 import React from 'react';
-import {jsx, css} from '@emotion/core';
 
 import {
   createComponent,
-  mouseFocusBehavior,
   useModelContext,
   useMountLayout,
+  createHook,
+  ExtractProps,
+  hideMouseFocus,
 } from '@workday/canvas-kit-react/common';
 
 import {TabsModelContext} from './Tabs';
 import {TabsModel} from './useTabsModel';
+import {Box} from '@workday/canvas-kit-labs-react/common';
+import styled from '@emotion/styled';
 
-export interface TabPanelProps<T = unknown> {
+export interface TabPanelProps<T = unknown> extends ExtractProps<typeof Box, never> {
   /**
    * The contents of the TabPanel.
    */
@@ -37,19 +39,22 @@ export interface TabPanelProps<T = unknown> {
   model?: TabsModel<T>;
 }
 
-const styles = css(
-  mouseFocusBehavior({
-    '&:focus': {
-      outline: 'none',
-    },
-  })
-);
+const StyledTabsPanel = styled(Box)(hideMouseFocus);
 
 export const TabsPanel = createComponent('div')({
   displayName: 'Tabs.Panel',
   Component: ({children, name = '', model, ...elemProps}: TabPanelProps, ref, Element) => {
-    const {state, events} = useModelContext(TabsModelContext, model);
-    const [tabName, setTabName] = React.useState(name);
+    const localModel = useModelContext(TabsModelContext, model);
+
+    const props = useTabsPanel(localModel, elemProps, ref);
+
+    return <StyledTabsPanel {...props}>{children}</StyledTabsPanel>;
+  },
+});
+
+export const useTabsPanel = createHook(
+  ({state, events}: TabsModel, _?: React.Ref<HTMLElement>, elemProps: {name?: string} = {}) => {
+    const [tabName, setTabName] = React.useState(elemProps.name || '');
 
     useMountLayout(() => {
       const index = state.panelIndexRef.current;
@@ -62,19 +67,12 @@ export const TabsPanel = createComponent('div')({
       };
     });
 
-    return (
-      <Element
-        ref={ref}
-        role="tabpanel"
-        css={styles}
-        aria-labelledby={`${state.id}-${tabName}`}
-        hidden={!!tabName && tabName !== state.selectedKeys[0]}
-        id={`tabpanel-${state.id}-${tabName}`}
-        tabIndex={0}
-        {...elemProps}
-      >
-        {children}
-      </Element>
-    );
-  },
-});
+    return {
+      role: 'tabpanel',
+      'aria-labelledby': `${state.id}-${tabName}`,
+      hidden: !!tabName && tabName !== state.selectedKeys[0],
+      id: `tabpanel-${state.id}-${tabName}`,
+      tabIndex: 0,
+    };
+  }
+);

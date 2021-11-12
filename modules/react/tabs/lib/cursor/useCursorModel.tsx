@@ -99,7 +99,6 @@ export const useCursorNavigation = <T extends unknown>(
     };
 
     const getOffsetItem = (offset: number) => (id: string, tries = itemsRef.current.length): T => {
-      console.log('getOffsetItem', offset, nonInteractiveKeysRef.current);
       const items = itemsRef.current;
       const item = getItem(id);
 
@@ -155,7 +154,6 @@ export const useCursorModel = <T extends unknown>(
       setCursorId(id);
     },
     next() {
-      console.log('next', state);
       setCursorId(list.getId(navigation.getNext(state.cursorId)));
     },
     previous() {

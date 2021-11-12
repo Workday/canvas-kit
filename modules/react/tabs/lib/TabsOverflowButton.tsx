@@ -7,15 +7,13 @@ import {
   createHook,
   composeHooks,
   subModelHook,
-  useLocalRef,
-  useMountLayout,
 } from '@workday/canvas-kit-react/common';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 
 import {TabsModelContext} from './Tabs';
 import {TabsModel} from './useTabsModel';
 import {StyledTabItem} from './TabsItem';
-import {OverflowModel} from './overflow';
+import {useOverflowTarget} from './overflow';
 import {useMenuTarget} from './menu/MenuTarget';
 
 export interface OverflowButtonProps {
@@ -29,52 +27,6 @@ export interface OverflowButtonProps {
    */
   model?: TabsModel;
 }
-
-// use a hidden style instead of `hidden` attribute for measurement purposes. `hidden` elements have no dimensions
-const hiddenStyle = {
-  position: 'absolute',
-  left: -99999,
-};
-
-const useOverflowTarget = createHook((model: OverflowModel, ref?: React.Ref<HTMLButtonElement>) => {
-  const {elementRef, localRef} = useLocalRef(ref);
-  // track first render to force correct size calculations
-  const firstRender = React.useRef(true);
-
-  useMountLayout(() => {
-    firstRender.current = false;
-    if (localRef.current) {
-      const styles = getComputedStyle(localRef.current);
-
-      model.events.setOverflowTargetWidth({
-        width:
-          localRef.current.offsetWidth +
-          parseFloat(styles.marginLeft) +
-          parseFloat(styles.marginRight),
-      });
-    }
-  });
-
-  const isHidden = !model.state.hiddenKeys.length;
-
-  return {
-    ref: elementRef,
-    'aria-hidden': isHidden,
-    style: isHidden ? hiddenStyle : {},
-  };
-});
-
-const useTabsOverflowButton = composeHooks(
-  createHook(
-    (model: TabsModel, _?: React.Ref<HTMLButtonElement>, elemProps: {name?: string} = {}) => {
-      return {
-        'aria-haspopup': true,
-      };
-    }
-  ),
-  useOverflowTarget,
-  subModelHook((m: TabsModel) => m.menu, useMenuTarget)
-);
 
 export const TabsOverflowButton = createComponent('button')({
   displayName: 'Tabs.OverflowButton',
@@ -90,3 +42,15 @@ export const TabsOverflowButton = createComponent('button')({
     );
   },
 });
+
+const useTabsOverflowButton = composeHooks(
+  createHook(
+    (model: TabsModel, _?: React.Ref<HTMLButtonElement>, elemProps: {name?: string} = {}) => {
+      return {
+        'aria-haspopup': true,
+      };
+    }
+  ),
+  useOverflowTarget,
+  subModelHook((m: TabsModel) => m.menu, useMenuTarget)
+);

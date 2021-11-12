@@ -17,7 +17,7 @@ export interface TabsPanelsProps<T = unknown> {
   model?: TabsModel<T>;
 }
 
-export const TabsList = createComponent()({
+export const TabsPanels = createComponent()({
   displayName: 'Tabs.Panels',
   Component: ({children, model}: TabsPanelsProps) => {
     const localModel = useModelContext(TabsModelContext, model);
