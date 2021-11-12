@@ -34,7 +34,7 @@ export const SinglePanel = () => {
         </Tabs.Item>
       </Tabs.List>
       <Tabs.Panel style={{marginTop: space.m}} hidden={undefined} id="mytab-panel">
-        {contents[model.state.activeTab]}
+        {contents[model.state.selectedKeys[0]]}
       </Tabs.Panel>
     </Tabs>
   );

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import uuid from 'uuid/v4';
 
-export const generateUniqueId = () => uuid().replace(/^[0-9]*/gi, '');
+export const generateUniqueId = () => uuid().replace(/^[0-9\-]*/gi, '');
 
 /**
  * Generate a unique ID if one is not provided. The generated ID will be stable across renders

@@ -9,7 +9,7 @@ import {MenuItem} from './MenuItem';
 import {MenuCard} from './MenuCard';
 import {MenuList} from './MenuList';
 
-export const MenuModelContext = React.createContext<MenuModel<unknown>>({} as any);
+export const MenuModelContext = React.createContext<MenuModel>({} as any);
 
 export interface MenuProps<T> extends MenuModelConfig<T> {
   /**

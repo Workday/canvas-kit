@@ -7,7 +7,7 @@ import {TabsModel} from './useTabsModel';
 /**
  * Reset the cursor to the active tab when the tab list looses focus
  */
-export const useResetCursorOnBlur = createHook(({state, visibleTabs}: TabsModel<unknown>) => {
+export const useResetCursorOnBlur = createHook(({state, events}: TabsModel) => {
   const programmaticFocusRef = React.useRef(false);
   return {
     onKeyDown(event: React.KeyboardEvent) {
@@ -21,7 +21,7 @@ export const useResetCursorOnBlur = createHook(({state, visibleTabs}: TabsModel<
     },
     onBlur() {
       if (!programmaticFocusRef.current) {
-        visibleTabs.events.goTo({id: state.activeTab});
+        events.goTo({id: state.selectedKeys[0]});
       }
     },
   };

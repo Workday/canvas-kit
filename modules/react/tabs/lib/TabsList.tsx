@@ -6,20 +6,18 @@ import {
   createComponent,
   createHook,
   ExtractProps,
-  subModelHook,
-  useLocalRef,
   useModelContext,
-  useMountLayout,
-  useWindowSize,
 } from '@workday/canvas-kit-react/common';
-import {Flex} from '@workday/canvas-kit-labs-react/layout';
+import {Stack} from '@workday/canvas-kit-labs-react/layout';
 
 import {TabsModelContext} from './Tabs';
 import {useResetCursorOnBlur} from './hooks';
 import {TabsModel} from './useTabsModel';
-import {OverflowModel} from './overflow';
+import {useMeasureOverflowContainer} from './overflow/hooks/useMeasureContainer';
+import {ListModel} from './list';
 
-export interface TabListProps<T> extends ExtractProps<typeof Flex, never> {
+// Use `Partial` here to make `spacing` optional
+export interface TabListProps<T = unknown> extends Partial<ExtractProps<typeof Stack, never>> {
   /**
    *
    */
@@ -32,71 +30,51 @@ export interface TabListProps<T> extends ExtractProps<typeof Flex, never> {
   overflowButton?: () => React.ReactNode;
 }
 
-const useMeasureOverflowContainer = createHook(
-  (model: OverflowModel<unknown>, ref?: React.Ref<HTMLElement>) => {
-    const {elementRef, localRef} = useLocalRef(ref);
-
-    const onResize = () => {
-      if (localRef.current) {
-        model.events.setContainerWidth({
-          width: localRef.current.offsetWidth,
-        });
-      }
-    };
-
-    useMountLayout(() => {
-      if (localRef.current) {
-        model.events.setContainerWidth({
-          width: localRef.current.offsetWidth,
-        });
-      }
-    });
-
-    useMountLayout(() => {
-      window.addEventListener('resize', onResize);
-
-      return () => {
-        window.removeEventListener('resize', onResize);
-      };
-    });
-
-    return {
-      ref: elementRef,
-    };
-  }
-);
-
-const useTabList = composeHooks(
-  createHook((model: TabsModel<unknown>) => {
+export const useTabList = composeHooks(
+  createHook((model: TabsModel) => {
     return {role: 'tablist'};
   }),
-  subModelHook(model => model.visibleTabs, useMeasureOverflowContainer),
+  useMeasureOverflowContainer,
   useResetCursorOnBlur
 );
 
+function useRenderItems<T>(
+  model: ListModel<T>,
+  children: ((item: T) => React.ReactNode) | React.ReactNode
+) {
+  const items = React.useMemo(() => {
+    console.log(
+      'calculating items',
+      typeof children === 'function' ? model.state.items.map(item => children(item)) : null,
+      model.state.items
+    );
+    return typeof children === 'function' ? model.state.items.map(item => children(item)) : null;
+    // If we added `children` as a dependency, this memo would be useless. If the user wants the
+    // item to rerender, the item and items array needs to be updated.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [model.state.items]);
+
+  return items || children;
+}
+
 export const TabsList = createComponent('div')({
   displayName: 'Tabs.List',
-  Component: (
-    {children, model, overflowButton, ...elemProps}: TabListProps<unknown>,
-    ref,
-    Element
-  ) => {
+  Component: ({children, model, overflowButton, ...elemProps}: TabListProps, ref, Element) => {
     const localModel = useModelContext(TabsModelContext, model);
     const props = useTabList(localModel, elemProps, ref);
 
     return (
-      <Flex
+      <Stack
         as={Element}
         position="relative"
         borderBottom={`1px solid ${commonColors.divider}`}
         marginX="m"
+        spacing="xxxs"
         {...props}
       >
-        {typeof children === 'function'
-          ? localModel.visibleTabs.state.items.map(item => children(item))
-          : children}
+        {useRenderItems(localModel, children)}
         {overflowButton?.()}
-      </Flex>
+      </Stack>
     );
   },
 });

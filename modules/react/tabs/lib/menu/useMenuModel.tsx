@@ -8,10 +8,12 @@ import {
   PopupState,
   useAlwaysCloseOnOutsideClick,
   useCloseOnEscape,
+  useFocusRedirect,
   useInitialFocus,
   usePopupModel,
   useReturnFocus,
 } from '@workday/canvas-kit-react/popup';
+import {ListModel} from '../list';
 
 import {
   SelectionState,
@@ -22,13 +24,15 @@ import {
   BaseSelectionModelConfig,
 } from '../selection';
 
-export type MenuState<T> = SelectionState<T> & PopupState & {};
+export type MenuState<T = unknown> = SelectionState<T> & PopupState & {};
 
-export type MenuEvents<T> = SelectionEvents<T> & PopupEvents & {};
+export type MenuEvents<T = unknown> = SelectionEvents<T> & PopupEvents & {};
 
-export type MenuModel<T> = Model<MenuState<T>, MenuEvents<T>>;
+export interface MenuModel<T = unknown> extends Model<MenuState<T>, MenuEvents<T>> {
+  getId: ListModel<T>['getId'];
+}
 
-export const menuEventMap = createEventMap<MenuEvents<unknown>>()({
+export const menuEventMap = createEventMap<MenuEvents>()({
   guards: {
     ...selectionEventMap.guards,
     ...popupEventMap.guards,
@@ -52,6 +56,7 @@ export const useMenuModel = <T extends unknown>(config: MenuModelConfig<T> = {})
   useCloseOnEscape(popup);
   useInitialFocus(popup);
   useReturnFocus(popup);
+  useFocusRedirect(popup);
 
   const state = {...selection.state, ...popup.state};
 
@@ -60,5 +65,5 @@ export const useMenuModel = <T extends unknown>(config: MenuModelConfig<T> = {})
     ...popup.events,
   } as MenuEvents<T>);
 
-  return {state, events};
+  return {state, events, getId: selection.getId};
 };

@@ -12,7 +12,7 @@ import {
 import {TabsModelContext} from './Tabs';
 import {TabsModel} from './useTabsModel';
 
-export interface TabPanelProps {
+export interface TabPanelProps<T = unknown> {
   /**
    * The contents of the TabPanel.
    */
@@ -34,7 +34,7 @@ export interface TabPanelProps {
    * Optionally pass a model directly to this component. Default is to implicitly use the same
    * model as the container component which uses React context. Only use this for advanced use-cases
    */
-  model?: TabsModel<unknown>;
+  model?: TabsModel<T>;
 }
 
 const styles = css(
@@ -68,7 +68,7 @@ export const TabsPanel = createComponent('div')({
         role="tabpanel"
         css={styles}
         aria-labelledby={`${state.id}-${tabName}`}
-        hidden={!!tabName && tabName !== state.activeTab}
+        hidden={!!tabName && tabName !== state.selectedKeys[0]}
         id={`tabpanel-${state.id}-${tabName}`}
         tabIndex={0}
         {...elemProps}

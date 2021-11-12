@@ -33,8 +33,8 @@ describe('Tabs', () => {
         cy.findByRole('tab', {name: 'Second Tab'}).should('have.attr', 'aria-selected', 'false');
       });
 
-      it('should not have tabindex on the first tab', () => {
-        cy.findByRole('tab', {name: 'First Tab'}).should('not.have.attr', 'tabindex');
+      it('should not have tabindex=-1 on the first tab', () => {
+        cy.findByRole('tab', {name: 'First Tab'}).should('not.have.attr', 'tabindex', '-1');
       });
 
       it('should have "tabindex=-1" on the second tab', () => {
@@ -96,8 +96,8 @@ describe('Tabs', () => {
             cy.findByRole('tab', {name: 'First Tab'}).should('have.attr', 'tabindex', '-1');
           });
 
-          it('should not have tabindex on the second tab', () => {
-            cy.findByRole('tab', {name: 'Second Tab'}).should('not.have.attr', 'tabindex');
+          it('should not have tabindex=-1 on the second tab', () => {
+            cy.findByRole('tab', {name: 'Second Tab'}).should('not.have.attr', 'tabindex', '-1');
           });
 
           it('should focus on the second tab', () => {
@@ -163,8 +163,8 @@ describe('Tabs', () => {
                 cy.tab({shift: true});
               });
 
-              it('should not have tabindex on the first tab', () => {
-                cy.findByRole('tab', {name: 'First Tab'}).should('not.have.attr', 'tabindex');
+              it('should not have tabindex=-1 on the first tab', () => {
+                cy.findByRole('tab', {name: 'First Tab'}).should('not.have.attr', 'tabindex', '-1');
               });
 
               it('should set "tabindex=-1" on the second tab', () => {
@@ -187,8 +187,8 @@ describe('Tabs', () => {
             cy.findByRole('tab', {name: 'First Tab'}).should('have.attr', 'tabindex', '-1');
           });
 
-          it('should not have tabindex on the last tab', () => {
-            cy.findByRole('tab', {name: 'Fifth Tab'}).should('not.have.attr', 'tabindex');
+          it('should not have tabindex=-1 on the last tab', () => {
+            cy.findByRole('tab', {name: 'Fifth Tab'}).should('not.have.attr', 'tabindex', '-1');
           });
 
           it('should focus on the last tab', () => {
@@ -213,8 +213,8 @@ describe('Tabs', () => {
             cy.focused().type('{rightarrow}');
           });
 
-          it('should not have tabindex on the first tab', () => {
-            cy.findByRole('tab', {name: 'First Tab'}).should('not.have.attr', 'tabindex');
+          it('should not have tabindex=-1 on the first tab', () => {
+            cy.findByRole('tab', {name: 'First Tab'}).should('not.have.attr', 'tabindex', '-1');
           });
 
           it('should set "tabindex=-1" on the last tab', () => {
@@ -230,6 +230,24 @@ describe('Tabs', () => {
       cy.loadStory('Components/Containers/Tabs/React', 'DisabledTab');
     });
 
+    context('when the Disabled Tab is clicked', () => {
+      beforeEach(() => {
+        cy.findByRole('tab', {name: 'Disabled Tab'}).click();
+      });
+
+      it('should not set "[aria-selected=true]" on the Disabled Tab', () => {
+        cy.findByRole('tab', {name: 'Disabled Tab'}).should(
+          'not.have.attr',
+          'aria-selected',
+          'true'
+        );
+      });
+
+      it('should leave the first tab selected', () => {
+        cy.findByRole('tabpanel').should('contain', 'Contents of First Tab');
+      });
+    });
+
     context('when the first tab is active and focused', () => {
       beforeEach(() => {
         cy.findByRole('tab', {name: 'First Tab'})
@@ -242,8 +260,26 @@ describe('Tabs', () => {
           cy.focused().type('{rightarrow}');
         });
 
-        it('should skip over the second tab and focus on the third tab', () => {
-          cy.findByRole('tab', {name: 'Third Tab'}).should('have.focus');
+        it('should focus on the Disabled Tab', () => {
+          cy.findByRole('tab', {name: 'Disabled Tab'}).should('have.focus');
+        });
+
+        context('when the enter key is pressed', () => {
+          beforeEach(() => {
+            cy.focused().type('{enter}');
+          });
+
+          it('should not set "[aria-selected=true]" on the Disabled Tab', () => {
+            cy.findByRole('tab', {name: 'Disabled Tab'}).should(
+              'not.have.attr',
+              'aria-selected',
+              'true'
+            );
+          });
+
+          it('should leave the first tab selected', () => {
+            cy.findByRole('tabpanel').should('contain', 'Contents of First Tab');
+          });
         });
       });
     });
@@ -279,9 +315,9 @@ describe('Tabs', () => {
         cy.findByRole('tab', {name: 'Tab 1'}).click();
       });
 
-      context('then the Backspace/Delete key is pressed', () => {
+      context('then the Delete key is pressed', () => {
         beforeEach(() => {
-          cy.focused().type('{backspace}');
+          cy.focused().type('{del}');
         });
 
         // Tab activation should move to the right if activated tab is removed
@@ -305,9 +341,9 @@ describe('Tabs', () => {
           cy.focused().type('{leftarrow}');
         });
 
-        context('then the Backspace/Delete key is pressed', () => {
+        context('then the Delete key is pressed', () => {
           beforeEach(() => {
-            cy.focused().type('{backspace}');
+            cy.focused().type('{del}');
           });
 
           it('should remove "Tab 2"', () => {
@@ -328,9 +364,9 @@ describe('Tabs', () => {
             cy.findByRole('tabpanel', {name: 'Tab 3'}).should('contain', 'Contents of Tab 3');
           });
 
-          context('then the Backspace/Delete key is pressed again', () => {
+          context('then the Delete key is pressed again', () => {
             beforeEach(() => {
-              cy.focused().type('{backspace}');
+              cy.focused().type('{del}');
             });
 
             // Focus moves to the right if focused tab is deleted again
@@ -346,9 +382,9 @@ describe('Tabs', () => {
           cy.focused().type('{leftarrow}{leftarrow}');
         });
 
-        context('then the Backspace/Delete key is pressed', () => {
+        context('then the Delete key is pressed', () => {
           beforeEach(() => {
-            cy.focused().type('{backspace}');
+            cy.focused().type('{del}');
           });
 
           it('should remove "Tab 1"', () => {
@@ -405,8 +441,8 @@ describe('Tabs', () => {
           cy.findByRole('tab', {name: 'ראשון'}).should('have.attr', 'tabindex', '-1');
         });
 
-        it('should not have tabindex on the second tab', () => {
-          cy.findByRole('tab', {name: 'שְׁנִיָה'}).should('not.have.attr', 'tabindex');
+        it('should not have tabindex=-1 on the second tab', () => {
+          cy.findByRole('tab', {name: 'שְׁנִיָה'}).should('not.have.attr', 'tabindex', '-1');
         });
 
         it('should focus on the second tab', () => {
@@ -437,8 +473,8 @@ describe('Tabs', () => {
           cy.findByRole('tab', {name: 'ראשון'}).should('have.attr', 'tabindex', '-1');
         });
 
-        it('should not have tabindex on the last tab', () => {
-          cy.findByRole('tab', {name: 'חמישי'}).should('not.have.attr', 'tabindex');
+        it('should not have tabindex=-1 on the last tab', () => {
+          cy.findByRole('tab', {name: 'חמישי'}).should('not.have.attr', 'tabindex', '-1');
         });
 
         it('should focus on the last tab', () => {

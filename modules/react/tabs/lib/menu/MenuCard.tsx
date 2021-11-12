@@ -18,12 +18,12 @@ import {getTransformFromPlacement} from '@workday/canvas-kit-react/popup';
 import {MenuModel} from './useMenuModel';
 import {MenuModelContext} from './Menu';
 
-export interface MenuCardProps extends ExtractProps<typeof Card, never> {
+export interface MenuCardProps<T = unknown> extends ExtractProps<typeof Card, never> {
   /**
    * Optionally pass a model directly to this component. Default is to implicitly use the same
    * model as the container component which uses React context. Only use this for advanced use-cases
    */
-  model?: MenuModel<unknown>;
+  model?: MenuModel<T>;
   children?: React.ReactNode;
 }
 
@@ -48,9 +48,7 @@ const StyledCard = styled(Card)<
   type.levels.subtext.large,
   {
     position: 'relative',
-    maxWidth: `calc(100vw - ${space.l})`,
   },
-  ({width}) => width && {width},
   ({transformOrigin}) => {
     if (transformOrigin == null) {
       return {};
@@ -68,7 +66,7 @@ const StyledCard = styled(Card)<
   }
 );
 
-const useMenuCard = createHook((_: MenuModel<unknown>) => {
+const useMenuCard = createHook((_: MenuModel) => {
   return {};
 });
 
@@ -82,7 +80,13 @@ export const MenuCard = createComponent('div')({
     }, [localModel.state.placement]);
 
     return (
-      <StyledCard as={Element} transformOrigin={transformOrigin} padding={padding} {...props}>
+      <StyledCard
+        maxWidth={`calc(100vw - ${space.l})`}
+        as={Element}
+        transformOrigin={transformOrigin}
+        padding={padding}
+        {...props}
+      >
         {children}
       </StyledCard>
     );

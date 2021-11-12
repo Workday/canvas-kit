@@ -10,7 +10,7 @@ import {TabsOverflowButton} from './TabsOverflowButton';
 import {TabsMenuPopper} from './TabsMenuPopper';
 import {Menu} from './menu';
 
-export const TabsModelContext = React.createContext<TabsModel<unknown>>({} as any);
+export const TabsModelContext = React.createContext<TabsModel>({} as any);
 
 export interface TabsProps<T> extends TabsModelConfig<T> {
   /**

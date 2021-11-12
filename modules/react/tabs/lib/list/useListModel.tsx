@@ -8,17 +8,23 @@ import {
   assert,
 } from '@workday/canvas-kit-react/common';
 
-export type ListState<T> = {
+export type ListState<T = unknown> = {
   /** IDREF of the list. Children ids can be derived from this id */
   id: string;
   /** Used as an auto-incrementing ID for accessibility */
   indexRef: React.RefObject<number>;
   items: T[];
-  disabledKeys: string[];
-  getId: (item: T) => string;
+  /**
+   * An array of keys of non-interactive elements. Non-interactive elements usually have `disabled`
+   * applied to them and thus are not focusable by the browser. Lists need to know about these so
+   * that keyboard navigation properly skips over these items. Interactive elements that are
+   * disabled should use `[aria-disabled]` instead and should still receive focus.
+   * @see https://www.w3.org/TR/wai-aria-practices-1.1/#kbd_disabled_controls
+   */
+  nonInteractiveKeys: string[];
 };
 
-export type ListEvents<T> = {
+export type ListEvents<T = unknown> = {
   /** Register an item to the list. Takes in an identifier, a React.Ref and an optional index. This should be called on
    * component mount */
   registerItem(data: {item: T; index?: number}): void;
@@ -28,12 +34,14 @@ export type ListEvents<T> = {
   updateItemPosition(data: {id: string; index: number}): void;
 };
 
-export type ListModel<T> = Model<ListState<T>, ListEvents<T>>;
+export interface ListModel<T = unknown> extends Model<ListState<T>, ListEvents<T>> {
+  getId: (item: T) => string;
+}
 
 // We don't have a way of knowing what the generic could be, so we leave it as `unknown`. It will
 // probably need to be cast to the generic in use inside extending models. This will not effect the
 // use of the model in an application, only in models composing this model.
-export const listEventMap = createEventMap<ListEvents<unknown>>()({
+export const listEventMap = createEventMap<ListEvents>()({
   guards: {
     /**
      * Should a list item be registered? This will prevent a DOM-based list item from being
@@ -84,13 +92,13 @@ export type BaseListModelConfig<T = unknown> = {
   /**
    * Array of all keys which are currently disabled
    */
-  disabledKeys?: string[];
+  nonInteractiveKeys?: string[];
 };
 
 export type ListModelConfig<T> = BaseListModelConfig<T> &
   Partial<ToModelConfig<ListState<T>, ListEvents<T>, typeof listEventMap>>;
 
-export const defaultGetId = (item: any) => {
+export const defaultGetId = (item: any): string => {
   assert(item.id, 'A list item must have an `id` field or a `getId` function defined');
   return item.id;
 };
@@ -99,9 +107,15 @@ export const useListModel = <T extends unknown>(config: ListModelConfig<T> = {})
   const id = useUniqueId(config.id);
   const indexRef = React.useRef(0);
   const [items, setItems] = React.useState(config.items || []);
+  console.log('calc items', config.items, items);
   const getId = config.getId || defaultGetId;
 
-  const state = {id, items: config.items || items, indexRef, disabledKeys: ['1'], getId};
+  const state = {
+    id,
+    items: config.items || items,
+    indexRef,
+    nonInteractiveKeys: config.nonInteractiveKeys || [],
+  };
 
   const events = useEventMap(listEventMap, state, config, {
     registerItem({item, index}) {
@@ -133,5 +147,5 @@ export const useListModel = <T extends unknown>(config: ListModelConfig<T> = {})
     },
   } as ListEvents<T>);
 
-  return {state, events};
+  return {state, events, getId};
 };

@@ -1,13 +1,6 @@
 import * as React from 'react';
 
-import {
-  colors,
-  commonColors,
-  iconColors,
-  typeColors,
-  space,
-  type,
-} from '@workday/canvas-kit-react/tokens';
+import {colors, iconColors, typeColors, space, type} from '@workday/canvas-kit-react/tokens';
 import {
   createComponent,
   styled,
@@ -16,13 +9,17 @@ import {
   composeHooks,
   createHook,
 } from '@workday/canvas-kit-react/common';
+import {SystemIcon} from '@workday/canvas-kit-react/icon';
+import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
 
 import {useRegisterItem} from '../list';
 import {useRovingFocus} from '../cursor';
 import {MenuModel} from './useMenuModel';
 import {MenuModelContext} from './Menu';
+import {useSelectionItem} from '../selection';
+import {Box} from '@workday/canvas-kit-labs-react/common';
 
-export interface MenuItemProps {
+export interface MenuItemProps<T = unknown> {
   /**
    * Optionally pass index to menu item. This should be done if `Menu.Item` components were created
    * via a `Array::map` function. This index will ensure keyboard navigation works even if items are
@@ -43,93 +40,118 @@ export interface MenuItemProps {
    * Optionally pass a model directly to this component. Default is to implicitly use the same
    * model as the container component which uses React context. Only use this for advanced use-cases
    */
-  model?: MenuModel<unknown>;
+  model?: MenuModel<T>;
   'aria-disabled'?: boolean;
+  /**
+   * Use `hasIcon={true}` when the Tab item contains an icon. This instructs the tab item to render
+   * children as a flex container to accommodate icons. You will have to use `Tabs.Item.Text` as a
+   * child element if this is set to true.
+   *
+   * @example
+   * <Menu.Item hasIcon>
+   *   <Menu.Item.Icon icon={someIcon} />
+   *   <Menu.Item.Text>Tab Text</Menu.Item.Text>
+   * </Menu.Item>
+   */
+  hasIcon?: boolean;
 }
 
-const StyledItem = styled('li')<StyledType>({
-  ...type.levels.subtext.large,
-  padding: `${space.xxs} ${space.s}`,
-  height: space.xl,
-  boxSizing: 'border-box',
-  cursor: 'pointer',
-  color: colors.blackPepper300,
-  display: 'flex',
-  flexDirection: 'row',
-  alignItems: 'center',
-  borderWidth: 0,
-  transition: 'background-color 80ms, color 80ms',
-  '&:focus': {
-    outline: 'none',
-    backgroundColor: commonColors.focusBackground,
-    color: typeColors.inverse,
-    'span .wd-icon-background ~ .wd-icon-accent, .wd-icon-background ~ .wd-icon-accent2': {
-      fill: iconColors.active,
-    },
-    '&:hover': {
-      'span .wd-icon-fill, span .wd-icon-accent, span .wd-icon-accent2': {
-        fill: iconColors.inverse,
+const StyledItem = styled(Box.as('li'))<StyledType & {hasIcon?: boolean}>(
+  ({theme}) => {
+    return {
+      ...type.levels.subtext.large,
+      '& > *:not(style) ~ *:not(style)': {
+        marginLeft: space.xxs,
       },
-      'span .wd-icon-background ~ .wd-icon-accent, span .wd-icon-background ~ .wd-icon-accent2': {
+      padding: `${space.xxs} ${space.s}`,
+      boxSizing: 'border-box',
+      cursor: 'pointer',
+      color: colors.blackPepper300,
+      borderWidth: 0,
+      textAlign: 'left',
+      transition: 'background-color 80ms, color 80ms',
+      '.wd-icon-background ~ .wd-icon-accent, .wd-icon-background ~ .wd-icon-accent2': {
         fill: iconColors.active,
       },
-      'span .wd-icon-background': {
-        fill: iconColors.inverse,
-      },
-    },
-    [`[data-whatinput='mouse'] &,
-        [data-whatinput='touch'] &,
-        [data-whatinput='pointer'] &`]: {
-      backgroundColor: 'inherit',
-      color: colors.blackPepper300,
-      'span .wd-icon-background ~ .wd-icon-accent, span .wd-icon-background ~ .wd-icon-accent2': {
-        fill: iconColors.standard,
-      },
-      '&:hover': {
-        backgroundColor: commonColors.hoverBackground,
-        'span .wd-icon-fill, span .wd-icon-accent, span .wd-icon-accent2': {
+      '&:hover, &[aria-selected=true]': {
+        backgroundColor: theme.canvas.palette.primary.lightest,
+        color: colors.blackPepper300,
+        '.wd-icon-fill, .wd-icon-accent, .wd-icon-accent2': {
           fill: iconColors.hover,
         },
-      },
-      '.wd-icon-fill, .wd-icon-accent, .wd-icon-accent2': {
-        fill: iconColors.standard,
-      },
-    },
-  },
-  backgroundColor: 'inherit',
-  '&:hover': {
-    backgroundColor: commonColors.hoverBackground,
-    color: colors.blackPepper300,
-    '.wd-icon-fill, .wd-icon-accent, .wd-icon-accent2': {
-      fill: iconColors.hover,
-    },
-  },
-  '&[aria-disabled]': {
-    color: colors.licorice100,
-    cursor: 'default',
-    '&:focus': {
-      backgroundColor: colors.blueberry200,
-      'span .wd-icon-background ~ .wd-icon-accent, .wd-icon-background ~ .wd-icon-accent2': {
-        fill: iconColors.disabled,
-      },
-      '&:hover': {
-        'span .wd-icon-background ~ .wd-icon-accent, span .wd-icon-background ~ .wd-icon-accent2': {
-          fill: iconColors.disabled,
+        '.wd-icon-background ~ .wd-icon-accent, .wd-icon-background ~ .wd-icon-accent2': {
+          fill: iconColors.active,
         },
       },
-    },
-  },
-});
-
-const useMenuItem = composeHooks(
-  createHook((model: MenuModel<unknown>, _?: React.Ref<any>, elemProps: {name?: string} = {}) => {
-    return {
-      role: 'menuitem',
-      onClick() {
-        model.events.select({id: elemProps.name || ''});
+      '&:focus': {
+        outline: 'none',
+        backgroundColor: theme.canvas.palette.primary.main,
+        color: typeColors.inverse,
+        '.wd-icon-fill, .wd-icon-accent, .wd-icon-accent2': {
+          fill: iconColors.inverse,
+        },
+        '.wd-icon-background ~ .wd-icon-accent, .wd-icon-background ~ .wd-icon-accent2': {
+          fill: iconColors.inverse,
+        },
+      },
+      // We want the focus styles no matter what
+      [`[data-whatinput]`]: {
+        backgroundColor: 'inherit',
+        color: colors.blackPepper300,
+        '.wd-icon-background ~ .wd-icon-accent, .wd-icon-background ~ .wd-icon-accent2': {
+          fill: iconColors.active,
+        },
+        '&:hover, &[aria-selected=true]': {
+          backgroundColor: theme.canvas.palette.primary.lightest,
+          '.wd-icon-fill, .wd-icon-accent, .wd-icon-accent2': {
+            fill: iconColors.hover,
+          },
+        },
+        '&:focus': {
+          '.wd-icon-background ~ .wd-icon-accent, .wd-icon-background ~ .wd-icon-accent2': {
+            fill: iconColors.active,
+          },
+        },
+      },
+      backgroundColor: 'inherit',
+      '&:disabled, &[aria-disabled]': {
+        color: colors.licorice100,
+        cursor: 'default',
+        '.wd-icon-fill, .wd-icon-accent, .wd-icon-accent2': {
+          fill: iconColors.disabled,
+        },
+        '&:focus': {
+          backgroundColor: colors.blueberry200,
+          '.wd-icon-background ~ .wd-icon-accent, .wd-icon-background ~ .wd-icon-accent2': {
+            fill: iconColors.disabled,
+          },
+          '&:hover, &[aria-selected=true]': {
+            '.wd-icon-background ~ .wd-icon-accent, .wd-icon-background ~ .wd-icon-accent2': {
+              fill: iconColors.disabled,
+            },
+          },
+        },
       },
     };
+  },
+  ({hasIcon}) => {
+    if (hasIcon) {
+      return {
+        display: 'flex',
+      };
+    } else {
+      return {}; //ellipsisStyles;
+    }
+  }
+);
+
+const useMenuItem = composeHooks(
+  createHook((model: MenuModel, _?: React.Ref<any>, elemProps: {name?: string} = {}) => {
+    return {
+      role: 'menuitem',
+    };
   }),
+  useSelectionItem,
   useRovingFocus,
   useRegisterItem
 );
@@ -140,12 +162,17 @@ export const MenuItem = createComponent('button')({
     const localModel = useModelContext(MenuModelContext, model);
 
     const props = useMenuItem(localModel, elemProps, ref);
-    console.log('localModel', localModel);
 
     return (
-      <StyledItem as={Element} {...props}>
-        {children}
-      </StyledItem>
+      <OverflowTooltip placement="left">
+        <StyledItem minHeight={space.xl} as={Element} {...props}>
+          {children}
+        </StyledItem>
+      </OverflowTooltip>
     );
+  },
+  subComponents: {
+    Icon: SystemIcon,
+    Text: styled('span')({}),
   },
 });

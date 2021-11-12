@@ -1,5 +1,5 @@
 import React from 'react';
-import {createEventMap, Model, ToModelConfig, useEventMap} from '@workday/canvas-kit-react/common';
+import {createEventMap, ToModelConfig, useEventMap} from '@workday/canvas-kit-react/common';
 
 import {
   SelectionState,
@@ -8,17 +8,18 @@ import {
   useSelectionModel,
   SelectionModelConfig,
   selectionEventMap,
-} from '../selection';
+  SelectionModel,
+} from '../../selection';
 
-export type OverflowState<T> = SelectionState<T> & {
+export type OverflowState<T = unknown> = SelectionState<T> & {
   containerWidth: number;
   overflowTargetWidth: number;
   itemWidthCache: Record<string, number>;
   hiddenKeys: string[];
 };
 
-export type OverflowEvents<T> = SelectionEvents<T> & {
-  setContainerWidth(data: {width: number}): void;
+export type OverflowEvents<T = unknown> = SelectionEvents<T> & {
+  setContainerWidth(data: {width?: number}): void;
   setOverflowTargetWidth(data: {width: number}): void;
   addItemWidth(data: {id: string; width: number}): void;
   removeItemWidth(data: {id: string}): void;
@@ -26,9 +27,12 @@ export type OverflowEvents<T> = SelectionEvents<T> & {
   removeHiddenKey(data: {id: string}): void;
 };
 
-export interface OverflowModel<T> extends Model<OverflowState<T>, OverflowEvents<T>> {}
+export interface OverflowModel<T = unknown> extends SelectionModel<T> {
+  state: OverflowState<T>;
+  events: OverflowEvents<T>;
+}
 
-export const overflowEventMap = createEventMap<OverflowEvents<unknown>>()({
+export const overflowEventMap = createEventMap<OverflowEvents>()({
   guards: {
     ...selectionEventMap.guards,
     shouldSetContainerWidth: 'setContainerWidth',
@@ -109,10 +113,15 @@ export const useOverflowModel = <T extends unknown>(
   const [overflowTargetWidth, setOverflowTargetWidth] = React.useState(0);
   const overflowTargetWidthRef = React.useRef(0);
 
-  const selection = useSelectionModel(config as SelectionModelConfig<T>);
+  // Cursors skip over disabled keys, but know nothing of hidden keys. We'll go ahead and disable
+  // hidden keys as well
+  const nonInteractiveKeys = (config.nonInteractiveKeys || []).concat(hiddenKeys);
+  console.log('useOverflowModel nonInteractiveKeys', nonInteractiveKeys);
+
+  const model = useSelectionModel({...(config as SelectionModelConfig<T>), nonInteractiveKeys});
 
   const state = {
-    ...selection.state,
+    ...model.state,
     hiddenKeys,
     itemWidthCache,
     containerWidth,
@@ -133,22 +142,22 @@ export const useOverflowModel = <T extends unknown>(
   // );
 
   const events = useEventMap(overflowEventMap, state, config, {
-    ...selection.events,
+    ...model.events,
     select(data) {
-      const {selectedKeys} = selection.selection.select(data.id, state as SelectionState<T>);
+      const {selectedKeys} = model.selection.select(data.id, state as SelectionState<T>);
       const keys = getHiddenKeys(
         containerWidthRef.current,
         overflowTargetWidthRef.current,
         itemWidthCacheRef.current,
         selectedKeys
       );
-      selection.events.select(data);
+      model.events.select(data);
 
       setHiddenKeys(keys);
     },
     setContainerWidth({width}) {
-      containerWidthRef.current = width;
-      setContainerWidth(width);
+      containerWidthRef.current = width || 0;
+      setContainerWidth(width || 0);
 
       const keys = getHiddenKeys(
         containerWidthRef.current,
@@ -182,5 +191,5 @@ export const useOverflowModel = <T extends unknown>(
     },
   } as OverflowEvents<T>);
 
-  return {state, events};
+  return {state, events, selection: model.selection, getId: model.getId};
 };

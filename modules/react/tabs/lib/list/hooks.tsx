@@ -10,7 +10,7 @@ import {ListModel} from './useListModel';
  */
 export const useRegisterItem = createHook(
   (
-    {state, events}: ListModel<unknown>,
+    {state, events, getId}: ListModel,
     _?: React.Ref<HTMLElement>,
     elemProps: {name?: string; index?: number; disabled?: boolean} = {}
   ) => {
@@ -18,6 +18,7 @@ export const useRegisterItem = createHook(
     const firstRender = React.useRef(true);
 
     React.useLayoutEffect(() => {
+      console.log('calc', elemProps.index);
       if (elemProps.index !== undefined && !firstRender.current) {
         events.updateItemPosition({id: localId, index: elemProps.index});
       }
@@ -29,9 +30,10 @@ export const useRegisterItem = createHook(
       const defaultId = state.indexRef.current;
       const itemId = elemProps.name || String(defaultId);
       // bail early if item already exists. This happens if items were already provided.
-      if (state.items.find(item => state.getId(item) === elemProps.name)) {
+      if (state.items.find(item => getId(item) === elemProps.name)) {
         return;
       }
+      console.log('calc', 'register item');
       events.registerItem({
         item: {id: itemId, disabled: elemProps.disabled, data: {}},
         index: elemProps.index,
@@ -47,6 +49,7 @@ export const useRegisterItem = createHook(
     return {
       'data-name': localId,
       name: localId,
+      disabled: elemProps.disabled || state.nonInteractiveKeys.includes(localId) ? true : undefined,
     };
   }
 );

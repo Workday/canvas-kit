@@ -1,5 +1,5 @@
 import React from 'react';
-import {createEventMap, Model, ToModelConfig, useEventMap} from '@workday/canvas-kit-react/common';
+import {createEventMap, ToModelConfig, useEventMap} from '@workday/canvas-kit-react/common';
 
 import {
   CursorState,
@@ -8,16 +8,17 @@ import {
   useCursorModel,
   CursorModelConfig,
   cursorEventMap,
+  CursorModel,
 } from '../cursor/useCursorModel';
 
 export type Orientation = 'horizontal' | 'vertical';
 
-export type SelectionState<T> = CursorState<T> & {
+export type SelectionState<T = unknown> = CursorState<T> & {
   selectedKeys: 'all' | string[];
   unselectedKeys: string[];
 };
 
-export type SelectionEvents<T> = CursorEvents<T> & {
+export type SelectionEvents<T = unknown> = CursorEvents<T> & {
   /** Select a specific item by its identifier. */
   select(data: {id: string}): void;
   /** Select all items. This will set `selectedKeys` to `'all'` and remove all `unselectedKeys`.
@@ -27,11 +28,13 @@ export type SelectionEvents<T> = CursorEvents<T> & {
   unselectAll(): void;
 };
 
-export interface SelectionModel<T> extends Model<SelectionState<T>, SelectionEvents<T>> {
+export interface SelectionModel<T = unknown> extends CursorModel<T> {
+  state: SelectionState<T>;
+  events: SelectionEvents<T>;
   selection: SelectionManager;
 }
 
-export const selectionEventMap = createEventMap<SelectionEvents<unknown>>()({
+export const selectionEventMap = createEventMap<SelectionEvents>()({
   guards: {
     ...cursorEventMap.guards,
     /** Should a cursor position be set? Use only in advance use-cases */
@@ -54,13 +57,13 @@ export const selectionEventMap = createEventMap<SelectionEvents<unknown>>()({
 export interface SelectionManager {
   select(
     id: string,
-    prevState: Pick<SelectionState<unknown>, 'selectedKeys' | 'unselectedKeys'>
-  ): Pick<SelectionState<unknown>, 'selectedKeys' | 'unselectedKeys'>;
+    prevState: Pick<SelectionState, 'selectedKeys' | 'unselectedKeys'>
+  ): Pick<SelectionState, 'selectedKeys' | 'unselectedKeys'>;
 }
 
 export const isSelected = (
   id: string,
-  {selectedKeys, unselectedKeys}: Pick<SelectionState<unknown>, 'selectedKeys' | 'unselectedKeys'>
+  {selectedKeys, unselectedKeys}: Pick<SelectionState, 'selectedKeys' | 'unselectedKeys'>
 ) => {
   if (selectedKeys === 'all') {
     return !unselectedKeys.includes(id);
@@ -125,8 +128,9 @@ export const useSelectionModel = <T extends unknown>(
       const {selectedKeys, unselectedKeys} = selection.select(data.id, state);
       setSelectedKeys(selectedKeys);
       setUnselectedKeys(unselectedKeys);
+      events.goTo({id: data.id});
     },
   } as SelectionEvents<T>);
 
-  return {state, events, selection};
+  return {state, events, selection, getId: cursor.getId};
 };

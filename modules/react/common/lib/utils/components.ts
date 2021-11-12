@@ -132,6 +132,7 @@ export type ElementComponent<T extends React.ElementType, P> = {
   ): JSX.Element;
   (props: PropsWithAs<P, T>): JSX.Element;
   displayName?: string;
+  as<E extends React.ElementType>(as: E): ElementComponent<E, P>;
 };
 
 export type Component<P> = {
@@ -232,6 +233,11 @@ export const createComponent = <
     (ReturnedComponent as Record<string, any>)[key] = (subComponents as Record<string, any>)[key];
   });
   ReturnedComponent.displayName = displayName;
+
+  // The `any`s are here because `ElementComponent` takes care of the `as` type and the
+  // `ReturnComponent` type is overridden
+  (ReturnedComponent as any).as = (as: any) =>
+    createComponent(as)({displayName, Component, subComponents});
 
   // Cast as `any`. We have already specified the return type. Be careful making changes to this
   // file due to this `any` `ReturnedComponent` is a `React.ForwardRefExoticComponent`, but we want
@@ -339,7 +345,7 @@ function setRef<T>(ref: React.Ref<T> | undefined, value: T): void {
  *   return <div ref={elementRef}/>
  * })
  */
-export function useForkRef<T>(ref1?: React.Ref<T>, ref2?: React.Ref<T>): (instance: T) => void {
+export function useForkRef<T>(ref1?: React.Ref<T>, ref2?: React.Ref<T>): React.RefCallback<T> {
   return (value: T) => {
     setRef(ref1, value);
     setRef(ref2, value);

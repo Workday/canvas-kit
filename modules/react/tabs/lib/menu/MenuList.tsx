@@ -10,9 +10,9 @@ import {
 
 import {MenuModel} from './useMenuModel';
 import {MenuModelContext} from './Menu';
-import {Box} from '@workday/canvas-kit-labs-react/common';
+import {Stack} from '@workday/canvas-kit-labs-react/layout';
 
-export interface MenuListProps extends ExtractProps<typeof Box, never> {
+export interface MenuListProps<T = unknown> extends Partial<ExtractProps<typeof Stack, never>> {
   /**
    * The label text of the MenuList.
    */
@@ -21,14 +21,17 @@ export interface MenuListProps extends ExtractProps<typeof Box, never> {
    * Optionally pass a model directly to this component. Default is to implicitly use the same
    * model as the container component which uses React context. Only use this for advanced use-cases
    */
-  model?: MenuModel<unknown>;
+  model?: MenuModel<T>;
 }
 
-const useMenuList = createHook(() => {
-  return {role: 'menu'};
+const useMenuList = createHook((model: MenuModel) => {
+  return {
+    role: 'menu',
+    'aria-labelledby': model.state.id,
+  };
 });
 
-export const MenuList = createComponent('ul')({
+export const MenuList = createComponent('div')({
   displayName: 'Menu.List',
   Component: ({model, children, ...elemProps}: MenuListProps, ref, Element) => {
     const localModel = useModelContext(MenuModelContext, model);
@@ -36,19 +39,21 @@ export const MenuList = createComponent('ul')({
     const props = useMenuList(localModel, elemProps, ref);
 
     return (
-      <Box
+      <Stack
         as={Element}
         background={commonColors.background}
         borderRadius="m"
         padding="zero"
         marginY="zero"
         marginX="xxs"
+        spacing="zero"
+        flexDirection={localModel.state.orientation === 'vertical' ? 'column' : 'row'}
         {...props}
       >
         {typeof children === 'function'
           ? localModel.state.items.map(item => children(item))
           : children}
-      </Box>
+      </Stack>
     );
   },
 });

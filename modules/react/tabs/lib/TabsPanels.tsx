@@ -1,19 +1,11 @@
 import * as React from 'react';
 
-import {space, commonColors} from '@workday/canvas-kit-react/tokens';
-import {
-  composeHooks,
-  createComponent,
-  createHook,
-  styled,
-  StyledType,
-  useModelContext,
-} from '@workday/canvas-kit-react/common';
+import {createComponent, useModelContext} from '@workday/canvas-kit-react/common';
 
 import {TabsModelContext} from './Tabs';
 import {TabsModel} from './useTabsModel';
 
-export interface TabsPanelsProps<T> {
+export interface TabsPanelsProps<T = unknown> {
   /**
    *
    */
@@ -27,7 +19,7 @@ export interface TabsPanelsProps<T> {
 
 export const TabsList = createComponent()({
   displayName: 'Tabs.Panels',
-  Component: ({children, model}: TabsPanelsProps<unknown>) => {
+  Component: ({children, model}: TabsPanelsProps) => {
     const localModel = useModelContext(TabsModelContext, model);
 
     return (

@@ -38,11 +38,11 @@ const rightToLeftMap = {
  * @see https://www.w3.org/TR/wai-aria-practices/#kbd_roving_tabindex
  */
 export const useRovingFocus = createHook(
-  ({state, events}: CursorModel<unknown>, ref, elemProps: {name?: string} = {}) => {
+  ({state, events, getId}: CursorModel, ref, elemProps: {name?: string} = {}) => {
     // Tracks when this element has focus. If this item is removed while still focused, we have to
     // inform the model to move the cursor to the next item.
     const focusRef = React.useRef(false);
-    const getIdRef = React.useRef(state.getId);
+    const getIdRef = React.useRef(getId);
 
     // Create a ref out of state. We don't want to watch state on unmount, so we use a ref to get the
     // current value at the time of unmounting. Otherwise, `state.items` would be a cached value of an
@@ -53,7 +53,7 @@ export const useRovingFocus = createHook(
     const keyDownRef = React.useRef(false);
     const isRTL = useIsRTL();
 
-    const navigation = useCursorNavigation(state);
+    const navigation = useCursorNavigation(state, getId);
 
     React.useEffect(() => {
       if (keyDownRef.current) {
@@ -63,23 +63,6 @@ export const useRovingFocus = createHook(
         keyDownRef.current = false;
       }
     }, [state.cursorId, state.id, navigation]);
-
-    useMount(() => {
-      return () => {
-        if (focusRef.current && stateRef.current.items.length) {
-          // Unmount is called before state updates are flushed and we'll never get the last state
-          // update, so use `getNext` instead of `getItem`
-          const item = navigation.getNext(stateRef.current.cursorId);
-
-          // If we call `focus` right away, there seems to be a timing issue where the focus handler
-          // never gets called. Waiting until just before a frame is rendered seems to ensure the
-          // focus handler is called correctly. Removing will make deleting multiple items fail.
-          requestAnimationFrame(() => {
-            document.querySelector<HTMLElement>(`#${state.id}-${state.getId(item)}`)?.focus();
-          });
-        }
-      };
-    });
 
     return {
       onKeyDown(event: React.KeyboardEvent) {

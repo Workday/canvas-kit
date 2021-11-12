@@ -1,1 +1,1 @@
-export * from './useOverflowModel';
+export * from './hooks/useOverflowModel';
