@@ -53,6 +53,13 @@ export interface PrimaryButtonProps extends Themeable, GrowthBehavior {
 
 // Button sizes where data labels are enabled
 const dataLabelSizes = ['medium', 'large'];
+// All disabled buttons are set to 40% opacity.
+// This will eventually live in the ButtonContainer styles, but for now we're scoping it to Primary, Secondary, and Tertiary buttons.
+const disabledButtonOpacity = {
+  '&:disabled, &:disabled:active': {
+    opacity: 0.4,
+  },
+};
 
 export const PrimaryButton = createComponent('button')({
   displayName: 'PrimaryButton',
@@ -78,6 +85,7 @@ export const PrimaryButton = createComponent('button')({
       as={Element}
       colors={getPrimaryButtonColors(variant, theme)}
       size={size}
+      extraStyles={disabledButtonOpacity}
       {...elemProps}
     >
       {icon && iconPosition === 'left' && (

@@ -98,7 +98,7 @@ export const ButtonContainer = styled('button', {
     // Makes the "down" state of the button happens faster than the hover state, so it animates in correctly.
     '&:hover:active': {transitionDuration: '40ms'},
 
-    '&:disabled, &:disabled:active': {cursor: 'default', boxShadow: 'none', opacity: 0.4},
+    '&:disabled, &:disabled:active': {cursor: 'default', boxShadow: 'none'},
 
     '& > *:first-of-type': {
       marginLeft: 0,
