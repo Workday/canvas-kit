@@ -123,7 +123,7 @@ export const StyledTabItem = styled(Box.as('button'))<StyledType & {hasIcon?: bo
 
     '&:focus': {
       outline: `none`,
-      ...focusRing({inset: 'outer', width: 0, separation: 2}),
+      ...focusRing({inset: 'outer', width: 0, separation: 2}, theme),
     },
 
     '&:disabled, &[aria-disabled]': {

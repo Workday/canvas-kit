@@ -1,8 +1,8 @@
 import React from 'react';
 
 import {setupIcon} from '@workday/canvas-system-icons-web';
-import {StaticStates} from '@workday/canvas-kit-react/common';
-import {withSnapshotsEnabled} from '../../../../utils/storybook';
+import {StaticStates, CanvasProvider} from '@workday/canvas-kit-react/common';
+import {withSnapshotsEnabled, customColorTheme} from '../../../../utils/storybook';
 
 import {Tabs, useTabsModel} from '@workday/canvas-kit-react/tabs';
 
@@ -22,7 +22,7 @@ export default {
   },
 };
 
-export const TabStates = withSnapshotsEnabled(() => {
+const TabsExample = () => {
   const [shouldRender, setShouldRender] = React.useState(false);
   React.useEffect(() => {
     setTimeout(() => {
@@ -64,7 +64,17 @@ export const TabStates = withSnapshotsEnabled(() => {
   ) : (
     <Tabs.Item model={model}>Default</Tabs.Item> // Render default tab right away to force font loading so that by the time the story loads, the font will be known
   );
-});
+};
+
+export const TabStates = withSnapshotsEnabled(() => <TabsExample />);
+
+export const ThemedTabStates = () => {
+  return (
+    <CanvasProvider theme={{canvas: customColorTheme}}>
+      <TabsExample />
+    </CanvasProvider>
+  );
+};
 
 export const Bidirectionality = withSnapshotsEnabled(() => {
   return (
