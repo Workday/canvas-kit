@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 
-const {exec} = require('child_process');
+const {spawn} = require('child_process');
 require('colors');
 
 const {_: commands, path} = require('yargs')
@@ -43,7 +43,7 @@ console.log(transform, path);
 
 console.log(`\nApplying ${transform} transform to '${path}'\n`.brightBlue);
 
-exec(
+spawn(
   `jscodeshift -t ${__dirname}/dist/es6/${transform} ${path} --parser=tsx --extensions=js,jsx,ts,tsx`,
   (error, stdout, stderr) => {
     if (error) {
