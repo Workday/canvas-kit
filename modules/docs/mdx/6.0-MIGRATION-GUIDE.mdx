@@ -374,17 +374,31 @@ These changes in behavior are intentional and expected.
 
 ## Button Updates
 
-`PrimaryButton`, `SecondaryButton`, and `TertiaryButton` have been slightly adjusted to tighten up
-the spacing and use our new type hierarchy. We also adjusted the opacity for their disabled state
-for a bit more consistency. These changes are automatic when you upgrade and do not require any
-manual updates in your codebase. However, these changes will likely cause any automated visual
-regression tests to fail, and you will need to update them accordingly. These adjustments are fairly
-minor, and we do not expect them to create significant layout shifts in your UI. But, as with any
-visual update, you will want to review your UI to ensure there are no adverse effects. We also added
-some net-new styling: `PrimaryButton`, `SecondaryButton`, and `TertiaryButton` have a new
-extra-small size, and `PrimaryButton` has a new `inverse` variant.
+All button updates for V6 are limited to our Primary, Secondary, and Tertiary buttons. Most of the
+button updates are small visual adjustments:
 
-All these changes are described in detail in the sections below.
+- We tightened up tighten the spacing for visual balance and added our new type hierarchy.
+- We adjusted icon sizes for uniformity:
+  - `large`: `24px` x `24px`
+  - `medium`: `20px` x `20px`
+  - `small`: `20px` x `20px`
+  - `extraSmall`: `18px` x `18px`
+- We also adjusted the opacity for their disabled state so they behave more appropriately on varied
+  / dark backgrounds.
+
+These changes are automatic when you upgrade and do not require any manual updates in your codebase.
+However, they will likely cause any automated visual regression tests to fail, and you will need to
+update your tests accordingly. We do not expect these minor adjustments to create significant layout
+shifts in your UI. But, as with any visual update, you will want to review your UI to ensure there
+are no adverse effects.
+
+We also added some net-new features:
+
+- All buttons have a new `extraSmall` size.
+- Icons are now supported for all sizes.
+- `PrimaryButton` has a new `inverse` variant.
+
+All these changes are described in detail by button type in the sections below.
 
 ### Primary Button
 
@@ -409,7 +423,7 @@ height of the button will remain the same.
 
 #### Primary Small
 
-We now support icons for small `PrimaryButton`s. The icons will be `20px x 20xpx`.
+We now support icons for small `PrimaryButton`s. The icons are `20px` x `20xpx`.
 
 #### Primary Extra Small
 

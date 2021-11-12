@@ -10,19 +10,23 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {colors} from '@workday/canvas-kit-react/tokens';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
+
 import {ButtonContainer, ButtonLabel, ButtonLabelData, ButtonLabelIcon} from './parts';
+import {ButtonSizes, IconPositions} from './types';
 
 export interface PrimaryButtonProps extends Themeable, GrowthBehavior {
   /**
-   * The variant of the SecondaryButton.
+   * The variant of the PrimaryButton.
    * @default undefined
    */
   variant?: 'inverse';
   /**
-   * The size of the Button.
+   * There are four button sizes: `extraSmall`, `small`, `medium`, and `large`.
+   * If no size is provided, it will default to `medium`.
+   *
    * @default 'medium'
    */
-  size?: 'extraSmall' | 'small' | 'medium' | 'large';
+  size?: ButtonSizes;
   /**
    * The data label of the Button.
    * Note: not displayed at `small` size
@@ -34,10 +38,11 @@ export interface PrimaryButtonProps extends Themeable, GrowthBehavior {
    */
   icon?: CanvasSystemIcon;
   /**
-   * The position of the TertiaryButton icon.
+   * Button icon positions can either be `left` or `right`.
+   * If no value is provided, it defaults to `left`.
    * @default 'left'
    */
-  iconPosition?: 'left' | 'right';
+  iconPosition?: IconPositions;
   /**
    * If set to `true`, transform the icon's x-axis to mirror the graphic
    * @default false

@@ -5,8 +5,7 @@ import isPropValid from '@emotion/is-prop-valid';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {styled} from '@workday/canvas-kit-react/common';
 
-type ButtonSizes = 'extraSmall' | 'small' | 'medium' | 'large';
-
+import {ButtonSizes, IconPositions} from '../types';
 export interface ButtonLabelIconProps {
   /**
    * There are four button sizes: `extraSmall`, `small`, `medium`, and `large`.
@@ -20,10 +19,11 @@ export interface ButtonLabelIconProps {
    */
   icon?: CanvasSystemIcon;
   /**
-   * The position of the TertiaryButton icon.
+   * Button icon positions can either be `left` or `right`.
+   * If no value is provided, it defaults to `left`.
    * @default 'left'
    */
-  iconPosition?: 'left' | 'right';
+  iconPosition?: IconPositions;
   /**
    * If set to `true`, transform the icon's x-axis to mirror the graphic
    * @default false
