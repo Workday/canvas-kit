@@ -1,11 +1,10 @@
 import * as React from 'react';
-import {SearchBar} from '../lib/parts/SearchBar';
+import {SearchForm} from '../lib/SearchForm';
 import {render, screen, fireEvent} from '@testing-library/react';
-import {searchThemes} from '../lib/shared/themes';
-import {SearchTheme} from '../lib/shared/types';
+import {searchThemes, SearchTheme} from '../lib/themes';
 import chroma from 'chroma-js';
 
-describe('Header Search', () => {
+describe('SearchForm', () => {
   const cb = jest.fn().mockImplementation((event: Event) => event);
 
   afterEach(() => {
@@ -14,7 +13,7 @@ describe('Header Search', () => {
 
   test('Searching empty string should focus input', () => {
     const inputLabelText = `label`;
-    render(<SearchBar onSubmit={cb} inputLabel={inputLabelText} />);
+    render(<SearchForm onSubmit={cb} inputLabel={inputLabelText} />);
 
     fireEvent.submit(screen.getByRole('search', {name: inputLabelText}));
 
@@ -24,7 +23,7 @@ describe('Header Search', () => {
 
   test('Searching something should call callback', () => {
     const role = `search`;
-    render(<SearchBar onSubmit={cb} initialValue="hello" />);
+    render(<SearchForm onSubmit={cb} initialValue="hello" />);
 
     fireEvent.submit(screen.getByRole(role));
 
@@ -33,7 +32,7 @@ describe('Header Search', () => {
 
   test('Searching with icon should call callback', () => {
     const label = `submitLabel`;
-    render(<SearchBar onSubmit={cb} initialValue="world" submitAriaLabel={label} />);
+    render(<SearchForm onSubmit={cb} initialValue="world" submitAriaLabel={label} />);
 
     fireEvent.click(screen.getByLabelText(label));
 
@@ -45,7 +44,7 @@ describe('Header Search', () => {
     const text = `initial text`;
     const inputLabelText = `label`;
     render(
-      <SearchBar
+      <SearchForm
         onSubmit={cb}
         initialValue={text}
         clearButtonAriaLabel={label}
@@ -61,7 +60,7 @@ describe('Header Search', () => {
   test('Input change should fire callback', () => {
     const inputLabelText = `label`;
     const newValue = `label`;
-    render(<SearchBar onSubmit={jest.fn()} onInputChange={cb} inputLabel={inputLabelText} />);
+    render(<SearchForm onSubmit={jest.fn()} onInputChange={cb} inputLabel={inputLabelText} />);
 
     const input = screen.getByRole('combobox', {name: inputLabelText});
     fireEvent.change(input, {target: {value: newValue}});
@@ -76,7 +75,7 @@ describe('Header Search', () => {
     const openLabel = `openLabel`;
 
     render(
-      <SearchBar
+      <SearchForm
         onSubmit={cb}
         inputLabel={inputLabel}
         openButtonAriaLabel={openLabel}
@@ -110,7 +109,7 @@ describe('Header Search', () => {
   test('Search Bar can accept custom themes', () => {
     const inputLabelText = `label`;
     render(
-      <SearchBar
+      <SearchForm
         onSubmit={jest.fn()}
         inputLabel={inputLabelText}
         searchTheme={{
@@ -143,7 +142,7 @@ describe('Header Search', () => {
   test('Search Bar can accept default themes', () => {
     const inputLabelText = `label`;
     const theme = SearchTheme.Dark;
-    render(<SearchBar onSubmit={jest.fn()} inputLabel={inputLabelText} searchTheme={theme} />);
+    render(<SearchForm onSubmit={jest.fn()} inputLabel={inputLabelText} searchTheme={theme} />);
 
     const input = screen.getByRole('combobox', {name: inputLabelText});
     const style = window.getComputedStyle(input);
@@ -156,7 +155,7 @@ describe('Header Search', () => {
   test('Search Bar should spread extra props', async () => {
     const cb = jest.fn();
     const data = 'test';
-    render(<SearchBar onSubmit={cb} data-propspread={data} />);
+    render(<SearchForm onSubmit={cb} data-propspread={data} />);
 
     expect(screen.getByRole('search')).toHaveAttribute('data-propspread', data);
   });

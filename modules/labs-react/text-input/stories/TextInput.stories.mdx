@@ -1,0 +1,125 @@
+import {Meta} from '@storybook/addon-docs/blocks';
+import {Specifications} from '@workday/canvas-kit-docs';
+
+import {TextInput} from '@workday/canvas-kit-labs-react/text-input';
+
+import {Basic} from './examples/Basic';
+import {Disabled} from './examples/Disabled';
+import {Grow} from './examples/Grow';
+import {LabelPosition} from './examples/LabelPosition';
+import {Placeholder} from './examples/Placeholder';
+import {RefForwarding} from './examples/RefForwarding';
+import {Required} from './examples/Required';
+import {Password} from './examples/Password';
+import {HiddenLabel} from './examples/HiddenLabel';
+import {ThemedAlert} from './examples/ThemedAlert';
+import {ThemedError} from './examples/ThemedError';
+import {Error} from './examples/Error';
+import {Alert} from './examples/Alert';
+import {LoginForm} from './examples/LoginForm';
+
+<Meta title="Labs/Text Input/React" component={TextInput} />
+
+# Canvas Kit Text Input
+
+Text Inputs allow users to enter words or characters without styling.
+
+[> Workday Design Reference](https://design.workday.com/components/inputs/text-input)
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-react
+```
+
+## Usage
+
+### Basic Example
+
+<ExampleCodeBlock code={Basic} />
+
+### Disabled
+
+Set the `disabled` prop of the TextInput.Field to prevent users from interacting with it.
+
+<ExampleCodeBlock code={Disabled} />
+
+### Placeholder
+
+Set the `placeholder` prop of the TextInput.Field to display a sample of its expected format or
+value before a value has been provided.
+
+<ExampleCodeBlock code={Placeholder} />
+
+### Required
+
+Set the `isRequired` property property from useTextInputModel to indicate that the field is
+required. This will also add an red asterisk next to your TextInput.Label.
+
+<ExampleCodeBlock code={Required} />
+
+### Ref Forwarding
+
+All the TextInput subcomponents support
+[ref forwarding](https://reactjs.org/docs/forwarding-refs.html). e.g. TextInput.Field will forward
+`ref` to its underlying `<input type="text">` element.
+
+<ExampleCodeBlock code={RefForwarding} />
+
+### Grow
+
+There are lots of ways to accomplish this. The TextInput.Field extends from Box so it is easy to
+extend full width, e.g. setting width prop to 100%, or you can wrap the whole TextInput in it a Flex
+and set the growth that way, etc.
+
+<ExampleCodeBlock code={Grow} />
+
+### Label Position
+
+Setting the Label position can be done using HStack or VStack
+
+<ExampleCodeBlock code={LabelPosition} />
+
+### Visually Hiding The Label
+
+If your label is just for screen reader users you can add the isVisuallyHidden to TextInput.Label
+
+<ExampleCodeBlock code={HiddenLabel} />
+
+### Type
+
+Set the `type` prop TextInput.Field to any allowed string, e.g. password to change the input field
+type.
+
+<ExampleCodeBlock code={Password} />
+
+### Error States
+
+Use the `hasError` property from useTextInputModel to set the TextInput to the Error state. If you
+have an accompanying hint you can use the TextInput.Hint subcomponent.
+
+#### Errors
+
+<ExampleCodeBlock code={Error} />
+
+#### Themed Errors
+
+<ExampleCodeBlock code={ThemedError} />
+
+### Other Visual States
+
+Use the `useThemedRing` hook to change the visual state of the input field.
+
+#### Alerts
+
+<ExampleCodeBlock code={Alert} />
+
+#### Themed Alerts
+
+<ExampleCodeBlock code={ThemedAlert} />
+
+#### Full example
+
+Login Form using Formik
+
+<ExampleCodeBlock code={LoginForm} />
