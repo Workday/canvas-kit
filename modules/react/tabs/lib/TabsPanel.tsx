@@ -50,7 +50,7 @@ export const useTabsPanel = createHook(
     useMountLayout(() => {
       const index = state.panelIndexRef.current;
       const tabName = name || String(index);
-      events.registerPanel({item: {id: tabName, data: {}}});
+      events.registerPanel({item: {id: tabName}});
       setTabName(tabName);
 
       return () => {

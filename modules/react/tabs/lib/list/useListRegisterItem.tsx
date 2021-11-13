@@ -33,7 +33,7 @@ export const useListRegisterItem = createHook(
         return;
       }
       events.registerItem({
-        item: {id: itemId, disabled: elemProps.disabled, data: {}},
+        item: {id: itemId},
         index: elemProps.index,
       });
       setLocalId(itemId);
