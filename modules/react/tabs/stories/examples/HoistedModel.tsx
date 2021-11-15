@@ -30,7 +30,7 @@ export const HoistedModel = () => {
           model.events.select({id: 'third'});
         }}
       >
-        Select third tab
+        Select Third Tab
       </SecondaryButton>
     </>
   );

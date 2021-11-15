@@ -11,14 +11,14 @@ export const LabelPosition = () => {
 
   return (
     <FormField
-      label="Choose your pizza crust"
+      label="Choose Your Pizza Crust"
       labelPosition={FormField.LabelPosition.Left}
       useFieldset={true}
     >
       <RadioGroup name="crust" onChange={handleChange} value={value}>
-        <Radio label="Deep Dish" value="deep-dish" />
+        <Radio label="Deep dish" value="deep-dish" />
         <Radio label="Thin" value="thin" />
-        <Radio label="Gluten Free" value="gluten-free" />
+        <Radio label="Gluten free" value="gluten-free" />
         <Radio label="Cauliflower" value="cauliflower" />
       </RadioGroup>
     </FormField>
