@@ -13,14 +13,14 @@ import {
 export type Orientation = 'horizontal' | 'vertical';
 
 export type SelectionState<T = unknown> = CursorState<T> & {
-  selectedKeys: 'all' | string[];
-  unselectedKeys: string[];
+  selectedIds: 'all' | string[];
+  unselectedIds: string[];
 };
 
 export type SelectionEvents<T = unknown> = CursorEvents<T> & {
   /** Select a specific item by its identifier. */
   select(data: {id: string}): void;
-  /** Select all items. This will set `selectedKeys` to `'all'` and remove all `unselectedKeys`.
+  /** Select all items. This will set `selectedIds` to `'all'` and remove all `unselectedIds`.
    * This is especially useful for virtual lists where not all items are loaded in memory.
    */
   selectAll(): void;
@@ -56,52 +56,50 @@ export const selectionEventMap = createEventMap<SelectionEvents>()({
 export interface SelectionManager {
   select(
     id: string,
-    prevState: Pick<SelectionState, 'selectedKeys' | 'unselectedKeys'>
-  ): Pick<SelectionState, 'selectedKeys' | 'unselectedKeys'>;
+    prevState: Pick<SelectionState, 'selectedIds' | 'unselectedIds'>
+  ): Pick<SelectionState, 'selectedIds' | 'unselectedIds'>;
 }
 
 export const isSelected = (
   id: string,
-  {selectedKeys, unselectedKeys}: Pick<SelectionState, 'selectedKeys' | 'unselectedKeys'>
+  {selectedIds, unselectedIds}: Pick<SelectionState, 'selectedIds' | 'unselectedIds'>
 ) => {
-  if (selectedKeys === 'all') {
-    return !unselectedKeys.includes(id);
+  if (selectedIds === 'all') {
+    return !unselectedIds.includes(id);
   }
-  return selectedKeys.includes(id);
+  return selectedIds.includes(id);
 };
 
 export const singleSelectionManager: SelectionManager = {
   select(id: string) {
-    return {selectedKeys: [id], unselectedKeys: []};
+    return {selectedIds: [id], unselectedIds: []};
   },
 };
 
 export const multiSelectionManager: SelectionManager = {
-  select(id: string, {selectedKeys, unselectedKeys}) {
-    if (selectedKeys === 'all') {
-      // If we have all selected, start adding/removing from `unselectedKeys`
-      const existingKey = unselectedKeys.includes(id);
+  select(id: string, {selectedIds, unselectedIds}) {
+    if (selectedIds === 'all') {
+      // If we have all selected, start adding/removing from `unselectedIds`
+      const existingKey = unselectedIds.includes(id);
       return {
-        selectedKeys: 'all',
-        unselectedKeys: existingKey
-          ? unselectedKeys.filter(key => key !== id)
-          : unselectedKeys.concat(id),
+        selectedIds: 'all',
+        unselectedIds: existingKey
+          ? unselectedIds.filter(key => key !== id)
+          : unselectedIds.concat(id),
       };
     } else {
-      const existingKey = selectedKeys.includes(id);
+      const existingKey = selectedIds.includes(id);
       return {
-        selectedKeys: existingKey
-          ? selectedKeys.filter(key => key !== id)
-          : selectedKeys.concat(id),
-        unselectedKeys: [],
+        selectedIds: existingKey ? selectedIds.filter(key => key !== id) : selectedIds.concat(id),
+        unselectedIds: [],
       };
     }
   },
 };
 
 export type BaseSelectionModelConfig<T> = BaseCursorModelConfig<T> & {
-  initialSelectedKeys?: string[];
-  initialUnselectedKeys?: string[];
+  initialSelectedIds?: string[];
+  initialUnselectedIds?: string[];
   selection?: SelectionManager;
 };
 
@@ -112,21 +110,21 @@ export const useSelectionModel = <T extends unknown>(
   config: SelectionModelConfig<T> = {}
 ): SelectionModel<T> => {
   const cursor = useCursorModel(config as CursorModelConfig<T>);
-  const [selectedKeys, setSelectedKeys] = React.useState<'all' | string[]>(
-    config.initialSelectedKeys || []
+  const [selectedIds, setSelectedIds] = React.useState<'all' | string[]>(
+    config.initialSelectedIds || []
   );
-  const [unselectedKeys, setUnselectedKeys] = React.useState(config.initialUnselectedKeys || []);
+  const [unselectedIds, setUnselectedIds] = React.useState(config.initialUnselectedIds || []);
 
   const selection = config.selection || singleSelectionManager;
 
-  const state = {...cursor.state, selectedKeys, unselectedKeys};
+  const state = {...cursor.state, selectedIds, unselectedIds};
 
   const events = useEventMap(selectionEventMap, state, config, {
     ...cursor.events,
     select(data) {
-      const {selectedKeys, unselectedKeys} = selection.select(data.id, state);
-      setSelectedKeys(selectedKeys);
-      setUnselectedKeys(unselectedKeys);
+      const {selectedIds, unselectedIds} = selection.select(data.id, state);
+      setSelectedIds(selectedIds);
+      setUnselectedIds(unselectedIds);
       events.goTo({id: data.id});
     },
   } as SelectionEvents<T>);

@@ -61,7 +61,7 @@ export const cursorEventMap = createEventMap<CursorEvents>()({
 export type BaseCursorModelConfig<T> = BaseListModelConfig<T> & {
   /**
    * The orientation of a list of items. Values are either `vertical` or `horizontal`. This value will
-   * effect which keys activate progression through a list. For example, `horizontal` will activate with
+   * effect which ids activate progression through a list. For example, `horizontal` will activate with
    * left and right arrows while `vertical` will activate with up and down arrows.
    * @default 'vertical'
    */
@@ -82,10 +82,10 @@ export const useCursorNavigation = <T extends unknown>(
   // refs for performance so that new functions aren't created every render
   const getIdRef = React.useRef(getId);
   const itemsRef = React.useRef(state.items);
-  const nonInteractiveKeysRef = React.useRef(state.nonInteractiveKeys);
+  const nonInteractiveIdsRef = React.useRef(state.nonInteractiveIds);
 
   itemsRef.current = state.items;
-  nonInteractiveKeysRef.current = state.nonInteractiveKeys;
+  nonInteractiveIdsRef.current = state.nonInteractiveIds;
 
   // return a memoized function to prevent recreation of functions every render
   return React.useMemo(() => {
@@ -111,7 +111,7 @@ export const useCursorNavigation = <T extends unknown>(
         nextIndex = 0;
       }
 
-      if (nonInteractiveKeysRef.current.includes(getId(items[nextIndex])) && tries > 0) {
+      if (nonInteractiveIdsRef.current.includes(getId(items[nextIndex])) && tries > 0) {
         // The next item is disabled, try again, but only if we haven't already tried everything.
         // Avoid an infinite loop with `tries`
         return getOffsetItem(offset)(getId(items[nextIndex]), tries - 1);

@@ -30,7 +30,7 @@ export const useOverflowTarget = createHook(
       }
     });
 
-    const isHidden = !model.state.hiddenKeys.length;
+    const isHidden = !model.state.hiddenIds.length;
 
     return {
       ref: elementRef,

@@ -13,7 +13,7 @@ export const useSelectionItem = createHook(
     const name = elemProps.name || '';
     const onClick = (event: React.MouseEvent<HTMLElement>) => {
       if (
-        state.nonInteractiveKeys.includes(name) ||
+        state.nonInteractiveIds.includes(name) ||
         event.currentTarget.hasAttribute('aria-disabled')
       ) {
         return;

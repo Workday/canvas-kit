@@ -61,7 +61,7 @@ export const useTabsPanel = createHook(
     return {
       role: 'tabpanel',
       'aria-labelledby': `${state.id}-${tabName}`,
-      hidden: !!tabName && tabName !== state.selectedKeys[0],
+      hidden: !!tabName && tabName !== state.selectedIds[0],
       id: `tabpanel-${state.id}-${tabName}`,
       tabIndex: 0,
     };

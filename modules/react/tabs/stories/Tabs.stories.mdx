@@ -2,7 +2,9 @@ import {Tabs} from '@workday/canvas-kit-react/tabs';
 import {Specifications} from '@workday/canvas-kit-docs';
 
 import {Basic} from './examples/Basic';
-import {NamedKeys} from './examples/NamedKeys';
+import {NamedTabs
+} from './examples/NamedTabs
+';
 import {RightToLeft} from './examples/RightToLeft';
 import {OverflowTabs} from './examples/OverflowTabs';
 import {DisabledTab} from './examples/DisabledTab';
@@ -16,7 +18,6 @@ import {
   TabsStateComponent,
   TabsEventsComponent,
 } from './TabsModel.splitprops.tsx';
-
 <Meta title="Components/Containers/Tabs/React" component={Tabs} />
 
 # Canvas Kit Tabs
@@ -69,13 +70,13 @@ trigger an event to change the active tab.
 
 <ExampleCodeBlock code={HoistedModel} />
 
-### Named Keys
+### Named Tabs
 
 `Tabs.Item` and `Tabs.Panel` both take an optional `name` attribute that is used for the
-`onActivate` callback. This example is identical to the Basic Example, but with named keys for the
+`onActivate` callback. This example is identical to the Basic Example, but with named tabs for the
 `Tabs.Item` and `Tabs.Panel` subcomponents.
 
-<ExampleCodeBlock code={NamedKeys} />
+<ExampleCodeBlock code={NamedTabs} />
 
 ### Right-to-Left
 

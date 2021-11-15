@@ -10,7 +10,7 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {Stack} from '@workday/canvas-kit-labs-react/layout';
 import {useOverflowMeasureContainer} from './overflow';
-import {ListModel, useRenderItems} from './list';
+import {useRenderItems} from './list';
 import {useResetCursorOnBlur} from './selection';
 
 import {TabsModelContext} from './Tabs';

@@ -22,7 +22,7 @@ export const useResetCursorOnBlur = createHook(({state, events}: SelectionModel)
     },
     onBlur() {
       if (!programmaticFocusRef.current) {
-        events.goTo({id: state.selectedKeys[0]});
+        events.goTo({id: state.selectedIds[0]});
       }
     },
   };

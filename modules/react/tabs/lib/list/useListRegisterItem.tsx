@@ -47,7 +47,7 @@ export const useListRegisterItem = createHook(
     return {
       'data-name': localId,
       name: localId,
-      disabled: elemProps.disabled || state.nonInteractiveKeys.includes(localId) ? true : undefined,
+      disabled: elemProps.disabled || state.nonInteractiveIds.includes(localId) ? true : undefined,
     };
   }
 );

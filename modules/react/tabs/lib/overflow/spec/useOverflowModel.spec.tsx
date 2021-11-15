@@ -1,7 +1,7 @@
-import {getHiddenKeys} from '../useOverflowModel';
+import {getHiddenIds} from '../useOverflowModel';
 
 describe('useOverflowModel', () => {
-  describe('getHiddenKeys', () => {
+  describe('getHiddenIds', () => {
     const itemWidthCache = {
       first: 100,
       second: 100,
@@ -14,32 +14,32 @@ describe('useOverflowModel', () => {
       {
         containerWidth: 100,
         selected: 'first',
-        hiddenKeys: ['first', 'second', 'third', 'fourth'],
+        hiddenIds: ['first', 'second', 'third', 'fourth'],
       },
       {
         containerWidth: 199,
         selected: 'first',
-        hiddenKeys: ['first', 'second', 'third', 'fourth'],
+        hiddenIds: ['first', 'second', 'third', 'fourth'],
       },
       {
         containerWidth: 200,
         selected: 'first',
-        hiddenKeys: ['second', 'third', 'fourth'],
+        hiddenIds: ['second', 'third', 'fourth'],
       },
-      {containerWidth: 400, selected: 'first', hiddenKeys: []},
-      {containerWidth: 399, selected: 'first', hiddenKeys: ['third', 'fourth']},
+      {containerWidth: 400, selected: 'first', hiddenIds: []},
+      {containerWidth: 399, selected: 'first', hiddenIds: ['third', 'fourth']},
       {
         containerWidth: 200,
         selected: 'second',
-        hiddenKeys: ['first', 'third', 'fourth'],
+        hiddenIds: ['first', 'third', 'fourth'],
       },
-    ].forEach(({containerWidth, hiddenKeys, selected}) => {
-      it(`when containerWidth is ${containerWidth} and selected is '${selected}' should contain hiddenKeys [${hiddenKeys.join(
+    ].forEach(({containerWidth, hiddenIds, selected}) => {
+      it(`when containerWidth is ${containerWidth} and selected is '${selected}' should contain hiddenIds [${hiddenIds.join(
         ', '
       )}] `, () => {
         expect(
-          getHiddenKeys(containerWidth, overflowTargetWidth, itemWidthCache, [selected])
-        ).toEqual(hiddenKeys);
+          getHiddenIds(containerWidth, overflowTargetWidth, itemWidthCache, [selected])
+        ).toEqual(hiddenIds);
       });
     });
   });

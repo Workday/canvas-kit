@@ -29,7 +29,7 @@ export const useOverflowMeasureItem = createHook(
       };
     });
 
-    const hidden = model.state.hiddenKeys.includes(name);
+    const hidden = model.state.hiddenIds.includes(name);
 
     return {
       ref: elementRef,

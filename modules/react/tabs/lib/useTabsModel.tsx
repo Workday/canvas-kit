@@ -105,7 +105,7 @@ export const useTabsModel = <T extends unknown>(config: TabsModelConfig<T> = {})
         events.select({id: initialSelectedRef.current});
       }
     },
-    initialSelectedKeys: config.initialTab
+    initialSelectedIds: config.initialTab
       ? [config.initialTab]
       : config.items?.length
       ? [getId(config.items![0])]
@@ -124,9 +124,9 @@ export const useTabsModel = <T extends unknown>(config: TabsModelConfig<T> = {})
   };
 
   const overflowItems = React.useMemo(
-    () => (items ? items.filter(item => state.hiddenKeys.includes(getId(item))) : undefined),
+    () => (items ? items.filter(item => state.hiddenIds.includes(getId(item))) : undefined),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [state.hiddenKeys, items]
+    [state.hiddenIds, items]
   );
 
   const events = useEventMap(tabEventMap, state, config, {
@@ -138,7 +138,7 @@ export const useTabsModel = <T extends unknown>(config: TabsModelConfig<T> = {})
   const menu = useMenuModel({
     id: `${id}-menu`,
     items: overflowItems,
-    nonInteractiveKeys: state.nonInteractiveKeys.filter(key => !state.hiddenKeys.includes(key)),
+    nonInteractiveIds: state.nonInteractiveIds.filter(key => !state.hiddenIds.includes(key)),
     onSelect({data, prevState}) {
       menu.events.hide();
       events.select(data);

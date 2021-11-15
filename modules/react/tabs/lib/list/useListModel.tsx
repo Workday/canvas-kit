@@ -15,13 +15,13 @@ export type ListState<T = unknown> = {
   indexRef: React.RefObject<number>;
   items: T[];
   /**
-   * An array of keys of non-interactive elements. Non-interactive elements usually have `disabled`
+   * An array of ids of non-interactive elements. Non-interactive elements usually have `disabled`
    * applied to them and thus are not focusable by the browser. Lists need to know about these so
    * that keyboard navigation properly skips over these items. Interactive elements that are
    * disabled should use `[aria-disabled]` instead and should still receive focus.
    * @see https://www.w3.org/TR/wai-aria-practices-1.1/#kbd_disabled_controls
    */
-  nonInteractiveKeys: string[];
+  nonInteractiveIds: string[];
 };
 
 export type ListEvents<T = unknown> = {
@@ -90,9 +90,9 @@ export type BaseListModelConfig<T = unknown> = {
   items?: T[];
   getId?: (item: T) => string;
   /**
-   * Array of all keys which are currently disabled
+   * Array of all ids which are currently disabled
    */
-  nonInteractiveKeys?: string[];
+  nonInteractiveIds?: string[];
 };
 
 export type ListModelConfig<T> = BaseListModelConfig<T> &
@@ -113,7 +113,7 @@ export const useListModel = <T extends unknown>(config: ListModelConfig<T> = {})
     id,
     items: config.items || items,
     indexRef,
-    nonInteractiveKeys: config.nonInteractiveKeys || [],
+    nonInteractiveIds: config.nonInteractiveIds || [],
   };
 
   const events = useEventMap(listEventMap, state, config, {
