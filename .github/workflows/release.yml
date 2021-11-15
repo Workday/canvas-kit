@@ -86,15 +86,18 @@ jobs:
       ## of a push action to allow a PAT to bypass branch protections (pushing directly on the
       ## branch).
       - name: Lerna Bump
+        if: "!contains(github.event.head_commit.message, '[skip release]')"
         run: yarn bump --yes --conventional-commits --no-changelog
 
       ## Capture the new tag and store it for later use
       - name: Get new tag
+        if: "!contains(github.event.head_commit.message, '[skip release]')"
         id: new-tag
         run: echo "::set-output name=tag::$(node -p 'require("./lerna.json").version')"
 
       ## Generate a changeset based on rules of the Canvas Kit repository
       - name: Generate Changeset
+        if: "!contains(github.event.head_commit.message, '[skip release]')"
         uses: Workday/canvas-kit-actions/generate-changeset@v1
         id: changeset
         with:
@@ -106,6 +109,7 @@ jobs:
       ## We could have gone the route of a lerna changeset plugin, but we would lose access to
       ## usernames which add a nice human touch to release notes
       - name: Update Changelog
+        if: "!contains(github.event.head_commit.message, '[skip release]')"
         run: node utils/update-changelog.js
         env:
           CHANGESET_TITLE: ${{steps.changeset.outputs.title}}
@@ -115,6 +119,7 @@ jobs:
       ## So far, the changes to to the workspace have not been committed. We'll commit them now and
       ## create a tag
       - name: Commit and add Tag
+        if: "!contains(github.event.head_commit.message, '[skip release]')"
         run: |
           git add . && git commit -m "chore: Release v${{steps.new-tag.outputs.tag}} [skip ci]" && git tag -a v${{steps.new-tag.outputs.tag}} -m "v${{steps.new-tag.outputs.tag}}"
 
@@ -132,12 +137,14 @@ jobs:
 
       ## Publish to npm. Must be run after a build
       - name: Publish
+        if: "!contains(github.event.head_commit.message, '[skip release]')"
         run: yarn lerna publish from-package --yes --dist-tag latest
         env:
           NODE_AUTH_TOKEN: '${{secrets.NPM_CI_PUBLISH_TOKEN}}'
 
       ## Push both the commit and tag created by Lerna's version command using a PAT
       - name: Push changes
+        if: "!contains(github.event.head_commit.message, '[skip release]')"
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GH_RW_TOKEN }}
@@ -146,6 +153,7 @@ jobs:
 
       ## Create a release on Github. This will trigger an internal Slack message
       - name: Create Release
+        if: "!contains(github.event.head_commit.message, '[skip release]')"
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

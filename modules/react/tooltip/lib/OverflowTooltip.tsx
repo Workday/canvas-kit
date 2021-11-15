@@ -10,7 +10,7 @@ import {useTooltip} from './useTooltip';
  * Look for an element within the tree for an overflow element (auto, scroll, clip, or hidden).
  * This could be the passed element, or a descendant. If no element is found, `null` is returned.
  */
-const findOverflowElement = (element: Element): Element | null => {
+export const findOverflowElement = (element: Element): Element | null => {
   const style = getComputedStyle(element);
   if (
     style.overflow === 'auto' ||
@@ -36,11 +36,12 @@ const findOverflowElement = (element: Element): Element | null => {
  * Look for an element within the tree for a `text-overflow` CSS property of `ellipsis`.
  * This could be the passed element, or a descendant. If no element is found, `null` is returned.
  */
-const findEllipsisElement = (element: Element): Element | null => {
+export const findEllipsisElement = (element: Element): Element | null => {
   const style = getComputedStyle(element);
   if (style.textOverflow === 'ellipsis' || Number(style.webkitLineClamp) > 0) {
     return element;
-  } else {
+  } else if (element.children) {
+    // `children` is not defined for SVGElement in IE11
     for (let i = 0; i < element.children.length; i++) {
       const overflowElement = findEllipsisElement(element.children[i]);
       if (overflowElement) {
@@ -49,6 +50,7 @@ const findEllipsisElement = (element: Element): Element | null => {
     }
     return null;
   }
+  return null;
 };
 
 const isOverflowed = (element: Element) => {
