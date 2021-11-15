@@ -1,7 +1,11 @@
 import React from 'react';
 
 import {setupIcon} from '@workday/canvas-system-icons-web';
-import {StaticStates, CanvasProvider} from '@workday/canvas-kit-react/common';
+import {
+  StaticStates,
+  PartialEmotionCanvasTheme,
+  ContentDirection,
+} from '@workday/canvas-kit-react/common';
 import {withSnapshotsEnabled, customColorTheme} from '../../../../utils/storybook';
 
 import {Tabs, useTabsModel} from '@workday/canvas-kit-react/tabs';
@@ -22,9 +26,9 @@ export default {
   },
 };
 
-const TabsExample = () => {
+const TabsExample = ({theme}: {theme?: PartialEmotionCanvasTheme} = {theme: undefined}) => {
   return (
-    <StaticStates>
+    <StaticStates theme={theme}>
       <Tabs>
         <ComponentStatesTable
           rowProps={[
@@ -55,15 +59,16 @@ const TabsExample = () => {
   );
 };
 
-export const TabStates = withSnapshotsEnabled(() => <TabsExample />);
-
-export const ThemedTabStates = () => {
-  return (
-    <CanvasProvider theme={{canvas: customColorTheme}}>
-      <TabsExample />
-    </CanvasProvider>
-  );
-};
+export const TabStates = withSnapshotsEnabled(() => (
+  <>
+    <h3>Default</h3>
+    <TabsExample />
+    <h3>Themed</h3>
+    <TabsExample theme={{canvas: customColorTheme}} />
+    <h3>RTL</h3>
+    <TabsExample theme={{canvas: {direction: ContentDirection.RTL}}} />
+  </>
+));
 
 export const Bidirectionality = withSnapshotsEnabled(() => {
   return (

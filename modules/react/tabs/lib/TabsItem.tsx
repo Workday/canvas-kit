@@ -34,7 +34,19 @@ export interface TabsItemProps extends ExtractProps<typeof Box, never> {
    */
   index?: number;
   /**
-   * The label text of the Tab.
+   * The contents of the tab item. This will be the accessible name of the tab for screen readers.
+   * Often, this is text. Icons are also supported. Using `Tabs.Icon` will render an icon that is
+   * not visible to screen readers and therefore the icon should not be necessary to understand the
+   * tab. In most circumstances, `aria-label` should not be used. The accessible name is determined
+   * by the rendered text.
+   *
+   * ```tsx
+   * <Tabs.Item>First Tab</Tabs.Item>
+   * <Tabs.Item hasIcon>
+   *   <Tabs.Icon icon={canvasIcon} />
+   *   <Tabs.Text>Second Tab</Tabs.Text>
+   * </Tabs.Item>
+   * ```
    */
   children: React.ReactNode;
   /**
