@@ -395,3 +395,30 @@ const model = useTabsModel({
 console.log('Selected tab', model.state.selectedKey[0]);
 model.events.select({id: tabName});
 ```
+
+The Tabs component can now handle responsive containers, but the support is not automatic. You must
+use the dynamic API and provide an overflow menu subcomponent. The dynamic API doesn't know the
+shape of your object, so render props must be used to instruct React how to render each item.
+
+```tsx
+// Use `useState` because React will give the same reference each render
+const [items] = React.useState([
+  {id: 'first', text: 'First Tab', contents: 'First Tab Content'},
+  {id: 'second', text: 'Second Tab', contents: 'Second Tab Content'},
+]);
+
+return (
+  <Tabs items={items}>
+    <Tabs.List overflowButton={<Tabs.OverflowButton>More</Tabs.OverflowButton>}>
+      {item => <Tabs.Item name={item.id}>{item.text}</Tabs.Item>}
+    </Tabs.List>
+    <Tabs.Menu.Popper>
+      <Tabs.Menu.Card maxWidth={300} maxHeight={200}>
+        <Tabs.Menu.List>
+          {(item: MyTabItem) => <Tabs.Menu.Item name={item.id}>{item.text}</Tabs.Menu.Item>}
+        </Tabs.Menu.List>
+      </Tabs.Menu.Card>
+    </Tabs.Menu.Popper>
+  </Tabs>
+);
+```

@@ -22,7 +22,6 @@ export const OverflowTabs = () => {
   ]);
   const model = useTabsModel({
     items,
-    getId: item => item.id, // `item` type is known
   });
   const [containerWidth, setContainerWidth] = React.useState('100%');
   return (

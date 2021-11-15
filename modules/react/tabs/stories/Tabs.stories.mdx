@@ -38,9 +38,24 @@ yarn add @workday/canvas-kit-react
 ### Basic Example
 
 `Tabs` includes a container `Tabs` component and the following subcomponents: `Tabs.List`,
-`Tabs.Item` and `Tabs.Panel`.
+`Tabs.Item` and `Tabs.Panel`. This example uses a static API that does not support overflow.
 
 <ExampleCodeBlock code={Basic} />
+
+### Overflow Tabs
+
+Tabs is a responsive component based on the width of its container. If the rendered tabs exceed the
+width of the `Tabs.List`, an overflow menu will be rendered. This only works against the dynamic API
+where you give the `TabsModel` an array of items to be rendered. The dynamic API handles the React
+`key` for you based on the item's identifier. The dynamic API requires either an `id` on each item
+object or a `getId` function that returns an identifier based on the item. The below example uses an
+`id` property on each item.
+
+The dynamic API takes in any object, but since nothing is known about your object, a
+[render prop](https://reactjs.org/docs/render-props.html) is necessary to instruct a list how it
+should render.
+
+<ExampleCodeBlock code={OverflowTabs} />
 
 ### Hoisted Model
 
@@ -67,10 +82,6 @@ trigger an event to change the active tab.
 `Tabs` supports right-to-left through the theme of the `CanvasProvider`.
 
 <ExampleCodeBlock code={RightToLeft} />
-
-### Overflow Tabs
-
-<ExampleCodeBlock code={OverflowTabs} />
 
 ### Disabled Tab
 

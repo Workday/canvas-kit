@@ -26,7 +26,10 @@ import {useOverflowMeasureItem} from './overflow';
 
 import {TabsModelContext} from './Tabs';
 import {TabsModel} from './useTabsModel';
-export interface TabsItemProps extends ExtractProps<typeof Box, never> {
+import {StackProps} from '@workday/canvas-kit-labs-react/layout';
+export interface TabsItemProps
+  extends ExtractProps<typeof Box, never>,
+    Partial<Pick<StackProps, 'spacing'>> {
   /**
    * Optionally pass index to tab item. This should be done if `Tabs.Item` components were created
    * via a `Array::map` function. This index will ensure keyboard navigation works even if items are
@@ -37,8 +40,7 @@ export interface TabsItemProps extends ExtractProps<typeof Box, never> {
    * The contents of the tab item. This will be the accessible name of the tab for screen readers.
    * Often, this is text. Icons are also supported. Using `Tabs.Icon` will render an icon that is
    * not visible to screen readers and therefore the icon should not be necessary to understand the
-   * tab. In most circumstances, `aria-label` should not be used. The accessible name is determined
-   * by the rendered text.
+   * tab. In most circumstances, `aria-label` should not be used.
    *
    * ```tsx
    * <Tabs.Item>First Tab</Tabs.Item>
@@ -96,11 +98,13 @@ export interface TabsItemProps extends ExtractProps<typeof Box, never> {
   hasIcon?: boolean;
 }
 
-export const StyledTabItem = styled(Box.as('button'))<StyledType & {hasIcon?: boolean}>(
-  ({theme}) => ({
+export const StyledTabItem = styled(Box.as('button'))<
+  StyledType & {hasIcon?: boolean} & Pick<TabsItemProps, 'spacing'>
+>(
+  ({theme, spacing}) => ({
     ...type.levels.subtext.large,
     '& > *:not(style) ~ *:not(style)': {
-      marginLeft: space.xxs,
+      marginLeft: spacing || space.xxs,
     },
     fontWeight: type.properties.fontWeights.medium,
     border: 'none',

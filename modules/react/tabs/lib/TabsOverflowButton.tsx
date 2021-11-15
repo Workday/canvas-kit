@@ -9,6 +9,7 @@ import {
   subModelHook,
 } from '@workday/canvas-kit-react/common';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
+import {space} from '@workday/canvas-kit-react/tokens';
 import {useOverflowTarget} from './overflow';
 import {useMenuTarget} from './menu';
 
@@ -36,8 +37,9 @@ export const TabsOverflowButton = createComponent('button')({
     const props = useTabsOverflowButton(localModel, elemProps, ref);
 
     return (
-      <StyledTabItem hasIcon={true} type="button" as={Element} {...props}>
-        {children} <SystemIcon style={{paddingLeft: 4}} icon={chevronDownSmallIcon} />
+      <StyledTabItem hasIcon={true} spacing={space.xxxs} type="button" as={Element} {...props}>
+        <span>{children}</span>
+        <SystemIcon icon={chevronDownSmallIcon} />
       </StyledTabItem>
     );
   },
