@@ -75,27 +75,31 @@ export function getHiddenKeys(
    * elements that won't fit in the container */
   const hiddenKeys: string[] = [];
 
-  if (
-    selectedKeys !== 'all' &&
-    selectedKeys.length &&
-    itemWidthCache[selectedKeys[0]] < containerWidth
-  ) {
+  if (selectedKeys !== 'all' && selectedKeys.length) {
     selectedKey = selectedKeys[0];
-    itemWidth += itemWidthCache[selectedKeys[0]];
   }
 
-  /** Track when we're "done" which happens when we've found all the keys that can fit in the
-   * container. Without this tracking, the loop will "pack" */
-  let done = false;
+  if (
+    Object.keys(itemWidthCache).reduce((sum, key) => sum + itemWidthCache[key], 0) <= containerWidth
+  ) {
+    // All items fit, return empty array
+    return [];
+  } else if (selectedKey) {
+    if (itemWidthCache[selectedKey] + overflowTargetWidth > containerWidth) {
+      // If the selected item doesn't fit, only show overflow (all keys hidden)
+      return Object.keys(itemWidthCache);
+    } else {
+      // at least the selected item and overflow target fit. Update our itemWidth with the sum
+      itemWidth += itemWidthCache[selectedKey] + overflowTargetWidth;
+    }
+  }
 
   for (const key in itemWidthCache) {
-    if (!done && itemWidthCache[key] + itemWidth + overflowTargetWidth < containerWidth) {
-      if (key !== selectedKey) {
-        itemWidth += itemWidthCache[key];
+    if (key !== selectedKey) {
+      itemWidth += itemWidthCache[key];
+      if (itemWidth > containerWidth) {
+        hiddenKeys.push(key);
       }
-    } else if (key !== selectedKey) {
-      done = true;
-      hiddenKeys.push(key);
     }
   }
 
@@ -142,6 +146,7 @@ export const useOverflowModel = <T extends unknown>(
       setHiddenKeys(keys);
     },
     setContainerWidth({width}) {
+      console.log('setContainerWidth', width);
       containerWidthRef.current = width || 0;
       setContainerWidth(width || 0);
 

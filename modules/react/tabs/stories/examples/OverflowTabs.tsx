@@ -1,6 +1,7 @@
 import React from 'react';
 
 import {Tabs, useTabsModel} from '@workday/canvas-kit-react/tabs';
+import {HStack} from '@workday/canvas-kit-labs-react';
 import {SecondaryButton} from '../../../button';
 
 type MyTabItem = {
@@ -23,33 +24,44 @@ export const OverflowTabs = () => {
     items,
     getId: item => item.id, // `item` type is known
   });
+  const [containerWidth, setContainerWidth] = React.useState('100%');
   return (
-    <Tabs model={model}>
-      <Tabs.List overflowButton={<Tabs.OverflowButton>More</Tabs.OverflowButton>}>
-        {(item: MyTabItem) => (
-          <Tabs.Item key={item.id} name={item.id}>
-            {item.text}
-          </Tabs.Item>
-        )}
-      </Tabs.List>
-      <Tabs.Menu.Popper>
-        <Tabs.Menu.Card maxWidth={300} maxHeight={150}>
-          <Tabs.Menu.List>
-            {(item: MyTabItem) => (
-              <Tabs.Menu.Item name={item.id} key={item.id}>
-                {item.text}
-              </Tabs.Menu.Item>
-            )}
-          </Tabs.Menu.List>
-        </Tabs.Menu.Card>
-      </Tabs.Menu.Popper>
-      <Tabs.Panels>
-        {(item: MyTabItem) => (
-          <Tabs.Panel marginTop="m" name={item.id} key={item.id}>
-            {item.contents}
-          </Tabs.Panel>
-        )}
-      </Tabs.Panels>
-    </Tabs>
+    <div style={{width: containerWidth}}>
+      <Tabs model={model}>
+        <Tabs.List overflowButton={<Tabs.OverflowButton>More</Tabs.OverflowButton>}>
+          {(item: MyTabItem) => (
+            <Tabs.Item key={item.id} name={item.id}>
+              {item.text}
+            </Tabs.Item>
+          )}
+        </Tabs.List>
+        <Tabs.Menu.Popper>
+          <Tabs.Menu.Card maxWidth={300} maxHeight={200}>
+            <Tabs.Menu.List>
+              {(item: MyTabItem) => (
+                <Tabs.Menu.Item name={item.id} key={item.id}>
+                  {item.text}
+                </Tabs.Menu.Item>
+              )}
+            </Tabs.Menu.List>
+          </Tabs.Menu.Card>
+        </Tabs.Menu.Popper>
+        <Tabs.Panels>
+          {(item: MyTabItem) => (
+            <Tabs.Panel marginTop="m" name={item.id} key={item.id}>
+              {item.contents}
+            </Tabs.Panel>
+          )}
+        </Tabs.Panels>
+      </Tabs>
+      <hr />
+      <h4>Change tab container size</h4>
+      <HStack spacing="xs">
+        <SecondaryButton onClick={() => setContainerWidth('100%')}>100%</SecondaryButton>
+        <SecondaryButton onClick={() => setContainerWidth('500px')}>500px</SecondaryButton>
+        <SecondaryButton onClick={() => setContainerWidth('235px')}>235px</SecondaryButton>
+        <SecondaryButton onClick={() => setContainerWidth('150px')}>150px</SecondaryButton>
+      </HStack>
+    </div>
   );
 };

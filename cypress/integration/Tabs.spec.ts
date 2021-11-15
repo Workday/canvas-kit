@@ -483,4 +483,56 @@ describe('Tabs', () => {
       });
     });
   });
+
+  context('when [Components/Containers/Tabs/React, OverflowTabs] story is rendered', () => {
+    beforeEach(() => {
+      h.stories.load('Components/Containers/Tabs/React', 'OverflowTabs');
+    });
+
+    it('should pass axe checks', () => {
+      cy.checkA11y();
+    });
+
+    it('should not show the "More" button', () => {
+      cy.findByRole('button', {name: 'More'}).should('not.exist');
+    });
+
+    context('when tab list container is only 500px wide', () => {
+      beforeEach(() => {
+        cy.findByRole('button', {name: '500px'}).click();
+      });
+
+      it('should pass axe checks', () => {
+        cy.checkA11y();
+      });
+
+      it('should show the "More" button', () => {
+        cy.findByRole('button', {name: 'More'}).should('exist');
+      });
+
+      context('when the "More" button is clicked', () => {
+        beforeEach(() => {
+          cy.findByRole('button', {name: 'More'}).click();
+        });
+
+        it('should show the Tab overflow menu', () => {
+          cy.findByRole('menu', {name: 'More'}).should('exist');
+        });
+
+        context('when the "Sixth Tab" is clicked', () => {
+          beforeEach(() => {
+            cy.findByRole('menuitem', {name: 'Sixth Tab'}).click();
+          });
+
+          it('should select the Sixth Tab', () => {
+            cy.findByRole('tab', {name: 'Sixth Tab'}).should('have.attr', 'aria-selected', 'true');
+          });
+
+          it('should move focus back to the "More" button', () => {
+            cy.findByRole('button', {name: 'More'}).should('have.focus');
+          });
+        });
+      });
+    });
+  });
 });
