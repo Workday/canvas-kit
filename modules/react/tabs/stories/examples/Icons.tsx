@@ -20,7 +20,7 @@ export const Icons = () => {
           <Tabs.Item.Icon icon={selectIcon} />
           <Tabs.Item.Text>Third Tab</Tabs.Item.Text>
         </Tabs.Item>
-        <Tabs.Item hasIcon>
+        <Tabs.Item>
           <Tabs.Item.Icon icon={shareIcon} />
           <Tabs.Item.Text>Fourth Tab</Tabs.Item.Text>
         </Tabs.Item>

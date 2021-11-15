@@ -11,6 +11,7 @@ import {Stack} from '@workday/canvas-kit-labs-react/layout';
 
 import {MenuModel} from './useMenuModel';
 import {MenuModelContext} from './Menu';
+import {useRenderItems} from '../list';
 
 export interface MenuListProps<T = unknown> extends Partial<ExtractProps<typeof Stack, never>> {
   /**
@@ -44,9 +45,7 @@ export const MenuList = createComponent('div')({
         flexDirection={localModel.state.orientation === 'vertical' ? 'column' : 'row'}
         {...props}
       >
-        {typeof children === 'function'
-          ? localModel.state.items.map(item => children(item))
-          : children}
+        {useRenderItems(localModel, children)}
       </Stack>
     );
   },

@@ -29,26 +29,18 @@ export const OverflowTabs = () => {
     <div style={{width: containerWidth}}>
       <Tabs model={model}>
         <Tabs.List overflowButton={<Tabs.OverflowButton>More</Tabs.OverflowButton>}>
-          {(item: MyTabItem) => (
-            <Tabs.Item key={item.id} name={item.id}>
-              {item.text}
-            </Tabs.Item>
-          )}
+          {(item: MyTabItem) => <Tabs.Item name={item.id}>{item.text}</Tabs.Item>}
         </Tabs.List>
         <Tabs.Menu.Popper>
           <Tabs.Menu.Card maxWidth={300} maxHeight={200}>
             <Tabs.Menu.List>
-              {(item: MyTabItem) => (
-                <Tabs.Menu.Item name={item.id} key={item.id}>
-                  {item.text}
-                </Tabs.Menu.Item>
-              )}
+              {(item: MyTabItem) => <Tabs.Menu.Item name={item.id}>{item.text}</Tabs.Menu.Item>}
             </Tabs.Menu.List>
           </Tabs.Menu.Card>
         </Tabs.Menu.Popper>
         <Tabs.Panels>
           {(item: MyTabItem) => (
-            <Tabs.Panel marginTop="m" name={item.id} key={item.id}>
+            <Tabs.Panel marginTop="m" name={item.id}>
               {item.contents}
             </Tabs.Panel>
           )}

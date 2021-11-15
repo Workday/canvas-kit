@@ -8,6 +8,8 @@ import {
   useModelContext,
   composeHooks,
   createHook,
+  useLocalRef,
+  useMount,
 } from '@workday/canvas-kit-react/common';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
@@ -140,7 +142,7 @@ const StyledItem = styled(Box.as('li'))<StyledType & {hasIcon?: boolean}>(
         display: 'flex',
       };
     } else {
-      return {}; //ellipsisStyles;
+      return {};
     }
   }
 );
@@ -151,6 +153,21 @@ export const MenuItem = createComponent('button')({
     const localModel = useModelContext(MenuModelContext, model);
 
     const props = useMenuItem(localModel, elemProps, ref);
+
+    if ('production' !== process.env.NODE_ENV) {
+      // ensure `hasIcon` is used when a child has an icon
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      const {elementRef, localRef} = useLocalRef(props.ref);
+      props.ref = elementRef;
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      useMount(() => {
+        if (localRef.current.querySelector('svg') && !props.hasIcon) {
+          console.warn(
+            `A Menu.Item with an icon should have the 'hasIcon' prop set to true. This ensures correct rendering`
+          );
+        }
+      });
+    }
 
     return (
       <OverflowTooltip placement="left">

@@ -4,6 +4,7 @@ import {createComponent, useModelContext} from '@workday/canvas-kit-react/common
 
 import {TabsModelContext} from './Tabs';
 import {TabsModel} from './useTabsModel';
+import {useRenderItems} from './list';
 
 export interface TabsPanelsProps<T = unknown> {
   /**
@@ -22,12 +23,6 @@ export const TabsPanels = createComponent()({
   Component: ({children, model}: TabsPanelsProps) => {
     const localModel = useModelContext(TabsModelContext, model);
 
-    return (
-      <>
-        {typeof children === 'function'
-          ? localModel.state.items.map(item => children(item))
-          : children}
-      </>
-    );
+    return <>{useRenderItems(localModel, children)}</>;
   },
 });

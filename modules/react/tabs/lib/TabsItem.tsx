@@ -13,6 +13,8 @@ import {
   ExtractProps,
   ellipsisStyles,
   EllipsisText,
+  useLocalRef,
+  useMount,
 } from '@workday/canvas-kit-react/common';
 import {Box} from '@workday/canvas-kit-labs-react/common';
 import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
@@ -179,6 +181,21 @@ export const TabsItem = createComponent('button')({
     const localModel = useModelContext(TabsModelContext, model);
 
     const props = useTabsItem(localModel, elemProps, ref);
+
+    if ('production' !== process.env.NODE_ENV) {
+      // ensure `hasIcon` is used when a child has an icon
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      const {elementRef, localRef} = useLocalRef(props.ref);
+      props.ref = elementRef;
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      useMount(() => {
+        if (localRef.current.querySelector('svg') && !props.hasIcon) {
+          console.warn(
+            `A Tabs.Item with an icon should have the 'hasIcon' prop set to true. This ensures correct rendering`
+          );
+        }
+      });
+    }
 
     return (
       <OverflowTooltip>

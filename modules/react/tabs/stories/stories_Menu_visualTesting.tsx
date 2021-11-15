@@ -8,6 +8,7 @@ import {customColorTheme, withSnapshotsEnabled} from '../../../../utils/storyboo
 
 // unreleased path
 import {Menu} from '../lib/menu';
+import {HStack} from '@workday/canvas-kit-labs-react';
 
 const fontDelay = 150; // best guess for the font delay to prevent incorrect Chromatic regressions
 
@@ -31,7 +32,7 @@ const AllStates = () => (
         <Menu.Item className="hover">Hovered Item</Menu.Item>
         <Menu.Item className="focus hover">Focused & Hovered Item</Menu.Item>
         <Menu.Item aria-disabled={true}>Disabled Item</Menu.Item>
-        <Menu.Item>Truncated Item Truncated Item Truncated Item</Menu.Item>
+        <Menu.Item>Wrapped Text Item Wrapped Text Item Wrapped Text Item</Menu.Item>
         <Menu.Item hasIcon>
           <Menu.Item.Icon icon={saveAsIcon} />
           <Menu.Item.Text>Item with Icon</Menu.Item.Text>
@@ -54,7 +55,7 @@ const AllStates = () => (
         </Menu.Item>
         <Menu.Item hasIcon>
           <Menu.Item.Icon icon={saveAsIcon} />
-          <Menu.Item.Text>Item with Icon Truncated Truncated</Menu.Item.Text>
+          <Menu.Item.Text>Item with Icon Wrapped Text Wrapped Text</Menu.Item.Text>
         </Menu.Item>
       </Menu.List>
     </Menu.Card>
@@ -64,18 +65,24 @@ const AllStates = () => (
 export const TabStates = withSnapshotsEnabled(() => {
   return (
     <StaticStates>
-      <div style={{width: 320}}>
-        <h3>Normal</h3>
-        <AllStates />
-        <h3>RTL</h3>
-        <CanvasProvider theme={{canvas: {direction: ContentDirection.RTL}}}>
+      <HStack spacing="xs">
+        <div>
+          <h3>Normal</h3>
           <AllStates />
-        </CanvasProvider>
-        <h3>Themed</h3>
-        <CanvasProvider theme={{canvas: customColorTheme}}>
-          <AllStates />
-        </CanvasProvider>
-      </div>
+        </div>
+        <div>
+          <h3>Themed</h3>
+          <CanvasProvider theme={{canvas: customColorTheme}}>
+            <AllStates />
+          </CanvasProvider>
+        </div>
+        <div>
+          <h3>RTL</h3>
+          <CanvasProvider theme={{canvas: {direction: ContentDirection.RTL}}}>
+            <AllStates />
+          </CanvasProvider>
+        </div>
+      </HStack>
     </StaticStates>
   );
 });

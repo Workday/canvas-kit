@@ -10,7 +10,7 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {Stack} from '@workday/canvas-kit-labs-react/layout';
 import {useOverflowMeasureContainer} from './overflow';
-import {ListModel} from './list';
+import {ListModel, useRenderItems} from './list';
 import {useResetCursorOnBlur} from './selection';
 
 import {TabsModelContext} from './Tabs';
@@ -34,20 +34,6 @@ export interface TabListProps<T = unknown> extends Partial<ExtractProps<typeof S
    */
   model?: TabsModel<T>;
   overflowButton?: React.ReactNode;
-}
-
-function useRenderItems<T>(
-  model: ListModel<T>,
-  children: ((item: T) => React.ReactNode) | React.ReactNode
-) {
-  const items = React.useMemo(() => {
-    return typeof children === 'function' ? model.state.items.map(item => children(item)) : null;
-    // If we added `children` as a dependency, this memo would be useless. If the user wants the
-    // item to rerender, the item and items array needs to be updated.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [model.state.items]);
-
-  return items || children;
 }
 
 export const TabsList = createComponent('div')({
