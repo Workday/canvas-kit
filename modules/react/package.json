@@ -56,7 +56,6 @@
     "@emotion/styled": "^10.0.27",
     "@popperjs/core": "^2.5.4",
     "@workday/canvas-colors-web": "^2.0.0",
-    "@workday/canvas-depth-web": "^0.16.4",
     "@workday/canvas-kit-labs-react": "^5.2.12",
     "@workday/canvas-kit-popup-stack": "^5.2.12",
     "@workday/canvas-kit-preview-react": "^5.2.12",
