@@ -340,7 +340,7 @@ type CustomDepthValues = CanvasDepthValue;
 interface OtherCustomDepthValues extends CanvasDepthValue {}
 
 // v6
-import {CanvasDepthValue} from '@workday/canvas-kit-react/tokens';
+import {CanvasDepthValues} from '@workday/canvas-kit-react/tokens';
 
 type CustomDepthValues = CanvasDepthValues;
 interface OtherCustomDepthValues extends CanvasDepthValues {}
@@ -366,10 +366,10 @@ Below is a reference table for the V5 and V6 breakpoint values.
 
 Also for reference, these are our viewport ranges:
 
-- `small` (320px - 767px) Used for mobile-sized screens
-- `medium` (768px - 1023px) Used for tablet-sized screens
-- `large` - (1024px - 1439px) Used for laptop and small desktop screens
-- `extra-large` (≥1440px) Used for very large screens
+- `small` (`320px` -` 767px`) Used for mobile-sized screens
+- `medium` (`768px` -` 1023px`) Used for tablet-sized screens
+- `large` - (`1024px` -` 1439px`) Used for laptop and small desktop screens
+- `extra-large` (`≥1440px`) Used for very large screens
 
 ### Action Bar
 
@@ -377,10 +377,10 @@ Also for reference, these are our viewport ranges:
 `max-width: 575px`. They now use `max-width: 767.5px` – the upper limit of the `small` range. This
 will have two effects for this component:
 
-- Container padding will decrease from `s` (16px) to `xxs` (8px) on all viewports < 768px wide
-  - This was previously happening only on viewports < 576px wide
-- Button order will be reversed on all viewports < 768px wide
-  - This was previously happening only on viewports < 576px wide
+- Container padding will decrease from `s` (`16px`) to `xxs` (`8px`) on all viewports less than `768px` wide
+  - This was previously happening only on viewports less than `576px` wide
+- Button order will be reversed on all viewports less than `768px` wide
+  - This was previously happening only on viewports less than `576px` wide
 
 These changes in behavior are intentional and expected.
 
@@ -417,7 +417,7 @@ All these changes are described in detail by button type in the sections below.
 #### Primary Disabled State
 
 Previously the button's disabled state had a `blueberry200` background, but it now uses the default
-`blueberry400` and sets the entire button to 40% opacity. This creates more more consistency for the
+`blueberry400` and sets the entire button to 40% opacity. This creates more consistency for the
 disabled states across all our buttons.
 
 #### Primary Large
