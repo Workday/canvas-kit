@@ -146,7 +146,6 @@ export const useOverflowModel = <T extends unknown>(
       setHiddenKeys(keys);
     },
     setContainerWidth({width}) {
-      console.log('setContainerWidth', width);
       containerWidthRef.current = width || 0;
       setContainerWidth(width || 0);
 

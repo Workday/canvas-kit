@@ -2,6 +2,7 @@ import React from 'react';
 import {space} from '@workday/canvas-kit-react/tokens';
 
 import {Tabs, useTabsModel, TabsModel} from '@workday/canvas-kit-react/tabs';
+import {SelectionModel} from '../../lib/selection';
 
 export const DynamicTabs = () => {
   const [tabs, setTabs] = React.useState([
@@ -13,31 +14,34 @@ export const DynamicTabs = () => {
   const model = useTabsModel({
     shouldSelect: ({data}) => data.id !== 'last',
   });
-  console.log('items', model.state.items);
 
   /**
-   * TODO fix weirdness around delete key
-   * Helper function that should be called when an item is programmatically removed. When called
-   * with an id of the
+   * Helper function that should be called when an item is programmatically removed. The following
+   * side effects depend on state of the model:
+   * * **Item is focused**: Focus will be moved to next item in the list
+   * * **Item is selected**: Selection will be moved to the next item in the list
    * @param id The id of the item that will be removed
    */
-  const removeItem = (id: string, model: TabsModel) => {
+  const removeItem = (id: string, model: SelectionModel) => {
     const index = model.state.items.findIndex(item => model.getId(item) === model.state.cursorId);
     const nextIndex = index === model.state.items.length - 1 ? index - 1 : index + 1;
     const nextId = model.getId(model.state.items[nextIndex]);
     if (model.state.selectedKeys[0] === id) {
-      // We're deleting the currently active item
-      // get the next item
+      // We're removing the currently selected item. Select next item
       model.events.select({id: nextId});
     }
     if (model.state.cursorId === id) {
+      // We're removing the currently focused item. Focus next item
       model.events.goTo({id: nextId});
-      document.querySelector<HTMLElement>(`#${model.state.id}-${nextId}`)?.focus();
+
+      // wait for stabilization of state
+      requestAnimationFrame(() => {
+        document.querySelector<HTMLElement>(`#${model.state.id}-${nextId}`)?.focus();
+      });
     }
   };
 
   const onKeyDown = (e: React.KeyboardEvent<HTMLElement>, id: string) => {
-    console.log('key', e.key);
     if (e.key === 'Delete') {
       setTabs(tabs.filter(item => item.id !== id));
       removeItem(id, model);

@@ -23,16 +23,7 @@ export default {
 };
 
 const TabsExample = () => {
-  const [shouldRender, setShouldRender] = React.useState(false);
-  React.useEffect(() => {
-    setTimeout(() => {
-      setShouldRender(true);
-    }, fontDelay);
-  }, []);
-
-  const model = useTabsModel();
-
-  return shouldRender ? (
+  return (
     <StaticStates>
       <Tabs>
         <ComponentStatesTable
@@ -61,8 +52,6 @@ const TabsExample = () => {
         </ComponentStatesTable>
       </Tabs>
     </StaticStates>
-  ) : (
-    <Tabs.Item model={model}>Default</Tabs.Item> // Render default tab right away to force font loading so that by the time the story loads, the font will be known
   );
 };
 
