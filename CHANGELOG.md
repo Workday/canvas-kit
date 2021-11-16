@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v5.3.2](https://github.com/Workday/canvas-kit/releases/tag/v5.3.2) (2021-11-16)
+
+### Infrastructure
+
+- ci: Fix npm tagging in release script ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v5.3.1](https://github.com/Workday/canvas-kit/releases/tag/v5.3.1) (2021-11-16)
 
 ### Components
