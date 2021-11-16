@@ -3,22 +3,6 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [v5.3.0](https://github.com/Workday/canvas-kit/releases/tag/v5.3.0) (2021-11-16)
-
-### BREAKING CHANGES
-
-- [#1201](https://github.com/Workday/canvas-kit/pull/1201) Optional breaking changes message. If your PR includes breaking changes. It is extremely rare to put breaking changes outside a `prerelease/v*` branch. Anything in this section will show up in release notes. Remove this section if no breaking changes are present.
-- [#1276](https://github.com/Workday/canvas-kit/pull/1276) `CanvasDepthValue` is renamed to `CanvasDepthValues` for consistency. This change is handled automatically by the v6 codemod. Please refer to the v6 migration guide for more information.
-- [#1319](https://github.com/Workday/canvas-kit/pull/1319) This change updates the theme breakpoint values and the media query breakpoints used in `ActionBar`. For more information, please see the V6 migration guide.
-- [#1331](https://github.com/Workday/canvas-kit/pull/1331) This change updates our `PrimaryButton` styles. For more information, please see the V6 migration guide.
-- [#1332](https://github.com/Workday/canvas-kit/pull/1332) This change updates our `SecondaryButton` styles. For more information, please see the V6 migration guide.
-- [#1338](https://github.com/Workday/canvas-kit/pull/1338) This change updates our `TertiaryButton` styles. For more information, please see the V6 migration guide.
-- [#1325](https://github.com/Workday/canvas-kit/pull/1325) Tabs API was updated to support a more generic selection model for all lists.
-  - `model.events.activate({tab})` -> `model.events.select({id})`
-  - `model.state.activeTab` -> `model.state.selectedKeys[0]`
-  - `useTabsModel({onActivate})` -> `useTabsModel({onSelect})`
-  - `useTabsModel({shouldActivate})` -> `useTabsModel({shouldSelect})`
-
 ### Components
 
 - feat(page-header): Deprecate PageHeader ([#1247](https://github.com/Workday/canvas-kit/pull/1247)) ([@alanbsmith](https://github.com/alanbsmith))

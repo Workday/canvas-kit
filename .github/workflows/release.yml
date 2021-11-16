@@ -73,7 +73,7 @@ jobs:
       ## Capture the previous tag and store it for later use
       - name: Get previous tag
         id: previous-tag
-        run: echo "::set-output name=tag::5.2.1"
+        run: echo "::set-output name=tag::5.2.12"
 
       ## `github.ref` is in the form of `refs/head/{name}`. This step extracts `{name}` and saves it
       ## as an output for later use
@@ -118,10 +118,10 @@ jobs:
 
       ## So far, the changes to to the workspace have not been committed. We'll commit them now and
       ## create a tag
-      # - name: Commit and add Tag
-      #   if: "!contains(github.event.head_commit.message, '[skip release]')"
-      #   run: |
-      #     git add . && git commit -m "chore: Release v${{steps.new-tag.outputs.tag}} [skip ci]" && git tag -a v${{steps.new-tag.outputs.tag}} -m "v${{steps.new-tag.outputs.tag}}"
+      - name: Commit and add Tag
+        if: "!contains(github.event.head_commit.message, '[skip release]')"
+        run: |
+          git add . && git commit -m "chore: Release v${{steps.new-tag.outputs.tag}} [skip ci]" && git tag -a v${{steps.new-tag.outputs.tag}} -m "v${{steps.new-tag.outputs.tag}}"
 
       ## Build Storybook and extract component stories for Storybook aggregation. This will be used
       ## for Chromatic rebaselining and publishing to GH Pages. Should be before `yarn build` since
@@ -143,13 +143,13 @@ jobs:
           NODE_AUTH_TOKEN: '${{secrets.NPM_CI_PUBLISH_TOKEN}}'
 
       ## Push both the commit and tag created by Lerna's version command using a PAT
-      # - name: Push changes
-      #   if: "!contains(github.event.head_commit.message, '[skip release]')"
-      #   uses: ad-m/github-push-action@master
-      #   with:
-      #     github_token: ${{ secrets.GH_RW_TOKEN }}
-      #     branch: ${{ github.ref }}
-      #     tags: true
+      - name: Push changes
+        if: "!contains(github.event.head_commit.message, '[skip release]')"
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GH_RW_TOKEN }}
+          branch: ${{ github.ref }}
+          tags: true
 
       ## Create a release on Github. This will trigger an internal Slack message
       - name: Create Release
