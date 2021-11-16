@@ -1,22 +1,50 @@
 import React from 'react';
 import {space} from '@workday/canvas-kit-react/tokens';
 
-import {Tabs, useTabsModel} from '@workday/canvas-kit-react/tabs';
+import {Tabs, useTabsModel, TabsModel} from '@workday/canvas-kit-react/tabs';
+import {SelectionModel} from '../../lib/selection';
 
 export const DynamicTabs = () => {
   const [tabs, setTabs] = React.useState([
-    {tab: 'Tab 1', name: 'tab-1'},
-    {tab: 'Tab 2', name: 'tab-2'},
-    {tab: 'Tab 3', name: 'tab-3'},
+    {tab: 'Tab 1', id: 'tab-1'},
+    {tab: 'Tab 2', id: 'tab-2'},
+    {tab: 'Tab 3', id: 'tab-3'},
   ]);
   const addedRef = React.useRef(tabs.length);
   const model = useTabsModel({
-    shouldActivate: ({data}) => data.tab !== 'last',
+    shouldSelect: ({data}) => data.id !== 'last',
   });
 
-  const onKeyDown = (e: React.KeyboardEvent<HTMLElement>, name: string) => {
-    if (e.key === 'Backspace') {
-      setTabs(tabs.filter(item => item.name !== name));
+  /**
+   * Helper function that should be called when an item is programmatically removed. The following
+   * side effects depend on state of the model:
+   * * **Item is focused**: Focus will be moved to next item in the list
+   * * **Item is selected**: Selection will be moved to the next item in the list
+   * @param id The id of the item that will be removed
+   */
+  const removeItem = (id: string, model: SelectionModel) => {
+    const index = model.state.items.findIndex(item => model.getId(item) === model.state.cursorId);
+    const nextIndex = index === model.state.items.length - 1 ? index - 1 : index + 1;
+    const nextId = model.getId(model.state.items[nextIndex]);
+    if (model.state.selectedIds[0] === id) {
+      // We're removing the currently selected item. Select next item
+      model.events.select({id: nextId});
+    }
+    if (model.state.cursorId === id) {
+      // We're removing the currently focused item. Focus next item
+      model.events.goTo({id: nextId});
+
+      // wait for stabilization of state
+      requestAnimationFrame(() => {
+        document.querySelector<HTMLElement>(`#${model.state.id}-${nextId}`)?.focus();
+      });
+    }
+  };
+
+  const onKeyDown = (e: React.KeyboardEvent<HTMLElement>, id: string) => {
+    if (e.key === 'Delete') {
+      setTabs(tabs.filter(item => item.id !== id));
+      removeItem(id, model);
     }
   };
 
@@ -25,10 +53,10 @@ export const DynamicTabs = () => {
       <Tabs.List>
         {tabs.map((item, index) => (
           <Tabs.Item
-            key={item.name}
-            name={item.name}
+            key={item.id}
+            name={item.id}
             index={index}
-            onKeyDown={e => onKeyDown(e, item.name)}
+            onKeyDown={e => onKeyDown(e, item.id)}
           >
             {item.tab}
           </Tabs.Item>
@@ -40,7 +68,7 @@ export const DynamicTabs = () => {
           onClick={() => {
             addedRef.current += 1;
             setTabs(tabs =>
-              tabs.concat({tab: `Tab ${addedRef.current}`, name: `tab-${addedRef.current}`})
+              tabs.concat({tab: `Tab ${addedRef.current}`, id: `tab-${addedRef.current}`})
             );
             model.events.goTo({id: 'last'});
           }}
@@ -50,7 +78,7 @@ export const DynamicTabs = () => {
       </Tabs.List>
       <div style={{marginTop: space.m}}>
         {tabs.map((item, index) => (
-          <Tabs.Panel key={item.name} name={item.name}>
+          <Tabs.Panel key={item.id} name={item.id}>
             Contents of {item.tab}
           </Tabs.Panel>
         ))}

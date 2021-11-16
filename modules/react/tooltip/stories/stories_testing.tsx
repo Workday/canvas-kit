@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {Popper, Placement} from '@workday/canvas-kit-react/popup';
-import {TooltipContainer, Tooltip} from '@workday/canvas-kit-react/tooltip';
+import {TooltipContainer, Tooltip, OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
+import {resetIcon} from '@workday/canvas-system-icons-web';
 import {Card} from '@workday/canvas-kit-react/card';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {StaticStates} from '@workday/canvas-kit-react/common';
@@ -18,6 +19,16 @@ export const NonInteractive = () => {
     <Tooltip title="Test">
       <span data-testid="non-interactive">Non-interactive Tooltip</span>
     </Tooltip>
+  );
+};
+
+export const Overflow = () => {
+  return (
+    <OverflowTooltip>
+      <SecondaryButton data-testid="overflow-tooltip" icon={resetIcon} style={{maxWidth: 200}}>
+        Super Mega Ultra Long Content With Max Width On The Button with Icon
+      </SecondaryButton>
+    </OverflowTooltip>
   );
 };
 

@@ -3,6 +3,52 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v5.2.12](https://github.com/Workday/canvas-kit/releases/tag/v5.2.12) (2021-11-10)
+
+### Documentation
+
+- docs: Add Version Support section to Readme ([#1337](https://github.com/Workday/canvas-kit/pull/1337)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
+## [v5.2.11](https://github.com/Workday/canvas-kit/releases/tag/v5.2.11) (2021-11-09)
+
+### Components
+
+- fix(tooltip): Fix findEllipsisElement IE11 ([#1330](https://github.com/Workday/canvas-kit/pull/1330)) ([@alorek](https://github.com/alorek))
+
+
+## [v5.2.10](https://github.com/Workday/canvas-kit/releases/tag/v5.2.10) (2021-11-03)
+
+### Components
+
+- fix(tabs): Allow consumers to style the selected tab ([#1327](https://github.com/Workday/canvas-kit/pull/1327)) ([@sachinmorajkar](https://github.com/sachinmorajkar))
+
+
+## [v5.2.9](https://github.com/Workday/canvas-kit/releases/tag/v5.2.9) (2021-10-21)
+
+### Components
+
+- Update Licence ([@jpante](https://github.com/jpante))
+
+
+## [v5.2.8](https://github.com/Workday/canvas-kit/releases/tag/v5.2.8) (2021-10-07)
+
+### Documentation
+
+- docs: Remove travis badge ([#1299](https://github.com/Workday/canvas-kit/pull/1299)) ([@theiliad](https://github.com/theiliad))
+- docs: Re-order content and fix links ([#1286](https://github.com/Workday/canvas-kit/pull/1286)) ([@willklein](https://github.com/willklein))
+  Improved Contributing Guidelines
+- docs(pagination): Update Pagination MDX to adhere to standardized template ([#1295](https://github.com/Workday/canvas-kit/pull/1295)) ([@jamesfan](https://github.com/jamesfan))
+- docs: Fix miscellaneous content issues with MDX docs ([#1304](https://github.com/Workday/canvas-kit/pull/1304)) ([@jamesfan](https://github.com/jamesfan))
+
+### Infrastructure
+
+- ci: Fix New Issue workflow job ([@NicholasBoll](https://github.com/NicholasBoll))
+- ci: Fix automerge by changing token to PAT ([@NicholasBoll](https://github.com/NicholasBoll))
+- ci: Add support for skip release ([@NicholasBoll](https://github.com/NicholasBoll))
+- ci: Update forward merge job to be once a day ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v5.2.7](https://github.com/Workday/canvas-kit/releases/tag/v5.2.7) (2021-09-30)
 
 ### Components

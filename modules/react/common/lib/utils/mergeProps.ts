@@ -39,6 +39,10 @@ export function mergeProps<T extends object, S extends object>(
         typeof targetProps[key] === 'function'
       ) {
         // we don't support removing callbacks via `undefined`, so do nothing here
+      } else if (key === 'ref' && sourceProps.hasOwnProperty('ref')) {
+        // refs should never be overridden. This doesn't happen normally, but happens with hook
+        // composition
+        (returnProps as any).ref = (returnProps as any).ref || (sourceProps as any).ref;
       } else {
         // @ts-ignore TS has more object constraint complaints that aren't useful here
         returnProps[key] = sourceProps[key];

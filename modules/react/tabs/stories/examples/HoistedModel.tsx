@@ -6,8 +6,8 @@ import {Tabs, useTabsModel} from '@workday/canvas-kit-react/tabs';
 
 export const HoistedModel = () => {
   const model = useTabsModel({
-    onActivate({data, prevState}) {
-      console.log('Activated Tab', data, prevState);
+    onSelect({data, prevState}) {
+      console.log('Selected Tab', data, prevState);
     },
   });
 
@@ -27,10 +27,10 @@ export const HoistedModel = () => {
       </Tabs>
       <SecondaryButton
         onClick={() => {
-          model.events.activate({tab: 'third'});
+          model.events.select({id: 'third'});
         }}
       >
-        Activate third tab
+        Select Third Tab
       </SecondaryButton>
     </>
   );
