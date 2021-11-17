@@ -54,7 +54,7 @@ const isInteractiveElement = (element: Element) => {
 export function useTooltip<T extends Element = Element>({
   type = 'label',
   titleText = '',
-  showDelay = 500,
+  showDelay = 300,
   hideDelay = 100,
 }: {
   /**

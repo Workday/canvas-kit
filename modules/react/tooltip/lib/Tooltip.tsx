@@ -74,7 +74,7 @@ export const Tooltip = ({
   placement = 'top',
   title,
   children,
-  showDelay = 500,
+  showDelay = 300,
   hideDelay = 100,
   ...elemProps
 }: TooltipProps) => {
