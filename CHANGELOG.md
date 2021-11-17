@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v6.0.1](https://github.com/Workday/canvas-kit/releases/tag/v6.0.1) (2021-11-17)
+
+### Infrastructure
+
+- ci: Fix major release process to detect breaking changes ([@NicholasBoll](https://github.com/NicholasBoll))
+- fix: Fix codemod command ([#1346](https://github.com/Workday/canvas-kit/pull/1346)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v6.0.0](https://github.com/Workday/canvas-kit/releases/tag/v6.0.0) (2021-11-16)
 
 ### BREAKING CHANGES
