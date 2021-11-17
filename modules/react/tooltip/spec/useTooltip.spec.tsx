@@ -33,7 +33,7 @@ describe('useTooltip with type="describe"', () => {
     const tooltip = getByRole('tooltip');
 
     fireEvent.mouseOver(target); // assign the ID to the tooltip
-    jest.advanceTimersByTime(500); // advance the timer by the amount of delay time
+    jest.advanceTimersByTime(300); // advance the timer by the amount of delay time
 
     expect(tooltip).toHaveAttribute('id');
     const id = tooltip.getAttribute('id');
