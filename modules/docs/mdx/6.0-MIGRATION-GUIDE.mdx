@@ -1,0 +1,558 @@
+import {Meta} from '@storybook/addon-docs/blocks';
+
+<Meta title="Welcome/Migration Guides/v6.0" />
+
+# Canvas Kit 6.0 Migration Guide
+
+Below are the breaking changes made in Canvas Kit v6. Please
+[reach out](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) if you have
+any questions about the update.
+
+- [Codemod](#codemod)
+- [Component Deprecations](#component-deprecations)
+  - [Cookie Banner](#cookie-banner)
+  - [Header & Global Header](#header--global-header)
+  - [Page Header](#page-header)
+- [Component Migrations](#component-migrations)
+  - [Search Bar](#search-bar)
+- [Name Updates](#name-updates)
+  - [Depth Tokens](#depth-tokens)
+- [Theme Breakpoint Updates](#theme-breakpoint-updates)
+  - [Action Bar](#action-bar)
+- [Tabs Component](#tabs-component)
+- [Button Updates](#button-updates)
+  - [Primary Button](#primary-button)
+    - [Primary Disabled](#primary-disabled)
+    - [Primary Large](#primary-large)
+    - [Primary Medium](#primary-medium)
+    - [Primary Small](#primary-small)
+    - [Primary Extra Small](#primary-extra-small)
+  - [Secondary Button](#secondary-button)
+    - [Secondary Disabled](#secondary-disabled)
+    - [Secondary Large](#secondary-large)
+    - [Secondary Medium](#secondary-medium)
+    - [Secondary Small](#secondary-small)
+    - [Secondary Extra Small](#secondary-extra-small)
+  - [Tertiary Button](#tertiary-button)
+    - [Tertiary Default](#tertiary-default)
+    - [Tertiary Disabled](#tertiary-disabled)
+    - [Tertiary Medium](#tertiary-medium)
+    - [Tertiary Small](#tertiary-small)
+    - [Tertiary Extra Small](#tertiary-extra-small)
+
+## Codemod
+
+Please use our [codemod package](https://github.com/Workday/canvas-kit/tree/master/modules/codemod)
+to automatically update your code to work with a majority of the breaking changes in the migration
+from Canvas Kit v5 to v6:
+
+```sh
+> npx @workday/canvas-kit-codemod v6 [path]
+```
+
+> Note: This codemod only works on `.js`, `.jsx`, `.ts`, and `.tsx` extensions. You may need to make
+> some manual changes in other file types (`.json`, `.mdx`, `.md`, etc.).
+
+> Note: You may need to run your linter after executing the codemod, as it's resulting formatting
+> (spacing, quotes, etc.) may not match your project's styling.
+
+**Breaking changes accounted for by this codemod will be marked with a 🤖.**
+
+**Please verify all changes made by the codemod. As a safety precaution, we recommend committing the
+changes from the codemod as a single isolated commit (separate from other changes) so you can
+rollback more easily if necessary.**
+
+[Let us know](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) if you
+encounter any issues or use cases that we've missed. The `@workday/canvas-kit-codemod` package will
+help us maintain additional codemod transforms to make future migrations easier.
+
+## Component Deprecations
+
+### Deprecation Types
+
+There are two types of deprecations: soft and hard.
+
+#### Soft Deprecation
+
+A soft-deprecated component is still available with its full functionality, but it will have been
+renamed with a prefix to indicate its soft-deprecated status. It will also include a console warning
+to announce its deprecation. This warning will only be triggered on the component's initial render.
+
+Soft-deprecated types and utilities will also be renamed but generally will not trigger a console
+warning.
+
+#### Hard Deprecation
+
+A hard-deprecated component or package is no longer available. You will need to follow the method
+prescribed in our migration guide to update your application. Please reach out to our team directly
+if you need additional help.
+
+### Cookie Banner
+
+We are [soft deprecating](#soft-deprecation) `CookieBanner`. It has been renamed to
+`DeprecatedCookieBanner`. Similarly, `CookieBannerProps` has been renamed to
+`DeprecatedCookieBannerProps`. You may continue to use this component exactly as you did in v5, but
+note that we plan to [hard-deprecate](#hard-deprecation) it in Canvas Kit v7.
+
+🤖 The codemod will rename `CookieBanner` and `CookieBannerProps` to their deprecated names:
+
+```tsx
+// v5
+import CookieBanner, {CookieBannerProps} from '@workday/canvas-kit-react/cookie-banner';
+
+export const CustomCookieBanner = (props: CookieBannerProps) => {
+  return <CookieBanner notice={CookieBanner.DefaultNotice} {...props} />;
+};
+
+// v6
+import DeprecatedCookieBanner, {
+  DeprecatedCookieBannerProps,
+} from '@workday/canvas-kit-react/cookie-banner';
+
+export const CustomCookieBanner = (props: DeprecatedCookieBannerProps) => {
+  return <DeprecatedCookieBanner notice={DeprecatedCookieBanner.DefaultNotice} {...props} />;
+};
+```
+
+```tsx
+// v5
+import {CookieBanner, CookieBannerProps} from '@workday/canvas-kit-react';
+
+interface CustomCookieBannerProps extends CookieBannerProps {
+  // custom page header props
+}
+
+export const CustomCookieBanner = (props: CustomCookieBannerProps) => {
+  return <CookieBanner notice={CookieBanner.DefaultNotice} {...props} />;
+};
+
+// v6
+import {DeprecatedCookieBanner, DeprecatedCookieBannerProps} from '@workday/canvas-kit-react';
+
+interface CustomCookieBannerProps extends DeprecatedCookieBannerProps {
+  // custom page header props
+}
+
+export const CustomCookieBanner = (props: CustomCookieBannerProps) => {
+  return <DeprecatedCookieBanner notice={DeprecatedCookieBanner.DefaultNotice} {...props} />;
+};
+```
+
+### Header & Global Header
+
+We are [soft deprecating](#soft-deprecation) `Header` and `GlobalHeader` and their related exports.
+They has been renamed to `DeprecatedHeader` and `DeprecatedGlobalHeader`, respectively. You may
+continue to use these components exactly as you did in v5, but note that we plan to
+[hard-deprecate](#hard-deprecation) this package in Canvas Kit v7.
+
+> Note: `SearchBar` is not being deprecated but will instead move to its own dedictated package. You
+> can read more [here](#search-bar).
+
+🤖 The codemod will handle all these changes automatically:
+
+- Rename import specifiers
+  - `DubLogoTitle` becomes `DeprecatedDubLogoTitle`
+  - `GlobalHeader` becomes `DeprecatedGlobalHeader`
+  - `Header` becomes `DeprecatedHeader`
+  - `HeaderHeight` becomes `DeprecatedHeaderHeight`
+  - `HeaderTheme` becomes `DeprecatedHeaderTheme`
+  - `HeaderVariant` becomes `DeprecatedHeaderVariant`
+  - `ThemeAttributes` becomes `DeprecatedHeaderThemeAttributes`
+  - `Themes` becomes `DeprecatedHeaderThemes`
+  - `WorkdayLogoTitle` becomes `DeprecatedWorkdayLogoTitle`
+  - `themes` becomes `deprecatedHeaderThemes`
+- Rename JSX identifiers
+  - `<DubLogoTitle>` becomes `<DeprecatedDubLogoTitle>`
+  - `<GlobalHeader>` becomes `<DeprecatedGlobalHeader>`
+  - `<Header>` becomes `<DeprecatedHeader>`
+  - `<WorkdayLogoTitle>` becomes `<DeprecatedWorkdayLogoTitle>`
+- Rename type references and interface declarations
+  - `type CustomHeaderHeight = HeaderHeight;` becomes
+    `type CustomHeaderHeight = DeprecatedHeaderHeight;`
+  - `type CustomHeaderTheme = HeaderTheme;` becomes
+    `type CustomHeaderTheme = DeprecatedHeaderTheme;`
+  - `type CustomHeaderVariant = HeaderVariant;` becomes
+    `type CustomHeaderVariant = DeprecatedHeaderVariant;`
+  - `type CustomThemeAttributes = ThemeAttributes;` becomes
+    `type CustomThemeAttributes = DeprecatedHeaderThemeAttributes;`
+  - `type CustomThemes = Themes;` becomes `type CustomThemes = DeprecatedHeaderThemes;`
+- Rename member expressions
+  - `HeaderHeight.Small` becomes `DeprecatedHeaderHeight.Small`
+  - `HeaderTheme.White` becomes `DeprecatedHeaderTheme.White`
+  - `HeaderVariant.Full` becomes `DeprecatedHeaderVariant.Full`
+  - `themes.Blue` becomes `deprecatedHeaderThemes.Blue`
+  - `Header.Variant.Global` becomes `DeprecatedHeader.Variant.Global`
+
+```tsx
+// v5
+import Header, {DubLogoTitle, GlobalHeader} from '@workday/canvas-kit-labs-react/header';
+
+const CustomGlobalHeader = props => {
+  return (
+    <GlobalHeader
+      brand={
+        <a href="#">
+          <DubLogoTitle themeColor={Header.Theme.White} />
+        </a>
+      }
+      {...props}
+    />
+  );
+};
+
+// v6
+import DeprecatedHeader, {
+  DeprecatedDubLogoTitle,
+  DeprecatedGlobalHeader,
+} from '@workday/canvas-kit-labs-react/header';
+
+const CustomGlobalHeader = props => {
+  return (
+    <DeprecatedGlobalHeader
+      brand={
+        <a href="#">
+          <DeprecatedDubLogoTitle themeColor={DeprecatedHeader.Theme.White} />
+        </a>
+      }
+      {...props}
+    />
+  );
+};
+```
+
+### Page Header
+
+We are [soft-deprecating](#soft-deprecation) `PageHeader`. It has been renamed to
+`DeprecatedPageHeader`. Similarly, `PageHeaderProps` has been renamed to
+`DeprecatedPageHeaderProps`. You may continue to use this component exactly as you did in v5, but
+note that we plan to [hard-deprecate](#hard-deprecation) it in Canvas Kit v7.
+
+🤖 The codemod will rename `PageHeader` and `PageHeaderProps` to their deprecated names:
+
+```tsx
+// v5
+import PageHeader, {PageHeaderProps} from '@workday/canvas-kit-react/page-header';
+
+export const CustomPageHeader = (props: PageHeaderProps) => {
+  return <PageHeader {...props} />;
+};
+
+// v6
+import DeprecatedPageHeader, {
+  DeprecatedPageHeaderProps,
+} from '@workday/canvas-kit-react/page-header';
+
+export const CustomPageHeader = (props: DeprecatedPageHeaderProps) => {
+  return <DeprecatedPageHeader {...props} />;
+};
+```
+
+```tsx
+// v5
+import {PageHeader, PageHeaderProps} from '@workday/canvas-kit-react';
+
+interface CustomPageHeaderProps extends PageHeaderProps {
+  // custom page header props
+}
+
+export const CustomPageHeader = (props: CustomPageHeaderProps) => {
+  return <PageHeader {...props} />;
+};
+
+// v6
+import {DeprecatedPageHeader, DeprecatedPageHeaderProps} from '@workday/canvas-kit-react';
+
+interface CustomPageHeaderProps extends DeprecatedPageHeaderProps {
+  // custom page header props
+}
+
+export const CustomPageHeader = (props: CustomPageHeaderProps) => {
+  return <DeprecatedPageHeader {...props} />;
+};
+```
+
+## Component Migrations
+
+### Search Bar
+
+`SeachBar` is being renamed to `SearchForm` and is moving out of
+`@workday/canvas-kit-labs-react/header` into its own dedicated package,
+`@workday/canvas-kit-labs-react/search-form`. The component has not been modified and you may
+continue to use this component exactly as you did in v5.
+
+🤖 The codemod will handle all these changes automatically:
+
+- Rename import sources
+  - `@workday/canvas-kit-labs-react/header` becomes `@workday/canvas-kit-labs-react/search-form`
+- Rename import specifiers
+  - `SearchBar` becomes `SearchForm`
+  - `SearchBarProps` becomes `SearchFormProps`
+  - `SearchBarState` becomes `SearchFormState`
+- Rename JSX identifiers
+  - `<SearchBar>` becomes `<SearchForm>`
+- Rename type references and interface declarations
+  - `type CustomSearchProps = SearchBarProps;` becomes `type CustomSearchProps = SearchFormProps;`
+  - `interface CustomSearchProps extends SearchBarProps` becomes
+    `interface CustomSearchProps extends SearchFormProps`
+
+```tsx
+// v5
+import {
+  SearchBar,
+  SearchBarProps,
+  SearchBarState,
+  SearchThemeAttributes,
+  SearchTheme,
+} from '@workday/canvas-kit-labs-react/header';
+
+const CustomSearchForm = (props: SearchFormProps) => {
+  return <SearchForm searchTheme={SearchTheme.Dark} {...props} />;
+};
+
+// v6
+import {
+  SearchForm,
+  SearchFormProps,
+  SearchFormState,
+  SearchThemeAttributes,
+  SearchTheme,
+} from '@workday/canvas-kit-labs-react/search-form';
+
+const CustomSearchForm = (props: SearchFormProps) => {
+  return <SearchForm searchTheme={SearchTheme.Dark} {...props} />;
+};
+```
+
+## Name Updates
+
+### Depth Tokens
+
+The `CanvasDepthValue` type has been renamed to `CanvasDepthValues` to be more consistent with our
+other token type names, such as `CanvasBorderRadiusValues`, `CanvasSpaceValues`, and
+`CanvasSpaceNumberValues`.
+
+🤖 The codemod will handle this rename transformation automatically:
+
+```ts
+// v5
+import {CanvasDepthValue} from '@workday/canvas-kit-react/tokens';
+
+type CustomDepthValues = CanvasDepthValue;
+interface OtherCustomDepthValues extends CanvasDepthValue {}
+
+// v6
+import {CanvasDepthValues} from '@workday/canvas-kit-react/tokens';
+
+type CustomDepthValues = CanvasDepthValues;
+interface OtherCustomDepthValues extends CanvasDepthValues {}
+```
+
+## Theme Breakpoint Updates
+
+Our default theme breakpoints have been updated to match the viewport ranges described in our design
+guidelines. We also updated `ActionBar`'s media query to align with this change. Those changes are
+described in [the section below](#action-bar). If you are using these default breakpoints, you will
+need to do visual regression testing to ensure there are no adverse effects to your application's
+layout. If you have questions about this testing, please reach out to our team.
+
+Below is a reference table for the V5 and V6 breakpoint values.
+
+| Breakpoint Name | V5 Value (px) | V6 Value (px) |
+| --------------- | ------------- | ------------- |
+| `zero`          | 0             | 0             |
+| `s`             | 600           | 320           |
+| `m`             | 900           | 768           |
+| `l`             | 1280          | 1024          |
+| `xl`            | 1920          | 1440          |
+
+Also for reference, these are our viewport ranges:
+
+- `small` (`320px` - `767px`) Used for mobile-sized screens
+- `medium` (`768px` - `1023px`) Used for tablet-sized screens
+- `large` - (`1024px` - `1439px`) Used for laptop and small desktop screens
+- `extra-large` (`≥1440px`) Used for very large screens
+
+### Action Bar
+
+`ActionBar` was updated to use the new breakpoint values. It previously had two media queries with
+`max-width: 575px`. They now use `max-width: 767.5px` – the upper limit of the `small` range. This
+will have two effects for this component:
+
+- Container padding will decrease from `s` (`16px`) to `xxs` (`8px`) on all viewports less than `768px` wide
+  - This was previously happening only on viewports less than `576px` wide
+- Button order will be reversed on all viewports less than `768px` wide
+  - This was previously happening only on viewports less than `576px` wide
+
+These changes in behavior are intentional and expected.
+
+## Tabs Component
+
+The Tabs API changed to support a responsive layout
+([#1325](https://github.com/Workday/canvas-kit/pull/1325)). The model API was updated to support
+more generic behaviors to allow for other components to support responsive layouts using the same
+models and behaviors. The most notable changes were concerning the state and events around tab
+selection. The verb "select" was chosen to more accurately reflect selection for more component
+types. Also selection of lists (which Tabs is based on) can support single or multiple selection.
+Selection is now stored on state as an array of selected keys.
+
+```tsx
+// v5
+const model = useTabsModel({
+  shouldActivate,
+  onActivate,
+});
+
+console.log('Selected tab', model.state.activeTab);
+model.events.activate({tab: tabName});
+
+// v6
+const model = useTabsModel({
+  shouldSelect,
+  onSelect,
+});
+
+console.log('Selected tab', model.state.selectedKey[0]);
+model.events.select({id: tabName});
+```
+
+The Tabs component can now handle responsive containers, but the support is not automatic. You must
+use the dynamic API and provide an overflow menu subcomponent. The dynamic API doesn't know the
+shape of your object, so render props must be used to instruct React how to render each item.
+
+```tsx
+// Use `useState` because React will give the same reference each render
+const [items] = React.useState([
+  {id: 'first', text: 'First Tab', contents: 'First Tab Content'},
+  {id: 'second', text: 'Second Tab', contents: 'Second Tab Content'},
+]);
+
+return (
+  <Tabs items={items}>
+    <Tabs.List overflowButton={<Tabs.OverflowButton>More</Tabs.OverflowButton>}>
+      {item => <Tabs.Item name={item.id}>{item.text}</Tabs.Item>}
+    </Tabs.List>
+    <Tabs.Menu.Popper>
+      <Tabs.Menu.Card maxWidth={300} maxHeight={200}>
+        <Tabs.Menu.List>
+          {(item: MyTabItem) => <Tabs.Menu.Item name={item.id}>{item.text}</Tabs.Menu.Item>}
+        </Tabs.Menu.List>
+      </Tabs.Menu.Card>
+    </Tabs.Menu.Popper>
+  </Tabs>
+);
+```
+
+## Button Updates
+
+All button updates for V6 are limited to our Primary, Secondary, and Tertiary buttons. Most of the
+button updates are small visual adjustments:
+
+- We tightened up tighten the spacing for visual balance and added our new type hierarchy.
+- We adjusted icon sizes for uniformity:
+  - `large`: `24px` x `24px`
+  - `medium`: `20px` x `20px`
+  - `small`: `20px` x `20px`
+  - `extraSmall`: `18px` x `18px`
+- We also adjusted the opacity for their disabled state so they behave more appropriately on varied
+  / dark backgrounds.
+
+These changes are automatic when you upgrade and do not require any manual updates in your codebase.
+However, they will likely cause any automated visual regression tests to fail, and you will need to
+update your tests accordingly. We do not expect these minor adjustments to create significant layout
+shifts in your UI. But, as with any visual update, you will want to review your UI to ensure there
+are no adverse effects.
+
+We also added some net-new features:
+
+- All buttons have a new `extraSmall` size.
+- Icons are now supported for all sizes.
+- `PrimaryButton` has a new `inverse` variant.
+
+All these changes are described in detail by button type in the sections below.
+
+### Primary Button
+
+#### Primary Disabled State
+
+Previously the button's disabled state had a `blueberry200` background, but it now uses the default
+`blueberry400` and sets the entire button to 40% opacity. This creates more consistency for the
+disabled states across all our buttons.
+
+#### Primary Large
+
+The padding for large `PrimaryButton`s has been slightly adjusted for more visual balance and to
+take up a bit less layout space. Specifically we:
+
+- decreased the space between the button icon and text from `12px` to `8px`
+- decreased the space between the button container and the icon from `28px` to `24px`
+
+#### Primary Medium
+
+The icon size for medium `PrimaryButton`s has been decreased from `24px` to `20px`, but the overall
+height of the button will remain the same.
+
+#### Primary Small
+
+We now support icons for small `PrimaryButton`s. The icons are `20px` x `20px`.
+
+#### Primary Extra Small
+
+We added a new size, `extraSmall` to our `PrimaryButton`s. These are particularly helpful for use
+cases where you have dense UI or tight layout constraints such as tables.
+
+### Secondary Button
+
+#### Secondary Large
+
+The padding for large `SecondaryButton`s has been slightly adjusted for more visual balance and to
+take up a bit less layout space. Specifically we:
+
+- decreased the space between the button icon and text from `12px` to `8px`
+- decreased the space between the button container and the icon from `28px` to `24px`
+
+#### Secondary Medium
+
+The icon size for medium `SecondaryButton`s has been decreased from `24px` to `20px`, but the
+overall height of the button will remain the same.
+
+#### Secondary Small
+
+We now support icons for small `SecondaryButton`s. The icons are `20px` x `20px`.
+
+#### Secondary Extra Small
+
+We added a new size, `extraSmall` to our `SecondaryButton`s. These are particularly helpful for use
+cases where you have dense UI or tight layout constraints such as tables.
+
+### Tertiary Button
+
+#### Tertiary Default
+
+We added an underline to the button text for all states to help distinguish it from the
+`SecondaryButton` and create more visual consistency.
+
+#### Tertiary Disabled
+
+As with our other buttons, we updated the disabled state to set the entire button to 40% opacity.
+They were previously using our light theme color at 50% opacity for icons and text.
+
+#### Tertiary Medium
+
+The medium `TertiaryButton` now uses our new type hierarchy and adjusted the padding, but the
+overall size of the button will stay the same. Specifically, we:
+
+- decreased the space between the button icon and text from `8px` to `4px`
+
+#### Tertiary Small
+
+The small `TertiaryButton` now uses our new type hierarchy and adjusted the padding, but the overall
+size of the button will stay the same. Specifically, we:
+
+- decreased the space between the button icon and text from `8px` to `4px`
+- increased the container padding outside the button text when an icon is present from `8px` to
+  `12px`
+
+#### Tertiary Extra Small
+
+We added a new size, `extraSmall` to our `TertiaryButton`s. These are particularly helpful for use
+cases where you have dense UI or tight layout constraints such as tables.

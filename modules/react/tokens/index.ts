@@ -13,7 +13,7 @@ import {
 
 import {borderRadius, CanvasBorderRadius, CanvasBorderRadiusKeys, CanvasBorderRadiusValues} from './lib/radius';
 import {BrandingColor, CanvasColor} from './lib/colors.types';
-import depth, {CanvasDepth, CanvasDepthValue} from './lib/depth';
+import {depth, CanvasDepth, CanvasDepthValues} from './lib/depth';
 import {
   space,
   CanvasSpace,
@@ -64,7 +64,7 @@ export {
   monoFontFamily,
   BrandingColor,
   CanvasDepth,
-  CanvasDepthValue,
+  CanvasDepthValues,
   CSSProperties,
 };
 export default canvas;

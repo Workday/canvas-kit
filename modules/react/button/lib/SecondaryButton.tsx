@@ -10,7 +10,7 @@ import {
   focusRing,
 } from '@workday/canvas-kit-react/common';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {ButtonColors} from './types';
+import {ButtonColors, ButtonSizes, IconPositions} from './types';
 import {ButtonContainer, ButtonLabel, ButtonLabelData, ButtonLabelIcon} from './parts';
 
 export interface SecondaryButtonProps extends Themeable, GrowthBehavior {
@@ -20,10 +20,12 @@ export interface SecondaryButtonProps extends Themeable, GrowthBehavior {
    */
   variant?: 'inverse' | undefined;
   /**
-   * The size of the Button.
+   * There are four button sizes: `extraSmall`, `small`, `medium`, and `large`.
+   * If no size is provided, it will default to `medium`.
+   *
    * @default 'medium'
    */
-  size?: 'small' | 'medium' | 'large';
+  size?: ButtonSizes;
   /**
    * The data label of the Button.
    * Note: not displayed at `small` size
@@ -35,10 +37,11 @@ export interface SecondaryButtonProps extends Themeable, GrowthBehavior {
    */
   icon?: CanvasSystemIcon;
   /**
-   * The position of the TertiaryButton icon.
+   * Button icon positions can either be `left` or `right`.
+   * If no value is provided, it defaults to `left`.
    * @default 'left'
    */
-  iconPosition?: 'left' | 'right';
+  iconPosition?: IconPositions;
   /**
    * If set to `true`, transform the icon's x-axis to mirror the graphic
    * @default false
@@ -46,6 +49,16 @@ export interface SecondaryButtonProps extends Themeable, GrowthBehavior {
   shouldMirrorIcon?: boolean;
   children?: React.ReactNode;
 }
+
+// Button sizes where data labels are enabled
+const dataLabelSizes = ['medium', 'large'];
+// All disabled buttons are set to 40% opacity.
+// This will eventually live in the ButtonContainer styles, but for now we're scoping it to Primary, Secondary, and Tertiary buttons.
+const disabledButtonOpacity = {
+  '&:disabled, &:disabled:active': {
+    opacity: 0.4,
+  },
+};
 
 export const SecondaryButton = createComponent('button')({
   displayName: 'SecondaryButton',
@@ -71,9 +84,10 @@ export const SecondaryButton = createComponent('button')({
       as={Element}
       colors={getSecondaryButtonColors(variant, theme)}
       size={size}
+      extraStyles={disabledButtonOpacity}
       {...elemProps}
     >
-      {icon && size !== 'small' && iconPosition === 'left' && (
+      {icon && iconPosition === 'left' && (
         <ButtonLabelIcon
           size={size}
           iconPosition={iconPosition}
@@ -82,8 +96,8 @@ export const SecondaryButton = createComponent('button')({
         />
       )}
       <ButtonLabel>{children}</ButtonLabel>
-      {dataLabel && size !== 'small' && <ButtonLabelData>{dataLabel}</ButtonLabelData>}
-      {icon && size !== 'small' && iconPosition === 'right' && (
+      {dataLabel && dataLabelSizes.includes(size) && <ButtonLabelData>{dataLabel}</ButtonLabelData>}
+      {icon && iconPosition === 'right' && (
         <ButtonLabelIcon
           size={size}
           iconPosition={iconPosition}
@@ -136,12 +150,13 @@ export const getSecondaryButtonColors = (
           label: colors.blackPepper400,
           labelData: colors.blackPepper400,
         },
+        // Identical to 'default' styles. ButtonContainer will set opacity to 40%
         disabled: {
           background: 'transparent',
-          border: 'rgba(30, 30, 30, 0.4)', // Black Pepper 400 @ 40%
-          icon: 'rgba(30, 30, 30, 0.4)', // Black Pepper 400 @ 40%
-          label: 'rgba(30, 30, 30, 0.4)', // Black Pepper 400 @ 40%
-          labelData: 'rgba(30, 30, 30, 0.4)', // Black Pepper 400 @ 40%
+          border: colors.blackPepper400,
+          icon: colors.blackPepper400,
+          label: colors.blackPepper400,
+          labelData: colors.blackPepper400,
         },
       };
     case 'inverse':
@@ -180,12 +195,12 @@ export const getSecondaryButtonColors = (
             theme
           ),
         },
+        // Identical to inverse 'default' styles. ButtonContainer will set opacity to 40%
         disabled: {
           background: 'transparent',
-          border: 'rgba(255, 255, 255, 0.4)', // French Vanilla 400 @ 40%
-          icon: 'rgba(255, 255, 255, 0.4)', // French Vanilla 400 @ 40%
-          label: 'rgba(255, 255, 255, 0.4)', // French Vanilla 400 @ 40%
-          labelData: 'rgba(255, 255, 255, 0.4)', // French Vanilla 400 @ 40%
+          border: colors.frenchVanilla100,
+          icon: colors.frenchVanilla100,
+          label: colors.frenchVanilla100,
         },
       };
   }
