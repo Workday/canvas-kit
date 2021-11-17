@@ -26,12 +26,10 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - feat: Rename SearchBar to SearchForm and move package ([#1267](https://github.com/Workday/canvas-kit/pull/1267)) ([@alanbsmith](https://github.com/alanbsmith))
 - feat: Deprecate Header and Global Header ([#1273](https://github.com/Workday/canvas-kit/pull/1273)) ([@alanbsmith](https://github.com/alanbsmith))
 - feat(labs): Add new compound component for text inputs ([#1201](https://github.com/Workday/canvas-kit/pull/1201)) ([@vibdev](https://github.com/vibdev))
-  Optional release note message. Changelog and release summaries will contain a pull request title. This section will add additional notes under that title. This section is not a summary, but something extra to point out in release notes. An example might be calling out breaking changes in a labs component or minor visual changes that need visual regression updates. Remove this section if no additional release notes are required.
 - feat(button): Update PrimaryButton for v6 ([#1331](https://github.com/Workday/canvas-kit/pull/1331)) ([@alanbsmith](https://github.com/alanbsmith))
 - feat(button): Update SecondaryButton for v6 ([#1332](https://github.com/Workday/canvas-kit/pull/1332)) ([@alanbsmith](https://github.com/alanbsmith))
 - feat(button): Update Tertiary Buttons for v6 ([#1338](https://github.com/Workday/canvas-kit/pull/1338)) ([@alanbsmith](https://github.com/alanbsmith))
 - feat(tabs): Add overflow support to tabs ([#1325](https://github.com/Workday/canvas-kit/pull/1325)) ([@NicholasBoll](https://github.com/NicholasBoll))
-  Optional release note message. Changelog and release summaries will contain a pull request title. This section will add additional notes under that title. This section is not a summary, but something extra to point out in release notes. An example might be calling out breaking changes in a labs component or minor visual changes that need visual regression updates. Remove this section if no additional release notes are required.
 - chore: Fix major release ([@NicholasBoll](https://github.com/NicholasBoll))
 - chore: Fix support release ([@NicholasBoll](https://github.com/NicholasBoll))
 
