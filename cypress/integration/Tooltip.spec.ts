@@ -33,6 +33,8 @@ describe('Tooltip', () => {
 
       context('when the tooltip is hovered', () => {
         beforeEach(() => {
+          cy.clock();
+          cy.tick(300); // advance the timer by the amount of default delay time
           cy.get('button').trigger('mouseout');
           cy.findByRole('tooltip').trigger('mouseover');
         });
