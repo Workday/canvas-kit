@@ -1,3 +1,4 @@
+/* eslint-disable workday-custom-rules/restricted-imports */
 /* eslint-disable no-nested-ternary */
 import styled from '@emotion/styled';
 import {
@@ -6,7 +7,9 @@ import {
   createComponent,
   StyledType,
   pickForegroundColor,
-  useMountLayout,
+  composeHooks,
+  createHook,
+  // useMountLayout,
 } from '@workday/canvas-kit-react/common';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {borderRadius, colors, space} from '@workday/canvas-kit-react/tokens';
@@ -14,6 +17,10 @@ import {checkSmallIcon} from '@workday/canvas-system-icons-web';
 import chroma from 'chroma-js';
 import * as React from 'react';
 import {ColorPickerModelContext} from './ColorPicker';
+import {isSelected, useSelectionItem} from '@workday/canvas-kit-react/tabs/lib/selection';
+import {useRovingFocus} from '@workday/canvas-kit-react/tabs/lib/cursor';
+import {useListRegisterItem} from '@workday/canvas-kit-react/tabs/lib/list';
+import {ColorPickerModel} from './useColorPickerModel';
 
 export interface SwatchButtonProps {
   /**
@@ -25,7 +32,6 @@ export interface SwatchButtonProps {
    * @default false
    */
   showCheck?: boolean;
-  isSelected?: boolean;
 }
 
 function compareColors(color1: string, color2: string): boolean {
@@ -40,9 +46,7 @@ function compareColors(color1: string, color2: string): boolean {
 }
 const accessibilityBorder = `${colors.frenchVanilla100} 0px 0px 0px 2px, ${colors.licorice200} 0px 0px 0px 3px`;
 
-const SwatchButtonContainer = styled('button')<
-  {color: string; showCheck: boolean; isSelected: boolean} & StyledType
->(
+const SwatchButtonContainer = styled('button')<{color: string; showCheck: boolean} & StyledType>(
   {
     width: 20,
     height: 20,
@@ -62,90 +66,47 @@ const SwatchButtonContainer = styled('button')<
       outline: 'none',
       ...focusRing({separation: 2}),
     },
+    '&[aria-selected=true]': {
+      boxShadow: accessibilityBorder,
+      ...mouseFocusBehavior({
+        '&:focus': {
+          animation: 'none',
+          boxShadow: 'none',
+        },
+        '&:hover': {
+          boxShadow: accessibilityBorder,
+        },
+        '&': {
+          boxShadow: accessibilityBorder,
+        },
+      }),
+    },
   },
+
   ({color, showCheck}) => ({
     backgroundColor: color,
     boxShadow:
       showCheck || compareColors(color, colors.frenchVanilla100)
         ? 'inset 0px 0px 0px 1px rgba(0, 0, 0, 0.25)'
         : undefined,
-  }),
-  ({isSelected}) => ({
-    boxShadow: isSelected ? accessibilityBorder : undefined,
-    ...mouseFocusBehavior({
-      '&:focus': {
-        animation: 'none',
-        boxShadow: 'none',
-      },
-      '&:hover': {
-        boxShadow: accessibilityBorder,
-      },
-      '&': {
-        boxShadow: isSelected ? accessibilityBorder : undefined,
-      },
-    }),
   })
 );
-
-const intentSwatchStyles = {
-  ...focusRing({separation: 2}),
-};
 
 export default createComponent('button')({
   displayName: 'SwatchButton',
   Component: ({color, showCheck = false, ...elemProps}: SwatchButtonProps, ref, Element) => {
-    const {state, events} = React.useContext(ColorPickerModelContext);
-
-    const isSelected = state.color ? color === state.color : false;
-
-    useMountLayout(() => {
-      events.registerColor({color: color});
-      return () => events.unregisterColor({color: color});
-    });
-
-    const onKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>) => {
-      switch (event.key) {
-        case 'ArrowLeft':
-        case 'Left':
-          events.previous();
-          break;
-        case 'ArrowRight':
-        case 'Right':
-          events.next();
-          break;
-        case 'ArrowUp':
-          events.up();
-          break;
-        case 'ArrowDown':
-          events.down();
-          break;
-        case 'Enter':
-        case ' ':
-          // console.log('intentTab', intentTab);
-
-          events.setColor({color: state.cursorColor});
-          // setActiveTab(intentTab);
-          event.preventDefault(); // prevent clicking this button
-          break;
-        default:
-          break;
-      }
-    };
-
+    const localModel = React.useContext(ColorPickerModelContext);
+    const hookedProps = useSwatchesItem(localModel, elemProps, ref);
     return (
       <SwatchButtonContainer
-        onKeyDown={onKeyDown}
-        ref={ref}
         color={color}
         as={Element}
-        showCheck={showCheck || state.color === color}
-        isSelected={isSelected}
-        onClick={() => events.setColor({color: color})}
-        tabIndex={state.cursorColor === color ? 0 : -1}
-        style={{boxShadow: state.cursorColor === color ? accessibilityBorder : undefined}}
+        showCheck={showCheck || localModel.state.color === color}
+        style={{boxShadow: localModel.state.cursorId === color ? accessibilityBorder : undefined}}
         {...elemProps}
+        {...hookedProps}
       >
-        {showCheck || state.color === color ? (
+        {showCheck || hookedProps.selected ? (
           <SystemIcon
             fill={pickForegroundColor(color)}
             fillHover={pickForegroundColor(color)}
@@ -157,3 +118,29 @@ export default createComponent('button')({
     );
   },
 });
+
+export const useSwatchesItem = composeHooks(
+  createHook(
+    (
+      model: ColorPickerModel,
+      _?: React.Ref<HTMLButtonElement>,
+      elemProps: {name?: string} = {}
+    ) => {
+      const {state} = model;
+      const name = elemProps.name || '';
+
+      const selected = !!elemProps.name && isSelected(name, state);
+
+      return {
+        selected,
+        type: 'button' as 'button', // keep Typescript happy
+        role: 'tab',
+        'aria-selected': selected,
+        'aria-controls': `tabpanel-${state.id}-${name}`,
+      };
+    }
+  ),
+  useSelectionItem,
+  useRovingFocus,
+  useListRegisterItem
+);

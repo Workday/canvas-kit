@@ -70,6 +70,7 @@ export const useRovingFocus = createHook(
           orientationKeyMap[state.orientation]
         ) as (keyof typeof orientationKeyMap[typeof state.orientation])[]).forEach(key => {
           if (isRTL ? event.key === rightToLeftMap[key] : event.key === key) {
+            console.warn(key, state.orientation);
             const event = orientationKeyMap[state.orientation][key];
             keyDownRef.current = true;
             events[event]?.();

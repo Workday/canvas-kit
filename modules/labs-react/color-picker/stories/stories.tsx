@@ -79,6 +79,7 @@ const defaultColorSet = [
 
 export const Default = () => {
   const model = useColorPickerModel();
+  console.warn(model.state.selectedIds);
   return (
     <>
       <ColorPicker model={model}>
@@ -89,7 +90,7 @@ export const Default = () => {
         </ColorPicker.SwatchBook>
       </ColorPicker>
       <ColorPicker>
-        <ColorPicker.Swatch showCheck={false} color={model.state.color} />
+        <ColorPicker.Swatch showCheck={false} color={defaultColorSet[model.state.selectedIds[0]]} />
       </ColorPicker>
     </>
   );
@@ -112,7 +113,12 @@ export const WithColorInput = () => {
       </ColorPicker>
 
       <ColorPicker>
-        <ColorPicker.Swatch showCheck={false} color={colorPickerModel.state.color} />
+        <ColorPicker.Swatch
+          showCheck={false}
+          color={
+            defaultColorSet[colorPickerModel.state.selectedIds[0]] || colorPickerModel.state.color
+          }
+        />
       </ColorPicker>
     </>
   );
@@ -135,7 +141,12 @@ export const WithCustomColumnCount = () => {
       </ColorPicker>
 
       <ColorPicker>
-        <ColorPicker.Swatch showCheck={false} color={colorPickerModel.state.color} />
+        <ColorPicker.Swatch
+          showCheck={false}
+          color={
+            defaultColorSet[colorPickerModel.state.selectedIds[0]] || colorPickerModel.state.color
+          }
+        />
       </ColorPicker>
     </>
   );
