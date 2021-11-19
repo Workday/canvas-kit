@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v5.3.3](https://github.com/Workday/canvas-kit/releases/tag/v5.3.3) (2021-11-19)
+
+### Components
+
+- fix(tooltip): Add delay to Tooltip show and hide ([#1339](https://github.com/Workday/canvas-kit/pull/1339)) ([@wooksauce](https://github.com/wooksauce))
+  This change could cause visual regression tests to fail if a screen shot is taken expecting a tooltip to show immediately. Your visual regression will either have to add an explicit wait of 300ms, or change the delay to 1ms only under test.
+
+
 ## [v5.3.2](https://github.com/Workday/canvas-kit/releases/tag/v5.3.2) (2021-11-16)
 
 ### Infrastructure
