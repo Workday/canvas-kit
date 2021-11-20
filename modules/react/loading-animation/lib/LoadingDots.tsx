@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {keyframes} from '@emotion/core';
-import styled from '@emotion/styled';
 import canvas, {borderRadius} from '@workday/canvas-kit-react/tokens';
+import {styled} from '@workday/canvas-kit-react/common';
 
 /**
  * Keyframe for the dots loading animation.
