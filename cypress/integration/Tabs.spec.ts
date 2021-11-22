@@ -497,6 +497,24 @@ describe('Tabs', () => {
       cy.findByRole('button', {name: 'More'}).should('not.exist');
     });
 
+    context('when the "First Tab" is focused', () => {
+      beforeEach(() => {
+        cy.findByRole('tab', {name: 'First Tab'})
+          .click()
+          .focus();
+      });
+
+      context('when the Tab key is pressed', () => {
+        beforeEach(() => {
+          cy.focused().tab();
+        });
+
+        it('should focus on the tab panel', () => {
+          cy.findByRole('tabpanel', {name: 'First Tab'}).should('have.focus');
+        });
+      });
+    });
+
     context('when tab list container is only 500px wide', () => {
       beforeEach(() => {
         cy.findByRole('button', {name: '500px'}).click();
@@ -508,6 +526,24 @@ describe('Tabs', () => {
 
       it('should show the "More" button', () => {
         cy.findByRole('button', {name: 'More'}).should('exist');
+      });
+
+      context('when the "First Tab" is focused', () => {
+        beforeEach(() => {
+          cy.findByRole('tab', {name: 'First Tab'})
+            .click()
+            .focus();
+        });
+
+        context('when the Tab key is pressed', () => {
+          beforeEach(() => {
+            cy.focused().tab();
+          });
+
+          it('should focus on the tab panel', () => {
+            cy.findByRole('button', {name: 'More'}).should('have.focus');
+          });
+        });
       });
 
       context('when the "More" button is clicked', () => {

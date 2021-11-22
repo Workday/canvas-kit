@@ -35,7 +35,7 @@ export const useOverflowTarget = createHook(
     return {
       ref: elementRef,
       'aria-hidden': isHidden,
-      tabIndex: -1,
+      tabIndex: isHidden ? -1 : 0,
       style: isHidden ? hiddenStyle : {},
     };
   }
