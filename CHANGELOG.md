@@ -3,6 +3,105 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v6.0.0](https://github.com/Workday/canvas-kit/releases/tag/v6.0.0) (2021-11-16)
+
+### BREAKING CHANGES
+
+- [#1201](https://github.com/Workday/canvas-kit/pull/1201) Optional breaking changes message. If your PR includes breaking changes. It is extremely rare to put breaking changes outside a `prerelease/v*` branch. Anything in this section will show up in release notes. Remove this section if no breaking changes are present.
+- [#1276](https://github.com/Workday/canvas-kit/pull/1276) `CanvasDepthValue` is renamed to `CanvasDepthValues` for consistency. This change is handled automatically by the v6 codemod. Please refer to the v6 migration guide for more information.
+- [#1319](https://github.com/Workday/canvas-kit/pull/1319) This change updates the theme breakpoint values and the media query breakpoints used in `ActionBar`. For more information, please see the V6 migration guide.
+- [#1331](https://github.com/Workday/canvas-kit/pull/1331) This change updates our `PrimaryButton` styles. For more information, please see the V6 migration guide.
+- [#1332](https://github.com/Workday/canvas-kit/pull/1332) This change updates our `SecondaryButton` styles. For more information, please see the V6 migration guide.
+- [#1338](https://github.com/Workday/canvas-kit/pull/1338) This change updates our `TertiaryButton` styles. For more information, please see the V6 migration guide.
+- [#1325](https://github.com/Workday/canvas-kit/pull/1325) Tabs API was updated to support a more generic selection model for all lists.
+  - `model.events.activate({tab})` -> `model.events.select({id})`
+  - `model.state.activeTab` -> `model.state.selectedKeys[0]`
+  - `useTabsModel({onActivate})` -> `useTabsModel({onSelect})`
+  - `useTabsModel({shouldActivate})` -> `useTabsModel({shouldSelect})`
+
+### Components
+
+- feat(page-header): Deprecate PageHeader ([#1247](https://github.com/Workday/canvas-kit/pull/1247)) ([@alanbsmith](https://github.com/alanbsmith))
+- feat(cookie-banner): Deprecate CookieBanner ([#1265](https://github.com/Workday/canvas-kit/pull/1265)) ([@alanbsmith](https://github.com/alanbsmith))
+- feat: Rename SearchBar to SearchForm and move package ([#1267](https://github.com/Workday/canvas-kit/pull/1267)) ([@alanbsmith](https://github.com/alanbsmith))
+- feat: Deprecate Header and Global Header ([#1273](https://github.com/Workday/canvas-kit/pull/1273)) ([@alanbsmith](https://github.com/alanbsmith))
+- feat(labs): Add new compound component for text inputs ([#1201](https://github.com/Workday/canvas-kit/pull/1201)) ([@vibdev](https://github.com/vibdev))
+- feat(button): Update PrimaryButton for v6 ([#1331](https://github.com/Workday/canvas-kit/pull/1331)) ([@alanbsmith](https://github.com/alanbsmith))
+- feat(button): Update SecondaryButton for v6 ([#1332](https://github.com/Workday/canvas-kit/pull/1332)) ([@alanbsmith](https://github.com/alanbsmith))
+- feat(button): Update Tertiary Buttons for v6 ([#1338](https://github.com/Workday/canvas-kit/pull/1338)) ([@alanbsmith](https://github.com/alanbsmith))
+- feat(tabs): Add overflow support to tabs ([#1325](https://github.com/Workday/canvas-kit/pull/1325)) ([@NicholasBoll](https://github.com/NicholasBoll))
+- chore: Fix major release ([@NicholasBoll](https://github.com/NicholasBoll))
+- chore: Fix support release ([@NicholasBoll](https://github.com/NicholasBoll))
+
+### Documentation
+
+- docs: Clean up V6 migration guide ([#1343](https://github.com/Workday/canvas-kit/pull/1343)) ([@alanbsmith](https://github.com/alanbsmith))
+
+### Infrastructure
+
+- fix: Update codemod to support output streaming ([#1340](https://github.com/Workday/canvas-kit/pull/1340)) ([@alanbsmith](https://github.com/alanbsmith))
+
+### Utilites
+
+- feat: Update depth tokens ([#1276](https://github.com/Workday/canvas-kit/pull/1276)) ([@alanbsmith](https://github.com/alanbsmith))
+
+### Utilities
+
+- feat(common): Update theme breakpoints ([#1319](https://github.com/Workday/canvas-kit/pull/1319)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
+### Components
+
+- feat(page-header): Deprecate PageHeader ([#1247](https://github.com/Workday/canvas-kit/pull/1247)) ([@alanbsmith](https://github.com/alanbsmith))
+- feat(cookie-banner): Deprecate CookieBanner ([#1265](https://github.com/Workday/canvas-kit/pull/1265)) ([@alanbsmith](https://github.com/alanbsmith))
+- feat: Rename SearchBar to SearchForm and move package ([#1267](https://github.com/Workday/canvas-kit/pull/1267)) ([@alanbsmith](https://github.com/alanbsmith))
+- feat: Deprecate Header and Global Header ([#1273](https://github.com/Workday/canvas-kit/pull/1273)) ([@alanbsmith](https://github.com/alanbsmith))
+- feat(labs): Add new compound component for text inputs ([#1201](https://github.com/Workday/canvas-kit/pull/1201)) ([@vibdev](https://github.com/vibdev))
+  Optional release note message. Changelog and release summaries will contain a pull request title. This section will add additional notes under that title. This section is not a summary, but something extra to point out in release notes. An example might be calling out breaking changes in a labs component or minor visual changes that need visual regression updates. Remove this section if no additional release notes are required.
+- feat(button): Update PrimaryButton for v6 ([#1331](https://github.com/Workday/canvas-kit/pull/1331)) ([@alanbsmith](https://github.com/alanbsmith))
+- feat(button): Update SecondaryButton for v6 ([#1332](https://github.com/Workday/canvas-kit/pull/1332)) ([@alanbsmith](https://github.com/alanbsmith))
+- feat(button): Update Tertiary Buttons for v6 ([#1338](https://github.com/Workday/canvas-kit/pull/1338)) ([@alanbsmith](https://github.com/alanbsmith))
+- feat(tabs): Add overflow support to tabs ([#1325](https://github.com/Workday/canvas-kit/pull/1325)) ([@NicholasBoll](https://github.com/NicholasBoll))
+  Optional release note message. Changelog and release summaries will contain a pull request title. This section will add additional notes under that title. This section is not a summary, but something extra to point out in release notes. An example might be calling out breaking changes in a labs component or minor visual changes that need visual regression updates. Remove this section if no additional release notes are required.
+
+### Documentation
+
+- docs: Clean up V6 migration guide ([#1343](https://github.com/Workday/canvas-kit/pull/1343)) ([@alanbsmith](https://github.com/alanbsmith))
+
+### Infrastructure
+
+- fix: Update codemod to support output streaming ([#1340](https://github.com/Workday/canvas-kit/pull/1340)) ([@alanbsmith](https://github.com/alanbsmith))
+
+### Utilites
+
+- feat: Update depth tokens ([#1276](https://github.com/Workday/canvas-kit/pull/1276)) ([@alanbsmith](https://github.com/alanbsmith))
+
+### Utilities
+
+- feat(common): Update theme breakpoints ([#1319](https://github.com/Workday/canvas-kit/pull/1319)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
+## [v5.2.12](https://github.com/Workday/canvas-kit/releases/tag/v5.2.12) (2021-11-10)
+
+### Documentation
+
+- docs: Add Version Support section to Readme ([#1337](https://github.com/Workday/canvas-kit/pull/1337)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
+## [v5.2.11](https://github.com/Workday/canvas-kit/releases/tag/v5.2.11) (2021-11-09)
+
+### Components
+
+- fix(tooltip): Fix findEllipsisElement IE11 ([#1330](https://github.com/Workday/canvas-kit/pull/1330)) ([@alorek](https://github.com/alorek))
+
+
+## [v5.2.10](https://github.com/Workday/canvas-kit/releases/tag/v5.2.10) (2021-11-03)
+
+### Components
+
+- fix(tabs): Allow consumers to style the selected tab ([#1327](https://github.com/Workday/canvas-kit/pull/1327)) ([@sachinmorajkar](https://github.com/sachinmorajkar))
+
+
 ## [v5.2.9](https://github.com/Workday/canvas-kit/releases/tag/v5.2.9) (2021-10-21)
 
 ### Components
