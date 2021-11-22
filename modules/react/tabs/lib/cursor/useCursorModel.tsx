@@ -77,6 +77,7 @@ export type BaseCursorModelConfig<T> = BaseListModelConfig<T> & {
    * Initial cursor position. If not provided, the cursor will point to the first item in the list
    */
   initialCursorId?: string;
+  columnCount?: number;
 };
 
 export type CursorModelConfig<T> = BaseCursorModelConfig<T> &
@@ -113,9 +114,9 @@ export const useCursorNavigation = <T extends unknown>(
       const currentIndex = items.findIndex(i => getId(item) === getId(i));
       let nextIndex = currentIndex + offset;
       if (nextIndex < 0) {
-        nextIndex = items.length - 1;
+        nextIndex = items.length + nextIndex;
       } else if (nextIndex >= items.length) {
-        nextIndex = 0;
+        nextIndex = nextIndex - items.length;
       }
 
       if (nonInteractiveIdsRef.current.includes(getId(items[nextIndex])) && tries > 0) {
@@ -129,9 +130,11 @@ export const useCursorNavigation = <T extends unknown>(
 
     const getNext = getOffsetItem(1);
     const getPrevious = getOffsetItem(-1);
+    const goToPreviousRow = getOffsetItem(-state.columnCount);
+    const goToNextRow = getOffsetItem(+state.columnCount);
 
-    return {getFirst, getLast, getItem, getNext, getPrevious};
-  }, []);
+    return {getFirst, getLast, getItem, getNext, getPrevious, goToPreviousRow, goToNextRow};
+  }, [state.columnCount]);
 };
 
 export const useCursorModel = <T extends unknown>(
@@ -139,12 +142,13 @@ export const useCursorModel = <T extends unknown>(
 ): CursorModel<T> => {
   const [orientation] = React.useState(config.orientation || 'vertical');
   const [cursorId, setCursorId] = React.useState('');
+  const columnCount = config.columnCount || 0;
   const list = useListModel(config as ListModelConfig<T>);
   const initialCurrentRef = React.useRef(
     config.initialCursorId || config.items?.length ? list.getId(config.items![0]) : ''
   );
 
-  const state = {...list.state, orientation, cursorId};
+  const state = {...list.state, orientation, columnCount, cursorId};
   const navigation = useCursorNavigation(state, list.getId);
 
   const events = useEventMap(cursorEventMap, state, config, {
@@ -165,6 +169,12 @@ export const useCursorModel = <T extends unknown>(
     },
     previous() {
       setCursorId(list.getId(navigation.getPrevious(state.cursorId)));
+    },
+    goToPreviousRow() {
+      setCursorId(list.getId(navigation.goToPreviousRow(state.cursorId)));
+    },
+    goToNextRow() {
+      setCursorId(list.getId(navigation.goToNextRow(state.cursorId)));
     },
     first() {
       setCursorId(list.getId(navigation.getFirst()));

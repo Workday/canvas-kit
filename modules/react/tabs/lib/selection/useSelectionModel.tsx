@@ -9,6 +9,7 @@ import {
   cursorEventMap,
   CursorModel,
 } from '../cursor/useCursorModel';
+import {config} from 'process';
 
 export type Orientation = 'horizontal' | 'vertical';
 

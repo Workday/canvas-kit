@@ -14,7 +14,6 @@ import React from 'react';
 type ColorPickerState<T = unknown> = SelectionState<T> & {
   color: string;
   customColor: string;
-  columnCount: number;
 };
 
 type ColorPickerEvents<T = unknown> = SelectionEvents<T> & {
@@ -40,15 +39,15 @@ export const colorPickerEventMap = createEventMap<ColorPickerEvents>()({
 
 export type ColorPickerModelConfig = {
   initialColor?: string;
-  columnCount?: number;
 } & Partial<ToModelConfig<ColorPickerState, ColorPickerEvents, typeof colorPickerEventMap>>;
 
 export const useColorPickerModel = <T extends unknown>(
   config: ColorPickerModelConfig = {}
 ): ColorPickerModel => {
-  const model = useSelectionModel(config as SelectionModelConfig<T>);
-  const [columnCount, setColumnCount] = React.useState(config.columnCount || 8);
+  const model = useSelectionModel({columnCount: 8, ...(config as SelectionModelConfig<T>)});
+
   const [color, setColor] = React.useState(config.initialColor || '');
+
   const [customColor, setCustomColor] = React.useState('');
   const getId = defaultGetId;
 
@@ -56,7 +55,6 @@ export const useColorPickerModel = <T extends unknown>(
     ...model.state,
     color,
     customColor,
-    columnCount,
   };
 
   const events = useEventMap(colorPickerEventMap, state, config, {

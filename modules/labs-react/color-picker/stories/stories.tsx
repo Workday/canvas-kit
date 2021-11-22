@@ -79,7 +79,7 @@ const defaultColorSet = [
 
 export const Default = () => {
   const model = useColorPickerModel();
-  console.warn(model.state.selectedIds);
+
   return (
     <>
       <ColorPicker model={model}>
