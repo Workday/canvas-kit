@@ -1,19 +1,21 @@
-/** @jsx jsx */
 import React from 'react';
-import {jsx, css} from '@emotion/core';
+import styled from '@emotion/styled';
 
 import {
   createComponent,
-  mouseFocusBehavior,
-  useLocalRef,
   useModelContext,
   useMountLayout,
+  createHook,
+  ExtractProps,
+  hideMouseFocus,
+  StyledType,
 } from '@workday/canvas-kit-react/common';
+import {Box} from '@workday/canvas-kit-labs-react/common';
 
 import {TabsModelContext} from './Tabs';
 import {TabsModel} from './useTabsModel';
 
-export interface TabPanelProps {
+export interface TabPanelProps<T = unknown> extends ExtractProps<typeof Box, never> {
   /**
    * The contents of the TabPanel.
    */
@@ -35,28 +37,20 @@ export interface TabPanelProps {
    * Optionally pass a model directly to this component. Default is to implicitly use the same
    * model as the container component which uses React context. Only use this for advanced use-cases
    */
-  model?: TabsModel;
+  model?: TabsModel<T>;
 }
 
-const styles = css(
-  mouseFocusBehavior({
-    '&:focus': {
-      outline: 'none',
-    },
-  })
-);
+const StyledTabsPanel = styled(Box)<StyledType>(hideMouseFocus);
 
-export const TabPanel = createComponent('div')({
-  displayName: 'Tabs.Panel',
-  Component: ({children, name = '', model, ...elemProps}: TabPanelProps, ref, Element) => {
-    const {state, events} = useModelContext(TabsModelContext, model);
-    const [tabName, setTabName] = React.useState(name);
-    const {localRef, elementRef} = useLocalRef(ref);
+export const useTabsPanel = createHook(
+  ({state, events}: TabsModel, _?: React.Ref<HTMLElement>, elemProps: {name?: string} = {}) => {
+    const name = elemProps.name;
+    const [tabName, setTabName] = React.useState(elemProps.name || '');
 
     useMountLayout(() => {
       const index = state.panelIndexRef.current;
       const tabName = name || String(index);
-      events.registerPanel({item: {id: tabName, ref: localRef}});
+      events.registerPanel({item: {id: tabName}});
       setTabName(tabName);
 
       return () => {
@@ -64,19 +58,27 @@ export const TabPanel = createComponent('div')({
       };
     });
 
+    return {
+      role: 'tabpanel',
+      'aria-labelledby': `${state.id}-${tabName}`,
+      hidden: !!tabName && tabName !== state.selectedIds[0],
+      id: `tabpanel-${state.id}-${tabName}`,
+      tabIndex: 0,
+    };
+  }
+);
+
+export const TabsPanel = createComponent('div')({
+  displayName: 'Tabs.Panel',
+  Component: ({children, model, ...elemProps}: TabPanelProps, ref, Element) => {
+    const localModel = useModelContext(TabsModelContext, model);
+
+    const props = useTabsPanel(localModel, elemProps, ref);
+
     return (
-      <Element
-        ref={elementRef}
-        role="tabpanel"
-        css={styles}
-        aria-labelledby={`tab-${state.id}-${tabName}`}
-        hidden={!!tabName && tabName !== state.activeTab}
-        id={`tabpanel-${state.id}-${tabName}`}
-        tabIndex={0}
-        {...elemProps}
-      >
+      <StyledTabsPanel as={Element} {...props}>
         {children}
-      </Element>
+      </StyledTabsPanel>
     );
   },
 });

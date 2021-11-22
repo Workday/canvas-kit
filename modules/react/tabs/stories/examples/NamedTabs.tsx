@@ -3,7 +3,7 @@ import {space} from '@workday/canvas-kit-react/tokens';
 
 import {Tabs} from '@workday/canvas-kit-react/tabs';
 
-export const NamedKeys = () => {
+export const NamedTabs = () => {
   return (
     <Tabs>
       <Tabs.List>
