@@ -19,6 +19,11 @@ export type CursorState<T = unknown> = ListState<T> & {
   orientation: Orientation;
   /** The id of the list item the cursor is pointing to */
   cursorId: string;
+  /**
+   * If this is set it will cause a wrapping of a list that will turn it into a grid
+   * @default 0
+   */
+  columnCount: number;
 };
 
 export type CursorEvents<T = unknown> = ListEvents<T> & {
@@ -27,9 +32,11 @@ export type CursorEvents<T = unknown> = ListEvents<T> & {
   /** Set the cursor to the "next" item in the list. If the end of the list is detected, it will
    * wrap to the first item */
   next(): void;
+  goToNextRow(): void;
   /** Set the cursor to the "previous" item in the list. If the beginning of the list is detected,
    * it will wrap to the last item */
   previous(): void;
+  goToPreviousRow(): void;
   /** Set the cursor to the first item in the list */
   first(): void;
   /** Set the cursor to the last item in the list */

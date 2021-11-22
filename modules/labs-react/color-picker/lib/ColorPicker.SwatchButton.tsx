@@ -22,7 +22,7 @@ import {useRovingFocus} from '@workday/canvas-kit-react/tabs/lib/cursor';
 import {useListRegisterItem} from '@workday/canvas-kit-react/tabs/lib/list';
 import {ColorPickerModel} from './useColorPickerModel';
 
-export interface SwatchButtonProps {
+export interface SwatchButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   /**
    * A valid color string that determines the color of the square
    */
@@ -96,17 +96,19 @@ export default createComponent('button')({
   displayName: 'SwatchButton',
   Component: ({color, showCheck = false, ...elemProps}: SwatchButtonProps, ref, Element) => {
     const localModel = React.useContext(ColorPickerModelContext);
-    const hookedProps = useSwatchesItem(localModel, elemProps, ref);
+    const props = useSwatchesItem(localModel, elemProps, ref);
+
+    // console.warn('STATE', localModel.state);
+    // console.warn('hookedProps', composedHook);
     return (
       <SwatchButtonContainer
         color={color}
         as={Element}
         showCheck={showCheck || localModel.state.color === color}
         style={{boxShadow: localModel.state.cursorId === color ? accessibilityBorder : undefined}}
-        {...elemProps}
-        {...hookedProps}
+        {...props}
       >
-        {showCheck || hookedProps.selected ? (
+        {showCheck || props['aria-selected'] ? (
           <SystemIcon
             fill={pickForegroundColor(color)}
             fillHover={pickForegroundColor(color)}
@@ -132,7 +134,6 @@ export const useSwatchesItem = composeHooks(
       const selected = !!elemProps.name && isSelected(name, state);
 
       return {
-        selected,
         type: 'button' as 'button', // keep Typescript happy
         role: 'tab',
         'aria-selected': selected,

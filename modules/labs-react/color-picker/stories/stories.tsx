@@ -85,12 +85,14 @@ export const Default = () => {
       <ColorPicker model={model}>
         <ColorPicker.SwatchBook style={{marginBottom: '20px'}} colors={defaultColorSet}>
           {colors => {
-            return colors.map(color => <ColorPicker.SwatchButton key={color} color={color} />);
+            return colors.map(color => (
+              <ColorPicker.SwatchButton key={color} name={color} color={color} />
+            ));
           }}
         </ColorPicker.SwatchBook>
       </ColorPicker>
       <ColorPicker>
-        <ColorPicker.Swatch showCheck={false} color={defaultColorSet[model.state.selectedIds[0]]} />
+        <ColorPicker.Swatch showCheck={false} color={model.state.selectedIds[0]} />
       </ColorPicker>
     </>
   );
