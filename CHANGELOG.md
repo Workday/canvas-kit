@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v5.3.5](https://github.com/Workday/canvas-kit/releases/tag/v5.3.5) (2021-11-23)
+
+### Components
+
+- fix(popup): Fix PopupCard styles to be more easily overridden ([#1352](https://github.com/Workday/canvas-kit/pull/1352)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v5.3.4](https://github.com/Workday/canvas-kit/releases/tag/v5.3.4) (2021-11-22)
 
 ### Components
