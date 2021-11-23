@@ -40,7 +40,7 @@ jobs:
 
   check:
     runs-on: ubuntu-latest
-    needs: ['install']
+    needs: 'install'
 
     steps:
       - uses: actions/checkout@v2
@@ -73,12 +73,10 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
-    needs: ['install']
+    needs: 'install'
 
     steps:
       - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0 # Required to retrieve git history
       - uses: actions/setup-node@v2
         with:
           node-version: 14.x
@@ -105,7 +103,7 @@ jobs:
 
   visual-test:
     runs-on: ubuntu-latest
-    needs: ['build']
+    needs: 'build'
 
     steps:
       - uses: actions/checkout@v2
@@ -141,7 +139,11 @@ jobs:
 
   integration-test:
     runs-on: ubuntu-latest
-    needs: ['build']
+    needs: 'build'
+    strategy:
+      fail-fast: false
+      matrix:
+        containers: [1, 2, 3, 4]
 
     steps:
       - uses: actions/checkout@v2
@@ -150,6 +152,16 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: 14.x
+
+      - uses: actions/cache/@v2
+        with:
+          path: .cache/cypress
+          key: ${{ runner.os }}-cypress-cache-version-${{ steps.cypress-version.outputs.version }}
+
+      - uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-modules-hash-${{ hashFiles('yarn.lock') }}
 
       - name: Restore Build
         uses: actions/cache/@v2
@@ -161,7 +173,7 @@ jobs:
         run: npx http-server docs -p 9001 & npx wait-on http://localhost:9001
 
       - name: Integration tests
-        run: yarn cypress run --record
+        run: yarn cypress run --record --parallel
         env:
           # Github Actions doesn't support encryption on forks
           # If these keys become compromised, we will rotate and disable these features
