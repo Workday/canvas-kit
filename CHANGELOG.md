@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v5.3.4](https://github.com/Workday/canvas-kit/releases/tag/v5.3.4) (2021-11-22)
+
+### Components
+
+- fix(LoadingAnimation): Add support for RTL ([#1349](https://github.com/Workday/canvas-kit/pull/1349)) ([@vibdev](https://github.com/vibdev))
+  Possible visual regression if you have overrides to get the old version working for RTL.
+
+
 ## [v5.3.3](https://github.com/Workday/canvas-kit/releases/tag/v5.3.3) (2021-11-19)
 
 ### Components
