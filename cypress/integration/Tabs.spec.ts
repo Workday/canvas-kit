@@ -540,7 +540,7 @@ describe('Tabs', () => {
             cy.focused().tab();
           });
 
-          it('should focus on the tab panel', () => {
+          it('should focus on the "More" button', () => {
             cy.findByRole('button', {name: 'More'}).should('have.focus');
           });
         });
