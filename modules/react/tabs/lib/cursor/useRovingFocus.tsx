@@ -31,6 +31,14 @@ const rightToLeftMap = {
   End: 'Home',
 } as const;
 
+const gridKeyMap = {
+  ...orientationKeyMap.horizontal,
+  ArrowUp: 'goToPreviousRow',
+  Up: 'goToPreviousRow',
+  ArrowDown: 'goToNextRow',
+  Down: 'goToNextRow',
+};
+
 /**
  * Handles the roving focus behavior of a Cursor model. It should be added to the element
  * representing a list item.
@@ -58,7 +66,9 @@ export const useRovingFocus = createHook(
     React.useEffect(() => {
       if (keyDownRef.current) {
         const item = navigation.getItem(state.cursorId);
-        document.querySelector<HTMLElement>(`#${state.id}-${getIdRef.current(item)}`)?.focus();
+        document
+          .querySelector<HTMLElement>(`[id="${state.id}-${getIdRef.current(item)}"]`)
+          ?.focus();
 
         keyDownRef.current = false;
       }
@@ -67,10 +77,11 @@ export const useRovingFocus = createHook(
     return {
       onKeyDown(event: React.KeyboardEvent) {
         (Object.keys(
-          orientationKeyMap[state.orientation]
+          state.columnCount > 0 ? gridKeyMap : orientationKeyMap[state.orientation]
         ) as (keyof typeof orientationKeyMap[typeof state.orientation])[]).forEach(key => {
           if (isRTL ? event.key === rightToLeftMap[key] : event.key === key) {
-            const event = orientationKeyMap[state.orientation][key];
+            const event =
+              state.columnCount > 0 ? gridKeyMap[key] : orientationKeyMap[state.orientation][key];
             keyDownRef.current = true;
             events[event]?.();
           }
