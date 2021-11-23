@@ -129,5 +129,5 @@ export const useSelectionModel = <T extends unknown>(
     },
   } as SelectionEvents<T>);
 
-  return {state, events, selection, getId: cursor.getId};
+  return {...cursor, state, events, selection};
 };

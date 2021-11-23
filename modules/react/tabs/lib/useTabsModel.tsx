@@ -152,10 +152,9 @@ export const useTabsModel = <T extends unknown>(config: TabsModelConfig<T> = {})
   });
 
   return {
+    ...model,
     state,
     events,
     menu,
-    getId: model.getId,
-    selection: model.selection,
   };
 };

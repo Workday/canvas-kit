@@ -49,9 +49,23 @@ export type CursorEvents<T = unknown> = ListEvents<T> & {
   last(): void;
 };
 
+type NavigationInput<T> = Pick<CursorModel<T>, 'state' | 'getId'>;
+
+export interface NavigationManager {
+  getFirst<T>(input: NavigationInput<T>): T,
+  getLast<T>(input: NavigationInput<T>): T,
+  getItem<T>(id: string, input: NavigationInput<T>): T,
+  getNext<T>(id: string, input: NavigationInput<T>): T, 
+  goToNextRow<T>(id: string, input: NavigationInput<T>): T, 
+  getPrevious<T>(id: string, input: NavigationInput<T>): T, 
+  goToPreviousRow<T>(id: string, input: NavigationInput<T>): T
+}
+
+
 export interface CursorModel<T = unknown> extends ListModel<T> {
   state: CursorState<T>;
   events: CursorEvents<T>;
+  navigation: NavigationManager;
 }
 
 export const cursorEventMap = createEventMap<CursorEvents>()({
@@ -88,6 +102,7 @@ export type BaseCursorModelConfig<T> = BaseListModelConfig<T> & {
    * @default 0
    */
   columnCount?: number;
+  navigation?: NavigationManager
 };
 
 export type CursorModelConfig<T> = BaseCursorModelConfig<T> &
@@ -147,6 +162,53 @@ export const useCursorNavigation = <T extends unknown>(
   }, [state.columnCount]);
 };
 
+export const wrappedNavigationManager: NavigationManager = (function() {
+  // return a memoized function to prevent recreation of functions every render
+  const getFirst = <T extends unknown>({state}: NavigationInput<T>) => state.items[0];
+  const getLast = <T extends unknown>({state}: NavigationInput<T>) =>
+    state.items[state.items.length - 1];
+
+  const getItem = <T extends unknown>(id: string, {state, getId}: NavigationInput<T>): T => {
+    const item = id ? state.items.find(item => getId(item) === id) : getFirst({state, getId}); // no id, return first item
+    assert(item, `Item not found: ${id}`);
+    return item;
+  };
+
+  const getOffsetItem = (offset: number) => <T extends unknown>(
+    id: string,
+    {state, getId}: NavigationInput<T>,
+    tries = state.items.length
+  ): T => {
+    const items = state.items;
+    const item = getItem(id, {state, getId});
+
+    const currentIndex = items.findIndex(i => getId(item) === getId(i));
+    let nextIndex = currentIndex + offset;
+    if (nextIndex < 0) {
+      nextIndex = items.length + nextIndex;
+    } else if (nextIndex >= items.length) {
+      nextIndex = nextIndex - items.length;
+    }
+
+    if (state.nonInteractiveIds.includes(getId(items[nextIndex])) && tries > 0) {
+      // The next item is disabled, try again, but only if we haven't already tried everything.
+      // Avoid an infinite loop with `tries`
+      return getOffsetItem(offset)(getId(items[nextIndex]), {state, getId}, tries - 1);
+    }
+
+    return items[nextIndex];
+  };
+
+  const getNext = getOffsetItem(1);
+  const getPrevious = getOffsetItem(-1);
+  const goToPreviousRow = <T extends unknown>(id: string, {state, getId}: NavigationInput<T>) =>
+    getOffsetItem(-state.columnCount)(id, {state, getId});
+  const goToNextRow = <T extends unknown>(id: string, {state, getId}: NavigationInput<T>) =>
+    getOffsetItem(state.columnCount)(id, {state, getId});
+
+  return {getFirst, getLast, getItem, getNext, goToNextRow, getPrevious, goToPreviousRow};
+})();
+
 export const useCursorModel = <T extends unknown>(
   config: CursorModelConfig<T> = {}
 ): CursorModel<T> => {
@@ -159,7 +221,8 @@ export const useCursorModel = <T extends unknown>(
   );
 
   const state = {...list.state, orientation, cursorId, columnCount};
-  const navigation = useCursorNavigation(state, list.getId);
+  // const navigation = useCursorNavigation(state, list.getId);
+  const navigation = config.navigation || wrappedNavigationManager
 
   const events = useEventMap(cursorEventMap, state, config, {
     ...list.events,
@@ -175,24 +238,24 @@ export const useCursorModel = <T extends unknown>(
       setCursorId(id);
     },
     next() {
-      setCursorId(list.getId(navigation.getNext(state.cursorId)));
+      setCursorId(list.getId(navigation.getNext(state.cursorId, {state, getId: list.getId})));
     },
     previous() {
-      setCursorId(list.getId(navigation.getPrevious(state.cursorId)));
+      setCursorId(list.getId(navigation.getPrevious(state.cursorId, {state, getId: list.getId})));
     },
     goToPreviousRow() {
-      setCursorId(list.getId(navigation.goToPreviousRow(state.cursorId)));
+      setCursorId(list.getId(navigation.goToPreviousRow(state.cursorId, {state, getId: list.getId})));
     },
     goToNextRow() {
-      setCursorId(list.getId(navigation.goToNextRow(state.cursorId)));
+      setCursorId(list.getId(navigation.goToNextRow(state.cursorId, {state, getId: list.getId})));
     },
     first() {
-      setCursorId(list.getId(navigation.getFirst()));
+      setCursorId(list.getId(navigation.getFirst({state, getId: list.getId})));
     },
     last() {
-      setCursorId(list.getId(navigation.getLast()));
+      setCursorId(list.getId(navigation.getLast({state, getId: list.getId})));
     },
   } as CursorEvents<T>);
 
-  return {state, events, getId: list.getId};
+  return {...list, state, events, navigation};
 };

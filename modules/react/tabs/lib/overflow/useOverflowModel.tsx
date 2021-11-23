@@ -181,5 +181,5 @@ export const useOverflowModel = <T extends unknown>(
     },
   } as OverflowEvents<T>);
 
-  return {state, events, selection: model.selection, getId: model.getId};
+  return {...model, state, events};
 };

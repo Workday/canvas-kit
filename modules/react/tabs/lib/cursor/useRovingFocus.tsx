@@ -46,7 +46,7 @@ const gridKeyMap = {
  * @see https://www.w3.org/TR/wai-aria-practices/#kbd_roving_tabindex
  */
 export const useRovingFocus = createHook(
-  ({state, events, getId}: CursorModel, ref, elemProps: {name?: string} = {}) => {
+  ({state, events, getId, navigation}: CursorModel, ref, elemProps: {name?: string} = {}) => {
     // Tracks when this element has focus. If this item is removed while still focused, we have to
     // inform the model to move the cursor to the next item.
     const focusRef = React.useRef(false);
@@ -61,18 +61,18 @@ export const useRovingFocus = createHook(
     const keyDownRef = React.useRef(false);
     const isRTL = useIsRTL();
 
-    const navigation = useCursorNavigation(state, getId);
-
     React.useEffect(() => {
       if (keyDownRef.current) {
-        const item = navigation.getItem(state.cursorId);
+        const item = navigation.getItem(state.cursorId, {state, getId});
         document
           .querySelector<HTMLElement>(`[id="${state.id}-${getIdRef.current(item)}"]`)
           ?.focus();
 
         keyDownRef.current = false;
       }
-    }, [state.cursorId, state.id, navigation]);
+      // we only want to run this effect if the cursor changes and not any other time
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [state.cursorId]);
 
     return {
       onKeyDown(event: React.KeyboardEvent) {
