@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v6.0.4](https://github.com/Workday/canvas-kit/releases/tag/v6.0.4) (2021-11-23)
+
+### Infrastructure
+
+- ci: Add parallel PR verification [skip-release] ([#1354](https://github.com/Workday/canvas-kit/pull/1354)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v6.0.3](https://github.com/Workday/canvas-kit/releases/tag/v6.0.3) (2021-11-23)
 
 ### Components
