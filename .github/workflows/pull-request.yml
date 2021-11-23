@@ -184,3 +184,6 @@ jobs:
   verify:
     runs-on: ubuntu-latest
     needs: ['check', 'integration-test']
+    steps:
+      - name: Done
+        run: echo "Done"
