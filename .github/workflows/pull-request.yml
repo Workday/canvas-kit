@@ -173,7 +173,7 @@ jobs:
         run: npx http-server docs -p 9001 & npx wait-on http://localhost:9001
 
       - name: Integration tests
-        run: yarn cypress run --record --parallel --retries 1
+        run: yarn cypress run --record --parallel
         env:
           # Github Actions doesn't support encryption on forks
           # If these keys become compromised, we will rotate and disable these features
