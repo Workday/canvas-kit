@@ -1,4 +1,4 @@
-import {createEventMap, Model, ToModelConfig, useEventMap} from '@workday/canvas-kit-react/common';
+import {createEventMap, ToModelConfig, useEventMap} from '@workday/canvas-kit-react/common';
 import {
   BasePopupModelConfig,
   popupEventMap,
@@ -14,7 +14,6 @@ import {
   useReturnFocus,
 } from '@workday/canvas-kit-react/popup';
 import {CursorModel} from '../cursor';
-import {ListModel} from '../list';
 import {
   SelectionState,
   SelectionEvents,
