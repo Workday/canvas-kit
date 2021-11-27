@@ -6,12 +6,25 @@ import {ActionText} from './examples/ActionText';
 import {Basic} from './examples/Basic';
 import {Error} from './examples/Error';
 import {Sticky} from './examples/Sticky';
+import {ThemedAlert} from './examples/ThemedAlert';
+import {ThemedError} from './examples/ThemedError';
+import {RefForwarding} from './examples/RefForwarding';
+import {StickyAnimation} from './examples/StickyAnimation';
+import {StickyRTL} from './examples/StickyRTL';
+import {
+  BannerHoistedComponent,
+  BannerModelConfigComponent,
+  BannerIconComponent,
+  BannerLabelComponent,
+  BannerActionComponent,
+} from './PropTables.splitprops.tsx';
 
 <Meta title="Components/Indicators/Banner/React" component={Banner} />
 
 # Canvas Kit Banner
 
-Banners surface important information and feedback to the user about a task, action, or state.
+`Banner` is a [compound component](/getting-started/for-developers/resources/compound-components/)
+used surface important information and feedback to the user about a task, action, or state.
 
 [> Workday Design Reference](https://design.workday.com/components/indicators/banners)
 
@@ -25,38 +38,209 @@ yarn add @workday/canvas-kit-react
 
 ### Basic Example
 
+Use the children of `Banner.Label` to set the main text for the `Banner`.
+
 <ExampleCodeBlock code={Basic} />
 
-### Error Type
+### Action Text
 
-Set the `error` prop of the Banner to designate the severity of the message presented in the banner.
-`error` accepts the following values:
-
-- `Banner.ErrorType.Alert` (Default)
-- `Banner.ErrorType.Error`
-
-<ExampleCodeBlock code={Error} />
-
-### Variant
-
-Banner is available in two variants. `variant` accepts the following values:
-
-- `Banner.Variant.Full` (Default)
-- `Banner.Variant.Sticky`
-
-Use the `Sticky` variant if the Banner is to be displayed along the right edge of the page.
-
-<ExampleCodeBlock code={Sticky} />
-
-#### Action Text
-
-Set the `actionText` prop to customize the text of the link contained in the Banner. `actionText` is
-only available in the `Full` variant and has a default value of `View All`.
+Use the children of `Banner.Action` to customize the action text contained in the `Banner`. The text
+has default value of `View All`.
 
 <ExampleCodeBlock code={ActionText} />
 
-## Props
+### Error Type
 
-Undocumented props are spread to the outermost element rendered by Banner.
+Set the `hasError` prop of the `Banner` to designate the severity of the message presented in the
+banner. This will change the defualt icon to `exclamationCircleIcon`.
 
-<ArgsTable of={Banner} />
+<ExampleCodeBlock code={Error} />
+
+### Sticky
+
+Set the `isSticky` prop of the `Banner` to display it along the right edge of the page. When true,
+the `Banner.Action` will be hidden. Some basic styles will be applied, but you will still need to
+manually set the css `position` value.
+
+<ExampleCodeBlock code={Sticky} />
+
+You can use keyframes to animate the `Banner` in.
+
+<ExampleCodeBlock code={StickyAnimation} />
+
+### RefForwarding
+
+`Banner` supports ref forwarding. It will forward ref to its underlying button element.
+
+<ExampleCodeBlock code={RefForwarding} />
+
+### Right-to-Left (RTL)
+
+Banner supports right-to-left languages when specified in the CanvasProvider theme.
+
+<ExampleCodeBlock code={StickyRTL} />
+
+### Themed Banners
+
+Banners use the `useThemedPalette` hook for themeing. By default, your alert theme is used. `main`
+will be used for the background, `dark` for the hover background, and `contrast` for the text.
+
+<ExampleCodeBlock code={ThemedAlert} />
+
+If you set the `hasError` prop, the banner will use your error theme.
+
+<ExampleCodeBlock code={ThemedError} />
+
+## Components
+
+### Banner
+
+#### Usage
+
+`Banner` is a container component rendered as a `<button>` element that is responsible for creating
+a `BannerModel` and sharing it with its subcomponents using React context.
+
+```tsx
+<Banner
+	isSticky={true}
+	hasError={true} id:
+	'custom-banner-id'
+	onClick={() => console.log('clicked banner')}
+>
+  {/* Child components */}
+</Banner>
+```
+
+Alternatively, you may pass in a model using the hoisted model pattern.
+
+```tsx
+const model = useBannerModel({
+  isSticky: true,
+  hasError: true,
+  id: 'custom-banner-id',
+});
+
+return (
+  <Banner onClick={() => console.log('clicked banner')} model={model}>
+    {/* Child components */}
+  </Banner>
+);
+```
+
+#### Props
+
+Undocumented props are spread to the underlying `<button>` element.
+
+<ArgsTable of={BannerModelConfigComponent} />
+
+If you're using the hoisted model pattern, follow this table instead (refer to the [Model](#model)
+section for more information about `BannerModel`):
+
+<ArgsTable of={BannerHoistedComponent} />
+
+### Banner.Icon
+
+#### Usage
+
+`Banner.Icon` is a styled `<SystemIcon>`. The icon defaults to exclamationTriangleIcon or
+exclamationCircleIcon when the model's hasError is true.
+
+```tsx
+<Banner.Icon />
+```
+
+#### Props
+
+You can override the default icon if needed.
+
+Undocumented props are spread to the underlying `<SystemIcon>` element.
+
+<ArgsTable of={BannerIconComponent} />
+
+### Banner.Label
+
+#### Usage
+
+`Banner.Label` is a styled `<Flex>`. This component will get an id that will be used for the
+aria-describedby on the top level `<button>`.
+
+```tsx
+<Banner.Label>3 Warnings</Banner.Label>
+```
+
+#### Props
+
+The children prop will be used as the Primary text of the Banner.
+
+Undocumented props are spread to the underlying `<Flex>` element.
+
+<ArgsTable of={BannerLabelComponent} />
+
+### Banner.Action
+
+#### Usage
+
+`Banner.Action` is a styled `<Box>`. This component will get an id that will be used for the
+aria-labelledby on the top level `<button>`. This component will be visually hidden when the model's
+`isSticky` prop is set to true.
+
+```tsx
+<Banner.Action>Custom call to action</Banner.Action>
+```
+
+#### Props
+
+The children prop will be used as the 'call to action' text of the Banner.
+
+Undocumented props are spread to the underlying `<Box>` element.
+
+<ArgsTable of={BannerActionComponent} />
+
+## Model
+
+If `Banner` was stripped of all its markup, attributes, and styling, what would remain is the
+[model](/getting-started/for-developers/resources/compound-components/#models). The model is an
+object that holds the `state`, i.e. a description of the current snapshot in time of the component.
+
+By default, `Banner` will create a model and share it internally with its subcomponents using React
+context. You may subscribe to `BannerContext` if you wish to create a custom subcomponent for your
+implementation. Here's a simple example.
+
+```tsx
+import * as React from 'react';
+import {Banner, BannerModelContext} from '@workday/canvas-kit-react/banner';
+
+const CustomText = (props: React.HTMLAttributes<HTMLSpanElement>) => {
+  const model = React.useContext(BannerModelContext);
+
+  return <span {...props}>{model.state.hasError ? 'Error:' : 'Warning:'}</span>;
+};
+
+export const CustomBanner = () => {
+  return (
+    <Banner>
+      <CustomText />
+      {/* Other subcomponents */}
+    </Banner>
+  );
+};
+```
+
+Alternatively, if you need direct access to the model's `state` outside of the `Banner` component,
+you may configure your own model with `useBannerModel` and pass it to `Banner` via a pattern called
+[hoisting the model](/getting-started/for-developers/resources/compound-components/#configuring-a-model).
+
+```tsx
+const model = useBannerModel({
+  isError: true,
+});
+
+<Banner model={model}>{/* Child components */}</Banner>;
+```
+
+### Config
+
+`useBannerModel` accepts a configuration object with the following properties and returns a
+`BannerModel` with a `state` property.
+
+<ArgsTable of={BannerModelConfigComponent} />

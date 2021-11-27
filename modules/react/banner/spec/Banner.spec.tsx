@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {mount} from 'enzyme';
-import Banner from '../lib/Banner';
+import {Banner} from '../lib/Banner';
 import ReactDOMServer from 'react-dom/server';
 import {axe} from 'jest-axe';
 
