@@ -1,8 +1,10 @@
 import {Meta} from '@storybook/addon-docs/blocks';
+import {Specifications, CodeSandboxButton } from '@workday/canvas-kit-docs';
 
 import {Pagination} from '@workday/canvas-kit-react/pagination';
 
 import {Basic} from './examples/Basic';
+
 import {CustomRange} from './examples/CustomRange';
 import {JumpControls} from './examples/JumpControls';
 import {GoToForm} from './examples/GoToForm';
@@ -46,6 +48,8 @@ well as step controls (`Pagination.StepToPreviousButton` and `Pagination.StepToN
 allow you to move to the previous page or the next page.
 
 <ExampleCodeBlock code={Basic} />
+
+<CodeSandboxButton examplePath="modules/react/pagination/stories/examples/Basic.tsx" />
 
 Note that you must include `Pagination.AdditionalDetails` to meet accessibility standards (with one
 exception, see [`Pagination.AdditionalDetails`](#paginationadditionaldetails) for more information).
