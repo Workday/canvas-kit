@@ -52,15 +52,14 @@ export type CursorEvents<T = unknown> = ListEvents<T> & {
 type NavigationInput<T> = Pick<CursorModel<T>, 'state' | 'getId'>;
 
 export interface NavigationManager {
-  getFirst<T>(input: NavigationInput<T>): T,
-  getLast<T>(input: NavigationInput<T>): T,
-  getItem<T>(id: string, input: NavigationInput<T>): T,
-  getNext<T>(id: string, input: NavigationInput<T>): T, 
-  goToNextRow<T>(id: string, input: NavigationInput<T>): T, 
-  getPrevious<T>(id: string, input: NavigationInput<T>): T, 
-  goToPreviousRow<T>(id: string, input: NavigationInput<T>): T
+  getFirst<T>(input: NavigationInput<T>): T;
+  getLast<T>(input: NavigationInput<T>): T;
+  getItem<T>(id: string, input: NavigationInput<T>): T;
+  getNext<T>(id: string, input: NavigationInput<T>): T;
+  goToNextRow<T>(id: string, input: NavigationInput<T>): T;
+  getPrevious<T>(id: string, input: NavigationInput<T>): T;
+  goToPreviousRow<T>(id: string, input: NavigationInput<T>): T;
 }
-
 
 export interface CursorModel<T = unknown> extends ListModel<T> {
   state: CursorState<T>;
@@ -102,7 +101,7 @@ export type BaseCursorModelConfig<T> = BaseListModelConfig<T> & {
    * @default 0
    */
   columnCount?: number;
-  navigation?: NavigationManager
+  navigation?: NavigationManager;
 };
 
 export type CursorModelConfig<T> = BaseCursorModelConfig<T> &
@@ -221,8 +220,7 @@ export const useCursorModel = <T extends unknown>(
   );
 
   const state = {...list.state, orientation, cursorId, columnCount};
-  // const navigation = useCursorNavigation(state, list.getId);
-  const navigation = config.navigation || wrappedNavigationManager
+  const navigation = config.navigation || wrappedNavigationManager;
 
   const events = useEventMap(cursorEventMap, state, config, {
     ...list.events,
@@ -244,7 +242,9 @@ export const useCursorModel = <T extends unknown>(
       setCursorId(list.getId(navigation.getPrevious(state.cursorId, {state, getId: list.getId})));
     },
     goToPreviousRow() {
-      setCursorId(list.getId(navigation.goToPreviousRow(state.cursorId, {state, getId: list.getId})));
+      setCursorId(
+        list.getId(navigation.goToPreviousRow(state.cursorId, {state, getId: list.getId}))
+      );
     },
     goToNextRow() {
       setCursorId(list.getId(navigation.goToNextRow(state.cursorId, {state, getId: list.getId})));
