@@ -43,7 +43,7 @@
     "@types/react-dom": "^16.9.1",
     "@types/react-test-renderer": "^16.9.0",
     "@types/react-transition-group": "^2.9.2",
-    "@types/uuid": "^3.4.4",
+    "@types/uuid": "^8.3.1",
     "@typescript-eslint/eslint-plugin": "^2.31.0",
     "@typescript-eslint/parser": "^2.31.0",
     "autoprefixer": "^9.5.0",
