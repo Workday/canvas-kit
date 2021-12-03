@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import uuid from 'uuid/v4';
+import {v4 as uuidv4} from 'uuid';
 import {MenuItemProps} from './MenuItem';
 import {Card} from '@workday/canvas-kit-react/card';
 import {commonColors, space, borderRadius} from '@workday/canvas-kit-react/tokens';
@@ -58,7 +58,7 @@ const List = styled('ul')({
 });
 
 export default class Menu extends React.Component<MenuProps, MenuState> {
-  private id = uuid();
+  private id = uuidv4();
   private animateId!: number;
 
   private menuRef: React.RefObject<HTMLUListElement>;

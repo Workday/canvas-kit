@@ -54,7 +54,7 @@
     "@emotion/core": "^10.0.28",
     "@emotion/is-prop-valid": "^0.8.2",
     "@emotion/styled": "^10.0.27",
-    "@types/uuid": "^3.4.4",
+    "@types/uuid": "^8.3.3",
     "@workday/canvas-kit-preview-react": "^5.2.12",
     "@workday/canvas-kit-react": "^5.2.12",
     "@workday/canvas-system-icons-web": "1.0.41",
@@ -62,7 +62,7 @@
     "csstype": "^2.6.17",
     "lodash.flatten": "^4.4.0",
     "rtl-css-js": "^1.14.1",
-    "uuid": "^3.3.3"
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@types/lodash.flatten": "^4.4.6"
