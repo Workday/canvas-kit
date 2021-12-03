@@ -138,7 +138,7 @@ jobs:
       ## Publish to npm. Must be run after a build
       - name: Publish
         if: "!contains(github.event.head_commit.message, '[skip release]')"
-        run: yarn lerna publish from-package --yes --dist-tag latest
+        run: yarn lerna publish from-package --yes --dist-tag ${{steps.extract-branch.outputs.branch == 'master' && 'latest' || 'support'}}
         env:
           NODE_AUTH_TOKEN: '${{secrets.NPM_CI_PUBLISH_TOKEN}}'
 
