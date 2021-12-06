@@ -1,4 +1,4 @@
-# Canvas Kit Labs React Header
+# Canvas Kit Labs React Header (Deprecated)
 
 <a href="https://github.com/Workday/canvas-kit/tree/master/modules/labs-react/README.md">
   <img src="https://img.shields.io/badge/LABS-alpha-orange" alt="LABS: Alpha" />
@@ -7,10 +7,6 @@
 A set of components to create headers for various Workday applications and sites.
 
 For a full suite of examples, have a look at the [Header Stories](./stories.tsx).
-
-## Coming Soon
-
-- Mobile Expanded Nav
 
 ## Installation
 
@@ -26,13 +22,13 @@ This component renders a responsive, Canvas-style header.
 
 ```tsx
 import * as React from 'react';
-import {Header} from '@workday/canvas-kit-labs-react/header';
+import {DeprecatedHeader} from '@workday/canvas-kit-labs-react/header';
 import {IconButton} from '@workday/canvas-kit-react/button';
 import {Avatar} from '@workday/canvas-kit-react/avatar';
 import {notificationsIcon} from '@workday/canvas-system-icons-web';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
 
-<Header title="Header" brandUrl="#">
+<DeprecatedHeader title="Header" brandUrl="#">
   <nav>
     <ul>
       <li className="current">
@@ -62,7 +58,7 @@ import {PrimaryButton} from '@workday/canvas-kit-react/button';
     altText="Profile"
   />
   <PrimaryButton>Sign Up</PrimaryButton>
-</Header>;
+</DeprecatedHeader>;
 ```
 
 ## Special Children
@@ -88,18 +84,18 @@ _Deprecated (but supported) - please use `IconButton` instead._
 
 ## Static Properties
 
-#### `Theme: HeaderTheme`
+#### `Theme: DeprecatedHeaderTheme`
 
 ```tsx
-<Header title="Blue Header" themeColor={Header.Theme.Blue} />
+<DeprecatedHeader title="Blue Header" themeColor={DeprecatedHeader.Theme.Blue} />
 ```
 
 ---
 
-#### `Variant: HeaderVariant`
+#### `Variant: DeprecatedHeaderVariant`
 
 ```tsx
-<Header title="Marketing Header" variant={Header.Variant.Full} />
+<DeprecatedHeader title="Marketing Header" variant={DeprecatedHeader.Variant.Full} />
 ```
 
 ## Component Props
@@ -118,7 +114,7 @@ Default: `''`
 
 ---
 
-#### `themeColor: HeaderTheme`
+#### `themeColor: DeprecatedHeaderTheme`
 
 > The theme of the header (White, Blue, or Transparent).
 
@@ -128,11 +124,11 @@ Default: `''`
 | Blue        | Dark blue gradient background with white text, white system icons.                               |
 | Transparent | Transparent background (intended for dark-colored overlays) with white text, white system icons. |
 
-Default: `HeaderTheme.White`
+Default: `DeprecatedHeaderTheme.White`
 
 ---
 
-#### `variant: HeaderVariant`
+#### `variant: DeprecatedHeaderVariant`
 
 > Specifies the variation of the header.
 
@@ -141,7 +137,7 @@ Default: `HeaderTheme.White`
 | Dub     | "Dub" headers have a singular "Dub" logo and a title, separated by a equivalent-height divider. It is shorter in height (64px) than the "Full" variant.                                                |
 | Full    | "Full" headers have the full Workday logo and an optional title at minimum, separated by an equivalent-height divider (when a title is defined). It is taller in height (80px) than the "Dub" variant. |
 
-Default: `HeaderVariant.Dub`
+Default: `DeprecatedHeaderVariant.Dub`
 
 ---
 
@@ -156,7 +152,7 @@ Default: `HeaderVariant.Dub`
 > If specified, this replaces the contents of the Dub logo and title. Used for replacing Dub + title
 > with a `contained lockup` and/or for adding custon design elements next to the Dub + title lockup.
 
-Default: `DubLogoTitle` (for "Dub" variants) or `WorkdayLogoTitle` (for "Full" variants)
+Default: `DeprecatedDubLogoTitle` (for "Dub" variants) or `DeprecatedWorkdayLogoTitle` (for "Full" variants)
 
 ---
 
@@ -183,7 +179,7 @@ Default: `DubLogoTitle` (for "Dub" variants) or `WorkdayLogoTitle` (for "Full" v
 
 > A React element for the left of the header, this is typically a search bar component
 
-# Global Header
+# Global Header (Deprecated)
 
 The Global Header (or App Header) is used for Workday applications.
 
@@ -191,12 +187,13 @@ The Global Header (or App Header) is used for Workday applications.
 
 ```tsx
 import {Avatar} from '@workday/canvas-kit-react/avatar';
-import {GlobalHeader, DubLogoTitle} from '@workday/canvas-kit-labs-react/header';
+import {DeprecatedGlobalHeader, DeprecatedDubLogoTitle} from '@workday/canvas-kit-labs-react/header';
+import {SearchForm} from '@workday/canvas-kit-labs-react/search-form';
 import {Avatar} from '@workday/canvas-kit-react/avatar';
 import {IconButton} from '@workday/canvas-kit-react/button';
 import {notificationsIcon, inboxIcon} from '@workday/canvas-system-icons-web';
 
-const HeaderBrand = () => <DubLogoTitle themeColor={Header.Theme.White} />
+const HeaderBrand = () => <DeprecatedDubLogoTitle themeColor={Header.Theme.White} />
 const HeaderAvatar = () => <Avatar onClick={handleMenuClick} url="https://my.cdn.amazonaws.com/assets/avatar_pic.png" />
 const handleSearchSubmit = event => {
   const query = (event.target as HTMLFormElement).getElementsByTagName('input')[0].value;
@@ -205,15 +202,15 @@ const handleSearchSubmit = event => {
 const openMenu = e => console.log("Menu opened")
 
 /**
- * In this instance, the right-most child will be an Avatar component, when the GlobalHeader
+ * In this instance, the right-most child will be an Avatar component, when the DeprecatedGlobalHeader
  * shrinks below the specified breakpoint (720 in this case), the children get replaced by a menuToggle.
- * For most GlobalHeader implementations, the menuToggle is also the Avatar component.
+ * For most DeprecatedGlobalHeader implementations, the menuToggle is also the Avatar component.
  */
-<GlobalHeader
+<DeprecatedGlobalHeader
   brand={<HeaderBrand />}
   menuToggle={<HeaderAvatar />}
   onMenuClick={openMenu}
-  leftSlot={<SearchBar
+  leftSlot={<SearchForm
     isCollapsed={false}
     grow={true}
     onSubmit={handleSearchSubmit}
@@ -223,7 +220,7 @@ const openMenu = e => console.log("Menu opened")
   <IconButton icon={notificationsIcon} variant={IconButton.Variant.Circle} />
   <IconButton icon={inboxIcon} variant={IconButton.Variant.Circle} />
   <HeaderAvatar />
-</GlobalHeader>
+</DeprecatedGlobalHeader>
 ```
 
 ## Static Properties
@@ -243,13 +240,13 @@ const openMenu = e => console.log("Menu opened")
 > If specified, this replaces the contents of the Dub logo and title. Used for replacing Dub + title
 > with a branded element and/or for adding custon design elements next to the Dub + title lockup.
 
-Default: `<DubLogoTitle />`
+Default: `<DeprecatedDubLogoTitle />`
 
 #### `menuToggle: React.ReactNode`
 
 > _Note: This `menuToggle` slot only appears when the screen size shrinks below the `breakpoint`._
 >
-> For most `GlobalHeader` implementations, this is generally the same as the users' `Avatar`. If not
+> For most `DeprecatedGlobalHeader` implementations, this is generally the same as the users' `Avatar`. If not
 > specified, `menuToggle` defaults to a "hamburger" menu icon or "justify" icon.
 
 Default: `justifyIcon` from `@workday/canvas-system-icons-web`
@@ -258,7 +255,7 @@ Default: `justifyIcon` from `@workday/canvas-system-icons-web`
 
 > A click handler for when the user clicks the `menuToggle` element.
 
-Default: `<DubLogoTitle />`
+Default: `<DeprecatedDubLogoTitle />`
 
 #### `leftSlot: React.ReactElement`
 
@@ -270,7 +267,7 @@ Default: `<DubLogoTitle />`
 
 # "Dub" Logo and Title
 
-_Intended to be used in conjunction with the `Header` component_
+_Intended to be used in conjunction with the `DeprecatedHeader` component_
 
 A component that encapsulates the 'Dub' logo and a title (we call this the contained lockup). This
 is used whenever you want to override the contained lockup that comes default with a header, or if
@@ -280,11 +277,11 @@ background color of the contained lockup
 ## Usage
 
 ```tsx
-import {Header, DubLogoTitle} from '@workday/canvas-kit-labs-react/header';
+import {DeprecatedHeader, DeprecatedDubLogoTitle} from '@workday/canvas-kit-labs-react/header';
 import {colors} from '@workday/canvas-kit-react/tokens';
 
-<Header
-  brand={<DubLogoTitle title="This title will show up instead" bgColor={colors.blueberry600} />}
+<DeprecatedHeader
+  brand={<DeprecatedDubLogoTitle title="This title will show up instead" bgColor={colors.blueberry600} />}
 />;
 ```
 
@@ -304,11 +301,11 @@ Default: `''`
 
 ### Optional
 
-#### `themeColor: HeaderTheme`
+#### `themeColor: DeprecatedHeaderTheme`
 
 > The theme of the header (White, Blue, or Transparent).
 
-Default: `HeaderTheme.White`
+Default: `DeprecatedHeaderTheme.White`
 
 ---
 
@@ -320,7 +317,7 @@ Default: `'none'`
 
 # Workday Logo and Title
 
-_Intended to be used in conjunction with the `Header` component_
+_Intended to be used in conjunction with the `DeprecatedHeader` component_
 
 A component that contains the full Workday logo and a title. This is used whenever you want to
 override the contained lockup that comes default with a header, or if you want to add more elements
@@ -329,9 +326,9 @@ next to the title with custom components or markup.
 ## Usage
 
 ```tsx
-import {Header, WorkdayLogoTitle} from '@workday/canvas-kit-labs-react/header';
+import {DeprecatedHeader, DeprecatedWorkdayLogoTitle} from '@workday/canvas-kit-labs-react/header';
 
-<Header brand={<WorkdayLogoTitle title="Display Title" />} />;
+<DeprecatedHeader brand={<DeprecatedWorkdayLogoTitle title="Display Title" />} />;
 ```
 
 ## Static Properties
@@ -346,12 +343,12 @@ import {Header, WorkdayLogoTitle} from '@workday/canvas-kit-labs-react/header';
 
 ### Optional
 
-#### `themeColor: HeaderTheme`
+#### `themeColor: DeprecatedHeaderTheme`
 
 > The theme of the header (White, Blue, or Transparent). See the
-> [`themeColor`](#themecolor-headertheme) prop on the `Header` component.
+> [`themeColor`](#themecolor-headertheme) prop on the `DeprecatedHeader` component.
 
-Default: `HeaderTheme.White`
+Default: `DeprecatedHeaderTheme.White`
 
 ---
 
@@ -360,144 +357,3 @@ Default: `HeaderTheme.White`
 > The title displayed on the header next to the logo.
 
 Default `''`
-
-# Search Bar
-
-_Intended to be used in conjunction with the `Header` component_
-
-A component that contains a search bar with autocomplete functionality.
-
-## Usage
-
-```tsx
-import {SearchBar} from '@workday/canvas-kit-labs-react/header';
-import {MenuItem} from '@workday/canvas-kit-labs-react/menu';
-
-const handleInputChange = event => console.log('Adjust menu items here');
-const handleSearchSubmit = event => {
-  const query = (event.target as HTMLFormElement).getElementsByTagName('input')[0].value;
-  console.log('Submitted query: ', query);
-};
-
-<SearchBar
-  autocompleteItems={[<MenuItem>Item 1</MenuItem>]}
-  isCollapsed={false}
-  onInputChange={this.autocompleteCallback}
-  placeholder={`Search with Autocomplete`}
-  grow={true}
-  searchTheme={SearchBar.Theme.Dark}
-  onSubmit={handleSearchSubmit}
-/>;
-```
-
-## Static Properties
-
-> None
-
-## Component Props
-
-### Required
-
-#### `onSubmit: React.FormEventHandler<HTMLFormElement>`
-
-> An function that gets called and passed the current input value when the search form is submitted.
-
-### Optional
-
-#### `isCollapsed: boolean`
-
-> True if the search input should be collapsed into a toggle icon (for responsive).
-
----
-
-#### `onInputChange: React.ChangeEventHandler<HTMLInputElement>`
-
-> Callback to listen when the TextInput changes. This is usually used to update the autocomplete
-> items.
-
----
-
-#### `autocompleteItems: React.ReactElement<MenuItemProps>[]`
-
-> An array of MenuItems to show under the search bar.
-
----
-
-#### `searchTheme?: SearchTheme | SearchThemeAttributes`
-
-> The theme of the header the search input is being rendered in. There are 3 build in themes, but
-> the styles are customizable via SearchThemeAttributes.
-
-| Theme       | Description                                                                                              |
-| ----------- | -------------------------------------------------------------------------------------------------------- |
-| Light       | White background with dark-colored text, blue focus ring.                                                |
-| Dark        | Dark semi transparent background with white text. Inverts on focus.                                      |
-| Transparent | Transparent background (intended for light-colored header) with dark text. Also used in collapsed state. |
-
-Default: `SearchTheme.Light`
-
----
-
-#### `placeholder: string`
-
-> Placeholder for search input.
-
-Default: `'Search'`
-
----
-
-#### `initialValue: string;`
-
-> Initial value to set the input to.
-
----
-
-#### `rightAlign: boolean;`
-
-> False if the search input should grow to left align it. True if it should right align.
-
----
-
-#### `inputLabel: string`
-
-> Screenreader label for text input.
-
-Default: `'Search'`
-
----
-
-#### `submitLabel: string`
-
-> Screenreader label for submit button
-
-Default: `'Search'`
-
----
-
-#### `clearButtonAriaLabel: string`
-
-> Screenreader Label for clear button
-
----
-
-#### `openButtonLabel: string`
-
-> Screenreader Label to open collapsed search bar
-
-Default: `'Open Search'`
-
----
-
-#### `closeButtonLabel: string`
-
-> Screenreader Label to close collapsed search bar
-
-Default: `'Cancel'`
-
----
-
-#### `showClearButton: string`
-
-> Show button to clear input field
-
-Default: `true`

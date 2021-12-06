@@ -11,18 +11,16 @@ import chroma from 'chroma-js';
 import {notificationsIcon, inboxIcon} from '@workday/canvas-system-icons-web';
 
 import {Avatar} from '@workday/canvas-kit-react/avatar';
-import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react';
 import {colors, space, gradients} from '@workday/canvas-kit-react/tokens';
 import {IconButton, PrimaryButton} from '@workday/canvas-kit-react/button';
 import {MenuItem} from '@workday/canvas-kit-preview-react/menu';
+import {SearchForm, SearchFormProps} from '@workday/canvas-kit-labs-react/search-form';
 import {
-  GlobalHeader,
-  Header,
-  DubLogoTitle,
-  WorkdayLogoTitle,
-  HeaderVariant,
-  SearchBar,
-  SearchBarProps,
+  DeprecatedGlobalHeader,
+  DeprecatedHeader,
+  DeprecatedDubLogoTitle,
+  DeprecatedWorkdayLogoTitle,
+  DeprecatedHeaderVariant,
 } from '../index';
 
 import README from '../README.md';
@@ -81,7 +79,7 @@ const nav = (
 );
 
 class SearchWithAutoComplete extends React.Component<
-  Partial<SearchBarProps>,
+  Partial<SearchFormProps>,
   {currentText: string}
 > {
   state = {
@@ -108,7 +106,7 @@ class SearchWithAutoComplete extends React.Component<
       </MenuItem>
     );
     return (
-      <SearchBar
+      <SearchForm
         autocompleteItems={Array.apply(null, Array(this.state.currentText.length))
           .map((_, i) => autocompleteResult(String(i)))
           .splice(0, 5)}
@@ -124,16 +122,16 @@ class SearchWithAutoComplete extends React.Component<
 }
 
 storiesOf('Labs/Header/React', module)
-  .addParameters({component: Header})
+  .addParameters({component: DeprecatedHeader})
   .addDecorator(withReadme(README))
   .addDecorator(withKnobs)
   .add('Global Header', () => (
     <div className="story">
       <div css={containerStyle}>
-        <GlobalHeader
+        <DeprecatedGlobalHeader
           brand={
             <a href="#">
-              <DubLogoTitle themeColor={Header.Theme.White} />
+              <DeprecatedDubLogoTitle themeColor={DeprecatedHeader.Theme.White} />
             </a>
           }
           menuToggle={
@@ -143,7 +141,7 @@ storiesOf('Labs/Header/React', module)
             />
           }
           leftSlot={
-            <SearchBar
+            <SearchForm
               isCollapsed={boolean('isCollapsed', false)}
               onSubmit={handleSearchSubmitTest}
             />
@@ -163,14 +161,14 @@ storiesOf('Labs/Header/React', module)
             url="https://s3-us-west-2.amazonaws.com/design-assets-internal/avatars/lmcneil.png"
             altText="Profile"
           />
-        </GlobalHeader>
+        </DeprecatedGlobalHeader>
       </div>
       <div css={containerStyle}>
-        <GlobalHeader
-          brand={<WorkdayLogoTitle variant={HeaderVariant.Global} />}
+        <DeprecatedGlobalHeader
+          brand={<DeprecatedWorkdayLogoTitle variant={DeprecatedHeaderVariant.Global} />}
           menuToggle={<Avatar onClick={handleMenuClickTest} />}
           leftSlot={
-            <SearchBar
+            <SearchForm
               isCollapsed={boolean('isCollapsed', false)}
               onSubmit={handleSearchSubmitTest}
             />
@@ -185,12 +183,12 @@ storiesOf('Labs/Header/React', module)
           />
           <IconButton icon={inboxIcon} variant="circle" title="Inbox" aria-label="Inbox" />
           <Avatar onClick={handleAvatarClickTest} altText="Profile" />
-        </GlobalHeader>
+        </DeprecatedGlobalHeader>
       </div>
       <div css={containerStyle}>
-        <GlobalHeader
+        <DeprecatedGlobalHeader
           leftSlot={
-            <SearchBar
+            <SearchForm
               isCollapsed={boolean('isCollapsed', false)}
               onSubmit={handleSearchSubmitTest}
             />
@@ -206,17 +204,17 @@ storiesOf('Labs/Header/React', module)
           />
           <IconButton icon={inboxIcon} variant="circle" title="Inbox" aria-label="Inbox" />
           <Avatar onClick={handleAvatarClickTest} altText="Profile" />
-        </GlobalHeader>
+        </DeprecatedGlobalHeader>
       </div>
     </div>
   ))
   .add('Dub Header', () => (
     <div className="story">
       <div css={containerStyle}>
-        <Header
+        <DeprecatedHeader
           title="Required"
           leftSlot={
-            <SearchBar
+            <SearchForm
               isCollapsed={boolean('isCollapsed', false)}
               rightAlign={true}
               autocompleteItems={[<MenuItem>Hello</MenuItem>]}
@@ -227,11 +225,11 @@ storiesOf('Labs/Header/React', module)
         />
       </div>
       <div css={containerStyle}>
-        <Header
+        <DeprecatedHeader
           title="Icons Only"
           brandUrl="#"
           leftSlot={
-            <SearchBar
+            <SearchForm
               isCollapsed={boolean('isCollapsed', false)}
               onSubmit={handleSearchSubmitTest}
             />
@@ -246,16 +244,16 @@ storiesOf('Labs/Header/React', module)
           />
           <IconButton variant="circle" icon={inboxIcon} title="Inbox" aria-label="Inbox" />
           <Avatar onClick={handleAvatarClickTest} altText="Profile" />
-        </Header>
+        </DeprecatedHeader>
       </div>
       <br />
       <div css={containerStyle}>
-        <Header
+        <DeprecatedHeader
           title="Kitchen Sink"
-          themeColor={Header.Theme.Blue}
+          themeColor={DeprecatedHeader.Theme.Blue}
           brandUrl="#"
           onMenuClick={handleMenuClickTest}
-          leftSlot={<SearchWithAutoComplete searchTheme={SearchBar.Theme.Dark} />}
+          leftSlot={<SearchWithAutoComplete searchTheme={SearchForm.Theme.Dark} />}
           isCollapsed={boolean('isCollapsed', false)}
           css={[{zIndex: 4}]}
         >
@@ -268,24 +266,24 @@ storiesOf('Labs/Header/React', module)
           />
           <Avatar onClick={handleAvatarClickTest} altText="Profile" />
           <PrimaryButton>Download</PrimaryButton>
-        </Header>
+        </DeprecatedHeader>
       </div>
       <br />
       <div css={containerStyle}>
-        <Header
-          variant={Header.Variant.Dub}
+        <DeprecatedHeader
+          variant={DeprecatedHeader.Variant.Dub}
           title="Ignored when brand prop exists..."
-          themeColor={Header.Theme.White}
+          themeColor={DeprecatedHeader.Theme.White}
           brand={
-            <DubLogoTitle
+            <DeprecatedDubLogoTitle
               title="Contained Lockup"
-              themeColor={Header.Theme.Blue}
+              themeColor={DeprecatedHeader.Theme.Blue}
               bgColor={gradients.blueberry}
             />
           }
           brandUrl="#"
           leftSlot={
-            <SearchBar
+            <SearchForm
               isCollapsed={boolean('isCollapsed', false)}
               grow={true}
               onSubmit={handleSearchSubmitTest}
@@ -302,18 +300,18 @@ storiesOf('Labs/Header/React', module)
           />
           <IconButton variant="circle" icon={inboxIcon} title="Inbox" aria-label="Inbox" />
           <PrimaryButton>Logout</PrimaryButton>
-        </Header>
+        </DeprecatedHeader>
       </div>
       <br />
       <div css={containerStyle}>
-        <Header
-          variant={Header.Variant.Dub}
+        <DeprecatedHeader
+          variant={DeprecatedHeader.Variant.Dub}
           title="Centered Menu"
-          themeColor={Header.Theme.White}
+          themeColor={DeprecatedHeader.Theme.White}
           centeredNav={true}
           brandUrl="#"
           leftSlot={
-            <SearchBar
+            <SearchForm
               isCollapsed={boolean('isCollapsed', false)}
               grow={true}
               onSubmit={handleSearchSubmitTest}
@@ -330,14 +328,14 @@ storiesOf('Labs/Header/React', module)
           />
           <IconButton variant="circle" icon={inboxIcon} title="Inbox" aria-label="Inbox" />
           <PrimaryButton>Logout</PrimaryButton>
-        </Header>
+        </DeprecatedHeader>
       </div>
       <br />
       <div css={containerStyle}>
-        <Header
-          variant={Header.Variant.Dub}
+        <DeprecatedHeader
+          variant={DeprecatedHeader.Variant.Dub}
           title="Centered Menu Without Search"
-          themeColor={Header.Theme.White}
+          themeColor={DeprecatedHeader.Theme.White}
           centeredNav={true}
           brandUrl="#"
           isCollapsed={boolean('isCollapsed', false)}
@@ -351,21 +349,21 @@ storiesOf('Labs/Header/React', module)
           />
           <IconButton variant="circle" icon={inboxIcon} title="Inbox" aria-label="Inbox" />
           <PrimaryButton>Logout</PrimaryButton>
-        </Header>
+        </DeprecatedHeader>
       </div>
       <br />
       <div css={[containerStyle, backgroundStyle]}>
-        <Header
-          variant={Header.Variant.Dub}
+        <DeprecatedHeader
+          variant={DeprecatedHeader.Variant.Dub}
           title="Transparent"
-          themeColor={Header.Theme.Transparent}
+          themeColor={DeprecatedHeader.Theme.Transparent}
           brandUrl="#"
           leftSlot={
-            <SearchBar
+            <SearchForm
               isCollapsed={boolean('isCollapsed', false)}
               grow={true}
               onSubmit={handleSearchSubmitTest}
-              searchTheme={SearchBar.Theme.Dark}
+              searchTheme={SearchForm.Theme.Dark}
             />
           }
           isCollapsed={boolean('isCollapsed', false)}
@@ -379,32 +377,35 @@ storiesOf('Labs/Header/React', module)
           />
           <IconButton variant="inverse" icon={inboxIcon} title="Inbox" aria-label="Inbox" />
           <PrimaryButton>Logout</PrimaryButton>
-        </Header>
+        </DeprecatedHeader>
       </div>
     </div>
   ))
   .add('Full Header', () => (
     <div className="story">
       <div css={containerStyle}>
-        <Header variant={Header.Variant.Full} isCollapsed={boolean('isCollapsed', false)} />
+        <DeprecatedHeader
+          variant={DeprecatedHeader.Variant.Full}
+          isCollapsed={boolean('isCollapsed', false)}
+        />
       </div>
       <div css={containerStyle}>
-        <Header
-          variant={Header.Variant.Full}
+        <DeprecatedHeader
+          variant={DeprecatedHeader.Variant.Full}
           title="Design"
-          themeColor={Header.Theme.White}
+          themeColor={DeprecatedHeader.Theme.White}
           brandUrl="#"
           isCollapsed={boolean('isCollapsed', false)}
         >
           {nav}
-        </Header>
+        </DeprecatedHeader>
       </div>
       <br />
       <div css={containerStyle}>
-        <Header
-          variant={Header.Variant.Full}
+        <DeprecatedHeader
+          variant={DeprecatedHeader.Variant.Full}
           title="Kitchen Sink"
-          themeColor={Header.Theme.Blue}
+          themeColor={DeprecatedHeader.Theme.Blue}
           brandUrl="#"
           onMenuClick={handleMenuClickTest}
           isCollapsed={boolean('isCollapsed', false)}
@@ -418,14 +419,14 @@ storiesOf('Labs/Header/React', module)
           />
           <Avatar onClick={handleAvatarClickTest} altText="Profile" />
           <PrimaryButton>Download</PrimaryButton>
-        </Header>
+        </DeprecatedHeader>
       </div>
       <br />
       <div css={containerStyle}>
-        <Header
-          variant={Header.Variant.Full}
+        <DeprecatedHeader
+          variant={DeprecatedHeader.Variant.Full}
           title=""
-          themeColor={Header.Theme.Blue}
+          themeColor={DeprecatedHeader.Theme.Blue}
           brandUrl="#"
           isCollapsed={boolean('isCollapsed', false)}
         >
@@ -437,14 +438,14 @@ storiesOf('Labs/Header/React', module)
             aria-label="Notifications"
           />
           <Avatar onClick={handleAvatarClickTest} />
-        </Header>
+        </DeprecatedHeader>
       </div>
       <br />
       <div css={[containerStyle, backgroundStyle]}>
-        <Header
-          variant={Header.Variant.Full}
+        <DeprecatedHeader
+          variant={DeprecatedHeader.Variant.Full}
           title="Transparent"
-          themeColor={Header.Theme.Transparent}
+          themeColor={DeprecatedHeader.Theme.Transparent}
           brandUrl="#"
           isCollapsed={boolean('isCollapsed', false)}
         >
@@ -456,14 +457,14 @@ storiesOf('Labs/Header/React', module)
             aria-label="Notifications"
           />
           <Avatar onClick={handleAvatarClickTest} altText="Profile" />
-        </Header>
+        </DeprecatedHeader>
       </div>
       <br />
       <div css={containerStyle}>
-        <Header
-          variant={Header.Variant.Full}
+        <DeprecatedHeader
+          variant={DeprecatedHeader.Variant.Full}
           title=""
-          themeColor={Header.Theme.White}
+          themeColor={DeprecatedHeader.Theme.White}
           centeredNav={true}
           brandUrl="#"
           isCollapsed={boolean('isCollapsed', false)}
@@ -477,49 +478,7 @@ storiesOf('Labs/Header/React', module)
           />
           <IconButton variant="circle" icon={inboxIcon} title="Inbox" aria-label="Inbox" />
           <PrimaryButton>Logout</PrimaryButton>
-        </Header>
+        </DeprecatedHeader>
       </div>
-    </div>
-  ))
-  .add('Search Form', () => (
-    <div>
-      <div css={{marginLeft: space.xs}}>LTR</div>
-      <div css={{display: 'flex', width: '100%'}}>
-        <div css={{flex: 1, background: colors.frenchVanilla100, padding: '12px'}}>
-          <SearchWithAutoComplete
-            css={{marginLeft: space.zero}}
-            searchTheme={SearchBar.Theme.Light}
-            height={48}
-          />
-        </div>
-        <div css={{flex: 1, background: colors.blueberry400, marginLeft: space.m, padding: '12px'}}>
-          <SearchWithAutoComplete
-            css={{marginLeft: space.zero}}
-            searchTheme={SearchBar.Theme.Dark}
-            height={48}
-          />
-        </div>
-      </div>
-
-      <div css={{marginLeft: space.xs, marginTop: space.xl}}>RTL</div>
-      <CanvasProvider
-        theme={{canvas: {direction: ContentDirection.RTL}}}
-        css={{display: 'flex', width: '100%'}}
-      >
-        <div css={{flex: 1, background: colors.blueberry400, marginLeft: space.m, padding: '12px'}}>
-          <SearchWithAutoComplete
-            css={{marginLeft: space.zero}}
-            searchTheme={SearchBar.Theme.Dark}
-            height={48}
-          />
-        </div>
-        <div css={{flex: 1, background: colors.frenchVanilla100, padding: '12px'}}>
-          <SearchWithAutoComplete
-            css={{marginLeft: space.zero}}
-            searchTheme={SearchBar.Theme.Light}
-            height={48}
-          />
-        </div>
-      </CanvasProvider>
     </div>
   ));
