@@ -11,7 +11,7 @@ import {MenuItemProps} from '@workday/canvas-kit-preview-react/menu';
 import {SearchThemeAttributes, searchThemes} from '../shared/themes';
 import {SearchTheme} from '../shared/types';
 import chroma from 'chroma-js';
-import {v4 as uuidv4} from 'uuid';
+import uuid from 'uuid/v4';
 
 export interface SearchBarProps extends GrowthBehavior, React.FormHTMLAttributes<HTMLFormElement> {
   /**
@@ -294,7 +294,7 @@ export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
 
   private inputRef = React.createRef<HTMLInputElement>();
   private openRef = React.createRef<HTMLButtonElement>();
-  private labelId = uuidv4();
+  private labelId = uuid();
 
   state: Readonly<SearchBarState> = {
     showForm: false,

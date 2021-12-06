@@ -69,7 +69,7 @@
     "polished": "^4.1.3",
     "react-innertext": "^1.1.5",
     "rtl-css-js": "^1.14.1",
-    "uuid": "^8.3.2"
+    "uuid": "^3.3.3"
   },
   "devDependencies": {
     "@workday/canvas-accent-icons-web": "^1.0.0",
