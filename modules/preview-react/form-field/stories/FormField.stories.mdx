@@ -1,0 +1,29 @@
+import {Meta} from '@storybook/addon-docs/blocks';
+import {Specifications} from '@workday/canvas-kit-docs';
+
+import {FormField} from '@workday/canvas-kit-preview-react/form-field';
+
+import {Custom} from './examples/Custom';
+
+<Meta title="Preview/Inputs/Form Field/React" component={FormField} />
+
+# Canvas Kit Form Field
+
+FormField allows users to wrap input components to make them accessible. You usually won't want to
+use FormField directly but instead should use the specific component you need, e.g. `TextInput`.
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-preview-react
+```
+
+## Usage
+
+### Customizing With Behavior Hooks Example
+
+If you need full customization you can use the form field behavior hooks to build your own solution.
+It is also easy it work with custom components or third party libraries and get the CKR
+accessibility guarantees by using the `as` prop.
+
+<ExampleCodeBlock code={Custom} />
