@@ -38,7 +38,8 @@
     "build": "npm-run-all --parallel build:cjs build:es6 --sequential build:downlevel-dts",
     "prepack": "node ../../utils/publish.js pre preview-react",
     "postpack": "node ../../utils/publish.js post preview-react",
-    "depcheck": "node ../../utils/check-dependencies-exist.js"
+    "depcheck": "node ../../utils/check-dependencies-exist.js",
+    "typecheck:src": "tsc -p . --noEmit --incremental false"
   },
   "keywords": [
     "canvas",
