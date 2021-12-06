@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-react-fonts",
-  "version": "6.0.5",
+  "version": "6.0.6",
   "description": "Fonts for canvas-kit-react",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -34,7 +34,8 @@
     "build:rebuild": "npm-run-all clean build",
     "build:downlevel-dts": "yarn run downlevel-dts dist ts3.5/dist",
     "build": "npm-run-all --parallel build:cjs build:es6 --sequential build:downlevel-dts",
-    "depcheck": "node ../../utils/check-dependencies-exist.js"
+    "depcheck": "node ../../utils/check-dependencies-exist.js",
+    "typecheck:src": "tsc -p . --noEmit --incremental false"
   },
   "keywords": [
     "canvas",

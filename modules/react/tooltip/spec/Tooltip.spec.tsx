@@ -17,6 +17,7 @@ describe('Tooltip', () => {
   });
 
   describe('when "type" is "describe"', () => {
+    jest.useFakeTimers();
     it('should render aria-describedby', () => {
       render(
         <Tooltip type="describe" title="This is an extra description">
@@ -26,11 +27,13 @@ describe('Tooltip', () => {
 
       fireEvent.mouseEnter(screen.getByText('Test Text')); // triggers the tooltip
 
+      jest.advanceTimersByTime(300); // advance the timer by the amount of delay time
       expect(screen.getByText('Test Text')).toHaveAttribute('aria-describedby');
 
       const id = screen.getByText('Test Text').getAttribute('aria-describedby');
       expect(screen.getByRole('tooltip')).toHaveAttribute('id', id);
     });
+    jest.clearAllTimers();
   });
 
   describe('when "type" is "muted"', () => {
@@ -57,6 +60,50 @@ describe('Tooltip', () => {
 
       expect(screen.getByText('Test Text')).toHaveAttribute('aria-label', 'Test Label');
     });
+  });
+
+  describe('when "showDelay" is passed in', () => {
+    jest.useFakeTimers();
+    it('should render the tooltip after the delay', () => {
+      render(
+        <Tooltip type="describe" title="Delayed Tooltip Text" showDelay={1000}>
+          <span>Test Text</span>
+        </Tooltip>
+      );
+
+      fireEvent.mouseEnter(screen.getByText('Test Text')); // triggers the tooltip
+
+      jest.advanceTimersByTime(300); // advance the timer by the amount less than delay time
+      expect(screen.queryByText('Delayed Tooltip Text')).toBeNull(); // tooltip is not shown before the delay
+
+      jest.advanceTimersByTime(700); // advance the timer by the amount of total delay time
+      expect(screen.getByText('Delayed Tooltip Text')).toBeInTheDocument();
+    });
+    jest.clearAllTimers();
+  });
+
+  describe('when "hideDelay" is passed in', () => {
+    jest.useFakeTimers();
+    it('should render the tooltip after the delay', () => {
+      render(
+        <Tooltip type="describe" title="Delayed Tooltip Text" hideDelay={300}>
+          <span>Test Text</span>
+        </Tooltip>
+      );
+
+      fireEvent.mouseEnter(screen.getByText('Test Text')); // triggers the tooltip
+
+      jest.advanceTimersByTime(300); // advance the timer by the delay time
+      expect(screen.getByText('Delayed Tooltip Text')).toBeInTheDocument();
+
+      fireEvent.mouseLeave(screen.getByText('Test Text')); // triggers hiding the tooltip
+      jest.advanceTimersByTime(100); // advance the timer by the amount less than hide delay time
+      expect(screen.getByText('Delayed Tooltip Text')).toBeInTheDocument(); // tooltip is still shown
+
+      jest.advanceTimersByTime(200); // advance the timer by the total amount of the hide delay time
+      expect(screen.queryByText('Delayed Tooltip Text')).toBeNull(); // tooltip is hidden after the delay
+    });
+    jest.clearAllTimers();
   });
 
   ['onMouseEnter', 'onMouseLeave', 'onFocus', 'onBlur', 'onClick', 'onMouseOver'].forEach(key => {
