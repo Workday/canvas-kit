@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v6.0.5](https://github.com/Workday/canvas-kit/releases/tag/v6.0.5) (2021-11-24)
+
+### Components
+
+- docs(popup): Fix typo in JSDoc description for useReturnFocus ([@RayRedGoose](https://github.com/RayRedGoose))
+
+
 ## [v6.0.4](https://github.com/Workday/canvas-kit/releases/tag/v6.0.4) (2021-11-23)
 
 ### Infrastructure
