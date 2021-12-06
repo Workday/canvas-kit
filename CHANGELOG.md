@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v6.0.6](https://github.com/Workday/canvas-kit/releases/tag/v6.0.6) (2021-12-06)
+
+### Documentation
+
+- docs: Add headers examples to Storybook ([#1366](https://github.com/Workday/canvas-kit/pull/1366)) ([@RayRedGoose](https://github.com/RayRedGoose))
+
+
 ## [v6.0.5](https://github.com/Workday/canvas-kit/releases/tag/v6.0.5) (2021-11-24)
 
 ### Components
