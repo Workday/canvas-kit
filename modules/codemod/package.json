@@ -36,6 +36,7 @@
   "scripts": {
     "clean": "rimraf dist && rimraf .build-info && mkdirp dist",
     "build": "tsc -p tsconfig.es6.json",
-    "test": "TZ=UTC jest -c ../../jest.config.js"
+    "test": "TZ=UTC jest -c ../../jest.config.js",
+    "typecheck:src": "tsc -p . --noEmit --incremental false"
   }
 }

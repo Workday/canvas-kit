@@ -236,13 +236,12 @@ describe('Popup', () => {
         });
 
         context('when the Escape key is pressed', () => {
-          beforeEach(() => {
+          it('should close the Tooltip', () => {
+            cy.clock();
+            cy.tick(300); // advance the timer by the amount of default delay time
             cy.get('html').trigger('keydown', {
               key: 'Escape',
             });
-          });
-
-          it('should close the Tooltip', () => {
             cy.findByRole('tooltip', {
               name: 'Really long tooltip showing how popup stacks overlap 1',
             }).should('not.exist');
