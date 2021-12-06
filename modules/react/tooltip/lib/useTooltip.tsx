@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {v4 as uuidv4} from 'uuid';
+import uuid from 'uuid/v4';
 import {
   useCloseOnEscape,
   useAlwaysCloseOnOutsideClick,
@@ -90,7 +90,7 @@ export function useTooltip<T extends Element = Element>({
   const mouseDownRef = React.useRef(false); // use to prevent newly focused from making tooltip flash
   const popupModel = usePopupModel();
   const [anchorElement, setAnchorElement] = React.useState<T | null>(null);
-  const [id] = React.useState(() => uuidv4());
+  const [id] = React.useState(() => uuid());
   const intentTimerHide = useIntentTimer(popupModel.events.hide, hideDelay);
   const intentTimerShow = useIntentTimer(popupModel.events.show, showDelay);
 

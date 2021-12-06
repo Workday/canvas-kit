@@ -4,7 +4,7 @@ import {menuAnimationDuration} from './SelectMenu';
 import SelectBase, {CoreSelectBaseProps, Option, NormalizedOption} from './SelectBase';
 import {MenuVisibility} from './types';
 import {getCorrectedIndexByValue} from './utils';
-import {v4 as uuidv4} from 'uuid';
+import uuid from 'uuid/v4';
 
 export interface SelectProps extends CoreSelectBaseProps {
   /**
@@ -87,13 +87,13 @@ class SelectContainer extends React.Component<SelectContainerProps, SelectContai
 
       if (typeof option === 'string') {
         disabled = false;
-        id = uuidv4();
+        id = uuid();
         value = option;
         label = option;
       } else {
         data = option.data || data;
         disabled = !!option.disabled;
-        id = option.id || uuidv4();
+        id = option.id || uuid();
         value = option.value;
         label = option.label || option.value;
       }

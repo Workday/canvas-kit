@@ -7,7 +7,7 @@ import {Card} from '@workday/canvas-kit-react/card';
 import {IconButton, IconButtonProps} from '@workday/canvas-kit-react/button';
 import {xSmallIcon} from '@workday/canvas-system-icons-web';
 import {TextInputProps} from '@workday/canvas-kit-react/text-input';
-import {v4 as uuidv4} from 'uuid';
+import uuid from 'uuid/v4';
 import flatten from 'lodash.flatten';
 import AutocompleteList from './AutocompleteList';
 import Status from './Status';
@@ -200,8 +200,8 @@ const Combobox = ({
 
   const comboboxRef: React.RefObject<HTMLDivElement> = useRef(null);
 
-  const [randomComponentId] = React.useState(() => uuidv4()); // https://codesandbox.io/s/p2ndq
-  const [randomLabelId] = React.useState(() => uuidv4());
+  const [randomComponentId] = React.useState(() => uuid()); // https://codesandbox.io/s/p2ndq
+  const [randomLabelId] = React.useState(() => uuid());
 
   const componentId = id || randomComponentId;
   const formLabelId = labelId || randomLabelId;
