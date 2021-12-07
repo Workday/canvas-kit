@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v6.1.0](https://github.com/Workday/canvas-kit/releases/tag/v6.1.0) (2021-12-07)
+
+### Components
+
+- feat(labs): Add new compound component for text area and form field  ([#1308](https://github.com/Workday/canvas-kit/pull/1308)) ([@vibdev](https://github.com/vibdev))
+- fix: Add formik and yup back to preview dev deps ([#1376](https://github.com/Workday/canvas-kit/pull/1376)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
+## [v6.0.7](https://github.com/Workday/canvas-kit/releases/tag/v6.0.7) (2021-12-06)
+
+### Components
+
+- Bump support to next major version ([@](https://github.com/))
+- chore: Fix support release ([@NicholasBoll](https://github.com/NicholasBoll))
+- fix(tooltip): Add delay to Tooltip show and hide ([#1339](https://github.com/Workday/canvas-kit/pull/1339)) ([@wooksauce](https://github.com/wooksauce))
+  This change could cause visual regression tests to fail if a screen shot is taken expecting a tooltip to show immediately. Your visual regression will either have to add an explicit wait of 300ms, or change the delay to 1ms only under test.
+- fix(LoadingAnimation): Add support for RTL ([#1349](https://github.com/Workday/canvas-kit/pull/1349)) ([@vibdev](https://github.com/vibdev))
+  Possible visual regression if you have overrides to get the old version working for RTL.
+- fix(popup): Fix PopupCard styles to be more easily overridden ([#1352](https://github.com/Workday/canvas-kit/pull/1352)) ([@NicholasBoll](https://github.com/NicholasBoll))
+- chore: Bump uuid to stable non deprecated version ([#1367](https://github.com/Workday/canvas-kit/pull/1367)) ([@mannycarrera4](https://github.com/mannycarrera4))
+
+### Infrastructure
+
+- ci: Fix npm tagging in release script ([@NicholasBoll](https://github.com/NicholasBoll))
+
+### Revert
+
+- fix: Revert uuid upgrade to get releases working ([#1371](https://github.com/Workday/canvas-kit/pull/1371)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v6.0.6](https://github.com/Workday/canvas-kit/releases/tag/v6.0.6) (2021-12-06)
 
 ### Documentation
