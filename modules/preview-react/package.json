@@ -62,6 +62,8 @@
   },
   "devDependencies": {
     "@workday/canvas-accent-icons-web": "^1.0.0",
-    "@workday/canvas-kit-labs-react": "^6.0.7"
+    "@workday/canvas-kit-labs-react": "^6.0.7",
+    "formik": "^2.2.9",
+    "yup": "^0.31.1"
   }
 }
