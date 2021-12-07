@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v6.1.0](https://github.com/Workday/canvas-kit/releases/tag/v6.1.0) (2021-12-07)
+
+### Components
+
+- feat(labs): Add new compound component for text area and form field  ([#1308](https://github.com/Workday/canvas-kit/pull/1308)) ([@vibdev](https://github.com/vibdev))
+- fix: Add formik and yup back to preview dev deps ([#1376](https://github.com/Workday/canvas-kit/pull/1376)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
 ## [v6.0.7](https://github.com/Workday/canvas-kit/releases/tag/v6.0.7) (2021-12-06)
 
 ### Components
