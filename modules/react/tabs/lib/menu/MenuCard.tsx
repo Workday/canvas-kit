@@ -83,6 +83,7 @@ export const MenuCard = createComponent('div')({
         as={Element}
         transformOrigin={transformOrigin}
         padding={padding}
+        border="none"
         {...props}
       >
         {children}

@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {commonColors} from '@workday/canvas-kit-react/tokens';
+import {commonColors, colors} from '@workday/canvas-kit-react/tokens';
 import {
   createComponent,
   useModelContext,
@@ -39,9 +39,10 @@ export const MenuList = createComponent('div')({
         borderRadius="m"
         padding="zero"
         marginY="zero"
-        marginX="xxs"
+        marginX="zero"
         spacing="zero"
         overflowY="auto"
+        border={`1px solid ${colors.soap500}`}
         flexDirection={localModel.state.orientation === 'vertical' ? 'column' : 'row'}
         {...props}
       >
