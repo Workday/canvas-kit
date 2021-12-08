@@ -1,4 +1,3 @@
-/// <reference path="../../../../../typings.d.ts" />
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
 import {ComponentStatesTable, permutateProps} from '@workday/canvas-kit-labs-react/common';

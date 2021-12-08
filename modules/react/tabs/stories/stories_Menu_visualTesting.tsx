@@ -1,4 +1,3 @@
-/// <reference path="../../../../typings.d.ts" />
 import React from 'react';
 
 import {CanvasProvider, ContentDirection, StaticStates} from '@workday/canvas-kit-react/common';

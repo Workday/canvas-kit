@@ -1,11 +1,6 @@
-/// <reference path="../../../../typings.d.ts" />
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
-import withReadme from 'storybook-readme/with-readme';
-import {select, boolean, text} from '@storybook/addon-knobs';
-import {action} from '@storybook/addon-actions';
 import {Drawer, DrawerDirection, DrawerHeader} from '../index';
-import README from '../README.md';
 import {space} from '@workday/canvas-kit-react/tokens';
 
 // Drawer Open Direction Knob
@@ -45,7 +40,7 @@ const paddingDefault = paddingOptions.s;
 
 storiesOf('Labs/Drawer/React', module)
   .addParameters({component: Drawer})
-  .addDecorator(withReadme(README))
+  .addParameters({ReadmePath: 'labs-react/drawer'})
   .add('Default', () => (
     <div className="story">
       <div style={{height: '80vh', position: 'relative'}}>
@@ -65,7 +60,7 @@ storiesOf('Labs/Drawer/React', module)
           header={
             <DrawerHeader
               closeIconAriaLabel={'Close'}
-              onClose={action('onClose callback')}
+              onClose={() => console.log('onClose callback')}
               title={'Drawer Header'}
             />
           }
@@ -97,7 +92,7 @@ storiesOf('Labs/Drawer/React', module)
               closeIconAriaLabel={'Close'}
               headerColor={text(headerColor, headerColorDefaultValue)}
               inverse={boolean(showInverselabel, showInverseIconDefaultValue)}
-              onClose={action('onClose callback')}
+              onClose={() => 'onClose callback'}
               title={text(headerTitle, title)}
             />
           }

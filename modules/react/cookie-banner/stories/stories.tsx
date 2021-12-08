@@ -1,15 +1,11 @@
-/// <reference path="../../../../typings.d.ts" />
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
-import withReadme from 'storybook-readme/with-readme';
-import {action} from '@storybook/addon-actions';
 import styled from '@emotion/styled';
 
 import {Hyperlink, SecondaryButton} from '../../button';
 import DeprecatedCookieBanner from '../index';
-import README from '../README.md';
 
 interface Props {
   bannerProps?: any;
@@ -32,7 +28,7 @@ class BannerContainer extends React.Component<Props, State> {
   }
 
   private onAccept = (e: React.MouseEvent<HTMLButtonElement>): void => {
-    action('accept-cookies')(e);
+    console.log('accept-cookies');
     this.setState({
       acceptedCookies: true,
     });
@@ -62,12 +58,12 @@ class BannerContainer extends React.Component<Props, State> {
 
 storiesOf('Components/Indicators/Cookie Banner/React', module)
   .addParameters({component: DeprecatedCookieBanner})
-  .addDecorator(withReadme(README))
+  .addParameters({ReadmePath: 'react/cookie-banner'})
   .add('Default', () => (
     <div className="story">
       <BannerContainer
         bannerProps={{
-          onClickSettings: action('click-settings'),
+          onClickSettings: () => console.log('click-settings'),
         }}
       />
     </div>
@@ -76,7 +72,7 @@ storiesOf('Components/Indicators/Cookie Banner/React', module)
     <div className="story">
       <BannerContainer
         bannerProps={{
-          onClickSettings: action('click-settings'),
+          onClickSettings: () => console.log('click-settings'),
           notice: (
             <React.Fragment>
               {DeprecatedCookieBanner.DefaultNotice} Please review our{' '}

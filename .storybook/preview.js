@@ -52,4 +52,7 @@ export const parameters = {
   chromatic: {
     disable: true,
   },
+  controls: {
+    expanded: true,
+  },
 };
