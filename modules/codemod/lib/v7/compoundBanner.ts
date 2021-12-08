@@ -10,6 +10,8 @@ import {
   JSXExpressionContainer,
   MemberExpression,
   Identifier,
+  ConditionalExpression,
+  BooleanLiteral,
 } from 'jscodeshift';
 
 import {getImportRenameMap} from './utils/getImportRenameMap';
@@ -74,32 +76,75 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
         const errorIndex = attributes.findIndex(findAttribute('error'));
         const variantIndex = attributes.findIndex(findAttribute('variant'));
 
-        if (errorIndex > 0 && nodePath.value.openingElement.attributes?.[errorIndex]) {
-          const hasError =
-            ((((nodePath.value.openingElement.attributes[errorIndex] as JSXAttribute)
-              .value as JSXExpressionContainer).expression as MemberExpression)
-              .property as Identifier).name === 'Error';
-          const newValue = hasError
-            ? j.jsxExpressionContainer(j.booleanLiteral(true))
-            : j.jsxExpressionContainer(j.booleanLiteral(false));
-          nodePath.value.openingElement.attributes[errorIndex] = j.jsxAttribute(
-            j.jsxIdentifier('hasError'),
-            newValue
-          );
+        if (errorIndex >= 0 && nodePath.value.openingElement.attributes?.[errorIndex]) {
+          const errorExpression = ((nodePath.value.openingElement.attributes[
+            errorIndex
+          ] as JSXAttribute).value as JSXExpressionContainer).expression;
+          const getNameToBoolean = (name: string) => {
+            return name === 'Error' ? j.booleanLiteral(true) : j.booleanLiteral(false);
+          };
+          const setHasError = (hasErrorValue: BooleanLiteral | ConditionalExpression) => {
+            if (nodePath.value.openingElement.attributes) {
+              nodePath.value.openingElement.attributes[errorIndex] = j.jsxAttribute(
+                j.jsxIdentifier('hasError'),
+                j.jsxExpressionContainer(hasErrorValue)
+              );
+            }
+          };
+          if ((errorExpression as MemberExpression).property) {
+            const previousExpression = errorExpression as MemberExpression;
+            const newValue = getNameToBoolean((previousExpression.property as Identifier).name);
+            setHasError(newValue);
+          }
+          if ((errorExpression as ConditionalExpression).test) {
+            const previousExpression = errorExpression as ConditionalExpression;
+            const newValue = j.conditionalExpression(
+              previousExpression.test,
+              getNameToBoolean(
+                ((previousExpression.consequent as MemberExpression).property as Identifier).name
+              ),
+              getNameToBoolean(
+                ((previousExpression.alternate as MemberExpression).property as Identifier).name
+              )
+            );
+            setHasError(newValue);
+          }
         }
 
-        if (variantIndex > 0 && nodePath.value.openingElement.attributes?.[variantIndex]) {
-          const isSticky =
-            ((((nodePath.value.openingElement.attributes[variantIndex] as JSXAttribute)
-              .value as JSXExpressionContainer).expression as MemberExpression)
-              .property as Identifier).name === 'Sticky';
-          const newValue = isSticky
-            ? j.jsxExpressionContainer(j.booleanLiteral(true))
-            : j.jsxExpressionContainer(j.booleanLiteral(false));
-          nodePath.value.openingElement.attributes[variantIndex] = j.jsxAttribute(
-            j.jsxIdentifier('isSticky'),
-            newValue
-          );
+        if (variantIndex >= 0 && nodePath.value.openingElement.attributes?.[variantIndex]) {
+          const stickyExpression = ((nodePath.value.openingElement.attributes[
+            variantIndex
+          ] as JSXAttribute).value as JSXExpressionContainer).expression;
+          const getNameToBoolean = (name: string) => {
+            return name === 'Sticky' ? j.booleanLiteral(true) : j.booleanLiteral(false);
+          };
+          const setIsSticky = (hasStickyValue: BooleanLiteral | ConditionalExpression) => {
+            if (nodePath.value.openingElement.attributes) {
+              nodePath.value.openingElement.attributes[variantIndex] = j.jsxAttribute(
+                j.jsxIdentifier('isSticky'),
+                j.jsxExpressionContainer(hasStickyValue)
+              );
+            }
+          };
+          if ((stickyExpression as MemberExpression).property) {
+            const previousExpression = stickyExpression as MemberExpression;
+            const newValue = getNameToBoolean((previousExpression.property as Identifier).name);
+            setIsSticky(newValue);
+          }
+
+          if ((stickyExpression as ConditionalExpression).test) {
+            const previousExpression = stickyExpression as ConditionalExpression;
+            const newValue = j.conditionalExpression(
+              previousExpression.test,
+              getNameToBoolean(
+                ((previousExpression.consequent as MemberExpression).property as Identifier).name
+              ),
+              getNameToBoolean(
+                ((previousExpression.alternate as MemberExpression).property as Identifier).name
+              )
+            );
+            setIsSticky(newValue);
+          }
         }
 
         // remove these attributes from the list - we'll add them as sub components

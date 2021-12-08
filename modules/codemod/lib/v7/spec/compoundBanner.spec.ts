@@ -53,6 +53,22 @@ describe('banner', () => {
     expectTransform(input, expected);
   });
 
+  it('should restructure Banner expression props', () => {
+    const input = stripIndent`
+      import {Banner} from '@workday/canvas-kit-react/banner'
+
+      <Banner error={numErrors ? Banner.ErrorType.Error : Banner.ErrorType.Alert} variant={shouldStick ? Banner.Variant.Sticky : Banner.Variant.Full} label='3 Warnings' />
+    `;
+
+    const expected = stripIndent`
+      import {Banner} from '@workday/canvas-kit-react/banner'
+
+      <Banner hasError={numErrors ? true : false} isSticky={shouldStick ? true : false}><Banner.Icon /><Banner.Label>3 Warnings</Banner.Label><Banner.ActionText /></Banner>
+    `;
+
+    expectTransform(input, expected);
+  });
+
   it('should not restructure Banner usages already transformed', () => {
     const input = stripIndent`
       import {Banner} from '@workday/canvas-kit-react/banner';
