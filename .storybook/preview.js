@@ -4,6 +4,7 @@ import routes from './routes';
 
 import {CanvasProviderDecorator} from '../utils/storybook';
 import theme from './theme';
+import {defaultCanvasTheme} from '@workday/canvas-kit-react/common';
 
 // set routes on window for testing the validity of the routes
 window.__routes = routes;
@@ -54,5 +55,11 @@ export const parameters = {
   },
   controls: {
     expanded: true,
+  },
+  argTypes: {
+    theme: {
+      control: 'object',
+      defaultValue: defaultCanvasTheme,
+    },
   },
 };

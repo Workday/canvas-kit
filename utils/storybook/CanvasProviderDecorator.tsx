@@ -4,9 +4,7 @@ import {
   CanvasProvider,
   PartialEmotionCanvasTheme,
 } from '@workday/canvas-kit-react/common';
-import {object} from '@storybook/addon-knobs';
-
-const label = 'theme';
+import {useArgs} from '@storybook/client-api';
 
 import {makeDecorator} from '@storybook/addons';
 
@@ -14,8 +12,10 @@ export default makeDecorator({
   name: 'canvasProviderDecorator',
   parameterName: 'canvasProviderDecorator',
   wrapper: (storyFn, context, {parameters = {}}) => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [args] = useArgs();
     const theme: PartialEmotionCanvasTheme = {
-      canvas: object(label, parameters.theme || defaultCanvasTheme),
+      canvas: args.theme || defaultCanvasTheme,
     };
     return <CanvasProvider theme={theme}>{storyFn(context)}</CanvasProvider>;
   },

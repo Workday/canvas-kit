@@ -19,7 +19,6 @@ module.exports = {
       },
     },
     './readme-panel/preset.js',
-    '@storybook/addon-knobs',
     '@storybook/addon-storysource',
   ],
   typescript: {
