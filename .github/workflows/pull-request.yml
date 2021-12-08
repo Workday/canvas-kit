@@ -134,7 +134,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           appCode: dlpro96xybh
           storybookBuildDir: docs
-          exitOnceUploaded: true
+          exitOnceUploaded: false
           exitZeroOnChanges: true
 
   integration-test:
@@ -183,7 +183,7 @@ jobs:
 
   verify:
     runs-on: ubuntu-latest
-    needs: ['check', 'integration-test']
+    needs: ['check', 'integration-test', 'visual-test']
     steps:
       - name: Done
         run: echo "Done"
