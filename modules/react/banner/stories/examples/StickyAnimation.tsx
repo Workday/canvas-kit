@@ -53,7 +53,7 @@ export const StickyAnimation = () => {
           >
             <Banner.Icon icon={loopIcon} />
             <Banner.Label>Click to run animation</Banner.Label>
-            <Banner.Action />
+            <Banner.ActionText />
           </Banner>
         </div>
       </div>

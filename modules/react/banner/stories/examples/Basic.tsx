@@ -7,7 +7,7 @@ export const Basic = () => {
     <Banner onClick={() => console.log('clicked banner')}>
       <Banner.Icon />
       <Banner.Label>3 Warnings</Banner.Label>
-      <Banner.Action />
+      <Banner.ActionText />
     </Banner>
   );
 };

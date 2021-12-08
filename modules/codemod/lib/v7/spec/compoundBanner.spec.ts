@@ -15,7 +15,7 @@ describe('banner', () => {
     const expected = stripIndent`
       import {Banner} from '@workday/canvas-kit-react/banner'
 
-      <Banner onClick={() => {}} isSticky={true} hasError={true}><Banner.Icon /><Banner.Label>3 Warnings</Banner.Label><Banner.Action>Show Details</Banner.Action></Banner>
+      <Banner onClick={() => {}} isSticky={true} hasError={true}><Banner.Icon /><Banner.Label>3 Warnings</Banner.Label><Banner.ActionText>Show Details</Banner.ActionText></Banner>
     `;
 
     expectTransform(input, expected);
@@ -31,7 +31,7 @@ describe('banner', () => {
     const expected = stripIndent`
       import {Banner} from '@workday/canvas-kit-react/banner'
 
-      <Banner isSticky={false} hasError={false}><Banner.Icon /><Banner.Label>1 Warning</Banner.Label><Banner.Action /></Banner>
+      <Banner isSticky={false} hasError={false}><Banner.Icon /><Banner.Label>1 Warning</Banner.Label><Banner.ActionText /></Banner>
     `;
 
     expectTransform(input, expected);
@@ -47,7 +47,7 @@ describe('banner', () => {
     const expected = stripIndent`
       import {Banner} from '@workday/canvas-kit-react/banner';
 
-      <Banner><Banner.Icon /><Banner.Label /><Banner.Action /></Banner>
+      <Banner><Banner.Icon /><Banner.Label /><Banner.ActionText /></Banner>
     `;
 
     expectTransform(input, expected);
@@ -60,7 +60,7 @@ describe('banner', () => {
       <Banner>
         <Banner.Icon />
         <Banner.Label>3 Warnings</Banner.Label>
-        <Banner.Action />
+        <Banner.ActionText />
       </Banner>
     `;
 
@@ -70,7 +70,7 @@ describe('banner', () => {
       <Banner>
         <Banner.Icon />
         <Banner.Label>3 Warnings</Banner.Label>
-        <Banner.Action />
+        <Banner.ActionText />
       </Banner>
     `;
 
@@ -87,7 +87,7 @@ describe('banner', () => {
     const expected = stripIndent`
       import {Banner as StyledBanner} from '@workday/canvas-kit-react/banner'
 
-      <StyledBanner onClick={() => {}} isSticky={true} hasError={true}><StyledBanner.Icon /><StyledBanner.Label>3 Warnings</StyledBanner.Label><StyledBanner.Action>Show Details</StyledBanner.Action></StyledBanner>
+      <StyledBanner onClick={() => {}} isSticky={true} hasError={true}><StyledBanner.Icon /><StyledBanner.Label>3 Warnings</StyledBanner.Label><StyledBanner.ActionText>Show Details</StyledBanner.ActionText></StyledBanner>
     `;
 
     expectTransform(input, expected);
@@ -103,7 +103,7 @@ describe('banner', () => {
     const expected = stripIndent`
       import {Banner} from '@workday/canvas-kit-react/banner'
 
-      <Banner><Banner.Icon /><Banner.Label><span>Banner Label</span></Banner.Label><Banner.Action /></Banner>
+      <Banner><Banner.Icon /><Banner.Label><span>Banner Label</span></Banner.Label><Banner.ActionText /></Banner>
     `;
 
     expectTransform(input, expected);
@@ -119,7 +119,7 @@ describe('banner', () => {
     const expected = stripIndent`
       import {Banner} from '@workday/canvas-kit-react/banner'
 
-      <Banner><Banner.Icon /><Banner.Label>{getLabel()}</Banner.Label><Banner.Action /></Banner>
+      <Banner><Banner.Icon /><Banner.Label>{getLabel()}</Banner.Label><Banner.ActionText /></Banner>
     `;
 
     expectTransform(input, expected);
@@ -139,7 +139,7 @@ describe('banner', () => {
 
       const StyledBanner = styled(Banner)({});
 
-      <StyledBanner><Banner.Icon /><Banner.Label>2 Warnings</Banner.Label><Banner.Action /></StyledBanner>
+      <StyledBanner><Banner.Icon /><Banner.Label>2 Warnings</Banner.Label><Banner.ActionText /></StyledBanner>
     `;
 
     expectTransform(input, expected);
@@ -163,7 +163,7 @@ describe('banner', () => {
         padding: 1px;
       \`;
 
-      <StyledBanner><Banner.Icon /><Banner.Label>4 Warnings</Banner.Label><Banner.Action /></StyledBanner>
+      <StyledBanner><Banner.Icon /><Banner.Label>4 Warnings</Banner.Label><Banner.ActionText /></StyledBanner>
     `;
 
     expectTransform(input, expected);

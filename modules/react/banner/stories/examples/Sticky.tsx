@@ -17,7 +17,7 @@ export const Sticky = () => {
       <Banner hasError={true} isSticky={true} css={styles}>
         <Banner.Icon />
         <Banner.Label>3 Errors</Banner.Label>
-        <Banner.Action />
+        <Banner.ActionText />
       </Banner>
     </Box>
   );

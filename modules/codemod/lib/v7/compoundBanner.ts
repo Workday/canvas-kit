@@ -124,9 +124,9 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
           j.jsxIdentifier('Label')
         );
 
-        const BannerActionJSX = j.jsxMemberExpression(
+        const BannerActionTextJSX = j.jsxMemberExpression(
           j.jsxIdentifier(importMap.Banner),
-          j.jsxIdentifier('Action')
+          j.jsxIdentifier('ActionText')
         );
 
         const convertAttributeToChildren = (input: JSXAttribute) => {
@@ -162,11 +162,11 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
             : createSelfClosingTag(BannerLabelJSX),
           !!actionText
             ? j.jsxElement(
-                j.jsxOpeningElement(BannerActionJSX),
-                j.jsxClosingElement(BannerActionJSX),
+                j.jsxOpeningElement(BannerActionTextJSX),
+                j.jsxClosingElement(BannerActionTextJSX),
                 convertAttributeToChildren(actionText)
               )
-            : createSelfClosingTag(BannerActionJSX),
+            : createSelfClosingTag(BannerActionTextJSX),
         ].filter<JSXElement>(filterDefined);
 
         nodePath.value.closingElement = j.jsxClosingElement(nodePath.value.openingElement.name);

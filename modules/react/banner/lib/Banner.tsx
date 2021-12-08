@@ -17,14 +17,14 @@ import {BannerModel, BannerModelConfig, useBanner, useBannerModel, useThemedPale
 
 import {BannerIcon} from './BannerIcon';
 import {BannerLabel} from './BannerLabel';
-import {BannerAction} from './BannerAction';
+import {BannerActionText} from './BannerActionText';
 
 export const BannerModelContext = React.createContext<BannerModel>({} as any);
 
 export interface BannerProps extends BannerModelConfig, ExtractProps<typeof Flex, never> {
   model?: BannerModel;
   /**
-   * Children of the Banner. Should contain a `<Banner.Label>` a <Banner.Icon> and an optional `<Banner.Action>`
+   * Children of the Banner. Should contain a `<Banner.Label>` a <Banner.Icon> and an optional `<Banner.ActionText>`
    */
   children?: React.ReactNode;
 }
@@ -96,6 +96,6 @@ export const Banner = createComponent('button')({
   subComponents: {
     Icon: BannerIcon,
     Label: BannerLabel,
-    Action: BannerAction,
+    ActionText: BannerActionText,
   },
 });

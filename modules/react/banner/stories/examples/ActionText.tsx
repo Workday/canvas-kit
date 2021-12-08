@@ -7,7 +7,7 @@ export const ActionText = () => {
     <Banner>
       <Banner.Icon />
       <Banner.Label>3 Warnings</Banner.Label>
-      <Banner.Action>Show Details</Banner.Action>
+      <Banner.ActionText>Show Details</Banner.ActionText>
     </Banner>
   );
 };

@@ -15,7 +15,7 @@ describe('Banner', () => {
 
 describe('Banner Accessibility', () => {
   test('Banner should pass axe DOM accessibility guidelines', async () => {
-    const html = ReactDOMServer.renderToString(<Banner />);
+    const html = ReactDOMServer.renderToString(<Banner>Hello</Banner>);
     expect(
       await axe(html, {
         rules: {

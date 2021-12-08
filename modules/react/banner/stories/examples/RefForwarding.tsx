@@ -17,7 +17,7 @@ export const RefForwarding = () => {
       <Banner ref={bannerRef}>
         <Banner.Icon />
         <Banner.Label>3 Warnings</Banner.Label>
-        <Banner.Action />
+        <Banner.ActionText />
       </Banner>
       <SecondaryButton onClick={focusBanner}>Focus Banner</SecondaryButton>
     </VStack>

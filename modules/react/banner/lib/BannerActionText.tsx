@@ -7,9 +7,9 @@ import {Box} from '@workday/canvas-kit-labs-react/common';
 import {CSSProperties} from '@workday/canvas-kit-react/tokens';
 
 import {BannerModelContext} from './Banner';
-import {BannerModel, useBannerAction} from './hooks';
+import {BannerModel, useBannerActionText} from './hooks';
 
-export interface BannerActionProps extends ExtractProps<typeof Box, never> {
+export interface BannerActionTextProps extends ExtractProps<typeof Box, never> {
   model?: BannerModel;
   /**
    * The text of the Banner action.
@@ -22,11 +22,15 @@ const styles: CSSProperties = {
   textDecoration: 'underline',
 };
 
-export const BannerAction = createComponent('span')({
-  displayName: 'Banner.Action',
-  Component: ({children = 'View All', model, ...elemProps}: BannerActionProps, ref, Element) => {
+export const BannerActionText = createComponent('span')({
+  displayName: 'Banner.ActionTextText',
+  Component: (
+    {children = 'View All', model, ...elemProps}: BannerActionTextProps,
+    ref,
+    Element
+  ) => {
     const localModel = useModelContext(BannerModelContext, model);
-    const props = useBannerAction(localModel, elemProps, ref);
+    const props = useBannerActionText(localModel, elemProps, ref);
 
     return (
       <Box

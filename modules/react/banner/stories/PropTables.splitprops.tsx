@@ -26,7 +26,7 @@ export const BannerLabelComponent = (_: {
   children: React.ReactNode;
 }) => <div />;
 
-// <ArgsTable of={Banner.Action} /> generates a props table with
+// <ArgsTable of={Banner.ActionText} /> generates a props table with
 // Box props. Use this dummy component instead to limit the props shown.
 export const BannerActionComponent = (_: {
   /**

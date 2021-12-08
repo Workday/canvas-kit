@@ -44,8 +44,8 @@ Use the children of `Banner.Label` to set the main text for the `Banner`.
 
 ### Action Text
 
-Use the children of `Banner.Action` to customize the action text contained in the `Banner`. The text
-has default value of `View All`.
+Use the children of `Banner.ActionText` to customize the action text contained in the `Banner`. The
+text has default value of `View All`.
 
 <ExampleCodeBlock code={ActionText} />
 
@@ -59,8 +59,8 @@ banner. This will change the defualt icon to `exclamationCircleIcon`.
 ### Sticky
 
 Set the `isSticky` prop of the `Banner` to display it along the right edge of the page. When true,
-the `Banner.Action` will be hidden. Some basic styles will be applied, but you will still need to
-manually set the css `position` value.
+the `Banner.ActionText` will be hidden. Some basic styles will be applied, but you will still need
+to manually set the css `position` value.
 
 <ExampleCodeBlock code={Sticky} />
 
@@ -176,16 +176,16 @@ Undocumented props are spread to the underlying `<Flex>` element.
 
 <ArgsTable of={BannerLabelComponent} />
 
-### Banner.Action
+### Banner.ActionText
 
 #### Usage
 
-`Banner.Action` is a styled `<Box>`. This component will get an id that will be used for the
+`Banner.ActionText` is a styled `<Box>`. This component will get an id that will be used for the
 aria-labelledby on the top level `<button>`. This component will be visually hidden when the model's
 `isSticky` prop is set to true.
 
 ```tsx
-<Banner.Action>Custom call to action</Banner.Action>
+<Banner.ActionText>Custom call to action</Banner.ActionText>
 ```
 
 #### Props

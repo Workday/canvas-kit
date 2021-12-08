@@ -21,7 +21,7 @@ export const ThemedAlert = () => {
       <Banner>
         <Banner.Icon />
         <Banner.Label>3 Items</Banner.Label>
-        <Banner.Action />
+        <Banner.ActionText />
       </Banner>
     </CanvasProvider>
   );

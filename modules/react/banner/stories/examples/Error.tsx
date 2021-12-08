@@ -7,7 +7,7 @@ export const Error = () => {
     <Banner hasError={true}>
       <Banner.Icon />
       <Banner.Label>3 Errors</Banner.Label>
-      <Banner.Action />
+      <Banner.ActionText />
     </Banner>
   );
 };

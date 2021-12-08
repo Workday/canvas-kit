@@ -14,7 +14,7 @@ type BannerState = {
    */
   hasError?: boolean;
   /**
-   * Optional flag to denote the banner is stuck to the side of the screen. When true the default `Banner.Action`
+   * Optional flag to denote the banner is stuck to the side of the screen. When true the default `Banner.ActionText`
    * will be hidden, and some basic styles will be applied.
    * You will still need to manually set the css `position` value.
    * @default false
@@ -25,7 +25,7 @@ type BannerState = {
    * - `Banner` will set `aria-describedby` to `label-${id}`
    * - `Banner` will set `aria-label` to `action-${id}`
    * - `Banner.Label` will set `id` to `label-${id}`
-   * - `Banner.Action` will set `id` to `action-${id}`
+   * - `Banner.ActionText` will set `id` to `action-${id}`
    *
    * If a value is not provided, a unique id will be automatically created by `useUniqueId()`.
    * @default `useUniqueId()`

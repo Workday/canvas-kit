@@ -30,7 +30,7 @@ export const StickyRTL = () => {
         <Banner isSticky={true} css={styles}>
           <Banner.Icon />
           <Banner.Label>3 אזהרות</Banner.Label>
-          <Banner.Action />
+          <Banner.ActionText />
         </Banner>
       </Box>
     </CanvasProvider>
