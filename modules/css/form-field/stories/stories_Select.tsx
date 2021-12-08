@@ -1,6 +1,5 @@
 import React from 'react';
 import {storiesOf} from '@storybook/react';
-import README from '../../select/README.md';
 import '../index.scss';
 import '@workday/canvas-kit-css-select/index.scss';
 
