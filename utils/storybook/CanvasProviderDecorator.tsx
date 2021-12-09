@@ -15,7 +15,7 @@ export default makeDecorator({
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [args] = useArgs();
     const theme: PartialEmotionCanvasTheme = {
-      canvas: args.theme || defaultCanvasTheme,
+      canvas: parameters.theme || args.theme || defaultCanvasTheme,
     };
     return <CanvasProvider theme={theme}>{storyFn(context)}</CanvasProvider>;
   },
