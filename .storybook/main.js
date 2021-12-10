@@ -18,8 +18,7 @@ module.exports = {
         actions: false, // Disabled because actions is SLOW
       },
     },
-    'storybook-readme',
-    '@storybook/addon-knobs',
+    './readme-panel/preset.js',
     '@storybook/addon-storysource',
   ],
   typescript: {

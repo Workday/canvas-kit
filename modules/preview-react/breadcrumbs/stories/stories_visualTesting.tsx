@@ -1,13 +1,10 @@
-/// <reference path="../../../../typings.d.ts" />
 import React from 'react';
-import withReadme from 'storybook-readme/with-readme';
 import {CanvasProvider, ContentDirection, StaticStates} from '@workday/canvas-kit-react/common';
 
 import {ComponentStatesTable} from '@workday/canvas-kit-labs-react/common';
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
 
 import {Breadcrumbs} from '../index';
-import README from '../README.md';
 import {BreadcrumbLinkProps} from '../lib/Breadcrumbs/List/Link';
 import {useDropdown} from '../lib/Breadcrumbs/Dropdown/hooks';
 import {DropdownMenu} from '../lib/Breadcrumbs/Dropdown/Menu';
@@ -15,7 +12,6 @@ import {DropdownMenu} from '../lib/Breadcrumbs/Dropdown/Menu';
 export default withSnapshotsEnabled({
   title: 'Testing/React/Preview/Breadcrumbs',
   component: Breadcrumbs,
-  decorators: [withReadme(README)],
 });
 
 const leftToRightItems = [
