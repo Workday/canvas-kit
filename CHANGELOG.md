@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v6.1.1](https://github.com/Workday/canvas-kit/releases/tag/v6.1.1) (2021-12-10)
+
+### Infrastructure
+
+- chore: Have verify action to wait on visual tests ([#1385](https://github.com/Workday/canvas-kit/pull/1385)) ([@mannycarrera4](https://github.com/mannycarrera4))
+- chore: Remove unused and uneeded dependencies ([#1388](https://github.com/Workday/canvas-kit/pull/1388)) ([@NicholasBoll](https://github.com/NicholasBoll))
+  - Storybook knobs are removed and all stories use [Storybook Controls](https://storybook.js.org/docs/react/essentials/controls) instead. This includes the `theme` override. See the PR for more details.
+  - Storybook Readme addon was removed. This addon is no longer maintained. The Readme tab in the Storybook plugin panel was replaced with a custom addon that links to the Readme in Github. This allows us to more easily upgrade Storybook.
+
+
 ## [v6.1.0](https://github.com/Workday/canvas-kit/releases/tag/v6.1.0) (2021-12-07)
 
 ### Components
