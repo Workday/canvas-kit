@@ -1,4 +1,3 @@
-/// <reference path="../../../../../typings.d.ts" />
 import * as React from 'react';
 import {withSnapshotsEnabled} from '../../../../../utils/storybook';
 import {Skeleton} from '../../index';

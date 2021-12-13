@@ -1,4 +1,3 @@
-/// <reference path="../../../../../typings.d.ts" />
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
 import {colors, type} from '@workday/canvas-kit-react/tokens';
