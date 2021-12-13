@@ -6,7 +6,6 @@ import {
   JSXAttribute,
   JSXSpreadAttribute,
   JSXMemberExpression,
-  jsxAttribute,
   JSXExpressionContainer,
   MemberExpression,
   Identifier,
