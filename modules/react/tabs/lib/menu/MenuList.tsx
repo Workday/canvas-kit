@@ -36,12 +36,11 @@ export const MenuList = createComponent('div')({
       <Stack
         as={Element}
         background={commonColors.background}
-        borderRadius="m"
+        borderRadius="zero"
         padding="zero"
-        margin="zero"
+        marginY="xxs"
         spacing="zero"
         overflowY="auto"
-        border={`1px solid ${colors.soap500}`}
         flexDirection={localModel.state.orientation === 'vertical' ? 'column' : 'row'}
         {...props}
       >
