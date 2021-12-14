@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {commonColors, colors} from '@workday/canvas-kit-react/tokens';
+import {commonColors} from '@workday/canvas-kit-react/tokens';
 import {
   createComponent,
   useModelContext,
