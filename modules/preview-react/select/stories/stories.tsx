@@ -1,7 +1,5 @@
-/// <reference path="../../../../typings.d.ts" />
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
-import withReadme from 'storybook-readme/with-readme';
 import {controlComponent} from '../../../../utils/storybook';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {
@@ -14,7 +12,6 @@ import {colors, typeColors} from '@workday/canvas-kit-react/tokens';
 import FormField from '../../../react/form-field';
 import Select from '../lib/Select';
 import {RenderOptionFunction} from '../lib/SelectBase';
-import README from '../README.md';
 
 const hintText = 'Helpful text goes here.';
 const hintId = 'error-desc-id';
@@ -88,7 +85,7 @@ export const customRenderOption: RenderOptionFunction = option => {
 
 storiesOf('Preview/Select/React/Top Label', module)
   .addParameters({component: Select})
-  .addDecorator(withReadme(README))
+  .addParameters({ReadmePath: 'preview-react/select'})
   .add('Default', () => (
     <FormField label="Label" inputId="select-default">
       {controlComponent(<Select name="contact" options={options} />)}
@@ -146,7 +143,7 @@ storiesOf('Preview/Select/React/Top Label', module)
 
 storiesOf('Preview/Select/React/Left Label', module)
   .addParameters({component: Select})
-  .addDecorator(withReadme(README))
+  .addParameters({ReadmePath: 'preview-react/select'})
   .add('Default', () => (
     <FormField labelPosition={FormField.LabelPosition.Left} label="Label" inputId="select-default">
       {controlComponent(<Select name="contact" options={options} />)}

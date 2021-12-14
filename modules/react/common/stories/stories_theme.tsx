@@ -1,12 +1,9 @@
-/// <reference path="../../../../typings.d.ts" />
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
 import styled from '@emotion/styled';
 import {storiesOf} from '@storybook/react';
-import withReadme from 'storybook-readme/with-readme';
 import {CanvasProvider} from '../index';
 import {CanvasTheme, CanvasThemePalette, Themeable} from '../lib/theming';
-import README from '../lib/theming/README.md';
 import {colors, type, space, borderRadius} from '@workday/canvas-kit-react/tokens';
 import {useTheme} from '@workday/canvas-kit-react/common';
 
@@ -129,7 +126,7 @@ const ThemeDemo = (props: any) => {
 };
 
 storiesOf('Tokens/Common/Theming', module)
-  .addDecorator(withReadme(README))
+  .addParameters({ReadmePath: 'react/common/lib/theming'})
   .add('Theme', () => {
     return <ThemeDemo />;
   });

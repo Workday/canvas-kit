@@ -1,15 +1,12 @@
-/// <reference path="../../../typings.d.ts" />
-
 import React from 'react';
 
-import withReadme from 'storybook-readme/with-readme';
-
-import README from '../README.md';
 import {PopupStack} from '../lib/PopupStack';
 
 export default {
   title: 'Components/Popups/Popup Stack',
-  decorators: [withReadme(README)],
+  parameters: {
+    ReadmePath: 'popup-stack',
+  },
 };
 
 export const Default = () => {

@@ -1,12 +1,10 @@
 import React from 'react';
 import {storiesOf} from '@storybook/react';
-import withReadme from 'storybook-readme/with-readme';
-import README from '../../text-area/README.md';
 import '../index.scss';
 import '@workday/canvas-kit-css-text-area/index.scss';
 
 storiesOf('Components/Inputs/TextArea/CSS/Top Label', module)
-  .addDecorator(withReadme(README))
+  .addParameters({ReadmePath: 'css/text-area'})
   .add('Default', () => (
     <div className="wdc-form">
       <div className="wdc-form-field-wrapper">
@@ -103,7 +101,7 @@ storiesOf('Components/Inputs/TextArea/CSS/Top Label', module)
   ));
 
 storiesOf('Components/Inputs/TextArea/CSS/Left Label', module)
-  .addDecorator(withReadme(README))
+  .addParameters({ReadmePath: 'css/text-area'})
   .add('Default', () => (
     <div className="wdc-form wdc-form-label-position-left">
       <div className="wdc-form-field-wrapper">

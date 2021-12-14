@@ -1,4 +1,3 @@
-/// <reference path="../../../../../typings.d.ts" />
 import * as React from 'react';
 import FormField from '../../lib/FormField';
 import {ComponentStatesTable, permutateProps} from '@workday/canvas-kit-labs-react/common';
