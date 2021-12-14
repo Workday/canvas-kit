@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v6.1.2](https://github.com/Workday/canvas-kit/releases/tag/v6.1.2) (2021-12-14)
+
+### Components
+
+- fix(tabs): Remove gutter from tabs overflow menu ([#1378](https://github.com/Workday/canvas-kit/pull/1378)) ([@mannycarrera4](https://github.com/mannycarrera4))
+
+
 ## [v6.1.1](https://github.com/Workday/canvas-kit/releases/tag/v6.1.1) (2021-12-10)
 
 ### Infrastructure
