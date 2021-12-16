@@ -1,76 +1,55 @@
 import * as React from 'react';
-import {styled} from '@workday/canvas-kit-react/common';
-import {colors, commonColors, space, CSSProperties} from '@workday/canvas-kit-react/tokens';
+import {createComponent, styled, StyledType} from '@workday/canvas-kit-react/common';
+import {commonColors, colors, space, depth} from '@workday/canvas-kit-react/tokens';
+import {Globals} from 'csstype';
 
-export interface ActionBarProps extends React.HTMLAttributes<HTMLDivElement> {
+type PropertyPosition =
+  | Globals
+  | '-webkit-sticky'
+  | 'absolute'
+  | 'fixed'
+  | 'relative'
+  | 'static'
+  | 'sticky';
+
+export type ActionBarProps = StyledType & {
   /**
-   * If true, fix the ActionBar to the bottom of the screen.
-   * @default false
+   * Sets the position for the container
+   * @default "fixed"
    */
-  fixed?: boolean;
-}
-
-function getFixedStyles(fixed = false): CSSProperties {
-  return fixed
-    ? {
-        position: 'fixed',
-        left: 0,
-        bottom: 0,
-        right: 0,
-      }
-    : {};
-}
+  position?: PropertyPosition;
+};
 
 const ActionBarContainer = styled('div')<ActionBarProps>(
   {
-    borderTop: `solid 1px ${colors.soap400}`,
     background: commonColors.background,
-    padding: space.s,
-    boxShadow: '0 -2px 4px rgba(0, 0, 0, 0.08)',
-  },
-  ({fixed, theme}) => {
-    return {
-      ...getFixedStyles(fixed),
-      [theme.canvas.breakpoints.down('s')]: {
-        padding: space.xxs,
-      },
-    };
-  }
-);
-
-const ChildrenContainer = styled('div')(
-  {
-    display: 'inline-block',
-    padding: `0 ${space.m}`,
-    '*:not(:first-of-type)': {
-      marginLeft: space.s,
+    borderTop: `solid 1px ${colors.soap400}`,
+    boxSizing: 'border-box',
+    display: 'flex',
+    position: 'fixed',
+    left: 0,
+    bottom: 0,
+    right: 0,
+    padding: `${space.s} ${space.xl} `,
+    ...depth[1],
+    '> *:not(:last-of-type)': {
+      marginRight: space.s,
     },
   },
   ({theme}) => ({
     [theme.canvas.breakpoints.down('s')]: {
-      display: 'flex',
-      padding: space.xxs,
-      justifyContent: 'center',
-      flexDirection: 'row-reverse',
-      '> *': {
+      padding: space.xs,
+      '> *:not(div)': {
         flex: 1,
-        '&:not(:first-of-type)': {
-          marginRight: space.s,
-          marginLeft: 0,
-        },
       },
     },
-  })
+  }),
+  ({position}) => ({position})
 );
 
-export default class ActionBar extends React.Component<ActionBarProps> {
-  public render() {
-    const {fixed, children, ...elemProps} = this.props;
-
-    return (
-      <ActionBarContainer {...elemProps} fixed={fixed}>
-        <ChildrenContainer>{children}</ChildrenContainer>
-      </ActionBarContainer>
-    );
-  }
-}
+export const ActionBar = createComponent('div')({
+  displayName: 'ActionBar',
+  Component: (props: ActionBarProps, ref, Element) => (
+    <ActionBarContainer ref={ref} as={Element} {...props} />
+  ),
+});
