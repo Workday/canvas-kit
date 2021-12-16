@@ -38,7 +38,7 @@ const ActionBarContainer = styled('div')<ActionBarProps>(
   },
   ({theme}) => ({
     [theme.canvas.breakpoints.down('s')]: {
-      padding: space.xs,
+      padding: space.s,
       '> *:not(div)': {
         flex: 1,
       },
