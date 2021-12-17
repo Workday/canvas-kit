@@ -1,4 +1,3 @@
-/// <reference path="../../../../../typings.d.ts" />
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
 import {ComponentStatesTable, permutateProps} from '@workday/canvas-kit-labs-react/common';
@@ -16,29 +15,45 @@ export default withSnapshotsEnabled({
 export const PrimaryButtonStates = (props: {theme?: PartialEmotionCanvasTheme}) => (
   <StaticStates theme={props.theme}>
     <ComponentStatesTable
-      rowProps={permutateProps({
-        size: [
-          {value: 'small', label: 'Small'},
-          {value: 'medium', label: 'Medium'},
-          {value: 'large', label: 'Large'},
-        ],
-        icon: [
-          {value: undefined, label: ''},
-          {value: playCircleIcon, label: 'w/ Icon'},
-        ],
-        iconPosition: [
-          {value: 'left', label: 'Left Icon'},
-          {value: 'right', label: 'right Icon'},
-        ],
-        dataLabel: [
-          {value: undefined, label: ''},
-          {value: '1:23', label: 'w/ Data Label'},
-        ],
-      })}
+      rowProps={permutateProps(
+        {
+          variant: [
+            {value: undefined, label: ''},
+            {value: 'inverse', label: 'Inverse'},
+          ],
+          size: [
+            {value: 'extraSmall', label: 'Extra Small'},
+            {value: 'small', label: 'Small'},
+            {value: 'medium', label: 'Medium'},
+            {value: 'large', label: 'Large'},
+          ],
+          icon: [
+            {value: undefined, label: ''},
+            // We don't need a label here, because `iconPosition` provides it
+            {value: playCircleIcon, label: ''},
+          ],
+          iconPosition: [
+            {value: undefined, label: ''},
+            {value: 'left', label: '& Left Icon'},
+            {value: 'right', label: '& Right Icon'},
+          ],
+          dataLabel: [
+            {value: undefined, label: ''},
+            {value: '1:23', label: '& Data Label'},
+          ],
+        },
+        // Filter out permutations where `iconPosition` is provided and not `icon`, and vice versa
+        props => {
+          if ((props.iconPosition && !props.icon) || (props.icon && !props.iconPosition)) {
+            return false;
+          }
+          return true;
+        }
+      )}
       columnProps={stateTableColumnProps}
     >
       {props => (
-        <Container>
+        <Container blue={props.variant === 'inverse'}>
           <PrimaryButton {...props}>Test</PrimaryButton>
         </Container>
       )}

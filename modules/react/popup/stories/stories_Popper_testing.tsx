@@ -1,4 +1,3 @@
-/// <reference path="../../../../typings.d.ts" />
 import * as React from 'react';
 
 import {SecondaryButton, PrimaryButton} from '@workday/canvas-kit-react/button';
