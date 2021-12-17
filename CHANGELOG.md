@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v6.1.4](https://github.com/Workday/canvas-kit/releases/tag/v6.1.4) (2021-12-17)
+
+### Documentation
+
+- docs: Add ExtractProps to the v5 migration guide ([#1397](https://github.com/Workday/canvas-kit/pull/1397)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v5.3.6](https://github.com/Workday/canvas-kit/releases/tag/v5.3.6) (2021-12-17)
 
 ### Components
