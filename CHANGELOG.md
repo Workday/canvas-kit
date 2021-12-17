@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v6.1.3](https://github.com/Workday/canvas-kit/releases/tag/v6.1.3) (2021-12-17)
+
+### Components
+
+- fix(tabs): Fix Dynamic Tabs example ([#1398](https://github.com/Workday/canvas-kit/pull/1398)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v6.1.2](https://github.com/Workday/canvas-kit/releases/tag/v6.1.2) (2021-12-14)
 
 ### Components
