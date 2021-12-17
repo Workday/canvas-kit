@@ -63,6 +63,7 @@
     "@workday/canvas-system-icons-web": "1.0.41",
     "@workday/design-assets-types": "^0.2.4",
     "chroma-js": "^2.1.0",
+    "csstype": "^2.6.17",
     "element-closest": "^3.0.2",
     "emotion-theming": "^10.0.10",
     "lodash": "^4.17.14",
