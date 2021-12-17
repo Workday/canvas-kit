@@ -3,6 +3,50 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v6.1.4](https://github.com/Workday/canvas-kit/releases/tag/v6.1.4) (2021-12-17)
+
+### Documentation
+
+- docs: Add ExtractProps to the v5 migration guide ([#1397](https://github.com/Workday/canvas-kit/pull/1397)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v5.3.6](https://github.com/Workday/canvas-kit/releases/tag/v5.3.6) (2021-12-17)
+
+### Components
+
+- chore: Bump uuid to stable non deprecated version ([#1367](https://github.com/Workday/canvas-kit/pull/1367)) ([@mannycarrera4](https://github.com/mannycarrera4))
+
+### Documentation
+
+- docs: Add ExtractProps to the v5 migration guide ([#1397](https://github.com/Workday/canvas-kit/pull/1397)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+### Revert
+
+- fix: Revert uuid upgrade to get releases working ([#1371](https://github.com/Workday/canvas-kit/pull/1371)) ([@NicholasBoll](https://github.com/NicholasBoll))
+## [v6.1.3](https://github.com/Workday/canvas-kit/releases/tag/v6.1.3) (2021-12-17)
+
+### Components
+
+- fix(tabs): Fix Dynamic Tabs example ([#1398](https://github.com/Workday/canvas-kit/pull/1398)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v6.1.2](https://github.com/Workday/canvas-kit/releases/tag/v6.1.2) (2021-12-14)
+
+### Components
+
+- fix(tabs): Remove gutter from tabs overflow menu ([#1378](https://github.com/Workday/canvas-kit/pull/1378)) ([@mannycarrera4](https://github.com/mannycarrera4))
+
+
+## [v6.1.1](https://github.com/Workday/canvas-kit/releases/tag/v6.1.1) (2021-12-10)
+
+### Infrastructure
+
+- chore: Have verify action to wait on visual tests ([#1385](https://github.com/Workday/canvas-kit/pull/1385)) ([@mannycarrera4](https://github.com/mannycarrera4))
+- chore: Remove unused and uneeded dependencies ([#1388](https://github.com/Workday/canvas-kit/pull/1388)) ([@NicholasBoll](https://github.com/NicholasBoll))
+  - Storybook knobs are removed and all stories use [Storybook Controls](https://storybook.js.org/docs/react/essentials/controls) instead. This includes the `theme` override. See the PR for more details.
+  - Storybook Readme addon was removed. This addon is no longer maintained. The Readme tab in the Storybook plugin panel was replaced with a custom addon that links to the Readme in Github. This allows us to more easily upgrade Storybook.
+
+
 ## [v6.1.0](https://github.com/Workday/canvas-kit/releases/tag/v6.1.0) (2021-12-07)
 
 ### Components
@@ -80,7 +124,6 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 - fix(tooltip): Add delay to Tooltip show and hide ([#1339](https://github.com/Workday/canvas-kit/pull/1339)) ([@wooksauce](https://github.com/wooksauce))
   This change could cause visual regression tests to fail if a screen shot is taken expecting a tooltip to show immediately. Your visual regression will either have to add an explicit wait of 300ms, or change the delay to 1ms only under test.
-
 ## [v6.0.1](https://github.com/Workday/canvas-kit/releases/tag/v6.0.1) (2021-11-17)
 
 ### Infrastructure

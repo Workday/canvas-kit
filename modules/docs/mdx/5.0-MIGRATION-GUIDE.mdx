@@ -14,6 +14,7 @@ any questions about the update.
   - [Canvas Kit Preview](#canvas-kit-preview)
   - [Type Deprecations and Hierarchy Updates](#type-deprecations-and-hierarchy-updates)
   - [Canvas Kit CSS Maintenance Mode](#canvas-kit-css-maintenance-mode)
+  - [Prop Interfaces](#prop-interfaces)
 - [Component Changes](#component-changes)
   - [Component Promotions](#component-promotions)
   - [Core](#core)
@@ -427,6 +428,59 @@ provide more focused support and to dedicate our efforts to making bigger and be
 our most used components: Canvas Kit React. If you have questions or concerns, please
 [let us know](https://github.com/Workday/canvas-kit/issues/new?labels=&template=question.md).
 
+### Prop Interfaces
+
+Many components were updated to be polymorphic using the `createComponent` utility function. Most
+components in Canvas Kit extend from an HTML interface and spread extra props onto the HTML element.
+Since these components are now polymorphic, the exported props no longer extend from an HTML
+interface since the HTML interface is now determined by an optional `as` prop. It is common to wrap
+Canvas Kit components with your own component and extend from the Canvas Kit component's prop
+interface. To support this use-case in addition to polymorphic prop interfaces, `ExtractProp` was
+introduced. `ExtractProp` understands these polymorphic components and will return the base props in
+addition to the HTML interface. There is an optional second argument that can override the default
+HTML interface if your wrapper component uses the `as`.
+
+```tsx
+// v4
+import {TextInput, TextInputProps} from '@workday/canvas-kit-react-text-input';
+
+const FancyTextInput: React.FC<TextInputProps> = props => <TextInput {...props} />;
+
+// v5
+import {TextInput} from '@workday/canvas-kit-react/text-input';
+import {ExtractProps} from '@workday/canvas-kit-react/common';
+
+const FancyTextInput: React.FC<ExtractProps<typeof TextInput>> = props => {};
+
+// v5 via createComponent
+import {TextInput} from '@workday/canvas-kit-react/text-input';
+import {createComponent} from '@workday/canvas-kit-react/common';
+
+const FancyTextInput = createComponent(TextInput)({
+  displayName: 'FancyTextInput',
+  Component((props) => <TextInput {...props} />)
+})
+```
+
+Components that made this change:
+
+- Button
+- IconButton
+- Card
+- Hyperlink
+- Select
+- TextArea
+- TextInput
+- Checkbox
+- Radio
+- ColorInput
+- ColorPreview
+- Modal
+- Popup
+- Skeleton
+- Tabs
+- Toast
+
 ## Component Changes
 
 ### Component Promotions
@@ -803,20 +857,25 @@ Button prop interface and accesses properties like `onClick`, you'll need to pro
 attribute yourself in order to avoid TypeScript issues (this doesn't affect runtime). This is not
 code-moddable since intent cannot be pre-determined.
 
+#### Props
+
+The exported props no longer extend from the `HTMLButtonElement` interface. Use
+[ExtractProps](#prop-interfaces) instead.
+
 ```tsx
 interface MyButtonProps extends ButtonProps {}
 
 // onClick no longer exists in `ButtonProps`, so TypeScript will complain about onClick not
 // existing in `MyButtonProps` (`onClick` does exist as a prop on `<Button>`, however)
 const MyButton = ({children, onClick}: MyButtonProps) => (
-  <Button onClick={onClick}>{children}</Button>
+  <SecondaryButton onClick={onClick}>{children}</SecondaryButton>
 );
 
 // After
-interface MyButtonProps extends ButtonProps, React.ButtonHTMLAttributes<HTMLButtonElement> {}
+interface MyButtonProps extends ExtractProps<typeof SecondaryButton> {}
 
 // After (alternate fix)
-interface MyButtonProps extends ButtonProps {
+interface MyButtonProps extends ExtractProps<> {
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 ```
@@ -885,6 +944,21 @@ const props = {
 import {Card} from './Card' // where `Card` is a re-exported Canvas Kit `Card`
 ```
 
+#### Props
+
+The exported props no longer extend from the `HTMLDivElement` interface. Use
+[ExtractProps](#prop-interfaces) instead.
+
+```tsx
+// NOT handled by the codemod
+
+// v4
+interface MyCard extends CardProps {}
+
+// v5
+interface MyCard extends ExtractProps<typeof Card>
+```
+
 ---
 
 ### Inputs
@@ -928,14 +1002,14 @@ element that `inputRef` was applied to previously. Select and Select (Preview) d
 `inputRef` in v4, but now support `ref` in v5. See each component's documentation for information on
 which element `ref` is forwarded to for that particular component.
 
+#### Props
+
 Input component prop interfaces no longer extend directly from their underlying element interface
 (e.g. `TextInputProps` no longer extends from `React.InputHTMLAttributes<HTMLInputElement>`).
 `createComponent` returns a component that determines the element interface via the `as` prop. This
 is why input component props no longer contain an element interface directly. If you extend from an
 input component prop interface, or have code that uses an input component prop interface and
-accesses properties like `onClick`, you'll need to provide the input attribute yourself in order to
-avoid TypeScript issues (this doesn't affect runtime). This is not code-moddable since intent cannot
-be pre-determined.
+accesses properties like `onClick`, you'll need to use [ExtractProps](#prop-interfaces) instead.
 
 ```tsx
 interface MyTextInputProps extends TextInputProps {}
@@ -945,7 +1019,7 @@ interface MyTextInputProps extends TextInputProps {}
 const MyTextInput = ({onClick}: MyTextInputProps) => <TextInput onClick={onClick} />;
 
 // Fix
-interface MyTextInputProps extends TextInputProps, React.InputHTMLAttributes<HTMLInputElement> {}
+interface MyTextInputProps extends ExtractProps<typeof TextInput> {}
 
 // Alternate fix
 interface MyTextInputProps extends TextInputProps {

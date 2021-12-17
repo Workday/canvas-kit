@@ -1,11 +1,9 @@
 import React from 'react';
 import {storiesOf} from '@storybook/react';
-import withReadme from 'storybook-readme/with-readme';
-import README from './README.md';
 import './index.scss';
 
 storiesOf('Components/Containers/Card/CSS', module)
-  .addDecorator(withReadme(README))
+  .addParameters({ReadmePath: 'css/card'})
   .add('All', () => (
     <div className="story">
       <h2>Default</h2>

@@ -1,7 +1,5 @@
-/// <reference path="../../../../typings.d.ts" />
 import React from 'react';
 import {storiesOf} from '@storybook/react';
-import withReadme from 'storybook-readme/with-readme';
 import {ColorInput} from '@workday/canvas-kit-react/color-picker';
 import {colors} from '@workday/canvas-kit-react/tokens';
 import {
@@ -15,7 +13,6 @@ import {
 import {IconButton} from '@workday/canvas-kit-react/button';
 import {bgColorIcon} from '@workday/canvas-system-icons-web';
 import {ColorPicker} from '@workday/canvas-kit-preview-react/color-picker';
-import README from '../README.md';
 import {changeFocus} from '@workday/canvas-kit-react/common';
 
 // eslint-disable-next-line no-empty-function
@@ -23,7 +20,7 @@ const noop = () => {};
 
 storiesOf('Preview/Color Picker/React', module)
   .addParameters({component: ColorPicker})
-  .addDecorator(withReadme(README))
+  .addParameters({ReadmePath: 'preview-react/color-picker'})
   .add('Default', () => <ColorPicker onColorChange={noop} />)
   .add('Icon Button Popup', () => {
     const model = usePopupModel();
