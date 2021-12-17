@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v5.3.6](https://github.com/Workday/canvas-kit/releases/tag/v5.3.6) (2021-12-17)
+
+### Components
+
+- chore: Bump uuid to stable non deprecated version ([#1367](https://github.com/Workday/canvas-kit/pull/1367)) ([@mannycarrera4](https://github.com/mannycarrera4))
+
+### Documentation
+
+- docs: Add ExtractProps to the v5 migration guide ([#1397](https://github.com/Workday/canvas-kit/pull/1397)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+### Revert
+
+- fix: Revert uuid upgrade to get releases working ([#1371](https://github.com/Workday/canvas-kit/pull/1371)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v5.3.5](https://github.com/Workday/canvas-kit/releases/tag/v5.3.5) (2021-11-23)
 
 ### Components
