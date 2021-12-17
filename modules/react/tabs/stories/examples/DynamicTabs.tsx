@@ -10,22 +10,21 @@ type Tab = {
 };
 
 export const DynamicTabs = () => {
-  // save a ref of the currently selected tab. `Tabs.List` takes a render function an memoizes. We
-  // need to get around this
-  const activeTabRef = React.useRef('');
-
   const [tabs, setTabs] = React.useState<Tab[]>([
     {tab: 'Tab 1', id: 'tab-1'},
     {tab: 'Tab 2', id: 'tab-2'},
     {tab: 'Tab 3', id: 'tab-3'},
-    {tab: 'Add New', id: 'add'},
+    {tab: 'Add Tab', id: 'add'},
   ]);
   const addedRef = React.useRef(tabs.length - 1);
   const model = useTabsModel({
     items: tabs,
     shouldSelect: ({data}) => data.id !== 'add',
   });
-  activeTabRef.current = model.state.selectedIds[0];
+
+  // A ref of the model for the render functions to work around the caching done to lists
+  const modelRef = React.useRef(model);
+  modelRef.current = model;
 
   /**
    * Helper function that should be called when an item is programmatically removed. The following
@@ -36,9 +35,10 @@ export const DynamicTabs = () => {
    */
   const removeItem = <T extends unknown>(id: string, model: SelectionModel<T>) => {
     const index = model.state.items.findIndex(item => model.getId(item) === model.state.cursorId);
+    console.log('index', index, id, model.state.cursorId, model.state.items);
     const nextIndex = index === model.state.items.length - 1 ? index - 1 : index + 1;
     const nextId = model.getId(model.state.items[nextIndex]);
-    if (activeTabRef.current === id) {
+    if (model.state.selectedIds[0] === id) {
       // We're removing the currently selected item. Select next item
       model.events.select({id: nextId});
     }
@@ -54,8 +54,9 @@ export const DynamicTabs = () => {
   };
 
   const onKeyDown = (id: string) => (e: React.KeyboardEvent<HTMLElement>) => {
-    if (e.key === 'Backspace' && id !== 'add') {
+    if (e.key === 'Delete' && id !== 'add') {
       setTabs(tabs.filter(item => item.id !== id));
+      const model = modelRef.current;
       removeItem(id, model);
     }
   };
