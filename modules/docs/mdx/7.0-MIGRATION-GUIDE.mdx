@@ -9,6 +9,7 @@ Below are the breaking changes made in Canvas Kit v7. Please
 any questions about the update.
 
 - [Codemod](#codemod)
+- [ActionBar Component Update](#action-bar-updates)
 
 ## Codemod
 
@@ -35,3 +36,16 @@ rollback more easily if necessary.**
 [Let us know](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) if you
 encounter any issues or use cases that we've missed. The `@workday/canvas-kit-codemod` package will
 help us maintain additional codemod transforms to make future migrations easier.
+
+## ActionBar Component Update
+
+We've refactored our ActionBar components to simplify logic.
+
+PR: https://github.com/Workday/canvas-kit/pull/1396
+
+**Changes:**
+
+- Component has been converted to compound component.
+- `fixed` prop has been removed from component.
+- Now ActionBar uses `position` prop to set container position instead `fixed` props.
+- Fixed position has been set as default if there is not passed `position` prop.
