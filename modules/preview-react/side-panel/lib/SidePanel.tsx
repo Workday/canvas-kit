@@ -212,12 +212,12 @@ export type ToggleButtonProps = Omit<IconButtonProps, 'aria-label'> & {
    * The tooltip text to expand the side panel
    * @default 'Expand'
    */
-  expandLabel?: string;
+  tooltipTextExpand?: string;
   /**
    * The tooltip text to collapse the side panel
    * @default 'Collapse'
    */
-  collapseLabel?: string;
+  tooltipTextCollapse?: string;
 };
 
 /**
@@ -226,8 +226,8 @@ export type ToggleButtonProps = Omit<IconButtonProps, 'aria-label'> & {
 const ToggleButton = ({
   variant = 'plain',
   icon = transformationImportIcon,
-  expandLabel = 'Expand',
-  collapseLabel = 'Collapse',
+  tooltipTextExpand: expandLabel = 'Expand',
+  tooltipTextCollapse: collapseLabel = 'Collapse',
   ...rest
 }: ToggleButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>) => {
   const context = React.useContext(SidePanelContext);
