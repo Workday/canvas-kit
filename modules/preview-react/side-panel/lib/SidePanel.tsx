@@ -209,12 +209,12 @@ const SidePanel = ({
 
 export type ToggleButtonProps = Omit<IconButtonProps, 'aria-label'> & {
   /**
-   * The tooltip label for when the side panel is collapsed
+   * The tooltip text to expand the side panel
    * @default 'Expand'
    */
   expandLabel?: string;
   /**
-   * The tooltip label for when the side panel is expanded
+   * The tooltip text to collapse the side panel
    * @default 'Collapse'
    */
   collapseLabel?: string;
