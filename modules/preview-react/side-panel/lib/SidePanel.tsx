@@ -207,7 +207,7 @@ const SidePanel = ({
   );
 };
 
-export type ToggleButtonProps = Omit<IconButtonProps, 'aria-label'> & {
+export type ToggleButtonProps = IconButtonProps & {
   /**
    * The tooltip text to expand the side panel
    * @default 'Expand'
