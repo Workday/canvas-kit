@@ -66,6 +66,7 @@ export interface SidePanelProps extends React.HTMLAttributes<HTMLDivElement> {
    * @param boolean
    */
   touched: boolean;
+  children: JSX.Element | JSX.Element[];
 }
 
 const createKeyframes = (from: number | string, to: number | string) => {
@@ -208,7 +209,15 @@ const SidePanel = ({
 };
 
 export type ToggleButtonProps = Omit<IconButtonProps, 'aria-label'> & {
+  /**
+   * The tooltip label for when the side panel is collapsed
+   * @default 'Expand'
+   */
   expandLabel?: string;
+  /**
+   * The tooltip label for when the side panel is expanded
+   * @default 'Collapse'
+   */
   collapseLabel?: string;
 };
 
