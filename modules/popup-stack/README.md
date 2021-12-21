@@ -198,6 +198,47 @@ considered to be "contained" by an element under the following conditions:
 PopupStack.contains(element: HTMLElement, eventTarget: HTMLElement): boolean
 ```
 
+### pushStackContext
+
+```tsx
+PopupStack.pushStackContext(element: HTMLElement): void
+```
+
+Add a new stack context for popups. This method could be called with the same element multiple
+times, but should only push a new stack context once. The most common use-case for calling
+`pushStackContext` is when entering fullscreen, but multiple fullscreen listeners could be pushing
+the same element which is very difficult to ensure only one stack is used. To mitigate, this method
+filters out multiple calls to push the same element as a new stack context.
+
+### popStackContext
+
+```tsx
+PopupStack.popStackContext(element: HTMLElement): void
+```
+
+Remove the topmost stack context. The the stack context will only be removed if the top stack
+context container element matches to guard against accidental remove of other stack contexts you
+don't own.
+
+### transferToCurrentContext
+
+```tsx
+PopupStack.transferToCurrentContext(item: PopupStackItem): void
+```
+
+Transfer the popup stack item into the current popup stack context.
+
+An example might be a popup that is opened and an element goes into fullscreen. The default popup
+stack context is `document.body`, but the
+[Fullscreen API](https://developer.mozilla.org/en-US/docs/Web/API/Fullscreen_API) will only render
+elements that are children of the fullscreen element. If the popup isn't transferred to the current
+popup stack context, the popup will remain open, but will no longer be rendered. This method will
+transfer that popup to the fullscreen element so that it will render. Popups created while in a
+fullscreen context that need to be transferred back when fullscreen is exited should also call this
+method. While popups may still render when fullscreen is exited, popups will be members of different
+popup stack contexts which will cause unspecified results (like the escape key will choose the wrong
+popup as the "topmost").
+
 ### createAdapter
 
 Create an adapter for the PopupStack. Any method provided will override the default method of
