@@ -207,7 +207,7 @@ const SidePanel = ({
   );
 };
 
-export type ToggleButtonProps = Omit<IconButtonProps, 'aria-label' | 'children'> & {
+export type ToggleButtonProps = Omit<IconButtonProps, 'aria-label'> & {
   /**
    * The tooltip label for when the side panel is collapsed
    * @default 'Expand'
@@ -260,7 +260,6 @@ const ToggleButton = ({
 
   return (
     <Tooltip title={context.state === 'collapsed' ? expandLabel : collapseLabel} type="muted">
-      {/* @ts-ignore aria-label type error here. The user will decide to use aria-label or aria-labelledby */}
       <IconButton type="button" css={buttonStyle} icon={icon} variant={variant} {...rest} />
     </Tooltip>
   );
