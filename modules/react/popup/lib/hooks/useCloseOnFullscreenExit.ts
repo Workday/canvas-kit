@@ -24,10 +24,13 @@ export const useCloseOnFullscreenExit = (model: PopupModel, elemProps = {}) => {
     if (!visible) {
       return;
     }
-    screenfull.on('change', handler);
-    return () => {
-      screenfull.off('change', handler);
-    };
+    if (screenfull.isEnabled) {
+      screenfull.on('change', handler);
+      return () => {
+        screenfull.off('change', handler);
+      };
+    }
+    return;
   }, [handler, visible]);
 
   return elemProps;
