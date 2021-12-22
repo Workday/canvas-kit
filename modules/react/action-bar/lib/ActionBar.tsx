@@ -13,7 +13,7 @@ type PropertyPosition =
   | 'static'
   | 'sticky';
 
-export interface ActionBarProps {
+interface ActionBarProps {
   /**
    * Sets the position for the container
    * @default "fixed"
