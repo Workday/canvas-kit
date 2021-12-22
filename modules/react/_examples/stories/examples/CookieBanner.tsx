@@ -13,9 +13,7 @@ const CookieBannerItem = createComponent('div')({
 
 const CookieBanner = createComponent('div')({
   displayName: 'CookieBanner',
-  Component: (props: CookieBannerProps, ref, Element) => (
-    <Banner ref={ref} as={Element} {...props} />
-  ),
+  Component: (props: BannerProps, ref, Element) => <Banner ref={ref} as={Element} {...props} />,
   subComponents: {Item: CookieBannerItem},
 });
 
@@ -36,11 +34,11 @@ export const Basic = () => {
   );
 };
 
-interface CookieBannerProps extends StyledType {
+interface BannerProps {
   isClosed?: boolean;
 }
 
-interface ItemProps extends StyledType {
+interface ItemProps {
   isRow?: boolean;
 }
 
@@ -50,7 +48,7 @@ const ExampleContainer = styled('div')({
   position: 'relative',
 });
 
-const Banner = styled('div')(
+const Banner = styled('div')<BannerProps & StyledType>(
   type.levels.subtext.medium,
   {
     backgroundColor: commonColors.background,
@@ -73,10 +71,10 @@ const Banner = styled('div')(
       padding: `${space.s} 0`,
     },
   },
-  ({isClosed}: Pick<CookieBannerProps, 'isClosed'>) => isClosed && {transform: 'translateY(100%)'}
+  ({isClosed}) => isClosed && {transform: 'translateY(100%)'}
 );
 
-const BannerItem = styled('div')(
+const BannerItem = styled('div')<ItemProps & StyledType>(
   {
     marginLeft: space.s,
     marginRight: space.s,
@@ -89,7 +87,7 @@ const BannerItem = styled('div')(
       },
     },
   },
-  ({isRow}: Pick<ItemProps, 'isRow'>) =>
+  ({isRow}) =>
     isRow && {
       display: 'flex',
       '> *': {
