@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v6.1.5](https://github.com/Workday/canvas-kit/releases/tag/v6.1.5) (2021-12-22)
+
+### Documentation
+
+- docs: Add CookieBanner example ([#1402](https://github.com/Workday/canvas-kit/pull/1402)) ([@RayRedGoose](https://github.com/RayRedGoose))
+
+
 ## [v6.1.4](https://github.com/Workday/canvas-kit/releases/tag/v6.1.4) (2021-12-17)
 
 ### Documentation
