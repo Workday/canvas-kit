@@ -36,6 +36,7 @@ export const useTransferOnFullscreenExit = (model: PopupModel, elemProps = {}) =
         screenfull.off('change', handler);
       };
     }
+    return;
   }, [handler, visible]);
 
   return elemProps;
