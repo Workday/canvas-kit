@@ -474,14 +474,16 @@ let element: HTMLElement | null = null;
 // Where should this go? Each version of `PopupStack` on a page will add a listener. The
 // `PopupStack` should guard against multiple handlers like this simultaneously and there is no
 // lifecycle here.
-screenfull.on('change', () => {
-  if (screenfull.isFullscreen) {
-    if (screenfull.element) {
-      element = screenfull.element as HTMLElement;
-      PopupStack.pushStackContext(element);
+if (screenfull.isEnabled) {
+  screenfull.on('change', () => {
+    if (screenfull.isFullscreen) {
+      if (screenfull.element) {
+        element = screenfull.element as HTMLElement;
+        PopupStack.pushStackContext(element);
+      }
+    } else if (element) {
+      PopupStack.popStackContext(element);
     }
-  } else if (element) {
-    PopupStack.popStackContext(element);
-  }
-  console.log('change', screenfull.isFullscreen, stacks.length);
-});
+    console.log('change', screenfull.isFullscreen, stacks.length);
+  });
+}
