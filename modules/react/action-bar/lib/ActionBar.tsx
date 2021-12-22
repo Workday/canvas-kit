@@ -1,7 +1,8 @@
 import * as React from 'react';
-import {createComponent, styled, StyledType} from '@workday/canvas-kit-react/common';
-import {commonColors, colors, space, depth} from '@workday/canvas-kit-react/tokens';
 import {Globals} from 'csstype';
+import {createComponent, styled, StyledType} from '@workday/canvas-kit-react/common';
+import {commonColors, colors, space} from '@workday/canvas-kit-react/tokens';
+import {HStack, HStackProps} from '@workday/canvas-kit-labs-react';
 
 type PropertyPosition =
   | Globals
@@ -12,44 +13,43 @@ type PropertyPosition =
   | 'static'
   | 'sticky';
 
-export type ActionBarProps = StyledType & {
+export interface ActionBarProps {
   /**
    * Sets the position for the container
    * @default "fixed"
    */
   position?: PropertyPosition;
-};
+}
 
-const ActionBarContainer = styled('div')<ActionBarProps>(
-  {
-    background: commonColors.background,
-    borderTop: `solid 1px ${colors.soap400}`,
-    boxSizing: 'border-box',
-    display: 'flex',
-    position: 'fixed',
-    left: 0,
-    bottom: 0,
-    right: 0,
-    padding: `${space.s} ${space.xl} `,
-    ...depth[1],
-    '> *:not(:last-of-type)': {
-      marginRight: space.s,
+const ResponsiveHStack = styled(HStack)<HStackProps & StyledType>(({theme}) => ({
+  [theme.canvas.breakpoints.down('s')]: {
+    padding: space.s,
+    '> *:not(div)': {
+      flex: 1,
     },
   },
-  ({theme}) => ({
-    [theme.canvas.breakpoints.down('s')]: {
-      padding: space.s,
-      '> *:not(div)': {
-        flex: 1,
-      },
-    },
-  }),
-  ({position}) => ({position})
-);
+}));
+
+const containerStyles: Omit<HStackProps, 'spacing'> = {
+  background: commonColors.background,
+  borderTop: `solid 1px ${colors.soap400}`,
+  bottom: 0,
+  depth: 1,
+  left: 0,
+  padding: `${space.s} ${space.xl} `,
+  width: '100%',
+};
 
 export const ActionBar = createComponent('div')({
   displayName: 'ActionBar',
-  Component: (props: ActionBarProps, ref, Element) => (
-    <ActionBarContainer ref={ref} as={Element} {...props} />
+  Component: ({position = 'fixed', ...elProps}: ActionBarProps, ref, Element) => (
+    <ResponsiveHStack
+      ref={ref}
+      as={Element}
+      position={position}
+      spacing="s"
+      {...containerStyles}
+      {...elProps}
+    />
   ),
 });
