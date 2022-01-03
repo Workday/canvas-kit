@@ -216,7 +216,7 @@ filters out multiple calls to push the same element as a new stack context.
 PopupStack.popStackContext(element: HTMLElement): void
 ```
 
-Remove the topmost stack context. The the stack context will only be removed if the top stack
+Remove the topmost stack context. The stack context will only be removed if the top stack
 context container element matches to guard against accidental remove of other stack contexts you
 don't own.
 

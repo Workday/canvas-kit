@@ -397,7 +397,7 @@ export const PopupStack = {
   },
 
   /**
-   * Remove the topmost stack context. The the stack context will only be removed if the top stack
+   * Remove the topmost stack context. The stack context will only be removed if the top stack
    * context container element matches to guard against accidental remove of other stack contexts
    * you don't own.
    */
@@ -484,6 +484,5 @@ if (screenfull.isEnabled) {
     } else if (element) {
       PopupStack.popStackContext(element);
     }
-    console.log('change', screenfull.isFullscreen, stacks.length);
   });
 }
