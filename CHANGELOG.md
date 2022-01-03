@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v5.3.7](https://github.com/Workday/canvas-kit/releases/tag/v5.3.7) (2022-01-03)
+
+### Components
+
+- fix(popup-stack): Add support for the fullscreen API ([#1403](https://github.com/Workday/canvas-kit/pull/1403)) ([@NicholasBoll](https://github.com/NicholasBoll))
+  Fullscreen support was added to all Popups. 3 new hooks were added to help support fullscreen in whatever way you see fit:
+  - `useTransferOnFullscreenEnter`: Use if your popup should remain open and be transfer into the fullscreen element
+  - `useTransferOnFullscreenExit`: Use if your popup should remain open and transfer out of the fullscreen element back to the body element
+  - `useCloseOnFullscreenExit`: Use if your popup should close when fullscreen is exited
+
 ## [v6.1.5](https://github.com/Workday/canvas-kit/releases/tag/v6.1.5) (2021-12-22)
 
 ### Documentation

@@ -8,6 +8,7 @@ import {
   usePopupModel,
   useAlwaysCloseOnOutsideClick,
   useCloseOnEscape,
+  useTransferOnFullscreenExit,
 } from '@workday/canvas-kit-react/popup';
 
 const ContextMenuTarget = createComponent('div')({
@@ -40,6 +41,7 @@ export const ContextMenu = () => {
 
   useAlwaysCloseOnOutsideClick(model);
   useCloseOnEscape(model);
+  useTransferOnFullscreenExit(model);
 
   return (
     <Popup model={model}>
