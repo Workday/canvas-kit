@@ -6,7 +6,7 @@
   "license": "Apache-2.0",
   "main": "dist/commonjs/index.js",
   "module": "dist/es6/index.js",
-  "sideEffects": false,
+  "sideEffects": true,
   "types": "dist/es6/index.d.ts",
   "repository": {
     "type": "git",
@@ -41,5 +41,8 @@
     "canvas-kit",
     "workday",
     "popup-stack"
-  ]
+  ],
+  "dependencies": {
+    "screenfull": "^5.2.0"
+  }
 }
