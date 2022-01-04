@@ -7,24 +7,14 @@ interface ActionBarProps extends Omit<HStackProps, 'spacing'> {
   spacing?: StackSpacing;
 }
 
-const ResponsiveHStack = styled(HStack)<HStackProps & StyledType>(
-  {
-    background: commonColors.background,
-    borderTop: `solid 1px ${colors.soap400}`,
-    bottom: 0,
-    left: 0,
-    padding: `${space.s} ${space.xl} `,
-    width: '100%',
-  },
-  ({theme}) => ({
-    [theme.canvas.breakpoints.down('s')]: {
-      padding: space.s,
-      '> *:not(div)': {
-        flex: 1,
-      },
+const ResponsiveHStack = styled(HStack)<HStackProps & StyledType>(({theme}) => ({
+  [theme.canvas.breakpoints.down('s')]: {
+    padding: space.s,
+    '> *:not(div)': {
+      flex: 1,
     },
-  })
-);
+  },
+}));
 
 export const ActionBar = createComponent('div')({
   displayName: 'ActionBar',
@@ -32,9 +22,15 @@ export const ActionBar = createComponent('div')({
     <ResponsiveHStack
       ref={ref}
       as={Element}
-      position="fixed"
       spacing="s"
       depth={1}
+      background={commonColors.background}
+      borderTop={`solid 1px ${colors.soap400}`}
+      padding={`${space.s} ${space.xl} `}
+      position="fixed"
+      bottom={0}
+      left={0}
+      width={'100%'}
       {...elemProps}
     />
   ),
