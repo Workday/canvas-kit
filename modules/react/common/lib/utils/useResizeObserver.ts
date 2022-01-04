@@ -15,6 +15,7 @@ export const useResizeObserver: typeof useResizeObserverOriginal = (params = {})
   const heightRef = React.useRef<number | undefined>();
   const onResize = params.onResize
     ? (data: {width: number | undefined; height: number | undefined}) => {
+        console.log('resize', data.width, data.height);
         if (widthRef.current !== data.width || heightRef.current !== data.height) {
           widthRef.current = data.width;
           heightRef.current = data.height;

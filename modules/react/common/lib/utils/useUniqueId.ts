@@ -1,8 +1,14 @@
-import uuid from 'uuid/v4';
-
 import {useConstant} from './useConstant';
 
-export const generateUniqueId = () => uuid().replace(/^[0-9\-]*/gi, '');
+// Create a unique seed per import to prevent collisions from other versions of `useUniqueId`
+const seed = Math.random()
+  .toString(36)
+  .slice(2)
+  .replace(/[0-9]*/, '')
+  .substr(0, 4);
+let c = 0;
+
+export const generateUniqueId = () => seed + (c++).toString(36);
 
 /**
  * Generate a unique ID if one is not provided. The generated ID will be stable across renders

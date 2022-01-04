@@ -25,7 +25,7 @@ Cypress.Commands.overwrite('visit', (originalFn, url, options = {}) => {
     url = options.url;
   }
 
-  return originalFn(url, {
+  return (originalFn as any)(url, {
     ...options,
     onBeforeLoad(win: Window) {
       options.onBeforeLoad?.(win);
@@ -121,8 +121,8 @@ function isKeyOf<T>(obj: T, key: any): key is keyof T {
 
 Cypress.Commands.overwrite('should', (originalFn, subject, expectation, ...args) => {
   const customMatchers = {
-    'have.ariaDescription': haveAriaDescription(args[0]),
-    'have.ariaLabel': haveAriaLabel(args[0]),
+    'have.ariaDescription': haveAriaDescription(args[0] as any),
+    'have.ariaLabel': haveAriaLabel(args[0] as any),
   };
   // See if the expectation is a string and if it is a member of Jest's expect
   if (isKeyOf(customMatchers, expectation)) {

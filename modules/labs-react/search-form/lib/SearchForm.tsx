@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {CSSObject} from '@emotion/core';
 import {colors, space, spaceNumbers} from '@workday/canvas-kit-react/tokens';
-import {GrowthBehavior, styled} from '@workday/canvas-kit-react/common';
+import {GrowthBehavior, styled, generateUniqueId} from '@workday/canvas-kit-react/common';
 import {IconButton, IconButtonProps} from '@workday/canvas-kit-react/button';
 import {searchIcon, xIcon} from '@workday/canvas-system-icons-web';
 import {FormField, FormFieldLabelPosition} from '@workday/canvas-kit-react/form-field';
@@ -10,7 +10,6 @@ import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {MenuItemProps} from '@workday/canvas-kit-preview-react/menu';
 import {SearchThemeAttributes, searchThemes, SearchTheme} from './themes';
 import chroma from 'chroma-js';
-import uuid from 'uuid/v4';
 
 export interface SearchFormProps extends GrowthBehavior, React.FormHTMLAttributes<HTMLFormElement> {
   /**
@@ -293,7 +292,7 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
 
   private inputRef = React.createRef<HTMLInputElement>();
   private openRef = React.createRef<HTMLButtonElement>();
-  private labelId = uuid();
+  private labelId = generateUniqueId();
 
   state: Readonly<SearchFormState> = {
     showForm: false,

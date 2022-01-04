@@ -5,13 +5,13 @@ describe('Tabs', () => {
     h.stories.visit();
   });
 
-  ['Basic', 'Named Tabs'].forEach(story => {
+  ['Basic'].forEach(story => {
     context(`given the [Components/Containers/Tabs/React, ${story}] story is rendered`, () => {
       beforeEach(() => {
         h.stories.load('Components/Containers/Tabs/React', story);
       });
 
-      it('should pass axe checks', () => {
+      it.only('should pass axe checks', () => {
         cy.checkA11y();
       });
 
