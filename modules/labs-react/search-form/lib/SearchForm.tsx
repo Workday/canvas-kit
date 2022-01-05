@@ -472,6 +472,7 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
                 inputColors={this.getThemeColors()}
                 height={height}
                 name="search"
+                autocomplete="off"
               />
             </SearchCombobox>
           </SearchField>
