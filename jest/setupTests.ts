@@ -6,6 +6,8 @@ import '@testing-library/jest-dom/extend-expect';
 import {verifyComponent} from './verifyComponent';
 import {jest} from '@jest/globals';
 
+import {setUniqueSeed, resetUniqueIdCount} from '@workday/canvas-kit-react/common';
+
 expect.addSnapshotSerializer(serializer);
 expect.extend(toHaveNoViolations);
 expect.extend(matchers);
@@ -14,3 +16,8 @@ configure({adapter: new Adapter()});
 // add convenience variables to the global context
 (global as any).verifyComponent = verifyComponent;
 (global as any).jest = jest;
+
+beforeEach(() => {
+  setUniqueSeed('a');
+  resetUniqueIdCount();
+});

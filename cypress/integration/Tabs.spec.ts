@@ -11,7 +11,7 @@ describe('Tabs', () => {
         h.stories.load('Components/Containers/Tabs/React', story);
       });
 
-      it.only('should pass axe checks', () => {
+      it('should pass axe checks', () => {
         cy.checkA11y();
       });
 
