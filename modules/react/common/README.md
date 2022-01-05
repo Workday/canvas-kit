@@ -17,6 +17,9 @@ Includes:
 - [Component Functions](#component-functions)
   - [createComponent](#createcomponent)
   - [ExtractProps](#extractprops)
+- [Common Hooks](#common-hooks)
+  - [useUniqueId](#useuniqueid)
+- [Utility Functions](#utility-functions)
 
 ## CanvasProvider
 
@@ -369,3 +372,78 @@ const MyNewComponent = createComponent('aside')(
 
 If the component is a `Component` and not an `ElementComponent`, only the prop interface will ever
 be returned since there is not HTML attribute interface associated with `Component`.
+
+## Common Hooks
+
+### useUniqueId
+
+A hook to generate a unique identifier for an element. Most commonly used for accessibility. The
+hook will generate a unique id the first render and always return the same id every render. This
+uses [generateUniqueId](#generateuniqueid) internally.
+
+```tsx
+const MyComponent = () => {
+  const id = useUniqueId();
+
+  return <div id={id}>Hello!</div>;
+};
+```
+
+If you wish to support user-defined ids, `useUniqueId` allows an optional id to override. This
+provides a safe and easy way of handling id overrides without conditional hooks.
+
+```tsx
+const MyComponent = ({id}) => {
+  const localId = useUniqueId(id);
+
+  return <div id={localId}>Hello!</div>;
+};
+```
+
+## Utility Functions
+
+### generateUniqueId
+
+Generates a unique and HTML5 compliant identifier every time it is called. Internally it uses a 4
+character random seed starting with a letter. This seed is unique to each instance of this package
+meaning different versions of Canvas Kit on the page will have a different seed. Each call will use
+a Base 36 string (10 numbers + 26 letters) based on an incremented number. The incremented number
+always starts at 0 and can be reset for testing purposes using
+[resetUniqueIdCount](#resetuniqueidcount). [setUniqueSeed](#setuniqueseed) can also be used for
+testing or server side rendering to get the same results during hydration.
+
+```ts
+const id1 = generateUniqueId(); // vi1e0
+const id2 = generateUniqueId(); // vi1e1
+```
+
+### setUniqueSeed
+
+Update the seed used by the id generator. This is useful for snapshot tests to help stabilize ids
+generated each run. This could also be used for server-side hydration - if you choose the same seed
+for server and set that on the client before components are rendered, the ids generated will be the
+same.
+
+For snapshot testing, this will help stabilize snapshot tests. Use in conjunction with
+[resetUniqueIdCount](#resetuniqueidcount).
+
+```ts
+// set in a script tag from the server
+setUniqueSeed(window.__ID_SEED); // set in a script tag from the server
+
+// jest setup
+before(() => {
+  setUniqueSeed('a');
+});
+```
+
+### resetUniqueIdCount
+
+This should only be called for tests in `beforeEach` for snapshot tests. Use in conjunction with
+[setUniqueSeed](#setuniqueseed).
+
+```ts
+beforeEach(() => {
+  resetUniqueIdCount();
+});
+```

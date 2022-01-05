@@ -19,15 +19,17 @@ Cypress.Commands.add('injectAxe', () => {
 });
 
 // Needed for https://github.com/Bkucera/cypress-plugin-tab/issues/46
-Cypress.Commands.overwrite('visit', (originalFn, url, options = {}) => {
-  if (typeof url === 'object') {
-    // eslint-disable-next-line no-param-reassign
-    url = options.url;
+Cypress.Commands.overwrite('visit', (originalFn, urlOrOptions, inputOptions = {}) => {
+  let options: typeof urlOrOptions;
+  if (typeof urlOrOptions === 'object') {
+    options = urlOrOptions;
+  } else {
+    options = {url: urlOrOptions, ...inputOptions};
   }
 
-  return (originalFn as any)(url, {
+  return originalFn({
     ...options,
-    onBeforeLoad(win: Window) {
+    onBeforeLoad(win) {
       options.onBeforeLoad?.(win);
       supports(); // prime the ally.js supports cache so it doesn't mess with the cypress-plugin-tab
     },
@@ -35,8 +37,15 @@ Cypress.Commands.overwrite('visit', (originalFn, url, options = {}) => {
 });
 
 // Add better logging to cy.tab
-Cypress.Commands.overwrite('tab', (originalFn, subject, options) => {
-  const prevSubject = cy.$$(subject || (cy as any).state('window').document.activeElement);
+Cypress.Commands.overwrite<'tab', 'element'>('tab', (originalFn, subject, options) => {
+  // Lots of `any` overrides:
+
+  // (cy.$$ as any) - according to the types, `cy.$$` can only take a string which isn't true.
+  // jQuery can wrap elements directly as well. Source:
+  // https://github.com/cypress-io/cypress/blob/df5687c65d82e0591256df2dea727e5680baeb82/cli/types/cypress.d.ts#L2285
+
+  // (cy as any).state - `cy.state` doesn't have any types since it is considered private.
+  const prevSubject = (cy.$$ as any)(subject || (cy as any).state('window').document.activeElement);
 
   const log = Cypress.log({
     $el: prevSubject,
@@ -49,16 +58,20 @@ Cypress.Commands.overwrite('tab', (originalFn, subject, options) => {
 
   log.snapshot('before', {next: 'after'});
 
-  return Cypress.Promise.try(() => {
-    return originalFn(subject, options);
-  })
-    .then(value => {
-      log.set('$el', value).snapshot();
-      return Cypress.$(value);
+  return (
+    Cypress.Promise.try(() => {
+      return originalFn(subject, options);
     })
-    .finally(() => {
-      log.end();
-    });
+      // Cypress types are wrong and think `value` is a `Cypress.Chainable<Subject>` instead of `Subject`
+      // https://github.com/cypress-io/cypress/pull/19003
+      .then((value: any) => {
+        log.set('$el', value).snapshot();
+        return Cypress.$(value);
+      })
+      .finally(() => {
+        log.end();
+      }) as any
+  );
 });
 
 declare global {
@@ -119,15 +132,18 @@ function isKeyOf<T>(obj: T, key: any): key is keyof T {
   return typeof key === 'string' && key in obj;
 }
 
-Cypress.Commands.overwrite('should', (originalFn, subject, expectation, ...args) => {
-  const customMatchers = {
-    'have.ariaDescription': haveAriaDescription(args[0] as any),
-    'have.ariaLabel': haveAriaLabel(args[0] as any),
-  };
-  // See if the expectation is a string and if it is a member of Jest's expect
-  if (isKeyOf(customMatchers, expectation)) {
-    return originalFn(subject, customMatchers[expectation]);
-  }
+Cypress.Commands.overwrite<'should', 'element'>(
+  'should',
+  (originalFn, subject, expectation, ...args) => {
+    const customMatchers = {
+      'have.ariaDescription': haveAriaDescription(args[0]),
+      'have.ariaLabel': haveAriaLabel(args[0]),
+    };
+    // See if the expectation is a string and if it is a member of Jest's expect
+    if (isKeyOf(customMatchers, expectation)) {
+      return (originalFn as any)(subject, customMatchers[expectation]);
+    }
 
-  return originalFn(subject, expectation, ...args);
-});
+    return originalFn(subject, expectation, ...args);
+  }
+);

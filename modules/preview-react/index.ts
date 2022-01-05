@@ -6,3 +6,5 @@ export * from './select';
 export * from './side-panel';
 export * from './text-area';
 export * from './text-input';
+
+/// <reference types="@types/node" />
