@@ -4,7 +4,7 @@ import {
   useAlwaysCloseOnOutsideClick,
   usePopupModel,
 } from '@workday/canvas-kit-react/popup';
-import {useUniqueId} from '../../common';
+import {useUniqueId} from '@workday/canvas-kit-react/common';
 
 const useIntentTimer = (fn: Function, waitMs: number = 0): {start(): void; clear(): void} => {
   const timer = React.useRef() as React.MutableRefObject<number | undefined>;

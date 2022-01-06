@@ -17,6 +17,7 @@ configure({adapter: new Adapter()});
 (global as any).verifyComponent = verifyComponent;
 (global as any).jest = jest;
 
+// Not necessary for our tests, but demonstrate how to have stable ids for jest snapshots
 beforeEach(() => {
   setUniqueSeed('a');
   resetUniqueIdCount();

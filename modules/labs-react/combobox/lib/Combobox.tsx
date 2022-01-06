@@ -5,7 +5,7 @@ import {
   useForkRef,
   styled,
   useIsRTL,
-  generateUniqueId,
+  useUniqueId,
 } from '@workday/canvas-kit-react/common';
 import {space, commonColors, borderRadius} from '@workday/canvas-kit-react/tokens';
 import {MenuItemProps} from '@workday/canvas-kit-preview-react/menu';
@@ -205,8 +205,8 @@ const Combobox = ({
 
   const comboboxRef: React.RefObject<HTMLDivElement> = useRef(null);
 
-  const [randomComponentId] = React.useState(generateUniqueId); // https://codesandbox.io/s/p2ndq
-  const [randomLabelId] = React.useState(generateUniqueId);
+  const randomComponentId = useUniqueId();
+  const randomLabelId = useUniqueId();
 
   const componentId = id || randomComponentId;
   const formLabelId = labelId || randomLabelId;
