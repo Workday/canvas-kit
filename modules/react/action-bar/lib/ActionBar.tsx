@@ -30,7 +30,7 @@ export const ActionBar = createComponent('div')({
       position="fixed"
       bottom={0}
       left={0}
-      width={'100%'}
+      right={0}
       {...elemProps}
     />
   ),
