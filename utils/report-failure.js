@@ -1,7 +1,8 @@
 #!/usr/bin/env node
+// @ts-check
 'use strict';
 
-const request = require('request');
+const fetch = require('node-fetch').default;
 
 const {
   SLACK_WEBHOOK,
@@ -10,25 +11,23 @@ const {
   TRAVIS_BUILD_URL = 'https://travis-ci.org/Workday/canvas-kit/branches',
 } = process.env;
 
-request.post(
-  SLACK_WEBHOOK,
-  {
-    json: {
-      attachments: [
-        {
-          fallback: `${TRAVIS_BRANCH} build failure`,
-          color: 'danger',
-          title_name: `${TRAVIS_BRANCH} build failure`,
-          title_link: TRAVIS_BUILD_URL,
-          text: `\`\`\`${TRAVIS_TEST_RESULT}\`\`\`\n`,
-          ts: Date.now(),
-        },
-      ],
-    },
-  },
-  (error, response, body) => {
-    if (error) {
-      throw error;
-    }
+fetch(SLACK_WEBHOOK, {
+  method: 'post',
+  headers: {'Content-Type': 'application/json'},
+  body: JSON.stringify({
+    attachments: [
+      {
+        fallback: `${TRAVIS_BRANCH} build failure`,
+        color: 'danger',
+        title_name: `${TRAVIS_BRANCH} build failure`,
+        title_link: TRAVIS_BUILD_URL,
+        text: `\`\`\`${TRAVIS_TEST_RESULT}\`\`\`\n`,
+        ts: Date.now(),
+      },
+    ],
+  }),
+}).then(response => {
+  if (!response.ok) {
+    throw new Error(`HTTP Error Response: ${response.status} ${response.statusText}`);
   }
-);
+});

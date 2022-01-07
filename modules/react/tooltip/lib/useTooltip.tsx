@@ -1,10 +1,10 @@
 import * as React from 'react';
-import uuid from 'uuid/v4';
 import {
   useCloseOnEscape,
   useAlwaysCloseOnOutsideClick,
   usePopupModel,
 } from '@workday/canvas-kit-react/popup';
+import {useUniqueId} from '@workday/canvas-kit-react/common';
 
 const useIntentTimer = (fn: Function, waitMs: number = 0): {start(): void; clear(): void} => {
   const timer = React.useRef() as React.MutableRefObject<number | undefined>;
@@ -90,7 +90,7 @@ export function useTooltip<T extends Element = Element>({
   const mouseDownRef = React.useRef(false); // use to prevent newly focused from making tooltip flash
   const popupModel = usePopupModel();
   const [anchorElement, setAnchorElement] = React.useState<T | null>(null);
-  const [id] = React.useState(() => uuid());
+  const id = useUniqueId();
   const intentTimerHide = useIntentTimer(popupModel.events.hide, hideDelay);
   const intentTimerShow = useIntentTimer(popupModel.events.show, showDelay);
 
