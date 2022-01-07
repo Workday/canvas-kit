@@ -3,6 +3,7 @@ import {
   useCloseOnEscape,
   useAlwaysCloseOnOutsideClick,
   usePopupModel,
+  useCloseOnFullscreenExit,
 } from '@workday/canvas-kit-react/popup';
 import {useUniqueId} from '@workday/canvas-kit-react/common';
 
@@ -126,6 +127,7 @@ export function useTooltip<T extends Element = Element>({
 
   useCloseOnEscape(popupModel);
   useAlwaysCloseOnOutsideClick(popupModel);
+  useCloseOnFullscreenExit(popupModel);
 
   const visible = popupModel.state.visibility !== 'hidden';
 
