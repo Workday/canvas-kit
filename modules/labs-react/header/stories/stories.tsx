@@ -1,4 +1,5 @@
 /// <reference path="../../../../typings.d.ts" />
+/** @jsxRuntime classic */
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
 import styled from '@emotion/styled';

@@ -1,3 +1,4 @@
+/** @jsxRuntime classic */
 /** @jsx jsx */
 import {css, jsx} from '@emotion/core';
 import {IconButton, IconButtonProps} from '@workday/canvas-kit-react/button';

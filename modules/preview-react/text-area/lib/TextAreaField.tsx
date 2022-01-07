@@ -1,3 +1,4 @@
+/** @jsxRuntime classic */
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
 
@@ -8,12 +9,17 @@ import {
   spaceNumbers,
   type,
 } from '@workday/canvas-kit-react/tokens';
-import {createComponent, ExtractProps, useModelContext, useTheme} from '@workday/canvas-kit-react/common';
+import {
+  createComponent,
+  ExtractProps,
+  useModelContext,
+  useTheme,
+} from '@workday/canvas-kit-react/common';
 import {useThemedRing} from '@workday/canvas-kit-labs-react/common';
 import {FormField} from '@workday/canvas-kit-preview-react/form-field';
 
 import {TextAreaModelContext} from './TextArea';
-import { TextAreaModel } from './hooks';
+import {TextAreaModel} from './hooks';
 
 export interface TextAreaFieldProps extends ExtractProps<typeof FormField.Input, never> {
   model?: TextAreaModel;
@@ -66,9 +72,10 @@ export const TextAreaField = createComponent('textarea')({
       <FormField.Input
         as="textarea"
         ref={ref}
-        css={[baseStyles, focusStyles]} {...elemProps}
+        css={[baseStyles, focusStyles]}
+        {...elemProps}
         border={`1px solid ${inputColors.border}`}
-        display='block'
+        display="block"
         backgroundColor={inputColors.background}
         borderRadius={borderRadius.m}
         minHeight={64}

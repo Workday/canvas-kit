@@ -1,3 +1,4 @@
+/** @jsxRuntime classic */
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
 import React from 'react';
@@ -17,14 +18,9 @@ export const Alert = () => {
   );
 
   return (
-    <TextInput orientation='vertical'>
+    <TextInput orientation="vertical">
       <TextInput.Label>Password</TextInput.Label>
-      <TextInput.Field
-        css={alertStyles}
-        onChange={handleChange}
-        value={value}
-        type="password"
-      />
+      <TextInput.Field css={alertStyles} onChange={handleChange} value={value} type="password" />
       <TextInput.Hint paddingTop={space.xxs}>
         <strong>Password Strength: </strong>
         {value.length < 3 ? (

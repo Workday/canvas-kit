@@ -1,8 +1,14 @@
+/** @jsxRuntime classic */
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
 import React from 'react';
 
-import {createComponent, ExtractProps, useModelContext, useTheme} from '@workday/canvas-kit-react/common';
+import {
+  createComponent,
+  ExtractProps,
+  useModelContext,
+  useTheme,
+} from '@workday/canvas-kit-react/common';
 import {space, type} from '@workday/canvas-kit-react/tokens';
 import {Box} from '@workday/canvas-kit-labs-react/common';
 

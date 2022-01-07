@@ -1,3 +1,4 @@
+/** @jsxRuntime classic */
 /** @jsx jsx */
 import * as React from 'react';
 import {styled, useIsRTL} from '@workday/canvas-kit-react/common';

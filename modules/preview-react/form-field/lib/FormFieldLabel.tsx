@@ -1,3 +1,4 @@
+/** @jsxRuntime classic */
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
 import React from 'react';
@@ -42,19 +43,13 @@ const styles: ComponentStyles = {
 
 export const FormFieldLabel = createComponent('label')({
   displayName: 'FormField.Label',
-  Component: ({spacing='xxxs', model, children, ...elemProps}: FormFieldLabelProps, ref) => {
+  Component: ({spacing = 'xxxs', model, children, ...elemProps}: FormFieldLabelProps, ref) => {
     const localModel = useModelContext(FormFieldModelContext, model);
     const props = useFormFieldLabel(localModel, elemProps, ref);
     const theme = useTheme();
 
     return (
-      <HStack
-        as="label"
-        spacing={spacing}
-        css={styles.label}
-        minWidth='180px'
-        {...props}
-      >
+      <HStack as="label" spacing={spacing} css={styles.label} minWidth="180px" {...props}>
         <span>{children}</span>
         {localModel.state.isRequired && (
           <span

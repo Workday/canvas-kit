@@ -1,3 +1,4 @@
+/** @jsxRuntime classic */
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
 import {colors, space, borderRadius} from '@workday/canvas-kit-react/tokens';
