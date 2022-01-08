@@ -2,9 +2,10 @@
 // @ts-check
 'use strict';
 
-const fetch = require('node-fetch').default;
-const {promisify} = require('util');
-const exec = promisify(require('child_process').exec);
+import fetch from 'node-fetch';
+import {promisify} from 'util';
+import * as childProcess from 'child_process';
+const exec = promisify(childProcess.exec);
 
 const {
   SLACK_WEBHOOK,

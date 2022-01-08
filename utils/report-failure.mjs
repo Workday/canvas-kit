@@ -2,7 +2,7 @@
 // @ts-check
 'use strict';
 
-const fetch = require('node-fetch').default;
+import fetch from 'node-fetch';
 
 const {
   SLACK_WEBHOOK,
