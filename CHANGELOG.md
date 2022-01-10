@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v6.2.2](https://github.com/Workday/canvas-kit/releases/tag/v6.2.2) (2022-01-10)
+
+### Infrastructure
+
+- chore: Pin colors to version 1.4.0 ([#1411](https://github.com/Workday/canvas-kit/pull/1411)) ([@Parker-Ledoux](https://github.com/Parker-Ledoux))
+
+
 ## [v6.2.1](https://github.com/Workday/canvas-kit/releases/tag/v6.2.1) (2022-01-07)
 
 ### Components
