@@ -1,6 +1,3 @@
-/** @jsxRuntime classic */
-/** @jsx jsx */
-import {jsx} from '@emotion/core';
 import React from 'react';
 
 import {
@@ -8,8 +5,10 @@ import {
   ExtractProps,
   useModelContext,
   useTheme,
+  styled,
+  StyledType,
 } from '@workday/canvas-kit-react/common';
-import {ComponentStyles} from '@workday/canvas-kit-labs-react/common';
+import {ComponentStyles, Box} from '@workday/canvas-kit-labs-react/common';
 import {type} from '@workday/canvas-kit-react/tokens';
 import {HStack, StackSpacing} from '@workday/canvas-kit-labs-react/layout';
 
@@ -29,17 +28,16 @@ export interface FormFieldLabelProps extends Omit<ExtractProps<typeof HStack, ne
   spacing?: StackSpacing;
 }
 
-const styles: ComponentStyles = {
-  label: {
-    ...type.levels.subtext.large,
-    fontWeight: type.properties.fontWeights.medium,
-  },
-  asterisk: {
-    fontSize: type.properties.fontSizes[16],
-    fontWeight: type.properties.fontWeights.regular,
-    textDecoration: 'unset',
-  },
-};
+const StyledFormFieldLabel = styled('span')({
+  ...type.levels.subtext.large,
+  fontWeight: type.properties.fontWeights.medium,
+});
+
+const StyledAsterisk = styled(Box)<StyledType>({
+  fontSize: type.properties.fontSizes[20],
+  fontWeight: type.properties.fontWeights.regular,
+  textDecoration: 'unset',
+});
 
 export const FormFieldLabel = createComponent('label')({
   displayName: 'FormField.Label',
@@ -49,15 +47,12 @@ export const FormFieldLabel = createComponent('label')({
     const theme = useTheme();
 
     return (
-      <HStack as="label" spacing={spacing} css={styles.label} minWidth="180px" {...props}>
-        <span>{children}</span>
+      <HStack as="label" spacing={spacing} minWidth="180px" {...props}>
+        <StyledFormFieldLabel>{children}</StyledFormFieldLabel>
         {localModel.state.isRequired && (
-          <span
-            css={[styles.asterisk, {color: theme.canvas.palette.error.main}]}
-            aria-hidden="true"
-          >
+          <StyledAsterisk as="span" color={theme.canvas.palette.error.main} aria-hidden="true">
             *
-          </span>
+          </StyledAsterisk>
         )}
       </HStack>
     );
