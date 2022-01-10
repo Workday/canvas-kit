@@ -1,8 +1,5 @@
-/** @jsxRuntime classic */
-/** @jsx jsx */
 import React from 'react';
-import {css, jsx} from '@emotion/core';
-import {styled} from '@workday/canvas-kit-react/common';
+import {styled, StyledType} from '@workday/canvas-kit-react/common';
 import {
   borderRadius,
   colors,
@@ -16,6 +13,7 @@ import {
 import {Breadcrumb} from '../types';
 // local components
 import {DropdownMenuItemLink} from './MenuItemLink';
+import {Box, BoxProps} from '@workday/canvas-kit-labs-react/common';
 
 export interface DropdownMenuProps {
   /**
@@ -52,7 +50,7 @@ export interface DropdownMenuProps {
   toggleActiveItemDown: () => void;
 }
 
-const menuStyles = css({
+const StyledDropdownMenu = styled(Box)<BoxProps & StyledType>({
   ...type.levels.subtext.large,
   ...depth[2],
   backgroundColor: commonColors.background,
@@ -130,10 +128,8 @@ export const DropdownMenu = ({
     }
   };
 
-  console.log('dropdownItems', dropdownItems);
-
   return (
-    <div css={menuStyles}>
+    <StyledDropdownMenu>
       <MenuList {...elemProps}>
         {dropdownItems.map((item, i) => {
           const {index, link, text, ...elemProps} = item;
@@ -151,6 +147,6 @@ export const DropdownMenu = ({
           );
         })}
       </MenuList>
-    </div>
+    </StyledDropdownMenu>
   );
 };

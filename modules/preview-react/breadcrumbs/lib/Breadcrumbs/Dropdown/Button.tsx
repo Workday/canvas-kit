@@ -1,6 +1,4 @@
-/** @jsxRuntime classic */
-/** @jsx jsx */
-import {css, jsx} from '@emotion/core';
+import React from 'react';
 import {IconButton, IconButtonProps} from '@workday/canvas-kit-react/button';
 import {relatedActionsIcon} from '@workday/canvas-system-icons-web';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
@@ -37,14 +35,12 @@ export const DropdownButton = createComponent(IconButton)({
     Element
   ) => {
     const hasPlainVariant = variant === 'plain';
-    // gives the plain icon variant a little extra space between the chevron separators
-    const customStyles = css(hasPlainVariant ? {margin: '0 1px'} : {});
 
     return (
       <Element
         ref={ref}
         type="button"
-        css={customStyles}
+        style={hasPlainVariant ? {margin: '0 1px'} : {}}
         variant={variant}
         icon={buttonIcon}
         color={colors.licorice200}
