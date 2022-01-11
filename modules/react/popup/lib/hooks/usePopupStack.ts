@@ -64,8 +64,9 @@ export const usePopupStack = <E extends HTMLElement>(
         ? target.current || undefined
         : target
       : undefined;
-    PopupStack.add({element: localRef.current!, owner: targetEl});
     const element = localRef.current!;
+
+    PopupStack.add({element: element, owner: targetEl});
     return () => {
       PopupStack.remove(element);
     };

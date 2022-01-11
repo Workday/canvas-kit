@@ -17,7 +17,6 @@ export const useFocusActiveItemElement = <E extends HTMLElement>(
   activeDropdownItemRef: React.RefObject<E>
 ) => {
   useLayoutEffect(() => {
-    console.log('useFocusActiveItem');
     if (activeDropdownItemRef.current) {
       return activeDropdownItemRef.current.focus();
     }

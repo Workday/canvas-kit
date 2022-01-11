@@ -3,6 +3,42 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v6.2.1](https://github.com/Workday/canvas-kit/releases/tag/v6.2.1) (2022-01-07)
+
+### Components
+
+- fix(search-form): Remove default autocomplete ([#1407](https://github.com/Workday/canvas-kit/pull/1407)) ([@sheenasi](https://github.com/sheenasi))
+
+
+## [v6.2.0](https://github.com/Workday/canvas-kit/releases/tag/v6.2.0) (2022-01-03)
+
+### Components
+
+- fix(popup-stack): Add support for the fullscreen API ([#1403](https://github.com/Workday/canvas-kit/pull/1403)) ([@NicholasBoll](https://github.com/NicholasBoll))
+  Fullscreen support was added to all Popups. 3 new hooks were added to help support fullscreen in whatever way you see fit:
+  - `useTransferOnFullscreenEnter`: Use if your popup should remain open and be transfer into the fullscreen element
+  - `useTransferOnFullscreenExit`: Use if your popup should remain open and transfer out of the fullscreen element back to the body element
+  - `useCloseOnFullscreenExit`: Use if your popup should close when fullscreen is exited
+- chore: Add screenful to lockfile ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v5.3.7](https://github.com/Workday/canvas-kit/releases/tag/v5.3.7) (2022-01-03)
+
+### Components
+
+- fix(popup-stack): Add support for the fullscreen API ([#1403](https://github.com/Workday/canvas-kit/pull/1403)) ([@NicholasBoll](https://github.com/NicholasBoll))
+  Fullscreen support was added to all Popups. 3 new hooks were added to help support fullscreen in whatever way you see fit:
+  - `useTransferOnFullscreenEnter`: Use if your popup should remain open and be transfer into the fullscreen element
+  - `useTransferOnFullscreenExit`: Use if your popup should remain open and transfer out of the fullscreen element back to the body element
+  - `useCloseOnFullscreenExit`: Use if your popup should close when fullscreen is exited
+
+## [v6.1.5](https://github.com/Workday/canvas-kit/releases/tag/v6.1.5) (2021-12-22)
+
+### Documentation
+
+- docs: Add CookieBanner example ([#1402](https://github.com/Workday/canvas-kit/pull/1402)) ([@RayRedGoose](https://github.com/RayRedGoose))
+
+
 ## [v6.1.4](https://github.com/Workday/canvas-kit/releases/tag/v6.1.4) (2021-12-17)
 
 ### Documentation
