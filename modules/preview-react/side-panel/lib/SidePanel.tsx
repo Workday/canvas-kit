@@ -1,12 +1,13 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import * as React from 'react';
-import {styled, useIsRTL} from '@workday/canvas-kit-react/common';
+import {styled, useIsRTL, StyledType} from '@workday/canvas-kit-react/common';
 import {css, CSSObject, jsx, keyframes} from '@emotion/core';
 import {IconButton, IconButtonProps} from '@workday/canvas-kit-react/button';
 import {space, colors, depth} from '@workday/canvas-kit-react/tokens';
 import {transformationImportIcon} from '@workday/canvas-system-icons-web';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
+import {Box} from '@workday/canvas-kit-labs-react/common';
 
 export type SidePanelVariant = 'standard' | 'alternate';
 export type SidePanelTransitionStates = 'collapsed' | 'collapsing' | 'expanded' | 'expanding';
@@ -98,7 +99,7 @@ const containerVariantStyle: Record<SidePanelVariant, CSSObject> = {
   },
 };
 
-const Panel = styled('section')<Pick<SidePanelProps, 'as'>>({
+const StyledPanel = styled(Box)<StyledType & Pick<SidePanelProps, 'as'>>({
   overflow: 'hidden',
   position: 'relative',
   boxSizing: 'border-box',
@@ -178,20 +179,15 @@ const SidePanel = ({
   };
 
   return (
-    <Panel
+    <StyledPanel
       as={as}
-      css={[
-        {
-          width: expanded ? expandedWidth : collapsedWidth,
-          maxWidth: expanded ? expandedWidth : collapsedWidth,
-          // mounted.current will be false on the first render, thus you won't get an unwanted animation here
-          // Will animate again if you force a re-render (like in Storybook)
-          animation: touched
-            ? `${expanded ? motion.expand : motion.collapse} 200ms ease-out`
-            : undefined,
-        },
-        containerVariantStyle[variant],
-      ]}
+      width={expanded ? expandedWidth : collapsedWidth}
+      maxWidth={expanded ? expandedWidth : collapsedWidth}
+      backgroundColor={variant === 'alternate' ? colors.frenchVanilla100 : colors.soap100}
+      depth={variant === 'alternate' ? undefined : 3}
+      animation={
+        touched ? `${expanded ? motion.expand : motion.collapse} 200ms ease-out` : undefined
+      }
       onAnimationEnd={handleAnimationEnd}
       onAnimationStart={handleAnimationStart}
       {...elemProps}
@@ -204,7 +200,7 @@ const SidePanel = ({
       >
         {children}
       </SidePanelContext.Provider>
-    </Panel>
+    </StyledPanel>
   );
 };
 

@@ -9,6 +9,7 @@ import {color, ColorStyleProps} from './utils/color';
 import {depth, DepthStyleProps} from './utils/depth';
 import {flexItem, FlexItemStyleProps} from './utils/flexItem';
 import {layout, LayoutStyleProps} from './utils/layout';
+import {other, OtherStyleProps} from './utils/other';
 import {position, PositionStyleProps} from './utils/position';
 import {space, SpaceStyleProps} from './utils/space';
 
@@ -17,6 +18,7 @@ export type BoxProps = BorderStyleProps &
   DepthStyleProps &
   FlexItemStyleProps &
   LayoutStyleProps &
+  OtherStyleProps &
   PositionStyleProps &
   SpaceStyleProps & {
     children?: React.ReactNode;
@@ -37,6 +39,7 @@ const StyledBox = styled('div', {shouldForwardProp})<StyledType & BoxProps>(
   depth,
   flexItem,
   layout,
+  other,
   position,
   space
 );
