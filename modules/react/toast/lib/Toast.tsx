@@ -8,7 +8,7 @@ import {space, colors, type, CanvasColor} from '@workday/canvas-kit-react/tokens
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {checkIcon} from '@workday/canvas-system-icons-web';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {createComponent, ExtractProps, styled} from '@workday/canvas-kit-react/common';
+import {createComponent, ExtractProps, styled, StyledType} from '@workday/canvas-kit-react/common';
 import {Hyperlink, HyperlinkProps} from '@workday/canvas-kit-react/button';
 
 export interface ToastProps extends ExtractProps<typeof Popup.Card, never> {
@@ -67,12 +67,20 @@ const actionButtonStyles = {
   marginTop: space.xxxs,
 };
 
-interface ActionButtonProps extends HyperlinkProps {
-  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+interface ActionButtonProps extends HyperlinkProps, StyledType {
+  onClick: React.MouseEvent<HTMLButtonElement>;
 }
 
+const StyledActionButton = styled(Hyperlink)({
+  ...type.levels.subtext.large,
+  display: 'block',
+  backgroundColor: 'transparent', // To prevent Safari from rendering grey 'buttonface' as bgcolor
+  border: 'none',
+  marginTop: space.xxxs,
+});
+
 const ActionButton = (props: ActionButtonProps) => {
-  return <Hyperlink as="button" css={actionButtonStyles} {...props} />;
+  return <StyledActionButton as="button" {...props} />;
 };
 
 const Message = styled('div')({

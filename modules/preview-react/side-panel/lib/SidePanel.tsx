@@ -89,16 +89,6 @@ const createKeyframes = (from: number | string, to: number | string) => {
   `;
 };
 
-const containerVariantStyle: Record<SidePanelVariant, CSSObject> = {
-  alternate: {
-    backgroundColor: colors.frenchVanilla100,
-    ...depth[3],
-  },
-  standard: {
-    backgroundColor: colors.soap100,
-  },
-};
-
 const StyledPanel = styled(Box)<StyledType & Pick<SidePanelProps, 'as'>>({
   overflow: 'hidden',
   position: 'relative',

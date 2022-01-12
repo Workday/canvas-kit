@@ -4,9 +4,11 @@ import {jsx} from '@emotion/core';
 import * as React from 'react';
 import styled from '@emotion/styled';
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
-import {pickForegroundColor} from '@workday/canvas-kit-react/common';
+import {pickForegroundColor, StyledType} from '@workday/canvas-kit-react/common';
 
 import {colors, type, depth, space, borderRadius} from '@workday/canvas-kit-react/tokens';
+import {Box} from '@workday/canvas-kit-labs-react/common';
+import {Flex} from '@workday/canvas-kit-labs-react/layout';
 
 export default withSnapshotsEnabled({
   title: 'Tokens/Tokens/React',
@@ -20,7 +22,7 @@ const inverseStyle = {
   borderRadius: '4px',
 };
 
-const Card = styled('div')({
+const StyledCard = styled(Box)<StyledType>({
   width: 200,
   height: 200,
   margin: 20,
@@ -31,13 +33,13 @@ const Card = styled('div')({
 });
 
 export const Depth = () => (
-  <div css={{display: 'flex'}}>
-    <Card css={depth.inset}>Depth -1</Card>
-    <Card css={depth['1']}>Depth 1</Card>
-    <Card css={depth['2']}>Depth 2</Card>
-    <Card css={depth['3']}>Depth 3</Card>
-    <Card css={depth['4']}>Depth 4</Card>
-  </div>
+  <Flex>
+    <StyledCard depth="inset">Depth -1</StyledCard>
+    <StyledCard depth={1}>Depth 1</StyledCard>
+    <StyledCard depth={2}>Depth 2</StyledCard>
+    <StyledCard depth={3}>Depth 3</StyledCard>
+    <StyledCard depth={4}>Depth 4</StyledCard>
+  </Flex>
 );
 
 export const Type = () => (
@@ -114,13 +116,13 @@ const SizeLabel = styled('div')({
 export const BorderRadius = () => (
   <React.Fragment>
     {Object.keys(borderRadius).map(size => (
-      <div css={{display: 'flex'}} key={size}>
+      <Flex key={size}>
         <SizeLabel>
           {size}
           <span>({borderRadius[size]})</span>
         </SizeLabel>
         <Shape radius={borderRadius[size]} />
-      </div>
+      </Flex>
     ))}
   </React.Fragment>
 );
@@ -128,13 +130,13 @@ export const BorderRadius = () => (
 export const Space = () => (
   <React.Fragment>
     {Object.keys(space).map(size => (
-      <div css={{display: 'flex'}} key={size}>
+      <Flex key={size}>
         <SizeLabel>
           {size}
           <span>({(space as any)[size]})</span>
         </SizeLabel>
         <Shape size={(space as any)[size]} radius={borderRadius.m} />
-      </div>
+      </Flex>
     ))}
   </React.Fragment>
 );
@@ -197,6 +199,10 @@ const colorNames = Object.keys(colors)
     return collection;
   }, []);
 
+const StyledColors = styled('span')({
+  fontFamily: type.properties.fontFamilies.monospace,
+});
+
 export const Colors = () => (
   <Palettes>
     {colorNames.map(colorName => (
@@ -210,9 +216,7 @@ export const Colors = () => (
           return (
             <Swatch bg={(colors as any)[color]} key={color}>
               <span>{level}00</span>
-              <span css={{fontFamily: type.properties.fontFamilies.monospace}}>
-                {(colors as any)[color]}
-              </span>
+              <StyledColors>{(colors as any)[color]}</StyledColors>
             </Swatch>
           );
         })}
