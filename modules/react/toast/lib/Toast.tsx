@@ -1,6 +1,3 @@
-/** @jsxRuntime classic */
-/** @jsx jsx */
-import {jsx} from '@emotion/core';
 import * as React from 'react';
 
 import {Popup} from '@workday/canvas-kit-react/popup';
@@ -9,7 +6,7 @@ import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {checkIcon} from '@workday/canvas-system-icons-web';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {createComponent, ExtractProps, styled, StyledType} from '@workday/canvas-kit-react/common';
-import {Hyperlink, HyperlinkProps} from '@workday/canvas-kit-react/button';
+import {Hyperlink} from '@workday/canvas-kit-react/button';
 
 export interface ToastProps extends ExtractProps<typeof Popup.Card, never> {
   /**
@@ -57,31 +54,15 @@ const ToastSystemIcon = styled(SystemIcon)({
   alignSelf: 'start',
 });
 
-const {color, ...subTextLargeStyles} = type.levels.subtext.large;
+// const {color} = type.levels.subtext.large;
 
-const actionButtonStyles = {
-  ...subTextLargeStyles,
-  display: 'block',
-  backgroundColor: 'transparent', // To prevent Safari from rendering grey 'buttonface' as bgcolor
-  border: 'none',
-  marginTop: space.xxxs,
-};
-
-interface ActionButtonProps extends HyperlinkProps, StyledType {
-  onClick: React.MouseEvent<HTMLButtonElement>;
-}
-
-const StyledActionButton = styled(Hyperlink)({
+const StyledActionButton = styled(Hyperlink)<StyledType>({
   ...type.levels.subtext.large,
   display: 'block',
   backgroundColor: 'transparent', // To prevent Safari from rendering grey 'buttonface' as bgcolor
   border: 'none',
   marginTop: space.xxxs,
 });
-
-const ActionButton = (props: ActionButtonProps) => {
-  return <StyledActionButton as="button" {...props} />;
-};
 
 const Message = styled('div')({
   wordBreak: 'break-word',
@@ -122,7 +103,11 @@ export const Toast = createComponent('div')({
             {icon && <ToastSystemIcon color={iconColor} colorHover={iconColor} icon={icon} />}
             <Message>
               {children}
-              {onActionClick && <ActionButton onClick={onActionClick}>{actionText}</ActionButton>}
+              {onActionClick && (
+                <StyledActionButton as="button" onClick={onActionClick}>
+                  {actionText}
+                </StyledActionButton>
+              )}
             </Message>
           </ToastContentContainer>
         </Popup.Body>
