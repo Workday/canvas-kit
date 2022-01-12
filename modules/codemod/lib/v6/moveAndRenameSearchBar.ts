@@ -1,4 +1,4 @@
-import {ASTPath, Transform, Identifier, ImportDeclaration, ImportSpecifier} from 'jscodeshift';
+import {ASTPath, Transform, ImportDeclaration, ImportSpecifier} from 'jscodeshift';
 import {
   filterImportSpecifiers,
   renameImportSpecifiers,
