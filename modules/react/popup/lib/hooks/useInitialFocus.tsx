@@ -29,7 +29,9 @@ export const useInitialFocus = (model: PopupModel, elemProps = {}) => {
         'No focusable element was found. Please ensure popup has at least one focusable element'
       );
 
-      changeFocus(element);
+      requestAnimationFrame(() => {
+        changeFocus(element);
+      });
     }
   }, [model.state.initialFocusRef, model.state.stackRef, visible]);
 
