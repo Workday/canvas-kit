@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v5.3.8](https://github.com/Workday/canvas-kit/releases/tag/v5.3.8) (2022-01-13)
+
+### Components
+
+- chore: Add screenful to lockfile ([@NicholasBoll](https://github.com/NicholasBoll))
+- fix(popup): Fix body scrolling using useInitialFocus ([#1415](https://github.com/Workday/canvas-kit/pull/1415)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v5.3.7](https://github.com/Workday/canvas-kit/releases/tag/v5.3.7) (2022-01-03)
 
 ### Components
