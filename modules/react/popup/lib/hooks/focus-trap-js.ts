@@ -1,4 +1,5 @@
 // refactor for v5
+/// <reference types="@types/node" />
 
 const candidateSelectors = [
   'input',
