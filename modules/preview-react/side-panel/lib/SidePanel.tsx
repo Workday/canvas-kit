@@ -220,7 +220,6 @@ const ToggleButton = ({
 
   const useRTLOrigin = () => {
     const isRTL = useIsRTL();
-    console.log('is RTL?', isRTL);
     // if the direction is set to RTl, flip the origin
     if (isRTL) {
       return context.origin === 'left' ? 'right' : 'left';
