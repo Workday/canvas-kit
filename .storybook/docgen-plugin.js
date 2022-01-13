@@ -1,5 +1,7 @@
 const docGen = require('react-docgen-typescript');
-const docGenLoader = require('react-docgen-typescript-loader/dist/generateDocgenCodeBlock.js');
+const {
+  generateDocgenCodeBlock,
+} = require('@storybook/react-docgen-typescript-plugin/dist/generateDocgenCodeBlock.js');
 const ts = require('typescript');
 const path = require('path');
 const tsconfigPath = path.join(__dirname, '../tsconfig.json');
@@ -106,15 +108,15 @@ const processModule = (module, tsProgram) => {
   let source = module._source._value;
   source +=
     '\n' +
-    docGenLoader
-      .default({
-        filename: module.userRequest,
-        source: module.userRequest,
-        componentDocs,
-        docgenCollectionName: 'STORYBOOK_REACT_CLASSES',
-        setDisplayName: true,
-      })
-      .substring(module.userRequest.length) +
+    generateDocgenCodeBlock({
+      filename: module.userRequest,
+      source: module.userRequest,
+      componentDocs,
+      docgenCollectionName: 'STORYBOOK_REACT_CLASSES',
+      setDisplayName: true,
+      savePropValueAsString: true,
+      typePropName: 'type',
+    }).substring(module.userRequest.length) +
     '\n';
   module._source._value = source;
 };
