@@ -15,7 +15,6 @@ const depCheckOptions = {
     'react',
     'react-dom',
     'jest-axe',
-    'jest-emotion',
   ],
 };
 

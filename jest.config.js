@@ -3,6 +3,7 @@ module.exports = {
   setupFilesAfterEnv: ['<rootDir>/jest/setupTests.ts'],
   verbose: true,
   moduleFileExtensions: ['tsx', 'ts', 'js', 'jsx', 'json'],
+  testEnvironment: 'jsdom',
   testMatch: ['**/?(*.)+(spec|test).ts?(x)'],
   testPathIgnorePatterns: ['/cypress/'],
   transformIgnorePatterns: ['<rootDir>/node_modules/'],

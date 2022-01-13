@@ -6,7 +6,7 @@ import {shieldIcon} from '@workday/canvas-accent-icons-web';
 
 describe('Icon component', () => {
   test('Mismatched icon types catches error and returns null', () => {
-    const consoleErrorSpy = spyOn(global.console, 'error');
+    const consoleErrorSpy = jest.spyOn(global.console, 'error');
     render(<Svg src={shieldIcon} type={CanvasIconTypes.System} />);
 
     expect(consoleErrorSpy).toHaveBeenCalled();

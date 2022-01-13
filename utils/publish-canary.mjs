@@ -2,11 +2,10 @@
 // @ts-check
 'use strict';
 
-// process.env.GITHUB_REF = 'refs/heads/prerelease/v5.3';
-
-const request = require('request');
-const {promisify} = require('util');
-const exec = promisify(require('child_process').exec);
+import fetch from 'node-fetch';
+import {promisify} from 'util';
+import * as childProcess from 'child_process';
+const exec = promisify(childProcess.exec);
 
 const {
   SLACK_WEBHOOK,
@@ -35,25 +34,23 @@ if (isPreMajor) {
 }
 
 const slackAnnouncement = attachment => {
-  request.post(
-    SLACK_WEBHOOK,
-    {
-      json: {
-        attachments: [
-          {
-            ...attachment,
-            author_link: BUILD_URL,
-            ts: Date.now(),
-          },
-        ],
-      },
-    },
-    error => {
-      if (error) {
-        throw error;
-      }
+  fetch(SLACK_WEBHOOK, {
+    method: 'post',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      attachments: [
+        {
+          ...attachment,
+          author_link: BUILD_URL,
+          ts: Date.now(),
+        },
+      ],
+    }),
+  }).then(response => {
+    if (!response.ok) {
+      throw new Error(`HTTP Error Response: ${response.status} ${response.statusText}`);
     }
-  );
+  });
 };
 
 exec('git diff --name-only HEAD HEAD^')

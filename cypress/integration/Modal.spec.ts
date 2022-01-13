@@ -127,7 +127,7 @@ describe('Modal', () => {
           });
 
           it('should close the modal', () => {
-            cy.findByRole('dialog', {name: 'Delete Item'}).should('not.be.visible');
+            cy.findByRole('dialog', {name: 'Delete Item'}).should('not.exist');
           });
 
           it('should transfer focus back to the target button', () => {
@@ -143,7 +143,7 @@ describe('Modal', () => {
           });
 
           it('should close the modal', () => {
-            cy.findByRole('dialog', {name: 'Delete Item'}).should('not.be.visible');
+            cy.findByRole('dialog', {name: 'Delete Item'}).should('not.exist');
           });
         });
 
@@ -153,7 +153,7 @@ describe('Modal', () => {
           });
 
           it('should close the modal', () => {
-            cy.findByRole('dialog', {name: 'Delete Item'}).should('not.be.visible');
+            cy.findByRole('dialog', {name: 'Delete Item'}).should('not.exist');
           });
         });
       });
@@ -189,11 +189,11 @@ describe('Modal', () => {
           });
 
           it(`should close the 'Cancel' tooltip`, () => {
-            cy.findByRole('tooltip', {name: 'Not so sure'}).should('not.be.visible');
+            cy.findByRole('tooltip', {name: 'Not so sure'}).should('not.exist');
           });
 
           it(`should close the modal`, () => {
-            cy.findByRole('dialog', {name: 'Open Modal'}).should('not.be.visible');
+            cy.findByRole('dialog', {name: 'Open Modal'}).should('not.exist');
           });
         });
       });
@@ -225,11 +225,11 @@ describe('Modal', () => {
             it(`should close the 'OK' tooltip`, () => {
               cy.findByRole('tooltip', {
                 name: 'Really, Really, Really, Really, Really sure',
-              }).should('not.be.visible');
+              }).should('not.exist');
             });
 
             it(`should close the 'Hidable Popup' popup`, () => {
-              cy.findByRole('dialog', {name: 'Hidable Popup'}).should('not.be.visible');
+              cy.findByRole('dialog', {name: 'Hidable Popup'}).should('not.exist');
             });
 
             it(`should keep the modal open`, () => {
@@ -268,13 +268,13 @@ describe('Modal', () => {
             });
 
             it(`should close the modal`, () => {
-              cy.findByRole('dialog', {name: 'Non-hidable'}).should('not.be.visible');
+              cy.findByRole('dialog', {name: 'Non-hidable'}).should('not.exist');
             });
 
             it(`should close the 'OK' tooltip`, () => {
               cy.findByRole('tooltip', {
                 name: 'Really, Really, Really, Really, Really sure',
-              }).should('not.be.visible');
+              }).should('not.exist');
             });
           });
         });
@@ -518,7 +518,7 @@ describe('Modal', () => {
         });
 
         it('should close the modal', () => {
-          cy.findByRole('dialog', {name: 'Delete Item'}).should('not.be.visible');
+          cy.findByRole('dialog', {name: 'Delete Item'}).should('not.exist');
         });
       });
 
@@ -528,7 +528,7 @@ describe('Modal', () => {
         });
 
         it('should close the modal', () => {
-          cy.findByRole('dialog', {name: 'Delete Item'}).should('not.be.visible');
+          cy.findByRole('dialog', {name: 'Delete Item'}).should('not.exist');
         });
       });
     });
@@ -633,7 +633,7 @@ describe('Modal', () => {
         });
 
         it('should hide the modal', () => {
-          cy.findByRole('dialog', {name: 'Modal'}).should('not.be.visible');
+          cy.findByRole('dialog', {name: 'Modal'}).should('not.exist');
         });
 
         it('should move focus back to the "Open" button', () => {

@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v6.3.0](https://github.com/Workday/canvas-kit/releases/tag/v6.3.0) (2022-01-13)
+
+### Hooks
+
+- feat(common): Remove uuid and update unique id generation ([#1408](https://github.com/Workday/canvas-kit/pull/1408)) ([@NicholasBoll](https://github.com/NicholasBoll))
+  **NOTE for jest snapshots**: This change removes the `uuid` package and instead will generate a one-time client seed and then create auto-incrementing ids. This change will not break UI or automated UI tests. It will break snapshot tests however. Previously, the only way to get stable ids for snapshot tests was to mock the `uuid` module. This was an implementation detail. To make snapshots work again, add the following to your jest setup file:
+  
+  ```ts
+  import {setUniqueSeed, resetUniqueIdCount} from '@workday/canvas-kit-react/common';
+  
+  beforeEach(() => {
+    setUniqueSeed('a'); // force set the seed
+    resetUniqueIdCount(); // reset the unique id count
+  });
+  ```
+  
+  This will ensure each Jest snapshot has ids that look like `a0` and `a1` and will be the same every time the snapshot is run. Do not use these methods in production though - it may lead to inaccessible applications due to IDREF collisions.
+
+### Infrastructure
+
+- ci: Fix scripts ([@NicholasBoll](https://github.com/NicholasBoll))
+- ci: Fix build script calls ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v6.2.3](https://github.com/Workday/canvas-kit/releases/tag/v6.2.3) (2022-01-13)
 
 ### Components
