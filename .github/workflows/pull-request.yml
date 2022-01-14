@@ -47,32 +47,32 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-  #     - uses: actions/setup-node@v2
-  #       with:
-  #         node-version: 14.x
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 14.x
 
-  #     - uses: actions/cache/@v2
-  #       with:
-  #         path: .cache/cypress
-  #         key: ${{ runner.os }}-cypress-cache-version-${{ steps.cypress-version.outputs.version }}
+      - uses: actions/cache/@v2
+        with:
+          path: .cache/cypress
+          key: ${{ runner.os }}-cypress-cache-version-${{ jobs.install.steps.cypress-version.outputs.version }}
 
-  #     - uses: actions/cache@v2
-  #       with:
-  #         path: node_modules
-  #         key: ${{ runner.os }}-node-modules-hash-${{ hashFiles('yarn.lock') }}
+      - uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-modules-hash-${{ hashFiles('yarn.lock') }}
 
-  #     # Keep steps separate for Github Actions annotation matching: https://github.com/actions/setup-node/blob/83c9f7a7df54d6b57455f7c57ac414f2ae5fb8de/src/setup-node.ts#L26-L33
-  #     - name: Lint
-  #       run: yarn lint
+      # Keep steps separate for Github Actions annotation matching: https://github.com/actions/setup-node/blob/83c9f7a7df54d6b57455f7c57ac414f2ae5fb8de/src/setup-node.ts#L26-L33
+      - name: Lint
+        run: yarn lint
 
-  #     - name: Dependency Check
-  #       run: yarn depcheck
+      - name: Dependency Check
+        run: yarn depcheck
 
-  #     - name: Type Check
-  #       run: yarn typecheck
+      - name: Type Check
+        run: yarn typecheck
 
-  #     - name: Unit tests
-  #       run: yarn test
+      - name: Unit tests
+        run: yarn test
 
   build:
     runs-on: ubuntu-latest
@@ -80,29 +80,29 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-  #     - uses: actions/setup-node@v2
-  #       with:
-  #         node-version: 14.x
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 14.x
 
-  #     - uses: actions/cache/@v2
-  #       with:
-  #         path: .cache/cypress
-  #         key: ${{ runner.os }}-cypress-cache-version-${{ steps.cypress-version.outputs.version }}
+      - uses: actions/cache/@v2
+        with:
+          path: .cache/cypress
+          key: ${{ runner.os }}-cypress-cache-version-${{ jobs.install.steps.cypress-version.outputs.version }}
 
-  #     - uses: actions/cache@v2
-  #       with:
-  #         path: node_modules
-  #         key: ${{ runner.os }}-node-modules-hash-${{ hashFiles('yarn.lock') }}
+      - uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-modules-hash-${{ hashFiles('yarn.lock') }}
 
-  #     - name: Build Storybook
-  #       run: yarn build-storybook --quiet
+      - name: Build Storybook
+        run: yarn build-storybook --quiet
 
-  #     - name: Cache Build
-  #       id: build-cache
-  #       uses: actions/cache/@v2
-  #       with:
-  #         path: docs
-  #         key: ${{ runner.os }}-build-${{ github.sha }}
+      - name: Cache Build
+        id: build-cache
+        uses: actions/cache/@v2
+        with:
+          path: docs
+          key: ${{ runner.os }}-build-${{ github.sha }}
 
   visual-test:
     runs-on: ubuntu-latest
@@ -110,35 +110,35 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-  #       with:
-  #         fetch-depth: 0 # Required to retrieve git history
-  #     - uses: actions/setup-node@v2
-  #       with:
-  #         node-version: 14.x
+        with:
+          fetch-depth: 0 # Required to retrieve git history
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 14.x
 
-  #     - uses: actions/cache/@v2
-  #       with:
-  #         path: .cache/cypress
-  #         key: ${{ runner.os }}-cypress-cache-version-${{ steps.cypress-version.outputs.version }}
+      - uses: actions/cache/@v2
+        with:
+          path: .cache/cypress
+          key: ${{ runner.os }}-cypress-cache-version-${{ jobs.install.steps.cypress-version.outputs.version }}
 
-  #     - uses: actions/cache@v2
-  #       with:
-  #         path: node_modules
-  #         key: ${{ runner.os }}-node-modules-hash-${{ hashFiles('yarn.lock') }}
+      - uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-modules-hash-${{ hashFiles('yarn.lock') }}
 
-  #     - name: Restore Build
-  #       uses: actions/cache/@v2
-  #       with:
-  #         path: docs
-  #         key: ${{ runner.os }}-build-${{ github.sha }}
+      - name: Restore Build
+        uses: actions/cache/@v2
+        with:
+          path: docs
+          key: ${{ runner.os }}-build-${{ github.sha }}
 
-  #     - uses: chromaui/action@v1
-  #       with:
-  #         token: ${{ secrets.GITHUB_TOKEN }}
-  #         appCode: dlpro96xybh
-  #         storybookBuildDir: docs
-  #         exitOnceUploaded: false
-  #         exitZeroOnChanges: true
+      - uses: chromaui/action@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          appCode: dlpro96xybh
+          storybookBuildDir: docs
+          exitOnceUploaded: false
+          exitZeroOnChanges: true
 
   integration-test:
     runs-on: ubuntu-latest
@@ -159,7 +159,7 @@ jobs:
       - uses: actions/cache/@v2
         with:
           path: .cache/cypress
-          key: ${{ runner.os }}-cypress-cache-version-${{ steps.cypress-version.outputs.version }}
+          key: ${{ runner.os }}-cypress-cache-version-${{ jobs.install.steps.cypress-version.outputs.version }}
 
       - uses: actions/cache@v2
         with:
