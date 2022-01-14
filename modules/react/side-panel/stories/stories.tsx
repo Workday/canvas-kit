@@ -13,7 +13,8 @@ import {Avatar} from '@workday/canvas-kit-react/avatar';
 import {SidePanel} from '@workday/canvas-kit-react/side-panel';
 import {SidePanelProps} from '../lib/SidePanel';
 
-import {defaultCanvasTheme} from '@workday/canvas-kit-react/common';
+import {defaultCanvasTheme, StyledType} from '@workday/canvas-kit-react/common';
+import {Flex} from '@workday/canvas-kit-labs-react/layout';
 
 export default {
   title: 'Components/Containers/Side Panel/React',
@@ -88,6 +89,16 @@ const AddButton = styled(IconButton)({
   display: 'block',
 });
 
+const StyledListItem = styled(Flex)<StyledType>({
+  display: 'flex',
+  listStyle: 'none',
+  alignItems: 'end',
+  cursor: 'pointer',
+  '&:hover': {
+    backgroundColor: colors.soap300,
+  },
+});
+
 class SidePanelWrapper extends React.Component<SidePanelProps, SidePanelState> {
   public state = {
     open: true,
@@ -114,12 +125,17 @@ class SidePanelWrapper extends React.Component<SidePanelProps, SidePanelState> {
         )}
         {/* TODO replace this with our list component */}
         <UnorderedList>
-          <ListItem css={listItemStyles}>
+          <StyledListItem
+            padding={open ? '15px 24px' : '15px 20px'}
+            marginLeft={open ? '-24px' : 0}
+            marginRight={open ? '-24px' : 0}
+            justifyContent={open ? undefined : 'center'}
+          >
             <span>
               <SystemIcon icon={homeIcon} />
             </span>
             {open && <ListTitle>Home</ListTitle>}
-          </ListItem>
+          </StyledListItem>
           <ListItem css={listItemStyles}>
             <span>
               <SystemIcon icon={starIcon} />
