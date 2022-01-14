@@ -1,4 +1,4 @@
-import {API, FileInfo, Options} from 'jscodeshift';
+import {Transform} from 'jscodeshift';
 // deprecate PageHeader
 import deprecatePageHeader from './deprecatePageHeader';
 // deprecate CookieBanner
@@ -10,7 +10,7 @@ import deprecateHeader from './deprecateHeader';
 // rename CanvasDepthValue
 import renameCanvasDepthValue from './renameCanvasDepthValue';
 
-export default function transformer(file: FileInfo, api: API, options: Options) {
+const transform: Transform = (file, api, options) => {
   // These will run in order. If your transform depends on others, place yours after dependent transforms
   const fixes = [
     deprecatePageHeader,
@@ -21,5 +21,7 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
     renameCanvasDepthValue,
   ];
 
-  return fixes.reduce((source, fix) => fix({...file, source}, api, options), file.source);
-}
+  return fixes.reduce((source, fix) => fix({...file, source}, api, options) as string, file.source);
+};
+
+export default transform;

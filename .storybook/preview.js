@@ -1,4 +1,4 @@
-import {DocsPage, DocsContainer} from '@storybook/addon-docs/blocks';
+import {DocsPage, DocsContainer} from '@storybook/addon-docs';
 import 'cypress-storybook/react';
 import routes from './routes';
 
