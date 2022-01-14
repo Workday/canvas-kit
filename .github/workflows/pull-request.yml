@@ -142,7 +142,7 @@ jobs:
 
   integration-test:
     runs-on: ubuntu-latest
-    needs: 'build'
+    needs: 'install'
     strategy:
       fail-fast: false
       matrix:
