@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v6.3.3](https://github.com/Workday/canvas-kit/releases/tag/v6.3.3) (2022-01-14)
+
+### Test
+
+- test: Remove enzyme ([#1418](https://github.com/Workday/canvas-kit/pull/1418)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v6.3.2](https://github.com/Workday/canvas-kit/releases/tag/v6.3.2) (2022-01-14)
 
 ### Dependencies
