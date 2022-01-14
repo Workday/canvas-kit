@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v6.3.2](https://github.com/Workday/canvas-kit/releases/tag/v6.3.2) (2022-01-14)
+
+### Dependencies
+
+- chore: Remove colors dependency/upgrade dependencies ([#1413](https://github.com/Workday/canvas-kit/pull/1413)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v6.3.1](https://github.com/Workday/canvas-kit/releases/tag/v6.3.1) (2022-01-13)
 
 
