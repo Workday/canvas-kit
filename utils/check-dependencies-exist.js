@@ -11,7 +11,6 @@ const depCheckOptions = {
     '@testing-library/react',
     '@testing-library/react-hooks',
     '@storybook/react',
-    'enzyme',
     'expect-type',
     'react',
     'react-dom',
