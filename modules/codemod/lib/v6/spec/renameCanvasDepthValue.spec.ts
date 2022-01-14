@@ -1,5 +1,5 @@
 import {expectTransformFactory} from './expectTransformFactory';
-import transformer from '../renameCanvasDepthValue';
+import transformer from '../';
 const context = describe;
 
 const expectTransform = expectTransformFactory(transformer);

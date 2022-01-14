@@ -91,12 +91,12 @@ describe('Canvas Kit Deprecate Header Codemod', () => {
     it('should transform type reference identifiers', () => {
       const input = `
         import {Themes} from '@workday/canvas-kit-labs-react/header';
-    
+
         type CustomThemes = Themes;
       `;
       const expected = `
         import {DeprecatedHeaderThemes} from '@workday/canvas-kit-labs-react/header';
-    
+
         type CustomThemes = DeprecatedHeaderThemes;
       `;
 
@@ -106,14 +106,14 @@ describe('Canvas Kit Deprecate Header Codemod', () => {
     it('should transform type interface declaration identifiers', () => {
       const input = `
         import {ThemeAttributes} from '@workday/canvas-kit-labs-react/header';
-    
+
         interface CustomThemeAttributes extends ThemeAttributes {
           specialAttribute?: string;
         }
       `;
       const expected = `
         import {DeprecatedHeaderThemeAttributes} from '@workday/canvas-kit-labs-react/header';
-    
+
         interface CustomThemeAttributes extends DeprecatedHeaderThemeAttributes {
           specialAttribute?: string;
         }
