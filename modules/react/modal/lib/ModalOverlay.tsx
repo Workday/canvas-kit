@@ -47,13 +47,20 @@ const Container = styled('div')<StyledType>({
 // the Modal. The centering container forces a "center" pixel calculation by making sure the width
 // is always an even number
 const CenteringContainer = styled('div')({
-  height: '100vh',
+  maxHeight: '100vh',
   display: 'flex',
   position: 'absolute',
   left: 0,
   top: 0,
   alignItems: 'center',
   justifyContent: 'center',
+
+  // IE11 fix for setting min-height in a flex container
+  ':before': {
+    display: 'block',
+    content: "''",
+    height: '100vh',
+  },
 });
 
 export const ModalOverlay = createComponent('div')({
