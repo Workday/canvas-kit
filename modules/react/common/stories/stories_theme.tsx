@@ -1,6 +1,4 @@
-/** @jsxRuntime classic */
-/** @jsx jsx */
-import {jsx} from '@emotion/core';
+import React from 'react';
 import styled from '@emotion/styled';
 import {storiesOf} from '@storybook/react';
 import {CanvasProvider} from '../index';
@@ -90,6 +88,14 @@ const createSwatch = (name: string, color: string, contrast: string, Component =
   );
 };
 
+const StyledHeaderDefaultTheme = styled('h1')({
+  ...type.levels.heading.medium,
+});
+
+const StyledHeaderCustomTheme = styled('h1')({
+  ...type.levels.heading.medium,
+});
+
 type Palette = keyof CanvasTheme['palette'];
 type Swatch = keyof CanvasThemePalette;
 
@@ -97,7 +103,7 @@ const ThemeDemo = (props: any) => {
   const theme = useTheme();
   return (
     <div>
-      <h1 css={type.levels.heading.medium}>Default Canvas Theme</h1>
+      <StyledHeaderDefaultTheme>Default Canvas Theme</StyledHeaderDefaultTheme>
       <Palettes>
         {Object.keys(theme.canvas.palette).map(name => {
           const palette = theme.canvas.palette[name as Palette] as CanvasThemePalette;
@@ -118,7 +124,7 @@ const ThemeDemo = (props: any) => {
         })}
       </Palettes>
       <hr style={{margin: '80px 0'}} />
-      <h1 css={type.levels.heading.medium}>Custom Theme</h1>
+      <StyledHeaderCustomTheme>Custom Theme</StyledHeaderCustomTheme>
       <CanvasProvider theme={customTheme}>
         <ThemedComponent>Themed Component</ThemedComponent>
       </CanvasProvider>

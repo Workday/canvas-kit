@@ -54,8 +54,6 @@ const ToastSystemIcon = styled(SystemIcon)({
   alignSelf: 'start',
 });
 
-// const {color} = type.levels.subtext.large;
-
 const StyledActionButton = styled(Hyperlink)<StyledType>({
   ...type.levels.subtext.large,
   display: 'block',
