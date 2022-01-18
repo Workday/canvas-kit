@@ -1,0 +1,65 @@
+import {Meta} from '@storybook/addon-docs';
+
+<Meta title="Welcome/Migration Guides/v7.0" />
+
+# Canvas Kit 7.0 Migration Guide
+
+Below are the breaking changes made in Canvas Kit v7. Please
+[reach out](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) if you have
+any questions about the update.
+
+- [Codemod](#codemod)
+- [ActionBar Component Updates](#actionbar-component-updates)
+- [Status Indicator Width](#status-indicator-width)
+
+## Codemod
+
+Please use our [codemod package](https://github.com/Workday/canvas-kit/tree/master/modules/codemod)
+to automatically update your code to work with a majority of the breaking changes in the migration
+from Canvas Kit v6 to v7:
+
+```sh
+> npx @workday/canvas-kit-codemod v7 [path]
+```
+
+> Note: This codemod only works on `.js`, `.jsx`, `.ts`, and `.tsx` extensions. You may need to make
+> some manual changes in other file types (`.json`, `.mdx`, `.md`, etc.).
+
+> Note: You may need to run your linter after executing the codemod, as it's resulting formatting
+> (spacing, quotes, etc.) may not match your project's styling.
+
+**Breaking changes accounted for by this codemod will be marked with a 🤖.**
+
+**Please verify all changes made by the codemod. As a safety precaution, we recommend committing the
+changes from the codemod as a single isolated commit (separate from other changes) so you can
+rollback more easily if necessary.**
+
+[Let us know](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) if you
+encounter any issues or use cases that we've missed. The `@workday/canvas-kit-codemod` package will
+help us maintain additional codemod transforms to make future migrations easier.
+
+## ActionBar Component Updates
+
+We've refactored our ActionBar components to simplify logic.
+
+PR: https://github.com/Workday/canvas-kit/pull/1396
+
+**Changes:**
+
+- Component has been converted to compound component.
+- `fixed` prop has been removed from component.
+- Now ActionBar uses `position` prop to set container position instead `fixed` prop.
+- Fixed position has been set as default if there is not passed `position` prop.
+
+## Status Indicator Width
+
+Status Indicators currently truncate when they reach their max width of `150px`. After receiving
+requests to increase this, we have upped it by 25% to `200px`.
+
+We've also added a prop (`maxWidth`) to configure this if you need to. While this increases
+flexibility, please keep in mind that status text should be short, direct, and preferably a single
+word.
+
+```tsx
+<StatusIndicator label="Slightly Longer Status" type={StatusIndicator.Type.Gray} maxWidth={250} />
+```

@@ -19,7 +19,6 @@ any questions about the update.
   - [Depth Tokens](#depth-tokens)
 - [Theme Breakpoint Updates](#theme-breakpoint-updates)
   - [Action Bar](#action-bar)
-- [Miscellaneous](#miscellaneous)
 
 ## Codemod
 
@@ -365,18 +364,3 @@ will have two effects for this component:
   - This was previously happening only on viewports < 576px wide
 
 These changes in behavior are intentional and expected.
-
-## Miscellaneous
-
-### Status Indicator Width
-
-Status Indicators currently truncate when they reach their max width of `150px`. After receiving
-requests to increase this, we have upped it by 25% to `200px`.
-
-We've also added a prop (`maxWidth`) to configure this if you need to. While this increases
-flexibility, please keep in mind that status text should be short, direct, and preferably a single
-word.
-
-```tsx
-<StatusIndicator label="Slightly Longer Status" type={StatusIndicator.Type.Gray} maxWidth={250} />
-```
