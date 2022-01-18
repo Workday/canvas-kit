@@ -1,5 +1,6 @@
 import React from 'react';
 import {render, getByTestId, act} from '@testing-library/react';
+import * as PopperJS from '@popperjs/core';
 
 import {Popper} from '../';
 
@@ -121,5 +122,16 @@ describe('Popper', () => {
     await act(() => new Promise(requestAnimationFrame));
 
     expect(onFirstUpdate).toHaveBeenCalledTimes(1);
+  });
+
+  it('should forward the popperInstanceRef prop to the PopperJS instance', () => {
+    const ref = React.createRef<PopperJS.Instance>();
+    render(
+      <Popper anchorElement={document.body} popperInstanceRef={ref}>
+        Contents
+      </Popper>
+    );
+
+    expect(ref.current).toHaveProperty('update');
   });
 });
