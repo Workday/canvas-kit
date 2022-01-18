@@ -1,10 +1,8 @@
-/** @jsxRuntime classic */
-/** @jsx jsx */
 import * as React from 'react';
-import {jsx, css, Interpolation} from '@emotion/core';
 import {type, typeColors} from '@workday/canvas-kit-react/tokens';
 
 import {PaginationModel} from '../types';
+import {StyledType, styled} from '@workday/canvas-kit-react/common';
 
 export interface GoToLabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> {
   model: PaginationModel;
@@ -14,16 +12,16 @@ export interface GoToLabelProps extends React.LabelHTMLAttributes<HTMLLabelEleme
   children?: (model: PaginationModel) => React.ReactNode | React.ReactNode;
 }
 
-const labelStyles = css({
+const StyledLabel = styled('label')<StyledType>({
   ...type.levels.subtext.medium,
   color: typeColors.hint,
   whiteSpace: 'nowrap',
 });
 
-export const GoToLabel = ({css: cssProp, model, children, ...elemProps}: GoToLabelProps) => {
+export const GoToLabel = ({model, children, ...elemProps}: GoToLabelProps) => {
   return (
-    <label css={[labelStyles, cssProp as Interpolation<undefined>]} {...elemProps}>
+    <StyledLabel {...elemProps}>
       {typeof children === 'function' ? children(model) : children}
-    </label>
+    </StyledLabel>
   );
 };

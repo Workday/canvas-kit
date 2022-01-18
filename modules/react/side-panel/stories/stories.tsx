@@ -1,6 +1,3 @@
-/** @jsxRuntime classic */
-/** @jsx jsx */
-import {css, jsx} from '@emotion/core';
 import * as React from 'react';
 import {homeIcon, starIcon, rocketIcon, plusIcon} from '@workday/canvas-system-icons-web';
 import styled from '@emotion/styled';
@@ -71,19 +68,6 @@ const UnorderedList = styled('ul')({
   paddingLeft: 0,
 });
 
-const listItemOpen = css({
-  padding: '15px 24px',
-  marginLeft: '-24px',
-  marginRight: '-24px',
-});
-
-const listItemClosed = css({
-  padding: '15px 20px',
-  marginLeft: 0,
-  marginRight: 0,
-  justifyContent: 'center',
-});
-
 const AddButton = styled(IconButton)({
   margin: '0 auto',
   display: 'block',
@@ -106,7 +90,6 @@ class SidePanelWrapper extends React.Component<SidePanelProps, SidePanelState> {
 
   public render() {
     const {open} = this.state;
-    const listItemStyles = open ? listItemOpen : listItemClosed;
 
     return (
       <SidePanel
@@ -136,18 +119,29 @@ class SidePanelWrapper extends React.Component<SidePanelProps, SidePanelState> {
             </span>
             {open && <ListTitle>Home</ListTitle>}
           </StyledListItem>
-          <ListItem css={listItemStyles}>
+          <StyledListItem
+            padding={open ? '15px 24px' : '15px 20px'}
+            marginLeft={open ? '-24px' : 0}
+            marginRight={open ? '-24px' : 0}
+            justifyContent={open ? undefined : 'center'}
+          >
+            >
             <span>
               <SystemIcon icon={starIcon} />
             </span>
             {open && <ListTitle>Favorites</ListTitle>}
-          </ListItem>
-          <ListItem css={listItemStyles}>
+          </StyledListItem>
+          <StyledListItem
+            padding={open ? '15px 24px' : '15px 20px'}
+            marginLeft={open ? '-24px' : 0}
+            marginRight={open ? '-24px' : 0}
+            justifyContent={open ? undefined : 'center'}
+          >
             <span>
               <SystemIcon icon={rocketIcon} />
             </span>
             {open && <ListTitle>Items</ListTitle>}
-          </ListItem>
+          </StyledListItem>
         </UnorderedList>
       </SidePanel>
     );

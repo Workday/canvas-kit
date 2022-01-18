@@ -1,24 +1,22 @@
-/** @jsxRuntime classic */
-/** @jsx jsx */
 import * as React from 'react';
-import {jsx, css} from '@emotion/core';
 
 import {Flex, FlexProps} from './Flex';
+import {StyledType, styled} from '../../../../common';
 
 export interface ListProps extends FlexProps, React.OlHTMLAttributes<HTMLElement> {
   as: 'ol' | 'ul';
 }
 
-const listStyles = css({
+const StyledList = styled(Flex)<StyledType & FlexProps>({
   listStyle: 'none',
 });
 
 export const List = React.forwardRef<HTMLOListElement | HTMLUListElement, ListProps>(
   ({as, children, ...elemProps}, ref) => {
     return (
-      <Flex as={as} m="zero" p="zero" css={listStyles} ref={ref} {...elemProps}>
+      <StyledList as={as} m="zero" p="zero" ref={ref} {...elemProps}>
         {children}
-      </Flex>
+      </StyledList>
     );
   }
 );
