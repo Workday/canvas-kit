@@ -1,4 +1,3 @@
-/// <reference path="../../../../typings.d.ts" />
 import * as React from 'react';
 import {Menu, MenuItem} from '@workday/canvas-kit-preview-react/menu';
 import {Popper} from '@workday/canvas-kit-react/popup';

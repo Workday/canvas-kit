@@ -19,7 +19,7 @@ module.exports = function rewriteExampleCodeBlock(source) {
   if (!hasArgsTable) imports.push('ArgsTable');
   return (
     (imports.length && hasSpecialBlocks
-      ? `import {${imports.join(',')}} from '@storybook/addon-docs/blocks';\n\n`
+      ? `import {${imports.join(',')}} from '@storybook/addon-docs';\n\n`
       : '') +
     source
       .replace(/\<ExampleCodeBlock code={([A-Za-z0-9]+)} \/\>/g, function replacer(match, p1, p2) {

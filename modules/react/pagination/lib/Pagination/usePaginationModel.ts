@@ -5,10 +5,29 @@ import {getRangeMax, getRangeMin} from './common/utils/helpers';
 import {PaginationModel} from './types';
 
 export type UsePaginationModelConfig = {
+  /**
+   * The page number for the last page (it can also be used as a total page
+   * count)
+   */
   lastPage: number;
+  /**
+   * The page number for the first page
+   * @default 1
+   */
   firstPage?: number;
+  /**
+   * The initial current page
+   * @default 1
+   */
   initialCurrentPage?: number;
+  /**
+   * The function called when the page changes
+   */
   onPageChange?: (pageNumber: number) => void;
+  /**
+   * The size of the pagination range
+   * @default 5
+   */
   rangeSize?: number;
 };
 

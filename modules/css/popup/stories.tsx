@@ -1,7 +1,5 @@
 import React from 'react';
 import {storiesOf} from '@storybook/react';
-import withReadme from 'storybook-readme/with-readme';
-import README from './README.md';
 import '@workday/canvas-kit-css-button/index.scss';
 import './index.scss';
 // @ts-ignore
@@ -101,7 +99,7 @@ class PopupWrapper extends React.Component<{}, PopupWrapperState> {
 }
 
 storiesOf('Components/Popups/Popup/CSS', module)
-  .addDecorator(withReadme(README))
+  .addParameters({ReadmePath: 'css/popup'})
   .add('Default', () => (
     <div className="story">
       <PopupWrapper />

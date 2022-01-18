@@ -14,9 +14,12 @@ import {ButtonContainer} from './parts';
 
 export interface IconButtonProps extends Themeable {
   /**
-   * The accessibility label to indicate the action triggered by clicking the IconButton.
+   * The accessibility label to indicate the action triggered by clicking the IconButton. This is optional because there are
+   * instances where an Icon Button might already have an `aria-labelledby`. In a case where an `aria-labelledby` is provided
+   * it will take precedence over the `aria-label` as explained here: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_aria-labelledby_attribute
+   * We highly encourage consumers to either provide an `aria-label` OR an `aria-labelledby`
    */
-  'aria-label': string;
+  'aria-label'?: string;
   /**
    * The type of the IconButton.
    * @default 'circle'

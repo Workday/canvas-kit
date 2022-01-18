@@ -1,4 +1,3 @@
-/// <reference path="../../../../../typings.d.ts" />
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
 import {ComponentStatesTable, permutateProps} from '@workday/canvas-kit-labs-react/common';
@@ -27,19 +26,26 @@ export const TertiaryButtonStates = (props: {theme?: PartialEmotionCanvasTheme})
             {value: true, label: 'All Caps'},
           ],
           size: [
+            {value: 'extraSmall', label: 'Extra Small'},
             {value: 'small', label: 'Small'},
             {value: 'medium', label: 'Medium'},
           ],
           icon: [
             {value: undefined, label: ''},
-            {value: playCircleIcon, label: 'w/ Icon'},
+            // We don't need a label here, because `iconPosition` provides it
+            {value: playCircleIcon, label: ''},
           ],
           iconPosition: [
-            {value: 'left', label: 'Left Icon'},
-            {value: 'right', label: 'right Icon'},
+            {value: undefined, label: ''},
+            {value: 'left', label: '& Left Icon'},
+            {value: 'right', label: '& Right Icon'},
           ],
         },
+        // Filter out permutations where `iconPosition` is provided and not `icon`, and vice versa
         props => {
+          if ((props.iconPosition && !props.icon) || (props.icon && !props.iconPosition)) {
+            return false;
+          }
           return true;
         }
       )}
@@ -47,7 +53,7 @@ export const TertiaryButtonStates = (props: {theme?: PartialEmotionCanvasTheme})
     >
       {props => (
         <Container blue={props.variant === 'inverse'}>
-          <TertiaryButton {...props}>Test</TertiaryButton>
+          <TertiaryButton {...props}>Tertiary</TertiaryButton>
         </Container>
       )}
     </ComponentStatesTable>

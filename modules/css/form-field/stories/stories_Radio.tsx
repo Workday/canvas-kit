@@ -1,12 +1,10 @@
 import React from 'react';
 import {storiesOf} from '@storybook/react';
-import withReadme from 'storybook-readme/with-readme';
-import README from '../../radio/README.md';
 import '../index.scss';
 import '@workday/canvas-kit-css-radio/index.scss';
 
 storiesOf('Components/Inputs/Radio/CSS/Top Label/Radio', module)
-  .addDecorator(withReadme(README))
+  .addParameters({ReadmePath: 'css/radio'})
   .add('Default', () => (
     <div className="wdc-form">
       <div className="wdc-form-field-wrapper">
@@ -22,7 +20,7 @@ storiesOf('Components/Inputs/Radio/CSS/Top Label/Radio', module)
   ));
 
 storiesOf('Components/Inputs/Radio/CSS/Left Label/Radio', module)
-  .addDecorator(withReadme(README))
+  .addParameters({ReadmePath: 'css/radio'})
   .add('Default', () => (
     <div className="wdc-form wdc-form-label-position-left">
       <div className="wdc-form-field-wrapper">
@@ -38,7 +36,7 @@ storiesOf('Components/Inputs/Radio/CSS/Left Label/Radio', module)
   ));
 
 storiesOf('Components/Inputs/Radio/CSS/Top Label/Radio Group', module)
-  .addDecorator(withReadme(README))
+  .addParameters({ReadmePath: 'css/radio'})
   .add('Default', () => (
     <div className="wdc-form">
       <fieldset className="wdc-form-field-wrapper wdc-form-group">
@@ -205,7 +203,7 @@ storiesOf('Components/Inputs/Radio/CSS/Top Label/Radio Group', module)
   ));
 
 storiesOf('Components/Inputs/Radio/CSS/Left Label/Radio Group', module)
-  .addDecorator(withReadme(README))
+  .addParameters({ReadmePath: 'css/radio'})
   .add('Default', () => (
     <div className="wdc-form wdc-form-label-position-left">
       <fieldset className="wdc-form-field-wrapper wdc-form-group">

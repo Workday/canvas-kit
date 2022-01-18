@@ -1,11 +1,9 @@
 import React from 'react';
 import {storiesOf} from '@storybook/react';
-import withReadme from 'storybook-readme/with-readme';
-import README from '../README.md';
 import '../index.scss';
 
 storiesOf('Components/Inputs/Form Field/CSS', module)
-  .addDecorator(withReadme(README))
+  .addParameters({ReadmePath: 'css/form-field'})
   .add('Label', () => (
     <div className="story">
       <div className="wdc-form">

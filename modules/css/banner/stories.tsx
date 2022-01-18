@@ -1,12 +1,10 @@
 import React from 'react';
 import {storiesOf} from '@storybook/react';
-import withReadme from 'storybook-readme/with-readme';
-import README from './README.md';
 import './index.scss';
 import './stories.scss';
 
 storiesOf('Components/Indicators/Banner/CSS/Alert ', module)
-  .addDecorator(withReadme(README))
+  .addParameters({ReadmePath: 'css/banner'})
   .add('Full', () => (
     <div className="banner-story">
       <a className="wdc-banner" href="#">
@@ -24,7 +22,7 @@ storiesOf('Components/Indicators/Banner/CSS/Alert ', module)
   ));
 
 storiesOf('Components/Indicators/Banner/CSS/Error ', module)
-  .addDecorator(withReadme(README))
+  .addParameters({ReadmePath: 'css/banner'})
   .add('Full', () => (
     <div className="banner-story">
       <a className="wdc-banner wdc-banner-error" href="#">
