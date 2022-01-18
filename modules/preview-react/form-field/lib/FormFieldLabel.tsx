@@ -8,7 +8,7 @@ import {
   styled,
   StyledType,
 } from '@workday/canvas-kit-react/common';
-import {ComponentStyles, Box} from '@workday/canvas-kit-labs-react/common';
+import {Box} from '@workday/canvas-kit-labs-react/common';
 import {type} from '@workday/canvas-kit-react/tokens';
 import {HStack, StackSpacing} from '@workday/canvas-kit-labs-react/layout';
 

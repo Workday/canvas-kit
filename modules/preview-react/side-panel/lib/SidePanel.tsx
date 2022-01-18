@@ -2,9 +2,9 @@
 /** @jsx jsx */
 import * as React from 'react';
 import {styled, useIsRTL, StyledType} from '@workday/canvas-kit-react/common';
-import {css, CSSObject, jsx, keyframes} from '@emotion/core';
+import {css, jsx, keyframes} from '@emotion/core';
 import {IconButton, IconButtonProps} from '@workday/canvas-kit-react/button';
-import {space, colors, depth} from '@workday/canvas-kit-react/tokens';
+import {space, colors} from '@workday/canvas-kit-react/tokens';
 import {transformationImportIcon} from '@workday/canvas-system-icons-web';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 import {Box} from '@workday/canvas-kit-labs-react/common';
