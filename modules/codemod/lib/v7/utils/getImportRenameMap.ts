@@ -1,4 +1,4 @@
-import {Collection, ImportDeclaration, JSCodeshift, CallExpression} from 'jscodeshift';
+import {Collection, JSCodeshift, CallExpression} from 'jscodeshift';
 
 export function getImportRenameMap(j: JSCodeshift, root: Collection<any>, packageName = '') {
   let containsCanvasImports = false;
@@ -7,7 +7,7 @@ export function getImportRenameMap(j: JSCodeshift, root: Collection<any>, packag
   // i.e. `import { IconButton as StyledIconButton } ...`
   const importMap: Record<string, string> = {};
   const styledMap: Record<string, string> = {};
-  root.find(j.ImportDeclaration, (node: ImportDeclaration) => {
+  root.find(j.ImportDeclaration, node => {
     // imports our module
     const value = node.source.value;
     if (
@@ -25,6 +25,7 @@ export function getImportRenameMap(j: JSCodeshift, root: Collection<any>, packag
         }
       });
     }
+    return false;
   });
 
   root

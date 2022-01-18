@@ -130,7 +130,7 @@ describe('Select', () => {
             it('should not be visible', () => {
               cy.findByLabelText('Label')
                 .pipe(h.selectPreview.getMenu)
-                .should('not.be.visible');
+                .should('not.exist');
             });
           });
 
@@ -242,7 +242,7 @@ describe('Select', () => {
                   it('should not be visible', () => {
                     cy.findByLabelText('Label')
                       .pipe(h.selectPreview.getMenu)
-                      .should('not.be.visible');
+                      .should('not.exist');
                   });
                 });
 
@@ -664,7 +664,7 @@ describe('Select', () => {
       //     it('should not be visible', () => {
       //       cy.findByLabelText('Label')
       //         .pipe(h.selectPreview.getMenu)
-      //         .should('not.be.visible');
+      //         .should('not.exist');
       //     });
       //   });
       // });

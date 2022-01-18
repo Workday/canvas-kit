@@ -3,7 +3,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const colors = require('colors');
+const chalk = require('chalk');
 const depCheck = require('depcheck');
 
 const depCheckOptions = {
@@ -11,35 +11,33 @@ const depCheckOptions = {
     '@testing-library/react',
     '@testing-library/react-hooks',
     '@storybook/react',
-    'enzyme',
     'expect-type',
     'react',
     'react-dom',
     'jest-axe',
-    'jest-emotion',
   ],
 };
 
 const labelMap = {
   dependencies: {
     label: 'unused dependency',
-    color: colors.yellow,
+    color: chalk.yellow,
   },
   devDependencies: {
     label: 'unused devDependency',
-    color: colors.yellow,
+    color: chalk.yellow,
   },
   missing: {
     label: 'missing dependency',
-    color: colors.red,
+    color: chalk.red,
   },
   invalidFiles: {
     label: 'error',
-    color: colors.red,
+    color: chalk.red,
   },
   invalidDirs: {
     label: 'error',
-    color: colors.red,
+    color: chalk.red,
   },
 };
 
@@ -97,7 +95,7 @@ function formatErrorMessage(pkgFile, errors) {
 
               return (
                 labelMap[key].color(labelMap[key].label.padEnd(20)) +
-                colors.dim(`  ${line}:${column}  `) +
+                chalk.dim(`  ${line}:${column}  `) +
                 message
               );
             })
@@ -111,9 +109,9 @@ function formatErrorMessage(pkgFile, errors) {
                 const line = findLineInFile(contents, packageName);
                 const char = findCharacterInFile(contents, packageName);
 
-                return `${errorFile}\n  ${colors.dim(`${line}:${char}`)}  ${colors.red(
+                return `${errorFile}\n  ${chalk.dim(`${line}:${char}`)}  ${chalk.red(
                   'error'
-                )}  ${colors.yellow(packageName)} is missing from ${pkgFile}  ${colors.dim(
+                )}  ${chalk.yellow(packageName)} is missing from ${pkgFile}  ${chalk.dim(
                   'check-dependencies-exist'
                 )}`;
               })
@@ -129,9 +127,9 @@ function formatErrorMessage(pkgFile, errors) {
               const line = findLineInFile(contents, packageName);
               const char = findCharacterInFile(contents, packageName);
 
-              return `  ${colors.dim(`${line}:${char}`)}  ${colors.red('error')}  ${colors.yellow(
+              return `  ${chalk.dim(`${line}:${char}`)}  ${chalk.red('error')}  ${chalk.yellow(
                 packageName
-              )} is not used in code  ${colors.dim('check-dependencies-exist')}`;
+              )} is not used in code  ${chalk.dim('check-dependencies-exist')}`;
             })
             .join('\n')
         );
@@ -159,15 +157,15 @@ depCheck(modulePath, depCheckOptions, unused => {
     }
     if (key === 'missing') {
       // Self-referencing imports are only okay in stories. It allows story code more copy/paste friendly. Stories are not packaged, so no circular dependency actually exists
-      if (unused['missing'][packageName]) {
-        unused['missing'][packageName] = unused['missing'][packageName].filter(
+      if (unused.missing[packageName]) {
+        unused.missing[packageName] = unused.missing[packageName].filter(
           file => file.indexOf('stories') === -1
         );
-        if (unused['missing'][packageName].length === 0) {
-          delete unused['missing'][packageName];
+        if (unused.missing[packageName].length === 0) {
+          delete unused.missing[packageName];
         }
       }
-      if (Object.keys(unused['missing']).length === 0) {
+      if (Object.keys(unused.missing).length === 0) {
         return false;
       }
     }

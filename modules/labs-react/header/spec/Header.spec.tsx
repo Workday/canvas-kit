@@ -1,120 +1,44 @@
 import * as React from 'react';
 import Header from '../lib/Header';
-import {shallow, mount} from 'enzyme';
 import {IconButton} from '@workday/canvas-kit-react/button';
-import {SystemIcon} from '@workday/canvas-kit-react/icon';
-import {activityStreamIcon, justifyIcon} from '@workday/canvas-system-icons-web';
+import {activityStreamIcon} from '@workday/canvas-system-icons-web';
 
-declare global {
-  interface Window {
-    resizeBy: (x: number, y: number) => void;
-  }
-}
-const map: {[key: string]: any} = {};
-window.addEventListener = jest.fn((event, callback) => {
-  map[event] = callback;
-});
-window.removeEventListener = jest.fn((event, callback) => {
-  if (map[event] && map[event] === callback) {
-    delete map[event];
-  }
-});
-window.dispatchEvent = (event: Event) => {
-  if (map[event.type]) {
-    map[event.type]();
-  }
-
-  // TODO: not totally accurate
-  return false;
-};
-
-window.resizeBy = (x: number, y: number) => {
-  // @ts-ignore
-  window.innerWidth = x;
-  // @ts-ignore
-  window.innerHeight = y;
-  window.dispatchEvent(new Event('resize'));
-};
-
-// @ts-ignore
-window.requestAnimationFrame = cbFn => cbFn();
+import {screen, render, fireEvent} from '@testing-library/react';
 
 describe('Header', () => {
-  const cb = jest.fn();
-  beforeEach(() => {
-    window.resizeBy(1280, 1024);
-  });
+  it('should spread extra props to containing element', () => {
+    render(<Header data-testid="test" data-propspread="test" />);
 
-  afterEach(() => {
-    cb.mockReset();
-  });
-
-  test('Header should spread extra props', () => {
-    const component = mount(<Header data-propspread="test" />);
-    const container = component.at(0).getDOMNode();
-    expect(container.getAttribute('data-propspread')).toBe('test');
-    component.unmount();
+    expect(screen.getByTestId('test')).toHaveAttribute('data-propspread', 'test');
   });
 
   describe('How Header children render', () => {
-    beforeEach(() => {
-      window.resizeBy(1280, 1024);
+    it('should render non-element children as is', () => {
+      const text = 'not an element';
+
+      const {container} = render(<Header>{text}</Header>);
+
+      expect(container).toContainHTML(text);
     });
 
-    test('Renders non-React child elements as is', () => {
-      const text = 'not a react element';
-      const wrapper = shallow<Header>(<Header>{text}</Header>);
+    it('should render children as is', () => {
+      const children = <div>Test</div>;
 
-      expect(wrapper.contains(text));
+      const {container} = render(<Header>{children}</Header>);
+
+      expect(container).toContainHTML('<div>Test</div>');
     });
 
-    test('Renders a div element as is', () => {
-      const wrapper = shallow<Header>(
-        <Header>
-          <div>Test</div>
-        </Header>
-      );
-      expect(
-        wrapper
-          .find('div')
-          .first()
-          .contains('Test')
-      ).toBeTruthy();
+    it('should render a hamburger menu with a justify icon when "isCollapsed" is true', () => {
+      render(<Header isCollapsed={true} />);
+
+      expect(screen.getByRole('button', {name: 'Open Menu'})).toContainHTML('wd-icon-justify');
     });
 
-    test('Converts SystemIcons into IconButtons matching theme', () => {
-      const theme = Header.Theme.Blue;
-
-      const wrapper = mount<Header>(
-        <Header themeColor={theme}>
-          <a href="#">
-            <SystemIcon icon={activityStreamIcon} />
-          </a>
-        </Header>
-      );
-      const renderedIcon = wrapper.find(IconButton).first();
-
-      expect(wrapper.find(IconButton)).toHaveLength(1);
-      expect(renderedIcon.props().icon).toBe(activityStreamIcon);
-      expect(renderedIcon.props().variant).toBe('inverse');
-      expect(renderedIcon.props().onClick).toBeTruthy();
-    });
-
-    test('Renders a child hamburger menu (IconButton) when isCollapsed is true', () => {
-      const wrapper = mount<Header>(
-        <Header isCollapsed={true}>
-          <IconButton icon={activityStreamIcon} aria-label="Activity Stream" />
-        </Header>
-      );
-      const renderedIcon = wrapper.find(IconButton).first();
-
-      expect(renderedIcon.props().icon).toBe(justifyIcon);
-    });
-
-    describe('When rendered in collapsed mode', () => {
-      test('Calls onMenuClick when the menuToggle does not have an onClick prop', () => {
+    describe('when rendered in collapsed mode', () => {
+      it('should call "onMenuClick" when the "menuToggle" component does not have an "onClick" prop', () => {
         const onMenuClick = jest.fn();
-        const wrapper = mount<Header>(
+        render(
           <Header
             isCollapsed={true}
             onMenuClick={onMenuClick}
@@ -122,15 +46,15 @@ describe('Header', () => {
           />
         );
 
-        wrapper.find('button').simulate('click');
+        fireEvent.click(screen.getByRole('button', {name: 'Activity Stream'}));
 
         expect(onMenuClick).toHaveBeenCalled();
       });
 
-      test('Does not overwrite the menuToggle onClick prop when onMenuClick is defined', () => {
+      it('should not call "onMenuClick" when the "menuToggle" component has an "onClick" prop', () => {
         const onMenuClick = jest.fn();
         const onIconClick = jest.fn();
-        const wrapper = mount<Header>(
+        render(
           <Header
             isCollapsed={true}
             onMenuClick={onMenuClick}
@@ -144,15 +68,15 @@ describe('Header', () => {
           />
         );
 
-        wrapper.find('button').simulate('click');
+        fireEvent.click(screen.getByRole('button', {name: 'Activity Stream'}));
 
         expect(onMenuClick).not.toHaveBeenCalled();
         expect(onIconClick).toHaveBeenCalled();
       });
 
-      test('Does not overwrite the menuToggle onClick prop when onMenuClick is undefined', () => {
+      it('should not overwrite the "menuToggle" onClick when "onMenuClick" is not provided', () => {
         const onIconClick = jest.fn();
-        const wrapper = mount<Header>(
+        render(
           <Header
             isCollapsed={true}
             menuToggle={
@@ -165,7 +89,7 @@ describe('Header', () => {
           />
         );
 
-        wrapper.find('button').simulate('click');
+        fireEvent.click(screen.getByRole('button', {name: 'Activity Stream'}));
 
         expect(onIconClick).toHaveBeenCalled();
       });

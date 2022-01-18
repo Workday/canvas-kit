@@ -5,6 +5,8 @@ on: pull_request
 jobs:
   install:
     runs-on: ubuntu-latest
+    outputs:
+      cypress-version: ${{ steps.cypress-version.outputs.version }}
 
     steps:
       - uses: actions/checkout@v2
@@ -51,7 +53,7 @@ jobs:
       - uses: actions/cache/@v2
         with:
           path: .cache/cypress
-          key: ${{ runner.os }}-cypress-cache-version-${{ steps.cypress-version.outputs.version }}
+          key: ${{ runner.os }}-cypress-cache-version-${{ needs.install.outputs.cypress-version }}
 
       - uses: actions/cache@v2
         with:
@@ -84,7 +86,7 @@ jobs:
       - uses: actions/cache/@v2
         with:
           path: .cache/cypress
-          key: ${{ runner.os }}-cypress-cache-version-${{ steps.cypress-version.outputs.version }}
+          key: ${{ runner.os }}-cypress-cache-version-${{ needs.install.outputs.cypress-version }}
 
       - uses: actions/cache@v2
         with:
@@ -116,7 +118,7 @@ jobs:
       - uses: actions/cache/@v2
         with:
           path: .cache/cypress
-          key: ${{ runner.os }}-cypress-cache-version-${{ steps.cypress-version.outputs.version }}
+          key: ${{ runner.os }}-cypress-cache-version-${{ needs.install.outputs.cypress-version }}
 
       - uses: actions/cache@v2
         with:
@@ -139,7 +141,7 @@ jobs:
 
   integration-test:
     runs-on: ubuntu-latest
-    needs: 'build'
+    needs: ['install', 'build']
     strategy:
       fail-fast: false
       matrix:
@@ -156,7 +158,7 @@ jobs:
       - uses: actions/cache/@v2
         with:
           path: .cache/cypress
-          key: ${{ runner.os }}-cypress-cache-version-${{ steps.cypress-version.outputs.version }}
+          key: ${{ runner.os }}-cypress-cache-version-${{ needs.install.outputs.cypress-version }}
 
       - uses: actions/cache@v2
         with:

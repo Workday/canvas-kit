@@ -9,6 +9,7 @@ import {
   useCloseOnOutsideClick,
   usePopupModel,
   useReturnFocus,
+  useTransferOnFullscreenExit,
 } from '@workday/canvas-kit-react/popup';
 import {colors, borderRadius, inputColors} from '@workday/canvas-kit-react/tokens';
 
@@ -271,6 +272,7 @@ const SelectMenu = ({
   useCloseOnEscape(model);
   useCloseOnOutsideClick(model);
   useReturnFocus(model);
+  useTransferOnFullscreenExit(model);
 
   return (
     <Popper

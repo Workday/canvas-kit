@@ -2,39 +2,39 @@
 'use strict';
 
 const {spawn} = require('child_process');
-require('colors');
+const chalk = require('chalk');
 
 const {_: commands, path} = require('yargs')
   .scriptName('canvas-kit-codemod')
-  .usage('$0 <transform> [path]'.brightBlue.bold)
-  .command('v5 [path]', 'Canvas Kit v4 > v5 migration transform'.gray, yargs => {
+  .usage(chalk.bold.blueBright('$0 <transform> [path]'))
+  .command('v5 [path]', chalk.gray('Canvas Kit v4 > v5 migration transform'), yargs => {
     yargs.positional('path', {
       type: 'string',
       default: '.',
-      describe: 'The path to execute the transform in (recursively).'.gray,
+      describe: chalk.gray('The path to execute the transform in (recursively).'),
     });
   })
-  .command('v6 [path]', 'Canvas Kit v5 > v6 migration transform'.gray, yargs => {
+  .command('v6 [path]', chalk.gray('Canvas Kit v5 > v6 migration transform'), yargs => {
     yargs.positional('path', {
       type: 'string',
       default: '.',
-      describe: 'The path to execute the transform in (recursively).'.gray,
+      describe: chalk.gray('The path to execute the transform in (recursively).'),
     });
   })
-  .command('v7 [path]', 'Canvas Kit v6 > v7 migration transform'.gray, yargs => {
+  .command('v7 [path]', chalk.gray('Canvas Kit v6 > v7 migration transform'), yargs => {
     yargs.positional('path', {
       type: 'string',
       default: '.',
-      describe: 'The path to execute the transform in (recursively).'.gray,
+      describe: chalk.gray('The path to execute the transform in (recursively).'),
     });
   })
-  .demandCommand(1, 'You must provide a transform to apply.'.red.bold)
+  .demandCommand(1, chalk.red.bold('You must provide a transform to apply.'))
   .strictCommands()
   .fail((msg, err, yargs) => {
     if (err) {
       throw err;
     }
-    console.error(`\n${msg.red.bold}\n`);
+    console.error(`\n${chalk.red.bold(msg)}\n`);
     console.error(yargs.help());
     process.exit(1);
   })
@@ -48,7 +48,7 @@ const {_: commands, path} = require('yargs')
 const transform = commands[0];
 console.log(transform, path);
 
-console.log(`\nApplying ${transform} transform to '${path}'\n`.brightBlue);
+console.log(chalk.blueBright(`\nApplying ${transform} transform to '${path}'\n`));
 const args = `-t ${__dirname}/dist/es6/${transform} ${path} --parser tsx --extensions js,jsx,ts,tsx`.split(
   ' '
 );

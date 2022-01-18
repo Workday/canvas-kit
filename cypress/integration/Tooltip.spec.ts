@@ -52,7 +52,7 @@ describe('Tooltip', () => {
         });
 
         it('should close the tooltip', () => {
-          cy.findByRole('tooltip').should('not.be.visible');
+          cy.findByRole('tooltip').should('not.exist');
         });
       });
 
@@ -62,7 +62,7 @@ describe('Tooltip', () => {
         });
 
         it('should not close the tooltip', () => {
-          cy.findByRole('tooltip').should('not.be.visible');
+          cy.findByRole('tooltip').should('not.exist');
         });
       });
     });
@@ -82,7 +82,7 @@ describe('Tooltip', () => {
         });
 
         it('should close the tooltip', () => {
-          cy.findByRole('tooltip').should('not.be.visible');
+          cy.findByRole('tooltip').should('not.exist');
         });
       });
 
@@ -104,7 +104,7 @@ describe('Tooltip', () => {
         });
 
         it('should close immediately, not waiting for blur or intent', () => {
-          cy.findByRole('tooltip', {timeout: 0}).should('not.be.visible');
+          cy.findByRole('tooltip', {timeout: 0}).should('not.exist');
         });
       });
     });
@@ -155,14 +155,14 @@ describe('Tooltip', () => {
     });
 
     it('the span element should not have an aria-describedby attribute', () => {
-      cy.get('button').should('not.have.attr', 'aria-describedby');
+      cy.get('span').should('not.have.attr', 'aria-describedby');
     });
 
     it('the span element should not have an aria-label attribute', () => {
-      cy.get('button').should('not.have.attr', 'aria-describedby');
+      cy.get('span').should('not.have.attr', 'aria-describedby');
     });
 
-    context('when the "Delete" button is hovered', () => {
+    context('when the "Some Text" text is hovered', () => {
       beforeEach(() => {
         cy.get('span').trigger('mouseover');
       });
@@ -176,11 +176,11 @@ describe('Tooltip', () => {
       });
 
       it('the span element should not have an aria-describedby attribute', () => {
-        cy.get('button').should('not.have.attr', 'aria-describedby');
+        cy.get('span').should('not.have.attr', 'aria-describedby');
       });
 
       it('the span element should not have an aria-label attribute', () => {
-        cy.get('button').should('not.have.attr', 'aria-describedby');
+        cy.get('span').should('not.have.attr', 'aria-describedby');
       });
     });
   });
@@ -204,7 +204,7 @@ describe('Tooltip', () => {
       });
 
       it('should not show the tooltip', () => {
-        cy.findByRole('tooltip').should('not.be.visible');
+        cy.findByRole('tooltip').should('not.exist');
       });
     });
 
@@ -244,7 +244,7 @@ describe('Tooltip', () => {
       });
 
       it('should not show the tooltip', () => {
-        cy.findByRole('tooltip').should('not.be.visible');
+        cy.findByRole('tooltip').should('not.exist');
       });
     });
 

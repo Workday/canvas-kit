@@ -28,7 +28,7 @@ export interface RadioProps extends Themeable {
   disabled?: boolean;
   /**
    * The HTML `id` of the underlying radio input element. This is required if `label` is defined as a non-empty string.
-   * @default A uniquely generated id by uuid()
+   * @default A uniquely generated id
    */
   id?: string;
   /**

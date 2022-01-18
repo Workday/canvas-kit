@@ -3,6 +3,99 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v6.3.3](https://github.com/Workday/canvas-kit/releases/tag/v6.3.3) (2022-01-14)
+
+### Test
+
+- test: Remove enzyme ([#1418](https://github.com/Workday/canvas-kit/pull/1418)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v6.3.2](https://github.com/Workday/canvas-kit/releases/tag/v6.3.2) (2022-01-14)
+
+### Dependencies
+
+- chore: Remove colors dependency/upgrade dependencies ([#1413](https://github.com/Workday/canvas-kit/pull/1413)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v6.3.1](https://github.com/Workday/canvas-kit/releases/tag/v6.3.1) (2022-01-13)
+
+
+
+
+## [v6.3.0](https://github.com/Workday/canvas-kit/releases/tag/v6.3.0) (2022-01-13)
+
+### Hooks
+
+- feat(common): Remove uuid and update unique id generation ([#1408](https://github.com/Workday/canvas-kit/pull/1408)) ([@NicholasBoll](https://github.com/NicholasBoll))
+  **NOTE for jest snapshots**: This change removes the `uuid` package and instead will generate a one-time client seed and then create auto-incrementing ids. This change will not break UI or automated UI tests. It will break snapshot tests however. Previously, the only way to get stable ids for snapshot tests was to mock the `uuid` module. This was an implementation detail. To make snapshots work again, add the following to your jest setup file:
+  
+  ```ts
+  import {setUniqueSeed, resetUniqueIdCount} from '@workday/canvas-kit-react/common';
+  
+  beforeEach(() => {
+    setUniqueSeed('a'); // force set the seed
+    resetUniqueIdCount(); // reset the unique id count
+  });
+  ```
+  
+  This will ensure each Jest snapshot has ids that look like `a0` and `a1` and will be the same every time the snapshot is run. Do not use these methods in production though - it may lead to inaccessible applications due to IDREF collisions.
+
+### Infrastructure
+
+- ci: Fix scripts ([@NicholasBoll](https://github.com/NicholasBoll))
+- ci: Fix build script calls ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v6.2.3](https://github.com/Workday/canvas-kit/releases/tag/v6.2.3) (2022-01-13)
+
+### Components
+
+- fix(side-panel): Remove console.log ([#1417](https://github.com/Workday/canvas-kit/pull/1417)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
+## [v6.2.2](https://github.com/Workday/canvas-kit/releases/tag/v6.2.2) (2022-01-10)
+
+### Infrastructure
+
+- chore: Pin colors to version 1.4.0 ([#1411](https://github.com/Workday/canvas-kit/pull/1411)) ([@Parker-Ledoux](https://github.com/Parker-Ledoux))
+
+
+## [v6.2.1](https://github.com/Workday/canvas-kit/releases/tag/v6.2.1) (2022-01-07)
+
+### Components
+
+- fix(search-form): Remove default autocomplete ([#1407](https://github.com/Workday/canvas-kit/pull/1407)) ([@sheenasi](https://github.com/sheenasi))
+
+
+## [v6.2.0](https://github.com/Workday/canvas-kit/releases/tag/v6.2.0) (2022-01-03)
+
+### Components
+
+- fix(popup-stack): Add support for the fullscreen API ([#1403](https://github.com/Workday/canvas-kit/pull/1403)) ([@NicholasBoll](https://github.com/NicholasBoll))
+  Fullscreen support was added to all Popups. 3 new hooks were added to help support fullscreen in whatever way you see fit:
+  - `useTransferOnFullscreenEnter`: Use if your popup should remain open and be transfer into the fullscreen element
+  - `useTransferOnFullscreenExit`: Use if your popup should remain open and transfer out of the fullscreen element back to the body element
+  - `useCloseOnFullscreenExit`: Use if your popup should close when fullscreen is exited
+- chore: Add screenful to lockfile ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v5.3.7](https://github.com/Workday/canvas-kit/releases/tag/v5.3.7) (2022-01-03)
+
+### Components
+
+- fix(popup-stack): Add support for the fullscreen API ([#1403](https://github.com/Workday/canvas-kit/pull/1403)) ([@NicholasBoll](https://github.com/NicholasBoll))
+  Fullscreen support was added to all Popups. 3 new hooks were added to help support fullscreen in whatever way you see fit:
+  - `useTransferOnFullscreenEnter`: Use if your popup should remain open and be transfer into the fullscreen element
+  - `useTransferOnFullscreenExit`: Use if your popup should remain open and transfer out of the fullscreen element back to the body element
+  - `useCloseOnFullscreenExit`: Use if your popup should close when fullscreen is exited
+
+## [v6.1.5](https://github.com/Workday/canvas-kit/releases/tag/v6.1.5) (2021-12-22)
+
+### Documentation
+
+- docs: Add CookieBanner example ([#1402](https://github.com/Workday/canvas-kit/pull/1402)) ([@RayRedGoose](https://github.com/RayRedGoose))
+
+
 ## [v6.1.4](https://github.com/Workday/canvas-kit/releases/tag/v6.1.4) (2021-12-17)
 
 ### Documentation
