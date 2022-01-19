@@ -5,6 +5,7 @@ import {
   SecondaryButton,
   TertiaryButton,
   DeleteButton,
+  Hyperlink,
 } from '@workday/canvas-kit-react/button';
 import {Specifications} from '@workday/canvas-kit-docs';
 
@@ -15,6 +16,9 @@ import {SecondaryInverse} from './examples/SecondaryInverse';
 import {Tertiary} from './examples/Tertiary';
 import {TertiaryInverse} from './examples/TertiaryInverse';
 import {Delete} from './examples/Delete';
+import {Link} from './examples/Hyperlink';
+import {LinkInverse} from './examples/HyperlinkInverse';
+import {LinkExternal} from './examples/HyperlinkExternal';
 
 <Meta title="Components/Buttons/Button/React" />
 
@@ -116,6 +120,30 @@ before deleting.
 Undocumented props are spread to the underlying `<button>` element.
 
 <ArgsTable of={DeleteButton} />
+
+### Hyperlink
+
+Hyperlinks should be used when you want to navigate away from the current page or to an anchor on
+the current page.
+
+<ExampleCodeBlock code={Link} />
+
+Hyperlinks also have an `inverse` variant. Use this variant when you need to place a Hyperlink on a
+dark or colorful background such as `blueberry400`.
+
+<ExampleCodeBlock code={LinkInverse} />
+
+If your link should open in a new tab or window add the attribute `target='_blank'`. For added
+security you should also include `rel='noreferrer'`. It is also typical to let users know about the
+behavior by adding an icon, e.g. `extLinkIcon`.
+
+<ExampleCodeBlock code={LinkExternal} />
+
+#### Props
+
+Undocumented props are spread to the underlying `<a>` element.
+
+<ArgsTable of={Hyperlink} />
 
 ### Accessible Use of the `as` Prop
 
