@@ -5554,6 +5554,16 @@
         "__isArgsStory": false
       }
     },
+    "testing-react-popups-popup--popup-with-body-scroll": {
+      "id": "testing-react-popups-popup--popup-with-body-scroll",
+      "name": "Popup With Body Scroll",
+      "kind": "Testing/React/Popups/Popup",
+      "story": "Popup With Body Scroll",
+      "parameters": {
+        "__id": "testing-react-popups-popup--popup-with-body-scroll",
+        "__isArgsStory": false
+      }
+    },
     "testing-react-popups-popup--popup-with-non-hidable-popup": {
       "id": "testing-react-popups-popup--popup-with-non-hidable-popup",
       "name": "Popup With Non Hidable Popup",
