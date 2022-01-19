@@ -15,7 +15,7 @@ describe('Text Area', () => {
   describe('when rendered with a placeholder', () => {
     it('should render a text area with placeholder', () => {
       const {getByRole} = render(
-        <TextArea orientation='vertical'>
+        <TextArea orientation="vertical">
           <TextArea.Field onChange={cb} placeholder={placeholder} />
         </TextArea>
       );
@@ -26,7 +26,7 @@ describe('Text Area', () => {
   describe('when rendered with an id', () => {
     it('should render a text area with a id', () => {
       const {getByRole} = render(
-        <TextArea orientation='vertical'>
+        <TextArea orientation="vertical">
           <TextArea.Field id={id} onChange={cb} />
         </TextArea>
       );
@@ -37,7 +37,7 @@ describe('Text Area', () => {
   describe('when rendered with a value', () => {
     it('should render a text area with a value', () => {
       const {getByDisplayValue} = render(
-        <TextArea orientation='vertical'>
+        <TextArea orientation="vertical">
           <TextArea.Field onChange={cb} value={value} />
         </TextArea>
       );
@@ -48,7 +48,7 @@ describe('Text Area', () => {
   describe('when rendered with disabled attribute', () => {
     it('should render a disabled text area', () => {
       const {getByRole} = render(
-        <TextArea orientation='vertical'>
+        <TextArea orientation="vertical">
           <TextArea.Field onChange={cb} disabled={true} />
         </TextArea>
       );
@@ -59,7 +59,7 @@ describe('Text Area', () => {
   describe('when typed into', () => {
     it('should call a callback function', () => {
       const {getByRole} = render(
-        <TextArea orientation='vertical'>
+        <TextArea orientation="vertical">
           <TextArea.Field onChange={cb} />
         </TextArea>
       );
@@ -71,8 +71,8 @@ describe('Text Area', () => {
   describe('when typed into with placeholder', () => {
     it('should call a callback function and persist the value', () => {
       const {getByDisplayValue, getByRole} = render(
-        <TextArea orientation='vertical'>
-           <TextArea.Field onChange={cb} placeholder={placeholder} />
+        <TextArea orientation="vertical">
+          <TextArea.Field onChange={cb} placeholder={placeholder} />
         </TextArea>
       );
       fireEvent.change(getByRole('textbox'), {target: {value: 'Test'}});
