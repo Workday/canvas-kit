@@ -41,6 +41,7 @@ export default class Svg extends React.Component<SvgProps> {
                 display: 'inline-block',
                 '& svg': {display: 'block'},
                 transform: shouldMirror ? 'scaleX(-1)' : undefined,
+                position: `relative`,
               }),
               elemProps.className
             )}

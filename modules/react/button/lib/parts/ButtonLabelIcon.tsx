@@ -60,6 +60,7 @@ const ButtonLabelIconStyled = styled('span', {
 })<ButtonLabelIconProps>(
   {
     display: 'inline-block',
+    '& > *:first-of-type': {position: 'absolute'},
   },
   ({size}) => ({
     width: size ? iconSizes[size] : iconSizes.medium,
