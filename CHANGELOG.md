@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v5.3.9](https://github.com/Workday/canvas-kit/releases/tag/v5.3.9) (2022-01-19)
+
+### Components
+
+- fix: Allow repositioning of PopperJS instances ([#1424](https://github.com/Workday/canvas-kit/pull/1424)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v5.3.8](https://github.com/Workday/canvas-kit/releases/tag/v5.3.8) (2022-01-13)
 
 ### Components
