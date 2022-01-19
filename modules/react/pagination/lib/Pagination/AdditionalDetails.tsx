@@ -1,12 +1,9 @@
-/** @jsxRuntime classic */
-/** @jsx jsx */
 import * as React from 'react';
-import {jsx, css} from '@emotion/core';
 import {type, typeColors} from '@workday/canvas-kit-react/tokens';
-import {accessibleHide} from '@workday/canvas-kit-react/common';
+import {accessibleHide, styled} from '@workday/canvas-kit-react/common';
 
 import {PaginationModel} from './types';
-import {Flex, FlexProps} from './common/Flex';
+import {Flex, FlexProps} from '@workday/canvas-kit-labs-react/layout';
 import {useLiveRegion} from './common/useLiveRegion';
 
 export interface AdditionalDetailsProps extends FlexProps {
@@ -16,11 +13,24 @@ export interface AdditionalDetailsProps extends FlexProps {
   shouldHideDetails?: boolean;
 }
 
-// Ideally, these styles would be applied directly to a Text component
-const textStyles = css({
-  ...type.levels.subtext.medium,
-  color: typeColors.hint,
-});
+const StyledAdditionalDetails = styled(Flex)<Pick<AdditionalDetailsProps, 'shouldHideDetails'>>(
+  ({shouldHideDetails}) => {
+    const styles = {
+      ...type.levels.subtext.medium,
+      color: typeColors.hint,
+    };
+    if (shouldHideDetails) {
+      return {
+        ...styles,
+        ...accessibleHide,
+      };
+    } else {
+      return {
+        ...styles,
+      };
+    }
+  }
+);
 
 export const AdditionalDetails = ({
   model,
@@ -30,16 +40,14 @@ export const AdditionalDetails = ({
   ...elemProps
 }: AdditionalDetailsProps) => {
   const liveRegionProps = useLiveRegion({shouldAnnounceToScreenReader});
-  const detailStyles = css([textStyles, shouldHideDetails ? accessibleHide : null]);
 
   return (
-    <Flex
-      mt={shouldHideDetails ? 'zero' : 'xs'}
-      css={detailStyles}
+    <StyledAdditionalDetails
+      marginTop={shouldHideDetails ? 'zero' : 'xs'}
       {...liveRegionProps}
       {...elemProps}
     >
       {typeof children === 'function' ? children(model) : children}
-    </Flex>
+    </StyledAdditionalDetails>
   );
 };
