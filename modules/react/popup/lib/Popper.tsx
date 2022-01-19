@@ -6,6 +6,7 @@ export type Placement = PopperJS.Placement;
 export type PopperOptions = PopperJS.Options;
 
 import {usePopupStack} from './hooks';
+import {useLocalRef} from '@workday/canvas-kit-react/common';
 
 export interface PopperProps {
   /**
@@ -68,6 +69,11 @@ export interface PopperProps {
    * @default true
    */
   portal?: boolean;
+  /**
+   * Reference to the PopperJS instance. Useful for making direct method calls on the popper
+   * instance like `update`.
+   */
+  popperInstanceRef?: React.Ref<PopperJS.Instance>;
 }
 
 export const Popper = React.forwardRef<HTMLDivElement, PopperProps>(
@@ -108,11 +114,12 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
       children,
       portal,
       containerElement,
+      popperInstanceRef,
     }: PopperProps,
     ref
   ) => {
     const firstRender = React.useRef(true);
-    const popperInstance = React.useRef<PopperJS.Instance>();
+    const {localRef, elementRef} = useLocalRef(popperInstanceRef);
     const [placement, setPlacement] = React.useState(popperPlacement);
     const stackRef = usePopupStack(ref, anchorElement as HTMLElement);
 
@@ -141,14 +148,15 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
       }
 
       if (stackRef.current) {
-        popperInstance.current = PopperJS.createPopper(anchorEl, stackRef.current, {
+        const instance = PopperJS.createPopper(anchorEl, stackRef.current, {
           placement: popperPlacement,
           ...popperOptions,
           modifiers: [...(popperOptions.modifiers || []), placementModifier],
         });
+        elementRef(instance); // update the ref with the instance
 
         return () => {
-          popperInstance.current?.destroy();
+          instance?.destroy();
         };
       }
 
@@ -162,14 +170,14 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
     React.useLayoutEffect(() => {
       // Only update options if this is _not_ the first render
       if (!firstRender.current) {
-        popperInstance.current?.setOptions({
+        localRef.current?.setOptions({
           placement: popperPlacement,
           ...popperOptions,
           modifiers: [...(popperOptions.modifiers || []), placementModifier],
         });
       }
       firstRender.current = false;
-    }, [popperOptions, popperPlacement, placementModifier]);
+    }, [popperOptions, popperPlacement, placementModifier, localRef]);
 
     const contents = <>{isRenderProp(children) ? children({placement}) : children}</>;
 
