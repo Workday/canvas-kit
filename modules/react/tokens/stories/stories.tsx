@@ -1,18 +1,15 @@
-/// <reference path="../../../../typings.d.ts" />
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
 import * as React from 'react';
 import styled from '@emotion/styled';
-import withReadme from 'storybook-readme/with-readme';
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
 import {pickForegroundColor} from '@workday/canvas-kit-react/common';
 
 import {colors, type, depth, space, borderRadius} from '@workday/canvas-kit-react/tokens';
-import README from '../README.md';
 
 export default withSnapshotsEnabled({
   title: 'Tokens/Tokens/React',
-  decorators: [withReadme(README)],
+  parameters: {ReadmePath: 'react/tokens'},
 });
 
 const inverseStyle = {

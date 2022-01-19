@@ -274,7 +274,7 @@ class MenuItem extends React.Component<MenuItemProps> {
           id={id}
           role={role}
           onClick={this.handleClick}
-          aria-disabled={!!isDisabled}
+          aria-disabled={isDisabled ? true : undefined}
           isDisabled={!!isDisabled}
           isFocused={!!isFocused}
           {...elemProps}

@@ -5,19 +5,18 @@ const fs = require('fs');
 const path = require('path');
 const inquirer = require('inquirer');
 const {exec} = require('child_process');
-
-require('colors');
+const chalk = require('chalk');
 
 const createReactComponent = require('./createReactComponent');
 const addExport = require('./addExport');
 
 const cwd = process.cwd();
 
-console.log('\nCanvas Kit Component Generator'.brightBlue.underline.bold);
+console.log(chalk.blueBright.underline.bold('\nCanvas Kit Component Generator'));
 
 console.log('\nThis utility will walk you through creating a new Canvas Kit component.');
 
-console.log('\nPress ^C at any time to quit.\n'.gray);
+console.log(chalk.gray('\nPress ^C at any time to quit.\n'));
 
 const questions = [
   {
@@ -61,7 +60,7 @@ inquirer
     console.log('\n');
   })
   .catch(e => {
-    console.log('\nError creating component:\n'.red);
+    console.log(chalk.red('\nError creating component:\n'));
     console.log(e.stack);
   });
 
@@ -70,11 +69,11 @@ const createComponent = (componentPath, componentGenerator, answers, prerelease,
 
   if (fs.existsSync(componentPath)) {
     const moduleName = `@workday/canvas-kit-${prefix}react/${name}`;
-    console.log(`\nModule ${moduleName} already exists. Skipping.`.yellow);
+    console.log(chalk.yellow(`\nModule ${moduleName} already exists. Skipping.`));
   } else {
     componentGenerator(componentPath, name, description, prerelease, category);
 
-    console.log('\nAdding export to ' + `./modules/${prefix}react/index.ts`.cyan);
+    console.log('\nAdding export to ' + chalk.cyan(`./modules/${prefix}react/index.ts`));
     addExport(name, prerelease);
 
     console.log('\nBootstrapping dependencies.');

@@ -28,7 +28,7 @@ export default function transformer(file: FileInfo, api: API) {
       } else {
         // `insertBefore` ensures the import order multiple specifiers from labs-react/tokens
         // are split into new imports. `insertAfter` would reverse the order, which isn't incorrect,
-        // but probably not what you'd intuitively expect.
+        // but probably not what you'd intuitively expect.
         nodePath.insertBefore(
           j.importDeclaration([specifier], j.stringLiteral('@workday/canvas-kit-react/tokens'))
         );

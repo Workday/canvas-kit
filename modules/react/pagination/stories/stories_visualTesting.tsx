@@ -1,6 +1,4 @@
-/// <reference path="../../../../typings.d.ts" />
 import React from 'react';
-import withReadme from 'storybook-readme/with-readme';
 import {ContentDirection, StaticStates} from '@workday/canvas-kit-react/common';
 
 import {ComponentStatesTable} from '@workday/canvas-kit-labs-react/common';
@@ -13,12 +11,9 @@ import {
   getVisibleResultsMin,
 } from '../lib/Pagination';
 
-import README from '../README.md';
-
 export default withSnapshotsEnabled({
   title: 'Testing/React/Navigation/Pagination',
   component: Pagination,
-  decorators: [withReadme(README)],
 });
 
 const TableRenderer = ({direction = ContentDirection.LTR}) => {

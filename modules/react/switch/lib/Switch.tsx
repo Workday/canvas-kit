@@ -25,7 +25,7 @@ export interface SwitchProps extends Themeable {
   disabled?: boolean;
   /**
    * The HTML `id` of the underlying checkbox input element.
-   * @default A uniquely generated id by uuid()
+   * @default A uniquely generated id
    */
   id?: string;
   /**

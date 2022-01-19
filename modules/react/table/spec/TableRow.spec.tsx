@@ -1,24 +1,22 @@
 import * as React from 'react';
-import {shallow, mount} from 'enzyme';
+import {screen, render} from '@testing-library/react';
+
 import TableRow from '../lib/TableRow';
 
 describe('TableRow', () => {
-  test('Custom class is applied', () => {
+  it('should apply a custom class', () => {
     const customClassName = 'custom-class-name';
     const testProps = {
       className: customClassName,
     };
-    const component = shallow(<TableRow {...testProps} />);
+    render(<TableRow {...testProps} />);
 
-    expect(component.props().className.includes(customClassName));
-
-    component.unmount();
+    expect(screen.getByRole('row')).toHaveClass(customClassName);
   });
 
-  test('TableRow should spread extra props', () => {
-    const component = mount(<TableRow data-propspread="test" />);
-    const container = component.at(0).getDOMNode();
-    expect(container.getAttribute('data-propspread')).toBe('test');
-    component.unmount();
+  it('should spread extra props', () => {
+    render(<TableRow data-propspread="test" />);
+
+    expect(screen.getByRole('row')).toHaveAttribute('data-propspread', 'test');
   });
 });
