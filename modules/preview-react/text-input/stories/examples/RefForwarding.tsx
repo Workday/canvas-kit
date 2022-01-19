@@ -13,12 +13,12 @@ export const RefForwarding = () => {
   };
 
   const handleClick = () => {
-    changeFocus(ref.current)
+    changeFocus(ref.current);
   };
 
   return (
-    <VStack spacing='xxxs' alignItems='flex-start'>
-      <TextInput orientation='vertical'>
+    <VStack spacing="xxxs" alignItems="flex-start">
+      <TextInput orientation="vertical">
         <TextInput.Label>Email</TextInput.Label>
         <TextInput.Field onChange={handleChange} value={value} ref={ref} />
       </TextInput>

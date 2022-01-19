@@ -9,13 +9,9 @@ export const Placeholder = () => {
   };
 
   return (
-    <TextArea orientation='vertical'>
+    <TextArea orientation="vertical">
       <TextArea.Label>Leave a review</TextArea.Label>
-      <TextArea.Field
-        placeholder="Let us know how we did!"
-        onChange={handleChange}
-        value={value}
-      />
+      <TextArea.Field placeholder="Let us know how we did!" onChange={handleChange} value={value} />
     </TextArea>
   );
 };

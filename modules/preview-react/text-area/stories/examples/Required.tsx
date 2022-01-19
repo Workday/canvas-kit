@@ -9,7 +9,7 @@ export const Required = () => {
   };
 
   return (
-    <TextArea isRequired={true} orientation='vertical'>
+    <TextArea isRequired={true} orientation="vertical">
       <TextArea.Label>Leave a review</TextArea.Label>
       <TextArea.Field onChange={handleChange} value={value} />
     </TextArea>
