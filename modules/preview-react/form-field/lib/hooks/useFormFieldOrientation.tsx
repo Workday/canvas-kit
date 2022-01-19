@@ -6,23 +6,23 @@ import {space} from '@workday/canvas-kit-react/tokens';
  */
 export const useFormFieldOrientation = (orientation: 'horizontal' | 'vertical') => {
   let layoutProps: {
-    flexDirection: StackProps['flexDirection'],
-    alignItems: StackProps['alignItems'],
-    spacing: StackSpacing
-  }
+    flexDirection: StackProps['flexDirection'];
+    alignItems: StackProps['alignItems'];
+    spacing: StackSpacing;
+  };
 
   if (orientation === 'horizontal') {
     layoutProps = {
       flexDirection: 'row',
       spacing: space.l,
       alignItems: 'center',
-    }
+    };
   } else {
     layoutProps = {
       flexDirection: 'column',
       spacing: space.xxxs,
       alignItems: 'flex-start',
-    }
+    };
   }
 
   return layoutProps;

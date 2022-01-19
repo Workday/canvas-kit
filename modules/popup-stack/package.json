@@ -1,12 +1,12 @@
 {
   "name": "@workday/canvas-kit-popup-stack",
-  "version": "6.0.2",
+  "version": "6.3.4",
   "description": "Stack for managing popup UIs to coordinate global concerns like escape key handling and rendering order",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
   "main": "dist/commonjs/index.js",
   "module": "dist/es6/index.js",
-  "sideEffects": false,
+  "sideEffects": true,
   "types": "dist/es6/index.d.ts",
   "repository": {
     "type": "git",
@@ -33,12 +33,16 @@
     "build:rebuild": "npm-run-all clean build",
     "build:downlevel-dts": "yarn run downlevel-dts dist ts3.5/dist",
     "build": "npm-run-all --parallel build:cjs build:es6 --sequential build:downlevel-dts",
-    "depcheck": "node ../../utils/check-dependencies-exist.js"
+    "depcheck": "node ../../utils/check-dependencies-exist.js",
+    "typecheck:src": "tsc -p . --noEmit --incremental false"
   },
   "keywords": [
     "canvas",
     "canvas-kit",
     "workday",
     "popup-stack"
-  ]
+  ],
+  "dependencies": {
+    "screenfull": "^5.2.0"
+  }
 }

@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
 import {storiesOf} from '@storybook/react';
-import withReadme from 'storybook-readme/with-readme';
-import README from './README.md';
 import './index.scss';
 // @ts-ignore
 import initializeIcons from '../icon/lib/canvas-kit-css-icon';
@@ -47,7 +45,7 @@ class WithIconsDemo extends Component {
 }
 
 storiesOf('Components/Popups/Menu/CSS', module)
-  .addDecorator(withReadme(README))
+  .addParameters({ReadmePath: 'css/menu'})
   .add('Default', () => (
     <div className="story">
       <div className="wdc-type">
