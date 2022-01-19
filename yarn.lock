@@ -4522,6 +4522,175 @@
   resolved "https://registry.yarnpkg.com/@workday/canvas-depth-web/-/canvas-depth-web-0.16.4.tgz#3714a1a955055386a2b70cc05852162b1e056bf2"
   integrity sha512-l4LpCUk2G1FVRfo0Z+MkCWa9bzNIfWdUqGtdXaFSBySYgYvLhG6vNNuTK1VXls8jQdFCUROhKRWcy3Ht1n7NDg==
 
+"@workday/canvas-kit-css-action-bar@^6.3.4":
+  version "6.3.4"
+  resolved "https://registry.yarnpkg.com/@workday/canvas-kit-css-action-bar/-/canvas-kit-css-action-bar-6.3.4.tgz#b0ce2fa1f66ca3c3d0867ec08aa897524df93ebb"
+  integrity sha512-gSlI/5SSm80QcGzZX4eUay89OSjjYbwmtRW0CMYK+lmkbyDDS0qctUnYLR+43Z39mP6+ivmdOOWljSiBU00N/g==
+  dependencies:
+    "@workday/canvas-kit-css-button" "^6.3.4"
+    "@workday/canvas-kit-css-core" "^6.3.4"
+
+"@workday/canvas-kit-css-badge@^6.3.4":
+  version "6.3.4"
+  resolved "https://registry.yarnpkg.com/@workday/canvas-kit-css-badge/-/canvas-kit-css-badge-6.3.4.tgz#c9bdeacfa48bba956d05799be8bcaff0d8956a50"
+  integrity sha512-/hoOmd9H/0oAJAcfW9QFDBiGyK/5JOWtxupFHYE5K2DgANL4uTnh+n7QikKrs8dP7Iwwvcy+inoG1YJaUsTXLQ==
+
+"@workday/canvas-kit-css-banner@^6.3.4":
+  version "6.3.4"
+  resolved "https://registry.yarnpkg.com/@workday/canvas-kit-css-banner/-/canvas-kit-css-banner-6.3.4.tgz#f4bfbe04e1fc7c6dba42bdf9420f5cadcc2b4779"
+  integrity sha512-9r4Hg4GXKn1nfW672Rg6tzrJvZj9vXRrpDVFid+iidzYaxIWEtJPqg0F1MEPY1AxzaifoTBVqJ1tQL0xUS56Gg==
+  dependencies:
+    "@workday/canvas-kit-css-core" "^6.3.4"
+    "@workday/canvas-system-icons-web" "1.0.41"
+
+"@workday/canvas-kit-css-button@^6.3.4":
+  version "6.3.4"
+  resolved "https://registry.yarnpkg.com/@workday/canvas-kit-css-button/-/canvas-kit-css-button-6.3.4.tgz#573e7d3fd497809a5a3560d6d2296d9d03e946c2"
+  integrity sha512-6uW4vsX81NzkdkM/rrLohq3I97L6xYt3Cx1wWF/YzaCziRQvzJoCqun2UeaEdeUya3d4Xg+91Fjj8OSNVWRhCg==
+  dependencies:
+    "@workday/canvas-kit-css-core" "^6.3.4"
+    "@workday/canvas-system-icons-web" "1.0.41"
+
+"@workday/canvas-kit-css-card@^6.3.4":
+  version "6.3.4"
+  resolved "https://registry.yarnpkg.com/@workday/canvas-kit-css-card/-/canvas-kit-css-card-6.3.4.tgz#94020cf9653db876b3666b9983d06fbe7b02ed66"
+  integrity sha512-2maHygJothwNL+zvq7Z5hXcM9urD5b2G66VuiOBf5i1klPjhwNSUMP2VUX23/j/G6vZltnOpcWTfddwPQp3DTw==
+  dependencies:
+    "@workday/canvas-kit-css-core" "^6.3.4"
+
+"@workday/canvas-kit-css-checkbox@^6.3.4":
+  version "6.3.4"
+  resolved "https://registry.yarnpkg.com/@workday/canvas-kit-css-checkbox/-/canvas-kit-css-checkbox-6.3.4.tgz#bb42cfc106e6e8074654e4168f93851552ed700b"
+  integrity sha512-Ng/TZc1y657cHiRySL2gVMFO6zabNQQUgk71pVU/gVjqiQblPYoF1+BBtxv1AOa5LQPr3H9Hc6N7RfFyDdH2RQ==
+  dependencies:
+    "@workday/canvas-kit-css-common" "^6.3.4"
+    "@workday/canvas-kit-css-core" "^6.3.4"
+
+"@workday/canvas-kit-css-common@^6.3.4":
+  version "6.3.4"
+  resolved "https://registry.yarnpkg.com/@workday/canvas-kit-css-common/-/canvas-kit-css-common-6.3.4.tgz#79e22dcf48a039fd4189673bed60b647eaa1a5d6"
+  integrity sha512-Q8gWL+K7+xZMc054k753RI8BH6H1QETNjIFeARZMDbIB2n6kf7ZR/ha1uvAIraEJgVOZZ7JvVztMMCkpjgiLOg==
+  dependencies:
+    "@workday/canvas-kit-css-core" "^6.3.4"
+
+"@workday/canvas-kit-css-core@^6.3.4":
+  version "6.3.4"
+  resolved "https://registry.yarnpkg.com/@workday/canvas-kit-css-core/-/canvas-kit-css-core-6.3.4.tgz#a6a79884f3a02f647d89644a7d4a36092816bd2b"
+  integrity sha512-kK4dvHo0R8lMLaTWlzCgo3ROhP6FSLYEwvN8eaxiDjE6oh/f2jMr0htGbEheMDcNlpj1St2QCr+5JwiOBd10XQ==
+  dependencies:
+    "@workday/canvas-colors-web" "^2.0.0"
+    "@workday/canvas-depth-web" "^0.16.4"
+
+"@workday/canvas-kit-css-form-field@^6.3.4":
+  version "6.3.4"
+  resolved "https://registry.yarnpkg.com/@workday/canvas-kit-css-form-field/-/canvas-kit-css-form-field-6.3.4.tgz#5344e97e01250b906ca36d3695e6377fa23d39e1"
+  integrity sha512-7fW0RrXuPh69/bNMC3NcyR89N9qrsNM+0yebKftIlR9+uVg5I8bldofYTtCL4y3UdX+7iRQfsSdKNLzpeUr1jg==
+  dependencies:
+    "@workday/canvas-kit-css-common" "^6.3.4"
+    "@workday/canvas-kit-css-core" "^6.3.4"
+    "@workday/canvas-system-icons-web" "1.0.41"
+
+"@workday/canvas-kit-css-icon@^6.3.4":
+  version "6.3.4"
+  resolved "https://registry.yarnpkg.com/@workday/canvas-kit-css-icon/-/canvas-kit-css-icon-6.3.4.tgz#5cf3bc03700152c0307856e705d9ac6b6addc444"
+  integrity sha512-jkxybr+rXCFGTQhuTSc0cDLQ1X+gT1iS4JO9x/JPJDU/+izM6KCE8MVAOxJtcwFc0xxK8jvbOGjrTc1C7wecOg==
+  dependencies:
+    "@workday/canvas-colors-web" "^2.0.0"
+    "@workday/canvas-kit-css-core" "^6.3.4"
+    svg-injector "^1.1.3"
+    to-slug-case "^1.0.0"
+
+"@workday/canvas-kit-css-layout@^6.3.4":
+  version "6.3.4"
+  resolved "https://registry.yarnpkg.com/@workday/canvas-kit-css-layout/-/canvas-kit-css-layout-6.3.4.tgz#b3903a69add9827137ebcf0d7587de59d78ad200"
+  integrity sha512-S7Df7F3XYYNrhoWUUJWTIbhfyDjPez+6Z7bXp61OPpb2/OF8cyO5lOcUdUXs7CxpesucCLMm+sjeSUtWdYDuyg==
+  dependencies:
+    "@workday/canvas-kit-css-core" "^6.3.4"
+
+"@workday/canvas-kit-css-loading-animation@^6.3.4":
+  version "6.3.4"
+  resolved "https://registry.yarnpkg.com/@workday/canvas-kit-css-loading-animation/-/canvas-kit-css-loading-animation-6.3.4.tgz#2695206954f052bcffc7e78a6f335aeec10628fb"
+  integrity sha512-Clb7jgrLW3CuDeSzWM6HmHQvksWUmNMr2v6kVTC1+7Ilt1Ym1C6G4mBL39HC5FciOYyxcLD4QCTYLT6uq1969w==
+  dependencies:
+    "@workday/canvas-kit-css-core" "^6.3.4"
+
+"@workday/canvas-kit-css-menu@^6.3.4":
+  version "6.3.4"
+  resolved "https://registry.yarnpkg.com/@workday/canvas-kit-css-menu/-/canvas-kit-css-menu-6.3.4.tgz#4d4dff5b85834000b8ebcfb44622068e0adecd11"
+  integrity sha512-BGF3sB2L3Z0hwWQbv3MsVjMgCQHR65SjBt/9Ztml6U2vj8dyWwJkFhdkBkb4ynYtJ0puWZIVCM2pPFfr5AVWeA==
+  dependencies:
+    "@workday/canvas-kit-css-core" "^6.3.4"
+
+"@workday/canvas-kit-css-modal@^6.3.4":
+  version "6.3.4"
+  resolved "https://registry.yarnpkg.com/@workday/canvas-kit-css-modal/-/canvas-kit-css-modal-6.3.4.tgz#8d1d19097459869dc92473880fa04b71c9ad65fc"
+  integrity sha512-kFq0DB+yrd8gL9t3i2HrGVXJI/XeWgqGVNOqOXXDQh5zjmvuzAdDcGgwMTTKlRS9L+vbAWbDBiKCuYrSrERbFQ==
+  dependencies:
+    "@workday/canvas-kit-css-core" "^6.3.4"
+    "@workday/canvas-kit-css-popup" "^6.3.4"
+
+"@workday/canvas-kit-css-page-header@^6.3.4":
+  version "6.3.4"
+  resolved "https://registry.yarnpkg.com/@workday/canvas-kit-css-page-header/-/canvas-kit-css-page-header-6.3.4.tgz#ef6b8fcd9318ad9c4315147290de1f54df56478c"
+  integrity sha512-+xrCoeJDNKel8rC3g+xx4n8cKzMMxaETqImdExBD5F57BJZHCtIvVmYnekH/ipZm21sQNHV5+uTpJEWXH+PZeA==
+  dependencies:
+    "@workday/canvas-kit-css-core" "^6.3.4"
+
+"@workday/canvas-kit-css-popup@^6.3.4":
+  version "6.3.4"
+  resolved "https://registry.yarnpkg.com/@workday/canvas-kit-css-popup/-/canvas-kit-css-popup-6.3.4.tgz#0e072b58bee3cd4845f4271605aa8b249f63b08c"
+  integrity sha512-STYaayjzlHbIdCNr02gC76vedUwzticMd+pUV5ceWyplIW6KFd7tHh1/ZKWHSPIx4EnglKXDbqJZ5gnH91z/cg==
+  dependencies:
+    "@workday/canvas-kit-css-card" "^6.3.4"
+    "@workday/canvas-kit-css-core" "^6.3.4"
+
+"@workday/canvas-kit-css-radio@^6.3.4":
+  version "6.3.4"
+  resolved "https://registry.yarnpkg.com/@workday/canvas-kit-css-radio/-/canvas-kit-css-radio-6.3.4.tgz#89596d207ae7da1630340901b264f8aa42d01476"
+  integrity sha512-m5gR66g1tLvGAzqcqyssxBssQ9y5va46Bx+QIysMhd4blW4RkN9HhYvelbjp6KVpod+thMY0eVkFimRSFoqEDw==
+  dependencies:
+    "@workday/canvas-kit-css-common" "^6.3.4"
+    "@workday/canvas-kit-css-core" "^6.3.4"
+
+"@workday/canvas-kit-css-select@^6.3.4":
+  version "6.3.4"
+  resolved "https://registry.yarnpkg.com/@workday/canvas-kit-css-select/-/canvas-kit-css-select-6.3.4.tgz#5742f22850cc04b1d16af3482cfe6b53e58bd548"
+  integrity sha512-LnCeKpDCX1vr6PGs98HKkUowmeLFrkUXCmNJVJ4B2+6xjEq39trkAK0N3RBwyjzbEv6Dq9TVEJ+8093QA5pd4w==
+  dependencies:
+    "@workday/canvas-kit-css-common" "^6.3.4"
+    "@workday/canvas-kit-css-core" "^6.3.4"
+
+"@workday/canvas-kit-css-table@^6.3.4":
+  version "6.3.4"
+  resolved "https://registry.yarnpkg.com/@workday/canvas-kit-css-table/-/canvas-kit-css-table-6.3.4.tgz#1dd72079fe0fbc842f1d1175c7432282e74b1bdb"
+  integrity sha512-UeU3RB3TXb6U4no51SvIkY5ev5sY22R1N1AjG4/V25aLmFBtl6ULdP4H90t/qtWalNNefdSq54fjCE4rOtT/qA==
+  dependencies:
+    "@workday/canvas-kit-css-core" "^6.3.4"
+    "@workday/canvas-kit-css-icon" "^6.3.4"
+
+"@workday/canvas-kit-css-text-area@^6.3.4":
+  version "6.3.4"
+  resolved "https://registry.yarnpkg.com/@workday/canvas-kit-css-text-area/-/canvas-kit-css-text-area-6.3.4.tgz#45a1ff38e36719e8c9d8d21f782d37882f6615ed"
+  integrity sha512-Vx8Eb8PQE4j5Nf+ddcUIdAO62ItNPtmt4cfqpUTmOvfxWH702mRFrTcIOCarnqO0vO9IMLuDM4KIl/rajHHQpQ==
+  dependencies:
+    "@workday/canvas-kit-css-common" "^6.3.4"
+    "@workday/canvas-kit-css-core" "^6.3.4"
+
+"@workday/canvas-kit-css-text-input@^6.3.4":
+  version "6.3.4"
+  resolved "https://registry.yarnpkg.com/@workday/canvas-kit-css-text-input/-/canvas-kit-css-text-input-6.3.4.tgz#e1e3873c51e7600e8c839386c2cf94a6a928ae55"
+  integrity sha512-EPhAioSvquspN5firt0XitjeNuwC/rfcm+JVALoWcxHYRaWheAxvaXbOngungE+fq3rACc1MV7HMuMdXfoXNJw==
+  dependencies:
+    "@workday/canvas-kit-css-common" "^6.3.4"
+    "@workday/canvas-kit-css-core" "^6.3.4"
+
+"@workday/canvas-kit-css-tooltip@^6.3.4":
+  version "6.3.4"
+  resolved "https://registry.yarnpkg.com/@workday/canvas-kit-css-tooltip/-/canvas-kit-css-tooltip-6.3.4.tgz#24ace7c8b2be3caba45610e6cc98cc554fcd61d5"
+  integrity sha512-O8HmMKq8XBXBCXKnyI6n2JVjx5luhCZxozXIt439ndBhgV4MASg38U3O7Ozh57TnhogT5blVSNgWX3nQeUbQ2A==
+  dependencies:
+    "@workday/canvas-kit-css-core" "^6.3.4"
+
 "@workday/canvas-system-icons-web@1.0.41":
   version "1.0.41"
   resolved "https://registry.yarnpkg.com/@workday/canvas-system-icons-web/-/canvas-system-icons-web-1.0.41.tgz#ad764e1ba24e5d932270617c1515de6386386a92"
@@ -17070,9 +17239,9 @@ trim-newlines@^3.0.0:
   integrity sha512-c1PTsA3tYrIsLGkJkzHF+w9F2EyxfXGo4UyJc4pFL++FMjnq0HJS69T3M7d//gKrFKwy429bouPescbjecU+Zw==
 
 trim-off-newlines@^1.0.0:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/trim-off-newlines/-/trim-off-newlines-1.0.1.tgz#9f9ba9d9efa8764c387698bcbfeb2c848f11adb3"
-  integrity sha1-n5up2e+odkw4dpi8v+sshI8RrbM=
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/trim-off-newlines/-/trim-off-newlines-1.0.3.tgz#8df24847fcb821b0ab27d58ab6efec9f2fe961a1"
+  integrity sha512-kh6Tu6GbeSNMGfrrZh6Bb/4ZEHV1QlB4xNDBeog8Y9/QwFlKTRyWvY3Fs9tRDAMZliVUwieMgEdIeL/FtqjkJg==
 
 trim-trailing-lines@^1.0.0:
   version "1.1.2"
