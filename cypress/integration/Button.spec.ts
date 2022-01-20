@@ -36,4 +36,20 @@ describe('Button', () => {
         .should('contain', 'Click Me');
     });
   });
+
+  context('given hyperlinks are rendered', () => {
+    beforeEach(() => {
+      h.stories.load('Components/Buttons/Button/React', 'Link External');
+    });
+
+    it('should not have any axe errors', () => {
+      cy.checkA11y();
+    });
+
+    it('should render the correct text', () => {
+      cy.get('a')
+        .first()
+        .should('contain', 'External Hyperlink');
+    });
+  });
 });

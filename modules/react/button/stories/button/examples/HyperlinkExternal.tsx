@@ -15,7 +15,7 @@ export const LinkExternal = () => (
     alignItems="center"
     spacing="xxxs"
   >
-    <span>External HyperLink</span>
-    <SystemIcon icon={extLinkIcon} aria-label="Opens link in new window" size={16} />
+    <span>External Hyperlink</span>
+    <SystemIcon icon={extLinkIcon} role="img" aria-label="Opens link in new window" size={16} />
   </HStack>
 );
