@@ -1,6 +1,6 @@
 import * as React from 'react';
-import {type, typeColors} from '@workday/canvas-kit-react/tokens';
-import {accessibleHide, styled} from '@workday/canvas-kit-react/common';
+import {type, typeColors, space} from '@workday/canvas-kit-react/tokens';
+import {accessibleHide, styled, StyledType} from '@workday/canvas-kit-react/common';
 
 import {PaginationModel} from './types';
 import {Flex, FlexProps} from '@workday/canvas-kit-labs-react/layout';
@@ -13,40 +13,37 @@ export interface AdditionalDetailsProps extends FlexProps {
   shouldHideDetails?: boolean;
 }
 
-const StyledAdditionalDetails = styled(Flex)<Pick<AdditionalDetailsProps, 'shouldHideDetails'>>(
-  ({shouldHideDetails}) => {
-    const styles = {
-      ...type.levels.subtext.medium,
-      color: typeColors.hint,
+const StyledAdditionalDetails = styled(Flex)<
+  StyledType & Pick<AdditionalDetailsProps, 'shouldHideDetails'>
+>(({shouldHideDetails}) => {
+  const styles = {
+    ...type.levels.subtext.medium,
+    color: typeColors.hint,
+  };
+  if (shouldHideDetails) {
+    return {
+      ...styles,
+      ...accessibleHide,
+      marginTop: space.zero,
     };
-    if (shouldHideDetails) {
-      return {
-        ...styles,
-        ...accessibleHide,
-      };
-    } else {
-      return {
-        ...styles,
-      };
-    }
+  } else {
+    return {
+      ...styles,
+      marginTop: space.xs,
+    };
   }
-);
+});
 
 export const AdditionalDetails = ({
   model,
   children,
   shouldAnnounceToScreenReader,
-  shouldHideDetails = false,
   ...elemProps
 }: AdditionalDetailsProps) => {
   const liveRegionProps = useLiveRegion({shouldAnnounceToScreenReader});
 
   return (
-    <StyledAdditionalDetails
-      marginTop={shouldHideDetails ? 'zero' : 'xs'}
-      {...liveRegionProps}
-      {...elemProps}
-    >
+    <StyledAdditionalDetails {...liveRegionProps} {...elemProps}>
       {typeof children === 'function' ? children(model) : children}
     </StyledAdditionalDetails>
   );
