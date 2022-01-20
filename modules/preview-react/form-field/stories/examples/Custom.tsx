@@ -45,7 +45,7 @@ export const Custom = () => {
 
   const model = useFormFieldModel({isRequired: true});
 
-  const layoutProps = useFormFieldOrientation('vertical')
+  const layoutProps = useFormFieldOrientation('vertical');
 
   return (
     <Stack {...layoutProps}>

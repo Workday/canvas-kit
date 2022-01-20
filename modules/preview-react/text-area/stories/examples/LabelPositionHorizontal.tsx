@@ -9,7 +9,7 @@ export const LabelPositionHorizontal = () => {
   };
 
   return (
-    <TextArea orientation='horizontal'>
+    <TextArea orientation="horizontal">
       <TextArea.Label>Leave a review</TextArea.Label>
       <TextArea.Field onChange={handleChange} value={value} />
     </TextArea>
