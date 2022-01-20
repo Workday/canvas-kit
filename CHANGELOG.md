@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v6.3.6](https://github.com/Workday/canvas-kit/releases/tag/v6.3.6) (2022-01-20)
+
+### Documentation
+
+- docs: Add examples for Select and TextInput with Formik ([#1435](https://github.com/Workday/canvas-kit/pull/1435)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
 ## [v6.3.5](https://github.com/Workday/canvas-kit/releases/tag/v6.3.5) (2022-01-19)
 
 
