@@ -1,7 +1,7 @@
 import React from 'react';
 import {Box} from '@workday/canvas-kit-labs-react/common';
 import {Banner} from '@workday/canvas-kit-react/banner';
-import styled from '../../../common/lib/theming/styled';
+import {styled} from '@workday/canvas-kit-react/common';
 
 const StyledBanner = styled(Banner)({
   position: 'absolute',

@@ -1,3 +1,6 @@
+/** @jsxRuntime classic */
+/** @jsx jsx */
+import {jsx} from '@emotion/core';
 import React from 'react';
 import {render, fireEvent} from '@testing-library/react';
 
@@ -81,10 +84,10 @@ export function verifyComponent(
       });
     });
 
-    it('should merge style props correctly', () => {
+    it('should merge css props correctly', () => {
       const ref = {current: null};
       const attrs = {
-        style: {
+        css: {
           top: 4,
           left: 8,
         },

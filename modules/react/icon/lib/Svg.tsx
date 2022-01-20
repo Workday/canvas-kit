@@ -2,7 +2,7 @@ import {CSSObject} from '@emotion/core';
 import * as React from 'react';
 import {CanvasIcon, CanvasIconTypes} from '@workday/design-assets-types';
 import {validateIconType} from './utils';
-import styled from '../../common/lib/theming/styled';
+import {styled} from '@workday/canvas-kit-react/common';
 
 export interface SvgProps extends React.HTMLAttributes<HTMLSpanElement> {
   src: CanvasIcon;

@@ -1,6 +1,12 @@
 import * as React from 'react';
 
-import {ExtractProps, createComponent, useModelContext} from '@workday/canvas-kit-react/common';
+import {
+  ExtractProps,
+  createComponent,
+  useModelContext,
+  styled,
+  StyledType,
+} from '@workday/canvas-kit-react/common';
 import {Box} from '@workday/canvas-kit-labs-react/common';
 
 import {BannerModelContext} from './Banner';
@@ -15,6 +21,10 @@ export interface BannerActionTextProps extends ExtractProps<typeof Box, never> {
   children?: React.ReactNode;
 }
 
+const StyledActionBarText = styled(Box.as('span'))<StyledType>({
+  textDecoration: 'underline',
+});
+
 export const BannerActionText = createComponent('span')({
   displayName: 'Banner.ActionTextText',
   Component: (
@@ -26,14 +36,14 @@ export const BannerActionText = createComponent('span')({
     const props = useBannerActionText(localModel, elemProps, ref);
 
     return (
-      <Box
+      <StyledActionBarText
         display={localModel.state.isSticky ? 'none' : 'inline'}
+        ref={ref}
         as={Element}
-        style={{textDecoration: 'underline'}}
         {...props}
       >
         {children}
-      </Box>
+      </StyledActionBarText>
     );
   },
 });
