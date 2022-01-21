@@ -19,7 +19,7 @@ export interface SvgProps extends React.HTMLAttributes<HTMLSpanElement> {
 const StyledIconSpan = styled('span')<Pick<SvgProps, 'shouldMirror' | 'styles'>>(
   ({shouldMirror, styles}) => ({
     display: 'inline-block',
-    '& svg': {display: 'block'},
+    '> svg': {display: 'block'},
     transform: shouldMirror ? 'scaleX(-1)' : undefined,
     ...styles,
   })
