@@ -9,7 +9,7 @@ export const Disabled = () => {
   };
 
   return (
-    <TextArea orientation='vertical'>
+    <TextArea orientation="vertical">
       <TextArea.Label>Leave a review</TextArea.Label>
       <TextArea.Field disabled onChange={handleChange} value={value} />
     </TextArea>

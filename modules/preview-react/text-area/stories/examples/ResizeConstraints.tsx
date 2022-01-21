@@ -14,7 +14,7 @@ export const ResizeConstraints = () => {
   };
 
   return (
-    <TextArea orientation='vertical'>
+    <TextArea orientation="vertical">
       <TextArea.Label>Leave a review</TextArea.Label>
       <StyledField onChange={handleChange} value={value} />
     </TextArea>

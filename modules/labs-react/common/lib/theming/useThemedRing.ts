@@ -15,12 +15,16 @@ const isAccessible = (foreground: string, background: string = colors.frenchVani
 
 const getPaletteColorsFromTheme = (
   palette: CanvasThemePalette,
-  fallbackColors?: ContrastColors,
+  fallbackColors?: ContrastColors
 ): ContrastColors => {
   return {
-    outer: isAccessible(palette.main) ? palette.main : isAccessible(palette.darkest) ? palette.darkest : fallbackColors?.outer,
+    outer: isAccessible(palette.main)
+      ? palette.main
+      : isAccessible(palette.darkest)
+      ? palette.darkest
+      : fallbackColors?.outer,
     inner: fallbackColors?.inner ? fallbackColors.inner : palette.main,
-  }
+  };
 };
 
 export function getPaletteColors(
@@ -31,10 +35,10 @@ export function getPaletteColors(
 
   switch (type) {
     case 'error': {
-      return getPaletteColorsFromTheme(palette, { outer: inputColors.error.border });
+      return getPaletteColorsFromTheme(palette, {outer: inputColors.error.border});
     }
     case 'alert': {
-      return getPaletteColorsFromTheme(palette, { outer: colors.cantaloupe600 });
+      return getPaletteColorsFromTheme(palette, {outer: colors.cantaloupe600});
     }
     case 'success': {
       return getPaletteColorsFromTheme(palette, {

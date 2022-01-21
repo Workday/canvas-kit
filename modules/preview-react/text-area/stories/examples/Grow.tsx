@@ -9,7 +9,7 @@ export const Grow = () => {
   };
 
   return (
-    <TextArea orientation='vertical' alignItems='stretch'>
+    <TextArea orientation="vertical" alignItems="stretch">
       <TextArea.Label>Leave a review</TextArea.Label>
       <TextArea.Field onChange={handleChange} value={value} />
     </TextArea>

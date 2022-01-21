@@ -8,7 +8,12 @@ import {
   space,
   type,
 } from '@workday/canvas-kit-react/tokens';
-import {createComponent, ExtractProps, useModelContext, useTheme} from '@workday/canvas-kit-react/common';
+import {
+  createComponent,
+  ExtractProps,
+  useModelContext,
+  useTheme,
+} from '@workday/canvas-kit-react/common';
 import {useThemedRing} from '@workday/canvas-kit-labs-react/common';
 import {FormField} from '@workday/canvas-kit-preview-react/form-field';
 
@@ -68,9 +73,9 @@ export const TextInputField = createComponent('input')({
         css={[baseStyles, focusStyles]}
         padding={space.xxs}
         margin={0}
-        display='block'
-        height='40px'
-        minWidth='280px'
+        display="block"
+        height="40px"
+        minWidth="280px"
         border={`1px solid ${inputColors.border}`}
         backgroundColor={inputColors.background}
         borderRadius={borderRadius.m}

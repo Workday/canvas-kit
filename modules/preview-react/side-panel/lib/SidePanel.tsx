@@ -5,6 +5,7 @@ import {css, CSSObject, jsx, keyframes} from '@emotion/core';
 import {IconButton, IconButtonProps} from '@workday/canvas-kit-react/button';
 import {space, colors, depth} from '@workday/canvas-kit-react/tokens';
 import {transformationImportIcon} from '@workday/canvas-system-icons-web';
+import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 
 export type SidePanelVariant = 'standard' | 'alternate';
 export type SidePanelTransitionStates = 'collapsed' | 'collapsing' | 'expanded' | 'expanding';
@@ -206,7 +207,18 @@ const SidePanel = ({
   );
 };
 
-export type ToggleButtonProps = Omit<IconButtonProps, 'aria-label'>;
+export type ToggleButtonProps = IconButtonProps & {
+  /**
+   * The tooltip text to expand the side panel
+   * @default 'Expand'
+   */
+  tooltipTextExpand?: string;
+  /**
+   * The tooltip text to collapse the side panel
+   * @default 'Collapse'
+   */
+  tooltipTextCollapse?: string;
+};
 
 /**
  * A toggle button styled specifically for the side panel container.
@@ -214,6 +226,8 @@ export type ToggleButtonProps = Omit<IconButtonProps, 'aria-label'>;
 const ToggleButton = ({
   variant = 'plain',
   icon = transformationImportIcon,
+  tooltipTextExpand: expandLabel = 'Expand',
+  tooltipTextCollapse: collapseLabel = 'Collapse',
   ...rest
 }: ToggleButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>) => {
   const context = React.useContext(SidePanelContext);
@@ -243,8 +257,11 @@ const ToggleButton = ({
         : `scaleX(${rtlOrigin === 'left' ? '-1' : '1'})`,
   });
 
-  // @ts-ignore aria-label type error here. The user will decide to use aria-label or aria-labelledby
-  return <IconButton type="button" css={buttonStyle} icon={icon} variant={variant} {...rest} />;
+  return (
+    <Tooltip title={context.state === 'collapsed' ? expandLabel : collapseLabel} type="muted">
+      <IconButton type="button" css={buttonStyle} icon={icon} variant={variant} {...rest} />
+    </Tooltip>
+  );
 };
 
 SidePanel.ToggleButton = ToggleButton;
