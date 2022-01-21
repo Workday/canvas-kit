@@ -112,7 +112,7 @@ const SidePanel = ({
   onExpandedChange,
   onStateTransition,
   origin = 'left',
-  variant = 'standard',
+  // variant = 'standard',
   touched,
   ...elemProps
 }: SidePanelProps) => {
@@ -173,8 +173,8 @@ const SidePanel = ({
       as={as}
       width={expanded ? expandedWidth : collapsedWidth}
       maxWidth={expanded ? expandedWidth : collapsedWidth}
-      backgroundColor={variant === 'alternate' ? colors.frenchVanilla100 : colors.soap100}
-      depth={variant === 'alternate' ? undefined : 3}
+      backgroundColor={elemProps.variant === 'alternate' ? colors.frenchVanilla100 : colors.soap100}
+      depth={elemProps.variant === 'alternate' ? 3 : undefined}
       animation={
         touched ? `${expanded ? motion.expand : motion.collapse} 200ms ease-out` : undefined
       }

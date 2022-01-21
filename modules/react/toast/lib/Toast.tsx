@@ -54,8 +54,10 @@ const ToastSystemIcon = styled(SystemIcon)({
   alignSelf: 'start',
 });
 
+const {color, ...subTextLargeStyles} = type.levels.subtext.large;
+
 const StyledActionButton = styled(Hyperlink)<StyledType>({
-  ...type.levels.subtext.large,
+  ...subTextLargeStyles,
   display: 'block',
   backgroundColor: 'transparent', // To prevent Safari from rendering grey 'buttonface' as bgcolor
   border: 'none',

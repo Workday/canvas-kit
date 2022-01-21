@@ -169,7 +169,7 @@ export default class StatusIndicator extends React.Component<StatusIndicatorProp
             color={variant.color}
             icon={icon}
             size={14}
-            style={{paddingRight: space.xxxs}}
+            style={{paddingRight: space.xxxs, display: 'flex'}}
           />
         )}
         <StatusLabel>{label}</StatusLabel>
