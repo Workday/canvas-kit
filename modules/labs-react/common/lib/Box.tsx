@@ -28,6 +28,7 @@ const shouldForwardProp = (prop: string) => {
   return isPropValid(prop) && !omittedProps.includes(prop);
 };
 
+// Meant to be used with elements. The `shouldForwardProps` will remove all style props
 const StyledBoxElement = styled('div', {shouldForwardProp})<StyledType & BoxProps>(
   {
     boxSizing: 'border-box',
@@ -41,6 +42,7 @@ const StyledBoxElement = styled('div', {shouldForwardProp})<StyledType & BoxProp
   space
 );
 
+// Meant to be used with components. There is no `shouldForwardProps` - all props will be forwarded to the component
 const StyledBoxComponent = styled('div')<StyledType & BoxProps>(
   {
     boxSizing: 'border-box',
