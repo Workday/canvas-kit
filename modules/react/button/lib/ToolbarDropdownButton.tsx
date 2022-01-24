@@ -1,5 +1,4 @@
-/** @jsx jsx */
-import {jsx} from '@emotion/core';
+import React from 'react';
 import {colors, space, borderRadius} from '@workday/canvas-kit-react/tokens';
 import {
   focusRing,

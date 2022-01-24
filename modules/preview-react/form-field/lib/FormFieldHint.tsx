@@ -1,15 +1,14 @@
-/** @jsx jsx */
-import {jsx} from '@emotion/core';
 import React from 'react';
-
 import {
   createComponent,
   ExtractProps,
   useModelContext,
   useTheme,
+  styled,
+  StyledType,
 } from '@workday/canvas-kit-react/common';
 import {space, type} from '@workday/canvas-kit-react/tokens';
-import {Box} from '@workday/canvas-kit-labs-react/common';
+import {Box, BoxProps} from '@workday/canvas-kit-labs-react/common';
 
 import {FormFieldModelContext} from './FormField';
 import {FormFieldModel, useFormFieldHint} from './hooks';
@@ -21,6 +20,10 @@ export interface FormFieldHintProps extends ExtractProps<typeof Box, never> {
    */
   children?: React.ReactNode;
 }
+
+const StyledHint = styled(Box)<StyledType & BoxProps>({
+  ...type.levels.subtext.medium,
+});
 
 export const FormFieldHint = createComponent('p')({
   displayName: 'FormField.Hint',
@@ -35,17 +38,14 @@ export const FormFieldHint = createComponent('p')({
     }
 
     return (
-      <Box
+      <StyledHint
         as={Element}
-        css={{
-          ...type.levels.subtext.medium,
-        }}
         color={localModel.state.hasError ? theme.canvas.palette.error.main : undefined}
         marginY={space.xxs}
         {...props}
       >
         {children}
-      </Box>
+      </StyledHint>
     );
   },
 });

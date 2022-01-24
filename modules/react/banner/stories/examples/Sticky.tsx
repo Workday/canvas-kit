@@ -1,24 +1,21 @@
-/** @jsx jsx */
-import {jsx} from '@emotion/core';
 import React from 'react';
-
-import {CSSProperties} from '@workday/canvas-kit-react/tokens';
-import {Box, useThemeRTL} from '@workday/canvas-kit-labs-react/common';
+import {Box} from '@workday/canvas-kit-labs-react/common';
 import {Banner} from '@workday/canvas-kit-react/banner';
+import {styled} from '@workday/canvas-kit-react/common';
 
-const styles: CSSProperties = {
+const StyledBanner = styled(Banner)({
   position: 'absolute',
   right: 0,
-};
+});
 
 export const Sticky = () => {
   return (
     <Box height={64}>
-      <Banner hasError={true} isSticky={true} css={styles}>
+      <StyledBanner hasError={true} isSticky={true}>
         <Banner.Icon />
         <Banner.Label>3 Errors</Banner.Label>
         <Banner.ActionText />
-      </Banner>
+      </StyledBanner>
     </Box>
   );
 };

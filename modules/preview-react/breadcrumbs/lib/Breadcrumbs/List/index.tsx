@@ -1,26 +1,28 @@
-/** @jsx jsx */
-import React, {forwardRef} from 'react';
-import {css, jsx} from '@emotion/core';
-
-const breadcrumbListStyles = css({
-  alignItems: 'center',
-  boxSizing: 'border-box',
-  display: 'inline-flex',
-  // minHeight set to keep the nav from bouncing when the icon button appears / disappears
-  minHeight: 40,
-  listStyle: 'none',
-  margin: 0,
-  padding: 0,
-});
+import React from 'react';
+import {createComponent} from '@workday/canvas-kit-react/common';
+import {Flex} from '@workday/canvas-kit-labs-react/layout';
 
 export type BreadcrumbsListProps = React.HTMLAttributes<HTMLUListElement>;
 
-export const BreadcrumbsList = forwardRef(
-  ({children, ...props}: BreadcrumbsListProps, ref: React.Ref<HTMLUListElement>) => {
+export const BreadcrumbsList = createComponent('ul')({
+  displayName: 'BreadcrumbsList',
+  Component: ({children, ...elemProps}: BreadcrumbsListProps, ref) => {
     return (
-      <ul css={breadcrumbListStyles} role="list" ref={ref} {...props}>
+      <Flex
+        padding="zero"
+        margin="zero"
+        display="inline-flex"
+        alignItems="center"
+        minHeight={40}
+        listStyle="none"
+        style={{boxSizing: 'border-box'}}
+        as="ul"
+        role="list"
+        ref={ref}
+        {...elemProps}
+      >
         {children}
-      </ul>
+      </Flex>
     );
-  }
-);
+  },
+});

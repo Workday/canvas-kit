@@ -1,20 +1,17 @@
-/** @jsx jsx */
-import {jsx} from '@emotion/core';
 import React from 'react';
 
-import {space, colors, borderRadius} from '@workday/canvas-kit-react/tokens';
+import {colors} from '@workday/canvas-kit-react/tokens';
 import {IconButton} from '@workday/canvas-kit-react/button';
 import {activityStreamIcon} from '@workday/canvas-system-icons-web';
-
-const blueBackground = {
-  backgroundColor: colors.blueberry400,
-  borderRadius: borderRadius.m,
-  padding: space.xxs,
-  display: 'inline-block',
-};
+import {Flex} from '@workday/canvas-kit-labs-react/layout';
 
 export const InverseFilled = () => (
-  <div css={blueBackground}>
+  <Flex
+    display="inline-flex"
+    backgroundColor={colors.blackPepper400}
+    borderRadius="m"
+    padding="xxs"
+  >
     <IconButton icon={activityStreamIcon} aria-label="Activity Stream" variant="inverseFilled" />
-  </div>
+  </Flex>
 );

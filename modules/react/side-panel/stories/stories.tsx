@@ -1,5 +1,3 @@
-/** @jsx jsx */
-import {css, jsx} from '@emotion/core';
 import * as React from 'react';
 import {homeIcon, starIcon, rocketIcon, plusIcon} from '@workday/canvas-system-icons-web';
 import styled from '@emotion/styled';
@@ -12,7 +10,8 @@ import {Avatar} from '@workday/canvas-kit-react/avatar';
 import {SidePanel} from '@workday/canvas-kit-react/side-panel';
 import {SidePanelProps} from '../lib/SidePanel';
 
-import {defaultCanvasTheme} from '@workday/canvas-kit-react/common';
+import {defaultCanvasTheme, StyledType} from '@workday/canvas-kit-react/common';
+import {Flex} from '@workday/canvas-kit-labs-react/layout';
 
 export default {
   title: 'Components/Containers/Side Panel/React',
@@ -69,22 +68,19 @@ const UnorderedList = styled('ul')({
   paddingLeft: 0,
 });
 
-const listItemOpen = css({
-  padding: '15px 24px',
-  marginLeft: '-24px',
-  marginRight: '-24px',
-});
-
-const listItemClosed = css({
-  padding: '15px 20px',
-  marginLeft: 0,
-  marginRight: 0,
-  justifyContent: 'center',
-});
-
 const AddButton = styled(IconButton)({
   margin: '0 auto',
   display: 'block',
+});
+
+const StyledListItem = styled(Flex)<StyledType>({
+  display: 'flex',
+  listStyle: 'none',
+  alignItems: 'end',
+  cursor: 'pointer',
+  '&:hover': {
+    backgroundColor: colors.soap300,
+  },
 });
 
 class SidePanelWrapper extends React.Component<SidePanelProps, SidePanelState> {
@@ -94,7 +90,6 @@ class SidePanelWrapper extends React.Component<SidePanelProps, SidePanelState> {
 
   public render() {
     const {open} = this.state;
-    const listItemStyles = open ? listItemOpen : listItemClosed;
 
     return (
       <SidePanel
@@ -113,24 +108,40 @@ class SidePanelWrapper extends React.Component<SidePanelProps, SidePanelState> {
         )}
         {/* TODO replace this with our list component */}
         <UnorderedList>
-          <ListItem css={listItemStyles}>
+          <StyledListItem
+            padding={open ? '15px 24px' : '15px 20px'}
+            marginLeft={open ? '-24px' : 0}
+            marginRight={open ? '-24px' : 0}
+            justifyContent={open ? undefined : 'center'}
+          >
             <span>
               <SystemIcon icon={homeIcon} />
             </span>
             {open && <ListTitle>Home</ListTitle>}
-          </ListItem>
-          <ListItem css={listItemStyles}>
+          </StyledListItem>
+          <StyledListItem
+            padding={open ? '15px 24px' : '15px 20px'}
+            marginLeft={open ? '-24px' : 0}
+            marginRight={open ? '-24px' : 0}
+            justifyContent={open ? undefined : 'center'}
+          >
+            >
             <span>
               <SystemIcon icon={starIcon} />
             </span>
             {open && <ListTitle>Favorites</ListTitle>}
-          </ListItem>
-          <ListItem css={listItemStyles}>
+          </StyledListItem>
+          <StyledListItem
+            padding={open ? '15px 24px' : '15px 20px'}
+            marginLeft={open ? '-24px' : 0}
+            marginRight={open ? '-24px' : 0}
+            justifyContent={open ? undefined : 'center'}
+          >
             <span>
               <SystemIcon icon={rocketIcon} />
             </span>
             {open && <ListTitle>Items</ListTitle>}
-          </ListItem>
+          </StyledListItem>
         </UnorderedList>
       </SidePanel>
     );

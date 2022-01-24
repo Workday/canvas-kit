@@ -1,6 +1,4 @@
-/** @jsx jsx */
 import * as React from 'react';
-import {jsx} from '@emotion/core';
 import {
   SidePanel,
   useSidePanel,
@@ -9,6 +7,13 @@ import {
 import {Flex} from '@workday/canvas-kit-labs-react/layout';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {colors, type} from '@workday/canvas-kit-react/tokens';
+import {styled} from '@workday/canvas-kit-react/common';
+
+const StyledHeader = styled('h3')({
+  ...type.levels.body.large,
+  color: colors.licorice500,
+  fontWeight: type.properties.fontWeights.bold,
+});
 
 export const ExternalControl = () => {
   const {expanded, panelProps, labelProps, controlProps} = useSidePanel({initialExpanded: false});
@@ -28,16 +33,7 @@ export const ExternalControl = () => {
       >
         {panelState === 'expanded' && (
           <Flex alignItems="center" paddingY="s" paddingX="xs">
-            <h3
-              css={{
-                ...type.levels.body.large,
-                color: colors.licorice500,
-                fontWeight: type.properties.fontWeights.bold,
-              }}
-              {...labelProps}
-            >
-              Tasks Panel
-            </h3>
+            <StyledHeader {...labelProps}>Tasks Panel</StyledHeader>
           </Flex>
         )}
       </SidePanel>

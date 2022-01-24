@@ -1,6 +1,4 @@
 /// <reference path="../../../../typings.d.ts" />
-/** @jsx jsx */
-import {jsx} from '@emotion/core';
 import styled from '@emotion/styled';
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
@@ -9,7 +7,7 @@ import chroma from 'chroma-js';
 import {notificationsIcon, inboxIcon} from '@workday/canvas-system-icons-web';
 
 import {Avatar} from '@workday/canvas-kit-react/avatar';
-import {colors, space, gradients} from '@workday/canvas-kit-react/tokens';
+import {colors, gradients} from '@workday/canvas-kit-react/tokens';
 import {IconButton, PrimaryButton} from '@workday/canvas-kit-react/button';
 import {MenuItem} from '@workday/canvas-kit-preview-react/menu';
 import {SearchForm, SearchFormProps} from '@workday/canvas-kit-labs-react/search-form';
@@ -22,22 +20,7 @@ import {
 } from '../index';
 
 import bgImg from '../static/workday-bg.jpg';
-
-const containerStyle = {
-  backgroundColor: colors.soap100,
-  padding: space.m,
-};
-
-const backgroundStyle = {
-  padding: `0 0 64px 0`,
-  background: `linear-gradient(${chroma(colors.blueberry500)
-    .alpha(0.8)
-    .css()}, ${chroma(colors.blueberry400)
-    .alpha(0.8)
-    .css()}), url(${bgImg})`,
-  backgroundPosition: `0 50%`,
-  backgroundSize: 'cover',
-};
+import {Box} from '@workday/canvas-kit-labs-react/common';
 
 // Simulate a React Router link
 const Link = styled('a')<{to: string}>({});
@@ -122,7 +105,7 @@ storiesOf('Labs/Header/React', module)
   .addParameters({ReadmePath: 'labs-react/header'})
   .add('Global Header', () => (
     <div className="story">
-      <div css={containerStyle}>
+      <Box backgroundColor={colors.soap100} padding="m">
         <DeprecatedGlobalHeader
           brand={
             <a href="#">
@@ -152,8 +135,8 @@ storiesOf('Labs/Header/React', module)
             altText="Profile"
           />
         </DeprecatedGlobalHeader>
-      </div>
-      <div css={containerStyle}>
+      </Box>
+      <Box backgroundColor={colors.soap100} padding="m">
         <DeprecatedGlobalHeader
           brand={<DeprecatedWorkdayLogoTitle variant={DeprecatedHeaderVariant.Global} />}
           menuToggle={<Avatar onClick={handleMenuClickTest} />}
@@ -169,8 +152,8 @@ storiesOf('Labs/Header/React', module)
           <IconButton icon={inboxIcon} variant="circle" title="Inbox" aria-label="Inbox" />
           <Avatar onClick={handleAvatarClickTest} altText="Profile" />
         </DeprecatedGlobalHeader>
-      </div>
-      <div css={containerStyle}>
+      </Box>
+      <Box backgroundColor={colors.soap100} padding="m">
         <DeprecatedGlobalHeader
           leftSlot={<SearchForm isCollapsed={false} onSubmit={handleSearchSubmitTest} />}
           onMenuClick={handleMenuClickTest}
@@ -185,12 +168,12 @@ storiesOf('Labs/Header/React', module)
           <IconButton icon={inboxIcon} variant="circle" title="Inbox" aria-label="Inbox" />
           <Avatar onClick={handleAvatarClickTest} altText="Profile" />
         </DeprecatedGlobalHeader>
-      </div>
+      </Box>
     </div>
   ))
   .add('Dub Header', () => (
     <div className="story">
-      <div css={containerStyle}>
+      <Box backgroundColor={colors.soap100} padding="m">
         <DeprecatedHeader
           title="Required"
           leftSlot={
@@ -203,8 +186,8 @@ storiesOf('Labs/Header/React', module)
           }
           isCollapsed={false}
         />
-      </div>
-      <div css={containerStyle}>
+      </Box>
+      <Box backgroundColor={colors.soap100} padding="m">
         <DeprecatedHeader
           title="Icons Only"
           brandUrl="#"
@@ -220,9 +203,9 @@ storiesOf('Labs/Header/React', module)
           <IconButton variant="circle" icon={inboxIcon} title="Inbox" aria-label="Inbox" />
           <Avatar onClick={handleAvatarClickTest} altText="Profile" />
         </DeprecatedHeader>
-      </div>
+      </Box>
       <br />
-      <div css={containerStyle}>
+      <Box backgroundColor={colors.soap100} padding="m">
         <DeprecatedHeader
           title="Kitchen Sink"
           themeColor={DeprecatedHeader.Theme.Blue}
@@ -230,7 +213,7 @@ storiesOf('Labs/Header/React', module)
           onMenuClick={handleMenuClickTest}
           leftSlot={<SearchWithAutoComplete searchTheme={SearchForm.Theme.Dark} />}
           isCollapsed={false}
-          css={[{zIndex: 4}]}
+          style={{zIndex: 4}}
         >
           {nav}
           <IconButton
@@ -242,9 +225,9 @@ storiesOf('Labs/Header/React', module)
           <Avatar onClick={handleAvatarClickTest} altText="Profile" />
           <PrimaryButton>Download</PrimaryButton>
         </DeprecatedHeader>
-      </div>
+      </Box>
       <br />
-      <div css={containerStyle}>
+      <Box backgroundColor={colors.soap100} padding="m">
         <DeprecatedHeader
           variant={DeprecatedHeader.Variant.Dub}
           title="Ignored when brand prop exists..."
@@ -272,9 +255,9 @@ storiesOf('Labs/Header/React', module)
           <IconButton variant="circle" icon={inboxIcon} title="Inbox" aria-label="Inbox" />
           <PrimaryButton>Logout</PrimaryButton>
         </DeprecatedHeader>
-      </div>
+      </Box>
       <br />
-      <div css={containerStyle}>
+      <Box backgroundColor={colors.soap100} padding="m">
         <DeprecatedHeader
           variant={DeprecatedHeader.Variant.Dub}
           title="Centered Menu"
@@ -296,9 +279,9 @@ storiesOf('Labs/Header/React', module)
           <IconButton variant="circle" icon={inboxIcon} title="Inbox" aria-label="Inbox" />
           <PrimaryButton>Logout</PrimaryButton>
         </DeprecatedHeader>
-      </div>
+      </Box>
       <br />
-      <div css={containerStyle}>
+      <Box backgroundColor={colors.soap100} padding="m">
         <DeprecatedHeader
           variant={DeprecatedHeader.Variant.Dub}
           title="Centered Menu Without Search"
@@ -317,9 +300,17 @@ storiesOf('Labs/Header/React', module)
           <IconButton variant="circle" icon={inboxIcon} title="Inbox" aria-label="Inbox" />
           <PrimaryButton>Logout</PrimaryButton>
         </DeprecatedHeader>
-      </div>
+      </Box>
       <br />
-      <div css={[containerStyle, backgroundStyle]}>
+      <Box
+        padding="0 0 64px 0"
+        background={`linear-gradient(${chroma(colors.blueberry500)
+          .alpha(0.8)
+          .css()}, ${chroma(colors.blueberry400)
+          .alpha(0.8)
+          .css()}), url(${bgImg})`}
+        style={{backgroundPosition: '0 50%', backgroundSize: 'cover'}}
+      >
         <DeprecatedHeader
           variant={DeprecatedHeader.Variant.Dub}
           title="Transparent"
@@ -345,15 +336,15 @@ storiesOf('Labs/Header/React', module)
           <IconButton variant="inverse" icon={inboxIcon} title="Inbox" aria-label="Inbox" />
           <PrimaryButton>Logout</PrimaryButton>
         </DeprecatedHeader>
-      </div>
+      </Box>
     </div>
   ))
   .add('Full Header', () => (
     <div className="story">
-      <div css={containerStyle}>
+      <Box backgroundColor={colors.soap100} padding="m">
         <DeprecatedHeader variant={DeprecatedHeader.Variant.Full} isCollapsed={false} />
-      </div>
-      <div css={containerStyle}>
+      </Box>
+      <Box backgroundColor={colors.soap100} padding="m">
         <DeprecatedHeader
           variant={DeprecatedHeader.Variant.Full}
           title="Design"
@@ -363,9 +354,9 @@ storiesOf('Labs/Header/React', module)
         >
           {nav}
         </DeprecatedHeader>
-      </div>
+      </Box>
       <br />
-      <div css={containerStyle}>
+      <Box backgroundColor={colors.soap100} padding="m">
         <DeprecatedHeader
           variant={DeprecatedHeader.Variant.Full}
           title="Kitchen Sink"
@@ -384,9 +375,9 @@ storiesOf('Labs/Header/React', module)
           <Avatar onClick={handleAvatarClickTest} altText="Profile" />
           <PrimaryButton>Download</PrimaryButton>
         </DeprecatedHeader>
-      </div>
+      </Box>
       <br />
-      <div css={containerStyle}>
+      <Box backgroundColor={colors.soap100} padding="m">
         <DeprecatedHeader
           variant={DeprecatedHeader.Variant.Full}
           title=""
@@ -403,9 +394,17 @@ storiesOf('Labs/Header/React', module)
           />
           <Avatar onClick={handleAvatarClickTest} />
         </DeprecatedHeader>
-      </div>
+      </Box>
       <br />
-      <div css={[containerStyle, backgroundStyle]}>
+      <Box
+        padding="0 0 64px 0"
+        background={`linear-gradient(${chroma(colors.blueberry500)
+          .alpha(0.8)
+          .css()}, ${chroma(colors.blueberry400)
+          .alpha(0.8)
+          .css()}), url(${bgImg})`}
+        style={{backgroundPosition: '0 50%', backgroundSize: 'cover'}}
+      >
         <DeprecatedHeader
           variant={DeprecatedHeader.Variant.Full}
           title="Transparent"
@@ -422,9 +421,9 @@ storiesOf('Labs/Header/React', module)
           />
           <Avatar onClick={handleAvatarClickTest} altText="Profile" />
         </DeprecatedHeader>
-      </div>
+      </Box>
       <br />
-      <div css={containerStyle}>
+      <Box backgroundColor={colors.soap100} padding="m">
         <DeprecatedHeader
           variant={DeprecatedHeader.Variant.Full}
           title=""
@@ -443,6 +442,6 @@ storiesOf('Labs/Header/React', module)
           <IconButton variant="circle" icon={inboxIcon} title="Inbox" aria-label="Inbox" />
           <PrimaryButton>Logout</PrimaryButton>
         </DeprecatedHeader>
-      </div>
+      </Box>
     </div>
   ));
