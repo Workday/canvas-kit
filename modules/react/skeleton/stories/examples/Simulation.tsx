@@ -16,7 +16,7 @@ import {Box, Flex} from '@workday/canvas-kit-labs-react';
 import {Skeleton} from '@workday/canvas-kit-react/skeleton';
 import {borderRadius, space, type} from '@workday/canvas-kit-react/tokens';
 import {patternIcon} from '@workday/canvas-system-icons-web';
-import {StyledType} from '../../../common';
+import {StyledType} from '@workday/canvas-kit-react/common';
 
 const fadeOut = keyframes`
   from {
