@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
 import isPropValid from '@emotion/is-prop-valid';
-import {createComponent, StyledType} from '@workday/canvas-kit-react/common';
+import {createComponent, StyledType, useConstant} from '@workday/canvas-kit-react/common';
 
 // style props
 import {border, BorderStyleProps} from './utils/border';
@@ -28,7 +28,20 @@ const shouldForwardProp = (prop: string) => {
   return isPropValid(prop) && !omittedProps.includes(prop);
 };
 
-const StyledBox = styled('div', {shouldForwardProp})<StyledType & BoxProps>(
+const StyledBoxElement = styled('div', {shouldForwardProp})<StyledType & BoxProps>(
+  {
+    boxSizing: 'border-box',
+  },
+  border,
+  color,
+  depth,
+  flexItem,
+  layout,
+  position,
+  space
+);
+
+const StyledBoxComponent = styled('div')<StyledType & BoxProps>(
   {
     boxSizing: 'border-box',
   },
@@ -61,10 +74,14 @@ const StyledBox = styled('div', {shouldForwardProp})<StyledType & BoxProps>(
 export const Box = createComponent('div')({
   displayName: 'Box',
   Component: ({children, ...elemProps}: BoxProps, ref, Element) => {
+    const BoxComponent = useConstant(() =>
+      typeof Element === 'string' ? StyledBoxElement : StyledBoxComponent
+    );
+
     return (
-      <StyledBox as={Element} ref={ref} {...elemProps}>
+      <BoxComponent as={Element} ref={ref} {...elemProps}>
         {children}
-      </StyledBox>
+      </BoxComponent>
     );
   },
 });

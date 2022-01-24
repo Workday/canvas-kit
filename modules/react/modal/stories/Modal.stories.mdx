@@ -85,26 +85,20 @@ requires a `label` prop.
 
 ### Body Content Overflow
 
-There are a few ways to handle body content overflowing. The easiest is to use `Modal.Card` as a
-vertical stack using `VStack` and setting the max height to the view height minus the desired margin
-around the card (default margin is `xl` or `40px`). The `VStack` is a flexbox container than
-controls the height of the children. From there, you set up the content area to have an
-`overflow: scroll` style. Usually, you want the header and action buttons to stay put. In this
-example, the `Modal.Card` has an `as={VStack}` with no spacing, and a max height of
-`calc(100vh - ${space.xl} * 2)` which is the viewport height minus the default margin x 2 (top and
-bottom). The `Modal.Heading`, `Modal.Body`, and `HStack` are the 3 flexbox children that will try to
-equally fill the container up to the max height defined. The `overflow: scroll` on the `Modal.Body`
-is what restricts the content to an overflow container so that it scrolls. The effectively fixes the
-position of the heading and action buttons.
+The Modal automatically handles overflowing content inside the `Modal.Body` element. If contents are
+larger than the browser's height will allow, the content will overflow with a scrollbar. You may
+need to restrict the height of your browser to observe the overflow.
 
 <ExampleCodeBlock code={BodyOverflow} />
 
 ### Full overlay scrolling
 
-If content is large, scrolling the entire overlay container is an option. An `overflow: scroll` must
-be added to the `Modal.Overlay` element to cause the whole overlay to be scrollable. This has the
-effect of scrolling the heading, close button, and any action buttons. If this type of scrolling
-behavior is not desired, try the [Body Content Overflow](#body-content-scrolling) method.
+If content is large, scrolling the entire overlay container is an option. Use the
+`Modal.OverflowOverlay` component instead of the `Modal.Overlay` component. The `Modal.Card`'s
+`maxHeight` and `height` will need to be reset to `inherit` to prevent any internal overflow.
+
+This has the effect of scrolling the heading, close button, and any action buttons. If this type of
+scrolling behavior is not desired, try the [Body Content Overflow](#body-content-overflow) method.
 
 <ExampleCodeBlock code={FullOverflow} />
 

@@ -12,8 +12,9 @@ import {
 import {PopupModel, PopupModelContext, usePopupStack} from '@workday/canvas-kit-react/popup';
 import {keyframes} from '@emotion/core';
 import styled from '@emotion/styled';
+import {Box, BoxProps} from '@workday/canvas-kit-labs-react/common';
 
-export interface ModalOverlayProps {
+export interface ModalOverlayProps extends BoxProps {
   model?: PopupModel;
   children: React.ReactNode;
 }
@@ -27,7 +28,7 @@ const fadeIn = keyframes`
   }
 `;
 
-const Container = styled('div')<StyledType>({
+const Container = styled(Box)<StyledType>({
   position: 'fixed',
   top: 0,
   left: 0,

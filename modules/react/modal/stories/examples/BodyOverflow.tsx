@@ -2,7 +2,7 @@ import React from 'react';
 
 import {Modal} from '@workday/canvas-kit-react/modal';
 import {DeleteButton} from '@workday/canvas-kit-react/button';
-import {HStack, VStack} from '@workday/canvas-kit-labs-react';
+import {HStack, VStack, Stack, Box} from '@workday/canvas-kit-labs-react';
 import {space} from '@workday/canvas-kit-react/tokens';
 
 export const BodyOverflow = () => {
@@ -14,10 +14,10 @@ export const BodyOverflow = () => {
     <Modal>
       <Modal.Target as={DeleteButton}>Delete Item</Modal.Target>
       <Modal.Overlay>
-        <Modal.Card as={VStack} spacing={0} maxHeight={`calc(100vh - ${space.xl} * 2)`}>
+        <Modal.Card>
           <Modal.CloseIcon aria-label="Close" />
           <Modal.Heading>Delete Item</Modal.Heading>
-          <Modal.Body style={{overflow: 'scroll'}}>
+          <Modal.Body>
             <p>Are you sure you want to delete the item?</p>
             <p>Are you sure you want to delete the item?</p>
             <p>Are you sure you want to delete the item?</p>

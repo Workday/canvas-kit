@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-import {Card} from '@workday/canvas-kit-react/card';
 import {createComponent, useDefaultModel} from '@workday/canvas-kit-react/common';
 
 import {PopupModel, usePopupModel, PopupModelContext} from './hooks';
@@ -10,6 +9,7 @@ import {PopupPopper} from './PopupPopper';
 import {PopupHeading} from './PopupHeading';
 import {PopupCloseIcon} from './PopupCloseIcon';
 import {PopupCloseButton} from './PopupCloseButton';
+import {PopupBody} from './PopupBody';
 
 export interface PopupProps {
   /**
@@ -30,7 +30,7 @@ export const Popup = createComponent()({
   },
   subComponents: {
     Heading: PopupHeading,
-    Body: Card.Body,
+    Body: PopupBody,
     Card: PopupCard,
     CloseIcon: PopupCloseIcon,
     Target: PopupTarget,
