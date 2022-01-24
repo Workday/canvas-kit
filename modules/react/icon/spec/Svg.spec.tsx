@@ -3,7 +3,7 @@ import {render} from '@testing-library/react';
 import Svg from '../lib/Svg';
 import {CanvasIconTypes} from '@workday/design-assets-types';
 import {shieldIcon} from '@workday/canvas-accent-icons-web';
-import {mergeProps} from '../../common';
+import {mergeProps} from '@workday/canvas-kit-react/common';
 
 describe('Icon component', () => {
   test('Mismatched icon types catches error and returns null', () => {
