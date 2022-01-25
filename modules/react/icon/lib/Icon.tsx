@@ -6,7 +6,7 @@ import {createComponent} from '../../common';
 
 export interface IconProps extends SvgProps {
   src: CanvasIcon;
-  size?: number;
+  size?: number | string;
   type: CanvasIconTypes.Accent | CanvasIconTypes.Applet | CanvasIconTypes.System;
 }
 
