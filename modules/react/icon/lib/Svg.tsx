@@ -1,4 +1,4 @@
-import {CSSObject} from '@emotion/core';
+import {CSSObject} from '@emotion/react';
 import * as React from 'react';
 import {CanvasIcon, CanvasIconTypes} from '@workday/design-assets-types';
 import {validateIconType} from './utils';

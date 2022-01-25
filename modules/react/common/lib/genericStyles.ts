@@ -1,4 +1,4 @@
-import {CSSObject} from '@emotion/core';
+import {CSSObject} from '@emotion/react';
 
 /**
  * Our schema for generic styles for a whole component.

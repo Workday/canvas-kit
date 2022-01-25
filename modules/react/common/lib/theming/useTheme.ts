@@ -1,6 +1,6 @@
 import * as React from 'react';
 import get from 'lodash/get';
-import {ThemeContext} from '@emotion/core';
+import {ThemeContext} from '@emotion/react';
 import {
   defaultCanvasTheme,
   createCanvasTheme,

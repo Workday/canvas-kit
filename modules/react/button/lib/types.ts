@@ -1,4 +1,4 @@
-import {CSSObject} from '@emotion/core';
+import {CSSObject} from '@emotion/react';
 
 /**
  * The object used for passing in colors to the ButtonContainer

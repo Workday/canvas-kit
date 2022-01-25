@@ -1,4 +1,4 @@
-import {CSSObject} from '@emotion/core';
+import {CSSObject} from '@emotion/react';
 
 // default max-width for truncating text
 const DEFAULT_MAX_WIDTH = 350;

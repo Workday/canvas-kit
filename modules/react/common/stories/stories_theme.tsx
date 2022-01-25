@@ -96,8 +96,8 @@ const StyledHeaderCustomTheme = styled('h1')({
   ...type.levels.heading.medium,
 });
 
-type Palette = keyof CanvasTheme['palette'];
-type Swatch = keyof CanvasThemePalette;
+type PaletteKey = keyof CanvasTheme['palette'];
+type SwatchKey = keyof CanvasThemePalette;
 
 const ThemeDemo = (props: any) => {
   const theme = useTheme();
@@ -106,7 +106,7 @@ const ThemeDemo = (props: any) => {
       <StyledHeaderDefaultTheme>Default Canvas Theme</StyledHeaderDefaultTheme>
       <Palettes>
         {Object.keys(theme.canvas.palette).map(name => {
-          const palette = theme.canvas.palette[name as Palette] as CanvasThemePalette;
+          const palette = theme.canvas.palette[name as PaletteKey] as CanvasThemePalette;
           const bg = (palette.main && palette.main) || colors.soap200;
           const contrast = palette.contrast;
 
@@ -117,7 +117,7 @@ const ThemeDemo = (props: any) => {
                 if (key === 'contrast') {
                   return;
                 }
-                return createSwatch(key, palette[key as Swatch], contrast);
+                return createSwatch(key, palette[key as SwatchKey], contrast);
               })}
             </Palette>
           );

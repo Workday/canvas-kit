@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {CanvasGraphic, CanvasIconTypes} from '@workday/design-assets-types';
-import {CSSObject} from '@emotion/core';
+import {CSSObject} from '@emotion/react';
 import Svg, {SvgProps} from './Svg';
 
 export interface GraphicStyles {

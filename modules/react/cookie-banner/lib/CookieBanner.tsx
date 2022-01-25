@@ -1,6 +1,6 @@
 /* @jsxRuntime classic */
 /** @jsx jsx */
-import {css, jsx} from '@emotion/core';
+import {css, jsx} from '@emotion/react';
 import * as React from 'react';
 import styled from '@emotion/styled';
 import {colors, commonColors, type, space} from '@workday/canvas-kit-react/tokens';

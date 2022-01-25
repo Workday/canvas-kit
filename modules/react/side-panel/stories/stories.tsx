@@ -125,7 +125,6 @@ class SidePanelWrapper extends React.Component<SidePanelProps, SidePanelState> {
             marginRight={open ? '-24px' : 0}
             justifyContent={open ? undefined : 'center'}
           >
-            >
             <span>
               <SystemIcon icon={starIcon} />
             </span>

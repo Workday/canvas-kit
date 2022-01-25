@@ -1,6 +1,6 @@
 import * as React from 'react';
 import isPropValid from '@emotion/is-prop-valid';
-import {CSSObject} from '@emotion/core';
+import {CSSObject} from '@emotion/react';
 import {borderRadius, space, spaceNumbers, type} from '@workday/canvas-kit-react/tokens';
 import {
   GrowthBehavior,

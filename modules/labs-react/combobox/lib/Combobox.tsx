@@ -1,5 +1,5 @@
 import React, {useEffect, useLayoutEffect, useRef, useState, useCallback} from 'react';
-import {CSSObject, jsx, keyframes} from '@emotion/core';
+import {CSSObject, jsx, keyframes} from '@emotion/react';
 import {
   GrowthBehavior,
   useForkRef,
