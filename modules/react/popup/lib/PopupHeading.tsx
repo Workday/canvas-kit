@@ -1,11 +1,11 @@
 import * as React from 'react';
 
-import {createComponent, useModelContext} from '@workday/canvas-kit-react/common';
+import {createComponent, useModelContext, ExtractProps} from '@workday/canvas-kit-react/common';
 import {Card} from '@workday/canvas-kit-react/card';
 
 import {usePopupHeading, PopupModel, PopupModelContext} from './hooks';
 
-export interface PopupHeadingProps {
+export interface PopupHeadingProps extends ExtractProps<typeof Card.Heading, never> {
   /**
    * Optionally pass a model directly to this component. Default is to implicitly use the same
    * model as the container component which uses React context. Only use this for advanced use-cases
@@ -21,7 +21,7 @@ export const PopupHeading = createComponent('h2')({
 
     const props = usePopupHeading(localModel, elemProps, ref);
     return (
-      <Card.Heading as={Element} {...props}>
+      <Card.Heading as={Element} marginBottom="s" {...props}>
         {children}
       </Card.Heading>
     );

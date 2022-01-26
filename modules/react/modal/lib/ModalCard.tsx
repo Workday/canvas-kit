@@ -14,7 +14,7 @@ export const ModalCard = createComponent('div')({
 
     const props = useModalCard(localModel, elemProps, ref);
     return (
-      <Popup.Card as={Element} width={440} borderWidth={0} {...props}>
+      <Popup.Card as={Element} width={440} borderWidth={0} margin="xl" {...props}>
         {children}
       </Popup.Card>
     );

@@ -35,26 +35,10 @@ const StyledStack = styled(Flex, {shouldForwardProp})<StyledType & StackProps>(s
 
 export const Stack = createComponent('div')({
   displayName: 'Stack',
-  Component: (
-    {
-      children,
-      flexDirection = 'row',
-      spacing,
-      shouldWrapChildren = false,
-      ...elemProps
-    }: StackProps,
-    ref,
-    Element
-  ) => {
+  Component: ({children, shouldWrapChildren = false, ...elemProps}: StackProps, ref, Element) => {
     const validChildren = getValidChildren(children);
     return (
-      <StyledStack
-        as={Element}
-        ref={ref}
-        flexDirection={flexDirection}
-        spacing={spacing}
-        {...elemProps}
-      >
+      <StyledStack as={Element} ref={ref} flexDirection="row" {...elemProps}>
         {shouldWrapChildren
           ? validChildren.map(child => <StackItem>{child}</StackItem>)
           : validChildren}
@@ -66,19 +50,19 @@ export const Stack = createComponent('div')({
   },
 });
 
-export type HStackProps = Omit<StackProps, 'flexDirection'> & {
+export interface HStackProps extends StackProps {
   /**
    * sets the direction for the stack
    * @default "row"
    * */
   flexDirection?: 'row' | 'row-reverse';
-};
+}
 
 export const HStack = createComponent('div')({
   displayName: 'HStack',
-  Component: ({children, flexDirection = 'row', ...elemProps}: HStackProps, ref, Element) => {
+  Component: ({children, ...elemProps}: HStackProps, ref, Element) => {
     return (
-      <Stack as={Element} ref={ref} flexDirection={flexDirection} {...elemProps}>
+      <Stack as={Element} ref={ref} flexDirection="row" {...elemProps}>
         {children}
       </Stack>
     );
@@ -88,19 +72,19 @@ export const HStack = createComponent('div')({
   },
 });
 
-export type VStackProps = Omit<StackProps, 'flexDirection'> & {
+export interface VStackProps extends StackProps {
   /**
    * sets the direction for the stack
    * @default "column"
    * */
   flexDirection?: 'column' | 'column-reverse';
-};
+}
 
 export const VStack = createComponent('div')({
   displayName: 'VStack',
-  Component: ({children, flexDirection = 'column', ...elemProps}: VStackProps, ref, Element) => {
+  Component: ({children, ...elemProps}: VStackProps, ref, Element) => {
     return (
-      <Stack as={Element} ref={ref} flexDirection={flexDirection} {...elemProps}>
+      <Stack as={Element} ref={ref} flexDirection="column" {...elemProps}>
         {children}
       </Stack>
     );
