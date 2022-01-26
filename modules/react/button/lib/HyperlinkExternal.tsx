@@ -13,7 +13,8 @@ import {Hyperlink, HyperlinkProps} from './Hyperlink';
 
 export interface HyperlinkExternalProps extends HyperlinkProps {
   /**
-   * Override the aria-label for the icon
+   * Informs a screen reader user the link will open in a new window. It is read after the link text.
+   * This value will need to be translated.
    * @default 'Opens link in new window'
    */
   iconLabel?: string;

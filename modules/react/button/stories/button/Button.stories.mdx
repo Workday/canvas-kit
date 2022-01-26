@@ -143,8 +143,9 @@ Undocumented props are spread to the underlying `<a>` element.
 ### HyperlinkExternal
 
 If your link should open in a new tab or window use the `<HyperlinkExternal>` component. It will let
-users know about the behavior by adding an icon, `extLinkIcon`. You can override `aria-label` of the
-icon by using the `iconLabel` attribute.
+users know about the behavior by adding an icon, `extLinkIcon`. By default, the icon has a label of
+"Opens link in new window". You can override `aria-label` of the icon by using the `iconLabel`
+attribute. This override will be needed for translations.
 
 <ExampleCodeBlock code={LinkExternal} />
 
