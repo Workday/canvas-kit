@@ -15,7 +15,7 @@ describe('Text Input', () => {
   describe('when rendered', () => {
     it('should render an input with type=text', () => {
       const {getByRole} = render(
-        <TextInput orientation='vertical'>
+        <TextInput orientation="vertical">
           <TextInput.Field onChange={cb}></TextInput.Field>
         </TextInput>
       );
@@ -26,7 +26,7 @@ describe('Text Input', () => {
   describe('when rendered with a placeholder', () => {
     it('should render a text input with placeholder', () => {
       const {getByRole} = render(
-        <TextInput orientation='vertical'>
+        <TextInput orientation="vertical">
           <TextInput.Field onChange={cb} placeholder={placeholder}></TextInput.Field>
         </TextInput>
       );
@@ -37,7 +37,7 @@ describe('Text Input', () => {
   describe('when rendered with an id', () => {
     it('should render a text input with a id', () => {
       const {getByRole} = render(
-        <TextInput orientation='vertical'>
+        <TextInput orientation="vertical">
           <TextInput.Field id={id} onChange={cb}></TextInput.Field>
         </TextInput>
       );
@@ -48,7 +48,7 @@ describe('Text Input', () => {
   describe('when rendered with a value', () => {
     it('should render a text input with a value', () => {
       const {getByDisplayValue} = render(
-        <TextInput orientation='vertical'>
+        <TextInput orientation="vertical">
           <TextInput.Field onChange={cb} value={value}></TextInput.Field>
         </TextInput>
       );
@@ -59,7 +59,7 @@ describe('Text Input', () => {
   describe('when rendered with disabled attribute', () => {
     it('should render a disabled text input', () => {
       const {getByRole} = render(
-        <TextInput orientation='vertical'>
+        <TextInput orientation="vertical">
           <TextInput.Field onChange={cb} disabled={true}></TextInput.Field>
         </TextInput>
       );
@@ -70,7 +70,7 @@ describe('Text Input', () => {
   describe('when typed into', () => {
     it('should call a callback function', () => {
       const {getByRole} = render(
-        <TextInput orientation='vertical'>
+        <TextInput orientation="vertical">
           <TextInput.Field onChange={cb}></TextInput.Field>
         </TextInput>
       );
@@ -82,7 +82,7 @@ describe('Text Input', () => {
   describe('when rendered as required', () => {
     it('should add an asterisk to the label to indicate that it is required', () => {
       const {getByText} = render(
-        <TextInput orientation='vertical' isRequired={true}>
+        <TextInput orientation="vertical" isRequired={true}>
           <TextInput.Label>Test</TextInput.Label>
         </TextInput>
       );
@@ -94,10 +94,10 @@ describe('Text Input', () => {
   describe('when rendered a hint id', () => {
     it('the input and hint text should have matching ids for accessibility', () => {
       const hintId = 'hintId';
-      const renderedHintId = `hint-${hintId}`
+      const renderedHintId = `hint-${hintId}`;
       const hintText = 'Helpful text goes here.';
       const {container} = render(
-        <TextInput orientation='vertical' id={hintId}>
+        <TextInput orientation="vertical" id={hintId}>
           <TextInput.Field />
           <TextInput.Hint>{hintText}</TextInput.Hint>
         </TextInput>
@@ -113,7 +113,7 @@ describe('Text Input', () => {
       const inputId = 'inputId';
       const renderedInputId = `input-${inputId}`;
       const {container} = render(
-        <TextInput orientation='vertical' id={inputId}>
+        <TextInput orientation="vertical" id={inputId}>
           <TextInput.Label>Test</TextInput.Label>
           <TextInput.Field />
         </TextInput>
@@ -127,7 +127,7 @@ describe('Text Input', () => {
   describe('when rendered with an error', () => {
     it('the input should have aria-invalid for accessibility', () => {
       const {container} = render(
-        <TextInput orientation='vertical' hasError={true}>
+        <TextInput orientation="vertical" hasError={true}>
           <TextInput.Field />
         </TextInput>
       );
@@ -138,7 +138,7 @@ describe('Text Input', () => {
   describe('when rendered with no inputId', () => {
     it('the input should have a unique id', () => {
       const {container} = render(
-        <TextInput orientation='vertical'>
+        <TextInput orientation="vertical">
           <TextInput.Field />
         </TextInput>
       );

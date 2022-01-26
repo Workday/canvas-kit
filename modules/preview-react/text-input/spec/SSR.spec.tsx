@@ -9,7 +9,7 @@ describe('TextInput', () => {
   it('should render on a server without crashing', () => {
     const ssrRender = () =>
       renderToString(
-        <TextInput orientation='vertical'>
+        <TextInput orientation="vertical">
           <TextInput.Label>You can't put a label on me</TextInput.Label>
           <TextInput.Field />
           <TextInput.Hint>SSR or bust</TextInput.Hint>

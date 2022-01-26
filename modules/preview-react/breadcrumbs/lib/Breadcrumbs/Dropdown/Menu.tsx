@@ -129,8 +129,6 @@ export const DropdownMenu = ({
     }
   };
 
-  console.log('dropdownItems', dropdownItems);
-
   return (
     <div css={menuStyles}>
       <MenuList {...elemProps}>

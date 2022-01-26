@@ -9,7 +9,7 @@ export const Basic = () => {
   };
 
   return (
-    <TextArea orientation='vertical'>
+    <TextArea orientation="vertical">
       <TextArea.Label>Leave a review</TextArea.Label>
       <TextArea.Field onChange={handleChange} value={value} />
     </TextArea>

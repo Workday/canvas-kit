@@ -1,9 +1,10 @@
-import {API, ASTPath, FileInfo, Identifier, ImportDeclaration, ImportSpecifier} from 'jscodeshift';
+import {ASTPath, Transform, ImportDeclaration, ImportSpecifier} from 'jscodeshift';
 import {
   filterImportSpecifiers,
   renameImportSpecifiers,
   ImportSpecifierArray,
-  RenameMap,
+  renameImports,
+  hasImportSpecifiers,
 } from './utils';
 
 const mainPackage = '@workday/canvas-kit-labs-react';
@@ -16,17 +17,22 @@ const searchBarImportSpecifiers = [
   'SearchThemes',
 ];
 
-const renameMap: RenameMap = {
+const renameMap = {
   SearchBar: 'SearchForm',
   SearchBarProps: 'SearchFormProps',
   SearchBarState: 'SearchFormState',
 };
 
-export default function transformer(file: FileInfo, api: API) {
+const transform: Transform = (file, api) => {
   const j = api.jscodeshift;
 
   const root = j(file.source);
-  let hasSearchBarImports = false;
+
+  if (
+    !hasImportSpecifiers(api, root, '@workday/canvas-kit-labs-react/header', Object.keys(renameMap))
+  ) {
+    return file.source;
+  }
 
   function insertImportDeclarationBefore(
     nodePath: ASTPath<ImportDeclaration>,
@@ -34,25 +40,6 @@ export default function transformer(file: FileInfo, api: API) {
     sourcePath: string
   ) {
     nodePath.insertBefore(j.importDeclaration(specifiers, j.stringLiteral(sourcePath)));
-  }
-
-  // This toggles the failsafe that prevents us from accidentally transforming something unintentionally.
-  root.find(j.ImportDeclaration, (nodePath: ImportDeclaration) => {
-    const value = nodePath.source.value;
-    // if there's any SearchBar imports from either the main package or the header package, toggle the failsafe
-    if (value === mainPackage || value === headerPackage) {
-      const importSpecifiers = nodePath.specifiers || [];
-      const searchBarImports = filterImportSpecifiers(importSpecifiers, searchBarImportSpecifiers);
-
-      if (searchBarImports.length) {
-        hasSearchBarImports = true;
-      }
-    }
-  });
-
-  // Failsafe to skip transforms unless a SearchBar import is detected
-  if (!hasSearchBarImports) {
-    return root.toSource();
   }
 
   // Rename search-bar named imports from @workday/canvas-kit-labs-react
@@ -109,35 +96,7 @@ export default function transformer(file: FileInfo, api: API) {
     }
   });
 
-  // Transform SearchBar JSXElements
-  // e.g. `<SearchBar>` becomes `<SearchForm>`
-  root.find(j.JSXIdentifier, {name: 'SearchBar'}).forEach(nodePath => {
-    nodePath.node.name = 'SearchForm';
-  });
+  return renameImports(api, root, '@workday/canvas-kit-labs-react/header', renameMap).toSource();
+};
 
-  // Transform SearchBarProps and SearchBarState type references
-  // e.g. type CustomSearchType = SearchBarProps & SearchBarState;
-  // becomes type CustomSearchType = SearchFormProps & SearchFormState;
-  root.find(j.TSTypeReference, {typeName: {type: 'Identifier'}}).forEach(nodePath => {
-    const identifier = nodePath.value.typeName as Identifier;
-    if (identifier.name in renameMap) {
-      identifier.name = renameMap[identifier.name];
-    }
-  });
-
-  // Transform SearchBarProps type interface declaration references
-  // e.g. `interface CustomProps extends SearchBarProps` becomes `interface CustomProps extends SearchFormProps`
-  root.find(j.TSInterfaceDeclaration).forEach(nodePath => {
-    // If the interface is extending SearchBarProps, transform the extension name to SearchFormProps
-    nodePath.node.extends?.forEach(typeExtension => {
-      if (typeExtension.expression.type === 'Identifier') {
-        const typeName = typeExtension.expression.name;
-        if (typeName in renameMap) {
-          typeExtension.expression.name = renameMap[typeName];
-        }
-      }
-    });
-  });
-
-  return root.toSource();
-}
+export default transform;

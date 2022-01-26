@@ -1,7 +1,6 @@
 const mkdirp = require('mkdirp');
 const {exec} = require('child_process');
-
-require('colors');
+const chalk = require('chalk');
 
 const writeModuleFiles = require('./writeModuleFiles');
 
@@ -23,7 +22,7 @@ const cwd = process.cwd();
 module.exports = (modulePath, name, description, prerelease, category) => {
   const moduleName = `@workday/canvas-kit-${prerelease && prerelease + '-'}react/${name}`;
 
-  console.log('\nCreating ' + `${moduleName}\n`.blue.underline);
+  console.log('\nCreating ' + chalk.blue.underline(`${moduleName}\n`));
 
   mkdirp.sync(modulePath);
 
@@ -84,6 +83,6 @@ module.exports = (modulePath, name, description, prerelease, category) => {
 
   writeModuleFiles(files, modulePath);
 
-  console.log('Copying License file to ' + `.${modulePath.replace(cwd, '')}/LICENSE`.cyan);
+  console.log('Copying License file to ' + chalk.cyan(`.${modulePath.replace(cwd, '')}/LICENSE`));
   exec(`cp ${cwd}/LICENSE ${modulePath}/LICENSE`);
 };

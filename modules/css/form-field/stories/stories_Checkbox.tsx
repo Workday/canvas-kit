@@ -1,12 +1,10 @@
 import React from 'react';
 import {storiesOf} from '@storybook/react';
-import withReadme from 'storybook-readme/with-readme';
-import README from '../../checkbox/README.md';
 import '../index.scss';
 import '@workday/canvas-kit-css-checkbox/index.scss';
 
 storiesOf('Components/Inputs/Checkbox/CSS/Top Label/Checkbox', module)
-  .addDecorator(withReadme(README))
+  .addParameters({ReadmePath: 'css/checkbox'})
   .add('Default', () => (
     <div className="wdc-form">
       <div className="wdc-form-field-wrapper">
@@ -80,7 +78,7 @@ storiesOf('Components/Inputs/Checkbox/CSS/Top Label/Checkbox', module)
   ));
 
 storiesOf('Components/Inputs/Checkbox/CSS/Left Label/Checkbox', module)
-  .addDecorator(withReadme(README))
+  .addParameters({ReadmePath: 'css/checkbox'})
   .add('Default', () => (
     <div className="wdc-form wdc-form-label-position-left">
       <div className="wdc-form-field-wrapper">
@@ -154,7 +152,7 @@ storiesOf('Components/Inputs/Checkbox/CSS/Left Label/Checkbox', module)
   ));
 
 storiesOf('Components/Inputs/Checkbox/CSS/Top Label/Checkbox Group', module)
-  .addDecorator(withReadme(README))
+  .addParameters({ReadmePath: 'css/checkbox'})
   .add('Default', () => (
     <div className="wdc-form">
       <fieldset className="wdc-form-field-wrapper wdc-form-group">
@@ -270,7 +268,7 @@ storiesOf('Components/Inputs/Checkbox/CSS/Top Label/Checkbox Group', module)
   ));
 
 storiesOf('Components/Inputs/Checkbox/CSS/Left Label/Checkbox Group', module)
-  .addDecorator(withReadme(README))
+  .addParameters({ReadmePath: 'css/checkbox'})
   .add('Default', () => (
     <div className="wdc-form wdc-form-label-position-left">
       <fieldset className="wdc-form-field-wrapper wdc-form-group">

@@ -1,40 +1,40 @@
-/// <reference path="../../../../typings.d.ts" />
 import React from 'react';
-import {withKnobs, number, select} from '@storybook/addon-knobs';
-import withReadme from 'storybook-readme/with-readme';
 
 import {CountBadge} from '../index';
-import README from '../README.md';
 
 export default {
   title: 'Components/Indicators/Badge/CountBadge/React',
-  decorators: [withKnobs, withReadme(README)],
+  component: CountBadge,
+  parameters: {ReadmePath: 'react/badge'},
+  argTypes: {
+    count: {
+      control: {type: 'number'},
+    },
+    limit: {
+      control: {type: 'number'},
+    },
+    variant: {
+      options: ['default', 'inverse'],
+      control: {type: 'select'},
+    },
+  },
 };
 
-export const Default = () => (
-  <div className="story">
-    <CountBadge
-      count={number('Count', 1)}
-      variant={select('Variant', ['default', 'inverse'], 'default')}
-    />
-  </div>
-);
+const Template = props => <CountBadge count={1} {...props} />;
 
-export const Inverse = () => (
-  <div className="story">
-    <CountBadge
-      count={number('Count', 1)}
-      variant={select('Variant', ['default', 'inverse'], 'inverse')}
-    />
-  </div>
-);
+export const Default = Template.bind({});
+(Default as any).args = {
+  count: 1,
+};
 
-export const CustomLimit = () => (
-  <div className="story">
-    <CountBadge
-      count={number('Count', 100)}
-      limit={number('Number', 100)}
-      variant={select('Variant', ['default', 'inverse'], 'default')}
-    />
-  </div>
-);
+export const Inverse = Template.bind({});
+(Inverse as any).args = {
+  count: 1,
+  variant: 'inverse',
+};
+
+export const CustomLimit = Template.bind({});
+(CustomLimit as any).args = {
+  count: 100,
+  limit: 100,
+};

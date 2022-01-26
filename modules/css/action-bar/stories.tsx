@@ -1,12 +1,10 @@
 import React from 'react';
 import {storiesOf} from '@storybook/react';
-import withReadme from 'storybook-readme/with-readme';
-import README from './README.md';
 import './index.scss';
 import './stories.scss';
 
 storiesOf('Components/Buttons/Action Bar/CSS', module)
-  .addDecorator(withReadme(README))
+  .addParameters({ReadmePath: 'css/action-bar'})
   .add('Default', () => (
     <div className="story">
       <div className="wdc-action-bar demo-action-bar-custom" role="region" aria-label="Action Bar">

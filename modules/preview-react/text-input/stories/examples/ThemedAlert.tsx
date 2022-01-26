@@ -37,7 +37,7 @@ const AlertInput = () => {
   const alertStyles = useThemedRing('alert');
 
   return (
-    <TextInput orientation='vertical'>
+    <TextInput orientation="vertical">
       <TextInput.Label>Email</TextInput.Label>
       <TextInput.Field css={alertStyles} onChange={handleChange} value={value} />
       <TextInput.Hint paddingTop={space.xxs}>Please enter a valid email.</TextInput.Hint>

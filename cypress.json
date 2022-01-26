@@ -2,5 +2,8 @@
   "projectId": "odida5",
   "baseUrl": "http://localhost:9001",
   "supportFile": "cypress/support/index.ts",
-  "watchForFileChanges": false
+  "watchForFileChanges": false,
+  "retries": {
+    "runMode": 2
+  }
 }

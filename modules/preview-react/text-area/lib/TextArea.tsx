@@ -1,10 +1,14 @@
 import React from 'react';
 
 import {createComponent, ExtractProps, useDefaultModel} from '@workday/canvas-kit-react/common';
-import {FormField, FormFieldModelContext, useFormFieldOrientation} from '@workday/canvas-kit-preview-react/form-field';
+import {
+  FormField,
+  FormFieldModelContext,
+  useFormFieldOrientation,
+} from '@workday/canvas-kit-preview-react/form-field';
 import {Stack} from '@workday/canvas-kit-labs-react/layout';
 
-import { TextAreaModel, useTextAreaModel } from './hooks';
+import {TextAreaModel, useTextAreaModel} from './hooks';
 import {TextAreaField} from './TextAreaField';
 import {TextAreaLabel} from './TextAreaLabel';
 import {TextAreaHint} from './TextAreaHint';
@@ -22,10 +26,10 @@ export interface TextAreaProps extends ExtractProps<typeof FormField, never> {
 export const TextArea = createComponent()({
   displayName: 'TextArea',
   Component: ({children, model, orientation, ...props}: TextAreaProps, ref) => {
-    const {hasError, id, isRequired, ...elemProps} = props
+    const {hasError, id, isRequired, ...elemProps} = props;
     const value = useDefaultModel(model, {hasError, id, isRequired}, useTextAreaModel);
 
-    const layoutProps = useFormFieldOrientation(orientation)
+    const layoutProps = useFormFieldOrientation(orientation);
 
     return (
       <TextAreaModelContext.Provider value={value}>

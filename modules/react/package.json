@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-react",
-  "version": "6.0.2",
+  "version": "6.3.4",
   "description": "The parent module that contains all Workday Canvas Kit React components",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -38,7 +38,8 @@
     "build": "npm-run-all --parallel build:cjs build:es6 --sequential build:downlevel-dts",
     "prepack": "node ../../utils/publish.js pre react",
     "postpack": "node ../../utils/publish.js post react",
-    "depcheck": "node ../../utils/check-dependencies-exist.js"
+    "depcheck": "node ../../utils/check-dependencies-exist.js",
+    "typecheck:src": "tsc -p . --noEmit --incremental false"
   },
   "keywords": [
     "canvas",
@@ -56,9 +57,9 @@
     "@emotion/styled": "^10.0.27",
     "@popperjs/core": "^2.5.4",
     "@workday/canvas-colors-web": "^2.0.0",
-    "@workday/canvas-kit-labs-react": "^6.0.2",
-    "@workday/canvas-kit-popup-stack": "^6.0.2",
-    "@workday/canvas-kit-preview-react": "^6.0.2",
+    "@workday/canvas-kit-labs-react": "^6.3.4",
+    "@workday/canvas-kit-popup-stack": "^6.3.4",
+    "@workday/canvas-kit-preview-react": "^6.3.4",
     "@workday/canvas-system-icons-web": "1.0.41",
     "@workday/design-assets-types": "^0.2.4",
     "chroma-js": "^2.1.0",
@@ -69,8 +70,8 @@
     "react-innertext": "^1.1.5",
     "resize-observer-polyfill": "^1.5.1",
     "rtl-css-js": "^1.14.1",
-    "use-resize-observer": "~7.0.1",
-    "uuid": "^3.3.3"
+    "screenfull": "^5.2.0",
+    "use-resize-observer": "~7.0.1"
   },
   "devDependencies": {
     "@workday/canvas-accent-icons-web": "^1.0.0",

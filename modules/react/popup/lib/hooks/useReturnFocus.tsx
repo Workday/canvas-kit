@@ -8,7 +8,7 @@ import {changeFocus} from '@workday/canvas-kit-react/common';
  * `useInitialFocus`. This should be used with `useFocusRedirect` or `useFocusTrap` for a complete
  * focus management solution.
  *
- * This should ble used on popup elements that use `useInitialFocus`.
+ * This should be used on popup elements that use `useInitialFocus`.
  */
 export const useReturnFocus = (model: PopupModel, elemProps = {}) => {
   const visible = model.state.visibility !== 'hidden';

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import InputProvider, {InputType, InputEventType, inputEventMap} from '../lib/InputProvider';
-import {mount} from 'enzyme';
+import {render} from '@testing-library/react';
 
 const testInput = (
   mockEvent: {type: string},
@@ -9,7 +9,8 @@ const testInput = (
   shimWindowProps?: {[key: string]: boolean},
   provideIntent: boolean = true
 ) => {
-  // https://github.com/airbnb/enzyme/issues/426#issuecomment-228601631
+  // I tried using `fireEvent`, but got a failure on a mouse-based pointer event.
+  // This could be because `fireEvent` doesn't handle mouse-based point events very well
   const map: any = {};
   window.addEventListener = jest.fn((event, cb) => {
     map[event] = cb;
@@ -24,7 +25,7 @@ const testInput = (
     }
   }
 
-  const component = mount(<InputProvider provideIntent={provideIntent} />);
+  render(<InputProvider provideIntent={provideIntent} />);
   const eventType = mockEvent.type!;
 
   // Reset window environment
@@ -48,7 +49,6 @@ const testInput = (
   } else if (expectedIntentType) {
     expect(document.body.getAttribute('data-whatintent')).toBe(expectedIntentType);
   }
-  component.unmount();
 };
 
 const getMockInputEvent = (
@@ -83,12 +83,6 @@ const getMockInputEvent = (
 };
 
 describe('InputProvider', () => {
-  const cb = jest.fn();
-
-  afterEach(() => {
-    cb.mockReset();
-  });
-
   // NOTE: It was hard to shim the `mousewheel` and `DOMMouseScroll` events, so we only test `wheel`
 
   test(`keydown event should result in keyboard input`, () => {
@@ -201,7 +195,7 @@ describe('InputProvider', () => {
 
   test(`Multiple input provider should only attach once to the dom`, () => {
     const ref = React.createRef<HTMLButtonElement>();
-    const component = mount(
+    render(
       <div>
         <InputProvider></InputProvider>
         <h1>Test</h1>
@@ -211,6 +205,5 @@ describe('InputProvider', () => {
     );
 
     expect(document.querySelectorAll('[data-whatinput]').length).toBe(1);
-    component.unmount();
   });
 });

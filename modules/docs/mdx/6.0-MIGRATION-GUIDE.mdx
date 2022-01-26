@@ -1,4 +1,4 @@
-import {Meta} from '@storybook/addon-docs/blocks';
+import {Meta} from '@storybook/addon-docs';
 
 <Meta title="Welcome/Migration Guides/v6.0" />
 
@@ -220,6 +220,12 @@ const CustomGlobalHeader = props => {
 };
 ```
 
+You may continue to use this component exactly as you did in v5, but note that we plan to
+hard-deprecate it in Canvas Kit v7. If you would like to migrate away from this deprecated component
+now, you can reference
+[this example](https://workday.github.io/canvas-kit/?path=/story/examples-global-header-react--basic)
+instead.
+
 ### Page Header
 
 We are [soft-deprecating](#soft-deprecation) `PageHeader`. It has been renamed to
@@ -270,6 +276,12 @@ export const CustomPageHeader = (props: CustomPageHeaderProps) => {
   return <DeprecatedPageHeader {...props} />;
 };
 ```
+
+You may continue to use this component exactly as you did in v5, but note that we plan to
+hard-deprecate it in Canvas Kit v7. If you would like to migrate away from this deprecated component
+now, you can reference
+[this example](https://workday.github.io/canvas-kit/?path=/story/examples-page-header-react--basic)
+instead.
 
 ## Component Migrations
 
@@ -378,7 +390,8 @@ Also for reference, these are our viewport ranges:
 `max-width: 575px`. They now use `max-width: 767.5px` – the upper limit of the `small` range. This
 will have two effects for this component:
 
-- Container padding will decrease from `s` (`16px`) to `xxs` (`8px`) on all viewports less than `768px` wide
+- Container padding will decrease from `s` (`16px`) to `xxs` (`8px`) on all viewports less than
+  `768px` wide
   - This was previously happening only on viewports less than `576px` wide
 - Button order will be reversed on all viewports less than `768px` wide
   - This was previously happening only on viewports less than `576px` wide

@@ -1,4 +1,4 @@
-import {Meta} from '@storybook/addon-docs/blocks';
+import {Meta} from '@storybook/addon-docs';
 
 import {Stack} from '@workday/canvas-kit-labs-react/layout';
 // examples
@@ -173,8 +173,8 @@ wrapping children in `Stack.Item`s. A `Stack.Item` is a `Box` with some preset s
 overridden if needed.
 
 In the example below, we wanted to keep our `li` elements as direct children of the `ul` stack. So
-we're wrapping each of the links with `Stack.Item`s, casting them as `li`s and applying custom styles to each.
-This would not be possible with `shouldWrapChildren`.
+we're wrapping each of the links with `Stack.Item`s, casting them as `li`s and applying custom
+styles to each. This would not be possible with `shouldWrapChildren`.
 
 <ExampleCodeBlock code={StackItems} />
 

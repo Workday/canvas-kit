@@ -43,7 +43,7 @@ describe('Popup', () => {
         });
 
         it('should hide the popup', () => {
-          cy.findByRole('dialog').should('not.visible');
+          cy.findByRole('dialog').should('not.exist');
         });
       });
 
@@ -55,7 +55,7 @@ describe('Popup', () => {
         });
 
         it('should hide the popup', () => {
-          cy.findByRole('dialog').should('not.visible');
+          cy.findByRole('dialog').should('not.exist');
         });
       });
 
@@ -65,7 +65,7 @@ describe('Popup', () => {
         });
 
         it('should close the popup', () => {
-          cy.findByRole('dialog').should('not.visible');
+          cy.findByRole('dialog').should('not.exist');
         });
       });
     });
@@ -236,13 +236,12 @@ describe('Popup', () => {
         });
 
         context('when the Escape key is pressed', () => {
-          beforeEach(() => {
+          it('should close the Tooltip', () => {
+            cy.clock();
+            cy.tick(300); // advance the timer by the amount of default delay time
             cy.get('html').trigger('keydown', {
               key: 'Escape',
             });
-          });
-
-          it('should close the Tooltip', () => {
             cy.findByRole('tooltip', {
               name: 'Really long tooltip showing how popup stacks overlap 1',
             }).should('not.exist');
@@ -316,11 +315,11 @@ describe('Popup', () => {
             it('should close the tooltip', () => {
               cy.findByRole('tooltip', {
                 name: 'Really long tooltip showing how popup stacks overlap 2',
-              }).should('not.be.visible');
+              }).should('not.exist');
             });
 
             it('should close the "Really Delete Item" popup', () => {
-              cy.findByRole('dialog', {name: 'Really Delete Item'}).should('be.not.visible');
+              cy.findByRole('dialog', {name: 'Really Delete Item'}).should('not.exist');
             });
 
             it('should NOT close the "Delete Item" popup', () => {
@@ -352,7 +351,7 @@ describe('Popup', () => {
         });
 
         it('should hide the popup', () => {
-          cy.findByRole('dialog', {name: 'Popup'}).should('not.be.visible');
+          cy.findByRole('dialog', {name: 'Popup'}).should('not.exist');
         });
 
         it('should move focus back to the "Open" button', () => {

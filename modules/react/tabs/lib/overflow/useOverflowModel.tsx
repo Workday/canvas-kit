@@ -92,6 +92,8 @@ export function getHiddenIds(
       // at least the selected item and overflow target fit. Update our itemWidth with the sum
       itemWidth += itemWidthCache[selectedKey] + overflowTargetWidth;
     }
+  } else {
+    itemWidth += overflowTargetWidth;
   }
 
   for (const key in itemWidthCache) {
@@ -166,12 +168,32 @@ export const useOverflowModel = <T extends unknown>(
       itemWidthCacheRef.current = {...itemWidthCacheRef.current, [id]: width};
 
       setItemWidthCache(itemWidthCacheRef.current);
+
+      const ids = getHiddenIds(
+        containerWidthRef.current,
+        overflowTargetWidthRef.current,
+        itemWidthCacheRef.current,
+        state.selectedIds
+      );
+
+      setHiddenIds(ids);
     },
     removeItemWidth({id}) {
       const newCache = {...itemWidthCacheRef.current};
       delete newCache[id];
       itemWidthCacheRef.current = newCache;
       setItemWidthCache(itemWidthCacheRef.current);
+
+      const ids = getHiddenIds(
+        containerWidthRef.current,
+        overflowTargetWidthRef.current,
+        itemWidthCacheRef.current,
+        state.selectedIds !== 'all'
+          ? state.selectedIds.filter(sId => id !== sId)
+          : state.selectedIds
+      );
+
+      setHiddenIds(ids);
     },
     addHiddenKey({id}) {
       setHiddenIds(ids => ids.concat(id));
