@@ -6,6 +6,7 @@ import {
   TertiaryButton,
   DeleteButton,
   Hyperlink,
+  HyperlinkExternal,
 } from '@workday/canvas-kit-react/button';
 import {Specifications} from '@workday/canvas-kit-docs';
 
@@ -133,10 +134,17 @@ dark or colorful background such as `blueberry400`.
 
 <ExampleCodeBlock code={LinkInverse} />
 
-If your link should open in a new tab or window add the attribute `target='_blank'`. For added
-security you should also include `rel='noreferrer'`. It is also typical to let users know about the
-behavior by adding an icon, e.g. `extLinkIcon`. Adding an `img` role and and `aria-label` to the
-icon will make it accessable.
+#### Props
+
+Undocumented props are spread to the underlying `<a>` element.
+
+<ArgsTable of={Hyperlink} />
+
+### HyperlinkExternal
+
+If your link should open in a new tab or window use the `<HyperlinkExternal>` component. It will let
+users know about the behavior by adding an icon, `extLinkIcon`. You can override `aria-label` of the
+icon by using the `iconLabel` attribute.
 
 <ExampleCodeBlock code={LinkExternal} />
 
@@ -144,7 +152,7 @@ icon will make it accessable.
 
 Undocumented props are spread to the underlying `<a>` element.
 
-<ArgsTable of={Hyperlink} />
+<ArgsTable of={HyperlinkExternal} />
 
 ### Accessible Use of the `as` Prop
 
