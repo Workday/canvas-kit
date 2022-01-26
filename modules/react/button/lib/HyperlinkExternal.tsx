@@ -21,13 +21,7 @@ export interface HyperlinkExternalProps extends HyperlinkProps {
 }
 
 const iconStyles = {
-  ...systemIconStyles({fill: colors.blueberry400, fillHover: colors.blueberry400}),
-  '&:hover': {
-    ...systemIconStyles({fill: colors.blueberry500, fillHover: colors.blueberry500}),
-  },
-  '&:active': {
-    ...systemIconStyles({fill: colors.blueberry600, fillHover: colors.blueberry600}),
-  },
+  ...systemIconStyles({fill: 'currentColor', fillHover: 'currentColor'}),
 };
 
 const Anchor = (styled(Hyperlink)<HyperlinkExternalProps & StyledType>({
