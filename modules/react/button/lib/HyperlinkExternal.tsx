@@ -19,17 +19,23 @@ export interface HyperlinkExternalProps extends HyperlinkProps {
   iconLabel?: string;
 }
 
-const Anchor = (styled(Hyperlink)<HyperlinkExternalProps & StyledType>({
-  '&:not(:hover)': {
-    ...systemIconStyles({fill: colors.blueberry400, fillHover: colors.blueberry400}),
-  },
+const iconStyles = {
+  ...systemIconStyles({fill: colors.blueberry400, fillHover: colors.blueberry400}),
   '&:hover': {
     ...systemIconStyles({fill: colors.blueberry500, fillHover: colors.blueberry500}),
   },
   '&:active': {
     ...systemIconStyles({fill: colors.blueberry600, fillHover: colors.blueberry600}),
   },
+};
+
+const Anchor = (styled(Hyperlink)<HyperlinkExternalProps & StyledType>({
+  ...iconStyles,
 }) as any) as ElementComponent<'a', HyperlinkExternalProps>;
+
+const StyledSystemIcon = styled(SystemIcon)<StyledType>({
+  ...iconStyles,
+});
 
 export const HyperlinkExternal = createComponent('a')({
   displayName: 'HyperlinkExternalProps',
@@ -48,7 +54,7 @@ export const HyperlinkExternal = createComponent('a')({
       {...elemProps}
     >
       <span>{children}</span>
-      <SystemIcon icon={extLinkIcon} role="img" aria-label={iconLabel} size="1em" />
+      <StyledSystemIcon icon={extLinkIcon} role="img" aria-label={iconLabel} size="1em" />
     </HStack>
   ),
 });
