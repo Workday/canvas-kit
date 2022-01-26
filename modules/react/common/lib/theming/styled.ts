@@ -16,7 +16,6 @@ function styled<Props>(node: any) {
         const direction = props.theme.canvas.direction;
         const maybeFlip = direction === ContentDirection.RTL ? rtlCSSJS : noop;
         const maybeConvert = props.theme._staticStates ? convertToStaticStates : noop;
-
         try {
           if (typeof interpolation === 'function') {
             return maybeFlip(maybeConvert(interpolation(props)) as CSSObject);

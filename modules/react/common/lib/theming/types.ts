@@ -1,8 +1,10 @@
 import {CanvasBreakpoints, BreakpointFnParam} from './breakpoints';
+import '@emotion/react';
 
 /**
  * A single palette within a Canvas theme
  */
+
 export type CanvasThemePalette = {
   lightest: string;
   light: string;
@@ -27,6 +29,7 @@ export enum ContentDirection {
 /**
  * The format of a Canvas theme for components that support it.
  */
+
 export interface CanvasTheme {
   palette: {
     common: CanvasThemeCommonPalette;

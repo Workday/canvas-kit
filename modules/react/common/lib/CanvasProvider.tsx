@@ -18,6 +18,7 @@ export class CanvasProvider extends React.Component<
 
   render() {
     const {children, theme, ...elemProps} = this.props;
+
     return (
       <ThemeProvider theme={theme}>
         <InputProvider />

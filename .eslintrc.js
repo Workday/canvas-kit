@@ -40,7 +40,6 @@ module.exports = {
     'react',
     'prettier',
     'react-hooks',
-    // 'emotion',
     '@emotion',
     'jsdoc',
     'react-ssr',

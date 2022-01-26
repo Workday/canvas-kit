@@ -44,6 +44,15 @@ module.exports = {
       ],
     });
 
+    config.resolve = {
+      ...config.resolve,
+      alias: {
+        ...config.resolve.alias,
+        '@emotion/core': '@emotion/react',
+        'emotion-theming': '@emotion/react',
+      },
+    };
+
     // Update @storybook/addon-docs webpack rules to load all .mdx files in storybook
     const mdxRule = config.module.rules.find(rule => rule.test.toString() === /\.mdx$/.toString());
     mdxRule.use.find(loader => loader.loader.includes('@mdx-js')).options['compilers'] = [
