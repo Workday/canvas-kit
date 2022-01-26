@@ -1,5 +1,4 @@
 import * as React from 'react';
-import {colors} from '@workday/canvas-kit-react/tokens';
 import {
   styled,
   createComponent,
