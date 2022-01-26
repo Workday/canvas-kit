@@ -17,10 +17,7 @@ export const Basic = () => {
   return (
     <StyledFormField label="Choose Your Pizza Crust" useFieldset={true}>
       <RadioGroup name="crust" onChange={handleChange} value={value}>
-        <Radio
-          label="Deep dish with garlic sauce, extra cheese, extra crispy, extra delicious."
-          value="deep-dish"
-        />
+        <Radio label="Deep dish" value="deep-dish" />
         <Radio label="Thin" value="thin" />
         <Radio label="Gluten free" value="gluten-free" />
         <Radio label="Cauliflower" value="cauliflower" />
