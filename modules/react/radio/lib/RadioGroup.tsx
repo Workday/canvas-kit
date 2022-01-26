@@ -39,16 +39,16 @@ const Container = styled('div')<Pick<RadioGroupProps, 'error' | 'grow' | 'theme'
     boxSizing: 'border-box',
     borderRadius: borderRadius.m,
     padding: `${space.xxxs} ${space.xs}`,
-    margin: `-${space.xxxs} -${space.xs}`,
+    margin: `calc(-${space.xxxs} + 2px) -${space.xs}`,
     '& > div': {
       margin: `${space.xxs} ${space.zero}`,
       alignItems: 'flex-start',
       '> div': {
         flex: '0 0 auto',
-        marginTop: '1px',
+        marginTop: '1px', // visually align radio button down
       },
       '&:first-of-type': {
-        marginTop: '6px',
+        marginTop: space.xxxs,
       },
       '&:last-child': {
         marginBottom: space.xxxs,
