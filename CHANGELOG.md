@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v6.3.7](https://github.com/Workday/canvas-kit/releases/tag/v6.3.7) (2022-01-27)
+
+### Components
+
+- fix(preview): Preview FormField.Hint error text not the correct color ([#1445](https://github.com/Workday/canvas-kit/pull/1445)) ([@vibdev](https://github.com/vibdev))
+
+
 ## [v6.3.6](https://github.com/Workday/canvas-kit/releases/tag/v6.3.6) (2022-01-20)
 
 ### Documentation
