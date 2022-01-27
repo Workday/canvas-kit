@@ -1,5 +1,4 @@
 import {CanvasBreakpoints, BreakpointFnParam} from './breakpoints';
-import '@emotion/react';
 
 /**
  * A single palette within a Canvas theme

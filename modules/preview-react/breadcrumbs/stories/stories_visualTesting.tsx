@@ -1,6 +1,5 @@
 import React from 'react';
 import {CanvasProvider, ContentDirection, StaticStates} from '@workday/canvas-kit-react/common';
-import {useTheme} from '@emotion/react';
 
 import {ComponentStatesTable} from '@workday/canvas-kit-labs-react/common';
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
@@ -114,8 +113,6 @@ const rightToLeftDropdownItems = [
 ];
 
 const TableRenderer = ({listItems, currentItem, direction = ContentDirection.LTR}) => {
-  const theme = useTheme();
-  console.warn('THEME IN STORY>>>>', theme);
   return (
     <CanvasProvider theme={{canvas: {direction}}}>
       <StaticStates>
@@ -195,8 +192,6 @@ export const VisualStatesLeftToRight = () => {
 };
 
 export const VisualStatesRightToLeft = () => {
-  // const theme = useTheme();
-  // console.warn('THEME IN STORY>>>>', theme);
   return (
     <>
       <h2>Right-To-Left Breadcrumbs</h2>
