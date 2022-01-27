@@ -39,9 +39,8 @@ export const FormFieldHint = createComponent('p')({
         as={Element}
         css={{
           ...type.levels.subtext.medium,
+          color: localModel.state.hasError ? theme.canvas.palette.error.main : undefined,
         }}
-        color={localModel.state.hasError ? theme.canvas.palette.error.main : undefined}
-        marginY={space.xxs}
         {...props}
       >
         {children}
