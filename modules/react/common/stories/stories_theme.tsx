@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from '@emotion/styled';
+import styled, {StyledComponent} from '@emotion/styled';
 import {storiesOf} from '@storybook/react';
 import {CanvasProvider} from '../index';
 import {CanvasTheme, CanvasThemePalette, Themeable} from '../lib/theming';
@@ -80,7 +80,7 @@ const ThemedComponent = styled('h1')<Themeable>(
   })
 );
 
-const createSwatch = (name: string, color: string, contrast: string, Component = Swatch) => {
+const createSwatch = (name: string, color: string, contrast: string, Component: any = Swatch) => {
   return (
     <Component bg={color} contrast={contrast} key={`${name}-${color}`}>
       {name}
@@ -105,7 +105,7 @@ const ThemeDemo = (props: any) => {
   return (
     <div>
       <StyledHeaderDefaultTheme>Default Canvas Theme</StyledHeaderDefaultTheme>
-      <Palettes>
+      <Palettes {...props}>
         {Object.keys(theme.canvas.palette).map(name => {
           const palette = theme.canvas.palette[name as PaletteKey] as CanvasThemePalette;
           const bg = (palette.main && palette.main) || colors.soap200;
