@@ -147,7 +147,7 @@ const StyledItem = styled(Box.as('li'))<StyledType & {hasIcon?: boolean}>(
   }
 );
 
-export const MenuItem = createComponent('button')({
+export const MenuItem = createComponent('li')({
   displayName: 'Menu.Item',
   Component: ({model, children, ...elemProps}: MenuItemProps, ref, Element) => {
     const localModel = useModelContext(MenuModelContext, model);
@@ -161,7 +161,7 @@ export const MenuItem = createComponent('button')({
       props.ref = elementRef;
       // eslint-disable-next-line react-hooks/rules-of-hooks
       useMount(() => {
-        if (localRef.current.querySelector('svg') && !props.hasIcon) {
+        if (localRef.current!.querySelector('svg') && !props.hasIcon) {
           console.warn(
             `A Menu.Item with an icon should have the 'hasIcon' prop set to true. This ensures correct rendering`
           );
