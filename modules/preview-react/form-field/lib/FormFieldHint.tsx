@@ -8,7 +8,7 @@ import {
   useModelContext,
   useTheme,
 } from '@workday/canvas-kit-react/common';
-import {space, type} from '@workday/canvas-kit-react/tokens';
+import {type} from '@workday/canvas-kit-react/tokens';
 import {Box} from '@workday/canvas-kit-labs-react/common';
 
 import {FormFieldModelContext} from './FormField';
