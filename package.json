@@ -15,7 +15,7 @@
     "@commitlint/cli": "^8.3.5",
     "@commitlint/config-conventional": "^8.1.0",
     "@emotion/eslint-plugin": "^11.7.0",
-    "@emotion/is-prop-valid": "^0.8.2",
+    "@emotion/is-prop-valid": "^1.1.1",
     "@emotion/styled-base": "^10.0.27",
     "@storybook/addon-essentials": "~6.3.13",
     "@storybook/addon-storysource": "~6.3.13",
