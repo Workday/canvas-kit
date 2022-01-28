@@ -2,8 +2,13 @@
 import {jsx} from '@emotion/core';
 import React from 'react';
 
-import {createComponent, ExtractProps, useModelContext, useTheme} from '@workday/canvas-kit-react/common';
-import {space, type} from '@workday/canvas-kit-react/tokens';
+import {
+  createComponent,
+  ExtractProps,
+  useModelContext,
+  useTheme,
+} from '@workday/canvas-kit-react/common';
+import {type} from '@workday/canvas-kit-react/tokens';
 import {Box} from '@workday/canvas-kit-labs-react/common';
 
 import {FormFieldModelContext} from './FormField';
@@ -34,9 +39,8 @@ export const FormFieldHint = createComponent('p')({
         as={Element}
         css={{
           ...type.levels.subtext.medium,
+          color: localModel.state.hasError ? theme.canvas.palette.error.main : undefined,
         }}
-        color={localModel.state.hasError ? theme.canvas.palette.error.main : undefined}
-        marginY={space.xxs}
         {...props}
       >
         {children}

@@ -1,8 +1,8 @@
 /** @jsx jsx */
-import { jsx } from '@emotion/core'
+import {jsx} from '@emotion/core';
 import React from 'react';
 import {TextArea} from '@workday/canvas-kit-preview-react/text-area';
-import { accessibleHide } from '@workday/canvas-kit-react/common';
+import {accessibleHide} from '@workday/canvas-kit-react/common';
 
 export const HiddenLabel = () => {
   const [value, setValue] = React.useState('');
@@ -12,7 +12,7 @@ export const HiddenLabel = () => {
   };
 
   return (
-    <TextArea orientation='vertical' spacing='zero'>
+    <TextArea orientation="vertical" spacing="zero">
       <TextArea.Label css={{...accessibleHide}}>Email</TextArea.Label>
       <TextArea.Field onChange={handleChange} value={value} />
     </TextArea>

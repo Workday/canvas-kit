@@ -9,7 +9,7 @@ export const LabelPositionVertical = () => {
   };
 
   return (
-    <TextInput orientation='vertical' spacing='xxxs'>
+    <TextInput orientation="vertical" spacing="xxxs">
       <TextInput.Label>Email</TextInput.Label>
       <TextInput.Field onChange={handleChange} value={value} />
     </TextInput>

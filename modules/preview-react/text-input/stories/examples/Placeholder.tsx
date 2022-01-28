@@ -9,7 +9,7 @@ export const Placeholder = () => {
   };
 
   return (
-    <TextInput orientation='vertical'>
+    <TextInput orientation="vertical">
       <TextInput.Label>Email</TextInput.Label>
       <TextInput.Field onChange={handleChange} value={value} placeholder="user@email.com" />
     </TextInput>

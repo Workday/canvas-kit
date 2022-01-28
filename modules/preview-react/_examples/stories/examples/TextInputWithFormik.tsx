@@ -9,7 +9,7 @@ import {IconButton, PrimaryButton} from '@workday/canvas-kit-react/button';
 import {visibleIcon, invisibleIcon} from '@workday/canvas-system-icons-web';
 import {useUniqueId} from '@workday/canvas-kit-react/common';
 
-export const LoginForm = () => {
+export const TextInputWithFormik = () => {
   const passwordMinimum = 8;
   const passwordHint = `Password should be of minimum ${passwordMinimum} characters length`;
   const emailRequired = 'Email is required';
@@ -48,9 +48,9 @@ export const LoginForm = () => {
 
   return (
     <form onSubmit={formik.handleSubmit} action=".">
-      <VStack spacing='xs' alignItems='flex-start'>
+      <VStack spacing="xs" alignItems="flex-start">
         <TextInput
-          orientation='vertical'
+          orientation="vertical"
           isRequired={true}
           hasError={formik.touched.email && !!formik.errors.email}
         >
@@ -66,7 +66,7 @@ export const LoginForm = () => {
           <TextInput.Hint>{formik.touched.email && formik.errors.email}</TextInput.Hint>
         </TextInput>
         <TextInput
-          orientation='vertical'
+          orientation="vertical"
           id={passwordId}
           hasError={formik.touched.password && !!formik.errors.password}
           isRequired={true}
