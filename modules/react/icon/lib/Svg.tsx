@@ -1,4 +1,4 @@
-import {CSSObject} from '@emotion/react';
+import {CSSObject} from '@emotion/styled';
 import * as React from 'react';
 import {CanvasIcon, CanvasIconTypes} from '@workday/design-assets-types';
 import {validateIconType} from './utils';
@@ -17,9 +17,11 @@ export interface SvgProps extends React.HTMLAttributes<HTMLSpanElement> {
 }
 
 const StyledIconSpan = styled('span')<Pick<SvgProps, 'shouldMirror' | 'styles'>>(
-  ({shouldMirror, styles}) => ({
+  {
     display: 'inline-block',
     '> svg': {display: 'block'},
+  },
+  ({shouldMirror, styles}) => ({
     transform: shouldMirror ? 'scaleX(-1)' : undefined,
     ...styles,
   })

@@ -1,6 +1,5 @@
 import * as React from 'react';
-import {CSSObject} from '@emotion/react';
-import styled from '@emotion/styled';
+import styled, {CSSObject} from '@emotion/styled';
 import {rgba} from 'polished';
 import {colors, space, spaceNumbers, statusColors} from '@workday/canvas-kit-react/tokens';
 import {borderColor, borderWidth, cellBorder} from './Table';

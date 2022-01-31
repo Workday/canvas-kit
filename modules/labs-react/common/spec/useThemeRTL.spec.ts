@@ -1,4 +1,5 @@
-import {css, CSSObject} from '@emotion/react';
+import {css} from '@emotion/react';
+import {CSSObject} from '@emotion/styled';
 import {renderHook} from '@testing-library/react-hooks';
 import {useThemeRTL} from '../lib/theming';
 

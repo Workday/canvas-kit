@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {colors} from '@workday/canvas-kit-react/tokens';
 import {CanvasAccentIcon, CanvasIconTypes} from '@workday/design-assets-types';
-import {CSSObject} from '@emotion/react';
+import {CSSObject} from '@emotion/styled';
 import Icon, {IconProps} from './Icon';
 
 export interface AccentIconStyles {

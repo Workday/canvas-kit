@@ -54,7 +54,7 @@
   "dependencies": {
     "@emotion/react": "^11.7.1",
     "@emotion/is-prop-valid": "^1.1.1",
-    "@emotion/styled": "^10.0.27",
+    "@emotion/styled": "^11.6.0",
     "@popperjs/core": "^2.5.4",
     "@workday/canvas-colors-web": "^2.0.0",
     "@workday/canvas-kit-labs-react": "^6.3.4",

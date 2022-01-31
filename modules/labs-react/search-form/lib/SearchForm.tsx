@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {CSSObject} from '@emotion/react';
+import {CSSObject} from '@emotion/styled';
 import {colors, space, spaceNumbers} from '@workday/canvas-kit-react/tokens';
 import {GrowthBehavior, styled, generateUniqueId} from '@workday/canvas-kit-react/common';
 import {IconButton, IconButtonProps} from '@workday/canvas-kit-react/button';
