@@ -255,4 +255,9 @@ type RecursivePartial<T> = {
 export type PartialCanvasTheme = RecursivePartial<CanvasTheme>;
 export type PartialCanvasThemePalette = RecursivePartial<CanvasThemePalette>;
 export type PartialEmotionCanvasTheme = {canvas?: PartialCanvasTheme};
+declare module '@emotion/react' {
+  export interface Theme {
+    canvas: CanvasTheme;
+  }
+}
 export type EmotionCanvasTheme = {canvas: CanvasTheme};

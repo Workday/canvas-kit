@@ -8,7 +8,7 @@ import {FormField, FormFieldLabelPosition} from '@workday/canvas-kit-react/form-
 import {Combobox} from '@workday/canvas-kit-labs-react/combobox';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {MenuItemProps} from '@workday/canvas-kit-preview-react/menu';
-import {SearchThemeAttributes, searchThemes, SearchTheme} from './themes';
+import {searchThemes, SearchTheme} from './themes';
 import chroma from 'chroma-js';
 
 export interface SearchFormProps extends GrowthBehavior, React.FormHTMLAttributes<HTMLFormElement> {
@@ -32,7 +32,7 @@ export interface SearchFormProps extends GrowthBehavior, React.FormHTMLAttribute
   /**
    * The theme of the header the search input is being rendered in.
    */
-  searchTheme?: SearchTheme | SearchThemeAttributes;
+  searchTheme?: SearchTheme | CSSObject;
   /**
    * The placeholder text of the SearchForm text input.
    * @default Search
@@ -90,7 +90,7 @@ export interface SearchFormState {
   isFocused: boolean;
 }
 
-function getInputColors(theme: SearchThemeAttributes, isFocused?: boolean) {
+function getInputColors(theme: CSSObject, isFocused?: boolean) {
   return {
     background: isFocused && theme.backgroundFocus ? theme.backgroundFocus : theme.background,
     backgroundHover: theme.backgroundHover,
@@ -301,7 +301,7 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
   };
 
   private getTheme = () => {
-    let theme: SearchThemeAttributes;
+    let theme: CSSObject;
     if (typeof this.props.searchTheme === 'number') {
       theme = searchThemes[this.props.searchTheme];
     } else if (this.props.searchTheme) {
@@ -325,7 +325,7 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
     if (this.props.isCollapsed && this.state.showForm) {
       background = formCollapsedBackground;
     }
-    const isDarkBackground = chroma(background).get('lab.l') < 70;
+    const isDarkBackground = chroma(background as string).get('lab.l') < 70;
     return isDarkBackground ? 'inverse' : 'plain';
   };
 

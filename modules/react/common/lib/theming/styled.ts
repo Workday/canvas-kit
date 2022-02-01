@@ -1,4 +1,5 @@
 import {default as emotionStyled, CreateStyled, Interpolation, CSSObject} from '@emotion/styled';
+
 import {useTheme, EmotionCanvasTheme, ContentDirection} from './index';
 import rtlCSSJS from 'rtl-css-js';
 import {convertToStaticStates} from '../utils/StaticStates';
@@ -31,4 +32,4 @@ function styled<Props>(node: any) {
   };
 }
 
-export default styled as CreateStyled<EmotionCanvasTheme>;
+export default styled as CreateStyled;

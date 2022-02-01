@@ -104,7 +104,7 @@ const BrandLink = styled(Hyperlink)({
   },
 });
 
-const navStyle = ({themeColor}: PickRequired<HeaderProps, 'themeColor', 'css'>) => {
+const navStyle = ({themeColor}: Required<Pick<HeaderProps, 'themeColor'>>) => {
   const theme = deprecatedHeaderThemes[themeColor];
 
   return css({

@@ -1,4 +1,4 @@
-import {keyframes} from '@emotion/react';
+import {keyframes, Theme} from '@emotion/react';
 import {CSSObject} from '@emotion/styled';
 import canvas from '@workday/canvas-kit-react/tokens';
 import {EmotionCanvasTheme, defaultCanvasTheme} from '../theming/index';
@@ -88,7 +88,7 @@ export const memoizedFocusRing = memoize(calculateFocusRing, (...args) => JSON.s
  *
  * @returns {CSSObject} the css object for the focus ring style
  */
-export function focusRing(options: FocusRingOptions = {}, theme?: EmotionCanvasTheme): CSSObject {
+export function focusRing(options: FocusRingOptions = {}, theme?: Theme): CSSObject {
   const {
     width = 2,
     separation = 0,

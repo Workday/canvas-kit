@@ -68,7 +68,7 @@ function getIconColorSelectors(
 }
 
 export const ButtonContainer = styled('button', {
-  shouldForwardProp: prop => isPropValid(prop) && prop !== 'size',
+  shouldForwardProp: (prop: string | number | symbol) => isPropValid(prop) && prop !== 'size',
 })<ButtonContainerProps>(
   {
     ...type.levels.subtext.large,
