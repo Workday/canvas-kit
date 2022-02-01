@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
 import isPropValid from '@emotion/is-prop-valid';
-import {createComponent, StyledType} from '@workday/canvas-kit-react/common';
+import {createComponent} from '@workday/canvas-kit-react/common';
 
 // style props
 import {border, BorderStyleProps} from './utils/border';
@@ -30,7 +30,7 @@ const shouldForwardProp = (prop: string) => {
   return isPropValid(prop) && !omittedProps.includes(prop);
 };
 
-const StyledBox = styled('div', {shouldForwardProp})<StyledType & BoxProps>(
+const StyledBox = styled('div', {shouldForwardProp})<BoxProps>(
   {
     boxSizing: 'border-box',
   },

@@ -1,4 +1,3 @@
-import * as React from 'react';
 import get from 'lodash/get';
 import {useTheme as useEmotionTheme} from '@emotion/react';
 import {

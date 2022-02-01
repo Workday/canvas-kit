@@ -1,5 +1,6 @@
 import * as React from 'react';
-import {styled, createComponent} from '@workday/canvas-kit-react/common';
+// import styled from '@emotion/styled';
+import {createComponent, styled} from '@workday/canvas-kit-react/common';
 
 import {colors, gradients, space, type} from '@workday/canvas-kit-react/tokens';
 
@@ -31,7 +32,7 @@ const PageHeaderItem = createComponent('div')({
 const PageHeaderTitle = createComponent('h2')({
   displayName: 'PageHeader.Title',
   Component: ({children, ...props}, ref, Element) => (
-    <Title ref={ref} as={Element} {...props}>
+    <Title ref={ref} as="span" {...props}>
       {children}
     </Title>
   ),

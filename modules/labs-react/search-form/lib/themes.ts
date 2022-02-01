@@ -1,6 +1,6 @@
 import {focusRing} from '@workday/canvas-kit-react/common';
 import {colors} from '@workday/canvas-kit-react/tokens';
-import {CSSObject} from '@emotion/react';
+// import {CSSObject} from '@emotion/react';
 
 export enum SearchTheme {
   Light,
@@ -8,8 +8,20 @@ export enum SearchTheme {
   Transparent,
 }
 
+export interface SearchThemeAttributes {
+  background?: string;
+  backgroundFocus?: string;
+  backgroundHover?: string;
+  color?: string;
+  colorFocus?: string;
+  placeholderColor?: string;
+  placeholderColorFocus?: string;
+  boxShadow?: string | string[];
+  boxShadowFocus?: string | string[];
+}
+
 export interface SearchThemes {
-  [key: string]: CSSObject;
+  [key: string]: SearchThemeAttributes;
 }
 
 export const searchThemes: SearchThemes = {
@@ -30,7 +42,7 @@ export const searchThemes: SearchThemes = {
     color: colors.blackPepper300,
     placeholderColor: colors.licorice300,
     boxShadow: 'none',
-    boxShadowFocus: focusRing().boxShadow,
+    boxShadowFocus: focusRing().boxShadow as SearchThemeAttributes['boxShadowFocus'],
   },
   [SearchTheme.Dark]: {
     background: 'rgba(0, 0, 0, 0.2)',
