@@ -58,7 +58,7 @@ export interface MenuItemProps<T = unknown> {
   hasIcon?: boolean;
 }
 
-const StyledItem = styled(Box.as('li'))<StyledType & {hasIcon?: boolean}>(
+const StyledItem = styled(Box.as('button'))<StyledType & {hasIcon?: boolean}>(
   ({theme}) => {
     return {
       ...type.levels.subtext.large,
@@ -147,7 +147,7 @@ const StyledItem = styled(Box.as('li'))<StyledType & {hasIcon?: boolean}>(
   }
 );
 
-export const MenuItem = createComponent('li')({
+export const MenuItem = createComponent('button')({
   displayName: 'Menu.Item',
   Component: ({model, children, ...elemProps}: MenuItemProps, ref, Element) => {
     const localModel = useModelContext(MenuModelContext, model);
