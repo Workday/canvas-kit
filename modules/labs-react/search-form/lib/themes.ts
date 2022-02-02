@@ -1,6 +1,5 @@
 import {focusRing} from '@workday/canvas-kit-react/common';
 import {colors} from '@workday/canvas-kit-react/tokens';
-// import {CSSObject} from '@emotion/react';
 
 export enum SearchTheme {
   Light,
