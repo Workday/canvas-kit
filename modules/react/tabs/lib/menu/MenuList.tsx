@@ -7,11 +7,11 @@ import {
   createHook,
   ExtractProps,
 } from '@workday/canvas-kit-react/common';
+import {useRenderItems} from '@workday/canvas-kit-react/list';
 import {Stack} from '@workday/canvas-kit-labs-react/layout';
 
 import {MenuModel} from './useMenuModel';
 import {MenuModelContext} from './Menu';
-import {useRenderItems} from '../list';
 
 export interface MenuListProps<T = unknown> extends Partial<ExtractProps<typeof Stack, never>> {
   /**

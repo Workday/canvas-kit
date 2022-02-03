@@ -14,12 +14,14 @@ import {
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
 import {Box} from '@workday/canvas-kit-labs-react/common';
+import {
+  useListRegisterItem,
+  useRovingFocus,
+  useSelectionItem,
+} from '@workday/canvas-kit-react/list';
 
-import {useListRegisterItem} from '../list';
-import {useRovingFocus} from '../cursor';
 import {MenuModel} from './useMenuModel';
 import {MenuModelContext} from './Menu';
-import {useSelectionItem} from '../selection';
 
 export interface MenuItemProps<T = unknown> {
   /**

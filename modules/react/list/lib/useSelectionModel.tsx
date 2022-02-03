@@ -8,9 +8,7 @@ import {
   CursorModelConfig,
   cursorEventMap,
   CursorModel,
-} from '../cursor/useCursorModel';
-
-export type Orientation = 'horizontal' | 'vertical';
+} from './useCursorModel';
 
 export type SelectionState<T = unknown> = CursorState<T> & {
   selectedIds: 'all' | string[];

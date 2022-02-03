@@ -10,9 +10,9 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {space} from '@workday/canvas-kit-react/tokens';
-import {useOverflowTarget} from './overflow';
-import {useMenuTarget} from './menu';
+import {useOverflowTarget} from '@workday/canvas-kit-react/list';
 
+import {useMenuTarget} from './menu';
 import {TabsModelContext} from './Tabs';
 import {TabsModel} from './useTabsModel';
 import {StyledTabItem} from './TabsItem';

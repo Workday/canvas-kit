@@ -1,10 +1,10 @@
 import * as React from 'react';
 
 import {createComponent, useModelContext} from '@workday/canvas-kit-react/common';
+import {useRenderItems} from '@workday/canvas-kit-react/list';
 
 import {TabsModelContext} from './Tabs';
 import {TabsModel} from './useTabsModel';
-import {useRenderItems} from './list';
 
 export interface TabsPanelsProps<T = unknown> {
   /**

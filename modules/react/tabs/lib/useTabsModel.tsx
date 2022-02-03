@@ -5,10 +5,12 @@ import {
   useEventMap,
   useUniqueId,
 } from '@workday/canvas-kit-react/common';
-import {Orientation} from './cursor';
-import {defaultGetId, ListEvents, ListState, useListModel} from './list';
-import {MenuModel, MenuModelConfig, useMenuModel} from './menu';
 import {
+  defaultGetId,
+  ListEvents,
+  ListState,
+  useListModel,
+  Orientation,
   overflowEventMap,
   OverflowEvents,
   OverflowState,
@@ -16,9 +18,11 @@ import {
   BaseOverflowModelConfig,
   useOverflowModel,
   OverflowModel,
-} from './overflow';
+} from '@workday/canvas-kit-react/list';
 
-export type TabsState<T> = OverflowState<T> & {
+import {MenuModel, MenuModelConfig, useMenuModel} from './menu';
+
+export type TabsState<T extends unknown> = OverflowState<T> & {
   /** IDREF of the list. Children ids can be derived from this id */
   id: string;
   /**
@@ -146,7 +150,7 @@ export const useTabsModel = <T extends unknown>(config: TabsModelConfig<T> = {})
     },
     onShow({data, prevState}) {
       // Always select the first item when the menu is opened
-      menu.events.first();
+      menu.events.goToFirst();
       config.menuConfig?.onShow?.({data, prevState});
     },
   });

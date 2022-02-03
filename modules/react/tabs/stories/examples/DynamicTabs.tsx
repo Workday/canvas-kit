@@ -1,8 +1,7 @@
 import React from 'react';
-import {space} from '@workday/canvas-kit-react/tokens';
 
 import {Tabs, useTabsModel, TabsModel} from '@workday/canvas-kit-react/tabs';
-import {SelectionModel} from '../../lib/selection';
+import {SelectionModel} from '@workday/canvas-kit-react/list';
 
 type Tab = {
   tab: string;

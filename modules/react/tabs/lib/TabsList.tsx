@@ -9,9 +9,11 @@ import {
   useModelContext,
 } from '@workday/canvas-kit-react/common';
 import {Stack} from '@workday/canvas-kit-labs-react/layout';
-import {useOverflowMeasureContainer} from './overflow';
-import {useRenderItems} from './list';
-import {useResetCursorOnBlur} from './selection';
+import {
+  useOverflowMeasureContainer,
+  useRenderItems,
+  useResetCursorOnBlur,
+} from '@workday/canvas-kit-react/list';
 
 import {TabsModelContext} from './Tabs';
 import {TabsModel} from './useTabsModel';

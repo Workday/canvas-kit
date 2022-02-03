@@ -1,4 +1,4 @@
-import {getHiddenIds} from '../useOverflowModel';
+import {getHiddenIds} from '../lib/useOverflowModel';
 
 describe('useOverflowModel', () => {
   describe('getHiddenIds', () => {

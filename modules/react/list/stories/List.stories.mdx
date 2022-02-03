@@ -1,0 +1,62 @@
+import {Meta} from '@storybook/addon-docs';
+
+import {List} from '@workday/canvas-kit-react/list';
+
+import {Basic} from './examples/Basic';
+import {RovingFocus} from './examples/RovingFocus';
+import {Selection} from './examples/Selection';
+import {MultiSelection} from './examples/MultiSelection';
+
+<Meta title="Components/Navigation/List/React" component={List} />
+
+# Canvas Kit List
+
+A list is a system of models and behaviors for creating lists. For example, `Tabs` uses list
+behaviors and so does `Menu`. The UI of each looks very different, but much of the behavior is
+shared.
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-react
+```
+
+## Usage
+
+There is no `List` component, but components can be created using models and behaviors
+
+### Basic Example
+
+The list on its own isn't very useful. It registers each item with a `name` that is used by other
+hooks (more on that later). `useRenderItems` provides rendering optimizations for rendering items.
+
+<ExampleCodeBlock code={Basic} />
+
+### Roving Tabindex
+
+The list system also includes a cursor that extends the list. A cursor is mostly used for focusing
+items. The [roving tabindex](https://w3c.github.io/aria-practices/#kbd_roving_tabindex) is a
+well-supported way to accomplish accessibility requirements for focusing items within a list. This
+example shows how to use `useRovingFocus`. You can either use the tab key for focus on an item or
+click on an item and then use the up/down keys to navigation the list. By default, the list is set
+to wrap navigation using the `wrappingNavigationManager`. Only a single item in the list is a focus
+stop that "roves" as the up/down arrows are pressed.
+
+**Note:** This example doesn't meet accessibility requirements. The list will have to have some type
+of context. Like "navigation list" or "menu list".
+
+<ExampleCodeBlock code={RovingFocus} />
+
+### Selection
+
+Lists support selection. `useSelectionItem` is applied to an item which adds an `onClick` that adds
+the item to the `state.selectedIds`. The default selection manager is a single select.
+
+<ExampleCodeBlock code={Selection} />
+
+### Multiple Selection
+
+Lists support selection. `useSelectionItem` is applied to an item which adds an `onClick` that adds
+the item to the `state.selectedIds`. The default selection manager is a single select.
+
+<ExampleCodeBlock code={MultiSelection} />

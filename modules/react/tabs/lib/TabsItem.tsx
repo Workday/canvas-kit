@@ -19,10 +19,13 @@ import {
 import {Box} from '@workday/canvas-kit-labs-react/common';
 import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
-import {useListRegisterItem} from './list';
-import {useRovingFocus} from './cursor';
-import {isSelected, useSelectionItem} from './selection';
-import {useOverflowMeasureItem} from './overflow';
+import {
+  useListRegisterItem,
+  useRovingFocus,
+  isSelected,
+  useSelectionItem,
+  useOverflowMeasureItem,
+} from '@workday/canvas-kit-react/list';
 
 import {TabsModelContext} from './Tabs';
 import {TabsModel} from './useTabsModel';

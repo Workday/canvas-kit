@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {createHook} from '@workday/canvas-kit-react/common';
-import {orientationKeyMap} from '../cursor';
+import {orientationKeyMap} from './useRovingFocus';
 
 import {SelectionModel} from './useSelectionModel';
 

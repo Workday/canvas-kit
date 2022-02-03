@@ -5,20 +5,24 @@ import {CursorModel} from './useCursorModel';
 
 export const orientationKeyMap = {
   horizontal: {
-    ArrowLeft: 'previous',
-    Left: 'previous',
-    ArrowRight: 'next',
-    Right: 'next',
-    Home: 'first',
-    End: 'last',
+    ArrowLeft: 'goToPrevious',
+    Left: 'goToPrevious',
+    ArrowRight: 'goToNext',
+    Right: 'goToNext',
+    Home: 'goToFirst',
+    End: 'goToLast',
+    PageDown: 'goToNextPage',
+    PageUp: 'goToPreviousPage',
   },
   vertical: {
-    ArrowUp: 'previous',
-    Up: 'previous',
-    ArrowDown: 'next',
-    Down: 'next',
-    Home: 'first',
-    End: 'last',
+    ArrowUp: 'goToPrevious',
+    Up: 'goToPrevious',
+    ArrowDown: 'goToNext',
+    Down: 'goToNext',
+    Home: 'goToFirst',
+    End: 'goToLast',
+    PageDown: 'goToNextPage',
+    PageUp: 'goToPreviousPage',
   },
 } as const;
 
@@ -27,17 +31,29 @@ const rightToLeftMap = {
   Left: 'Right',
   ArrowRight: 'ArrowLeft',
   Right: 'Left',
-  Home: 'End',
-  End: 'Home',
+  Home: 'Home',
+  End: 'End',
+  PageDown: 'PageDown',
+  PageUp: 'PageUp',
 } as const;
 
 const gridKeyMap = {
   ...orientationKeyMap.horizontal,
+  Home: 'goToFirstOfRow',
+  End: 'goToLastOfRow',
   ArrowUp: 'goToPreviousRow',
   Up: 'goToPreviousRow',
   ArrowDown: 'goToNextRow',
   Down: 'goToNextRow',
-};
+} as const;
+
+// const ctrlKeyMap = {
+//   Home: 'goToFirst',
+//   End: 'goToLast',
+// } as const;
+
+const keys = <T extends object>(obj: T): (keyof T)[] => Object.keys(obj) as (keyof T)[];
+// const hasOwnKey = <T extends object>(obj: T, key: any): key is keyof T => obj.hasOwnProperty(key);
 
 /**
  * Handles the roving focus behavior of a Cursor model. It should be added to the element
@@ -74,18 +90,49 @@ export const useRovingFocus = createHook(
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [state.cursorId]);
 
+    // const object = {
+    //   foo: 'bar',
+    //   bar: 'baz',
+    // } as const;
+
+    // Object.keys(object).forEach(key => {
+    //   if (hasOwnKey(object, key)) {
+    //     key; //?
+    //     console.log(object[key]);
+    //   }
+    // });
+
     return {
       onKeyDown(event: React.KeyboardEvent) {
-        (Object.keys(
-          state.columnCount > 0 ? gridKeyMap : orientationKeyMap[state.orientation]
-        ) as (keyof typeof orientationKeyMap[typeof state.orientation])[]).forEach(key => {
-          if (isRTL ? event.key === rightToLeftMap[key] : event.key === key) {
-            const event =
-              state.columnCount > 0 ? gridKeyMap[key] : orientationKeyMap[state.orientation][key];
-            keyDownRef.current = true;
-            events[event]?.();
+        if (event.ctrlKey) {
+          // for (const key in Object.keys(ctrlKeyMap)) {
+          //   if (hasOwnKey(ctrlKeyMap, key)) {
+          //     key; //?
+          //     const temp = ctrlKeyMap[key]; //?
+          //     keyDownRef.current = true;
+          //     events[ctrlKeyMap[key]]?.();
+          //     return;
+          //   }
+          // }
+          // keys(ctrlKeyMap).forEach(key => {
+          //   keyDownRef.current = true;
+          //   events[ctrlKeyMap[key]]?.();
+          //   return;
+          // });
+        }
+        keys(state.columnCount > 0 ? gridKeyMap : orientationKeyMap[state.orientation]).forEach(
+          key => {
+            if (isRTL ? event.key === rightToLeftMap[key] : event.key === key) {
+              const eventName =
+                state.columnCount > 0 ? gridKeyMap[key] : orientationKeyMap[state.orientation][key];
+              keyDownRef.current = true;
+              if (events[eventName]) {
+                events[eventName]?.();
+                event.preventDefault();
+              }
+            }
           }
-        });
+        );
       },
       onFocus() {
         focusRef.current = true;

@@ -9,7 +9,7 @@ import {
   useListModel,
   ListModelConfig,
   ListModel,
-} from '../list/useListModel';
+} from './useListModel';
 
 export type Orientation = 'horizontal' | 'vertical';
 
@@ -35,7 +35,7 @@ export type CursorEvents<T = unknown> = ListEvents<T> & {
    * currently on the last item. For a grid, the default navigation manager will stay on the last
    * item in a row.
    */
-  next(): void;
+  goToNext(): void;
   /**
    * Next item perpendicular to the orientation of a list, or the next row in a grid. For example,
    * if a list is horizontal, the next row would describe a down direction. This could be ignored by
@@ -47,7 +47,7 @@ export type CursorEvents<T = unknown> = ListEvents<T> & {
    * Set the cursor to the "previous" item in the list. If the beginning of the list is detected,
    * it will wrap to the last item
    */
-  previous(): void;
+  goToPrevious(): void;
   /**
    * Previous item perpendicular to the orientation of a list, or the previous row in a grid. For
    * example, if a list is horizontal, the previous row would describe an up direction. This could
@@ -56,21 +56,30 @@ export type CursorEvents<T = unknown> = ListEvents<T> & {
    */
   goToPreviousRow(): void;
   /** Set the cursor to the first item in the list */
-  first(): void;
+  goToFirst(): void;
   /** Set the cursor to the last item in the list */
-  last(): void;
+  goToLast(): void;
+
+  goToFirstOfRow(): void;
+  goToLastOfRow(): void;
+  goToNextPage(): void;
+  goToPreviousPage(): void;
 };
 
 type NavigationInput<T> = Pick<CursorModel<T>, 'state' | 'getId'>;
 
 export interface NavigationManager {
-  getFirst<T>(input: NavigationInput<T>): T;
-  getLast<T>(input: NavigationInput<T>): T;
-  getItem<T>(id: string, input: NavigationInput<T>): T;
-  getNext<T>(id: string, input: NavigationInput<T>): T;
-  getNextRow<T>(id: string, input: NavigationInput<T>): T;
-  getPrevious<T>(id: string, input: NavigationInput<T>): T;
-  getPreviousRow<T>(id: string, input: NavigationInput<T>): T;
+  getFirst: NavigationRequestor;
+  getLast: NavigationRequestor;
+  getItem: NavigationRequestor;
+  getNext: NavigationRequestor;
+  getNextRow: NavigationRequestor;
+  getPrevious: NavigationRequestor;
+  getPreviousRow: NavigationRequestor;
+  getFirstOfRow: NavigationRequestor;
+  getLastOfRow: NavigationRequestor;
+  getPreviousPage: NavigationRequestor;
+  getNextPage: NavigationRequestor;
 }
 
 export interface CursorModel<T = unknown> extends ListModel<T> {
@@ -133,68 +142,92 @@ export type BaseCursorModelConfig<T> = BaseListModelConfig<T> & {
 export type CursorModelConfig<T> = BaseCursorModelConfig<T> &
   Partial<ToModelConfig<CursorState<T>, CursorEvents<T>, typeof cursorEventMap>>;
 
-export const useCursorNavigation = <T extends unknown>(
-  state: CursorState<T>,
-  getId: ListModel<T>['getId']
-) => {
-  // refs for performance so that new functions aren't created every render
-  const getIdRef = React.useRef(getId);
-  const itemsRef = React.useRef(state.items);
-  const nonInteractiveIdsRef = React.useRef(state.nonInteractiveIds);
-
-  itemsRef.current = state.items;
-  nonInteractiveIdsRef.current = state.nonInteractiveIds;
-
-  // return a memoized function to prevent recreation of functions every render
-  return React.useMemo(() => {
-    const getFirst = () => itemsRef.current[0];
-    const getLast = () => itemsRef.current[itemsRef.current.length - 1];
-
-    const getItem = (id: string): T => {
-      const item = id ? itemsRef.current.find(item => getIdRef.current(item) === id) : getFirst(); // no id, return first item
-      assert(item, `Item not found: ${id}`);
-      return item;
-    };
-
-    const getOffsetItem = (offset: number) => (id: string, tries = itemsRef.current.length): T => {
-      const items = itemsRef.current;
-      const item = getItem(id);
-
-      const getId = getIdRef.current;
-      const currentIndex = items.findIndex(i => getId(item) === getId(i));
-      let nextIndex = currentIndex + offset;
-      if (nextIndex < 0) {
-        nextIndex = items.length + nextIndex;
-      } else if (nextIndex >= items.length) {
-        nextIndex = nextIndex - items.length;
-      }
-
-      if (nonInteractiveIdsRef.current.includes(getId(items[nextIndex])) && tries > 0) {
-        // The next item is disabled, try again, but only if we haven't already tried everything.
-        // Avoid an infinite loop with `tries`
-        return getOffsetItem(offset)(getId(items[nextIndex]), tries - 1);
-      }
-
-      return items[nextIndex];
-    };
-
-    const getNext = getOffsetItem(1);
-    const getPrevious = getOffsetItem(-1);
-    const goToPreviousRow = getOffsetItem(-state.columnCount);
-    const goToNextRow = getOffsetItem(+state.columnCount);
-
-    return {getFirst, getLast, getItem, getNext, goToNextRow, getPrevious, goToPreviousRow};
-  }, [state.columnCount]);
-};
-
+/**
+ * Factory function that does type checking to create navigation managers. Navigation managers
+ * are expected to handle all methods of a grid. If your use-case isn't meant to handle a grid,
+ * pick one of the existing navigation managers and override the methods you wish to implement.
+ *
+ * For example,
+ * ```tsx
+ * import {createNavigationManager, wrappingNavigationManager} from '@workday/canvas-kit-react/list'
+ *
+ * const navigationManager = createNavigationManager({
+ *   ...wrappingNavigationManager,
+ *   getNext(id, {state, getId}) {
+ *     //
+ *   }
+ * })
+ * ```
+ */
 export const createNavigationManager = (manager: NavigationManager) => manager;
 
-const getFirst = <T extends unknown>({state}: NavigationInput<T>) => state.items[0];
-const getLast = <T extends unknown>({state}: NavigationInput<T>) =>
-  state.items[state.items.length - 1];
+/** Function type to make it easier to define navigation functions */
+export type NavigationRequestor = <T>(id: string, {state}: NavigationInput<T>) => T;
 
-const getItem = <T extends unknown>(id: string, {state, getId}: NavigationInput<T>): T => {
-  const item = id ? state.items.find(item => getId(item) === id) : getFirst({state, getId}); // no id, return first item
+/**
+ * Get the first item in a list regardless of column count
+ */
+export const getFirst: NavigationRequestor = (_, {state}) => state.items[0];
+/**
+ * Get the last item in a list regardless of column count
+ */
+export const getLast: NavigationRequestor = (_, {state}) => state.items[state.items.length - 1];
+
+/**
+ * Get the first item in a row. If column count is 0, it will return the results of `getFirst`
+ */
+export const getFirstOfRow: NavigationRequestor = (id, {state, getId}) => {
+  if (state.columnCount) {
+    const item = getItem(id, {state, getId});
+    const currentIndex = state.items.findIndex(i => getId(item) === getId(i));
+    const offset = currentIndex % state.columnCount;
+    return state.items[currentIndex - offset];
+  }
+  return getFirst(id, {state, getId});
+};
+
+/**
+ * get the last item in a row - if column count is 0, it will return the results of `getLast`
+ */
+export const getLastOfRow: NavigationRequestor = (id, {state, getId}) => {
+  if (state.columnCount) {
+    const item = getItem(id, {state, getId});
+    const currentIndex = state.items.findIndex(i => getId(item) === getId(i));
+    const offset = (currentIndex % state.columnCount) - state.columnCount + 1;
+    return state.items[currentIndex - offset];
+  }
+  return getLast(id, {state, getId});
+};
+
+/**
+ * get the item in the previous page. This can be author defined. By default it will return the
+ * first item for a list, and the first item in the same column for a grid.
+ */
+export const getPreviousPage: NavigationRequestor = (id, {state, getId}) => {
+  if (state.columnCount) {
+    const item = getItem(id, {state, getId});
+    const currentIndex = state.items.findIndex(i => getId(item) === getId(i));
+    return state.items[currentIndex % state.columnCount];
+  }
+  return getFirst(id, {state, getId});
+};
+
+/**
+ * get the item in the next page. This can be author defined. By default, it will return the last
+ * item for a list, and the last item in the same column for a grid.
+ */
+export const getNextPage: NavigationRequestor = (id, {state, getId}) => {
+  if (state.columnCount) {
+    const item = getItem(id, {state, getId});
+    const currentIndex = state.items.findIndex(i => getId(item) === getId(i));
+    const lastRowIndex = state.items.length - state.columnCount;
+    return state.items[lastRowIndex + (currentIndex % state.columnCount)];
+  }
+  return getLast(id, {state, getId});
+};
+
+const getItem: NavigationRequestor = (id, {state, getId}) => {
+  const item = id ? state.items.find(item => getId(item) === id) : getFirst(id, {state, getId}); // no id, return first item
   assert(item, `Item not found: ${id}`);
   return item;
 };
@@ -234,10 +267,26 @@ export const getOffsetItem = (offset: number) => <T extends unknown>(
 
   const currentIndex = items.findIndex(i => getId(item) === getId(i));
   let nextIndex = currentIndex + offset;
-  if (nextIndex < 0) {
-    nextIndex = items.length + nextIndex;
+  if (Math.abs(offset) < columnCount) {
+    // if we're here, the columnCount is non-zero and the absolute value of offset is less than the
+    // column count. We don't want to wrap, so we'll bound within the row
+
+    const currentIndexInRow = currentIndex % columnCount;
+    const nextIndexInRow = nextIndex - currentIndex + currentIndexInRow;
+    if (nextIndexInRow >= columnCount || nextIndexInRow < 0) {
+      nextIndex = currentIndex;
+    }
+  } else if (columnCount) {
+    // if we're here, there's a column count, but the offset will move into another row. We need to
+    // bound to row values
+    const nextRow = Math.floor(nextIndex / columnCount);
+    if (nextRow < 0 || nextRow >= columnCount) {
+      nextIndex = currentIndex;
+    }
+  } else if (nextIndex < 0) {
+    nextIndex = 0;
   } else if (nextIndex >= items.length) {
-    nextIndex = nextIndex - items.length;
+    nextIndex = items.length - 1;
   }
 
   if (state.nonInteractiveIds.includes(getId(items[nextIndex])) && tries > 0) {
@@ -249,28 +298,36 @@ export const getOffsetItem = (offset: number) => <T extends unknown>(
   return items[nextIndex];
 };
 
+/**
+ * The default navigation manager of lists
+ */
 export const wrappingNavigationManager = createNavigationManager({
   getFirst,
   getLast,
   getItem,
   getNext: getWrappingOffsetItem(1),
-  getNextRow: <T extends unknown>(id: string, {state, getId}: NavigationInput<T>) =>
-    getWrappingOffsetItem(-state.columnCount)(id, {state, getId}),
+  getNextRow: (id, {state, getId}) => getWrappingOffsetItem(-state.columnCount)(id, {state, getId}),
   getPrevious: getWrappingOffsetItem(-1),
-  getPreviousRow: <T extends unknown>(id: string, {state, getId}: NavigationInput<T>) =>
+  getPreviousRow: (id, {state, getId}) =>
     getWrappingOffsetItem(state.columnCount)(id, {state, getId}),
+  getPreviousPage,
+  getNextPage,
+  getFirstOfRow,
+  getLastOfRow,
 });
 
 export const navigationManager = createNavigationManager({
   getFirst,
   getLast,
   getItem,
-  getNext: getWrappingOffsetItem(1),
-  getNextRow: <T extends unknown>(id: string, {state, getId}: NavigationInput<T>) =>
-    getWrappingOffsetItem(-state.columnCount)(id, {state, getId}),
-  getPrevious: getWrappingOffsetItem(-1),
-  getPreviousRow: <T extends unknown>(id: string, {state, getId}: NavigationInput<T>) =>
-    getWrappingOffsetItem(state.columnCount)(id, {state, getId}),
+  getNext: getOffsetItem(1),
+  getNextRow: (id, {state, getId}) => getOffsetItem(-state.columnCount)(id, {state, getId}),
+  getPrevious: getOffsetItem(-1),
+  getPreviousRow: (id, {state, getId}) => getOffsetItem(state.columnCount)(id, {state, getId}),
+  getPreviousPage,
+  getNextPage,
+  getFirstOfRow,
+  getLastOfRow,
 });
 
 /**
@@ -305,10 +362,10 @@ export const useCursorModel = <T extends unknown>(
     goTo({id}) {
       setCursorId(id);
     },
-    next() {
+    goToNext() {
       setCursorId(list.getId(navigation.getNext(state.cursorId, {state, getId: list.getId})));
     },
-    previous() {
+    goToPrevious() {
       setCursorId(list.getId(navigation.getPrevious(state.cursorId, {state, getId: list.getId})));
     },
     goToPreviousRow() {
@@ -319,11 +376,25 @@ export const useCursorModel = <T extends unknown>(
     goToNextRow() {
       setCursorId(list.getId(navigation.getNextRow(state.cursorId, {state, getId: list.getId})));
     },
-    first() {
-      setCursorId(list.getId(navigation.getFirst({state, getId: list.getId})));
+    goToFirst() {
+      setCursorId(list.getId(navigation.getFirst(state.cursorId, {state, getId: list.getId})));
     },
-    last() {
-      setCursorId(list.getId(navigation.getLast({state, getId: list.getId})));
+    goToLast() {
+      setCursorId(list.getId(navigation.getLast(state.cursorId, {state, getId: list.getId})));
+    },
+    goToFirstOfRow() {
+      setCursorId(list.getId(navigation.getFirstOfRow(state.cursorId, {state, getId: list.getId})));
+    },
+    goToLastOfRow() {
+      setCursorId(list.getId(navigation.getLastOfRow(state.cursorId, {state, getId: list.getId})));
+    },
+    goToNextPage() {
+      setCursorId(list.getId(navigation.getNextPage(state.cursorId, {state, getId: list.getId})));
+    },
+    goToPreviousPage() {
+      setCursorId(
+        list.getId(navigation.getPreviousPage(state.cursorId, {state, getId: list.getId}))
+      );
     },
   } as CursorEvents<T>);
 

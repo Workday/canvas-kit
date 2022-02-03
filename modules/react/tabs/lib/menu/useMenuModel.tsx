@@ -13,15 +13,15 @@ import {
   usePopupModel,
   useReturnFocus,
 } from '@workday/canvas-kit-react/popup';
-import {CursorModel} from '../cursor';
 import {
+  CursorModel,
   SelectionState,
   SelectionEvents,
   selectionEventMap,
   SelectionModelConfig,
   useSelectionModel,
   BaseSelectionModelConfig,
-} from '../selection';
+} from '@workday/canvas-kit-react/list';
 
 export type MenuState<T = unknown> = SelectionState<T> & PopupState & {};
 

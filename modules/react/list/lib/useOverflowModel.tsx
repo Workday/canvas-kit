@@ -9,7 +9,7 @@ import {
   SelectionModelConfig,
   selectionEventMap,
   SelectionModel,
-} from '../selection';
+} from './useSelectionModel';
 
 export type OverflowState<T = unknown> = SelectionState<T> & {
   containerWidth: number;
