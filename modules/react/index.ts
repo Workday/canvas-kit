@@ -15,7 +15,6 @@ export * from './icon';
 export * from './layout';
 export * from './loading-animation';
 export * from './modal';
-export * from './page-header';
 export * from './pagination';
 export * from './popup';
 export * from './radio';
