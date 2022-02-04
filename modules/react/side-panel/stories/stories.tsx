@@ -4,11 +4,10 @@ import styled from '@emotion/styled';
 
 import {colors, type} from '@workday/canvas-kit-react/tokens';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
-import {DeprecatedHeader} from '@workday/canvas-kit-labs-react/header';
 import {IconButton, PrimaryButton} from '@workday/canvas-kit-react/button';
-import {Avatar} from '@workday/canvas-kit-react/avatar';
 import {SidePanel} from '@workday/canvas-kit-react/side-panel';
 import {SidePanelProps} from '../lib/SidePanel';
+import {Basic} from '../../_examples/stories/examples/GlobalHeader';
 
 import {defaultCanvasTheme, StyledType} from '@workday/canvas-kit-react/common';
 import {Flex} from '@workday/canvas-kit-labs-react/layout';
@@ -174,14 +173,7 @@ export const Default = () => (
 
 const Template = props => (
   <div style={{height: '67vh', position: 'relative'}}>
-    <DeprecatedHeader brandUrl="#">
-      <Avatar
-        onClick={() => {
-          alert('clicked avatar');
-        }}
-      />
-      <PrimaryButton>Sign Up</PrimaryButton>
-    </DeprecatedHeader>
+    <Basic />
     <SidePanelWrapper {...props} />
   </div>
 );
