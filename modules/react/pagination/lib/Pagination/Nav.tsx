@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Flex, FlexProps} from '@workday/canvas-kit-labs-react/layout';
+import {Flex, FlexProps} from '@workday/canvas-kit-react/layout';
 
 export interface PaginationNavProps extends Omit<FlexProps, 'as'> {
   'aria-label': string;

@@ -1,4 +1,4 @@
-import {color} from '../lib/utils/color';
+import {color} from '@workday/canvas-kit-react/layout';
 
 describe('Color Style Props Function', () => {
   it('should ignore non-color props', () => {

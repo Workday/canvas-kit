@@ -1,4 +1,4 @@
-import {layout, LayoutStyleProps} from '../lib/utils/layout';
+import {layout, LayoutStyleProps} from '@workday/canvas-kit-react/layout';
 
 describe('Layout Style Props Function', () => {
   it('should ignore non-layout props', () => {

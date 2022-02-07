@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Box} from '@workday/canvas-kit-labs-react/common';
+import {Box} from '@workday/canvas-kit-react/layout';
 
 export const Ref = () => {
   const boxRef = React.useRef(null);

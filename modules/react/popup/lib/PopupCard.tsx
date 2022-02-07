@@ -13,7 +13,7 @@ import {
   ExtractProps,
   useConstant,
 } from '@workday/canvas-kit-react/common';
-import {Stack, StackStyleProps} from '@workday/canvas-kit-labs-react/layout';
+import {Stack, StackStyleProps} from '@workday/canvas-kit-react/layout';
 
 import {getTransformFromPlacement} from './getTransformFromPlacement';
 import {usePopupCard, PopupModel, PopupModelContext} from './hooks';

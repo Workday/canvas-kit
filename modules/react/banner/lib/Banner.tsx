@@ -12,7 +12,7 @@ import {
   useDefaultModel,
   useIsRTL,
 } from '@workday/canvas-kit-react/common';
-import {Flex} from '@workday/canvas-kit-labs-react/layout';
+import {Flex} from '@workday/canvas-kit-react/layout';
 
 import {BannerModel, BannerModelConfig, useBanner, useBannerModel, useThemedPalette} from './hooks';
 

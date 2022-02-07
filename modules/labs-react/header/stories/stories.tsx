@@ -20,7 +20,7 @@ import {
 } from '../index';
 
 import bgImg from '../static/workday-bg.jpg';
-import {Box} from '@workday/canvas-kit-labs-react/common';
+import {Box} from '@workday/canvas-kit-react/layout';
 
 // Simulate a React Router link
 const Link = styled('a')<{to: string}>({});

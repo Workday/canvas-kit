@@ -3,7 +3,7 @@ import React from 'react';
 import {colors} from '@workday/canvas-kit-react/tokens';
 import {IconButton} from '@workday/canvas-kit-react/button';
 import {activityStreamIcon} from '@workday/canvas-system-icons-web';
-import {Flex} from '@workday/canvas-kit-labs-react/layout';
+import {Flex} from '@workday/canvas-kit-react/layout';
 
 export const InverseFilled = () => (
   <Flex

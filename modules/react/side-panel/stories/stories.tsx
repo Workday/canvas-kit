@@ -11,7 +11,7 @@ import {SidePanel} from '@workday/canvas-kit-react/side-panel';
 import {SidePanelProps} from '../lib/SidePanel';
 
 import {defaultCanvasTheme, StyledType} from '@workday/canvas-kit-react/common';
-import {Flex} from '@workday/canvas-kit-labs-react/layout';
+import {Flex} from '@workday/canvas-kit-react/layout';
 
 export default {
   title: 'Components/Containers/Side Panel/React',

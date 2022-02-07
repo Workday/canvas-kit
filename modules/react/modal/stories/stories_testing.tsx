@@ -8,7 +8,7 @@ import {
   useCloseOnEscape,
   usePopupModel,
 } from '@workday/canvas-kit-react/popup';
-import {HStack, VStack} from '@workday/canvas-kit-labs-react/layout';
+import {HStack, VStack} from '@workday/canvas-kit-react/layout';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 import Radio, {RadioGroup} from '@workday/canvas-kit-react/radio';
 

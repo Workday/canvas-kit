@@ -1,6 +1,7 @@
 import React from 'react';
 
-import {Box, useThemeRTL} from '@workday/canvas-kit-labs-react/common';
+import {Box} from '@workday/canvas-kit-react/layout';
+import {useThemeRTL} from '@workday/canvas-kit-labs-react/common';
 import {
   CanvasProvider,
   ContentDirection,

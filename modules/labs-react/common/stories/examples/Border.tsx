@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {colors, borderRadius, space} from '@workday/canvas-kit-react/tokens';
-import {Box} from '@workday/canvas-kit-labs-react/common';
+import {Box} from '@workday/canvas-kit-react/layout';
 
 export const Border = () => (
   <Box>

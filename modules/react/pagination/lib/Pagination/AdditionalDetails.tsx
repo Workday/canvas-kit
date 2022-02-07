@@ -3,7 +3,7 @@ import {type, typeColors, space} from '@workday/canvas-kit-react/tokens';
 import {accessibleHide, styled, StyledType} from '@workday/canvas-kit-react/common';
 
 import {PaginationModel} from './types';
-import {Flex, FlexProps} from '@workday/canvas-kit-labs-react/layout';
+import {Flex, FlexProps} from '@workday/canvas-kit-react/layout';
 import {useLiveRegion} from './common/useLiveRegion';
 
 export interface AdditionalDetailsProps extends FlexProps {

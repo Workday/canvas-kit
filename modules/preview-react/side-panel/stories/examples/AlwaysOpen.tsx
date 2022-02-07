@@ -3,7 +3,7 @@ import {colors, space, type} from '@workday/canvas-kit-react/tokens';
 import {AccentIcon} from '@workday/canvas-kit-react/icon';
 import {rocketIcon} from '@workday/canvas-accent-icons-web';
 import {SidePanel, useSidePanel} from '@workday/canvas-kit-preview-react/side-panel';
-import {Flex, HStack} from '@workday/canvas-kit-labs-react/layout';
+import {Flex, HStack} from '@workday/canvas-kit-react/layout';
 import {styled} from '@workday/canvas-kit-react/common';
 
 const StyledHeader = styled('h3')({

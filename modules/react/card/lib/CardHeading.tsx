@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled from '@emotion/styled';
 import {type} from '@workday/canvas-kit-react/tokens';
 import {StyledType, createComponent} from '@workday/canvas-kit-react/common';
-import {Box, BoxProps} from '@workday/canvas-kit-labs-react/common';
+import {Box, BoxProps} from '@workday/canvas-kit-react/layout';
 
 export interface CardHeadingProps extends BoxProps {
   /**

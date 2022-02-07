@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {HStack, HStackProps, StackSpacing} from '@workday/canvas-kit-labs-react/layout';
+import {HStack, HStackProps, StackSpacing} from '@workday/canvas-kit-react/layout';
 import {useRTL} from '../common/utils/useRTL';
 
 export type GoToFormProps = React.FormHTMLAttributes<HTMLFormElement> &

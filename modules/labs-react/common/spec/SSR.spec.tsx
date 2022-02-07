@@ -3,7 +3,7 @@
  */
 import * as React from 'react';
 import {renderToString} from 'react-dom/server';
-import {Box} from '../';
+import {Box} from '@workday/canvas-kit-react/layout';
 
 describe('Box', () => {
   it('should render on a server without crashing', () => {
