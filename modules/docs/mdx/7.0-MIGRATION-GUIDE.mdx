@@ -12,6 +12,7 @@ any questions about the update.
 - [ActionBar Component Updates](#actionbar-component-updates)
 - [Status Indicator Width](#status-indicator-width)
 - [Popup Cards](popup-cards)
+- [Component Promotions](#component-promotion)
 
 ## Codemod
 
@@ -112,3 +113,17 @@ If your code contains any hacks to make a `Modal` overflow, these hacks should n
 (you may have to limit your browser height to see the overflow). Before you had to manually set the
 `max-height` of the `Modal.Body` element using calculations. These should be removed. The
 `Popup.Card` now has a max height and the `Popup.Body` height is automatically calculated.
+
+## Component Promotions
+
+After some [assessment](https://github.com/Workday/canvas-kit/issues/1395) we've decided to promote
+the following components: `Flex`, `Stack`, `Box` and `Breadcumbs`
+
+This promotion does not introduce any API changes, we've just changed moved the components to our
+main `react` package.
+
+**Changes:**
+
+- `Box` was promoted from `@workday/canvas-kit-labs/common` to `@workday/canvas-kit-react/layout`
+- `Flex` was promoted from `@workday/canvas-kit-labs/layout` to `@workday/canvas-kit-react/layout`
+- `Stack` was promoted from `@workday/canvas-kit-labs/layout` to `@workday/canvas-kit-react/layout`
