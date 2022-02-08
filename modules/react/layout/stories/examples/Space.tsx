@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Box} from '../../lib/Box';
+import {Box} from '@workday/canvas-kit-react/layout';
 import {colors, space, spaceNumbers} from '@workday/canvas-kit-react/tokens';
 
 export const Space = () => (

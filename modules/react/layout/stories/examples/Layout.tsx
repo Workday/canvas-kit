@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Box} from '../../lib/Box';
+import {Box} from '@workday/canvas-kit-react/layout';
 
 export const Layout = () => (
   <Box

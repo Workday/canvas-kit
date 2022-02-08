@@ -1,6 +1,5 @@
 import * as React from 'react';
-import {Box} from '../../lib/Box';
-import {Flex} from '../../lib/Flex';
+import {Box, Flex} from '@workday/canvas-kit-react/layout';
 
 export const FlexItem = () => (
   <Flex padding="xs">

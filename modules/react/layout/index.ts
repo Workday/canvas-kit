@@ -2,7 +2,6 @@ import Layout from './lib/Layout';
 import Column from './lib/Column';
 
 export { Layout, Column};
-// export * from '../layout/lib/Layout';
 export * from './lib/Box';
 export * from './lib/utils/border';
 export * from './lib/utils/color';
@@ -15,5 +14,3 @@ export * from './lib/Flex';
 export * from './lib/Stack';
 export type { FlexStyleProps } from './lib/utils/flex';
 export type { StackSpacing, StackDirection, StackStyleProps } from './lib/utils/stack';
-console.warn('in here layout index')
-// export * from '../layout/lib/Layout';
