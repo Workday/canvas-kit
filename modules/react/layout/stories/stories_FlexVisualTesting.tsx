@@ -3,11 +3,11 @@ import React from 'react';
 import {ComponentStatesTable} from '@workday/canvas-kit-labs-react/common';
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
 
-import {Flex} from '@workday/canvas-kit-react/layout';
+import {Flex} from '../index';
 import {ContentDirection, StaticStates} from '@workday/canvas-kit-react/common';
 
 export default withSnapshotsEnabled({
-  title: 'Testing/React/Labs/Layout/Flex',
+  title: 'Testing/React/Containers/Layout/Flex',
   component: Flex,
 });
 

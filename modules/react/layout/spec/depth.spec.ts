@@ -1,5 +1,5 @@
 import {DepthStyleProps} from '@workday/canvas-kit-react/layout';
-import {depth} from '../../../react/layout/lib/utils/depth';
+import {depth} from '../lib/utils/depth';
 
 describe('Depth Style Props Function', () => {
   it('should ignore non-depth props', () => {

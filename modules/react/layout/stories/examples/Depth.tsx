@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Box} from '@workday/canvas-kit-react/layout';
+import {Box} from '../../lib/Box';
 
 export const Depth = () => (
   <>

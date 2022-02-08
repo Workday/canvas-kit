@@ -52,6 +52,7 @@
     "react": "^16.8 || ^17.0"
   },
   "dependencies": {
+    "csstype": "^2.6.17",
     "@emotion/core": "^10.0.28",
     "@emotion/is-prop-valid": "^0.8.2",
     "@emotion/styled": "^10.0.27",
