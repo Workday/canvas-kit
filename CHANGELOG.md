@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v6.3.10](https://github.com/Workday/canvas-kit/releases/tag/v6.3.10) (2022-02-08)
+
+### Documentation
+
+- docs(side-panel): Fix padding in header ([#1459](https://github.com/Workday/canvas-kit/pull/1459)) ([@emroller16](https://github.com/emroller16))
+
+
 ## [v6.3.9](https://github.com/Workday/canvas-kit/releases/tag/v6.3.9) (2022-02-01)
 
 ### Components
