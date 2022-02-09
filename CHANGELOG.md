@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v5.3.10](https://github.com/Workday/canvas-kit/releases/tag/v5.3.10) (2022-02-09)
+
+### Documentation
+
+- docs(switch): Fix error switch example id ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v5.3.9](https://github.com/Workday/canvas-kit/releases/tag/v5.3.9) (2022-01-19)
 
 ### Components
