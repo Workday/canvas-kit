@@ -1,5 +1,5 @@
 import React from 'react';
-import {styled, StyledType} from '@workday/canvas-kit-react/common';
+import {styled} from '@workday/canvas-kit-react/common';
 import {
   borderRadius,
   colors,
@@ -50,7 +50,7 @@ export interface DropdownMenuProps {
   toggleActiveItemDown: () => void;
 }
 
-const StyledDropdownMenu = styled(Box)<BoxProps & StyledType>({
+const StyledDropdownMenu = styled(Box)<BoxProps>({
   ...type.levels.subtext.large,
   ...depth[2],
   backgroundColor: commonColors.background,

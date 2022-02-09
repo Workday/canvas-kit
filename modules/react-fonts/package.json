@@ -49,6 +49,7 @@
     "react": "^16.8 || ^17.0"
   },
   "dependencies": {
-    "@emotion/core": "^10.0.28"
+    "@emotion/react": "^11.7.1",
+    "@emotion/styled": "^11.6.0"
   }
 }

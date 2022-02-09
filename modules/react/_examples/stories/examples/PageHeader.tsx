@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {styled, createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, styled} from '@workday/canvas-kit-react/common';
 
 import {colors, gradients, space, type} from '@workday/canvas-kit-react/tokens';
 

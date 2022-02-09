@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {keyframes} from '@emotion/core';
+import {keyframes} from '@emotion/react';
 
 import {Card} from '@workday/canvas-kit-react/card';
 import {space, type, CanvasSpaceKeys} from '@workday/canvas-kit-react/tokens';

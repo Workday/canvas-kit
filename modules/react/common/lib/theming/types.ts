@@ -3,6 +3,7 @@ import {CanvasBreakpoints, BreakpointFnParam} from './breakpoints';
 /**
  * A single palette within a Canvas theme
  */
+
 export type CanvasThemePalette = {
   lightest: string;
   light: string;
@@ -27,6 +28,7 @@ export enum ContentDirection {
 /**
  * The format of a Canvas theme for components that support it.
  */
+
 export interface CanvasTheme {
   palette: {
     common: CanvasThemeCommonPalette;
@@ -253,4 +255,9 @@ type RecursivePartial<T> = {
 export type PartialCanvasTheme = RecursivePartial<CanvasTheme>;
 export type PartialCanvasThemePalette = RecursivePartial<CanvasThemePalette>;
 export type PartialEmotionCanvasTheme = {canvas?: PartialCanvasTheme};
+declare module '@emotion/react' {
+  export interface Theme {
+    canvas: CanvasTheme;
+  }
+}
 export type EmotionCanvasTheme = {canvas: CanvasTheme};

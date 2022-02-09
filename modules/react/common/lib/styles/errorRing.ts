@@ -1,6 +1,6 @@
 import {EmotionCanvasTheme} from '../theming/index';
 import {ErrorType} from '../types';
-import {CSSObject} from '@emotion/core';
+import {CSSObject} from '@emotion/styled';
 import {colors, inputColors} from '@workday/canvas-kit-react/tokens';
 import chroma from 'chroma-js';
 

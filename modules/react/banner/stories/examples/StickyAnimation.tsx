@@ -1,6 +1,6 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import {jsx, keyframes} from '@emotion/core';
+import {jsx, keyframes} from '@emotion/react';
 import React from 'react';
 
 import {CSSProperties} from '@workday/canvas-kit-react/tokens';

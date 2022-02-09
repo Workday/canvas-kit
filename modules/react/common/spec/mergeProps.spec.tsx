@@ -1,6 +1,6 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import {jsx} from '@emotion/core';
+import {jsx} from '@emotion/react';
 import {render, screen} from '@testing-library/react';
 
 import {mergeProps} from '../lib/utils';
