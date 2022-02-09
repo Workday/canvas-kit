@@ -6,6 +6,7 @@ export enum SearchTheme {
   Dark,
   Transparent,
 }
+
 export interface SearchThemeAttributes {
   background?: string;
   backgroundFocus?: string;
@@ -40,7 +41,7 @@ export const searchThemes: SearchThemes = {
     color: colors.blackPepper300,
     placeholderColor: colors.licorice300,
     boxShadow: 'none',
-    boxShadowFocus: focusRing().boxShadow,
+    boxShadowFocus: focusRing().boxShadow as SearchThemeAttributes['boxShadowFocus'],
   },
   [SearchTheme.Dark]: {
     background: 'rgba(0, 0, 0, 0.2)',

@@ -52,9 +52,9 @@
     "react": "^16.8 || ^17.0"
   },
   "dependencies": {
-    "@emotion/core": "^10.0.28",
-    "@emotion/is-prop-valid": "^0.8.2",
-    "@emotion/styled": "^10.0.27",
+    "@emotion/react": "^11.7.1",
+    "@emotion/is-prop-valid": "^1.1.1",
+    "@emotion/styled": "^11.6.0",
     "@workday/canvas-kit-preview-react": "^6.3.4",
     "@workday/canvas-kit-react": "^6.3.4",
     "@workday/canvas-system-icons-web": "1.0.41",
