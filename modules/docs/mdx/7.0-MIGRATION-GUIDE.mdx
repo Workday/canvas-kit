@@ -9,6 +9,7 @@ Below are the breaking changes made in Canvas Kit v7. Please
 any questions about the update.
 
 - [Codemod](#codemod)
+- [Component Deprecations](#component-deprecations)
 - [ActionBar Component Updates](#actionbar-component-updates)
 - [Status Indicator Width](#status-indicator-width)
 - [Popup Cards](popup-cards)
@@ -38,6 +39,45 @@ rollback more easily if necessary.**
 [Let us know](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) if you
 encounter any issues or use cases that we've missed. The `@workday/canvas-kit-codemod` package will
 help us maintain additional codemod transforms to make future migrations easier.
+
+## Component Deprecations
+
+### Deprecation Types
+
+There are two types of deprecations: soft and hard.
+
+#### Soft Deprecation
+
+A soft-deprecated component is still available with its full functionality, but it will have been
+renamed with a prefix to indicate its soft-deprecated status. It will also include a console warning
+to announce its deprecation. This warning will only be triggered on the component's initial render.
+
+Soft-deprecated types and utilities will also be renamed but generally will not trigger a console
+warning.
+
+#### Hard Deprecation
+
+A hard-deprecated component or package is no longer available. You will need to follow the method
+prescribed in our migration guide to update your application. Please reach out to our team directly
+if you need additional help.
+
+### Cookie Banner
+
+We are [hard deprecating](#hard-deprecation) `CookieBanner`. If you would like to migrate away from
+this deprecated component now, you can reference
+[this example](https://workday.github.io/canvas-kit/?path=/story/examples-cookiebanner-react--basic)
+
+### Page Header
+
+We are [hard deprecating](#hard-deprecation) `Page Header`. If you would like to migrate away from
+this deprecated component now, you can reference
+[this example](https://workday.github.io/canvas-kit/?path=/story/examples-pageheader-react--basic)
+
+### Header / GlobalHeader
+
+We are [hard deprecating](#hard-deprecation) `Header`. If you would like to migrate away from this
+deprecated component now, you can reference
+[this example](https://workday.github.io/canvas-kit/?path=/story/examples-globalheader-react--basic)
 
 ## ActionBar Component Updates
 
