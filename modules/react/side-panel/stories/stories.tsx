@@ -1,16 +1,31 @@
 import * as React from 'react';
-import {homeIcon, starIcon, rocketIcon, plusIcon} from '@workday/canvas-system-icons-web';
+import {
+  homeIcon,
+  starIcon,
+  rocketIcon,
+  plusIcon,
+  justifyIcon,
+  assistantIcon,
+  notificationsIcon,
+  inboxIcon,
+} from '@workday/canvas-system-icons-web';
 import styled from '@emotion/styled';
 
-import {colors, type} from '@workday/canvas-kit-react/tokens';
+import {colors, type, space, depth} from '@workday/canvas-kit-react/tokens';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
-import {IconButton, PrimaryButton} from '@workday/canvas-kit-react/button';
+import {IconButton, PrimaryButton, Hyperlink} from '@workday/canvas-kit-react/button';
 import {SidePanel} from '@workday/canvas-kit-react/side-panel';
 import {SidePanelProps} from '../lib/SidePanel';
-import {Basic} from '../../_examples/stories/examples/GlobalHeader';
 
-import {defaultCanvasTheme, StyledType} from '@workday/canvas-kit-react/common';
-import {Flex} from '@workday/canvas-kit-labs-react/layout';
+import {
+  defaultCanvasTheme,
+  StyledType,
+  createComponent,
+  dubLogoBlue,
+} from '@workday/canvas-kit-react/common';
+import {Flex, StackSpacing, HStackProps, HStack} from '@workday/canvas-kit-labs-react/layout';
+import {SearchForm} from '@workday/canvas-kit-labs-react/search-form';
+import {Avatar} from '@workday/canvas-kit-react/avatar';
 
 export default {
   title: 'Components/Containers/Side Panel/React',
@@ -49,6 +64,10 @@ interface SidePanelState {
   open: boolean;
 }
 
+interface HeaderItemProps extends Omit<HStackProps, 'spacing'> {
+  spacing?: StackSpacing;
+}
+
 const ListItem = styled('li')({
   display: 'flex',
   listStyle: 'none',
@@ -81,6 +100,34 @@ const StyledListItem = styled(Flex)<StyledType>({
     backgroundColor: colors.soap300,
   },
 });
+
+const GlobalHeaderItem = createComponent('div')({
+  displayName: 'GlobalHeader.Item',
+  Component: ({spacing = 's', ...props}: HeaderItemProps, ref) => (
+    <HStack spacing={spacing} alignItems="center" marginX={space.xs} ref={ref} {...props} />
+  ),
+});
+
+const GlobalHeader = createComponent('header')({
+  displayName: 'GlobalHeader',
+  Component: (props, ref, Element) => <HeaderWrapper ref={ref} as={Element} {...props} />,
+  subComponents: {Item: GlobalHeaderItem},
+});
+
+const HeaderWrapper = styled('header')({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  boxSizing: 'border-box',
+  ...type.levels.subtext.large,
+  WebkitFontSmoothing: 'antialiased',
+  MozOsxFontSmoothing: 'grayscale',
+  backgroundColor: colors.frenchVanilla100,
+  ...depth[1],
+  padding: space.xxs,
+});
+
+const WorkdayLogo = styled('span')({lineHeight: 0});
 
 class SidePanelWrapper extends React.Component<SidePanelProps, SidePanelState> {
   public state = {
@@ -172,7 +219,23 @@ export const Default = () => (
 
 const Template = props => (
   <div style={{height: '67vh', position: 'relative'}}>
-    <Basic />
+    <GlobalHeader>
+      <GlobalHeader.Item>
+        <IconButton aria-label="menu" icon={justifyIcon} />
+        <Hyperlink>
+          <WorkdayLogo dangerouslySetInnerHTML={{__html: dubLogoBlue}} />
+        </Hyperlink>
+      </GlobalHeader.Item>
+      <GlobalHeader.Item margin="auto" width="100%" maxWidth={`calc(${space.xxxl} * 6)`}>
+        <SearchForm onSubmit={() => 1} />
+      </GlobalHeader.Item>
+      <GlobalHeader.Item>
+        <IconButton aria-label="messages" icon={assistantIcon} />
+        <IconButton aria-label="notifications" icon={notificationsIcon} />
+        <IconButton aria-label="inbox" icon={inboxIcon} />
+        <Avatar size={Avatar.Size.m} variant={Avatar.Variant.Light} />
+      </GlobalHeader.Item>
+    </GlobalHeader>
     <SidePanelWrapper {...props} />
   </div>
 );
