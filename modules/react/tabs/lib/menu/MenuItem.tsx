@@ -58,7 +58,7 @@ export interface MenuItemProps<T = unknown> {
   hasIcon?: boolean;
 }
 
-const StyledItem = styled(Box.as('li'))<StyledType & {hasIcon?: boolean}>(
+const StyledItem = styled(Box.as('button'))<StyledType & {hasIcon?: boolean}>(
   ({theme}) => {
     return {
       ...type.levels.subtext.large,
@@ -161,7 +161,7 @@ export const MenuItem = createComponent('button')({
       props.ref = elementRef;
       // eslint-disable-next-line react-hooks/rules-of-hooks
       useMount(() => {
-        if (localRef.current.querySelector('svg') && !props.hasIcon) {
+        if (localRef.current!.querySelector('svg') && !props.hasIcon) {
           console.warn(
             `A Menu.Item with an icon should have the 'hasIcon' prop set to true. This ensures correct rendering`
           );

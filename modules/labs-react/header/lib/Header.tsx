@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {css} from '@emotion/core';
+import {css} from '@emotion/react';
 import styled from '@emotion/styled';
 import {borderRadius, space, type} from '@workday/canvas-kit-react/tokens';
 import {DeprecatedDubLogoTitle, DeprecatedWorkdayLogoTitle} from './parts';
@@ -104,7 +104,7 @@ const BrandLink = styled(Hyperlink)({
   },
 });
 
-const navStyle = ({themeColor}: PickRequired<HeaderProps, 'themeColor', 'css'>) => {
+const navStyle = ({themeColor}: Required<Pick<HeaderProps, 'themeColor'>>) => {
   const theme = deprecatedHeaderThemes[themeColor];
 
   return css({

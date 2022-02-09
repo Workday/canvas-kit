@@ -52,9 +52,9 @@
     "react": "^16.8 || ^17.0"
   },
   "dependencies": {
-    "@emotion/core": "^10.0.28",
-    "@emotion/is-prop-valid": "^0.8.2",
-    "@emotion/styled": "^10.0.27",
+    "@emotion/react": "^11.7.1",
+    "@emotion/is-prop-valid": "^1.1.1",
+    "@emotion/styled": "^11.6.0",
     "@popperjs/core": "^2.5.4",
     "@workday/canvas-colors-web": "^2.0.0",
     "@workday/canvas-kit-labs-react": "^6.3.4",
@@ -64,7 +64,6 @@
     "@workday/design-assets-types": "^0.2.4",
     "chroma-js": "^2.1.0",
     "element-closest": "^3.0.2",
-    "emotion-theming": "^10.0.10",
     "lodash": "^4.17.14",
     "polished": "^4.1.3",
     "react-innertext": "^1.1.5",

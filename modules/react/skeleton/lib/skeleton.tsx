@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {keyframes} from '@emotion/core';
+import {keyframes} from '@emotion/react';
 import styled from '@emotion/styled';
 
 import {accessibleHide, createComponent, StyledType} from '@workday/canvas-kit-react/common';

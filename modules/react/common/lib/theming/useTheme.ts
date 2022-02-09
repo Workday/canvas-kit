@@ -1,6 +1,5 @@
-import * as React from 'react';
 import get from 'lodash/get';
-import {ThemeContext} from '@emotion/core';
+import {useTheme as useEmotionTheme} from '@emotion/react';
 import {
   defaultCanvasTheme,
   createCanvasTheme,
@@ -38,7 +37,7 @@ export function useTheme(theme?: PartialEmotionCanvasTheme): EmotionCanvasTheme 
 
   try {
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    const contextTheme = React.useContext(ThemeContext) as EmotionCanvasTheme;
+    const contextTheme = useEmotionTheme() as EmotionCanvasTheme;
     if (contextTheme && contextTheme.canvas) {
       return getFilledTheme(contextTheme);
     }

@@ -1,5 +1,5 @@
 import React, {useEffect, useLayoutEffect, useRef, useState, useCallback} from 'react';
-import {CSSObject, jsx, keyframes} from '@emotion/core';
+import {jsx, keyframes, CSSObject} from '@emotion/react';
 import {
   GrowthBehavior,
   useForkRef,
@@ -426,8 +426,10 @@ const Combobox = ({
         [paddingDirection]: space.xl,
       };
     }
-    const newTextInputProps: Partial<TextInputProps &
-      React.InputHTMLAttributes<HTMLInputElement> & {ref: React.Ref<HTMLInputElement>}> = {
+    const newTextInputProps: Partial<
+      TextInputProps &
+        React.InputHTMLAttributes<HTMLInputElement> & {ref: React.Ref<HTMLInputElement>}
+    > & {css: CSSObject} = {
       type: 'text',
       id: componentId,
       grow: grow,
