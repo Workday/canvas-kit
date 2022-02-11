@@ -15,7 +15,7 @@ const Container = styled('div')(accessibleHide);
 
 const Status = ({
   ariaLive = 'polite',
-  role = 'log',
+  role = 'status',
   ariaAtomic = false,
   ariaRelevant = 'additions',
   expireMilliseconds = 500,
