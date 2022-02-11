@@ -11,6 +11,7 @@ import {FocusRedirect} from './examples/FocusRedirect';
 import {FocusTrap} from './examples/FocusTrap';
 import {RTL} from './examples/RTL';
 import {CustomTarget} from './examples/CustomTarget';
+import {FullScreen} from './examples/FullScreen';
 import {
   PopupModelConfigComponent,
   PopupStateComponent,
@@ -145,6 +146,25 @@ requires a `label` prop.
 > Without this, the Popup will open at the top-left of the window instead of around the target.
 
 <ExampleCodeBlock code={CustomTarget} />
+
+### Full Screen API
+
+By default, popups are created as children of the `document.body` element, but the `PopupStack`
+supports the [Fullscreen API](https://developer.mozilla.org/en-US/docs/Web/API/Fullscreen_API). When
+fullscreen is entered, the `PopupStack` will automatically create a new stacking context for all
+future popups. Any existing popups will disappear, but not be removed. They disappear because the
+fullscreen API is only showing content within the fullscreen element. There are instances where a
+popup may not close when fullscreen is exited:
+
+- The escape key is used to exit fullscreen
+- There is a button to exit fullscreen, but the popup doesn't use `useCloseOnOutsideClick`
+
+If fullscreen is exited, popups within the fullscreen stacking context are not removed or
+transferred automatically. If you do not handle this case, the popup may not render correctly. This
+example shows a popup that closes when fullscreen is entered/exited and another popup that transfers
+the popup's stack context when entering/exiting fullscreen.
+
+<ExampleCodeBlock code={FullScreen} />
 
 ### RTL
 
@@ -399,6 +419,15 @@ stack. This is useful for Tooltips or hierarchical menus. Adds a
 This should be used with popup elements that should close no matter their position in the stack
 (i.e. Tooltips).
 
+### useCloseOnFullscreenExit
+
+```ts
+useCloseOnFullscreenExit(model: PopupModel): {}
+```
+
+Closes the popup when fullscreen is exited. Entering/exiting fullscreen changes the context of the
+entire screen. This should be added to popup types that are very context sensitive like Tooltips.
+
 ### useDisableBodyScroll
 
 ```ts
@@ -445,6 +474,10 @@ This should be used on popup elements that need to hide content (i.e. Modals).
 
 ### useInitialFocus
 
+```ts
+useInitialFocus(model: PopupModel): {}
+```
+
 Moves focus within the popup when the popup becomes visible. This is useful for keyboard and screen
 reader users alike. This should be used with [useFocusRedirect](#usefocusredirect) or
 [useFocusTrap](#usefocustrap) for a complete focus management solution.
@@ -454,11 +487,40 @@ menus, etc.
 
 ### useReturnFocus
 
+```ts
+useReturnFocus(model: PopupModel): {}
+```
+
 Returns focus to the target element when the popup is hidden. This works well with
 [useInitialFocus](#useinitialfocus). This should be used with [useFocusRedirect](#usefocusredirect)
 or [useFocusTrap](#usefocustrap) for a complete focus management solution.
 
 This should ble used on popup elements that use [useInitialFocus](#useinitialfocus).
+
+### useTransferOnFullscreenEnter
+
+```ts
+useTransferOnFullscreenEnter(model: PopupModel): {}
+```
+
+Makes the popup transfer to the fullscreen element when fullscreen is entered. Without this, the
+popup would seem to disappear because the popup container element is not a child of the fullscreen
+element.
+
+Don't use this in conjunction with a hook that will close the popup when entering fullscreen. Doing
+so would open the popup when the intention was to close it.
+
+### useTransferOnFullscreenExit
+
+```ts
+useTransferOnFullscreenExit(model: PopupModel): {}
+```
+
+Makes the popup transfer to fullscreen when fullscreen is exited. Without this hook, the popup would
+not operate correctly with other popups on the screen.
+
+Don't use this in conjunction with a hook that will close the popup when exiting fullscreen. Doing
+so would open the popup when the intention was to close it.
 
 ### usePopupPopper
 

@@ -12,7 +12,7 @@ export const Error = () => {
   return (
     <FormField
       error={FormField.ErrorType.Error}
-      hintId="hint-alert"
+      hintId="hint-error"
       hintText="We were unable to activate Dark Mode."
       label="Dark Mode"
     >

@@ -4,6 +4,7 @@ import {
   useCloseOnEscape,
   useAlwaysCloseOnOutsideClick,
   usePopupModel,
+  useCloseOnFullscreenExit,
 } from '@workday/canvas-kit-react/popup';
 
 const useIntentTimer = (fn: Function, waitMs: number = 0): {start(): void; clear(): void} => {
@@ -126,6 +127,7 @@ export function useTooltip<T extends Element = Element>({
 
   useCloseOnEscape(popupModel);
   useAlwaysCloseOnOutsideClick(popupModel);
+  useCloseOnFullscreenExit(popupModel);
 
   const visible = popupModel.state.visibility !== 'hidden';
 

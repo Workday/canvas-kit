@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-react",
-  "version": "5.3.5",
+  "version": "5.3.10",
   "description": "The parent module that contains all Workday Canvas Kit React components",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -58,9 +58,9 @@
     "@popperjs/core": "^2.5.4",
     "@workday/canvas-colors-web": "^2.0.0",
     "@workday/canvas-depth-web": "^0.16.4",
-    "@workday/canvas-kit-labs-react": "^5.3.5",
-    "@workday/canvas-kit-popup-stack": "^5.3.5",
-    "@workday/canvas-kit-preview-react": "^5.3.5",
+    "@workday/canvas-kit-labs-react": "^5.3.10",
+    "@workday/canvas-kit-popup-stack": "^5.3.10",
+    "@workday/canvas-kit-preview-react": "^5.3.10",
     "@workday/canvas-system-icons-web": "1.0.41",
     "@workday/design-assets-types": "^0.2.4",
     "chroma-js": "^2.1.0",
@@ -70,6 +70,7 @@
     "polished": "^4.1.3",
     "react-innertext": "^1.1.5",
     "rtl-css-js": "^1.14.1",
+    "screenfull": "^5.2.0",
     "uuid": "^3.3.3"
   },
   "devDependencies": {
