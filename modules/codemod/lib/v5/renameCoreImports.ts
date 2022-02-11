@@ -20,7 +20,7 @@ export default function transformer(file: FileInfo, api: API) {
   // transform import {} from "@workday/canvas-kit-react/core"
   // to import {} from "@workday/canvas-kit-react/tokens"
   root
-    .find(j.ImportDeclaration, {source: {value: '@workday/canvas-kit-labs-react/core'}})
+    .find(j.ImportDeclaration, {source: {value: '@workday/canvas-kit-react/core'}})
     .forEach(nodePath => {
       const source = nodePath.value.source.value as keyof typeof sourceMap;
       nodePath.value.source.value = sourceMap[source];
