@@ -237,78 +237,61 @@ const scrollIntoViewIfNeeded = (elem: HTMLElement, centerIfNeeded = true): void 
   }
 };
 
-class MenuItem extends React.Component<MenuItemProps> {
-  ref = React.createRef<HTMLLIElement>();
+const MenuItem: React.FC<MenuItemProps> = ({
+  onClick,
+  children,
+  id,
+  icon,
+  secondaryIcon,
+  hasDivider,
+  isDisabled,
+  isFocused,
+  shouldClose = true,
+  role = 'menuitem',
+  ...elemProps
+}) => {
+  const ref = React.useRef<HTMLLIElement>(null);
 
-  componentDidUpdate = (prevProps: MenuItemProps) => {
-    if (!prevProps.isFocused && this.props.isFocused) {
-      if (this.ref.current) {
-        scrollIntoViewIfNeeded(this.ref.current);
-      }
+  React.useEffect(() => {
+    if (ref.current) {
+      scrollIntoViewIfNeeded(ref.current);
     }
-  };
+  }, [isFocused]);
 
-  render(): React.ReactNode {
-    const {
-      onClick,
-      children,
-      id,
-      icon,
-      secondaryIcon,
-      hasDivider,
-      isDisabled,
-      isFocused,
-      role,
-      ...elemProps
-    } = this.props;
+  iconProps = setIconProps(icon, isDisabled, isFocused);
+  secondaryIconProps = setIconProps(secondaryIcon, isDisabled, isFocused);
 
-    iconProps = setIconProps(icon, isDisabled, isFocused);
-    secondaryIconProps = setIconProps(secondaryIcon, isDisabled, isFocused);
-
-    return (
-      <>
-        {hasDivider && <Divider />}
-        <Item
-          ref={this.ref}
-          tabIndex={-1}
-          id={id}
-          role={role}
-          onClick={this.handleClick}
-          aria-disabled={isDisabled ? true : undefined}
-          isDisabled={!!isDisabled}
-          isFocused={!!isFocused}
-          {...elemProps}
-        >
-          {icon && iconProps && <StyledSystemIcon {...iconProps} />}
-          <LabelContainer>{children}</LabelContainer>
-          {secondaryIcon && secondaryIconProps && (
-            <SecondaryStyledSystemIcon {...secondaryIconProps} />
-          )}
-        </Item>
-      </>
-    );
-  }
-
-  private handleClick = (event: React.MouseEvent): void => {
-    if (this.props.isDisabled) {
+  const handleClick = (event: React.MouseEvent): void => {
+    if (isDisabled) {
       return;
     }
-    if (this.props.onClick) {
-      this.props.onClick(event);
+    if (onClick) {
+      onClick(event);
     }
   };
-}
 
-/**
- * If we destructure props, shouldClose will be undefined because the value is only applied for the render method only.
- * We have to use defaultProps so that the value of shouldClose is applied for every method and therefore references in the Menu component.
- * For reference: https://github.com/Workday/canvas-kit/blob/f6d4d29e9bb2eb2af0b204e6f4ce2e5ed5a98e57/modules/_labs/menu/react/lib/Menu.tsx#L259,
- */
-// TODO: Remove this ts-ignore when we convert to a functional component
-// @ts-ignore
-MenuItem.defaultProps = {
-  shouldClose: true,
-  role: 'menuitem',
+  return (
+    <>
+      {hasDivider && <Divider />}
+      <Item
+        ref={ref}
+        tabIndex={-1}
+        id={id}
+        role={role}
+        onClick={handleClick}
+        aria-disabled={isDisabled ? true : undefined}
+        isDisabled={!!isDisabled}
+        isFocused={!!isFocused}
+        {...elemProps}
+      >
+        {icon && iconProps && <StyledSystemIcon {...iconProps} />}
+        <LabelContainer>{children}</LabelContainer>
+        {secondaryIcon && secondaryIconProps && (
+          <SecondaryStyledSystemIcon {...secondaryIconProps} />
+        )}
+      </Item>
+    </>
+  );
 };
 
 export default MenuItem;

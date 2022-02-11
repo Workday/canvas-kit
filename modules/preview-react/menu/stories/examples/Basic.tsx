@@ -8,10 +8,12 @@ import {
   useReturnFocus,
   useCloseOnEscape,
 } from '@workday/canvas-kit-react/popup';
+import {useUniqueId} from '@workday/canvas-kit-react';
 
 const menuId = 'basic-menu';
 
 export const Basic = () => {
+  const id = useUniqueId();
   const model = usePopupModel();
 
   useAlwaysCloseOnOutsideClick(model);
@@ -48,6 +50,7 @@ export const Basic = () => {
         aria-expanded={isOpen}
         aria-haspopup={true}
         aria-controls={isOpen ? menuId : undefined}
+        id={id}
       >
         Open Menu
       </Popup.Target>
@@ -57,7 +60,7 @@ export const Basic = () => {
           onClose must be set in order to the Menu to close properly after
           selecting a MenuItem
         */}
-        <Menu id={menuId} isOpen={isOpen} onClose={model.events.hide}>
+        <Menu id={menuId} isOpen={isOpen} onClose={model.events.hide} aria-labelledby={id}>
           <MenuItem>First Item</MenuItem>
           <MenuItem>Second Item (with a really really really long label)</MenuItem>
           <MenuItem isDisabled>Third Item (disabled)</MenuItem>
