@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v6.3.11](https://github.com/Workday/canvas-kit/releases/tag/v6.3.11) (2022-02-11)
+
+### Documentation
+
+- docs: Correct typo in README file ([#1464](https://github.com/Workday/canvas-kit/pull/1464)) ([@mani11](https://github.com/mani11))
+
+
 ## [v6.3.10](https://github.com/Workday/canvas-kit/releases/tag/v6.3.10) (2022-02-08)
 
 ### Documentation
