@@ -119,7 +119,8 @@ describe('createHook', () => {
   });
 
   it('should return props that are merged together correctly when no ref is given', () => {
-    const props = createHook((model: any) => ({foo: 'bar'}))(emptyModel, {bar: 'baz'});
+    const hook = createHook((model: any) => ({foo: 'bar'}));
+    const props = hook(emptyModel, {bar: 'baz'});
 
     expectTypeOf(props).toEqualTypeOf<{foo: string} & {bar: string}>();
     expect(props).toEqual({foo: 'bar', bar: 'baz'});
@@ -127,11 +128,9 @@ describe('createHook', () => {
 
   it('should return props that are merged together correctly when a ref is given', () => {
     const divElement = document.createElement('div');
-    const props = createHook((model: any) => ({foo: 'bar'}))(
-      emptyModel,
-      {bar: 'baz'},
-      {current: divElement}
-    );
+    const hook = createHook((model: any) => ({foo: 'bar'}));
+
+    const props = hook(emptyModel, {bar: 'baz'}, {current: divElement});
 
     expectTypeOf(props).toEqualTypeOf<
       {foo: string} & {bar: string} & {ref: React.Ref<HTMLDivElement>}
@@ -139,8 +138,44 @@ describe('createHook', () => {
     expect(props).toEqual({foo: 'bar', bar: 'baz', ref: {current: divElement}});
   });
 
+  it('should return the ref if the hook provides a ref and the component does not', () => {
+    const ref = {current: 'foo'};
+    const hook = createHook((model: any) => ({ref}));
+
+    const props = hook(emptyModel, {}, undefined);
+
+    expect(props).toHaveProperty('ref', ref);
+  });
+
+  it('should return the ref if the hook does not provide a ref and the component does', () => {
+    const ref = {current: 'foo'};
+    const hook = createHook((model: any) => ({}));
+
+    const props = hook(emptyModel, {}, ref);
+
+    expect(props).toHaveProperty('ref', ref);
+  });
+
+  it('should return the ref elemProps contains a ref and the hook and component do not', () => {
+    const ref = {current: 'foo'};
+    const hook = createHook((model: any) => ({}));
+
+    const props = hook(emptyModel, {ref}, null);
+
+    expect(props).toHaveProperty('ref', ref);
+  });
+
+  it('should not return the a ref prop if not ref was defined', () => {
+    const hook = createHook((model: any) => ({}));
+
+    const props = hook(emptyModel, {}, null);
+
+    expect(props).not.toHaveProperty('ref');
+  });
+
   it('should merge provided props over hook props', () => {
-    const props = createHook((model: any) => ({foo: 'bar'}))(emptyModel, {foo: 'baz'});
+    const hook = createHook((model: any) => ({foo: 'bar'}));
+    const props = hook(emptyModel, {foo: 'baz'});
 
     expect(props).toEqual({foo: 'baz'});
   });
@@ -239,29 +274,24 @@ describe('composeHooks', () => {
   let spy1, spy2;
   const myModel = {state: {first: 'first', second: 'second'}, events: {}};
 
-  const hook1 = function<P extends {}>(model: typeof myModel, props: P) {
-    return mergeProps(
-      {
-        id: 'hook1',
-        hook1: 'hook1',
-        first: model.state.first,
-        onClick: spy1,
-      },
-      props
-    );
-  };
+  const hook1 = createHook((model: typeof myModel) => {
+    return {
+      id: 'hook1',
+      hook1: 'hook1',
+      first: model.state.first,
+      onClick: spy1,
+    };
+  });
 
-  const hook2 = function<P extends {}>(model: typeof myModel, props: P) {
-    return mergeProps(
-      {
-        id: 'hook2',
-        hook2: 'hook2',
-        second: model.state.second,
-        onClick: spy2,
-      },
-      props
-    );
-  };
+  const hook2 = createHook((model: typeof myModel) => {
+    return {
+      id: 'hook2',
+      hook2: 'hook2',
+      second: model.state.second,
+      onClick: spy2,
+    };
+  });
+
   beforeEach(() => {
     spy1 = jest.fn();
     spy2 = jest.fn();
@@ -322,5 +352,44 @@ describe('composeHooks', () => {
     expect(props).toHaveProperty('id', 9);
     expect(props).toHaveProperty('hook1', 'bar');
     expect(props).toHaveProperty('foo', 'baz');
+  });
+
+  it('should compose hooks where first hook has a ref', () => {
+    const ref = {current: 'foo'};
+    const hook1 = createHook(() => {
+      return {ref};
+    });
+    const hook2 = createHook(() => {
+      return {};
+    });
+
+    const props = composeHooks(hook1, hook2)(myModel, {});
+    expect(props).toHaveProperty('ref', ref);
+  });
+
+  it('should compose hooks where second hook has a ref', () => {
+    const ref = {current: 'foo'};
+    const hook1 = createHook(() => {
+      return {};
+    });
+    const hook2 = createHook(() => {
+      return {ref};
+    });
+
+    const props = composeHooks(hook1, hook2)(myModel, {});
+    expect(props).toHaveProperty('ref', ref);
+  });
+
+  it('should compose hooks where second hook has a ref', () => {
+    const ref = {current: 'foo'};
+    const hook1 = createHook(() => {
+      return {};
+    });
+    const hook2 = createHook(() => {
+      return {};
+    });
+
+    const props = composeHooks(hook1, hook2)(myModel, {}, ref);
+    expect(props).toHaveProperty('ref', ref);
   });
 });

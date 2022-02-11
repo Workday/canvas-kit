@@ -1,9 +1,10 @@
-import {DocsPage, DocsContainer} from '@storybook/addon-docs/blocks';
+import {DocsPage, DocsContainer} from '@storybook/addon-docs';
 import 'cypress-storybook/react';
 import routes from './routes';
 
 import {CanvasProviderDecorator} from '../utils/storybook';
 import theme from './theme';
+import {defaultCanvasTheme} from '@workday/canvas-kit-react/common';
 
 // set routes on window for testing the validity of the routes
 window.__routes = routes;
@@ -25,7 +26,8 @@ function storySort(a, b) {
     prefix('labs-', '4'),
     prefix('basic', 'aa'),
     prefix('default', 'ab'),
-    prefix('visual-testing', 'zz')
+    prefix('visual-testing', 'zz'),
+    prefix('examples', 'zzz')
   );
 
   const left = prefixFn(a[0]);
@@ -50,5 +52,14 @@ export const parameters = {
   },
   chromatic: {
     disable: true,
+  },
+  controls: {
+    expanded: true,
+  },
+  argTypes: {
+    theme: {
+      control: 'object',
+      defaultValue: defaultCanvasTheme,
+    },
   },
 };

@@ -1,15 +1,10 @@
-/// <reference path="../../../../typings.d.ts" />
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
-import withReadme from 'storybook-readme/with-readme';
-
 import {activityStreamIcon, paragraphIcon} from '@workday/canvas-system-icons-web';
 
 import {ToolbarIconButton, ToolbarDropdownButton} from '@workday/canvas-kit-react/button';
-
-import README from '../README.md';
 
 const customElementStyles = {
   margin: '0 16px 0 8px',
@@ -18,7 +13,7 @@ const customElementStyles = {
 
 storiesOf('Components/Buttons/Button/React/Toolbar', module)
   .addParameters({component: ToolbarIconButton})
-  .addDecorator(withReadme(README))
+  .addParameters({ReadmePath: 'react/button'})
   .add('Toolbar Icon Button', () => {
     const [toggled, setToggled] = React.useState<boolean | undefined>();
     const handleToggle = () => {

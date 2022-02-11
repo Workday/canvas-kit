@@ -1,7 +1,5 @@
-/// <reference path="../../../../typings.d.ts" />
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
-import withReadme from 'storybook-readme/with-readme';
 import {shieldIcon} from '@workday/canvas-accent-icons-web';
 import {benefitsIcon} from '@workday/canvas-applet-icons-web';
 import {activityStreamIcon} from '@workday/canvas-system-icons-web';
@@ -9,7 +7,6 @@ import {CanvasGraphic, CanvasIconTypes} from '@workday/design-assets-types';
 
 import {colors} from '../../tokens';
 import {AccentIcon, AppletIcon, SystemIcon, SystemIconCircle, Graphic} from '../index';
-import README from '../README.md';
 
 const graphicExample: CanvasGraphic = {
   name: 'badgeAchievement',
@@ -23,7 +20,7 @@ const graphicExample: CanvasGraphic = {
 
 storiesOf('Tokens/Icon/React', module)
   .addParameters({component: AccentIcon})
-  .addDecorator(withReadme(README))
+  .addParameters({ReadmePath: 'react/icon'})
   .add('Accent Icon', () => (
     <div className="story">
       <AccentIcon icon={shieldIcon} />

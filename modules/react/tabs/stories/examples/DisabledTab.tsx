@@ -8,7 +8,7 @@ export const DisabledTab = () => {
     <Tabs>
       <Tabs.List>
         <Tabs.Item>First Tab</Tabs.Item>
-        <Tabs.Item disabled>Disabled Tab</Tabs.Item>
+        <Tabs.Item aria-disabled>Disabled Tab</Tabs.Item>
         <Tabs.Item>Third Tab</Tabs.Item>
       </Tabs.List>
       <div style={{marginTop: space.m}}>
