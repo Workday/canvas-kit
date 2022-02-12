@@ -3,11 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v5.3.11](https://github.com/Workday/canvas-kit/releases/tag/v5.3.11) (2022-02-11)
+
+### Components
+
+- fix(popup): Restore overflow y and x with `useDisableBodyScroll` ([#1470](https://github.com/Workday/canvas-kit/pull/1470)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
 ## [v6.3.11](https://github.com/Workday/canvas-kit/releases/tag/v6.3.11) (2022-02-11)
 
 ### Documentation
 
 - docs: Correct typo in README file ([#1464](https://github.com/Workday/canvas-kit/pull/1464)) ([@mani11](https://github.com/mani11))
+
+
+## [v5.3.10](https://github.com/Workday/canvas-kit/releases/tag/v5.3.10) (2022-02-09)
+
+### Documentation
+
+- docs(switch): Fix error switch example id ([@NicholasBoll](https://github.com/NicholasBoll))
 
 
 ## [v6.3.10](https://github.com/Workday/canvas-kit/releases/tag/v6.3.10) (2022-02-08)
@@ -53,6 +66,13 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Components
 
 - fix(popup): Fix body scrolling using useInitialFocus ([#1415](https://github.com/Workday/canvas-kit/pull/1415)) ([@NicholasBoll](https://github.com/NicholasBoll))
+- fix: Allow repositioning of PopperJS instances ([#1424](https://github.com/Workday/canvas-kit/pull/1424)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v5.3.9](https://github.com/Workday/canvas-kit/releases/tag/v5.3.9) (2022-01-19)
+
+### Components
+
 - fix: Allow repositioning of PopperJS instances ([#1424](https://github.com/Workday/canvas-kit/pull/1424)) ([@NicholasBoll](https://github.com/NicholasBoll))
 
 ## [v6.3.3](https://github.com/Workday/canvas-kit/releases/tag/v6.3.3) (2022-01-14)
