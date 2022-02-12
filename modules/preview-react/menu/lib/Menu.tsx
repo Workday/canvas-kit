@@ -288,6 +288,7 @@ export const Menu = createComponent('ul')({
       <Card
         as={List}
         padding={`${space.xxs} 0`}
+        margin={space.zero}
         width={cardWidth}
         display="inline-block"
         background={commonColors.background}
