@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v6.4.0](https://github.com/Workday/canvas-kit/releases/tag/v6.4.0) (2022-02-12)
+
+### Components
+
+- fix(popup): Restore overflow y and x with `useDisableBodyScroll` ([#1470](https://github.com/Workday/canvas-kit/pull/1470)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+### Documentation
+
+- docs(switch): Fix error switch example id ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v5.3.11](https://github.com/Workday/canvas-kit/releases/tag/v5.3.11) (2022-02-11)
 
 ### Components
