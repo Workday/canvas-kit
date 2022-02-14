@@ -1,6 +1,6 @@
 # Canvas Kit React Layout
 
-a collection of layout components
+A collection of layout components.
 
 ## Installation
 
