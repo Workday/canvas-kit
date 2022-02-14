@@ -1,4 +1,5 @@
 export {PrimaryButton, PrimaryButtonProps} from './lib/PrimaryButton';
+export {PrimaryButtonKing, PrimaryButtonKingProps} from './lib/PrimaryButtonKing';
 export {SecondaryButton, SecondaryButtonProps} from './lib/SecondaryButton';
 export {TertiaryButton, TertiaryButtonProps} from './lib/TertiaryButton';
 export {DeleteButton, DeleteButtonProps} from './lib/DeleteButton';
