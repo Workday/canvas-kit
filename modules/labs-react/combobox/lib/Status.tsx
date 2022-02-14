@@ -16,10 +16,10 @@ const Container = styled('div')(accessibleHide);
 const Status = ({
   ariaLive = 'polite',
   role = 'status',
-  ariaAtomic = false,
   ariaRelevant = 'additions',
   expireMilliseconds = 500,
   announcementText = '',
+  ariaAtomic,
 }: StatusProps) => {
   const [displayText, setDisplayText] = useState(announcementText);
   useEffect(() => {
