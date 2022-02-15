@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v6.4.2](https://github.com/Workday/canvas-kit/releases/tag/v6.4.2) (2022-02-15)
+
+### Components
+
+- fix(tabs): Add back the extending bottom border ([#1474](https://github.com/Workday/canvas-kit/pull/1474)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v6.4.1](https://github.com/Workday/canvas-kit/releases/tag/v6.4.1) (2022-02-14)
 
 
