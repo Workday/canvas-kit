@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import {colors} from '@workday/canvas-kit-react/tokens';
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {Box, BoxProps} from '@workday/canvas-kit-labs-react/common';
+import {Box, BoxProps} from '@workday/canvas-kit-react/layout';
 
 import {CardHeading} from './CardHeading';
 import {CardBody} from './CardBody';

@@ -8,9 +8,8 @@ import {
   styled,
   StyledType,
 } from '@workday/canvas-kit-react/common';
-import {Box} from '@workday/canvas-kit-labs-react/common';
+import {Box, HStack, StackSpacing} from '@workday/canvas-kit-react/layout';
 import {type} from '@workday/canvas-kit-react/tokens';
-import {HStack, StackSpacing} from '@workday/canvas-kit-labs-react/layout';
 
 import {FormFieldModelContext} from './FormField';
 import {FormFieldModel, useFormFieldLabel} from './hooks';

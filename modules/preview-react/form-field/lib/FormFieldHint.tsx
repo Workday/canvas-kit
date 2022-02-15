@@ -8,7 +8,7 @@ import {
   StyledType,
 } from '@workday/canvas-kit-react/common';
 import {space, type} from '@workday/canvas-kit-react/tokens';
-import {Box, BoxProps} from '@workday/canvas-kit-labs-react/common';
+import {Box, BoxProps} from '@workday/canvas-kit-react/layout';
 
 import {FormFieldModelContext} from './FormField';
 import {FormFieldModel, useFormFieldHint} from './hooks';

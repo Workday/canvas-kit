@@ -13,7 +13,7 @@ import {
 import {Breadcrumb} from '../types';
 // local components
 import {DropdownMenuItemLink} from './MenuItemLink';
-import {Box, BoxProps} from '@workday/canvas-kit-labs-react/common';
+import {Box, BoxProps} from '@workday/canvas-kit-react/layout';
 
 export interface DropdownMenuProps {
   /**

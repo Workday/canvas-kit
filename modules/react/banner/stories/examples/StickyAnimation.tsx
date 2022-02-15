@@ -4,7 +4,8 @@ import {jsx, keyframes} from '@emotion/react';
 import React from 'react';
 
 import {CSSProperties} from '@workday/canvas-kit-react/tokens';
-import {Box, useThemeRTL} from '@workday/canvas-kit-labs-react/common';
+import {Box} from '@workday/canvas-kit-react/layout';
+import {useThemeRTL} from '@workday/canvas-kit-labs-react/common';
 import {loopIcon} from '@workday/canvas-system-icons-web';
 import {Banner} from '@workday/canvas-kit-react/banner';
 

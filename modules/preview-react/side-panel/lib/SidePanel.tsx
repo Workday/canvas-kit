@@ -7,7 +7,7 @@ import {IconButton, IconButtonProps} from '@workday/canvas-kit-react/button';
 import {space, colors} from '@workday/canvas-kit-react/tokens';
 import {transformationImportIcon} from '@workday/canvas-system-icons-web';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
-import {Box} from '@workday/canvas-kit-labs-react/common';
+import {Box} from '@workday/canvas-kit-react/layout';
 
 export type SidePanelVariant = 'standard' | 'alternate';
 export type SidePanelTransitionStates = 'collapsed' | 'collapsing' | 'expanded' | 'expanding';

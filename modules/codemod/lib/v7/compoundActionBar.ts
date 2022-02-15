@@ -18,6 +18,7 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
     const parent = nodePath.parent as ASTPath<ImportDeclaration>;
     const importSource = String(parent.node.source.value) as typeof actionBarPackage;
     const localName = nodePath.value.local?.name;
+
     if (actionBarPackage === importSource && localName) {
       nodePath.replace(j.importSpecifier(j.identifier('ActionBar'), j.identifier(localName)));
     }

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {createComponent, ExtractProps, useDefaultModel} from '@workday/canvas-kit-react/common';
-import {Stack, StackSpacing} from '@workday/canvas-kit-labs-react/layout';
+import {Stack, StackSpacing} from '@workday/canvas-kit-react/layout';
 
 import {
   useFormFieldModel,

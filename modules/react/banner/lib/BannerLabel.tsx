@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import {ExtractProps, createComponent, useModelContext} from '@workday/canvas-kit-react/common';
-import {Flex} from '@workday/canvas-kit-labs-react/layout';
+import {Flex} from '@workday/canvas-kit-react/layout';
 
 import {BannerModelContext} from './Banner';
 import {BannerModel, useBannerLabel} from './hooks';

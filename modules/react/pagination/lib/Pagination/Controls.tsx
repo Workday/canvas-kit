@@ -8,7 +8,7 @@ import {
 } from '@workday/canvas-system-icons-web';
 
 import {PaginationModel} from './types';
-import {HStack} from '@workday/canvas-kit-labs-react/layout';
+import {HStack} from '@workday/canvas-kit-react/layout';
 import {useRTL} from './common/utils/useRTL';
 
 export type ControlButtonProps = IconButtonProps &

@@ -6,7 +6,7 @@ import {
   useSidePanel,
   SidePanelTransitionStates,
 } from '@workday/canvas-kit-preview-react/side-panel';
-import {Flex} from '@workday/canvas-kit-labs-react/layout';
+import {Flex} from '@workday/canvas-kit-react/layout';
 import {CanvasProvider, styled} from '@workday/canvas-kit-react/common';
 import {AccentIcon} from '@workday/canvas-kit-react/icon';
 import {rocketIcon} from '@workday/canvas-accent-icons-web';
