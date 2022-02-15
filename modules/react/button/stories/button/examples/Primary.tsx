@@ -8,8 +8,6 @@ export const Primary = props => (
   <HStack spacing="s" padding="s">
     <PrimaryButton {...props}>Primary</PrimaryButton>
     <p>{JSON.stringify(props.theme)}</p>
-    <PrimaryButton icon={plusIcon} iconPosition="right" {...props}>
-      Primary
-    </PrimaryButton>
+    <PrimaryButton icon={plusIcon} iconPosition="right" {...props}></PrimaryButton>
   </HStack>
 );

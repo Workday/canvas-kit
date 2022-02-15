@@ -1,5 +1,9 @@
 import React from 'react';
 
+import {ButtonLabelIconNew} from './parts/ButtonLabelIconNew';
+import {ButtonLabelNew} from './parts/ButtonLabelNew';
+import {ButtonLabelDataNew} from './parts/ButtonLabelDataNew';
+
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {Box, BoxProps} from '@workday/canvas-kit-labs-react/common';
 
@@ -13,5 +17,10 @@ export const Button = createComponent('button')({
         {children}
       </Box>
     );
+  },
+  subComponents: {
+    Icon: ButtonLabelIconNew,
+    Label: ButtonLabelNew,
+    LabelData: ButtonLabelDataNew,
   },
 });
