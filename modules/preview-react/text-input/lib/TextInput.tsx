@@ -6,7 +6,7 @@ import {
   FormFieldModelContext,
   useFormFieldOrientation,
 } from '@workday/canvas-kit-preview-react/form-field';
-import {Stack} from '@workday/canvas-kit-labs-react/layout';
+import {Stack} from '@workday/canvas-kit-react/layout';
 
 import {useTextInputModel, TextInputModel} from './hooks';
 import {TextInputField} from './TextInputField';

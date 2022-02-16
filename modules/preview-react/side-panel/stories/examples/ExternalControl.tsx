@@ -4,7 +4,7 @@ import {
   useSidePanel,
   SidePanelTransitionStates,
 } from '@workday/canvas-kit-preview-react/side-panel';
-import {Flex} from '@workday/canvas-kit-labs-react/layout';
+import {Flex} from '@workday/canvas-kit-react/layout';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {colors, type} from '@workday/canvas-kit-react/tokens';
 import {styled} from '@workday/canvas-kit-react/common';

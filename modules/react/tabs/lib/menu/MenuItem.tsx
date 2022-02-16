@@ -13,7 +13,7 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
-import {Box} from '@workday/canvas-kit-labs-react/common';
+import {Box} from '@workday/canvas-kit-react/layout';
 
 import {useListRegisterItem} from '../list';
 import {useRovingFocus} from '../cursor';

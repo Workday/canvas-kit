@@ -2,7 +2,7 @@ import React from 'react';
 
 import {Modal} from '@workday/canvas-kit-react/modal';
 import {DeleteButton} from '@workday/canvas-kit-react/button';
-import {HStack, VStack, Stack, Box} from '@workday/canvas-kit-labs-react';
+import {HStack, VStack, Stack, Box} from '@workday/canvas-kit-react/layout';
 import {space} from '@workday/canvas-kit-react/tokens';
 
 export const BodyOverflow = () => {

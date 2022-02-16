@@ -7,7 +7,7 @@ import {customColorTheme, withSnapshotsEnabled} from '../../../../utils/storyboo
 
 // unreleased path
 import {Menu} from '../lib/menu';
-import {HStack} from '@workday/canvas-kit-labs-react';
+import {HStack} from '@workday/canvas-kit-react/layout';
 
 const fontDelay = 150; // best guess for the font delay to prevent incorrect Chromatic regressions
 

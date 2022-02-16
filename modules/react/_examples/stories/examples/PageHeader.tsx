@@ -3,7 +3,7 @@ import {createComponent, styled} from '@workday/canvas-kit-react/common';
 
 import {colors, gradients, space, type} from '@workday/canvas-kit-react/tokens';
 
-import {HStack, HStackProps, StackSpacing} from '@workday/canvas-kit-labs-react';
+import {HStack, HStackProps, StackSpacing} from '@workday/canvas-kit-react/layout';
 import {IconButton} from '@workday/canvas-kit-react/button';
 import {justifyIcon, notificationsIcon} from '@workday/canvas-system-icons-web';
 

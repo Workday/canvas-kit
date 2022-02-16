@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {createComponent, ExtractProps, useModelContext} from '@workday/canvas-kit-react/common';
-import {Box} from '@workday/canvas-kit-labs-react/common';
+import {Box} from '@workday/canvas-kit-react/layout';
 
 import {FormFieldModelContext} from './FormField';
 import {FormFieldModel, useFormFieldInput} from './hooks';

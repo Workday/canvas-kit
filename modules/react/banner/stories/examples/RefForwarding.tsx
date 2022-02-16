@@ -3,7 +3,7 @@ import React from 'react';
 import {changeFocus} from '@workday/canvas-kit-react/common';
 import {Banner} from '@workday/canvas-kit-react/banner';
 import {SecondaryButton} from '../../..';
-import {VStack} from '@workday/canvas-kit-labs-react';
+import {VStack} from '@workday/canvas-kit-react/layout';
 
 export const RefForwarding = () => {
   const bannerRef = React.useRef<HTMLButtonElement>(null);

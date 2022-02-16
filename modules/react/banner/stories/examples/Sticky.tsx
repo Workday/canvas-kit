@@ -1,5 +1,5 @@
 import React from 'react';
-import {Box} from '@workday/canvas-kit-labs-react/common';
+import {Box} from '@workday/canvas-kit-react/layout';
 import {Banner} from '@workday/canvas-kit-react/banner';
 import {styled} from '@workday/canvas-kit-react/common';
 

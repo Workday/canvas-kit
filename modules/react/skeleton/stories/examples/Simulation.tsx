@@ -11,7 +11,7 @@ import {
   styled,
 } from '@workday/canvas-kit-react';
 
-import {Box, Flex} from '@workday/canvas-kit-labs-react';
+import {Box, Flex} from '@workday/canvas-kit-react/layout';
 
 import {Skeleton} from '@workday/canvas-kit-react/skeleton';
 import {borderRadius, space, type} from '@workday/canvas-kit-react/tokens';

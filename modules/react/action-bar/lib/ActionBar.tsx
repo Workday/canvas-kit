@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {createComponent, styled, StyledType} from '@workday/canvas-kit-react/common';
 import {commonColors, colors, space} from '@workday/canvas-kit-react/tokens';
-import {HStack, HStackProps, StackSpacing} from '@workday/canvas-kit-labs-react';
+import {HStack, HStackProps, StackSpacing} from '@workday/canvas-kit-react/layout';
 
 interface ActionBarProps extends Omit<HStackProps, 'spacing'> {
   spacing?: StackSpacing;

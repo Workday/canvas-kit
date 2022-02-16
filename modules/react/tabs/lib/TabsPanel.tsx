@@ -10,7 +10,7 @@ import {
   hideMouseFocus,
   StyledType,
 } from '@workday/canvas-kit-react/common';
-import {Box} from '@workday/canvas-kit-labs-react/common';
+import {Box} from '@workday/canvas-kit-react/layout';
 
 import {TabsModelContext} from './Tabs';
 import {TabsModel} from './useTabsModel';

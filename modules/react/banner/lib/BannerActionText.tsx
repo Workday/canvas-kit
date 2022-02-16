@@ -7,7 +7,7 @@ import {
   styled,
   StyledType,
 } from '@workday/canvas-kit-react/common';
-import {Box} from '@workday/canvas-kit-labs-react/common';
+import {Box} from '@workday/canvas-kit-react/layout';
 
 import {BannerModelContext} from './Banner';
 import {BannerModel, useBannerActionText} from './hooks';

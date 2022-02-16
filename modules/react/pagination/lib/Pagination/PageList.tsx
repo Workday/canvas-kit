@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import {PaginationModel} from './types';
 import {ListItem, ListItemProps} from './common/List';
-import {HStack, HStackProps} from '@workday/canvas-kit-labs-react/layout';
+import {HStack, HStackProps} from '@workday/canvas-kit-react/layout';
 
 export interface PageListProps extends Omit<HStackProps, 'as' | 'spacing'> {
   model: PaginationModel;

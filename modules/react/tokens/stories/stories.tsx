@@ -4,8 +4,7 @@ import {withSnapshotsEnabled} from '../../../../utils/storybook';
 import {pickForegroundColor, StyledType} from '@workday/canvas-kit-react/common';
 
 import {colors, type, depth, space, borderRadius} from '@workday/canvas-kit-react/tokens';
-import {Box} from '@workday/canvas-kit-labs-react/common';
-import {Flex} from '@workday/canvas-kit-labs-react/layout';
+import {Box, Flex} from '@workday/canvas-kit-react/layout';
 
 export default withSnapshotsEnabled({
   title: 'Tokens/Tokens/React',

@@ -23,7 +23,7 @@ import {
   createComponent,
   dubLogoBlue,
 } from '@workday/canvas-kit-react/common';
-import {Flex, StackSpacing, HStackProps, HStack} from '@workday/canvas-kit-labs-react/layout';
+import {Flex, StackSpacing, HStackProps, HStack} from '@workday/canvas-kit-react/layout';
 import {SearchForm} from '@workday/canvas-kit-labs-react/search-form';
 import {Avatar} from '@workday/canvas-kit-react/avatar';
 
@@ -114,7 +114,7 @@ const GlobalHeader = createComponent('header')({
   subComponents: {Item: GlobalHeaderItem},
 });
 
-const HeaderWrapper = styled('header')({
+const HeaderWrapper = styled('header')<StyledType>({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
