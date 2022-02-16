@@ -6,7 +6,7 @@ import {
   TertiaryButton,
   DeleteButton,
   Hyperlink,
-  HyperlinkExternal,
+  ExternalHyperlink,
 } from '@workday/canvas-kit-react/button';
 import {Specifications} from '@workday/canvas-kit-docs';
 
@@ -19,7 +19,8 @@ import {TertiaryInverse} from './examples/TertiaryInverse';
 import {Delete} from './examples/Delete';
 import {Link} from './examples/Hyperlink';
 import {LinkInverse} from './examples/HyperlinkInverse';
-import {LinkExternal} from './examples/HyperlinkExternal';
+import {ExternalLink} from './examples/ExternalHyperlink';
+import {ExternalLinkInverse} from './examples/ExternalHyperlinkInverse';
 
 <Meta title="Components/Buttons/Button/React" />
 
@@ -140,20 +141,25 @@ Undocumented props are spread to the underlying `<a>` element.
 
 <ArgsTable of={Hyperlink} />
 
-### HyperlinkExternal
+### ExternalHyperlink
 
-If your link should open in a new tab or window use the `<HyperlinkExternal>` component. It will let
+If your link should open in a new tab or window use the `<ExternalHyperlink>` component. It will let
 users know about the behavior by adding an icon, `extLinkIcon`. By default, the icon has a label of
 "Opens link in new window". You can override `aria-label` of the icon by using the `iconLabel`
 attribute. This override will be needed for translations.
 
-<ExampleCodeBlock code={LinkExternal} />
+<ExampleCodeBlock code={ExternalLink} />
+
+ExternalHyperlinks also have an `inverse` variant. Use this variant when you need to place a
+Hyperlink on a dark or colorful background such as `blueberry400`.
+
+<ExampleCodeBlock code={ExternalLinkInverse} />
 
 #### Props
 
 Undocumented props are spread to the underlying `<a>` element.
 
-<ArgsTable of={HyperlinkExternal} />
+<ArgsTable of={ExternalHyperlink} />
 
 ### Accessible Use of the `as` Prop
 
