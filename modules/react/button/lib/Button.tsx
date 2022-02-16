@@ -5,7 +5,7 @@ import {ButtonLabelNew} from './parts/ButtonLabelNew';
 import {ButtonLabelDataNew} from './parts/ButtonLabelDataNew';
 
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {Box, BoxProps} from '@workday/canvas-kit-labs-react/common';
+import {Box, BoxProps} from '@workday/canvas-kit-react/layout';
 
 export interface ButtonProps extends BoxProps {}
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import {BoxProps, Box} from '@workday/canvas-kit-labs-react/common';
+import {BoxProps, Box} from '@workday/canvas-kit-react/layout';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {ButtonSizes, IconPositionsNew} from '../types';
 import {StyledType, styled, createComponent} from '@workday/canvas-kit-react/common';

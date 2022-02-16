@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {PrimaryButtonKing} from '@workday/canvas-kit-react/button';
-import {HStack} from '@workday/canvas-kit-labs-react/layout';
+import {HStack} from '@workday/canvas-kit-react/layout';
 import {plusIcon} from '@workday/canvas-system-icons-web';
 
 export const PrimaryKing = props => (
