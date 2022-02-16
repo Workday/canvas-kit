@@ -39,7 +39,7 @@ describe('Button', () => {
 
   context('given hyperlinks are rendered', () => {
     beforeEach(() => {
-      h.stories.load('Components/Buttons/Button/React', 'Link External');
+      h.stories.load('Components/Buttons/Button/React', 'External Link');
     });
 
     it('should not have any axe errors', () => {
