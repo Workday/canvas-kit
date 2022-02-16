@@ -14,7 +14,7 @@ import {
 import {borderRadius, space, spaceNumbers, type, colors} from '@workday/canvas-kit-react/tokens';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {CSSObject} from '@emotion/styled';
-import {ButtonSizes, IconPositionsNew} from './types';
+import {ButtonColors, ButtonSizes, IconPositionsNew} from './types';
 import {buttonLabelDataClassName} from './parts/ButtonLabelData';
 import {Button} from './Button';
 
@@ -244,10 +244,10 @@ const StyledPrimaryButton = styled(Button)<StyledType & PrimaryButtonKingProps>(
       return;
     }
 
-    const colors = getPrimaryButtonColorsNew(variant, theme);
+    const colors: ButtonColors = getPrimaryButtonColorsNew(variant, theme);
     const baseStyles = {
       backgroundColor: colors.default.background,
-      borderColor: colors.focus.border,
+      borderColor: colors.default.border,
       color: colors.default.label,
       ...(colors.default.icon && {
         '.wd-icon-fill, .wd-icon-accent, .wd-icon-accent2, .wd-icon-background': {
@@ -265,7 +265,7 @@ const StyledPrimaryButton = styled(Button)<StyledType & PrimaryButtonKingProps>(
     const hoverStyles = {
       '&:hover': {
         backgroundColor: colors.hover.background,
-        // borderColor: colors.hover.border,
+        borderColor: colors.hover.border,
         color: colors.hover.label,
         ...(colors.hover.labelData && {
           ['.' + buttonLabelDataClassName]: {
@@ -280,7 +280,7 @@ const StyledPrimaryButton = styled(Button)<StyledType & PrimaryButtonKingProps>(
     const activeStyles = {
       '&:active, &:focus:active, &:hover:active': {
         backgroundColor: colors.active.background,
-        // borderColor: colors.active.border,
+        borderColor: colors.active.border,
         color: colors.active.label,
         ...(colors.active.labelData && {
           ['.' + buttonLabelDataClassName]: {
@@ -310,7 +310,7 @@ const StyledPrimaryButton = styled(Button)<StyledType & PrimaryButtonKingProps>(
       ...hoverStyles,
       '&:disabled, &:active:disabled, &:focus:disabled, &:hover:disabled': {
         backgroundColor: colors.disabled.background,
-        // borderColor: colors.disabled.border,
+        borderColor: colors.disabled.border,
         color: colors.disabled.label,
         ...(colors.disabled.icon && getIconColorSelectorsNew(theme, colors.disabled.icon, false)),
         ...(colors.disabled.labelData && {
@@ -391,7 +391,6 @@ export const PrimaryButtonKing = createComponent('button')({
         as={Element}
         size={size}
         variant={variant}
-        // grow={grow}
         padding={getPaddingStyles(children, size)}
         minWidth={getMinWidthStyles(children, size)}
         {...elemProps}
