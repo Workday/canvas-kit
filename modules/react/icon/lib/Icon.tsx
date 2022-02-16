@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {CSSObject} from '@emotion/styled';
 import {CanvasIcon, CanvasIconTypes} from '@workday/design-assets-types';
-import Svg, {SvgProps} from './Svg';
+import {Svg, SvgProps} from './Svg';
 
 export interface IconProps extends SvgProps {
   src: CanvasIcon;

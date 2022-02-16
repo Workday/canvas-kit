@@ -1,5 +1,5 @@
 import React from 'react';
-import {BoxProps, Box} from '@workday/canvas-kit-react/layout';
+import {BoxProps} from '@workday/canvas-kit-react/layout';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {ButtonSizes, IconPositionsNew} from '../types';
 import {StyledType, styled, createComponent} from '@workday/canvas-kit-react/common';
@@ -37,7 +37,7 @@ const iconSizes: Record<ButtonSizes, number> = {
   large: 24,
 };
 
-const StyledButtonLabelIcon = styled(Box)<StyledType & ButtonLabelIconPropsNew>({
+const StyledButtonLabelIcon = styled(SystemIcon)<StyledType & ButtonLabelIconPropsNew>({
   display: 'inline-block',
 });
 
@@ -56,15 +56,14 @@ export const ButtonLabelIconNew = createComponent('span')({
 
     return (
       <StyledButtonLabelIcon
-        as="span"
-        iconPosition={iconPosition}
-        size={size}
+        size={iconSize}
+        icon={icon}
+        shouldMirror={shouldMirrorIcon}
         width={size ? iconSizes[size] : iconSizes.medium}
         height={size ? iconSizes[size] : iconSizes.medium}
+        iconPosition={iconPosition}
         {...elemProps}
-      >
-        <SystemIcon size={iconSize} icon={icon} shouldMirror={shouldMirrorIcon} />
-      </StyledButtonLabelIcon>
+      />
     );
   },
 });
