@@ -28,7 +28,7 @@ const iconSize = '1em';
 
 const StyledSystemIcon = styled(SystemIcon)<StyledType>({
   ...iconStyles,
-  width: `calc(${iconSize} - 2px)`,
+  width: `calc(${iconSize} - 1px)`,
   marginLeft: '2px',
 });
 
