@@ -8,9 +8,9 @@ export const PrimaryKing = props => (
   <>
     <h1>Default</h1>
     <HStack spacing="s" padding="s">
-      {/* <PrimaryButtonKing {...props}>Primary</PrimaryButtonKing>
-      <p>{JSON.stringify(props.theme)}</p> */}
-      <PrimaryButtonKing size="medium" icon={plusIcon} iconPosition="start" {...props}>
+      <PrimaryButtonKing {...props}>Primary</PrimaryButtonKing>
+      <p>{JSON.stringify(props.theme)}</p>
+      <PrimaryButtonKing icon={plusIcon} iconPosition="start" {...props}>
         Primary
       </PrimaryButtonKing>
       <PrimaryButtonKing icon={plusIcon} {...props}></PrimaryButtonKing>

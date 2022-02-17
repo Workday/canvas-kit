@@ -10,12 +10,10 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {ButtonColors, ButtonSizes} from '../types';
 import {buttonLabelDataClassName} from './ButtonLabelData';
-import {Button} from '../Button';
+import {ButtonProps} from '../Button';
 import {CSSObject} from '@emotion/styled';
 
-export interface ButtonContainerNewProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    GrowthBehavior {
+export interface ButtonContainerNewProps extends ButtonProps, GrowthBehavior {
   colors?: ButtonColors;
   /**
    * There are four button sizes: `extraSmall`, `small`, `medium`, and `large`.
@@ -63,7 +61,7 @@ function getIconColorSelectorsNew(
   };
 }
 
-export const ButtonContainerNew = styled(Button)<StyledType & ButtonContainerNewProps>(
+export const ButtonContainerNew = styled('button')<StyledType & ButtonContainerNewProps>(
   {
     ...type.levels.subtext.large,
     cursor: 'pointer',
@@ -232,3 +230,34 @@ export const ButtonContainerNew = styled(Button)<StyledType & ButtonContainerNew
     };
   }
 );
+
+export const getMinWidthStyles = (children: React.ReactNode, size: ButtonSizes) => {
+  switch (size) {
+    case 'large':
+      return children ? '112px' : '48px';
+    case 'medium':
+      return children ? '96px' : space.xl;
+    case 'small':
+      return children ? space.xxxl : space.l;
+    case 'extraSmall':
+      return children ? 'auto' : space.m;
+    default:
+      return children ? '96px' : space.xl;
+  }
+};
+
+export const getPaddingStyles = (children: React.ReactNode, size: ButtonSizes) => {
+  switch (size) {
+    case 'large':
+      return children ? `0 ${space.l}` : 0;
+
+    case 'medium':
+      return children ? `0 ${space.m}` : 0;
+    case 'small':
+      return children ? `0 ${space.s}` : 0;
+    case 'extraSmall':
+      return children ? `0 ${space.xs}` : 0;
+    default:
+      return children ? `0 ${space.m}` : 0;
+  }
+};

@@ -23,5 +23,6 @@ export const Button = createComponent('button')({
     Icon: ButtonLabelIconNew,
     Label: ButtonLabelNew,
     LabelData: ButtonLabelDataNew,
+    Container: ButtonContainerNew,
   },
 });
