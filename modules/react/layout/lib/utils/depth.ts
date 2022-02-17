@@ -10,9 +10,18 @@ export type DepthStyleProps = {
   depth?: DepthTokenKeys;
 };
 
-const depthProps = {
-  depth: (token: DepthTokenKeys) => depthTokens[token],
+export const depthFns = {
+  depth: (value?: DepthTokenKeys) => (value ? depthTokens[value] : {}),
 };
+
+export function getDepthStyles<P extends DepthStyleProps>(
+  styleProps: P,
+  key: keyof DepthStyleProps
+) {
+  const value = styleProps[key as keyof DepthStyleProps];
+  const styleFn = depthFns[key as keyof typeof depthFns];
+  return styleFn(value);
+}
 
 /**
  * A style prop function that takes components props and returns depth styles from canvas token values.
@@ -25,13 +34,13 @@ const depthProps = {
  * );
  *
  */
-export function depth<P extends DepthStyleProps>(props: P): DepthTokenValues {
+export function depth<P extends DepthStyleProps>(props: P) {
+  let styles = {};
   for (const key in props) {
-    if (key in depthProps) {
-      const token = props[key as keyof DepthStyleProps] as DepthTokenKeys;
-      const depthFn = depthProps[key as keyof DepthStyleProps];
-      return depthFn(token);
+    if (key in depthFns) {
+      const style = getDepthStyles(props, key as keyof DepthStyleProps);
+      styles = {...styles, ...style};
     }
   }
-  return {} as DepthTokenValues;
+  return styles;
 }

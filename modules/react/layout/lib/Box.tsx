@@ -1,7 +1,10 @@
+/** @jsxRuntime classic */
+/** @jsx jsx */
+import {jsx} from '@emotion/react';
 import * as React from 'react';
 import styled from '@emotion/styled';
 import isPropValid from '@emotion/is-prop-valid';
-import {createComponent, StyledType, useConstant} from '@workday/canvas-kit-react/common';
+import {createComponent, useTheme, useConstant, StyledType} from '@workday/canvas-kit-react/common';
 
 // style props
 import {border, BorderStyleProps} from './utils/border';
@@ -12,6 +15,9 @@ import {layout, LayoutStyleProps} from './utils/layout';
 import {other, OtherStyleProps} from './utils/other';
 import {position, PositionStyleProps} from './utils/position';
 import {space, SpaceStyleProps} from './utils/space';
+import {pseudo, PseudoStyleProps} from './utils/pseudo';
+// cx function
+import {cxFn, CXStyleProps} from './utils/cx';
 
 export type BoxProps = BorderStyleProps &
   ColorStyleProps &
@@ -20,8 +26,10 @@ export type BoxProps = BorderStyleProps &
   LayoutStyleProps &
   OtherStyleProps &
   PositionStyleProps &
-  SpaceStyleProps & {
+  SpaceStyleProps &
+  PseudoStyleProps & {
     children?: React.ReactNode;
+    cx?: CXStyleProps;
   };
 
 const omittedProps = ['display', 'color', 'height', 'overflow', 'width', 'border', 'background'];
@@ -40,8 +48,10 @@ const StyledBoxElement = styled('div', {shouldForwardProp})<StyledType & BoxProp
   depth,
   flexItem,
   layout,
+  other,
   position,
-  space
+  space,
+  pseudo
 );
 
 // Meant to be used with components. There is no `shouldForwardProps` - all props will be forwarded to the component
@@ -56,7 +66,8 @@ const StyledBoxComponent = styled('div')<StyledType & BoxProps>(
   layout,
   other,
   position,
-  space
+  space,
+  pseudo
 );
 
 /**
@@ -78,13 +89,16 @@ const StyledBoxComponent = styled('div')<StyledType & BoxProps>(
  */
 export const Box = createComponent('div')({
   displayName: 'Box',
-  Component: ({children, ...elemProps}: BoxProps, ref, Element) => {
+  Component: ({children, cx, ...elemProps}: BoxProps, ref, Element) => {
     const BoxComponent = useConstant(() =>
       typeof Element === 'string' ? StyledBoxElement : StyledBoxComponent
     );
+    const theme = useTheme();
+    const isRTL = theme.canvas.direction === 'rtl';
+    const cxStyles = cxFn(cx || {}, isRTL);
 
     return (
-      <BoxComponent as={Element} ref={ref} {...elemProps}>
+      <BoxComponent as={Element} ref={ref} css={cxStyles} {...elemProps}>
         {children}
       </BoxComponent>
     );

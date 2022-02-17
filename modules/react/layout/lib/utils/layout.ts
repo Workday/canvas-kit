@@ -35,7 +35,7 @@ export type LayoutStyleProps = {
   width?: number | string;
 };
 
-const layoutProps = {
+export const layoutProps = {
   display: 'display',
   height: 'height',
   listStyle: 'listStyle',
@@ -50,6 +50,13 @@ const layoutProps = {
   width: 'width',
 };
 
+export function getLayoutStyles<P extends LayoutStyleProps>(
+  styleProps: P,
+  key: keyof LayoutStyleProps
+) {
+  const value = styleProps[key as keyof LayoutStyleProps];
+  return {[key]: value};
+}
 /**
  * A style prop function that takes components props and returns layout styles.
  * If no `LayoutStyleProps` are found, it returns an empty object.
@@ -64,13 +71,11 @@ const layoutProps = {
  *
  */
 export function layout<P extends LayoutStyleProps>(props: P) {
-  const styles = {};
+  let styles = {};
   for (const key in props) {
     if (key in layoutProps) {
-      const attr = layoutProps[key as keyof LayoutStyleProps];
-      const value = props[key];
-      // @ts-ignore TS doesn't like adding a potentially unknown key to an object, but because we own this object, it's fine.
-      styles[attr] = value;
+      const style = getLayoutStyles(props, key as keyof LayoutStyleProps);
+      styles = {...styles, ...style};
     }
   }
   return styles;

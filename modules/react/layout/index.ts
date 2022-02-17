@@ -1,7 +1,7 @@
 import Layout from './lib/Layout';
 import Column from './lib/Column';
 
-export { Layout, Column};
+export {Layout, Column};
 export * from './lib/Box';
 export * from './lib/utils/border';
 export * from './lib/utils/color';
@@ -12,5 +12,5 @@ export * from './lib/utils/position';
 export {SpaceStyleProps} from './lib/utils/space';
 export * from './lib/Flex';
 export * from './lib/Stack';
-export type { FlexStyleProps } from './lib/utils/flex';
-export type { StackSpacing, StackDirection, StackStyleProps } from './lib/utils/stack';
+export type {FlexStyleProps} from './lib/utils/flex';
+export type {StackSpacing, StackDirection, StackStyleProps} from './lib/utils/stack';

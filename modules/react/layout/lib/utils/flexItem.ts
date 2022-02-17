@@ -18,8 +18,8 @@ export type FlexItemStyleProps = {
   order?: PropertyOrder;
 };
 
-/** style props to for flexbox item properties */
-const flexItemProps = {
+/** Style props to for flexbox item properties */
+export const flexItemProps = {
   flex: 'flex',
   flexGrow: 'flexGrow',
   flexShrink: 'flexShrink',
@@ -28,6 +28,14 @@ const flexItemProps = {
   alignSelf: 'alignSelf',
   order: 'order',
 };
+
+export function getFlexItemStyles<P extends FlexItemStyleProps>(
+  styleProps: P,
+  key: keyof FlexItemStyleProps
+) {
+  const value = styleProps[key as keyof FlexItemStyleProps] || '';
+  return {[key]: value};
+}
 
 /**
  * A style prop function that takes component props and returns flexbox item styles.
@@ -43,13 +51,11 @@ const flexItemProps = {
  *
  */
 export function flexItem<P extends FlexItemStyleProps>(props: P) {
-  const styles = {};
+  let styles = {};
   for (const key in props) {
     if (key in flexItemProps) {
-      const attr = flexItemProps[key as keyof FlexItemStyleProps];
-      const value = props[key];
-      // @ts-ignore TS doesn't like adding a potentially unknown key to an object, but because we own this object, it's fine.
-      styles[attr] = value;
+      const style = getFlexItemStyles(props, key as keyof FlexItemStyleProps);
+      styles = {...styles, ...style};
     }
   }
   return styles;

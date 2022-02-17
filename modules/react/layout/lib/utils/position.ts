@@ -1,12 +1,7 @@
-import {
-  ContentDirection,
-  PartialEmotionCanvasTheme,
-  useTheme,
-} from '@workday/canvas-kit-react/common';
+import {PartialEmotionCanvasTheme} from '@workday/canvas-kit-react/common';
 import {PropertyPosition, PropertyZIndex} from './types';
 
-/** style props to for standard position properties */
-export type PositionStandardProps = {
+export type PositionStyleProps = {
   /** sets `position` property  */
   position?: PropertyPosition;
   /** sets `zIndex` property  */
@@ -19,40 +14,53 @@ export type PositionStandardProps = {
   bottom?: number | string;
   /** sets `left` property (no bidirectional support)  */
   left?: number | string;
-};
-
-export type PositionLogicalProps = {
   /** sets `left` property (bidirectional support)  */
   insetInlineStart?: number | string;
   /** sets `right` property (bidirectional support) */
   insetInlineEnd?: number | string;
 };
 
-const getInsetInlineStartStyle = (value: number | string, isRTL = false) => {
-  const attr = isRTL ? 'right' : 'left';
-  return {[attr]: value};
+const insetInlineStart = (value?: number | string, isRTL = false) => {
+  const key = isRTL ? 'right' : 'left';
+  return {[key]: value};
 };
 
-const getInsetInlineEndStyle = (value: number | string, isRTL = false) => {
-  const attr = isRTL ? 'left' : 'right';
-  return {[attr]: value};
+const insetInlineEnd = (value?: number | string, isRTL = false) => {
+  const key = isRTL ? 'left' : 'right';
+  return {[key]: value};
 };
 
-const standardPositionProps = {
-  position: 'position',
-  zIndex: 'zIndex',
-  top: 'top',
-  right: 'right',
-  bottom: 'bottom',
-  left: 'left',
+export const positionFns = {
+  position: (value?: PropertyPosition) => ({position: value}),
+  zIndex: (value?: PropertyZIndex) => ({zIndex: value}),
+  top: (value?: number | string) => ({top: value}),
+  right: (value?: number | string) => ({right: value}),
+  bottom: (value?: number | string) => ({bottom: value}),
+  left: (value?: number | string) => ({left: value}),
+  insetInlineStart: (value?: number | string, isRTL = false) => {
+    const key = isRTL ? 'right' : 'left';
+    return {[key]: value};
+  },
+  insetInlineEnd: (value?: number | string, isRTL = false) => {
+    const key = isRTL ? 'left' : 'right';
+    return {[key]: value};
+  },
 };
 
-const logicalPositionProps = {
-  insetInlineStart: getInsetInlineStartStyle,
-  insetInlineEnd: getInsetInlineEndStyle,
-};
-
-export type PositionStyleProps = PositionStandardProps & PositionLogicalProps;
+export function getPositionStyles<P extends PositionStyleProps>(
+  styleProps: P,
+  key: keyof PositionStyleProps,
+  isRTL = false
+) {
+  const value = styleProps[key as keyof PositionStyleProps];
+  if (key === 'insetInlineStart') {
+    return insetInlineStart(value, isRTL);
+  }
+  if (key === 'insetInlineEnd') {
+    return insetInlineEnd(value, isRTL);
+  }
+  return {[key]: value};
+}
 
 /**
  * A style prop function that takes components props and returns position styles.
@@ -67,29 +75,16 @@ export type PositionStyleProps = PositionStandardProps & PositionLogicalProps;
  * );
  *
  */
-export function position<P extends PositionStyleProps & {theme?: PartialEmotionCanvasTheme}>(
+export function position<P extends PositionStyleProps & {theme: PartialEmotionCanvasTheme}>(
   props: P
 ) {
-  // position will always be used within the context of a component, but eslint doesn't know that
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const {canvas} = useTheme(props.theme);
+  const isRTL = props.theme.canvas?.direction === 'rtl';
   let styles = {};
+
   for (const key in props) {
-    if (key in props) {
-      if (key in standardPositionProps) {
-        const value = props[key];
-        const attr = standardPositionProps[key as keyof PositionStandardProps];
-        // @ts-ignore TS doesn't like adding a potentially unknown key to an object, but because we own this object, it's fine.
-        styles[attr] = value;
-        continue;
-      }
-      if (key in logicalPositionProps) {
-        const value = props[key as keyof PositionLogicalProps] as string | number;
-        const styleFn = logicalPositionProps[key as keyof PositionLogicalProps];
-        const isRTL = canvas.direction === ContentDirection.RTL;
-        const style = styleFn(value, isRTL);
-        styles = {...styles, ...style};
-      }
+    if (props.hasOwnProperty(key) && positionFns.hasOwnProperty(key)) {
+      const style = getPositionStyles(props, key as keyof PositionStyleProps, isRTL);
+      styles = {...styles, ...style};
     }
   }
   return styles;

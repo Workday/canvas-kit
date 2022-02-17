@@ -2,40 +2,42 @@ import {colors as colorTokens, CanvasColor} from '@workday/canvas-kit-react/toke
 
 export type ColorTokens = typeof colorTokens;
 
+export type ColorValue = CanvasColor | (string & {});
+
+function getColor(value?: ColorValue) {
+  if (value && value in colorTokens) {
+    return colorTokens[value];
+  }
+  return value;
+}
+
 /** style props to for color properties */
 export type ColorStyleProps = {
   /** sets `background` property */
-  background?: CanvasColor | (string & {});
+  background?: ColorValue;
   /** sets `background-color` property */
-  backgroundColor?: CanvasColor | (string & {});
+  backgroundColor?: ColorValue;
   /** sets `background-image` property */
   backgroundImage?: string;
   /** sets `color` property */
-  color?: CanvasColor | (string & {});
+  color?: ColorValue;
 };
 
-const getBackground = (value: CanvasColor | string) => ({
-  background: colorTokens[value] || value,
-});
-
-const getBackgroundColor = (value: CanvasColor | string) => ({
-  backgroundColor: colorTokens[value] || value,
-});
-
-const getBackgroundImage = (value: string) => ({
-  backgroundImage: value,
-});
-
-const getColor = (value: CanvasColor | string) => ({
-  color: colorTokens[value] || value,
-});
-
-const colorProps = {
-  background: getBackground,
-  backgroundColor: getBackgroundColor,
-  backgroundImage: getBackgroundImage,
-  color: getColor,
+export const colorFns = {
+  background: (value?: ColorValue) => ({background: getColor(value)}),
+  backgroundColor: (value?: ColorValue) => ({backgroundColor: getColor(value)}),
+  backgroundImage: (value?: string) => ({backgroundImage: value}),
+  color: (value?: ColorValue) => ({color: getColor(value)}),
 };
+
+export function getColorStyles<P extends ColorStyleProps>(
+  styleProps: P,
+  key: keyof ColorStyleProps
+) {
+  const value = styleProps[key as keyof ColorStyleProps];
+  const styleFn = colorFns[key as keyof typeof colorFns];
+  return styleFn(value);
+}
 
 /**
  * A style prop function that takes components props and returns color styles from canvas token values.
@@ -51,10 +53,8 @@ const colorProps = {
 export function color<P extends ColorStyleProps>(props: P) {
   let styles = {};
   for (const key in props) {
-    if (key in colorProps) {
-      const value = props[key as keyof ColorStyleProps] as CanvasColor | string;
-      const colorFn = colorProps[key as keyof ColorStyleProps];
-      const style = colorFn(value);
+    if (key in colorFns) {
+      const style = getColorStyles(props, key as keyof typeof colorFns);
       styles = {...styles, ...style};
     }
   }
