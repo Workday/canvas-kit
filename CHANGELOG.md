@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v6.4.5](https://github.com/Workday/canvas-kit/releases/tag/v6.4.5) (2022-02-17)
+
+### Components
+
+- fix: Fix Primary button example ([#1481](https://github.com/Workday/canvas-kit/pull/1481)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
 ## [v6.4.4](https://github.com/Workday/canvas-kit/releases/tag/v6.4.4) (2022-02-17)
 
 ### Components
