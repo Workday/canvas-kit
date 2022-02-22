@@ -2,7 +2,7 @@ import React from 'react';
 import {BoxProps} from '@workday/canvas-kit-react/layout';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {ButtonSizes, IconPositionsNew} from '../types';
-import {StyledType, styled, createComponent} from '@workday/canvas-kit-react/common';
+import {styled, createComponent} from '@workday/canvas-kit-react/common';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 
 interface ButtonLabelIconPropsNew extends BoxProps {
@@ -11,7 +11,7 @@ interface ButtonLabelIconPropsNew extends BoxProps {
    *
    * @default 'medium'
    */
-  size?: ButtonSizes;
+  size: ButtonSizes | undefined;
   /**
    * The icon of the Button.
    * Note: not displayed at `small` size
@@ -37,14 +37,14 @@ const iconSizes: Record<ButtonSizes, number> = {
   large: 24,
 };
 
-const StyledButtonLabelIcon = styled(SystemIcon)<StyledType & ButtonLabelIconPropsNew>({
+const StyledButtonLabelIcon = styled(SystemIcon)({
   display: 'inline-block',
 });
 
 export const ButtonLabelIconNew = createComponent('span')({
   displayName: 'ButtonLabelIconNew',
   Component: (
-    {icon, size, iconPosition, shouldMirrorIcon = false, ...elemProps}: ButtonLabelIconPropsNew,
+    {icon, size = 'medium', shouldMirrorIcon = false, ...elemProps}: ButtonLabelIconPropsNew,
     ref,
     Element
   ) => {
@@ -61,7 +61,6 @@ export const ButtonLabelIconNew = createComponent('span')({
         shouldMirror={shouldMirrorIcon}
         width={size ? iconSizes[size] : iconSizes.medium}
         height={size ? iconSizes[size] : iconSizes.medium}
-        iconPosition={iconPosition}
         {...elemProps}
       />
     );

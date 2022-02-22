@@ -155,8 +155,7 @@ export const PrimaryButtonKing = createComponent('button')({
     const balancingMargin = size === 'large' ? space.xxs : space.xxxs;
     const theme = useTheme();
     return (
-      <Button.Container
-        as={Button}
+      <Button
         ref={ref}
         size={size}
         colors={getPrimaryButtonColorsNew(variant, theme)}
@@ -186,7 +185,7 @@ export const PrimaryButtonKing = createComponent('button')({
             marginInlineEnd={children ? `-${balancingMargin} !important` : undefined}
           />
         )}
-      </Button.Container>
+      </Button>
     );
   },
 });

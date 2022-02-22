@@ -1,7 +1,9 @@
 export {PrimaryButton, PrimaryButtonProps} from './lib/PrimaryButton';
 export {PrimaryButtonKing, PrimaryButtonKingProps} from './lib/PrimaryButtonKing';
 export {SecondaryButton, SecondaryButtonProps} from './lib/SecondaryButton';
+export {SecondaryButtonNew, SecondaryButtonNewProps} from './lib/SecondaryButtonNew';
 export {TertiaryButton, TertiaryButtonProps} from './lib/TertiaryButton';
+export {TertiaryButtonNew, TertiaryButtonNewProps} from './lib/TertiaryButtonNew';
 export {DeleteButton, DeleteButtonProps} from './lib/DeleteButton';
 export {
   DeprecatedButton as deprecated_Button,

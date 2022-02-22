@@ -43,7 +43,9 @@ export interface SystemIconStyles {
   fillHover?: string;
 }
 
-export interface SystemIconProps extends SystemIconStyles, Omit<IconProps, 'src' | 'type'> {
+export interface SystemIconProps
+  extends Omit<SystemIconStyles, 'color' | 'background'>,
+    Omit<IconProps, 'src' | 'type'> {
   /**
    * The icon to display from `@workday/canvas-system-icons-web`.
    */
@@ -51,7 +53,7 @@ export interface SystemIconProps extends SystemIconStyles, Omit<IconProps, 'src'
   /**
    * The size of the SystemIcon in `px`.
    */
-  size?: number;
+  size?: number | undefined;
 }
 
 export const systemIconStyles = ({
@@ -97,7 +99,7 @@ export default class SystemIcon extends React.Component<SystemIconProps> {
       accentHover,
       fill,
       fillHover,
-      size,
+      size = 20,
       shouldMirror,
       ...elemProps
     } = this.props;

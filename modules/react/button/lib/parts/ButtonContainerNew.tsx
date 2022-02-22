@@ -8,7 +8,7 @@ import {
   EmotionCanvasTheme,
   StyledType,
 } from '@workday/canvas-kit-react/common';
-import {ButtonColors, ButtonSizes} from '../types';
+import {ButtonColors, ButtonSizes, TertiaryButtonSizes} from '../types';
 import {buttonLabelDataClassName} from './ButtonLabelData';
 import {ButtonProps} from '../Button';
 import {CSSObject} from '@emotion/styled';
@@ -81,7 +81,7 @@ export const ButtonContainerNew = styled('button')<StyledType & ButtonContainerN
     verticalAlign: 'middle',
     overflow: 'hidden',
     border: '1px solid transparent',
-    background: 'red',
+    background: 'transparent',
     transition:
       'box-shadow 120ms linear, border 120ms linear, background-color 120ms linear, color 120ms linear',
     '&:disabled, &:disabled:active': {
@@ -247,6 +247,7 @@ export const getMinWidthStyles = (children: React.ReactNode, size: ButtonSizes) 
 };
 
 export const getPaddingStyles = (children: React.ReactNode, size: ButtonSizes) => {
+  console.warn('in here', size, children);
   switch (size) {
     case 'large':
       return children ? `0 ${space.l}` : 0;
