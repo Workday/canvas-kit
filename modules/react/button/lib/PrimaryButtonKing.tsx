@@ -104,7 +104,13 @@ export interface PrimaryButtonKingProps extends Themeable, GrowthBehavior {
    */
   size?: ButtonSizes;
   /**
-   * The data label of the Button.
+   * The data label is additional information about the button. The `children` of the Button will
+   * appear in bold font while the `dataLabel` will not be emphasized as bold. The `dataLabel` will
+   * be part of a button's accessible name appended after `children`. Useful to ancillary data
+   * associated with the button, but not the prominent label. If `dataLabel` contents are
+   * left-to-right characters, and the `children` are RTL characters, the button may show contents
+   * out of order.
+   *
    * Note: not displayed at `small` size
    */
   dataLabel?: String;
