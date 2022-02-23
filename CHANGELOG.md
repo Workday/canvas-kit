@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v6.4.6](https://github.com/Workday/canvas-kit/releases/tag/v6.4.6) (2022-02-23)
+
+### Components
+
+- fix(combobox): Use correct role for live region ([#1466](https://github.com/Workday/canvas-kit/pull/1466)) ([@anicholls](https://github.com/anicholls))
+
+
 ## [v6.4.5](https://github.com/Workday/canvas-kit/releases/tag/v6.4.5) (2022-02-17)
 
 ### Components
