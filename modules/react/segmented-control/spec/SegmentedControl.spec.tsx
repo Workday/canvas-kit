@@ -22,13 +22,14 @@ describe('Segmented Control', () => {
     });
   });
 
+  // ensure random elements don't break anything
   describe('when clicked', () => {
     it('should call SegmentedControl onChange callback', () => {
       const {getAllByRole} = render(
         <SegmentedControl onChange={cb}>
           <IconButton icon={listViewIcon} value="list-view" aria-label="List View" />
           <IconButton icon={worksheetsIcon} value="table-view" aria-label="Table View" />
-          <span /> {/* ensure random elements don't break anything */}
+          <span />
         </SegmentedControl>
       );
       fireEvent.click(getAllByRole('button')[1]);

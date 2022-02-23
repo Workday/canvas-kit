@@ -1,10 +1,13 @@
+/** @jsxRuntime classic */
 /** @jsx jsx */
 import * as React from 'react';
-import {styled, useIsRTL} from '@workday/canvas-kit-react/common';
-import {css, CSSObject, jsx, keyframes} from '@emotion/core';
+import {styled, useIsRTL, StyledType} from '@workday/canvas-kit-react/common';
+import {css, jsx, keyframes} from '@emotion/react';
 import {IconButton, IconButtonProps} from '@workday/canvas-kit-react/button';
-import {space, colors, depth} from '@workday/canvas-kit-react/tokens';
+import {space, colors} from '@workday/canvas-kit-react/tokens';
 import {transformationImportIcon} from '@workday/canvas-system-icons-web';
+import {Tooltip} from '@workday/canvas-kit-react/tooltip';
+import {Box} from '@workday/canvas-kit-react/layout';
 
 export type SidePanelVariant = 'standard' | 'alternate';
 export type SidePanelTransitionStates = 'collapsed' | 'collapsing' | 'expanded' | 'expanding';
@@ -86,17 +89,7 @@ const createKeyframes = (from: number | string, to: number | string) => {
   `;
 };
 
-const containerVariantStyle: Record<SidePanelVariant, CSSObject> = {
-  alternate: {
-    backgroundColor: colors.frenchVanilla100,
-    ...depth[3],
-  },
-  standard: {
-    backgroundColor: colors.soap100,
-  },
-};
-
-const Panel = styled('section')<Pick<SidePanelProps, 'as'>>({
+const StyledPanel = styled(Box)<StyledType & Pick<SidePanelProps, 'as'>>({
   overflow: 'hidden',
   position: 'relative',
   boxSizing: 'border-box',
@@ -119,7 +112,7 @@ const SidePanel = ({
   onExpandedChange,
   onStateTransition,
   origin = 'left',
-  variant = 'standard',
+  // variant = 'standard',
   touched,
   ...elemProps
 }: SidePanelProps) => {
@@ -176,20 +169,15 @@ const SidePanel = ({
   };
 
   return (
-    <Panel
+    <StyledPanel
       as={as}
-      css={[
-        {
-          width: expanded ? expandedWidth : collapsedWidth,
-          maxWidth: expanded ? expandedWidth : collapsedWidth,
-          // mounted.current will be false on the first render, thus you won't get an unwanted animation here
-          // Will animate again if you force a re-render (like in Storybook)
-          animation: touched
-            ? `${expanded ? motion.expand : motion.collapse} 200ms ease-out`
-            : undefined,
-        },
-        containerVariantStyle[variant],
-      ]}
+      width={expanded ? expandedWidth : collapsedWidth}
+      maxWidth={expanded ? expandedWidth : collapsedWidth}
+      backgroundColor={elemProps.variant === 'alternate' ? colors.frenchVanilla100 : colors.soap100}
+      depth={elemProps.variant === 'alternate' ? 3 : undefined}
+      animation={
+        touched ? `${expanded ? motion.expand : motion.collapse} 200ms ease-out` : undefined
+      }
       onAnimationEnd={handleAnimationEnd}
       onAnimationStart={handleAnimationStart}
       {...elemProps}
@@ -202,11 +190,22 @@ const SidePanel = ({
       >
         {children}
       </SidePanelContext.Provider>
-    </Panel>
+    </StyledPanel>
   );
 };
 
-export type ToggleButtonProps = Omit<IconButtonProps, 'aria-label'>;
+export type ToggleButtonProps = IconButtonProps & {
+  /**
+   * The tooltip text to expand the side panel
+   * @default 'Expand'
+   */
+  tooltipTextExpand?: string;
+  /**
+   * The tooltip text to collapse the side panel
+   * @default 'Collapse'
+   */
+  tooltipTextCollapse?: string;
+};
 
 /**
  * A toggle button styled specifically for the side panel container.
@@ -214,6 +213,8 @@ export type ToggleButtonProps = Omit<IconButtonProps, 'aria-label'>;
 const ToggleButton = ({
   variant = 'plain',
   icon = transformationImportIcon,
+  tooltipTextExpand: expandLabel = 'Expand',
+  tooltipTextCollapse: collapseLabel = 'Collapse',
   ...rest
 }: ToggleButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>) => {
   const context = React.useContext(SidePanelContext);
@@ -243,8 +244,11 @@ const ToggleButton = ({
         : `scaleX(${rtlOrigin === 'left' ? '-1' : '1'})`,
   });
 
-  // @ts-ignore aria-label type error here. The user will decide to use aria-label or aria-labelledby
-  return <IconButton type="button" css={buttonStyle} icon={icon} variant={variant} {...rest} />;
+  return (
+    <Tooltip title={context.state === 'collapsed' ? expandLabel : collapseLabel} type="muted">
+      <IconButton type="button" css={buttonStyle} icon={icon} variant={variant} {...rest} />
+    </Tooltip>
+  );
 };
 
 SidePanel.ToggleButton = ToggleButton;

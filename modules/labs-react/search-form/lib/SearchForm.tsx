@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {CSSObject} from '@emotion/core';
+import {CSSObject} from '@emotion/styled';
 import {colors, space, spaceNumbers} from '@workday/canvas-kit-react/tokens';
 import {GrowthBehavior, styled, generateUniqueId} from '@workday/canvas-kit-react/common';
 import {IconButton, IconButtonProps} from '@workday/canvas-kit-react/button';
@@ -8,7 +8,7 @@ import {FormField, FormFieldLabelPosition} from '@workday/canvas-kit-react/form-
 import {Combobox} from '@workday/canvas-kit-labs-react/combobox';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {MenuItemProps} from '@workday/canvas-kit-preview-react/menu';
-import {SearchThemeAttributes, searchThemes, SearchTheme} from './themes';
+import {searchThemes, SearchTheme, SearchThemeAttributes} from './themes';
 import chroma from 'chroma-js';
 
 export interface SearchFormProps extends GrowthBehavior, React.FormHTMLAttributes<HTMLFormElement> {
@@ -330,7 +330,7 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
     if (this.props.isCollapsed && this.state.showForm) {
       background = formCollapsedBackground;
     }
-    const isDarkBackground = chroma(background).get('lab.l') < 70;
+    const isDarkBackground = chroma(background as string).get('lab.l') < 70;
     return isDarkBackground ? 'inverse' : 'plain';
   };
 

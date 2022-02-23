@@ -16,7 +16,7 @@ import {
   useLocalRef,
   useMount,
 } from '@workday/canvas-kit-react/common';
-import {Box} from '@workday/canvas-kit-labs-react/common';
+import {Box, StackProps} from '@workday/canvas-kit-react/layout';
 import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {useListRegisterItem} from './list';
@@ -26,7 +26,6 @@ import {useOverflowMeasureItem} from './overflow';
 
 import {TabsModelContext} from './Tabs';
 import {TabsModel} from './useTabsModel';
-import {StackProps} from '@workday/canvas-kit-labs-react/layout';
 export interface TabsItemProps
   extends ExtractProps<typeof Box, never>,
     Partial<Pick<StackProps, 'spacing'>> {
@@ -205,7 +204,7 @@ export const TabsItem = createComponent('button')({
       props.ref = elementRef;
       // eslint-disable-next-line react-hooks/rules-of-hooks
       useMount(() => {
-        if (localRef.current.querySelector('svg') && !props.hasIcon) {
+        if (localRef?.current?.querySelector('svg') && !props.hasIcon) {
           console.warn(
             `A Tabs.Item with an icon should have the 'hasIcon' prop set to true. This ensures correct rendering`
           );

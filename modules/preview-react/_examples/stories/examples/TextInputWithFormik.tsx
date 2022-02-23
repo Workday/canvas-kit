@@ -4,7 +4,7 @@ import {useFormik} from 'formik';
 import * as yup from 'yup';
 
 import {TextInput} from '@workday/canvas-kit-preview-react/text-input';
-import {HStack, VStack} from '@workday/canvas-kit-labs-react/layout';
+import {HStack, VStack} from '@workday/canvas-kit-react/layout';
 import {IconButton, PrimaryButton} from '@workday/canvas-kit-react/button';
 import {visibleIcon, invisibleIcon} from '@workday/canvas-system-icons-web';
 import {useUniqueId} from '@workday/canvas-kit-react/common';

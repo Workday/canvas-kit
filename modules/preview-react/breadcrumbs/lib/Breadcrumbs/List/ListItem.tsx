@@ -1,25 +1,19 @@
-/** @jsx jsx */
 import React from 'react';
-import {css, jsx} from '@emotion/core';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {chevronLeftSmallIcon, chevronRightSmallIcon} from '@workday/canvas-system-icons-web';
 import {colors} from '@workday/canvas-kit-react/tokens';
 
 import {useRTL} from '../hooks';
+import {Flex} from '@workday/canvas-kit-react/layout';
 
 export type ListItemProps = React.HTMLAttributes<HTMLLIElement>;
-
-const breadcrumbItemStyles = css({
-  display: `flex`,
-  alignItems: `center`,
-});
 
 export const BreadcrumbsListItem = ({children, ...props}: ListItemProps) => {
   const {shouldUseRTL} = useRTL();
   const icon = shouldUseRTL ? chevronLeftSmallIcon : chevronRightSmallIcon;
 
   return (
-    <li css={breadcrumbItemStyles} {...props}>
+    <Flex as="li" alignItems="center" {...props}>
       {children}
       <SystemIcon
         icon={icon}
@@ -27,6 +21,6 @@ export const BreadcrumbsListItem = ({children, ...props}: ListItemProps) => {
         colorHover={colors.licorice200}
         aria-hidden
       />
-    </li>
+    </Flex>
   );
 };

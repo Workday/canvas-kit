@@ -8,7 +8,7 @@ import {
   FormFieldModelContext,
 } from '@workday/canvas-kit-preview-react/form-field';
 import {useModelContext} from '@workday/canvas-kit-react/common';
-import {Stack} from '@workday/canvas-kit-labs-react/layout';
+import {Stack} from '@workday/canvas-kit-react/layout';
 
 const Label = ({model, children}) => {
   const localModel = useModelContext(FormFieldModelContext, model);
