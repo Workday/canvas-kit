@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v6.5.0](https://github.com/Workday/canvas-kit/releases/tag/v6.5.0) (2022-02-23)
+
+### Components
+
+- feat(search-form): Allow onSubmit when input is empty ([#1439](https://github.com/Workday/canvas-kit/pull/1439)) ([@sophiasun311](https://github.com/sophiasun311))
+- feat(BrandAssets): Add alt property to Workday logos. ([#1446](https://github.com/Workday/canvas-kit/pull/1446)) ([@renato-rossi](https://github.com/renato-rossi))
+
+
 ## [v6.4.6](https://github.com/Workday/canvas-kit/releases/tag/v6.4.6) (2022-02-23)
 
 ### Components
