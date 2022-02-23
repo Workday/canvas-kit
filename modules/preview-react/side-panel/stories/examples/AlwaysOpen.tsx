@@ -19,7 +19,7 @@ export const AlwaysOpen = () => {
   return (
     <Flex height={320}>
       <SidePanel {...panelProps}>
-        <Flex alignItems="center" paddingY="s" paddingX="xs">
+        <Flex alignItems="center" paddingY="s" paddingX="s">
           <AccentIcon css={iconStyles} icon={rocketIcon} />
           <h3
             css={{

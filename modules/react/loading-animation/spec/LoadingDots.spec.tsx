@@ -1,12 +1,12 @@
 import * as React from 'react';
-import {mount} from 'enzyme';
+import {render} from '@testing-library/react';
+
 import LoadingDots from '../lib/LoadingDots';
 
 describe('LoadingDots', () => {
-  test('LoadingDots should spread extra props', () => {
-    const component = mount(<LoadingDots data-propspread="test" />);
-    const container = component.at(0).getDOMNode();
-    expect(container.getAttribute('data-propspread')).toBe('test');
-    component.unmount();
+  it('should spread extra props to container', () => {
+    const {container} = render(<LoadingDots data-propspread="test" />);
+
+    expect(container.firstChild).toHaveAttribute('data-propspread', 'test');
   });
 });

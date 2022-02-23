@@ -1,16 +1,13 @@
-/// <reference path="../../../../typings.d.ts" />
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
-import withReadme from 'storybook-readme/with-readme';
 
 import {Card} from '@workday/canvas-kit-react/card';
 
 import Layout from '../index';
-import README from '../README.md';
 
 storiesOf('Components/Containers/Layout/React', module)
   .addParameters({component: Layout})
-  .addDecorator(withReadme(README))
+  .addParameters({ReadmePath: 'react/layout'})
   .add('Page Layout', () => (
     <div className="story">
       <h3>Full Page</h3>

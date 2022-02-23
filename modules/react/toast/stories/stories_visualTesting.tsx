@@ -2,7 +2,6 @@ import React from 'react';
 
 import {colors} from '@workday/canvas-kit-react/tokens';
 import {ContentDirection, StaticStates} from '@workday/canvas-kit-react/common';
-import {action} from '@storybook/addon-actions';
 import {exclamationCircleIcon} from '@workday/canvas-system-icons-web';
 import {Toast} from '@workday/canvas-kit-react/toast';
 
@@ -24,11 +23,11 @@ const ToastStates = ({direction = ContentDirection.LTR}) => (
           label: 'Custom Icon Color',
           props: {icon: exclamationCircleIcon, iconColor: colors.cinnamon500},
         },
-        {label: 'On Close', props: {onClose: action('close button clicked')}},
+        {label: 'On Close', props: {onClose: () => console.log('close button clicked')}},
         {
           label: 'With Action Link',
           props: {
-            onActionClick: action('action button clicked'),
+            onActionClick: () => console.log('action button clicked'),
             actionText: 'View More Details',
           },
         },
@@ -36,7 +35,7 @@ const ToastStates = ({direction = ContentDirection.LTR}) => (
           label: 'With Action Link and Multiple Lines',
           props: {
             children: 'Your workbook was successfully processed. Congratulation!',
-            onActionClick: action('action button clicked'),
+            onActionClick: () => console.log('action button clicked'),
             actionText: 'View More Details',
           },
         },

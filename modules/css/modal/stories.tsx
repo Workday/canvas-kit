@@ -1,7 +1,5 @@
 import React from 'react';
 import {storiesOf} from '@storybook/react';
-import withReadme from 'storybook-readme/with-readme';
-import README from './README.md';
 import '@workday/canvas-kit-css-button/index.scss';
 import './index.scss';
 // @ts-ignore
@@ -103,7 +101,7 @@ class ModalWrapper extends React.Component<{}, ModalWrapperState> {
 }
 
 storiesOf('Components/Popups/Modal/CSS', module)
-  .addDecorator(withReadme(README))
+  .addParameters({ReadmePath: 'css/modal'})
   .add('Default', () => (
     <div className="story">
       <h1 className="section-label">Modal</h1>
