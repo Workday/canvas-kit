@@ -260,7 +260,6 @@ export const getPaddingStyles = (
   children: React.ReactNode,
   size: ButtonSizes | TertiaryButtonSizes
 ) => {
-  console.warn('in here', size, children);
   switch (size) {
     case 'large':
       return children ? `0 ${space.l}` : 0;
