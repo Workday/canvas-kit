@@ -12,7 +12,6 @@ import {borderRadius, colors, space} from '@workday/canvas-kit-react/tokens';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {ButtonColors, IconPositionsNew, ButtonSizes} from './types';
 import {Button} from './Button';
-import {getMinWidthStyles} from './parts/ButtonContainerNew';
 
 export interface TertiaryButtonNewProps extends Themeable {
   /**
@@ -64,7 +63,7 @@ const getTertiaryButtonNewColors = (
     return {
       default: {
         background: 'transparent',
-        icon: children ? colors.frenchVanilla100 : colors.blackPepper400,
+        icon: colors.frenchVanilla100,
         label: colors.frenchVanilla100,
       },
       hover: {
@@ -110,16 +109,16 @@ const getTertiaryButtonNewColors = (
       },
       active: {
         background: colors.soap300,
-        icon: themePrimary.dark,
+        icon: children ? themePrimary.dark : colors.blackPepper400,
         label: themePrimary.dark,
       },
       focus: {
-        icon: themePrimary.dark,
+        icon: children ? themePrimary.dark : colors.blackPepper400,
         label: themePrimary.dark,
         focusRing: focusRing({}, theme),
       },
       disabled: {
-        icon: themePrimary.main,
+        icon: children ? themePrimary.dark : colors.blackPepper400,
         label: themePrimary.main,
       },
     };
@@ -162,6 +161,25 @@ const getPaddingStyles = (
   }
 };
 
+const getMinWidthStyles = (children: React.ReactNode, size: ButtonSizes): string => {
+  if (children) {
+    return 'auto';
+  } else {
+    switch (size) {
+      case 'large':
+        return children ? '112px' : '48px';
+      case 'medium':
+        return children ? '96px' : space.xl;
+      case 'small':
+        return children ? space.xxxl : space.l;
+      case 'extraSmall':
+        return children ? 'auto' : space.m;
+      default:
+        return children ? '96px' : space.xl;
+    }
+  }
+};
+
 export const TertiaryButtonNew = createComponent('button')({
   displayName: 'TertiaryButtonNew',
   Component: (
@@ -185,6 +203,7 @@ export const TertiaryButtonNew = createComponent('button')({
       <StyledTertiaryButtonContainer
         ref={ref}
         as={Element}
+        allCaps={allCaps}
         colors={getTertiaryButtonNewColors(variant, theme, children)}
         size={size}
         padding={getPaddingStyles(icon, iconPosition, children)}
