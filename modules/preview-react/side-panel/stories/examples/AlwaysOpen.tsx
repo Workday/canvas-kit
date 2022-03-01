@@ -22,7 +22,7 @@ export const AlwaysOpen = () => {
   return (
     <HStack spacing="s" height={320}>
       <SidePanel {...panelProps}>
-        <Flex alignItems="center" paddingY="s" paddingX="xs">
+        <Flex alignItems="center" paddingY="s" paddingX="s">
           <StyledAccentIcon icon={rocketIcon} />
           <StyledHeader {...labelProps}>Tasks Panel</StyledHeader>
         </Flex>

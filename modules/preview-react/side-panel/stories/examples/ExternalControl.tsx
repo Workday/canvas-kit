@@ -32,7 +32,7 @@ export const ExternalControl = () => {
         onStateTransition={setPanelState}
       >
         {panelState === 'expanded' && (
-          <Flex alignItems="center" paddingY="s" paddingX="xs">
+          <Flex alignItems="center" paddingY="s" paddingX="s">
             <StyledHeader {...labelProps}>Tasks Panel</StyledHeader>
           </Flex>
         )}

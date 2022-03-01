@@ -30,7 +30,7 @@ export const AlternatePanel = () => {
         <SidePanel {...panelProps} onStateTransition={setPanelState} variant="alternate">
           <SidePanel.ToggleButton {...controlProps} />
           {panelState === 'expanded' && (
-            <Flex alignItems="center" paddingY="s" paddingX="xs">
+            <Flex alignItems="center" paddingY="s" paddingX="s">
               <StyledHeader {...labelProps}>Alternate Panel</StyledHeader>
             </Flex>
           )}

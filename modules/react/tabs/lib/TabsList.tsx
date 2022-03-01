@@ -47,7 +47,7 @@ export const TabsList = createComponent('div')({
         as={Element}
         position="relative"
         borderBottom={`1px solid ${commonColors.divider}`}
-        marginX="m"
+        paddingX="m"
         spacing="xxxs"
         {...props}
       >

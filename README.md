@@ -86,7 +86,7 @@ inline icons. Process your SASS through PostCSS once it has been compiled to CSS
 
 If you spot a bug, inconsistency, or typo, please
 [open a bug issue](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md).
-Better yet, submit a pull request to addresses it.
+Better yet, submit a pull request to address it.
 
 ## Feature Requests
 
@@ -119,13 +119,13 @@ Each module is independently versioned using [Lerna](https://github.com/lerna/le
 At any given time, we support three major versions of Canvas Kit: previous, current, and next. Each
 of these have different levels of support.
 
-The previous major version is stable for production and will receive patch updates as needed, but there
-will be no new features added. Patch releases are automatically deployed upon merge by GitHub
+The previous major version is stable for production and will receive patch updates as needed, but
+there will be no new features added. Patch releases are automatically deployed upon merge by GitHub
 Actions.
 
-The current major version is also stable and receives new feature and patch updates. Patch releases are
-automatically deployed upon merge by GitHub Actions, and minor releases are manually deployed at the
-end of each sprint.
+The current major version is also stable and receives new feature and patch updates. Patch releases
+are automatically deployed upon merge by GitHub Actions, and minor releases are manually deployed at
+the end of each sprint.
 
 The next major version is typically an unstable environment and has major breaking changes. You are
 welcome to pull this version down for local development and experimentation, but we generally

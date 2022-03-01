@@ -32,7 +32,7 @@ const RightPanel = () => {
     <StyledSidePanel {...panelProps} onStateTransition={setPanelState} origin="right">
       <SidePanel.ToggleButton {...controlProps} />
       {panelState === 'expanded' && (
-        <Flex alignItems="center" justifyContent="flex-end" paddingY="s" paddingX="xs">
+        <Flex alignItems="center" justifyContent="flex-end" paddingY="s" paddingX="s">
           <StyledHeader {...labelProps}>Tasks Panel</StyledHeader>
         </Flex>
       )}
