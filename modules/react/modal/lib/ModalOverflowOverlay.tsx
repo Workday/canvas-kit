@@ -17,7 +17,7 @@ export const ModalOverflowOverlay = createComponent('div')({
     Element
   ) => {
     return (
-      <StyledOverlay as={Element} ref={ref} overflow="auto" {...elemProps}>
+      <StyledOverlay as={Element} ref={ref} overflowY="hidden auto" {...elemProps}>
         {children}
       </StyledOverlay>
     );
