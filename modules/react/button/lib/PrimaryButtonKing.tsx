@@ -59,7 +59,7 @@ const getPrimaryButtonColorsNew = (variant: 'inverse' | undefined, theme: Emotio
           labelData: colors.blackPepper500,
         },
         active: {
-          background: colors.soap300,
+          background: colors.soap400,
           icon: colors.blackPepper500,
           label: colors.blackPepper500,
           labelData: colors.blackPepper500,

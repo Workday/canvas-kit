@@ -99,8 +99,8 @@ const getTertiaryButtonNewColors = (
   } else {
     return {
       default: {
-        icon: children ? themePrimary.main : colors.blackPepper400,
-        label: themePrimary.main,
+        icon: children ? themePrimary.dark : colors.blackPepper400,
+        label: themePrimary.dark,
       },
       hover: {
         background: colors.soap200,
@@ -119,7 +119,7 @@ const getTertiaryButtonNewColors = (
       },
       disabled: {
         icon: children ? themePrimary.dark : colors.blackPepper400,
-        label: themePrimary.main,
+        label: themePrimary.dark,
       },
     };
   }
@@ -148,11 +148,11 @@ const getPaddingStyles = (
   if (children) {
     // if there is an icon on the left, add 4px extra padding to the right for visual balance
     if (icon && iconPosition === 'start') {
-      return `0 ${space.xs} 0 ${space.xxs}`;
+      return `0 ${space.xxs} 0 ${space.xs}`;
     }
     // if there is an icon on the right, add 4px extra padding to the left for visual balance
     if (icon && iconPosition === 'end') {
-      return `0 ${space.xxs} 0 ${space.xs}`;
+      return `0 ${space.xs} 0 ${space.xxs}`;
     }
     // if there is no icon, return the default padding
     return `0 ${space.xxs}`;

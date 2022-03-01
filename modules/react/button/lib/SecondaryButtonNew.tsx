@@ -170,22 +170,22 @@ export const getSecondaryButtonNewColors = (
         hover: {
           background: colors.soap300,
           border: colors.soap300,
-          icon: colors.blackPepper400,
-          label: colors.blackPepper400,
-          labelData: colors.blackPepper400,
+          icon: colors.blackPepper500,
+          label: colors.blackPepper500,
+          labelData: colors.blackPepper500,
         },
         active: {
           background: colors.soap400,
           border: colors.soap400,
-          icon: colors.blackPepper400,
-          label: colors.blackPepper400,
-          labelData: colors.blackPepper400,
+          icon: colors.blackPepper500,
+          label: colors.blackPepper500,
+          labelData: colors.blackPepper500,
         },
         focus: {
           background: colors.frenchVanilla100,
-          icon: colors.blackPepper400,
-          label: colors.blackPepper400,
-          labelData: colors.blackPepper400,
+          icon: colors.blackPepper500,
+          label: colors.blackPepper500,
+          labelData: colors.blackPepper500,
           focusRing: focusRing(
             {
               separation: 2,
