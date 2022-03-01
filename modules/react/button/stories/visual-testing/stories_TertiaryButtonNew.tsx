@@ -28,6 +28,7 @@ export const TertiaryButtonNewStates = (props: {theme?: PartialEmotionCanvasThem
             {value: 'extraSmall', label: 'Extra Small'},
             {value: 'small', label: 'Small'},
             {value: 'medium', label: 'Medium'},
+            {value: 'large', label: 'Large'},
           ],
           icon: [
             {value: undefined, label: ''},

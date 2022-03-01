@@ -10,6 +10,7 @@ any questions about the update.
 
 - [Codemod](#codemod)
 - [Component Deprecations](#component-deprecations)
+- [Buttons](#buttons)
 - [ActionBar Component Updates](#actionbar-component-updates)
 - [Status Indicator Width](#status-indicator-width)
 - [Popup Cards](popup-cards)
@@ -105,6 +106,47 @@ word.
 ```tsx
 <StatusIndicator label="Slightly Longer Status" type={StatusIndicator.Type.Gray} maxWidth={250} />
 ```
+
+## Buttons
+
+As part of our efforts to decrease variants and consolidate APIs, we've combined `IconButton` with
+our `PrimaryButton`, `SecondaryButton` and `TertiaryButton`. \_
+
+Note\_: In order to render a icon button, omit any `children` and pass the button an `icon`.
+
+Example
+
+v6
+
+```tsx
+<IconButton variant="circleFilled" icon={plusIcon} />
+```
+
+v7
+
+```tsx
+<SecondaryButton icon={plusIcon} />
+```
+
+This will render an icon button that is styled like our secondary buttons.
+
+### Button Mapping
+
+Below is a mapping of `IconButtons` to their respective buttons
+
+| IconButton variant | Button Type                          |
+| ------------------ | ------------------------------------ |
+| `circle`           | TertiaryButton                       |
+| `circleFilled`     | SecondaryButton                      |
+| `inverse`          | TertiButton with variant inverse     |
+| `inverseFilled`    | SeoncdaryButton with variant inverse |
+| `plain`            | Not Supporting                       |
+| `square`           | Not Supporting                       |
+| `squareFilled`     | Not Supporting                       |
+
+### Button sizes
+
+Each button now supports sizes: `extraSmall`, `small`, `medium` and `large`
 
 ## Popup Cards
 
