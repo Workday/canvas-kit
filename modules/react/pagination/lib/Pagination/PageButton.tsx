@@ -1,23 +1,21 @@
 import * as React from 'react';
 import {styled} from '@workday/canvas-kit-react/common';
-import canvas, {colors, type} from '@workday/canvas-kit-react/tokens';
-// import {TertiaryButtonNewProps} from '@workday/canvas-kit-react/button';
+import {borderRadius, colors, space} from '@workday/canvas-kit-react/tokens';
 import {Button} from '../../../button/lib/Button';
 
 import {PaginationModel} from './types';
 
-const toggledStyles = {
-  color: canvas.colors.frenchVanilla100,
-  fontWeight: 700,
-  pointerEvents: 'none',
-};
-
 const StyledPageButton = styled(Button)<{toggled?: boolean}>(
   {
-    ...type.levels.subtext.large,
+    minWidth: space.l,
+    width: space.l,
+    borderRadius: borderRadius.circle,
+    height: space.l,
   },
   ({toggled}) => {
-    return toggled ? toggledStyles : {};
+    return {
+      fontWeight: toggled ? 700 : 'normal',
+    };
   }
 );
 
@@ -25,20 +23,22 @@ const getPaginationButtonColors = (toggled: boolean) => {
   return {
     default: {
       background: toggled ? colors.blueberry400 : 'transparent',
-      icon: colors.frenchVanilla100,
-      label: toggled ? colors.frenchVanilla400 : colors.blackPepper400,
+      label: toggled ? colors.frenchVanilla100 : colors.blackPepper400,
     },
     hover: {
-      background: toggled ? colors.blueberry400 : colors.soap400,
+      background: toggled ? colors.blueberry400 : colors.soap300,
+      label: toggled ? colors.frenchVanilla100 : colors.blackPepper400,
     },
     active: {
       background: toggled ? colors.blueberry400 : 'transparent',
+      label: toggled ? colors.frenchVanilla100 : colors.blackPepper400,
     },
     focus: {
       background: toggled ? colors.blueberry400 : 'transparent',
+      label: toggled ? colors.frenchVanilla100 : colors.blackPepper400,
     },
     disabled: {
-      background: 'grey',
+      background: colors.licorice100,
     },
   };
 };
@@ -68,7 +68,7 @@ export const PageButton = ({
       colors={getPaginationButtonColors(isCurrentPage)}
       aria-pressed={undefined}
       onClick={handleClick}
-      size="small"
+      toggled={isCurrentPage}
       {...elemProps}
     >
       {children || pageNumber}
