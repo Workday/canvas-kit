@@ -1,11 +1,10 @@
 import React from 'react';
-import {IconButton, IconButtonProps} from '@workday/canvas-kit-react/button';
+import {TertiaryButtonNew, TertiaryButtonNewProps} from '@workday/canvas-kit-react/button';
 import {relatedActionsIcon} from '@workday/canvas-system-icons-web';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {colors} from '@workday/canvas-kit-react/tokens';
 import {createComponent} from '@workday/canvas-kit-react/common';
 
-export interface DropdownButtonProps extends IconButtonProps {
+export interface DropdownButtonProps extends TertiaryButtonNewProps {
   /**
    * The accessibility label for the button
    */
@@ -22,19 +21,19 @@ export interface DropdownButtonProps extends IconButtonProps {
   toggled: boolean;
 }
 
-export const DropdownButton = createComponent(IconButton)({
+export const DropdownButton = createComponent(TertiaryButtonNew)({
   displayName: 'DropdownButton',
   Component: (
     {
       buttonIcon = relatedActionsIcon,
+      variant = undefined,
       toggled,
-      variant = 'plain',
       ...elemProps
     }: DropdownButtonProps,
     ref,
     Element
   ) => {
-    const hasPlainVariant = variant === 'plain';
+    const hasPlainVariant = variant === undefined;
 
     return (
       <Element
@@ -43,9 +42,7 @@ export const DropdownButton = createComponent(IconButton)({
         style={hasPlainVariant ? {margin: '0 1px'} : {}}
         variant={variant}
         icon={buttonIcon}
-        color={colors.licorice200}
-        toggled={toggled}
-        aria-pressed={undefined} // removing aria-pressed from IconButton and opting for aria-expanded
+        aria-pressed={undefined} // removing aria-pressed from button and opting for aria-expanded
         aria-expanded={toggled}
         aria-haspopup
         aria-controls="menu"

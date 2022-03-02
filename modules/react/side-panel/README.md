@@ -15,7 +15,7 @@ yarn add @workday/canvas-kit-react
 
 ```tsx
 import * as React from 'react';
-import {SecondaryButton, IconButton} from '@workday/canvas-kit-react/button';
+import {SecondaryButton, TertiaryButtonNew} from '@workday/canvas-kit-react/button';
 import SidePanel from '@workday/canvas-kit-react/side-panel';
 
 interface SidePanelState {
@@ -41,9 +41,9 @@ class SidePanelExample extends React.Component<{}, SidePanelState> {
         {open ? (
           <SecondaryButton variant="primary">Add New</SecondaryButton>
         ) : (
-          <IconButton size="small" variant="filled">
+          <TertiaryButtonNew size="small" variant="filled">
             <SystemIcon icon={plusIcon} />
-          </IconButton>
+          </TertiaryButtonNew>
         )}
         <ul>
           <li css={listItemStyles}>{open && <span>Home</span>}</li>

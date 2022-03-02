@@ -13,7 +13,12 @@ import styled from '@emotion/styled';
 
 import {colors, type, space, depth} from '@workday/canvas-kit-react/tokens';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
-import {IconButton, PrimaryButton, Hyperlink} from '@workday/canvas-kit-react/button';
+import {
+  TertiaryButtonNew,
+  PrimaryButton,
+  Hyperlink,
+  SecondaryButtonNew,
+} from '@workday/canvas-kit-react/button';
 import {SidePanel} from '@workday/canvas-kit-react/side-panel';
 import {SidePanelProps} from '../lib/SidePanel';
 
@@ -86,7 +91,7 @@ const UnorderedList = styled('ul')({
   paddingLeft: 0,
 });
 
-const AddButton = styled(IconButton)({
+const AddButton = styled(SecondaryButtonNew)({
   margin: '0 auto',
   display: 'block',
 });
@@ -148,7 +153,7 @@ class SidePanelWrapper extends React.Component<SidePanelProps, SidePanelState> {
         {open ? (
           <PrimaryButton>Add New</PrimaryButton>
         ) : (
-          <AddButton toggled={false} size="small" variant="circleFilled" aria-label="Add">
+          <AddButton toggled={false} size="small" aria-label="Add">
             <SystemIcon icon={plusIcon} />
           </AddButton>
         )}
@@ -221,7 +226,7 @@ const Template = props => (
   <div style={{height: '67vh', position: 'relative'}}>
     <GlobalHeader>
       <GlobalHeader.Item>
-        <IconButton aria-label="menu" icon={justifyIcon} />
+        <TertiaryButtonNew aria-label="menu" icon={justifyIcon} />
         <Hyperlink>
           <WorkdayLogo dangerouslySetInnerHTML={{__html: dubLogoBlue}} />
         </Hyperlink>
@@ -230,9 +235,9 @@ const Template = props => (
         <SearchForm onSubmit={() => 1} />
       </GlobalHeader.Item>
       <GlobalHeader.Item>
-        <IconButton aria-label="messages" icon={assistantIcon} />
-        <IconButton aria-label="notifications" icon={notificationsIcon} />
-        <IconButton aria-label="inbox" icon={inboxIcon} />
+        <TertiaryButtonNew aria-label="messages" icon={assistantIcon} />
+        <TertiaryButtonNew aria-label="notifications" icon={notificationsIcon} />
+        <TertiaryButtonNew aria-label="inbox" icon={inboxIcon} />
         <Avatar size={Avatar.Size.m} variant={Avatar.Variant.Light} />
       </GlobalHeader.Item>
     </GlobalHeader>

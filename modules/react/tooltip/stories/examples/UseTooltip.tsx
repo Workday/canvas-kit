@@ -2,7 +2,7 @@ import React from 'react';
 
 import {Popper} from '@workday/canvas-kit-react/popup';
 import {xIcon} from '@workday/canvas-system-icons-web';
-import {IconButton} from '@workday/canvas-kit-react/button';
+import {TertiaryButtonNew} from '@workday/canvas-kit-react/button';
 import {TooltipContainer, useTooltip} from '@workday/canvas-kit-react/tooltip';
 
 export const UseTooltip = () => {
@@ -10,7 +10,7 @@ export const UseTooltip = () => {
 
   return (
     <>
-      <IconButton variant="circle" icon={xIcon} {...targetProps} aria-label="Close" />
+      <TertiaryButtonNew icon={xIcon} {...targetProps} aria-label="Close" />
       <Popper placement="top" {...popperProps}>
         <TooltipContainer {...tooltipProps}>Close</TooltipContainer>
       </Popper>

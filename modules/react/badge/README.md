@@ -32,15 +32,14 @@ const AccessibleHide = styled('div')({
 
 ...
 
-<IconButton
+<TertiaryButtonNew
   style={{ position: "relative" }}
   aria-label={`Alerts ${count} new notifications`}
   size="medium"
-  variant="circle"
 >
   <SystemIcon icon={notificationsIcon} aria-hidden="true" />
   <Badge count={count} aria-hidden="true" />
-</IconButton>
+</TertiaryButtonNew>
 <AccessibleHide role="status" aria-live="polite" aria-atomic="true">
   New notifications
 </AccessibleHide>

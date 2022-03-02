@@ -5,7 +5,7 @@ import * as yup from 'yup';
 
 import {TextInput} from '@workday/canvas-kit-preview-react/text-input';
 import {HStack, VStack} from '@workday/canvas-kit-react/layout';
-import {IconButton, PrimaryButton} from '@workday/canvas-kit-react/button';
+import {TertiaryButtonNew, PrimaryButton} from '@workday/canvas-kit-react/button';
 import {visibleIcon, invisibleIcon} from '@workday/canvas-system-icons-web';
 import {useUniqueId} from '@workday/canvas-kit-react/common';
 
@@ -82,7 +82,7 @@ export const TextInputWithFormik = () => {
               onBlur={formik.handleBlur}
               value={formik.values.password}
             />
-            <IconButton
+            <TertiaryButtonNew
               type="button"
               icon={showPassword ? invisibleIcon : visibleIcon}
               aria-label={showPassword ? 'Hide Password' : 'Show Password'}

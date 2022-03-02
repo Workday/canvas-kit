@@ -2,7 +2,7 @@
 
 Clickable button elements that extend the native `<button>` element with Canvas styling.
 
-For `PrimaryButton`, `SecondaryButton`, `TertiaryButton`, `DeleteButton`, or `IconButton`, view the
+For `PrimaryButton`, `SecondaryButton`, `TertiaryButton` or `DeleteButton`, view the
 [documentation on Storybook](https://workday.github.io/canvas-kit/?path=/docs/components-buttons-button-react--primary).
 
 [> Workday Design Reference](https://design.workday.com/components/buttons/buttons)

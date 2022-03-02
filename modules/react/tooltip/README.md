@@ -2,7 +2,8 @@
 
 A Tooltip component that renders information/text when the user hovers over an element. A tooltip is
 used to label or describe an element. By default, a tooltip will label an element. This is useful
-for IconButtons. A tooltip can also be used to describe additional information about an element
+for TertiaryButtons that render just an icon. A tooltip can also be used to describe additional
+information about an element
 
 [> Workday Design Reference](https://design.workday.com/components/popups/tooltips)
 
@@ -18,12 +19,12 @@ yarn add @workday/canvas-kit-react
 import * as React from 'react';
 
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
-import {IconButton} from '@workday/canvas-kit-react/button';
+import {TertiaryButtonNew} from '@workday/canvas-kit-react/button';
 
 const TooltipExample = () => {
   return (
     <Tooltip title="Close">
-      <IconButton variant="circle" icon={xIcon} aria-label="Close" />
+      <TertiaryButtonNew icon={xIcon} aria-label="Close" />
     </Tooltip>
   );
 };
@@ -60,8 +61,8 @@ const TooltipExample = () => {
 > Determines the tooltip type for accessibility.
 >
 > - `label`: Sets the accessible name for the wrapped element. Use for icons or if tooltip `title`
->   prop is the same as the text content of the wrapped element. E.g. IconButtons or Ellipsis
->   tooltips.
+>   prop is the same as the text content of the wrapped element. E.g. TertiaryButtons that render an
+>   icon or Ellipsis tooltips.
 > - `describe`: Sets `aria-describedby` of the wrapped element. Use if the tooltip has additional
 >   information about the target. **Note**: Assistive technology may ignore `describe` techniques
 >   based on verbosity settings. Consider an alternate way to inform a user of additional important

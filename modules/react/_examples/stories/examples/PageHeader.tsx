@@ -4,7 +4,7 @@ import {createComponent, styled} from '@workday/canvas-kit-react/common';
 import {colors, gradients, space, type} from '@workday/canvas-kit-react/tokens';
 
 import {HStack, HStackProps, StackSpacing} from '@workday/canvas-kit-react/layout';
-import {IconButton} from '@workday/canvas-kit-react/button';
+import {TertiaryButtonNew} from '@workday/canvas-kit-react/button';
 import {justifyIcon, notificationsIcon} from '@workday/canvas-system-icons-web';
 
 interface HeaderItemProps extends Omit<HStackProps, 'spacing'> {
@@ -15,8 +15,8 @@ export const Basic = () => (
   <PageHeader>
     <PageHeader.Title>Page Header</PageHeader.Title>
     <PageHeader.Item>
-      <IconButton aria-label="notifications" icon={notificationsIcon} variant="inverse" />
-      <IconButton aria-label="menu" icon={justifyIcon} variant="inverse" />
+      <TertiaryButtonNew aria-label="notifications" icon={notificationsIcon} variant="inverse" />
+      <TertiaryButtonNew aria-label="menu" icon={justifyIcon} variant="inverse" />
     </PageHeader.Item>
   </PageHeader>
 );

@@ -6,31 +6,35 @@ import {
   deviceTabletIcon,
   percentageIcon,
 } from '@workday/canvas-system-icons-web';
-import {IconButton} from '@workday/canvas-kit-react/button';
+import {TertiaryButtonNew} from '@workday/canvas-kit-react/button';
 import {SegmentedControl} from '@workday/canvas-kit-react/segmented-control';
 
 export const Basic = () => {
   const [value, setValue] = React.useState<string | number>();
   const handleToggle = (selectedValue: string | number) => {
+    console.warn(selectedValue);
+
     setValue(selectedValue);
   };
 
   return (
     <SegmentedControl value={value} onChange={handleToggle}>
-      <IconButton
+      <SegmentedControl.Button
         icon={listViewIcon}
         value="list-view"
-        aria-label="List View"
-        onClick={e => console.log('Existing IconButton onClick callback')}
+        onClick={e => console.log('Existing TertiaryButtonNew onClick callback')}
       />
-      <IconButton
-        icon={worksheetsIcon}
-        value="table-view"
-        aria-label="Table View"
-        disabled={true}
+      <SegmentedControl.Button icon={worksheetsIcon} value="table-view" disabled={true} />
+      <SegmentedControl.Button
+        icon={deviceTabletIcon}
+        value="device-view"
+        aria-label="Device View"
       />
-      <IconButton icon={deviceTabletIcon} value="device-view" aria-label="Device View" />
-      <IconButton icon={percentageIcon} value="percent-view" aria-label="Percent View" />
+      <SegmentedControl.Button
+        icon={percentageIcon}
+        value="percent-view"
+        aria-label="Percent View"
+      />
     </SegmentedControl>
   );
 };

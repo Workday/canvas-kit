@@ -1,14 +1,15 @@
 import * as React from 'react';
 import {borderRadius, colors} from '@workday/canvas-kit-react/tokens';
-import {IconButton, IconButtonProps} from '@workday/canvas-kit-react/button';
-import {mouseFocusBehavior, styled} from '@workday/canvas-kit-react/common';
+// import {IconButton, IconButtonProps} from '@workday/canvas-kit-react/button';
+import {createComponent, mouseFocusBehavior, styled} from '@workday/canvas-kit-react/common';
+import {SegmentedControlButton, SegmentedControlButtonProps} from './SegmentedControlButton';
 
 export interface SegmentedControlProps {
   /**
    * The IconButton children of the SegmentedControl (must be at least two).
    * TODO: Add support for text children
    */
-  children: React.ReactElement<IconButtonProps>[];
+  children: React.ReactElement<SegmentedControlButtonProps>[];
 
   /**
    * The value or index of the IconButton that the SegmentedControl should be toggled on to.
@@ -26,53 +27,53 @@ export interface SegmentedControlProps {
   onChange?: (value: string | number) => void;
 }
 
-const SegmentedControlContainer = styled('div')(
-  {
-    '& button': {
-      borderRadius: borderRadius.zero,
-      border: `1px solid ${colors.soap500}`,
-      borderLeft: 'none',
-      '&[aria-pressed="true"]': {
-        borderColor: colors.blueberry400,
-        '&:hover, &:focus:hover': {
-          background: colors.blueberry400,
-        },
-      },
-      '&:first-of-type': {
-        borderRadius: `${borderRadius.m} 0 0 ${borderRadius.m}`,
-        borderLeft: `1px solid ${colors.soap500}`,
-      },
-      '&:last-of-type': {
-        borderRadius: `0 ${borderRadius.m} ${borderRadius.m} 0`,
-      },
-      '&:focus': {
-        borderRadius: borderRadius.m,
-        zIndex: 1,
-        animation: 'none', // reset focusRing animation
-        transition: 'all 120ms, border-radius 1ms',
-        ...mouseFocusBehavior({
-          '&': {
-            borderRadius: borderRadius.zero,
-            '&:first-of-type': {
-              borderRadius: `${borderRadius.m} 0 0 ${borderRadius.m}`,
-            },
-            '&:last-of-type': {
-              borderRadius: `0 ${borderRadius.m} ${borderRadius.m} 0`,
-            },
-          },
-        }),
-      },
-    },
-  },
-  ({theme}) => ({
-    '& button[aria-pressed="true"]': {
-      borderColor: theme.canvas.palette.primary.main,
-      '&:hover, &:focus:hover': {
-        background: theme.canvas.palette.primary.main,
-      },
-    },
-  })
-);
+// const SegmentedControlContainer = styled('div')(
+//   {
+//     '& button': {
+//       borderRadius: borderRadius.zero,
+//       border: `1px solid ${colors.soap500}`,
+//       borderLeft: 'none',
+//       '&[aria-pressed="true"]': {
+//         borderColor: colors.blueberry400,
+//         '&:hover, &:focus:hover': {
+//           background: colors.blueberry400,
+//         },
+//       },
+//       '&:first-of-type': {
+//         borderRadius: `${borderRadius.m} 0 0 ${borderRadius.m}`,
+//         borderLeft: `1px solid ${colors.soap500}`,
+//       },
+//       '&:last-of-type': {
+//         borderRadius: `0 ${borderRadius.m} ${borderRadius.m} 0`,
+//       },
+//       '&:focus': {
+//         borderRadius: borderRadius.m,
+//         zIndex: 1,
+//         animation: 'none', // reset focusRing animation
+//         transition: 'all 120ms, border-radius 1ms',
+//         ...mouseFocusBehavior({
+//           '&': {
+//             borderRadius: borderRadius.zero,
+//             '&:first-of-type': {
+//               borderRadius: `${borderRadius.m} 0 0 ${borderRadius.m}`,
+//             },
+//             '&:last-of-type': {
+//               borderRadius: `0 ${borderRadius.m} ${borderRadius.m} 0`,
+//             },
+//           },
+//         }),
+//       },
+//     },
+//   },
+//   ({theme}) => ({
+//     '& button[aria-pressed="true"]': {
+//       borderColor: theme.canvas.palette.primary.main,
+//       '&:hover, &:focus:hover': {
+//         background: theme.canvas.palette.primary.main,
+//       },
+//     },
+//   })
+// );
 
 const onButtonClick = (
   existingOnClick: ((e: React.MouseEvent<HTMLButtonElement>) => void) | undefined,
@@ -94,28 +95,35 @@ const onButtonClick = (
   }
 };
 
-const SegmentedControl = ({value = 0, children, onChange, ...elemProps}: SegmentedControlProps) => (
-  <SegmentedControlContainer {...elemProps}>
-    {React.Children.map(
-      children,
-      (
-        child: React.ReactElement<
-          IconButtonProps & {onClick?: React.MouseEventHandler<HTMLButtonElement>} // IconButton will have correct props
-        >,
-        index: number
-      ) => {
-        if (typeof child.type === typeof IconButton) {
-          return React.cloneElement(child, {
-            toggled: typeof value === 'number' ? index === value : child.props.value === value,
-            variant: 'squareFilled',
-            onClick: onButtonClick.bind(undefined, child.props.onClick, onChange, index),
-          });
-        }
+export const SegmentedControl = createComponent('div')({
+  displayName: 'SegmentedControl',
+  Component: ({value = 0, children, onChange, ...elemProps}: SegmentedControlProps, ref) => {
+    return (
+      <div {...elemProps}>
+        {React.Children.map(
+          children,
+          (
+            child: React.ReactElement<
+              SegmentedControlButtonProps & {onClick?: React.MouseEventHandler<HTMLButtonElement>} // IconButton will have correct props
+            >,
+            index: number
+          ) => {
+            if (typeof child.type === typeof SegmentedControlButton) {
+              return React.cloneElement(child, {
+                toggled: typeof value === 'number' ? index === value : child.props.value === value,
+                onClick: onButtonClick.bind(undefined, child.props.onClick, onChange, index),
+              });
+            }
 
-        return child;
-      }
-    )}
-  </SegmentedControlContainer>
-);
+            return child;
+          }
+        )}
+      </div>
+    );
+  },
+  subComponents: {
+    Button: SegmentedControlButton,
+  },
+});
 
 export default SegmentedControl;

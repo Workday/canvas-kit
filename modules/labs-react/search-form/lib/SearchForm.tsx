@@ -2,7 +2,7 @@ import * as React from 'react';
 import {CSSObject} from '@emotion/styled';
 import {colors, space, spaceNumbers} from '@workday/canvas-kit-react/tokens';
 import {GrowthBehavior, styled, generateUniqueId} from '@workday/canvas-kit-react/common';
-import {IconButton, IconButtonProps} from '@workday/canvas-kit-react/button';
+import {TertiaryButtonNew, TertiaryButtonNewProps} from '@workday/canvas-kit-react/button';
 import {searchIcon, xIcon} from '@workday/canvas-system-icons-web';
 import {FormField, FormFieldLabelPosition} from '@workday/canvas-kit-react/form-field';
 import {Combobox} from '@workday/canvas-kit-labs-react/combobox';
@@ -169,39 +169,39 @@ const SearchCombobox = styled(Combobox)({
   width: `100%`,
 });
 
-const SearchIcon = styled(IconButton)<Pick<SearchFormProps, 'isCollapsed'> & {isHidden: boolean}>(
-  ({isCollapsed, isHidden}) => {
-    const collapsedSize = 40;
-    const size = 32;
-    const collapseStyles: CSSObject = isCollapsed
-      ? {
-          minWidth: collapsedSize,
-          width: collapsedSize,
-          minHeight: collapsedSize,
-          height: collapsedSize,
-        }
-      : {
-          minWidth: size,
-          width: size,
-          minHeight: size,
-          height: size,
-        };
+const SearchIcon = styled(TertiaryButtonNew)<
+  Pick<SearchFormProps, 'isCollapsed'> & {isHidden: boolean}
+>(({isCollapsed, isHidden}) => {
+  const collapsedSize = 40;
+  const size = 32;
+  const collapseStyles: CSSObject = isCollapsed
+    ? {
+        minWidth: collapsedSize,
+        width: collapsedSize,
+        minHeight: collapsedSize,
+        height: collapsedSize,
+      }
+    : {
+        minWidth: size,
+        width: size,
+        minHeight: size,
+        height: size,
+      };
 
-    return {
-      position: `absolute`,
-      margin: isCollapsed ? `auto ${space.xxs}` : `auto ${space.xxxs}`,
-      top: 0,
-      bottom: 0,
-      left: 0,
-      padding: 0,
-      zIndex: 3,
-      display: isHidden ? 'none' : 'flex',
-      ...collapseStyles,
-    };
-  }
-);
+  return {
+    position: `absolute`,
+    margin: isCollapsed ? `auto ${space.xxs}` : `auto ${space.xxxs}`,
+    top: 0,
+    bottom: 0,
+    left: 0,
+    padding: 0,
+    zIndex: 3,
+    display: isHidden ? 'none' : 'flex',
+    ...collapseStyles,
+  };
+});
 
-const CloseButton = styled(IconButton)<
+const CloseButton = styled(TertiaryButtonNew)<
   Pick<SearchFormProps, 'isCollapsed'> & Pick<SearchFormState, 'showForm'>
 >(({isCollapsed, showForm}) => {
   const collapseStyles: CSSObject =
@@ -325,13 +325,13 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
     return getInputColors(theme, this.state.isFocused);
   };
 
-  getIconButtonType = (): IconButtonProps['variant'] => {
+  getIconButtonType = (): TertiaryButtonNewProps['variant'] => {
     let background = this.getThemeColors().background || `#fff`;
     if (this.props.isCollapsed && this.state.showForm) {
       background = formCollapsedBackground;
     }
     const isDarkBackground = chroma(background as string).get('lab.l') < 70;
-    return isDarkBackground ? 'inverse' : 'plain';
+    return isDarkBackground ? 'inverse' : undefined;
   };
 
   handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
@@ -485,7 +485,6 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
             aria-label={closeButtonAriaLabel}
             icon={xIcon}
             isCollapsed={isCollapsed}
-            variant="plain"
             showForm={this.state.showForm}
             onClick={this.closeCollapsedSearch}
             type="button"
