@@ -112,6 +112,7 @@ export const SegmentedControl = createComponent('div')({
               return React.cloneElement(child, {
                 toggled: typeof value === 'number' ? index === value : child.props.value === value,
                 onClick: onButtonClick.bind(undefined, child.props.onClick, onChange, index),
+                ...child.props,
               });
             }
 

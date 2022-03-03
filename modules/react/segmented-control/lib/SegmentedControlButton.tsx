@@ -91,9 +91,10 @@ export const SegmentedControlButton = createComponent()({
         aria-pressed={toggled}
         value={value}
         colors={getIconButtonColors(toggled)}
+        ref={ref}
         {...props}
       >
-        <Button.Icon size="medium" icon={icon} />
+        <Button.Icon size="large" icon={icon} />
       </StyledButton>
     );
   },

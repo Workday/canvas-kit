@@ -18,8 +18,8 @@ import {IconButton} from '@workday/canvas-kit-react/button';
 import {listViewIcon, worksheetsIcon} from '@workday/canvas-system-icons-web';
 
 <SegmentedControl>
-  <IconButton icon={listViewIcon} aria-label="List View" value="list-view" />
-  <IconButton icon={worksheetsIcon} aria-label="Table view" value="table-view" />
+  <SegmentedControl.Button icon={listViewIcon} aria-label="List View" value="list-view" />
+  <SegmentedControl.Button icon={worksheetsIcon} aria-label="Table view" value="table-view" />
 </SegmentedControl>;
 ```
 
@@ -35,7 +35,7 @@ methods.
 
 ### Required
 
-#### `children: React.ReactElement<IconButton>[]`
+#### `children:React.ReactElement<SegmentedControlButtonProps>[]`
 
 > Icon buttons to toggle between.
 
