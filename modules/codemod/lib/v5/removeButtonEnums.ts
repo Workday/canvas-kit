@@ -237,18 +237,20 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
     return null;
   }
 
-  root.find(j.TSTypeReference, findTypeRename).replaceWith(nodePath => {
-    const node = nodePath.value;
+  root
+    .find(j.TSTypeReference, (node: TSTypeReference) => !!findTypeRename(node))
+    .replaceWith(nodePath => {
+      const node = nodePath.value;
 
-    const matches = findTypeRename(node);
-    if (matches) {
-      return j.tsUnionType(
-        matches.map(literal => j.tsLiteralType({type: 'StringLiteral', value: literal}))
-      );
-    }
+      const matches = findTypeRename(node);
+      if (matches) {
+        return j.tsUnionType(
+          matches.map(literal => j.tsLiteralType({type: 'StringLiteral', value: literal}))
+        );
+      }
 
-    return nodePath.value;
-  });
+      return nodePath.value;
+    });
 
   return root.toSource();
 }

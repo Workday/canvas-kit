@@ -1,3 +1,2 @@
-export {DubLogoTitle} from './DubLogoTitle';
-export {SearchBar, SearchBarProps} from './SearchBar';
-export {WorkdayLogoTitle} from './WorkdayLogoTitle';
+export {DeprecatedDubLogoTitle} from './DubLogoTitle';
+export {DeprecatedWorkdayLogoTitle} from './WorkdayLogoTitle';

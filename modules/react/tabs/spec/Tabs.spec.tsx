@@ -22,10 +22,10 @@ describe('Tabs', () => {
 
   // intent tab is covered by visual and Cypress tests
 
-  it('should call "onActivate" when tab is activated', () => {
+  it('should call "onSelect" when tab is selected', () => {
     const cb = jest.fn();
     render(
-      <Tabs onActivate={cb}>
+      <Tabs onSelect={cb}>
         <Tabs.List>
           <Tabs.Item name="first">First Tab</Tabs.Item>
           <Tabs.Item name="second">Second Tab</Tabs.Item>
@@ -35,6 +35,6 @@ describe('Tabs', () => {
     );
 
     fireEvent.click(screen.getByRole('tab', {name: 'Second Tab'}));
-    expect(cb).toHaveBeenCalledWith(expect.objectContaining({data: {tab: 'second'}}));
+    expect(cb).toHaveBeenCalledWith(expect.objectContaining({data: {id: 'second'}}));
   });
 });

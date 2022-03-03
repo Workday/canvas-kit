@@ -1,25 +1,24 @@
 import * as React from 'react';
-import {mount} from 'enzyme';
+import {render} from '@testing-library/react';
+
 import Layout from '../lib/Layout';
 
 describe('Layout', () => {
-  test('Layout should spread extra props', () => {
-    const component = mount(
+  it('should spread extra props to the container element', () => {
+    const {container} = render(
       <Layout data-propspread="test">
         <Layout.Column />
       </Layout>
     );
-    const container = component.at(0).getDOMNode();
-    expect(container.getAttribute('data-propspread')).toBe('test');
-    component.unmount();
+
+    expect(container.firstChild).toHaveAttribute('data-propspread', 'test');
   });
 });
 
 describe('Column', () => {
-  test('Column should spread extra props', () => {
-    const component = mount(<Layout.Column data-propspread="test" />);
-    const container = component.at(0).getDOMNode();
-    expect(container.getAttribute('data-propspread')).toBe('test');
-    component.unmount();
+  it('should spread extra props to the container element', () => {
+    const {container} = render(<Layout.Column data-propspread="test" />);
+
+    expect(container.firstChild).toHaveAttribute('data-propspread', 'test');
   });
 });

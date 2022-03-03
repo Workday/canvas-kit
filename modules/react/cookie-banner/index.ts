@@ -1,5 +1,5 @@
-import CookieBanner from './lib/CookieBanner';
+import DeprecatedCookieBanner from './lib/CookieBanner';
 
-export default CookieBanner;
-export {CookieBanner};
+export default DeprecatedCookieBanner;
+export {DeprecatedCookieBanner};
 export * from './lib/CookieBanner';

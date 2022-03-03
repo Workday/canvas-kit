@@ -1,20 +1,17 @@
 import * as React from 'react';
-import {mount} from 'enzyme';
 import Banner from '../lib/Banner';
 import ReactDOMServer from 'react-dom/server';
 import {axe} from 'jest-axe';
+import {screen, render} from '@testing-library/react';
 
 describe('Banner', () => {
-  test('Banner should spread extra props', () => {
-    const component = mount(<Banner data-propspread="test" />);
-    const container = component.at(0).getDOMNode();
-    expect(container.getAttribute('data-propspread')).toBe('test');
-    component.unmount();
-  });
-});
+  it('should spread extra props to button element', () => {
+    render(<Banner data-propspread="test" />);
 
-describe('Banner Accessibility', () => {
-  test('Banner should pass axe DOM accessibility guidelines', async () => {
+    expect(screen.getByRole('button')).toHaveAttribute('data-propspread', 'test');
+  });
+
+  it('should pass axe', async () => {
     const html = ReactDOMServer.renderToString(<Banner />);
     expect(
       await axe(html, {

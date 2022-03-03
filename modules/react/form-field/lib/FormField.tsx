@@ -1,10 +1,15 @@
 import * as React from 'react';
 import {space} from '@workday/canvas-kit-react/tokens';
-import {GrowthBehavior, ErrorType, styled, Themeable} from '@workday/canvas-kit-react/common';
+import {
+  GrowthBehavior,
+  ErrorType,
+  styled,
+  Themeable,
+  generateUniqueId,
+} from '@workday/canvas-kit-react/common';
 import Hint from './Hint';
 import Label from './Label';
 import {FormFieldLabelPosition, FormFieldLabelPositionBehavior} from './types';
-import uuid from 'uuid/v4';
 
 export interface FormFieldProps
   extends Themeable,
@@ -135,7 +140,7 @@ class FormField extends React.Component<FormFieldProps> {
   static LabelPosition = FormFieldLabelPosition;
   static ErrorType = ErrorType;
 
-  private inputId: string = this.props.inputId || uuid();
+  private inputId: string = this.props.inputId || generateUniqueId();
 
   private renderChildren = (child: React.ReactNode): React.ReactNode => {
     if (React.isValidElement(child)) {

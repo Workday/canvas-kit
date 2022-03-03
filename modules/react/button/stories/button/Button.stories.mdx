@@ -1,4 +1,4 @@
-import {Meta, Story} from '@storybook/addon-docs/blocks';
+import {Meta, Story} from '@storybook/addon-docs';
 
 import {
   PrimaryButton,
@@ -9,8 +9,11 @@ import {
 import {Specifications} from '@workday/canvas-kit-docs';
 
 import {Primary} from './examples/Primary';
+import {PrimaryInverse} from './examples/PrimaryInverse';
 import {Secondary} from './examples/Secondary';
+import {SecondaryInverse} from './examples/SecondaryInverse';
 import {Tertiary} from './examples/Tertiary';
+import {TertiaryInverse} from './examples/TertiaryInverse';
 import {Delete} from './examples/Delete';
 
 <Meta title="Components/Buttons/Button/React" />
@@ -38,7 +41,16 @@ Primary Buttons are high emphasis. Use once per screen to draw attention to the 
 action. Multiple primary buttons make it confusing for the user to understand what action they
 should take. Not all screens require a Primary Button.
 
+Primary Buttons have four sizes: `extraSmall`, `small`, `medium`, and `large`. Icons are supported
+for every size and can be positioned to the `left` or `right` with the `iconPosition` prop.
+
 <ExampleCodeBlock code={Primary} />
+
+Primary Buttons also have an `inverse` variant. While it looks similar to the default Secondary
+Button, the default outline as well as the hover and focus states are different. Use this variant
+when you need to place a Primary Button on a dark or colorful background such as `blueberry400`.
+
+<ExampleCodeBlock code={PrimaryInverse} />
 
 #### Props
 
@@ -52,9 +64,15 @@ Secondary Buttons have a medium level of emphasis. Use them for non-critical act
 Buttons can be used on most pages without restrictions and work well for multiple actions of equal
 weight. They can be used in conjunction with a Primary Button or independently.
 
-Use the `inverse` variants on dark or colorful backgrounds.
+Secondary Buttons have four sizes: `extraSmall`, `small`, `medium`, and `large`. Icons are supported
+for every size and can be positioned to the `left` or `right` with the `iconPosition` prop.
 
 <ExampleCodeBlock code={Secondary} />
+
+Secondary Buttons also have an `inverse` variant. Use this when you need to place a Secondary Button
+on a dark or colorful background such as `blueberry400`.
+
+<ExampleCodeBlock code={SecondaryInverse} />
 
 #### Props
 
@@ -69,9 +87,15 @@ the user may not often be looking to do. Tertiary Buttons have lower prominence 
 not visible until it is interacted with. Use Tertiary Buttons for supplemental actions such as “View
 More”, “Read More” or “Select a File”. Tertiary Buttons are frequently used on Cards.
 
-Use the `inverse` variants on dark or colorful backgrounds.
+Tertiary Buttons have three sizes: `extraSmall`, `small`, and `medium`. Icons are supported for
+every size and can be positioned to the `left` or `right` with the `iconPosition` prop.
 
 <ExampleCodeBlock code={Tertiary} />
+
+Tertiary Buttons also have an `inverse` variant. Use this when you need to place a Tertiary Button
+on a dark or colorful background such as `blueberry400`.
+
+<ExampleCodeBlock code={TertiaryInverse} />
 
 #### Props
 

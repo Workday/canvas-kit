@@ -1,8 +1,8 @@
 import * as React from 'react';
-import {shallow, mount} from 'enzyme';
-import Graphic, {graphicStyles} from '../lib/Graphic';
-import Svg from '../lib/Svg';
+import {render} from '@testing-library/react';
+
 import {CanvasGraphic, CanvasIconTypes} from '@workday/design-assets-types';
+import Graphic, {graphicStyles} from '../lib/Graphic';
 
 const mockGraphic: CanvasGraphic = {
   name: 'mockGraphic',
@@ -12,10 +12,11 @@ const mockGraphic: CanvasGraphic = {
 };
 
 describe('Graphic', () => {
-  test('Icon is of type graphic', () => {
-    const component = shallow(<Graphic src={mockGraphic} />);
-    expect(component.find(Svg).prop('type')).toEqual('graphic');
-    component.unmount();
+  it('should render an svg with a graphic type', () => {
+    const {container} = render(<Graphic src={mockGraphic} />);
+
+    // container is not a semantic element
+    expect(container.firstChild).toContainHTML('svg');
   });
 
   test('No default sizing', () => {
@@ -51,10 +52,10 @@ describe('Graphic', () => {
     );
   });
 
-  test('AccentIcon should spread extra props', () => {
-    const component = mount(<Graphic src={mockGraphic} data-propspread="test" />);
-    const container = component.at(0).getDOMNode();
-    expect(container.getAttribute('data-propspread')).toBe('test');
-    component.unmount();
+  it('should forward extra props to containing element', () => {
+    const {container} = render(<Graphic src={mockGraphic} data-propspread="test" />);
+
+    // container is not a semantic element
+    expect(container.firstChild).toHaveAttribute('data-propspread', 'test');
   });
 });

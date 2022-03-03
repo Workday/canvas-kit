@@ -1,4 +1,3 @@
-/// <reference path="../../../../typings.d.ts" />
 import * as React from 'react';
 
 import {Modal, useModalModel} from '@workday/canvas-kit-react/modal';
