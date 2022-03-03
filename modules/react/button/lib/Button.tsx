@@ -20,7 +20,10 @@ import {ButtonColors, ButtonSizes, TertiaryButtonSizes} from './types';
 import {buttonLabelDataClassName} from './parts/ButtonLabelData';
 import {CSSObject} from '@emotion/styled';
 
-export interface ButtonContainerNewProps extends BoxProps, GrowthBehavior {
+export interface ButtonContainerNewProps
+  extends BoxProps,
+    GrowthBehavior,
+    Omit<React.HTMLAttributes<HTMLButtonElement>, 'color'> {
   colors?: ButtonColors;
   /**
    * There are four button sizes: `extraSmall`, `small`, `medium`, and `large`.

@@ -10,7 +10,7 @@ describe('Segmented Control', () => {
   });
 
   describe('when rendered', () => {
-    it('should render two icon buttons', () => {
+    it('should render two buttons', () => {
       const {getAllByRole} = render(
         <SegmentedControl>
           <SegmentedControl.Button value="list-view" icon={listViewIcon} aria-label="List View" />
@@ -45,7 +45,7 @@ describe('Segmented Control', () => {
       expect(cb.mock.calls[0][0]).toBe('table-view');
     });
 
-    it('should preserve existing IconButton onClick callbacks', () => {
+    it('should preserve existing button onClick callbacks', () => {
       const existingCb = jest.fn();
       const {getAllByRole} = render(
         <SegmentedControl onChange={cb}>
@@ -58,6 +58,7 @@ describe('Segmented Control', () => {
           />
         </SegmentedControl>
       );
+
       fireEvent.click(getAllByRole('button')[1]);
 
       expect(cb).toHaveBeenCalledTimes(1);
@@ -96,11 +97,7 @@ describe('Segmented Control', () => {
       const {getAllByRole} = render(
         <SegmentedControl onChange={cb}>
           <SegmentedControl.Button value="list-view" icon={listViewIcon} aria-label="List View" />
-          <SegmentedControl.Button
-            value="table-view"
-            icon={worksheetsIcon}
-            aria-label="Table View"
-          />
+          <SegmentedControl.Button icon={worksheetsIcon} aria-label="Table View" />
         </SegmentedControl>
       );
 

@@ -79,13 +79,14 @@ const StyledButton = styled(Button)(
 export interface SegmentedControlButtonProps extends ButtonContainerNewProps {
   toggled?: boolean;
   icon: CanvasSystemIcon;
-  value: string | number;
+  value?: string | number;
 }
 
 export const SegmentedControlButton = createComponent()({
   displayName: 'Button',
   Component: ({children, value, icon, toggled, ...props}: SegmentedControlButtonProps, ref) => {
-    console.warn('value', value);
+    console.warn(props.onClick);
+
     return (
       <StyledButton
         aria-pressed={toggled}

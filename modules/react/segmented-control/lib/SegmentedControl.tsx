@@ -27,54 +27,6 @@ export interface SegmentedControlProps {
   onChange?: (value: string | number) => void;
 }
 
-// const SegmentedControlContainer = styled('div')(
-//   {
-//     '& button': {
-//       borderRadius: borderRadius.zero,
-//       border: `1px solid ${colors.soap500}`,
-//       borderLeft: 'none',
-//       '&[aria-pressed="true"]': {
-//         borderColor: colors.blueberry400,
-//         '&:hover, &:focus:hover': {
-//           background: colors.blueberry400,
-//         },
-//       },
-//       '&:first-of-type': {
-//         borderRadius: `${borderRadius.m} 0 0 ${borderRadius.m}`,
-//         borderLeft: `1px solid ${colors.soap500}`,
-//       },
-//       '&:last-of-type': {
-//         borderRadius: `0 ${borderRadius.m} ${borderRadius.m} 0`,
-//       },
-//       '&:focus': {
-//         borderRadius: borderRadius.m,
-//         zIndex: 1,
-//         animation: 'none', // reset focusRing animation
-//         transition: 'all 120ms, border-radius 1ms',
-//         ...mouseFocusBehavior({
-//           '&': {
-//             borderRadius: borderRadius.zero,
-//             '&:first-of-type': {
-//               borderRadius: `${borderRadius.m} 0 0 ${borderRadius.m}`,
-//             },
-//             '&:last-of-type': {
-//               borderRadius: `0 ${borderRadius.m} ${borderRadius.m} 0`,
-//             },
-//           },
-//         }),
-//       },
-//     },
-//   },
-//   ({theme}) => ({
-//     '& button[aria-pressed="true"]': {
-//       borderColor: theme.canvas.palette.primary.main,
-//       '&:hover, &:focus:hover': {
-//         background: theme.canvas.palette.primary.main,
-//       },
-//     },
-//   })
-// );
-
 const onButtonClick = (
   existingOnClick: ((e: React.MouseEvent<HTMLButtonElement>) => void) | undefined,
   onChange: ((value: string | number) => void) | undefined,
@@ -82,6 +34,7 @@ const onButtonClick = (
   event: React.MouseEvent<HTMLButtonElement>
 ): void => {
   if (existingOnClick) {
+    console.warn(event);
     existingOnClick(event);
   }
 
