@@ -57,7 +57,9 @@ export const SegmentedControl = createComponent('div')({
           children,
           (
             child: React.ReactElement<
-              SegmentedControlButtonProps & {onClick?: React.MouseEventHandler<HTMLButtonElement>} // IconButton will have correct props
+              SegmentedControlButtonProps & {
+                onClick?: React.MouseEventHandler<HTMLButtonElement>;
+              } & React.HTMLAttributes<HTMLButtonElement> // segmented control button will have correct props
             >,
             index: number
           ) => {
@@ -65,7 +67,7 @@ export const SegmentedControl = createComponent('div')({
               return React.cloneElement(child, {
                 toggled: typeof value === 'number' ? index === value : child.props.value === value,
                 onClick: onButtonClick.bind(undefined, child.props.onClick, onChange, index),
-                ...child.props,
+                // ...child.props,
               });
             }
 

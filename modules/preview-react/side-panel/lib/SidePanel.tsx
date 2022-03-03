@@ -3,7 +3,7 @@
 import * as React from 'react';
 import {styled, useIsRTL} from '@workday/canvas-kit-react/common';
 import {css, CSSObject, jsx, keyframes} from '@emotion/react';
-import {TertiaryButtonNew, TertiaryButtonNewProps} from '@workday/canvas-kit-react/button';
+import {TertiaryButton, TertiaryButtonProps} from '@workday/canvas-kit-react/button';
 import {space, colors, depth} from '@workday/canvas-kit-react/tokens';
 import {transformationImportIcon} from '@workday/canvas-system-icons-web';
 
@@ -207,7 +207,7 @@ const SidePanel = ({
   );
 };
 
-export type ToggleButtonProps = Omit<TertiaryButtonNewProps, 'aria-label'>;
+export type ToggleButtonProps = Omit<TertiaryButtonProps, 'aria-label'>;
 
 /**
  * A toggle button styled specifically for the side panel container.
@@ -245,7 +245,7 @@ const ToggleButton = ({
   });
 
   // @ts-ignore aria-label type error here. The user will decide to use aria-label or aria-labelledby
-  return <TertiaryButtonNew type="button" css={buttonStyle} icon={icon} {...rest} />;
+  return <TertiaryButton type="button" css={buttonStyle} icon={icon} {...rest} />;
 };
 
 SidePanel.ToggleButton = ToggleButton;

@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {colors} from '@workday/canvas-kit-react/tokens';
+import {colors, space} from '@workday/canvas-kit-react/tokens';
 import {
   GrowthBehavior,
   useTheme,
@@ -10,8 +10,8 @@ import {
   focusRing,
 } from '@workday/canvas-kit-react/common';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {ButtonColors, ButtonSizes, IconPositions} from './types';
-import {ButtonContainer, ButtonLabel, ButtonLabelData, ButtonLabelIcon} from './parts';
+import {ButtonColors, ButtonSizes, IconPositionsNew} from './types';
+import {Button, getMinWidthStyles, getPaddingStyles} from './Button';
 
 export interface SecondaryButtonProps extends Themeable, GrowthBehavior {
   /**
@@ -41,7 +41,7 @@ export interface SecondaryButtonProps extends Themeable, GrowthBehavior {
    * If no value is provided, it defaults to `left`.
    * @default 'left'
    */
-  iconPosition?: IconPositions;
+  iconPosition?: IconPositionsNew;
   /**
    * If set to `true`, transform the icon's x-axis to mirror the graphic
    * @default false
@@ -52,23 +52,13 @@ export interface SecondaryButtonProps extends Themeable, GrowthBehavior {
 
 // Button sizes where data labels are enabled
 const dataLabelSizes = ['medium', 'large'];
-// All disabled buttons are set to 40% opacity.
-// This will eventually live in the ButtonContainer styles, but for now we're scoping it to Primary, Secondary, and Tertiary buttons.
-const disabledButtonOpacity = {
-  '&:disabled, &:disabled:active': {
-    opacity: 0.4,
-  },
-};
 
 export const SecondaryButton = createComponent('button')({
   displayName: 'SecondaryButton',
   Component: (
     {
-      // TODO: Fix useTheme and make it a real hook
-      // eslint-disable-next-line react-hooks/rules-of-hooks
-      theme = useTheme(),
       size = 'medium',
-      iconPosition = 'left',
+      iconPosition = 'start',
       variant,
       dataLabel,
       icon,
@@ -78,35 +68,44 @@ export const SecondaryButton = createComponent('button')({
     }: SecondaryButtonProps,
     ref,
     Element
-  ) => (
-    <ButtonContainer
-      ref={ref}
-      as={Element}
-      colors={getSecondaryButtonColors(variant, theme)}
-      size={size}
-      extraStyles={disabledButtonOpacity}
-      {...elemProps}
-    >
-      {icon && iconPosition === 'left' && (
-        <ButtonLabelIcon
-          size={size}
-          iconPosition={iconPosition}
-          icon={icon}
-          shouldMirrorIcon={shouldMirrorIcon}
-        />
-      )}
-      <ButtonLabel>{children}</ButtonLabel>
-      {dataLabel && dataLabelSizes.includes(size) && <ButtonLabelData>{dataLabel}</ButtonLabelData>}
-      {icon && iconPosition === 'right' && (
-        <ButtonLabelIcon
-          size={size}
-          iconPosition={iconPosition}
-          icon={icon}
-          shouldMirrorIcon={shouldMirrorIcon}
-        />
-      )}
-    </ButtonContainer>
-  ),
+  ) => {
+    const balancingMargin = size === 'large' ? space.xxs : space.xxxs;
+    const theme = useTheme();
+
+    return (
+      <Button
+        ref={ref}
+        size={size}
+        colors={getSecondaryButtonColors(variant, theme)}
+        padding={getPaddingStyles(children, size)}
+        minWidth={getMinWidthStyles(children, size)}
+        {...elemProps}
+      >
+        {icon && iconPosition === 'start' && (
+          <Button.Icon
+            size={size}
+            iconPosition={iconPosition}
+            icon={icon}
+            shouldMirrorIcon={shouldMirrorIcon}
+            marginInlineStart={children ? `-${balancingMargin} !important` : undefined}
+          />
+        )}
+        {children && <Button.Label>{children}</Button.Label>}
+        {dataLabel && dataLabelSizes.includes(size) && (
+          <Button.LabelData>{dataLabel}</Button.LabelData>
+        )}
+        {icon && iconPosition === 'end' && (
+          <Button.Icon
+            size={size}
+            iconPosition={iconPosition}
+            icon={icon}
+            shouldMirrorIcon={shouldMirrorIcon}
+            marginInlineEnd={children ? `-${balancingMargin} !important` : undefined}
+          />
+        )}
+      </Button>
+    );
+  },
 });
 
 export const getSecondaryButtonColors = (
@@ -170,22 +169,22 @@ export const getSecondaryButtonColors = (
         hover: {
           background: colors.soap300,
           border: colors.soap300,
-          icon: colors.blackPepper400,
-          label: colors.blackPepper400,
-          labelData: colors.blackPepper400,
+          icon: colors.blackPepper500,
+          label: colors.blackPepper500,
+          labelData: colors.blackPepper500,
         },
         active: {
           background: colors.soap400,
           border: colors.soap400,
-          icon: colors.blackPepper400,
-          label: colors.blackPepper400,
-          labelData: colors.blackPepper400,
+          icon: colors.blackPepper500,
+          label: colors.blackPepper500,
+          labelData: colors.blackPepper500,
         },
         focus: {
           background: colors.frenchVanilla100,
-          icon: colors.blackPepper400,
-          label: colors.blackPepper400,
-          labelData: colors.blackPepper400,
+          icon: colors.blackPepper500,
+          label: colors.blackPepper500,
+          labelData: colors.blackPepper500,
           focusRing: focusRing(
             {
               separation: 2,

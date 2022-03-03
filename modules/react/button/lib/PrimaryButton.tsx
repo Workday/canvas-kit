@@ -8,112 +8,12 @@ import {
   createComponent,
   focusRing,
 } from '@workday/canvas-kit-react/common';
-import {colors} from '@workday/canvas-kit-react/tokens';
+import {colors, space} from '@workday/canvas-kit-react/tokens';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
+import {ButtonSizes, IconPositionsNew} from './types';
+import {Button, getMinWidthStyles, getPaddingStyles} from './Button';
 
-import {ButtonContainer, ButtonLabel, ButtonLabelData, ButtonLabelIcon} from './parts';
-import {ButtonSizes, IconPositions} from './types';
-
-export interface PrimaryButtonProps extends Themeable, GrowthBehavior {
-  /**
-   * The variant of the PrimaryButton.
-   * @default undefined
-   */
-  variant?: 'inverse';
-  /**
-   * There are four button sizes: `extraSmall`, `small`, `medium`, and `large`.
-   * If no size is provided, it will default to `medium`.
-   *
-   * @default 'medium'
-   */
-  size?: ButtonSizes;
-  /**
-   * The data label of the Button.
-   * Note: not displayed at `small` size
-   */
-  dataLabel?: String;
-  /**
-   * The icon of the Button.
-   * Note: not displayed at `small` size
-   */
-  icon?: CanvasSystemIcon;
-  /**
-   * Button icon positions can either be `left` or `right`.
-   * If no value is provided, it defaults to `left`.
-   * @default 'left'
-   */
-  iconPosition?: IconPositions;
-  /**
-   * If set to `true`, transform the icon's x-axis to mirror the graphic
-   * @default false
-   */
-  shouldMirrorIcon?: boolean;
-  children?: React.ReactNode;
-}
-
-// Button sizes where data labels are enabled
-const dataLabelSizes = ['medium', 'large'];
-// All disabled buttons are set to 40% opacity.
-// This will eventually live in the ButtonContainer styles, but for now we're scoping it to Primary, Secondary, and Tertiary buttons.
-const disabledButtonOpacity = {
-  '&:disabled, &:disabled:active': {
-    opacity: 0.4,
-  },
-};
-
-export const PrimaryButton = createComponent('button')({
-  displayName: 'PrimaryButton',
-  Component: (
-    {
-      // TODO: Fix useTheme and make it a real hook
-      // eslint-disable-next-line react-hooks/rules-of-hooks
-      theme = useTheme(),
-      size = 'medium',
-      iconPosition = 'left',
-      variant,
-      dataLabel,
-      icon,
-      shouldMirrorIcon = false,
-      children,
-      ...elemProps
-    }: PrimaryButtonProps,
-    ref,
-    Element
-  ) => (
-    <ButtonContainer
-      ref={ref}
-      as={Element}
-      colors={getPrimaryButtonColors(variant, theme)}
-      size={size}
-      extraStyles={disabledButtonOpacity}
-      {...elemProps}
-    >
-      {icon && iconPosition === 'left' && (
-        <ButtonLabelIcon
-          size={size}
-          iconPosition={iconPosition}
-          icon={icon}
-          shouldMirrorIcon={shouldMirrorIcon}
-        />
-      )}
-      <ButtonLabel>{children}</ButtonLabel>
-      {dataLabel && dataLabelSizes.includes(size) && <ButtonLabelData>{dataLabel}</ButtonLabelData>}
-      {icon && iconPosition === 'right' && (
-        <ButtonLabelIcon
-          size={size}
-          iconPosition={iconPosition}
-          icon={icon}
-          shouldMirrorIcon={shouldMirrorIcon}
-        />
-      )}
-    </ButtonContainer>
-  ),
-});
-
-export const getPrimaryButtonColors = (
-  variant: 'inverse' | undefined,
-  theme: EmotionCanvasTheme
-) => {
+const getPrimaryButtonColors = (variant: 'inverse' | undefined, theme: EmotionCanvasTheme) => {
   const {
     canvas: {
       palette: {primary: themePrimary},
@@ -158,7 +58,7 @@ export const getPrimaryButtonColors = (
           labelData: colors.blackPepper500,
         },
         active: {
-          background: colors.soap300,
+          background: colors.soap400,
           icon: colors.blackPepper500,
           label: colors.blackPepper500,
           labelData: colors.blackPepper500,
@@ -188,3 +88,103 @@ export const getPrimaryButtonColors = (
       };
   }
 };
+
+export interface PrimaryButtonProps extends Themeable, GrowthBehavior {
+  /**
+   * The variant of the PrimaryButton.
+   * @default undefined
+   */
+  variant?: 'inverse';
+  /**
+   * There are four button sizes: `extraSmall`, `small`, `medium`, and `large`.
+   * If no size is provided, it will default to `medium`.
+   *
+   * @default 'medium'
+   */
+  size?: ButtonSizes;
+  /**
+   * The data label is additional information about the button. The `children` of the Button will
+   * appear in bold font while the `dataLabel` will not be emphasized as bold. The `dataLabel` will
+   * be part of a button's accessible name appended after `children`. Useful to ancillary data
+   * associated with the button, but not the prominent label. If `dataLabel` contents are
+   * left-to-right characters, and the `children` are RTL characters, the button may show contents
+   * out of order.
+   *
+   * Note: not displayed at `small` size
+   */
+  dataLabel?: String;
+  /**
+   * The icon of the Button.
+   * Note: not displayed at `small` size
+   */
+  icon?: CanvasSystemIcon;
+  /**
+   * Button icon positions can either be `start` or `end`.
+   * If no value is provided, it defaults to `start`.
+   * @default 'start'
+   */
+  iconPosition?: IconPositionsNew;
+  /**
+   * If set to `true`, transform the icon's x-axis to mirror the graphic
+   * @default false
+   */
+  shouldMirrorIcon?: boolean;
+  children?: React.ReactNode;
+}
+
+// Button sizes where data labels are enabled
+const dataLabelSizes = ['medium', 'large'];
+
+export const PrimaryButton = createComponent('button')({
+  displayName: 'PrimaryButton',
+  Component: (
+    {
+      size = 'medium',
+      iconPosition = 'start',
+      variant,
+      dataLabel,
+      icon,
+      shouldMirrorIcon = false,
+      children,
+      ...elemProps
+    }: PrimaryButtonProps,
+    ref,
+    Element
+  ) => {
+    const balancingMargin = size === 'large' ? space.xxs : space.xxxs;
+    const theme = useTheme();
+    return (
+      <Button
+        ref={ref}
+        size={size}
+        colors={getPrimaryButtonColors(variant, theme)}
+        padding={getPaddingStyles(children, size)}
+        minWidth={getMinWidthStyles(children, size)}
+        {...elemProps}
+      >
+        {icon && iconPosition === 'start' && (
+          <Button.Icon
+            size={size}
+            iconPosition={iconPosition}
+            icon={icon}
+            shouldMirrorIcon={shouldMirrorIcon}
+            marginInlineStart={children ? `-${balancingMargin} !important` : undefined}
+          />
+        )}
+        {children && <Button.Label>{children}</Button.Label>}
+        {dataLabel && dataLabelSizes.includes(size) && (
+          <Button.LabelData>{dataLabel}</Button.LabelData>
+        )}
+        {icon && iconPosition === 'end' && (
+          <Button.Icon
+            size={size}
+            iconPosition={iconPosition}
+            icon={icon}
+            shouldMirrorIcon={shouldMirrorIcon}
+            marginInlineEnd={children ? `-${balancingMargin} !important` : undefined}
+          />
+        )}
+      </Button>
+    );
+  },
+});

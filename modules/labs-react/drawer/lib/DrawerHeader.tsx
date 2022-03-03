@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
 import {colors, space, type, CanvasColor, typeColors} from '@workday/canvas-kit-react/tokens';
-import {TertiaryButtonNew} from '@workday/canvas-kit-react/button';
+import {TertiaryButton} from '@workday/canvas-kit-react/button';
 import {xIcon} from '@workday/canvas-system-icons-web';
 
 export interface DrawerHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -69,7 +69,7 @@ const HeaderTitle = styled('h4')<Pick<DrawerHeaderProps, 'inverse'>>(
   })
 );
 
-const CloseButton = styled(TertiaryButtonNew)({
+const CloseButton = styled(TertiaryButton)({
   margin: '-8px', // for inverse and plain button, we always want this margin
 });
 

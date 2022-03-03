@@ -10,10 +10,10 @@ import {
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {ButtonColors} from './types';
 import {ButtonContainer} from './parts';
-import {TertiaryButtonNewProps} from './TertiaryButtonNew';
+import {TertiaryButtonProps} from './TertiaryButton';
 
 export interface ToolbarIconButtonProps
-  extends Omit<TertiaryButtonNewProps, 'size' | 'variant'>,
+  extends Omit<TertiaryButtonProps, 'size' | 'variant'>,
     Themeable {}
 
 const containerStyles = {

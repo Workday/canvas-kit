@@ -10,7 +10,7 @@ import {
   useInitialFocus,
   useReturnFocus,
 } from '@workday/canvas-kit-react/popup';
-import {TertiaryButtonNew} from '@workday/canvas-kit-react/button';
+import {TertiaryButton} from '@workday/canvas-kit-react/button';
 import {bgColorIcon} from '@workday/canvas-system-icons-web';
 import {ColorPicker} from '@workday/canvas-kit-preview-react/color-picker';
 import {changeFocus} from '@workday/canvas-kit-react/common';
@@ -42,11 +42,7 @@ storiesOf('Preview/Color Picker/React', module)
 
     return (
       <Popup model={model}>
-        <Popup.Target
-          as={TertiaryButtonNew}
-          icon={bgColorIcon}
-          aria-label="Select Background Color"
-        />
+        <Popup.Target as={TertiaryButton} icon={bgColorIcon} aria-label="Select Background Color" />
         <Popup.Popper>
           <Popup.Card marginTop="xxs" padding="s">
             <Popup.Body>

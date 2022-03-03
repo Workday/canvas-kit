@@ -1,6 +1,6 @@
 import * as React from 'react';
 import isPropValid from '@emotion/is-prop-valid';
-import {CSSObject} from '@emotion/styled';
+import {CSSObject} from '@emotion/react';
 import {borderRadius, space, spaceNumbers, type} from '@workday/canvas-kit-react/tokens';
 import {
   GrowthBehavior,
@@ -8,6 +8,7 @@ import {
   focusRing,
   styled,
   EmotionCanvasTheme,
+  StyledType,
 } from '@workday/canvas-kit-react/common';
 import {ButtonColors, ButtonSizes} from '../types';
 import {buttonLabelDataClassName} from './ButtonLabelData';
@@ -69,7 +70,7 @@ function getIconColorSelectors(
 
 export const ButtonContainer = styled('button', {
   shouldForwardProp: prop => isPropValid(prop) && prop !== 'size',
-})<ButtonContainerProps>(
+})<ButtonContainerProps & StyledType>(
   {
     ...type.levels.subtext.large,
     fontWeight: type.properties.fontWeights.bold,

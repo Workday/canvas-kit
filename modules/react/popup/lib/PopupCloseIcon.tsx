@@ -8,14 +8,14 @@ import {
   useModelContext,
   ExtractProps,
 } from '@workday/canvas-kit-react/common';
-import {TertiaryButtonNew, TertiaryButtonNewProps} from '@workday/canvas-kit-react/button';
+import {TertiaryButton, TertiaryButtonProps} from '@workday/canvas-kit-react/button';
 
 import {usePopupCloseButton, PopupModel, PopupModelContext} from './hooks';
 
 const closeIconSpacing = 11;
 const closeIconSpacingSmall = 9;
 
-export interface PopupCloseIconProps extends ExtractProps<typeof TertiaryButtonNew, never> {
+export interface PopupCloseIconProps extends ExtractProps<typeof TertiaryButton, never> {
   /**
    * Optionally pass a model directly to this component. Default is to implicitly use the same
    * model as the container component which uses React context. Only use this for advanced use-cases
@@ -23,7 +23,7 @@ export interface PopupCloseIconProps extends ExtractProps<typeof TertiaryButtonN
   model?: PopupModel;
 }
 
-const StyledCloseIcon = styled(TertiaryButtonNew)<StyledType & PopupCloseIconProps>(
+const StyledCloseIcon = styled(TertiaryButton)<StyledType & PopupCloseIconProps>(
   {
     position: 'absolute',
   },

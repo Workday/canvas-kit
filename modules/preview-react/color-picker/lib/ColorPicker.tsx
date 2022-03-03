@@ -1,7 +1,7 @@
 import {colors, space} from '@workday/canvas-kit-react/tokens';
 import {checkIcon} from '@workday/canvas-system-icons-web';
 import {ColorInput} from '@workday/canvas-kit-react/color-picker';
-import {SecondaryButtonNew} from '@workday/canvas-kit-react/button';
+import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import * as React from 'react';
 import FormField from '@workday/canvas-kit-react/form-field';
 import styled from '@emotion/styled';
@@ -141,7 +141,7 @@ const ColorInputAndLabel = styled(FormField)({
   margin: 0,
 });
 
-const CheckButton = styled(SecondaryButtonNew)({
+const CheckButton = styled(SecondaryButton)({
   alignSelf: 'flex-end',
 });
 

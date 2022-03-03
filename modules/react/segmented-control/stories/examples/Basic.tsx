@@ -6,7 +6,6 @@ import {
   deviceTabletIcon,
   percentageIcon,
 } from '@workday/canvas-system-icons-web';
-import {TertiaryButtonNew} from '@workday/canvas-kit-react/button';
 import {SegmentedControl} from '@workday/canvas-kit-react/segmented-control';
 
 export const Basic = () => {
@@ -22,7 +21,8 @@ export const Basic = () => {
       <SegmentedControl.Button
         icon={listViewIcon}
         value="list-view"
-        onClick={e => console.log('Existing TertiaryButtonNew onClick callback')}
+        onClick={e => console.log('Existing TertiaryButton onClick callback')}
+        id="test"
       />
       <SegmentedControl.Button icon={worksheetsIcon} value="table-view" disabled={true} />
       <SegmentedControl.Button

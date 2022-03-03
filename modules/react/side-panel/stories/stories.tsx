@@ -14,10 +14,10 @@ import styled from '@emotion/styled';
 import {colors, type, space, depth} from '@workday/canvas-kit-react/tokens';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {
-  TertiaryButtonNew,
+  TertiaryButton,
   PrimaryButton,
   Hyperlink,
-  SecondaryButtonNew,
+  SecondaryButton,
 } from '@workday/canvas-kit-react/button';
 import {SidePanel} from '@workday/canvas-kit-react/side-panel';
 import {SidePanelProps} from '../lib/SidePanel';
@@ -91,7 +91,7 @@ const UnorderedList = styled('ul')({
   paddingLeft: 0,
 });
 
-const AddButton = styled(SecondaryButtonNew)({
+const AddButton = styled(SecondaryButton)({
   margin: '0 auto',
   display: 'block',
 });
@@ -226,7 +226,7 @@ const Template = props => (
   <div style={{height: '67vh', position: 'relative'}}>
     <GlobalHeader>
       <GlobalHeader.Item>
-        <TertiaryButtonNew aria-label="menu" icon={justifyIcon} />
+        <TertiaryButton aria-label="menu" icon={justifyIcon} />
         <Hyperlink>
           <WorkdayLogo dangerouslySetInnerHTML={{__html: dubLogoBlue}} />
         </Hyperlink>
@@ -235,9 +235,9 @@ const Template = props => (
         <SearchForm onSubmit={() => 1} />
       </GlobalHeader.Item>
       <GlobalHeader.Item>
-        <TertiaryButtonNew aria-label="messages" icon={assistantIcon} />
-        <TertiaryButtonNew aria-label="notifications" icon={notificationsIcon} />
-        <TertiaryButtonNew aria-label="inbox" icon={inboxIcon} />
+        <TertiaryButton aria-label="messages" icon={assistantIcon} />
+        <TertiaryButton aria-label="notifications" icon={notificationsIcon} />
+        <TertiaryButton aria-label="inbox" icon={inboxIcon} />
         <Avatar size={Avatar.Size.m} variant={Avatar.Variant.Light} />
       </GlobalHeader.Item>
     </GlobalHeader>

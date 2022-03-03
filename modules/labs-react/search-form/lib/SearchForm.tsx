@@ -2,7 +2,7 @@ import * as React from 'react';
 import {CSSObject} from '@emotion/styled';
 import {colors, space, spaceNumbers} from '@workday/canvas-kit-react/tokens';
 import {GrowthBehavior, styled, generateUniqueId} from '@workday/canvas-kit-react/common';
-import {TertiaryButtonNew, TertiaryButtonNewProps} from '@workday/canvas-kit-react/button';
+import {TertiaryButton, TertiaryButtonProps} from '@workday/canvas-kit-react/button';
 import {searchIcon, xIcon} from '@workday/canvas-system-icons-web';
 import {FormField, FormFieldLabelPosition} from '@workday/canvas-kit-react/form-field';
 import {Combobox} from '@workday/canvas-kit-labs-react/combobox';
@@ -169,7 +169,7 @@ const SearchCombobox = styled(Combobox)({
   width: `100%`,
 });
 
-const SearchIcon = styled(TertiaryButtonNew)<
+const SearchIcon = styled(TertiaryButton)<
   Pick<SearchFormProps, 'isCollapsed'> & {isHidden: boolean}
 >(({isCollapsed, isHidden}) => {
   const collapsedSize = 40;
@@ -201,7 +201,7 @@ const SearchIcon = styled(TertiaryButtonNew)<
   };
 });
 
-const CloseButton = styled(TertiaryButtonNew)<
+const CloseButton = styled(TertiaryButton)<
   Pick<SearchFormProps, 'isCollapsed'> & Pick<SearchFormState, 'showForm'>
 >(({isCollapsed, showForm}) => {
   const collapseStyles: CSSObject =
@@ -325,7 +325,7 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
     return getInputColors(theme, this.state.isFocused);
   };
 
-  getIconButtonType = (): TertiaryButtonNewProps['variant'] => {
+  getIconButtonType = (): TertiaryButtonProps['variant'] => {
     let background = this.getThemeColors().background || `#fff`;
     if (this.props.isCollapsed && this.state.showForm) {
       background = formCollapsedBackground;

@@ -1,10 +1,10 @@
 import React from 'react';
-import {TertiaryButtonNew, TertiaryButtonNewProps} from '@workday/canvas-kit-react/button';
+import {TertiaryButton, TertiaryButtonProps} from '@workday/canvas-kit-react/button';
 import {relatedActionsIcon} from '@workday/canvas-system-icons-web';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {createComponent} from '@workday/canvas-kit-react/common';
 
-export interface DropdownButtonProps extends TertiaryButtonNewProps {
+export interface DropdownButtonProps extends TertiaryButtonProps {
   /**
    * The accessibility label for the button
    */
@@ -21,7 +21,7 @@ export interface DropdownButtonProps extends TertiaryButtonNewProps {
   toggled: boolean;
 }
 
-export const DropdownButton = createComponent(TertiaryButtonNew)({
+export const DropdownButton = createComponent(TertiaryButton)({
   displayName: 'DropdownButton',
   Component: (
     {

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {ButtonColors} from './types';
-import {ButtonContainer, ButtonLabel} from './parts';
+import {Button, getMinWidthStyles, getPaddingStyles} from './Button';
 import {
   GrowthBehavior,
   useTheme,
@@ -55,14 +55,16 @@ export const DeleteButton = createComponent('button')({
     ref,
     Element
   ) => (
-    <ButtonContainer
+    <Button
+      padding={getPaddingStyles(children, size)}
+      minWidth={getMinWidthStyles(children, size)}
       ref={ref}
       as={Element}
       colors={getDeleteButtonColors(theme)}
       size={size}
       {...elemProps}
     >
-      <ButtonLabel>{children}</ButtonLabel>
-    </ButtonContainer>
+      <Button.Label>{children}</Button.Label>
+    </Button>
   ),
 });

@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-import {ButtonLabelIconNew} from './parts/ButtonLabelIconNew';
-import {ButtonLabelNew} from './parts/ButtonLabelNew';
-import {ButtonLabelDataNew} from './parts/ButtonLabelDataNew';
+import {ButtonLabelIcon} from './parts/ButtonLabelIcon';
+import {ButtonLabel} from './parts/ButtonLabel';
+import {ButtonLabelData, buttonLabelDataClassName} from './parts/ButtonLabelData';
 
 import {
   createComponent,
@@ -17,13 +17,10 @@ import {Box, BoxProps} from '@workday/canvas-kit-react/layout';
 import {borderRadius, space, spaceNumbers, type} from '@workday/canvas-kit-react/tokens';
 
 import {ButtonColors, ButtonSizes, TertiaryButtonSizes} from './types';
-import {buttonLabelDataClassName} from './parts/ButtonLabelData';
+
 import {CSSObject} from '@emotion/styled';
 
-export interface ButtonContainerNewProps
-  extends BoxProps,
-    GrowthBehavior,
-    Omit<React.HTMLAttributes<HTMLButtonElement>, 'color'> {
+export interface ButtonContainerProps extends BoxProps, GrowthBehavior {
   colors?: ButtonColors;
   /**
    * There are four button sizes: `extraSmall`, `small`, `medium`, and `large`.
@@ -71,7 +68,7 @@ function getIconColorSelectorsNew(
   };
 }
 
-const ButtonContainerNew = styled(Box.as('button'))<StyledType & ButtonContainerNewProps>(
+export const ButtonContainer = styled(Box.as('button'))<StyledType & ButtonContainerProps>(
   {
     ...type.levels.subtext.large,
     cursor: 'pointer',
@@ -280,16 +277,16 @@ export const getPaddingStyles = (
 
 export const Button = createComponent('button')({
   displayName: 'Button',
-  Component: ({children, ...elemProps}: ButtonContainerNewProps, ref, Element) => {
+  Component: ({children, ...elemProps}: ButtonContainerProps, ref, Element) => {
     return (
-      <ButtonContainerNew as="button" ref={ref} {...elemProps}>
+      <ButtonContainer as="button" ref={ref} {...elemProps}>
         {children}
-      </ButtonContainerNew>
+      </ButtonContainer>
     );
   },
   subComponents: {
-    Icon: ButtonLabelIconNew,
-    Label: ButtonLabelNew,
-    LabelData: ButtonLabelDataNew,
+    Icon: ButtonLabelIcon,
+    Label: ButtonLabel,
+    LabelData: ButtonLabelData,
   },
 });

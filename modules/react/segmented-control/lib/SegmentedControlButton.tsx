@@ -1,6 +1,11 @@
 import React from 'react';
-import {ButtonContainerNewProps, Button, ButtonColors} from '@workday/canvas-kit-react/button';
-import {createComponent, mouseFocusBehavior, styled} from '@workday/canvas-kit-react/common';
+import {Button, ButtonColors} from '@workday/canvas-kit-react/button';
+import {
+  createComponent,
+  mouseFocusBehavior,
+  styled,
+  StyledType,
+} from '@workday/canvas-kit-react/common';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {colors, borderRadius, space} from '@workday/canvas-kit-react/tokens';
 
@@ -29,7 +34,7 @@ const getIconButtonColors = (toggled?: boolean): ButtonColors => {
   };
 };
 
-const StyledButton = styled(Button)(
+const StyledButton = styled(Button)<StyledType>(
   {
     borderRadius: borderRadius.zero,
     border: `1px solid ${colors.soap500}`,
@@ -76,19 +81,19 @@ const StyledButton = styled(Button)(
   })
 );
 
-export interface SegmentedControlButtonProps extends ButtonContainerNewProps {
+export interface SegmentedControlButtonProps {
   toggled?: boolean;
   icon: CanvasSystemIcon;
   value?: string | number;
 }
 
-export const SegmentedControlButton = createComponent()({
+export const SegmentedControlButton = createComponent('button')({
   displayName: 'Button',
-  Component: ({children, value, icon, toggled, ...props}: SegmentedControlButtonProps, ref) => {
-    console.warn(props.onClick);
-
+  Component: ({value, icon, toggled, ...props}: SegmentedControlButtonProps, ref, Element) => {
+    console.warn(props);
     return (
       <StyledButton
+        as={Element}
         aria-pressed={toggled}
         value={value}
         colors={getIconButtonColors(toggled)}

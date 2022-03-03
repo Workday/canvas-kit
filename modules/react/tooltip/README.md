@@ -19,12 +19,12 @@ yarn add @workday/canvas-kit-react
 import * as React from 'react';
 
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
-import {TertiaryButtonNew} from '@workday/canvas-kit-react/button';
+import {TertiaryButton} from '@workday/canvas-kit-react/button';
 
 const TooltipExample = () => {
   return (
     <Tooltip title="Close">
-      <TertiaryButtonNew icon={xIcon} aria-label="Close" />
+      <TertiaryButton icon={xIcon} aria-label="Close" />
     </Tooltip>
   );
 };

@@ -9,7 +9,7 @@ import {
   assistantIcon,
 } from '@workday/canvas-system-icons-web';
 
-import {TertiaryButtonNew, Hyperlink} from '@workday/canvas-kit-react/button';
+import {TertiaryButton, Hyperlink} from '@workday/canvas-kit-react/button';
 import {Avatar} from '@workday/canvas-kit-react/avatar';
 import {HStack, HStackProps, StackSpacing} from '@workday/canvas-kit-react/layout';
 import {SearchForm} from '@workday/canvas-kit-labs-react';
@@ -21,7 +21,7 @@ interface HeaderItemProps extends Omit<HStackProps, 'spacing'> {
 export const Basic = () => (
   <GlobalHeader>
     <GlobalHeader.Item>
-      <TertiaryButtonNew aria-label="menu" icon={justifyIcon} />
+      <TertiaryButton aria-label="menu" icon={justifyIcon} />
       <Hyperlink>
         <WorkdayLogo dangerouslySetInnerHTML={{__html: dubLogoBlue}} />
       </Hyperlink>
@@ -30,9 +30,9 @@ export const Basic = () => (
       <SearchForm onSubmit={() => 1} />
     </GlobalHeader.Item>
     <GlobalHeader.Item>
-      <TertiaryButtonNew aria-label="messages" icon={assistantIcon} />
-      <TertiaryButtonNew aria-label="notifications" icon={notificationsIcon} />
-      <TertiaryButtonNew aria-label="inbox" icon={inboxIcon} />
+      <TertiaryButton aria-label="messages" icon={assistantIcon} />
+      <TertiaryButton aria-label="notifications" icon={notificationsIcon} />
+      <TertiaryButton aria-label="inbox" icon={inboxIcon} />
       <Avatar size={Avatar.Size.m} variant={Avatar.Variant.Light} />
     </GlobalHeader.Item>
   </GlobalHeader>
