@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {IconButtonProps} from '@workday/canvas-kit-react/button';
+import {TertiaryButtonProps} from '@workday/canvas-kit-react/button';
 
 import {PaginationModel} from './types';
 import {usePaginationModel, UsePaginationModelConfig} from './usePaginationModel';
@@ -78,7 +78,7 @@ Pagination.Controls = (props: ControlsProps) => {
 };
 
 Pagination.JumpToFirstButton = (
-  props: IconButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>
+  props: TertiaryButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>
 ) => {
   // The linter doesn't recognize the dot syntax, so we're disabling the rule
   // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -87,7 +87,7 @@ Pagination.JumpToFirstButton = (
 };
 
 Pagination.StepToPreviousButton = (
-  props: IconButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>
+  props: TertiaryButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>
 ) => {
   // The linter doesn't recognize the dot syntax, so we're disabling the rule
   // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -96,7 +96,7 @@ Pagination.StepToPreviousButton = (
 };
 
 Pagination.StepToNextButton = (
-  props: IconButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>
+  props: TertiaryButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>
 ) => {
   // The linter doesn't recognize the dot syntax, so we're disabling the rule
   // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -105,7 +105,7 @@ Pagination.StepToNextButton = (
 };
 
 Pagination.JumpToLastButton = (
-  props: IconButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>
+  props: TertiaryButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>
 ) => {
   // The linter doesn't recognize the dot syntax, so we're disabling the rule
   // eslint-disable-next-line react-hooks/rules-of-hooks

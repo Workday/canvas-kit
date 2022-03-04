@@ -14,7 +14,10 @@ import {TertiaryButtonProps} from './TertiaryButton';
 
 export interface ToolbarIconButtonProps
   extends Omit<TertiaryButtonProps, 'size' | 'variant'>,
-    Themeable {}
+    Themeable {
+  onToggleChange?: (toggled: boolean | undefined) => void;
+  toggled?: boolean;
+}
 
 const containerStyles = {
   padding: 0,

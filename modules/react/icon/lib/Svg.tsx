@@ -2,10 +2,9 @@ import {CSSObject} from '@emotion/styled';
 import * as React from 'react';
 import {CanvasIcon, CanvasIconTypes} from '@workday/design-assets-types';
 import {validateIconType} from './utils';
-import {createComponent, styled, StyledType} from '@workday/canvas-kit-react/common';
-import {Box, BoxProps} from '@workday/canvas-kit-react/layout';
+import {styled} from '@workday/canvas-kit-react/common';
 
-export interface SvgProps extends BoxProps {
+export interface SvgProps extends React.HTMLAttributes<HTMLSpanElement> {
   src: CanvasIcon;
   styles?: CSSObject;
   type: CanvasIconTypes;
@@ -17,7 +16,7 @@ export interface SvgProps extends BoxProps {
   shouldMirror?: boolean;
 }
 
-const StyledIconSpan = styled(Box)<StyledType & Pick<SvgProps, 'shouldMirror' | 'styles'>>(
+const StyledIconSpan = styled('span')<Pick<SvgProps, 'shouldMirror' | 'styles'>>(
   {
     display: 'inline-block',
     '> svg': {display: 'block'},
@@ -28,15 +27,20 @@ const StyledIconSpan = styled(Box)<StyledType & Pick<SvgProps, 'shouldMirror' | 
   })
 );
 
-export const Svg = createComponent('span')({
-  displayName: 'Svg',
-  Component: ({src, type, iconRef, ...elemProps}: SvgProps, Element) => {
+export default class Svg extends React.Component<SvgProps> {
+  public render() {
+    const {src, type, iconRef, ...elemProps} = this.props;
+
+    // Validation for JS
     try {
       validateIconType(src, type);
     } catch (e) {
       console.error(e);
       return null;
     }
-    return <StyledIconSpan as="span" dangerouslySetInnerHTML={{__html: src.svg}} {...elemProps} />;
-  },
-});
+
+    return (
+      <StyledIconSpan {...elemProps} dangerouslySetInnerHTML={{__html: src.svg}} ref={iconRef} />
+    );
+  }
+}

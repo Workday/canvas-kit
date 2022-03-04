@@ -153,7 +153,7 @@ class SidePanelWrapper extends React.Component<SidePanelProps, SidePanelState> {
         {open ? (
           <PrimaryButton>Add New</PrimaryButton>
         ) : (
-          <AddButton toggled={false} size="small" aria-label="Add">
+          <AddButton size="small" aria-label="Add">
             <SystemIcon icon={plusIcon} />
           </AddButton>
         )}

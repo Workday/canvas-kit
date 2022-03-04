@@ -43,9 +43,7 @@ export interface SystemIconStyles {
   fillHover?: string;
 }
 
-export interface SystemIconProps
-  extends Omit<SystemIconStyles, 'color' | 'background'>,
-    Omit<IconProps, 'src' | 'type'> {
+export interface SystemIconProps extends SystemIconStyles, Omit<IconProps, 'src' | 'type'> {
   /**
    * The icon to display from `@workday/canvas-system-icons-web`.
    */

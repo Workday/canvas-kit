@@ -8,7 +8,7 @@ import {
   useModelContext,
   ExtractProps,
 } from '@workday/canvas-kit-react/common';
-import {TertiaryButton, TertiaryButtonProps} from '@workday/canvas-kit-react/button';
+import {TertiaryButton} from '@workday/canvas-kit-react/button';
 
 import {usePopupCloseButton, PopupModel, PopupModelContext} from './hooks';
 

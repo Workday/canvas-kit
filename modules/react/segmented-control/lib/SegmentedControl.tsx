@@ -1,7 +1,7 @@
 import * as React from 'react';
-import {borderRadius, colors} from '@workday/canvas-kit-react/tokens';
+
 // import {IconButton, IconButtonProps} from '@workday/canvas-kit-react/button';
-import {createComponent, mouseFocusBehavior, styled} from '@workday/canvas-kit-react/common';
+import {createComponent} from '@workday/canvas-kit-react/common';
 import {SegmentedControlButton, SegmentedControlButtonProps} from './SegmentedControlButton';
 
 export interface SegmentedControlProps {
