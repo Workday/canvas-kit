@@ -6,7 +6,6 @@ import {plusIcon} from '@workday/canvas-system-icons-web';
 
 export const Secondary = props => (
   <>
-    <h1>Default</h1>
     <HStack spacing="s" padding="s">
       <SecondaryButton {...props}>Primary</SecondaryButton>
       <p>{JSON.stringify(props.theme)}</p>
