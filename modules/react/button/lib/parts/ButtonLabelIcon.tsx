@@ -1,7 +1,7 @@
 import React from 'react';
 import {BoxProps} from '@workday/canvas-kit-react/layout';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {ButtonSizes, IconPositionsNew} from '../types';
+import {ButtonSizes, IconPositions} from '../types';
 import {styled, createComponent} from '@workday/canvas-kit-react/common';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 
@@ -22,7 +22,7 @@ export interface ButtonLabelIconProps extends BoxProps {
    * If no value is provided, it defaults to `left`.
    * @default 'start'
    */
-  iconPosition?: IconPositionsNew;
+  iconPosition?: IconPositions;
   /**
    * If set to `true`, transform the icon's x-axis to mirror the graphic
    * @default false

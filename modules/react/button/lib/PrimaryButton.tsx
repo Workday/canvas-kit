@@ -10,7 +10,7 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {colors, space} from '@workday/canvas-kit-react/tokens';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {ButtonSizes, IconPositionsNew} from './types';
+import {ButtonSizes, IconPositions} from './types';
 import {Button, getMinWidthStyles, getPaddingStyles} from './Button';
 
 const getPrimaryButtonColors = (variant: 'inverse' | undefined, theme: EmotionCanvasTheme) => {
@@ -123,7 +123,7 @@ export interface PrimaryButtonProps extends Themeable, GrowthBehavior {
    * If no value is provided, it defaults to `start`.
    * @default 'start'
    */
-  iconPosition?: IconPositionsNew;
+  iconPosition?: IconPositions;
   /**
    * If set to `true`, transform the icon's x-axis to mirror the graphic
    * @default false

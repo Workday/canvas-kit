@@ -10,7 +10,7 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {borderRadius, colors, space} from '@workday/canvas-kit-react/tokens';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {ButtonColors, IconPositionsNew, ButtonSizes} from './types';
+import {ButtonColors, IconPositions, ButtonSizes} from './types';
 import {Button} from './Button';
 
 export interface TertiaryButtonProps extends Themeable {
@@ -31,7 +31,7 @@ export interface TertiaryButtonProps extends Themeable {
    * If no value is provided, it defaults to `left`.
    * @default 'left'
    */
-  iconPosition?: IconPositionsNew;
+  iconPosition?: IconPositions;
   /**
    * The icon of the TertiaryButton.
    */

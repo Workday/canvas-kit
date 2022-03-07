@@ -11,8 +11,6 @@ import {SegmentedControl} from '@workday/canvas-kit-react/segmented-control';
 export const Basic = () => {
   const [value, setValue] = React.useState<string | number>();
   const handleToggle = (selectedValue: string | number) => {
-    console.warn(selectedValue);
-
     setValue(selectedValue);
   };
 

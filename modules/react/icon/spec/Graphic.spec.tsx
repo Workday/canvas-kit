@@ -14,7 +14,6 @@ const mockGraphic: CanvasGraphic = {
 describe('Graphic', () => {
   it('should render an svg with a graphic type', () => {
     const {container} = render(<Graphic src={mockGraphic} />);
-    console.log(container);
 
     // container is not a semantic element
     expect(container.firstChild).toContainHTML('svg');

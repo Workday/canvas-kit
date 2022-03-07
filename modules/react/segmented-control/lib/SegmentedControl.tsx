@@ -34,7 +34,6 @@ const onButtonClick = (
   event: React.MouseEvent<HTMLButtonElement>
 ): void => {
   if (existingOnClick) {
-    console.warn(event);
     existingOnClick(event);
   }
 

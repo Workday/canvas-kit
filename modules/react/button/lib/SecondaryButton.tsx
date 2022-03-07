@@ -10,7 +10,7 @@ import {
   focusRing,
 } from '@workday/canvas-kit-react/common';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {ButtonColors, ButtonSizes, IconPositionsNew} from './types';
+import {ButtonColors, ButtonSizes, IconPositions} from './types';
 import {Button, getMinWidthStyles, getPaddingStyles} from './Button';
 
 export interface SecondaryButtonProps extends Themeable, GrowthBehavior {
@@ -41,7 +41,7 @@ export interface SecondaryButtonProps extends Themeable, GrowthBehavior {
    * If no value is provided, it defaults to `left`.
    * @default 'left'
    */
-  iconPosition?: IconPositionsNew;
+  iconPosition?: IconPositions;
   /**
    * If set to `true`, transform the icon's x-axis to mirror the graphic
    * @default false
