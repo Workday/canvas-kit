@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import {ButtonLabelIcon} from './parts/ButtonLabelIcon';
 import {ButtonLabel} from './parts/ButtonLabel';
-import {ButtonLabelData, buttonLabelDataClassName} from './parts/ButtonLabelData';
+import {ButtonLabelData} from './parts/ButtonLabelData';
 
 import {
   createComponent,
@@ -160,11 +160,6 @@ export const ButtonContainer = styled(Box.as('button'))<StyledType & ButtonConta
         },
         ...getIconColorSelectors(theme, colors.default.icon, fillIcon),
       }),
-      ...(colors.default.labelData && {
-        ['.' + buttonLabelDataClassName]: {
-          color: colors.default.labelData,
-        },
-      }),
     };
 
     const hoverStyles = {
@@ -172,12 +167,6 @@ export const ButtonContainer = styled(Box.as('button'))<StyledType & ButtonConta
         backgroundColor: colors.hover.background,
         borderColor: colors.hover.border,
         color: colors.hover.label,
-        ...(colors.hover.labelData && {
-          ['.' + buttonLabelDataClassName]: {
-            transition: 'color 120ms ease-in',
-            color: colors.hover.labelData,
-          },
-        }),
         ...(colors.hover.icon && getIconColorSelectors(theme, colors.hover.icon, fillIcon)),
       },
     };
@@ -187,11 +176,6 @@ export const ButtonContainer = styled(Box.as('button'))<StyledType & ButtonConta
         backgroundColor: colors.active.background,
         borderColor: colors.active.border,
         color: colors.active.label,
-        ...(colors.active.labelData && {
-          ['.' + buttonLabelDataClassName]: {
-            color: colors.active.labelData,
-          },
-        }),
         ...(colors.active.icon && getIconColorSelectors(theme, colors.active.icon, fillIcon)),
       },
     };
@@ -203,11 +187,6 @@ export const ButtonContainer = styled(Box.as('button'))<StyledType & ButtonConta
         borderColor: colors.focus.border,
         color: colors.focus.label,
         ...(colors.focus.focusRing || focusRing({separation: 2}, theme)),
-        ...(colors.focus.labelData && {
-          ['.' + buttonLabelDataClassName]: {
-            color: colors.focus.labelData,
-          },
-        }),
         ...(colors.focus.icon && getIconColorSelectors(theme, colors.focus.icon, fillIcon)),
       },
 
@@ -218,11 +197,6 @@ export const ButtonContainer = styled(Box.as('button'))<StyledType & ButtonConta
         borderColor: colors.disabled.border,
         color: colors.disabled.label,
         ...(colors.disabled.icon && getIconColorSelectors(theme, colors.disabled.icon, fillIcon)),
-        ...(colors.disabled.labelData && {
-          ['.' + buttonLabelDataClassName]: {
-            color: colors.disabled.labelData,
-          },
-        }),
       },
       ...mouseFocusBehavior({
         '&:focus': {

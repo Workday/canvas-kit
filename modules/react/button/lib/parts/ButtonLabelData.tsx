@@ -2,8 +2,6 @@ import * as React from 'react';
 import {styled, createComponent, StyledType} from '@workday/canvas-kit-react/common';
 import {Box, BoxProps} from '@workday/canvas-kit-react/layout';
 
-export const buttonLabelDataClassName = 'button-label-data';
-
 export interface ButtonLabelDataProps extends BoxProps {}
 
 const StyledLabelData = styled(Box.as('span'))<StyledType>({
