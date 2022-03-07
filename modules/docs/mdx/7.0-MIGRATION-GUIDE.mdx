@@ -132,7 +132,10 @@ This will render an icon button that is styled like our secondary buttons.
 
 ### Button Mapping
 
-Below is a mapping of `IconButtons` to their respective buttons
+Below is a mapping of `IconButtons` to their respective buttons. _Note_: We're no longer supporting
+what use to be `plain`, `square` and `squareFilled`. If you would still like to have a squared icon,
+you can use
+[ToolbarIconButton](https://workday.github.io/canvas-kit/?path=/docs/components-buttons-button-react-toolbar--toolbar-icon-button)
 
 | IconButton variant | Button Type                          |
 | ------------------ | ------------------------------------ |
@@ -143,6 +146,19 @@ Below is a mapping of `IconButtons` to their respective buttons
 | `plain`            | Not Supporting                       |
 | `square`           | Not Supporting                       |
 | `squareFilled`     | Not Supporting                       |
+
+### Rendering an icon button
+
+You can now render what use to be an `IconButton` using out main buttons.
+
+```tsx
+<PrimaryButton icon={plusIcon} />
+<SecondaryButton icon={plusIcon} />
+<TertiaryButton icon={plusIcon} />
+<PrimaryButton variant='inverse' icon={plusIcon} />
+<SecondaryButton variant='inverse' icon={plusIcon} />
+<TertiaryButton variant='inverse' icon={plusIcon} />
+```
 
 ### Button sizes
 
