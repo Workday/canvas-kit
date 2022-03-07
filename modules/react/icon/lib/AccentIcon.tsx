@@ -17,7 +17,9 @@ export interface AccentIconStyles {
   transparent?: boolean;
 }
 
-export interface AccentIconProps extends AccentIconStyles, Omit<IconProps, 'src' | 'type'> {
+export interface AccentIconProps
+  extends AccentIconStyles,
+    Omit<IconProps, 'src' | 'type' | 'color'> {
   /**
    *  The icon to display from `@workday/canvas-accent-icons-web`.
    */
