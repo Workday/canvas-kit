@@ -40,7 +40,7 @@ export interface ButtonContainerProps extends BoxProps, GrowthBehavior {
   fillIcon?: boolean;
 }
 
-function getIconColorSelectorsNew(
+function getIconColorSelectors(
   {
     canvas: {
       palette: {primary: themePrimary},
@@ -145,7 +145,7 @@ export const ButtonContainer = styled(Box.as('button'))<StyledType & ButtonConta
     }
   },
   ({grow}) => grow && {width: '100%', maxWidth: '100%'},
-  ({colors, theme}) => {
+  ({colors, fillIcon, theme}) => {
     if (!colors) {
       return;
     }
@@ -158,7 +158,7 @@ export const ButtonContainer = styled(Box.as('button'))<StyledType & ButtonConta
         '.wd-icon-fill, .wd-icon-accent, .wd-icon-accent2, .wd-icon-background': {
           transition: 'fill 120ms ease-in',
         },
-        ...getIconColorSelectorsNew(theme, colors.default.icon, false),
+        ...getIconColorSelectors(theme, colors.default.icon, fillIcon),
       }),
       ...(colors.default.labelData && {
         ['.' + buttonLabelDataClassName]: {
@@ -178,7 +178,7 @@ export const ButtonContainer = styled(Box.as('button'))<StyledType & ButtonConta
             color: colors.hover.labelData,
           },
         }),
-        ...(colors.hover.icon && getIconColorSelectorsNew(theme, colors.hover.icon, false)),
+        ...(colors.hover.icon && getIconColorSelectors(theme, colors.hover.icon, fillIcon)),
       },
     };
 
@@ -192,7 +192,7 @@ export const ButtonContainer = styled(Box.as('button'))<StyledType & ButtonConta
             color: colors.active.labelData,
           },
         }),
-        ...(colors.active.icon && getIconColorSelectorsNew(theme, colors.active.icon, false)),
+        ...(colors.active.icon && getIconColorSelectors(theme, colors.active.icon, fillIcon)),
       },
     };
 
@@ -208,7 +208,7 @@ export const ButtonContainer = styled(Box.as('button'))<StyledType & ButtonConta
             color: colors.focus.labelData,
           },
         }),
-        ...(colors.focus.icon && getIconColorSelectorsNew(theme, colors.focus.icon, false)),
+        ...(colors.focus.icon && getIconColorSelectors(theme, colors.focus.icon, fillIcon)),
       },
 
       ...activeStyles,
@@ -217,7 +217,7 @@ export const ButtonContainer = styled(Box.as('button'))<StyledType & ButtonConta
         backgroundColor: colors.disabled.background,
         borderColor: colors.disabled.border,
         color: colors.disabled.label,
-        ...(colors.disabled.icon && getIconColorSelectorsNew(theme, colors.disabled.icon, false)),
+        ...(colors.disabled.icon && getIconColorSelectors(theme, colors.disabled.icon, fillIcon)),
         ...(colors.disabled.labelData && {
           ['.' + buttonLabelDataClassName]: {
             color: colors.disabled.labelData,

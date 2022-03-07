@@ -54,6 +54,7 @@ export interface SystemIconProps
    * The size of the SystemIcon in `px`.
    */
   size?: number | undefined;
+  className?: string; //investigate more
 }
 
 export const systemIconStyles = ({
