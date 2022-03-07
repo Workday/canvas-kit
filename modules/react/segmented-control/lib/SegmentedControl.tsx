@@ -1,20 +1,19 @@
 import * as React from 'react';
 
-// import {IconButton, IconButtonProps} from '@workday/canvas-kit-react/button';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {SegmentedControlButton, SegmentedControlButtonProps} from './SegmentedControlButton';
 
 export interface SegmentedControlProps {
   /**
-   * The IconButton children of the SegmentedControl (must be at least two).
+   * The Button children of the SegmentedControl (must be at least two).
    * TODO: Add support for text children
    */
   children: React.ReactElement<SegmentedControlButtonProps>[];
 
   /**
-   * The value or index of the IconButton that the SegmentedControl should be toggled on to.
-   * If a string is provided, the IconButton with the corresponding value will be selected.
-   * If a number is provided, the IconButton with the corresponding index will be selected.
+   * The value or index of the Button that the SegmentedControl should be toggled on to.
+   * If a string is provided, the Button with the corresponding value will be selected.
+   * If a number is provided, the Button with the corresponding index will be selected.
    * @default 0
    */
   value?: string | number;
@@ -66,7 +65,6 @@ export const SegmentedControl = createComponent('div')({
               return React.cloneElement(child, {
                 toggled: typeof value === 'number' ? index === value : child.props.value === value,
                 onClick: onButtonClick.bind(undefined, child.props.onClick, onChange, index),
-                // ...child.props,
               });
             }
 

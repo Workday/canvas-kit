@@ -1,15 +1,17 @@
 import * as React from 'react';
-import {colors, space, borderRadius} from '@workday/canvas-kit-react/tokens';
+import {borderRadius, colors, space} from '@workday/canvas-kit-react/tokens';
 import {
   focusRing,
   useTheme,
   Themeable,
   EmotionCanvasTheme,
   createComponent,
+  styled,
+  StyledType,
 } from '@workday/canvas-kit-react/common';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {ButtonColors} from './types';
-import {ButtonContainer} from './parts';
+import {Button} from './Button';
 import {TertiaryButtonProps} from './TertiaryButton';
 
 export interface ToolbarIconButtonProps
@@ -19,11 +21,7 @@ export interface ToolbarIconButtonProps
   toggled?: boolean;
 }
 
-const containerStyles = {
-  padding: 0,
-  minWidth: space.l,
-  width: space.l,
-  height: space.l,
+const StyledToolbarIconButton = styled(Button)<StyledType & ToolbarIconButtonProps>({
   borderRadius: borderRadius.m,
   ['& .wd-icon']: {
     display: 'inline-block',
@@ -31,7 +29,7 @@ const containerStyles = {
     width: 20,
     height: 20,
   },
-};
+});
 
 export const ToolbarIconButton = createComponent('button')({
   displayName: 'ToolbarIconButton',
@@ -64,18 +62,21 @@ export const ToolbarIconButton = createComponent('button')({
     }, [toggled, onToggleChange]);
 
     return (
-      <ButtonContainer
+      <StyledToolbarIconButton
         ref={ref}
         as={Element}
         colors={getToolbarIconButtonColors(theme, toggled)}
         size={'small'}
         fillIcon={toggled}
-        extraStyles={containerStyles}
         aria-pressed={toggled}
+        padding="zero"
+        minWidth={space.l}
+        width={space.l}
+        height={space.l}
         {...elemProps}
       >
         {icon ? <SystemIcon icon={icon} shouldMirror={shouldMirrorIcon} /> : children}
-      </ButtonContainer>
+      </StyledToolbarIconButton>
     );
   },
 });

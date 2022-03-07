@@ -35,7 +35,7 @@ export interface ButtonContainerProps extends BoxProps, GrowthBehavior {
   ref?: React.Ref<HTMLButtonElement>;
   /**
    * Whether the icon should received filled (colored background layer) or regular styles.
-   * Corresponds to `toggled` in IconButton
+   * Corresponds to `toggled` in ToolbarIconButton
    */
   fillIcon?: boolean;
 }

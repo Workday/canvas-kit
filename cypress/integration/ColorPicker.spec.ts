@@ -115,7 +115,7 @@ describe('ColorPicker', () => {
   });
 
   describe('Icon Button ColorPicker Popup', () => {
-    context('when the IconButton is clicked', () => {
+    context('when the SecondaryButton is clicked', () => {
       beforeEach(() => {
         h.stories.load(colorPickerStory, 'Icon Button Popup');
         getOpenButton().click();

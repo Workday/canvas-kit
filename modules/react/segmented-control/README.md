@@ -14,7 +14,6 @@ yarn add @workday/canvas-kit-react
 ```tsx
 import * as React from 'react';
 import {SegmentedControl} from '@workday/canvas-kit-react/segmented-control';
-import {IconButton} from '@workday/canvas-kit-react/button';
 import {listViewIcon, worksheetsIcon} from '@workday/canvas-system-icons-web';
 
 <SegmentedControl>
@@ -23,8 +22,8 @@ import {listViewIcon, worksheetsIcon} from '@workday/canvas-system-icons-web';
 </SegmentedControl>;
 ```
 
-**Note:** while managing state using a unique `value` for each `IconButton` child is encouraged, you
-can also use indexes and omit the `value` field. It is strongly recommended to not mix these two
+**Note:** while managing state using a unique `value` for each `Button` child is encouraged, you can
+also use indexes and omit the `value` field. It is strongly recommended to not mix these two
 methods.
 
 ## Static Properties
@@ -37,7 +36,7 @@ methods.
 
 #### `children:React.ReactElement<SegmentedControlButtonProps>[]`
 
-> Icon buttons to toggle between.
+> Buttons to toggle between.
 
 ---
 
@@ -45,8 +44,8 @@ methods.
 
 #### `value: string | number`
 
-> Identify which item is selected (toggled=true). If a string is passed, the IconButton with the
-> corresponding value will be selected. If a number is passed, the IconButton with the corresponding
+> Identify which item is selected (toggled=true). If a string is passed, the Button with the
+> corresponding value will be selected. If a number is passed, the Button with the corresponding
 > index will be selected.
 
 ---
