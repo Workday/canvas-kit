@@ -33,7 +33,7 @@ export interface ButtonLabelIconProps extends BoxProps {
 const iconSizes: Record<ButtonSizes, number> = {
   extraSmall: 18,
   small: 20,
-  medium: 20,
+  medium: 24,
   large: 24,
 };
 

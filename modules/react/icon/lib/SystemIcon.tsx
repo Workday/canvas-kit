@@ -100,7 +100,7 @@ export default class SystemIcon extends React.Component<SystemIconProps> {
       accentHover,
       fill,
       fillHover,
-      size = 20,
+      size = 24,
       shouldMirror,
       ...elemProps
     } = this.props;
