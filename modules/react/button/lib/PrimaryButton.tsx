@@ -160,6 +160,7 @@ export const PrimaryButton = createComponent('button')({
         colors={getPrimaryButtonColors(variant, theme)}
         padding={getPaddingStyles(children, size)}
         minWidth={getMinWidthStyles(children, size)}
+        as={Element}
         {...elemProps}
       >
         {icon && iconPosition === 'start' && (

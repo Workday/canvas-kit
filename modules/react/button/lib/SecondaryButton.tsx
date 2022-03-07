@@ -79,6 +79,7 @@ export const SecondaryButton = createComponent('button')({
         colors={getSecondaryButtonColors(variant, theme)}
         padding={getPaddingStyles(children, size)}
         minWidth={getMinWidthStyles(children, size)}
+        as={Element}
         {...elemProps}
       >
         {icon && iconPosition === 'start' && (
