@@ -9,7 +9,6 @@ import {
   styled,
   StyledType,
 } from '@workday/canvas-kit-react/common';
-import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {ButtonColors} from './types';
 import {Button} from './Button';
 import {chevronDownSmallIcon} from '@workday/canvas-system-icons-web';
@@ -64,18 +63,18 @@ export const ToolbarDropdownButton = createComponent('button')({
         {...elemProps}
       >
         {icon ? (
-          <SystemIcon
+          <Button.Icon
             className={'wdc-toolbar-dropdown-btn-custom-icon'}
             icon={icon}
-            shouldMirror={shouldMirrorIcon}
+            shouldMirrorIcon={shouldMirrorIcon}
           />
         ) : (
           children
         )}
-        <SystemIcon
+        <Button.Icon
           className={'wdc-toolbar-dropdown-btn-arrow'}
           icon={chevronDownSmallIcon}
-          shouldMirror={shouldMirrorIcon}
+          shouldMirrorIcon={shouldMirrorIcon}
         />
       </StyledToolbarDropdownButton>
     );

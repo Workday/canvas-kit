@@ -9,7 +9,6 @@ import {
   styled,
   StyledType,
 } from '@workday/canvas-kit-react/common';
-import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {ButtonColors} from './types';
 import {Button} from './Button';
 import {TertiaryButtonProps} from './TertiaryButton';
@@ -19,6 +18,7 @@ export interface ToolbarIconButtonProps
     Themeable {
   onToggleChange?: (toggled: boolean | undefined) => void;
   toggled?: boolean;
+  shouldMirrorIcon?: boolean;
 }
 
 const StyledToolbarIconButton = styled(Button)<StyledType & ToolbarIconButtonProps>({
@@ -75,7 +75,7 @@ export const ToolbarIconButton = createComponent('button')({
         height={space.l}
         {...elemProps}
       >
-        {icon ? <SystemIcon icon={icon} shouldMirror={shouldMirrorIcon} /> : children}
+        {icon ? <Button.Icon icon={icon} shouldMirrorIcon={shouldMirrorIcon} /> : children}
       </StyledToolbarIconButton>
     );
   },

@@ -1,9 +1,9 @@
 import React from 'react';
-import {BoxProps} from '@workday/canvas-kit-react/layout';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {ButtonSizes, IconPositions} from '../types';
 import {styled, createComponent} from '@workday/canvas-kit-react/common';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
+import {BoxProps} from '@workday/canvas-kit-react/layout';
 
 export interface ButtonLabelIconProps extends BoxProps {
   /**
@@ -11,7 +11,7 @@ export interface ButtonLabelIconProps extends BoxProps {
    *
    * @default 'medium'
    */
-  size: ButtonSizes | undefined;
+  size?: ButtonSizes | undefined;
   /**
    * The icon of the Button.
    * Note: not displayed at `small` size
