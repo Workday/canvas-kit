@@ -92,6 +92,4 @@ export const AppletIcon = createComponent('span')({
   },
 });
 
-// AppletIcon.Colors = BrandingColor;
-
 export default AppletIcon;

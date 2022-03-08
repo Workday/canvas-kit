@@ -1,7 +1,7 @@
 import React from 'react';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {ButtonSizes, IconPositions} from '../types';
-import {styled, createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent} from '@workday/canvas-kit-react/common';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {BoxProps} from '@workday/canvas-kit-react/layout';
 
