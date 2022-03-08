@@ -1,11 +1,12 @@
-/** @jsx jsx */
 /** @jsxRuntime classic */
+/** @jsx jsx */
 import * as React from 'react';
 import {styled, useIsRTL} from '@workday/canvas-kit-react/common';
-import {css, CSSObject, jsx, keyframes} from '@emotion/react';
+import {css, jsx, keyframes, CSSObject} from '@emotion/react';
 import {TertiaryButton, TertiaryButtonProps} from '@workday/canvas-kit-react/button';
 import {space, colors, depth} from '@workday/canvas-kit-react/tokens';
 import {transformationImportIcon} from '@workday/canvas-system-icons-web';
+import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 
 export type SidePanelVariant = 'standard' | 'alternate';
 export type SidePanelTransitionStates = 'collapsed' | 'collapsing' | 'expanded' | 'expanding';
@@ -207,13 +208,27 @@ const SidePanel = ({
   );
 };
 
-export type ToggleButtonProps = Omit<TertiaryButtonProps, 'aria-label'>;
+export type ToggleButtonProps = TertiaryButtonProps & {
+  /**
+   * The tooltip text to expand the side panel
+   * @default 'Expand'
+   */
+  tooltipTextExpand?: string;
+  /**
+   * The tooltip text to collapse the side panel
+   * @default 'Collapse'
+   */
+  tooltipTextCollapse?: string;
+};
 
 /**
  * A toggle button styled specifically for the side panel container.
  */
 const ToggleButton = ({
+  variant = undefined,
   icon = transformationImportIcon,
+  tooltipTextExpand: expandLabel = 'Expand',
+  tooltipTextCollapse: collapseLabel = 'Collapse',
   ...rest
 }: ToggleButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>) => {
   const context = React.useContext(SidePanelContext);
@@ -234,18 +249,21 @@ const ToggleButton = ({
   const buttonStyle = css({
     position: 'absolute',
     top: space.m,
-    width: space.xl,
+    width: space.l,
     right: context.state === 'collapsed' ? 0 : rtlOrigin === 'left' ? space.s : undefined,
     left: context.state === 'collapsed' ? 0 : rtlOrigin === 'right' ? space.s : undefined,
-    margin: context.state === 'collapsed' ? 'auto' : 0, // to override the -8px margin for tertiary button
+    margin: context.state === 'collapsed' ? 'auto' : 0, // to override the -8px margin for TertiaryButton.Plain
     transform:
       context.state === 'collapsed' || context.state === 'collapsing'
         ? `scaleX(${rtlOrigin === 'left' ? '1' : '-1'})`
         : `scaleX(${rtlOrigin === 'left' ? '-1' : '1'})`,
   });
 
-  // @ts-ignore aria-label type error here. The user will decide to use aria-label or aria-labelledby
-  return <TertiaryButton type="button" css={buttonStyle} icon={icon} {...rest} />;
+  return (
+    <Tooltip title={context.state === 'collapsed' ? expandLabel : collapseLabel} type="muted">
+      <TertiaryButton type="button" css={buttonStyle} icon={icon} variant={variant} {...rest} />
+    </Tooltip>
+  );
 };
 
 SidePanel.ToggleButton = ToggleButton;

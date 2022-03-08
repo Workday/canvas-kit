@@ -33,7 +33,7 @@ export interface ButtonLabelIconProps extends BoxProps {
 const iconSizes: Record<ButtonSizes, number> = {
   extraSmall: 18,
   small: 20,
-  medium: 24,
+  medium: 20,
   large: 24,
 };
 
@@ -52,15 +52,15 @@ export const ButtonLabelIcon = createComponent('span')({
       return null;
     }
 
-    const iconSize = size ? iconSizes[size] : undefined;
+    const iconSize = size ? iconSizes[size] : iconSizes.large;
 
     return (
       <StyledButtonLabelIcon
         size={iconSize}
         icon={icon}
         shouldMirror={shouldMirrorIcon}
-        width={size ? iconSizes[size] : iconSizes.medium}
-        height={size ? iconSizes[size] : iconSizes.medium}
+        width={size ? iconSizes[size] : iconSizes.large}
+        height={size ? iconSizes[size] : iconSizes.large}
         {...elemProps}
       />
     );

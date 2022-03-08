@@ -63,32 +63,23 @@ export const TertiaryButtonStates = (props: {theme?: PartialEmotionCanvasTheme})
 export const TertiaryButtonIconStates = (props: {theme?: PartialEmotionCanvasTheme}) => (
   <StaticStates theme={props.theme}>
     <ComponentStatesTable
-      rowProps={permutateProps(
-        {
-          variant: [
-            {value: undefined, label: 'Default'},
-            {value: 'inverse', label: 'Inverse'},
-          ],
+      rowProps={permutateProps({
+        variant: [
+          {value: undefined, label: 'Default'},
+          {value: 'inverse', label: 'Inverse'},
+        ],
 
-          size: [
-            {value: 'extraSmall', label: 'Extra Small'},
-            {value: 'small', label: 'Small'},
-            {value: 'medium', label: 'Medium'},
-            {value: 'large', label: 'Large'},
-          ],
-          icon: [
-            // We don't need a label here, because `iconPosition` provides it
-            {value: playCircleIcon, label: ''},
-          ],
-        },
-        // Filter out permutations where `iconPosition` is provided and not `icon`, and vice versa
-        props => {
-          //   if ((props.iconPosition && !props.icon) || (props.icon && !props.iconPosition)) {
-          //     return false;
-          //   }
-          return true;
-        }
-      )}
+        size: [
+          {value: 'extraSmall', label: 'Extra Small'},
+          {value: 'small', label: 'Small'},
+          {value: 'medium', label: 'Medium'},
+          {value: 'large', label: 'Large'},
+        ],
+        icon: [
+          // We don't need a label here, because `iconPosition` provides it
+          {value: playCircleIcon, label: ''},
+        ],
+      })}
       columnProps={stateTableColumnProps}
     >
       {props => (

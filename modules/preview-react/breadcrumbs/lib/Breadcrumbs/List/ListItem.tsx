@@ -17,7 +17,6 @@ export const BreadcrumbsListItem = ({children, ...props}: ListItemProps) => {
       {children}
       <SystemIcon
         icon={icon}
-        size={24}
         color={colors.licorice200}
         colorHover={colors.licorice200}
         aria-hidden
