@@ -213,7 +213,7 @@ export const TertiaryButton = createComponent('button')({
       >
         {icon && iconPosition === 'start' && (
           <BaseButton.Icon
-            // size={size}
+            size={size}
             iconPosition={iconPosition}
             icon={icon}
             shouldMirrorIcon={shouldMirrorIcon}
@@ -223,7 +223,7 @@ export const TertiaryButton = createComponent('button')({
         {children && <StyledButtonLabel>{children}</StyledButtonLabel>}
         {icon && iconPosition === 'end' && (
           <BaseButton.Icon
-            // size={size}
+            size={size}
             iconPosition={iconPosition}
             icon={icon}
             shouldMirrorIcon={shouldMirrorIcon}
