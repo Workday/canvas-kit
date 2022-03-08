@@ -9,5 +9,5 @@ export {
 export {ToolbarIconButton, ToolbarIconButtonProps} from './lib/ToolbarIconButton';
 export {ToolbarDropdownButton, ToolbarDropdownButtonProps} from './lib/ToolbarDropdownButton';
 export {Hyperlink, HyperlinkProps} from './lib/Hyperlink';
-export {Button, ButtonContainerProps} from './lib/Button';
+export {BaseButton as Button, ButtonContainerProps} from './lib/Button';
 export * from './lib/types';

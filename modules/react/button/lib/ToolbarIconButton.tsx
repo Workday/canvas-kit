@@ -10,7 +10,7 @@ import {
   StyledType,
 } from '@workday/canvas-kit-react/common';
 import {ButtonColors} from './types';
-import {Button} from './Button';
+import {BaseButton} from './Button';
 import {TertiaryButtonProps} from './TertiaryButton';
 
 export interface ToolbarIconButtonProps
@@ -21,7 +21,7 @@ export interface ToolbarIconButtonProps
   shouldMirrorIcon?: boolean;
 }
 
-const StyledToolbarIconButton = styled(Button)<StyledType & ToolbarIconButtonProps>({
+const StyledToolbarIconButton = styled(BaseButton)<StyledType & ToolbarIconButtonProps>({
   borderRadius: borderRadius.m,
   ['& .wd-icon']: {
     display: 'inline-block',
@@ -75,7 +75,7 @@ export const ToolbarIconButton = createComponent('button')({
         height={space.l}
         {...elemProps}
       >
-        {icon ? <Button.Icon icon={icon} shouldMirrorIcon={shouldMirrorIcon} /> : children}
+        {icon ? <BaseButton.Icon icon={icon} shouldMirrorIcon={shouldMirrorIcon} /> : children}
       </StyledToolbarIconButton>
     );
   },

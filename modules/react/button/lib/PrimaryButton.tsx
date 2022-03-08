@@ -11,7 +11,7 @@ import {
 import {colors, space} from '@workday/canvas-kit-react/tokens';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {ButtonSizes, IconPositions} from './types';
-import {Button, getMinWidthStyles, getPaddingStyles} from './Button';
+import {BaseButton, getMinWidthStyles, getPaddingStyles} from './Button';
 
 const getPrimaryButtonColors = (variant: 'inverse' | undefined, theme: EmotionCanvasTheme) => {
   const {
@@ -154,7 +154,7 @@ export const PrimaryButton = createComponent('button')({
     const balancingMargin = size === 'large' ? space.xxs : space.xxxs;
     const theme = useTheme();
     return (
-      <Button
+      <BaseButton
         ref={ref}
         size={size}
         colors={getPrimaryButtonColors(variant, theme)}
@@ -164,7 +164,7 @@ export const PrimaryButton = createComponent('button')({
         {...elemProps}
       >
         {icon && iconPosition === 'start' && (
-          <Button.Icon
+          <BaseButton.Icon
             size={size}
             iconPosition={iconPosition}
             icon={icon}
@@ -172,12 +172,12 @@ export const PrimaryButton = createComponent('button')({
             marginInlineStart={children ? `-${balancingMargin} !important` : undefined}
           />
         )}
-        {children && <Button.Label>{children}</Button.Label>}
+        {children && <BaseButton.Label>{children}</BaseButton.Label>}
         {dataLabel && dataLabelSizes.includes(size) && (
-          <Button.LabelData>{dataLabel}</Button.LabelData>
+          <BaseButton.LabelData>{dataLabel}</BaseButton.LabelData>
         )}
         {icon && iconPosition === 'end' && (
-          <Button.Icon
+          <BaseButton.Icon
             size={size}
             iconPosition={iconPosition}
             icon={icon}
@@ -185,7 +185,7 @@ export const PrimaryButton = createComponent('button')({
             marginInlineEnd={children ? `-${balancingMargin} !important` : undefined}
           />
         )}
-      </Button>
+      </BaseButton>
     );
   },
 });

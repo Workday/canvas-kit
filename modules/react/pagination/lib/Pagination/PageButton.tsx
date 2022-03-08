@@ -1,11 +1,11 @@
 import * as React from 'react';
 import {styled} from '@workday/canvas-kit-react/common';
 import {borderRadius, colors, space} from '@workday/canvas-kit-react/tokens';
-import {Button} from '../../../button/lib/Button';
+import {BaseButton} from '../../../button/lib/Button';
 
 import {PaginationModel} from './types';
 
-const StyledPageButton = styled(Button)<{toggled?: boolean}>(
+const StyledPageButton = styled(BaseButton)<{toggled?: boolean}>(
   {
     minWidth: space.l,
     width: space.l,

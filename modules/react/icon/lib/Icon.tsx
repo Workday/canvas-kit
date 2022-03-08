@@ -2,36 +2,36 @@ import * as React from 'react';
 import {CSSObject} from '@emotion/styled';
 import {CanvasIcon, CanvasIconTypes} from '@workday/design-assets-types';
 import Svg, {SvgProps} from './Svg';
+import {createComponent} from '../../common';
 
 export interface IconProps extends SvgProps {
   src: CanvasIcon;
   size?: number;
   type: CanvasIconTypes.Accent | CanvasIconTypes.Applet | CanvasIconTypes.System;
-  iconRef?: React.Ref<HTMLSpanElement>;
 }
 
-export default class Icon extends React.Component<IconProps> {
-  public render() {
-    const {src, size, styles, type, iconRef, shouldMirror, ...elemProps} = this.props;
-
+export const Icon = createComponent('span')({
+  displayName: 'Icon',
+  Component: ({src, size, styles, type, shouldMirror, ...elemProps}: IconProps, ref, Element) => {
     const iconStyles: CSSObject = {...styles};
-
     if (size) {
       iconStyles['& svg'] = {
         width: size,
         height: size,
       };
     }
-
     return (
       <Svg
         src={src}
         type={type}
         shouldMirror={shouldMirror}
+        as={Element}
         {...elemProps}
         styles={iconStyles}
-        iconRef={iconRef}
+        ref={ref}
       />
     );
-  }
-}
+  },
+});
+
+export default Icon;

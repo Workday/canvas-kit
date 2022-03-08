@@ -11,7 +11,7 @@ import {
 import {borderRadius, colors, space} from '@workday/canvas-kit-react/tokens';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {ButtonColors, IconPositions, ButtonSizes} from './types';
-import {Button} from './Button';
+import {BaseButton} from './Button';
 
 export interface TertiaryButtonProps extends Themeable {
   /**
@@ -125,11 +125,11 @@ const getTertiaryButtonColors = (
   }
 };
 
-const StyledButtonLabel = styled(Button.Label)({
+const StyledButtonLabel = styled(BaseButton.Label)({
   textDecoration: 'underline',
 });
 
-const StyledTertiaryButtonContainer = styled(Button)<
+const StyledTertiaryButtonContainer = styled(BaseButton)<
   StyledType & Pick<TertiaryButtonProps, 'allCaps'>
 >(
   {
@@ -212,7 +212,7 @@ export const TertiaryButton = createComponent('button')({
         {...elemProps}
       >
         {icon && iconPosition === 'start' && (
-          <Button.Icon
+          <BaseButton.Icon
             // size={size}
             iconPosition={iconPosition}
             icon={icon}
@@ -222,7 +222,7 @@ export const TertiaryButton = createComponent('button')({
         )}
         {children && <StyledButtonLabel>{children}</StyledButtonLabel>}
         {icon && iconPosition === 'end' && (
-          <Button.Icon
+          <BaseButton.Icon
             // size={size}
             iconPosition={iconPosition}
             icon={icon}

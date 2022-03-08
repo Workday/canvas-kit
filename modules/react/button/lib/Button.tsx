@@ -68,7 +68,7 @@ function getIconColorSelectors(
   };
 }
 
-export const ButtonContainer = styled(Box.as('button'))<StyledType & ButtonContainerProps>(
+const ButtonContainer = styled(Box.as('button'))<StyledType & ButtonContainerProps>(
   {
     ...type.levels.subtext.large,
     cursor: 'pointer',
@@ -249,7 +249,7 @@ export const getPaddingStyles = (
   }
 };
 
-export const Button = createComponent('button')({
+export const BaseButton = createComponent('button')({
   displayName: 'Button',
   Component: ({children, ...elemProps}: ButtonContainerProps, ref, Element) => {
     return (

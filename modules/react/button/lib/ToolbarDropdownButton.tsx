@@ -10,7 +10,7 @@ import {
   StyledType,
 } from '@workday/canvas-kit-react/common';
 import {ButtonColors} from './types';
-import {Button} from './Button';
+import {BaseButton} from './Button';
 import {chevronDownSmallIcon} from '@workday/canvas-system-icons-web';
 import {ToolbarIconButtonProps} from './ToolbarIconButton';
 
@@ -18,7 +18,7 @@ export interface ToolbarDropdownButtonProps
   extends Omit<ToolbarIconButtonProps, 'toggled' | 'onToggleChange'>,
     Themeable {}
 
-const StyledToolbarDropdownButton = styled(Button)<StyledType & ToolbarDropdownButtonProps>({
+const StyledToolbarDropdownButton = styled(BaseButton)<StyledType & ToolbarDropdownButtonProps>({
   padding: space.zero,
   minWidth: space.l,
   width: 'auto',
@@ -63,7 +63,7 @@ export const ToolbarDropdownButton = createComponent('button')({
         {...elemProps}
       >
         {icon ? (
-          <Button.Icon
+          <BaseButton.Icon
             className={'wdc-toolbar-dropdown-btn-custom-icon'}
             icon={icon}
             shouldMirrorIcon={shouldMirrorIcon}
@@ -71,7 +71,7 @@ export const ToolbarDropdownButton = createComponent('button')({
         ) : (
           children
         )}
-        <Button.Icon
+        <BaseButton.Icon
           className={'wdc-toolbar-dropdown-btn-arrow'}
           icon={chevronDownSmallIcon}
           shouldMirrorIcon={shouldMirrorIcon}

@@ -37,10 +37,6 @@ const iconSizes: Record<ButtonSizes, number> = {
   large: 24,
 };
 
-const StyledButtonLabelIcon = styled(SystemIcon)({
-  display: 'inline-block',
-});
-
 export const ButtonLabelIcon = createComponent('span')({
   displayName: 'ButtonLabelIconNew',
   Component: (
@@ -55,12 +51,13 @@ export const ButtonLabelIcon = createComponent('span')({
     const iconSize = size ? iconSizes[size] : iconSizes.large;
 
     return (
-      <StyledButtonLabelIcon
+      <SystemIcon
         size={iconSize}
         icon={icon}
         shouldMirror={shouldMirrorIcon}
         width={size ? iconSizes[size] : iconSizes.large}
         height={size ? iconSizes[size] : iconSizes.large}
+        display="inline-block"
         {...elemProps}
       />
     );

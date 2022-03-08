@@ -3,6 +3,7 @@ import {iconColors} from '@workday/canvas-kit-react/tokens';
 import {CanvasSystemIcon, CanvasIconTypes} from '@workday/design-assets-types';
 import {CSSObject} from '@emotion/styled';
 import Icon, {IconProps} from './Icon';
+import {createComponent} from '../../common';
 
 export interface SystemIconStyles {
   /**
@@ -87,15 +88,16 @@ export const systemIconStyles = ({
   },
 });
 
-export default class SystemIcon extends React.Component<SystemIconProps> {
-  render() {
-    const {
+const SystemIcon = createComponent('span')({
+  displayName: 'SystemIcon',
+  Component: (
+    {
       background = 'transparent',
       backgroundHover = 'transparent',
       color = iconColors.standard,
       colorHover = iconColors.hover,
       icon,
-      iconRef,
+
       accent,
       accentHover,
       fill,
@@ -103,8 +105,10 @@ export default class SystemIcon extends React.Component<SystemIconProps> {
       size,
       shouldMirror,
       ...elemProps
-    } = this.props;
-
+    }: SystemIconProps,
+    ref,
+    Element
+  ) => {
     const style = systemIconStyles({
       accent,
       accentHover,
@@ -115,17 +119,19 @@ export default class SystemIcon extends React.Component<SystemIconProps> {
       fill,
       fillHover,
     });
-
     return (
       <Icon
         src={icon}
         type={CanvasIconTypes.System}
         size={size}
         styles={style}
-        iconRef={iconRef}
+        as={Element}
+        ref={ref}
         shouldMirror={shouldMirror}
         {...elemProps}
       />
     );
-  }
-}
+  },
+});
+
+export default SystemIcon;

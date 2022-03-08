@@ -9,7 +9,6 @@ export interface SvgProps extends BoxProps {
   src: CanvasIcon;
   styles?: CSSObject;
   type: CanvasIconTypes;
-  iconRef?: React.Ref<HTMLSpanElement>;
   /**
    * If set to `true`, transform the SVG's x-axis to mirror the graphic
    * @default false
@@ -30,7 +29,7 @@ const StyledIconSpan = styled(Box.as('span'))<Pick<SvgProps, 'shouldMirror' | 's
 
 export const Svg = createComponent('span')({
   displayName: 'Svg',
-  Component: ({src, type, iconRef, ...elemProps}: SvgProps, ref, Element) => {
+  Component: ({src, type, ...elemProps}: SvgProps, ref, Element) => {
     // Validation for JS
     try {
       validateIconType(src, type);
@@ -38,9 +37,7 @@ export const Svg = createComponent('span')({
       console.error(e);
       return null;
     }
-    return (
-      <StyledIconSpan {...elemProps} dangerouslySetInnerHTML={{__html: src.svg}} ref={iconRef} />
-    );
+    return <StyledIconSpan {...elemProps} dangerouslySetInnerHTML={{__html: src.svg}} ref={ref} />;
   },
 });
 

@@ -11,7 +11,7 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {ButtonColors, ButtonSizes, IconPositions} from './types';
-import {Button, getMinWidthStyles, getPaddingStyles} from './Button';
+import {BaseButton, getMinWidthStyles, getPaddingStyles} from './Button';
 
 export interface SecondaryButtonProps extends Themeable, GrowthBehavior {
   /**
@@ -73,7 +73,7 @@ export const SecondaryButton = createComponent('button')({
     const theme = useTheme();
 
     return (
-      <Button
+      <BaseButton
         ref={ref}
         size={size}
         colors={getSecondaryButtonColors(variant, theme)}
@@ -83,7 +83,7 @@ export const SecondaryButton = createComponent('button')({
         {...elemProps}
       >
         {icon && iconPosition === 'start' && (
-          <Button.Icon
+          <BaseButton.Icon
             size={size}
             iconPosition={iconPosition}
             icon={icon}
@@ -91,12 +91,12 @@ export const SecondaryButton = createComponent('button')({
             marginInlineStart={children ? `-${balancingMargin} !important` : undefined}
           />
         )}
-        {children && <Button.Label>{children}</Button.Label>}
+        {children && <BaseButton.Label>{children}</BaseButton.Label>}
         {dataLabel && dataLabelSizes.includes(size) && (
-          <Button.LabelData>{dataLabel}</Button.LabelData>
+          <BaseButton.LabelData>{dataLabel}</BaseButton.LabelData>
         )}
         {icon && iconPosition === 'end' && (
-          <Button.Icon
+          <BaseButton.Icon
             size={size}
             iconPosition={iconPosition}
             icon={icon}
@@ -104,7 +104,7 @@ export const SecondaryButton = createComponent('button')({
             marginInlineEnd={children ? `-${balancingMargin} !important` : undefined}
           />
         )}
-      </Button>
+      </BaseButton>
     );
   },
 });
