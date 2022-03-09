@@ -10,7 +10,7 @@ export interface IconProps extends SvgProps {
   type: CanvasIconTypes.Accent | CanvasIconTypes.Applet | CanvasIconTypes.System;
 }
 
-export const Icon = createComponent('svg')({
+export const Icon = createComponent('span')({
   displayName: 'Icon',
   Component: ({src, size, styles, type, shouldMirror, ...elemProps}: IconProps, ref, Element) => {
     const iconStyles: CSSObject = {...styles};

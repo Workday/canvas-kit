@@ -88,7 +88,7 @@ export const systemIconStyles = ({
   },
 });
 
-const SystemIcon = createComponent('svg')({
+const SystemIcon = createComponent('span')({
   displayName: 'SystemIcon',
   Component: (
     {
@@ -125,8 +125,8 @@ const SystemIcon = createComponent('svg')({
         type={CanvasIconTypes.System}
         size={size}
         as={Element}
-        ref={ref}
         shouldMirror={shouldMirror}
+        ref={ref}
         styles={style}
         {...elemProps}
       />
