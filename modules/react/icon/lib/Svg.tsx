@@ -30,14 +30,14 @@ const StyledIconSpan = styled(Box.as('span'))<Pick<SvgProps, 'shouldMirror' | 's
 export const Svg = createComponent('span')({
   displayName: 'Svg',
   Component: ({src, type, ...elemProps}: SvgProps, ref, Element) => {
-    // Validation for JS
     try {
       validateIconType(src, type);
     } catch (e) {
       console.error(e);
       return null;
     }
-    return <StyledIconSpan {...elemProps} dangerouslySetInnerHTML={{__html: src.svg}} ref={ref} />;
+
+    return <StyledIconSpan dangerouslySetInnerHTML={{__html: src.svg}} {...elemProps} ref={ref} />;
   },
 });
 

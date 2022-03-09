@@ -46,7 +46,7 @@ export interface SystemIconStyles {
 
 export interface SystemIconProps
   extends SystemIconStyles,
-    Omit<IconProps, 'src' | 'type' | 'color' | 'background'> {
+    Omit<IconProps, 'src' | 'color' | 'type' | 'background'> {
   /**
    * The icon to display from `@workday/canvas-system-icons-web`.
    */
@@ -88,7 +88,7 @@ export const systemIconStyles = ({
   },
 });
 
-const SystemIcon = createComponent('span')({
+const SystemIcon = createComponent('svg')({
   displayName: 'SystemIcon',
   Component: (
     {
@@ -97,7 +97,6 @@ const SystemIcon = createComponent('span')({
       color = iconColors.standard,
       colorHover = iconColors.hover,
       icon,
-
       accent,
       accentHover,
       fill,
@@ -119,15 +118,16 @@ const SystemIcon = createComponent('span')({
       fill,
       fillHover,
     });
+
     return (
       <Icon
         src={icon}
         type={CanvasIconTypes.System}
         size={size}
-        styles={style}
         as={Element}
         ref={ref}
         shouldMirror={shouldMirror}
+        styles={style}
         {...elemProps}
       />
     );

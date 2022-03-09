@@ -10,16 +10,18 @@ export interface IconProps extends SvgProps {
   type: CanvasIconTypes.Accent | CanvasIconTypes.Applet | CanvasIconTypes.System;
 }
 
-export const Icon = createComponent('span')({
+export const Icon = createComponent('svg')({
   displayName: 'Icon',
   Component: ({src, size, styles, type, shouldMirror, ...elemProps}: IconProps, ref, Element) => {
     const iconStyles: CSSObject = {...styles};
+
     if (size) {
       iconStyles['& svg'] = {
         width: size,
         height: size,
       };
     }
+    console.warn('styles', styles);
     return (
       <Svg
         src={src}
@@ -27,8 +29,8 @@ export const Icon = createComponent('span')({
         shouldMirror={shouldMirror}
         as={Element}
         {...elemProps}
-        styles={iconStyles}
         ref={ref}
+        styles={iconStyles}
       />
     );
   },
