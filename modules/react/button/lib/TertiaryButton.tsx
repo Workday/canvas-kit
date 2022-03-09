@@ -118,8 +118,8 @@ const getTertiaryButtonColors = (
         focusRing: focusRing({innerColor: colors.blueberry400}, theme),
       },
       disabled: {
-        icon: children ? themePrimary.dark : colors.blackPepper400,
-        label: themePrimary.dark,
+        icon: children ? themePrimary.main : colors.blackPepper400,
+        label: themePrimary.main,
       },
     };
   }
