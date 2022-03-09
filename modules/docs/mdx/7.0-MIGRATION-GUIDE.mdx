@@ -110,9 +110,9 @@ word.
 ## Buttons
 
 As part of our efforts to decrease variants and consolidate APIs, we've combined `IconButton` with
-our `PrimaryButton`, `SecondaryButton` and `TertiaryButton`. \_
+our `PrimaryButton`, `SecondaryButton` and `TertiaryButton`.
 
-Note\_: In order to render a icon button, omit any `children` and pass the button an `icon` prop.
+_Note_: In order to render a icon button, omit any `children` and pass the button an `icon` prop.
 
 Example
 
@@ -162,7 +162,34 @@ You can now render what use to be an `IconButton` using out main buttons.
 
 ### Button sizes
 
-Each button now supports sizes: `extraSmall`, `small`, `medium` and `large`
+Each button now supports sizes: `extraSmall`, `small`, `medium` and `large` with `medium` being the
+default size.
+
+```tsx
+  <PrimaryButton icon={plusIcon} size='extraSmall' />
+  <PrimaryButton icon={plusIcon} size='small' />
+  <PrimaryButton icon={plusIcon} size='medium' /> // default
+  <PrimaryButton icon={plusIcon} size='large' />
+```
+
+### Button Icon position
+
+The prop `iconPosition` which is used to determine which side an icon should be when rendered with
+some text, has been changed. The default is `start`
+
+v6
+
+```tsx
+iconPosition: 'left' | 'right';
+```
+
+v7
+
+```tsx
+iconPosition: 'start' | 'end';
+```
+
+_Note:_ The position of the icon should have no affect if you're rending an icon button.
 
 ## Popup Cards
 
