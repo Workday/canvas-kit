@@ -184,12 +184,13 @@ export const getSecondaryButtonColors = (
         focus: {
           background: colors.frenchVanilla100,
           icon: colors.blackPepper500,
+          border: colors.blackPepper400,
           label: colors.blackPepper500,
           labelData: colors.blackPepper500,
           focusRing: focusRing(
             {
               separation: 2,
-              innerColor: 'currentColor',
+              innerColor: colors.blackPepper400,
               outerColor: colors.frenchVanilla100,
             },
             theme

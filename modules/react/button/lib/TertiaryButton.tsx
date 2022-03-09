@@ -148,11 +148,11 @@ const getPaddingStyles = (
   if (children) {
     // if there is an icon on the left, add 4px extra padding to the right for visual balance
     if (icon && iconPosition === 'start') {
-      return `0 ${space.xxs} 0 ${space.xs}`;
+      return `0 ${space.xs} 0 ${space.xxs}`;
     }
     // if there is an icon on the right, add 4px extra padding to the left for visual balance
     if (icon && iconPosition === 'end') {
-      return `0 ${space.xs} 0 ${space.xxs}`;
+      return `0 ${space.xxs} 0 ${space.xs}`;
     }
     // if there is no icon, return the default padding
     return `0 ${space.xxs}`;
@@ -162,21 +162,17 @@ const getPaddingStyles = (
 };
 
 const getMinWidthStyles = (children: React.ReactNode, size: ButtonSizes): string => {
-  if (children) {
-    return 'auto';
-  } else {
-    switch (size) {
-      case 'large':
-        return children ? '112px' : '48px';
-      case 'medium':
-        return children ? '96px' : space.xl;
-      case 'small':
-        return children ? space.xxxl : space.l;
-      case 'extraSmall':
-        return children ? 'auto' : space.m;
-      default:
-        return children ? '96px' : space.xl;
-    }
+  switch (size) {
+    case 'large':
+      return children ? 'auto' : '48px';
+    case 'medium':
+      return children ? 'auto' : space.xl;
+    case 'small':
+      return children ? '92px' : space.l;
+    case 'extraSmall':
+      return children ? 'auto' : space.m;
+    default:
+      return children ? '96px' : space.xl;
   }
 };
 
@@ -196,7 +192,7 @@ export const TertiaryButton = createComponent('button')({
     ref,
     Element
   ) => {
-    const balancingMargin = size === 'medium' ? space.xxs : space.xxxs;
+    const balancingMargin = size === 'medium' ? space.xxxs : space.xxxs;
     const theme = useTheme();
 
     return (

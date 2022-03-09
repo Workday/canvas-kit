@@ -72,7 +72,7 @@ const getPrimaryButtonColors = (variant: 'inverse' | undefined, theme: EmotionCa
           focusRing: focusRing(
             {
               separation: 1,
-              innerColor: colors.blackPepper500,
+              innerColor: colors.blackPepper400,
               outerColor: colors.frenchVanilla100,
             },
             theme
