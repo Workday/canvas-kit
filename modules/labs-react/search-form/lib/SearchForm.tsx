@@ -172,22 +172,6 @@ const SearchCombobox = styled(Combobox)({
 const SearchIcon = styled(TertiaryButton)<
   Pick<SearchFormProps, 'isCollapsed'> & {isHidden: boolean}
 >(({isCollapsed, isHidden}) => {
-  const collapsedSize = 40;
-  const size = 32;
-  const collapseStyles: CSSObject = isCollapsed
-    ? {
-        minWidth: collapsedSize,
-        width: collapsedSize,
-        minHeight: collapsedSize,
-        height: collapsedSize,
-      }
-    : {
-        minWidth: size,
-        width: size,
-        minHeight: size,
-        height: size,
-      };
-
   return {
     position: `absolute`,
     margin: isCollapsed ? `auto ${space.xxs}` : `auto ${space.xxxs}`,
@@ -197,7 +181,6 @@ const SearchIcon = styled(TertiaryButton)<
     padding: 0,
     zIndex: 3,
     display: isHidden ? 'none' : 'flex',
-    ...collapseStyles,
   };
 });
 

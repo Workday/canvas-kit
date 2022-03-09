@@ -46,6 +46,7 @@ export const DropdownButton = createComponent(TertiaryButton)({
         aria-expanded={toggled}
         aria-haspopup
         aria-controls="menu"
+        size="small"
         {...elemProps}
       />
     );

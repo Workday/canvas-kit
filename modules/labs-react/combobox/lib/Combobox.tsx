@@ -11,7 +11,7 @@ import {space, commonColors, borderRadius} from '@workday/canvas-kit-react/token
 import {MenuItemProps} from '@workday/canvas-kit-preview-react/menu';
 import {Card} from '@workday/canvas-kit-react/card';
 import {TertiaryButton, TertiaryButtonProps} from '@workday/canvas-kit-react/button';
-import {xSmallIcon} from '@workday/canvas-system-icons-web';
+import {xIcon} from '@workday/canvas-system-icons-web';
 import {TextInputProps} from '@workday/canvas-kit-react/text-input';
 import flatten from 'lodash.flatten';
 import AutocompleteList from './AutocompleteList';
@@ -115,9 +115,6 @@ const MenuContainer = styled(Card)({
 
 const ResetButton = styled(TertiaryButton)<{shouldShow: boolean}>(
   {
-    width: space.l,
-    minWidth: space.l,
-    height: space.l,
     position: 'absolute',
     margin: `auto ${space.xxxs}`,
     top: 0,
@@ -467,7 +464,7 @@ const Combobox = ({
           <ResetButton
             shouldShow={!!value}
             aria-label={clearButtonAriaLabel}
-            icon={xSmallIcon}
+            icon={xIcon}
             variant={clearButtonVariant}
             onClick={resetSearchInput}
             onBlur={handleBlur}
