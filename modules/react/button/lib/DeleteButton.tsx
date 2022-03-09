@@ -38,6 +38,7 @@ const getDeleteButtonColors = ({
   },
   disabled: {
     background: themeError.light,
+    opacity: '1', // allows for overriding the default opacity of 0.4
   },
 });
 

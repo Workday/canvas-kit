@@ -108,6 +108,7 @@ const getToolbarIconButtonColors = (theme: EmotionCanvasTheme, toggled?: boolean
     disabled: {
       icon: toggled ? themePrimary.light : colors.soap600,
       background: toggled ? themePrimary.lightest : 'transparent',
+      opacity: '1',
     },
   };
 };

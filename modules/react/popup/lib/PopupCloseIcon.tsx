@@ -30,6 +30,7 @@ const StyledCloseIcon = styled(TertiaryButton)<StyledType & PopupCloseIconProps>
   ({size}) => ({
     right: size === 'small' ? closeIconSpacingSmall : closeIconSpacing,
     top: size === 'small' ? closeIconSpacingSmall : closeIconSpacing,
+    margin: `-${size === 'small' ? closeIconSpacingSmall : closeIconSpacing}px`,
   })
 );
 

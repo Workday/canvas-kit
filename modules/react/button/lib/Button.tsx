@@ -196,6 +196,7 @@ const ButtonContainer = styled(Box.as('button'))<StyledType & ButtonContainerPro
         backgroundColor: colors.disabled.background,
         borderColor: colors.disabled.border,
         color: colors.disabled.label,
+        opacity: colors.disabled.opacity,
         ...(colors.disabled.icon && getIconColorSelectors(theme, colors.disabled.icon, fillIcon)),
       },
       ...mouseFocusBehavior({

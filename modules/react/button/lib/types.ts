@@ -10,6 +10,7 @@ export interface ButtonStateColors {
   iconFill?: boolean;
   label?: string;
   labelData?: string;
+  opacity?: string;
 }
 export interface ButtonColors {
   default: ButtonStateColors;
