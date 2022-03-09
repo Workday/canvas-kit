@@ -102,6 +102,7 @@ const getToolbarDropdownButtonColors = (theme: EmotionCanvasTheme): ButtonColors
     disabled: {
       icon: colors.soap600,
       background: 'transparent',
+      opacity: '1',
     },
   };
 };

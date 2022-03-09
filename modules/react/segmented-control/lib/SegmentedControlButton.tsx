@@ -30,6 +30,7 @@ const getIconButtonColors = (toggled?: boolean): ButtonColors => {
     disabled: {
       background: toggled ? colors.soap100 : colors.soap100,
       icon: colors.soap600,
+      opacity: '1',
     },
   };
 };
@@ -97,6 +98,7 @@ export const SegmentedControlButton = createComponent('button')({
         aria-pressed={toggled}
         value={value}
         colors={getIconButtonColors(toggled)}
+        fillIcon={toggled}
         ref={ref}
         {...props}
       >
