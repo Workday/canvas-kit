@@ -269,6 +269,26 @@ describe('Menu Keyboard Shortcuts', () => {
     cb.mockReset();
   });
 
+  test('should not apply keyboard events on bubbled up events', () => {
+    const id: string = 'myId';
+    const component = mount(
+      <Menu id={id}>
+        <MenuItem>Alpha</MenuItem>
+        <MenuItem>Bravo</MenuItem>
+      </Menu>
+    );
+
+    const menu = component.find('ul');
+    const down = {keyCode: 40, key: 'ArrowDown'};
+
+    menu
+      .children()
+      .first()
+      .simulate('keydown', down);
+    expect(menu.getDOMNode().getAttribute('aria-activedescendant')).toEqual(`${id}-0`);
+    component.unmount();
+  });
+
   test("should select an item by press it's first letter", () => {
     const id: string = 'myId';
     const component = mount(

@@ -169,80 +169,85 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
   };
 
   private handleKeyboardShortcuts = (event: React.KeyboardEvent): void => {
-    if (event.ctrlKey || event.altKey || event.metaKey) {
-      return;
-    }
-    const children = React.Children.toArray(this.props.children);
-    let nextSelectedIndex = 0;
-    let isShortcut = false;
-    const itemCount = children.length;
-    const firstItem = 0;
-    const lastItem = itemCount - 1;
-
-    if (event.key.length === 1 && event.key.match(/\S/)) {
-      let start = this.state.selectedItemIndex + 1;
-      let searchIndex;
-      if (start === children.length) {
-        start = 0;
+    if (event.target === this.menuRef.current) {
+      if (event.ctrlKey || event.altKey || event.metaKey) {
+        return;
       }
-      searchIndex = this.getIndexFirstChars(start, event.key.toLowerCase());
-      if (searchIndex === -1) {
-        searchIndex = this.getIndexFirstChars(0, event.key.toLowerCase(), start);
+
+      const children = React.Children.toArray(this.props.children);
+      let nextSelectedIndex = 0;
+      let isShortcut = false;
+      const itemCount = children.length;
+      const firstItem = 0;
+      const lastItem = itemCount - 1;
+
+      if (event.key.length === 1 && event.key.match(/\S/)) {
+        let start = this.state.selectedItemIndex + 1;
+        let searchIndex;
+        if (start === children.length) {
+          start = 0;
+        }
+        searchIndex = this.getIndexFirstChars(start, event.key.toLowerCase());
+        if (searchIndex === -1) {
+          searchIndex = this.getIndexFirstChars(0, event.key.toLowerCase(), start);
+        }
+        if (searchIndex > -1) {
+          isShortcut = true;
+          nextSelectedIndex = searchIndex;
+        }
+      } else {
+        switch (event.key) {
+          case 'ArrowUp':
+          case 'ArrowDown':
+          case 'Down': // IE/Edge specific value
+          case 'Up': // IE/Edge specific value
+            const direction = event.key === 'ArrowUp' ? -1 : 1;
+            isShortcut = true;
+            const nextIndex = this.state.selectedItemIndex + direction;
+            nextSelectedIndex =
+              nextIndex < 0 ? lastItem : nextIndex >= itemCount ? firstItem : nextIndex;
+            break;
+
+          case 'Home':
+          case 'End':
+            const skipTo = event.key === 'Home' ? firstItem : lastItem;
+            isShortcut = true;
+            nextSelectedIndex = skipTo;
+            break;
+
+          case 'Tab':
+            if (this.props.onClose) {
+              this.props.onClose();
+            }
+            break;
+
+          case 'Escape':
+          case 'Esc': // IE/Edge specific value
+            isShortcut = true;
+            if (this.props.onClose) {
+              this.props.onClose();
+            }
+            break;
+
+          case 'Spacebar':
+          case ' ':
+          case 'Enter':
+            nextSelectedIndex = this.state.selectedItemIndex;
+            const child = children[this.state.selectedItemIndex] as React.ReactElement<
+              MenuItemProps
+            >;
+            this.handleClick(event, child.props);
+            isShortcut = true;
+            break;
+
+          default:
+        }
       }
-      if (searchIndex > -1) {
-        isShortcut = true;
-        nextSelectedIndex = searchIndex;
+      if (isShortcut) {
+        this.setNormalizedItemIndex(nextSelectedIndex);
+        event.stopPropagation();
+        event.preventDefault();
       }
-    } else {
-      switch (event.key) {
-        case 'ArrowUp':
-        case 'ArrowDown':
-        case 'Down': // IE/Edge specific value
-        case 'Up': // IE/Edge specific value
-          const direction = event.key === 'ArrowUp' ? -1 : 1;
-          isShortcut = true;
-          const nextIndex = this.state.selectedItemIndex + direction;
-          nextSelectedIndex =
-            nextIndex < 0 ? lastItem : nextIndex >= itemCount ? firstItem : nextIndex;
-          break;
-
-        case 'Home':
-        case 'End':
-          const skipTo = event.key === 'Home' ? firstItem : lastItem;
-          isShortcut = true;
-          nextSelectedIndex = skipTo;
-          break;
-
-        case 'Tab':
-          if (this.props.onClose) {
-            this.props.onClose();
-          }
-          break;
-
-        case 'Escape':
-        case 'Esc': // IE/Edge specific value
-          isShortcut = true;
-          if (this.props.onClose) {
-            this.props.onClose();
-          }
-          break;
-
-        case 'Spacebar':
-        case ' ':
-        case 'Enter':
-          nextSelectedIndex = this.state.selectedItemIndex;
-          const child = children[this.state.selectedItemIndex] as React.ReactElement<MenuItemProps>;
-          this.handleClick(event, child.props);
-          isShortcut = true;
-          break;
-
-        default:
-      }
-    }
-    if (isShortcut) {
-      this.setNormalizedItemIndex(nextSelectedIndex);
-      event.stopPropagation();
-      event.preventDefault();
     }
   };
 
