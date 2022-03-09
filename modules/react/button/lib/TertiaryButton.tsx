@@ -99,8 +99,8 @@ const getTertiaryButtonColors = (
   } else {
     return {
       default: {
-        icon: children ? themePrimary.dark : colors.blackPepper400,
-        label: themePrimary.dark,
+        icon: children ? themePrimary.main : colors.blackPepper400,
+        label: themePrimary.main,
       },
       hover: {
         background: colors.soap200,
@@ -113,8 +113,8 @@ const getTertiaryButtonColors = (
         label: themePrimary.dark,
       },
       focus: {
-        icon: children ? themePrimary.dark : colors.blackPepper500,
-        label: themePrimary.dark,
+        icon: children ? themePrimary.main : colors.blackPepper500,
+        label: themePrimary.main,
         focusRing: focusRing({}, theme),
       },
       disabled: {
