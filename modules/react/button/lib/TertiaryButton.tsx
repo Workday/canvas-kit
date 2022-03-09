@@ -168,11 +168,11 @@ const getMinWidthStyles = (children: React.ReactNode, size: ButtonSizes): string
     case 'medium':
       return children ? 'auto' : space.xl;
     case 'small':
-      return children ? '92px' : space.l;
+      return children ? 'auto' : space.l;
     case 'extraSmall':
       return children ? 'auto' : space.m;
     default:
-      return children ? '96px' : space.xl;
+      return children ? 'auto' : space.xl;
   }
 };
 
