@@ -10,6 +10,9 @@ export const SecondaryInverse = () => (
     <SecondaryButton icon={plusIcon} variant="inverse">
       Secondary
     </SecondaryButton>
+    <SecondaryButton icon={plusIcon} variant="inverse" iconPosition="end">
+      Secondary
+    </SecondaryButton>
     <SecondaryButton icon={plusIcon} variant="inverse"></SecondaryButton>
   </HStack>
 );

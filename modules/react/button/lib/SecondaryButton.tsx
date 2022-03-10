@@ -69,7 +69,6 @@ export const SecondaryButton = createComponent('button')({
     ref,
     Element
   ) => {
-    const balancingMargin = size === 'large' ? space.xxs : space.xxxs;
     const theme = useTheme();
 
     return (
@@ -77,7 +76,7 @@ export const SecondaryButton = createComponent('button')({
         ref={ref}
         size={size}
         colors={getSecondaryButtonColors(variant, theme)}
-        padding={getPaddingStyles(children, size)}
+        padding={getPaddingStyles(children, size, icon, iconPosition)}
         minWidth={getMinWidthStyles(children, size)}
         as={Element}
         {...elemProps}
@@ -88,7 +87,6 @@ export const SecondaryButton = createComponent('button')({
             iconPosition={iconPosition}
             icon={icon}
             shouldMirrorIcon={shouldMirrorIcon}
-            marginInlineStart={children ? `-${balancingMargin} !important` : undefined}
           />
         )}
         {children && <BaseButton.Label>{children}</BaseButton.Label>}
@@ -101,7 +99,6 @@ export const SecondaryButton = createComponent('button')({
             iconPosition={iconPosition}
             icon={icon}
             shouldMirrorIcon={shouldMirrorIcon}
-            marginInlineEnd={children ? `-${balancingMargin} !important` : undefined}
           />
         )}
       </BaseButton>

@@ -16,9 +16,10 @@ import {
 import {Box, BoxProps} from '@workday/canvas-kit-react/layout';
 import {borderRadius, space, spaceNumbers, type} from '@workday/canvas-kit-react/tokens';
 
-import {ButtonColors, ButtonSizes, TertiaryButtonSizes} from './types';
+import {ButtonColors, ButtonSizes, IconPositions, TertiaryButtonSizes} from './types';
 
 import {CSSObject} from '@emotion/styled';
+import {CanvasSystemIcon} from '@workday/design-assets-types';
 
 export interface ButtonContainerProps extends BoxProps, GrowthBehavior {
   colors?: ButtonColors;
@@ -233,22 +234,88 @@ export const getMinWidthStyles = (
 
 export const getPaddingStyles = (
   children: React.ReactNode,
-  size: ButtonSizes | TertiaryButtonSizes
+  size: ButtonSizes | TertiaryButtonSizes,
+  icon: CanvasSystemIcon | undefined,
+  iconPosition: IconPositions
 ) => {
+  // In order to calculate the correct padding, we need to know its children
+  // and what side the icon is on and if there's an icon provided
+
+  // If there are children AND an icon
+  // 1. We check what side the icon is in
+  // 2. Adjust padding to visually center the icon and text
+  // If there is children (most likely just text)
+  // 1. We keep the padding the same on both side
+  // If there are no children (this is an icon button)
+  // 1. We set the padding to 0 to center the icon in the button
   switch (size) {
     case 'large':
-      return children ? `0 ${space.l}` : 0;
+      return children && icon
+        ? iconPosition === 'start'
+          ? `0 ${space.l} 0 28px`
+          : `0 28px 0 ${space.l}`
+        : children
+        ? `0 ${space.l}`
+        : 0;
 
     case 'medium':
-      return children ? `0 ${space.m}` : 0;
+      return children && icon
+        ? iconPosition === 'start'
+          ? `0 ${space.m} 0 20px`
+          : `0 20px 0 ${space.m}`
+        : children
+        ? `0 ${space.m}`
+        : 0;
     case 'small':
-      return children ? `0 ${space.s}` : 0;
+      return children && icon
+        ? iconPosition === 'start'
+          ? `0 ${space.s} 0 ${space.xs}`
+          : `0 ${space.xs} 0 ${space.s}`
+        : children
+        ? `0 ${space.s}`
+        : 0;
     case 'extraSmall':
-      return children ? `0 ${space.xs}` : 0;
+      return children && icon
+        ? iconPosition === 'start'
+          ? `0 ${space.xs} 0 ${space.xxs}`
+          : `0 ${space.xxs} 0 ${space.xs}`
+        : children
+        ? `0 ${space.xs}`
+        : 0;
     default:
-      return children ? `0 ${space.m}` : 0;
+      return children && icon
+        ? iconPosition === 'start'
+          ? `0 ${space.m} 0 20px`
+          : `0 20px 0 ${space.m}`
+        : children
+        ? `0 ${space.m}`
+        : 0;
   }
 };
+
+// export const getPaddingStyles = (
+//   children: React.ReactNode,
+//   size: ButtonSizes | TertiaryButtonSizes,
+//   iconPosition?: IconPositions
+// ) => {
+//   switch (size) {
+//     case 'large':
+//       return children ? `0 ${space.l}` : 0;
+
+//     case 'medium':
+//       return children
+//         ? iconPosition === 'start'
+//           ? `0 ${space.m} 0 20px`
+//           : `0 20px 0 ${space.m}`
+//         : 0;
+//     case 'small':
+//       return children ? `0 ${space.s}` : 0;
+//     case 'extraSmall':
+//       return children ? `0 ${space.xs}` : 0;
+//     default:
+//       return children ? `0 ${space.m}` : 0;
+//   }
+// };
 
 export const BaseButton = createComponent('button')({
   displayName: 'Button',
