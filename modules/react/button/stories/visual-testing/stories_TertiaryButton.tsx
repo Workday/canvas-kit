@@ -17,7 +17,7 @@ export const TertiaryButtonStates = (props: {theme?: PartialEmotionCanvasTheme})
       rowProps={permutateProps(
         {
           variant: [
-            {value: undefined, label: 'Default'},
+            {value: undefined, label: ''},
             {value: 'inverse', label: 'Inverse'},
           ],
           allCaps: [
