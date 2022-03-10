@@ -57,7 +57,7 @@ export const DeleteButton = createComponent('button')({
     Element
   ) => (
     <BaseButton
-      padding={getPaddingStyles(children, size)}
+      padding={getPaddingStyles(children, size, undefined, undefined)}
       minWidth={getMinWidthStyles(children, size)}
       ref={ref}
       as={Element}

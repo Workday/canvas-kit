@@ -8,7 +8,7 @@ import {
   createComponent,
   focusRing,
 } from '@workday/canvas-kit-react/common';
-import {colors, space} from '@workday/canvas-kit-react/tokens';
+import {colors} from '@workday/canvas-kit-react/tokens';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {ButtonSizes, IconPositions} from './types';
 import {BaseButton, getMinWidthStyles, getPaddingStyles} from './Button';

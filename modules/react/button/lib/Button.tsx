@@ -236,7 +236,7 @@ export const getPaddingStyles = (
   children: React.ReactNode,
   size: ButtonSizes | TertiaryButtonSizes,
   icon: CanvasSystemIcon | undefined,
-  iconPosition: IconPositions
+  iconPosition: IconPositions | undefined
 ) => {
   // In order to calculate the correct padding, we need to know its children
   // and what side the icon is on and if there's an icon provided
