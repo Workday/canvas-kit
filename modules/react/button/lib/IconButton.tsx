@@ -9,7 +9,7 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {ButtonColors} from './types';
+import {ButtonColors, PropertyPosition} from './types';
 import {ButtonContainer} from './parts';
 
 export interface IconButtonProps extends Themeable {
@@ -95,6 +95,19 @@ export const IconButton = createComponent('button')({
       width: size === 'small' ? space.l : space.xl,
       height: size === 'small' ? space.l : space.xl,
       ...getIconButtonBorderRadius(variant),
+      overflow: 'visible',
+      '&:focus': {
+        boxShadow: 'none',
+        '&::after': {
+          position: 'absolute' as PropertyPosition,
+          content: '""',
+          width: 44,
+          height: 44,
+          display: 'block',
+          borderRadius: 'inherit',
+          boxShadow: `${theme.canvas.palette.common.focusOutline} 0px 0px 0px 2px`,
+        },
+      },
       ['& .wd-icon']: {
         display: 'inline-block',
         verticalAlign: 'middle',
@@ -161,7 +174,6 @@ const getIconButtonColors = (
         focus: {
           background: toggled ? themePrimary.main : undefined,
           icon: toggled ? themePrimary.contrast : colors.licorice500,
-          focusRing: focusRing({}, theme),
         },
         disabled: {
           background: toggled ? themePrimary.lightest : 'transparent',
