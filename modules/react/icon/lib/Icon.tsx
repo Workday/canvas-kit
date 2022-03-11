@@ -21,7 +21,7 @@ export const Icon = createComponent('span')({
         height: size,
       };
     }
-    console.warn('styles', styles);
+
     return (
       <Svg
         src={src}
