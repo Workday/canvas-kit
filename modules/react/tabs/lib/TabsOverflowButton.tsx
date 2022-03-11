@@ -10,7 +10,7 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {space} from '@workday/canvas-kit-react/tokens';
-import {useOverflowTarget} from '@workday/canvas-kit-react/list';
+import {useOverflowListTarget} from '@workday/canvas-kit-react/list';
 
 import {useMenuTarget} from './menu';
 import {TabsModelContext} from './Tabs';
@@ -53,6 +53,6 @@ export const useTabsOverflowButton = composeHooks(
       };
     }
   ),
-  useOverflowTarget,
+  useOverflowListTarget,
   subModelHook((m: TabsModel) => m.menu, useMenuTarget)
 );

@@ -2,21 +2,16 @@ import React from 'react';
 import {createEventMap, ToModelConfig, useEventMap, assert} from '@workday/canvas-kit-react/common';
 
 import {
-  ListState,
-  ListEvents,
+  BaseListState,
+  BaseListEvents,
+  BaseBaseListModelConfig,
+  baseListEventMap,
+  useBaseListModel,
   BaseListModelConfig,
-  listEventMap,
-  useListModel,
-  ListModelConfig,
-  ListModel,
-} from './useListModel';
+  BaseListModel,
+} from './useBaseListModel';
 
-export type Orientation = 'horizontal' | 'vertical';
-
-export type CursorState<T = unknown> = ListState<T> & {
-  /** Orientation of the list. This property determines what "next" and "previous" mean. This should
-   * be set to match the layout of UI components */
-  orientation: Orientation;
+export type CursorListState<T = unknown> = BaseListState<T> & {
   /** The id of the list item the cursor is pointing to */
   cursorId: string;
   /**
@@ -26,7 +21,7 @@ export type CursorState<T = unknown> = ListState<T> & {
   columnCount: number;
 };
 
-export type CursorEvents<T = unknown> = ListEvents<T> & {
+export type CursorListEvents<T = unknown> = BaseListEvents<T> & {
   /** Directly sets the cursor to the list item by its identifier.  */
   goTo(data: {id: string}): void;
   /**
@@ -66,7 +61,7 @@ export type CursorEvents<T = unknown> = ListEvents<T> & {
   goToPreviousPage(): void;
 };
 
-type NavigationInput<T> = Pick<CursorModel<T>, 'state' | 'getId'>;
+type NavigationInput<T> = Pick<CursorListModel<T>, 'state' | 'getId'>;
 
 export interface NavigationManager {
   getFirst: NavigationRequestor;
@@ -82,20 +77,20 @@ export interface NavigationManager {
   getNextPage: NavigationRequestor;
 }
 
-export interface CursorModel<T = unknown> extends ListModel<T> {
-  state: CursorState<T>;
-  events: CursorEvents<T>;
+export interface CursorListModel<T = unknown> extends BaseListModel<T> {
+  state: CursorListState<T>;
+  events: CursorListEvents<T>;
   navigation: NavigationManager;
 }
 
-export const cursorEventMap = createEventMap<CursorEvents>()({
+export const cursorListEventMap = createEventMap<CursorListEvents>()({
   guards: {
-    ...listEventMap.guards,
+    ...baseListEventMap.guards,
     /** Should a cursor position be set? Use only in advance use-cases */
     shouldGoTo: 'goTo',
   },
   callbacks: {
-    ...listEventMap.callbacks,
+    ...baseListEventMap.callbacks,
     /**
      * Called when a cursor position has been changed. Useful to set state or perform side effects.
      * This is called during state change batching, so calling state setters will not invoke extra
@@ -105,14 +100,7 @@ export const cursorEventMap = createEventMap<CursorEvents>()({
   },
 });
 
-export type BaseCursorModelConfig<T> = BaseListModelConfig<T> & {
-  /**
-   * The orientation of a list of items. Values are either `vertical` or `horizontal`. This value will
-   * effect which ids activate progression through a list. For example, `horizontal` will activate with
-   * left and right arrows while `vertical` will activate with up and down arrows.
-   * @default 'vertical'
-   */
-  orientation?: Orientation;
+export type BaseCursorModelConfig<T> = BaseBaseListModelConfig<T> & {
   /**
    * Initial cursor position. If not provided, the cursor will point to the first item in the list
    */
@@ -139,8 +127,8 @@ export type BaseCursorModelConfig<T> = BaseListModelConfig<T> & {
   navigation?: NavigationManager;
 };
 
-export type CursorModelConfig<T> = BaseCursorModelConfig<T> &
-  Partial<ToModelConfig<CursorState<T>, CursorEvents<T>, typeof cursorEventMap>>;
+export type CursorListModelConfig<T> = BaseCursorModelConfig<T> &
+  Partial<ToModelConfig<CursorListState<T>, CursorListEvents<T>, typeof cursorListEventMap>>;
 
 /**
  * Factory function that does type checking to create navigation managers. Navigation managers
@@ -335,21 +323,20 @@ export const navigationManager = createNavigationManager({
  * current position in the list. The most common use-case is keeping track of which item currently
  * has focus within the list. Many w3c list role types specify a single tab stop within the list.
  */
-export const useCursorModel = <T extends unknown>(
-  config: CursorModelConfig<T> = {}
-): CursorModel<T> => {
-  const [orientation] = React.useState(config.orientation || 'vertical');
+export const useCursorListModel = <T extends unknown>(
+  config: CursorListModelConfig<T> = {}
+): CursorListModel<T> => {
   const [cursorId, setCursorId] = React.useState('');
   const columnCount = config.columnCount || 0;
-  const list = useListModel(config as ListModelConfig<T>);
+  const list = useBaseListModel(config as BaseListModelConfig<T>);
   const initialCurrentRef = React.useRef(
     config.initialCursorId || config.items?.length ? list.getId(config.items![0]) : ''
   );
 
-  const state = {...list.state, orientation, cursorId, columnCount};
+  const state = {...list.state, cursorId, columnCount};
   const navigation = config.navigation || wrappingNavigationManager;
 
-  const events = useEventMap(cursorEventMap, state, config, {
+  const events = useEventMap(cursorListEventMap, state, config, {
     ...list.events,
     registerItem(data) {
       // point the cursor at the first item
@@ -396,7 +383,7 @@ export const useCursorModel = <T extends unknown>(
         list.getId(navigation.getPreviousPage(state.cursorId, {state, getId: list.getId}))
       );
     },
-  } as CursorEvents<T>);
+  } as CursorListEvents<T>);
 
   return {...list, state, events, navigation};
 };

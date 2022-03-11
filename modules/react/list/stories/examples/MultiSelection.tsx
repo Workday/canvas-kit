@@ -2,25 +2,27 @@ import React from 'react';
 
 import {
   useListRegisterItem,
-  useRovingFocus,
-  useRenderItems,
-  SelectionModel,
-  useSelectionItem,
-  useSelectionModel,
+  useListRovingFocus,
+  useListRenderItems,
+  ListModel,
+  useListSelectItem,
+  useListModel,
   multiSelectionManager,
+  ListProps,
+  ListItemProps,
 } from '@workday/canvas-kit-react/list';
 import {composeHooks} from '@workday/canvas-kit-react/common';
 
-const ListModelContext = React.createContext<SelectionModel>({} as any);
+const ListModelContext = React.createContext<ListModel>({} as any);
 
-const List = (props: {children: React.ReactNode}) => {
-  const model = useSelectionModel({
+const List = (props: ListProps) => {
+  const model = useListModel({
     selection: multiSelectionManager,
   });
 
   return (
     <ListModelContext.Provider value={model}>
-      <ul>{useRenderItems(model, props.children)}</ul>
+      <ul>{useListRenderItems(model, props.children)}</ul>
       <p>Cursor ID: {model.state.cursorId}</p>
       <p>
         Selected ID: {(model.state.selectedIds !== 'all' ? model.state.selectedIds : []).join(',')}
@@ -29,9 +31,9 @@ const List = (props: {children: React.ReactNode}) => {
   );
 };
 
-const useItem = composeHooks(useSelectionItem, useRovingFocus, useListRegisterItem);
+const useItem = composeHooks(useListSelectItem, useListRovingFocus, useListRegisterItem);
 
-const Item = (elemProps: {children: React.ReactNode}) => {
+const Item = (elemProps: ListItemProps) => {
   const model = React.useContext(ListModelContext);
 
   const props = useItem(model, elemProps);
@@ -42,7 +44,7 @@ const Item = (elemProps: {children: React.ReactNode}) => {
       {...props}
       style={{background: model.state.selectedIds.includes(props.name) ? 'gray' : 'white'}}
     >
-      {props.children} - {props['data-name']}
+      {props.children} - {props['data-id']}
     </button>
   );
 };

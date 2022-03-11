@@ -7,22 +7,22 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {
   defaultGetId,
-  ListEvents,
-  ListState,
-  useListModel,
+  BaseListEvents,
+  BaseListState,
+  useBaseListModel,
   Orientation,
-  overflowEventMap,
-  OverflowEvents,
-  OverflowState,
-  OverflowModelConfig,
-  BaseOverflowModelConfig,
-  useOverflowModel,
-  OverflowModel,
+  overflowListEventMap,
+  OverflowListEvents,
+  OverflowListState,
+  OverflowListModelConfig,
+  BaseOverflowListModelConfig,
+  useOverflowListModel,
+  OverflowListModel,
 } from '@workday/canvas-kit-react/list';
 
 import {MenuModel, MenuModelConfig, useMenuModel} from './menu';
 
-export type TabsState<T extends unknown> = OverflowState<T> & {
+export type TabsState<T extends unknown> = OverflowListState<T> & {
   /** IDREF of the list. Children ids can be derived from this id */
   id: string;
   /**
@@ -34,23 +34,23 @@ export type TabsState<T extends unknown> = OverflowState<T> & {
    * React state cycle to ensure accurate index tracking as items are registered within the same
    * state setting phase.
    */
-  panelIndexRef: ListState<T>['indexRef'];
+  panelIndexRef: BaseListState<T>['indexRef'];
   orientation: Orientation;
   getId: (item: T) => string;
 };
 
-export type TabsEvents<T = unknown> = OverflowEvents<T> & {
+export type TabsEvents<T = unknown> = OverflowListEvents<T> & {
   /**
    * This event registers panels with state.panels. Called when a panel is mounted.
    */
-  registerPanel: ListEvents<T>['registerItem'];
+  registerPanel: BaseListEvents<T>['registerItem'];
   /**
    * This event unregisters panels with state.panels. Called when a panel is unmounted.
    */
-  unregisterPanel: ListEvents<T>['unregisterItem'];
+  unregisterPanel: BaseListEvents<T>['unregisterItem'];
 };
 
-export interface TabsModel<T = unknown> extends OverflowModel<T> {
+export interface TabsModel<T = unknown> extends OverflowListModel<T> {
   state: TabsState<T>;
   events: TabsEvents<T>;
   menu: MenuModel<T>;
@@ -58,14 +58,14 @@ export interface TabsModel<T = unknown> extends OverflowModel<T> {
 
 export const tabEventMap = createEventMap<TabsEvents>()({
   guards: {
-    ...overflowEventMap.guards,
+    ...overflowListEventMap.guards,
   },
   callbacks: {
-    ...overflowEventMap.callbacks,
+    ...overflowListEventMap.callbacks,
   },
 });
 
-export type BaseTabsModelConfig<T> = Omit<BaseOverflowModelConfig<T>, 'orientation'> & {
+export type BaseTabsModelConfig<T> = Omit<BaseOverflowListModelConfig<T>, 'orientation'> & {
   /**
    * Optional id for the whole `Tabs` group. The `aria-controls` of the `Tab.Item` and `id` of the
    * `Tab.Panel` will automatically derived from this id. If not provided, a unique id will be
@@ -97,8 +97,8 @@ export const useTabsModel = <T extends unknown>(config: TabsModelConfig<T> = {})
 
   const items = config.items; // || (emptyItems as T[]);
 
-  const model = useOverflowModel<T>({
-    ...(config as OverflowModelConfig<T>),
+  const model = useOverflowListModel<T>({
+    ...(config as OverflowListModelConfig<T>),
     id: `${id}-tabs`,
     orientation: config.orientation || 'horizontal',
     items,
@@ -116,7 +116,7 @@ export const useTabsModel = <T extends unknown>(config: TabsModelConfig<T> = {})
       : [],
   });
 
-  const panels = useListModel<T>();
+  const panels = useBaseListModel<T>();
 
   const state: TabsState<T> = {
     ...model.state,

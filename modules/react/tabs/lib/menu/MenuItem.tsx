@@ -16,8 +16,8 @@ import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
 import {Box} from '@workday/canvas-kit-labs-react/common';
 import {
   useListRegisterItem,
-  useRovingFocus,
-  useSelectionItem,
+  useListRovingFocus,
+  useListSelectItem,
 } from '@workday/canvas-kit-react/list';
 
 import {MenuModel} from './useMenuModel';
@@ -191,7 +191,7 @@ export const useMenuItem = composeHooks(
       role: 'menuitem',
     };
   }),
-  useSelectionItem,
-  useRovingFocus,
+  useListSelectItem,
+  useListRovingFocus,
   useListRegisterItem
 );

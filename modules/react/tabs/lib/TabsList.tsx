@@ -10,9 +10,9 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {Stack} from '@workday/canvas-kit-labs-react/layout';
 import {
-  useOverflowMeasureContainer,
-  useRenderItems,
-  useResetCursorOnBlur,
+  useOverflowListMeasureContainer,
+  useListRenderItems,
+  useListResetCursorOnBlur,
 } from '@workday/canvas-kit-react/list';
 
 import {TabsModelContext} from './Tabs';
@@ -53,7 +53,7 @@ export const TabsList = createComponent('div')({
         spacing="xxxs"
         {...props}
       >
-        {useRenderItems(localModel, children)}
+        {useListRenderItems(localModel, children)}
         {overflowButton}
       </Stack>
     );
@@ -64,6 +64,6 @@ export const useTabsList = composeHooks(
   createHook((_: TabsModel) => {
     return {role: 'tablist'};
   }),
-  useOverflowMeasureContainer,
-  useResetCursorOnBlur
+  useOverflowListMeasureContainer,
+  useListResetCursorOnBlur
 );

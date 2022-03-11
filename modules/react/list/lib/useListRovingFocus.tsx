@@ -1,7 +1,7 @@
 import React from 'react';
 import {useIsRTL, createHook} from '@workday/canvas-kit-react/common';
 
-import {CursorModel} from './useCursorModel';
+import {CursorListModel} from './useCursorListModel';
 
 export const orientationKeyMap = {
   horizontal: {
@@ -47,13 +47,13 @@ const gridKeyMap = {
   Down: 'goToNextRow',
 } as const;
 
-// const ctrlKeyMap = {
-//   Home: 'goToFirst',
-//   End: 'goToLast',
-// } as const;
+const ctrlKeyMap = {
+  Home: 'goToFirst',
+  End: 'goToLast',
+} as const;
 
 const keys = <T extends object>(obj: T): (keyof T)[] => Object.keys(obj) as (keyof T)[];
-// const hasOwnKey = <T extends object>(obj: T, key: any): key is keyof T => obj.hasOwnProperty(key);
+const hasOwnKey = <T extends object>(obj: T, key: any): key is keyof T => obj.hasOwnProperty(key);
 
 /**
  * Handles the roving focus behavior of a Cursor model. It should be added to the element
@@ -61,8 +61,8 @@ const keys = <T extends object>(obj: T): (keyof T)[] => Object.keys(obj) as (key
  *
  * @see https://www.w3.org/TR/wai-aria-practices/#kbd_roving_tabindex
  */
-export const useRovingFocus = createHook(
-  ({state, events, getId, navigation}: CursorModel, ref, elemProps: {name?: string} = {}) => {
+export const useListRovingFocus = createHook(
+  ({state, events, getId, navigation}: CursorListModel, ref, elemProps: {name?: string} = {}) => {
     // Tracks when this element has focus. If this item is removed while still focused, we have to
     // inform the model to move the cursor to the next item.
     const focusRef = React.useRef(false);
@@ -105,15 +105,15 @@ export const useRovingFocus = createHook(
     return {
       onKeyDown(event: React.KeyboardEvent) {
         if (event.ctrlKey) {
-          // for (const key in Object.keys(ctrlKeyMap)) {
-          //   if (hasOwnKey(ctrlKeyMap, key)) {
-          //     key; //?
-          //     const temp = ctrlKeyMap[key]; //?
-          //     keyDownRef.current = true;
-          //     events[ctrlKeyMap[key]]?.();
-          //     return;
-          //   }
-          // }
+          for (const key in ctrlKeyMap) {
+            if (hasOwnKey(ctrlKeyMap, key)) {
+              key; //?
+              const temp = ctrlKeyMap[key]; //?
+              keyDownRef.current = true;
+              events[ctrlKeyMap[key]]?.();
+              return;
+            }
+          }
           // keys(ctrlKeyMap).forEach(key => {
           //   keyDownRef.current = true;
           //   events[ctrlKeyMap[key]]?.();
@@ -139,6 +139,9 @@ export const useRovingFocus = createHook(
       },
       onBlur() {
         focusRef.current = false;
+      },
+      onClick() {
+        events.goTo({id: elemProps.name!});
       },
       id: `${state.id}-${elemProps.name}`,
       tabIndex: !state.cursorId

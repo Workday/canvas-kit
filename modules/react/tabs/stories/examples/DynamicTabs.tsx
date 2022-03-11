@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {Tabs, useTabsModel, TabsModel} from '@workday/canvas-kit-react/tabs';
-import {SelectionModel} from '@workday/canvas-kit-react/list';
+import {SelectionListModel} from '@workday/canvas-kit-react/list';
 
 type Tab = {
   tab: string;
@@ -32,9 +32,8 @@ export const DynamicTabs = () => {
    * * **Item is selected**: Selection will be moved to the next item in the list
    * @param id The id of the item that will be removed
    */
-  const removeItem = <T extends unknown>(id: string, model: SelectionModel<T>) => {
+  const removeItem = <T extends unknown>(id: string, model: SelectionListModel<T>) => {
     const index = model.state.items.findIndex(item => model.getId(item) === model.state.cursorId);
-    console.log('index', index, id, model.state.cursorId, model.state.items);
     const nextIndex = index === model.state.items.length - 1 ? index - 1 : index + 1;
     const nextId = model.getId(model.state.items[nextIndex]);
     if (model.state.selectedIds[0] === id) {

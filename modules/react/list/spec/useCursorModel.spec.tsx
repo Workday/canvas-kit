@@ -1,11 +1,11 @@
 import {
   getOffsetItem,
-  CursorState,
+  CursorListState,
   getFirstOfRow,
   getLastOfRow,
   getPreviousPage,
   getNextPage,
-} from '../lib/useCursorModel';
+} from '../lib/useCursorListModel';
 
 /**
  * This allows us to show grids in a more understandable way, but the code works with flattened arrays.
@@ -21,10 +21,10 @@ function flatten<T>(arr: T[][]): T[] {
 // The `getId` allows us to use strings instead of objects
 // The `createState` returns state that mocks unimportant parts the test isn't isolating
 const getId = (input: string) => input;
-const createState = <T extends any>(input: Partial<CursorState<T>>): CursorState<T> => {
+const createState = <T extends any>(input: Partial<CursorListState<T>>): CursorListState<T> => {
   return {
     nonInteractiveIds: [],
-    ...(input as CursorState<T>),
+    ...(input as CursorListState<T>),
   };
 };
 

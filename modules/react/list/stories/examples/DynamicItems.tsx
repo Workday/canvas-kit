@@ -5,14 +5,26 @@ import {
   useListRegisterItem,
   useListRenderItems,
   ListModel,
-  ListItemProps,
   ListProps,
+  ListItemProps,
 } from '@workday/canvas-kit-react/list';
 
-const ListModelContext = React.createContext<ListModel>({} as any);
+interface Item {
+  id: string;
+  text: string;
+}
+
+const ListModelContext = React.createContext<ListModel<Item>>({} as any);
+
+const items = [
+  {id: 'first', text: 'First'},
+  {id: 'second', text: 'Second'},
+];
 
 const List = (props: ListProps) => {
-  const model = useListModel();
+  const model = useListModel<Item>({
+    items,
+  });
 
   return (
     <ListModelContext.Provider value={model}>
@@ -28,16 +40,16 @@ const Item = (elemProps: ListItemProps) => {
 
   return (
     <li {...props}>
-      {useListRenderItems(model, props.children)} - {props['data-id']}
+      {props.children} - {props['data-id']}
     </li>
   );
 };
 
-export const Basic = () => {
+export const DynamicItems = () => {
+  const [count, setCount] = React.useState(0);
   return (
-    <List>
-      <Item>First</Item>
-      <Item>Second</Item>
-    </List>
+    <>
+      <List>{(item: Item) => <Item name={item.id}>{item.id}</Item>}</List>
+    </>
   );
 };

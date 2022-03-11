@@ -2,23 +2,23 @@ import React from 'react';
 
 import {createEventMap, ToModelConfig, useEventMap} from '@workday/canvas-kit-react/common';
 import {
-  SelectionState,
-  SelectionEvents,
-  BaseSelectionModelConfig,
-  useSelectionModel,
-  SelectionModelConfig,
-  selectionEventMap,
-  SelectionModel,
-} from './useSelectionModel';
+  SelectionListState,
+  SelectionListEvents,
+  BaseSelectionListModelConfig,
+  useSelectionListModel,
+  SelectionListModelConfig,
+  selectionListEventMap,
+  SelectionListModel,
+} from './useSelectionListModel';
 
-export type OverflowState<T = unknown> = SelectionState<T> & {
+export type OverflowListState<T = unknown> = SelectionListState<T> & {
   containerWidth: number;
   overflowTargetWidth: number;
   itemWidthCache: Record<string, number>;
   hiddenIds: string[];
 };
 
-export type OverflowEvents<T = unknown> = SelectionEvents<T> & {
+export type OverflowListEvents<T = unknown> = SelectionListEvents<T> & {
   setContainerWidth(data: {width?: number}): void;
   setOverflowTargetWidth(data: {width: number}): void;
   addItemWidth(data: {id: string; width: number}): void;
@@ -27,14 +27,14 @@ export type OverflowEvents<T = unknown> = SelectionEvents<T> & {
   removeHiddenKey(data: {id: string}): void;
 };
 
-export interface OverflowModel<T = unknown> extends SelectionModel<T> {
-  state: OverflowState<T>;
-  events: OverflowEvents<T>;
+export interface OverflowListModel<T = unknown> extends SelectionListModel<T> {
+  state: OverflowListState<T>;
+  events: OverflowListEvents<T>;
 }
 
-export const overflowEventMap = createEventMap<OverflowEvents>()({
+export const overflowListEventMap = createEventMap<OverflowListEvents>()({
   guards: {
-    ...selectionEventMap.guards,
+    ...selectionListEventMap.guards,
     shouldSetContainerWidth: 'setContainerWidth',
     shouldSetOverflowTargetWidth: 'setOverflowTargetWidth',
     shouldAddItemWidth: 'addItemWidth',
@@ -43,7 +43,7 @@ export const overflowEventMap = createEventMap<OverflowEvents>()({
     shouldRemoveHiddenKey: 'removeHiddenKey',
   },
   callbacks: {
-    ...selectionEventMap.callbacks,
+    ...selectionListEventMap.callbacks,
     onSetContainerWidth: 'setContainerWidth',
     onSetOverflowTargetWidth: 'setOverflowTargetWidth',
     onAddItemWidth: 'addItemWidth',
@@ -53,13 +53,13 @@ export const overflowEventMap = createEventMap<OverflowEvents>()({
   },
 });
 
-export type BaseOverflowModelConfig<T> = BaseSelectionModelConfig<T> & {
+export type BaseOverflowListModelConfig<T> = BaseSelectionListModelConfig<T> & {
   initialHiddenIds?: string[];
   containerWidth?: number;
 };
 
-export type OverflowModelConfig<T> = BaseOverflowModelConfig<T> &
-  Partial<ToModelConfig<OverflowState<T>, OverflowEvents<T>, typeof selectionEventMap>>;
+export type OverflowListModelConfig<T> = BaseOverflowListModelConfig<T> &
+  Partial<ToModelConfig<OverflowListState<T>, OverflowListEvents<T>, typeof selectionListEventMap>>;
 
 export function getHiddenIds(
   containerWidth: number,
@@ -108,9 +108,9 @@ export function getHiddenIds(
   return hiddenIds;
 }
 
-export const useOverflowModel = <T extends unknown>(
-  config: OverflowModelConfig<T> = {}
-): OverflowModel<T> => {
+export const useOverflowListModel = <T extends unknown>(
+  config: OverflowListModelConfig<T> = {}
+): OverflowListModel<T> => {
   const [hiddenIds, setHiddenIds] = React.useState(config.initialHiddenIds || []);
   const [itemWidthCache, setItemWidthCache] = React.useState<Record<string, number>>({});
   const [containerWidth, setContainerWidth] = React.useState(0);
@@ -123,7 +123,10 @@ export const useOverflowModel = <T extends unknown>(
   // hidden ids as well
   const nonInteractiveIds = (config.nonInteractiveIds || []).concat(hiddenIds);
 
-  const model = useSelectionModel({...(config as SelectionModelConfig<T>), nonInteractiveIds});
+  const model = useSelectionListModel({
+    ...(config as SelectionListModelConfig<T>),
+    nonInteractiveIds,
+  });
 
   const state = {
     ...model.state,
@@ -133,10 +136,10 @@ export const useOverflowModel = <T extends unknown>(
     overflowTargetWidth,
   };
 
-  const events = useEventMap(overflowEventMap, state, config, {
+  const events = useEventMap(overflowListEventMap, state, config, {
     ...model.events,
     select(data) {
-      const {selectedIds} = model.selection.select(data.id, state as SelectionState<T>);
+      const {selectedIds} = model.selection.select(data.id, state as SelectionListState<T>);
       const ids = getHiddenIds(
         containerWidthRef.current,
         overflowTargetWidthRef.current,
@@ -201,7 +204,7 @@ export const useOverflowModel = <T extends unknown>(
     removeHiddenKey({id}) {
       setHiddenIds(ids => ids.filter(key => key !== id));
     },
-  } as OverflowEvents<T>);
+  } as OverflowListEvents<T>);
 
   return {...model, state, events};
 };

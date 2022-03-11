@@ -14,43 +14,43 @@ import {
   useReturnFocus,
 } from '@workday/canvas-kit-react/popup';
 import {
-  CursorModel,
-  SelectionState,
-  SelectionEvents,
-  selectionEventMap,
-  SelectionModelConfig,
-  useSelectionModel,
-  BaseSelectionModelConfig,
+  CursorListModel,
+  SelectionListState,
+  SelectionListEvents,
+  selectionListEventMap,
+  SelectionListModelConfig,
+  useListModel,
+  BaseSelectionListModelConfig,
 } from '@workday/canvas-kit-react/list';
 
-export type MenuState<T = unknown> = SelectionState<T> & PopupState & {};
+export type MenuState<T = unknown> = SelectionListState<T> & PopupState & {};
 
-export type MenuEvents<T = unknown> = SelectionEvents<T> & PopupEvents & {};
+export type MenuEvents<T = unknown> = SelectionListEvents<T> & PopupEvents & {};
 
-export interface MenuModel<T = unknown> extends CursorModel<T>, PopupModel {
+export interface MenuModel<T = unknown> extends CursorListModel<T>, PopupModel {
   state: MenuState<T>;
   events: MenuEvents<T>;
 }
 
 export const menuEventMap = createEventMap<MenuEvents>()({
   guards: {
-    ...selectionEventMap.guards,
+    ...selectionListEventMap.guards,
     ...popupEventMap.guards,
   },
   callbacks: {
-    ...selectionEventMap.callbacks,
+    ...selectionListEventMap.callbacks,
     ...popupEventMap.callbacks,
   },
 });
 
-export type BaseMenuModelConfig<T> = BaseSelectionModelConfig<T> & BasePopupModelConfig & {};
+export type BaseMenuModelConfig<T> = BaseSelectionListModelConfig<T> & BasePopupModelConfig & {};
 
 export type MenuModelConfig<T> = BaseMenuModelConfig<T> &
   Partial<ToModelConfig<MenuState<T>, MenuEvents<T>, typeof menuEventMap>>;
 
 export const useMenuModel = <T extends unknown>(config: MenuModelConfig<T> = {}): MenuModel<T> => {
   const popup = usePopupModel(config as PopupModelConfig);
-  const selection = useSelectionModel(config as SelectionModelConfig<T>);
+  const list = useListModel(config as SelectionListModelConfig<T>);
 
   useAlwaysCloseOnOutsideClick(popup);
   useCloseOnEscape(popup);
@@ -58,12 +58,12 @@ export const useMenuModel = <T extends unknown>(config: MenuModelConfig<T> = {})
   useReturnFocus(popup);
   useFocusRedirect(popup);
 
-  const state = {...selection.state, ...popup.state};
+  const state = {...list.state, ...popup.state};
 
   const events = useEventMap(menuEventMap, state, config, {
-    ...selection.events,
+    ...list.events,
     ...popup.events,
   } as MenuEvents<T>);
 
-  return {...selection, state, events};
+  return {...list, state, events};
 };

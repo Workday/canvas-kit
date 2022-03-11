@@ -23,6 +23,7 @@ export interface DropdownButtonProps extends IconButtonProps {
   toggled: boolean;
 }
 
+let foo: string = 0;
 export const DropdownButton = createComponent(IconButton)({
   displayName: 'DropdownButton',
   Component: (

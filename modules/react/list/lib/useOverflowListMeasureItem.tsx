@@ -1,14 +1,14 @@
 import {createHook, useLocalRef, useMountLayout} from '@workday/canvas-kit-react/common';
 
-import {OverflowModel} from './useOverflowModel';
+import {OverflowListModel} from './useOverflowListModel';
 
 const hiddenStyles = {
   position: 'absolute',
   left: -99999,
 } as const;
 
-export const useOverflowMeasureItem = createHook(
-  (model: OverflowModel, ref?: React.Ref<HTMLElement>, elemProps: {name?: string} = {}) => {
+export const useOverflowListMeasureItem = createHook(
+  (model: OverflowListModel, ref?: React.Ref<HTMLElement>, elemProps: {name?: string} = {}) => {
     const {elementRef, localRef} = useLocalRef(ref);
     const name = elemProps.name || '';
 

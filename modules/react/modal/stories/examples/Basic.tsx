@@ -13,7 +13,7 @@ export const Basic = () => {
     <Modal>
       <Modal.Target as={DeleteButton}>Delete Item</Modal.Target>
       <Modal.Overlay>
-        <Modal.Card>
+        <Modal.Card overflow="hidden auto">
           <Modal.CloseIcon aria-label="Close" />
           <Modal.Heading>Delete Item</Modal.Heading>
           <Modal.Body>

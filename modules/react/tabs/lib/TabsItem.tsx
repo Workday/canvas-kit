@@ -21,10 +21,10 @@ import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {
   useListRegisterItem,
-  useRovingFocus,
+  useListRovingFocus,
   isSelected,
-  useSelectionItem,
-  useOverflowMeasureItem,
+  useListSelectItem,
+  useOverflowListMeasureItem,
 } from '@workday/canvas-kit-react/list';
 
 import {TabsModelContext} from './Tabs';
@@ -239,15 +239,15 @@ export const useTabsItem = composeHooks(
       const selected = !!elemProps.name && isSelected(name, state);
 
       return {
-        type: 'button' as 'button', // keep Typescript happy
+        type: 'button',
         role: 'tab',
         'aria-selected': selected,
         'aria-controls': `tabpanel-${state.id}-${name}`,
-      };
+      } as const;
     }
   ),
-  useSelectionItem,
-  useOverflowMeasureItem,
-  useRovingFocus,
+  useListSelectItem,
+  useOverflowListMeasureItem,
+  useListRovingFocus,
   useListRegisterItem
 );

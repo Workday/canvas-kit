@@ -7,7 +7,7 @@ import {
   createHook,
   ExtractProps,
 } from '@workday/canvas-kit-react/common';
-import {useRenderItems} from '@workday/canvas-kit-react/list';
+import {useListRenderItems} from '@workday/canvas-kit-react/list';
 import {Stack} from '@workday/canvas-kit-labs-react/layout';
 
 import {MenuModel} from './useMenuModel';
@@ -44,7 +44,7 @@ export const MenuList = createComponent('div')({
         flexDirection={localModel.state.orientation === 'vertical' ? 'column' : 'row'}
         {...props}
       >
-        {useRenderItems(localModel, children)}
+        {useListRenderItems(localModel, children)}
       </Stack>
     );
   },

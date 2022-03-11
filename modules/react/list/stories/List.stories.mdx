@@ -3,6 +3,9 @@ import {Meta} from '@storybook/addon-docs';
 import {List} from '@workday/canvas-kit-react/list';
 
 import {Basic} from './examples/Basic';
+import {BasicVirtual} from './examples/BasicVirtual';
+import {NamedItems} from './examples/NamedItems';
+import {DynamicItems} from './examples/DynamicItems';
 import {RovingFocus} from './examples/RovingFocus';
 import {Selection} from './examples/Selection';
 import {MultiSelection} from './examples/MultiSelection';
@@ -13,7 +16,7 @@ import {MultiSelection} from './examples/MultiSelection';
 
 A list is a system of models and behaviors for creating lists. For example, `Tabs` uses list
 behaviors and so does `Menu`. The UI of each looks very different, but much of the behavior is
-shared.
+shared. The list system should be used if a component doesn't already exist to satisfy your needs.
 
 ## Installation
 
@@ -23,40 +26,93 @@ yarn add @workday/canvas-kit-react
 
 ## Usage
 
-There is no `List` component, but components can be created using models and behaviors
+### List
 
-### Basic Example
+There is no `List` component, but components can be created using models and behaviors. A list is a
+single dimension collection of items. A `ListModel` is created using the `useListModel` hook. A list
+can be static or dynamic. A [static list](#basic-example) defines the items using the JSX syntax
+while [dynamic lists](#dynamic-items) pass an `items` array to the model. `useListRegisterItem` is
+used to add a static item to the list. Each item can specify a `name` that will become the
+identifier for that item. For dynamic items, the `name` identifier is in the data and the `getId` is
+used to extract out the identifier.
+
+#### Basic Example
 
 The list on its own isn't very useful. It registers each item with a `name` that is used by other
-hooks (more on that later). `useRenderItems` provides rendering optimizations for rendering items.
+hooks (more on that later). `useListRegisterItem` handles registration of static items to the model.
+`useListRenderItems` adds some optimizations as well as renders items either statically or allows
+children to be a render prop (more on that in the [Dynamic Items](#dynamic-items) example).
 
 <ExampleCodeBlock code={Basic} />
 
-### Roving Tabindex
+foo
+
+<ExampleCodeBlock code={BasicVirtual} />
+
+#### Named Items
+
+A list item takes an optional `name` property that will be used to identify an item. Without a
+`name`, the identifier will be the item's index when first registered.
+
+<ExampleCodeBlock code={NamedItems} />
+
+#### Dynamic Items
+
+An array of items can be passed to the `ListModel` instead of specifying them in the JSX. This
+allows items to be dynamic. It is more efficient to do this than to use a `map` in the JSX.
+
+<ExampleCodeBlock code={DynamicItems} />
+
+A list also has a "cursor". A cursor is often represented by focus, but it is not always a 1:1
+mapping. Think of the cursor as the focus item within the list. If the list has browser focus, the
+cursor will map to browser focus. Behaviors such as `useListRovingFocus` will map the cursor to the
+active tab stop of the list. For more information, see
+[Roving Tabindex](https://w3c.github.io/aria-practices/#kbd_roving_tabindex). `useListRovingFocus`
+adds keyboard events that map to navigation events. A [Navigation Manager](#navigation-manager) is
+used to map new cursor ids to these events. The `ListModel` takes an optional `navigation`
+configuration to change the default navigation behavior. The default navigation manager is a
+[wrappingNavigationManager](#wrappingnavigationmanager) meaning the cursor will wrap around the
+beginning and the ends. The cursor also provides a [navigationManager](#navigationmanager) that does
+not wrap. This is the default navigation for grids.
+
+The cursor also adds the concept of `orientation` which defaults to `'vertical'`. A Tab list is an
+example of a `'horizontal'` list.
+
+### Grid
+
+A Cursor List can become a grid if a `columnCount` is provided. The array of items is still flat,
+but navigational controls are now in two dimensions instead of one. A one dimension list is
+bidirectionally aware, but a grid will always
+
+#### Navigation Manager
+
+#### Roving Tabindex
 
 The list system also includes a cursor that extends the list. A cursor is mostly used for focusing
 items. The [roving tabindex](https://w3c.github.io/aria-practices/#kbd_roving_tabindex) is a
 well-supported way to accomplish accessibility requirements for focusing items within a list. This
-example shows how to use `useRovingFocus`. You can either use the tab key for focus on an item or
-click on an item and then use the up/down keys to navigation the list. By default, the list is set
-to wrap navigation using the `wrappingNavigationManager`. Only a single item in the list is a focus
-stop that "roves" as the up/down arrows are pressed.
+example shows how to use `useListRovingFocus`. You can either use the tab key for focus on an item
+or click on an item and then use the up/down keys to navigation the list. By default, the list is
+set to wrap navigation using the `wrappingNavigationManager`. Only a single item in the list is a
+focus stop that "roves" as the up/down arrows are pressed.
 
 **Note:** This example doesn't meet accessibility requirements. The list will have to have some type
 of context. Like "navigation list" or "menu list".
 
 <ExampleCodeBlock code={RovingFocus} />
 
-### Selection
+#### Selection
 
 Lists support selection. `useSelectionItem` is applied to an item which adds an `onClick` that adds
 the item to the `state.selectedIds`. The default selection manager is a single select.
 
 <ExampleCodeBlock code={Selection} />
 
-### Multiple Selection
+#### Multiple Selection
 
 Lists support selection. `useSelectionItem` is applied to an item which adds an `onClick` that adds
 the item to the `state.selectedIds`. The default selection manager is a single select.
 
 <ExampleCodeBlock code={MultiSelection} />
+
+### Hooks

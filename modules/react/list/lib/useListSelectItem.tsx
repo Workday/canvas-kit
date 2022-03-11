@@ -2,11 +2,11 @@ import React from 'react';
 
 import {createHook} from '@workday/canvas-kit-react/common';
 
-import {SelectionModel} from './useSelectionModel';
+import {SelectionListModel} from './useSelectionListModel';
 
-export const useSelectionItem = createHook(
+export const useListSelectItem = createHook(
   (
-    {state, events}: SelectionModel,
+    {state, events}: SelectionListModel,
     _?: React.Ref<HTMLElement>,
     elemProps: {name?: string} = {}
   ) => {

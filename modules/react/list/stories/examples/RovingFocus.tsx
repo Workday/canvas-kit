@@ -2,36 +2,38 @@ import React from 'react';
 
 import {
   useListRegisterItem,
-  useRovingFocus,
-  useRenderItems,
-  useCursorModel,
+  useListRovingFocus,
+  useListRenderItems,
+  useListModel,
   ListModel,
+  ListProps,
+  ListItemProps,
 } from '@workday/canvas-kit-react/list';
 import {composeHooks} from '@workday/canvas-kit-react/common';
 
 const ListModelContext = React.createContext<ListModel>({} as any);
 
-const List = (props: {children: React.ReactNode}) => {
-  const model = useCursorModel();
+const List = (props: ListProps) => {
+  const model = useListModel();
 
   return (
     <ListModelContext.Provider value={model}>
-      <ul>{useRenderItems(model, props.children)}</ul>
+      <ul>{useListRenderItems(model, props.children)}</ul>
       <p>Cursor ID: {model.state.cursorId}</p>
     </ListModelContext.Provider>
   );
 };
 
-const useItem = composeHooks(useRovingFocus, useListRegisterItem);
+const useItem = composeHooks(useListRovingFocus, useListRegisterItem);
 
-const Item = (elemProps: {children: React.ReactNode}) => {
+const Item = (elemProps: ListItemProps) => {
   const model = React.useContext(ListModelContext);
 
   const props = useItem(model, elemProps);
 
   return (
     <li {...props}>
-      {props.children} - {props['data-name']}
+      {props.children} - {props['data-id']}
     </li>
   );
 };
