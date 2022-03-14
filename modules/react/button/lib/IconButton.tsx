@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {CSSObject} from '@emotion/core';
 import {colors, space, borderRadius} from '@workday/canvas-kit-react/tokens';
 import {
   focusRing,
@@ -9,7 +10,7 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {ButtonColors, PropertyPosition} from './types';
+import {ButtonColors} from './types';
 import {ButtonContainer} from './parts';
 
 export interface IconButtonProps extends Themeable {
@@ -88,7 +89,7 @@ export const IconButton = createComponent('button')({
       }
     }, [toggled, onToggleChange]);
 
-    const containerStyles = {
+    const containerStyles: CSSObject = {
       padding: 0,
       margin: variant === 'plain' ? '-8px' : undefined,
       minWidth: size === 'small' ? space.l : space.xl, // min-width is set so buttons don't collapse in IE11
@@ -99,7 +100,7 @@ export const IconButton = createComponent('button')({
       '&:focus': {
         boxShadow: 'none',
         '&::after': {
-          position: 'absolute' as PropertyPosition,
+          position: 'absolute',
           content: '""',
           width: 44,
           height: 44,
