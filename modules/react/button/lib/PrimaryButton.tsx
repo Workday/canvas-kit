@@ -49,26 +49,23 @@ const getPrimaryButtonColors = (variant: 'inverse' | undefined, theme: EmotionCa
           background: colors.frenchVanilla100,
           icon: colors.blackPepper400,
           label: colors.blackPepper400,
-          labelData: colors.blackPepper400,
         },
         hover: {
           background: colors.soap300,
           icon: colors.blackPepper500,
           label: colors.blackPepper500,
-          labelData: colors.blackPepper500,
         },
         active: {
           background: colors.soap400,
           icon: colors.blackPepper500,
           label: colors.blackPepper500,
-          labelData: colors.blackPepper500,
         },
         focus: {
           background: colors.frenchVanilla100,
           border: colors.blackPepper400,
           icon: colors.blackPepper400,
           label: colors.blackPepper400,
-          labelData: colors.blackPepper400,
+
           focusRing: focusRing(
             {
               separation: 1,
@@ -83,7 +80,6 @@ const getPrimaryButtonColors = (variant: 'inverse' | undefined, theme: EmotionCa
           background: colors.frenchVanilla100,
           icon: colors.blackPepper400,
           label: colors.blackPepper400,
-          labelData: colors.blackPepper400,
         },
       };
   }
@@ -103,17 +99,6 @@ export interface PrimaryButtonProps extends Themeable, GrowthBehavior {
    */
   size?: ButtonSizes;
   /**
-   * The data label is additional information about the button. The `children` of the Button will
-   * appear in bold font while the `dataLabel` will not be emphasized as bold. The `dataLabel` will
-   * be part of a button's accessible name appended after `children`. Useful to ancillary data
-   * associated with the button, but not the prominent label. If `dataLabel` contents are
-   * left-to-right characters, and the `children` are RTL characters, the button may show contents
-   * out of order.
-   *
-   * Note: not displayed at `small` size
-   */
-  dataLabel?: String;
-  /**
    * The icon of the Button.
    * Note: not displayed at `small` size
    */
@@ -132,9 +117,6 @@ export interface PrimaryButtonProps extends Themeable, GrowthBehavior {
   children?: React.ReactNode;
 }
 
-// Button sizes where data labels are enabled
-const dataLabelSizes = ['medium', 'large'];
-
 export const PrimaryButton = createComponent('button')({
   displayName: 'PrimaryButton',
   Component: (
@@ -142,7 +124,6 @@ export const PrimaryButton = createComponent('button')({
       size = 'medium',
       iconPosition = 'start',
       variant,
-      dataLabel,
       icon,
       shouldMirrorIcon = false,
       children,
@@ -171,9 +152,7 @@ export const PrimaryButton = createComponent('button')({
           />
         )}
         {children && <BaseButton.Label>{children}</BaseButton.Label>}
-        {dataLabel && dataLabelSizes.includes(size) && (
-          <BaseButton.LabelData>{dataLabel}</BaseButton.LabelData>
-        )}
+
         {icon && iconPosition === 'end' && (
           <BaseButton.Icon
             size={size}

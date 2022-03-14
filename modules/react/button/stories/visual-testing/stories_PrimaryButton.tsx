@@ -36,10 +36,6 @@ export const PrimaryButtonStates = (props: {theme?: PartialEmotionCanvasTheme}) 
             {value: 'start', label: '& Left Icon'},
             {value: 'end', label: '& Right Icon'},
           ],
-          dataLabel: [
-            {value: undefined, label: ''},
-            {value: '1:23', label: '& Data Label'},
-          ],
         },
         // Filter out permutations where `iconPosition` is provided and not `icon`, and vice versa
         props => {

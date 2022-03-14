@@ -27,11 +27,6 @@ export interface SecondaryButtonProps extends Themeable, GrowthBehavior {
    */
   size?: ButtonSizes;
   /**
-   * The data label of the Button.
-   * Note: not displayed at `small` size
-   */
-  dataLabel?: String;
-  /**
    * The icon of the Button.
    * Note: not displayed at `small` size
    */
@@ -50,9 +45,6 @@ export interface SecondaryButtonProps extends Themeable, GrowthBehavior {
   children?: React.ReactNode;
 }
 
-// Button sizes where data labels are enabled
-const dataLabelSizes = ['medium', 'large'];
-
 export const SecondaryButton = createComponent('button')({
   displayName: 'SecondaryButton',
   Component: (
@@ -60,7 +52,6 @@ export const SecondaryButton = createComponent('button')({
       size = 'medium',
       iconPosition = 'start',
       variant,
-      dataLabel,
       icon,
       shouldMirrorIcon = false,
       children,
@@ -90,9 +81,6 @@ export const SecondaryButton = createComponent('button')({
           />
         )}
         {children && <BaseButton.Label>{children}</BaseButton.Label>}
-        {dataLabel && dataLabelSizes.includes(size) && (
-          <BaseButton.LabelData>{dataLabel}</BaseButton.LabelData>
-        )}
         {icon && iconPosition === 'end' && (
           <BaseButton.Icon
             size={size}
@@ -125,27 +113,23 @@ export const getSecondaryButtonColors = (
           border: colors.blackPepper400,
           icon: colors.blackPepper400,
           label: colors.blackPepper400,
-          labelData: colors.blackPepper400,
         },
         hover: {
           background: colors.blackPepper400,
           border: colors.blackPepper400,
           icon: themePrimary.contrast,
           label: themePrimary.contrast,
-          labelData: themePrimary.contrast,
         },
         active: {
           background: colors.blackPepper500,
           border: colors.blackPepper500,
           icon: themePrimary.contrast,
           label: themePrimary.contrast,
-          labelData: themePrimary.contrast,
         },
         focus: {
           border: colors.blackPepper400,
           icon: colors.blackPepper400,
           label: colors.blackPepper400,
-          labelData: colors.blackPepper400,
         },
         // Identical to 'default' styles. ButtonContainer will set opacity to 40%
         disabled: {
@@ -153,7 +137,6 @@ export const getSecondaryButtonColors = (
           border: colors.blackPepper400,
           icon: colors.blackPepper400,
           label: colors.blackPepper400,
-          labelData: colors.blackPepper400,
         },
       };
     case 'inverse':
@@ -169,21 +152,18 @@ export const getSecondaryButtonColors = (
           border: colors.soap300,
           icon: colors.blackPepper500,
           label: colors.blackPepper500,
-          labelData: colors.blackPepper500,
         },
         active: {
           background: colors.soap400,
           border: colors.soap400,
           icon: colors.blackPepper500,
           label: colors.blackPepper500,
-          labelData: colors.blackPepper500,
         },
         focus: {
           background: colors.frenchVanilla100,
           icon: colors.blackPepper500,
           border: colors.blackPepper400,
           label: colors.blackPepper500,
-          labelData: colors.blackPepper500,
           focusRing: focusRing(
             {
               separation: 2,

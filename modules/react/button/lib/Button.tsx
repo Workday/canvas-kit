@@ -238,82 +238,138 @@ export const getPaddingStyles = (
   icon: CanvasSystemIcon | undefined,
   iconPosition: IconPositions | undefined
 ) => {
-  // In order to calculate the correct padding, we need to know its children
-  // and what side the icon is on and if there's an icon provided
-
-  // If there are children AND an icon
-  // 1. We check what side the icon is in
-  // 2. Adjust padding to visually center the icon and text
-  // If there is children (most likely just text)
-  // 1. We keep the padding the same on both side
-  // If there are no children (this is an icon button)
-  // 1. We set the padding to 0 to center the icon in the button
+  let padding = '0';
+  const isChildrenAndIcon = children && icon;
+  const startIconPoistion = iconPosition === 'start';
   switch (size) {
-    case 'large':
-      return children && icon
-        ? iconPosition === 'start'
-          ? `0 ${space.l} 0 28px`
-          : `0 28px 0 ${space.l}`
-        : children
-        ? `0 ${space.l}`
-        : 0;
+    case 'large': {
+      if (isChildrenAndIcon) {
+        if (startIconPoistion) {
+          return (padding = `0 ${space.l} 0 28px`);
+        } else {
+          return (padding = `0 28px 0 ${space.l}`);
+        }
+      } else if (children) {
+        return (padding = `0 ${space.l}`);
+      } else {
+        return (padding = '0');
+      }
+    }
+    case 'medium': {
+      if (isChildrenAndIcon) {
+        if (startIconPoistion) {
+          return (padding = `0 ${space.m} 0 20px`);
+        } else {
+          return (padding = `0 20px 0 ${space.m}`);
+        }
+      } else if (children) {
+        return (padding = `0 ${space.m}`);
+      } else {
+        return (padding = '0');
+      }
+    }
 
-    case 'medium':
-      return children && icon
-        ? iconPosition === 'start'
-          ? `0 ${space.m} 0 20px`
-          : `0 20px 0 ${space.m}`
-        : children
-        ? `0 ${space.m}`
-        : 0;
-    case 'small':
-      return children && icon
-        ? iconPosition === 'start'
-          ? `0 ${space.s} 0 ${space.xs}`
-          : `0 ${space.xs} 0 ${space.s}`
-        : children
-        ? `0 ${space.s}`
-        : 0;
-    case 'extraSmall':
-      return children && icon
-        ? iconPosition === 'start'
-          ? `0 ${space.xs} 0 ${space.xxs}`
-          : `0 ${space.xxs} 0 ${space.xs}`
-        : children
-        ? `0 ${space.xs}`
-        : 0;
-    default:
-      return children && icon
-        ? iconPosition === 'start'
-          ? `0 ${space.m} 0 20px`
-          : `0 20px 0 ${space.m}`
-        : children
-        ? `0 ${space.m}`
-        : 0;
+    case 'small': {
+      if (isChildrenAndIcon) {
+        if (startIconPoistion) {
+          return (padding = `0 ${space.s} 0 ${space.xs}`);
+        } else {
+          return (padding = `0 ${space.xs} 0 ${space.s}`);
+        }
+      } else if (children) {
+        return (padding = `0 ${space.s}`);
+      } else {
+        return (padding = '0');
+      }
+    }
+
+    case 'extraSmall': {
+      if (isChildrenAndIcon) {
+        if (startIconPoistion) {
+          return (padding = `0 ${space.xs} 0 ${space.xxs}`);
+        } else {
+          return (padding = `0 ${space.xxs} 0 ${space.xs}`);
+        }
+      } else if (children) {
+        return (padding = `0 ${space.xs}`);
+      } else {
+        return (padding = '0');
+      }
+    }
+    default: {
+      if (isChildrenAndIcon) {
+        if (startIconPoistion) {
+          return (padding = `0 ${space.m} 0 20px`);
+        } else {
+          return (padding = `0 20px 0 ${space.m}`);
+        }
+      } else if (children) {
+        return (padding = `0 ${space.m}`);
+      } else {
+        return (padding = '0');
+      }
+    }
   }
 };
 
 // export const getPaddingStyles = (
 //   children: React.ReactNode,
 //   size: ButtonSizes | TertiaryButtonSizes,
-//   iconPosition?: IconPositions
+//   icon: CanvasSystemIcon | undefined,
+//   iconPosition: IconPositions | undefined
 // ) => {
+//   // In order to calculate the correct padding, we need to know its children
+//   // and what side the icon is on and if there's an icon provided
+
+//   // If there are children AND an icon
+//   // 1. We check what side the icon is in
+//   // 2. Adjust padding to visually center the icon and text
+//   // If there is children (most likely just text)
+//   // 1. We keep the padding the same on both side
+//   // If there are no children (this is an icon button)
+//   // 1. We set the padding to 0 to center the icon in the button
 //   switch (size) {
 //     case 'large':
-//       return children ? `0 ${space.l}` : 0;
+//       return children && icon
+//         ? iconPosition === 'start'
+//           ? `0 ${space.l} 0 28px`
+//           : `0 28px 0 ${space.l}`
+//         : children
+//         ? `0 ${space.l}`
+//         : 0;
 
 //     case 'medium':
-//       return children
+//       return children && icon
 //         ? iconPosition === 'start'
 //           ? `0 ${space.m} 0 20px`
 //           : `0 20px 0 ${space.m}`
+//         : children
+//         ? `0 ${space.m}`
 //         : 0;
 //     case 'small':
-//       return children ? `0 ${space.s}` : 0;
+//       return children && icon
+//         ? iconPosition === 'start'
+//           ? `0 ${space.s} 0 ${space.xs}`
+//           : `0 ${space.xs} 0 ${space.s}`
+//         : children
+//         ? `0 ${space.s}`
+//         : 0;
 //     case 'extraSmall':
-//       return children ? `0 ${space.xs}` : 0;
+//       return children && icon
+//         ? iconPosition === 'start'
+//           ? `0 ${space.xs} 0 ${space.xxs}`
+//           : `0 ${space.xxs} 0 ${space.xs}`
+//         : children
+//         ? `0 ${space.xs}`
+//         : 0;
 //     default:
-//       return children ? `0 ${space.m}` : 0;
+//       return children && icon
+//         ? iconPosition === 'start'
+//           ? `0 ${space.m} 0 20px`
+//           : `0 20px 0 ${space.m}`
+//         : children
+//         ? `0 ${space.m}`
+//         : 0;
 //   }
 // };
 

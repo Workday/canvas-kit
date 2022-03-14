@@ -9,7 +9,6 @@ export interface ButtonStateColors {
   icon?: string;
   iconFill?: boolean;
   label?: string;
-  labelData?: string;
   opacity?: string;
 }
 export interface ButtonColors {
