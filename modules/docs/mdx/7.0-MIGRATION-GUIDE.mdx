@@ -114,23 +114,11 @@ word.
 As part of our efforts to decrease variants and consolidate APIs, we've combined `IconButton` with
 our `PrimaryButton`, `SecondaryButton` and `TertiaryButton`.
 
-_Note_: In order to render a icon button, omit any `children` and pass the button an `icon` prop.
+#### Breaking Changes
 
-Example
-
-v6
-
-```tsx
-<IconButton variant="circleFilled" icon={plusIcon} />
-```
-
-v7
-
-```tsx
-<SecondaryButton icon={plusIcon} />
-```
-
-This will render an icon button that is styled like our secondary buttons.
+- Removed the `toggled` prop when migrating over Icon Buttons
+- Changed the values of `IconPosition: left | right` - > `IconPosition: start | end`
+- Remove `dataLabel` prop from `PrimaryButton` and `SecondaryButton`
 
 ### Button Mapping
 
@@ -150,6 +138,22 @@ you can use
 | `squareFilled`     | Not Supporting                       |
 
 ### Rendering an icon button
+
+In order to render a icon button, omit any `children` and pass the button an `icon` prop.
+
+Example
+
+v6
+
+```tsx
+<IconButton variant="circleFilled" icon={plusIcon} />
+```
+
+v7
+
+```tsx
+<SecondaryButton icon={plusIcon} />
+```
 
 You can now render what use to be an `IconButton` using out main buttons.
 
@@ -195,7 +199,55 @@ _Note:_ The position of the icon should have no affect if you're rending an icon
 
 ## Segmented Control
 
+Segmente Control use to work when rendering `IconButton` as children. This has now moved to a
+compound component and removed the use of `IconButton`.
+
+v6
+
+```tsx
+<SegmentedControl value={value} onChange={handleToggle}>
+  <IconButton
+    icon={listViewIcon}
+    value="list-view"
+    aria-label="List View"
+    onClick={e => console.log('Existing IconButton onClick callback')}
+  />
+  <IconButton icon={worksheetsIcon} value="table-view" aria-label="Table View" disabled={true} />
+  <IconButton icon={deviceTabletIcon} value="device-view" aria-label="Device View" />
+  <IconButton icon={percentageIcon} value="percent-view" aria-label="Percent View" />
+</SegmentedControl>
+```
+
+v7
+
+```tsx
+<SegmentedControl value={value} onChange={handleToggle}>
+  <SegmentedControl.Button
+    icon={listViewIcon}
+    value="list-view"
+    aria-label="List View"
+    onClick={e => console.log('Existing IconButton onClick callback')}
+  />
+  <SegmentedControl.Button
+    icon={worksheetsIcon}
+    value="table-view"
+    aria-label="Table View"
+    disabled={true}
+  />
+  <SegmentedControl.Button icon={deviceTabletIcon} value="device-view" aria-label="Device View" />
+  <SegmentedControl.Button icon={percentageIcon} value="percent-view" aria-label="Percent View" />
+</SegmentedControl>
+```
+
 ## Icons
+
+We've updated our lower level icon components such as `AccentIcon`, `AppletIcon`, `Graphic`, `Icon`,
+`Svg`, `SystemIcon`, and `SystemIconCircle` to use our
+[createComponent](https://github.com/Workday/canvas-kit/blob/ff77c5bd83e41c3ab2b9c55e41a8b7c1fde33a1b/modules/react/common/lib/utils/components.ts#L167)
+which allows us to `forwardRef`.
+
+_Note:_ This is a breaking change since we've removed `iconRef`. You can now just pass a `ref` to
+the element.
 
 ## Popup Cards
 

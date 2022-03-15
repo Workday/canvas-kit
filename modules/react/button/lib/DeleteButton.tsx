@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {ButtonColors} from './types';
-import {BaseButton, getMinWidthStyles, getPaddingStyles} from './Button';
+import {BaseButton, getMinWidthStyles, getPaddingStyles} from './BaseButton';
 import {
   GrowthBehavior,
   useTheme,

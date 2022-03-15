@@ -10,7 +10,7 @@ import {
   StyledType,
 } from '@workday/canvas-kit-react/common';
 import {ButtonColors} from './types';
-import {BaseButton} from './Button';
+import {BaseButton} from './BaseButton';
 import {chevronDownSmallIcon} from '@workday/canvas-system-icons-web';
 import {ToolbarIconButtonProps} from './ToolbarIconButton';
 

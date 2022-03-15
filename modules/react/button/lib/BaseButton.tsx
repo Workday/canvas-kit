@@ -2,7 +2,6 @@ import * as React from 'react';
 
 import {ButtonLabelIcon} from './parts/ButtonLabelIcon';
 import {ButtonLabel} from './parts/ButtonLabel';
-import {ButtonLabelData} from './parts/ButtonLabelData';
 
 import {
   createComponent,
@@ -13,7 +12,7 @@ import {
   EmotionCanvasTheme,
   StyledType,
 } from '@workday/canvas-kit-react/common';
-import {Box, BoxProps} from '@workday/canvas-kit-react/layout';
+import {BoxProps, boxStyleFn} from '@workday/canvas-kit-react/layout';
 import {borderRadius, space, spaceNumbers, type} from '@workday/canvas-kit-react/tokens';
 
 import {ButtonColors, ButtonSizes, IconPositions, TertiaryButtonSizes} from './types';
@@ -69,7 +68,8 @@ function getIconColorSelectors(
   };
 }
 
-const ButtonContainer = styled(Box.as('button'))<StyledType & ButtonContainerProps>(
+const ButtonContainer = styled('button')<StyledType & ButtonContainerProps>(
+  boxStyleFn,
   {
     ...type.levels.subtext.large,
     cursor: 'pointer',
@@ -189,16 +189,6 @@ const ButtonContainer = styled(Box.as('button'))<StyledType & ButtonContainerPro
         color: colors.focus.label,
         ...(colors.focus.focusRing || focusRing({separation: 2}, theme)),
         ...(colors.focus.icon && getIconColorSelectors(theme, colors.focus.icon, fillIcon)),
-        ...mouseFocusBehavior({
-          '&:focus': {
-            ...baseStyles,
-            outline: 'none',
-            boxShadow: 'none',
-            animation: 'none',
-            ...hoverStyles,
-            ...activeStyles,
-          },
-        }),
       },
 
       ...activeStyles,
@@ -210,6 +200,16 @@ const ButtonContainer = styled(Box.as('button'))<StyledType & ButtonContainerPro
         opacity: colors.disabled.opacity,
         ...(colors.disabled.icon && getIconColorSelectors(theme, colors.disabled.icon, fillIcon)),
       },
+      ...mouseFocusBehavior({
+        '&:focus': {
+          ...baseStyles,
+          outline: 'none',
+          boxShadow: 'none',
+          animation: 'none',
+          ...hoverStyles,
+          ...activeStyles,
+        },
+      }),
     };
   }
 );
@@ -232,86 +232,6 @@ export const getMinWidthStyles = (
   }
 };
 
-// export const getPaddingStyles = (
-//   children: React.ReactNode,
-//   size: ButtonSizes | TertiaryButtonSizes,
-//   icon: CanvasSystemIcon | undefined,
-//   iconPosition: IconPositions | undefined
-// ) => {
-//   let padding = '0';
-//   const isChildrenAndIcon = children && icon;
-//   const startIconPoistion = iconPosition === 'start';
-//   switch (size) {
-//     case 'large': {
-//       if (isChildrenAndIcon) {
-//         if (startIconPoistion) {
-//           return (padding = `0 ${space.l} 0 28px`);
-//         } else {
-//           return (padding = `0 28px 0 ${space.l}`);
-//         }
-//       } else if (children) {
-//         return (padding = `0 ${space.l}`);
-//       } else {
-//         return (padding = '0');
-//       }
-//     }
-//     case 'medium': {
-//       if (isChildrenAndIcon) {
-//         if (startIconPoistion) {
-//           return (padding = `0 ${space.m} 0 20px`);
-//         } else {
-//           return (padding = `0 20px 0 ${space.m}`);
-//         }
-//       } else if (children) {
-//         return (padding = `0 ${space.m}`);
-//       } else {
-//         return (padding = '0');
-//       }
-//     }
-
-//     case 'small': {
-//       if (isChildrenAndIcon) {
-//         if (startIconPoistion) {
-//           return (padding = `0 ${space.s} 0 ${space.xs}`);
-//         } else {
-//           return (padding = `0 ${space.xs} 0 ${space.s}`);
-//         }
-//       } else if (children) {
-//         return (padding = `0 ${space.s}`);
-//       } else {
-//         return (padding = '0');
-//       }
-//     }
-
-//     case 'extraSmall': {
-//       if (isChildrenAndIcon) {
-//         if (startIconPoistion) {
-//           return (padding = `0 ${space.xs} 0 ${space.xxs}`);
-//         } else {
-//           return (padding = `0 ${space.xxs} 0 ${space.xs}`);
-//         }
-//       } else if (children) {
-//         return (padding = `0 ${space.xs}`);
-//       } else {
-//         return (padding = '0');
-//       }
-//     }
-//     default: {
-//       if (isChildrenAndIcon) {
-//         if (startIconPoistion) {
-//           return (padding = `0 ${space.m} 0 20px`);
-//         } else {
-//           return (padding = `0 20px 0 ${space.m}`);
-//         }
-//       } else if (children) {
-//         return (padding = `0 ${space.m}`);
-//       } else {
-//         return (padding = '0');
-//       }
-//     }
-//   }
-// };
-
 export const getPaddingStyles = (
   children: React.ReactNode,
   size: ButtonSizes | TertiaryButtonSizes,
@@ -321,6 +241,7 @@ export const getPaddingStyles = (
   // In order to calculate the correct padding, we need to know its children
   // and what side the icon is on and if there's an icon provided
   if (!children) {
+    // icon buttons do not have any padding
     return 0;
   }
   // If there are children AND an icon
@@ -328,8 +249,6 @@ export const getPaddingStyles = (
   // 2. Adjust padding to visually center the icon and text
   // If there is children (most likely just text)
   // 1. We keep the padding the same on both side
-  // If there are no children (this is an icon button)
-  // 1. We set the padding to 0 to center the icon in the button
   switch (size) {
     case 'large':
       return icon
@@ -380,6 +299,5 @@ export const BaseButton = createComponent('button')({
   subComponents: {
     Icon: ButtonLabelIcon,
     Label: ButtonLabel,
-    LabelData: ButtonLabelData,
   },
 });

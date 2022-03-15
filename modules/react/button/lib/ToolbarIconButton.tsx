@@ -10,7 +10,7 @@ import {
   StyledType,
 } from '@workday/canvas-kit-react/common';
 import {ButtonColors} from './types';
-import {BaseButton} from './Button';
+import {BaseButton} from './BaseButton';
 import {TertiaryButtonProps} from './TertiaryButton';
 
 export interface ToolbarIconButtonProps

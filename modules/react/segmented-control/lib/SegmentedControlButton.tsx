@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, ButtonColors} from '@workday/canvas-kit-react/button';
+import {BaseButton, ButtonColors} from '@workday/canvas-kit-react/button';
 import {
   createComponent,
   mouseFocusBehavior,
@@ -35,7 +35,7 @@ const getIconButtonColors = (toggled?: boolean): ButtonColors => {
   };
 };
 
-const StyledButton = styled(Button)<StyledType>(
+const StyledButton = styled(BaseButton)<StyledType>(
   {
     borderRadius: borderRadius.zero,
     border: `1px solid ${colors.soap500}`,
@@ -102,7 +102,7 @@ export const SegmentedControlButton = createComponent('button')({
         ref={ref}
         {...props}
       >
-        <Button.Icon size="large" icon={icon} />
+        <BaseButton.Icon size="large" icon={icon} />
       </StyledButton>
     );
   },

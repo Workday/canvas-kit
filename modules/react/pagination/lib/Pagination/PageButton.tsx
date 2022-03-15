@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {styled} from '@workday/canvas-kit-react/common';
 import {borderRadius, colors, space} from '@workday/canvas-kit-react/tokens';
-import {BaseButton} from '../../../button/lib/Button';
+import {BaseButton} from '@workday/canvas-kit-react/button';
 
 import {PaginationModel} from './types';
 

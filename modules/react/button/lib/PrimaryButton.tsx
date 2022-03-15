@@ -11,7 +11,7 @@ import {
 import {colors} from '@workday/canvas-kit-react/tokens';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {ButtonSizes, IconPositions} from './types';
-import {BaseButton, getMinWidthStyles, getPaddingStyles} from './Button';
+import {BaseButton, getMinWidthStyles, getPaddingStyles} from './BaseButton';
 
 const getPrimaryButtonColors = (variant: 'inverse' | undefined, theme: EmotionCanvasTheme) => {
   const {
