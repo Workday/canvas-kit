@@ -27,8 +27,6 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
           value.openingElement.name.name === (styledMap.PrimaryButton || styledMap.SecondaryButton))
     )
     .forEach(nodePath => {
-      console.log(nodePath);
-
       const findAttribute = (name: string) => (item: JSXAttribute | JSXSpreadAttribute) => {
         if (
           item.type === 'JSXAttribute' &&
