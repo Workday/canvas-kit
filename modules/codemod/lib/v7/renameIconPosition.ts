@@ -2,10 +2,6 @@ import {API, FileInfo, Options, JSXElement, JSXAttribute, JSXSpreadAttribute} fr
 
 import {getImportRenameMap} from './utils/getImportRenameMap';
 
-function filterDefined<T>(input: any): input is T {
-  return !!input;
-}
-
 export default function transformer(file: FileInfo, api: API, options: Options) {
   const j = api.jscodeshift;
 
