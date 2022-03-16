@@ -197,6 +197,39 @@ iconPosition: 'start' | 'end';
 
 _Note:_ The position of the icon should have no affect if you're rending an icon button.
 
+### Removal of `dataLabel` Prop
+
+The `dataLabel` prop has been removed from our Buttons in v7 in order to simplify the API.
+
+_Note:_ The codemod will not remove this prop since use of this prop varies. If you'd like to still
+have a similar effect, below is an example of how to achieve this.
+
+v6
+
+```tsx
+<PrimaryButton dataLabel="1:00">Time</PrimaryButton>
+```
+
+v7
+
+```tsx
+<PrimaryButton>
+  Time
+  <span
+    style={{
+      position: 'relative', // Fixes an IE issue with text within button moving on click
+      textOverflow: 'ellipsis',
+      overflow: 'hidden',
+      whiteSpace: 'nowrap',
+      fontWeight: 400,
+      marginLeft: 4,
+    }}
+  >
+    1:00
+  </span>
+</PrimaryButton>
+```
+
 ## Segmented Control
 
 Segmente Control use to work when rendering `IconButton` as children. This has now moved to a
