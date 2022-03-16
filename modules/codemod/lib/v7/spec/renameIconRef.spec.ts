@@ -4,24 +4,8 @@ import {stripIndent} from 'common-tags';
 
 const expectTransform = expectTransformFactory(transform);
 
-describe('renameInputRefs', () => {
-  it('should not replace "inputRef" with "ref" on non-input components', () => {
-    const input = `
-      import {SomeOtherComponent} from '@workday/canvas-kit-react'
-
-      <SomeOtherComponent inputRef={ref} />
-    `;
-
-    const expected = `
-      import {SomeOtherComponent} from '@workday/canvas-kit-react'
-
-      <SomeOtherComponent inputRef={ref} />
-    `;
-
-    expectTransform(input, expected);
-  });
-
-  it('when imported with a default import', () => {
+describe('renameIconRefs', () => {
+  it('should rename iconRef to ref', () => {
     const input = stripIndent`
         import {AccentIcon, AppletIcon, SystemIcon, SystemIconCircle, Graphic, Svg} from '@workday/canvas-kit-react/icon'
         <>
