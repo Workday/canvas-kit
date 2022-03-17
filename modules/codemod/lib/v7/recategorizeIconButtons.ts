@@ -41,22 +41,21 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
     return file.source;
   }
 
-  //   circle -> tertiary
+  // circle -> tertiary
   // circle-filled -> secondary
   // inverse -> tertiary inverse
   // inverse-filled -> secondary inverse
-  // 10:00
-  // plain/square -> tertiary
-  // square-filled -> secondary
+  // plain/square -> not supported
+  // square-filled -> not supported
 
   /**
-   * 2. Find `Button`
-   *  - If it has variant="primary"
-   *    - Swap to `PrimaryButton` and remove variant prop
-   *    - Add `PrimaryButton` import if it doesn't exist.
+   * 2. Find `IconButton`
+   *  - If it has no variant, it means it's "circle" which is the default
+   *    - Swap to `TertiaryButton`
+   *    - Add `TertiaryButton` import if it doesn't exist.
    *  - If not
-   *    - Swap to `SecondaryButton` and remove variant prop
-   *    - Add `SecondaryButton` import if it doesn't exist
+   *    - check the variant of the IconButton
+   *    - Swap it out for the appropriate mapping
    */
   root
     .find(j.JSXElement, findIconBtnTag.bind(undefined, importMap.IconButton))
@@ -99,131 +98,11 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
           updateJSXTag(nodePath, 'TertiaryButton');
           requiredImportSpecifiers.push('TertiaryButton');
         }
-
-        // // remove variant prop
-        // nodePath.value.openingElement.attributes?.splice(attrs?.indexOf(variantProp)!, 1);
       }
-      // Swap to `PrimaryButton` or `SecondaryButton`
-      // updateJSXTag(nodePath, buttonType);
-      // requiredImportSpecifiers.push(buttonType);
     });
 
   /**
-   * 3. Find `HighlightButton`
-   *  - Replace with `SecondaryButton`
-   *  - Replace import with `SecondaryButton` if it doesn't exist
-   */
-  //   root
-  //     .find(j.JSXElement, findIconBtnTag.bind(undefined, importMap.HighlightButton))
-  //     .forEach(nodePath => {
-  //       updateJSXTag(nodePath, 'SecondaryButton');
-  //       requiredImportSpecifiers.push('SecondaryButton');
-  //     });
-
-  /**
-   * 4. Find `OutlineButton`
-   *  - Replace with `SecondaryButton`
-   *  - If variant is 'inverse', keep it. Otherwise, remove the variant prop
-   *  - Replace import with `SecondaryButton` if it doesn't exist
-   */
-  //   root
-  //     .find(j.JSXElement, findIconBtnTag.bind(undefined, importMap.OutlineButton))
-  //     .forEach(nodePath => {
-  //       // Swap to `SecondaryButton`
-  //       updateJSXTag(nodePath, 'SecondaryButton');
-
-  //       const attrs = nodePath.value.openingElement.attributes;
-
-  //       const variantProp = attrs?.find(
-  //         attr => attr.type === 'JSXAttribute' && attr.name.name === 'variant'
-  //       );
-  //       if (variantProp && variantProp.type === 'JSXAttribute') {
-  //         if ((variantProp.value as StringLiteral).value !== 'inverse') {
-  //           // remove variant prop
-  //           nodePath.value.openingElement.attributes?.splice(attrs?.indexOf(variantProp)!, 1);
-  //         }
-  //       }
-
-  //       requiredImportSpecifiers.push('SecondaryButton');
-  //     });
-
-  /**
-   * 5. Find `TextButton`
-   *  - Replace with `TertiaryButton`
-   *  - If variant="text", remove variant prop
-   */
-  //   root
-  //     .find(j.JSXElement, findIconBtnTag.bind(undefined, importMap.TextButton))
-  //     .forEach(nodePath => {
-  //       // Swap to `TertiaryButton`
-  //       updateJSXTag(nodePath, 'TertiaryButton');
-  //       const attrs = nodePath.value.openingElement.attributes;
-
-  //       const variantProp = attrs?.find(
-  //         attr => attr.type === 'JSXAttribute' && attr.name.name === 'variant'
-  //       );
-  //       if (
-  //         variantProp &&
-  //         ((variantProp as JSXAttribute)?.value as StringLiteral)?.value === 'text'
-  //       ) {
-  //         // remove variant prop
-  //         nodePath.value.openingElement.attributes?.splice(attrs?.indexOf(variantProp)!, 1);
-  //       }
-
-  //       requiredImportSpecifiers.push('TertiaryButton');
-  //     });
-
-  /**
-   * 6. Find `DropdownButton`
-   *  - Replace `DropdownButton` with `SecondaryButton`
-   *  - Remove `variant` prop
-   *  - Add `icon="caretDownIcon" iconPosition="right"`
-   *  - Add `import {caretDownIcon} from '@workday/canvas-system-icons-web'`
-   *  - Replace `DropdownButton` import with `SecondaryButton`
-   */
-  //   root
-  //     .find(j.JSXElement, findIconBtnTag.bind(undefined, importMap.DropdownButton))
-  //     .forEach(nodePath => {
-  //       const attrs = nodePath.value.openingElement.attributes;
-  //       let isPrimary = false;
-
-  //       const variantProp = attrs?.find(
-  //         attr => attr.type === 'JSXAttribute' && attr.name.name === 'variant'
-  //       );
-  //       if (variantProp) {
-  //         isPrimary = ((variantProp as JSXAttribute).value as StringLiteral)?.value === 'primary';
-  //         // remove variant prop
-  //         nodePath.value.openingElement.attributes?.splice(attrs?.indexOf(variantProp)!, 1);
-  //       }
-
-  //       const buttonType = isPrimary ? 'PrimaryButton' : 'SecondaryButton';
-  //       // Swap to `PrimaryButton` or `SecondaryButton`
-  //       updateJSXTag(nodePath, buttonType);
-
-  //       // Add `icon="caretDownIcon" iconPosition="right"`
-  //       nodePath.value.openingElement.attributes!.push(
-  //         j.jsxAttribute(j.jsxIdentifier('icon'), j.stringLiteral('caretDownIcon'))
-  //       );
-  //       nodePath.value.openingElement.attributes!.push(
-  //         j.jsxAttribute(j.jsxIdentifier('iconPosition'), j.stringLiteral('right'))
-  //       );
-
-  //       requiredImportSpecifiers.push(buttonType);
-
-  //       // Add `import {caretDownIcon} from '@workday/canvas-system-icons-web'`
-  //       const lastImport = root.find(j.ImportDeclaration).at(-1);
-  //       if (lastImport) {
-  //         lastImport.insertAfter(
-  //           j.importDeclaration(
-  //             [j.importSpecifier(j.identifier('caretDownIcon'))],
-  //             j.stringLiteral('@workday/canvas-system-icons-web')
-  //           )
-  //         );
-  //       }
-  //     });
-
-  /**
-   * Remove old imports: `DropdownButton`, `TextButton`, `OutlineButton`, `HighlightButton`, `Button`.
+   * Remove old imports: `IconButton`
    * Add new required imports
    */
   const buttonImports = root.find(j.ImportDeclaration, {
