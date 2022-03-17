@@ -62,21 +62,50 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
     .find(j.JSXElement, findIconBtnTag.bind(undefined, importMap.IconButton))
     .forEach((nodePath: ASTPath<JSXElement>) => {
       const attrs = nodePath.value.openingElement.attributes;
-      let isPrimary = false;
 
       const variantProp = attrs?.find(
         attr => attr.type === 'JSXAttribute' && attr.name.name === 'variant'
       );
-      if (variantProp) {
-        isPrimary = ((variantProp as JSXAttribute).value as StringLiteral)?.value === 'circle';
-        // remove variant prop
-        nodePath.value.openingElement.attributes?.splice(attrs?.indexOf(variantProp)!, 1);
-      }
+      // Default IconButton variant is `circle`
+      if (!variantProp) {
+        updateJSXTag(nodePath, 'TertiaryButton');
+        requiredImportSpecifiers.push('TertiaryButton');
+      } else {
+        const isCircleVariant =
+          ((variantProp as JSXAttribute).value as StringLiteral)?.value === 'circle';
+        const isCircleFilledVariant =
+          ((variantProp as JSXAttribute).value as StringLiteral)?.value === 'circleFilled';
+        const isInverseVariant =
+          ((variantProp as JSXAttribute).value as StringLiteral)?.value === 'inverse';
+        const isInverseFilledVariant =
+          ((variantProp as JSXAttribute).value as StringLiteral)?.value === 'inverseFilled';
 
-      const buttonType = isPrimary ? 'TertiaryButton' : 'SecondaryButton';
+        if (isCircleVariant) {
+          nodePath.value.openingElement.attributes?.splice(attrs?.indexOf(variantProp)!, 1);
+          updateJSXTag(nodePath, 'TertiaryButton');
+          requiredImportSpecifiers.push('TertiaryButton');
+        } else if (isCircleFilledVariant) {
+          nodePath.value.openingElement.attributes?.splice(attrs?.indexOf(variantProp)!, 1);
+          updateJSXTag(nodePath, 'SecondaryButton');
+          requiredImportSpecifiers.push('SecondaryButton');
+        } else if (isInverseVariant) {
+          updateJSXTag(nodePath, 'TertiaryButton');
+          requiredImportSpecifiers.push('TertiaryButton');
+        } else if (isInverseFilledVariant) {
+          updateJSXTag(nodePath, 'SecondaryButton');
+          requiredImportSpecifiers.push('SecondaryButton');
+        } else {
+          nodePath.value.openingElement.attributes?.splice(attrs?.indexOf(variantProp)!, 1);
+          updateJSXTag(nodePath, 'TertiaryButton');
+          requiredImportSpecifiers.push('TertiaryButton');
+        }
+
+        // // remove variant prop
+        // nodePath.value.openingElement.attributes?.splice(attrs?.indexOf(variantProp)!, 1);
+      }
       // Swap to `PrimaryButton` or `SecondaryButton`
-      updateJSXTag(nodePath, buttonType);
-      requiredImportSpecifiers.push(buttonType);
+      // updateJSXTag(nodePath, buttonType);
+      // requiredImportSpecifiers.push(buttonType);
     });
 
   /**
