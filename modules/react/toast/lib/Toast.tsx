@@ -102,6 +102,7 @@ export const Toast = createComponent('div')({
         as={Element}
         width={toastWidth}
         padding="s"
+        depth={5}
         role={isInteractive ? 'dialog' : 'status'}
         aria-live={isInteractive ? 'off' : 'polite'}
         aria-atomic={!isInteractive}

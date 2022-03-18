@@ -43,7 +43,14 @@ export const PopupStates = withSnapshotsEnabled(() => (
             padding: 's',
           },
         },
-
+        {
+          label: 'With no depth',
+          props: {
+            heading: 'Delete Item',
+            hasCloseIcon: true,
+            depth: 'none',
+          },
+        },
         {
           label: 'With different depth value 1',
           props: {
@@ -74,6 +81,22 @@ export const PopupStates = withSnapshotsEnabled(() => (
             heading: 'Delete Item',
             hasCloseIcon: true,
             depth: 4,
+          },
+        },
+        {
+          label: 'With different depth value 5',
+          props: {
+            heading: 'Delete Item',
+            hasCloseIcon: true,
+            depth: 5,
+          },
+        },
+        {
+          label: 'With different depth value 6',
+          props: {
+            heading: 'Delete Item',
+            hasCloseIcon: true,
+            depth: 6,
           },
         },
         {
