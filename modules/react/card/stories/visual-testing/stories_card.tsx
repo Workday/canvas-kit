@@ -31,7 +31,13 @@ export const CardStates = () => (
             padding: 's',
           },
         },
-
+        {
+          label: 'With no depth',
+          props: {
+            heading: 'Delete Item',
+            depth: 'none',
+          },
+        },
         {
           label: 'With different depth value 1',
           props: {
@@ -58,6 +64,20 @@ export const CardStates = () => (
           props: {
             heading: 'Delete Item',
             depth: 4,
+          },
+        },
+        {
+          label: 'With different depth value 5',
+          props: {
+            heading: 'Delete Item',
+            depth: 5,
+          },
+        },
+        {
+          label: 'With different depth value 6',
+          props: {
+            heading: 'Delete Item',
+            depth: 6,
           },
         },
         {

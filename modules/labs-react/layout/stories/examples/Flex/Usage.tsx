@@ -24,7 +24,7 @@ const Card = ({children, ...props}: FlexProps) => (
   <Flex
     backgroundColor="frenchVanilla100"
     borderRadius="m"
-    depth={2}
+    depth={1}
     flexDirection="column"
     margin="xs"
     flex="1 1 300px"
