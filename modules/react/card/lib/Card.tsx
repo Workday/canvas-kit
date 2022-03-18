@@ -21,7 +21,7 @@ export const Card = createComponent('div')({
       <Box
         ref={ref}
         as={Element}
-        depth={2}
+        depth={1}
         padding="l"
         backgroundColor="frenchVanilla100"
         border={`1px solid ${colors.soap500}`}
