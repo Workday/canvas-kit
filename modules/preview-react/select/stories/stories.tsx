@@ -11,7 +11,7 @@ import {
 import {colors, typeColors} from '@workday/canvas-kit-react/tokens';
 import FormField from '../../../react/form-field';
 import Select from '../lib/Select';
-import {RenderOptionFunction} from '../lib/SelectBase';
+import {RenderOptionFunction, RenderSelectedOptionFunction} from '../lib/SelectBase';
 
 const hintText = 'Helpful text goes here.';
 const hintId = 'error-desc-id';
@@ -83,6 +83,16 @@ export const customRenderOption: RenderOptionFunction = option => {
   );
 };
 
+export const customRenderSelectedOption: RenderSelectedOptionFunction = option => {
+  const iconColor = colors.blackPepper100;
+  return (
+    <div style={{alignItems: 'center', display: 'flex'}}>
+      <SystemIcon icon={option.data.icon} color={iconColor} colorHover={iconColor} />
+      <div style={{marginLeft: 5}}>{option.value}</div>
+    </div>
+  );
+};
+
 storiesOf('Preview/Select/React/Top Label', module)
   .addParameters({component: Select})
   .addParameters({ReadmePath: 'preview-react/select'})
@@ -138,6 +148,13 @@ storiesOf('Preview/Select/React/Top Label', module)
   .add('Grow', () => (
     <FormField label="Label" inputId="select-grow" grow={true}>
       {controlComponent(<Select name="contact" options={options} />)}
+    </FormField>
+  ))
+  .add('Default with Custom Render Selected Method', () => (
+    <FormField label="Label" inputId="select-default-custom-selected">
+      {controlComponent(
+        <Select name="icon" options={customOptions} renderSelected={customRenderSelectedOption} />
+      )}
     </FormField>
   ));
 
@@ -215,5 +232,16 @@ storiesOf('Preview/Select/React/Left Label', module)
       grow={true}
     >
       {controlComponent(<Select name="contact" options={options} />)}
+    </FormField>
+  ))
+  .add('Default with Custom Render Selected Method', () => (
+    <FormField
+      labelPosition={FormField.LabelPosition.Left}
+      label="Label"
+      inputId="select-default-custom-selected"
+    >
+      {controlComponent(
+        <Select name="icon" options={customOptions} renderSelected={customRenderSelectedOption} />
+      )}
     </FormField>
   ));
