@@ -174,16 +174,18 @@ const buttonSyles = {
 
 ## Depth
 
-Depth is the relative distance between surfaces in the z-axis. It provides delineation, focus, and priority with shadows and layering. There are five depth levels, `inset`, `1`, `2`, `3`, and `4`. Most levels only apply box-shadow styles, but `depth[4]` also applies border styles.
+Depth is the relative distance between surfaces in the z-axis. It provides delineation, focus, and
+priority with shadows and layering. There are seven depth levels, `none`, `1`, `2`, `3`, `4`, `5`
+and `6`. All levels only apply box-shadow styles.
 
 ### Usage
 
 ```tsx
-import { depth } from '@workday/canvas-kit-react/tokens';
+import {depth} from '@workday/canvas-kit-react/tokens';
 
 const CustomCard = () => {
   return <div css={depth[2]}>A standard-depth card</div>;
-}
+};
 ```
 
 ## Type
@@ -211,8 +213,8 @@ To use the Canvas Kit font
 
 Canvas Kit v5 introduced `rem` units (instead of `px`) to our type tokens. This update follows the
 guidance [from the WCAG spec](https://www.w3.org/TR/WCAG21/#resize-text) and provides better support
-for users who change their browser's default font size. If you'd like to learn more about `rem` and relative units, you can
-review this
+for users who change their browser's default font size. If you'd like to learn more about `rem` and
+relative units, you can review this
 [documentation](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Values_and_units#ems_and_rems).
 
 > **Note:** We are using `16px` as our base font-size for these values. This is a browser standard
@@ -299,8 +301,8 @@ _Intended for standard body text_
 
 _Intended for small subtext content or in tight spaces_
 
-| Size     | Properties                                            |
-| -------- | ----------------------------------------------------- |
+| Size     | Properties                                                   |
+| -------- | ------------------------------------------------------------ |
 | `large`  | fontSize: `14px` (`0.875rem`), fontWeight: `regular` (`400`) |
 | `medium` | fontSize: `12px` (`0.75rem`), fontWeight: `regular` (`400`)  |
 | `small`  | fontSize: `10px` (`0.625rem`), fontWeight: `regular` (`400`) |
