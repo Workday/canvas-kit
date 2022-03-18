@@ -10,7 +10,7 @@ import {
   usePopupModel,
   useReturnFocus,
 } from '@workday/canvas-kit-react/popup';
-import {colors, borderRadius, inputColors} from '@workday/canvas-kit-react/tokens';
+import {colors, depth, borderRadius, inputColors} from '@workday/canvas-kit-react/tokens';
 
 import {SelectProps} from './Select';
 import {buttonBorderWidth} from './SelectBase';
@@ -132,6 +132,7 @@ const Menu = styled('div')<
     boxSizing: 'border-box',
     position: 'relative',
     transition: `opacity ${menuAnimationDuration}ms`,
+    ...depth[3],
 
     '[data-popper-placement="bottom"] &': {
       borderRadius: `0 0 ${borderRadius.m} ${borderRadius.m}`,

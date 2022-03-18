@@ -53,7 +53,7 @@ export interface DropdownMenuProps {
 
 const menuStyles = css({
   ...type.levels.subtext.large,
-  ...depth[2],
+  ...depth[3],
   backgroundColor: commonColors.background,
   border: `1px solid ${colors.soap500}`,
   borderRadius: borderRadius.m,

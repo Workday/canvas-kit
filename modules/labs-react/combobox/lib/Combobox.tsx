@@ -469,7 +469,7 @@ const Combobox = ({
           />
         )}
         {showingAutocomplete && autocompleteItems && (
-          <MenuContainer padding={space.zero} depth={1}>
+          <MenuContainer padding={space.zero} depth={3}>
             <Card.Body>
               <AutocompleteList
                 comboboxId={componentId}
