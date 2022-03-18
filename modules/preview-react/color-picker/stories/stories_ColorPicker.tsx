@@ -49,7 +49,7 @@ storiesOf('Preview/Color Picker/React', module)
           variant="squareFilled"
         />
         <Popup.Popper>
-          <Popup.Card marginTop="xxs" padding="s">
+          <Popup.Card marginTop="xxs" padding="s" depth={5}>
             <Popup.Body>
               <ColorPicker
                 resetColor={colors.blueberry400}
@@ -132,7 +132,7 @@ storiesOf('Preview/Color Picker/React', module)
           onBlur={onBlur}
         />
         <Popup.Popper>
-          <Popup.Card style={{marginTop: 8}} padding="s">
+          <Popup.Card style={{marginTop: 8}} padding="s" depth={5}>
             <Popup.Body>
               <ColorPicker
                 resetColor={colors.blueberry400}

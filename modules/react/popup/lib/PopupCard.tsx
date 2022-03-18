@@ -73,7 +73,7 @@ export const PopupCard = createComponent('div')({
         transformOrigin={transformOrigin}
         position="relative"
         padding="l"
-        depth={2}
+        depth={5}
         maxWidth={`calc(100vw - ${space.l})`}
         {...props}
       >
