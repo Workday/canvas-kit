@@ -56,6 +56,12 @@ export const IconButtonStates = (props: {theme?: PartialEmotionCanvasTheme}) => 
   </React.Fragment>
 );
 
+IconButtonStates.parameters = {
+  chromatic: {
+    pauseAnimationAtEnd: true,
+  },
+};
+
 export const IconButtonCircleToggleableGrid = () => (
   <IconButtonGrid initialToggled={true} variant={'circle'} />
 );
