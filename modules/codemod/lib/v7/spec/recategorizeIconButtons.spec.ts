@@ -59,4 +59,47 @@ describe('recategorizeIconButtons', () => {
 
     expectTransform(input, expected);
   });
+
+  it('should restructure styled IconButton usages', () => {
+    const input = stripIndent`
+      import {IconButton} from '@workday/canvas-kit-react/button';
+
+      const StyledIconButton = styled(IconButton)({});
+
+      <StyledIconButton icon={plusIcon}/>
+    `;
+
+    const expected = stripIndent`
+      import {TertiaryButton} from '@workday/canvas-kit-react/button';
+
+      const StyledIconButton = styled(TertiaryButton)({});
+
+      <StyledIconButton icon={plusIcon}/>
+    `;
+
+    expectTransform(input, expected);
+  });
+
+  it.only('should import correct button based on styled IconButton', () => {
+    const input = stripIndent`
+      import {IconButton} from '@workday/canvas-kit-react/button';
+
+      const StyledIconButton = styled(IconButton)({});
+      
+      <StyledIconButton icon={plusIcon} />
+      
+      
+    `;
+
+    const expected = stripIndent`
+      import {TertiaryButton} from '@workday/canvas-kit-react/button';
+
+      const StyledIconButton = styled(TertiaryButton)({});
+
+      <StyledIconButton icon={plusIcon} />
+      
+    `;
+
+    expectTransform(input, expected);
+  });
 });
