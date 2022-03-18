@@ -31,11 +31,13 @@ const Card = styled('div')({
 
 export const Depth = () => (
   <div css={{display: 'flex'}}>
-    <Card css={depth.inset}>Depth -1</Card>
+    <Card css={depth.none}>Depth None</Card>
     <Card css={depth['1']}>Depth 1</Card>
     <Card css={depth['2']}>Depth 2</Card>
     <Card css={depth['3']}>Depth 3</Card>
     <Card css={depth['4']}>Depth 4</Card>
+    <Card css={depth['5']}>Depth 5</Card>
+    <Card css={depth['6']}>Depth 6</Card>
   </div>
 );
 
