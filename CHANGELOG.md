@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v6.6.1](https://github.com/Workday/canvas-kit/releases/tag/v6.6.1) (2022-03-18)
+
+### Components
+
+- fix(action-bar): Update CSS selector to fix spacing bug ([#1510](https://github.com/Workday/canvas-kit/pull/1510)) ([@alanbsmith](https://github.com/alanbsmith))
+  This change updates the CSS selector for the `ChildrenContainer`. We're using [the same selector as what's used in Stack](https://github.com/Workday/canvas-kit/blob/master/modules/labs-react/layout/lib/utils/stack.ts#L10). It is also now SSR-safe by avoiding applying styles to `style` tags. If you were compensating for this bug by adding space for non-button elements in the ActionBar, you'll need to remove that adjustment.
+
+
 ## [v6.6.0](https://github.com/Workday/canvas-kit/releases/tag/v6.6.0) (2022-03-07)
 
 ### Components
