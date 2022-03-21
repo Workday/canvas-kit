@@ -281,7 +281,7 @@ const SelectWrapper = styled('div')<Pick<SelectBaseProps, 'grow' | 'disabled'>>(
 );
 
 const defaultRenderOption: RenderOptionFunction = option => {
-  return <div>{option.label}</div>;
+  return <div>{defaultRenderSelectedOption(option)}</div>;
 };
 
 const defaultRenderSelectedOption: RenderSelectedOptionFunction = option => {
