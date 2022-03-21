@@ -1,10 +1,6 @@
-/// <reference path="../../../../typings.d.ts" />
 import * as React from 'react';
-import {storiesOf} from '@storybook/react';
-import {action} from '@storybook/addon-actions';
-import withReadme from 'storybook-readme/with-readme';
 import {StaticStates} from '@workday/canvas-kit-react/common';
-import {ComponentStatesTable, permutateProps} from '@workday/canvas-kit-labs-react/common';
+import {ComponentStatesTable} from '@workday/canvas-kit-labs-react/common';
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
 
 import {
@@ -17,12 +13,12 @@ import {
 import {IconButton} from '@workday/canvas-kit-react/button';
 import {SegmentedControl} from '../index';
 
-import README from '../README.md';
-
 export default withSnapshotsEnabled({
   title: 'Testing/React/Buttons/Segmented Control',
   component: SegmentedControl,
-  decorators: [withReadme(README)],
+  parameters: {
+    ReadmePath: 'labs-react/header',
+  },
 });
 
 export const SegmentedControlStates = () => (

@@ -1,4 +1,4 @@
-import {Meta} from '@storybook/addon-docs/blocks';
+import {Meta} from '@storybook/addon-docs';
 
 <Meta title="Welcome/Dev Docs/Testing" />
 
@@ -33,7 +33,7 @@ do. A "test" simply has to pass. A specification requires meaning.
 test('SomeComponent should render correctly', async () => {
   const {getByTestId} = render(<SomeComponent data-testid="test" text="foo" />);
 
-  const component = await getByTestId('test');
+  const component = getByTestId('test');
 
   expect(component.textContent).toEqual('foo');
   expect(component.getAttribute('aria-label')).toEqual('foo');
@@ -57,14 +57,14 @@ describe('SomeComponent', () => {
   it('should render the "text" prop as the text', async () => {
     const {getByTestId} = render(<SomeComponent data-testid="test" text="foo" />);
 
-    const component = await getByTestId('test');
+    const component = getByTestId('test');
     expect(component).toHaveTextContent('foo');
   });
 
   it('should render the "text" prop as an aria-label for accessibility', async () => {
     const {getByTestId} = render(<SomeComponent data-testid="test" text="foo" />);
 
-    const component = await getByTestId('test');
+    const component = getByTestId('test');
     expect(component).toHaveAttribute('aria-label', 'foo');
   });
 });
@@ -128,8 +128,8 @@ const {getByTestId} = render(
   </SomeComponent>
 );
 
-const component = await getByTestId('container');
-const child = await getByTestId('test');
+const component = getByTestId('container');
+const child = getByTestId('test');
 
 expect(component).toContainElement(child);
 ```
@@ -139,6 +139,30 @@ and the test will still pass as long as the `div` is a child of the component so
 specification is met). Also this example will have a more useful failure message since
 `.toContainElement` has the context that it is expecting an element in another element vs a match of
 a string.
+
+### Snapshot tests
+
+Canvas Kit does not contain DOM-based snapshot tests and uses [Visual Tests](#visual-tests) instead.
+DOM snapshots failures are often difficult to parse. Humans tend to be better at noticing and
+discerning visual changes than changes to a DOM structure.
+
+If your project uses snapshot tests and Canvas Kit, chances are you'll run into issues with changing
+ids and other ARIA attributes. Canvas Kit generates unique ids that are different every time the
+page loads. This can be a problem with snapshot tests. To fix this, you'll need to add special code
+to your test bootstrap file. For example:
+
+```ts
+import {setUniqueSeed, resetUniqueIdCount} from '@workday/canvas-kit-react/common';
+
+beforeEach(() => {
+  setUniqueSeed('a'); // set a static seed
+  resetUniqueIdCount(); // reset the id counter before every test
+});
+```
+
+This will ensure snapshot tests have stable ids for each snapshot. It is still possible to get ids
+changing if you add an additional component that uses id generation - subsequent ids will be
+different, but this will prevent snapshot tests that don't have any changes from showing diffs.
 
 ## Functional tests
 

@@ -1,265 +1,175 @@
 import * as React from 'react';
 import Menu, {MenuItem} from '../index';
-import {mount} from 'enzyme';
+import {screen, render, fireEvent} from '@testing-library/react';
 
 describe('Menu', () => {
   const cb = jest.fn();
-  afterEach(() => {
-    cb.mockReset();
-  });
 
-  test('should call a callback function when item is clicked', () => {
-    const component = mount(
+  it('should call the "onClick" event when an item is clicked', () => {
+    render(
       <Menu>
-        <MenuItem onClick={cb} />
+        <MenuItem onClick={cb}>Option</MenuItem>
       </Menu>
     );
-    const item = component.find('li');
-    item.simulate('click');
-    expect(cb.mock.calls.length).toBe(1);
-    component.unmount();
+
+    fireEvent.click(screen.getByRole('menuitem', {name: 'Option'}));
+
+    expect(cb).toBeCalledTimes(1);
   });
 
-  test('should call on select function when item is clicked', () => {
-    const component = mount(
+  it('should call the "onSelect" event when an item is clicked', () => {
+    render(
       <Menu onSelect={cb}>
-        <MenuItem />
+        <MenuItem>Option</MenuItem>
       </Menu>
     );
-    const item = component.find('li');
-    item.simulate('click');
-    expect(cb.mock.calls.length).toBe(1);
-    component.unmount();
+
+    fireEvent.click(screen.getByRole('menuitem', {name: 'Option'}));
+
+    expect(cb).toBeCalledTimes(1);
   });
 
-  test('should call on close function when item is clicked', () => {
-    const component = mount(
+  it('should call the "onClose" event when an item is clicked', () => {
+    render(
       <Menu onClose={cb}>
-        <MenuItem />
+        <MenuItem>Option</MenuItem>
       </Menu>
     );
-    const item = component.find('li');
-    item.simulate('click');
-    expect(cb.mock.calls.length).toBe(1);
-    component.unmount();
+
+    fireEvent.click(screen.getByRole('menuitem', {name: 'Option'}));
+
+    expect(cb).toBeCalledTimes(1);
   });
 
-  test('should call on close function when item is clicked with shouldClose enabled', () => {
-    const component = mount(
+  it('should call the "onClose" event when an item is clicked and "shouldClose" is true', () => {
+    render(
       <Menu onClose={cb}>
-        <MenuItem shouldClose={false} />
+        <MenuItem shouldClose={true}>Option</MenuItem>
       </Menu>
     );
-    const item = component.find('li');
-    item.simulate('click');
-    expect(cb.mock.calls.length).toBe(0);
-    component.unmount();
+
+    fireEvent.click(screen.getByRole('menuitem', {name: 'Option'}));
+
+    expect(cb).toBeCalledTimes(1);
   });
 
-  test('should not call on close function when item is clicked with shouldClose disabled', () => {
-    const component = mount(
+  it('should not call the "onClose" event when an item is clicked and "shouldClose" is false', () => {
+    render(
       <Menu onClose={cb}>
-        <MenuItem shouldClose={false} />
+        <MenuItem shouldClose={false}>Option</MenuItem>
       </Menu>
     );
-    const item = component.find('li');
-    item.simulate('click');
-    expect(cb.mock.calls.length).toBe(0);
-    component.unmount();
+
+    fireEvent.click(screen.getByRole('menuitem', {name: 'Option'}));
+
+    expect(cb).not.toHaveBeenCalled();
   });
 
-  test('should not call a callback function when disabled', () => {
-    const component = mount(
-      <Menu>
-        <MenuItem onClick={cb} isDisabled={true} />
+  it('should not call the "onClose" event when an item is clicked and disabled', () => {
+    render(
+      <Menu onClose={cb}>
+        <MenuItem isDisabled={true}>Option</MenuItem>
       </Menu>
     );
-    const item = component.find('li');
-    item.simulate('click');
-    expect(cb.mock.calls.length).toBe(0);
-    component.unmount();
+
+    fireEvent.click(screen.getByRole('menuitem', {name: 'Option'}));
+
+    expect(cb).not.toHaveBeenCalled();
   });
 
-  test('should not call a callback function when none is passed in', () => {
-    const component = mount(<MenuItem />);
-    const item = component.find('li');
-    item.simulate('click');
-    expect(cb.mock.calls.length).toBe(0);
-    component.unmount();
-  });
-
-  test('should not call on select function when disabled', () => {
-    const component = mount(
+  it('should not call the "onSelect" event when an item is clicked and disabled', () => {
+    render(
       <Menu onSelect={cb}>
-        <MenuItem isDisabled={true} />
+        <MenuItem isDisabled={true}>Option</MenuItem>
       </Menu>
     );
-    const item = component.find('li');
-    item.simulate('click');
-    expect(cb.mock.calls.length).toBe(0);
-    component.unmount();
+
+    fireEvent.click(screen.getByRole('menuitem', {name: 'Option'}));
+
+    expect(cb).not.toHaveBeenCalled();
   });
 
-  test('should not call on close function when disabled', () => {
-    const component = mount(
-      <Menu onClose={cb}>
-        <MenuItem isDisabled={true} />
-      </Menu>
+  it('should render a menu item with children', () => {
+    render(
+      <MenuItem>
+        <em>Option</em>
+      </MenuItem>
     );
-    const item = component.find('li');
-    item.simulate('click');
-    expect(cb.mock.calls.length).toBe(0);
-    component.unmount();
+
+    expect(screen.getByRole('menuitem', {name: 'Option'})).toContainHTML('<em>Option</em>');
   });
 
-  test('menu item should render children correctly', () => {
-    const labelText: JSX.Element = <em>Menu Label</em>;
-    const component = mount(<MenuItem>{labelText}</MenuItem>);
-    expect(component.find('span').getDOMNode().innerHTML).toEqual(
-      mount(labelText).getDOMNode().outerHTML
+  it('should forward extra Menu props to the element', () => {
+    render(<Menu data-propspread="test" />);
+
+    expect(screen.getByRole('menu')).toHaveAttribute('data-propspread', 'test');
+  });
+
+  it('should forward extra MenuItem props to the element', () => {
+    render(<MenuItem data-propspread="test">Option</MenuItem>);
+
+    expect(screen.getByRole('menuitem', {name: 'Option'})).toHaveAttribute(
+      'data-propspread',
+      'test'
     );
-    component.unmount();
-  });
-
-  test('Menu should spread extra props', () => {
-    const component = mount(<Menu data-propspread="test" />);
-    const list = component
-      .find('ul') // TODO: Standardize on prop spread location (see #150)
-      .getDOMNode();
-    expect(list.getAttribute('data-propspread')).toBe('test');
-    component.unmount();
-  });
-
-  test('Menu Item should spread extra props', () => {
-    const component = mount(<MenuItem data-propspread="test" />);
-    const container = component.at(0).getDOMNode();
-    expect(container.getAttribute('data-propspread')).toBe('test');
-    component.unmount();
   });
 });
 
 describe('Menu Accessibility', () => {
   // https://www.w3.org/TR/wai-aria-practices-1.1/examples/menu-button/menu-button-actions-active-descendant.html
-  const cb = jest.fn();
-  afterEach(() => {
-    cb.mockReset();
+
+  it('should render Menu as [role="menu"]', () => {
+    render(<Menu />);
+
+    expect(screen.getByRole('menu')).toBeInTheDocument();
   });
 
-  test('menu should be using <ul> tag', () => {
-    const id: string = 'myId';
-    const component = mount(<Menu id={id} />);
-    const menuElement = component.getDOMNode().querySelector(`#${id}`);
-    expect(menuElement).not.toBeNull();
-    if (menuElement) {
-      expect(menuElement.tagName.toLowerCase()).toEqual('ul');
-    }
-    component.unmount();
+  it('should render the MenuItem as [role="menuitem]', () => {
+    render(<MenuItem />);
+
+    expect(screen.getByRole('menuitem')).toBeInTheDocument();
   });
 
-  test('menu should be using <li> tag', () => {
-    const component = mount(<MenuItem id="myId" />);
-    expect(component.getDOMNode().tagName.toLowerCase()).toEqual('li');
-    component.unmount();
+  it('should add [tabIndex=0] to the Menu element', () => {
+    render(<Menu />);
+
+    expect(screen.getByRole('menu')).toHaveAttribute('tabIndex', '0');
   });
 
-  test('menu should have tabIndex set', () => {
-    const component = mount(<Menu />);
-    expect(
-      component
-        .find('ul')
-        .getDOMNode()
-        .getAttribute('tabIndex')
-    ).toEqual('0');
-    component.unmount();
+  it('should add [tabIndex=-1] to the MenuItem element', () => {
+    render(<MenuItem />);
+
+    expect(screen.getByRole('menuitem')).toHaveAttribute('tabIndex', '-1');
   });
 
-  test('menu item should have tabIndex set', () => {
-    const component = mount(<MenuItem />);
-    expect(
-      component
-        .find('li')
-        .getDOMNode()
-        .getAttribute('tabIndex')
-    ).toEqual('-1');
-    component.unmount();
+  it('should not add [aria-disabled] if "isDisabled" is false', () => {
+    render(<MenuItem isDisabled={false} />);
+
+    expect(screen.getByRole('menuitem')).not.toHaveAttribute('aria-disabled');
   });
 
-  test('enabled menu item should NOT have aria-disabled attribute set', () => {
-    const component = mount(<MenuItem isDisabled={false} />);
-    expect(
-      component
-        .find('li')
-        .getDOMNode()
-        .getAttribute('aria-disabled')
-    ).toEqual('false');
-    component.unmount();
+  it('should add [aria-disabled=true] if "isDisabled" is true', () => {
+    render(<MenuItem isDisabled={true} />);
+
+    expect(screen.getByRole('menuitem')).toHaveAttribute('aria-disabled', 'true');
   });
 
-  test('disabled menu item should have aria-disabled attribute set', () => {
-    const component = mount(<MenuItem isDisabled={true} />);
-    expect(
-      component
-        .find('li')
-        .getDOMNode()
-        .getAttribute('aria-disabled')
-    ).toEqual('true');
-    component.unmount();
+  it('should allow overriding the role of the MenuItem', () => {
+    render(<MenuItem data-testid="Option" role="option" />);
+
+    expect(screen.getByTestId('Option')).toHaveAttribute('role', 'option');
   });
 
-  test('role should be overridden', () => {
-    const newRole = 'option';
-    const component = mount(<MenuItem role={newRole} />);
-    expect(
-      component
-        .find('li')
-        .getDOMNode()
-        .getAttribute('role')
-    ).toEqual(newRole);
-    component.unmount();
-  });
-
-  test('labeledBy menu should have aria-labelledby set', () => {
-    const label: string = 'myLabel';
-    const component = mount(<Menu aria-labelledby={label} />);
-    expect(
-      component
-        .find('ul')
-        .getDOMNode()
-        .getAttribute('aria-labelledby')
-    ).toEqual(label);
-    component.unmount();
-  });
-
-  test('menu should have aria-activedescendant set', () => {
-    const id: string = 'myId';
-    const component = mount(
-      <Menu id={id}>
-        <MenuItem />
+  it('should have aria-activedescendant pointing to the first item', () => {
+    render(
+      <Menu>
+        <MenuItem>Option</MenuItem>
       </Menu>
     );
-    expect(
-      component
-        .find('ul')
-        .getDOMNode()
-        .getAttribute('aria-activedescendant')
-    ).toEqual(`${id}-0`);
-    component.unmount();
-  });
 
-  test('menu item should inherit id from menu', () => {
-    const id: string = 'myId';
-    const component = mount(
-      <Menu id={id}>
-        <MenuItem />
-      </Menu>
-    );
-    expect(
-      component
-        .find('li')
-        .getDOMNode()
-        .getAttribute('id')
-    ).toEqual(`${id}-0`);
-    component.unmount();
+    const id = screen.getByRole('menuitem').getAttribute('id');
+
+    expect(screen.getByRole('menu')).toHaveAttribute('aria-activedescendant', id);
   });
 });
 
@@ -269,10 +179,9 @@ describe('Menu Keyboard Shortcuts', () => {
     cb.mockReset();
   });
 
-  test("should select an item by press it's first letter", () => {
-    const id: string = 'myId';
-    const component = mount(
-      <Menu id={id}>
+  it('should select an item by pressing its first letter', () => {
+    render(
+      <Menu>
         <MenuItem>Alpha</MenuItem>
         <MenuItem>
           <em>
@@ -288,297 +197,198 @@ describe('Menu Keyboard Shortcuts', () => {
         <MenuItem />
       </Menu>
     );
-    const item = component.find('ul');
-    const b = {keyCode: 66, key: 'b'};
-    item.simulate('keydown', b);
-    expect(item.getDOMNode().getAttribute('aria-activedescendant')).toEqual(`${id}-1`);
-    component.unmount();
-  });
 
-  test("should select an item by press it's first letter if it is added later", () => {
-    const id: string = 'myId';
-    const component = mount(<Menu id={id} />);
-    component.setProps({
-      children: [<MenuItem key={1}>Alpha</MenuItem>, <MenuItem key={2}>Bravo</MenuItem>],
-    });
-    const item = component.find('ul');
-    const b = {keyCode: 66, key: 'b'};
-    item.simulate('keydown', b);
-    expect(item.getDOMNode().getAttribute('aria-activedescendant')).toEqual(`${id}-1`);
-    component.unmount();
-  });
+    fireEvent.keyDown(screen.getByRole('menu'), {key: 'b'});
 
-  test('should NOT select an item when no letter matches', () => {
-    const id: string = 'myId';
-    const component = mount(
-      <Menu isOpen={false} initialSelectedItem={1} id={id}>
-        <MenuItem>Alpha</MenuItem>
-        <MenuItem>Zeta</MenuItem>
-      </Menu>
+    const secondItem = screen.getByRole('menuitem', {name: 'Bravo Item ( with markup )'});
+
+    expect(screen.getByRole('menu')).toHaveAttribute(
+      'aria-activedescendant',
+      secondItem.getAttribute('id')
     );
-    const item = component.find('ul');
-    const b = {keyCode: 66, key: 'b'};
-    item.simulate('keydown', b);
-    expect(item.getDOMNode().getAttribute('aria-activedescendant')).toEqual(`${id}-1`);
-    component.unmount();
   });
 
-  test('should select an item when it starts with a number', () => {
-    const id: string = 'myId';
-    const component = mount(
-      <Menu isOpen={false} initialSelectedItem={1} id={id}>
-        <MenuItem>0</MenuItem>
-        <MenuItem>1</MenuItem>
-      </Menu>
-    );
-    const item = component.find('ul');
-    const zero = {keyCode: 48, key: '0'};
-    item.simulate('keydown', zero);
-    expect(item.getDOMNode().getAttribute('aria-activedescendant')).toEqual(`${id}-0`);
-    component.unmount();
-  });
-
-  test('should loop around selected items using down arrow', () => {
-    const id: string = 'myId';
-    const component = mount(
-      <Menu isOpen={false} id={id}>
+  it('should loop around selected items using the down arrow', () => {
+    render(
+      <Menu isOpen={false}>
         <MenuItem>Alpha</MenuItem>
         <MenuItem>Bravo</MenuItem>
       </Menu>
     );
-    const item = component.find('ul');
-    const down = {keyCode: 40, key: 'ArrowDown'};
-    item.simulate('keydown', down);
-    expect(item.getDOMNode().getAttribute('aria-activedescendant')).toEqual(`${id}-1`);
-    item.simulate('keydown', down);
-    expect(item.getDOMNode().getAttribute('aria-activedescendant')).toEqual(`${id}-0`);
-    component.unmount();
+
+    const firstId = screen.getByRole('menuitem', {name: 'Alpha'}).getAttribute('id');
+    const secondId = screen.getByRole('menuitem', {name: 'Bravo'}).getAttribute('id');
+
+    fireEvent.keyDown(screen.getByRole('menu'), {key: 'ArrowDown'});
+    expect(screen.getByRole('menu')).toHaveAttribute('aria-activedescendant', secondId);
+    fireEvent.keyDown(screen.getByRole('menu'), {key: 'ArrowDown'});
+    expect(screen.getByRole('menu')).toHaveAttribute('aria-activedescendant', firstId);
   });
 
-  test('should loop around selected items using up arrow', () => {
-    const id: string = 'myId';
-    const component = mount(
-      <Menu id={id}>
-        <MenuItem>Alpha</MenuItem>
-        <MenuItem>Bravo</MenuItem>
-      </Menu>
-    );
-    const item = component.find('ul');
-    const up = {keyCode: 38, key: 'ArrowUp'};
-    item.simulate('keydown', up);
-    expect(item.getDOMNode().getAttribute('aria-activedescendant')).toEqual(`${id}-1`);
-    item.simulate('keydown', up);
-    expect(item.getDOMNode().getAttribute('aria-activedescendant')).toEqual(`${id}-0`);
-    component.unmount();
-  });
-
-  test('home key and end keys should move you to end and beginning of list', () => {
-    const id: string = 'myId';
-    const component = mount(
-      <Menu id={id}>
-        <MenuItem>Alpha</MenuItem>
-        <MenuItem>Bravo</MenuItem>
-      </Menu>
-    );
-    const item = component.find('ul');
-    const home = {keyCode: 36, key: 'Home'};
-    const end = {keyCode: 35, key: 'End'};
-    item.simulate('keydown', end);
-    expect(item.getDOMNode().getAttribute('aria-activedescendant')).toEqual(`${id}-1`);
-    item.simulate('keydown', home);
-    expect(item.getDOMNode().getAttribute('aria-activedescendant')).toEqual(`${id}-0`);
-    component.unmount();
-  });
-
-  test('unbound keys should NOT change selected item', () => {
-    const id: string = 'myId';
-    const component = mount(
-      <Menu id={id} initialSelectedItem={1}>
-        <MenuItem>Alpha</MenuItem>
-        <MenuItem>Bravo</MenuItem>
-      </Menu>
-    );
-    const item = component.find('ul');
-    const meta = {keyCode: 91, key: 'Meta', metaKey: true};
-    const left = {keyCode: 37, key: 'ArrowLeft'};
-    const right = {keyCode: 39, key: 'ArrowRight'};
-    item.simulate('keydown', meta);
-    item.simulate('keydown', left);
-    item.simulate('keydown', right);
-    expect(item.getDOMNode().getAttribute('aria-activedescendant')).toEqual(`${id}-1`);
-    component.unmount();
-  });
-
-  test('should call on close function tab is pressed', () => {
-    const component = mount(
-      <Menu onClose={cb}>
-        <MenuItem>Alpha</MenuItem>
-      </Menu>
-    );
-    const item = component.find('ul');
-    const tab = {keyCode: 9, key: 'Tab'};
-    item.simulate('keydown', tab);
-    expect(cb.mock.calls.length).toBe(1);
-    component.unmount();
-  });
-
-  test('should NOT call on close function tab is pressed and no function is set', () => {
-    const component = mount(
+  it('should loop around selected items using the up arrow', () => {
+    render(
       <Menu>
         <MenuItem>Alpha</MenuItem>
+        <MenuItem>Bravo</MenuItem>
       </Menu>
     );
-    const item = component.find('ul');
-    const tab = {keyCode: 9, key: 'Tab'};
-    item.simulate('keydown', tab);
-    expect(cb.mock.calls.length).toBe(0);
-    component.unmount();
+
+    const firstId = screen.getByRole('menuitem', {name: 'Alpha'}).getAttribute('id');
+    const secondId = screen.getByRole('menuitem', {name: 'Bravo'}).getAttribute('id');
+
+    fireEvent.keyDown(screen.getByRole('menu'), {key: 'ArrowUp'});
+    expect(screen.getByRole('menu')).toHaveAttribute('aria-activedescendant', secondId);
+    fireEvent.keyDown(screen.getByRole('menu'), {key: 'ArrowUp'});
+    expect(screen.getByRole('menu')).toHaveAttribute('aria-activedescendant', firstId);
   });
 
-  test('should call on close function escape is pressed', () => {
-    const component = mount(
+  it('should select the first items when Home key is pressed', () => {
+    render(
+      <Menu initialSelectedItem={1}>
+        <MenuItem>Alpha</MenuItem>
+        <MenuItem>Bravo</MenuItem>
+      </Menu>
+    );
+
+    const firstId = screen.getByRole('menuitem', {name: 'Alpha'}).getAttribute('id');
+    const secondId = screen.getByRole('menuitem', {name: 'Bravo'}).getAttribute('id');
+
+    fireEvent.keyDown(screen.getByRole('menu'), {key: 'Home'});
+    expect(screen.getByRole('menu')).toHaveAttribute('aria-activedescendant', firstId);
+  });
+
+  it('should select the last items when End key is pressed', () => {
+    render(
+      <Menu initialSelectedItem={0}>
+        <MenuItem>Alpha</MenuItem>
+        <MenuItem>Bravo</MenuItem>
+      </Menu>
+    );
+
+    const firstId = screen.getByRole('menuitem', {name: 'Alpha'}).getAttribute('id');
+    const secondId = screen.getByRole('menuitem', {name: 'Bravo'}).getAttribute('id');
+
+    fireEvent.keyDown(screen.getByRole('menu'), {key: 'End'});
+    expect(screen.getByRole('menu')).toHaveAttribute('aria-activedescendant', secondId);
+  });
+
+  it('should not change selected item when other keys are pressed', () => {
+    render(
+      <Menu initialSelectedItem={1}>
+        <MenuItem>Alpha</MenuItem>
+        <MenuItem>Bravo</MenuItem>
+      </Menu>
+    );
+
+    const firstId = screen.getByRole('menuitem', {name: 'Alpha'}).getAttribute('id');
+    const secondId = screen.getByRole('menuitem', {name: 'Bravo'}).getAttribute('id');
+
+    fireEvent.keyDown(screen.getByRole('menu'), {key: 'Meta'});
+    fireEvent.keyDown(screen.getByRole('menu'), {key: 'ArrowLeft'});
+    fireEvent.keyDown(screen.getByRole('menu'), {key: 'ArrowRight'});
+
+    expect(screen.getByRole('menu')).toHaveAttribute('aria-activedescendant', secondId);
+  });
+
+  it('should call the "onClose" event when the tab key is pressed', () => {
+    render(
       <Menu onClose={cb}>
         <MenuItem>Alpha</MenuItem>
       </Menu>
     );
-    const item = component.find('ul');
-    const escape = {keyCode: 27, key: 'Escape'};
-    item.simulate('keydown', escape);
-    expect(cb.mock.calls.length).toBe(1);
-    component.unmount();
+
+    fireEvent.keyDown(screen.getByRole('menu'), {key: 'Tab'});
+
+    expect(cb).toHaveBeenCalled();
   });
 
-  test('should NOT call on close function escape is pressed and no function is set', () => {
-    const component = mount(
-      <Menu>
-        <MenuItem>Alpha</MenuItem>
-      </Menu>
-    );
-    const item = component.find('ul');
-    const escape = {keyCode: 27, key: 'Escape'};
-    item.simulate('keydown', escape);
-    expect(cb.mock.calls.length).toBe(0);
-    component.unmount();
-  });
-
-  test('should call callback function when enter or space is pressed', () => {
-    const component = mount(
+  it('should call the "onClose" event when the escape key is pressed', () => {
+    render(
       <Menu onClose={cb}>
         <MenuItem>Alpha</MenuItem>
       </Menu>
     );
-    const item = component.find('ul');
-    const enter = {keyCode: 13, key: 'Enter'};
-    const space = {keyCode: 32, key: ' '};
-    item.simulate('keydown', enter);
-    item.simulate('keydown', space);
 
-    expect(cb.mock.calls.length).toBe(2);
-    component.unmount();
+    fireEvent.keyDown(screen.getByRole('menu'), {key: 'Escape'});
+
+    expect(cb).toHaveBeenCalled();
+  });
+
+  it('should call the "onClose" event when the space key is pressed', () => {
+    render(
+      <Menu onClose={cb}>
+        <MenuItem>Alpha</MenuItem>
+      </Menu>
+    );
+
+    fireEvent.keyDown(screen.getByRole('menu'), {key: ' '});
+
+    expect(cb).toHaveBeenCalled();
+  });
+
+  it('should call the "onClose" event when the enter key is pressed', () => {
+    render(
+      <Menu onClose={cb}>
+        <MenuItem>Alpha</MenuItem>
+      </Menu>
+    );
+
+    fireEvent.keyDown(screen.getByRole('menu'), {key: 'Enter'});
+
+    expect(cb).toHaveBeenCalled();
   });
 });
 
 describe('Menu Initial Selected Item', () => {
-  test('positive numbers should select from start', () => {
-    const id: string = 'myId';
-    const component = mount(
-      <Menu initialSelectedItem={1} id={id}>
-        <MenuItem />
-        <MenuItem />
+  it('should select item when "initialSelectedItem" is passed', () => {
+    render(
+      <Menu initialSelectedItem={1}>
+        <MenuItem>Alpha</MenuItem>
+        <MenuItem>Bravo</MenuItem>
       </Menu>
     );
-    expect(
-      component
-        .find('ul')
-        .getDOMNode()
-        .getAttribute('aria-activedescendant')
-    ).toEqual(`${id}-1`);
-    component.unmount();
+
+    const secondId = screen.getByRole('menuitem', {name: 'Bravo'}).getAttribute('id');
+
+    expect(screen.getByRole('menu')).toHaveAttribute('aria-activedescendant', secondId);
   });
 
-  test('numbers greater than children should select last child', () => {
-    const id: string = 'myId';
-    const component = mount(
-      <Menu initialSelectedItem={100} id={id}>
-        <MenuItem />
-        <MenuItem />
+  it('should select last item when "initialSelectedItem" is greater than number of items', () => {
+    render(
+      <Menu initialSelectedItem={100}>
+        <MenuItem>Alpha</MenuItem>
+        <MenuItem>Bravo</MenuItem>
       </Menu>
     );
-    expect(
-      component
-        .find('ul')
-        .getDOMNode()
-        .getAttribute('aria-activedescendant')
-    ).toEqual(`${id}-1`);
-    component.unmount();
+
+    const secondId = screen.getByRole('menuitem', {name: 'Bravo'}).getAttribute('id');
+
+    expect(screen.getByRole('menu')).toHaveAttribute('aria-activedescendant', secondId);
   });
 
-  test('negative numbers should select from end', () => {
-    const id: string = 'myId';
-    const component = mount(
-      <Menu initialSelectedItem={-1} id={id}>
-        <MenuItem />
-        <MenuItem />
+  it('should select from end when "initialSelectedItem" is a negative number', () => {
+    render(
+      <Menu initialSelectedItem={-1}>
+        <MenuItem>Alpha</MenuItem>
+        <MenuItem>Bravo</MenuItem>
       </Menu>
     );
-    expect(
-      component
-        .find('ul')
-        .getDOMNode()
-        .getAttribute('aria-activedescendant')
-    ).toEqual(`${id}-1`);
-    component.unmount();
+
+    const secondId = screen.getByRole('menuitem', {name: 'Bravo'}).getAttribute('id');
+
+    expect(screen.getByRole('menu')).toHaveAttribute('aria-activedescendant', secondId);
   });
 
-  test('|negative numbers| greater than children should select first child', () => {
-    const id: string = 'myId';
-    const component = mount(
-      <Menu initialSelectedItem={-100} id={id}>
-        <MenuItem />
-        <MenuItem />
+  it('should select first item when "initialSelectedItem" is a negative number greater than items', () => {
+    render(
+      <Menu initialSelectedItem={-100}>
+        <MenuItem>Alpha</MenuItem>
+        <MenuItem>Bravo</MenuItem>
       </Menu>
     );
-    expect(
-      component
-        .find('ul')
-        .getDOMNode()
-        .getAttribute('aria-activedescendant')
-    ).toEqual(`${id}-0`);
-    component.unmount();
-  });
 
-  test('selected item should set correctly when opened', () => {
-    const id: string = 'myId';
-    const component = mount(
-      <Menu isOpen={false} initialSelectedItem={0} id={id}>
-        <MenuItem />
-        <MenuItem />
-      </Menu>
-    );
-    component.setProps({isOpen: true, initialSelectedItem: 1});
-    expect(
-      component
-        .find('ul')
-        .getDOMNode()
-        .getAttribute('aria-activedescendant')
-    ).toEqual(`${id}-1`);
-    component.unmount();
-  });
-});
+    const firstId = screen.getByRole('menuitem', {name: 'Alpha'}).getAttribute('id');
 
-describe('Getting Selected Item', () => {
-  test('you should not be able to get out of range indexes', () => {
-    const id: string = 'myId';
-    const component = mount(
-      <Menu id={id}>
-        <MenuItem />
-        <MenuItem />
-      </Menu>
-    );
-    const under = (component.instance() as Menu).getNormalizedItemIndex(-1);
-    expect(under).toEqual(0);
-    const over = (component.instance() as Menu).getNormalizedItemIndex(100);
-    expect(over).toEqual(1);
-    component.unmount();
+    expect(screen.getByRole('menu')).toHaveAttribute('aria-activedescendant', firstId);
   });
 });

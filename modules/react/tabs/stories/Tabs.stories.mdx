@@ -2,9 +2,11 @@ import {Tabs} from '@workday/canvas-kit-react/tabs';
 import {Specifications} from '@workday/canvas-kit-docs';
 
 import {Basic} from './examples/Basic';
-import {NamedKeys} from './examples/NamedKeys';
+import {NamedTabs} from './examples/NamedTabs';
 import {RightToLeft} from './examples/RightToLeft';
+import {OverflowTabs} from './examples/OverflowTabs';
 import {DisabledTab} from './examples/DisabledTab';
+import {Icons} from './examples/Icons';
 import {SinglePanel} from './examples/SinglePanel';
 import {AlternativeTabStop} from './examples/AlternativeTabStop';
 import {HoistedModel} from './examples/HoistedModel';
@@ -39,9 +41,25 @@ yarn add @workday/canvas-kit-react
 in a variety of ways: `Tabs.List`, `Tabs.Item` and `Tabs.Panel`. It follows the
 [W3 Tabs specification](https://www.w3.org/TR/wai-aria-practices/#tabpanel).
 
-In this example, we set up a basic `Tabs` component with five tabs.
+In this example, we set up a basic `Tabs` component with five tabs. This example uses a static API
+that does not support overflow.
 
 <ExampleCodeBlock code={Basic} />
+
+### Overflow Tabs
+
+Tabs is a responsive component based on the width of its container. If the rendered tabs exceed the
+width of the `Tabs.List`, an overflow menu will be rendered. This only works against the dynamic API
+where you give the `TabsModel` an array of items to be rendered. The dynamic API handles the React
+`key` for you based on the item's identifier. The dynamic API requires either an `id` on each item
+object or a `getId` function that returns an identifier based on the item. The below example uses an
+`id` property on each item.
+
+The dynamic API takes in any object, but since nothing is known about your object, a
+[render prop](https://reactjs.org/docs/render-props.html) is necessary to instruct a list how it
+should render.
+
+<ExampleCodeBlock code={OverflowTabs} />
 
 ### Hoisted Model
 
@@ -56,13 +74,13 @@ trigger an event to change the active tab.
 
 <ExampleCodeBlock code={HoistedModel} />
 
-### Named Keys
+### Named Tabs
 
 `Tabs.Item` and `Tabs.Panel` both take an optional `name` attribute that is used for the
-`onActivate` callback. This example is identical to the Basic Example, but with named keys for the
+`onActivate` callback. This example is identical to the Basic Example, but with named tabs for the
 `Tabs.Item` and `Tabs.Panel` subcomponents.
 
-<ExampleCodeBlock code={NamedKeys} />
+<ExampleCodeBlock code={NamedTabs} />
 
 ### Right-to-Left (RTL)
 
@@ -75,6 +93,14 @@ trigger an event to change the active tab.
 Set the `disabled` prop of a `Tabs.Item` to `true` to disable it.
 
 <ExampleCodeBlock code={DisabledTab} />
+
+### Tab Icons
+
+Tabs can have icons. You must set `hasIcon` on the `Tabs.Item` and use the `Icon` and `Text`
+subcomponent. The `hasIcon` changes the `Tabs.Item` to change where overflow detection is from the
+`Tabs.Item` element to the `Tabs.Item.Text` element.
+
+<ExampleCodeBlock code={Icons} />
 
 ### Alternative Tab Stop
 

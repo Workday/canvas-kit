@@ -1,19 +1,18 @@
 import * as React from 'react';
 import {screen, render} from '@testing-library/react';
 
-import {TabList} from '../lib/TabList';
 import {Tabs} from '../lib/Tabs';
 import {useTabsModel} from '../lib/useTabsModel';
 
 describe('TabList', () => {
-  verifyComponent(TabList, {modelFn: useTabsModel});
+  verifyComponent(Tabs.List, {modelFn: useTabsModel});
 
   it('should have a role of "tablist"', () => {
     render(
       <Tabs>
-        <TabList>
+        <Tabs.List>
           <div />
-        </TabList>
+        </Tabs.List>
       </Tabs>
     );
     expect(screen.getByRole('tablist')).toBeInTheDocument();
@@ -22,10 +21,10 @@ describe('TabList', () => {
   it('should render child elements', () => {
     render(
       <Tabs>
-        <TabList>
+        <Tabs.List>
           <div>First Item</div>
           <div />
-        </TabList>
+        </Tabs.List>
       </Tabs>
     );
     expect(screen.getByRole('tablist')).toHaveTextContent('First Item');

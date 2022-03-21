@@ -1,10 +1,15 @@
 import * as React from 'react';
-import {ErrorType, StyledType, createComponent, useForkRef} from '@workday/canvas-kit-react/common';
+import {
+  ErrorType,
+  StyledType,
+  createComponent,
+  useForkRef,
+  generateUniqueId,
+} from '@workday/canvas-kit-react/common';
 import {menuAnimationDuration} from './SelectMenu';
 import SelectBase, {CoreSelectBaseProps, Option, NormalizedOption} from './SelectBase';
 import {MenuVisibility} from './types';
 import {getCorrectedIndexByValue} from './utils';
-import uuid from 'uuid/v4';
 
 export interface SelectProps extends CoreSelectBaseProps {
   /**
@@ -87,13 +92,13 @@ class SelectContainer extends React.Component<SelectContainerProps, SelectContai
 
       if (typeof option === 'string') {
         disabled = false;
-        id = uuid();
+        id = generateUniqueId();
         value = option;
         label = option;
       } else {
         data = option.data || data;
         disabled = !!option.disabled;
-        id = option.id || uuid();
+        id = option.id || generateUniqueId();
         value = option.value;
         label = option.label || option.value;
       }

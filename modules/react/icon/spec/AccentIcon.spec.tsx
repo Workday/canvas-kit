@@ -1,8 +1,9 @@
 import * as React from 'react';
-import {mount} from 'enzyme';
-import AccentIcon, {accentIconStyles} from '../lib/AccentIcon';
+import {render} from '@testing-library/react';
+
 import {colors} from '@workday/canvas-kit-react/tokens';
 import {shieldIcon} from '@workday/canvas-accent-icons-web';
+import AccentIcon, {accentIconStyles} from '../lib/AccentIcon';
 
 describe('Accent Icon', () => {
   test('Defaults styles are set correctly', () => {
@@ -21,10 +22,10 @@ describe('Accent Icon', () => {
     expect(componentStyle['& .color-500']).toHaveProperty('fill', colors.cinnamon500);
   });
 
-  test('AccentIcon should spread extra props', () => {
-    const component = mount(<AccentIcon icon={shieldIcon} data-propspread="test" />);
-    const container = component.at(0).getDOMNode();
-    expect(container.getAttribute('data-propspread')).toBe('test');
-    component.unmount();
+  it('should spread extra props to the icon element', () => {
+    const {container} = render(<AccentIcon icon={shieldIcon} data-propspread="test" />);
+
+    // the container is not a semantic element
+    expect(container.firstChild).toHaveAttribute('data-propspread', 'test');
   });
 });
