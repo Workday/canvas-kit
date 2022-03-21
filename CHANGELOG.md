@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v5.3.14](https://github.com/Workday/canvas-kit/releases/tag/v5.3.14) (2022-03-21)
+
+### Components
+
+- fix: Update usePopupTarget to apply Refs to elements not class instance ([#1514](https://github.com/Workday/canvas-kit/pull/1514)) ([@jaslloyd](https://github.com/jaslloyd))
+
+
 ## [v5.3.13](https://github.com/Workday/canvas-kit/releases/tag/v5.3.13) (2022-03-02)
 
 ### Components
