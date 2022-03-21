@@ -86,7 +86,7 @@ describe('recategorizeIconButtons', () => {
 
       const StyledIconButton = styled(IconButton)({});
       
-      <StyledIconButton icon={plusIcon} />
+      <StyledIconButton variant="circle" icon={plusIcon} />
       
       
     `;

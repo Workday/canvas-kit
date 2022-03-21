@@ -7,6 +7,7 @@ import {
   JSXAttribute,
   ASTPath,
   JSXElement,
+  CallExpression,
 } from 'jscodeshift';
 import {getImportRenameMap} from './utils/getImportRenameMap';
 
@@ -39,19 +40,14 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
     return file.source;
   }
 
+  let buttonType = '';
+
   // circle -> tertiary
   // circle-filled -> secondary
   // inverse -> tertiary inverse
   // inverse-filled -> secondary inverse
   // plain/square -> not supported
   // square-filled -> not supported
-
-  root.find(j.VariableDeclarator || j.ExpressionStatement).forEach(nodePath => {
-    if (nodePath.value.init?.type === 'CallExpression') {
-      nodePath.value.init.callee.arguments[0].name = 'TertiaryButton';
-      requiredImportSpecifiers.push('TertiaryButton');
-    }
-  });
 
   /**
    * 2. Find `IconButton`
@@ -66,9 +62,9 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
     .find(
       j.JSXElement,
       (value: JSXElement) =>
-        (value.openingElement.name.type === 'JSXIdentifier' &&
-          value.openingElement.name.name === importMap.IconButton) ||
-        value.openingElement.name.name === styledMap.IconButton
+        value.openingElement.name.type === 'JSXIdentifier' &&
+        (value.openingElement.name.name === importMap.IconButton ||
+          value.openingElement.name.name === styledMap.IconButton)
     )
     .forEach(nodePath => {
       const attrs = nodePath.value.openingElement.attributes;
@@ -92,25 +88,34 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
 
         if (isCircleVariant) {
           nodePath.value.openingElement.attributes?.splice(attrs?.indexOf(variantProp)!, 1);
-          updateJSXTag(nodePath, 'TertiaryButton');
-          requiredImportSpecifiers.push('TertiaryButton');
+          buttonType = 'TertiaryButton';
         } else if (isCircleFilledVariant) {
           nodePath.value.openingElement.attributes?.splice(attrs?.indexOf(variantProp)!, 1);
-          updateJSXTag(nodePath, 'SecondaryButton');
-          requiredImportSpecifiers.push('SecondaryButton');
+          buttonType = 'SecondaryButton';
         } else if (isInverseVariant) {
-          updateJSXTag(nodePath, 'TertiaryButton');
-          requiredImportSpecifiers.push('TertiaryButton');
+          buttonType = 'TertiaryButton';
         } else if (isInverseFilledVariant) {
-          updateJSXTag(nodePath, 'SecondaryButton');
-          requiredImportSpecifiers.push('SecondaryButton');
+          buttonType = 'SecondaryButton';
         } else {
           nodePath.value.openingElement.attributes?.splice(attrs?.indexOf(variantProp)!, 1);
-          updateJSXTag(nodePath, 'TertiaryButton');
-          requiredImportSpecifiers.push('TertiaryButton');
+          buttonType = 'TertiaryButton';
         }
+
+        updateJSXTag(nodePath, buttonType);
+        requiredImportSpecifiers.push(buttonType);
       }
     });
+
+  root.find(j.VariableDeclarator || j.JSXElement).forEach(nodePath => {
+    if (
+      nodePath.value.init?.type === 'CallExpression' &&
+      nodePath.value.init.callee.type === 'CallExpression' &&
+      nodePath.value.init.callee.arguments[0].type === 'Identifier'
+    ) {
+      nodePath.value.init.callee.arguments[0].name = buttonType;
+      requiredImportSpecifiers.push(buttonType);
+    }
+  });
 
   /**
    * Remove old imports: `IconButton`
