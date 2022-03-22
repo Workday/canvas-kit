@@ -41,6 +41,7 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
 
   let buttonType = '';
 
+  // Button Mapping
   // circle -> tertiary
   // circle-filled -> secondary
   // inverse -> tertiary inverse
@@ -105,7 +106,10 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
       }
     });
 
-  root.find(j.VariableDeclarator || j.JSXElement).forEach(nodePath => {
+  // Find all instances of IconButton within a style function
+  // const StyledIconButton = styled(IconButton) gets renamed to
+  // const StyledIconButton = styled(CorrectButtonMapping)
+  root.find(j.VariableDeclarator).forEach(nodePath => {
     if (
       nodePath.value.init?.type === 'CallExpression' &&
       nodePath.value.init.callee.type === 'CallExpression' &&
