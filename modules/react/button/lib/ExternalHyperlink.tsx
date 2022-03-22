@@ -25,10 +25,12 @@ const Anchor = styled(Hyperlink)<ExternalHyperlinkProps & StyledType>({
 });
 
 const iconSize = '1em';
+const minIconSize = '16px';
 
 const StyledSystemIcon = styled(SystemIcon)<StyledType>({
   ...iconStyles,
   width: `calc(${iconSize} - 1px)`,
+  minWidth: `calc(${minIconSize} - 1px)`,
   marginLeft: '2px',
 });
 
@@ -45,7 +47,13 @@ export const ExternalHyperlink = createComponent('a')({
   ) => (
     <Anchor ref={ref} target="_blank" rel="noreferrer" variant={variant} {...elemProps}>
       <span>{children}</span>
-      <StyledSystemIcon icon={extLinkIcon} role="img" aria-label={iconLabel} size={iconSize} />
+      <StyledSystemIcon
+        icon={extLinkIcon}
+        role="img"
+        aria-label={iconLabel}
+        size={iconSize}
+        styles={{['& svg']: {minWidth: minIconSize, minHeight: minIconSize}}}
+      />
     </Anchor>
   ),
 });

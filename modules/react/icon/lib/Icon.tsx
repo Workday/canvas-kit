@@ -17,6 +17,7 @@ export const Icon = createComponent('span')({
 
     if (size) {
       iconStyles['& svg'] = {
+        ...((iconStyles['& svg'] as CSSObject) ?? {}),
         width: size,
         height: size,
       };
