@@ -123,9 +123,7 @@ our `PrimaryButton`, `SecondaryButton` and `TertiaryButton`.
 ### Button Mapping
 
 Below is a mapping of `IconButtons` to their respective buttons. _Note_: We're no longer supporting
-what use to be `plain`, `square` and `squareFilled`. If you would still like to have a squared icon,
-you can use
-[ToolbarIconButton](https://workday.github.io/canvas-kit/?path=/docs/components-buttons-button-react-toolbar--toolbar-icon-button)
+what use to be `plain`, `square` and `squareFilled` as well as the `toggled` prop.
 
 | IconButton variant | Button Type                          |
 | ------------------ | ------------------------------------ |
@@ -136,6 +134,20 @@ you can use
 | `plain`            | Not Supporting                       |
 | `square`           | Not Supporting                       |
 | `squareFilled`     | Not Supporting                       |
+
+### Removal of variants Square, SquareFilled, and Plain as well as the Toggled Prop
+
+As part of simplyging our variants and cleaning up the API, we've removed the variants `square`,
+`squareFilled` and `plain`. We've also removed the prop `toggled`.
+
+If you would still like to have a squared icon, you can use
+[ToolbarIconButton](https://workday.github.io/canvas-kit/?path=/docs/components-buttons-button-react-toolbar--toolbar-icon-button)
+which also has the `toggled`prop.
+
+If this button doesn't fit your specific use case, we've introduced a low level
+[`BaseButton` component](#basebutton-component). This component allows you to modify the colors,
+props, and size of the button. For an example of this being used, you can reference our
+[PageButton component](https://github.com/Workday/canvas-kit/blob/master/modules/react/pagination/lib/Pagination/PageButton.tsx).
 
 ### Rendering an icon button
 
