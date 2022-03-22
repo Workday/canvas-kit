@@ -86,15 +86,15 @@ describe('recategorizeIconButtons', () => {
 
       const StyledIconButton = styled(IconButton)({});
       
-      <StyledIconButton variant="circle" icon={plusIcon} />
+      <StyledIconButton variant="circleFilled" icon={plusIcon} />
       
       
     `;
 
     const expected = stripIndent`
-      import {TertiaryButton} from '@workday/canvas-kit-react/button';
+      import {SecondaryButton} from '@workday/canvas-kit-react/button';
 
-      const StyledIconButton = styled(TertiaryButton)({});
+      const StyledIconButton = styled(SecondaryButton)({});
 
       <StyledIconButton icon={plusIcon} />
       

@@ -7,7 +7,6 @@ import {
   JSXAttribute,
   ASTPath,
   JSXElement,
-  CallExpression,
 } from 'jscodeshift';
 import {getImportRenameMap} from './utils/getImportRenameMap';
 
