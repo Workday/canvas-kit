@@ -57,7 +57,7 @@ export interface SidePanelProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   onStateTransition?: (state?: SidePanelTransitionStates) => void;
   /**
-   * The style variant of the side panel. 'standard' is with a `soap100` background, no depth. 'alternate' is a `frenchVanilla100` background with a level 3 depth.
+   * The style variant of the side panel. 'standard' is with a `soap100` background, no depth. 'alternate' is a `frenchVanilla100` background with a level 6 depth.
    *
    * @default 'standard'
    */
@@ -174,7 +174,7 @@ const SidePanel = ({
       width={expanded ? expandedWidth : collapsedWidth}
       maxWidth={expanded ? expandedWidth : collapsedWidth}
       backgroundColor={elemProps.variant === 'alternate' ? colors.frenchVanilla100 : colors.soap100}
-      depth={elemProps.variant === 'alternate' ? 3 : undefined}
+      depth={elemProps.variant === 'alternate' ? 6 : undefined}
       animation={
         touched ? `${expanded ? motion.expand : motion.collapse} 200ms ease-out` : undefined
       }

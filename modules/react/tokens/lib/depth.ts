@@ -1,19 +1,19 @@
 export type CanvasDepth = {
   /**
-   * ### Depth Inset
-   * 	Used for inset containers
+   * ### Depth None
+   * 	Used for removing existing depth
    *
    * @example
    * ```ts
    * import { depth } from '@workday/canvas-kit-react/tokens';
    *
-   * const insetCardStyles = {
-   *   ...depth.inset,
+   * const noDepthCardStyles = {
+   *   ...depth.none,
    * };
    * ```
    */
-  inset: {
-    boxShadow: 'inset 0px 0px 8px 0 rgba(82, 97, 115, 0.09)';
+  none: {
+    boxShadow: 'none';
   };
   /**
    * ### Depth 1
@@ -29,7 +29,7 @@ export type CanvasDepth = {
    * ```
    */
   1: {
-    boxShadow: '0px 2px 4px 0 rgba(0, 0, 0, 0.08)';
+    boxShadow: '0px 1px 4px rgba(0, 0, 0, 0.2), 0px 2px 8px rgba(0, 0, 0, 0.16)';
   };
   /**
    * ### Depth 2
@@ -45,7 +45,7 @@ export type CanvasDepth = {
    * ```
    */
   2: {
-    boxShadow: '0px 4px 8px 0 rgba(0, 0, 0, 0.1)';
+    boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.2), 0px 4px 16px rgba(0, 0, 0, 0.16)';
   };
   /**
    * ### Depth 3
@@ -61,7 +61,7 @@ export type CanvasDepth = {
    * ```
    */
   3: {
-    boxShadow: '0px 8px 16px 0 rgba(0, 0, 0, 0.12)';
+    boxShadow: '0px 3px 12px rgba(0, 0, 0, 0.2), 0px 6px 24px rgba(0, 0, 0, 0.16)';
   };
   /**
    * ### Depth 4
@@ -77,8 +77,39 @@ export type CanvasDepth = {
    * ```
    */
   4: {
-    border: '1px solid rgba(218, 226, 230, 1)';
-    boxShadow: '0px 8px 16px 0 rgba(0, 0, 0, 0.12)';
+    boxShadow: '0px 4px 16px rgba(0, 0, 0, 0.2), 0px 8px 32px rgba(0, 0, 0, 0.16)';
+  };
+  /**
+   * ### Depth 5
+   * Used for Banners, Snackbars, Toast Messages, Non modal Dialogs
+   *
+   * @example
+   * ```ts
+   * import { depth } from '@workday/canvas-kit-react/tokens';
+   *
+   * const cardStyles = {
+   *   ...depth[5],
+   * };
+   * ```
+   */
+  5: {
+    boxShadow: '0px 5px 20px rgba(0, 0, 0, 0.2), 0px 10px 40px rgba(0, 0, 0, 0.16)';
+  };
+  /**
+   * ### Depth 6
+   * Used for Modal Dialogs, Side Panels (both with opacity overlay behaviour)
+   *
+   * @example
+   * ```ts
+   * import { depth } from '@workday/canvas-kit-react/tokens';
+   *
+   * const cardStyles = {
+   *   ...depth[6],
+   * };
+   * ```
+   */
+  6: {
+    boxShadow: '0px 6px 24px rgba(0, 0, 0, 0.2), 0px 12px 48px rgba(0, 0, 0, 0.16)';
   };
 };
 
@@ -90,8 +121,8 @@ export type CanvasDepthValues = ValueOf<CanvasDepth>;
  *
  * Depth is the relative distance between surfaces in the z-axis.
  * It provides delineation, focus, and priority with shadows and layering.
- * There are five depth levels, `inset`, `1`, `2`, `3`, and `4`.
- * Most levels only apply box-shadow styles, but `depth[4]` also applies border styles.
+ * There are seven depth levels, `none`, `1`, `2`, `3`, `4`, `5` and `6`.
+ * All levels only apply box-shadow styles.
  *
  * @example
  * ```tsx
@@ -108,20 +139,25 @@ export type CanvasDepthValues = ValueOf<CanvasDepth>;
  *
  */
 export const depth: CanvasDepth = {
-  inset: {
-    boxShadow: 'inset 0px 0px 8px 0 rgba(82, 97, 115, 0.09)',
+  none: {
+    boxShadow: 'none',
   },
   1: {
-    boxShadow: '0px 2px 4px 0 rgba(0, 0, 0, 0.08)',
+    boxShadow: '0px 1px 4px rgba(0, 0, 0, 0.2), 0px 2px 8px rgba(0, 0, 0, 0.16)',
   },
   2: {
-    boxShadow: '0px 4px 8px 0 rgba(0, 0, 0, 0.1)',
+    boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.2), 0px 4px 16px rgba(0, 0, 0, 0.16)',
   },
   3: {
-    boxShadow: '0px 8px 16px 0 rgba(0, 0, 0, 0.12)',
+    boxShadow: '0px 3px 12px rgba(0, 0, 0, 0.2), 0px 6px 24px rgba(0, 0, 0, 0.16)',
   },
   4: {
-    border: '1px solid rgba(218, 226, 230, 1)',
-    boxShadow: '0px 8px 16px 0 rgba(0, 0, 0, 0.12)',
+    boxShadow: '0px 4px 16px rgba(0, 0, 0, 0.2), 0px 8px 32px rgba(0, 0, 0, 0.16)',
+  },
+  5: {
+    boxShadow: '0px 5px 20px rgba(0, 0, 0, 0.2), 0px 10px 40px rgba(0, 0, 0, 0.16)',
+  },
+  6: {
+    boxShadow: '0px 6px 24px rgba(0, 0, 0, 0.2), 0px 12px 48px rgba(0, 0, 0, 0.16)',
   },
 };

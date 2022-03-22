@@ -3,8 +3,8 @@ import {Box} from '@workday/canvas-kit-react/layout';
 
 export const Depth = () => (
   <>
-    <Box depth="inset" display="inline-block" margin="xxxs" padding="xs">
-      Depth Inset
+    <Box depth="none" display="inline-block" margin="xxxs" padding="xs">
+      Depth None
     </Box>
     <Box depth={1} display="inline-block" margin="xxxs" padding="xs">
       Depth 1
@@ -17,6 +17,12 @@ export const Depth = () => (
     </Box>
     <Box depth={4} display="inline-block" margin="xxxs" padding="xs">
       Depth 4
+    </Box>
+    <Box depth={5} display="inline-block" margin="xxxs" padding="xs">
+      Depth 5
+    </Box>
+    <Box depth={6} display="inline-block" margin="xxxs" padding="xs">
+      Depth 6
     </Box>
   </>
 );
