@@ -14,6 +14,8 @@ any questions about the update.
 - [Status Indicator Width](#status-indicator-width)
 - [Popup Cards](popup-cards)
 - [Component Promotions](#component-promotion)
+- [Tokens Updates](#tokens-updates)
+  - [Depth Tokens](#depth-tokens)
 
 ## Codemod
 
@@ -167,3 +169,25 @@ main `react` package.
 - `Box` was promoted from `@workday/canvas-kit-labs/common` to `@workday/canvas-kit-react/layout`
 - `Flex` was promoted from `@workday/canvas-kit-labs/layout` to `@workday/canvas-kit-react/layout`
 - `Stack` was promoted from `@workday/canvas-kit-labs/layout` to `@workday/canvas-kit-react/layout`
+
+## Tokens Updates
+
+### Depth Tokens
+
+**Changes:**
+
+- Depth `inset` was removed from token list.
+- Added new depth: `none` (to remove default depth from component), `5` and `6`.
+- Now all depth will add only `box-shadow` with 2 shadows style and no border.
+
+Also we changed default depth for the next components:
+
+- Card: Depth 2 → Depth 1
+- Select Menu, Menu: Depth 2 → Depth 3
+- Breadcrumbs Dropdown Menu: Depth 2 → Depth 3
+- Combobox: Depth 1 → Depth 3
+- Popup: Depth 2 → Depth 5
+- Dialog: Depth 2 → Depth 5
+- Color Picker Palette, Toast: Depth 2 → Depth 5
+- Modal: Depth 2 → Depth 6
+- Side Panel (alternate variant): Depth 3 → Depth 6

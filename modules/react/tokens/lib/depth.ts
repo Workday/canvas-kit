@@ -17,7 +17,7 @@ export type CanvasDepth = {
   };
   /**
    * ### Depth 1
-   * Used for minimal offset
+   * Used for minimal offset and Cards
    *
    * @example
    * ```ts
@@ -33,7 +33,7 @@ export type CanvasDepth = {
   };
   /**
    * ### Depth 2
-   * Used for Cards, Popups, and Menus — our most common depth
+   * Used for Top navigation, Bottom navigation
    *
    * @example
    * ```ts
@@ -49,7 +49,7 @@ export type CanvasDepth = {
   };
   /**
    * ### Depth 3
-   * Used for interactive Cards on hover
+   * Used for FABs, Menus
    *
    * @example
    * ```ts
@@ -65,7 +65,7 @@ export type CanvasDepth = {
   };
   /**
    * ### Depth 4
-   * Used for Cards on white backgrounds — adds border styles for more contrast
+   * Used for Bottom Sheets
    *
    * @example
    * ```ts
@@ -81,7 +81,7 @@ export type CanvasDepth = {
   };
   /**
    * ### Depth 5
-   * Used for Banners, Snackbars, Toast Messages, Non modal Dialogs
+   * Used for Popups, Toast Messages, Dialogs, Side Panels (without opacity overlay behaviour)
    *
    * @example
    * ```ts
