@@ -10,13 +10,14 @@ any questions about the update.
 
 - [Codemod](#codemod)
 - [Component Deprecations](#component-deprecations)
+- [Component Promotions](#component-promotion)
 - [Buttons](#buttons)
 - [Segmented Control](#segmented-control)
+- [Side Panel](#side-panel)
 - [Icons](#icons)
 - [ActionBar Component Updates](#actionbar-component-updates)
 - [Status Indicator Width](#status-indicator-width)
 - [Popup Cards](popup-cards)
-- [Component Promotions](#component-promotion)
 
 ## Codemod
 
@@ -352,6 +353,27 @@ v7
   <SegmentedControl.Button icon={deviceTabletIcon} value="device-view" aria-label="Device View" />
   <SegmentedControl.Button icon={percentageIcon} value="percent-view" aria-label="Percent View" />
 </SegmentedControl>
+```
+
+## Side Panel
+
+The `SidePanel` in our `preview` package has now been updated so that the toggle button has a
+tooltip built in. If you currently have a `Tooltip` component wrapping this element, you shoulre
+remove it and provide the appropiate text to the button based on its state.
+
+Two props where added to the `SidePanel.ToggleButton`:
+
+```tsx
+/**
+   * The tooltip text to expand the side panel
+   * @default 'Expand'
+   */
+  tooltipTextExpand?: string;
+  /**
+   * The tooltip text to collapse the side panel
+   * @default 'Collapse'
+   */
+  tooltipTextCollapse?: string;
 ```
 
 ## Icons
