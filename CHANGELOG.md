@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v6.7.1](https://github.com/Workday/canvas-kit/releases/tag/v6.7.1) (2022-03-23)
+
+### Components
+
+- fix(layout): Pass key to Stack.Item when using shouldWrapChildren ([#1518](https://github.com/Workday/canvas-kit/pull/1518)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
 ## [v6.7.0](https://github.com/Workday/canvas-kit/releases/tag/v6.7.0) (2022-03-21)
 
 ### Components
