@@ -26,8 +26,6 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
           value.openingElement.name.name === styledMap.SegmentedControl)
     )
     .forEach(nodePath => {
-      console.log(nodePath.value.children);
-
       for (const child of nodePath.value.children || []) {
         if (child.type === 'JSXElement' && child.openingElement.name.type === 'JSXIdentifier') {
           child.openingElement.name.name = 'SegmentedControl.Button';

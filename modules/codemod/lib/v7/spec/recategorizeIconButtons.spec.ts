@@ -80,7 +80,7 @@ describe('recategorizeIconButtons', () => {
     expectTransform(input, expected);
   });
 
-  it.only('should import correct button based on styled IconButton', () => {
+  it('should import correct button based on styled IconButton', () => {
     const input = stripIndent`
       import {IconButton} from '@workday/canvas-kit-react/button';
 

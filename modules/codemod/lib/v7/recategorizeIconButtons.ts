@@ -36,10 +36,12 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
     '@workday/canvas-kit-react/button'
   );
   if (!containsCanvasImports) {
+    console.log(containsCanvasImports);
+
     return file.source;
   }
 
-  let buttonType = '';
+  let buttonType = ''; //default button if no variant is specified
 
   // Button Mapping
   // circle -> tertiary
@@ -74,6 +76,7 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
       );
       // Default IconButton variant is `circle`
       if (!variantProp) {
+        buttonType = 'TertiaryButton';
         updateJSXTag(nodePath, 'TertiaryButton');
         requiredImportSpecifiers.push('TertiaryButton');
       } else {
@@ -115,6 +118,9 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
       nodePath.value.init.callee.type === 'CallExpression' &&
       nodePath.value.init.callee.arguments[0].type === 'Identifier'
     ) {
+      console.log(nodePath.value.init.callee.arguments[0].name);
+      console.log(buttonType);
+
       nodePath.value.init.callee.arguments[0].name = buttonType;
       requiredImportSpecifiers.push(buttonType);
     }
@@ -128,11 +134,19 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
     source: {value: '@workday/canvas-kit-react/button'},
   });
 
+  const buttonImportFromMain = root.find(j.ImportDeclaration, {
+    source: {value: '@workday/canvas-kit-react'},
+  });
+  console.log(buttonImportFromMain);
+
   if (!buttonImports.length) {
     // Add new specifiers to a new import
     const allImports = root.find(j.ImportDeclaration);
+
     const lastImport = allImports.at(allImports.length);
     if (lastImport) {
+      console.log(requiredImportSpecifiers);
+
       lastImport.insertAfter(
         j.importDeclaration(
           requiredImportSpecifiers.map(specifier => j.importSpecifier(j.identifier(specifier))),
@@ -143,6 +157,7 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
   } else {
     buttonImports.forEach(({node}) => {
       const specifiersToRemove = ['IconButton'];
+      console.log(node);
 
       // Remove old specifiers
       if (
