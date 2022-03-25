@@ -15,7 +15,7 @@ export const Primary = props => (
       <PrimaryButton icon={plusIcon} iconPosition="end" {...props}>
         Primary
       </PrimaryButton>
-      <PrimaryButton icon={plusIcon} {...props}></PrimaryButton>
+      <PrimaryButton icon={plusIcon} {...props} />
     </HStack>
   </>
 );
