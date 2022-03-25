@@ -85,7 +85,7 @@ export const TertiaryButtonIconStates = (props: {theme?: PartialEmotionCanvasThe
     >
       {props => (
         <Container blue={props.variant === 'inverse'}>
-          <TertiaryButton {...props}></TertiaryButton>
+          <TertiaryButton {...props} />
         </Container>
       )}
     </ComponentStatesTable>
