@@ -10,6 +10,6 @@ export const PrimaryInverse = () => (
     <PrimaryButton icon={plusIcon} iconPosition="end" variant="inverse">
       Primary
     </PrimaryButton>
-    <PrimaryButton icon={plusIcon} variant="inverse"></PrimaryButton>
+    <PrimaryButton icon={plusIcon} variant="inverse" />
   </HStack>
 );
