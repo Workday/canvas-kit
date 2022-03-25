@@ -174,7 +174,7 @@ const SidePanel = ({
       width={expanded ? expandedWidth : collapsedWidth}
       maxWidth={expanded ? expandedWidth : collapsedWidth}
       backgroundColor={elemProps.variant === 'alternate' ? colors.frenchVanilla100 : colors.soap100}
-      depth={elemProps.variant === 'alternate' ? 6 : undefined}
+      depth={elemProps.variant === 'alternate' ? 5 : undefined}
       animation={
         touched ? `${expanded ? motion.expand : motion.collapse} 200ms ease-out` : undefined
       }

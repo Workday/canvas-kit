@@ -65,7 +65,7 @@ export type CanvasDepth = {
   };
   /**
    * ### Depth 4
-   * Used for Bottom Sheets
+   *
    *
    * @example
    * ```ts
@@ -81,7 +81,7 @@ export type CanvasDepth = {
   };
   /**
    * ### Depth 5
-   * Used for Popups, Toast Messages, Dialogs, Side Panels (without opacity overlay behaviour)
+   * Used for Popups, Toast Messages, Dialogs, Side Panels without opacity overlay behavior
    *
    * @example
    * ```ts
@@ -97,7 +97,7 @@ export type CanvasDepth = {
   };
   /**
    * ### Depth 6
-   * Used for Modal Dialogs, Side Panels (both with opacity overlay behaviour)
+   * Used for components with opacity overlay behavior such as Modal or Side Panels
    *
    * @example
    * ```ts
@@ -122,7 +122,7 @@ export type CanvasDepthValues = ValueOf<CanvasDepth>;
  * Depth is the relative distance between surfaces in the z-axis.
  * It provides delineation, focus, and priority with shadows and layering.
  * There are seven depth levels, `none`, `1`, `2`, `3`, `4`, `5` and `6`.
- * All levels only apply box-shadow styles.
+ * `none` is a special value to remove depth styles. All other levels only apply box-shadow styles.
  *
  * @example
  * ```tsx

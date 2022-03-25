@@ -176,7 +176,8 @@ const buttonSyles = {
 
 Depth is the relative distance between surfaces in the z-axis. It provides delineation, focus, and
 priority with shadows and layering. There are seven depth levels, `none`, `1`, `2`, `3`, `4`, `5`
-and `6`. All levels only apply box-shadow styles.
+and `6`. `none` is a special value to remove depth styles. All other levels only apply box-shadow
+styles.
 
 ### Usage
 
