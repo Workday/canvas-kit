@@ -13,6 +13,6 @@ export const Tertiary = () => (
     <TertiaryButton icon={plusIcon} iconPosition="end">
       Tertiary
     </TertiaryButton>
-    <TertiaryButton icon={plusIcon}></TertiaryButton>
+    <TertiaryButton icon={plusIcon} />
   </HStack>
 );
