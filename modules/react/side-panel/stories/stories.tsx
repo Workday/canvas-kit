@@ -93,7 +93,7 @@ const UnorderedList = styled('ul')({
 
 const AddButton = styled(SecondaryButton)({
   margin: '0 auto',
-  display: 'block',
+  display: 'flex',
 });
 
 const StyledListItem = styled(Flex)<StyledType>({
@@ -153,9 +153,7 @@ class SidePanelWrapper extends React.Component<SidePanelProps, SidePanelState> {
         {open ? (
           <PrimaryButton>Add New</PrimaryButton>
         ) : (
-          <AddButton size="small" aria-label="Add">
-            <SystemIcon icon={plusIcon} />
-          </AddButton>
+          <AddButton size="small" aria-label="Add" icon={plusIcon} />
         )}
         {/* TODO replace this with our list component */}
         <UnorderedList>

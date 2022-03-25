@@ -69,7 +69,6 @@ function getIconColorSelectors(
 }
 
 const ButtonContainer = styled('button')<StyledType & ButtonContainerProps>(
-  boxStyleFn,
   {
     ...type.levels.subtext.large,
     cursor: 'pointer',
@@ -211,7 +210,8 @@ const ButtonContainer = styled('button')<StyledType & ButtonContainerProps>(
         },
       }),
     };
-  }
+  },
+  boxStyleFn
 );
 
 export const getMinWidthStyles = (

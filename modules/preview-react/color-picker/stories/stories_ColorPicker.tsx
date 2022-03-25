@@ -22,7 +22,7 @@ storiesOf('Preview/Color Picker/React', module)
   .addParameters({component: ColorPicker})
   .addParameters({ReadmePath: 'preview-react/color-picker'})
   .add('Default', () => <ColorPicker onColorChange={noop} />)
-  .add('Icon Button Popup', () => {
+  .add('Icon button Popup', () => {
     const model = usePopupModel();
     const [color, setColor] = React.useState('');
 

@@ -114,10 +114,10 @@ describe('ColorPicker', () => {
     cy.viewport(800, 1000);
   });
 
-  describe('Icon Button ColorPicker Popup', () => {
+  describe('Icon button ColorPicker Popup', () => {
     context('when the SecondaryButton is clicked', () => {
       beforeEach(() => {
-        h.stories.load(colorPickerStory, 'Icon Button Popup');
+        h.stories.load(colorPickerStory, 'Icon button Popup');
         getOpenButton().click();
       });
 

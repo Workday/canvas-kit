@@ -22,7 +22,6 @@ export interface ToolbarIconButtonProps
 }
 
 const StyledToolbarIconButton = styled(BaseButton)<StyledType & ToolbarIconButtonProps>({
-  borderRadius: borderRadius.m,
   ['& .wd-icon']: {
     display: 'inline-block',
     verticalAlign: 'middle',
@@ -73,6 +72,7 @@ export const ToolbarIconButton = createComponent('button')({
         minWidth={space.l}
         width={space.l}
         height={space.l}
+        borderRadius={borderRadius.m}
         {...elemProps}
       >
         {icon ? <BaseButton.Icon icon={icon} shouldMirrorIcon={shouldMirrorIcon} /> : children}

@@ -11,7 +11,7 @@ export interface ButtonLabelIconProps extends BoxProps {
    *
    * @default 'medium'
    */
-  size?: ButtonSizes | undefined;
+  size?: ButtonSizes;
   /**
    * The icon of the Button.
    * Note: not displayed at `small` size

@@ -33,13 +33,13 @@ export const DropdownButton = createComponent(TertiaryButton)({
     ref,
     Element
   ) => {
-    const hasPlainVariant = variant === undefined;
+    const hasVariant = variant === undefined;
 
     return (
       <Element
         ref={ref}
         type="button"
-        style={hasPlainVariant ? {margin: '0 1px'} : {}}
+        style={hasVariant ? {margin: '0 1px'} : {}}
         variant={variant}
         icon={buttonIcon}
         aria-pressed={undefined} // removing aria-pressed from button and opting for aria-expanded

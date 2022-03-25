@@ -34,8 +34,7 @@ export interface ComboboxProps extends GrowthBehavior, React.HTMLAttributes<HTML
    */
   initialValue?: string;
   /**
-   * The variant of the Combobox clear button.
-   * @default undefined
+   * The variant of the Combobox clear button. The default is a TertiaryButton
    */
   clearButtonVariant?: TertiaryButtonProps['variant'];
   /**
