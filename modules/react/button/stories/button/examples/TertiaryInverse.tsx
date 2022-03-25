@@ -10,6 +10,6 @@ export const TertiaryInverse = () => (
     <TertiaryButton icon={plusIcon} iconPosition="end" variant="inverse">
       Tertiary
     </TertiaryButton>
-    <TertiaryButton icon={plusIcon} variant="inverse"></TertiaryButton>
+    <TertiaryButton icon={plusIcon} variant="inverse" />
   </HStack>
 );
