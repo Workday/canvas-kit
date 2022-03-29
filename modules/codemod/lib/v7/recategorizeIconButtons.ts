@@ -77,24 +77,10 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
         requiredImportSpecifiers.push(buttonType);
       } else {
         const variantPropValue = ((variantProp as JSXAttribute).value as StringLiteral)?.value;
-        const isCircleVariant = variantPropValue === 'circle';
-        const isCircleFilledVariant = variantPropValue === 'circleFilled';
-        const isInverseVariant = variantPropValue === 'inverse';
-        const isInverseFilledVariant = variantPropValue === 'inverseFilled';
 
-        if (isCircleVariant) {
+        buttonType = /filled/gi.test(variantPropValue) ? 'SecondaryButton' : 'TertiaryButton';
+        if (!variantPropValue.includes('inverse')) {
           nodePath.value.openingElement.attributes?.splice(attrs?.indexOf(variantProp)!, 1);
-          buttonType = 'TertiaryButton';
-        } else if (isCircleFilledVariant) {
-          nodePath.value.openingElement.attributes?.splice(attrs?.indexOf(variantProp)!, 1);
-          buttonType = 'SecondaryButton';
-        } else if (isInverseVariant) {
-          buttonType = 'TertiaryButton';
-        } else if (isInverseFilledVariant) {
-          buttonType = 'SecondaryButton';
-        } else {
-          nodePath.value.openingElement.attributes?.splice(attrs?.indexOf(variantProp)!, 1);
-          buttonType = 'TertiaryButton';
         }
 
         updateJSXTag(nodePath, buttonType);
