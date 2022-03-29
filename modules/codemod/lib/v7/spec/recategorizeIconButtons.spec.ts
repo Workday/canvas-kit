@@ -21,6 +21,22 @@ describe('recategorizeIconButtons', () => {
     expectTransform(input, expected);
   });
 
+  it('should replace "IconButton" with "TertiaryButton" when imported from main package', () => {
+    const input = `
+      import {IconButton} from '@workday/canvas-kit-react';
+
+      <IconButton />
+    `;
+
+    const expected = `
+      import {TertiaryButton} from '@workday/canvas-kit-react';
+
+      <TertiaryButton />
+    `;
+
+    expectTransform(input, expected);
+  });
+
   it('should replace "IconButton" with "TertiaryButton" if variant "circle" is defined', () => {
     const input = `
       import {IconButton} from '@workday/canvas-kit-react/button'
