@@ -139,6 +139,10 @@ const Avatar: AvatarOverload = React.forwardRef(
       }
     };
 
+    React.useLayoutEffect(() => {
+      setImageLoaded(false);
+    }, [url]);
+
     const background = variant === AvatarVariant.Dark ? colors.blueberry400 : colors.soap300;
 
     return (
