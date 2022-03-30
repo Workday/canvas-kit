@@ -8,7 +8,22 @@ export function useListRenderItems<T>(
 ) {
   const items =
     typeof children === 'function'
-      ? model.state.items.map(item => React.cloneElement(children(item.value), {key: item.id}))
+      ? model.state.isVirtualized
+        ? model.state.UNSTABLE_virtual.virtualItems.map(virtualItem => {
+            const item = model.state.items[virtualItem.index];
+            const child = children(item.value);
+            console.log('child', child);
+            return React.cloneElement(child, {
+              ref: virtualItem.measureRef,
+              key: item.id,
+              item: item,
+              'aria-setsize': virtualItem.size,
+              'aria-posinset': item.index + 1,
+            });
+          })
+        : model.state.items.map(item =>
+            React.cloneElement(children(item.value), {key: item.id, item: item.value})
+          )
       : null;
 
   return items || children;

@@ -55,9 +55,16 @@ export type BaseListState<T = unknown> = {
    * @see https://www.w3.org/TR/wai-aria-practices-1.1/#kbd_disabled_controls
    */
   nonInteractiveIds: string[];
-  /** Orientation of the list. This property determines what "next" and "previous" mean. This should
-   * be set to match the layout of UI components */
+  /**
+   * Orientation of the list. This property determines what "next" and "previous" mean. This should
+   * be set to match the layout of UI components
+   * */
   orientation: Orientation;
+  /**
+   * Indicator if virtualization is being used. If virtualized, `aria-setsize` and `aria-posinset`
+   * are being used and not all items may be in the DOM.
+   */
+  isVirtualized: boolean;
 };
 
 export type BaseListEvents<T = unknown> = {
@@ -152,7 +159,7 @@ export const defaultGetTextValue = (item: any): string => {
   return item.text || '';
 };
 
-interface Item<T> {
+export interface Item<T> {
   index: number;
   id: string;
   value: T;
@@ -199,8 +206,6 @@ class StaticCollection<T> implements Collection<T> {
   }
 }
 
-// TODO: Switch `items` to be Item<T>[] instead of T[]
-
 export const useBaseListModel = <T extends unknown>(
   config: BaseListModelConfig<T> = {}
 ): BaseListModel<T> => {
@@ -209,6 +214,7 @@ export const useBaseListModel = <T extends unknown>(
   const getTextValue = config.getTextValue || defaultGetTextValue;
   const [orientation] = React.useState(config.orientation || 'vertical');
   const [UNSTABLE_defaultItemHeight, setDefaultItemHeight] = React.useState(50);
+  const isVirtualized = !!config.items?.length;
   const indexRef = React.useRef(0);
   const containerRef = React.useRef<HTMLDivElement>(null);
   const items: Item<T>[] = React.useMemo(
@@ -221,13 +227,14 @@ export const useBaseListModel = <T extends unknown>(
           textValue: getTextValue(item),
         };
       }),
-    [config.items]
+    [config.items, getId, getTextValue]
   );
   const [staticItems, setStaticItems] = React.useState<Item<T>[]>([]);
+  console.log('size', items.length);
   const UNSTABLE_virtual = useVirtual({
     size: items.length,
     parentRef: containerRef,
-    estimateSize: React.useCallback(() => UNSTABLE_defaultItemHeight, [UNSTABLE_defaultItemHeight]),
+    // estimateSize: React.useCallback(() => UNSTABLE_defaultItemHeight, [UNSTABLE_defaultItemHeight]),
     horizontal: config.orientation === 'horizontal',
   });
 
@@ -240,9 +247,9 @@ export const useBaseListModel = <T extends unknown>(
     items: items.length ? items : staticItems,
     indexRef,
     nonInteractiveIds: config.nonInteractiveIds || [],
+    isVirtualized,
   };
 
-  // TODO get rid of the dynamic part using the `index`. We'll use the dynamic API instead
   const events = useEventMap(baseListEventMap, state, config, {
     registerItem({item, textValue}) {
       indexRef.current++;
@@ -258,6 +265,7 @@ export const useBaseListModel = <T extends unknown>(
     },
     unregisterItem({id}) {
       setStaticItems(items => {
+        // this extra `if` ensures reference stability for no-ops
         if (items.find(item => getId(item.value) === id)) {
           return items.filter(item => getId(item.value) !== id);
         } else {

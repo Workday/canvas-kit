@@ -231,11 +231,11 @@ export const TabsItem = createComponent('button')({
 
 export const useTabsItem = composeHooks(
   createHook(
-    (model: TabsModel, _?: React.Ref<HTMLButtonElement>, elemProps: {name?: string} = {}) => {
+    (model: TabsModel, _?: React.Ref<HTMLButtonElement>, elemProps: {'data-id'?: string} = {}) => {
       const {state} = model;
-      const name = elemProps.name || '';
+      const name = elemProps['data-id'] || '';
 
-      const selected = !!elemProps.name && isSelected(name, state);
+      const selected = !!elemProps['data-id'] && isSelected(name, state);
 
       return {
         type: 'button',

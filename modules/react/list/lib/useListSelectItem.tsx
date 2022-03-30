@@ -8,9 +8,9 @@ export const useListSelectItem = createHook(
   (
     {state, events}: SelectionListModel,
     _?: React.Ref<HTMLElement>,
-    elemProps: {name?: string} = {}
+    elemProps: {'data-id'?: string} = {}
   ) => {
-    const name = elemProps.name || '';
+    const name = elemProps['data-id'] || '';
     const onClick = (event: React.MouseEvent<HTMLElement>) => {
       if (
         state.nonInteractiveIds.includes(name) ||

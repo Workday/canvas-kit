@@ -62,7 +62,11 @@ const hasOwnKey = <T extends object>(obj: T, key: any): key is keyof T => obj.ha
  * @see https://www.w3.org/TR/wai-aria-practices/#kbd_roving_tabindex
  */
 export const useListRovingFocus = createHook(
-  ({state, events, getId, navigation}: CursorListModel, ref, elemProps: {name?: string} = {}) => {
+  (
+    {state, events, getId, navigation}: CursorListModel,
+    ref,
+    elemProps: {'data-id'?: string} = {}
+  ) => {
     // Tracks when this element has focus. If this item is removed while still focused, we have to
     // inform the model to move the cursor to the next item.
     const focusRef = React.useRef(false);
@@ -141,12 +145,12 @@ export const useListRovingFocus = createHook(
         focusRef.current = false;
       },
       onClick() {
-        events.goTo({id: elemProps.name!});
+        events.goTo({id: elemProps['data-id']!});
       },
-      id: `${state.id}-${elemProps.name}`,
+      id: `${state.id}-${elemProps['data-id']}`,
       tabIndex: !state.cursorId
         ? 0 // cursor isn't known yet, be safe and mark this as focusable
-        : !!elemProps.name && state.cursorId === elemProps.name
+        : !!elemProps['data-id'] && state.cursorId === elemProps['data-id']
         ? 0 // A name is known and cursor is here
         : -1, // A name is known an cursor is somewhere else
       ref,

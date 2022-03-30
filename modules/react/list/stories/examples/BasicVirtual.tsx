@@ -56,25 +56,52 @@ const Item = React.forwardRef(
 
 export const BasicVirtual = () => {
   const parentRef = React.useRef<HTMLDivElement>();
-  const virtual = useVirtual({
-    size: items.length,
-    parentRef,
-    // estimateSize: React.useCallback(() => 20, []),
-  });
-  const model = useListModel<Item>({
+  // const virtual = useVirtual({
+  //   size: items.length,
+  //   parentRef,
+  //   // estimateSize: React.useCallback(() => 20, []),
+  // });
+  const model = useListModel({
     items,
+    getId(item: Item) {
+      return item.id;
+    },
   });
 
-  React.useEffect(() => {
-    // get the index of the cursorId:
-    // const id = model.state.items.
-    virtual.scrollToIndex(Number(model.state.cursorId) - 1);
-    requestAnimationFrame(() => {
-      document
-        .querySelector<HTMLElement>(`[id="${model.state.id}-${model.state.cursorId}"]`)
-        ?.focus();
-    });
-  }, [model.state.cursorId]);
+  // React.useEffect(() => {
+  //   // get the index of the cursorId:
+  //   // const id = model.state.items.
+  //   virtual.scrollToIndex(Number(model.state.cursorId) - 1);
+  //   requestAnimationFrame(() => {
+  //     document
+  //       .querySelector<HTMLElement>(`[id="${model.state.id}-${model.state.cursorId}"]`)
+  //       ?.focus();
+  //   });
+  // }, [model.state.cursorId]);
+
+  console.log('virtualized', model.state.isVirtualized);
+
+  return (
+    <>
+      <div
+        ref={parentRef}
+        style={{
+          maxHeight: `350px`,
+          width: `300px`,
+          overflow: 'auto',
+        }}
+      >
+        <List model={model}>{(item: Item) => <Item>{item.text}</Item>}</List>
+      </div>
+      <ul>
+        <div>
+          <li>One</li>
+          <li>Two</li>
+        </div>
+      </ul>
+      <p>CursorId: {model.state.cursorId}</p>
+    </>
+  );
 
   return (
     <>
@@ -91,7 +118,7 @@ export const BasicVirtual = () => {
             return (
               <Item
                 ref={item.measureRef}
-                aria-setsize={items.length}
+                aria-setsize={item.size}
                 aria-posinset={item.index}
                 key={items[item.index].id}
                 name={items[item.index].id}
