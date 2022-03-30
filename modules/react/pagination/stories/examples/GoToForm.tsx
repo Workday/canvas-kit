@@ -33,7 +33,7 @@ export const GoToForm = () => {
         <Pagination.JumpToLastButton aria-label="Last" />
         <Pagination.GoToForm>
           <Pagination.GoToTextInput aria-label="Go to page number" />
-          <Pagination.GoToLabel>{({state}) => `of ${totalCount} results`}</Pagination.GoToLabel>
+          <Pagination.GoToLabel>{({state}) => `of ${state.lastPage} pages`}</Pagination.GoToLabel>
         </Pagination.GoToForm>
       </Pagination.Controls>
       <Pagination.AdditionalDetails shouldHideDetails>

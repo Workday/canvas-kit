@@ -1,3 +1,5 @@
+import screenfull from 'screenfull';
+
 /**
  * This type is purposely an interface so that it can be extended for a specific use-case.
  */
@@ -106,6 +108,7 @@ function getChildPopups(item: PopupStackItem, items: PopupStackItem[]): PopupSta
 
 interface Stack {
   items: PopupStackItem[];
+  container?: () => HTMLElement;
   zIndex: {
     min: number;
     max: number;
@@ -183,12 +186,22 @@ const setToWindow = (path: string, value: any) => {
 // defined on the page, we need to use that one. Never, ever, ever change this variable name on
 // window
 const stack: Stack = getFromWindow('workday.__popupStack') || {
-  description: 'Global popup stack from @workday/canvas-kit-popup-stack',
-  items: [] as PopupStackItem[],
+  description: 'Global popup stack from @workday/canvas-kit/popup-stack',
+  container: () => document.body,
+  items: [],
   zIndex: {min: 30, max: 50, getValue: getValue},
-  _adapter: {} as Partial<typeof PopupStack>,
+  _adapter: {},
 };
 setToWindow('workday.__popupStack', stack);
+
+const stacks: Stack[] = getFromWindow('workday.__popupStackOfStacks') || [stack];
+
+(stacks as any).description = 'Global stack of popup stacks from @workday/canvas-kit/popup-stack';
+setToWindow('workday.__popupStackOfStacks', stacks);
+
+function getTopStack() {
+  return stacks[stacks.length - 1];
+}
 
 export const PopupStack = {
   /**
@@ -198,6 +211,7 @@ export const PopupStack = {
    * should be added to this element.
    */
   createContainer(): HTMLElement {
+    const stack = getTopStack();
     if (stack._adapter?.createContainer) {
       return stack._adapter.createContainer();
     }
@@ -212,31 +226,40 @@ export const PopupStack = {
    * method when the event triggers.
    */
   add(item: PopupStackItem): void {
+    const stack = getTopStack();
     if (stack._adapter?.add) {
       stack._adapter.add(item);
       return;
     }
     stack.items.push(item);
-    document.body.appendChild(item.element);
+    (stack.container?.() || document.body).appendChild(item.element);
 
     setZIndexOfElements(PopupStack.getElements());
   },
 
   /**
-   * Removes an item from the stack by its `HTMLElement` reference. This should be called when a
-   * popup is "closed" or when the element is removed from the page entirely to ensure proper memory
-   * cleanup. This will not automatically be called when the element is removed from the DOM. Will
-   * reset z-index values of the stack
+   * Removes an item from a stack by its `HTMLElement` reference. This should be called when a popup
+   * is "closed" or when the element is removed from the page entirely to ensure proper memory
+   * cleanup. A popup will be removed from the stack it is a part of. This will not automatically be
+   * called when the element is removed from the DOM. This method will reset z-index values of the
+   * stack.
    */
   remove(element: HTMLElement): void {
-    if (stack._adapter?.remove) {
-      stack._adapter.remove(element);
-      return;
-    }
-    stack.items = stack.items.filter(item => item.element !== element);
-    document.body.removeChild(element);
+    // Find the stack the popup belongs to.
+    const stack = find(
+      stacks,
+      stack => !!find(PopupStack.getElements(stack), el => el === element)
+    );
+    if (stack) {
+      if (stack._adapter?.remove) {
+        stack._adapter.remove(element);
+        return;
+      }
+      stack.items = stack.items.filter(item => item.element !== element);
+      (stack.container?.() || document.body).removeChild(element);
 
-    setZIndexOfElements(PopupStack.getElements());
+      setZIndexOfElements(PopupStack.getElements(stack));
+    }
   },
 
   /**
@@ -245,6 +268,7 @@ export const PopupStack = {
    * reference that was passed to `add`
    */
   isTopmost(element: HTMLElement): boolean {
+    const stack = getTopStack();
     if (stack._adapter?.isTopmost) {
       return stack._adapter.isTopmost(element);
     }
@@ -261,7 +285,8 @@ export const PopupStack = {
    * elements in the order of lowest z-index to highest z-index. Some popup behaviors will need to
    * make decisions based on z-index order.
    */
-  getElements(): HTMLElement[] {
+  getElements(stackOverride?: Stack): HTMLElement[] {
+    const stack = stackOverride || getTopStack();
     if (stack._adapter?.getElements) {
       return stack._adapter.getElements();
     }
@@ -281,6 +306,7 @@ export const PopupStack = {
    * the top of the stack.
    */
   bringToTop(element: HTMLElement): void {
+    const stack = getTopStack();
     if (stack._adapter?.bringToTop) {
       stack._adapter.bringToTop(element);
       return;
@@ -320,6 +346,7 @@ export const PopupStack = {
    * is not inside `element`).
    */
   contains(element: HTMLElement, eventTarget: HTMLElement): boolean {
+    const stack = getTopStack();
     if (stack._adapter?.contains) {
       return stack._adapter.contains(element, eventTarget);
     }
@@ -344,6 +371,87 @@ export const PopupStack = {
     }
     return false;
   },
+
+  /**
+   * Add a new stack context for popups. This method could be called with the same element multiple
+   * times, but should only push a new stack context once. The most common use-case for calling
+   * `pushStackContext` is when entering fullscreen, but multiple fullscreen listeners could be
+   * pushing the same element which is very difficult to ensure only one stack is used. To mitigate,
+   * this method filters out multiple calls to push the same element as a new stack context.
+   */
+  pushStackContext(container: HTMLElement): void {
+    const stack = getTopStack();
+
+    if (stack._adapter?.pushStackContext) {
+      return stack._adapter.pushStackContext(container);
+    }
+    // Don't push if the container already exists. This removes duplicates
+    if (stack.container?.() === container) {
+      return;
+    }
+
+    const newStack: Stack = {
+      items: [],
+      zIndex: stack.zIndex,
+      container: () => container,
+      _adapter: {},
+    };
+    stacks.push(newStack);
+  },
+
+  /**
+   * Remove the topmost stack context. The stack context will only be removed if the top stack
+   * context container element matches to guard against accidental remove of other stack contexts
+   * you don't own.
+   */
+  popStackContext(container: HTMLElement): void {
+    const stack = getTopStack();
+
+    if (stack._adapter?.popStackContext) {
+      return stack._adapter.popStackContext(container);
+    }
+
+    if (stack.container?.() === container && stacks.length > 1) {
+      stacks.pop();
+    }
+  },
+
+  /**
+   * Transfer the popup stack item into the current popup stack context.
+   *
+   * An example might be a popup
+   * that is opened and an element goes into fullscreen. The default popup stack context is
+   * `document.body`, but the [Fullscreen
+   * API](https://developer.mozilla.org/en-US/docs/Web/API/Fullscreen_API) will only render elements
+   * that are children of the fullscreen element. If the popup isn't transferred to the current
+   * popup stack context, the popup will remain open, but will no longer be rendered. This method
+   * will transfer that popup to the fullscreen element so that it will render. Popups created while
+   * in a fullscreen context that need to be transferred back when fullscreen is exited should also
+   * call this method. While popups may still render when fullscreen is exited, popups will be
+   * members of different popup stack contexts which will cause unspecified results (like the escape
+   * key will choose the wrong popup as the "topmost").
+   */
+  transferToCurrentContext(item: PopupStackItem): void {
+    const stack = getTopStack();
+
+    if (stack._adapter?.transferToCurrentContext) {
+      return stack._adapter.transferToCurrentContext(item);
+    }
+
+    if (find(stack.items, i => i.element === item.element)) {
+      // The element is already in the stack, don't do anything
+      return;
+    }
+
+    // Try to find the element in existing stacks. If it exists, we need to first remove from that
+    // stack context
+    const oldStack = find(stacks, stack => !!find(stack.items, i => i.element === item.element));
+    if (oldStack) {
+      PopupStack.remove(item.element);
+    }
+
+    PopupStack.add(item);
+  },
 };
 
 /**
@@ -361,3 +469,23 @@ export function resetStack() {
 export const createAdapter = (adapter: Partial<typeof PopupStack>) => {
   stack._adapter = adapter;
 };
+
+// keep track of the element ourselves to avoid accidentally popping off someone else's stack
+// context
+let element: HTMLElement | null = null;
+
+// Where should this go? Each version of `PopupStack` on a page will add a listener. The
+// `PopupStack` should guard against multiple handlers like this simultaneously and there is no
+// lifecycle here.
+if (screenfull.isEnabled) {
+  screenfull.on('change', () => {
+    if (screenfull.isFullscreen) {
+      if (screenfull.element) {
+        element = screenfull.element as HTMLElement;
+        PopupStack.pushStackContext(element);
+      }
+    } else if (element) {
+      PopupStack.popStackContext(element);
+    }
+  });
+}

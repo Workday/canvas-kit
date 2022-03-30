@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
 import isPropValid from '@emotion/is-prop-valid';
-import {createComponent, StyledType} from '@workday/canvas-kit-react/common';
+import {createComponent, StyledType, useConstant} from '@workday/canvas-kit-react/common';
 
 // style props
 import {border, BorderStyleProps} from './utils/border';
@@ -22,13 +22,14 @@ export type BoxProps = BorderStyleProps &
     children?: React.ReactNode;
   };
 
-const omittedProps = ['display', 'color'];
+const omittedProps = ['display', 'color', 'height', 'overflow', 'width', 'border', 'background'];
 
 const shouldForwardProp = (prop: string) => {
   return isPropValid(prop) && !omittedProps.includes(prop);
 };
 
-const StyledBox = styled('div', {shouldForwardProp})<StyledType & BoxProps>(
+// Meant to be used with elements. The `shouldForwardProps` will remove all style props
+const StyledBoxElement = styled('div', {shouldForwardProp})<StyledType & BoxProps>(
   {
     boxSizing: 'border-box',
   },
@@ -41,6 +42,19 @@ const StyledBox = styled('div', {shouldForwardProp})<StyledType & BoxProps>(
   space
 );
 
+// Meant to be used with components. There is no `shouldForwardProps` - all props will be forwarded to the component
+const StyledBoxComponent = styled('div')<StyledType & BoxProps>(
+  {
+    boxSizing: 'border-box',
+  },
+  border,
+  color,
+  depth,
+  flexItem,
+  layout,
+  position,
+  space
+);
 /**
  * `Box` is a primitive component that provides a common, ergonomic API around Canvas design tokens.
  * It is highly flexible, and its primary purpose is to build other components.
@@ -61,10 +75,13 @@ const StyledBox = styled('div', {shouldForwardProp})<StyledType & BoxProps>(
 export const Box = createComponent('div')({
   displayName: 'Box',
   Component: ({children, ...elemProps}: BoxProps, ref, Element) => {
+    const BoxComponent = useConstant(() =>
+      typeof Element === 'string' ? StyledBoxElement : StyledBoxComponent
+    );
     return (
-      <StyledBox as={Element} ref={ref} {...elemProps}>
+      <BoxComponent as={Element} ref={ref} {...elemProps}>
         {children}
-      </StyledBox>
+      </BoxComponent>
     );
   },
 });

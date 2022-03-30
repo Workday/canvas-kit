@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-docs",
-  "version": "5.2.0",
+  "version": "6.7.1",
   "description": "Documentation components of Canvas Kit components",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -35,7 +35,8 @@
     "build:specs": "node ./utils/build-specifications.js",
     "build:downlevel-dts": "yarn run downlevel-dts dist ts3.5/dist",
     "build": "npm-run-all --parallel build:cjs build:es6 build:mdx --sequential build:specs build:downlevel-dts",
-    "depcheck": "node ../../utils/check-dependencies-exist.js"
+    "depcheck": "node ../../utils/check-dependencies-exist.js",
+    "typecheck:src": "tsc -p . --noEmit --incremental false"
   },
   "publishConfig": {
     "access": "public"
@@ -49,7 +50,7 @@
   ],
   "dependencies": {
     "@storybook/csf": "0.0.1",
-    "@workday/canvas-kit-react": "^5.2.0"
+    "@workday/canvas-kit-react": "^6.7.1"
   },
   "devDependencies": {
     "fs-extra": "^10.0.0",

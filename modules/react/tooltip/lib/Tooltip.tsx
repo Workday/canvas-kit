@@ -44,6 +44,14 @@ export interface TooltipProps extends Omit<React.HTMLAttributes<HTMLDivElement>,
    * @default 'label'
    */
   type?: 'label' | 'describe' | 'muted';
+  /**
+   * Amount of time (in ms) to delay before showing the tooltip
+   */
+  showDelay?: number;
+  /**
+   * Amount of time (in ms) to delay before hiding the tooltip
+   */
+  hideDelay?: number;
 }
 
 function mergeCallbacks<T extends {[key: string]: any}>(
@@ -66,10 +74,17 @@ export const Tooltip = ({
   placement = 'top',
   title,
   children,
+  showDelay = 300,
+  hideDelay = 100,
   ...elemProps
 }: TooltipProps) => {
   const titleText = innerText(title);
-  const {targetProps, popperProps, tooltipProps} = useTooltip({type, titleText});
+  const {targetProps, popperProps, tooltipProps} = useTooltip({
+    type,
+    titleText,
+    showDelay,
+    hideDelay,
+  });
 
   return (
     <React.Fragment>

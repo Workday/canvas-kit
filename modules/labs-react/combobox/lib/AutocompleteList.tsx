@@ -1,14 +1,16 @@
 import React, {Fragment, useState} from 'react';
 import styled from '@emotion/styled';
 import {space} from '@workday/canvas-kit-react/tokens';
-import {accessibleHide} from '@workday/canvas-kit-react/common';
+import {accessibleHide, generateUniqueId} from '@workday/canvas-kit-react/common';
 import {MenuItemProps} from '@workday/canvas-kit-preview-react/menu';
 import {ComboBoxMenuItemGroup, getOptionId, listBoxIdPart, getTextFromElement} from './Combobox';
-import uuid from 'uuid/v4';
 
 const Autocomplete = styled('ul')({
-  padding: 0,
-  margin: `${space.xxs} 0`,
+  margin: 0,
+  maxHeight: 200,
+  boxSizing: 'border-box',
+  overflowY: 'auto',
+  padding: `${space.xxs} 0`,
 });
 
 const AccessibleHide = styled('span')(accessibleHide);
@@ -52,7 +54,7 @@ const AutocompleteList = ({
   labelId,
   showGroupText,
 }: AutocompleteListProps) => {
-  const [randomComponentId] = useState(() => uuid()); // https://codesandbox.io/s/p2ndq
+  const [randomComponentId] = useState(generateUniqueId); // https://codesandbox.io/s/p2ndq
 
   const componentId = comboboxId || randomComponentId;
 

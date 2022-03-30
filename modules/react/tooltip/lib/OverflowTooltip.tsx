@@ -1,5 +1,4 @@
 import * as React from 'react';
-import innerText from 'react-innertext';
 
 import {getTransformFromPlacement, Placement, Popper} from '@workday/canvas-kit-react/popup';
 import {mergeCallback} from '@workday/canvas-kit-react/common';
@@ -11,7 +10,7 @@ import {useTooltip} from './useTooltip';
  * Look for an element within the tree for an overflow element (auto, scroll, clip, or hidden).
  * This could be the passed element, or a descendant. If no element is found, `null` is returned.
  */
-const findOverflowElement = (element: HTMLElement): HTMLElement | null => {
+export const findOverflowElement = (element: Element): Element | null => {
   const style = getComputedStyle(element);
   if (
     style.overflow === 'auto' ||
@@ -20,37 +19,41 @@ const findOverflowElement = (element: HTMLElement): HTMLElement | null => {
     style.overflow === 'hidden'
   ) {
     return element;
-  } else {
+  } else if (element.children) {
+    // `children` is not defined for SVGElement in IE11
     for (let i = 0; i < element.children.length; i++) {
-      const overflowElement = findOverflowElement(element.children[i] as HTMLElement);
+      const overflowElement = findOverflowElement(element.children[i]);
       if (overflowElement) {
         return overflowElement;
       }
     }
     return null;
   }
+  return null;
 };
 
 /**
  * Look for an element within the tree for a `text-overflow` CSS property of `ellipsis`.
  * This could be the passed element, or a descendant. If no element is found, `null` is returned.
  */
-const findEllipsisElement = (element: HTMLElement): HTMLElement | null => {
+export const findEllipsisElement = (element: Element): Element | null => {
   const style = getComputedStyle(element);
   if (style.textOverflow === 'ellipsis' || Number(style.webkitLineClamp) > 0) {
     return element;
-  } else {
+  } else if (element.children) {
+    // `children` is not defined for SVGElement in IE11
     for (let i = 0; i < element.children.length; i++) {
-      const overflowElement = findEllipsisElement(element.children[i] as HTMLElement);
+      const overflowElement = findEllipsisElement(element.children[i]);
       if (overflowElement) {
         return overflowElement;
       }
     }
     return null;
   }
+  return null;
 };
 
-const isOverflowed = (element: HTMLElement) => {
+const isOverflowed = (element: Element) => {
   const overflowElement = findEllipsisElement(element) || findOverflowElement(element);
 
   if (overflowElement) {
@@ -99,17 +102,21 @@ export const OverflowTooltip = ({
   children,
   ...elemProps
 }: OverflowTooltipProps) => {
-  const titleText = innerText(children);
-  const {targetProps, popperProps, tooltipProps} = useTooltip({type: 'label', titleText});
+  const [titleText, setTitleText] = React.useState('');
+  const {targetProps, popperProps, tooltipProps} = useTooltip({type: 'muted'});
 
-  const onMouseEnter = (event: React.MouseEvent<HTMLElement>) => {
-    if (isOverflowed(event.currentTarget)) {
-      targetProps.onMouseEnter(event);
+  const onMouseEnter = (event: React.MouseEvent) => {
+    const target = event.currentTarget;
+    setTitleText(target instanceof HTMLElement ? target.innerText : '');
+    if (isOverflowed(target)) {
+      targetProps.onMouseEnter(event as React.MouseEvent);
     }
   };
-  const onFocus = (event: React.FocusEvent<HTMLElement>) => {
-    if (isOverflowed(event.currentTarget)) {
-      targetProps.onFocus(event);
+  const onFocus = (event: React.FocusEvent) => {
+    const target = event.currentTarget;
+    setTitleText(target instanceof HTMLElement ? target.innerText : '');
+    if (isOverflowed(target)) {
+      targetProps.onFocus(event as React.FocusEvent);
     }
   };
 

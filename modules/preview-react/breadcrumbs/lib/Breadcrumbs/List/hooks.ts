@@ -15,8 +15,8 @@ export const useCollapse = <E extends HTMLElement>(listEl: React.RefObject<E>, m
 };
 
 const getBreadcrumbLink = (breadcrumb: React.ReactElement) => {
-  return Children.toArray(breadcrumb.props.children).filter((child: React.ReactElement) => {
-    return child.type === BreadcrumbLink;
+  return Children.toArray(breadcrumb.props.children).filter(child => {
+    return React.isValidElement(child) && child.type === BreadcrumbLink;
   })[0] as React.ReactElement;
 };
 
@@ -58,7 +58,7 @@ export const useBuildCollapsedList = <E extends HTMLElement>(
       // We should make this match work better
       const listItemNode = listItemNodes[index];
 
-      // We might need to allow folks to spead more props from the link
+      // We might need to allow folks to spread more props from the link
       listItems.push({
         index: index, // TODO: use unique identifiers instead of indices
         link: breadcrumbLink?.props?.href || '',
@@ -70,8 +70,8 @@ export const useBuildCollapsedList = <E extends HTMLElement>(
 
     // don't collapse the root breadcrumb
     const collapsibleListItems = listItems.slice(1);
-    const collaspedList = buildCollapsedList(collapsibleListItems, containerWidth, maxWidth);
-    setCollapsedItems(collaspedList);
+    const collapsedList = buildCollapsedList(collapsibleListItems, containerWidth, maxWidth);
+    setCollapsedItems(collapsedList);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [maxWidth]);
 

@@ -1,11 +1,9 @@
 import React from 'react';
 import {storiesOf} from '@storybook/react';
-import withReadme from 'storybook-readme/with-readme';
-import README from './README.md';
 import './index.scss';
 
 storiesOf('Tokens/Core/CSS', module)
-  .addDecorator(withReadme(README))
+  .addParameters({ReadmePath: 'css/core'})
   .add('Typography', () => {
     const inverseStyle = {
       display: 'inline-block',
@@ -76,7 +74,7 @@ storiesOf('Tokens/Core/CSS', module)
   });
 
 storiesOf('Tokens/Core/CSS', module)
-  .addDecorator(withReadme(README))
+  .addParameters({ReadmePath: 'css/core'})
   .add('Depth', () => {
     const cardStyle = {
       width: 200,
@@ -112,7 +110,7 @@ storiesOf('Tokens/Core/CSS', module)
   });
 
 storiesOf('Tokens/Core/CSS', module)
-  .addDecorator(withReadme(README))
+  .addParameters({ReadmePath: 'css/core'})
   .add('Accessibility', () => (
     <div className="story">
       <div className="wdc-type">

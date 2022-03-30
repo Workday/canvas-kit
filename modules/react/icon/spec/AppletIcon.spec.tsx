@@ -1,7 +1,8 @@
 import * as React from 'react';
-import {mount} from 'enzyme';
-import AppletIcon, {appletIconStyles} from '../lib/AppletIcon';
+import {render} from '@testing-library/react';
+
 import {benefitsIcon} from '@workday/canvas-applet-icons-web';
+import AppletIcon, {appletIconStyles} from '../lib/AppletIcon';
 
 describe('Applet Icon', () => {
   test('Throws error if using unofficial color names', () => {
@@ -16,10 +17,10 @@ describe('Applet Icon', () => {
     expect(iconOfUnknownColor).toThrow();
   });
 
-  test('AppletIcon should spread extra props', () => {
-    const component = mount(<AppletIcon icon={benefitsIcon} data-propspread="test" />);
-    const container = component.at(0).getDOMNode();
-    expect(container.getAttribute('data-propspread')).toBe('test');
-    component.unmount();
+  it('should render extra props to containing element', () => {
+    const {container} = render(<AppletIcon icon={benefitsIcon} data-propspread="test" />);
+
+    // containing element is not a semantic element
+    expect(container.firstChild).toHaveAttribute('data-propspread', 'test');
   });
 });

@@ -3,7 +3,15 @@ import styled from '@emotion/styled';
 import {colors, gradients, space, type} from '@workday/canvas-kit-react/tokens';
 import {IconButton, IconButtonProps} from '@workday/canvas-kit-react/button';
 
-export interface PageHeaderProps {
+/**
+ * ### Deprecated Page Header Props
+ *
+ * As of Canvas Kit v6, PageHeader is being soft-deprecated.
+ * It will be hard-deprecated (completely removed) in v7. Please see the
+ * [migration guide](https://workday.github.io/canvas-kit/?path=/story/welcome-migration-guides-v6-0--page)
+ * for more information.
+ */
+export interface DeprecatedPageHeaderProps {
   /**
    * The text of the PageHeader title.
    */
@@ -28,7 +36,7 @@ const Header = styled('header')({
   MozOsxFontSmoothing: 'grayscale',
 });
 
-const Container = styled('div')<Pick<PageHeaderProps, 'breakpoint' | 'capWidth'>>(
+const Container = styled('div')<Pick<DeprecatedPageHeaderProps, 'breakpoint' | 'capWidth'>>(
   {
     display: 'flex',
     alignItems: 'center',
@@ -68,7 +76,24 @@ const IconList = styled('div')({
   },
 });
 
-export default class PageHeader extends React.Component<PageHeaderProps> {
+/**
+ * ### Deprecated Page Header
+ *
+ * As of Canvas Kit v6, this component is being soft-deprecated.
+ * It will be hard-deprecated (completely removed) in v7. Please see the
+ * [migration guide](https://workday.github.io/canvas-kit/?path=/story/welcome-migration-guides-v6-0--page)
+ * for more information.
+ */
+export default class DeprecatedPageHeader extends React.Component<DeprecatedPageHeaderProps> {
+  componentDidMount() {
+    console.warn(
+      `This component is being deprecated and will be removed in Canvas Kit V7.\n
+      For more information, please see the V6 migration guide:\n
+      https://workday.github.io/canvas-kit/?path=/story/welcome-migration-guides-v6-0--page
+      `
+    );
+  }
+
   private renderChildren(children: React.ReactNode): React.ReactNode {
     return React.Children.map(children, child => {
       if (!React.isValidElement(child)) {

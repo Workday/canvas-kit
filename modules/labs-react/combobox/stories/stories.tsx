@@ -1,14 +1,10 @@
-/// <reference path="../../../../typings.d.ts" />
 import React, {useState, ReactNode, ReactElement, FC, ChangeEvent} from 'react';
 import {storiesOf} from '@storybook/react';
-import withReadme from 'storybook-readme/with-readme';
-import {withKnobs} from '@storybook/addon-knobs';
 
 import {Combobox, ComboboxProps, ComboBoxMenuItemGroup} from '@workday/canvas-kit-labs-react';
 import FormField from '@workday/canvas-kit-react/form-field';
 import {MenuItem, MenuItemProps} from '@workday/canvas-kit-preview-react/menu';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
-import README from '../README.md';
 import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
 
 const autocompleteResult = (
@@ -39,7 +35,7 @@ const groupOfResults = (
       <strong>{groupHeading}</strong>
     </MenuItem>
   ),
-  items: simpleAutoComplete(count, showDisabledItems, 3),
+  items: simpleAutoComplete(count, showDisabledItems, 10),
 });
 
 export const Autocomplete: FC<Omit<ComboboxProps, 'children'> & {
@@ -63,7 +59,7 @@ export const Autocomplete: FC<Omit<ComboboxProps, 'children'> & {
               groupOfResults(groupLength, showDisabledItems, <em>Animals</em>),
               groupOfResults(Math.min(1, groupLength), showDisabledItems, 'Cars'),
             ]
-          : simpleAutoComplete(textLength, showDisabledItems)
+          : simpleAutoComplete(textLength, showDisabledItems, 10)
       }
       onChange={autocompleteCallback}
       showClearButton={showClearButton == null ? true : showClearButton}
@@ -78,8 +74,7 @@ export const Autocomplete: FC<Omit<ComboboxProps, 'children'> & {
 
 storiesOf('Labs/Combobox/React', module)
   .addParameters({component: Combobox})
-  .addDecorator(withReadme(README))
-  .addDecorator(withKnobs)
+  .addParameters({ReadmePath: 'labs-react/combobox'})
   .add('Autocomplete', () => (
     <FormField id="autocomplete-123" label="Autocomplete example">
       <Autocomplete />

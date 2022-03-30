@@ -5,34 +5,42 @@ import {
   ToModelConfig,
   useEventMap,
   useUniqueId,
+  assert,
 } from '@workday/canvas-kit-react/common';
 
-export type Item = {
-  /** IDREF of the list. Children ids can be derived from this id */
-  id: string;
-  ref: React.RefObject<HTMLElement>;
-};
-
-export type ListState = {
+export type ListState<T = unknown> = {
   /** IDREF of the list. Children ids can be derived from this id */
   id: string;
   /** Used as an auto-incrementing ID for accessibility */
   indexRef: React.RefObject<number>;
-  items: Item[];
+  items: T[];
+  /**
+   * An array of ids of non-interactive elements. Non-interactive elements usually have `disabled`
+   * applied to them and thus are not focusable by the browser. Lists need to know about these so
+   * that keyboard navigation properly skips over these items. Interactive elements that are
+   * disabled should use `[aria-disabled]` instead and should still receive focus.
+   * @see https://www.w3.org/TR/wai-aria-practices-1.1/#kbd_disabled_controls
+   */
+  nonInteractiveIds: string[];
 };
 
-export type ListEvents = {
+export type ListEvents<T = unknown> = {
   /** Register an item to the list. Takes in an identifier, a React.Ref and an optional index. This should be called on
    * component mount */
-  registerItem(data: {item: Item; index?: number}): void;
+  registerItem(data: {item: T; index?: number}): void;
   /** Unregister an item by its identifier. This should be called when the component is unmounted */
   unregisterItem(data: {id: string}): void;
   /** Updates the position of a tab within the list. This should be called when a tab's index is updated */
   updateItemPosition(data: {id: string; index: number}): void;
 };
 
-export type ListModel = Model<ListState, ListEvents>;
+export interface ListModel<T = unknown> extends Model<ListState<T>, ListEvents<T>> {
+  getId: (item: T) => string;
+}
 
+// We don't have a way of knowing what the generic could be, so we leave it as `unknown`. It will
+// probably need to be cast to the generic in use inside extending models. This will not effect the
+// use of the model in an application, only in models composing this model.
 export const listEventMap = createEventMap<ListEvents>()({
   guards: {
     /**
@@ -76,20 +84,37 @@ export const listEventMap = createEventMap<ListEvents>()({
   },
 });
 
-export type BaseListModelConfig = {
+export type BaseListModelConfig<T = unknown> = {
   /** IDREF of the list. Children ids can be derived from this id */
   id?: string;
+  items?: T[];
+  getId?: (item: T) => string;
+  /**
+   * Array of all ids which are currently disabled
+   */
+  nonInteractiveIds?: string[];
 };
 
-export type ListModelConfig = BaseListModelConfig &
-  Partial<ToModelConfig<ListState, ListEvents, typeof listEventMap>>;
+export type ListModelConfig<T> = BaseListModelConfig<T> &
+  Partial<ToModelConfig<ListState<T>, ListEvents<T>, typeof listEventMap>>;
 
-export const useListModel = (config: ListModelConfig = {}): ListModel => {
+export const defaultGetId = (item: any): string => {
+  assert(item.id, 'A list item must have an `id` field or a `getId` function defined');
+  return item.id;
+};
+
+export const useListModel = <T extends unknown>(config: ListModelConfig<T> = {}): ListModel<T> => {
   const id = useUniqueId(config.id);
   const indexRef = React.useRef(0);
-  const [items, setItems] = React.useState([] as Item[]);
+  const [items, setItems] = React.useState(config.items || []);
+  const getId = config.getId || defaultGetId;
 
-  const state = {id, items, indexRef};
+  const state = {
+    id,
+    items: config.items || items,
+    indexRef,
+    nonInteractiveIds: config.nonInteractiveIds || [],
+  };
 
   const events = useEventMap(listEventMap, state, config, {
     registerItem({item, index}) {
@@ -105,8 +130,8 @@ export const useListModel = (config: ListModelConfig = {}): ListModel => {
     },
     unregisterItem({id}) {
       setItems(items => {
-        if (items.find(item => item.id === id)) {
-          return items.filter(item => item.id !== id);
+        if (items.find(item => getId(item) === id)) {
+          return items.filter(item => getId(item) !== id);
         } else {
           return items;
         }
@@ -114,12 +139,12 @@ export const useListModel = (config: ListModelConfig = {}): ListModel => {
     },
     updateItemPosition({id, index}) {
       setItems(items => {
-        const copy = items.filter(item => item.id !== id);
-        copy.splice(index, 0, items.find(item => item.id === id)!);
+        const copy = items.filter(item => getId(item) !== id);
+        copy.splice(index, 0, items.find(item => getId(item) === id)!);
         return copy;
       });
     },
-  });
+  } as ListEvents<T>);
 
-  return {state, events};
+  return {state, events, getId};
 };

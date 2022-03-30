@@ -7,11 +7,11 @@ implement user experiences consistent with
 <a href="./LICENSE">
   <img src="https://img.shields.io/badge/license-Apache--2.0-blue.svg" alt="Workday Canvas Kit is released under the Apache-2.0 license" />
 </a>
-<a href="https://travis-ci.org/Workday/canvas-kit">
-  <img src="https://travis-ci.com/Workday/canvas-kit.svg?token=oZpr7hcrwxtuCsrBb5dT&branch=master" alt="Travis CI">
-</a>
 <a href="https://lerna.js.org">
   <img src="https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg" alt="Maintained with Lerna" />
+</a>
+<a href="https://github.com/Workday/canvas-kit/actions/workflows/release.yml">
+  <img alt="Release" src="https://github.com/Workday/canvas-kit/actions/workflows/release.yml/badge.svg">
 </a>
 <a href="./modules/docs/mdx/CONTRIBUTING.mdx">
   <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs welcome" />
@@ -19,8 +19,8 @@ implement user experiences consistent with
 
 ---
 
-**:white_check_mark: For a list of available react modules see
-[Canvas Kit Component Status](./modules/docs/mdx/COMPONENT_STATUS.mdx)**
+_For a list of available react modules see
+[Canvas Kit Component Status](./modules/docs/mdx/COMPONENT_STATUS.mdx)_
 
 ## Getting started
 
@@ -86,7 +86,7 @@ inline icons. Process your SASS through PostCSS once it has been compiled to CSS
 
 If you spot a bug, inconsistency, or typo, please
 [open a bug issue](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md).
-Better yet, submit a pull request to addresses it.
+Better yet, submit a pull request to address it.
 
 ## Feature Requests
 
@@ -114,6 +114,23 @@ Canvas Kit follows [semantic versioning](https://semver.org/) and is enforced au
 
 Each module is independently versioned using [Lerna](https://github.com/lerna/lerna).
 
+## Version Support
+
+At any given time, we support three major versions of Canvas Kit: previous, current, and next. Each
+of these have different levels of support.
+
+The previous major version is stable for production and will receive patch updates as needed, but
+there will be no new features added. Patch releases are automatically deployed upon merge by GitHub
+Actions.
+
+The current major version is also stable and receives new feature and patch updates. Patch releases
+are automatically deployed upon merge by GitHub Actions, and minor releases are manually deployed at
+the end of each sprint.
+
+The next major version is typically an unstable environment and has major breaking changes. You are
+welcome to pull this version down for local development and experimentation, but we generally
+recommend against using it in production until the first stable version has been released.
+
 ## Developer Documentation
 
 - [Contributing](./modules/docs/mdx/CONTRIBUTING.mdx)
@@ -122,6 +139,7 @@ Each module is independently versioned using [Lerna](https://github.com/lerna/le
 - Migration Guides:
   - [v4.0 Migration Guide](./modules/docs/mdx/4.0-MIGRATION-GUIDE.mdx)
   - [v5.0 Migration Guide](./modules/docs/mdx/5.0-MIGRATION-GUIDE.mdx)
+  - [v6.0 Migration Guide](./modules/docs/mdx/6.0-MIGRATION-GUIDE.mdx)
 - Code Style / Best Practices:
   - [API & Pattern Guidelines](./modules/docs/mdx/API_PATTERN_GUIDELINES.mdx)
   - [Compound Components](./modules/docs/mdx/COMPOUND_COMPONENTS.mdx)
@@ -145,4 +163,4 @@ The Workday Canvas Kits are licensed under the Apache 2.0 License.
 
 Visual Testing by [ChromaticQA](https://www.chromaticqa.com/)
 
-Builds by [TravisCI](https://www.chromaticqa.com/)
+Builds by [Github Actions](https://docs.github.com/en/actions)

@@ -1,10 +1,11 @@
 import * as React from 'react';
-import uuid from 'uuid/v4';
 import {
   useCloseOnEscape,
   useAlwaysCloseOnOutsideClick,
   usePopupModel,
+  useCloseOnFullscreenExit,
 } from '@workday/canvas-kit-react/popup';
+import {useUniqueId} from '@workday/canvas-kit-react/common';
 
 const useIntentTimer = (fn: Function, waitMs: number = 0): {start(): void; clear(): void} => {
   const timer = React.useRef() as React.MutableRefObject<number | undefined>;
@@ -31,7 +32,7 @@ const useIntentTimer = (fn: Function, waitMs: number = 0): {start(): void; clear
   };
 };
 
-const isInteractiveElement = (element: HTMLElement) => {
+const isInteractiveElement = (element: Element) => {
   const tagName = element.tagName.toLowerCase();
   const tabIndex = element.getAttribute('tabindex');
 
@@ -51,9 +52,11 @@ const isInteractiveElement = (element: HTMLElement) => {
  * Convenience hook for creating components with tooltips. It will return an object of properties to mix
  * into a target, popper and tooltip
  */
-export function useTooltip<T extends HTMLElement = HTMLElement>({
+export function useTooltip<T extends Element = Element>({
   type = 'label',
   titleText = '',
+  showDelay = 300,
+  hideDelay = 100,
 }: {
   /**
    * Determines the tooltip type for accessibility.
@@ -76,25 +79,38 @@ export function useTooltip<T extends HTMLElement = HTMLElement>({
    * The content of the `aria-label` if `type` is `label.
    */
   titleText?: string;
+  /**
+   * Amount of time (in ms) to delay before showing the tooltip
+   */
+  showDelay?: number;
+  /**
+   * Amount of time (in ms) to delay before hiding the tooltip
+   */
+  hideDelay?: number;
 } = {}) {
   const mouseDownRef = React.useRef(false); // use to prevent newly focused from making tooltip flash
   const popupModel = usePopupModel();
   const [anchorElement, setAnchorElement] = React.useState<T | null>(null);
-  const [id] = React.useState(() => uuid());
+  const id = useUniqueId();
+  const intentTimerHide = useIntentTimer(popupModel.events.hide, hideDelay);
+  const intentTimerShow = useIntentTimer(popupModel.events.show, showDelay);
 
-  const intentTimer = useIntentTimer(popupModel.events.hide, 100);
-
-  const onOpen = () => {
-    popupModel.events.show();
-    intentTimer.clear();
+  const onHide = () => {
+    intentTimerHide.start();
+    intentTimerShow.clear();
   };
 
-  const onOpenFromTarget = (event: React.SyntheticEvent<HTMLElement>) => {
+  const onOpen = () => {
+    intentTimerShow.start();
+    intentTimerHide.clear();
+  };
+
+  const onOpenFromTarget = (event: React.SyntheticEvent) => {
     setAnchorElement(event.currentTarget as T);
     onOpen();
   };
 
-  const onFocus = (event: React.FocusEvent<HTMLElement>) => {
+  const onFocus = (event: React.FocusEvent) => {
     if (!mouseDownRef.current) {
       onOpenFromTarget(event);
     }
@@ -102,7 +118,7 @@ export function useTooltip<T extends HTMLElement = HTMLElement>({
     mouseDownRef.current = false;
   };
 
-  const onMouseDown = (event: React.MouseEvent<HTMLElement>) => {
+  const onMouseDown = (event: React.MouseEvent) => {
     mouseDownRef.current = true;
     if (isInteractiveElement(event.currentTarget)) {
       popupModel.events.hide();
@@ -111,6 +127,7 @@ export function useTooltip<T extends HTMLElement = HTMLElement>({
 
   useCloseOnEscape(popupModel);
   useAlwaysCloseOnOutsideClick(popupModel);
+  useCloseOnFullscreenExit(popupModel);
 
   const visible = popupModel.state.visibility !== 'hidden';
 
@@ -122,10 +139,10 @@ export function useTooltip<T extends HTMLElement = HTMLElement>({
       // This will replace the accessible name of the target element
       'aria-label': type === 'label' ? titleText : undefined,
       onMouseEnter: onOpenFromTarget,
-      onMouseLeave: intentTimer.start,
+      onMouseLeave: onHide,
       onMouseDown,
       onFocus,
-      onBlur: intentTimer.start,
+      onBlur: onHide,
     },
     /** Mix these properties into the `Popper` component */
     popperProps: {
@@ -138,7 +155,7 @@ export function useTooltip<T extends HTMLElement = HTMLElement>({
       id: type === 'describe' && visible ? id : undefined,
       role: 'tooltip',
       onMouseEnter: onOpen,
-      onMouseLeave: intentTimer.start,
+      onMouseLeave: onHide,
     },
   };
 }

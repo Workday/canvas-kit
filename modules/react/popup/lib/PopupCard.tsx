@@ -2,7 +2,7 @@ import * as React from 'react';
 import {keyframes} from '@emotion/core';
 
 import {Card} from '@workday/canvas-kit-react/card';
-import {space} from '@workday/canvas-kit-react/tokens';
+import {space, type} from '@workday/canvas-kit-react/tokens';
 import {
   styled,
   TransformOrigin,
@@ -42,36 +42,25 @@ const popupAnimation = (transformOrigin: TransformOrigin) => {
 
 const StyledPopupCard = styled(Card)<
   StyledType & {width?: number | string; transformOrigin?: TransformOrigin}
->(
-  {
-    position: 'relative',
-    maxWidth: `calc(100vw - ${space.l})`,
-  },
-  ({width}) => width && {width},
-  ({transformOrigin}) => {
-    if (transformOrigin == null) {
-      return {};
-    }
-    return {
-      animation: popupAnimation(transformOrigin),
-      animationDuration: '150ms',
-      animationTimingFunction: 'ease-out',
-      transformOrigin: `${transformOrigin.vertical} ${transformOrigin.horizontal}`,
-      // Allow overriding of animation in special cases
-      '.wd-no-animation &': {
-        animation: 'none',
-      },
-    };
+>(type.levels.subtext.large, ({transformOrigin}) => {
+  if (transformOrigin == null) {
+    return {};
   }
-);
+  return {
+    animation: popupAnimation(transformOrigin),
+    animationDuration: '150ms',
+    animationTimingFunction: 'ease-out',
+    transformOrigin: `${transformOrigin.vertical} ${transformOrigin.horizontal}`,
+    // Allow overriding of animation in special cases
+    '.wd-no-animation &': {
+      animation: 'none',
+    },
+  };
+});
 
 export const PopupCard = createComponent('div')({
   displayName: 'Popup.Card',
-  Component: (
-    {children, model, padding = 'l', depth = 2, width, ...elemProps}: PopupCardProps,
-    ref,
-    Element
-  ) => {
+  Component: ({children, model, ...elemProps}: PopupCardProps, ref, Element) => {
     const localModel = useModelContext(PopupModelContext, model);
     const props = usePopupCard(localModel, elemProps, ref);
     const transformOrigin = React.useMemo(() => {
@@ -82,12 +71,13 @@ export const PopupCard = createComponent('div')({
       <StyledPopupCard
         as={Element}
         transformOrigin={transformOrigin}
-        depth={depth}
-        width={width}
-        padding={padding}
+        position="relative"
+        padding="l"
+        depth={2}
+        maxWidth={`calc(100vw - ${space.l})`}
         {...props}
       >
-        <Card.Body>{children}</Card.Body>
+        {children}
       </StyledPopupCard>
     );
   },
