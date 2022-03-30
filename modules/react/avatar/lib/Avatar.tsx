@@ -139,7 +139,7 @@ const Avatar: AvatarOverload = React.forwardRef(
       }
     };
 
-    React.useEffect(() => {
+    React.useLayoutEffect(() => {
       setImageLoaded(false);
     }, [url]);
 
