@@ -3,11 +3,99 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v6.4.2](https://github.com/Workday/canvas-kit/releases/tag/v6.4.2) (2022-02-15)
+
+### Components
+
+- fix(tabs): Add back the extending bottom border ([#1474](https://github.com/Workday/canvas-kit/pull/1474)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v6.4.1](https://github.com/Workday/canvas-kit/releases/tag/v6.4.1) (2022-02-14)
+
+
+
+
+## [v6.4.0](https://github.com/Workday/canvas-kit/releases/tag/v6.4.0) (2022-02-12)
+
+### Components
+
+- fix(popup): Restore overflow y and x with `useDisableBodyScroll` ([#1470](https://github.com/Workday/canvas-kit/pull/1470)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+### Documentation
+
+- docs(switch): Fix error switch example id ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v5.3.11](https://github.com/Workday/canvas-kit/releases/tag/v5.3.11) (2022-02-11)
+
+### Components
+
+- fix(popup): Restore overflow y and x with `useDisableBodyScroll` ([#1470](https://github.com/Workday/canvas-kit/pull/1470)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+## [v6.3.11](https://github.com/Workday/canvas-kit/releases/tag/v6.3.11) (2022-02-11)
+
+### Documentation
+
+- docs: Correct typo in README file ([#1464](https://github.com/Workday/canvas-kit/pull/1464)) ([@mani11](https://github.com/mani11))
+
+
+## [v5.3.10](https://github.com/Workday/canvas-kit/releases/tag/v5.3.10) (2022-02-09)
+
+### Documentation
+
+- docs(switch): Fix error switch example id ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v6.3.10](https://github.com/Workday/canvas-kit/releases/tag/v6.3.10) (2022-02-08)
+
+### Documentation
+
+- docs(side-panel): Fix padding in header ([#1459](https://github.com/Workday/canvas-kit/pull/1459)) ([@emroller16](https://github.com/emroller16))
+
+
+## [v6.3.9](https://github.com/Workday/canvas-kit/releases/tag/v6.3.9) (2022-02-01)
+
+### Components
+
+- fix(popup-stack): Fix popup element removal when adapter is used ([#1450](https://github.com/Workday/canvas-kit/pull/1450)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v6.3.8](https://github.com/Workday/canvas-kit/releases/tag/v6.3.8) (2022-02-01)
+
+
+
+
+## [v6.3.7](https://github.com/Workday/canvas-kit/releases/tag/v6.3.7) (2022-01-27)
+
+### Components
+
+- fix(preview): Preview FormField.Hint error text not the correct color ([#1445](https://github.com/Workday/canvas-kit/pull/1445)) ([@vibdev](https://github.com/vibdev))
+
+
+## [v6.3.6](https://github.com/Workday/canvas-kit/releases/tag/v6.3.6) (2022-01-20)
+
+### Documentation
+
+- docs: Add examples for Select and TextInput with Formik ([#1435](https://github.com/Workday/canvas-kit/pull/1435)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
+## [v6.3.5](https://github.com/Workday/canvas-kit/releases/tag/v6.3.5) (2022-01-19)
+
+
+
+
 ## [v6.3.4](https://github.com/Workday/canvas-kit/releases/tag/v6.3.4) (2022-01-19)
 
 ### Components
 
 - fix(popup): Fix body scrolling using useInitialFocus ([#1415](https://github.com/Workday/canvas-kit/pull/1415)) ([@NicholasBoll](https://github.com/NicholasBoll))
+- fix: Allow repositioning of PopperJS instances ([#1424](https://github.com/Workday/canvas-kit/pull/1424)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v5.3.9](https://github.com/Workday/canvas-kit/releases/tag/v5.3.9) (2022-01-19)
+
+### Components
+
 - fix: Allow repositioning of PopperJS instances ([#1424](https://github.com/Workday/canvas-kit/pull/1424)) ([@NicholasBoll](https://github.com/NicholasBoll))
 
 ## [v6.3.3](https://github.com/Workday/canvas-kit/releases/tag/v6.3.3) (2022-01-14)

@@ -21,6 +21,15 @@ describe('SearchForm', () => {
     expect(screen.getByRole('combobox', {name: inputLabelText})).toHaveFocus();
   });
 
+  test('Searching empty string should call callback, when allowEmptyStringSearch is true', () => {
+    const role = `search`;
+    render(<SearchForm onSubmit={cb} allowEmptyStringSearch={true} />);
+
+    fireEvent.submit(screen.getByRole(role));
+
+    expect(cb).toHaveBeenCalledTimes(1);
+  });
+
   test('Searching something should call callback', () => {
     const role = `search`;
     render(<SearchForm onSubmit={cb} initialValue="hello" />);

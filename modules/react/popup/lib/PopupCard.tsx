@@ -1,8 +1,8 @@
 import * as React from 'react';
-import {keyframes} from '@emotion/core';
+import {keyframes} from '@emotion/react';
 
 import {Card} from '@workday/canvas-kit-react/card';
-import {space, type} from '@workday/canvas-kit-react/tokens';
+import {space, type, CanvasSpaceKeys} from '@workday/canvas-kit-react/tokens';
 import {
   styled,
   TransformOrigin,
@@ -11,12 +11,14 @@ import {
   StyledType,
   useModelContext,
   ExtractProps,
+  useConstant,
 } from '@workday/canvas-kit-react/common';
+import {Stack, StackStyleProps} from '@workday/canvas-kit-react/layout';
 
 import {getTransformFromPlacement} from './getTransformFromPlacement';
 import {usePopupCard, PopupModel, PopupModelContext} from './hooks';
 
-export interface PopupCardProps extends ExtractProps<typeof Card, never> {
+export interface PopupCardProps extends ExtractProps<typeof Card, never>, Partial<StackStyleProps> {
   /**
    * Optionally pass a model directly to this component. Default is to implicitly use the same
    * model as the container component which uses React context. Only use this for advanced use-cases
@@ -67,14 +69,26 @@ export const PopupCard = createComponent('div')({
       return getTransformFromPlacement(localModel.state.placement || 'bottom');
     }, [localModel.state.placement]);
 
+    // As is a Stack that will render an element of `Element`
+    const As = useConstant(() => Stack.as(Element));
+
     return (
       <StyledPopupCard
-        as={Element}
+        as={As}
         transformOrigin={transformOrigin}
         position="relative"
         padding="l"
         depth={2}
         maxWidth={`calc(100vw - ${space.l})`}
+        spacing={0}
+        flexDirection="column"
+        minHeight={0}
+        maxHeight={`calc(100vh - ${
+          elemProps.margin
+            ? space[elemProps.margin as CanvasSpaceKeys] || elemProps.margin
+            : space.xl
+        } * 2)`}
+        overflowY="auto" // force IE11 to limit the flex size of the card. Without this, the body isn't allowed to overflow properly: https://github.com/philipwalton/flexbugs/issues/216#issuecomment-453053557
         {...props}
       >
         {children}

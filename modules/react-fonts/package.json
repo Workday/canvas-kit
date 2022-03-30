@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-react-fonts",
-  "version": "6.3.4",
+  "version": "6.4.2",
   "description": "Fonts for canvas-kit-react",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -49,6 +49,7 @@
     "react": "^16.8 || ^17.0"
   },
   "dependencies": {
-    "@emotion/core": "^10.0.28"
+    "@emotion/react": "^11.7.1",
+    "@emotion/styled": "^11.6.0"
   }
 }

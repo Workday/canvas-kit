@@ -1,8 +1,8 @@
-/** @jsx jsx */
-import {CSSObject, jsx, ClassNames} from '@emotion/core';
+import {CSSObject} from '@emotion/styled';
 import * as React from 'react';
 import {CanvasIcon, CanvasIconTypes} from '@workday/design-assets-types';
 import {validateIconType} from './utils';
+import {styled} from '@workday/canvas-kit-react/common';
 
 export interface SvgProps extends React.HTMLAttributes<HTMLSpanElement> {
   src: CanvasIcon;
@@ -16,9 +16,20 @@ export interface SvgProps extends React.HTMLAttributes<HTMLSpanElement> {
   shouldMirror?: boolean;
 }
 
+const StyledIconSpan = styled('span')<Pick<SvgProps, 'shouldMirror' | 'styles'>>(
+  {
+    display: 'inline-block',
+    '> svg': {display: 'block'},
+  },
+  ({shouldMirror, styles}) => ({
+    transform: shouldMirror ? 'scaleX(-1)' : undefined,
+    ...styles,
+  })
+);
+
 export default class Svg extends React.Component<SvgProps> {
   public render() {
-    const {src, styles, type, iconRef, shouldMirror, ...elemProps} = this.props;
+    const {src, type, iconRef, ...elemProps} = this.props;
 
     // Validation for JS
     try {
@@ -29,25 +40,7 @@ export default class Svg extends React.Component<SvgProps> {
     }
 
     return (
-      <ClassNames>
-        {({css, cx}) => (
-          <span
-            {...elemProps}
-            dangerouslySetInnerHTML={{__html: src.svg}}
-            // Need to combine iconStyle with the className prop, otherwise we'll clobber it
-            // (we'll need to do something like this for each HTML <span> prop we explicitly set in this component)
-            className={cx(
-              css(styles, {
-                display: 'inline-block',
-                '& svg': {display: 'block'},
-                transform: shouldMirror ? 'scaleX(-1)' : undefined,
-              }),
-              elemProps.className
-            )}
-            ref={iconRef}
-          />
-        )}
-      </ClassNames>
+      <StyledIconSpan {...elemProps} dangerouslySetInnerHTML={{__html: src.svg}} ref={iconRef} />
     );
   }
 }

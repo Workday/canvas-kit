@@ -14,8 +14,8 @@
     "@babel/preset-typescript": "^7.1.0",
     "@commitlint/cli": "^8.3.5",
     "@commitlint/config-conventional": "^8.1.0",
-    "@emotion/is-prop-valid": "^0.8.2",
-    "@emotion/styled-base": "^10.0.27",
+    "@emotion/eslint-plugin": "^11.7.0",
+    "@emotion/is-prop-valid": "^1.1.1",
     "@storybook/addon-essentials": "~6.3.13",
     "@storybook/addon-storysource": "~6.3.13",
     "@storybook/components": "~6.3.13",
@@ -36,8 +36,8 @@
     "@types/react-dom": "^16.9.1",
     "@types/react-test-renderer": "^16.9.0",
     "@types/react-transition-group": "^2.9.2",
-    "@typescript-eslint/eslint-plugin": "^2.31.0",
-    "@typescript-eslint/parser": "^2.31.0",
+    "@typescript-eslint/eslint-plugin": "^5.10.1",
+    "@typescript-eslint/parser": "^5.10.1",
     "autoprefixer": "^9.5.0",
     "axe-core": "^3.4.0",
     "babel-jest": "^26.0.1",
@@ -73,7 +73,7 @@
     "eslint-plugin-jsdoc": "^22.1.0",
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-react": "^7.16.0",
-    "eslint-plugin-react-hooks": "^2.1.2",
+    "eslint-plugin-react-hooks": "^4.3.0",
     "eslint-plugin-react-ssr": "^1.0.3",
     "eslint-plugin-workday-custom-rules": "file:./utils/custom-lint-rules",
     "expect-type": "^0.11.0",
@@ -99,9 +99,9 @@
     "postcss-loader": "^2.1.4",
     "prettier": "^1.19.0",
     "prismjs": "^1.23.0",
-    "react": "16.12.0",
+    "react": "17.0.2",
     "react-docgen-typescript": "^2.2.2",
-    "react-dom": "16.12.0",
+    "react-dom": "17.0.2",
     "replace-in-files": "^2.0.3",
     "rimraf": "^2.6.3",
     "rollup": "^1.16.2",
@@ -113,7 +113,7 @@
     "string-replace-loader": "2.3.0",
     "style-loader": "^1.0.0",
     "ts-loader": "^6.2.0",
-    "typescript": "^3.8.3",
+    "typescript": "4.1",
     "yargs": "^16.2.0"
   },
   "scripts": {
@@ -174,5 +174,9 @@
   "workspaces": [
     "modules/**"
   ],
-  "browserslist": "> 5%, last 2 firefox versions, last 2 chrome versions, last 2 safari versions, last 2 edge versions, ie 11"
+  "browserslist": "> 5%, last 2 firefox versions, last 2 chrome versions, last 2 safari versions, last 2 edge versions, ie 11",
+  "dependencies": {
+    "@emotion/react": "^11.7.1",
+    "@emotion/styled": "^11.6.0"
+  }
 }

@@ -10,7 +10,7 @@ import {
   useReturnFocus,
 } from '@workday/canvas-kit-react/popup';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
-import {HStack} from '@workday/canvas-kit-labs-react/layout';
+import {HStack} from '@workday/canvas-kit-react/layout';
 
 export const NestedPopups = () => {
   const popup1 = usePopupModel();

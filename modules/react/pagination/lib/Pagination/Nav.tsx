@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Flex, FlexProps} from './common/Flex';
+import {Flex, FlexProps} from '@workday/canvas-kit-react/layout';
 
 export interface PaginationNavProps extends Omit<FlexProps, 'as'> {
   'aria-label': string;
@@ -11,7 +11,7 @@ export const PaginationNav = ({'aria-label': ariaLabel, ...elemProps}: Paginatio
       as="nav"
       aria-label={ariaLabel}
       display="inline-flex"
-      direction="column"
+      flexDirection="column"
       alignItems="center"
       {...elemProps}
     />

@@ -8,6 +8,8 @@ import {WithoutCloseIcon} from './examples/WithoutCloseIcon';
 import {CustomFocus} from './examples/CustomFocus';
 import {ReturnFocus} from './examples/ReturnFocus';
 import {CustomTarget} from './examples/CustomTarget';
+import {BodyOverflow} from './examples/BodyOverflow';
+import {FullOverflow} from './examples/FullOverflow';
 
 <Meta title="Components/Popups/Modal/React" component={Modal} />
 
@@ -80,6 +82,25 @@ requires a `label` prop.
 > Without this, the Modal will open at the top-left of the window instead of around the target.
 
 <ExampleCodeBlock code={CustomTarget} />
+
+### Body Content Overflow
+
+The Modal automatically handles overflowing content inside the `Modal.Body` element. If contents are
+larger than the browser's height will allow, the content will overflow with a scrollbar. You may
+need to restrict the height of your browser to observe the overflow.
+
+<ExampleCodeBlock code={BodyOverflow} />
+
+### Full overlay scrolling
+
+If content is large, scrolling the entire overlay container is an option. Use the
+`Modal.OverflowOverlay` component instead of the `Modal.Overlay` component. The `Modal.Card`'s
+`maxHeight` and `height` will need to be reset to `inherit` to prevent any internal overflow.
+
+This has the effect of scrolling the heading, close button, and any action buttons. If this type of
+scrolling behavior is not desired, try the [Body Content Overflow](#body-content-overflow) method.
+
+<ExampleCodeBlock code={FullOverflow} />
 
 ## Components
 

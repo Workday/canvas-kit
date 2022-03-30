@@ -245,7 +245,10 @@ export const PopupStack = {
    */
   remove(element: HTMLElement): void {
     // Find the stack the popup belongs to.
-    const stack = find(stacks, stack => !!find(stack.items, item => item.element === element));
+    const stack = find(
+      stacks,
+      stack => !!find(PopupStack.getElements(stack), el => el === element)
+    );
     if (stack) {
       if (stack._adapter?.remove) {
         stack._adapter.remove(element);

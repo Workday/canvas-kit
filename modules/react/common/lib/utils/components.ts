@@ -4,7 +4,6 @@ import {Model} from './models';
 
 /**
  * Adds the `as` to the style interface to support `as` in styled components
- * This type and usage should be removed with Emotion 11
  */
 export type StyledType = {
   as?: React.ElementType;
@@ -143,7 +142,7 @@ export type Component<P> = {
 
 interface RefForwardingComponent<T, P = {}> {
   (
-    props: React.PropsWithChildren<P> & {as?: React.ReactElement<any>},
+    props: React.PropsWithChildren<P> & {as?: React.ElementType},
     /**
      * A ref to be forwarded. Pass it along to the root element. If no element was passed, this
      * will result in a `never`

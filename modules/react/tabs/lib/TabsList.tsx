@@ -8,7 +8,7 @@ import {
   ExtractProps,
   useModelContext,
 } from '@workday/canvas-kit-react/common';
-import {Stack} from '@workday/canvas-kit-labs-react/layout';
+import {Stack} from '@workday/canvas-kit-react/layout';
 import {
   useOverflowListMeasureContainer,
   useListRenderItems,
@@ -49,7 +49,7 @@ export const TabsList = createComponent('div')({
         as={Element}
         position="relative"
         borderBottom={`1px solid ${commonColors.divider}`}
-        marginX="m"
+        paddingX="m"
         spacing="xxxs"
         {...props}
       >

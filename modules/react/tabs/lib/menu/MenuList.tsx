@@ -8,7 +8,7 @@ import {
   ExtractProps,
 } from '@workday/canvas-kit-react/common';
 import {useListRenderItems} from '@workday/canvas-kit-react/list';
-import {Stack} from '@workday/canvas-kit-labs-react/layout';
+import {Stack} from '@workday/canvas-kit-react/layout';
 
 import {MenuModel} from './useMenuModel';
 import {MenuModelContext} from './Menu';
