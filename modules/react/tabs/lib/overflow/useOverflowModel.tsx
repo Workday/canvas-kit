@@ -56,10 +56,16 @@ export const overflowEventMap = createEventMap<OverflowEvents>()({
 export type BaseOverflowModelConfig<T> = BaseSelectionModelConfig<T> & {
   initialHiddenIds?: string[];
   containerWidth?: number;
+  /**
+   * Determines if overflow should actually occur. For example, touch devices are better at
+   * side-scrolling than mouse devices. In these cases, it makes sense to disable overflowing.
+   * @default true
+   */
+  shouldCalculateOverflow?: boolean;
 };
 
 export type OverflowModelConfig<T> = BaseOverflowModelConfig<T> &
-  Partial<ToModelConfig<OverflowState<T>, OverflowEvents<T>, typeof selectionEventMap>>;
+  Partial<ToModelConfig<OverflowState<T>, OverflowEvents<T>, typeof overflowEventMap>>;
 
 export function getHiddenIds(
   containerWidth: number,
@@ -111,6 +117,8 @@ export function getHiddenIds(
 export const useOverflowModel = <T extends unknown>(
   config: OverflowModelConfig<T> = {}
 ): OverflowModel<T> => {
+  const shouldCalculateOverflow =
+    config.shouldCalculateOverflow === undefined ? true : config.shouldCalculateOverflow;
   const [hiddenIds, setHiddenIds] = React.useState(config.initialHiddenIds || []);
   const [itemWidthCache, setItemWidthCache] = React.useState<Record<string, number>>({});
   const [containerWidth, setContainerWidth] = React.useState(0);
@@ -119,15 +127,17 @@ export const useOverflowModel = <T extends unknown>(
   const [overflowTargetWidth, setOverflowTargetWidth] = React.useState(0);
   const overflowTargetWidthRef = React.useRef(0);
 
+  const internalHiddenIds = shouldCalculateOverflow ? hiddenIds : [];
+
   // Cursors skip over disabled ids, but know nothing of hidden ids. We'll go ahead and disable
   // hidden ids as well
-  const nonInteractiveIds = (config.nonInteractiveIds || []).concat(hiddenIds);
+  const nonInteractiveIds = (config.nonInteractiveIds || []).concat(internalHiddenIds);
 
   const model = useSelectionModel({...(config as SelectionModelConfig<T>), nonInteractiveIds});
 
   const state = {
     ...model.state,
-    hiddenIds,
+    hiddenIds: internalHiddenIds,
     itemWidthCache,
     containerWidth,
     overflowTargetWidth,

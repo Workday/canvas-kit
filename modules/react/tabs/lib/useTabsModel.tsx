@@ -4,6 +4,7 @@ import {
   ToModelConfig,
   useEventMap,
   useUniqueId,
+  useModalityType,
 } from '@workday/canvas-kit-react/common';
 import {Orientation} from './cursor';
 import {defaultGetId, ListEvents, ListState, useListModel} from './list';
@@ -90,11 +91,13 @@ export const useTabsModel = <T extends unknown>(config: TabsModelConfig<T> = {})
   const id = useUniqueId(config.id);
   const initialSelectedRef = React.useRef(config.initialTab);
   const getId = config.getId || defaultGetId;
+  const modality = useModalityType();
 
-  const items = config.items; // || (emptyItems as T[]);
+  const items = config.items;
 
   const model = useOverflowModel<T>({
     ...(config as OverflowModelConfig<T>),
+    shouldCalculateOverflow: modality !== 'touch',
     id: `${id}-tabs`,
     orientation: config.orientation || 'horizontal',
     items,

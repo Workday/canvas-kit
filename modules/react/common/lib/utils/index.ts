@@ -11,6 +11,7 @@ export * from './components';
 export * from './models';
 export * from './elements';
 export * from './useIsFullscreen';
+export * from './useModalityType';
 export * from './useWindowSize';
 export * from './useResizeObserver';
 export * from './StaticStates';

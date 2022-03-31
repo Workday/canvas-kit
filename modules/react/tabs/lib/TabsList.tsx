@@ -7,6 +7,7 @@ import {
   createHook,
   ExtractProps,
   useModelContext,
+  useModalityType,
 } from '@workday/canvas-kit-react/common';
 import {Stack} from '@workday/canvas-kit-labs-react/layout';
 import {useOverflowMeasureContainer} from './overflow';
@@ -41,13 +42,14 @@ export const TabsList = createComponent('div')({
   Component: ({children, model, overflowButton, ...elemProps}: TabListProps, ref, Element) => {
     const localModel = useModelContext(TabsModelContext, model);
     const props = useTabsList(localModel, elemProps, ref);
+    const modality = useModalityType();
 
     return (
       <Stack
         as={Element}
         position="relative"
         borderBottom={`1px solid ${commonColors.divider}`}
-        paddingX="m"
+        paddingX={modality === 'touch' ? 'zero' : 'm'}
         spacing="xxxs"
         {...props}
       >
@@ -60,7 +62,8 @@ export const TabsList = createComponent('div')({
 
 export const useTabsList = composeHooks(
   createHook((_: TabsModel) => {
-    return {role: 'tablist'};
+    const modality = useModalityType();
+    return {role: 'tablist', overflowX: modality === 'touch' ? 'auto' : undefined};
   }),
   useOverflowMeasureContainer,
   useResetCursorOnBlur
