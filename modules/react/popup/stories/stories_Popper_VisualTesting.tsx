@@ -34,6 +34,8 @@ export const CustomPlacement = withSnapshotsEnabled(() => {
   const ownerRef = React.useRef<HTMLDivElement>(null);
   const virtualLeft = 190 + 30; // square offset + red box offset
   const virtualTop = 250 + 30; // square offset + red box offset
+  const popupRef = React.useRef<HTMLDivElement>(null);
+  const popperInstanceRef = React.useRef(null);
   return (
     <div style={containerStyles}>
       <div style={innerContainerStyles}>
@@ -54,17 +56,20 @@ export const CustomPlacement = withSnapshotsEnabled(() => {
         </div>
         <Popper
           anchorElement={ownerRef}
-          getAnchorClientRect={() => ({
-            top: virtualTop,
-            left: virtualLeft,
-            width: 40,
-            height: 40,
-            bottom: virtualTop + 40,
-            right: virtualLeft + 40,
-            x: virtualLeft,
-            y: virtualTop,
-            toJSON: () => '',
-          })}
+          // ref={popupRef}
+          // popperInstanceRef={popperInstanceRef}
+          open={true}
+          // getAnchorClientRect={() => ({
+          //   top: virtualTop,
+          //   left: virtualLeft,
+          //   width: 40,
+          //   height: 40,
+          //   bottom: virtualTop + 40,
+          //   right: virtualLeft + 40,
+          //   x: virtualLeft,
+          //   y: virtualTop,
+          //   toJSON: () => '',
+          // })}
         >
           <Menu>
             <MenuItem>{'Custom'}</MenuItem>
