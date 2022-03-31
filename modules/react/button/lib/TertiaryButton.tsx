@@ -162,18 +162,25 @@ const getPaddingStyles = (
 };
 
 const getMinWidthStyles = (children: React.ReactNode, size: ButtonSizes): string => {
+  let minWidthNum;
   switch (size) {
     case 'large':
-      return children ? 'auto' : '48px';
+      minWidthNum = '48px';
+      break;
     case 'medium':
-      return children ? 'auto' : space.xl;
+      minWidthNum = space.xl;
+      break;
     case 'small':
-      return children ? 'auto' : space.l;
+      minWidthNum = space.l;
+      break;
     case 'extraSmall':
-      return children ? 'auto' : space.m;
+      minWidthNum = space.m;
+      break;
     default:
-      return children ? 'auto' : space.xl;
+      minWidthNum = space.xl;
+      break;
   }
+  return children ? 'auto' : minWidthNum;
 };
 
 export const TertiaryButton = createComponent('button')({

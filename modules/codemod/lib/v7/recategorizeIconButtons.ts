@@ -72,10 +72,10 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
       );
 
       // Default IconButton variant is `circle`
-if (variantProp) {
+      if (variantProp) {
         const variantPropValue = ((variantProp as JSXAttribute).value as StringLiteral)?.value;
         buttonType = /filled/gi.test(variantPropValue) ? 'SecondaryButton' : 'TertiaryButton';
-        
+
         if (!variantPropValue.includes('inverse')) {
           nodePath.value.openingElement.attributes?.splice(attrs?.indexOf(variantProp)!, 1);
         }
@@ -83,6 +83,7 @@ if (variantProp) {
 
       updateJSXTag(nodePath, buttonType);
       requiredImportSpecifiers.push(buttonType);
+    });
 
   // Find all instances of IconButton within a style function
   // const StyledIconButton = styled(IconButton) gets renamed to

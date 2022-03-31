@@ -169,7 +169,7 @@ const Combobox = ({
   onFocus,
   onBlur,
   showClearButton,
-  clearButtonVariant = undefined,
+  clearButtonVariant,
   clearButtonAriaLabel = `Reset Search Input`,
   labelId,
   getStatusText = buildStatusString,
