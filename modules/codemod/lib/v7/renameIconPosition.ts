@@ -27,16 +27,11 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
           value.openingElement.name.name === (styledMap.PrimaryButton || styledMap.SecondaryButton))
     )
     .forEach(nodePath => {
-      const findAttribute = (name: string) => (item: JSXAttribute | JSXSpreadAttribute) => {
-        if (
-          item.type === 'JSXAttribute' &&
-          item.name.type === 'JSXIdentifier' &&
-          item.name.name === name
-        ) {
-          return true;
-        }
-        return false;
-      };
+      const findAttribute = (name: string) => (item: JSXAttribute | JSXSpreadAttribute) =>
+        item.type === 'JSXAttribute' &&
+        item.name.type === 'JSXIdentifier' &&
+        item.name.name === name;
+
       const attributes = nodePath.value.openingElement.attributes;
       if (attributes) {
         const iconPosition = attributes.find(findAttribute('iconPosition')) as
