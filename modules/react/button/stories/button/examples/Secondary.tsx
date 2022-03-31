@@ -4,18 +4,15 @@ import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {HStack} from '@workday/canvas-kit-react/layout';
 import {plusIcon} from '@workday/canvas-system-icons-web';
 
-export const Secondary = props => (
-  <>
+export const Secondary = () => (
     <HStack spacing="s" padding="s">
-      <SecondaryButton {...props}>Secondary</SecondaryButton>
-      <p>{JSON.stringify(props.theme)}</p>
-      <SecondaryButton icon={plusIcon} iconPosition="start" {...props}>
+      <SecondaryButton>Secondary</SecondaryButton>
+      <SecondaryButton icon={plusIcon} iconPosition="start">
         Secondary
       </SecondaryButton>
-      <SecondaryButton icon={plusIcon} iconPosition="end" {...props}>
+      <SecondaryButton icon={plusIcon} iconPosition="end">
         Secondary
       </SecondaryButton>
-      <SecondaryButton icon={plusIcon} {...props} />
+      <SecondaryButton icon={plusIcon} />
     </HStack>
-  </>
 );
