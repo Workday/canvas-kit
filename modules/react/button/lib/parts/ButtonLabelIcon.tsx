@@ -48,7 +48,7 @@ export const ButtonLabelIcon = createComponent('span')({
       return null;
     }
 
-    const iconSize = size ? iconSizes[size] : iconSizes.large;
+    const iconSize = iconSizes[size];
 
     return (
       <SystemIcon
