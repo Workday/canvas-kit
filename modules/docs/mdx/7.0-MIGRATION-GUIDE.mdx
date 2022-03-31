@@ -112,26 +112,44 @@ word.
 
 ## Buttons
 
-To consolidate button APIs, we removed `IconButton` in favor of `PrimaryButton`, `SecondaryButton` and `TertiaryButton`.
+To consolidate button APIs, we removed `IconButton` in favor of `PrimaryButton`, `SecondaryButton`
+and `TertiaryButton`.
 
-**Breaking Changes:**
+### Breaking Changes
 
 - Removed the `toggled` prop when migrating from `IconButton`
 - Changed the values of `IconPosition: left | right` - > `IconPosition: start | end`
 - Remove `dataLabel` prop from `PrimaryButton` and `SecondaryButton`
 
+🤖 The codemod will handle all these changes automatically:
+
+- `iconPosition='left'` becomes `iconPosition='start'`
+- `iconPosition='right'` becomes `iconPosition='end'`
+- `<IconButton icon={plusIcon} />` becomes `<TertiaryButton icon={plusIcon} />`
+- `<IconButton variant='circleFilled' icon={plusIcon} />` becomes
+  `<SecondaryButton icon={plusIcon} />`
+- `<IconButton variant='inverse' icon={plusIcon} />` becomes
+  `<TertiaryButton variant='inverse' icon={plusIcon} />`
+- `<IconButton variant='inverseFilled' icon={plusIcon} />` becomes
+  `<SecondaryButton variant='inverseFilled' icon={plusIcon} />`
+
+#### Manual Changes
+
+The following changes will not be automatic updated and will require a manual update:
+
+- Remove `IconButton` variants: `plain`, `square`, and `squareFilled`
+- Remove `IconButtonProps`
+- Remove `IconButton` prop: `toggled`
+- Remove `PrimaryButton` and `SecondaryButton` prop: `dataLabel`
+
 ### Button Mapping
 
-Below is a mapping of V6 `IconButton` variants to their respective V7 buttons and variants. Further below is a description of how to manually migrate from unsupported V6 variants.
-| IconButton variant | Button Type                          |
-| ------------------ | ------------------------------------ |
-| `circle`           | TertiaryButton                       |
-| `circleFilled`     | SecondaryButton                      |
-| `inverse`          | TertiButton with variant inverse     |
-| `inverseFilled`    | SecondaryButton with variant inverse |
-| `plain`            | Not Supporting                       |
-| `square`           | Not Supporting                       |
-| `squareFilled`     | Not Supporting                       |
+Below is a mapping of V6 `IconButton` variants to their respective V7 buttons and variants. Further
+below is a description of how to manually migrate from unsupported V6 variants. | IconButton variant
+| Button Type | | ------------------ | ------------------------------------ | | `circle` |
+TertiaryButton | | `circleFilled` | SecondaryButton | | `inverse` | TertiButton with variant inverse
+| | `inverseFilled` | SecondaryButton with variant inverse | | `plain` | Not Supporting | | `square`
+| Not Supporting | | `squareFilled` | Not Supporting |
 
 ### Remove `IconButton` `plain`, `square`, and `squareFilled` Variants
 
@@ -315,6 +333,14 @@ system.
 Segmente Control use to work when rendering `IconButton` as children. This has now moved to a
 compound component and removed the use of `IconButton`.
 
+### Breaking Change
+
+`IconButton` is no longer a valid child of segmented control.
+
+🤖 The codemod will handle all these changes automatically:
+
+- `IconButton` becomes `SegmentedControl.Button`
+
 v6
 
 ```tsx
@@ -380,8 +406,14 @@ We've updated our lower level icon components such as `AccentIcon`, `AppletIcon`
 [createComponent](https://github.com/Workday/canvas-kit/blob/ff77c5bd83e41c3ab2b9c55e41a8b7c1fde33a1b/modules/react/common/lib/utils/components.ts#L167)
 which allows us to `forwardRef`.
 
-_Note:_ This is a breaking change since we've removed `iconRef`. You can now just pass a `ref` to
-the element.
+### Breaking Change
+
+This is a breaking change since we've removed `iconRef`. You can now just pass a `ref` to the
+element.
+
+🤖 The codemod will handle all these changes automatically:\
+
+- `iconRef` becomes `ref`
 
 ## Popup Cards
 
