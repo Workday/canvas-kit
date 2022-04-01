@@ -1,5 +1,5 @@
-import PageHeader from './lib/PageHeader';
+import DeprecatedPageHeader from './lib/PageHeader';
 
-export default PageHeader;
-export {PageHeader};
+export default DeprecatedPageHeader;
+export {DeprecatedPageHeader};
 export * from './lib/PageHeader';

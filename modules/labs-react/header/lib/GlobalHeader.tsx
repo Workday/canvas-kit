@@ -1,7 +1,7 @@
 import * as React from 'react';
-import Header from './Header';
-import {HeaderVariant} from './shared/types';
-import {DubLogoTitle} from './parts';
+import DeprecatedHeader from './Header';
+import {DeprecatedHeaderVariant} from './shared/types';
+import {DeprecatedDubLogoTitle} from './parts';
 
 export interface GlobalHeaderProps {
   /**
@@ -23,15 +23,32 @@ export interface GlobalHeaderProps {
    */
   isCollapsed?: boolean;
   /**
-   * The React element to render in the left slot of the GlobalHeader. This is typically a SearchBar component.
+   * The React element to render in the left slot of the GlobalHeader. This is typically a SearchForm component.
    */
   leftSlot?: React.ReactElement;
 }
 
-export default class GlobalHeader extends React.Component<GlobalHeaderProps> {
+/**
+ * ### Deprecated Global Header
+ *
+ * As of Canvas Kit v6, this component is being soft-deprecated.
+ * It will be hard-deprecated (completely removed) in v7. Please see the
+ * [migration guide](https://workday.github.io/canvas-kit/?path=/story/welcome-migration-guides-v6-0--page)
+ * for more information.
+ */
+export default class DeprecatedGlobalHeader extends React.Component<GlobalHeaderProps> {
+  componentDidMount() {
+    console.warn(
+      `GlobalHeader is being deprecated and will be removed in Canvas Kit V7.\n
+      For more information, please see the V6 migration guide:\n
+      https://workday.github.io/canvas-kit/?path=/story/welcome-migration-guides-v6-0--page
+      `
+    );
+  }
+
   public render() {
     const {
-      brand = <DubLogoTitle />,
+      brand = <DeprecatedDubLogoTitle />,
       menuToggle,
       onMenuClick,
       isCollapsed,
@@ -40,17 +57,17 @@ export default class GlobalHeader extends React.Component<GlobalHeaderProps> {
       ...elemProps
     } = this.props;
     return (
-      <Header
+      <DeprecatedHeader
         brand={brand}
         menuToggle={menuToggle}
         leftSlot={leftSlot}
         onMenuClick={onMenuClick}
-        variant={HeaderVariant.Global}
+        variant={DeprecatedHeaderVariant.Global}
         isCollapsed={isCollapsed}
         {...elemProps}
       >
         {children}
-      </Header>
+      </DeprecatedHeader>
     );
   }
 }

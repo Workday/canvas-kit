@@ -1,18 +1,17 @@
-/// <reference path="../../../../typings.d.ts" />
 import * as React from 'react';
-import withReadme from 'storybook-readme/with-readme';
 
 import {PrimaryButton, SecondaryButton} from '@workday/canvas-kit-react/button';
 import {Popper} from '@workday/canvas-kit-react/popup';
 import {Card} from '@workday/canvas-kit-react/card';
 
-import README from '../README.md';
 import {HStack} from '@workday/canvas-kit-labs-react';
 
 export default {
   title: 'Components/Popups/Popper/React',
   component: Popper,
-  decorators: [withReadme(README)],
+  parameters: {
+    ReadmePath: 'react/popup',
+  },
 };
 
 export * from './stories_Popper_VisualTesting';

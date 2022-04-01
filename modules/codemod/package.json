@@ -2,7 +2,7 @@
   "name": "@workday/canvas-kit-codemod",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
-  "version": "5.3.15",
+  "version": "6.7.2",
   "description": "A collection of codemods for use on Workday Canvas Kit packages.",
   "main": "dist/es6/index.js",
   "sideEffects": false,
@@ -29,9 +29,12 @@
   },
   "homepage": "https://github.com/Workday/canvas-kit#readme",
   "dependencies": {
-    "colors": "^1.4.0",
-    "jscodeshift": "^0.11.0",
+    "chalk": "4.1.2",
+    "jscodeshift": "^0.13.1",
     "yargs": "^16.2.0"
+  },
+  "devDependencies": {
+    "@types/jscodeshift": "^0.11.3"
   },
   "scripts": {
     "clean": "rimraf dist && rimraf .build-info && mkdirp dist",

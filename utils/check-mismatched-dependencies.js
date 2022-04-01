@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 
-const colors = require('colors/safe');
+const chalk = require('chalk');
 const fs = require('fs');
 const path = require('path');
 const {promisify} = require('util');
@@ -20,9 +20,9 @@ function findCharacter(pkg, dependency) {
 }
 
 function formatErrorMessage(error) {
-  return `${error.file}\n  ${colors.dim(`${error.line}:${error.character}`)}  ${colors.red(
+  return `${error.file}\n  ${chalk.dim(`${error.line}:${error.character}`)}  ${chalk.red(
     'error'
-  )}  ${error.message}  ${colors.dim('versions-must-match')}\n`;
+  )}  ${error.message}  ${chalk.dim('versions-must-match')}\n`;
 }
 
 async function main() {
@@ -40,9 +40,9 @@ async function main() {
           file: path.join(process.cwd(), packageFile),
           line: findLine(pkg, key),
           character: findCharacter(pkg, key),
-          message: `dependency '${colors.yellow(key)}' is at '${colors.green(
+          message: `dependency '${chalk.yellow(key)}' is at '${chalk.green(
             pkg.dependencies[key]
-          )}' while other files have a version of '${colors.green(dependencies[key])}'`,
+          )}' while other files have a version of '${chalk.green(dependencies[key])}'`,
         });
       } else {
         dependencies[key] = pkg.dependencies[key];

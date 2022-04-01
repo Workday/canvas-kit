@@ -1,13 +1,18 @@
 import React, {useEffect, useLayoutEffect, useRef, useState, useCallback} from 'react';
 import {CSSObject, jsx, keyframes} from '@emotion/core';
-import {GrowthBehavior, useForkRef, styled, useIsRTL} from '@workday/canvas-kit-react/common';
+import {
+  GrowthBehavior,
+  useForkRef,
+  styled,
+  useIsRTL,
+  useUniqueId,
+} from '@workday/canvas-kit-react/common';
 import {space, commonColors, borderRadius} from '@workday/canvas-kit-react/tokens';
 import {MenuItemProps} from '@workday/canvas-kit-preview-react/menu';
 import {Card} from '@workday/canvas-kit-react/card';
 import {IconButton, IconButtonProps} from '@workday/canvas-kit-react/button';
 import {xSmallIcon} from '@workday/canvas-system-icons-web';
 import {TextInputProps} from '@workday/canvas-kit-react/text-input';
-import uuid from 'uuid/v4';
 import flatten from 'lodash.flatten';
 import AutocompleteList from './AutocompleteList';
 import Status from './Status';
@@ -200,8 +205,8 @@ const Combobox = ({
 
   const comboboxRef: React.RefObject<HTMLDivElement> = useRef(null);
 
-  const [randomComponentId] = React.useState(() => uuid()); // https://codesandbox.io/s/p2ndq
-  const [randomLabelId] = React.useState(() => uuid());
+  const randomComponentId = useUniqueId();
+  const randomLabelId = useUniqueId();
 
   const componentId = id || randomComponentId;
   const formLabelId = labelId || randomLabelId;

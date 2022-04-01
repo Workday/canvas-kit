@@ -1,17 +1,16 @@
-/// <reference path="../../../../typings.d.ts" />
 import React from 'react';
-import withReadme from 'storybook-readme/with-readme';
 
 import {ComponentStatesTable} from '@workday/canvas-kit-labs-react/common';
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
 
 import {CountBadge} from '../index';
-import README from '../README.md';
 
 export default withSnapshotsEnabled({
   title: 'Testing/React/Indicators/Badge/CountBadge',
   component: CountBadge,
-  decorators: [withReadme(README)],
+  parameters: {
+    ReadmePath: 'react/badge',
+  },
 });
 
 export const CountBadgeStates = () => {

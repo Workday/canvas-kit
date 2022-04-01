@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-css-modal",
-  "version": "5.3.15",
+  "version": "6.7.2",
   "description": "Modal CSS for Canvas kit CSS",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -16,8 +16,8 @@
     "url": "http://github.com/Workday/canvas-kit/tree/master/modules/modal/css"
   },
   "dependencies": {
-    "@workday/canvas-kit-css-core": "^5.3.15",
-    "@workday/canvas-kit-css-popup": "^5.3.15"
+    "@workday/canvas-kit-css-core": "^6.7.2",
+    "@workday/canvas-kit-css-popup": "^6.7.2"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

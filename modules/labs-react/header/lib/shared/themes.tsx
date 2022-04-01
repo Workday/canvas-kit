@@ -1,4 +1,3 @@
-import {focusRing} from '@workday/canvas-kit-react/common';
 import {
   colors,
   gradients,
@@ -7,9 +6,17 @@ import {
   CSSProperties,
 } from '@workday/canvas-kit-react/tokens';
 import chroma from 'chroma-js';
-import {HeaderTheme, SearchTheme} from './types';
+import {DeprecatedHeaderTheme} from './types';
 
-export interface ThemeAttributes {
+/**
+ * ### Deprecated Header Theme Attributes Interface
+ *
+ * As of Canvas Kit v6, this type interface is being soft-deprecated along with the rest of the labs/header package.
+ * It will be hard-deprecated (completely removed) in v7. Please see the
+ * [migration guide](https://workday.github.io/canvas-kit/?path=/story/welcome-migration-guides-v6-0--page)
+ * for more information.
+ */
+export interface DeprecatedHeaderThemeAttributes {
   color: string;
   background: string;
   depth: CSSProperties;
@@ -23,12 +30,28 @@ export interface ThemeAttributes {
   chipColor: string;
 }
 
-export interface Themes {
-  [key: string]: ThemeAttributes;
+/**
+ * ### Deprecated Header Themes Interface
+ *
+ * As of Canvas Kit v6, this type interface is being soft-deprecated along with the rest of the labs/header package.
+ * It will be hard-deprecated (completely removed) in v7. Please see the
+ * [migration guide](https://workday.github.io/canvas-kit/?path=/story/welcome-migration-guides-v6-0--page)
+ * for more information.
+ */
+export interface DeprecatedHeaderThemes {
+  [key: string]: DeprecatedHeaderThemeAttributes;
 }
 
-export const themes: Themes = {
-  [HeaderTheme.White]: {
+/**
+ * ### Deprecated Header Themes
+ *
+ * As of Canvas Kit v6, this theme object is being soft-deprecated along with the rest of the labs/header package.
+ * It will be hard-deprecated (completely removed) in v7. Please see the
+ * [migration guide](https://workday.github.io/canvas-kit/?path=/story/welcome-migration-guides-v6-0--page)
+ * for more information.
+ */
+export const deprecatedHeaderThemes: DeprecatedHeaderThemes = {
+  [DeprecatedHeaderTheme.White]: {
     color: colors.blackPepper400,
     background: colors.frenchVanilla100,
     depth: depth['1'],
@@ -41,7 +64,7 @@ export const themes: Themes = {
     currentLinkColor: colors.blueberry500,
     chipColor: colors.blueberry400,
   },
-  [HeaderTheme.Blue]: {
+  [DeprecatedHeaderTheme.Blue]: {
     color: colors.frenchVanilla100,
     background: gradients.blueberry,
     depth: depth['3'],
@@ -56,7 +79,7 @@ export const themes: Themes = {
     currentLinkColor: colors.frenchVanilla100,
     chipColor: colors.frenchVanilla100,
   },
-  [HeaderTheme.Transparent]: {
+  [DeprecatedHeaderTheme.Transparent]: {
     color: colors.frenchVanilla100,
     background: 'transparent',
     depth: {boxShadow: 'none'},
@@ -70,52 +93,5 @@ export const themes: Themes = {
       .css(),
     currentLinkColor: colors.frenchVanilla100,
     chipColor: colors.frenchVanilla100,
-  },
-};
-
-export interface SearchThemeAttributes {
-  background?: string;
-  backgroundFocus?: string;
-  backgroundHover?: string;
-  color?: string;
-  colorFocus?: string;
-  placeholderColor?: string;
-  placeholderColorFocus?: string;
-  boxShadow?: string | string[];
-  boxShadowFocus?: string | string[];
-}
-
-export interface SearchThemes {
-  [key: string]: SearchThemeAttributes;
-}
-
-export const searchThemes: SearchThemes = {
-  [SearchTheme.Transparent]: {
-    background: 'rgba(0, 0, 0, 0)',
-    backgroundFocus: 'rgba(0, 0, 0, 0)',
-    color: colors.blackPepper300,
-    colorFocus: colors.blackPepper300,
-    placeholderColor: colors.licorice300,
-    placeholderColorFocus: colors.licorice300,
-    boxShadow: 'none',
-    boxShadowFocus: 'none',
-  },
-  [SearchTheme.Light]: {
-    background: colors.soap200,
-    backgroundFocus: colors.soap200,
-    backgroundHover: colors.soap300,
-    color: colors.blackPepper300,
-    placeholderColor: colors.licorice300,
-    boxShadow: 'none',
-    boxShadowFocus: focusRing().boxShadow,
-  },
-  [SearchTheme.Dark]: {
-    background: 'rgba(0, 0, 0, 0.2)',
-    backgroundFocus: colors.frenchVanilla100,
-    color: colors.frenchVanilla100,
-    colorFocus: colors.blackPepper300,
-    placeholderColor: colors.frenchVanilla100,
-    placeholderColorFocus: colors.licorice300,
-    boxShadow: 'none',
   },
 };

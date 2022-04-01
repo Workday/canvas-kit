@@ -1,27 +1,27 @@
 'use strict';
 
-require('colors');
 const {promisify} = require('util');
 const glob = promisify(require('glob'));
 const fs = require('fs');
+const chalk = require('chalk');
 
 let command = '';
 
 const {path} = require('yargs')
   .scriptName('publish')
-  // .usage('prepublish [path]'.brightBlue.bold)
-  .command('pre [path]', 'Create package.json files in module'.gray, argv => {
+  // .usage(chalk.blueBright.bold('prepublish [path]'))
+  .command('pre [path]', chalk.gray('Create package.json files in module'), argv => {
     argv.positional('path', {
       type: 'string',
-      describe: 'The module to work on.'.gray,
+      describe: chalk.gray('The module to work on.'),
     });
 
     command = 'pre';
   })
-  .command('post [path]', 'Remove package.json files in module'.gray, argv => {
+  .command('post [path]', chalk.gray('Remove package.json files in module'), argv => {
     argv.positional('path', {
       type: 'string',
-      describe: 'The module to work on.'.gray,
+      describe: chalk.gray('The module to work on.'),
     });
 
     command = 'post';

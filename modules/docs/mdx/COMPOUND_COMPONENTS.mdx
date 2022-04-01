@@ -1,4 +1,4 @@
-import {Meta} from '@storybook/addon-docs/blocks';
+import {Meta} from '@storybook/addon-docs';
 
 <Meta title="Welcome/Dev Docs/Compound Components" />
 
@@ -82,8 +82,8 @@ const Tabs = ({children, model, ...config}) => {
 
 ## Subcomponents
 
-A subcomponent typically follows ARIA roles. For the `Tabs` example, these are the `tablist`,
-`tab`, and `tabpanel` roles. A subcomponent provides direct access to semantic or key elements of a
+A subcomponent typically follows ARIA roles. For the `Tabs` example, these are the `tablist`, `tab`,
+and `tabpanel` roles. A subcomponent provides direct access to semantic or key elements of a
 compound component. In the `IconButton` example, the icon is not semantic and might be hidden from
 screen readers while the `IconButton.Text` content is instead used for a tooltip and as the
 accessible name while being visibly hidden.
@@ -179,35 +179,35 @@ Components that directly wrap an element (most of them) will have the following 
 
 Compound components are also made up of [models](#models) that accept [guards](#guards) to
 conditionally prevent state changes and [callbacks](#callbacks) to attach listeners. For example, in
-our Tabs component clicking a Tab will activate that tab. The `Tabs` container component will accept
-a `shouldActivate` and a `onActivate` for the event called `activate`.
+our Tabs component clicking a Tab will select that tab. The `Tabs` container component will accept a
+`shouldSelect` and a `onSelect` for the event called `select`.
 
 ```tsx
 const MyComponent = () => {
-  // `data` is all event data from the `activate` event
+  // `data` is all event data from the `select` event
 
   // `state` is the current state of the `Tabs` component
-  const shouldActivate = ({data, state}) => {
-    // for some reason, we only want to allow activation the 'first' tab
-    // Clicking on the first tab will activate it, but clicking on the
+  const shouldSelect = ({data, state}) => {
+    // for some reason, we only want to allow selection the 'first' tab
+    // Clicking on the first tab will select it, but clicking on the
     // second tab will do nothing
     return data.tab === 'first' ? true : false;
 
     // returning true allows the event to trigger a state change and will
-    // also call the `onActivate` callback
+    // also call the `onSelect` callback
   };
 
   // `prevState` is the previous state of the model. Callbacks are called _before_ state has resolved.
   // This means the passed state hasn't updated yet. It also means it is safe to call `setState` without
   // triggering extra renders. `setState` calls will add to React's batching system before a state changes
   // are flushed and render functions are called.
-  const onActivate = ({data, prevState}) => {
-    // called any time the `activate` event is triggered
-    console.log('onActivate', data, prevState);
+  const onSelect = ({data, prevState}) => {
+    // called any time the `select` event is triggered
+    console.log('onSelect', data, prevState);
   };
 
   return (
-    <Tabs shouldActivate={shouldActivate} onActivate={onActivate}>
+    <Tabs shouldSelect={shouldSelect} onSelect={onSelect}>
       <Tabs.List>
         <Tabs.Item name="first">First</Tabs.Item>
         <Tabs.Item name="second">Second</Tabs.Item>
@@ -328,20 +328,20 @@ const useEllipsisTooltipModel = (config = {}) => {
 
 Models are meant to be composable. For example, a `TabsModel` uses a `CursorModel` (which itself
 uses `ListModel`) and a `ListModel` for a list of panels. `TabsModel` also keeps track of which tab
-is currently active. This might look like the following:
+is currently selected. This might look like the following:
 
 ```ts
 const useTabsModel = (config = {}) => {
   // id is used for ARIA attributes
   const id = useUniqueId(config.id);
-  const [activeTab, setActiveTab] = React.useState('');
+  const [selectedTab, setSelectedTab] = React.useState('');
   const cursor = useCursorModel(config);
   const panels = useListModel(config);
 
   const state = {
     ...cursor.state, // extend the CursorModel state
     id,
-    activeTab,
+    selectedTab,
     panels: panels.state.items, // we only care about
   };
 
@@ -350,12 +350,12 @@ const useTabsModel = (config = {}) => {
     registerPanel: panels.events.registerItem,
     unregisterPanel: panels.events.unregisterItem,
 
-    activate(data) {
-      if (config.shouldActivate?.({data, prevState: state}) === false) {
+    select(data) {
+      if (config.shouldSelect?.({data, prevState: state}) === false) {
         return;
       }
-      setActiveTab(data.tab);
-      config.onActivate?.({data, prevState: state});
+      setSelectedTab(data.tab);
+      config.onSelect?.({data, prevState: state});
     },
   };
 
@@ -366,10 +366,11 @@ const useTabsModel = (config = {}) => {
 Model composition allows for components to share functionality with other components. In the Tabs
 example, `ListModel` is in charge of maintaining a list of tab elements. The `CursorModel` is in
 charge of maintaining a current cursor position of the tab list. The `Tabs.List` component uses the
-cursor to allow keyboard navigation of the tabs. The `TabsModel` also maintains the currently active
-tab to ensure the correct `TabPanel` is visible. The `TabsModel` is also using a `ListModel` to
-maintain a list of tab panels. The `TabsModel` is in charge of composing all this and providing data
-and events to the `Tabs` compound component - coordination state between subcomponents.
+cursor to allow keyboard navigation of the tabs. The `TabsModel` also maintains the currently
+selected tab to ensure the correct `TabPanel` is visible. The `TabsModel` is also using a
+`ListModel` to maintain a list of tab panels. The `TabsModel` is in charge of composing all this and
+providing data and events to the `Tabs` compound component - coordination state between
+subcomponents.
 
 Many other components like `Select`, `Breadcrumbs`, or dropdown menus can also use the `ListModel`
 and/or the `CursorModel`. These models could be thought of as abstract models where they do not
@@ -467,11 +468,11 @@ const TabList = ({children, ...elemProps}) => {
 
 A container component can either accept model configuration _or_ a model. Passing model
 configuration allows for simpler model configuration of guards, callbacks, or any other model
-configuration. The following example provides an `onActivate` callback that fetches some data from
-the server:
+configuration. The following example provides an `onSelect` callback that fetches some data from the
+server:
 
 ```tsx
-<Tabs onActivate={({data}) => fetch('/api/activate' + data.id)}>...</Tabs>
+<Tabs onSelect={({data}) => fetch('/api/selectTab' + data.id)}>...</Tabs>
 ```
 
 If you need direct access to a model's state or events, you can hoist the model into your component
@@ -483,15 +484,15 @@ look like this:
 const MyTabs = () => {
   const model = useTabsModel({
     // we can still load data from the server
-    onActivate: ({data}) => fetch('/api/activate' + data.id),
+    onSelect: ({data}) => fetch('/api/selectTab' + data.id),
   });
 
   return (
     <>
       <Tabs model={model}>...</Tabs>
-      // direct access to the model's state Currently selected tab: {model.state.activeTab}
+      // direct access to the model's state Currently selected tab: {model.state.selectedTab}
       // Now we can send events directly to the model
-      <button onClick={() => model.events.activate({tab: 'third'})}>Activate third tab</button>
+      <button onClick={() => model.events.select({tab: 'third'})}>Select third tab</button>
     </>
   );
 };

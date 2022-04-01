@@ -2,7 +2,7 @@ import * as React from 'react';
 import {keyframes} from '@emotion/core';
 
 import {Card} from '@workday/canvas-kit-react/card';
-import {space} from '@workday/canvas-kit-react/tokens';
+import {space, type} from '@workday/canvas-kit-react/tokens';
 import {
   styled,
   TransformOrigin,
@@ -42,7 +42,7 @@ const popupAnimation = (transformOrigin: TransformOrigin) => {
 
 const StyledPopupCard = styled(Card)<
   StyledType & {width?: number | string; transformOrigin?: TransformOrigin}
->(({transformOrigin}) => {
+>(type.levels.subtext.large, ({transformOrigin}) => {
   if (transformOrigin == null) {
     return {};
   }
@@ -77,7 +77,7 @@ export const PopupCard = createComponent('div')({
         maxWidth={`calc(100vw - ${space.l})`}
         {...props}
       >
-        <Card.Body>{children}</Card.Body>
+        {children}
       </StyledPopupCard>
     );
   },

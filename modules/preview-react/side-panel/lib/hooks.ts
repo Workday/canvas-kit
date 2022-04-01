@@ -12,12 +12,12 @@ export interface UseSidePanelProps {
   initialExpanded?: boolean;
   /**
    * sets the `id` for the panel
-   * @default `uuid`-generated string
+   * @default unique identifier
    */
   panelId?: string;
   /**
    * sets the `id` for the label
-   * @default `uuid`-generated string
+   * @default unique identifier
    */
   labelId?: string;
 }
@@ -32,12 +32,12 @@ export interface PanelProps {
   expanded: boolean;
   /**
    * the accessible `id`
-   * - this will either be a `uuid`-generated value or the `panelId` provided in the config
+   * - this will either be a unique identifier value or the `panelId` provided in the config
    */
   id: string;
   /**
    * the accessible label `id`
-   * - this will either be a `uuid`-generated value or the `labelId` provided in the config
+   * - this will either be a unique identifier value or the `labelId` provided in the config
    */
   'aria-labelledby': string;
   /**
@@ -50,7 +50,7 @@ export interface PanelProps {
 export interface LabelProps {
   /**
    * the accessible `id`
-   * - this will either be a `uuid`-generated value or the `labelId` provided in the config
+   * - this will either be a unique identifier value or the `labelId` provided in the config
    */
   id: string;
 }
@@ -58,7 +58,7 @@ export interface LabelProps {
 export interface ControlProps {
   /**
    * the accessible `id` that connects the panel to this control
-   * - this will either be a `uuid`-generated value or the `panelId` provided in the config
+   * - this will either be a unique identifier value or the `panelId` provided in the config
    */
   'aria-controls': string;
   /**
@@ -68,7 +68,7 @@ export interface ControlProps {
   'aria-expanded': boolean;
   /**
    * the accessible label `id`
-   * - this will either be a `uuid`-generated value or the `labelId` provided in the config
+   * - this will either be a unique identifier value or the `labelId` provided in the config
    */
   'aria-labelledby': string;
   /**

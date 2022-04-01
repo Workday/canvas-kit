@@ -69,7 +69,7 @@ jobs:
 
       ## Publish prerelease to npm. Must be run after a build
       - name: Publish
-        run: node utils/publish-canary.js
+        run: node utils/publish-canary.mjs
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_CI_PUBLISH_TOKEN}}
           SLACK_WEBHOOK: ${{secrets.SLACK_WEBHOOK}}

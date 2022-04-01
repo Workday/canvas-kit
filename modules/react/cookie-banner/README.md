@@ -1,4 +1,9 @@
-# Canvas Kit Cookie Banner
+# Canvas Kit Cookie Banner (Deprecated)
+
+> Note: As of Canvas Kit v6, CookieBanner is being soft-deprecated. It will be hard-deprecated
+> (completely removed) in v7. Please see the
+> [migration guide](https://workday.github.io/canvas-kit/?path=/story/welcome-migration-guides-v6-0--page)
+> for more information.
 
 Cookie banner component.
 
@@ -15,28 +20,28 @@ Fixes a cookie banner to the bottom of the web page.
 Can be configured with a "Cookie Settings" element and a custom notice.
 
 ```tsx
-import CookieBanner from '@workday/canvas-kit-react/cookie-banner'
+import DeprecatedCookieBanner from '@workday/canvas-kit-react/cookie-banner'
 
-<CookieBanner
+<DeprecatedCookieBanner
   onAccept={this.onAccept}
   isClosed={this.state.acceptedCookies}
 />
 
-<CookieBanner
+<DeprecatedCookieBanner
   onAccept={this.onAccept}
   isClosed={this.state.acceptedCookies}
   onClickSettings={this.openSettings}
   notice="Custom notice"
 />
 
-<CookieBanner
+<DeprecatedCookieBanner
   onAccept={this.onAccept}
   isClosed={this.state.acceptedCookies}
   onClickSettings={this.openSettings}
-  notice={`${CookieBanner.DefaultNotice} This is appended.`}
+  notice={`${DeprecatedCookieBanner.DefaultNotice} This is appended.`}
 />
 
-<CookieBanner
+<DeprecatedCookieBanner
   onAccept={this.onAccept}
   isClosed={this.state.acceptedCookies}
   notice={<Component />}
@@ -51,11 +56,11 @@ import CookieBanner from '@workday/canvas-kit-react/cookie-banner'
 > without changing your settings, we’ll assume that you are willing to receive cookies.
 
 ```tsx
-<CookieBanner
+<DeprecatedCookieBanner
   onAccept={this.onAccept}
   isClosed={this.state.acceptedCookies}
   onClickSettings={this.openSettings}
-  notice={`${CookieBanner.DefaultNotice} This is appended.`}
+  notice={`${DeprecatedCookieBanner.DefaultNotice} This is appended.`}
 />
 ```
 
@@ -90,7 +95,7 @@ Default: `undefined`
 
 > Custom cookie notice text or element to display.
 
-Default: `CookieBanner.DefaultNotice`
+Default: `DeprecatedCookieBanner.DefaultNotice`
 
 #### `settingsLabel: string`
 
