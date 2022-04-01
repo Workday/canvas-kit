@@ -85,41 +85,40 @@ const BannerViewAll = styled('span')<BannerProps>(
   })
 );
 
-class Banner extends React.Component<BannerProps> {
-  static Variant = BannerVariant;
-  static ErrorType = ErrorType;
+const Banner = (React.forwardRef<HTMLButtonElement, BannerProps>((props, ref) => {
+  const {
+    actionText = 'View All',
+    variant = BannerVariant.Full,
+    error = ErrorType.Alert,
+    label,
+    onClick,
+    ...elemProps
+  } = props;
 
-  public render() {
-    const {
-      actionText = 'View All',
-      variant = BannerVariant.Full,
-      error = ErrorType.Alert,
-      label,
-      onClick,
-      ...props
-    } = this.props;
+  const bannerIcon = error === ErrorType.Error ? exclamationCircleIcon : exclamationTriangleIcon;
+  const iconColor = error === ErrorType.Error ? colors.frenchVanilla100 : colors.blackPepper400;
+  const iconSize = 24;
 
-    const bannerIcon = error === ErrorType.Error ? exclamationCircleIcon : exclamationTriangleIcon;
-    const iconColor = error === ErrorType.Error ? colors.frenchVanilla100 : colors.blackPepper400;
-    const iconSize = 24;
-
-    return (
-      <BannerWrapper
-        aria-label={actionText + ': ' + label}
-        role="button"
-        variant={variant}
-        tabIndex={0}
-        onClick={onClick}
-        error={error}
-        {...props}
-      >
-        <BannerIcon icon={bannerIcon} color={iconColor} colorHover={iconColor} size={iconSize} />
-        <BannerLabel>{label}</BannerLabel>
-        <BannerViewAll variant={variant}>{actionText}</BannerViewAll>
-      </BannerWrapper>
-    );
-  }
-}
+  return (
+    <BannerWrapper
+      aria-label={actionText + ': ' + label}
+      role="button"
+      variant={variant}
+      tabIndex={0}
+      onClick={onClick}
+      error={error}
+      ref={ref}
+      {...elemProps}
+    >
+      <BannerIcon icon={bannerIcon} color={iconColor} colorHover={iconColor} size={iconSize} />
+      <BannerLabel>{label}</BannerLabel>
+      <BannerViewAll variant={variant}>{actionText}</BannerViewAll>
+    </BannerWrapper>
+  );
+}) as any) as React.FC<BannerProps> & {
+  Variant: typeof BannerVariant;
+  ErrorType: typeof ErrorType;
+};
 
 Banner.Variant = BannerVariant;
 Banner.ErrorType = ErrorType;
