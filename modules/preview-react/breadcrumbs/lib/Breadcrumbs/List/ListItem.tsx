@@ -20,6 +20,9 @@ export const BreadcrumbsListItem = ({children, ...props}: ListItemProps) => {
         color={colors.licorice200}
         colorHover={colors.licorice200}
         size={20}
+        height={32}
+        width={32}
+        styles={{justifyContent: 'center', alignItems: 'center', display: 'inline-flex'}}
         aria-hidden
       />
     </Flex>
