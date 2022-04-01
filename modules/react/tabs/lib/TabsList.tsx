@@ -8,6 +8,8 @@ import {
   ExtractProps,
   useModelContext,
   useModalityType,
+  styled,
+  StyledType,
 } from '@workday/canvas-kit-react/common';
 import {Stack} from '@workday/canvas-kit-labs-react/layout';
 import {useOverflowMeasureContainer} from './overflow';
@@ -37,6 +39,20 @@ export interface TabListProps<T = unknown> extends Partial<ExtractProps<typeof S
   overflowButton?: React.ReactNode;
 }
 
+const StyledStack = styled(Stack)<StyledType>({
+  '::after': {
+    content: '""',
+    position: 'sticky',
+    height: 52,
+    minWidth: 30,
+    background: `linear-gradient(to right,rgba(255,255,255,0),white);`,
+    zIndex: 1,
+    right: 0,
+    top: 0,
+    pointerEvents: 'none',
+  },
+});
+
 export const TabsList = createComponent('div')({
   displayName: 'Tabs.List',
   Component: ({children, model, overflowButton, ...elemProps}: TabListProps, ref, Element) => {
@@ -45,7 +61,7 @@ export const TabsList = createComponent('div')({
     const modality = useModalityType();
 
     return (
-      <Stack
+      <StyledStack
         as={Element}
         position="relative"
         borderBottom={`1px solid ${commonColors.divider}`}
@@ -55,7 +71,7 @@ export const TabsList = createComponent('div')({
       >
         {useRenderItems(localModel, children)}
         {overflowButton}
-      </Stack>
+      </StyledStack>
     );
   },
 });

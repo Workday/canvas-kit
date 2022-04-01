@@ -15,6 +15,7 @@ import {
   EllipsisText,
   useLocalRef,
   useMount,
+  useModalityType,
 } from '@workday/canvas-kit-react/common';
 import {Box} from '@workday/canvas-kit-labs-react/common';
 import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
@@ -111,7 +112,6 @@ export const StyledTabItem = styled(Box.as('button'))<
     backgroundColor: 'transparent',
     flex: '0 0 auto',
     alignItems: 'center',
-    maxWidth: '280px',
     padding: `${space.xs} ${space.s}`,
     height: 52,
     boxSizing: 'border-box',
@@ -197,6 +197,7 @@ export const TabsItem = createComponent('button')({
     const localModel = useModelContext(TabsModelContext, model);
 
     const props = useTabsItem(localModel, elemProps, ref);
+    const modality = useModalityType();
 
     if ('production' !== process.env.NODE_ENV) {
       // ensure `hasIcon` is used when a child has an icon
@@ -215,7 +216,7 @@ export const TabsItem = createComponent('button')({
 
     return (
       <OverflowTooltip>
-        <StyledTabItem as={Element} {...props}>
+        <StyledTabItem as={Element} maxWidth={modality === 'touch' ? undefined : 280} {...props}>
           {children}
         </StyledTabItem>
       </OverflowTooltip>
