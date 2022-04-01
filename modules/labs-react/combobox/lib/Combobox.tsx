@@ -11,7 +11,7 @@ import {space, commonColors, borderRadius} from '@workday/canvas-kit-react/token
 import {MenuItemProps} from '@workday/canvas-kit-preview-react/menu';
 import {Card} from '@workday/canvas-kit-react/card';
 import {TertiaryButton, TertiaryButtonProps} from '@workday/canvas-kit-react/button';
-import {xIcon} from '@workday/canvas-system-icons-web';
+import {xSmallIcon} from '@workday/canvas-system-icons-web';
 import {TextInputProps} from '@workday/canvas-kit-react/text-input';
 import flatten from 'lodash.flatten';
 import AutocompleteList from './AutocompleteList';
@@ -169,7 +169,7 @@ const Combobox = ({
   onFocus,
   onBlur,
   showClearButton,
-  clearButtonVariant,
+  clearButtonVariant = undefined,
   clearButtonAriaLabel = `Reset Search Input`,
   labelId,
   getStatusText = buildStatusString,
@@ -463,10 +463,11 @@ const Combobox = ({
           <ResetButton
             shouldShow={!!value}
             aria-label={clearButtonAriaLabel}
-            icon={xIcon}
+            icon={xSmallIcon}
             variant={clearButtonVariant}
             onClick={resetSearchInput}
             onBlur={handleBlur}
+            size="small"
             type="button"
           />
         )}

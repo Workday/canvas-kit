@@ -19,6 +19,7 @@ export const BreadcrumbsListItem = ({children, ...props}: ListItemProps) => {
         icon={icon}
         color={colors.licorice200}
         colorHover={colors.licorice200}
+        size={20}
         aria-hidden
       />
     </Flex>

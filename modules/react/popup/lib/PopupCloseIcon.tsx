@@ -12,8 +12,7 @@ import {TertiaryButton} from '@workday/canvas-kit-react/button';
 
 import {usePopupCloseButton, PopupModel, PopupModelContext} from './hooks';
 
-const closeIconSpacing = 11;
-const closeIconSpacingSmall = 9;
+const closeIconSpacing = 4;
 
 export interface PopupCloseIconProps extends ExtractProps<typeof TertiaryButton, never> {
   /**
@@ -28,9 +27,8 @@ const StyledCloseIcon = styled(TertiaryButton)<StyledType & PopupCloseIconProps>
     position: 'absolute',
   },
   ({size}) => ({
-    right: size === 'small' ? closeIconSpacingSmall : closeIconSpacing,
-    top: size === 'small' ? closeIconSpacingSmall : closeIconSpacing,
-    margin: `-${size === 'small' ? closeIconSpacingSmall : closeIconSpacing}px`,
+    right: closeIconSpacing,
+    top: closeIconSpacing,
   })
 );
 
