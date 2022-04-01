@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v5.3.15](https://github.com/Workday/canvas-kit/releases/tag/v5.3.15) (2022-04-01)
+
+### Components
+
+- fix(banner): Convert Banner to a functional component ([#1520](https://github.com/Workday/canvas-kit/pull/1520)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v5.3.14](https://github.com/Workday/canvas-kit/releases/tag/v5.3.14) (2022-03-21)
 
 ### Components
