@@ -8,8 +8,8 @@ export interface PillCountProps extends BoxProps {
   countPosition?: 'start' | 'end';
 }
 const StyledCountContainer = styled(Box.as('span'))<StyledType>({
-  height: '22px',
-  width: '22px',
+  height: '23px',
+  width: '23px',
   display: 'inline-flex',
   alignItems: 'center',
   justifyContent: 'center',
