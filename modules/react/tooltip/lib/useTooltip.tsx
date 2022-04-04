@@ -62,7 +62,7 @@ export function useTooltip<T extends Element = Element>({
    * Determines the tooltip type for accessibility.
    *
    * - `label`: Sets the accessible name for the wrapped element. Use for icons or if tooltip
-   *   `title` prop is the same as the text content of the wrapped element. E.g. IconButtons or
+   *   `title` prop is the same as the text content of the wrapped element. E.g. TertiaryButton that renders an icon or
    *   Ellipsis tooltips.
    * - `describe`: Sets `aria-describedby` of the wrapped element. Use if the tooltip has additional
    *   information about the target.

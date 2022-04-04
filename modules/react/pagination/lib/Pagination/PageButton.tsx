@@ -1,30 +1,52 @@
 import * as React from 'react';
 import {styled} from '@workday/canvas-kit-react/common';
-import canvas, {type} from '@workday/canvas-kit-react/tokens';
-import {IconButton, IconButtonProps} from '@workday/canvas-kit-react/button';
+import {borderRadius, colors, space} from '@workday/canvas-kit-react/tokens';
+import {BaseButton} from '@workday/canvas-kit-react/button';
 
 import {PaginationModel} from './types';
 
-const toggledStyles = {
-  color: canvas.colors.frenchVanilla100,
-  fontWeight: 700,
-  pointerEvents: 'none',
-};
-
-const StyledPageButton = styled(IconButton)<{toggled?: boolean}>(
+const StyledPageButton = styled(BaseButton)<{toggled?: boolean}>(
   {
-    ...type.levels.subtext.large,
+    minWidth: space.l,
+    width: space.l,
+    borderRadius: borderRadius.circle,
+    height: space.l,
   },
   ({toggled}) => {
-    return toggled ? toggledStyles : {};
+    return {
+      fontWeight: toggled ? 700 : 'normal',
+    };
   }
 );
 
-export type PageButtonProps = IconButtonProps &
-  React.ButtonHTMLAttributes<HTMLButtonElement> & {
-    model: PaginationModel;
-    pageNumber: number;
+const getPaginationButtonColors = (toggled: boolean) => {
+  return {
+    default: {
+      background: toggled ? colors.blueberry400 : 'transparent',
+      label: toggled ? colors.frenchVanilla100 : colors.blackPepper400,
+    },
+    hover: {
+      background: toggled ? colors.blueberry400 : colors.soap300,
+      label: toggled ? colors.frenchVanilla100 : colors.blackPepper400,
+    },
+    active: {
+      background: toggled ? colors.blueberry400 : 'transparent',
+      label: toggled ? colors.frenchVanilla100 : colors.blackPepper400,
+    },
+    focus: {
+      background: toggled ? colors.blueberry400 : 'transparent',
+      label: toggled ? colors.frenchVanilla100 : colors.blackPepper400,
+    },
+    disabled: {
+      background: colors.licorice100,
+    },
   };
+};
+
+export type PageButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
+  model: PaginationModel;
+  pageNumber: number;
+};
 
 export const PageButton = ({
   model,
@@ -43,11 +65,10 @@ export const PageButton = ({
   return (
     <StyledPageButton
       aria-current={isCurrentPage ? 'page' : undefined}
+      colors={getPaginationButtonColors(isCurrentPage)}
       aria-pressed={undefined}
       onClick={handleClick}
-      size="small"
       toggled={isCurrentPage}
-      variant="square"
       {...elemProps}
     >
       {children || pageNumber}

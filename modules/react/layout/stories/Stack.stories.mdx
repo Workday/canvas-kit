@@ -147,11 +147,12 @@ that you do not have direct access to the `Stack.Item` being rendered. If having
 element is necessary, using `Stack.Item` explicitly (as described below) could be the best solution.
 
 The example below is a bit contrived but has enough information to convey the point. In this
-scenario, we have a horizontal stack of `IconButtons`, but they are visually divided into separate
-groupings. The navigational buttons are on the left, and the additional actions are spaced slightly
-further to the right. You could use two separate horizontal stacks here to achieve the same result,
-but you could also use `shouldWrapChildren` and then put additional margin only where needed. Either
-approach would be fine; it's a matter of personal preference.
+scenario, we have a horizontal stack of `SecondaryButton`s that render an icon, but they are
+visually divided into separate groupings. The navigational buttons are on the left, and the
+additional actions are spaced slightly further to the right. You could use two separate horizontal
+stacks here to achieve the same result, but you could also use `shouldWrapChildren` and then put
+additional margin only where needed. Either approach would be fine; it's a matter of personal
+preference.
 
 <ExampleCodeBlock code={ShouldWrapChildren} />
 

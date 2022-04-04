@@ -32,8 +32,8 @@ export const BannerIcon = createComponent('span')({
     const localModel = useModelContext(BannerModelContext, model);
 
     // SystemIcon is still a class based component so we need to set ref manually.
-    const {ref: iconRef, icon: defaultIcon, ...props} = useBannerIcon(localModel, elemProps, ref);
+    const {icon: defaultIcon, ...props} = useBannerIcon(localModel, elemProps);
 
-    return <StyledBannerIcon icon={icon ?? defaultIcon} iconRef={iconRef} {...props} />;
+    return <StyledBannerIcon icon={icon ?? defaultIcon} ref={ref} {...props} />;
   },
 });
