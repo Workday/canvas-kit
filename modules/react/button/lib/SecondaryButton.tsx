@@ -166,7 +166,7 @@ export const getSecondaryButtonColors = (
           label: colors.blackPepper500,
           focusRing: focusRing(
             {
-              separation: 2,
+              separation: 1,
               innerColor: colors.blackPepper400,
               outerColor: colors.frenchVanilla100,
             },

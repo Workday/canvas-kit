@@ -143,15 +143,22 @@ const StyledTertiaryButtonContainer = styled(BaseButton)<
 const getPaddingStyles = (
   icon: CanvasSystemIcon | undefined,
   iconPosition: 'start' | 'end',
-  children: React.ReactNode
+  children: React.ReactNode,
+  size: ButtonSizes
 ): string => {
   if (children) {
     // if there is an icon on the left, add 4px extra padding to the right for visual balance
     if (icon && iconPosition === 'start') {
+      if (size === 'extraSmall') {
+        return `0 ${space.xxs} 0 ${space.xxxs}`;
+      }
       return `0 ${space.xs} 0 ${space.xxs}`;
     }
     // if there is an icon on the right, add 4px extra padding to the left for visual balance
     if (icon && iconPosition === 'end') {
+      if (size === 'extraSmall') {
+        return `0 ${space.xxxs} 0 ${space.xxs}`;
+      }
       return `0 ${space.xxs} 0 ${space.xs}`;
     }
     // if there is no icon, return the default padding
@@ -199,7 +206,6 @@ export const TertiaryButton = createComponent('button')({
     ref,
     Element
   ) => {
-    const balancingMargin = size === 'medium' ? space.xxxs : space.xxxs;
     const theme = useTheme();
 
     return (
@@ -209,7 +215,7 @@ export const TertiaryButton = createComponent('button')({
         allCaps={allCaps}
         colors={getTertiaryButtonColors(variant, theme, children)}
         size={size}
-        padding={getPaddingStyles(icon, iconPosition, children)}
+        padding={getPaddingStyles(icon, iconPosition, children, size)}
         minWidth={getMinWidthStyles(children, size)}
         style={{borderRadius: children ? borderRadius.m : borderRadius.circle}}
         {...elemProps}
@@ -220,7 +226,6 @@ export const TertiaryButton = createComponent('button')({
             iconPosition={iconPosition}
             icon={icon}
             shouldMirrorIcon={shouldMirrorIcon}
-            marginInlineStart={children ? `-${balancingMargin} !important` : undefined}
           />
         )}
         {children && <StyledButtonLabel>{children}</StyledButtonLabel>}
@@ -230,7 +235,6 @@ export const TertiaryButton = createComponent('button')({
             iconPosition={iconPosition}
             icon={icon}
             shouldMirrorIcon={shouldMirrorIcon}
-            marginInlineEnd={children ? `-${balancingMargin} !important` : undefined}
           />
         )}
       </StyledTertiaryButtonContainer>
