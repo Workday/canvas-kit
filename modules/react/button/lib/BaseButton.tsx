@@ -253,8 +253,8 @@ export const getPaddingStyles = (
     case 'large':
       return icon
         ? iconPosition === 'start'
-          ? `0 ${space.l} 0 28px`
-          : `0 28px 0 ${space.l}`
+          ? `0 ${space.l} 0 ${space.m}`
+          : `0 ${space.m} 0 ${space.l}`
         : `0 ${space.l}`;
 
     case 'medium':
@@ -267,8 +267,8 @@ export const getPaddingStyles = (
     case 'small':
       return icon
         ? iconPosition === 'start'
-          ? `0 ${space.s} 0 ${space.xs}`
-          : `0 ${space.xs} 0 ${space.s}`
+          ? `0 20px 0 ${space.s}`
+          : `0 ${space.s} 0 20px`
         : `0 ${space.s}`;
 
     case 'extraSmall':
