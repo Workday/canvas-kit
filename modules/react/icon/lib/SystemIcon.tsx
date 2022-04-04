@@ -3,6 +3,7 @@ import {iconColors} from '@workday/canvas-kit-react/tokens';
 import {CanvasSystemIcon, CanvasIconTypes} from '@workday/design-assets-types';
 import {CSSObject} from '@emotion/styled';
 import Icon, {IconProps} from './Icon';
+import {createComponent} from '../../common';
 
 export interface SystemIconStyles {
   /**
@@ -43,7 +44,9 @@ export interface SystemIconStyles {
   fillHover?: string;
 }
 
-export interface SystemIconProps extends SystemIconStyles, Omit<IconProps, 'src' | 'type'> {
+export interface SystemIconProps
+  extends SystemIconStyles,
+    Omit<IconProps, 'src' | 'color' | 'type' | 'background'> {
   /**
    * The icon to display from `@workday/canvas-system-icons-web`.
    */
@@ -51,7 +54,8 @@ export interface SystemIconProps extends SystemIconStyles, Omit<IconProps, 'src'
   /**
    * The size of the SystemIcon in `px`.
    */
-  size?: number;
+  size?: number | undefined;
+  className?: string; //investigate more
 }
 
 export const systemIconStyles = ({
@@ -84,15 +88,15 @@ export const systemIconStyles = ({
   },
 });
 
-export default class SystemIcon extends React.Component<SystemIconProps> {
-  render() {
-    const {
+const SystemIcon = createComponent('span')({
+  displayName: 'SystemIcon',
+  Component: (
+    {
       background = 'transparent',
       backgroundHover = 'transparent',
       color = iconColors.standard,
       colorHover = iconColors.hover,
       icon,
-      iconRef,
       accent,
       accentHover,
       fill,
@@ -100,8 +104,10 @@ export default class SystemIcon extends React.Component<SystemIconProps> {
       size,
       shouldMirror,
       ...elemProps
-    } = this.props;
-
+    }: SystemIconProps,
+    ref,
+    Element
+  ) => {
     const style = systemIconStyles({
       accent,
       accentHover,
@@ -118,11 +124,14 @@ export default class SystemIcon extends React.Component<SystemIconProps> {
         src={icon}
         type={CanvasIconTypes.System}
         size={size}
-        styles={style}
-        iconRef={iconRef}
+        as={Element}
         shouldMirror={shouldMirror}
+        ref={ref}
+        styles={style}
         {...elemProps}
       />
     );
-  }
-}
+  },
+});
+
+export default SystemIcon;

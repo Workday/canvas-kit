@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Flex, Box} from '@workday/canvas-kit-react/layout';
-import {PrimaryButton, SecondaryButton, IconButton} from '@workday/canvas-kit-react/button';
+import {PrimaryButton, SecondaryButton} from '@workday/canvas-kit-react/button';
 import {type} from '@workday/canvas-kit-react/tokens';
 
 // temporary placeholder until type components are added to canvas-kit

@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {render, fireEvent} from '@testing-library/react';
-import SegmentedControl from '../lib/SegmentedControl';
-import {IconButton} from '@workday/canvas-kit-react/button';
+import {SegmentedControl} from '../lib/SegmentedControl';
 import {listViewIcon, worksheetsIcon} from '@workday/canvas-system-icons-web';
 
 describe('Segmented Control', () => {
@@ -11,11 +10,15 @@ describe('Segmented Control', () => {
   });
 
   describe('when rendered', () => {
-    it('should render two icon buttons', () => {
+    it('should render two buttons', () => {
       const {getAllByRole} = render(
         <SegmentedControl>
-          <IconButton icon={listViewIcon} aria-label="List View" />
-          <IconButton icon={worksheetsIcon} aria-label="Table View" />
+          <SegmentedControl.Button value="list-view" icon={listViewIcon} aria-label="List View" />
+          <SegmentedControl.Button
+            value="table-view"
+            icon={worksheetsIcon}
+            aria-label="Table View"
+          />
         </SegmentedControl>
       );
       expect(getAllByRole('button').length).toEqual(2);
@@ -27,8 +30,12 @@ describe('Segmented Control', () => {
     it('should call SegmentedControl onChange callback', () => {
       const {getAllByRole} = render(
         <SegmentedControl onChange={cb}>
-          <IconButton icon={listViewIcon} value="list-view" aria-label="List View" />
-          <IconButton icon={worksheetsIcon} value="table-view" aria-label="Table View" />
+          <SegmentedControl.Button icon={listViewIcon} value="list-view" aria-label="List View" />
+          <SegmentedControl.Button
+            icon={worksheetsIcon}
+            value="table-view"
+            aria-label="Table View"
+          />
           <span />
         </SegmentedControl>
       );
@@ -38,12 +45,12 @@ describe('Segmented Control', () => {
       expect(cb.mock.calls[0][0]).toBe('table-view');
     });
 
-    it('should preserve existing IconButton onClick callbacks', () => {
+    it('should preserve existing button onClick callbacks', () => {
       const existingCb = jest.fn();
       const {getAllByRole} = render(
         <SegmentedControl onChange={cb}>
-          <IconButton icon={listViewIcon} value="list-view" aria-label="List View" />
-          <IconButton
+          <SegmentedControl.Button icon={listViewIcon} value="list-view" aria-label="List View" />
+          <SegmentedControl.Button
             icon={worksheetsIcon}
             value="table-view"
             aria-label="Table View"
@@ -51,6 +58,7 @@ describe('Segmented Control', () => {
           />
         </SegmentedControl>
       );
+
       fireEvent.click(getAllByRole('button')[1]);
 
       expect(cb).toHaveBeenCalledTimes(1);
@@ -60,13 +68,17 @@ describe('Segmented Control', () => {
     it('disabled buttons should trigger callback', () => {
       const {getAllByRole} = render(
         <SegmentedControl onChange={cb}>
-          <IconButton
+          <SegmentedControl.Button
             icon={listViewIcon}
             value="list-view"
             aria-label="List View"
             disabled={true}
           />
-          <IconButton icon={worksheetsIcon} value="table-view" aria-label="Table View" />
+          <SegmentedControl.Button
+            icon={worksheetsIcon}
+            value="table-view"
+            aria-label="Table View"
+          />
         </SegmentedControl>
       );
       fireEvent.click(getAllByRole('button')[0]);
@@ -84,8 +96,8 @@ describe('Segmented Control', () => {
     it('should call callback with index', () => {
       const {getAllByRole} = render(
         <SegmentedControl onChange={cb}>
-          <IconButton icon={listViewIcon} aria-label="List View" />
-          <IconButton icon={worksheetsIcon} aria-label="Table View" />
+          <SegmentedControl.Button value="list-view" icon={listViewIcon} aria-label="List View" />
+          <SegmentedControl.Button icon={worksheetsIcon} aria-label="Table View" />
         </SegmentedControl>
       );
 

@@ -9,7 +9,7 @@ export interface ButtonStateColors {
   icon?: string;
   iconFill?: boolean;
   label?: string;
-  labelData?: string;
+  opacity?: string;
 }
 export interface ButtonColors {
   default: ButtonStateColors;
@@ -30,4 +30,4 @@ export interface ButtonColors {
 export type ButtonSizes = 'extraSmall' | 'small' | 'medium' | 'large';
 // TODO: Remove TertiaryButtonSizes in favor of button sizes when we add Tertiary large
 export type TertiaryButtonSizes = 'extraSmall' | 'small' | 'medium';
-export type IconPositions = 'left' | 'right';
+export type IconPositions = 'start' | 'end';

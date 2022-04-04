@@ -6,10 +6,11 @@ import {
   Themeable,
   EmotionCanvasTheme,
   createComponent,
+  styled,
+  StyledType,
 } from '@workday/canvas-kit-react/common';
-import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {ButtonColors} from './types';
-import {ButtonContainer} from './parts';
+import {BaseButton} from './BaseButton';
 import {chevronDownSmallIcon} from '@workday/canvas-system-icons-web';
 import {ToolbarIconButtonProps} from './ToolbarIconButton';
 
@@ -17,7 +18,7 @@ export interface ToolbarDropdownButtonProps
   extends Omit<ToolbarIconButtonProps, 'toggled' | 'onToggleChange'>,
     Themeable {}
 
-const containerStyles = {
+const StyledToolbarDropdownButton = styled(BaseButton)<StyledType & ToolbarDropdownButtonProps>({
   padding: space.zero,
   minWidth: space.l,
   width: 'auto',
@@ -37,7 +38,7 @@ const containerStyles = {
     marginRight: 0,
     width: 18, // decrease the space between a custom icon and the chevron per design
   },
-};
+});
 
 export const ToolbarDropdownButton = createComponent('button')({
   displayName: 'ToolbarDropdownButton',
@@ -55,28 +56,27 @@ export const ToolbarDropdownButton = createComponent('button')({
     Element
   ) => {
     return (
-      <ButtonContainer
+      <StyledToolbarDropdownButton
         ref={ref}
         as={Element}
         colors={getToolbarDropdownButtonColors(theme)}
-        extraStyles={containerStyles}
         {...elemProps}
       >
         {icon ? (
-          <SystemIcon
+          <BaseButton.Icon
             className={'wdc-toolbar-dropdown-btn-custom-icon'}
             icon={icon}
-            shouldMirror={shouldMirrorIcon}
+            shouldMirrorIcon={shouldMirrorIcon}
           />
         ) : (
           children
         )}
-        <SystemIcon
+        <BaseButton.Icon
           className={'wdc-toolbar-dropdown-btn-arrow'}
           icon={chevronDownSmallIcon}
-          shouldMirror={shouldMirrorIcon}
+          shouldMirrorIcon={shouldMirrorIcon}
         />
-      </ButtonContainer>
+      </StyledToolbarDropdownButton>
     );
   },
 });
@@ -102,6 +102,7 @@ const getToolbarDropdownButtonColors = (theme: EmotionCanvasTheme): ButtonColors
     disabled: {
       icon: colors.soap600,
       background: 'transparent',
+      opacity: '1',
     },
   };
 };

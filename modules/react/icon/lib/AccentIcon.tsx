@@ -3,6 +3,7 @@ import {colors} from '@workday/canvas-kit-react/tokens';
 import {CanvasAccentIcon, CanvasIconTypes} from '@workday/design-assets-types';
 import {CSSObject} from '@emotion/styled';
 import Icon, {IconProps} from './Icon';
+import {createComponent} from '../../common';
 
 export interface AccentIconStyles {
   /**
@@ -17,7 +18,9 @@ export interface AccentIconStyles {
   transparent?: boolean;
 }
 
-export interface AccentIconProps extends AccentIconStyles, Omit<IconProps, 'src' | 'type'> {
+export interface AccentIconProps
+  extends AccentIconStyles,
+    Omit<IconProps, 'src' | 'type' | 'color'> {
   /**
    *  The icon to display from `@workday/canvas-accent-icons-web`.
    */
@@ -41,28 +44,26 @@ export const accentIconStyles = ({
   },
 });
 
-export default class AccentIcon extends React.Component<AccentIconProps> {
-  render() {
-    const {
-      transparent = false,
-      size = 56,
-      icon,
-      color,
-      iconRef,
-      shouldMirror,
-      ...elemProps
-    } = this.props;
-
+const AccentIcon = createComponent('span')({
+  displayName: 'AccentIcon',
+  Component: (
+    {transparent = false, size = 56, icon, color, shouldMirror, ...elemProps}: AccentIconProps,
+    ref,
+    Element
+  ) => {
     return (
       <Icon
         src={icon}
         type={CanvasIconTypes.Accent}
         styles={accentIconStyles({color, transparent})}
         size={size}
-        iconRef={iconRef}
+        as={Element}
+        ref={ref}
         shouldMirror={shouldMirror}
         {...elemProps}
       />
     );
-  }
-}
+  },
+});
+
+export default AccentIcon;

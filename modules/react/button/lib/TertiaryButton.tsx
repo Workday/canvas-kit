@@ -1,16 +1,17 @@
 import * as React from 'react';
-import {CSSObject} from '@emotion/styled';
 import {
   focusRing,
   useTheme,
   Themeable,
   EmotionCanvasTheme,
   createComponent,
+  styled,
+  StyledType,
 } from '@workday/canvas-kit-react/common';
-import {colors, space, borderRadius} from '@workday/canvas-kit-react/tokens';
+import {borderRadius, colors, space} from '@workday/canvas-kit-react/tokens';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {ButtonColors, TertiaryButtonSizes, IconPositions} from './types';
-import {ButtonContainer, ButtonLabelIcon, ButtonLabel} from './parts';
+import {ButtonColors, IconPositions, ButtonSizes} from './types';
+import {BaseButton} from './BaseButton';
 
 export interface TertiaryButtonProps extends Themeable {
   /**
@@ -24,7 +25,7 @@ export interface TertiaryButtonProps extends Themeable {
    *
    * @default 'medium'
    */
-  size?: TertiaryButtonSizes;
+  size?: ButtonSizes;
   /**
    * Button icon positions can either be `left` or `right`.
    * If no value is provided, it defaults to `left`.
@@ -49,7 +50,8 @@ export interface TertiaryButtonProps extends Themeable {
 
 const getTertiaryButtonColors = (
   variant: 'inverse' | undefined,
-  theme: EmotionCanvasTheme
+  theme: EmotionCanvasTheme,
+  children: React.ReactNode
 ): ButtonColors => {
   const {
     canvas: {
@@ -97,65 +99,103 @@ const getTertiaryButtonColors = (
   } else {
     return {
       default: {
-        icon: themePrimary.main,
+        icon: children ? themePrimary.main : colors.blackPepper400,
         label: themePrimary.main,
       },
       hover: {
         background: colors.soap200,
-        icon: themePrimary.dark,
+        icon: children ? themePrimary.dark : colors.blackPepper500,
         label: themePrimary.dark,
       },
       active: {
         background: colors.soap300,
-        icon: themePrimary.dark,
+        icon: children ? themePrimary.dark : colors.blackPepper500,
         label: themePrimary.dark,
       },
       focus: {
-        icon: themePrimary.dark,
-        label: themePrimary.dark,
-        focusRing: focusRing({}, theme),
+        icon: children ? themePrimary.main : colors.blackPepper500,
+        label: themePrimary.main,
+        focusRing: focusRing({innerColor: colors.blueberry400}, theme),
       },
       disabled: {
-        icon: themePrimary.main,
+        icon: children ? themePrimary.main : colors.blackPepper400,
         label: themePrimary.main,
       },
     };
   }
 };
 
+const StyledButtonLabel = styled(BaseButton.Label)({
+  textDecoration: 'underline',
+});
+
+const StyledTertiaryButtonContainer = styled(BaseButton)<
+  StyledType & Pick<TertiaryButtonProps, 'allCaps'>
+>(
+  {
+    border: '0',
+  },
+  ({allCaps}) => ({
+    textTransform: allCaps ? 'uppercase' : undefined,
+  })
+);
+
 const getPaddingStyles = (
   icon: CanvasSystemIcon | undefined,
-  iconPosition: 'left' | 'right'
+  iconPosition: 'start' | 'end',
+  children: React.ReactNode,
+  size: ButtonSizes
 ): string => {
-  // if there is an icon on the left, add 4px extra padding to the right for visual balance
-  if (icon && iconPosition === 'left') {
-    return `0 ${space.xs} 0 ${space.xxs}`;
+  if (children) {
+    // if there is an icon on the left, add 4px extra padding to the right for visual balance
+    if (icon && iconPosition === 'start') {
+      if (size === 'extraSmall') {
+        return `0 ${space.xxs} 0 ${space.xxxs}`;
+      }
+      return `0 ${space.xs} 0 ${space.xxs}`;
+    }
+    // if there is an icon on the right, add 4px extra padding to the left for visual balance
+    if (icon && iconPosition === 'end') {
+      if (size === 'extraSmall') {
+        return `0 ${space.xxxs} 0 ${space.xxs}`;
+      }
+      return `0 ${space.xxs} 0 ${space.xs}`;
+    }
+    // if there is no icon, return the default padding
+    return `0 ${space.xxs}`;
+  } else {
+    return '0';
   }
-  // if there is an icon on the right, add 4px extra padding to the left for visual balance
-  if (icon && iconPosition === 'right') {
-    return `0 ${space.xxs} 0 ${space.xs}`;
-  }
-  // if there is no icon, return the default padding
-  return `0 ${space.xxs}`;
 };
 
-// All disabled buttons are set to 40% opacity.
-// This will eventually live in the ButtonContainer styles, but for now we're scoping it to Primary, Secondary, and Tertiary buttons.
-const disabledButtonOpacity = {
-  '&:disabled, &:disabled:active': {
-    opacity: 0.4,
-  },
+const getMinWidthStyles = (children: React.ReactNode, size: ButtonSizes): string => {
+  let minWidthNum;
+  switch (size) {
+    case 'large':
+      minWidthNum = '48px';
+      break;
+    case 'medium':
+      minWidthNum = space.xl;
+      break;
+    case 'small':
+      minWidthNum = space.l;
+      break;
+    case 'extraSmall':
+      minWidthNum = space.m;
+      break;
+    default:
+      minWidthNum = space.xl;
+      break;
+  }
+  return children ? 'auto' : minWidthNum;
 };
 
 export const TertiaryButton = createComponent('button')({
   displayName: 'TertiaryButton',
   Component: (
     {
-      // TODO: Fix useTheme and make it a real hook
-      // eslint-disable-next-line react-hooks/rules-of-hooks
-      theme = useTheme(),
       size = 'medium',
-      iconPosition = 'left',
+      iconPosition = 'start',
       variant,
       children,
       icon,
@@ -166,45 +206,38 @@ export const TertiaryButton = createComponent('button')({
     ref,
     Element
   ) => {
-    const allContainerStyles: CSSObject = {
-      borderRadius: borderRadius.m,
-      border: '0',
-      padding: getPaddingStyles(icon, iconPosition),
-      minWidth: 'auto',
-      textTransform: allCaps ? 'uppercase' : undefined,
-      '.wdc-text-button-label': {
-        textDecoration: 'underline',
-      },
-      ...disabledButtonOpacity,
-    };
+    const theme = useTheme();
 
     return (
-      <ButtonContainer
+      <StyledTertiaryButtonContainer
         ref={ref}
         as={Element}
-        colors={getTertiaryButtonColors(variant, theme)}
+        allCaps={allCaps}
+        colors={getTertiaryButtonColors(variant, theme, children)}
         size={size}
-        extraStyles={allContainerStyles}
+        padding={getPaddingStyles(icon, iconPosition, children, size)}
+        minWidth={getMinWidthStyles(children, size)}
+        style={{borderRadius: children ? borderRadius.m : borderRadius.circle}}
         {...elemProps}
       >
-        {icon && iconPosition === 'left' && (
-          <ButtonLabelIcon
+        {icon && iconPosition === 'start' && (
+          <BaseButton.Icon
             size={size}
             iconPosition={iconPosition}
             icon={icon}
             shouldMirrorIcon={shouldMirrorIcon}
           />
         )}
-        <ButtonLabel className="wdc-text-button-label">{children}</ButtonLabel>
-        {icon && iconPosition === 'right' && (
-          <ButtonLabelIcon
+        {children && <StyledButtonLabel>{children}</StyledButtonLabel>}
+        {icon && iconPosition === 'end' && (
+          <BaseButton.Icon
             size={size}
             iconPosition={iconPosition}
             icon={icon}
             shouldMirrorIcon={shouldMirrorIcon}
           />
         )}
-      </ButtonContainer>
+      </StyledTertiaryButtonContainer>
     );
   },
 });

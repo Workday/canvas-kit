@@ -1,20 +1,26 @@
 import * as React from 'react';
-import isPropValid from '@emotion/is-prop-valid';
-import {CSSObject} from '@emotion/styled';
-import {borderRadius, space, spaceNumbers, type} from '@workday/canvas-kit-react/tokens';
+
+import {ButtonLabelIcon} from './parts/ButtonLabelIcon';
+import {ButtonLabel} from './parts/ButtonLabel';
+
 import {
+  createComponent,
   GrowthBehavior,
   mouseFocusBehavior,
   focusRing,
   styled,
   EmotionCanvasTheme,
+  StyledType,
 } from '@workday/canvas-kit-react/common';
-import {ButtonColors, ButtonSizes} from '../types';
-import {buttonLabelDataClassName} from './ButtonLabelData';
+import {BoxProps, boxStyleFn} from '@workday/canvas-kit-react/layout';
+import {borderRadius, space, spaceNumbers, type} from '@workday/canvas-kit-react/tokens';
 
-export interface ButtonContainerProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    GrowthBehavior {
+import {ButtonColors, ButtonSizes, IconPositions, TertiaryButtonSizes} from './types';
+
+import {CSSObject} from '@emotion/styled';
+import {CanvasSystemIcon} from '@workday/design-assets-types';
+
+export interface ButtonContainerProps extends BoxProps, GrowthBehavior {
   colors?: ButtonColors;
   /**
    * There are four button sizes: `extraSmall`, `small`, `medium`, and `large`.
@@ -29,14 +35,9 @@ export interface ButtonContainerProps
   ref?: React.Ref<HTMLButtonElement>;
   /**
    * Whether the icon should received filled (colored background layer) or regular styles.
-   * Corresponds to `toggled` in IconButton
+   * Corresponds to `toggled` in ToolbarIconButton
    */
   fillIcon?: boolean;
-  /**
-   * Any extra styles necessary for a given parent component.
-   * This avoids using the inline `style` attribute when the shape needs to be customized (e.g. for IconButton)
-   */
-  extraStyles?: CSSObject;
 }
 
 function getIconColorSelectors(
@@ -67,40 +68,39 @@ function getIconColorSelectors(
   };
 }
 
-export const ButtonContainer = styled('button', {
-  shouldForwardProp: prop => isPropValid(prop) && prop !== 'size',
-})<ButtonContainerProps>(
+const ButtonContainer = styled('button')<StyledType & ButtonContainerProps>(
   {
     ...type.levels.subtext.large,
-    fontWeight: type.properties.fontWeights.bold,
-    lineHeight: 'normal',
-    boxSizing: 'border-box',
+    cursor: 'pointer',
     display: 'inline-flex',
     alignItems: 'center',
     justifyContent: 'center',
-    background: 'none',
-    borderRadius: borderRadius.circle,
+    boxSizing: 'border-box',
     boxShadow: 'none',
-    position: 'relative',
-    cursor: 'pointer',
     outline: 'none',
-    verticalAlign: 'middle',
-    border: '1px solid transparent',
-    overflow: 'hidden',
+    fontWeight: type.properties.fontWeights.bold,
+    lineHeight: 'normal',
     whiteSpace: 'nowrap',
     WebkitFontSmoothing: 'antialiased',
     MozOsxFontSmoothing: 'grayscale',
-
+    borderRadius: borderRadius.circle,
+    position: 'relative',
+    verticalAlign: 'middle',
+    overflow: 'hidden',
+    border: '1px solid transparent',
+    background: 'transparent',
     transition:
       'box-shadow 120ms linear, border 120ms linear, background-color 120ms linear, color 120ms linear',
+    '&:disabled, &:disabled:active': {
+      cursor: 'default',
+      boxShadow: 'none',
+      opacity: 0.4,
+    },
 
-    // Makes the "down" state of the button happens faster than the hover state, so it animates in correctly.
     '&:hover:active': {transitionDuration: '40ms'},
 
-    '&:disabled, &:disabled:active': {cursor: 'default', boxShadow: 'none'},
-
     '& > *:first-of-type': {
-      marginLeft: 0,
+      marginLeft: '0',
     },
 
     '& > *:last-of-type': {
@@ -113,9 +113,7 @@ export const ButtonContainer = styled('button', {
         return {
           ...type.levels.body.small,
           fontWeight: type.properties.fontWeights.bold,
-          minWidth: '112px',
           height: '48px',
-          padding: `0 ${space.l}`,
           '& > * ': {
             margin: `0 ${spaceNumbers.xxs / 2}px`,
           },
@@ -123,18 +121,14 @@ export const ButtonContainer = styled('button', {
       case 'medium':
       default:
         return {
-          minWidth: '96px',
           height: space.xl,
-          padding: `0 ${space.m}`,
           '& > * ': {
             margin: `0 ${spaceNumbers.xxs / 2}px`,
           },
         };
       case 'small':
         return {
-          minWidth: '80px',
           height: space.l,
-          padding: `0 ${space.s}`,
           '& > * ': {
             margin: `0 ${spaceNumbers.xxxs / 2}px`,
           },
@@ -144,7 +138,6 @@ export const ButtonContainer = styled('button', {
           ...type.levels.subtext.medium,
           fontWeight: type.properties.fontWeights.bold,
           height: space.m,
-          padding: `0 ${space.xs}`,
           '& > * ': {
             margin: `0 ${spaceNumbers.xxxs / 2}px`,
           },
@@ -156,6 +149,7 @@ export const ButtonContainer = styled('button', {
     if (!colors) {
       return;
     }
+
     const baseStyles = {
       backgroundColor: colors.default.background,
       borderColor: colors.default.border,
@@ -166,11 +160,6 @@ export const ButtonContainer = styled('button', {
         },
         ...getIconColorSelectors(theme, colors.default.icon, fillIcon),
       }),
-      ...(colors.default.labelData && {
-        ['.' + buttonLabelDataClassName]: {
-          color: colors.default.labelData,
-        },
-      }),
     };
 
     const hoverStyles = {
@@ -178,12 +167,6 @@ export const ButtonContainer = styled('button', {
         backgroundColor: colors.hover.background,
         borderColor: colors.hover.border,
         color: colors.hover.label,
-        ...(colors.hover.labelData && {
-          ['.' + buttonLabelDataClassName]: {
-            transition: 'color 120ms ease-in',
-            color: colors.hover.labelData,
-          },
-        }),
         ...(colors.hover.icon && getIconColorSelectors(theme, colors.hover.icon, fillIcon)),
       },
     };
@@ -193,11 +176,6 @@ export const ButtonContainer = styled('button', {
         backgroundColor: colors.active.background,
         borderColor: colors.active.border,
         color: colors.active.label,
-        ...(colors.active.labelData && {
-          ['.' + buttonLabelDataClassName]: {
-            color: colors.active.labelData,
-          },
-        }),
         ...(colors.active.icon && getIconColorSelectors(theme, colors.active.icon, fillIcon)),
       },
     };
@@ -209,11 +187,6 @@ export const ButtonContainer = styled('button', {
         borderColor: colors.focus.border,
         color: colors.focus.label,
         ...(colors.focus.focusRing || focusRing({separation: 2}, theme)),
-        ...(colors.focus.labelData && {
-          ['.' + buttonLabelDataClassName]: {
-            color: colors.focus.labelData,
-          },
-        }),
         ...(colors.focus.icon && getIconColorSelectors(theme, colors.focus.icon, fillIcon)),
       },
 
@@ -223,12 +196,8 @@ export const ButtonContainer = styled('button', {
         backgroundColor: colors.disabled.background,
         borderColor: colors.disabled.border,
         color: colors.disabled.label,
+        opacity: colors.disabled.opacity,
         ...(colors.disabled.icon && getIconColorSelectors(theme, colors.disabled.icon, fillIcon)),
-        ...(colors.disabled.labelData && {
-          ['.' + buttonLabelDataClassName]: {
-            color: colors.disabled.labelData,
-          },
-        }),
       },
       ...mouseFocusBehavior({
         '&:focus': {
@@ -242,5 +211,93 @@ export const ButtonContainer = styled('button', {
       }),
     };
   },
-  ({extraStyles}) => extraStyles
+  boxStyleFn
 );
+
+export const getMinWidthStyles = (
+  children: React.ReactNode,
+  size: ButtonSizes | TertiaryButtonSizes
+) => {
+  switch (size) {
+    case 'large':
+      return children ? '112px' : '48px';
+    case 'medium':
+      return children ? '96px' : space.xl;
+    case 'small':
+      return children ? space.xxxl : space.l;
+    case 'extraSmall':
+      return children ? 'auto' : space.m;
+    default:
+      return children ? '96px' : space.xl;
+  }
+};
+
+export const getPaddingStyles = (
+  children: React.ReactNode,
+  size: ButtonSizes | TertiaryButtonSizes,
+  icon: CanvasSystemIcon | undefined,
+  iconPosition: IconPositions | undefined
+) => {
+  // In order to calculate the correct padding, we need to know its children
+  // and what side the icon is on and if there's an icon provided
+  if (!children) {
+    // icon buttons do not have any padding
+    return 0;
+  }
+  // If there are children AND an icon
+  // 1. We check what side the icon is in
+  // 2. Adjust padding to visually center the icon and text
+  // If there is children (most likely just text)
+  // 1. We keep the padding the same on both side
+  switch (size) {
+    case 'large':
+      return icon
+        ? iconPosition === 'start'
+          ? `0 ${space.l} 0 ${space.m}`
+          : `0 ${space.m} 0 ${space.l}`
+        : `0 ${space.l}`;
+
+    case 'medium':
+      return icon
+        ? iconPosition === 'start'
+          ? `0 ${space.m} 0 20px`
+          : `0 20px 0 ${space.m}`
+        : `0 ${space.m}`;
+
+    case 'small':
+      return icon
+        ? iconPosition === 'start'
+          ? `0 20px 0 ${space.s}`
+          : `0 ${space.s} 0 20px`
+        : `0 ${space.s}`;
+
+    case 'extraSmall':
+      return icon
+        ? iconPosition === 'start'
+          ? `0 ${space.xs} 0 ${space.xxs}`
+          : `0 ${space.xxs} 0 ${space.xs}`
+        : `0 ${space.xs}`;
+
+    default:
+      return icon
+        ? iconPosition === 'start'
+          ? `0 ${space.m} 0 20px`
+          : `0 20px 0 ${space.m}`
+        : `0 ${space.m}`;
+  }
+};
+
+export const BaseButton = createComponent('button')({
+  displayName: 'Button',
+  Component: ({children, ...elemProps}: ButtonContainerProps, ref, Element) => {
+    return (
+      <ButtonContainer as={Element} ref={ref} {...elemProps}>
+        {children}
+      </ButtonContainer>
+    );
+  },
+  subComponents: {
+    Icon: ButtonLabelIcon,
+    Label: ButtonLabel,
+  },
+});
