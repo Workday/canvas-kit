@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {ButtonColors} from './types';
-import {ButtonContainer, ButtonLabel} from './parts';
+import {BaseButton, getMinWidthStyles, getPaddingStyles} from './BaseButton';
 import {
   GrowthBehavior,
   useTheme,
@@ -38,6 +38,7 @@ const getDeleteButtonColors = ({
   },
   disabled: {
     background: themeError.light,
+    opacity: '1', // allows for overriding the default opacity of 0.4
   },
 });
 
@@ -55,14 +56,16 @@ export const DeleteButton = createComponent('button')({
     ref,
     Element
   ) => (
-    <ButtonContainer
+    <BaseButton
+      padding={getPaddingStyles(children, size, undefined, undefined)}
+      minWidth={getMinWidthStyles(children, size)}
       ref={ref}
       as={Element}
       colors={getDeleteButtonColors(theme)}
       size={size}
       {...elemProps}
     >
-      <ButtonLabel>{children}</ButtonLabel>
-    </ButtonContainer>
+      <BaseButton.Label>{children}</BaseButton.Label>
+    </BaseButton>
   ),
 });
