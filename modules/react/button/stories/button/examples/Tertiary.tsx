@@ -7,8 +7,12 @@ import {plusIcon} from '@workday/canvas-system-icons-web';
 export const Tertiary = () => (
   <HStack spacing="s" padding="s">
     <TertiaryButton>Tertiary</TertiaryButton>
-    <TertiaryButton icon={plusIcon} iconPosition="right">
+    <TertiaryButton icon={plusIcon} iconPosition="start">
       Tertiary
     </TertiaryButton>
+    <TertiaryButton icon={plusIcon} iconPosition="end">
+      Tertiary
+    </TertiaryButton>
+    <TertiaryButton icon={plusIcon} />
   </HStack>
 );

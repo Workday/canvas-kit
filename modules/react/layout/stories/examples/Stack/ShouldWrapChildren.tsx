@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Stack, Box} from '@workday/canvas-kit-react/layout';
-import {IconButton} from '@workday/canvas-kit-react/button';
+import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {
   arrowLeftIcon,
   arrowRightIcon,
@@ -14,19 +14,15 @@ import {
 export const ShouldWrapChildren = () => {
   return (
     <Stack border="solid 2px" shouldWrapChildren spacing="xxxs" padding="xxxs">
-      <IconButton aria-label="go to previous page" icon={arrowLeftIcon} variant="squareFilled" />
-      <IconButton aria-label="go to next page" icon={arrowRightIcon} variant="squareFilled" />
-      <IconButton aria-label="reload current page" icon={resetIcon} variant="squareFilled" />
-      <IconButton aria-label="go to home page" icon={homeIcon} variant="squareFilled" />
+      <SecondaryButton aria-label="go to previous page" icon={arrowLeftIcon} />
+      <SecondaryButton aria-label="go to next page" icon={arrowRightIcon} />
+      <SecondaryButton aria-label="reload current page" icon={resetIcon} />
+      <SecondaryButton aria-label="go to home page" icon={homeIcon} />
       <Box marginInlineStart="m">
-        <IconButton aria-label="share current page" icon={exportIcon} variant="squareFilled" />
+        <SecondaryButton aria-label="share current page" icon={exportIcon} />
       </Box>
-      <IconButton aria-label="bookmark current page" icon={starIcon} variant="squareFilled" />
-      <IconButton
-        aria-label="view related actions"
-        icon={relatedActionsIcon}
-        variant="squareFilled"
-      />
+      <SecondaryButton aria-label="bookmark current page" icon={starIcon} />
+      <SecondaryButton aria-label="view related actions" icon={relatedActionsIcon} />
     </Stack>
   );
 };
