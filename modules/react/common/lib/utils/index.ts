@@ -10,6 +10,7 @@ export * from './useMount';
 export * from './components';
 export * from './models';
 export * from './elements';
+export * from './useConstant';
 export * from './useIsFullscreen';
 export * from './useModalityType';
 export * from './useWindowSize';
