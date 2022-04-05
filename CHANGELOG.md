@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v6.8.1](https://github.com/Workday/canvas-kit/releases/tag/v6.8.1) (2022-04-05)
+
+### Components
+
+- fix(button): Update disabled background for tertiary button ([#1530](https://github.com/Workday/canvas-kit/pull/1530)) ([@mannycarrera4](https://github.com/mannycarrera4))
+
+
 ## [v6.8.0](https://github.com/Workday/canvas-kit/releases/tag/v6.8.0) (2022-04-04)
 
 ### Components
