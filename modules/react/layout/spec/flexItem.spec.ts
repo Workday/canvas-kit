@@ -3,7 +3,7 @@ import {flexItem, FlexItemStyleProps} from '@workday/canvas-kit-react/layout';
 describe('FlexItem Style Props Function', () => {
   it('should ignore non-flex-item props', () => {
     const props = {
-      depth: 'inset',
+      depth: 'none',
       children: null,
       flex: 1,
     } as FlexItemStyleProps;

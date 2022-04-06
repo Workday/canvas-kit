@@ -112,7 +112,7 @@ const StyledBoxComponent = styled('div')<StyledType & BoxProps>(
  *
  * // `Card`'s default values are set using `BoxProps`
  * const Card = (props: CardProps) => (
- *   <Box depth={2} padding="m" borderRadius="l" {...props}>Hello, Card!</Box>
+ *   <Box depth={1} padding="m" borderRadius="l" {...props}>Hello, Card!</Box>
  * );
  *
  */
