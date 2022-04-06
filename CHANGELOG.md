@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v5.3.16](https://github.com/Workday/canvas-kit/releases/tag/v5.3.16) (2022-04-06)
+
+### Components
+
+- fix(action-bar): Update styled function to support RTL ([#1534](https://github.com/Workday/canvas-kit/pull/1534)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
 ## [v5.3.15](https://github.com/Workday/canvas-kit/releases/tag/v5.3.15) (2022-04-01)
 
 ### Components
