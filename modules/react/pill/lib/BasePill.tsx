@@ -7,6 +7,7 @@ import {Box, BoxProps} from '@workday/canvas-kit-react/layout';
 import {PillIcon} from './Pill.Icon';
 import {PillCount} from './Pill.Count';
 import {borderRadius, colors, space, type} from '@workday/canvas-kit-react/tokens';
+import {PillAvatar} from './Pill.Avatar';
 
 export interface BasePillProps extends BoxProps {
   variant?: 'removable' | 'readOnly' | 'interactive';
@@ -94,5 +95,6 @@ export const BasePill = createComponent('span')({
   subComponents: {
     Icon: PillIcon,
     Count: PillCount,
+    Avatar: PillAvatar,
   },
 });

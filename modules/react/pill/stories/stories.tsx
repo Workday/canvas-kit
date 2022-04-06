@@ -14,12 +14,8 @@ export default {
 export const Default = () => (
   <HStack spacing="s">
     <ReadyOnlyPill>Ready Only Pill</ReadyOnlyPill>
-    <InteractivePill iconPosition="end" icon={plusIcon}>
-      Interactive Pill
-    </InteractivePill>
-    <InteractivePill count={4} countPosition="end">
-      California
-    </InteractivePill>
+    <InteractivePill icon={plusIcon}>Interactive Pill</InteractivePill>
+    <InteractivePill count={4}>California</InteractivePill>
     {/* <Pill variant="interactive">California</Pill> */}
   </HStack>
 );
