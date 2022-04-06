@@ -44,7 +44,7 @@ storiesOf('Preview/Color Picker/React', module)
       <Popup model={model}>
         <Popup.Target as={TertiaryButton} icon={bgColorIcon} aria-label="Select Background Color" />
         <Popup.Popper>
-          <Popup.Card marginTop="xxs" padding="s">
+          <Popup.Card marginTop="xxs" padding="s" depth={3}>
             <Popup.Body>
               <ColorPicker
                 resetColor={colors.blueberry400}
@@ -127,7 +127,7 @@ storiesOf('Preview/Color Picker/React', module)
           onBlur={onBlur}
         />
         <Popup.Popper>
-          <Popup.Card style={{marginTop: 8}} padding="s">
+          <Popup.Card style={{marginTop: 8}} padding="s" depth={3}>
             <Popup.Body>
               <ColorPicker
                 resetColor={colors.blueberry400}

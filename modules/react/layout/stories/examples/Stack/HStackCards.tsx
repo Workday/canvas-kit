@@ -4,7 +4,7 @@ import {TertiaryButton} from '@workday/canvas-kit-react/button';
 import {type} from '@workday/canvas-kit-react/tokens';
 
 const Card = ({heading = '', body = ''}) => (
-  <Flex flex={1} flexBasis="auto" depth={2} padding="s" backgroundColor="frenchVanilla100">
+  <Flex flex={1} flexBasis="auto" depth={1} padding="s" backgroundColor="frenchVanilla100">
     <Stack flexDirection="column" spacing="xs">
       <h3 style={{...type.levels.heading.small, margin: 0}}>{heading}</h3>
       <Box maxWidth={240}>

@@ -56,7 +56,7 @@ export interface SidePanelProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   onStateTransition?: (state?: SidePanelTransitionStates) => void;
   /**
-   * The style variant of the side panel. 'standard' is with a `soap100` background, no depth. 'alternate' is a `frenchVanilla100` background with a level 3 depth.
+   * The style variant of the side panel. 'standard' is with a `soap100` background, no depth. 'alternate' is a `frenchVanilla100` background with a level 6 depth.
    *
    * @default 'standard'
    */
@@ -91,7 +91,7 @@ const createKeyframes = (from: number | string, to: number | string) => {
 const containerVariantStyle: Record<SidePanelVariant, CSSObject> = {
   alternate: {
     backgroundColor: colors.frenchVanilla100,
-    ...depth[3],
+    ...depth[5],
   },
   standard: {
     backgroundColor: colors.soap100,

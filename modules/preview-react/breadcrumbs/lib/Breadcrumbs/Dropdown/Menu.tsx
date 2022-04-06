@@ -52,7 +52,7 @@ export interface DropdownMenuProps {
 
 const StyledDropdownMenu = styled(Box)<BoxProps>({
   ...type.levels.subtext.large,
-  ...depth[2],
+  ...depth[3],
   backgroundColor: commonColors.background,
   border: `1px solid ${colors.soap500}`,
   borderRadius: borderRadius.m,
