@@ -267,8 +267,8 @@ export const getPaddingStyles = (
     case 'small':
       return icon
         ? iconPosition === 'start'
-          ? `0 20px 0 ${space.s}`
-          : `0 ${space.s} 0 20px`
+          ? `0 ${space.s} 0 ${space.xs}`
+          : `0 ${space.xs} 0 ${space.s}`
         : `0 ${space.s}`;
 
     case 'extraSmall':
