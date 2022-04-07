@@ -74,7 +74,6 @@ export const BasePill = createComponent('span')({
     ref,
     Element
   ) => {
-    console.warn(children);
     return (
       <BasePillsContext.Provider value={{variant}}>
         <OverflowTooltip>

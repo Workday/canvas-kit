@@ -2,28 +2,25 @@ import React from 'react';
 
 import {createComponent, styled, StyledType} from '@workday/canvas-kit-react/common';
 import {Box, BoxProps} from '@workday/canvas-kit-react/layout';
-import {colors, space} from '@workday/canvas-kit-react/tokens';
+import {borderRadius, colors, space} from '@workday/canvas-kit-react/tokens';
 
-export interface PillCountProps extends BoxProps {
-  countPosition?: 'start' | 'end';
-}
+export interface PillCountProps extends BoxProps {}
 const StyledCountContainer = styled(Box.as('span'))<StyledType>({
   height: '23px',
   width: '23px',
   display: 'inline-flex',
   alignItems: 'center',
   justifyContent: 'center',
+  borderTopLeftRadius: borderRadius.zero,
+  borderTopRightRadius: borderRadius.m,
+  borderBottomLeftRadius: borderRadius.zero,
+  borderBottomRightRadius: borderRadius.m,
 });
 export const PillCount = createComponent('span')({
   displayName: 'Pill.Avatar',
-  Component: ({children, countPosition = 'start', ...elemProps}: PillCountProps, ref, Element) => {
+  Component: ({children, ...elemProps}: PillCountProps, ref, Element) => {
     return (
-      <StyledCountContainer
-        borderRadius={countPosition === 'start' ? '4px 0 0 4px' : '0 4px 4px 0'}
-        backgroundColor={colors.soap500}
-        ref={ref}
-        {...elemProps}
-      >
+      <StyledCountContainer backgroundColor={colors.soap500} ref={ref} {...elemProps}>
         {children}
       </StyledCountContainer>
     );
