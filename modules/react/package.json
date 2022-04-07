@@ -34,6 +34,7 @@
     "build:cjs": "tsc -p tsconfig.cjs.json",
     "build:es6": "tsc -p tsconfig.es6.json",
     "build:rebuild": "npm-run-all clean build",
+    "create-component": "./utils/create-component/createComponent.js",
     "build:downlevel-dts": "yarn run downlevel-dts dist ts3.5/dist",
     "build": "npm-run-all --parallel build:cjs build:es6 --sequential build:downlevel-dts",
     "prepack": "node ../../utils/publish.js pre react",
