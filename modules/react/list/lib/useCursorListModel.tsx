@@ -1,5 +1,13 @@
 import React from 'react';
-import {createEventMap, ToModelConfig, useEventMap, assert} from '@workday/canvas-kit-react/common';
+import {
+  createEventMap,
+  ToModelConfig,
+  useEventMap,
+  assert,
+  createModel,
+  Generic,
+  useUniqueId,
+} from '@workday/canvas-kit-react/common';
 
 import {
   BaseListState,
@@ -7,8 +15,10 @@ import {
   BaseBaseListModelConfig,
   baseListEventMap,
   useBaseListModel,
+  useBaseListModel2,
   BaseListModelConfig,
   BaseListModel,
+  Item,
 } from './useBaseListModel';
 
 export type CursorListState<T = unknown> = BaseListState<T> & {
@@ -22,7 +32,7 @@ export type CursorListState<T = unknown> = BaseListState<T> & {
 };
 
 export type CursorListEvents<T = unknown> = BaseListEvents<T> & {
-  /** Directly sets the cursor to the list item by its identifier.  */
+  /** Directly sets the cursor to the list item by its identifier. */
   goTo(data: {id: string}): void;
   /**
    * Set the cursor to the "next" item in the list. This event delegates to the `getNext` method of
@@ -150,7 +160,7 @@ export type CursorListModelConfig<T> = BaseCursorModelConfig<T> &
 export const createNavigationManager = (manager: NavigationManager) => manager;
 
 /** Function type to make it easier to define navigation functions */
-export type NavigationRequestor = <T>(id: string, {state}: NavigationInput<T>) => T;
+export type NavigationRequestor = <T>(id: string, {state}: NavigationInput<T>) => Item<T>;
 
 /**
  * Get the first item in a list regardless of column count
@@ -357,7 +367,12 @@ export const useCursorListModel = <T extends unknown>(
     },
     goToPreviousRow() {
       setCursorId(
-        list.getId(navigation.getPreviousRow(state.cursorId, {state, getId: list.getId}))
+        list.getId(
+          navigation.getPreviousRow(state.cursorId, {
+            state,
+            getId: list.getId,
+          })
+        )
       );
     },
     goToNextRow() {
@@ -380,10 +395,160 @@ export const useCursorListModel = <T extends unknown>(
     },
     goToPreviousPage() {
       setCursorId(
-        list.getId(navigation.getPreviousPage(state.cursorId, {state, getId: list.getId}))
+        list.getId(
+          navigation.getPreviousPage(state.cursorId, {
+            state,
+            getId: list.getId,
+          })
+        )
       );
     },
   } as CursorListEvents<T>);
 
   return {...list, state, events, navigation};
 };
+
+/**
+ * A `CursorModel` extends a `ListModel` and adds a "cursor" to the list. A cursor is a pointer to a
+ * current position in the list. The most common use-case is keeping track of which item currently
+ * has focus within the list. Many w3c list role types specify a single tab stop within the list.
+ */
+export const useCursorListModel2 = createModel({
+  defaultConfig: {
+    ...useBaseListModel2.defaultConfig,
+    /**
+     * Initial cursor position. If not provided, the cursor will point to the first item in the list
+     */
+    initialCursorId: '',
+    /**
+     * If this is set it will cause a wrapping of a list that will turn it into a grid
+     * @default 0
+     */
+    columnCount: 0,
+    /**
+     * Controls the state changes when the user sends navigation events to the model. For example,
+     * when the user hits the "right" arrow, a behavior hook will determine directionality
+     * (left-to-right or right-to-left) and call the correct navigation method. In our example, a
+     * left-to-right language would send a `getNext`. The navigation manager may return the next item
+     * in the list. Different managers can be created for slightly different use cases. The default
+     * navigation manager will accept `orientation` and directionality to determine mapping. If
+     * `columnCount` is non-zero, it will use a grid mode where `orientation` is ignored and only
+     * directionality matters.
+     *
+     * An example override might be a tab list with an overflow menu that is meant to be transparent
+     * to screen reader users. This would require the overflow menu to accept both up/down keys as
+     * well as left/right keys to give a more consistent experience to all users.
+     */
+    navigation: wrappingNavigationManager,
+  },
+  requiredConfig: useBaseListModel2.requiredConfig,
+})(config => {
+  const [cursorId, setCursorId] = React.useState('');
+  const columnCount = config.columnCount || 0;
+  const list = useBaseListModel2(config);
+  const initialCurrentRef = React.useRef(
+    config.initialCursorId || config.items?.length ? list.getId(config.items![0]) : ''
+  );
+
+  const state = {
+    ...list.state,
+    /** The id of the list item the cursor is pointing to */
+    cursorId,
+    /**
+     * Any positive non-zero value treats the list like a grid with rows and columns
+     * @default 0
+     */
+    columnCount,
+  };
+  const navigation = config.navigation || wrappingNavigationManager;
+
+  const events = {
+    ...list.events,
+    /**
+     * Register an item to the list. Takes in an identifier, a React.Ref and an optional index. This
+     * should be called on component mount
+     */
+    registerItem(data: Parameters<typeof list.events.registerItem>[0]) {
+      // point the cursor at the first item
+      if (!initialCurrentRef.current) {
+        initialCurrentRef.current = list.getId(data.item);
+        setCursorId(initialCurrentRef.current);
+      }
+      list.events.registerItem(data);
+    },
+    /** Directly sets the cursor to the list item by its identifier. */
+    goTo(data: {id: string}) {
+      setCursorId(data.id);
+    },
+    /**
+     * Set the cursor to the "next" item in the list. This event delegates to the `getNext` method of
+     * the navigation manager. For a list, the default navigation manager will wrap if cursor is
+     * currently on the last item. For a grid, the default navigation manager will stay on the last
+     * item in a row.
+     */
+    goToNext() {
+      setCursorId(list.getId(navigation.getNext(state.cursorId, {state, getId: list.getId})));
+    },
+    /**
+     * Set the cursor to the "previous" item in the list. If the beginning of the list is detected,
+     * it will wrap to the last item
+     */
+    goToPrevious() {
+      setCursorId(list.getId(navigation.getPrevious(state.cursorId, {state, getId: list.getId})));
+    },
+    /**
+     * Previous item perpendicular to the orientation of a list, or the previous row in a grid. For
+     * example, if a list is horizontal, the previous row would describe an up direction. This could
+     * be ignored by the navigation manager, or return the same result as `previous()`. In a grid,
+     * this would be the previous row (current position - column count).
+     */
+    goToPreviousRow() {
+      setCursorId(
+        list.getId(
+          navigation.getPreviousRow(state.cursorId, {
+            state,
+            getId: list.getId,
+          })
+        )
+      );
+    },
+    /**
+     * Next item perpendicular to the orientation of a list, or the next row in a grid. For example,
+     * if a list is horizontal, the next row would describe a down direction. This could be ignored by
+     * the navigation manager, or return the same result as `next()`. In a grid, this would be the
+     * next row (current position + column count).
+     */
+    goToNextRow() {
+      setCursorId(list.getId(navigation.getNextRow(state.cursorId, {state, getId: list.getId})));
+    },
+    /** Set the cursor to the first item in the list */
+    goToFirst() {
+      setCursorId(list.getId(navigation.getFirst(state.cursorId, {state, getId: list.getId})));
+    },
+    /** Set the cursor to the last item in the list */
+    goToLast() {
+      setCursorId(list.getId(navigation.getLast(state.cursorId, {state, getId: list.getId})));
+    },
+    goToFirstOfRow() {
+      setCursorId(list.getId(navigation.getFirstOfRow(state.cursorId, {state, getId: list.getId})));
+    },
+    goToLastOfRow() {
+      setCursorId(list.getId(navigation.getLastOfRow(state.cursorId, {state, getId: list.getId})));
+    },
+    goToNextPage() {
+      setCursorId(list.getId(navigation.getNextPage(state.cursorId, {state, getId: list.getId})));
+    },
+    goToPreviousPage() {
+      setCursorId(
+        list.getId(
+          navigation.getPreviousPage(state.cursorId, {
+            state,
+            getId: list.getId,
+          })
+        )
+      );
+    },
+  };
+
+  return {...list, state, events, navigation};
+});

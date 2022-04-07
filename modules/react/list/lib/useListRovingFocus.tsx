@@ -84,9 +84,14 @@ export const useListRovingFocus = createHook(
     React.useEffect(() => {
       if (keyDownRef.current) {
         const item = navigation.getItem(state.cursorId, {state, getId});
-        document
-          .querySelector<HTMLElement>(`[id="${state.id}-${getIdRef.current(item)}"]`)
-          ?.focus();
+        if (state.isVirtualized) {
+          state.UNSTABLE_virtual.scrollToIndex(item.index);
+        }
+        requestAnimationFrame(() => {
+          document
+            .querySelector<HTMLElement>(`[id="${state.id}-${getIdRef.current(item)}"]`)
+            ?.focus();
+        });
 
         keyDownRef.current = false;
       }
@@ -157,3 +162,5 @@ export const useListRovingFocus = createHook(
     };
   }
 );
+
+// TODO make focus selection work with virtualization

@@ -9,16 +9,16 @@ export function useListRenderItems<T>(
   const items =
     typeof children === 'function'
       ? model.state.isVirtualized
-        ? model.state.UNSTABLE_virtual.virtualItems.map(virtualItem => {
-            const item = model.state.items[virtualItem.index];
+        ? model.state.UNSTABLE_virtual.virtualItems.map(virtual => {
+            const item = model.state.items[virtual.index];
             const child = children(item.value);
-            console.log('child', child);
             return React.cloneElement(child, {
-              ref: virtualItem.measureRef,
+              // We call this `virtual` instead of `virtualItem` to avoid a React render warning
+              // about capital letters in attributes. React thinks this will be applied to the DOM
+              // element even though we remove it later...
+              virtual,
               key: item.id,
               item: item,
-              'aria-setsize': virtualItem.size,
-              'aria-posinset': item.index + 1,
             });
           })
         : model.state.items.map(item =>

@@ -1,13 +1,14 @@
-import {createModel} from '../../common';
+import { createModel } from "../../common";
 import {
   useSelectionListModel,
+  useSelectionListModel2,
   SelectionListState,
   SelectionListEvents,
   selectionListEventMap,
   BaseSelectionListModelConfig,
   SelectionListModelConfig,
-  SelectionListModel,
-} from './useSelectionListModel';
+  SelectionListModel
+} from "./useSelectionListModel";
 
 // This file creates a `ListModel` composing a `BaseListModel`, `CursorListModel`, and
 // `SelectionListModel` and renames to `List*`. Without interfaces like this, the result would be
@@ -18,7 +19,8 @@ export type ListEvents<T = unknown> = SelectionListEvents<T>;
 export interface ListModel<T = any> extends SelectionListModel<T> {}
 export const listEventMap = selectionListEventMap;
 
-export interface BaseListModelConfig<T> extends BaseSelectionListModelConfig<T> {}
+export interface BaseListModelConfig<T>
+  extends BaseSelectionListModelConfig<T> {}
 export interface ListModelConfig<T> extends SelectionListModelConfig<T> {}
 
 export type ListProps<T = unknown> = {
@@ -44,6 +46,13 @@ export type ListItemProps = {
  *   getId: item => item.id, // get the unique identifier of your item
  * })
  */
-export const useListModel = <T extends unknown>(config?: ListModelConfig<T>): ListModel<T> => {
+export const useListModel = <T extends unknown>(
+  config?: ListModelConfig<T>
+): ListModel<T> => {
   return useSelectionListModel(config);
 };
+
+export const useListModel2 = createModel({
+  defaultConfig: useSelectionListModel2.defaultConfig,
+  requiredConfig: useSelectionListModel2.requiredConfig
+})(useSelectionListModel2);

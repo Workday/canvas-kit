@@ -10,4 +10,5 @@ export * from './lib/useListResetCursorOnBlur';
 export * from './lib/useListRovingFocus';
 export * from './lib/useListSelectItem';
 export * from './lib/useSelectionListModel';
+export {ListBox} from './lib/ListBox';
 export * from './lib/useListModel';

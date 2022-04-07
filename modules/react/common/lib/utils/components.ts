@@ -157,6 +157,159 @@ interface RefForwardingComponent<T, P = {}> {
   ): React.ReactElement | null;
 }
 
+function defaultGetElemProps(input: any) {
+  return input;
+}
+
+export const createContainerComponent = <
+  E extends
+    | keyof JSX.IntrinsicElements
+    | React.ComponentType
+    | ElementComponent<any, any>
+    | undefined = undefined
+>(
+  as?: E
+) => <
+  TModelHook extends ((config: any) => {state: any; events: any}) & {Context?: React.Context<any>},
+  TDefaultContext extends {state: Record<string, any>; events: Record<string, any>},
+  TPropsHook extends (...args: any) => any,
+  SubComponents = {}
+>({
+  displayName,
+  modelHook,
+  elemPropsHook,
+  defaultContext,
+  subComponents,
+}: {
+  displayName: string;
+  modelHook: TModelHook;
+  elemPropsHook?: TPropsHook;
+  defaultContext?: TDefaultContext;
+  subComponents: SubComponents;
+}) => {
+  const Context = modelHook.Context || React.createContext({state: {}, events: {}});
+
+  return <Props>(
+    Component: (
+      props: Props & RemoveNull<ReturnType<TPropsHook>>,
+      Element: E extends undefined ? never : E,
+      model: TModelHook extends (config: infer TConfig) => infer TModel ? TModel : never
+    ) => React.ReactElement | null
+  ): (TModelHook extends (config: infer TConfig) => infer TModel
+    ? E extends undefined
+      ? Component<Props & TConfig & {model?: TModel}>
+      : ElementComponent<
+          // E is not `undefined` here, but Typescript thinks it could be, so we add another `undefined`
+          // check and cast to a `React.FC` to match a valid signature for `ElementComponent`.
+          // `React.FC` was chosen as the simplest valid interface.
+          E extends undefined ? React.FC : E,
+          Props & TConfig & {model?: TModel}
+        > & {Context: React.Context<TModel>}
+    : never) &
+    SubComponents => {
+    console.log('create', as, displayName, modelHook, subComponents);
+    const ReturnedComponent = React.forwardRef<E, Props & {as?: React.ElementType} & {model?: any}>(
+      ({as: asOverride, model, ...props}, ref) => {
+        const localModel = useDefaultModel(model, props, modelHook);
+        const elemProps = ((modelHook as any).getElemProps || defaultGetElemProps)(props);
+        const finalElemProps = elemPropsHook
+          ? elemPropsHook(localModel, elemProps, ref)
+          : elemProps;
+        console.log('props', finalElemProps);
+
+        return React.createElement(
+          Context.Provider,
+          {value: localModel},
+          Component(
+            finalElemProps as Props & RemoveNull<ReturnType<TPropsHook>>,
+            // Cast to `any` to avoid: "ts(2345): Type 'undefined' is not assignable to type 'E extends
+            // undefined ? never : E'" I'm not sure I can actually cast to this conditional type and it
+            // doesn't actually matter, so cast to `any` it is.
+            (asOverride || as) as any,
+            localModel
+          )
+        );
+      }
+    );
+
+    Object.keys(subComponents || {}).forEach(key => {
+      // `ReturnedComponent` is a `React.ForwardRefExoticComponent` which has no additional keys so
+      // we'll cast to `Record<string, any>` for assignment. Note the lack of type checking
+      // properties. Take care when changing the runtime of this function.
+      (ReturnedComponent as Record<string, any>)[key] = (subComponents as Record<string, any>)[key];
+    });
+    ReturnedComponent.displayName = displayName;
+    (ReturnedComponent as any).Context = Context;
+
+    // Cast as `any`. We have already specified the return type. Be careful making changes to this
+    // file due to this `any` `ReturnedComponent` is a `React.ForwardRefExoticComponent`, but we want
+    // it to be either an `Component` or `ElementComponent`
+    return ReturnedComponent as any;
+  };
+};
+
+type RemoveNull<T> = {[K in keyof T]: Exclude<T[K], null>};
+
+export const createSubcomponent = <
+  E extends
+    | keyof JSX.IntrinsicElements
+    | React.ComponentType
+    | ElementComponent<any, any>
+    | undefined = undefined
+>(
+  as?: E
+) => <
+  TModelHook extends ((config: any) => {state: any; events: any}) & {Context?: React.Context<any>},
+  TPropHook extends (...args: any) => any
+>({
+  displayName,
+  modelHook,
+  elemPropsHook,
+}: {
+  displayName: string;
+  modelHook: TModelHook;
+  elemPropsHook: TPropHook;
+}) => {
+  return <Props>(
+    Component: (
+      props: Props & RemoveNull<ReturnType<TPropHook>>,
+      Element: E extends undefined ? never : E,
+      model: TModelHook extends (config: infer TConfig) => infer TModel ? TModel : never
+    ) => React.ReactElement | null
+  ): TModelHook extends (config: infer TConfig) => infer TModel
+    ? ElementComponent<
+        // E is not `undefined` here, but Typescript thinks it could be, so we add another `undefined`
+        // check and cast to a `React.FC` to match a valid signature for `ElementComponent`.
+        // `React.FC` was chosen as the simplest valid interface.
+        E extends undefined ? React.FC : E,
+        Props & TConfig & {model?: TModel}
+      > & {Context: React.Context<TModel>}
+    : never => {
+    const ReturnedComponent = React.forwardRef<E, Props & {as?: React.ElementType} & {model?: any}>(
+      ({as: asOverride, model, ...props}, ref) => {
+        const localModel = useModelContext(modelHook.Context, model);
+        const elemProps = elemPropsHook(localModel, props, ref);
+
+        return Component(
+          elemProps as any,
+          // Cast to `any` to avoid: "ts(2345): Type 'undefined' is not assignable to type 'E extends
+          // undefined ? never : E'" I'm not sure I can actually cast to this conditional type and it
+          // doesn't actually matter, so cast to `any` it is.
+          (asOverride || as) as any,
+          localModel
+        );
+      }
+    );
+
+    ReturnedComponent.displayName = displayName;
+
+    // Cast as `any`. We have already specified the return type. Be careful making changes to this
+    // file due to this `any` `ReturnedComponent` is a `React.ForwardRefExoticComponent`, but we want
+    // it to be either an `Component` or `ElementComponent`
+    return ReturnedComponent as any;
+  };
+};
+
 /**
  * Factory function that creates components to be exported. It enforces React ref forwarding, `as`
  * prop, display name, and sub-components, and handles proper typing without much boiler plate. The
@@ -242,6 +395,34 @@ export const createComponent = <
   // file due to this `any` `ReturnedComponent` is a `React.ForwardRefExoticComponent`, but we want
   // it to be either an `Component` or `ElementComponent`
   return ReturnedComponent as any;
+};
+
+// TODO: create a new `createHook` function that takes in a model hook to further reduce typing
+// const useMyHook = createHook(useModel)((model, ref, elemProps) => props)
+export const createHook2 = <
+  TModelHook extends (config: any) => {state: Record<string, any>; events: Record<string, any>}
+>(
+  modelHook: TModelHook
+) => <PO extends {}, PI extends {}>(
+  fn: (
+    model: TModelHook extends (config: any) => infer TModel
+      ? TModel
+      : {state: Record<string, any>; events: Record<string, any>},
+    ref?: React.Ref<any>,
+    elemProps?: PI
+  ) => PO
+): BehaviorHook<
+  TModelHook extends (config: any) => infer TModel
+    ? TModel
+    : {state: Record<string, any>; events: Record<string, any>},
+  PO
+> => (model, elemProps, ref) => {
+  const props = mergeProps(fn(model, ref, elemProps || ({} as any)), elemProps || ({} as any));
+  if (!props.hasOwnProperty('ref') && ref) {
+    // This is the weird "incoming ref isn't in props, but outgoing ref is in props" thing
+    props.ref = ref;
+  }
+  return props;
 };
 
 /**

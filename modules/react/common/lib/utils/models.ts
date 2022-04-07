@@ -208,6 +208,8 @@ export const createEvents = <TEvents extends EventCreator>(events: TEvents) => <
   return {events, eventMap: config as EventMap<ToEvent<TEvents>, TGuardMap, TCallbackMap>};
 };
 
+console.log('foo')
+
 // Temporary type so that `extends` works
 type Any = any
 /**
@@ -216,11 +218,20 @@ type Any = any
  */
 export interface Generic extends Any {};
 
-export type ModelExtras<TDefaultConfig, TRequiredConfig, TState, TEvents> = {
+export type ModelExtras<TDefaultConfig, TRequiredConfig, TState, TEvents, TModel> = {
   /** Default config of the model. Useful when composing models to reused config */
   defaultConfig: TDefaultConfig;
   /** Required config of the model. Useful when composing models to reused config */
   requiredConfig: TRequiredConfig;
+  /**
+   * This is only a type and not a value. If you want to
+   */
+  TConfig: TDefaultConfig & TRequiredConfig;
+  /**
+   * The context of the model. This can be used directly, but is mostly used internally by
+   * `createContainerComponent` or `createSubcomponent` to handle model context automatically.
+   */
+  Context: React.Context<TModel>;
   /**
    * This function will separate all elemProps from config props. If a prop is both a config _and_
    * an elemProp, you can manually apply the prop again.
@@ -274,12 +285,12 @@ export type ModelFn<
   TRequiredConfig,
   TModel
 > = TModel extends { state: infer TState; events: infer TEvents }
-  ? ((
+  ? (<TT_Special_Generic>( // special generic used by post processing to handle generic models
       config?: Partial<TDefaultConfig> &
         TRequiredConfig &
         ToEventConfig<TState, TEvents>
     ) => TModel ) &
-      ModelExtras<TDefaultConfig, TRequiredConfig, TState, TEvents>
+      ModelExtras<TDefaultConfig, TRequiredConfig, TState, TEvents, TModel>
   : never;
 
 /**
@@ -360,6 +371,8 @@ function mergeConfig<TConfig extends Record<string, any>>(
   return result;
 }
 
+export type ExtractModelConfig<T extends (config: any) => any> = T extends (config: infer P) => any ? Required<P> : {}
+
 export type ModelConfig<TDefaultConfig, TRequiredConfig> = {
   /**
    * Optional config with any defaults if applicable. The values will both be used
@@ -430,6 +443,7 @@ export const createModel = <TDefaultConfig extends {}, TRequiredConfig extends {
   const eventsRef: { current: Record<string, any> } = { current: null as any }; // cast as any since we throw an error if the value is null
   const callbacksRef: { current: string[] } = { current: [] };
   const guardsRef: { current: string[] } = { current: [] };
+  const Context = React.createContext<any>({state: {}, events: {}})
 
   const getElemProps = (props: object) => {
     if (eventsRef.current === null) {
@@ -518,6 +532,7 @@ export const createModel = <TDefaultConfig extends {}, TRequiredConfig extends {
   wrappedModel.defaultConfig = defaultConfig;
   wrappedModel.requiredConfig = requiredConfig;
   wrappedModel.mergeConfig = mergeConfig;
+  wrappedModel.Context = Context;
 
   return <
     TModelFn extends (config: TDefaultConfig & TRequiredConfig) => {
