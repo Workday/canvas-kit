@@ -8,88 +8,87 @@ import {PillAvatar} from './Pill.Avatar';
 import {PillIcon} from './Pill.Icon';
 import {PillCount} from './Pill.Count';
 import {borderRadius, colors, space, type} from '@workday/canvas-kit-react/tokens';
+import {AvatarProps} from '@workday/canvas-kit-react/avatar';
+import {BasePill} from './BasePill';
+import {CanvasSystemIcon} from '@workday/design-assets-types';
 
 export interface PillProps extends BoxProps {
   variant?: 'removable' | 'readOnly' | 'interactive';
   maxWidth?: number;
+  icon?: CanvasSystemIcon;
+  count?: number;
+  avatarProps?: AvatarProps;
+  showAvatar?: boolean;
   children: React.ReactNode;
 }
-
-export const PillsContext = React.createContext({});
-
-const StyledPillContainer = styled(Box.as('span'))<StyledType & PillProps>(
-  {
-    border: `1px solid ${colors.licorice200}`,
-    display: 'inline-flex',
-    alignItems: 'center',
-    borderRadius: borderRadius.m,
-    whiteSpace: 'nowrap',
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
-    flexShrink: 0,
-    ...type.levels.body.small,
-    boxShadow: 'none',
-    outline: 'none',
-    fontWeight: 500,
-    WebkitFontSmoothing: 'antialiased',
-    MozOsxFontSmoothing: 'grayscale',
-    padding: `2px ${space.xxxs}`,
-  },
-  ({variant}) => {
-    switch (variant) {
-      case 'interactive': {
-        return {
-          cursor: 'pointer',
-          backgroundColor: colors.soap300,
-          transition:
-            'box-shadow 120ms linear, border 120ms linear, background-color 120ms linear, color 120ms linear',
-          '&:hover:active': {transitionDuration: '40ms'},
-
-          '&:disabled, &:disabled:active': {cursor: 'default', boxShadow: 'none'},
-          '&:hover': {
-            backgroundColor: colors.soap400,
-            borderColor: colors.licorice400,
-          },
-          '&:focus': {
-            ...focusRing({width: 1}),
-          },
-          '&:active': {
-            backgroundColor: colors.soap500,
-            borderColor: colors.licorice500,
-          },
-        };
-      }
-      default:
-        return {
-          cursor: 'default',
-          background: colors.frenchVanilla100,
-        };
-    }
-  }
-);
 
 export const Pill = createComponent('span')({
   displayName: 'Pill',
   Component: (
-    {children, maxWidth = 200, variant = 'interactive', ...elemProps}: PillProps,
+    {
+      children,
+      maxWidth = 200,
+      variant = 'interactive',
+      showAvatar,
+      icon,
+      avatarProps,
+      count,
+      ...elemProps
+    }: PillProps,
     ref,
     Element
   ) => {
-    console.warn(children);
     return (
-      <PillsContext.Provider value={{variant}}>
-        <OverflowTooltip>
-          <StyledPillContainer
-            variant={variant}
-            as={variant === 'interactive' ? 'button' : Element}
-            maxWidth={maxWidth}
-            height={space.m}
+      <>
+        {variant === 'interactive' && (
+          <BasePill
+            padding={!icon && showAvatar ? '8px' : '0px'}
+            variant="interactive"
+            ref={ref}
+            as={Element}
             {...elemProps}
           >
-            <HStack spacing="xxs">{children}</HStack>
-          </StyledPillContainer>
-        </OverflowTooltip>
-      </PillsContext.Provider>
+            {icon && <BasePill.Icon margin="0px 4px" icon={icon} />}
+            {showAvatar && <BasePill.Avatar {...avatarProps} />}
+            <OverflowTooltip>
+              <Box
+                as="span"
+                marginInlineStart={icon || showAvatar ? '4px' : '8px'}
+                marginInlineEnd={count ? '4px' : '8px'}
+                style={{whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'}}
+              >
+                {children}
+              </Box>
+            </OverflowTooltip>
+
+            {count && <BasePill.Count marginInlineStart="xxxs">{count}</BasePill.Count>}
+          </BasePill>
+        )}
+        {variant === 'interactive' && (
+          <BasePill
+            padding={!icon && showAvatar ? '8px' : '0px'}
+            variant="interactive"
+            ref={ref}
+            as={Element}
+            {...elemProps}
+          >
+            {icon && <BasePill.Icon margin="0px 4px" icon={icon} />}
+            {showAvatar && <BasePill.Avatar {...avatarProps} />}
+            <OverflowTooltip>
+              <Box
+                as="span"
+                marginInlineStart={icon || showAvatar ? '4px' : '8px'}
+                marginInlineEnd={count ? '4px' : '8px'}
+                style={{whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'}}
+              >
+                {children}
+              </Box>
+            </OverflowTooltip>
+
+            {count && <BasePill.Count marginInlineStart="xxxs">{count}</BasePill.Count>}
+          </BasePill>
+        )}
+      </>
     );
   },
   subComponents: {

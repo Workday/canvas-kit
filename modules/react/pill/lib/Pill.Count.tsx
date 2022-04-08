@@ -6,8 +6,8 @@ import {borderRadius, colors, space} from '@workday/canvas-kit-react/tokens';
 
 export interface PillCountProps extends BoxProps {}
 const StyledCountContainer = styled(Box.as('span'))<StyledType>({
-  height: '23px',
-  width: '23px',
+  height: '22px',
+  width: '22px',
   display: 'inline-flex',
   alignItems: 'center',
   justifyContent: 'center',

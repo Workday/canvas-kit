@@ -5,6 +5,7 @@ import {Box} from '@workday/canvas-kit-react/layout';
 import {BasePill, BasePillProps} from './BasePill';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {AvatarProps} from '@workday/canvas-kit-react/avatar';
+import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
 
 export interface InteractivePillProps extends BasePillProps {
   /**
@@ -34,13 +35,16 @@ export const InteractivePill = createComponent('span')({
       >
         {icon && <BasePill.Icon margin="0px 4px" icon={icon} />}
         {showAvatar && <BasePill.Avatar {...avatarProps} />}
-        <Box
-          as="span"
-          marginInlineStart={icon || showAvatar ? '4px' : '8px'}
-          marginInlineEnd={count ? '4px' : '8px'}
-        >
-          {children}
-        </Box>
+        <OverflowTooltip>
+          <Box
+            as="span"
+            marginInlineStart={icon || showAvatar ? '4px' : '8px'}
+            marginInlineEnd={count ? '4px' : '8px'}
+            style={{whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'}}
+          >
+            {children}
+          </Box>
+        </OverflowTooltip>
 
         {count && <BasePill.Count marginInlineStart="xxxs">{count}</BasePill.Count>}
       </BasePill>

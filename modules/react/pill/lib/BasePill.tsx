@@ -2,8 +2,7 @@ import React from 'react';
 
 import {createComponent, focusRing, styled, StyledType} from '@workday/canvas-kit-react/common';
 
-import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
-import {Box, BoxProps} from '@workday/canvas-kit-react/layout';
+import {boxStyleFn, BoxProps} from '@workday/canvas-kit-react/layout';
 import {PillIcon} from './Pill.Icon';
 import {PillCount} from './Pill.Count';
 import {borderRadius, colors, space, type} from '@workday/canvas-kit-react/tokens';
@@ -12,20 +11,14 @@ import {PillAvatar} from './Pill.Avatar';
 export interface BasePillProps extends BoxProps {
   variant?: 'removable' | 'readOnly' | 'interactive';
   maxWidth?: number;
-  children: React.ReactNode;
 }
 
-export const BasePillsContext = React.createContext({});
-
-const StyledPillContainer = styled(Box.as('span'))<StyledType & BasePillProps>(
+const StyledPillContainer = styled('span')<StyledType & BasePillProps>(
   {
     border: `1px solid ${colors.licorice200}`,
     display: 'inline-flex',
     alignItems: 'center',
     borderRadius: borderRadius.m,
-    whiteSpace: 'nowrap',
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
     flexShrink: 0,
     ...type.levels.body.small,
     boxShadow: 'none',
@@ -33,6 +26,7 @@ const StyledPillContainer = styled(Box.as('span'))<StyledType & BasePillProps>(
     fontWeight: 500,
     WebkitFontSmoothing: 'antialiased',
     MozOsxFontSmoothing: 'grayscale',
+    width: 'fit-content',
   },
   ({variant}) => {
     switch (variant) {
@@ -64,7 +58,8 @@ const StyledPillContainer = styled(Box.as('span'))<StyledType & BasePillProps>(
           background: colors.frenchVanilla100,
         };
     }
-  }
+  },
+  boxStyleFn
 );
 
 export const BasePill = createComponent('span')({
@@ -75,20 +70,16 @@ export const BasePill = createComponent('span')({
     Element
   ) => {
     return (
-      <BasePillsContext.Provider value={{variant}}>
-        <OverflowTooltip>
-          <StyledPillContainer
-            ref={ref}
-            variant={variant}
-            as={variant === 'interactive' ? 'button' : Element}
-            maxWidth={maxWidth}
-            height={space.m}
-            {...elemProps}
-          >
-            {children}
-          </StyledPillContainer>
-        </OverflowTooltip>
-      </BasePillsContext.Provider>
+      <StyledPillContainer
+        ref={ref}
+        variant={variant}
+        as={variant === 'interactive' ? 'button' : Element}
+        maxWidth={maxWidth}
+        height={space.m}
+        {...elemProps}
+      >
+        {children}
+      </StyledPillContainer>
     );
   },
   subComponents: {
