@@ -4,10 +4,8 @@ import {StaticStates} from '@workday/canvas-kit-react/common';
 import {ComponentStatesTable} from '@workday/canvas-kit-labs-react/common';
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
 
-import {
-  ExpandableContainer,
-  useExpandableContainerModel,
-} from '@workday/canvas-kit-labs-react/expandable-container';
+import {ExpandableContainer} from '@workday/canvas-kit-labs-react/expandable-container';
+import {useDisclosureModel} from '@workday/canvas-kit-react/disclosure';
 
 export default withSnapshotsEnabled({
   title: 'Testing/React/Labs/Expandable Container',
@@ -15,7 +13,7 @@ export default withSnapshotsEnabled({
 });
 
 export const ExpandableContainerStates = () => {
-  const model = useExpandableContainerModel();
+  const model = useDisclosureModel();
 
   return (
     <StaticStates>
@@ -24,16 +22,16 @@ export const ExpandableContainerStates = () => {
         columnProps={[
           {
             label: 'Closed',
-            props: {open: false},
+            props: {visibility: 'hidden', id: '1'},
           },
           {
             label: 'Opened',
-            props: {open: true},
+            props: {visibility: 'visible', id: '1'},
           },
         ]}
       >
         {props => {
-          const state = {open: props.open};
+          const state = {visibility: props.visibility, id: props.id};
 
           return (
             <ExpandableContainer model={{...model, state}}>
