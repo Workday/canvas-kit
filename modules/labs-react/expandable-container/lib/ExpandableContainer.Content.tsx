@@ -9,10 +9,10 @@ import {
 } from '@workday/canvas-kit-react/common';
 
 import {ExpandableContainerModelContext} from './ExpandableContainer';
-import {ExpandableContainerModel} from './useExpandableContainerModel';
+import {DisclosureModel} from '@workday/canvas-kit-react/disclosure';
 
 export interface ExpandableContainerContentProps {
-  model?: ExpandableContainerModel;
+  model?: DisclosureModel;
   children: React.ReactNode;
 }
 
@@ -27,7 +27,7 @@ export const ExpandableContainerContent = createComponent('div')({
   Component: ({children, model, ...elemProps}: ExpandableContainerContentProps, ref, Element) => {
     const {state} = useModelContext(ExpandableContainerModelContext, model);
 
-    return state.open ? (
+    return state.visibility === 'visible' ? (
       <Container as={Element} ref={ref} {...elemProps}>
         {children}
       </Container>

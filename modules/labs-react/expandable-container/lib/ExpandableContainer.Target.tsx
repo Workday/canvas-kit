@@ -3,25 +3,25 @@ import React from 'react';
 import {createComponent, useModelContext} from '@workday/canvas-kit-react/common';
 
 import {ExpandableContainerModelContext} from './ExpandableContainer';
-import {ExpandableContainerModel} from './useExpandableContainerModel';
+import {DisclosureModel} from '@workday/canvas-kit-react/disclosure';
 
 export interface ExpandableContainerTargetProps {
-  model?: ExpandableContainerModel;
+  model?: DisclosureModel;
   children: React.ReactNode;
 }
 
 const useDiscloseTarget = (
-  {state, events}: ExpandableContainerModel,
+  {state, events}: DisclosureModel,
   elemProps: Partial<React.HTMLAttributes<HTMLElement>> = {}
 ) => {
   return {
     onClick(event: React.MouseEvent<HTMLElement>) {
       elemProps.onClick?.(event);
 
-      if (state.open) {
-        events.close({});
+      if (state.visibility === 'visible') {
+        events.hide({event});
       } else {
-        events.open({});
+        events.show({event});
       }
     },
   };
