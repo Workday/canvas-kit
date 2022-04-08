@@ -3,7 +3,7 @@ import * as React from 'react';
 import {Popup} from '@workday/canvas-kit-react/popup';
 import {space, colors, type, CanvasColor} from '@workday/canvas-kit-react/tokens';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
-import {checkIcon} from '@workday/canvas-system-icons-web';
+import {checkIcon, exclamationCircleIcon} from '@workday/canvas-system-icons-web';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {createComponent, ExtractProps, styled, StyledType} from '@workday/canvas-kit-react/common';
 import {Hyperlink} from '@workday/canvas-kit-react/button';
@@ -85,6 +85,7 @@ export const Toast = createComponent('div')({
     Element
   ) => {
     const isInteractive = onClose || onActionClick;
+    const isError = iconColor === colors.cinnamon500 && icon === exclamationCircleIcon;
 
     return (
       <Popup.Card
@@ -93,9 +94,10 @@ export const Toast = createComponent('div')({
         width={toastWidth}
         padding="s"
         depth={5}
-        role={isInteractive ? 'dialog' : 'status'}
-        aria-live={isInteractive ? 'off' : 'polite'}
+        role={isInteractive ? 'dialog' : isError ? 'alert' : 'status'}
+        aria-live={isInteractive ? 'off' : isError ? 'assertive' : 'polite'}
         aria-atomic={!isInteractive}
+        tabIndex={1}
         {...elemProps}
       >
         {onClose && <Popup.CloseIcon aria-label="Close" onClick={onClose} size="small" />}
