@@ -97,7 +97,6 @@ export const Toast = createComponent('div')({
         role={isInteractive ? 'dialog' : isError ? 'alert' : 'status'}
         aria-live={isInteractive ? 'off' : isError ? 'assertive' : 'polite'}
         aria-atomic={!isInteractive}
-        tabIndex={1}
         {...elemProps}
       >
         {onClose && <Popup.CloseIcon aria-label="Close" onClick={onClose} size="small" />}
