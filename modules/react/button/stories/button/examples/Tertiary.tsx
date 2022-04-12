@@ -2,17 +2,22 @@ import React from 'react';
 
 import {TertiaryButton} from '@workday/canvas-kit-react/button';
 import {HStack} from '@workday/canvas-kit-react/layout';
-import {plusIcon} from '@workday/canvas-system-icons-web';
+import {
+  plusIcon,
+  relatedActionsVerticalIcon,
+  arrowLeftIcon,
+  arrowRightIcon,
+} from '@workday/canvas-system-icons-web';
 
 export const Tertiary = () => (
   <HStack spacing="s" padding="s">
     <TertiaryButton>Tertiary</TertiaryButton>
-    <TertiaryButton icon={plusIcon} iconPosition="start">
+    <TertiaryButton icon={arrowLeftIcon} iconPosition="start">
       Tertiary
     </TertiaryButton>
-    <TertiaryButton icon={plusIcon} iconPosition="end">
+    <TertiaryButton icon={arrowRightIcon} iconPosition="end">
       Tertiary
     </TertiaryButton>
-    <TertiaryButton icon={plusIcon} />
+    <TertiaryButton icon={relatedActionsVerticalIcon} />
   </HStack>
 );
