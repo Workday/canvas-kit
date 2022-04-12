@@ -7,15 +7,16 @@ import {
   relatedActionsVerticalIcon,
   arrowLeftIcon,
   arrowRightIcon,
+  caretDownIcon,
 } from '@workday/canvas-system-icons-web';
 
 export const Tertiary = () => (
   <HStack spacing="s" padding="s">
     <TertiaryButton>Tertiary</TertiaryButton>
-    <TertiaryButton icon={arrowLeftIcon} iconPosition="start">
+    <TertiaryButton icon={plusIcon} iconPosition="start">
       Tertiary
     </TertiaryButton>
-    <TertiaryButton icon={arrowRightIcon} iconPosition="end">
+    <TertiaryButton icon={caretDownIcon} iconPosition="end">
       Tertiary
     </TertiaryButton>
     <TertiaryButton icon={relatedActionsVerticalIcon} />
