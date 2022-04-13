@@ -5,7 +5,7 @@ import {createComponent, useModelContext} from '@workday/canvas-kit-react/common
 import {ExpandableContainerModelContext} from './ExpandableContainer';
 import {DisclosureModel} from '@workday/canvas-kit-react/disclosure';
 
-export interface ExpandableContainerTargetProps {
+export interface ExpandableContainerButtonProps {
   model?: DisclosureModel;
   children: React.ReactNode;
 }
@@ -28,8 +28,8 @@ const useDiscloseTarget = (
 };
 
 export const ExpandableContainerButton = createComponent('button')({
-  displayName: 'ExpandableContainer.Header.Button',
-  Component: ({children, model, ...elemProps}: ExpandableContainerTargetProps, ref, Element) => {
+  displayName: 'ExpandableContainer.Button',
+  Component: ({children, model, ...elemProps}: ExpandableContainerButtonProps, ref, Element) => {
     const expandableContainerModel = useModelContext(ExpandableContainerModelContext, model);
     const target = useDiscloseTarget(expandableContainerModel, elemProps);
 
