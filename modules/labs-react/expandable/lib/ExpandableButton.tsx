@@ -2,10 +2,10 @@ import React from 'react';
 
 import {createComponent, useModelContext} from '@workday/canvas-kit-react/common';
 
-import {ExpandableContainerModelContext} from './ExpandableContainer';
+import {ExpandableModelContext} from './Expandable';
 import {DisclosureModel} from '@workday/canvas-kit-react/disclosure';
 
-export interface ExpandableContainerButtonProps {
+export interface ExpandableButtonProps {
   model?: DisclosureModel;
   children: React.ReactNode;
 }
@@ -27,13 +27,13 @@ const useDiscloseTarget = (
   };
 };
 
-export const ExpandableContainerButton = createComponent('button')({
-  displayName: 'ExpandableContainer.Button',
-  Component: ({children, model, ...elemProps}: ExpandableContainerButtonProps, ref, Element) => {
-    const expandableContainerModel = useModelContext(ExpandableContainerModelContext, model);
-    const target = useDiscloseTarget(expandableContainerModel, elemProps);
+export const ExpandableButton = createComponent('button')({
+  displayName: 'Expandable.Button',
+  Component: ({children, model, ...elemProps}: ExpandableButtonProps, ref, Element) => {
+    const expandableModel = useModelContext(ExpandableModelContext, model);
+    const target = useDiscloseTarget(expandableModel, elemProps);
 
-    const state = expandableContainerModel.state;
+    const state = expandableModel.state;
     const isVisible = state.visibility === 'visible';
 
     return (
