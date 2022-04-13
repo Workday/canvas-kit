@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {colors, space} from '@workday/canvas-kit-react/tokens';
+import {space} from '@workday/canvas-kit-react/tokens';
 import {
   createComponent,
   styled,
@@ -17,9 +17,9 @@ export interface ExpandableContainerContentProps {
 }
 
 const Container = styled('div')<StyledType>({
-  background: colors.frenchVanilla600,
+  background: 'none',
+  border: 'none',
   padding: space.s,
-  border: `1px solid ${colors.licorice600}`,
 });
 
 export const ExpandableContainerContent = createComponent('div')({
@@ -28,7 +28,7 @@ export const ExpandableContainerContent = createComponent('div')({
     const {state} = useModelContext(ExpandableContainerModelContext, model);
 
     return state.visibility === 'visible' ? (
-      <Container as={Element} ref={ref} {...elemProps}>
+      <Container as={Element} id={state.id} ref={ref} {...elemProps}>
         {children}
       </Container>
     ) : null;

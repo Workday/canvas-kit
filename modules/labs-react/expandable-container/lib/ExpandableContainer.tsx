@@ -7,8 +7,9 @@ import {
   useDisclosureModel,
   DisclosureModelConfig,
 } from '@workday/canvas-kit-react/disclosure';
-import {ExpandableContainerTarget} from './ExpandableContainer.Target';
-import {ExpandableContainerContent} from './ExpandableContainer.Content';
+import {ExpandableContainerContent} from './ExpandableContainerContent';
+import {ExpandableContainerHeader} from './ExpandableContainerHeader';
+import {ExpandableContainerButton} from './ExpandableContainerButton';
 
 export const ExpandableContainerModelContext = React.createContext<DisclosureModel>({} as any);
 
@@ -29,7 +30,8 @@ export const ExpandableContainer = createComponent()({
     );
   },
   subComponents: {
-    Target: ExpandableContainerTarget,
+    Header: ExpandableContainerHeader,
+    Button: ExpandableContainerButton,
     Content: ExpandableContainerContent,
   },
 });

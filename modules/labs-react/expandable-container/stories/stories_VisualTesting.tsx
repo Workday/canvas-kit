@@ -35,7 +35,9 @@ export const ExpandableContainerStates = () => {
 
           return (
             <ExpandableContainer model={{...model, state}}>
-              <ExpandableContainer.Target>Toggle</ExpandableContainer.Target>
+              <ExpandableContainer.Header>
+                <ExpandableContainer.Button>Hello</ExpandableContainer.Button>
+              </ExpandableContainer.Header>
               <ExpandableContainer.Content>Content</ExpandableContainer.Content>
             </ExpandableContainer>
           );
