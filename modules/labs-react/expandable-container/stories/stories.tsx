@@ -1,6 +1,7 @@
 import React from 'react';
 
 import {ExpandableContainer} from '@workday/canvas-kit-labs-react/expandable-container';
+import {PrimaryButton} from '@workday/canvas-kit-react';
 
 export default {
   title: 'Labs/Expandable Container/React',
@@ -10,16 +11,9 @@ export default {
 export const Default = () => (
   <ExpandableContainer>
     <ExpandableContainer.Header as={'h2'}>
-      <ExpandableContainer.Button>Hello</ExpandableContainer.Button>
-    </ExpandableContainer.Header>
-    <ExpandableContainer.Content>Content</ExpandableContainer.Content>
-  </ExpandableContainer>
-);
-
-export const RightChevron = () => (
-  <ExpandableContainer>
-    <ExpandableContainer.Header as={'h2'}>
-      <ExpandableContainer.Button rightChevron={true}>Hello</ExpandableContainer.Button>
+      <ExpandableContainer.Button as={PrimaryButton}>
+        Additional Information
+      </ExpandableContainer.Button>
     </ExpandableContainer.Header>
     <ExpandableContainer.Content>Content</ExpandableContainer.Content>
   </ExpandableContainer>
