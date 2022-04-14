@@ -14,7 +14,7 @@ import {PillIcon} from './Pill.Icon';
 import {PillCount} from './Pill.Count';
 import {PillAvatar} from './Pill.Avatar';
 import {borderRadius, colors, space, type} from '@workday/canvas-kit-react/tokens';
-import {BoxProps, boxStyleFn, HStack} from '@workday/canvas-kit-react/layout';
+import {BoxProps, boxStyleFn} from '@workday/canvas-kit-react/layout';
 import {CSSObject} from '@emotion/react';
 
 export const PillModelContext = React.createContext<PillModel>({} as any);
@@ -22,6 +22,7 @@ export const PillModelContext = React.createContext<PillModel>({} as any);
 export interface PillProps extends PillModelConfig, BoxProps {
   model?: PillModel;
   children: React.ReactNode;
+  maxWidth?: number;
 }
 
 const pillBaseStyles: CSSObject = {

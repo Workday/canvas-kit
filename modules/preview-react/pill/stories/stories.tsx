@@ -11,9 +11,28 @@ export default {
   component: Pill,
 };
 
+const data = [
+  'Shoes',
+  'Pants',
+  'Dress Shoes',
+  'Color',
+  'Accessories',
+  'Luxury',
+  'Casual',
+  'Hats',
+  'Beanies',
+  'Glasses',
+  'Jewelry',
+];
+
 export const Default = () => (
   <HStack shouldWrapChildren spacing="xxs">
     <Pill>Ready Only</Pill>
+  </HStack>
+);
+
+export const AdditivePill = () => (
+  <HStack shouldWrapChildren spacing="xxs">
     <Pill onClick={() => console.warn('clicked')}>
       <Pill.Avatar url={testAvatar} />
       Regina Skeltor
@@ -26,6 +45,11 @@ export const Default = () => (
       Category
       <Pill.Count>30</Pill.Count>
     </Pill>
+  </HStack>
+);
+
+export const RemovablePill = () => (
+  <HStack shouldWrapChildren spacing="xxs">
     <Pill onDelete={() => console.warn('clicked')}>
       Pink Shirts
       <Pill.Icon icon={xIcon} />
@@ -35,5 +59,18 @@ export const Default = () => (
       Carolyn Grimaldi
       <Pill.Icon icon={xIcon} />
     </Pill>
+  </HStack>
+);
+
+export const ListOfPills = () => (
+  <HStack shouldWrapChildren spacing="xxs" flexWrap="wrap">
+    {data.map(cat => {
+      return (
+        <Pill marginBottom="xxs" onDelete={() => console.log(`delete ${cat}`)}>
+          {cat}
+          <Pill.Icon icon={xIcon} />
+        </Pill>
+      );
+    })}
   </HStack>
 );
