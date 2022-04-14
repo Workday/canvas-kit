@@ -15,7 +15,6 @@ export * from './layout';
 export * from './loading-animation';
 export * from './modal';
 export * from './pagination';
-export * from './pill';
 export * from './popup';
 export * from './radio';
 export * from './segmented-control';
