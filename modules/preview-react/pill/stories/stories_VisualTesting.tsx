@@ -4,15 +4,15 @@ import {StaticStates} from '@workday/canvas-kit-react/common';
 import {ComponentStatesTable} from '@workday/canvas-kit-labs-react/common';
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
 
-import {Pill} from '@workday/canvas-kit-react/pill';
+import {Pill, usePillModel} from '@workday/canvas-kit-preview-react/pill';
 
 export default withSnapshotsEnabled({
-  title: 'Testing/React/Indicators/Pill',
+  title: 'Testing/React/Preview/Pill',
   component: Pill,
 });
 
 export const PillStates = () => {
-  // const model = usePillModel();
+  const model = usePillModel();
 
   return (
     <StaticStates>
@@ -30,14 +30,9 @@ export const PillStates = () => {
         ]}
       >
         {props => {
-          const state = {open: props.open};
+          const state = {onClick: props.onClick};
 
-          return (
-            <Pill>
-              {/* <Pill.Target>Toggle</Pill.Target> */}
-              Content
-            </Pill>
-          );
+          return <Pill model={{...model, state}}>Pill Label</Pill>;
         }}
       </ComponentStatesTable>
     </StaticStates>

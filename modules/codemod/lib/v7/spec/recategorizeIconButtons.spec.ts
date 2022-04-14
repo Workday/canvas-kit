@@ -118,4 +118,47 @@ describe('recategorizeIconButtons', () => {
 
     expectTransform(input, expected);
   });
+
+  it.only('wdc eexample', () => {
+    const input = stripIndent`
+      import {IconButton} from '@workday/canvas-kit-react/button';
+
+      <IconButton
+        {...previousAutoId}
+        data-uxi-widget-type={'wd-datepicker'}
+        data-uxi-datepicker-action={'prevMonth'}
+        aria-label={identifiers.previousAriaLabel}
+        autoFocus={true}
+        variant='inverseFilled'
+        size={'small'}
+        onKeyDown={this.props.onKeyDown}
+        onClick={this.handlePreviousMonthChange}
+        tabIndex={0}
+      >
+        <SystemIcon icon={!!isRTL ? chevronRightIcon : chevronLeftIcon} />
+      </IconButton>
+    `;
+
+    const expected = stripIndent`
+      import {SecondaryButton} from '@workday/canvas-kit-react/button';
+
+      <SecondaryButton
+        {...previousAutoId}
+        data-uxi-widget-type={'wd-datepicker'}
+        data-uxi-datepicker-action={'prevMonth'}
+        aria-label={identifiers.previousAriaLabel}
+        autoFocus={true}
+        variant={'inverseFilled'}
+        size={'small'}
+        onKeyDown={this.props.onKeyDown}
+        onClick={this.handlePreviousMonthChange}
+        tabIndex={0}
+      >
+        <SystemIcon icon={!!isRTL ? chevronRightIcon : chevronLeftIcon} />
+      </SecondaryButton>
+      
+    `;
+
+    expectTransform(input, expected);
+  });
 });

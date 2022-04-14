@@ -75,6 +75,7 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
       if (variantProp) {
         const variantPropValue = ((variantProp as JSXAttribute).value as StringLiteral)?.value;
         buttonType = /filled/gi.test(variantPropValue) ? 'SecondaryButton' : 'TertiaryButton';
+        console.log(variantPropValue);
 
         if (!variantPropValue.includes('inverse')) {
           nodePath.value.openingElement.attributes?.splice(attrs?.indexOf(variantProp)!, 1);

@@ -15,12 +15,18 @@ const StyledCountContainer = styled(Box.as('span'))<StyledType>({
   borderTopRightRadius: borderRadius.m,
   borderBottomLeftRadius: borderRadius.zero,
   borderBottomRightRadius: borderRadius.m,
+  marginInlineEnd: `-${space.xxs}`,
 });
 export const PillCount = createComponent('span')({
   displayName: 'Pill.Avatar',
   Component: ({children, ...elemProps}: PillCountProps, ref, Element) => {
     return (
-      <StyledCountContainer backgroundColor={colors.soap500} ref={ref} {...elemProps}>
+      <StyledCountContainer
+        marginInlineStart="xxs"
+        backgroundColor={colors.soap500}
+        ref={ref}
+        {...elemProps}
+      >
         {children}
       </StyledCountContainer>
     );
