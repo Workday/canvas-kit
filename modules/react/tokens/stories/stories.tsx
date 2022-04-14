@@ -23,11 +23,13 @@ const StyledCard = styled(Box)<StyledType>({
 
 export const Depth = () => (
   <Flex>
-    <StyledCard depth="inset">Depth -1</StyledCard>
+    <StyledCard depth="none">Depth None</StyledCard>
     <StyledCard depth={1}>Depth 1</StyledCard>
     <StyledCard depth={2}>Depth 2</StyledCard>
     <StyledCard depth={3}>Depth 3</StyledCard>
     <StyledCard depth={4}>Depth 4</StyledCard>
+    <StyledCard depth={5}>Depth 5</StyledCard>
+    <StyledCard depth={6}>Depth 6</StyledCard>
   </Flex>
 );
 

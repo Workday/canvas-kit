@@ -28,7 +28,7 @@ const StyledFlex = styled(Box)<StyledType & FlexProps>(
  *
  * // `Card`'s default values are set using `FlexProps`
  * const Card = (props: CardProps) => (
- *   <Flex flexDirection="column" alignItems="flex-start" depth={2} space="m" {...props}>
+ *   <Flex flexDirection="column" alignItems="flex-start" depth={1} space="m" {...props}>
  *     <h1>Hello, Card!</h1>
  *     <p>This card uses flexbox to set its layout.</p>
  *   </Flex>

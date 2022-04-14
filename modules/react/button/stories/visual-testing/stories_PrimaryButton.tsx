@@ -1,7 +1,7 @@
 import React from 'react';
 import {ComponentStatesTable, permutateProps} from '@workday/canvas-kit-labs-react/common';
 import {withSnapshotsEnabled, customColorTheme} from '../../../../../utils/storybook';
-import {playCircleIcon} from '@workday/canvas-system-icons-web';
+import {playCircleIcon, relatedActionsVerticalIcon} from '@workday/canvas-system-icons-web';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {Container, stateTableColumnProps} from './utils';
 import {PartialEmotionCanvasTheme, StaticStates} from '@workday/canvas-kit-react/common';
@@ -73,7 +73,7 @@ export const PrimaryIconButtonStates = (props: {theme?: PartialEmotionCanvasThem
           ],
           icon: [
             // We don't need a label here, because `iconPosition` provides it
-            {value: playCircleIcon, label: ''},
+            {value: relatedActionsVerticalIcon, label: ''},
           ],
           iconPosition: [
             {value: undefined, label: ''},

@@ -17,7 +17,11 @@ any questions about the update.
 - [Icons](#icons)
 - [ActionBar Component Updates](#actionbar-component-updates)
 - [Status Indicator Width](#status-indicator-width)
-- [Popup Cards](popup-cards)
+- [Popup Cards](#popup-cards)
+- [Popper Props Update](#popper-props-update)
+- [Component Promotions](#component-promotion)
+- [Token Updates](#token-updates)
+  - [Depth Tokens](#depth-tokens)
 
 ## Codemod
 
@@ -463,6 +467,11 @@ If your code contains any hacks to make a `Modal` overflow, these hacks should n
 `max-height` of the `Modal.Body` element using calculations. These should be removed. The
 `Popup.Card` now has a max height and the `Popup.Body` height is automatically calculated.
 
+## Popper Props Update
+
+We removed the `containerElement` prop from Popper component because it's no longer needed with
+Fullscreen API.
+
 ## Component Promotions
 
 After some [assessment](https://github.com/Workday/canvas-kit/issues/1395) we've decided to promote
@@ -476,3 +485,26 @@ main `react` package.
 - `Box` was promoted from `@workday/canvas-kit-labs/common` to `@workday/canvas-kit-react/layout`
 - `Flex` was promoted from `@workday/canvas-kit-labs/layout` to `@workday/canvas-kit-react/layout`
 - `Stack` was promoted from `@workday/canvas-kit-labs/layout` to `@workday/canvas-kit-react/layout`
+
+## Token Updates
+
+### Depth Tokens
+
+**Changes:**
+
+- Depth `inset` was removed from token list.
+- Added new depth: `none` (to remove default depth from component), `5` and `6`.
+- Updated all depth values: now depth adds only `box-shadow` with 2 shadows and no border.
+
+Also we changed default depth for the following components:
+
+- Card: Depth 2 → Depth 1
+- Breadcrumbs Dropdown Menu: Depth 2 → Depth 3
+- Menu: Depth 2 → Depth 3
+- Combobox: Depth 1 → Depth 3
+- Popup: Depth 2 → Depth 5
+- Dialog: Depth 2 → Depth 5
+- Color Picker Palette: Depth 2 → Depth 5
+- Toast: Depth 2 → Depth 5
+- Modal: Depth 2 → Depth 6
+- Preview Side Panel (alternate variant): Depth 3 → Depth 6
