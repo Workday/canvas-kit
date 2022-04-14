@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v5.3.17](https://github.com/Workday/canvas-kit/releases/tag/v5.3.17) (2022-04-14)
+
+### Components
+
+- fix: Add RTL support to FormField.Label ([#1541](https://github.com/Workday/canvas-kit/pull/1541)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
 ## [v5.3.16](https://github.com/Workday/canvas-kit/releases/tag/v5.3.16) (2022-04-06)
 
 ### Components
