@@ -9,11 +9,9 @@ export const PillAvatar = createComponent('button')({
   displayName: 'Pill.Avatar',
   Component: ({children, ...elemProps}: PillAvatarProps, ref, Element) => {
     return (
-      <span style={{minWidth: '20px', display: 'inline-flex', marginInlineEnd: '4px'}}>
-        <Avatar size={20} ref={ref} {...elemProps}>
-          {children}
-        </Avatar>
-      </span>
+      <Avatar size={20} ref={ref} {...elemProps}>
+        {children}
+      </Avatar>
     );
   },
 });

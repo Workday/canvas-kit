@@ -11,11 +11,14 @@ import {
 import {usePillModel, PillModel, PillModelConfig} from './usePillModel';
 
 import {PillIcon} from './Pill.Icon';
+import {PillIconButton} from './Pill.IconButton';
 import {PillCount} from './Pill.Count';
 import {PillAvatar} from './Pill.Avatar';
 import {borderRadius, colors, space, type} from '@workday/canvas-kit-react/tokens';
-import {BoxProps, boxStyleFn} from '@workday/canvas-kit-react/layout';
+import {BoxProps, boxStyleFn, HStack} from '@workday/canvas-kit-react/layout';
 import {CSSObject} from '@emotion/react';
+import {PillLabel} from './Pill.Label';
+import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
 
 export const PillModelContext = React.createContext<PillModel>({} as any);
 
@@ -31,7 +34,7 @@ const pillBaseStyles: CSSObject = {
   alignItems: 'center',
   borderRadius: borderRadius.m,
   flexShrink: 0,
-  ...type.levels.body.small,
+  ...type.levels.subtext.large,
   boxShadow: 'none',
   outline: 'none',
   fontWeight: 500,
@@ -40,11 +43,15 @@ const pillBaseStyles: CSSObject = {
   width: 'fit-content',
   padding: `2px ${space.xxs}`,
   height: space.m,
+  position: 'relative',
 };
 
 const StyledReadOnlyPillContainer = styled('span')<StyledType & PillProps>(
   {
     ...pillBaseStyles,
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
   },
   boxStyleFn
 );
@@ -69,6 +76,18 @@ const StyledInteractivePillContainer = styled('button')<StyledType & PillProps>(
     '&:active': {
       backgroundColor: colors.soap500,
       borderColor: colors.licorice500,
+    },
+    ':before': {
+      content: '""',
+      borderRadius: borderRadius.m,
+      zIndex: -1,
+      margin: space.xxxs,
+      backgroundColor: 'transparent',
+      position: 'absolute',
+      top: `-${space.xxxs}`,
+      left: `-${space.xxxs}`,
+      right: `-${space.xxxs}`,
+      bottom: `-${space.xxxs}`,
     },
   },
   boxStyleFn
@@ -102,15 +121,42 @@ export const Pill = createComponent()({
       <PillModelContext.Provider value={value}>
         <>
           {!config.onClick && !config.onDelete && (
-            <StyledReadOnlyPillContainer {...rest}>{children}</StyledReadOnlyPillContainer>
+            <StyledReadOnlyPillContainer as={Element} ref={ref} {...rest}>
+              <OverflowTooltip>
+                <>{children}</>
+              </OverflowTooltip>
+            </StyledReadOnlyPillContainer>
           )}
           {config.onClick && !config.onDelete && (
-            <StyledInteractivePillContainer onClick={config.onClick} {...rest}>
-              {children}
+            <StyledInteractivePillContainer
+              as={Element}
+              ref={ref}
+              onClick={config.onClick}
+              {...rest}
+            >
+              <HStack
+                shouldWrapChildren
+                spacing="xxxs"
+                alignItems="center"
+                justifyContent="center"
+                flexDirection="row"
+              >
+                {children}
+              </HStack>
             </StyledInteractivePillContainer>
           )}
           {config.onDelete && !config.onClick && (
-            <StyledRemovablePillContainer {...rest}>{children}</StyledRemovablePillContainer>
+            <StyledRemovablePillContainer as={Element} ref={ref} {...rest}>
+              <HStack
+                shouldWrapChildren
+                spacing="xxxs"
+                alignItems="center"
+                justifyContent="center"
+                // flexDirection="row"
+              >
+                {children}
+              </HStack>
+            </StyledRemovablePillContainer>
           )}
         </>
       </PillModelContext.Provider>
@@ -120,5 +166,7 @@ export const Pill = createComponent()({
     Icon: PillIcon,
     Avatar: PillAvatar,
     Count: PillCount,
+    Label: PillLabel,
+    IconButton: PillIconButton,
   },
 });

@@ -8,6 +8,7 @@ export interface PillCountProps extends BoxProps {}
 const StyledCountContainer = styled(Box.as('span'))<StyledType>({
   height: '22px',
   width: '22px',
+  minWidth: '22px',
   display: 'inline-flex',
   alignItems: 'center',
   justifyContent: 'center',
@@ -22,7 +23,7 @@ export const PillCount = createComponent('span')({
   Component: ({children, ...elemProps}: PillCountProps, ref, Element) => {
     return (
       <StyledCountContainer
-        marginInlineStart="xxs"
+        // marginInlineStart="xxs"
         backgroundColor={colors.soap500}
         ref={ref}
         {...elemProps}
