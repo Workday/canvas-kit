@@ -46,8 +46,8 @@ const getIconColors = () => {
 };
 
 const StyledHitTarget = styled('span')({
-  //   opacity: 0,
   height: 24,
+
   position: 'absolute',
   right: '4px',
   left: '4px',
@@ -62,20 +62,21 @@ export const PillIconButton = createComponent('button')({
   displayName: 'Pill.IconButton',
   Component: ({size, model, icon = xSmallIcon, ...elemProps}: PillIconProps, ref, Element) => {
     const {state} = useModelContext(PillModelContext, model);
-    const props = mergeProps({onClick: state.onDelete}, elemProps);
+    const props = mergeProps(
+      {onClick: state.onDelete, style: {position: 'relative' as const}},
+      elemProps
+    );
     return (
       <BaseButton
         borderRadius="s"
         height={32}
         width={32}
         padding="zero"
-        marginInlineEnd={'-14px'}
+        marginInlineEnd={'-14px !important'}
         paddingInlineEnd={'4px'}
-        marginInlineStart="-8px"
+        marginInlineStart="-4px !important"
         colors={getIconColors()}
-        onClick={state.onDelete ? state.onDelete : undefined}
         tabIndex={-1}
-        style={{position: 'relative'}}
         {...props}
       >
         <StyledHitTarget tabIndex={0} />

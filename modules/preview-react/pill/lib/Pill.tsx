@@ -18,15 +18,81 @@ import {borderRadius, colors, space, type} from '@workday/canvas-kit-react/token
 import {BoxProps, boxStyleFn, HStack} from '@workday/canvas-kit-react/layout';
 import {CSSObject} from '@emotion/react';
 import {PillLabel} from './Pill.Label';
+import {BaseButton} from '@workday/canvas-kit-react/button';
 import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
 
 export const PillModelContext = React.createContext<PillModel>({} as any);
 
-export interface PillProps extends PillModelConfig, BoxProps {
+export interface PillProps extends PillModelConfig {
   model?: PillModel;
   children: React.ReactNode;
-  maxWidth?: number;
 }
+
+const getButtonPillColors = () => {
+  return {
+    default: {
+      background: colors.soap300,
+      icon: colors.licorice200,
+      label: colors.blackPepper400,
+    },
+
+    hover: {
+      icon: colors.licorice500,
+      background: colors.soap300,
+      border: colors.licorice400,
+    },
+    active: {
+      icon: colors.licorice500,
+      background: colors.soap500,
+      border: colors.licorice200,
+    },
+    focus: {
+      icon: colors.licorice500,
+      background: colors.soap300,
+      focusRing: focusRing({width: 0, innerColor: 'transparent', outerColor: 'transparent'}),
+    },
+    disabled: {
+      icon: colors.licorice100,
+      label: colors.licorice100,
+      background: colors.soap100,
+      border: colors.licorice100,
+      opacity: '1',
+    },
+  };
+};
+
+const getRemovablePillColors = () => {
+  return {
+    default: {
+      background: colors.soap300,
+      icon: colors.licorice200,
+      label: colors.blackPepper400,
+    },
+
+    hover: {
+      icon: colors.licorice500,
+      background: colors.soap300,
+      border: colors.licorice200,
+    },
+    active: {
+      icon: colors.licorice500,
+      background: colors.soap500,
+      border: colors.licorice500,
+    },
+    focus: {
+      icon: colors.licorice200,
+      background: colors.soap300,
+      focusRing: focusRing({width: 1}),
+    },
+    disabled: {
+      icon: colors.licorice100,
+      label: colors.licorice100,
+      background: 'red',
+      border: colors.licorice100,
+      opacity: '1',
+    },
+  };
+};
 
 const pillBaseStyles: CSSObject = {
   border: `1px solid ${colors.licorice200}`,
@@ -46,117 +112,77 @@ const pillBaseStyles: CSSObject = {
   position: 'relative',
 };
 
-const StyledReadOnlyPillContainer = styled('span')<StyledType & PillProps>(
+const StyledBasePill = styled(BaseButton.as('button'))<StyledType & PillProps>(
   {
     ...pillBaseStyles,
-    whiteSpace: 'nowrap',
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
   },
+  // ({maxWidth}) => ({
+  //   maxWidth: maxWidth,
+  // }),
   boxStyleFn
 );
 
-const StyledInteractivePillContainer = styled('button')<StyledType & PillProps>(
-  {
-    ...pillBaseStyles,
-    cursor: 'pointer',
-    backgroundColor: colors.soap300,
-    transition:
-      'box-shadow 120ms linear, border 120ms linear, background-color 120ms linear, color 120ms linear',
-    '&:hover:active': {transitionDuration: '40ms'},
+const StyledEllipsisText = styled('span')({
+  whiteSpace: 'nowrap',
+  overflow: 'hidden',
+  textOverflow: 'ellipsis',
+});
 
-    '&:disabled, &:disabled:active': {cursor: 'default', boxShadow: 'none'},
-    '&:hover': {
-      backgroundColor: colors.soap400,
-      borderColor: colors.licorice400,
-    },
-    '&:focus': {
-      ...focusRing({width: 1}),
-    },
-    '&:active': {
-      backgroundColor: colors.soap500,
-      borderColor: colors.licorice500,
-    },
-    ':before': {
-      content: '""',
-      borderRadius: borderRadius.m,
-      zIndex: -1,
-      margin: space.xxxs,
-      backgroundColor: 'transparent',
-      position: 'absolute',
-      top: `-${space.xxxs}`,
-      left: `-${space.xxxs}`,
-      right: `-${space.xxxs}`,
-      bottom: `-${space.xxxs}`,
-    },
-  },
-  boxStyleFn
-);
-
-const StyledRemovablePillContainer = styled('span')<StyledType & PillProps>(
-  {
-    ...pillBaseStyles,
-    cursor: 'default',
-    backgroundColor: colors.soap300,
-    transition:
-      'box-shadow 120ms linear, border 120ms linear, background-color 120ms linear, color 120ms linear',
-    '&:hover:active': {transitionDuration: '40ms'},
-
-    '&:disabled, &:disabled:active': {cursor: 'default', boxShadow: 'none'},
-
-    '&:active': {
-      backgroundColor: colors.soap500,
-      borderColor: colors.licorice500,
-    },
-  },
-  boxStyleFn
-);
+const StyledNonInteractivePill = styled(StyledBasePill)({
+  cursor: 'default',
+  overflow: 'revert',
+});
 
 export const Pill = createComponent()({
   displayName: 'Pill',
   Component: ({children, model, ...config}: PillProps, ref, Element) => {
     const value = useDefaultModel(model, config, usePillModel);
-    const {onClick, onDelete, ...rest} = config;
+    const {onClick, onDelete, maxWidth, ...rest} = config;
+
     return (
       <PillModelContext.Provider value={value}>
         <>
           {!config.onClick && !config.onDelete && (
-            <StyledReadOnlyPillContainer as={Element} ref={ref} {...rest}>
-              <OverflowTooltip>
-                <>{children}</>
-              </OverflowTooltip>
-            </StyledReadOnlyPillContainer>
+            <OverflowTooltip>
+              <StyledNonInteractivePill
+                maxWidth={value.state.maxWidth}
+                as={Element || 'span'}
+                ref={ref}
+                {...rest}
+              >
+                <StyledEllipsisText>{children}</StyledEllipsisText>
+              </StyledNonInteractivePill>
+            </OverflowTooltip>
           )}
           {config.onClick && !config.onDelete && (
-            <StyledInteractivePillContainer
+            <StyledBasePill
+              colors={getButtonPillColors()}
               as={Element}
               ref={ref}
               onClick={config.onClick}
               {...rest}
             >
-              <HStack
-                shouldWrapChildren
-                spacing="xxxs"
-                alignItems="center"
-                justifyContent="center"
-                flexDirection="row"
-              >
-                {children}
+              <HStack shouldWrapChildren spacing="xxxs" alignItems="center" justifyContent="center">
+                {React.Children.map(children, (child, index) => {
+                  if (typeof child === 'string') {
+                    return <span>{child}</span>;
+                  }
+                  return child;
+                })}
               </HStack>
-            </StyledInteractivePillContainer>
+            </StyledBasePill>
           )}
           {config.onDelete && !config.onClick && (
-            <StyledRemovablePillContainer as={Element} ref={ref} {...rest}>
-              <HStack
-                shouldWrapChildren
-                spacing="xxxs"
-                alignItems="center"
-                justifyContent="center"
-                // flexDirection="row"
-              >
-                {children}
-              </HStack>
-            </StyledRemovablePillContainer>
+            <StyledNonInteractivePill
+              colors={getRemovablePillColors()}
+              as={Element || 'span'}
+              ref={ref}
+              {...rest}
+            >
+              {/* <HStack shouldWrapChildren spacing="xxxs" alignItems="center" justifyContent="center"> */}
+              {children}
+              {/* </HStack> */}
+            </StyledNonInteractivePill>
           )}
         </>
       </PillModelContext.Provider>

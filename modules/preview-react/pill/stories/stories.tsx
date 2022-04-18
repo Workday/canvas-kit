@@ -27,15 +27,25 @@ const data = [
 
 export const Default = () => (
   <HStack shouldWrapChildren spacing="xxs">
-    <Pill>Ready Only</Pill>
+    <Pill onClick={() => console.warn('here')}>Ready Only</Pill>
+    <Pill maxWidth={250}>
+      Ready Only but with a super long text in case you want to read a paragraph in a pill which we
+      don't recommend
+    </Pill>
   </HStack>
 );
 
 export const ClickablePillWithAvatar = () => (
-  <Pill onClick={() => console.warn('clicked')}>
-    <Pill.Avatar url={testAvatar} />
-    <Pill.Label>Regina Skeltor</Pill.Label>
-  </Pill>
+  <HStack shouldWrapChildren spacing="xxs">
+    <Pill onClick={() => console.warn('clicked')}>
+      <Pill.Avatar url={testAvatar} />
+      Regina Skeltor
+    </Pill>
+    <Pill onClick={() => console.warn('clicked')} disabled>
+      <Pill.Avatar url={testAvatar} />
+      <Pill.Label>Regina Skeltor</Pill.Label>
+    </Pill>
+  </HStack>
 );
 
 export const ClickablePillWithIcon = () => (
@@ -47,13 +57,13 @@ export const ClickablePillWithIcon = () => (
 
 export const ClickablePillWithCount = () => (
   <Pill onClick={() => console.warn('clicked')}>
-    <Pill.Label>Category</Pill.Label>
+    Category
     <Pill.Count>30</Pill.Count>
   </Pill>
 );
 
 export const WithOverflow = () => (
-  <Pill onClick={() => console.warn('clicked')} maxWidth={200}>
+  <Pill onClick={() => console.warn('clicked')}>
     <Pill.Label>Category of foods that is too long to contain the awesomeness</Pill.Label>
     <Pill.Count>10</Pill.Count>
   </Pill>
@@ -68,16 +78,29 @@ export const RemovablePill = () => (
     <Pill onDelete={() => console.warn('clicked')}>
       <Pill.Avatar url={testAvatar}></Pill.Avatar>
       <Pill.Label>Carolyn Grimaldi</Pill.Label>
+      <Pill.IconButton />
+    </Pill>
+    <Pill onDelete={() => console.warn('clicked')} disabled>
+      <Pill.Avatar url={testAvatar}></Pill.Avatar>
+      <Pill.Label>Carolyn Grimaldi</Pill.Label>
+      <Pill.IconButton onClick={() => console.warn('click event on icon button')} />
+    </Pill>
+    <Pill onDelete={() => console.warn('clicked')} disabled>
+      <Pill.Label>This is a category that should not exist because it is too long</Pill.Label>
       <Pill.IconButton onClick={() => console.warn('click event on icon button')} />
     </Pill>
   </HStack>
 );
 
 export const ListOfPills = () => (
-  <HStack shouldWrapChildren spacing="xxs" flexWrap="wrap">
+  <HStack shouldWrapChildren spacing="zero" flexWrap="wrap">
     {data.map(cat => {
       return (
-        <Pill marginBottom="xxs" onDelete={() => console.log(`delete ${cat}`)}>
+        <Pill
+          marginBottom="xxs"
+          onDelete={() => console.log(`delete ${cat}`)}
+          marginInlineEnd="xxs"
+        >
           <Pill.Label>{cat}</Pill.Label>
           <Pill.IconButton />
         </Pill>
