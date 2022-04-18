@@ -3,6 +3,95 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v6.8.2](https://github.com/Workday/canvas-kit/releases/tag/v6.8.2) (2022-04-05)
+
+### Assets
+
+- fix(common): Update brand assets url ([#1529](https://github.com/Workday/canvas-kit/pull/1529)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
+## [v6.8.1](https://github.com/Workday/canvas-kit/releases/tag/v6.8.1) (2022-04-05)
+
+### Components
+
+- fix(button): Update disabled background for tertiary button ([#1530](https://github.com/Workday/canvas-kit/pull/1530)) ([@mannycarrera4](https://github.com/mannycarrera4))
+
+
+## [v6.8.0](https://github.com/Workday/canvas-kit/releases/tag/v6.8.0) (2022-04-04)
+
+### Components
+
+- fix(banner): Convert Banner to a functional component ([#1520](https://github.com/Workday/canvas-kit/pull/1520)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v5.3.15](https://github.com/Workday/canvas-kit/releases/tag/v5.3.15) (2022-04-01)
+
+### Components
+
+- fix(banner): Convert Banner to a functional component ([#1520](https://github.com/Workday/canvas-kit/pull/1520)) ([@NicholasBoll](https://github.com/NicholasBoll))
+## [v6.7.2](https://github.com/Workday/canvas-kit/releases/tag/v6.7.2) (2022-03-30)
+
+### Components
+
+- fix(avatar): Resetting imageLoaded when new url is provided ([#1521](https://github.com/Workday/canvas-kit/pull/1521)) ([@BillGeoghegan](https://github.com/BillGeoghegan))
+
+
+## [v6.7.1](https://github.com/Workday/canvas-kit/releases/tag/v6.7.1) (2022-03-23)
+
+### Components
+
+- fix(layout): Pass key to Stack.Item when using shouldWrapChildren ([#1518](https://github.com/Workday/canvas-kit/pull/1518)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
+## [v6.7.0](https://github.com/Workday/canvas-kit/releases/tag/v6.7.0) (2022-03-21)
+
+### Components
+
+- fix: Update usePopupTarget to apply Refs to elements not class instance ([#1514](https://github.com/Workday/canvas-kit/pull/1514)) ([@jaslloyd](https://github.com/jaslloyd))
+
+
+## [v5.3.14](https://github.com/Workday/canvas-kit/releases/tag/v5.3.14) (2022-03-21)
+
+### Components
+
+- fix: Update usePopupTarget to apply Refs to elements not class instance ([#1514](https://github.com/Workday/canvas-kit/pull/1514)) ([@jaslloyd](https://github.com/jaslloyd))
+## [v6.6.1](https://github.com/Workday/canvas-kit/releases/tag/v6.6.1) (2022-03-18)
+
+### Components
+
+- fix(action-bar): Update CSS selector to fix spacing bug ([#1510](https://github.com/Workday/canvas-kit/pull/1510)) ([@alanbsmith](https://github.com/alanbsmith))
+  This change updates the CSS selector for the `ChildrenContainer`. We're using [the same selector as what's used in Stack](https://github.com/Workday/canvas-kit/blob/master/modules/labs-react/layout/lib/utils/stack.ts#L10). It is also now SSR-safe by avoiding applying styles to `style` tags. If you were compensating for this bug by adding space for non-button elements in the ActionBar, you'll need to remove that adjustment.
+
+
+## [v6.6.0](https://github.com/Workday/canvas-kit/releases/tag/v6.6.0) (2022-03-07)
+
+### Components
+
+- fix: Set overflowX and overflowY to cater for IE11 scrolling bug ([#1494](https://github.com/Workday/canvas-kit/pull/1494)) ([@ahayes91](https://github.com/ahayes91))
+
+
+## [v5.3.13](https://github.com/Workday/canvas-kit/releases/tag/v5.3.13) (2022-03-02)
+
+### Components
+
+- fix: Set overflowX and overflowY to cater for IE11 scrolling bug ([#1494](https://github.com/Workday/canvas-kit/pull/1494)) ([@ahayes91](https://github.com/ahayes91))
+
+
+## [v6.5.1](https://github.com/Workday/canvas-kit/releases/tag/v6.5.1) (2022-02-24)
+
+### Components
+
+- fix: Fix Box valid prop passing ([#1488](https://github.com/Workday/canvas-kit/pull/1488)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
+## [v6.5.0](https://github.com/Workday/canvas-kit/releases/tag/v6.5.0) (2022-02-23)
+
+### Components
+
+- feat(search-form): Allow onSubmit when input is empty ([#1439](https://github.com/Workday/canvas-kit/pull/1439)) ([@sophiasun311](https://github.com/sophiasun311))
+- feat(BrandAssets): Add alt property to Workday logos. ([#1446](https://github.com/Workday/canvas-kit/pull/1446)) ([@renato-rossi](https://github.com/renato-rossi))
+
+
 ## [v6.4.6](https://github.com/Workday/canvas-kit/releases/tag/v6.4.6) (2022-02-23)
 
 ### Components

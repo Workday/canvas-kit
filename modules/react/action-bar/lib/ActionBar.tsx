@@ -42,7 +42,7 @@ const ChildrenContainer = styled('div')(
   {
     display: 'inline-block',
     padding: `0 ${space.m}`,
-    '*:not(:first-of-type)': {
+    '> *:not(style) ~ *:not(style)': {
       marginLeft: space.s,
     },
   },
@@ -54,7 +54,7 @@ const ChildrenContainer = styled('div')(
       flexDirection: 'row-reverse',
       '> *': {
         flex: 1,
-        '&:not(:first-of-type)': {
+        '&:not(style) ~ *:not(style)': {
           marginRight: space.s,
           marginLeft: 0,
         },

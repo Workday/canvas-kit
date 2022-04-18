@@ -116,6 +116,7 @@ const getTertiaryButtonColors = (
         focusRing: focusRing({}, theme),
       },
       disabled: {
+        background: 'transparent',
         icon: themePrimary.main,
         label: themePrimary.main,
       },
