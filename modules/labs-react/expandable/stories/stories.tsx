@@ -1,30 +1,39 @@
 import React from 'react';
 
-import {ExpandableContainer} from '@workday/canvas-kit-labs-react/expandable';
-import {Avatar, PrimaryButton, SystemIcon, TertiaryButton} from '@workday/canvas-kit-react';
+import {Expandable} from '@workday/canvas-kit-labs-react/expandable';
+import {
+  Avatar,
+  PrimaryButton,
+  styled,
+  SystemIcon,
+  TertiaryButton,
+  type,
+} from '@workday/canvas-kit-react';
 import {chevronDownSmallIcon} from '@workday/canvas-system-icons-web';
 import {Flex} from '../../layout/lib/Flex';
 
 export default {
-  title: 'Labs/Expandable Container/React',
-  component: ExpandableContainer,
+  title: 'Labs/Container/Expandable/React',
+  component: Expandable,
 };
 
 export const Default = () => (
-  <ExpandableContainer>
-    <ExpandableContainer.Heading as={'h2'}>
-      <ExpandableContainer.Button as={PrimaryButton}>
-        Additional Information
-      </ExpandableContainer.Button>
-    </ExpandableContainer.Heading>
-    <ExpandableContainer.Content>Content</ExpandableContainer.Content>
-  </ExpandableContainer>
+  <Expandable>
+    <Expandable.Heading>
+      <Expandable.Button>Additional Information</Expandable.Button>
+    </Expandable.Heading>
+    <Expandable.Content>Content</Expandable.Content>
+  </Expandable>
 );
 
+const h2 = styled('h2')({
+  ...type.levels.heading.medium,
+});
+
 export const SingleLineHeader = () => (
-  <ExpandableContainer>
-    <ExpandableContainer.Heading as={'h2'}>
-      <ExpandableContainer.Button as={TertiaryButton}>
+  <Expandable>
+    <Expandable.Heading as={h2}>
+      <Expandable.Button as={TertiaryButton}>
         <Flex
           alignItems={'center'}
           flexDirection={'row'}
@@ -39,17 +48,17 @@ export const SingleLineHeader = () => (
           <Avatar as={'div'} />
           <span>Additional Information</span>
         </Flex>
-      </ExpandableContainer.Button>
-    </ExpandableContainer.Heading>
-    <ExpandableContainer.Content>Content</ExpandableContainer.Content>
-  </ExpandableContainer>
+      </Expandable.Button>
+    </Expandable.Heading>
+    <Expandable.Content>Content</Expandable.Content>
+  </Expandable>
 );
 
 export const MultiLineHeader = () => (
-  <ExpandableContainer>
-    <ExpandableContainer.Heading as={'h2'}>
-      <ExpandableContainer.Button>Additional Information</ExpandableContainer.Button>
-    </ExpandableContainer.Heading>
-    <ExpandableContainer.Content>Content</ExpandableContainer.Content>
-  </ExpandableContainer>
+  <Expandable>
+    <Expandable.Heading as={'h2'}>
+      <Expandable.Button>Additional Information</Expandable.Button>
+    </Expandable.Heading>
+    <Expandable.Content>Content</Expandable.Content>
+  </Expandable>
 );

@@ -16,9 +16,9 @@ yarn add @workday/canvas-kit-labs-react
 
 ```tsx
 import * as React from 'react';
-import {ExpandableContainer} from '@workday/canvas-kit-labs-react/expandable-container';
+import {Expandable} from '@workday/canvas-kit-labs-react/expandable';
 
-<ExpandableContainer />;
+<Expandable />;
 ```
 
 ## Static Properties
