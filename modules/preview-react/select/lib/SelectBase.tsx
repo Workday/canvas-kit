@@ -101,9 +101,9 @@ export interface CoreSelectBaseProps
    * * `label: string`
    * * `value: string`
    *
-   * If you omit the `renderSelected` prop, each option will be rendered using a `defaultRenderSelectedOption` function provided by the component.
+   * If you omit the `renderSelected` prop, each option will be rendered using a `defaultRenderSelected` function provided by the component.
    *
-   * @default defaultRenderSelectedOption
+   * @default defaultRenderSelected
    */
   renderSelected?: RenderSelectedFunction;
   /**
