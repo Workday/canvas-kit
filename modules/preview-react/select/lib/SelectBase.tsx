@@ -49,7 +49,7 @@ export interface NormalizedOption extends Option {
   label: string;
 }
 
-export interface RenderSelectedOptionFunction {
+export interface RenderSelectedFunction {
   (option: NormalizedOption): React.ReactNode;
 }
 
@@ -105,7 +105,7 @@ export interface CoreSelectBaseProps
    *
    * @default defaultRenderSelectedOption
    */
-  renderSelected?: RenderSelectedOptionFunction;
+  renderSelected?: RenderSelectedFunction;
   /**
    * The value of the Select.
    */
@@ -281,10 +281,10 @@ const SelectWrapper = styled('div')<Pick<SelectBaseProps, 'grow' | 'disabled'>>(
 );
 
 const defaultRenderOption: RenderOptionFunction = option => {
-  return <div>{defaultRenderSelectedOption(option)}</div>;
+  return <div>{defaultRenderSelected(option)}</div>;
 };
 
-const defaultRenderSelectedOption: RenderSelectedOptionFunction = option => {
+const defaultRenderSelected: RenderSelectedFunction = option => {
   return option.label;
 };
 
@@ -308,7 +308,7 @@ const SelectBase = ({
   onOptionSelection,
   options,
   renderOption = defaultRenderOption,
-  renderSelected = defaultRenderSelectedOption,
+  renderSelected = defaultRenderSelected,
   required,
   shouldMenuAutoFlip = true,
   shouldMenuAutoFocus = true,

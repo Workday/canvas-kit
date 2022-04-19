@@ -11,7 +11,7 @@ import {
 import {colors, typeColors} from '@workday/canvas-kit-react/tokens';
 import FormField from '../../../react/form-field';
 import Select from '../lib/Select';
-import {RenderOptionFunction, RenderSelectedOptionFunction} from '../lib/SelectBase';
+import {RenderOptionFunction, RenderSelectedFunction} from '../lib/SelectBase';
 
 const hintText = 'Helpful text goes here.';
 const hintId = 'error-desc-id';
@@ -83,7 +83,7 @@ export const customRenderOption: RenderOptionFunction = option => {
   );
 };
 
-export const customRenderSelectedOption: RenderSelectedOptionFunction = option => {
+export const customRenderSelected: RenderSelectedFunction = option => {
   const iconColor = colors.blackPepper100;
   return (
     <div style={{alignItems: 'center', display: 'flex'}}>
@@ -109,7 +109,12 @@ storiesOf('Preview/Select/React/Top Label', module)
   .add('Default with Custom Options Data', () => (
     <FormField label="Label" inputId="select-default-custom">
       {controlComponent(
-        <Select name="icon" options={customOptions} renderOption={customRenderOption} />
+        <Select
+          name="icon"
+          options={customOptions}
+          renderOption={customRenderOption}
+          renderSelected={customRenderSelected}
+        />
       )}
     </FormField>
   ))
@@ -149,13 +154,6 @@ storiesOf('Preview/Select/React/Top Label', module)
     <FormField label="Label" inputId="select-grow" grow={true}>
       {controlComponent(<Select name="contact" options={options} />)}
     </FormField>
-  ))
-  .add('Default with Custom Render Selected Method', () => (
-    <FormField label="Label" inputId="select-default-custom-selected">
-      {controlComponent(
-        <Select name="icon" options={customOptions} renderSelected={customRenderSelectedOption} />
-      )}
-    </FormField>
   ));
 
 storiesOf('Preview/Select/React/Left Label', module)
@@ -182,7 +180,12 @@ storiesOf('Preview/Select/React/Left Label', module)
       inputId="select-default-custom"
     >
       {controlComponent(
-        <Select name="icon" options={customOptions} renderOption={customRenderOption} />
+        <Select
+          name="icon"
+          options={customOptions}
+          renderOption={customRenderOption}
+          renderSelected={customRenderSelected}
+        />
       )}
     </FormField>
   ))
@@ -232,16 +235,5 @@ storiesOf('Preview/Select/React/Left Label', module)
       grow={true}
     >
       {controlComponent(<Select name="contact" options={options} />)}
-    </FormField>
-  ))
-  .add('Default with Custom Render Selected Method', () => (
-    <FormField
-      labelPosition={FormField.LabelPosition.Left}
-      label="Label"
-      inputId="select-default-custom-selected"
-    >
-      {controlComponent(
-        <Select name="icon" options={customOptions} renderSelected={customRenderSelectedOption} />
-      )}
     </FormField>
   ));
