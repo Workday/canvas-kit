@@ -117,6 +117,12 @@ const pillBaseStyles: CSSObject = {
 const StyledBasePill = styled(BaseButton.as('button'))<StyledType & PillProps>(
   {
     ...pillBaseStyles,
+
+    '&:active, &active:hover': {
+      'span[data-count="ck-pill-count"]': {
+        backgroundColor: colors.soap600,
+      },
+    },
   },
   boxStyleFn
 );
