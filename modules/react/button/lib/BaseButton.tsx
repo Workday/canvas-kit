@@ -182,7 +182,7 @@ const ButtonContainer = styled('button')<StyledType & ButtonContainerProps>(
 
     return {
       ...baseStyles,
-      '&:focus': {
+      '&:focus, &:focus:hover': {
         backgroundColor: colors.focus.background,
         borderColor: colors.focus.border,
         color: colors.focus.label,

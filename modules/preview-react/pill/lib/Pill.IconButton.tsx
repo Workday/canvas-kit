@@ -4,9 +4,9 @@ import {
   createComponent,
   focusRing,
   styled,
-  useDefaultModel,
   useModelContext,
   mergeProps,
+  StyledType,
 } from '@workday/canvas-kit-react/common';
 
 import {SystemIcon, SystemIconProps} from '@workday/canvas-kit-react/icon';
@@ -14,10 +14,10 @@ import {PillModelContext} from './Pill';
 import {PillModel} from './usePillModel';
 import {xSmallIcon} from '@workday/canvas-system-icons-web';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {colors} from '@workday/canvas-kit-react/tokens';
+import {borderRadius, colors, space} from '@workday/canvas-kit-react/tokens';
 import {BaseButton} from '@workday/canvas-kit-react/button';
 
-export interface PillIconProps extends Omit<SystemIconProps, 'icon'> {
+export interface PillIconButtonProps extends Omit<SystemIconProps, 'icon'> {
   model?: PillModel;
   icon?: CanvasSystemIcon;
 }
@@ -40,48 +40,60 @@ const getIconColors = () => {
       focusRing: focusRing({width: 0, innerColor: 'transparent', outerColor: 'transparent'}),
     },
     disabled: {
-      icon: colors.licorice200,
+      icon: colors.licorice100,
     },
+    opacity: 1,
   };
 };
 
-const StyledHitTarget = styled('span')({
-  height: 24,
-
+const StyledFocusTarget = styled('span')<StyledType & PillIconButtonProps>({
+  height: 22,
   position: 'absolute',
-  right: '4px',
-  left: '4px',
+  right: space.xxxs,
+  left: space.xxxs,
   margin: '0 !important',
-  borderRadius: '4px',
+  borderRadius: borderRadius.m,
   '&:focus': {
-    ...focusRing({outerColor: 'transparent', separation: 0}),
+    ...focusRing({
+      outerColor: 'transparent',
+      innerColor: 'transparent',
+    }),
   },
+});
+
+const StyledIconButton = styled(BaseButton)<StyledType & PillIconButtonProps>({
+  marginInlineEnd: '-14px !important',
+  paddingInlineEnd: space.xxxs,
+  marginInlineStart: `-${space.xxxs} !important`,
 });
 
 export const PillIconButton = createComponent('button')({
   displayName: 'Pill.IconButton',
-  Component: ({size, model, icon = xSmallIcon, ...elemProps}: PillIconProps, ref, Element) => {
+  Component: (
+    {size, model, icon = xSmallIcon, ...elemProps}: PillIconButtonProps,
+    ref,
+    Element
+  ) => {
     const {state} = useModelContext(PillModelContext, model);
     const props = mergeProps(
       {onClick: state.onDelete, style: {position: 'relative' as const}},
       elemProps
     );
     return (
-      <BaseButton
+      <StyledIconButton
         borderRadius="s"
         height={32}
         width={32}
         padding="zero"
-        marginInlineEnd={'-14px !important'}
-        paddingInlineEnd={'4px'}
-        marginInlineStart="-4px !important"
+        disabled={state.disabled}
         colors={getIconColors()}
         tabIndex={-1}
         {...props}
       >
-        <StyledHitTarget tabIndex={0} />
+        {/* We made the clickable element in this case the button larger, and have the span be the visible focus area */}
+        <StyledFocusTarget aria-hidden="true" tabIndex={state.disabled ? -1 : 0} />
         <SystemIcon icon={icon} ref={ref} size={20} />
-      </BaseButton>
+      </StyledIconButton>
     );
   },
 });

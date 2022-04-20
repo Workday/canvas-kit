@@ -6,6 +6,7 @@ type PillState = {
   maxWidth?: number | string;
   onClick?: () => void | undefined;
   onDelete?: () => void | undefined;
+  disabled?: boolean;
 };
 
 type PillEvents = {};
@@ -21,6 +22,7 @@ export type PillModelConfig = {
   onClick?: () => void | undefined;
   onDelete?: () => void | undefined;
   maxWidth?: number | string;
+  disabled?: boolean;
 } & Partial<ToModelConfig<PillState, PillEvents, typeof pillEventMap>>;
 
 export const usePillModel = (config: PillModelConfig = {}): PillModel => {
@@ -28,6 +30,7 @@ export const usePillModel = (config: PillModelConfig = {}): PillModel => {
     onClick: config.onClick,
     onDelete: config.onDelete,
     maxWidth: config.maxWidth || 200,
+    disabled: config.disabled || false,
   };
 
   const events = useEventMap(pillEventMap, state, config, {});

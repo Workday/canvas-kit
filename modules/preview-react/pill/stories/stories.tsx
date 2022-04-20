@@ -4,7 +4,7 @@ import {Pill} from '@workday/canvas-kit-preview-react/pill';
 import {plusIcon, xIcon, trashIcon} from '@workday/canvas-system-icons-web';
 // @ts-ignore: Cannot find module error
 import testAvatar from './test-avatar.png';
-import {HStack} from '@workday/canvas-kit-react';
+import {Box, HStack} from '@workday/canvas-kit-react';
 
 export default {
   title: 'Preview/Pill/React',
@@ -27,7 +27,7 @@ const data = [
 
 export const Default = () => (
   <HStack shouldWrapChildren spacing="xxs">
-    <Pill onClick={() => console.warn('here')}>Ready Only</Pill>
+    <Pill>Ready Only</Pill>
     <Pill maxWidth={250}>
       Ready Only but with a super long text in case you want to read a paragraph in a pill which we
       don't recommend
@@ -43,16 +43,22 @@ export const ClickablePillWithAvatar = () => (
     </Pill>
     <Pill onClick={() => console.warn('clicked')} disabled>
       <Pill.Avatar url={testAvatar} />
-      <Pill.Label>Regina Skeltor</Pill.Label>
+      Regina Skeltor
     </Pill>
   </HStack>
 );
 
 export const ClickablePillWithIcon = () => (
-  <Pill onClick={() => console.warn('clicked')}>
-    <Pill.Icon />
-    <Pill.Label>Regina Skeltor</Pill.Label>
-  </Pill>
+  <HStack shouldWrapChildren spacing="xxs">
+    <Pill onClick={() => console.warn('clicked')}>
+      <Pill.Icon />
+      <Pill.Label>Regina Skeltor</Pill.Label>
+    </Pill>
+    <Pill onClick={() => console.warn('clicked')} disabled>
+      <Pill.Icon />
+      <Pill.Label>Regina Skeltor</Pill.Label>
+    </Pill>
+  </HStack>
 );
 
 export const ClickablePillWithCount = () => (
@@ -62,31 +68,20 @@ export const ClickablePillWithCount = () => (
   </Pill>
 );
 
-export const WithOverflow = () => (
-  <Pill onClick={() => console.warn('clicked')}>
-    <Pill.Label>Category of foods that is too long to contain the awesomeness</Pill.Label>
-    <Pill.Count>10</Pill.Count>
-  </Pill>
-);
-
 export const RemovablePill = () => (
   <HStack shouldWrapChildren spacing="xxs">
     <Pill onDelete={() => console.warn('clicked')}>
-      <Pill.Label>Pink Shirts</Pill.Label>
+      Pink Shirts
       <Pill.IconButton />
     </Pill>
     <Pill onDelete={() => console.warn('clicked')}>
       <Pill.Avatar url={testAvatar}></Pill.Avatar>
-      <Pill.Label>Carolyn Grimaldi</Pill.Label>
+      Carolyn Grimaldi
       <Pill.IconButton />
     </Pill>
+
     <Pill onDelete={() => console.warn('clicked')} disabled>
-      <Pill.Avatar url={testAvatar}></Pill.Avatar>
-      <Pill.Label>Carolyn Grimaldi</Pill.Label>
-      <Pill.IconButton onClick={() => console.warn('click event on icon button')} />
-    </Pill>
-    <Pill onDelete={() => console.warn('clicked')} disabled>
-      <Pill.Label>This is a category that should not exist because it is too long</Pill.Label>
+      This is a category that should not exist because it is too long
       <Pill.IconButton onClick={() => console.warn('click event on icon button')} />
     </Pill>
   </HStack>
