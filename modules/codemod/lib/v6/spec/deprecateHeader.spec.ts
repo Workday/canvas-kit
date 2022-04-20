@@ -8,7 +8,42 @@ describe('Canvas Kit Deprecate Header Codemod', () => {
   context('when transforming header imports', () => {
     it('should ignore non-canvas-kit imports', () => {
       const input = `import Header, {GlobalHeader} from "@workday/some-other-library";`;
-      const expected = `import Header, {GlobalHeader} from "@workday/some-other-library";`;
+      const expected = `${input}`;
+
+      expectTransform(input, expected);
+    });
+
+    it('should ignore non-canvas-kit header identifiers', () => {
+      const input = `
+        import Header, {GlobalHeader} from "@workday/some-other-library";
+
+        const SomeComponent = (props) => {
+          return (
+            <>
+              <Header {...props}/>
+              <GlobalHeader {...props}/>
+            </>
+          )
+        }
+      `;
+      const expected = `${input}`;
+
+      expectTransform(input, expected);
+    });
+
+    it('should ignore Skeleton header components', () => {
+      const input = `
+        import {Skeleton} from '@workday/canvas-kit-react/skeleton';
+
+        const SomeComponent = () => {
+          return (
+            <Skeleton>
+              <Skeleton.Header {...props} />
+            </Skeleton>
+          );
+        };
+      `;
+      const expected = `${input}`;
 
       expectTransform(input, expected);
     });

@@ -1,10 +1,10 @@
 import {ASTPath, Transform, ImportDeclaration, ImportSpecifier} from 'jscodeshift';
 import {
   filterImportSpecifiers,
-  renameImportSpecifiers,
   ImportSpecifierArray,
   renameImports,
   hasImportSpecifiers,
+  RenameMap,
 } from './utils';
 
 const mainPackage = '@workday/canvas-kit-labs-react';
@@ -17,7 +17,7 @@ const searchBarImportSpecifiers = [
   'SearchThemes',
 ];
 
-const renameMap = {
+const renameMap: RenameMap = {
   SearchBar: 'SearchForm',
   SearchBarProps: 'SearchFormProps',
   SearchBarState: 'SearchFormState',
@@ -42,6 +42,8 @@ const transform: Transform = (file, api) => {
     nodePath.insertBefore(j.importDeclaration(specifiers, j.stringLiteral(sourcePath)));
   }
 
+  const discoveredImportAliases: Record<string, boolean> = {};
+
   // Rename search-bar named imports from @workday/canvas-kit-labs-react
   // e.g. import { SearchBar, SearchBarProps } from '@workday/canvas-kit-labs-react';
   // becomes import { SearchForm, SearchFormProps } from '@workday/canvas-kit-labs-react';
@@ -49,8 +51,16 @@ const transform: Transform = (file, api) => {
     const importSpecifiers = nodePath.value.specifiers || [];
     // Filter search bar imports
     const searchBarImports = filterImportSpecifiers(importSpecifiers);
+
     // Rename search bar imports
-    renameImportSpecifiers(searchBarImports, renameMap);
+    searchBarImports.forEach(specifier => {
+      const specifierName = specifier.imported.name;
+      if (specifierName in renameMap) {
+        discoveredImportAliases[specifier.imported.name] = true;
+
+        specifier.imported.name = renameMap[specifierName];
+      }
+    });
   });
 
   // Handle imports from @workday/canvas-kit-react/header
@@ -81,10 +91,18 @@ const transform: Transform = (file, api) => {
 
     // If SearchBar import specifiers were found, insert a new import declaration above the original import declaration
     if (searchBarSpecifiers.length) {
-      const renamedSearchBarSpecifiers = renameImportSpecifiers(searchBarSpecifiers, renameMap);
+      searchBarSpecifiers.forEach(specifier => {
+        const specifierName = specifier.imported.name;
+        if (specifierName in renameMap) {
+          discoveredImportAliases[specifier.imported.name] = true;
+
+          specifier.imported.name = renameMap[specifierName];
+        }
+      });
+
       insertImportDeclarationBefore(
         nodePath,
-        renamedSearchBarSpecifiers,
+        searchBarSpecifiers,
         '@workday/canvas-kit-labs-react/search-form'
       );
     }
@@ -96,7 +114,13 @@ const transform: Transform = (file, api) => {
     }
   });
 
-  return renameImports(api, root, '@workday/canvas-kit-labs-react/header', renameMap).toSource();
+  return renameImports(
+    api,
+    root,
+    '@workday/canvas-kit-labs-react/search-form',
+    renameMap,
+    discoveredImportAliases
+  ).toSource();
 };
 
 export default transform;
