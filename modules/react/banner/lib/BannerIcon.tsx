@@ -28,8 +28,7 @@ export const BannerIcon = createSubcomponent('span')({
   modelHook: useBannerModel,
   elemPropsHook: useBannerIcon,
 })<BannerIconProps>((elemProps, Element, model) => {
-  // SystemIcon is still a class based component so we need to set ref manually.
-  const {ref, icon, ...iconButtonProps} = elemProps;
+  const {icon, ...iconButtonProps} = elemProps;
 
-  return <StyledBannerIcon as={Element} icon={icon!} iconRef={ref} {...iconButtonProps} />;
+  return <StyledBannerIcon as={Element} icon={icon!} {...iconButtonProps} />;
 });

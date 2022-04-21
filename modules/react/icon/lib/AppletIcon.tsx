@@ -3,6 +3,7 @@ import {colors, BrandingColor, CanvasColor} from '@workday/canvas-kit-react/toke
 import {CanvasAppletIcon, CanvasIconTypes} from '@workday/design-assets-types';
 import {CSSObject} from '@emotion/styled';
 import Icon, {IconProps} from './Icon';
+import {createComponent} from '../../common';
 
 export interface AppletIconStyles {
   /**
@@ -54,9 +55,7 @@ export const appletIconStyles = ({
   };
 };
 
-export interface AppletIconProps
-  extends AppletIconStyles,
-    Pick<IconProps, 'iconRef' | 'shouldMirror'> {
+export interface AppletIconProps extends AppletIconStyles, Pick<IconProps, 'shouldMirror'> {
   /**
    * The icon to display from `@workday/canvas-applet-icons-web`.
    */
@@ -68,22 +67,29 @@ export interface AppletIconProps
   size?: number;
 }
 
-export default class AppletIcon extends React.Component<AppletIconProps> {
-  public static Colors = BrandingColor;
-
-  public render() {
-    const {size = 92, icon, color, iconRef, shouldMirror, ...elemProps} = this.props;
-
+export const AppletIcon = createComponent('span')({
+  displayName: 'AppletIcon',
+  Component: (
+    {size = 92, icon, color, shouldMirror, ...elemProps}: AppletIconProps,
+    ref,
+    Element
+  ) => {
     return (
       <Icon
         src={icon}
         type={CanvasIconTypes.Applet}
         styles={appletIconStyles({color})}
+        as={Element}
         size={size}
-        iconRef={iconRef}
+        ref={ref}
         shouldMirror={shouldMirror}
         {...elemProps}
       />
     );
-  }
-}
+  },
+  subComponents: {
+    Colors: BrandingColor,
+  },
+});
+
+export default AppletIcon;

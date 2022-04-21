@@ -66,6 +66,7 @@ export const PopupCard = createSubcomponent('div')({
   // As is a Stack that will render an element of `Element`
   const As = useConstant(() => Stack.as(Element));
 
+<<<<<<< HEAD
   return (
     <StyledPopupCard
       as={As}
@@ -86,4 +87,29 @@ export const PopupCard = createSubcomponent('div')({
       {children}
     </StyledPopupCard>
   );
+=======
+    return (
+      <StyledPopupCard
+        as={As}
+        transformOrigin={transformOrigin}
+        position="relative"
+        padding="l"
+        depth={5}
+        maxWidth={`calc(100vw - ${space.l})`}
+        spacing={0}
+        flexDirection="column"
+        minHeight={0}
+        maxHeight={`calc(100vh - ${
+          elemProps.margin
+            ? space[elemProps.margin as CanvasSpaceKeys] || elemProps.margin
+            : space.xl
+        } * 2)`}
+        overflowY="auto" // force IE11 to limit the flex size of the card. Without this, the body isn't allowed to overflow properly: https://github.com/philipwalton/flexbugs/issues/216#issuecomment-453053557
+        {...props}
+      >
+        {children}
+      </StyledPopupCard>
+    );
+  },
+>>>>>>> 66707760f9a668fff661c61bf664b57eb86983c5
 });

@@ -121,7 +121,7 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
     const cardWidth = grow ? '100%' : width;
 
     return (
-      <Card display="inline-block" padding={space.zero} width={cardWidth}>
+      <Card display="inline-block" padding={space.zero} width={cardWidth} depth={3}>
         <Card.Body>
           <List
             role="menu"
