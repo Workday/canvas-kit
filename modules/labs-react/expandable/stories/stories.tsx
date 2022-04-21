@@ -19,46 +19,29 @@ export default {
 
 export const Default = () => (
   <Expandable>
-    <Expandable.Heading>
-      <Expandable.Button>Additional Information</Expandable.Button>
-    </Expandable.Heading>
+    <Expandable.Target headingLevel="h1">Additional Information</Expandable.Target>
     <Expandable.Content>Content</Expandable.Content>
   </Expandable>
 );
-
-const h2 = styled('h2')({
-  ...type.levels.heading.medium,
-});
 
 export const SingleLineHeader = () => (
   <Expandable>
-    <Expandable.Heading as={h2}>
-      <Expandable.Button as={TertiaryButton}>
-        <Flex
-          alignItems={'center'}
-          flexDirection={'row'}
-          flex={1}
-          flexBasis="auto"
-          padding="xs"
-          marginX="xxxs"
-          justifyContent="center"
-          borderRadius="m"
-        >
-          <SystemIcon icon={chevronDownSmallIcon} />
-          <Avatar as={'div'} />
-          <span>Additional Information</span>
-        </Flex>
-      </Expandable.Button>
-    </Expandable.Heading>
+    <Expandable.Target headingLevel="h1">
+      <Expandable.StartChevron />
+      <Expandable.Title>Title</Expandable.Title>
+    </Expandable.Target>
+
     <Expandable.Content>Content</Expandable.Content>
   </Expandable>
 );
 
-export const MultiLineHeader = () => (
+export const SingleLineHeaderEndChevron = () => (
   <Expandable>
-    <Expandable.Heading as={'h2'}>
-      <Expandable.Button>Additional Information</Expandable.Button>
-    </Expandable.Heading>
+    <Expandable.Target headingLevel="h1">
+      <Expandable.Title>Title</Expandable.Title>
+      <Expandable.EndChevron />
+    </Expandable.Target>
+
     <Expandable.Content>Content</Expandable.Content>
   </Expandable>
 );

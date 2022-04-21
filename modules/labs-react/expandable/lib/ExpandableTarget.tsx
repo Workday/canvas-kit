@@ -5,9 +5,10 @@ import {createComponent, useModelContext} from '@workday/canvas-kit-react/common
 import {ExpandableModelContext} from './Expandable';
 import {DisclosureModel} from '@workday/canvas-kit-react/disclosure';
 
-export interface ExpandableButtonProps {
+export interface ExpandableTargetProps {
   model?: DisclosureModel;
   children: React.ReactNode;
+  headingLevel: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 }
 
 const useDiscloseTarget = (
@@ -27,24 +28,32 @@ const useDiscloseTarget = (
   };
 };
 
-export const ExpandableButton = createComponent('button')({
-  displayName: 'Expandable.Button',
-  Component: ({children, model, ...elemProps}: ExpandableButtonProps, ref, Element) => {
+export const ExpandableTarget = createComponent('button')({
+  displayName: 'Expandable.Target',
+  Component: (
+    {children, model, headingLevel, ...elemProps}: ExpandableTargetProps,
+    ref,
+    Element
+  ) => {
     const expandableModel = useModelContext(ExpandableModelContext, model);
     const target = useDiscloseTarget(expandableModel, elemProps);
 
     const state = expandableModel.state;
     const isVisible = state.visibility === 'visible';
 
+    const Heading = headingLevel;
+
     return (
-      <Element
-        aria-controls={isVisible ? state.id : undefined}
-        aria-expanded={isVisible}
-        ref={ref}
-        {...target}
-      >
-        {children}
-      </Element>
+      <Heading>
+        <Element
+          aria-controls={isVisible ? state.id : undefined}
+          aria-expanded={isVisible}
+          ref={ref}
+          {...target}
+        >
+          {children}
+        </Element>
+      </Heading>
     );
   },
 });

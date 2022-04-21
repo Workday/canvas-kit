@@ -8,8 +8,11 @@ import {
   DisclosureModelConfig,
 } from '@workday/canvas-kit-react/disclosure';
 import {ExpandableContent} from './ExpandableContent';
-import {ExpandableHeading} from './ExpandableHeading';
-import {ExpandableButton} from './ExpandableButton';
+import {ExpandableTarget} from './ExpandableTarget';
+import {StartChevron} from './StartChevron';
+import {EndChevron} from './EndChevron';
+import {Avatar} from '@workday/canvas-kit-react';
+import {Title} from './Title';
 
 export const ExpandableModelContext = React.createContext<DisclosureModel>({} as any);
 
@@ -17,6 +20,8 @@ export interface ExpandableProps extends DisclosureModelConfig {
   model?: DisclosureModel;
   children: React.ReactNode;
 }
+
+const ExpandableAvatar = <Avatar as="div" />;
 
 export const Expandable = createComponent()({
   displayName: 'Expandable',
@@ -28,21 +33,12 @@ export const Expandable = createComponent()({
     );
   },
   subComponents: {
-    Heading: ExpandableHeading,
-    Button: ExpandableButton,
+    Target: ExpandableTarget,
     Content: ExpandableContent,
+    StartChevron: StartChevron,
+    EndChevron: EndChevron,
+    Avatar: ExpandableAvatar,
+    Title: Title,
+    // MultiLineTitle,
   },
 });
-
-{
-  /* <>
-<h1>
-  <button aria-expanded={true} aria-controls={"content"}>
-    <SystemIcon />
-    <Avatar />
-    Title
-  </button>
-</h1>
-<div id="content">Content</div>
-</> */
-}
