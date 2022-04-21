@@ -55,7 +55,7 @@ describe('Canvas Kit Deprecate Header Codemod', () => {
       expectTransform(input, expected);
     });
 
-    it('should rename aliased specifiers from the component package', () => {
+    it('should only rename the import specifier and not similarly named components', () => {
       const input = `
         import { Header as CanvasHeader } from '@workday/canvas-kit-labs-react/header';
 
@@ -80,7 +80,7 @@ describe('Canvas Kit Deprecate Header Codemod', () => {
       expectTransform(input, expected);
     });
 
-    it('should rename aliased specifiers from the main package', () => {
+    it('should only rename the import specifier from the main package and not similarly named components', () => {
       const input = `
         import { Header as CanvasHeader } from '@workday/canvas-kit-labs-react';
 

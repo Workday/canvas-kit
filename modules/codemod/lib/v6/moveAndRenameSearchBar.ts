@@ -96,6 +96,7 @@ const transform: Transform = (file, api) => {
     if (searchBarSpecifiers.length) {
       searchBarSpecifiers.forEach(specifier => {
         const specifierName = specifier.imported.name;
+
         if (specifierName in renameMap) {
           // if it hasn't been aliased, track it for updating JSX
           if (!specifier.local || specifier.local.name === specifier.imported.name) {
