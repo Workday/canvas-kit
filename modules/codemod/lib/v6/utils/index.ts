@@ -183,6 +183,7 @@ export function renameImports(
     nodePath.value.specifiers?.forEach(specifier => {
       if (specifier.type === 'ImportSpecifier') {
         if (Object.keys(specifierMap).includes(specifier.imported.name)) {
+          // if it hasn't been aliased, track it for updating JSX
           if (!specifier.local || specifier.local.name === specifier.imported.name) {
             discoveredImportSpecifiers[specifier.imported.name] = true;
           }
@@ -209,6 +210,7 @@ export function renameImports(
       // Transform named exports
       if (specifier.type === 'ImportSpecifier') {
         if (Object.keys(specifierMap).includes(specifier.imported.name)) {
+          // if it hasn't been aliased, track it for updating JSX
           if (!specifier.local || specifier.local.name === specifier.imported.name) {
             discoveredImportSpecifiers[specifier.imported.name] = true;
           }
@@ -248,8 +250,9 @@ export function renameImports(
   // e.g. `<CookieBanner>` becomes `<DeprecatedCookieBanner>`
   root.find(j.JSXIdentifier).forEach(nodePath => {
     if (
-      Object.keys(specifierMap).includes(nodePath.value.name) &&
-      discoveredImportSpecifiers[nodePath.value.name]
+      // Check to see if it was imported from Canvas Kit
+      discoveredImportSpecifiers[nodePath.value.name] &&
+      Object.keys(specifierMap).includes(nodePath.value.name)
     ) {
       nodePath.node.name = specifierMap[nodePath.value.name];
     }
@@ -260,8 +263,9 @@ export function renameImports(
   root.find(j.MemberExpression, {object: {type: 'Identifier'}}).forEach(nodePath => {
     if (
       nodePath.value.object.type === 'Identifier' &&
-      Object.keys(specifierMap).includes(nodePath.value.object.name) &&
-      discoveredImportSpecifiers[nodePath.value.object.name]
+      // Check to see if it was imported from Canvas Kit
+      discoveredImportSpecifiers[nodePath.value.object.name] &&
+      Object.keys(specifierMap).includes(nodePath.value.object.name)
     ) {
       nodePath.value.object.name = specifierMap[nodePath.value.object.name];
     }
