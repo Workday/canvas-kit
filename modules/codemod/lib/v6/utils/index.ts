@@ -160,7 +160,7 @@ export function renameImports(
   root: Collection<any>,
   packageName: string,
   specifierMap: Record<string, string>,
-  discoveredImportAliases: Record<string, boolean> = {}
+  discoveredImportSpecifiers: Record<string, boolean> = {}
 ): Collection<any> {
   const j = api.jscodeshift;
 
@@ -176,11 +176,16 @@ export function renameImports(
   // Transform import statements
   // e.g. import { CookieBanner, CookieBannerProps } from '@workday/canvas-kit-react';
   // becomes import { DeprecatedCookieBanner, DeprecatedCookieBannerProps } from '@workday/canvas-kit-react';
+
+  // Find imports from main packages
+  // ex. '@workday/canvas-kit-labs-react'
   root.find(j.ImportDeclaration, {source: {value: mainPackage}}).forEach(nodePath => {
     nodePath.value.specifiers?.forEach(specifier => {
       if (specifier.type === 'ImportSpecifier') {
         if (Object.keys(specifierMap).includes(specifier.imported.name)) {
-          discoveredImportAliases[specifier.imported.name] = true;
+          if (!specifier.local || specifier.local.name === specifier.imported.name) {
+            discoveredImportSpecifiers[specifier.imported.name] = true;
+          }
 
           specifier.imported.name = specifierMap[specifier.imported.name];
         }
@@ -188,19 +193,25 @@ export function renameImports(
     });
   });
 
-  // Transforms default imports from package
+  // Find imports from component specific packages
+  // ex. '@workday/canvas-kit-labs-react/header'
   root.find(j.ImportDeclaration, {source: {value: packageName}}).forEach(nodePath => {
     nodePath.value.specifiers?.forEach(specifier => {
+      // Transforms default imports
       if (specifier.type === 'ImportDefaultSpecifier') {
         if (specifier.local && Object.keys(specifierMap).includes(specifier.local.name)) {
-          discoveredImportAliases[specifier.local.name] = true;
+          discoveredImportSpecifiers[specifier.local.name] = true;
 
           specifier.local.name = specifierMap[specifier.local.name];
         }
       }
+
+      // Transform named exports
       if (specifier.type === 'ImportSpecifier') {
         if (Object.keys(specifierMap).includes(specifier.imported.name)) {
-          discoveredImportAliases[specifier.imported.name] = true;
+          if (!specifier.local || specifier.local.name === specifier.imported.name) {
+            discoveredImportSpecifiers[specifier.imported.name] = true;
+          }
 
           specifier.imported.name = specifierMap[specifier.imported.name];
         }
@@ -238,7 +249,7 @@ export function renameImports(
   root.find(j.JSXIdentifier).forEach(nodePath => {
     if (
       Object.keys(specifierMap).includes(nodePath.value.name) &&
-      discoveredImportAliases[nodePath.value.name]
+      discoveredImportSpecifiers[nodePath.value.name]
     ) {
       nodePath.node.name = specifierMap[nodePath.value.name];
     }
@@ -250,7 +261,7 @@ export function renameImports(
     if (
       nodePath.value.object.type === 'Identifier' &&
       Object.keys(specifierMap).includes(nodePath.value.object.name) &&
-      discoveredImportAliases[nodePath.value.object.name]
+      discoveredImportSpecifiers[nodePath.value.object.name]
     ) {
       nodePath.value.object.name = specifierMap[nodePath.value.object.name];
     }
