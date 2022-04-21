@@ -1,22 +1,23 @@
 import {Meta} from '@storybook/addon-docs';
 
-import {List} from '@workday/canvas-kit-react/list';
+import {List, ListBox} from '@workday/canvas-kit-react/list';
 
 import {Basic} from './examples/Basic';
+import {DynamicItems} from './examples/DynamicItems';
 import {BasicVirtual} from './examples/BasicVirtual';
 import {NamedItems} from './examples/NamedItems';
-import {DynamicItems} from './examples/DynamicItems';
 import {RovingFocus} from './examples/RovingFocus';
 import {Selection} from './examples/Selection';
 import {MultiSelection} from './examples/MultiSelection';
 
 <Meta title="Components/Navigation/List/React" component={List} />
 
-# Canvas Kit List
+# Canvas Kit Collection API
 
-A list is a system of models and behaviors for creating lists. For example, `Tabs` uses list
-behaviors and so does `Menu`. The UI of each looks very different, but much of the behavior is
-shared. The list system should be used if a component doesn't already exist to satisfy your needs.
+The Collection API is a system of models and behaviors for creating lists and grids. For example,
+`Tabs` uses collection behaviors and so does `Menu`. The UI of each looks very different, but much
+of the behavior is shared. The Collection API should be used if a component doesn't already exist to
+satisfy your needs.
 
 ## Installation
 
@@ -26,42 +27,55 @@ yarn add @workday/canvas-kit-react
 
 ## Usage
 
-### List
+### ListBox
 
-There is no `List` component, but components can be created using models and behaviors. A list is a
-single dimension collection of items. A `ListModel` is created using the `useListModel` hook. A list
-can be static or dynamic. A [static list](#basic-example) defines the items using the JSX syntax
-while [dynamic lists](#dynamic-items) pass an `items` array to the model. `useListRegisterItem` is
-used to add a static item to the list. Each item can specify a `name` that will become the
-identifier for that item. For dynamic items, the `name` identifier is in the data and the `getId` is
-used to extract out the identifier.
+The `ListBox` is a basic component that offers vertical rendering of a collection in the form of a
+2-dimension list. It understands virtualization, rendering only visible items in the DOM while also
+providing aria attributes to allow screen readers to still navigate virtual lists. The `ListBox`
+contains a basic `ListBox.Item` that renders list items that render correctly with virtualization
+and adds `aria-setsize` and `aria-posinset` for screen readers.
+
+The `ListBox` is very basic and only adds enough functionality to render correctly. No additional
+behaviors are added to navigate or select. React Hooks are provided to add this functionality and
+are used by higher level components like `Menu` and `Menu.Item` which utilize `ListBox`.
+
+<ArgsTable of={ListBox} />
 
 #### Basic Example
 
-The list on its own isn't very useful. It registers each item with a `name` that is used by other
-hooks (more on that later). `useListRegisterItem` handles registration of static items to the model.
-`useListRenderItems` adds some optimizations as well as renders items either statically or allows
-children to be a render prop (more on that in the [Dynamic Items](#dynamic-items) example).
+The `ListBox` on its own isn't very useful. It registers each item with the model. The
+`ListBox.Item` only uses the `useListItemRegister` hook which handles registration of static items
+to the model. The `ListBox` uses `useListRenderItems` which handles rendering static items as well
+as [Dynamic List](#dynamic-list) example).
 
 <ExampleCodeBlock code={Basic} />
 
-foo
-
-<ExampleCodeBlock code={BasicVirtual} />
-
 #### Named Items
 
-A list item takes an optional `name` property that will be used to identify an item. Without a
-`name`, the identifier will be the item's index when first registered.
+A list item takes an optional `data-id` property that will be used to identify an item. Without a
+`data-id`, the identifier will be the item's index when first registered. The basic example has a
+`data-id` attribute that is a string representation of the index. Providing a `data-id` will
+override to a value of your choosing. This identifier will be used by other hooks to identify the
+item for selection, maintaining a cursor, or anything else.
 
 <ExampleCodeBlock code={NamedItems} />
 
 #### Dynamic Items
 
-An array of items can be passed to the `ListModel` instead of specifying them in the JSX. This
-allows items to be dynamic. It is more efficient to do this than to use a `map` in the JSX.
+The `ListBox` also handles a dynamic collection of items. Instead of providing each `ListBox.Item`
+statically, provide a render function instead. The function is called with an `items` value that is
+the same was what's provided to the model. By default, providing items will enable virtualization.
+This example adds a `maxHeight` to ensure overflow. Virtualization uses absolute positioning of each
+item, which could cause problems for popup menus. If your item count is low, pass
+`shouldVirtualize={false}` to disable virtualization.
 
 <ExampleCodeBlock code={DynamicItems} />
+
+### List Model
+
+The List model contains the the state and events necessary to track items, selection, and a cursor.
+Various hooks can be used for a List model to create common behaviors associated with lists, such as
+navigating a list with a keyboard, selection (single and multiple), and virtualization.
 
 A list also has a "cursor". A cursor is often represented by focus, but it is not always a 1:1
 mapping. Think of the cursor as the focus item within the list. If the list has browser focus, the
@@ -99,7 +113,7 @@ focus stop that "roves" as the up/down arrows are pressed.
 **Note:** This example doesn't meet accessibility requirements. The list will have to have some type
 of context. Like "navigation list" or "menu list".
 
-<ExampleCodeBlock code={RovingFocus} />
+<!--ExampleCodeBlock code={RovingFocus} /-->
 
 #### Selection
 

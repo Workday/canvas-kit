@@ -1,7 +1,11 @@
 import * as React from 'react';
-import {createComponent, ExtractProps, useDefaultModel} from '@workday/canvas-kit-react/common';
+import {
+  createContainerComponent,
+  createWrapperSubcomponent,
+  ExtractProps,
+} from '@workday/canvas-kit-react/common';
 import {Dialog} from '@workday/canvas-kit-react/dialog';
-import {PopupModelContext, Popup} from '@workday/canvas-kit-react/popup';
+import {Popup} from '@workday/canvas-kit-react/popup';
 import {ModalOverlay} from './ModalOverlay';
 import {ModalCard} from './ModalCard';
 import {useModalModel} from './hooks';
@@ -13,22 +17,31 @@ export interface ModalProps extends ExtractProps<typeof Dialog, never> {
   children: React.ReactNode;
 }
 
-export const Modal = createComponent()({
+export const Modal = createContainerComponent()({
   displayName: 'Modal',
-  Component: ({children, model, ...config}: ModalProps) => {
-    const value = useDefaultModel(model, config, useModalModel);
-
-    return <PopupModelContext.Provider value={value}>{children}</PopupModelContext.Provider>;
-  },
-
+  modelHook: useModalModel,
   subComponents: {
-    Body: Popup.Body,
+    Body: createWrapperSubcomponent(Popup.Body)({
+      displayName: 'Modal.Body',
+      modelHook: useModalModel,
+    }),
     Card: ModalCard,
-    CloseIcon: Popup.CloseIcon,
-    Target: Popup.Target,
+    CloseIcon: createWrapperSubcomponent(Popup.CloseIcon)({
+      displayName: 'Modal.CloseIcon',
+      modelHook: useModalModel,
+    }),
+    Target: createWrapperSubcomponent(Popup.Target)({
+      displayName: 'Modal.Target',
+      modelHook: useModalModel,
+    }),
     Heading: ModalHeading,
     Overlay: ModalOverlay,
     OverflowOverlay: ModalOverflowOverlay,
-    CloseButton: Popup.CloseButton,
+    CloseButton: createWrapperSubcomponent(Popup.CloseButton)({
+      displayName: 'Modal.CloseButton',
+      modelHook: useModalModel,
+    }),
   },
+})<ModalProps>(elemProps => {
+  return <>{elemProps.children}</>;
 });

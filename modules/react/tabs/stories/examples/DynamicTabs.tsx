@@ -1,7 +1,6 @@
 import React from 'react';
 
-import {Tabs, useTabsModel, TabsModel} from '@workday/canvas-kit-react/tabs';
-import {SelectionListModel} from '@workday/canvas-kit-react/list';
+import {Tabs, useTabsModel2} from '@workday/canvas-kit-react/tabs';
 
 type Tab = {
   tab: string;
@@ -16,9 +15,9 @@ export const DynamicTabs = () => {
     {tab: 'Add Tab', id: 'add'},
   ]);
   const addedRef = React.useRef(tabs.length - 1);
-  const model = useTabsModel({
+  const model = useTabsModel2({
     items: tabs,
-    shouldSelect: ({data}) => data.id !== 'add',
+    shouldSelect: data => data.id !== 'add',
   });
 
   // A ref of the model for the render functions to work around the caching done to lists
@@ -32,7 +31,7 @@ export const DynamicTabs = () => {
    * * **Item is selected**: Selection will be moved to the next item in the list
    * @param id The id of the item that will be removed
    */
-  const removeItem = <T extends unknown>(id: string, model: SelectionListModel<T>) => {
+  const removeItem = <T extends unknown>(id: string, model: ReturnType<typeof useTabsModel2>) => {
     const index = model.state.items.findIndex(item => model.getId(item) === model.state.cursorId);
     const nextIndex = index === model.state.items.length - 1 ? index - 1 : index + 1;
     const nextId = model.getId(model.state.items[nextIndex]);

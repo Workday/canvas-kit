@@ -1,8 +1,8 @@
 import React from 'react';
 
-import {Tabs, useTabsModel} from '@workday/canvas-kit-react/tabs';
+import {Tabs, useTabsModel2} from '@workday/canvas-kit-react/tabs';
 import {HStack} from '@workday/canvas-kit-react/layout';
-import {SecondaryButton} from '../../../button';
+import {SecondaryButton} from '@workday/canvas-kit-react/button';
 
 type MyTabItem = {
   id: string;
@@ -20,7 +20,7 @@ export const OverflowTabs = () => {
     {id: 'sixth', text: 'Sixth Tab', contents: 'Contents of Sixth Tab'},
     {id: 'seventh', text: 'Seventh Tab', contents: 'Contents of Seventh Tab'},
   ]);
-  const model = useTabsModel({
+  const model = useTabsModel2({
     items,
   });
   const [containerWidth, setContainerWidth] = React.useState('100%');

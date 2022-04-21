@@ -208,8 +208,6 @@ export const createEvents = <TEvents extends EventCreator>(events: TEvents) => <
   return {events, eventMap: config as EventMap<ToEvent<TEvents>, TGuardMap, TCallbackMap>};
 };
 
-console.log('foo')
-
 // Temporary type so that `extends` works
 type Any = any
 /**
@@ -252,7 +250,7 @@ export type ModelExtras<TDefaultConfig, TRequiredConfig, TState, TEvents, TModel
    *
    * @example
    * ```ts
-   * const useComposedModel = createModel({
+   * const useComposedModel = createModelHook({
    *   defaultConfig: useModel.defaultConfig,
    *   requiredConfig: useModel.requiredConfig,
    * })(config => {
@@ -365,6 +363,9 @@ function mergeConfig<TConfig extends Record<string, any>>(
         // @ts-ignore
         return sourceConfig[key](data, state) && newConfig[key](data, state);
       };
+    } else {
+      // @ts-ignore
+      result[key] = newConfig[key]
     }
   }
 
@@ -405,6 +406,11 @@ export type ModelConfig<TDefaultConfig, TRequiredConfig> = {
    * }
    */
   requiredConfig?: TRequiredConfig;
+  /**
+   * Use `defaultContext` to set the model passed to components that support rendering without a
+   * model or container component.
+   */
+  defaultContext?: Record<string, any>;
 };
 
 /**
@@ -419,7 +425,7 @@ export type ModelConfig<TDefaultConfig, TRequiredConfig> = {
  * and only used to extract types.
  *
  * @example
- * const useModel = createModel({
+ * const useModel = createModelHook({
  *   defaultConfig: {
  *     optional: 'right' as 'left' | 'right', // optional type casting
  *   },
@@ -430,27 +436,25 @@ export type ModelConfig<TDefaultConfig, TRequiredConfig> = {
  *   // config is pre-typed for you based on `defaultConfig`
  * })
  */
-export const createModel = <TDefaultConfig extends {}, TRequiredConfig extends {}>(
+export const createModelHook = <TDefaultConfig extends {}, TRequiredConfig extends {}>(
   options: ModelConfig<TDefaultConfig, TRequiredConfig>
 ) => {
-  const { defaultConfig = {}, requiredConfig = {} } =
+  const { defaultConfig = {}, requiredConfig = {}, defaultContext } =
     options;
 
   // create a bunch of refs so we can define the `wrappedModel` function once.
   const fnRef: { current: any } = { current: null };
-  const stateRef: { current: Record<string, any> } = { current: {} };
-  const configRef: { current: Record<string, any> } = { current: {} };
-  const eventsRef: { current: Record<string, any> } = { current: null as any }; // cast as any since we throw an error if the value is null
+
   const callbacksRef: { current: string[] } = { current: [] };
   const guardsRef: { current: string[] } = { current: [] };
-  const Context = React.createContext<any>({state: {}, events: {}})
+  const Context = React.createContext<any>(defaultContext || {state: {}, events: {}})
 
   const getElemProps = (props: object) => {
-    if (eventsRef.current === null) {
-      throw Error(
-        `useModel.getElemProps() must be called after useModel(). getElemProps needs to determine the events returned by the model to function correctly.\nExample:\nconst model = useModel();\nconst elemProps = useModel.getElemProps(props);`
-      );
-    }
+    // if (eventsRef.current === null) {
+    //   throw Error(
+    //     `useModel.getElemProps() must be called after useModel(). getElemProps needs to determine the events returned by the model to function correctly.\nExample:\nconst model = useModel();\nconst elemProps = useModel.getElemProps(props);`
+    //   );
+    // }
     const elemProps = {};
     for (const key in props) {
       if (
@@ -469,7 +473,12 @@ export const createModel = <TDefaultConfig extends {}, TRequiredConfig extends {
 
   // we use `any` here because we don't know what the type is here and it is internal. No use
   // slowing down Typescript to bother type checking
-  function wrappedModel(config: Record<string, any>) {
+  function wrappedModelHook(config: Record<string, any>) {
+    const stateRef = React.useRef<Record<string, any>>({})
+    const configRef = React.useRef<Record<string, any>>({})
+    const eventsRef = React.useRef<Record<string, any>>({})
+
+    console.log('wrappedModelHook', config)
     const { state, events, ...rest } = fnRef.current({
       ...defaultConfig,
       ...config,
@@ -495,10 +504,10 @@ export const createModel = <TDefaultConfig extends {}, TRequiredConfig extends {
 
             if (
               configRef.current[guardFnName] &&
-              !configRef.current[guardFnName]({
+              !configRef.current[guardFnName](
                 data,
-                state: stateRef.current,
-              })
+                stateRef.current,
+              )
             ) {
               return;
             }
@@ -511,10 +520,10 @@ export const createModel = <TDefaultConfig extends {}, TRequiredConfig extends {
             const callbackFnName = getCallbackName(key);
 
             if (configRef.current[callbackFnName]) {
-              configRef.current[callbackFnName]({
+              configRef.current[callbackFnName](
                 data,
-                prevState: stateRef.current,
-              });
+                stateRef.current,
+              );
             }
           }
         };
@@ -528,11 +537,11 @@ export const createModel = <TDefaultConfig extends {}, TRequiredConfig extends {
     return { state, events: wrappedEvents, ...rest };
   }
 
-  wrappedModel.getElemProps = getElemProps;
-  wrappedModel.defaultConfig = defaultConfig;
-  wrappedModel.requiredConfig = requiredConfig;
-  wrappedModel.mergeConfig = mergeConfig;
-  wrappedModel.Context = Context;
+  wrappedModelHook.getElemProps = getElemProps;
+  wrappedModelHook.defaultConfig = defaultConfig;
+  wrappedModelHook.requiredConfig = requiredConfig;
+  wrappedModelHook.mergeConfig = mergeConfig;
+  wrappedModelHook.Context = Context;
 
   return <
     TModelFn extends (config: TDefaultConfig & TRequiredConfig) => {
@@ -544,6 +553,6 @@ export const createModel = <TDefaultConfig extends {}, TRequiredConfig extends {
   ): ModelFn<TDefaultConfig, TRequiredConfig, ReturnType<TModelFn>> => {
     fnRef.current = fn;
 
-    return wrappedModel as any; // Typescript complains about the `fn` not matching the signature. It's okay Typescript. It works at runtime
+    return wrappedModelHook as any; // Typescript complains about the `fn` not matching the signature. It's okay Typescript. It works at runtime
   };
 };

@@ -2,12 +2,12 @@ import React from 'react';
 import {space} from '@workday/canvas-kit-react/tokens';
 
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
-import {Tabs, useTabsModel} from '@workday/canvas-kit-react/tabs';
+import {Tabs, useTabsModel2} from '@workday/canvas-kit-react/tabs';
 
 export const HoistedModel = () => {
-  const model = useTabsModel({
-    onSelect({data, prevState}) {
-      console.log('Selected Tab', data, prevState);
+  const model = useTabsModel2({
+    onSelect(data, prevState) {
+      console.log('Selected Tab', data.id, prevState);
     },
   });
 

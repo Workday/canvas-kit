@@ -1,5 +1,4 @@
 import {
-  PopupModelConfig,
   usePopupModel,
   useInitialFocus,
   useReturnFocus,
@@ -8,10 +7,14 @@ import {
   useAssistiveHideSiblings,
   useDisableBodyScroll,
 } from '@workday/canvas-kit-react/popup';
+import {createModelHook} from '../../../common';
 
 import {useCloseOnOverlayClick} from './useCloseOnOverlayClick';
 
-export const useModalModel = (config: PopupModelConfig = {}) => {
+export const useModalModel = createModelHook({
+  defaultConfig: usePopupModel.defaultConfig,
+  requiredConfig: usePopupModel.requiredConfig,
+})(config => {
   const model = usePopupModel(config);
 
   useInitialFocus(model);
@@ -23,4 +26,4 @@ export const useModalModel = (config: PopupModelConfig = {}) => {
   useDisableBodyScroll(model);
 
   return model;
-};
+});

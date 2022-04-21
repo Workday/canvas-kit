@@ -1,15 +1,15 @@
-import React from "react";
-import { IconButton, IconButtonProps } from "@workday/canvas-kit-react/button";
-import { relatedActionsIcon } from "@workday/canvas-system-icons-web";
-import { CanvasSystemIcon } from "@workday/design-assets-types";
-import { colors } from "@workday/canvas-kit-react/tokens";
-import { createComponent } from "@workday/canvas-kit-react/common";
+import React from 'react';
+import {IconButton, IconButtonProps} from '@workday/canvas-kit-react/button';
+import {relatedActionsIcon} from '@workday/canvas-system-icons-web';
+import {CanvasSystemIcon} from '@workday/design-assets-types';
+import {colors} from '@workday/canvas-kit-react/tokens';
+import {createComponent} from '@workday/canvas-kit-react/common';
 
 export interface DropdownButtonProps extends IconButtonProps {
   /**
    * The accessibility label for the button
    */
-  "aria-label": string;
+  'aria-label': string;
   /**
    * The Canvas System Icon for the button
    *
@@ -23,24 +23,24 @@ export interface DropdownButtonProps extends IconButtonProps {
 }
 
 export const DropdownButton = createComponent(IconButton)({
-  displayName: "DropdownButton",
+  displayName: 'DropdownButton',
   Component: (
     {
       buttonIcon = relatedActionsIcon,
       toggled,
-      variant = "plain",
+      variant = 'plain',
       ...elemProps
     }: DropdownButtonProps,
     ref,
     Element
   ) => {
-    const hasPlainVariant = variant === "plain";
+    const hasPlainVariant = variant === 'plain';
 
     return (
       <Element
         ref={ref}
         type="button"
-        style={hasPlainVariant ? { margin: "0 1px" } : {}}
+        style={hasPlainVariant ? {margin: '0 1px'} : {}}
         variant={variant}
         icon={buttonIcon}
         color={colors.licorice200}
@@ -52,5 +52,5 @@ export const DropdownButton = createComponent(IconButton)({
         {...elemProps}
       />
     );
-  }
+  },
 });

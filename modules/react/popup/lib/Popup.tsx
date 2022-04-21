@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-import {createComponent, useDefaultModel} from '@workday/canvas-kit-react/common';
+import {createContainerComponent} from '@workday/canvas-kit-react/common';
 
-import {PopupModel, usePopupModel, PopupModelContext} from './hooks';
+import {usePopupModel} from './hooks';
 import {PopupCard} from './PopupCard';
 import {PopupTarget} from './PopupTarget';
 import {PopupPopper} from './PopupPopper';
@@ -16,18 +16,11 @@ export interface PopupProps {
    * The contents of the Popup. Can be `Popup` children or any valid elements.
    */
   children: React.ReactNode;
-  /**
-   * A PopupModel with optional behavior hooks applied.
-   */
-  model: PopupModel;
 }
 
-export const Popup = createComponent()({
+export const Popup = createContainerComponent()({
   displayName: 'Popup',
-  Component: ({children, model, ...config}: PopupProps) => {
-    const value = useDefaultModel(model, config, usePopupModel);
-    return <PopupModelContext.Provider value={value}>{children}</PopupModelContext.Provider>;
-  },
+  modelHook: usePopupModel,
   subComponents: {
     Heading: PopupHeading,
     Body: PopupBody,
@@ -37,4 +30,6 @@ export const Popup = createComponent()({
     Popper: PopupPopper,
     CloseButton: PopupCloseButton,
   },
+})<PopupProps>(({children}: PopupProps) => {
+  return <>{children}</>;
 });

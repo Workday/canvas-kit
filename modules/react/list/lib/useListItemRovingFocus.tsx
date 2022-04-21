@@ -1,7 +1,7 @@
 import React from 'react';
-import {useIsRTL, createHook} from '@workday/canvas-kit-react/common';
+import {useIsRTL, createElemPropsHook} from '@workday/canvas-kit-react/common';
 
-import {CursorListModel} from './useCursorListModel';
+import {useCursorListModel2} from './useCursorListModel';
 
 export const orientationKeyMap = {
   horizontal: {
@@ -61,12 +61,8 @@ const hasOwnKey = <T extends object>(obj: T, key: any): key is keyof T => obj.ha
  *
  * @see https://www.w3.org/TR/wai-aria-practices/#kbd_roving_tabindex
  */
-export const useListRovingFocus = createHook(
-  (
-    {state, events, getId, navigation}: CursorListModel,
-    ref,
-    elemProps: {'data-id'?: string} = {}
-  ) => {
+export const useListItemRovingFocus = createElemPropsHook(useCursorListModel2)(
+  ({state, events, getId, navigation}, ref, elemProps: {'data-id'?: string} = {}) => {
     // Tracks when this element has focus. If this item is removed while still focused, we have to
     // inform the model to move the cursor to the next item.
     const focusRef = React.useRef(false);
@@ -113,22 +109,18 @@ export const useListRovingFocus = createHook(
 
     return {
       onKeyDown(event: React.KeyboardEvent) {
+        // Test ctrl key first
         if (event.ctrlKey) {
           for (const key in ctrlKeyMap) {
             if (hasOwnKey(ctrlKeyMap, key)) {
-              key; //?
-              const temp = ctrlKeyMap[key]; //?
               keyDownRef.current = true;
               events[ctrlKeyMap[key]]?.();
+              event.preventDefault();
               return;
             }
           }
-          // keys(ctrlKeyMap).forEach(key => {
-          //   keyDownRef.current = true;
-          //   events[ctrlKeyMap[key]]?.();
-          //   return;
-          // });
         }
+        // Try regular keys
         keys(state.columnCount > 0 ? gridKeyMap : orientationKeyMap[state.orientation]).forEach(
           key => {
             if (isRTL ? event.key === rightToLeftMap[key] : event.key === key) {
@@ -162,5 +154,3 @@ export const useListRovingFocus = createHook(
     };
   }
 );
-
-// TODO make focus selection work with virtualization

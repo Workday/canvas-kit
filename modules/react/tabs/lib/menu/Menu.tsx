@@ -1,27 +1,19 @@
 import React from 'react';
 
-import {createComponent, useDefaultModel} from '@workday/canvas-kit-react/common';
+import {createContainerComponent} from '@workday/canvas-kit-react/common';
 
-import {MenuModel, MenuModelConfig, useMenuModel} from './useMenuModel';
+import {useMenuModel2} from './useMenuModel';
 import {MenuPopper} from './MenuPopper';
 import {MenuTarget} from './MenuTarget';
 import {MenuItem} from './MenuItem';
 import {MenuCard} from './MenuCard';
 import {MenuList} from './MenuList';
 
-export const MenuModelContext = React.createContext<MenuModel>({} as any);
-
-export interface MenuProps<T> extends MenuModelConfig<T> {
+export interface MenuProps {
   /**
    * The contents of the Menu. Can be `Menu` children or any valid elements.
    */
   children: React.ReactNode;
-  /**
-   * Optionally pass a model directly to this component. Default is to create a model out of model
-   * config passed to this component.
-   * @default useMenuModel(config)
-   */
-  model?: MenuModel<T>;
 }
 
 /**
@@ -40,13 +32,9 @@ export interface MenuProps<T> extends MenuModelConfig<T> {
  *   </Menu.Popper>
  * </Menu>
  */
-export const Menu = createComponent()({
+export const Menu = createContainerComponent()({
   displayName: 'Menu',
-  Component: ({children, model, ...config}: MenuProps<any>) => {
-    const value = useDefaultModel(model, config, useMenuModel);
-
-    return <MenuModelContext.Provider value={value}>{children}</MenuModelContext.Provider>;
-  },
+  modelHook: useMenuModel2,
   subComponents: {
     /**
      * The menu card is a non-semantic element used to give the dropdown menu its distinct visual
@@ -92,4 +80,6 @@ export const Menu = createComponent()({
      */
     Popper: MenuPopper,
   },
+})<MenuProps>(({children}) => {
+  return <>{children}</>;
 });

@@ -2,38 +2,20 @@ import * as React from 'react';
 
 import {
   composeHooks,
-  createComponent,
-  createHook,
-  useModelContext,
+  createSubcomponent,
+  createElemPropsHook,
 } from '@workday/canvas-kit-react/common';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {usePopupTarget} from '@workday/canvas-kit-react/popup';
 
-import {MenuModel} from './useMenuModel';
-import {MenuModelContext} from './Menu';
+import {useMenuModel2} from './useMenuModel';
 
-export interface MenuTargetProps<T = unknown> {
-  /**
-   * Optionally pass a model directly to this component. Default is to implicitly use the same
-   * model as the container component which uses React context. Only use this for advanced use-cases
-   */
-  model?: MenuModel<T>;
+export interface MenuTargetProps {
   children?: React.ReactNode;
 }
 
-export const MenuTarget = createComponent(SecondaryButton)({
-  displayName: 'Menu.Target',
-  Component: ({children, model, ...elemProps}: MenuTargetProps, ref, Element) => {
-    const localModel = useModelContext(MenuModelContext, model);
-
-    const props = useMenuTarget(localModel, elemProps, ref);
-
-    return <Element {...props}>{children}</Element>;
-  },
-});
-
 export const useMenuTarget = composeHooks(
-  createHook((model: MenuModel) => {
+  createElemPropsHook(useMenuModel2)(model => {
     return {
       id: model.state.id,
       onKeyDown(event: React.KeyboardEvent) {
@@ -50,3 +32,11 @@ export const useMenuTarget = composeHooks(
   }),
   usePopupTarget
 );
+
+export const MenuTarget = createSubcomponent(SecondaryButton)({
+  displayName: 'Menu.Target',
+  modelHook: useMenuModel2,
+  elemPropsHook: useMenuTarget,
+})<MenuTargetProps>(({children, ...elemProps}, Element) => {
+  return <Element {...elemProps}>{children}</Element>;
+});

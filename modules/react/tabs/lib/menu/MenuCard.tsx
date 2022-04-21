@@ -7,23 +7,16 @@ import {
   styled,
   TransformOrigin,
   getTranslateFromOrigin,
-  createComponent,
+  createSubcomponent,
   StyledType,
-  useModelContext,
   ExtractProps,
-  createHook,
+  createElemPropsHook,
 } from '@workday/canvas-kit-react/common';
 import {getTransformFromPlacement} from '@workday/canvas-kit-react/popup';
 
-import {MenuModel} from './useMenuModel';
-import {MenuModelContext} from './Menu';
+import {useMenuModel2} from './useMenuModel';
 
-export interface MenuCardProps<T = unknown> extends ExtractProps<typeof Card, never> {
-  /**
-   * Optionally pass a model directly to this component. Default is to implicitly use the same
-   * model as the container component which uses React context. Only use this for advanced use-cases
-   */
-  model?: MenuModel<T>;
+export interface MenuCardProps extends ExtractProps<typeof Card, never> {
   children?: React.ReactNode;
 }
 
@@ -68,29 +61,28 @@ const StyledCard = styled(Card)<
   }
 );
 
-export const MenuCard = createComponent('div')({
-  displayName: 'Menu.Card',
-  Component: ({children, model, padding = 'zero', ...elemProps}: MenuCardProps, ref, Element) => {
-    const localModel = useModelContext(MenuModelContext, model);
-    const props = useMenuCard(localModel, elemProps, ref);
-    const transformOrigin = React.useMemo(() => {
-      return getTransformFromPlacement(localModel.state.placement || 'bottom');
-    }, [localModel.state.placement]);
-
-    return (
-      <StyledCard
-        maxWidth={`calc(100vw - ${space.l})`}
-        as={Element}
-        transformOrigin={transformOrigin}
-        padding={padding}
-        {...props}
-      >
-        {children}
-      </StyledCard>
-    );
-  },
+export const useMenuCard = createElemPropsHook(useMenuModel2)(() => {
+  return {};
 });
 
-export const useMenuCard = createHook((_: MenuModel) => {
-  return {};
+export const MenuCard = createSubcomponent('div')({
+  displayName: 'Menu.Card',
+  modelHook: useMenuModel2,
+  elemPropsHook: useMenuCard,
+})<MenuCardProps>((elemProps, Element, model) => {
+  const transformOrigin = React.useMemo(() => {
+    return getTransformFromPlacement(model.state.placement || 'bottom');
+  }, [model.state.placement]);
+
+  return (
+    <StyledCard
+      as={Element}
+      maxWidth={`calc(100vw - ${space.l})`}
+      transformOrigin={transformOrigin}
+      padding="zero"
+      {...elemProps}
+    >
+      {elemProps.children}
+    </StyledCard>
+  );
 });

@@ -2,19 +2,16 @@ import * as React from 'react';
 
 import {chevronDownSmallIcon} from '@workday/canvas-system-icons-web';
 import {
-  createComponent,
-  useModelContext,
-  createHook,
+  createElemPropsHook,
   composeHooks,
   subModelHook,
+  createSubcomponent,
 } from '@workday/canvas-kit-react/common';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
-import {space} from '@workday/canvas-kit-react/tokens';
 import {useOverflowListTarget} from '@workday/canvas-kit-react/list';
 
 import {useMenuTarget} from './menu';
-import {TabsModelContext} from './Tabs';
-import {TabsModel} from './useTabsModel';
+import {useTabsModel2} from './useTabsModel';
 import {StyledTabItem} from './TabsItem';
 
 export interface OverflowButtonProps {
@@ -22,37 +19,29 @@ export interface OverflowButtonProps {
    * The label text of the Tab.
    */
   children: React.ReactNode;
-  /**
-   * Optionally pass a model directly to this component. Default is to implicitly use the same
-   * model as the container component which uses React context. Only use this for advanced use-cases
-   */
-  model?: TabsModel;
 }
 
-export const TabsOverflowButton = createComponent('button')({
-  displayName: 'Tabs.OverflowButton',
-  Component: ({model, children, ...elemProps}: OverflowButtonProps, ref, Element) => {
-    const localModel = useModelContext(TabsModelContext, model);
-
-    const props = useTabsOverflowButton(localModel, elemProps, ref);
-
-    return (
-      <StyledTabItem hasIcon={true} spacing={space.xxxs} type="button" as={Element} {...props}>
-        <span>{children}</span>
-        <SystemIcon icon={chevronDownSmallIcon} />
-      </StyledTabItem>
-    );
-  },
-});
-
 export const useTabsOverflowButton = composeHooks(
-  createHook(
-    (model: TabsModel, _?: React.Ref<HTMLButtonElement>, elemProps: {name?: string} = {}) => {
+  createElemPropsHook(useTabsModel2)(
+    (model, _?: React.Ref<HTMLButtonElement>, elemProps: {name?: string} = {}) => {
       return {
         'aria-haspopup': true,
       };
     }
   ),
   useOverflowListTarget,
-  subModelHook((m: TabsModel) => m.menu, useMenuTarget)
+  subModelHook((m: ReturnType<typeof useTabsModel2>) => m.menu, useMenuTarget)
 );
+
+export const TabsOverflowButton = createSubcomponent('button')({
+  displayName: 'Tabs.OverflowButton',
+  modelHook: useTabsModel2,
+  elemPropsHook: useTabsOverflowButton,
+})<OverflowButtonProps>(({children, ...elemProps}, Element) => {
+  return (
+    <StyledTabItem type="button" hasIcon={true} spacing="xxxs" as={Element} {...elemProps}>
+      <span>{children}</span>
+      <SystemIcon icon={chevronDownSmallIcon} />
+    </StyledTabItem>
+  );
+});

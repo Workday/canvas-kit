@@ -1,11 +1,5 @@
-import {createEventMap, ToModelConfig, useEventMap} from '@workday/canvas-kit-react/common';
+import {createModelHook} from '@workday/canvas-kit-react/common';
 import {
-  BasePopupModelConfig,
-  popupEventMap,
-  PopupEvents,
-  PopupModel,
-  PopupModelConfig,
-  PopupState,
   useAlwaysCloseOnOutsideClick,
   useCloseOnEscape,
   useFocusRedirect,
@@ -13,44 +7,20 @@ import {
   usePopupModel,
   useReturnFocus,
 } from '@workday/canvas-kit-react/popup';
-import {
-  CursorListModel,
-  SelectionListState,
-  SelectionListEvents,
-  selectionListEventMap,
-  SelectionListModelConfig,
-  useListModel,
-  BaseSelectionListModelConfig,
-} from '@workday/canvas-kit-react/list';
+import {useListModel2} from '@workday/canvas-kit-react/list';
 
-export type MenuState<T = unknown> = SelectionListState<T> & PopupState & {};
-
-export type MenuEvents<T = unknown> = SelectionListEvents<T> & PopupEvents & {};
-
-export interface MenuModel<T = unknown> extends CursorListModel<T>, PopupModel {
-  state: MenuState<T>;
-  events: MenuEvents<T>;
-}
-
-export const menuEventMap = createEventMap<MenuEvents>()({
-  guards: {
-    ...selectionListEventMap.guards,
-    ...popupEventMap.guards,
+export const useMenuModel2 = createModelHook({
+  defaultConfig: {
+    ...useListModel2.defaultConfig,
+    ...usePopupModel.defaultConfig,
   },
-  callbacks: {
-    ...selectionListEventMap.callbacks,
-    ...popupEventMap.callbacks,
+  requiredConfig: {
+    ...useListModel2.requiredConfig,
+    ...usePopupModel.requiredConfig,
   },
-});
-
-export type BaseMenuModelConfig<T> = BaseSelectionListModelConfig<T> & BasePopupModelConfig & {};
-
-export type MenuModelConfig<T> = BaseMenuModelConfig<T> &
-  Partial<ToModelConfig<MenuState<T>, MenuEvents<T>, typeof menuEventMap>>;
-
-export const useMenuModel = <T extends unknown>(config: MenuModelConfig<T> = {}): MenuModel<T> => {
-  const popup = usePopupModel(config as PopupModelConfig);
-  const list = useListModel(config as SelectionListModelConfig<T>);
+})(config => {
+  const popup = usePopupModel(config);
+  const list = useListModel2(useListModel2.mergeConfig(config, {shouldVirtualize: false}));
 
   useAlwaysCloseOnOutsideClick(popup);
   useCloseOnEscape(popup);
@@ -60,10 +30,10 @@ export const useMenuModel = <T extends unknown>(config: MenuModelConfig<T> = {})
 
   const state = {...list.state, ...popup.state};
 
-  const events = useEventMap(menuEventMap, state, config, {
+  const events = {
     ...list.events,
     ...popup.events,
-  } as MenuEvents<T>);
+  };
 
   return {...list, state, events};
-};
+});

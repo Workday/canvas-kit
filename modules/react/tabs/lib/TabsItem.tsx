@@ -2,33 +2,31 @@ import * as React from 'react';
 
 import {colors, space, type, borderRadius, iconColors} from '@workday/canvas-kit-react/tokens';
 import {
-  createComponent,
   focusRing,
   hideMouseFocus,
   styled,
   StyledType,
-  useModelContext,
-  createHook,
+  createElemPropsHook,
   composeHooks,
   ExtractProps,
   ellipsisStyles,
   EllipsisText,
   useLocalRef,
   useMount,
+  createSubcomponent,
 } from '@workday/canvas-kit-react/common';
 import {Box, StackProps} from '@workday/canvas-kit-react/layout';
 import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {
-  useListRegisterItem,
-  useListRovingFocus,
+  useListItemRegister,
+  useListItemRovingFocus,
   isSelected,
-  useListSelectItem,
-  useOverflowListMeasureItem,
+  useListItemSelect,
+  useOverflowListItemMeasure,
 } from '@workday/canvas-kit-react/list';
 
-import {TabsModelContext} from './Tabs';
-import {TabsModel} from './useTabsModel';
+import {useTabsModel2} from './useTabsModel';
 export interface TabsItemProps
   extends ExtractProps<typeof Box, never>,
     Partial<Pick<StackProps, 'spacing'>> {
@@ -54,16 +52,12 @@ export interface TabsItemProps
    */
   children: React.ReactNode;
   /**
-   * The name of the tab. This name will be used in change events and for `initialTab`. Must match
-   * the `name` of the associated tab panel. If this property is not provided, it will default to a
-   * string representation of the the zero-based index of the Tab when it was initialized.
+   * The identifier of the tab. This identifier will be used in change events and for `initialTab`.
+   * Must match the `data-id` of the associated tab panel. If this property is not provided, it will
+   * default to a string representation of the the zero-based index of the Tab when it was
+   * initialized.
    */
-  name?: string;
-  /**
-   * Optionally pass a model directly to this component. Default is to implicitly use the same
-   * model as the container component which uses React context. Only use this for advanced use-cases
-   */
-  model?: TabsModel;
+  'data-id'?: string;
   /**
    * Optional id. If not set, it will inherit the ID passed to the `Tabs` component and append the
    * index at the end. Only set this for advanced cases.
@@ -193,46 +187,9 @@ export const StyledTabItem = styled(Box.as('button'))<
   }
 );
 
-export const TabsItem = createComponent('button')({
-  displayName: 'Tabs.Item',
-  Component: ({model, children, ...elemProps}: TabsItemProps, ref, Element) => {
-    const localModel = useModelContext(TabsModelContext, model);
-
-    const props = useTabsItem(localModel, elemProps, ref);
-
-    if ('production' !== process.env.NODE_ENV) {
-      // ensure `hasIcon` is used when a child has an icon
-      // eslint-disable-next-line react-hooks/rules-of-hooks
-      const {elementRef, localRef} = useLocalRef(props.ref);
-      props.ref = elementRef;
-      // eslint-disable-next-line react-hooks/rules-of-hooks
-      useMount(() => {
-        if (localRef?.current?.querySelector('svg') && !props.hasIcon) {
-          console.warn(
-            `A Tabs.Item with an icon should have the 'hasIcon' prop set to true. This ensures correct rendering`
-          );
-        }
-      });
-    }
-
-    return (
-      <OverflowTooltip>
-        <StyledTabItem as={Element} {...props}>
-          {children}
-        </StyledTabItem>
-      </OverflowTooltip>
-    );
-  },
-  subComponents: {
-    Icon: SystemIcon,
-    Text: EllipsisText,
-  },
-});
-
 export const useTabsItem = composeHooks(
-  createHook(
-    (model: TabsModel, _?: React.Ref<HTMLButtonElement>, elemProps: {'data-id'?: string} = {}) => {
-      const {state} = model;
+  createElemPropsHook(useTabsModel2)(
+    ({state}, _?: React.Ref<HTMLButtonElement>, elemProps: {'data-id'?: string} = {}) => {
       const name = elemProps['data-id'] || '';
 
       const selected = !!elemProps['data-id'] && isSelected(name, state);
@@ -242,11 +199,44 @@ export const useTabsItem = composeHooks(
         role: 'tab',
         'aria-selected': selected,
         'aria-controls': `tabpanel-${state.id}-${name}`,
-      } as const;
+      };
     }
   ),
-  useListSelectItem,
-  useOverflowListMeasureItem,
-  useListRovingFocus,
-  useListRegisterItem
+  useListItemSelect,
+  useOverflowListItemMeasure,
+  useListItemRovingFocus,
+  useListItemRegister
 );
+
+export const TabsItem = createSubcomponent('button')({
+  displayName: 'Tabs.Item',
+  modelHook: useTabsModel2,
+  elemPropsHook: useTabsItem,
+  subComponents: {
+    Icon: SystemIcon,
+    Text: EllipsisText,
+  },
+})<TabsItemProps>(({children, ...elemProps}, Element, model) => {
+  if ('production' !== process.env.NODE_ENV) {
+    // ensure `hasIcon` is used when a child has an icon
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const {elementRef, localRef} = useLocalRef(elemProps.ref);
+    elemProps.ref = elementRef;
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    useMount(() => {
+      if (localRef?.current?.querySelector('svg') && !elemProps.hasIcon) {
+        console.warn(
+          `A Tabs.Item with an icon should have the 'hasIcon' prop set to true. This ensures correct rendering`
+        );
+      }
+    });
+  }
+
+  return (
+    <OverflowTooltip>
+      <StyledTabItem as={Element} {...elemProps}>
+        {children}
+      </StyledTabItem>
+    </OverflowTooltip>
+  );
+});

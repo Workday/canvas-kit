@@ -9,6 +9,7 @@ Below are the breaking changes made in Canvas Kit v7. Please
 any questions about the update.
 
 - [Codemod](#codemod)
+- [Infrastructure](#infrastructure)
 - [Component Deprecations](#component-deprecations)
 - [ActionBar Component Updates](#actionbar-component-updates)
 - [Status Indicator Width](#status-indicator-width)
@@ -40,6 +41,19 @@ rollback more easily if necessary.**
 [Let us know](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) if you
 encounter any issues or use cases that we've missed. The `@workday/canvas-kit-codemod` package will
 help us maintain additional codemod transforms to make future migrations easier.
+
+## Infrastructure
+
+## Infrastructure Upgrades
+
+Breaking:
+
+- v7 now requires Typescript 4.1 and has dropped support for Typescript 3.5-3.9. Previously we used
+  `downlevel-dts` to support Typescript 3.5+ while using Typescript 3.8 features, but
+  `downlevel-dts` does not support the Typescript 4.1 features we use. Typescript 4.1 was release in
+  November, 2020 and we feel it is time to move forward. Reach out if you experience issues
+  upgrading your Typescript version. In our experience, Typescript 4.1 found a few more errors that
+  Typescript 3.8 did not, but the upgrade was manageable.
 
 ## Component Deprecations
 
@@ -153,6 +167,45 @@ If your code contains any hacks to make a `Modal` overflow, these hacks should n
 (you may have to limit your browser height to see the overflow). Before you had to manually set the
 `max-height` of the `Modal.Body` element using calculations. These should be removed. The
 `Popup.Card` now has a max height and the `Popup.Body` height is automatically calculated.
+
+### Popup.Body
+
+The `Popup.Body` is now an overflow container. This means 2 things:
+
+- `Popup.Body` will scroll if the contents are too big to fit in the page
+- `Popup.Body` will hide focus rings that render outside the overflow container
+
+Our examples contained some buttons inside the `Body` element and had focus rings cut off. The
+adjustment is to move the buttons outside the `Body` element. This is most likely the desired
+structure anyways since the buttons will not scroll with the overflowed `Body` content.
+
+Before:
+
+```tsx
+<Modal.Card>
+  <Modal.Body>
+    Body Contents
+    <HStack spacing="s">
+      {' '}
+      // will scroll with the body
+      <Modal.CloseButton as={PrimaryButton}>Delete</Modal.CloseButton>
+      <Modal.CloseButton>Cancel</Modal.CloseButton>
+    </HStack>
+  </Modal.Body>
+</Modal.Card>
+```
+
+After:
+
+```tsx
+<Modal.Card>
+  <Modal.Body>Body Contents</Modal.Body>
+  <HStack spacing="s">
+    <Modal.CloseButton as={PrimaryButton}>Delete</Modal.CloseButton>
+    <Modal.CloseButton>Cancel</Modal.CloseButton>
+  </HStack>
+</Modal.Card>
+```
 
 ## Component Promotions
 

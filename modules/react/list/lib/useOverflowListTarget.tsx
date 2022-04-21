@@ -1,8 +1,8 @@
 import React from 'react';
 
-import {createHook, useMountLayout, useLocalRef} from '@workday/canvas-kit-react/common';
+import {createElemPropsHook, useMountLayout, useLocalRef} from '@workday/canvas-kit-react/common';
 
-import {OverflowListModel} from './useOverflowListModel';
+import {useOverflowListModel2} from './useOverflowListModel';
 
 // use a hidden style instead of `hidden` attribute for measurement purposes. `hidden` elements have no dimensions
 const hiddenStyle = {
@@ -10,8 +10,8 @@ const hiddenStyle = {
   left: -99999,
 };
 
-export const useOverflowListTarget = createHook(
-  (model: OverflowListModel, ref?: React.Ref<HTMLButtonElement>) => {
+export const useOverflowListTarget = createElemPropsHook(useOverflowListModel2)(
+  (model, ref?: React.Ref<HTMLButtonElement>) => {
     const {elementRef, localRef} = useLocalRef(ref);
     // track first render to force correct size calculations
     const firstRender = React.useRef(true);

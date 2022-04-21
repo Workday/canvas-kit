@@ -2,10 +2,10 @@ import * as React from 'react';
 import {screen, render} from '@testing-library/react';
 
 import {Tabs} from '../lib/Tabs';
-import {useTabsModel} from '../lib/useTabsModel';
+import {useTabsModel2} from '../lib/useTabsModel';
 
 describe('TabList', () => {
-  verifyComponent(Tabs.List, {modelFn: useTabsModel});
+  verifyComponent(Tabs.List, {modelFn: useTabsModel2});
 
   it('should have a role of "tablist"', () => {
     render(

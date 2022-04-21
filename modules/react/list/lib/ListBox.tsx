@@ -1,10 +1,15 @@
 import React from 'react';
-import {createContainerComponent, createSubcomponent} from '@workday/canvas-kit-react/common';
+import {
+  createContainerComponent,
+  createElemPropsHook,
+  createSubcomponent,
+} from '@workday/canvas-kit-react/common';
 import {Box, BoxProps} from '@workday/canvas-kit-react/layout';
 
 import {useListModel2} from './useListModel';
 import {useListRenderItems} from './useListRenderItem';
-import {useListRegisterItem} from './useListRegisterItem';
+import {useListItemRegister} from './useListItemRegister';
+
 export interface ListBoxProps extends BoxProps {
   children?: React.ReactNode | ((item: any) => React.ReactNode);
 }
@@ -12,10 +17,18 @@ export interface ListBoxProps extends BoxProps {
 export const ListBoxItem = createSubcomponent('li')({
   displayName: 'Item',
   modelHook: useListModel2,
-  elemPropsHook: useListRegisterItem,
+  elemPropsHook: useListItemRegister,
 })<BoxProps>((elemProps, Element) => {
-  // Question: the `_` is the model, but it isn't used. `Element` is more common, should that go second?
   return <Box as={Element} {...elemProps} />;
+});
+
+const useListBox = createElemPropsHook(useListModel2)(model => {
+  return {
+    style: {
+      position: 'relative',
+      height: model.state.isVirtualized ? model.state.UNSTABLE_virtual.totalSize : undefined,
+    },
+  };
 });
 
 /**
@@ -29,6 +42,7 @@ export const ListBoxItem = createSubcomponent('li')({
 export const ListBox = createContainerComponent('ul')({
   displayName: 'ListBox',
   modelHook: useListModel2,
+  elemPropsHook: useListBox,
   subComponents: {
     /**
      * Extremely simple ListBox item that contains no functionality other than registering items and
@@ -38,20 +52,17 @@ export const ListBox = createContainerComponent('ul')({
     Item: ListBoxItem,
   },
 })<ListBoxProps>(({height, maxHeight, ...elemProps}, Element, model) => {
-  console.log('ref', elemProps.ref, Element);
   // TODO figure out what style props should go to which `Box`
   return (
     <Box
       ref={model.state.containerRef}
-      height={height}
+      height={
+        height || model.state.isVirtualized ? model.state.UNSTABLE_virtual.totalSize : undefined
+      }
       maxHeight={maxHeight}
       overflowY={model.state.orientation === 'vertical' ? 'auto' : undefined}
     >
-      <Box
-        as={Element}
-        style={{position: 'relative', height: model.state.UNSTABLE_virtual.totalSize}}
-        {...elemProps}
-      >
+      <Box as={Element} {...elemProps}>
         {useListRenderItems(model, elemProps.children)}
       </Box>
     </Box>

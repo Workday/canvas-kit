@@ -1,46 +1,49 @@
 import React from 'react';
 
-import {createComponent, useDefaultModel} from '@workday/canvas-kit-react/common';
 import {
-  Popup,
-  PopupModelContext,
-  PopupModel,
-  PopupModelConfig,
-} from '@workday/canvas-kit-react/popup';
+  createContainerComponent,
+  createWrapperSubcomponent,
+} from '@workday/canvas-kit-react/common';
+import {Popup} from '@workday/canvas-kit-react/popup';
 
 import {DialogPopper} from './DialogPopper';
 import {DialogCard} from './DialogCard';
 import {useDialogModel} from './hooks';
 
-export interface DialogProps extends PopupModelConfig {
+export interface DialogProps {
   /**
    * The contents of the Dialog. Can be `Dialog` children or any valid elements.
    */
   children: React.ReactNode;
-  /**
-   * A PopupModel. The following behaviors will be automatically applied to this model:
-   * - useInitialFocus
-   * - useReturnFocus
-   * - useCloseOnOutsideClick
-   * - useCloseOnEscape
-   */
-  model?: PopupModel;
 }
 
-export const Dialog = createComponent()({
+export const Dialog = createContainerComponent()({
   displayName: 'Dialog',
-  Component: ({children, model, ...config}: DialogProps) => {
-    const value = useDefaultModel(model, config, useDialogModel);
-
-    return <PopupModelContext.Provider value={value}>{children}</PopupModelContext.Provider>;
-  },
+  modelHook: useDialogModel,
   subComponents: {
-    Body: Popup.Body,
+    Body: createWrapperSubcomponent(Popup.Body)({
+      displayName: 'Dialog.Body',
+      modelHook: useDialogModel,
+    }),
     Card: DialogCard,
-    CloseIcon: Popup.CloseIcon,
-    Target: Popup.Target,
-    Heading: Popup.Heading,
+    CloseIcon: createWrapperSubcomponent(Popup.CloseIcon)({
+      displayName: 'Dialog.CloseIcon',
+      modelHook: useDialogModel,
+    }),
+    Target: createWrapperSubcomponent(Popup.Target)({
+      displayName: 'Dialog.Target',
+      modelHook: useDialogModel,
+    }),
+    Heading: createWrapperSubcomponent(Popup.Heading)({
+      displayName: 'Dialog.Body',
+      modelHook: useDialogModel,
+    }),
     Popper: DialogPopper,
-    CloseButton: Popup.CloseButton,
+    CloseButton: createWrapperSubcomponent(Popup.CloseButton)({
+      displayName: 'Dialog.CloseButton',
+      modelHook: useDialogModel,
+    }),
   },
+})(({children}: DialogProps) => {
+  return <>{children}</>;
 });

@@ -2,12 +2,11 @@ import * as React from 'react';
 
 import {colors, iconColors, typeColors, space, type} from '@workday/canvas-kit-react/tokens';
 import {
-  createComponent,
+  createSubcomponent,
   styled,
   StyledType,
-  useModelContext,
   composeHooks,
-  createHook,
+  createElemPropsHook,
   useLocalRef,
   useMount,
 } from '@workday/canvas-kit-react/common';
@@ -15,13 +14,12 @@ import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
 import {Box} from '@workday/canvas-kit-react/layout';
 import {
-  useListRegisterItem,
-  useListRovingFocus,
-  useListSelectItem,
+  useListItemRegister,
+  useListItemRovingFocus,
+  useListItemSelect,
 } from '@workday/canvas-kit-react/list';
 
-import {MenuModel} from './useMenuModel';
-import {MenuModelContext} from './Menu';
+import {useMenuModel2} from './useMenuModel';
 
 export interface MenuItemProps<T = unknown> {
   /**
@@ -39,12 +37,7 @@ export interface MenuItemProps<T = unknown> {
    * this property is not provided, it will default to a string representation of the the zero-based
    * index of the Tab when it was initialized.
    */
-  name?: string;
-  /**
-   * Optionally pass a model directly to this component. Default is to implicitly use the same
-   * model as the container component which uses React context. Only use this for advanced use-cases
-   */
-  model?: MenuModel<T>;
+  'data-id'?: string;
   'aria-disabled'?: boolean;
   /**
    * Use `hasIcon={true}` when the Tab item contains an icon. This instructs the tab item to render
@@ -67,6 +60,8 @@ const StyledItem = styled(Box.as('button'))<StyledType & {hasIcon?: boolean}>(
       '& > *:not(style) ~ *:not(style)': {
         marginLeft: space.xxs,
       },
+      display: 'block',
+      width: '100%',
       padding: `${space.xxs} ${space.s}`,
       boxSizing: 'border-box',
       cursor: 'pointer',
@@ -149,49 +144,46 @@ const StyledItem = styled(Box.as('button'))<StyledType & {hasIcon?: boolean}>(
   }
 );
 
-export const MenuItem = createComponent('button')({
-  displayName: 'Menu.Item',
-  Component: ({model, children, ...elemProps}: MenuItemProps, ref, Element) => {
-    const localModel = useModelContext(MenuModelContext, model);
-
-    const props = useMenuItem(localModel, elemProps, ref);
-
-    if ('production' !== process.env.NODE_ENV) {
-      // ensure `hasIcon` is used when a child has an icon
-      // eslint-disable-next-line react-hooks/rules-of-hooks
-      const {elementRef, localRef} = useLocalRef(props.ref);
-      props.ref = elementRef;
-      // eslint-disable-next-line react-hooks/rules-of-hooks
-      useMount(() => {
-        if (localRef.current!.querySelector('svg') && !props.hasIcon) {
-          console.warn(
-            `A Menu.Item with an icon should have the 'hasIcon' prop set to true. This ensures correct rendering`
-          );
-        }
-      });
-    }
-
-    return (
-      <OverflowTooltip placement="left">
-        <StyledItem minHeight={space.xl} as={Element} {...props}>
-          {children}
-        </StyledItem>
-      </OverflowTooltip>
-    );
-  },
-  subComponents: {
-    Icon: SystemIcon,
-    Text: styled('span')({}),
-  },
-});
-
 export const useMenuItem = composeHooks(
-  createHook((model: MenuModel, _?: React.Ref<any>, elemProps: {name?: string} = {}) => {
+  createElemPropsHook(useMenuModel2)(() => {
     return {
       role: 'menuitem',
     };
   }),
-  useListSelectItem,
-  useListRovingFocus,
-  useListRegisterItem
+  useListItemSelect,
+  useListItemRovingFocus,
+  useListItemRegister
 );
+
+export const MenuItem = createSubcomponent('button')({
+  displayName: 'Menu.Item',
+  modelHook: useMenuModel2,
+  elemPropsHook: useMenuItem,
+  subComponents: {
+    Icon: SystemIcon,
+    Text: styled('span')({}),
+  },
+})<MenuItemProps>(({children, ...elemProps}, Element) => {
+  if ('production' !== process.env.NODE_ENV) {
+    // ensure `hasIcon` is used when a child has an icon
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const {elementRef, localRef} = useLocalRef(elemProps.ref);
+    elemProps.ref = elementRef;
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    useMount(() => {
+      if (localRef.current!.querySelector('svg') && !elemProps.hasIcon) {
+        console.warn(
+          `A Menu.Item with an icon should have the 'hasIcon' prop set to true. This ensures correct rendering`
+        );
+      }
+    });
+  }
+
+  return (
+    <OverflowTooltip placement="left">
+      <StyledItem minHeight={space.xl} as={Element} {...elemProps}>
+        {children}
+      </StyledItem>
+    </OverflowTooltip>
+  );
+});

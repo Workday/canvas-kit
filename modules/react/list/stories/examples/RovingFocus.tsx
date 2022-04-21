@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {
-  useListRegisterItem,
+  useListItemRegister,
   useListRovingFocus,
   useListRenderItems,
   useListModel,
@@ -24,7 +24,7 @@ const List = (props: ListProps) => {
   );
 };
 
-const useItem = composeHooks(useListRovingFocus, useListRegisterItem);
+const useItem = composeHooks(useListRovingFocus, useListItemRegister);
 
 const Item = (elemProps: ListItemProps) => {
   const model = React.useContext(ListModelContext);

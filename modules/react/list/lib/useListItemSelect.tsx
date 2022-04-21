@@ -1,15 +1,11 @@
 import React from 'react';
 
-import {createHook} from '@workday/canvas-kit-react/common';
+import {createElemPropsHook} from '@workday/canvas-kit-react/common';
 
-import {SelectionListModel} from './useSelectionListModel';
+import {useListModel2} from './useListModel';
 
-export const useListSelectItem = createHook(
-  (
-    {state, events}: SelectionListModel,
-    _?: React.Ref<HTMLElement>,
-    elemProps: {'data-id'?: string} = {}
-  ) => {
+export const useListItemSelect = createElemPropsHook(useListModel2)(
+  ({state, events}, _?: React.Ref<HTMLElement>, elemProps: {'data-id'?: string} = {}) => {
     const name = elemProps['data-id'] || '';
     const onClick = (event: React.MouseEvent<HTMLElement>) => {
       if (
@@ -18,6 +14,7 @@ export const useListSelectItem = createHook(
       ) {
         return;
       }
+      console.log('select', name);
       events.select({id: name});
     };
 

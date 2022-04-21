@@ -2,19 +2,16 @@ import React from 'react';
 import {space} from '@workday/canvas-kit-react/tokens';
 import {
   ExtractProps,
-  createComponent,
-  useModelContext,
+  createSubcomponent,
   styled,
+  StyledType,
 } from '@workday/canvas-kit-react/common';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
-import {exclamationTriangleIcon} from '@workday/canvas-system-icons-web';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 
-import {BannerModelContext} from './Banner';
-import {BannerModel, useBannerIcon} from './hooks';
+import {useBannerIcon, useBannerModel} from './hooks';
 
 export interface BannerIconProps extends Omit<ExtractProps<typeof SystemIcon, never>, 'icon'> {
-  model?: BannerModel;
   /**
    * Icon to show next to label
    * @default exclamationTriangleIcon or exclamationCircleIcon when hasError is true
@@ -22,18 +19,17 @@ export interface BannerIconProps extends Omit<ExtractProps<typeof SystemIcon, ne
   icon?: CanvasSystemIcon;
 }
 
-const StyledBannerIcon = styled(SystemIcon)({
+const StyledBannerIcon = styled(SystemIcon)<StyledType>({
   marginRight: space.xs,
 });
 
-export const BannerIcon = createComponent('span')({
+export const BannerIcon = createSubcomponent('span')({
   displayName: 'Banner.Icon',
-  Component: ({icon = exclamationTriangleIcon, model, ...elemProps}: BannerIconProps, ref) => {
-    const localModel = useModelContext(BannerModelContext, model);
+  modelHook: useBannerModel,
+  elemPropsHook: useBannerIcon,
+})<BannerIconProps>((elemProps, Element, model) => {
+  // SystemIcon is still a class based component so we need to set ref manually.
+  const {ref, icon, ...iconButtonProps} = elemProps;
 
-    // SystemIcon is still a class based component so we need to set ref manually.
-    const {ref: iconRef, icon: defaultIcon, ...props} = useBannerIcon(localModel, elemProps, ref);
-
-    return <StyledBannerIcon icon={icon ?? defaultIcon} iconRef={iconRef} {...props} />;
-  },
+  return <StyledBannerIcon as={Element} icon={icon!} iconRef={ref} {...iconButtonProps} />;
 });

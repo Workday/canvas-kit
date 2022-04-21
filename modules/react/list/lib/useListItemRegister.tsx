@@ -2,7 +2,7 @@ import React, {CSSProperties} from 'react';
 
 import {
   useMountLayout,
-  createHook2,
+  createElemPropsHook,
   useLocalRef,
   useForkRef,
 } from '@workday/canvas-kit-react/common';
@@ -15,12 +15,13 @@ import {useListModel2} from './useListModel';
  * Registers an item with a list. It will return elemProps with a `name` which can be used by other
  * hooks to identify the item in the list.
  */
-export const useListRegisterItem = createHook2(useListModel2)(
+export const useListItemRegister = createElemPropsHook(useListModel2)(
   (
     {state, events, getId},
     ref?: React.Ref<HTMLElement>,
     elemProps: {
       name?: string;
+      'data-id'?: string;
       children?: React.ReactNode;
       index?: number;
       disabled?: boolean;
@@ -28,7 +29,9 @@ export const useListRegisterItem = createHook2(useListModel2)(
       virtual?: VirtualItem;
     } = {}
   ) => {
-    const [localId, setLocalId] = React.useState(elemProps.name || elemProps.item?.id || '');
+    const [localId, setLocalId] = React.useState(
+      elemProps.name || elemProps['data-id'] || elemProps.item?.id || ''
+    );
     const {localRef, elementRef} = useLocalRef(useForkRef(ref, elemProps.virtual?.measureRef));
 
     // if the list is virtual, force the correct styling. Without this, weird things happen...
@@ -51,7 +54,8 @@ export const useListRegisterItem = createHook2(useListModel2)(
         return;
       }
       const defaultId = state.indexRef.current;
-      const itemId = elemProps.name || String(defaultId);
+      const itemId = localId || String(defaultId);
+      console.log('mount', defaultId, localId);
 
       // TODO: Better lookup that using `items.find`. We need a more generic collection to handle seeing if an item already exists
       // bail early if item already exists. This happens if items were already provided.
@@ -77,7 +81,6 @@ export const useListRegisterItem = createHook2(useListModel2)(
       ref: elementRef,
       'data-id': localId,
       disabled: elemProps.disabled || state.nonInteractiveIds.includes(localId) ? true : undefined,
-      name: null, // remove name from prop list
       item: null, // remove `item` from prop list
       virtual: null, // remove `virtual` from prop list
       'aria-setsize': elemProps.virtual?.size,
