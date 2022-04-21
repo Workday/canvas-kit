@@ -20,7 +20,6 @@ import {BoxProps, boxStyleFn, HStack} from '@workday/canvas-kit-react/layout';
 import {CSSObject} from '@emotion/react';
 import {PillLabel} from './Pill.Label';
 import {BaseButton} from '@workday/canvas-kit-react/button';
-import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
 
 export const PillModelContext = React.createContext<PillModel>({} as any);
 
