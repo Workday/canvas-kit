@@ -42,7 +42,7 @@ const transform: Transform = (file, api) => {
     nodePath.insertBefore(j.importDeclaration(specifiers, j.stringLiteral(sourcePath)));
   }
 
-  const discoveredImportAliases: Record<string, boolean> = {};
+  const discoveredImportSpecifiers: Record<string, boolean> = {};
 
   // Rename search-bar named imports from @workday/canvas-kit-labs-react
   // e.g. import { SearchBar, SearchBarProps } from '@workday/canvas-kit-labs-react';
@@ -56,7 +56,10 @@ const transform: Transform = (file, api) => {
     searchBarImports.forEach(specifier => {
       const specifierName = specifier.imported.name;
       if (specifierName in renameMap) {
-        discoveredImportAliases[specifier.imported.name] = true;
+        // if it hasn't been aliased, track it for updating JSX
+        if (!specifier.local || specifier.local.name === specifier.imported.name) {
+          discoveredImportSpecifiers[specifier.imported.name] = true;
+        }
 
         specifier.imported.name = renameMap[specifierName];
       }
@@ -94,7 +97,10 @@ const transform: Transform = (file, api) => {
       searchBarSpecifiers.forEach(specifier => {
         const specifierName = specifier.imported.name;
         if (specifierName in renameMap) {
-          discoveredImportAliases[specifier.imported.name] = true;
+          // if it hasn't been aliased, track it for updating JSX
+          if (!specifier.local || specifier.local.name === specifier.imported.name) {
+            discoveredImportSpecifiers[specifier.imported.name] = true;
+          }
 
           specifier.imported.name = renameMap[specifierName];
         }
@@ -119,7 +125,7 @@ const transform: Transform = (file, api) => {
     root,
     '@workday/canvas-kit-labs-react/search-form',
     renameMap,
-    discoveredImportAliases
+    discoveredImportSpecifiers
   ).toSource();
 };
 
