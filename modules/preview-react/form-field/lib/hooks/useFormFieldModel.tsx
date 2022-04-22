@@ -30,8 +30,7 @@ export const useFormFieldModel = createModelHook({
   const id = useUniqueId(config.id);
 
   const state = {
-    hasError: config.hasError,
-    isRequired: config.isRequired,
+    ...config,
     id,
   };
 
