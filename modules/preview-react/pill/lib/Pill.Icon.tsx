@@ -6,6 +6,7 @@ import {SystemIcon, SystemIconProps} from '@workday/canvas-kit-react/icon';
 import {PillModel} from './usePillModel';
 import {plusIcon} from '@workday/canvas-system-icons-web';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
+import {space} from '@workday/canvas-kit-react/tokens';
 
 export interface PillIconProps extends Omit<SystemIconProps, 'icon'> {
   model?: PillModel;
@@ -17,8 +18,7 @@ export const PillIcon = createComponent('span')({
   Component: ({size, model, icon, ...elemProps}: PillIconProps, ref, Element) => {
     return (
       <SystemIcon
-        marginInlineStart={'-4px'}
-        // marginInlineEnd={'4px'}
+        marginInlineStart={`-${space.xxxs}`}
         style={{display: 'flex'}}
         ref={ref}
         as={Element}

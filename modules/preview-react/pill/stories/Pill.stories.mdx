@@ -7,8 +7,8 @@ import {Basic} from './examples/Basic';
 import {ClickablePillWithAvatar} from './examples/WithAvatar';
 import {ClickablePillWithIcon} from './examples/WithIcon';
 import {ClickablePillWithCount} from './examples/WithCount';
-import {RemovablePill} from './examples/Removable';
-import {ListOfPills} from './examples/PillList';
+import {RemovablePill} from './examples/WithRemovable';
+import {ListOfPills} from './examples/WithList';
 
 <Meta title="Preview/Pill/React" component={Pill} />
 
@@ -90,3 +90,38 @@ In order to achieve this, you can use our `HStack` component to wrap each `Pill`
 accordingly.
 
 <ExampleCodeBlock code={ListOfPills} />
+
+## Components
+
+### Pill
+
+This component is the container component for a Pill. It also provides a React Context model for its
+sub components. If you give this component a `string` as its children, it will render a read only
+pill.
+
+Example of read only:
+
+```tsx
+<Pill>This is a read only</Pill>
+```
+
+If you give this component an `onClick` it will render as an interactive pill where sub components
+are acceptable
+
+```tsx
+<Pill onClick={() => console.log('clicked')}>
+  <Pill.Avatar /> Regina Skeltor
+</Pill>
+```
+
+If you give this component an `onDelete` it will render as a span and you can have a removable Pill
+that has a smaller click target to prevent users from accidentally delete something.
+
+```tsx
+<Pill onDelete={() => console.log('handle remove')}>
+  Shoes
+  <Pill.IconButton />
+</Pill>
+```
+
+<ArgsTable of={Pill} />

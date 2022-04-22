@@ -17,7 +17,7 @@ const StyledCountContainer = styled(Box.as('span'))<StyledType>({
   borderBottomLeftRadius: borderRadius.zero,
   borderBottomRightRadius: borderRadius.m,
   marginInlineEnd: `-${space.xxs}`,
-  marginInlineStart: `${space.xxs} !important`, // override margin from HStack
+  marginInlineStart: `${space.xxs} !important`, // override margin from HStack because we want it larger
   backgroundColor: colors.soap500,
 });
 export const PillCount = createComponent('span')({
