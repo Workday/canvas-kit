@@ -140,7 +140,8 @@ Note that the APIs for the promoted components remain unchanged.
 
 ### Action Bar
 
-We've [refactored `ActionBar`](https://github.com/Workday/canvas-kit/pull/1396) and simplified its logic.
+We've [refactored `ActionBar`](https://github.com/Workday/canvas-kit/pull/1396) and simplified its
+logic.
 
 **Changes:**
 
@@ -153,8 +154,8 @@ We've [refactored `ActionBar`](https://github.com/Workday/canvas-kit/pull/1396) 
 
 ### Button
 
-To consolidate Button APIs, we've removed `IconButton` in favor of `PrimaryButton`, `SecondaryButton`
-and `TertiaryButton`.
+To consolidate Button APIs, we've removed `IconButton` in favor of `PrimaryButton`,
+`SecondaryButton` and `TertiaryButton`.
 
 #### Breaking Changes
 
@@ -365,25 +366,30 @@ system.
 
 ### Icon
 
-We've updated our lower level icon components such as `AccentIcon`, `AppletIcon`, `Graphic`, `Icon`,
-`Svg`, `SystemIcon`, and `SystemIconCircle` to use our
-[createComponent](https://github.com/Workday/canvas-kit/blob/ff77c5bd83e41c3ab2b9c55e41a8b7c1fde33a1b/modules/react/common/lib/utils/components.ts#L167)
-which allows us to `forwardRef`.
+`AccentIcon`, `AppletIcon`, `Graphic`, `Icon`, `Svg`, `SystemIcon`, and `SystemIconCircle` now
+support [ref forwarding](https://reactjs.org/docs/forwarding-refs.html) through use of the
+[`createComponent`](https://github.com/Workday/canvas-kit/blob/ff77c5bd83e41c3ab2b9c55e41a8b7c1fde33a1b/modules/react/common/lib/utils/components.ts#L167)
+utility from the `common` module.
 
-#### Breaking Change
+These components previously supported an `iconRef` prop. In v7, you'll need to use `ref` instead of
+`iconRef`:
 
-This is a breaking change since we've removed `iconRef`. You can now just pass a `ref` to the
-element.
+```tsx
+// v6
+<SystemIcon iconRef={ref} />;
 
-🤖 The codemod will handle all these changes automatically:\
+// v7
+<SystemIcon ref={ref} />;
+```
 
-- `iconRef` becomes `ref`
+🤖 The codemod will update all Icon components that previously supported `iconRef` to use `ref`
+instead.
 
 ---
 
 ### Popper
 
-We removed the `containerElement` prop from Popper component because it's no longer needed with
+We've removed the `containerElement` prop from `Popper` because it's no longer needed with the
 Fullscreen API.
 
 ---
