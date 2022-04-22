@@ -7,7 +7,13 @@ import {Pill} from '../';
 
 describe('Pill', () => {
   it('should render on a server without crashing', () => {
-    const ssrRender = () => renderToString(<Pill>Pill Label</Pill>);
+    const ssrRender = () =>
+      renderToString(
+        <Pill onClick={jest.fn()}>
+          <Pill.Icon />
+          Pill Label
+        </Pill>
+      );
     expect(ssrRender).not.toThrow();
   });
 });

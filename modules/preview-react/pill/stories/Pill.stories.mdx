@@ -1,0 +1,92 @@
+import {Meta} from '@storybook/addon-docs';
+import {Specifications} from '@workday/canvas-kit-docs';
+
+import {Pill} from '@workday/canvas-kit-preview-react/pill';
+
+import {Basic} from './examples/Basic';
+import {ClickablePillWithAvatar} from './examples/WithAvatar';
+import {ClickablePillWithIcon} from './examples/WithIcon';
+import {ClickablePillWithCount} from './examples/WithCount';
+import {RemovablePill} from './examples/Removable';
+import {ListOfPills} from './examples/PillList';
+
+<Meta title="Preview/Pill/React" component={Pill} />
+
+# Canvas Kit Pill
+
+Pills are static or interactive elements that allow users to input, filter, or label information.
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-preview-react
+```
+
+## Usage
+
+Pills are used to visually label objects on a page for quick recognition. They’re offered as both
+static, read-only and interactive elements. They allow users to input a section, filter a list or
+table, or label information to help with scanning and organization.
+
+### Basic
+
+If only text is rendered by the Pill, it will look like a `read only` pill. This is a non
+interactive element that is used to display some information.
+
+<ExampleCodeBlock code={Basic} />
+
+## Pills with Icon, Avatar or Count
+
+All leading elements (icons or avatars) are intended to be descriptive, helping support the label.
+Do not rely on the leading element to indicate the interaction behavior.
+
+You can define an `interactive` Pill by providing an `onClick` prop.
+
+```tsx
+<Pill onClick={() => console.warn('clicked')}>
+  <Pill.Avatar />
+  Regina Skeltor
+</Pill>
+```
+
+<ExampleCodeBlock code={ClickablePillWithAvatar} />
+
+### With Icon
+
+<ExampleCodeBlock code={ClickablePillWithIcon} />
+
+### With Count
+
+The count appears after indicating the action is directly related to the count of that label.
+
+<ExampleCodeBlock code={ClickablePillWithCount} />
+
+## Pills that are removable
+
+Pills that are removable display the X icon following after the label. Removable pills have a
+smaller, more specific focus state and click target to be more intentional about its action and to
+avoid unintended removal of a Pill.
+
+You can define a removable pill by providing an `onDelete` click handler.
+
+```tsx
+<Pill onDelete={() => console.warn('clicked')}>
+  Pink Shirts
+  <Pill.IconButton />
+</Pill>
+```
+
+In this case, we use a `Pill.IconButton` because the `X` becomes the focusable and clickable
+element.
+
+<ExampleCodeBlock code={RemovablePill} />
+
+## Showing a list of Pills
+
+Pills can often represent multiple pieces of information such as a filtered list of categories or
+skills.
+
+In order to achieve this, you can use our `HStack` component to wrap each `Pill` and space it out
+accordingly.
+
+<ExampleCodeBlock code={ListOfPills} />
