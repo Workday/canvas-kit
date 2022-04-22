@@ -4,13 +4,13 @@ import {Meta} from '@storybook/addon-docs';
 
 # Canvas Kit 7.0 Migration Guide
 
-Below are the breaking changes made in Canvas Kit v7. Please
+This guide contains breaking changes made in Canvas Kit v7. Please
 [reach out](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) if you have
-any questions about the update.
+any questions.
 
 - [Codemod](#codemod)
 - [Component Deprecations](#component-deprecations)
-- [Component Promotions](#component-promotion)
+- [Component Promotions](#component-promotions)
 - [Buttons](#buttons)
 - [Segmented Control](#segmented-control)
 - [Side Panel](#side-panel)
@@ -26,7 +26,7 @@ any questions about the update.
 ## Codemod
 
 Please use our [codemod package](https://github.com/Workday/canvas-kit/tree/master/modules/codemod)
-to automatically update your code to work with a majority of the breaking changes in the migration
+to automatically update your code to work with a majority of the breaking changes as you migrate
 from Canvas Kit v6 to v7:
 
 ```sh
@@ -36,18 +36,17 @@ from Canvas Kit v6 to v7:
 > Note: This codemod only works on `.js`, `.jsx`, `.ts`, and `.tsx` extensions. You may need to make
 > some manual changes in other file types (`.json`, `.mdx`, `.md`, etc.).
 
-> Note: You may need to run your linter after executing the codemod, as it's resulting formatting
+> Note: You may need to run your linter after executing the codemod, as its resulting formatting
 > (spacing, quotes, etc.) may not match your project's styling.
 
-**Breaking changes accounted for by this codemod will be marked with a 🤖.**
+**Breaking changes handled by this codemod will be marked with a 🤖.**
 
 **Please verify all changes made by the codemod. As a safety precaution, we recommend committing the
 changes from the codemod as a single isolated commit (separate from other changes) so you can
 rollback more easily if necessary.**
 
 [Let us know](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) if you
-encounter any issues or use cases that we've missed. The `@workday/canvas-kit-codemod` package will
-help us maintain additional codemod transforms to make future migrations easier.
+encounter any issues or use cases that we've missed.
 
 ## Component Deprecations
 
@@ -59,7 +58,7 @@ There are two types of deprecations: soft and hard.
 
 A soft-deprecated component is still available with its full functionality, but it will have been
 renamed with a prefix to indicate its soft-deprecated status. It will also include a console warning
-to announce its deprecation. This warning will only be triggered on the component's initial render.
+announcing its deprecation. This warning will only be triggered on the component's initial render.
 
 Soft-deprecated types and utilities will also be renamed but generally will not trigger a console
 warning.
@@ -67,26 +66,27 @@ warning.
 #### Hard Deprecation
 
 A hard-deprecated component or package is no longer available. You will need to follow the method
-prescribed in our migration guide to update your application. Please reach out to our team directly
-if you need additional help.
+prescribed in our migration guide to update your application. Please
+[reach out](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) to our team
+directly if you need additional help.
 
 ### Cookie Banner
 
-We are [hard deprecating](#hard-deprecation) `CookieBanner`. If you would like to migrate away from
-this deprecated component now, you can reference
-[this example](https://workday.github.io/canvas-kit/?path=/story/examples-cookiebanner-react--basic)
+We are [hard-deprecating](#hard-deprecation) `CookieBanner`. Please reference this
+[example](https://workday.github.io/canvas-kit/?path=/story/examples-cookiebanner-react--basic) if
+you would like to migrate away from `CookieBanner`.
 
 ### Page Header
 
-We are [hard deprecating](#hard-deprecation) `Page Header`. If you would like to migrate away from
-this deprecated component now, you can reference
-[this example](https://workday.github.io/canvas-kit/?path=/story/examples-pageheader-react--basic)
+We are [hard-deprecating](#hard-deprecation) `PageHeader`. Please reference this
+[example](https://workday.github.io/canvas-kit/?path=/story/examples-pageheader-react--basic) if
+you would like to migrate away from `PageHeader`.
 
 ### Header / GlobalHeader
 
-We are [hard deprecating](#hard-deprecation) `Header`. If you would like to migrate away from this
-deprecated component now, you can reference
-[this example](https://workday.github.io/canvas-kit/?path=/story/examples-globalheader-react--basic)
+We are [hard-deprecating](#hard-deprecation) `Header`. Please reference this
+[example](https://workday.github.io/canvas-kit/?path=/story/examples-globalheader-react--basic) if
+you would like to migrate away from `Header`.
 
 ## ActionBar Component Updates
 
@@ -139,7 +139,7 @@ and `TertiaryButton`.
 
 #### Manual Changes
 
-The following changes will not be automatic updated and will require a manual update:
+The following changes will not be automatically updated and will require a manual update:
 
 - Remove `IconButton` variants: `plain`, `square`, and `squareFilled`
 - Remove `IconButtonProps`
@@ -149,11 +149,17 @@ The following changes will not be automatic updated and will require a manual up
 ### Button Mapping
 
 Below is a mapping of V6 `IconButton` variants to their respective V7 buttons and variants. Further
-below is a description of how to manually migrate from unsupported V6 variants. | IconButton variant
-| Button Type | | ------------------ | ------------------------------------ | | `circle` |
-TertiaryButton | | `circleFilled` | SecondaryButton | | `inverse` | TertiButton with variant inverse
-| | `inverseFilled` | SecondaryButton with variant inverse | | `plain` | Not Supporting | | `square`
-| Not Supporting | | `squareFilled` | Not Supporting |
+below is a description of how to manually migrate from unsupported V6 variants.
+
+| IconButton variant | Button Type                          |
+| ------------------ | ------------------------------------ |
+| `circle`           | TertiaryButton                       |
+| `circleFilled`     | SecondaryButton                      |
+| `inverse`          | TertiaryButton with variant inverse  |
+| `inverseFilled`    | SecondaryButton with variant inverse |
+| `plain`            | Not Supporting                       |
+| `square`           | Not Supporting                       |
+| `squareFilled`     | Not Supporting                       |
 
 ### Remove `IconButton` `plain`, `square`, and `squareFilled` Variants
 
@@ -334,7 +340,7 @@ system.
 
 ## Segmented Control
 
-Segmente Control use to work when rendering `IconButton` as children. This has now moved to a
+Segmented Control used to work when rendering `IconButton` as children. This has now moved to a
 compound component and removed the use of `IconButton`.
 
 ### Breaking Change
