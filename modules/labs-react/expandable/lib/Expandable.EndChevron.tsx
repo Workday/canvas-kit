@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {createComponent, styled, useModelContext} from '@workday/canvas-kit-react/common';
-import {space, SystemIcon} from '@workday/canvas-kit-react';
+import {colors, space, SystemIcon} from '@workday/canvas-kit-react';
 import {chevronUpSmallIcon} from '@workday/canvas-system-icons-web';
 import {ExpandableModelContext} from './Expandable';
 import {DisclosureModel} from '@workday/canvas-kit-react/disclosure';
@@ -12,7 +12,8 @@ export interface EndChevronProps {
 
 const StyledIcon = styled(SystemIcon)<{isVisible: boolean}>(
   {
-    padding: space.xxs,
+    padding: space.xxxs,
+    marginLeft: 'auto',
   },
   ({isVisible}) => ({
     transform: !isVisible ? 'rotate(-180deg)' : undefined,
@@ -26,6 +27,13 @@ export const EndChevron = createComponent()({
     const state = expandableModel.state;
     const isVisible = state.visibility === 'visible';
 
-    return <StyledIcon isVisible={isVisible} icon={chevronUpSmallIcon} {...elemProps} />;
+    return (
+      <StyledIcon
+        fill={colors.licorice200}
+        isVisible={isVisible}
+        icon={chevronUpSmallIcon}
+        {...elemProps}
+      />
+    );
   },
 });

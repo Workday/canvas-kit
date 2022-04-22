@@ -7,12 +7,14 @@ import {
   useDisclosureModel,
   DisclosureModelConfig,
 } from '@workday/canvas-kit-react/disclosure';
-import {ExpandableContent} from './ExpandableContent';
-import {ExpandableTarget} from './ExpandableTarget';
-import {StartChevron} from './StartChevron';
-import {EndChevron} from './EndChevron';
-import {Avatar} from '@workday/canvas-kit-react';
-import {Title} from './Title';
+import {ExpandableContent} from './Expandable.Content';
+import {ExpandableTarget} from './Expandable.Target';
+import {StartChevron} from './Expandable.StartChevron';
+import {EndChevron} from './Expandable.EndChevron';
+import {Title} from './Expandable.Title';
+import {ExpandableAvatar} from './Expandable.Avatar';
+import {Box} from '../../common';
+import {space} from '@workday/canvas-kit-react/tokens';
 
 export const ExpandableModelContext = React.createContext<DisclosureModel>({} as any);
 
@@ -21,15 +23,15 @@ export interface ExpandableProps extends DisclosureModelConfig {
   children: React.ReactNode;
 }
 
-const ExpandableAvatar = <Avatar as="div" />;
-
 export const Expandable = createComponent()({
   displayName: 'Expandable',
   Component: ({children, model, ...config}: ExpandableProps) => {
     const value = useDefaultModel(model, config, useDisclosureModel);
 
     return (
-      <ExpandableModelContext.Provider value={value}>{children}</ExpandableModelContext.Provider>
+      <ExpandableModelContext.Provider value={value}>
+        <Box padding={space.xxs}>{children}</Box>
+      </ExpandableModelContext.Provider>
     );
   },
   subComponents: {
@@ -39,6 +41,5 @@ export const Expandable = createComponent()({
     EndChevron: EndChevron,
     Avatar: ExpandableAvatar,
     Title: Title,
-    // MultiLineTitle,
   },
 });

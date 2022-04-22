@@ -1,9 +1,11 @@
 import React from 'react';
 
-import {createComponent, useModelContext} from '@workday/canvas-kit-react/common';
+import {createComponent, styled, useModelContext} from '@workday/canvas-kit-react/common';
 
 import {ExpandableModelContext} from './Expandable';
 import {DisclosureModel} from '@workday/canvas-kit-react/disclosure';
+import {Title} from './Expandable.Title';
+import {space} from '@workday/canvas-kit-react';
 
 export interface ExpandableTargetProps {
   model?: DisclosureModel;
@@ -28,6 +30,16 @@ const useDiscloseTarget = (
   };
 };
 
+const StyledButton = styled('button')({
+  width: '100%',
+  display: 'flex',
+  flexDirection: 'row',
+  alignItems: 'center',
+  border: 'none',
+  background: 'none',
+  padding: space.xxs,
+});
+
 export const ExpandableTarget = createComponent('button')({
   displayName: 'Expandable.Target',
   Component: (
@@ -37,22 +49,25 @@ export const ExpandableTarget = createComponent('button')({
   ) => {
     const expandableModel = useModelContext(ExpandableModelContext, model);
     const target = useDiscloseTarget(expandableModel, elemProps);
-
     const state = expandableModel.state;
     const isVisible = state.visibility === 'visible';
-
     const Heading = headingLevel;
 
     return (
-      <Heading>
-        <Element
+      <Heading style={{margin: 0}}>
+        <StyledButton
           aria-controls={isVisible ? state.id : undefined}
           aria-expanded={isVisible}
           ref={ref}
           {...target}
         >
-          {children}
-        </Element>
+          {React.Children.map(children, (child, index) => {
+            if (typeof child === 'string') {
+              return <Title key={index}>{child}</Title>;
+            }
+            return child;
+          })}
+        </StyledButton>
       </Heading>
     );
   },
