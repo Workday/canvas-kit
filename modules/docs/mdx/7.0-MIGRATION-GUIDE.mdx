@@ -4,24 +4,24 @@ import {Meta} from '@storybook/addon-docs';
 
 # Canvas Kit 7.0 Migration Guide
 
-This guide contains breaking changes made in Canvas Kit v7. Please
+This guide contains breaking changes in Canvas Kit v7. Please
 [reach out](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) if you have
 any questions.
 
 - [Codemod](#codemod)
-- [Component Deprecations](#component-deprecations)
-- [Component Promotions](#component-promotions)
-- [Buttons](#buttons)
-- [Segmented Control](#segmented-control)
-- [Side Panel](#side-panel)
-- [Icons](#icons)
-- [ActionBar Component Updates](#actionbar-component-updates)
-- [Status Indicator Width](#status-indicator-width)
-- [Popup Cards](#popup-cards)
-- [Popper Props Update](#popper-props-update)
-- [Component Promotions](#component-promotion)
-- [Token Updates](#token-updates)
-  - [Depth Tokens](#depth-tokens)
+- [Tokens](#tokens)
+  - [Depth](#depth)
+- [Components](#components)
+  - [Component Deprecations](#component-deprecations)
+  - [Component Promotions](#component-promotions)
+  - [Action Bar](#action-bar)
+  - [Button](#button)
+  - [Icon](#icon)
+  - [Popper](#popper)
+  - [Popup](#popup)
+  - [Segmented Control](#segmented-control)
+  - [Side Panel](#side-panel)
+  - [Status Indicator](#status-indicator)
 
 ## Codemod
 
@@ -48,13 +48,38 @@ rollback more easily if necessary.**
 [Let us know](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) if you
 encounter any issues or use cases that we've missed.
 
-## Component Deprecations
+## Tokens
 
-### Deprecation Types
+### Depth
+
+**Changes:**
+
+- Depth `inset` was removed from token list.
+- Added new depth: `none` (to remove default depth from component), `5` and `6`.
+- Updated all depth values: now depth adds only `box-shadow` with 2 shadows and no border.
+
+Also we changed default depth for the following components:
+
+- Card: Depth 2 → Depth 1
+- Breadcrumbs Dropdown Menu: Depth 2 → Depth 3
+- Menu: Depth 2 → Depth 3
+- Combobox: Depth 1 → Depth 3
+- Popup: Depth 2 → Depth 5
+- Dialog: Depth 2 → Depth 5
+- Color Picker Palette: Depth 2 → Depth 5
+- Toast: Depth 2 → Depth 5
+- Modal: Depth 2 → Depth 6
+- Preview Side Panel (alternate variant): Depth 3 → Depth 6
+
+## Components
+
+### Component Deprecations
+
+#### Deprecation Types
 
 There are two types of deprecations: soft and hard.
 
-#### Soft Deprecation
+##### Soft Deprecation
 
 A soft-deprecated component is still available with its full functionality, but it will have been
 renamed with a prefix to indicate its soft-deprecated status. It will also include a console warning
@@ -63,32 +88,57 @@ announcing its deprecation. This warning will only be triggered on the component
 Soft-deprecated types and utilities will also be renamed but generally will not trigger a console
 warning.
 
-#### Hard Deprecation
+##### Hard Deprecation
 
 A hard-deprecated component or package is no longer available. You will need to follow the method
 prescribed in our migration guide to update your application. Please
 [reach out](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) to our team
 directly if you need additional help.
 
-### Cookie Banner
+#### Cookie Banner
 
 We are [hard-deprecating](#hard-deprecation) `CookieBanner`. Please reference this
 [example](https://workday.github.io/canvas-kit/?path=/story/examples-cookiebanner-react--basic) if
 you would like to migrate away from `CookieBanner`.
 
-### Page Header
+#### Page Header
 
 We are [hard-deprecating](#hard-deprecation) `PageHeader`. Please reference this
-[example](https://workday.github.io/canvas-kit/?path=/story/examples-pageheader-react--basic) if
-you would like to migrate away from `PageHeader`.
+[example](https://workday.github.io/canvas-kit/?path=/story/examples-pageheader-react--basic) if you
+would like to migrate away from `PageHeader`.
 
-### Header / GlobalHeader
+#### Header / Global Header
 
 We are [hard-deprecating](#hard-deprecation) `Header`. Please reference this
 [example](https://workday.github.io/canvas-kit/?path=/story/examples-globalheader-react--basic) if
 you would like to migrate away from `Header`.
 
-## ActionBar Component Updates
+---
+
+### Component Promotions
+
+We've [promoted](https://github.com/Workday/canvas-kit/issues/1395) the following components in v7:
+
+- `Box` from `@workday/canvas-kit-labs/common` to `@workday/canvas-kit-react/layout`
+- `Flex` from `@workday/canvas-kit-labs/layout` to `@workday/canvas-kit-react/layout`
+- `Stack` from `@workday/canvas-kit-labs/layout` to `@workday/canvas-kit-react/layout`
+
+You'll need to update your imports for the promoted components (this is _not_ handled by the
+codemod):
+
+```tsx
+// v6
+import {Box} from '@workday/canvas-kit-labs/common';
+
+// v7
+import {Box} from '@workday/canvas-kit-react/layout';
+```
+
+Note that the APIs for the promoted components remain unchanged.
+
+---
+
+### Action Bar
 
 We've refactored our ActionBar components to simplify logic.
 
@@ -101,25 +151,14 @@ PR: https://github.com/Workday/canvas-kit/pull/1396
 - Now ActionBar uses `position` prop to set container position instead `fixed` prop.
 - Fixed position has been set as default if there is not passed `position` prop.
 
-## Status Indicator Width
+---
 
-Status Indicators currently truncate when they reach their max width of `150px`. After receiving
-requests to increase this, we have upped it by 25% to `200px`.
-
-We've also added a prop (`maxWidth`) to configure this if you need to. While this increases
-flexibility, please keep in mind that status text should be short, direct, and preferably a single
-word.
-
-```tsx
-<StatusIndicator label="Slightly Longer Status" type={StatusIndicator.Type.Gray} maxWidth={250} />
-```
-
-## Buttons
+### Button
 
 To consolidate button APIs, we removed `IconButton` in favor of `PrimaryButton`, `SecondaryButton`
 and `TertiaryButton`.
 
-### Breaking Changes
+#### Breaking Changes
 
 - Removed the `toggled` prop when migrating from `IconButton`
 - Changed the values of `IconPosition: left | right` - > `IconPosition: start | end`
@@ -137,7 +176,7 @@ and `TertiaryButton`.
 - `<IconButton variant='inverseFilled' icon={plusIcon} />` becomes
   `<SecondaryButton variant='inverseFilled' icon={plusIcon} />`
 
-#### Manual Changes
+##### Manual Changes
 
 The following changes will not be automatically updated and will require a manual update:
 
@@ -146,7 +185,7 @@ The following changes will not be automatically updated and will require a manua
 - Remove `IconButton` prop: `toggled`
 - Remove `PrimaryButton` and `SecondaryButton` prop: `dataLabel`
 
-### Button Mapping
+#### Button Mapping
 
 Below is a mapping of V6 `IconButton` variants to their respective V7 buttons and variants. Further
 below is a description of how to manually migrate from unsupported V6 variants.
@@ -161,7 +200,7 @@ below is a description of how to manually migrate from unsupported V6 variants.
 | `square`           | Not Supporting                       |
 | `squareFilled`     | Not Supporting                       |
 
-### Remove `IconButton` `plain`, `square`, and `squareFilled` Variants
+#### Remove `IconButton` `plain`, `square`, and `squareFilled` Variants
 
 As part of simplifying our variants and cleaning up the API, we've removed the variants `square`,
 `squareFilled` and `plain`. We've also removed the prop `toggled`.
@@ -178,7 +217,7 @@ If this button doesn't fit your specific use case, we've introduced a low level
 props, and size of the button. For an example of this being used, you can reference our
 [PageButton component](https://github.com/Workday/canvas-kit/blob/master/modules/react/pagination/lib/Pagination/PageButton.tsx).
 
-### Rendering an icon button
+#### Rendering an icon button
 
 In order to render a icon button, omit any `children` and pass the button an `icon` prop.
 
@@ -207,7 +246,7 @@ You can now render what use to be an `IconButton` using our main buttons.
 <TertiaryButton variant='inverse' icon={plusIcon} />
 ```
 
-### Button sizes
+#### Button sizes
 
 Each button now supports sizes: `extraSmall`, `small`, `medium` and `large` with `medium` being the
 default size.
@@ -219,7 +258,7 @@ default size.
   <PrimaryButton icon={plusIcon} size='large' />
 ```
 
-### Button Icon position
+#### Button Icon position
 
 The prop `iconPosition` which is used to determine which side an icon should be when rendered with
 some text, has been changed. The default is `start`
@@ -271,7 +310,7 @@ v7
 </PrimaryButton>
 ```
 
-### BaseButton Component
+#### BaseButton Component
 
 As part of the restructure of our Buttons, we've created a low level `BaseButton` component. This
 component isn't intended to be used outside of Canvas Kit, but we do export it for very specific use
@@ -338,85 +377,16 @@ system.
 **Disclaimer** We strongly advise consumers not to use this component if possible and to rely on our
 `PrimaryButton`, `SecondaryButton` and `TertiaryButton` when possible.
 
-## Segmented Control
+---
 
-Segmented Control used to work when rendering `IconButton` as children. This has now moved to a
-compound component and removed the use of `IconButton`.
-
-### Breaking Change
-
-`IconButton` is no longer a valid child of segmented control.
-
-🤖 The codemod will handle all these changes automatically:
-
-- `IconButton` becomes `SegmentedControl.Button`
-
-v6
-
-```tsx
-<SegmentedControl value={value} onChange={handleToggle}>
-  <IconButton
-    icon={listViewIcon}
-    value="list-view"
-    aria-label="List View"
-    onClick={e => console.log('Existing IconButton onClick callback')}
-  />
-  <IconButton icon={worksheetsIcon} value="table-view" aria-label="Table View" disabled={true} />
-  <IconButton icon={deviceTabletIcon} value="device-view" aria-label="Device View" />
-  <IconButton icon={percentageIcon} value="percent-view" aria-label="Percent View" />
-</SegmentedControl>
-```
-
-v7
-
-```tsx
-<SegmentedControl value={value} onChange={handleToggle}>
-  <SegmentedControl.Button
-    icon={listViewIcon}
-    value="list-view"
-    aria-label="List View"
-    onClick={e => console.log('Existing IconButton onClick callback')}
-  />
-  <SegmentedControl.Button
-    icon={worksheetsIcon}
-    value="table-view"
-    aria-label="Table View"
-    disabled={true}
-  />
-  <SegmentedControl.Button icon={deviceTabletIcon} value="device-view" aria-label="Device View" />
-  <SegmentedControl.Button icon={percentageIcon} value="percent-view" aria-label="Percent View" />
-</SegmentedControl>
-```
-
-## Side Panel
-
-The `SidePanel` in our `preview` package has now been updated so that the toggle button has a
-tooltip built in. If you currently have a `Tooltip` component wrapping this element, you should
-remove it and provide the appropiate text to the button based on its state.
-
-Two props where added to the `SidePanel.ToggleButton`:
-
-```tsx
-/**
-   * The tooltip text to expand the side panel
-   * @default 'Expand'
-   */
-  tooltipTextExpand?: string;
-  /**
-   * The tooltip text to collapse the side panel
-   * @default 'Collapse'
-   */
-  tooltipTextCollapse?: string;
-```
-
-## Icons
+### Icon
 
 We've updated our lower level icon components such as `AccentIcon`, `AppletIcon`, `Graphic`, `Icon`,
 `Svg`, `SystemIcon`, and `SystemIconCircle` to use our
 [createComponent](https://github.com/Workday/canvas-kit/blob/ff77c5bd83e41c3ab2b9c55e41a8b7c1fde33a1b/modules/react/common/lib/utils/components.ts#L167)
 which allows us to `forwardRef`.
 
-### Breaking Change
+#### Breaking Change
 
 This is a breaking change since we've removed `iconRef`. You can now just pass a `ref` to the
 element.
@@ -425,7 +395,16 @@ element.
 
 - `iconRef` becomes `ref`
 
-## Popup Cards
+---
+
+### Popper
+
+We removed the `containerElement` prop from Popper component because it's no longer needed with
+Fullscreen API.
+
+---
+
+### Popup
 
 `Popup.Card` (this includes `Modal.Card` and `Dialog.Card`) components are now a flexbox container.
 This was done to support overflowing content (by default, the `Popup.Body` component). The idea is
@@ -473,44 +452,92 @@ If your code contains any hacks to make a `Modal` overflow, these hacks should n
 `max-height` of the `Modal.Body` element using calculations. These should be removed. The
 `Popup.Card` now has a max height and the `Popup.Body` height is automatically calculated.
 
-## Popper Props Update
+---
 
-We removed the `containerElement` prop from Popper component because it's no longer needed with
-Fullscreen API.
+### Segmented Control
 
-## Component Promotions
+Segmented Control used to work when rendering `IconButton` as children. This has now moved to a
+compound component and removed the use of `IconButton`.
 
-After some [assessment](https://github.com/Workday/canvas-kit/issues/1395) we've decided to promote
-the following components: `Flex`, `Stack`, `Box` and `Breadcumbs`
+#### Breaking Change
 
-This promotion does not introduce any API changes, we've just changed moved the components to our
-main `react` package.
+`IconButton` is no longer a valid child of segmented control.
 
-**Changes:**
+🤖 The codemod will handle all these changes automatically:
 
-- `Box` was promoted from `@workday/canvas-kit-labs/common` to `@workday/canvas-kit-react/layout`
-- `Flex` was promoted from `@workday/canvas-kit-labs/layout` to `@workday/canvas-kit-react/layout`
-- `Stack` was promoted from `@workday/canvas-kit-labs/layout` to `@workday/canvas-kit-react/layout`
+- `IconButton` becomes `SegmentedControl.Button`
 
-## Token Updates
+v6
 
-### Depth Tokens
+```tsx
+<SegmentedControl value={value} onChange={handleToggle}>
+  <IconButton
+    icon={listViewIcon}
+    value="list-view"
+    aria-label="List View"
+    onClick={e => console.log('Existing IconButton onClick callback')}
+  />
+  <IconButton icon={worksheetsIcon} value="table-view" aria-label="Table View" disabled={true} />
+  <IconButton icon={deviceTabletIcon} value="device-view" aria-label="Device View" />
+  <IconButton icon={percentageIcon} value="percent-view" aria-label="Percent View" />
+</SegmentedControl>
+```
 
-**Changes:**
+v7
 
-- Depth `inset` was removed from token list.
-- Added new depth: `none` (to remove default depth from component), `5` and `6`.
-- Updated all depth values: now depth adds only `box-shadow` with 2 shadows and no border.
+```tsx
+<SegmentedControl value={value} onChange={handleToggle}>
+  <SegmentedControl.Button
+    icon={listViewIcon}
+    value="list-view"
+    aria-label="List View"
+    onClick={e => console.log('Existing IconButton onClick callback')}
+  />
+  <SegmentedControl.Button
+    icon={worksheetsIcon}
+    value="table-view"
+    aria-label="Table View"
+    disabled={true}
+  />
+  <SegmentedControl.Button icon={deviceTabletIcon} value="device-view" aria-label="Device View" />
+  <SegmentedControl.Button icon={percentageIcon} value="percent-view" aria-label="Percent View" />
+</SegmentedControl>
+```
 
-Also we changed default depth for the following components:
+---
 
-- Card: Depth 2 → Depth 1
-- Breadcrumbs Dropdown Menu: Depth 2 → Depth 3
-- Menu: Depth 2 → Depth 3
-- Combobox: Depth 1 → Depth 3
-- Popup: Depth 2 → Depth 5
-- Dialog: Depth 2 → Depth 5
-- Color Picker Palette: Depth 2 → Depth 5
-- Toast: Depth 2 → Depth 5
-- Modal: Depth 2 → Depth 6
-- Preview Side Panel (alternate variant): Depth 3 → Depth 6
+### Side Panel
+
+The `SidePanel` in our `preview` package has now been updated so that the toggle button has a
+tooltip built in. If you currently have a `Tooltip` component wrapping this element, you should
+remove it and provide the appropiate text to the button based on its state.
+
+Two props where added to the `SidePanel.ToggleButton`:
+
+```tsx
+/**
+   * The tooltip text to expand the side panel
+   * @default 'Expand'
+   */
+  tooltipTextExpand?: string;
+  /**
+   * The tooltip text to collapse the side panel
+   * @default 'Collapse'
+   */
+  tooltipTextCollapse?: string;
+```
+
+---
+
+### Status Indicator
+
+Status Indicators currently truncate when they reach their max width of `150px`. After receiving
+requests to increase this, we have upped it by 25% to `200px`.
+
+We've also added a prop (`maxWidth`) to configure this if you need to. While this increases
+flexibility, please keep in mind that status text should be short, direct, and preferably a single
+word.
+
+```tsx
+<StatusIndicator label="Slightly Longer Status" type={StatusIndicator.Type.Gray} maxWidth={250} />
+```
