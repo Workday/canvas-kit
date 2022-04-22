@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v6.8.3](https://github.com/Workday/canvas-kit/releases/tag/v6.8.3) (2022-04-22)
+
+### Codemods
+
+- fix(codemod): Limit specifier renaming to Canvas Kit imports ([#1546](https://github.com/Workday/canvas-kit/pull/1546)) ([@willklein](https://github.com/willklein))
+  Fixed code mods that improperly rename non-Canvas Kit components as well as Canvas Kit sub-components. This typically includes non-Canvas Kit `Header` components and Canvas Kit's `Skeleton.Header` being improperly renamed in the JSX, but solves for all future cases of Canvas Kit component names.
+
+
 ## [v6.8.2](https://github.com/Workday/canvas-kit/releases/tag/v6.8.2) (2022-04-05)
 
 ### Assets
