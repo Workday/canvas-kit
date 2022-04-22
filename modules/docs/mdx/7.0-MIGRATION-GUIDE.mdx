@@ -140,9 +140,7 @@ Note that the APIs for the promoted components remain unchanged.
 
 ### Action Bar
 
-We've refactored our ActionBar components to simplify logic.
-
-PR: https://github.com/Workday/canvas-kit/pull/1396
+We've [refactored `ActionBar`](https://github.com/Workday/canvas-kit/pull/1396) and simplified its logic.
 
 **Changes:**
 
@@ -155,7 +153,7 @@ PR: https://github.com/Workday/canvas-kit/pull/1396
 
 ### Button
 
-To consolidate button APIs, we removed `IconButton` in favor of `PrimaryButton`, `SecondaryButton`
+To consolidate Button APIs, we've removed `IconButton` in favor of `PrimaryButton`, `SecondaryButton`
 and `TertiaryButton`.
 
 #### Breaking Changes
@@ -187,8 +185,8 @@ The following changes will not be automatically updated and will require a manua
 
 #### Button Mapping
 
-Below is a mapping of V6 `IconButton` variants to their respective V7 buttons and variants. Further
-below is a description of how to manually migrate from unsupported V6 variants.
+Below is a mapping of v6 `IconButton` variants to their respective v7 buttons and variants. Further
+below is a description of how to manually migrate from unsupported v6 variants.
 
 | IconButton variant | Button Type                          |
 | ------------------ | ------------------------------------ |
@@ -221,17 +219,11 @@ props, and size of the button. For an example of this being used, you can refere
 
 In order to render a icon button, omit any `children` and pass the button an `icon` prop.
 
-Example
-
-v6
-
 ```tsx
+// v6
 <IconButton variant="circleFilled" icon={plusIcon} />
-```
 
-v7
-
-```tsx
+// v7
 <SecondaryButton icon={plusIcon} />
 ```
 
@@ -263,15 +255,11 @@ default size.
 The prop `iconPosition` which is used to determine which side an icon should be when rendered with
 some text, has been changed. The default is `start`
 
-v6
-
 ```tsx
+// v6
 iconPosition: 'left' | 'right';
-```
 
-v7
-
-```tsx
+// v7
 iconPosition: 'start' | 'end';
 ```
 
@@ -284,15 +272,11 @@ The `dataLabel` prop has been removed from our Buttons in v7 in order to simplif
 _Note:_ The codemod will not remove this prop since use of this prop varies. If you'd like to still
 have a similar effect, below is an example of how to achieve this.
 
-v6
-
 ```tsx
+// v6
 <PrimaryButton dataLabel="1:00">Time</PrimaryButton>
-```
 
-v7
-
-```tsx
+// v7
 <PrimaryButton>
   Time
   <span
@@ -467,9 +451,8 @@ compound component and removed the use of `IconButton`.
 
 - `IconButton` becomes `SegmentedControl.Button`
 
-v6
-
 ```tsx
+// v6
 <SegmentedControl value={value} onChange={handleToggle}>
   <IconButton
     icon={listViewIcon}
@@ -481,11 +464,8 @@ v6
   <IconButton icon={deviceTabletIcon} value="device-view" aria-label="Device View" />
   <IconButton icon={percentageIcon} value="percent-view" aria-label="Percent View" />
 </SegmentedControl>
-```
 
-v7
-
-```tsx
+// v7
 <SegmentedControl value={value} onChange={handleToggle}>
   <SegmentedControl.Button
     icon={listViewIcon}
