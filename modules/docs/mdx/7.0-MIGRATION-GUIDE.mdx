@@ -26,8 +26,8 @@ any questions.
 ## Codemod
 
 Please use our [codemod package](https://github.com/Workday/canvas-kit/tree/master/modules/codemod)
-to automatically update your code to work with a majority of the breaking changes as you migrate
-from Canvas Kit v6 to v7:
+to automatically update your code to work with many of the breaking changes as you migrate from
+Canvas Kit v6 to v7:
 
 ```sh
 > npx @workday/canvas-kit-codemod v7 [path]
@@ -54,22 +54,22 @@ encounter any issues or use cases that we've missed.
 
 **Changes:**
 
-- Depth `inset` was removed from token list.
-- Added new depth: `none` (to remove default depth from component), `5` and `6`.
-- Updated all depth values: now depth adds only `box-shadow` with 2 shadows and no border.
+- Removed `inset` depth
+- Added new depth values: `none` (to remove the default depth from a component), `5` and `6`
+- Updated all depth values: depth now adds only `box-shadow` with two shadows and no border
 
-Also we changed default depth for the following components:
+We've also changed the default depth for the following components:
 
+- Breadcrumbs (Dropdown Menu): Depth 2 → Depth 3
 - Card: Depth 2 → Depth 1
-- Breadcrumbs Dropdown Menu: Depth 2 → Depth 3
-- Menu: Depth 2 → Depth 3
+- Color Picker (Palette): Depth 2 → Depth 5
 - Combobox: Depth 1 → Depth 3
-- Popup: Depth 2 → Depth 5
 - Dialog: Depth 2 → Depth 5
-- Color Picker Palette: Depth 2 → Depth 5
-- Toast: Depth 2 → Depth 5
+- Menu: Depth 2 → Depth 3
 - Modal: Depth 2 → Depth 6
-- Preview Side Panel (alternate variant): Depth 3 → Depth 5
+- Popup: Depth 2 → Depth 5
+- Side Panel (Preview, alternate variant): Depth 3 → Depth 5
+- Toast: Depth 2 → Depth 5
 
 ## Components
 
@@ -396,19 +396,17 @@ Fullscreen API.
 
 ### Popup
 
-`Popup.Card` (this includes `Modal.Card` and `Dialog.Card`) components are now a flexbox container.
-This was done to support overflowing content (by default, the `Popup.Body` component). The idea is
-the card is a vertical flexbox container and the `Popup.Heading`, `Popup.Body`, and any other
-children are flex items. The `Popup.Body` now has an `overflow-y: auto` on it to naturally allow the
-body content to overflow in a scroll container. This is a breaking change if your `Popup`, `Modal`,
-or `Dialog` doesn't work with a flexbox with `flex-direction: column`. In most cases, this shouldn't
-matter. If this change does cause your popup to display correctly, you may need to play around with
-flex item containers.
+`Popup.Card` components (this includes `Modal.Card` and `Dialog.Card`) are now flexbox containers.
+This was done to support overflowing content (by default, the `Popup.Body` component). The card is a
+vertical flexbox container and `Popup.Heading`, `Popup.Body`, and any other children are flex items.
+`Popup.Body` now has `overflow-y: auto` to naturally allow the body content to overflow in a scroll
+container. This is a breaking change if your `Popup`, `Modal`, or `Dialog` doesn't work with a
+flexbox with `flex-direction: column`. In most cases, this shouldn't matter. If this change does
+cause your popup to display incorrectly, you may need to play around with flex item containers.
 
-An example where this might break:
-
-A common Modal has a heading, body, and footer (Cancel/Submit buttons). If the Cancel and Submit
-buttons are direct children of the `Modal.Card` like the following:
+Here's an example of where your current implementation might break. A common `Modal` has a heading,
+body, and footer (Cancel/Submit buttons). If the Cancel and Submit buttons are direct children of
+the `Modal.Card` like the following...
 
 ```tsx
 <Modal.Card>
@@ -419,11 +417,11 @@ buttons are direct children of the `Modal.Card` like the following:
 </Modal.Card>
 ```
 
-The buttons will become vertical flex items instead of the default which is displaying inline-block.
-Before, the buttons would layout next to each other horizontally. After, the buttons will stack
-vertically. To fix this, you'll have to add another element to be a flex item from the `Modal.Card`.
-Our examples use `HStack` to align the buttons. The following will render correctly after this
-change:
+...the buttons will become vertical flex items instead of the default which is displaying
+inline-block. Before v7, the buttons would layout next to each other horizontally. In v7, the
+buttons will stack vertically. To fix this, you'll need to add another element as a flex item in the
+`Modal.Card`. Our examples use `HStack` to align the buttons. The following will render correctly
+after this change:
 
 ```tsx
 <Modal.Card>
@@ -436,10 +434,10 @@ change:
 </Modal.Card>
 ```
 
-If your code contains any hacks to make a `Modal` overflow, these hacks should now be removed.
+If your code contains any hacks to make a `Modal` overflow, those hacks should now be removed.
 [This example shows how body content overflows](https://workday.github.io/canvas-kit/?path=/docs/components-popups-modal-react--body-overflow)
-(you may have to limit your browser height to see the overflow). Before you had to manually set the
-`max-height` of the `Modal.Body` element using calculations. These should be removed. The
+(you may have to limit your browser height to see the overflow). Before v7, you had to manually set
+the `max-height` of the `Modal.Body` element using calculations. These should now be removed. The
 `Popup.Card` now has a max height and the `Popup.Body` height is automatically calculated.
 
 ---
@@ -494,23 +492,22 @@ compound component and removed the use of `IconButton`.
 
 ### Side Panel
 
-The `SidePanel` in our `preview` package has now been updated so that the toggle button has a
-tooltip built in. If you currently have a `Tooltip` component wrapping this element, you should
-remove it and provide the appropiate text to the button based on its state.
-
-Two props where added to the `SidePanel.ToggleButton`:
+The `SidePanel` in our Preview package now has a tooltip built in to its toggle button. If you
+currently have a `Tooltip` component wrapping this component, you should remove it. Instead, you'll
+need to provide the appropriate tooltip text to the button based on its state using the following
+new props added to `SidePanel.ToggleButton`:
 
 ```tsx
 /**
-   * The tooltip text to expand the side panel
-   * @default 'Expand'
-   */
-  tooltipTextExpand?: string;
-  /**
-   * The tooltip text to collapse the side panel
-   * @default 'Collapse'
-   */
-  tooltipTextCollapse?: string;
+ * The tooltip text to expand the side panel
+ * @default 'Expand'
+ */
+tooltipTextExpand?: string;
+/**
+ * The tooltip text to collapse the side panel
+ * @default 'Collapse'
+ */
+tooltipTextCollapse?: string;
 ```
 
 ---
@@ -518,11 +515,11 @@ Two props where added to the `SidePanel.ToggleButton`:
 ### Status Indicator
 
 Status Indicators currently truncate when they reach their max width of `150px`. After receiving
-requests to increase this, we have upped it by 25% to `200px`.
+requests to increase this value, we've increased it by 33% to `200px`.
 
-We've also added a prop (`maxWidth`) to configure this if you need to. While this increases
-flexibility, please keep in mind that status text should be short, direct, and preferably a single
-word.
+We've also added a `maxWidth` prop to further configure this value if necessary. While this
+increases flexibility, please keep in mind that status text should be short, direct, and preferably
+a single word.
 
 ```tsx
 <StatusIndicator label="Slightly Longer Status" type={StatusIndicator.Type.Gray} maxWidth={250} />
