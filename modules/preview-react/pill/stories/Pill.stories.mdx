@@ -33,6 +33,9 @@ table, or label information to help with scanning and organization.
 If only text is rendered by the Pill, it will look like a `read only` pill. This is a non
 interactive element that is used to display some information.
 
+> **_NOTE:_** By default, the Pill's width will max out at `200px` and the text will overflow into a
+> tooltip. This max width can be changed by providing a `maxWidth` prop on the pill.
+
 <ExampleCodeBlock code={Basic} />
 
 ## Pills with Icon, Avatar or Count
@@ -53,6 +56,9 @@ You can define an `interactive` Pill by providing an `onClick` prop.
 
 ### With Icon
 
+> **_NOTE:_** The `Pill.Icon` icon will default to rendering a `plusIcon`. You can change this by
+> providing a `icon` prop to `Pill.Icon`
+
 <ExampleCodeBlock code={ClickablePillWithIcon} />
 
 ### With Count
@@ -63,7 +69,7 @@ The count appears after indicating the action is directly related to the count o
 
 ## Pills that are removable
 
-Pills that are removable display the X icon following after the label. Removable pills have a
+Pills that are removable display the `X` icon following after the label. Removable pills have a
 smaller, more specific focus state and click target to be more intentional about its action and to
 avoid unintended removal of a Pill.
 
@@ -78,6 +84,9 @@ You can define a removable pill by providing an `onDelete` click handler.
 
 In this case, we use a `Pill.IconButton` because the `X` becomes the focusable and clickable
 element.
+
+> **_NOTE:_** The default icon for `Pill.IconButton` is `xSmallIcon` but this can also be
+> overwritten by passing an `icon` prop to `Pill.IconButton`
 
 <ExampleCodeBlock code={RemovablePill} />
 
@@ -125,3 +134,35 @@ that has a smaller click target to prevent users from accidentally delete someth
 ```
 
 <ArgsTable of={Pill} />
+
+### Pill Avatar
+
+This component renders an avatar but you can still pass it avatar props
+
+<ArgsTable of={Pill.Avatar} />
+
+### Pill Count
+
+This component renders the count. The `child` element is what gets rendered as the count.
+
+<ArgsTable of={Pill.Count} />
+
+### Pill Icon
+
+This component renders an `icon`. This component is used when an `onClick` is provided.
+
+<ArgsTable of={Pill.Icon} />
+
+### Pill IconButton
+
+This component renders a `icon button`. This is used for `removable` Pills so that the click target
+and focus area is soley the icon.
+
+<ArgsTable of={Pill.IconButton} />
+
+### Pill Label
+
+This component renders a `span` that automatically handles overflow and rendering a tooltip. There's
+no need to use this component directly since the overflow is handle for you automatically.
+
+<ArgsTable of={Pill.Label} />

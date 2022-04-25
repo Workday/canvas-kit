@@ -2,6 +2,9 @@ import {createEventMap, Model, ToModelConfig, useEventMap} from '@workday/canvas
 
 type PillState = {
   maxWidth?: number | string;
+  /**
+   * Use to determine if a pill is of type `button` and pass the click event to the semantic button element
+   */
   onClick?: () => void | undefined;
   onDelete?: () => void | undefined;
   disabled?: boolean;
@@ -17,6 +20,9 @@ const pillEventMap = createEventMap<PillEvents>()({
 });
 
 export type PillModelConfig = {
+  /**
+   * Use to determine if a pill is of type `button` and pass the click event to the semantic button element
+   */
   onClick?: () => void | undefined;
   onDelete?: () => void | undefined;
   maxWidth?: number | string;
