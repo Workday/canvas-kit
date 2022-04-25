@@ -7,12 +7,12 @@ import {
   useIsRTL,
   useModelContext,
 } from '@workday/canvas-kit-react/common';
-import {colors, space, SystemIcon} from '@workday/canvas-kit-react';
+import {colors, space, SystemIcon, SystemIconProps} from '@workday/canvas-kit-react';
 import {chevronDownSmallIcon} from '@workday/canvas-system-icons-web';
 import {ExpandableModelContext} from './Expandable';
 import {DisclosureModel} from '@workday/canvas-kit-react/disclosure';
 
-export interface StartChevronProps {
+export interface StartChevronProps extends Omit<SystemIconProps, 'icon'> {
   model?: DisclosureModel;
 }
 

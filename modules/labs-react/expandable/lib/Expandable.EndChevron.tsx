@@ -6,12 +6,12 @@ import {
   StyledType,
   useModelContext,
 } from '@workday/canvas-kit-react/common';
-import {colors, space, SystemIcon} from '@workday/canvas-kit-react';
+import {colors, space, SystemIcon, SystemIconProps} from '@workday/canvas-kit-react';
 import {chevronUpSmallIcon} from '@workday/canvas-system-icons-web';
 import {ExpandableModelContext} from './Expandable';
 import {DisclosureModel} from '@workday/canvas-kit-react/disclosure';
 
-export interface EndChevronProps {
+export interface EndChevronProps extends Omit<SystemIconProps, 'icon'> {
   model?: DisclosureModel;
 }
 

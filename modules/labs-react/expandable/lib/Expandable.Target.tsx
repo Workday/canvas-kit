@@ -2,6 +2,8 @@ import React from 'react';
 
 import {
   createComponent,
+  focusRing,
+  hideMouseFocus,
   styled,
   StyledType,
   useModelContext,
@@ -10,7 +12,7 @@ import {
 import {ExpandableModelContext} from './Expandable';
 import {DisclosureModel} from '@workday/canvas-kit-react/disclosure';
 import {Title} from './Expandable.Title';
-import {space} from '@workday/canvas-kit-react';
+import {colors, space} from '@workday/canvas-kit-react';
 
 export interface ExpandableTargetProps {
   model?: DisclosureModel;
@@ -35,20 +37,23 @@ const useDiscloseTarget = (
   };
 };
 
-const StyledButton = styled('button')<{isVisible: boolean} & StyledType>(
-  {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    border: 'none',
-    background: 'none',
-    padding: space.xxs,
-    width: '100%',
+const StyledButton = styled('button')<StyledType>({
+  display: 'flex',
+  flexDirection: 'row',
+  alignItems: 'center',
+  border: 'none',
+  background: 'none',
+  padding: space.xxs,
+  width: '100%',
+  borderRadius: space.xxxs,
+  '&:focus': {
+    ...focusRing(),
   },
-  ({isVisible}) => ({
-    paddingBottom: isVisible ? space.s : space.xxs,
-  })
-);
+  '&:hover': {
+    background: colors.soap300,
+  },
+  ...hideMouseFocus,
+});
 
 export const ExpandableTarget = createComponent('button')({
   displayName: 'Expandable.Target',
@@ -64,12 +69,11 @@ export const ExpandableTarget = createComponent('button')({
     const Heading = headingLevel;
 
     return (
-      <Heading style={{margin: 0}}>
+      <Heading style={{margin: 0, paddingBottom: isVisible ? space.s : space.xxs}}>
         <StyledButton
           as={Element}
           aria-controls={isVisible ? state.id : undefined}
           aria-expanded={isVisible}
-          isVisible={isVisible}
           ref={ref}
           {...target}
         >

@@ -23,7 +23,7 @@ export interface ExpandableProps extends DisclosureModelConfig, FlexProps {
   children: React.ReactNode;
 }
 
-export const Expandable = createComponent('span')({
+export const Expandable = createComponent('div')({
   displayName: 'Expandable',
   Component: ({children, model, ...elemProps}: ExpandableProps, Element) => {
     const config = elemProps as DisclosureModelConfig;
