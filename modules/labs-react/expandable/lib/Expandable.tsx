@@ -13,24 +13,27 @@ import {StartChevron} from './Expandable.StartChevron';
 import {EndChevron} from './Expandable.EndChevron';
 import {Title} from './Expandable.Title';
 import {ExpandableAvatar} from './Expandable.Avatar';
-import {Box} from '../../common';
 import {space} from '@workday/canvas-kit-react/tokens';
+import {Flex, FlexProps} from '@workday/canvas-kit-react/layout';
 
 export const ExpandableModelContext = React.createContext<DisclosureModel>({} as any);
 
-export interface ExpandableProps extends DisclosureModelConfig {
+export interface ExpandableProps extends DisclosureModelConfig, FlexProps {
   model?: DisclosureModel;
   children: React.ReactNode;
 }
 
-export const Expandable = createComponent()({
+export const Expandable = createComponent('span')({
   displayName: 'Expandable',
-  Component: ({children, model, ...config}: ExpandableProps) => {
+  Component: ({children, model, ...elemProps}: ExpandableProps, Element) => {
+    const config = elemProps as DisclosureModelConfig;
     const value = useDefaultModel(model, config, useDisclosureModel);
-
+    const flexProps = elemProps as FlexProps;
     return (
       <ExpandableModelContext.Provider value={value}>
-        <Box padding={space.xxs}>{children}</Box>
+        <Flex {...flexProps} flexDirection={'column'} padding={space.xxs}>
+          {children}
+        </Flex>
       </ExpandableModelContext.Provider>
     );
   },

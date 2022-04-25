@@ -1,6 +1,11 @@
 import React from 'react';
 
-import {createComponent, styled, useModelContext} from '@workday/canvas-kit-react/common';
+import {
+  createComponent,
+  styled,
+  StyledType,
+  useModelContext,
+} from '@workday/canvas-kit-react/common';
 
 import {ExpandableModelContext} from './Expandable';
 import {DisclosureModel} from '@workday/canvas-kit-react/disclosure';
@@ -30,15 +35,20 @@ const useDiscloseTarget = (
   };
 };
 
-const StyledButton = styled('button')({
-  width: '100%',
-  display: 'flex',
-  flexDirection: 'row',
-  alignItems: 'center',
-  border: 'none',
-  background: 'none',
-  padding: space.xxs,
-});
+const StyledButton = styled('button')<{isVisible: boolean} & StyledType>(
+  {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    border: 'none',
+    background: 'none',
+    padding: space.xxs,
+    width: '100%',
+  },
+  ({isVisible}) => ({
+    paddingBottom: isVisible ? space.s : space.xxs,
+  })
+);
 
 export const ExpandableTarget = createComponent('button')({
   displayName: 'Expandable.Target',
@@ -56,8 +66,10 @@ export const ExpandableTarget = createComponent('button')({
     return (
       <Heading style={{margin: 0}}>
         <StyledButton
+          as={Element}
           aria-controls={isVisible ? state.id : undefined}
           aria-expanded={isVisible}
+          isVisible={isVisible}
           ref={ref}
           {...target}
         >

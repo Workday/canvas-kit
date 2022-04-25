@@ -4,7 +4,7 @@ import {createComponent, styled} from '@workday/canvas-kit-react/common';
 import {colors, type} from '@workday/canvas-kit-react';
 
 export interface TitleProps {
-  children?: React.ReactNode;
+  children: React.ReactNode;
 }
 
 const StyledTitle = styled('div')({

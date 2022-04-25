@@ -14,23 +14,87 @@ yarn add @workday/canvas-kit-labs-react
 
 ## Usage
 
+### Basic Example
+
 ```tsx
 import * as React from 'react';
 import {Expandable} from '@workday/canvas-kit-labs-react/expandable';
 
-<Expandable />;
+<Expandable>
+  <Expandable.Target headingLevel="h1">
+    <Expandable.StartChevron />
+    Additional Information
+  </Expandable.Target>
+  <Expandable.Content>Content</Expandable.Content>
+</Expandable>;
 ```
 
-## Static Properties
+## Components
 
-> None
+### Expandable
 
-## Component Props
+#### Component Props
 
-### Required
+##### Required
 
-> None
+> children
 
-### Optional
+##### Optional
 
-> None
+> model
+
+### Expandable.Target
+
+#### Component Props
+
+##### Required
+
+> headingLevel children
+
+##### Optional
+
+> model
+
+### Expandable.Title
+
+#### Component Props
+
+##### Required
+
+> children
+
+### Expandable.StartChevron
+
+#### Component Props
+
+##### Optional
+
+> model
+
+### Expandable.EndChevron
+
+#### Component Props
+
+##### Optional
+
+> model
+
+### Expandable.Avatar
+
+#### Component Props
+
+##### Optional
+
+> AvatarProps
+
+### Expandable.Content
+
+#### Component Props
+
+##### Required
+
+> children
+
+##### Optional
+
+> model
