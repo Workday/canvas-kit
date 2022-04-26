@@ -140,21 +140,19 @@ Note that the APIs for the promoted components remain unchanged.
 
 ### Action Bar
 
-We've [refactored `ActionBar`](https://github.com/Workday/canvas-kit/pull/1396) and simplified its
-logic.
+`ActionBar` is now a
+[compound component](/getting-started/for-developers/resources/compound-components/).
 
-**Changes:**
+We've removed the `fixed` prop from `ActionBar`. It now uses the `position` prop (defaults to
+`fixed`) to set the container position.
 
-- Component has been converted to compound component.
-- `fixed` prop has been removed from component.
-- Now ActionBar uses `position` prop to set container position instead `fixed` prop.
-- Fixed position has been set as default if there is not passed `position` prop.
+🤖 The codemod will remove uses of the `fixed` prop from `ActionBar`.
 
 ---
 
 ### Button
 
-#### Removal of IconButton
+#### Removal of Icon Button
 
 To consolidate Button APIs, we've removed `IconButton` in favor of `SecondaryButton` and
 `TertiaryButton`. The following table shows how `IconButton` variants in v6 map to their
@@ -190,33 +188,36 @@ v7:
 <SecondaryButton variant="inverse" icon={plusIcon} />
 ```
 
+##### Unsupported IconButton Variants
+
+In order to simplify our API, we no longer support the `plain`, `square`, and `squareFilled`
+variants from `IconButton`.
+
+`square`, `squareFilled` and `plain` `IconButton` components should be transitioned to the new
+icon-only versions of the `Button` components (`PrimaryButton`, `SecondaryButton`, and
+`TertiaryButton`), `ToolbarIconButton`, or `SegmentedControl`. You may use `ToolbarIconButton` if
+you would still like to have a square icon.
+
+These changes are **not** handled by the codemod.
+
+> If none of these options support your use case, we've introduced a low-level
+> [`BaseButton`](#basebutton) component which allows you to modify the colors, props, and size of
+> the button. For an example of it being used, reference our
+> [`PageButton`](https://github.com/Workday/canvas-kit/blob/master/modules/react/pagination/lib/Pagination/PageButton.tsx)
+> component.
+
 ##### Removal of IconButtonProps
 
 The `IconButtonProps` interface no longer exists now that `IconButton` has been removed.
 
 This change is **not** handled by the codemod.
 
-##### Unsupported IconButton Variants
+##### Toggled
 
-In order to simplify our API, we no longer support the `plain`, `square`, and `squareFilled`
-variants from `IconButton`. We also no longer support the `toggled` prop from `IconButton`.
+There is no equivalent to the `IconButton` `toggled` prop in `SecondaryButton` and `TertiaryButton`.
+If you wish to render a button with a toggled state, consider using `ToolbarIconButton`.
 
-`square`, `squareFilled` and `plain` `IconButton` components should be transitioned to the new
-icon-only versions of the `Button` components (`PrimaryButton`, `SecondaryButton`, and
-`TertiaryButton`), `ToolbarIconButton`, or `SegmentedControl`.
-
-Note that you may use
-[`ToolbarIconButton`](https://workday.github.io/canvas-kit/?path=/docs/components-buttons-button-react-toolbar--toolbar-icon-button)
-if you would still like to have a squared icon. `ToolbarIconButton` also supports the `toggled`
-prop.
-
-These changes are **not** handled by the codemod.
-
-> If none of these options support your use case, we've introduced a low-level
-> [`BaseButton`](#basebutton-component) component which allows you to modify the colors, props, and
-> size of the button. For an example of it being used, reference our
-> [`PageButton`](https://github.com/Workday/canvas-kit/blob/master/modules/react/pagination/lib/Pagination/PageButton.tsx)
-> component.
+This change is **not** handled by the codemod.
 
 #### Icon Position
 
@@ -232,7 +233,7 @@ iconPosition: 'left' | 'right';
 iconPosition: 'start' | 'end';
 ```
 
-🤖 The codemod will automatically map `left` to `start` and `right` to `end`.
+🤖 The codemod will map `left` to `start` and `right` to `end` for all uses of `iconPosition`.
 
 `iconPosition` will have no effect if you're rendering a button with only an icon and no text.
 
@@ -269,25 +270,28 @@ return (
 
 #### Sizes
 
-Each button now supports sizes: `extraSmall`, `small`, `medium` and `large` with `medium` being the
-default size.
+Each `Button` now supports the following sizes: `extraSmall`, `small`, `medium` and `large`
+(defaults to `medium`).
 
 ```tsx
-  <PrimaryButton icon={plusIcon} size='extraSmall' />
-  <PrimaryButton icon={plusIcon} size='small' />
-  <PrimaryButton icon={plusIcon} size='medium' /> // default
-  <PrimaryButton icon={plusIcon} size='large' />
+  <PrimaryButton icon={plusIcon} size="extraSmall" />
+  <PrimaryButton icon={plusIcon} size="small" />
+  <PrimaryButton icon={plusIcon} size="medium" /> // default
+  <PrimaryButton icon={plusIcon} size="large" />
 ```
 
-#### BaseButton Component
+#### BaseButton
 
-As part of the restructure of our Buttons, we've created a low level `BaseButton` component. This
+> **Disclaimer**: We **strongly** advise consumers **not** to use `BaseButton` and to instead rely
+> on `PrimaryButton`, `SecondaryButton` and `TertiaryButton` whenever possible. `BaseButton` is
+> strictly provided as a last resort if no other option is available for your use case.
+
+As part of our Button restructuring, we've created a low level `BaseButton` component. This
 component isn't intended to be used outside of Canvas Kit, but we do export it for very specific use
-cases which we'll outline below. The `BaseButton` is a styled `button` element which extends our
-style properties which allow us to customize a buttons `colors`, `padding`, `width` and other style
-properties.
+cases. `BaseButton` is a styled `<button>` element which supports style properties such as `colors`,
+`padding`, and `width` among many others.
 
-Basic example:
+Here's an example:
 
 ```tsx
 import * as React from 'react';
@@ -338,13 +342,10 @@ export const BasicButton = ({children, ...elemProps}: BasicButtonProps) => {
 };
 ```
 
-**Note:** Under the hood, `BaseButton` uses our `Box` component which allows `BaseButton` to accept
-style properties. Because of the flexibility of this component, consumers can use this to create
-toggled buttons or a specific button that doesn't fall under the main use case you see in our design
-system.
-
-**Disclaimer** We strongly advise consumers not to use this component if possible and to rely on our
-`PrimaryButton`, `SecondaryButton` and `TertiaryButton` when possible.
+`BaseButton` uses our `Box` component under the hood, which allows it to accept a variety of style
+properties. Because of the flexibility of this component, consumers can use it to create toggled
+buttons or other buttons that don't fall under the use cases supported by our standard `Button`
+components.
 
 ---
 
@@ -404,8 +405,7 @@ the `Modal.Card` like the following...
 ...the buttons will become vertical flex items instead of the default which is displaying
 inline-block. Before v7, the buttons would layout next to each other horizontally. In v7, the
 buttons will stack vertically. To fix this, you'll need to add another element as a flex item in the
-`Modal.Card`. Our examples use `HStack` to align the buttons. The following will render correctly
-after this change:
+`Modal.Card`. The following example uses `HStack` to achieve the desired horizontal layout:
 
 ```tsx
 <Modal.Card>
@@ -428,16 +428,11 @@ the `max-height` of the `Modal.Body` element using calculations. These should no
 
 ### Segmented Control
 
-Segmented Control used to work when rendering `IconButton` as children. This has now moved to a
-compound component and removed the use of `IconButton`.
+`SegmentedControl` is now a
+[compound component](/getting-started/for-developers/resources/compound-components/).
 
-#### Breaking Change
-
-`IconButton` is no longer a valid child of segmented control.
-
-🤖 The codemod will handle all these changes automatically:
-
-- `IconButton` becomes `SegmentedControl.Button`
+Given the [removal of `IconButton`](#removal-of-icon-button) in v7, you'll now need to use
+`SegmentedControl.Button` instead.
 
 ```tsx
 // v6
@@ -471,6 +466,9 @@ compound component and removed the use of `IconButton`.
   <SegmentedControl.Button icon={percentageIcon} value="percent-view" aria-label="Percent View" />
 </SegmentedControl>
 ```
+
+🤖 The codemod will replace all `IconButton` children of `SegmentedControl` with
+`SegmentedControl.Button`.
 
 ---
 
