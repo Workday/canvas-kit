@@ -25,8 +25,8 @@ yarn add @workday/canvas-kit-preview-react
 ## Usage
 
 Pills are used to visually label objects on a page for quick recognition. They’re offered as both
-static, read-only and interactive elements. They allow users to input a section, filter a list or
-table, or label information to help with scanning and organization.
+static (read-only) and interactive elements. They allow users to filter a list or table, or label
+information to help with scanning and organization.
 
 ### Basic Example
 
@@ -38,7 +38,7 @@ that is used to display information.
 
 <ExampleCodeBlock code={Basic} />
 
-## Pills with Icon, Avatar or Count
+### Interactive Pills
 
 All leading elements (icons or avatars) are intended to be descriptive, helping support the label.
 Do not rely on the leading element to indicate the interaction behavior.
@@ -52,22 +52,27 @@ You can define an interactive Pill by providing an `onClick` prop.
 </Pill>
 ```
 
+#### Avatar
+
+The Avatar should appear before the text of a Pill. You have access to all Avatar props.
+
 <ExampleCodeBlock code={ClickablePillWithAvatar} />
 
-### With Icon
+#### Icon
 
-> **_NOTE:_** The `Pill.Icon` icon will default to rendering a `plusIcon`. You can change this by
-> providing a `icon` prop to `Pill.Icon`
+The `Pill.Icon` icon will default to rendering a `plusIcon`. You can change this by providing a
+`icon` prop to `Pill.Icon`
 
 <ExampleCodeBlock code={ClickablePillWithIcon} />
 
-### With Count
+#### Count
 
-The count appears after indicating the action is directly related to the count of that label.
+The count appears after the label. It is usually associate to the label. If you have a category, the
+count will dirrectly correlate to that category.
 
 <ExampleCodeBlock code={ClickablePillWithCount} />
 
-## Pills that are removable
+### Removable Pills
 
 Pills that are removable display the `X` icon following after the label. Removable pills have a
 smaller, more specific focus state and click target to be more intentional about its action and to
@@ -85,12 +90,12 @@ You can define a removable pill by providing an `onDelete` click handler.
 In this case, we use a `Pill.IconButton` because the `X` becomes the focusable and clickable
 element.
 
-> **_NOTE:_** The default icon for `Pill.IconButton` is `xSmallIcon` but this can also be
-> overwritten by passing an `icon` prop to `Pill.IconButton`
+The default icon for `Pill.IconButton` is `xSmallIcon` but this can also be overwritten by passing
+an `icon` prop to `Pill.IconButton`
 
 <ExampleCodeBlock code={RemovablePill} />
 
-## Showing a list of Pills
+### List of Pills
 
 Pills can often represent multiple pieces of information such as a filtered list of categories or
 skills.
@@ -107,6 +112,8 @@ accordingly.
 This component is the container component for a Pill. It also provides a React Context model for its
 sub components. If you give this component a `string` as its children, it will render a read only
 pill.
+
+#### Usage
 
 Example of read only:
 
@@ -135,32 +142,32 @@ that has a smaller click target to prevent users from accidentally delete someth
 
 <ArgsTable of={Pill} />
 
-### Pill Avatar
+### Pill.Avatar
 
 This component renders an avatar but you can still pass it avatar props
 
 <ArgsTable of={Pill.Avatar} />
 
-### Pill Count
+### Pill.Count
 
 This component renders its `children` as the count.
 
 <ArgsTable of={Pill.Count} />
 
-### Pill Icon
+### Pill.Icon
 
-This component renders an `icon`. This component is used when an `onClick` is provided.
+This component renders an `icon`. This component should only be used when an `onClick` is provided.
 
 <ArgsTable of={Pill.Icon} />
 
-### Pill IconButton
+### Pill.IconButton
 
 This component renders an icon button. This is used for removable Pills where the click target and
 focus area is solely the icon.
 
 <ArgsTable of={Pill.IconButton} />
 
-### Pill Label
+### Pill.Label
 
 This component renders a `span` that automatically handles overflow and rendering a tooltip. There's
 no need to use this component directly since the overflow is handle for you automatically.
