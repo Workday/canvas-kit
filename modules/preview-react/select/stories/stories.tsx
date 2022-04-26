@@ -11,7 +11,7 @@ import {
 import {colors, typeColors} from '@workday/canvas-kit-react/tokens';
 import FormField from '../../../react/form-field';
 import Select from '../lib/Select';
-import {RenderOptionFunction} from '../lib/SelectBase';
+import {RenderOptionFunction, RenderSelectedFunction} from '../lib/SelectBase';
 
 const hintText = 'Helpful text goes here.';
 const hintId = 'error-desc-id';
@@ -83,6 +83,16 @@ export const customRenderOption: RenderOptionFunction = option => {
   );
 };
 
+export const customRenderSelected: RenderSelectedFunction = option => {
+  const iconColor = colors.blackPepper100;
+  return (
+    <div style={{alignItems: 'center', display: 'flex'}}>
+      <SystemIcon icon={option.data.icon} color={iconColor} colorHover={iconColor} />
+      <div style={{marginLeft: 5}}>{option.value}</div>
+    </div>
+  );
+};
+
 storiesOf('Preview/Select/React/Top Label', module)
   .addParameters({component: Select})
   .addParameters({ReadmePath: 'preview-react/select'})
@@ -99,7 +109,12 @@ storiesOf('Preview/Select/React/Top Label', module)
   .add('Default with Custom Options Data', () => (
     <FormField label="Label" inputId="select-default-custom">
       {controlComponent(
-        <Select name="icon" options={customOptions} renderOption={customRenderOption} />
+        <Select
+          name="icon"
+          options={customOptions}
+          renderOption={customRenderOption}
+          renderSelected={customRenderSelected}
+        />
       )}
     </FormField>
   ))
@@ -165,7 +180,12 @@ storiesOf('Preview/Select/React/Left Label', module)
       inputId="select-default-custom"
     >
       {controlComponent(
-        <Select name="icon" options={customOptions} renderOption={customRenderOption} />
+        <Select
+          name="icon"
+          options={customOptions}
+          renderOption={customRenderOption}
+          renderSelected={customRenderSelected}
+        />
       )}
     </FormField>
   ))

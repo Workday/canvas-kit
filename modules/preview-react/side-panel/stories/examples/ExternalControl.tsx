@@ -27,7 +27,7 @@ export const ExternalControl = () => {
         onStateTransition={setPanelState}
       >
         {panelState === 'expanded' && (
-          <Flex alignItems="center" paddingY="s" paddingX="xs">
+          <Flex alignItems="center" paddingY="s" paddingX="s">
             <h3
               css={{
                 ...type.levels.body.large,

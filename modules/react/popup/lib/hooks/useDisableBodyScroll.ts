@@ -16,11 +16,19 @@ export const useDisableBodyScroll = (model: PopupModel, elemProps = {}) => {
     if (!visible) {
       return;
     }
+
+    const overflowY = document.body.style.overflowY;
+    const overflowX = document.body.style.overflowX;
     const overflow = document.body.style.overflow;
+
     document.body.style.overflow = 'hidden';
+    document.body.style.overflowY = 'hidden';
+    document.body.style.overflowX = 'hidden';
 
     return () => {
       document.body.style.overflow = overflow;
+      document.body.style.overflowY = overflowY;
+      document.body.style.overflowX = overflowX;
     };
   }, [visible]);
 

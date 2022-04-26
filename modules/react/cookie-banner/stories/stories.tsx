@@ -4,7 +4,7 @@ import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import styled from '@emotion/styled';
 
-import {Hyperlink, SecondaryButton} from '../../button';
+import {Hyperlink, SecondaryButton} from '@workday/canvas-kit-react/button';
 import DeprecatedCookieBanner from '../index';
 
 interface Props {

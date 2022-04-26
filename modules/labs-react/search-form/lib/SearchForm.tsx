@@ -82,6 +82,11 @@ export interface SearchFormProps extends GrowthBehavior, React.FormHTMLAttribute
    * @default 40
    */
   height?: number;
+  /**
+   * If true, allow onSubmit being called when input value is empty.
+   * @default false
+   */
+  allowEmptyStringSearch?: boolean;
 }
 
 export interface SearchFormState {
@@ -331,7 +336,7 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
 
   handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    if (this.state.searchQuery.trim()) {
+    if (this.props.allowEmptyStringSearch || this.state.searchQuery.trim()) {
       this.props.onSubmit(event);
     } else {
       this.focusInput();
@@ -407,6 +412,7 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
       initialValue,
       searchTheme,
       rightAlign,
+      allowEmptyStringSearch = false,
       ...elemProps
     } = this.props;
 

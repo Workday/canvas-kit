@@ -95,7 +95,7 @@ describe('Combobox', () => {
       });
       fireEvent.focus(screen.getByRole('combobox'));
 
-      expect(screen.getByRole('log')).toHaveTextContent('Item count: 2');
+      expect(screen.getByRole('status')).toHaveTextContent('Item count: 2');
     });
   });
 

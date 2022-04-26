@@ -2,7 +2,7 @@ import React from 'react';
 
 import {Tabs, useTabsModel} from '@workday/canvas-kit-react/tabs';
 import {HStack} from '@workday/canvas-kit-labs-react';
-import {SecondaryButton} from '../../../button';
+import {SecondaryButton} from '@workday/canvas-kit-react/button';
 
 type MyTabItem = {
   id: string;
