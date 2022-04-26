@@ -28,13 +28,13 @@ Pills are used to visually label objects on a page for quick recognition. Theyâ€
 static, read-only and interactive elements. They allow users to input a section, filter a list or
 table, or label information to help with scanning and organization.
 
-### Basic
+### Basic Example
 
-If only text is rendered by the Pill, it will look like a `read only` pill. This is a non
-interactive element that is used to display some information.
+If the Pill only renders text, it will look like a read-only Pill. This is a non-interactive element
+that is used to display information.
 
 > **_NOTE:_** By default, the Pill's width will max out at `200px` and the text will overflow into a
-> tooltip. This max width can be changed by providing a `maxWidth` prop on the pill.
+> tooltip. This max width can be changed by providing a `maxWidth` prop on the Pill.
 
 <ExampleCodeBlock code={Basic} />
 
@@ -43,7 +43,7 @@ interactive element that is used to display some information.
 All leading elements (icons or avatars) are intended to be descriptive, helping support the label.
 Do not rely on the leading element to indicate the interaction behavior.
 
-You can define an `interactive` Pill by providing an `onClick` prop.
+You can define an interactive Pill by providing an `onClick` prop.
 
 ```tsx
 <Pill onClick={() => console.warn('clicked')}>
@@ -143,7 +143,7 @@ This component renders an avatar but you can still pass it avatar props
 
 ### Pill Count
 
-This component renders the count. The `child` element is what gets rendered as the count.
+This component renders its `children` as the count.
 
 <ArgsTable of={Pill.Count} />
 
@@ -155,8 +155,8 @@ This component renders an `icon`. This component is used when an `onClick` is pr
 
 ### Pill IconButton
 
-This component renders a `icon button`. This is used for `removable` Pills so that the click target
-and focus area is soley the icon.
+This component renders an icon button. This is used for removable Pills where the click target and
+focus area is solely the icon.
 
 <ArgsTable of={Pill.IconButton} />
 
