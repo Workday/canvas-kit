@@ -6,9 +6,9 @@ import {HStack} from '@workday/canvas-kit-react';
 
 export const Basic = () => (
   <HStack shouldWrapChildren spacing="xxs">
-    <Pill>Ready Only</Pill>
+    <Pill>Read-only</Pill>
     <Pill maxWidth={250}>
-      Ready Only but with a super long text in case you want to read a paragraph in a pill which we
+      Read-only but with super long text in case you want to read a paragraph in a Pill which we
       don't recommend
     </Pill>
   </HStack>

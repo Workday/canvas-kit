@@ -100,7 +100,7 @@ an `icon` prop to `Pill.IconButton`
 Pills can often represent multiple pieces of information such as a filtered list of categories or
 skills.
 
-In order to achieve this, you can use our `HStack` component to wrap each `Pill` and space it out
+In order to achieve this, use our `HStack` component to wrap each `Pill` and space them out
 accordingly.
 
 <ExampleCodeBlock code={ListOfPills} />
@@ -121,8 +121,8 @@ Example of read only:
 <Pill>This is a read only</Pill>
 ```
 
-If you give this component an `onClick` it will render as an interactive pill where sub components
-are acceptable
+If you give this component an `onClick` prop it will render as an interactive Pill which accepts
+subcomponents.
 
 ```tsx
 <Pill onClick={() => console.log('clicked')}>
@@ -144,7 +144,7 @@ that has a smaller click target to prevent users from accidentally delete someth
 
 ### Pill.Avatar
 
-This component renders an avatar but you can still pass it avatar props
+This component renders an avatar. It supports all props of the `Avatar` component.
 
 <ArgsTable of={Pill.Avatar} />
 
@@ -169,7 +169,7 @@ focus area is solely the icon.
 
 ### Pill.Label
 
-This component renders a `span` that automatically handles overflow and rendering a tooltip. There's
-no need to use this component directly since the overflow is handle for you automatically.
+This component renders a `<span>` that automatically handles overflow by rendering a tooltip.
+There's no need to use this component directly since the overflow is handled for you automatically.
 
 <ArgsTable of={Pill.Label} />
