@@ -123,7 +123,7 @@ We've [promoted](https://github.com/Workday/canvas-kit/issues/1395) the followin
 - `Flex` from `@workday/canvas-kit-labs/layout` to `@workday/canvas-kit-react/layout`
 - `Stack` from `@workday/canvas-kit-labs/layout` to `@workday/canvas-kit-react/layout`
 
-You'll need to update your imports for the promoted components (this is _not_ handled by the
+You'll need to update your imports for the promoted components (this is **not** handled by the
 codemod):
 
 ```tsx
@@ -154,107 +154,75 @@ logic.
 
 ### Button
 
-To consolidate Button APIs, we've removed `IconButton` in favor of `PrimaryButton`,
-`SecondaryButton` and `TertiaryButton`.
+#### Removal of IconButton
 
-#### Breaking Changes
+To consolidate Button APIs, we've removed `IconButton` in favor of `SecondaryButton` and
+`TertiaryButton`. The following table shows how `IconButton` variants in v6 map to their
+corresponding `Button` in v7.
 
-- Removed the `toggled` prop when migrating from `IconButton`
-- Changed the values of `IconPosition: left | right` - > `IconPosition: start | end`
-- Remove `dataLabel` prop from `PrimaryButton` and `SecondaryButton`
+| v6 `IconButton` variant    | v7 `Button` (and variant, if necessary)  |
+| -------------------------- | ---------------------------------------- |
+| `circle` (default variant) | `TertiaryButton`                         |
+| `circleFilled`             | `SecondaryButton`                        |
+| `inverse`                  | `TertiaryButton` with `inverse` variant  |
+| `inverseFilled`            | `SecondaryButton` with `inverse` variant |
+| `plain`                    | Unsupported                              |
+| `square`                   | Unsupported                              |
+| `squareFilled`             | Unsupported                              |
 
-🤖 The codemod will handle all these changes automatically:
+> Note: See below for more information about how to manually migrate from
+> [unsupported v6 variants](#unsupported-iconbutton-variants).
 
-- `iconPosition='left'` becomes `iconPosition='start'`
-- `iconPosition='right'` becomes `iconPosition='end'`
-- `<IconButton icon={plusIcon} />` becomes `<TertiaryButton icon={plusIcon} />`
-- `<IconButton variant='circleFilled' icon={plusIcon} />` becomes
-  `<SecondaryButton icon={plusIcon} />`
-- `<IconButton variant='inverse' icon={plusIcon} />` becomes
-  `<TertiaryButton variant='inverse' icon={plusIcon} />`
-- `<IconButton variant='inverseFilled' icon={plusIcon} />` becomes
-  `<SecondaryButton variant='inverseFilled' icon={plusIcon} />`
-
-##### Manual Changes
-
-The following changes will not be automatically updated and will require a manual update:
-
-- Remove `IconButton` variants: `plain`, `square`, and `squareFilled`
-- Remove `IconButtonProps`
-- Remove `IconButton` prop: `toggled`
-- Remove `PrimaryButton` and `SecondaryButton` prop: `dataLabel`
-
-#### Button Mapping
-
-Below is a mapping of v6 `IconButton` variants to their respective v7 buttons and variants. Further
-below is a description of how to manually migrate from unsupported v6 variants.
-
-| IconButton variant | Button Type                          |
-| ------------------ | ------------------------------------ |
-| `circle`           | TertiaryButton                       |
-| `circleFilled`     | SecondaryButton                      |
-| `inverse`          | TertiaryButton with variant inverse  |
-| `inverseFilled`    | SecondaryButton with variant inverse |
-| `plain`            | Not Supporting                       |
-| `square`           | Not Supporting                       |
-| `squareFilled`     | Not Supporting                       |
-
-#### Remove `IconButton` `plain`, `square`, and `squareFilled` Variants
-
-As part of simplifying our variants and cleaning up the API, we've removed the variants `square`,
-`squareFilled` and `plain`. We've also removed the prop `toggled`.
-
-Plain, Square, or Square-Filled Icon Buttons should either transition to the new icon only Primary,
-Secondary, and Tertiary button variants, the Toolbar Icon Button, or the Segmented Control component
-
-If you would still like to have a squared icon, you can use
-[ToolbarIconButton](https://workday.github.io/canvas-kit/?path=/docs/components-buttons-button-react-toolbar--toolbar-icon-button)
-which also has the `toggled`prop.
-
-If this button doesn't fit your specific use case, we've introduced a low level
-[`BaseButton` component](#basebutton-component). This component allows you to modify the colors,
-props, and size of the button. For an example of this being used, you can reference our
-[PageButton component](https://github.com/Workday/canvas-kit/blob/master/modules/react/pagination/lib/Pagination/PageButton.tsx).
-
-#### Rendering an icon button
-
-In order to render a icon button, omit any `children` and pass the button an `icon` prop.
+🤖 Use the codemod to migrate your `IconButton` components in v6 to their corresponding `Button` in
+v7:
 
 ```tsx
 // v6
+<IconButton icon={plusIcon} />
 <IconButton variant="circleFilled" icon={plusIcon} />
+<IconButton variant="inverse" icon={plusIcon} />
+<IconButton variant="inverseFilled" icon={plusIcon} />
 
 // v7
-<SecondaryButton icon={plusIcon} />
-```
-
-You can now render what use to be an `IconButton` using our main buttons.
-
-```tsx
-<PrimaryButton icon={plusIcon} />
-<SecondaryButton icon={plusIcon} />
 <TertiaryButton icon={plusIcon} />
-<PrimaryButton variant='inverse' icon={plusIcon} />
-<SecondaryButton variant='inverse' icon={plusIcon} />
-<TertiaryButton variant='inverse' icon={plusIcon} />
+<SecondaryButton icon={plusIcon} />
+<TertiaryButton variant="inverse" icon={plusIcon} />
+<SecondaryButton variant="inverse" icon={plusIcon} />
 ```
 
-#### Button sizes
+##### Removal of IconButtonProps
 
-Each button now supports sizes: `extraSmall`, `small`, `medium` and `large` with `medium` being the
-default size.
+The `IconButtonProps` interface no longer exists now that `IconButton` has been removed.
 
-```tsx
-  <PrimaryButton icon={plusIcon} size='extraSmall' />
-  <PrimaryButton icon={plusIcon} size='small' />
-  <PrimaryButton icon={plusIcon} size='medium' /> // default
-  <PrimaryButton icon={plusIcon} size='large' />
-```
+This change is **not** handled by the codemod.
 
-#### Button Icon position
+##### Unsupported IconButton Variants
 
-The prop `iconPosition` which is used to determine which side an icon should be when rendered with
-some text, has been changed. The default is `start`
+In order to simplify our API, we no longer support the `plain`, `square`, and `squareFilled`
+variants from `IconButton`. We also no longer support the `toggled` prop from `IconButton`.
+
+`square`, `squareFilled` and `plain` `IconButton` components should be transitioned to the new
+icon-only versions of the `Button` components (`PrimaryButton`, `SecondaryButton`, and
+`TertiaryButton`), `ToolbarIconButton`, or `SegmentedControl`.
+
+Note that you may use
+[`ToolbarIconButton`](https://workday.github.io/canvas-kit/?path=/docs/components-buttons-button-react-toolbar--toolbar-icon-button)
+if you would still like to have a squared icon. `ToolbarIconButton` also supports the `toggled`
+prop.
+
+These changes are **not** handled by the codemod.
+
+> If none of these options support your use case, we've introduced a low-level
+> [`BaseButton`](#basebutton-component) component which allows you to modify the colors, props, and
+> size of the button. For an example of it being used, reference our
+> [`PageButton`](https://github.com/Workday/canvas-kit/blob/master/modules/react/pagination/lib/Pagination/PageButton.tsx)
+> component.
+
+#### Icon Position
+
+The `iconPosition` prop determines where an icon should be rendered relative to the button text.
+We've updated the values from `left` and `right` to `start` and `end` respectively to better reflect
+bidirectionality. The default value is `start`.
 
 ```tsx
 // v6
@@ -264,35 +232,51 @@ iconPosition: 'left' | 'right';
 iconPosition: 'start' | 'end';
 ```
 
-_Note:_ The position of the icon should have no affect if you're rending an icon button.
+🤖 The codemod will automatically map `left` to `start` and `right` to `end`.
 
-### Removal of `dataLabel` Prop
+`iconPosition` will have no effect if you're rendering a button with only an icon and no text.
 
-The `dataLabel` prop has been removed from our Buttons in v7 in order to simplify the API.
+#### Removal of dataLabel
 
-_Note:_ The codemod will not remove this prop since use of this prop varies. If you'd like to still
-have a similar effect, below is an example of how to achieve this.
+In order to simplify our API, we've removed the `dataLabel` prop from `PrimaryButton` and
+`SecondaryButton`.
+
+Given the varied use of `dataLabel`, this change is **not** handled by the codemod. Here's an
+example of how to achieve a similar styling in v7:
 
 ```tsx
 // v6
-<PrimaryButton dataLabel="1:00">Time</PrimaryButton>
+<PrimaryButton dataLabel="1:00">Time</PrimaryButton>;
 
 // v7
-<PrimaryButton>
-  Time
-  <span
-    style={{
-      position: 'relative', // Fixes an IE issue with text within button moving on click
-      textOverflow: 'ellipsis',
-      overflow: 'hidden',
-      whiteSpace: 'nowrap',
-      fontWeight: 400,
-      marginLeft: 4,
-    }}
-  >
-    1:00
-  </span>
-</PrimaryButton>
+import {space, type} from '@workday/canvas-kit-react/common';
+
+const DataLabel = styled('span')({
+  position: 'relative', // Fixes an IE issue with text within button moving on click
+  overflow: 'hidden',
+  whiteSpace: 'nowrap',
+  fontWeight: type.properties.fontWeights.regular,
+  marginLeft: space.xxxs,
+});
+
+return (
+  <PrimaryButton>
+    Time
+    <DataLabel>1:00</DataLabel>
+  </PrimaryButton>
+);
+```
+
+#### Sizes
+
+Each button now supports sizes: `extraSmall`, `small`, `medium` and `large` with `medium` being the
+default size.
+
+```tsx
+  <PrimaryButton icon={plusIcon} size='extraSmall' />
+  <PrimaryButton icon={plusIcon} size='small' />
+  <PrimaryButton icon={plusIcon} size='medium' /> // default
+  <PrimaryButton icon={plusIcon} size='large' />
 ```
 
 #### BaseButton Component
