@@ -1,0 +1,117 @@
+import {Meta} from '@storybook/addon-docs';
+import {Specifications} from '@workday/canvas-kit-docs';
+
+import {Expandable} from '@workday/canvas-kit-labs-react/expandable';
+
+import {Basic} from './examples/Basic';
+import {EndChevron} from './examples/EndChevron';
+import {Avatar} from './examples/Avatar';
+import {Depth} from './examples/Depth';
+
+<Meta title="Labs/Containers/Expandable/React" component={Expandable} />
+
+# Canvas Kit Expandable
+
+Expandable container enables users to conditionally show and hide relevant content.
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-labs-react
+```
+
+## Usage
+
+### Basic Start Chevron Example
+
+<ExampleCodeBlock code={Basic} />
+
+### Basic End Chevron Example
+
+<ExampleCodeBlock code={EndChevron} />
+
+### With Avatar
+
+<ExampleCodeBlock code={Avatar} />
+
+### Depth
+
+<ExampleCodeBlock code={Depth} />
+
+## Components
+
+### Expandable
+
+#### Usage
+
+`Expandable` is a container component that holds a `Expandable.Target` and a `Expandable.Content`.
+It provides a React Context model for its sub components.
+
+#### Props
+
+<!-- <ArgsTable of={Expandable} /> -->
+
+### Expandable.Target
+
+#### Usage
+
+`Expandable.Target` creates a heading and a button. The button comes with the `aria-expanded` and
+`aria-controls` attributes. When a user interacts with the button, they can show or hide the
+`Expandable.Content`. If a string is passed to the Target as a child, it will be wrapped in a Title.
+
+#### Props
+
+<!-- <ArgsTable of={Expandable.Target} /> -->
+
+### Expandable.Title
+
+#### Usage
+
+`Expandable.Title` styles the target button title text.
+
+#### Props
+
+<!-- <ArgsTable of={Expandable.Title} /> -->
+
+### Expandable.StartChevron
+
+#### Usage
+
+`Expandable.StartChevron` creates a chevron points down when the container is expanded and points
+towards the title when the container is closed.
+
+#### Props
+
+<!-- <ArgsTable of={Expandable.StartChevron} /> -->
+
+### Expandable.EndChevron
+
+#### Usage
+
+`Expandable.EndChevron` creates a chevron that points down when the container is expanded and points
+up when the container is closed.
+
+#### Props
+
+<!-- <ArgsTable of={Expandable.EndChevron} /> -->
+
+### Expandable.Avatar
+
+#### Usage
+
+Optional component `Expandable.Avatar` creates a `div` `Avatar` to display an image.
+
+#### Props
+
+<!-- <ArgsTable of={Expandable.Avatar} /> -->
+
+### Expandable.Content
+
+#### Usage
+
+`Expandable.Content` holds the content that will be conditionally opened and closed. It has an `id`
+to ensure the `Expandable.Target` can properly set the `aira-controls` attribute.
+
+#### Props
+
+<!-- <ArgsTable of={Expandable.Content} /> -->

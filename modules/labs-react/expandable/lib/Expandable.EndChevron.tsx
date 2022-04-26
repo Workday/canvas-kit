@@ -7,7 +7,7 @@ import {
   useModelContext,
 } from '@workday/canvas-kit-react/common';
 import {colors, space, SystemIcon, SystemIconProps} from '@workday/canvas-kit-react';
-import {chevronUpSmallIcon} from '@workday/canvas-system-icons-web';
+import {chevronUpIcon} from '@workday/canvas-system-icons-web';
 import {ExpandableModelContext} from './Expandable';
 import {DisclosureModel} from '@workday/canvas-kit-react/disclosure';
 
@@ -38,7 +38,7 @@ export const EndChevron = createComponent()({
         as={Element}
         fill={colors.licorice200}
         isVisible={isVisible}
-        icon={chevronUpSmallIcon}
+        icon={chevronUpIcon}
         ref={ref}
         {...elemProps}
       />

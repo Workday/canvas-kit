@@ -25,13 +25,13 @@ export interface ExpandableProps extends DisclosureModelConfig, FlexProps {
 
 export const Expandable = createComponent('div')({
   displayName: 'Expandable',
-  Component: ({children, model, ...elemProps}: ExpandableProps, Element) => {
+  Component: ({children, model, ...elemProps}: ExpandableProps, ref) => {
     const config = elemProps as DisclosureModelConfig;
     const value = useDefaultModel(model, config, useDisclosureModel);
     const flexProps = elemProps as FlexProps;
     return (
       <ExpandableModelContext.Provider value={value}>
-        <Flex {...flexProps} flexDirection={'column'} padding={space.xxs}>
+        <Flex ref={ref} {...flexProps} flexDirection={'column'} padding={space.xxs}>
           {children}
         </Flex>
       </ExpandableModelContext.Provider>
