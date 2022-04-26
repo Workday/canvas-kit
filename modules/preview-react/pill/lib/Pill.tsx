@@ -136,6 +136,7 @@ export const Pill = createComponent('button')({
   Component: ({children, model, ...config}: PillProps, ref, Element) => {
     const value = useDefaultModel(model, config, usePillModel);
     const {onClick, onDelete, maxWidth, ...elemProps} = config;
+
     const actualEl = useConstant(() => {
       if (Element === 'button') {
         return !!onDelete || !onClick ? 'span' : 'button';
@@ -206,3 +207,13 @@ export const Pill = createComponent('button')({
     IconButton: PillIconButton,
   },
 });
+
+// const interface PillProps = {
+//   onClick:
+// }
+
+// const Pill = ({children, ...props}: PillsProps) => {
+//   return <button {...props}>{children}</button>;
+// };
+
+// <Pill onClick></Pill>
