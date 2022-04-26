@@ -74,11 +74,11 @@ count will dirrectly correlate to that category.
 
 ### Removable Pills
 
-Pills that are removable display the `X` icon following after the label. Removable pills have a
-smaller, more specific focus state and click target to be more intentional about its action and to
-avoid unintended removal of a Pill.
+Removable Pills display an `X` icon after the label. They have a smaller, more specific focus state
+and click target to be more intentional about their actions and to avoid unintended removal of a
+Pill.
 
-You can define a removable pill by providing an `onDelete` click handler.
+You can define a removable Pill by providing an `onDelete` prop.
 
 ```tsx
 <Pill onDelete={() => console.warn('clicked')}>
