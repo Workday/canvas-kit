@@ -29,6 +29,7 @@ export const useTabsModel = createModelHook({
   },
   requiredConfig: useOverflowListModel.requiredConfig,
 })(config => {
+  const initialSelectedRef = React.useRef(config.initialTab);
   const getId = config.getId || defaultGetId;
 
   const items = config.items;
@@ -37,6 +38,12 @@ export const useTabsModel = createModelHook({
     useOverflowListModel.mergeConfig(config, {
       orientation: config.orientation || 'horizontal',
       items,
+      onRegisterItem(data) {
+        if (!initialSelectedRef.current) {
+          initialSelectedRef.current = getId(data.item);
+          events.select({id: initialSelectedRef.current});
+        }
+      },
       initialSelectedIds: config.initialTab
         ? [config.initialTab]
         : config.items?.length
