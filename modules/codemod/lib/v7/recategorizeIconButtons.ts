@@ -7,6 +7,7 @@ import {
   JSXAttribute,
   ASTPath,
   JSXElement,
+  JSXExpressionContainer,
 } from 'jscodeshift';
 import {getImportRenameMap} from './utils/getImportRenameMap';
 
@@ -73,7 +74,19 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
 
       // Default IconButton variant is `circle`
       if (variantProp) {
-        const variantPropValue = ((variantProp as JSXAttribute).value as StringLiteral)?.value;
+        const valueBody = (variantProp as JSXAttribute).value;
+        if (valueBody?.type === 'JSXExpressionContainer') {
+          (variantProp as JSXAttribute).value = (valueBody as JSXExpressionContainer)
+            .expression as StringLiteral;
+        }
+
+        const variantPropValue = ((variantProp as JSXAttribute).value as StringLiteral).value;
+
+        ((variantProp as JSXAttribute).value as StringLiteral).value = variantPropValue.replace(
+          'Filled',
+          ''
+        );
+
         buttonType = /filled/gi.test(variantPropValue) ? 'SecondaryButton' : 'TertiaryButton';
 
         if (!variantPropValue.includes('inverse')) {

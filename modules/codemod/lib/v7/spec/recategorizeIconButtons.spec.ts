@@ -61,6 +61,7 @@ describe('recategorizeIconButtons', () => {
             <IconButton variant="circleFilled" />
             <IconButton variant="inverse" />
             <IconButton variant="inverseFilled" />
+            <IconButton variant={"inverseFilled"} />
         </>
     `;
     const expected = stripIndent`
@@ -69,7 +70,8 @@ describe('recategorizeIconButtons', () => {
             <TertiaryButton />
             <SecondaryButton />
             <TertiaryButton variant="inverse" />
-            <SecondaryButton variant="inverseFilled" />
+            <SecondaryButton variant="inverse" />
+            <SecondaryButton variant="inverse" />
         </>
     `;
 
@@ -101,10 +103,10 @@ describe('recategorizeIconButtons', () => {
       import {IconButton} from '@workday/canvas-kit-react/button';
 
       const StyledIconButton = styled(IconButton)({});
-      
+
       <StyledIconButton variant="circleFilled" icon={plusIcon} />
-      
-      
+
+
     `;
 
     const expected = stripIndent`
@@ -113,7 +115,7 @@ describe('recategorizeIconButtons', () => {
       const StyledIconButton = styled(SecondaryButton)({});
 
       <StyledIconButton icon={plusIcon} />
-      
+
     `;
 
     expectTransform(input, expected);
