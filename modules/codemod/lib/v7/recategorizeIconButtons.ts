@@ -70,22 +70,18 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
 
       const variantProp = attrs?.find(
         attr => attr.type === 'JSXAttribute' && attr.name.name === 'variant'
-      );
+      ) as JSXAttribute | undefined;
 
       // Default IconButton variant is `circle`
       if (variantProp) {
-        const valueBody = (variantProp as JSXAttribute).value;
+        const valueBody = variantProp.value;
         if (valueBody?.type === 'JSXExpressionContainer') {
-          (variantProp as JSXAttribute).value = (valueBody as JSXExpressionContainer)
-            .expression as StringLiteral;
+          variantProp.value = valueBody.expression as StringLiteral;
         }
 
-        const variantPropValue = ((variantProp as JSXAttribute).value as StringLiteral).value;
+        const variantPropValue = (variantProp.value as StringLiteral).value;
 
-        ((variantProp as JSXAttribute).value as StringLiteral).value = variantPropValue.replace(
-          'Filled',
-          ''
-        );
+        (variantProp.value as StringLiteral).value = variantPropValue.replace('Filled', '');
 
         buttonType = /filled/gi.test(variantPropValue) ? 'SecondaryButton' : 'TertiaryButton';
 
