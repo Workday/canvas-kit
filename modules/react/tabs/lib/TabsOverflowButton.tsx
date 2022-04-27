@@ -11,7 +11,7 @@ import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {useOverflowListTarget} from '@workday/canvas-kit-react/list';
 
 import {useMenuTarget} from './menu';
-import {useTabsModel2} from './useTabsModel';
+import {useTabsModel} from './useTabsModel';
 import {StyledTabItem} from './TabsItem';
 
 export interface OverflowButtonProps {
@@ -22,7 +22,7 @@ export interface OverflowButtonProps {
 }
 
 export const useTabsOverflowButton = composeHooks(
-  createElemPropsHook(useTabsModel2)(
+  createElemPropsHook(useTabsModel)(
     (model, _?: React.Ref<HTMLButtonElement>, elemProps: {name?: string} = {}) => {
       return {
         'aria-haspopup': true,
@@ -30,12 +30,12 @@ export const useTabsOverflowButton = composeHooks(
     }
   ),
   useOverflowListTarget,
-  subModelHook((m: ReturnType<typeof useTabsModel2>) => m.menu, useMenuTarget)
+  subModelHook((m: ReturnType<typeof useTabsModel>) => m.menu, useMenuTarget)
 );
 
 export const TabsOverflowButton = createSubcomponent('button')({
   displayName: 'Tabs.OverflowButton',
-  modelHook: useTabsModel2,
+  modelHook: useTabsModel,
   elemPropsHook: useTabsOverflowButton,
 })<OverflowButtonProps>(({children, ...elemProps}, Element) => {
   return (

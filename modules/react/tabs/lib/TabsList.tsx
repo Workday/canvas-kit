@@ -14,7 +14,7 @@ import {
   useListResetCursorOnBlur,
 } from '@workday/canvas-kit-react/list';
 
-import {useTabsModel2} from './useTabsModel';
+import {useTabsModel} from './useTabsModel';
 
 // Use `Partial` here to make `spacing` optional
 export interface TabListProps<T = unknown> extends Partial<ExtractProps<typeof Stack, never>> {
@@ -32,7 +32,7 @@ export interface TabListProps<T = unknown> extends Partial<ExtractProps<typeof S
 }
 
 export const useTabsList = composeHooks(
-  createElemPropsHook(useTabsModel2)(() => {
+  createElemPropsHook(useTabsModel)(() => {
     return {role: 'tablist'};
   }),
   useOverflowListMeasure,
@@ -41,10 +41,9 @@ export const useTabsList = composeHooks(
 
 export const TabsList = createSubcomponent('div')({
   displayName: 'Tabs.List',
-  modelHook: useTabsModel2,
+  modelHook: useTabsModel,
   elemPropsHook: useTabsList,
 })<TabListProps>(({children, overflowButton, ...elemProps}, Element, model) => {
-  console.log('Tabs.List', model.state);
   return (
     <Stack
       as={Element}

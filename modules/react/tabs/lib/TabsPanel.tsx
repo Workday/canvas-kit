@@ -11,7 +11,7 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {Box} from '@workday/canvas-kit-react/layout';
 
-import {useTabsModel2} from './useTabsModel';
+import {useTabsModel} from './useTabsModel';
 
 export interface TabPanelProps<T = unknown> extends ExtractProps<typeof Box, never> {
   /**
@@ -36,7 +36,7 @@ export interface TabPanelProps<T = unknown> extends ExtractProps<typeof Box, nev
 
 const StyledTabsPanel = styled(Box)<StyledType>(hideMouseFocus);
 
-export const useTabsPanel = createElemPropsHook(useTabsModel2)(
+export const useTabsPanel = createElemPropsHook(useTabsModel)(
   ({state, events}, _?: React.Ref<HTMLElement>, elemProps: {'data-id'?: string} = {}) => {
     const name = elemProps['data-id'];
     const [tabName, setTabName] = React.useState(elemProps['data-id'] || '');
@@ -64,7 +64,7 @@ export const useTabsPanel = createElemPropsHook(useTabsModel2)(
 
 export const TabsPanel = createSubcomponent('div')({
   displayName: 'Tabs.Panel',
-  modelHook: useTabsModel2,
+  modelHook: useTabsModel,
   elemPropsHook: useTabsPanel,
 })<TabPanelProps>(({children, ...elemProps}, Element) => {
   return (

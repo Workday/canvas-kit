@@ -9,13 +9,13 @@ import {
 
 import {Item} from './useBaseListModel';
 import {VirtualItem} from './react-virtual';
-import {useListModel2} from './useListModel';
+import {useListModel} from './useListModel';
 
 /**
  * Registers an item with a list. It will return elemProps with a `name` which can be used by other
  * hooks to identify the item in the list.
  */
-export const useListItemRegister = createElemPropsHook(useListModel2)(
+export const useListItemRegister = createElemPropsHook(useListModel)(
   (
     {state, events, getId},
     ref?: React.Ref<HTMLElement>,
@@ -55,12 +55,10 @@ export const useListItemRegister = createElemPropsHook(useListModel2)(
       }
       const defaultId = state.indexRef.current;
       const itemId = localId || String(defaultId);
-      console.log('mount', defaultId, localId);
 
       // TODO: Better lookup that using `items.find`. We need a more generic collection to handle seeing if an item already exists
       // bail early if item already exists. This happens if items were already provided.
       if (state.items.find(item => getId(item) === itemId)) {
-        console.log('found', itemId);
         return;
       }
       events.registerItem({
@@ -72,7 +70,6 @@ export const useListItemRegister = createElemPropsHook(useListModel2)(
       setLocalId(itemId);
 
       return () => {
-        console.log('unregister', itemId);
         events.unregisterItem({id: itemId});
       };
     });

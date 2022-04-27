@@ -6,9 +6,10 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {Box, BoxProps} from '@workday/canvas-kit-react/layout';
 
-import {useListModel2} from './useListModel';
+import {useListModel} from './useListModel';
 import {useListRenderItems} from './useListRenderItem';
 import {useListItemRegister} from './useListItemRegister';
+import styled from '@emotion/styled';
 
 export interface ListBoxProps extends BoxProps {
   children?: React.ReactNode | ((item: any) => React.ReactNode);
@@ -16,16 +17,16 @@ export interface ListBoxProps extends BoxProps {
 
 export const ListBoxItem = createSubcomponent('li')({
   displayName: 'Item',
-  modelHook: useListModel2,
+  modelHook: useListModel,
   elemPropsHook: useListItemRegister,
-})<BoxProps>((elemProps, Element) => {
+})<BoxProps>((elemProps, Element, model) => {
   return <Box as={Element} {...elemProps} />;
 });
 
-const useListBox = createElemPropsHook(useListModel2)(model => {
+const useListBox = createElemPropsHook(useListModel)(model => {
   return {
     style: {
-      position: 'relative',
+      position: 'relative' as const,
       height: model.state.isVirtualized ? model.state.UNSTABLE_virtual.totalSize : undefined,
     },
   };
@@ -41,7 +42,7 @@ const useListBox = createElemPropsHook(useListModel2)(model => {
  */
 export const ListBox = createContainerComponent('ul')({
   displayName: 'ListBox',
-  modelHook: useListModel2,
+  modelHook: useListModel,
   elemPropsHook: useListBox,
   subComponents: {
     /**

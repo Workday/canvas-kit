@@ -2,9 +2,9 @@ import * as React from 'react';
 
 import {createElemPropsHook, useForkRef, useResizeObserver} from '@workday/canvas-kit-react/common';
 
-import {useOverflowListModel2} from './useOverflowListModel';
+import {useOverflowListModel} from './useOverflowListModel';
 
-export const useOverflowListMeasure = createElemPropsHook(useOverflowListModel2)(
+export const useOverflowListMeasure = createElemPropsHook(useOverflowListModel)(
   (model, ref?: React.Ref<HTMLElement>) => {
     const localRef = React.useRef(null);
     const {ref: resizeRef} = useResizeObserver({

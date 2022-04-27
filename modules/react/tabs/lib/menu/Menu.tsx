@@ -2,7 +2,7 @@ import React from 'react';
 
 import {createContainerComponent} from '@workday/canvas-kit-react/common';
 
-import {useMenuModel2} from './useMenuModel';
+import {useMenuModel} from './useMenuModel';
 import {MenuPopper} from './MenuPopper';
 import {MenuTarget} from './MenuTarget';
 import {MenuItem} from './MenuItem';
@@ -34,7 +34,7 @@ export interface MenuProps {
  */
 export const Menu = createContainerComponent()({
   displayName: 'Menu',
-  modelHook: useMenuModel2,
+  modelHook: useMenuModel,
   subComponents: {
     /**
      * The menu card is a non-semantic element used to give the dropdown menu its distinct visual

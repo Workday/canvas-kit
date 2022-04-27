@@ -1,6 +1,6 @@
 import React from 'react';
 import {createModelHook} from '@workday/canvas-kit-react/common';
-import {useCursorListModel2} from './useCursorListModel';
+import {useCursorListModel} from './useCursorListModel';
 
 export type SelectedIds = 'all' | string[];
 
@@ -50,16 +50,16 @@ export const multiSelectionManager: SelectionManager = {
   },
 };
 
-export const useSelectionListModel2 = createModelHook({
+export const useSelectionListModel = createModelHook({
   defaultConfig: {
-    ...useCursorListModel2.defaultConfig,
+    ...useCursorListModel.defaultConfig,
     initialSelectedIds: [] as SelectedIds,
     initialUnselectedIds: [] as string[],
     selection: singleSelectionManager,
   },
-  requiredConfig: useCursorListModel2.requiredConfig,
+  requiredConfig: useCursorListModel.requiredConfig,
 })(config => {
-  const cursor = useCursorListModel2(config);
+  const cursor = useCursorListModel(config);
   const [selectedIds, setSelectedIds] = React.useState(config.initialSelectedIds);
   const [unselectedIds, setUnselectedIds] = React.useState(config.initialUnselectedIds);
 

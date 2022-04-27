@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Tabs, useTabsModel2} from '@workday/canvas-kit-react/tabs';
+import {Tabs, useTabsModel} from '@workday/canvas-kit-react/tabs';
 
 type Tab = {
   tab: string;
@@ -15,7 +15,7 @@ export const DynamicTabs = () => {
     {tab: 'Add Tab', id: 'add'},
   ]);
   const addedRef = React.useRef(tabs.length - 1);
-  const model = useTabsModel2({
+  const model = useTabsModel({
     items: tabs,
     shouldSelect: data => data.id !== 'add',
   });
@@ -31,7 +31,7 @@ export const DynamicTabs = () => {
    * * **Item is selected**: Selection will be moved to the next item in the list
    * @param id The id of the item that will be removed
    */
-  const removeItem = <T extends unknown>(id: string, model: ReturnType<typeof useTabsModel2>) => {
+  const removeItem = <T extends unknown>(id: string, model: ReturnType<typeof useTabsModel>) => {
     const index = model.state.items.findIndex(item => model.getId(item) === model.state.cursorId);
     const nextIndex = index === model.state.items.length - 1 ? index - 1 : index + 1;
     const nextId = model.getId(model.state.items[nextIndex]);
@@ -91,7 +91,7 @@ export const DynamicTabs = () => {
       </Tabs.Menu.Popper>
       <Tabs.Panels>
         {(item: Tab) => (
-          <Tabs.Panel marginTop="m" name={item.id}>
+          <Tabs.Panel marginTop="m" data-id={item.id}>
             Contents of {item.tab}
           </Tabs.Panel>
         )}

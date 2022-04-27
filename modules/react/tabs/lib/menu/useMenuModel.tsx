@@ -7,20 +7,20 @@ import {
   usePopupModel,
   useReturnFocus,
 } from '@workday/canvas-kit-react/popup';
-import {useListModel2} from '@workday/canvas-kit-react/list';
+import {useListModel} from '@workday/canvas-kit-react/list';
 
-export const useMenuModel2 = createModelHook({
+export const useMenuModel = createModelHook({
   defaultConfig: {
-    ...useListModel2.defaultConfig,
+    ...useListModel.defaultConfig,
     ...usePopupModel.defaultConfig,
   },
   requiredConfig: {
-    ...useListModel2.requiredConfig,
+    ...useListModel.requiredConfig,
     ...usePopupModel.requiredConfig,
   },
 })(config => {
   const popup = usePopupModel(config);
-  const list = useListModel2(useListModel2.mergeConfig(config, {shouldVirtualize: false}));
+  const list = useListModel(useListModel.mergeConfig(config, {shouldVirtualize: false}));
 
   useAlwaysCloseOnOutsideClick(popup);
   useCloseOnEscape(popup);

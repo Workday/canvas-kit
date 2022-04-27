@@ -19,7 +19,7 @@ import {
   useListItemSelect,
 } from '@workday/canvas-kit-react/list';
 
-import {useMenuModel2} from './useMenuModel';
+import {useMenuModel} from './useMenuModel';
 
 export interface MenuItemProps<T = unknown> {
   /**
@@ -145,7 +145,7 @@ const StyledItem = styled(Box.as('button'))<StyledType & {hasIcon?: boolean}>(
 );
 
 export const useMenuItem = composeHooks(
-  createElemPropsHook(useMenuModel2)(() => {
+  createElemPropsHook(useMenuModel)(() => {
     return {
       role: 'menuitem',
     };
@@ -157,7 +157,7 @@ export const useMenuItem = composeHooks(
 
 export const MenuItem = createSubcomponent('button')({
   displayName: 'Menu.Item',
-  modelHook: useMenuModel2,
+  modelHook: useMenuModel,
   elemPropsHook: useMenuItem,
   subComponents: {
     Icon: SystemIcon,

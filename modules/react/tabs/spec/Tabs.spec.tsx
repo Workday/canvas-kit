@@ -24,8 +24,8 @@ describe('Tabs', () => {
 
   it('should call "onSelect" when tab is selected', () => {
     const cb = jest.fn();
-    render(
-      <Tabs onSelect={cb}>
+    const {container} = render(
+      <Tabs onSelect={cb} initialSelectedIds={['first']}>
         <Tabs.List>
           <Tabs.Item name="first">First Tab</Tabs.Item>
           <Tabs.Item name="second">Second Tab</Tabs.Item>
@@ -35,6 +35,6 @@ describe('Tabs', () => {
     );
 
     fireEvent.click(screen.getByRole('tab', {name: 'Second Tab'}));
-    expect(cb).toHaveBeenCalledWith(expect.objectContaining({data: {id: 'second'}}));
+    expect(cb).toHaveBeenCalledWith(expect.objectContaining({id: 'second'}), expect.anything());
   });
 });

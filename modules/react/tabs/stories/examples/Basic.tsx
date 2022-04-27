@@ -5,7 +5,7 @@ import {Tabs} from '@workday/canvas-kit-react/tabs';
 
 export const Basic = () => {
   return (
-    <Tabs>
+    <Tabs onSelect={data => console.log('onSelect', data)}>
       <Tabs.List>
         <Tabs.Item>First Tab</Tabs.Item>
         <Tabs.Item>Second Tab</Tabs.Item>

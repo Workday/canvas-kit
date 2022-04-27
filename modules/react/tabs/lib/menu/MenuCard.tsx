@@ -14,7 +14,7 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {getTransformFromPlacement} from '@workday/canvas-kit-react/popup';
 
-import {useMenuModel2} from './useMenuModel';
+import {useMenuModel} from './useMenuModel';
 
 export interface MenuCardProps extends ExtractProps<typeof Card, never> {
   children?: React.ReactNode;
@@ -61,13 +61,13 @@ const StyledCard = styled(Card)<
   }
 );
 
-export const useMenuCard = createElemPropsHook(useMenuModel2)(() => {
+export const useMenuCard = createElemPropsHook(useMenuModel)(() => {
   return {};
 });
 
 export const MenuCard = createSubcomponent('div')({
   displayName: 'Menu.Card',
-  modelHook: useMenuModel2,
+  modelHook: useMenuModel,
   elemPropsHook: useMenuCard,
 })<MenuCardProps>((elemProps, Element, model) => {
   const transformOrigin = React.useMemo(() => {

@@ -6,7 +6,7 @@ import {Menu} from './menu';
 import {TabsItem} from './TabsItem';
 import {TabsList} from './TabsList';
 import {TabsPanel} from './TabsPanel';
-import {useTabsModel2} from './useTabsModel';
+import {useTabsModel} from './useTabsModel';
 import {TabsOverflowButton} from './TabsOverflowButton';
 import {TabsMenuPopper} from './TabsMenuPopper';
 import {TabsPanels} from './TabsPanels';
@@ -21,7 +21,7 @@ export interface TabsProps {
 
 export const Tabs = createContainerComponent()({
   displayName: 'Tabs',
-  modelHook: useTabsModel2,
+  modelHook: useTabsModel,
   subComponents: {
     List: TabsList,
     Item: TabsItem,

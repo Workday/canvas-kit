@@ -208,13 +208,14 @@ export const createEvents = <TEvents extends EventCreator>(events: TEvents) => <
   return {events, eventMap: config as EventMap<ToEvent<TEvents>, TGuardMap, TCallbackMap>};
 };
 
-// Temporary type so that `extends` works
-type Any = any
 /**
  * Special type that will be a placeholder during development. At build time, this generic will be
- * used to create a real generic type for models.
+ * used to create a real generic type for models. If you use `Generic`, you'll have to create an
+ * explicit type for your configs to preserve the `Generic` symbol, otherwise Typescript will
+ * convert to `any`.
  */
-export interface Generic extends Any {};
+export type Generic = any
+
 
 export type ModelExtras<TDefaultConfig, TRequiredConfig, TState, TEvents, TModel> = {
   /** Default config of the model. Useful when composing models to reused config */
@@ -478,7 +479,6 @@ export const createModelHook = <TDefaultConfig extends {}, TRequiredConfig exten
     const configRef = React.useRef<Record<string, any>>({})
     const eventsRef = React.useRef<Record<string, any>>({})
 
-    console.log('wrappedModelHook', config)
     const { state, events, ...rest } = fnRef.current({
       ...defaultConfig,
       ...config,
@@ -516,8 +516,9 @@ export const createModelHook = <TDefaultConfig extends {}, TRequiredConfig exten
           // call the event (setter)
           eventsRef.current[key](data);
 
+          const callbackFnName = getCallbackName(key);
+          // console.log(callbackFnName, (eventsRef.current[key] as any)._wrapped, stateRef.current)
           if (!(eventsRef.current[key] as any)._wrapped) {
-            const callbackFnName = getCallbackName(key);
 
             if (configRef.current[callbackFnName]) {
               configRef.current[callbackFnName](

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {createModelHook} from '@workday/canvas-kit-react/common';
-import {useSelectionListModel2} from './useSelectionListModel';
+import {useSelectionListModel} from './useSelectionListModel';
 
 export function getHiddenIds(
   containerWidth: number,
@@ -50,13 +50,13 @@ export function getHiddenIds(
   return hiddenIds;
 }
 
-export const useOverflowListModel2 = createModelHook({
+export const useOverflowListModel = createModelHook({
   defaultConfig: {
-    ...useSelectionListModel2.defaultConfig,
+    ...useSelectionListModel.defaultConfig,
     initialHiddenIds: [] as string[],
     containerWidth: 0,
   },
-  requiredConfig: useSelectionListModel2.requiredConfig,
+  requiredConfig: useSelectionListModel.requiredConfig,
 })(config => {
   const [hiddenIds, setHiddenIds] = React.useState(config.initialHiddenIds);
   const [itemWidthCache, setItemWidthCache] = React.useState<Record<string, number>>({});
@@ -70,12 +70,10 @@ export const useOverflowListModel2 = createModelHook({
   // hidden ids as well
   const nonInteractiveIds = (config.nonInteractiveIds || []).concat(hiddenIds);
 
-  const model = useSelectionListModel2({
+  const model = useSelectionListModel({
     ...config,
     nonInteractiveIds,
   });
-
-  console.log('overflowModel', model.state.id, model.state);
 
   const state = {
     ...model.state,

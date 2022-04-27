@@ -3,7 +3,7 @@ import * as React from 'react';
 import {createSubcomponent} from '@workday/canvas-kit-react/common';
 import {useListRenderItems} from '@workday/canvas-kit-react/list';
 
-import {useTabsModel2} from './useTabsModel';
+import {useTabsModel} from './useTabsModel';
 
 export interface TabsPanelsProps<T = unknown> {
   /**
@@ -14,7 +14,7 @@ export interface TabsPanelsProps<T = unknown> {
 
 export const TabsPanels = createSubcomponent()({
   displayName: 'Tabs.Panels',
-  modelHook: useTabsModel2,
+  modelHook: useTabsModel,
 })<TabsPanelsProps>(({children}, _, model) => {
   return <>{useListRenderItems(model, children)}</>;
 });

@@ -2,13 +2,12 @@ import React from 'react';
 
 import {Generic} from '@workday/canvas-kit-react/common';
 
-import {useBaseListModel2} from './useBaseListModel';
+import {useBaseListModel} from './useBaseListModel';
 
 export function useListRenderItems<T>(
-  model: ReturnType<typeof useBaseListModel2>,
+  model: ReturnType<typeof useBaseListModel>,
   children: ((item: Generic) => React.ReactNode) | React.ReactNode
 ) {
-  console.log('useListRenderItem', model.state);
   const items =
     typeof children === 'function'
       ? model.state.isVirtualized

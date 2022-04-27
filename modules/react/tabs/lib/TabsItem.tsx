@@ -26,7 +26,7 @@ import {
   useOverflowListItemMeasure,
 } from '@workday/canvas-kit-react/list';
 
-import {useTabsModel2} from './useTabsModel';
+import {useTabsModel} from './useTabsModel';
 export interface TabsItemProps
   extends ExtractProps<typeof Box, never>,
     Partial<Pick<StackProps, 'spacing'>> {
@@ -188,7 +188,7 @@ export const StyledTabItem = styled(Box.as('button'))<
 );
 
 export const useTabsItem = composeHooks(
-  createElemPropsHook(useTabsModel2)(
+  createElemPropsHook(useTabsModel)(
     ({state}, _?: React.Ref<HTMLButtonElement>, elemProps: {'data-id'?: string} = {}) => {
       const name = elemProps['data-id'] || '';
 
@@ -210,7 +210,7 @@ export const useTabsItem = composeHooks(
 
 export const TabsItem = createSubcomponent('button')({
   displayName: 'Tabs.Item',
-  modelHook: useTabsModel2,
+  modelHook: useTabsModel,
   elemPropsHook: useTabsItem,
   subComponents: {
     Icon: SystemIcon,

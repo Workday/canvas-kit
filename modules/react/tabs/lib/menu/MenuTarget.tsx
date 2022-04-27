@@ -8,14 +8,14 @@ import {
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {usePopupTarget} from '@workday/canvas-kit-react/popup';
 
-import {useMenuModel2} from './useMenuModel';
+import {useMenuModel} from './useMenuModel';
 
 export interface MenuTargetProps {
   children?: React.ReactNode;
 }
 
 export const useMenuTarget = composeHooks(
-  createElemPropsHook(useMenuModel2)(model => {
+  createElemPropsHook(useMenuModel)(model => {
     return {
       id: model.state.id,
       onKeyDown(event: React.KeyboardEvent) {
@@ -35,7 +35,7 @@ export const useMenuTarget = composeHooks(
 
 export const MenuTarget = createSubcomponent(SecondaryButton)({
   displayName: 'Menu.Target',
-  modelHook: useMenuModel2,
+  modelHook: useMenuModel,
   elemPropsHook: useMenuTarget,
 })<MenuTargetProps>(({children, ...elemProps}, Element) => {
   return <Element {...elemProps}>{children}</Element>;

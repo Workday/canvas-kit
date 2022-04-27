@@ -5,17 +5,17 @@ import {
   useListItemRovingFocus,
   useListRenderItems,
   useListItemSelect,
-  useListModel2,
+  useListModel,
   multiSelectionManager,
   ListProps,
   ListItemProps,
 } from '@workday/canvas-kit-react/list';
 import {composeHooks} from '@workday/canvas-kit-react/common';
 
-const ListModelContext = useListModel2.Context;
+const ListModelContext = useListModel.Context;
 
 const List = (props: ListProps) => {
-  const model = useListModel2({
+  const model = useListModel({
     selection: multiSelectionManager,
   });
 

@@ -1,5 +1,5 @@
 import {createModelHook} from '../../common';
-import {useSelectionListModel2} from './useSelectionListModel';
+import {useSelectionListModel} from './useSelectionListModel';
 
 // This file creates a `ListModel` composing a `BaseListModel`, `CursorListModel`, and
 // `SelectionListModel` and renames to `List*`. Without interfaces like this, the result would be
@@ -28,7 +28,7 @@ export type ListItemProps = {
  *   getId: item => item.id, // get the unique identifier of your item
  * })
  */
-export const useListModel2 = createModelHook({
-  defaultConfig: useSelectionListModel2.defaultConfig,
-  requiredConfig: useSelectionListModel2.requiredConfig,
-})(useSelectionListModel2);
+export const useListModel = createModelHook({
+  defaultConfig: useSelectionListModel.defaultConfig,
+  requiredConfig: useSelectionListModel.requiredConfig,
+})(useSelectionListModel);

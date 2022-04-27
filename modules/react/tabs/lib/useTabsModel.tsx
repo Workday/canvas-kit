@@ -1,12 +1,12 @@
 import React from 'react';
 import {createModelHook} from '@workday/canvas-kit-react/common';
-import {defaultGetId, useListModel2, useOverflowListModel2} from '@workday/canvas-kit-react/list';
+import {defaultGetId, useListModel, useOverflowListModel} from '@workday/canvas-kit-react/list';
 
-import {useMenuModel2} from './menu';
+import {useMenuModel} from './menu';
 
-export const useTabsModel2 = createModelHook({
+export const useTabsModel = createModelHook({
   defaultConfig: {
-    ...useOverflowListModel2.defaultConfig,
+    ...useOverflowListModel.defaultConfig,
     /**
      * Optional id for the whole `Tabs` group. The `aria-controls` of the `Tab.Item` and `id` of the
      * `Tab.Panel` will automatically derived from this id. If not provided, a unique id will be
@@ -24,27 +24,19 @@ export const useTabsModel2 = createModelHook({
      * the sub-components could be replaced to handle vertical orientations.
      * @default 'horizontal'
      */
-    orientation: 'horizontal' as typeof useOverflowListModel2.defaultConfig.orientation,
-    menuConfig: {} as Partial<typeof useMenuModel2.defaultConfig>,
+    orientation: 'horizontal' as typeof useOverflowListModel.defaultConfig.orientation,
+    menuConfig: {} as Partial<typeof useMenuModel.defaultConfig>,
   },
-  requiredConfig: useOverflowListModel2.requiredConfig,
+  requiredConfig: useOverflowListModel.requiredConfig,
 })(config => {
-  const initialSelectedRef = React.useRef(config.initialTab);
   const getId = config.getId || defaultGetId;
 
   const items = config.items;
 
-  const model = useOverflowListModel2(
-    useOverflowListModel2.mergeConfig(config, {
+  const model = useOverflowListModel(
+    useOverflowListModel.mergeConfig(config, {
       orientation: config.orientation || 'horizontal',
       items,
-      onRegisterItem(data, prevState) {
-        console.log('onRegisterItem', data);
-        if (!initialSelectedRef.current) {
-          initialSelectedRef.current = getId(data.item);
-          events.select({id: initialSelectedRef.current});
-        }
-      },
       initialSelectedIds: config.initialTab
         ? [config.initialTab]
         : config.items?.length
@@ -54,10 +46,7 @@ export const useTabsModel2 = createModelHook({
     })
   );
 
-  console.log('tabsModel', model.state.id, model.state);
-
-  const panels = useListModel2();
-  console.log('panels', panels.state.id);
+  const panels = useListModel();
 
   const state = {
     ...model.state,
@@ -93,10 +82,8 @@ export const useTabsModel2 = createModelHook({
     unregisterPanel: panels.events.unregisterItem,
   };
 
-  console.log('overflowItems', overflowItems);
-
-  const menu = useMenuModel2(
-    useMenuModel2.mergeConfig(config.menuConfig as Required<typeof config.menuConfig>, {
+  const menu = useMenuModel(
+    useMenuModel.mergeConfig(config.menuConfig as Required<typeof config.menuConfig>, {
       id: `menu-${model.state.id}`,
       items: overflowItems,
       nonInteractiveIds: state.nonInteractiveIds.filter(key => !state.hiddenIds.includes(key)),
@@ -110,8 +97,6 @@ export const useTabsModel2 = createModelHook({
       },
     })
   );
-
-  console.log('menu', state.id);
 
   return {
     ...model,

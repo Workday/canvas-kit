@@ -2,12 +2,12 @@ import React from 'react';
 
 import {createElemPropsHook} from '@workday/canvas-kit-react/common';
 import {orientationKeyMap} from './useListItemRovingFocus';
-import {useListModel2} from './useListModel';
+import {useListModel} from './useListModel';
 
 /**
  * Reset the cursor to the selected item when the list looses focus
  */
-export const useListResetCursorOnBlur = createElemPropsHook(useListModel2)(({state, events}) => {
+export const useListResetCursorOnBlur = createElemPropsHook(useListModel)(({state, events}) => {
   const programmaticFocusRef = React.useRef(false);
   return {
     onKeyDown(event: React.KeyboardEvent) {

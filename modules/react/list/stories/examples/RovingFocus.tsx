@@ -2,16 +2,15 @@ import React from 'react';
 
 import {
   useListItemRegister,
-  useListRovingFocus,
+  useListItemRovingFocus,
   useListRenderItems,
   useListModel,
-  ListModel,
   ListProps,
   ListItemProps,
 } from '@workday/canvas-kit-react/list';
 import {composeHooks} from '@workday/canvas-kit-react/common';
 
-const ListModelContext = React.createContext<ListModel>({} as any);
+const ListModelContext = useListModel.Context;
 
 const List = (props: ListProps) => {
   const model = useListModel();
@@ -24,7 +23,7 @@ const List = (props: ListProps) => {
   );
 };
 
-const useItem = composeHooks(useListRovingFocus, useListItemRegister);
+const useItem = composeHooks(useListItemRovingFocus, useListItemRegister);
 
 const Item = (elemProps: ListItemProps) => {
   const model = React.useContext(ListModelContext);

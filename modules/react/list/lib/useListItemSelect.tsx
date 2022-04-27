@@ -2,9 +2,9 @@ import React from 'react';
 
 import {createElemPropsHook} from '@workday/canvas-kit-react/common';
 
-import {useListModel2} from './useListModel';
+import {useListModel} from './useListModel';
 
-export const useListItemSelect = createElemPropsHook(useListModel2)(
+export const useListItemSelect = createElemPropsHook(useListModel)(
   ({state, events}, _?: React.Ref<HTMLElement>, elemProps: {'data-id'?: string} = {}) => {
     const name = elemProps['data-id'] || '';
     const onClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -14,7 +14,6 @@ export const useListItemSelect = createElemPropsHook(useListModel2)(
       ) {
         return;
       }
-      console.log('select', name);
       events.select({id: name});
     };
 

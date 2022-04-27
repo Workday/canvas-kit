@@ -9,7 +9,7 @@ import {
 import {ListBox} from '@workday/canvas-kit-react/list';
 import {Stack} from '@workday/canvas-kit-react/layout';
 
-import {useMenuModel2} from './useMenuModel';
+import {useMenuModel} from './useMenuModel';
 
 export interface MenuListProps extends Partial<ExtractProps<typeof Stack, never>> {
   /**
@@ -18,7 +18,7 @@ export interface MenuListProps extends Partial<ExtractProps<typeof Stack, never>
   children: React.ReactNode;
 }
 
-export const useMenuList = createElemPropsHook(useMenuModel2)(model => {
+export const useMenuList = createElemPropsHook(useMenuModel)(model => {
   return {
     role: 'menu',
     'aria-labelledby': model.state.id,
@@ -27,7 +27,7 @@ export const useMenuList = createElemPropsHook(useMenuModel2)(model => {
 
 export const MenuList = createSubcomponent('div')({
   displayName: 'Menu.List',
-  modelHook: useMenuModel2,
+  modelHook: useMenuModel,
   elemPropsHook: useMenuList,
 })<MenuListProps>(({children, ...elemProps}, Element, model) => {
   return (

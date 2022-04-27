@@ -91,7 +91,7 @@ export type ExtractProps<
     | never = undefined
 > = ExtractMaybeModel<
   TComponent,
-  TComponent extends ElementComponent<infer E, infer P> // test if `TComponent` is an `ElementComponent`, while inferring both default element and props associated
+  TComponent extends {__element: infer E; __props: infer P} //ElementComponent<infer E, infer P> // test if `TComponent` is an `ElementComponent`, while inferring both default element and props associated
     ? [TElement] extends [never] // test if user passed `never` for the `TElement` override. We have to test `never` first, otherwise TS gets confused and `ExtractProps` will return `never`. https://github.com/microsoft/TypeScript/issues/23182
       ? P // else attach only inferred props `P`
       : TElement extends undefined // else test if TElement was defined
@@ -232,7 +232,7 @@ export const createContainerComponent = <
     Context?: React.Context<any>;
   } & {defaultConfig?: Record<string, any>},
   TDefaultContext extends {state: Record<string, any>; events: Record<string, any>},
-  TPropsHook extends (...args: any) => any,
+  TElemPropsHook extends (...args: any) => any,
   SubComponents = {}
 >({
   displayName,
@@ -243,7 +243,7 @@ export const createContainerComponent = <
 }: {
   displayName?: string;
   modelHook: TModelHook;
-  elemPropsHook?: TPropsHook;
+  elemPropsHook?: TElemPropsHook;
   defaultContext?: TDefaultContext;
   subComponents?: SubComponents;
 }) => {
@@ -253,7 +253,7 @@ export const createContainerComponent = <
 
   return <Props>(
     Component: (
-      props: Props & RemoveNull<ReturnType<TPropsHook>> & {ref: ExtractRef<E>},
+      props: Props & RemoveNull<ReturnType<TElemPropsHook>> & {ref: ExtractRef<E>},
       Element: E extends undefined ? never : E,
       model: TModelHook extends (config: infer TConfig) => infer TModel ? TModel : never
     ) => React.ReactElement | null
@@ -282,7 +282,7 @@ export const createContainerComponent = <
           Context.Provider,
           {value: localModel},
           Component(
-            finalElemProps as Props & RemoveNull<ReturnType<TPropsHook>> & {ref: ExtractRef<E>},
+            finalElemProps as Props & RemoveNull<ReturnType<TElemPropsHook>> & {ref: ExtractRef<E>},
             // Cast to `any` to avoid: "ts(2345): Type 'undefined' is not assignable to type 'E extends
             // undefined ? never : E'" I'm not sure I can actually cast to this conditional type and it
             // doesn't actually matter, so cast to `any` it is.
@@ -311,6 +311,8 @@ export const createContainerComponent = <
 
 type RemoveNull<T> = {[K in keyof T]: Exclude<T[K], null>};
 
+// export type ModelComponentFn<TModelHook, TElemPropsHook, SubComponents> = <Props={}>(Component: ())
+
 export const createSubcomponent = <
   E extends
     | keyof JSX.IntrinsicElements
@@ -320,8 +322,8 @@ export const createSubcomponent = <
 >(
   as?: E
 ) => <
+  TElemPropsHook, // normally we'd put a constraint here, but doing so causes the `infer` below to fail to infer the return props
   TModelHook extends ((config: any) => {state: any; events: any}) & {Context?: React.Context<any>},
-  TPropHook extends (...args: any) => any,
   SubComponents = {}
 >({
   displayName,
@@ -331,7 +333,7 @@ export const createSubcomponent = <
 }: {
   displayName?: string;
   modelHook: TModelHook;
-  elemPropsHook?: TPropHook;
+  elemPropsHook?: TElemPropsHook;
   subComponents?: SubComponents;
 }) => {
   assert(
@@ -339,13 +341,23 @@ export const createSubcomponent = <
     'createSubcomponent only works on models with context. Please use `createModelHook` to create the `modelHook`'
   );
 
-  return <Props>(
+  return <Props = {}>(
     Component: (
-      props: Props & RemoveNull<ReturnType<TPropHook>> & {ref: ExtractRef<E>},
+      props: Props &
+        (TElemPropsHook extends (...args: any[]) => infer TProps // try to infer TProps returned from the elemPropsHook function
+          ? TProps extends {ref: infer R}
+            ? TProps
+            : TProps & {ref: ExtractRef<E>}
+          : {ref: ExtractRef<E>}) &
+        (Props extends {children: any}
+          ? {}
+          : {
+              children?: React.ReactNode;
+            }),
       Element: E extends undefined ? never : E,
-      model: TModelHook extends (config: infer TConfig) => infer TModel ? TModel : never
+      model: TModelHook extends (...args: any[]) => infer TModel ? TModel : never
     ) => React.ReactElement | null
-  ): (TModelHook extends (config: infer TConfig) => infer TModel
+  ): (TModelHook extends (...args: any[]) => infer TModel
     ? ElementComponentM<
         // E is not `undefined` here, but Typescript thinks it could be, so we add another `undefined`
         // check and cast to a `React.FC` to match a valid signature for `ElementComponent`.
@@ -353,7 +365,7 @@ export const createSubcomponent = <
         E extends undefined ? React.FC : E,
         Props,
         TModel
-      > & {Context: React.Context<TModel>}
+      >
     : never) &
     SubComponents => {
     const ReturnedComponent = React.forwardRef<
@@ -361,7 +373,9 @@ export const createSubcomponent = <
       Props & {as?: React.ElementType} & {model?: any; elemPropsHook?: (...args: any) => any}
     >(({as: asOverride, model, elemPropsHook: additionalPropsHook, ...props}, ref) => {
       const localModel = useModelContext(modelHook.Context!, model);
-      const elemProps = elemPropsHook ? elemPropsHook(localModel, props, ref) : {...props, ref};
+      const elemProps = elemPropsHook
+        ? (elemPropsHook as any)(localModel, props, ref)
+        : {...props, ref};
 
       return Component(
         additionalPropsHook ? additionalPropsHook(localModel, elemProps, ref) : elemProps,
@@ -482,7 +496,7 @@ export const createWrapperSubcomponent = <TElement extends ElementComponentM<any
     Context?: React.Context<any>;
   } & {defaultConfig?: Record<string, any>},
   TDefaultContext extends {state: Record<string, any>; events: Record<string, any>},
-  TPropsHook extends (...args: any) => any,
+  TElemPropsHook extends (...args: any) => any,
   SubComponents = {}
 >({
   displayName,
@@ -493,7 +507,7 @@ export const createWrapperSubcomponent = <TElement extends ElementComponentM<any
 }: {
   displayName?: string;
   modelHook: TModelHook;
-  elemPropsHook?: TPropsHook;
+  elemPropsHook?: TElemPropsHook;
   defaultContext?: TDefaultContext;
   subComponents?: SubComponents;
 }): TModelHook extends (config: infer TConfig) => infer TModel

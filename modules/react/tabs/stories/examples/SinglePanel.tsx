@@ -1,10 +1,10 @@
 import React from 'react';
 import {space} from '@workday/canvas-kit-react/tokens';
 
-import {Tabs, useTabsModel2} from '@workday/canvas-kit-react/tabs';
+import {Tabs, useTabsModel} from '@workday/canvas-kit-react/tabs';
 
 export const SinglePanel = () => {
-  const model = useTabsModel2();
+  const model = useTabsModel();
 
   const message = (
     <p>

@@ -61,16 +61,23 @@ export interface Item<T> {
 //   }
 // }
 
-export const useBaseListModel2 = createModelHook({
+// force Typescript to use `Generic` as a symbol
+const genericDefaultConfig: {
+  /**
+   * Optional array of items. If provided, use a render prop for list children instead of static
+   * children. If the shape of each item object does not have an `id` property or uses a different
+   * property to uniquely identify each item, a `getId` must also be supplied.
+   */
+  items: Generic[];
+} = {
+  items: [],
+};
+
+export const useBaseListModel = createModelHook({
   defaultConfig: {
+    ...genericDefaultConfig,
     /** IDREF of the list. Children ids can be derived from this id */
     id: '',
-    /**
-     * Optional array of items. If provided, use a render prop for list children instead of static
-     * children. If the shape of each item object does not have an `id` property or uses a different
-     * property to uniquely identify each item, a `getId` must also be supplied.
-     */
-    items: [] as Generic[],
     /**
      * Optional function to return an id of an item. If not provided, the default function will return
      * the `id` property from the object of each item. If you did not provide `items`, do not override
@@ -100,7 +107,6 @@ export const useBaseListModel2 = createModelHook({
      * @default 50
      */
     defaultItemHeight: 50,
-    foobar: '',
     shouldVirtualize: true,
   },
 })(config => {
@@ -136,13 +142,18 @@ export const useBaseListModel2 = createModelHook({
     overscan: 3, // overscan of 3 helps rapid navigation
   });
 
+  // Force Typescript to recognize the `Generic` symbol
+  const genericState: {items: Item<Generic>[]} = {
+    items: items.length ? items : staticItems,
+  };
+
   const state = {
+    ...genericState,
     UNSTABLE_virtual,
     UNSTABLE_defaultItemHeight,
     containerRef,
     id,
     orientation,
-    items: items.length ? items : staticItems,
     indexRef,
     nonInteractiveIds: config.nonInteractiveIds || [],
     isVirtualized,
