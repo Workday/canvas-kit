@@ -104,9 +104,6 @@ export const getNextPage: NavigationRequestor = (id, {state}) => {
 };
 
 const getItem: NavigationRequestor = (id, {state}) => {
-  getId(state.items[0]); //?
-  id; //?
-  state.items; //?
   const item = id ? state.items.find(item => getId(item) === id) : getFirst(id, {state}); // no id, return first item
   assert(item, `Item not found: ${id}`);
   return item;
