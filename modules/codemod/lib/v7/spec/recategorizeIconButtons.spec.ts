@@ -78,21 +78,29 @@ describe('recategorizeIconButtons', () => {
     expectTransform(input, expected);
   });
 
-  it('should not error when an expression lives in a JSX attribute', () => {
+  it('should not error when variant prop is an expression', () => {
+    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {
+      //No op
+    });
+
     const input = stripIndent`
-        import {IconButton} from '@workday/canvas-kit-react/button';
-        <>
-            <IconButton variant={ true ? "circle" : "inverse"} />
-        </>
+    import {IconButton} from '@workday/canvas-kit-react/button';
+    <>
+    <IconButton variant={ true ? "circle" : "inverse"} />
+    </>
     `;
     const expected = stripIndent`
-        import { TertiaryButton, SecondaryButton } from '@workday/canvas-kit-react/button';
-        <>
-            <IconButton variant={ true ? "circle" : "inverse"} />
-        </>
+    import {TertiaryButton} from '@workday/canvas-kit-react/button';
+    <>
+    <TertiaryButton variant={ true ? "circle" : "inverse"} />
+    </>
     `;
 
     expectTransform(input, expected);
+
+    expect(warn).toHaveBeenCalledTimes(1);
+
+    warn.mockReset();
   });
 
   it('should restructure styled IconButton usages', () => {
