@@ -4,7 +4,6 @@ import {
   createComponent,
   styled,
   StyledType,
-  useIsRTL,
   useModelContext,
 } from '@workday/canvas-kit-react/common';
 import {colors, space, SystemIcon, SystemIconProps} from '@workday/canvas-kit-react';
@@ -22,13 +21,13 @@ export interface StartChevronProps extends Omit<SystemIconProps, 'icon'> {
   icon?: CanvasSystemIcon;
 }
 
-const StyledIcon = styled(SystemIcon)<{isVisible: boolean; isRTL: boolean} & StyledType>(
+const StyledIcon = styled(SystemIcon)<{isVisible: boolean} & StyledType>(
   {
+    margin: `0 ${space.xxs} 0 0`,
     padding: space.xxxs,
   },
-  ({isVisible, isRTL}) => ({
+  ({isVisible}) => ({
     transform: !isVisible ? 'rotate(-90deg)' : undefined,
-    margin: isRTL ? `0 ${space.xxs} 0 0` : `0 0 ${space.xxs} 0`,
   })
 );
 
@@ -39,13 +38,10 @@ export const StartIcon = createComponent()({
     const state = expandableModel.state;
     const isVisible = state.visibility === 'visible';
 
-    const isRTL = useIsRTL();
-
     return (
       <StyledIcon
         as={Element}
         fill={colors.licorice200}
-        isRTL={isRTL}
         isVisible={isVisible}
         icon={icon}
         ref={ref}

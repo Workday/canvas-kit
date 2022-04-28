@@ -22,7 +22,7 @@ export interface ExpandableContentProps {
 const Container = styled('div')<StyledType>({
   background: 'none',
   border: 'none',
-  padding: `${space.s} ${space.xxs} ${space.xxs} ${space.xxs}`,
+  padding: `${space.s} ${space.xxs} ${space.xxs}`,
 });
 
 export const ExpandableContent = createComponent('div')({

@@ -13,7 +13,6 @@ import {StartIcon} from './ExpandableStartIcon';
 import {EndIcon} from './ExpandableEndIcon';
 import {Title} from './ExpandableTitle';
 import {ExpandableAvatar} from './ExpandableAvatar';
-import {space} from '@workday/canvas-kit-react/tokens';
 import {Flex, FlexProps} from '@workday/canvas-kit-react/layout';
 
 export const ExpandableModelContext = React.createContext<DisclosureModel>({} as any);
@@ -29,12 +28,15 @@ export interface ExpandableProps extends DisclosureModelConfig, FlexProps {
 export const Expandable = createComponent('div')({
   displayName: 'Expandable',
   Component: ({children, model, ...props}: ExpandableProps, ref) => {
-    const config = props as DisclosureModelConfig;
-    const value = useDefaultModel(model, config, useDisclosureModel);
-    const flexProps = props as FlexProps;
+    const {id, initialVisibility, shouldShow, shouldHide, onShow, onHide, ...elemProps} = props;
+    const value = useDefaultModel(
+      model,
+      {id, initialVisibility, shouldShow, shouldHide, onShow, onHide},
+      useDisclosureModel
+    );
     return (
       <ExpandableModelContext.Provider value={value}>
-        <Flex ref={ref} {...flexProps} flexDirection={'column'} padding={space.xxs}>
+        <Flex flexDirection={'column'} padding="xxs" ref={ref} {...elemProps}>
           {children}
         </Flex>
       </ExpandableModelContext.Provider>
