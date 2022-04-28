@@ -36,7 +36,6 @@ const getButtonPillColors = () => {
       label: colors.blackPepper400,
       border: colors.licorice200,
     },
-
     hover: {
       icon: colors.licorice500,
       background: colors.soap400,
@@ -66,14 +65,14 @@ const getButtonPillColors = () => {
 };
 
 const getRemovablePillColors = (disabled?: boolean) => {
+  console.warn(disabled);
   return {
     default: {
-      background: colors.soap300,
-      icon: colors.licorice200,
-      label: colors.blackPepper400,
+      background: disabled ? colors.soap100 : colors.soap300,
+      icon: disabled ? colors.licorice100 : colors.licorice200,
+      label: disabled ? colors.licorice100 : colors.blackPepper400,
       border: disabled ? colors.licorice100 : colors.licorice200,
     },
-
     hover: {
       icon: disabled ? colors.licorice100 : colors.licorice500,
       background: disabled ? colors.soap100 : colors.soap300,
@@ -104,7 +103,7 @@ const pillBaseStyles: CSSObject = {
   ...type.levels.subtext.large,
   boxShadow: 'none',
   outline: 'none',
-  fontWeight: 500,
+  fontWeight: type.properties.fontWeights.medium,
   WebkitFontSmoothing: 'antialiased',
   MozOsxFontSmoothing: 'grayscale',
   width: 'fit-content',
@@ -177,12 +176,9 @@ export const Pill = createComponent('button')({
           )}
           {config.onDelete && !config.onClick && (
             <StyledNonInteractivePill
-              colors={getRemovablePillColors(config.disabled)}
+              colors={getRemovablePillColors(value.state.disabled)}
               as={actualEl}
               ref={ref}
-              backgroundColor={config.disabled ? colors.soap100 : colors.soap300}
-              color={config.disabled ? colors.licorice100 : colors.blackPepper400}
-              borderColor={config.disabled ? colors.licorice100 : colors.licorice200}
               {...elemProps}
             >
               <HStack spacing="xxxs" height="inherit" alignItems="center">

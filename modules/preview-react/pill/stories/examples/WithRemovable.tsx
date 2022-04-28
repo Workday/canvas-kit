@@ -7,7 +7,7 @@ import {HStack} from '@workday/canvas-kit-react';
 
 export const RemovablePill = () => (
   <HStack shouldWrapChildren spacing="xxs">
-    <Pill onDelete={() => console.warn('clicked')}>
+    {/* <Pill onDelete={() => console.warn('clicked')}>
       Pink Shirts
       <Pill.IconButton />
     </Pill>
@@ -15,7 +15,7 @@ export const RemovablePill = () => (
       <Pill.Avatar url={testAvatar}></Pill.Avatar>
       Carolyn Grimaldi
       <Pill.IconButton />
-    </Pill>
+    </Pill> */}
 
     <Pill onDelete={() => console.warn('clicked')} disabled>
       This is a category that should not exist because it is too long

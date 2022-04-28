@@ -51,7 +51,7 @@ const StyledFocusTarget = styled('span')<StyledType & PillIconButtonProps>({
   position: 'absolute',
   right: space.xxxs,
   left: space.xxxs,
-  margin: '0 !important',
+  margin: 0,
   borderRadius: borderRadius.m,
   '&:focus': {
     ...focusRing({

@@ -1,14 +1,11 @@
 import React from 'react';
 
 import {createComponent, styled, StyledType} from '@workday/canvas-kit-react/common';
-import {BoxProps, Box} from '@workday/canvas-kit-react/layout';
+import {Flex, FlexProps} from '@workday/canvas-kit-react/layout';
 import {borderRadius, colors, space} from '@workday/canvas-kit-react/tokens';
 
-export interface PillCountProps extends BoxProps {}
-const StyledCountContainer = styled(Box.as('span'))<StyledType>({
-  display: 'inline-flex',
-  alignItems: 'center',
-  justifyContent: 'center',
+export interface PillCountProps extends FlexProps {}
+const StyledCountContainer = styled(Flex.as('span'))<StyledType>({
   borderTopLeftRadius: borderRadius.zero,
   borderTopRightRadius: borderRadius.m,
   borderBottomLeftRadius: borderRadius.zero,
@@ -19,6 +16,9 @@ export const PillCount = createComponent('span')({
   Component: ({children, ...elemProps}: PillCountProps, ref, Element) => {
     return (
       <StyledCountContainer
+        display="inline-flex"
+        alignItems="center"
+        justifyContent="center"
         as={Element}
         height={22}
         width={22}

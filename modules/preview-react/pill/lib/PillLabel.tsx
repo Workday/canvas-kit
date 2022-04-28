@@ -7,12 +7,14 @@ import {
   useModelContext,
 } from '@workday/canvas-kit-react/common';
 import {Box, BoxProps} from '@workday/canvas-kit-react/layout';
-import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
+import {OverflowTooltip, OverflowTooltipProps} from '@workday/canvas-kit-react/tooltip';
 import {PillModelContext} from './Pill';
 import {PillModel} from './usePillModel';
+import {colors} from '@workday/canvas-kit-react/tokens';
 
 export interface PillLabelProps extends BoxProps {
   model?: PillModel;
+  tooltipProps?: Omit<OverflowTooltipProps, 'children'>;
 }
 const StyledLabelContainer = styled(Box.as('span'))<StyledType>({
   whiteSpace: 'nowrap',
@@ -22,11 +24,16 @@ const StyledLabelContainer = styled(Box.as('span'))<StyledType>({
 });
 export const PillLabel = createComponent('span')({
   displayName: 'Pill.Label',
-  Component: ({children, model, ...elemProps}: PillLabelProps, ref, Element) => {
+  Component: ({children, model, tooltipProps, ...elemProps}: PillLabelProps, ref, Element) => {
     const {state} = useModelContext(PillModelContext, model);
     return (
-      <OverflowTooltip>
-        <StyledLabelContainer maxWidth={state.maxWidth} ref={ref} {...elemProps}>
+      <OverflowTooltip {...tooltipProps}>
+        <StyledLabelContainer
+          color={state.disabled ? colors.licorice100 : 'inherit'}
+          maxWidth={state.maxWidth}
+          ref={ref}
+          {...elemProps}
+        >
           {children}
         </StyledLabelContainer>
       </OverflowTooltip>
