@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v6.8.4](https://github.com/Workday/canvas-kit/releases/tag/v6.8.4) (2022-04-28)
+
+### Components
+
+- fix(combobox): Add "overflow: hidden" to MenuContainer ([#1560](https://github.com/Workday/canvas-kit/pull/1560)) ([@jsvossen](https://github.com/jsvossen))
+
+
 ## [v6.8.3](https://github.com/Workday/canvas-kit/releases/tag/v6.8.3) (2022-04-22)
 
 ### Codemods
