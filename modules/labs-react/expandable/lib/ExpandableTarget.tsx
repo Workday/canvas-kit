@@ -10,14 +10,23 @@ import {
 } from '@workday/canvas-kit-react/common';
 
 import {ExpandableModelContext} from './Expandable';
-import {DisclosureModel} from '@workday/canvas-kit-react/disclosure';
-import {Title} from './Expandable.Title';
+import {DisclosureModel, DisclosureModelConfig} from '@workday/canvas-kit-react/disclosure';
+import {Title} from './ExpandableTitle';
 import {colors, space} from '@workday/canvas-kit-react';
 
-export interface ExpandableTargetProps {
+export interface ExpandableTargetProps extends DisclosureModelConfig {
   model?: DisclosureModel;
+  /**
+   * Children of the Expandable Target. Should contain Target.Title, an options Target.Avatar
+   * and either Target.StartIcon or Target.EndIcon. Target.StartIcon is meant to be placed
+   * before the Target.Title and Target.EndIcon should be placed after.
+   */
   children: React.ReactNode;
-  headingLevel: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+  /**
+   * Semantic heading level that will wrap the Expandable Target's button. Only use 'div' if
+   * you absolutely understand the accessibility implications of not using a heading!!!
+   */
+  headingLevel: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'div';
 }
 
 const useDiscloseTarget = (
@@ -39,6 +48,7 @@ const useDiscloseTarget = (
 
 const StyledButton = styled('button')<StyledType>({
   display: 'flex',
+  cursor: 'pointer',
   flexDirection: 'row',
   alignItems: 'center',
   border: 'none',
@@ -55,6 +65,10 @@ const StyledButton = styled('button')<StyledType>({
   ...hideMouseFocus,
 });
 
+const Heading = styled('h1')<StyledType>({
+  margin: 0,
+});
+
 export const ExpandableTarget = createComponent('button')({
   displayName: 'Expandable.Target',
   Component: (
@@ -62,20 +76,19 @@ export const ExpandableTarget = createComponent('button')({
     ref,
     Element
   ) => {
-    const expandableModel = useModelContext(ExpandableModelContext, model);
-    const target = useDiscloseTarget(expandableModel, elemProps);
-    const state = expandableModel.state;
+    const {state, events} = useModelContext(ExpandableModelContext, model);
+    const target = useDiscloseTarget({state, events}, elemProps);
     const isVisible = state.visibility === 'visible';
-    const Heading = headingLevel;
 
     return (
-      <Heading style={{margin: 0, paddingBottom: isVisible ? space.s : space.xxs}}>
+      <Heading as={headingLevel}>
         <StyledButton
           as={Element}
           aria-controls={isVisible ? state.id : undefined}
           aria-expanded={isVisible}
           ref={ref}
           {...target}
+          {...elemProps}
         >
           {React.Children.map(children, (child, index) => {
             if (typeof child === 'string') {

@@ -7,12 +7,12 @@ import {
   useDisclosureModel,
   DisclosureModelConfig,
 } from '@workday/canvas-kit-react/disclosure';
-import {ExpandableContent} from './Expandable.Content';
-import {ExpandableTarget} from './Expandable.Target';
-import {StartChevron} from './Expandable.StartChevron';
-import {EndChevron} from './Expandable.EndChevron';
-import {Title} from './Expandable.Title';
-import {ExpandableAvatar} from './Expandable.Avatar';
+import {ExpandableContent} from './ExpandableContent';
+import {ExpandableTarget} from './ExpandableTarget';
+import {StartIcon} from './ExpandableStartIcon';
+import {EndIcon} from './ExpandableEndIcon';
+import {Title} from './ExpandableTitle';
+import {ExpandableAvatar} from './ExpandableAvatar';
 import {space} from '@workday/canvas-kit-react/tokens';
 import {Flex, FlexProps} from '@workday/canvas-kit-react/layout';
 
@@ -20,15 +20,18 @@ export const ExpandableModelContext = React.createContext<DisclosureModel>({} as
 
 export interface ExpandableProps extends DisclosureModelConfig, FlexProps {
   model?: DisclosureModel;
+  /**
+   * Children of the Expandable container. This should contain Expandable.Target and Expandable.Container
+   */
   children: React.ReactNode;
 }
 
 export const Expandable = createComponent('div')({
   displayName: 'Expandable',
-  Component: ({children, model, ...elemProps}: ExpandableProps, ref) => {
-    const config = elemProps as DisclosureModelConfig;
+  Component: ({children, model, ...props}: ExpandableProps, ref) => {
+    const config = props as DisclosureModelConfig;
     const value = useDefaultModel(model, config, useDisclosureModel);
-    const flexProps = elemProps as FlexProps;
+    const flexProps = props as FlexProps;
     return (
       <ExpandableModelContext.Provider value={value}>
         <Flex ref={ref} {...flexProps} flexDirection={'column'} padding={space.xxs}>
@@ -40,8 +43,8 @@ export const Expandable = createComponent('div')({
   subComponents: {
     Target: ExpandableTarget,
     Content: ExpandableContent,
-    StartChevron: StartChevron,
-    EndChevron: EndChevron,
+    StartIcon: StartIcon,
+    EndIcon: EndIcon,
     Avatar: ExpandableAvatar,
     Title: Title,
   },

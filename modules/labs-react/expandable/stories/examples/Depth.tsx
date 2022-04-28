@@ -5,10 +5,10 @@ import {space} from '@workday/canvas-kit-react/tokens';
 
 export const Depth = () => {
   return (
-    <Expandable borderRadius="m" depth={3} margin={space.xxxs} padding={space.xs}>
+    <Expandable borderRadius="l" depth={3} margin="xxxs" padding="xs">
       <Expandable.Target headingLevel="h4">
         <Expandable.Title>Additional Information</Expandable.Title>
-        <Expandable.EndChevron />
+        <Expandable.EndIcon />
       </Expandable.Target>
 
       <Expandable.Content>This Expandable Container has a depth of 3.</Expandable.Content>

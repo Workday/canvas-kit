@@ -2,11 +2,11 @@ import React from 'react';
 
 import {Expandable} from '@workday/canvas-kit-labs-react/expandable';
 
-export const Basic = () => (
+export const EndIcon = () => (
   <Expandable>
-    <Expandable.Target headingLevel="h1">
-      <Expandable.StartChevron />
-      Title
+    <Expandable.Target headingLevel="h4">
+      <Expandable.Title>Title</Expandable.Title>
+      <Expandable.EndIcon />
     </Expandable.Target>
 
     <Expandable.Content>Content</Expandable.Content>

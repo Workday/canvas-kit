@@ -3,10 +3,11 @@ import {Specifications} from '@workday/canvas-kit-docs';
 
 import {Expandable} from '@workday/canvas-kit-labs-react/expandable';
 
-import {Basic} from './examples/Basic';
-import {EndChevron} from './examples/EndChevron';
+import {StartIcon} from './examples/StartIcon';
+import {EndIcon} from './examples/EndIcon';
 import {Avatar} from './examples/Avatar';
 import {Depth} from './examples/Depth';
+import {RTL} from './examples/RTL';
 
 <Meta title="Labs/Containers/Expandable/React" component={Expandable} />
 
@@ -22,17 +23,21 @@ yarn add @workday/canvas-kit-labs-react
 
 ## Usage
 
-### Basic Start Chevron Example
+### Start Icon
 
-<ExampleCodeBlock code={Basic} />
+<ExampleCodeBlock code={StartIcon} />
 
-### Basic End Chevron Example
+### End Icon
 
-<ExampleCodeBlock code={EndChevron} />
+<ExampleCodeBlock code={EndIcon} />
 
 ### With Avatar
 
 <ExampleCodeBlock code={Avatar} />
+
+### Right to Left (RTL)
+
+<ExampleCodeBlock code={RTL} />
 
 ### Depth
 
@@ -73,23 +78,23 @@ It provides a React Context model for its sub components.
 
 <!-- <ArgsTable of={Expandable.Title} /> -->
 
-### Expandable.StartChevron
+### Expandable.StartIcon
 
 #### Usage
 
-`Expandable.StartChevron` creates a chevron points down when the container is expanded and points
+`Expandable.StartIcon` creates an icon, by default it uses a chevron. It will orient the icon
 towards the title when the container is closed.
 
 #### Props
 
 <!-- <ArgsTable of={Expandable.StartChevron} /> -->
 
-### Expandable.EndChevron
+### Expandable.EndIcon
 
 #### Usage
 
-`Expandable.EndChevron` creates a chevron that points down when the container is expanded and points
-up when the container is closed.
+`Expandable.EndIcon` creates an icon, by default is uses a chevron that points up. It will orient
+the icon up when the container is closed.
 
 #### Props
 

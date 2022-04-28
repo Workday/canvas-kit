@@ -13,13 +13,16 @@ import {DisclosureModel} from '@workday/canvas-kit-react/disclosure';
 
 export interface ExpandableContentProps {
   model?: DisclosureModel;
+  /**
+   * Children of the Expandable Content. Can contain anything that should be conditionally visible.
+   */
   children: React.ReactNode;
 }
 
 const Container = styled('div')<StyledType>({
   background: 'none',
   border: 'none',
-  padding: space.xxs,
+  padding: `${space.s} ${space.xxs} ${space.xxs} ${space.xxs}`,
 });
 
 export const ExpandableContent = createComponent('div')({
