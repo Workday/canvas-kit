@@ -91,11 +91,9 @@ storiesOf('Labs/Combobox/React', module)
     </FormField>
   ))
   .add('Group of results', () => (
-    <div>
-      <FormField id="autocomplete-123" label="Group of results">
-        <Autocomplete group={true} />
-      </FormField>
-    </div>
+    <FormField id="autocomplete-123" label="Group of results">
+      <Autocomplete group={true} />
+    </FormField>
   ))
   .add('Disabled item', () => (
     <FormField id="autocomplete-123" label="Group of results">

@@ -1,6 +1,10 @@
 import React from 'react';
 import {createModelHook} from '@workday/canvas-kit-react/common';
-import {defaultGetId, useListModel, useOverflowListModel} from '@workday/canvas-kit-react/list';
+import {
+  defaultGetId,
+  useListModel,
+  useOverflowListModel,
+} from '@workday/canvas-kit-react/collection';
 
 import {useMenuModel} from './menu';
 

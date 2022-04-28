@@ -219,7 +219,7 @@ function defaultGetElemProps(input: any) {
   return input;
 }
 
-export const createContainerComponent = <
+export const createContainer = <
   E extends
     | keyof JSX.IntrinsicElements
     | React.ComponentType

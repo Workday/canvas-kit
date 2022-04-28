@@ -6,21 +6,26 @@ import {
   useListRenderItems,
   useListItemSelect,
   useListModel,
+  multiSelectionManager,
   ListProps,
   ListItemProps,
-} from '@workday/canvas-kit-react/list';
+} from '@workday/canvas-kit-react/collection';
 import {composeHooks} from '@workday/canvas-kit-react/common';
 
 const ListModelContext = useListModel.Context;
 
 const List = (props: ListProps) => {
-  const model = useListModel();
+  const model = useListModel({
+    selection: multiSelectionManager,
+  });
 
   return (
     <ListModelContext.Provider value={model}>
       <ul>{useListRenderItems(model, props.children)}</ul>
       <p>Cursor ID: {model.state.cursorId}</p>
-      <p>Selected ID: {model.state.selectedIds[0]}</p>
+      <p>
+        Selected ID: {(model.state.selectedIds !== 'all' ? model.state.selectedIds : []).join(',')}
+      </p>
     </ListModelContext.Provider>
   );
 };
@@ -43,7 +48,7 @@ const Item = (elemProps: ListItemProps) => {
   );
 };
 
-export const Selection = () => {
+export const MultiSelection = () => {
   return (
     <List>
       <Item>First</Item>

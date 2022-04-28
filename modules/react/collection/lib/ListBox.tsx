@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  createContainerComponent,
+  createContainer,
   createElemPropsHook,
   createSubcomponent,
 } from '@workday/canvas-kit-react/common';
@@ -9,7 +9,6 @@ import {Box, BoxProps} from '@workday/canvas-kit-react/layout';
 import {useListModel} from './useListModel';
 import {useListRenderItems} from './useListRenderItem';
 import {useListItemRegister} from './useListItemRegister';
-import styled from '@emotion/styled';
 
 export interface ListBoxProps extends BoxProps {
   children?: React.ReactNode | ((item: any) => React.ReactNode);
@@ -19,7 +18,7 @@ export const ListBoxItem = createSubcomponent('li')({
   displayName: 'Item',
   modelHook: useListModel,
   elemPropsHook: useListItemRegister,
-})<BoxProps>((elemProps, Element, model) => {
+})<BoxProps>((elemProps, Element) => {
   return <Box as={Element} {...elemProps} />;
 });
 
@@ -40,7 +39,7 @@ const useListBox = createElemPropsHook(useListModel)(model => {
  * - Inner Box: The element responsible for the virtual container. Height is controlled by the model
  *   and cannot be changed by the developer. All props and ref will be spread to this element.
  */
-export const ListBox = createContainerComponent('ul')({
+export const ListBox = createContainer('ul')({
   displayName: 'ListBox',
   modelHook: useListModel,
   elemPropsHook: useListBox,

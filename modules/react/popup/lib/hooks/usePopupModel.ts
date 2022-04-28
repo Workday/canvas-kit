@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {createModelHook} from '@workday/canvas-kit-react/common';
 
-import {useDisclosureModel2} from '@workday/canvas-kit-react/disclosure';
+import {useDisclosureModel} from '@workday/canvas-kit-react/disclosure';
 import {Placement} from '@workday/canvas-kit-react/popup';
 
 // eslint-disable-next-line no-empty-function
@@ -11,7 +11,7 @@ export const usePopupModel = createModelHook({
   // create enough of a model to use `Popup.Card` without a `Popup` container component.
   defaultContext: {state: {}, events: {show: noop, hide: noop}},
   defaultConfig: {
-    ...useDisclosureModel2.defaultConfig,
+    ...useDisclosureModel.defaultConfig,
     /**
      * Optional reference to an element that should receive focus when a popup is hidden. If left
      * blank, focus will return to the `targetRef`
@@ -23,12 +23,12 @@ export const usePopupModel = createModelHook({
      */
     initialFocusRef: undefined as undefined | React.RefObject<any>,
   },
-  requiredConfig: useDisclosureModel2.requiredConfig,
+  requiredConfig: useDisclosureModel.requiredConfig,
 })(config => {
   const stackRef = React.useRef<HTMLDivElement>(null);
   const targetRef = React.useRef<HTMLButtonElement>(null);
   const [placement, setPlacement] = React.useState<Placement>('bottom');
-  const disclosure = useDisclosureModel2(config);
+  const disclosure = useDisclosureModel(config);
 
   const state = {
     ...disclosure.state,

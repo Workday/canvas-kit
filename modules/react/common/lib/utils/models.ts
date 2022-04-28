@@ -228,7 +228,7 @@ export type ModelExtras<TDefaultConfig, TRequiredConfig, TState, TEvents, TModel
   TConfig: TDefaultConfig & TRequiredConfig;
   /**
    * The context of the model. This can be used directly, but is mostly used internally by
-   * `createContainerComponent` or `createSubcomponent` to handle model context automatically.
+   * `createContainer` or `createSubcomponent` to handle model context automatically.
    */
   Context: React.Context<TModel>;
   /**

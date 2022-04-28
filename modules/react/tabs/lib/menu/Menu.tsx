@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {createContainerComponent} from '@workday/canvas-kit-react/common';
+import {createContainer} from '@workday/canvas-kit-react/common';
 
 import {useMenuModel} from './useMenuModel';
 import {MenuPopper} from './MenuPopper';
@@ -32,7 +32,7 @@ export interface MenuProps {
  *   </Menu.Popper>
  * </Menu>
  */
-export const Menu = createContainerComponent()({
+export const Menu = createContainer()({
   displayName: 'Menu',
   modelHook: useMenuModel,
   subComponents: {

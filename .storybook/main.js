@@ -29,9 +29,6 @@ module.exports = {
     // Get the specifications object and replace with a real object in the spec.ts file
     const specs = await getSpecifications();
 
-    // temp
-    config.mode = 'development';
-
     // modules/specifications/lib/specs.ts
     config.module.rules.push({
       test: /specs\.ts$/,

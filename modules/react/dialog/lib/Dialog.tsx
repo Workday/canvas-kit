@@ -1,9 +1,6 @@
 import React from 'react';
 
-import {
-  createContainerComponent,
-  createWrapperSubcomponent,
-} from '@workday/canvas-kit-react/common';
+import {createContainer, createWrapperSubcomponent} from '@workday/canvas-kit-react/common';
 import {Popup} from '@workday/canvas-kit-react/popup';
 
 import {DialogPopper} from './DialogPopper';
@@ -17,7 +14,7 @@ export interface DialogProps {
   children: React.ReactNode;
 }
 
-export const Dialog = createContainerComponent()({
+export const Dialog = createContainer()({
   displayName: 'Dialog',
   modelHook: useDialogModel,
   subComponents: {

@@ -1,6 +1,6 @@
-# Canvas Kit List
+# Canvas Kit Collection
 
-List System
+Collection System
 
 ## Installation
 
@@ -12,9 +12,9 @@ yarn add @workday/canvas-kit-react
 
 ```tsx
 import * as React from 'react';
-import {List} from '@workday/canvas-kit-react/list';
+import {Collection} from '@workday/canvas-kit-react/collection';
 
-<List />;
+<Collection />;
 ```
 
 ## Static Properties

@@ -17,7 +17,7 @@ import {
   useListItemRegister,
   useListItemRovingFocus,
   useListItemSelect,
-} from '@workday/canvas-kit-react/list';
+} from '@workday/canvas-kit-react/collection';
 
 import {useMenuModel} from './useMenuModel';
 

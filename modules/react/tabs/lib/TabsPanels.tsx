@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import {createSubcomponent} from '@workday/canvas-kit-react/common';
-import {useListRenderItems} from '@workday/canvas-kit-react/list';
+import {useListRenderItems} from '@workday/canvas-kit-react/collection';
 
 import {useTabsModel} from './useTabsModel';
 

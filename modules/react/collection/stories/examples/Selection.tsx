@@ -4,10 +4,11 @@ import {
   useListItemRegister,
   useListItemRovingFocus,
   useListRenderItems,
+  useListItemSelect,
   useListModel,
   ListProps,
   ListItemProps,
-} from '@workday/canvas-kit-react/list';
+} from '@workday/canvas-kit-react/collection';
 import {composeHooks} from '@workday/canvas-kit-react/common';
 
 const ListModelContext = useListModel.Context;
@@ -19,11 +20,12 @@ const List = (props: ListProps) => {
     <ListModelContext.Provider value={model}>
       <ul>{useListRenderItems(model, props.children)}</ul>
       <p>Cursor ID: {model.state.cursorId}</p>
+      <p>Selected ID: {model.state.selectedIds[0]}</p>
     </ListModelContext.Provider>
   );
 };
 
-const useItem = composeHooks(useListItemRovingFocus, useListItemRegister);
+const useItem = composeHooks(useListItemSelect, useListItemRovingFocus, useListItemRegister);
 
 const Item = (elemProps: ListItemProps) => {
   const model = React.useContext(ListModelContext);
@@ -31,13 +33,17 @@ const Item = (elemProps: ListItemProps) => {
   const props = useItem(model, elemProps);
 
   return (
-    <li {...props}>
+    <button
+      role="listitem"
+      {...props}
+      style={{background: model.state.selectedIds.includes(props.name) ? 'gray' : 'white'}}
+    >
       {props.children} - {props['data-id']}
-    </li>
+    </button>
   );
 };
 
-export const RovingFocus = () => {
+export const Selection = () => {
   return (
     <List>
       <Item>First</Item>

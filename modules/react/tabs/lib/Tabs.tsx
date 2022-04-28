@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {createContainerComponent} from '@workday/canvas-kit-react/common';
+import {createContainer} from '@workday/canvas-kit-react/common';
 import {Menu} from './menu';
 
 import {TabsItem} from './TabsItem';
@@ -19,7 +19,7 @@ export interface TabsProps {
   children: React.ReactNode;
 }
 
-export const Tabs = createContainerComponent()({
+export const Tabs = createContainer()({
   displayName: 'Tabs',
   modelHook: useTabsModel,
   subComponents: {

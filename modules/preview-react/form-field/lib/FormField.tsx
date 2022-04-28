@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {createContainerComponent, ExtractProps} from '@workday/canvas-kit-react/common';
+import {createContainer, ExtractProps} from '@workday/canvas-kit-react/common';
 import {Stack, StackSpacing} from '@workday/canvas-kit-react/layout';
 
 import {useFormFieldModel, useFormFieldOrientation} from './hooks';
@@ -24,7 +24,7 @@ export interface FormFieldProps extends Omit<ExtractProps<typeof Stack, never>, 
   spacing?: StackSpacing;
 }
 
-export const FormField = createContainerComponent('div')({
+export const FormField = createContainer('div')({
   displayName: 'FormField',
   modelHook: useFormFieldModel,
   subComponents: {

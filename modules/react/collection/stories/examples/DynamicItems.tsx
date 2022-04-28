@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {ListBox, useListItemRovingFocus} from '@workday/canvas-kit-react/list';
+import {ListBox} from '@workday/canvas-kit-react/collection';
 
 interface Item {
   id: string;
@@ -11,14 +11,10 @@ const items: Item[] = Array(1000)
   .fill(true)
   .map((_, index) => ({id: String(index + 1), text: `Item - ${index + 1}`}));
 
-export const BasicVirtual = () => {
+export const DynamicItems = () => {
   return (
     <ListBox items={items} maxHeight={300}>
-      {(item: Item) => (
-        <ListBox.Item data-id={item.id} elemPropsHook={useListItemRovingFocus}>
-          {item.text}
-        </ListBox.Item>
-      )}
+      {(item: Item) => <ListBox.Item data-id={item.id}>{item.text}</ListBox.Item>}
     </ListBox>
   );
 };

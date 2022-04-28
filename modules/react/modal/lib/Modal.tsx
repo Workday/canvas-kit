@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {
-  createContainerComponent,
+  createContainer,
   createWrapperSubcomponent,
   ExtractProps,
 } from '@workday/canvas-kit-react/common';
@@ -17,7 +17,7 @@ export interface ModalProps extends ExtractProps<typeof Dialog, never> {
   children: React.ReactNode;
 }
 
-export const Modal = createContainerComponent()({
+export const Modal = createContainer()({
   displayName: 'Modal',
   modelHook: useModalModel,
   subComponents: {

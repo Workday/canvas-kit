@@ -79,7 +79,7 @@ export const useListItemRovingFocus = createElemPropsHook(useCursorListModel)(
 
     React.useEffect(() => {
       if (keyDownRef.current) {
-        const item = navigation.getItem(state.cursorId, {state, getId});
+        const item = navigation.getItem(state.cursorId, {state});
         if (state.isVirtualized) {
           state.UNSTABLE_virtual.scrollToIndex(item.index);
         }

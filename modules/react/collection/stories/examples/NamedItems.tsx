@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {ListBox} from '@workday/canvas-kit-react/list';
+import {ListBox} from '@workday/canvas-kit-react/collection';
 
 export const NamedItems = () => {
   return (

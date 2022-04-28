@@ -12,7 +12,7 @@ import {
   useOverflowListMeasure,
   useListRenderItems,
   useListResetCursorOnBlur,
-} from '@workday/canvas-kit-react/list';
+} from '@workday/canvas-kit-react/collection';
 
 import {useTabsModel} from './useTabsModel';
 

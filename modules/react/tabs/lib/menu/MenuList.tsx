@@ -6,7 +6,7 @@ import {
   createElemPropsHook,
   ExtractProps,
 } from '@workday/canvas-kit-react/common';
-import {ListBox} from '@workday/canvas-kit-react/list';
+import {ListBox} from '@workday/canvas-kit-react/collection';
 import {Stack} from '@workday/canvas-kit-react/layout';
 
 import {useMenuModel} from './useMenuModel';

@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {createContainerComponent} from '@workday/canvas-kit-react/common';
+import {createContainer} from '@workday/canvas-kit-react/common';
 
 import {usePopupModel} from './hooks';
 import {PopupCard} from './PopupCard';
@@ -18,7 +18,7 @@ export interface PopupProps {
   children: React.ReactNode;
 }
 
-export const Popup = createContainerComponent()({
+export const Popup = createContainer()({
   displayName: 'Popup',
   modelHook: usePopupModel,
   subComponents: {

@@ -3,7 +3,7 @@ import {expectTypeOf} from 'expect-type';
 
 import {
   createComponent,
-  createContainerComponent,
+  createContainer,
   createSubcomponent,
   ElementComponent,
   ExtractProps,
@@ -204,7 +204,7 @@ describe('ExtractProps', () => {
     });
 
     it('should return only props on a `ComponentM`', () => {
-      const Component = createContainerComponent()({
+      const Component = createContainer()({
         modelHook: createModelHook({})((): Model => ({state: {foo: 'bar'}, events: {}})),
       })((props: Props) => null);
       type Expected = ExtractProps<typeof Component>;

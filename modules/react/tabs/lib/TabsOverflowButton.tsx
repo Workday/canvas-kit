@@ -8,7 +8,7 @@ import {
   createSubcomponent,
 } from '@workday/canvas-kit-react/common';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
-import {useOverflowListTarget} from '@workday/canvas-kit-react/list';
+import {useOverflowListTarget} from '@workday/canvas-kit-react/collection';
 
 import {useMenuTarget} from './menu';
 import {useTabsModel} from './useTabsModel';

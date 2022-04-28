@@ -5,7 +5,7 @@ import * as React from 'react';
 
 import {borderRadius, CSSProperties, space, type} from '@workday/canvas-kit-react/tokens';
 import {
-  createContainerComponent,
+  createContainer,
   ExtractProps,
   focusRing,
   hideMouseFocus,
@@ -42,7 +42,7 @@ const styles: CSSProperties = {
   ...hideMouseFocus,
 };
 
-export const Banner = createContainerComponent('button')({
+export const Banner = createContainer('button')({
   displayName: 'Banner',
   modelHook: useBannerModel,
   elemPropsHook: useBanner,

@@ -7,7 +7,7 @@ import {
   usePopupModel,
   useReturnFocus,
 } from '@workday/canvas-kit-react/popup';
-import {useListModel} from '@workday/canvas-kit-react/list';
+import {useListModel} from '@workday/canvas-kit-react/collection';
 
 export const useMenuModel = createModelHook({
   defaultConfig: {

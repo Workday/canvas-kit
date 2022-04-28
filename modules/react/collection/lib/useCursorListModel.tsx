@@ -26,7 +26,7 @@ export interface NavigationManager {
  *
  * For example,
  * ```tsx
- * import {createNavigationManager, wrappingNavigationManager} from '@workday/canvas-kit-react/list'
+ * import {createNavigationManager, wrappingNavigationManager} from '@workday/canvas-kit-react/collection'
  *
  * const navigationManager = createNavigationManager({
  *   ...wrappingNavigationManager,

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {createContainerComponent, ExtractProps} from '@workday/canvas-kit-react/common';
+import {createContainer, ExtractProps} from '@workday/canvas-kit-react/common';
 import {FormField, useFormFieldOrientation} from '@workday/canvas-kit-preview-react/form-field';
 import {Stack} from '@workday/canvas-kit-react/layout';
 
@@ -14,7 +14,7 @@ export interface TextInputProps extends ExtractProps<typeof FormField, never> {
   children: React.ReactNode;
 }
 
-export const TextInput = createContainerComponent('div')({
+export const TextInput = createContainer('div')({
   displayName: 'TextInput',
   modelHook: useTextInputModel,
   subComponents: {
