@@ -11,14 +11,14 @@ import {
 
 import {usePillModel, PillModel, PillModelConfig} from './usePillModel';
 
-import {PillIcon} from './Pill.Icon';
-import {PillIconButton} from './Pill.IconButton';
-import {PillCount} from './Pill.Count';
-import {PillAvatar} from './Pill.Avatar';
+import {PillIcon} from './PillIcon';
+import {PillIconButton} from './PillIconButton';
+import {PillCount} from './PillCount';
+import {PillAvatar} from './PillAvatar';
 import {borderRadius, colors, space, type} from '@workday/canvas-kit-react/tokens';
 import {BoxProps, boxStyleFn, HStack} from '@workday/canvas-kit-react/layout';
 import {CSSObject} from '@emotion/react';
-import {PillLabel} from './Pill.Label';
+import {PillLabel} from './PillLabel';
 import {BaseButton} from '@workday/canvas-kit-react/button';
 
 export const PillModelContext = React.createContext<PillModel>({} as any);
@@ -207,13 +207,3 @@ export const Pill = createComponent('button')({
     IconButton: PillIconButton,
   },
 });
-
-// const interface PillProps = {
-//   onClick:
-// }
-
-// const Pill = ({children, ...props}: PillsProps) => {
-//   return <button {...props}>{children}</button>;
-// };
-
-// <Pill onClick></Pill>

@@ -19,7 +19,7 @@ export const PillIcon = createComponent('span')({
     return (
       <SystemIcon
         marginInlineStart={`-${space.xxxs}`}
-        style={{display: 'flex'}}
+        display="flex"
         ref={ref}
         as={Element}
         size={20}
