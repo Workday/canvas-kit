@@ -40,7 +40,9 @@ export const Stack = createComponent('div')({
     return (
       <StyledStack as={Element} ref={ref} flexDirection="row" {...elemProps}>
         {shouldWrapChildren
-          ? validChildren.map(child => <StackItem>{child}</StackItem>)
+          ? validChildren.map((child, index) => (
+              <StackItem key={child.props.id || index}>{child}</StackItem>
+            ))
           : validChildren}
       </StyledStack>
     );

@@ -7,6 +7,7 @@ import {
   StyledType,
   useConstant,
   useDefaultModel,
+  useMount,
 } from '@workday/canvas-kit-react/common';
 
 import {usePillModel, PillModel, PillModelConfig} from './usePillModel';
@@ -16,7 +17,7 @@ import {PillIconButton} from './PillIconButton';
 import {PillCount} from './PillCount';
 import {PillAvatar} from './PillAvatar';
 import {borderRadius, colors, space, type} from '@workday/canvas-kit-react/tokens';
-import {BoxProps, boxStyleFn, HStack} from '@workday/canvas-kit-react/layout';
+import {BoxProps, boxStyleFn, HStack, Stack} from '@workday/canvas-kit-react/layout';
 import {CSSObject} from '@emotion/react';
 import {PillLabel} from './PillLabel';
 import {BaseButton} from '@workday/canvas-kit-react/button';
@@ -142,10 +143,22 @@ export const Pill = createComponent('button')({
       }
       return Element;
     });
+
+    if ('production' !== process.env.NODE_ENV) {
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      useMount(() => {
+        if (config.onClick && config.onDelete) {
+          console.warn(
+            `Please provide either an onClick OR an onDelete. If both are provided, nothing will render.`
+          );
+        }
+      });
+    }
+
     return (
       <PillModelContext.Provider value={value}>
         <>
-          {!config.onClick && !config.onDelete && (
+          {value.state.variations !== 'interactive' && value.state.variations !== 'removable' && (
             <StyledNonInteractivePill
               maxWidth={value.state.maxWidth}
               as={actualEl}
@@ -156,37 +169,45 @@ export const Pill = createComponent('button')({
               <PillLabel>{children}</PillLabel>
             </StyledNonInteractivePill>
           )}
-          {config.onClick && !config.onDelete && (
+          {value.state.variations === 'interactive' && !config.onDelete && (
             <StyledBasePill
               colors={getButtonPillColors()}
               as={Element}
               ref={ref}
-              onClick={config.onClick}
+              onClick={value.events.click}
               {...elemProps}
             >
-              <HStack spacing="xxxs">
+              <HStack spacing="xxxs" display="inline-flex">
                 {React.Children.map(children, (child, index) => {
                   if (typeof child === 'string') {
                     return <PillLabel key={index}>{child}</PillLabel>;
                   }
-                  return child;
+                  return (
+                    <Stack.Item key={index} display="inline-flex">
+                      {child}
+                    </Stack.Item>
+                  );
                 })}
               </HStack>
             </StyledBasePill>
           )}
-          {config.onDelete && !config.onClick && (
+          {value.state.variations === 'removable' && !config.onClick && (
             <StyledNonInteractivePill
               colors={getRemovablePillColors(value.state.disabled)}
               as={actualEl}
               ref={ref}
               {...elemProps}
             >
-              <HStack spacing="xxxs" height="inherit" alignItems="center">
+              <HStack spacing="xxxs" height="inherit" alignItems="center" shouldWrapChildren>
                 {React.Children.map(children, (child, index) => {
                   if (typeof child === 'string') {
                     return <PillLabel key={index}>{child}</PillLabel>;
                   }
-                  return child;
+                  return (
+                    <Stack.Item key={index} display="inline-flex">
+                      {child}
+                    </Stack.Item>
+                  );
                 })}
               </HStack>
             </StyledNonInteractivePill>

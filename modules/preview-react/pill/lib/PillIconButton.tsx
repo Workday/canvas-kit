@@ -74,9 +74,9 @@ export const PillIconButton = createComponent('button')({
     ref,
     Element
   ) => {
-    const {state} = useModelContext(PillModelContext, model);
+    const {events, state} = useModelContext(PillModelContext, model);
     const props = mergeProps(
-      {onClick: state.onDelete, style: {position: 'relative' as const}},
+      {onClick: events.delete, style: {position: 'relative' as const}},
       elemProps
     );
     return (

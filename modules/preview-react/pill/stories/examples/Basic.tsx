@@ -11,5 +11,8 @@ export const Basic = () => (
       Read-only but with super long text in case you want to read a paragraph in a Pill which we
       don't recommend
     </Pill>
+    <Pill onClick={() => console.warn('test')} onDelete={() => console.warn('2')}>
+      test
+    </Pill>
   </HStack>
 );

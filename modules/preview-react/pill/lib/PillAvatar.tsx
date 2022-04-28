@@ -7,9 +7,9 @@ export interface PillAvatarProps extends AvatarProps {}
 
 export const PillAvatar = createComponent('button')({
   displayName: 'Pill.Avatar',
-  Component: ({children, ...elemProps}: PillAvatarProps, ref, Element) => {
+  Component: ({children, ...elemProps}: PillAvatarProps, ref) => {
     return (
-      <Avatar as={Element} size={20} ref={ref} {...elemProps}>
+      <Avatar as="span" size={20} ref={ref} {...elemProps}>
         {children}
       </Avatar>
     );
