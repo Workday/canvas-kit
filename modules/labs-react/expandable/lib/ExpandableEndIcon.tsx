@@ -39,6 +39,7 @@ export const EndIcon = createComponent()({
   Component: ({icon = chevronUpIcon, model, ...elemProps}: EndChevronProps, ref, Element) => {
     const localModel = useModelContext(ExpandableModelContext, model);
     const props = useExpandableIcon(localModel, elemProps);
+
     return <StyledIcon as={Element} fill={colors.licorice200} icon={icon} ref={ref} {...props} />;
   },
 });

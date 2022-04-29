@@ -26,10 +26,10 @@ export interface ExpandableTargetProps
    */
   children: React.ReactNode;
   /**
-   * Semantic heading level that will wrap the Expandable Target's button. Only use 'div' if
+   * Semantic heading level that will wrap the Expandable Target's button. Only use 'none' if
    * you absolutely understand the accessibility implications of not using a heading!!!
    */
-  headingLevel: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'div';
+  headingLevel: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'none';
 }
 
 const StyledButton = styled('button')<StyledType>({
@@ -65,17 +65,17 @@ export const ExpandableTarget = createComponent('button')({
     const localModel = useModelContext(ExpandableModelContext, model);
     const props = useExpandableTarget(localModel, elemProps);
 
-    return (
-      <Heading as={headingLevel}>
-        <StyledButton as={Element} ref={ref} {...props}>
-          {React.Children.map(children, (child, index) => {
-            if (typeof child === 'string') {
-              return <Title key={index}>{child}</Title>;
-            }
-            return child;
-          })}
-        </StyledButton>
-      </Heading>
+    const button = (
+      <StyledButton as={Element} ref={ref} {...props}>
+        {React.Children.map(children, (child, index) => {
+          if (typeof child === 'string') {
+            return <Title key={index}>{child}</Title>;
+          }
+          return child;
+        })}
+      </StyledButton>
     );
+
+    return headingLevel === 'none' ? button : <Heading as={headingLevel}>{button}</Heading>;
   },
 });
