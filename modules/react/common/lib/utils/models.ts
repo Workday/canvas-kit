@@ -412,6 +412,49 @@ export type ModelConfig<TDefaultConfig, TRequiredConfig> = {
    * model or container component.
    */
   defaultContext?: Record<string, any>;
+  /**
+   * Useful if you want to extend a model, but not create a new model context. This allows models to
+   * be compatible with existing compound components. An example might be a modal model extends a
+   * popup model, but uses the same context. If you create your own subcomponents or container
+   * component that utilize this model, you'll need to set this property. Failure to do so will mean
+   * components are not getting the correct context.
+   *
+   * @example
+   * const useMyModel = createModelHook({
+   *   defaultConfig: {
+   *     ...useModel.defaultConfig, // inherit the same default config
+   *     initialValue: '',
+   *   },
+   *   requiredConfig: useModel.requiredConfig, // inherit the same required config
+   *   contextOverride: useModel.Context,
+   * })(config => {
+   *   // config has all the same config `useModel` has, but also `initialValue`
+   *
+   *   const model = useModel(config);
+   *   const [value, setValue] = React.useState(config.initialValue);
+   *   const state = { ...model.state, value } // merge model.state with our state
+   *   const events = {
+   *     ...model.events, // merge model.events with our events
+   *     updateValue(value: string) {
+   *       setValue(value)
+   *     }
+   *   }
+   *
+   *   return {
+   *     ...model, // merge any additional properties added to the model by the `useModel` hook
+   *     state,
+   *     events
+   *   }
+   * })
+   *
+   * const MySubComponent = createSubcomponent('div')({
+   *   modelHook: useMyModel, // this tells the component which model and context to use
+   * })((elemProps, Element, model) => {
+   *   elemProps // { children: React.ReactNode }
+   *   model.state.value // `string`
+   * })
+   */
+  contextOverride?: React.Context<any>
 };
 
 /**
@@ -440,7 +483,7 @@ export type ModelConfig<TDefaultConfig, TRequiredConfig> = {
 export const createModelHook = <TDefaultConfig extends {}, TRequiredConfig extends {}>(
   options: ModelConfig<TDefaultConfig, TRequiredConfig>
 ) => {
-  const { defaultConfig = {}, requiredConfig = {}, defaultContext } =
+  const { defaultConfig = {}, requiredConfig = {}, defaultContext, contextOverride } =
     options;
 
   // create a bunch of refs so we can define the `wrappedModel` function once.
@@ -448,7 +491,7 @@ export const createModelHook = <TDefaultConfig extends {}, TRequiredConfig exten
 
   const callbacksRef: { current: string[] } = { current: [] };
   const guardsRef: { current: string[] } = { current: [] };
-  const Context = React.createContext<any>(defaultContext || {state: {}, events: {}})
+  const Context = contextOverride || React.createContext<any>(defaultContext || {state: {}, events: {}})
 
   const getElemProps = (props: object) => {
     // if (eventsRef.current === null) {
@@ -517,7 +560,6 @@ export const createModelHook = <TDefaultConfig extends {}, TRequiredConfig exten
           eventsRef.current[key](data);
 
           const callbackFnName = getCallbackName(key);
-          // console.log(callbackFnName, (eventsRef.current[key] as any)._wrapped, stateRef.current)
           if (!(eventsRef.current[key] as any)._wrapped) {
 
             if (configRef.current[callbackFnName]) {

@@ -21,26 +21,14 @@ export const Modal = createContainer()({
   displayName: 'Modal',
   modelHook: useModalModel,
   subComponents: {
-    Body: createWrapperSubcomponent(Popup.Body)({
-      displayName: 'Modal.Body',
-      modelHook: useModalModel,
-    }),
+    Body: Popup.Body,
     Card: ModalCard,
-    CloseIcon: createWrapperSubcomponent(Popup.CloseIcon)({
-      displayName: 'Modal.CloseIcon',
-      modelHook: useModalModel,
-    }),
-    Target: createWrapperSubcomponent(Popup.Target)({
-      displayName: 'Modal.Target',
-      modelHook: useModalModel,
-    }),
+    CloseIcon: Popup.CloseIcon,
+    Target: Popup.Target,
     Heading: ModalHeading,
     Overlay: ModalOverlay,
     OverflowOverlay: ModalOverflowOverlay,
-    CloseButton: createWrapperSubcomponent(Popup.CloseButton)({
-      displayName: 'Modal.CloseButton',
-      modelHook: useModalModel,
-    }),
+    CloseButton: Popup.CloseButton,
   },
 })<ModalProps>(elemProps => {
   return <>{elemProps.children}</>;

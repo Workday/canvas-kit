@@ -14,6 +14,7 @@ import {useCloseOnOverlayClick} from './useCloseOnOverlayClick';
 export const useModalModel = createModelHook({
   defaultConfig: usePopupModel.defaultConfig,
   requiredConfig: usePopupModel.requiredConfig,
+  contextOverride: usePopupModel.Context,
 })(config => {
   const model = usePopupModel(config);
 

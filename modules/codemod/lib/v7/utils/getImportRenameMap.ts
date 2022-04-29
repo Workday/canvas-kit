@@ -12,7 +12,7 @@ export function getImportRenameMap(j: JSCodeshift, root: Collection<any>, packag
     const value = node.source.value;
     if (
       typeof value === 'string' &&
-      (value === '@workday/canvas-kit-react' || value === packageName)
+      (value.startsWith('@workday/canvas-kit-react') || value === packageName)
     ) {
       containsCanvasImports = true;
       (node.specifiers || []).forEach(specifier => {

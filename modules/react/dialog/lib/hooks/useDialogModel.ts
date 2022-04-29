@@ -11,6 +11,7 @@ import {createModelHook} from '@workday/canvas-kit-react/common';
 export const useDialogModel = createModelHook({
   defaultConfig: usePopupModel.defaultConfig,
   requiredConfig: usePopupModel.requiredConfig,
+  contextOverride: usePopupModel.Context,
 })(config => {
   const model = usePopupModel(config);
 

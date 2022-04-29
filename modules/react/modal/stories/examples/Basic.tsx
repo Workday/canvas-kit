@@ -1,19 +1,19 @@
-import React from "react";
+import React from 'react';
 
-import { Modal } from "@workday/canvas-kit-react/modal";
-import { DeleteButton } from "@workday/canvas-kit-react/button";
-import { HStack, Box } from "@workday/canvas-kit-react/layout";
+import {Modal} from '@workday/canvas-kit-react/modal';
+import {DeleteButton} from '@workday/canvas-kit-react/button';
+import {HStack, Box} from '@workday/canvas-kit-react/layout';
 
 export const Basic = () => {
   const handleDelete = () => {
-    console.log("Deleted item");
+    console.log('Deleted item');
   };
 
   return (
     <Modal>
       <Modal.Target as={DeleteButton}>Delete Item</Modal.Target>
       <Modal.Overlay>
-        <Modal.Card overflow="hidden auto">
+        <Modal.Card>
           <Modal.CloseIcon aria-label="Close" />
           <Modal.Heading>Delete Item</Modal.Heading>
           <Modal.Body>

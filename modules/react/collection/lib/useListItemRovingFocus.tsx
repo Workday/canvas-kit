@@ -95,18 +95,6 @@ export const useListItemRovingFocus = createElemPropsHook(useCursorListModel)(
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [state.cursorId]);
 
-    // const object = {
-    //   foo: 'bar',
-    //   bar: 'baz',
-    // } as const;
-
-    // Object.keys(object).forEach(key => {
-    //   if (hasOwnKey(object, key)) {
-    //     key; //?
-    //     console.log(object[key]);
-    //   }
-    // });
-
     return {
       onKeyDown(event: React.KeyboardEvent) {
         // Test ctrl key first
