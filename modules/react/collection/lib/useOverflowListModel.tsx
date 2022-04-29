@@ -57,6 +57,7 @@ export const useOverflowListModel = createModelHook({
     containerWidth: 0,
   },
   requiredConfig: useSelectionListModel.requiredConfig,
+  contextOverride: useSelectionListModel.Context,
 })(config => {
   const [hiddenIds, setHiddenIds] = React.useState(config.initialHiddenIds);
   const [itemWidthCache, setItemWidthCache] = React.useState<Record<string, number>>({});
