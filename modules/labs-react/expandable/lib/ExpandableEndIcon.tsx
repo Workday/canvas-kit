@@ -11,6 +11,7 @@ import {chevronUpIcon} from '@workday/canvas-system-icons-web';
 import {ExpandableModelContext} from './Expandable';
 import {DisclosureModel} from '@workday/canvas-kit-react/disclosure';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
+import {useExpandableIcon} from './hooks/useExpandableIcon';
 
 export interface EndChevronProps extends Omit<SystemIconProps, 'icon'> {
   model?: DisclosureModel;
@@ -21,13 +22,13 @@ export interface EndChevronProps extends Omit<SystemIconProps, 'icon'> {
   icon?: CanvasSystemIcon;
 }
 
-const StyledIcon = styled(SystemIcon)<{isVisible: boolean} & StyledType>(
+const StyledIcon = styled(SystemIcon)<{open: boolean} & StyledType>(
   {
     marginLeft: 'auto',
   },
-  ({isVisible}) => ({
-    transform: !isVisible ? 'rotate(-180deg)' : undefined,
-    padding: !isVisible
+  ({open}) => ({
+    transform: !open ? 'rotate(-180deg)' : undefined,
+    padding: !open
       ? `${space.xxxs} ${space.xs} ${space.xxxs} ${space.xxxs}`
       : `${space.xxxs} ${space.xxxs} ${space.xxxs} ${space.xs}`,
   })
@@ -36,18 +37,8 @@ const StyledIcon = styled(SystemIcon)<{isVisible: boolean} & StyledType>(
 export const EndIcon = createComponent()({
   displayName: 'Expandable.StartIcon',
   Component: ({icon = chevronUpIcon, model, ...elemProps}: EndChevronProps, ref, Element) => {
-    const expandableModel = useModelContext(ExpandableModelContext, model);
-    const state = expandableModel.state;
-    const isVisible = state.visibility === 'visible';
-    return (
-      <StyledIcon
-        as={Element}
-        fill={colors.licorice200}
-        isVisible={isVisible}
-        icon={icon}
-        ref={ref}
-        {...elemProps}
-      />
-    );
+    const localModel = useModelContext(ExpandableModelContext, model);
+    const props = useExpandableIcon(localModel, elemProps);
+    return <StyledIcon as={Element} fill={colors.licorice200} icon={icon} ref={ref} {...props} />;
   },
 });

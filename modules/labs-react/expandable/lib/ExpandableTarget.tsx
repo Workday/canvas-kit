@@ -13,8 +13,11 @@ import {ExpandableModelContext} from './Expandable';
 import {DisclosureModel, DisclosureModelConfig} from '@workday/canvas-kit-react/disclosure';
 import {Title} from './ExpandableTitle';
 import {colors, space} from '@workday/canvas-kit-react';
+import {useExpandableTarget} from './hooks/useExpandableTarget';
 
-export interface ExpandableTargetProps extends DisclosureModelConfig {
+export interface ExpandableTargetProps
+  extends DisclosureModelConfig,
+    React.ButtonHTMLAttributes<HTMLButtonElement> {
   model?: DisclosureModel;
   /**
    * Children of the Expandable Target. Should contain Target.Title, an options Target.Avatar
@@ -28,23 +31,6 @@ export interface ExpandableTargetProps extends DisclosureModelConfig {
    */
   headingLevel: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'div';
 }
-
-const useDiscloseTarget = (
-  {state, events}: DisclosureModel,
-  elemProps: Partial<React.HTMLAttributes<HTMLElement>> = {}
-) => {
-  return {
-    onClick(event: React.MouseEvent<HTMLElement>) {
-      elemProps.onClick?.(event);
-
-      if (state.visibility === 'visible') {
-        events.hide({event});
-      } else {
-        events.show({event});
-      }
-    },
-  };
-};
 
 const StyledButton = styled('button')<StyledType>({
   display: 'flex',
@@ -76,20 +62,12 @@ export const ExpandableTarget = createComponent('button')({
     ref,
     Element
   ) => {
-    const {state, events} = useModelContext(ExpandableModelContext, model);
-    const target = useDiscloseTarget({state, events}, elemProps);
-    const isVisible = state.visibility === 'visible';
+    const localModel = useModelContext(ExpandableModelContext, model);
+    const props = useExpandableTarget(localModel, elemProps);
 
     return (
       <Heading as={headingLevel}>
-        <StyledButton
-          as={Element}
-          aria-controls={isVisible ? state.id : undefined}
-          aria-expanded={isVisible}
-          ref={ref}
-          {...target}
-          {...elemProps}
-        >
+        <StyledButton as={Element} ref={ref} {...props}>
           {React.Children.map(children, (child, index) => {
             if (typeof child === 'string') {
               return <Title key={index}>{child}</Title>;

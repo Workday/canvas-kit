@@ -10,6 +10,7 @@ import {
 
 import {ExpandableModelContext} from './Expandable';
 import {DisclosureModel} from '@workday/canvas-kit-react/disclosure';
+import {useExpandableContent} from './hooks/useExpandableContent';
 
 export interface ExpandableContentProps {
   model?: DisclosureModel;
@@ -27,11 +28,12 @@ const Container = styled('div')<StyledType>({
 
 export const ExpandableContent = createComponent('div')({
   displayName: 'Expandable.Content',
-  Component: ({children, model, ...elemProps}: ExpandableContentProps, ref, Element) => {
-    const {state} = useModelContext(ExpandableModelContext, model);
+  Component: ({children, model}: ExpandableContentProps, ref, Element) => {
+    const localModel = useModelContext(ExpandableModelContext, model);
+    const {open, id} = useExpandableContent(localModel);
 
-    return state.visibility === 'visible' ? (
-      <Container as={Element} id={state.id} ref={ref} {...elemProps}>
+    return open ? (
+      <Container as={Element} id={id} ref={ref}>
         {children}
       </Container>
     ) : null;
