@@ -20,7 +20,7 @@ const StyledLabelContainer = styled(Box.as('span'))<StyledType>({
   whiteSpace: 'nowrap',
   overflow: 'hidden',
   textOverflow: 'ellipsis',
-  display: 'inline-block',
+  display: 'block',
 });
 export const PillLabel = createComponent('span')({
   displayName: 'Pill.Label',
@@ -32,6 +32,7 @@ export const PillLabel = createComponent('span')({
           color={state.disabled ? colors.licorice100 : 'inherit'}
           maxWidth={state.maxWidth}
           ref={ref}
+          as={Element}
           {...elemProps}
         >
           {children}

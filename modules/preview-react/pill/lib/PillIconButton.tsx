@@ -69,11 +69,7 @@ const StyledIconButton = styled(BaseButton)<StyledType & PillIconButtonProps>({
 
 export const PillIconButton = createComponent('button')({
   displayName: 'Pill.IconButton',
-  Component: (
-    {size, model, icon = xSmallIcon, ...elemProps}: PillIconButtonProps,
-    ref,
-    Element
-  ) => {
+  Component: ({size, model, icon = xSmallIcon, ...elemProps}: PillIconButtonProps, ref) => {
     const {events, state} = useModelContext(PillModelContext, model);
     const props = mergeProps(
       {onClick: events.delete, style: {position: 'relative' as const}},

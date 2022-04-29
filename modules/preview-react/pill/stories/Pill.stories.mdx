@@ -141,6 +141,9 @@ that has a smaller click target to prevent users from accidentally delete someth
 </Pill>
 ```
 
+If you give the component an `onClick` and an `onDelete` this is not a valid configuration and
+nothing will render. You should see a warning in the console stating to provide one or the other.
+
 #### Props
 
 <ArgsTable of={Pill} />
@@ -151,6 +154,15 @@ This component renders an avatar. It supports all props of the `Avatar` componen
 
 #### Usage
 
+```tsx
+<Pill onDelete={() => console.log('handle remove')}>
+  <Pill.Avatar url={avatarUrl} />
+  Regina Skeltor
+  <Pill.IconButton />
+</Pill>
+```
+
+#### Props
 
 <ArgsTable of={Pill.Avatar} />
 
@@ -158,18 +170,53 @@ This component renders an avatar. It supports all props of the `Avatar` componen
 
 This component renders its `children` as the count.
 
+#### Usage
+
+```tsx
+<Pill onClick={() => console.warn('clicked')}>
+  Shoes
+  <Pill.Count>30</Pill.Count>
+</Pill>
+```
+
+#### Props
+
 <ArgsTable of={Pill.Count} />
 
 ### Pill.Icon
 
 This component renders an `icon`. This component should only be used when an `onClick` is provided.
+By default this component render a `plusIcon` but it can be overriden.
+
+#### Usage
+
+```tsx
+<Pill onClick={() => console.warn('clicked')}>
+  <Pill.Icon />
+  <Pill.Label>Regina Skeltor</Pill.Label>
+</Pill>
+```
+
+#### Props
 
 <ArgsTable of={Pill.Icon} />
 
 ### Pill.IconButton
 
 This component renders an icon button. This is used for removable Pills where the click target and
-focus area is solely the icon.
+focus area is solely the icon. By default, this component renders a `xSmallIcon` but can be
+overriden.
+
+#### Usage
+
+```tsx
+<Pill onDelete={() => console.warn('clicked')}>
+  Pink Shirts
+  <Pill.IconButton />
+</Pill>
+```
+
+#### Props
 
 <ArgsTable of={Pill.IconButton} />
 
@@ -177,5 +224,15 @@ focus area is solely the icon.
 
 This component renders a `<span>` that automatically handles overflow by rendering a tooltip.
 There's no need to use this component directly since the overflow is handled for you automatically.
+
+#### Usage
+
+```tsx
+<Pill>
+  <Pill.Label>Read-only</Pill.Label>
+</Pill>
+```
+
+#### Props
 
 <ArgsTable of={Pill.Label} />

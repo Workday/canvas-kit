@@ -102,6 +102,7 @@ const pillBaseStyles: CSSObject = {
   borderRadius: borderRadius.m,
   flexShrink: 0,
   ...type.levels.subtext.large,
+  color: colors.blackPepper400,
   boxShadow: 'none',
   outline: 'none',
   fontWeight: type.properties.fontWeights.medium,
