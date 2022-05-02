@@ -13,9 +13,9 @@ import {
 import {ExpandableModelContext} from './Expandable';
 import {DisclosureModel, DisclosureModelConfig} from '@workday/canvas-kit-react/disclosure';
 import {ExpandableTitle} from './ExpandableTitle';
-import {colors} from '@workday/canvas-kit-react';
 import {useExpandableTarget} from './hooks/useExpandableTarget';
 import {Flex} from '@workday/canvas-kit-react/layout';
+import {colors} from '@workday/canvas-kit-react/tokens';
 
 export interface ExpandableTargetProps
   extends DisclosureModelConfig,

@@ -1,9 +1,9 @@
 import React from 'react';
 
 import {createComponent, styled, StyledType} from '@workday/canvas-kit-react/common';
-import {colors, type} from '@workday/canvas-kit-react';
+import {colors, type} from '@workday/canvas-kit-react/tokens';
 
-export interface TitleProps {
+export interface ExpandableTitleProps {
   /**
    * Children of the `Expandable.Title`. This should contain a string for the title
    */
@@ -19,7 +19,7 @@ const StyledTitle = styled('div')<StyledType>({
 
 export const ExpandableTitle = createComponent('div')({
   displayName: 'Expandable.Title',
-  Component: ({children, ...elemProps}: TitleProps, ref, Element) => {
+  Component: ({children, ...elemProps}: ExpandableTitleProps, ref, Element) => {
     return (
       <StyledTitle as={Element} ref={ref} {...elemProps}>
         {children}
