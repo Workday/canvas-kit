@@ -149,7 +149,7 @@ export const Pill = createComponent('button')({
       useMount(() => {
         if (config.onClick && config.onDelete) {
           console.warn(
-            `Please provide either an onClick OR an onDelete on the <Pill/> component. If both are provided, nothing will render.`
+            `It looks like you've provided two different click events.Please provide either an onClick OR an onDelete on the <Pill/> component. If both are provided, onClick will take precedence.`
           );
         }
       });
@@ -158,7 +158,7 @@ export const Pill = createComponent('button')({
     return (
       <PillModelContext.Provider value={value}>
         <>
-          {value.state.variations !== 'interactive' && value.state.variations !== 'removable' && (
+          {value.state.variations === 'read-only' && (
             <StyledNonInteractivePill
               maxWidth={value.state.maxWidth}
               as={actualEl}
@@ -169,7 +169,7 @@ export const Pill = createComponent('button')({
               <PillLabel>{children}</PillLabel>
             </StyledNonInteractivePill>
           )}
-          {value.state.variations === 'interactive' && !config.onDelete && (
+          {value.state.variations === 'interactive' && (
             <StyledBasePill
               colors={getButtonPillColors()}
               as={Element}
@@ -177,7 +177,7 @@ export const Pill = createComponent('button')({
               onClick={value.events.click}
               {...elemProps}
             >
-              <HStack spacing="xxxs" display="inline-flex">
+              <HStack spacing="xxxs" display="inline-flex" alignItems="center">
                 {React.Children.map(children, (child, index) => {
                   if (typeof child === 'string') {
                     return <PillLabel key={index}>{child}</PillLabel>;
@@ -191,7 +191,7 @@ export const Pill = createComponent('button')({
               </HStack>
             </StyledBasePill>
           )}
-          {value.state.variations === 'removable' && !config.onClick && (
+          {value.state.variations === 'removable' && (
             <StyledNonInteractivePill
               colors={getRemovablePillColors(value.state.disabled)}
               as={actualEl}
