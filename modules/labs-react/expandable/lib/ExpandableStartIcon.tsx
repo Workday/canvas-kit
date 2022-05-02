@@ -22,7 +22,7 @@ export interface StartChevronProps extends Omit<ExtractProps<typeof SystemIcon, 
   icon?: CanvasSystemIcon;
 }
 
-const StyledIcon = styled(SystemIcon)<{visible: boolean}>(
+const StyledStartIcon = styled(SystemIcon)<{visible: boolean}>(
   {
     margin: `0 ${space.xxs} 0 0`,
     padding: space.xxxs,
@@ -38,6 +38,6 @@ export const ExpandableStartIcon = createComponent('span')({
     const localModel = useModelContext(ExpandableModelContext, model);
     const props = useExpandableIcon(localModel, elemProps, ref);
 
-    return <StyledIcon fill={colors.licorice200} icon={icon} {...props} />;
+    return <StyledStartIcon fill={colors.licorice200} icon={icon} {...props} />;
   },
 });

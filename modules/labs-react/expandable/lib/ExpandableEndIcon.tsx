@@ -22,7 +22,7 @@ export interface EndChevronProps extends Omit<ExtractProps<typeof SystemIcon, ne
   icon?: CanvasSystemIcon;
 }
 
-const StyledIcon = styled(SystemIcon)<{visible: boolean}>(
+const StyledEndIcon = styled(SystemIcon)<{visible: boolean}>(
   {
     marginLeft: 'auto',
   },
@@ -40,6 +40,6 @@ export const ExpandableEndIcon = createComponent('span')({
     const localModel = useModelContext(ExpandableModelContext, model);
     const props = useExpandableIcon(localModel, elemProps, ref);
 
-    return <StyledIcon fill={colors.licorice200} icon={icon} {...props} />;
+    return <StyledEndIcon fill={colors.licorice200} icon={icon} {...props} />;
   },
 });
