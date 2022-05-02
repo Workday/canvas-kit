@@ -2,7 +2,7 @@ import React from 'react';
 
 import {ListBox} from '@workday/canvas-kit-react/collection';
 
-export const NamedItems = () => {
+export const IdentifiedItems = () => {
   return (
     <ListBox>
       <ListBox.Item data-id="first">First</ListBox.Item>
