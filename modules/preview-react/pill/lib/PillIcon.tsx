@@ -18,7 +18,7 @@ export const PillIcon = createComponent('span')({
   Component: ({size, model, icon, ...elemProps}: PillIconProps, ref, Element) => {
     return (
       <SystemIcon
-        marginInlineStart={`-${space.xxxs}`}
+        marginInlineStart={`-${space.xxxs}`} // remove padding on the left from HStack
         display="flex"
         ref={ref}
         as={Element}

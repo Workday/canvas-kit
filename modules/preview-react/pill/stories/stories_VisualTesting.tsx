@@ -6,6 +6,8 @@ import {withSnapshotsEnabled} from '../../../../utils/storybook';
 
 import {Pill, usePillModel} from '@workday/canvas-kit-preview-react/pill';
 import {stateTableColumnProps} from '@workday/canvas-kit-react/button/stories/visual-testing/utils';
+// @ts-ignore: Cannot find module error
+import testAvatar from './examples/test-avatar.png';
 
 export default withSnapshotsEnabled({
   title: 'Testing/React/Preview/Pill',
@@ -31,8 +33,6 @@ export const ReadOnlyPillStates = () => {
         ]}
       >
         {({maxWidth, ...props}) => {
-          const state = {onClick: props.onClick};
-
           return (
             <Pill>{maxWidth ? 'This is a super long te that should overflow' : 'PillLabel'}</Pill>
           );
@@ -47,15 +47,56 @@ export const PillStates = () => {
     <StaticStates>
       <ComponentStatesTable
         rowProps={[
-          {label: 'Default', props: {}},
-          {
-            label: 'With Avatar',
-            props: {avatar: true},
-          },
           {
             label: 'With Icon',
-            props: {icon: true},
+            props: {},
           },
+        ]}
+        columnProps={stateTableColumnProps}
+      >
+        {({...props}) => {
+          return (
+            <Pill onClick={() => console.warn('clicked')} {...props}>
+              <Pill.Icon />
+              Regina Skeltor
+            </Pill>
+          );
+        }}
+      </ComponentStatesTable>
+    </StaticStates>
+  );
+};
+
+export const PillStatesAvatar = () => {
+  return (
+    <StaticStates>
+      <ComponentStatesTable
+        rowProps={[
+          {
+            label: 'With Avatar',
+            props: {},
+          },
+        ]}
+        columnProps={stateTableColumnProps}
+      >
+        {({...props}) => {
+          return (
+            <Pill onClick={() => console.warn('clicked')} {...props}>
+              <Pill.Avatar url={testAvatar} />
+              Regina Skeltor
+            </Pill>
+          );
+        }}
+      </ComponentStatesTable>
+    </StaticStates>
+  );
+};
+
+export const PillStatesCount = () => {
+  return (
+    <StaticStates>
+      <ComponentStatesTable
+        rowProps={[
           {
             label: 'With Count',
             props: {count: true},
@@ -63,13 +104,11 @@ export const PillStates = () => {
         ]}
         columnProps={stateTableColumnProps}
       >
-        {({avatar, icon, count, ...props}) => {
+        {({count, ...props}) => {
           return (
             <Pill onClick={() => console.warn('clicked')} {...props}>
-              {icon && <Pill.Icon />}
-              {avatar && <Pill.Avatar />}
-              Regina Skeltor
-              {count && <Pill.Count>30</Pill.Count>}
+              Shoes
+              <Pill.Count>30</Pill.Count>
             </Pill>
           );
         }}
@@ -84,21 +123,25 @@ export const RemovablePillStates = () => {
       <ComponentStatesTable
         rowProps={[
           {
+            label: 'Removable',
+            props: {},
+          },
+          {
             label: 'With Avatar',
             props: {avatar: true},
           },
           {
-            label: 'With no Avatar',
-            props: {icon: true},
+            label: 'With Max Width',
+            props: {maxWidth: true},
           },
         ]}
         columnProps={stateTableColumnProps}
       >
-        {({avatar, icon, count, ...props}) => {
+        {({avatar, maxWidth, ...props}) => {
           return (
             <Pill onDelete={() => console.warn('clicked')} {...props}>
-              {avatar && <Pill.Avatar />}
-              Regina Skeltor
+              {avatar && <Pill.Avatar url={testAvatar} />}
+              {maxWidth ? 'This is a super long te that should overflow' : 'PillLabel'}
               <Pill.IconButton {...props} />
             </Pill>
           );

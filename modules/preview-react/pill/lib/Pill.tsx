@@ -66,7 +66,6 @@ const getButtonPillColors = () => {
 };
 
 const getRemovablePillColors = (disabled?: boolean) => {
-  console.warn(disabled);
   return {
     default: {
       background: disabled ? colors.soap100 : colors.soap300,
@@ -150,7 +149,7 @@ export const Pill = createComponent('button')({
       useMount(() => {
         if (config.onClick && config.onDelete) {
           console.warn(
-            `Please provide either an onClick OR an onDelete. If both are provided, nothing will render.`
+            `Please provide either an onClick OR an onDelete on the <Pill/> component. If both are provided, nothing will render.`
           );
         }
       });
@@ -199,16 +198,17 @@ export const Pill = createComponent('button')({
               ref={ref}
               {...elemProps}
             >
-              <HStack spacing="xxxs" height="inherit" alignItems="center" shouldWrapChildren>
+              <HStack
+                spacing="xxxs"
+                display="inline-flex"
+                alignItems="center"
+                justifyContent="center"
+              >
                 {React.Children.map(children, (child, index) => {
                   if (typeof child === 'string') {
                     return <PillLabel key={index}>{child}</PillLabel>;
                   }
-                  return (
-                    <Stack.Item key={index} display="inline-flex">
-                      {child}
-                    </Stack.Item>
-                  );
+                  return <Stack.Item key={index}>{child}</Stack.Item>;
                 })}
               </HStack>
             </StyledNonInteractivePill>
