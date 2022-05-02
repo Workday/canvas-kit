@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {StaticStates} from '@workday/canvas-kit-react/common';
+import {CanvasProvider, ContentDirection, StaticStates} from '@workday/canvas-kit-react/common';
 import {ComponentStatesTable} from '@workday/canvas-kit-labs-react/common';
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
 
@@ -12,13 +12,18 @@ export default withSnapshotsEnabled({
   component: Expandable,
 });
 
-export const ExpandableContainerStates = () => {
+export const StartIcon = () => {
   const model = useDisclosureModel();
 
   return (
     <StaticStates>
       <ComponentStatesTable
-        rowProps={[{label: 'Default', props: {}}]}
+        rowProps={[
+          {label: 'No Avatar', props: {}},
+          {label: 'Avatar', props: {avatar: true}},
+          {label: 'Depth', props: {depth: 3}},
+          {label: 'RTL', props: {direction: ContentDirection.RTL}},
+        ]}
         columnProps={[
           {
             label: 'Closed',
@@ -34,12 +39,60 @@ export const ExpandableContainerStates = () => {
           const state = {visibility: props.visibility, id: props.id};
 
           return (
-            <Expandable model={{...model, state}}>
-              <Expandable.Target headingLevel="h1">
-                <Expandable.Title>Hello</Expandable.Title>
-              </Expandable.Target>
-              <Expandable.Content>Content</Expandable.Content>
-            </Expandable>
+            <CanvasProvider theme={{canvas: {direction: props?.direction}}}>
+              <Expandable depth={props?.depth} model={{...model, state}}>
+                <Expandable.Target headingLevel="h2">
+                  <Expandable.StartIcon />
+                  {props.avatar && <Expandable.Avatar />}
+                  <Expandable.Title>Hello</Expandable.Title>
+                </Expandable.Target>
+                <Expandable.Content>Content</Expandable.Content>
+              </Expandable>
+            </CanvasProvider>
+          );
+        }}
+      </ComponentStatesTable>
+    </StaticStates>
+  );
+};
+
+export const EndIcon = () => {
+  const model = useDisclosureModel();
+
+  return (
+    <StaticStates>
+      <ComponentStatesTable
+        rowProps={[
+          {label: 'No Avatar', props: {}},
+          {label: 'Avatar', props: {avatar: true}},
+          {label: 'Depth', props: {depth: 3}},
+          {label: 'RTL', props: {direction: ContentDirection.RTL}},
+        ]}
+        columnProps={[
+          {
+            label: 'Closed',
+            props: {visibility: 'hidden', id: '1'},
+          },
+          {
+            label: 'Opened',
+            props: {visibility: 'visible', id: '1'},
+          },
+        ]}
+      >
+        {props => {
+          const state = {visibility: props.visibility, id: props.id};
+
+          return (
+            <CanvasProvider theme={{canvas: {direction: props?.direction}}}>
+              <Expandable depth={props?.depth} model={{...model, state}}>
+                <Expandable.Target headingLevel="h3">
+                  {props?.avatar && <Expandable.Avatar />}
+                  <Expandable.Title>Hello</Expandable.Title>
+                  <Expandable.EndIcon />
+                </Expandable.Target>
+                <Expandable.Content>Content</Expandable.Content>
+              </Expandable>
+            </CanvasProvider>
           );
         }}
       </ComponentStatesTable>

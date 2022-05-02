@@ -5,7 +5,7 @@ import {colors, type} from '@workday/canvas-kit-react';
 
 export interface TitleProps {
   /**
-   * Children of the Expandable Target. Should contain a string for the title
+   * Children of the `Expandable.Title`. This should contain a string for the title
    */
   children: React.ReactNode;
 }
@@ -17,7 +17,7 @@ const StyledTitle = styled('div')<StyledType>({
   color: colors.blackPepper400,
 });
 
-export const Title = createComponent('div')({
+export const ExpandableTitle = createComponent('div')({
   displayName: 'Expandable.Title',
   Component: ({children, ...elemProps}: TitleProps, ref, Element) => {
     return (
