@@ -4,7 +4,6 @@ import {
   createComponent,
   ExtractProps,
   styled,
-  StyledType,
   useModelContext,
 } from '@workday/canvas-kit-react/common';
 import {colors, space, SystemIcon} from '@workday/canvas-kit-react';
@@ -23,22 +22,22 @@ export interface StartChevronProps extends Omit<ExtractProps<typeof SystemIcon, 
   icon?: CanvasSystemIcon;
 }
 
-const StyledIcon = styled(SystemIcon)<{open: boolean} & StyledType>(
+const StyledIcon = styled(SystemIcon)<{visible: boolean}>(
   {
     margin: `0 ${space.xxs} 0 0`,
     padding: space.xxxs,
   },
-  ({open}) => ({
-    transform: !open ? 'rotate(-90deg)' : undefined,
+  ({visible}) => ({
+    transform: !visible ? 'rotate(-90deg)' : undefined,
   })
 );
 
-export const ExpandableStartIcon = createComponent()({
+export const ExpandableStartIcon = createComponent('span')({
   displayName: 'Expandable.StartIcon',
-  Component: ({icon = chevronDownIcon, model, ...elemProps}: StartChevronProps, ref, Element) => {
+  Component: ({icon = chevronDownIcon, model, ...elemProps}: StartChevronProps, ref) => {
     const localModel = useModelContext(ExpandableModelContext, model);
     const props = useExpandableIcon(localModel, elemProps, ref);
 
-    return <StyledIcon as={Element} fill={colors.licorice200} icon={icon} {...props} />;
+    return <StyledIcon fill={colors.licorice200} icon={icon} {...props} />;
   },
 });

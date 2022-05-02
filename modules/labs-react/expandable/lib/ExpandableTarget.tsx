@@ -2,6 +2,7 @@ import React from 'react';
 
 import {
   createComponent,
+  ExtractProps,
   focusRing,
   hideMouseFocus,
   styled,

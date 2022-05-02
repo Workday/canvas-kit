@@ -30,9 +30,9 @@ export const ExpandableContent = createComponent('div')({
   displayName: 'Expandable.Content',
   Component: ({children, model}: ExpandableContentProps, ref, Element) => {
     const localModel = useModelContext(ExpandableModelContext, model);
-    const {open, ...props} = useExpandableContent(localModel, {}, ref);
+    const {visible, ...props} = useExpandableContent(localModel, {}, ref);
 
-    return open ? (
+    return visible ? (
       <Container as={Element} {...props}>
         {children}
       </Container>

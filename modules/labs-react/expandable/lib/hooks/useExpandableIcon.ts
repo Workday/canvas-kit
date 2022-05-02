@@ -3,6 +3,6 @@ import {DisclosureModel} from '@workday/canvas-kit-react/disclosure';
 
 export const useExpandableIcon = createHook(({state}: DisclosureModel) => {
   return {
-    open: state.visibility === 'visible',
+    visible: state.visibility === 'visible',
   };
 });
