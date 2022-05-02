@@ -685,64 +685,78 @@ import {
   useInitialFocus,
   usePopupModel,
   useReturnFocus,
-} from '@workday/canvas-kit-react'
+} from '@workday/canvas-kit-react';
 
 type MyModalState = PopupState & {
-  showOverlay: boolean
-}
+  showOverlay: boolean;
+};
 
-type MyModalEvents = PopupEvents
+type MyModalEvents = PopupEvents;
 
 const myModalEventMap = createEventMap<MyModalEvents>()({
   guards: {
-    ...popupEventMap.guards
+    ...popupEventMap.guards,
   },
   callbacks: {
-    ...popupEventMap.callbacks
-  }
-})
+    ...popupEventMap.callbacks,
+  },
+});
 
 type MyBaseModalConfig = BasePopupModelConfig & {
-  showOverlay?: boolean
-}
+  showOverlay?: boolean;
+};
 
-type MyModalModel = Model<MyModalState, MyModalEvents>
+type MyModalModel = Model<MyModalState, MyModalEvents>;
 
 type MyConfig = MyBaseConfig &
-  Partial<ToModelConfig<MyModalState, MyModalEvents, typeof myModalEventMap>>
+  Partial<ToModelConfig<MyModalState, MyModalEvents, typeof myModalEventMap>>;
 
 export const useMyModalModel = (config: MyConfig = {}): MyModalModel => {
-  const [showOverlay] = React.useState(config.showOverlay ?? true)
+  const [showOverlay] = React.useState(config.showOverlay ?? true);
 
   const model = usePopupModel({
     ...config,
     // hook up to a redux store
     onShow(...params) {
-      dispatch(setIsModalOpen(true))
-      config.?onShow?.(...params)
+      dispatch(setIsModalOpen(true));
+      config?.onShow?.(...params);
     },
     onHide(...params) {
-      dispatch(setIsModalOpen(false))
-      config.?onShow?.(...params)
+      dispatch(setIsModalOpen(false));
+      config?.onShow?.(...params);
     },
-  })
+  });
+
+  useInitialFocus(model);
+  useReturnFocus(model);
+  useFocusTrap(model);
+  useCloseOnEscape(model);
 
   const state = {
     ...model.state,
-    showOverlay
-  }
+    showOverlay,
+  };
 
   const events = useEventMap(myEventMap, state, config, {
-    ...model.events
-  })
+    ...model.events,
+  });
 
-  return {state, events}
-}
+  return {state, events};
+};
 ```
 
 After:
 
 ```ts
+import {
+  useCloseOnEscape,
+  useEventMap,
+  useFocusTrap,
+  useInitialFocus,
+  usePopupModel,
+  useReturnFocus,
+} from '@workday/canvas-kit-react';
+
 const useMyModalModel = createModelHook({
   defaultConfig: {
     ...usePopupModel.defaultConfig,
@@ -764,6 +778,11 @@ const useMyModalModel = createModelHook({
     })
   );
 
+  useInitialFocus(model);
+  useReturnFocus(model);
+  useFocusTrap(model);
+  useCloseOnEscape(model);
+
   const state = {
     ...model.state,
     showOverlay,
@@ -773,7 +792,9 @@ const useMyModalModel = createModelHook({
 });
 ```
 
-All the cumbersome type boilerplate went away.
+All the cumbersome type boilerplate went away. Also all the type imports went away. The code is more
+focused on your unique logic and less on boilerplate. Unfortunately, this change doesn't have a
+codemod. While possible, this code isn't very common and the codemod would be very complex.
 
 ## Token Updates
 
