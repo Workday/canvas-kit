@@ -9,6 +9,7 @@ import {
   JSXElement,
 } from 'jscodeshift';
 import {getImportRenameMap} from './utils/getImportRenameMap';
+import chalk from 'chalk';
 
 const updateJSXTag = (nodePath: ASTPath<JSXElement>, newTag: string) => {
   const {name: componentName} = nodePath.value.openingElement.name as JSXIdentifier;
@@ -69,15 +70,35 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
 
       const variantProp = attrs?.find(
         attr => attr.type === 'JSXAttribute' && attr.name.name === 'variant'
-      );
-
+      ) as JSXAttribute | undefined;
       // Default IconButton variant is `circle`
       if (variantProp) {
-        const variantPropValue = ((variantProp as JSXAttribute).value as StringLiteral)?.value;
-        buttonType = /filled/gi.test(variantPropValue) ? 'SecondaryButton' : 'TertiaryButton';
+        const valueBody = variantProp.value;
+        if (
+          valueBody?.type === 'JSXExpressionContainer' &&
+          valueBody.expression.type === 'StringLiteral'
+        ) {
+          variantProp.value = valueBody.expression;
+        }
 
-        if (!variantPropValue.includes('inverse')) {
-          nodePath.value.openingElement.attributes?.splice(attrs?.indexOf(variantProp)!, 1);
+        const variantPropValue = (variantProp.value as StringLiteral).value;
+
+        if (variantPropValue) {
+          (variantProp.value as StringLiteral).value = variantPropValue.replace('Filled', '');
+
+          buttonType = /filled/gi.test(variantPropValue) ? 'SecondaryButton' : 'TertiaryButton';
+
+          if (!variantPropValue.includes('inverse')) {
+            nodePath.value.openingElement.attributes?.splice(attrs?.indexOf(variantProp)!, 1);
+          }
+        } else {
+          console.warn(
+            chalk.bold.red('** CANNOT UPDATE EXPRESSION FOR ICON BUTTON VARIANT. **') +
+              '\nYou will need to manually update this file to fix this warning.' +
+              '\nFile Name: ' +
+              chalk.blue(file.path) +
+              '\nConsult Upgrade Guide Section for v7: "Removal of Icon Button"'
+          );
         }
       }
 
