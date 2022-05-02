@@ -7,11 +7,9 @@ export const useExpandableTarget = createHook(
     _?: React.Ref<any>,
     elemProps: Partial<React.HTMLAttributes<HTMLElement>> = {}
   ) => {
-    const visible = state.visibility === 'visible';
-
     return {
-      'aria-controls': visible ? state.id : undefined,
-      'aria-expanded': visible,
+      'aria-controls': state.id,
+      'aria-expanded': state.visibility === 'visible',
       onClick(event: React.MouseEvent<HTMLElement>) {
         elemProps.onClick?.(event);
 
