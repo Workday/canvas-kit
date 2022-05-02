@@ -8,7 +8,7 @@ import {Expandable} from '@workday/canvas-kit-labs-react/expandable';
 import {useDisclosureModel} from '@workday/canvas-kit-react/disclosure';
 
 export default withSnapshotsEnabled({
-  title: 'Testing/React/Labs/Container/Expandable',
+  title: 'Testing/React/Labs/Expandable',
   component: Expandable,
 });
 
