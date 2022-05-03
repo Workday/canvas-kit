@@ -1,12 +1,10 @@
 import * as React from 'react';
-import {keyframes} from '@emotion/react';
 
 import {Card} from '@workday/canvas-kit-react/card';
 import {space, type} from '@workday/canvas-kit-react/tokens';
 import {
   styled,
   TransformOrigin,
-  getTranslateFromOrigin,
   createSubcomponent,
   StyledType,
   ExtractProps,
@@ -19,21 +17,6 @@ import {useMenuModel} from './useMenuModel';
 export interface MenuCardProps extends ExtractProps<typeof Card, never> {
   children?: React.ReactNode;
 }
-
-const popupAnimation = (transformOrigin: TransformOrigin) => {
-  const translate = getTranslateFromOrigin(transformOrigin, space.xxs);
-
-  return keyframes`
-    0% {
-      opacity: 0;
-      transform: translate(${translate.x}px, ${translate.y}px);
-    }
-    100% {
-      opacity: 1;
-      transform: translate(0);
-    }
-  `;
-};
 
 const StyledCard = styled(Card)<
   StyledType & {width?: number | string; transformOrigin?: TransformOrigin}
@@ -49,9 +32,7 @@ const StyledCard = styled(Card)<
       return {};
     }
     return {
-      animation: popupAnimation(transformOrigin),
-      animationDuration: '150ms',
-      animationTimingFunction: 'ease-out',
+      transition: `transform ease-out 150ms`,
       transformOrigin: `${transformOrigin.vertical} ${transformOrigin.horizontal}`,
       // Allow overriding of animation in special cases
       '.wd-no-animation &': {

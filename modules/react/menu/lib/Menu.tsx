@@ -4,10 +4,11 @@ import {createContainer} from '@workday/canvas-kit-react/common';
 
 import {useMenuModel} from './useMenuModel';
 import {MenuPopper} from './MenuPopper';
-import {MenuTarget} from './MenuTarget';
+import {MenuTarget, MenuTargetContext} from './MenuTarget';
 import {MenuItem} from './MenuItem';
 import {MenuCard} from './MenuCard';
 import {MenuList} from './MenuList';
+import {MenuDivider} from './MenuDivider';
 
 export interface MenuProps {
   /**
@@ -71,7 +72,9 @@ export const Menu = createContainer()({
      * HTML. If more complex HTML is provided, consider
      */
     Item: MenuItem,
+    Divider: MenuDivider,
     Target: MenuTarget,
+    TargetContext: MenuTargetContext,
     /**
      * The "Popper" of a menu. The popper will appear around the `Menu.Target`. It renders a `div`
      * element that is portalled to the `document.body` which is controlled by the `PopupStack. The

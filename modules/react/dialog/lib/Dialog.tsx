@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {createContainer, createWrapperSubcomponent} from '@workday/canvas-kit-react/common';
+import {createContainer} from '@workday/canvas-kit-react/common';
 import {Popup} from '@workday/canvas-kit-react/popup';
 
 import {DialogPopper} from './DialogPopper';

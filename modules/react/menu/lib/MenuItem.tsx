@@ -8,7 +8,6 @@ import {
   composeHooks,
   createElemPropsHook,
   useLocalRef,
-  useMount,
 } from '@workday/canvas-kit-react/common';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
@@ -21,7 +20,7 @@ import {
 
 import {useMenuModel} from './useMenuModel';
 
-export interface MenuItemProps<T = unknown> {
+export interface MenuItemProps {
   /**
    * Optionally pass index to menu item. This should be done if `Menu.Item` components were created
    * via a `Array::map` function. This index will ensure keyboard navigation works even if items are
@@ -39,21 +38,9 @@ export interface MenuItemProps<T = unknown> {
    */
   'data-id'?: string;
   'aria-disabled'?: boolean;
-  /**
-   * Use `hasIcon={true}` when the Tab item contains an icon. This instructs the tab item to render
-   * children as a flex container to accommodate icons. You will have to use `Tabs.Item.Text` as a
-   * child element if this is set to true.
-   *
-   * @example
-   * <Menu.Item hasIcon>
-   *   <Menu.Item.Icon icon={someIcon} />
-   *   <Menu.Item.Text>Tab Text</Menu.Item.Text>
-   * </Menu.Item>
-   */
-  hasIcon?: boolean;
 }
 
-const StyledItem = styled(Box.as('button'))<StyledType & {hasIcon?: boolean}>(
+const StyledItem = styled(Box.as('button'))<StyledType>(
   ({theme}) => {
     return {
       ...type.levels.subtext.large,
@@ -133,23 +120,50 @@ const StyledItem = styled(Box.as('button'))<StyledType & {hasIcon?: boolean}>(
       },
     };
   },
-  ({hasIcon}) => {
-    if (hasIcon) {
+  ({children}) => {
+    if (typeof children === 'string') {
+      return {};
+    } else {
       return {
         display: 'flex',
       };
-    } else {
-      return {};
     }
   }
 );
 
 export const useMenuItem = composeHooks(
-  createElemPropsHook(useMenuModel)(() => {
-    return {
-      role: 'menuitem',
-    };
-  }),
+  createElemPropsHook(useMenuModel)(
+    (model, ref, elemProps: {'data-id': string} = {'data-id': ''}) => {
+      const {localRef, elementRef} = useLocalRef(ref);
+      const id = elemProps['data-id'];
+
+      // focus on the item with the cursor
+      React.useLayoutEffect(() => {
+        if (model.state.mode === 'single') {
+          if (model.state.cursorId === id) {
+            // delay focus changes to allow PopperJS to position
+            requestAnimationFrame(() => {
+              localRef.current.focus();
+            });
+          }
+        }
+        // We only need to run when the ID has changed. If the static API is used, the first time
+        // this is run, the id will be blank
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+      }, [id]);
+
+      return {
+        ref: elementRef,
+        role: 'menuitem',
+        onClick:
+          model.state.mode === 'single'
+            ? (event: React.SyntheticEvent) => {
+                model.events.hide({event});
+              }
+            : undefined,
+      };
+    }
+  ),
   useListItemSelect,
   useListItemRovingFocus,
   useListItemRegister
@@ -161,24 +175,9 @@ export const MenuItem = createSubcomponent('button')({
   elemPropsHook: useMenuItem,
   subComponents: {
     Icon: SystemIcon,
-    Text: styled('span')({}),
+    Text: styled('span')({flexGrow: 1, alignSelf: 'center'}),
   },
 })<MenuItemProps>(({children, ...elemProps}, Element) => {
-  if ('production' !== process.env.NODE_ENV) {
-    // ensure `hasIcon` is used when a child has an icon
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const {elementRef, localRef} = useLocalRef(elemProps.ref);
-    elemProps.ref = elementRef;
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    useMount(() => {
-      if (localRef.current!.querySelector('svg') && !elemProps.hasIcon) {
-        console.warn(
-          `A Menu.Item with an icon should have the 'hasIcon' prop set to true. This ensures correct rendering`
-        );
-      }
-    });
-  }
-
   return (
     <OverflowTooltip placement="left">
       <StyledItem minHeight={space.xl} as={Element} {...elemProps}>

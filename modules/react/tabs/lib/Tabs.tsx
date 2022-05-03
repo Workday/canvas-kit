@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {createContainer} from '@workday/canvas-kit-react/common';
-import {Menu} from './menu';
+import {Menu} from '@workday/canvas-kit-react/menu';
 
 import {TabsItem} from './TabsItem';
 import {TabsList} from './TabsList';

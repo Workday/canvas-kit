@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
 import {usePopupPopper, Popper} from '@workday/canvas-kit-react/popup';
-import {useMenuModel} from './menu';
+import {useMenuModel} from '@workday/canvas-kit-react/menu';
 export interface MenuPopperProps extends ExtractProps<typeof Popper> {}
 
 export const useTabsMenuPopper = usePopupPopper;

@@ -1,6 +1,8 @@
 import React from 'react';
 import {createModelHook, useUniqueId} from '@workday/canvas-kit-react/common';
 
+export type Visibility = 'hidden' | 'visible';
+
 export const useDisclosureModel = createModelHook({
   defaultConfig: {
     /** ID reference of the list. Children ids can be derived from this id */
@@ -9,7 +11,7 @@ export const useDisclosureModel = createModelHook({
      * The initial visibility of the disclosed content
      * @default 'hidden'
      */
-    initialVisibility: 'hidden' as 'hidden' | 'visible',
+    initialVisibility: 'hidden' as Visibility,
   },
 })(config => {
   const id = useUniqueId(config.id);

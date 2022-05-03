@@ -6,7 +6,7 @@ import {
   useOverflowListModel,
 } from '@workday/canvas-kit-react/collection';
 
-import {useMenuModel} from './menu';
+import {useMenuModel} from '@workday/canvas-kit-react/menu';
 
 export const useTabsModel = createModelHook({
   defaultConfig: {

@@ -489,59 +489,6 @@ export const createComponent = <
   return ReturnedComponent as any;
 };
 
-export const createWrapperSubcomponent = <TElement extends ElementComponentM<any, any, any>>(
-  Component: TElement
-) => <
-  TModelHook extends ((config: any) => {state: any; events: any}) & {
-    Context?: React.Context<any>;
-  } & {defaultConfig?: Record<string, any>},
-  TDefaultContext extends {state: Record<string, any>; events: Record<string, any>},
-  TElemPropsHook extends (...args: any) => any,
-  SubComponents = {}
->({
-  displayName,
-  modelHook,
-  elemPropsHook,
-  defaultContext,
-  subComponents,
-}: {
-  displayName?: string;
-  modelHook: TModelHook;
-  elemPropsHook?: TElemPropsHook;
-  defaultContext?: TDefaultContext;
-  subComponents?: SubComponents;
-}): TModelHook extends (config: infer TConfig) => infer TModel
-  ? TElement extends ElementComponentM<infer E, infer P, infer M>
-    ? ElementComponentM<E, P, TModel>
-    : never
-  : never => {
-  const ReturnedComponent = React.forwardRef<any, any>(
-    ({model, elemPropsHook: additionalPropsHook, ...props}, ref) => {
-      const localModel = useModelContext(modelHook.Context!, model);
-      const elemProps = elemPropsHook ? elemPropsHook(localModel, props, ref) : {...props, ref};
-
-      return React.createElement(Component, {
-        model: localModel,
-        elemPropsHook: additionalPropsHook,
-        ...elemProps,
-      });
-    }
-  );
-
-  Object.keys(subComponents || {}).forEach(key => {
-    // `ReturnedComponent` is a `React.ForwardRefExoticComponent` which has no additional keys so
-    // we'll cast to `Record<string, any>` for assignment. Note the lack of type checking
-    // properties. Take care when changing the runtime of this function.
-    (ReturnedComponent as Record<string, any>)[key] = (subComponents as Record<string, any>)[key];
-  });
-  ReturnedComponent.displayName = displayName;
-
-  // Cast as `any`. We have already specified the return type. Be careful making changes to this
-  // file due to this `any` `ReturnedComponent` is a `React.ForwardRefExoticComponent`, but we want
-  // it to be either an `Component` or `ElementComponent`
-  return ReturnedComponent as any;
-};
-
 export const createElemPropsHook = <
   TModelHook extends (config: any) => {state: Record<string, any>; events: Record<string, any>}
 >(

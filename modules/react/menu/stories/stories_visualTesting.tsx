@@ -6,13 +6,13 @@ import {saveAsIcon} from '@workday/canvas-system-icons-web';
 import {customColorTheme, withSnapshotsEnabled} from '../../../../utils/storybook';
 
 // unreleased path
-import {Menu} from '../lib/menu';
+import {Menu} from '@workday/canvas-kit-react/menu';
 import {HStack} from '@workday/canvas-kit-react/layout';
 
 const fontDelay = 150; // best guess for the font delay to prevent incorrect Chromatic regressions
 
 export default {
-  title: 'Testing/React/Unreleased/Menu',
+  title: 'Testing/React/Popups/Menu',
   component: Menu,
   parameters: {
     chromatic: {
@@ -32,27 +32,30 @@ const AllStates = () => (
         <Menu.Item className="focus hover">Focused & Hovered Item</Menu.Item>
         <Menu.Item aria-disabled={true}>Disabled Item</Menu.Item>
         <Menu.Item>Wrapped Text Item Wrapped Text Item Wrapped Text Item</Menu.Item>
-        <Menu.Item hasIcon>
+        <Menu.Divider />
+        <Menu.Item>Menu item between dividers</Menu.Item>
+        <Menu.Divider />
+        <Menu.Item>
           <Menu.Item.Icon icon={saveAsIcon} />
           <Menu.Item.Text>Item with Icon</Menu.Item.Text>
         </Menu.Item>
-        <Menu.Item hasIcon aria-selected={true}>
+        <Menu.Item aria-selected={true}>
           <Menu.Item.Icon icon={saveAsIcon} />
           <Menu.Item.Text>Item with Icon (selected)</Menu.Item.Text>
         </Menu.Item>
-        <Menu.Item hasIcon className="focus">
+        <Menu.Item className="focus">
           <Menu.Item.Icon icon={saveAsIcon} />
           <Menu.Item.Text>Item with Icon (focused)</Menu.Item.Text>
         </Menu.Item>
-        <Menu.Item hasIcon className="hover">
+        <Menu.Item className="hover">
           <Menu.Item.Icon icon={saveAsIcon} />
           <Menu.Item.Text>Item with Icon (hovered)</Menu.Item.Text>
         </Menu.Item>
-        <Menu.Item hasIcon className="focus hover">
+        <Menu.Item className="focus hover">
           <Menu.Item.Icon icon={saveAsIcon} />
           <Menu.Item.Text>Item with Icon (focus & hovered)</Menu.Item.Text>
         </Menu.Item>
-        <Menu.Item hasIcon>
+        <Menu.Item>
           <Menu.Item.Icon icon={saveAsIcon} />
           <Menu.Item.Text>Item with Icon Wrapped Text Wrapped Text</Menu.Item.Text>
         </Menu.Item>
@@ -61,7 +64,7 @@ const AllStates = () => (
   </Menu>
 );
 
-export const TabStates = withSnapshotsEnabled(() => {
+export const MenuStates = withSnapshotsEnabled(() => {
   return (
     <StaticStates>
       <HStack spacing="xs">

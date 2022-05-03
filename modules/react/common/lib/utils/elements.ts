@@ -36,6 +36,7 @@ export const getFirstFocusableElement = (container: HTMLElement): HTMLElement | 
 
   for (let i = 0; i < elements.length; i++) {
     const element = elements.item(i);
+    console.log('element', element);
     if (element && isFocusable(element as HTMLElement)) {
       return element as HTMLElement;
     }

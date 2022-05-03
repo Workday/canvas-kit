@@ -578,15 +578,15 @@ In v6 we supported Typescript 3.8 which limited the way types could be inferred 
 Kit v7 now requires Typescript 4.1 which introduced
 [Template Literal Types](https://www.typescriptlang.org/docs/handbook/2/template-literal-types.html).
 This means that the guards and callbacks no longer need to be manually defined via an `eventMap`.
-Event maps were a stopgap and were manual and suffered from user-error in defining them. Not all
-events had guards and callbacks there's no check other than manual review to ensure the existence of
-an event callback or guard. Template Literal Types allow us to properly type guards and callbacks
-without event maps. The previous types forced `data` to be an object. We've since dropped that
-restriction. You can still only pass a single argument to events. If you need additional
-information, use an object.
+Event maps were a stopgap, were manual, and prone to errors in defining them. Not all events had
+guards or callbacks there's no check other than manual review to ensure the existence of an event
+callback or guard. Template Literal Types allow us to properly type guards and callbacks without
+event maps. The previous types forced `data` to be an object. We've since dropped that restriction.
+You can still only pass a single argument to events. If you need additional information, use an
+object.
 
 This change also allowed us to remove a lot of boilerplate associated with models without
-sacrificing type safety. This change doesn't effect most use-cases, but will effect those whole
+sacrificing type safety. This change doesn't effect most use cases, but will effect those whole
 extended a model. We created a new utility function called `createModelHook` that helps set up
 types.
 

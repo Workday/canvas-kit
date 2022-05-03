@@ -11,8 +11,6 @@ import {
   ExtractProps,
   ellipsisStyles,
   EllipsisText,
-  useLocalRef,
-  useMount,
   createSubcomponent,
 } from '@workday/canvas-kit-react/common';
 import {Box, StackProps} from '@workday/canvas-kit-react/layout';
@@ -44,7 +42,7 @@ export interface TabsItemProps
    *
    * ```tsx
    * <Tabs.Item>First Tab</Tabs.Item>
-   * <Tabs.Item hasIcon>
+   * <Tabs.Item>
    *   <Tabs.Icon icon={canvasIcon} />
    *   <Tabs.Text>Second Tab</Tabs.Text>
    * </Tabs.Item>
@@ -80,23 +78,9 @@ export interface TabsItemProps
    * set while all inactive tabs should have a `tabIndex={-1}`
    */
   tabIndex?: number;
-  /**
-   * Use `hasIcon={true}` when the Tab item contains an icon. This instructs the tab item to render
-   * children as a flex container to accommodate icons. You will have to use `Tabs.Item.Text` as a
-   * child element if this is set to true.
-   *
-   * @example
-   * <Tabs.Item hasIcon>
-   *   <Tabs.Item.Icon icon={someIcon} />
-   *   <Tabs.Item.Text>Tab Text</Tabs.Item.Text>
-   * </Tabs.Item>
-   */
-  hasIcon?: boolean;
 }
 
-export const StyledTabItem = styled(Box.as('button'))<
-  StyledType & {hasIcon?: boolean} & Pick<TabsItemProps, 'spacing'>
->(
+export const StyledTabItem = styled(Box.as('button'))<StyledType & Pick<TabsItemProps, 'spacing'>>(
   ({theme, spacing}) => ({
     ...type.levels.subtext.large,
     '& > *:not(style) ~ *:not(style)': {
@@ -176,13 +160,13 @@ export const StyledTabItem = styled(Box.as('button'))<
       },
     },
   }),
-  ({hasIcon}) => {
-    if (hasIcon) {
+  ({children}) => {
+    if (typeof children === 'string') {
+      return ellipsisStyles;
+    } else {
       return {
         display: 'flex',
       };
-    } else {
-      return ellipsisStyles;
     }
   }
 );
@@ -217,21 +201,6 @@ export const TabsItem = createSubcomponent('button')({
     Text: EllipsisText,
   },
 })<TabsItemProps>(({children, ...elemProps}, Element, model) => {
-  if ('production' !== process.env.NODE_ENV) {
-    // ensure `hasIcon` is used when a child has an icon
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const {elementRef, localRef} = useLocalRef(elemProps.ref);
-    elemProps.ref = elementRef;
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    useMount(() => {
-      if (localRef?.current?.querySelector('svg') && !elemProps.hasIcon) {
-        console.warn(
-          `A Tabs.Item with an icon should have the 'hasIcon' prop set to true. This ensures correct rendering`
-        );
-      }
-    });
-  }
-
   return (
     <OverflowTooltip>
       <StyledTabItem as={Element} {...elemProps}>
