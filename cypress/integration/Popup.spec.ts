@@ -360,4 +360,36 @@ describe('Popup', () => {
       });
     });
   });
+
+  context('given the [Components/Popups/Popup/React, FocusRedirect] example is rendered', () => {
+    beforeEach(() => {
+      h.stories.load('Components/Popups/Popup/React', 'FocusRedirect');
+    });
+
+    context('when the "Delete Item" button is clicked', () => {
+      beforeEach(() => {
+        cy.findByRole('button', {name: 'Delete Item'}).click();
+      });
+
+      it('should show the popup', () => {
+        cy.findByRole('dialog', {name: 'Delete Item'}).should('be.visible');
+      });
+
+      context('when the "Delete" button has focus and the tab key is pressed', () => {
+        beforeEach(() => {
+          cy.findByRole('button', {name: 'Delete'})
+            .focus()
+            .tab();
+        });
+
+        it('should hide the popup', () => {
+          cy.findByRole('dialog', {name: 'Delete Item'}).should('not.exist');
+        });
+
+        it('should redirect focus to the "Next Focusable Button" button', () => {
+          cy.findByRole('button', {name: 'Next Focusable Button'}).should('have.focus');
+        });
+      });
+    });
+  });
 });
