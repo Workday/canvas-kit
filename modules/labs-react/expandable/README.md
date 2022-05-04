@@ -7,5 +7,5 @@
 ## Usage
 
 View the
-[documentation for Expandable](https://workday.github.io/canvas-kit/?path=/docs/labs-containers-expandable-react--basic)
+[documentation for Expandable](https://workday.github.io/canvas-kit/?path=/docs/labs-expandable-react--avatar)
 on Storybook.

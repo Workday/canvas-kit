@@ -15,7 +15,7 @@ import {useExpandableContent} from './hooks/useExpandableContent';
 export interface ExpandableContentProps {
   model?: DisclosureModel;
   /**
-   * Children of the `Expandable.Content` whose visibility will be controlled by the `Expandable.Target`
+   * Children of the `Expandable.Content` whose visibility is controlled by the associated `Expandable.Target`
    */
   children: React.ReactNode;
 }
