@@ -2,11 +2,13 @@ import {Transform} from 'jscodeshift';
 
 import compoundActionBar from './compoundActionBar';
 import compoundBanner from './compoundBanner';
-import recategorizeIconButtons from './recategorizeIconButtons';
 import removePropFromPopper from './removePropFromPopper';
-import renameIconPosition from './renameIconPosition';
+import renameIconRef from './renameIconRef';
 import renameLayoutImports from './renameLayoutImports';
 import updateSegmentedControl from './updateSegmentedControl';
+import renameIconPosition from './renameIconPosition';
+import recategorizeIconButtons from './recategorizeIconButtons';
+import updateModelSignatures from './updateModelSignatures';
 
 const transform: Transform = (file, api, options) => {
   // These will run in order. If your transform depends on others, place yours after dependent transforms
@@ -14,12 +16,14 @@ const transform: Transform = (file, api, options) => {
     compoundActionBar,
     compoundBanner,
     recategorizeIconButtons,
+    renameIconRef,
     removePropFromPopper,
     renameIconPosition,
     renameLayoutImports,
     updateSegmentedControl,
+    updateModelSignatures,
   ];
+
   return fixes.reduce((source, fix) => fix({...file, source}, api, options) as string, file.source);
 };
-
 export default transform;
