@@ -59,6 +59,7 @@ export const IconButtonStates = (props: {theme?: PartialEmotionCanvasTheme}) => 
 IconButtonStates.parameters = {
   chromatic: {
     pauseAnimationAtEnd: true,
+    delay: 300, // best guess for the focus delay to prevent incorrect Chromatic regressions
   },
 };
 
