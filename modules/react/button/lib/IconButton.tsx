@@ -175,6 +175,12 @@ const getIconButtonColors = (
         focus: {
           background: toggled ? themePrimary.main : undefined,
           icon: toggled ? themePrimary.contrast : colors.licorice500,
+          focusRing: focusRing(
+            {
+              separation: 0,
+            },
+            theme
+          ),
         },
         disabled: {
           background: toggled ? themePrimary.lightest : 'transparent',
