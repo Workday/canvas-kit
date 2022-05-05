@@ -81,7 +81,7 @@ const getRemovablePillColors = (disabled?: boolean) => {
     },
     active: {
       icon: disabled ? colors.licorice100 : colors.licorice500,
-      background: disabled ? colors.soap100 : colors.soap300,
+      background: disabled ? colors.soap100 : colors.soap500,
       border: disabled ? colors.licorice100 : colors.licorice500,
       label: disabled ? colors.licorice100 : colors.blackPepper400,
     },

@@ -64,7 +64,7 @@ const StyledFocusTarget = styled('span')<StyledType & PillIconButtonProps>({
 const StyledIconButton = styled(BaseButton)<StyledType & PillIconButtonProps>({
   marginInlineEnd: '-14px !important', // visually pull in the pill to the right size
   paddingInlineEnd: space.xxxs, // add 4px padding outside the pill for click target
-  marginInlineStart: `-${space.xxxs} !important`, // visually create space between label and the button
+  marginInlineStart: `-${space.xxs} !important`, // visually create space between label and the button
 });
 
 export const PillIconButton = createComponent('button')({
