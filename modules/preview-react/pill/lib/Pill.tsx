@@ -3,6 +3,8 @@ import React from 'react';
 import {
   createComponent,
   focusRing,
+  hideMouseFocus,
+  mouseFocusBehavior,
   styled,
   StyledType,
   useConstant,
@@ -52,7 +54,11 @@ const getButtonPillColors = () => {
       background: colors.soap300,
       border: colors.blueberry400,
       focusRing: focusRing({
-        width: 1,
+        width: 0,
+        inset: 'inner',
+        innerColor: colors.blueberry400,
+        outerColor: colors.blueberry400,
+        separation: 1,
       }),
     },
     disabled: {
@@ -89,7 +95,11 @@ const getRemovablePillColors = (disabled?: boolean) => {
       icon: colors.licorice200,
       background: colors.soap300,
       label: colors.blackPepper400,
-      focusRing: focusRing({width: 0, innerColor: 'transparent', outerColor: 'transparent'}),
+      focusRing: focusRing({
+        width: 0,
+        innerColor: 'transparent',
+        outerColor: 'transparent',
+      }),
     },
     disabled: {},
   };
@@ -116,12 +126,28 @@ const pillBaseStyles: CSSObject = {
 const StyledBasePill = styled(BaseButton.as('button'))<StyledType & PillProps>(
   {
     ...pillBaseStyles,
-
-    '&:active, &active:hover': {
+    '&:focus': {
+      borderColor: colors.blueberry400,
       'span[data-count="ck-pill-count"]': {
-        backgroundColor: colors.soap600,
+        borderTop: `1px solid ${colors.blueberry400}`,
+        borderBottom: `1px solid ${colors.blueberry400}`,
+        borderRight: `1px solid ${colors.blueberry400}`,
       },
     },
+    '&:active, &:active:hover, &:active:focus': {
+      'span[data-count="ck-pill-count"]': {
+        backgroundColor: colors.soap600,
+        border: 'none',
+      },
+    },
+
+    ...mouseFocusBehavior({
+      '&:focus': {
+        'span[data-count="ck-pill-count"]': {
+          border: 'none',
+        },
+      },
+    }),
   },
   boxStyleFn
 );

@@ -37,7 +37,11 @@ const getIconColors = () => {
     focus: {
       icon: colors.licorice500,
 
-      focusRing: focusRing({width: 0, innerColor: 'transparent', outerColor: 'transparent'}),
+      focusRing: focusRing({
+        width: 0,
+        innerColor: 'transparent',
+        outerColor: 'transparent',
+      }),
     },
     disabled: {
       icon: colors.licorice100,
@@ -47,16 +51,20 @@ const getIconColors = () => {
 };
 
 const StyledFocusTarget = styled('span')<StyledType & PillIconButtonProps>({
-  height: 22,
+  height: 20,
   position: 'absolute',
-  right: space.xxxs,
+  right: '5px',
   left: space.xxxs,
   margin: 0,
   borderRadius: borderRadius.m,
   '&:focus': {
+    outline: 'none',
     ...focusRing({
-      outerColor: 'transparent',
+      outerColor: colors.blueberry400,
       innerColor: 'transparent',
+      separation: 0,
+      width: 2,
+      inset: 'inner',
     }),
   },
 });
