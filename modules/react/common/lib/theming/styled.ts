@@ -9,7 +9,7 @@ const noop = (styles: any) => styles;
 // Pulled from https://github.com/emotion-js/emotion/blob/master/packages/styled-base/src/utils.js#L6 (not exported)
 type Interpolations = Array<any>;
 
-function styled<Props>(node: any) {
+function styled<Props>(node: any, options: any) {
   return (...args: Interpolation<Props>[]) => {
     const newArgs: Interpolations = args.map(
       interpolation => (props: Props & {theme: EmotionCanvasTheme & {_staticStates?: boolean}}) => {
@@ -28,7 +28,7 @@ function styled<Props>(node: any) {
       }
     );
 
-    return emotionStyled(node)(newArgs);
+    return emotionStyled(node, options)(newArgs);
   };
 }
 

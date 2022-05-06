@@ -4,6 +4,7 @@ export * from './form-field';
 export * from './menu';
 export * from './select';
 export * from './side-panel';
+export * from './text';
 export * from './text-area';
 export * from './text-input';
 
