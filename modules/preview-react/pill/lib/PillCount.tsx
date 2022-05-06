@@ -1,11 +1,6 @@
 import React from 'react';
 
-import {
-  createComponent,
-  hideMouseFocus,
-  styled,
-  StyledType,
-} from '@workday/canvas-kit-react/common';
+import {createComponent, styled, StyledType} from '@workday/canvas-kit-react/common';
 import {Flex, FlexProps} from '@workday/canvas-kit-react/layout';
 import {borderRadius, colors, space} from '@workday/canvas-kit-react/tokens';
 
