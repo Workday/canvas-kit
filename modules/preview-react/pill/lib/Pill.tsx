@@ -3,7 +3,6 @@ import React from 'react';
 import {
   createComponent,
   focusRing,
-  hideMouseFocus,
   mouseFocusBehavior,
   styled,
   StyledType,
