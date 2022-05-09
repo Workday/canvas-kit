@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
 import {createComponent, StyledType} from '@workday/canvas-kit-react/common';
-import {Box, BoxProps} from '@workday/canvas-kit-react/layout';
+import {Box, BoxProps} from './Box';
 import {Flex, FlexProps} from './Flex';
 import {getValidChildren} from './utils/getValidChildren';
 import {stack, StackStyleProps} from './utils/stack';
