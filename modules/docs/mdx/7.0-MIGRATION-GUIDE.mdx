@@ -16,6 +16,7 @@ any questions.
   - [Component Deprecations](#component-deprecations)
   - [Component Promotions](#component-promotions)
   - [Action Bar](#action-bar)
+  - [Banner](#banner)
   - [Button](#button)
   - [Icon](#icon)
   - [Popper](#popper)
@@ -173,6 +174,44 @@ We've removed the `fixed` prop from `ActionBar`. It now uses the `position` prop
 `fixed`) to set the container position.
 
 🤖 The codemod will remove uses of the `fixed` prop from `ActionBar`.
+
+---
+
+### Banner
+
+Banner is now a [compound component](/getting-started/for-developers/resources/compound-components/)
+composed of `Banner.Icon`, `Banner.Label`, and `Banner.ActionText`. This allows direct access to the
+icon, label, and text elements.
+
+```tsx
+// v6
+<Banner label="3 Warnings" actionText="Show Details" variant={Banner.Variant.Sticky} error={Banner.ErrorType.Error} />
+
+// v7
+<Banner isSticky={true} hasError={true}>
+  <Banner.Icon />
+  <Banner.Label>3 Warnings</Banner.Label>
+  <Banner.ActionText>Show Details</Banner.ActionText>
+</Banner>
+```
+
+🤖 The codemod will rewrite your JSX to match the new API.
+
+Like all components that use the
+[createComponent](/getting-started/for-developers/resources/creating-compound-components/#disclosurecontent-component)
+utility from our
+[common](https://github.com/Workday/canvas-kit/blob/ff77c5bd83e41c3ab2b9c55e41a8b7c1fde33a1b/modules/react/common/lib/utils/components.ts#L167)
+module, `Banner` now supports ref forwarding and using the `as` prop to change the component's
+underlying element.
+
+The `variant` prop (which previously accepted `Banner.Variant.Full` or `Banner.Variant.Sticky`) has
+been converted to the boolean `isSticky` prop on the container `Banner` component. Similarly, the
+`error` prop (which previously accepted `Banner.ErrorType.Alert` or `Banner.ErrorType.Error`) has
+been converted to the boolean `hasError` prop on `Banner`.
+
+The icon is now customizable via the `icon` prop of `Banner.Icon`. Previously, the icon was limited
+to `exclamationTriangleIcon` and `exclamationCircleIcon` for the alert and error states,
+respectively.
 
 ---
 
