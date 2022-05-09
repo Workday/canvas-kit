@@ -9,6 +9,7 @@ This guide contains breaking changes in Canvas Kit v7. Please
 any questions.
 
 - [Codemod](#codemod)
+- [Dependency Upgrades](#dependency-upgrades)
 - [Tokens](#tokens)
   - [Depth](#depth)
 - [Components](#components)
@@ -47,6 +48,32 @@ rollback more easily if necessary.**
 
 [Let us know](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) if you
 encounter any issues or use cases that we've missed.
+
+## Dependency Upgrades
+
+We will be upgrading to Emotion 11 and React 17 as part of the v7 release. This will allow teams to
+upgrade to newer versions of Emotion and React without the need to maintain older versions in order
+to use Canvas Kit.
+
+As part of this upgrade, Canvas Kit will remove the jsx pragma and the use of CSS props. However,
+consumers can continue to use CSS props.
+
+To use v7, teams will need to be using:
+
+- React 16.14 OR React 17.X for backwards compatibility on JSX transform if they are using Babel or
+  Typescript to compile code
+- Emotion 11
+- Typescript 4.1 or higher, if applicable
+- Babel 7.9 or higher, if applicable
+- An Enzyme adapter for React 17, if applicable
+
+Please note that teams may also need to update any side effect dependencies or linting packages with
+this update.
+
+View our [React 17](https://github.com/Workday/canvas-kit/discussions/1455) and
+[Emotion 11](https://github.com/Workday/canvas-kit/discussions/1453) Github discussions to learn
+more about any gotchas or tips and tricks with these upgrades. And of course, feel free to
+contribute to the discussion with any questions or learnings of your own!
 
 ## Tokens
 
