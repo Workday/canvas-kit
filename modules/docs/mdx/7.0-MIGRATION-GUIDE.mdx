@@ -98,20 +98,20 @@ directly if you need additional help.
 #### Cookie Banner
 
 We are [hard-deprecating](#hard-deprecation) `CookieBanner`. Please reference this
-[example](https://workday.github.io/canvas-kit/?path=/story/examples-cookiebanner-react--basic) if
-you would like to migrate away from `CookieBanner`.
+[example](https://workday.github.io/canvas-kit/?path=/story/examples-cookiebanner-react--basic) to
+migrate away from `CookieBanner`.
 
 #### Page Header
 
 We are [hard-deprecating](#hard-deprecation) `PageHeader`. Please reference this
-[example](https://workday.github.io/canvas-kit/?path=/story/examples-pageheader-react--basic) if you
-would like to migrate away from `PageHeader`.
+[example](https://workday.github.io/canvas-kit/?path=/story/examples-pageheader-react--basic) to
+migrate away from `PageHeader`.
 
 #### Header / Global Header
 
 We are [hard-deprecating](#hard-deprecation) `Header`. Please reference this
-[example](https://workday.github.io/canvas-kit/?path=/story/examples-globalheader-react--basic) if
-you would like to migrate away from `Header`.
+[example](https://workday.github.io/canvas-kit/?path=/story/examples-globalheader-react--basic) to
+migrate away from `Header`.
 
 ---
 
@@ -123,7 +123,7 @@ We've [promoted](https://github.com/Workday/canvas-kit/issues/1395) the followin
 - `Flex` from `@workday/canvas-kit-labs/layout` to `@workday/canvas-kit-react/layout`
 - `Stack` from `@workday/canvas-kit-labs/layout` to `@workday/canvas-kit-react/layout`
 
-🤖 The codemod will update imports for the promoted components.
+🤖 The codemod will update imports for these promoted components.
 
 ```tsx
 // v6
@@ -133,7 +133,7 @@ import {Box} from '@workday/canvas-kit-labs-react/common';
 import {Box} from '@workday/canvas-kit-react/layout';
 ```
 
-Note that the APIs for the promoted components remain unchanged.
+Note that the APIs for these promoted components remain unchanged.
 
 ---
 
@@ -155,9 +155,9 @@ We've removed the `fixed` prop from `ActionBar`. It now uses the `position` prop
 
 To consolidate Button APIs, we've removed `IconButton` in favor of `SecondaryButton` and
 `TertiaryButton`. The following table shows how `IconButton` variants in v6 map to their
-corresponding `Button` in v7.
+corresponding buttons in v7.
 
-| v6 `IconButton` variant    | v7 `Button` (and variant, if necessary)  |
+| v6 `IconButton` variant    | v7 button (and variant, if necessary)    |
 | -------------------------- | ---------------------------------------- |
 | `circle` (default variant) | `TertiaryButton`                         |
 | `circleFilled`             | `SecondaryButton`                        |
@@ -170,7 +170,7 @@ corresponding `Button` in v7.
 > Note: See below for more information about how to manually migrate from
 > [unsupported v6 variants](#unsupported-iconbutton-variants).
 
-🤖 Use the codemod to migrate your `IconButton` components in v6 to their corresponding `Button` in
+🤖 Use the codemod to migrate your `IconButton` components in v6 to their corresponding buttons in
 v7:
 
 ```tsx
@@ -192,16 +192,16 @@ v7:
 In order to simplify our API, we no longer support the `plain`, `square`, and `squareFilled`
 variants from `IconButton`.
 
-`square`, `squareFilled` and `plain` `IconButton` components should be transitioned to the new
-icon-only versions of the `Button` components (`PrimaryButton`, `SecondaryButton`, and
-`TertiaryButton`), `ToolbarIconButton`, or `SegmentedControl`. You may use `ToolbarIconButton` if
-you would still like to have a square icon that is toggleable.
+`IconButton` components with `square`, `squareFilled` and `plain` variants should be updated to the
+corresponding icon-only button versions (`PrimaryButton`, `SecondaryButton`, and `TertiaryButton`),
+`ToolbarIconButton`, or `SegmentedControl`. You may use `ToolbarIconButton` if you would still like
+to have a square icon that is toggleable.
 
 These changes are **not** handled by the codemod.
 
 > If none of these options support your use case, we've introduced a low-level
-> [`BaseButton`](#basebutton) component which allows you to modify the colors, props, and size of
-> the button. For an example of it being used, reference our
+> [`BaseButton`](#basebutton) component which allows you to modify the button's colors, size, and
+> other props. For an example of it being used, reference our
 > [`PageButton`](https://github.com/Workday/canvas-kit/blob/master/modules/react/pagination/lib/Pagination/PageButton.tsx)
 > component.
 
@@ -269,8 +269,8 @@ return (
 
 #### Sizes
 
-Each `Button` now supports the following sizes: `extraSmall`, `small`, `medium` and `large`
-(defaults to `medium`).
+Each button now supports the following sizes: `extraSmall`, `small`, `medium` and `large` (defaults
+to `medium`).
 
 ```tsx
   <PrimaryButton icon={plusIcon} size="extraSmall" />
@@ -343,8 +343,7 @@ export const BasicButton = ({children, ...elemProps}: BasicButtonProps) => {
 
 `BaseButton` uses our `Box` component under the hood, which allows it to accept a variety of style
 properties. Because of the flexibility of this component, consumers can use it to create toggled
-buttons or other buttons that don't fall under the use cases supported by our standard `Button`
-components.
+buttons or other buttons that aren't supported by our standard button components.
 
 ---
 
