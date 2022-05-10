@@ -52,29 +52,30 @@ encounter any issues or use cases that we've missed.
 
 ## Dependency Upgrades
 
-We will be upgrading to Emotion 11 and React 17 as part of the v7 release. This will allow teams to
-upgrade to newer versions of Emotion and React without the need to maintain older versions in order
-to use Canvas Kit.
+We've upgraded to Emotion 11 and React 17 in v7. This allows teams to upgrade to newer versions of
+Emotion and React without needing to maintain older versions in order to use Canvas Kit.
 
-As part of this upgrade, Canvas Kit will remove the jsx pragma and the use of CSS props. However,
-consumers can continue to use CSS props.
+As part of this upgrade, we've removed use of the `/** @jsx jsx */` pragma and `css` prop within
+Canvas Kit. See our [React 17 discussion](https://github.com/Workday/canvas-kit/discussions/1455)
+and [corresponding PR](https://github.com/Workday/canvas-kit/pull/1409) for more information on why
+we made this change. Consumers may continue to use the `css` prop.
 
-To use v7, teams will need to be using:
+To use v7, you'll need to upgrade the following dependencies:
 
-- React 16.14 OR React 17.X for backwards compatibility on JSX transform if they are using Babel or
+- React 16.14 OR React 17.X for backwards compatibility on JSX transform if you're using Babel or
   Typescript to compile code
 - Emotion 11
 - Typescript 4.1 or higher, if applicable
 - Babel 7.9 or higher, if applicable
 - An Enzyme adapter for React 17, if applicable
 
-Please note that teams may also need to update any side effect dependencies or linting packages with
+Please note that you may also need to update any side effect dependencies or linting packages with
 this update.
 
 View our [React 17](https://github.com/Workday/canvas-kit/discussions/1455) and
-[Emotion 11](https://github.com/Workday/canvas-kit/discussions/1453) Github discussions to learn
-more about any gotchas or tips and tricks with these upgrades. And of course, feel free to
-contribute to the discussion with any questions or learnings of your own!
+[Emotion 11](https://github.com/Workday/canvas-kit/discussions/1453) discussions to learn more about
+any gotchas or tips and tricks with these upgrades. And of course, feel free to contribute to the
+discussion with any questions or learnings of your own!
 
 ## Tokens
 
@@ -167,8 +168,12 @@ Note that the APIs for these promoted components remain unchanged.
 
 ### Action Bar
 
-`ActionBar` is now a
-[compound component](/getting-started/for-developers/resources/compound-components/).
+We've updated `ActionBar` to use the
+[createComponent](/getting-started/for-developers/resources/creating-compound-components/#disclosurecontent-component)
+utility from our
+[common](https://github.com/Workday/canvas-kit/blob/ff77c5bd83e41c3ab2b9c55e41a8b7c1fde33a1b/modules/react/common/lib/utils/components.ts#L167)
+module; it now supports [ref forwarding](https://reactjs.org/docs/forwarding-refs.html) and using
+the `as` prop to change the rendered element.
 
 We've removed the `fixed` prop from `ActionBar`. It now uses the `position` prop (defaults to
 `fixed`) to set the container position.
@@ -197,12 +202,12 @@ icon, label, and text elements.
 
 🤖 The codemod will rewrite your JSX to match the new API.
 
-Like all components that use the
+Like all compound components, `Banner` is written using the
 [createComponent](/getting-started/for-developers/resources/creating-compound-components/#disclosurecontent-component)
 utility from our
 [common](https://github.com/Workday/canvas-kit/blob/ff77c5bd83e41c3ab2b9c55e41a8b7c1fde33a1b/modules/react/common/lib/utils/components.ts#L167)
-module, `Banner` now supports ref forwarding and using the `as` prop to change the component's
-underlying element.
+module; it supports [ref forwarding](https://reactjs.org/docs/forwarding-refs.html) and using the
+`as` prop to change the rendered element.
 
 The `variant` prop (which previously accepted `Banner.Variant.Full` or `Banner.Variant.Sticky`) has
 been converted to the boolean `isSticky` prop on the container `Banner` component. Similarly, the
@@ -339,10 +344,10 @@ Each button now supports the following sizes: `extraSmall`, `small`, `medium` an
 to `medium`).
 
 ```tsx
-  <PrimaryButton icon={plusIcon} size="extraSmall" />
-  <PrimaryButton icon={plusIcon} size="small" />
-  <PrimaryButton icon={plusIcon} size="medium" /> // default
-  <PrimaryButton icon={plusIcon} size="large" />
+<PrimaryButton icon={plusIcon} size="extraSmall" />
+<PrimaryButton icon={plusIcon} size="small" />
+<PrimaryButton icon={plusIcon} size="medium" /> // default
+<PrimaryButton icon={plusIcon} size="large" />
 ```
 
 #### BaseButton
@@ -415,10 +420,13 @@ buttons or other buttons that aren't supported by our standard button components
 
 ### Icon
 
-`AccentIcon`, `AppletIcon`, `Graphic`, `Icon`, `Svg`, `SystemIcon`, and `SystemIconCircle` now
-support [ref forwarding](https://reactjs.org/docs/forwarding-refs.html) through use of the
-[`createComponent`](https://github.com/Workday/canvas-kit/blob/ff77c5bd83e41c3ab2b9c55e41a8b7c1fde33a1b/modules/react/common/lib/utils/components.ts#L167)
-utility from the `common` module.
+We've updated `AccentIcon`, `AppletIcon`, `Graphic`, `Icon`, `Svg`, `SystemIcon`, and
+`SystemIconCircle` to use the
+[createComponent](/getting-started/for-developers/resources/creating-compound-components/#disclosurecontent-component)
+utility from our
+[common](https://github.com/Workday/canvas-kit/blob/ff77c5bd83e41c3ab2b9c55e41a8b7c1fde33a1b/modules/react/common/lib/utils/components.ts#L167)
+module; they now support [ref forwarding](https://reactjs.org/docs/forwarding-refs.html) and using
+the `as` prop to change the rendered element.
 
 These components previously supported an `iconRef` prop. In v7, you'll need to use `ref` instead of
 `iconRef`:
