@@ -11,7 +11,7 @@ export type ListProps<T = unknown> = {
 
 export type ListItemProps = {
   children?: React.ReactNode;
-  name?: string;
+  'data-id'?: string;
 };
 
 /**

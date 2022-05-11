@@ -103,20 +103,27 @@ bidirectionally aware, but a grid will always
 The list system also includes a cursor that extends the list. A cursor is mostly used for focusing
 items. The [roving tabindex](https://w3c.github.io/aria-practices/#kbd_roving_tabindex) is a
 well-supported way to accomplish accessibility requirements for focusing items within a list. This
-example shows how to use `useListRovingFocus`. You can either use the tab key for focus on an item
-or click on an item and then use the up/down keys to navigation the list. By default, the list is
-set to wrap navigation using the `wrappingNavigationManager`. Only a single item in the list is a
-focus stop that "roves" as the up/down arrows are pressed.
+example shows how to use `useListRovingFocus`. This example uses the `ListBox` component, but the
+default `ListBox.Item` is very basic. We have two options, we can either pass additional
+functionality via `elemPropsHook` or by creating a new item using our elemProps hook primitives.
+Both will be demonstrated. Creating a custom item is recommended if you create a custom component
+and export it. Using `elemPropsHook` with `ListBox.Item` is recommended only for one-off instances.
+
+You can either use the tab key for focus on an item or click on an item and then use the up/down
+keys to navigation the list. By default, the list is set to wrap navigation using the
+`wrappingNavigationManager`. Only a single item in the list is a focus stop that "roves" as the
+up/down arrows are pressed.
 
 **Note:** This example doesn't meet accessibility requirements. The list will have to have some type
 of context. Like "navigation list" or "menu list".
 
-<!--ExampleCodeBlock code={RovingFocus} /-->
+<ExampleCodeBlock code={RovingFocus} />
 
 #### Selection
 
 Lists support selection. `useSelectionItem` is applied to an item which adds an `onClick` that adds
-the item to the `state.selectedIds`. The default selection manager is a single select.
+the item to the `state.selectedIds`. The default selection manager is a single select. This example
+uses `ListBox` and creates a custom `SelectableItem` elemProps hook and component.
 
 <ExampleCodeBlock code={Selection} />
 

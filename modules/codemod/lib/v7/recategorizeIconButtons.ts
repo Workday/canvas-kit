@@ -66,6 +66,7 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
           value.openingElement.name.name === styledMap.IconButton)
     )
     .forEach(nodePath => {
+      console.log('here');
       const attrs = nodePath.value.openingElement.attributes;
 
       const variantProp = attrs?.find(
@@ -106,6 +107,10 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
       requiredImportSpecifiers.push(buttonType);
     });
 
+  if (requiredImportSpecifiers.length === 0) {
+    return file.source;
+  }
+
   // Find all instances of IconButton within a style function
   // const StyledIconButton = styled(IconButton) gets renamed to
   // const StyledIconButton = styled(CorrectButtonMapping)
@@ -113,7 +118,10 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
     if (
       nodePath.value.init?.type === 'CallExpression' &&
       nodePath.value.init.callee.type === 'CallExpression' &&
-      nodePath.value.init.callee.arguments[0].type === 'Identifier'
+      nodePath.value.init.callee.callee.type === 'Identifier' &&
+      nodePath.value.init.callee.callee.name === 'styled' &&
+      nodePath.value.init.callee.arguments[0].type === 'Identifier' &&
+      nodePath.value.init.callee.arguments[0].name === 'IconButton'
     ) {
       nodePath.value.init.callee.arguments[0].name = buttonType;
       requiredImportSpecifiers.push(buttonType);

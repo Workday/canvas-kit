@@ -3,52 +3,55 @@ import React from 'react';
 import {
   useListItemRegister,
   useListItemRovingFocus,
-  useListRenderItems,
   useListItemSelect,
   useListModel,
-  ListProps,
   ListItemProps,
+  ListBox,
 } from '@workday/canvas-kit-react/collection';
-import {composeHooks} from '@workday/canvas-kit-react/common';
+import {
+  composeHooks,
+  createElemPropsHook,
+  createSubcomponent,
+} from '@workday/canvas-kit-react/common';
 
-const ListModelContext = useListModel.Context;
+// Create a custom hook for our item
+const useItem = composeHooks(
+  createElemPropsHook(useListModel)((model, ref, elemProps: ListItemProps) => {
+    return {
+      role: 'listitem',
+      style: {
+        background: model.state.selectedIds.includes(elemProps['data-id']) ? 'gray' : 'white',
+      },
+    };
+  }),
+  useListItemSelect,
+  useListItemRovingFocus,
+  useListItemRegister
+);
 
-const List = (props: ListProps) => {
-  const model = useListModel();
-
-  return (
-    <ListModelContext.Provider value={model}>
-      <ul>{useListRenderItems(model, props.children)}</ul>
-      <p>Cursor ID: {model.state.cursorId}</p>
-      <p>Selected ID: {model.state.selectedIds[0]}</p>
-    </ListModelContext.Provider>
-  );
-};
-
-const useItem = composeHooks(useListItemSelect, useListItemRovingFocus, useListItemRegister);
-
-const Item = (elemProps: ListItemProps) => {
-  const model = React.useContext(ListModelContext);
-
-  const props = useItem(model, elemProps);
-
-  return (
-    <button
-      role="listitem"
-      {...props}
-      style={{background: model.state.selectedIds.includes(props.name) ? 'gray' : 'white'}}
-    >
-      {props.children} - {props['data-id']}
-    </button>
-  );
-};
+// Create a custom item
+const SelectableItem = createSubcomponent('button')({
+  displayName: 'SelectableItem',
+  modelHook: useListModel,
+  elemPropsHook: useItem,
+})<ListItemProps>((elemProps, Element) => {
+  return <Element {...elemProps} />;
+});
 
 export const Selection = () => {
+  const model = useListModel({
+    initialSelectedIds: ['first'],
+  });
   return (
-    <List>
-      <Item>First</Item>
-      <Item>Second</Item>
-      <Item>Third</Item>
-    </List>
+    <>
+      <ListBox model={model}>
+        <SelectableItem data-id="first">First</SelectableItem>
+        <SelectableItem data-id="second">Second</SelectableItem>
+        <SelectableItem data-id="third">Third</SelectableItem>
+      </ListBox>
+
+      <p>Cursor ID: {model.state.cursorId}</p>
+      <p>Selected ID: {model.state.selectedIds[0]}</p>
+    </>
   );
 };

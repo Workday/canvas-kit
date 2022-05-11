@@ -3,46 +3,37 @@ import React from 'react';
 import {
   useListItemRegister,
   useListItemRovingFocus,
-  useListRenderItems,
   useListModel,
-  ListProps,
+  ListBox,
   ListItemProps,
 } from '@workday/canvas-kit-react/collection';
-import {composeHooks} from '@workday/canvas-kit-react/common';
+import {composeHooks, createSubcomponent} from '@workday/canvas-kit-react/common';
 
-const ListModelContext = useListModel.Context;
+// create our own hook using `useListItemRegister` and `useListItemRovingFocus`. Note the
+// `useListItemRegister` must be the last hook when using `composeHooks`
+const useRovingFocusItem = composeHooks(useListItemRovingFocus, useListItemRegister);
 
-const List = (props: ListProps) => {
-  const model = useListModel();
-
-  return (
-    <ListModelContext.Provider value={model}>
-      <ul>{useListRenderItems(model, props.children)}</ul>
-      <p>Cursor ID: {model.state.cursorId}</p>
-    </ListModelContext.Provider>
-  );
-};
-
-const useItem = composeHooks(useListItemRovingFocus, useListItemRegister);
-
-const Item = (elemProps: ListItemProps) => {
-  const model = React.useContext(ListModelContext);
-
-  const props = useItem(model, elemProps);
-
-  return (
-    <li {...props}>
-      {props.children} - {props['data-id']}
-    </li>
-  );
-};
+// create our own item. We use `modelHook` to define which model should be used and `elemPropsHook`
+// to determine which elemProps hook should be used. `elemProps` will be populated with props to
+// pass to the element
+const RovingFocusItem = createSubcomponent('li')({
+  displayName: 'RovingFocusItem',
+  modelHook: useListModel,
+  elemPropsHook: useRovingFocusItem,
+})<ListItemProps>((elemProps, Element) => {
+  return <Element {...elemProps} />;
+});
 
 export const RovingFocus = () => {
   return (
-    <List>
-      <Item>First</Item>
-      <Item>Second</Item>
-      <Item>Third</Item>
-    </List>
+    <ListBox>
+      {/* We can use `ListBox.Item` and add `useListItemRovingFocus`. Useful for one-off */}
+      <ListBox.Item data-id="first" elemPropsHook={useListItemRovingFocus}>
+        First
+      </ListBox.Item>
+      {/* Use a custom item. Useful for reusing components */}
+      <RovingFocusItem data-id="second">Second</RovingFocusItem>
+      <RovingFocusItem data-id="third">Third</RovingFocusItem>
+    </ListBox>
   );
 };

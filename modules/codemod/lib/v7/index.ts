@@ -9,6 +9,7 @@ import updateSegmentedControl from './updateSegmentedControl';
 import renameIconPosition from './renameIconPosition';
 import recategorizeIconButtons from './recategorizeIconButtons';
 import updateModelSignatures from './updateModelSignatures';
+import updateTabs from './updateTabs';
 
 const transform: Transform = (file, api, options) => {
   // These will run in order. If your transform depends on others, place yours after dependent transforms
@@ -22,6 +23,7 @@ const transform: Transform = (file, api, options) => {
     renameLayoutImports,
     updateSegmentedControl,
     updateModelSignatures,
+    updateTabs,
   ];
 
   return fixes.reduce((source, fix) => fix({...file, source}, api, options) as string, file.source);
