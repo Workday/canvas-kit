@@ -241,11 +241,11 @@ export const useCursorListModel = createModelHook({
   },
   requiredConfig: useBaseListModel.requiredConfig,
 })(config => {
-  const [cursorId, setCursorId] = React.useState('');
+  const [cursorId, setCursorId] = React.useState(config.initialCursorId);
   const columnCount = config.columnCount || 0;
   const list = useBaseListModel(config);
   const initialCurrentRef = React.useRef(
-    config.initialCursorId || config.items?.length ? getId(config.items![0]) : ''
+    config.initialCursorId || (config.items?.length ? getId(config.items![0]) : '')
   );
 
   const state = {

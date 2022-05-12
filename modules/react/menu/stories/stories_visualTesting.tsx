@@ -22,7 +22,7 @@ export default {
 };
 
 const AllStates = () => (
-  <Menu initialSelectedIds={['selected']}>
+  <Menu initialSelectedIds={['selected']} initialCursorId="non-existent">
     <Menu.Card style={{animation: 'none', width: 300}}>
       <Menu.List>
         <Menu.Item>Normal Item</Menu.Item>
