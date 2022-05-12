@@ -1,13 +1,14 @@
+/** @jsxRuntime classic */
 /** @jsx jsx */
+import {jsx} from '@emotion/react';
 import React from 'react';
-import {jsx} from '@emotion/core';
 import {colors, type} from '@workday/canvas-kit-react/tokens';
 import {CanvasProvider, ContentDirection, StaticStates} from '@workday/canvas-kit-react/common';
 import {ComponentStatesTable, permutateProps} from '@workday/canvas-kit-labs-react/common';
 import {withSnapshotsEnabled} from '../../../../../utils/storybook';
 import {ExternalHyperlink} from '@workday/canvas-kit-react/button';
 import {Container} from './utils';
-import {VStack} from '@workday/canvas-kit-labs-react';
+import {VStack} from '@workday/canvas-kit-react/layout';
 
 export default withSnapshotsEnabled({
   title: 'Testing/React/Buttons/Button/ExternalHyperlink',

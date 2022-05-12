@@ -5,8 +5,6 @@ import {
   SecondaryButton,
   TertiaryButton,
   DeleteButton,
-  Hyperlink,
-  ExternalHyperlink,
 } from '@workday/canvas-kit-react/button';
 import {Specifications} from '@workday/canvas-kit-docs';
 
@@ -17,10 +15,6 @@ import {SecondaryInverse} from './examples/SecondaryInverse';
 import {Tertiary} from './examples/Tertiary';
 import {TertiaryInverse} from './examples/TertiaryInverse';
 import {Delete} from './examples/Delete';
-import {Link} from './examples/Hyperlink';
-import {LinkInverse} from './examples/HyperlinkInverse';
-import {ExternalLink} from './examples/ExternalHyperlink';
-import {ExternalLinkInverse} from './examples/ExternalHyperlinkInverse';
 
 <Meta title="Components/Buttons/Button/React" />
 
@@ -122,44 +116,6 @@ before deleting.
 Undocumented props are spread to the underlying `<button>` element.
 
 <ArgsTable of={DeleteButton} />
-
-### Hyperlink
-
-Hyperlinks should be used when you want to navigate away from the current page or to an anchor on
-the current page.
-
-<ExampleCodeBlock code={Link} />
-
-Hyperlinks also have an `inverse` variant. Use this variant when you need to place a Hyperlink on a
-dark or colorful background such as `blueberry400`.
-
-<ExampleCodeBlock code={LinkInverse} />
-
-#### Props
-
-Undocumented props are spread to the underlying `<a>` element.
-
-<ArgsTable of={Hyperlink} />
-
-### ExternalHyperlink
-
-If your link should open in a new tab or window use the `<ExternalHyperlink>` component. It will let
-users know about the behavior by adding an icon, `extLinkIcon`. By default, the icon has a label of
-"Opens link in new window". You can override `aria-label` of the icon by using the `iconLabel`
-attribute. This override will be needed for translations.
-
-<ExampleCodeBlock code={ExternalLink} />
-
-ExternalHyperlinks also have an `inverse` variant. Use this variant when you need to place a
-Hyperlink on a dark or colorful background such as `blueberry400`.
-
-<ExampleCodeBlock code={ExternalLinkInverse} />
-
-#### Props
-
-Undocumented props are spread to the underlying `<a>` element.
-
-<ArgsTable of={ExternalHyperlink} />
 
 ### Accessible Use of the `as` Prop
 

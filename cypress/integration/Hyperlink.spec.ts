@@ -5,9 +5,9 @@ describe('Button', () => {
     h.stories.visit();
   });
 
-  context('given primary buttons are rendered', () => {
+  context('given internal hyperlinks are rendered', () => {
     beforeEach(() => {
-      h.stories.load('Components/Buttons/Button/React', 'Primary');
+      h.stories.load('Components/Buttons/Hyperlink/React', 'Link');
     });
 
     it('should not have any axe errors', () => {
@@ -15,15 +15,15 @@ describe('Button', () => {
     });
 
     it('should render the correct text', () => {
-      cy.get('button')
+      cy.get('a')
         .first()
-        .should('contain', 'Primary');
+        .should('contain', 'Hyperlink');
     });
   });
 
-  context('given delete buttons are rendered', () => {
+  context('given external hyperlinks are rendered', () => {
     beforeEach(() => {
-      h.stories.load('Components/Buttons/Button/React', 'DeleteStory');
+      h.stories.load('Components/Buttons/Hyperlink/React', 'External Link');
     });
 
     it('should not have any axe errors', () => {
@@ -31,9 +31,9 @@ describe('Button', () => {
     });
 
     it('should render the correct text', () => {
-      cy.get('button')
+      cy.get('a')
         .first()
-        .should('contain', 'Click Me');
+        .should('contain', 'External Hyperlink');
     });
   });
 });
