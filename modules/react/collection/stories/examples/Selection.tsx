@@ -41,6 +41,7 @@ const SelectableItem = createSubcomponent('button')({
 export const Selection = () => {
   const model = useListModel({
     initialSelectedIds: ['first'],
+    orientation: 'horizontal',
   });
   return (
     <>

@@ -6,7 +6,7 @@ import {
   SidePanel,
   SidePanelBackgroundColor,
   SidePanelOpenDirection,
-} from '@workday/canvas-kit-react//side-panel';
+} from '@workday/canvas-kit-react/side-panel';
 import {space} from '@workday/canvas-kit-react/tokens';
 
 export default withSnapshotsEnabled({

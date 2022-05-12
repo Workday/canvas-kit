@@ -20,7 +20,3 @@ export const MenuPopper = createSubcomponent('div')({
     </Popper>
   );
 });
-
-// TODO: Before, all popup stuff was using the Popup context, now is using specialized context from
-// the model. This means every use of a subcomponent forwarding to a Popup one will not get the
-// right context

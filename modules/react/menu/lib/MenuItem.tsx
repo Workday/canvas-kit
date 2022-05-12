@@ -143,7 +143,6 @@ export const useMenuItem = composeHooks(
           if (model.state.cursorId === id) {
             // delay focus changes to allow PopperJS to position
             requestAnimationFrame(() => {
-              console.log('focus', model.state.cursorId, id);
               localRef.current.focus();
             });
           }

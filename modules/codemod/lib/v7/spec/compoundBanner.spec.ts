@@ -1,5 +1,5 @@
 import {expectTransformFactory} from './expectTransformFactory';
-import transform from '..';
+import transform from '../compoundBanner';
 import {stripIndent} from 'common-tags';
 
 const expectTransform = expectTransformFactory(transform);

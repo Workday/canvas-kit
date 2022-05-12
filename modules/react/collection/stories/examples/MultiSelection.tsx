@@ -3,54 +3,48 @@ import React from 'react';
 import {
   useListItemRegister,
   useListItemRovingFocus,
-  useListRenderItems,
   useListItemSelect,
   useListModel,
-  multiSelectionManager,
-  ListProps,
   ListItemProps,
   ListBox,
 } from '@workday/canvas-kit-react/collection';
 import {composeHooks, createSubcomponent} from '@workday/canvas-kit-react/common';
+import {multiSelectionManager} from '../../lib/useSelectionListModel';
 
-const ListModelContext = useListModel.Context;
+const useMultiSelectItem = composeHooks(
+  useListItemSelect,
+  useListItemRovingFocus,
+  useListItemRegister
+);
 
-const useItem = composeHooks(useListItemSelect, useListItemRovingFocus, useListItemRegister);
-
-const useMultiSelectableItem = useItem;
-
-const MultiSelectableItem = createSubcomponent('button')({
+const Item = createSubcomponent('button')({
   displayName: 'MultiSelectableItem',
   modelHook: useListModel,
-  elemPropsHook: useMultiSelectableItem,
-});
-
-const Item = (elemProps: ListItemProps) => {
-  const model = React.useContext(ListModelContext);
-
-  const props = useItem(model, elemProps);
-
+  elemPropsHook: useMultiSelectItem,
+})<ListItemProps>((elemProps, Element, model) => {
   return (
-    <button
+    <Element
       role="listitem"
-      {...props}
-      style={{background: model.state.selectedIds.includes(props['data-id']) ? 'gray' : 'white'}}
-    >
-      {props.children} - {props['data-id']}
-    </button>
+      {...elemProps}
+      style={{
+        background: model.state.selectedIds.includes(elemProps['data-id']) ? 'gray' : 'white',
+      }}
+    />
   );
-};
+});
 
 export const MultiSelection = () => {
   const model = useListModel({
     initialSelectedIds: ['first', 'second'],
+    selection: multiSelectionManager,
+    orientation: 'horizontal',
   });
   return (
     <>
       <ListBox model={model}>
-        <Item>First</Item>
-        <Item>Second</Item>
-        <Item>Third</Item>
+        <Item data-id="first">First</Item>
+        <Item data-id="second">Second</Item>
+        <Item data-id="third">Third</Item>
       </ListBox>
 
       <p>Cursor ID: {model.state.cursorId}</p>

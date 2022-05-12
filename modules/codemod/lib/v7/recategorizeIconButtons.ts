@@ -66,7 +66,6 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
           value.openingElement.name.name === styledMap.IconButton)
     )
     .forEach(nodePath => {
-      console.log('here');
       const attrs = nodePath.value.openingElement.attributes;
 
       const variantProp = attrs?.find(
