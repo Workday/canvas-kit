@@ -30,8 +30,8 @@ information to help with scanning and organization.
 
 ### Basic Example
 
-If the Pill only renders text, it will look like a read-only Pill. This is a non-interactive element
-that is used to display information.
+If the Pill has `variant='readOnly'`, it will look like a read-only Pill. This is a non-interactive
+element that is used to display information.
 
 > **_NOTE:_** By default, the Pill's width will max out at `200px` and the text will be truncated
 > with an ellipsis and render an OverflowTooltip on hover and focus. This max width can be changed
@@ -42,9 +42,8 @@ that is used to display information.
 ### Interactive Pills
 
 All leading elements (icons or avatars) are intended to be descriptive, helping support the label.
-Do not rely on the leading element to indicate the interaction behavior.
-
-You can define an interactive Pill by providing an `onClick` prop.
+Do not rely on the leading element to indicate the interaction behavior. By default a Pill is
+considered interactive, therefore it's default variant is `default`.
 
 ```tsx
 <Pill onClick={() => console.warn('clicked')}>
@@ -79,10 +78,10 @@ Removable Pills display an `X` icon after the label. They have a smaller, more s
 and click target to be more intentional about their actions and to avoid unintended removal of a
 Pill.
 
-You can define a removable Pill by providing an `onDelete` prop.
+You can define a removable Pill by providing a `variant='removable'` prop.
 
 ```tsx
-<Pill onDelete={() => console.warn('clicked')}>
+<Pill variant="removable" onDelete={() => console.warn('clicked')}>
   Pink Shirts
   <Pill.IconButton />
 </Pill>
@@ -119,30 +118,31 @@ pill.
 Example of read only:
 
 ```tsx
-<Pill>This is a read only</Pill>
+<Pill variant="readOnly">This is a read only</Pill>
 ```
 
-If you give this component an `onClick` prop it will render as an interactive Pill which accepts
-subcomponents.
+If you give this component a `variant='default'` prop it will render as an interactive Pill which
+accepts subcomponents.
 
 ```tsx
-<Pill onClick={() => console.log('clicked')}>
+<Pill variant="default" onClick={() => console.log('clicked')}>
   <Pill.Avatar /> Regina Skeltor
 </Pill>
 ```
 
-If you give this component an `onDelete` it will render as a span and you can have a removable Pill
-that has a smaller click target to prevent users from accidentally delete something.
+If you give this component a `variant='removable'` it will render as a span and you can have a
+removable Pill that has a smaller click target to prevent users from accidentally delete something.
 
 ```tsx
-<Pill onDelete={() => console.log('handle remove')}>
+<Pill variant="removable" onDelete={() => console.log('handle remove')}>
   Shoes
   <Pill.IconButton />
 </Pill>
 ```
 
-If you give the component an `onClick` and an `onDelete` this is not a valid configuration and
-nothing will render. You should see a warning in the console stating to provide one or the other.
+If you give the component an `onClick` and an `onDelete` and the `variant='default'` only `onClick`
+will be called and you'll see a warning in the console suggesting to either provide an onClick or
+change the variant to be `removable`.
 
 #### Props
 
@@ -185,8 +185,8 @@ This component renders its `children` as the count.
 
 ### Pill.Icon
 
-This component renders an `icon`. This component should only be used when an `onClick` is provided.
-By default this component render a `plusIcon` but it can be overriden.
+This component renders an `icon`. This component should only be used when `variant='default'`. By
+default this component render a `plusIcon` but it can be overriden.
 
 #### Usage
 
@@ -210,7 +210,7 @@ overriden.
 #### Usage
 
 ```tsx
-<Pill onDelete={() => console.warn('clicked')}>
+<Pill variant="removable" onDelete={() => console.warn('clicked')}>
   Pink Shirts
   <Pill.IconButton />
 </Pill>
@@ -228,7 +228,7 @@ There's no need to use this component directly since the overflow is handled for
 #### Usage
 
 ```tsx
-<Pill>
+<Pill variant="readOnly">
   <Pill.Label>Read-only</Pill.Label>
 </Pill>
 ```

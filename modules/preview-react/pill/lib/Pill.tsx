@@ -8,6 +8,7 @@ import {
   StyledType,
   useConstant,
   useDefaultModel,
+  useMount,
 } from '@workday/canvas-kit-react/common';
 
 import {usePillModel, PillModel, PillModelConfig} from './usePillModel';
@@ -29,7 +30,7 @@ export interface PillProps extends PillModelConfig, BoxProps {
   children: React.ReactNode;
   /**
    * Defines what kind of pill to render stylistically and it's interaction states
-   * @default 'default''
+   * @default 'default'
    */
   variant?: 'readOnly' | 'default' | 'removable';
 }
@@ -173,6 +174,17 @@ export const Pill = createComponent('button')({
       return Element;
     });
 
+    if ('production' !== process.env.NODE_ENV) {
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      useMount(() => {
+        if (config.onDelete && variant === 'default') {
+          console.warn(
+            `It looks like you've provided two different click events.Please provide either an onClick OR change the variant to be 'removable'. If both are provided, ONLY onClick will be called.`
+          );
+        }
+      });
+    }
+
     return (
       <PillModelContext.Provider value={value}>
         <>
@@ -188,13 +200,7 @@ export const Pill = createComponent('button')({
             </StyledNonInteractivePill>
           )}
           {variant === 'default' && (
-            <StyledBasePill
-              colors={getButtonPillColors()}
-              as={Element}
-              ref={ref}
-              // onClick={value.events.click}
-              {...elemProps}
-            >
+            <StyledBasePill colors={getButtonPillColors()} as={Element} ref={ref} {...elemProps}>
               <HStack spacing="xxxs" display="inline-flex" alignItems="center">
                 {React.Children.map(children, (child, index) => {
                   if (typeof child === 'string') {
