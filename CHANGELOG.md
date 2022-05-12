@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v6.8.5](https://github.com/Workday/canvas-kit/releases/tag/v6.8.5) (2022-05-12)
+
+### Documentation
+
+- docs: Fix link in TESTING.mdx ([#1576](https://github.com/Workday/canvas-kit/pull/1576)) ([@Keysox](https://github.com/Keysox))
+
+
 ## [v6.8.4](https://github.com/Workday/canvas-kit/releases/tag/v6.8.4) (2022-04-28)
 
 ### Components
