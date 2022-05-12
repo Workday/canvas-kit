@@ -8,7 +8,6 @@ import {
   StyledType,
   useConstant,
   useDefaultModel,
-  useMount,
 } from '@workday/canvas-kit-react/common';
 
 import {usePillModel, PillModel, PillModelConfig} from './usePillModel';
@@ -28,6 +27,11 @@ export const PillModelContext = React.createContext<PillModel>({} as any);
 export interface PillProps extends PillModelConfig, BoxProps {
   model?: PillModel;
   children: React.ReactNode;
+  /**
+   * Defines what kind of pill to render stylistically and it's interaction states
+   * @default 'default''
+   */
+  variant?: 'readOnly' | 'default' | 'removable';
 }
 
 const getButtonPillColors = () => {
@@ -158,32 +162,21 @@ const StyledNonInteractivePill = styled(StyledBasePill)({
 
 export const Pill = createComponent('button')({
   displayName: 'Pill',
-  Component: ({children, model, ...config}: PillProps, ref, Element) => {
+  Component: ({children, model, variant = 'default', ...config}: PillProps, ref, Element) => {
     const value = useDefaultModel(model, config, usePillModel);
-    const {onClick, onDelete, maxWidth, ...elemProps} = config;
+    const {maxWidth, ...elemProps} = config;
 
     const actualEl = useConstant(() => {
       if (Element === 'button') {
-        return !!onDelete || !onClick ? 'span' : 'button';
+        return !!elemProps.onDelete || !elemProps.onClick ? 'span' : 'button';
       }
       return Element;
     });
 
-    if ('production' !== process.env.NODE_ENV) {
-      // eslint-disable-next-line react-hooks/rules-of-hooks
-      useMount(() => {
-        if (config.onClick && config.onDelete) {
-          console.warn(
-            `It looks like you've provided two different click events.Please provide either an onClick OR an onDelete on the <Pill/> component. If both are provided, onClick will take precedence.`
-          );
-        }
-      });
-    }
-
     return (
       <PillModelContext.Provider value={value}>
         <>
-          {value.state.variations === 'read-only' && (
+          {variant === 'readOnly' && (
             <StyledNonInteractivePill
               maxWidth={value.state.maxWidth}
               as={actualEl}
@@ -194,12 +187,12 @@ export const Pill = createComponent('button')({
               <PillLabel>{children}</PillLabel>
             </StyledNonInteractivePill>
           )}
-          {value.state.variations === 'interactive' && (
+          {variant === 'default' && (
             <StyledBasePill
               colors={getButtonPillColors()}
               as={Element}
               ref={ref}
-              onClick={value.events.click}
+              // onClick={value.events.click}
               {...elemProps}
             >
               <HStack spacing="xxxs" display="inline-flex" alignItems="center">
@@ -216,7 +209,7 @@ export const Pill = createComponent('button')({
               </HStack>
             </StyledBasePill>
           )}
-          {value.state.variations === 'removable' && (
+          {variant === 'removable' && (
             <StyledNonInteractivePill
               colors={getRemovablePillColors(value.state.disabled)}
               as={actualEl}

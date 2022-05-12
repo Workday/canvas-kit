@@ -3,7 +3,6 @@ import {createEventMap, Model, ToModelConfig, useEventMap} from '@workday/canvas
 type PillState = {
   maxWidth?: number | string;
   disabled?: boolean;
-  variations?: 'read-only' | 'interactive' | 'removable';
 };
 
 type PillEvents = {
@@ -40,19 +39,9 @@ export type PillModelConfig = {
 } & Partial<ToModelConfig<PillState, PillEvents, typeof pillEventMap>>;
 
 export const usePillModel = (config: PillModelConfig = {}): PillModel => {
-  let variationType: 'read-only' | 'interactive' | 'removable';
-  if (config.onClick) {
-    variationType = 'interactive';
-  } else if (config.onDelete) {
-    variationType = 'removable';
-  } else {
-    variationType = 'read-only';
-  }
-
   const state = {
     maxWidth: config.maxWidth || 200,
     disabled: config.disabled || false,
-    variations: variationType,
   };
 
   const events = useEventMap(pillEventMap, state, config, {

@@ -18,10 +18,11 @@ const data = [
 ];
 
 export const ListOfPills = () => (
-  <HStack shouldWrapChildren spacing="zero" flexWrap="wrap">
+  <HStack spacing="zero" flexWrap="wrap">
     {data.map(cat => {
       return (
         <Pill
+          variant="removable"
           marginBottom="xxs"
           onDelete={() => console.log(`delete ${cat}`)}
           marginInlineEnd="xxs"
