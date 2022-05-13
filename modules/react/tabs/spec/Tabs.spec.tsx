@@ -10,8 +10,8 @@ describe('Tabs', () => {
       renderToString(
         <Tabs>
           <Tabs.List>
-            <Tabs.Item name="first">First Tab</Tabs.Item>
-            <Tabs.Item name="second">Second Tab</Tabs.Item>
+            <Tabs.Item data-id="first">First Tab</Tabs.Item>
+            <Tabs.Item data-id="second">Second Tab</Tabs.Item>
           </Tabs.List>
           <Tabs.Panel>First Tab contents</Tabs.Panel>
         </Tabs>
@@ -27,8 +27,8 @@ describe('Tabs', () => {
     const {container} = render(
       <Tabs onSelect={cb} initialSelectedIds={['first']}>
         <Tabs.List>
-          <Tabs.Item name="first">First Tab</Tabs.Item>
-          <Tabs.Item name="second">Second Tab</Tabs.Item>
+          <Tabs.Item data-id="first">First Tab</Tabs.Item>
+          <Tabs.Item data-id="second">Second Tab</Tabs.Item>
         </Tabs.List>
         <Tabs.Panel>First Tab contents</Tabs.Panel>
       </Tabs>
