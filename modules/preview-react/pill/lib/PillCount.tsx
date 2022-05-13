@@ -5,12 +5,14 @@ import {Flex, FlexProps} from '@workday/canvas-kit-react/layout';
 import {borderRadius, colors, space} from '@workday/canvas-kit-react/tokens';
 
 export interface PillCountProps extends FlexProps {}
+
 const StyledCountContainer = styled(Flex.as('span'))<StyledType>({
   borderTopLeftRadius: borderRadius.zero,
   borderTopRightRadius: borderRadius.m,
   borderBottomLeftRadius: borderRadius.zero,
   borderBottomRightRadius: borderRadius.m,
 });
+
 export const PillCount = createComponent('span')({
   displayName: 'Pill.Avatar',
   Component: ({children, ...elemProps}: PillCountProps, ref, Element) => {

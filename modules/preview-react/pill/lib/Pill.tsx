@@ -1,17 +1,16 @@
 import React from 'react';
 
 import {
-  createComponent,
+  createContainer,
   focusRing,
   mouseFocusBehavior,
   styled,
   StyledType,
   useConstant,
-  useDefaultModel,
   useMount,
 } from '@workday/canvas-kit-react/common';
 
-import {usePillModel, PillModel, PillModelConfig} from './usePillModel';
+import {usePillModel} from './usePillModel';
 
 import {PillIcon} from './PillIcon';
 import {PillIconButton} from './PillIconButton';
@@ -23,11 +22,11 @@ import {CSSObject} from '@emotion/react';
 import {PillLabel} from './PillLabel';
 import {BaseButton} from '@workday/canvas-kit-react/button';
 
-export const PillModelContext = React.createContext<PillModel>({} as any);
+// export const PillModelContext = React.createContext<PillModel>({} as any);
 
-export interface PillProps extends PillModelConfig, BoxProps {
-  model?: PillModel;
-  children: React.ReactNode;
+export interface PillProps extends BoxProps {
+  // model?: PillModel;
+  // children: React.ReactNode;
   /**
    * Defines what kind of pill to render stylistically and it's interaction states
    * @default 'default'
@@ -161,86 +160,8 @@ const StyledNonInteractivePill = styled(StyledBasePill)({
   overflow: 'revert', // override BaseButton overflow styles so the click target exists outside the pill for removable
 });
 
-export const Pill = createComponent('button')({
-  displayName: 'Pill',
-  Component: ({children, model, variant = 'default', ...config}: PillProps, ref, Element) => {
-    const value = useDefaultModel(model, config, usePillModel);
-    const {maxWidth, ...elemProps} = config;
-
-    const actualEl = useConstant(() => {
-      if (Element === 'button') {
-        return !!elemProps.onDelete || !elemProps.onClick ? 'span' : 'button';
-      }
-      return Element;
-    });
-
-    if ('production' !== process.env.NODE_ENV) {
-      // eslint-disable-next-line react-hooks/rules-of-hooks
-      useMount(() => {
-        if (config.onDelete && variant === 'default') {
-          console.warn(
-            `It looks like you've provided two different click events.Please provide either an onClick OR change the variant to be 'removable'. If both are provided, ONLY onClick will be called.`
-          );
-        }
-      });
-    }
-
-    return (
-      <PillModelContext.Provider value={value}>
-        <>
-          {variant === 'readOnly' && (
-            <StyledNonInteractivePill
-              maxWidth={value.state.maxWidth}
-              as={actualEl}
-              ref={ref}
-              border={`1px solid ${colors.licorice200}`}
-              {...elemProps}
-            >
-              <PillLabel>{children}</PillLabel>
-            </StyledNonInteractivePill>
-          )}
-          {variant === 'default' && (
-            <StyledBasePill colors={getButtonPillColors()} as={Element} ref={ref} {...elemProps}>
-              <HStack spacing="xxxs" display="inline-flex" alignItems="center">
-                {React.Children.map(children, (child, index) => {
-                  if (typeof child === 'string') {
-                    return <PillLabel key={index}>{child}</PillLabel>;
-                  }
-                  return (
-                    <Stack.Item key={index} display="inline-flex">
-                      {child}
-                    </Stack.Item>
-                  );
-                })}
-              </HStack>
-            </StyledBasePill>
-          )}
-          {variant === 'removable' && (
-            <StyledNonInteractivePill
-              colors={getRemovablePillColors(value.state.disabled)}
-              as={actualEl}
-              ref={ref}
-              {...elemProps}
-            >
-              <HStack
-                spacing="xxxs"
-                display="inline-flex"
-                alignItems="center"
-                justifyContent="center"
-              >
-                {React.Children.map(children, (child, index) => {
-                  if (typeof child === 'string') {
-                    return <PillLabel key={index}>{child}</PillLabel>;
-                  }
-                  return <Stack.Item key={index}>{child}</Stack.Item>;
-                })}
-              </HStack>
-            </StyledNonInteractivePill>
-          )}
-        </>
-      </PillModelContext.Provider>
-    );
-  },
+export const Pill = createContainer('button')({
+  modelHook: usePillModel,
   subComponents: {
     Icon: PillIcon,
     Avatar: PillAvatar,
@@ -248,4 +169,74 @@ export const Pill = createComponent('button')({
     Label: PillLabel,
     IconButton: PillIconButton,
   },
+})<PillProps>(({variant = 'default', maxWidth, ...elemProps}, Element, model) => {
+  const actualEl = useConstant(() => {
+    if (Element === 'button') {
+      return !!elemProps.onDelete || !elemProps.onClick ? 'span' : 'button';
+    }
+    return Element;
+  });
+
+  if ('production' !== process.env.NODE_ENV) {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    useMount(() => {
+      if (elemProps.onDelete && variant === 'default') {
+        console.warn(
+          `It looks like you've provided two different click events.Please provide either an onClick OR change the variant to be 'removable'. If both are provided, ONLY onClick will be called.`
+        );
+      }
+    });
+  }
+  console.warn('elemPrps', elemProps);
+  return (
+    <>
+      {variant === 'readOnly' && (
+        <StyledNonInteractivePill
+          maxWidth={model.state.maxWidth}
+          as={actualEl}
+          border={`1px solid ${colors.licorice200}`}
+          {...elemProps}
+        >
+          <PillLabel>{elemProps.children}</PillLabel>
+        </StyledNonInteractivePill>
+      )}
+      {variant === 'default' && (
+        <StyledBasePill
+          colors={getButtonPillColors()}
+          as={Element}
+          {...elemProps}
+          disabled={model.state.disabled}
+        >
+          <HStack spacing="xxxs" display="inline-flex" alignItems="center">
+            {React.Children.map(elemProps.children, (child, index) => {
+              if (typeof child === 'string') {
+                return <PillLabel key={index}>{child}</PillLabel>;
+              }
+              return (
+                <Stack.Item key={index} display="inline-flex">
+                  {child}
+                </Stack.Item>
+              );
+            })}
+          </HStack>
+        </StyledBasePill>
+      )}
+      {variant === 'removable' && (
+        <StyledNonInteractivePill
+          colors={getRemovablePillColors(model.state.disabled)}
+          as={actualEl}
+          {...elemProps}
+        >
+          <HStack spacing="xxxs" display="inline-flex" alignItems="center" justifyContent="center">
+            {React.Children.map(elemProps.children, (child, index) => {
+              if (typeof child === 'string') {
+                return <PillLabel key={index}>{child}</PillLabel>;
+              }
+              return <Stack.Item key={index}>{child}</Stack.Item>;
+            })}
+          </HStack>
+        </StyledNonInteractivePill>
+      )}
+    </>
+  );
 });

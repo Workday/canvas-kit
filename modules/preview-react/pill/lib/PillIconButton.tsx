@@ -1,24 +1,15 @@
 import React from 'react';
 
-import {
-  createComponent,
-  focusRing,
-  styled,
-  useModelContext,
-  mergeProps,
-  StyledType,
-} from '@workday/canvas-kit-react/common';
+import {focusRing, styled, StyledType, createSubcomponent} from '@workday/canvas-kit-react/common';
 
 import {SystemIcon, SystemIconProps} from '@workday/canvas-kit-react/icon';
-import {PillModelContext} from './Pill';
-import {PillModel} from './usePillModel';
+import {usePillModel} from './usePillModel';
 import {xSmallIcon} from '@workday/canvas-system-icons-web';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {borderRadius, colors, space} from '@workday/canvas-kit-react/tokens';
 import {BaseButton} from '@workday/canvas-kit-react/button';
 
 export interface PillIconButtonProps extends Omit<SystemIconProps, 'icon'> {
-  model?: PillModel;
   icon?: CanvasSystemIcon;
 }
 
@@ -75,29 +66,27 @@ const StyledIconButton = styled(BaseButton)<StyledType & PillIconButtonProps>({
   marginInlineStart: `-${space.xxs} !important`, // visually create space between label and the button
 });
 
-export const PillIconButton = createComponent('button')({
-  displayName: 'Pill.IconButton',
-  Component: ({size, model, icon = xSmallIcon, ...elemProps}: PillIconButtonProps, ref) => {
-    const {events, state} = useModelContext(PillModelContext, model);
-    const props = mergeProps(
-      {onClick: events.delete, style: {position: 'relative' as const}},
-      elemProps
-    );
+export const PillIconButton = createSubcomponent('button')({
+  modelHook: usePillModel,
+})<PillIconButtonProps>(
+  ({size, icon = xSmallIcon, maxWidth, children, ...elemProps}, Element, model) => {
     return (
       <StyledIconButton
         borderRadius="s"
         height={space.l}
         width={space.l}
         padding="zero"
-        disabled={state.disabled}
+        disabled={model.state.disabled}
         colors={getIconColors()}
         tabIndex={-1}
-        {...props}
+        as={Element}
+        position="relative"
+        {...elemProps}
       >
         {/* We made the clickable element in this case the button larger, and have the span be the visible focus area */}
-        <StyledFocusTarget aria-hidden="true" tabIndex={state.disabled ? -1 : 0} />
-        <SystemIcon icon={icon} ref={ref} size={20} />
+        <StyledFocusTarget aria-hidden="true" tabIndex={model.state.disabled ? -1 : 0} />
+        <SystemIcon icon={icon} size={20} />
       </StyledIconButton>
     );
-  },
-});
+  }
+);

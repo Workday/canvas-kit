@@ -7,17 +7,17 @@ import {HStack} from '@workday/canvas-kit-react';
 
 export const RemovablePill = () => (
   <HStack shouldWrapChildren spacing="xxs">
-    <Pill variant="removable" onDelete={() => console.warn('clicked')}>
+    <Pill variant="removable">
       Pink Shirts
-      <Pill.IconButton />
+      <Pill.IconButton onClick={() => console.warn('clicked')} />
     </Pill>
-    <Pill variant="removable" onDelete={() => console.warn('clicked')}>
+    <Pill variant="removable">
       <Pill.Avatar url={testAvatar}></Pill.Avatar>
       Carolyn Grimaldi
-      <Pill.IconButton />
+      <Pill.IconButton onClick={() => console.warn('clicked')} />
     </Pill>
 
-    <Pill variant="removable" onDelete={() => console.warn('clicked')}>
+    <Pill variant="removable" disabled>
       <Pill.Label>This is a category that should not exist because it is too long</Pill.Label>
       <Pill.IconButton />
     </Pill>

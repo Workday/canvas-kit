@@ -12,7 +12,7 @@ export const ClickablePillWithAvatar = () => {
         <Pill.Avatar url={testAvatar} />
         Regina Skeltor
       </Pill>
-      <Pill onClick={() => console.warn('clicked')} disabled maxWidth={100}>
+      <Pill onClick={() => console.warn('clicked')} disabled maxWidth={50}>
         <Pill.Avatar url={testAvatar} />
         Regina Skeltor
       </Pill>

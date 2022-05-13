@@ -34,7 +34,9 @@ export const ReadOnlyPillStates = () => {
       >
         {({maxWidth, ...props}) => {
           return (
-            <Pill>{maxWidth ? 'This is a super long te that should overflow' : 'PillLabel'}</Pill>
+            <Pill variant="readOnly">
+              {maxWidth ? 'This is a super long te that should overflow' : 'PillLabel'}
+            </Pill>
           );
         }}
       </ComponentStatesTable>
@@ -139,10 +141,10 @@ export const RemovablePillStates = () => {
       >
         {({avatar, maxWidth, ...props}) => {
           return (
-            <Pill onDelete={() => console.warn('clicked')} {...props}>
+            <Pill variant="removable" {...props}>
               {avatar && <Pill.Avatar url={testAvatar} />}
               {maxWidth ? 'This is a super long te that should overflow' : 'PillLabel'}
-              <Pill.IconButton {...props} />
+              <Pill.IconButton onClick={() => console.warn('clicked')} {...props} />
             </Pill>
           );
         }}
