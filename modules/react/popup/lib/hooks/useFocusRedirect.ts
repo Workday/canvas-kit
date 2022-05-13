@@ -1,7 +1,12 @@
 import React from 'react';
 
-import {PopupModel} from './usePopupModel';
-import {getFirstFocusableElement, getLastFocusableElement} from '@workday/canvas-kit-react/common';
+import {
+  createElemPropsHook,
+  getFirstFocusableElement,
+  getLastFocusableElement,
+} from '@workday/canvas-kit-react/common';
+
+import {usePopupModel} from './usePopupModel';
 
 /**
  * Manages focus around a popup, treating the popup as if it was part of the DOM where it appears.
@@ -15,7 +20,7 @@ import {getFirstFocusableElement, getLastFocusableElement} from '@workday/canvas
  *
  * This should be used with non-modal dialogs.
  */
-export const useFocusRedirect = (model: PopupModel, elemProps = {}) => {
+export const useFocusRedirect = createElemPropsHook(usePopupModel)(model => {
   const onKeyDown = React.useCallback(
     (event: KeyboardEvent): void => {
       if (model.state.stackRef.current && event.key === 'Tab') {
@@ -50,5 +55,5 @@ export const useFocusRedirect = (model: PopupModel, elemProps = {}) => {
     };
   }, [visible, onKeyDown]);
 
-  return elemProps;
-};
+  return {};
+});
