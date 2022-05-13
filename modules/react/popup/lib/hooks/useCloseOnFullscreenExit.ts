@@ -1,14 +1,16 @@
 import React from 'react';
 import screenfull from 'screenfull';
 
-import {PopupModel} from './usePopupModel';
+import {createElemPropsHook} from '@workday/canvas-kit-react/common';
+
+import {usePopupModel} from './usePopupModel';
 
 /**
  * Closes the popup when fullscreen is exited. Entering/exiting fullscreen changes the context of
  * the entire screen. This should be added to popup types that are very context sensitive like
  * Tooltips.
  */
-export const useCloseOnFullscreenExit = (model: PopupModel, elemProps = {}) => {
+export const useCloseOnFullscreenExit = createElemPropsHook(usePopupModel)(model => {
   const handler = React.useCallback(
     event => {
       if (!screenfull.isFullscreen) {
@@ -33,5 +35,5 @@ export const useCloseOnFullscreenExit = (model: PopupModel, elemProps = {}) => {
     return;
   }, [handler, visible]);
 
-  return elemProps;
-};
+  return {};
+});

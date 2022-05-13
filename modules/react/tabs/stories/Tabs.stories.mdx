@@ -96,9 +96,7 @@ Set the `disabled` prop of a `Tabs.Item` to `true` to disable it.
 
 ### Tab Icons
 
-Tabs can have icons. You must set `hasIcon` on the `Tabs.Item` and use the `Icon` and `Text`
-subcomponent. The `hasIcon` changes the `Tabs.Item` to change where overflow detection is from the
-`Tabs.Item` element to the `Tabs.Item.Text` element.
+Tabs can have icons. Use the `Icon` and `Text` subcomponents.
 
 <ExampleCodeBlock code={Icons} />
 
@@ -140,17 +138,15 @@ array.
 its subcomponents using React context. It does not represent a real element.
 
 ```tsx
-<Tabs onActivate={({data}) => console.log('Activated tab', data.tab)}>
-  {/* Child components */}
-</Tabs>
+<Tabs onSelect={data => console.log('Activated tab', data.id)}>{/* Child components */}</Tabs>
 ```
 
 Alternatively, you may pass in a model using the hoisted model pattern.
 
 ```tsx
 const model = useTabsModel({
-  onActivate({data}) {
-    console.log('Activated Tab', data.tab);
+  onSelect(data) {
+    console.log('Activated Tab', data.id);
   },
 });
 
