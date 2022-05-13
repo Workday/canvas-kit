@@ -48,26 +48,6 @@ export type RenameMap = {
 };
 
 /**
- *  Renames import specifiers for a given rename map
- * @example
- * const renameMap = {
- *   'PageHeader': 'DeprecatedPageHeader',
- *   'PageHeaderProps': 'DeprecatedPageHeaderProps',
- * };
- * const pageHeaderImports = filterImportSpecifiers(importSpecifiers, importNames);
- * renameImportSpecifiers(pageHeaderSpecifiers, renameMap);
- */
-export function renameImportSpecifiers(importSpecifiers: ImportSpecifier[], renameMap: RenameMap) {
-  importSpecifiers.forEach(specifier => {
-    const specifierName = specifier.imported.name;
-    if (specifierName in renameMap) {
-      specifier.imported.name = renameMap[specifierName];
-    }
-  });
-  return importSpecifiers;
-}
-
-/**
  * Returns a filtered array of ImportDefaultSpecifiers
  * You can filter all ImportDefaultSpecifiers or additionally filter by providing an array of import names.
  * @example
@@ -179,7 +159,8 @@ export function renameImports(
   api: API,
   root: Collection<any>,
   packageName: string,
-  specifierMap: Record<string, string>
+  specifierMap: Record<string, string>,
+  discoveredImportSpecifiers: Record<string, boolean> = {}
 ): Collection<any> {
   const j = api.jscodeshift;
 
@@ -195,26 +176,45 @@ export function renameImports(
   // Transform import statements
   // e.g. import { CookieBanner, CookieBannerProps } from '@workday/canvas-kit-react';
   // becomes import { DeprecatedCookieBanner, DeprecatedCookieBannerProps } from '@workday/canvas-kit-react';
+
+  // Find imports from main packages
+  // ex. '@workday/canvas-kit-labs-react'
   root.find(j.ImportDeclaration, {source: {value: mainPackage}}).forEach(nodePath => {
     nodePath.value.specifiers?.forEach(specifier => {
       if (specifier.type === 'ImportSpecifier') {
         if (Object.keys(specifierMap).includes(specifier.imported.name)) {
+          // if it hasn't been aliased, track it for updating JSX
+          if (!specifier.local || specifier.local.name === specifier.imported.name) {
+            discoveredImportSpecifiers[specifier.imported.name] = true;
+          }
+
           specifier.imported.name = specifierMap[specifier.imported.name];
         }
       }
     });
   });
 
-  // Transforms default imports from package
+  // Find imports from component specific packages
+  // ex. '@workday/canvas-kit-labs-react/header'
   root.find(j.ImportDeclaration, {source: {value: packageName}}).forEach(nodePath => {
     nodePath.value.specifiers?.forEach(specifier => {
+      // Transforms default imports
       if (specifier.type === 'ImportDefaultSpecifier') {
         if (specifier.local && Object.keys(specifierMap).includes(specifier.local.name)) {
+          discoveredImportSpecifiers[specifier.local.name] = true;
+
           specifier.local.name = specifierMap[specifier.local.name];
         }
       }
+
+      // Transform named exports
       if (specifier.type === 'ImportSpecifier') {
         if (Object.keys(specifierMap).includes(specifier.imported.name)) {
+          // if it hasn't been aliased, track it for updating JSX
+          if (!specifier.local || specifier.local.name === specifier.imported.name) {
+            discoveredImportSpecifiers[specifier.imported.name] = true;
+          }
+
           specifier.imported.name = specifierMap[specifier.imported.name];
         }
       }
@@ -249,7 +249,11 @@ export function renameImports(
   // Transform JSXElements
   // e.g. `<CookieBanner>` becomes `<DeprecatedCookieBanner>`
   root.find(j.JSXIdentifier).forEach(nodePath => {
-    if (Object.keys(specifierMap).includes(nodePath.value.name)) {
+    if (
+      // Check to see if it was imported from Canvas Kit
+      discoveredImportSpecifiers[nodePath.value.name] &&
+      Object.keys(specifierMap).includes(nodePath.value.name)
+    ) {
       nodePath.node.name = specifierMap[nodePath.value.name];
     }
   });
@@ -259,6 +263,8 @@ export function renameImports(
   root.find(j.MemberExpression, {object: {type: 'Identifier'}}).forEach(nodePath => {
     if (
       nodePath.value.object.type === 'Identifier' &&
+      // Check to see if it was imported from Canvas Kit
+      discoveredImportSpecifiers[nodePath.value.object.name] &&
       Object.keys(specifierMap).includes(nodePath.value.object.name)
     ) {
       nodePath.value.object.name = specifierMap[nodePath.value.object.name];

@@ -8,7 +8,99 @@ describe('Canvas Kit Deprecate Header Codemod', () => {
   context('when transforming header imports', () => {
     it('should ignore non-canvas-kit imports', () => {
       const input = `import Header, {GlobalHeader} from "@workday/some-other-library";`;
-      const expected = `import Header, {GlobalHeader} from "@workday/some-other-library";`;
+      const expected = `${input}`;
+
+      expectTransform(input, expected);
+    });
+
+    it('should ignore non-canvas-kit header identifiers', () => {
+      const input = `
+        import Header, {GlobalHeader} from '@workday/some-other-library';
+
+        const SomeComponent = (props) => {
+          return (
+            <>
+              <Header {...props}/>
+              <GlobalHeader {...props}/>
+            </>
+          );
+        };
+      `;
+      const expected = `${input}`;
+
+      expectTransform(input, expected);
+    });
+
+    it('should ignore header sub-components', () => {
+      const input = `
+        import { Skeleton } from '@workday/canvas-kit-react/skeleton';
+
+        const SomeComponent = () => {
+          return (
+            <Skeleton>
+              <Skeleton.Header {...props} />
+            </Skeleton>
+          );
+        };
+      `;
+      const expected = `${input}`;
+
+      expectTransform(input, expected);
+    });
+
+    it('should rename aliased imports', () => {
+      const input = `import { Header as CanvasHeader } from '@workday/canvas-kit-labs-react/header';`;
+      const expected = `import { DeprecatedHeader as CanvasHeader } from '@workday/canvas-kit-labs-react/header';`;
+
+      expectTransform(input, expected);
+    });
+
+    it('should only rename the import specifier and not similarly named components', () => {
+      const input = `
+        import { Header as CanvasHeader } from '@workday/canvas-kit-labs-react/header';
+
+        const SomeComponent = () => {
+          return <>
+            <Header />
+            <CanvasHeader />
+          </>;
+        };
+      `;
+      const expected = `
+        import { DeprecatedHeader as CanvasHeader } from '@workday/canvas-kit-labs-react/header';
+
+        const SomeComponent = () => {
+          return <>
+            <Header />
+            <CanvasHeader />
+          </>;
+        };
+      `;
+
+      expectTransform(input, expected);
+    });
+
+    it('should only rename the import specifier from the main package and not similarly named components', () => {
+      const input = `
+        import { Header as CanvasHeader } from '@workday/canvas-kit-labs-react';
+
+        const SomeComponent = () => {
+          return <>
+            <Header />
+            <CanvasHeader />
+          </>;
+        };
+      `;
+      const expected = `
+        import { DeprecatedHeader as CanvasHeader } from '@workday/canvas-kit-labs-react';
+
+        const SomeComponent = () => {
+          return <>
+            <Header />
+            <CanvasHeader />
+          </>;
+        };
+      `;
 
       expectTransform(input, expected);
     });

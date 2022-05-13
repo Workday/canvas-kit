@@ -3,6 +3,61 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v6.8.3](https://github.com/Workday/canvas-kit/releases/tag/v6.8.3) (2022-04-22)
+
+### Codemods
+
+- fix(codemod): Limit specifier renaming to Canvas Kit imports ([#1546](https://github.com/Workday/canvas-kit/pull/1546)) ([@willklein](https://github.com/willklein))
+  Fixed code mods that improperly rename non-Canvas Kit components as well as Canvas Kit sub-components. This typically includes non-Canvas Kit `Header` components and Canvas Kit's `Skeleton.Header` being improperly renamed in the JSX, but solves for all future cases of Canvas Kit component names.
+
+
+## [v6.8.2](https://github.com/Workday/canvas-kit/releases/tag/v6.8.2) (2022-04-05)
+
+### Assets
+
+- fix(common): Update brand assets url ([#1529](https://github.com/Workday/canvas-kit/pull/1529)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
+## [v6.8.1](https://github.com/Workday/canvas-kit/releases/tag/v6.8.1) (2022-04-05)
+
+### Components
+
+- fix(button): Update disabled background for tertiary button ([#1530](https://github.com/Workday/canvas-kit/pull/1530)) ([@mannycarrera4](https://github.com/mannycarrera4))
+
+
+## [v6.8.0](https://github.com/Workday/canvas-kit/releases/tag/v6.8.0) (2022-04-04)
+
+### Components
+
+- fix(banner): Convert Banner to a functional component ([#1520](https://github.com/Workday/canvas-kit/pull/1520)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v5.3.15](https://github.com/Workday/canvas-kit/releases/tag/v5.3.15) (2022-04-01)
+
+### Components
+
+- fix(banner): Convert Banner to a functional component ([#1520](https://github.com/Workday/canvas-kit/pull/1520)) ([@NicholasBoll](https://github.com/NicholasBoll))
+## [v6.7.2](https://github.com/Workday/canvas-kit/releases/tag/v6.7.2) (2022-03-30)
+
+### Components
+
+- fix(avatar): Resetting imageLoaded when new url is provided ([#1521](https://github.com/Workday/canvas-kit/pull/1521)) ([@BillGeoghegan](https://github.com/BillGeoghegan))
+
+
+## [v6.7.1](https://github.com/Workday/canvas-kit/releases/tag/v6.7.1) (2022-03-23)
+
+### Components
+
+- fix(layout): Pass key to Stack.Item when using shouldWrapChildren ([#1518](https://github.com/Workday/canvas-kit/pull/1518)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
+## [v6.7.0](https://github.com/Workday/canvas-kit/releases/tag/v6.7.0) (2022-03-21)
+
+### Components
+
+- fix: Update usePopupTarget to apply Refs to elements not class instance ([#1514](https://github.com/Workday/canvas-kit/pull/1514)) ([@jaslloyd](https://github.com/jaslloyd))
+
+
 ## [v5.3.14](https://github.com/Workday/canvas-kit/releases/tag/v5.3.14) (2022-03-21)
 
 ### Components
