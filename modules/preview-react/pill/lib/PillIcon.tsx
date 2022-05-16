@@ -9,6 +9,10 @@ import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {space} from '@workday/canvas-kit-react/tokens';
 
 export interface PillIconProps extends Omit<SystemIconProps, 'icon'> {
+  /**
+   * The system icon rendered by the component
+   * @default `plusIcon`
+   */
   icon?: CanvasSystemIcon;
 }
 
