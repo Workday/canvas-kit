@@ -1,5 +1,8 @@
-import {ActionBar} from '../lib/ActionBar';
+import {screen, render} from '@testing-library/react';
 
-describe('ActionBar', () => {
-  verifyComponent(ActionBar, {});
+import {ActionBar} from '../lib/ActionBar';
+import {useActionBarModel} from '../lib/useActionBarModel';
+
+describe('Tab', () => {
+  verifyComponent(ActionBar.Item, {modelFn: useActionBarModel});
 });

@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {relatedActionsVerticalIcon} from '@workday/canvas-system-icons-web';
+import {relatedActionsIcon} from '@workday/canvas-system-icons-web';
 import {
   createElemPropsHook,
   composeHooks,
@@ -26,5 +26,5 @@ export const ActionBarOverflowButton = createSubcomponent('button')({
   modelHook: useActionBarModel,
   elemPropsHook: useActionBarOverflowButton,
 })(elemProps => {
-  return <SecondaryButton icon={relatedActionsVerticalIcon} {...elemProps} />;
+  return <SecondaryButton icon={relatedActionsIcon} {...elemProps} />;
 });
