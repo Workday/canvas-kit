@@ -105,16 +105,53 @@ deprecated component now, you can reference
 
 ## ActionBar Component Updates
 
-We've refactored our ActionBar components to simplify logic.
+The ActionBar API changed to model API to support more generic behaviors to allow for other
+components to support responsive layouts using the same models and behaviors. It also allows to
+implement a responsive layout based on a container width
+([#1325](https://github.com/Workday/canvas-kit/pull/1585)).
 
-PR: https://github.com/Workday/canvas-kit/pull/1396
+````
+const model = useActionBarModel({
+  items: [{
+    id: 'first,
+    text: 'First Action',
+    onClick: () => console.log('first clecked')
+  }]
+});
 
-**Changes:**
+<ActionBar model={model} />
 
-- Component has been converted to compound component.
-- `fixed` prop has been removed from component.
-- Now ActionBar uses `position` prop to set container position instead `fixed` prop.
-- Fixed position has been set as default if there is not passed `position` prop.
+The ActionBar component can now handle responsive containers, but the support is not automatic. You must
+use the dynamic API, `showOverflowButton` prop in `ActionBar.List` and provide an overflow menu subcomponent.
+The dynamic API doesn't know the shape of your object, so render props must be used to instruct React how to render each item.
+
+```
+const [items] = React.useState<MyActionItem[]>([
+  {id: 'first', text: 'First Button', onClick: () => console.log('first button clicked')},
+  {id: 'second', text: 'Second Button', onClick: () => console.log('second button clicked')},
+  {id: 'third', text: 'Third Button', onClick: () => console.log('third button clicked')},
+  {id: 'fourth', text: 'Fourth Button', onClick: () => console.log('fourth button clicked')},
+  {id: 'fifth', text: 'Fifth Button', onClick: () => console.log('fifth button clicked')},
+]);
+
+const model = useActionBarModel({items});
+
+<ActionBar model={model}>
+  <ActionBar.List showOverflowButton={true}>
+    {(item) => <ActionBar.Item data-id={item.id}>{item.text}</ActionBar.Item>}
+  </ActionBar.List>
+  <ActionBar.Menu.Popper>
+    <ActionBar.Menu.Card maxWidth={300} maxHeight={200}>
+      <ActionBar.Menu.List>
+        {(item) => <ActionBar.Menu.Item>{item.text}</ActionBar.Menu.Item>}
+      </ActionBar.Menu.List>
+    </ActionBar.Menu.Card>
+  </ActionBar.Menu.Popper>
+</ActionBar>
+```
+
+🤖 The codemod will remove uses of the `fixed` prop from `ActionBar` and restructure component by
+creating `ActionBar.List` component and replacing all children to it.
 
 ## Status Indicator Width
 
@@ -127,7 +164,7 @@ word.
 
 ```tsx
 <StatusIndicator label="Slightly Longer Status" type={StatusIndicator.Type.Gray} maxWidth={250} />
-```
+````
 
 ## Buttons
 
