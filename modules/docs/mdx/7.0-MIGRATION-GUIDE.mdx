@@ -69,14 +69,15 @@ To use v7, you'll need to upgrade the following dependencies:
 - React 16.14 OR React 17.X for backwards compatibility on JSX transform if you're using Babel or
   Typescript to compile code
 - Emotion 11
-- Typescript 4.1 or higher, if applicable. We've dropped support for Typescript 3.5-3.9. Previously we used
-  `downlevel-dts` to support Typescript 3.5+ while using Typescript 3.8 features, but
-  `downlevel-dts` does not support the Typescript 4.1 features we use. Typescript 4.1 was release in
-  November, 2020 and we feel it is time to move forward. Reach out if you experience issues
-  upgrading your Typescript version. In our experience, Typescript 4.1 found a few more errors that
-  Typescript 3.8 did not, but the upgrade was manageable.
+- Typescript 4.1 or higher, if applicable
 - Babel 7.9 or higher, if applicable
 - An Enzyme adapter for React 17, if applicable
+
+> We no longer support Typescript 3.5-3.9. Previously, we used `downlevel-dts` to support Typescript
+> 3.5+ while using Typescript 3.8 features, but `downlevel-dts` does not support features we use in
+> Typescript 4.1. Typescript 4.1 was released in November 2020, and we feel it is time to move
+> forward. Reach out if you experience issues upgrading your Typescript version. In our experience,
+> Typescript 4.1 found a few more errors than Typescript 3.8, but the upgrade was manageable.
 
 Please note that you may also need to update any side effect dependencies or linting packages with
 this update.
@@ -709,6 +710,8 @@ Fullscreen API.
 
 ### Popup
 
+#### Popup.Card
+
 `Popup.Card` components (this includes `Modal.Card` and `Dialog.Card`) are now flexbox containers.
 This was done to support overflowing content (by default, the `Popup.Body` component). The card is a
 vertical flexbox container and `Popup.Heading`, `Popup.Body`, and any other children are flex items.
@@ -754,14 +757,14 @@ the `max-height` of the `Modal.Body` element using calculations. These should no
 
 #### Popup.Body
 
-The `Popup.Body` is now an overflow container. This means 2 things:
+`Popup.Body` is now an overflow container. This means two things:
 
 - `Popup.Body` will scroll if the contents are too big to fit in the page
 - `Popup.Body` will hide focus rings that render outside the overflow container
 
-Our examples contained some buttons inside the `Body` element and had focus rings cut off. The
-adjustment is to move the buttons outside the `Body` element. This is most likely the desired
-structure anyways since the buttons will not scroll with the overflowed `Body` content.
+Our examples contained buttons inside the `Body` element with their focus rings cut off. We fixed
+this by moving the buttons outside the `Body` element. This is most likely the desired structure
+anyway since the buttons will no longer scroll with overflowed `Body` content.
 
 Before:
 
@@ -770,7 +773,7 @@ Before:
   <Modal.Body>
     Body Contents
     <HStack spacing="s">
-      {/*will scroll with the body*/}
+      {/* Will scroll with the body */}
       <Modal.CloseButton as={PrimaryButton}>Delete</Modal.CloseButton>
       <Modal.CloseButton>Cancel</Modal.CloseButton>
     </HStack>
