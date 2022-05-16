@@ -22,7 +22,7 @@ import {BaseButton} from '@workday/canvas-kit-react/button';
 
 export interface PillProps extends BoxProps {
   /**
-   * Defines what kind of pill to render stylistically and it's interaction states
+   * Defines what kind of pill to render stylistically and its interaction states
    * @default 'default'
    */
   variant?: 'default' | 'readOnly' | 'removable';
