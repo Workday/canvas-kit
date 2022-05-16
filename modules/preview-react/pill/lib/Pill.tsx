@@ -169,7 +169,7 @@ export const Pill = createContainer('button')({
       {variant === 'readOnly' && (
         <StyledNonInteractivePill
           maxWidth={model.state.maxWidth}
-          as="span"
+          as={Element !== 'button' ? Element : 'span'}
           border={`1px solid ${colors.licorice200}`}
           {...elemProps}
         >
@@ -179,7 +179,7 @@ export const Pill = createContainer('button')({
       {variant === 'default' && (
         <StyledBasePill
           colors={getButtonPillColors()}
-          as={Element}
+          as="button"
           {...elemProps}
           disabled={model.state.disabled}
         >
@@ -200,7 +200,7 @@ export const Pill = createContainer('button')({
       {variant === 'removable' && (
         <StyledNonInteractivePill
           colors={getRemovablePillColors(model.state.disabled)}
-          as="span"
+          as={Element !== 'button' ? Element : 'span'}
           {...elemProps}
         >
           <HStack spacing="xxxs" display="inline-flex" alignItems="center" justifyContent="center">
