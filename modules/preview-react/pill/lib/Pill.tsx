@@ -22,11 +22,7 @@ import {CSSObject} from '@emotion/react';
 import {PillLabel} from './PillLabel';
 import {BaseButton} from '@workday/canvas-kit-react/button';
 
-// export const PillModelContext = React.createContext<PillModel>({} as any);
-
 export interface PillProps extends BoxProps {
-  // model?: PillModel;
-  // children: React.ReactNode;
   /**
    * Defines what kind of pill to render stylistically and it's interaction states
    * @default 'default'
@@ -50,7 +46,7 @@ const getButtonPillColors = () => {
     active: {
       icon: colors.licorice500,
       background: colors.soap500,
-      border: colors.licorice200,
+      border: colors.licorice500,
     },
     focus: {
       icon: colors.licorice500,

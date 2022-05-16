@@ -85,7 +85,7 @@ export const PillIconButton = createSubcomponent('button')({
       >
         {/* We made the clickable element in this case the button larger, and have the span be the visible focus area */}
         <StyledFocusTarget aria-hidden="true" tabIndex={model.state.disabled ? -1 : 0} />
-        <SystemIcon icon={icon} size={20} />
+        <SystemIcon icon={icon} size={24} />
       </StyledIconButton>
     );
   }
