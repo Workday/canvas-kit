@@ -1,13 +1,16 @@
 import React from 'react';
 
 import {ActionBar} from '@workday/canvas-kit-react/action-bar';
-import {PrimaryButton, SecondaryButton} from '@workday/canvas-kit-react/button';
-import {relatedActionsIcon} from '@workday/canvas-system-icons-web';
+import {TertiaryButton} from '@workday/canvas-kit-react/button';
+// import {relatedActionsIcon} from '@workday/canvas-system-icons-web';
 
 export const Basic = () => (
-  <ActionBar position="relative">
-    <PrimaryButton>First Action</PrimaryButton>
-    <SecondaryButton>Second Action</SecondaryButton>
-    <SecondaryButton icon={relatedActionsIcon} />
+  <ActionBar>
+    <ActionBar.List>
+      <ActionBar.Item isPrimary onClick={() => console.log('first action')}>
+        First Action
+      </ActionBar.Item>
+      <ActionBar.Item>Second Action</ActionBar.Item>
+    </ActionBar.List>
   </ActionBar>
 );
