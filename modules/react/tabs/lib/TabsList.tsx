@@ -24,7 +24,7 @@ export interface TabListProps<T = unknown> extends Partial<ExtractProps<typeof S
    *
    * @example
    * <Tabs.List>
-   *   {(item) => <Tabs.Item key={item.id} name={item.name}>{item.text}</Tabs.Item>}
+   *   {(item) => <Tabs.Item>{item.text}</Tabs.Item>}
    * </Tabs.List>
    */
   children: ((item: T) => React.ReactNode) | React.ReactNode;

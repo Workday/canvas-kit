@@ -36,7 +36,7 @@ export const Tabs = createContainer()({
      * <Tabs.Menu.Popper>
      *   <Tabs.Menu.Card>
      *     <Tabs.Menu.List>
-     *       {(item: MyTabItem) => <Tabs.Menu.Item name={item.id}>{item.text}</Tabs.Menu.Item>}
+     *       {(item: MyTabItem) => <Tabs.Menu.Item data-id={item.id}>{item.text}</Tabs.Menu.Item>}
      *     </Tabs.Menu.List>
      *   </Tabs.Menu.Card>
      * </Tabs.Menu.Popper>

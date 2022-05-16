@@ -23,13 +23,13 @@ export const SinglePanel = () => {
   return (
     <Tabs model={model}>
       <Tabs.List>
-        <Tabs.Item name="first" aria-controls="mytab-panel">
+        <Tabs.Item data-id="first" aria-controls="mytab-panel">
           First Tab
         </Tabs.Item>
-        <Tabs.Item name="second" aria-controls="mytab-panel">
+        <Tabs.Item data-id="second" aria-controls="mytab-panel">
           Second Tab
         </Tabs.Item>
-        <Tabs.Item name="third" aria-controls="mytab-panel">
+        <Tabs.Item data-id="third" aria-controls="mytab-panel">
           Third Tab
         </Tabs.Item>
       </Tabs.List>

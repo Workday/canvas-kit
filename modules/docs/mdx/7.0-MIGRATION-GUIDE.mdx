@@ -26,6 +26,7 @@ any questions.
   - [Segmented Control](#segmented-control)
   - [Side Panel](#side-panel)
   - [Status Indicator](#status-indicator)
+  - [Tabs](#tabs)
 
 ## Codemod
 
@@ -870,3 +871,24 @@ a single word.
 ```tsx
 <StatusIndicator label="Slightly Longer Status" type={StatusIndicator.Type.Gray} maxWidth={250} />
 ```
+
+---
+
+### Tabs
+
+To avoid interference with the HTML `name` attribute, we're now using `data-id` instead of `name`
+for `Tabs.Item`, `Tabs.Panel`, and `Tabs.Menu.Item`.
+
+```tsx
+// v6
+<Tabs.Item name="tabs-item">...</Tabs.Item>
+<Tabs.Panel name="tabs-panel">...</Tabs.Panel>
+<Tabs.Menu.Item name="tabs-menu-item">...</Tabs.Menu.Item>
+
+// v7
+<Tabs.Item data-id="tabs-item">...</TabsItem>
+<Tabs.Panel data-id="tabs-panel">...</Tabs.Panel>
+<Tabs.Menu.Item data-id="tabs-menu-item">...</Tabs.Menu.Item>
+```
+
+🤖 The codemod will handle these changes for you automatically.
