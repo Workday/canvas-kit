@@ -67,17 +67,17 @@ we made this change. Consumers may continue to use the `css` prop.
 To use v7, you'll need to upgrade the following dependencies:
 
 - React 16.14 OR React 17.X for backwards compatibility on JSX transform if you're using Babel or
-  Typescript to compile code
+  TypeScript to compile code
 - Emotion 11
-- Typescript 4.1 or higher, if applicable
+- TypeScript 4.1 or higher, if applicable
 - Babel 7.9 or higher, if applicable
 - An Enzyme adapter for React 17, if applicable
 
-> We no longer support Typescript 3.5-3.9. Previously, we used `downlevel-dts` to support Typescript
-> 3.5+ while using Typescript 3.8 features, but `downlevel-dts` does not support features we use in
-> Typescript 4.1. Typescript 4.1 was released in November 2020, and we feel it is time to move
-> forward. Reach out if you experience issues upgrading your Typescript version. In our experience,
-> Typescript 4.1 found a few more errors than Typescript 3.8, but the upgrade was manageable.
+> We no longer support TypeScript 3.5-3.9. Previously, we used `downlevel-dts` to support TypeScript
+> 3.5+ while using TypeScript 3.8 features, but `downlevel-dts` does not support features we use in
+> TypeScript 4.1. TypeScript 4.1 was released in November 2020, and we feel it is time to move
+> forward. Reach out if you experience issues upgrading your TypeScript version. In our experience,
+> TypeScript 4.1 found a few more errors than TypeScript 3.8, but the upgrade was manageable.
 
 Please note that you may also need to update any side effect dependencies or linting packages with
 this update.
@@ -93,26 +93,20 @@ discussion with any questions or learnings of your own!
 
 #### Guards and Callbacks
 
-We changed the signature of model event guards and callbacks. In v6, the parameters were in an
-object. This has a less than ideal developer experience as intellisense isn't engaged immediately
+We've changed the signature of model event guards and callbacks. In v6, the parameters were in an
+object. This was a less than ideal developer experience as IntelliSense isn't engaged immediately
 and we don't plan on adding any additional parameters to guard and callback functions. We've removed
 the object wrapper.
 
-🤖 The codemod handles these changes automatically.
-
-Before:
-
 ```tsx
+// v6
 const model = useTabsModel({
   onSelect({data: {id}, prevState}) {
     console.log(id, prevState);
   },
 });
-```
 
-After:
-
-```tsx
+// v7
 const model = useTabsModel({
   onSelect({id}, prevState) {
     console.log(id, prevState);
@@ -120,27 +114,27 @@ const model = useTabsModel({
 });
 ```
 
+🤖 The codemod will handle this change for you automatically.
+
 #### Model Implementation
 
 If you don't extend models, you can skip this section.
 
-In v6 we supported Typescript 3.8 which limited the way types could be inferred and defined. Canvas
-Kit v7 now requires Typescript 4.1 which introduced
+In v6 we supported TypeScript 3.8 which limited the way types could be inferred and defined. v7
+requires TypeScript 4.1 which introduced
 [Template Literal Types](https://www.typescriptlang.org/docs/handbook/2/template-literal-types.html).
-This means that the guards and callbacks no longer need to be manually defined via an `eventMap`.
-Event maps were a stopgap, were manual, and prone to errors in defining them. Not all events had
-guards or callbacks there's no check other than manual review to ensure the existence of an event
-callback or guard. Template Literal Types allow us to properly type guards and callbacks without
-event maps. The previous types forced `data` to be an object. We've since dropped that restriction.
-You can still only pass a single argument to events. If you need additional information, use an
-object.
+This means guards and callbacks no longer need to be manually defined via an `eventMap`. Event maps
+were a stopgap, manual, and prone to errors in defining them. Not all events have guards or
+callbacks, and there's no way other than manual review to verify their existence. Template Literal
+Types allow us to properly type guards and callbacks without event maps. The previous types forced
+`data` to be an object. We've since dropped that restriction. You can still only pass a single
+argument to events. If you need additional information, use an object.
 
 This change also allowed us to remove a lot of boilerplate associated with models without
-sacrificing type safety. This change doesn't effect most use cases, but will effect those whole
-extended a model. We created a new utility function called `createModelHook` that helps set up
-types.
+sacrificing type safety. This change doesn't affect most use cases, but will affect those who
+extended a model. We created a new `createModelHook` utility function to help set up types.
 
-Before:
+##### v6
 
 ```ts
 export type MyState = {
@@ -184,7 +178,7 @@ const useMyModel = (config: MyConfig = {}): MyModel => {
 };
 ```
 
-After:
+##### v7
 
 ```tsx
 const useMyModel = createModelHook({
@@ -207,17 +201,19 @@ const useMyModel = createModelHook({
 });
 ```
 
-Notice the large reduction in Typescript type boilerplate. In this example, the only place that
-Typescript syntax exists is in the `updateValue` function definition. This allows better collocating
-of types and values. Also notice that `useEventMap` doesn't need to be used anymore. The
-`createModelHook` will automatically wrap the `events` returned to call guards and callbacks when
-appropriate. Today this is done via creating a new events object. Once we drop IE11 support, this
-can be done via a proxy instead. The `createModelHook` handles all type inference so we don't have
-to explicitly type everything. Also `createModelHook` attaches React Context directly to the hook
-along with `defaultConfig` and `requiredConfig` for model extension.
+Note the large reduction in TypeScript type boilerplate. In this example, the only place that
+TypeScript syntax exists is in the `updateValue` function definition. This allows better collocating
+of types and values. Also note that `useEventMap` is no longer needed. `createModelHook` will
+automatically wrap the `events` returned to call guards and callbacks when appropriate. Today, this
+is done by creating a new events object. Once we drop IE11 support, this will be done via a proxy
+instead. `createModelHook` handles all type inference so you don't need to explicitly type
+everything. `createModelHook` also attaches React Context directly to the hook along with
+`defaultConfig` and `requiredConfig` for model extension.
 
 If you extended a model, you'll notice all those types are no longer being exported. You'll have to
 use this new utility function. Here's an example we found in the wild:
+
+##### v6
 
 ```tsx
 import {
@@ -295,7 +291,7 @@ export const useMyModalModel = (config: MyConfig = {}): MyModalModel => {
 };
 ```
 
-After:
+##### v7
 
 ```ts
 import {
@@ -342,9 +338,10 @@ const useMyModalModel = createModelHook({
 });
 ```
 
-All the cumbersome type boilerplate went away. Also all the type imports went away. The code is more
-focused on your unique logic and less on boilerplate. Unfortunately, this change doesn't have a
-codemod. While possible, this code isn't very common and the codemod would be very complex.
+We've eliminated the cumbersome type boilerplate and type imports. The code is more focused on your
+unique logic and less on boilerplate.
+
+Given the complex nature of this code, this change is **not** handled by the codemod.
 
 ## Tokens
 
@@ -421,8 +418,6 @@ We've [promoted](https://github.com/Workday/canvas-kit/issues/1395) the followin
 - `Flex` from `@workday/canvas-kit-labs/layout` to `@workday/canvas-kit-react/layout`
 - `Stack` from `@workday/canvas-kit-labs/layout` to `@workday/canvas-kit-react/layout`
 
-🤖 The codemod will update imports for these promoted components.
-
 ```tsx
 // v6
 import {Box} from '@workday/canvas-kit-labs-react/common';
@@ -431,7 +426,9 @@ import {Box} from '@workday/canvas-kit-labs-react/common';
 import {Box} from '@workday/canvas-kit-react/layout';
 ```
 
-Note that the APIs for these promoted components remain unchanged.
+🤖 The codemod will update imports for these promoted components.
+
+The APIs for these promoted components remain unchanged.
 
 ---
 
@@ -479,9 +476,11 @@ module; it supports [ref forwarding](https://reactjs.org/docs/forwarding-refs.ht
 `as` prop to change the rendered element.
 
 The `variant` prop (which previously accepted `Banner.Variant.Full` or `Banner.Variant.Sticky`) has
-been converted to the boolean `isSticky` prop on the container `Banner` component. Similarly, the
-`error` prop (which previously accepted `Banner.ErrorType.Alert` or `Banner.ErrorType.Error`) has
-been converted to the boolean `hasError` prop on `Banner`.
+been converted to the boolean `isSticky` prop on the container `Banner` component.
+
+Similarly, the `error` prop (which previously accepted `Banner.ErrorType.Alert` or
+`Banner.ErrorType.Error`) has been converted to the boolean `hasError` prop on `Banner`. `Banner`
+now uses the `useThemedPalette` hook which allows you to override its colors using the Canvas theme.
 
 The icon is now customizable via the `icon` prop of `Banner.Icon`. Previously, the icon was limited
 to `exclamationTriangleIcon` and `exclamationCircleIcon` for the alert and error states,
@@ -766,9 +765,8 @@ Our examples contained buttons inside the `Body` element with their focus rings 
 this by moving the buttons outside the `Body` element. This is most likely the desired structure
 anyway since the buttons will no longer scroll with overflowed `Body` content.
 
-Before:
-
 ```tsx
+// v6
 <Modal.Card>
   <Modal.Body>
     Body Contents
@@ -779,11 +777,8 @@ Before:
     </HStack>
   </Modal.Body>
 </Modal.Card>
-```
 
-After:
-
-```tsx
+// v7
 <Modal.Card>
   <Modal.Body>Body Contents</Modal.Body>
   <HStack spacing="s">
