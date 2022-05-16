@@ -6,7 +6,7 @@ import {usePillModel} from './usePillModel';
 
 export interface PillAvatarProps extends AvatarProps {}
 
-// When the component is create it needs to be a button element to play nicely with AvatarProps.
+// When the component is created, it needs to be a button element to match AvatarProps.
 // Once Avatar becomes a `createComponent` we can default the element type to a `div`
 // and the types should be properly extracted
 export const PillAvatar = createSubcomponent('button')({
