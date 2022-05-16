@@ -59,7 +59,6 @@ export const DynamicTabs = () => {
   };
 
   const onClick = (id: string) => (e: React.MouseEvent) => {
-    console.log('id', id);
     if (id === 'add') {
       addedRef.current += 1;
       setTabs(tabs => {
