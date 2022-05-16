@@ -25,7 +25,7 @@ export const useActionBarButtonProps = createElemPropsHook(useActionBarModel)(
     };
 
     return {
-      isPrimary: index === 0,
+      isPrimaryButton: index === 0,
       onClick,
     };
   }

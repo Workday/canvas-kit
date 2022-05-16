@@ -26,5 +26,9 @@ export const ActionBarOverflowButton = createSubcomponent('button')({
   modelHook: useActionBarModel,
   elemPropsHook: useActionBarOverflowButton,
 })(elemProps => {
-  return <SecondaryButton icon={relatedActionsIcon} {...elemProps} />;
+  return (
+    <span>
+      <SecondaryButton icon={relatedActionsIcon} {...elemProps} />
+    </span>
+  );
 });

@@ -33,7 +33,7 @@ export interface ActionBarItemProps extends PrimaryButtonProps {
    * index at the end. Only set this for advanced cases.
    */
   id?: string;
-  isPrimary?: boolean;
+  isPrimaryButton?: boolean;
 }
 
 export const useActionBarItem = composeHooks(useActionBarOverflow, useActionBarButtonProps);
@@ -46,8 +46,8 @@ export const ActionBarItem = createSubcomponent('button')({
     Icon: SystemIcon,
     Text: EllipsisText,
   },
-})<ActionBarItemProps>(({children, isPrimary, ...elemProps}, Element) => {
-  const Component = isPrimary ? PrimaryButton : SecondaryButton;
+})<ActionBarItemProps>(({children, isPrimaryButton, ...elemProps}, Element) => {
+  const Component = isPrimaryButton ? PrimaryButton : SecondaryButton;
   return (
     <Component as={Element} {...elemProps}>
       {children}

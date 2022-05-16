@@ -52,7 +52,7 @@ export const useActionBarModel = createModelHook({
 
   const menu = useMenuModel(
     useMenuModel.mergeConfig(config.menuConfig as Required<typeof config.menuConfig>, {
-      id: `menu-${model.state.id}`,
+      id: `act-bar-menu-${model.state.id}`,
       items: overflowItems,
       nonInteractiveIds: state.nonInteractiveIds.filter(key => !state.hiddenIds.includes(key)),
       onSelect() {

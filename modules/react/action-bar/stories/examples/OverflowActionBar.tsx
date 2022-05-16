@@ -6,7 +6,6 @@ import {SecondaryButton} from '@workday/canvas-kit-react/button';
 
 type MyActionItem = {
   id: string;
-  isPrimary?: boolean;
   text: React.ReactNode;
   onClick: React.ReactEventHandler;
 };
@@ -26,7 +25,7 @@ export const OverflowActionBar = () => {
   return (
     <div style={{width: containerWidth}}>
       <ActionBar model={model}>
-        <ActionBar.List position="relative" overflowButton={true}>
+        <ActionBar.List position="relative" showOverflowButton={true}>
           {(item: MyActionItem) => <ActionBar.Item data-id={item.id}>{item.text}</ActionBar.Item>}
         </ActionBar.List>
         <ActionBar.Menu.Popper>
