@@ -15,6 +15,7 @@ any questions about the update.
 - [Buttons](#buttons)
 - [Segmented Control](#segmented-control)
 - [Side Panel](#side-panel)
+- [Tabs](#tabs)
 - [Icons](#icons)
 - [ActionBar Component Updates](#actionbar-component-updates)
 - [Status Indicator Width](#status-indicator-width)
@@ -455,6 +456,20 @@ Two props where added to the `SidePanel.ToggleButton`:
   tooltipTextCollapse?: string;
 ```
 
+## Tabs
+
+We've updated the `name` attribute of list items. This effects `Tabs.Item`, `Tabs.Panel`, and
+`Tabs.Menu.Item`. The attribute changed from `name` to `data-id`. We did this to not interfere with
+the HTML `name` attribute.
+
+### Breaking Change
+
+🤖 The codemod will handle all these changes automatically:
+
+- `<Tabs.Item name=` becomes `<Tabs.Item data-id=`
+- `<Tabs.Panel name=` becomes `<Tabs.Panel data-id=`
+- `<Tabs.Menu.Item name=` becomes `<Tabs.Menu.Item data-id=`
+
 ## Icons
 
 We've updated our lower level icon components such as `AccentIcon`, `AppletIcon`, `Graphic`, `Icon`,
@@ -467,7 +482,7 @@ which allows us to `forwardRef`.
 This is a breaking change since we've removed `iconRef`. You can now just pass a `ref` to the
 element.
 
-🤖 The codemod will handle all these changes automatically:\
+🤖 The codemod will handle all these changes automatically:
 
 - `iconRef` becomes `ref`
 

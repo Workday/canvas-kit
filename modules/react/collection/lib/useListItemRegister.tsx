@@ -12,7 +12,7 @@ import {VirtualItem} from './react-virtual';
 import {useListModel} from './useListModel';
 
 /**
- * Registers an item with a list. It will return elemProps with a `name` which can be used by other
+ * Registers an item with a list. It will return elemProps with a `data-id` which can be used by other
  * hooks to identify the item in the list.
  */
 export const useListItemRegister = createElemPropsHook(useListModel)(

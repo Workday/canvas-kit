@@ -1,4 +1,4 @@
-export {defaultGetId} from './lib/useBaseListModel';
+export {defaultGetId, Item} from './lib/useBaseListModel';
 export * from './lib/useListItemRegister';
 export * from './lib/useOverflowListMeasure';
 export * from './lib/useOverflowListItemMeasure';
