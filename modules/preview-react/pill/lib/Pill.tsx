@@ -25,7 +25,7 @@ export interface PillProps extends BoxProps {
    * Defines what kind of pill to render stylistically and it's interaction states
    * @default 'default'
    */
-  variant?: 'readOnly' | 'default' | 'removable';
+  variant?: 'default' | 'readOnly' | 'removable';
 }
 
 const getButtonPillColors = () => {
