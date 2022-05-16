@@ -21,15 +21,17 @@ export const useActionBarOverflow = composeHooks(
       const [item] = state.items.filter(item => item.id === name);
       const isHidden = state.hiddenIds.includes(name);
 
-      let props = {};
+      const props = {
+        tabIndex: isHidden ? -1 : 0,
+      };
 
       // Hide all item after third button
       // Place them into an overflow menu
       if (index > 2 && !isHidden) {
         events.addHiddenKey(item);
-        props = {
+        return {
+          ...props,
           style: {position: 'absolute', left: -99999},
-          tabIndex: -1,
         };
       }
 
