@@ -6,7 +6,11 @@ import {mergeCallback} from './mergeCallback';
 
 /**
  * Merges source props into target props, overwriting target props that are also defined on source
- * props. Callback will be merged in such a way that both callbacks will be called.
+ * props. Callback will be merged in such a way that both callbacks will be called. `css` and
+ * `style` props will be merged in such a way that source props have the final override.
+ *
+ * If `targetProps` has a `null` set, it will remove the prop from the `sourceProps`. This allows
+ * passing of props from merged hooks to another without passing out to the final element props.
  */
 export function mergeProps<T extends object, S extends object>(
   targetProps: T,
@@ -43,6 +47,9 @@ export function mergeProps<T extends object, S extends object>(
         // refs should never be overridden. This doesn't happen normally, but happens with hook
         // composition
         (returnProps as any).ref = (returnProps as any).ref || (sourceProps as any).ref;
+        // @ts-ignore Typescript complains that key might not exist in `targetProps` since we're iterating over sourceProps. At runtime this doesn't matter
+      } else if (targetProps[key] === null) {
+        // target props is trying to disable the prop for whatever reason. Consider `null` a "remove this prop"
       } else {
         // @ts-ignore TS has more object constraint complaints that aren't useful here
         returnProps[key] = sourceProps[key];

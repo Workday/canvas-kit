@@ -91,7 +91,6 @@ export interface SegmentedControlButtonProps {
 export const SegmentedControlButton = createComponent('button')({
   displayName: 'Button',
   Component: ({value, icon, toggled, ...props}: SegmentedControlButtonProps, ref, Element) => {
-    console.warn(props);
     return (
       <StyledButton
         as={Element}

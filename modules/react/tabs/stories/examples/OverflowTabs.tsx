@@ -2,7 +2,7 @@ import React from 'react';
 
 import {Tabs, useTabsModel} from '@workday/canvas-kit-react/tabs';
 import {HStack} from '@workday/canvas-kit-react/layout';
-import {SecondaryButton} from '../../../button';
+import {SecondaryButton} from '@workday/canvas-kit-react/button';
 
 type MyTabItem = {
   id: string;
@@ -28,7 +28,7 @@ export const OverflowTabs = () => {
     <div style={{width: containerWidth}}>
       <Tabs model={model}>
         <Tabs.List overflowButton={<Tabs.OverflowButton>More</Tabs.OverflowButton>}>
-          {(item: MyTabItem) => <Tabs.Item name={item.id}>{item.text}</Tabs.Item>}
+          {(item: MyTabItem) => <Tabs.Item data-id={item.id}>{item.text}</Tabs.Item>}
         </Tabs.List>
         <Tabs.Menu.Popper>
           <Tabs.Menu.Card maxWidth={300} maxHeight={200}>
@@ -39,7 +39,7 @@ export const OverflowTabs = () => {
         </Tabs.Menu.Popper>
         <Tabs.Panels>
           {(item: MyTabItem) => (
-            <Tabs.Panel marginTop="m" name={item.id}>
+            <Tabs.Panel marginTop="m" data-id={item.id}>
               {item.contents}
             </Tabs.Panel>
           )}

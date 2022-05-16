@@ -3,7 +3,7 @@ import {StaticStates} from '@workday/canvas-kit-react/common';
 import {ComponentStatesTable, permutateProps} from '@workday/canvas-kit-labs-react/common';
 import {withSnapshotsEnabled, customColorTheme} from '../../../../../utils/storybook';
 
-import {TextArea} from '../../../text-area';
+import {TextArea} from '@workday/canvas-kit-react/text-area';
 
 export default withSnapshotsEnabled({
   title: 'Testing/React/Inputs/TextArea',

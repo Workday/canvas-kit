@@ -1,11 +1,11 @@
-import {createHook} from '@workday/canvas-kit-react/common';
-import {BannerModel} from './useBannerModel';
+import {createElemPropsHook} from '@workday/canvas-kit-react/common';
+import {useBannerModel} from './useBannerModel';
 
 /**
  * Adds the necessary props to a `ActionText` component.
  * Used by the Banner.ActionText subcomponent
  */
-export const useBannerActionText = createHook(({state}: BannerModel) => {
+export const useBannerActionText = createElemPropsHook(useBannerModel)(({state}) => {
   return {
     id: `action-${state.id}`,
   };

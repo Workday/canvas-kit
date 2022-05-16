@@ -11,6 +11,7 @@ any questions.
 - [Codemod](#codemod)
 - [General Changes](#general-changes)
   - [Dependency Upgrades](#dependency-upgrades)
+  - [Model Changes](#model-changes)
 - [Tokens](#tokens)
   - [Depth](#depth)
 - [Components](#components)
@@ -68,7 +69,12 @@ To use v7, you'll need to upgrade the following dependencies:
 - React 16.14 OR React 17.X for backwards compatibility on JSX transform if you're using Babel or
   Typescript to compile code
 - Emotion 11
-- Typescript 4.1 or higher, if applicable
+- Typescript 4.1 or higher, if applicable. We've dropped support for Typescript 3.5-3.9. Previously we used
+  `downlevel-dts` to support Typescript 3.5+ while using Typescript 3.8 features, but
+  `downlevel-dts` does not support the Typescript 4.1 features we use. Typescript 4.1 was release in
+  November, 2020 and we feel it is time to move forward. Reach out if you experience issues
+  upgrading your Typescript version. In our experience, Typescript 4.1 found a few more errors that
+  Typescript 3.8 did not, but the upgrade was manageable.
 - Babel 7.9 or higher, if applicable
 - An Enzyme adapter for React 17, if applicable
 
@@ -79,6 +85,265 @@ View our [React 17](https://github.com/Workday/canvas-kit/discussions/1455) and
 [Emotion 11](https://github.com/Workday/canvas-kit/discussions/1453) discussions to learn more about
 any gotchas or tips and tricks with these upgrades. And of course, feel free to contribute to the
 discussion with any questions or learnings of your own!
+
+---
+
+### Model Changes
+
+#### Guards and Callbacks
+
+We changed the signature of model event guards and callbacks. In v6, the parameters were in an
+object. This has a less than ideal developer experience as intellisense isn't engaged immediately
+and we don't plan on adding any additional parameters to guard and callback functions. We've removed
+the object wrapper.
+
+🤖 The codemod handles these changes automatically.
+
+Before:
+
+```tsx
+const model = useTabsModel({
+  onSelect({data: {id}, prevState}) {
+    console.log(id, prevState);
+  },
+});
+```
+
+After:
+
+```tsx
+const model = useTabsModel({
+  onSelect({id}, prevState) {
+    console.log(id, prevState);
+  },
+});
+```
+
+#### Model Implementation
+
+If you don't extend models, you can skip this section.
+
+In v6 we supported Typescript 3.8 which limited the way types could be inferred and defined. Canvas
+Kit v7 now requires Typescript 4.1 which introduced
+[Template Literal Types](https://www.typescriptlang.org/docs/handbook/2/template-literal-types.html).
+This means that the guards and callbacks no longer need to be manually defined via an `eventMap`.
+Event maps were a stopgap, were manual, and prone to errors in defining them. Not all events had
+guards or callbacks there's no check other than manual review to ensure the existence of an event
+callback or guard. Template Literal Types allow us to properly type guards and callbacks without
+event maps. The previous types forced `data` to be an object. We've since dropped that restriction.
+You can still only pass a single argument to events. If you need additional information, use an
+object.
+
+This change also allowed us to remove a lot of boilerplate associated with models without
+sacrificing type safety. This change doesn't effect most use cases, but will effect those whole
+extended a model. We created a new utility function called `createModelHook` that helps set up
+types.
+
+Before:
+
+```ts
+export type MyState = {
+  value: string;
+};
+
+export type MyEvents = {
+  updateValue(data: {value: string}): void; // enforced that `data` is an object even if we only need to pass a string
+};
+
+export type MyModel = Model<MyState, MyEvents>;
+
+export const myEventMap = createEventMap<MyEvents>()({
+  guards: {
+    shouldUpdateValue: 'updateValue', // easy to forget or make a mistake on guard name
+  },
+  callbacks: {
+    onUpdateValue: 'updateValue',
+  },
+});
+
+export type MyBaseConfig = {
+  initialValue?: string;
+};
+
+export type MyConfig = MyBaseConfig & Partial<ToModelConfig<MyState, MyEvents, typeof myEventMap>>;
+
+const useMyModel = (config: MyConfig = {}): MyModel => {
+  const [value, setValue] = React.useState(config.initialValue || '');
+
+  const state = {value};
+
+  // useEventMap is used to wrap the event object with guards and callbacks according to the event map
+  const events = useEventMap(myEventMap, state, config, {
+    updateValue(data) {
+      setValue(data.value);
+    },
+  });
+
+  return {state, events};
+};
+```
+
+After:
+
+```tsx
+const useMyModel = createModelHook({
+  defaultConfig: {
+    initialValue: '',
+  },
+})(config => {
+  const [value, setValue] = React.useState(config.initialValue); // default is already handled
+
+  const state = {value};
+
+  const events = {
+    updateValue(value: string) {
+      // doesn't need to be an object anymore
+      setValue(value);
+    },
+  };
+
+  return {state, events};
+});
+```
+
+Notice the large reduction in Typescript type boilerplate. In this example, the only place that
+Typescript syntax exists is in the `updateValue` function definition. This allows better collocating
+of types and values. Also notice that `useEventMap` doesn't need to be used anymore. The
+`createModelHook` will automatically wrap the `events` returned to call guards and callbacks when
+appropriate. Today this is done via creating a new events object. Once we drop IE11 support, this
+can be done via a proxy instead. The `createModelHook` handles all type inference so we don't have
+to explicitly type everything. Also `createModelHook` attaches React Context directly to the hook
+along with `defaultConfig` and `requiredConfig` for model extension.
+
+If you extended a model, you'll notice all those types are no longer being exported. You'll have to
+use this new utility function. Here's an example we found in the wild:
+
+```tsx
+import {
+  BasePopupModelConfig,
+  createEventMap,
+  Model,
+  popupEventMap,
+  PopupEvents,
+  PopupModelConfig,
+  PopupState,
+  ToModelConfig,
+  useCloseOnEscape,
+  useEventMap,
+  useFocusTrap,
+  useInitialFocus,
+  usePopupModel,
+  useReturnFocus,
+} from '@workday/canvas-kit-react';
+
+type MyModalState = PopupState & {
+  showOverlay: boolean;
+};
+
+type MyModalEvents = PopupEvents;
+
+const myModalEventMap = createEventMap<MyModalEvents>()({
+  guards: {
+    ...popupEventMap.guards,
+  },
+  callbacks: {
+    ...popupEventMap.callbacks,
+  },
+});
+
+type MyBaseModalConfig = BasePopupModelConfig & {
+  showOverlay?: boolean;
+};
+
+type MyModalModel = Model<MyModalState, MyModalEvents>;
+
+type MyConfig = MyBaseConfig &
+  Partial<ToModelConfig<MyModalState, MyModalEvents, typeof myModalEventMap>>;
+
+export const useMyModalModel = (config: MyConfig = {}): MyModalModel => {
+  const [showOverlay] = React.useState(config.showOverlay ?? true);
+
+  const model = usePopupModel({
+    ...config,
+    // hook up to a redux store
+    onShow(...params) {
+      dispatch(setIsModalOpen(true));
+      config?.onShow?.(...params);
+    },
+    onHide(...params) {
+      dispatch(setIsModalOpen(false));
+      config?.onShow?.(...params);
+    },
+  });
+
+  useInitialFocus(model);
+  useReturnFocus(model);
+  useFocusTrap(model);
+  useCloseOnEscape(model);
+
+  const state = {
+    ...model.state,
+    showOverlay,
+  };
+
+  const events = useEventMap(myEventMap, state, config, {
+    ...model.events,
+  });
+
+  return {state, events};
+};
+```
+
+After:
+
+```ts
+import {
+  useCloseOnEscape,
+  useEventMap,
+  useFocusTrap,
+  useInitialFocus,
+  usePopupModel,
+  useReturnFocus,
+} from '@workday/canvas-kit-react';
+
+const useMyModalModel = createModelHook({
+  defaultConfig: {
+    ...usePopupModel.defaultConfig,
+    showOverlay: true,
+  },
+  requiredConfig: usePopupModel.requiredConfig,
+  contextOverride: usePopupModel.Context, // needed to make sure this model uses the same context as the popup model, otherwise it will create a new one
+})(config => {
+  // `mergeConfig` takes care of the manual merging we were doing earlier
+  const model = usePopupModel(
+    usePopupModel.mergeConfig(config, {
+      // hook up to a redux store
+      onShow() {
+        dispatch(setIsModalOpen(true));
+      },
+      onHide() {
+        dispatch(setIsModalOpen(false));
+      },
+    })
+  );
+
+  useInitialFocus(model);
+  useReturnFocus(model);
+  useFocusTrap(model);
+  useCloseOnEscape(model);
+
+  const state = {
+    ...model.state,
+    showOverlay,
+  };
+
+  return {...model, state};
+});
+```
+
+All the cumbersome type boilerplate went away. Also all the type imports went away. The code is more
+focused on your unique logic and less on boilerplate. Unfortunately, this change doesn't have a
+codemod. While possible, this code isn't very common and the codemod would be very complex.
 
 ## Tokens
 
@@ -486,6 +751,44 @@ If your code contains any hacks to make a `Modal` overflow, those hacks should n
 (you may have to limit your browser height to see the overflow). Before v7, you had to manually set
 the `max-height` of the `Modal.Body` element using calculations. These should now be removed. The
 `Popup.Card` now has a max height and the `Popup.Body` height is automatically calculated.
+
+#### Popup.Body
+
+The `Popup.Body` is now an overflow container. This means 2 things:
+
+- `Popup.Body` will scroll if the contents are too big to fit in the page
+- `Popup.Body` will hide focus rings that render outside the overflow container
+
+Our examples contained some buttons inside the `Body` element and had focus rings cut off. The
+adjustment is to move the buttons outside the `Body` element. This is most likely the desired
+structure anyways since the buttons will not scroll with the overflowed `Body` content.
+
+Before:
+
+```tsx
+<Modal.Card>
+  <Modal.Body>
+    Body Contents
+    <HStack spacing="s">
+      {/*will scroll with the body*/}
+      <Modal.CloseButton as={PrimaryButton}>Delete</Modal.CloseButton>
+      <Modal.CloseButton>Cancel</Modal.CloseButton>
+    </HStack>
+  </Modal.Body>
+</Modal.Card>
+```
+
+After:
+
+```tsx
+<Modal.Card>
+  <Modal.Body>Body Contents</Modal.Body>
+  <HStack spacing="s">
+    <Modal.CloseButton as={PrimaryButton}>Delete</Modal.CloseButton>
+    <Modal.CloseButton>Cancel</Modal.CloseButton>
+  </HStack>
+</Modal.Card>
+```
 
 ---
 
