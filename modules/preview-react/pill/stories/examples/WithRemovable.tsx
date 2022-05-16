@@ -6,7 +6,7 @@ import testAvatar from './test-avatar.png';
 import {HStack} from '@workday/canvas-kit-react';
 
 export const RemovablePill = () => (
-  <HStack shouldWrapChildren spacing="xxs">
+  <HStack spacing="xxs">
     <Pill variant="removable">
       Pink Shirts
       <Pill.IconButton onClick={() => console.warn('clicked')} />
