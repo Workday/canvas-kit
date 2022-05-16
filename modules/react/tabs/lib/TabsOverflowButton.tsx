@@ -22,13 +22,11 @@ export interface OverflowButtonProps {
 }
 
 export const useTabsOverflowButton = composeHooks(
-  createElemPropsHook(useTabsModel)(
-    (model, _?: React.Ref<HTMLButtonElement>, elemProps: {name?: string} = {}) => {
-      return {
-        'aria-haspopup': true,
-      };
-    }
-  ),
+  createElemPropsHook(useTabsModel)(() => {
+    return {
+      'aria-haspopup': true,
+    };
+  }),
   useOverflowListTarget,
   subModelHook((m: ReturnType<typeof useTabsModel>) => m.menu, useMenuTarget)
 );

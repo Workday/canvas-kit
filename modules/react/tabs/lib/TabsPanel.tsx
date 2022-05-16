@@ -9,6 +9,7 @@ import {
   hideMouseFocus,
   StyledType,
 } from '@workday/canvas-kit-react/common';
+import {Item} from '@workday/canvas-kit-react/collection';
 import {Box} from '@workday/canvas-kit-react/layout';
 
 import {useTabsModel} from './useTabsModel';
@@ -37,26 +38,29 @@ export interface TabPanelProps<T = unknown> extends ExtractProps<typeof Box, nev
 const StyledTabsPanel = styled(Box)<StyledType>(hideMouseFocus);
 
 export const useTabsPanel = createElemPropsHook(useTabsModel)(
-  ({state, events}, _?: React.Ref<HTMLElement>, elemProps: {'data-id'?: string} = {}) => {
-    const name = elemProps['data-id'];
-    const [tabName, setTabName] = React.useState(elemProps['data-id'] || '');
+  (
+    {state, events},
+    _?: React.Ref<HTMLElement>,
+    elemProps: {'data-id'?: string; item?: Item<any>} = {}
+  ) => {
+    const [localId, setLocalId] = React.useState(elemProps['data-id'] || elemProps.item?.id || '');
 
     useMountLayout(() => {
-      const index = state.panelIndexRef.current;
-      const tabName = name || String(index);
-      events.registerPanel({item: {id: tabName}, textValue: ''});
-      setTabName(tabName);
+      const defaultId = state.panelIndexRef.current;
+      const itemId = localId || String(defaultId);
+      events.registerPanel({item: {id: itemId}, textValue: ''});
+      setLocalId(itemId);
 
       return () => {
-        events.unregisterPanel({id: tabName});
+        events.unregisterPanel({id: itemId});
       };
     });
 
     return {
       role: 'tabpanel',
-      'aria-labelledby': `${state.id}-${tabName}`,
-      hidden: !!tabName && tabName !== state.selectedIds[0],
-      id: `tabpanel-${state.id}-${tabName}`,
+      'aria-labelledby': `${state.id}-${localId}`,
+      hidden: !!localId && localId !== state.selectedIds[0],
+      id: `tabpanel-${state.id}-${localId}`,
       tabIndex: 0,
     };
   }
