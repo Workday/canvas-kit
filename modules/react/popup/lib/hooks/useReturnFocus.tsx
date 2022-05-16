@@ -1,7 +1,8 @@
 import React from 'react';
 
-import {PopupModel} from './usePopupModel';
-import {changeFocus} from '@workday/canvas-kit-react/common';
+import {changeFocus, createElemPropsHook} from '@workday/canvas-kit-react/common';
+
+import {usePopupModel} from './usePopupModel';
 
 /**
  * Returns focus to the target element when the popup is hidden. This works well with
@@ -10,7 +11,7 @@ import {changeFocus} from '@workday/canvas-kit-react/common';
  *
  * This should be used on popup elements that use `useInitialFocus`.
  */
-export const useReturnFocus = (model: PopupModel, elemProps = {}) => {
+export const useReturnFocus = createElemPropsHook(usePopupModel)(model => {
   const visible = model.state.visibility !== 'hidden';
 
   React.useLayoutEffect(() => {
@@ -24,5 +25,5 @@ export const useReturnFocus = (model: PopupModel, elemProps = {}) => {
     };
   }, [model.state.returnFocusRef, model.state.targetRef, visible]);
 
-  return elemProps;
-};
+  return {};
+});

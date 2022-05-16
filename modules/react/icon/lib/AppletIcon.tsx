@@ -3,7 +3,7 @@ import {colors, BrandingColor, CanvasColor} from '@workday/canvas-kit-react/toke
 import {CanvasAppletIcon, CanvasIconTypes} from '@workday/design-assets-types';
 import {CSSObject} from '@emotion/styled';
 import Icon, {IconProps} from './Icon';
-import {createComponent} from '../../common';
+import {createComponent} from '@workday/canvas-kit-react/common';
 
 export interface AppletIconStyles {
   /**

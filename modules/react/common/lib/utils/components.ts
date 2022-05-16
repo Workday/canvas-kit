@@ -1,4 +1,5 @@
 import React from 'react';
+import {assert} from './assert';
 import {mergeProps} from './mergeProps';
 import {Model} from './models';
 
@@ -34,8 +35,8 @@ type ExtractRef<T> = T extends undefined // test if T was even passed in
  * @template P Additional props
  * @template ElementType React component or string element
  */
-export type PropsWithAs<P, ElementType extends React.ElementType> = P &
-  Omit<React.ComponentProps<ElementType>, 'as' | 'state' | keyof P> & {
+export type PropsWithoutAs<P, ElementType extends React.ElementType> = P &
+  Omit<React.ComponentProps<ElementType>, 'as' | keyof P> & {
     /**
      * Optional ref. If the component represents an element, this ref will be a reference to the
      * real DOM element of the component. If `as` is set to an element, it will be that element.
@@ -88,39 +89,55 @@ export type ExtractProps<
     | React.ComponentType<any>
     | undefined
     | never = undefined
-> = TComponent extends ElementComponent<infer E, infer P> // test if `TComponent` is an `ElementComponent`, while inferring both default element and props associated
-  ? [TElement] extends [never] // test if user passed `never` for the `TElement` override. We have to test `never` first, otherwise TS gets confused and `ExtractProps` will return `never`. https://github.com/microsoft/TypeScript/issues/23182
-    ? P // if `TElement` was `never`, return only the inferred props `P`
-    : TElement extends undefined // else test if TElement was defined
-    ? E extends keyof JSX.IntrinsicElements // test if the inferred element `E` is in `JSX.IntrinsicElements`
-      ? P & ExtractHTMLAttributes<JSX.IntrinsicElements[E]> // `TElement` wasn't explicitly defined, so let's fall back to the inferred element's HTML attribute interface + props `P`
-      : P & ExtractPropsFromComponent<E> // E isn't in `JSX.IntrinsicElements`, return inferred props `P` + props extracted from component `E`. It would be nice to use `ExtractProps` again here, but that creates a circular dependency
-    : TElement extends keyof JSX.IntrinsicElements // `TElement` was defined, test if it is in `JSX.IntrinsicElements`
-    ? P & ExtractHTMLAttributes<JSX.IntrinsicElements[TElement]> // `TElement` is in `JSX.IntrinsicElements`, return inferred props `P` + HTML attributes of `TElement`
-    : P & ExtractPropsFromComponent<TElement> // `TElement` is not in `JSX.IntrinsicElements`, return inferred props `P` + props extracted from component `TElement`. It would be nice to use `ExtractProps` again here, but that creates a circular dependency
-  : ExtractPropsFromComponent<TComponent>; // `TComponent` does not extend `ElementComponent`. Return props extracted from component `TComponent`
+> = ExtractMaybeModel<
+  TComponent,
+  TComponent extends {__element: infer E; __props: infer P} //ElementComponent<infer E, infer P> // test if `TComponent` is an `ElementComponent`, while inferring both default element and props associated
+    ? [TElement] extends [never] // test if user passed `never` for the `TElement` override. We have to test `never` first, otherwise TS gets confused and `ExtractProps` will return `never`. https://github.com/microsoft/TypeScript/issues/23182
+      ? P // else attach only inferred props `P`
+      : TElement extends undefined // else test if TElement was defined
+      ? E extends keyof JSX.IntrinsicElements // test if the inferred element `E` is in `JSX.IntrinsicElements`
+        ? P & ExtractHTMLAttributes<JSX.IntrinsicElements[E]> // `TElement` wasn't explicitly defined, so let's fall back to the inferred element's HTML attribute interface + props `P`
+        : P & ExtractProps<E> // E isn't in `JSX.IntrinsicElements`, return inferred props `P` + props extracted from component `E`.
+      : TElement extends keyof JSX.IntrinsicElements // `TElement` was defined, test if it is in `JSX.IntrinsicElements`
+      ? P & ExtractHTMLAttributes<JSX.IntrinsicElements[TElement]> // `TElement` is in `JSX.IntrinsicElements`, return inferred props `P` + HTML attributes of `TElement`
+      : P & ExtractProps<TElement> // `TElement` is not in `JSX.IntrinsicElements`, return inferred props `P` + props extracted from component `TElement`.
+    : TComponent extends Component<infer P> // test if `TComponent` is a `Component`, while inferring props `P`
+    ? P // else attach only inferred props `P`
+    : TComponent extends React.ComponentType<infer P> // test if `TComponent` is a `React.ComponentType` (class or functional component)
+    ? P // it was a `React.ComponentType`, return inferred props `P`
+    : {} // We don't know what `TComponent` was, return an empty object
+>;
 
-// Extract props from a component. This type is only necessary because `ExtractProps` cannot
-// reference itself, creating a circular dependency. Instead, we define this type to allow for at
-// least 1 level of nesting.
-type ExtractPropsFromComponent<TComponent> = TComponent extends ElementComponent<infer E, infer P> // test if `TComponent` is an `ElementComponent`, while inferring both default element and props associated
-  ? E extends keyof JSX.IntrinsicElements // test if the inferred element `E` is in `JSX.IntrinsicElements`
-    ? P & ExtractHTMLAttributes<JSX.IntrinsicElements[E]> // return inferred props `P` + HTML attributes of inferred element `E`
-    : P // `E` wasn't a key of `JSX.IntrinsicElements`, so just return the inferred props `P`
-  : TComponent extends Component<infer P> // test if `TComponent` is a `Component`, while inferring props `P`
-  ? P // it was a `Component`, return inferred props `P`
-  : TComponent extends React.ComponentType<infer P> // test if `TComponent` is a `React.ComponentType` (class or functional component)
-  ? P // it was a `React.ComponentType`, return inferred props `P`
-  : {}; // We don't know what `TComponent` was, return an empty object
+// If the component has a model, be sure to add it to the prop interface
+type ExtractMaybeModel<TComponent, P> = TComponent extends {__model: infer M} // test if a model is used
+  ? P & PropsWithModel<M>
+  : P;
+
+export type PropsWithModel<TModel = never> = {
+  /**
+   * Optional model to pass to the component. This will override the default model created for the
+   * component. This can be useful if you want to access to the state and events of the model, or if
+   * you have nested components of the same type and you need to override the model provided by
+   * React Context.
+   */
+  model?: TModel;
+  /**
+   * Optional hook that receives the model and all props to be applied to the element. If you use
+   * this, it is your responsibility to return props, merging as appropriate. For example, returning
+   * an empty object will disable all elemProps hooks associated with this component. This allows
+   * finer control over a component without creating a new one.
+   */
+  elemPropsHook?: <TProps>(model: TModel, elemProps: TProps) => any;
+};
 
 /**
  * Component type that allows for `as` to change the element or component type.
  * Passing `as` will correctly change the allowed interface of the JSX element
  */
-export type ElementComponent<T extends React.ElementType, P> = {
-  __type: 'ElementComponent'; // used internally to distinguish between `ElementComponent` and `Component`
+export type ElementComponent<E extends React.ElementType, P> = {
+  displayName?: string;
   <ElementType extends React.ElementType>(
-    props: PropsWithAs<P, ElementType> & {
+    props: PropsWithoutAs<P, ElementType> & {
       /**
        * Optional override of the default element used by the component. Any valid tag or Component.
        * If you provided a Component, this component should forward the ref using `React.forwardRef`
@@ -129,15 +146,56 @@ export type ElementComponent<T extends React.ElementType, P> = {
       as: ElementType;
     }
   ): JSX.Element;
-  (props: PropsWithAs<P, T>): JSX.Element;
-  displayName?: string;
+  (props: PropsWithoutAs<P, E>): JSX.Element;
   as<E extends React.ElementType>(as: E): ElementComponent<E, P>;
+  /** @private Only used internally to hold the element type for extraction */
+  __element: E;
+  /** @private Only used internally to hold the element type for extraction */
+  __props: P;
+};
+
+/**
+ * Component type that allows for `as` to change the element or component type.
+ * Passing `as` will correctly change the allowed interface of the JSX element.
+ * Same as `ElementComponent`, but adds a model to the interface.
+ */
+export type ElementComponentM<E extends React.ElementType, P, TModel> = {
+  displayName?: string;
+  <ElementType extends React.ElementType>(
+    props: PropsWithoutAs<P, ElementType> &
+      PropsWithModel<TModel> & {
+        /**
+         * Optional override of the default element used by the component. Any valid tag or Component.
+         * If you provided a Component, this component should forward the ref using `React.forwardRef`
+         * and spread extra props to a root element.
+         */
+        as: ElementType;
+      }
+  ): JSX.Element;
+  (props: PropsWithoutAs<P, E> & PropsWithModel<TModel>): JSX.Element;
+  as<E extends React.ElementType>(as: E): ElementComponentM<E, P, TModel>;
+  /** @private Only used internally to hold the element type for extraction */
+  __element: E;
+  /** @private Only used internally to hold the element type for extraction */
+  __props: P;
+  /** @private Only used internally to hold the element type for extraction */
+  __model: TModel;
+};
+
+export type ComponentM<P, TModel> = {
+  displayName?: string;
+  (props: P & PropsWithModel<TModel>): JSX.Element;
+  /** @private Only used internally to hold the element type for extraction */
+  __props: P;
+  /** @private Only used internally to hold the element type for extraction */
+  __model: TModel;
 };
 
 export type Component<P> = {
-  __type: 'Component'; // used internally to distinguish between `ElementComponent` and `Component`
-  (props: P): JSX.Element;
   displayName?: string;
+  (props: P): JSX.Element;
+  /** @private Only used internally to hold the element type for extraction */
+  __props: P;
 };
 
 interface RefForwardingComponent<T, P = {}> {
@@ -156,6 +214,193 @@ interface RefForwardingComponent<T, P = {}> {
     Element: T extends undefined ? never : T
   ): React.ReactElement | null;
 }
+
+function defaultGetElemProps(input: any) {
+  return input;
+}
+
+export const createContainer = <
+  E extends
+    | keyof JSX.IntrinsicElements
+    | React.ComponentType
+    | ElementComponentM<any, any, any>
+    | undefined = undefined
+>(
+  as?: E
+) => <
+  TModelHook extends ((config: any) => {state: any; events: any}) & {
+    Context?: React.Context<any>;
+  } & {defaultConfig?: Record<string, any>},
+  TDefaultContext extends {state: Record<string, any>; events: Record<string, any>},
+  TElemPropsHook extends (...args: any) => any,
+  SubComponents = {}
+>({
+  displayName,
+  modelHook,
+  elemPropsHook,
+  defaultContext,
+  subComponents,
+}: {
+  displayName?: string;
+  modelHook: TModelHook;
+  elemPropsHook?: TElemPropsHook;
+  defaultContext?: TDefaultContext;
+  subComponents?: SubComponents;
+}) => {
+  const Context =
+    modelHook.Context ||
+    React.createContext({state: {}, events: {}, defaultConfig: modelHook.defaultConfig});
+
+  return <Props>(
+    Component: (
+      props: Props & RemoveNull<ReturnType<TElemPropsHook>> & {ref: ExtractRef<E>},
+      Element: E extends undefined ? never : E,
+      model: TModelHook extends (config: infer TConfig) => infer TModel ? TModel : never
+    ) => React.ReactElement | null
+  ): (TModelHook extends (config: infer TConfig) => infer TModel
+    ? E extends undefined
+      ? ComponentM<Props & TConfig, TModel>
+      : ElementComponentM<
+          // E is not `undefined` here, but Typescript thinks it could be, so we add another `undefined`
+          // check and cast to a `React.FC` to match a valid signature for `ElementComponent`.
+          // `React.FC` was chosen as the simplest valid interface.
+          E extends undefined ? React.FC : E,
+          Props & TConfig,
+          TModel
+        > & {Context: React.Context<TModel>}
+    : never) &
+    SubComponents => {
+    const ReturnedComponent = React.forwardRef<E, Props & {as?: React.ElementType} & {model?: any}>(
+      ({as: asOverride, model, ...props}, ref) => {
+        const localModel = useDefaultModel(model, props, modelHook);
+        const elemProps = ((modelHook as any).getElemProps || defaultGetElemProps)(props);
+        const finalElemProps = elemPropsHook
+          ? elemPropsHook(localModel, elemProps, ref)
+          : elemProps;
+
+        return React.createElement(
+          Context.Provider,
+          {value: localModel},
+          Component(
+            finalElemProps as Props & RemoveNull<ReturnType<TElemPropsHook>> & {ref: ExtractRef<E>},
+            // Cast to `any` to avoid: "ts(2345): Type 'undefined' is not assignable to type 'E extends
+            // undefined ? never : E'" I'm not sure I can actually cast to this conditional type and it
+            // doesn't actually matter, so cast to `any` it is.
+            (asOverride || as) as any,
+            localModel
+          )
+        );
+      }
+    );
+
+    Object.keys(subComponents || {}).forEach(key => {
+      // `ReturnedComponent` is a `React.ForwardRefExoticComponent` which has no additional keys so
+      // we'll cast to `Record<string, any>` for assignment. Note the lack of type checking
+      // properties. Take care when changing the runtime of this function.
+      (ReturnedComponent as Record<string, any>)[key] = (subComponents as Record<string, any>)[key];
+    });
+    ReturnedComponent.displayName = displayName;
+    (ReturnedComponent as any).Context = Context;
+
+    // Cast as `any`. We have already specified the return type. Be careful making changes to this
+    // file due to this `any` `ReturnedComponent` is a `React.ForwardRefExoticComponent`, but we want
+    // it to be either an `Component` or `ElementComponent`
+    return ReturnedComponent as any;
+  };
+};
+
+type RemoveNull<T> = {[K in keyof T]: Exclude<T[K], null>};
+
+// export type ModelComponentFn<TModelHook, TElemPropsHook, SubComponents> = <Props={}>(Component: ())
+
+export const createSubcomponent = <
+  E extends
+    | keyof JSX.IntrinsicElements
+    | React.ComponentType
+    | ElementComponentM<any, any, any>
+    | undefined = undefined
+>(
+  as?: E
+) => <
+  TElemPropsHook, // normally we'd put a constraint here, but doing so causes the `infer` below to fail to infer the return props
+  TModelHook extends ((config: any) => {state: any; events: any}) & {Context?: React.Context<any>},
+  SubComponents = {}
+>({
+  displayName,
+  modelHook,
+  elemPropsHook,
+  subComponents,
+}: {
+  displayName?: string;
+  modelHook: TModelHook;
+  elemPropsHook?: TElemPropsHook;
+  subComponents?: SubComponents;
+}) => {
+  assert(
+    modelHook.Context,
+    'createSubcomponent only works on models with context. Please use `createModelHook` to create the `modelHook`'
+  );
+
+  return <Props = {}>(
+    Component: (
+      props: Props &
+        (TElemPropsHook extends (...args: any[]) => infer TProps // try to infer TProps returned from the elemPropsHook function
+          ? TProps extends {ref: infer R}
+            ? TProps
+            : TProps & {ref: ExtractRef<E>}
+          : {ref: ExtractRef<E>}) &
+        (Props extends {children: any}
+          ? {}
+          : {
+              children?: React.ReactNode;
+            }),
+      Element: E extends undefined ? never : E,
+      model: TModelHook extends (...args: any[]) => infer TModel ? TModel : never
+    ) => React.ReactElement | null
+  ): (TModelHook extends (...args: any[]) => infer TModel
+    ? ElementComponentM<
+        // E is not `undefined` here, but Typescript thinks it could be, so we add another `undefined`
+        // check and cast to a `React.FC` to match a valid signature for `ElementComponent`.
+        // `React.FC` was chosen as the simplest valid interface.
+        E extends undefined ? React.FC : E,
+        Props,
+        TModel
+      >
+    : never) &
+    SubComponents => {
+    const ReturnedComponent = React.forwardRef<
+      E,
+      Props & {as?: React.ElementType} & {model?: any; elemPropsHook?: (...args: any) => any}
+    >(({as: asOverride, model, elemPropsHook: additionalPropsHook, ...props}, ref) => {
+      const localModel = useModelContext(modelHook.Context!, model);
+      const elemProps = elemPropsHook
+        ? (elemPropsHook as any)(localModel, props, ref)
+        : {...props, ref};
+
+      return Component(
+        additionalPropsHook ? additionalPropsHook(localModel, elemProps, ref) : elemProps,
+        // Cast to `any` to avoid: "ts(2345): Type 'undefined' is not assignable to type 'E extends
+        // undefined ? never : E'" I'm not sure I can actually cast to this conditional type and it
+        // doesn't actually matter, so cast to `any` it is.
+        (asOverride || as) as any,
+        localModel
+      );
+    });
+
+    Object.keys(subComponents || {}).forEach(key => {
+      // `ReturnedComponent` is a `React.ForwardRefExoticComponent` which has no additional keys so
+      // we'll cast to `Record<string, any>` for assignment. Note the lack of type checking
+      // properties. Take care when changing the runtime of this function.
+      (ReturnedComponent as Record<string, any>)[key] = (subComponents as Record<string, any>)[key];
+    });
+    ReturnedComponent.displayName = displayName;
+
+    // Cast as `any`. We have already specified the return type. Be careful making changes to this
+    // file due to this `any` `ReturnedComponent` is a `React.ForwardRefExoticComponent`, but we want
+    // it to be either an `Component` or `ElementComponent`
+    return ReturnedComponent as any;
+  };
+};
 
 /**
  * Factory function that creates components to be exported. It enforces React ref forwarding, `as`
@@ -242,6 +487,32 @@ export const createComponent = <
   // file due to this `any` `ReturnedComponent` is a `React.ForwardRefExoticComponent`, but we want
   // it to be either an `Component` or `ElementComponent`
   return ReturnedComponent as any;
+};
+
+export const createElemPropsHook = <
+  TModelHook extends (config: any) => {state: Record<string, any>; events: Record<string, any>}
+>(
+  modelHook: TModelHook
+) => <PO extends {}, PI extends {}>(
+  fn: (
+    model: TModelHook extends (config: any) => infer TModel
+      ? TModel
+      : {state: Record<string, any>; events: Record<string, any>},
+    ref?: React.Ref<any>,
+    elemProps?: PI
+  ) => PO
+): BehaviorHook<
+  TModelHook extends (config: any) => infer TModel
+    ? TModel
+    : {state: Record<string, any>; events: Record<string, any>},
+  PO
+> => (model, elemProps, ref) => {
+  const props = mergeProps(fn(model, ref, elemProps || ({} as any)), elemProps || ({} as any));
+  if (!props.hasOwnProperty('ref') && ref) {
+    // This is the weird "incoming ref isn't in props, but outgoing ref is in props" thing
+    props.ref = ref;
+  }
+  return props;
 };
 
 /**
@@ -484,6 +755,89 @@ export function composeHooks<
   hook5: BehaviorHook<M, O5>
 ): BehaviorHook<M, O1 & O2 & O3 & O4 & O5>;
 export function composeHooks<M extends Model<any, any>, R, P extends {}, O extends {}>(
+  ...hooks: ((model: M, props: P, ref: React.Ref<R>) => O)[]
+): BehaviorHook<M, O> {
+  return (model, props, ref) => {
+    const returnProps = [...hooks].reverse().reduce((props: any, hook) => {
+      return hook(model, props, props.ref || ref);
+    }, props);
+
+    if (!returnProps.hasOwnProperty('ref') && ref) {
+      // This is the weird "incoming ref isn't in props, but outgoing ref is in props" thing
+      returnProps.ref = ref;
+    }
+
+    return returnProps;
+  };
+}
+
+/**
+ * Compose many hooks together. Assumes hooks are using `mergeProps`. Returns a function that will
+ * receive a model and return props to be applied to a component. These props should always be
+ * applied last on the Component. The props will override as follows: rightmost hook props override
+ * leftmost hook props which are overridden by props passed to the composeHooks function.
+ *
+ * A `ref` should be passed for hooks that require a ref. Each hook should fork the ref using
+ * `useLocalRef`, passing the `elementRef` in the returned props object. This ref will be passed to
+ * the next hook.
+ *
+ * @example
+ * const MyComponent = React.forwardRef(({ children, model, ...elemProps }, ref) => {
+ *   const props = composeModelHooks(useModel)(useHook1, useHook2)(model, elemProps, ref)
+ *
+ *   return <div id="foo" {...props}>{children}</div>
+ * })
+ */
+//  export function composeModelHooks<M extends
+//  TModelHook extends (config: any) => {state: Record<string, any>; events: Record<string, any>}
+// >, O1 extends {}, O2 extends {}>(
+//   hook1: BehaviorHook<M, O1>,
+//   hook2: BehaviorHook<M, O2>
+// ): BehaviorHook<M, O1 & O2>;
+
+export function composeModelHooks<
+  M extends Model<any, any>,
+  R,
+  P extends {},
+  O1 extends {},
+  O2 extends {},
+  O3 extends {}
+>(
+  hook1: BehaviorHook<M, O1>,
+  hook2: BehaviorHook<M, O2>,
+  hook3: BehaviorHook<M, O3>
+): BehaviorHook<M, O1 & O2 & O3>;
+export function composeModelHooks<
+  M extends Model<any, any>,
+  R,
+  P extends {},
+  O1 extends {},
+  O2 extends {},
+  O3 extends {},
+  O4 extends {}
+>(
+  hook1: BehaviorHook<M, O1>,
+  hook2: BehaviorHook<M, O2>,
+  hook3: BehaviorHook<M, O3>,
+  hook4: BehaviorHook<M, O4>
+): BehaviorHook<M, O1 & O2 & O3 & O4>;
+export function composeModelHooks<
+  M extends Model<any, any>,
+  R,
+  P extends {},
+  O1 extends {},
+  O2 extends {},
+  O3 extends {},
+  O4 extends {},
+  O5 extends {}
+>(
+  hook1: BehaviorHook<M, O1>,
+  hook2: BehaviorHook<M, O2>,
+  hook3: BehaviorHook<M, O3>,
+  hook4: BehaviorHook<M, O4>,
+  hook5: BehaviorHook<M, O5>
+): BehaviorHook<M, O1 & O2 & O3 & O4 & O5>;
+export function composeModelHooks<M extends Model<any, any>, R, P extends {}, O extends {}>(
   ...hooks: ((model: M, props: P, ref: React.Ref<R>) => O)[]
 ): BehaviorHook<M, O> {
   return (model, props, ref) => {
