@@ -10,6 +10,10 @@ import {borderRadius, colors, space} from '@workday/canvas-kit-react/tokens';
 import {BaseButton} from '@workday/canvas-kit-react/button';
 
 export interface PillIconButtonProps extends Omit<SystemIconProps, 'icon'> {
+  /**
+   * The system icon rendered by the button
+   * @default `xSmallIcon`
+   */
   icon?: CanvasSystemIcon;
 }
 
