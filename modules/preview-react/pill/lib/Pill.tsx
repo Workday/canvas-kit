@@ -6,8 +6,6 @@ import {
   mouseFocusBehavior,
   styled,
   StyledType,
-  useConstant,
-  useMount,
 } from '@workday/canvas-kit-react/common';
 
 import {usePillModel} from './usePillModel';
@@ -166,30 +164,12 @@ export const Pill = createContainer('button')({
     IconButton: PillIconButton,
   },
 })<PillProps>(({variant = 'default', maxWidth, ...elemProps}, Element, model) => {
-  const actualEl = useConstant(() => {
-    if (Element === 'button') {
-      return !!elemProps.onDelete || !elemProps.onClick ? 'span' : 'button';
-    }
-    return Element;
-  });
-
-  if ('production' !== process.env.NODE_ENV) {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    useMount(() => {
-      if (elemProps.onDelete && variant === 'default') {
-        console.warn(
-          `It looks like you've provided two different click events.Please provide either an onClick OR change the variant to be 'removable'. If both are provided, ONLY onClick will be called.`
-        );
-      }
-    });
-  }
-
   return (
     <>
       {variant === 'readOnly' && (
         <StyledNonInteractivePill
           maxWidth={model.state.maxWidth}
-          as={actualEl}
+          as="span"
           border={`1px solid ${colors.licorice200}`}
           {...elemProps}
         >
@@ -220,7 +200,7 @@ export const Pill = createContainer('button')({
       {variant === 'removable' && (
         <StyledNonInteractivePill
           colors={getRemovablePillColors(model.state.disabled)}
-          as={actualEl}
+          as="span"
           {...elemProps}
         >
           <HStack spacing="xxxs" display="inline-flex" alignItems="center" justifyContent="center">
