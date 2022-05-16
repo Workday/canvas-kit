@@ -32,9 +32,9 @@ export interface SecondaryButtonProps extends Themeable, GrowthBehavior {
    */
   icon?: CanvasSystemIcon;
   /**
-   * Button icon positions can either be `left` or `right`.
-   * If no value is provided, it defaults to `left`.
-   * @default 'left'
+   * Button icon positions can either be `start` or `end`.
+   * If no value is provided, it defaults to `start`.
+   * @default 'start'
    */
   iconPosition?: IconPositions;
   /**
