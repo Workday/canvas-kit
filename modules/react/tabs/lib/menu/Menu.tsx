@@ -1,20 +1,27 @@
 import React from 'react';
 
-import {createContainer} from '@workday/canvas-kit-react/common';
+import {createComponent, useDefaultModel} from '@workday/canvas-kit-react/common';
 
-import {useMenuModel} from './useMenuModel';
+import {MenuModel, MenuModelConfig, useMenuModel} from './useMenuModel';
 import {MenuPopper} from './MenuPopper';
-import {MenuTarget, MenuTargetContext} from './MenuTarget';
+import {MenuTarget} from './MenuTarget';
 import {MenuItem} from './MenuItem';
 import {MenuCard} from './MenuCard';
 import {MenuList} from './MenuList';
-import {MenuDivider} from './MenuDivider';
 
-export interface MenuProps {
+export const MenuModelContext = React.createContext<MenuModel>({} as any);
+
+export interface MenuProps<T> extends MenuModelConfig<T> {
   /**
    * The contents of the Menu. Can be `Menu` children or any valid elements.
    */
   children: React.ReactNode;
+  /**
+   * Optionally pass a model directly to this component. Default is to create a model out of model
+   * config passed to this component.
+   * @default useMenuModel(config)
+   */
+  model?: MenuModel<T>;
 }
 
 /**
@@ -33,9 +40,13 @@ export interface MenuProps {
  *   </Menu.Popper>
  * </Menu>
  */
-export const Menu = createContainer()({
+export const Menu = createComponent()({
   displayName: 'Menu',
-  modelHook: useMenuModel,
+  Component: ({children, model, ...config}: MenuProps<any>) => {
+    const value = useDefaultModel(model, config, useMenuModel);
+
+    return <MenuModelContext.Provider value={value}>{children}</MenuModelContext.Provider>;
+  },
   subComponents: {
     /**
      * The menu card is a non-semantic element used to give the dropdown menu its distinct visual
@@ -59,7 +70,7 @@ export const Menu = createContainer()({
      *   return (
      *     <Menu model={model}>
      *       <Menu.List>
-     *         {(item) => <Menu.Item name={item.id}>{item.text}</Menu.Item>}
+     *         {(item) => <Menu.Item>{item.text}</Menu.Item>}
      *       </Menu.List>
      *     </Menu>
      *   )
@@ -72,9 +83,7 @@ export const Menu = createContainer()({
      * HTML. If more complex HTML is provided, consider
      */
     Item: MenuItem,
-    Divider: MenuDivider,
     Target: MenuTarget,
-    TargetContext: MenuTargetContext,
     /**
      * The "Popper" of a menu. The popper will appear around the `Menu.Target`. It renders a `div`
      * element that is portalled to the `document.body` which is controlled by the `PopupStack. The
@@ -83,6 +92,4 @@ export const Menu = createContainer()({
      */
     Popper: MenuPopper,
   },
-})<MenuProps>(({children}) => {
-  return <>{children}</>;
 });

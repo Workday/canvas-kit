@@ -59,6 +59,7 @@ export const DynamicTabs = () => {
   };
 
   const onClick = (id: string) => (e: React.MouseEvent) => {
+    console.log('id', id);
     if (id === 'add') {
       addedRef.current += 1;
       setTabs(tabs => {
@@ -77,7 +78,7 @@ export const DynamicTabs = () => {
     <Tabs model={model}>
       <Tabs.List overflowButton={<Tabs.OverflowButton>More</Tabs.OverflowButton>}>
         {(item: Tab) => (
-          <Tabs.Item name={item.id} onKeyDown={onKeyDown(item.id)} onClick={onClick(item.id)}>
+          <Tabs.Item onKeyDown={onKeyDown(item.id)} onClick={onClick(item.id)}>
             {item.tab}
           </Tabs.Item>
         )}
@@ -85,16 +86,12 @@ export const DynamicTabs = () => {
       <Tabs.Menu.Popper>
         <Tabs.Menu.Card maxWidth={300} maxHeight={200}>
           <Tabs.Menu.List>
-            {(item: Tab) => <Tabs.Menu.Item name={item.id}>{item.tab}</Tabs.Menu.Item>}
+            {(item: Tab) => <Tabs.Menu.Item>{item.tab}</Tabs.Menu.Item>}
           </Tabs.Menu.List>
         </Tabs.Menu.Card>
       </Tabs.Menu.Popper>
       <Tabs.Panels>
-        {(item: Tab) => (
-          <Tabs.Panel marginTop="m" data-id={item.id}>
-            Contents of {item.tab}
-          </Tabs.Panel>
-        )}
+        {(item: Tab) => <Tabs.Panel marginTop="m">Contents of {item.tab}</Tabs.Panel>}
       </Tabs.Panels>
     </Tabs>
   );
