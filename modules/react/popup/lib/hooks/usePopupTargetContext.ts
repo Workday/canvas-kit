@@ -18,9 +18,9 @@ export const usePopupTargetContext = createElemPropsHook(usePopupModel)(({events
       }
 
       if (state.visibility !== 'hidden') {
-        events.hide({event});
+        events.hide(event);
       } else {
-        events.show({event});
+        events.show(event);
       }
 
       // Prevent the default context menu from showing to avoid double menus

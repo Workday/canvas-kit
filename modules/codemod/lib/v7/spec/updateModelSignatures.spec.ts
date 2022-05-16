@@ -96,4 +96,96 @@ describe('updateModelSignatures', () => {
 
     expectTransform(input, expected);
   });
+
+  it('should replace destructured ObjectMethod {data} in "should*" callback names', () => {
+    const input = stripIndent`
+      import {Tabs, useTabsModel} from '@workday/canvas-kit-react/tabs'
+
+      const model = useTabsModel({
+        shouldSelect({ data }) {
+          // do something
+        }
+      })
+    `;
+
+    const expected = stripIndent`
+      import {Tabs, useTabsModel} from '@workday/canvas-kit-react/tabs'
+
+      const model = useTabsModel({
+        shouldSelect(data) {
+          // do something
+        }
+      })
+    `;
+
+    expectTransform(input, expected);
+  });
+
+  it('should replace destructured ObjectMethod {data} in "should*" callback names', () => {
+    const input = stripIndent`
+      import {Tabs, useTabsModel} from '@workday/canvas-kit-react/tabs'
+
+      const model = useTabsModel({
+        shouldSelect({ data: {id} }) {
+          // do something
+        }
+      })
+    `;
+
+    const expected = stripIndent`
+      import {Tabs, useTabsModel} from '@workday/canvas-kit-react/tabs'
+
+      const model = useTabsModel({
+        shouldSelect({id}) {
+          // do something
+        }
+      })
+    `;
+
+    expectTransform(input, expected);
+  });
+
+  it('should replace destructured ObjectMethod {data, prevState} in "should*" callback names', () => {
+    const input = stripIndent`
+      import {Tabs, useTabsModel} from '@workday/canvas-kit-react/tabs'
+
+      const model = useTabsModel({
+        shouldSelect({ data, prevState }) {
+          // do something
+        }
+      })
+    `;
+
+    const expected = stripIndent`
+      import {Tabs, useTabsModel} from '@workday/canvas-kit-react/tabs'
+
+      const model = useTabsModel({
+        shouldSelect(data, prevState) {
+          // do something
+        }
+      })
+    `;
+
+    expectTransform(input, expected);
+  });
+
+  it('should replace destructured ObjectProperty with ArrowFunctionExpression {data} in "should*" callback names', () => {
+    const input = stripIndent`
+      import {Tabs, useTabsModel} from '@workday/canvas-kit-react/tabs'
+
+      const model = useTabsModel({
+        shouldSelect: ({ data: { id } }) => setActiveTab(id)
+      })
+    `;
+
+    const expected = stripIndent`
+      import {Tabs, useTabsModel} from '@workday/canvas-kit-react/tabs'
+
+      const model = useTabsModel({
+        shouldSelect: ({ id }) => setActiveTab(id)
+      })
+    `;
+
+    expectTransform(input, expected);
+  });
 });
