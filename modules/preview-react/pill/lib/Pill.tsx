@@ -183,7 +183,7 @@ export const Pill = createContainer('button')({
       }
     });
   }
-  console.warn('elemPrps', elemProps);
+
   return (
     <>
       {variant === 'readOnly' && (
