@@ -19,9 +19,9 @@ const data = [
 
 export const ListOfPills = () => (
   <HStack spacing="zero" flexWrap="wrap">
-    {data.map(cat => {
+    {data.map((cat, index) => {
       return (
-        <Pill variant="removable" marginBottom="xxs" marginInlineEnd="xxs">
+        <Pill key={index} variant="removable" marginBottom="xxs" marginInlineEnd="xxs">
           <Pill.Label>{cat}</Pill.Label>
           <Pill.IconButton onClick={() => console.log(`delete ${cat}`)} />
         </Pill>
