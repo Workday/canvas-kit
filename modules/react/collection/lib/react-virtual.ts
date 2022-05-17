@@ -1,12 +1,9 @@
 // retype interfaces
 // delete when `react-virtual` accepts this PR: https://github.com/TanStack/react-virtual/pull/277
 
-import {
-  useVirtual as useVirtualReactVirtual,
-  defaultRangeExtractor
-} from "react-virtual";
+import {useVirtual as useVirtualReactVirtual, defaultRangeExtractor} from 'react-virtual';
 
-type ScrollAlignment = "start" | "center" | "end" | "auto";
+type ScrollAlignment = 'start' | 'center' | 'end' | 'auto';
 
 export interface ScrollToOptions {
   align: ScrollAlignment;
@@ -44,10 +41,7 @@ export interface Options<T> {
   estimateSize?: (index: number) => number;
   overscan?: number;
   horizontal?: boolean;
-  scrollToFn?: (
-    offset: number,
-    defaultScrollToFn?: (offset: number) => void
-  ) => void;
+  scrollToFn?: (offset: number, defaultScrollToFn?: (offset: number) => void) => void;
   paddingStart?: number;
   paddingEnd?: number;
   useObserver?: (ref: React.RefObject<T>, initialRect?: Rect) => Rect;
@@ -68,4 +62,4 @@ const useVirtual = useVirtualReactVirtual as <T>(
   measure: () => void;
 };
 
-export { defaultRangeExtractor, useVirtual };
+export {defaultRangeExtractor, useVirtual};
