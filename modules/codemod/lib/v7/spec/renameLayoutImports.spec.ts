@@ -78,4 +78,29 @@ describe('Rename Box, Flex and Stack', () => {
 
     expectTransform(input, expected);
   });
+
+  it('should rename imports from main labs package', () => {
+    const input = stripIndent`
+      import { Box } from "@workday/canvas-kit-labs-react";
+    `;
+
+    const expected = stripIndent`
+      import { Box } from "@workday/canvas-kit-react/layout";
+    `;
+
+    expectTransform(input, expected);
+  });
+
+  it('should rename imports from main labs package and remove import', () => {
+    const input = stripIndent`
+      import { Box, SearchForm } from "@workday/canvas-kit-labs-react";
+    `;
+
+    const expected = stripIndent`
+      import { Box } from "@workday/canvas-kit-react/layout";
+      import { SearchForm } from "@workday/canvas-kit-labs-react";
+    `;
+
+    expectTransform(input, expected);
+  });
 });
