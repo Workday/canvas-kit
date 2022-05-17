@@ -5,9 +5,9 @@ import {Pill} from '@workday/canvas-kit-preview-react/pill';
 import testAvatar from './test-avatar.png';
 import {HStack} from '@workday/canvas-kit-react';
 
-export const ClickablePillWithAvatar = () => {
+export const WithAvatar = () => {
   return (
-    <HStack shouldWrapChildren spacing="xxs">
+    <HStack spacing="xxs">
       <Pill onClick={() => console.warn('clicked')}>
         <Pill.Avatar url={testAvatar} />
         Regina Skeltor

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {Pill} from '@workday/canvas-kit-preview-react/pill';
-import {HStack} from '@workday/canvas-kit-react';
+import {Flex} from '@workday/canvas-kit-react';
 
 const data = [
   'Shoes',
@@ -17,8 +17,8 @@ const data = [
   'Jewelry',
 ];
 
-export const ListOfPills = () => (
-  <HStack spacing="zero" flexWrap="wrap">
+export const WithList = () => (
+  <Flex flexWrap="wrap">
     {data.map((cat, index) => {
       return (
         <Pill key={index} variant="removable" marginBottom="xxs" marginInlineEnd="xxs">
@@ -27,5 +27,5 @@ export const ListOfPills = () => (
         </Pill>
       );
     })}
-  </HStack>
+  </Flex>
 );

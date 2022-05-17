@@ -5,14 +5,14 @@ import {Pill} from '@workday/canvas-kit-preview-react/pill';
 import testAvatar from './test-avatar.png';
 import {HStack} from '@workday/canvas-kit-react';
 
-export const RemovablePill = () => (
+export const WithRemovable = () => (
   <HStack spacing="xxs">
     <Pill variant="removable">
       Pink Shirts
       <Pill.IconButton onClick={() => console.warn('clicked')} />
     </Pill>
     <Pill variant="removable">
-      <Pill.Avatar url={testAvatar}></Pill.Avatar>
+      <Pill.Avatar url={testAvatar} />
       Carolyn Grimaldi
       <Pill.IconButton onClick={() => console.warn('clicked')} />
     </Pill>
