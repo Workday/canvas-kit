@@ -26,8 +26,8 @@ export interface MenuProps {
  *   <Menu.Popper>
  *     <Menu.Card>
  *       <Menu.List>
- *         <Menu.Item name="first">First Item</Menu.Item>
- *         <Menu.Item name="second">Second Item</Menu.Item>
+ *         <Menu.Item data-id="first">First Item</Menu.Item>
+ *         <Menu.Item data-id="second">Second Item</Menu.Item>
  *       </Menu.List>
  *     </Menu.Card>
  *   </Menu.Popper>

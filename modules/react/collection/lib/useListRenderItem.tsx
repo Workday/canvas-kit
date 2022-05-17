@@ -20,7 +20,7 @@ export function useListRenderItems<T>(
               // element even though we remove it later...
               virtual,
               key: item.id,
-              item: item,
+              item,
             });
           })
         : model.state.items.map(item =>
