@@ -136,10 +136,11 @@ recommend against using it in production until the first stable version has been
 - [Contributing](./modules/docs/mdx/CONTRIBUTING.mdx)
 - [Code of Conduct](./modules/docs/mdx/CODE_OF_CONDUCT.md)
 - [Component Status](./modules/docs/mdx/COMPONENT_STATUS.mdx)
-- Migration Guides:
-  - [v4.0 Migration Guide](./modules/docs/mdx/4.0-MIGRATION-GUIDE.mdx)
-  - [v5.0 Migration Guide](./modules/docs/mdx/5.0-MIGRATION-GUIDE.mdx)
-  - [v6.0 Migration Guide](./modules/docs/mdx/6.0-MIGRATION-GUIDE.mdx)
+- Upgrade Guides:
+  - [v4.0 Upgrade Guide](./modules/docs/mdx/4.0-UPGRADE-GUIDE.mdx)
+  - [v5.0 Upgrade Guide](./modules/docs/mdx/5.0-UPGRADE-GUIDE.mdx)
+  - [v6.0 Upgrade Guide](./modules/docs/mdx/6.0-UPGRADE-GUIDE.mdx)
+  - [v7.0 Upgrade Guide](./modules/docs/mdx/7.0-UPGRADE-GUIDE.mdx)
 - Code Style / Best Practices:
   - [API & Pattern Guidelines](./modules/docs/mdx/API_PATTERN_GUIDELINES.mdx)
   - [Compound Components](./modules/docs/mdx/COMPOUND_COMPONENTS.mdx)

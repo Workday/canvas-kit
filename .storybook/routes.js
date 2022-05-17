@@ -49,10 +49,10 @@ const routes = {
   '/getting-started/for-developers/resources/creating-compound-components/':
     'welcome-dev-docs-creating-compound-components--page',
   '/getting-started/for-developers/resources/testing/': 'welcome-dev-docs-testing--page',
-  '/getting-started/for-developers/resources/4.0-migration-guide/':
-    'welcome-migration-guides-v4-0--page',
-  '/getting-started/for-developers/resources/5.0-migration-guide/':
-    'welcome-migration-guides-v5-0--page',
+  '/whats-new/upgrade-guides/canvas-kit-v4-upgrade-guide/': 'welcome-upgrade-guides-v4-0--page',
+  '/whats-new/upgrade-guides/canvas-kit-v5-upgrade-guide/': 'welcome-upgrade-guides-v5-0--page',
+  '/whats-new/upgrade-guides/canvas-kit-v6-upgrade-guide/': 'welcome-upgrade-guides-v6-0--page',
+  '/whats-new/upgrade-guides/canvas-kit-v7-upgrade-guide/': 'welcome-upgrade-guides-v7-0--page',
 };
 
 module.exports = routes;
