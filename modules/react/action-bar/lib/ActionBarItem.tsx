@@ -2,15 +2,14 @@ import * as React from 'react';
 import {composeHooks, EllipsisText, createSubcomponent} from '@workday/canvas-kit-react/common';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {
-  PrimaryButton,
   SecondaryButton,
   PrimaryButtonProps,
   SecondaryButtonProps,
 } from '@workday/canvas-kit-react/button';
+import {useListItemRegister} from '@workday/canvas-kit-react/collection';
 
 import {useActionBarModel} from './useActionBarModel';
 import {useActionBarOverflow} from './useActionBarOverflow';
-import {useActionBarButtonProps} from './useActionBarButtonProps';
 
 export interface ActionBarItemProps extends PrimaryButtonProps, SecondaryButtonProps {
   /**
@@ -38,12 +37,11 @@ export interface ActionBarItemProps extends PrimaryButtonProps, SecondaryButtonP
    * index at the end. Only set this for advanced cases.
    */
   id?: string;
-  isPrimaryButton?: boolean;
 }
 
-export const useActionBarItem = composeHooks(useActionBarOverflow, useActionBarButtonProps);
+export const useActionBarItem = composeHooks(useActionBarOverflow, useListItemRegister);
 
-export const ActionBarItem = createSubcomponent('button')({
+export const ActionBarItem = createSubcomponent(SecondaryButton)({
   displayName: 'ActionBar.Item',
   modelHook: useActionBarModel,
   elemPropsHook: useActionBarItem,
@@ -51,11 +49,6 @@ export const ActionBarItem = createSubcomponent('button')({
     Icon: SystemIcon,
     Text: EllipsisText,
   },
-})<ActionBarItemProps>(({children, isPrimaryButton, ...elemProps}, Element) => {
-  const Component = isPrimaryButton ? PrimaryButton : SecondaryButton;
-  return (
-    <Component as={Element} {...elemProps}>
-      {children}
-    </Component>
-  );
+})<ActionBarItemProps>((elemProps, Element) => {
+  return <Element {...elemProps} />;
 });

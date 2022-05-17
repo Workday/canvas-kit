@@ -445,7 +445,6 @@ const model = useActionBarModel({
   items: [{
     id: 'first,
     text: 'First Action',
-    onClick: () => console.log('first action')
   }]
 });
 
@@ -461,35 +460,30 @@ instruct React how to render each item.
 const [items] = React.useState<MyActionItem[]>([{
   id: 'first',
   text: 'First Action',
-  onClick: () => console.log('first action')
 }, {
   id: 'second',
   text: 'Second Action',
-  onClick: () => console.log('second action')
 }, {
   id: 'third',
   text: 'Third Action',
-  onClick: () => console.log('third action')
 }, {
   id: 'fourth',
   text: 'Fourth Action',
-  onClick: () => console.log('fourth action')
 }, {
   id: 'fifth',
   text: 'Fifth Action',
-  onClick: () => console.log('fifth action')
 }]);
 
 const model = useActionBarModel({items});
 
 <ActionBar model={model}>
   <ActionBar.List showOverflowButton={true}>
-    {item => <ActionBar.Item data-id={item.id}>{item.text}</ActionBar.Item>}
+    {item => <ActionBar.Item onClick={() => console.log(item.id)}>{item.text}</ActionBar.Item>}
   </ActionBar.List>
   <ActionBar.Menu.Popper>
     <ActionBar.Menu.Card maxWidth={300} maxHeight={200}>
       <ActionBar.Menu.List>
-        {item => <ActionBar.Menu.Item>{item.text}</ActionBar.Menu.Item>}
+        {item => <ActionBar.Menu.Item onClick={() => console.log(item.id)}>{item.text}</ActionBar.Menu.Item>}
       </ActionBar.Menu.List>
     </ActionBar.Menu.Card>
   </ActionBar.Menu.Popper>

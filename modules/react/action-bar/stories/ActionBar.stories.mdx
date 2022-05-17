@@ -30,27 +30,26 @@ yarn add @workday/canvas-kit-react
 `ActionBar.List` which should contains `ActionBar.Item`.
 
 In a basic example of an `ActionBar` there are two buttons. The primary action button should be used
-only once and left aligned if content is left to right, followed by secondary buttons. Tertiary buttons should not be used in the
-Action Bar.
+only once and left aligned if content is left to right, followed by secondary buttons. Tertiary
+buttons should not be used in the Action Bar.
 
 <ExampleCodeBlock code={Basic} />
 
 ### Icons Example
 
-`ActionBar.Item` renders a `PrimaryButton` or `SecondaryButton`, so it's possible to use other Button props with `ActionBar.Item` such
-as `icon` or `size`.
+`ActionBar.Item` renders a `PrimaryButton` or `SecondaryButton`, so it's possible to use other
+Button props with `ActionBar.Item` such as `icon` or `size`.
 
 <ExampleCodeBlock code={Icons} />
 
 ### Overflow Example
 
 `ActionBar` container can contain up to 3 actions and an Overflow Menu if there are more than 3
-actions, the other remaining actions should be placed into an Overflow Menu that is
-launched by clicking the Overflow Button.
+actions, the other remaining actions should be placed into an Overflow Menu that is launched by
+clicking the Overflow Button.
 
 To use the overflow behavior in ActionBar `showOverflowButton` prop should be passed to
-`ActionBar.List` and `ActionBar.Menu.Popper` component should be used inside `ActionBar`
-component.
+`ActionBar.List` and `ActionBar.Menu.Popper` component should be used inside `ActionBar` component.
 
 Also, ActionBar is a responsive component based on the width of its container. If the rendered
 actions exceed the width of the `ActionBar.List`, an overflow menu will be rendered. This only works
@@ -116,18 +115,18 @@ Undocumented props are spread to the underlying `HStack` element.
 
 #### Usage
 
-`ActionBar.Item` is a `button` element, by default it's a `SecondaryButton` unless `isPrimaryButton`
-prop passed.
+`ActionBar.Item` is a `button` element, by default it's a `SecondaryButton` unless an `as` prop
+passed.
 
 ```tsx
-<ActionBar.Item isPrimaryButton onClick={() => console.log('first action')}>
+<ActionBar.Item as={PrimaryButton} onClick={() => console.log('first action')}>
   First Action
 </ActionBar.Item>
 ```
 
 #### Props
 
-Undocumented props are spread to the underlying `SecondaryButton` or `PrimaryButton` component.
+Undocumented props are spread to the underlying `SecondaryButton` component.
 
 <ArgsTable of={ActionBar.Item} />
 

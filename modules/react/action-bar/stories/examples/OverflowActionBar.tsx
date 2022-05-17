@@ -2,21 +2,21 @@ import React from 'react';
 
 import {ActionBar, useActionBarModel} from '@workday/canvas-kit-react/action-bar';
 import {HStack} from '@workday/canvas-kit-react/layout';
-import {SecondaryButton} from '@workday/canvas-kit-react/button';
+import {PrimaryButton, SecondaryButton} from '@workday/canvas-kit-react/button';
 
 type MyActionItem = {
   id: string;
   text: React.ReactNode;
-  onClick: React.ReactEventHandler;
+  as?: any;
 };
 
 export const OverflowActionBar = () => {
   const [items] = React.useState<MyActionItem[]>([
-    {id: 'first', text: 'First Action', onClick: () => console.log('first action')},
-    {id: 'second', text: 'Second Action', onClick: () => console.log('second action')},
-    {id: 'third', text: 'Third Action', onClick: () => console.log('third action')},
-    {id: 'fourth', text: 'Fourth Action', onClick: () => console.log('fourth action')},
-    {id: 'fifth', text: 'Fifth Action', onClick: () => console.log('fifth action')},
+    {id: 'first', text: 'First Action'},
+    {id: 'second', text: 'Second Action'},
+    {id: 'third', text: 'Third Action'},
+    {id: 'fourth', text: 'Fourth Action'},
+    {id: 'fifth', text: 'Fifth Action'},
   ]);
 
   const model = useActionBarModel({items});
@@ -26,13 +26,22 @@ export const OverflowActionBar = () => {
     <div style={{width: containerWidth}}>
       <ActionBar model={model}>
         <ActionBar.List position="relative" showOverflowButton={true}>
-          {(item: MyActionItem) => <ActionBar.Item data-id={item.id}>{item.text}</ActionBar.Item>}
+          {(item: MyActionItem, index) => (
+            <ActionBar.Item
+              as={index === 0 ? PrimaryButton : undefined}
+              onClick={() => console.log(item.id)}
+            >
+              {item.text}
+            </ActionBar.Item>
+          )}
         </ActionBar.List>
         <ActionBar.Menu.Popper>
           <ActionBar.Menu.Card maxWidth={300} maxHeight={200}>
             <ActionBar.Menu.List>
               {(item: MyActionItem) => (
-                <ActionBar.Menu.Item onClick={item.onClick}>{item.text}</ActionBar.Menu.Item>
+                <ActionBar.Menu.Item onClick={() => console.log(item.id)}>
+                  {item.text}
+                </ActionBar.Menu.Item>
               )}
             </ActionBar.Menu.List>
           </ActionBar.Menu.Card>
