@@ -158,7 +158,7 @@ export const useMenuItem = composeHooks(
         onClick:
           model.state.mode === 'single'
             ? (event: React.SyntheticEvent) => {
-                model.events.hide({event});
+                model.events.hide(event);
               }
             : undefined,
       };

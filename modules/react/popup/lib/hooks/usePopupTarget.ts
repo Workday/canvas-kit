@@ -18,9 +18,9 @@ export const usePopupTarget = createElemPropsHook(usePopupModel)(({events, state
       }
 
       if (state.visibility !== 'hidden') {
-        events.hide({event});
+        events.hide(event);
       } else {
-        events.show({event});
+        events.show(event);
       }
     },
   };

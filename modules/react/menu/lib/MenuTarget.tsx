@@ -26,7 +26,7 @@ const useMenuTargetBase = createElemPropsHook(useMenuModel)(model => {
         case 'ArrowDown': // IE11
         case 'Up':
         case 'ArrowUp': // IE11
-          model.events.show({event});
+          model.events.show(event);
       }
     },
   };

@@ -19,7 +19,7 @@ export const useCloseOnEscape = createElemPropsHook(usePopupModel)(model => {
         (event.key === 'Esc' || event.key === 'Escape') &&
         PopupStack.isTopmost(model.state.stackRef.current!)
       ) {
-        model.events.hide({event});
+        model.events.hide(event);
       }
     },
     [model.state.stackRef, model.events]

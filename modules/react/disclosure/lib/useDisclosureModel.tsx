@@ -33,14 +33,14 @@ export const useDisclosureModel = createModelHook({
      * Start showing the disclosed content. If a DOM event triggered this event, the event data will
      * be passed along. This data can be used by guards and callbacks.
      */
-    show(data?: {event: Event | React.SyntheticEvent}) {
+    show(event?: Event | React.SyntheticEvent) {
       setVisibility('visible');
     },
     /**
      * Start hiding this disclosed content. If a DOM event triggered this event, the event data will
      * be passed along. This data can be used by guards and callbacks.
      */
-    hide(data?: {event: Event | React.SyntheticEvent}) {
+    hide(event?: Event | React.SyntheticEvent) {
       setVisibility('hidden');
     },
   };
