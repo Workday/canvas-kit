@@ -32,7 +32,7 @@ export const useCloseOnOutsideClick = createElemPropsHook(usePopupModel)(model =
         // because the target is outside `ref.current`
         !PopupStack.contains(model.state.stackRef.current, event.target as HTMLElement)
       ) {
-        model.events.hide({event});
+        model.events.hide(event);
       }
     },
     [model.state.stackRef, model.events]
