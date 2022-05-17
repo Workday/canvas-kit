@@ -8,7 +8,7 @@ export const useActionBarModel = createModelHook({
   defaultConfig: {
     ...useOverflowListModel.defaultConfig,
     /**
-     * Optional id for the whole `ActionBars` group. If not provided, a unique id will be created.
+     * Optional id for the whole `ActionBar` group. If not provided, a unique id will be created.
      * @default useUniqueId()
      */
     id: '',

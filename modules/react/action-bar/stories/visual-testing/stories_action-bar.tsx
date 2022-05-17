@@ -51,11 +51,11 @@ export const ActionBarStates = () => (
 
 export const ActionBarWithOverflowMenuStates = () => {
   const [items] = React.useState<MyActionItem[]>([
-    {id: 'first', text: 'First Button', onClick: () => console.log('first button clicked')},
-    {id: 'second', text: 'Second Button', onClick: () => console.log('second button clicked')},
-    {id: 'third', text: 'Third Button', onClick: () => console.log('third button clicked')},
-    {id: 'fourth', text: 'Fourth Button', onClick: () => console.log('fourth button clicked')},
-    {id: 'fifth', text: 'Fifth Button', onClick: () => console.log('fifth button clicked')},
+    {id: 'first', text: 'First Action', onClick: () => console.log('first action')},
+    {id: 'second', text: 'Second Action', onClick: () => console.log('second action')},
+    {id: 'third', text: 'Third Action', onClick: () => console.log('third action')},
+    {id: 'fourth', text: 'Fourth Action', onClick: () => console.log('fourth action')},
+    {id: 'fifth', text: 'Fifth Action', onClick: () => console.log('fifth action')},
   ]);
 
   const model = useActionBarModel({items});
@@ -63,7 +63,7 @@ export const ActionBarWithOverflowMenuStates = () => {
   return (
     <StaticStates>
       <ComponentStatesTable
-        rowProps={[{label: 'With Overflow Menu', props: {position: 'absolute'}}]}
+        rowProps={[{label: 'With Overflow Menu', props: {}}]}
         columnProps={[{label: ' ', props: {position: 'relative'}}]}
       >
         {props => (

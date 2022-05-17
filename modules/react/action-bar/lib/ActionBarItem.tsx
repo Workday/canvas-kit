@@ -1,13 +1,18 @@
 import * as React from 'react';
 import {composeHooks, EllipsisText, createSubcomponent} from '@workday/canvas-kit-react/common';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
-import {PrimaryButton, SecondaryButton, PrimaryButtonProps} from '@workday/canvas-kit-react/button';
+import {
+  PrimaryButton,
+  SecondaryButton,
+  PrimaryButtonProps,
+  SecondaryButtonProps,
+} from '@workday/canvas-kit-react/button';
 
 import {useActionBarModel} from './useActionBarModel';
 import {useActionBarOverflow} from './useActionBarOverflow';
 import {useActionBarButtonProps} from './useActionBarButtonProps';
 
-export interface ActionBarItemProps extends PrimaryButtonProps {
+export interface ActionBarItemProps extends PrimaryButtonProps, SecondaryButtonProps {
   /**
    * Optionally pass index to action item. This should be done if `ActionBar.Item` components were created
    * via a `Array::map` function. This index will ensure keyboard navigation works even if items are
@@ -18,7 +23,7 @@ export interface ActionBarItemProps extends PrimaryButtonProps {
    * The contents of the action item. This will be the accessible name of the action for screen readers.
    *
    * ```tsx
-   * <ActionBar.Item>First Tab</ActionBar.Item>
+   * <ActionBar.Item>First Action</ActionBar.Item>
    * ```
    */
   children: React.ReactNode;

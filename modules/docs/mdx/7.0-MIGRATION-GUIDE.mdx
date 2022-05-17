@@ -445,7 +445,7 @@ const model = useActionBarModel({
   items: [{
     id: 'first,
     text: 'First Action',
-    onClick: () => console.log('first clecked')
+    onClick: () => console.log('first action')
   }]
 });
 
@@ -460,24 +460,24 @@ instruct React how to render each item.
 ```
 const [items] = React.useState<MyActionItem[]>([{
   id: 'first',
-  text: 'First Button',
-  onClick: () => console.log('first button clicked')
+  text: 'First Action',
+  onClick: () => console.log('first action')
 }, {
   id: 'second',
-  text: 'Second Button',
-  onClick: () => console.log('second button clicked')
+  text: 'Second Action',
+  onClick: () => console.log('second action')
 }, {
   id: 'third',
-  text: 'Third Button',
-  onClick: () => console.log('third button clicked')
+  text: 'Third Action',
+  onClick: () => console.log('third action')
 }, {
   id: 'fourth',
-  text: 'Fourth Button',
-  onClick: () => console.log('fourth button clicked')
+  text: 'Fourth Action',
+  onClick: () => console.log('fourth action')
 }, {
   id: 'fifth',
-  text: 'Fifth Button',
-  onClick: () => console.log('fifth button clicked')
+  text: 'Fifth Action',
+  onClick: () => console.log('fifth action')
 }]);
 
 const model = useActionBarModel({items});
