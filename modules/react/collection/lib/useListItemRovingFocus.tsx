@@ -62,7 +62,7 @@ const hasOwnKey = <T extends object>(obj: T, key: any): key is keyof T => obj.ha
  * @see https://www.w3.org/TR/wai-aria-practices/#kbd_roving_tabindex
  */
 export const useListItemRovingFocus = createElemPropsHook(useCursorListModel)(
-  ({state, events, getId, navigation}, ref, elemProps: {'data-id'?: string} = {}) => {
+  ({state, events, getId, navigation}, ref, elemProps: {id?: string; 'data-id'?: string} = {}) => {
     // Tracks when this element has focus. If this item is removed while still focused, we have to
     // inform the model to move the cursor to the next item.
     const focusRef = React.useRef(false);
@@ -85,7 +85,9 @@ export const useListItemRovingFocus = createElemPropsHook(useCursorListModel)(
         }
         requestAnimationFrame(() => {
           document
-            .querySelector<HTMLElement>(`[id="${state.id}-${getIdRef.current(item)}"]`)
+            .querySelector<HTMLElement>(
+              `[data-focus-id="${`${state.id}-${getIdRef.current(item)}`}"]`
+            )
             ?.focus();
         });
 
@@ -132,7 +134,7 @@ export const useListItemRovingFocus = createElemPropsHook(useCursorListModel)(
       onClick() {
         events.goTo({id: elemProps['data-id']!});
       },
-      id: `${state.id}-${elemProps['data-id']}`,
+      'data-focus-id': `${state.id}-${elemProps['data-id']}`,
       tabIndex: !state.cursorId
         ? 0 // cursor isn't known yet, be safe and mark this as focusable
         : !!elemProps['data-id'] && state.cursorId === elemProps['data-id']
