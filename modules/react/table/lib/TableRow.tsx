@@ -1,6 +1,5 @@
 import * as React from 'react';
-import {CSSObject} from '@emotion/core';
-import styled from '@emotion/styled';
+import styled, {CSSObject} from '@emotion/styled';
 import {rgba} from 'polished';
 import {colors, space, spaceNumbers, statusColors} from '@workday/canvas-kit-react/tokens';
 import {borderColor, borderWidth, cellBorder} from './Table';
@@ -92,7 +91,16 @@ function makeBorderlessStyle(_bgColor: string): CSSObject {
   };
 }
 
-const Row = styled('tr')<TableRowProps>(
+/**
+ * Styled Table Row
+ * ---
+ * _The underlying styled `TableRow` component_
+ *
+ * This is temporarily being exported to allow consumers to wrap this styled component
+ * in their own functional component instead of using the existing `TableRow` class component.
+ * This export will likely be removed in a future major release.
+ */
+export const StyledTableRow = styled('tr')<TableRowProps>(
   {
     'th, td': {
       backgroundColor: colors.frenchVanilla100,
@@ -199,9 +207,9 @@ export default class TableRow extends React.Component<TableRowProps> {
     const {state, header, children, ...elemProps} = this.props;
 
     return (
-      <Row state={state} header={header} {...elemProps}>
+      <StyledTableRow state={state} header={header} {...elemProps}>
         {children}
-      </Row>
+      </StyledTableRow>
     );
   }
 }
