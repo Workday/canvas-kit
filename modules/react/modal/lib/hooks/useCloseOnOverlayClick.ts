@@ -34,7 +34,7 @@ export const useCloseOnOverlayClick = createElemPropsHook(usePopupModel)(model =
         elements[elements.length - 1] === model.state.stackRef.current &&
         elementsBetweenDialogAnBody.some(element => element === event.target)
       ) {
-        model.events.hide({event});
+        model.events.hide(event);
       }
     },
     [model.state.stackRef, model.events]

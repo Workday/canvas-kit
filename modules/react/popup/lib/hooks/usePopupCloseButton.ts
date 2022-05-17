@@ -7,8 +7,6 @@ import {usePopupModel} from './usePopupModel';
  */
 export const usePopupCloseButton = createElemPropsHook(usePopupModel)(({events}) => {
   return {
-    onClick: (event: React.MouseEvent) => {
-      events.hide({event});
-    },
+    onClick: events.hide,
   };
 });
