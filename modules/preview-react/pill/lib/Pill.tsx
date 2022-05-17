@@ -1,5 +1,7 @@
 import React from 'react';
+import {CSSObject} from '@emotion/react';
 
+import {BaseButton} from '@workday/canvas-kit-react/button';
 import {
   createContainer,
   focusRing,
@@ -7,6 +9,8 @@ import {
   styled,
   StyledType,
 } from '@workday/canvas-kit-react/common';
+import {BoxProps, boxStyleFn, HStack, Stack} from '@workday/canvas-kit-react/layout';
+import {borderRadius, colors, space, type} from '@workday/canvas-kit-react/tokens';
 
 import {usePillModel} from './usePillModel';
 
@@ -14,11 +18,7 @@ import {PillIcon} from './PillIcon';
 import {PillIconButton} from './PillIconButton';
 import {PillCount} from './PillCount';
 import {PillAvatar} from './PillAvatar';
-import {borderRadius, colors, space, type} from '@workday/canvas-kit-react/tokens';
-import {BoxProps, boxStyleFn, HStack, Stack} from '@workday/canvas-kit-react/layout';
-import {CSSObject} from '@emotion/react';
 import {PillLabel} from './PillLabel';
-import {BaseButton} from '@workday/canvas-kit-react/button';
 
 export interface PillProps extends BoxProps {
   /**
@@ -179,7 +179,7 @@ export const Pill = createContainer('button')({
       {variant === 'default' && (
         <StyledBasePill
           colors={getButtonPillColors()}
-          as="button"
+          as={Element}
           {...elemProps}
           disabled={model.state.disabled}
         >

@@ -66,18 +66,17 @@ You can render an icon inside the `Pill` with `Pill.Icon`. It will render a `plu
 
 #### Count
 
-The count appears after the label. It is usually associate to the label. If you have a category, the
+The count appears after the label. It is usually associated with the label. If you have a category, the
 count will dirrectly correlate to that category.
 
 <ExampleCodeBlock code={ClickablePillWithCount} />
 
 ### Removable Pills
 
-Removable Pills display an `X` icon after the label. They have a smaller, more specific focus state
-and click target to be more intentional about their actions and to avoid unintended removal of a
-Pill.
+Removable `Pill`s display an `X` icon after the label. They have a smaller, more specific focus state
+and click target to be more intentional about their actions and to avoid unintended removal.
 
-You can define a removable Pill by providing a `variant='removable'` prop.
+You can define a removable `Pill` by providing a `variant='removable'` prop.
 
 ```tsx
 <Pill variant="removable" onDelete={() => console.warn('clicked')}>
@@ -96,7 +95,7 @@ an `icon` prop to `Pill.IconButton`
 
 ### List of Pills
 
-Pills can often represent multiple pieces of information such as a filtered list of categories or
+`Pill`s can often represent multiple pieces of information such as a filtered list of categories or
 skills.
 
 In order to achieve this, use our `HStack` component to wrap each `Pill` and space them out
@@ -108,8 +107,8 @@ accordingly.
 
 ### Pill
 
-This component is the container component for a Pill. It also provides a React Context model for its
-sub components. Based on the `variant` prop this component will render different styled Pills.
+This is the container component for a `Pill`. It also provides a React context model for its
+subcomponents. Based on the `variant` prop this component will render different styled `Pill`s.
 
 #### Usage
 
@@ -119,17 +118,14 @@ Example of read only:
 <Pill variant="readOnly">This is a read only</Pill>
 ```
 
-If you give this component a `variant='default'` prop it will render as an interactive Pill which
-accepts subcomponents.
+By default, a `Pill` render an interactive element that accepts subcomponents.
 
 ```tsx
-<Pill variant="default" onClick={() => console.log('clicked')}>
+<Pill onClick={() => console.log('clicked')}>
   <Pill.Avatar /> Regina Skeltor
 </Pill>
-```
 
-If you give this component a `variant='removable'` it will render as a span and you can have a
-removable Pill that has a smaller click target to prevent users from accidentally delete something.
+If you set the `Pill` `variant` to `removable`, it will render a `<span>` element. You can then provide a `Pill.IconButton` that acts as the focus target. This creates a smaller, more intentional click target that prevents users from accidentally deleting an item.
 
 ```tsx
 <Pill variant="removable" onDelete={() => console.log('handle remove')}>
