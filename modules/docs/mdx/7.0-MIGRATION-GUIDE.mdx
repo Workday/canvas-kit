@@ -789,6 +789,65 @@ anyway since the buttons will no longer scroll with overflowed `Body` content.
 </Modal.Card>
 ```
 
+#### Popup Model
+
+In addition to the other [Model Changes](#model-changes), the `show` and `hide` events of all
+disclosure-type models has been updated to remove the extra event wrapper. This change allows
+developers to directly attach the `show` and `hide` events directly to React event handlers.
+
+Models affected:
+
+- `useDisclosureModel`
+- `usePopupModel`
+- `useModalModel`
+- `useDisclosureModel`
+
+```tsx
+// v6
+
+<button onClick={() => model.events.show()} /> // most use-cases look like this
+<button onClick={event => model.events.show({event})} />
+
+// v7
+<button onClick={model.events.show} />
+```
+
+Removing the object wrapper around the `event` allows us to directly pass the `show` or `hide` event
+to the `onClick` handler which is much more convenient. We couldn't find many uses of the `event` in
+the wild, so impact will be minimum. Most usage of `show` or `hide` events are called without
+`event`, so this change will not impact most people. There is no codemod for this change, because
+the usage is much more difficult to detect since most people pass a callback that doesn't take
+parameters.
+
+Guards and Callback signatures have also changed to remove the object wrapper around the `event`.
+The following v6 example includes the [Model Changes](#model-changes) which this change compounds
+upon.
+
+```tsx
+// v6
+const model = usePopupModel({
+  shouldShow({data: {event}, state}) {
+    console.log(event, state);
+  },
+  onShow({data: {event}, prevState}) {
+    console.log(event, prevState);
+  },
+});
+
+// v7
+const model = usePopupModel({
+  shouldShow(event, state) {
+    console.log(event, state);
+  },
+  onShow(event, prevState) {
+    console.log(event, prevState);
+  },
+});
+```
+
+🤖 The codemod will update all inline guards and callbacks like in this example. If a guard or
+callback was defined outside the model config block, it will not be covered by the codemod.
+
 ---
 
 ### Segmented Control
