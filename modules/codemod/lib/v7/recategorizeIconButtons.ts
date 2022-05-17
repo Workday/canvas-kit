@@ -132,7 +132,10 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
    * Add new required imports
    */
   const buttonImports = root.find(j.ImportDeclaration, {
-    source: {value: (value: string) => value.includes('@workday/canvas-kit-react')},
+    source: {
+      value: (value: string) =>
+        value === '@workday/canvas-kit-react' || value === '@workday/canvas-kit-react/button',
+    },
   });
 
   if (!buttonImports.length) {
