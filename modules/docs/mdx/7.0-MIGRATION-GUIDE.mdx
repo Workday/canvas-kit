@@ -435,17 +435,69 @@ The APIs for these promoted components remain unchanged.
 
 ### Action Bar
 
-We've updated `ActionBar` to use the
-[createComponent](/getting-started/for-developers/resources/creating-compound-components/#disclosurecontent-component)
-utility from our
-[common](https://github.com/Workday/canvas-kit/blob/ff77c5bd83e41c3ab2b9c55e41a8b7c1fde33a1b/modules/react/common/lib/utils/components.ts#L167)
-module; it now supports [ref forwarding](https://reactjs.org/docs/forwarding-refs.html) and using
-the `as` prop to change the rendered element.
+The ActionBar API changed to model API to support more generic behaviors to allow for other
+components to support responsive layouts using the same models and behaviors. It also allows to
+implement a responsive layout based on a container width
+([#1585](https://github.com/Workday/canvas-kit/pull/1585)).
 
-We've removed the `fixed` prop from `ActionBar`. It now uses the `position` prop (defaults to
-`fixed`) to set the container position.
+```
+const model = useActionBarModel({
+  items: [{
+    id: 'first,
+    text: 'First Action',
+    onClick: () => console.log('first clecked')
+  }]
+});
 
-🤖 The codemod will remove uses of the `fixed` prop from `ActionBar`.
+<ActionBar model={model} />
+```
+
+The ActionBar component can now handle responsive containers, but the support is not automatic. You
+must use the dynamic API, `showOverflowButton` prop in `ActionBar.List` and provide an overflow menu
+subcomponent. The dynamic API doesn't know the shape of your object, so render props must be used to
+instruct React how to render each item.
+
+```
+const [items] = React.useState<MyActionItem[]>([{
+  id: 'first',
+  text: 'First Button',
+  onClick: () => console.log('first button clicked')
+}, {
+  id: 'second',
+  text: 'Second Button',
+  onClick: () => console.log('second button clicked')
+}, {
+  id: 'third',
+  text: 'Third Button',
+  onClick: () => console.log('third button clicked')
+}, {
+  id: 'fourth',
+  text: 'Fourth Button',
+  onClick: () => console.log('fourth button clicked')
+}, {
+  id: 'fifth',
+  text: 'Fifth Button',
+  onClick: () => console.log('fifth button clicked')
+}]);
+
+const model = useActionBarModel({items});
+
+<ActionBar model={model}>
+  <ActionBar.List showOverflowButton={true}>
+    {item => <ActionBar.Item data-id={item.id}>{item.text}</ActionBar.Item>}
+  </ActionBar.List>
+  <ActionBar.Menu.Popper>
+    <ActionBar.Menu.Card maxWidth={300} maxHeight={200}>
+      <ActionBar.Menu.List>
+        {item => <ActionBar.Menu.Item>{item.text}</ActionBar.Menu.Item>}
+      </ActionBar.Menu.List>
+    </ActionBar.Menu.Card>
+  </ActionBar.Menu.Popper>
+</ActionBar>
+```
+
+🤖 The codemod will remove uses of the `fixed` prop from `ActionBar` and restructure component by
+creating `ActionBar.List` subcomponent and replacing all `ActionBar` children to it.
 
 ---
 
