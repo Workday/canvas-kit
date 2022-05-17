@@ -85,7 +85,9 @@ export const useListItemRovingFocus = createElemPropsHook(useCursorListModel)(
         }
         requestAnimationFrame(() => {
           document
-            .querySelector<HTMLElement>(`[id="${state.id}-${getIdRef.current(item)}"]`)
+            .querySelector<HTMLElement>(
+              `[data-focus-id="${`${state.id}-${getIdRef.current(item)}`}"]`
+            )
             ?.focus();
         });
 
@@ -132,7 +134,7 @@ export const useListItemRovingFocus = createElemPropsHook(useCursorListModel)(
       onClick() {
         events.goTo({id: elemProps['data-id']!});
       },
-      id: `${state.id}-${elemProps['data-id']}`,
+      'data-focus-id': `${state.id}-${elemProps['data-id']}`,
       tabIndex: !state.cursorId
         ? 0 // cursor isn't known yet, be safe and mark this as focusable
         : !!elemProps['data-id'] && state.cursorId === elemProps['data-id']

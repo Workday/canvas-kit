@@ -181,6 +181,7 @@ export const useTabsItem = composeHooks(
       return {
         type: 'button',
         role: 'tab',
+        id: `${state.id}-${name}`,
         'aria-selected': selected,
         'aria-controls': `tabpanel-${state.id}-${name}`,
       };
