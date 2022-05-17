@@ -2,18 +2,15 @@ import * as React from 'react';
 
 import {
   ExtractProps,
-  createComponent,
-  useModelContext,
+  createSubcomponent,
   styled,
   StyledType,
 } from '@workday/canvas-kit-react/common';
 import {Box} from '@workday/canvas-kit-react/layout';
 
-import {BannerModelContext} from './Banner';
-import {BannerModel, useBannerActionText} from './hooks';
+import {useBannerActionText, useBannerModel} from './hooks';
 
 export interface BannerActionTextProps extends ExtractProps<typeof Box, never> {
-  model?: BannerModel;
   /**
    * The text of the Banner action.
    * @default 'View All'
@@ -25,25 +22,18 @@ const StyledActionBarText = styled(Box.as('span'))<StyledType>({
   textDecoration: 'underline',
 });
 
-export const BannerActionText = createComponent('span')({
+export const BannerActionText = createSubcomponent('span')({
   displayName: 'Banner.ActionTextText',
-  Component: (
-    {children = 'View All', model, ...elemProps}: BannerActionTextProps,
-    ref,
-    Element
-  ) => {
-    const localModel = useModelContext(BannerModelContext, model);
-    const props = useBannerActionText(localModel, elemProps, ref);
-
-    return (
-      <StyledActionBarText
-        display={localModel.state.isSticky ? 'none' : 'inline'}
-        ref={ref}
-        as={Element}
-        {...props}
-      >
-        {children}
-      </StyledActionBarText>
-    );
-  },
+  modelHook: useBannerModel,
+  elemPropsHook: useBannerActionText,
+})<BannerActionTextProps>(({children = 'View All', ...elemProps}, Element, model) => {
+  return (
+    <StyledActionBarText
+      as={Element}
+      display={model.state.isSticky ? 'none' : 'inline'}
+      {...elemProps}
+    >
+      {children}
+    </StyledActionBarText>
+  );
 });

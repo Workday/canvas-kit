@@ -2,7 +2,7 @@ import * as React from 'react';
 import {CanvasGraphic, CanvasIconTypes} from '@workday/design-assets-types';
 import {CSSObject} from '@emotion/styled';
 import Svg, {SvgProps} from './Svg';
-import {createComponent} from '../../common';
+import {createComponent} from '@workday/canvas-kit-react/common';
 
 export interface GraphicStyles {
   /**

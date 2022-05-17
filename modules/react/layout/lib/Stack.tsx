@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
 import {createComponent, StyledType} from '@workday/canvas-kit-react/common';
-import {Box, BoxProps} from '@workday/canvas-kit-react/layout';
+import {Box, BoxProps} from './Box';
 import {Flex, FlexProps} from './Flex';
 import {getValidChildren} from './utils/getValidChildren';
 import {stack, StackStyleProps} from './utils/stack';
@@ -40,7 +40,9 @@ export const Stack = createComponent('div')({
     return (
       <StyledStack as={Element} ref={ref} flexDirection="row" {...elemProps}>
         {shouldWrapChildren
-          ? validChildren.map(child => <StackItem>{child}</StackItem>)
+          ? validChildren.map((child, index) => (
+              <StackItem key={child.props.id || index}>{child}</StackItem>
+            ))
           : validChildren}
       </StyledStack>
     );

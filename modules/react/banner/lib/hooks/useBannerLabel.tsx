@@ -1,11 +1,11 @@
-import {createHook} from '@workday/canvas-kit-react/common';
-import {BannerModel} from './useBannerModel';
+import {createElemPropsHook} from '@workday/canvas-kit-react/common';
+import {useBannerModel} from './useBannerModel';
 
 /**
  * Adds the necessary props to a `Label` component.
  * Used by the Banner.Label subcomponent
  */
-export const useBannerLabel = createHook(({state}: BannerModel) => {
+export const useBannerLabel = createElemPropsHook(useBannerModel)(({state}) => {
   return {
     id: `label-${state.id}`,
   };

@@ -6,8 +6,8 @@ import {Tabs, useTabsModel} from '@workday/canvas-kit-react/tabs';
 
 export const HoistedModel = () => {
   const model = useTabsModel({
-    onSelect({data, prevState}) {
-      console.log('Selected Tab', data, prevState);
+    onSelect(data, prevState) {
+      console.log('Selected Tab', data.id, prevState);
     },
   });
 
@@ -15,14 +15,14 @@ export const HoistedModel = () => {
     <>
       <Tabs model={model}>
         <Tabs.List>
-          <Tabs.Item name="first">First Tab</Tabs.Item>
-          <Tabs.Item name="second">Second Tab</Tabs.Item>
-          <Tabs.Item name="third">Third Tab</Tabs.Item>
+          <Tabs.Item data-id="first">First Tab</Tabs.Item>
+          <Tabs.Item data-id="second">Second Tab</Tabs.Item>
+          <Tabs.Item data-id="third">Third Tab</Tabs.Item>
         </Tabs.List>
         <div style={{marginTop: space.m}}>
-          <Tabs.Panel name="first">Contents of First Tab</Tabs.Panel>
-          <Tabs.Panel name="second">Contents of Second Tab</Tabs.Panel>
-          <Tabs.Panel name="third">Contents of Third Tab</Tabs.Panel>
+          <Tabs.Panel data-id="first">Contents of First Tab</Tabs.Panel>
+          <Tabs.Panel data-id="second">Contents of Second Tab</Tabs.Panel>
+          <Tabs.Panel data-id="third">Contents of Third Tab</Tabs.Panel>
         </div>
       </Tabs>
       <SecondaryButton

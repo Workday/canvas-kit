@@ -3,7 +3,7 @@ import {StaticStates} from '@workday/canvas-kit-react/common';
 import {ComponentStatesTable, permutateProps} from '@workday/canvas-kit-labs-react/common';
 import {withSnapshotsEnabled, customColorTheme} from '../../../../../utils/storybook';
 
-import {Select, SelectOption} from '../../../select';
+import {Select, SelectOption} from '@workday/canvas-kit-react/select';
 
 export default withSnapshotsEnabled({
   title: 'Testing/React/Inputs/Select',

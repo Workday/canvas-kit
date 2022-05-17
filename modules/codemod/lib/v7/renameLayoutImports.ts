@@ -103,13 +103,14 @@ const transform: Transform = (file, api) => {
     });
   } else {
     // create new import
-
-    foundImport[0].insertBefore(
-      j.importDeclaration(
-        reactLayoutSpecifiers.map(mapToSpecifiers),
-        j.stringLiteral('@workday/canvas-kit-react/layout')
-      )
-    );
+    if (foundImport.length) {
+      foundImport[0].insertBefore(
+        j.importDeclaration(
+          reactLayoutSpecifiers.map(mapToSpecifiers),
+          j.stringLiteral('@workday/canvas-kit-react/layout')
+        )
+      );
+    }
   }
 
   foundImport.forEach(importPath => {
