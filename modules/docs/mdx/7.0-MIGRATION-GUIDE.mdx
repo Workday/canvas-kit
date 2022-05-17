@@ -814,8 +814,8 @@ The following models were affected:
 Removing the object wrapper around the `event` allows us to directly pass the `show` or `hide` event
 to the `onClick` handler which is much more convenient. We couldn't find many uses of the `event` in
 the wild, so the impact will be minimal. Most usage of `show` or `hide` events are called without
-`event`, so this change will not impact most people. There is **no** codemod for this change, because
-the usage is very difficult to detect since most people pass a callback that doesn't take
+`event`, so this change will not impact most people. There is **no** codemod for this change,
+because the usage is very difficult to detect since most people pass a callback that doesn't take
 parameters.
 
 Guards and callback signatures have also changed to remove the object wrapper around the `event`.
@@ -844,8 +844,9 @@ const model = usePopupModel({
 });
 ```
 
-🤖 The codemod will update all inline guards and callbacks defined like they are in this example. If a guard or
-callback was defined outside the model config block, it will not be covered by the codemod.
+🤖 The codemod will update all inline guards and callbacks defined like they are in this example. If
+a guard or callback was defined outside the model config block, it will not be covered by the
+codemod.
 
 ---
 
