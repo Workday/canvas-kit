@@ -440,54 +440,65 @@ components to support responsive layouts using the same models and behaviors. It
 implement a responsive layout based on a container width
 ([#1585](https://github.com/Workday/canvas-kit/pull/1585)).
 
-```
+```tsx
 const model = useActionBarModel({
-  items: [{
-    id: 'first,
-    text: 'First Action',
-  }]
+  items: [
+    {
+      id: 'first',
+      text: 'First Action',
+    },
+  ],
 });
 
-<ActionBar model={model} />
+<ActionBar model={model} />;
 ```
 
 The ActionBar component can now handle responsive containers, but the support is not automatic. You
-must use the dynamic API, `showOverflowButton` prop in `ActionBar.List` and provide an overflow menu
-subcomponent. The dynamic API doesn't know the shape of your object, so render props must be used to
-instruct React how to render each item.
+must use the dynamic API and provide an overflow menu subcomponent. The dynamic API doesn't know the
+shape of your object, so render props must be used to instruct React how to render each item.
 
-```
-const [items] = React.useState<MyActionItem[]>([{
-  id: 'first',
-  text: 'First Action',
-}, {
-  id: 'second',
-  text: 'Second Action',
-}, {
-  id: 'third',
-  text: 'Third Action',
-}, {
-  id: 'fourth',
-  text: 'Fourth Action',
-}, {
-  id: 'fifth',
-  text: 'Fifth Action',
-}]);
+```tsx
+const [items] = React.useState<MyActionItem[]>([
+  {
+    id: 'first',
+    text: 'First Action',
+  },
+  {
+    id: 'second',
+    text: 'Second Action',
+  },
+  {
+    id: 'third',
+    text: 'Third Action',
+  },
+  {
+    id: 'fourth',
+    text: 'Fourth Action',
+  },
+  {
+    id: 'fifth',
+    text: 'Fifth Action',
+  },
+]);
 
 const model = useActionBarModel({items});
 
 <ActionBar model={model}>
-  <ActionBar.List showOverflowButton={true}>
+  <ActionBar.List>
     {item => <ActionBar.Item onClick={() => console.log(item.id)}>{item.text}</ActionBar.Item>}
   </ActionBar.List>
   <ActionBar.Menu.Popper>
     <ActionBar.Menu.Card maxWidth={300} maxHeight={200}>
       <ActionBar.Menu.List>
-        {item => <ActionBar.Menu.Item onClick={() => console.log(item.id)}>{item.text}</ActionBar.Menu.Item>}
+        {item => (
+          <ActionBar.Menu.Item onClick={() => console.log(item.id)}>
+            {item.text}
+          </ActionBar.Menu.Item>
+        )}
       </ActionBar.Menu.List>
     </ActionBar.Menu.Card>
   </ActionBar.Menu.Popper>
-</ActionBar>
+</ActionBar>;
 ```
 
 🤖 The codemod will remove uses of the `fixed` prop from `ActionBar` and restructure component by

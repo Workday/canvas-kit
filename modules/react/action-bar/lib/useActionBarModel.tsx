@@ -34,9 +34,25 @@ export const useActionBarModel = createModelHook({
     })
   );
 
+  let hiddenIds = model.state.hiddenIds;
+  let nonInteractiveIds = model.state.nonInteractiveIds;
+  const totalSize = model.state.items.length;
+
+  // Only show a maximum of 3 buttons
+  if (totalSize - hiddenIds.length >= 3) {
+    hiddenIds = items.slice(3, totalSize).map(getId);
+  }
+
+  // Always show the first button and make sure it is interactive
+  if (totalSize - hiddenIds.length === 0) {
+    hiddenIds = items.slice(1, totalSize).map(getId);
+    nonInteractiveIds = [];
+  }
+
   const state = {
     ...model.state,
-    getId,
+    hiddenIds,
+    nonInteractiveIds,
     orientation: config.orientation || 'horizontal',
   };
 

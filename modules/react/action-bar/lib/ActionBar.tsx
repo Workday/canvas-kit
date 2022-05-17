@@ -13,7 +13,7 @@ export interface ActionBarProps {
   children: React.ReactNode;
 }
 
-export const ActionBar = createContainer('div')({
+export const ActionBar = createContainer()({
   displayName: 'ActionBar',
   modelHook: useActionBarModel,
   subComponents: {

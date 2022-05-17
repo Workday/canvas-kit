@@ -31,13 +31,12 @@ export interface ActionBarListProps<T = unknown>
    * </ActionBar.List>
    */
   children: ((item: T) => React.ReactNode) | React.ReactNode;
-  showOverflowButton?: boolean;
 }
 
 const ResponsiveHStack = styled(HStack)<ActionBarListProps & StyledType>(({theme}) => ({
   [theme.canvas.breakpoints.down('s')]: {
     padding: space.s,
-    '> *:not(span)': {
+    '> *': {
       flex: 1,
     },
   },
@@ -49,7 +48,7 @@ export const ActionBarList = createSubcomponent('div')({
   displayName: 'ActionBar.List',
   modelHook: useActionBarModel,
   elemPropsHook: useActionBarList,
-})<ActionBarListProps>(({children, showOverflowButton, ...elemProps}, Element, model) => {
+})<ActionBarListProps>(({children, ...elemProps}, Element, model) => {
   return (
     <ResponsiveHStack
       as={Element}
@@ -65,7 +64,7 @@ export const ActionBarList = createSubcomponent('div')({
       {...elemProps}
     >
       {useListRenderItems(model, children)}
-      {showOverflowButton && <ActionBar.OverflowButton />}
+      <ActionBar.OverflowButton />
     </ResponsiveHStack>
   );
 });

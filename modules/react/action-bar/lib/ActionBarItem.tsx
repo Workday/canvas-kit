@@ -2,10 +2,13 @@ import * as React from 'react';
 import {composeHooks, EllipsisText, createSubcomponent} from '@workday/canvas-kit-react/common';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
-import {useListItemRegister} from '@workday/canvas-kit-react/collection';
+import {
+  useListItemRegister,
+  useListItemRovingFocus,
+  useOverflowListItemMeasure,
+} from '@workday/canvas-kit-react/collection';
 
 import {useActionBarModel} from './useActionBarModel';
-import {useActionBarOverflow} from './useActionBarOverflow';
 
 export interface ActionBarItemProps {
   /**
@@ -24,7 +27,11 @@ export interface ActionBarItemProps {
   'data-id'?: string;
 }
 
-export const useActionBarItem = composeHooks(useActionBarOverflow, useListItemRegister);
+export const useActionBarItem = composeHooks(
+  useOverflowListItemMeasure,
+  useListItemRovingFocus,
+  useListItemRegister
+);
 
 export const ActionBarItem = createSubcomponent(SecondaryButton)({
   displayName: 'ActionBar.Item',

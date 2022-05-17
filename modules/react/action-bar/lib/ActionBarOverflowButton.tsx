@@ -1,4 +1,5 @@
 import * as React from 'react';
+import styled from '@emotion/styled';
 
 import {relatedActionsIcon} from '@workday/canvas-system-icons-web';
 import {
@@ -6,6 +7,7 @@ import {
   composeHooks,
   subModelHook,
   createSubcomponent,
+  StyledType,
 } from '@workday/canvas-kit-react/common';
 import {useOverflowListTarget} from '@workday/canvas-kit-react/collection';
 
@@ -21,14 +23,14 @@ export const useActionBarOverflowButton = composeHooks(
   subModelHook((m: ReturnType<typeof useActionBarModel>) => m.menu, useMenuTarget)
 );
 
+const StyledSecondaryButton = styled(SecondaryButton)<StyledType>({
+  flex: 0,
+});
+
 export const ActionBarOverflowButton = createSubcomponent('button')({
   displayName: 'ActionBar.OverflowButton',
   modelHook: useActionBarModel,
   elemPropsHook: useActionBarOverflowButton,
-})(elemProps => {
-  return (
-    <span>
-      <SecondaryButton icon={relatedActionsIcon} {...elemProps} />
-    </span>
-  );
+})((elemProps, Element) => {
+  return <StyledSecondaryButton as={Element} icon={relatedActionsIcon} {...elemProps} />;
 });

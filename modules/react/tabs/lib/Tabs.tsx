@@ -44,9 +44,5 @@ export const Tabs = createContainer()({
     Menu,
   },
 })<TabsProps>(({children}, _, model) => {
-  return (
-    <>
-      <Menu model={model.menu}>{children}</Menu>
-    </>
-  );
+  return <Menu model={model.menu}>{children}</Menu>;
 });
