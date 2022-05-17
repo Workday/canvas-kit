@@ -119,7 +119,7 @@ components to support responsive layouts using the same models and behaviors. It
 implement a responsive layout based on a container width
 ([#1325](https://github.com/Workday/canvas-kit/pull/1585)).
 
-````
+```
 const model = useActionBarModel({
   items: [{
     id: 'first,
@@ -129,30 +129,32 @@ const model = useActionBarModel({
 });
 
 <ActionBar model={model} />
+```
 
-The ActionBar component can now handle responsive containers, but the support is not automatic. You must
-use the dynamic API, `showOverflowButton` prop in `ActionBar.List` and provide an overflow menu subcomponent.
-The dynamic API doesn't know the shape of your object, so render props must be used to instruct React how to render each item.
+The ActionBar component can now handle responsive containers, but the support is not automatic. You
+must use the dynamic API, `showOverflowButton` prop in `ActionBar.List` and provide an overflow menu
+subcomponent. The dynamic API doesn't know the shape of your object, so render props must be used to
+instruct React how to render each item.
 
 ```
-const [items] = React.useState<MyActionItem[]>([
-  {id: 'first', text: 'First Button', onClick: () => console.log('first button clicked')},
-  {id: 'second', text: 'Second Button', onClick: () => console.log('second button clicked')},
-  {id: 'third', text: 'Third Button', onClick: () => console.log('third button clicked')},
-  {id: 'fourth', text: 'Fourth Button', onClick: () => console.log('fourth button clicked')},
-  {id: 'fifth', text: 'Fifth Button', onClick: () => console.log('fifth button clicked')},
-]);
+
+const [items] = React.useState<MyActionItem[]>([ {id: 'first', text: 'First Button', onClick: () =>
+console.log('first button clicked')}, {id: 'second', text: 'Second Button', onClick: () =>
+console.log('second button clicked')}, {id: 'third', text: 'Third Button', onClick: () =>
+console.log('third button clicked')}, {id: 'fourth', text: 'Fourth Button', onClick: () =>
+console.log('fourth button clicked')}, {id: 'fifth', text: 'Fifth Button', onClick: () =>
+console.log('fifth button clicked')}, ]);
 
 const model = useActionBarModel({items});
 
 <ActionBar model={model}>
   <ActionBar.List showOverflowButton={true}>
-    {(item) => <ActionBar.Item data-id={item.id}>{item.text}</ActionBar.Item>}
+    {item => <ActionBar.Item data-id={item.id}>{item.text}</ActionBar.Item>}
   </ActionBar.List>
   <ActionBar.Menu.Popper>
     <ActionBar.Menu.Card maxWidth={300} maxHeight={200}>
       <ActionBar.Menu.List>
-        {(item) => <ActionBar.Menu.Item>{item.text}</ActionBar.Menu.Item>}
+        {item => <ActionBar.Menu.Item>{item.text}</ActionBar.Menu.Item>}
       </ActionBar.Menu.List>
     </ActionBar.Menu.Card>
   </ActionBar.Menu.Popper>
@@ -160,7 +162,7 @@ const model = useActionBarModel({items});
 ```
 
 🤖 The codemod will remove uses of the `fixed` prop from `ActionBar` and restructure component by
-creating `ActionBar.List` component and replacing all children to it.
+creating `ActionBar.List` subcomponent and replacing all `ActionBar` children to it.
 
 ## Status Indicator Width
 
@@ -173,7 +175,7 @@ word.
 
 ```tsx
 <StatusIndicator label="Slightly Longer Status" type={StatusIndicator.Type.Gray} maxWidth={250} />
-````
+```
 
 ## Buttons
 
