@@ -28,7 +28,6 @@ export const OverflowActionBar = () => {
         <ActionBar.List position="relative" showOverflowButton={true}>
           {(item: MyActionItem, index) => (
             <ActionBar.Item
-              id={item.id}
               as={index === 0 ? PrimaryButton : undefined}
               onClick={() => console.log(item.id)}
             >
@@ -40,7 +39,7 @@ export const OverflowActionBar = () => {
           <ActionBar.Menu.Card maxWidth={300} maxHeight={200}>
             <ActionBar.Menu.List>
               {(item: MyActionItem) => (
-                <ActionBar.Menu.Item onClick={() => console.log(item.id)} id={item.id}>
+                <ActionBar.Menu.Item onClick={() => console.log(item.id)}>
                   {item.text}
                 </ActionBar.Menu.Item>
               )}
