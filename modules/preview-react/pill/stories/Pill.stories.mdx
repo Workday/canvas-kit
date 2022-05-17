@@ -1,0 +1,243 @@
+import {Meta} from '@storybook/addon-docs';
+import {Specifications} from '@workday/canvas-kit-docs';
+
+import {Pill} from '@workday/canvas-kit-preview-react/pill';
+
+import {WithReadOnly} from './examples/WithReadOnly';
+import {WithAvatar} from './examples/WithAvatar';
+import {Basic} from './examples/Basic';
+import {WithCount} from './examples/WithCount';
+import {WithRemovable} from './examples/WithRemovable';
+import {WithList} from './examples/WithList';
+
+<Meta title="Preview/Pill/React" component={Pill} />
+
+# Canvas Kit Pill
+
+`Pill`s are static or interactive indicators that allow users to input, filter, or label
+information.
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-preview-react
+```
+
+## Usage
+
+`Pill`s are used to visually label objects on a page for quick recognition. They’re offered as both
+static (read-only) and interactive elements. They allow users to filter a list or table, or label
+information to help with scanning and organization.
+
+### Basic Pills
+
+By default a Pill is considered interactive, therefore it's default variant is `default`.All leading
+elements (icons or avatars) are intended to be descriptive, helping support the label. Do not rely
+on the leading element to indicate the interaction behavior.
+
+#### Icon
+
+You can render an icon inside the `Pill` with `Pill.Icon`. It will render a `plusIcon` by default,
+but it can be customized by providing an icon to the `icon` prop. Because it uses `SystemIcon` under
+the hood, you also have to all `SystemIconProps`.
+
+<ExampleCodeBlock code={Basic} />
+
+#### Avatar
+
+You can render an avatar image inside the `Pill` with `Pill.Avatar`. It should appear before the
+`Pill` text. Because it uses `Avatar` under the hood, you also have access to all `AvatarProps`.
+
+<ExampleCodeBlock code={WithAvatar} />
+
+#### Count
+
+The count appears after the label. It is usually associated with the label. If you have a category,
+the count will dirrectly correlate to that category.
+
+<ExampleCodeBlock code={WithCount} />
+
+### Read Only
+
+If the `Pill` has `variant='readOnly'`, it will look like a read-only `Pill`. This is a
+non-interactive element that is used to display information.
+
+> **_NOTE:_** `maxWidth` measures the width of the `Pill.Label` (or text) and not the width of the
+> entire `Pill`. By default, this `maxWidth` is set to `200px` and the text will be truncated with
+> an ellipsis and render an OverflowTooltip on hover and focus. This max width can be changed by
+> providing a `maxWidth` prop on the Pill.
+
+<ExampleCodeBlock code={WithReadOnly} />
+
+### Removable Pills
+
+Removable `Pill`s display an `X` icon after the label. They have a smaller, more specific focus
+state and click target to be more intentional about their actions and to avoid unintended removal.
+
+You can define a removable `Pill` by providing a `variant='removable'` prop.
+
+```tsx
+<Pill variant="removable">
+  Pink Shirts
+  <Pill.IconButton onClick={() => console.warn('clicked')} />
+</Pill>
+```
+
+In this case, we use a `Pill.IconButton` because the `X` becomes the focusable and clickable
+element.
+
+The default icon for `Pill.IconButton` is `xSmallIcon` but this can also be overwritten by passing
+an `icon` prop to `Pill.IconButton`
+
+<ExampleCodeBlock code={WithRemovable} />
+
+### List of Pills
+
+`Pill`s can often represent multiple pieces of information such as a filtered list of categories or
+skills.
+
+In order to achieve this, use our `HStack` component to wrap each `Pill` and space them out
+accordingly.
+
+<ExampleCodeBlock code={WithList} />
+
+## Components
+
+### Pill
+
+By default, a `Pill` renders an interactive element that accepts subcomponents. By "interactive" we
+mean that the Pill container is a focusable element (a `<button>`). All leading elements (icons or
+avatars) are intended to be descriptive, helping support the label. They should not receive focus.
+
+`Pill` is the container component. It also provides a React context model for its subcomponents.
+Based on the `variant` prop this component will render different styled `Pill`s.
+
+#### Usage
+
+Example of read only:
+
+```tsx
+<Pill variant="readOnly">This is a read only</Pill>
+```
+
+Example of interactive:
+
+```tsx
+<Pill onClick={() => console.log('clicked')}>
+  <Pill.Avatar /> Regina Skeltor
+</Pill>
+```
+
+Example of removable:
+
+```tsx
+<Pill variant="removable">
+  <Pill.Avatar /> Regina Skeltor
+  <Pill.IconButton onClick={() => console.log('clicked')} />
+</Pill>
+```
+
+If you set the `Pill` `variant` to `removable`, it will render a `<span>` element. You can then
+provide a `Pill.IconButton` that acts as the focus target. This creates a smaller, more intentional
+click target that prevents users from accidentally deleting an item.
+
+```tsx
+<Pill variant="removable">
+  Shoes
+  <Pill.IconButton onClick={() => console.log('handle remove')} />
+</Pill>
+```
+
+#### Props
+
+<ArgsTable of={Pill} />
+
+### Pill.Avatar
+
+This component renders an avatar. It supports all props of the `Avatar` component.
+
+#### Usage
+
+```tsx
+<Pill variant="removable">
+  <Pill.Avatar url={avatarUrl} />
+  Regina Skeltor
+  <Pill.IconButton onClick={() => console.log('handle remove')} />
+</Pill>
+```
+
+#### Props
+
+<ArgsTable of={Pill.Avatar} />
+
+### Pill.Count
+
+This component renders its `children` as the count.
+
+#### Usage
+
+```tsx
+<Pill onClick={() => console.warn('clicked')}>
+  Shoes
+  <Pill.Count>30</Pill.Count>
+</Pill>
+```
+
+#### Props
+
+<ArgsTable of={Pill.Count} />
+
+### Pill.Icon
+
+This component renders an `icon`. It not be used with the `default` styling – not `readOnly` or
+`removable` variants. By default it renders a `plusIcon` but it can be overridden by providing an
+icon to the `icon` prop.
+
+#### Usage
+
+```tsx
+<Pill onClick={() => console.warn('clicked')}>
+  <Pill.Icon />
+  <Pill.Label>Regina Skeltor</Pill.Label>
+</Pill>
+```
+
+#### Props
+
+<ArgsTable of={Pill.Icon} />
+
+### Pill.IconButton
+
+This component renders a custom icon button. It is only intended to be used with the `removable`
+variant. By default, it renders a `xSmallIcon` but can be overridden by providing an icon to the
+`icon` prop.
+
+#### Usage
+
+```tsx
+<Pill variant="removable">
+  Pink Shirts
+  <Pill.IconButton onClick={() => console.warn('clicked')} />
+</Pill>
+```
+
+#### Props
+
+<ArgsTable of={Pill.IconButton} />
+
+### Pill.Label
+
+This component renders a `<span>` that automatically handles overflow by rendering a tooltip.
+There's no need to use this component directly since the overflow is handled for you automatically.
+
+#### Usage
+
+```tsx
+<Pill variant="readOnly">
+  <Pill.Label>Read-only</Pill.Label>
+</Pill>
+```
+
+#### Props
+
+<ArgsTable of={Pill.Label} />
