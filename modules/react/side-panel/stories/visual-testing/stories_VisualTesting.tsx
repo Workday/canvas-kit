@@ -2,9 +2,12 @@ import React from 'react';
 import {StaticStates} from '@workday/canvas-kit-react/common';
 import {ComponentStatesTable} from '@workday/canvas-kit-labs-react/common';
 import {withSnapshotsEnabled} from '../../../../../utils/storybook';
-import {SidePanel} from '../../index';
+import {
+  SidePanel,
+  SidePanelBackgroundColor,
+  SidePanelOpenDirection,
+} from '@workday/canvas-kit-react/side-panel';
 import {space} from '@workday/canvas-kit-react/tokens';
-import {SidePanelBackgroundColor, SidePanelOpenDirection} from '../../lib/SidePanel';
 
 export default withSnapshotsEnabled({
   title: 'Testing/React/Containers/Side Panel',

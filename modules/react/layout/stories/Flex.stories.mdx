@@ -9,27 +9,38 @@ import {FlexStyle} from './examples/PropTables.splitprops.tsx';
 
 <Meta title="Components/Containers/Layout/Flex" component={Flex} />
 
-# Flex
+# Canvas Kit Flex
 
 `Flex` is a low-level layout component that provides a common, ergonomic API for building
 one-dimensional layouts with
 [CSS Flexbox](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Flexbox).
 
-## Table of Contents
+## Installation
 
-- [Flex](#flex)
-  - [Table of Contents](#table-of-contents)
-  - [Usage](#usage)
-  - [What's the difference between `Flex` and `Box`?](#whats-the-difference-between-flex-and-box)
-  - [Flex Props](#flex-props)
-  - [Examples](#examples)
-  - [Exhaustive Prop List](#exhaustive-prop-list)
+```sh
+yarn add @workday/canvas-kit-react
+```
 
 ## Usage
 
+### Basic Example
+
 <ExampleCodeBlock code={Usage} />
 
-## What's the difference between `Flex` and `Box`?
+### Rows and Columns
+
+You can nest `Flex` components to build layouts with rows and columns.
+
+<ExampleCodeBlock code={FlexLayout} />
+
+### Small Containers
+
+You can also use `Flex` to create layouts within smaller containers, such as this card example
+below:
+
+<ExampleCodeBlock code={FlexCard} />
+
+### Flex vs. Box
 
 `Flex` is built with `Box` and has access to all `BoxProps`. The main differences between `Box` and
 `Flex` are:
@@ -52,17 +63,6 @@ through style props as well. There are seven flex container props:
 
 <ArgsTable of={FlexStyle} />
 
-## Examples
-
-You can nest `Flex` components to build layouts with rows and columns.
-
-<ExampleCodeBlock code={FlexLayout} />
-
-You can also use `Flex` to create layouts within smaller containers, such as this card example
-below:
-
-<ExampleCodeBlock code={FlexCard} />
-
-## Exhaustive Prop List
+### Flex Props (Exhaustive List)
 
 <ArgsTable of={Flex} />

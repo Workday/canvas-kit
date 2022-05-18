@@ -9,21 +9,11 @@ import {
   space,
   type,
 } from '@workday/canvas-kit-react/tokens';
-import {
-  createComponent,
-  ExtractProps,
-  useModelContext,
-  useTheme,
-} from '@workday/canvas-kit-react/common';
+import {createSubcomponent, ExtractProps, useTheme} from '@workday/canvas-kit-react/common';
 import {useThemedRing} from '@workday/canvas-kit-labs-react/common';
 import {FormField} from '@workday/canvas-kit-preview-react/form-field';
 
-import {TextInputModelContext} from './TextInput';
-import {useTextInputField, TextInputModel} from './hooks';
-
-export interface TextInputFieldProps extends ExtractProps<typeof FormField.Input, never> {
-  model?: TextInputModel;
-}
+import {useTextInputField, useTextInputModel} from './hooks';
 
 const baseStyles: CSSProperties = {
   ...type.levels.subtext.large,
@@ -50,38 +40,36 @@ const baseStyles: CSSProperties = {
   },
 };
 
-export const TextInputField = createComponent('input')({
+export const TextInputField = createSubcomponent('input')({
   displayName: 'TextInput.Field',
-  Component: ({model, ...elemProps}: TextInputFieldProps, ref) => {
-    const localModel = useModelContext(TextInputModelContext, model);
-    const props = useTextInputField(localModel, elemProps, ref);
+  modelHook: useTextInputModel,
+  elemPropsHook: useTextInputField,
+})<ExtractProps<typeof FormField.Input, never>>((elemProps, Element, model) => {
+  const theme = useTheme();
+  const errorRing = useThemedRing('error');
 
-    const theme = useTheme();
-    const errorRing = useThemedRing('error');
+  const focusStyles = model.state.hasError
+    ? errorRing
+    : {
+        '&:focus:not([disabled])': {
+          borderColor: theme.canvas.palette.common.focusOutline,
+          boxShadow: `inset 0 0 0 1px ${theme.canvas.palette.common.focusOutline}`,
+        },
+      };
 
-    const focusStyles = localModel.state.hasError
-      ? errorRing
-      : {
-          '&:focus:not([disabled])': {
-            borderColor: theme.canvas.palette.common.focusOutline,
-            boxShadow: `inset 0 0 0 1px ${theme.canvas.palette.common.focusOutline}`,
-          },
-        };
-
-    return (
-      <FormField.Input
-        as="input"
-        css={[baseStyles, focusStyles]}
-        padding={space.xxs}
-        margin={0}
-        display="block"
-        height="40px"
-        minWidth="280px"
-        border={`1px solid ${inputColors.border}`}
-        backgroundColor={inputColors.background}
-        borderRadius={borderRadius.m}
-        {...props}
-      />
-    );
-  },
+  return (
+    <FormField.Input
+      as="input"
+      css={[baseStyles, focusStyles]}
+      padding={space.xxs}
+      margin={0}
+      display="block"
+      height="40px"
+      minWidth="280px"
+      border={`1px solid ${inputColors.border}`}
+      backgroundColor={inputColors.background}
+      borderRadius={borderRadius.m}
+      {...elemProps}
+    />
+  );
 });

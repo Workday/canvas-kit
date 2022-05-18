@@ -15,6 +15,7 @@ export * from './usePopupModel';
 export * from './usePopupPopper';
 export * from './usePopupStack';
 export * from './usePopupTarget';
+export * from './usePopupTargetContext';
 export * from './useReturnFocus';
 export * from './useTransferOnFullscreenEnter';
 export * from './useTransferOnFullscreenExit';

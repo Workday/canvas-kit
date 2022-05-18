@@ -52,7 +52,7 @@ storiesOf('Preview/Color Picker/React', module)
                 showCustomHexInput={true}
                 onColorChange={handleSubmit}
                 onColorReset={() => handleSubmit(colors.blueberry400)}
-                onSubmitClick={event => model.events.hide({event})}
+                onSubmitClick={model.events.hide}
                 value={color}
               />
             </Popup.Body>
@@ -123,7 +123,7 @@ storiesOf('Preview/Color Picker/React', module)
           }}
           value={colorInputValue}
           showCheck={colorInputValidColor === color || colorInputValue === color}
-          onFocus={event => model.events.show({event})}
+          onFocus={model.events.show}
           onBlur={onBlur}
         />
         <Popup.Popper>

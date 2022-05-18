@@ -8,19 +8,19 @@ export const Icons = () => {
   return (
     <Tabs>
       <Tabs.List>
-        <Tabs.Item hasIcon>
+        <Tabs.Item>
           <Tabs.Item.Icon icon={starIcon} />
           <Tabs.Item.Text>First Tab</Tabs.Item.Text>
         </Tabs.Item>
-        <Tabs.Item hasIcon>
+        <Tabs.Item>
           <Tabs.Item.Icon icon={searchIcon} />
           <Tabs.Item.Text>Second Tab</Tabs.Item.Text>
         </Tabs.Item>
-        <Tabs.Item hasIcon>
+        <Tabs.Item>
           <Tabs.Item.Icon icon={selectIcon} />
           <Tabs.Item.Text>Third Tab</Tabs.Item.Text>
         </Tabs.Item>
-        <Tabs.Item hasIcon>
+        <Tabs.Item>
           <Tabs.Item.Icon icon={shareIcon} />
           <Tabs.Item.Text>Fourth Tab</Tabs.Item.Text>
         </Tabs.Item>
