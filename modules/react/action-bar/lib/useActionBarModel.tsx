@@ -46,8 +46,9 @@ export const useActionBarModel = createModelHook({
   // Always show the first button and make sure it is interactive
   if (totalSize - hiddenIds.length === 0) {
     hiddenIds = items.slice(1, totalSize).map(getId);
-    nonInteractiveIds = [];
   }
+
+  nonInteractiveIds = hiddenIds;
 
   const state = {
     ...model.state,
