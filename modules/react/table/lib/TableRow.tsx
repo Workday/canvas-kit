@@ -2,6 +2,7 @@ import * as React from 'react';
 import styled, {CSSObject} from '@emotion/styled';
 import {rgba} from 'polished';
 import {colors, space, spaceNumbers, statusColors} from '@workday/canvas-kit-react/tokens';
+import {createComponent, StyledType} from '@workday/canvas-kit-react/common';
 import {borderColor, borderWidth, cellBorder} from './Table';
 
 export enum TableRowState {
@@ -91,16 +92,7 @@ function makeBorderlessStyle(_bgColor: string): CSSObject {
   };
 }
 
-/**
- * Styled Table Row
- * ---
- * _The underlying styled `TableRow` component_
- *
- * This is temporarily being exported to allow consumers to wrap this styled component
- * in their own functional component instead of using the existing `TableRow` class component.
- * This export will likely be removed in a future major release.
- */
-export const StyledTableRow = styled('tr')<TableRowProps>(
+const StyledTableRow = styled('tr')<TableRowProps>(
   {
     'th, td': {
       backgroundColor: colors.frenchVanilla100,
@@ -200,16 +192,22 @@ export const StyledTableRow = styled('tr')<TableRowProps>(
   }
 );
 
-export default class TableRow extends React.Component<TableRowProps> {
-  public static State = TableRowState;
-
-  public render() {
-    const {state, header, children, ...elemProps} = this.props;
-
+const TableRow = createComponent('tr')({
+  displayName: 'TableRow',
+  Component: (
+    {state, header, children, ...elemProps}: TableRowProps & StyledType,
+    ref,
+    Element
+  ) => {
     return (
-      <StyledTableRow state={state} header={header} {...elemProps}>
+      <StyledTableRow as={Element} ref={ref} state={state} header={header} {...elemProps}>
         {children}
       </StyledTableRow>
     );
-  }
-}
+  },
+  subComponents: {
+    State: TableRowState,
+  },
+});
+
+export default TableRow;

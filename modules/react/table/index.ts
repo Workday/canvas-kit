@@ -1,7 +1,7 @@
 import Table from './lib/Table';
-import TableRow, {StyledTableRow} from './lib/TableRow';
+import TableRow from './lib/TableRow';
 
 export default Table;
-export {Table, TableRow, StyledTableRow};
+export {Table, TableRow};
 export * from './lib/Table';
 export * from './lib/TableRow';
