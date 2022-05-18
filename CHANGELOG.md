@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v6.8.8](https://github.com/Workday/canvas-kit/releases/tag/v6.8.8) (2022-05-18)
+
+### Components
+
+- fix(popup): Exclude disabled elements from isFocusable ([#1564](https://github.com/Workday/canvas-kit/pull/1564)) ([@derek-h-kim](https://github.com/derek-h-kim))
+
+
 ## [v6.8.7](https://github.com/Workday/canvas-kit/releases/tag/v6.8.7) (2022-05-18)
 
 ### Components
