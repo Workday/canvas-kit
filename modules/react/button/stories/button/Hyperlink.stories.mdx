@@ -26,12 +26,14 @@ yarn add @workday/canvas-kit-react
 
 ### Hyperlink
 
-Hyperlinks should be used when you want to navigate away from the current page or to an anchor on
+`Hyperlink`s should be used when you want to navigate away from the current page or to an anchor on
 the current page.
 
 <ExampleCodeBlock code={Link} />
 
-Hyperlinks also have an `inverse` variant. Use this variant when you need to place a Hyperlink on a
+#### Inverse
+
+`Hyperlink`s also have an `inverse` variant. Use this variant when you need to place a `Hyperlink` on a
 dark or colorful background such as `blueberry400`.
 
 <ExampleCodeBlock code={LinkInverse} />
@@ -44,15 +46,14 @@ Undocumented props are spread to the underlying `<a>` element.
 
 ### ExternalHyperlink
 
-If your link should open in a new tab or window use the `<ExternalHyperlink>` component. It will let
+If your link should open in a new tab or window use the `ExternalHyperlink` component. It will let
 users know about the behavior by adding an icon, `extLinkIcon`. By default, the icon has a label of
 "Opens link in new window". You can override `aria-label` of the icon by using the `iconLabel`
-attribute. This override will be needed for translations.
+prop. This override will be needed for translations.
 
 <ExampleCodeBlock code={ExternalLink} />
 
-ExternalHyperlinks also have an `inverse` variant. Use this variant when you need to place a
-Hyperlink on a dark or colorful background such as `blueberry400`.
+`ExternalHyperlink`s also have an `inverse` variant. Use this variant when you need to place the link on a dark or colorful background such as `blueberry400`.
 
 <ExampleCodeBlock code={ExternalLinkInverse} />
 
@@ -64,7 +65,7 @@ Undocumented props are spread to the underlying `<a>` element.
 
 ### Accessible Use of the `as` Prop
 
-Like many of our components, Buttons accept an `as` prop, which lets you change the underlying
+Like many of our components, `Hyperlink` and `ExternalHyperlink` accept an `as` prop, which lets you change the underlying
 semantic element - usually an `<a>`, or a `<button>`. This should be done with caution to ensure the
 best accessibility. Generally, `<button>` elements should be used for actions, and `<a>` elements
 should be used for navigation.
