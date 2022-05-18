@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v6.8.7](https://github.com/Workday/canvas-kit/releases/tag/v6.8.7) (2022-05-18)
+
+### Components
+
+- fix(table): Refactor TableRow to use createComponent ([#1590](https://github.com/Workday/canvas-kit/pull/1590)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
 ## [v6.8.6](https://github.com/Workday/canvas-kit/releases/tag/v6.8.6) (2022-05-16)
 
 
