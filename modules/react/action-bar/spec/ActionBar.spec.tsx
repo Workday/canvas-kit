@@ -1,23 +1,12 @@
 import * as React from 'react';
-import {mount} from 'enzyme';
 import ActionBar from '../index';
+import {render} from '@testing-library/react';
 
 describe('ActionBar', () => {
-  const cb = jest.fn();
-  afterEach(() => {
-    cb.mockReset();
-  });
+  it('should spread extra props to containing element', () => {
+    const {container} = render(<ActionBar data-propspread="test" />);
 
-  test('render a action bar with id', () => {
-    const component = mount(<ActionBar id="myActionBar">Button Label</ActionBar>);
-    expect(component.find(ActionBar).props().id).toBe('myActionBar');
-    component.unmount();
-  });
-
-  test('ActionBar should spread extra props', () => {
-    const component = mount(<ActionBar data-propspread="test" />);
-    const container = component.at(0).getDOMNode();
-    expect(container.getAttribute('data-propspread')).toBe('test');
-    component.unmount();
+    // ActionBar doesn't have a semantic element, so we'll use `container`
+    expect(container.firstChild).toHaveAttribute('data-propspread', 'test');
   });
 });

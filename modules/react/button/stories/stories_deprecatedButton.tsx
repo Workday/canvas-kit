@@ -1,14 +1,11 @@
-/// <reference path="../../../../typings.d.ts" />
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
-import withReadme from 'storybook-readme/with-readme';
 
 import {deprecated_Button as Button} from '@workday/canvas-kit-react/button';
-import README from '../README.md';
 
 storiesOf('Components/Buttons/Button/React/Deprecated', module)
   .addParameters({component: Button})
-  .addDecorator(withReadme(README))
+  .addParameters({ReadmePath: 'react/button'})
   .add('Primary', () => (
     <div className="story">
       <h3>Large Primary</h3>

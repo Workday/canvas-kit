@@ -174,23 +174,16 @@ const buttonSyles = {
 
 ## Depth
 
-Five levels of depth are available. They are directly exported from `@workday/canvas-depth-web`.
-
-| Level            | Usage Recommendations             |
-| ---------------- | --------------------------------- |
-| Depth -1 (inset) | Inset card depth                  |
-| Depth 1          | Standard card depth               |
-| Depth 2          | Increased card depth on hover     |
-| Depth 3          | Active cards, popups              |
-| Depth 4          | Cards on white backgrounds, menus |
+Depth is the relative distance between surfaces in the z-axis. It provides delineation, focus, and priority with shadows and layering. There are five depth levels, `inset`, `1`, `2`, `3`, and `4`. Most levels only apply box-shadow styles, but `depth[4]` also applies border styles.
 
 ### Usage
 
 ```tsx
-import {depth} from '@workday/canvas-kit-react/tokens';
+import { depth } from '@workday/canvas-kit-react/tokens';
 
-depth.inset;
-depth['2'];
+const CustomCard = () => {
+  return <div css={depth[2]}>A standard-depth card</div>;
+}
 ```
 
 ## Type

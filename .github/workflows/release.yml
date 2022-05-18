@@ -87,7 +87,7 @@ jobs:
       ## branch).
       - name: Lerna Bump
         if: "!contains(github.event.head_commit.message, '[skip release]')"
-        run: yarn bump --yes --conventional-commits --no-changelog
+        run: yarn bump --yes --conventional-commits --no-changelog --changelog-preset conventionalcommits
 
       ## Capture the new tag and store it for later use
       - name: Get new tag
@@ -165,6 +165,14 @@ jobs:
           draft: false
           prerelease: false
 
+      ## The master branch is used for static Storybook documentation in the `gh-pages` branch.
+      - name: Publish Storybook
+        if: steps.extract-branch.outputs.branch == 'master'
+        uses: JamesIves/github-pages-deploy-action@4.1.5
+        with:
+          branch: gh-pages
+          folder: docs
+
       ## Create a Chromatic baseline auto-accepting changes. Chromatic changes are already accepted
       ## in PRs, so we don't need to manually approve them here again. This new baseline will be
       ## used for future PRs. New PRs may show extra Chromatic changes until the "Update Branch"
@@ -179,18 +187,10 @@ jobs:
           exitZeroOnChanges: true
           autoAcceptChanges: true
 
-      ## The master branch is used for static Storybook documentation in the `gh-pages` branch.
-      - name: Publish Storybook
-        if: steps.extract-branch.outputs.branch == 'master'
-        uses: JamesIves/github-pages-deploy-action@4.1.5
-        with:
-          branch: gh-pages
-          folder: docs
-
       ## Notify Slack of any failures
       - name: Report failures
         if: ${{ failure() }}
-        run: node utils/report-failure.js
+        run: node utils/report-failure.mjs
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
           TRAVIS_BRANCH: ${{ steps.extract-branch.outputs.branch }}

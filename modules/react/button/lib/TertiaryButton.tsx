@@ -7,9 +7,9 @@ import {
   EmotionCanvasTheme,
   createComponent,
 } from '@workday/canvas-kit-react/common';
-import {colors, space, type, borderRadius} from '@workday/canvas-kit-react/tokens';
+import {colors, space, borderRadius} from '@workday/canvas-kit-react/tokens';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {ButtonColors} from './types';
+import {ButtonColors, TertiaryButtonSizes, IconPositions} from './types';
 import {ButtonContainer, ButtonLabelIcon, ButtonLabel} from './parts';
 
 export interface TertiaryButtonProps extends Themeable {
@@ -19,15 +19,18 @@ export interface TertiaryButtonProps extends Themeable {
    */
   variant?: 'inverse' | undefined;
   /**
-   * The size of the TertiaryButton.
+   * There are three button sizes: `extraSmall`, `small`, and `medium`.
+   * If no size is provided, it will default to `medium`.
+   *
    * @default 'medium'
    */
-  size?: 'small' | 'medium';
+  size?: TertiaryButtonSizes;
   /**
-   * The position of the TertiaryButton icon.
+   * Button icon positions can either be `left` or `right`.
+   * If no value is provided, it defaults to `left`.
    * @default 'left'
    */
-  iconPosition?: 'left' | 'right';
+  iconPosition?: IconPositions;
   /**
    * The icon of the TertiaryButton.
    */
@@ -87,8 +90,8 @@ const getTertiaryButtonColors = (
       },
       disabled: {
         background: 'transparent',
-        icon: 'rgba(255, 255, 255, 0.5)',
-        label: 'rgba(255, 255, 255, 0.5)',
+        icon: colors.frenchVanilla100,
+        label: colors.frenchVanilla100,
       },
     };
   } else {
@@ -114,25 +117,34 @@ const getTertiaryButtonColors = (
       },
       disabled: {
         background: 'transparent',
-        icon: themePrimary.light,
-        label: themePrimary.light,
+        icon: themePrimary.main,
+        label: themePrimary.main,
       },
     };
   }
 };
 
-const containerStyles = {
-  borderRadius: borderRadius.m,
-  border: '0',
-  padding: `0 ${space.xxs}`,
-  minWidth: 'auto',
-  '.wdc-text-button-label': {
-    borderBottom: '2px solid transparent',
-    paddingTop: '2px',
-    transition: 'border-color 0.3s',
-  },
-  '&:hover:not([disabled]) .wdc-text-button-label': {
-    borderBottomColor: 'currentColor',
+const getPaddingStyles = (
+  icon: CanvasSystemIcon | undefined,
+  iconPosition: 'left' | 'right'
+): string => {
+  // if there is an icon on the left, add 4px extra padding to the right for visual balance
+  if (icon && iconPosition === 'left') {
+    return `0 ${space.xs} 0 ${space.xxs}`;
+  }
+  // if there is an icon on the right, add 4px extra padding to the left for visual balance
+  if (icon && iconPosition === 'right') {
+    return `0 ${space.xxs} 0 ${space.xs}`;
+  }
+  // if there is no icon, return the default padding
+  return `0 ${space.xxs}`;
+};
+
+// All disabled buttons are set to 40% opacity.
+// This will eventually live in the ButtonContainer styles, but for now we're scoping it to Primary, Secondary, and Tertiary buttons.
+const disabledButtonOpacity = {
+  '&:disabled, &:disabled:active': {
+    opacity: 0.4,
   },
 };
 
@@ -155,19 +167,17 @@ export const TertiaryButton = createComponent('button')({
     ref,
     Element
   ) => {
-    // Note: We don't use ButtonLabel because the label styles differ from other button types
-    const allContainerStyles: CSSObject = allCaps
-      ? {
-          ...containerStyles,
-          textTransform: 'uppercase',
-          fontWeight: type.properties.fontWeights.bold,
-          fontSize: size === 'medium' ? type.properties.fontSizes[16] : undefined,
-          letterSpacing: '.5px',
-        }
-      : {
-          ...containerStyles,
-          fontSize: size === 'medium' ? type.properties.fontSizes[14] : undefined,
-        };
+    const allContainerStyles: CSSObject = {
+      borderRadius: borderRadius.m,
+      border: '0',
+      padding: getPaddingStyles(icon, iconPosition),
+      minWidth: 'auto',
+      textTransform: allCaps ? 'uppercase' : undefined,
+      '.wdc-text-button-label': {
+        textDecoration: 'underline',
+      },
+      ...disabledButtonOpacity,
+    };
 
     return (
       <ButtonContainer

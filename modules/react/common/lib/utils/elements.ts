@@ -1,8 +1,12 @@
 /**
  * Is an element focusable? This function performs various tests to see if the element in question
- * can receive focus.
+ * can receive focus. Should skip disabled elements as they are not focusable.
  */
 export const isFocusable = (element: HTMLElement) => {
+  if (element.hasAttribute('disabled')) {
+    return null;
+  }
+
   const nodeName = element.nodeName.toLowerCase();
   const validInput = nodeName === 'input' && element.getAttribute('type') !== 'hidden';
   const validAnchor = nodeName === 'a' && element.hasAttribute('href');

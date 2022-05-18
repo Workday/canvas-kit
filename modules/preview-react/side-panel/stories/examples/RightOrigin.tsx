@@ -30,7 +30,7 @@ const RightPanel = () => {
     <SidePanel {...panelProps} onStateTransition={setPanelState} origin="right" css={panelStyles}>
       <SidePanel.ToggleButton {...controlProps} />
       {panelState === 'expanded' && (
-        <Flex alignItems="center" justifyContent="flex-end" paddingY="s" paddingX="xs">
+        <Flex alignItems="center" justifyContent="flex-end" paddingY="s" paddingX="s">
           <h3
             css={{
               ...type.levels.body.large,

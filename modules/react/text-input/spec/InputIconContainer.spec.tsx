@@ -1,16 +1,16 @@
 import * as React from 'react';
-import {shallow} from 'enzyme';
+import {render} from '@testing-library/react';
+
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {exclamationCircleIcon} from '@workday/canvas-system-icons-web';
 import InputIconContainer from '../lib/InputIconContainer';
 
 describe('InputIconContainer', () => {
-  test('Icon is set', () => {
-    const icon = <SystemIcon icon={exclamationCircleIcon} />;
-    const component = shallow(<InputIconContainer icon={icon} />);
+  it('should render an Icon', () => {
+    const {container} = render(
+      <InputIconContainer icon={<SystemIcon icon={exclamationCircleIcon} />} />
+    );
 
-    expect(component.contains(icon)).toBeTruthy();
-
-    component.unmount();
+    expect(container).toContainHTML('wd-icon-exclamation');
   });
 });

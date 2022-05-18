@@ -1,4 +1,4 @@
-import {Meta} from '@storybook/addon-docs/blocks';
+import {Meta} from '@storybook/addon-docs';
 
 import {Stack} from '@workday/canvas-kit-labs-react/layout';
 // examples
@@ -156,6 +156,11 @@ further to the right. You could use two separate horizontal stacks here to achie
 but you could also use `shouldWrapChildren` and then put additional margin only where needed. Either
 approach would be fine; it's a matter of personal preference.
 
+> Note: `shouldWrapChildren` implicitly passes the child element's index as a unique `key` prop to
+> the `Stack.Item`, which works well for static lists. If you have dynamic lists with child elements
+> that change over time, you'll want to provide a unique `id` prop to each child element for the
+> `Stack.Item` to use as a key instead.
+
 <ExampleCodeBlock code={ShouldWrapChildren} />
 
 Use this approach when:
@@ -173,8 +178,8 @@ wrapping children in `Stack.Item`s. A `Stack.Item` is a `Box` with some preset s
 overridden if needed.
 
 In the example below, we wanted to keep our `li` elements as direct children of the `ul` stack. So
-we're wrapping each of the links with `Stack.Item`s, casting them as `li`s and applying custom styles to each.
-This would not be possible with `shouldWrapChildren`.
+we're wrapping each of the links with `Stack.Item`s, casting them as `li`s and applying custom
+styles to each. This would not be possible with `shouldWrapChildren`.
 
 <ExampleCodeBlock code={StackItems} />
 

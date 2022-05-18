@@ -1,21 +1,20 @@
 import * as React from 'react';
 import {screen, render} from '@testing-library/react';
 
-import {TabPanel} from '../lib/TabPanel';
 import {Tabs} from '../lib/Tabs';
 import {useTabsModel} from '../lib/useTabsModel';
 
 describe('TabPanel', () => {
-  verifyComponent(TabPanel, {modelFn: useTabsModel});
+  verifyComponent(Tabs.Panel, {modelFn: useTabsModel});
 
   it('should have a role of "tabpanel"', () => {
     render(
       <Tabs>
         <Tabs.Item>First</Tabs.Item>
-        <TabPanel>
+        <Tabs.Panel>
           <div />
           <div />
-        </TabPanel>
+        </Tabs.Panel>
       </Tabs>
     );
     expect(screen.getByRole('tabpanel')).toBeInTheDocument();
@@ -25,10 +24,10 @@ describe('TabPanel', () => {
     render(
       <Tabs>
         <Tabs.Item>First</Tabs.Item>
-        <TabPanel>
+        <Tabs.Panel>
           <div>First Item</div>
           <div />
-        </TabPanel>
+        </Tabs.Panel>
       </Tabs>
     );
     expect(screen.getByRole('tabpanel')).toHaveTextContent('First Item');

@@ -1,6 +1,7 @@
 import * as React from 'react';
+import {screen, render, fireEvent} from '@testing-library/react';
+
 import CookieBanner from '../lib/CookieBanner';
-import {mount} from 'enzyme';
 
 function noop() {
   // noop
@@ -12,36 +13,43 @@ describe('Cookie Banner', () => {
     cb.mockReset();
   });
 
-  test('should display a custom notice', () => {
-    const customNotice = (
-      <React.Fragment>
-        {CookieBanner.DefaultNotice} Please review our{' '}
-        <a href="https://www.workday.com/en-us/privacy.html" target="__blank">
-          Privacy Policy
-        </a>
-        .
-      </React.Fragment>
+  it('should display a custom children', () => {
+    render(
+      <CookieBanner
+        onAccept={noop}
+        notice={
+          <React.Fragment>
+            {CookieBanner.DefaultNotice} Please review our{' '}
+            <a href="https://www.workday.com/en-us/privacy.html" target="__blank">
+              Privacy Policy
+            </a>
+            .
+          </React.Fragment>
+        }
+      />
     );
-    const component = mount(<CookieBanner onAccept={noop} notice={customNotice} />);
-    expect(component.find('a').text()).toEqual('Privacy Policy');
+
+    expect(screen.getByRole('link')).toContainHTML('Privacy Policy');
   });
 
-  test('should execute callback upon accepting notice', () => {
-    const component = mount(<CookieBanner onAccept={cb} />);
-    component.find('button').simulate('click');
+  it('should call "onAccept" event the button is clicked', () => {
+    render(<CookieBanner onAccept={cb} />);
+
+    fireEvent.click(screen.getByRole('button'));
     expect(cb).toHaveBeenCalled();
   });
 
-  test('should execute callback upon clicking settings button', () => {
-    const component = mount(<CookieBanner onAccept={noop} onClickSettings={cb} />);
-    component.find('button[children="Cookie Settings"]').simulate('click');
+  it('should call "onClickSettings" when Cookie Settings button is clicked', () => {
+    render(<CookieBanner onAccept={noop} onClickSettings={cb} />);
+
+    fireEvent.click(screen.getByRole('button', {name: 'Cookie Settings'}));
     expect(cb).toHaveBeenCalled();
   });
 
-  test('Cookie Banner should spread extra props', () => {
-    const component = mount(<CookieBanner onAccept={noop} data-propspread="test" />);
-    const container = component.at(0).getDOMNode();
-    expect(container.getAttribute('data-propspread')).toBe('test');
-    component.unmount();
+  it('should forward extra props to the containing component', () => {
+    const {container} = render(<CookieBanner onAccept={noop} data-propspread="test" />);
+
+    // The containing element is not a semantic element
+    expect(container.firstChild).toHaveAttribute('data-propspread', 'test');
   });
 });
