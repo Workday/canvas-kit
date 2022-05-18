@@ -1,7 +1,8 @@
 import React from 'react';
 import {PopupStack} from '@workday/canvas-kit-popup-stack';
+import {createElemPropsHook} from '@workday/canvas-kit-react/common';
 
-import {PopupModel} from './usePopupModel';
+import {usePopupModel} from './usePopupModel';
 
 /**
  * This hook will bring an element to the top of the stack when any element inside the provided
@@ -12,7 +13,7 @@ import {PopupModel} from './usePopupModel';
  *
  * This should be used on popup elements that are meant to persist (i.e. Windows).
  */
-export const useBringToTopOnClick = (model: PopupModel, elemProps = {}) => {
+export const useBringToTopOnClick = createElemPropsHook(usePopupModel)(model => {
   const timer = React.useRef(-1);
   const onClick = React.useCallback(
     (event: MouseEvent) => {
@@ -40,5 +41,5 @@ export const useBringToTopOnClick = (model: PopupModel, elemProps = {}) => {
     };
   }, [visible, onClick]);
 
-  return elemProps;
-};
+  return {};
+});

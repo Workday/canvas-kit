@@ -96,9 +96,7 @@ Set the `disabled` prop of a `Tabs.Item` to `true` to disable it.
 
 ### Tab Icons
 
-Tabs can have icons. You must set `hasIcon` on the `Tabs.Item` and use the `Icon` and `Text`
-subcomponent. The `hasIcon` changes the `Tabs.Item` to change where overflow detection is from the
-`Tabs.Item` element to the `Tabs.Item.Text` element.
+Tabs can have icons. Use the `Icon` and `Text` subcomponents.
 
 <ExampleCodeBlock code={Icons} />
 
@@ -140,17 +138,15 @@ array.
 its subcomponents using React context. It does not represent a real element.
 
 ```tsx
-<Tabs onActivate={({data}) => console.log('Activated tab', data.tab)}>
-  {/* Child components */}
-</Tabs>
+<Tabs onSelect={data => console.log('Activated tab', data.id)}>{/* Child components */}</Tabs>
 ```
 
 Alternatively, you may pass in a model using the hoisted model pattern.
 
 ```tsx
 const model = useTabsModel({
-  onActivate({data}) {
-    console.log('Activated Tab', data.tab);
+  onSelect(data) {
+    console.log('Activated Tab', data.id);
   },
 });
 
@@ -185,11 +181,11 @@ Undocumented props are spread to the underlying `<div>` element.
 #### Usage
 
 `Tabs.Item` is a `<button role="tab">` element. Each `Tabs.Item` is associated with a `Tabs.Panel`
-either by a `name` attribute or by the position in the list. If a `name` is provided, it must match
-the name passed to the corresponding `Tabs.Panel` component.
+either by a `data-id` attribute or by the position in the list. If a `data-id` is provided, it must
+match the `data-id` passed to the corresponding `Tabs.Panel` component.
 
 ```tsx
-<Tabs.Item name="first">First Tab</Tabs.Item>
+<Tabs.Item data-id="first">First Tab</Tabs.Item>
 ```
 
 #### Props
@@ -203,11 +199,12 @@ Undocumented props are spread to the underlying `button` element.
 #### Usage
 
 `Tabs.Panel` is a `<div role="tabpanel">` element. It is focusable by default. Each `Tabs.Panel` is
-controlled by a `Tabs.Item` either by a `name` attribute or by the position in the list. If a `name`
-is provided, it must match the name passed to the corresponding `Tabs.Item` component.
+controlled by a `Tabs.Item` either by a `data-id` attribute or by the position in the list. If a
+`data-id` is provided, it must match the `data-id` passed to the corresponding `Tabs.Item`
+component.
 
 ```tsx
-<Tabs.Panel name="first">{/* Contents of the tab panel */}</Tabs.Panel>
+<Tabs.Panel data-id="first">{/* Contents of the tab panel */}</Tabs.Panel>
 ```
 
 #### Props
