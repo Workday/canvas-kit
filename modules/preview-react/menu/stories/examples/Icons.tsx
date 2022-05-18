@@ -3,7 +3,6 @@ import {
   setupIcon,
   uploadCloudIcon,
   userIcon,
-  extLinkIcon,
   taskContactIcon,
 } from '@workday/canvas-system-icons-web';
 import {Menu, MenuItem} from '@workday/canvas-kit-preview-react/menu';

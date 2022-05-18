@@ -513,11 +513,11 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### BREAKING CHANGES
 
 - [#1201](https://github.com/Workday/canvas-kit/pull/1201) Optional breaking changes message. If your PR includes breaking changes. It is extremely rare to put breaking changes outside a `prerelease/v*` branch. Anything in this section will show up in release notes. Remove this section if no breaking changes are present.
-- [#1276](https://github.com/Workday/canvas-kit/pull/1276) `CanvasDepthValue` is renamed to `CanvasDepthValues` for consistency. This change is handled automatically by the v6 codemod. Please refer to the v6 migration guide for more information.
-- [#1319](https://github.com/Workday/canvas-kit/pull/1319) This change updates the theme breakpoint values and the media query breakpoints used in `ActionBar`. For more information, please see the V6 migration guide.
-- [#1331](https://github.com/Workday/canvas-kit/pull/1331) This change updates our `PrimaryButton` styles. For more information, please see the V6 migration guide.
-- [#1332](https://github.com/Workday/canvas-kit/pull/1332) This change updates our `SecondaryButton` styles. For more information, please see the V6 migration guide.
-- [#1338](https://github.com/Workday/canvas-kit/pull/1338) This change updates our `TertiaryButton` styles. For more information, please see the V6 migration guide.
+- [#1276](https://github.com/Workday/canvas-kit/pull/1276) `CanvasDepthValue` is renamed to `CanvasDepthValues` for consistency. This change is handled automatically by the v6 codemod. Please refer to the V6 upgrade guide for more information.
+- [#1319](https://github.com/Workday/canvas-kit/pull/1319) This change updates the theme breakpoint values and the media query breakpoints used in `ActionBar`. For more information, please see the V6 upgrade guide.
+- [#1331](https://github.com/Workday/canvas-kit/pull/1331) This change updates our `PrimaryButton` styles. For more information, please see the V6 upgrade guide.
+- [#1332](https://github.com/Workday/canvas-kit/pull/1332) This change updates our `SecondaryButton` styles. For more information, please see the V6 upgrade guide.
+- [#1338](https://github.com/Workday/canvas-kit/pull/1338) This change updates our `TertiaryButton` styles. For more information, please see the V6 upgrade guide.
 - [#1325](https://github.com/Workday/canvas-kit/pull/1325) Tabs API was updated to support a more generic selection model for all lists.
   - `model.events.activate({tab})` -> `model.events.select({id})`
   - `model.state.activeTab` -> `model.state.selectedKeys[0]`
@@ -871,7 +871,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 The changes below include the changes made across all 5.0.0 beta and rc versions (`v5.0.0-beta.0 - v5.0.0-rc.0`).
 
-To review the breaking changes made in this release, check out the [v5.0.0 Migration Guide](./modules/docs/mdx/5.0-MIGRATION-GUIDE.mdx). Use our new [codemod utility](./modules/codemod) to make the update as smooth as possible.
+To review the breaking changes made in this release, check out the [v5.0.0 Upgrade Guide](./modules/docs/mdx/5.0-UPGRADE-GUIDE.mdx). Use our new [codemod utility](./modules/codemod) to make the update as smooth as possible.
 
 ### Components
 
@@ -1126,7 +1126,7 @@ To review the breaking changes made in this release, check out the [v5.0.0 Migra
 ### Notes
 
 - Update Pagination component  [#954](https://github.com/Workday/canvas-kit/pull/954)
-  - This is a breaking change in this Labs component. Please refer to the [migration guide](https://github.com/Workday/canvas-kit/blob/master/modules/labs-react/pagination/react/MIGRATION_GUIDE.md) for more information on how to upgrade.
+  - This is a breaking change in this Labs component. Please refer to the [migration guide](https://github.com/Workday/canvas-kit/blob/master/modules/react/pagination/MIGRATION_GUIDE.md) for more information on how to upgrade.
 
 ## 5.0.0-beta.0 (2021-01-27)
 
@@ -1400,7 +1400,7 @@ React.createPortal(contents, stackRef.current)
 
 The changes below are the consolidation of changes made across all 4.0.0 beta versions (`v4.0.0-beta.0-5`).
 
-To review the breaking changes made in this release, check out the [v4.0.0 Migration Guide](./modules/docs/mdx/4.0-MIGRATION-GUIDE.mdx).
+To review the breaking changes made in this release, check out the [v4.0.0 Upgrade Guide](./modules/docs/mdx/4.0-UPGRADE-GUIDE.mdx).
 
 ### Infrastructure
 - ci: Release canary builds for prerelease branches ([#481](https://github.com/Workday/canvas-kit/pull/481)) [@anicholls](https://github.com/anicholls)

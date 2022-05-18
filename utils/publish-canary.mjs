@@ -97,7 +97,7 @@ exec('git diff --name-only HEAD HEAD^')
       // `v5.2.3` -> `v6.0.0-beta.n`
       if (isPreMajor) {
         // for pre major releases, we'll assume we're going to start with an alpha prerelease
-        preid = 'alpha.0-next';
+        preid = `alpha.${process.env.GITHUB_RUN_NUMBER || 0}-next`;
         bump = 'premajor';
       } else {
         // we'll use `next` for pre minors

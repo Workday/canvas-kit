@@ -1,11 +1,11 @@
-/** @jsx jsx */
-import {jsx} from '@emotion/core';
-import styled from '@emotion/styled';
+import React from 'react';
+import styled, {StyledComponent} from '@emotion/styled';
 import {storiesOf} from '@storybook/react';
 import {CanvasProvider} from '../index';
 import {CanvasTheme, CanvasThemePalette, Themeable} from '../lib/theming';
 import {colors, type, space, borderRadius} from '@workday/canvas-kit-react/tokens';
 import {useTheme} from '@workday/canvas-kit-react/common';
+import {StyledType} from '../lib/utils';
 
 const Palettes = styled('div')({
   display: 'flex',
@@ -37,7 +37,7 @@ const Swatch = styled('li')(
     },
   })
 );
-const PaletteTitle = styled(Swatch)(
+const PaletteTitle = styled(Swatch)<StyledType>(
   {
     ...type.levels.body.large,
     height: space.xxl,
@@ -80,7 +80,7 @@ const ThemedComponent = styled('h1')<Themeable>(
   })
 );
 
-const createSwatch = (name: string, color: string, contrast: string, Component = Swatch) => {
+const createSwatch = (name: string, color: string, contrast: string, Component: any = Swatch) => {
   return (
     <Component bg={color} contrast={contrast} key={`${name}-${color}`}>
       {name}
@@ -89,17 +89,25 @@ const createSwatch = (name: string, color: string, contrast: string, Component =
   );
 };
 
-type Palette = keyof CanvasTheme['palette'];
-type Swatch = keyof CanvasThemePalette;
+const StyledHeaderDefaultTheme = styled('h1')({
+  ...type.levels.heading.medium,
+});
+
+const StyledHeaderCustomTheme = styled('h1')({
+  ...type.levels.heading.medium,
+});
+
+type PaletteKey = keyof CanvasTheme['palette'];
+type SwatchKey = keyof CanvasThemePalette;
 
 const ThemeDemo = (props: any) => {
   const theme = useTheme();
   return (
     <div>
-      <h1 css={type.levels.heading.medium}>Default Canvas Theme</h1>
-      <Palettes>
+      <StyledHeaderDefaultTheme>Default Canvas Theme</StyledHeaderDefaultTheme>
+      <Palettes {...props}>
         {Object.keys(theme.canvas.palette).map(name => {
-          const palette = theme.canvas.palette[name as Palette] as CanvasThemePalette;
+          const palette = theme.canvas.palette[name as PaletteKey] as CanvasThemePalette;
           const bg = (palette.main && palette.main) || colors.soap200;
           const contrast = palette.contrast;
 
@@ -110,14 +118,14 @@ const ThemeDemo = (props: any) => {
                 if (key === 'contrast') {
                   return;
                 }
-                return createSwatch(key, palette[key as Swatch], contrast);
+                return createSwatch(key, palette[key as SwatchKey], contrast);
               })}
             </Palette>
           );
         })}
       </Palettes>
       <hr style={{margin: '80px 0'}} />
-      <h1 css={type.levels.heading.medium}>Custom Theme</h1>
+      <StyledHeaderCustomTheme>Custom Theme</StyledHeaderCustomTheme>
       <CanvasProvider theme={customTheme}>
         <ThemedComponent>Themed Component</ThemedComponent>
       </CanvasProvider>

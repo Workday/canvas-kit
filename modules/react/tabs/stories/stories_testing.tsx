@@ -43,8 +43,8 @@ const TabsExample = ({theme}: {theme?: PartialEmotionCanvasTheme} = {theme: unde
             {label: 'Disabled', props: {'aria-disabled': true}},
           ]}
         >
-          {props =>
-            props.hasIcon ? (
+          {({hasIcon, ...props}) =>
+            hasIcon ? (
               <Tabs.Item {...props}>
                 <Tabs.Item.Icon icon={setupIcon} />
                 <Tabs.Item.Text>Icon</Tabs.Item.Text>

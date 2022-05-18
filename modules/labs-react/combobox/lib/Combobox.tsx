@@ -1,5 +1,5 @@
 import React, {useEffect, useLayoutEffect, useRef, useState, useCallback} from 'react';
-import {CSSObject, jsx, keyframes} from '@emotion/core';
+import {jsx, keyframes, CSSObject} from '@emotion/react';
 import {
   GrowthBehavior,
   useForkRef,
@@ -10,7 +10,7 @@ import {
 import {space, commonColors, borderRadius} from '@workday/canvas-kit-react/tokens';
 import {MenuItemProps} from '@workday/canvas-kit-preview-react/menu';
 import {Card} from '@workday/canvas-kit-react/card';
-import {IconButton, IconButtonProps} from '@workday/canvas-kit-react/button';
+import {TertiaryButton, TertiaryButtonProps} from '@workday/canvas-kit-react/button';
 import {xSmallIcon} from '@workday/canvas-system-icons-web';
 import {TextInputProps} from '@workday/canvas-kit-react/text-input';
 import flatten from 'lodash.flatten';
@@ -34,10 +34,9 @@ export interface ComboboxProps extends GrowthBehavior, React.HTMLAttributes<HTML
    */
   initialValue?: string;
   /**
-   * The variant of the Combobox clear button.
-   * @default IconButton.Variant.Plain
+   * The variant of the Combobox clear button. The default is a TertiaryButton
    */
-  clearButtonVariant?: IconButtonProps['variant'];
+  clearButtonVariant?: TertiaryButtonProps['variant'];
   /**
    * If true, render the Combobox with a button to clear the text input.
    * @default false
@@ -114,11 +113,8 @@ const MenuContainer = styled(Card)({
   overflow: 'hidden',
 });
 
-const ResetButton = styled(IconButton)<{shouldShow: boolean}>(
+const ResetButton = styled(TertiaryButton)<{shouldShow: boolean}>(
   {
-    width: space.l,
-    minWidth: space.l,
-    height: space.l,
     position: 'absolute',
     margin: `auto ${space.xxxs}`,
     top: 0,
@@ -174,7 +170,7 @@ const Combobox = ({
   onFocus,
   onBlur,
   showClearButton,
-  clearButtonVariant = 'plain',
+  clearButtonVariant = undefined,
   clearButtonAriaLabel = `Reset Search Input`,
   labelId,
   getStatusText = buildStatusString,
@@ -427,8 +423,10 @@ const Combobox = ({
         [paddingDirection]: space.xl,
       };
     }
-    const newTextInputProps: Partial<TextInputProps &
-      React.InputHTMLAttributes<HTMLInputElement> & {ref: React.Ref<HTMLInputElement>}> = {
+    const newTextInputProps: Partial<
+      TextInputProps &
+        React.InputHTMLAttributes<HTMLInputElement> & {ref: React.Ref<HTMLInputElement>}
+    > & {css: CSSObject} = {
       type: 'text',
       id: componentId,
       grow: grow,
@@ -468,14 +466,14 @@ const Combobox = ({
             aria-label={clearButtonAriaLabel}
             icon={xSmallIcon}
             variant={clearButtonVariant}
-            toggled={undefined}
             onClick={resetSearchInput}
             onBlur={handleBlur}
+            size="small"
             type="button"
           />
         )}
         {showingAutocomplete && autocompleteItems && (
-          <MenuContainer padding={space.zero} depth={1}>
+          <MenuContainer padding={space.zero} depth={3}>
             <Card.Body>
               <AutocompleteList
                 comboboxId={componentId}
