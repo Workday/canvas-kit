@@ -6,7 +6,7 @@ import {createComponent} from '@workday/canvas-kit-react/common';
 
 export interface IconProps extends SvgProps {
   src: CanvasIcon;
-  size?: number;
+  size?: number | string;
   type: CanvasIconTypes.Accent | CanvasIconTypes.Applet | CanvasIconTypes.System;
 }
 
@@ -17,6 +17,7 @@ export const Icon = createComponent('span')({
 
     if (size) {
       iconStyles['& svg'] = {
+        ...((iconStyles['& svg'] as CSSObject) ?? {}),
         width: size,
         height: size,
       };
