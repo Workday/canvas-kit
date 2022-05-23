@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v7.0.1](https://github.com/Workday/canvas-kit/releases/tag/v7.0.1) (2022-05-23)
+
+### Documentation
+
+- docs: Clean up upgrade docs for base button example ([#1603](https://github.com/Workday/canvas-kit/pull/1603)) ([@mannycarrera4](https://github.com/mannycarrera4))
+
+
 ## [v7.0.0](https://github.com/Workday/canvas-kit/releases/tag/v7.0.0) (2022-05-18)
 
 ### BREAKING CHANGES
