@@ -1,9 +1,8 @@
-/// <reference path="../../../../../typings.d.ts" />
 import * as React from 'react';
 import {ComponentStatesTable, permutateProps} from '@workday/canvas-kit-labs-react/common';
 import {withSnapshotsEnabled, customColorTheme} from '../../../../../utils/storybook';
 import {StaticStates} from '@workday/canvas-kit-react/common';
-import {Switch} from '../../../switch';
+import {Switch} from '@workday/canvas-kit-react/switch';
 
 export default withSnapshotsEnabled({
   title: 'Testing/React/Inputs/Switch',

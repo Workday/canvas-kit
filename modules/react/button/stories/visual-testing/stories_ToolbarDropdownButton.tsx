@@ -1,6 +1,3 @@
-/// <reference path="../../../../../typings.d.ts" />
-/** @jsx jsx */
-import {jsx} from '@emotion/core';
 import * as React from 'react';
 import {ComponentStatesTable} from '@workday/canvas-kit-labs-react/common';
 import {withSnapshotsEnabled, customColorTheme} from '../../../../../utils/storybook';

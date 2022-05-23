@@ -1,16 +1,15 @@
 import * as React from 'react';
-import {CSSObject} from '@emotion/core';
+import {CSSObject} from '@emotion/styled';
 import {colors, space, spaceNumbers} from '@workday/canvas-kit-react/tokens';
-import {GrowthBehavior, styled} from '@workday/canvas-kit-react/common';
-import {IconButton, IconButtonProps} from '@workday/canvas-kit-react/button';
+import {GrowthBehavior, styled, generateUniqueId} from '@workday/canvas-kit-react/common';
+import {TertiaryButton, TertiaryButtonProps} from '@workday/canvas-kit-react/button';
 import {searchIcon, xIcon} from '@workday/canvas-system-icons-web';
 import {FormField, FormFieldLabelPosition} from '@workday/canvas-kit-react/form-field';
 import {Combobox} from '@workday/canvas-kit-labs-react/combobox';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {MenuItemProps} from '@workday/canvas-kit-preview-react/menu';
-import {SearchThemeAttributes, searchThemes, SearchTheme} from './themes';
+import {searchThemes, SearchTheme, SearchThemeAttributes} from './themes';
 import chroma from 'chroma-js';
-import uuid from 'uuid/v4';
 
 export interface SearchFormProps extends GrowthBehavior, React.FormHTMLAttributes<HTMLFormElement> {
   /**
@@ -83,6 +82,11 @@ export interface SearchFormProps extends GrowthBehavior, React.FormHTMLAttribute
    * @default 40
    */
   height?: number;
+  /**
+   * If true, allow onSubmit being called when input value is empty.
+   * @default false
+   */
+  allowEmptyStringSearch?: boolean;
 }
 
 export interface SearchFormState {
@@ -165,39 +169,22 @@ const SearchCombobox = styled(Combobox)({
   width: `100%`,
 });
 
-const SearchIcon = styled(IconButton)<Pick<SearchFormProps, 'isCollapsed'> & {isHidden: boolean}>(
-  ({isCollapsed, isHidden}) => {
-    const collapsedSize = 40;
-    const size = 32;
-    const collapseStyles: CSSObject = isCollapsed
-      ? {
-          minWidth: collapsedSize,
-          width: collapsedSize,
-          minHeight: collapsedSize,
-          height: collapsedSize,
-        }
-      : {
-          minWidth: size,
-          width: size,
-          minHeight: size,
-          height: size,
-        };
+const SearchIcon = styled(TertiaryButton)<
+  Pick<SearchFormProps, 'isCollapsed'> & {isHidden: boolean}
+>(({isCollapsed, isHidden}) => {
+  return {
+    position: `absolute`,
+    margin: isCollapsed ? `auto ${space.xxs}` : `auto ${space.xxxs}`,
+    top: 0,
+    bottom: 0,
+    left: 0,
+    padding: 0,
+    zIndex: 3,
+    display: isHidden ? 'none' : 'flex',
+  };
+});
 
-    return {
-      position: `absolute`,
-      margin: isCollapsed ? `auto ${space.xxs}` : `auto ${space.xxxs}`,
-      top: 0,
-      bottom: 0,
-      left: 0,
-      padding: 0,
-      zIndex: 3,
-      display: isHidden ? 'none' : 'flex',
-      ...collapseStyles,
-    };
-  }
-);
-
-const CloseButton = styled(IconButton)<
+const CloseButton = styled(TertiaryButton)<
   Pick<SearchFormProps, 'isCollapsed'> & Pick<SearchFormState, 'showForm'>
 >(({isCollapsed, showForm}) => {
   const collapseStyles: CSSObject =
@@ -293,7 +280,7 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
 
   private inputRef = React.createRef<HTMLInputElement>();
   private openRef = React.createRef<HTMLButtonElement>();
-  private labelId = uuid();
+  private labelId = generateUniqueId();
 
   state: Readonly<SearchFormState> = {
     showForm: false,
@@ -321,18 +308,18 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
     return getInputColors(theme, this.state.isFocused);
   };
 
-  getIconButtonType = (): IconButtonProps['variant'] => {
+  getIconButtonType = (): TertiaryButtonProps['variant'] => {
     let background = this.getThemeColors().background || `#fff`;
     if (this.props.isCollapsed && this.state.showForm) {
       background = formCollapsedBackground;
     }
-    const isDarkBackground = chroma(background).get('lab.l') < 70;
-    return isDarkBackground ? 'inverse' : 'plain';
+    const isDarkBackground = chroma(background as string).get('lab.l') < 70;
+    return isDarkBackground ? 'inverse' : undefined;
   };
 
   handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    if (this.state.searchQuery.trim()) {
+    if (this.props.allowEmptyStringSearch || this.state.searchQuery.trim()) {
       this.props.onSubmit(event);
     } else {
       this.focusInput();
@@ -408,6 +395,7 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
       initialValue,
       searchTheme,
       rightAlign,
+      allowEmptyStringSearch = false,
       ...elemProps
     } = this.props;
 
@@ -472,6 +460,7 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
                 inputColors={this.getThemeColors()}
                 height={height}
                 name="search"
+                autoComplete="off"
               />
             </SearchCombobox>
           </SearchField>
@@ -479,7 +468,6 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
             aria-label={closeButtonAriaLabel}
             icon={xIcon}
             isCollapsed={isCollapsed}
-            variant="plain"
             showForm={this.state.showForm}
             onClick={this.closeCollapsedSearch}
             type="button"

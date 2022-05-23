@@ -1,4 +1,3 @@
-/// <reference path="../../../../typings.d.ts" />
 import * as React from 'react';
 
 import {Modal, useModalModel} from '@workday/canvas-kit-react/modal';
@@ -9,7 +8,7 @@ import {
   useCloseOnEscape,
   usePopupModel,
 } from '@workday/canvas-kit-react/popup';
-import {HStack, VStack} from '@workday/canvas-kit-labs-react/layout';
+import {HStack, VStack} from '@workday/canvas-kit-react/layout';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 import Radio, {RadioGroup} from '@workday/canvas-kit-react/radio';
 
@@ -151,7 +150,7 @@ export const StackedModals = () => {
                         <Modal.CloseButton
                           as={DeleteButton}
                           onClick={event => {
-                            model.events.hide({event});
+                            model.events.hide(event);
                             handleDelete();
                           }}
                         >
@@ -208,7 +207,7 @@ export const ModalWithPopup = () => {
                         <Popup.CloseButton
                           as={DeleteButton}
                           onClick={event => {
-                            modal.events.hide({event});
+                            modal.events.hide(event);
                             handleDelete();
                           }}
                         >
@@ -232,7 +231,7 @@ export const WithTooltips = () => {
   const modal = useModalModel();
   const popup1 = usePopupModel();
   const popup2 = usePopupModel();
-  const closeModal = (event: React.MouseEvent) => modal.events.hide({event});
+  const closeModal = (event: React.MouseEvent) => modal.events.hide(event);
 
   useCloseOnOutsideClick(popup1);
 

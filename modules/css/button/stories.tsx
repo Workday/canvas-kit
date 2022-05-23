@@ -1,11 +1,10 @@
+/** @jsxRuntime classic */
 /** @jsx jsx */
-import {css, jsx} from '@emotion/core';
+import {css, jsx} from '@emotion/react';
 import {Component} from 'react';
 import {storiesOf} from '@storybook/react';
-import withReadme from 'storybook-readme/with-readme';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {activityStreamIcon} from '@workday/canvas-system-icons-web';
-import README from './README.md';
 import './index.scss';
 
 // @ts-ignore
@@ -42,7 +41,7 @@ class IconDemo extends Component {
 }
 
 storiesOf('Components/Buttons/Button/CSS', module)
-  .addDecorator(withReadme(README))
+  .addParameters({ReadmePath: 'css/button'})
   .add('Primary', () => (
     <div className="story">
       <section className="story">
@@ -153,7 +152,7 @@ storiesOf('Components/Buttons/Button/CSS', module)
   ));
 
 storiesOf('Components/Buttons/Button/CSS/Dropdown', module)
-  .addDecorator(withReadme(README))
+  .addParameters({ReadmePath: 'css/button'})
   .add('Default', () => (
     <div className="story">
       <section className="story">
@@ -173,7 +172,7 @@ storiesOf('Components/Buttons/Button/CSS/Dropdown', module)
   ));
 
 storiesOf('Components/Buttons/Button/CSS/Text', module)
-  .addDecorator(withReadme(README))
+  .addParameters({ReadmePath: 'css/button'})
   .add('Default', () => (
     <div className="story">
       <h3>Large</h3>
@@ -257,7 +256,7 @@ storiesOf('Components/Buttons/Button/CSS/Text', module)
   ));
 
 storiesOf('Components/Buttons/Button/CSS/Deprecated', module)
-  .addDecorator(withReadme(README))
+  .addParameters({ReadmePath: 'css/button'})
   .add('Primary', () => (
     <div className="story">
       <h3>Large Primary</h3>
@@ -385,7 +384,7 @@ storiesOf('Components/Buttons/Button/CSS/Deprecated', module)
   ));
 
 storiesOf('Components/Buttons/Button/CSS/Icon Button', module)
-  .addDecorator(withReadme(README))
+  .addParameters({ReadmePath: 'css/button'})
   .add('Square', () => (
     <div className="story">
       <h3>Medium Square</h3>

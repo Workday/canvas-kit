@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {MenuItem} from '@workday/canvas-kit-preview-react/menu';
 import {SearchForm} from '@workday/canvas-kit-labs-react/search-form';
-import {Flex} from '@workday/canvas-kit-labs-react/layout';
+import {Flex} from '@workday/canvas-kit-react/layout';
 
 const initialWineList = [
   'Beaujolais',

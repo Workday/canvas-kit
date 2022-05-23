@@ -1,4 +1,4 @@
-import {Meta} from '@storybook/addon-docs/blocks';
+import {Meta} from '@storybook/addon-docs';
 
 import {Modal} from '@workday/canvas-kit-react/modal';
 import {Specifications} from '@workday/canvas-kit-docs';
@@ -8,6 +8,8 @@ import {WithoutCloseIcon} from './examples/WithoutCloseIcon';
 import {CustomFocus} from './examples/CustomFocus';
 import {ReturnFocus} from './examples/ReturnFocus';
 import {CustomTarget} from './examples/CustomTarget';
+import {BodyOverflow} from './examples/BodyOverflow';
+import {FullOverflow} from './examples/FullOverflow';
 
 <Meta title="Components/Popups/Modal/React" component={Modal} />
 
@@ -81,6 +83,25 @@ requires a `label` prop.
 
 <ExampleCodeBlock code={CustomTarget} />
 
+### Body Content Overflow
+
+The Modal automatically handles overflowing content inside the `Modal.Body` element. If contents are
+larger than the browser's height will allow, the content will overflow with a scrollbar. You may
+need to restrict the height of your browser to observe the overflow.
+
+<ExampleCodeBlock code={BodyOverflow} />
+
+### Full overlay scrolling
+
+If content is large, scrolling the entire overlay container is an option. Use the
+`Modal.OverflowOverlay` component instead of the `Modal.Overlay` component. The `Modal.Card`'s
+`maxHeight` and `height` will need to be reset to `inherit` to prevent any internal overflow.
+
+This has the effect of scrolling the heading, close button, and any action buttons. If this type of
+scrolling behavior is not desired, try the [Body Content Overflow](#body-content-overflow) method.
+
+<ExampleCodeBlock code={FullOverflow} />
+
 ## Components
 
 ### Modal
@@ -97,12 +118,13 @@ container component will build a default one using `useModalModel`. `Modal` is a
 
 The `Modal.Target` is any element that is meant to show the Modal. The default component rendered by
 this component is a `SecondaryButton` element. You can override this by passing the desired
-component via `as`. Many examples above use `as={DeleteButton}`. If you want to render an
-`IconButton` instead, use `as={IconButton}`. The `Modal.Target` is an alias for `Popup.Target` and
-uses the `usePopupTarget` hook, which provides a `ref` and an `onClick`. The provided `ref` will be
-used to return focus to this element when the Modal is closed. If the provided component does not
-forward the `ref` to an element, the fallback is to capture an element in the `onClick`. This can be
-overridden by providing a `returnFocusRef` to the model.
+component via `as`. Many examples above use `as={DeleteButton}`. If you want to render an icon
+button instead, pass an icon to the the `icon` prop and pass no children to the button. The
+`Modal.Target` is an alias for `Popup.Target` and uses the `usePopupTarget` hook, which provides a
+`ref` and an `onClick`. The provided `ref` will be used to return focus to this element when the
+Modal is closed. If the provided component does not forward the `ref` to an element, the fallback is
+to capture an element in the `onClick`. This can be overridden by providing a `returnFocusRef` to
+the model.
 
 <ArgsTable of={Modal.Target} />
 
@@ -140,8 +162,8 @@ cannot use this component. The default element is an `h2` and can be changed via
 
 The `Modal.CloseIcon` is the 'X' icon in the top corner of a Modal. It always requires an
 `aria-label` which must be translated. It uses the `usePopupCloseIcon` which adds an `onClick` that
-will close the Modal. The default component rendered is an `IconButton` can be changed via the `as`.
-All props that `IconButton` takes are also available by default.
+will close the Modal. The default component rendered is an `TertiaryButton` with just an icon that
+can be changed via the `as`. All props that `TertiaryButton` takes are also available by default.
 
 <ArgsTable of={Modal.CloseIcon} />
 
@@ -153,9 +175,10 @@ Modal. It uses the `usePopupCloseButton` behavior hook which adds an `onClick` t
 you'll have to hoist the model. The default component rendered is a `SecondaryButton` and can be
 changed via the `as` prop. This component doesn't contain any styles and will take on the styles of
 the component given to it. For example, `as={DeleteButton}` will render a delete button.
-`as={IconButton}` will render an `IconButton`. If you give it a base element like `as="button"`, you
-are responsible for styling the element. You can add your own `onClick` to perform side effects.
-Your callback will be merged with the `onClick` that closes the Modal.
+`as={TertiaryButton}` with no children and an `icon` will render a `TertiaryButton` styled icon
+button. If you give it a base element like `as="button"`, you are responsible for styling the
+element. You can add your own `onClick` to perform side effects. Your callback will be merged with
+the `onClick` that closes the Modal.
 
 <ArgsTable of={Modal.CloseButton} />
 

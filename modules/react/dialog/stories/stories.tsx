@@ -1,16 +1,15 @@
-/// <reference path="../../../../typings.d.ts" />
 import React from 'react';
-import withReadme from 'storybook-readme/with-readme';
 
 import {Dialog} from '@workday/canvas-kit-react/dialog';
-import README from '../README.md';
 import {DeleteButton} from '@workday/canvas-kit-react/button';
-import {HStack} from '@workday/canvas-kit-labs-react';
+import {HStack} from '@workday/canvas-kit-react/layout';
 
 export default {
   title: 'Components/Popups/Dialog/React',
-  decorators: [withReadme(README)],
   component: Dialog,
+  parameters: {
+    ReadmePath: 'react/dialog',
+  },
 };
 
 export const Basic = () => {

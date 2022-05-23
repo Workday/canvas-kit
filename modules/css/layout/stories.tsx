@@ -1,12 +1,10 @@
 import React from 'react';
 import {storiesOf} from '@storybook/react';
-import withReadme from 'storybook-readme/with-readme';
-import README from './README.md';
 import './index.scss';
 import './stories.scss';
 
 storiesOf('Components/Containers/Layout/CSS', module)
-  .addDecorator(withReadme(README))
+  .addParameters({ReadmePath: 'css/layout'})
   .add('Responsive Layout', () => (
     <div className="story">
       <div>

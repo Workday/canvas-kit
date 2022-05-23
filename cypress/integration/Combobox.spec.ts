@@ -37,7 +37,7 @@ describe('Combobox', () => {
     });
 
     it('should not show menu', () => {
-      cy.findByRole('listbox').should('not.be.visible');
+      cy.findByRole('listbox').should('not.exist');
     });
 
     it('should show the clear button', () => {
@@ -154,7 +154,7 @@ describe('Combobox', () => {
           });
 
           it('should close the listbox', () => {
-            cy.findByRole('listbox').should('not.be.visible');
+            cy.findByRole('listbox').should('not.exist');
           });
 
           context('when the use hits the "a" key', () => {
@@ -213,7 +213,7 @@ describe('Combobox', () => {
         });
 
         it('should close the listbox', () => {
-          cy.findByRole('listbox').should('not.be.visible');
+          cy.findByRole('listbox').should('not.exist');
         });
 
         it('should keep focus on combobox', () => {
@@ -374,7 +374,7 @@ describe('Combobox', () => {
       });
 
       it('should update the aria-live status to "There are 3 suggestions"', () => {
-        cy.findByRole('log').should('contain', 'There are 3 suggestions');
+        cy.findByRole('status').should('contain', 'There are 3 suggestions');
       });
     });
   });

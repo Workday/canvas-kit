@@ -1,7 +1,5 @@
-/// <reference path="../../../../typings.d.ts" />
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
-import withReadme from 'storybook-readme/with-readme';
 import {controlComponent} from '../../../../utils/storybook';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {
@@ -11,10 +9,12 @@ import {
   userIcon,
 } from '@workday/canvas-system-icons-web';
 import {colors, typeColors} from '@workday/canvas-kit-react/tokens';
-import FormField from '../../../react/form-field';
-import Select from '../lib/Select';
-import {RenderOptionFunction} from '../lib/SelectBase';
-import README from '../README.md';
+import FormField from '@workday/canvas-kit-react/form-field';
+import {
+  Select,
+  RenderOptionFunction,
+  RenderSelectedFunction,
+} from '@workday/canvas-kit-preview-react/select';
 
 const hintText = 'Helpful text goes here.';
 const hintId = 'error-desc-id';
@@ -86,9 +86,19 @@ export const customRenderOption: RenderOptionFunction = option => {
   );
 };
 
+export const customRenderSelected: RenderSelectedFunction = option => {
+  const iconColor = colors.blackPepper100;
+  return (
+    <div style={{alignItems: 'center', display: 'flex'}}>
+      <SystemIcon icon={option.data.icon} color={iconColor} colorHover={iconColor} />
+      <div style={{marginLeft: 5}}>{option.value}</div>
+    </div>
+  );
+};
+
 storiesOf('Preview/Select/React/Top Label', module)
   .addParameters({component: Select})
-  .addDecorator(withReadme(README))
+  .addParameters({ReadmePath: 'preview-react/select'})
   .add('Default', () => (
     <FormField label="Label" inputId="select-default">
       {controlComponent(<Select name="contact" options={options} />)}
@@ -102,7 +112,12 @@ storiesOf('Preview/Select/React/Top Label', module)
   .add('Default with Custom Options Data', () => (
     <FormField label="Label" inputId="select-default-custom">
       {controlComponent(
-        <Select name="icon" options={customOptions} renderOption={customRenderOption} />
+        <Select
+          name="icon"
+          options={customOptions}
+          renderOption={customRenderOption}
+          renderSelected={customRenderSelected}
+        />
       )}
     </FormField>
   ))
@@ -146,7 +161,7 @@ storiesOf('Preview/Select/React/Top Label', module)
 
 storiesOf('Preview/Select/React/Left Label', module)
   .addParameters({component: Select})
-  .addDecorator(withReadme(README))
+  .addParameters({ReadmePath: 'preview-react/select'})
   .add('Default', () => (
     <FormField labelPosition={FormField.LabelPosition.Left} label="Label" inputId="select-default">
       {controlComponent(<Select name="contact" options={options} />)}
@@ -168,7 +183,12 @@ storiesOf('Preview/Select/React/Left Label', module)
       inputId="select-default-custom"
     >
       {controlComponent(
-        <Select name="icon" options={customOptions} renderOption={customRenderOption} />
+        <Select
+          name="icon"
+          options={customOptions}
+          renderOption={customRenderOption}
+          renderSelected={customRenderSelected}
+        />
       )}
     </FormField>
   ))

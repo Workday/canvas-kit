@@ -1,4 +1,4 @@
-import {Meta} from '@storybook/addon-docs/blocks';
+import {Meta} from '@storybook/addon-docs';
 
 import {Pagination} from '@workday/canvas-kit-react/pagination';
 
@@ -166,7 +166,7 @@ Undocumented props are spread to the underlying `<div>` element.
 
 #### Usage
 
-`Pagination.JumpToFirstButton` is an `IconButton` that subscribes to the `Pagination` context. This
+`Pagination.JumpToFirstButton` is an `Button` that subscribes to the `Pagination` context. This
 allows it to know when to disable and set `currentPage` to the first page.
 
 ```tsx
@@ -179,14 +179,14 @@ Undocumented props are spread to the underlying `<button>` element. Note that yo
 `aria-label` to meet accessibility standards. We recommend setting it to `First` or the translated
 equivalent.
 
-`Pagination.JumpToFirstButton` supports all `IconButton` props.
+`Pagination.JumpToFirstButton` supports all `TertiaryButton` props.
 
 ### Pagination.StepToPreviousButton
 
 #### Usage
 
-`Pagination.StepToPreviousButton` is an `IconButton` that subscribes to the `Pagination` context.
-This allows it to know when to disable and decrement the `currentPage`.
+`Pagination.StepToPreviousButton` is an `TertiaryButton` that renders an icon that subscribes to the
+`Pagination` context. This allows it to know when to disable and decrement the `currentPage`.
 
 ```tsx
 <Pagination.StepToPreviousButton aria-label="Previous" />
@@ -198,14 +198,14 @@ Undocumented props are spread to the underlying `<button>` element. Note that yo
 `aria-label` to meet accessibility standards. We recommend setting it to `Previous` or the
 translated equivalent.
 
-`Pagination.StepToPreviousButton` supports all `IconButton` props.
+`Pagination.StepToPreviousButton` supports all `TertiaryButton` props.
 
 ### Pagination.StepToNextButton
 
 #### Usage
 
-`Pagination.StepToNextButton` is an `IconButton` that subscribes to the `Pagination` context. This
-allows it to know when to disable and increment the `currentPage`.
+`Pagination.StepToNextButton` is an `TertiaryButton` that subscribes to the `Pagination` context.
+This allows it to know when to disable and increment the `currentPage`.
 
 ```tsx
 <Pagination.StepToNextButton aria-label="Next" />
@@ -217,14 +217,14 @@ Undocumented props are spread to the underlying `<button>` element. Note that yo
 `aria-label` to meet accessibility standards. We recommend setting it to `Next` or the translated
 equivalent.
 
-`Pagination.StepToNextButton` supports all `IconButton` props.
+`Pagination.StepToNextButton` supports all `TertiaryButton` props.
 
 ### Pagination.JumpToLastButton
 
 #### Usage
 
-`Pagination.JumpToLastButton` is an `IconButton` that subscribes to the `Pagination` context. This
-allows it to know when to disable and set `currentPage` to the last page.
+`Pagination.JumpToLastButton` is an `TertiaryButton` that renders an icon that subscribes to the
+`Pagination` context. This allows it to know when to disable and set `currentPage` to the last page.
 
 ```tsx
 <Pagination.JumpToLastButton aria-label="Last" />
@@ -236,7 +236,7 @@ Undocumented props are spread to the underlying `<button>` element. Note that yo
 `aria-label` to meet accessibility standards. We recommend setting it to `Last` or the translated
 equivalent.
 
-`Pagination.JumpToLastButton` supports all `IconButton` props.
+`Pagination.JumpToLastButton` supports all `TertiaryButton` props.
 
 ### Pagination.PageList
 
@@ -288,8 +288,8 @@ Undocumented props are spread to the underlying `<li>` element.
 
 #### Usage
 
-`Pagination.PageButton` is an `IconButton` that subscribes to the `Pagination` context. This allows
-it to update the `currentPage` and set the `toggled` styling when it is the current item.
+`Pagination.PageButton` is a `Button` that subscribes to the `Pagination` context. This allows it to
+update the `currentPage` and set the `toggled` styling when it is the current item.
 
 `Pagination.PageButton` will render `pageNumber` as its children.
 
@@ -305,7 +305,7 @@ translated equivalent.
 
 <ArgsTable of={PageButtonComponent} />
 
-`Pagination.PageButton` also supports all `IconButton` props.
+`Pagination.PageButton` also supports all `Button` props.
 
 ### Pagination.GoToForm
 

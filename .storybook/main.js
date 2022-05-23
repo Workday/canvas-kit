@@ -18,8 +18,7 @@ module.exports = {
         actions: false, // Disabled because actions is SLOW
       },
     },
-    'storybook-readme',
-    '@storybook/addon-knobs',
+    './readme-panel/preset.js',
     '@storybook/addon-storysource',
   ],
   typescript: {
@@ -44,6 +43,18 @@ module.exports = {
         },
       ],
     });
+    /**
+     * Added this because Storybook 6.3 is on emotion 10, so we rewrote the imports to point to emotion 11
+     * https://github.com/storybookjs/storybook/issues/13145
+     */
+    config.resolve = {
+      ...config.resolve,
+      alias: {
+        ...config.resolve.alias,
+        '@emotion/core': '@emotion/react',
+        'emotion-theming': '@emotion/react',
+      },
+    };
 
     // Update @storybook/addon-docs webpack rules to load all .mdx files in storybook
     const mdxRule = config.module.rules.find(rule => rule.test.toString() === /\.mdx$/.toString());
@@ -126,6 +137,10 @@ module.exports = {
       '@babel/plugin-transform-modules-commonjs',
       // Needed temporarily until https://github.com/storybookjs/storybook/issues/14805 is resolved
       ['@babel/plugin-proposal-private-property-in-object', {loose: true}],
+    ],
+    presets: [
+      ...options.presets,
+      ['@babel/preset-react', {runtime: 'classic'}, 'react-16-backwards-compatible-override'],
     ],
   }),
 };

@@ -1,11 +1,11 @@
 import React from 'react';
-import withReadme from 'storybook-readme/with-readme';
-import README from '../README.md';
 import '../index.scss';
 
 export default {
   title: 'Components/Indicators/Badge/CountBadge/CSS',
-  decorators: [withReadme(README)],
+  parameters: {
+    ReadmePath: 'css/badge',
+  },
 };
 
 export const Default = () => (

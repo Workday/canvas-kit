@@ -1,7 +1,6 @@
-/// <reference path="../../../../../typings.d.ts" />
 import * as React from 'react';
 import {withSnapshotsEnabled} from '../../../../../utils/storybook';
-import {Skeleton} from '../../index';
+import {Skeleton} from '@workday/canvas-kit-react/skeleton';
 import styled from '@emotion/styled';
 
 export default withSnapshotsEnabled({

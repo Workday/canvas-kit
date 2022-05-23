@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Combobox, {ComboboxProps} from '../lib/Combobox';
 import {MenuItem} from '@workday/canvas-kit-preview-react/menu';
-import {TextInput} from '../../../react/text-input';
+import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {render, fireEvent} from '@testing-library/react';
 
 const renderCombobox = (props: ComboboxProps) => render(<Combobox {...props} />);
@@ -95,7 +95,7 @@ describe('Combobox', () => {
       });
       fireEvent.focus(screen.getByRole('combobox'));
 
-      expect(screen.getByRole('log')).toHaveTextContent('Item count: 2');
+      expect(screen.getByRole('status')).toHaveTextContent('Item count: 2');
     });
   });
 

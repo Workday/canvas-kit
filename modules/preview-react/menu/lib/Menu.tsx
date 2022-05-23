@@ -1,10 +1,10 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import uuid from 'uuid/v4';
+
 import {MenuItemProps} from './MenuItem';
 import {Card} from '@workday/canvas-kit-react/card';
 import {commonColors, space, borderRadius} from '@workday/canvas-kit-react/tokens';
-import {hideMouseFocus, GrowthBehavior} from '@workday/canvas-kit-react/common';
+import {hideMouseFocus, GrowthBehavior, generateUniqueId} from '@workday/canvas-kit-react/common';
 
 export interface MenuProps extends GrowthBehavior, React.HTMLAttributes<HTMLUListElement> {
   /**
@@ -58,7 +58,7 @@ const List = styled('ul')({
 });
 
 export default class Menu extends React.Component<MenuProps, MenuState> {
-  private id = uuid();
+  private id = generateUniqueId();
   private animateId!: number;
 
   private menuRef: React.RefObject<HTMLUListElement>;
@@ -121,7 +121,7 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
     const cardWidth = grow ? '100%' : width;
 
     return (
-      <Card style={{display: 'inline-block'}} padding={space.zero} width={cardWidth}>
+      <Card display="inline-block" padding={space.zero} width={cardWidth} depth={3}>
         <Card.Body>
           <List
             role="menu"

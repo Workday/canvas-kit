@@ -27,6 +27,13 @@ describe('Canvas Kit Deprecate CookieBanner Codemod', () => {
       expectTransform(input, expected);
     });
 
+    it('should properly transform renamed imports from @workday/canvas-kit-react/cookie-banner', () => {
+      const input = `import {CookieBanner as CanvasCookieBanner} from '@workday/canvas-kit-react/cookie-banner'`;
+      const expected = `import {DeprecatedCookieBanner as CanvasCookieBanner} from '@workday/canvas-kit-react/cookie-banner'`;
+
+      expectTransform(input, expected);
+    });
+
     it('should properly transform default imports from @workday/canvas-kit-react/cookie-banner', () => {
       const input = `import CookieBanner from '@workday/canvas-kit-react/cookie-banner'`;
       const expected = `import DeprecatedCookieBanner from '@workday/canvas-kit-react/cookie-banner'`;
@@ -46,11 +53,11 @@ describe('Canvas Kit Deprecate CookieBanner Codemod', () => {
     it('should properly transform CookieBanner JSX identifiers', () => {
       const input = `
       import {CookieBanner} from '@workday/canvas-kit-react/cookie-banner';
-  
+
       const CustomCookieBanner = () => {
         return (
           <CookieBanner
-            onAccept={() => console.log('accecpted')}
+            onAccept={() => console.log('accepted')}
             notice={CookieBanner.DefaultNotice}
           >
             Hello World
@@ -64,11 +71,11 @@ describe('Canvas Kit Deprecate CookieBanner Codemod', () => {
       `;
       const expected = `
       import {DeprecatedCookieBanner} from '@workday/canvas-kit-react/cookie-banner';
-  
+
       const CustomCookieBanner = () => {
         return (
           <DeprecatedCookieBanner
-            onAccept={() => console.log('accecpted')}
+            onAccept={() => console.log('accepted')}
             notice={DeprecatedCookieBanner.DefaultNotice}
           >
             Hello World
@@ -87,7 +94,7 @@ describe('Canvas Kit Deprecate CookieBanner Codemod', () => {
     it('should properly transform type reference identifiers', () => {
       const input = `
       import { CookieBannerProps } from '@workday/canvas-kit-react/cookie-banner';
-  
+
       type CustomCookieBannerProps = CookieBannerProps;
       interface AnotherCookieBannerProps extends CookieBannerProps {
         specialProp?: boolean;
@@ -95,7 +102,7 @@ describe('Canvas Kit Deprecate CookieBanner Codemod', () => {
       `;
       const expected = `
       import { DeprecatedCookieBannerProps } from '@workday/canvas-kit-react/cookie-banner';
-  
+
       type CustomCookieBannerProps = DeprecatedCookieBannerProps;
       interface AnotherCookieBannerProps extends DeprecatedCookieBannerProps {
         specialProp?: boolean;

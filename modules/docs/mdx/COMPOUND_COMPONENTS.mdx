@@ -1,4 +1,4 @@
-import {Meta} from '@storybook/addon-docs/blocks';
+import {Meta} from '@storybook/addon-docs';
 
 <Meta title="Welcome/Dev Docs/Compound Components" />
 
@@ -209,8 +209,8 @@ const MyComponent = () => {
   return (
     <Tabs shouldSelect={shouldSelect} onSelect={onSelect}>
       <Tabs.List>
-        <Tabs.Item name="first">First</Tabs.Item>
-        <Tabs.Item name="second">Second</Tabs.Item>
+        <Tabs.Item data-id="first">First</Tabs.Item>
+        <Tabs.Item data-id="second">Second</Tabs.Item>
       </Tabs.List>
     </Tabs>
   );

@@ -1,13 +1,13 @@
-/// <reference path="../../../../../typings.d.ts" />
-/** @jsx jsx */
-import {jsx} from '@emotion/core';
+import React from 'react';
 import {StaticStates} from '@workday/canvas-kit-react/common';
 import {ComponentStatesTable} from '@workday/canvas-kit-labs-react/common';
 import {withSnapshotsEnabled} from '../../../../../utils/storybook';
-import {SidePanel} from '../../index';
+import {
+  SidePanel,
+  SidePanelBackgroundColor,
+  SidePanelOpenDirection,
+} from '@workday/canvas-kit-react/side-panel';
 import {space} from '@workday/canvas-kit-react/tokens';
-import {SidePanelBackgroundColor, SidePanelOpenDirection} from '../../lib/SidePanel';
-import {action} from '@storybook/addon-actions';
 
 export default withSnapshotsEnabled({
   title: 'Testing/React/Containers/Side Panel',
@@ -33,7 +33,7 @@ export const SidePanelStates = () => (
             header: 'Navigation',
             open: true,
             backgroundColor: SidePanelBackgroundColor.Gray,
-            onToggleClick: action('click toggle button'),
+            onToggleClick: () => console.log('click toggle button'),
           },
         },
         {
@@ -42,7 +42,7 @@ export const SidePanelStates = () => (
             header: 'Navigation',
             open: true,
             backgroundColor: SidePanelBackgroundColor.Gray,
-            onToggleClick: action('click toggle button'),
+            onToggleClick: () => console.log('click toggle button'),
             openDirection: SidePanelOpenDirection.Right,
           },
         },
@@ -52,7 +52,7 @@ export const SidePanelStates = () => (
             header: 'Navigation',
             open: true,
             backgroundColor: SidePanelBackgroundColor.Gray,
-            onToggleClick: action('click toggle button'),
+            onToggleClick: () => console.log('click toggle button'),
             padding: space.xxs,
           },
         },
@@ -62,7 +62,7 @@ export const SidePanelStates = () => (
             header: 'Navigation',
             open: true,
             backgroundColor: SidePanelBackgroundColor.Gray,
-            onToggleClick: action('click toggle button'),
+            onToggleClick: () => console.log('click toggle button'),
             openWidth: 350,
           },
         },
@@ -71,7 +71,7 @@ export const SidePanelStates = () => (
           props: {
             header: 'Navigation',
             open: false,
-            onToggleClick: action('click toggle button'),
+            onToggleClick: () => console.log('click toggle button'),
           },
         },
       ]}

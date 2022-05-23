@@ -124,11 +124,7 @@ describe('changeToStaticStates', () => {
         outline: 'none',
       },
     };
-    const expected = {
-      '[data-whatinput="noop"], [data-whatinput="noop"], [data-whatinput="noop"], [data-whatinput="noop"]': {
-        outline: 'none',
-      },
-    };
+    const expected = {};
     expect(convertToStaticStates(input)).toEqual(expected);
   });
 });

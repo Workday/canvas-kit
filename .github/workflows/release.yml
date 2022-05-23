@@ -190,7 +190,7 @@ jobs:
       ## Notify Slack of any failures
       - name: Report failures
         if: ${{ failure() }}
-        run: node utils/report-failure.js
+        run: node utils/report-failure.mjs
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
           TRAVIS_BRANCH: ${{ steps.extract-branch.outputs.branch }}

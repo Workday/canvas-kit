@@ -1,9 +1,8 @@
-/// <reference path="../../../../../typings.d.ts" />
 import * as React from 'react';
 import {StaticStates} from '@workday/canvas-kit-react/common';
 import {ComponentStatesTable, permutateProps} from '@workday/canvas-kit-labs-react/common';
 import {withSnapshotsEnabled, customColorTheme} from '../../../../../utils/storybook';
-import {TextInput} from '../../../text-input';
+import {TextInput} from '@workday/canvas-kit-react/text-input';
 
 export default withSnapshotsEnabled({
   title: 'Testing/React/Inputs/Text Input',

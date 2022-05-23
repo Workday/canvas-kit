@@ -1,10 +1,9 @@
-/// <reference path="../../../../../typings.d.ts" />
 import * as React from 'react';
 import {StaticStates} from '@workday/canvas-kit-react/common';
 import {ComponentStatesTable, permutateProps} from '@workday/canvas-kit-labs-react/common';
 import {withSnapshotsEnabled, customColorTheme} from '../../../../../utils/storybook';
 
-import {Checkbox} from '../../../checkbox';
+import {Checkbox} from '@workday/canvas-kit-react/checkbox';
 
 export default withSnapshotsEnabled({
   title: 'Testing/React/Inputs/Checkbox',

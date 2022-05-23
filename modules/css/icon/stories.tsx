@@ -1,9 +1,8 @@
+/** @jsxRuntime classic */
 /** @jsx jsx */
-import {css, jsx} from '@emotion/core';
+import {css, jsx} from '@emotion/react';
 import {Component} from 'react';
 import {storiesOf} from '@storybook/react';
-import withReadme from 'storybook-readme/with-readme';
-import README from './README.md';
 import {colors} from '../../react/tokens';
 // @ts-ignore
 import initializeIcons from './lib/canvas-kit-css-icon';
@@ -28,7 +27,7 @@ class IconDemo extends Component {
 }
 
 storiesOf('Tokens/Icon/CSS', module)
-  .addDecorator(withReadme(README))
+  .addParameters({ReadmePath: 'css/icon'})
   .add('Accent Icon', () => (
     <div className="story">
       <IconDemo>

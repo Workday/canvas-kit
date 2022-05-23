@@ -1,6 +1,5 @@
-/** @jsx jsx */
 import React from 'react';
-import {jsx, keyframes} from '@emotion/core';
+import {keyframes} from '@emotion/react';
 
 import {
   Card,
@@ -9,13 +8,15 @@ import {
   SecondaryButton,
   SystemIconCircle,
   TextInput,
+  styled,
 } from '@workday/canvas-kit-react';
 
-import {Box, Flex} from '@workday/canvas-kit-labs-react';
+import {Box, Flex} from '@workday/canvas-kit-react/layout';
 
 import {Skeleton} from '@workday/canvas-kit-react/skeleton';
 import {borderRadius, space, type} from '@workday/canvas-kit-react/tokens';
 import {patternIcon} from '@workday/canvas-system-icons-web';
+import {StyledType} from '@workday/canvas-kit-react/common';
 
 const fadeOut = keyframes`
   from {
@@ -26,6 +27,10 @@ const fadeOut = keyframes`
     opacity: 0;
   }
 `;
+
+const StyledSimulation = styled(Box)<StyledType>({
+  pointerEvents: 'none',
+});
 
 export const Simulation = () => {
   const [loading, setLoading] = React.useState(true);
@@ -96,16 +101,12 @@ export const Simulation = () => {
               </Box>
             )}
 
-            <Box
+            <StyledSimulation
               position="absolute"
               top={0}
               left={0}
               width="100%"
-              css={{
-                pointerEvents: 'none',
-                animation: !loading ? `${fadeOut} 150ms ease-out` : undefined,
-                animationFillMode: !loading ? 'forwards' : undefined,
-              }}
+              animation={!loading ? `${fadeOut} 150ms ease-out forwards` : undefined}
             >
               <Skeleton>
                 <Flex alignItems="center">
@@ -120,7 +121,7 @@ export const Simulation = () => {
                 </Flex>
                 <Skeleton.Text lineCount={3} />
               </Skeleton>
-            </Box>
+            </StyledSimulation>
           </Box>
         </Card.Body>
       </Card>

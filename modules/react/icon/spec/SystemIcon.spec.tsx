@@ -1,8 +1,10 @@
 import * as React from 'react';
-import {mount} from 'enzyme';
-import SystemIcon, {systemIconStyles} from '../lib/SystemIcon';
+import {render} from '@testing-library/react';
+
 import {colors, iconColors} from '@workday/canvas-kit-react/tokens';
 import {activityStreamIcon} from '@workday/canvas-system-icons-web';
+
+import SystemIcon, {systemIconStyles} from '../lib/SystemIcon';
 
 describe('System Icon', () => {
   test('Defaults styles are set correctly', () => {
@@ -54,10 +56,10 @@ describe('System Icon', () => {
     );
   });
 
-  test('SystemIcon should spread extra props', () => {
-    const component = mount(<SystemIcon icon={activityStreamIcon} data-propspread="test" />);
-    const container = component.at(0).getDOMNode();
-    expect(container.getAttribute('data-propspread')).toBe('test');
-    component.unmount();
+  it('should forward extra props to containing element', () => {
+    const {container} = render(<SystemIcon icon={activityStreamIcon} data-propspread="test" />);
+
+    // container is not a semantic element
+    expect(container.firstChild).toHaveAttribute('data-propspread', 'test');
   });
 });

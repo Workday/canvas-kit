@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-labs-react",
-  "version": "6.0.1",
+  "version": "7.0.1",
   "description": "Canvas Kit Labs is an incubator for new and experimental components. Since we have a rather rigorous process for getting components in at a production level, it can be valuable to make them available earlier while we continuously iterate on the API/functionality. The Labs modules allow us to do that as needed.",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -17,28 +17,20 @@
     "*/lib/*",
     "*/index.ts",
     "dist/",
-    "index.ts",
-    "ts3.5/**/*"
+    "index.ts"
   ],
-  "typesVersions": {
-    "<=3.5": {
-      "*": [
-        "ts3.5/*"
-      ]
-    }
-  },
   "scripts": {
     "watch": "yarn build:es6 -w",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "clean": "rimraf dist && rimraf ts3.5 && rimraf .build-info && mkdirp dist && mkdirp ts3.5/dist",
+    "clean": "rimraf dist && rimraf .build-info && mkdirp dist",
     "build:cjs": "tsc -p tsconfig.cjs.json",
     "build:es6": "tsc -p tsconfig.es6.json",
     "build:rebuild": "npm-run-all clean build",
-    "build:downlevel-dts": "yarn run downlevel-dts dist ts3.5/dist",
-    "build": "npm-run-all --parallel build:cjs build:es6 --sequential build:downlevel-dts",
+    "build": "npm-run-all --parallel build:cjs build:es6",
     "prepack": "node ../../utils/publish.js pre labs-react",
     "postpack": "node ../../utils/publish.js post labs-react",
-    "depcheck": "node ../../utils/check-dependencies-exist.js"
+    "depcheck": "node ../../utils/check-dependencies-exist.js",
+    "typecheck:src": "tsc -p . --noEmit --incremental false"
   },
   "keywords": [
     "canvas",
@@ -51,22 +43,16 @@
     "react": "^16.8 || ^17.0"
   },
   "dependencies": {
-    "@emotion/core": "^10.0.28",
-    "@emotion/is-prop-valid": "^0.8.2",
-    "@emotion/styled": "^10.0.27",
-    "@types/uuid": "^3.4.4",
-    "@workday/canvas-kit-preview-react": "^6.0.1",
-    "@workday/canvas-kit-react": "^6.0.1",
-    "@workday/canvas-system-icons-web": "1.0.41",
+    "@emotion/react": "^11.7.1",
+    "@emotion/styled": "^11.6.0",
+    "@workday/canvas-kit-preview-react": "^7.0.1",
+    "@workday/canvas-kit-react": "^7.0.1",
+    "@workday/canvas-system-icons-web": "^3.0.0",
     "chroma-js": "^2.1.0",
-    "csstype": "^2.6.17",
     "lodash.flatten": "^4.4.0",
-    "rtl-css-js": "^1.14.1",
-    "uuid": "^3.3.3"
+    "rtl-css-js": "^1.14.1"
   },
   "devDependencies": {
-    "@types/lodash.flatten": "^4.4.6",
-    "formik": "^2.2.9",
-    "yup": "^0.31.1"
+    "@types/lodash.flatten": "^4.4.6"
   }
 }

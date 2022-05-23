@@ -1,10 +1,6 @@
-/// <reference path="../../../../typings.d.ts" />
 import * as React from 'react';
-import {storiesOf} from '@storybook/react';
-import {action} from '@storybook/addon-actions';
-import withReadme from 'storybook-readme/with-readme';
 import {StaticStates} from '@workday/canvas-kit-react/common';
-import {ComponentStatesTable, permutateProps} from '@workday/canvas-kit-labs-react/common';
+import {ComponentStatesTable} from '@workday/canvas-kit-labs-react/common';
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
 
 import {
@@ -14,15 +10,14 @@ import {
   percentageIcon,
 } from '@workday/canvas-system-icons-web';
 
-import {IconButton} from '@workday/canvas-kit-react/button';
 import {SegmentedControl} from '../index';
-
-import README from '../README.md';
 
 export default withSnapshotsEnabled({
   title: 'Testing/React/Buttons/Segmented Control',
   component: SegmentedControl,
-  decorators: [withReadme(README)],
+  parameters: {
+    ReadmePath: 'labs-react/header',
+  },
 });
 
 export const SegmentedControlStates = () => (
@@ -40,25 +35,25 @@ export const SegmentedControlStates = () => (
     >
       {props => (
         <SegmentedControl value={props.value}>
-          <IconButton
+          <SegmentedControl.Button
             icon={listViewIcon}
             value="list-view"
             aria-label="List View"
             className={props.value === 'list-view' ? props.className : undefined}
           />
-          <IconButton
+          <SegmentedControl.Button
             icon={worksheetsIcon}
             value="table-view"
             aria-label="Table View"
             disabled={true}
           />
-          <IconButton
+          <SegmentedControl.Button
             icon={deviceTabletIcon}
             value="device-view"
             aria-label="Device View"
             className={props.value === 'device-view' ? props.className : undefined}
           />
-          <IconButton
+          <SegmentedControl.Button
             icon={percentageIcon}
             value="percent-view"
             aria-label="Percent View"

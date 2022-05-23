@@ -1,20 +1,14 @@
-/// <reference path="../../../../typings.d.ts" />
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
-import withReadme from 'storybook-readme/with-readme';
 
 import Avatar from '../index';
-import README from '../README.md';
-import {withKnobs} from '@storybook/addon-knobs';
-import {action} from '@storybook/addon-actions';
 // @ts-ignore: Cannot find module error
 import testAvatar from './test-avatar.png';
 
-const handleAvatarButtonClick = action('AvatarButton clicked');
+const handleAvatarButtonClick = () => console.log('AvatarButton clicked');
 
 storiesOf('Components/Indicators/Avatar/React/Default', module)
-  .addDecorator(withReadme(README))
-  .addDecorator(withKnobs)
+  .addParameters({ReadmePath: 'react/avatar'})
   .addParameters({component: Avatar})
   .add('Light', () => (
     <div className="story">
@@ -66,8 +60,7 @@ storiesOf('Components/Indicators/Avatar/React/Default', module)
   ));
 
 storiesOf('Components/Indicators/Avatar/React/Avatar Button', module)
-  .addDecorator(withReadme(README))
-  .addDecorator(withKnobs)
+  .addParameters({ReadmePath: 'react/avatar'})
   .addParameters({component: Avatar})
   .add('Light', () => (
     <div className="story">

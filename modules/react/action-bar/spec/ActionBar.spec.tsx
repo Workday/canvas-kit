@@ -1,23 +1,6 @@
-import * as React from 'react';
-import {mount} from 'enzyme';
-import ActionBar from '../index';
+import {ActionBar} from '../lib/ActionBar';
+import {useActionBarModel} from '../lib/useActionBarModel';
 
-describe('ActionBar', () => {
-  const cb = jest.fn();
-  afterEach(() => {
-    cb.mockReset();
-  });
-
-  test('render a action bar with id', () => {
-    const component = mount(<ActionBar id="myActionBar">Button Label</ActionBar>);
-    expect(component.find(ActionBar).props().id).toBe('myActionBar');
-    component.unmount();
-  });
-
-  test('ActionBar should spread extra props', () => {
-    const component = mount(<ActionBar data-propspread="test" />);
-    const container = component.at(0).getDOMNode();
-    expect(container.getAttribute('data-propspread')).toBe('test');
-    component.unmount();
-  });
+describe('ActionBar.Item', () => {
+  verifyComponent(ActionBar.Item, {modelFn: useActionBarModel});
 });

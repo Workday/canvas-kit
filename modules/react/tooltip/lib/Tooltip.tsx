@@ -31,7 +31,7 @@ export interface TooltipProps extends Omit<React.HTMLAttributes<HTMLDivElement>,
    * Determines the tooltip type for accessibility.
    *
    * - `label`: Sets the accessible name for the wrapped element. Use for icons or if tooltip
-   *   `title` prop is the same as the text content of the wrapped element. E.g. IconButtons or
+   *   `title` prop is the same as the text content of the wrapped element. E.g. TertiaryButtons that render an icon or
    *   Ellipsis tooltips.
    * - `describe`: Sets `aria-describedby` of the wrapped element. Use if the tooltip has additional
    *   information about the target.
@@ -44,6 +44,14 @@ export interface TooltipProps extends Omit<React.HTMLAttributes<HTMLDivElement>,
    * @default 'label'
    */
   type?: 'label' | 'describe' | 'muted';
+  /**
+   * Amount of time (in ms) to delay before showing the tooltip
+   */
+  showDelay?: number;
+  /**
+   * Amount of time (in ms) to delay before hiding the tooltip
+   */
+  hideDelay?: number;
 }
 
 function mergeCallbacks<T extends {[key: string]: any}>(
@@ -66,10 +74,17 @@ export const Tooltip = ({
   placement = 'top',
   title,
   children,
+  showDelay = 300,
+  hideDelay = 100,
   ...elemProps
 }: TooltipProps) => {
   const titleText = innerText(title);
-  const {targetProps, popperProps, tooltipProps} = useTooltip({type, titleText});
+  const {targetProps, popperProps, tooltipProps} = useTooltip({
+    type,
+    titleText,
+    showDelay,
+    hideDelay,
+  });
 
   return (
     <React.Fragment>

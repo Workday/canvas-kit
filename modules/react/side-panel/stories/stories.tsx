@@ -1,23 +1,76 @@
-/// <reference path="../../../../typings.d.ts" />
-/** @jsx jsx */
-import {css, jsx} from '@emotion/core';
 import * as React from 'react';
-import {storiesOf} from '@storybook/react';
-import withReadme from 'storybook-readme/with-readme';
-import {homeIcon, starIcon, rocketIcon, plusIcon} from '@workday/canvas-system-icons-web';
+import {
+  homeIcon,
+  starIcon,
+  rocketIcon,
+  plusIcon,
+  justifyIcon,
+  assistantIcon,
+  notificationsIcon,
+  inboxIcon,
+} from '@workday/canvas-system-icons-web';
 import styled from '@emotion/styled';
-import {select, number} from '@storybook/addon-knobs';
 
-import {colors, type} from '@workday/canvas-kit-react/tokens';
-import README from '../README.md';
+import {colors, type, space, depth} from '@workday/canvas-kit-react/tokens';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
-import {DeprecatedHeader} from '@workday/canvas-kit-labs-react/header';
-import {IconButton, PrimaryButton} from '@workday/canvas-kit-react/button';
-import {Avatar} from '@workday/canvas-kit-react/avatar';
+import {
+  TertiaryButton,
+  PrimaryButton,
+  Hyperlink,
+  SecondaryButton,
+} from '@workday/canvas-kit-react/button';
 import {SidePanel} from '@workday/canvas-kit-react/side-panel';
+import {SidePanelProps} from '../lib/SidePanel';
+
+import {
+  defaultCanvasTheme,
+  StyledType,
+  createComponent,
+  dubLogoBlue,
+} from '@workday/canvas-kit-react/common';
+import {Flex, StackSpacing, HStackProps, HStack} from '@workday/canvas-kit-react/layout';
+import {SearchForm} from '@workday/canvas-kit-labs-react/search-form';
+import {Avatar} from '@workday/canvas-kit-react/avatar';
+
+export default {
+  title: 'Components/Containers/Side Panel/React',
+  component: SidePanel,
+  parameters: {ReadmePath: 'react/side-panel'},
+  argTypes: {
+    backgroundColor: {
+      options: {
+        white: SidePanel.BackgroundColor.White,
+        gray: SidePanel.BackgroundColor.Gray,
+        transparent: SidePanel.BackgroundColor.Transparent,
+      },
+      control: 'radio',
+    },
+    openWidth: {
+      control: 'number',
+    },
+    openDirection: {
+      options: {
+        left: SidePanel.OpenDirection.Left,
+        right: SidePanel.OpenDirection.Right,
+      },
+      control: 'radio',
+    },
+    breakpoint: {
+      control: 'number',
+    },
+    theme: {
+      control: 'object',
+      defaultValue: defaultCanvasTheme,
+    },
+  },
+};
 
 interface SidePanelState {
   open: boolean;
+}
+
+interface HeaderItemProps extends Omit<HStackProps, 'spacing'> {
+  spacing?: StackSpacing;
 }
 
 const ListItem = styled('li')({
@@ -38,99 +91,105 @@ const UnorderedList = styled('ul')({
   paddingLeft: 0,
 });
 
-const listItemOpen = css({
-  padding: '15px 24px',
-  marginLeft: '-24px',
-  marginRight: '-24px',
-});
-
-const listItemClosed = css({
-  padding: '15px 20px',
-  marginLeft: 0,
-  marginRight: 0,
-  justifyContent: 'center',
-});
-
-const AddButton = styled(IconButton)({
+const AddButton = styled(SecondaryButton)({
   margin: '0 auto',
-  display: 'block',
+  display: 'flex',
 });
 
-// SidePanel Open Direction Knob
-const label = 'Open Direction';
-const options = {
-  left: SidePanel.OpenDirection.Left,
-  right: SidePanel.OpenDirection.Right,
-};
-const defaultValue = SidePanel.OpenDirection.Left;
+const StyledListItem = styled(Flex)<StyledType>({
+  display: 'flex',
+  listStyle: 'none',
+  alignItems: 'end',
+  cursor: 'pointer',
+  '&:hover': {
+    backgroundColor: colors.soap300,
+  },
+});
 
-// SidePanel Breakpoint Knob
-const breakpointLabel = 'Breakpoint';
-const breakpointDefaultValue = 768;
+const GlobalHeaderItem = createComponent('div')({
+  displayName: 'GlobalHeader.Item',
+  Component: ({spacing = 's', ...props}: HeaderItemProps, ref) => (
+    <HStack spacing={spacing} alignItems="center" marginX={space.xs} ref={ref} {...props} />
+  ),
+});
 
-// SidePanel Open Width Knob
-const openWidthLabel = 'Open Width';
-const openWidthDefaultValue = 300;
+const GlobalHeader = createComponent('header')({
+  displayName: 'GlobalHeader',
+  Component: (props, ref, Element) => <HeaderWrapper ref={ref} as={Element} {...props} />,
+  subComponents: {Item: GlobalHeaderItem},
+});
 
-// SidePanel Open Background Color
-const openBackgroundColorLabel = 'Open Background Color';
-const openBackgroundColorOptions = {
-  white: SidePanel.BackgroundColor.White,
-  Gray: SidePanel.BackgroundColor.Gray,
-  transparent: SidePanel.BackgroundColor.Transparent,
-};
-const openBackgroundColorDefault = SidePanel.BackgroundColor.Gray;
+const HeaderWrapper = styled('header')<StyledType>({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  boxSizing: 'border-box',
+  ...type.levels.subtext.large,
+  WebkitFontSmoothing: 'antialiased',
+  MozOsxFontSmoothing: 'grayscale',
+  backgroundColor: colors.frenchVanilla100,
+  ...depth[1],
+  padding: space.xxs,
+});
 
-class SidePanelWrapper extends React.Component<{}, SidePanelState> {
+const WorkdayLogo = styled('span')({lineHeight: 0});
+
+class SidePanelWrapper extends React.Component<SidePanelProps, SidePanelState> {
   public state = {
     open: true,
   };
 
   public render() {
     const {open} = this.state;
-    const listItemStyles = open ? listItemOpen : listItemClosed;
+
     return (
       <SidePanel
-        backgroundColor={select(
-          openBackgroundColorLabel,
-          openBackgroundColorOptions,
-          openBackgroundColorDefault
-        )}
-        openWidth={number(openWidthLabel, openWidthDefaultValue)}
-        openDirection={select(label, options, defaultValue)}
+        {...this.props}
         open={open}
         onToggleClick={this.onClick}
-        breakpoint={number(breakpointLabel, breakpointDefaultValue)}
         onBreakpointChange={this.handleBreakpoint}
         header={'Side Panel Header'}
       >
         {open ? (
           <PrimaryButton>Add New</PrimaryButton>
         ) : (
-          <AddButton toggled={false} size="small" variant="circleFilled" aria-label="Add">
-            <SystemIcon icon={plusIcon} />
-          </AddButton>
+          <AddButton size="small" aria-label="Add" icon={plusIcon} />
         )}
         {/* TODO replace this with our list component */}
         <UnorderedList>
-          <ListItem css={listItemStyles}>
+          <StyledListItem
+            padding={open ? '15px 24px' : '15px 20px'}
+            marginLeft={open ? '-24px' : 0}
+            marginRight={open ? '-24px' : 0}
+            justifyContent={open ? undefined : 'center'}
+          >
             <span>
               <SystemIcon icon={homeIcon} />
             </span>
             {open && <ListTitle>Home</ListTitle>}
-          </ListItem>
-          <ListItem css={listItemStyles}>
+          </StyledListItem>
+          <StyledListItem
+            padding={open ? '15px 24px' : '15px 20px'}
+            marginLeft={open ? '-24px' : 0}
+            marginRight={open ? '-24px' : 0}
+            justifyContent={open ? undefined : 'center'}
+          >
             <span>
               <SystemIcon icon={starIcon} />
             </span>
             {open && <ListTitle>Favorites</ListTitle>}
-          </ListItem>
-          <ListItem css={listItemStyles}>
+          </StyledListItem>
+          <StyledListItem
+            padding={open ? '15px 24px' : '15px 20px'}
+            marginLeft={open ? '-24px' : 0}
+            marginRight={open ? '-24px' : 0}
+            justifyContent={open ? undefined : 'center'}
+          >
             <span>
               <SystemIcon icon={rocketIcon} />
             </span>
             {open && <ListTitle>Items</ListTitle>}
-          </ListItem>
+          </StyledListItem>
         </UnorderedList>
       </SidePanel>
     );
@@ -150,33 +209,44 @@ class SidePanelWrapper extends React.Component<{}, SidePanelState> {
   };
 }
 
-storiesOf('Components/Containers/Side Panel/React', module)
-  .addParameters({component: SidePanel})
-  .addDecorator(withReadme(README))
-  .add('Default', () => (
-    <div className="story">
-      <div style={{height: '67vh', position: 'relative'}}>
-        <SidePanel
-          backgroundColor={SidePanel.BackgroundColor.Gray}
-          onToggleClick={() => console.warn('clicked')}
-          header={'Side Panel Header'}
-          open={true}
-        />
-      </div>
-    </div>
-  ))
-  .add('Configurable', () => (
-    <div className="story">
-      <div style={{height: '67vh', position: 'relative'}}>
-        <DeprecatedHeader brandUrl="#">
-          <Avatar
-            onClick={() => {
-              alert('clicked avatar');
-            }}
-          />
-          <PrimaryButton>Sign Up</PrimaryButton>
-        </DeprecatedHeader>
-        <SidePanelWrapper />
-      </div>
-    </div>
-  ));
+export const Default = () => (
+  <div style={{height: '67vh', position: 'relative'}}>
+    <SidePanel
+      backgroundColor={SidePanel.BackgroundColor.Gray}
+      onToggleClick={() => console.warn('clicked')}
+      header={'Side Panel Header'}
+      open={true}
+    />
+  </div>
+);
+
+const Template = props => (
+  <div style={{height: '67vh', position: 'relative'}}>
+    <GlobalHeader>
+      <GlobalHeader.Item>
+        <TertiaryButton aria-label="menu" icon={justifyIcon} />
+        <Hyperlink>
+          <WorkdayLogo dangerouslySetInnerHTML={{__html: dubLogoBlue}} />
+        </Hyperlink>
+      </GlobalHeader.Item>
+      <GlobalHeader.Item margin="auto" width="100%" maxWidth={`calc(${space.xxxl} * 6)`}>
+        <SearchForm onSubmit={() => 1} />
+      </GlobalHeader.Item>
+      <GlobalHeader.Item>
+        <TertiaryButton aria-label="messages" icon={assistantIcon} />
+        <TertiaryButton aria-label="notifications" icon={notificationsIcon} />
+        <TertiaryButton aria-label="inbox" icon={inboxIcon} />
+        <Avatar size={Avatar.Size.m} variant={Avatar.Variant.Light} />
+      </GlobalHeader.Item>
+    </GlobalHeader>
+    <SidePanelWrapper {...props} />
+  </div>
+);
+
+export const Configurable = Template.bind({});
+(Configurable as any).args = {
+  backgroundColor: SidePanel.BackgroundColor.Gray,
+  openWidth: 300,
+  breakpoint: 768,
+  openDirection: SidePanel.OpenDirection.Left,
+};

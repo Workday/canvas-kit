@@ -10,18 +10,17 @@ const inquirer = require('inquirer');
 const glob = require('glob');
 const replaceInFiles = require('replace-in-files');
 const addExport = require('./create-component/addExport');
-
-require('colors');
+const chalk = require('chalk');
 
 const cwd = process.cwd();
 
-console.log('\nCanvas Kit Component Promoter'.brightBlue.underline.bold);
+console.log(chalk.blueBright.underline.bold('\nCanvas Kit Component Promoter'));
 
 console.log(
   '\nThis utility will walk you through promoting a Canvas Kit Labs or Preview component to a regular component.'
 );
 
-console.log('\nPress ^C at any time to quit.\n'.gray);
+console.log(chalk.gray('\nPress ^C at any time to quit.\n'));
 
 const questions = [
   {
@@ -59,13 +58,13 @@ inquirer.prompt(questions).then(answers => {
   const destPath = path.join(destModule, component);
 
   if (fs.existsSync(`${destPath}`)) {
-    console.log(`\n${destPath} already exists. Skipping.`.yellow);
+    console.log(chalk.yellow(`\n${destPath} already exists. Skipping.`));
   } else {
     console.log(
-      `\nMoving `.gray +
-        `modules/${srcPrefix}react/${component}`.cyan +
-        ` > `.gray +
-        `modules/${destPrefix}react/${component}`.cyan
+      chalk.gray(`\nMoving `) +
+        chalk.cyan(`modules/${srcPrefix}react/${component}`) +
+        chalk.gray(` > `) +
+        chalk.cyan(`modules/${destPrefix}react/${component}`)
     );
 
     exec(`git mv ${srcPath} ${destModule}`)
@@ -77,7 +76,7 @@ inquirer.prompt(questions).then(answers => {
           }
 
           try {
-            console.log(`Updating file paths and removing labs references\n`.gray);
+            console.log(chalk.gray(`Updating file paths and removing labs references\n`));
             await replaceInFiles({
               files,
               from: `@workday/canvas-kit-${srcPrefix}react/${component}`,
@@ -120,7 +119,7 @@ inquirer.prompt(questions).then(answers => {
             console.log('Error occurred:', error);
           }
 
-          console.log(`Adding depenency to ` + `modules/react/index.ts\n`.brightBlue);
+          console.log(chalk.blueBright(`Adding depenency to ` + `modules/react/index.ts\n`));
           addExport(component);
         });
       })

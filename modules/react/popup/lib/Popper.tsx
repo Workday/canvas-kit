@@ -6,6 +6,7 @@ export type Placement = PopperJS.Placement;
 export type PopperOptions = PopperJS.Options;
 
 import {usePopupStack} from './hooks';
+import {useLocalRef} from '@workday/canvas-kit-react/common';
 
 export interface PopperProps {
   /**
@@ -21,14 +22,6 @@ export interface PopperProps {
    * `anchorElement`.
    */
   children: ((props: {placement: Placement}) => React.ReactNode) | React.ReactNode;
-  /**
-   * The element that contains the portal children when `portal` is true. It is best to not define
-   * this unless you know what you're doing. Popper works with a PopupStack and in order for
-   * z-indexes to work correctly, all Popups on your page should live on the same root element
-   * otherwise you risk running into rendering issues:
-   * https://philipwalton.com/articles/what-no-one-told-you-about-z-index/
-   */
-  containerElement?: Element | null;
   /**
    * When provided, this optional callback will be used to determine positioning for the Popper element
    * instead of calling `getBoundingClientRect` on the `anchorElement` prop. Use this when you need
@@ -61,13 +54,18 @@ export interface PopperProps {
    */
   popperOptions?: Partial<PopperOptions>;
   /**
-   * If true, attach the Popper to the `containerElement`. If false, render the Popper within the
+   * If false, render the Popper within the
    * DOM hierarchy of its parent. A non-portal Popper will constrained by the parent container
    * overflows. If you set this to `false`, you may experience issues where you content gets cut off
    * by scrollbars or `overflow: hidden`
    * @default true
    */
   portal?: boolean;
+  /**
+   * Reference to the PopperJS instance. Useful for making direct method calls on the popper
+   * instance like `update`.
+   */
+  popperInstanceRef?: React.Ref<PopperJS.Instance>;
 }
 
 export const Popper = React.forwardRef<HTMLDivElement, PopperProps>(
@@ -107,12 +105,12 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
       onPlacementChange,
       children,
       portal,
-      containerElement,
+      popperInstanceRef,
     }: PopperProps,
     ref
   ) => {
     const firstRender = React.useRef(true);
-    const popperInstance = React.useRef<PopperJS.Instance>();
+    const {localRef, elementRef} = useLocalRef(popperInstanceRef);
     const [placement, setPlacement] = React.useState(popperPlacement);
     const stackRef = usePopupStack(ref, anchorElement as HTMLElement);
 
@@ -141,14 +139,15 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
       }
 
       if (stackRef.current) {
-        popperInstance.current = PopperJS.createPopper(anchorEl, stackRef.current, {
+        const instance = PopperJS.createPopper(anchorEl, stackRef.current, {
           placement: popperPlacement,
           ...popperOptions,
           modifiers: [...(popperOptions.modifiers || []), placementModifier],
         });
+        elementRef(instance); // update the ref with the instance
 
         return () => {
-          popperInstance.current?.destroy();
+          instance?.destroy();
         };
       }
 
@@ -162,14 +161,14 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
     React.useLayoutEffect(() => {
       // Only update options if this is _not_ the first render
       if (!firstRender.current) {
-        popperInstance.current?.setOptions({
+        localRef.current?.setOptions({
           placement: popperPlacement,
           ...popperOptions,
           modifiers: [...(popperOptions.modifiers || []), placementModifier],
         });
       }
       firstRender.current = false;
-    }, [popperOptions, popperPlacement, placementModifier]);
+    }, [popperOptions, popperPlacement, placementModifier, localRef]);
 
     const contents = <>{isRenderProp(children) ? children({placement}) : children}</>;
 
@@ -177,7 +176,7 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
       return contents;
     }
 
-    return ReactDOM.createPortal(contents, containerElement || stackRef.current!);
+    return ReactDOM.createPortal(contents, stackRef.current!);
   }
 );
 

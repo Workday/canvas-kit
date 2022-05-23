@@ -1,4 +1,3 @@
-/// <reference path="../../../../typings.d.ts" />
 import * as React from 'react';
 import {controlComponent} from '../../../../utils/storybook';
 
@@ -10,7 +9,7 @@ import Select from '../lib/Select';
 
 import {manyOptions, options} from './stories';
 import {Modal} from '@workday/canvas-kit-react/modal';
-import {HStack} from '@workday/canvas-kit-labs-react';
+import {HStack} from '@workday/canvas-kit-react/layout';
 
 export default {
   title: 'Testing/React/Preview/Select/Cypress',

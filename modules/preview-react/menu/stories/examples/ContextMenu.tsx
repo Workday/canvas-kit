@@ -8,6 +8,7 @@ import {
   usePopupModel,
   useAlwaysCloseOnOutsideClick,
   useCloseOnEscape,
+  useTransferOnFullscreenExit,
 } from '@workday/canvas-kit-react/popup';
 
 const ContextMenuTarget = createComponent('div')({
@@ -18,9 +19,9 @@ const ContextMenuTarget = createComponent('div')({
 
     const onContextMenu = (event: React.MouseEvent) => {
       if (model.state.visibility === 'visible') {
-        model.events.hide({event});
+        model.events.hide(event);
       } else if (model.state.visibility === 'hidden') {
-        model.events.show({event});
+        model.events.show(event);
       }
 
       // Prevent the default context menu from showing to avoid double menus
@@ -40,6 +41,7 @@ export const ContextMenu = () => {
 
   useAlwaysCloseOnOutsideClick(model);
   useCloseOnEscape(model);
+  useTransferOnFullscreenExit(model);
 
   return (
     <Popup model={model}>
