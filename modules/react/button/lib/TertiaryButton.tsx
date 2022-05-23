@@ -27,9 +27,9 @@ export interface TertiaryButtonProps extends Themeable {
    */
   size?: ButtonSizes;
   /**
-   * Button icon positions can either be `left` or `right`.
-   * If no value is provided, it defaults to `left`.
-   * @default 'left'
+   * Button icon positions can either be `start` or `end`.
+   * If no value is provided, it defaults to `start`.
+   * @default 'start'
    */
   iconPosition?: IconPositions;
   /**
@@ -118,6 +118,7 @@ const getTertiaryButtonColors = (
         focusRing: focusRing({innerColor: colors.blueberry400}, theme),
       },
       disabled: {
+        background: 'transparent',
         icon: children ? themePrimary.main : colors.blackPepper400,
         label: themePrimary.main,
       },

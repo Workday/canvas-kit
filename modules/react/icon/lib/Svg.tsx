@@ -2,7 +2,7 @@ import {CSSObject} from '@emotion/styled';
 import * as React from 'react';
 import {CanvasIcon, CanvasIconTypes} from '@workday/design-assets-types';
 import {validateIconType} from './utils';
-import {createComponent, styled} from '@workday/canvas-kit-react/common';
+import {createComponent, styled, StyledType} from '@workday/canvas-kit-react/common';
 import {Box, BoxProps} from '@workday/canvas-kit-react/layout';
 
 export interface SvgProps extends BoxProps {
@@ -16,7 +16,9 @@ export interface SvgProps extends BoxProps {
   shouldMirror?: boolean;
 }
 
-const StyledIconSpan = styled(Box.as('span'))<Pick<SvgProps, 'shouldMirror' | 'styles'>>(
+const StyledIconSpan = styled(Box.as('span'))<
+  StyledType & Pick<SvgProps, 'shouldMirror' | 'styles'>
+>(
   {
     display: 'inline-block',
     '> svg': {display: 'block'},
@@ -37,7 +39,14 @@ export const Svg = createComponent('span')({
       return null;
     }
 
-    return <StyledIconSpan dangerouslySetInnerHTML={{__html: src.svg}} {...elemProps} ref={ref} />;
+    return (
+      <StyledIconSpan
+        as={Element}
+        dangerouslySetInnerHTML={{__html: src.svg}}
+        {...elemProps}
+        ref={ref}
+      />
+    );
   },
 });
 

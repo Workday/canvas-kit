@@ -61,6 +61,7 @@ describe('recategorizeIconButtons', () => {
             <IconButton variant="circleFilled" />
             <IconButton variant="inverse" />
             <IconButton variant="inverseFilled" />
+            <IconButton variant={"inverseFilled"} />
         </>
     `;
     const expected = stripIndent`
@@ -69,11 +70,37 @@ describe('recategorizeIconButtons', () => {
             <TertiaryButton />
             <SecondaryButton />
             <TertiaryButton variant="inverse" />
-            <SecondaryButton variant="inverseFilled" />
+            <SecondaryButton variant="inverse" />
+            <SecondaryButton variant="inverse" />
         </>
     `;
 
     expectTransform(input, expected);
+  });
+
+  it('should not error when variant prop is an expression', () => {
+    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {
+      //No op
+    });
+
+    const input = stripIndent`
+    import {IconButton} from '@workday/canvas-kit-react/button';
+    <>
+    <IconButton variant={ true ? "circle" : "inverse"} />
+    </>
+    `;
+    const expected = stripIndent`
+    import {TertiaryButton} from '@workday/canvas-kit-react/button';
+    <>
+    <TertiaryButton variant={ true ? "circle" : "inverse"} />
+    </>
+    `;
+
+    expectTransform(input, expected);
+
+    expect(warn).toHaveBeenCalledTimes(1);
+
+    warn.mockReset();
   });
 
   it('should restructure styled IconButton usages', () => {
@@ -101,10 +128,10 @@ describe('recategorizeIconButtons', () => {
       import {IconButton} from '@workday/canvas-kit-react/button';
 
       const StyledIconButton = styled(IconButton)({});
-      
+
       <StyledIconButton variant="circleFilled" icon={plusIcon} />
-      
-      
+
+
     `;
 
     const expected = stripIndent`
@@ -113,7 +140,7 @@ describe('recategorizeIconButtons', () => {
       const StyledIconButton = styled(SecondaryButton)({});
 
       <StyledIconButton icon={plusIcon} />
-      
+
     `;
 
     expectTransform(input, expected);

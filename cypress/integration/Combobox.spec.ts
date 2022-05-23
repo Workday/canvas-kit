@@ -374,7 +374,7 @@ describe('Combobox', () => {
       });
 
       it('should update the aria-live status to "There are 3 suggestions"', () => {
-        cy.findByRole('log').should('contain', 'There are 3 suggestions');
+        cy.findByRole('status').should('contain', 'There are 3 suggestions');
       });
     });
   });

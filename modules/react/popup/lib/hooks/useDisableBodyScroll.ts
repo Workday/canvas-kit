@@ -1,6 +1,8 @@
 import React from 'react';
 
-import {PopupModel} from './usePopupModel';
+import {createElemPropsHook} from '@workday/canvas-kit-react/common';
+
+import {usePopupModel} from './usePopupModel';
 
 /**
  * Disables body scroll by adding `overflow: hidden` to the body element. This effectively prevents
@@ -9,7 +11,7 @@ import {PopupModel} from './usePopupModel';
  * This should be used with popup elements that hide all other content and force the user to accept
  * or dismiss the popup before continuing (i.e. Modals).
  */
-export const useDisableBodyScroll = (model: PopupModel, elemProps = {}) => {
+export const useDisableBodyScroll = createElemPropsHook(usePopupModel)(model => {
   const visible = model.state.visibility !== 'hidden';
 
   React.useLayoutEffect(() => {
@@ -22,6 +24,8 @@ export const useDisableBodyScroll = (model: PopupModel, elemProps = {}) => {
     const overflow = document.body.style.overflow;
 
     document.body.style.overflow = 'hidden';
+    document.body.style.overflowY = 'hidden';
+    document.body.style.overflowX = 'hidden';
 
     return () => {
       document.body.style.overflow = overflow;
@@ -30,5 +34,5 @@ export const useDisableBodyScroll = (model: PopupModel, elemProps = {}) => {
     };
   }, [visible]);
 
-  return elemProps;
-};
+  return {};
+});

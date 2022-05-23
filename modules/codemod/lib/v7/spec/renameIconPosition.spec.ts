@@ -39,17 +39,16 @@ describe('Button Icon Position', () => {
 
   it('should rename right to end for PrimaryButton', () => {
     const input = stripIndent`
-      import {PrimaryButton} from '@workday/canvas-kit-react/button'
+      import {SecondaryButton} from '@workday/canvas-kit-react/button'
 
-      <PrimaryButton onClick={() => {}} iconPosition="right">Primary</PrimaryButton>
+      <SecondaryButton onClick={() => {}} iconPosition="right">Primary</SecondaryButton>
     `;
 
     const expected = stripIndent`
-      import {PrimaryButton} from '@workday/canvas-kit-react/button'
+      import {SecondaryButton} from '@workday/canvas-kit-react/button'
 
-      <PrimaryButton onClick={() => {}} iconPosition="end">Primary</PrimaryButton>
+      <SecondaryButton onClick={() => {}} iconPosition="end">Primary</SecondaryButton>
     `;
-    console.log(expected);
 
     expectTransform(input, expected);
   });

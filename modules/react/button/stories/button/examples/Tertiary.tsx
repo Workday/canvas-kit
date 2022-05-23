@@ -5,8 +5,6 @@ import {HStack} from '@workday/canvas-kit-react/layout';
 import {
   plusIcon,
   relatedActionsVerticalIcon,
-  arrowLeftIcon,
-  arrowRightIcon,
   caretDownIcon,
 } from '@workday/canvas-system-icons-web';
 
