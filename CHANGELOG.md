@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v7.0.2](https://github.com/Workday/canvas-kit/releases/tag/v7.0.2) (2022-05-24)
+
+### Components
+
+- fix(action-bar): Remove subcomponents from ActionBar.Item ([#1606](https://github.com/Workday/canvas-kit/pull/1606)) ([@RayRedGoose](https://github.com/RayRedGoose))
+
+
 ## [v7.0.1](https://github.com/Workday/canvas-kit/releases/tag/v7.0.1) (2022-05-23)
 
 ### Documentation
