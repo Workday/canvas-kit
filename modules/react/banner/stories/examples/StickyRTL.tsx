@@ -18,11 +18,10 @@ const theme: PartialEmotionCanvasTheme = {
 
 const StyledStickyBanner = styled(Banner)({
   position: 'absolute',
-  left: 0,
+  right: 0,
 });
 
 export const StickyRTL = () => {
-  const {themeRTL} = useThemeRTL();
   return (
     <CanvasProvider theme={theme}>
       <Box height={64}>
