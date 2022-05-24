@@ -23,7 +23,8 @@
   }
 
   &:focus:not([disabled]),
-  &.wdc-form-focus:not([disabled]) {
+  &.wdc-form-focus:not([disabled]),
+  &.wdc-form-select-focus {
     @include wdc-form-focus();
     background-image: svg-load(
       '#{$_wdc-form-icons-path}/wd-icon-caret-down.svg',
@@ -55,7 +56,7 @@
 }
 
 [data-whatinput='keyboard'] .wdc-form-select:not([disabled]):focus {
-  @extend .wdc-form-select.wdc-form-focus;
+  @extend .wdc-form-select-focus;
 }
 
 [data-whatinput='mouse'],

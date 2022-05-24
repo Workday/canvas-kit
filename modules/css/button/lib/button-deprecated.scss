@@ -59,7 +59,7 @@ $_wdc-btn-deprecated-caret-down-icon-hover: svg-load(
   }
 
   .wdc-btn-icon-inline {
-    padding: (($wdc-btn-deprecated-height-l - $wdc-btn-deprecated-split-icon-height)/2) 0;
+    padding: calc(($wdc-btn-deprecated-height-l - $wdc-btn-deprecated-split-icon-height) / 2) 0;
     margin-left: $wdc-spacing-xxs;
     line-height: 0;
     float: right;
@@ -83,7 +83,8 @@ $_wdc-btn-deprecated-caret-down-icon-hover: svg-load(
     }
 
     &:focus,
-    &.wdc-btn-focus {
+    &.wdc-btn-focus,
+    &.wdc-btn-primary-focus  {
       background-color: $wdc-btn-deprecated-bg-focus;
       box-shadow: 0 0 0 2px $wdc-btn-deprecated-border-active;
       border-color: $wdc-btn-deprecated-border-active;
@@ -120,7 +121,7 @@ $_wdc-btn-deprecated-caret-down-icon-hover: svg-load(
 
     &:after {
       @include wdc-btn-deprecated-icon-inline($_wdc-btn-deprecated-caret-down-icon);
-      padding: (($wdc-btn-deprecated-height-l - $wdc-btn-deprecated-split-icon-height)/2) 0;
+      padding: calc(($wdc-btn-deprecated-height-l - $wdc-btn-deprecated-split-icon-height) / 2) 0;
       margin-left: $wdc-spacing-xxs;
       line-height: 0;
       float: right;
@@ -251,7 +252,8 @@ $_wdc-btn-deprecated-caret-down-icon-hover: svg-load(
       }
 
       &:focus,
-      &.wdc-btn-focus {
+      &.wdc-btn-focus,
+      &.wdc-btn-delete-focus {
         background-color: $wdc-btn-deprecated-bg-delete;
         color: $wdc-btn-deprecated-color-delete;
         box-shadow: 0 0 0 2px $wdc-color-french-vanilla-100,
@@ -308,7 +310,9 @@ $_wdc-btn-deprecated-caret-down-icon-hover: svg-load(
     }
 
     &:focus,
-    &.wdc-btn-focus {
+    &.wdc-btn-focus,
+    &.wdc-btn-split-text-focus,
+    &.wdc-btn-split-icon-focus {
       z-index: 2;
     }
   }
@@ -335,7 +339,8 @@ $_wdc-btn-deprecated-caret-down-icon-hover: svg-load(
         }
 
         &:focus,
-        &.wdc-btn-focus {
+        &.wdc-btn-focus,
+        &.wdc-btn-split-text-focus {
           box-shadow: 0 0 0 2px $wdc-btn-deprecated-border-active,
             inset -1px 0 0 0 $wdc-btn-deprecated-border-active;
           border-right: 0px;

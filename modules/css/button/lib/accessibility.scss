@@ -19,7 +19,7 @@
   }
 
   .wdc-btn-primary:not([disabled]):not(.wdc-btn-disabled):not([tabindex='-1']):focus {
-    @extend .wdc-btn-primary.wdc-btn-focus;
+    @extend .wdc-btn-primary-focus;
 
     &:hover {
       background-color: $wdc-btn-bg-primary-hover;
@@ -66,10 +66,10 @@
 
   .wdc-btn-delete:not([disabled]):not(.wdc-btn-disabled):not([tabindex='-1']) {
     &:hover {
-      @extend .wdc-btn-delete.wdc-btn-hover;
+      @extend .wdc-btn-delete-hover;
     }
     &:active {
-      @extend .wdc-btn-delete.wdc-btn-active;
+      @extend .wdc-btn-delete-active;
     }
   }
 

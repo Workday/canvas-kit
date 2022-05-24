@@ -56,8 +56,6 @@ $wdc-btn-deprecated-color-delete-disabled: $wdc-color-cinnamon-300;
 $wdc-btn-deprecated-split-border-radius: 3px;
 $wdc-btn-deprecated-split-icon-height: $wdc-spacing-s;
 $wdc-btn-deprecated-split-icon-width: $wdc-spacing-xxxs + $wdc-spacing-m + $wdc-spacing-xxs;
-$wdc-btn-deprecated-split-icon-padding-v: (
-    $wdc-btn-deprecated-height-l - $wdc-btn-deprecated-split-icon-height
-  )/2;
+$wdc-btn-deprecated-split-icon-padding-v: (calc(($wdc-btn-deprecated-height-l - $wdc-btn-deprecated-split-icon-height) / 2));
 $wdc-btn-deprecated-split-icon-padding: $wdc-btn-deprecated-split-icon-padding-v $wdc-spacing-xxs
   $wdc-btn-deprecated-split-icon-padding-v $wdc-spacing-xxxs;
