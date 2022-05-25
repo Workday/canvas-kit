@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-labs-react",
-  "version": "7.0.2",
+  "version": "7.0.4",
   "description": "Canvas Kit Labs is an incubator for new and experimental components. Since we have a rather rigorous process for getting components in at a production level, it can be valuable to make them available earlier while we continuously iterate on the API/functionality. The Labs modules allow us to do that as needed.",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -45,8 +45,8 @@
   "dependencies": {
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
-    "@workday/canvas-kit-preview-react": "^7.0.2",
-    "@workday/canvas-kit-react": "^7.0.2",
+    "@workday/canvas-kit-preview-react": "^7.0.4",
+    "@workday/canvas-kit-react": "^7.0.4",
     "@workday/canvas-system-icons-web": "^3.0.0",
     "chroma-js": "^2.1.0",
     "lodash.flatten": "^4.4.0",

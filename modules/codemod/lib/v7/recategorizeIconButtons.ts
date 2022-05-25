@@ -152,7 +152,8 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
       );
     }
   } else {
-    buttonImports.forEach(({node}) => {
+    buttonImports.forEach(nodePath => {
+      const {node} = nodePath;
       const specifiersToRemove = ['IconButton'];
 
       // Remove old specifiers
@@ -178,9 +179,18 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
             existing => existing.type === 'ImportSpecifier' && existing.imported.name === specifier
           )
         ) {
-          node.specifiers?.push(j.importSpecifier(j.identifier(specifier)));
+          // Only add a specifier if it has not already been declared
+          if (!importMap[buttonType]) {
+            node.specifiers?.push(j.importSpecifier(j.identifier(specifier)));
+          }
         }
       });
+      console.log(node.specifiers?.length);
+
+      // if we removed all specifiers, remove the import
+      if (!node.specifiers?.length) {
+        nodePath.prune();
+      }
     });
   }
 
