@@ -101,7 +101,7 @@ $_wdc-btn-caret-down-icon-white: svg-load(
     .wdc-icon-position-left & {
       margin: 0 $wdc-spacing-xxs 0 0;
     }
-  
+
     .wdc-icon-position-right & {
       margin: 0 0 0 $wdc-spacing-xxs;
     }
@@ -118,7 +118,7 @@ $_wdc-btn-caret-down-icon-white: svg-load(
 
     &:after {
       @include wdc-btn-icon-inline($_wdc-btn-caret-down-icon);
-      padding: (($wdc-btn-height-l - $wdc-btn-split-icon-height)/2) 0;
+      padding: calc(($wdc-btn-height-l - $wdc-btn-split-icon-height) / 2) 0;
       margin-left: $wdc-spacing-xxs;
       line-height: 0;
       float: right;
@@ -149,12 +149,12 @@ $_wdc-btn-caret-down-icon-white: svg-load(
     font-size: 16px;
     .wdc-icon[data-category="system"]:not([data-circle-background]) {
       vertical-align: -6px;
-      
+
       &,
       &.wdc-icon-position-left {
         margin: 0 $wdc-spacing-xs 0 (-$wdc-spacing-xxxs);
       }
-    
+
       &.wdc-icon-position-right {
         margin: 0 (-$wdc-spacing-xxxs) 0 $wdc-spacing-xs;
       }
@@ -213,12 +213,14 @@ $_wdc-btn-caret-down-icon-white: svg-load(
     @include wdc-icon-color($wdc-btn-text-color);
 
     &.wdc-btn-hover,
+    &.wdc-btn-delete-hover,
     &:hover {
       background-color: $wdc-btn-bg-delete-hover;
       @include wdc-icon-color($wdc-btn-text-color);
     }
 
     &.wdc-btn-active,
+    &.wdc-btn-delete-active,
     &:active {
       background-color: $wdc-btn-bg-delete-active;
       @include wdc-icon-color($wdc-btn-text-color);

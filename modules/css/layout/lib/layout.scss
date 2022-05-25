@@ -38,8 +38,8 @@
         @include wdc-col-common;
         padding-left: $_half-spacing;
         padding-right: $_half-spacing;
-        flex-basis: 100% / $wdc-layout-columns * $_i;
-        max-width: 100% / $wdc-layout-columns * $_i;
+        flex-basis: calc(100% / $wdc-layout-columns) * $_i;
+        max-width: calc(100% / $wdc-layout-columns) * $_i;
       }
 
       .wdc-col-offset-#{$_i} {
@@ -50,7 +50,7 @@
         @if $_i == 0 {
           margin-left: 0;
         } @else {
-          margin-left: 100% / $wdc-layout-columns * $_i;
+          margin-left: calc(100% / $wdc-layout-columns) * $_i;
         }
       }
 
@@ -58,8 +58,8 @@
         @include wdc-col-common;
         padding-left: $_half-spacing;
         padding-right: $_half-spacing;
-        flex-basis: 100% / $wdc-layout-columns * $_i;
-        max-width: 100% / $wdc-layout-columns * $_i;
+        flex-basis: calc(100% / $wdc-layout-columns) * $_i;
+        max-width: calc(100% / $wdc-layout-columns) * $_i;
       }
 
       .wdc-col-#{$_name}-offset-#{$_i} {
@@ -70,7 +70,7 @@
         @if $_i == 0 {
           margin-left: 0;
         } @else {
-          margin-left: 100% / $wdc-layout-columns * $_i;
+          margin-left: calc(100% / $wdc-layout-columns) * $_i;
         }
       }
     }
