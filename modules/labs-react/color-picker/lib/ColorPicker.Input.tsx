@@ -1,19 +1,21 @@
+/** @jsxRuntime classic */
 /** @jsx jsx */
-import {jsx, css} from '@emotion/core';
+import {jsx, css} from '@emotion/react';
 import {
   expandHex,
   GrowthBehavior,
   ErrorType,
   styled,
   ContentDirection,
-  createComponent,
   ExtractProps,
+  createSubcomponent,
 } from '@workday/canvas-kit-react/common';
 import TextInput from '@workday/canvas-kit-react/text-input';
 import {colors, space, type, inputColors} from '@workday/canvas-kit-react/tokens';
 import * as React from 'react';
 
-import {ColorPicker, ColorPickerModelContext} from './ColorPicker';
+import {ColorPicker} from './ColorPicker';
+import {useColorPickerModel} from './useColorPickerModel';
 
 export interface ColorInputProps extends ExtractProps<typeof TextInput>, GrowthBehavior {
   /**
@@ -115,9 +117,11 @@ const swatchTileStyles = css({
   pointerEvents: 'none',
 });
 
-export default createComponent('input')({
+export default createSubcomponent('input')({
   displayName: 'ColorInput',
-  Component: (
+  modelHook: useColorPickerModel,
+})<ColorInputProps>(
+  (
     {
       placeholder = 'FFFFFF',
       value = '',
@@ -128,11 +132,10 @@ export default createComponent('input')({
       error,
       grow,
       ...elemProps
-    }: ColorInputProps,
-    ref
+    },
+    _,
+    model
   ) => {
-    const {state, events} = React.useContext(ColorPickerModelContext);
-
     const formatValue = (value: string) => {
       return value.replace(/#/g, '').substring(0, 6);
     };
@@ -147,20 +150,18 @@ export default createComponent('input')({
       if (onChange) {
         onChange(e);
       }
-      events.setCustomColor({color: e.target.value});
+      model.events.setCustomColor(e.target.value);
 
       if (isValidHex(value) && onValidColorChange) {
         onValidColorChange(`#${expandHex(value)}`);
       }
     };
 
-    const formattedValue = formatValue(value || state.customColor);
-
+    const formattedValue = formatValue(value || model.state.customColor);
     return (
       <StyledInputContainer grow={grow}>
         <CustomHexInput
           dir="ltr"
-          ref={ref}
           onChange={handleChange}
           type="text"
           placeholder={value ? undefined : placeholder}
@@ -182,5 +183,5 @@ export default createComponent('input')({
         </PoundSignPrefix>
       </StyledInputContainer>
     );
-  },
-});
+  }
+);

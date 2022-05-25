@@ -4,23 +4,28 @@ import styled from '@emotion/styled';
 import {
   focusRing,
   mouseFocusBehavior,
-  createComponent,
   StyledType,
   pickForegroundColor,
   composeHooks,
   createHook,
-  // useMountLayout,
+  createSubcomponent,
+  createElemPropsHook,
 } from '@workday/canvas-kit-react/common';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {borderRadius, colors, space} from '@workday/canvas-kit-react/tokens';
 import {checkSmallIcon} from '@workday/canvas-system-icons-web';
 import chroma from 'chroma-js';
 import * as React from 'react';
-import {ColorPickerModelContext} from './ColorPicker';
-import {isSelected, useSelectionItem} from '@workday/canvas-kit-react/tabs/lib/selection';
-import {useRovingFocus} from '@workday/canvas-kit-react/tabs/lib/cursor';
-import {useListRegisterItem} from '@workday/canvas-kit-react/tabs/lib/list';
-import {ColorPickerModel} from './useColorPickerModel';
+import {
+  useListItemRegister,
+  useListItemRovingFocus,
+  useListItemSelect,
+  isSelected,
+} from '@workday/canvas-kit-react/collection';
+// import {useListRegisterItem} from '@workday/canvas-kit-react/collection';
+import {useColorPickerModel} from './useColorPickerModel';
+import {useSelectionListModel} from '@workday/canvas-kit-react/collection/lib/useSelectionListModel';
+import {Flex} from '@workday/canvas-kit-react/layout';
 
 export interface SwatchButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   /**
@@ -92,56 +97,61 @@ const SwatchButtonContainer = styled('button')<{color: string; showCheck: boolea
   })
 );
 
-export default createComponent('button')({
-  displayName: 'SwatchButton',
-  Component: ({color, showCheck = false, ...elemProps}: SwatchButtonProps, ref, Element) => {
-    const localModel = React.useContext(ColorPickerModelContext);
-    const props = useSwatchesItem(localModel, elemProps, ref);
+// export const useSwatchesItem = createElemPropsHook(useSelectionListModel)(({state}) => {
+//   const selected = !!state.name && isSelected(name, state);
 
-    // console.warn('STATE', localModel.state);
-    // console.warn('hookedProps', composedHook);
-    return (
-      <SwatchButtonContainer
-        color={color}
-        as={Element}
-        showCheck={showCheck || localModel.state.color === color}
-        style={{boxShadow: localModel.state.cursorId === color ? accessibilityBorder : undefined}}
-        {...props}
-      >
-        {showCheck || props['aria-selected'] ? (
-          <SystemIcon
-            fill={pickForegroundColor(color)}
-            fillHover={pickForegroundColor(color)}
-            icon={checkSmallIcon}
-            color={color}
-          />
-        ) : null}
-      </SwatchButtonContainer>
-    );
-  },
-});
+//   return {
+//     type: 'button' as 'button', // keep Typescript happy
+//     role: 'tab',
+//     'aria-selected': selected,
+//     'aria-controls': `tabpanel-${state.id}-${name}`,
+//   };
+// });
 
 export const useSwatchesItem = composeHooks(
-  createHook(
-    (
-      model: ColorPickerModel,
-      _?: React.Ref<HTMLButtonElement>,
-      elemProps: {name?: string} = {}
-    ) => {
-      const {state} = model;
-      const name = elemProps.name || '';
+  createElemPropsHook(useColorPickerModel)(
+    ({state}, _?: React.Ref<HTMLButtonElement>, elemProps: {'data-id'?: string} = {}) => {
+      const name = elemProps['data-id'] || '';
 
-      const selected = !!elemProps.name && isSelected(name, state);
-
+      const selected = !!elemProps['data-id'] && isSelected(name, state);
+      console.warn(elemProps);
       return {
         type: 'button' as 'button', // keep Typescript happy
         role: 'tab',
         'aria-selected': selected,
-        'aria-controls': `tabpanel-${state.id}-${name}`,
+        'aria-controls': `swatch-${state.id}-${name}`,
       };
     }
   ),
-  useSelectionItem,
-  useRovingFocus,
-  useListRegisterItem
+  useListItemSelect,
+  useListItemRovingFocus,
+  useListItemRegister
 );
+
+export default createSubcomponent('button')({
+  displayName: 'SwatchButton',
+  modelHook: useColorPickerModel,
+  // elemPropsHook: useSwatchesItem,
+})<SwatchButtonProps>(({color, showCheck = false, ...elemProps}, Element, model) => {
+  const props = useSwatchesItem(model, elemProps, elemProps.ref);
+
+  return (
+    <SwatchButtonContainer
+      as="button"
+      color={color}
+      // as={Element}
+      showCheck={showCheck || model.state.color === color}
+      style={{boxShadow: model.state.cursorId === color ? accessibilityBorder : undefined}}
+      {...props}
+    >
+      {showCheck || elemProps['aria-selected'] ? (
+        <SystemIcon
+          fill={pickForegroundColor(color)}
+          fillHover={pickForegroundColor(color)}
+          icon={checkSmallIcon}
+          color={color}
+        />
+      ) : null}
+    </SwatchButtonContainer>
+  );
+});

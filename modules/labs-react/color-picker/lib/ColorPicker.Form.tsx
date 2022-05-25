@@ -1,10 +1,9 @@
 import styled from '@emotion/styled';
-import {createComponent, StyledType} from '@workday/canvas-kit-react/common';
+import {createSubcomponent, StyledType} from '@workday/canvas-kit-react/common';
 import {FormField, FormFieldProps} from '@workday/canvas-kit-react/form-field';
-import {HStack} from '@workday/canvas-kit-labs-react/layout';
+import {HStack} from '@workday/canvas-kit-react/layout';
 import * as React from 'react';
-
-import {ColorPickerModelContext} from './ColorPicker';
+import {useColorPickerModel} from './useColorPickerModel';
 
 export interface CustomColorFormProps {
   children: React.ReactNode;
@@ -18,24 +17,22 @@ const StyledForm = styled('form')<StyledType>({
   justifyContent: 'space-between',
 });
 
-export default createComponent('form')({
+export default createSubcomponent('form')({
   displayName: 'CustomColorForm',
-  Component: ({children, label, ...elemProps}: CustomColorFormProps, ref, Element) => {
-    const {state, events} = React.useContext(ColorPickerModelContext);
-    return (
-      <StyledForm
-        onSubmit={event => {
-          event.preventDefault();
-          events.setColor({color: `#${state.customColor}`});
-        }}
-        ref={ref}
-        as={Element}
-        {...elemProps}
-      >
-        <FormField label={label}>
-          <HStack spacing="s">{children}</HStack>
-        </FormField>
-      </StyledForm>
-    );
-  },
+  modelHook: useColorPickerModel,
+})<CustomColorFormProps>(({children, label, ...elemProps}, Element, model) => {
+  return (
+    <StyledForm
+      onSubmit={event => {
+        event.preventDefault();
+        model.events.setColor(`#${model.state.customColor}`);
+      }}
+      as={Element}
+      {...elemProps}
+    >
+      <FormField label={label}>
+        <HStack spacing="s">{children}</HStack>
+      </FormField>
+    </StyledForm>
+  );
 });

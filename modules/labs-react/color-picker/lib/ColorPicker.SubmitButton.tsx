@@ -1,13 +1,13 @@
-import {IconButton, IconButtonProps} from '@workday/canvas-kit-react/button';
+import {SecondaryButton, SecondaryButtonProps} from '@workday/canvas-kit-react/button';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {checkIcon} from '@workday/canvas-system-icons-web';
 import * as React from 'react';
 
-export interface SubmitButtonProps extends IconButtonProps {}
+export interface SubmitButtonProps extends SecondaryButtonProps {}
 
-export default createComponent(IconButton)({
+export default createComponent(SecondaryButton)({
   displayName: 'SubmitButton',
   Component: ({...elemProps}: SubmitButtonProps) => {
-    return <IconButton variant={'circleFilled'} icon={checkIcon} {...elemProps}></IconButton>;
+    return <SecondaryButton icon={checkIcon} {...elemProps}></SecondaryButton>;
   },
 });

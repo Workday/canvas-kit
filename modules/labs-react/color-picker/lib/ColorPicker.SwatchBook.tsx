@@ -1,14 +1,21 @@
 import styled from '@emotion/styled';
-import {createComponent, StyledType} from '@workday/canvas-kit-react/common';
+import {
+  composeHooks,
+  createSubcomponent,
+  ExtractProps,
+  StyledType,
+} from '@workday/canvas-kit-react/common';
 import {space} from '@workday/canvas-kit-react/tokens';
+import {useListRenderItems} from '@workday/canvas-kit-react/collection';
 import * as React from 'react';
-import {ColorPickerModelContext} from '..';
 
-import SwatchButton, {SwatchButtonProps} from './ColorPicker.SwatchButton';
+// import SwatchButton, {SwatchButtonProps} from './ColorPicker.SwatchButton';
+import {useColorPickerModel} from './useColorPickerModel';
+import {Flex} from '@workday/canvas-kit-react/layout';
 
-export interface SwatchBookProps extends React.HtmlHTMLAttributes<HTMLDivElement> {
-  colors: string[];
-  children: (colors: string[]) => React.ReactNode[];
+export interface SwatchBookProps<T = unknown> extends Partial<ExtractProps<typeof Flex, never>> {
+  colors?: string[];
+  children: ((color: T) => React.ReactNode) | React.ReactNode;
 }
 
 /* eslint-disable */
@@ -20,34 +27,39 @@ function setUpTwoDArray(colors: React.ReactNode[], columnCount: number = 8) {
   return temp;
 }
 
-const StyledSwatchBookContainer = styled('div')<StyledType>({
+const StyledFlex = styled('div')<StyledType>({
   display: 'flex',
   flexWrap: 'wrap',
-  margin: `0px -${space.xxs} -${space.xxs} 0px`,
   flexDirection: 'column',
 });
 
-export default createComponent('div')({
+export default createSubcomponent('div')({
   displayName: 'SwatchBook',
-  Component: ({colors, children, ...elemProps}: SwatchBookProps, ref, Element) => {
-    const {state} = React.useContext(ColorPickerModelContext);
-    return (
-      <StyledSwatchBookContainer ref={ref} as={Element} {...elemProps}>
-        {setUpTwoDArray(children(colors), state.columnCount).map((row, index) => {
-          return (
-            <div key={index} style={{display: 'flex', flexDirection: 'row'}}>
-              {row
-                .filter(
-                  (child): child is React.ReactElement<SwatchButtonProps> =>
-                    React.isValidElement(child) && child.type === SwatchButton
-                )
-                .map((child, i: number) => {
-                  return <SwatchButton key={i} {...child.props} />;
-                })}
-            </div>
-          );
-        })}
-      </StyledSwatchBookContainer>
-    );
-  },
+  modelHook: useColorPickerModel,
+})<SwatchBookProps>(({colors, children, ...elemProps}, Element, model) => {
+  return (
+    <StyledFlex
+      // flexWrap="wrap"
+      // margin={`0px -${space.xxs} -${space.xxs} 0px`}
+      // flexDirection="column"
+      as={Element}
+      {...elemProps}
+    >
+      {useListRenderItems(model, children)}
+      {/* {setUpTwoDArray(children(colors), model.state.columnCount).map((row, index) => {
+        return (
+          <div key={index} style={{display: 'flex', flexDirection: 'row'}}>
+            {row
+              .filter(
+                (child): child is React.ReactElement<SwatchButtonProps> =>
+                  React.isValidElement(child) && child.type === SwatchButton
+              )
+              .map((child, i: number) => {
+                return <SwatchButton key={i} {...child.props} />;
+              })}
+          </div>
+        );
+      })} */}
+    </StyledFlex>
+  );
 });

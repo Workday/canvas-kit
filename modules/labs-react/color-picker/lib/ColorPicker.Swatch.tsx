@@ -1,13 +1,17 @@
 /* eslint-disable no-nested-ternary */
 import styled from '@emotion/styled';
-import {pickForegroundColor, StyledType, createComponent} from '@workday/canvas-kit-react/common';
+import {
+  pickForegroundColor,
+  StyledType,
+  createSubcomponent,
+} from '@workday/canvas-kit-react/common';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {borderRadius, colors} from '@workday/canvas-kit-react/tokens';
 import {checkSmallIcon} from '@workday/canvas-system-icons-web';
 import chroma from 'chroma-js';
 import * as React from 'react';
 
-import {ColorPickerModelContext} from './ColorPicker';
+import {useColorPickerModel} from './useColorPickerModel';
 
 export interface ColorSwatchProps {
   /**
@@ -54,28 +58,25 @@ const StyledContainer = styled('div')<ColorSwatchProps & StyledType>(
   })
 );
 
-export default createComponent('div')({
+export default createSubcomponent('div')({
   displayName: 'Swatch',
-  Component: ({color, showCheck = false, ...elemProps}: ColorSwatchProps, ref, Element) => {
-    const {state} = React.useContext(ColorPickerModelContext);
-
-    return (
-      <StyledContainer
-        ref={ref}
-        color={color}
-        as={Element}
-        showCheck={showCheck === true || state.color === color}
-        {...elemProps}
-      >
-        {showCheck || state.color === color ? (
-          <SystemIcon
-            fill={pickForegroundColor(color)}
-            fillHover={pickForegroundColor(color)}
-            icon={checkSmallIcon}
-            color={color}
-          />
-        ) : null}
-      </StyledContainer>
-    );
-  },
+  modelHook: useColorPickerModel,
+})<ColorSwatchProps>(({color, showCheck = false, ...elemProps}, Element, model) => {
+  return (
+    <StyledContainer
+      color={color}
+      as={Element}
+      showCheck={showCheck === true || model.state.color === color}
+      {...elemProps}
+    >
+      {showCheck || model.state.color === color ? (
+        <SystemIcon
+          fill={pickForegroundColor(color)}
+          fillHover={pickForegroundColor(color)}
+          icon={checkSmallIcon}
+          color={color}
+        />
+      ) : null}
+    </StyledContainer>
+  );
 });
