@@ -11,6 +11,7 @@ import {
 export const Primary = () => (
   <HStack spacing="s" padding="s">
     <PrimaryButton>Primary</PrimaryButton>
+    <PrimaryButton>+</PrimaryButton>
     <PrimaryButton icon={plusIcon} iconPosition="start">
       Primary
     </PrimaryButton>
