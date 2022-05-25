@@ -20,6 +20,7 @@
   .wdc-btn-deprecated.wdc-btn-split-text:not([disabled]):not(.wdc-btn-disabled):not([tabindex='-1']):focus {
     @extend .wdc-btn-split-text-focus;
   }
+
   .wdc-btn-deprecated.wdc-btn-split-icon:not([disabled]):not(.wdc-btn-disabled):not([tabindex='-1']):focus {
     @extend .wdc-btn-split-icon-focus;
   }
