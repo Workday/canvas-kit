@@ -126,439 +126,439 @@
       "framework": "react"
     },
     "Welcome/Upgrade Guides/v4.0": {
-      "fileName": 2840,
+      "fileName": 2839,
       "framework": "react"
     },
     "Welcome/Upgrade Guides/v5.0": {
-      "fileName": 2841,
+      "fileName": 2840,
       "framework": "react"
     },
     "Welcome/Upgrade Guides/v6.0": {
-      "fileName": 2842,
+      "fileName": 2841,
       "framework": "react"
     },
     "Welcome/Upgrade Guides/v7.0": {
-      "fileName": 2843,
+      "fileName": 2842,
       "framework": "react"
     },
     "Welcome/Dev Docs/API & Pattern Guidelines": {
-      "fileName": 2844,
+      "fileName": 2843,
       "framework": "react"
     },
     "Welcome/Component Status": {
-      "fileName": 2845,
+      "fileName": 2844,
       "framework": "react"
     },
     "Welcome/Dev Docs/Compound Components": {
-      "fileName": 2846,
+      "fileName": 2845,
       "framework": "react"
     },
     "Welcome/Contributing": {
-      "fileName": 2847,
+      "fileName": 2846,
       "framework": "react"
     },
     "Welcome/Dev Docs/Creating Compound Components": {
-      "fileName": 2848,
+      "fileName": 2847,
       "framework": "react"
     },
     "Welcome/Dev Docs/Testing": {
-      "fileName": 2849,
+      "fileName": 2848,
       "framework": "react"
     },
     "Welcome/Changelog": {
-      "fileName": 1735,
+      "fileName": 1732,
       "framework": "react"
     },
     "Welcome/Getting Started": {
-      "fileName": 1737,
+      "fileName": 1734,
       "framework": "react"
     },
     "Labs/React/Search Form": {
-      "fileName": 2859,
+      "fileName": 2858,
       "framework": "react"
     },
     "Examples/Select With Formik/React": {
-      "fileName": 2903,
+      "fileName": 2902,
       "framework": "react"
     },
     "Examples/SidePanel With Overlay/React": {
-      "fileName": 2944,
+      "fileName": 2943,
       "framework": "react"
     },
     "Examples/Text Input With Formik/React": {
-      "fileName": 2951,
+      "fileName": 2950,
       "framework": "react"
     },
     "Preview/Breadcrumbs/React": {
-      "fileName": 2962,
+      "fileName": 2961,
       "framework": "react"
     },
     "Preview/Inputs/Form Field/React": {
-      "fileName": 2977,
+      "fileName": 2976,
       "framework": "react"
     },
     "Preview/Menu/React": {
-      "fileName": 2980,
+      "fileName": 2979,
       "framework": "react"
     },
     "Preview/Pill/React": {
-      "fileName": 2986,
+      "fileName": 2985,
       "framework": "react"
     },
     "Preview/Side Panel/React": {
-      "fileName": 3073,
+      "fileName": 3072,
       "framework": "react"
     },
     "Preview/Inputs/Text Area/React": {
-      "fileName": 3083,
+      "fileName": 3082,
       "framework": "react"
     },
     "Preview/Inputs/Text Input/React": {
-      "fileName": 3100,
+      "fileName": 3099,
       "framework": "react"
     },
     "Examples/CookieBanner/React": {
-      "fileName": 3115,
+      "fileName": 3114,
       "framework": "react"
     },
     "Examples/GlobalHeader/React": {
-      "fileName": 3117,
+      "fileName": 3116,
       "framework": "react"
     },
     "Examples/PageHeader/React": {
-      "fileName": 3121,
+      "fileName": 3120,
       "framework": "react"
     },
     "Components/Buttons/Action Bar/React": {
-      "fileName": 3123,
+      "fileName": 3122,
       "framework": "react"
     },
     "Components/Indicators/Banner/React": {
-      "fileName": 3127,
+      "fileName": 3126,
       "framework": "react"
     },
     "Components/Buttons/Button/React": {
-      "fileName": 3138,
+      "fileName": 3137,
       "framework": "react"
     },
     "Components/Buttons/Hyperlink/React": {
-      "fileName": 3146,
+      "fileName": 3145,
       "framework": "react"
     },
     "Components/Containers/Card/React": {
-      "fileName": 3151,
+      "fileName": 3150,
       "framework": "react"
     },
     "Components/Inputs/Checkbox/React": {
-      "fileName": 3155,
+      "fileName": 3154,
       "framework": "react"
     },
     "Welcome/Dev Docs/Collections": {
-      "fileName": 3164,
+      "fileName": 3163,
       "framework": "react"
     },
     "Components/Inputs/Color Picker/Color Input/React": {
-      "fileName": 3172,
+      "fileName": 3171,
       "framework": "react"
     },
     "Components/Inputs/Color Picker/Color Preview/React": {
-      "fileName": 3183,
+      "fileName": 3182,
       "framework": "react"
     },
     "Components/Inputs/Form Field/React": {
-      "fileName": 3187,
+      "fileName": 3186,
       "framework": "react"
     },
     "Components/Containers/Layout/Box": {
-      "fileName": 3199,
+      "fileName": 3198,
       "framework": "react"
     },
     "Components/Containers/Layout/Flex": {
-      "fileName": 3209,
+      "fileName": 3208,
       "framework": "react"
     },
     "Components/Containers/Layout/Stack": {
-      "fileName": 3213,
+      "fileName": 3212,
       "framework": "react"
     },
     "Components/Indicators/Loading Animation/React": {
-      "fileName": 3221,
+      "fileName": 3220,
       "framework": "react"
     },
     "Components/Popups/Menu/React": {
-      "fileName": 3224,
+      "fileName": 3223,
       "framework": "react"
     },
     "Components/Popups/Modal/React": {
-      "fileName": 3228,
+      "fileName": 3227,
       "framework": "react"
     },
     "Components/Navigation/Pagination/React": {
-      "fileName": 3236,
+      "fileName": 3235,
       "framework": "react"
     },
     "Components/Popups/Popup/React": {
-      "fileName": 3244,
+      "fileName": 3243,
       "framework": "react"
     },
     "Components/Inputs/Radio/React": {
-      "fileName": 3255,
+      "fileName": 3254,
       "framework": "react"
     },
     "Components/Buttons/Segmented Control/React": {
-      "fileName": 3264,
+      "fileName": 3263,
       "framework": "react"
     },
     "Components/Inputs/Select/React": {
-      "fileName": 3266,
+      "fileName": 3265,
       "framework": "react"
     },
     "Components/Indicators/Skeleton/React": {
-      "fileName": 3276,
+      "fileName": 3275,
       "framework": "react"
     },
     "Components/Indicators/Status Indicator/React": {
-      "fileName": 3283,
+      "fileName": 3282,
       "framework": "react"
     },
     "Components/Inputs/Switch/React": {
-      "fileName": 3288,
+      "fileName": 3287,
       "framework": "react"
     },
     "Components/Containers/Table/React": {
-      "fileName": 3295,
+      "fileName": 3294,
       "framework": "react"
     },
     "Components/Containers/Tabs/React": {
-      "fileName": 3299,
+      "fileName": 3298,
       "framework": "react"
     },
     "Components/Inputs/TextArea/React": {
-      "fileName": 3309,
+      "fileName": 3308,
       "framework": "react"
     },
     "Components/Inputs/Text Input/React": {
-      "fileName": 3320,
+      "fileName": 3319,
       "framework": "react"
     },
     "Components/Popups/Toast/React": {
-      "fileName": 3330,
+      "fileName": 3329,
       "framework": "react"
     },
     "Components/Popups/Tooltip/React": {
-      "fileName": 3338,
+      "fileName": 3337,
       "framework": "react"
     },
     "Components/Indicators/Badge/CountBadge/CSS": {
-      "fileName": 3354,
+      "fileName": 3353,
       "framework": "react"
     },
     "Labs/Drawer/React": {
-      "fileName": 3420,
+      "fileName": 3419,
       "framework": "react"
     },
     "Testing/React/Labs/Drawer": {
-      "fileName": 3421,
+      "fileName": 3420,
       "framework": "react"
     },
     "Components/Popups/Popup Stack": {
-      "fileName": 3422,
+      "fileName": 3421,
       "framework": "react"
     },
     "Testing/React/Preview/Breadcrumbs": {
-      "fileName": 3423,
+      "fileName": 3422,
       "framework": "react"
     },
     "Testing/React/Preview/Color Picker": {
-      "fileName": 3428,
+      "fileName": 3427,
       "framework": "react"
     },
     "Testing/React/Preview/Menu": {
-      "fileName": 3429,
+      "fileName": 3428,
       "framework": "react"
     },
     "Testing/React/Preview/Pill": {
-      "fileName": 3430,
+      "fileName": 3429,
       "framework": "react"
     },
     "Testing/React/Preview/Select/Cypress": {
-      "fileName": 3431,
+      "fileName": 3430,
       "framework": "react"
     },
     "Testing/React/Preview/Select": {
-      "fileName": 3432,
+      "fileName": 3431,
       "framework": "react"
     },
     "Testing/React/Preview/Side Panel/Cypress": {
-      "fileName": 3433,
+      "fileName": 3432,
       "framework": "react"
     },
     "Testing/React/Preview/Side Panel": {
-      "fileName": 3434,
+      "fileName": 3433,
       "framework": "react"
     },
     "Testing/React/Buttons/ActionBar": {
-      "fileName": 3435,
+      "fileName": 3434,
       "framework": "react"
     },
     "Testing/React/Indicators/Avatar": {
-      "fileName": 3437,
+      "fileName": 3436,
       "framework": "react"
     },
     "Components/Indicators/Badge/CountBadge/React": {
-      "fileName": 3438,
+      "fileName": 3437,
       "framework": "react"
     },
     "Testing/React/Indicators/Badge/CountBadge": {
-      "fileName": 3439,
+      "fileName": 3438,
       "framework": "react"
     },
     "Testing/React/Buttons/Button/Delete Button": {
-      "fileName": 3442,
+      "fileName": 3441,
       "framework": "react"
     },
     "Testing/React/Buttons/Button/ExternalHyperlink": {
-      "fileName": 3443,
+      "fileName": 3442,
       "framework": "react"
     },
     "Testing/React/Buttons/Button/Hyperlink": {
-      "fileName": 3444,
+      "fileName": 3443,
       "framework": "react"
     },
     "Testing/React/Buttons/Button/Primary Button": {
-      "fileName": 3445,
+      "fileName": 3444,
       "framework": "react"
     },
     "Testing/React/Buttons/Button/Secondary Button": {
-      "fileName": 3446,
+      "fileName": 3445,
       "framework": "react"
     },
     "Testing/React/Buttons/Button/Tertiary Button": {
-      "fileName": 3447,
+      "fileName": 3446,
       "framework": "react"
     },
     "Testing/React/Buttons/Button/Toolbar Dropdown Button": {
-      "fileName": 3448,
+      "fileName": 3447,
       "framework": "react"
     },
     "Testing/React/Buttons/Button/Toolbar Icon Button": {
-      "fileName": 3449,
+      "fileName": 3448,
       "framework": "react"
     },
     "Testing/React/Buttons/Button/Deprecated Button": {
-      "fileName": 3450,
+      "fileName": 3449,
       "framework": "react"
     },
     "Testing/React/Containers/Card": {
-      "fileName": 3451,
+      "fileName": 3450,
       "framework": "react"
     },
     "Components/Popups/Dialog/React": {
-      "fileName": 3455,
+      "fileName": 3454,
       "framework": "react"
     },
     "Testing/React/Inputs/Checkbox": {
-      "fileName": 3456,
+      "fileName": 3455,
       "framework": "react"
     },
     "Testing/React/Inputs/Color Picker/Color Input": {
-      "fileName": 3457,
+      "fileName": 3456,
       "framework": "react"
     },
     "Testing/React/Inputs/Form Field": {
-      "fileName": 3458,
+      "fileName": 3457,
       "framework": "react"
     },
     "Testing/React/Inputs/Radio": {
-      "fileName": 3459,
+      "fileName": 3458,
       "framework": "react"
     },
     "Testing/React/Inputs/Select": {
-      "fileName": 3460,
+      "fileName": 3459,
       "framework": "react"
     },
     "Testing/React/Inputs/Switch": {
-      "fileName": 3461,
+      "fileName": 3460,
       "framework": "react"
     },
     "Testing/React/Inputs/TextArea": {
-      "fileName": 3462,
+      "fileName": 3461,
       "framework": "react"
     },
     "Testing/React/Inputs/Text Input": {
-      "fileName": 3463,
+      "fileName": 3462,
       "framework": "react"
     },
     "Testing/React/Labs/Common": {
-      "fileName": 3466,
+      "fileName": 3465,
       "framework": "react"
     },
     "Testing/React/Containers/Layout/Flex": {
-      "fileName": 3467,
+      "fileName": 3466,
       "framework": "react"
     },
     "Testing/React/Labs/Layout/Stack": {
-      "fileName": 3468,
+      "fileName": 3467,
       "framework": "react"
     },
     "Testing/React/Popups/Menu": {
-      "fileName": 3469,
+      "fileName": 3468,
       "framework": "react"
     },
     "Testing/React/Popups/Modal": {
-      "fileName": 3470,
+      "fileName": 3469,
       "framework": "react"
     },
     "Testing/React/Navigation/Pagination": {
-      "fileName": 3471,
+      "fileName": 3470,
       "framework": "react"
     },
     "Components/Popups/Popper/React": {
-      "fileName": 3472,
+      "fileName": 3471,
       "framework": "react"
     },
     "Testing/React/Popups/Popper": {
-      "fileName": 3473,
+      "fileName": 3472,
       "framework": "react"
     },
     "Testing/React/Popups/Popup": {
-      "fileName": 3474,
+      "fileName": 3473,
       "framework": "react"
     },
     "Testing/React/Buttons/Segmented Control": {
-      "fileName": 3475,
+      "fileName": 3474,
       "framework": "react"
     },
     "Components/Containers/Side Panel/React": {
-      "fileName": 3476,
+      "fileName": 3475,
       "framework": "react"
     },
     "Testing/React/Containers/Side Panel": {
-      "fileName": 3477,
+      "fileName": 3476,
       "framework": "react"
     },
     "Testing/React/Indicators/Skeleton": {
-      "fileName": 3478,
+      "fileName": 3477,
       "framework": "react"
     },
     "Testing/React/Indicators/Status Indicator": {
-      "fileName": 3479,
+      "fileName": 3478,
       "framework": "react"
     },
     "Testing/React/Containers/Tabs": {
-      "fileName": 3480,
+      "fileName": 3479,
       "framework": "react"
     },
     "Testing/React/Popups/Toast": {
-      "fileName": 3481,
+      "fileName": 3480,
       "framework": "react"
     },
     "Tokens/Tokens/React": {
-      "fileName": 3482,
+      "fileName": 3481,
       "framework": "react"
     },
     "Testing/React/Popups/Tooltip": {
-      "fileName": 3483,
+      "fileName": 3482,
       "framework": "react"
     }
   },
@@ -761,7 +761,7 @@
       "kind": "Tokens/Common/Theming",
       "story": "Direction",
       "parameters": {
-        "fileName": "3453",
+        "fileName": "3452",
         "__isArgsStory": false
       }
     },
@@ -771,7 +771,7 @@
       "kind": "Tokens/Common/Theming",
       "story": "Theme",
       "parameters": {
-        "fileName": "3454",
+        "fileName": "3453",
         "__isArgsStory": false
       }
     },
@@ -781,7 +781,7 @@
       "kind": "Tokens/Core/CSS",
       "story": "Accessibility",
       "parameters": {
-        "fileName": "3372",
+        "fileName": "3371",
         "__isArgsStory": false
       }
     },
@@ -791,7 +791,7 @@
       "kind": "Tokens/Core/CSS",
       "story": "Depth",
       "parameters": {
-        "fileName": "3372",
+        "fileName": "3371",
         "__isArgsStory": false
       }
     },
@@ -801,7 +801,7 @@
       "kind": "Tokens/Core/CSS",
       "story": "Typography",
       "parameters": {
-        "fileName": "3372",
+        "fileName": "3371",
         "__isArgsStory": false
       }
     },
@@ -811,7 +811,7 @@
       "kind": "Tokens/Icon/CSS",
       "story": "Accent Icon",
       "parameters": {
-        "fileName": "3389",
+        "fileName": "3388",
         "__isArgsStory": false
       }
     },
@@ -821,7 +821,7 @@
       "kind": "Tokens/Icon/CSS",
       "story": "Applet Icon",
       "parameters": {
-        "fileName": "3389",
+        "fileName": "3388",
         "__isArgsStory": false
       }
     },
@@ -831,7 +831,7 @@
       "kind": "Tokens/Icon/CSS",
       "story": "System Icon",
       "parameters": {
-        "fileName": "3389",
+        "fileName": "3388",
         "__isArgsStory": false
       }
     },
@@ -841,7 +841,7 @@
       "kind": "Tokens/Icon/React",
       "story": "Accent Icon",
       "parameters": {
-        "fileName": "3464",
+        "fileName": "3463",
         "__isArgsStory": false
       }
     },
@@ -851,7 +851,7 @@
       "kind": "Tokens/Icon/React",
       "story": "Applet Icon",
       "parameters": {
-        "fileName": "3464",
+        "fileName": "3463",
         "__isArgsStory": false
       }
     },
@@ -861,7 +861,7 @@
       "kind": "Tokens/Icon/React",
       "story": "Graphic",
       "parameters": {
-        "fileName": "3464",
+        "fileName": "3463",
         "__isArgsStory": false
       }
     },
@@ -871,7 +871,7 @@
       "kind": "Tokens/Icon/React",
       "story": "System Icon",
       "parameters": {
-        "fileName": "3464",
+        "fileName": "3463",
         "__isArgsStory": false
       }
     },
@@ -931,7 +931,7 @@
       "kind": "Components/Buttons/Action Bar/CSS",
       "story": "Default",
       "parameters": {
-        "fileName": "3349",
+        "fileName": "3348",
         "__isArgsStory": false
       }
     },
@@ -941,7 +941,7 @@
       "kind": "Components/Buttons/Action Bar/CSS",
       "story": "With Two Buttons",
       "parameters": {
-        "fileName": "3349",
+        "fileName": "3348",
         "__isArgsStory": false
       }
     },
@@ -951,7 +951,7 @@
       "kind": "Components/Buttons/Action Bar/CSS",
       "story": "With Two Buttons Fixed",
       "parameters": {
-        "fileName": "3349",
+        "fileName": "3348",
         "__isArgsStory": false
       }
     },
@@ -991,7 +991,7 @@
       "kind": "Components/Buttons/Button/CSS",
       "story": "Delete",
       "parameters": {
-        "fileName": "3362",
+        "fileName": "3361",
         "__isArgsStory": false
       }
     },
@@ -1001,7 +1001,7 @@
       "kind": "Components/Buttons/Button/CSS",
       "story": "Primary",
       "parameters": {
-        "fileName": "3362",
+        "fileName": "3361",
         "__isArgsStory": false
       }
     },
@@ -1011,7 +1011,7 @@
       "kind": "Components/Buttons/Button/CSS",
       "story": "Secondary",
       "parameters": {
-        "fileName": "3362",
+        "fileName": "3361",
         "__isArgsStory": false
       }
     },
@@ -1021,7 +1021,7 @@
       "kind": "Components/Buttons/Button/CSS/Deprecated",
       "story": "Delete",
       "parameters": {
-        "fileName": "3362",
+        "fileName": "3361",
         "__isArgsStory": false
       }
     },
@@ -1031,7 +1031,7 @@
       "kind": "Components/Buttons/Button/CSS/Deprecated",
       "story": "Dropdown",
       "parameters": {
-        "fileName": "3362",
+        "fileName": "3361",
         "__isArgsStory": false
       }
     },
@@ -1041,7 +1041,7 @@
       "kind": "Components/Buttons/Button/CSS/Deprecated",
       "story": "Primary",
       "parameters": {
-        "fileName": "3362",
+        "fileName": "3361",
         "__isArgsStory": false
       }
     },
@@ -1051,7 +1051,7 @@
       "kind": "Components/Buttons/Button/CSS/Deprecated",
       "story": "Secondary",
       "parameters": {
-        "fileName": "3362",
+        "fileName": "3361",
         "__isArgsStory": false
       }
     },
@@ -1061,7 +1061,7 @@
       "kind": "Components/Buttons/Button/CSS/Deprecated",
       "story": "Split",
       "parameters": {
-        "fileName": "3362",
+        "fileName": "3361",
         "__isArgsStory": false
       }
     },
@@ -1071,7 +1071,7 @@
       "kind": "Components/Buttons/Button/CSS/Dropdown",
       "story": "Default",
       "parameters": {
-        "fileName": "3362",
+        "fileName": "3361",
         "__isArgsStory": false
       }
     },
@@ -1081,7 +1081,7 @@
       "kind": "Components/Buttons/Button/CSS/Icon Button",
       "story": "Circle",
       "parameters": {
-        "fileName": "3362",
+        "fileName": "3361",
         "__isArgsStory": false
       }
     },
@@ -1091,7 +1091,7 @@
       "kind": "Components/Buttons/Button/CSS/Icon Button",
       "story": "Circle Filled",
       "parameters": {
-        "fileName": "3362",
+        "fileName": "3361",
         "__isArgsStory": false
       }
     },
@@ -1101,7 +1101,7 @@
       "kind": "Components/Buttons/Button/CSS/Icon Button",
       "story": "Inverse",
       "parameters": {
-        "fileName": "3362",
+        "fileName": "3361",
         "__isArgsStory": false
       }
     },
@@ -1111,7 +1111,7 @@
       "kind": "Components/Buttons/Button/CSS/Icon Button",
       "story": "Inverse Filled",
       "parameters": {
-        "fileName": "3362",
+        "fileName": "3361",
         "__isArgsStory": false
       }
     },
@@ -1121,7 +1121,7 @@
       "kind": "Components/Buttons/Button/CSS/Icon Button",
       "story": "Plain",
       "parameters": {
-        "fileName": "3362",
+        "fileName": "3361",
         "__isArgsStory": false
       }
     },
@@ -1131,7 +1131,7 @@
       "kind": "Components/Buttons/Button/CSS/Icon Button",
       "story": "Square",
       "parameters": {
-        "fileName": "3362",
+        "fileName": "3361",
         "__isArgsStory": false
       }
     },
@@ -1141,7 +1141,7 @@
       "kind": "Components/Buttons/Button/CSS/Icon Button",
       "story": "Square Filled",
       "parameters": {
-        "fileName": "3362",
+        "fileName": "3361",
         "__isArgsStory": false
       }
     },
@@ -1151,7 +1151,7 @@
       "kind": "Components/Buttons/Button/CSS/Text",
       "story": "Default",
       "parameters": {
-        "fileName": "3362",
+        "fileName": "3361",
         "__isArgsStory": false
       }
     },
@@ -1161,7 +1161,7 @@
       "kind": "Components/Buttons/Button/CSS/Text",
       "story": "Inverse",
       "parameters": {
-        "fileName": "3362",
+        "fileName": "3361",
         "__isArgsStory": false
       }
     },
@@ -1241,7 +1241,7 @@
       "kind": "Components/Buttons/Button/React/Deprecated",
       "story": "Delete",
       "parameters": {
-        "fileName": "3441",
+        "fileName": "3440",
         "__isArgsStory": false
       }
     },
@@ -1251,7 +1251,7 @@
       "kind": "Components/Buttons/Button/React/Deprecated",
       "story": "Primary",
       "parameters": {
-        "fileName": "3441",
+        "fileName": "3440",
         "__isArgsStory": false
       }
     },
@@ -1261,7 +1261,7 @@
       "kind": "Components/Buttons/Button/React/Deprecated",
       "story": "Secondary",
       "parameters": {
-        "fileName": "3441",
+        "fileName": "3440",
         "__isArgsStory": false
       }
     },
@@ -1271,7 +1271,7 @@
       "kind": "Components/Buttons/Button/React/Toolbar",
       "story": "Toolbar Dropdown Button",
       "parameters": {
-        "fileName": "3440",
+        "fileName": "3439",
         "__isArgsStory": false
       }
     },
@@ -1281,7 +1281,7 @@
       "kind": "Components/Buttons/Button/React/Toolbar",
       "story": "Toolbar Icon Button",
       "parameters": {
-        "fileName": "3440",
+        "fileName": "3439",
         "__isArgsStory": false
       }
     },
@@ -1341,7 +1341,7 @@
       "kind": "Components/Containers/Card/CSS",
       "story": "All",
       "parameters": {
-        "fileName": "3369",
+        "fileName": "3368",
         "__isArgsStory": false
       }
     },
@@ -1471,7 +1471,7 @@
       "kind": "Components/Containers/Layout/CSS",
       "story": "Auto Widths",
       "parameters": {
-        "fileName": "3392",
+        "fileName": "3391",
         "__isArgsStory": false
       }
     },
@@ -1481,7 +1481,7 @@
       "kind": "Components/Containers/Layout/CSS",
       "story": "Distribution",
       "parameters": {
-        "fileName": "3392",
+        "fileName": "3391",
         "__isArgsStory": false
       }
     },
@@ -1491,7 +1491,7 @@
       "kind": "Components/Containers/Layout/CSS",
       "story": "Fluid Layout",
       "parameters": {
-        "fileName": "3392",
+        "fileName": "3391",
         "__isArgsStory": false
       }
     },
@@ -1501,7 +1501,7 @@
       "kind": "Components/Containers/Layout/CSS",
       "story": "Horizontal Positioning",
       "parameters": {
-        "fileName": "3392",
+        "fileName": "3391",
         "__isArgsStory": false
       }
     },
@@ -1511,7 +1511,7 @@
       "kind": "Components/Containers/Layout/CSS",
       "story": "Offsets",
       "parameters": {
-        "fileName": "3392",
+        "fileName": "3391",
         "__isArgsStory": false
       }
     },
@@ -1521,7 +1521,7 @@
       "kind": "Components/Containers/Layout/CSS",
       "story": "Responsive Layout",
       "parameters": {
-        "fileName": "3392",
+        "fileName": "3391",
         "__isArgsStory": false
       }
     },
@@ -1531,7 +1531,7 @@
       "kind": "Components/Containers/Layout/CSS",
       "story": "Vertical Positioning",
       "parameters": {
-        "fileName": "3392",
+        "fileName": "3391",
         "__isArgsStory": false
       }
     },
@@ -1571,7 +1571,7 @@
       "kind": "Components/Containers/Layout/React/Column and Layout",
       "story": "12 Column Layout",
       "parameters": {
-        "fileName": "3465",
+        "fileName": "3464",
         "__isArgsStory": false
       }
     },
@@ -1581,7 +1581,7 @@
       "kind": "Components/Containers/Layout/React/Column and Layout",
       "story": "Page Layout",
       "parameters": {
-        "fileName": "3465",
+        "fileName": "3464",
         "__isArgsStory": false
       }
     },
@@ -1681,7 +1681,7 @@
       "kind": "Components/Containers/Table/CSS",
       "story": "All",
       "parameters": {
-        "fileName": "3412",
+        "fileName": "3411",
         "__isArgsStory": false
       }
     },
@@ -1691,7 +1691,7 @@
       "kind": "Components/Containers/Table/CSS",
       "story": "Errors",
       "parameters": {
-        "fileName": "3412",
+        "fileName": "3411",
         "__isArgsStory": false
       }
     },
@@ -1831,7 +1831,7 @@
       "kind": "Components/Indicators/Avatar/React/Default",
       "story": "Dark",
       "parameters": {
-        "fileName": "3436",
+        "fileName": "3435",
         "__isArgsStory": false
       }
     },
@@ -1841,7 +1841,7 @@
       "kind": "Components/Indicators/Avatar/React/Default",
       "story": "Image",
       "parameters": {
-        "fileName": "3436",
+        "fileName": "3435",
         "__isArgsStory": false
       }
     },
@@ -1851,7 +1851,7 @@
       "kind": "Components/Indicators/Avatar/React/Default",
       "story": "Light",
       "parameters": {
-        "fileName": "3436",
+        "fileName": "3435",
         "__isArgsStory": false
       }
     },
@@ -1861,7 +1861,7 @@
       "kind": "Components/Indicators/Avatar/React/Avatar Button",
       "story": "Dark",
       "parameters": {
-        "fileName": "3436",
+        "fileName": "3435",
         "__isArgsStory": false
       }
     },
@@ -1871,7 +1871,7 @@
       "kind": "Components/Indicators/Avatar/React/Avatar Button",
       "story": "Image",
       "parameters": {
-        "fileName": "3436",
+        "fileName": "3435",
         "__isArgsStory": false
       }
     },
@@ -1881,7 +1881,7 @@
       "kind": "Components/Indicators/Avatar/React/Avatar Button",
       "story": "Light",
       "parameters": {
-        "fileName": "3436",
+        "fileName": "3435",
         "__isArgsStory": false
       }
     },
@@ -1931,7 +1931,7 @@
       "kind": "Components/Indicators/Banner/CSS/Alert ",
       "story": "Full",
       "parameters": {
-        "fileName": "3357",
+        "fileName": "3356",
         "__isArgsStory": false
       }
     },
@@ -1941,7 +1941,7 @@
       "kind": "Components/Indicators/Banner/CSS/Alert ",
       "story": "Sticky  ",
       "parameters": {
-        "fileName": "3357",
+        "fileName": "3356",
         "__isArgsStory": false
       }
     },
@@ -1951,7 +1951,7 @@
       "kind": "Components/Indicators/Banner/CSS/Error ",
       "story": "Full",
       "parameters": {
-        "fileName": "3357",
+        "fileName": "3356",
         "__isArgsStory": false
       }
     },
@@ -1961,7 +1961,7 @@
       "kind": "Components/Indicators/Banner/CSS/Error ",
       "story": "Sticky",
       "parameters": {
-        "fileName": "3357",
+        "fileName": "3356",
         "__isArgsStory": false
       }
     },
@@ -2061,7 +2061,7 @@
       "kind": "Components/Indicators/Loading Animation/CSS",
       "story": "Loading Dots",
       "parameters": {
-        "fileName": "3397",
+        "fileName": "3396",
         "__isArgsStory": false
       }
     },
@@ -2191,7 +2191,7 @@
       "kind": "Components/Inputs/Checkbox/CSS/Left Label/Checkbox",
       "story": "Default",
       "parameters": {
-        "fileName": "3377",
+        "fileName": "3376",
         "__isArgsStory": false
       }
     },
@@ -2201,7 +2201,7 @@
       "kind": "Components/Inputs/Checkbox/CSS/Left Label/Checkbox",
       "story": "Alert",
       "parameters": {
-        "fileName": "3377",
+        "fileName": "3376",
         "__isArgsStory": false
       }
     },
@@ -2211,7 +2211,7 @@
       "kind": "Components/Inputs/Checkbox/CSS/Left Label/Checkbox",
       "story": "Disabled",
       "parameters": {
-        "fileName": "3377",
+        "fileName": "3376",
         "__isArgsStory": false
       }
     },
@@ -2221,7 +2221,7 @@
       "kind": "Components/Inputs/Checkbox/CSS/Left Label/Checkbox",
       "story": "Error",
       "parameters": {
-        "fileName": "3377",
+        "fileName": "3376",
         "__isArgsStory": false
       }
     },
@@ -2231,7 +2231,7 @@
       "kind": "Components/Inputs/Checkbox/CSS/Left Label/Checkbox Group",
       "story": "Default",
       "parameters": {
-        "fileName": "3377",
+        "fileName": "3376",
         "__isArgsStory": false
       }
     },
@@ -2241,7 +2241,7 @@
       "kind": "Components/Inputs/Checkbox/CSS/Left Label/Checkbox Group",
       "story": "Alert",
       "parameters": {
-        "fileName": "3377",
+        "fileName": "3376",
         "__isArgsStory": false
       }
     },
@@ -2251,7 +2251,7 @@
       "kind": "Components/Inputs/Checkbox/CSS/Left Label/Checkbox Group",
       "story": "Error",
       "parameters": {
-        "fileName": "3377",
+        "fileName": "3376",
         "__isArgsStory": false
       }
     },
@@ -2261,7 +2261,7 @@
       "kind": "Components/Inputs/Checkbox/CSS/Top Label/Checkbox",
       "story": "Default",
       "parameters": {
-        "fileName": "3377",
+        "fileName": "3376",
         "__isArgsStory": false
       }
     },
@@ -2271,7 +2271,7 @@
       "kind": "Components/Inputs/Checkbox/CSS/Top Label/Checkbox",
       "story": "Alert",
       "parameters": {
-        "fileName": "3377",
+        "fileName": "3376",
         "__isArgsStory": false
       }
     },
@@ -2281,7 +2281,7 @@
       "kind": "Components/Inputs/Checkbox/CSS/Top Label/Checkbox",
       "story": "Disabled",
       "parameters": {
-        "fileName": "3377",
+        "fileName": "3376",
         "__isArgsStory": false
       }
     },
@@ -2291,7 +2291,7 @@
       "kind": "Components/Inputs/Checkbox/CSS/Top Label/Checkbox",
       "story": "Error",
       "parameters": {
-        "fileName": "3377",
+        "fileName": "3376",
         "__isArgsStory": false
       }
     },
@@ -2301,7 +2301,7 @@
       "kind": "Components/Inputs/Checkbox/CSS/Top Label/Checkbox Group",
       "story": "Default",
       "parameters": {
-        "fileName": "3377",
+        "fileName": "3376",
         "__isArgsStory": false
       }
     },
@@ -2311,7 +2311,7 @@
       "kind": "Components/Inputs/Checkbox/CSS/Top Label/Checkbox Group",
       "story": "Alert",
       "parameters": {
-        "fileName": "3377",
+        "fileName": "3376",
         "__isArgsStory": false
       }
     },
@@ -2321,7 +2321,7 @@
       "kind": "Components/Inputs/Checkbox/CSS/Top Label/Checkbox Group",
       "story": "Error",
       "parameters": {
-        "fileName": "3377",
+        "fileName": "3376",
         "__isArgsStory": false
       }
     },
@@ -2541,7 +2541,7 @@
       "kind": "Components/Inputs/Form Field/CSS",
       "story": "Hint",
       "parameters": {
-        "fileName": "3375",
+        "fileName": "3374",
         "__isArgsStory": false
       }
     },
@@ -2551,7 +2551,7 @@
       "kind": "Components/Inputs/Form Field/CSS",
       "story": "Label",
       "parameters": {
-        "fileName": "3375",
+        "fileName": "3374",
         "__isArgsStory": false
       }
     },
@@ -2751,7 +2751,7 @@
       "kind": "Components/Inputs/Select/CSS/Left Label",
       "story": "Default",
       "parameters": {
-        "fileName": "3380",
+        "fileName": "3379",
         "__isArgsStory": false
       }
     },
@@ -2761,7 +2761,7 @@
       "kind": "Components/Inputs/Select/CSS/Left Label",
       "story": "Alert",
       "parameters": {
-        "fileName": "3380",
+        "fileName": "3379",
         "__isArgsStory": false
       }
     },
@@ -2771,7 +2771,7 @@
       "kind": "Components/Inputs/Select/CSS/Left Label",
       "story": "Disabled",
       "parameters": {
-        "fileName": "3380",
+        "fileName": "3379",
         "__isArgsStory": false
       }
     },
@@ -2781,7 +2781,7 @@
       "kind": "Components/Inputs/Select/CSS/Left Label",
       "story": "Error",
       "parameters": {
-        "fileName": "3380",
+        "fileName": "3379",
         "__isArgsStory": false
       }
     },
@@ -2791,7 +2791,7 @@
       "kind": "Components/Inputs/Select/CSS/Top Label",
       "story": "Default",
       "parameters": {
-        "fileName": "3380",
+        "fileName": "3379",
         "__isArgsStory": false
       }
     },
@@ -2801,7 +2801,7 @@
       "kind": "Components/Inputs/Select/CSS/Top Label",
       "story": "Alert",
       "parameters": {
-        "fileName": "3380",
+        "fileName": "3379",
         "__isArgsStory": false
       }
     },
@@ -2811,7 +2811,7 @@
       "kind": "Components/Inputs/Select/CSS/Top Label",
       "story": "Disabled",
       "parameters": {
-        "fileName": "3380",
+        "fileName": "3379",
         "__isArgsStory": false
       }
     },
@@ -2821,7 +2821,7 @@
       "kind": "Components/Inputs/Select/CSS/Top Label",
       "story": "Error",
       "parameters": {
-        "fileName": "3380",
+        "fileName": "3379",
         "__isArgsStory": false
       }
     },
@@ -2981,7 +2981,7 @@
       "kind": "Components/Inputs/Text Input/CSS/Left Label",
       "story": "Default",
       "parameters": {
-        "fileName": "3386",
+        "fileName": "3385",
         "__isArgsStory": false
       }
     },
@@ -2991,7 +2991,7 @@
       "kind": "Components/Inputs/Text Input/CSS/Left Label",
       "story": "Alert",
       "parameters": {
-        "fileName": "3386",
+        "fileName": "3385",
         "__isArgsStory": false
       }
     },
@@ -3001,7 +3001,7 @@
       "kind": "Components/Inputs/Text Input/CSS/Left Label",
       "story": "Disabled",
       "parameters": {
-        "fileName": "3386",
+        "fileName": "3385",
         "__isArgsStory": false
       }
     },
@@ -3011,7 +3011,7 @@
       "kind": "Components/Inputs/Text Input/CSS/Left Label",
       "story": "Disabled with placeholder",
       "parameters": {
-        "fileName": "3386",
+        "fileName": "3385",
         "__isArgsStory": false
       }
     },
@@ -3021,7 +3021,7 @@
       "kind": "Components/Inputs/Text Input/CSS/Left Label",
       "story": "Error",
       "parameters": {
-        "fileName": "3386",
+        "fileName": "3385",
         "__isArgsStory": false
       }
     },
@@ -3031,7 +3031,7 @@
       "kind": "Components/Inputs/Text Input/CSS/Left Label",
       "story": "With placeholder",
       "parameters": {
-        "fileName": "3386",
+        "fileName": "3385",
         "__isArgsStory": false
       }
     },
@@ -3041,7 +3041,7 @@
       "kind": "Components/Inputs/Text Input/CSS/Top Label",
       "story": "Default",
       "parameters": {
-        "fileName": "3386",
+        "fileName": "3385",
         "__isArgsStory": false
       }
     },
@@ -3051,7 +3051,7 @@
       "kind": "Components/Inputs/Text Input/CSS/Top Label",
       "story": "Alert",
       "parameters": {
-        "fileName": "3386",
+        "fileName": "3385",
         "__isArgsStory": false
       }
     },
@@ -3061,7 +3061,7 @@
       "kind": "Components/Inputs/Text Input/CSS/Top Label",
       "story": "Disabled",
       "parameters": {
-        "fileName": "3386",
+        "fileName": "3385",
         "__isArgsStory": false
       }
     },
@@ -3071,7 +3071,7 @@
       "kind": "Components/Inputs/Text Input/CSS/Top Label",
       "story": "Disabled with placeholder",
       "parameters": {
-        "fileName": "3386",
+        "fileName": "3385",
         "__isArgsStory": false
       }
     },
@@ -3081,7 +3081,7 @@
       "kind": "Components/Inputs/Text Input/CSS/Top Label",
       "story": "Error",
       "parameters": {
-        "fileName": "3386",
+        "fileName": "3385",
         "__isArgsStory": false
       }
     },
@@ -3091,7 +3091,7 @@
       "kind": "Components/Inputs/Text Input/CSS/Top Label",
       "story": "With placeholder",
       "parameters": {
-        "fileName": "3386",
+        "fileName": "3385",
         "__isArgsStory": false
       }
     },
@@ -3191,7 +3191,7 @@
       "kind": "Components/Inputs/TextArea/CSS/Left Label",
       "story": "Default",
       "parameters": {
-        "fileName": "3383",
+        "fileName": "3382",
         "__isArgsStory": false
       }
     },
@@ -3201,7 +3201,7 @@
       "kind": "Components/Inputs/TextArea/CSS/Left Label",
       "story": "Alert",
       "parameters": {
-        "fileName": "3383",
+        "fileName": "3382",
         "__isArgsStory": false
       }
     },
@@ -3211,7 +3211,7 @@
       "kind": "Components/Inputs/TextArea/CSS/Left Label",
       "story": "Disabled",
       "parameters": {
-        "fileName": "3383",
+        "fileName": "3382",
         "__isArgsStory": false
       }
     },
@@ -3221,7 +3221,7 @@
       "kind": "Components/Inputs/TextArea/CSS/Left Label",
       "story": "Disabled with placeholder",
       "parameters": {
-        "fileName": "3383",
+        "fileName": "3382",
         "__isArgsStory": false
       }
     },
@@ -3231,7 +3231,7 @@
       "kind": "Components/Inputs/TextArea/CSS/Left Label",
       "story": "Error",
       "parameters": {
-        "fileName": "3383",
+        "fileName": "3382",
         "__isArgsStory": false
       }
     },
@@ -3241,7 +3241,7 @@
       "kind": "Components/Inputs/TextArea/CSS/Left Label",
       "story": "With placeholder",
       "parameters": {
-        "fileName": "3383",
+        "fileName": "3382",
         "__isArgsStory": false
       }
     },
@@ -3251,7 +3251,7 @@
       "kind": "Components/Inputs/TextArea/CSS/Top Label",
       "story": "Default",
       "parameters": {
-        "fileName": "3383",
+        "fileName": "3382",
         "__isArgsStory": false
       }
     },
@@ -3261,7 +3261,7 @@
       "kind": "Components/Inputs/TextArea/CSS/Top Label",
       "story": "Alert",
       "parameters": {
-        "fileName": "3383",
+        "fileName": "3382",
         "__isArgsStory": false
       }
     },
@@ -3271,7 +3271,7 @@
       "kind": "Components/Inputs/TextArea/CSS/Top Label",
       "story": "Disabled",
       "parameters": {
-        "fileName": "3383",
+        "fileName": "3382",
         "__isArgsStory": false
       }
     },
@@ -3281,7 +3281,7 @@
       "kind": "Components/Inputs/TextArea/CSS/Top Label",
       "story": "Disabled with placeholder",
       "parameters": {
-        "fileName": "3383",
+        "fileName": "3382",
         "__isArgsStory": false
       }
     },
@@ -3291,7 +3291,7 @@
       "kind": "Components/Inputs/TextArea/CSS/Top Label",
       "story": "Error",
       "parameters": {
-        "fileName": "3383",
+        "fileName": "3382",
         "__isArgsStory": false
       }
     },
@@ -3301,7 +3301,7 @@
       "kind": "Components/Inputs/TextArea/CSS/Top Label",
       "story": "With placeholder",
       "parameters": {
-        "fileName": "3383",
+        "fileName": "3382",
         "__isArgsStory": false
       }
     },
@@ -3411,7 +3411,7 @@
       "kind": "Components/Navigation/Page Header/CSS",
       "story": "Default",
       "parameters": {
-        "fileName": "3406",
+        "fileName": "3405",
         "__isArgsStory": false
       }
     },
@@ -3421,7 +3421,7 @@
       "kind": "Components/Navigation/Page Header/CSS",
       "story": "Cap Width",
       "parameters": {
-        "fileName": "3406",
+        "fileName": "3405",
         "__isArgsStory": false
       }
     },
@@ -3501,7 +3501,7 @@
       "kind": "Components/Popups/Menu/CSS",
       "story": "Default",
       "parameters": {
-        "fileName": "3400",
+        "fileName": "3399",
         "__isArgsStory": false
       }
     },
@@ -3511,7 +3511,7 @@
       "kind": "Components/Popups/Menu/CSS",
       "story": "With Icons",
       "parameters": {
-        "fileName": "3400",
+        "fileName": "3399",
         "__isArgsStory": false
       }
     },
@@ -3551,7 +3551,7 @@
       "kind": "Components/Popups/Modal/CSS",
       "story": "Default",
       "parameters": {
-        "fileName": "3403",
+        "fileName": "3402",
         "__isArgsStory": false
       }
     },
@@ -3651,7 +3651,7 @@
       "kind": "Components/Popups/Popup/CSS",
       "story": "Default",
       "parameters": {
-        "fileName": "3409",
+        "fileName": "3408",
         "__isArgsStory": false
       }
     },
@@ -3831,7 +3831,7 @@
       "kind": "Components/Popups/Tooltip/CSS",
       "story": "Default",
       "parameters": {
-        "fileName": "3415",
+        "fileName": "3414",
         "__isArgsStory": false
       }
     },
@@ -3981,7 +3981,7 @@
       "kind": "Preview/Color Picker/React",
       "story": "Default",
       "parameters": {
-        "fileName": "3424",
+        "fileName": "3423",
         "__isArgsStory": false
       }
     },
@@ -3991,7 +3991,7 @@
       "kind": "Preview/Color Picker/React",
       "story": "Color Input Popup",
       "parameters": {
-        "fileName": "3424",
+        "fileName": "3423",
         "__isArgsStory": false
       }
     },
@@ -4001,7 +4001,7 @@
       "kind": "Preview/Color Picker/React",
       "story": "Icon button Popup",
       "parameters": {
-        "fileName": "3424",
+        "fileName": "3423",
         "__isArgsStory": false
       }
     },
@@ -4401,7 +4401,7 @@
       "kind": "Preview/Select/React/Left Label",
       "story": "Default",
       "parameters": {
-        "fileName": "1201",
+        "fileName": "1200",
         "__isArgsStory": false
       }
     },
@@ -4411,7 +4411,7 @@
       "kind": "Preview/Select/React/Left Label",
       "story": "Default with Custom Options Data",
       "parameters": {
-        "fileName": "1201",
+        "fileName": "1200",
         "__isArgsStory": false
       }
     },
@@ -4421,7 +4421,7 @@
       "kind": "Preview/Select/React/Left Label",
       "story": "Default with Simple Options (Strings)",
       "parameters": {
-        "fileName": "1201",
+        "fileName": "1200",
         "__isArgsStory": false
       }
     },
@@ -4431,7 +4431,7 @@
       "kind": "Preview/Select/React/Left Label",
       "story": "Alert",
       "parameters": {
-        "fileName": "1201",
+        "fileName": "1200",
         "__isArgsStory": false
       }
     },
@@ -4441,7 +4441,7 @@
       "kind": "Preview/Select/React/Left Label",
       "story": "Disabled",
       "parameters": {
-        "fileName": "1201",
+        "fileName": "1200",
         "__isArgsStory": false
       }
     },
@@ -4451,7 +4451,7 @@
       "kind": "Preview/Select/React/Left Label",
       "story": "Error",
       "parameters": {
-        "fileName": "1201",
+        "fileName": "1200",
         "__isArgsStory": false
       }
     },
@@ -4461,7 +4461,7 @@
       "kind": "Preview/Select/React/Left Label",
       "story": "Grow",
       "parameters": {
-        "fileName": "1201",
+        "fileName": "1200",
         "__isArgsStory": false
       }
     },
@@ -4471,7 +4471,7 @@
       "kind": "Preview/Select/React/Left Label",
       "story": "Scrollable",
       "parameters": {
-        "fileName": "1201",
+        "fileName": "1200",
         "__isArgsStory": false
       }
     },
@@ -4481,7 +4481,7 @@
       "kind": "Preview/Select/React/Top Label",
       "story": "Default",
       "parameters": {
-        "fileName": "1201",
+        "fileName": "1200",
         "__isArgsStory": false
       }
     },
@@ -4491,7 +4491,7 @@
       "kind": "Preview/Select/React/Top Label",
       "story": "Default with Custom Options Data",
       "parameters": {
-        "fileName": "1201",
+        "fileName": "1200",
         "__isArgsStory": false
       }
     },
@@ -4501,7 +4501,7 @@
       "kind": "Preview/Select/React/Top Label",
       "story": "Default with Simple Options (Strings)",
       "parameters": {
-        "fileName": "1201",
+        "fileName": "1200",
         "__isArgsStory": false
       }
     },
@@ -4511,7 +4511,7 @@
       "kind": "Preview/Select/React/Top Label",
       "story": "Alert",
       "parameters": {
-        "fileName": "1201",
+        "fileName": "1200",
         "__isArgsStory": false
       }
     },
@@ -4521,7 +4521,7 @@
       "kind": "Preview/Select/React/Top Label",
       "story": "Disabled",
       "parameters": {
-        "fileName": "1201",
+        "fileName": "1200",
         "__isArgsStory": false
       }
     },
@@ -4531,7 +4531,7 @@
       "kind": "Preview/Select/React/Top Label",
       "story": "Error",
       "parameters": {
-        "fileName": "1201",
+        "fileName": "1200",
         "__isArgsStory": false
       }
     },
@@ -4541,7 +4541,7 @@
       "kind": "Preview/Select/React/Top Label",
       "story": "Grow",
       "parameters": {
-        "fileName": "1201",
+        "fileName": "1200",
         "__isArgsStory": false
       }
     },
@@ -4551,7 +4551,7 @@
       "kind": "Preview/Select/React/Top Label",
       "story": "Scrollable",
       "parameters": {
-        "fileName": "1201",
+        "fileName": "1200",
         "__isArgsStory": false
       }
     },
@@ -4641,7 +4641,7 @@
       "kind": "Labs/Combobox/React",
       "story": "Autocomplete",
       "parameters": {
-        "fileName": "3418",
+        "fileName": "3417",
         "__isArgsStory": false
       }
     },
@@ -4651,7 +4651,7 @@
       "kind": "Labs/Combobox/React",
       "story": "Disabled item",
       "parameters": {
-        "fileName": "3418",
+        "fileName": "3417",
         "__isArgsStory": false
       }
     },
@@ -4661,7 +4661,7 @@
       "kind": "Labs/Combobox/React",
       "story": "Group of results",
       "parameters": {
-        "fileName": "3418",
+        "fileName": "3417",
         "__isArgsStory": false
       }
     },
@@ -4671,7 +4671,7 @@
       "kind": "Labs/Combobox/React",
       "story": "Grow",
       "parameters": {
-        "fileName": "3418",
+        "fileName": "3417",
         "__isArgsStory": false
       }
     },
@@ -4681,7 +4681,7 @@
       "kind": "Labs/Combobox/React",
       "story": "No clear button",
       "parameters": {
-        "fileName": "3418",
+        "fileName": "3417",
         "__isArgsStory": false
       }
     },
@@ -4691,7 +4691,7 @@
       "kind": "Labs/Combobox/React",
       "story": "RTL",
       "parameters": {
-        "fileName": "3418",
+        "fileName": "3417",
         "__isArgsStory": false
       }
     },
