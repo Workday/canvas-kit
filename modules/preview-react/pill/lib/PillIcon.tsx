@@ -14,17 +14,23 @@ export interface PillIconProps extends Omit<SystemIconProps, 'icon'> {
    * @default `plusIcon`
    */
   icon?: CanvasSystemIcon;
+  /**
+   * The aria label for the icon
+   * @default 'add'
+   */
+  'aria-label'?: string;
 }
 
 export const PillIcon = createSubcomponent('span')({
   modelHook: usePillModel,
-})<PillIconProps>(({size, icon, ...elemProps}, Element) => {
+})<PillIconProps>(({size, icon, 'aria-label': ariaLabel = 'add', ...elemProps}, Element) => {
   return (
     <SystemIcon
       marginInlineStart={`-${space.xxxs}`} // remove padding on the left from HStack
       display="flex"
       as={Element}
       size={20}
+      aria-label={ariaLabel}
       icon={icon || plusIcon}
       {...elemProps}
     />

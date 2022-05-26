@@ -26,6 +26,7 @@ export const PillLabel = createSubcomponent('span')({
         color={model.state.disabled ? colors.licorice100 : 'inherit'}
         maxWidth={model.state.maxWidth}
         as={Element}
+        id={model.state.id}
         {...elemProps}
       >
         {elemProps.children}

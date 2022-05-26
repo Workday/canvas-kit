@@ -149,9 +149,10 @@ const StyledBasePill = styled(BaseButton.as('button'))<StyledType & PillProps>(
   boxStyleFn
 );
 
-const StyledNonInteractivePill = styled(StyledBasePill)({
+const StyledNonInteractivePill = styled(StyledBasePill)<StyledType & PillProps>({
   cursor: 'default',
   overflow: 'revert', // override BaseButton overflow styles so the click target exists outside the pill for removable
+  position: 'relative',
 });
 
 export const Pill = createContainer('button')({

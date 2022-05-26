@@ -1,4 +1,4 @@
-import {createModelHook} from '@workday/canvas-kit-react/common';
+import {createModelHook, useUniqueId} from '@workday/canvas-kit-react/common';
 
 export const usePillModel = createModelHook({
   defaultConfig: {
@@ -11,10 +11,13 @@ export const usePillModel = createModelHook({
      * Use to disable a pill.
      */
     disabled: false,
+    id: '',
   },
 })(config => {
+  const id = useUniqueId();
   const state = {
     ...config,
+    id: id || config.id,
   };
 
   return {state, events: {}};
