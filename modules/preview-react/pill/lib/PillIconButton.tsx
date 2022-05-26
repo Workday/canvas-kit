@@ -90,13 +90,7 @@ export const PillIconButton = createSubcomponent('button')({
         position="relative"
         {...elemProps}
       >
-        <SystemIcon
-          aria-label={ariaLabel}
-          id={'removable'}
-          icon={icon}
-          size={24}
-          aria-hidden={true}
-        />
+        <SystemIcon aria-label={ariaLabel} id={'removable'} icon={icon} size={24} role="img" />
       </StyledIconButton>
     );
   }
