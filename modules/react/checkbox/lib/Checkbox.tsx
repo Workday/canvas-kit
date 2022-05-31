@@ -194,7 +194,7 @@ const CheckboxInput = styled('input')<CheckboxProps & StyledType>(
     '&:checked:focus ~ div:first-of-type': {
       borderColor: variant === 'inverse' ? colors.blackPepper400 : themePrimary.main,
       ...focusRing({
-        width: variant === 'inverse' ? 3 : 2,
+        width: 2,
         separation: variant === 'inverse' ? 0 : 2,
         animate: false,
         innerColor: variant === 'inverse' ? colors.blackPepper400 : undefined,
@@ -331,8 +331,14 @@ const CheckboxLabel = styled('label')<{disabled?: boolean; variant?: string}>(
     ...canvas.type.levels.subtext.large,
     paddingLeft: checkboxLabelDistance,
   },
-  ({disabled}) => (disabled ? {color: inputColors.disabled.text} : {cursor: 'pointer'}),
-  ({variant}) => (variant === 'inverse' ? {color: colors.frenchVanilla100} : {color: 'inherit'})
+  ({variant}) => (variant === 'inverse' ? {color: colors.frenchVanilla100} : undefined),
+  ({disabled, variant}) =>
+    disabled
+      ? {
+          color: variant === 'inverse' ? colors.frenchVanilla100 : inputColors.disabled.text,
+          opacity: variant === 'inverse' ? '.4' : '1',
+        }
+      : {cursor: 'pointer'}
 );
 
 export const Checkbox = createComponent('input')({
