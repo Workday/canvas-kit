@@ -80,7 +80,10 @@ export interface CheckboxProps extends Themeable {
    * @default false
    */
   indeterminate?: boolean;
-  variant?: 'inverse';
+  /**
+   * The variant for the checkbox
+   */
+  variant?: 'inverse' | undefined;
 }
 
 const checkboxHeight = 18;
@@ -119,7 +122,6 @@ const CheckboxRipple = styled('span')<Pick<CheckboxProps, 'disabled' | 'variant'
     width: checkboxWidth,
     position: 'absolute',
     pointerEvents: 'none', // This is a decorative element we don't want it to block clicks to input
-    // zIndex: -1,
   },
   ({variant}) => ({
     opacity: variant === 'inverse' ? '0.4' : '1',
