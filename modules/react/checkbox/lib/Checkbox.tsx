@@ -147,7 +147,7 @@ const CheckboxInput = styled('input')<CheckboxProps & StyledType>(
     },
     '&:disabled ~ div:first-of-type': {
       borderColor: inputColors.disabled.border,
-      backgroundColor: variant === 'inverse' ? colors.soap300 : themePrimary.lightest,
+      backgroundColor: variant === 'inverse' ? colors.soap300 : inputColors.disabled.background,
       opacity: variant === 'inverse' ? '.4' : '1',
     },
     '&:disabled:checked ~ div:first-of-type': {
