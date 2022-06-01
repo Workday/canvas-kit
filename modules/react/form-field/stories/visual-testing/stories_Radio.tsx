@@ -207,3 +207,10 @@ RadioThemedStates.parameters = {
     theme: customColorTheme,
   },
 };
+
+export const RadioInverseThemedStates = () => <InverseRadioStates />;
+RadioInverseThemedStates.parameters = {
+  canvasProviderDecorator: {
+    theme: customColorTheme,
+  },
+};

@@ -181,7 +181,7 @@ const CheckboxInput = styled('input')<CheckboxProps & StyledType>(
     '&:focus, &:active': {
       outline: 'none',
     },
-    '&:focus ~ div:first-of-type': {
+    '&:focus:not(:checked):not(:disabled) ~ div:first-of-type': {
       borderColor: variant === 'inverse' ? colors.blackPepper400 : themePrimary.main,
       borderWidth: '2px',
       boxShadow: 'none',
@@ -194,14 +194,15 @@ const CheckboxInput = styled('input')<CheckboxProps & StyledType>(
       }),
     },
     '&:checked:focus ~ div:first-of-type': {
-      borderColor: variant === 'inverse' ? colors.blackPepper400 : themePrimary.main,
       ...focusRing({
         width: 2,
-        separation: variant === 'inverse' ? 0 : 2,
+        separation: 2,
         animate: false,
         innerColor: variant === 'inverse' ? colors.blackPepper400 : undefined,
         outerColor: variant === 'inverse' ? colors.frenchVanilla100 : themeFocusOutline,
       }),
+      borderColor: variant === 'inverse' ? undefined : themePrimary.main,
+      borderWidth: undefined,
       '& span': {
         marginLeft: '-7px',
       },
@@ -219,6 +220,7 @@ const CheckboxInput = styled('input')<CheckboxProps & StyledType>(
       },
       '&:checked ~ div:first-of-type': {
         borderColor: variant === 'inverse' ? colors.soap300 : themePrimary.main,
+        borderWidth: 0,
       },
       '&:disabled:checked ~ div:first-of-type': {
         borderColor: themePrimary.light,

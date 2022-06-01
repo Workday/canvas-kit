@@ -134,3 +134,10 @@ CheckboxThemedStates.parameters = {
     theme: customColorTheme,
   },
 };
+
+export const InverseCheckboxThemedStates = () => <InverseCheckboxStates />;
+InverseCheckboxThemedStates.parameters = {
+  canvasProviderDecorator: {
+    theme: customColorTheme,
+  },
+};
