@@ -6,7 +6,7 @@ import {SystemIcon, SystemIconProps} from '@workday/canvas-kit-react/icon';
 import {usePillModel} from './usePillModel';
 import {xSmallIcon} from '@workday/canvas-system-icons-web';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {colors} from '@workday/canvas-kit-react/tokens';
+import {colors, space} from '@workday/canvas-kit-react/tokens';
 import {BaseButton} from '@workday/canvas-kit-react/button';
 
 export interface PillIconButtonProps extends Omit<SystemIconProps, 'icon'> {
@@ -38,11 +38,7 @@ const getIconColors = () => {
       icon: colors.licorice500,
 
       focusRing: focusRing({
-        outerColor: colors.blueberry400,
         innerColor: 'transparent',
-        separation: 0,
-        width: 2,
-        inset: 'inner',
       }),
     },
     disabled: {
@@ -58,8 +54,8 @@ const StyledIconButton = styled(BaseButton)<StyledType & PillIconButtonProps>({
   overflow: 'visible',
   '::after': {
     content: '""',
-    height: 32,
-    width: 32,
+    height: space.l,
+    width: space.l,
     position: 'absolute',
     left: '-7px',
     bottom: '-7px',
@@ -85,12 +81,19 @@ export const PillIconButton = createSubcomponent('button')({
         padding="zero"
         disabled={model.state.disabled}
         colors={getIconColors()}
-        aria-labelledby={`removable ${model.state.id}`}
+        aria-labelledby={`removable-${model.state.id} ${model.state.id}`}
         as={Element}
         position="relative"
         {...elemProps}
       >
-        <SystemIcon aria-label={ariaLabel} id={'removable'} icon={icon} size={24} role="img" />
+        <SystemIcon
+          aria-label={ariaLabel}
+          id={`removable-${model.state.id}`}
+          icon={icon}
+          size={space.m}
+          aria-hidden
+          role="img"
+        />
       </StyledIconButton>
     );
   }
