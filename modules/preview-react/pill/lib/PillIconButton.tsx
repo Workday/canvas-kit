@@ -91,7 +91,7 @@ export const PillIconButton = createSubcomponent('button')({
           id={`removable-${model.state.id}`}
           icon={icon}
           size={space.m}
-          aria-hidden
+          aria-hidden // This works for Chrome but not needed in Safari
           role="img"
         />
       </StyledIconButton>

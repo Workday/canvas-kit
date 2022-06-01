@@ -17,7 +17,7 @@ export const usePillModel = createModelHook({
   const id = useUniqueId();
   const state = {
     ...config,
-    id: id || config.id,
+    id: config.id || id,
   };
 
   return {state, events: {}};
