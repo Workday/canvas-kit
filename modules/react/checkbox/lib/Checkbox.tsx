@@ -19,28 +19,6 @@ import canvas, {
 } from '@workday/canvas-kit-react/tokens';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {checkSmallIcon} from '@workday/canvas-system-icons-web';
-import {CSSObject} from '@emotion/styled';
-
-/**
- * The object used for passing in colors to the ButtonContainer
- */
-export interface CheckBoxStateColors {
-  background?: string;
-  border?: string;
-  icon?: string;
-  iconFill?: boolean;
-  label?: string;
-  opacity?: string;
-}
-export interface CheckboxColors {
-  default: CheckBoxStateColors;
-  hover: CheckBoxStateColors;
-  active: CheckBoxStateColors;
-  focus: CheckBoxStateColors & {
-    focusRing?: CSSObject;
-  };
-  disabled: CheckBoxStateColors;
-}
 
 export interface CheckboxProps extends Themeable {
   /**
