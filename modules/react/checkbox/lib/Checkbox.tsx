@@ -187,7 +187,7 @@ const CheckboxInput = styled('input')<CheckboxProps & StyledType>(
       boxShadow: 'none',
       ...focusRing({
         width: variant === 'inverse' ? 2 : 0,
-        separation: variant === 'inverse' ? 0 : 0,
+        separation: 0,
         animate: false,
         innerColor: variant === 'inverse' ? colors.blackPepper400 : undefined,
         outerColor: variant === 'inverse' ? colors.frenchVanilla100 : undefined,
