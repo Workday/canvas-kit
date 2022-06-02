@@ -193,7 +193,7 @@ const CheckboxInput = styled('input')<CheckboxProps & StyledType>(
             : `1px solid ${inputColors.hoverBorder}`,
         boxShadow: 'none',
         '& span': {
-          marginLeft: '-6px',
+          marginLeft: '-5px',
         },
       },
       '&:checked ~ div:first-of-type': {
