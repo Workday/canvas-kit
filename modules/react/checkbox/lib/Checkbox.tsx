@@ -182,7 +182,7 @@ const CheckboxInput = styled('input')<CheckboxProps & StyledType>(
       borderColor: variant === 'inverse' ? undefined : themePrimary.main,
       borderWidth: undefined,
       '& span': {
-        marginLeft: '-7px',
+        marginLeft: '-6px',
       },
     },
     ...mouseFocusBehavior({
