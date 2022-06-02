@@ -7,6 +7,7 @@ import {
   Heading as HeadingComponent,
   Title as TitleComponent,
 } from '@workday/canvas-kit-preview-react/text';
+// type changes no need
 import {type} from '@workday/canvas-kit-react/tokens';
 import {Box} from '@workday/canvas-kit-react';
 
@@ -18,13 +19,14 @@ export default {
 export const Text = () => (
   <>
     <TextComponent fontSize={10} fontWeight="regular" textAlign="center" fontFamily="monospace">
-      Text
+      Centerized Text
     </TextComponent>
-    <TextComponent as={HeadingComponent} size="small" color="blueberry300">
+    <TextComponent as={HeadingComponent} size="small" color="error">
       Error text
     </TextComponent>
-    <Box position="absolute">
-      <TextComponent {...type.levels.subtext.large}>Text with type passed</TextComponent>
+    <TextComponent {...type.levels.subtext.large}>Text with type passed</TextComponent>
+    <Box {...type.levels.subtext.large} color="hint">
+      <TextComponent>Text with inherenced styles</TextComponent>
     </Box>
   </>
 );

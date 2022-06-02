@@ -1,4 +1,10 @@
-import {colors as colorTokens, CanvasColor} from '@workday/canvas-kit-react/tokens';
+// type changes no need
+import {
+  colors as colorTokens,
+  type,
+  CanvasColor,
+  CanvasTypeVariants,
+} from '@workday/canvas-kit-react/tokens';
 
 export type ColorTokens = typeof colorTokens;
 
@@ -26,9 +32,10 @@ const getBackgroundImage = (value: string) => ({
   backgroundImage: value,
 });
 
-const getColor = (value: CanvasColor | string) => ({
-  color: colorTokens[value] || value,
-});
+const getColor = (value: CanvasColor | keyof CanvasTypeVariants | string) =>
+  type.variants[value as keyof CanvasTypeVariants] || {
+    color: colorTokens[value] || value,
+  };
 
 const colorProps = {
   background: getBackground,

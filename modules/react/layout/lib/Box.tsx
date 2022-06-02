@@ -8,19 +8,23 @@ import {border, BorderStyleProps} from './utils/border';
 import {color, ColorStyleProps} from './utils/color';
 import {depth, DepthStyleProps} from './utils/depth';
 import {flexItem, FlexItemStyleProps} from './utils/flexItem';
+import {font, FontStyleProps} from './utils/font';
 import {layout, LayoutStyleProps} from './utils/layout';
 import {other, OtherStyleProps} from './utils/other';
 import {position, PositionStyleProps} from './utils/position';
 import {space, SpaceStyleProps} from './utils/space';
+import {text, TextStyleProps} from './utils/text';
 
 export type BoxProps = BorderStyleProps &
   ColorStyleProps &
   DepthStyleProps &
   FlexItemStyleProps &
+  FontStyleProps &
   LayoutStyleProps &
   OtherStyleProps &
   PositionStyleProps &
-  SpaceStyleProps & {
+  SpaceStyleProps &
+  TextStyleProps & {
     children?: React.ReactNode;
   };
 
@@ -55,9 +59,11 @@ export const boxStyleFn = <P extends BoxProps>(props: P) => {
     color,
     depth,
     flexItem,
+    font,
     layout,
     position,
     space,
+    text,
   ].reduce((result, style) => {
     // @ts-ignore
     const temp = typeof style === 'function' ? style(props) : style;
@@ -79,9 +85,11 @@ const StyledBoxElement = styled('div', {shouldForwardProp})<StyledType & BoxProp
   color,
   depth,
   flexItem,
+  font,
   layout,
   position,
-  space
+  space,
+  text
 );
 
 // Meant to be used with components. There is no `shouldForwardProps` - all props will be forwarded to the component
@@ -93,10 +101,12 @@ const StyledBoxComponent = styled('div')<StyledType & BoxProps>(
   color,
   depth,
   flexItem,
+  font,
   layout,
   other,
   position,
-  space
+  space,
+  text
 );
 
 /**

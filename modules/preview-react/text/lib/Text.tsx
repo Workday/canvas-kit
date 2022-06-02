@@ -1,38 +1,35 @@
 import * as React from 'react';
-import isPropValid from '@emotion/is-prop-valid';
-import {createComponent, StyledType, styled, useConstant} from '@workday/canvas-kit-react/common';
-import {type} from '@workday/canvas-kit-react/tokens';
-import {colorStyle} from './utils/colorStyle';
-import {fontStyles} from './utils/fontStyles';
-import {lineStyles} from './utils/lineStyles';
-import {textStyles} from './utils/textStyles';
-import {TextProps} from './utils/types';
+import {createComponent, StyledType, styled} from '@workday/canvas-kit-react/common';
+// type changes no need
+import {type, CanvasTypeHierarchy} from '@workday/canvas-kit-react/tokens';
+import {Box, BoxProps} from '@workday/canvas-kit-react/layout';
 
-const omittedProps = [
-  'color',
-  'fontSize',
-  'fontWeight',
-  'fontFamily',
-  'letterSpacing',
-  'lineHeight',
-  'textAlign',
-  'textDecoration',
-  'textTransform',
-  'textShadow',
-  'whiteSpace',
-  'wordBreak',
-];
+export interface TextProps extends BoxProps {
+  /**
+   * Type token level: `title`, `heading`, `body`, `subtext`. Should be provided with `size` prop or it will not apply token.
+   */
+  level?: keyof CanvasTypeHierarchy;
+  /**
+   * Type token size: `large`, `medium`, `small`. Should be provided with `level` prop or it will not apply token.
+   */
+  size?: 'large' | 'medium' | 'small';
+  /**
+   * If true, add ellipsis text for overflow.
+   * @default false
+   */
+  isTruncated?: boolean;
+  children: React.ReactNode;
+}
 
-const shouldForwardProp = (prop: string) => {
-  return isPropValid(prop) && !omittedProps.includes(prop);
-};
+/**
+ * Props interface for type level specific component:
+ * Title, Heading, BodyText, Subtext.
+ */
+export interface TypeLevelTextProps extends Omit<TextProps, 'level'> {
+  size: 'large' | 'medium' | 'small';
+}
 
-const StyledTextComponent = styled('p', {shouldForwardProp})<StyledType & TextProps>(
-  colorStyle,
-  fontStyles,
-  lineStyles,
-  textStyles,
-  ({variant}) => variant && type.variants[variant],
+const StyledTextComponent = styled(Box.as('span'))<StyledType & TextProps>(
   ({isTruncated}) =>
     isTruncated && {
       whiteSpace: 'nowrap',
@@ -41,15 +38,10 @@ const StyledTextComponent = styled('p', {shouldForwardProp})<StyledType & TextPr
     }
 );
 
-export const Text = createComponent('p')({
+export const Text = createComponent('span')({
   displayName: 'Text',
-  Component: ({children, ...elemProps}: TextProps, ref, Element) => {
-    const TextComponent = useConstant(() => StyledTextComponent);
-
-    return (
-      <TextComponent ref={ref} as={Element} {...elemProps}>
-        {children}
-      </TextComponent>
-    );
+  Component: ({level, size, ...elemProps}: TextProps, ref, Element) => {
+    const levelProps = level && size ? type.levels[level][size] : {};
+    return <StyledTextComponent ref={ref} as={Element} {...levelProps} {...elemProps} />;
   },
 });

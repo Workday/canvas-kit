@@ -1,16 +1,10 @@
 import * as React from 'react';
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {Text} from '@workday/canvas-kit-preview-react/text';
-import {type} from '@workday/canvas-kit-react/tokens';
-import {TypeProps} from './utils/types';
+import {Text, TypeLevelTextProps} from '@workday/canvas-kit-preview-react/text';
 
-export const Title = createComponent('p')({
+export const Title = createComponent('h4')({
   displayName: 'Title',
-  Component: ({children, size, ...elemProps}: TypeProps, ref, Element) => {
-    return (
-      <Text ref={ref} as={Element} {...type.levels.title[size]} {...elemProps}>
-        {children}
-      </Text>
-    );
-  },
+  Component: (elemProps: TypeLevelTextProps, ref, Element) => (
+    <Text ref={ref} as={Element} level="title" {...elemProps} />
+  ),
 });

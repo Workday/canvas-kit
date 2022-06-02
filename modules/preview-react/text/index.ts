@@ -3,3 +3,4 @@ export * from './lib/BodyText';
 export * from './lib/Subtext';
 export * from './lib/Heading';
 export * from './lib/Title';
+export * from './lib/Label';

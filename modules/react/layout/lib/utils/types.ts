@@ -1,4 +1,8 @@
 import {
+  AbsoluteSize,
+  ContentDistribution,
+  ContentPosition,
+  Color,
   Globals,
   GlobalsNumber,
   SelfPosition,
@@ -7,9 +11,8 @@ import {
   DisplayInternal,
   DisplayLegacy,
   LineStyle,
-  ContentDistribution,
-  ContentPosition,
 } from 'csstype';
+import {FontFamilyTokens, FontSizeTokens, FontWeightTokens} from './font';
 
 // We're temporarily creating these types from csstype
 // to improve type completion until we move to csstype v3.
@@ -146,3 +149,77 @@ export type PropertyJustifyContent =
 export type PropertyFlexWrap = Globals | 'nowrap' | 'wrap' | 'wrap-reverse';
 
 export type PropertyFlexDirection = Globals | 'column' | 'column-reverse' | 'row' | 'row-reverse';
+
+/* Font Props */
+export type FontFamily = Globals | FontFamilyTokens | string;
+
+export type FontSize = Globals | FontSizeTokens | AbsoluteSize | 'larger' | 'smaller' | string;
+
+export type FontStyle = Globals | 'italic' | 'normal' | 'oblique' | string;
+
+export type FontWeight =
+  | Globals
+  | FontWeightTokens
+  | number
+  | 'bold'
+  | 'normal'
+  | 'bolder'
+  | 'lighter';
+
+/* Text Props */
+
+export type TextAlign =
+  | Globals
+  | 'center'
+  | 'end'
+  | 'justify'
+  | 'left'
+  | 'match-parent'
+  | 'right'
+  | 'start';
+
+export type TextDecoration =
+  | Globals
+  | Color
+  | 'auto'
+  | 'blink'
+  | 'dashed'
+  | 'dotted'
+  | 'double'
+  | 'from-font'
+  | 'grammar-error'
+  | 'line-through'
+  | 'none'
+  | 'overline'
+  | 'solid'
+  | 'spelling-error'
+  | 'underline'
+  | 'wavy'
+  | string;
+
+export type TextTransform =
+  | Globals
+  | 'capitalize'
+  | 'full-size-kana'
+  | 'full-width'
+  | 'lowercase'
+  | 'none'
+  | 'uppercase';
+
+export type TextShadow = Globals | 'none' | string;
+
+export type LineHeight = Globals | 'normal' | string | number;
+
+export type LetterSpacing = Globals | 'normal' | string;
+
+export type WhiteSpace =
+  | Globals
+  | '-moz-pre-wrap'
+  | 'break-spaces'
+  | 'normal'
+  | 'nowrap'
+  | 'pre'
+  | 'pre-line'
+  | 'pre-wrap';
+
+export type WordBreak = Globals | 'break-all' | 'break-word' | 'keep-all' | 'normal';
