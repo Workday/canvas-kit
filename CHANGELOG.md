@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v7.0.6](https://github.com/Workday/canvas-kit/releases/tag/v7.0.6) (2022-06-03)
+
+### Components
+
+- test(select): Reduce sensitivity of scrolling test ([#1613](https://github.com/Workday/canvas-kit/pull/1613)) ([@jamesfan](https://github.com/jamesfan))
+- fix(preview): Make removable pill accessible ([#1616](https://github.com/Workday/canvas-kit/pull/1616)) ([@mannycarrera4](https://github.com/mannycarrera4))
+
+
 ## [v7.0.5](https://github.com/Workday/canvas-kit/releases/tag/v7.0.5) (2022-05-25)
 
 ### Documentation
