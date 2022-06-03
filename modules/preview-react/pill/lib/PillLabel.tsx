@@ -1,11 +1,6 @@
 import React from 'react';
 
-import {
-  createSubcomponent,
-  styled,
-  StyledType,
-  useUniqueId,
-} from '@workday/canvas-kit-react/common';
+import {createSubcomponent, styled, StyledType} from '@workday/canvas-kit-react/common';
 import {Box, BoxProps} from '@workday/canvas-kit-react/layout';
 import {OverflowTooltip, OverflowTooltipProps} from '@workday/canvas-kit-react/tooltip';
 
