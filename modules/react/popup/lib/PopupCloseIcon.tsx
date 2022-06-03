@@ -3,45 +3,28 @@ import React from 'react';
 import {xIcon} from '@workday/canvas-system-icons-web';
 import {
   styled,
-  createComponent,
+  createSubcomponent,
   StyledType,
-  useModelContext,
   ExtractProps,
 } from '@workday/canvas-kit-react/common';
-import {IconButton} from '@workday/canvas-kit-react/button';
+import {TertiaryButton} from '@workday/canvas-kit-react/button';
 
-import {usePopupCloseButton, PopupModel, PopupModelContext} from './hooks';
+import {usePopupCloseButton, usePopupModel} from './hooks';
 
-const closeIconSpacing = 11;
-const closeIconSpacingSmall = 9;
+const closeIconSpacing = 4;
 
-export interface PopupCloseIconProps extends ExtractProps<typeof IconButton, never> {
-  /**
-   * Optionally pass a model directly to this component. Default is to implicitly use the same
-   * model as the container component which uses React context. Only use this for advanced use-cases
-   */
-  model?: PopupModel;
-}
+export interface PopupCloseIconProps extends ExtractProps<typeof TertiaryButton, never> {}
 
-const StyledCloseIcon = styled(IconButton)<StyledType & PopupCloseIconProps>(
-  {
-    position: 'absolute',
-  },
-  ({size}) => ({
-    right: size === 'small' ? closeIconSpacingSmall : closeIconSpacing,
-    top: size === 'small' ? closeIconSpacingSmall : closeIconSpacing,
-  })
-);
+const StyledCloseIcon = styled(TertiaryButton)<StyledType & PopupCloseIconProps>({
+  position: 'absolute',
+  right: closeIconSpacing,
+  top: closeIconSpacing,
+});
 
-export const PopupCloseIcon = createComponent('button')({
+export const PopupCloseIcon = createSubcomponent('button')({
   displayName: 'Popup.CloseIcon',
-  Component: (
-    {size = 'medium', children, model, ...elemProps}: PopupCloseIconProps,
-    ref,
-    Element
-  ) => {
-    const localModel = useModelContext(PopupModelContext, model);
-    const props = usePopupCloseButton(localModel, elemProps, ref);
-    return <StyledCloseIcon as={Element} variant="plain" size={size} icon={xIcon} {...props} />;
-  },
+  modelHook: usePopupModel,
+  elemPropsHook: usePopupCloseButton,
+})<PopupCloseIconProps>(({children, ...elemProps}, Element) => {
+  return <StyledCloseIcon as={Element} size="medium" icon={xIcon} {...elemProps} />;
 });

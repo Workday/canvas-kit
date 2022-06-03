@@ -1,0 +1,137 @@
+import {ListBox} from '@workday/canvas-kit-react/collection';
+
+import {Basic} from './examples/Basic';
+import {DynamicItems} from './examples/DynamicItems';
+import {BasicVirtual} from './examples/BasicVirtual';
+import {IdentifiedItems} from './examples/IdentifiedItems';
+import {RovingFocus} from './examples/RovingFocus';
+import {Selection} from './examples/Selection';
+import {MultiSelection} from './examples/MultiSelection';
+
+<Meta title="Welcome/Dev Docs/Collections" />
+
+# Canvas Kit Collection API
+
+The Collection API is a system of models and behaviors for creating lists and grids. For example,
+`Tabs` uses collection behaviors and so does `Menu`. The UI of each looks very different, but much
+of the behavior is shared. The Collection API should be used if a component doesn't already exist to
+satisfy your needs.
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-react
+```
+
+## Usage
+
+### ListBox
+
+The `ListBox` is a basic component that offers vertical rendering of a collection in the form of a
+2-dimension list. It understands virtualization, rendering only visible items in the DOM while also
+providing aria attributes to allow screen readers to still navigate virtual lists. The `ListBox`
+contains a basic `ListBox.Item` that renders list items that render correctly with virtualization
+and adds `aria-setsize` and `aria-posinset` for screen readers.
+
+The `ListBox` is very basic and only adds enough functionality to render correctly. No additional
+behaviors are added to navigate or select. React Hooks are provided to add this functionality and
+are used by higher level components like `Menu` and `Menu.Item` which utilize `ListBox`.
+
+<ArgsTable of={ListBox} />
+
+#### Basic Example
+
+The `ListBox` on its own isn't very useful. It registers each item with the model. The
+`ListBox.Item` only uses the `useListItemRegister` hook which handles registration of static items
+to the model. The `ListBox` uses `useListRenderItems` which handles rendering static items as well
+as [Dynamic List](#dynamic-list) example).
+
+<ExampleCodeBlock code={Basic} />
+
+#### Identifying Items
+
+A list item takes an optional `data-id` property that will be used to identify an item. Without a
+`data-id`, the identifier will be the item's index when first registered. The basic example has a
+`data-id` attribute that is a string representation of the index. Providing a `data-id` will
+override to a value of your choosing. This identifier will be used by other hooks to identify the
+item for selection, maintaining a cursor, or anything else.
+
+<ExampleCodeBlock code={IdentifiedItems} />
+
+#### Dynamic Items
+
+The `ListBox` also handles a dynamic collection of items. Instead of providing each `ListBox.Item`
+statically, provide a render function instead. The function is called with an `items` value that is
+the same was what's provided to the model. By default, providing items will enable virtualization.
+This example adds a `maxHeight` to ensure overflow. Virtualization uses absolute positioning of each
+item, which could cause problems for popup menus. If your item count is low, pass
+`shouldVirtualize={false}` to disable virtualization.
+
+<ExampleCodeBlock code={DynamicItems} />
+
+### List Model
+
+The List model contains the the state and events necessary to track items, selection, and a cursor.
+Various hooks can be used for a List model to create common behaviors associated with lists, such as
+navigating a list with a keyboard, selection (single and multiple), and virtualization.
+
+A list also has a "cursor". A cursor is often represented by focus, but it is not always a 1:1
+mapping. Think of the cursor as the focus item within the list. If the list has browser focus, the
+cursor will map to browser focus. Behaviors such as `useListRovingFocus` will map the cursor to the
+active tab stop of the list. For more information, see
+[Roving Tabindex](https://w3c.github.io/aria-practices/#kbd_roving_tabindex). `useListRovingFocus`
+adds keyboard events that map to navigation events. A [Navigation Manager](#navigation-manager) is
+used to map new cursor ids to these events. The `ListModel` takes an optional `navigation`
+configuration to change the default navigation behavior. The default navigation manager is a
+[wrappingNavigationManager](#wrappingnavigationmanager) meaning the cursor will wrap around the
+beginning and the ends. The cursor also provides a [navigationManager](#navigationmanager) that does
+not wrap. This is the default navigation for grids.
+
+The cursor also adds the concept of `orientation` which defaults to `'vertical'`. A Tab list is an
+example of a `'horizontal'` list.
+
+### Grid
+
+A Cursor List can become a grid if a `columnCount` is provided. The array of items is still flat,
+but navigational controls are now in two dimensions instead of one. A one dimension list is
+bidirectionally aware, but a grid will always
+
+#### Navigation Manager
+
+#### Roving Tabindex
+
+The list system also includes a cursor that extends the list. A cursor is mostly used for focusing
+items. The [roving tabindex](https://w3c.github.io/aria-practices/#kbd_roving_tabindex) is a
+well-supported way to accomplish accessibility requirements for focusing items within a list. This
+example shows how to use `useListRovingFocus`. This example uses the `ListBox` component, but the
+default `ListBox.Item` is very basic. We have two options, we can either pass additional
+functionality via `elemPropsHook` or by creating a new item using our elemProps hook primitives.
+Both will be demonstrated. Creating a custom item is recommended if you create a custom component
+and export it. Using `elemPropsHook` with `ListBox.Item` is recommended only for one-off instances.
+
+You can either use the tab key for focus on an item or click on an item and then use the up/down
+keys to navigation the list. By default, the list is set to wrap navigation using the
+`wrappingNavigationManager`. Only a single item in the list is a focus stop that "roves" as the
+up/down arrows are pressed.
+
+**Note:** This example doesn't meet accessibility requirements. The list will have to have some type
+of context. Like "navigation list" or "menu list".
+
+<ExampleCodeBlock code={RovingFocus} />
+
+#### Selection
+
+Lists support selection. `useSelectionItem` is applied to an item which adds an `onClick` that adds
+the item to the `state.selectedIds`. The default selection manager is a single select. This example
+uses `ListBox` and creates a custom `SelectableItem` elemProps hook and component.
+
+<ExampleCodeBlock code={Selection} />
+
+#### Multiple Selection
+
+Lists support selection. `useSelectionItem` is applied to an item which adds an `onClick` that adds
+the item to the `state.selectedIds`. The default selection manager is a single select.
+
+<ExampleCodeBlock code={MultiSelection} />
+
+### Hooks

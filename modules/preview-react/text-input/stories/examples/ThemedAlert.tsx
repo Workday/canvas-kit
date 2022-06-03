@@ -1,5 +1,6 @@
+/** @jsxRuntime classic */
 /** @jsx jsx */
-import {jsx} from '@emotion/core';
+import {jsx} from '@emotion/react';
 import React from 'react';
 import {TextInput} from '@workday/canvas-kit-preview-react/text-input';
 import {useThemedRing} from '@workday/canvas-kit-labs-react/common';

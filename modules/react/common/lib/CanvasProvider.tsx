@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {ThemeProvider} from 'emotion-theming';
+import {Theme, ThemeProvider} from '@emotion/react';
 import {InputProvider} from './InputProvider';
 import {defaultCanvasTheme, PartialEmotionCanvasTheme} from './theming';
 
@@ -18,8 +18,9 @@ export class CanvasProvider extends React.Component<
 
   render() {
     const {children, theme, ...elemProps} = this.props;
+
     return (
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={theme as Theme}>
         <InputProvider />
         <div
           dir={(theme.canvas && theme.canvas.direction) || defaultCanvasTheme.direction}

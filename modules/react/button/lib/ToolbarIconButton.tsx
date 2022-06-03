@@ -1,34 +1,34 @@
 import * as React from 'react';
-import {colors, space, borderRadius} from '@workday/canvas-kit-react/tokens';
+import {borderRadius, colors, space} from '@workday/canvas-kit-react/tokens';
 import {
   focusRing,
   useTheme,
   Themeable,
   EmotionCanvasTheme,
   createComponent,
+  styled,
+  StyledType,
 } from '@workday/canvas-kit-react/common';
-import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {ButtonColors} from './types';
-import {ButtonContainer} from './parts';
-import {IconButtonProps} from './IconButton';
+import {BaseButton} from './BaseButton';
+import {TertiaryButtonProps} from './TertiaryButton';
 
 export interface ToolbarIconButtonProps
-  extends Omit<IconButtonProps, 'size' | 'variant'>,
-    Themeable {}
+  extends Omit<TertiaryButtonProps, 'size' | 'variant'>,
+    Themeable {
+  onToggleChange?: (toggled: boolean | undefined) => void;
+  toggled?: boolean;
+  shouldMirrorIcon?: boolean;
+}
 
-const containerStyles = {
-  padding: 0,
-  minWidth: space.l,
-  width: space.l,
-  height: space.l,
-  borderRadius: borderRadius.m,
+const StyledToolbarIconButton = styled(BaseButton)<StyledType & ToolbarIconButtonProps>({
   ['& .wd-icon']: {
     display: 'inline-block',
     verticalAlign: 'middle',
     width: 20,
     height: 20,
   },
-};
+});
 
 export const ToolbarIconButton = createComponent('button')({
   displayName: 'ToolbarIconButton',
@@ -61,18 +61,22 @@ export const ToolbarIconButton = createComponent('button')({
     }, [toggled, onToggleChange]);
 
     return (
-      <ButtonContainer
+      <StyledToolbarIconButton
         ref={ref}
         as={Element}
         colors={getToolbarIconButtonColors(theme, toggled)}
         size={'small'}
         fillIcon={toggled}
-        extraStyles={containerStyles}
         aria-pressed={toggled}
+        padding="zero"
+        minWidth={space.l}
+        width={space.l}
+        height={space.l}
+        borderRadius={borderRadius.m}
         {...elemProps}
       >
-        {icon ? <SystemIcon icon={icon} shouldMirror={shouldMirrorIcon} /> : children}
-      </ButtonContainer>
+        {icon ? <BaseButton.Icon icon={icon} shouldMirrorIcon={shouldMirrorIcon} /> : children}
+      </StyledToolbarIconButton>
     );
   },
 });
@@ -104,6 +108,7 @@ const getToolbarIconButtonColors = (theme: EmotionCanvasTheme, toggled?: boolean
     disabled: {
       icon: toggled ? themePrimary.light : colors.soap600,
       background: toggled ? themePrimary.lightest : 'transparent',
+      opacity: '1',
     },
   };
 };

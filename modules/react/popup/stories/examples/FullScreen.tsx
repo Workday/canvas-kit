@@ -13,7 +13,7 @@ import {
   useTransferOnFullscreenExit,
   useTransferOnFullscreenEnter,
 } from '@workday/canvas-kit-react/popup';
-import {HStack, Flex} from '@workday/canvas-kit-labs-react/layout';
+import {HStack, Flex} from '@workday/canvas-kit-react/layout';
 import {useIsFullscreen} from '@workday/canvas-kit-react/common';
 import screenfull from 'screenfull';
 

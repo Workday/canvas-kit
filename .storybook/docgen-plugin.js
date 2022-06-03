@@ -16,7 +16,7 @@ const propFilter = (fileName, prop, component) => {
   if (prop.declarations) {
     // filter out props that come from node_modules or style props
     return !prop.declarations.some(
-      d => d.fileName.includes('labs-react/common/lib/utils') || d.fileName.includes('node_modules')
+      d => d.fileName.includes('react/layout/lib/utils') || d.fileName.includes('node_modules')
     );
   }
 

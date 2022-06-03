@@ -53,8 +53,7 @@ export function getValue(index: number, length: number): number {
 // IE11 doesn't support Array.prototype.find, so we'll polyfill here
 function find<T>(
   items: T[],
-  predicate: (value: T, index: number, obj: T[]) => boolean,
-  thisArg?: any
+  predicate: (value: T, index: number, obj: T[]) => boolean
 ): T | undefined {
   const length = items.length;
   for (let i = 0; i < length; i++) {
@@ -246,7 +245,10 @@ export const PopupStack = {
    */
   remove(element: HTMLElement): void {
     // Find the stack the popup belongs to.
-    const stack = find(stacks, stack => !!find(stack.items, item => item.element === element));
+    const stack = find(
+      stacks,
+      stack => !!find(PopupStack.getElements(stack), el => el === element)
+    );
     if (stack) {
       if (stack._adapter?.remove) {
         stack._adapter.remove(element);

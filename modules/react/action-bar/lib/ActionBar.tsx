@@ -1,76 +1,39 @@
 import * as React from 'react';
-import {styled} from '@workday/canvas-kit-react/common';
-import {colors, commonColors, space, CSSProperties} from '@workday/canvas-kit-react/tokens';
+import {createContainer} from '@workday/canvas-kit-react/common';
+import {Menu} from '@workday/canvas-kit-react/menu';
+import {useActionBarModel} from './useActionBarModel';
+import {ActionBarList} from './ActionBarList';
+import {ActionBarOverflowButton} from './ActionBarOverflowButton';
+import {ActionBarItem} from './ActionBarItem';
 
-export interface ActionBarProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface ActionBarProps {
   /**
-   * If true, fix the ActionBar to the bottom of the screen.
-   * @default false
+   * The contents of the ActionBar. Can be `ActionBar` children or any valid elements.
    */
-  fixed?: boolean;
+  children: React.ReactNode;
 }
 
-function getFixedStyles(fixed = false): CSSProperties {
-  return fixed
-    ? {
-        position: 'fixed',
-        left: 0,
-        bottom: 0,
-        right: 0,
-      }
-    : {};
-}
-
-const ActionBarContainer = styled('div')<ActionBarProps>(
-  {
-    borderTop: `solid 1px ${colors.soap400}`,
-    background: commonColors.background,
-    padding: space.s,
-    boxShadow: '0 -2px 4px rgba(0, 0, 0, 0.08)',
+export const ActionBar = createContainer()({
+  displayName: 'ActionBar',
+  modelHook: useActionBarModel,
+  subComponents: {
+    List: ActionBarList,
+    Item: ActionBarItem,
+    OverflowButton: ActionBarOverflowButton,
+    /**
+     * The overflow menu of the ActionBar component. If there isn't enough room to render all the action
+     * items, the extra actions that don't fit will be overflowed into this menu.
+     * @example
+     * <ActionBar.Menu.Popper>
+     *   <ActionBar.Menu.Card>
+     *     <ActionBar.Menu.List>
+     *       {(item: MyActionItem) => <ActionBar.Menu.Item>{item.text}</ActionBar.Menu.Item>}
+     *     </ActionBar.Menu.List>
+     *   </ActionBar.Menu.Card>
+     * </ActionBar.Menu.Popper>
+     */
+    Menu,
   },
-  ({fixed, theme}) => {
-    return {
-      ...getFixedStyles(fixed),
-      [theme.canvas.breakpoints.down('s')]: {
-        padding: space.xxs,
-      },
-    };
-  }
-);
-
-const ChildrenContainer = styled('div')(
-  {
-    display: 'inline-block',
-    padding: `0 ${space.m}`,
-    '*:not(:first-of-type)': {
-      marginLeft: space.s,
-    },
-  },
-  ({theme}) => ({
-    [theme.canvas.breakpoints.down('s')]: {
-      display: 'flex',
-      padding: space.xxs,
-      justifyContent: 'center',
-      flexDirection: 'row-reverse',
-      '> *': {
-        flex: 1,
-        '&:not(:first-of-type)': {
-          marginRight: space.s,
-          marginLeft: 0,
-        },
-      },
-    },
-  })
-);
-
-export default class ActionBar extends React.Component<ActionBarProps> {
-  public render() {
-    const {fixed, children, ...elemProps} = this.props;
-
-    return (
-      <ActionBarContainer {...elemProps} fixed={fixed}>
-        <ChildrenContainer>{children}</ChildrenContainer>
-      </ActionBarContainer>
-    );
-  }
-}
+})<ActionBarProps>(({children}, _, model) => {
+  return <Menu model={model.menu}>{children}</Menu>;
+});

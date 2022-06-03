@@ -10,7 +10,6 @@ import {
   percentageIcon,
 } from '@workday/canvas-system-icons-web';
 
-import {IconButton} from '@workday/canvas-kit-react/button';
 import {SegmentedControl} from '../index';
 
 export default withSnapshotsEnabled({
@@ -36,25 +35,25 @@ export const SegmentedControlStates = () => (
     >
       {props => (
         <SegmentedControl value={props.value}>
-          <IconButton
+          <SegmentedControl.Button
             icon={listViewIcon}
             value="list-view"
             aria-label="List View"
             className={props.value === 'list-view' ? props.className : undefined}
           />
-          <IconButton
+          <SegmentedControl.Button
             icon={worksheetsIcon}
             value="table-view"
             aria-label="Table View"
             disabled={true}
           />
-          <IconButton
+          <SegmentedControl.Button
             icon={deviceTabletIcon}
             value="device-view"
             aria-label="Device View"
             className={props.value === 'device-view' ? props.className : undefined}
           />
-          <IconButton
+          <SegmentedControl.Button
             icon={percentageIcon}
             value="percent-view"
             aria-label="Percent View"
