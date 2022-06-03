@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v7.0.7](https://github.com/Workday/canvas-kit/releases/tag/v7.0.7) (2022-06-03)
+
+### Components
+
+- fix: Add inverse variant to checkbox and radio ([#1617](https://github.com/Workday/canvas-kit/pull/1617)) ([@mannycarrera4](https://github.com/mannycarrera4))
+  We've added `variant="inverse"` to our `Radio` and `CheckBox` components
+
+
 ## [v7.0.6](https://github.com/Workday/canvas-kit/releases/tag/v7.0.6) (2022-06-03)
 
 ### Components
