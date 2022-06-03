@@ -172,6 +172,7 @@ export const Pill = createContainer('button')({
           maxWidth={model.state.maxWidth}
           as={Element !== 'button' ? Element : 'span'}
           border={`1px solid ${colors.licorice200}`}
+          id={model.state.id}
           {...elemProps}
         >
           <PillLabel>{elemProps.children}</PillLabel>

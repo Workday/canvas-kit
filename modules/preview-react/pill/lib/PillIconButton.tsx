@@ -81,7 +81,7 @@ export const PillIconButton = createSubcomponent('button')({
         padding="zero"
         disabled={model.state.disabled}
         colors={getIconColors()}
-        aria-labelledby={`removable-${model.state.id} ${model.state.id}`}
+        aria-labelledby={`removable-${model.state.id} label-${model.state.id}`}
         as={Element}
         position="relative"
         {...elemProps}

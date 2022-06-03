@@ -17,7 +17,7 @@ export const PillAvatar = createSubcomponent('button')({
       style={{opacity: model.state.disabled ? '.7' : '1'}}
       as="div"
       size={18}
-      altText=""
+      altText={undefined}
       {...elemProps}
       disabled={model.state.disabled}
     >
