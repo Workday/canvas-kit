@@ -92,6 +92,7 @@ const getRemovablePillColors = (disabled?: boolean) => {
       icon: colors.licorice200,
       background: colors.soap300,
       label: colors.blackPepper400,
+
       focusRing: focusRing({
         width: 0,
         innerColor: 'transparent',
@@ -124,7 +125,6 @@ const StyledBasePill = styled(BaseButton.as('button'))<StyledType & PillProps>(
   {
     ...pillBaseStyles,
     '&:focus': {
-      borderColor: colors.blueberry400,
       'span[data-count="ck-pill-count"]': {
         borderTop: `1px solid ${colors.blueberry400}`,
         borderBottom: `1px solid ${colors.blueberry400}`,
@@ -146,6 +146,11 @@ const StyledBasePill = styled(BaseButton.as('button'))<StyledType & PillProps>(
       },
     }),
   },
+  ({variant}) => ({
+    '&:focus': {
+      borderColor: variant === 'removable' ? undefined : colors.blueberry400,
+    },
+  }),
   boxStyleFn
 );
 
@@ -203,6 +208,7 @@ export const Pill = createContainer('button')({
         <StyledNonInteractivePill
           colors={getRemovablePillColors(model.state.disabled)}
           as={Element !== 'button' ? Element : 'span'}
+          variant={variant}
           {...elemProps}
         >
           <HStack spacing="xxxs" display="inline-flex" alignItems="center" justifyContent="center">
