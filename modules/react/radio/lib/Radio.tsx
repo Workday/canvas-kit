@@ -157,7 +157,7 @@ const RadioInput = styled('input')<RadioProps & StyledType>(
         : inputColors.hoverBorder,
       borderWidth: '1px',
     },
-    '&:focus:not(:checked):not(:disabled), &focus:hover': {
+    '&:focus, &focus:hover': {
       '& ~ div:first-of-type': {
         borderWidth: '2px',
         borderColor: variant === 'inverse' ? colors.blackPepper400 : themeFocusOutline,
@@ -172,14 +172,14 @@ const RadioInput = styled('input')<RadioProps & StyledType>(
       },
     },
     '&:checked:focus ~ div:first-of-type': {
-      borderWidth: undefined,
-      borderColor: undefined,
       ...focusRing({
         separation: 2,
         width: 2,
         innerColor: variant === 'inverse' ? colors.blackPepper400 : undefined,
         outerColor: variant === 'inverse' ? colors.frenchVanilla100 : themeFocusOutline,
       }),
+      borderColor: variant === 'inverse' ? colors.frenchVanilla100 : themePrimary.main,
+      borderWidth: '2px',
     },
     ...mouseFocusBehavior({
       '&:focus ~ div:first-of-type': {
@@ -190,12 +190,18 @@ const RadioInput = styled('input')<RadioProps & StyledType>(
         borderWidth: '1px',
         borderColor: checked
           ? variant === 'inverse'
-            ? colors.blackPepper400
+            ? colors.soap300
             : themePrimary.main
           : inputColors.border,
       },
       '&:focus:hover ~ div:first-of-type, &:focus:active ~ div:first-of-type': {
-        borderColor: checked ? themePrimary.main : inputColors.hoverBorder,
+        borderColor: checked
+          ? variant === 'inverse'
+            ? colors.soap300
+            : themePrimary.main
+          : variant === 'inverse'
+          ? colors.soap300
+          : inputColors.hoverBorder,
       },
     }),
   })
