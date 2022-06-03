@@ -28,7 +28,26 @@ export type BoxProps = BorderStyleProps &
     children?: React.ReactNode;
   };
 
-const omittedProps = ['display', 'color', 'height', 'overflow', 'width', 'border', 'background'];
+const omittedProps = [
+  'display',
+  'color',
+  'height',
+  'overflow',
+  'width',
+  'border',
+  'background',
+  'fontSize',
+  'fontWeight',
+  'fontFamily',
+  'letterSpacing',
+  'lineHeight',
+  'textAlign',
+  'textDecoration',
+  'textTransform',
+  'textShadow',
+  'whiteSpace',
+  'wordBreak',
+];
 
 const shouldForwardProp = (prop: string) => {
   return isPropValid(prop) && !omittedProps.includes(prop);

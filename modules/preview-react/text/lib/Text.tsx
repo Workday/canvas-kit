@@ -38,10 +38,35 @@ const StyledTextComponent = styled(Box.as('span'))<StyledType & TextProps>(
     }
 );
 
+/**
+ * Return updated styles to replace undefined values of
+ * `fontFamily`, `fontSize`, `lineHeight`, `fontWeight`, `color` props by token value
+ */
+const validatedProps = (props: TextProps, tokenProps: any) => {
+  const validatedProps = ['fontFamily', 'fontSize', 'lineHeight', 'fontWeight', 'color'];
+  const styles: any = {};
+  validatedProps.forEach(item => {
+    if (item in props && item in tokenProps && !props[item as keyof TextProps]) {
+      styles[item] = tokenProps[item];
+    }
+  });
+  return styles;
+};
+
 export const Text = createComponent('span')({
   displayName: 'Text',
   Component: ({level, size, ...elemProps}: TextProps, ref, Element) => {
-    const levelProps = level && size ? type.levels[level][size] : {};
-    return <StyledTextComponent ref={ref} as={Element} {...levelProps} {...elemProps} />;
+    const tokenProps = level && size ? type.levels[level][size] : {};
+    console.log(tokenProps, elemProps);
+
+    return (
+      <StyledTextComponent
+        ref={ref}
+        as={Element}
+        {...tokenProps}
+        {...elemProps}
+        {...validatedProps(elemProps, tokenProps)}
+      />
+    );
   },
 });

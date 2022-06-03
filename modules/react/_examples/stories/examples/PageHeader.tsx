@@ -1,11 +1,12 @@
 import * as React from 'react';
 import {createComponent, styled} from '@workday/canvas-kit-react/common';
 
-import {colors, gradients, space, type} from '@workday/canvas-kit-react/tokens';
+import {colors, gradients, space} from '@workday/canvas-kit-react/tokens';
 
 import {HStack, HStackProps, StackSpacing} from '@workday/canvas-kit-react/layout';
 import {TertiaryButton} from '@workday/canvas-kit-react/button';
 import {justifyIcon, notificationsIcon} from '@workday/canvas-system-icons-web';
+import {Heading} from '@workday/canvas-kit-preview-react/text';
 
 interface HeaderItemProps extends Omit<HStackProps, 'spacing'> {
   spacing?: StackSpacing;
@@ -31,9 +32,18 @@ const PageHeaderItem = createComponent('div')({
 const PageHeaderTitle = createComponent('h2')({
   displayName: 'PageHeader.Title',
   Component: ({children, ...props}, ref, Element) => (
-    <Title ref={ref} as={Element} {...props}>
+    <Heading
+      as={Element}
+      ref={ref}
+      size="medium"
+      color="inverse"
+      padding={`${space.xs} 0`}
+      margin={0}
+      whiteSpace="nowrap"
+      {...props}
+    >
       {children}
-    </Title>
+    </Heading>
   ),
 });
 
@@ -52,12 +62,4 @@ const Header = styled('header')({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
-});
-
-const Title = styled('h2')({
-  ...type.levels.heading.medium,
-  color: colors.frenchVanilla100,
-  padding: `${space.xs} 0`,
-  margin: 0,
-  whiteSpace: 'nowrap',
 });

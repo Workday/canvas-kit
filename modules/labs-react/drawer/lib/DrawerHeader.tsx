@@ -1,7 +1,8 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import {colors, space, type, CanvasColor, typeColors} from '@workday/canvas-kit-react/tokens';
+import {colors, space, CanvasColor, typeColors} from '@workday/canvas-kit-react/tokens';
 import {TertiaryButton} from '@workday/canvas-kit-react/button';
+import {BodyText} from '@workday/canvas-kit-preview-react/text';
 import {xIcon} from '@workday/canvas-system-icons-web';
 
 export interface DrawerHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -55,20 +56,6 @@ const HeaderContainer = styled('div')<Pick<DrawerHeaderProps, 'headerColor' | 'b
   })
 );
 
-const HeaderTitle = styled('h4')<Pick<DrawerHeaderProps, 'inverse'>>(
-  {
-    ...type.levels.body.small,
-    fontWeight: type.properties.fontWeights.bold,
-    whiteSpace: 'nowrap',
-    textOverflow: 'ellipsis',
-    overflow: 'hidden',
-    paddingRight: space.xxxs,
-  },
-  ({inverse}) => ({
-    color: inverse ? colors.frenchVanilla100 : typeColors.heading,
-  })
-);
-
 const CloseButton = styled(TertiaryButton)({
   margin: '-8px', // for inverse and plain button, we always want this margin
 });
@@ -88,9 +75,17 @@ export default class DrawerHeader extends React.Component<DrawerHeaderProps, {}>
 
     return (
       <HeaderContainer borderColor={borderColor} {...elemProps} headerColor={headerColor}>
-        <HeaderTitle id={id} inverse={inverse} title={title}>
+        <BodyText
+          as="h4"
+          title={title}
+          size="small"
+          fontWeight="bold"
+          color={inverse ? 'inverse' : typeColors.heading}
+          paddingRight="xxxxs"
+          isTruncated
+        >
           {title}
-        </HeaderTitle>
+        </BodyText>
         {onClose && closeIconAriaLabel && (
           <CloseButton
             variant={inverse ? 'inverse' : undefined}

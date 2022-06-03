@@ -5,9 +5,10 @@ import React from 'react';
 import {TextArea} from '@workday/canvas-kit-preview-react/text-area';
 import {useThemedRing} from '@workday/canvas-kit-labs-react/common';
 import {space, colors} from '@workday/canvas-kit-react/tokens';
+import {Text} from '@workday/canvas-kit-preview-react/text';
 
 export const Alert = () => {
-  const [value, setValue] = React.useState('');
+  const [value, setValue] = React.useState('Hello');
 
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setValue(event.target.value.slice(0, 10));
@@ -30,7 +31,7 @@ export const Alert = () => {
       <TextArea.Field css={alertStyles} onChange={handleChange} value={value} />
       <TextArea.Hint paddingTop={space.xxs}>
         <strong>Character Limit: </strong>
-        <span css={{color: hintColor}}>{10 - value.length} Left</span>
+        <Text color={hintColor}>{10 - value.length} Left</Text>
       </TextArea.Hint>
     </TextArea>
   );

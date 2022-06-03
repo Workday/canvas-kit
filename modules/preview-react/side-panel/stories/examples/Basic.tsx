@@ -7,17 +7,12 @@ import {
   SidePanelTransitionStates,
 } from '@workday/canvas-kit-preview-react/side-panel';
 import {Flex} from '@workday/canvas-kit-react/layout';
-import {CanvasProvider, styled} from '@workday/canvas-kit-react/common';
+import {BodyText} from '@workday/canvas-kit-preview-react/text';
+import {CanvasProvider} from '@workday/canvas-kit-react/common';
 import {AccentIcon} from '@workday/canvas-kit-react/icon';
 import {rocketIcon} from '@workday/canvas-accent-icons-web';
 // local helper hook for setting content direction;
 import {useDirection} from './useDirection';
-
-const StyledHeader = styled('h3')({
-  ...type.levels.body.large,
-  color: colors.licorice500,
-  fontWeight: type.properties.fontWeights.bold,
-});
 
 export const Basic = () => {
   const {direction, toggleDirection} = useDirection();
@@ -36,7 +31,9 @@ export const Basic = () => {
               <Flex marginInlineEnd="s">
                 <AccentIcon icon={rocketIcon} />
               </Flex>
-              <StyledHeader {...labelProps}>Tasks Panel</StyledHeader>
+              <BodyText as="h3" size="large" color="licorice500" fontWeight="bold" {...labelProps}>
+                Tasks Panel
+              </BodyText>
             </Flex>
           )}
         </SidePanel>

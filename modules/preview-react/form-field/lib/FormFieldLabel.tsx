@@ -1,15 +1,8 @@
 import React from 'react';
 
-import {
-  createSubcomponent,
-  ExtractProps,
-  useTheme,
-  styled,
-  StyledType,
-} from '@workday/canvas-kit-react/common';
-import {Box, HStack, StackSpacing} from '@workday/canvas-kit-react/layout';
-import {type} from '@workday/canvas-kit-react/tokens';
-
+import {createSubcomponent, ExtractProps, useTheme} from '@workday/canvas-kit-react/common';
+import {HStack, StackSpacing} from '@workday/canvas-kit-react/layout';
+import {Label, Text} from '@workday/canvas-kit-preview-react/text';
 import {useFormFieldLabel, useFormFieldModel} from './hooks';
 
 export interface FormFieldLabelProps extends Omit<ExtractProps<typeof HStack, never>, 'spacing'> {
@@ -24,17 +17,6 @@ export interface FormFieldLabelProps extends Omit<ExtractProps<typeof HStack, ne
   spacing?: StackSpacing;
 }
 
-const StyledFormFieldLabel = styled('span')({
-  ...type.levels.subtext.large,
-  fontWeight: type.properties.fontWeights.medium,
-});
-
-const StyledAsterisk = styled(Box)<StyledType>({
-  fontSize: type.properties.fontSizes[20],
-  fontWeight: type.properties.fontWeights.regular,
-  textDecoration: 'unset',
-});
-
 export const FormFieldLabel = createSubcomponent('label')({
   displayName: 'FormField.Label',
   modelHook: useFormFieldModel,
@@ -44,11 +26,19 @@ export const FormFieldLabel = createSubcomponent('label')({
 
   return (
     <HStack as={Element} spacing={spacing} minWidth="180px" {...elemProps}>
-      <StyledFormFieldLabel>{children}</StyledFormFieldLabel>
+      <Label as="span" fontWeight="medium">
+        {children}
+      </Label>
       {model.state.isRequired && (
-        <StyledAsterisk as="span" color={theme.canvas.palette.error.main} aria-hidden="true">
+        <Text
+          fontSize={20}
+          fontWeight="regular"
+          textDecoration="unset"
+          color={theme.canvas.palette.error.main}
+          aria-hidden="true"
+        >
           *
-        </StyledAsterisk>
+        </Text>
       )}
     </HStack>
   );

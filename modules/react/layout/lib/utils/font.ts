@@ -26,7 +26,7 @@ const getFontSize = (value: FontSize) => ({
 });
 
 const getFontWeight = (value: FontWeight) => ({
-  fontWeight: type.properties.fontWeights[value as FontWeightTokens],
+  fontWeight: type.properties.fontWeights[value as FontWeightTokens] || value,
 });
 
 const getFontStyle = (value: FontStyle) => ({
@@ -59,6 +59,7 @@ export function font<P extends FontStyleProps>(props: P) {
       const fontFn = fontProps[key as keyof FontStyleProps];
       const style = fontFn(value);
       styles = {...styles, ...style};
+      console.log(style, value);
     }
   }
 
