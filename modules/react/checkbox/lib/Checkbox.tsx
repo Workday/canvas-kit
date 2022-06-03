@@ -151,7 +151,7 @@ const CheckboxInput = styled('input')<CheckboxProps & StyledType>(
       opacity: variant === 'inverse' ? '.4' : '1',
     },
     '&:disabled:checked ~ div:first-of-type': {
-      borderColor: themePrimary.light,
+      borderColor: variant === 'inverse' ? colors.soap300 : themePrimary.light,
       backgroundColor: variant === 'inverse' ? colors.soap300 : themePrimary.light,
     },
 
@@ -159,7 +159,7 @@ const CheckboxInput = styled('input')<CheckboxProps & StyledType>(
     '&:focus, &:active': {
       outline: 'none',
     },
-    '&:focus:not(:checked):not(:disabled) ~ div:first-of-type': {
+    '&:focus ~ div:first-of-type': {
       borderColor: variant === 'inverse' ? colors.blackPepper400 : themePrimary.main,
       borderWidth: '2px',
       boxShadow: 'none',
@@ -179,8 +179,8 @@ const CheckboxInput = styled('input')<CheckboxProps & StyledType>(
         innerColor: variant === 'inverse' ? colors.blackPepper400 : undefined,
         outerColor: variant === 'inverse' ? colors.frenchVanilla100 : themeFocusOutline,
       }),
-      borderColor: variant === 'inverse' ? undefined : themePrimary.main,
-      borderWidth: undefined,
+      borderColor: variant === 'inverse' ? colors.frenchVanilla100 : themePrimary.main,
+      borderWidth: '2px',
       '& span': {
         marginLeft: '-7px',
       },
@@ -189,7 +189,7 @@ const CheckboxInput = styled('input')<CheckboxProps & StyledType>(
       '&:focus ~ div:first-of-type': {
         border:
           variant === 'inverse'
-            ? `1px solid ${colors.frenchVanilla100}`
+            ? `1px solid ${colors.soap300}`
             : `1px solid ${inputColors.hoverBorder}`,
         boxShadow: 'none',
         '& span': {
@@ -198,7 +198,6 @@ const CheckboxInput = styled('input')<CheckboxProps & StyledType>(
       },
       '&:checked ~ div:first-of-type': {
         borderColor: variant === 'inverse' ? colors.soap300 : themePrimary.main,
-        borderWidth: 0,
       },
       '&:disabled:checked ~ div:first-of-type': {
         borderColor: themePrimary.light,
