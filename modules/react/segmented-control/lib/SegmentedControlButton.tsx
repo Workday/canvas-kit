@@ -84,13 +84,20 @@ const StyledButton = styled(BaseButton)<StyledType>(
 
 export interface SegmentedControlButtonProps {
   toggled?: boolean;
-  icon: CanvasSystemIcon;
+  icon?: CanvasSystemIcon;
   value?: string | number;
+  label?: string;
 }
 
 export const SegmentedControlButton = createComponent('button')({
   displayName: 'Button',
-  Component: ({value, icon, toggled, ...props}: SegmentedControlButtonProps, ref, Element) => {
+  Component: (
+    {value, icon, toggled, label, ...props}: SegmentedControlButtonProps,
+    ref,
+    Element
+  ) => {
+    console.warn(label);
+
     return (
       <StyledButton
         as={Element}
@@ -101,7 +108,11 @@ export const SegmentedControlButton = createComponent('button')({
         ref={ref}
         {...props}
       >
-        <BaseButton.Icon size="large" icon={icon} />
+        {label ? (
+          <span style={{color: toggled ? colors.frenchVanilla100 : 'inherit'}}>{label}</span>
+        ) : (
+          <BaseButton.Icon size="large" icon={icon} />
+        )}
       </StyledButton>
     );
   },
