@@ -1,23 +1,6 @@
 import * as React from 'react';
 import {Flex, FlexProps, Box} from '@workday/canvas-kit-react/layout';
-import {type} from '@workday/canvas-kit-react/tokens';
-
-// temporary placeholder until type components are added to canvas-kit
-const H3 = props => (
-  <h3
-    style={{
-      ...type.levels.body.large,
-      ...type.variants.inverse,
-      margin: 0,
-      fontWeight: type.properties.fontWeights.bold,
-    }}
-    {...props}
-  />
-);
-
-const Body = props => (
-  <p style={{...type.levels.body.small, ...type.variants.inverse, margin: 0}} {...props} />
-);
+import {BodyText} from '@workday/canvas-kit-preview-react/text';
 
 const Card = ({children, ...props}: FlexProps) => (
   <Flex
@@ -40,40 +23,48 @@ export const Usage = () => {
       <h2>Canvas Principles</h2>
       <Flex alignItems="stretch" flexWrap="wrap">
         <Card backgroundColor="blueberry400">
-          <H3>Empower over Enforce</H3>
+          <BodyText as="h3" size="large" color="inverse" fontWeight="bold" margin={0}>
+            Empower over Enforce
+          </BodyText>
           <Box paddingY="xs">
-            <Body>
+            <BodyText size="small" color="inverse" margin={0}>
               Encourage our user's expression. Stay out of the way and provide them with the tools
               and resources to build their vision.
-            </Body>
+            </BodyText>
           </Box>
         </Card>
         <Card backgroundColor="juicyPear500">
-          <H3>Evolution over Perfection</H3>
+          <BodyText as="h3" size="large" color="inverse" fontWeight="bold" margin={0}>
+            Evolution over Perfection
+          </BodyText>
           <Box paddingY="xs">
-            <Body>
+            <BodyText size="small" color="inverse" margin={0}>
               Nothing is ever perfect – embrace that. Make educated assumptions, validate and test
               our decisions, then iterate! Aim of continous rather than perfect solutions.
-            </Body>
+            </BodyText>
           </Box>
         </Card>
         <Card backgroundColor="chiliMango400">
-          <H3>Simple over Clever</H3>
+          <BodyText as="h3" size="large" color="inverse" fontWeight="bold" margin={0}>
+            Simple over Clever
+          </BodyText>
           <Box paddingY="xs">
-            <Body>
+            <BodyText size="small" color="inverse" margin={0}>
               Simple solutions invite the user in - clever solutions invite complexity. Make the
               system easy and predictable, and progressively disclose advanced functionality.
-            </Body>
+            </BodyText>
           </Box>
         </Card>
         <Card backgroundColor="blackberry400">
-          <H3>Everyone over Every One</H3>
+          <BodyText as="h3" size="large" color="inverse" fontWeight="bold" margin={0}>
+            Everyone over Every One
+          </BodyText>
           <Box paddingY="xs">
-            <Body>
+            <BodyText size="small" color="inverse" margin={0}>
               Each piece of the system is designs and built to be accessible, while still providing
               the best experience for all consumers. But not if something is focused on a single use
               case and negates the usability for others.
-            </Body>
+            </BodyText>
           </Box>
         </Card>
       </Flex>

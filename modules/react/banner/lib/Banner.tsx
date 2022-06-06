@@ -75,6 +75,9 @@ export const Banner = createContainer('button')({
   return (
     <Flex
       as={Element}
+      {...type.levels.subtext.large}
+      fontWeight="medium"
+      textAlign="left"
       width={model.state.isSticky ? '222px' : '328px'}
       backgroundColor={palette.normal}
       color={palette.contrast}

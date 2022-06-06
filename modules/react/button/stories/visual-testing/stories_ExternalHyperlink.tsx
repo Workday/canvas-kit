@@ -2,13 +2,13 @@
 /** @jsx jsx */
 import {jsx} from '@emotion/react';
 import React from 'react';
-import {colors, type} from '@workday/canvas-kit-react/tokens';
 import {CanvasProvider, ContentDirection, StaticStates} from '@workday/canvas-kit-react/common';
 import {ComponentStatesTable, permutateProps} from '@workday/canvas-kit-labs-react/common';
 import {withSnapshotsEnabled} from '../../../../../utils/storybook';
 import {ExternalHyperlink} from '@workday/canvas-kit-react/button';
 import {Container} from './utils';
 import {VStack} from '@workday/canvas-kit-react/layout';
+import {BodyText, Subtext} from '@workday/canvas-kit-preview-react/text';
 
 export default withSnapshotsEnabled({
   title: 'Testing/React/Buttons/Button/ExternalHyperlink',
@@ -39,47 +39,42 @@ export const ExternalHyperlinkStates = () => (
       >
         {(props: any) => (
           <Container blue={props.variant === 'inverse'}>
-            <div
-              css={{
-                ...type.levels.subtext.large,
-                color: props.variant === 'inverse' ? colors.frenchVanilla100 : undefined,
-              }}
-            >
+            <Subtext size="large" color={props.variant === 'inverse' ? 'inverse' : undefined}>
               Here's a <ExternalHyperlink {...props}>Link</ExternalHyperlink> to something
-            </div>
+            </Subtext>
           </Container>
         )}
       </ComponentStatesTable>
     </StaticStates>
     <VStack spacing="xxs">
       <h3>Typography</h3>
-      <p css={{...type.levels.subtext.large}}>
+      <Subtext size="large">
         The quick <ExternalHyperlink>brown fox</ExternalHyperlink> jumps over the lazy dog
-      </p>
-      <p css={{...type.levels.body.small}}>
+      </Subtext>
+      <BodyText size="small">
         The quick <ExternalHyperlink>brown fox</ExternalHyperlink> jumps over the lazy dog
-      </p>
-      <p css={{...type.levels.body.medium}}>
+      </BodyText>
+      <BodyText size="medium">
         The quick <ExternalHyperlink>brown fox</ExternalHyperlink> jumps over the lazy dog
-      </p>
-      <p css={{...type.levels.body.large}}>
+      </BodyText>
+      <BodyText size="large">
         The quick <ExternalHyperlink>brown fox</ExternalHyperlink> jumps over the lazy dog
-      </p>
+      </BodyText>
     </VStack>
     <CanvasProvider theme={{canvas: {direction: ContentDirection.RTL}}}>
       <VStack spacing="xxs">
-        <p css={{...type.levels.subtext.large}}>
+        <Subtext size="large">
           The quick <ExternalHyperlink>brown fox</ExternalHyperlink> jumps over the lazy dog
-        </p>
-        <p css={{...type.levels.body.small}}>
+        </Subtext>
+        <BodyText size="small">
           The quick <ExternalHyperlink>brown fox</ExternalHyperlink> jumps over the lazy dog
-        </p>
-        <p css={{...type.levels.body.medium}}>
+        </BodyText>
+        <BodyText size="medium">
           The quick <ExternalHyperlink>brown fox</ExternalHyperlink> jumps over the lazy dog
-        </p>
-        <p css={{...type.levels.body.large}}>
+        </BodyText>
+        <BodyText size="large">
           The quick <ExternalHyperlink>brown fox</ExternalHyperlink> jumps over the lazy dog
-        </p>
+        </BodyText>
       </VStack>
     </CanvasProvider>
   </React.Fragment>

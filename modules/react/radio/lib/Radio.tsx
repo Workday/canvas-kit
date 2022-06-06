@@ -8,12 +8,8 @@ import {
   Themeable,
   useUniqueId,
 } from '@workday/canvas-kit-react/common';
-import canvas, {
-  borderRadius,
-  colors,
-  inputColors,
-  spaceNumbers,
-} from '@workday/canvas-kit-react/tokens';
+import {borderRadius, colors, inputColors, spaceNumbers} from '@workday/canvas-kit-react/tokens';
+import {Label} from '@workday/canvas-kit-preview-react/text';
 
 export interface RadioProps extends Themeable {
   /**
@@ -225,14 +221,6 @@ const RadioCheck = styled('div')<Pick<RadioProps, 'checked'>>(
   })
 );
 
-const RadioLabel = styled('label')<{disabled?: boolean}>(
-  {
-    ...canvas.type.levels.subtext.large,
-    paddingLeft: radioLabelDistance,
-  },
-  ({disabled}) => (disabled ? {color: inputColors.disabled.text} : {cursor: 'pointer'})
-);
-
 export const Radio = createComponent('input')({
   displayName: 'Radio',
   Component: (
@@ -263,9 +251,9 @@ export const Radio = createComponent('input')({
           </RadioBackground>
         </RadioInputWrapper>
         {label && (
-          <RadioLabel htmlFor={inputId} disabled={disabled}>
+          <Label paddingLeft={radioLabelDistance} htmlFor={inputId} disabled={disabled}>
             {label}
-          </RadioLabel>
+          </Label>
         )}
       </RadioContainer>
     );

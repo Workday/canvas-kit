@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {type, typeColors, space} from '@workday/canvas-kit-react/tokens';
+import {type, space} from '@workday/canvas-kit-react/tokens';
 import {accessibleHide, styled, StyledType} from '@workday/canvas-kit-react/common';
 
 import {PaginationModel} from './types';
@@ -16,19 +16,13 @@ export interface AdditionalDetailsProps extends FlexProps {
 const StyledAdditionalDetails = styled(Flex)<
   StyledType & Pick<AdditionalDetailsProps, 'shouldHideDetails'>
 >(({shouldHideDetails}) => {
-  const styles = {
-    ...type.levels.subtext.medium,
-    color: typeColors.hint,
-  };
   if (shouldHideDetails) {
     return {
-      ...styles,
       ...accessibleHide,
       marginTop: space.zero,
     };
   } else {
     return {
-      ...styles,
       marginTop: space.xs,
     };
   }
@@ -43,7 +37,12 @@ export const AdditionalDetails = ({
   const liveRegionProps = useLiveRegion({shouldAnnounceToScreenReader});
 
   return (
-    <StyledAdditionalDetails {...liveRegionProps} {...elemProps}>
+    <StyledAdditionalDetails
+      {...type.levels.subtext.medium}
+      color="hint"
+      {...liveRegionProps}
+      {...elemProps}
+    >
       {typeof children === 'function' ? children(model) : children}
     </StyledAdditionalDetails>
   );

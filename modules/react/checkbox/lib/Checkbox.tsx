@@ -11,14 +11,10 @@ import {
   useTheme,
   Themeable,
 } from '@workday/canvas-kit-react/common';
-import canvas, {
-  borderRadius,
-  colors,
-  inputColors,
-  spaceNumbers,
-} from '@workday/canvas-kit-react/tokens';
+import {borderRadius, colors, inputColors, spaceNumbers} from '@workday/canvas-kit-react/tokens';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {checkSmallIcon} from '@workday/canvas-system-icons-web';
+import {Label} from '@workday/canvas-kit-preview-react/text';
 
 export interface CheckboxProps extends Themeable {
   /**
@@ -271,14 +267,6 @@ const IndeterminateBox = styled('div')(
   })
 );
 
-const CheckboxLabel = styled('label')<{disabled?: boolean}>(
-  {
-    ...canvas.type.levels.subtext.large,
-    paddingLeft: checkboxLabelDistance,
-  },
-  ({disabled}) => (disabled ? {color: inputColors.disabled.text} : {cursor: 'pointer'})
-);
-
 export const Checkbox = createComponent('input')({
   displayName: 'Checkbox',
   Component: (
@@ -328,9 +316,9 @@ export const Checkbox = createComponent('input')({
           </CheckboxBackground>
         </CheckboxInputWrapper>
         {label && (
-          <CheckboxLabel htmlFor={inputId} disabled={disabled}>
+          <Label htmlFor={inputId} disabled={disabled} paddingLeft={checkboxLabelDistance}>
             {label}
-          </CheckboxLabel>
+          </Label>
         )}
       </CheckboxContainer>
     );

@@ -1,21 +1,7 @@
 import * as React from 'react';
 import {Flex, Box} from '@workday/canvas-kit-react/layout';
 import {PrimaryButton, SecondaryButton} from '@workday/canvas-kit-react/button';
-import {type} from '@workday/canvas-kit-react/tokens';
-
-// temporary placeholder until type components are added to canvas-kit
-const H3 = props => (
-  <h3
-    style={{
-      ...type.levels.body.large,
-      margin: 0,
-      fontWeight: type.properties.fontWeights.bold,
-    }}
-    {...props}
-  />
-);
-
-const Body = props => <p style={{...type.levels.body.small, margin: 0}} {...props} />;
+import {BodyText} from '@workday/canvas-kit-preview-react/text';
 
 export const FlexCard = () => {
   const [isComplete, setIsComplete] = React.useState(false);
@@ -29,9 +15,13 @@ export const FlexCard = () => {
       borderColor="soap400"
       maxWidth={600}
     >
-      <H3>Learn about Flex {isComplete && '🥳'}</H3>
+      <BodyText as="h3" size="large" fontWeight="bold" margin={0}>
+        Learn about Flex {isComplete && '🥳'}
+      </BodyText>
       <Box paddingY="s">
-        <Body>Complete this task when you have a functional understanding of Flex.</Body>
+        <BodyText size="small" margin={0}>
+          Complete this task when you have a functional understanding of Flex.
+        </BodyText>
       </Box>
       <Flex justifyContent="flex-end">
         <Box marginRight="xxs">
