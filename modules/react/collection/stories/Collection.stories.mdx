@@ -7,6 +7,16 @@ import {IdentifiedItems} from './examples/IdentifiedItems';
 import {RovingFocus} from './examples/RovingFocus';
 import {Selection} from './examples/Selection';
 import {MultiSelection} from './examples/MultiSelection';
+import {BasicGrid} from './examples/BasicGrid';
+import {WrappingGrid} from './examples/WrappingGrid';
+import {
+  ListModelConfigComponent,
+  ListStateComponent,
+  ListEventsComponent,
+  GridModelConfigComponent,
+  GridStateComponent,
+  GridEventsComponent,
+} from './Collection.splitprops';
 
 <Meta title="Welcome/Dev Docs/Collections" />
 
@@ -90,12 +100,6 @@ not wrap. This is the default navigation for grids.
 The cursor also adds the concept of `orientation` which defaults to `'vertical'`. A Tab list is an
 example of a `'horizontal'` list.
 
-### Grid
-
-A Cursor List can become a grid if a `columnCount` is provided. The array of items is still flat,
-but navigational controls are now in two dimensions instead of one. A one dimension list is
-bidirectionally aware, but a grid will always
-
 #### Navigation Manager
 
 #### Roving Tabindex
@@ -134,4 +138,63 @@ the item to the `state.selectedIds`. The default selection manager is a single s
 
 <ExampleCodeBlock code={MultiSelection} />
 
+### Basic Grid
+
+A grid is a 2 dimensional list. A `columnCount` config is added to inform how to break up an array
+of items. A grid is very similar to a list - it receives items as a single dimension list and uses
+the `columnCount` to determine keyboard navigation. Grids only support a single orientation.
+
+<ExampleCodeBlock code={BasicGrid} />
+
+#### Wrapping Grid
+
+By default, navigating a grid does not wrap around when the user reaches the end of a row or column.
+The grid model supports passing in a navigation manager. The collection system supports two types of
+navigation managers, a non-wrapping `navigationManager` and the `wrappingNavigationManager`. The
+following example passes the `wrappingNavigationManager` manager to the model. Observe how the
+cursor wraps around columns and rows when an edge of a column or row is encountered.
+
+<ExampleCodeBlock code={WrappingGrid} />
+
+### Models
+
+There are two supported models based on the collection system.
+
+#### `useListModel`
+
+The `useListModel` is used to create a single dimensional collection.
+
+#### `useGridModel`
+
 ### Hooks
+
+#### `useListItemRegister`
+
+This elemProps hook is the base of all item component hooks. It registers an item with a collection
+and sets the `data-id` that is used by other hooks. It should always be the last defined hook when
+using `composeHooks` (`composeHooks` executes hooks right to left and merges props left to right).
+It is used by `ListBox.Item` and all `*.Item` subcomponents.
+
+#### `useListItemRovingFocus`
+
+This elemProps hook is used for cursor navigation by using
+[Roving Tabindex](https://w3c.github.io/aria-practices/#kbd_roving_tabindex). This means only a
+single stop in the collection has a tab stop and using the arrow keys moves which of the items in
+the collection is this tab stop. See the [Roving Tabindex](#roving-tabindex) example. This elemProps
+hook should be applied to an `*.Item` component.
+
+#### `useListItemSelect`
+
+This elemProps hook adds selection support to a `*.Item` subcomponent of a collection. It adds a
+click handler that toggles selection status according to the [Selection Manager](#selection-manager)
+used.
+
+#### `useListRenderItem`
+
+#### `useListResetCursorOnBlur`
+
+#### `useOverflowListItemMeasure`
+
+#### `useOverflowListMeasure`
+
+#### `useOverflowListTarget`
