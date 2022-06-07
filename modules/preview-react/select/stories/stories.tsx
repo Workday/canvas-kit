@@ -9,9 +9,12 @@ import {
   userIcon,
 } from '@workday/canvas-system-icons-web';
 import {colors, typeColors} from '@workday/canvas-kit-react/tokens';
-import FormField from '../../../react/form-field';
-import Select from '../lib/Select';
-import {RenderOptionFunction, RenderSelectedFunction} from '../lib/SelectBase';
+import FormField from '@workday/canvas-kit-react/form-field';
+import {
+  Select,
+  RenderOptionFunction,
+  RenderSelectedFunction,
+} from '@workday/canvas-kit-preview-react/select';
 
 const hintText = 'Helpful text goes here.';
 const hintId = 'error-desc-id';

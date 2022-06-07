@@ -9,7 +9,7 @@ describe('TabPanel', () => {
 
   it('should have a role of "tabpanel"', () => {
     render(
-      <Tabs>
+      <Tabs initialTab="0">
         <Tabs.Item>First</Tabs.Item>
         <Tabs.Panel>
           <div />
@@ -22,7 +22,7 @@ describe('TabPanel', () => {
 
   it('should render child elements', () => {
     render(
-      <Tabs>
+      <Tabs initialTab="0">
         <Tabs.Item>First</Tabs.Item>
         <Tabs.Panel>
           <div>First Item</div>

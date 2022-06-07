@@ -1,22 +1,16 @@
 import * as React from 'react';
 
-import {createComponent, useModelContext, ExtractProps} from '@workday/canvas-kit-react/common';
-import {Popup, PopupModelContext} from '@workday/canvas-kit-react/popup';
+import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
+import {Popup} from '@workday/canvas-kit-react/popup';
 
-import {useModalHeading} from './hooks';
+import {useModalHeading, useModalModel} from './hooks';
 
 export interface ModalHeadingProps extends ExtractProps<typeof Popup.Heading, never> {}
 
-export const ModalHeading = createComponent('h2')({
+export const ModalHeading = createSubcomponent('h2')({
   displayName: 'Modal.Heading',
-  Component: ({children, model, ...elemProps}: ModalHeadingProps, ref, Element) => {
-    const localModel = useModelContext(PopupModelContext, model);
-
-    const props = useModalHeading(localModel, elemProps, ref);
-    return (
-      <Popup.Heading as={Element} {...props}>
-        {children}
-      </Popup.Heading>
-    );
-  },
+  modelHook: useModalModel,
+  elemPropsHook: useModalHeading,
+})<ModalHeadingProps>((elemProps, Element) => {
+  return <Popup.Heading as={Element} {...elemProps} />;
 });

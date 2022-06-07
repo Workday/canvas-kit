@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {MenuItem} from '@workday/canvas-kit-preview-react/menu';
 import {SearchForm, SearchThemeAttributes} from '@workday/canvas-kit-labs-react/search-form';
-import {Flex} from '@workday/canvas-kit-labs-react/layout';
+import {Flex} from '@workday/canvas-kit-react/layout';
 import {colors} from '@workday/canvas-kit-react/tokens';
 
 const initialWineList = [
@@ -40,7 +40,9 @@ export const CustomTheme = () => {
     if (!formattedValue.length) {
       setWineList(initialWineList);
     } else {
-      const filteredItems = wineList.filter(wine => wine.toLowerCase().startsWith(formattedValue));
+      const filteredItems = initialWineList.filter(wine =>
+        wine.toLowerCase().includes(formattedValue)
+      );
       setWineList(filteredItems);
     }
   };

@@ -1,4 +1,5 @@
 import {default as emotionStyled, CreateStyled, Interpolation, CSSObject} from '@emotion/styled';
+
 import {useTheme, EmotionCanvasTheme, ContentDirection} from './index';
 import rtlCSSJS from 'rtl-css-js';
 import {convertToStaticStates} from '../utils/StaticStates';
@@ -16,7 +17,6 @@ function styled<Props>(node: any) {
         const direction = props.theme.canvas.direction;
         const maybeFlip = direction === ContentDirection.RTL ? rtlCSSJS : noop;
         const maybeConvert = props.theme._staticStates ? convertToStaticStates : noop;
-
         try {
           if (typeof interpolation === 'function') {
             return maybeFlip(maybeConvert(interpolation(props)) as CSSObject);
@@ -32,4 +32,4 @@ function styled<Props>(node: any) {
   };
 }
 
-export default styled as CreateStyled<EmotionCanvasTheme>;
+export default styled as CreateStyled;

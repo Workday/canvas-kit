@@ -5,7 +5,7 @@ import {benefitsIcon} from '@workday/canvas-applet-icons-web';
 import {activityStreamIcon} from '@workday/canvas-system-icons-web';
 import {CanvasGraphic, CanvasIconTypes} from '@workday/design-assets-types';
 
-import {colors} from '../../tokens';
+import {colors} from '@workday/canvas-kit-react/tokens';
 import {AccentIcon, AppletIcon, SystemIcon, SystemIconCircle, Graphic} from '../index';
 
 const graphicExample: CanvasGraphic = {
