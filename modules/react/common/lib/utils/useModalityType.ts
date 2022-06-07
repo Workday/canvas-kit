@@ -11,24 +11,24 @@ type Modality = 'mouse' | 'touch' | 'pen';
 //   a. if localStorage isn't primed, use clientWidth of the browsers
 //   b. if < 768, default to 'touch'
 //   c. else default to 'mouse'
-let localStorageValue = ((typeof localStorage !== 'undefined'
-  ? localStorage.getItem('modality')
-  : '') ||
-  (typeof document !== 'undefined'
-    ? document.documentElement.clientWidth < 768
-      ? 'touch'
-      : ''
-    : '') ||
-  'mouse') as Modality;
+const localStorageValue = 'mouse' as Modality; //((typeof localStorage !== 'undefined'
+//   ? localStorage.getItem('modality')
+//   : '') ||
+//   (typeof document !== 'undefined'
+//     ? document.documentElement.clientWidth < 768
+//       ? 'touch'
+//       : ''
+//     : '') ||
+//   'mouse') as Modality;
 
 // Update the `localStorageValue`, but conditionally update localStorage only if the value has
 // changed. This prevents too many calls to `localStorage` which can be costly on spinning disk
 // drives
 const updateLocalStorage = (value: Modality) => {
-  if (localStorageValue !== value) {
-    localStorage.setItem('modality', value);
-  }
-  localStorageValue = value;
+  // if (localStorageValue !== value) {
+  //   localStorage.setItem('modality', value);
+  // }
+  // localStorageValue = value;
 };
 
 /**
