@@ -57,8 +57,6 @@ export const Text = createComponent('span')({
   displayName: 'Text',
   Component: ({level, size, ...elemProps}: TextProps, ref, Element) => {
     const tokenProps = level && size ? type.levels[level][size] : {};
-    console.log(tokenProps, elemProps);
-
     return (
       <StyledTextComponent
         ref={ref}

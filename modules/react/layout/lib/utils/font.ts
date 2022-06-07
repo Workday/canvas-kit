@@ -59,7 +59,6 @@ export function font<P extends FontStyleProps>(props: P) {
       const fontFn = fontProps[key as keyof FontStyleProps];
       const style = fontFn(value);
       styles = {...styles, ...style};
-      console.log(style, value);
     }
   }
 
