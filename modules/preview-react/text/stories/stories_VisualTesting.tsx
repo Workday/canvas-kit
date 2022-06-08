@@ -3,7 +3,7 @@ import {StaticStates, ContentDirection} from '@workday/canvas-kit-react/common';
 import {ComponentStatesTable} from '@workday/canvas-kit-labs-react/common';
 import {colors} from '@workday/canvas-kit-react/tokens';
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
-import {BodyText, Heading, Subtext, Text, Title} from '../';
+import {BodyText, Heading, Label, Subtext, Text, Title} from '../';
 import {Box} from '@workday/canvas-kit-react/layout';
 
 type TypeStateProp = {size: 'small' | 'medium' | 'large'};
@@ -46,16 +46,16 @@ export const TextStates = () => (
           props: {fontFamily: 'monospace'},
         },
         {
-          label: 'With monospace font-family value',
-          props: {fontFamily: 'monospace'},
-        },
-        {
           label: 'With color',
           props: {color: colors.blueberry300},
         },
         {
           label: 'With color as color token name',
           props: {color: 'blueberry300'},
+        },
+        {
+          label: 'With color as a variant name',
+          props: {color: 'error'},
         },
         {
           label: 'With letter-spacing of 0.5rem',
@@ -66,7 +66,7 @@ export const TextStates = () => (
           props: {lineHeight: '2.5rem'},
         },
         {
-          label: 'Aligned to the right side',
+          label: 'Aligned to the right',
           props: {textAlign: 'right'},
         },
         {
@@ -86,27 +86,17 @@ export const TextStates = () => (
           props: {whiteSpace: 'nowrap'},
         },
         {
-          label: 'With wordBreak changed to break-all',
+          label: 'With word-break changed to break-all',
           props: {wordBreak: 'break-all'},
-        },
-        {
-          label: 'With error variant',
-          props: {variant: 'error'},
-        },
-        {
-          label: 'As hint variant',
-          props: {variant: 'hint'},
-        },
-        {
-          label: 'As inverse variant',
-          props: {variant: 'inverse', style: {backgroundColor: colors.blueberry300}},
         },
       ]}
       columnProps={[{label: 'Examples', props: {}}]}
     >
       {props => (
         <Box width={350}>
-          <Text {...props}>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Text>
+          <Text as="p" {...props}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          </Text>
         </Box>
       )}
     </ComponentStatesTable>
@@ -117,30 +107,18 @@ export const TitleStates = () => (
   <StaticStates>
     <ComponentStatesTable
       rowProps={[
-        {
-          label: 'With error variant',
-          props: {variant: 'error'},
-        },
-        {
-          label: 'As hint variant',
-          props: {variant: 'hint'},
-        },
-        {
-          label: 'As inverse variant',
-          props: {variant: 'inverse', style: {backgroundColor: colors.blueberry300}},
-        },
-      ]}
-      columnProps={[
         {label: 'Small Size', props: {size: 'small'}},
         {label: 'Medium Size', props: {size: 'medium'}},
         {label: 'Large Size', props: {size: 'large'}},
       ]}
+      columnProps={[
+        {
+          label: 'Examples',
+          props: {},
+        },
+      ]}
     >
-      {(props: TypeStateProp) => (
-        <Box>
-          <Title {...props}>Lorem ipsum title.</Title>
-        </Box>
-      )}
+      {(props: TypeStateProp) => <Title {...props}>Lorem ipsum title.</Title>}
     </ComponentStatesTable>
   </StaticStates>
 );
@@ -149,30 +127,18 @@ export const HeadingStates = () => (
   <StaticStates>
     <ComponentStatesTable
       rowProps={[
-        {
-          label: 'With error variant',
-          props: {variant: 'error'},
-        },
-        {
-          label: 'As hint variant',
-          props: {variant: 'hint'},
-        },
-        {
-          label: 'As inverse variant',
-          props: {variant: 'inverse', style: {backgroundColor: colors.blueberry300}},
-        },
-      ]}
-      columnProps={[
         {label: 'Small Size', props: {size: 'small'}},
         {label: 'Medium Size', props: {size: 'medium'}},
         {label: 'Large Size', props: {size: 'large'}},
       ]}
+      columnProps={[
+        {
+          label: 'Examples',
+          props: {},
+        },
+      ]}
     >
-      {(props: TypeStateProp) => (
-        <Box>
-          <Heading {...props}>Lorem ipsum title.</Heading>
-        </Box>
-      )}
+      {(props: TypeStateProp) => <Heading {...props}>Lorem ipsum title.</Heading>}
     </ComponentStatesTable>
   </StaticStates>
 );
@@ -181,30 +147,18 @@ export const SubtextStates = () => (
   <StaticStates>
     <ComponentStatesTable
       rowProps={[
-        {
-          label: 'With error variant',
-          props: {variant: 'error'},
-        },
-        {
-          label: 'As hint variant',
-          props: {variant: 'hint'},
-        },
-        {
-          label: 'As inverse variant',
-          props: {variant: 'inverse', style: {backgroundColor: colors.blueberry300}},
-        },
-      ]}
-      columnProps={[
         {label: 'Small Size', props: {size: 'small'}},
         {label: 'Medium Size', props: {size: 'medium'}},
         {label: 'Large Size', props: {size: 'large'}},
       ]}
+      columnProps={[
+        {
+          label: 'Examples',
+          props: {},
+        },
+      ]}
     >
-      {(props: TypeStateProp) => (
-        <Box>
-          <Subtext {...props}>Lorem ipsum title.</Subtext>
-        </Box>
-      )}
+      {(props: TypeStateProp) => <Subtext {...props}>Lorem ipsum title.</Subtext>}
     </ComponentStatesTable>
   </StaticStates>
 );
@@ -213,30 +167,37 @@ export const BodyTextStates = () => (
   <StaticStates>
     <ComponentStatesTable
       rowProps={[
-        {
-          label: 'With error variant',
-          props: {variant: 'error'},
-        },
-        {
-          label: 'As hint variant',
-          props: {variant: 'hint'},
-        },
-        {
-          label: 'As inverse variant',
-          props: {variant: 'inverse', style: {backgroundColor: colors.blueberry300}},
-        },
-      ]}
-      columnProps={[
         {label: 'Small Size', props: {size: 'small'}},
         {label: 'Medium Size', props: {size: 'medium'}},
         {label: 'Large Size', props: {size: 'large'}},
       ]}
+      columnProps={[
+        {
+          label: 'Examples',
+          props: {},
+        },
+      ]}
     >
-      {(props: TypeStateProp) => (
-        <Box>
-          <BodyText {...props}>Lorem ipsum title.</BodyText>
-        </Box>
-      )}
+      {(props: TypeStateProp) => <BodyText {...props}>Lorem ipsum title.</BodyText>}
+    </ComponentStatesTable>
+  </StaticStates>
+);
+
+export const LabelStates = () => (
+  <StaticStates>
+    <ComponentStatesTable
+      rowProps={[
+        {label: 'Default', props: {}},
+        {label: 'Disabled', props: {disabled: true}},
+      ]}
+      columnProps={[
+        {
+          label: 'Examples',
+          props: {},
+        },
+      ]}
+    >
+      {(props: TypeStateProp) => <Label {...props}>Lorem ipsum title.</Label>}
     </ComponentStatesTable>
   </StaticStates>
 );

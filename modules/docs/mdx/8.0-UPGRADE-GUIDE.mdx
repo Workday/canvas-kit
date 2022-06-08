@@ -1,0 +1,72 @@
+import {Meta} from '@storybook/addon-docs';
+
+<Meta title="Welcome/Upgrade Guides/v8.0" />
+
+# Canvas Kit 8.0 Upgrade Guide
+
+This guide contains breaking changes in Canvas Kit v8. Please
+[reach out](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) if you have
+any questions.
+
+- [Codemod](#codemod)
+- [Components](#components)
+  - [Box](#box)
+
+## Codemod
+
+Please use our [codemod package](https://github.com/Workday/canvas-kit/tree/master/modules/codemod)
+to automatically update your code to work with many of the breaking changes as you upgrade from
+Canvas Kit v6 to v7:
+
+```sh
+> npx @workday/canvas-kit-codemod v7 [path]
+```
+
+> Note: This codemod only works on `.js`, `.jsx`, `.ts`, and `.tsx` extensions. You may need to make
+> some manual changes in other file types (`.json`, `.mdx`, `.md`, etc.).
+
+> Note: You may need to run your linter after executing the codemod, as its resulting formatting
+> (spacing, quotes, etc.) may not match your project's styling.
+
+**Breaking changes handled by this codemod will be marked with a 🤖.**
+
+**Please verify all changes made by the codemod. As a safety precaution, we recommend committing the
+changes from the codemod as a single isolated commit (separate from other changes) so you can
+rollback more easily if necessary.**
+
+[Let us know](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) if you
+encounter any issues or use cases that we've missed.
+
+## Components
+
+### Box
+
+#### Updating props
+
+`color` prop supports type variant names as value.
+
+```tsx
+// v7
+<Box color={type.variants.error.color} />
+
+// v8
+<Box color="error" />
+```
+
+The next props have been addet to the `Box` component to support font and text styles: `fontFamily`,
+`fontSize`, `fontStyle`, `fontWeight`, `lineHeight`, `letterSpacing`, `textAlign`, `textDecoration`,
+`textTransform`, `textShadow`, `whiteSpace`, `wordBreak`.
+
+```tsx
+// v7
+const StyledBox = styled(Box)({
+  fontFamily: 'monospace',
+  fontSize: type.properties.fontSizes[16],
+  fontWeight: type.properties.fontWeights.medium
+})
+
+<StyledBox />
+
+// v8
+<Box fontFamily="monospace" fontSize={16} fontWeight="medium" />
+```

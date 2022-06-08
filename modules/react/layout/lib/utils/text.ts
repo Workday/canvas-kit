@@ -11,7 +11,9 @@ import {
 
 /** style props to for text properties */
 export type TextStyleProps = {
+  /** sets `line-height` property */
   lineHeight?: LineHeight;
+  /** sets `letter-spacing` property */
   letterSpacing?: LetterSpacing;
   /** sets `text-align` property */
   textAlign?: TextAlign;
@@ -21,8 +23,9 @@ export type TextStyleProps = {
   textTransform?: TextTransform;
   /** sets `text-shadow` property */
   textShadow?: TextShadow;
+  /** sets `white-space` property */
   whiteSpace?: WhiteSpace;
-  /** sets `text-align` property */
+  /** sets `word-break` property */
   wordBreak?: WordBreak;
 };
 

@@ -12,9 +12,10 @@ export type FontStyleProps = {
   fontFamily?: FontFamily;
   /** sets `font-size` property */
   fontSize?: FontSize;
+  /** sets `font-style` property */
+  fontStyle?: FontStyle;
   /** sets `font-weight` property */
   fontWeight?: FontWeight;
-  fontStyle?: FontStyle;
 };
 
 const getFontFamily = (value: FontFamily) => ({

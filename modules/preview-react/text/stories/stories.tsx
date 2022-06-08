@@ -3,6 +3,7 @@ import React from 'react';
 import {
   Text as TextComponent,
   BodyText,
+  Label as LabelText,
   Subtext as SubtextComponent,
   Heading as HeadingComponent,
   Title as TitleComponent,
@@ -18,15 +19,18 @@ export default {
 
 export const Text = () => (
   <>
-    <TextComponent fontSize={10} fontWeight="regular" textAlign="center" fontFamily="monospace">
-      Centerized Text
+    <TextComponent
+      as="p"
+      fontSize={14}
+      fontWeight="regular"
+      textAlign="center"
+      fontFamily="monospace"
+    >
+      Centerized Monospace Text
     </TextComponent>
-    <TextComponent as={HeadingComponent} size="small" color="error">
-      Error text
-    </TextComponent>
-    <TextComponent {...type.levels.subtext.large}>Text with type passed</TextComponent>
+    <TextComponent {...type.levels.subtext.large}>Text with type token passed</TextComponent>
     <Box {...type.levels.subtext.large} color="hint">
-      <TextComponent>Text with inherenced styles</TextComponent>
+      <TextComponent as="p">Text with inherenced styles</TextComponent>
     </Box>
   </>
 );
@@ -50,13 +54,13 @@ export const Subtext = () => (
 export const Heading = () => (
   <>
     <HeadingComponent as="h4" size="large">
-      Large Subtext
+      Large Heading Text
     </HeadingComponent>
     <HeadingComponent as="h5" size="medium">
-      Medium Subtext
+      Medium Heading Text
     </HeadingComponent>
     <HeadingComponent as="h6" size="small">
-      Small Subtext
+      Small Heading Text
     </HeadingComponent>
   </>
 );
@@ -72,5 +76,19 @@ export const Title = () => (
     <TitleComponent as="h3" size="small">
       Small Title Text
     </TitleComponent>
+  </>
+);
+
+export const Label = () => (
+  <>
+    <LabelText as="h1" size="large">
+      Label
+    </LabelText>
+    <LabelText as="h2" hasPointerCursor>
+      Label with pointer
+    </LabelText>
+    <LabelText as="h3" disabled>
+      Disabled Label
+    </LabelText>
   </>
 );
