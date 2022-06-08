@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v7.0.8](https://github.com/Workday/canvas-kit/releases/tag/v7.0.8) (2022-06-08)
+
+### Documentation
+
+- docs(action-bar): Add delete action example to ActionBar ([#1629](https://github.com/Workday/canvas-kit/pull/1629)) ([@RayRedGoose](https://github.com/RayRedGoose))
+
+
 ## [v7.0.7](https://github.com/Workday/canvas-kit/releases/tag/v7.0.7) (2022-06-03)
 
 ### Components
