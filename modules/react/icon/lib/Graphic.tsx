@@ -1,7 +1,8 @@
 import * as React from 'react';
 import {CanvasGraphic, CanvasIconTypes} from '@workday/design-assets-types';
-import {CSSObject} from '@emotion/core';
+import {CSSObject} from '@emotion/styled';
 import Svg, {SvgProps} from './Svg';
+import {createComponent} from '@workday/canvas-kit-react/common';
 
 export interface GraphicStyles {
   /**
@@ -21,7 +22,7 @@ export interface GraphicStyles {
   grow?: boolean;
 }
 
-export interface GraphicProps extends GraphicStyles, Pick<SvgProps, 'iconRef' | 'shouldMirror'> {
+export interface GraphicProps extends GraphicStyles, Pick<SvgProps, 'shouldMirror'> {
   /**
    * The graphic to display from `@workday/canvas-graphics-web`.
    */
@@ -58,19 +59,25 @@ export const graphicStyles = ({width, height, grow}: GraphicStyles): CSSObject =
   return {};
 };
 
-export default class Graphic extends React.Component<GraphicProps> {
-  render() {
-    const {grow = false, src, width, height, iconRef, shouldMirror, ...elemProps} = this.props;
-
+const Graphic = createComponent('span')({
+  displayName: 'Graphic',
+  Component: (
+    {grow = false, src, width, height, shouldMirror, ...elemProps}: GraphicProps,
+    ref,
+    Element
+  ) => {
     return (
       <Svg
         src={src}
         styles={graphicStyles({width, height, grow})}
         type={CanvasIconTypes.Graphic}
-        iconRef={iconRef}
+        as={Element}
+        ref={ref}
         shouldMirror={shouldMirror}
         {...elemProps}
       />
     );
-  }
-}
+  },
+});
+
+export default Graphic;

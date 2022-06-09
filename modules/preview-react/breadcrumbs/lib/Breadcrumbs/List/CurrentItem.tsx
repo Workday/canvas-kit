@@ -23,6 +23,7 @@ const ListItem = styled('li')(
     flexDirection: 'column',
     textAlign: 'left',
     ...type.levels.subtext.large,
+    fontWeight: 500,
   },
 
   ({maxWidth}: CurrentItemProps) => ({

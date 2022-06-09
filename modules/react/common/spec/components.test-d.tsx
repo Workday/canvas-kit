@@ -1,7 +1,15 @@
 import React from 'react';
 import {expectTypeOf} from 'expect-type';
 
-import {createComponent, ElementComponent, ExtractProps} from '../lib/utils/components';
+import {
+  createComponent,
+  createContainer,
+  createSubcomponent,
+  ElementComponent,
+  ExtractProps,
+  PropsWithModel,
+} from '../lib/utils/components';
+import {createModelHook} from '../lib/utils/models';
 
 // expect-type is a very cool library, but failures can be extremely difficult to understand. To
 // combat the non-helpful failure messages, try to assign a value or type to a variable instead of
@@ -108,7 +116,7 @@ describe('ExtractProps', () => {
       bar: string;
     }
 
-    it('should return the combined interface of all components and HTML attributes when no element override is provided to ExtractProps', () => {
+    it('should return the combined interface of 2 components and HTML attributes when no element override is provided to ExtractProps', () => {
       const Component1 = createComponent('button')({Component: (props: Props) => null});
       const Component2 = createComponent(Component1)({Component: (props: Props2) => null});
       type Expected = ExtractProps<typeof Component2>;
@@ -118,9 +126,22 @@ describe('ExtractProps', () => {
       >();
     });
 
+    it('should return the combined interface of 3 components and HTML attributes when no element override is provided to ExtractProps', () => {
+      type Props3 = {baz: string};
+      const Component1 = createComponent('button')({Component: (props: Props) => null});
+      const Component2 = createComponent(Component1)({Component: (props: Props2) => null});
+      const Component3 = createComponent(Component2)({Component: (props: Props3) => null});
+      type Expected = ExtractProps<typeof Component3>;
+
+      expectTypeOf<Expected>().toEqualTypeOf<
+        Props & Props2 & Props3 & React.ButtonHTMLAttributes<HTMLButtonElement>
+      >();
+    });
+
     it('should return only the outer component props when `never` is supplied to ExtractProps', () => {
       const Component1 = createComponent('button')({Component: (props: Props) => null});
       const Component2 = createComponent(Component1)({Component: (props: Props2) => null});
+      const Component3 = createComponent(Component2)({Component: (props: {test: number}) => null});
       type Expected = ExtractProps<typeof Component2, never>;
 
       expectTypeOf<Expected>().toEqualTypeOf<Props2>();
@@ -144,6 +165,58 @@ describe('ExtractProps', () => {
       expectTypeOf<Expected>().toEqualTypeOf<Props & Props2>();
 
       type Foo = ExtractProps<ElementComponent<'div', Props>>;
+    });
+  });
+
+  describe('with a model', () => {
+    type Model = {
+      state: {
+        foo: string;
+      };
+      events: {};
+    };
+    const ElementComponent = createSubcomponent('div')({
+      modelHook: createModelHook({})((): Model => ({state: {foo: 'bar'}, events: {}})),
+    })<Props>(props => null);
+
+    it('should return the props and HTMLDivElement interface when no element is provided on an `ElementComponentM`', () => {
+      type Expected = ExtractProps<typeof ElementComponent>;
+
+      expectTypeOf<Expected>().toEqualTypeOf<
+        Props & PropsWithModel<Model> & React.HTMLAttributes<HTMLDivElement>
+      >();
+    });
+
+    // TODO: Add more tests with a model
+
+    it('should return the props and HTMLButtonElement when a `button` element is provided on an `ElementComponentM`', () => {
+      type Expected = ExtractProps<typeof ElementComponent, 'button'>;
+
+      expectTypeOf<Expected>().toEqualTypeOf<
+        Props & PropsWithModel<Model> & React.ButtonHTMLAttributes<HTMLButtonElement>
+      >();
+    });
+
+    it('should return only the props when `never` is provided on an `ElementComponentM', () => {
+      type Expected = ExtractProps<typeof ElementComponent, never>;
+
+      expectTypeOf<Expected>().toEqualTypeOf<Props & PropsWithModel<Model>>();
+    });
+
+    it('should return only props on a `ComponentM`', () => {
+      const Component = createContainer()({
+        modelHook: createModelHook({})((): Model => ({state: {foo: 'bar'}, events: {}})),
+      })((props: Props) => null);
+      type Expected = ExtractProps<typeof Component>;
+
+      expectTypeOf<Expected>().toEqualTypeOf<Props & PropsWithModel<Model>>();
+    });
+
+    it('should return props of a class component', () => {
+      class Component extends React.Component<Props> {}
+      type Expected = ExtractProps<typeof Component>;
+
+      expectTypeOf<Expected>().toEqualTypeOf<Props>();
     });
   });
 });

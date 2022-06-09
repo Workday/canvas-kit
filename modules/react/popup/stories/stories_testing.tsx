@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 import {DeleteButton, SecondaryButton} from '@workday/canvas-kit-react/button';
 import {useMount} from '@workday/canvas-kit-react/common';
-import {HStack} from '@workday/canvas-kit-labs-react/layout';
+import {HStack} from '@workday/canvas-kit-react/layout';
 import {
   Popup,
   useCloseOnOutsideClick,

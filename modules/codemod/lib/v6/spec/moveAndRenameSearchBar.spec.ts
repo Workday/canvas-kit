@@ -78,10 +78,65 @@ describe('Canvas Kit Move and Rename Search Bar Codemod', () => {
 
       expectTransform(input, expected);
     });
+
+    it('should ignore non-canvas-kit components from main package', () => {
+      const input = `
+        import { SearchBar as CanvasSearchBar } from "@workday/canvas-kit-labs-react";
+        import { SearchBar } from "@other/search-bar";
+
+        const CustomSearch = () => {
+          return <>
+            <CanvasSearchBar />
+            <SearchBar />
+          </>;
+        }
+      `;
+      const expected = `
+        import { SearchForm as CanvasSearchBar } from "@workday/canvas-kit-labs-react";
+        import { SearchBar } from "@other/search-bar";
+
+        const CustomSearch = () => {
+          return <>
+            <CanvasSearchBar />
+            <SearchBar />
+          </>;
+        }
+      `;
+
+      expectTransform(input, expected);
+    });
+
+    it('should ignore non-canvas-kit components from sub-path', () => {
+      const input = `
+        import { SearchBar as CanvasSearchBar } from "@workday/canvas-kit-labs-react/header";
+        import { SearchBar } from "@other/search-bar";
+
+        const CustomSearch = () => {
+          return <>
+            <CanvasSearchBar />
+            <SearchBar />
+          </>;
+        }
+      `;
+      const expected = `
+        import { SearchForm as CanvasSearchBar } from "@workday/canvas-kit-labs-react/search-form";
+        import { SearchBar } from "@other/search-bar";
+
+        const CustomSearch = () => {
+          return <>
+            <CanvasSearchBar />
+            <SearchBar />
+          </>;
+        }
+      `;
+
+      expectTransform(input, expected);
+    });
+
     it('should transform type reference identifiers', () => {
       const input = `
         import { SearchBarProps } from "@workday/canvas-kit-labs-react/header";
-    
+
         type CustomSearchProps = SearchBarProps;
         interface AnotherSearchProps extends SearchBarProps {
           specialProp?: boolean;
@@ -89,7 +144,7 @@ describe('Canvas Kit Move and Rename Search Bar Codemod', () => {
       `;
       const expected = `
         import { SearchFormProps } from "@workday/canvas-kit-labs-react/search-form";
-    
+
         type CustomSearchProps = SearchFormProps;
         interface AnotherSearchProps extends SearchFormProps {
           specialProp?: boolean;
