@@ -64,4 +64,4 @@ class Hint extends React.Component<HintProps> {
 
 Hint.ErrorType = ErrorType;
 
-export default Hint;
+export {Hint};

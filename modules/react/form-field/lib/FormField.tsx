@@ -7,8 +7,8 @@ import {
   Themeable,
   generateUniqueId,
 } from '@workday/canvas-kit-react/common';
-import Hint from './Hint';
-import Label from './Label';
+import {Hint} from './Hint';
+import {Label} from './Label';
 import {FormFieldLabelPosition, FormFieldLabelPositionBehavior} from './types';
 
 export interface FormFieldProps
@@ -238,4 +238,4 @@ class FormField extends React.Component<FormFieldProps> {
 FormField.LabelPosition = FormFieldLabelPosition;
 FormField.ErrorType = ErrorType;
 
-export default FormField;
+export {FormField};

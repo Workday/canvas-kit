@@ -59,7 +59,7 @@ function Example() {
 ```tsx
 import * as React from 'react';
 import Select from '@workday/canvas-kit-preview-react/select';
-import FormField from '@workday/canvas-kit-react/form-field';
+import {FormField} from '@workday/canvas-kit-react/form-field';
 
 function Example() {
   const options = [
@@ -90,7 +90,7 @@ function Example() {
 ```tsx
 import * as React from 'react';
 import Select from '@workday/canvas-kit-preview-react/select';
-import FormField from '@workday/canvas-kit-react/form-field';
+import {FormField} from '@workday/canvas-kit-react/form-field';
 
 function Example() {
   const options = ['California', 'Florida', 'New York', 'Pennsylvania', 'Texas'];
@@ -118,7 +118,7 @@ used to customize how each option is rendered.
 ```tsx
 import * as React from 'react';
 import Select from '@workday/canvas-kit-preview-react/select';
-import FormField from '@workday/canvas-kit-react/form-field';
+import {FormField} from '@workday/canvas-kit-react/form-field';
 import {colors, typeColors} from '@workday/canvas-kit-react/tokens';
 import {
   activityStreamIcon,

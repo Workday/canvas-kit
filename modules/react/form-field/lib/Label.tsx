@@ -125,4 +125,4 @@ class Label extends React.Component<LabelProps> {
 
 Label.Position = FormFieldLabelPosition;
 
-export default Label;
+export {Label};
