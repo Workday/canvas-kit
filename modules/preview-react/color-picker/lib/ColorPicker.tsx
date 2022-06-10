@@ -158,7 +158,7 @@ const isCustomColor = (colors: string[], hexCode?: string) => {
   return !colors.includes(lowercaseHex);
 };
 
-const ColorPicker = ({
+export const ColorPicker = ({
   colorSet = defaultColorSet,
   customHexInputLabel = 'Custom Hex Color',
   submitLabel = 'Submit',
@@ -215,4 +215,3 @@ const ColorPicker = ({
 };
 
 ColorPicker.defaultColorSet = defaultColorSet;
-export default ColorPicker;

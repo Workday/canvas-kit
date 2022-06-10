@@ -1,5 +1,5 @@
-import ColorInput from './lib/ColorInput';
-import ColorPreview from './lib/ColorPreview';
+import {ColorInput} from './lib/ColorInput';
+import {ColorPreview} from './lib/ColorPreview';
 
 export {ColorInput, ColorPreview};
 export * from './lib/ColorInput';
