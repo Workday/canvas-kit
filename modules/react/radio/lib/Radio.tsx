@@ -8,7 +8,8 @@ import {
   Themeable,
   useUniqueId,
 } from '@workday/canvas-kit-react/common';
-import canvas, {
+import {
+  canvas,
   borderRadius,
   colors,
   inputColors,

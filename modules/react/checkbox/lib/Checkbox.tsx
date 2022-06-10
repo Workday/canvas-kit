@@ -11,7 +11,8 @@ import {
   useTheme,
   Themeable,
 } from '@workday/canvas-kit-react/common';
-import canvas, {
+import {
+  canvas,
   borderRadius,
   colors,
   inputColors,
