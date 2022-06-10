@@ -12,7 +12,7 @@
  * })
  */
 declare function verifyComponent(
-  Component: React.ComponentType<any>,
+  Component: React.ComponentType<React.PropsWithChildren<React.PropsWithChildren<any>>>,
   {
     modelFn,
     props,
