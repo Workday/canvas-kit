@@ -271,5 +271,3 @@ export const Radio = createComponent('input')({
     );
   },
 });
-
-export default Radio;
