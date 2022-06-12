@@ -3,7 +3,7 @@ import {iconColors} from '@workday/canvas-kit-react/tokens';
 import {CanvasSystemIcon, CanvasIconTypes} from '@workday/design-assets-types';
 import {CSSObject} from '@emotion/styled';
 import Icon, {IconProps} from './Icon';
-import {createComponent} from '../../common';
+import {createComponent} from '@workday/canvas-kit-react/common';
 
 export interface SystemIconStyles {
   /**
@@ -54,7 +54,7 @@ export interface SystemIconProps
   /**
    * The size of the SystemIcon in `px`.
    */
-  size?: number | undefined;
+  size?: number | string | undefined;
   className?: string; //investigate more
 }
 

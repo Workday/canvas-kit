@@ -49,6 +49,10 @@ export interface NormalizedOption extends Option {
   label: string;
 }
 
+export interface RenderSelectedFunction {
+  (option: NormalizedOption): React.ReactNode;
+}
+
 export interface RenderableOption extends NormalizedOption {
   focused: boolean;
   selected: boolean;
@@ -86,6 +90,22 @@ export interface CoreSelectBaseProps
    * @default defaultRenderOption
    */
   renderOption?: RenderOptionFunction;
+  /**
+   * The function called to render the selected option.
+   *
+   * The `option` argument passed to the function is an object which contains the following:
+   *
+   * * `data: object` (data object carried over from the corresponding option originally passed into the component)
+   * * `disabled: boolean`
+   * * `id: string`
+   * * `label: string`
+   * * `value: string`
+   *
+   * If you omit the `renderSelected` prop, each option will be rendered using a `defaultRenderSelected` function provided by the component.
+   *
+   * @default defaultRenderSelected
+   */
+  renderSelected?: RenderSelectedFunction;
   /**
    * The value of the Select.
    */
@@ -261,7 +281,11 @@ const SelectWrapper = styled('div')<Pick<SelectBaseProps, 'grow' | 'disabled'>>(
 );
 
 const defaultRenderOption: RenderOptionFunction = option => {
-  return <div>{option.label}</div>;
+  return <div>{defaultRenderSelected(option)}</div>;
+};
+
+const defaultRenderSelected: RenderSelectedFunction = option => {
+  return option.label;
 };
 
 const SelectBase = ({
@@ -284,6 +308,7 @@ const SelectBase = ({
   onOptionSelection,
   options,
   renderOption = defaultRenderOption,
+  renderSelected = defaultRenderSelected,
   required,
   shouldMenuAutoFlip = true,
   shouldMenuAutoFocus = true,
@@ -393,7 +418,6 @@ const SelectBase = ({
   // Do a bit of error-checking in case options weren't provided
   const hasOptions = options.length > 0;
   const selectedOption = hasOptions ? options[getCorrectedIndexByValue(options, value)] : null;
-  const selectedOptionLabel = selectedOption ? selectedOption.label : '';
   const selectedOptionValue = selectedOption ? selectedOption.value : '';
 
   return (
@@ -419,7 +443,7 @@ const SelectBase = ({
         value={selectedOptionValue}
         {...elemProps}
       >
-        {selectedOptionLabel}
+        {!!selectedOption && renderSelected(selectedOption)}
       </SelectButton>
       <SelectInput onChange={onChange} ref={inputRef} type="text" value={selectedOptionValue} />
       {hasOptions && menuVisibility !== 'closed' && (

@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-react",
-  "version": "6.4.2",
+  "version": "7.0.7",
   "description": "The parent module that contains all Workday Canvas Kit React components",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -17,25 +17,16 @@
     "*/lib/*",
     "*/index.ts",
     "dist/",
-    "index.ts",
-    "ts3.5/**/*"
+    "index.ts"
   ],
-  "typesVersions": {
-    "<=3.5": {
-      "*": [
-        "ts3.5/*"
-      ]
-    }
-  },
   "scripts": {
     "watch": "yarn build:es6 -w",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "clean": "rimraf dist && rimraf ts3.5 && rimraf .build-info && mkdirp dist && mkdirp ts3.5/dist",
+    "clean": "rimraf dist && rimraf .build-info && mkdirp dist",
     "build:cjs": "tsc -p tsconfig.cjs.json",
     "build:es6": "tsc -p tsconfig.es6.json",
     "build:rebuild": "npm-run-all clean build",
-    "build:downlevel-dts": "yarn run downlevel-dts dist ts3.5/dist",
-    "build": "npm-run-all --parallel build:cjs build:es6 --sequential build:downlevel-dts",
+    "build": "npm-run-all --parallel build:cjs build:es6",
     "prepack": "node ../../utils/publish.js pre react",
     "postpack": "node ../../utils/publish.js post react",
     "depcheck": "node ../../utils/check-dependencies-exist.js",
@@ -52,22 +43,23 @@
     "react": "^16.8 || ^17.0"
   },
   "dependencies": {
-    "csstype": "^2.6.17",
-    "@emotion/react": "^11.7.1",
     "@emotion/is-prop-valid": "^1.1.1",
+    "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
     "@popperjs/core": "^2.5.4",
     "@workday/canvas-colors-web": "^2.0.0",
-    "@workday/canvas-kit-labs-react": "^6.4.2",
-    "@workday/canvas-kit-popup-stack": "^6.4.2",
-    "@workday/canvas-kit-preview-react": "^6.4.2",
+    "@workday/canvas-kit-labs-react": "^7.0.7",
+    "@workday/canvas-kit-popup-stack": "^7.0.7",
+    "@workday/canvas-kit-preview-react": "^7.0.7",
     "@workday/canvas-system-icons-web": "^3.0.0",
     "@workday/design-assets-types": "^0.2.4",
     "chroma-js": "^2.1.0",
+    "csstype": "^2.6.17",
     "element-closest": "^3.0.2",
     "lodash": "^4.17.14",
     "polished": "^4.1.3",
     "react-innertext": "^1.1.5",
+    "react-virtual": "^2.10.4",
     "resize-observer-polyfill": "^1.5.1",
     "rtl-css-js": "^1.14.1",
     "screenfull": "^5.2.0",

@@ -106,6 +106,10 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
       requiredImportSpecifiers.push(buttonType);
     });
 
+  if (requiredImportSpecifiers.length === 0) {
+    return file.source;
+  }
+
   // Find all instances of IconButton within a style function
   // const StyledIconButton = styled(IconButton) gets renamed to
   // const StyledIconButton = styled(CorrectButtonMapping)
@@ -113,7 +117,10 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
     if (
       nodePath.value.init?.type === 'CallExpression' &&
       nodePath.value.init.callee.type === 'CallExpression' &&
-      nodePath.value.init.callee.arguments[0].type === 'Identifier'
+      nodePath.value.init.callee.callee.type === 'Identifier' &&
+      nodePath.value.init.callee.callee.name === 'styled' &&
+      nodePath.value.init.callee.arguments[0].type === 'Identifier' &&
+      nodePath.value.init.callee.arguments[0].name === importMap.IconButton
     ) {
       nodePath.value.init.callee.arguments[0].name = buttonType;
       requiredImportSpecifiers.push(buttonType);
@@ -125,7 +132,10 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
    * Add new required imports
    */
   const buttonImports = root.find(j.ImportDeclaration, {
-    source: {value: (value: string) => value.includes('@workday/canvas-kit-react')},
+    source: {
+      value: (value: string) =>
+        value === '@workday/canvas-kit-react' || value === '@workday/canvas-kit-react/button',
+    },
   });
 
   if (!buttonImports.length) {
@@ -142,7 +152,8 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
       );
     }
   } else {
-    buttonImports.forEach(({node}) => {
+    buttonImports.forEach(nodePath => {
+      const {node} = nodePath;
       const specifiersToRemove = ['IconButton'];
 
       // Remove old specifiers
@@ -168,9 +179,18 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
             existing => existing.type === 'ImportSpecifier' && existing.imported.name === specifier
           )
         ) {
-          node.specifiers?.push(j.importSpecifier(j.identifier(specifier)));
+          // Only add a specifier if it has not already been declared
+          if (!importMap[buttonType]) {
+            node.specifiers?.push(j.importSpecifier(j.identifier(specifier)));
+          }
         }
       });
+      console.log(node.specifiers?.length);
+
+      // if we removed all specifiers, remove the import
+      if (!node.specifiers?.length) {
+        nodePath.prune();
+      }
     });
   }
 

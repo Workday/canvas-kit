@@ -1,26 +1,16 @@
 import * as React from 'react';
-import {createComponent, ExtractProps, useDefaultModel} from '@workday/canvas-kit-react/common';
+import {createContainer, ExtractProps} from '@workday/canvas-kit-react/common';
 import {Dialog} from '@workday/canvas-kit-react/dialog';
-import {PopupModelContext, Popup} from '@workday/canvas-kit-react/popup';
+import {Popup} from '@workday/canvas-kit-react/popup';
 import {ModalOverlay} from './ModalOverlay';
 import {ModalCard} from './ModalCard';
 import {useModalModel} from './hooks';
 import {ModalHeading} from './ModalHeading';
 import {ModalOverflowOverlay} from './ModalOverflowOverlay';
 
-export interface ModalProps extends ExtractProps<typeof Dialog, never> {
-  /** The contents of the Modal. Can be `Modal` subcomponents or any valid elements. */
-  children: React.ReactNode;
-}
-
-export const Modal = createComponent()({
+export const Modal = createContainer()({
   displayName: 'Modal',
-  Component: ({children, model, ...config}: ModalProps) => {
-    const value = useDefaultModel(model, config, useModalModel);
-
-    return <PopupModelContext.Provider value={value}>{children}</PopupModelContext.Provider>;
-  },
-
+  modelHook: useModalModel,
   subComponents: {
     Body: Popup.Body,
     Card: ModalCard,
@@ -31,4 +21,6 @@ export const Modal = createComponent()({
     OverflowOverlay: ModalOverflowOverlay,
     CloseButton: Popup.CloseButton,
   },
+})<ExtractProps<typeof Dialog, never>>(elemProps => {
+  return <>{elemProps.children}</>;
 });
