@@ -7,11 +7,11 @@ import {
   StyledType,
 } from '@workday/canvas-kit-react/common';
 import {chevronUpIcon} from '@workday/canvas-system-icons-web';
-import {useDisclosureModel} from '@workday/canvas-kit-react/disclosure';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {useExpandableIcon} from './hooks/useExpandableIcon';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {colors, space} from '@workday/canvas-kit-react/tokens';
+import {useExpandableModel} from './useExpandableModel';
 
 export interface ExpandableEndIconProps
   extends Omit<ExtractProps<typeof SystemIcon, never>, 'icon'> {
@@ -35,7 +35,7 @@ const StyledEndIcon = styled(SystemIcon)<{visible: boolean} & StyledType>(
 );
 
 export const ExpandableEndIcon = createSubcomponent('span')({
-  modelHook: useDisclosureModel,
+  modelHook: useExpandableModel,
   elemPropsHook: useExpandableIcon,
 })<ExpandableEndIconProps>(({icon, ...elementProps}, Element) => {
   return (

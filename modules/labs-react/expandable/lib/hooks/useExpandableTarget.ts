@@ -1,7 +1,7 @@
 import {createElemPropsHook} from '@workday/canvas-kit-react/common';
-import {useDisclosureModel} from '@workday/canvas-kit-react/disclosure';
+import {useExpandableModel} from '../useExpandableModel';
 
-export const useExpandableTarget = createElemPropsHook(useDisclosureModel)(({state, events}) => {
+export const useExpandableTarget = createElemPropsHook(useExpandableModel)(({state, events}) => {
   return {
     'aria-controls': state.id,
     'aria-expanded': state.visibility !== 'hidden',

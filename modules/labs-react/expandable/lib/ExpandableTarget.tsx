@@ -13,7 +13,7 @@ import {ExpandableModelConfig} from './Expandable';
 import {useExpandableTarget} from './hooks/useExpandableTarget';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {colors} from '@workday/canvas-kit-react/tokens';
-import {useDisclosureModel} from '@workday/canvas-kit-react';
+import {useExpandableModel} from './useExpandableModel';
 
 export interface ExpandableTargetProps
   extends ExpandableModelConfig,
@@ -47,7 +47,7 @@ const Heading = styled('h1')<StyledType>({
 });
 
 export const ExpandableTarget = createSubcomponent('button')({
-  modelHook: useDisclosureModel,
+  modelHook: useExpandableModel,
   elemPropsHook: useExpandableTarget,
 })<ExpandableTargetProps>(({children, headingLevel, ...elementProps}, Element) => {
   const button = (

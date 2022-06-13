@@ -9,15 +9,14 @@ import {ExpandableEndIcon} from './ExpandableEndIcon';
 import {ExpandableTitle} from './ExpandableTitle';
 import {ExpandableAvatar} from './ExpandableAvatar';
 import {Flex} from '@workday/canvas-kit-react/layout';
-import {useDisclosureModel} from '@workday/canvas-kit-react/disclosure';
+import {useExpandableModel} from './useExpandableModel';
 
-export const ExpandableModelContext = useDisclosureModel.Context;
+export const ExpandableModelContext = useExpandableModel.Context;
 
-export type ExpandableModelConfig = Partial<typeof useDisclosureModel.defaultConfig> &
-  typeof useDisclosureModel.requiredConfig;
+export type ExpandableModelConfig = Partial<typeof useExpandableModel.defaultConfig> &
+  typeof useExpandableModel.requiredConfig;
 
 export interface ExpandableProps extends ExpandableModelConfig, ExtractProps<typeof Flex, never> {
-  model?: ReturnType<typeof useDisclosureModel>;
   /**
    * The children of the `Expandable` container. This should contain `Expandable.Target` and
    * `Expandable.Container`
@@ -26,7 +25,7 @@ export interface ExpandableProps extends ExpandableModelConfig, ExtractProps<typ
 }
 
 export const Expandable = createContainer('div')({
-  modelHook: useDisclosureModel,
+  modelHook: useExpandableModel,
   subComponents: {
     Target: ExpandableTarget,
     Content: ExpandableContent,
