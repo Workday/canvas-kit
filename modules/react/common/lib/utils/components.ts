@@ -86,7 +86,9 @@ export type ExtractProps<
     | keyof JSX.IntrinsicElements
     | ElementComponent<any, any>
     | Component<any>
-    | React.ComponentType<React.PropsWithChildren<React.PropsWithChildren<any>>>
+    | React.ComponentType<
+        React.PropsWithChildren<React.PropsWithChildren<React.PropsWithChildren<any>>>
+      >
     | undefined
     | never = undefined
 > = ExtractMaybeModel<
@@ -104,7 +106,7 @@ export type ExtractProps<
     : TComponent extends Component<infer P> // test if `TComponent` is a `Component`, while inferring props `P`
     ? P // else attach only inferred props `P`
     : TComponent extends React.ComponentType<
-        React.PropsWithChildren<React.PropsWithChildren<infer P>>
+        React.PropsWithChildren<React.PropsWithChildren<React.PropsWithChildren<infer P>>>
       > // test if `TComponent` is a `React.ComponentType` (class or functional component)
     ? P // it was a `React.ComponentType`, return inferred props `P`
     : {} // We don't know what `TComponent` was, return an empty object
@@ -224,7 +226,9 @@ function defaultGetElemProps(input: any) {
 export const createContainer = <
   E extends
     | keyof JSX.IntrinsicElements
-    | React.ComponentType<React.PropsWithChildren<React.PropsWithChildren<unknown>>>
+    | React.ComponentType<
+        React.PropsWithChildren<React.PropsWithChildren<React.PropsWithChildren<unknown>>>
+      >
     | ElementComponentM<any, any, any>
     | undefined = undefined
 >(
@@ -267,7 +271,9 @@ export const createContainer = <
           // check and cast to a `React.FC` to match a valid signature for `ElementComponent`.
           // `React.FC` was chosen as the simplest valid interface.
           E extends undefined
-            ? React.FC<React.PropsWithChildren<React.PropsWithChildren<unknown>>>
+            ? React.FC<
+                React.PropsWithChildren<React.PropsWithChildren<React.PropsWithChildren<unknown>>>
+              >
             : E,
           Props & TConfig,
           TModel
@@ -320,7 +326,9 @@ type RemoveNull<T> = {[K in keyof T]: Exclude<T[K], null>};
 export const createSubcomponent = <
   E extends
     | keyof JSX.IntrinsicElements
-    | React.ComponentType<React.PropsWithChildren<React.PropsWithChildren<unknown>>>
+    | React.ComponentType<
+        React.PropsWithChildren<React.PropsWithChildren<React.PropsWithChildren<unknown>>>
+      >
     | ElementComponentM<any, any, any>
     | undefined = undefined
 >(
@@ -367,7 +375,9 @@ export const createSubcomponent = <
         // check and cast to a `React.FC` to match a valid signature for `ElementComponent`.
         // `React.FC` was chosen as the simplest valid interface.
         E extends undefined
-          ? React.FC<React.PropsWithChildren<React.PropsWithChildren<unknown>>>
+          ? React.FC<
+              React.PropsWithChildren<React.PropsWithChildren<React.PropsWithChildren<unknown>>>
+            >
           : E,
         Props,
         TModel
@@ -417,7 +427,9 @@ export const createSubcomponent = <
 export const createComponent = <
   E extends
     | keyof JSX.IntrinsicElements
-    | React.ComponentType<React.PropsWithChildren<React.PropsWithChildren<unknown>>>
+    | React.ComponentType<
+        React.PropsWithChildren<React.PropsWithChildren<React.PropsWithChildren<unknown>>>
+      >
     | ElementComponent<any, any>
     | undefined = undefined
 >(
@@ -459,7 +471,11 @@ export const createComponent = <
       // E is not `undefined` here, but Typescript thinks it could be, so we add another `undefined`
       // check and cast to a `React.FC` to match a valid signature for `ElementComponent`.
       // `React.FC` was chosen as the simplest valid interface.
-      E extends undefined ? React.FC<React.PropsWithChildren<React.PropsWithChildren<unknown>>> : E,
+      E extends undefined
+        ? React.FC<
+            React.PropsWithChildren<React.PropsWithChildren<React.PropsWithChildren<unknown>>>
+          >
+        : E,
       P
     >) &
   SubComponents => {

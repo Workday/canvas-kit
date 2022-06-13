@@ -19,10 +19,21 @@
     "allowSyntheticDefaultImports": true,
     "types": [],
     "incremental": true,
+    "skipLibCheck": true
   },
   "ts-node": {
     "transpileOnly": true,
     "module": "commonjs"
   },
-  "exclude": ["cypress", "node_modules", "modules/**/dist/*", "modules/**/ts-tmp/*", "docs", "utils/**/spec/*", "modules/**/spec/*", "modules/**/stories/*", "jest/**/*"]
+  "exclude": [
+    "cypress",
+    "./node_modules",
+    "modules/**/dist/*",
+    "modules/**/ts-tmp/*",
+    "docs",
+    "utils/**/spec/*",
+    "modules/**/spec/*",
+    "modules/**/stories/*",
+    "jest/**/*"
+  ]
 }

@@ -282,7 +282,7 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
   };
 
   private setFirstCharacters = (): void => {
-    const getFirstCharacter = (child: React.ReactNode): string => {
+    const getFirstCharacter = (child: React.ReactNode | {}): string => {
       let character = '';
       if (!child || typeof child === 'boolean' || child === {}) {
         character = '';
@@ -296,7 +296,7 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
         // TODO test React.ReactNodeArray
         character = getFirstCharacter(child[0]);
       } else if ('props' in child) {
-        const {children} = child.props;
+        const {children} = (child as {props: {children: any}}).props;
 
         if (Array.isArray(children)) {
           character = getFirstCharacter(children[0]);

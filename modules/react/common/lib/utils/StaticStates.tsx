@@ -30,7 +30,9 @@ export const convertToStaticStates = (obj?: CSSProperties): CSSProperties | unde
 };
 
 export const StaticStates: React.FC<React.PropsWithChildren<
-  React.PropsWithChildren<{theme?: PartialEmotionCanvasTheme} & React.HTMLAttributes<HTMLElement>>
+  React.PropsWithChildren<
+    React.PropsWithChildren<{theme?: PartialEmotionCanvasTheme} & React.HTMLAttributes<HTMLElement>>
+  >
 >> = ({children, theme, ...elemProps}) => {
   const localTheme: EmotionCanvasTheme & {_staticStates?: boolean} = useTheme(theme);
   localTheme._staticStates = true;

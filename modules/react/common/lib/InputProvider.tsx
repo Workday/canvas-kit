@@ -117,7 +117,9 @@ const supportsPassive = () => {
 /**
  * This component takes heavy inspiration from what-input (https://github.com/ten1seven/what-input)
  */
-export class InputProvider extends React.Component<InputProviderProps> {
+export class InputProvider extends React.Component<
+  React.PropsWithChildren<React.PropsWithChildren<InputProviderProps>>
+> {
   private eventTimer: number | undefined;
 
   private currentInput: InputType;

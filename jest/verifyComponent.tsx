@@ -18,7 +18,7 @@ import {render, fireEvent} from '@testing-library/react';
  * })
  */
 export function verifyComponent(
-  Component: React.ComponentType<React.PropsWithChildren<React.PropsWithChildren<any>>>,
+  Component: React.ComponentType<React.PropsWithChildren<React.PropsWithChildren<React.PropsWithChildren<any>>>>,
   {modelFn, props}: {modelFn?: Function; props: object}
 ) {
   describe('verifyComponent', () => {

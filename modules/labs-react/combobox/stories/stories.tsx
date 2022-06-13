@@ -40,10 +40,12 @@ const groupOfResults = (
 
 export const Autocomplete: FC<React.PropsWithChildren<
   React.PropsWithChildren<
-    Omit<ComboboxProps, 'children'> & {
-      group?: boolean;
-      showDisabledItems?: boolean;
-    }
+    React.PropsWithChildren<
+      Omit<ComboboxProps, 'children'> & {
+        group?: boolean;
+        showDisabledItems?: boolean;
+      }
+    >
   >
 >> = ({showClearButton, group, showDisabledItems = false, ...props}) => {
   const [currentText, setCurrentText] = useState('');

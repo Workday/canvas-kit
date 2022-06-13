@@ -20,7 +20,7 @@ const IconContainer = styled('div')({
 });
 
 const InputIconContainer: React.FunctionComponent<React.PropsWithChildren<
-  React.PropsWithChildren<InputIconContainerProps>
+  React.PropsWithChildren<React.PropsWithChildren<InputIconContainerProps>>
 >> = ({grow, children, icon}) => (
   <Container grow={grow}>
     {children}

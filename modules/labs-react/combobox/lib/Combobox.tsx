@@ -137,7 +137,7 @@ export const getOptionId = (baseId?: string, index?: number) =>
 
 export const getTextFromElement = (children?: React.ReactNode) => {
   let text = '';
-  React.Children.map(children, child => {
+  React.Children.map(children, (child: React.ReactNode | {}) => {
     if (child == null || typeof child === 'boolean' || child === {}) {
       text += '';
     } else if (typeof child === 'string' || typeof child === 'number') {
