@@ -1,12 +1,7 @@
 import React from 'react';
 
-import {createComponent, ExtractProps, useDefaultModel} from '@workday/canvas-kit-react/common';
+import {createContainer, ExtractProps} from '@workday/canvas-kit-react/common';
 
-import {
-  DisclosureModel,
-  useDisclosureModel,
-  DisclosureModelConfig,
-} from '@workday/canvas-kit-react/disclosure';
 import {ExpandableContent} from './ExpandableContent';
 import {ExpandableTarget} from './ExpandableTarget';
 import {ExpandableStartIcon} from './ExpandableStartIcon';
@@ -14,35 +9,24 @@ import {ExpandableEndIcon} from './ExpandableEndIcon';
 import {ExpandableTitle} from './ExpandableTitle';
 import {ExpandableAvatar} from './ExpandableAvatar';
 import {Flex} from '@workday/canvas-kit-react/layout';
+import {useDisclosureModel} from '@workday/canvas-kit-react/disclosure';
 
-export const ExpandableModelContext = React.createContext<DisclosureModel>({} as any);
+export const ExpandableModelContext = useDisclosureModel.Context;
 
-export interface ExpandableProps extends DisclosureModelConfig, ExtractProps<typeof Flex, never> {
-  model?: DisclosureModel;
+export type ExpandableModelConfig = Partial<typeof useDisclosureModel.defaultConfig> &
+  typeof useDisclosureModel.requiredConfig;
+
+export interface ExpandableProps extends ExpandableModelConfig, ExtractProps<typeof Flex, never> {
+  model?: ReturnType<typeof useDisclosureModel>;
   /**
-   * Children of the `Expandable` container. This should contain `Expandable.Target` and `Expandable.Container`
+   * The children of the `Expandable` container. This should contain `Expandable.Target` and
+   * `Expandable.Container`
    */
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
-export const Expandable = createComponent('div')({
-  displayName: 'Expandable',
-  Component: ({children, model, ...elemProps}: ExpandableProps, ref, Element) => {
-    const {id, initialVisibility, shouldShow, shouldHide, onShow, onHide, ...props} = elemProps;
-    const value = useDefaultModel(
-      model,
-      {id, initialVisibility, shouldShow, shouldHide, onShow, onHide},
-      useDisclosureModel
-    );
-
-    return (
-      <ExpandableModelContext.Provider value={value}>
-        <Flex as={Element} flexDirection={'column'} padding="xxs" ref={ref} {...props}>
-          {children}
-        </Flex>
-      </ExpandableModelContext.Provider>
-    );
-  },
+export const Expandable = createContainer('div')({
+  modelHook: useDisclosureModel,
   subComponents: {
     Target: ExpandableTarget,
     Content: ExpandableContent,
@@ -51,4 +35,8 @@ export const Expandable = createComponent('div')({
     Avatar: ExpandableAvatar,
     Title: ExpandableTitle,
   },
-});
+})<ExpandableProps>(({children, ...elementProps}, Element) => (
+  <Flex as={Element} flexDirection={'column'} padding={'xxs'} {...elementProps}>
+    {children}
+  </Flex>
+));

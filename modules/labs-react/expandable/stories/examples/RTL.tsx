@@ -15,7 +15,7 @@ export const RTL = () => {
         <Expandable.Target headingLevel="h4">
           <Expandable.StartIcon />
           <Expandable.Avatar />
-          <Expandable.Title>Title</Expandable.Title>
+          <Expandable.Title>Expandable Title</Expandable.Title>
         </Expandable.Target>
 
         <Expandable.Content>Content</Expandable.Content>

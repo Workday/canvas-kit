@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {createComponent, styled, StyledType} from '@workday/canvas-kit-react/common';
-import {colors, type} from '@workday/canvas-kit-react/tokens';
+import {colors, space, type} from '@workday/canvas-kit-react/tokens';
 
 export interface ExpandableTitleProps {
   /**
@@ -15,6 +15,9 @@ const StyledTitle = styled('div')<StyledType>({
   fontSize: type.properties.fontSizes[18],
   fontFamily: type.properties.fontFamilies.default,
   color: colors.blackPepper400,
+  lineHeight: '21px',
+  padding: `6px ${space.zero} ${space.xxxs}`,
+  textAlign: 'left',
 });
 
 export const ExpandableTitle = createComponent('div')({

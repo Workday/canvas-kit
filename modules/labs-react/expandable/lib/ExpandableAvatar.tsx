@@ -18,6 +18,15 @@ export const ExpandableAvatar = createComponent('div')({
   displayName: 'Expandable.Avatar',
   Component: ({...elemProps}: ExpandableAvatarProps, ref, Element) => {
     const margin = !useIsRTL() ? 'marginRight' : 'marginLeft';
-    return <Avatar as={Element} css={{[margin]: space.xxs}} ref={ref} {...elemProps} />;
+    return (
+      <Avatar
+        altText={undefined}
+        as={Element}
+        css={{[margin]: space.xxs, flexShrink: 0}}
+        ref={ref}
+        size={32}
+        {...elemProps}
+      />
+    );
   },
 });

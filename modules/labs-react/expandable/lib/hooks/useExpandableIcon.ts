@@ -1,8 +1,8 @@
-import {createHook} from '@workday/canvas-kit-react/common';
-import {DisclosureModel} from '@workday/canvas-kit-react/disclosure';
+import {useDisclosureModel} from '@workday/canvas-kit-react';
+import {createElemPropsHook} from '@workday/canvas-kit-react/common';
 
-export const useExpandableIcon = createHook(({state}: DisclosureModel) => {
+export const useExpandableIcon = createElemPropsHook(useDisclosureModel)(({state}) => {
   return {
-    visible: state.visibility === 'visible',
+    visible: state.visibility !== 'hidden',
   };
 });
