@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
 import {GenericStyle} from '@workday/canvas-kit-react/common';
-import Column, {ColumnProps} from './Column';
+import {Column, ColumnProps} from './Column';
 import {canvas, spaceNumbers} from '@workday/canvas-kit-react/tokens';
 import isPropValid from '@emotion/is-prop-valid';
 
@@ -58,7 +58,7 @@ const LayoutContainer = styled('div', {
   }
 );
 
-class Layout extends React.Component<LayoutProps> {
+export class Layout extends React.Component<LayoutProps> {
   public static Column = Column;
 
   private renderChild = (child: React.ReactNode, spacing: number): React.ReactNode => {
@@ -97,5 +97,3 @@ class Layout extends React.Component<LayoutProps> {
 }
 
 Layout.Column = Column;
-
-export default Layout;

@@ -57,7 +57,7 @@ const List = styled('ul')({
   ...hideMouseFocus,
 });
 
-export default class Menu extends React.Component<MenuProps, MenuState> {
+export class Menu extends React.Component<MenuProps, MenuState> {
   private id = generateUniqueId();
   private animateId!: number;
 
