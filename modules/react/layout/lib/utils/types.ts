@@ -1,7 +1,69 @@
-// @ts-ignore
-import {Globals, GlobalsNumber, SelfPosition, DisplayOutside, DisplayInside, DisplayInternal, DisplayLegacy, LineStyle, ContentDistribution, ContentPosition} from 'csstype';
 // We're temporarily creating these types from csstype
 // to improve type completion until we move to csstype v3.
+
+type Globals = '-moz-initial' | 'inherit' | 'initial' | 'revert' | 'unset';
+type GlobalsNumber = Globals | number;
+
+type SelfPosition =
+  | 'center'
+  | 'end'
+  | 'flex-end'
+  | 'flex-start'
+  | 'self-end'
+  | 'self-start'
+  | 'start';
+
+type DisplayOutside = 'block' | 'inline' | 'run-in';
+
+type DisplayInside =
+  | '-ms-flexbox'
+  | '-ms-grid'
+  | '-webkit-flex'
+  | 'flex'
+  | 'flow'
+  | 'flow-root'
+  | 'grid'
+  | 'ruby'
+  | 'table';
+
+type DisplayInternal =
+  | 'ruby-base'
+  | 'ruby-base-container'
+  | 'ruby-text'
+  | 'ruby-text-container'
+  | 'table-caption'
+  | 'table-cell'
+  | 'table-column'
+  | 'table-column-group'
+  | 'table-footer-group'
+  | 'table-header-group'
+  | 'table-row'
+  | 'table-row-group';
+
+type DisplayLegacy =
+  | '-ms-inline-flexbox'
+  | '-ms-inline-grid'
+  | '-webkit-inline-flex'
+  | 'inline-block'
+  | 'inline-flex'
+  | 'inline-grid'
+  | 'inline-list-item'
+  | 'inline-table';
+
+type LineStyle =
+  | 'dashed'
+  | 'dotted'
+  | 'double'
+  | 'groove'
+  | 'hidden'
+  | 'inset'
+  | 'none'
+  | 'outset'
+  | 'ridge'
+  | 'solid';
+
+type ContentDistribution = 'space-around' | 'space-between' | 'space-evenly' | 'stretch';
+type ContentPosition = 'center' | 'end' | 'flex-end' | 'flex-start' | 'start';
 
 // Border
 export type PropertyBorder = Globals | LineStyle | (string & {});
