@@ -1,16 +1,5 @@
 /* @ts-ignore */
-import {
-  Globals,
-  GlobalsNumber,
-  SelfPosition,
-  DisplayOutside,
-  DisplayInside,
-  DisplayInternal,
-  DisplayLegacy,
-  LineStyle,
-  ContentDistribution,
-  ContentPosition,
-} from 'csstype';
+import {Globals, GlobalsNumber, SelfPosition, DisplayOutside, DisplayInside, DisplayInternal, DisplayLegacy, LineStyle, ContentDistribution, ContentPosition} from 'csstype';
 
 // We're temporarily creating these types from csstype
 // to improve type completion until we move to csstype v3.
