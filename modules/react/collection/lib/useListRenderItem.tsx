@@ -14,7 +14,7 @@ export function useListRenderItems<T>(
         ? model.state.UNSTABLE_virtual.virtualItems.map(virtual => {
             const item = model.state.items[virtual.index];
             const child = children(item.value, virtual.index);
-            return React.cloneElement(child, {
+            return React.cloneElement(child as React.ReactElement, {
               // We call this `virtual` instead of `virtualItem` to avoid a React render warning
               // about capital letters in attributes. React thinks this will be applied to the DOM
               // element even though we remove it later...
@@ -24,7 +24,10 @@ export function useListRenderItems<T>(
             });
           })
         : model.state.items.map(item =>
-            React.cloneElement(children(item.value, item.index), {key: item.id, item: item.value})
+            React.cloneElement(children(item.value, item.index) as React.ReactElement, {
+              key: item.id,
+              item: item.value,
+            })
           )
       : null;
 

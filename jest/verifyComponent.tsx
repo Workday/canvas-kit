@@ -18,11 +18,11 @@ import {render, fireEvent} from '@testing-library/react';
  * })
  */
 export function verifyComponent(
-  Component: React.ComponentType<any>,
+  Component: React.ComponentType<React.PropsWithChildren<any>>,
   {modelFn, props}: {modelFn?: Function; props: object}
 ) {
   describe('verifyComponent', () => {
-    const Test = React.forwardRef(({...elemProps}: {as?: React.ReactType}, ref) => {
+    const Test = React.forwardRef(({...elemProps}: {as?: React.ElementType}, ref) => {
       const model = modelFn?.() || null;
 
       return <Component model={model} ref={ref} {...props} {...elemProps} />;
