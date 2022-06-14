@@ -5,7 +5,7 @@ import {Box, BoxProps} from './Box';
 
 import {flex, FlexStyleProps} from './utils/flex';
 
-export type FlexProps = BoxProps & FlexStyleProps;
+export type FlexProps = Omit<BoxProps, 'display'> & FlexStyleProps;
 
 const StyledFlex = styled(Box)<StyledType & FlexProps>(
   {
