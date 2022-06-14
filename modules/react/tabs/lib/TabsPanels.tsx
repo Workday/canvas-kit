@@ -5,11 +5,11 @@ import {useListRenderItems} from '@workday/canvas-kit-react/collection';
 
 import {useTabsModel} from './useTabsModel';
 
-export interface TabsPanelsProps<T = unknown> {
+export interface TabsPanelsProps {
   /**
    *
    */
-  children: ((item: T) => React.ReactNode) | React.ReactNode;
+  children: ((item: any) => React.ReactNode) | React.ReactNode;
 }
 
 export const TabsPanels = createSubcomponent()({

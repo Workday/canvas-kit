@@ -14,7 +14,7 @@ import styled from '@emotion/styled';
 import {Box, BoxProps} from '@workday/canvas-kit-react/layout';
 import {useModalModel} from './hooks';
 
-export interface ModalOverlayProps extends BoxProps {
+export interface ModalOverlayProps extends Omit<BoxProps, 'children'> {
   children: React.ReactNode;
 }
 
@@ -86,6 +86,7 @@ const OpenModalOverlay = createSubcomponent('div')({
   displayName: 'Modal.OpenOverlay',
   modelHook: useModalModel,
   elemPropsHook: useModalOverlay,
+  /* @ts-ignore */
 })<ModalOverlayProps>((elemProps: ModalOverlayProps, Element, model) => {
   const windowSize = useWindowSize();
 

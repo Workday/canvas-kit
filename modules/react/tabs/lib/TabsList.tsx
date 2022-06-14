@@ -17,7 +17,7 @@ import {
 import {useTabsModel} from './useTabsModel';
 
 // Use `Partial` here to make `spacing` optional
-export interface TabListProps<T = unknown> extends Partial<ExtractProps<typeof Stack, never>> {
+export interface TabListProps extends Omit<Partial<ExtractProps<typeof Stack, never>>, 'children'> {
   /**
    * If items are passed to a `TabsModel`, the child of `Tabs.List` should be a render prop. The
    * List will determine how and when the item will be rendered.
@@ -27,7 +27,7 @@ export interface TabListProps<T = unknown> extends Partial<ExtractProps<typeof S
    *   {(item) => <Tabs.Item>{item.text}</Tabs.Item>}
    * </Tabs.List>
    */
-  children: ((item: T) => React.ReactNode) | React.ReactNode;
+  children: ((item: any) => React.ReactNode) | React.ReactNode;
   overflowButton?: React.ReactNode;
 }
 
@@ -44,6 +44,7 @@ export const TabsList = createSubcomponent('div')({
   modelHook: useTabsModel,
   elemPropsHook: useTabsList,
 })<TabListProps>(({children, overflowButton, ...elemProps}, Element, model) => {
+  const renderedListItems = useListRenderItems(model, children) as React.ReactNode[];
   return (
     <Stack
       as={Element}
@@ -53,7 +54,7 @@ export const TabsList = createSubcomponent('div')({
       spacing="xxxs"
       {...elemProps}
     >
-      {useListRenderItems(model, children)}
+      {renderedListItems}
       {overflowButton}
     </Stack>
   );

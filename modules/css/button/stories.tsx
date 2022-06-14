@@ -1,7 +1,7 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import {css, jsx} from '@emotion/react';
-import {Component} from 'react';
+import React, {Component} from 'react';
 import {storiesOf} from '@storybook/react';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {activityStreamIcon} from '@workday/canvas-system-icons-web';
@@ -30,7 +30,7 @@ const spaceButton = css({
   },
 });
 
-class IconDemo extends Component {
+class IconDemo extends Component<React.PropsWithChildren<any>> {
   componentDidMount() {
     initializeIcons();
   }

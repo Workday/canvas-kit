@@ -16,11 +16,11 @@ import {
 } from '@workday/canvas-kit-react/collection';
 
 import {useActionBarModel} from './useActionBarModel';
-import {ActionBar} from './ActionBar';
+import {ActionBar, ActionModelItem} from './ActionBar';
 
 // Use `Partial` here to make `spacing` optional
 export interface ActionBarListProps<T = unknown>
-  extends Partial<ExtractProps<typeof HStack, never>> {
+  extends Omit<Partial<ExtractProps<typeof HStack, never>>, 'children'> {
   /**
    * If items are passed to a `ActionBarModel`, the child of `ActionBar.List` should be a render prop. The
    * List will determine how and when the item will be rendered.
@@ -30,7 +30,7 @@ export interface ActionBarListProps<T = unknown>
    *   {(item) => <ActionBar.Item key={item.id} name={item.name}>{item.text}</ActionBar.Item>}
    * </ActionBar.List>
    */
-  children: ((item: T) => React.ReactNode) | React.ReactNode;
+  children: ((item: T, index: number) => React.ReactElement) | React.ReactNode;
 }
 
 const ResponsiveHStack = styled(HStack)<ActionBarListProps & StyledType>(({theme}) => ({
@@ -48,7 +48,9 @@ export const ActionBarList = createSubcomponent('div')({
   displayName: 'ActionBar.List',
   modelHook: useActionBarModel,
   elemPropsHook: useActionBarList,
-})<ActionBarListProps>(({children, ...elemProps}, Element, model) => {
+})<ActionBarListProps<ActionModelItem>>(({children, ...elemProps}, Element, model) => {
+  const renderedItems = useListRenderItems(model, children) as React.ReactNode;
+
   return (
     <ResponsiveHStack
       as={Element}
@@ -63,7 +65,7 @@ export const ActionBarList = createSubcomponent('div')({
       right={0}
       {...elemProps}
     >
-      {useListRenderItems(model, children)}
+      {renderedItems}
       <ActionBar.OverflowButton />
     </ResponsiveHStack>
   );

@@ -3,13 +3,8 @@ import {StaticStates} from '@workday/canvas-kit-react/common';
 import {ComponentStatesTable} from '@workday/canvas-kit-labs-react/common';
 import {withSnapshotsEnabled} from '../../../../../utils/storybook';
 import {colors, space, spaceNumbers} from '@workday/canvas-kit-react/tokens';
-import {ActionBar, useActionBarModel} from '@workday/canvas-kit-react/action-bar';
+import {ActionBar, useActionBarModel, ActionModelItem} from '@workday/canvas-kit-react/action-bar';
 import {PrimaryButton, SecondaryButton} from '@workday/canvas-kit-react/button';
-
-type MyActionItem = {
-  id: string;
-  text: React.ReactNode;
-};
 
 export default withSnapshotsEnabled({
   title: 'Testing/React/Buttons/ActionBar',
@@ -49,7 +44,7 @@ export const ActionBarStates = () => (
 );
 
 export const ActionBarWithOverflowMenuStates = () => {
-  const [items] = React.useState<MyActionItem[]>([
+  const [items] = React.useState<ActionModelItem[]>([
     {id: 'first', text: 'First Action'},
     {id: 'second', text: 'Second Action'},
     {id: 'third', text: 'Third Action'},
@@ -69,7 +64,7 @@ export const ActionBarWithOverflowMenuStates = () => {
           <div>
             <ActionBar model={model}>
               <ActionBar.List {...props} position="relative">
-                {(item: MyActionItem, index: number) => (
+                {(item: ActionModelItem, index: number) => (
                   <ActionBar.Item as={index === 0 ? PrimaryButton : undefined}>
                     {item.text}
                   </ActionBar.Item>
@@ -78,7 +73,9 @@ export const ActionBarWithOverflowMenuStates = () => {
               <ActionBar.Menu.Popper>
                 <ActionBar.Menu.Card maxWidth={300} maxHeight={200}>
                   <ActionBar.Menu.List>
-                    {(item: MyActionItem) => <ActionBar.Menu.Item>{item.text}</ActionBar.Menu.Item>}
+                    {(item: ActionModelItem) => (
+                      <ActionBar.Menu.Item>{item.text}</ActionBar.Menu.Item>
+                    )}
                   </ActionBar.Menu.List>
                 </ActionBar.Menu.Card>
               </ActionBar.Menu.Popper>

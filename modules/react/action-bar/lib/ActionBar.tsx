@@ -5,6 +5,12 @@ import {useActionBarModel} from './useActionBarModel';
 import {ActionBarList} from './ActionBarList';
 import {ActionBarOverflowButton} from './ActionBarOverflowButton';
 import {ActionBarItem} from './ActionBarItem';
+import {ButtonContainerProps} from '@workday/canvas-kit-react/button';
+
+export interface ActionModelItem extends ButtonContainerProps {
+  id: string;
+  text: React.ReactNode;
+}
 
 export interface ActionBarProps {
   /**

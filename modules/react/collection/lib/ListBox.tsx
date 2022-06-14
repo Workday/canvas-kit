@@ -10,7 +10,7 @@ import {useListModel} from './useListModel';
 import {useListRenderItems} from './useListRenderItem';
 import {useListItemRegister} from './useListItemRegister';
 
-export interface ListBoxProps extends BoxProps {
+export interface ListBoxProps extends Omit<BoxProps, 'children'> {
   children?: React.ReactNode | ((item: any) => React.ReactNode);
 }
 
@@ -53,6 +53,7 @@ export const ListBox = createContainer('ul')({
   },
 })<ListBoxProps>(({height, maxHeight, ...elemProps}, Element, model) => {
   // TODO figure out what style props should go to which `Box`
+  const renderedItems = useListRenderItems(model, elemProps.children) as React.ReactNode;
   return (
     <Box
       ref={model.state.containerRef}
@@ -63,7 +64,7 @@ export const ListBox = createContainer('ul')({
       overflowY={model.state.orientation === 'vertical' ? 'auto' : undefined}
     >
       <Box as={Element} {...elemProps}>
-        {useListRenderItems(model, elemProps.children)}
+        {renderedItems}
       </Box>
     </Box>
   );
