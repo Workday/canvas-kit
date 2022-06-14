@@ -135,7 +135,7 @@ const optionIdPart = `option`;
 export const getOptionId = (baseId?: string, index?: number) =>
   `${baseId}-${optionIdPart}-${index}`;
 
-export const getTextFromElement = (children?: React.ReactNode) => {
+export const getTextFromElement = (children?: React.ReactNode | {}) => {
   let text = '';
   React.Children.map(children, child => {
     if (child == null || typeof child === 'boolean' || child === {}) {
