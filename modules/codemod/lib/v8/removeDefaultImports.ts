@@ -48,12 +48,9 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
     const parent = nodePath.parent as ASTPath<ImportDeclaration>;
     const importSource = String(parent.node.source.value) as keyof typeof renameDefaultMap;
     const localName = nodePath.value.local?.name;
-    console.log(localName);
+
     if (Object.keys(renameDefaultMap).includes(importSource) && localName) {
-      console.log('in here');
-      console.log(nodePath); //
       nodePath.replace(j.importSpecifier(j.identifier(localName)));
-      console.log(nodePath);
     }
   });
 
