@@ -4650,7 +4650,7 @@
   dependencies:
     "@workday/design-assets-types" "0.2.8"
 
-"@workday/design-assets-types@0.2.8", "@workday/design-assets-types@^0.2.4":
+"@workday/design-assets-types@0.2.8", "@workday/design-assets-types@^0.2.8":
   version "0.2.8"
   resolved "https://registry.yarnpkg.com/@workday/design-assets-types/-/design-assets-types-0.2.8.tgz#54026b4e6ea79861b12837a7deb83db9a16caad4"
   integrity sha512-5rYCg67W43ueng4KgRC69ZKbzl7EfO8Y3uSbs+pYJO3Qbb65yRF841Fz9SZTyuHrDpEiFMAI9s1laqLG56Bb1w==
