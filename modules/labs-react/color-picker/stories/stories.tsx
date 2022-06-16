@@ -3,6 +3,8 @@ import React from 'react';
 
 import {ColorPicker, useColorPickerModel} from '@workday/canvas-kit-labs-react/color-picker';
 import {colors} from '@workday/canvas-kit-react/tokens';
+import {ListBox} from '@workday/canvas-kit-react/collection';
+import {Flex} from '@workday/canvas-kit-react/layout';
 
 export default {
   title: 'Labs/Color Picker/React',
@@ -70,20 +72,26 @@ const defaultColorSet = [
 ];
 
 export const Default = () => {
-  const model = useColorPickerModel({items: defaultColorSet});
-  console.warn(model.state.columnCount);
+  const model = useColorPickerModel({
+    items: defaultColorSet,
+    columnCount: 8,
+    shouldVirtualize: false,
+  });
+
   return (
     <>
       <ColorPicker model={model}>
-        <ColorPicker.SwatchBook style={{marginBottom: '20px'}}>
-          {(color: any) => {
-            return (
-              <ColorPicker.SwatchButton color={color.id} onClick={() => console.log(color.id)} />
-            );
-          }}
+        <ColorPicker.SwatchBook marginBottom="m">
+          {item => (
+            <ColorPicker.SwatchButton
+              onClick={() => console.warn(item.id)}
+              color={item.id}
+            ></ColorPicker.SwatchButton>
+          )}
         </ColorPicker.SwatchBook>
       </ColorPicker>
       <ColorPicker>
+        Selected Color:
         <ColorPicker.Swatch showCheck={false} color={model.state.selectedIds[0]} />
       </ColorPicker>
     </>

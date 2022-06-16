@@ -77,20 +77,18 @@
 // };
 
 import {createModelHook} from '@workday/canvas-kit-react/common';
-import {useListModel} from '@workday/canvas-kit-react/collection';
+import {useGridModel} from './useGridModel';
 import React from 'react';
-import {useMenuModel} from '@workday/canvas-kit-react/menu';
 
 export const useColorPickerModel = createModelHook({
   defaultConfig: {
-    ...useListModel.defaultConfig,
+    ...useGridModel.defaultConfig,
     initialColor: '',
     columnCount: 8,
     id: '',
-    // menuConfig: {} as Partial<typeof useMenuModel.defaultConfig>,
   },
   requiredConfig: {
-    ...useListModel.requiredConfig,
+    // ...useGridModel.requiredConfig,
   },
 })(config => {
   const [color, setColor] = React.useState(config.initialColor || '');
@@ -100,9 +98,11 @@ export const useColorPickerModel = createModelHook({
   // const initialSelectedRef = React.useRef(config.initialTab);
   // const getId = config.getId || defaultGetId;
 
-  // const items = config.items;
-
-  const model = useListModel(useListModel.mergeConfig(config, {shouldVirtualize: false}));
+  const model = useGridModel({
+    columnCount: config.columnCount,
+    items: config.items,
+    shouldVirtualize: false,
+  });
 
   const state = {
     ...model.state,
@@ -120,27 +120,9 @@ export const useColorPickerModel = createModelHook({
     },
   };
 
-  // const menu = useMenuModel(
-  //   useMenuModel.mergeConfig(config.menuConfig as Required<typeof config.menuConfig>, {
-  //     id: `menu-${model.state.id}`,
-  //     items: config.items,
-
-  //     // nonInteractiveIds: state.nonInteractiveIds.filter(key => !state.hiddenIds.includes(key)),
-  //     // onSelect(data) {
-  //     //   menu.events.hide();
-  //     //   events.select(data);
-  //     // },
-  //     // onShow() {
-  //     //   // Always select the first item when the menu is opened
-  //     //   menu.events.goToFirst();
-  //     // },
-  //   })
-  // );
-
   return {
     ...model,
     state,
     events,
-    // menu,
   };
 });

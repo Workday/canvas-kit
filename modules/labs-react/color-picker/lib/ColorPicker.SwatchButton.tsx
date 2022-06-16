@@ -7,7 +7,6 @@ import {
   StyledType,
   pickForegroundColor,
   composeHooks,
-  createHook,
   createSubcomponent,
   createElemPropsHook,
 } from '@workday/canvas-kit-react/common';
@@ -22,10 +21,7 @@ import {
   useListItemSelect,
   isSelected,
 } from '@workday/canvas-kit-react/collection';
-// import {useListRegisterItem} from '@workday/canvas-kit-react/collection';
 import {useColorPickerModel} from './useColorPickerModel';
-import {useSelectionListModel} from '@workday/canvas-kit-react/collection/lib/useSelectionListModel';
-import {Flex} from '@workday/canvas-kit-react/layout';
 
 export interface SwatchButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   /**
@@ -97,24 +93,13 @@ const SwatchButtonContainer = styled('button')<{color: string; showCheck: boolea
   })
 );
 
-// export const useSwatchesItem = createElemPropsHook(useSelectionListModel)(({state}) => {
-//   const selected = !!state.name && isSelected(name, state);
-
-//   return {
-//     type: 'button' as 'button', // keep Typescript happy
-//     role: 'tab',
-//     'aria-selected': selected,
-//     'aria-controls': `tabpanel-${state.id}-${name}`,
-//   };
-// });
-
 export const useSwatchesItem = composeHooks(
   createElemPropsHook(useColorPickerModel)(
     ({state}, _?: React.Ref<HTMLButtonElement>, elemProps: {'data-id'?: string} = {}) => {
       const name = elemProps['data-id'] || '';
 
       const selected = !!elemProps['data-id'] && isSelected(name, state);
-      console.warn(elemProps);
+
       return {
         type: 'button' as 'button', // keep Typescript happy
         role: 'tab',
@@ -131,18 +116,15 @@ export const useSwatchesItem = composeHooks(
 export default createSubcomponent('button')({
   displayName: 'SwatchButton',
   modelHook: useColorPickerModel,
-  // elemPropsHook: useSwatchesItem,
+  elemPropsHook: useSwatchesItem,
 })<SwatchButtonProps>(({color, showCheck = false, ...elemProps}, Element, model) => {
-  const props = useSwatchesItem(model, elemProps, elemProps.ref);
-
   return (
     <SwatchButtonContainer
-      as="button"
       color={color}
-      // as={Element}
+      as={Element}
       showCheck={showCheck || model.state.color === color}
       style={{boxShadow: model.state.cursorId === color ? accessibilityBorder : undefined}}
-      {...props}
+      {...elemProps}
     >
       {showCheck || elemProps['aria-selected'] ? (
         <SystemIcon
