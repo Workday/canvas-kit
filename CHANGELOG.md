@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v7.0.9](https://github.com/Workday/canvas-kit/releases/tag/v7.0.9) (2022-06-16)
+
+### Documentation
+
+- fix: Update remaining Emotion 11 imports ([#1638](https://github.com/Workday/canvas-kit/pull/1638)) ([@willklein](https://github.com/willklein))
+  Updated documentation for `@workday/canvas-kit-react-fonts` to correctly import utilities from Emotion 11 rather than Emotion 10.
+
+
 ## [v7.0.8](https://github.com/Workday/canvas-kit/releases/tag/v7.0.8) (2022-06-08)
 
 ### Documentation
