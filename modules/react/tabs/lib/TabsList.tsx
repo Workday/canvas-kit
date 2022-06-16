@@ -44,7 +44,6 @@ export const TabsList = createSubcomponent('div')({
   modelHook: useTabsModel,
   elemPropsHook: useTabsList,
 })<TabListProps>(({children, overflowButton, ...elemProps}, Element, model) => {
-  const renderedListItems = useListRenderItems(model, children) as React.ReactNode[];
   return (
     <Stack
       as={Element}
@@ -54,7 +53,7 @@ export const TabsList = createSubcomponent('div')({
       spacing="xxxs"
       {...elemProps}
     >
-      {renderedListItems}
+      {useListRenderItems(model, children)}
       {overflowButton}
     </Stack>
   );

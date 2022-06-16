@@ -7,7 +7,7 @@ import {useBaseListModel} from './useBaseListModel';
 export function useListRenderItems<T>(
   model: ReturnType<typeof useBaseListModel>,
   children: ((item: Generic, index: number) => React.ReactNode) | React.ReactNode
-) {
+): React.ReactNode {
   const items =
     typeof children === 'function'
       ? model.state.isVirtualized
@@ -31,5 +31,5 @@ export function useListRenderItems<T>(
           )
       : null;
 
-  return items || children;
+  return items || (children as React.ReactNode);
 }

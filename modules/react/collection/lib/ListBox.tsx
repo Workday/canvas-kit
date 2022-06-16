@@ -53,7 +53,6 @@ export const ListBox = createContainer('ul')({
   },
 })<ListBoxProps>(({height, maxHeight, ...elemProps}, Element, model) => {
   // TODO figure out what style props should go to which `Box`
-  const renderedItems = useListRenderItems(model, elemProps.children) as React.ReactNode;
   return (
     <Box
       ref={model.state.containerRef}
@@ -64,7 +63,7 @@ export const ListBox = createContainer('ul')({
       overflowY={model.state.orientation === 'vertical' ? 'auto' : undefined}
     >
       <Box as={Element} {...elemProps}>
-        {renderedItems}
+        {useListRenderItems(model, elemProps.children)}
       </Box>
     </Box>
   );

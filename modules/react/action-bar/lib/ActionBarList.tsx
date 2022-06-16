@@ -49,8 +49,6 @@ export const ActionBarList = createSubcomponent('div')({
   modelHook: useActionBarModel,
   elemPropsHook: useActionBarList,
 })<ActionBarListProps<ActionModelItem>>(({children, ...elemProps}, Element, model) => {
-  const renderedItems = useListRenderItems(model, children) as React.ReactNode;
-
   return (
     <ResponsiveHStack
       as={Element}
@@ -65,7 +63,7 @@ export const ActionBarList = createSubcomponent('div')({
       right={0}
       {...elemProps}
     >
-      {renderedItems}
+      {useListRenderItems(model, children)}
       <ActionBar.OverflowButton />
     </ResponsiveHStack>
   );
