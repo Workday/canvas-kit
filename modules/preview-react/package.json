@@ -10,7 +10,8 @@
   "types": "dist/es6/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "http://github.com/Workday/canvas-kit/tree/master/modules/canvas-kit-preview-react"
+    "url": "https://github.com/workday/canvas-kit.git",
+    "directory": "modules/preview-react"
   },
   "files": [
     "*/package.json",

@@ -13,7 +13,8 @@
   "main": "dist/canvas-kit-css.min.css",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Workday/canvas-kit/tree/master/modules/canvas-kit-css"
+    "url": "https://github.com/workday/canvas-kit.git",
+    "directory": "modules/css"
   },
   "dependencies": {
     "@workday/canvas-kit-css-action-bar": "^7.0.10",
