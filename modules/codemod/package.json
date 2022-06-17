@@ -10,8 +10,8 @@
     "canvas-kit-codemod": "index.js"
   },
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/workday/canvas-kit.git",
+    "type": "git",
+    "url": "https://github.com/workday/canvas-kit.git",
     "directory": "modules/codemod"
   },
   "files": [
