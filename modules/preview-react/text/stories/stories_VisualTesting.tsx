@@ -103,7 +103,7 @@ export const TextStates = () => (
   </StaticStates>
 );
 
-export const TitleStates = () => (
+export const TypeTitleLevelStates = () => (
   <StaticStates>
     <ComponentStatesTable
       rowProps={[
@@ -123,7 +123,7 @@ export const TitleStates = () => (
   </StaticStates>
 );
 
-export const HeadingStates = () => (
+export const TypeHeadingLevelStates = () => (
   <StaticStates>
     <ComponentStatesTable
       rowProps={[
@@ -143,7 +143,7 @@ export const HeadingStates = () => (
   </StaticStates>
 );
 
-export const SubtextStates = () => (
+export const TypeSubtextLevelStates = () => (
   <StaticStates>
     <ComponentStatesTable
       rowProps={[
