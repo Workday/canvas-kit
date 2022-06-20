@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v7.0.12](https://github.com/Workday/canvas-kit/releases/tag/v7.0.12) (2022-06-20)
+
+### Documentation
+
+- chore: Update repository fields for NPM ([#1642](https://github.com/Workday/canvas-kit/pull/1642)) ([@willklein](https://github.com/willklein))
+
+
 ## [v7.0.11](https://github.com/Workday/canvas-kit/releases/tag/v7.0.11) (2022-06-20)
 
 ### Dependencies
