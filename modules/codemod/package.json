@@ -11,7 +11,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Workday/canvas-kit.git"
+    "url": "https://github.com/workday/canvas-kit.git",
+    "directory": "modules/codemod"
   },
   "files": [
     "dist/",
