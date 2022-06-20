@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v7.0.11](https://github.com/Workday/canvas-kit/releases/tag/v7.0.11) (2022-06-20)
+
+### Dependencies
+
+- fix: Update yarn.lock dependencies for icons and TypeScript ([#1640](https://github.com/Workday/canvas-kit/pull/1640)) ([@willklein](https://github.com/willklein))
+
+### Documentation
+
+- docs: Update SidePanel right origin story ([#1644](https://github.com/Workday/canvas-kit/pull/1644)) ([@willklein](https://github.com/willklein))
+
+
 ## [v7.0.10](https://github.com/Workday/canvas-kit/releases/tag/v7.0.10) (2022-06-16)
 
 ### Dependencies

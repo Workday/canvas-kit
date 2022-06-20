@@ -4619,17 +4619,17 @@
     "@webassemblyjs/wast-parser" "1.9.0"
     "@xtuc/long" "4.2.2"
 
-"@workday/canvas-accent-icons-web@^1.0.0":
-  version "1.0.26"
-  resolved "https://registry.yarnpkg.com/@workday/canvas-accent-icons-web/-/canvas-accent-icons-web-1.0.26.tgz#e4aa2c96cd0d646c2913b1ff53c706673a96e8eb"
-  integrity sha512-awhBmgLuLnvJ6wJsaKWTx5iDQShlges1cF8w5p6S6ogqCRtGJG/0QznQ35K954ImEDGnQ82ScGRUMONiDZAAWw==
+"@workday/canvas-accent-icons-web@^3.0.0":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@workday/canvas-accent-icons-web/-/canvas-accent-icons-web-3.0.1.tgz#5fd7b750436f6d85fa34b379b4f3334f0de7fe7a"
+  integrity sha512-rZ5PptOhAlzQHvppg331nW7NG2Np/TLMGgTyt2MeaeS4RzC37IMPapLAhPYlg+W40p+/s1DjRo2CN4Q9y8TIGw==
   dependencies:
     "@workday/design-assets-types" "0.2.8"
 
-"@workday/canvas-applet-icons-web@^0.17.50":
-  version "0.17.83"
-  resolved "https://registry.yarnpkg.com/@workday/canvas-applet-icons-web/-/canvas-applet-icons-web-0.17.83.tgz#4879c23f0316b0eba610c84a3afb85746c45914e"
-  integrity sha512-h3FfPTQagBTvGB7wAx2S2BhewJI9Sbixj+UzO+QoncfhO699vbGJcVxAha3pJWYW89vBwLZ4jF3uopQBuH26Kg==
+"@workday/canvas-applet-icons-web@^2.0.0":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@workday/canvas-applet-icons-web/-/canvas-applet-icons-web-2.0.1.tgz#4e47e11dd0aa301a7736847d0db798b20096fb24"
+  integrity sha512-4RiCySs4HefJkqFFSNwskwWshV3Hfbld3U0mU//GFO2oYbQ4lM+Jxxkn83YWObb57e4QgsJoZ/CaLvyQ6dFCcQ==
   dependencies:
     "@workday/design-assets-types" "0.2.8"
 
@@ -4643,10 +4643,10 @@
   resolved "https://registry.yarnpkg.com/@workday/canvas-depth-web/-/canvas-depth-web-0.16.4.tgz#3714a1a955055386a2b70cc05852162b1e056bf2"
   integrity sha512-l4LpCUk2G1FVRfo0Z+MkCWa9bzNIfWdUqGtdXaFSBySYgYvLhG6vNNuTK1VXls8jQdFCUROhKRWcy3Ht1n7NDg==
 
-"@workday/canvas-system-icons-web@1.0.41":
-  version "1.0.41"
-  resolved "https://registry.yarnpkg.com/@workday/canvas-system-icons-web/-/canvas-system-icons-web-1.0.41.tgz#ad764e1ba24e5d932270617c1515de6386386a92"
-  integrity sha512-XRvESwir+jHCbuJrCO1Sflws2bMggy1vFDBnDBX4N4l7ykmDsFSLMtj8iiPovEErSpIlHxxpMIZiTt+W+/9lWQ==
+"@workday/canvas-system-icons-web@^3.0.0":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@workday/canvas-system-icons-web/-/canvas-system-icons-web-3.0.1.tgz#9b46d65427dd5d07745b369f1b77ddcb5f5bb7bb"
+  integrity sha512-lN+3HJmO4NwBomDKhn+H85nPHMXqT3H7dlzbTcfkPU7dedlMhpmzgiY5QKmM7OWoM3Vdg9vwPwi5f/9ZfMX/4A==
   dependencies:
     "@workday/design-assets-types" "0.2.8"
 
@@ -17384,11 +17384,6 @@ typescript@4.1:
   version "4.1.6"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.1.6.tgz#1becd85d77567c3c741172339e93ce2e69932138"
   integrity sha512-pxnwLxeb/Z5SP80JDRzVjh58KsM6jZHRAOtTpS7sXLS4ogXNKC9ANxHHZqLLeVHZN35jCtI4JdmLLbLiC1kBow==
-
-typescript@^3.8.3:
-  version "3.8.3"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.8.3.tgz#409eb8544ea0335711205869ec458ab109ee1061"
-  integrity sha512-MYlEfn5VrLNsgudQTVJeNaQFUAI7DkhnOjdpAp4T+ku1TfQClewlbSuTVHiA+8skNBgaf02TL/kLOvig4y3G8w==
 
 uglify-js@^3.1.4:
   version "3.7.3"
