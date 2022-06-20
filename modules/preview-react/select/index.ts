@@ -1,6 +1,4 @@
-import {Select} from './lib/Select';
 
-export {Select};
 export * from './lib/Select';
 
 export {

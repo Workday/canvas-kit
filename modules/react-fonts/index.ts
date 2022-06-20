@@ -1,3 +1,2 @@
-import {fonts} from './lib/fonts';
+export * from './lib/fonts';
 
-export {fonts};
