@@ -5,6 +5,6 @@ import {Text, TypeLevelTextProps} from '@workday/canvas-kit-preview-react/text';
 export const TypeBodyLevel = createComponent('p')({
   displayName: 'TypeBodyLevel',
   Component: (elemProps: TypeLevelTextProps, ref, Element) => (
-    <Text ref={ref} as={Element} level="body" {...elemProps} />
+    <Text ref={ref} as={Element} {...elemProps} level="body" />
   ),
 });

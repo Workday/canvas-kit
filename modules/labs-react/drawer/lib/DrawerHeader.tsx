@@ -77,11 +77,11 @@ export default class DrawerHeader extends React.Component<DrawerHeaderProps, {}>
       <HeaderContainer borderColor={borderColor} {...elemProps} headerColor={headerColor}>
         <TypeBodyLevel
           as="h4"
-          title={title}
           size="small"
+          title={title}
           fontWeight="bold"
           color={inverse ? 'inverse' : typeColors.heading}
-          paddingRight="xxxxs"
+          paddingRight="xxxs"
           isTruncated
         >
           {title}

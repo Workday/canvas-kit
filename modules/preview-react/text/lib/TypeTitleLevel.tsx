@@ -5,6 +5,6 @@ import {Text, TypeLevelTextProps} from '@workday/canvas-kit-preview-react/text';
 export const TypeTitleLevel = createComponent('h1')({
   displayName: 'TypeTitleLevel',
   Component: (elemProps: TypeLevelTextProps, ref, Element) => (
-    <Text ref={ref} as={Element} level="title" {...elemProps} />
+    <Text ref={ref} as={Element} {...elemProps} level="title" />
   ),
 });

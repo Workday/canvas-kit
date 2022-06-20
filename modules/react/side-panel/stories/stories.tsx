@@ -164,7 +164,7 @@ class SidePanelWrapper extends React.Component<SidePanelProps, SidePanelState> {
               <SystemIcon icon={homeIcon} />
             </span>
             {open && (
-              <TypeBodyLevel as="span" fontWeight="bold" size="small" paddingLeft={24}>
+              <TypeBodyLevel as="span" size="small" fontWeight="bold" paddingLeft={24}>
                 Home
               </TypeBodyLevel>
             )}
@@ -179,7 +179,7 @@ class SidePanelWrapper extends React.Component<SidePanelProps, SidePanelState> {
               <SystemIcon icon={starIcon} />
             </span>
             {open && (
-              <TypeBodyLevel as="span" fontWeight="bold" size="small" paddingLeft={24}>
+              <TypeBodyLevel as="span" size="small" fontWeight="bold" paddingLeft={24}>
                 Favorites
               </TypeBodyLevel>
             )}
@@ -194,7 +194,7 @@ class SidePanelWrapper extends React.Component<SidePanelProps, SidePanelState> {
               <SystemIcon icon={rocketIcon} />
             </span>
             {open && (
-              <TypeBodyLevel as="span" fontWeight="bold" size="small" paddingLeft={24}>
+              <TypeBodyLevel as="span" size="small" fontWeight="bold" paddingLeft={24}>
                 Items
               </TypeBodyLevel>
             )}

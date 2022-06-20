@@ -26,14 +26,8 @@ export interface BannerProps extends ExtractProps<typeof Flex, never> {
   children?: React.ReactNode;
 }
 
-// Remove color from our type since it is set on the Flex style attribute
-const {color: _color, ...typeLevelsSubtextLarge} = type.levels.subtext.large;
-
 const styles: CSSProperties = {
-  ...typeLevelsSubtextLarge,
   cursor: 'pointer',
-  fontWeight: type.properties.fontWeights.medium,
-  textAlign: 'left',
   transition: 'background-color 120ms',
   '&:focus': {
     outline: 'none',

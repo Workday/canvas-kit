@@ -14,7 +14,7 @@ import {
 import {Box, Flex} from '@workday/canvas-kit-react/layout';
 
 import {Skeleton} from '@workday/canvas-kit-react/skeleton';
-import {borderRadius, space, type} from '@workday/canvas-kit-react/tokens';
+import {borderRadius, space} from '@workday/canvas-kit-react/tokens';
 import {patternIcon} from '@workday/canvas-system-icons-web';
 import {StyledType} from '@workday/canvas-kit-react/common';
 import {TypeHeadingLevel} from '@workday/canvas-kit-preview-react/text';
@@ -84,7 +84,7 @@ export const Simulation = () => {
               <Box>
                 <Flex alignItems="center" display="inline-flex" marginBottom="s">
                   <SystemIconCircle icon={patternIcon} />
-                  <TypeHeadingLevel size="small" margin={`0 0 0 ${space.xxs}`}>
+                  <TypeHeadingLevel as="h3" size="small" margin={`0 0 0 ${space.xxs}`}>
                     Patterns
                   </TypeHeadingLevel>
                 </Flex>
