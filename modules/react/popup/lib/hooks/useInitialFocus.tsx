@@ -1,8 +1,13 @@
 import React from 'react';
 
-import {changeFocus, assert, getFirstFocusableElement} from '@workday/canvas-kit-react/common';
+import {
+  changeFocus,
+  assert,
+  getFirstFocusableElement,
+  createElemPropsHook,
+} from '@workday/canvas-kit-react/common';
 
-import {PopupModel} from './usePopupModel';
+import {usePopupModel} from './usePopupModel';
 
 /**
  * Moves focus within the popup when the popup becomes visible. This is useful for keyboard and
@@ -12,7 +17,7 @@ import {PopupModel} from './usePopupModel';
  * This should be used for popups that have focusable elements inside, like Modals, non-modal
  * dialogs, menus, etc.
  */
-export const useInitialFocus = (model: PopupModel, elemProps = {}) => {
+export const useInitialFocus = createElemPropsHook(usePopupModel)(model => {
   const visible = model.state.visibility !== 'hidden';
 
   // Using `useEffect` instead of `useLayoutEffect` so that focus doesn't change _before_ PopperJS
@@ -35,5 +40,5 @@ export const useInitialFocus = (model: PopupModel, elemProps = {}) => {
     }
   }, [model.state.initialFocusRef, model.state.stackRef, visible]);
 
-  return elemProps;
-};
+  return {};
+});

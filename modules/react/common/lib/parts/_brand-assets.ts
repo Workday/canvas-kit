@@ -1,4 +1,4 @@
-const CDN_URI = '//design.workday.com/images/';
+const CDN_URI = 'https://design.workday.com/images/';
 
 export const dubLogoBlue = `<img src="${CDN_URI}ck-dub-logo-blue.svg" alt="">`;
 

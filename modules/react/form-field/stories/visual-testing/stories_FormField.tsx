@@ -1,10 +1,9 @@
 import * as React from 'react';
-import FormField from '../../lib/FormField';
 import {ComponentStatesTable, permutateProps} from '@workday/canvas-kit-labs-react/common';
 import {withSnapshotsEnabled, customColorTheme} from '../../../../../utils/storybook';
 import {StaticStates} from '@workday/canvas-kit-react/common';
-import {TextInput} from '../../../text-input';
-import {FormFieldLabelPosition} from '../../lib/types';
+import {TextInput} from '@workday/canvas-kit-react/text-input';
+import {FormFieldLabelPosition, FormField} from '@workday/canvas-kit-react/form-field';
 
 export default withSnapshotsEnabled({
   title: 'Testing/React/Inputs/Form Field',

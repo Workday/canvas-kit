@@ -10,7 +10,7 @@ import {
   useReturnFocus,
   usePopupModel,
 } from '@workday/canvas-kit-react/popup';
-import {HStack} from '@workday/canvas-kit-labs-react/layout';
+import {HStack} from '@workday/canvas-kit-react/layout';
 
 export const FocusTrap = () => {
   const model = usePopupModel();
