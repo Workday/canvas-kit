@@ -34,7 +34,6 @@ const renameDefaultMap = {
 export default function transformer(file: FileInfo, api: API, options: Options) {
   const j = api.jscodeshift;
 
-  console.log(file.source);
   const root = j(file.source);
   // Renames default imports from `renameDefaultMap` and changes them to named exports
   // Example:
