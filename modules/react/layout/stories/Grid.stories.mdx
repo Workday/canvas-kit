@@ -1,0 +1,66 @@
+import {Meta} from '@storybook/addon-docs';
+
+import {Grid} from '@workday/canvas-kit-react/layout';
+// examples
+import {GridCard} from './examples/Grid/GridCard';
+import {GridLayout} from './examples/Grid/GridLayout';
+import {Example} from './examples/Grid/Example';
+import {GridStyle} from './examples/PropTables.splitprops.tsx';
+
+<Meta title="Components/Containers/Layout/Grid" component={Grid} />
+
+# Canvas Kit Grid
+
+`Grid` is a two-dimensional layout system for the web. It lets you lay content out in rows and
+columns. [CSS Grid](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Grids).
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-react
+```
+
+## Example
+
+### Basic Example
+
+<ExampleCodeBlock code={Example} />
+
+### Rows and Columns
+
+You can nest `Grid` components to build layouts with rows and columns.
+
+<ExampleCodeBlock code={GridLayout} />
+
+### Small Containers
+
+You can also use `Grid` to create layouts within smaller containers, such as this card example
+below:
+
+<ExampleCodeBlock code={GridCard} />
+
+### Grid vs. Box
+
+`Grid` is built with `Box` and has access to all `BoxProps`. The main differences between `Box` and
+`Grid` are:
+
+- `Grid` is set to `display: grid` by default
+- The `display` prop is limited to `grid`, `inline-grid` and `subgrid`
+- `Grid` has access to grid container properties.
+
+In short, use `Grid` when you need a grid container to build layouts with CSS Grid, and use `Box`
+when you need a simple container. It's also important to note that `Grid` has no real opinion about
+how to build layouts outside of the CSS Grid spec. Its unopinonated nature allows it to be composed
+into many different components.
+
+## Grid Props
+
+As previously mentioned, `Grid` is built on top of `Box` and has access to all its props, including
+[grid container properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout/Basic_Concepts_of_Grid_Layout#the_grid_container)
+through style props as well. There are seven grid container props:
+
+<ArgsTable of={GridStyle} />
+
+<!-- ### Grid Props (Exhaustive List)
+
+<ArgsTable of={Grid} /> -->

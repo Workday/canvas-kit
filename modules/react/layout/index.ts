@@ -11,6 +11,8 @@ export * from './lib/utils/layout';
 export * from './lib/utils/position';
 export {SpaceStyleProps} from './lib/utils/space';
 export * from './lib/Flex';
+export * from './lib/Grid';
 export * from './lib/Stack';
 export type { FlexStyleProps } from './lib/utils/flex';
+export type { GridStyleProps } from './lib/utils/grid';
 export type { StackSpacing, StackDirection, StackStyleProps } from './lib/utils/stack';

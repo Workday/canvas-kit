@@ -143,6 +143,60 @@ export type PropertyJustifyContent =
   | 'right'
   | (string & {});
 
-export type PropertyFlexWrap = Globals | 'nowrap' | 'wrap' | 'wrap-reverse';
+//Grid
+export type PropertyGridTemplate = Globals | string;
 
-export type PropertyFlexDirection = Globals | 'column' | 'column-reverse' | 'row' | 'row-reverse';
+export type PropertyGridTemplateColumns = Globals | 'max-content' | 'min-content' | string;
+
+export type PropertyGridTemplateRows = Globals | 'max-content' | 'min-content' | string;
+
+export type PropertyGridGap = Globals | string;
+
+export type PropertyGridColumnsGap = Globals | string;
+
+export type PropertyGridRowGap = Globals | string;
+
+export type PropertyPlaceItems =
+  | Globals
+  | 'baseline'
+  | 'center'
+  | 'end'
+  | 'normal'
+  | 'self-start'
+  | 'self-end'
+  | 'start'
+  | 'stretch'
+  | string;
+
+export type PropertyAutoColumns = Globals | 'max-content' | 'min-content' | string;
+
+export type PropertyAutoRows = Globals | 'max-content' | 'min-content' | string;
+
+export type PropertyGridAutoFlow = Globals | 'row' | 'column' | 'dense';
+
+export type PropertyGrid = Globals | string;
+
+export type PropertyColumnStart = Globals | 'none' | 'auto' | string;
+
+export type PropertyColumnEnd = Globals | 'none' | 'auto' | string;
+
+export type PropertyRowStart = Globals | 'none' | 'auto' | string;
+
+export type PropertyRowEnd = Globals | 'none' | 'auto' | string;
+
+export type PropertyGridColumn = Globals | 'none' | 'auto' | string;
+
+export type PropertyGridRow = Globals | 'none' | 'auto' | string;
+
+export type PropertyGridArea = Globals | 'none' | 'auto' | string;
+
+export type PropertyPlaceSelf =
+  | Globals
+  | 'baseline'
+  | 'center'
+  | 'end'
+  | 'normal'
+  | 'self-start'
+  | 'self-end'
+  | 'start'
+  | 'stretch';
