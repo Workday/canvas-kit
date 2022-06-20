@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {BoxProps} from '@workday/canvas-kit-react/layout';
-import {BodyText} from '@workday/canvas-kit-preview-react/text';
+import {TypeBodyLevel} from '@workday/canvas-kit-preview-react/text';
 
 export interface CardHeadingProps extends BoxProps {
   /**
@@ -16,7 +16,7 @@ export const CardHeading = createComponent('h3')({
   displayName: 'Card.Heading',
   Component: ({children, ...elemProps}: CardHeadingProps, ref, Element) => {
     return (
-      <BodyText
+      <TypeBodyLevel
         ref={ref}
         size="large"
         fontWeight="bold"
@@ -26,7 +26,7 @@ export const CardHeading = createComponent('h3')({
         {...elemProps}
       >
         {children}
-      </BodyText>
+      </TypeBodyLevel>
     );
   },
 });

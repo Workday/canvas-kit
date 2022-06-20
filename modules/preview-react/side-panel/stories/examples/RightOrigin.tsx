@@ -6,7 +6,7 @@ import {
   SidePanelTransitionStates,
 } from '@workday/canvas-kit-preview-react/side-panel';
 import {Flex} from '@workday/canvas-kit-react/layout';
-import {BodyText} from '@workday/canvas-kit-preview-react/text';
+import {TypeBodyLevel} from '@workday/canvas-kit-preview-react/text';
 import {CanvasProvider, styled} from '@workday/canvas-kit-react/common';
 // local helper hook for setting content direction;
 import {useDirection} from './useDirection';
@@ -27,9 +27,9 @@ const RightPanel = () => {
       <SidePanel.ToggleButton {...controlProps} />
       {panelState === 'expanded' && (
         <Flex alignItems="center" justifyContent="flex-end" paddingY="s" paddingX="s">
-          <BodyText as="h3" size="large" color="licorice500" fontWeight="bold" {...labelProps}>
+          <TypeBodyLevel as="h3" size="large" color="licorice500" fontWeight="bold" {...labelProps}>
             Tasks Panel
-          </BodyText>
+          </TypeBodyLevel>
         </Flex>
       )}
     </StyledSidePanel>

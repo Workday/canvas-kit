@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled from '@emotion/styled';
 import {colors, space, CanvasColor, typeColors} from '@workday/canvas-kit-react/tokens';
 import {TertiaryButton} from '@workday/canvas-kit-react/button';
-import {BodyText} from '@workday/canvas-kit-preview-react/text';
+import {TypeBodyLevel} from '@workday/canvas-kit-preview-react/text';
 import {xIcon} from '@workday/canvas-system-icons-web';
 
 export interface DrawerHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -75,7 +75,7 @@ export default class DrawerHeader extends React.Component<DrawerHeaderProps, {}>
 
     return (
       <HeaderContainer borderColor={borderColor} {...elemProps} headerColor={headerColor}>
-        <BodyText
+        <TypeBodyLevel
           as="h4"
           title={title}
           size="small"
@@ -85,7 +85,7 @@ export default class DrawerHeader extends React.Component<DrawerHeaderProps, {}>
           isTruncated
         >
           {title}
-        </BodyText>
+        </TypeBodyLevel>
         {onClose && closeIconAriaLabel && (
           <CloseButton
             variant={inverse ? 'inverse' : undefined}

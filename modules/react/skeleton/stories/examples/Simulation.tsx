@@ -17,7 +17,7 @@ import {Skeleton} from '@workday/canvas-kit-react/skeleton';
 import {borderRadius, space, type} from '@workday/canvas-kit-react/tokens';
 import {patternIcon} from '@workday/canvas-system-icons-web';
 import {StyledType} from '@workday/canvas-kit-react/common';
-import {Heading} from '@workday/canvas-kit-preview-react/text';
+import {TypeHeadingLevel} from '@workday/canvas-kit-preview-react/text';
 
 const fadeOut = keyframes`
   from {
@@ -84,9 +84,9 @@ export const Simulation = () => {
               <Box>
                 <Flex alignItems="center" display="inline-flex" marginBottom="s">
                   <SystemIconCircle icon={patternIcon} />
-                  <Heading size="small" margin={`0 0 0 ${space.xxs}`}>
+                  <TypeHeadingLevel size="small" margin={`0 0 0 ${space.xxs}`}>
                     Patterns
-                  </Heading>
+                  </TypeHeadingLevel>
                 </Flex>
                 <p>
                   Canvas Patterns classify and document reusable solutions built to respond to

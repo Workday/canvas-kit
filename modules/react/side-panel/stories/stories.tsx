@@ -31,7 +31,7 @@ import {
 import {Flex, StackSpacing, HStackProps, HStack} from '@workday/canvas-kit-react/layout';
 import {SearchForm} from '@workday/canvas-kit-labs-react/search-form';
 import {Avatar} from '@workday/canvas-kit-react/avatar';
-import {BodyText} from '@workday/canvas-kit-preview-react/text';
+import {TypeBodyLevel} from '@workday/canvas-kit-preview-react/text';
 
 export default {
   title: 'Components/Containers/Side Panel/React',
@@ -164,9 +164,9 @@ class SidePanelWrapper extends React.Component<SidePanelProps, SidePanelState> {
               <SystemIcon icon={homeIcon} />
             </span>
             {open && (
-              <BodyText as="span" fontWeight="bold" size="small" paddingLeft={24}>
+              <TypeBodyLevel as="span" fontWeight="bold" size="small" paddingLeft={24}>
                 Home
-              </BodyText>
+              </TypeBodyLevel>
             )}
           </StyledListItem>
           <StyledListItem
@@ -179,9 +179,9 @@ class SidePanelWrapper extends React.Component<SidePanelProps, SidePanelState> {
               <SystemIcon icon={starIcon} />
             </span>
             {open && (
-              <BodyText as="span" fontWeight="bold" size="small" paddingLeft={24}>
+              <TypeBodyLevel as="span" fontWeight="bold" size="small" paddingLeft={24}>
                 Favorites
-              </BodyText>
+              </TypeBodyLevel>
             )}
           </StyledListItem>
           <StyledListItem
@@ -194,9 +194,9 @@ class SidePanelWrapper extends React.Component<SidePanelProps, SidePanelState> {
               <SystemIcon icon={rocketIcon} />
             </span>
             {open && (
-              <BodyText as="span" fontWeight="bold" size="small" paddingLeft={24}>
+              <TypeBodyLevel as="span" fontWeight="bold" size="small" paddingLeft={24}>
                 Items
-              </BodyText>
+              </TypeBodyLevel>
             )}
           </StyledListItem>
         </UnorderedList>

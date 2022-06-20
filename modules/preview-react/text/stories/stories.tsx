@@ -1,12 +1,12 @@
 import React from 'react';
 
 import {
-  Text as TextComponent,
-  BodyText,
   Label as LabelText,
-  Subtext as SubtextComponent,
-  Heading as HeadingComponent,
-  Title as TitleComponent,
+  Text as TextComponent,
+  TypeBodyLevel as BodyComponent,
+  TypeHeadingLevel as HeadingComponent,
+  TypeSubtextLevel as SubtextComponent,
+  TypeTitleLevel as TitleComponent,
 } from '@workday/canvas-kit-preview-react/text';
 // type changes no need
 import {type} from '@workday/canvas-kit-react/tokens';
@@ -37,9 +37,9 @@ export const Text = () => (
 
 export const Body = () => (
   <>
-    <BodyText size="large">Large Body Text</BodyText>
-    <BodyText size="medium">Medium Body Text</BodyText>
-    <BodyText size="small">Small Body Text</BodyText>
+    <BodyComponent size="large">Large Body Text</BodyComponent>
+    <BodyComponent size="medium">Medium Body Text</BodyComponent>
+    <BodyComponent size="small">Small Body Text</BodyComponent>
   </>
 );
 

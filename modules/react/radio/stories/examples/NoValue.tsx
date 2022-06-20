@@ -1,7 +1,7 @@
 import React from 'react';
 import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Radio, RadioGroup} from '@workday/canvas-kit-react/radio';
-import {Subtext} from '@workday/canvas-kit-preview-react/text';
+import {TypeSubtextLevel} from '@workday/canvas-kit-preview-react/text';
 
 export const NoValue = () => {
   const [value, setValue] = React.useState<string | number>(0);
@@ -20,7 +20,7 @@ export const NoValue = () => {
           <Radio label="Cauliflower" />
         </RadioGroup>
       </FormField>
-      <Subtext size="large">Value: {value}</Subtext>
+      <TypeSubtextLevel size="large">Value: {value}</TypeSubtextLevel>
     </>
   );
 };

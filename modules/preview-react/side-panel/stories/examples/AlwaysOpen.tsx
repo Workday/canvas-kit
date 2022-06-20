@@ -5,7 +5,7 @@ import {AccentIcon} from '@workday/canvas-kit-react/icon';
 import {rocketIcon} from '@workday/canvas-accent-icons-web';
 import {SidePanel, useSidePanel} from '@workday/canvas-kit-preview-react/side-panel';
 import {Flex, HStack} from '@workday/canvas-kit-react/layout';
-import {BodyText} from '@workday/canvas-kit-preview-react/text';
+import {TypeBodyLevel} from '@workday/canvas-kit-preview-react/text';
 
 const StyledAccentIcon = styled(AccentIcon)({
   marginRight: space.s,
@@ -19,9 +19,9 @@ export const AlwaysOpen = () => {
       <SidePanel {...panelProps}>
         <Flex alignItems="center" paddingY="s" paddingX="s">
           <StyledAccentIcon icon={rocketIcon} />
-          <BodyText as="h3" size="large" color="licorice500" fontWeight="bold" {...labelProps}>
+          <TypeBodyLevel as="h3" size="large" color="licorice500" fontWeight="bold" {...labelProps}>
             Tasks Panel
-          </BodyText>
+          </TypeBodyLevel>
         </Flex>
       </SidePanel>
     </HStack>

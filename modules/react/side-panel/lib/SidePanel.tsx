@@ -6,7 +6,7 @@ import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {colors, space, CanvasSpaceValues} from '@workday/canvas-kit-react/tokens';
 import {TertiaryButton, TertiaryButtonProps} from '@workday/canvas-kit-react/button';
 import {chevronLeftIcon, chevronRightIcon} from '@workday/canvas-system-icons-web';
-import {Heading} from '@workday/canvas-kit-preview-react/text';
+import {TypeHeadingLevel} from '@workday/canvas-kit-preview-react/text';
 
 export interface SidePanelProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -211,9 +211,9 @@ export default class SidePanel extends React.Component<SidePanelProps, SidePanel
       >
         <ChildrenContainer open={open} openWidth={openWidth}>
           {header && open ? (
-            <Heading as="h2" size="small" marginTop="zero">
+            <TypeHeadingLevel as="h2" size="small" marginTop="zero">
               {header}
-            </Heading>
+            </TypeHeadingLevel>
           ) : null}
           {this.props.children}
         </ChildrenContainer>

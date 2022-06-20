@@ -1,9 +1,9 @@
 import React from 'react';
-import {StaticStates, ContentDirection} from '@workday/canvas-kit-react/common';
+import {StaticStates} from '@workday/canvas-kit-react/common';
 import {ComponentStatesTable} from '@workday/canvas-kit-labs-react/common';
 import {colors} from '@workday/canvas-kit-react/tokens';
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
-import {BodyText, Heading, Label, Subtext, Text, Title} from '../';
+import {TypeBodyLevel, TypeHeadingLevel, Label, TypeSubtextLevel, Text, TypeTitleLevel} from '../';
 import {Box} from '@workday/canvas-kit-react/layout';
 
 type TypeStateProp = {size: 'small' | 'medium' | 'large'};
@@ -118,7 +118,7 @@ export const TitleStates = () => (
         },
       ]}
     >
-      {(props: TypeStateProp) => <Title {...props}>Lorem ipsum title.</Title>}
+      {(props: TypeStateProp) => <TypeTitleLevel {...props}>Lorem ipsum title.</TypeTitleLevel>}
     </ComponentStatesTable>
   </StaticStates>
 );
@@ -138,7 +138,7 @@ export const HeadingStates = () => (
         },
       ]}
     >
-      {(props: TypeStateProp) => <Heading {...props}>Lorem ipsum title.</Heading>}
+      {(props: TypeStateProp) => <TypeHeadingLevel {...props}>Lorem ipsum title.</TypeHeadingLevel>}
     </ComponentStatesTable>
   </StaticStates>
 );
@@ -158,12 +158,12 @@ export const SubtextStates = () => (
         },
       ]}
     >
-      {(props: TypeStateProp) => <Subtext {...props}>Lorem ipsum title.</Subtext>}
+      {(props: TypeStateProp) => <TypeSubtextLevel {...props}>Lorem ipsum title.</TypeSubtextLevel>}
     </ComponentStatesTable>
   </StaticStates>
 );
 
-export const BodyTextStates = () => (
+export const TypeBodyLevelStates = () => (
   <StaticStates>
     <ComponentStatesTable
       rowProps={[
@@ -178,7 +178,7 @@ export const BodyTextStates = () => (
         },
       ]}
     >
-      {(props: TypeStateProp) => <BodyText {...props}>Lorem ipsum title.</BodyText>}
+      {(props: TypeStateProp) => <TypeBodyLevel {...props}>Lorem ipsum title.</TypeBodyLevel>}
     </ComponentStatesTable>
   </StaticStates>
 );
