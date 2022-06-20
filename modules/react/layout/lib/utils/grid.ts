@@ -1,10 +1,8 @@
 import {
   PropertyAlignItems,
   PropertyAlignContent,
-  PropertyAlignSelf,
   PropertyJustifyItems,
   PropertyJustifyContent,
-  PropertyJustifySelf,
   PropertyGridTemplate,
   PropertyGridTemplateColumns,
   PropertyGridTemplateRows,
