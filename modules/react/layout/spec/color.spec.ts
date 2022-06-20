@@ -42,4 +42,12 @@ describe('Color Style Props Function', () => {
 
     expect(colorStyles).toEqual(expected);
   });
+
+  it('should translate variants to style values', () => {
+    const props = {color: 'inverse'};
+    const expected = {color: '#ffffff'};
+    const colorStyles = color(props);
+
+    expect(colorStyles).toEqual(expected);
+  });
 });

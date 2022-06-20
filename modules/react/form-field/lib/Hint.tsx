@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {ErrorType, Themeable, styled} from '@workday/canvas-kit-react/common';
 import {space} from '@workday/canvas-kit-react/tokens';
-import {Subtext, Text} from '@workday/canvas-kit-preview-react/text';
+import {TypeSubtextLevel, Text} from '@workday/canvas-kit-preview-react/text';
 
 export interface HintProps extends Themeable, React.HTMLAttributes<HTMLParagraphElement> {
   /**
@@ -20,7 +20,7 @@ export interface HintProps extends Themeable, React.HTMLAttributes<HTMLParagraph
   alertLabel?: string;
 }
 
-const Message = styled(Subtext)<Pick<HintProps, 'error'>>(
+const Message = styled(TypeSubtextLevel)<Pick<HintProps, 'error'>>(
   ({error, theme}) => error === ErrorType.Error && {color: theme.canvas.palette.error.main}
 );
 
