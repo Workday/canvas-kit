@@ -143,6 +143,10 @@ export type PropertyJustifyContent =
   | 'right'
   | (string & {});
 
+export type PropertyFlexWrap = Globals | 'nowrap' | 'wrap' | 'wrap-reverse';
+
+export type PropertyFlexDirection = Globals | 'column' | 'column-reverse' | 'row' | 'row-reverse';
+
 //Grid
 export type PropertyGridTemplate = Globals | string;
 
