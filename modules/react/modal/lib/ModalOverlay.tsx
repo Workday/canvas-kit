@@ -14,9 +14,7 @@ import styled from '@emotion/styled';
 import {Box, BoxProps} from '@workday/canvas-kit-react/layout';
 import {useModalModel} from './hooks';
 
-export interface ModalOverlayProps extends Omit<BoxProps, 'children'> {
-  children: React.ReactNode;
-}
+export interface ModalOverlayProps extends BoxProps {}
 
 const fadeIn = keyframes`
   from {
