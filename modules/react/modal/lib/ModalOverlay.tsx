@@ -85,7 +85,7 @@ const OpenModalOverlay = createSubcomponent('div')({
   modelHook: useModalModel,
   elemPropsHook: useModalOverlay,
   /* @ts-ignore */
-})<ModalOverlayProps>((elemProps: ModalOverlayProps, Element, model) => {
+})<ModalOverlayProps>((elemProps, Element, model) => {
   const windowSize = useWindowSize();
 
   const content = (

@@ -17,7 +17,8 @@ import {
 import {useTabsModel} from './useTabsModel';
 
 // Use `Partial` here to make `spacing` optional
-export interface TabListProps extends Omit<Partial<ExtractProps<typeof Stack, never>>, 'children'> {
+export interface TabListProps<T = any>
+  extends Omit<Partial<ExtractProps<typeof Stack, never>>, 'children'> {
   /**
    * If items are passed to a `TabsModel`, the child of `Tabs.List` should be a render prop. The
    * List will determine how and when the item will be rendered.
@@ -27,7 +28,7 @@ export interface TabListProps extends Omit<Partial<ExtractProps<typeof Stack, ne
    *   {(item) => <Tabs.Item>{item.text}</Tabs.Item>}
    * </Tabs.List>
    */
-  children: ((item: any) => React.ReactNode) | React.ReactNode;
+  children: ((item: T) => React.ReactNode) | React.ReactNode;
   overflowButton?: React.ReactNode;
 }
 

@@ -1,10 +1,12 @@
 import React from 'react';
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {Flex, FlexProps} from '@workday/canvas-kit-react/layout';
+import {Flex} from '@workday/canvas-kit-react/layout';
+
+export type BreadcrumbsListProps = React.HTMLAttributes<HTMLUListElement>;
 
 export const BreadcrumbsList = createComponent('ul')({
   displayName: 'BreadcrumbsList',
-  Component: (elemProps: FlexProps, ref, Element) => {
+  Component: (elemProps: BreadcrumbsListProps, ref, Element) => {
     return (
       <Flex
         as={Element}

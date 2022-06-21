@@ -16,10 +16,10 @@ import {
 } from '@workday/canvas-kit-react/collection';
 
 import {useActionBarModel} from './useActionBarModel';
-import {ActionBar, ActionModelItem} from './ActionBar';
+import {ActionBar} from './ActionBar';
 
 // Use `Partial` here to make `spacing` optional
-export interface ActionBarListProps<T = unknown>
+export interface ActionBarListProps<T = any>
   extends Omit<Partial<ExtractProps<typeof HStack, never>>, 'children'> {
   /**
    * If items are passed to a `ActionBarModel`, the child of `ActionBar.List` should be a render prop. The
@@ -30,7 +30,7 @@ export interface ActionBarListProps<T = unknown>
    *   {(item) => <ActionBar.Item key={item.id} name={item.name}>{item.text}</ActionBar.Item>}
    * </ActionBar.List>
    */
-  children: ((item: T, index: number) => React.ReactElement) | React.ReactNode;
+  children: ((item: T, index: number) => React.ReactNode) | React.ReactNode;
 }
 
 const ResponsiveHStack = styled(HStack)<ActionBarListProps & StyledType>(({theme}) => ({
@@ -48,7 +48,7 @@ export const ActionBarList = createSubcomponent('div')({
   displayName: 'ActionBar.List',
   modelHook: useActionBarModel,
   elemPropsHook: useActionBarList,
-})<ActionBarListProps<ActionModelItem>>(({children, ...elemProps}, Element, model) => {
+})<ActionBarListProps>(({children, ...elemProps}, Element, model) => {
   return (
     <ResponsiveHStack
       as={Element}
