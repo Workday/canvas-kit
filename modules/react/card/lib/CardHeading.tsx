@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {BoxProps} from '@workday/canvas-kit-react/layout';
-import {TypeBodyLevel} from '@workday/canvas-kit-preview-react/text';
+import {TypeBodyLevel} from '@workday/canvas-kit-preview-react/type';
 
 export interface CardHeadingProps extends BoxProps {
   /**

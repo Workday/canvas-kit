@@ -3,7 +3,7 @@ import {styled} from '@workday/canvas-kit-react/common';
 import {depth} from '@workday/canvas-kit-react/tokens';
 import {SidePanel, useSidePanel} from '@workday/canvas-kit-preview-react/side-panel';
 import {Flex, Box} from '@workday/canvas-kit-react/layout';
-import {TypeBodyLevel} from '@workday/canvas-kit-preview-react/text';
+import {TypeBodyLevel} from '@workday/canvas-kit-preview-react/type';
 
 const StyledPanel = styled(SidePanel)({
   ...depth[6],

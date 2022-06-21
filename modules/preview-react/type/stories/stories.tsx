@@ -7,7 +7,7 @@ import {
   TypeHeadingLevel as HeadingComponent,
   TypeSubtextLevel as SubtextComponent,
   TypeTitleLevel as TitleComponent,
-} from '@workday/canvas-kit-preview-react/text';
+} from '@workday/canvas-kit-preview-react/type';
 // type changes no need
 import {type} from '@workday/canvas-kit-react/tokens';
 import {Box} from '@workday/canvas-kit-react';

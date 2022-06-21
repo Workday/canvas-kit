@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {createComponent, styled, StyledType} from '@workday/canvas-kit-react/common';
-import {Text, TextProps} from '@workday/canvas-kit-preview-react/text';
+import {Text, TextProps} from '@workday/canvas-kit-preview-react/type';
 
 interface LabelProps extends TextProps {
   hasPointerCursor?: boolean;

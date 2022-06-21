@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Flex, FlexProps, Box} from '@workday/canvas-kit-react/layout';
-import {TypeBodyLevel} from '@workday/canvas-kit-preview-react/text';
+import {TypeBodyLevel} from '@workday/canvas-kit-preview-react/type';
 
 const Card = ({children, ...props}: FlexProps) => (
   <Flex

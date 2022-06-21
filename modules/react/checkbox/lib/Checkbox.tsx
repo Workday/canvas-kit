@@ -14,7 +14,7 @@ import {
 import {borderRadius, colors, inputColors, spaceNumbers} from '@workday/canvas-kit-react/tokens';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {checkSmallIcon} from '@workday/canvas-system-icons-web';
-import {Label} from '@workday/canvas-kit-preview-react/text';
+import {Label} from '@workday/canvas-kit-preview-react/type';
 
 export interface CheckboxProps extends Themeable {
   /**

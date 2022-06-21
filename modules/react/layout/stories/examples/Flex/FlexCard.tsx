@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Flex, Box} from '@workday/canvas-kit-react/layout';
 import {PrimaryButton, SecondaryButton} from '@workday/canvas-kit-react/button';
-import {TypeBodyLevel} from '@workday/canvas-kit-preview-react/text';
+import {TypeBodyLevel} from '@workday/canvas-kit-preview-react/type';
 
 export const FlexCard = () => {
   const [isComplete, setIsComplete] = React.useState(false);

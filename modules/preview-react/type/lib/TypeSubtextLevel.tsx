@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {Text, TypeLevelTextProps} from '@workday/canvas-kit-preview-react/text';
+import {Text, TypeLevelTextProps} from '@workday/canvas-kit-preview-react/type';
 
 export const TypeSubtextLevel = createComponent('p')({
   displayName: 'TypeSubtextLevel',
