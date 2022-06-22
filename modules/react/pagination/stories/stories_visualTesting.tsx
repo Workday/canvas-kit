@@ -119,7 +119,7 @@ export const VisualStatesLeftToRight = () => {
   return (
     <>
       <h2>Left-To-Right Pagination</h2>
-      <TableRenderer theme={{direction: ContentDirection.LTR}} />
+      <TableRenderer theme={{canvas: {direction: ContentDirection.LTR}}} />
     </>
   );
 };
@@ -137,7 +137,7 @@ export const VisualStatesRightToLeft = () => {
   return (
     <>
       <h2>Right-To-Left Pagination</h2>
-      <TableRenderer theme={{direction: ContentDirection.RTL}} />
+      <TableRenderer theme={{canvas: {direction: ContentDirection.RTL}}} />
     </>
   );
 };
