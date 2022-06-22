@@ -28,7 +28,13 @@ yarn add @workday/canvas-kit-react
 
 ### Rows and Columns
 
-You can nest `Grid` components to build layouts with rows and columns.
+You can nest `Grid` components to build layouts with rows and columns. In the below example, the
+`child elem`, is the third element in the structure. However, with the `<Grid.Item/>` component, it
+will allow the user to use child specific props for that component. The `child elem` below is using
+the `gridRowStart='1'` prop to be placed first in the order.
+
+You can also use the `<Grid/>` component inside the `<Grid.Item/>` component to build a layout. This
+would allow a user to place a container/layout, wherever they need too.
 
 <ExampleCodeBlock code={GridLayout} />
 

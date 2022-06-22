@@ -26,10 +26,10 @@ const StyledGridItem = styled(Box)<StyledType & GridItemProps>(
 /**
  * `Grid` is a two-dimensional layout system for the web. It lets you lay content out in rows and columns.
  * It is highly flexible, and can be used on its own or to build other components.
- * `Grid` is built on top of `Box` and has access to all `BoxProps`.
  *
  * @example
  * import { Grid, GridProps } from '@workday/canvas-kit-react/layout';
+ * `Grid` is built on top of `Box` and has access to all `BoxProps`.
  *
  * interface CardProps extends GridProps {
  *   // card-specific props

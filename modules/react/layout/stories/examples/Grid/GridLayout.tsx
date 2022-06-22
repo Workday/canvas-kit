@@ -5,9 +5,22 @@ const Cell = (props: {children: React.ReactNode}) => {
   return (
     <Grid
       padding="xs"
-      marginX="xxxs"
       justifyContent="center"
-      backgroundColor="blueberry400"
+      backgroundColor="soap500"
+      color="blackPepper500"
+      borderRadius="m"
+    >
+      {props.children}
+    </Grid>
+  );
+};
+
+const CellItem = (props: {children: React.ReactNode}) => {
+  return (
+    <Grid
+      padding="xs"
+      justifyContent="center"
+      backgroundColor="blueberry500"
       color="frenchVanilla100"
       borderRadius="m"
     >
@@ -18,22 +31,42 @@ const Cell = (props: {children: React.ReactNode}) => {
 
 export const GridLayout = () => (
   <Grid gridAutoFlow="row" padding="xs" gridGap="10px 0">
-    <Grid gridTemplateColumns="repeat(3, 1fr)" gridGap="0 5px">
+    <Grid
+      gridTemplateColumns="repeat(auto-fit, minmax(300px, 1fr))"
+      gridGap="10px"
+      padding="xs"
+      border="5px solid red"
+    >
       <Cell>1</Cell>
       <Cell>2</Cell>
+      <Grid.Item gridRowStart="1">
+        <CellItem>Child Elem</CellItem>
+      </Grid.Item>
       <Cell>3</Cell>
-    </Grid>
-    <Grid gridTemplateColumns="repeat(2, 1fr)" gridGap="0 5px">
       <Cell>4</Cell>
       <Cell>5</Cell>
     </Grid>
-    <Grid gridTemplateColumns="repeat(3, 1fr)" gridGap="0 5px">
-      <Cell>6</Cell>
-      <Cell>7</Cell>
-      <Cell>8</Cell>
-    </Grid>
-    <Grid>
-      <Cell>9</Cell>
+    <Grid
+      gridTemplateColumns="repeat(auto-fit, minmax(300px, 1fr))"
+      gridGap="10px"
+      padding="xxs"
+      border="5px solid red"
+    >
+      <Grid.Item gridRowStart="2">
+        <Grid gridTemplateColumns="repeat(auto-fit, minmax(300px, 1fr))" gridGap="10px">
+          <Cell>1</Cell>
+          <Cell>2</Cell>
+        </Grid>
+      </Grid.Item>
+      <Grid.Item gridRowStart="1">
+        <Grid gridTemplateColumns="repeat(auto-fit, minmax(100px, 1fr))" gridGap="10px">
+          <CellItem>3</CellItem>
+          <CellItem>4</CellItem>
+          <CellItem>5</CellItem>
+          <CellItem>6</CellItem>
+          <CellItem>7</CellItem>
+        </Grid>
+      </Grid.Item>
     </Grid>
   </Grid>
 );
