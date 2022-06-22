@@ -3,6 +3,74 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v7.0.14](https://github.com/Workday/canvas-kit/releases/tag/v7.0.14) (2022-06-22)
+
+### Components
+
+- fix(button): Make PageButton in Pagination themable ([#1648](https://github.com/Workday/canvas-kit/pull/1648)) ([@mannycarrera4](https://github.com/mannycarrera4))
+
+
+## [v7.0.13](https://github.com/Workday/canvas-kit/releases/tag/v7.0.13) (2022-06-20)
+
+
+
+
+## [v7.0.12](https://github.com/Workday/canvas-kit/releases/tag/v7.0.12) (2022-06-20)
+
+### Documentation
+
+- chore: Update repository fields for NPM ([#1642](https://github.com/Workday/canvas-kit/pull/1642)) ([@willklein](https://github.com/willklein))
+
+
+## [v7.0.11](https://github.com/Workday/canvas-kit/releases/tag/v7.0.11) (2022-06-20)
+
+### Dependencies
+
+- fix: Update yarn.lock dependencies for icons and TypeScript ([#1640](https://github.com/Workday/canvas-kit/pull/1640)) ([@willklein](https://github.com/willklein))
+
+### Documentation
+
+- docs: Update SidePanel right origin story ([#1644](https://github.com/Workday/canvas-kit/pull/1644)) ([@willklein](https://github.com/willklein))
+
+
+## [v7.0.10](https://github.com/Workday/canvas-kit/releases/tag/v7.0.10) (2022-06-16)
+
+### Dependencies
+
+- chore: Bump design-assets-types to latest ([#1639](https://github.com/Workday/canvas-kit/pull/1639)) ([@willklein](https://github.com/willklein))
+
+
+## [v7.0.9](https://github.com/Workday/canvas-kit/releases/tag/v7.0.9) (2022-06-16)
+
+### Documentation
+
+- fix: Update remaining Emotion 11 imports ([#1638](https://github.com/Workday/canvas-kit/pull/1638)) ([@willklein](https://github.com/willklein))
+  Updated documentation for `@workday/canvas-kit-react-fonts` to correctly import utilities from Emotion 11 rather than Emotion 10.
+
+
+## [v7.0.8](https://github.com/Workday/canvas-kit/releases/tag/v7.0.8) (2022-06-08)
+
+### Documentation
+
+- docs(action-bar): Add delete action example to ActionBar ([#1629](https://github.com/Workday/canvas-kit/pull/1629)) ([@RayRedGoose](https://github.com/RayRedGoose))
+
+
+## [v7.0.7](https://github.com/Workday/canvas-kit/releases/tag/v7.0.7) (2022-06-03)
+
+### Components
+
+- fix: Add inverse variant to checkbox and radio ([#1617](https://github.com/Workday/canvas-kit/pull/1617)) ([@mannycarrera4](https://github.com/mannycarrera4))
+  We've added `variant="inverse"` to our `Radio` and `CheckBox` components
+
+
+## [v7.0.6](https://github.com/Workday/canvas-kit/releases/tag/v7.0.6) (2022-06-03)
+
+### Components
+
+- test(select): Reduce sensitivity of scrolling test ([#1613](https://github.com/Workday/canvas-kit/pull/1613)) ([@jamesfan](https://github.com/jamesfan))
+- fix(preview): Make removable pill accessible ([#1616](https://github.com/Workday/canvas-kit/pull/1616)) ([@mannycarrera4](https://github.com/mannycarrera4))
+
+
 ## [v7.0.5](https://github.com/Workday/canvas-kit/releases/tag/v7.0.5) (2022-05-25)
 
 ### Documentation
