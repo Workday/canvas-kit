@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v7.0.14](https://github.com/Workday/canvas-kit/releases/tag/v7.0.14) (2022-06-22)
+
+### Components
+
+- fix(button): Make PageButton in Pagination themable ([#1648](https://github.com/Workday/canvas-kit/pull/1648)) ([@mannycarrera4](https://github.com/mannycarrera4))
+
+
 ## [v7.0.13](https://github.com/Workday/canvas-kit/releases/tag/v7.0.13) (2022-06-20)
 
 
