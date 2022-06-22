@@ -5645,6 +5645,16 @@
         "__isArgsStory": false
       }
     },
+    "testing-react-navigation-pagination--visual-states-themed": {
+      "id": "testing-react-navigation-pagination--visual-states-themed",
+      "name": "Visual States Themed",
+      "kind": "Testing/React/Navigation/Pagination",
+      "story": "Visual States Themed",
+      "parameters": {
+        "__id": "testing-react-navigation-pagination--visual-states-themed",
+        "__isArgsStory": false
+      }
+    },
     "testing-react-popups-menu--menu-states": {
       "id": "testing-react-popups-menu--menu-states",
       "name": "Menu States",
