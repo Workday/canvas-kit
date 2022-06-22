@@ -12,6 +12,7 @@ import {
   ellipsisStyles,
   EllipsisText,
   createSubcomponent,
+  useModalityType,
 } from '@workday/canvas-kit-react/common';
 import {Box, StackProps} from '@workday/canvas-kit-react/layout';
 import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
@@ -91,7 +92,6 @@ export const StyledTabItem = styled(Box.as('button'))<StyledType & Pick<TabsItem
     backgroundColor: 'transparent',
     flex: '0 0 auto',
     alignItems: 'center',
-    maxWidth: '280px',
     padding: `${space.xs} ${space.s}`,
     height: 52,
     boxSizing: 'border-box',
@@ -201,10 +201,11 @@ export const TabsItem = createSubcomponent('button')({
     Icon: SystemIcon,
     Text: EllipsisText,
   },
-})<TabsItemProps>(({children, ...elemProps}, Element, model) => {
+})<TabsItemProps>(({children, ...elemProps}, Element) => {
+  const modality = useModalityType();
   return (
     <OverflowTooltip>
-      <StyledTabItem as={Element} {...elemProps}>
+      <StyledTabItem as={Element} maxWidth={modality === 'touch' ? undefined : 280} {...elemProps}>
         {children}
       </StyledTabItem>
     </OverflowTooltip>

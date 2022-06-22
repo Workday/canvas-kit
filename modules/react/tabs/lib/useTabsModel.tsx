@@ -1,5 +1,5 @@
 import React from 'react';
-import {createModelHook} from '@workday/canvas-kit-react/common';
+import {createModelHook, useModalityType} from '@workday/canvas-kit-react/common';
 import {
   defaultGetId,
   useListModel,
@@ -35,11 +35,13 @@ export const useTabsModel = createModelHook({
 })(config => {
   const initialSelectedRef = React.useRef(config.initialTab);
   const getId = config.getId || defaultGetId;
+  const modality = useModalityType();
 
   const items = config.items;
 
   const model = useOverflowListModel(
     useOverflowListModel.mergeConfig(config, {
+      shouldCalculateOverflow: modality !== 'touch',
       orientation: config.orientation || 'horizontal',
       items,
       onRegisterItem(data) {

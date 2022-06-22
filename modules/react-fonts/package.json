@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-react-fonts",
-  "version": "7.0.5",
+  "version": "7.0.13",
   "description": "Fonts for canvas-kit-react",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -10,7 +10,8 @@
   "types": "dist/es6/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "http://github.com/Workday/canvas-kit/tree/master/modules/fonts/react"
+    "url": "https://github.com/workday/canvas-kit.git",
+    "directory": "modules/react-fonts"
   },
   "files": [
     "dist/",
