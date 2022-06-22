@@ -1,0 +1,130 @@
+import {Meta} from '@storybook/addon-docs';
+import {TextComponent, LabelComponent, TypeLevelComponent} from './PropTables.splitprops.tsx';
+
+import {Basic as BasicText} from './examples/Text';
+import {Label} from './examples/Label';
+import {TypeLevelBody} from './examples/TypeLevelBody';
+import {TypeLevelHeading} from './examples/TypeLevelHeading';
+import {TypeLevelSubtext} from './examples/TypeLevelSubtext';
+import {TypeLevelTitle} from './examples/TypeLevelTitle';
+
+<Meta title="Preview/Type/React" component={() => {}} />;
+
+# Canvas Kit React Type
+
+`Type` is a group of text components that provide a common, ergonomic API to render text with
+simplified usage of Canvas Kit type token.
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-react
+```
+
+## Text
+
+### Usage
+
+`Text` is a basic text component to render modified text. `Text` component composes `Box` component
+that allows to use all layout props, such as `display`, `margin`, `lineHeight` etc. It also has
+their own props such as `level` and `size` that should be provided together, because they refer to
+type token level and size, and `isTruncated` allows to make text truncated with ellipsis on its end.
+
+By default `Type` component is a `span` element, but it's possible to override the element by
+passing `as` prop.
+
+```tsx
+<Text as="p" fontSize={14} fontWeight="medium">
+  Text here...
+</Text>
+```
+
+<ExampleCodeBlock code={BasicText} />
+
+### Text Props
+
+As previously mentioned, `Text` is built on top of `Box` and has access to all its props. In
+addition `Text` has its own props:
+
+<ArgsTable of={TextComponent} />
+
+## Label
+
+`Label` is a `label` element build based on the top of `Text` component with added ability to add
+pointer cursor or disabled style.
+
+### Usage
+
+```tsx
+<Label hasPointerCursor disabled={true}>
+  Text here...
+</Label>
+```
+
+<ExampleCodeBlock code={Label} />
+
+### Label Props
+
+In addition to `Box` component props, `Label` has the following props:
+
+<ArgsTable of={LabelComponent} />
+
+## Type Level Components
+
+Type Level Components, `TypeSubtextLevel`, `TypeBodyLevel`, `TypeHeadingLevel` and `TypeTitleLevel`,
+apply type token styles to text element. Instead of passing type level token you can use one of Type
+Level Components, like in example below:
+
+```tsx
+// v7
+<p css={{...type.levels.subtext.small}}>Small Subtext Text</p>
+
+// v8
+<TypeSubtextLevel size="small">Small Subtext Text</TypeSubtextLevel>
+```
+
+### Props
+
+In addition to `Box` component props, each type level components has the following props:
+
+<ArgsTable of={TypeLevelComponent} />
+
+### TypeBodyLevel
+
+`TypeBodyLevel` component renders text with `type.levels.body[size]` styles.
+
+```tsx
+<TypeSubtextLevel size="small">Small Subtext Text</TypeSubtextLevel>
+```
+
+<ExampleCodeBlock code={TypeLevelBody} />
+
+### TypeHeadingLevel
+
+`TypeHeadingLevel` component renders text with `type.levels.heading[size]` styles.
+
+```tsx
+<TypeHeadingLevel size="small">Small Heading Text</TypeHeadingLevel>
+```
+
+<ExampleCodeBlock code={TypeLevelHeading} />
+
+### TypeSubtextLevel
+
+`TypeSubtextLevel` component renders text with `type.levels.subtext[size]` styles.
+
+```tsx
+<TypeSubtextLevel size="small">Small Subtext Text</TypeSubtextLevel>
+```
+
+<ExampleCodeBlock code={TypeLevelSubtext} />
+
+### TypeTitleLevel
+
+`TypeTitleLevel` component renders text with `type.levels.title[size]` styles.
+
+```tsx
+<TypeTitleLevel size="small">Small Title Text</TypeTitleLevel>
+```
+
+<ExampleCodeBlock code={TypeLevelTitle} />
