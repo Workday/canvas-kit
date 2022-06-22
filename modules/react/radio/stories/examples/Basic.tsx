@@ -21,6 +21,10 @@ export const Basic = () => {
         <Radio label="Thin" value="thin" />
         <Radio label="Gluten free" value="gluten-free" />
         <Radio label="Cauliflower" value="cauliflower" />
+        <Radio
+          label="My favorite pizza crust flavor is butter because it's the best thing to put on bread"
+          value="cauliflower"
+        />
       </RadioGroup>
     </StyledFormField>
   );
