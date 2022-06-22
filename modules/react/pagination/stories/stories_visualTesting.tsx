@@ -85,7 +85,7 @@ const TableRenderer = ({theme}) => {
                   <Pagination.GoToTextInput aria-label="Go to page number" />
                   <Pagination.GoToLabel>
                     {() =>
-                      theme.direction === ContentDirection.RTL
+                      theme.canvas.direction === ContentDirection.RTL
                         ? `من 100 صفحات`
                         : `of ${totalCount} pages`
                     }
@@ -95,7 +95,7 @@ const TableRenderer = ({theme}) => {
             </Pagination.Controls>
             <Pagination.AdditionalDetails shouldHideDetails={!props.shouldShowAddtionalDetails}>
               {({state}) =>
-                theme.direction === ContentDirection.RTL
+                theme.canvas.direction === ContentDirection.RTL
                   ? `${getVisibleResultsMax(
                       state.currentPage,
                       resultCount,
