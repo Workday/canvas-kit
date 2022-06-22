@@ -1,5 +1,4 @@
 import {Meta} from '@storybook/addon-docs';
-import {TextComponent, LabelComponent, TypeLevelComponent} from './PropTables.splitprops.tsx';
 
 import {Basic as BasicText} from './examples/Text';
 import {Label} from './examples/Label';
@@ -8,7 +7,9 @@ import {TypeLevelHeading} from './examples/TypeLevelHeading';
 import {TypeLevelSubtext} from './examples/TypeLevelSubtext';
 import {TypeLevelTitle} from './examples/TypeLevelTitle';
 
-<Meta title="Preview/Type/React" component={() => {}} />;
+import {TextComponent, LabelComponent, TypeLevelComponent} from './PropTables.splitprops.tsx';
+
+<Meta title="Preview/Type/React" />
 
 # Canvas Kit React Type
 
@@ -94,7 +95,7 @@ In addition to `Box` component props, each type level components has the followi
 `TypeBodyLevel` component renders text with `type.levels.body[size]` styles.
 
 ```tsx
-<TypeSubtextLevel size="small">Small Subtext Text</TypeSubtextLevel>
+<TypeBodyLevel size="small">Small Body Text</TypeBodyLevel>
 ```
 
 <ExampleCodeBlock code={TypeLevelBody} />
