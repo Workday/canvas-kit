@@ -40,7 +40,7 @@
     "workday"
   ],
   "peerDependencies": {
-    "react": "^16.8 || ^17.0"
+    "react": "^17.0 || ^18.0"
   },
   "dependencies": {
     "@emotion/is-prop-valid": "^1.1.1",
@@ -54,7 +54,6 @@
     "@workday/canvas-system-icons-web": "^3.0.0",
     "@workday/design-assets-types": "^0.2.4",
     "chroma-js": "^2.1.0",
-    "csstype": "^2.6.17",
     "element-closest": "^3.0.2",
     "lodash": "^4.17.14",
     "polished": "^4.1.3",

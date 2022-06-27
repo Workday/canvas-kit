@@ -17,7 +17,8 @@ import {
 import {useTabsModel} from './useTabsModel';
 
 // Use `Partial` here to make `spacing` optional
-export interface TabListProps<T = unknown> extends Partial<ExtractProps<typeof Stack, never>> {
+export interface TabListProps<T = any>
+  extends Omit<Partial<ExtractProps<typeof Stack, never>>, 'children'> {
   /**
    * If items are passed to a `TabsModel`, the child of `Tabs.List` should be a render prop. The
    * List will determine how and when the item will be rendered.
