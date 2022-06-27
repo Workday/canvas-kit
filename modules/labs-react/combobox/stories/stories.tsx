@@ -38,12 +38,10 @@ const groupOfResults = (
   items: simpleAutoComplete(count, showDisabledItems, 10),
 });
 
-export const Autocomplete: FC<React.PropsWithChildren<
-  Omit<ComboboxProps, 'children'> & {
-    group?: boolean;
-    showDisabledItems?: boolean;
-  }
->> = ({showClearButton, group, showDisabledItems = false, ...props}) => {
+export const Autocomplete: FC<Omit<ComboboxProps, 'children'> & {
+  group?: boolean;
+  showDisabledItems?: boolean;
+}> = ({showClearButton, group, showDisabledItems = false, ...props}) => {
   const [currentText, setCurrentText] = useState('');
 
   const autocompleteCallback = (event: ChangeEvent<HTMLInputElement>): void => {

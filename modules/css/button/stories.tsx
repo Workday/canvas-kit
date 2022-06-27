@@ -30,7 +30,7 @@ const spaceButton = css({
   },
 });
 
-class IconDemo extends Component<React.PropsWithChildren<any>> {
+class IconDemo extends Component<React.PropsWithChildren> {
   componentDidMount() {
     initializeIcons();
   }
