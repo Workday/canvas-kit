@@ -28,28 +28,29 @@ describe('renameIconRefs', () => {
     `;
 
     const expected = stripIndent`
-    import { fonts } from '@workday/canvas-kit-react-fonts';
-    import { Toast } from '@workday/canvas-kit-react/toast';
-    import { Canvas } from '@workday/canvas-kit-react/tokens';
-    import { Tooltip } from '@workday/canvas-kit-react/tooltip';
-    import { TextArea } from '@workday/canvas-kit-react/text-area';
-    import { Avatar } from '@workday/canvas-kit-react/avatar';
-    import { CountBadge } from '@workday/canvas-kit-react/badge';
-    import { Checkbox } from '@workday/canvas-kit-react/checkbox';
-    import { FormField } from '@workday/canvas-kit-react/form-field';
-    import { LoadingDots } from '@workday/canvas-kit-react/loading-animation';
-    import { Radio } from '@workday/canvas-kit-react/radio';
-    import { SegmentedControl } from '@workday/canvas-kit-react/segmented-control';
-    import { Select } from '@workday/canvas-kit-react/select';
-    import { SidePanel } from '@workday/canvas-kit-react/side-panel';
-    import { StatusIndicator } from '@workday/canvas-kit-react/status-indicator';
-    import { Switch } from '@workday/canvas-kit-react/switch';
-    import { Table } from '@workday/canvas-kit-react/table';
-    import { TextInput } from '@workday/canvas-kit-react/text-input';
+      import { fonts } from '@workday/canvas-kit-react-fonts';
+      import { Toast } from '@workday/canvas-kit-react/toast';
+      import { Canvas } from '@workday/canvas-kit-react/tokens';
+      import { Tooltip } from '@workday/canvas-kit-react/tooltip';
+      import { TextArea } from '@workday/canvas-kit-react/text-area';
+      import { Avatar } from '@workday/canvas-kit-react/avatar';
+      import { CountBadge } from '@workday/canvas-kit-react/badge';
+      import { Checkbox } from '@workday/canvas-kit-react/checkbox';
+      import { FormField } from '@workday/canvas-kit-react/form-field';
+      import { LoadingDots } from '@workday/canvas-kit-react/loading-animation';
+      import { Radio } from '@workday/canvas-kit-react/radio';
+      import { SegmentedControl } from '@workday/canvas-kit-react/segmented-control';
+      import { Select } from '@workday/canvas-kit-react/select';
+      import { SidePanel } from '@workday/canvas-kit-react/side-panel';
+      import { StatusIndicator } from '@workday/canvas-kit-react/status-indicator';
+      import { Switch } from '@workday/canvas-kit-react/switch';
+      import { Table } from '@workday/canvas-kit-react/table';
+      import { TextInput } from '@workday/canvas-kit-react/text-input';
     `;
 
     expectTransform(input, expected);
   });
+
   it('should replace default exports with named imports for labs', () => {
     const input = stripIndent`
       import ComboBox from '@workday/canvas-kit-labs-react/combobox';
@@ -62,6 +63,7 @@ describe('renameIconRefs', () => {
     `;
     expectTransform(input, expected);
   });
+
   it('should replace default exports with named imports for preview', () => {
     const input = stripIndent`
       import Breadcrumbs from '@workday/canvas-kit-preview-react/breadcrumbs';
@@ -80,5 +82,15 @@ describe('renameIconRefs', () => {
     `;
 
     expectTransform(input, expected);
+  });
+
+  it('should replace renamed default exports to renamed named exports', () => {
+    const input = stripIndent`
+      import CanvasToast from '@workday/canvas-kit-react/toast';
+    `;
+
+    const expected = stripIndent`
+      import {Toast as CanvasToast} from '@workday/canvas-kit-react/toast';
+    `;
   });
 });
