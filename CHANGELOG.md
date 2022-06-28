@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v7.0.15](https://github.com/Workday/canvas-kit/releases/tag/v7.0.15) (2022-06-28)
+
+### Components
+
+- docs(examples): Add example for SegmentedControl with text buttons ([#1623](https://github.com/Workday/canvas-kit/pull/1623)) ([@RayRedGoose](https://github.com/RayRedGoose))
+
+
 ## [v7.0.14](https://github.com/Workday/canvas-kit/releases/tag/v7.0.14) (2022-06-22)
 
 ### Components
