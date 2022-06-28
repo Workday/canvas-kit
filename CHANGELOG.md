@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v7.1.0](https://github.com/Workday/canvas-kit/releases/tag/v7.1.0) (2022-06-28)
+
+### Components
+
+- chore: Bump prerelease/minor to new major version ([@NicholasBoll](https://github.com/NicholasBoll))
+- feat: Add useModalityType hook and add modality support to tabs ([#1523](https://github.com/Workday/canvas-kit/pull/1523)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v7.0.15](https://github.com/Workday/canvas-kit/releases/tag/v7.0.15) (2022-06-28)
 
 ### Components
