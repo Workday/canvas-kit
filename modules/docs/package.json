@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-docs",
-  "version": "7.0.0",
+  "version": "7.1.0",
   "description": "Documentation components of Canvas Kit components",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -10,7 +10,8 @@
   "types": "dist/es6/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "http://github.com/Workday/canvas-kit/tree/master/modules/specifications"
+    "url": "https://github.com/workday/canvas-kit.git",
+    "directory": "modules/docs"
   },
   "files": [
     "dist/",
@@ -41,7 +42,7 @@
   ],
   "dependencies": {
     "@storybook/csf": "0.0.1",
-    "@workday/canvas-kit-react": "^7.0.0"
+    "@workday/canvas-kit-react": "^7.1.0"
   },
   "devDependencies": {
     "fs-extra": "^10.0.0",

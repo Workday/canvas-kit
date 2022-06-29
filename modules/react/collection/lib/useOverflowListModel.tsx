@@ -55,10 +55,17 @@ export const useOverflowListModel = createModelHook({
     ...useSelectionListModel.defaultConfig,
     initialHiddenIds: [] as string[],
     containerWidth: 0,
+    /**
+     * Determines if overflow should actually occur. For example, touch devices are better at
+     * side-scrolling than mouse devices. In these cases, it makes sense to disable overflowing.
+     * @default true
+     */ shouldCalculateOverflow: true,
   },
   requiredConfig: useSelectionListModel.requiredConfig,
   contextOverride: useSelectionListModel.Context,
 })(config => {
+  const shouldCalculateOverflow =
+    config.shouldCalculateOverflow === undefined ? true : config.shouldCalculateOverflow;
   const [hiddenIds, setHiddenIds] = React.useState(config.initialHiddenIds);
   const [itemWidthCache, setItemWidthCache] = React.useState<Record<string, number>>({});
   const [containerWidth, setContainerWidth] = React.useState(0);
@@ -67,9 +74,11 @@ export const useOverflowListModel = createModelHook({
   const [overflowTargetWidth, setOverflowTargetWidth] = React.useState(0);
   const overflowTargetWidthRef = React.useRef(0);
 
+  const internalHiddenIds = shouldCalculateOverflow ? hiddenIds : [];
+
   // Cursors skip over disabled ids, but know nothing of hidden ids. We'll go ahead and disable
   // hidden ids as well
-  const nonInteractiveIds = (config.nonInteractiveIds || []).concat(hiddenIds);
+  const nonInteractiveIds = (config.nonInteractiveIds || []).concat(internalHiddenIds);
 
   const model = useSelectionListModel({
     ...config,
@@ -78,7 +87,7 @@ export const useOverflowListModel = createModelHook({
 
   const state = {
     ...model.state,
-    hiddenIds,
+    hiddenIds: internalHiddenIds,
     itemWidthCache,
     containerWidth,
     overflowTargetWidth,
