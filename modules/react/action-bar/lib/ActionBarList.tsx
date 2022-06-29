@@ -19,8 +19,8 @@ import {useActionBarModel} from './useActionBarModel';
 import {ActionBar} from './ActionBar';
 
 // Use `Partial` here to make `spacing` optional
-export interface ActionBarListProps<T = unknown>
-  extends Partial<ExtractProps<typeof HStack, never>> {
+export interface ActionBarListProps<T = any>
+  extends Omit<Partial<ExtractProps<typeof HStack, never>>, 'children'> {
   /**
    * If items are passed to a `ActionBarModel`, the child of `ActionBar.List` should be a render prop. The
    * List will determine how and when the item will be rendered.
@@ -30,7 +30,7 @@ export interface ActionBarListProps<T = unknown>
    *   {(item) => <ActionBar.Item key={item.id} name={item.name}>{item.text}</ActionBar.Item>}
    * </ActionBar.List>
    */
-  children: ((item: T) => React.ReactNode) | React.ReactNode;
+  children: ((item: T, index: number) => React.ReactNode) | React.ReactNode;
 }
 
 const ResponsiveHStack = styled(HStack)<ActionBarListProps & StyledType>(({theme}) => ({

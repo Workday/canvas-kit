@@ -16,7 +16,7 @@ const containerStyle = css({
   },
 });
 
-class IconDemo extends Component {
+class IconDemo extends Component<React.PropsWithChildren> {
   componentDidMount() {
     initializeIcons();
   }

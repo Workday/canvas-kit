@@ -14,9 +14,7 @@ import styled from '@emotion/styled';
 import {Box, BoxProps} from '@workday/canvas-kit-react/layout';
 import {useModalModel} from './hooks';
 
-export interface ModalOverlayProps extends BoxProps {
-  children: React.ReactNode;
-}
+export interface ModalOverlayProps extends BoxProps {}
 
 const fadeIn = keyframes`
   from {
@@ -86,7 +84,7 @@ const OpenModalOverlay = createSubcomponent('div')({
   displayName: 'Modal.OpenOverlay',
   modelHook: useModalModel,
   elemPropsHook: useModalOverlay,
-})<ModalOverlayProps>((elemProps: ModalOverlayProps, Element, model) => {
+})<ModalOverlayProps>((elemProps, Element, model) => {
   const windowSize = useWindowSize();
 
   const content = (
