@@ -4,6 +4,7 @@ import {
   PropertyJustifyItems,
   PropertyJustifyContent,
   PropertyGridTemplate,
+  PropertyGridTemplateAreas,
   PropertyGridTemplateColumns,
   PropertyGridTemplateRows,
   PropertyGridGap,
@@ -12,6 +13,7 @@ import {
   PropertyPlaceItems,
   PropertyAutoColumns,
   PropertyAutoRows,
+  PropertyGridArea,
   PropertyGridAutoFlow,
   PropertyGrid,
 } from './types';
@@ -35,10 +37,12 @@ export type GridStyleProps = {
   // Container Types
   /** sets `grid-template` property */
   gridTemplate?: PropertyGridTemplate;
+  /** sets `grid-template-area` property */
+  gridTemplateAreas?: PropertyGridTemplateAreas;
   /** sets `grid-template-columns` property */
   gridTemplateColumns?: PropertyGridTemplateColumns;
   /** sets `grid-template-rows` property */
-  gridTemplateRow?: PropertyGridTemplateRows;
+  gridTemplateRows?: PropertyGridTemplateRows;
   /** sets `gap` property */
   gridGap?: PropertyGridGap;
   /** sets `column-gap` property */
@@ -51,6 +55,8 @@ export type GridStyleProps = {
   gridAutoColumns?: PropertyAutoColumns;
   /** sets `grid-auto-rows` property */
   gridAutoRows?: PropertyAutoRows;
+  /** sets `grid-area` property */
+  gridArea?: PropertyGridArea;
   /** sets `grid-auto-flow` property */
   gridAutoFlow?: PropertyGridAutoFlow;
   /** sets `grid` property */
@@ -63,9 +69,10 @@ const gridProps = {
   display: 'display',
   justifyContent: 'justifyContent',
   justifyItems: 'justifyItems',
+  gridTemplateAreas: 'gridTemplateAreas',
   gridTemplate: 'gridTemplate',
   gridTemplateColumns: 'gridTemplateColumns',
-  gridTemplateRow: 'gridTemplateRow',
+  gridTemplateRows: 'gridTemplateRows',
   gridGap: 'gridGap',
   gridColumnGap: 'gridColumnGap',
   gridRowGap: 'gridRowGap',
@@ -73,6 +80,7 @@ const gridProps = {
   gridAutoColumns: 'gridAutoColumns',
   gridAutoRows: 'gridAutoRows',
   gridAutoFlow: 'gridAutoFlow',
+  gridArea: 'gridArea',
   grid: 'grid',
 };
 

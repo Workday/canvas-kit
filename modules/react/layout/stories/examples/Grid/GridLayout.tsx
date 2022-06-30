@@ -35,12 +35,12 @@ export const GridLayout = () => (
       gridTemplateColumns="repeat(auto-fit, minmax(300px, 1fr))"
       gridGap="10px"
       padding="xs"
-      border="5px solid red"
+      border="5px solid #8ea618"
     >
       <Cell>1</Cell>
       <Cell>2</Cell>
       <Grid.Item gridRowStart="1">
-        <CellItem>Child Elem</CellItem>
+        <CellItem>Child</CellItem>
       </Grid.Item>
       <Cell>3</Cell>
       <Cell>4</Cell>
@@ -50,7 +50,7 @@ export const GridLayout = () => (
       gridTemplateColumns="repeat(auto-fit, minmax(300px, 1fr))"
       gridGap="10px"
       padding="xxs"
-      border="5px solid red"
+      border="5px solid #ff671b"
     >
       <Grid.Item gridRowStart="2">
         <Grid gridTemplateColumns="repeat(auto-fit, minmax(300px, 1fr))" gridGap="10px">

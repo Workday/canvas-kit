@@ -150,6 +150,8 @@ export type PropertyFlexDirection = Globals | 'column' | 'column-reverse' | 'row
 //Grid
 export type PropertyGridTemplate = Globals | string;
 
+export type PropertyGridTemplateAreas = string;
+
 export type PropertyGridTemplateColumns = Globals | 'max-content' | 'min-content' | string;
 
 export type PropertyGridTemplateRows = Globals | 'max-content' | 'min-content' | string;

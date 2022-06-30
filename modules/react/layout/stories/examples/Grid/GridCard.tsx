@@ -39,9 +39,6 @@ export const GridCard = () => {
         </Box>
         <SecondaryButton onClick={() => setIsComplete(false)}>Cancel</SecondaryButton>
       </Grid>
-      <Grid.Item>
-        <div>Hello World</div>
-      </Grid.Item>
     </Grid>
   );
 };

@@ -16,12 +16,7 @@ const StyledGrid = styled(Box)<StyledType & GridProps>(
   grid
 );
 
-const StyledGridItem = styled(Box)<StyledType & GridItemProps>(
-  {
-    display: 'grid',
-  },
-  gridItem
-);
+const StyledGridItem = styled(Box)<StyledType & GridItemProps>(gridItem);
 
 /**
  * `Grid` is a two-dimensional layout system for the web. It lets you lay content out in rows and columns.

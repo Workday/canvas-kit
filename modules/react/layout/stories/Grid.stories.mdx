@@ -4,7 +4,7 @@ import {Grid} from '@workday/canvas-kit-react/layout';
 // examples
 import {GridCard} from './examples/Grid/GridCard';
 import {GridLayout} from './examples/Grid/GridLayout';
-import {Example} from './examples/Grid/Example';
+import {UIExample} from './examples/Grid/UIExample';
 import {GridStyle} from './examples/PropTables.splitprops.tsx';
 
 <Meta title="Components/Containers/Layout/Grid" component={Grid} />
@@ -12,7 +12,10 @@ import {GridStyle} from './examples/PropTables.splitprops.tsx';
 # Canvas Kit Grid
 
 `Grid` is a two-dimensional layout system for the web. It lets you lay content out in rows and
-columns. [CSS Grid](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Grids).
+columns [CSS Grid](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Grids).
+
+If you want to see how Flexbox and Grid can
+[work together](https://css-tricks.com/css-grid-replace-flexbox/).
 
 ## Installation
 
@@ -20,39 +23,48 @@ columns. [CSS Grid](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layou
 yarn add @workday/canvas-kit-react
 ```
 
-## Example
-
-### Basic Example
-
-<ExampleCodeBlock code={Example} />
+## Examples
 
 ### Rows and Columns
 
-You can nest `Grid` components to build layouts with rows and columns. In the below example, the
-`child elem`, is the third element in the structure. However, with the `<Grid.Item/>` component, it
-will allow the user to use child specific props for that component. The `child elem` below is using
-the `gridRowStart='1'` prop to be placed first in the order.
+You can nest `Grid` components to build layouts with rows and columns. You can also nest `Grid`
+components within `<Grid.Item/>` components for even more possibilities.
 
-You can also use the `<Grid/>` component inside the `<Grid.Item/>` component to build a layout. This
-would allow a user to place a container/layout, wherever they need too.
+In the below example, we have a `Grid` container which has a green border. It contains six elements
+and one of them is called `Child`. This is to show how the `<Grid.Item/>` component functions. In
+the layout, the `Child` element, is the third element in the layout however, with the `<Grid.Item/>`
+component, it allows a user to use child specific props for that component. The `Child` element
+below is using the `gridRowStart='1'` prop to be placed first in the order.
+
+In the second example below, we have a `Grid` container which has a red-orange border. It contains
+two rows with one having seven elements and the other has two elements. This example is to show how
+a user can use the `<Grid.Item/>` component to wrap a `<Grid/>` component. This would allow a user
+to have access to the child props of `<Grid.Item/>` to place a layout where needed. The row with
+elements 3 - 7 is put before the 1 & 2 elements since that layout is wrapped by the `<Grid.Item/>`
+component.
 
 <ExampleCodeBlock code={GridLayout} />
 
-### Small Containers
+### UI Layout Example
+
+<ExampleCodeBlock code={UIExample} />
+
+<!-- ### Small Containers
 
 You can also use `Grid` to create layouts within smaller containers, such as this card example
 below:
 
-<ExampleCodeBlock code={GridCard} />
+<ExampleCodeBlock code={GridCard} /> -->
 
 ### Grid vs. Box
 
 `Grid` is built with `Box` and has access to all `BoxProps`. The main differences between `Box` and
 `Grid` are:
 
-- `Grid` is set to `display: grid` by default
-- The `display` prop is limited to `grid`, `inline-grid` and `subgrid`
+- `Grid` is set to `display: grid`, `inline-grid` or `subgrid` by default.
+- The `display` prop is limited to `grid`, `inline-grid` and `subgrid`.
 - `Grid` has access to grid container properties.
+- `Grid.Item` has access to grid child properties.
 
 In short, use `Grid` when you need a grid container to build layouts with CSS Grid, and use `Box`
 when you need a simple container. It's also important to note that `Grid` has no real opinion about
