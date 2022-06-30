@@ -5,6 +5,7 @@ import {Specifications} from '@workday/canvas-kit-docs';
 
 import {Basic} from './examples/Basic';
 import {Icons} from './examples/Icons';
+import {DeleteAction} from './examples/DeleteAction';
 import {OverflowActionBar} from './examples/OverflowActionBar';
 
 <Meta title="Components/Buttons/Action Bar/React" component={ActionBar} />
@@ -37,10 +38,17 @@ buttons should not be used in the Action Bar.
 
 ### Icons Example
 
-`ActionBar.Item` renders a `PrimaryButton` or `SecondaryButton`, so it's possible to use other
-Button props with `ActionBar.Item` such as `icon` or `size`.
+`ActionBar.Item` renders a `SecondaryButton` as default, so it's possible to use other Button props
+with `ActionBar.Item` such as `icon` or `size`.
 
 <ExampleCodeBlock code={Icons} />
+
+### Delete Action Example
+
+`ActionBar.Item` is a `SecondaryButton` by default but it's posible to change it to another element,
+such as `DeleteButton`, by using `as` prop.
+
+<ExampleCodeBlock code={DeleteAction} />
 
 ### Overflow Example
 
