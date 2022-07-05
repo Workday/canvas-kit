@@ -182,11 +182,11 @@ export type PropertyGridAutoFlow = Globals | 'row' | 'column' | 'dense';
 
 export type PropertyGrid = Globals | string;
 
-export type PropertyColumnStart = Globals | 'none' | 'auto' | string;
+export type PropertyColumnStart = Globals | 'none' | 'auto' | string | number;
 
 export type PropertyColumnEnd = Globals | 'none' | 'auto' | string;
 
-export type PropertyRowStart = Globals | 'none' | 'auto' | string;
+export type PropertyRowStart = Globals | 'none' | 'auto' | string | number;
 
 export type PropertyRowEnd = Globals | 'none' | 'auto' | string;
 
