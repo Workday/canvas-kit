@@ -2,7 +2,8 @@ import * as React from 'react';
 import {PaginationModel} from '../types';
 import {Label} from '@workday/canvas-kit-preview-react/type';
 
-export interface GoToLabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> {
+export interface GoToLabelProps
+  extends Omit<React.LabelHTMLAttributes<HTMLLabelElement>, 'children'> {
   model: PaginationModel;
   /**
    * Accepts child elements or a render prop.

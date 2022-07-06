@@ -1,21 +1,232 @@
-import {
-  AbsoluteSize,
-  ContentDistribution,
-  ContentPosition,
-  Color,
-  Globals,
-  GlobalsNumber,
-  SelfPosition,
-  DisplayOutside,
-  DisplayInside,
-  DisplayInternal,
-  DisplayLegacy,
-  LineStyle,
-} from 'csstype';
 import {FontFamilyTokens, FontSizeTokens, FontWeightTokens} from './font';
 
 // We're temporarily creating these types from csstype
 // to improve type completion until we move to csstype v3.
+type AbsoluteSize =
+  | 'large'
+  | 'medium'
+  | 'small'
+  | 'x-large'
+  | 'x-small'
+  | 'xx-large'
+  | 'xx-small'
+  | 'xxx-large';
+
+type NamedColor =
+  | 'aliceblue'
+  | 'antiquewhite'
+  | 'aqua'
+  | 'aquamarine'
+  | 'azure'
+  | 'beige'
+  | 'bisque'
+  | 'black'
+  | 'blanchedalmond'
+  | 'blue'
+  | 'blueviolet'
+  | 'brown'
+  | 'burlywood'
+  | 'cadetblue'
+  | 'chartreuse'
+  | 'chocolate'
+  | 'coral'
+  | 'cornflowerblue'
+  | 'cornsilk'
+  | 'crimson'
+  | 'cyan'
+  | 'darkblue'
+  | 'darkcyan'
+  | 'darkgoldenrod'
+  | 'darkgray'
+  | 'darkgreen'
+  | 'darkgrey'
+  | 'darkkhaki'
+  | 'darkmagenta'
+  | 'darkolivegreen'
+  | 'darkorange'
+  | 'darkorchid'
+  | 'darkred'
+  | 'darksalmon'
+  | 'darkseagreen'
+  | 'darkslateblue'
+  | 'darkslategray'
+  | 'darkslategrey'
+  | 'darkturquoise'
+  | 'darkviolet'
+  | 'deeppink'
+  | 'deepskyblue'
+  | 'dimgray'
+  | 'dimgrey'
+  | 'dodgerblue'
+  | 'firebrick'
+  | 'floralwhite'
+  | 'forestgreen'
+  | 'fuchsia'
+  | 'gainsboro'
+  | 'ghostwhite'
+  | 'gold'
+  | 'goldenrod'
+  | 'gray'
+  | 'green'
+  | 'greenyellow'
+  | 'grey'
+  | 'honeydew'
+  | 'hotpink'
+  | 'indianred'
+  | 'indigo'
+  | 'ivory'
+  | 'khaki'
+  | 'lavender'
+  | 'lavenderblush'
+  | 'lawngreen'
+  | 'lemonchiffon'
+  | 'lightblue'
+  | 'lightcoral'
+  | 'lightcyan'
+  | 'lightgoldenrodyellow'
+  | 'lightgray'
+  | 'lightgreen'
+  | 'lightgrey'
+  | 'lightpink'
+  | 'lightsalmon'
+  | 'lightseagreen'
+  | 'lightskyblue'
+  | 'lightslategray'
+  | 'lightslategrey'
+  | 'lightsteelblue'
+  | 'lightyellow'
+  | 'lime'
+  | 'limegreen'
+  | 'linen'
+  | 'magenta'
+  | 'maroon'
+  | 'mediumaquamarine'
+  | 'mediumblue'
+  | 'mediumorchid'
+  | 'mediumpurple'
+  | 'mediumseagreen'
+  | 'mediumslateblue'
+  | 'mediumspringgreen'
+  | 'mediumturquoise'
+  | 'mediumvioletred'
+  | 'midnightblue'
+  | 'mintcream'
+  | 'mistyrose'
+  | 'moccasin'
+  | 'navajowhite'
+  | 'navy'
+  | 'oldlace'
+  | 'olive'
+  | 'olivedrab'
+  | 'orange'
+  | 'orangered'
+  | 'orchid'
+  | 'palegoldenrod'
+  | 'palegreen'
+  | 'paleturquoise'
+  | 'palevioletred'
+  | 'papayawhip'
+  | 'peachpuff'
+  | 'peru'
+  | 'pink'
+  | 'plum'
+  | 'powderblue'
+  | 'purple'
+  | 'rebeccapurple'
+  | 'red'
+  | 'rosybrown'
+  | 'royalblue'
+  | 'saddlebrown'
+  | 'salmon'
+  | 'sandybrown'
+  | 'seagreen'
+  | 'seashell'
+  | 'sienna'
+  | 'silver'
+  | 'skyblue'
+  | 'slateblue'
+  | 'slategray'
+  | 'slategrey'
+  | 'snow'
+  | 'springgreen'
+  | 'steelblue'
+  | 'tan'
+  | 'teal'
+  | 'thistle'
+  | 'tomato'
+  | 'transparent'
+  | 'turquoise'
+  | 'violet'
+  | 'wheat'
+  | 'white'
+  | 'whitesmoke'
+  | 'yellow'
+  | 'yellowgreen';
+
+type Color = NamedColor | 'currentcolor' | string;
+type Globals = '-moz-initial' | 'inherit' | 'initial' | 'revert' | 'unset';
+type GlobalsNumber = Globals | number;
+
+type SelfPosition =
+  | 'center'
+  | 'end'
+  | 'flex-end'
+  | 'flex-start'
+  | 'self-end'
+  | 'self-start'
+  | 'start';
+
+type DisplayOutside = 'block' | 'inline' | 'run-in';
+
+type DisplayInside =
+  | '-ms-flexbox'
+  | '-ms-grid'
+  | '-webkit-flex'
+  | 'flex'
+  | 'flow'
+  | 'flow-root'
+  | 'grid'
+  | 'ruby'
+  | 'table';
+
+type DisplayInternal =
+  | 'ruby-base'
+  | 'ruby-base-container'
+  | 'ruby-text'
+  | 'ruby-text-container'
+  | 'table-caption'
+  | 'table-cell'
+  | 'table-column'
+  | 'table-column-group'
+  | 'table-footer-group'
+  | 'table-header-group'
+  | 'table-row'
+  | 'table-row-group';
+
+type DisplayLegacy =
+  | '-ms-inline-flexbox'
+  | '-ms-inline-grid'
+  | '-webkit-inline-flex'
+  | 'inline-block'
+  | 'inline-flex'
+  | 'inline-grid'
+  | 'inline-list-item'
+  | 'inline-table';
+
+type LineStyle =
+  | 'dashed'
+  | 'dotted'
+  | 'double'
+  | 'groove'
+  | 'hidden'
+  | 'inset'
+  | 'none'
+  | 'outset'
+  | 'ridge'
+  | 'solid';
+
+type ContentDistribution = 'space-around' | 'space-between' | 'space-evenly' | 'stretch';
+type ContentPosition = 'center' | 'end' | 'flex-end' | 'flex-start' | 'start';
 
 // Border
 export type PropertyBorder = Globals | LineStyle | (string & {});
