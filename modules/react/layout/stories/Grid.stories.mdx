@@ -30,11 +30,20 @@ yarn add @workday/canvas-kit-react
 You can nest `Grid` components to build layouts with rows and columns. You can also nest `Grid`
 components within `<Grid.Item/>` components for even more possibilities.
 
-In the below example, we have a `Grid` container which has a green border. It contains six elements
-and one of them is called `Child`. This is to show how the `<Grid.Item/>` component functions. In
-the layout, the `Child` element, is the third element in the layout however, with the `<Grid.Item/>`
-component, it allows a user to use child specific props for that component. The `Child` element
-below is using the `gridRowStart='1'` prop to be placed first in the order.
+In the below example, we have a `Grid` container which has a green border. It contains nine elements
+with one of them being grey. This is a `<Grid.Item/>` component and has access to child specific
+props, the `<Grid/>` component only has access to container props. This is to show what the
+`<Grid.Item/>` component can do. **This is NOT best practice for accessibility reasons and we
+suggest against following this. This is merely to showcase the child specific props for the
+`<Grid.Item/>` component.**
+
+In the layout, the `<Grid.Item/>` component (grey element), has a `Row` and `Col` button. These
+buttons are interactive and if you click the `Row` button, it will move the element between the rows
+and if you click the `Col` button, it will move the element through the columns. The `<Grid.Item/>`
+component will move among the parent grid when the `Row` or `Col` button is clicked. These buttons
+are updating `gridRowStart`(`grid-row-start` css grid property) and
+`gridColumnStart`(`grid-column-start` css grid property). This is to showcase the child specific
+props for the `<Grid.Item/>` component.
 
 In the second example below, we have a `Grid` container which has a red-orange border. It contains
 two rows with one having seven elements and the other has two elements. This example is to show how
@@ -46,6 +55,12 @@ component.
 <ExampleCodeBlock code={GridLayout} />
 
 ### UI Layout Example
+
+This example showcases what a basic UI could look like utilzing Grid. In the below example, we have
+created four elements (`Header`, `SideBar`, `BodyContent` and `Footer`). By giving each element a
+`gridArea` name, the name can be used to organize the UI however you want. If you want more info on
+how `gridArea` works with `gridTemplateAreas`,
+[see here](https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-areas).
 
 <ExampleCodeBlock code={UIExample} />
 

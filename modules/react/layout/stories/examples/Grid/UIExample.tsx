@@ -51,13 +51,13 @@ export const UIExample = () => {
         <Header backgroundColor="blueberry400">
           <H3>Header</H3>
         </Header>
-        <SideBar backgroundColor="chiliMango400">
+        <SideBar backgroundColor="blueberry300">
           <H3>SideBar</H3>
         </SideBar>
-        <BodyContent backgroundColor="juicyPear500">
+        <BodyContent backgroundColor="plum300">
           <H3>Body Content</H3>
         </BodyContent>
-        <Footer backgroundColor="blackberry400">
+        <Footer backgroundColor="berrySmoothie300">
           <H3>Footer</H3>
         </Footer>
       </Grid>
