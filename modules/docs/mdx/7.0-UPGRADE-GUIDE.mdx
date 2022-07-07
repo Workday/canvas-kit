@@ -1,0 +1,1010 @@
+import {Meta} from '@storybook/addon-docs';
+
+<Meta title="Welcome/Upgrade Guides/v7.0" />
+
+# Canvas Kit 7.0 Upgrade Guide
+
+This guide contains breaking changes in Canvas Kit v7. Please
+[reach out](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) if you have
+any questions.
+
+- [Codemod](#codemod)
+- [General Changes](#general-changes)
+  - [Dependency Upgrades](#dependency-upgrades)
+  - [Model Changes](#model-changes)
+- [Tokens](#tokens)
+  - [Depth](#depth)
+- [Components](#components)
+  - [Component Deprecations](#component-deprecations)
+  - [Component Promotions](#component-promotions)
+  - [Action Bar](#action-bar)
+  - [Banner](#banner)
+  - [Button](#button)
+  - [Icon](#icon)
+  - [Popper](#popper)
+  - [Popup](#popup)
+  - [Segmented Control](#segmented-control)
+  - [Side Panel](#side-panel)
+  - [Status Indicator](#status-indicator)
+  - [Tabs](#tabs)
+
+## Codemod
+
+Please use our [codemod package](https://github.com/Workday/canvas-kit/tree/master/modules/codemod)
+to automatically update your code to work with many of the breaking changes as you upgrade from
+Canvas Kit v6 to v7:
+
+```sh
+> npx @workday/canvas-kit-codemod v7 [path]
+```
+
+> Note: This codemod only works on `.js`, `.jsx`, `.ts`, and `.tsx` extensions. You may need to make
+> some manual changes in other file types (`.json`, `.mdx`, `.md`, etc.).
+
+> Note: You may need to run your linter after executing the codemod, as its resulting formatting
+> (spacing, quotes, etc.) may not match your project's styling.
+
+**Breaking changes handled by this codemod will be marked with a 🤖.**
+
+**Please verify all changes made by the codemod. As a safety precaution, we recommend committing the
+changes from the codemod as a single isolated commit (separate from other changes) so you can
+rollback more easily if necessary.**
+
+[Let us know](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) if you
+encounter any issues or use cases that we've missed.
+
+## General Changes
+
+### Dependency Upgrades
+
+We've upgraded to Emotion 11 and React 17 in v7. This allows teams to upgrade to newer versions of
+Emotion and React without needing to maintain older versions in order to use Canvas Kit.
+
+As part of this upgrade, we've removed use of the `/** @jsx jsx */` pragma and `css` prop within
+Canvas Kit. See our [React 17 discussion](https://github.com/Workday/canvas-kit/discussions/1455)
+and [corresponding PR](https://github.com/Workday/canvas-kit/pull/1409) for more information on why
+we made this change. Consumers may continue to use the `css` prop.
+
+To use v7, you'll need to upgrade the following dependencies:
+
+- React 16.14 OR React 17.X for backwards compatibility on JSX transform if you're using Babel or
+  TypeScript to compile code
+- Emotion 11
+- TypeScript 4.1 or higher, if applicable
+- Babel 7.9 or higher, if applicable
+- An Enzyme adapter for React 17, if applicable
+
+> We no longer support TypeScript 3.5-3.9. Previously, we used `downlevel-dts` to support TypeScript
+> 3.5+ while using TypeScript 3.8 features, but `downlevel-dts` does not support features we use in
+> TypeScript 4.1. TypeScript 4.1 was released in November 2020, and we feel it is time to move
+> forward. Reach out if you experience issues upgrading your TypeScript version. In our experience,
+> TypeScript 4.1 found a few more errors than TypeScript 3.8, but the upgrade was manageable.
+
+Please note that you may also need to update any side effect dependencies or linting packages with
+this update.
+
+View our [React 17](https://github.com/Workday/canvas-kit/discussions/1455) and
+[Emotion 11](https://github.com/Workday/canvas-kit/discussions/1453) discussions to learn more about
+any gotchas or tips and tricks with these upgrades. And of course, feel free to contribute to the
+discussion with any questions or learnings of your own!
+
+---
+
+### Model Changes
+
+#### Guards and Callbacks
+
+We've changed the signature of model event guards and callbacks. In v6, the parameters were in an
+object. This was a less than ideal developer experience as IntelliSense isn't engaged immediately
+and we don't plan on adding any additional parameters to guard and callback functions. We've removed
+the object wrapper.
+
+```tsx
+// v6
+const model = useTabsModel({
+  onSelect({data: {id}, prevState}) {
+    console.log(id, prevState);
+  },
+});
+
+// v7
+const model = useTabsModel({
+  onSelect({id}, prevState) {
+    console.log(id, prevState);
+  },
+});
+```
+
+🤖 The codemod will handle this change for you automatically.
+
+#### Model Implementation
+
+If you don't extend models, you can skip this section.
+
+In v6 we supported TypeScript 3.8 which limited the way types could be inferred and defined. v7
+requires TypeScript 4.1 which introduced
+[Template Literal Types](https://www.typescriptlang.org/docs/handbook/2/template-literal-types.html).
+This means guards and callbacks no longer need to be manually defined via an `eventMap`. Event maps
+were a stopgap, manual, and prone to errors in defining them. Not all events have guards or
+callbacks, and there's no way other than manual review to verify their existence. Template Literal
+Types allow us to properly type guards and callbacks without event maps. The previous types forced
+`data` to be an object. We've since dropped that restriction. You can still only pass a single
+argument to events. If you need additional information, use an object.
+
+This change also allowed us to remove a lot of boilerplate associated with models without
+sacrificing type safety. This change doesn't affect most use cases, but will affect those who
+extended a model. We created a new `createModelHook` utility function to help set up types.
+
+##### v6
+
+```ts
+export type MyState = {
+  value: string;
+};
+
+export type MyEvents = {
+  updateValue(data: {value: string}): void; // enforced that `data` is an object even if we only need to pass a string
+};
+
+export type MyModel = Model<MyState, MyEvents>;
+
+export const myEventMap = createEventMap<MyEvents>()({
+  guards: {
+    shouldUpdateValue: 'updateValue', // easy to forget or make a mistake on guard name
+  },
+  callbacks: {
+    onUpdateValue: 'updateValue',
+  },
+});
+
+export type MyBaseConfig = {
+  initialValue?: string;
+};
+
+export type MyConfig = MyBaseConfig & Partial<ToModelConfig<MyState, MyEvents, typeof myEventMap>>;
+
+const useMyModel = (config: MyConfig = {}): MyModel => {
+  const [value, setValue] = React.useState(config.initialValue || '');
+
+  const state = {value};
+
+  // useEventMap is used to wrap the event object with guards and callbacks according to the event map
+  const events = useEventMap(myEventMap, state, config, {
+    updateValue(data) {
+      setValue(data.value);
+    },
+  });
+
+  return {state, events};
+};
+```
+
+##### v7
+
+```tsx
+const useMyModel = createModelHook({
+  defaultConfig: {
+    initialValue: '',
+  },
+})(config => {
+  const [value, setValue] = React.useState(config.initialValue); // default is already handled
+
+  const state = {value};
+
+  const events = {
+    updateValue(value: string) {
+      // doesn't need to be an object anymore
+      setValue(value);
+    },
+  };
+
+  return {state, events};
+});
+```
+
+Note the large reduction in TypeScript type boilerplate. In this example, the only place that
+TypeScript syntax exists is in the `updateValue` function definition. This allows better collocating
+of types and values. Also note that `useEventMap` is no longer needed. `createModelHook` will
+automatically wrap the `events` returned to call guards and callbacks when appropriate. Today, this
+is done by creating a new events object. Once we drop IE11 support, this will be done via a proxy
+instead. `createModelHook` handles all type inference so you don't need to explicitly type
+everything. `createModelHook` also attaches React Context directly to the hook along with
+`defaultConfig` and `requiredConfig` for model extension.
+
+If you extended a model, you'll notice all those types are no longer being exported. You'll have to
+use this new utility function. Here's an example we found in the wild:
+
+##### v6
+
+```tsx
+import {
+  BasePopupModelConfig,
+  createEventMap,
+  Model,
+  popupEventMap,
+  PopupEvents,
+  PopupModelConfig,
+  PopupState,
+  ToModelConfig,
+  useCloseOnEscape,
+  useEventMap,
+  useFocusTrap,
+  useInitialFocus,
+  usePopupModel,
+  useReturnFocus,
+} from '@workday/canvas-kit-react';
+
+type MyModalState = PopupState & {
+  showOverlay: boolean;
+};
+
+type MyModalEvents = PopupEvents;
+
+const myModalEventMap = createEventMap<MyModalEvents>()({
+  guards: {
+    ...popupEventMap.guards,
+  },
+  callbacks: {
+    ...popupEventMap.callbacks,
+  },
+});
+
+type MyBaseModalConfig = BasePopupModelConfig & {
+  showOverlay?: boolean;
+};
+
+type MyModalModel = Model<MyModalState, MyModalEvents>;
+
+type MyConfig = MyBaseConfig &
+  Partial<ToModelConfig<MyModalState, MyModalEvents, typeof myModalEventMap>>;
+
+export const useMyModalModel = (config: MyConfig = {}): MyModalModel => {
+  const [showOverlay] = React.useState(config.showOverlay ?? true);
+
+  const model = usePopupModel({
+    ...config,
+    // hook up to a redux store
+    onShow(...params) {
+      dispatch(setIsModalOpen(true));
+      config?.onShow?.(...params);
+    },
+    onHide(...params) {
+      dispatch(setIsModalOpen(false));
+      config?.onShow?.(...params);
+    },
+  });
+
+  useInitialFocus(model);
+  useReturnFocus(model);
+  useFocusTrap(model);
+  useCloseOnEscape(model);
+
+  const state = {
+    ...model.state,
+    showOverlay,
+  };
+
+  const events = useEventMap(myEventMap, state, config, {
+    ...model.events,
+  });
+
+  return {state, events};
+};
+```
+
+##### v7
+
+```ts
+import {
+  useCloseOnEscape,
+  useEventMap,
+  useFocusTrap,
+  useInitialFocus,
+  usePopupModel,
+  useReturnFocus,
+} from '@workday/canvas-kit-react';
+
+const useMyModalModel = createModelHook({
+  defaultConfig: {
+    ...usePopupModel.defaultConfig,
+    showOverlay: true,
+  },
+  requiredConfig: usePopupModel.requiredConfig,
+  contextOverride: usePopupModel.Context, // needed to make sure this model uses the same context as the popup model, otherwise it will create a new one
+})(config => {
+  // `mergeConfig` takes care of the manual merging we were doing earlier
+  const model = usePopupModel(
+    usePopupModel.mergeConfig(config, {
+      // hook up to a redux store
+      onShow() {
+        dispatch(setIsModalOpen(true));
+      },
+      onHide() {
+        dispatch(setIsModalOpen(false));
+      },
+    })
+  );
+
+  useInitialFocus(model);
+  useReturnFocus(model);
+  useFocusTrap(model);
+  useCloseOnEscape(model);
+
+  const state = {
+    ...model.state,
+    showOverlay,
+  };
+
+  return {...model, state};
+});
+```
+
+We've eliminated the cumbersome type boilerplate and type imports. The code is more focused on your
+unique logic and less on boilerplate.
+
+Given the complex nature of this code, this change is **not** handled by the codemod.
+
+## Tokens
+
+### Depth
+
+**Changes:**
+
+- Removed `inset` depth
+- Added new depth values: `none` (to remove the default depth from a component), `5` and `6`
+- Updated all depth values: depth now adds only `box-shadow` with two shadows and no border
+
+We've also changed the default depth for the following components:
+
+- Breadcrumbs (Dropdown Menu): Depth 2 → Depth 3
+- Card: Depth 2 → Depth 1
+- Color Picker (Palette): Depth 2 → Depth 5
+- Combobox: Depth 1 → Depth 3
+- Dialog: Depth 2 → Depth 5
+- Menu: Depth 2 → Depth 3
+- Modal: Depth 2 → Depth 6
+- Popup: Depth 2 → Depth 5
+- Side Panel (Preview, alternate variant): Depth 3 → Depth 5
+- Toast: Depth 2 → Depth 5
+
+## Components
+
+### Component Deprecations
+
+#### Deprecation Types
+
+There are two types of deprecations: soft and hard.
+
+##### Soft Deprecation
+
+A soft-deprecated component is still available with its full functionality, but it will have been
+renamed with a prefix to indicate its soft-deprecated status. It will also include a console warning
+announcing its deprecation. This warning will only be triggered on the component's initial render.
+
+Soft-deprecated types and utilities will also be renamed but generally will not trigger a console
+warning.
+
+##### Hard Deprecation
+
+A hard-deprecated component or package is no longer available. You will need to follow the method
+prescribed in our upgrade guide to update your application. Please
+[reach out](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) to our team
+directly if you need additional help.
+
+#### Cookie Banner
+
+We are [hard-deprecating](#hard-deprecation) `CookieBanner`. Please reference this
+[example](https://workday.github.io/canvas-kit/?path=/story/examples-cookiebanner-react--basic) to
+migrate away from `CookieBanner`.
+
+#### Page Header
+
+We are [hard-deprecating](#hard-deprecation) `PageHeader`. Please reference this
+[example](https://workday.github.io/canvas-kit/?path=/story/examples-pageheader-react--basic) to
+migrate away from `PageHeader`.
+
+#### Header / Global Header
+
+We are [hard-deprecating](#hard-deprecation) `Header`. Please reference this
+[example](https://workday.github.io/canvas-kit/?path=/story/examples-globalheader-react--basic) to
+migrate away from `Header`.
+
+---
+
+### Component Promotions
+
+We've [promoted](https://github.com/Workday/canvas-kit/issues/1395) the following components in v7:
+
+- `Box` from `@workday/canvas-kit-labs/common` to `@workday/canvas-kit-react/layout`
+- `Flex` from `@workday/canvas-kit-labs/layout` to `@workday/canvas-kit-react/layout`
+- `Stack` from `@workday/canvas-kit-labs/layout` to `@workday/canvas-kit-react/layout`
+
+```tsx
+// v6
+import {Box} from '@workday/canvas-kit-labs-react/common';
+
+// v7
+import {Box} from '@workday/canvas-kit-react/layout';
+```
+
+🤖 The codemod will update imports for these promoted components.
+
+The APIs for these promoted components remain unchanged.
+
+---
+
+### Action Bar
+
+The ActionBar API changed to model API to support more generic behaviors to allow for other
+components to support responsive layouts using the same models and behaviors. It also allows to
+implement a responsive layout based on a container width
+([#1585](https://github.com/Workday/canvas-kit/pull/1585)).
+
+```tsx
+const model = useActionBarModel({
+  items: [
+    {
+      id: 'first',
+      text: 'First Action',
+    },
+  ],
+});
+
+<ActionBar model={model} />;
+```
+
+The ActionBar component can now handle responsive containers, but the support is not automatic. You
+must use the dynamic API and provide an overflow menu subcomponent. The dynamic API doesn't know the
+shape of your object, so render props must be used to instruct React how to render each item.
+
+```tsx
+const [items] = React.useState<MyActionItem[]>([
+  {
+    id: 'first',
+    text: 'First Action',
+  },
+  {
+    id: 'second',
+    text: 'Second Action',
+  },
+  {
+    id: 'third',
+    text: 'Third Action',
+  },
+  {
+    id: 'fourth',
+    text: 'Fourth Action',
+  },
+  {
+    id: 'fifth',
+    text: 'Fifth Action',
+  },
+]);
+
+const model = useActionBarModel({items});
+
+<ActionBar model={model}>
+  <ActionBar.List>
+    {item => <ActionBar.Item onClick={() => console.log(item.id)}>{item.text}</ActionBar.Item>}
+  </ActionBar.List>
+  <ActionBar.Menu.Popper>
+    <ActionBar.Menu.Card maxWidth={300} maxHeight={200}>
+      <ActionBar.Menu.List>
+        {item => (
+          <ActionBar.Menu.Item onClick={() => console.log(item.id)}>
+            {item.text}
+          </ActionBar.Menu.Item>
+        )}
+      </ActionBar.Menu.List>
+    </ActionBar.Menu.Card>
+  </ActionBar.Menu.Popper>
+</ActionBar>;
+```
+
+🤖 The codemod will remove uses of the `fixed` prop from `ActionBar` and restructure component by
+creating `ActionBar.List` subcomponent and replacing all `ActionBar` children to it.
+
+---
+
+### Banner
+
+Banner is now a [compound component](/getting-started/for-developers/resources/compound-components/)
+composed of `Banner.Icon`, `Banner.Label`, and `Banner.ActionText`. This allows direct access to the
+icon, label, and text elements.
+
+```tsx
+// v6
+<Banner label="3 Warnings" actionText="Show Details" variant={Banner.Variant.Sticky} error={Banner.ErrorType.Error} />
+
+// v7
+<Banner isSticky={true} hasError={true}>
+  <Banner.Icon />
+  <Banner.Label>3 Warnings</Banner.Label>
+  <Banner.ActionText>Show Details</Banner.ActionText>
+</Banner>
+```
+
+🤖 The codemod will rewrite your JSX to match the new API.
+
+Like all compound components, `Banner` is written using the
+[createComponent](/getting-started/for-developers/resources/creating-compound-components/#disclosurecontent-component)
+utility from our
+[common](https://github.com/Workday/canvas-kit/blob/ff77c5bd83e41c3ab2b9c55e41a8b7c1fde33a1b/modules/react/common/lib/utils/components.ts#L167)
+module; it supports [ref forwarding](https://reactjs.org/docs/forwarding-refs.html) and using the
+`as` prop to change the rendered element.
+
+The `variant` prop (which previously accepted `Banner.Variant.Full` or `Banner.Variant.Sticky`) has
+been converted to the boolean `isSticky` prop on the container `Banner` component.
+
+Similarly, the `error` prop (which previously accepted `Banner.ErrorType.Alert` or
+`Banner.ErrorType.Error`) has been converted to the boolean `hasError` prop on `Banner`. `Banner`
+now uses the `useThemedPalette` hook which allows you to override its colors using the Canvas theme.
+
+The icon is now customizable via the `icon` prop of `Banner.Icon`. Previously, the icon was limited
+to `exclamationTriangleIcon` and `exclamationCircleIcon` for the alert and error states,
+respectively.
+
+---
+
+### Button
+
+#### Removal of Icon Button
+
+To consolidate Button APIs, we've removed `IconButton` in favor of `SecondaryButton` and
+`TertiaryButton`. The following table shows how `IconButton` variants in v6 map to their
+corresponding buttons in v7.
+
+| v6 `IconButton` variant    | v7 button (and variant, if necessary)    |
+| -------------------------- | ---------------------------------------- |
+| `circle` (default variant) | `TertiaryButton`                         |
+| `circleFilled`             | `SecondaryButton`                        |
+| `inverse`                  | `TertiaryButton` with `inverse` variant  |
+| `inverseFilled`            | `SecondaryButton` with `inverse` variant |
+| `plain`                    | Unsupported                              |
+| `square`                   | Unsupported                              |
+| `squareFilled`             | Unsupported                              |
+
+> Note: See below for more information about how to manually migrate from
+> [unsupported v6 variants](#unsupported-iconbutton-variants).
+
+🤖 Use the codemod to migrate your `IconButton` components in v6 to their corresponding buttons in
+v7:
+
+```tsx
+// v6
+<IconButton icon={plusIcon} />
+<IconButton variant="circleFilled" icon={plusIcon} />
+<IconButton variant="inverse" icon={plusIcon} />
+<IconButton variant="inverseFilled" icon={plusIcon} />
+
+// v7
+<TertiaryButton icon={plusIcon} />
+<SecondaryButton icon={plusIcon} />
+<TertiaryButton variant="inverse" icon={plusIcon} />
+<SecondaryButton variant="inverse" icon={plusIcon} />
+```
+
+##### Unsupported IconButton Variants
+
+In order to simplify our API, we no longer support the `plain`, `square`, and `squareFilled`
+variants from `IconButton`.
+
+`IconButton` components with `square`, `squareFilled` and `plain` variants should be updated to the
+corresponding icon-only button versions (`PrimaryButton`, `SecondaryButton`, and `TertiaryButton`),
+`ToolbarIconButton`, or `SegmentedControl`. You may use `ToolbarIconButton` if you would still like
+to have a square icon that is toggleable.
+
+These changes are **not** handled by the codemod.
+
+> If none of these options support your use case, we've introduced a low-level
+> [`BaseButton`](#basebutton) component which allows you to modify the button's colors, size, and
+> other props. For an example of it being used, reference our
+> [`PageButton`](https://github.com/Workday/canvas-kit/blob/master/modules/react/pagination/lib/Pagination/PageButton.tsx)
+> component.
+
+##### Removal of IconButtonProps
+
+The `IconButtonProps` interface no longer exists now that `IconButton` has been removed.
+
+This change is **not** handled by the codemod.
+
+##### Toggled
+
+There is no equivalent to the `IconButton` `toggled` prop in `SecondaryButton` and `TertiaryButton`.
+If you wish to render a button with a toggled state, consider using `ToolbarIconButton`.
+
+This change is **not** handled by the codemod.
+
+#### Icon Position
+
+The `iconPosition` prop determines where an icon should be rendered relative to the button text.
+We've updated the values from `left` and `right` to `start` and `end` respectively to better reflect
+bidirectionality. The default value is `start`.
+
+```tsx
+// v6
+iconPosition: 'left' | 'right';
+
+// v7
+iconPosition: 'start' | 'end';
+```
+
+🤖 The codemod will map `left` to `start` and `right` to `end` for all uses of `iconPosition`.
+
+`iconPosition` will have no effect if you're rendering a button with only an icon and no text.
+
+#### Removal of dataLabel
+
+In order to simplify our API, we've removed the `dataLabel` prop from `PrimaryButton` and
+`SecondaryButton`.
+
+Given the varied use of `dataLabel`, this change is **not** handled by the codemod. Here's an
+example of how to achieve a similar styling in v7:
+
+```tsx
+// v6
+<PrimaryButton dataLabel="1:00">Time</PrimaryButton>;
+
+// v7
+import {space, type} from '@workday/canvas-kit-react/common';
+
+const DataLabel = styled('span')({
+  position: 'relative', // Fixes an IE issue with text within button moving on click
+  overflow: 'hidden',
+  whiteSpace: 'nowrap',
+  fontWeight: type.properties.fontWeights.regular,
+  marginLeft: space.xxxs,
+});
+
+return (
+  <PrimaryButton>
+    Time
+    <DataLabel>1:00</DataLabel>
+  </PrimaryButton>
+);
+```
+
+#### BaseButton
+
+> **Disclaimer**: We **strongly** advise consumers **not** to use `BaseButton` and to instead rely
+> on `PrimaryButton`, `SecondaryButton` and `TertiaryButton` whenever possible. `BaseButton` is
+> strictly provided as a last resort if no other option is available for your use case.
+
+As part of our Button restructuring, we've created a low level `BaseButton` component. This
+component isn't intended to be used outside of Canvas Kit, but we do export it for very specific use
+cases. `BaseButton` is a styled `<button>` element which supports style properties such as `colors`,
+`padding`, and `width` among many others.
+
+Here's an example:
+
+```tsx
+import * as React from 'react';
+import {colors} from '@workday/canvas-kit-react/tokens';
+import {BaseButton} from '@workday/canvas-kit-react/button';
+import {plusIcon} from '@workday/canvas-system-icons-web';
+
+const getBasicButtonColors = () => {
+  return {
+    default: {
+      background: colors.blueberry400,
+      label: colors.frenchVanilla100,
+      icon: colors.frenchVanilla100,
+    },
+    hover: {
+      background: colors.blueberry500,
+      label: colors.frenchVanilla100,
+      icon: colors.frenchVanilla100,
+    },
+    active: {
+      background: colors.blueberry500,
+      label: colors.frenchVanilla100,
+      icon: colors.frenchVanilla100,
+    },
+    focus: {
+      background: colors.blueberry400,
+      label: colors.frenchVanilla100,
+      icon: colors.frenchVanilla100,
+    },
+    disabled: {
+      background: colors.blueberry400,
+    },
+  };
+};
+
+export type BasicButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {};
+
+export const BasicButton = ({children, ...elemProps}: BasicButtonProps) => {
+  return (
+    <BaseButton
+      colors={getPaginationButtonColors()}
+      {...elemProps}
+    >
+      <BaseButton.Label>{children}</BaseButton.Label>
+      <BaseButton.Icon icon={plusIcon}>
+    </BaseButton>
+  );
+};
+```
+
+`BaseButton` uses our `Box` component under the hood, which allows it to accept a variety of style
+properties. Because of the flexibility of this component, consumers can use it to create toggled
+buttons or other buttons that aren't supported by our standard button components.
+
+---
+
+### Icon
+
+We've updated `AccentIcon`, `AppletIcon`, `Graphic`, `Icon`, `Svg`, `SystemIcon`, and
+`SystemIconCircle` to use the
+[createComponent](/getting-started/for-developers/resources/creating-compound-components/#disclosurecontent-component)
+utility from our
+[common](https://github.com/Workday/canvas-kit/blob/ff77c5bd83e41c3ab2b9c55e41a8b7c1fde33a1b/modules/react/common/lib/utils/components.ts#L167)
+module; they now support [ref forwarding](https://reactjs.org/docs/forwarding-refs.html) and using
+the `as` prop to change the rendered element.
+
+These components previously supported an `iconRef` prop. In v7, you'll need to use `ref` instead of
+`iconRef`:
+
+```tsx
+// v6
+<SystemIcon iconRef={ref} />;
+
+// v7
+<SystemIcon ref={ref} />;
+```
+
+🤖 The codemod will update all Icon components that previously supported `iconRef` to use `ref`
+instead.
+
+---
+
+### Popper
+
+We've removed the `containerElement` prop from `Popper` because it's no longer needed with the
+Fullscreen API.
+
+---
+
+### Popup
+
+#### Popup.Card
+
+`Popup.Card` components (this includes `Modal.Card` and `Dialog.Card`) are now flexbox containers.
+This was done to support overflowing content (by default, the `Popup.Body` component). The card is a
+vertical flexbox container and `Popup.Heading`, `Popup.Body`, and any other children are flex items.
+`Popup.Body` now has `overflow-y: auto` to naturally allow the body content to overflow in a scroll
+container. This is a breaking change if your `Popup`, `Modal`, or `Dialog` doesn't work with a
+flexbox with `flex-direction: column`. In most cases, this shouldn't matter. If this change does
+cause your popup to display incorrectly, you may need to play around with flex item containers.
+
+Here's an example of where your current implementation might break. A common `Modal` has a heading,
+body, and footer (Cancel/Submit buttons). If the Cancel and Submit buttons are direct children of
+the `Modal.Card` like the following...
+
+```tsx
+<Modal.Card>
+  <Modal.Heading>Some Heading</Modal.Heading>
+  <Modal.Body>Some Body</Modal.Body>
+  <SecondaryButton>Cancel</SecondaryButton>
+  <PrimaryButton>Submit</PrimaryButton>
+</Modal.Card>
+```
+
+...the buttons will become vertical flex items instead of the default which is displaying
+inline-block. Before v7, the buttons would layout next to each other horizontally. In v7, the
+buttons will stack vertically. To fix this, you'll need to add another element as a flex item in the
+`Modal.Card`. The following example uses `HStack` to achieve the desired horizontal layout:
+
+```tsx
+<Modal.Card>
+  <Modal.Heading>Some Heading</Modal.Heading>
+  <Modal.Body>Some Body</Modal.Body>
+  <HStack spacing="s">
+    <SecondaryButton>Cancel</SecondaryButton>
+    <PrimaryButton>Submit</PrimaryButton>
+  </HStack>
+</Modal.Card>
+```
+
+If your code contains any hacks to make a `Modal` overflow, those hacks should now be removed.
+[This example shows how body content overflows](https://workday.github.io/canvas-kit/?path=/docs/components-popups-modal-react--body-overflow)
+(you may have to limit your browser height to see the overflow). Before v7, you had to manually set
+the `max-height` of the `Modal.Body` element using calculations. These should now be removed. The
+`Popup.Card` now has a max height and the `Popup.Body` height is automatically calculated.
+
+#### Popup.Body
+
+`Popup.Body` is now an overflow container. This means two things:
+
+- `Popup.Body` will scroll if the contents are too big to fit in the page
+- `Popup.Body` will hide focus rings that render outside the overflow container
+
+Our examples contained buttons inside the `Body` element with their focus rings cut off. We fixed
+this by moving the buttons outside the `Body` element. This is most likely the desired structure
+anyway since the buttons will no longer scroll with overflowed `Body` content.
+
+```tsx
+// v6
+<Modal.Card>
+  <Modal.Body>
+    Body Contents
+    <HStack spacing="s">
+      {/* Will scroll with the body */}
+      <Modal.CloseButton as={PrimaryButton}>Delete</Modal.CloseButton>
+      <Modal.CloseButton>Cancel</Modal.CloseButton>
+    </HStack>
+  </Modal.Body>
+</Modal.Card>
+
+// v7
+<Modal.Card>
+  <Modal.Body>Body Contents</Modal.Body>
+  <HStack spacing="s">
+    <Modal.CloseButton as={PrimaryButton}>Delete</Modal.CloseButton>
+    <Modal.CloseButton>Cancel</Modal.CloseButton>
+  </HStack>
+</Modal.Card>
+```
+
+#### Popup Model
+
+In addition to the other [Model Changes](#model-changes), the `show` and `hide` events of all
+disclosure-type models have been updated to remove the extra event wrapper. This change allows
+developers to directly attach the `show` and `hide` events to React event handlers.
+
+The following models were affected:
+
+- `useDisclosureModel`
+- `usePopupModel`
+- `useModalModel`
+- `useDisclosureModel`
+
+```tsx
+// v6
+<button onClick={() => model.events.show()} /> // most use-cases look like this
+<button onClick={event => model.events.show({event})} />
+
+// v7
+<button onClick={model.events.show} />
+```
+
+Removing the object wrapper around the `event` allows us to directly pass the `show` or `hide` event
+to the `onClick` handler which is much more convenient. We couldn't find many uses of the `event` in
+the wild, so the impact will be minimal. Most usage of `show` or `hide` events are called without
+`event`, so this change will not impact most people. There is **no** codemod for this change,
+because the usage is very difficult to detect since most people pass a callback that doesn't take
+parameters.
+
+Guards and callback signatures have also changed to remove the object wrapper around the `event`.
+The following v6 example includes the [Model Changes](#model-changes) which this change compounds
+upon.
+
+```tsx
+// v6
+const model = usePopupModel({
+  shouldShow({data: {event}, state}) {
+    console.log(event, state);
+  },
+  onShow({data: {event}, prevState}) {
+    console.log(event, prevState);
+  },
+});
+
+// v7
+const model = usePopupModel({
+  shouldShow(event, state) {
+    console.log(event, state);
+  },
+  onShow(event, prevState) {
+    console.log(event, prevState);
+  },
+});
+```
+
+🤖 The codemod will update all inline guards and callbacks defined like they are in this example. If
+a guard or callback was defined outside the model config block, it will not be covered by the
+codemod.
+
+---
+
+### Segmented Control
+
+`SegmentedControl` is now a
+[compound component](/getting-started/for-developers/resources/compound-components/).
+
+Given the [removal of `IconButton`](#removal-of-icon-button) in v7, you'll now need to use
+`SegmentedControl.Button` instead.
+
+```tsx
+// v6
+<SegmentedControl value={value} onChange={handleToggle}>
+  <IconButton
+    icon={listViewIcon}
+    value="list-view"
+    aria-label="List View"
+    onClick={e => console.log('Existing IconButton onClick callback')}
+  />
+  <IconButton icon={worksheetsIcon} value="table-view" aria-label="Table View" disabled={true} />
+  <IconButton icon={deviceTabletIcon} value="device-view" aria-label="Device View" />
+  <IconButton icon={percentageIcon} value="percent-view" aria-label="Percent View" />
+</SegmentedControl>
+
+// v7
+<SegmentedControl value={value} onChange={handleToggle}>
+  <SegmentedControl.Button
+    icon={listViewIcon}
+    value="list-view"
+    aria-label="List View"
+    onClick={e => console.log('Existing IconButton onClick callback')}
+  />
+  <SegmentedControl.Button
+    icon={worksheetsIcon}
+    value="table-view"
+    aria-label="Table View"
+    disabled={true}
+  />
+  <SegmentedControl.Button icon={deviceTabletIcon} value="device-view" aria-label="Device View" />
+  <SegmentedControl.Button icon={percentageIcon} value="percent-view" aria-label="Percent View" />
+</SegmentedControl>
+```
+
+🤖 The codemod will replace all `IconButton` children of `SegmentedControl` with
+`SegmentedControl.Button`.
+
+---
+
+### Side Panel
+
+The `SidePanel` in our Preview package now has a tooltip built in to its toggle button. If you
+currently have a `Tooltip` component wrapping this component, you should remove it. Instead, you'll
+need to provide the appropriate tooltip text to the button based on its state using the following
+new props added to `SidePanel.ToggleButton`:
+
+```tsx
+/**
+ * The tooltip text to expand the side panel
+ * @default 'Expand'
+ */
+tooltipTextExpand?: string;
+/**
+ * The tooltip text to collapse the side panel
+ * @default 'Collapse'
+ */
+tooltipTextCollapse?: string;
+```
+
+---
+
+### Status Indicator
+
+Status Indicators currently truncate when they reach their max width of `150px`. After receiving
+requests to increase this value, we've increased it by 33% to `200px`.
+
+We've also added a `maxWidth` prop to further configure this value if necessary. While this
+increases flexibility, please keep in mind that status text should be short, direct, and preferably
+a single word.
+
+```tsx
+<StatusIndicator label="Slightly Longer Status" type={StatusIndicator.Type.Gray} maxWidth={250} />
+```
+
+---
+
+### Tabs
+
+To avoid interference with the HTML `name` attribute, we're now using `data-id` instead of `name`
+for `Tabs.Item`, `Tabs.Panel`, and `Tabs.Menu.Item`.
+
+```tsx
+// v6
+<Tabs.Item name="tabs-item">...</Tabs.Item>
+<Tabs.Panel name="tabs-panel">...</Tabs.Panel>
+<Tabs.Menu.Item name="tabs-menu-item">...</Tabs.Menu.Item>
+
+// v7
+<Tabs.Item data-id="tabs-item">...</TabsItem>
+<Tabs.Panel data-id="tabs-panel">...</Tabs.Panel>
+<Tabs.Menu.Item data-id="tabs-menu-item">...</Tabs.Menu.Item>
+```
+
+🤖 The codemod will handle these changes for you automatically.

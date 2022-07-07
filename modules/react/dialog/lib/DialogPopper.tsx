@@ -1,27 +1,23 @@
 import * as React from 'react';
 
-import {createComponent, useModelContext, ExtractProps} from '@workday/canvas-kit-react/common';
-import {Popup, PopupModelContext, usePopupPopper, Popper} from '@workday/canvas-kit-react/popup';
+import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
+import {Popup, usePopupPopper, Popper} from '@workday/canvas-kit-react/popup';
 
-import {useDialogPopper} from './hooks';
+import {useDialogPopper, useDialogModel} from './hooks';
 
 export interface DialogPopperProps extends ExtractProps<typeof Popup.Popper, never> {}
 
-export const DialogPopper = createComponent('div')({
+export const DialogPopper = createSubcomponent('div')({
   displayName: 'Dialog.Popper',
-  Component: (
-    {children, model, placement, popperOptions, ...elemProps}: DialogPopperProps,
-    ref,
-    Element
-  ) => {
-    const localModel = useModelContext(PopupModelContext, model);
-
-    const popperProps = usePopupPopper(localModel, {placement, popperOptions}, ref);
-    const props = useDialogPopper(localModel, elemProps);
+  modelHook: useDialogModel,
+})<ExtractProps<typeof Popup.Popper, never>>(
+  ({children, placement, popperOptions, ref, ...props}, Element, model) => {
+    const popperProps = usePopupPopper(model, {placement, popperOptions}, ref);
+    const elemProps = useDialogPopper(model, props);
     return (
-      <Element {...props}>
+      <Element {...elemProps}>
         <Popper {...popperProps}>{children}</Popper>
       </Element>
     );
-  },
-});
+  }
+);

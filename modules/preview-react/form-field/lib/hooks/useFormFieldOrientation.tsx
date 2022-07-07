@@ -1,4 +1,4 @@
-import {StackSpacing, StackProps} from '@workday/canvas-kit-labs-react/layout';
+import {StackSpacing, StackProps} from '@workday/canvas-kit-react/layout';
 import {space} from '@workday/canvas-kit-react/tokens';
 
 /**

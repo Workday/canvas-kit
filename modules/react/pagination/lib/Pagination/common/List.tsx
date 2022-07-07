@@ -1,39 +1,41 @@
-/** @jsx jsx */
 import * as React from 'react';
-import {jsx, css} from '@emotion/core';
 
-import {Flex, FlexProps} from './Flex';
+import {Flex, FlexProps} from '@workday/canvas-kit-react/layout';
+import {StyledType, styled, createComponent} from '@workday/canvas-kit-react/common';
 
-export interface ListProps extends FlexProps, React.OlHTMLAttributes<HTMLElement> {
-  as: 'ol' | 'ul';
-}
+export interface ListProps extends FlexProps {}
 
-const listStyles = css({
+const StyledList = styled(Flex.as('ul'))<StyledType & FlexProps>({
   listStyle: 'none',
 });
 
-export const List = React.forwardRef<HTMLOListElement | HTMLUListElement, ListProps>(
-  ({as, children, ...elemProps}, ref) => {
+export const List = createComponent('ul')({
+  displayName: 'List',
+  Component: ({children, ...elemProps}: ListProps, ref, Element) => {
     return (
-      <Flex as={as} m="zero" p="zero" css={listStyles} ref={ref} {...elemProps}>
+      <StyledList
+        as={Element}
+        marginY="zero"
+        marginX="zero"
+        padding="zero"
+        ref={ref}
+        {...elemProps}
+      >
+        {children}
+      </StyledList>
+    );
+  },
+});
+
+export interface ListItemProps extends FlexProps {}
+
+export const ListItem = createComponent('li')({
+  displayName: 'ListItem',
+  Component: ({children, ...elemProps}: ListItemProps, ref, Element) => {
+    return (
+      <Flex as={Element} ref={ref} {...elemProps}>
         {children}
       </Flex>
     );
-  }
-);
-
-List.displayName = 'List';
-
-export type ListItemProps = Omit<FlexProps, 'as'>;
-
-export const ListItem = React.forwardRef<HTMLLIElement, ListItemProps>(
-  ({children, ...elemProps}, ref) => {
-    return (
-      <Flex as="li" ref={ref} {...elemProps}>
-        {children}
-      </Flex>
-    );
-  }
-);
-
-ListItem.displayName = 'ListItem';
+  },
+});
