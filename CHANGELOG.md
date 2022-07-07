@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v7.1.2](https://github.com/Workday/canvas-kit/releases/tag/v7.1.2) (2022-07-07)
+
+### Components
+
+- chore: Bump support to next major version ([@NicholasBoll](https://github.com/NicholasBoll))
+
+### Infrastructure
+
+- ci: Add automated forward merge ([#1662](https://github.com/Workday/canvas-kit/pull/1662)) ([@NicholasBoll](https://github.com/NicholasBoll))
+- ci: Add automated forward merge ([#1662](https://github.com/Workday/canvas-kit/pull/1662)) ([@NicholasBoll](https://github.com/NicholasBoll))
+- ci: Add yarn install step after forward merge attempt ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v7.1.1](https://github.com/Workday/canvas-kit/releases/tag/v7.1.1) (2022-06-30)
 
 ### Components
