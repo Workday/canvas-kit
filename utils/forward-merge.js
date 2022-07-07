@@ -57,6 +57,8 @@ async function main() {
       }
     }
 
+    await exec(`yarn install --production=false`);
+
     // If we're here, we've fixed all merge conflicts. We need to commit
     await exec(`git add .`);
     await exec(`git commit --no-verify -m "chore: Merge ${branch} into ${nextBranch}"`);
