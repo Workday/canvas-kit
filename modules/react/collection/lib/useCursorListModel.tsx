@@ -6,17 +6,40 @@ import {useBaseListModel, Item, defaultGetId as getId} from './useBaseListModel'
 type NavigationInput = Pick<ReturnType<typeof useCursorListModel>, 'state'>;
 
 export interface NavigationManager {
+  /** Get the first item in a collection. This will be called when the `Home` key is pressed for
+   * Lists and `Ctrl+Home` for Grids. */
   getFirst: NavigationRequestor;
+  /** Get the last item in a collection. This will be called when the `End` key is pressed for Lists
+   * and `Ctrl+End` for Grids. */
   getLast: NavigationRequestor;
+  /** Get an item with the provided `id`. */
   getItem: NavigationRequestor;
+  /** Get the next item after the provided `id`. This will be called when the `Right` arrow key is
+   * pressed for RTL languages and when the `Left` arrow is pressed for LTR languages. */
   getNext: NavigationRequestor;
+  /** **For Grids:** Get the cell in the next row from the provided `id`. This will be called when
+   * the `Down` arrow is pressed.  */
   getNextRow: NavigationRequestor;
+  /** Get the previous item before the provided `id`. This will be called when the `Left` arrow key
+   * is pressed for RTL languages and when the `Right` arrow is pressed for LTR languages. */
   getPrevious: NavigationRequestor;
+  /** **For Grids:** Get the cell in the previous row from the provided `id`. This will be called
+   * when the `Up` arrow is pressed.  */
   getPreviousRow: NavigationRequestor;
+  /** **For Grids:** Get the first item in a row. This will be called when the `Home` key is
+   * pressed. */
   getFirstOfRow: NavigationRequestor;
+  /** **For Grids:** Get the last item in a row. This will be called when the `End` key is
+   * pressed. */
   getLastOfRow: NavigationRequestor;
-  getPreviousPage: NavigationRequestor;
+  /** Get the next "page". A "page" is application specific and usually means next visible screen.
+   * If the viewport is scrollable, it would scroll so that the last item visible is now the first
+   * item visible. This is called when the `PageDown` key is pressed */
   getNextPage: NavigationRequestor;
+  /** Get the next "page". A "page" is application specific and usually means previous visible
+   * screen. If the viewport is scrollable, it would scroll so that the first item visible is now
+   * the last item visible. This is called when the `PageUp` key is pressed */
+  getPreviousPage: NavigationRequestor;
 }
 
 /**

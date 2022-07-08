@@ -174,7 +174,7 @@ describe('navigationManager', () => {
     });
 
     describe('getPreviousRow', () => {
-      it('should return the original item when cursor is at 8', () => {
+      it('should return the original item when cursor is at 2', () => {
         expect(navigationManager.getPreviousRow('2', {state})).toEqual(items[1]);
       });
 
@@ -228,7 +228,7 @@ describe('navigationManager', () => {
     });
 
     describe('getPreviousRow', () => {
-      it('should return the original item when cursor is at 8', () => {
+      it('should return the original item when cursor is at 2', () => {
         expect(navigationManager.getPreviousRow('2', {state})).toEqual(items[1]);
       });
 
@@ -292,7 +292,7 @@ describe('wrappingNavigationManager', () => {
     });
 
     describe('getPreviousRow', () => {
-      it('should return the second item of the last row when cursor is at 8', () => {
+      it('should return the second item of the last row when cursor is at 2', () => {
         expect(wrappingNavigationManager.getPreviousRow('2', {state})).toEqual(items[7]);
       });
 
@@ -346,7 +346,7 @@ describe('wrappingNavigationManager', () => {
     });
 
     describe('getPreviousRow', () => {
-      it('should return the second item of the last row when cursor is at 8', () => {
+      it('should return the second item of the last row when cursor is at 2', () => {
         expect(wrappingNavigationManager.getPreviousRow('2', {state})).toEqual(items[7]);
       });
 

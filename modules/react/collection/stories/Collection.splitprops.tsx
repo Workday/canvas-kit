@@ -15,3 +15,5 @@ export const ListEventsComponent = (_: ListModel['events']) => <div />;
 export const GridModelConfigComponent = (_: GridModelConfig) => <div />;
 export const GridStateComponent = (_: GridModel['state']) => <div />;
 export const GridEventsComponent = (_: GridModel['events']) => <div />;
+
+export const NavigationManager = (_: GridModelConfig['navigation']) => <div />;
