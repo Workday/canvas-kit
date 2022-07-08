@@ -3,6 +3,35 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v7.1.1](https://github.com/Workday/canvas-kit/releases/tag/v7.1.1) (2022-06-30)
+
+### Components
+
+- fix(pagination): Remove console warning ([#1657](https://github.com/Workday/canvas-kit/pull/1657)) ([@jamesfan](https://github.com/jamesfan))
+
+
+## [v7.1.0](https://github.com/Workday/canvas-kit/releases/tag/v7.1.0) (2022-06-28)
+
+### Components
+
+- chore: Bump prerelease/minor to new major version ([@NicholasBoll](https://github.com/NicholasBoll))
+- feat: Add useModalityType hook and add modality support to tabs ([#1523](https://github.com/Workday/canvas-kit/pull/1523)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v7.0.15](https://github.com/Workday/canvas-kit/releases/tag/v7.0.15) (2022-06-28)
+
+### Components
+
+- docs(examples): Add example for SegmentedControl with text buttons ([#1623](https://github.com/Workday/canvas-kit/pull/1623)) ([@RayRedGoose](https://github.com/RayRedGoose))
+
+
+## [v7.0.14](https://github.com/Workday/canvas-kit/releases/tag/v7.0.14) (2022-06-22)
+
+### Components
+
+- fix(button): Make PageButton in Pagination themable ([#1648](https://github.com/Workday/canvas-kit/pull/1648)) ([@mannycarrera4](https://github.com/mannycarrera4))
+
+
 ## [v7.0.13](https://github.com/Workday/canvas-kit/releases/tag/v7.0.13) (2022-06-20)
 
 
