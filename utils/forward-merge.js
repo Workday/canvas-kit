@@ -87,6 +87,7 @@ async function main() {
   const alreadyMerging = defaultBranch.startsWith('merge');
 
   let hasConflicts = false;
+  let hasUnresolvedConflicts = false;
   const {GITHUB_REF: currentBranch = defaultBranch} = process.env;
   const [branch, nextBranch] = getBranches(currentBranch.replace('refs/heads/', ''));
 
@@ -98,12 +99,13 @@ async function main() {
 
   try {
     console.log(`Creating a merge branch`);
-    const result = await exec(
+    await spawn(
       `git merge origin/${nextBranch} -m 'chore: Merge ${branch} into ${nextBranch} [skip release]'`
     );
 
     // The merge was successful with no merge conflicts
   } catch (result) {
+    hasConflicts = true;
     console.log(`Attempting to automatically resolve conflicts`);
     // The merge had conflicts
 
@@ -134,7 +136,7 @@ async function main() {
         console.log(`Resolved conflicts in ${conflict}`);
       } else {
         console.log('Merge cannot be resolved automatically');
-        hasConflicts = true;
+        hasUnresolvedConflicts = true;
         if (!alreadyMerging) {
           // If we're not already merging, we want to bail now - this is the default for CI
           // If we are already merging, we must be doing things manually
@@ -146,17 +148,23 @@ async function main() {
 
   await spawn(`yarn install --production=false`);
 
-  if (!hasConflicts) {
-    // If we're here, we've fixed all merge conflicts. We need to commit
-    await spawn(`git add .`);
-    await spawn(`git commit --no-verify -m "chore: Merge ${branch} into ${nextBranch}"`);
+  if (hasConflicts) {
+    if (hasUnresolvedConflicts) {
+      // We have conflicts. Inform the user
+      console.log(`Conflicts still need to be resolved manually.`);
+      console.log(`Manually resolve the conflicts, then run the following command:`);
+      console.log(
+        `git add . && git commit --no-verify -m "chore: Merge ${branch} into ${nextBranch} [skip release]" && git push upstream merge/${branch}-into-${nextBranch}`
+      );
+    } else {
+      console.log('All conflicts automatically resolved.');
+
+      // If we're here, we've fixed all merge conflicts. We need to commit
+      await spawn(`git add .`);
+      await spawn(`git commit --no-verify -m "chore: Merge ${branch} into ${nextBranch}"`);
+    }
   } else {
-    // We have conflicts. Inform the user
-    console.log(`Conflicts still need to be resolved manually.`);
-    console.log(`Manually resolve the conflicts, then run the following command:`);
-    console.log(
-      `git add . && git commit --no-verify -m "chore: Merge ${branch} into ${nextBranch} [skip release]" && git push upstream merge/${branch}-into-${nextBranch}`
-    );
+    console.log('No conflicts detected');
   }
 }
 
