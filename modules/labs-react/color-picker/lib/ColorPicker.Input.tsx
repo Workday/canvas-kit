@@ -10,7 +10,7 @@ import {
   ExtractProps,
   createSubcomponent,
 } from '@workday/canvas-kit-react/common';
-import TextInput from '@workday/canvas-kit-react/text-input';
+import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {colors, space, type, inputColors} from '@workday/canvas-kit-react/tokens';
 import * as React from 'react';
 
