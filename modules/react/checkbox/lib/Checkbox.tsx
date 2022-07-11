@@ -11,7 +11,8 @@ import {
   useTheme,
   Themeable,
 } from '@workday/canvas-kit-react/common';
-import canvas, {
+import {
+  canvas,
   borderRadius,
   colors,
   inputColors,
@@ -391,5 +392,3 @@ export const Checkbox = createComponent('input')({
     ErrorType,
   },
 });
-
-export default Checkbox;

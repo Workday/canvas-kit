@@ -192,7 +192,7 @@ const StyledTableRow = styled('tr')<TableRowProps>(
   }
 );
 
-const TableRow = createComponent('tr')({
+export const TableRow = createComponent('tr')({
   displayName: 'TableRow',
   Component: (
     {state, header, children, ...elemProps}: TableRowProps & StyledType,
@@ -209,5 +209,3 @@ const TableRow = createComponent('tr')({
     State: TableRowState,
   },
 });
-
-export default TableRow;

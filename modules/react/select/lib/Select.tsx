@@ -18,7 +18,7 @@ import {
 } from '@workday/canvas-kit-react/tokens';
 import {caretDownSmallIcon} from '@workday/canvas-system-icons-web';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
-import SelectOption from './SelectOption';
+import {SelectOption} from './SelectOption';
 
 export interface SelectProps extends Themeable, GrowthBehavior {
   /**
@@ -147,5 +147,3 @@ export const Select = createComponent('select')({
     ErrorType,
   },
 });
-
-export default Select;
