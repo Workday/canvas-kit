@@ -8,6 +8,33 @@ const {promisify} = require('node:util');
 const {exec: originalExec} = require('node:child_process');
 const exec = promisify(originalExec);
 const getNextBranch = require('./get-forward-merge-branch');
+const nodeSpawn = require('node:child_process').spawn;
+
+/**  */
+async function spawn(/** @type {string} */ cmd) {
+  const [name, ...args] = cmd.split(' ');
+
+  const child = nodeSpawn(name, args);
+
+  for await (const chunk of child.stdout) {
+    console.log(chunk.toString());
+  }
+  let error = '';
+  for await (const chunk of child.stderr) {
+    console.error(chunk.toString());
+    error += chunk.toString();
+  }
+
+  // eslint-disable-next-line compat/compat
+  const exitCode = await new Promise((resolve, reject) => {
+    child.on('close', resolve);
+  });
+
+  if (exitCode) {
+    throw new Error(`subprocess error exit ${exitCode}, ${error}`);
+  }
+  return;
+}
 
 function getBranches(/** @type string */ branch) {
   if (branch.startsWith('merge')) {
@@ -82,7 +109,7 @@ async function main() {
       }
     }
 
-    await exec(`yarn install --production=false`);
+    await spawn(`yarn install --production=false`);
 
     if (!hasConflicts) {
       // If we're here, we've fixed all merge conflicts. We need to commit
