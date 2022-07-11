@@ -160,7 +160,9 @@ async function main() {
   }
 }
 
-main();
+main().catch(err => {
+  process.exit(1);
+});
 
 /**
  * @param line {string}
