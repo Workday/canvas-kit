@@ -276,10 +276,6 @@ describe('Pagination', () => {
         cy.findByRole('status').should('have.attr', 'aria-atomic', 'true');
       });
 
-      it('should set aria-relevant to true', () => {
-        cy.findByRole('status').should('have.attr', 'aria-relevant', 'true');
-      });
-
       it('should describe the current page range and the total page count', () => {
         cy.findByRole('status').should('contain.text', '1-10 of 100 results');
       });
