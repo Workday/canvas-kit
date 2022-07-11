@@ -10,6 +10,9 @@ on:
 jobs:
   verify-merge:
     runs-on: ubuntu-latest
+    outputs: # Output branch names for the make-pull-request job
+      branch: ${{steps.extract-branch.outputs.branch}}
+      next-branch: ${{steps.extract-next-branch.outputs.branch}}
 
     steps:
 
@@ -164,7 +167,7 @@ jobs:
 
                 ```
                 git fetch upstream
-                git checkout merge/${{steps.extract-branch.outputs.branch}}-into-${{ steps.extract-next-branch.outputs.branch }}
+                git checkout merge/${{needs.verify-merge.outputs.branch}}-into-${{ needs.verify-merge.outputs.next-branch }}
                 node utils/forward-merge.js
                 ```
 
@@ -172,13 +175,13 @@ jobs:
 
                 ```
                 git add .
-                git commit -m "chore: Merge ${{steps.extract-branch.outputs.branch}} into ${{ steps.extract-next-branch.outputs.branch }}"
+                git commit -m "chore: Merge ${{needs.verify-merge.outputs.branch}} into ${{ needs.verify-merge.outputs.next-branch }}"
                 ```
 
             3. Push the merge commit back to the pull request
 
                 ```
-                git push upstream merge/${{steps.extract-branch.outputs.branch}}-into-${{ steps.extract-next-branch.outputs.branch }}
+                git push upstream merge/${{needs.verify-merge.outputs.branch}}-into-${{ needs.verify-merge.outputs.next-branch }}
                 ```
 
             If there were no merge conflicts, the forward-merge job failed because of a test failure. You can wait for the pull request to give errors, or you can check the logs for failures. You'll have to update code to fix errors.

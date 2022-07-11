@@ -10,10 +10,41 @@ const exec = promisify(originalExec);
 const getNextBranch = require('./get-forward-merge-branch');
 const nodeSpawn = require('node:child_process').spawn;
 
+// Tokenize and parse command arguments and be aware that anything in quotes is part of a single argument
+// For example: `echo "hello there" bob` returns args like `['"hello there"', 'bob']
+function splitArgs(/** @type {string} */ input) {
+  const [name, ...rest] = input.split(' ');
+
+  /** @type {string[]} */
+  const args = [];
+  let quote = '';
+  let currentArg = '';
+  for (const l of rest.join(' ')) {
+    if (l !== ' ' || quote) {
+      currentArg += l;
+    } else {
+      args.push(currentArg);
+      currentArg = '';
+    }
+
+    if (l === quote) {
+      quote = '';
+    } else if (l === '"' || l === "'") {
+      quote = l;
+    }
+  }
+
+  if (currentArg) {
+    args.push(currentArg);
+  }
+
+  return {name, args};
+}
+
 /**  */
 async function spawn(/** @type {string} */ cmd) {
   console.log(`Running: "${cmd}"`);
-  const [name, ...args] = cmd.split(' ');
+  const {name, args} = splitArgs(cmd);
 
   const child = nodeSpawn(name, args);
 
