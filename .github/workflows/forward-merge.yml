@@ -148,4 +148,48 @@ jobs:
           token: ${{secrets.GH_RW_TOKEN}} # use PAT to force GH Actions to run the PR verify. The regular token will not
           branches: support+master,master+prerelease/minor,prerelease/minor+prerelease/major
           prefix: 'chore: '
+          body: |
+            This pull request was automatically created by an automated [forward-merge job](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}). The automated job failed automated checks and must be resolved manually.
+
+            Reasons for failure may include:
+            - Merge conflicts that cannot be automatically resolved
+            - A merge resulted in check failures
+              - Lint or type errors
+              - Test failures
+              - Unexpected visual changes
+
+            The pull request should inform you of merge conflicts before you start if any.
+
+            1. Run the following commands in your terminal. If this succeeds, skip step 2. The last command will run a script that tries to merge and resolve conflicts automatically.
+
+                ```
+                git fetch upstream
+                git checkout merge/${{steps.extract-branch.outputs.branch}}-into-${{ steps.extract-next-branch.outputs.branch }}
+                node utils/forward-merge.js
+                ```
+
+            2. If the previous step succeeded, skip to step 3. Resolve conflicts manually. Then run the following.
+
+                ```
+                git add .
+                git commit -m "chore: Merge ${{steps.extract-branch.outputs.branch}} into ${{ steps.extract-next-branch.outputs.branch }}"
+                ```
+
+            3. Push the merge commit back to the pull request
+
+                ```
+                git push upstream merge/${{steps.extract-branch.outputs.branch}}-into-${{ steps.extract-next-branch.outputs.branch }}
+                ```
+
+            If there were no merge conflicts, the forward-merge job failed because of a test failure. You can wait for the pull request to give errors, or you can check the logs for failures. You'll have to update code to fix errors.
+
+            This pull request will be merged using the `merge` strategy instead of the `squash` strategy. This means any commit in the log will show in the branch's history. Any commit you make should amend the merge commit. Use the following command:
+
+            ```
+            git commit --amend --no-edit
+            ```
+
+            You must then force-push the branch and the CI will rerun verification.
+
+            Use the `automerge` label like normal and the CI will pick the correct merge strategy.
 

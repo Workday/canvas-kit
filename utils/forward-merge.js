@@ -9,17 +9,37 @@ const {exec: originalExec} = require('node:child_process');
 const exec = promisify(originalExec);
 const getNextBranch = require('./get-forward-merge-branch');
 
-const {GITHUB_REF = ''} = process.env;
-const branch = GITHUB_REF.replace('refs/heads/', '');
-const nextBranch = getNextBranch(branch);
+function getBranches(/** @type string */ branch) {
+  if (branch.startsWith('merge')) {
+    // we're already merging, so extract branch information
+    const matches = branch.match(/merge\/(.+)-into-(.+)/);
+    if (matches) {
+      return [matches[1], matches[2]];
+    }
+    console.error(`The branch name is not valid: ${branch}`);
+    process.exit(1);
+  }
+  return [branch, getNextBranch(branch)];
+}
 
 async function main() {
+  // get the current branch
+  const {stdout: defaultBranch} = await exec(`git rev-parse --abbrev-ref HEAD`);
+  const alreadyMerging = defaultBranch.startsWith('merge');
+
+  let hasConflicts = false;
+  const {GITHUB_REF: currentBranch = defaultBranch} = process.env;
+  const [branch, nextBranch] = getBranches(currentBranch.replace('refs/heads/', ''));
+
   // create a merge branch
-  await exec(`git checkout -b merge/${branch}-into-${nextBranch}`);
+  if (!alreadyMerging) {
+    console.log('Creating a merge branch');
+    await exec(`git checkout -b merge/${branch}-into-${nextBranch}`);
+  }
 
   try {
     const result = await exec(
-      `git merge origin/${nextBranch} -m 'chore: Merge ${branch} into ${nextBranch}'`
+      `git merge origin/${nextBranch} -m 'chore: Merge ${branch} into ${nextBranch} [skip release]'`
     );
 
     // The merge was successful with no merge conflicts
@@ -53,15 +73,29 @@ async function main() {
         console.log(`Resolved conflicts in ${conflict}`);
       } else {
         console.log('Merge cannot be resolved automatically');
-        process.exit(1);
+        hasConflicts = true;
+        if (!alreadyMerging) {
+          // If we're not already merging, we want to bail now - this is the default for CI
+          // If we are already merging, we must be doing things manually
+          process.exit(1);
+        }
       }
     }
 
     await exec(`yarn install --production=false`);
 
-    // If we're here, we've fixed all merge conflicts. We need to commit
-    await exec(`git add .`);
-    await exec(`git commit --no-verify -m "chore: Merge ${branch} into ${nextBranch}"`);
+    if (!hasConflicts) {
+      // If we're here, we've fixed all merge conflicts. We need to commit
+      await exec(`git add .`);
+      await exec(`git commit --no-verify -m "chore: Merge ${branch} into ${nextBranch}"`);
+    } else {
+      // We have conflicts. Inform the user
+      console.log(`Conflicts still need to be resolved manually.`);
+      console.log(`Manually resolve the conflicts, then run the following command:`);
+      console.log(
+        `git add . && git commit --no-verify -m "chore: Merge ${branch} into ${nextBranch} [skip release]" && git push upstream merge/${branch}-into-${nextBranch}`
+      );
+    }
   }
 }
 
