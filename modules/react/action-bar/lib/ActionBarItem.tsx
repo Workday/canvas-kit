@@ -1,6 +1,5 @@
 import * as React from 'react';
-import {composeHooks, EllipsisText, createSubcomponent} from '@workday/canvas-kit-react/common';
-import {SystemIcon} from '@workday/canvas-kit-react/icon';
+import {composeHooks, createSubcomponent} from '@workday/canvas-kit-react/common';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {
   useListItemRegister,
@@ -37,10 +36,6 @@ export const ActionBarItem = createSubcomponent(SecondaryButton)({
   displayName: 'ActionBar.Item',
   modelHook: useActionBarModel,
   elemPropsHook: useActionBarItem,
-  subComponents: {
-    Icon: SystemIcon,
-    Text: EllipsisText,
-  },
 })<ActionBarItemProps>((elemProps, Element) => {
   return <Element {...elemProps} />;
 });

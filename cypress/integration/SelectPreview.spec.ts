@@ -902,7 +902,7 @@ describe('Select', () => {
         context('the page', () => {
           it('should not scroll', () => {
             cy.window().then($window => {
-              cy.get('@originalWindowScrollY').should('equal', $window.scrollY);
+              cy.get('@originalWindowScrollY').should('equal', Math.floor($window.scrollY));
             });
           });
         });
@@ -919,7 +919,7 @@ describe('Select', () => {
           context('the page', () => {
             it('should not scroll', () => {
               cy.window().then($window => {
-                cy.get('@originalWindowScrollY').should('equal', $window.scrollY);
+                cy.get('@originalWindowScrollY').should('equal', Math.floor($window.scrollY));
               });
             });
           });
