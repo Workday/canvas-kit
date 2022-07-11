@@ -67,7 +67,6 @@ export const PageButton = ({
     onClick?.(e);
     model.events.goTo(pageNumber);
   };
-  console.warn(theme);
 
   return (
     <StyledPageButton

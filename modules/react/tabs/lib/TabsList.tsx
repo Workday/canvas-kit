@@ -6,6 +6,9 @@ import {
   createSubcomponent,
   createElemPropsHook,
   ExtractProps,
+  useModalityType,
+  styled,
+  StyledType,
 } from '@workday/canvas-kit-react/common';
 import {Stack} from '@workday/canvas-kit-react/layout';
 import {
@@ -33,28 +36,44 @@ export interface TabListProps<T = unknown> extends Partial<ExtractProps<typeof S
 
 export const useTabsList = composeHooks(
   createElemPropsHook(useTabsModel)(() => {
-    return {role: 'tablist'};
+    const modality = useModalityType();
+    return {role: 'tablist', overflowX: modality === 'touch' ? 'auto' : undefined};
   }),
   useOverflowListMeasure,
   useListResetCursorOnBlur
 );
+
+const StyledStack = styled(Stack)<StyledType>({
+  '::after': {
+    content: '""',
+    position: 'sticky',
+    height: 52,
+    minWidth: 30,
+    background: `linear-gradient(to right,rgba(255,255,255,0),white);`,
+    zIndex: 1,
+    right: 0,
+    top: 0,
+    pointerEvents: 'none',
+  },
+});
 
 export const TabsList = createSubcomponent('div')({
   displayName: 'Tabs.List',
   modelHook: useTabsModel,
   elemPropsHook: useTabsList,
 })<TabListProps>(({children, overflowButton, ...elemProps}, Element, model) => {
+  const modality = useModalityType();
   return (
-    <Stack
+    <StyledStack
       as={Element}
       position="relative"
       borderBottom={`1px solid ${commonColors.divider}`}
-      paddingX="m"
+      paddingX={modality === 'touch' ? 'zero' : 'm'}
       spacing="xxxs"
       {...elemProps}
     >
       {useListRenderItems(model, children)}
       {overflowButton}
-    </Stack>
+    </StyledStack>
   );
 });
