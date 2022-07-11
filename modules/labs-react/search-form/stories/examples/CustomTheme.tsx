@@ -40,7 +40,9 @@ export const CustomTheme = () => {
     if (!formattedValue.length) {
       setWineList(initialWineList);
     } else {
-      const filteredItems = wineList.filter(wine => wine.toLowerCase().startsWith(formattedValue));
+      const filteredItems = initialWineList.filter(wine =>
+        wine.toLowerCase().includes(formattedValue)
+      );
       setWineList(filteredItems);
     }
   };

@@ -4,7 +4,8 @@ import {type, typeColors} from '@workday/canvas-kit-react/tokens';
 import {PaginationModel} from '../types';
 import {StyledType, styled} from '@workday/canvas-kit-react/common';
 
-export interface GoToLabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> {
+export interface GoToLabelProps
+  extends Omit<React.LabelHTMLAttributes<HTMLLabelElement>, 'children'> {
   model: PaginationModel;
   /**
    * Accepts child elements or a render prop.

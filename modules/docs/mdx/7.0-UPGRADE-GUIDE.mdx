@@ -716,12 +716,12 @@ export type BasicButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
 export const BasicButton = ({children, ...elemProps}: BasicButtonProps) => {
   return (
     <BaseButton
-      colors={getPaginationButtonColors(toggled)}
+      colors={getPaginationButtonColors()}
       {...elemProps}
     >
       <BaseButton.Label>{children}</BaseButton.Label>
       <BaseButton.Icon icon={plusIcon}>
-    </StyledToggleButton>
+    </BaseButton>
   );
 };
 ```

@@ -37,6 +37,23 @@ describe('recategorizeIconButtons', () => {
     expectTransform(input, expected);
   });
 
+  it('should only remove "IconButton" if "TertiaryButton" is already imported', () => {
+    const input = stripIndent`
+      import {IconButton} from '@workday/canvas-kit-react';
+      import {TertiaryButton} from '@workday/canvas-kit-react/button';
+
+      <IconButton />
+    `;
+
+    const expected = stripIndent`
+      import {TertiaryButton} from '@workday/canvas-kit-react/button';
+
+      <TertiaryButton />
+    `;
+
+    expectTransform(input, expected);
+  });
+
   it('should replace "IconButton" with "TertiaryButton" if variant "circle" is defined', () => {
     const input = `
       import {IconButton} from '@workday/canvas-kit-react/button'

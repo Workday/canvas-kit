@@ -284,7 +284,7 @@ export class Menu extends React.Component<MenuProps, MenuState> {
   private setFirstCharacters = (): void => {
     const getFirstCharacter = (child: React.ReactNode): string => {
       let character = '';
-      if (!child || typeof child === 'boolean' || child === {}) {
+      if (!child || typeof child === 'boolean') {
         character = '';
       } else if (typeof child === 'string' || typeof child === 'number') {
         character = child

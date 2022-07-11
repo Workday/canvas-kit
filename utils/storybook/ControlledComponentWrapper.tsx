@@ -30,7 +30,7 @@ export const useControlledCheck = (initialChecked = false) => {
   return {checked, onChange};
 };
 
-export interface ControlledComponentWrapperProps extends React.Props<any> {
+export interface ControlledComponentWrapperProps extends React.PropsWithChildren {
   controlledProp?: ControlledProp;
 }
 

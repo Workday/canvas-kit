@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-css-fonts",
-  "version": "7.0.0",
+  "version": "7.1.1",
   "description": "Fonts for canvas-kit-css",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -13,7 +13,8 @@
   "main": "dist/canvas-kit-css-fonts.min.css",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Workday/canvas-kit/tree/master/modules/fonts/css"
+    "url": "https://github.com/workday/canvas-kit.git",
+    "directory": "modules/css-fonts"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

@@ -59,6 +59,10 @@ export interface CheckboxProps extends Themeable {
    * @default false
    */
   indeterminate?: boolean;
+  /**
+   * The variant for the checkbox
+   */
+  variant?: 'inverse' | undefined;
 }
 
 const checkboxHeight = 18;
@@ -88,16 +92,20 @@ const CheckboxInputWrapper = styled('div')<Pick<CheckboxProps, 'disabled'>>({
   alignSelf: 'flex-start',
 });
 
-const CheckboxRipple = styled('span')<Pick<CheckboxProps, 'disabled'>>({
-  borderRadius: borderRadius.circle,
-  boxShadow: `0 0 0 0 ${colors.soap200}`,
-  height: checkboxHeight,
-  transition: 'box-shadow 150ms ease-out',
-  width: checkboxWidth,
-  position: 'absolute',
-  pointerEvents: 'none', // This is a decorative element we don't want it to block clicks to input
-  zIndex: -1,
-});
+const CheckboxRipple = styled('span')<Pick<CheckboxProps, 'disabled' | 'variant'>>(
+  {
+    borderRadius: borderRadius.circle,
+    boxShadow: `0 0 0 0 ${colors.soap200}`,
+    height: checkboxHeight,
+    transition: 'box-shadow 150ms ease-out',
+    width: checkboxWidth,
+    position: 'absolute',
+    pointerEvents: 'none', // This is a decorative element we don't want it to block clicks to input
+  },
+  ({variant}) => ({
+    opacity: variant === 'inverse' ? '0.4' : '1',
+  })
+);
 
 /**
  * Note: `~ div:first-of-type` refers to `CheckboxBackground`
@@ -113,6 +121,7 @@ const CheckboxInput = styled('input')<CheckboxProps & StyledType>(
         },
       },
     },
+    variant,
   }) => ({
     borderRadius: borderRadius.s,
     width: checkboxTapArea,
@@ -130,20 +139,21 @@ const CheckboxInput = styled('input')<CheckboxProps & StyledType>(
     // States
     '&:not(:checked):not(:disabled):not(:focus):hover, &:not(:checked):not(:disabled):active': {
       '~ div:first-of-type': {
-        borderColor: inputColors.hoverBorder,
+        borderColor: variant === 'inverse' ? colors.soap300 : inputColors.hoverBorder,
       },
     },
     '&:checked ~ div:first-of-type': {
-      borderColor: themePrimary.main,
-      backgroundColor: themePrimary.main,
+      borderColor: variant === 'inverse' ? colors.soap300 : themePrimary.main,
+      backgroundColor: variant === 'inverse' ? colors.frenchVanilla100 : themePrimary.main,
     },
     '&:disabled ~ div:first-of-type': {
       borderColor: inputColors.disabled.border,
-      backgroundColor: inputColors.disabled.background,
+      backgroundColor: variant === 'inverse' ? colors.soap300 : inputColors.disabled.background,
+      opacity: variant === 'inverse' ? '.4' : '1',
     },
     '&:disabled:checked ~ div:first-of-type': {
-      borderColor: themePrimary.light,
-      backgroundColor: themePrimary.light,
+      borderColor: variant === 'inverse' ? colors.soap300 : themePrimary.light,
+      backgroundColor: variant === 'inverse' ? colors.soap300 : themePrimary.light,
     },
 
     // Focus
@@ -151,30 +161,48 @@ const CheckboxInput = styled('input')<CheckboxProps & StyledType>(
       outline: 'none',
     },
     '&:focus ~ div:first-of-type': {
-      borderColor: themePrimary.main,
+      borderColor: variant === 'inverse' ? colors.blackPepper400 : themePrimary.main,
       borderWidth: '2px',
       boxShadow: 'none',
+      ...focusRing({
+        width: variant === 'inverse' ? 2 : 0,
+        separation: 0,
+        animate: false,
+        innerColor: variant === 'inverse' ? colors.blackPepper400 : undefined,
+        outerColor: variant === 'inverse' ? colors.frenchVanilla100 : undefined,
+      }),
     },
     '&:checked:focus ~ div:first-of-type': {
-      ...focusRing({width: 2, separation: 2, animate: false, outerColor: themeFocusOutline}),
+      ...focusRing({
+        width: 2,
+        separation: 2,
+        animate: false,
+        innerColor: variant === 'inverse' ? colors.blackPepper400 : undefined,
+        outerColor: variant === 'inverse' ? colors.frenchVanilla100 : themeFocusOutline,
+      }),
+      borderColor: variant === 'inverse' ? colors.frenchVanilla100 : themePrimary.main,
+      borderWidth: '2px',
       '& span': {
         marginLeft: '-7px',
       },
     },
     ...mouseFocusBehavior({
       '&:focus ~ div:first-of-type': {
-        border: `1px solid ${inputColors.hoverBorder}`,
+        border:
+          variant === 'inverse'
+            ? `1px solid ${colors.soap300}`
+            : `1px solid ${inputColors.hoverBorder}`,
         boxShadow: 'none',
         '& span': {
           marginLeft: '-6px',
         },
       },
       '&:checked ~ div:first-of-type': {
-        borderColor: themePrimary.main,
+        borderColor: variant === 'inverse' ? colors.soap300 : themePrimary.main,
       },
       '&:disabled:checked ~ div:first-of-type': {
         borderColor: themePrimary.light,
-        backgroundColor: themePrimary.light,
+        backgroundColor: variant === 'inverse' ? colors.soap300 : themePrimary.light,
       },
     }),
   }),
@@ -183,7 +211,7 @@ const CheckboxInput = styled('input')<CheckboxProps & StyledType>(
       boxShadow: disabled ? undefined : `0 0 0 ${rippleRadius}px ${colors.soap200}`,
     },
   }),
-  ({theme, error}) => {
+  ({theme, error, variant}) => {
     const errorColors = getErrorColors(error, theme);
 
     if (errorColors.outer === errorColors.inner) {
@@ -192,24 +220,24 @@ const CheckboxInput = styled('input')<CheckboxProps & StyledType>(
 
     const errorStyles = {
       '& ~ div:first-of-type': {
-        border: `1px solid ${errorColors.inner}`,
+        border:
+          variant === 'inverse' ? `1px solid ${colors.soap300}` : `1px solid ${errorColors.inner}`,
         boxShadow: `0 0 0 1px ${errorColors.inner}, 0 0 0 2px ${errorColors.outer}`,
       },
       '&:not(:checked):not(:disabled):not(:focus):hover, &:not(:checked):not(:disabled):active': {
         '~ div:first-of-type': {
-          borderColor: errorColors.inner,
+          borderColor: variant === 'inverse' ? `1px solid ${colors.soap300}` : errorColors.inner,
         },
       },
       '&:checked ~ div:first-of-type': {
-        borderColor: theme.canvas.palette.primary.main,
+        borderColor: variant === 'inverse' ? colors.soap300 : theme.canvas.palette.primary.main,
         boxShadow: `
-            0 0 0 2px ${colors.frenchVanilla100},
-            0 0 0 4px ${errorColors.inner},
-            0 0 0 5px ${errorColors.outer}`,
+              0 0 0 2px ${colors.frenchVanilla100},
+              0 0 0 4px ${errorColors.inner},
+              0 0 0 5px ${errorColors.outer}`,
       },
     };
     return {
-      ...errorStyles,
       // Error rings take precedence over focus
       ...mouseFocusBehavior({
         ...errorStyles,
@@ -218,25 +246,30 @@ const CheckboxInput = styled('input')<CheckboxProps & StyledType>(
           boxShadow: `0 0 0 1px ${errorColors.inner}, 0 0 0 2px ${errorColors.outer}`,
         },
       }),
+      ...errorStyles,
     };
   }
 );
 
-const CheckboxBackground = styled('div')<CheckboxProps>({
-  alignItems: 'center',
-  backgroundColor: colors.frenchVanilla100,
-  borderRadius: borderRadius.s,
-  border: '1px solid ' + inputColors.border,
-  boxSizing: 'border-box',
-  display: 'flex',
-  height: checkboxHeight,
-  justifyContent: 'center',
-  padding: '0px 2px',
-  pointerEvents: 'none',
-  position: 'absolute',
-  transition: 'border 200ms ease, background 200ms',
-  width: checkboxWidth,
-});
+const CheckboxBackground = styled('div')<CheckboxProps>(
+  {
+    alignItems: 'center',
+    backgroundColor: colors.frenchVanilla100,
+    borderRadius: borderRadius.s,
+    boxSizing: 'border-box',
+    display: 'flex',
+    height: checkboxHeight,
+    justifyContent: 'center',
+    padding: '0px 2px',
+    pointerEvents: 'none',
+    position: 'absolute',
+    transition: 'border 200ms ease, background 200ms',
+    width: checkboxWidth,
+  },
+  ({variant}) => ({
+    border: `1px solid ${variant === 'inverse' ? colors.soap300 : inputColors.border}`,
+  })
+);
 
 const CheckboxCheck = styled('div')<Pick<CheckboxProps, 'checked'>>(
   {
@@ -262,22 +295,32 @@ const CheckboxCheck = styled('div')<Pick<CheckboxProps, 'checked'>>(
   })
 );
 
-const IndeterminateBox = styled('div')(
+const IndeterminateBox = styled('div')<CheckboxProps>(
   {
     width: '10px',
     height: '2px',
   },
-  ({theme}) => ({
-    backgroundColor: theme.canvas.palette.primary.contrast,
+  ({theme, variant}) => ({
+    backgroundColor:
+      variant === 'inverse'
+        ? theme.canvas.palette.primary.main
+        : theme.canvas.palette.primary.contrast,
   })
 );
 
-const CheckboxLabel = styled('label')<{disabled?: boolean}>(
+const CheckboxLabel = styled('label')<{disabled?: boolean; variant?: string}>(
   {
     ...canvas.type.levels.subtext.large,
     paddingLeft: checkboxLabelDistance,
   },
-  ({disabled}) => (disabled ? {color: inputColors.disabled.text} : {cursor: 'pointer'})
+  ({variant}) => (variant === 'inverse' ? {color: colors.frenchVanilla100} : undefined),
+  ({disabled, variant}) =>
+    disabled
+      ? {
+          color: variant === 'inverse' ? colors.frenchVanilla100 : inputColors.disabled.text,
+          opacity: variant === 'inverse' ? '.4' : '1',
+        }
+      : {cursor: 'pointer'}
 );
 
 export const Checkbox = createComponent('input')({
@@ -295,6 +338,7 @@ export const Checkbox = createComponent('input')({
       value,
       error,
       indeterminate,
+      variant,
       ...elemProps
     }: CheckboxProps,
     ref,
@@ -314,22 +358,30 @@ export const Checkbox = createComponent('input')({
             type="checkbox"
             value={value}
             error={error}
+            variant={variant}
             aria-checked={indeterminate ? 'mixed' : checked}
             {...elemProps}
           />
-          <CheckboxRipple />
-          <CheckboxBackground checked={checked} disabled={disabled}>
+          <CheckboxRipple variant={variant} />
+          <CheckboxBackground variant={variant} checked={checked} disabled={disabled}>
             <CheckboxCheck checked={checked}>
               {indeterminate ? (
-                <IndeterminateBox />
+                <IndeterminateBox variant={variant} />
               ) : (
-                <SystemIcon icon={checkSmallIcon} color={theme.canvas.palette.primary.contrast} />
+                <SystemIcon
+                  icon={checkSmallIcon}
+                  color={
+                    variant === 'inverse'
+                      ? theme.canvas.palette.primary.main
+                      : theme.canvas.palette.primary.contrast
+                  }
+                />
               )}
             </CheckboxCheck>
           </CheckboxBackground>
         </CheckboxInputWrapper>
         {label && (
-          <CheckboxLabel htmlFor={inputId} disabled={disabled}>
+          <CheckboxLabel variant={variant} htmlFor={inputId} disabled={disabled}>
             {label}
           </CheckboxLabel>
         )}
