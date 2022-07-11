@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v7.1.1](https://github.com/Workday/canvas-kit/releases/tag/v7.1.1) (2022-06-30)
+
+### Components
+
+- fix(pagination): Remove console warning ([#1657](https://github.com/Workday/canvas-kit/pull/1657)) ([@jamesfan](https://github.com/jamesfan))
+
+
 ## [v7.1.0](https://github.com/Workday/canvas-kit/releases/tag/v7.1.0) (2022-06-28)
 
 ### Components

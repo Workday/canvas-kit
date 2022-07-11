@@ -167,7 +167,7 @@ const SidePanelFooter = styled('div')<Pick<SidePanelProps, 'open' | 'openWidth'>
   })
 );
 
-export default class SidePanel extends React.Component<SidePanelProps, SidePanelState> {
+export class SidePanel extends React.Component<SidePanelProps, SidePanelState> {
   static OpenDirection = SidePanelOpenDirection;
   static BackgroundColor = SidePanelBackgroundColor;
 

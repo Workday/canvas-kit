@@ -2,7 +2,7 @@ import * as React from 'react';
 import {render} from '@testing-library/react';
 
 import {benefitsIcon} from '@workday/canvas-applet-icons-web';
-import AppletIcon, {appletIconStyles} from '../lib/AppletIcon';
+import {AppletIcon, appletIconStyles} from '../lib/AppletIcon';
 
 describe('Applet Icon', () => {
   test('Throws error if using unofficial color names', () => {
