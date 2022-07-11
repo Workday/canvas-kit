@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {render, fireEvent} from '@testing-library/react';
-import Radio from '../lib/Radio';
+import {Radio} from '../lib/Radio';
 
 describe('Radio', () => {
   const cb = jest.fn();

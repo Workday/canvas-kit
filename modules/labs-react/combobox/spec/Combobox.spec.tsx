@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Combobox, {ComboboxProps} from '../lib/Combobox';
+import {Combobox, ComboboxProps} from '../lib/Combobox';
 import {MenuItem} from '@workday/canvas-kit-preview-react/menu';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {render, fireEvent} from '@testing-library/react';

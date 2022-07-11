@@ -1,0 +1,84 @@
+import {Meta} from '@storybook/addon-docs';
+
+<Meta title="Welcome/Upgrade Guides/v7.0" />
+
+# Canvas Kit 7.0 Upgrade Guide
+
+This guide contains breaking changes in Canvas Kit v7. Please
+[reach out](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) if you have
+any questions.
+
+- [Codemod](#codemod)
+- [General Changes](#general-changes) -[Remove Default Imports](#remove-default-imports)
+
+## Codemod
+
+Please use our [codemod package](https://github.com/Workday/canvas-kit/tree/master/modules/codemod)
+to automatically update your code to work with many of the breaking changes as you upgrade from
+Canvas Kit v6 to v7:
+
+```sh
+> npx @workday/canvas-kit-codemod v7 [path]
+```
+
+> Note: This codemod only works on `.js`, `.jsx`, `.ts`, and `.tsx` extensions. You may need to make
+> some manual changes in other file types (`.json`, `.mdx`, `.md`, etc.).
+
+> Note: You may need to run your linter after executing the codemod, as its resulting formatting
+> (spacing, quotes, etc.) may not match your project's styling.
+
+**Breaking changes handled by this codemod will be marked with a 🤖.**
+
+**Please verify all changes made by the codemod. As a safety precaution, we recommend committing the
+changes from the codemod as a single isolated commit (separate from other changes) so you can
+rollback more easily if necessary.**
+
+[Let us know](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) if you
+encounter any issues or use cases that we've missed.
+
+## General Changes
+
+### Remove Default Imports
+
+As part of some cleanup, we've removed any default imports that where lingering. This change matches
+more closely what we've been doing with new components and systems. As part of this change, the
+components listed below have moved from default imports to named imports.
+
+##### Fonts
+
+- fonts
+
+##### Main Package Components
+
+- Toast
+- Canvas
+- Tooltip
+- TextArea
+- Avatar
+- CountBadge
+- Checkbox
+- FormField
+- LoadingDots
+- Radio
+- SegmentedControl
+- Select
+- SidePanel
+- StatusIndicator
+- Switch
+- Table
+- TextInput
+
+##### Labs Components
+
+- Combobox
+- Drawer
+
+##### Preview Components
+
+- Breadcrumbs
+- ColorPicker
+- Menu
+- Select
+- SidePanel
+
+🤖 The codemod will update imports to be named imports

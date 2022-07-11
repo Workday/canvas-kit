@@ -46,7 +46,7 @@ interface AutocompleteListProps {
   showGroupText: boolean;
 }
 
-const AutocompleteList = ({
+export const AutocompleteList = ({
   autocompleteItems,
   comboboxId,
   selectedIndex,
@@ -135,5 +135,3 @@ const AutocompleteList = ({
     );
   }
 };
-
-export default AutocompleteList;
