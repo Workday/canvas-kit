@@ -103,10 +103,12 @@ export const useListItemRovingFocus = createElemPropsHook(useCursorListModel)(
         if (event.ctrlKey) {
           for (const key in ctrlKeyMap) {
             if (hasOwnKey(ctrlKeyMap, key)) {
-              keyDownRef.current = true;
-              events[ctrlKeyMap[key]]?.();
-              event.preventDefault();
-              return;
+              if (event.key === key) {
+                keyDownRef.current = true;
+                events[ctrlKeyMap[key]]?.();
+                event.preventDefault();
+                return;
+              }
             }
           }
         }
