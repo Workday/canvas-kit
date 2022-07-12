@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v7.1.4](https://github.com/Workday/canvas-kit/releases/tag/v7.1.4) (2022-07-12)
+
+### Components
+
+- fix(radio): Align radio group button ([#1441](https://github.com/Workday/canvas-kit/pull/1441)) ([@karapalumbo](https://github.com/karapalumbo))
+- fix(skeleton): Move simulation code block within loading condition ([#1676](https://github.com/Workday/canvas-kit/pull/1676)) ([@anishatulai](https://github.com/anishatulai))
+
+
 ## [v7.1.3](https://github.com/Workday/canvas-kit/releases/tag/v7.1.3) (2022-07-11)
 
 ### Components
