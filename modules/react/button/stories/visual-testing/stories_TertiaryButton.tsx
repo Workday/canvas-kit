@@ -56,31 +56,29 @@ export const TertiaryButtonStates = (props: {theme?: PartialEmotionCanvasTheme})
   </StaticStates>
 );
 
-export const TertiaryIconButtonStates = (props: {theme?: PartialEmotionCanvasTheme}) => (
+export const TertiaryIconButtonStates = (props: {
+  theme?: PartialEmotionCanvasTheme;
+  isThemable: boolean;
+}) => (
   <StaticStates theme={props.theme}>
     <ComponentStatesTable
-      rowProps={permutateProps(
-        {
-          variant: [
-            {value: undefined, label: ''},
-            {value: 'inverse', label: 'Inverse'},
-          ],
-          size: [
-            {value: 'extraSmall', label: 'Extra Small'},
-            {value: 'small', label: 'Small'},
-            {value: 'medium', label: 'Medium'},
-            {value: 'large', label: 'Large'},
-          ],
-          icon: [
-            // We don't need a label here, because `iconPosition` provides it
-            {value: relatedActionsVerticalIcon, label: ''},
-          ],
-        },
-        // Filter out permutations where `iconPosition` is provided and not `icon`, and vice versa
-        props => {
-          return true;
-        }
-      )}
+      rowProps={permutateProps({
+        isThemable: [{value: props.isThemable, label: ''}],
+        variant: [
+          {value: undefined, label: ''},
+          {value: 'inverse', label: 'Inverse'},
+        ],
+        size: [
+          {value: 'extraSmall', label: 'Extra Small'},
+          {value: 'small', label: 'Small'},
+          {value: 'medium', label: 'Medium'},
+          {value: 'large', label: 'Large'},
+        ],
+        icon: [
+          // We don't need a label here, because `iconPosition` provides it
+          {value: relatedActionsVerticalIcon, label: ''},
+        ],
+      })}
       columnProps={stateTableColumnProps}
     >
       {props => (
@@ -97,5 +95,5 @@ export const TertiaryButtonThemedStates = () => (
 );
 
 export const TertiaryIconButtonThemedStates = () => (
-  <TertiaryIconButtonStates theme={{canvas: customColorTheme}} />
+  <TertiaryIconButtonStates theme={{canvas: customColorTheme}} isThemable />
 );

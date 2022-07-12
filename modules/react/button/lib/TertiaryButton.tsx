@@ -210,7 +210,7 @@ export const TertiaryButton = createComponent('button')({
     Element
   ) => {
     const theme = useTheme();
-    const hasThemeStyles = !!(children || isThemable);
+    const hasThemeStyles = !!children || isThemable;
 
     return (
       <StyledTertiaryButtonContainer
