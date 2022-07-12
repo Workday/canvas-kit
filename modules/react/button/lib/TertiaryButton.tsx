@@ -46,12 +46,13 @@ export interface TertiaryButtonProps extends Themeable {
   shouldMirrorIcon?: boolean;
   allCaps?: boolean;
   children?: React.ReactNode;
+  isThemable?: boolean;
 }
 
 const getTertiaryButtonColors = (
   variant: 'inverse' | undefined,
   theme: EmotionCanvasTheme,
-  children: React.ReactNode
+  hasThemeStyles: boolean
 ): ButtonColors => {
   const {
     canvas: {
@@ -97,31 +98,29 @@ const getTertiaryButtonColors = (
       },
     };
   } else {
-    const isDefaultTheme = themePrimary.main === colors.blueberry400;
-
     return {
       default: {
-        icon: isDefaultTheme && !children ? colors.blackPepper400 : themePrimary.main,
+        icon: hasThemeStyles ? themePrimary.main : colors.blackPepper400,
         label: themePrimary.main,
       },
       hover: {
         background: colors.soap200,
-        icon: isDefaultTheme && !children ? colors.blackPepper500 : themePrimary.dark,
+        icon: hasThemeStyles ? themePrimary.dark : colors.blackPepper500,
         label: themePrimary.dark,
       },
       active: {
         background: colors.soap300,
-        icon: isDefaultTheme && !children ? colors.blackPepper500 : themePrimary.dark,
+        icon: hasThemeStyles ? themePrimary.dark : colors.blackPepper500,
         label: themePrimary.dark,
       },
       focus: {
-        icon: isDefaultTheme && !children ? colors.blackPepper400 : themePrimary.dark,
+        icon: hasThemeStyles ? themePrimary.main : colors.blackPepper500,
         label: themePrimary.main,
         focusRing: focusRing({innerColor: colors.blueberry400}, theme),
       },
       disabled: {
         background: 'transparent',
-        icon: themePrimary.main,
+        icon: hasThemeStyles ? themePrimary.main : colors.blackPepper400,
         label: themePrimary.main,
       },
     };
@@ -199,6 +198,7 @@ export const TertiaryButton = createComponent('button')({
     {
       size = 'medium',
       iconPosition = 'start',
+      isThemable = false,
       variant,
       children,
       icon,
@@ -210,13 +210,14 @@ export const TertiaryButton = createComponent('button')({
     Element
   ) => {
     const theme = useTheme();
+    const hasThemeStyles = !!(children || isThemable);
 
     return (
       <StyledTertiaryButtonContainer
         ref={ref}
         as={Element}
         allCaps={allCaps}
-        colors={getTertiaryButtonColors(variant, theme, children)}
+        colors={getTertiaryButtonColors(variant, theme, hasThemeStyles)}
         size={size}
         padding={getPaddingStyles(icon, iconPosition, children, size)}
         minWidth={getMinWidthStyles(children, size)}
