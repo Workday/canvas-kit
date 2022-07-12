@@ -9,7 +9,7 @@ import {IconButton, PrimaryButton} from '@workday/canvas-kit-react/button';
 import {visibleIcon, invisibleIcon} from '@workday/canvas-system-icons-web';
 import {useUniqueId} from '@workday/canvas-kit-react/common';
 
-export const LoginForm = () => {
+export const TextInputWithFormik = () => {
   const passwordMinimum = 8;
   const passwordHint = `Password should be of minimum ${passwordMinimum} characters length`;
   const emailRequired = 'Email is required';

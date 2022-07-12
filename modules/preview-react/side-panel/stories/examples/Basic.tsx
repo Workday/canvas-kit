@@ -32,7 +32,7 @@ export const Basic = () => {
         <SidePanel {...panelProps} onStateTransition={setPanelState}>
           <SidePanel.ToggleButton {...controlProps} />
           {panelState === 'expanded' && (
-            <Flex alignItems="center" paddingY="s" paddingX="xs">
+            <Flex alignItems="center" paddingY="s" paddingX="s">
               <Flex marginInlineEnd="s">
                 <AccentIcon icon={rocketIcon} />
               </Flex>
