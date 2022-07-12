@@ -44,8 +44,16 @@ export interface TertiaryButtonProps extends Themeable {
    * @default false
    */
   shouldMirrorIcon?: boolean;
+  /**
+   * If set to `true`, transform text to all letters uppercase
+   * @default undefined
+   */
   allCaps?: boolean;
   children?: React.ReactNode;
+  /**
+   * If set to `true`, make icon button available to use theme colors instead of default
+   * @default false
+   */
   isThemable?: boolean;
 }
 
