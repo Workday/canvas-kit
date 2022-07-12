@@ -1,15 +1,4 @@
-import {
-  PropertyJustifySelf,
-  PropertyAlignSelf,
-  PropertyColumnStart,
-  PropertyColumnEnd,
-  PropertyRowStart,
-  PropertyRowEnd,
-  PropertyGridColumn,
-  PropertyGridRow,
-  PropertyGridArea,
-  PropertyPlaceSelf,
-} from './types';
+import {Property} from 'csstype';
 
 /** style props to for grid item properties */
 export type GridItemStyleProps = {
@@ -19,25 +8,25 @@ export type GridItemStyleProps = {
    * @default 'grid'
    * */
   /** sets `grid-column-start` property */
-  gridColumnStart?: PropertyColumnStart;
+  gridColumnStart?: Property.GridColumnStart;
   /** sets `grid-column-end` property */
-  gridColumnEnd?: PropertyColumnEnd;
+  gridColumnEnd?: Property.GridColumnEnd;
   /** sets `grid-row-start` property */
-  gridRowStart?: PropertyRowStart;
+  gridRowStart?: Property.GridRowStart;
   /** sets `grid-row-end` property */
-  gridRowEnd?: PropertyRowEnd;
+  gridRowEnd?: Property.GridRowEnd;
   /** sets `grid-column` property */
-  gridColumn?: PropertyGridColumn;
+  gridColumn?: Property.GridColumn;
   /** sets `grid-row` property */
-  gridRow?: PropertyGridRow;
+  gridRow?: Property.GridRow;
   /** sets `grid-area` property */
-  gridArea?: PropertyGridArea;
+  gridArea?: Property.GridArea;
   /** sets `justify-self` property */
-  justifySelf?: PropertyJustifySelf;
+  justifySelf?: Property.JustifySelf;
   /** sets `align-self` property */
-  alignSelf?: PropertyAlignSelf;
+  alignSelf?: Property.AlignSelf;
   /** sets `place-self` property */
-  placeSelf?: PropertyPlaceSelf;
+  placeSelf?: Property.PlaceSelf;
 };
 
 /** style props to for grid item properties */
