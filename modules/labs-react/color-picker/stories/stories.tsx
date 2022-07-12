@@ -3,7 +3,7 @@ import React from 'react';
 
 import {ColorPicker, useColorPickerModel} from '@workday/canvas-kit-labs-react/color-picker';
 import {colors} from '@workday/canvas-kit-react/tokens';
-import {ListBox} from '@workday/canvas-kit-react/collection';
+import {ListBox, wrappingNavigationManager} from '@workday/canvas-kit-react/collection';
 import {Flex} from '@workday/canvas-kit-react/layout';
 
 export default {
@@ -13,69 +13,72 @@ export default {
 };
 
 const defaultColorSet = [
-  {id: colors.blueberry600},
-  {id: colors.grapeSoda600},
-  {id: colors.pomegranate600},
-  {id: colors.cinnamon600},
-  {id: colors.cantaloupe600},
-  {id: colors.sourLemon600},
-  {id: colors.greenApple600},
-  {id: colors.jewel600},
-  {id: colors.blueberry500},
-  {id: colors.grapeSoda500},
-  {id: colors.pomegranate500},
-  {id: colors.cinnamon500},
-  {id: colors.cantaloupe500},
-  {id: colors.sourLemon500},
-  {id: colors.greenApple500},
-  {id: colors.jewel500},
-  {id: colors.blueberry400},
-  {id: colors.grapeSoda400},
-  {id: colors.pomegranate400},
-  {id: colors.cinnamon400},
-  {id: colors.cantaloupe400},
-  {id: colors.sourLemon400},
-  {id: colors.greenApple400},
-  {id: colors.jewel400},
-  {id: colors.blueberry300},
-  {id: colors.grapeSoda300},
-  {id: colors.pomegranate300},
-  {id: colors.cinnamon300},
-  {id: colors.cantaloupe300},
-  {id: colors.sourLemon300},
-  {id: colors.greenApple300},
-  {id: colors.jewel300},
-  {id: colors.blueberry200},
-  {id: colors.grapeSoda200},
-  {id: colors.pomegranate200},
-  {id: colors.cinnamon200},
-  {id: colors.cantaloupe200},
-  {id: colors.sourLemon200},
-  {id: colors.greenApple200},
-  {id: colors.jewel200},
-  {id: colors.blueberry100},
-  {id: colors.grapeSoda100},
-  {id: colors.pomegranate100},
-  {id: colors.cinnamon100},
-  {id: colors.cantaloupe100},
-  {id: colors.sourLemon100},
-  {id: colors.greenApple100},
-  {id: colors.jewel100},
-  {id: colors.blackPepper600},
-  {id: colors.blackPepper400},
-  {id: colors.blackPepper300},
-  {id: colors.blackPepper100},
-  {id: colors.frenchVanilla500},
-  {id: colors.frenchVanilla400},
-  {id: colors.frenchVanilla200},
-  {id: colors.frenchVanilla100},
+  colors.blueberry600,
+  colors.grapeSoda600,
+  colors.pomegranate600,
+  colors.cinnamon600,
+  colors.cantaloupe600,
+  colors.sourLemon600,
+  colors.greenApple600,
+  colors.jewel600,
+  colors.blueberry500,
+  colors.grapeSoda500,
+  colors.pomegranate500,
+  colors.cinnamon500,
+  colors.cantaloupe500,
+  colors.sourLemon500,
+  colors.greenApple500,
+  colors.jewel500,
+  colors.blueberry400,
+  colors.grapeSoda400,
+  colors.pomegranate400,
+  colors.cinnamon400,
+  colors.cantaloupe400,
+  colors.sourLemon400,
+  colors.greenApple400,
+  colors.jewel400,
+  colors.blueberry300,
+  colors.grapeSoda300,
+  colors.pomegranate300,
+  colors.cinnamon300,
+  colors.cantaloupe300,
+  colors.sourLemon300,
+  colors.greenApple300,
+  colors.jewel300,
+  colors.blueberry200,
+  colors.grapeSoda200,
+  colors.pomegranate200,
+  colors.cinnamon200,
+  colors.cantaloupe200,
+  colors.sourLemon200,
+  colors.greenApple200,
+  colors.jewel200,
+  colors.blueberry100,
+  colors.grapeSoda100,
+  colors.pomegranate100,
+  colors.cinnamon100,
+  colors.cantaloupe100,
+  colors.sourLemon100,
+  colors.greenApple100,
+  colors.jewel100,
+  colors.blackPepper600,
+  colors.blackPepper400,
+  colors.blackPepper300,
+  colors.blackPepper100,
+  colors.frenchVanilla500,
+  colors.frenchVanilla400,
+  colors.frenchVanilla200,
+  colors.frenchVanilla100,
 ];
+
+const arrOfColor = defaultColorSet.map((individualColor, i) => {
+  return {id: individualColor};
+});
 
 export const Default = () => {
   const model = useColorPickerModel({
-    items: defaultColorSet,
-    columnCount: 8,
-    shouldVirtualize: false,
+    items: arrOfColor,
+    columnCount: 7,
   });
 
   return (
@@ -84,13 +87,13 @@ export const Default = () => {
         <ColorPicker.SwatchBook marginBottom="m">
           {item => (
             <ColorPicker.SwatchButton
-              onClick={() => console.warn(item.id)}
+              onClick={() => console.warn(item)}
               color={item.id}
             ></ColorPicker.SwatchButton>
           )}
         </ColorPicker.SwatchBook>
       </ColorPicker>
-      <ColorPicker>
+      <ColorPicker model={model}>
         Selected Color:
         <ColorPicker.Swatch showCheck={false} color={model.state.selectedIds[0]} />
       </ColorPicker>

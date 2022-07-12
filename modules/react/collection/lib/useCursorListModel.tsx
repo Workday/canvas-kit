@@ -149,6 +149,7 @@ export const getWrappingOffsetItem = (offset: number) => (
 
   // calculate idealLength as in if the grid was a perfect rectangle
   const rows = Math.ceil(items.length / state.columnCount);
+  console.warn('rows', rows);
   const idealLength = rows * state.columnCount;
   if (nextIndex < 0) {
     if (offset === -1) {

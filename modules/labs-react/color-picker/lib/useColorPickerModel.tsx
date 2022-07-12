@@ -1,5 +1,5 @@
 import {createModelHook} from '@workday/canvas-kit-react/common';
-import {useGridModel} from '@workday/canvas-kit-react/collection';
+import {useGridModel, wrappingNavigationManager} from '@workday/canvas-kit-react/collection';
 import React from 'react';
 
 export const useColorPickerModel = createModelHook({
@@ -8,6 +8,8 @@ export const useColorPickerModel = createModelHook({
     initialColor: '',
     columnCount: 8,
     id: '',
+    shouldVirtualize: false,
+    navigation: wrappingNavigationManager,
   },
   requiredConfig: {},
 })(config => {

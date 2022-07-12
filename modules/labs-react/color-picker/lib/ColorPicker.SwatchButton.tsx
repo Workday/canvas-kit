@@ -46,11 +46,12 @@ function compareColors(color1: string, color2: string): boolean {
   return chroma(color1).hex() === chroma(color2).hex();
 }
 const accessibilityBorder = `${colors.frenchVanilla100} 0px 0px 0px 2px, ${colors.licorice200} 0px 0px 0px 3px`;
+export const swatchButtonSize = 20;
 
 const SwatchButtonContainer = styled('button')<{color: string; showCheck: boolean} & StyledType>(
   {
-    width: 20,
-    height: 20,
+    width: swatchButtonSize,
+    height: swatchButtonSize,
     cursor: 'pointer',
     borderRadius: borderRadius.s,
     transition: 'box-shadow 120ms ease',
