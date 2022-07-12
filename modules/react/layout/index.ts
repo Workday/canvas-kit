@@ -1,5 +1,5 @@
-import Layout from './lib/Layout';
-import Column from './lib/Column';
+import {Layout} from './lib/Layout';
+import {Column} from './lib/Column';
 
 export { Layout, Column};
 export * from './lib/Box';

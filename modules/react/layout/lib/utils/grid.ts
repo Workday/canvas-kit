@@ -1,66 +1,48 @@
-import {
-  PropertyAlignItems,
-  PropertyAlignContent,
-  PropertyJustifyItems,
-  PropertyJustifyContent,
-  PropertyGridTemplate,
-  PropertyGridTemplateAreas,
-  PropertyGridTemplateColumns,
-  PropertyGridTemplateRows,
-  PropertyGridGap,
-  PropertyGridColumnsGap,
-  PropertyGridRowGap,
-  PropertyPlaceItems,
-  PropertyAutoColumns,
-  PropertyAutoRows,
-  PropertyGridArea,
-  PropertyGridAutoFlow,
-  PropertyGrid,
-} from './types';
+import {Property} from 'csstype';
 
 /** style props to for grid container properties */
 export type GridStyleProps = {
   /** sets `align-items` property */
-  alignItems?: PropertyAlignItems;
+  alignItems?: Property.AlignItems;
   /** sets `align-content` property */
-  alignContent?: PropertyAlignContent;
+  alignContent?: Property.AlignContent;
   /**
    * sets `display` property
    * @default 'grid'
    * */
-  display?: 'grid' | 'inline-grid' | 'subgrid';
+  display?: 'grid' | 'inline-grid';
   /** sets `justify-items` property */
-  justifyItems?: PropertyJustifyItems;
+  justifyItems?: Property.JustifyItems;
   /** sets `justify-content` property */
-  justifyContent?: PropertyJustifyContent;
+  justifyContent?: Property.JustifyContent;
 
   // Container Types
   /** sets `grid-template` property */
-  gridTemplate?: PropertyGridTemplate;
+  gridTemplate?: Property.GridTemplate;
   /** sets `grid-template-area` property */
-  gridTemplateAreas?: PropertyGridTemplateAreas;
+  gridTemplateAreas?: Property.GridTemplateAreas;
   /** sets `grid-template-columns` property */
-  gridTemplateColumns?: PropertyGridTemplateColumns;
+  gridTemplateColumns?: Property.GridTemplateColumns;
   /** sets `grid-template-rows` property */
-  gridTemplateRows?: PropertyGridTemplateRows;
+  gridTemplateRows?: Property.GridTemplateRows;
   /** sets `gap` property */
-  gridGap?: PropertyGridGap;
+  gridGap?: Property.GridGap;
   /** sets `column-gap` property */
-  gridColumnGap?: PropertyGridColumnsGap;
+  gridColumnGap?: Property.GridColumnGap;
   /** sets `row-gap` property */
-  gridRowGap?: PropertyGridRowGap;
+  gridRowGap?: Property.GridRowGap;
   /** sets `place-items` property */
-  gridPlaceItems?: PropertyPlaceItems;
+  gridPlaceItems?: Property.PlaceItems;
   /** sets `grid-auto-columns` property */
-  gridAutoColumns?: PropertyAutoColumns;
+  gridAutoColumns?: Property.GridAutoColumns;
   /** sets `grid-auto-rows` property */
-  gridAutoRows?: PropertyAutoRows;
+  gridAutoRows?: Property.GridAutoRows;
   /** sets `grid-area` property */
-  gridArea?: PropertyGridArea;
+  gridArea?: Property.GridArea;
   /** sets `grid-auto-flow` property */
-  gridAutoFlow?: PropertyGridAutoFlow;
+  gridAutoFlow?: Property.GridAutoFlow;
   /** sets `grid` property */
-  grid?: PropertyGrid;
+  grid?: Property.Grid;
 };
 
 const gridProps = {

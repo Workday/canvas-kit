@@ -8,7 +8,8 @@ import {
   Themeable,
   useUniqueId,
 } from '@workday/canvas-kit-react/common';
-import canvas, {
+import {
+  canvas,
   borderRadius,
   colors,
   inputColors,
@@ -340,5 +341,3 @@ export const Radio = createComponent('input')({
     );
   },
 });
-
-export default Radio;
