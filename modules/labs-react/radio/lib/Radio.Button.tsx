@@ -15,6 +15,8 @@ import {
   mouseFocusBehavior,
   useUniqueId,
 } from '@workday/canvas-kit-react/common';
+import RadioButtonInput from './RadioButton.Input';
+import RadioLabel from './RadioButton.Label';
 
 import {RadioModel} from './useRadioModel';
 
@@ -93,85 +95,6 @@ const RadioRipple = styled('span')<Pick<RadioButtonProps, 'disabled'>>({
   zIndex: -1,
 });
 
-const RadioInput = styled('input')<RadioButtonProps & StyledType>(
-  {
-    borderRadius: radioBorderRadius,
-    width: radioTapArea,
-    height: radioTapArea,
-    margin: 0,
-    marginTop: '-3px',
-    marginLeft: '-3px',
-    position: 'absolute',
-    opacity: 0,
-    '&:focus, &:active': {
-      outline: 'none',
-    },
-  },
-  ({
-    checked,
-    disabled,
-    theme: {
-      canvas: {
-        palette: {
-          primary: themePrimary,
-          common: {focusOutline: themeFocusOutline},
-        },
-      },
-    },
-  }) => ({
-    cursor: disabled ? undefined : 'pointer',
-    /**
-     * These selectors are targetting various sibling elements (~) here because
-     * their styles need to be connected to changes around the input's state
-     * (e.g. hover, focus, etc.).
-     *
-     * We are choosing not to use component selectors from Emotion in this case.
-     * The Babel transforms have been problematic in the past.
-     */
-
-    // `span:first-of-type` refers to `RadioRipple`, the light grey
-    // element that animates around the component on hover
-    '&:hover ~ span:first-of-type': {
-      boxShadow: disabled ? undefined : `0 0 0 ${rippleRadius}px ${colors.soap200}`,
-    },
-
-    // `div:first-of-type` refers to the `RadioBackground`, the visual facade of the
-    // input (which is visually hidden)
-    '&:hover ~ div:first-of-type': {
-      backgroundColor: checked
-        ? themePrimary.main
-        : disabled
-        ? inputColors.disabled.background
-        : 'white',
-      borderColor: checked
-        ? themePrimary.main
-        : disabled
-        ? inputColors.disabled.border
-        : inputColors.hoverBorder,
-      borderWidth: '1px',
-    },
-    '&:focus, &focus:hover': {
-      '& ~ div:first-of-type': {
-        borderColor: checked ? themePrimary.main : themeFocusOutline,
-        borderWidth: '2px',
-      },
-    },
-    '&:checked:focus ~ div:first-of-type': {
-      ...focusRing({separation: 2, outerColor: themeFocusOutline}),
-    },
-    ...mouseFocusBehavior({
-      '&:focus ~ div:first-of-type': {
-        ...focusRing({width: 0, outerColor: themeFocusOutline}),
-        borderWidth: '1px',
-        borderColor: checked ? themePrimary.main : inputColors.border,
-      },
-      '&:focus:hover ~ div:first-of-type, &:focus:active ~ div:first-of-type': {
-        borderColor: checked ? themePrimary.main : inputColors.hoverBorder,
-      },
-    }),
-  })
-);
-
 const RadioBackground = styled('div')<RadioButtonProps>(
   {
     alignItems: 'center',
@@ -230,14 +153,6 @@ const RadioCheck = styled('div')<Pick<RadioButtonProps, 'checked'>>(
   })
 );
 
-const RadioLabel = styled('label')<{disabled?: boolean}>(
-  {
-    ...canvas.type.levels.subtext.large,
-    paddingLeft: radioLabelDistance,
-  },
-  ({disabled}) => (disabled ? {color: inputColors.disabled.text} : {cursor: 'pointer'})
-);
-
 export const RadioButton = createComponent('input')({
   displayName: 'Radio.Button',
   Component: (
@@ -257,30 +172,57 @@ export const RadioButton = createComponent('input')({
     Element
   ) => {
     const inputId = useUniqueId(id);
+    const onRadioChange = (
+      existingOnChange: ((e: React.ChangeEvent<HTMLInputElement>) => void) | undefined,
+      index: number,
+      event: React.ChangeEvent<HTMLInputElement>
+    ): void => {
+      if (existingOnChange) {
+        existingOnChange(event);
+      }
+
+      const target = event.currentTarget;
+      if (target && onChange) {
+        if (target.value) {
+          onChange(target.value);
+        } else {
+          onChange(index);
+        }
+      }
+    };
+    const RenderChildren = (
+      child: React.ReactElement<RadioButtonProps>,
+      index: number,
+      value: string | number | undefined
+    ): React.ReactNode => {
+      if (typeof child.type === typeof RadioButton) {
+        const childProps = child.props;
+        const checked = typeof value === 'number' ? index === value : childProps.value === value;
+        // const radioButtonName = name ? name : childProps.name;
+
+        return React.cloneElement(child, {
+          checked,
+          onChange: onRadioChange.bind(this, childProps.onChange, index),
+        });
+      }
+
+      return child;
+    };
     return (
       <RadioContainer>
         <RadioInputWrapper disabled={disabled}>
-          <RadioInput
-            as={Element}
-            checked={checked}
-            disabled={disabled}
-            id={inputId}
-            name={name}
-            onChange={onChange}
-            type="radio"
-            value={value}
-            aria-checked={checked}
-            {...elemProps}
-          />
+          {React.Children.map(children, (child, index) => RenderChildren(child, index, value))}
           <RadioRipple />
           <RadioBackground checked={checked} disabled={disabled}>
             <RadioCheck checked={checked} />
           </RadioBackground>
-          {label && (
+          {label &&
+            React.Children.map(children, (child, index) => RenderChildren(child, index, value))}
+          {/* {label && (
             <RadioLabel htmlFor={inputId} disabled={disabled}>
               {label}
             </RadioLabel>
-          )}
+          )} */}
         </RadioInputWrapper>
       </RadioContainer>
     );

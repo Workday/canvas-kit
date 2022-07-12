@@ -8,6 +8,8 @@ import {
 } from '@workday/canvas-kit-react/common';
 
 import {RadioButton, RadioButtonProps} from './Radio.Button';
+import RadioButtonInput from './RadioButton.Input';
+import RadioLabel from './RadioButton.Label';
 import Container from './utils/RadioGroupContainer';
 
 export interface RadioGroupProps extends Themeable, GrowthBehavior {
@@ -84,5 +86,7 @@ export const RadioGroup = createComponent('div')({
   },
   subComponents: {
     Button: RadioButton,
+    Input: RadioButtonInput,
+    Label: RadioLabel,
   },
 });
