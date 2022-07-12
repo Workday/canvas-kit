@@ -48,6 +48,7 @@ export interface RadioProps extends Themeable {
    * The value of the Radio button.
    */
   value?: string;
+  variant?: 'inverse' | undefined;
 }
 
 const radioBorderRadius = 9;
@@ -77,16 +78,20 @@ const RadioInputWrapper = styled('div')<Pick<RadioProps, 'disabled'>>({
   width: radioWidth,
 });
 
-const RadioRipple = styled('span')<Pick<RadioProps, 'disabled'>>({
-  borderRadius: borderRadius.circle,
-  boxShadow: `0 0 0 0 ${colors.soap200}`,
-  height: radioHeight,
-  transition: 'box-shadow 150ms ease-out',
-  width: radioWidth,
-  position: 'absolute',
-  pointerEvents: 'none', // This is a decorative element we don't want it to block clicks to input
-  zIndex: -1,
-});
+const RadioRipple = styled('span')<Pick<RadioProps, 'disabled' | 'variant'>>(
+  {
+    borderRadius: borderRadius.circle,
+    boxShadow: `0 0 0 0 ${colors.soap200}`,
+    height: radioHeight,
+    transition: 'box-shadow 150ms ease-out',
+    width: radioWidth,
+    position: 'absolute',
+    pointerEvents: 'none', // This is a decorative element we don't want it to block clicks to input
+  },
+  ({variant}) => ({
+    opacity: variant === 'inverse' ? '0.4' : '1',
+  })
+);
 
 const RadioInput = styled('input')<RadioProps & StyledType>(
   {
@@ -105,6 +110,7 @@ const RadioInput = styled('input')<RadioProps & StyledType>(
   ({
     checked,
     disabled,
+    variant,
     theme: {
       canvas: {
         palette: {
@@ -134,34 +140,68 @@ const RadioInput = styled('input')<RadioProps & StyledType>(
     // input (which is visually hidden)
     '&:hover ~ div:first-of-type': {
       backgroundColor: checked
-        ? themePrimary.main
+        ? variant === 'inverse'
+          ? colors.frenchVanilla100
+          : themePrimary.main
         : disabled
         ? inputColors.disabled.background
         : 'white',
       borderColor: checked
-        ? themePrimary.main
+        ? variant === 'inverse'
+          ? colors.soap300
+          : themePrimary.main
         : disabled
         ? inputColors.disabled.border
+        : variant === 'inverse'
+        ? colors.soap300
         : inputColors.hoverBorder,
       borderWidth: '1px',
     },
     '&:focus, &focus:hover': {
       '& ~ div:first-of-type': {
-        borderColor: checked ? themePrimary.main : themeFocusOutline,
         borderWidth: '2px',
+        borderColor: variant === 'inverse' ? colors.blackPepper400 : themeFocusOutline,
+        boxShadow: 'none',
+        ...focusRing({
+          width: variant === 'inverse' ? 2 : 0,
+          separation: 0,
+          animate: false,
+          innerColor: variant === 'inverse' ? colors.blackPepper400 : undefined,
+          outerColor: variant === 'inverse' ? colors.frenchVanilla100 : undefined,
+        }),
       },
     },
     '&:checked:focus ~ div:first-of-type': {
-      ...focusRing({separation: 2, outerColor: themeFocusOutline}),
+      ...focusRing({
+        separation: 2,
+        width: 2,
+        innerColor: variant === 'inverse' ? colors.blackPepper400 : undefined,
+        outerColor: variant === 'inverse' ? colors.frenchVanilla100 : themeFocusOutline,
+      }),
+      borderColor: variant === 'inverse' ? colors.frenchVanilla100 : themePrimary.main,
+      borderWidth: '2px',
     },
     ...mouseFocusBehavior({
       '&:focus ~ div:first-of-type': {
-        ...focusRing({width: 0, outerColor: themeFocusOutline}),
+        ...focusRing({
+          width: 0,
+          outerColor: variant === 'inverse' ? colors.frenchVanilla100 : themeFocusOutline,
+        }),
         borderWidth: '1px',
-        borderColor: checked ? themePrimary.main : inputColors.border,
+        borderColor: checked
+          ? variant === 'inverse'
+            ? colors.soap300
+            : themePrimary.main
+          : inputColors.border,
       },
       '&:focus:hover ~ div:first-of-type, &:focus:active ~ div:first-of-type': {
-        borderColor: checked ? themePrimary.main : inputColors.hoverBorder,
+        borderColor: checked
+          ? variant === 'inverse'
+            ? colors.soap300
+            : themePrimary.main
+          : variant === 'inverse'
+          ? colors.soap300
+          : inputColors.hoverBorder,
       },
     }),
   })
@@ -187,6 +227,7 @@ const RadioBackground = styled('div')<RadioProps>(
   ({
     checked,
     disabled,
+    variant,
     theme: {
       canvas: {
         palette: {primary: themePrimary},
@@ -194,19 +235,26 @@ const RadioBackground = styled('div')<RadioProps>(
     },
   }) => ({
     borderColor: checked
-      ? themePrimary.main
+      ? variant === 'inverse'
+        ? colors.soap300
+        : themePrimary.main
       : disabled
       ? inputColors.disabled.border
+      : variant === 'inverse'
+      ? colors.soap300
       : inputColors.border,
     backgroundColor: checked
-      ? themePrimary.main
+      ? variant === 'inverse'
+        ? colors.frenchVanilla100
+        : themePrimary.main
       : disabled
       ? inputColors.disabled.background
       : 'white',
+    opacity: disabled && variant === 'inverse' ? '.4' : '1',
   })
 );
 
-const RadioCheck = styled('div')<Pick<RadioProps, 'checked'>>(
+const RadioCheck = styled('div')<Pick<RadioProps, 'checked' | 'variant'>>(
   {
     borderRadius: radioBorderRadius,
     display: 'flex',
@@ -216,8 +264,11 @@ const RadioCheck = styled('div')<Pick<RadioProps, 'checked'>>(
     transition: 'transform 200ms ease, opacity 200ms ease',
     width: radioDot,
   },
-  ({theme}) => ({
-    backgroundColor: theme.canvas.palette.primary.contrast,
+  ({theme, variant}) => ({
+    backgroundColor:
+      variant === 'inverse'
+        ? theme.canvas.palette.primary.main
+        : theme.canvas.palette.primary.contrast,
   }),
   ({checked}) => ({
     opacity: checked ? 1 : 0,
@@ -225,18 +276,35 @@ const RadioCheck = styled('div')<Pick<RadioProps, 'checked'>>(
   })
 );
 
-const RadioLabel = styled('label')<{disabled?: boolean}>(
+const RadioLabel = styled('label')<{disabled?: boolean; variant?: 'inverse' | undefined}>(
   {
     ...canvas.type.levels.subtext.large,
     paddingLeft: radioLabelDistance,
   },
-  ({disabled}) => (disabled ? {color: inputColors.disabled.text} : {cursor: 'pointer'})
+  ({variant}) => (variant === 'inverse' ? {color: colors.frenchVanilla100} : undefined),
+  ({disabled, variant}) =>
+    disabled
+      ? {
+          color: variant === 'inverse' ? colors.frenchVanilla100 : inputColors.disabled.text,
+          opacity: variant === 'inverse' ? '.4' : '1',
+        }
+      : {cursor: 'pointer'}
 );
 
 export const Radio = createComponent('input')({
   displayName: 'Radio',
   Component: (
-    {checked = false, id, label = '', disabled, name, onChange, value, ...elemProps}: RadioProps,
+    {
+      checked = false,
+      id,
+      label = '',
+      disabled,
+      name,
+      onChange,
+      value,
+      variant,
+      ...elemProps
+    }: RadioProps,
     ref,
     Element
   ) => {
@@ -255,15 +323,16 @@ export const Radio = createComponent('input')({
             type="radio"
             value={value}
             aria-checked={checked}
+            variant={variant}
             {...elemProps}
           />
-          <RadioRipple />
-          <RadioBackground checked={checked} disabled={disabled}>
-            <RadioCheck checked={checked} />
+          <RadioRipple variant={variant} />
+          <RadioBackground checked={checked} disabled={disabled} variant={variant}>
+            <RadioCheck checked={checked} variant={variant} />
           </RadioBackground>
         </RadioInputWrapper>
         {label && (
-          <RadioLabel htmlFor={inputId} disabled={disabled}>
+          <RadioLabel htmlFor={inputId} disabled={disabled} variant={variant}>
             {label}
           </RadioLabel>
         )}

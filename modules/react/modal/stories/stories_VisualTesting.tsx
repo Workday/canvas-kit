@@ -4,8 +4,7 @@ import ReactDOM from 'react-dom';
 import {DeleteButton} from '@workday/canvas-kit-react/button';
 import {Modal, useModalModel} from '@workday/canvas-kit-react/modal';
 import {ContentDirection, CanvasProvider} from '@workday/canvas-kit-react/common';
-import {HStack} from '@workday/canvas-kit-labs-react/layout';
-import {Box} from '@workday/canvas-kit-labs-react/common';
+import {HStack, Box} from '@workday/canvas-kit-react/layout';
 
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
 

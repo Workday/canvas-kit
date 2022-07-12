@@ -1,9 +1,9 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import {jsx, CSSObject} from '@emotion/core';
+import {jsx} from '@emotion/react';
+import {CSSObject} from '@emotion/styled';
 import * as React from 'react';
 
-import {IconButton, IconButtonProps} from '@workday/canvas-kit-react/button';
 import * as systemIcons from '@workday/canvas-system-icons-web';
 
 const buttonLayout: CSSObject = {
@@ -34,39 +34,6 @@ export const stateTableColumnProps = [
   {label: 'Active Hover ', props: {className: 'active hover', disabled: false}},
 ];
 
-const isInverseVariant = (variant: IconButtonProps['variant']) => {
-  return ['inverse', 'inverseFilled'].indexOf(variant) !== -1;
-};
-
-const iconGridStyles = (variant: IconButtonProps['variant']): CSSObject => {
-  const inverse = isInverseVariant(variant);
-
-  return {
-    ...(inverse && {background: '#0875e1'}),
-    borderRadius: '4px',
-    display: 'flex',
-    flexWrap: 'wrap',
-  };
-};
-
-const iconCellStyles = (variant: IconButtonProps['variant']): CSSObject => {
-  const inverse = isInverseVariant(variant);
-
-  return {
-    padding: '10px',
-    textAlign: 'center',
-    width: '75px',
-
-    p: {
-      ...(inverse && {color: '#fff'}),
-      fontSize: '12px',
-      margin: '12px 0 0',
-      overflow: 'hidden',
-      textOverflow: 'ellipsis',
-    },
-  };
-};
-
 // Convert systemIcons into an array
 const systemIconArray = [];
 for (const icon in systemIcons) {
@@ -74,41 +41,3 @@ for (const icon in systemIcons) {
     systemIconArray.push(systemIcons[icon]);
   }
 }
-
-interface IconButtonGridProps {
-  /**
-   * If defined, makes the buttons toggleable and sets their initial
-   * toggled state to the provided boolean value. If undefined, the
-   * button is not considered toggleable.
-   */
-  initialToggled?: boolean;
-  /**
-   * The button variant to display in the grid.
-   */
-  variant: IconButtonProps['variant'];
-}
-
-export const IconButtonGrid = ({initialToggled, variant}: IconButtonGridProps) => {
-  const [toggled, setToggled] = React.useState(initialToggled);
-
-  const handleToggle = () => {
-    setToggled(!toggled);
-  };
-
-  return (
-    <div css={iconGridStyles(variant)}>
-      {systemIconArray.map(icon => (
-        <div css={iconCellStyles(variant)} key={icon.name}>
-          <IconButton
-            aria-label={icon.name}
-            icon={icon}
-            toggled={initialToggled !== undefined ? toggled : undefined}
-            variant={variant}
-            onClick={initialToggled !== undefined ? handleToggle : undefined}
-          />
-          <p title={icon.name}>{icon.name}</p>
-        </div>
-      ))}
-    </div>
-  );
-};

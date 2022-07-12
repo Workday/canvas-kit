@@ -1,6 +1,6 @@
 import React from 'react';
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {Flex} from '@workday/canvas-kit-labs-react/layout';
+import {Flex} from '@workday/canvas-kit-react/layout';
 
 export type BreadcrumbsListProps = React.HTMLAttributes<HTMLUListElement>;
 

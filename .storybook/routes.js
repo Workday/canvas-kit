@@ -14,14 +14,13 @@ const routes = {
   '/tokens/type/': 'tokens-tokens-react--type',
   '/components/buttons/button/': 'components-buttons-button-react--primary',
   '/components/buttons/action-bar/': 'components-buttons-action-bar-react--basic',
-  '/components/buttons/icon-button/': 'components-buttons-button-react-icon-button--circle',
   '/components/containers/card/': 'components-containers-card-react--basic',
   '/components/containers/side-panel/': 'preview-side-panel-react--basic',
   '/components/containers/table/': 'components-containers-table-react--basic',
   '/components/containers/tabs/': 'components-containers-tabs-react--basic',
-  '/components/layout/box/': 'labs-common-box--as',
-  '/components/layout/flex/': 'labs-layout-flex--usage',
-  '/components/layout/stack/': 'labs-layout-stack--basic-stack',
+  '/components/layout/box/': 'components-containers-layout-box--as',
+  '/components/layout/flex/': 'components-containers-layout-flex--usage',
+  '/components/layout/stack/': 'components-containers-layout-stack--basic-stack',
   '/components/inputs/select/': 'preview-select-react-top-label--default',
   '/components/inputs/checkbox/': 'components-inputs-checkbox-react--basic',
   '/components/inputs/form-field/': 'components-inputs-form-field-react--basic',
@@ -36,8 +35,6 @@ const routes = {
   '/components/indicators/status-indicator/': 'components-indicators-status-indicator-react--basic',
   '/components/inputs/text-area/': 'components-inputs-textarea-react--basic',
   '/components/navigation/breadcrumbs/': 'preview-breadcrumbs-react--basic',
-  '/components/navigation/header/': 'components-navigation-page-header-react--product-page-header',
-  '/components/navigation/page-header/': 'labs-header-react--global-header',
   '/components/navigation/pagination/': 'components-navigation-pagination-react--basic',
   '/components/popups/toast/': 'components-popups-toast-react--with-popper',
   '/components/popups/menu/': 'preview-menu-react--basic',
@@ -52,10 +49,10 @@ const routes = {
   '/getting-started/for-developers/resources/creating-compound-components/':
     'welcome-dev-docs-creating-compound-components--page',
   '/getting-started/for-developers/resources/testing/': 'welcome-dev-docs-testing--page',
-  '/getting-started/for-developers/resources/4.0-migration-guide/':
-    'welcome-migration-guides-v4-0--page',
-  '/getting-started/for-developers/resources/5.0-migration-guide/':
-    'welcome-migration-guides-v5-0--page',
+  '/whats-new/upgrade-guides/canvas-kit-v4-upgrade-guide/': 'welcome-upgrade-guides-v4-0--page',
+  '/whats-new/upgrade-guides/canvas-kit-v5-upgrade-guide/': 'welcome-upgrade-guides-v5-0--page',
+  '/whats-new/upgrade-guides/canvas-kit-v6-upgrade-guide/': 'welcome-upgrade-guides-v6-0--page',
+  '/whats-new/upgrade-guides/canvas-kit-v7-upgrade-guide/': 'welcome-upgrade-guides-v7-0--page',
 };
 
 module.exports = routes;

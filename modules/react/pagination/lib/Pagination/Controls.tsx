@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {IconButton, IconButtonProps} from '@workday/canvas-kit-react/button';
+import {TertiaryButton, TertiaryButtonProps} from '@workday/canvas-kit-react/button';
 import {
   chevronLeftSmallIcon,
   chevron2xLeftSmallIcon,
@@ -8,10 +8,10 @@ import {
 } from '@workday/canvas-system-icons-web';
 
 import {PaginationModel} from './types';
-import {HStack} from '@workday/canvas-kit-labs-react/layout';
+import {HStack} from '@workday/canvas-kit-react/layout';
 import {useRTL} from './common/utils/useRTL';
 
-export type ControlButtonProps = IconButtonProps &
+export type ControlButtonProps = TertiaryButtonProps &
   React.ButtonHTMLAttributes<HTMLButtonElement> & {
     model: PaginationModel;
   };
@@ -38,9 +38,8 @@ export const JumpToFirstButton = ({model, onClick, ...restProps}: ControlButtonP
   const {shouldUseRTL} = useRTL();
   const icon = shouldUseRTL ? chevron2xRightSmallIcon : chevron2xLeftSmallIcon;
   return (
-    <IconButton
+    <TertiaryButton
       aria-disabled={isDisabled || undefined}
-      variant="square"
       size="small"
       icon={icon}
       onClick={handleClick}
@@ -61,9 +60,8 @@ export const StepToPreviousButton = ({onClick, model, ...restProps}: ControlButt
   const {shouldUseRTL} = useRTL();
   const icon = shouldUseRTL ? chevronRightSmallIcon : chevronLeftSmallIcon;
   return (
-    <IconButton
+    <TertiaryButton
       aria-disabled={isDisabled || undefined}
-      variant="square"
       size="small"
       icon={icon}
       onClick={handleClick}
@@ -84,9 +82,8 @@ export const StepToNextButton = ({model, onClick, ...restProps}: ControlButtonPr
   const {shouldUseRTL} = useRTL();
   const icon = shouldUseRTL ? chevronLeftSmallIcon : chevronRightSmallIcon;
   return (
-    <IconButton
+    <TertiaryButton
       aria-disabled={isDisabled || undefined}
-      variant="square"
       size="small"
       icon={icon}
       onClick={handleClick}
@@ -107,9 +104,8 @@ export const JumpToLastButton = ({model, onClick, ...restProps}: ControlButtonPr
   const {shouldUseRTL} = useRTL();
   const icon = shouldUseRTL ? chevron2xLeftSmallIcon : chevron2xRightSmallIcon;
   return (
-    <IconButton
+    <TertiaryButton
       aria-disabled={isDisabled || undefined}
-      variant="square"
       size="small"
       icon={icon}
       onClick={handleClick}

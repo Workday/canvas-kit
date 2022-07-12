@@ -43,6 +43,18 @@ module.exports = {
         },
       ],
     });
+    /**
+     * Added this because Storybook 6.3 is on emotion 10, so we rewrote the imports to point to emotion 11
+     * https://github.com/storybookjs/storybook/issues/13145
+     */
+    config.resolve = {
+      ...config.resolve,
+      alias: {
+        ...config.resolve.alias,
+        '@emotion/core': '@emotion/react',
+        'emotion-theming': '@emotion/react',
+      },
+    };
 
     // Update @storybook/addon-docs webpack rules to load all .mdx files in storybook
     const mdxRule = config.module.rules.find(rule => rule.test.toString() === /\.mdx$/.toString());

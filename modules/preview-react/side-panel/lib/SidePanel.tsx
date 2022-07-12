@@ -1,13 +1,12 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import * as React from 'react';
-import {styled, useIsRTL, StyledType} from '@workday/canvas-kit-react/common';
-import {css, jsx, keyframes} from '@emotion/core';
-import {IconButton, IconButtonProps} from '@workday/canvas-kit-react/button';
-import {space, colors} from '@workday/canvas-kit-react/tokens';
+import {styled, useIsRTL} from '@workday/canvas-kit-react/common';
+import {css, jsx, keyframes, CSSObject} from '@emotion/react';
+import {TertiaryButton, TertiaryButtonProps} from '@workday/canvas-kit-react/button';
+import {space, colors, depth} from '@workday/canvas-kit-react/tokens';
 import {transformationImportIcon} from '@workday/canvas-system-icons-web';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
-import {Box} from '@workday/canvas-kit-labs-react/common';
 
 export type SidePanelVariant = 'standard' | 'alternate';
 export type SidePanelTransitionStates = 'collapsed' | 'collapsing' | 'expanded' | 'expanding';
@@ -57,7 +56,7 @@ export interface SidePanelProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   onStateTransition?: (state?: SidePanelTransitionStates) => void;
   /**
-   * The style variant of the side panel. 'standard' is with a `soap100` background, no depth. 'alternate' is a `frenchVanilla100` background with a level 3 depth.
+   * The style variant of the side panel. 'standard' is with a `soap100` background, no depth. 'alternate' is a `frenchVanilla100` background with a level 6 depth.
    *
    * @default 'standard'
    */
@@ -89,7 +88,17 @@ const createKeyframes = (from: number | string, to: number | string) => {
   `;
 };
 
-const StyledPanel = styled(Box)<StyledType & Pick<SidePanelProps, 'as'>>({
+const containerVariantStyle: Record<SidePanelVariant, CSSObject> = {
+  alternate: {
+    backgroundColor: colors.frenchVanilla100,
+    ...depth[5],
+  },
+  standard: {
+    backgroundColor: colors.soap100,
+  },
+};
+
+const Panel = styled('section')<Pick<SidePanelProps, 'as'>>({
   overflow: 'hidden',
   position: 'relative',
   boxSizing: 'border-box',
@@ -112,7 +121,7 @@ const SidePanel = ({
   onExpandedChange,
   onStateTransition,
   origin = 'left',
-  // variant = 'standard',
+  variant = 'standard',
   touched,
   ...elemProps
 }: SidePanelProps) => {
@@ -169,15 +178,20 @@ const SidePanel = ({
   };
 
   return (
-    <StyledPanel
+    <Panel
       as={as}
-      width={expanded ? expandedWidth : collapsedWidth}
-      maxWidth={expanded ? expandedWidth : collapsedWidth}
-      backgroundColor={elemProps.variant === 'alternate' ? colors.frenchVanilla100 : colors.soap100}
-      depth={elemProps.variant === 'alternate' ? 3 : undefined}
-      animation={
-        touched ? `${expanded ? motion.expand : motion.collapse} 200ms ease-out` : undefined
-      }
+      css={[
+        {
+          width: expanded ? expandedWidth : collapsedWidth,
+          maxWidth: expanded ? expandedWidth : collapsedWidth,
+          // mounted.current will be false on the first render, thus you won't get an unwanted animation here
+          // Will animate again if you force a re-render (like in Storybook)
+          animation: touched
+            ? `${expanded ? motion.expand : motion.collapse} 200ms ease-out`
+            : undefined,
+        },
+        containerVariantStyle[variant],
+      ]}
       onAnimationEnd={handleAnimationEnd}
       onAnimationStart={handleAnimationStart}
       {...elemProps}
@@ -190,11 +204,11 @@ const SidePanel = ({
       >
         {children}
       </SidePanelContext.Provider>
-    </StyledPanel>
+    </Panel>
   );
 };
 
-export type ToggleButtonProps = IconButtonProps & {
+export type ToggleButtonProps = TertiaryButtonProps & {
   /**
    * The tooltip text to expand the side panel
    * @default 'Expand'
@@ -211,7 +225,7 @@ export type ToggleButtonProps = IconButtonProps & {
  * A toggle button styled specifically for the side panel container.
  */
 const ToggleButton = ({
-  variant = 'plain',
+  variant = undefined,
   icon = transformationImportIcon,
   tooltipTextExpand: expandLabel = 'Expand',
   tooltipTextCollapse: collapseLabel = 'Collapse',
@@ -235,9 +249,10 @@ const ToggleButton = ({
   const buttonStyle = css({
     position: 'absolute',
     top: space.m,
+    width: space.l,
     right: context.state === 'collapsed' ? 0 : rtlOrigin === 'left' ? space.s : undefined,
     left: context.state === 'collapsed' ? 0 : rtlOrigin === 'right' ? space.s : undefined,
-    margin: context.state === 'collapsed' ? 'auto' : 0, // to override the -8px margin for IconButton.Plain
+    margin: context.state === 'collapsed' ? 'auto' : 0, // to override the -8px margin for TertiaryButton.Plain
     transform:
       context.state === 'collapsed' || context.state === 'collapsing'
         ? `scaleX(${rtlOrigin === 'left' ? '1' : '-1'})`
@@ -246,7 +261,7 @@ const ToggleButton = ({
 
   return (
     <Tooltip title={context.state === 'collapsed' ? expandLabel : collapseLabel} type="muted">
-      <IconButton type="button" css={buttonStyle} icon={icon} variant={variant} {...rest} />
+      <TertiaryButton type="button" css={buttonStyle} icon={icon} variant={variant} {...rest} />
     </Tooltip>
   );
 };

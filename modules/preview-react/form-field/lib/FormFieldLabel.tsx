@@ -1,22 +1,18 @@
 import React from 'react';
 
 import {
-  createComponent,
+  createSubcomponent,
   ExtractProps,
-  useModelContext,
   useTheme,
   styled,
   StyledType,
 } from '@workday/canvas-kit-react/common';
-import {Box} from '@workday/canvas-kit-labs-react/common';
+import {Box, HStack, StackSpacing} from '@workday/canvas-kit-react/layout';
 import {type} from '@workday/canvas-kit-react/tokens';
-import {HStack, StackSpacing} from '@workday/canvas-kit-labs-react/layout';
 
-import {FormFieldModelContext} from './FormField';
-import {FormFieldModel, useFormFieldLabel} from './hooks';
+import {useFormFieldLabel, useFormFieldModel} from './hooks';
 
 export interface FormFieldLabelProps extends Omit<ExtractProps<typeof HStack, never>, 'spacing'> {
-  model?: FormFieldModel;
   /**
    * The text of the label.
    */
@@ -39,22 +35,21 @@ const StyledAsterisk = styled(Box)<StyledType>({
   textDecoration: 'unset',
 });
 
-export const FormFieldLabel = createComponent('label')({
+export const FormFieldLabel = createSubcomponent('label')({
   displayName: 'FormField.Label',
-  Component: ({spacing = 'xxxs', model, children, ...elemProps}: FormFieldLabelProps, ref) => {
-    const localModel = useModelContext(FormFieldModelContext, model);
-    const props = useFormFieldLabel(localModel, elemProps, ref);
-    const theme = useTheme();
+  modelHook: useFormFieldModel,
+  elemPropsHook: useFormFieldLabel,
+})<FormFieldLabelProps>(({spacing = 'xxxs', children, ...elemProps}, Element, model) => {
+  const theme = useTheme();
 
-    return (
-      <HStack as="label" spacing={spacing} minWidth="180px" {...props}>
-        <StyledFormFieldLabel>{children}</StyledFormFieldLabel>
-        {localModel.state.isRequired && (
-          <StyledAsterisk as="span" color={theme.canvas.palette.error.main} aria-hidden="true">
-            *
-          </StyledAsterisk>
-        )}
-      </HStack>
-    );
-  },
+  return (
+    <HStack as={Element} spacing={spacing} minWidth="180px" {...elemProps}>
+      <StyledFormFieldLabel>{children}</StyledFormFieldLabel>
+      {model.state.isRequired && (
+        <StyledAsterisk as="span" color={theme.canvas.palette.error.main} aria-hidden="true">
+          *
+        </StyledAsterisk>
+      )}
+    </HStack>
+  );
 });

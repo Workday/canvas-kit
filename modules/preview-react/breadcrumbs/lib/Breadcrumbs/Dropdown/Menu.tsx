@@ -1,5 +1,5 @@
 import React from 'react';
-import {styled, StyledType} from '@workday/canvas-kit-react/common';
+import {styled} from '@workday/canvas-kit-react/common';
 import {
   borderRadius,
   colors,
@@ -13,7 +13,7 @@ import {
 import {Breadcrumb} from '../types';
 // local components
 import {DropdownMenuItemLink} from './MenuItemLink';
-import {Box, BoxProps} from '@workday/canvas-kit-labs-react/common';
+import {Box, BoxProps} from '@workday/canvas-kit-react/layout';
 
 export interface DropdownMenuProps {
   /**
@@ -50,9 +50,9 @@ export interface DropdownMenuProps {
   toggleActiveItemDown: () => void;
 }
 
-const StyledDropdownMenu = styled(Box)<BoxProps & StyledType>({
+const StyledDropdownMenu = styled(Box)<BoxProps>({
   ...type.levels.subtext.large,
-  ...depth[2],
+  ...depth[3],
   backgroundColor: commonColors.background,
   border: `1px solid ${colors.soap500}`,
   borderRadius: borderRadius.m,

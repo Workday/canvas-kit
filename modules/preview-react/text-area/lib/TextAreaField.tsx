@@ -1,6 +1,6 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import {jsx} from '@emotion/core';
+import {jsx} from '@emotion/react';
 
 import {
   borderRadius,
@@ -9,21 +9,10 @@ import {
   spaceNumbers,
   type,
 } from '@workday/canvas-kit-react/tokens';
-import {
-  createComponent,
-  ExtractProps,
-  useModelContext,
-  useTheme,
-} from '@workday/canvas-kit-react/common';
+import {createSubcomponent, ExtractProps, useTheme} from '@workday/canvas-kit-react/common';
 import {useThemedRing} from '@workday/canvas-kit-labs-react/common';
 import {FormField} from '@workday/canvas-kit-preview-react/form-field';
-
-import {TextAreaModelContext} from './TextArea';
-import {TextAreaModel} from './hooks';
-
-export interface TextAreaFieldProps extends ExtractProps<typeof FormField.Input, never> {
-  model?: TextAreaModel;
-}
+import {useTextInputModel} from '@workday/canvas-kit-preview-react/text-input';
 
 const baseStyles: CSSProperties = {
   ...type.levels.subtext.large,
@@ -51,38 +40,35 @@ const baseStyles: CSSProperties = {
   },
 };
 
-export const TextAreaField = createComponent('textarea')({
+export const TextAreaField = createSubcomponent('textarea')({
   displayName: 'TextArea.Field',
-  Component: ({model, ...elemProps}: TextAreaFieldProps, ref) => {
-    const localModel = useModelContext(TextAreaModelContext, model);
+  modelHook: useTextInputModel,
+})<ExtractProps<typeof FormField.Input, never>>(({...elemProps}, Element, model) => {
+  const theme = useTheme();
+  const errorRing = useThemedRing('error');
 
-    const theme = useTheme();
-    const errorRing = useThemedRing('error');
+  const focusStyles = model.state.hasError
+    ? errorRing
+    : {
+        '&:focus:not([disabled])': {
+          borderColor: theme.canvas.palette.common.focusOutline,
+          boxShadow: `inset 0 0 0 1px ${theme.canvas.palette.common.focusOutline}`,
+        },
+      };
 
-    const focusStyles = localModel.state.hasError
-      ? errorRing
-      : {
-          '&:focus:not([disabled])': {
-            borderColor: theme.canvas.palette.common.focusOutline,
-            boxShadow: `inset 0 0 0 1px ${theme.canvas.palette.common.focusOutline}`,
-          },
-        };
-
-    return (
-      <FormField.Input
-        as="textarea"
-        ref={ref}
-        css={[baseStyles, focusStyles]}
-        {...elemProps}
-        border={`1px solid ${inputColors.border}`}
-        display="block"
-        backgroundColor={inputColors.background}
-        borderRadius={borderRadius.m}
-        minHeight={64}
-        minWidth={280}
-        padding={spaceNumbers.xxs} // Compensate for border
-        margin={0} // Fix Safari
-      />
-    );
-  },
+  return (
+    <FormField.Input
+      as={Element}
+      css={[baseStyles, focusStyles]}
+      {...elemProps}
+      border={`1px solid ${inputColors.border}`}
+      display="block"
+      backgroundColor={inputColors.background}
+      borderRadius={borderRadius.m}
+      minHeight={64}
+      minWidth={280}
+      padding={spaceNumbers.xxs} // Compensate for border
+      margin={0} // Fix Safari
+    />
+  );
 });

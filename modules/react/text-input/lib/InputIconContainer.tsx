@@ -5,7 +5,7 @@ import {space} from '@workday/canvas-kit-react/tokens';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 
 export interface InputIconContainerProps extends GrowthBehavior {
-  icon?: React.ReactElement<SystemIcon>;
+  icon?: React.ReactElement<typeof SystemIcon>;
 }
 
 const Container = styled('div')<InputIconContainerProps>(({grow}) => ({

@@ -3,9 +3,9 @@ import {storiesOf} from '@storybook/react';
 
 import {Card} from '@workday/canvas-kit-react/card';
 
-import Layout from '../index';
+import {Layout} from '../index';
 
-storiesOf('Components/Containers/Layout/React', module)
+storiesOf('Components/Containers/Layout/React/Column and Layout', module)
   .addParameters({component: Layout})
   .addParameters({ReadmePath: 'react/layout'})
   .add('Page Layout', () => (

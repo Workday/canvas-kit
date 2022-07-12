@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {SidePanel, useSidePanel} from '@workday/canvas-kit-preview-react/side-panel';
-import {Flex} from '@workday/canvas-kit-labs-react/layout';
+import {Flex} from '@workday/canvas-kit-react/layout';
 
 export const HiddenName = () => {
   const {panelProps, labelProps, controlProps} = useSidePanel();

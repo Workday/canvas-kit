@@ -1,13 +1,13 @@
-import {createHook} from '@workday/canvas-kit-react/common';
+import {createElemPropsHook} from '@workday/canvas-kit-react/common';
 import {exclamationCircleIcon, exclamationTriangleIcon} from '@workday/canvas-system-icons-web';
-import {BannerModel} from './useBannerModel';
+import {useBannerModel} from './useBannerModel';
 import {useThemedPalette} from './useThemedPalette';
 
 /**
  * Adds the necessary props to a `Icon` component.
  * Used by the Banner.Icon subcomponent
  */
-export const useBannerIcon = createHook(({state}: BannerModel) => {
+export const useBannerIcon = createElemPropsHook(useBannerModel)(({state}) => {
   const palette = useThemedPalette(state.hasError ? 'error' : 'alert');
 
   return {

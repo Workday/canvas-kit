@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Box, useThemeRTL} from '@workday/canvas-kit-labs-react/common';
+import {Box} from '@workday/canvas-kit-react/layout';
 import {
   CanvasProvider,
   ContentDirection,
@@ -17,11 +17,10 @@ const theme: PartialEmotionCanvasTheme = {
 
 const StyledStickyBanner = styled(Banner)({
   position: 'absolute',
-  left: 0,
+  right: 0,
 });
 
 export const StickyRTL = () => {
-  const {themeRTL} = useThemeRTL();
   return (
     <CanvasProvider theme={theme}>
       <Box height={64}>

@@ -13,7 +13,7 @@ module.exports = {
 };
 
 // Extra scopes supported outside the `modules` folder
-const scopes = ['labs', 'preview', 'fonts', 'popup-stack'];
+const scopes = ['labs', 'preview', 'fonts', 'popup-stack', 'codemod'];
 
 /**
  * @param {{ cwd: string}} context

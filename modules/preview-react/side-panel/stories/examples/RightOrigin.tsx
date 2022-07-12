@@ -6,7 +6,7 @@ import {
   useSidePanel,
   SidePanelTransitionStates,
 } from '@workday/canvas-kit-preview-react/side-panel';
-import {Flex} from '@workday/canvas-kit-labs-react/layout';
+import {Flex} from '@workday/canvas-kit-react/layout';
 import {CanvasProvider, styled} from '@workday/canvas-kit-react/common';
 // local helper hook for setting content direction;
 import {useDirection} from './useDirection';
@@ -18,8 +18,7 @@ const StyledHeader = styled('h3')({
 });
 
 const StyledSidePanel = styled(SidePanel)({
-  position: 'absolute',
-  right: 0,
+  marginLeft: 'auto',
 });
 
 const RightPanel = () => {
@@ -46,7 +45,6 @@ export const RightOrigin = () => {
   return (
     <CanvasProvider theme={{canvas: {direction}}}>
       <Flex height={320}>
-        <RightPanel />
         <Flex
           as="main"
           alignItems="center"
@@ -60,6 +58,8 @@ export const RightOrigin = () => {
             Set to {direction === 'ltr' ? 'Right-to-Left' : 'Left-to-Right'}
           </SecondaryButton>
         </Flex>
+
+        <RightPanel />
       </Flex>
     </CanvasProvider>
   );
