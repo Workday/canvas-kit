@@ -54,36 +54,19 @@ export const PrimaryButtonStates = (props: {theme?: PartialEmotionCanvasTheme}) 
 export const PrimaryIconButtonStates = (props: {theme?: PartialEmotionCanvasTheme}) => (
   <StaticStates theme={props.theme}>
     <ComponentStatesTable
-      rowProps={permutateProps(
-        {
-          variant: [
-            {value: undefined, label: ''},
-            {value: 'inverse', label: 'Inverse'},
-          ],
-          size: [
-            {value: 'extraSmall', label: 'Extra Small'},
-            {value: 'small', label: 'Small'},
-            {value: 'medium', label: 'Medium'},
-            {value: 'large', label: 'Large'},
-          ],
-          icon: [
-            // We don't need a label here, because `iconPosition` provides it
-            {value: relatedActionsVerticalIcon, label: ''},
-          ],
-          iconPosition: [
-            {value: undefined, label: ''},
-            {value: 'start', label: '& Left Icon'},
-            {value: 'end', label: '& Right Icon'},
-          ],
-        },
-        // Filter out permutations where `iconPosition` is provided and not `icon`, and vice versa
-        props => {
-          if ((props.iconPosition && !props.icon) || (props.icon && !props.iconPosition)) {
-            return false;
-          }
-          return true;
-        }
-      )}
+      rowProps={permutateProps({
+        variant: [
+          {value: undefined, label: ''},
+          {value: 'inverse', label: 'Inverse'},
+        ],
+        size: [
+          {value: 'extraSmall', label: 'Extra Small'},
+          {value: 'small', label: 'Small'},
+          {value: 'medium', label: 'Medium'},
+          {value: 'large', label: 'Large'},
+        ],
+        icon: [{value: relatedActionsVerticalIcon, label: ''}],
+      })}
       columnProps={stateTableColumnProps}
     >
       {props => (

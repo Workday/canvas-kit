@@ -38,12 +38,7 @@ export const SecondaryButtonStates = (props: {theme?: PartialEmotionCanvasTheme}
           ],
         },
         // Filter out permutations where `iconPosition` is provided and not `icon`, and vice versa
-        props => {
-          if ((props.iconPosition && !props.icon) || (props.icon && !props.iconPosition)) {
-            return false;
-          }
-          return true;
-        }
+        props => (props.iconPosition && props.icon) || (!props.icon && !props.iconPosition)
       )}
       columnProps={stateTableColumnProps}
     >
@@ -59,28 +54,19 @@ export const SecondaryButtonStates = (props: {theme?: PartialEmotionCanvasTheme}
 export const SecondaryIconButtonStates = (props: {theme?: PartialEmotionCanvasTheme}) => (
   <StaticStates theme={props.theme}>
     <ComponentStatesTable
-      rowProps={permutateProps(
-        {
-          variant: [
-            {value: undefined, label: ''},
-            {value: 'inverse', label: 'Inverse'},
-          ],
-          size: [
-            {value: 'extraSmall', label: 'Extra Small'},
-            {value: 'small', label: 'Small'},
-            {value: 'medium', label: 'Medium'},
-            {value: 'large', label: 'Large'},
-          ],
-          icon: [
-            // We don't need a label here, because `iconPosition` provides it
-            {value: relatedActionsVerticalIcon, label: ''},
-          ],
-        },
-        // Filter out permutations where `iconPosition` is provided and not `icon`, and vice versa
-        props => {
-          return true;
-        }
-      )}
+      rowProps={permutateProps({
+        variant: [
+          {value: undefined, label: ''},
+          {value: 'inverse', label: 'Inverse'},
+        ],
+        size: [
+          {value: 'extraSmall', label: 'Extra Small'},
+          {value: 'small', label: 'Small'},
+          {value: 'medium', label: 'Medium'},
+          {value: 'large', label: 'Large'},
+        ],
+        icon: [{value: relatedActionsVerticalIcon, label: ''}],
+      })}
       columnProps={stateTableColumnProps}
     >
       {props => (

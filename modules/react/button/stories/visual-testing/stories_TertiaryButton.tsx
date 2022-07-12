@@ -38,12 +38,7 @@ export const TertiaryButtonStates = (props: {theme?: PartialEmotionCanvasTheme})
           ],
         },
         // Filter out permutations where `iconPosition` is provided and not `icon`, and vice versa
-        props => {
-          if ((props.iconPosition && !props.icon) || (props.icon && !props.iconPosition)) {
-            return false;
-          }
-          return true;
-        }
+        props => (props.iconPosition && props.icon) || (!props.icon && !props.iconPosition)
       )}
       columnProps={stateTableColumnProps}
     >
@@ -74,10 +69,7 @@ export const TertiaryIconButtonStates = (props: {
           {value: 'medium', label: 'Medium'},
           {value: 'large', label: 'Large'},
         ],
-        icon: [
-          // We don't need a label here, because `iconPosition` provides it
-          {value: relatedActionsVerticalIcon, label: ''},
-        ],
+        icon: [{value: relatedActionsVerticalIcon, label: ''}],
       })}
       columnProps={stateTableColumnProps}
     >
