@@ -97,23 +97,25 @@ const getTertiaryButtonColors = (
       },
     };
   } else {
+    const isDefaultTheme = themePrimary.main === colors.blueberry400;
+
     return {
       default: {
-        icon: themePrimary.main,
+        icon: isDefaultTheme ? colors.blackPepper400 : themePrimary.main,
         label: themePrimary.main,
       },
       hover: {
         background: colors.soap200,
-        icon: themePrimary.dark,
+        icon: isDefaultTheme ? colors.blackPepper500 : themePrimary.dark,
         label: themePrimary.dark,
       },
       active: {
         background: colors.soap300,
-        icon: themePrimary.dark,
+        icon: isDefaultTheme ? colors.blackPepper500 : themePrimary.dark,
         label: themePrimary.dark,
       },
       focus: {
-        icon: themePrimary.main,
+        icon: isDefaultTheme ? colors.blackPepper400 : themePrimary.dark,
         label: themePrimary.main,
         focusRing: focusRing({innerColor: colors.blueberry400}, theme),
       },

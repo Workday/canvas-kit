@@ -56,7 +56,7 @@ export const SecondaryButtonStates = (props: {theme?: PartialEmotionCanvasTheme}
   </StaticStates>
 );
 
-export const SecondaryButtonIconStates = (props: {theme?: PartialEmotionCanvasTheme}) => (
+export const SecondaryIconButtonStates = (props: {theme?: PartialEmotionCanvasTheme}) => (
   <StaticStates theme={props.theme}>
     <ComponentStatesTable
       rowProps={permutateProps(
@@ -94,4 +94,8 @@ export const SecondaryButtonIconStates = (props: {theme?: PartialEmotionCanvasTh
 
 export const SecondaryButtonThemedStates = () => (
   <SecondaryButtonStates theme={{canvas: customColorTheme}} />
+);
+
+export const SecondaryIconButtonThemedStates = () => (
+  <SecondaryIconButtonStates theme={{canvas: customColorTheme}} />
 );

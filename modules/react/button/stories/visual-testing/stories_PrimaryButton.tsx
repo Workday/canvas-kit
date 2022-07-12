@@ -38,12 +38,7 @@ export const PrimaryButtonStates = (props: {theme?: PartialEmotionCanvasTheme}) 
           ],
         },
         // Filter out permutations where `iconPosition` is provided and not `icon`, and vice versa
-        props => {
-          if ((props.iconPosition && !props.icon) || (props.icon && !props.iconPosition)) {
-            return false;
-          }
-          return true;
-        }
+        props => (props.iconPosition && props.icon) || (!props.icon && !props.iconPosition)
       )}
       columnProps={stateTableColumnProps}
     >
@@ -102,4 +97,8 @@ export const PrimaryIconButtonStates = (props: {theme?: PartialEmotionCanvasThem
 
 export const PrimaryButtonThemedStates = () => (
   <PrimaryButtonStates theme={{canvas: customColorTheme}} />
+);
+
+export const PrimaryIconButtonThemedStates = () => (
+  <PrimaryIconButtonStates theme={{canvas: customColorTheme}} />
 );
