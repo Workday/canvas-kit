@@ -41,14 +41,14 @@ jobs:
       ## folders. A cache hit will skip the cache steps
       - name: Cache node modules
         id: yarn-cache
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         with:
           path: node_modules
           key: ${{ runner.os }}-node-modules-hash-${{ hashFiles('yarn.lock') }}
 
       - name: Cache Cypress
         id: cypress-cache
-        uses: actions/cache/@v1
+        uses: actions/cache/@v2
         with:
           path: .cache/cypress
           key: ${{ runner.os }}-cypress-cache-version-${{ steps.cypress-version.outputs.version }}
