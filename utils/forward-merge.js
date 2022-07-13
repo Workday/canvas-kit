@@ -20,17 +20,17 @@ function splitArgs(/** @type {string} */ input) {
   let quote = '';
   let currentArg = '';
   for (const l of rest.join(' ')) {
-    if (l !== ' ' || quote) {
-      currentArg += l;
-    } else {
-      args.push(currentArg);
-      currentArg = '';
-    }
-
     if (l === quote) {
       quote = '';
     } else if (l === '"' || l === "'") {
       quote = l;
+    } else {
+      if (l !== ' ' || quote) {
+        currentArg += l;
+      } else {
+        args.push(currentArg);
+        currentArg = '';
+      }
     }
   }
 
@@ -173,6 +173,7 @@ async function main() {
 }
 
 main().catch(err => {
+  console.error('Error:', err.message);
   process.exit(1);
 });
 
