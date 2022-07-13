@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v6.8.10](https://github.com/Workday/canvas-kit/releases/tag/v6.8.10) (2022-07-13)
+
+### Components
+
+- chore: Bump support to next major version ([@NicholasBoll](https://github.com/NicholasBoll))
+- fix(pagination): Remove aria-relevant attr ([#1659](https://github.com/Workday/canvas-kit/pull/1659)) ([@alanbsmith](https://github.com/alanbsmith))
+- Throw CI errors in forward-merge script ([@NicholasBoll](https://github.com/NicholasBoll))
+
+### Infrastructure
+
+- ci: Add automated forward merge ([#1662](https://github.com/Workday/canvas-kit/pull/1662)) ([@NicholasBoll](https://github.com/NicholasBoll))
+- ci: Add yarn install step after forward merge attempt ([@NicholasBoll](https://github.com/NicholasBoll))
+- ci: Add post-merge yarn install and add merge pr instructions ([@NicholasBoll](https://github.com/NicholasBoll))
+- ci: Add command logging to forward-merge ([@NicholasBoll](https://github.com/NicholasBoll))
+- ci: Fix forward-merge logic to move install out of conflict code ([@NicholasBoll](https://github.com/NicholasBoll))
+- ci: Fix forward-merge command line processing ([@NicholasBoll](https://github.com/NicholasBoll))
+- ci: Fix forward-merge command line processing ([@NicholasBoll](https://github.com/NicholasBoll))
+- ci: Fix issues with forward merge script when run locally ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v6.8.9](https://github.com/Workday/canvas-kit/releases/tag/v6.8.9) (2022-05-18)
 
 ### Components
