@@ -8,6 +8,7 @@ import {border, BorderStyleProps} from './utils/border';
 import {color, ColorStyleProps} from './utils/color';
 import {depth, DepthStyleProps} from './utils/depth';
 import {flexItem, FlexItemStyleProps} from './utils/flexItem';
+import {gridItem, GridItemStyleProps} from './utils/gridItem';
 import {layout, LayoutStyleProps} from './utils/layout';
 import {other, OtherStyleProps} from './utils/other';
 import {position, PositionStyleProps} from './utils/position';
@@ -17,6 +18,7 @@ export type BoxProps = BorderStyleProps &
   ColorStyleProps &
   DepthStyleProps &
   FlexItemStyleProps &
+  GridItemStyleProps &
   LayoutStyleProps &
   OtherStyleProps &
   PositionStyleProps &
@@ -55,6 +57,7 @@ export const boxStyleFn = <P extends BoxProps>(props: P) => {
     color,
     depth,
     flexItem,
+    gridItem,
     layout,
     position,
     space,
@@ -79,6 +82,7 @@ const StyledBoxElement = styled('div', {shouldForwardProp})<StyledType & BoxProp
   color,
   depth,
   flexItem,
+  gridItem,
   layout,
   position,
   space
@@ -93,6 +97,7 @@ const StyledBoxComponent = styled('div')<StyledType & BoxProps>(
   color,
   depth,
   flexItem,
+  gridItem,
   layout,
   other,
   position,

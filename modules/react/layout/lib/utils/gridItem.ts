@@ -46,14 +46,14 @@ const gridItemProps = {
 
 /**
  * A style prop function that takes component props and returns grid styles.
- * If no `GridStyleProps` are found, it returns an empty object.
+ * If no `GridItemStyleProps` are found, it returns an empty object.
  *
  * @example
  * // You'll most likely use `grid` with low-level, styled components
- * const GridExample = () => (
- *   <Grid gridAutoFlow="row" justifyContent="center" alignItems="center">
- *     Hello, Grid!
- *   </Grid>
+ * const GridItemExample = () => (
+ *   <Grid.Item gridRowStart="1" justifySelf="center" gridArea="Card">
+ *     Hello, Grid Item!
+ *   </Grid.Item>
  * );
  *
  */
