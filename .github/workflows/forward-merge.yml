@@ -166,8 +166,10 @@ jobs:
             1. Run the following commands in your terminal. If this succeeds, skip step 2. The last command will run a script that tries to merge and resolve conflicts automatically.
 
                 ```
+                git branch -D merge/${{needs.verify-merge.outputs.branch}}-into-${{ needs.verify-merge.outputs.next-branch }} || true
                 git fetch upstream
                 git checkout merge/${{needs.verify-merge.outputs.branch}}-into-${{ needs.verify-merge.outputs.next-branch }}
+                git pull upstream merge/${{needs.verify-merge.outputs.branch}}-into-${{ needs.verify-merge.outputs.next-branch }} -f
                 node utils/forward-merge.js
                 ```
 
