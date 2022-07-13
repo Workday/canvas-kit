@@ -101,7 +101,7 @@ async function main() {
     console.log(`Creating a merge branch`);
     // The CI uses `origin` while locally we use `upstream`.
     const remote = alreadyMerging ? 'upstream' : 'origin';
-    await spawn(
+    await exec(
       `git merge ${remote}/${nextBranch} -m 'chore: Merge ${branch} into ${nextBranch} [skip release]'`
     );
 
@@ -109,6 +109,7 @@ async function main() {
   } catch (result) {
     hasConflicts = true;
     console.log(`Attempting to automatically resolve conflicts`);
+    console.log(result);
     // The merge had conflicts
 
     /** @type {{stdout: string}} */
@@ -128,7 +129,7 @@ async function main() {
 
       if (conflict === 'lerna.json' || conflict.includes('package.json')) {
         // resolve the conflicts by taking incoming file
-        await spawn(`git checkout --theirs -- "${conflict}"`);
+        await exec(`git checkout --theirs -- "${conflict}"`);
         await spawn(`git add ${conflict}`);
 
         console.log(`Resolved conflicts in ${conflict}`);
@@ -173,6 +174,7 @@ async function main() {
 }
 
 main().catch(err => {
+  console.error('Error:', err.message);
   process.exit(1);
 });
 
