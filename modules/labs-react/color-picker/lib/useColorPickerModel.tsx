@@ -15,7 +15,7 @@ export const useColorPickerModel = createModelHook({
   const [customColor, setCustomColor] = React.useState('');
   const getId = config.id || config.getId;
 
-  const [color, setColor] = React.useState(config.initialColor || '');
+  const [color, setColor] = React.useState(config.initialColor[0] || '');
   const model = useGridModel({
     columnCount: config.columnCount,
     items: config.items,
@@ -27,7 +27,7 @@ export const useColorPickerModel = createModelHook({
   const state = {
     ...model.state,
     getId,
-    color: model.state.selectedIds[0],
+    color: model.state.selectedIds[0] || color,
     customColor,
   };
   const events = {

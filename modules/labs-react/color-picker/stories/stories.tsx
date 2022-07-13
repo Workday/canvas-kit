@@ -99,6 +99,7 @@ export const Default = () => {
 
 export const WithColorInput = () => {
   const colorPickerModel = useColorPickerModel({items: arrOfColor});
+
   return (
     <>
       <ColorPicker model={colorPickerModel}>

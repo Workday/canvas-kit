@@ -10,8 +10,7 @@ describe('ColorPicker', () => {
     const ssrRender = () =>
       renderToString(
         <ColorPicker>
-          <ColorPicker.Target>Target</ColorPicker.Target>
-          <ColorPicker.Content>Content</ColorPicker.Content>
+          <ColorPicker.Swatch color="red" />
         </ColorPicker>
       );
     expect(ssrRender).not.toThrow();
