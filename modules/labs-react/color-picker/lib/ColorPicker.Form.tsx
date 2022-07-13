@@ -25,7 +25,7 @@ export default createSubcomponent('form')({
     <StyledForm
       onSubmit={event => {
         event.preventDefault();
-        model.events.setColor(`#${model.state.customColor}`);
+        model.events.select({id: `#${model.state.customColor}`});
       }}
       as={Element}
       {...elemProps}

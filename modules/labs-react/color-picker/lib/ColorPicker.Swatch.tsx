@@ -66,7 +66,7 @@ export default createSubcomponent('div')({
     <StyledContainer
       color={color}
       as={Element}
-      showCheck={showCheck === true || model.state.color === color}
+      showCheck={showCheck || model.state.selectedIds[0] === color}
       {...elemProps}
     >
       {showCheck || model.state.color === color ? (

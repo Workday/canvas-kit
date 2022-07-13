@@ -5,33 +5,35 @@ import React from 'react';
 export const useColorPickerModel = createModelHook({
   defaultConfig: {
     ...useGridModel.defaultConfig,
-    initialColor: '',
+    initialColor: [''],
     columnCount: 8,
     id: '',
     shouldVirtualize: false,
-    navigation: wrappingNavigationManager,
   },
   requiredConfig: {},
 })(config => {
-  const [color, setColor] = React.useState(config.initialColor || '');
   const [customColor, setCustomColor] = React.useState('');
   const getId = config.id || config.getId;
 
+  const [color, setColor] = React.useState(config.initialColor || '');
   const model = useGridModel({
     columnCount: config.columnCount,
     items: config.items,
     shouldVirtualize: false,
+    initialSelectedIds: config.initialColor,
+    navigation: wrappingNavigationManager,
   });
 
   const state = {
     ...model.state,
     getId,
-    color,
+    color: model.state.selectedIds[0],
     customColor,
   };
   const events = {
     ...model.events,
     setColor(color: string) {
+      setCustomColor('');
       setColor(color);
     },
     setCustomColor(color: string) {

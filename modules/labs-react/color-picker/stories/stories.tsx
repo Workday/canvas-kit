@@ -3,12 +3,9 @@ import React from 'react';
 
 import {ColorPicker, useColorPickerModel} from '@workday/canvas-kit-labs-react/color-picker';
 import {colors} from '@workday/canvas-kit-react/tokens';
-import {ListBox, wrappingNavigationManager} from '@workday/canvas-kit-react/collection';
-import {Flex} from '@workday/canvas-kit-react/layout';
 
 export default {
   title: 'Labs/Color Picker/React',
-
   component: ColorPicker,
 };
 
@@ -78,7 +75,6 @@ const arrOfColor = defaultColorSet.map((individualColor, i) => {
 export const Default = () => {
   const model = useColorPickerModel({
     items: arrOfColor,
-    columnCount: 7,
   });
 
   return (
@@ -101,98 +97,81 @@ export const Default = () => {
   );
 };
 
-// export const WithColorInput = () => {
-//   const colorPickerModel = useColorPickerModel();
-//   return (
-//     <>
-//       <ColorPicker model={colorPickerModel}>
-//         <ColorPicker.SwatchBook style={{marginBottom: '20px'}} colors={defaultColorSet}>
-//           {colors => {
-//             return colors.map(color => <ColorPicker.SwatchButton key={color} color={color} />);
-//           }}
-//         </ColorPicker.SwatchBook>
-//         <ColorPicker.CustomColorForm label="Custom Color">
-//           <ColorPicker.Input />
-//           <ColorPicker.SubmitButton aria-label="Submit Custom Color" />
-//         </ColorPicker.CustomColorForm>
-//       </ColorPicker>
+export const WithColorInput = () => {
+  const colorPickerModel = useColorPickerModel({items: arrOfColor});
+  return (
+    <>
+      <ColorPicker model={colorPickerModel}>
+        <ColorPicker.SwatchBook marginBottom={18} colors={defaultColorSet}>
+          {item => (
+            <ColorPicker.SwatchButton
+              onClick={() => console.warn(item)}
+              color={item.id}
+            ></ColorPicker.SwatchButton>
+          )}
+        </ColorPicker.SwatchBook>
+        <ColorPicker.CustomColorForm label="Custom Hex Color">
+          <ColorPicker.Input />
+          <ColorPicker.SubmitButton aria-label="Submit Custom Color" />
+        </ColorPicker.CustomColorForm>
+      </ColorPicker>
 
-//       <ColorPicker>
-//         <ColorPicker.Swatch
-//           showCheck={false}
-//           color={
-//             defaultColorSet[colorPickerModel.state.selectedIds[0]] || colorPickerModel.state.color
-//           }
-//         />
-//       </ColorPicker>
-//     </>
-//   );
-// };
+      <ColorPicker>
+        Selected Color:
+        <ColorPicker.Swatch showCheck={false} color={colorPickerModel.state.selectedIds[0]} />
+      </ColorPicker>
+    </>
+  );
+};
 
-// export const WithCustomColumnCount = () => {
-//   const colorPickerModel = useColorPickerModel({columnCount: 5});
-//   return (
-//     <>
-//       <ColorPicker model={colorPickerModel}>
-//         <ColorPicker.SwatchBook style={{marginBottom: '20px'}} colors={defaultColorSet}>
-//           {colors => {
-//             return colors.map(color => <ColorPicker.SwatchButton key={color} color={color} />);
-//           }}
-//         </ColorPicker.SwatchBook>
-//         <ColorPicker.CustomColorForm label="Custom Color">
-//           <ColorPicker.Input />
-//           <ColorPicker.SubmitButton aria-label="Submit Custom Color" />
-//         </ColorPicker.CustomColorForm>
-//       </ColorPicker>
+export const WithCustomColumnCount = () => {
+  const model = useColorPickerModel({
+    items: arrOfColor,
+    columnCount: 5,
+  });
 
-//       <ColorPicker>
-//         <ColorPicker.Swatch
-//           showCheck={false}
-//           color={
-//             defaultColorSet[colorPickerModel.state.selectedIds[0]] || colorPickerModel.state.color
-//           }
-//         />
-//       </ColorPicker>
-//     </>
-//   );
-// };
+  return (
+    <>
+      <ColorPicker model={model}>
+        <ColorPicker.SwatchBook marginBottom="m">
+          {item => (
+            <ColorPicker.SwatchButton
+              onClick={() => console.warn(item)}
+              color={item.id}
+            ></ColorPicker.SwatchButton>
+          )}
+        </ColorPicker.SwatchBook>
+      </ColorPicker>
+      <ColorPicker model={model}>
+        Selected Color:
+        <ColorPicker.Swatch showCheck={false} color={model.state.selectedIds[0]} />
+      </ColorPicker>
+    </>
+  );
+};
 
-// export const WithCustomComponent = () => {
-//   const colorPickerModel = useColorPickerModel();
-//   const [customColors, setCustomColors] = React.useState([]);
-//   const [customColorValue, setCustomColorValue] = React.useState('');
-//   const handleCustomColorChange = (e: any) => {
-//     setCustomColorValue(e.target.value);
-//   };
-//   const handleSubmitCustomColor = () => {
-//     setCustomColors([...customColors, customColorValue]);
-//   };
-//   return (
-//     <>
-//       <ColorPicker model={colorPickerModel}>
-//         <ColorPicker.SwatchBook style={{marginBottom: '20px'}} colors={defaultColorSet}>
-//           {colors => {
-//             return colors.map(color => <ColorPicker.SwatchButton key={color} color={color} />);
-//           }}
-//         </ColorPicker.SwatchBook>
+export const WithInitialColor = () => {
+  const model = useColorPickerModel({
+    items: arrOfColor,
+    initialColor: [colors.blueberry400],
+  });
 
-//         <ColorPicker.CustomColorForm label="Custom Color">
-//           <ColorPicker.Input onChange={handleCustomColorChange} />
-//           <ColorPicker.SubmitButton
-//             onClick={handleSubmitCustomColor}
-//             aria-label="Submit Custom Color"
-//           />
-//         </ColorPicker.CustomColorForm>
-//         <div>
-//           <ColorPicker.SwatchBook colors={customColors}>
-//             {customColors => {
-//               return customColors.map(color => (
-//                 <ColorPicker.SwatchButton aria-label={color} key={color} color={`#${color}`} />
-//               ));
-//             }}
-//           </ColorPicker.SwatchBook>
-//         </div>
-//       </ColorPicker>
-//     </>
-//   );
-// };
+  return (
+    <>
+      <ColorPicker model={model}>
+        <ColorPicker.SwatchBook marginBottom="m">
+          {item => (
+            <ColorPicker.SwatchButton
+              onClick={() => console.warn(item)}
+              color={item.id}
+            ></ColorPicker.SwatchButton>
+          )}
+        </ColorPicker.SwatchBook>
+      </ColorPicker>
+      <ColorPicker model={model}>
+        Default Color:
+        <ColorPicker.Swatch showCheck={false} color={model.state.selectedIds[0]} />
+      </ColorPicker>
+    </>
+  );
+};

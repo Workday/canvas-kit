@@ -1,5 +1,4 @@
 import * as React from 'react';
-import styled from '@emotion/styled';
 import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
 
 import {ListBox, useListRenderItems} from '@workday/canvas-kit-react/collection';
