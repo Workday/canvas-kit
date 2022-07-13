@@ -5,7 +5,7 @@ import React from 'react';
 import {renderToString} from 'react-dom/server';
 import Combobox from '../lib/Combobox';
 import {MenuItem} from '@workday/canvas-kit-preview-react/menu';
-import {TextInput} from '../../../react/text-input';
+import {TextInput} from '@workday/canvas-kit-react/text-input';
 
 describe('InputProvider', () => {
   it('should render on a server without crashing', () => {

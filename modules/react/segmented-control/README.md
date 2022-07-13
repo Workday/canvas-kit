@@ -14,17 +14,16 @@ yarn add @workday/canvas-kit-react
 ```tsx
 import * as React from 'react';
 import {SegmentedControl} from '@workday/canvas-kit-react/segmented-control';
-import {IconButton} from '@workday/canvas-kit-react/button';
 import {listViewIcon, worksheetsIcon} from '@workday/canvas-system-icons-web';
 
 <SegmentedControl>
-  <IconButton icon={listViewIcon} aria-label="List View" value="list-view" />
-  <IconButton icon={worksheetsIcon} aria-label="Table view" value="table-view" />
+  <SegmentedControl.Button icon={listViewIcon} aria-label="List View" value="list-view" />
+  <SegmentedControl.Button icon={worksheetsIcon} aria-label="Table view" value="table-view" />
 </SegmentedControl>;
 ```
 
-**Note:** while managing state using a unique `value` for each `IconButton` child is encouraged, you
-can also use indexes and omit the `value` field. It is strongly recommended to not mix these two
+**Note:** while managing state using a unique `value` for each `Button` child is encouraged, you can
+also use indexes and omit the `value` field. It is strongly recommended to not mix these two
 methods.
 
 ## Static Properties
@@ -35,9 +34,9 @@ methods.
 
 ### Required
 
-#### `children: React.ReactElement<IconButton>[]`
+#### `children:React.ReactElement<SegmentedControlButtonProps>[]`
 
-> Icon buttons to toggle between.
+> Buttons to toggle between.
 
 ---
 
@@ -45,8 +44,8 @@ methods.
 
 #### `value: string | number`
 
-> Identify which item is selected (toggled=true). If a string is passed, the IconButton with the
-> corresponding value will be selected. If a number is passed, the IconButton with the corresponding
+> Identify which item is selected (toggled=true). If a string is passed, the Button with the
+> corresponding value will be selected. If a number is passed, the Button with the corresponding
 > index will be selected.
 
 ---

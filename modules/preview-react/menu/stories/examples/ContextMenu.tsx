@@ -19,9 +19,9 @@ const ContextMenuTarget = createComponent('div')({
 
     const onContextMenu = (event: React.MouseEvent) => {
       if (model.state.visibility === 'visible') {
-        model.events.hide({event});
+        model.events.hide(event);
       } else if (model.state.visibility === 'hidden') {
-        model.events.show({event});
+        model.events.show(event);
       }
 
       // Prevent the default context menu from showing to avoid double menus

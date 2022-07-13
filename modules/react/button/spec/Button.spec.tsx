@@ -5,10 +5,10 @@ import {
   TertiaryButton,
   DeleteButton,
   deprecated_Button as DeprecatedButton,
-} from '../index';
+  SecondaryButtonProps as ButtonProps,
+} from '@workday/canvas-kit-react/button';
 import {render, fireEvent} from '@testing-library/react';
-import {ElementComponent} from '../../common';
-import {SecondaryButtonProps as ButtonProps} from '../lib/SecondaryButton';
+import {ElementComponent} from '@workday/canvas-kit-react/common';
 
 ([
   PrimaryButton,
