@@ -54,7 +54,7 @@ export interface TertiaryButtonProps extends Themeable {
    * If set to `true`, make icon button available to use theme colors instead of default
    * @default false
    */
-  isThemable?: boolean;
+  isThemeable?: boolean;
 }
 
 const getTertiaryButtonColors = (
@@ -206,7 +206,7 @@ export const TertiaryButton = createComponent('button')({
     {
       size = 'medium',
       iconPosition = 'start',
-      isThemable = false,
+      isThemeable = false,
       variant,
       children,
       icon,
@@ -218,7 +218,7 @@ export const TertiaryButton = createComponent('button')({
     Element
   ) => {
     const theme = useTheme();
-    const hasThemeStyles = !!children || isThemable;
+    const hasThemeStyles = !!children || isThemeable;
 
     return (
       <StyledTertiaryButtonContainer
