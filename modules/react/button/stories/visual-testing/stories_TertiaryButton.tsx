@@ -58,7 +58,7 @@ export const TertiaryIconButtonStates = (props: {
   <StaticStates theme={props.theme}>
     <ComponentStatesTable
       rowProps={permutateProps({
-        isThemable: [{value: props.isThemeable, label: ''}],
+        isThemeable: [{value: props.isThemeable, label: ''}],
         variant: [
           {value: undefined, label: ''},
           {value: 'inverse', label: 'Inverse'},
