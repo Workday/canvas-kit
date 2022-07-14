@@ -53,12 +53,12 @@ export const TertiaryButtonStates = (props: {theme?: PartialEmotionCanvasTheme})
 
 export const TertiaryIconButtonStates = (props: {
   theme?: PartialEmotionCanvasTheme;
-  isThemable: boolean;
+  isThemeable: boolean;
 }) => (
   <StaticStates theme={props.theme}>
     <ComponentStatesTable
       rowProps={permutateProps({
-        isThemable: [{value: props.isThemable, label: ''}],
+        isThemable: [{value: props.isThemeable, label: ''}],
         variant: [
           {value: undefined, label: ''},
           {value: 'inverse', label: 'Inverse'},
@@ -87,5 +87,5 @@ export const TertiaryButtonThemedStates = () => (
 );
 
 export const TertiaryIconButtonThemedStates = () => (
-  <TertiaryIconButtonStates theme={{canvas: customColorTheme}} isThemable />
+  <TertiaryIconButtonStates theme={{canvas: customColorTheme}} isThemeable />
 );
