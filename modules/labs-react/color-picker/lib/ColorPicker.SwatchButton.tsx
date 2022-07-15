@@ -68,7 +68,7 @@ const SwatchButtonContainer = styled('button')<{color: string; showCheck: boolea
       outline: 'none',
       ...focusRing({separation: 2}),
     },
-    '&[aria-selected=true]': {
+    '&[aria-checked=true]': {
       boxShadow: accessibilityBorder,
       ...mouseFocusBehavior({
         '&:focus': {
@@ -104,10 +104,8 @@ export const useSwatchesItem = composeHooks(
       return {
         type: 'button' as 'button', // keep Typescript happy
         role: 'radio',
-        'aria-selected': selected,
         'aria-checked': selected,
         'aria-label': `color ${state.color}`,
-        'aria-controls': `swatch-${state.id}-${name}`,
       };
     }
   ),
@@ -129,7 +127,7 @@ export default createSubcomponent('button')({
       style={{boxShadow: model.state.cursorId === color ? accessibilityBorder : undefined}}
       {...elemProps}
     >
-      {showCheck || elemProps['aria-selected'] ? (
+      {showCheck || elemProps['aria-checked'] ? (
         <SystemIcon
           fill={pickForegroundColor(color)}
           fillHover={pickForegroundColor(color)}
