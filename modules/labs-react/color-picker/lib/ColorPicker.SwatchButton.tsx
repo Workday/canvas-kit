@@ -103,8 +103,10 @@ export const useSwatchesItem = composeHooks(
 
       return {
         type: 'button' as 'button', // keep Typescript happy
-        role: 'tab',
+        role: 'radio',
         'aria-selected': selected,
+        'aria-checked': selected,
+        'aria-label': `color ${state.color}`,
         'aria-controls': `swatch-${state.id}-${name}`,
       };
     }
