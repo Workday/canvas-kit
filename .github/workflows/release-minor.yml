@@ -1,0 +1,30 @@
+name: 'Minor Release'
+on:
+  workflow_dispatch:
+
+jobs:
+  release-minor:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout prerelease/minor
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+          fetch-depth: 0 # Needed to do a proper push
+          ref: prerelease/minor # This job only works on prerelease/minor
+
+      - name: Push to master
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GH_RW_TOKEN }}
+          branch: refs/heads/master
+
+      - name: Success Message
+        run: echo "Release successful. Check out https://github.com/Workday/canvas-kit/actions/workflows/release.yml to see the release job start."
+
+      - name: Failure Message
+        if: failure()
+        run: echo "Make sure there are no changes https://github.com/Workday/canvas-kit/compare/prerelease/minor...master and try again."
+
