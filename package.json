@@ -60,6 +60,7 @@
     "cypress-keyboard-plugin": "^1.0.3",
     "cypress-pipe": "^2.0.0",
     "cypress-plugin-tab": "^1.0.5",
+    "cypress-real-events": "^1.7.1",
     "cypress-storybook": "^0.5.1",
     "cz-conventional-changelog": "^2.1.0",
     "depcheck": "^0.9.2",

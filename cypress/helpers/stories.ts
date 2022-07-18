@@ -8,7 +8,10 @@
  * h.stories.load('Button', 'Primary')
  */
 export function load(categorization: string, story: string) {
-  return cy.loadStory(categorization, story);
+  cy.loadStory('Components/Buttons/Button/React', 'Primary');
+  // cy.wait(100);
+  cy.loadStory(categorization, story);
+  return cy.wait(200);
 }
 
 /**

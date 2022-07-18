@@ -15,7 +15,7 @@ describe('Button', () => {
     });
 
     it('should render the correct text', () => {
-      cy.get('button')
+      cy.findAllByRole('button', {name: 'Primary'})
         .first()
         .should('contain', 'Primary');
     });
@@ -31,7 +31,7 @@ describe('Button', () => {
     });
 
     it('should render the correct text', () => {
-      cy.get('button')
+      cy.findAllByRole('button', {name: 'Click Me'})
         .first()
         .should('contain', 'Click Me');
     });
