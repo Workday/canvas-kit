@@ -2,18 +2,13 @@ import * as React from 'react';
 
 import {commonColors, colors, space} from '@workday/canvas-kit-react/tokens';
 import {
-  composeHooks,
   createSubcomponent,
   ExtractProps,
   styled,
   StyledType,
 } from '@workday/canvas-kit-react/common';
 import {HStack} from '@workday/canvas-kit-react/layout';
-import {
-  useOverflowListMeasure,
-  useListRenderItems,
-  useListResetCursorOnBlur,
-} from '@workday/canvas-kit-react/collection';
+import {useOverflowListMeasure, useListRenderItems} from '@workday/canvas-kit-react/collection';
 
 import {useActionBarModel} from './useActionBarModel';
 import {ActionBar} from './ActionBar';
@@ -42,12 +37,10 @@ const ResponsiveHStack = styled(HStack)<ActionBarListProps & StyledType>(({theme
   },
 }));
 
-export const useActionBarList = composeHooks(useOverflowListMeasure, useListResetCursorOnBlur);
-
 export const ActionBarList = createSubcomponent('div')({
   displayName: 'ActionBar.List',
   modelHook: useActionBarModel,
-  elemPropsHook: useActionBarList,
+  elemPropsHook: useOverflowListMeasure,
 })<ActionBarListProps>(({children, ...elemProps}, Element, model) => {
   return (
     <ResponsiveHStack
