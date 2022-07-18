@@ -6,17 +6,40 @@ import {useBaseListModel, Item, defaultGetId as getId} from './useBaseListModel'
 type NavigationInput = Pick<ReturnType<typeof useCursorListModel>, 'state'>;
 
 export interface NavigationManager {
+  /** Get the first item in a collection. This will be called when the `Home` key is pressed for
+   * Lists and `Ctrl+Home` for Grids. */
   getFirst: NavigationRequestor;
+  /** Get the last item in a collection. This will be called when the `End` key is pressed for Lists
+   * and `Ctrl+End` for Grids. */
   getLast: NavigationRequestor;
+  /** Get an item with the provided `id`. */
   getItem: NavigationRequestor;
+  /** Get the next item after the provided `id`. This will be called when the `Right` arrow key is
+   * pressed for RTL languages and when the `Left` arrow is pressed for LTR languages. */
   getNext: NavigationRequestor;
+  /** **For Grids:** Get the cell in the next row from the provided `id`. This will be called when
+   * the `Down` arrow is pressed.  */
   getNextRow: NavigationRequestor;
+  /** Get the previous item before the provided `id`. This will be called when the `Left` arrow key
+   * is pressed for RTL languages and when the `Right` arrow is pressed for LTR languages. */
   getPrevious: NavigationRequestor;
+  /** **For Grids:** Get the cell in the previous row from the provided `id`. This will be called
+   * when the `Up` arrow is pressed.  */
   getPreviousRow: NavigationRequestor;
+  /** **For Grids:** Get the first item in a row. This will be called when the `Home` key is
+   * pressed. */
   getFirstOfRow: NavigationRequestor;
+  /** **For Grids:** Get the last item in a row. This will be called when the `End` key is
+   * pressed. */
   getLastOfRow: NavigationRequestor;
-  getPreviousPage: NavigationRequestor;
+  /** Get the next "page". A "page" is application specific and usually means next visible screen.
+   * If the viewport is scrollable, it would scroll so that the last item visible is now the first
+   * item visible. This is called when the `PageDown` key is pressed */
   getNextPage: NavigationRequestor;
+  /** Get the next "page". A "page" is application specific and usually means previous visible
+   * screen. If the viewport is scrollable, it would scroll so that the first item visible is now
+   * the last item visible. This is called when the `PageUp` key is pressed */
+  getPreviousPage: NavigationRequestor;
 }
 
 /**
@@ -56,7 +79,7 @@ export const getLast: NavigationRequestor = (_, {state}) => state.items[state.it
 export const getFirstOfRow: NavigationRequestor = (id, {state}) => {
   if (state.columnCount) {
     const item = getItem(id, {state});
-    const currentIndex = state.items.findIndex(i => getId(item) === getId(i));
+    const currentIndex = item.index;
     const offset = currentIndex % state.columnCount;
     return state.items[currentIndex - offset];
   }
@@ -69,9 +92,13 @@ export const getFirstOfRow: NavigationRequestor = (id, {state}) => {
 export const getLastOfRow: NavigationRequestor = (id, {state}) => {
   if (state.columnCount) {
     const item = getItem(id, {state});
-    const currentIndex = state.items.findIndex(i => getId(item) === getId(i));
+    const currentIndex = item.index;
     const offset = (currentIndex % state.columnCount) - state.columnCount + 1;
-    return state.items[currentIndex - offset];
+    let nextIndex = currentIndex - offset;
+    if (nextIndex >= state.items.length) {
+      nextIndex = state.items.length - 1;
+    }
+    return state.items[nextIndex];
   }
   return getLast(id, {state});
 };
@@ -83,7 +110,7 @@ export const getLastOfRow: NavigationRequestor = (id, {state}) => {
 export const getPreviousPage: NavigationRequestor = (id, {state}) => {
   if (state.columnCount) {
     const item = getItem(id, {state});
-    const currentIndex = state.items.findIndex(i => getId(item) === getId(i));
+    const currentIndex = item.index;
     return state.items[currentIndex % state.columnCount];
   }
   return getFirst(id, {state});
@@ -96,7 +123,7 @@ export const getPreviousPage: NavigationRequestor = (id, {state}) => {
 export const getNextPage: NavigationRequestor = (id, {state}) => {
   if (state.columnCount) {
     const item = getItem(id, {state});
-    const currentIndex = state.items.findIndex(i => getId(item) === getId(i));
+    const currentIndex = item.index;
     const lastRowIndex = state.items.length - state.columnCount;
     return state.items[lastRowIndex + (currentIndex % state.columnCount)];
   }
@@ -117,12 +144,38 @@ export const getWrappingOffsetItem = (offset: number) => (
   const items = state.items;
   const item = getItem(id, {state});
 
-  const currentIndex = items.findIndex(i => getId(item) === getId(i));
+  const currentIndex = item.index;
   let nextIndex = currentIndex + offset;
+
+  // calculate idealLength as in if the grid was a perfect rectangle
+  const rows = Math.ceil(items.length / state.columnCount);
+  const idealLength = rows * state.columnCount;
   if (nextIndex < 0) {
-    nextIndex = items.length + nextIndex;
+    if (offset === -1) {
+      // if the offset is -1, we want to wrap to the end
+      nextIndex = items.length - 1;
+    } else {
+      // if the offset is smaller than -1, we want to wrap by column
+      if (idealLength + nextIndex >= items.length) {
+        // we'll overflow the grid because there isn't enough items. Move `nextIndex` up so we wrap in
+        // the right spot
+        nextIndex -= state.columnCount;
+      }
+      nextIndex = idealLength + nextIndex;
+    }
   } else if (nextIndex >= items.length) {
-    nextIndex = nextIndex - items.length;
+    if (offset === 1) {
+      // if the offset is 1, we want to wrap to the beginning
+      nextIndex = 0;
+    } else {
+      // if the offset is larger than 1, we want to wrap by column
+      if (nextIndex - idealLength < 0) {
+        // we're going to overflow the grid because there isn't enough items. Move `nextIndex` down to
+        // the missing item in the next row. This way we'll end up wrapping in the right spot
+        nextIndex += state.columnCount;
+      }
+      nextIndex = nextIndex - idealLength;
+    }
   }
 
   if (state.nonInteractiveIds.includes(getId(items[nextIndex])) && tries > 0) {
@@ -142,8 +195,9 @@ export const getOffsetItem = (offset: number) => (
   const {items, columnCount} = state;
   const item = getItem(id, {state});
 
-  const currentIndex = items.findIndex(i => getId(item) === getId(i));
+  const currentIndex = item.index;
   let nextIndex = currentIndex + offset;
+
   if (Math.abs(offset) < columnCount) {
     // if we're here, the columnCount is non-zero and the absolute value of offset is less than the
     // column count. We don't want to wrap, so we'll bound within the row
@@ -157,10 +211,19 @@ export const getOffsetItem = (offset: number) => (
     // if we're here, there's a column count, but the offset will move into another row. We need to
     // bound to row values
     const nextRow = Math.floor(nextIndex / columnCount);
+
     if (nextRow < 0 || nextRow >= columnCount) {
       nextIndex = currentIndex;
     }
-  } else if (nextIndex < 0) {
+
+    // make sure we don't go out of bounds if the grid isn't a perfect rectangle
+    if (nextIndex > items.length - 1) {
+      nextIndex = currentIndex;
+    }
+  }
+
+  // make sure we're always in bounds
+  if (nextIndex < 0) {
     nextIndex = 0;
   } else if (nextIndex >= items.length) {
     nextIndex = items.length - 1;
@@ -176,30 +239,36 @@ export const getOffsetItem = (offset: number) => (
 };
 
 /**
- * The default navigation manager of lists
+ * The default navigation manager of lists. This navigation manager will wrap around when the edge
+ * is hit. For example, if the user is the the right-most item in a list or right-most item in a
+ * row, the cursor will wrap around to the beginning or the next row.
  */
 export const wrappingNavigationManager = createNavigationManager({
   getFirst,
   getLast,
   getItem,
   getNext: getWrappingOffsetItem(1),
-  getNextRow: (id, {state}) => getWrappingOffsetItem(-state.columnCount)(id, {state}),
+  getNextRow: (id, {state}) => getWrappingOffsetItem(state.columnCount)(id, {state}),
   getPrevious: getWrappingOffsetItem(-1),
-  getPreviousRow: (id, {state}) => getWrappingOffsetItem(state.columnCount)(id, {state}),
+  getPreviousRow: (id, {state}) => getWrappingOffsetItem(-state.columnCount)(id, {state}),
   getPreviousPage,
   getNextPage,
   getFirstOfRow,
   getLastOfRow,
 });
 
+/**
+ * The default navigation of grids. This navigation manager will not wrap, but will stop when an
+ * edge is detected. This could be the last item in a list or the last item of a row in a grid.
+ */
 export const navigationManager = createNavigationManager({
   getFirst,
   getLast,
   getItem,
   getNext: getOffsetItem(1),
-  getNextRow: (id, {state}) => getOffsetItem(-state.columnCount)(id, {state}),
+  getNextRow: (id, {state}) => getOffsetItem(state.columnCount)(id, {state}),
   getPrevious: getOffsetItem(-1),
-  getPreviousRow: (id, {state}) => getOffsetItem(state.columnCount)(id, {state}),
+  getPreviousRow: (id, {state}) => getOffsetItem(-state.columnCount)(id, {state}),
   getPreviousPage,
   getNextPage,
   getFirstOfRow,
@@ -229,9 +298,7 @@ export const useCursorListModel = createModelHook({
      * (left-to-right or right-to-left) and call the correct navigation method. In our example, a
      * left-to-right language would send a `getNext`. The navigation manager may return the next item
      * in the list. Different managers can be created for slightly different use cases. The default
-     * navigation manager will accept `orientation` and directionality to determine mapping. If
-     * `columnCount` is non-zero, it will use a grid mode where `orientation` is ignored and only
-     * directionality matters.
+     * navigation manager will accept `orientation` and directionality to determine mapping.
      *
      * An example override might be a tab list with an overflow menu that is meant to be transparent
      * to screen reader users. This would require the overflow menu to accept both up/down keys as
@@ -247,6 +314,7 @@ export const useCursorListModel = createModelHook({
   const initialCurrentRef = React.useRef(
     config.initialCursorId || (config.items?.length ? getId(config.items![0]) : '')
   );
+  const navigation = config.navigation;
 
   const state = {
     ...list.state,
@@ -255,10 +323,10 @@ export const useCursorListModel = createModelHook({
     /**
      * Any positive non-zero value treats the list like a grid with rows and columns
      * @default 0
+     * @private Use useGridModel instead to make a grid instead of a list
      */
     columnCount,
   };
-  const navigation = config.navigation || wrappingNavigationManager;
 
   const events = {
     ...list.events,

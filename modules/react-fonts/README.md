@@ -24,7 +24,7 @@ yarn add emotion
 Then in your index or main file of your project...
 
 ```tsx
-import {Global, css} from '@emotion/core';
+import {Global, css} from '@emotion/react';
 import fonts from '@workday/canvas-kit-react-fonts';
 
 // Inject all of Canvas' @font-face declarations to <head> via emotion
@@ -38,7 +38,7 @@ same module.
 Examples:
 
 ```tsx
-import {css} from '@emotion/core';
+import {css} from '@emotion/react';
 import {type} from '@workday/canvas-kit-react/tokens';
 
 ...
