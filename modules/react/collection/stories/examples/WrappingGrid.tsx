@@ -32,7 +32,7 @@ const Item = createSubcomponent('button')({
 
 export const WrappingGrid = () => {
   const model = useGridModel({
-    columnCount: 3,
+    columnCount: 5,
     // @ts-ignore Create an array of [{id: 1}, ...{id: n}]
     items: [...Array(25).keys()].map(i => ({id: i + 1})),
     // we don't need virtualization here

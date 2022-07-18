@@ -50,6 +50,7 @@ if (command === 'pre') {
         main: `../dist/commonjs/${folderName}`,
         module: `../dist/es6/${folderName}`,
         sideEffects: false,
+        types: `../dist/es6/${folderName}`,
       };
       fs.writeFileSync(folderName + '/package.json', JSON.stringify(contents, null, '  ') + '\n');
     });
