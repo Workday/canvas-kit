@@ -6,7 +6,7 @@ import {SystemIcon, SystemIconProps} from '@workday/canvas-kit-react/icon';
 import {usePillModel} from './usePillModel';
 import {xSmallIcon} from '@workday/canvas-system-icons-web';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {borderRadius, colors, space} from '@workday/canvas-kit-react/tokens';
+import {colors, space} from '@workday/canvas-kit-react/tokens';
 import {BaseButton} from '@workday/canvas-kit-react/button';
 
 export interface PillIconButtonProps extends Omit<SystemIconProps, 'icon'> {
@@ -15,6 +15,11 @@ export interface PillIconButtonProps extends Omit<SystemIconProps, 'icon'> {
    * @default `xSmallIcon`
    */
   icon?: CanvasSystemIcon;
+  /**
+   * The aria label for the removable icon
+   * @default 'remove'
+   */
+  'aria-label'?: string;
 }
 
 const getIconColors = () => {
@@ -33,9 +38,7 @@ const getIconColors = () => {
       icon: colors.licorice500,
 
       focusRing: focusRing({
-        width: 0,
         innerColor: 'transparent',
-        outerColor: 'transparent',
       }),
     },
     disabled: {
@@ -45,51 +48,52 @@ const getIconColors = () => {
   };
 };
 
-const StyledFocusTarget = styled('span')<StyledType & PillIconButtonProps>({
-  height: 20,
-  position: 'absolute',
-  right: '5px',
-  left: space.xxxs,
-  margin: 0,
-  borderRadius: borderRadius.m,
-  '&:focus': {
-    outline: 'none',
-    ...focusRing({
-      outerColor: colors.blueberry400,
-      innerColor: 'transparent',
-      separation: 0,
-      width: 2,
-      inset: 'inner',
-    }),
-  },
-});
-
 const StyledIconButton = styled(BaseButton)<StyledType & PillIconButtonProps>({
-  marginInlineEnd: '-14px !important', // visually pull in the pill to the right size
-  paddingInlineEnd: space.xxxs, // add 4px padding outside the pill for click target
-  marginInlineStart: `-${space.xxs} !important`, // visually create space between label and the button
+  marginInlineEnd: '-7px', // visually pull in the pill to the right size
+  marginInlineStart: `-2px`, // visually create space between label and the button
+  overflow: 'visible',
+  '::after': {
+    content: '""',
+    height: space.l,
+    width: space.l,
+    position: 'absolute',
+    left: '-7px',
+    bottom: '-7px',
+    margin: 0,
+    pointerEvents: 'all',
+    cursor: 'pointer',
+  },
 });
 
 export const PillIconButton = createSubcomponent('button')({
   modelHook: usePillModel,
 })<PillIconButtonProps>(
-  ({size, icon = xSmallIcon, maxWidth, children, ...elemProps}, Element, model) => {
+  (
+    {size, icon = xSmallIcon, maxWidth, children, 'aria-label': ariaLabel = 'remove', ...elemProps},
+    Element,
+    model
+  ) => {
     return (
       <StyledIconButton
         borderRadius="s"
-        height={space.l}
-        width={space.l}
+        height={20}
+        width={20}
         padding="zero"
         disabled={model.state.disabled}
         colors={getIconColors()}
-        tabIndex={-1}
+        aria-labelledby={`removable-${model.state.id} label-${model.state.id}`}
         as={Element}
         position="relative"
         {...elemProps}
       >
-        {/* We made the clickable element in this case the button larger, and have the span be the visible focus area */}
-        <StyledFocusTarget aria-hidden="true" tabIndex={model.state.disabled ? -1 : 0} />
-        <SystemIcon icon={icon} size={24} />
+        <SystemIcon
+          aria-label={ariaLabel}
+          id={`removable-${model.state.id}`}
+          icon={icon}
+          size={space.m}
+          aria-hidden // This works for Chrome but not needed in Safari
+          role="img"
+        />
       </StyledIconButton>
     );
   }

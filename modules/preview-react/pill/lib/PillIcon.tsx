@@ -25,6 +25,8 @@ export const PillIcon = createSubcomponent('span')({
       display="flex"
       as={Element}
       size={20}
+      role="img"
+      aria-label="add"
       icon={icon || plusIcon}
       {...elemProps}
     />
