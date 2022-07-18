@@ -73,7 +73,7 @@ const CloseButton = styled(TertiaryButton)({
   margin: '-8px', // for inverse and plain button, we always want this margin
 });
 
-export default class DrawerHeader extends React.Component<DrawerHeaderProps, {}> {
+export class DrawerHeader extends React.Component<DrawerHeaderProps, {}> {
   public render() {
     const {
       closeIconAriaLabel = 'Close',

@@ -6,7 +6,7 @@ import {PaginationModel} from './types';
 import {Flex, FlexProps} from '@workday/canvas-kit-react/layout';
 import {useLiveRegion} from './common/useLiveRegion';
 
-export interface AdditionalDetailsProps extends FlexProps {
+export interface AdditionalDetailsProps extends Omit<FlexProps, 'children'> {
   children: (model: PaginationModel) => React.ReactNode | React.ReactNode;
   model: PaginationModel;
   shouldAnnounceToScreenReader?: boolean;

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Radio, {RadioProps} from './Radio';
+import {Radio, RadioProps} from './Radio';
 import {borderRadius, space} from '@workday/canvas-kit-react/tokens';
 import {
   ErrorType,
@@ -121,4 +121,4 @@ class RadioGroup extends React.Component<RadioGroupProps> {
 
 RadioGroup.ErrorType = ErrorType;
 
-export default RadioGroup;
+export {RadioGroup};

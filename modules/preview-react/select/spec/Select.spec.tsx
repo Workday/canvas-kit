@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {fireEvent, render} from '@testing-library/react';
-import Select from '../lib/Select';
+import {Select} from '../lib/Select';
 
 describe('Select', () => {
   const cb = jest.fn();

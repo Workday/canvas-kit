@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {render} from '@testing-library/react';
-import FormField from '../lib/FormField';
+import {FormField} from '../lib/FormField';
 import {ErrorType} from '@workday/canvas-kit-react/common';
 
 describe('FormField', () => {
