@@ -3,7 +3,16 @@ import {Grid} from '@workday/canvas-kit-react/layout';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
 // eslint-disable-next-line no-duplicate-imports
 import {useState, useEffect, useRef} from 'react';
-import {minusIcon, plusIcon} from '@workday/canvas-system-icons-web';
+import {
+  arrowDownIcon,
+  arrowLeftIcon,
+  arrowRightIcon,
+  arrowUpIcon,
+  caretDownIcon,
+  caretUpIcon,
+  minusIcon,
+  plusIcon,
+} from '@workday/canvas-system-icons-web';
 
 const Cell = (props: {children: React.ReactNode}) => {
   return (
@@ -30,7 +39,7 @@ const CellItem = (props: {children: React.ReactNode}) => {
       gridAutoFlow="column"
       padding="xs"
       justifyContent="center"
-      backgroundColor="licorice200"
+      backgroundColor="sourLemon600"
       color="frenchVanilla100"
       borderRadius="m"
     >
@@ -78,7 +87,7 @@ export const GridLayoutInteractive = () => {
           <CellItem>
             <PrimaryButton
               size="extraSmall"
-              icon={plusMinus(rowCount, prevRowCount) ? plusIcon : minusIcon}
+              icon={plusMinus(rowCount, prevRowCount) ? arrowDownIcon : arrowUpIcon}
               onClick={() => {
                 incDec(rowCount, prevRowCount, setRowCount);
               }}
@@ -87,7 +96,7 @@ export const GridLayoutInteractive = () => {
             </PrimaryButton>
             <PrimaryButton
               size="extraSmall"
-              icon={plusMinus(colCount, prevColCount) ? plusIcon : minusIcon}
+              icon={plusMinus(colCount, prevColCount) ? arrowRightIcon : arrowLeftIcon}
               onClick={() => {
                 incDec(colCount, prevColCount, setColCount);
               }}

@@ -1,11 +1,12 @@
-import {Meta} from '@storybook/addon-docs';
+import {Meta, ArgsTable} from '@storybook/addon-docs';
 
-import {Grid} from '@workday/canvas-kit-react/layout';
+import {Grid, GridItem} from '@workday/canvas-kit-react/layout';
 // examples
 import {GridLayout} from './examples/Grid/GridLayout';
 import {UIExample} from './examples/Grid/UIExample';
 import {GridLayoutInteractive} from './examples/Grid/GridLayoutInteractive';
 import {GridStyle} from './examples/PropTables.splitprops.tsx';
+import {GridStyleProps} from '../lib/utils/grid';
 
 <Meta title="Components/Containers/Layout/Grid" component={Grid} />
 
@@ -24,6 +25,16 @@ yarn add @workday/canvas-kit-react
 ```
 
 ## Examples
+
+### UI Layout Example
+
+This example showcases what a basic UI could look like utilzing Grid. In the below example, we have
+created four elements (`Header`, `SideBar`, `BodyContent` and `Footer`). By giving each element a
+`gridArea` name, the name can be used to organize the UI however you want. If you want more info on
+how `gridArea` works with `gridTemplateAreas`,
+[see here](https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-areas).
+
+<ExampleCodeBlock code={UIExample} />
 
 ### Rows and Columns
 
@@ -55,16 +66,6 @@ before the 1 & 2 elements since that layout is wrapped by the `<Grid.Item/>` com
 
 <ExampleCodeBlock code={GridLayout} />
 
-### UI Layout Example
-
-This example showcases what a basic UI could look like utilzing Grid. In the below example, we have
-created four elements (`Header`, `SideBar`, `BodyContent` and `Footer`). By giving each element a
-`gridArea` name, the name can be used to organize the UI however you want. If you want more info on
-how `gridArea` works with `gridTemplateAreas`,
-[see here](https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-areas).
-
-<ExampleCodeBlock code={UIExample} />
-
 ### Grid vs. Box
 
 `Grid` is built with `Box` and has access to all `BoxProps`. The main differences between `Box` and
@@ -86,7 +87,7 @@ As previously mentioned, `Grid` is built on top of `Box` and has access to all i
 [grid container properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout/Basic_Concepts_of_Grid_Layout#the_grid_container)
 through style props as well. Here are the grid container props:
 
-<ArgsTable of={GridStyle} />
+<ArgsTable of={GridStyleProps} />
 
 ### Grid Props (Exhaustive List)
 
