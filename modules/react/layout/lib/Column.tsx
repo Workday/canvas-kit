@@ -58,7 +58,7 @@ const ColumnContainer = styled('div', {
   }
 );
 
-export default class Column extends React.Component<ColumnProps> {
+export class Column extends React.Component<ColumnProps> {
   public render() {
     const {children, spacing, columns, width, ...elemProps} = this.props;
 

@@ -372,5 +372,3 @@ export const Checkbox = createComponent('input')({
     ErrorType,
   },
 });
-
-export default Checkbox;

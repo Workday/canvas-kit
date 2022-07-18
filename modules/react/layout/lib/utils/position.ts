@@ -3,14 +3,14 @@ import {
   PartialEmotionCanvasTheme,
   useTheme,
 } from '@workday/canvas-kit-react/common';
-import {PropertyPosition, PropertyZIndex} from './types';
+import {Property} from 'csstype';
 
 /** style props to for standard position properties */
 export type PositionStandardProps = {
   /** sets `position` property  */
-  position?: PropertyPosition;
+  position?: Property.Position;
   /** sets `zIndex` property  */
-  zIndex?: PropertyZIndex;
+  zIndex?: Property.ZIndex;
   /** sets `top` property  */
   top?: number | string;
   /** sets `right` property (no bidirectional support) */

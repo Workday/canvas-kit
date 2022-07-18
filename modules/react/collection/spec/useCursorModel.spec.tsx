@@ -5,6 +5,8 @@ import {
   getPreviousPage,
   getNextPage,
   useCursorListModel,
+  navigationManager,
+  wrappingNavigationManager,
 } from '../lib/useCursorListModel';
 
 /**
@@ -20,9 +22,7 @@ function flatten<T>(arr: T[][]): T[] {
 type CursorListState = ReturnType<typeof useCursorListModel>['state'];
 
 // mocked id and state so we can isolate logic in our tests
-// The `getId` allows us to use strings instead of objects
 // The `createState` returns state that mocks unimportant parts the test isn't isolating
-const getId = (input: string) => input;
 const createState = (input: Partial<CursorListState>): CursorListState => {
   return {
     nonInteractiveIds: [],
@@ -141,6 +141,242 @@ describe('getNextPage', () => {
 
     it('should return the first item of the second row when cursor is at 8', () => {
       expect(getNextPage('8', {state})).toEqual(items[7]);
+    });
+  });
+});
+
+describe('navigationManager', () => {
+  describe('when state represents a perfect grid', () => {
+    // use flatten to make it easier to visualize a grid in code, but code requires a flat array
+    const items = flatten([
+      ['1', '2', '3'],
+      ['4', '5', '6'],
+      ['7', '8', '9'],
+    ]).map(createItem);
+    const state = createState({
+      items,
+      columnCount: 3,
+      cursorId: '2',
+    });
+
+    describe('getNextRow', () => {
+      it('should return the second item of the second row when cursor is at 2', () => {
+        expect(navigationManager.getNextRow('2', {state})).toEqual(items[4]);
+      });
+
+      it('should return the second item of the last row when cursor is at 5', () => {
+        expect(navigationManager.getNextRow('5', {state})).toEqual(items[7]);
+      });
+
+      it('should return the original item when cursor is at 8', () => {
+        expect(navigationManager.getNextRow('8', {state})).toEqual(items[7]);
+      });
+    });
+
+    describe('getPreviousRow', () => {
+      it('should return the original item when cursor is at 2', () => {
+        expect(navigationManager.getPreviousRow('2', {state})).toEqual(items[1]);
+      });
+
+      it('should return the original item when cursor is at 3', () => {
+        expect(navigationManager.getPreviousRow('3', {state})).toEqual(items[2]);
+      });
+    });
+
+    describe('getNext', () => {
+      it('should return the original item when the cursor is on the last item', () => {
+        expect(navigationManager.getNext('9', {state})).toEqual(items[8]);
+      });
+    });
+
+    describe('getPrevious', () => {
+      it('should return the original item when the cursor is on the first item', () => {
+        expect(navigationManager.getPrevious('1', {state})).toEqual(items[0]);
+      });
+    });
+  });
+
+  describe('when state represents a imperfect grid', () => {
+    // use flatten to make it easier to visualize a grid in code, but code requires a flat array
+    const items = flatten([
+      ['1', '2', '3'],
+      ['4', '5', '6'],
+      ['7', '8'],
+    ]).map(createItem);
+    const state = createState({
+      items,
+      columnCount: 3,
+      cursorId: '2',
+    });
+
+    describe('getNextRow', () => {
+      it('should return the second item of the second row when cursor is at 2', () => {
+        expect(navigationManager.getNextRow('2', {state})).toEqual(items[4]);
+      });
+
+      it('should return the second item of the last row when cursor is at 5', () => {
+        expect(navigationManager.getNextRow('5', {state})).toEqual(items[7]);
+      });
+
+      it('should return the original item when cursor is at 8', () => {
+        expect(navigationManager.getNextRow('8', {state})).toEqual(items[7]);
+      });
+
+      it('should return the original item when cursor is at 6', () => {
+        expect(navigationManager.getNextRow('6', {state})).toEqual(items[5]);
+      });
+    });
+
+    describe('getPreviousRow', () => {
+      it('should return the original item when cursor is at 2', () => {
+        expect(navigationManager.getPreviousRow('2', {state})).toEqual(items[1]);
+      });
+
+      it('should return the original item when cursor is at 3', () => {
+        expect(navigationManager.getPreviousRow('3', {state})).toEqual(items[2]);
+      });
+    });
+
+    describe('getNext', () => {
+      it('should return the original item when the cursor is on the last item', () => {
+        expect(navigationManager.getNext('8', {state})).toEqual(items[7]);
+      });
+    });
+
+    describe('getPrevious', () => {
+      it('should return the original item when the cursor is on the first item', () => {
+        expect(navigationManager.getPrevious('1', {state})).toEqual(items[0]);
+      });
+    });
+
+    describe('getFirstOfRow', () => {
+      it('should return 7 item when the cursor is at 8', () => {
+        expect(navigationManager.getFirstOfRow('8', {state})).toEqual(items[6]);
+      });
+    });
+
+    describe('getLastOfRow', () => {
+      it('should return the last item when the cursor is at 7', () => {
+        expect(navigationManager.getLastOfRow('7', {state})).toEqual(items[7]);
+      });
+    });
+  });
+});
+
+describe('wrappingNavigationManager', () => {
+  describe('when state represents a perfect grid', () => {
+    // use flatten to make it easier to visualize a grid in code, but code requires a flat array
+    const items = flatten([
+      ['1', '2', '3'],
+      ['4', '5', '6'],
+      ['7', '8', '9'],
+    ]).map(createItem);
+    const state = createState({
+      items,
+      columnCount: 3,
+      cursorId: '2',
+    });
+
+    describe('getNextRow', () => {
+      it('should return the second item of the second row when cursor is at 2', () => {
+        expect(wrappingNavigationManager.getNextRow('2', {state})).toEqual(items[4]);
+      });
+
+      it('should return the second item of the last row when cursor is at 5', () => {
+        expect(wrappingNavigationManager.getNextRow('5', {state})).toEqual(items[7]);
+      });
+
+      it('should return the second item of the first row when cursor is at 8', () => {
+        expect(wrappingNavigationManager.getNextRow('8', {state})).toEqual(items[1]);
+      });
+    });
+
+    describe('getPreviousRow', () => {
+      it('should return the second item of the last row when cursor is at 2', () => {
+        expect(wrappingNavigationManager.getPreviousRow('2', {state})).toEqual(items[7]);
+      });
+
+      it('should return the third item of the last row when cursor is at 3', () => {
+        expect(wrappingNavigationManager.getPreviousRow('3', {state})).toEqual(items[8]);
+      });
+    });
+
+    describe('getNext', () => {
+      it('should return the first item when the cursor is on the last item', () => {
+        expect(wrappingNavigationManager.getNext('9', {state})).toEqual(items[0]);
+      });
+    });
+
+    describe('getPrevious', () => {
+      it('should return the last item when the cursor is on the first item', () => {
+        expect(wrappingNavigationManager.getPrevious('1', {state})).toEqual(items[8]);
+      });
+    });
+  });
+
+  describe('when state represents a imperfect grid', () => {
+    // use flatten to make it easier to visualize a grid in code, but code requires a flat array
+    const items = flatten([
+      ['1', '2', '3'],
+      ['4', '5', '6'],
+      ['7', '8'],
+    ]).map(createItem);
+    const state = createState({
+      items,
+      columnCount: 3,
+      cursorId: '2',
+    });
+
+    describe('getNextRow', () => {
+      it('should return the second item of the second row when cursor is at 2', () => {
+        expect(wrappingNavigationManager.getNextRow('2', {state})).toEqual(items[4]);
+      });
+
+      it('should return the second item of the last row when cursor is at 5', () => {
+        expect(wrappingNavigationManager.getNextRow('5', {state})).toEqual(items[7]);
+      });
+
+      it('should return the second item of the first row when cursor is at 8', () => {
+        expect(wrappingNavigationManager.getNextRow('8', {state})).toEqual(items[1]);
+      });
+
+      it('should return the third item of the first row when cursor is at 6', () => {
+        expect(wrappingNavigationManager.getNextRow('6', {state})).toEqual(items[2]);
+      });
+    });
+
+    describe('getPreviousRow', () => {
+      it('should return the second item of the last row when cursor is at 2', () => {
+        expect(wrappingNavigationManager.getPreviousRow('2', {state})).toEqual(items[7]);
+      });
+
+      it('should return the third item of the second row when cursor is at 3', () => {
+        expect(wrappingNavigationManager.getPreviousRow('3', {state})).toEqual(items[5]);
+      });
+    });
+
+    describe('getNext', () => {
+      it('should return the first item when the cursor is on the last item', () => {
+        expect(wrappingNavigationManager.getNext('8', {state})).toEqual(items[0]);
+      });
+    });
+
+    describe('getPrevious', () => {
+      it('should return the last item when the cursor is on the first item', () => {
+        expect(wrappingNavigationManager.getPrevious('1', {state})).toEqual(items[7]);
+      });
+    });
+
+    describe('getFirstOfRow', () => {
+      it('should return 7 item when the cursor is at 8', () => {
+        expect(wrappingNavigationManager.getFirstOfRow('8', {state})).toEqual(items[6]);
+      });
+    });
+
+    describe('getLastOfRow', () => {
+      it('should return the last item when the cursor is at 7', () => {
+        expect(wrappingNavigationManager.getLastOfRow('7', {state})).toEqual(items[7]);
+      });
     });
   });
 });

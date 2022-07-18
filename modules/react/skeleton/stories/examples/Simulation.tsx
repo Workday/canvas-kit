@@ -80,7 +80,29 @@ export const Simulation = () => {
       <Card>
         <Card.Body>
           <Box minHeight={180} position="relative">
-            {!loading && (
+            {loading ? (
+              <StyledSimulation
+                position="absolute"
+                top={0}
+                left={0}
+                width="100%"
+                animation={!loading ? `${fadeOut} 150ms ease-out forwards` : undefined}
+              >
+                <Skeleton>
+                  <Flex alignItems="center">
+                    <Skeleton.Shape
+                      width={space.xl}
+                      height={space.xl}
+                      borderRadius={borderRadius.circle}
+                    />
+                    <Box flex={1} marginLeft="xs">
+                      <Skeleton.Header />
+                    </Box>
+                  </Flex>
+                  <Skeleton.Text lineCount={3} />
+                </Skeleton>
+              </StyledSimulation>
+            ) : (
               <Box>
                 <Flex alignItems="center" display="inline-flex" marginBottom="s">
                   <SystemIconCircle icon={patternIcon} />
@@ -96,28 +118,6 @@ export const Simulation = () => {
                 </p>
               </Box>
             )}
-
-            <StyledSimulation
-              position="absolute"
-              top={0}
-              left={0}
-              width="100%"
-              animation={!loading ? `${fadeOut} 150ms ease-out forwards` : undefined}
-            >
-              <Skeleton>
-                <Flex alignItems="center">
-                  <Skeleton.Shape
-                    width={space.xl}
-                    height={space.xl}
-                    borderRadius={borderRadius.circle}
-                  />
-                  <Box flex={1} marginLeft="xs">
-                    <Skeleton.Header />
-                  </Box>
-                </Flex>
-                <Skeleton.Text lineCount={3} />
-              </Skeleton>
-            </StyledSimulation>
           </Box>
         </Card.Body>
       </Card>
