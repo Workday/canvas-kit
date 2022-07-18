@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Banner from '../lib/Banner';
+import {Banner} from '../lib/Banner';
 import ReactDOMServer from 'react-dom/server';
 import {axe} from 'jest-axe';
 import {screen, render} from '@testing-library/react';
@@ -12,7 +12,7 @@ describe('Banner', () => {
   });
 
   it('should pass axe', async () => {
-    const html = ReactDOMServer.renderToString(<Banner />);
+    const html = ReactDOMServer.renderToString(<Banner>Hello</Banner>);
     expect(
       await axe(html, {
         rules: {

@@ -1,11 +1,10 @@
 import * as React from 'react';
-import {HStack, HStackProps} from '../common/Stack';
-import {Spacing} from '../common/utils/space';
+import {HStack, HStackProps, StackSpacing} from '@workday/canvas-kit-react/layout';
 import {useRTL} from '../common/utils/useRTL';
 
 export type GoToFormProps = React.FormHTMLAttributes<HTMLFormElement> &
   Omit<HStackProps, 'spacing'> & {
-    spacing?: Spacing;
+    spacing?: StackSpacing;
   };
 
 export const GoToForm = ({children, onSubmit, spacing = 'xxs', ...elemProps}: GoToFormProps) => {
@@ -15,8 +14,8 @@ export const GoToForm = ({children, onSubmit, spacing = 'xxs', ...elemProps}: Go
       as="form"
       alignItems="center"
       spacing={spacing}
-      pl={shouldUseRTL ? 'xxs' : undefined}
-      pr={shouldUseRTL ? 'xxs' : undefined}
+      paddingLeft={shouldUseRTL ? 'xxs' : undefined}
+      paddingRight={shouldUseRTL ? 'xxs' : undefined}
       onSubmit={onSubmit}
       {...elemProps}
     >

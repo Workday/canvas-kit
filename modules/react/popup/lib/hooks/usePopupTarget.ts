@@ -1,10 +1,10 @@
-import {createHook, useForkRef} from '@workday/canvas-kit-react/common';
-import {PopupModel} from './usePopupModel';
+import {createElemPropsHook, useForkRef} from '@workday/canvas-kit-react/common';
+import {usePopupModel} from './usePopupModel';
 
 /**
  * Adds the necessary props to a `Target` component. Used by the Popup.Target subcomponent.
  */
-export const usePopupTarget = createHook(({events, state}: PopupModel, ref) => {
+export const usePopupTarget = createElemPropsHook(usePopupModel)(({events, state}, ref) => {
   const elementRef = useForkRef(ref, state.targetRef);
   return {
     ref: elementRef,
@@ -18,9 +18,9 @@ export const usePopupTarget = createHook(({events, state}: PopupModel, ref) => {
       }
 
       if (state.visibility !== 'hidden') {
-        events.hide({event});
+        events.hide(event);
       } else {
-        events.show({event});
+        events.show(event);
       }
     },
   };

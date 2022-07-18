@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import {colors} from '@workday/canvas-kit-react/tokens';
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {Box, BoxProps} from '@workday/canvas-kit-labs-react/common';
+import {Box, BoxProps} from '@workday/canvas-kit-react/layout';
 
 import {CardHeading} from './CardHeading';
 import {CardBody} from './CardBody';
@@ -21,7 +21,7 @@ export const Card = createComponent('div')({
       <Box
         ref={ref}
         as={Element}
-        depth={2}
+        depth={1}
         padding="l"
         backgroundColor="frenchVanilla100"
         border={`1px solid ${colors.soap500}`}

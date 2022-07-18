@@ -368,6 +368,7 @@ class SelectContainer extends React.Component<SelectContainerProps, SelectContai
     // (2) Either update the current value of buttonRef if it was a ref object,
     //     or call buttonRef with the underlying button element if it was a
     //     callback ref.
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     this.forwardedButtonRef = useForkRef(props.buttonRef, this.localButtonRef);
   }
 

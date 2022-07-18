@@ -2,7 +2,7 @@ import React from 'react';
 import {ContentDirection, StaticStates} from '@workday/canvas-kit-react/common';
 
 import {ComponentStatesTable} from '@workday/canvas-kit-labs-react/common';
-import {withSnapshotsEnabled} from '../../../../utils/storybook';
+import {customColorTheme, withSnapshotsEnabled} from '../../../../utils/storybook';
 
 import {
   Pagination,
@@ -16,13 +16,13 @@ export default withSnapshotsEnabled({
   component: Pagination,
 });
 
-const TableRenderer = ({direction = ContentDirection.LTR}) => {
+const TableRenderer = ({theme}) => {
   const resultCount = 10;
   const totalCount = 100;
   const lastPage = getLastPage(resultCount, totalCount);
 
   return (
-    <StaticStates theme={{canvas: {direction}}} style={{display: 'inline-block'}}>
+    <StaticStates theme={theme} style={{display: 'inline-block'}}>
       <ComponentStatesTable
         rowProps={[
           {label: 'Step Controls', props: {}},
@@ -85,7 +85,9 @@ const TableRenderer = ({direction = ContentDirection.LTR}) => {
                   <Pagination.GoToTextInput aria-label="Go to page number" />
                   <Pagination.GoToLabel>
                     {() =>
-                      direction === ContentDirection.RTL ? `من 100 صفحات` : `of ${totalCount} pages`
+                      theme.canvas.direction === ContentDirection.RTL
+                        ? `من 100 صفحات`
+                        : `of ${totalCount} pages`
                     }
                   </Pagination.GoToLabel>
                 </Pagination.GoToForm>
@@ -93,7 +95,7 @@ const TableRenderer = ({direction = ContentDirection.LTR}) => {
             </Pagination.Controls>
             <Pagination.AdditionalDetails shouldHideDetails={!props.shouldShowAddtionalDetails}>
               {({state}) =>
-                direction === ContentDirection.RTL
+                theme.canvas.direction === ContentDirection.RTL
                   ? `${getVisibleResultsMax(
                       state.currentPage,
                       resultCount,
@@ -117,7 +119,16 @@ export const VisualStatesLeftToRight = () => {
   return (
     <>
       <h2>Left-To-Right Pagination</h2>
-      <TableRenderer />
+      <TableRenderer theme={{canvas: {direction: ContentDirection.LTR}}} />
+    </>
+  );
+};
+
+export const VisualStatesThemed = () => {
+  return (
+    <>
+      <h2>Themed</h2>
+      <TableRenderer theme={{canvas: customColorTheme}} />
     </>
   );
 };
@@ -126,7 +137,7 @@ export const VisualStatesRightToLeft = () => {
   return (
     <>
       <h2>Right-To-Left Pagination</h2>
-      <TableRenderer direction={ContentDirection.RTL} />
+      <TableRenderer theme={{canvas: {direction: ContentDirection.RTL}}} />
     </>
   );
 };
