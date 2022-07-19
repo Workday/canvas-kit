@@ -60,6 +60,7 @@ const SwatchButtonContainer = styled('button')<{color: string; showCheck: boolea
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    forcedColorAdjust: 'none',
     '&:hover': {
       boxShadow: accessibilityBorder,
     },
@@ -96,16 +97,20 @@ const SwatchButtonContainer = styled('button')<{color: string; showCheck: boolea
 
 export const useSwatchesItem = composeHooks(
   createElemPropsHook(useColorPickerModel)(
-    ({state}, _?: React.Ref<HTMLButtonElement>, elemProps: {'data-id'?: string} = {}) => {
+    ({state, events}, _?: React.Ref<HTMLButtonElement>, elemProps: {'data-id'?: string} = {}) => {
       const name = elemProps['data-id'] || '';
 
       const selected = !!elemProps['data-id'] && isSelected(name, state);
 
       return {
-        type: 'button' as 'button', // keep Typescript happy
+        type: 'button' as const,
         role: 'radio',
         'aria-checked': selected,
         'aria-label': `color ${state.color}`,
+        onClick: (event: React.MouseEvent<HTMLButtonElement>) => {
+          console.log('event', event.target.getAttribute('color'));
+          events.setCustomColor(event.target.getAttribute('color'));
+        },
       };
     }
   ),

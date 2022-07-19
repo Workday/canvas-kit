@@ -117,6 +117,10 @@ const swatchTileStyles = css({
   pointerEvents: 'none',
 });
 
+export const formatValue = (value: string) => {
+  return value.replace(/#/g, '').substring(0, 6);
+};
+
 export default createSubcomponent('input')({
   displayName: 'ColorInput',
   modelHook: useColorPickerModel,
@@ -136,10 +140,6 @@ export default createSubcomponent('input')({
     _,
     model
   ) => {
-    const formatValue = (value: string) => {
-      return value.replace(/#/g, '').substring(0, 6);
-    };
-
     const isValidHex = (value: string) => {
       return /(^#?[0-9A-F]{3}$)|(^#?[0-9A-F]{6}$)/i.test(value);
     };
@@ -150,14 +150,14 @@ export default createSubcomponent('input')({
       if (onChange) {
         onChange(e);
       }
-      model.events.setCustomColor(e.target.value);
+      model.events.setCustomColor(e.currentTarget.value);
 
       if (isValidHex(value) && onValidColorChange) {
         onValidColorChange(`#${expandHex(value)}`);
       }
     };
-
     const formattedValue = formatValue(value || model.state.customColor);
+    console.warn('custom color', model.state.customColor);
     return (
       <StyledInputContainer grow={grow}>
         <CustomHexInput
@@ -176,7 +176,9 @@ export default createSubcomponent('input')({
         <ColorPicker.Swatch
           css={swatchTileStyles}
           showCheck={showCheck}
-          color={isValidHex(formattedValue) ? `#${formattedValue}` : ''}
+          color={
+            isValidHex(model.state.customColor) ? `#${formatValue(model.state.customColor)}` : ''
+          }
         />
         <PoundSignPrefix aria-hidden={true} disabled={disabled}>
           #

@@ -33,7 +33,6 @@ export const useColorPickerModel = createModelHook({
   const events = {
     ...model.events,
     setColor(color: string) {
-      setCustomColor('');
       setColor(color);
     },
     setCustomColor(color: string) {

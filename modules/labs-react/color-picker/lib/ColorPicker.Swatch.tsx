@@ -44,6 +44,7 @@ const StyledContainer = styled('div')<ColorSwatchProps & StyledType>(
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    forcedColorAdjust: 'none',
     '& > *': {
       // Account for 24px icon
       margin: -2,

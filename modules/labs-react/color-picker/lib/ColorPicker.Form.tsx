@@ -4,6 +4,7 @@ import {FormField, FormFieldProps} from '@workday/canvas-kit-react/form-field';
 import {HStack} from '@workday/canvas-kit-react/layout';
 import * as React from 'react';
 import {useColorPickerModel} from './useColorPickerModel';
+import {formatValue} from './ColorPicker.Input';
 
 export interface CustomColorFormProps {
   children: React.ReactNode;
@@ -25,7 +26,7 @@ export default createSubcomponent('form')({
     <StyledForm
       onSubmit={event => {
         event.preventDefault();
-        model.events.select({id: `#${model.state.customColor}`});
+        model.events.select({id: `#${formatValue(model.state.customColor)}`});
       }}
       as={Element}
       {...elemProps}
