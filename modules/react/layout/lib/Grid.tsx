@@ -62,12 +62,26 @@ export const Grid = createComponent('div')({
   },
   subComponents: {
     /**
- *
- * @example
- * ```
-    Grid.Item Docs
-    ```
- */
+     * `<Grid.Item />` is the child specific sub-component to `<Grid/>`. `<Grid.Item />` gets child specific props, whereas `<Grid./>` gets parent container props.
+     *
+     * @example
+     * ```
+     * import { gridItem, GridItemStyleProps } from '@workday/canvas-kit-react/layout';
+     * `Grid` is built on top of `Box` so `<Grid.Item />` gets all `BoxProps`.
+     *
+     * interface CardProps extends GridItemStyleProps {
+     *   // card-specific props
+     * }
+     *
+     * // `Card`'s default values are set using `GridItemStyleProps`
+     * const Card = (props: CardProps) => (
+     *   <Grid.Item gridRowStart="1" gridArea="Card" {...props}>
+     *     <h1>Hello, Card!</h1>
+     *     <p>This card uses grid child specific props to set its layout.</p>
+     *   </Grid.Item>
+     * );
+     *```
+     */
 
     Item: GridItem,
   },

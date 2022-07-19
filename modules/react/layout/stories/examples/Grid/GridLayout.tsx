@@ -1,11 +1,5 @@
 import * as React from 'react';
 import {Grid} from '@workday/canvas-kit-react/layout';
-import {PrimaryButton} from '@workday/canvas-kit-react/button';
-// eslint-disable-next-line no-duplicate-imports
-import {useState, useEffect, useRef} from 'react';
-import {minusIcon, plusIcon} from '@workday/canvas-system-icons-web';
-import styled from '@emotion/styled';
-import {count} from 'console';
 
 const Cell = (props: {children: React.ReactNode}) => {
   return (
@@ -32,7 +26,7 @@ const CellItem = (props: {children: React.ReactNode}) => {
       gridAutoFlow="column"
       padding="xs"
       justifyContent="center"
-      backgroundColor="licorice200"
+      backgroundColor="sourLemon600"
       color="frenchVanilla100"
       borderRadius="m"
     >

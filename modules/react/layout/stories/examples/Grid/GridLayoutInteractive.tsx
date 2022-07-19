@@ -8,10 +8,6 @@ import {
   arrowLeftIcon,
   arrowRightIcon,
   arrowUpIcon,
-  caretDownIcon,
-  caretUpIcon,
-  minusIcon,
-  plusIcon,
 } from '@workday/canvas-system-icons-web';
 
 const Cell = (props: {children: React.ReactNode}) => {
