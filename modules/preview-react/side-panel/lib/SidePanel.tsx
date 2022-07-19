@@ -110,7 +110,7 @@ export const SidePanelContext = React.createContext({
   origin: 'left',
 });
 
-const SidePanel = ({
+export const SidePanel = ({
   as = 'section',
   children,
   collapsedWidth = 64,
@@ -267,4 +267,3 @@ const ToggleButton = ({
 };
 
 SidePanel.ToggleButton = ToggleButton;
-export default SidePanel;

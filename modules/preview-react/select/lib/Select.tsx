@@ -7,7 +7,7 @@ import {
   generateUniqueId,
 } from '@workday/canvas-kit-react/common';
 import {menuAnimationDuration} from './SelectMenu';
-import SelectBase, {CoreSelectBaseProps, Option, NormalizedOption} from './SelectBase';
+import {SelectBase, CoreSelectBaseProps, Option, NormalizedOption} from './SelectBase';
 import {MenuVisibility} from './types';
 import {getCorrectedIndexByValue} from './utils';
 
@@ -587,5 +587,3 @@ export const Select = createComponent('button')({
     ErrorType,
   },
 });
-
-export default Select;

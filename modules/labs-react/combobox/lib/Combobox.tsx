@@ -14,8 +14,8 @@ import {TertiaryButton, TertiaryButtonProps} from '@workday/canvas-kit-react/but
 import {xSmallIcon} from '@workday/canvas-system-icons-web';
 import {TextInputProps} from '@workday/canvas-kit-react/text-input';
 import flatten from 'lodash.flatten';
-import AutocompleteList from './AutocompleteList';
-import Status from './Status';
+import {AutocompleteList} from './AutocompleteList';
+import {Status} from './Status';
 
 export interface ComboBoxMenuItemGroup {
   // A non intractable header that logically separates autocomplete items
@@ -138,7 +138,7 @@ export const getOptionId = (baseId?: string, index?: number) =>
 export const getTextFromElement = (children?: React.ReactNode) => {
   let text = '';
   React.Children.map(children, child => {
-    if (child == null || typeof child === 'boolean' || child === {}) {
+    if (child == null || typeof child === 'boolean') {
       text += '';
     } else if (typeof child === 'string' || typeof child === 'number') {
       text += child.toString();
@@ -161,7 +161,7 @@ const isValidSingleChild = (child: React.ReactNode) => {
   return React.isValidElement(child) && React.Children.only(child);
 };
 
-const Combobox = ({
+export const Combobox = ({
   autocompleteItems,
   children,
   grow,
@@ -491,5 +491,3 @@ const Combobox = ({
     </Container>
   );
 };
-
-export default Combobox;
