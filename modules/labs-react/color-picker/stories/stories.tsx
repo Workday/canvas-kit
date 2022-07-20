@@ -3,6 +3,13 @@ import React from 'react';
 
 import {ColorPicker, useColorPickerModel} from '@workday/canvas-kit-labs-react/color-picker';
 import {colors} from '@workday/canvas-kit-react/tokens';
+import {
+  Popup,
+  useCloseOnEscape,
+  useInitialFocus,
+  usePopupModel,
+} from '@workday/canvas-kit-react/popup';
+import {Flex} from '@workday/canvas-kit-react/layout';
 
 export default {
   title: 'Labs/Color Picker/React',
@@ -46,9 +53,7 @@ const arrOfColor = defaultColorSet.map((individualColor, i) => {
 });
 
 export const Default = () => {
-  const model = useColorPickerModel({
-    items: arrOfColor,
-  });
+  const model = useColorPickerModel({items: arrOfColor});
 
   return (
     <>
@@ -94,6 +99,48 @@ export const WithColorInput = () => {
         Selected Color:
         <ColorPicker.Swatch showCheck={false} color={colorPickerModel.state.color} />
       </ColorPicker>
+    </>
+  );
+};
+
+export const WithPopup = () => {
+  const colorPickerModel = useColorPickerModel({items: arrOfColor});
+  const model = usePopupModel();
+  useInitialFocus(model);
+  useCloseOnEscape(model);
+  return (
+    <>
+      <Popup model={model}>
+        <ColorPicker model={colorPickerModel}>
+          <Popup.Target as={ColorPicker.Input} />
+        </ColorPicker>
+        <Popup.Popper>
+          <Popup.Card style={{marginTop: 8}} padding="s" depth={3}>
+            <Popup.Body>
+              <ColorPicker model={colorPickerModel}>
+                <Flex flexDirection="row" padding={'4px'}>
+                  <ColorPicker.SwatchButton
+                    onClick={() => {
+                      colorPickerModel.events.select({id: colors.blueberry400});
+                      model.events.hide();
+                    }}
+                    color={colors.blueberry400}
+                  />
+                  Reset
+                </Flex>
+                <ColorPicker.SwatchBook colors={defaultColorSet}>
+                  {item => (
+                    <ColorPicker.SwatchButton
+                      onClick={() => model.events.hide()}
+                      color={item.id}
+                    ></ColorPicker.SwatchButton>
+                  )}
+                </ColorPicker.SwatchBook>
+              </ColorPicker>
+            </Popup.Body>
+          </Popup.Card>
+        </Popup.Popper>
+      </Popup>
     </>
   );
 };

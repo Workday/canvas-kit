@@ -17,7 +17,7 @@ export interface SwatchBookProps<T = any> extends Partial<ExtractProps<typeof Fl
   children: ((item: any, index: number) => React.ReactNode) | React.ReactNode;
 }
 
-const StyledSwatchBookContainer = styled(ListBox)<StyledType>({
+const StyledSwatchBookContainer = styled(ListBox)<StyledType & SwatchBookProps>({
   display: 'flex',
   flexDirection: 'row',
   flexWrap: 'wrap',
@@ -38,6 +38,7 @@ export default createSubcomponent('fieldset')({
       width={swatchBookWidth} // determines width of the color picker
       flexWrap="wrap"
       padding="xxxs"
+      margin="zero"
       role="radiogroup"
       aria-label="Pick a color"
       {...elemProps}

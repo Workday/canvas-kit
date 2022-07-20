@@ -108,8 +108,9 @@ export const useSwatchesItem = composeHooks(
         'aria-checked': selected,
         'aria-label': `color ${state.color}`,
         onClick: (event: React.MouseEvent<HTMLButtonElement>) => {
-          console.log('event', event.target.getAttribute('color'));
-          events.setCustomColor(event.target.getAttribute('color'));
+          const el = event.target as HTMLButtonElement;
+          const color = el.getAttribute('color');
+          events.setCustomColor(color ? color : '');
         },
       };
     }
