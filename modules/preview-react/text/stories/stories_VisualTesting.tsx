@@ -22,10 +22,6 @@ export const TextStates = () => (
           props: {},
         },
         {
-          label: 'With overflow',
-          props: {isTruncated: true},
-        },
-        {
           label: 'With font-size as a token value of 8',
           props: {fontSize: 8},
         },

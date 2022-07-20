@@ -6,7 +6,7 @@ import {
   SidePanelTransitionStates,
 } from '@workday/canvas-kit-preview-react/side-panel';
 import {Flex} from '@workday/canvas-kit-react/layout';
-import {TypeBodyLevel} from '@workday/canvas-kit-preview-react/type';
+import {TypeBodyLevel} from '@workday/canvas-kit-preview-react/text';
 import {CanvasProvider, styled} from '@workday/canvas-kit-react/common';
 // local helper hook for setting content direction;
 import {useDirection} from './useDirection';

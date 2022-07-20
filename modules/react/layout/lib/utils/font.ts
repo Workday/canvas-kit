@@ -1,5 +1,5 @@
+import {Property} from 'csstype';
 import {type, CanvasTypeProperties} from '@workday/canvas-kit-react/tokens';
-import {FontFamily, FontSize, FontStyle, FontWeight} from './types';
 
 export type FontFamilyTokens = keyof CanvasTypeProperties['fontFamilies'];
 export type FontSizeTokens = keyof CanvasTypeProperties['fontSizes'];
@@ -9,29 +9,29 @@ type FontValue = FontFamilyTokens & FontSizeTokens & FontWeightTokens;
 /** style props to for color properties */
 export type FontStyleProps = {
   /** sets `font-family` property */
-  fontFamily?: FontFamily;
+  fontFamily?: Property.FontFamily | FontFamilyTokens;
   /** sets `font-size` property */
-  fontSize?: FontSize;
+  fontSize?: Property.FontSize | FontSizeTokens;
   /** sets `font-style` property */
-  fontStyle?: FontStyle;
+  fontStyle?: Property.FontStyle;
   /** sets `font-weight` property */
-  fontWeight?: FontWeight;
+  fontWeight?: Property.FontWeight | FontWeightTokens;
 };
 
-const getFontFamily = (value: FontFamily) => ({
+const getFontFamily = (value: FontStyleProps['fontFamily']) => ({
   fontFamily: type.properties.fontFamilies[value as FontFamilyTokens] || value,
 });
 
-const getFontSize = (value: FontSize) => ({
+const getFontSize = (value: FontStyleProps['fontSize']) => ({
   fontSize: type.properties.fontSizes[value as FontSizeTokens] || value,
 });
 
-const getFontWeight = (value: FontWeight) => ({
-  fontWeight: type.properties.fontWeights[value as FontWeightTokens] || value,
+const getFontStyle = (value: FontStyleProps['fontStyle']) => ({
+  fontStyle: value,
 });
 
-const getFontStyle = (value: FontStyle) => ({
-  fontStyle: value,
+const getFontWeight = (value: FontStyleProps['fontWeight']) => ({
+  fontWeight: type.properties.fontWeights[value as FontWeightTokens] || value,
 });
 
 const fontProps = {

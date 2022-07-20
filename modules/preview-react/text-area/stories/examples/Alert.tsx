@@ -5,7 +5,7 @@ import React from 'react';
 import {TextArea} from '@workday/canvas-kit-preview-react/text-area';
 import {useThemedRing} from '@workday/canvas-kit-labs-react/common';
 import {space, colors} from '@workday/canvas-kit-react/tokens';
-import {Text} from '@workday/canvas-kit-preview-react/type';
+import {Text} from '@workday/canvas-kit-preview-react/text';
 
 export const Alert = () => {
   const [value, setValue] = React.useState('Hello');

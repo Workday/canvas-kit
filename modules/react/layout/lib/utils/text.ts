@@ -1,32 +1,23 @@
-import {
-  LetterSpacing,
-  LineHeight,
-  TextAlign,
-  TextDecoration,
-  TextShadow,
-  TextTransform,
-  WhiteSpace,
-  WordBreak,
-} from './types';
+import {Property} from 'csstype';
 
 /** style props to for text properties */
 export type TextStyleProps = {
   /** sets `line-height` property */
-  lineHeight?: LineHeight;
+  lineHeight?: Property.LineHeight;
   /** sets `letter-spacing` property */
-  letterSpacing?: LetterSpacing;
+  letterSpacing?: Property.LetterSpacing;
   /** sets `text-align` property */
-  textAlign?: TextAlign;
+  textAlign?: Property.TextAlign;
   /** sets `text-decoration` property */
-  textDecoration?: TextDecoration;
+  textDecoration?: Property.TextDecoration;
   /** sets `text-transform` property */
-  textTransform?: TextTransform;
+  textTransform?: Property.TextTransform;
   /** sets `text-shadow` property */
-  textShadow?: TextShadow;
+  textShadow?: Property.TextShadow;
   /** sets `white-space` property */
-  whiteSpace?: WhiteSpace;
+  whiteSpace?: Property.WhiteSpace;
   /** sets `word-break` property */
-  wordBreak?: WordBreak;
+  wordBreak?: Property.WordBreak;
 };
 
 const textProps = [

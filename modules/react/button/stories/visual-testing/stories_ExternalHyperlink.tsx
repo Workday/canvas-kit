@@ -8,7 +8,7 @@ import {withSnapshotsEnabled} from '../../../../../utils/storybook';
 import {ExternalHyperlink} from '@workday/canvas-kit-react/button';
 import {Container} from './utils';
 import {VStack} from '@workday/canvas-kit-react/layout';
-import {TypeBodyLevel, TypeSubtextLevel} from '@workday/canvas-kit-preview-react/type';
+import {TypeBodyLevel, TypeSubtextLevel} from '@workday/canvas-kit-preview-react/text';
 
 export default withSnapshotsEnabled({
   title: 'Testing/React/Buttons/Button/ExternalHyperlink',

@@ -5,7 +5,7 @@ import {AccentIcon} from '@workday/canvas-kit-react/icon';
 import {rocketIcon} from '@workday/canvas-accent-icons-web';
 import {SidePanel, useSidePanel} from '@workday/canvas-kit-preview-react/side-panel';
 import {Flex, HStack} from '@workday/canvas-kit-react/layout';
-import {TypeBodyLevel} from '@workday/canvas-kit-preview-react/type';
+import {TypeBodyLevel} from '@workday/canvas-kit-preview-react/text';
 
 const StyledAccentIcon = styled(AccentIcon)({
   marginRight: space.s,

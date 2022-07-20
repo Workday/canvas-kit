@@ -31,7 +31,7 @@ import {
 import {Flex, StackSpacing, HStackProps, HStack} from '@workday/canvas-kit-react/layout';
 import {SearchForm} from '@workday/canvas-kit-labs-react/search-form';
 import {Avatar} from '@workday/canvas-kit-react/avatar';
-import {TypeBodyLevel} from '@workday/canvas-kit-preview-react/type';
+import {TypeBodyLevel} from '@workday/canvas-kit-preview-react/text';
 
 export default {
   title: 'Components/Containers/Side Panel/React',

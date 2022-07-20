@@ -17,7 +17,7 @@ import {Skeleton} from '@workday/canvas-kit-react/skeleton';
 import {borderRadius, space} from '@workday/canvas-kit-react/tokens';
 import {patternIcon} from '@workday/canvas-system-icons-web';
 import {StyledType} from '@workday/canvas-kit-react/common';
-import {TypeHeadingLevel} from '@workday/canvas-kit-preview-react/type';
+import {TypeHeadingLevel} from '@workday/canvas-kit-preview-react/text';
 
 const fadeOut = keyframes`
   from {

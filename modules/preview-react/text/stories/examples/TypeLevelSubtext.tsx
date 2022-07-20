@@ -1,5 +1,5 @@
 import React from 'react';
-import {TypeSubtextLevel} from '@workday/canvas-kit-preview-react/type';
+import {TypeSubtextLevel} from '@workday/canvas-kit-preview-react/text';
 
 export const TypeLevelSubtext = () => (
   <>

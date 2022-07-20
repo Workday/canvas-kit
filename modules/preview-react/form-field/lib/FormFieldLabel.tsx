@@ -2,7 +2,7 @@ import React from 'react';
 
 import {createSubcomponent, ExtractProps, useTheme} from '@workday/canvas-kit-react/common';
 import {HStack, StackSpacing} from '@workday/canvas-kit-react/layout';
-import {Label, Text} from '@workday/canvas-kit-preview-react/type';
+import {Label, Text} from '@workday/canvas-kit-preview-react/text';
 import {useFormFieldLabel, useFormFieldModel} from './hooks';
 
 export interface FormFieldLabelProps extends Omit<ExtractProps<typeof HStack, never>, 'spacing'> {

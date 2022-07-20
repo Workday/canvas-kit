@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {Box} from '@workday/canvas-kit-react';
-import {Label as LabelText} from '@workday/canvas-kit-preview-react/type';
+import {Label as LabelText} from '@workday/canvas-kit-preview-react/text';
 
 export const Label = () => (
   <>

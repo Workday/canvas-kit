@@ -1,7 +1,7 @@
 import * as React from 'react';
-import {createComponent, StyledType, styled} from '@workday/canvas-kit-react/common';
+import {createComponent} from '@workday/canvas-kit-react/common';
 // type changes no need
-import {type, CanvasTypeHierarchy} from '@workday/canvas-kit-react/tokens';
+import {type, CanvasTypeHierarchy, CanvasTypeVariants} from '@workday/canvas-kit-react/tokens';
 import {Box, BoxProps} from '@workday/canvas-kit-react/layout';
 
 export interface TextProps extends BoxProps {
@@ -13,11 +13,7 @@ export interface TextProps extends BoxProps {
    * Type token size: `large`, `medium`, `small`. Should be provided with `level` prop or it will not apply token.
    */
   size?: 'large' | 'medium' | 'small';
-  /**
-   * If true, add ellipsis text for overflow.
-   * @default false
-   */
-  isTruncated?: boolean;
+  variant?: keyof CanvasTypeVariants;
   children: React.ReactNode;
 }
 
@@ -25,18 +21,9 @@ export interface TextProps extends BoxProps {
  * Props interface for type level specific component:
  * Title, Heading, BodyText, Subtext.
  */
-export interface TypeLevelTextProps extends Omit<TextProps, 'level'> {
+export interface TypeLevelProps extends Omit<TextProps, 'level'> {
   size: 'large' | 'medium' | 'small';
 }
-
-const StyledTextComponent = styled(Box.as('span'))<StyledType & TextProps>(
-  ({isTruncated}) =>
-    isTruncated && {
-      whiteSpace: 'nowrap',
-      textOverflow: 'ellipsis',
-      overflow: 'hidden',
-    }
-);
 
 /**
  * Return updated styles to replace undefined values of
@@ -55,13 +42,16 @@ const validatedProps = (props: TextProps, tokenProps: any) => {
 
 export const Text = createComponent('span')({
   displayName: 'Text',
-  Component: ({level, size, ...elemProps}: TextProps, ref, Element) => {
+  Component: ({level, size, variant, ...elemProps}: TextProps, ref, Element) => {
     const tokenProps = level && size ? type.levels[level][size] : {};
+    const variantColor = variant ? type.variants[variant] : {};
+
     return (
-      <StyledTextComponent
+      <Box
         ref={ref}
         as={Element}
         {...tokenProps}
+        {...variantColor}
         {...elemProps}
         {...validatedProps(elemProps, tokenProps)}
       />

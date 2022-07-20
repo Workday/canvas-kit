@@ -1,5 +1,5 @@
 import React from 'react';
-import {TypeBodyLevel} from '@workday/canvas-kit-preview-react/type';
+import {TypeBodyLevel} from '@workday/canvas-kit-preview-react/text';
 
 export const TypeLevelBody = () => (
   <>

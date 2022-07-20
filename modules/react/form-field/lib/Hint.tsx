@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {ErrorType, Themeable, styled} from '@workday/canvas-kit-react/common';
 import {space} from '@workday/canvas-kit-react/tokens';
-import {TypeSubtextLevel, Text} from '@workday/canvas-kit-preview-react/type';
+import {TypeSubtextLevel, Text} from '@workday/canvas-kit-preview-react/text';
 
 export interface HintProps extends Themeable, React.HTMLAttributes<HTMLParagraphElement> {
   /**

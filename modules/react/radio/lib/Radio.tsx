@@ -9,7 +9,7 @@ import {
   useUniqueId,
 } from '@workday/canvas-kit-react/common';
 import {borderRadius, colors, inputColors, spaceNumbers} from '@workday/canvas-kit-react/tokens';
-import {Label} from '@workday/canvas-kit-preview-react/type';
+import {Label} from '@workday/canvas-kit-preview-react/text';
 
 export interface RadioProps extends Themeable {
   /**

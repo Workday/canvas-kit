@@ -9,11 +9,11 @@ import {TypeLevelTitle} from './examples/TypeLevelTitle';
 
 import {TextComponent, LabelComponent, TypeLevelComponent} from './PropTables.splitprops.tsx';
 
-<Meta title="Preview/Type/React" />
+<Meta title="Preview/Text/React" />
 
-# Canvas Kit React Type
+# Canvas Kit React Text
 
-`Type` is a group of text components that provide a common, ergonomic API to render text with
+`Text` is a group of text components that provide a common, ergonomic API to render text with
 simplified usage of Canvas Kit type token.
 
 ## Installation
@@ -29,9 +29,9 @@ yarn add @workday/canvas-kit-react
 `Text` is a basic text component to render modified text. `Text` component composes `Box` component
 that allows to use all layout props, such as `display`, `margin`, `lineHeight` etc. It also has
 their own props such as `level` and `size` that should be provided together, because they refer to
-type token level and size, and `isTruncated` allows to make text truncated with ellipsis on its end.
+type token level and size, and `variant` to set variant color.
 
-By default `Type` component is a `span` element, but it's possible to override the element by
+By default `Text` component is a `span` element, but it's possible to override the element by
 passing `as` prop.
 
 ```tsx

@@ -1,5 +1,5 @@
 import React from 'react';
-import {TypeTitleLevel} from '@workday/canvas-kit-preview-react/type';
+import {TypeTitleLevel} from '@workday/canvas-kit-preview-react/text';
 
 export const TypeLevelTitle = () => (
   <>
