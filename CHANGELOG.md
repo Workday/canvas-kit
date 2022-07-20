@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v6.8.11](https://github.com/Workday/canvas-kit/releases/tag/v6.8.11) (2022-07-20)
+
+### Infrastructure
+
+- ci: Fixing issues with forward-merge script ([@NicholasBoll](https://github.com/NicholasBoll))
+- ci: Fix release and forward-merge CI interactions ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v6.8.10](https://github.com/Workday/canvas-kit/releases/tag/v6.8.10) (2022-07-13)
 
 ### Components
