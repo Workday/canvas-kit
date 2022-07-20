@@ -31,6 +31,7 @@ export default createSubcomponent('fieldset')({
   const swatchWidth = swatchButtonSize + 8; // the height and width of the swatch + margin
   const swatchBookWidth = swatchWidth * model.state.columnCount + 8; // the width of each swatch times how many columns plus the padding around the swatch book
   return (
+    //@ts-ignore next-line
     <StyledSwatchBookContainer
       model={model}
       as={Element}

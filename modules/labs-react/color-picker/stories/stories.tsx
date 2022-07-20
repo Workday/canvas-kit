@@ -6,6 +6,7 @@ import {colors} from '@workday/canvas-kit-react/tokens';
 import {
   Popup,
   useCloseOnEscape,
+  useCloseOnOutsideClick,
   useInitialFocus,
   usePopupModel,
 } from '@workday/canvas-kit-react/popup';
@@ -108,11 +109,22 @@ export const WithPopup = () => {
   const model = usePopupModel();
   useInitialFocus(model);
   useCloseOnEscape(model);
+  useCloseOnOutsideClick(model);
+
+  const onBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    console.log('blur', e.currentTarget, e.relatedTarget, model.state.stackRef.current);
+    if (
+      !model.state.stackRef.current ||
+      !model.state.stackRef.current.contains(e.relatedTarget as Node)
+    ) {
+      model.events.show();
+    }
+  };
   return (
     <>
       <Popup model={model}>
         <ColorPicker model={colorPickerModel}>
-          <Popup.Target as={ColorPicker.Input} />
+          <Popup.Target as={ColorPicker.Input} onFocus={onBlur} />
         </ColorPicker>
         <Popup.Popper>
           <Popup.Card style={{marginTop: 8}} padding="s" depth={3}>
