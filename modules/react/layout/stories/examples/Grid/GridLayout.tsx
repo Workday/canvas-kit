@@ -26,8 +26,8 @@ const CellItem = (props: {children: React.ReactNode}) => {
       gridAutoFlow="column"
       padding="xs"
       justifyContent="center"
-      backgroundColor="sourLemon600"
-      color="frenchVanilla100"
+      backgroundColor="peach300"
+      color="blackPepper500"
       borderRadius="m"
     >
       {props.children}

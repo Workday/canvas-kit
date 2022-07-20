@@ -4,43 +4,50 @@ import {ComponentStatesTable} from '@workday/canvas-kit-labs-react/common';
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
 
 import {Grid} from '../index';
-import {ContentDirection, StaticStates} from '@workday/canvas-kit-react/common';
+import {StaticStates} from '@workday/canvas-kit-react/common';
 
 export default withSnapshotsEnabled({
   title: 'Testing/React/Containers/Layout/Grid',
   component: Grid,
 });
 
-export const GridLTRStates = () => {
+export const GridStates = () => {
   return (
     <>
-      <h2>Grid LTR States</h2>
-      <StaticStates theme={{canvas: {direction: ContentDirection.LTR}}}>
+      <h2>Grid States</h2>
+      <StaticStates>
         <ComponentStatesTable
           columnProps={[{label: 'Default', props: {}}]}
           rowProps={[
             {
               label: 'Row',
-              props: {gridAutoFlow: 'row', border: 'solid 2px', borderColor: 'blackPepper500'},
-            },
-            {
-              label: 'Row Reverse',
               props: {
-                flexDirection: 'row-reverse',
+                gridAutoFlow: 'column',
                 border: 'solid 2px',
                 borderColor: 'blackPepper500',
+                padding: '16px',
+                gridGap: '16px',
               },
             },
             {
               label: 'Column',
-              props: {flexDirection: 'column', border: 'solid 2px', borderColor: 'blackPepper500'},
-            },
-            {
-              label: 'Column Reverse',
               props: {
-                flexDirection: 'column-reverse',
+                gridAutoFlow: 'row',
                 border: 'solid 2px',
                 borderColor: 'blackPepper500',
+                padding: '16px',
+                gridGap: '16px',
+              },
+            },
+            {
+              label: 'Template Column',
+              props: {
+                flexDirection: 'row',
+                gridTemplateColumns: 'repeat(2, 1fr)',
+                border: 'solid 2px',
+                borderColor: 'blackPepper500',
+                padding: '16px',
+                gridGap: '16px',
               },
             },
           ]}
@@ -49,40 +56,44 @@ export const GridLTRStates = () => {
             return (
               <Grid {...props}>
                 <Grid
-                  flex="1 1 auto"
                   border="solid 2px"
                   alignItems="center"
                   justifyContent="center"
                   borderColor="cinnamon500"
-                  margin="xxs"
                   paddingY="xxs"
                   paddingX="s"
                 >
                   1
                 </Grid>
                 <Grid
-                  flex="1 1 auto"
                   border="solid 2px"
                   alignItems="center"
                   justifyContent="center"
                   borderColor="cinnamon500"
-                  margin="xxs"
                   paddingY="xxs"
                   paddingX="s"
                 >
                   2
                 </Grid>
                 <Grid
-                  flex="1 1 auto"
                   border="solid 2px"
                   alignItems="center"
                   justifyContent="center"
                   borderColor="cinnamon500"
-                  margin="xxs"
                   paddingY="xxs"
                   paddingX="s"
                 >
                   3
+                </Grid>
+                <Grid
+                  border="solid 2px"
+                  alignItems="center"
+                  justifyContent="center"
+                  borderColor="cinnamon500"
+                  paddingY="xxs"
+                  paddingX="s"
+                >
+                  4
                 </Grid>
               </Grid>
             );
@@ -93,36 +104,25 @@ export const GridLTRStates = () => {
   );
 };
 
-export const FlexRTLStates = () => {
+export const GridUILayout = () => {
   return (
     <>
-      <h2>Flex RTL States</h2>
-      <StaticStates theme={{canvas: {direction: ContentDirection.RTL}}}>
+      <h2>Grid UI Layout</h2>
+      <StaticStates>
         <ComponentStatesTable
           columnProps={[{label: 'Default', props: {}}]}
           rowProps={[
             {
-              label: 'Row',
-              props: {flexDirection: 'row', border: 'solid 2px', borderColor: 'blackPepper500'},
-            },
-            {
-              label: 'Row-Reverse',
+              label: 'UI - Grid Area',
               props: {
-                flexDirection: 'row-reverse',
+                gridTemplateAreas:
+                  "'Header Header Header Header' 'SideBar BodyContent BodyContent BodyContent' 'Footer Footer Footer Footer'",
+                gridTemplateColumns: '1fr 3fr',
+                gridTemplateRows: 'auto 300px auto',
                 border: 'solid 2px',
                 borderColor: 'blackPepper500',
-              },
-            },
-            {
-              label: 'Column',
-              props: {flexDirection: 'column', border: 'solid 2px', borderColor: 'blackPepper500'},
-            },
-            {
-              label: 'Column-Reverse',
-              props: {
-                flexDirection: 'column-reverse',
-                border: 'solid 2px',
-                borderColor: 'blackPepper500',
+                padding: '16px',
+                gridGap: '16px',
               },
             },
           ]}
@@ -131,40 +131,48 @@ export const FlexRTLStates = () => {
             return (
               <Grid {...props}>
                 <Grid
-                  flex="1 1 auto"
+                  gridArea="Header"
                   border="solid 2px"
                   alignItems="center"
                   justifyContent="center"
                   borderColor="cinnamon500"
-                  margin="xxs"
                   paddingY="xxs"
                   paddingX="s"
                 >
-                  1
+                  Header
                 </Grid>
                 <Grid
-                  flex="1 1 auto"
+                  gridArea="SideBar"
                   border="solid 2px"
                   alignItems="center"
                   justifyContent="center"
                   borderColor="cinnamon500"
-                  margin="xxs"
                   paddingY="xxs"
                   paddingX="s"
                 >
-                  2
+                  SideBar
                 </Grid>
                 <Grid
-                  flex="1 1 auto"
+                  gridArea="BodyContent"
                   border="solid 2px"
                   alignItems="center"
                   justifyContent="center"
                   borderColor="cinnamon500"
-                  margin="xxs"
                   paddingY="xxs"
                   paddingX="s"
                 >
-                  3
+                  BodyContent
+                </Grid>
+                <Grid
+                  gridArea="Footer"
+                  border="solid 2px"
+                  alignItems="center"
+                  justifyContent="center"
+                  borderColor="cinnamon500"
+                  paddingY="xxs"
+                  paddingX="s"
+                >
+                  Footer
                 </Grid>
               </Grid>
             );
