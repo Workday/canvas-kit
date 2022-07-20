@@ -63,6 +63,9 @@ export default createSubcomponent('div')({
   displayName: 'Swatch',
   modelHook: useColorPickerModel,
 })<ColorSwatchProps>(({color, showCheck = false, ...elemProps}, Element, model) => {
+  console.log('state color', model.state.color !== '');
+  console.log('scolor', color);
+
   return (
     <StyledContainer
       color={color}
@@ -70,14 +73,14 @@ export default createSubcomponent('div')({
       showCheck={showCheck || model.state.selectedIds[0] === color}
       {...elemProps}
     >
-      {showCheck || model.state.color === color ? (
+      {showCheck && (
         <SystemIcon
           fill={pickForegroundColor(color)}
           fillHover={pickForegroundColor(color)}
           icon={checkSmallIcon}
           color={color}
         />
-      ) : null}
+      )}
     </StyledContainer>
   );
 });

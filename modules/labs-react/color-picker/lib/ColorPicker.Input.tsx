@@ -157,7 +157,7 @@ export default createSubcomponent('input')({
       }
     };
     const formattedValue = formatValue(value || model.state.customColor);
-    console.warn('custom color', model.state.customColor);
+
     return (
       <StyledInputContainer grow={grow}>
         <CustomHexInput
@@ -175,7 +175,7 @@ export default createSubcomponent('input')({
         />
         <ColorPicker.Swatch
           css={swatchTileStyles}
-          showCheck={showCheck}
+          showCheck={false}
           color={
             isValidHex(model.state.customColor) ? `#${formatValue(model.state.customColor)}` : ''
           }
