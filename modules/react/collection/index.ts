@@ -9,9 +9,11 @@ export * from './lib/useListResetCursorOnBlur';
 export * from './lib/useListItemRovingFocus';
 export * from './lib/useListItemSelect';
 export * from './lib/useListModel';
+export * from './lib/useGridModel';
 export {ListBox} from './lib/ListBox';
 export {
   singleSelectionManager,
   multiSelectionManager,
   isSelected,
 } from './lib/useSelectionListModel';
+export {wrappingNavigationManager, navigationManager} from './lib/useCursorListModel';
