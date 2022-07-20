@@ -5209,14 +5209,14 @@
         "__isArgsStory": true
       }
     },
-    "testing-react-buttons-button-secondary-button--secondary-button-icon-states": {
-      "id": "testing-react-buttons-button-secondary-button--secondary-button-icon-states",
-      "name": "Secondary Button Icon States",
-      "kind": "Testing/React/Buttons/Button/Secondary Button",
-      "story": "Secondary Button Icon States",
+    "testing-react-buttons-button-primary-button--primary-icon-button-themed-states": {
+      "id": "testing-react-buttons-button-primary-button--primary-icon-button-themed-states",
+      "name": "Primary Icon Button Themed States",
+      "kind": "Testing/React/Buttons/Button/Primary Button",
+      "story": "Primary Icon Button Themed States",
       "parameters": {
-        "__id": "testing-react-buttons-button-secondary-button--secondary-button-icon-states",
-        "__isArgsStory": true
+        "__id": "testing-react-buttons-button-primary-button--primary-icon-button-themed-states",
+        "__isArgsStory": false
       }
     },
     "testing-react-buttons-button-secondary-button--secondary-button-states": {
@@ -5239,14 +5239,24 @@
         "__isArgsStory": false
       }
     },
-    "testing-react-buttons-button-tertiary-button--tertiary-button-icon-states": {
-      "id": "testing-react-buttons-button-tertiary-button--tertiary-button-icon-states",
-      "name": "Tertiary Button Icon States",
-      "kind": "Testing/React/Buttons/Button/Tertiary Button",
-      "story": "Tertiary Button Icon States",
+    "testing-react-buttons-button-secondary-button--secondary-icon-button-states": {
+      "id": "testing-react-buttons-button-secondary-button--secondary-icon-button-states",
+      "name": "Secondary Icon Button States",
+      "kind": "Testing/React/Buttons/Button/Secondary Button",
+      "story": "Secondary Icon Button States",
       "parameters": {
-        "__id": "testing-react-buttons-button-tertiary-button--tertiary-button-icon-states",
+        "__id": "testing-react-buttons-button-secondary-button--secondary-icon-button-states",
         "__isArgsStory": true
+      }
+    },
+    "testing-react-buttons-button-secondary-button--secondary-icon-button-themed-states": {
+      "id": "testing-react-buttons-button-secondary-button--secondary-icon-button-themed-states",
+      "name": "Secondary Icon Button Themed States",
+      "kind": "Testing/React/Buttons/Button/Secondary Button",
+      "story": "Secondary Icon Button Themed States",
+      "parameters": {
+        "__id": "testing-react-buttons-button-secondary-button--secondary-icon-button-themed-states",
+        "__isArgsStory": false
       }
     },
     "testing-react-buttons-button-tertiary-button--tertiary-button-states": {
@@ -5266,6 +5276,26 @@
       "story": "Tertiary Button Themed States",
       "parameters": {
         "__id": "testing-react-buttons-button-tertiary-button--tertiary-button-themed-states",
+        "__isArgsStory": false
+      }
+    },
+    "testing-react-buttons-button-tertiary-button--tertiary-icon-button-states": {
+      "id": "testing-react-buttons-button-tertiary-button--tertiary-icon-button-states",
+      "name": "Tertiary Icon Button States",
+      "kind": "Testing/React/Buttons/Button/Tertiary Button",
+      "story": "Tertiary Icon Button States",
+      "parameters": {
+        "__id": "testing-react-buttons-button-tertiary-button--tertiary-icon-button-states",
+        "__isArgsStory": true
+      }
+    },
+    "testing-react-buttons-button-tertiary-button--tertiary-icon-button-themed-states": {
+      "id": "testing-react-buttons-button-tertiary-button--tertiary-icon-button-themed-states",
+      "name": "Tertiary Icon Button Themed States",
+      "kind": "Testing/React/Buttons/Button/Tertiary Button",
+      "story": "Tertiary Icon Button Themed States",
+      "parameters": {
+        "__id": "testing-react-buttons-button-tertiary-button--tertiary-icon-button-themed-states",
         "__isArgsStory": false
       }
     },
