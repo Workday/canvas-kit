@@ -43,6 +43,7 @@ const omittedProps = [
   'lineHeight',
   'textAlign',
   'textDecoration',
+  'textOverflow',
   'textTransform',
   'textShadow',
   'whiteSpace',

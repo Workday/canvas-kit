@@ -5,14 +5,14 @@ import {Label as LabelText} from '@workday/canvas-kit-preview-react/text';
 
 export const Label = () => (
   <>
-    <Box marginBottom="s">
-      <LabelText size="large">Label</LabelText>
-    </Box>
-    <Box marginBottom="s">
-      <LabelText hasPointerCursor>Label with pointer</LabelText>
-    </Box>
-    <Box marginBottom="s">
-      <LabelText disabled>Disabled Label</LabelText>
-    </Box>
+    <LabelText size="large" marginBottom="s">
+      Label
+    </LabelText>
+    <LabelText hasPointerCursor marginBottom="s">
+      Label with pointer
+    </LabelText>
+    <LabelText disabled marginBottom="s">
+      Disabled Label
+    </LabelText>
   </>
 );

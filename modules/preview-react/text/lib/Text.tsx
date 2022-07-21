@@ -13,6 +13,9 @@ export interface TextProps extends BoxProps {
    * Type token size: `large`, `medium`, `small`. Should be provided with `level` prop or it will not apply token.
    */
   size?: 'large' | 'medium' | 'small';
+  /**
+   * Type variant token names: `error`, `hint` or `inverse`.
+   */
   variant?: keyof CanvasTypeVariants;
   children: React.ReactNode;
 }

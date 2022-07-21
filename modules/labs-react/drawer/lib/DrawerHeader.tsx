@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled from '@emotion/styled';
 import {colors, space, CanvasColor, typeColors} from '@workday/canvas-kit-react/tokens';
 import {TertiaryButton} from '@workday/canvas-kit-react/button';
-import {TypeBodyLevel, TypeLevelProps} from '@workday/canvas-kit-preview-react/text';
+import {TypeBodyLevel as Heading} from '@workday/canvas-kit-preview-react/text';
 import {xIcon} from '@workday/canvas-system-icons-web';
 
 export interface DrawerHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -56,12 +56,6 @@ const HeaderContainer = styled('div')<Pick<DrawerHeaderProps, 'headerColor' | 'b
   })
 );
 
-const Heading = styled(TypeBodyLevel.as('h4'))<TypeLevelProps>({
-  whiteSpace: 'nowrap',
-  textOverflow: 'ellipsis',
-  overflow: 'hidden',
-});
-
 const CloseButton = styled(TertiaryButton)({
   margin: '-8px', // for inverse and plain button, we always want this margin
 });
@@ -82,11 +76,15 @@ export class DrawerHeader extends React.Component<DrawerHeaderProps, {}> {
     return (
       <HeaderContainer borderColor={borderColor} {...elemProps} headerColor={headerColor}>
         <Heading
+          as="h4"
           size="small"
           title={title}
           fontWeight="bold"
           color={inverse ? 'inverse' : typeColors.heading}
           paddingRight="xxxs"
+          whiteSpace="nowrap"
+          textOverflow="ellipsis"
+          overflow="hidden"
         >
           {title}
         </Heading>

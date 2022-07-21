@@ -10,6 +10,8 @@ export type TextStyleProps = {
   textAlign?: Property.TextAlign;
   /** sets `text-decoration` property */
   textDecoration?: Property.TextDecoration;
+  /** sets `text-overflow` property */
+  textOverflow?: Property.TextOverflow;
   /** sets `text-transform` property */
   textTransform?: Property.TextTransform;
   /** sets `text-shadow` property */
@@ -25,6 +27,7 @@ const textProps = [
   'letterSpacing',
   'textAlign',
   'textDecoration',
+  'textOverflow',
   'textTransform',
   'textShadow',
   'whiteSpace',
