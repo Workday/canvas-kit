@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Menu, {MenuItem} from '../index';
+import {Menu, MenuItem} from '../index';
 import {screen, render, fireEvent} from '@testing-library/react';
 
 describe('Menu', () => {

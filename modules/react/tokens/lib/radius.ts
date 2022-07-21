@@ -28,5 +28,3 @@ export const borderRadius: CanvasBorderRadius = {
   l: '8px',
   circle: '999px',
 };
-
-export default borderRadius;

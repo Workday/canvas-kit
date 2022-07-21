@@ -5,7 +5,7 @@ import {useListRenderItems} from '@workday/canvas-kit-react/collection';
 
 import {useTabsModel} from './useTabsModel';
 
-export interface TabsPanelsProps<T = unknown> {
+export interface TabsPanelsProps<T = any> {
   /**
    *
    */

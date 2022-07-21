@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {CanvasGraphic, CanvasIconTypes} from '@workday/design-assets-types';
 import {CSSObject} from '@emotion/styled';
-import Svg, {SvgProps} from './Svg';
+import {Svg, SvgProps} from './Svg';
 import {createComponent} from '@workday/canvas-kit-react/common';
 
 export interface GraphicStyles {
@@ -59,7 +59,7 @@ export const graphicStyles = ({width, height, grow}: GraphicStyles): CSSObject =
   return {};
 };
 
-const Graphic = createComponent('span')({
+export const Graphic = createComponent('span')({
   displayName: 'Graphic',
   Component: (
     {grow = false, src, width, height, shouldMirror, ...elemProps}: GraphicProps,
@@ -79,5 +79,3 @@ const Graphic = createComponent('span')({
     );
   },
 });
-
-export default Graphic;

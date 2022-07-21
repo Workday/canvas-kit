@@ -237,7 +237,7 @@ const scrollIntoViewIfNeeded = (elem: HTMLElement, centerIfNeeded = true): void 
   }
 };
 
-class MenuItem extends React.Component<MenuItemProps> {
+export class MenuItem extends React.Component<MenuItemProps> {
   ref = React.createRef<HTMLLIElement>();
 
   componentDidUpdate = (prevProps: MenuItemProps) => {
@@ -310,5 +310,3 @@ MenuItem.defaultProps = {
   shouldClose: true,
   role: 'menuitem',
 };
-
-export default MenuItem;

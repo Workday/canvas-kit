@@ -4,7 +4,7 @@ import {render} from '@testing-library/react';
 import {colors, iconColors} from '@workday/canvas-kit-react/tokens';
 import {activityStreamIcon} from '@workday/canvas-system-icons-web';
 
-import SystemIcon, {systemIconStyles} from '../lib/SystemIcon';
+import {SystemIcon, systemIconStyles} from '../lib/SystemIcon';
 
 describe('System Icon', () => {
   test('Defaults styles are set correctly', () => {
