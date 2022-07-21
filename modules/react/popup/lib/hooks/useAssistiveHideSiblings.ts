@@ -1,5 +1,7 @@
 import React from 'react';
-import {PopupModel} from './usePopupModel';
+import {createElemPropsHook} from '@workday/canvas-kit-react/common';
+
+import {usePopupModel} from './usePopupModel';
 
 /**
  * This hook will hide all sibling elements from assistive technology. Very useful for modal
@@ -12,7 +14,7 @@ import {PopupModel} from './usePopupModel';
  *
  * This should be used on popup elements that need to hide content (i.e. Modals).
  */
-export const useAssistiveHideSiblings = (model: PopupModel, elemProps = {}) => {
+export const useAssistiveHideSiblings = createElemPropsHook(usePopupModel)(model => {
   const visible = model.state.visibility !== 'hidden';
 
   React.useEffect(() => {
@@ -40,5 +42,5 @@ export const useAssistiveHideSiblings = (model: PopupModel, elemProps = {}) => {
     };
   }, [model.state.stackRef, visible]);
 
-  return elemProps;
-};
+  return {};
+});

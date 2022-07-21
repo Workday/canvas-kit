@@ -1,8 +1,9 @@
 import React from 'react';
 
 import {PopupStack} from '@workday/canvas-kit-popup-stack';
+import {createElemPropsHook} from '@workday/canvas-kit-react/common';
 
-import {PopupModel} from './usePopupModel';
+import {usePopupModel} from './usePopupModel';
 
 /**
  * Registers global detection of the Escape key. It will only call the PopupModel's `hide` event if the
@@ -11,14 +12,14 @@ import {PopupModel} from './usePopupModel';
  * This should be used with popup elements that are dismissible like Tooltips, Modals, non-modal
  * dialogs, dropdown menus, etc.
  */
-export const useCloseOnEscape = (model: PopupModel, elemProps = {}) => {
+export const useCloseOnEscape = createElemPropsHook(usePopupModel)(model => {
   const onKeyDown = React.useCallback(
     (event: KeyboardEvent) => {
       if (
         (event.key === 'Esc' || event.key === 'Escape') &&
         PopupStack.isTopmost(model.state.stackRef.current!)
       ) {
-        model.events.hide({event});
+        model.events.hide(event);
       }
     },
     [model.state.stackRef, model.events]
@@ -37,5 +38,5 @@ export const useCloseOnEscape = (model: PopupModel, elemProps = {}) => {
     };
   }, [onKeyDown, visible]);
 
-  return elemProps;
-};
+  return {};
+});

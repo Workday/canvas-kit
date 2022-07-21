@@ -35,7 +35,6 @@ export const statusIndicatorStyles: StatusIndicatorGenericStyle = {
     display: 'inline-flex',
     alignItems: 'center',
     verticalAlign: 'middle',
-    maxWidth: 150,
     height: space.s,
     padding: `1px ${space.xxxs}`,
     borderRadius: borderRadius.s,
@@ -117,6 +116,11 @@ export interface StatusIndicatorProps extends React.HTMLAttributes<HTMLSpanEleme
    */
   emphasis?: StatusIndicatorEmphasis;
   /**
+   * The maxWidth of the container before it truncates
+   * @default 200
+   */
+  maxWidth?: number;
+  /**
    * The text of the StatusIndicator.
    */
   label: string;
@@ -126,12 +130,12 @@ export interface StatusIndicatorProps extends React.HTMLAttributes<HTMLSpanEleme
   icon?: CanvasSystemIcon;
 }
 
-const Container = styled('span')<PickRequired<StatusIndicatorProps, 'emphasis', 'type'>>(
-  statusIndicatorStyles.styles,
-  ({type, emphasis}) => ({
-    ...statusIndicatorStyles.variants[type][emphasis],
-  })
-);
+const Container = styled('span')<
+  PickRequired<StatusIndicatorProps, 'emphasis' | 'maxWidth', 'type'>
+>(statusIndicatorStyles.styles, ({type, emphasis, maxWidth}) => ({
+  ...statusIndicatorStyles.variants[type][emphasis],
+  maxWidth: maxWidth,
+}));
 
 const StatusLabel = styled('span')({
   fontWeight: 'bold',
@@ -147,11 +151,18 @@ export default class StatusIndicator extends React.Component<StatusIndicatorProp
   public static Emphasis = StatusIndicatorEmphasis;
 
   public render() {
-    const {emphasis = StatusIndicatorEmphasis.High, type, icon, label, ...elemProps} = this.props;
+    const {
+      emphasis = StatusIndicatorEmphasis.High,
+      maxWidth = 200,
+      type,
+      icon,
+      label,
+      ...elemProps
+    } = this.props;
     const variant = statusIndicatorStyles.variants[type][emphasis]!;
 
     return (
-      <Container type={type} emphasis={emphasis} {...elemProps}>
+      <Container type={type} emphasis={emphasis} maxWidth={maxWidth} {...elemProps}>
         {icon && (
           <SystemIcon
             colorHover={variant.color}

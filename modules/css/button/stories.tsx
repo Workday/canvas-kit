@@ -1,5 +1,6 @@
+/** @jsxRuntime classic */
 /** @jsx jsx */
-import {css, jsx} from '@emotion/core';
+import {css, jsx} from '@emotion/react';
 import {Component} from 'react';
 import {storiesOf} from '@storybook/react';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';

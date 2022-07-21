@@ -104,6 +104,11 @@ jobs:
         if: "inputs.version"
         run: yarn bump --yes ${{inputs.version}}
 
+      ## Manual version override
+      - name: Lerna Bump
+        if: "inputs.version"
+        run: yarn bump --yes ${{inputs.version}}
+
       ## Capture the new tag and store it for later use
       - name: Get new tag
         if: "!contains(github.event.head_commit.message, '[skip release]') || inputs.version"
