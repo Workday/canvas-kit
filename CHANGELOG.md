@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v7.2.0](https://github.com/Workday/canvas-kit/releases/tag/v7.2.0) (2022-07-21)
+
+### Components
+
+- feat(collection): Add grid model and examples ([#1628](https://github.com/Workday/canvas-kit/pull/1628)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+### Infrastructure
+
+- ci: Fix release and forward-merge CI interactions ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v6.8.11](https://github.com/Workday/canvas-kit/releases/tag/v6.8.11) (2022-07-20)
 
 ### Infrastructure
