@@ -101,9 +101,7 @@ async function main() {
     console.log(`Creating a merge branch`);
     // The CI uses `origin` while locally we use `upstream`.
     const remote = alreadyMerging ? 'upstream' : 'origin';
-    await spawn(
-      `git merge ${remote}/${nextBranch} -m 'chore: Merge ${branch} into ${nextBranch} [skip release]'`
-    );
+    await exec(`git merge ${remote}/${nextBranch} -m 'chore: Merge ${branch} into ${nextBranch}'`);
 
     // The merge was successful with no merge conflicts
   } catch (result) {
@@ -156,16 +154,14 @@ async function main() {
       console.log(`Conflicts still need to be resolved manually.`);
       console.log(`Manually resolve the conflicts, then run the following command:`);
       console.log(
-        `git add . && git commit --no-verify -m "chore: Merge ${branch} into ${nextBranch} [skip release]" && git push upstream merge/${branch}-into-${nextBranch}`
+        `git add . && git commit --no-verify -m "chore: Merge ${branch} into ${nextBranch}" && git push upstream merge/${branch}-into-${nextBranch}`
       );
     } else {
       console.log('All conflicts automatically resolved.');
 
       // If we're here, we've fixed all merge conflicts. We need to commit
       await spawn(`git add .`);
-      await spawn(
-        `git commit --no-verify -m "chore: Merge ${branch} into ${nextBranch} [skip release]"`
-      );
+      await spawn(`git commit --no-verify -m "chore: Merge ${branch} into ${nextBranch}"`);
     }
   } else {
     console.log('No conflicts detected');

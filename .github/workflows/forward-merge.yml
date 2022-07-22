@@ -28,25 +28,33 @@ jobs:
       ## as an output for later use
       - name: Extract branch name
         id: extract-branch
-        run: echo "::set-output name=branch::$(echo ${GITHUB_REF#refs/heads/})"
-
-      - run: echo ${{steps.extract-branch.outputs.branch}}
+        run: |
+          echo "::set-output name=branch::$(echo ${GITHUB_REF#refs/heads/})"
+          echo ${{steps.extract-branch.outputs.branch}}
 
       - name: Extract next branch name
         id: extract-next-branch
-        run: echo "::set-output name=branch::$(node utils/get-forward-merge-branch.js)"
+        run: |
+          echo "::set-output name=branch::$(node utils/get-forward-merge-branch.js)"
+          echo ${{steps.extract-next-branch.outputs.branch}}
 
-      - run: echo ${{steps.extract-next-branch.outputs.branch}}
+      - name: Should we run?
+        id: should-run
+        run: |
+          echo "::set-output name=answer::${{(steps.extract-branch.outputs.branch == 'support' && contains(github.event.head_commit.message, 'chore: Release')) || (steps.extract-branch.outputs.branch == 'master' && contains(github.event.head_commit.message, 'chore: Release')) || startsWith(steps.extract-branch.outputs.branch, 'prerelease/')}}"
+          echo ${{steps.should-run.outputs.answer}}
 
       ## This step installs node and sets up several matchers (regex matching for Github
       ## Annotations). See
       ## https://github.com/actions/setup-node/blob/25316bbc1f10ac9d8798711f44914b1cf3c4e954/src/main.ts#L58-L65
       - uses: actions/setup-node@v2.4.0
+        if: steps.should-run.outputs.answer == 'true'
         with:
           node-version: 14.x
           registry-url: https://registry.npmjs.org
 
       - name: Get Cypress Version
+        if: steps.should-run.outputs.answer == 'true'
         id: cypress-version
         run: echo "::set-output name=version::$(node utils/get-cypress-version.js)"
 
@@ -54,6 +62,7 @@ jobs:
       ## cache hit will copy files from Github cache into the `node_modules` and `.cache/cypress`
       ## folders. A cache hit will skip the cache steps
       - name: Cache node modules
+        if: steps.should-run.outputs.answer == 'true'
         id: yarn-cache
         uses: actions/cache@v2
         with:
@@ -61,6 +70,7 @@ jobs:
           key: ${{ runner.os }}-node-modules-hash-${{ hashFiles('yarn.lock') }}
 
       - name: Cache Cypress
+        if: steps.should-run.outputs.answer == 'true'
         id: cypress-cache
         uses: actions/cache/@v2
         with:
@@ -71,8 +81,8 @@ jobs:
       ## install` step. This effectively saves up to 3m on a cache hit build.
       - name: Install Packages
         if:
-          steps.yarn-cache.outputs.cache-hit != 'true' || steps.cypress-cache.outputs.cache-hit !=
-          'true'
+          (steps.yarn-cache.outputs.cache-hit != 'true' || steps.cypress-cache.outputs.cache-hit !=
+          'true') && steps.should-run.outputs.answer == 'true'
         run: yarn install --production=false
         env:
           CYPRESS_CACHE_FOLDER: .cache/cypress
@@ -80,6 +90,7 @@ jobs:
       ## A `yarn bump` will create a commit and a tag. We need to set up the git user to do this.
       ## We'll make that user be the github-actions user.
       - name: Config git user
+        if: steps.should-run.outputs.answer == 'true'
         run: |
           git config --global user.name "${{ github.actor }}"
           git config --global user.email "${{ github.actor }}@users.noreply.github.com"
@@ -87,25 +98,32 @@ jobs:
 
       ## Create a merge branch
       - name: Forward merge
+        if: steps.should-run.outputs.answer == 'true'
         run: node utils/forward-merge.js
 
       # Keep steps separate for Github Actions annotation matching: https://github.com/actions/setup-node/blob/83c9f7a7df54d6b57455f7c57ac414f2ae5fb8de/src/setup-node.ts#L26-L33
       - name: Lint
+        if: steps.should-run.outputs.answer == 'true'
         run: yarn lint
 
       - name: Dependency Check
+        if: steps.should-run.outputs.answer == 'true'
         run: yarn depcheck
 
       - name: Type Check
+        if: steps.should-run.outputs.answer == 'true'
         run: yarn typecheck
 
       - name: Unit tests
+        if: steps.should-run.outputs.answer == 'true'
         run: yarn test
 
       - name: Build Storybook
+        if: steps.should-run.outputs.answer == 'true'
         run: yarn build-storybook --quiet
 
       - name: Cache Build
+        if: steps.should-run.outputs.answer == 'true'
         id: build-cache
         uses: actions/cache/@v2
         with:
@@ -113,6 +131,7 @@ jobs:
           key: ${{ runner.os }}-build-${{ github.sha }}
 
       - name: Visual Tests
+        if: steps.should-run.outputs.answer == 'true'
         uses: chromaui/action@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -122,9 +141,11 @@ jobs:
           exitZeroOnChanges: true
 
       - name: Start Server
+        if: steps.should-run.outputs.answer == 'true'
         run: npx http-server docs -p 9001 & npx wait-on http://localhost:9001
 
       - name: Integration tests
+        if: steps.should-run.outputs.answer == 'true'
         run: yarn cypress run --record --parallel
         env:
           # Github Actions doesn't support encryption on forks
@@ -135,6 +156,7 @@ jobs:
 
       ## Push both the commit and tag created by Lerna's version command using a PAT
       - name: Push changes
+        if: steps.should-run.outputs.answer == 'true'
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GH_RW_TOKEN }}
