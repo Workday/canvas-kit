@@ -11,6 +11,7 @@ import {
   ExtractProps,
   useConstant,
   createSubcomponent,
+  useModalityType,
 } from '@workday/canvas-kit-react/common';
 import {Stack, StackStyleProps} from '@workday/canvas-kit-react/layout';
 
@@ -42,6 +43,7 @@ const StyledPopupCard = styled(Card)<
   if (transformOrigin == null) {
     return {};
   }
+
   return {
     animation: popupAnimation(transformOrigin),
     animationDuration: '150ms',
@@ -65,11 +67,13 @@ export const PopupCard = createSubcomponent('div')({
 
   // As is a Stack that will render an element of `Element`
   const As = useConstant(() => Stack.as(Element));
-
+  const modality = useModalityType();
   return (
     <StyledPopupCard
       as={As}
-      transformOrigin={transformOrigin}
+      transformOrigin={
+        modality === 'touch' ? {horizontal: 'center', vertical: 'bottom'} : transformOrigin
+      }
       position="relative"
       padding="l"
       depth={5}

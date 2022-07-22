@@ -7,6 +7,7 @@ import {
   StyledType,
   useWindowSize,
   useForkRef,
+  useModalityType,
 } from '@workday/canvas-kit-react/common';
 import {usePopupModel, usePopupStack} from '@workday/canvas-kit-react/popup';
 import {keyframes} from '@emotion/react';
@@ -50,7 +51,6 @@ const CenteringContainer = styled('div')({
   position: 'absolute',
   left: 0,
   top: 0,
-  alignItems: 'center',
   justifyContent: 'center',
 
   // IE11 fix for setting min-height in a flex container
@@ -86,13 +86,16 @@ const OpenModalOverlay = createSubcomponent('div')({
   elemPropsHook: useModalOverlay,
 })<ModalOverlayProps>((elemProps, Element, model) => {
   const windowSize = useWindowSize();
-
+  const modality = useModalityType();
   const content = (
     <Container as={Element} {...elemProps}>
       <CenteringContainer
         // make sure the centering container is an even number of pixels to avoid sub-pixel
         // inaccuracies due to centering
-        style={{width: windowSize.width % 2 === 1 ? 'calc(100vw - 1px)' : '100vw'}}
+        style={{
+          width: windowSize.width % 2 === 1 ? 'calc(100vw - 1px)' : '100vw',
+          alignItems: modality === 'touch' ? 'end' : 'center',
+        }}
       >
         {elemProps.children}
       </CenteringContainer>
