@@ -435,7 +435,9 @@ The APIs for these promoted components remain unchanged.
 
 ### Action Bar
 
-The ActionBar API changed to model API to support more generic behaviors to allow for other
+#### Model
+
+The `ActionBar` API changed to model API to support more generic behaviors to allow for other
 components to support responsive layouts using the same models and behaviors. It also allows to
 implement a responsive layout based on a container width
 ([#1585](https://github.com/Workday/canvas-kit/pull/1585)).
@@ -453,7 +455,9 @@ const model = useActionBarModel({
 <ActionBar model={model} />;
 ```
 
-The ActionBar component can now handle responsive containers, but the support is not automatic. You
+#### Responsive Container Support
+
+The `ActionBar` component can now handle responsive containers, but the support is not automatic. You
 must use the dynamic API and provide an overflow menu subcomponent. The dynamic API doesn't know the
 shape of your object, so render props must be used to instruct React how to render each item.
 
@@ -500,6 +504,11 @@ const model = useActionBarModel({items});
   </ActionBar.Menu.Popper>
 </ActionBar>;
 ```
+
+#### Fixed Position Prop
+
+`ActionBar`'s boolean `fixed` prop has been removed. It has been replaced by a new `position` style
+prop in the `ActionBar.List` component and is set to `fixed` by default.
 
 🤖 The codemod will remove uses of the `fixed` prop from `ActionBar` and restructure component by
 creating `ActionBar.List` subcomponent and replacing all `ActionBar` children to it.
