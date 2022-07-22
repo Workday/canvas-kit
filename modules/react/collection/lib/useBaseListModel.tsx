@@ -170,7 +170,7 @@ export const useBaseListModel = createModelHook({
         return items.concat({
           id: getId(data.item),
           value: data.item,
-          index: items.length - 1,
+          index: items.length,
           textValue: data.textValue,
         });
       });
