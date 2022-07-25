@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {Grid, GridProps, Box} from '@workday/canvas-kit-react/layout';
 import {type} from '@workday/canvas-kit-react/tokens';
+import {fontSizes} from '../../../../tokens/lib/type/fontSizes';
 
 // temporary placeholder until type components are added to canvas-kit
 const H3 = props => (
@@ -15,39 +16,46 @@ const H3 = props => (
   />
 );
 
+const borderPadProps = {
+  borderRadius: 'm',
+  padding: 's',
+};
+
 const Header = ({children, ...props}: GridProps) => (
-  <Grid borderRadius="m" depth={1} gridArea="Header" padding="s" {...props}>
+  <Grid gridArea="Header" depth={1} {...props} {...borderPadProps}>
     {children}
   </Grid>
 );
 
 const BodyContent = ({children, ...props}: GridProps) => (
-  <Grid borderRadius="m" depth={1} gridArea="BodyContent" padding="s" {...props}>
+  <Grid gridArea="BodyContent" depth={1} {...props} {...borderPadProps}>
     {children}
   </Grid>
 );
 
 const SideBar = ({children, ...props}: GridProps) => (
-  <Grid borderRadius="m" depth={1} gridArea="SideBar" padding="s" {...props}>
+  <Grid gridArea="SideBar" depth={1} {...props} {...borderPadProps}>
     {children}
   </Grid>
 );
 
 const Footer = ({children, ...props}: GridProps) => (
-  <Grid gridArea="Footer" borderRadius="m" depth={1} gridAutoFlow="row" padding="s" {...props}>
+  <Grid gridArea="Footer" depth={1} {...props} {...borderPadProps}>
     {children}
   </Grid>
 );
 
 export const UIExample = () => {
+  const parentCont = {
+    gridTemplateAreas:
+      "'Header Header Header Header' 'SideBar BodyContent BodyContent BodyContent' 'Footer Footer Footer Footer'",
+    gridGap: fontSizes[16],
+    gridTemplateColumns: '1fr 3fr',
+    gridTemplateRows: 'auto 300px auto',
+  };
   return (
     <Grid as="section" padding="s">
-      <Grid
-        gridGap="16px"
-        gridTemplateAreas="'Header Header Header Header' 'SideBar BodyContent BodyContent BodyContent' 'Footer Footer Footer Footer'"
-        gridTemplateColumns="1fr 3fr"
-        gridTemplateRows="auto 300px auto"
-      >
+      <Grid {...parentCont}>
         <Header backgroundColor="blueberry400">
           <H3>Header</H3>
         </Header>
