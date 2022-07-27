@@ -23,14 +23,6 @@ export interface PopperProps {
    */
   children: ((props: {placement: Placement}) => React.ReactNode) | React.ReactNode;
   /**
-   * The element that contains the portal children when `portal` is true. It is best to not define
-   * this unless you know what you're doing. Popper works with a PopupStack and in order for
-   * z-indexes to work correctly, all Popups on your page should live on the same root element
-   * otherwise you risk running into rendering issues:
-   * https://philipwalton.com/articles/what-no-one-told-you-about-z-index/
-   */
-  containerElement?: Element | null;
-  /**
    * When provided, this optional callback will be used to determine positioning for the Popper element
    * instead of calling `getBoundingClientRect` on the `anchorElement` prop. Use this when you need
    * complete control over positioning. When this prop is specified, it is safe to pass `null` into the
@@ -62,7 +54,7 @@ export interface PopperProps {
    */
   popperOptions?: Partial<PopperOptions>;
   /**
-   * If true, attach the Popper to the `containerElement`. If false, render the Popper within the
+   * If false, render the Popper within the
    * DOM hierarchy of its parent. A non-portal Popper will constrained by the parent container
    * overflows. If you set this to `false`, you may experience issues where you content gets cut off
    * by scrollbars or `overflow: hidden`
@@ -113,7 +105,6 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
       onPlacementChange,
       children,
       portal,
-      containerElement,
       popperInstanceRef,
     }: PopperProps,
     ref
@@ -185,7 +176,7 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
       return contents;
     }
 
-    return ReactDOM.createPortal(contents, containerElement || stackRef.current!);
+    return ReactDOM.createPortal(contents, stackRef.current!);
   }
 );
 

@@ -53,8 +53,7 @@ export function getValue(index: number, length: number): number {
 // IE11 doesn't support Array.prototype.find, so we'll polyfill here
 function find<T>(
   items: T[],
-  predicate: (value: T, index: number, obj: T[]) => boolean,
-  thisArg?: any
+  predicate: (value: T, index: number, obj: T[]) => boolean
 ): T | undefined {
   const length = items.length;
   for (let i = 0; i < length; i++) {
