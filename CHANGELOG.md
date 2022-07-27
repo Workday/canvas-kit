@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v6.8.14](https://github.com/Workday/canvas-kit/releases/tag/v6.8.14) (2022-07-27)
+
+### Infrastructure
+
+- ci: Allow auto-merging of the yarn.lock file ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v6.8.13](https://github.com/Workday/canvas-kit/releases/tag/v6.8.13) (2022-07-22)
 
 ### Documentation
