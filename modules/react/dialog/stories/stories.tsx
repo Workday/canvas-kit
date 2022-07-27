@@ -2,7 +2,7 @@ import React from 'react';
 
 import {Dialog} from '@workday/canvas-kit-react/dialog';
 import {DeleteButton} from '@workday/canvas-kit-react/button';
-import {HStack} from '@workday/canvas-kit-labs-react';
+import {HStack} from '@workday/canvas-kit-react/layout';
 
 export default {
   title: 'Components/Popups/Dialog/React',

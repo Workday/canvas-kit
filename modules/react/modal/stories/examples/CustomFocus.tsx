@@ -3,7 +3,7 @@ import {Modal, useModalModel} from '@workday/canvas-kit-react/modal';
 import {DeleteButton} from '@workday/canvas-kit-react/button';
 import FormField from '@workday/canvas-kit-react/form-field';
 import TextInput from '@workday/canvas-kit-react/text-input';
-import {HStack} from '@workday/canvas-kit-labs-react';
+import {HStack, Box} from '@workday/canvas-kit-react/layout';
 
 export const CustomFocus = () => {
   const ref = React.useRef<HTMLInputElement>(null);
@@ -24,7 +24,9 @@ export const CustomFocus = () => {
           <Modal.CloseIcon aria-label="Close" />
           <Modal.Heading>Delete Item</Modal.Heading>
           <Modal.Body>
-            <p>Enter name to confirm deletion</p>
+            <Box as="p" marginTop={0} marginBottom="m">
+              Enter name to confirm deletion
+            </Box>
             <FormField label="Item name">
               <TextInput ref={ref} value={value} onChange={e => setValue(e.currentTarget.value)} />
             </FormField>

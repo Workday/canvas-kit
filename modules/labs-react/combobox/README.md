@@ -68,7 +68,7 @@ const autocompleteCallback = event => console.log('Adjust menu items here')
 
 ---
 
-#### `clearButtonVariant: IconButtonProps['variant']`
+#### `clearButtonVariant: TertiaryButtonProps['variant']`
 
 > The type of icon button to use for clearing input.
 

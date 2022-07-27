@@ -1,7 +1,9 @@
 import React from 'react';
 
 import {PopupStack} from '@workday/canvas-kit-popup-stack';
-import {PopupModel} from './usePopupModel';
+import {createElemPropsHook} from '@workday/canvas-kit-react/common';
+
+import {usePopupModel} from './usePopupModel';
 
 /**
  * Registers global listener for all clicks. It will only call the PopupModel's `hide` event if the
@@ -13,7 +15,7 @@ import {PopupModel} from './usePopupModel';
  * dropdown menus, etc. Tooltips and hierarchical menus should use `useAlwaysCloseOnClickOutside`
  * instead.
  */
-export const useCloseOnOutsideClick = (model: PopupModel, elemProps = {}) => {
+export const useCloseOnOutsideClick = createElemPropsHook(usePopupModel)(model => {
   const onClick = React.useCallback(
     (event: MouseEvent) => {
       if (!model.state.stackRef.current) {
@@ -30,7 +32,7 @@ export const useCloseOnOutsideClick = (model: PopupModel, elemProps = {}) => {
         // because the target is outside `ref.current`
         !PopupStack.contains(model.state.stackRef.current, event.target as HTMLElement)
       ) {
-        model.events.hide({event});
+        model.events.hide(event);
       }
     },
     [model.state.stackRef, model.events]
@@ -50,5 +52,5 @@ export const useCloseOnOutsideClick = (model: PopupModel, elemProps = {}) => {
     };
   }, [model.state.stackRef, visible, onClick]);
 
-  return elemProps;
-};
+  return {};
+});

@@ -1,25 +1,27 @@
-/** @jsx jsx */
 import * as React from 'react';
-import {jsx, css} from '@emotion/core';
 
 import {PaginationModel} from './types';
-import {List, ListItem, ListItemProps, ListProps} from './common/List';
-import {useStack} from './common/Stack';
-import {useRTL} from './common/utils/useRTL';
+import {ListItem, ListItemProps} from './common/List';
+import {HStack, HStackProps} from '@workday/canvas-kit-react/layout';
 
-export interface PageListProps extends Omit<ListProps, 'as'> {
+export interface PageListProps extends Omit<HStackProps, 'as' | 'spacing'> {
   model: PaginationModel;
   children?: (model: PaginationModel) => React.ReactNode[] | React.ReactNode;
 }
 
 export const PageList = ({model, children, ...elemProps}: PageListProps) => {
-  const {shouldUseRTL} = useRTL();
-  const stackStyles = useStack({direction: 'row', spacing: 'xxxs', shouldUseRTL});
-
   return (
-    <List as="ol" role="list" css={css(stackStyles)} {...elemProps}>
+    <HStack
+      margin="zero"
+      as="ol"
+      role="list"
+      paddingLeft="zero"
+      paddingRight="zero"
+      spacing="xxxs"
+      {...elemProps}
+    >
       {typeof children === 'function' ? children(model) : children}
-    </List>
+    </HStack>
   );
 };
 

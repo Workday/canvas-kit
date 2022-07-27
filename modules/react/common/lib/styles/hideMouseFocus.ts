@@ -1,10 +1,11 @@
-import {CSSObject, Interpolation} from '@emotion/core';
+import {Interpolation} from '@emotion/react';
+import {CSSProperties} from '@workday/canvas-kit-react/tokens';
 
 /**
  * A utility to hide the default canvas style focus ring when using mouse input.
  * Requires wrapping your components in an InputProvider component.
  */
-export const hideMouseFocus: CSSObject = {
+export const hideMouseFocus: CSSProperties = {
   [`[data-whatinput="mouse"] &:focus,
     [data-whatinput="touch"] &:focus,
     [data-whatinput="pointer"] &:focus`]: {
@@ -25,9 +26,9 @@ export const hideMouseFocus: CSSObject = {
    },
  */
 export const mouseFocusBehavior = (
-  selectors: Record<string, Interpolation>
-): Record<string, Interpolation> => {
-  const output: Record<string, Interpolation> = {};
+  selectors: Record<string, Interpolation<any>>
+): Record<string, Interpolation<any>> => {
+  const output: Record<string, Interpolation<any>> = {};
 
   Object.keys(selectors).map((selector, index) => {
     selector.split(',').forEach(selectorPart => {

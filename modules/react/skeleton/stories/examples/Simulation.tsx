@@ -1,6 +1,5 @@
-/** @jsx jsx */
 import React from 'react';
-import {jsx, keyframes} from '@emotion/core';
+import {keyframes} from '@emotion/react';
 
 import {
   Card,
@@ -9,13 +8,15 @@ import {
   SecondaryButton,
   SystemIconCircle,
   TextInput,
+  styled,
 } from '@workday/canvas-kit-react';
 
-import {Box, Flex} from '@workday/canvas-kit-labs-react';
+import {Box, Flex} from '@workday/canvas-kit-react/layout';
 
 import {Skeleton} from '@workday/canvas-kit-react/skeleton';
 import {borderRadius, space, type} from '@workday/canvas-kit-react/tokens';
 import {patternIcon} from '@workday/canvas-system-icons-web';
+import {StyledType} from '@workday/canvas-kit-react/common';
 
 const fadeOut = keyframes`
   from {
@@ -26,6 +27,10 @@ const fadeOut = keyframes`
     opacity: 0;
   }
 `;
+
+const StyledSimulation = styled(Box)<StyledType>({
+  pointerEvents: 'none',
+});
 
 export const Simulation = () => {
   const [loading, setLoading] = React.useState(true);
@@ -74,7 +79,29 @@ export const Simulation = () => {
       <Card>
         <Card.Body>
           <Box minHeight={180} position="relative">
-            {!loading && (
+            {loading ? (
+              <StyledSimulation
+                position="absolute"
+                top={0}
+                left={0}
+                width="100%"
+                animation={!loading ? `${fadeOut} 150ms ease-out forwards` : undefined}
+              >
+                <Skeleton>
+                  <Flex alignItems="center">
+                    <Skeleton.Shape
+                      width={space.xl}
+                      height={space.xl}
+                      borderRadius={borderRadius.circle}
+                    />
+                    <Box flex={1} marginLeft="xs">
+                      <Skeleton.Header />
+                    </Box>
+                  </Flex>
+                  <Skeleton.Text lineCount={3} />
+                </Skeleton>
+              </StyledSimulation>
+            ) : (
               <Box>
                 <Flex alignItems="center" display="inline-flex" marginBottom="s">
                   <SystemIconCircle icon={patternIcon} />
@@ -95,32 +122,6 @@ export const Simulation = () => {
                 </p>
               </Box>
             )}
-
-            <Box
-              position="absolute"
-              top={0}
-              left={0}
-              width="100%"
-              css={{
-                pointerEvents: 'none',
-                animation: !loading ? `${fadeOut} 150ms ease-out` : undefined,
-                animationFillMode: !loading ? 'forwards' : undefined,
-              }}
-            >
-              <Skeleton>
-                <Flex alignItems="center">
-                  <Skeleton.Shape
-                    width={space.xl}
-                    height={space.xl}
-                    borderRadius={borderRadius.circle}
-                  />
-                  <Box flex={1} marginLeft="xs">
-                    <Skeleton.Header />
-                  </Box>
-                </Flex>
-                <Skeleton.Text lineCount={3} />
-              </Skeleton>
-            </Box>
           </Box>
         </Card.Body>
       </Card>

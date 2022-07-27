@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {keyframes} from '@emotion/core';
+import {keyframes} from '@emotion/react';
 import canvas, {borderRadius} from '@workday/canvas-kit-react/tokens';
 import {styled} from '@workday/canvas-kit-react/common';
 

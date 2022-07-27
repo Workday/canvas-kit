@@ -82,12 +82,6 @@ Default: `false`
 
 ---
 
-#### `iconRef: React.Ref<HTMLSpanElement>`
-
-> Returns the ref to the rendered icon.
-
----
-
 #### `shouldMirror: boolean`
 
 > If set to `true`, transform the SVG's x-axis to mirror the graphic
@@ -174,12 +168,6 @@ Default: `AppletIcon.Colors.Blueberry`
 > Size of the icon in `px`.
 
 Default: `92`
-
----
-
-#### `iconRef: React.Ref<HTMLSpanElement>`
-
-> Returns the ref to the rendered icon.
 
 ---
 
@@ -292,12 +280,6 @@ Default: `'transparent'`
 
 ---
 
-#### `iconRef: React.Ref<HTMLSpanElement>`
-
-> Returns the ref to the rendered icon.
-
----
-
 #### `shouldMirror: boolean`
 
 > If set to `true`, transform the SVG's x-axis to mirror the graphic
@@ -355,12 +337,6 @@ Default: `colors.soap300`
 > Size of the icon.
 
 Default: `SystemIconCircleSize.l` (`40`)
-
----
-
-#### `iconRef: React.Ref<HTMLSpanElement>`
-
-> Returns the ref to the rendered icon.
 
 ---
 
@@ -442,12 +418,6 @@ Default: `height of graphic`
 > Expand graphic to fit container. `grow` takes precedence over both `width` and `height`.
 
 Default: `false`
-
-#### `iconRef: React.Ref<HTMLSpanElement>`
-
-> Returns the ref to the rendered icon.
-
----
 
 #### `shouldMirror: boolean`
 
