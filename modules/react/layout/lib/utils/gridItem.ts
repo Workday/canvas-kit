@@ -3,10 +3,6 @@ import {Property} from 'csstype';
 /** style props to for grid item properties */
 export type GridItemStyleProps = {
   // Child Types
-  /**
-   * sets `display` property
-   * @default 'grid'
-   * */
   /** sets `grid-column-start` property */
   gridColumnStart?: Property.GridColumnStart;
   /** sets `grid-column-end` property */
@@ -49,7 +45,7 @@ const gridItemProps = {
  * If no `GridItemStyleProps` are found, it returns an empty object.
  *
  * @example
- * // You'll most likely use `grid` with low-level, styled components
+ * // You'll most likely use `grid item` with low-level, styled components
  * const GridItemExample = () => (
  *   <Grid.Item gridRowStart="1" justifySelf="center" gridArea="Card">
  *     Hello, Grid Item!

@@ -2,19 +2,16 @@ import * as React from 'react';
 import {Grid, GridProps, Box} from '@workday/canvas-kit-react/layout';
 import {type} from '@workday/canvas-kit-react/tokens';
 import {fontSizes} from '../../../../tokens/lib/type/fontSizes';
+import styled from '@emotion/styled';
 
 // temporary placeholder until type components are added to canvas-kit
-const H3 = props => (
-  <h3
-    style={{
-      ...type.levels.body.large,
-      ...type.variants.inverse,
-      margin: 0,
-      fontWeight: type.properties.fontWeights.bold,
-    }}
-    {...props}
-  />
-);
+
+const StyledHeading = styled(Box.as('h3'))({
+  ...type.levels.body.large,
+  ...type.variants.inverse,
+  margin: 0,
+  fontWeight: type.properties.fontWeights.bold,
+});
 
 const borderPadProps = {
   borderRadius: 'm',
@@ -57,16 +54,16 @@ export const UIExample = () => {
     <Grid as="section" padding="s">
       <Grid {...parentCont}>
         <Header backgroundColor="blueberry400">
-          <H3>Header</H3>
+          <StyledHeading>Header</StyledHeading>
         </Header>
         <SideBar backgroundColor="blueberry300">
-          <H3>SideBar</H3>
+          <StyledHeading>SideBar</StyledHeading>
         </SideBar>
         <BodyContent backgroundColor="plum300">
-          <H3>Body Content</H3>
+          <StyledHeading>Body Content</StyledHeading>
         </BodyContent>
         <Footer backgroundColor="berrySmoothie300">
-          <H3>Footer</H3>
+          <StyledHeading>Footer</StyledHeading>
         </Footer>
       </Grid>
     </Grid>

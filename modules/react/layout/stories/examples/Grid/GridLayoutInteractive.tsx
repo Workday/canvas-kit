@@ -1,8 +1,7 @@
-import * as React from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {Grid} from '@workday/canvas-kit-react/layout';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
 // eslint-disable-next-line no-duplicate-imports
-import {useState, useEffect, useRef} from 'react';
 import {
   arrowDownIcon,
   arrowLeftIcon,

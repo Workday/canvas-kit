@@ -35,7 +35,7 @@ const GridItem = createComponent('div')({
  *
  * @example
  * ```
- * import { Grid, GridProps } from '@workday/canvas-kit-react/layout';
+ * import { Grid } from '@workday/canvas-kit-react/layout';
  * `Grid` is built on top of `Box` and has access to all `BoxProps`.
  *
  * interface CardProps extends GridProps {
@@ -66,8 +66,8 @@ export const Grid = createComponent('div')({
      *
      * @example
      * ```
-     * import { gridItem, GridItemStyleProps } from '@workday/canvas-kit-react/layout';
-     * `Grid` is built on top of `Box` so `<Grid.Item />` gets all `BoxProps`.
+     * import { Grid } from '@workday/canvas-kit-react/layout';
+     * `Grid` is built on top of `Box` so `<Grid.Item />` gets all `BoxProps` as well.
      *
      * interface CardProps extends GridItemStyleProps {
      *   // card-specific props
