@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v7.2.3](https://github.com/Workday/canvas-kit/releases/tag/v7.2.3) (2022-07-27)
+
+### Documentation
+
+- fix: Set types import direction for sub-directory packages ([#1695](https://github.com/Workday/canvas-kit/pull/1695)) ([@RayRedGoose](https://github.com/RayRedGoose))
+
+### Infrastructure
+
+- ci: Fix forward-merge script and optimize release/forward-merge jobs ([@NicholasBoll](https://github.com/NicholasBoll))
+- ci: Ignore Storybook test on forward-merge ([@NicholasBoll](https://github.com/NicholasBoll))
+- ci: Remove extra manual bump step ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v7.2.2](https://github.com/Workday/canvas-kit/releases/tag/v7.2.2) (2022-07-27)
 
 ### Components
