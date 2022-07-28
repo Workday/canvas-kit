@@ -185,6 +185,7 @@ export const LabelStates = () => (
       rowProps={[
         {label: 'Default', props: {}},
         {label: 'Disabled', props: {disabled: true}},
+        {label: 'With cursor', props: {cursor: 'pointer'}},
       ]}
       columnProps={[
         {

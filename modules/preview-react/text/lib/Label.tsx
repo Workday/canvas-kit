@@ -1,18 +1,16 @@
 import * as React from 'react';
+import {Property} from 'csstype';
 import {createComponent, styled, StyledType} from '@workday/canvas-kit-react/common';
 import {Text, TextProps} from '@workday/canvas-kit-preview-react/text';
 
 export interface TypeLabelProps extends TextProps {
-  hasPointerCursor?: boolean;
+  cursor?: Property.Cursor;
   disabled?: boolean;
 }
 
-const StyledLabel = styled(Text.as('label'))<StyledType & TypeLabelProps>(
-  ({hasPointerCursor, disabled}) =>
-    hasPointerCursor && {
-      cursor: disabled ? 'default' : 'pointer',
-    }
-);
+const StyledLabel = styled(Text.as('label'))<StyledType & TypeLabelProps>(({cursor, disabled}) => ({
+  cursor: cursor && !disabled ? cursor : 'default',
+}));
 
 export const Label = createComponent('label')({
   displayName: 'Label',
@@ -20,8 +18,7 @@ export const Label = createComponent('label')({
     <StyledLabel
       ref={ref}
       as={Element}
-      level="subtext"
-      size="large"
+      asToken="subtext.large"
       color={elemProps.disabled ? 'licorice100' : undefined}
       {...elemProps}
     />

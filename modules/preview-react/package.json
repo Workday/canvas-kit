@@ -48,7 +48,8 @@
     "@emotion/styled": "^11.6.0",
     "@workday/canvas-kit-react": "^7.2.0",
     "@workday/canvas-system-icons-web": "^3.0.0",
-    "@workday/design-assets-types": "^0.2.8"
+    "@workday/design-assets-types": "^0.2.8",
+    "csstype": "^3.0.2"
   },
   "devDependencies": {
     "@workday/canvas-accent-icons-web": "^3.0.0",
