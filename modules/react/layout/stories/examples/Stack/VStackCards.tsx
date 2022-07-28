@@ -1,17 +1,17 @@
 import * as React from 'react';
 import {VStack, Stack, Flex} from '@workday/canvas-kit-react/layout';
 import {TertiaryButton} from '@workday/canvas-kit-react/button';
-import {TypeBodyLevel, TypeHeadingLevel} from '@workday/canvas-kit-preview-react/text';
+import {BodyText, Heading} from '@workday/canvas-kit-preview-react/text';
 
 const Card = ({heading = '', body = ''}) => (
   <Flex flex={1} flexBasis="auto" depth={1} padding="s" backgroundColor="frenchVanilla100">
     <Stack flexDirection="column" spacing="xs">
-      <TypeHeadingLevel as="h3" size="small" margin={0}>
+      <Heading as="h3" size="small" margin={0}>
         {heading}
-      </TypeHeadingLevel>
-      <TypeBodyLevel size="small" margin={0}>
+      </Heading>
+      <BodyText size="small" margin={0}>
         {body}
-      </TypeBodyLevel>
+      </BodyText>
       <Flex>
         <TertiaryButton>Add to order</TertiaryButton>
       </Flex>

@@ -3,7 +3,7 @@ import {StaticStates} from '@workday/canvas-kit-react/common';
 import {ComponentStatesTable} from '@workday/canvas-kit-labs-react/common';
 import {colors} from '@workday/canvas-kit-react/tokens';
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
-import {TypeBodyLevel, TypeHeadingLevel, Label, TypeSubtextLevel, Text, TypeTitleLevel} from '../';
+import {BodyText, Heading, Label, Subtext, Text, Title} from '../';
 import {Box} from '@workday/canvas-kit-react/layout';
 
 type TypeStateProp = {size: 'small' | 'medium' | 'large'};
@@ -99,7 +99,7 @@ export const TextStates = () => (
   </StaticStates>
 );
 
-export const TypeTitleLevelStates = () => (
+export const TitleStates = () => (
   <StaticStates>
     <ComponentStatesTable
       rowProps={[
@@ -114,12 +114,12 @@ export const TypeTitleLevelStates = () => (
         },
       ]}
     >
-      {(props: TypeStateProp) => <TypeTitleLevel {...props}>Lorem ipsum title.</TypeTitleLevel>}
+      {(props: TypeStateProp) => <Title {...props}>Lorem ipsum title.</Title>}
     </ComponentStatesTable>
   </StaticStates>
 );
 
-export const TypeHeadingLevelStates = () => (
+export const HeadingStates = () => (
   <StaticStates>
     <ComponentStatesTable
       rowProps={[
@@ -134,12 +134,12 @@ export const TypeHeadingLevelStates = () => (
         },
       ]}
     >
-      {(props: TypeStateProp) => <TypeHeadingLevel {...props}>Lorem ipsum title.</TypeHeadingLevel>}
+      {(props: TypeStateProp) => <Heading {...props}>Lorem ipsum title.</Heading>}
     </ComponentStatesTable>
   </StaticStates>
 );
 
-export const TypeSubtextLevelStates = () => (
+export const SubtextStates = () => (
   <StaticStates>
     <ComponentStatesTable
       rowProps={[
@@ -154,12 +154,12 @@ export const TypeSubtextLevelStates = () => (
         },
       ]}
     >
-      {(props: TypeStateProp) => <TypeSubtextLevel {...props}>Lorem ipsum title.</TypeSubtextLevel>}
+      {(props: TypeStateProp) => <Subtext {...props}>Lorem ipsum title.</Subtext>}
     </ComponentStatesTable>
   </StaticStates>
 );
 
-export const TypeBodyLevelStates = () => (
+export const BodyTextStates = () => (
   <StaticStates>
     <ComponentStatesTable
       rowProps={[
@@ -174,7 +174,7 @@ export const TypeBodyLevelStates = () => (
         },
       ]}
     >
-      {(props: TypeStateProp) => <TypeBodyLevel {...props}>Lorem ipsum title.</TypeBodyLevel>}
+      {(props: TypeStateProp) => <BodyText {...props}>Lorem ipsum title.</BodyText>}
     </ComponentStatesTable>
   </StaticStates>
 );

@@ -3,13 +3,13 @@ import {createSubcomponent, ExtractProps, useTheme} from '@workday/canvas-kit-re
 import {space} from '@workday/canvas-kit-react/tokens';
 
 import {useFormFieldHint, useFormFieldModel} from './hooks';
-import {TypeSubtextLevel} from '@workday/canvas-kit-preview-react/text';
+import {Subtext} from '@workday/canvas-kit-preview-react/text';
 
 export const FormFieldHint = createSubcomponent('p')({
   displayName: 'FormField.Hint',
   modelHook: useFormFieldModel,
   elemPropsHook: useFormFieldHint,
-})<Omit<ExtractProps<typeof TypeSubtextLevel, never>, 'size'>>(
+})<Omit<ExtractProps<typeof Subtext, never>, 'size'>>(
   ({children, ...elemProps}, Element, model) => {
     const theme = useTheme();
 
@@ -19,7 +19,7 @@ export const FormFieldHint = createSubcomponent('p')({
     }
 
     return (
-      <TypeSubtextLevel
+      <Subtext
         as={Element}
         size="medium"
         color={model.state.hasError ? theme.canvas.palette.error.main : undefined}
@@ -27,7 +27,7 @@ export const FormFieldHint = createSubcomponent('p')({
         {...elemProps}
       >
         {children}
-      </TypeSubtextLevel>
+      </Subtext>
     );
   }
 );

@@ -5,7 +5,7 @@ import {
   SidePanelTransitionStates,
 } from '@workday/canvas-kit-preview-react/side-panel';
 import {Flex} from '@workday/canvas-kit-react/layout';
-import {TypeBodyLevel} from '@workday/canvas-kit-preview-react/text';
+import {BodyText as Heading} from '@workday/canvas-kit-preview-react/text';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
 
 export const ExternalControl = () => {
@@ -26,15 +26,9 @@ export const ExternalControl = () => {
       >
         {panelState === 'expanded' && (
           <Flex alignItems="center" paddingY="s" paddingX="s">
-            <TypeBodyLevel
-              as="h3"
-              size="large"
-              color="licorice500"
-              fontWeight="bold"
-              {...labelProps}
-            >
+            <Heading as="h3" size="large" color="licorice500" fontWeight="bold" {...labelProps}>
               Tasks Panel
-            </TypeBodyLevel>
+            </Heading>
           </Flex>
         )}
       </SidePanel>

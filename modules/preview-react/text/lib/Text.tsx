@@ -6,58 +6,53 @@ import {Box, BoxProps} from '@workday/canvas-kit-react/layout';
 
 export interface TextProps extends BoxProps {
   /**
-   * Type token level: `title`, `heading`, `body`, `subtext`. Should be provided with `size` prop or it will not apply token.
+   * Type token as string with level and size separated by dot.
    */
-  level?: keyof CanvasTypeHierarchy;
-  /**
-   * Type token size: `large`, `medium`, `small`. Should be provided with `level` prop or it will not apply token.
-   */
-  size?: 'large' | 'medium' | 'small';
+  asToken?: `${keyof CanvasTypeHierarchy}.${'large'|'medium'|'small'}`;
   /**
    * Type variant token names: `error`, `hint` or `inverse`.
    */
   variant?: keyof CanvasTypeVariants;
-  children: React.ReactNode;
 }
 
 /**
- * Props interface for type level specific component:
- * Title, Heading, BodyText, Subtext.
+ * Function returns updated props by token and variant values
  */
-export interface TypeLevelProps extends Omit<TextProps, 'level'> {
-  size: 'large' | 'medium' | 'small';
-}
+const validateProps = ({asToken, variant, ...props}: TextProps) => {
+  let updatedProps: any = props;
+  const tokenPropNames = ['fontFamily', 'fontSize', 'lineHeight', 'fontWeight', 'color'];
 
-/**
- * Return updated styles to replace undefined values of
- * `fontFamily`, `fontSize`, `lineHeight`, `fontWeight`, `color` props by token value
- */
-const validatedProps = (props: TextProps, tokenProps: any) => {
-  const validatedProps = ['fontFamily', 'fontSize', 'lineHeight', 'fontWeight', 'color'];
-  const styles: any = {};
-  validatedProps.forEach(item => {
-    if (item in props && item in tokenProps && !props[item as keyof TextProps]) {
-      styles[item] = tokenProps[item];
-    }
-  });
-  return styles;
+  /*
+  If token provided it updates undefined values of token styles:
+  `fontFamily`, `fontSize`, `lineHeight`, `fontWeight`, `color` 
+  by replacing them by token value
+  */
+  if (asToken) {
+    const [level, size] = asToken.split('.') as [keyof CanvasTypeHierarchy, 'large'|'medium'|'small'];
+    const tokenProps = type.levels[level][size];
+
+    tokenPropNames.forEach((item) => {
+      if (item in props && item in tokenProps && !props[item as keyof typeof props]) {
+        updatedProps[item] = tokenProps[item as keyof typeof tokenProps];
+      }
+    });
+  }
+
+  // If variant provided it updates color value by variant color
+  if (variant) {
+    updatedProps = {...updatedProps, ...type.variants[variant]}
+  }
+  
+  return updatedProps;
 };
 
 export const Text = createComponent('span')({
   displayName: 'Text',
-  Component: ({level, size, variant, ...elemProps}: TextProps, ref, Element) => {
-    const tokenProps = level && size ? type.levels[level][size] : {};
-    const variantColor = variant ? type.variants[variant] : {};
-
+  Component: ({children, ...elemProps}: TextProps, ref, Element) => {
     return (
-      <Box
-        ref={ref}
-        as={Element}
-        {...tokenProps}
-        {...variantColor}
-        {...elemProps}
-        {...validatedProps(elemProps, tokenProps)}
-      />
+      <Box ref={ref} as={Element} {...validateProps(elemProps)}>
+        {children}
+      </Box>
     );
   },
 });

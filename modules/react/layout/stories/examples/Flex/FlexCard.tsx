@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Flex, Box} from '@workday/canvas-kit-react/layout';
 import {PrimaryButton, SecondaryButton} from '@workday/canvas-kit-react/button';
-import {TypeBodyLevel} from '@workday/canvas-kit-preview-react/text';
+import {BodyText} from '@workday/canvas-kit-preview-react/text';
 
 export const FlexCard = () => {
   const [isComplete, setIsComplete] = React.useState(false);
@@ -15,14 +15,12 @@ export const FlexCard = () => {
       borderColor="soap400"
       maxWidth={600}
     >
-      <TypeBodyLevel as="h3" size="large" fontWeight="bold" margin={0}>
+      <BodyText as="h3" size="large" fontWeight="bold" margin={0}>
         Learn about Flex {isComplete && '🥳'}
-      </TypeBodyLevel>
-      <Box paddingY="s">
-        <TypeBodyLevel size="small" margin={0}>
-          Complete this task when you have a functional understanding of Flex.
-        </TypeBodyLevel>
-      </Box>
+      </BodyText>
+      <BodyText size="small" margin={0} paddingY="s">
+        Complete this task when you have a functional understanding of Flex.
+      </BodyText>
       <Flex justifyContent="flex-end">
         <Box marginRight="xxs">
           <PrimaryButton onClick={() => setIsComplete(true)}>Complete</PrimaryButton>

@@ -18,7 +18,7 @@ export const Basic = () => (
     <Box {...type.levels.subtext.large} color="hint" marginBottom="s">
       <Text>Text with inherenced styles</Text>
     </Box>
-    <Text as="p" level="body" size="small">
+    <Text as="p" asToken="body.small">
       Small Body level text
     </Text>
   </Box>

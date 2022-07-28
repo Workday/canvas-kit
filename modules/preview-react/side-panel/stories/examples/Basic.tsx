@@ -1,5 +1,4 @@
 import * as React from 'react';
-import {colors, type} from '@workday/canvas-kit-react/tokens';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {
   SidePanel,
@@ -7,7 +6,7 @@ import {
   SidePanelTransitionStates,
 } from '@workday/canvas-kit-preview-react/side-panel';
 import {Flex} from '@workday/canvas-kit-react/layout';
-import {TypeBodyLevel} from '@workday/canvas-kit-preview-react/text';
+import {BodyText as Heading} from '@workday/canvas-kit-preview-react/text';
 import {CanvasProvider} from '@workday/canvas-kit-react/common';
 import {AccentIcon} from '@workday/canvas-kit-react/icon';
 import {rocketIcon} from '@workday/canvas-accent-icons-web';
@@ -31,15 +30,9 @@ export const Basic = () => {
               <Flex marginInlineEnd="s">
                 <AccentIcon icon={rocketIcon} />
               </Flex>
-              <TypeBodyLevel
-                as="h3"
-                size="large"
-                color="licorice500"
-                fontWeight="bold"
-                {...labelProps}
-              >
+              <Heading as="h3" size="large" color="licorice500" fontWeight="bold" {...labelProps}>
                 Tasks Panel
-              </TypeBodyLevel>
+              </Heading>
             </Flex>
           )}
         </SidePanel>

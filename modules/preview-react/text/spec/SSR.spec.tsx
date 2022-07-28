@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import {renderToString} from 'react-dom/server';
-import {Label, Text, TypeBodyLevel, TypeHeadingLevel, TypeSubtextLevel, TypeTitleLevel} from '../';
+import {Label, Text, BodyText, Heading, Subtext, Title} from '../';
 
 describe('Text', () => {
   it('should render Label on a server without crashing', () => {
@@ -16,23 +16,23 @@ describe('Text', () => {
     expect(ssrRender).not.toThrow();
   });
 
-  it('should render TypeBodyLevel on a server without crashing', () => {
-    const ssrRender = () => renderToString(<TypeBodyLevel size="small">text</TypeBodyLevel>);
+  it('should render BodyText on a server without crashing', () => {
+    const ssrRender = () => renderToString(<BodyText size="small">text</BodyText>);
     expect(ssrRender).not.toThrow();
   });
 
-  it('should render TypeHeadingLevel on a server without crashing', () => {
-    const ssrRender = () => renderToString(<TypeHeadingLevel size="small">text</TypeHeadingLevel>);
+  it('should render Heading on a server without crashing', () => {
+    const ssrRender = () => renderToString(<Heading size="small">text</Heading>);
     expect(ssrRender).not.toThrow();
   });
 
-  it('should render TypeSubtextLevel on a server without crashing', () => {
-    const ssrRender = () => renderToString(<TypeSubtextLevel size="small">text</TypeSubtextLevel>);
+  it('should render Subtext on a server without crashing', () => {
+    const ssrRender = () => renderToString(<Subtext size="small">text</Subtext>);
     expect(ssrRender).not.toThrow();
   });
 
-  it('should render TypeTitleLevel on a server without crashing', () => {
-    const ssrRender = () => renderToString(<TypeTitleLevel size="small">text</TypeTitleLevel>);
+  it('should render Title on a server without crashing', () => {
+    const ssrRender = () => renderToString(<Title size="small">text</Title>);
     expect(ssrRender).not.toThrow();
   });
 });

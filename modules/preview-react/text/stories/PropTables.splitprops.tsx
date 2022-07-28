@@ -10,6 +10,6 @@ export const TextComponent = (_: TextProps) => <div />;
 // Text and Box props. Use this dummy component instead to limit the props shown.
 export const LabelComponent = (_: TypeLabelProps) => <div />;
 
-// <ArgsTable of={TypeHeadingLevel} /> generates a props table with
+// <ArgsTable of={Heading} /> generates a props table with
 // Text and Box props. Use this dummy component instead to limit the props shown.
 export const TypeLevelComponent = (_: TypeLevelProps) => <div />;

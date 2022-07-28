@@ -6,7 +6,7 @@ import {colors, gradients, space} from '@workday/canvas-kit-react/tokens';
 import {HStack, HStackProps, StackSpacing} from '@workday/canvas-kit-react/layout';
 import {TertiaryButton} from '@workday/canvas-kit-react/button';
 import {justifyIcon, notificationsIcon} from '@workday/canvas-system-icons-web';
-import {TypeHeadingLevel} from '@workday/canvas-kit-preview-react/text';
+import {Heading} from '@workday/canvas-kit-preview-react/text';
 
 interface HeaderItemProps extends Omit<HStackProps, 'spacing'> {
   spacing?: StackSpacing;
@@ -32,7 +32,7 @@ const PageHeaderItem = createComponent('div')({
 const PageHeaderTitle = createComponent('h2')({
   displayName: 'PageHeader.Title',
   Component: ({children, ...props}, ref, Element) => (
-    <TypeHeadingLevel
+    <Heading
       as={Element}
       ref={ref}
       size="medium"
@@ -43,7 +43,7 @@ const PageHeaderTitle = createComponent('h2')({
       {...props}
     >
       {children}
-    </TypeHeadingLevel>
+    </Heading>
   ),
 });
 
