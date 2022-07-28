@@ -313,7 +313,12 @@ export const Radio = createComponent('input')({
           </RadioBackground>
         </RadioInputWrapper>
         {label && (
-          <Label paddingLeft={radioLabelDistance} htmlFor={inputId} disabled={disabled}>
+          <Label
+            paddingLeft={radioLabelDistance}
+            htmlFor={inputId}
+            disabled={disabled}
+            variant={variant}
+          >
             {label}
           </Label>
         )}

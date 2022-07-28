@@ -7,7 +7,7 @@ import {ComponentStatesTable, permutateProps} from '@workday/canvas-kit-labs-rea
 import {withSnapshotsEnabled} from '../../../../../utils/storybook';
 import {ExternalHyperlink} from '@workday/canvas-kit-react/button';
 import {Container} from './utils';
-import {VStack} from '@workday/canvas-kit-react/layout';
+import {Box, VStack} from '@workday/canvas-kit-react/layout';
 import {BodyText, Subtext} from '@workday/canvas-kit-preview-react/text';
 
 export default withSnapshotsEnabled({
@@ -39,9 +39,9 @@ export const ExternalHyperlinkStates = () => (
       >
         {(props: any) => (
           <Container blue={props.variant === 'inverse'}>
-            <Subtext as="div" size="large" color={props.variant === 'inverse' ? 'inverse' : '#000'}>
+            <Box as="span" color={props.variant === 'inverse' ? 'frenchVanilla100' : undefined}>
               Here's a <ExternalHyperlink {...props}>Link</ExternalHyperlink> to something
-            </Subtext>
+            </Box>
           </Container>
         )}
       </ComponentStatesTable>

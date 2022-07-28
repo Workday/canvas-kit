@@ -32,7 +32,7 @@ const validateProps = ({asToken, variant, ...props}: TextProps) => {
     const tokenProps = type.levels[level][size];
 
     tokenPropNames.forEach((item) => {
-      if (item in props && item in tokenProps && !props[item as keyof typeof props]) {
+      if (!props[item as keyof typeof props]) {
         updatedProps[item] = tokenProps[item as keyof typeof tokenProps];
       }
     });
@@ -49,6 +49,8 @@ const validateProps = ({asToken, variant, ...props}: TextProps) => {
 export const Text = createComponent('span')({
   displayName: 'Text',
   Component: ({children, ...elemProps}: TextProps, ref, Element) => {
+    console.log(validateProps(elemProps));
+    
     return (
       <Box ref={ref} as={Element} {...validateProps(elemProps)}>
         {children}

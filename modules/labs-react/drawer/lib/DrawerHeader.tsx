@@ -72,6 +72,7 @@ export class DrawerHeader extends React.Component<DrawerHeaderProps, {}> {
       id,
       ...elemProps
     } = this.props;
+    const variant = inverse ? 'inverse' : undefined;
 
     return (
       <HeaderContainer borderColor={borderColor} {...elemProps} headerColor={headerColor}>
@@ -80,7 +81,8 @@ export class DrawerHeader extends React.Component<DrawerHeaderProps, {}> {
           size="small"
           title={title}
           fontWeight="bold"
-          color={inverse ? 'inverse' : typeColors.heading}
+          color={typeColors.heading}
+          variant={variant}
           paddingRight="xxxs"
           whiteSpace="nowrap"
           textOverflow="ellipsis"
@@ -90,7 +92,7 @@ export class DrawerHeader extends React.Component<DrawerHeaderProps, {}> {
         </Heading>
         {onClose && closeIconAriaLabel && (
           <CloseButton
-            variant={inverse ? 'inverse' : undefined}
+            variant={variant}
             onClick={onClose}
             aria-label={closeIconAriaLabel}
             icon={xIcon}
