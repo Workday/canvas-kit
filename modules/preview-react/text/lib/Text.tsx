@@ -28,10 +28,13 @@ const validateProps = ({asToken, variant, ...props}: TextProps) => {
   by replacing them by token value
   */
   if (asToken) {
-    const [level, size] = asToken.split('.') as [keyof CanvasTypeHierarchy, 'large'|'medium'|'small'];
+    const [level, size] = asToken.split('.') as [
+      keyof CanvasTypeHierarchy,
+      'large' | 'medium' | 'small'
+    ];
     const tokenProps = type.levels[level][size];
 
-    tokenPropNames.forEach((item) => {
+    tokenPropNames.forEach(item => {
       if (!props[item as keyof typeof props]) {
         updatedProps[item] = tokenProps[item as keyof typeof tokenProps];
       }
@@ -40,21 +43,17 @@ const validateProps = ({asToken, variant, ...props}: TextProps) => {
 
   // If variant provided it updates color value by variant color
   if (variant) {
-    updatedProps = {...updatedProps, ...type.variants[variant]}
+    updatedProps = {...updatedProps, ...type.variants[variant]};
   }
-  
+
   return updatedProps;
 };
 
 export const Text = createComponent('span')({
   displayName: 'Text',
-  Component: ({children, ...elemProps}: TextProps, ref, Element) => {
-    console.log(validateProps(elemProps));
-    
-    return (
-      <Box ref={ref} as={Element} {...validateProps(elemProps)}>
-        {children}
-      </Box>
-    );
-  },
+  Component: ({children, ...elemProps}: TextProps, ref, Element) => (
+    <Box ref={ref} as={Element} {...validateProps(elemProps)}>
+      {children}
+    </Box>
+  ),
 });
