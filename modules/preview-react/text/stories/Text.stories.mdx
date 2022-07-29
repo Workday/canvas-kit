@@ -29,8 +29,8 @@ yarn add @workday/canvas-kit-preview-react
 `Text` is the base component that is used to render text in the UI. It is built off of our `Box`
 component which allows the use of styles props such as `display`, `margin`, `padding` as well as the
 most common type styles such as `fontWeight`, `fontSize` amongst others. This component is an
-extension of our type tokens(insert link), therefore, props like `variant`, `level` and `size` all
-exists.
+extension of our [type tokens](https://canvas.workdaydesign.com/tokens/type/#type-styles),
+therefore, props like `tokenLevel` and `variant` all exists.
 
 By default `Text` component is a `span` element, but it's possible to override the element by
 passing `as` prop.
@@ -67,7 +67,7 @@ cursor or disabled style.
 
 ### Label Props
 
-In addition to `Box` component props, `Label` has the following props:
+In addition to `Text` component props, `Label` has the following props:
 
 <ArgsTable of={LabelComponent} />
 
@@ -87,7 +87,7 @@ example below:
 
 ### Props
 
-In addition to `Box` component props, each type level components has the following props:
+In addition to `Text` component props, each type level components has the following props:
 
 <ArgsTable of={TypeLevelComponent} />
 

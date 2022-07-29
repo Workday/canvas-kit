@@ -6,38 +6,38 @@ import {Text, TextProps} from '@workday/canvas-kit-preview-react/text';
  * Props interface for type level specific component:
  * Title, Heading, BodyText, Subtext.
  */
-export interface TypeLevelProps extends Omit<TextProps, 'asToken'> {
+export interface TypeLevelProps extends Omit<TextProps, 'tokenLevel'> {
   size: 'large' | 'medium' | 'small';
 }
 
 export const Subtext = createComponent('p')({
   displayName: 'Subtext',
   Component: ({size, ...elemProps}: TypeLevelProps, ref, Element) => {
-    const asToken = `subtext.${size}` as TextProps['asToken'];
-    return <Text ref={ref} as={Element} asToken={asToken} {...elemProps} />;
+    const tokenLevel = `subtext.${size}` as TextProps['tokenLevel'];
+    return <Text ref={ref} as={Element} tokenLevel={tokenLevel} {...elemProps} />;
   },
 });
 
 export const BodyText = createComponent('p')({
   displayName: 'BodyText',
   Component: ({size, ...elemProps}: TypeLevelProps, ref, Element) => {
-    const asToken = `body.${size}` as TextProps['asToken'];
-    return <Text ref={ref} as={Element} asToken={asToken} {...elemProps} />;
+    const tokenLevel = `body.${size}` as TextProps['tokenLevel'];
+    return <Text ref={ref} as={Element} tokenLevel={tokenLevel} {...elemProps} />;
   },
 });
 
 export const Heading = createComponent('h2')({
   displayName: 'Heading',
   Component: ({size, ...elemProps}: TypeLevelProps, ref, Element) => {
-    const asToken = `heading.${size}` as TextProps['asToken'];
-    return <Text ref={ref} as={Element} asToken={asToken} {...elemProps} />;
+    const tokenLevel = `heading.${size}` as TextProps['tokenLevel'];
+    return <Text ref={ref} as={Element} tokenLevel={tokenLevel} {...elemProps} />;
   },
 });
 
 export const Title = createComponent('h1')({
   displayName: 'Title',
   Component: ({size, ...elemProps}: TypeLevelProps, ref, Element) => {
-    const asToken = `title.${size}` as TextProps['asToken'];
-    return <Text ref={ref} as={Element} asToken={asToken} {...elemProps} />;
+    const tokenLevel = `title.${size}` as TextProps['tokenLevel'];
+    return <Text ref={ref} as={Element} tokenLevel={tokenLevel} {...elemProps} />;
   },
 });

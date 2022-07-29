@@ -50,8 +50,8 @@ export const TextStates = () => (
           props: {color: 'blueberry300'},
         },
         {
-          label: 'With color as a variant name',
-          props: {color: 'error'},
+          label: 'With variant',
+          props: {variant: 'error'},
         },
         {
           label: 'With letter-spacing of 0.5rem',
@@ -185,7 +185,6 @@ export const LabelStates = () => (
       rowProps={[
         {label: 'Default', props: {}},
         {label: 'Disabled', props: {disabled: true}},
-        {label: 'With cursor', props: {cursor: 'pointer'}},
       ]}
       columnProps={[
         {
