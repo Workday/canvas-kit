@@ -19,6 +19,8 @@ export interface TextProps extends BoxProps {
  * Function returns updated props by token and variant values
  */
 const validateProps = ({asToken, variant, ...props}: TextProps) => {
+  console.log(props);
+  
   let updatedProps: any = props;
   const tokenPropNames = [
     'color',
@@ -52,6 +54,7 @@ const validateProps = ({asToken, variant, ...props}: TextProps) => {
   if (variant) {
     updatedProps = {...updatedProps, ...type.variants[variant]};
   }
+  
 
   return updatedProps;
 };

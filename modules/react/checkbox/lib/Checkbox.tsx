@@ -361,7 +361,12 @@ export const Checkbox = createComponent('input')({
           </CheckboxBackground>
         </CheckboxInputWrapper>
         {label && (
-          <Label htmlFor={inputId} disabled={disabled} paddingLeft={checkboxLabelDistance}>
+          <Label
+            htmlFor={inputId}
+            disabled={disabled}
+            variant={variant}
+            paddingLeft={checkboxLabelDistance}
+          >
             {label}
           </Label>
         )}
