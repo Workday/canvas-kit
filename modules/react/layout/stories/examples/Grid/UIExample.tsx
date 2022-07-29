@@ -47,7 +47,7 @@ export const UIExample = () => {
     gridTemplateAreas:
       "'Header Header Header Header' 'SideBar BodyContent BodyContent BodyContent' 'Footer Footer Footer Footer'",
     gridGap: fontSizes[16],
-    gridTemplateColumns: '1fr 3fr',
+    gridTemplateColumns: '3fr 9fr',
     gridTemplateRows: 'auto 300px auto',
   };
   return (
