@@ -39,9 +39,9 @@ export const ExternalHyperlinkStates = () => (
       >
         {(props: any) => (
           <Container blue={props.variant === 'inverse'}>
-            <Box as="span" color={props.variant === 'inverse' ? 'frenchVanilla100' : undefined}>
+            <Subtext size="large" color="#000" variant={props.variant}>
               Here's a <ExternalHyperlink {...props}>Link</ExternalHyperlink> to something
-            </Box>
+            </Subtext>
           </Container>
         )}
       </ComponentStatesTable>
