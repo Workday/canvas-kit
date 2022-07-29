@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {type, space} from '@workday/canvas-kit-react/tokens';
+import {type, space, typeColors} from '@workday/canvas-kit-react/tokens';
 import {accessibleHide, styled, StyledType} from '@workday/canvas-kit-react/common';
 
 import {PaginationModel} from './types';
@@ -39,7 +39,7 @@ export const AdditionalDetails = ({
   return (
     <StyledAdditionalDetails
       {...type.levels.subtext.medium}
-      color="hint"
+      color={typeColors.hint}
       {...liveRegionProps}
       {...elemProps}
     >

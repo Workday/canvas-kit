@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {type} from '@workday/canvas-kit-react/tokens';
+import {type, typeColors} from '@workday/canvas-kit-react/tokens';
 import {Box} from '@workday/canvas-kit-react';
 import {Text} from '@workday/canvas-kit-preview-react/text';
 
@@ -13,7 +13,7 @@ export const Basic = () => (
     <Text as="p" {...type.levels.subtext.large}>
       Text with type token passed
     </Text>
-    <Box {...type.levels.subtext.large} color="hint" marginBottom="s">
+    <Box {...type.levels.subtext.large} color={typeColors.hint} marginBottom="s">
       <Text>Text with inherenced styles</Text>
     </Box>
     <Text as="p" asToken="body.small">
