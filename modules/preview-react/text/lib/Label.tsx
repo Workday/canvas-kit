@@ -14,12 +14,13 @@ const StyledLabel = styled(Text.as('label'))<StyledType & TypeLabelProps>(({curs
 
 export const Label = createComponent('label')({
   displayName: 'Label',
-  Component: (elemProps: TypeLabelProps, ref, Element) => (
+  Component: ({disabled, variant, ...elemProps}: TypeLabelProps, ref, Element) => (
     <StyledLabel
       ref={ref}
       as={Element}
       asToken="subtext.large"
-      color={elemProps.disabled ? 'licorice100' : undefined}
+      color={disabled ? 'licorice100' : undefined}
+      variant={!disabled ? variant : undefined}
       {...elemProps}
     />
   ),
