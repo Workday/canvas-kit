@@ -20,7 +20,14 @@ export interface TextProps extends BoxProps {
  */
 const validateProps = ({asToken, variant, ...props}: TextProps) => {
   let updatedProps: any = props;
-  const tokenPropNames = ['fontFamily', 'fontSize', 'lineHeight', 'fontWeight', 'color'];
+  const tokenPropNames = [
+    'color',
+    'fontFamily',
+    'fontSize',
+    'fontWeight',
+    'letterSpacing',
+    'lineHeight',
+  ];
 
   /*
   If token provided it updates undefined values of token styles:
