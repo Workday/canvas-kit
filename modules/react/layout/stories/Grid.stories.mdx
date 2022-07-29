@@ -37,14 +37,14 @@ allows the parent container to control how its children render. For page layouts
 uses a 12 column grid. In the example below, the Sidebar is 3 columns and the Body Content is 9
 columns.
 
-> Note: You can learn more about CSS Grid's `gridArea` and `gridTemplateAreas` >
+> Note: You can learn more about CSS Grid's `gridArea` and `gridTemplateAreas`
 > [here](https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-areas).
 
 <ExampleCodeBlock code={UIExample} />
 
 ### Using Grid Items
 
-In the example above we nested `Grid` components to created our layout, and we controlled the layout
+In the example above we nested `Grid` components to create our layout, and we controlled the layout
 structure from the top-level `Grid` container. That's a perfectly valid approach. However, we can
 also use `Grid.Item` components to allow child cells to have more control. While any direct child of
 a `Grid` component is implicitly a grid item, `Grid.Item` provides special CSS Grid Item style props
@@ -58,17 +58,17 @@ position adjust accordingly.
 
 > Note: This example is solely intended to demonstrate the `Grid.Item`'s functionality and is NOT
 > considered an accessibility best practice. Visually reordering content does not change the order
-> it is read by a screen reader or the tab order. You can learn more about CSS Grid Layout and
-> Accessibility
+> it is read by a screen reader or the tab order. You can learn more about CSS Grid layout and
+> accessibility
 > [here](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout/CSS_Grid_Layout_and_Accessibility).
 
 <ExampleCodeBlock code={GridLayoutInteractive} />
 
-In the second example below, we have a `Grid` container. It contains two rows with one having seven
-elements and the other has two elements. This example is to show how a user can use the
-`<Grid.Item/>` component to wrap a `<Grid/>` component. This would allow a user to have access to
-the child props of `<Grid.Item/>` to place a layout where needed. The row with elements 3 - 7 is put
-before the 1 & 2 elements since that layout is wrapped by the `<Grid.Item/>` component.
+Let's look at another `Grid.Item` example. Below, we have a `Grid` container with two rows: one with
+seven elements and the other with two elements. This example is to show how a user can use the
+`<Grid.Item/>` component to wrap a `Grid` component. This would allow a user to have access to the
+child props of `Grid.Item` to place a layout where needed. The row with elements 3 - 7 is put before
+the 1 & 2 elements since that layout is wrapped by the `Grid.Item` component.
 
 <ExampleCodeBlock code={GridLayout} />
 
