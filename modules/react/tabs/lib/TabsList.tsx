@@ -44,12 +44,12 @@ export const useTabsList = composeHooks(
 );
 
 const StyledStack = styled(Stack)<StyledType>({
+  maskImage: `linear-gradient(to right, white 95%, transparent)`,
   '::after': {
     content: '""',
     position: 'sticky',
     height: 52,
     minWidth: 30,
-    background: `linear-gradient(to right,rgba(255,255,255,0),white);`,
     zIndex: 1,
     right: 0,
     top: 0,
