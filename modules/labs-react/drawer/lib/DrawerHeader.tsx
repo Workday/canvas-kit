@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled from '@emotion/styled';
 import {colors, space, CanvasColor, typeColors} from '@workday/canvas-kit-react/tokens';
 import {TertiaryButton} from '@workday/canvas-kit-react/button';
-import {BodyText as Heading} from '@workday/canvas-kit-preview-react/text';
+import {Text} from '@workday/canvas-kit-preview-react/text';
 import {xIcon} from '@workday/canvas-system-icons-web';
 
 export interface DrawerHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
