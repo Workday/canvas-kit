@@ -19,9 +19,9 @@ export const AlwaysOpen = () => {
       <SidePanel {...panelProps}>
         <Flex alignItems="center" paddingY="s" paddingX="s">
           <StyledAccentIcon icon={rocketIcon} />
-          <Heading as="h3" size="large" color="licorice500" fontWeight="bold" {...labelProps}>
+          <Text as="h3" tokenLevel="body.large" color="licorice500" fontWeight="bold" {...labelProps}>
             Tasks Panel
-          </Heading>
+          </Text>
         </Flex>
       </SidePanel>
     </HStack>
