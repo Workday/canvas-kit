@@ -19,7 +19,7 @@ export const Basic = () => {
         <Flex alignItems="center" paddingY="s" paddingX="s">
           <Text as="h3" typeLevel="body.large" fontWeight="bold" color="licorice500">
             Alternate Panel
-          </Heading>
+          </Text>
         </Flex>
       </StyledPanel>
       <Box position="absolute" background="rgba(0,0,0,0.65)" height="100%" width="100%" />
