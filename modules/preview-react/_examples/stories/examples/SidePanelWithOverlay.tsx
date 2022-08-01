@@ -17,7 +17,7 @@ export const Basic = () => {
     <Flex height={320} backgroundColor="soap100" position="relative">
       <StyledPanel touched={true} variant="alternate">
         <Flex alignItems="center" paddingY="s" paddingX="s">
-          <Heading as="h3" size="large" fontWeight="bold" color="licorice500">
+          <Text as="h3" typeLevel="body.large" fontWeight="bold" color="licorice500">
             Alternate Panel
           </Heading>
         </Flex>
