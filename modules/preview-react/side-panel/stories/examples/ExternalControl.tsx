@@ -5,7 +5,7 @@ import {
   SidePanelTransitionStates,
 } from '@workday/canvas-kit-preview-react/side-panel';
 import {Flex} from '@workday/canvas-kit-react/layout';
-import {BodyText as Heading} from '@workday/canvas-kit-preview-react/text';
+import {Text} from '@workday/canvas-kit-preview-react/text';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
 
 export const ExternalControl = () => {
