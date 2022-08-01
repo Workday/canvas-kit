@@ -30,9 +30,9 @@ export const Basic = () => {
               <Flex marginInlineEnd="s">
                 <AccentIcon icon={rocketIcon} />
               </Flex>
-              <Heading as="h3" size="large" color="licorice500" fontWeight="bold" {...labelProps}>
+              <Text as="h3" tokenLevel="body.large" color="licorice500" fontWeight="bold" {...labelProps}>
                 Tasks Panel
-              </Heading>
+              </Text>
             </Flex>
           )}
         </SidePanel>
