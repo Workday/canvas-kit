@@ -16,9 +16,9 @@ export const CardHeading = createComponent('h3')({
   displayName: 'Card.Heading',
   Component: ({children, ...elemProps}: CardHeadingProps, ref, Element) => {
     return (
-      <Heading
+      <Text
         ref={ref}
-        size="large"
+        tokenLevel="body.large"
         fontWeight="bold"
         marginBottom="m"
         marginTop={0}
