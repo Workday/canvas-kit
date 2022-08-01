@@ -89,7 +89,7 @@ export class DrawerHeader extends React.Component<DrawerHeaderProps, {}> {
           overflow="hidden"
         >
           {title}
-        </Heading>
+        </Text>
         {onClose && closeIconAriaLabel && (
           <CloseButton
             variant={variant}
