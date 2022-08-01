@@ -26,7 +26,7 @@ export const CardHeading = createComponent('h3')({
         {...elemProps}
       >
         {children}
-      </Heading>
+      </Text>
     );
   },
 });
