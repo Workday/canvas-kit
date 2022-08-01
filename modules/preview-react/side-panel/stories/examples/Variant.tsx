@@ -25,9 +25,9 @@ export const AlternatePanel = () => {
           <SidePanel.ToggleButton {...controlProps} />
           {panelState === 'expanded' && (
             <Flex alignItems="center" paddingY="s" paddingX="s">
-              <Heading as="h3" size="large" color="licorice500" fontWeight="bold" {...labelProps}>
+              <Text as="h3" tokenLevel="body.large" color="licorice500" fontWeight="bold" {...labelProps}>
                 Alternate Panel
-              </Heading>
+              </Text>
             </Flex>
           )}
         </SidePanel>
