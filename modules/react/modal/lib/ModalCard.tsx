@@ -1,28 +1,31 @@
 import * as React from 'react';
 
-import {createSubcomponent, ExtractProps, useModalityType} from '@workday/canvas-kit-react/common';
+import {
+  createSubcomponent,
+  ExtractProps,
+  StyledType,
+  styled,
+} from '@workday/canvas-kit-react/common';
+import {space} from '@workday/canvas-kit-react/tokens';
 import {Popup} from '@workday/canvas-kit-react/popup';
 
 import {useModalCard, useModalModel} from './hooks';
 
 export interface ModalCardProps extends ExtractProps<typeof Popup.Card, never> {}
 
+const ResponsiveModalCard = styled(Popup.Card)<ModalCardProps & StyledType>(({theme}) => ({
+  margin: space.xl,
+  padding: space.l,
+  [theme.canvas.breakpoints.down('s')]: {
+    margin: `0 0 ${space.xl}`,
+    padding: space.m,
+  },
+}));
+
 export const ModalCard = createSubcomponent('div')({
   displayName: 'Modal.Card',
   modelHook: useModalModel,
   elemPropsHook: useModalCard,
 })<ModalCardProps>((elemProps, Element) => {
-  const modality = useModalityType();
-
-  return (
-    <Popup.Card
-      as={Element}
-      width={440}
-      borderWidth={0}
-      margin={modality === 'touch' ? '0 0 40px' : 'xl'}
-      padding={modality === 'touch' ? 'm' : 'l'}
-      depth={6}
-      {...elemProps}
-    />
-  );
+  return <ResponsiveModalCard as={Element} width={440} borderWidth={0} depth={6} {...elemProps} />;
 });
