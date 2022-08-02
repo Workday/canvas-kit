@@ -10,7 +10,7 @@ import {ListBox, useListRenderItems} from '@workday/canvas-kit-react/collection'
 
 import {useColorPickerModel} from './useColorPickerModel';
 import {Flex} from '@workday/canvas-kit-react/layout';
-import {swatchButtonSize} from './ColorPicker.SwatchButton';
+import {swatchButtonSize} from './ColorPickerSwatchButton';
 
 export interface SwatchBookProps<T = any> extends Partial<ExtractProps<typeof Flex, never>> {
   colors?: string[];

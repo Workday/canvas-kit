@@ -3,12 +3,12 @@ import React from 'react';
 import {createContainer} from '@workday/canvas-kit-react/common';
 
 import {useColorPickerModel} from './useColorPickerModel';
-import Swatch from './ColorPicker.Swatch';
-import ColorInput from './ColorPicker.Input';
-import CustomColorForm from './ColorPicker.Form';
-import SubmitButton from './ColorPicker.SubmitButton';
-import SwatchButton from './ColorPicker.SwatchButton';
-import SwatchBook from './ColorPicker.SwatchBook';
+import Swatch from './ColorPickerSwatch';
+import ColorInput from './ColorPickerInput';
+import CustomColorForm from './ColorPickerForm';
+import SubmitButton from './ColorPickerSubmitButton';
+import SwatchButton from './ColorPickerSwatchButton';
+import SwatchBook from './ColorPickerSwatchBook';
 // import {Menu} from '@workday/canvas-kit-react/menu';
 
 export interface ColorPickerProps {

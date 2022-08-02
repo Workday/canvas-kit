@@ -4,7 +4,7 @@ import {FormField, FormFieldProps} from '@workday/canvas-kit-react/form-field';
 import {HStack} from '@workday/canvas-kit-react/layout';
 import * as React from 'react';
 import {useColorPickerModel} from './useColorPickerModel';
-import {formatValue} from './ColorPicker.Input';
+import {formatValue} from './ColorPickerInput';
 
 export interface CustomColorFormProps {
   children: React.ReactNode;
