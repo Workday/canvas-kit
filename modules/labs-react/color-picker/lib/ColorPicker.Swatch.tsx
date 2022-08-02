@@ -63,9 +63,6 @@ export default createSubcomponent('div')({
   displayName: 'Swatch',
   modelHook: useColorPickerModel,
 })<ColorSwatchProps>(({color, showCheck = false, ...elemProps}, Element, model) => {
-  console.log('state color', model.state.color !== '');
-  console.log('scolor', color);
-
   return (
     <StyledContainer
       color={color}

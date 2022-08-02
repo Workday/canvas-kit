@@ -8,7 +8,6 @@ import ColorInput from './ColorPicker.Input';
 import CustomColorForm from './ColorPicker.Form';
 import SubmitButton from './ColorPicker.SubmitButton';
 import SwatchButton from './ColorPicker.SwatchButton';
-import SwatchRow from './ColorPicker.SwatchRow';
 import SwatchBook from './ColorPicker.SwatchBook';
 // import {Menu} from '@workday/canvas-kit-react/menu';
 
@@ -21,7 +20,6 @@ export const ColorPicker = createContainer()({
   modelHook: useColorPickerModel,
   subComponents: {
     SwatchBook: SwatchBook,
-    SwatchRow: SwatchRow,
     SwatchButton: SwatchButton,
     SubmitButton: SubmitButton,
     CustomColorForm: CustomColorForm,

@@ -111,20 +111,11 @@ export const WithPopup = () => {
   useCloseOnEscape(model);
   useCloseOnOutsideClick(model);
 
-  const onBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-    console.log('blur', e.currentTarget, e.relatedTarget, model.state.stackRef.current);
-    if (
-      !model.state.stackRef.current ||
-      !model.state.stackRef.current.contains(e.relatedTarget as Node)
-    ) {
-      model.events.show();
-    }
-  };
   return (
     <>
       <Popup model={model}>
         <ColorPicker model={colorPickerModel}>
-          <Popup.Target as={ColorPicker.Input} onFocus={onBlur} />
+          <Popup.Target as={ColorPicker.Input} />
         </ColorPicker>
         <Popup.Popper>
           <Popup.Card style={{marginTop: 8}} padding="s" depth={3}>
