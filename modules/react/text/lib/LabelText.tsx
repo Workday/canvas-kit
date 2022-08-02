@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Property} from 'csstype';
 import {createComponent, styled, StyledType} from '@workday/canvas-kit-react/common';
-import {Text, TextProps} from '@workday/canvas-kit-preview-react/text';
+import {Text, TextProps} from '@workday/canvas-kit-react/text';
 import {inputColors} from '@workday/canvas-kit-react/tokens';
 
 export interface TypeLabelProps extends TextProps {
@@ -17,7 +17,7 @@ const StyledLabel = styled(Text.as('label'))<StyledType & TypeLabelProps>(
   })
 );
 
-export const Label = createComponent('label')({
+export const LabelText = createComponent('label')({
   displayName: 'Label',
   Component: (elemProps: TypeLabelProps, ref, Element) => {
     return <StyledLabel ref={ref} as={Element} tokenLevel="subtext.large" {...elemProps} />;

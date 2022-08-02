@@ -5,7 +5,7 @@ import {
   SidePanelTransitionStates,
 } from '@workday/canvas-kit-preview-react/side-panel';
 import {Flex} from '@workday/canvas-kit-react/layout';
-import {Text} from '@workday/canvas-kit-preview-react/text';
+import {Text} from '@workday/canvas-kit-react/text';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
 
 export const ExternalControl = () => {
@@ -26,7 +26,13 @@ export const ExternalControl = () => {
       >
         {panelState === 'expanded' && (
           <Flex alignItems="center" paddingY="s" paddingX="s">
-            <Text as="h3" tokenLevel="body.large" color="licorice500" fontWeight="bold" {...labelProps}>
+            <Text
+              as="h3"
+              tokenLevel="body.large"
+              color="licorice500"
+              fontWeight="bold"
+              {...labelProps}
+            >
               Tasks Panel
             </Text>
           </Flex>

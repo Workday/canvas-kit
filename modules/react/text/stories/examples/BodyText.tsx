@@ -1,5 +1,5 @@
 import React from 'react';
-import {BodyText as BodyTextComponent} from '@workday/canvas-kit-preview-react/text';
+import {BodyText as BodyTextComponent} from '@workday/canvas-kit-react/text';
 
 export const BodyText = () => (
   <>

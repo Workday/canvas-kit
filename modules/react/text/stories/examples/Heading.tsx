@@ -1,5 +1,5 @@
 import React from 'react';
-import {Heading as HeadingComponent} from '@workday/canvas-kit-preview-react/text';
+import {Heading as HeadingComponent} from '@workday/canvas-kit-react/text';
 
 export const Heading = () => (
   <>

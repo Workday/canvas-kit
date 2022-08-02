@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {Text, TextProps} from '@workday/canvas-kit-preview-react/text';
+import {Text, TextProps} from '@workday/canvas-kit-react/text';
 
 /**
  * Props interface for type level specific component:

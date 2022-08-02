@@ -1,5 +1,5 @@
 import React from 'react';
-import {Subtext as SubtextComponent} from '@workday/canvas-kit-preview-react/text';
+import {Subtext as SubtextComponent} from '@workday/canvas-kit-react/text';
 
 export const Subtext = () => (
   <>

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Label as LabelText} from '@workday/canvas-kit-preview-react/text';
+import {LabelText} from '@workday/canvas-kit-react/text';
 
 export const Label = () => (
   <>

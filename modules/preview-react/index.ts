@@ -5,7 +5,6 @@ export * from './menu';
 export * from './pill';
 export * from './select';
 export * from './side-panel';
-export * from './text';
 export * from './text-area';
 export * from './text-input';
 

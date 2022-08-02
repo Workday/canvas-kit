@@ -3,13 +3,13 @@ import {StaticStates} from '@workday/canvas-kit-react/common';
 import {ComponentStatesTable} from '@workday/canvas-kit-labs-react/common';
 import {colors} from '@workday/canvas-kit-react/tokens';
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
-import {BodyText, Heading, Label, Subtext, Text, Title} from '../';
+import {BodyText, Heading, LabelText, Subtext, Text, Title} from '../';
 import {Box} from '@workday/canvas-kit-react/layout';
 
 type TypeStateProp = {size: 'small' | 'medium' | 'large'};
 
 export default withSnapshotsEnabled({
-  title: 'Testing/React/Preview/Text',
+  title: 'Testing/React/Containers/Text',
   component: Text,
 });
 
@@ -193,7 +193,7 @@ export const LabelStates = () => (
         },
       ]}
     >
-      {(props: TypeStateProp) => <Label {...props}>Lorem ipsum title.</Label>}
+      {(props: TypeStateProp) => <LabelText {...props}>Lorem ipsum title.</LabelText>}
     </ComponentStatesTable>
   </StaticStates>
 );

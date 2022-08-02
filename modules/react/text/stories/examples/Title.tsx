@@ -1,5 +1,5 @@
 import React from 'react';
-import {Title as TitleComponent} from '@workday/canvas-kit-preview-react/text';
+import {Title as TitleComponent} from '@workday/canvas-kit-react/text';
 
 export const Title = () => (
   <>

@@ -6,7 +6,7 @@ import {
   SidePanelTransitionStates,
 } from '@workday/canvas-kit-preview-react/side-panel';
 import {Flex} from '@workday/canvas-kit-react/layout';
-import {Text} from '@workday/canvas-kit-preview-react/text';
+import {Text} from '@workday/canvas-kit-react/text';
 import {CanvasProvider} from '@workday/canvas-kit-react/common';
 import {AccentIcon} from '@workday/canvas-kit-react/icon';
 import {rocketIcon} from '@workday/canvas-accent-icons-web';
@@ -30,7 +30,13 @@ export const Basic = () => {
               <Flex marginInlineEnd="s">
                 <AccentIcon icon={rocketIcon} />
               </Flex>
-              <Text as="h3" tokenLevel="body.large" color="licorice500" fontWeight="bold" {...labelProps}>
+              <Text
+                as="h3"
+                tokenLevel="body.large"
+                color="licorice500"
+                fontWeight="bold"
+                {...labelProps}
+              >
                 Tasks Panel
               </Text>
             </Flex>

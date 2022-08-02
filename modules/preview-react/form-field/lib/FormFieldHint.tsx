@@ -3,7 +3,7 @@ import {createSubcomponent, ExtractProps, useTheme} from '@workday/canvas-kit-re
 import {space} from '@workday/canvas-kit-react/tokens';
 
 import {useFormFieldHint, useFormFieldModel} from './hooks';
-import {Subtext} from '@workday/canvas-kit-preview-react/text';
+import {Subtext} from '@workday/canvas-kit-react/text';
 
 export const FormFieldHint = createSubcomponent('p')({
   displayName: 'FormField.Hint',

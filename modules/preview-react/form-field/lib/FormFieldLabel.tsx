@@ -2,7 +2,7 @@ import React from 'react';
 
 import {createSubcomponent, ExtractProps, useTheme} from '@workday/canvas-kit-react/common';
 import {HStack, StackSpacing} from '@workday/canvas-kit-react/layout';
-import {Label, Text} from '@workday/canvas-kit-preview-react/text';
+import {LabelText, Text} from '@workday/canvas-kit-react/text';
 import {useFormFieldLabel, useFormFieldModel} from './hooks';
 
 export interface FormFieldLabelProps extends Omit<ExtractProps<typeof HStack, never>, 'spacing'> {
@@ -26,9 +26,9 @@ export const FormFieldLabel = createSubcomponent('label')({
 
   return (
     <HStack as={Element} spacing={spacing} minWidth="180px" {...elemProps}>
-      <Label as="span" fontWeight="medium">
+      <LabelText as="span" fontWeight="medium">
         {children}
-      </Label>
+      </LabelText>
       {model.state.isRequired && (
         <Text
           fontSize={20}

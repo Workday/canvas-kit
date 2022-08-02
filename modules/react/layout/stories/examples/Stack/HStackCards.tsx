@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {HStack, Stack, Flex, Box} from '@workday/canvas-kit-react/layout';
 import {TertiaryButton} from '@workday/canvas-kit-react/button';
-import {BodyText, Heading} from '@workday/canvas-kit-preview-react/text';
+import {BodyText, Heading} from '@workday/canvas-kit-react/text';
 
 const Card = ({heading = '', body = ''}) => (
   <Flex flex={1} flexBasis="auto" depth={1} padding="s" backgroundColor="frenchVanilla100">

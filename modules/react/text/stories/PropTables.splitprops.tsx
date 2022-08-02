@@ -1,5 +1,5 @@
 import React from 'react';
-import {TextProps, TypeLabelProps, TypeLevelProps} from '@workday/canvas-kit-preview-react/text';
+import {TextProps, TypeLabelProps, TypeLevelProps} from '@workday/canvas-kit-react/text';
 
 // <ArgsTable of={Text} /> generates a very large props table given that
 // Text includes BoxProps. Use this dummy component instead to

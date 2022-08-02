@@ -14,7 +14,7 @@ import {
 import {borderRadius, colors, inputColors, spaceNumbers} from '@workday/canvas-kit-react/tokens';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {checkSmallIcon} from '@workday/canvas-system-icons-web';
-import {Label} from '@workday/canvas-kit-preview-react/text';
+import {LabelText} from '@workday/canvas-kit-react/text';
 
 export interface CheckboxProps extends Themeable {
   /**
@@ -361,14 +361,14 @@ export const Checkbox = createComponent('input')({
           </CheckboxBackground>
         </CheckboxInputWrapper>
         {label && (
-          <Label
+          <LabelText
             htmlFor={inputId}
             disabled={disabled}
             variant={variant}
             paddingLeft={checkboxLabelDistance}
           >
             {label}
-          </Label>
+          </LabelText>
         )}
       </CheckboxContainer>
     );

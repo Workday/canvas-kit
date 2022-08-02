@@ -6,7 +6,7 @@ import {colors, gradients, space} from '@workday/canvas-kit-react/tokens';
 import {HStack, HStackProps, StackSpacing} from '@workday/canvas-kit-react/layout';
 import {TertiaryButton} from '@workday/canvas-kit-react/button';
 import {justifyIcon, notificationsIcon} from '@workday/canvas-system-icons-web';
-import {Heading} from '@workday/canvas-kit-preview-react/text';
+import {Heading} from '@workday/canvas-kit-react/text';
 
 interface HeaderItemProps extends Omit<HStackProps, 'spacing'> {
   spacing?: StackSpacing;

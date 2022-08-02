@@ -19,7 +19,7 @@ simplified usage of Canvas Kit type token.
 ## Installation
 
 ```sh
-yarn add @workday/canvas-kit-preview-react
+yarn add @workday/canvas-kit-react
 ```
 
 ## Text
@@ -50,24 +50,24 @@ addition `Text` has its own props:
 
 <ArgsTable of={TextComponent} />
 
-## Label
+## LabelText
 
-`Label` is a `label` element build based on the top of `Text` component with added ability to add a
-cursor or disabled style.
+`LabelText` is a `label` element build based on the top of `Text` component with added ability to
+add a cursor or disabled style.
 
 ### Usage
 
 ```tsx
-<Label cursor="pointer" disabled={true}>
+<LabelText cursor="pointer" disabled={true}>
   Text here...
-</Label>
+</LabelText>
 ```
 
 <ExampleCodeBlock code={Label} />
 
-### Label Props
+### LabelText Props
 
-In addition to `Text` component props, `Label` has the following props:
+In addition to `Text` component props, `LabelText` has the following props:
 
 <ArgsTable of={LabelComponent} />
 

@@ -9,7 +9,7 @@ import {
   useUniqueId,
 } from '@workday/canvas-kit-react/common';
 import {borderRadius, colors, inputColors, spaceNumbers} from '@workday/canvas-kit-react/tokens';
-import {Label} from '@workday/canvas-kit-preview-react/text';
+import {LabelText} from '@workday/canvas-kit-react/text';
 
 export interface RadioProps extends Themeable {
   /**
@@ -313,14 +313,14 @@ export const Radio = createComponent('input')({
           </RadioBackground>
         </RadioInputWrapper>
         {label && (
-          <Label
+          <LabelText
             paddingLeft={radioLabelDistance}
             htmlFor={inputId}
             disabled={disabled}
             variant={variant}
           >
             {label}
-          </Label>
+          </LabelText>
         )}
       </RadioContainer>
     );

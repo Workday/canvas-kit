@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {PaginationModel} from '../types';
-import {Label} from '@workday/canvas-kit-preview-react/text';
+import {LabelText} from '@workday/canvas-kit-react/text';
 
 export interface GoToLabelProps
   extends Omit<React.LabelHTMLAttributes<HTMLLabelElement>, 'children'> {
@@ -13,8 +13,8 @@ export interface GoToLabelProps
 
 export const GoToLabel = ({model, children, ...elemProps}: GoToLabelProps) => {
   return (
-    <Label tokenLevel="subtext.medium" variant="hint" whiteSpace="nowrap" {...elemProps}>
+    <LabelText tokenLevel="subtext.medium" variant="hint" whiteSpace="nowrap" {...elemProps}>
       {typeof children === 'function' ? children(model) : children}
-    </Label>
+    </LabelText>
   );
 };

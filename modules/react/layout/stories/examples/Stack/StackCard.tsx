@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Stack, Flex} from '@workday/canvas-kit-react/layout';
 import {TertiaryButton} from '@workday/canvas-kit-react/button';
-import {BodyText, Heading} from '@workday/canvas-kit-preview-react/text';
+import {BodyText, Heading} from '@workday/canvas-kit-react/text';
 
 export const StackCard = () => {
   return (
