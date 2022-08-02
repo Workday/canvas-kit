@@ -8,7 +8,7 @@ export interface TextProps extends BoxProps {
   /**
    * Type token as string with level and size separated by dot.
    */
-  tokenLevel?: `${keyof CanvasTypeHierarchy}.${'large'|'medium'|'small'}`;
+   typeLevel?: `${keyof CanvasTypeHierarchy}.${'large'|'medium'|'small'}`;
   /**
    * Type variant token names: `error`, `hint` or `inverse`.
    */
@@ -18,7 +18,7 @@ export interface TextProps extends BoxProps {
 /**
  * Function returns updated props by token and variant values
  */
-const validateProps = ({tokenLevel, variant, ...props}: TextProps) => {
+const validateProps = ({typeLevel, variant, ...props}: TextProps) => {
   let updatedProps: any = props;
   const tokenPropNames = [
     'color',
@@ -34,8 +34,8 @@ const validateProps = ({tokenLevel, variant, ...props}: TextProps) => {
   `fontFamily`, `fontSize`, `lineHeight`, `fontWeight`, `color` 
   by replacing them by token value
   */
-  if (tokenLevel) {
-    const [level, size] = tokenLevel.split('.') as [
+  if (typeLevel) {
+    const [level, size] = typeLevel.split('.') as [
       keyof CanvasTypeHierarchy,
       'large' | 'medium' | 'small'
     ];

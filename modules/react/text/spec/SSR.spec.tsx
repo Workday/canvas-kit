@@ -3,11 +3,11 @@
  */
 import React from 'react';
 import {renderToString} from 'react-dom/server';
-import {Label, Text, BodyText, Heading, Subtext, Title} from '../';
+import {LabelText, Text, BodyText, Heading, Subtext, Title} from '../';
 
 describe('Text', () => {
   it('should render Label on a server without crashing', () => {
-    const ssrRender = () => renderToString(<Label>text</Label>);
+    const ssrRender = () => renderToString(<LabelText>text</LabelText>);
     expect(ssrRender).not.toThrow();
   });
 

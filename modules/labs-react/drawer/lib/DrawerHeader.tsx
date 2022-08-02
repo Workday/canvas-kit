@@ -78,7 +78,7 @@ export class DrawerHeader extends React.Component<DrawerHeaderProps, {}> {
       <HeaderContainer borderColor={borderColor} {...elemProps} headerColor={headerColor}>
         <Text
           as="h4"
-          tokenLevel="body.small"
+          typeLevel="body.small"
           title={title}
           fontWeight="bold"
           color={typeColors.heading}

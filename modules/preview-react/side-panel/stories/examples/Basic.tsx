@@ -32,7 +32,7 @@ export const Basic = () => {
               </Flex>
               <Text
                 as="h3"
-                tokenLevel="body.large"
+                typeLevel="body.large"
                 color="licorice500"
                 fontWeight="bold"
                 {...labelProps}

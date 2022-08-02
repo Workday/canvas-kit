@@ -28,7 +28,7 @@ export const ExternalControl = () => {
           <Flex alignItems="center" paddingY="s" paddingX="s">
             <Text
               as="h3"
-              tokenLevel="body.large"
+              typeLevel="body.large"
               color="licorice500"
               fontWeight="bold"
               {...labelProps}

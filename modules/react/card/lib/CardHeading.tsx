@@ -18,7 +18,7 @@ export const CardHeading = createComponent('h3')({
     return (
       <Text
         ref={ref}
-        tokenLevel="body.large"
+        typeLevel="body.large"
         fontWeight="bold"
         marginBottom="m"
         marginTop={0}

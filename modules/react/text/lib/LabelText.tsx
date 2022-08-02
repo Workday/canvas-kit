@@ -20,6 +20,6 @@ const StyledLabel = styled(Text.as('label'))<StyledType & TypeLabelProps>(
 export const LabelText = createComponent('label')({
   displayName: 'Label',
   Component: (elemProps: TypeLabelProps, ref, Element) => {
-    return <StyledLabel ref={ref} as={Element} tokenLevel="subtext.large" {...elemProps} />;
+    return <StyledLabel ref={ref} as={Element} typeLevel="subtext.large" {...elemProps} />;
   },
 });

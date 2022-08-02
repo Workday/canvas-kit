@@ -13,7 +13,7 @@ export interface GoToLabelProps
 
 export const GoToLabel = ({model, children, ...elemProps}: GoToLabelProps) => {
   return (
-    <LabelText tokenLevel="subtext.medium" variant="hint" whiteSpace="nowrap" {...elemProps}>
+    <LabelText typeLevel="subtext.medium" variant="hint" whiteSpace="nowrap" {...elemProps}>
       {typeof children === 'function' ? children(model) : children}
     </LabelText>
   );
