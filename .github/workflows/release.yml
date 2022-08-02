@@ -13,6 +13,10 @@ on:
 
 jobs:
   release:
+    # Only run if:
+    # - The commit message does not contain `[skip release]`
+    # - OR the workflow was manually triggered and has a `version` string
+    if: "!contains(github.event.head_commit.message, '[skip release]') || inputs.version"
     runs-on: ubuntu-latest
 
     steps:
@@ -20,7 +24,6 @@ jobs:
       ## Personal Access Token to push on a branch that is protected. See
       ## https://github.com/cycjimmy/semantic-release-action#basic-usage
       - uses: actions/checkout@v2
-        if: "!contains(github.event.head_commit.message, '[skip release]') || inputs.version"
         with:
           persist-credentials: false
           fetch-depth: 0 # Used for conventional commit ranges
@@ -29,7 +32,6 @@ jobs:
       ## Annotations). See
       ## https://github.com/actions/setup-node/blob/25316bbc1f10ac9d8798711f44914b1cf3c4e954/src/main.ts#L58-L65
       - uses: actions/setup-node@v2.4.0
-        if: "!contains(github.event.head_commit.message, '[skip release]') || inputs.version"
         with:
           node-version: 14.x
           registry-url: https://registry.npmjs.org
@@ -38,7 +40,6 @@ jobs:
       ## cache hit will copy files from Github cache into the `node_modules` and `.cache/cypress`
       ## folders. A cache hit will skip the cache steps
       - name: Cache node modules
-        if: "!contains(github.event.head_commit.message, '[skip release]') || inputs.version"
         id: yarn-cache
         uses: actions/cache@v2
         with:
@@ -46,7 +47,6 @@ jobs:
           key: ${{ runner.os }}-node-modules-hash-${{ hashFiles('yarn.lock') }}
 
       - name: Cache Cypress
-        if: "!contains(github.event.head_commit.message, '[skip release]') || inputs.version"
         id: cypress-cache
         uses: actions/cache/@v2
         with:
@@ -57,8 +57,8 @@ jobs:
       ## install` step. This effectively saves up to 3m on a cache hit build.
       - name: Install Packages
         if:
-          (steps.yarn-cache.outputs.cache-hit != 'true' || steps.cypress-cache.outputs.cache-hit !=
-          'true') && (!contains(github.event.head_commit.message, '[skip release]') || inputs.version)
+          steps.yarn-cache.outputs.cache-hit != 'true' || steps.cypress-cache.outputs.cache-hit !=
+          'true'
         run: yarn install --production=false
         env:
           CYPRESS_CACHE_FOLDER: .cache/cypress
@@ -66,37 +66,32 @@ jobs:
       ## A `yarn bump` will create a commit and a tag. We need to set up the git user to do this.
       ## We'll make that user be the github-actions user.
       - name: Config git user
-        if: "!contains(github.event.head_commit.message, '[skip release]') || inputs.version"
         run: |
           git config --global user.name "${{ github.actor }}"
           git config --global user.email "${{ github.actor }}@users.noreply.github.com"
 
       ## Capture the previous tag and store it for later use
       - name: Get previous tag
-        if: "!contains(github.event.head_commit.message, '[skip release]') || inputs.version"
         id: previous-tag
         run: echo "::set-output name=tag::$(node -p 'require("./lerna.json").version')"
 
       ## `github.ref` is in the form of `refs/head/{name}`. This step extracts `{name}` and saves it
       ## as an output for later use
       - name: Extract branch name
-        if: "!contains(github.event.head_commit.message, '[skip release]') || inputs.version"
         id: extract-branch
         run: echo "::set-output name=branch::$(echo ${GITHUB_REF#refs/heads/})"
 
       - name: Get Next Bump
-        if: "!contains(github.event.head_commit.message, '[skip release]') || inputs.version"
         id: next-bump
         run: |
           echo "::set-output name=bump::$(node node_modules/conventional-recommended-bump/cli.js -p angular)"
           echo ${{steps.next-bump.outputs.bump}}
 
       ## On the master branch, we'll do a patch bump on every commit. This will create a commit with
-      ## the message found in `lerna.json` and a tag of the version. We've disabled pushing in favor
       ## of a push action to allow a PAT to bypass branch protections (pushing directly on the
       ## branch).
       - name: Lerna Bump
-        if: "!contains(github.event.head_commit.message, '[skip release]') || inputs.version"
+        if: "!inputs.version"
         run: yarn bump --yes ${{steps.next-bump.outputs.bump}}
 
       ## Manual version override
@@ -111,13 +106,11 @@ jobs:
 
       ## Capture the new tag and store it for later use
       - name: Get new tag
-        if: "!contains(github.event.head_commit.message, '[skip release]') || inputs.version"
         id: new-tag
         run: echo "::set-output name=tag::$(node -p 'require("./lerna.json").version')"
 
       ## Generate a changeset based on rules of the Canvas Kit repository
       - name: Generate Changeset
-        if: "!contains(github.event.head_commit.message, '[skip release]') || inputs.version"
         uses: Workday/canvas-kit-actions/generate-changeset@v1
         id: changeset
         with:
@@ -129,7 +122,6 @@ jobs:
       ## We could have gone the route of a lerna changeset plugin, but we would lose access to
       ## usernames which add a nice human touch to release notes
       - name: Update Changelog
-        if: "!contains(github.event.head_commit.message, '[skip release]') || inputs.version"
         run: node utils/update-changelog.js
         env:
           CHANGESET_TITLE: ${{steps.changeset.outputs.title}}
@@ -139,7 +131,6 @@ jobs:
       ## So far, the changes to to the workspace have not been committed. We'll commit them now and
       ## create a tag
       - name: Commit and add Tag
-        if: "!contains(github.event.head_commit.message, '[skip release]') || inputs.version"
         run: |
           git add . && git commit -m "chore: Release v${{steps.new-tag.outputs.tag}} [skip release]" && git tag -a v${{steps.new-tag.outputs.tag}} -m "v${{steps.new-tag.outputs.tag}}"
 
@@ -147,26 +138,22 @@ jobs:
       ## for Chromatic rebaselining and publishing to GH Pages. Should be before `yarn build` since
       ## built assets mess up this command
       - name: Build Storybook
-        if: "!contains(github.event.head_commit.message, '[skip release]') || inputs.version"
         run: |
           yarn build-storybook --quiet
           npx sb extract docs docs/stories.json
 
       ## Build for packaging.
       - name: Build
-        if: "!contains(github.event.head_commit.message, '[skip release]') || inputs.version"
         run: yarn build
 
       ## Publish to npm. Must be run after a build
       - name: Publish
-        if: "!contains(github.event.head_commit.message, '[skip release]') || inputs.version"
         run: yarn lerna publish from-package --yes --dist-tag ${{steps.extract-branch.outputs.branch == 'master' && 'latest' || 'support'}}
         env:
           NODE_AUTH_TOKEN: '${{secrets.NPM_CI_PUBLISH_TOKEN}}'
 
       ## Push both the commit and tag created by Lerna's version command using a PAT
       - name: Push changes
-        if: "!contains(github.event.head_commit.message, '[skip release]') || inputs.version"
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GH_RW_TOKEN }}
@@ -175,7 +162,6 @@ jobs:
 
       ## Create a release on Github. This will trigger an internal Slack message
       - name: Create Release
-        if: "!contains(github.event.head_commit.message, '[skip release]') || inputs.version"
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -189,7 +175,7 @@ jobs:
 
       ## The master branch is used for static Storybook documentation in the `gh-pages` branch.
       - name: Publish Storybook
-        if: steps.extract-branch.outputs.branch == 'master' && (!contains(github.event.head_commit.message, '[skip release]') || inputs.version)
+        if: steps.extract-branch.outputs.branch == 'master'
         uses: JamesIves/github-pages-deploy-action@4.1.5
         with:
           branch: gh-pages
@@ -200,7 +186,6 @@ jobs:
       ## used for future PRs. New PRs may show extra Chromatic changes until the "Update Branch"
       ## button is used in PRs which will pull this new baseline.
       - name: Update Chromatic Baseline
-        if: "!contains(github.event.head_commit.message, '[skip release]') || inputs.version"
         uses: chromaui/action@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
