@@ -134,6 +134,9 @@ async function main() {
         await updateChangelog();
 
         console.log(`Resolved conflicts in ${conflict}`);
+      } else if (conflict === 'yarn.lock') {
+        // yarn resolves yarn.lock conflicts
+        console.log(`Conflicts in ${conflict} will be resolved later.`);
       } else {
         console.log('Merge cannot be resolved automatically');
         hasUnresolvedConflicts = true;
