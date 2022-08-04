@@ -11,7 +11,7 @@ import {
   StyledType,
   useIsRTL,
 } from '@workday/canvas-kit-react/common';
-import {Stack, StackStyleProps} from '@workday/canvas-kit-react/layout';
+import {Stack} from '@workday/canvas-kit-react/layout';
 import {
   useOverflowListMeasure,
   useListRenderItems,
