@@ -2,6 +2,7 @@ export * from './action-bar';
 export * from './avatar';
 export * from './badge';
 export * from './banner';
+export * from './breadcrumbs';
 export * from './button';
 export * from './card';
 export * from './checkbox';

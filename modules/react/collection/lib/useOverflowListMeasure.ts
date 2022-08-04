@@ -11,6 +11,7 @@ export const useOverflowListMeasure = createElemPropsHook(useOverflowListModel)(
       ref: localRef,
       onResize: model.events.setContainerWidth,
     });
+
     const elementRef = useForkRef(ref, resizeRef);
 
     return {
