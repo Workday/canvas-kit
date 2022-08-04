@@ -15,7 +15,6 @@ import {FormField} from '@workday/canvas-kit-preview-react/form-field';
 import {useTextInputModel} from '@workday/canvas-kit-preview-react/text-input';
 
 const baseStyles: CSSProperties = {
-  ...type.levels.subtext.large,
   transition: '0.2s box-shadow, 0.2s border-color',
   resize: 'both',
   '&::webkit-resizer': {
@@ -59,6 +58,7 @@ export const TextAreaField = createSubcomponent('textarea')({
   return (
     <FormField.Input
       as={Element}
+      {...type.levels.subtext.large}
       css={[baseStyles, focusStyles]}
       {...elemProps}
       border={`1px solid ${inputColors.border}`}

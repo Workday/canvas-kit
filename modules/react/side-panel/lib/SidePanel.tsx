@@ -3,9 +3,10 @@ import styled from '@emotion/styled';
 import throttle from 'lodash/throttle';
 
 import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {colors, space, type, CanvasSpaceValues} from '@workday/canvas-kit-react/tokens';
+import {colors, space, CanvasSpaceValues} from '@workday/canvas-kit-react/tokens';
 import {TertiaryButton, TertiaryButtonProps} from '@workday/canvas-kit-react/button';
 import {chevronLeftIcon, chevronRightIcon} from '@workday/canvas-system-icons-web';
+import {Heading} from '@workday/canvas-kit-react/text';
 
 export interface SidePanelProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -77,11 +78,6 @@ export enum SidePanelBackgroundColor {
 }
 
 const closedWidth = space.xxl;
-
-const Header = styled('h2')({
-  ...type.levels.heading.small,
-  marginTop: space.zero,
-});
 
 const SidePanelContainer = styled('div')<
   Pick<SidePanelProps, 'open' | 'backgroundColor' | 'padding' | 'openWidth' | 'openDirection'>
@@ -214,7 +210,11 @@ export class SidePanel extends React.Component<SidePanelProps, SidePanelState> {
         {...elemProps}
       >
         <ChildrenContainer open={open} openWidth={openWidth}>
-          {header && open ? <Header>{header}</Header> : null}
+          {header && open ? (
+            <Heading as="h2" size="small" marginTop="zero">
+              {header}
+            </Heading>
+          ) : null}
           {this.props.children}
         </ChildrenContainer>
         <SidePanelFooter openWidth={openWidth} open={open}>
