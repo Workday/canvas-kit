@@ -1,8 +1,6 @@
 import * as React from 'react';
-import {type, typeColors} from '@workday/canvas-kit-react/tokens';
-
 import {PaginationModel} from '../types';
-import {StyledType, styled} from '@workday/canvas-kit-react/common';
+import {LabelText} from '@workday/canvas-kit-react/text';
 
 export interface GoToLabelProps
   extends Omit<React.LabelHTMLAttributes<HTMLLabelElement>, 'children'> {
@@ -13,16 +11,10 @@ export interface GoToLabelProps
   children?: (model: PaginationModel) => React.ReactNode | React.ReactNode;
 }
 
-const StyledLabel = styled('label')<StyledType>({
-  ...type.levels.subtext.medium,
-  color: typeColors.hint,
-  whiteSpace: 'nowrap',
-});
-
 export const GoToLabel = ({model, children, ...elemProps}: GoToLabelProps) => {
   return (
-    <StyledLabel {...elemProps}>
+    <LabelText typeLevel="subtext.medium" variant="hint" whiteSpace="nowrap" {...elemProps}>
       {typeof children === 'function' ? children(model) : children}
-    </StyledLabel>
+    </LabelText>
   );
 };
