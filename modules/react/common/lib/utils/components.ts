@@ -8,6 +8,7 @@ import {Model} from './models';
  */
 export type StyledType = {
   as?: React.ElementType;
+  maskImage?: string;
 };
 
 // For React class components

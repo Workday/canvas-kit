@@ -9,8 +9,9 @@ import {
   useModalityType,
   styled,
   StyledType,
+  useIsRTL,
 } from '@workday/canvas-kit-react/common';
-import {Stack} from '@workday/canvas-kit-react/layout';
+import {Stack, StackStyleProps} from '@workday/canvas-kit-react/layout';
 import {
   useOverflowListMeasure,
   useListRenderItems,
@@ -43,19 +44,9 @@ export const useTabsList = composeHooks(
   useListResetCursorOnBlur
 );
 
-const StyledStack = styled(Stack)<StyledType>({
-  maskImage: `linear-gradient(to right, white 95%, transparent)`,
-  '::after': {
-    content: '""',
-    position: 'sticky',
-    height: 52,
-    minWidth: 30,
-    zIndex: 1,
-    right: 0,
-    top: 0,
-    pointerEvents: 'none',
-  },
-});
+const StyledStack = styled(Stack)<StyledType>(({maskImage}) => ({
+  maskImage: maskImage,
+}));
 
 export const TabsList = createSubcomponent('div')({
   displayName: 'Tabs.List',
@@ -63,6 +54,7 @@ export const TabsList = createSubcomponent('div')({
   elemPropsHook: useTabsList,
 })<TabListProps>(({children, overflowButton, ...elemProps}, Element, model) => {
   const modality = useModalityType();
+  const isRTL = useIsRTL();
   return (
     <StyledStack
       as={Element}
@@ -70,6 +62,11 @@ export const TabsList = createSubcomponent('div')({
       borderBottom={`1px solid ${commonColors.divider}`}
       paddingX={modality === 'touch' ? 'zero' : 'm'}
       spacing="xxxs"
+      maskImage={
+        modality === 'touch'
+          ? `linear-gradient(${isRTL ? 'to left' : 'to right'}, white 95%, transparent)`
+          : undefined
+      }
       {...elemProps}
     >
       {useListRenderItems(model, children)}
