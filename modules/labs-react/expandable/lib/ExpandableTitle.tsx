@@ -1,6 +1,7 @@
 import React from 'react';
 
-import {createComponent, styled, StyledType} from '@workday/canvas-kit-react/common';
+import {createComponent} from '@workday/canvas-kit-react/common';
+import {Box} from '@workday/canvas-kit-react/layout';
 import {colors, space, type} from '@workday/canvas-kit-react/tokens';
 
 export interface ExpandableTitleProps {
@@ -10,23 +11,26 @@ export interface ExpandableTitleProps {
   children: React.ReactNode;
 }
 
-const StyledTitle = styled('div')<StyledType>({
-  fontWeight: type.properties.fontWeights.bold,
-  fontSize: type.properties.fontSizes[18],
-  fontFamily: type.properties.fontFamilies.default,
-  color: colors.blackPepper400,
-  lineHeight: '21px',
-  padding: `6px ${space.zero} ${space.xxxs}`,
-  textAlign: 'left',
-});
-
 export const ExpandableTitle = createComponent('div')({
   displayName: 'Expandable.Title',
   Component: ({children, ...elemProps}: ExpandableTitleProps, ref, Element) => {
     return (
-      <StyledTitle as={Element} ref={ref} {...elemProps}>
+      <Box
+        as={Element}
+        ref={ref}
+        padding={`6px ${space.zero} ${space.xxxs}`}
+        color={colors.blackPepper400}
+        style={{
+          fontWeight: type.properties.fontWeights.bold,
+          fontSize: type.properties.fontSizes[18],
+          fontFamily: type.properties.fontFamilies.default,
+          lineHeight: '21px',
+          textAlign: 'left',
+        }}
+        {...elemProps}
+      >
         {children}
-      </StyledTitle>
+      </Box>
     );
   },
 });

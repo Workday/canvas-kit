@@ -13,7 +13,7 @@ export const RTL = () => {
     <CanvasProvider theme={theme}>
       <Expandable>
         <Expandable.Target headingLevel="h4">
-          <Expandable.StartIcon />
+          <Expandable.Icon iconPosition="start" />
           <Expandable.Avatar />
           <Expandable.Title>Title</Expandable.Title>
         </Expandable.Target>
@@ -24,7 +24,7 @@ export const RTL = () => {
         <Expandable.Target headingLevel="h4">
           <Expandable.Avatar />
           <Expandable.Title>Title</Expandable.Title>
-          <Expandable.EndIcon />
+          <Expandable.Icon iconPosition="end" />
         </Expandable.Target>
 
         <Expandable.Content>Content</Expandable.Content>

@@ -5,7 +5,7 @@ import {Expandable} from '@workday/canvas-kit-labs-react/expandable';
 export const StartIcon = () => (
   <Expandable>
     <Expandable.Target headingLevel="h4">
-      <Expandable.StartIcon />
+      <Expandable.Icon iconPosition="start" />
       <Expandable.Title>Title</Expandable.Title>
     </Expandable.Target>
 

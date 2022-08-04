@@ -23,7 +23,6 @@ export const ExpandableContent = createSubcomponent('div')({
     <Box
       as={Element}
       background="none"
-      border="none"
       padding={`${space.s} ${space.xxs} ${space.xxs}`}
       {...elementProps}
     >

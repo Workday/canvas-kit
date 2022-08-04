@@ -7,7 +7,7 @@ import testAvatar from './test-avatar.png';
 export const LongTitle = () => (
   <Expandable>
     <Expandable.Target headingLevel="h4">
-      <Expandable.StartIcon />
+      <Expandable.Icon iconPosition="start" />
       <Expandable.Avatar url={testAvatar} />
       <Expandable.Title>
         Our house special supreme pizza includes pepperoni, sausage, bell peppers, mushrooms,

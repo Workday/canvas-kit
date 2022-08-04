@@ -9,15 +9,12 @@ import {
   StyledType,
 } from '@workday/canvas-kit-react/common';
 
-import {ExpandableModelConfig} from './Expandable';
 import {useExpandableTarget} from './hooks/useExpandableTarget';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {colors} from '@workday/canvas-kit-react/tokens';
 import {useExpandableModel} from './useExpandableModel';
 
-export interface ExpandableTargetProps
-  extends ExpandableModelConfig,
-    ExtractProps<typeof Flex, never> {
+export interface ExpandableTargetProps extends ExtractProps<typeof Flex, never> {
   /**
    * Children of the `Expandable.Target`. Should contain `Target.Title`, an optional `Target.Avatar`
    * and either `Target.StartIcon` or `Target.EndIcon`. `Target.StartIcon` is meant to be placed before
