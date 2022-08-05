@@ -1,14 +1,16 @@
 import {Meta} from '@storybook/addon-docs';
 
-<Meta title="Welcome/Upgrade Guides/v7.0" />
+<Meta title="Welcome/Upgrade Guides/v8.0" />
 
-# Canvas Kit 7.0 Upgrade Guide
+# Canvas Kit 8.0 Upgrade Guide
 
-This guide contains breaking changes in Canvas Kit v7. Please
+This guide contains breaking changes in Canvas Kit v8. Please
 [reach out](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) if you have
 any questions.
 
 - [Codemod](#codemod)
+- [Components](#components)
+  - [Box](#box)
 - [General Changes](#general-changes) -[Remove Default Imports](#remove-default-imports)
 
 ## Codemod
@@ -35,6 +37,30 @@ rollback more easily if necessary.**
 
 [Let us know](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) if you
 encounter any issues or use cases that we've missed.
+
+## Components
+
+### Box
+
+#### Updating props
+
+The following props have been added to the `Box` component to support font and text styles:
+`fontFamily`, `fontSize`, `fontStyle`, `fontWeight`, `lineHeight`, `letterSpacing`, `textAlign`,
+`textDecoration`, `textTransform`, `textShadow`, `whiteSpace`, `wordBreak`.
+
+```tsx
+// v7
+const StyledBox = styled(Box)({
+  fontFamily: 'monospace',
+  fontSize: type.properties.fontSizes[16],
+  fontWeight: type.properties.fontWeights.medium
+})
+
+<StyledBox />
+
+// v8
+<Box fontFamily="monospace" fontSize={16} fontWeight="medium" />
+```
 
 ## General Changes
 

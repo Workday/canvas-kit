@@ -36,22 +36,9 @@ const popupAnimation = (transformOrigin: TransformOrigin) => {
   `;
 };
 
-const responsivePopupAnimation = () => {
-  return keyframes`
-    0% {
-      opacity: 0;
-      transform: translate(0px, 8px);
-    }
-    100% {
-      opacity: 1;
-      transform: translate(0);
-    }
-  `;
-};
-
 const StyledPopupCard = styled(Card)<
   StyledType & {width?: number | string; transformOrigin?: TransformOrigin}
->(type.levels.subtext.large, ({transformOrigin, theme}) => {
+>(({transformOrigin, theme}) => {
   if (transformOrigin == null) {
     return {};
   }
@@ -101,6 +88,7 @@ export const PopupCard = createSubcomponent('div')({
         elemProps.margin ? space[elemProps.margin as CanvasSpaceKeys] || elemProps.margin : space.xl
       } * 2)`}
       overflowY="auto" // force IE11 to limit the flex size of the card. Without this, the body isn't allowed to overflow properly: https://github.com/philipwalton/flexbugs/issues/216#issuecomment-453053557
+      {...type.levels.subtext.large}
       {...elemProps}
     >
       {children}
