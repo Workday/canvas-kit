@@ -19,17 +19,19 @@ export const useMediaQuery = (query: string) => {
 
 export const useBreakpoints = () => {
   const breakpoints = {
-    isXs: useMediaQuery('(max-width: 640px)'),
-    isSm: useMediaQuery('(min-width: 641px) and (max-width: 768px)'),
-    isMd: useMediaQuery('(min-width: 769px) and (max-width: 1024px)'),
-    isLg: useMediaQuery('(min-width: 1025px)'),
-    active: 'xs',
+    zero: useMediaQuery('(min-width: 0)'),
+    isSm: useMediaQuery('(min-width: 320px)'),
+    isMd: useMediaQuery('(min-width: 768px)'),
+    isLg: useMediaQuery('(min-width: 1024px)'),
+    isXl: useMediaQuery('(min-width: 1440px)'),
+    active: 'zero',
   };
   /* eslint-disable curly */
-  if (breakpoints.isXs) breakpoints.active = 'xs';
+  if (breakpoints.zero) breakpoints.active = 'zero';
   if (breakpoints.isSm) breakpoints.active = 'sm';
   if (breakpoints.isMd) breakpoints.active = 'md';
   if (breakpoints.isLg) breakpoints.active = 'lg';
+  if (breakpoints.isXl) breakpoints.active = 'xl';
   return breakpoints;
 };
 
