@@ -27,7 +27,7 @@ export const Basic = () => {
     <Popup model={model}>
       <Popup.Target as={DeleteButton}>Delete Item</Popup.Target>
       <Popup.Popper placement="bottom">
-        <Popup.Card width={400} padding="s" zIndex={9999}>
+        <Popup.Card width={400} padding="s">
           <Popup.CloseIcon aria-label="Close" />
           <Popup.Heading>Delete Item</Popup.Heading>
           <Popup.Body>

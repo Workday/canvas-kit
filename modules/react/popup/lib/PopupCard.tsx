@@ -11,7 +11,6 @@ import {
   ExtractProps,
   useConstant,
   createSubcomponent,
-  useTheme,
 } from '@workday/canvas-kit-react/common';
 import {Stack, StackStyleProps} from '@workday/canvas-kit-react/layout';
 
@@ -37,9 +36,22 @@ const popupAnimation = (transformOrigin: TransformOrigin) => {
   `;
 };
 
+const responsivePopupAnimation = () => {
+  return keyframes`
+    0% {
+      opacity: 0;
+      transform: translate(0px, 8px);
+    }
+    100% {
+      opacity: 1;
+      transform: translate(0);
+    }
+  `;
+};
+
 const StyledPopupCard = styled(Card)<
   StyledType & {width?: number | string; transformOrigin?: TransformOrigin}
->(type.levels.subtext.large, ({transformOrigin}) => {
+>(type.levels.subtext.large, ({transformOrigin, theme}) => {
   if (transformOrigin == null) {
     return {};
   }
@@ -49,6 +61,12 @@ const StyledPopupCard = styled(Card)<
     animationDuration: '150ms',
     animationTimingFunction: 'ease-out',
     transformOrigin: `${transformOrigin.vertical} ${transformOrigin.horizontal}`,
+    [theme.canvas.breakpoints.down('s')]: {
+      animation: popupAnimation({vertical: 'bottom', horizontal: 'center'}),
+      animationDuration: '150ms',
+      animationTimingFunction: 'ease-out',
+      transformOrigin: 'bottom center',
+    },
     // Allow overriding of animation in special cases
     '.wd-no-animation &': {
       animation: 'none',
@@ -67,15 +85,11 @@ export const PopupCard = createSubcomponent('div')({
 
   // As is a Stack that will render an element of `Element`
   const As = useConstant(() => Stack.as(Element));
-  const theme = useTheme();
+
   return (
     <StyledPopupCard
       as={As}
-      transformOrigin={
-        theme.canvas.breakpoints.down('s')
-          ? {horizontal: 'center', vertical: 'bottom'}
-          : transformOrigin
-      }
+      transformOrigin={transformOrigin}
       position="relative"
       padding="l"
       depth={5}
