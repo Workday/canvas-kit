@@ -5,9 +5,7 @@ import {Grid, GridItem} from '@workday/canvas-kit-react/layout';
 import {GridLayout} from './examples/Grid/GridLayout';
 import {Basic} from './examples/Grid/Basic';
 import {GridLayoutInteractive} from './examples/Grid/GridLayoutInteractive';
-import {GridStyle} from './examples/PropTables.splitprops.tsx';
-import {GridStyleProps} from '../lib/utils/grid';
-import {GridItemStyleProps} from '../lib/utils/gridItem';
+import {GridStyle, GridItemStyle} from './examples/PropTables.splitprops.tsx';
 
 <Meta title="Components/Containers/Layout/Grid" component={Grid} />
 
@@ -112,7 +110,7 @@ As previously mentioned, `Grid` is built on top of `Box` and has access to all i
 [grid container properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout/Basic_Concepts_of_Grid_Layout#the_grid_container)
 through style props as well.
 
-<ArgsTable of={GridStyleProps} />
+<ArgsTable of={GridStyle} />
 
 ### Grid.Item
 
@@ -133,4 +131,4 @@ Item properties. This provides greater control over how child components render 
 
 #### Props
 
-<ArgsTable of={GridItemStyleProps} />
+<ArgsTable of={GridItemStyle} />

@@ -8,8 +8,8 @@ const tsconfigPath = path.join(__dirname, '../tsconfig.json');
 const fs = require('fs');
 
 const propFilter = (fileName, prop, component) => {
-  // `PropTables.tsx` files are okay to pass through
-  if (fileName.includes('PropTables.tsx')) {
+  // `PropTables.splitprops.tsx` files are okay to pass through
+  if (fileName.includes('PropTables.splitprops.tsx')) {
     return true;
   }
 
