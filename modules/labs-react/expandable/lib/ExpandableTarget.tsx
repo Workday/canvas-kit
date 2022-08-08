@@ -17,8 +17,9 @@ import {useExpandableModel} from './useExpandableModel';
 export interface ExpandableTargetProps extends ExtractProps<typeof Flex, never> {
   /**
    * Children of the `Expandable.Target`. Should contain `Target.Title`, an optional `Target.Avatar`
-   * and either `Target.StartIcon` or `Target.EndIcon`. `Target.StartIcon` is meant to be placed before
-   * the `Target.Title` and `Target.EndIcon` should be placed after.
+   * and `Target.Icon` with an `iconPosition` prop that takes a value of either `start` or `end`.
+   * `Target.Icon` with `start` is meant to be placed before the `Target.Title` and `Target.Icon`
+   * `end` should be placed after.
    */
   children: React.ReactNode;
   /**

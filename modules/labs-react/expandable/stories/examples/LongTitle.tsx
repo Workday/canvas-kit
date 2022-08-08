@@ -6,7 +6,7 @@ import testAvatar from './test-avatar.png';
 
 export const LongTitle = () => (
   <Expandable>
-    <Expandable.Target headingLevel="h4">
+    <Expandable.Target aria-label="expand container" headingLevel="h4">
       <Expandable.Icon iconPosition="start" />
       <Expandable.Avatar url={testAvatar} />
       <Expandable.Title>
