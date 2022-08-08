@@ -1,0 +1,60 @@
+import {Meta} from '@storybook/addon-docs';
+
+import {ColorPicker} from '@workday/canvas-kit-labs-react/color-picker';
+import {Specifications} from '@workday/canvas-kit-docs';
+
+import {Basic} from './examples/Basic';
+import {WithColorInput} from './examples/WithColorInput';
+import {WithCustomColumnCount} from './examples/WithCustomColumnCount';
+import {WithInitialColor} from './examples/WithInitialColor';
+import {WithPopup} from './examples/WithPopup';
+
+<Meta title="Labs/Color Picker/React" component={ColorPicker} />
+
+# Canvas Kit ColorPicker
+
+ColorPicker is a
+[compound component](/getting-started/for-developers/resources/compound-components/) that contains
+sub components like a swatchbook, input, and swatch.
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-labs-react
+```
+
+## Usage
+
+### Basic Example
+
+In a basic example of color picker, given an array of colors it will render a swatchbook. The model
+exposes the current color selected. This component is built off of a grid system, therefore, you can
+use arrow keys to navigate through the swatchbook to select a color.
+
+<ExampleCodeBlock code={Basic} />
+
+### With Color Input
+
+As part of the subcomponents you can render a color input. When wrapped in the form, all basic form
+behaviors works. The color input allows you to set a custom color.
+
+<ExampleCodeBlock code={WithColorInput} />
+
+### With Column Count
+
+You can set a custom column count on the model. Because this component uses the grid system,
+keyboard navigation wraps your selection.
+
+<ExampleCodeBlock code={WithCustomColumnCount} />
+
+### With Initial Color
+
+You set an intial color selected by passing an initial color to the model.
+
+<ExampleCodeBlock code={WithInitialColor} />
+
+### With Popup
+
+You can render the color picker within a popup.
+
+<ExampleCodeBlock code={WithPopup} />
