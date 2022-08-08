@@ -2,15 +2,15 @@ import * as React from 'react';
 import {composeHooks, createSubcomponent} from '@workday/canvas-kit-react/common';
 import {
   useListItemRegister,
-  useListItemRovingFocus,
   useOverflowListItemMeasure,
 } from '@workday/canvas-kit-react/collection';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {chevronLeftSmallIcon, chevronRightSmallIcon} from '@workday/canvas-system-icons-web';
 import {colors} from '@workday/canvas-kit-react/tokens';
-
+import {useRTL} from './useRTL';
 import {useBreadcrumbsModel} from './useBreadcrumbsModel';
+import {BreadcrumbsLink} from './BreadcrumbsLink';
 
 export interface BreadcrumbsItemProps {
   /**
@@ -29,22 +29,24 @@ export interface BreadcrumbsItemProps {
   'data-id'?: string;
 }
 
-export const useBreadcrumbsItem = composeHooks(
-  useOverflowListItemMeasure,
-  useListItemRovingFocus,
-  useListItemRegister
-);
+export const useBreadcrumbsItem = composeHooks(useOverflowListItemMeasure, useListItemRegister);
 
 export const BreadcrumbsItem = createSubcomponent('li')({
   displayName: 'Breadcrumbs.Item',
   modelHook: useBreadcrumbsModel,
   elemPropsHook: useBreadcrumbsItem,
+  subComponents: {
+    Link: BreadcrumbsLink,
+  },
 })<BreadcrumbsItemProps>(({children, ...elemProps}, Element) => {
+  const {shouldUseRTL} = useRTL();
+  const icon = shouldUseRTL ? chevronLeftSmallIcon : chevronRightSmallIcon;
+
   return (
-    <Flex as={Element} alignItems="center" {...elemProps}>
+    <Flex as={Element} alignItems="center" whiteSpace="nowrap" {...elemProps}>
       {children}
       <SystemIcon
-        icon={chevronRightSmallIcon}
+        icon={icon}
         color={colors.licorice200}
         colorHover={colors.licorice200}
         size={20}

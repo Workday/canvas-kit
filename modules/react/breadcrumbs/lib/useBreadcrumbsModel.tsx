@@ -1,19 +1,18 @@
 import React from 'react';
 import {createModelHook} from '@workday/canvas-kit-react/common';
 import {defaultGetId, useOverflowListModel} from '@workday/canvas-kit-react/collection';
-
 import {useMenuModel} from '@workday/canvas-kit-react/menu';
 
 export const useBreadcrumbsModel = createModelHook({
   defaultConfig: {
     ...useOverflowListModel.defaultConfig,
     /**
-     * Optional id for the whole `Breadcrumbs` group. If not provided, a unique id will be created.
+     * Optional id for the whole `ActionBar` group. If not provided, a unique id will be created.
      * @default useUniqueId()
      */
     id: '',
     /**
-     * The default Breadcrumbs sub-components only handle rendering of button group in a horizontal orientation,
+     * The default ActionBar sub-components only handle rendering of button group in a horizontal orientation,
      * but the sub-components could be replaced to handle vertical orientations.
      * @default 'horizontal'
      */
@@ -37,15 +36,27 @@ export const useBreadcrumbsModel = createModelHook({
   let hiddenIds = model.state.hiddenIds;
   let nonInteractiveIds = model.state.nonInteractiveIds;
   const totalSize = model.state.items.length;
+  const itemSpace = totalSize - hiddenIds.length;
 
-  // Only show a maximum of 3 buttons
-  if (totalSize - hiddenIds.length >= 3) {
-    hiddenIds = items.slice(3, totalSize).map(getId);
-  }
-
-  // Always show the first button and make sure it is interactive
-  if (totalSize - hiddenIds.length === 0) {
-    hiddenIds = items.slice(1, totalSize).map(getId);
+  if (itemSpace <= 1) {
+    // Keep only last items if there is place for two or less items
+    hiddenIds = items.slice(0, totalSize - 1).map(getId);
+  } else if (itemSpace === 2) {
+    // Always keep first and last item if there is place for 3 items
+    hiddenIds = items.slice(1, totalSize - 1).map(getId);
+  } else if (itemSpace === 3) {
+    // Always keep first and 2 last items if there is place for 4 items
+    hiddenIds = items.slice(1, totalSize - 2).map(getId);
+  } else {
+    const indexFirstHidden = items.findIndex(item => item.id === hiddenIds[0]);
+    // If there is space for more than 3 items, keep the first and 2 last items visible
+    // If they are hidden it should replace by non-hidden items
+    hiddenIds = hiddenIds.length
+      ? [
+          ...items.slice(indexFirstHidden - 2, indexFirstHidden).map(getId),
+          ...hiddenIds.slice(0, hiddenIds.length - 2),
+        ]
+      : hiddenIds;
   }
 
   nonInteractiveIds = hiddenIds;
@@ -55,6 +66,7 @@ export const useBreadcrumbsModel = createModelHook({
     hiddenIds,
     nonInteractiveIds,
     orientation: config.orientation || 'horizontal',
+    tooltip: {},
   };
 
   const overflowItems = React.useMemo(
@@ -72,12 +84,26 @@ export const useBreadcrumbsModel = createModelHook({
       id: `act-bar-menu-${model.state.id}`,
       items: overflowItems,
       nonInteractiveIds: state.nonInteractiveIds.filter(key => !state.hiddenIds.includes(key)),
-      onSelect() {
-        menu.events.hide();
-      },
-      onShow() {
-        // Always select the first item when the menu is opened
-        menu.events.goToFirst();
+      onSelect: ({id}, {items}) => {
+        const item = items.find(item => item.id === id) || {value: null};
+        if (item.value) {
+          const {onAction, link, onClick} = item.value as {
+            onAction?: any;
+            link?: string;
+            onClick?: any;
+          };
+
+          if (onAction) {
+            onAction(link);
+          } else {
+            // default to hard redirecting
+            window.location.href = link || '#';
+          }
+          // don't block the onClick event if it's provided
+          if (onClick) {
+            onClick(event);
+          }
+        }
       },
     })
   );

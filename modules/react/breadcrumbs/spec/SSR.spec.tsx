@@ -11,7 +11,7 @@ describe('Breadcrumbs', () => {
       renderToString(
         <Breadcrumbs>
           <Breadcrumbs.List>
-            <Breadcrumbs.Item>Link</Breadcrumbs.Item>
+            <Breadcrumbs.Item>Item</Breadcrumbs.Item>
           </Breadcrumbs.List>
         </Breadcrumbs>
       );

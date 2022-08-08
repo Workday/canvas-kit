@@ -1,13 +1,7 @@
 import * as React from 'react';
 
-import {space} from '@workday/canvas-kit-react/tokens';
-import {
-  createSubcomponent,
-  ExtractProps,
-  styled,
-  StyledType,
-} from '@workday/canvas-kit-react/common';
-import {HStack} from '@workday/canvas-kit-react/layout';
+import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
+import {Flex} from '@workday/canvas-kit-react/layout';
 import {useOverflowListMeasure, useListRenderItems} from '@workday/canvas-kit-react/collection';
 
 import {useBreadcrumbsModel} from './useBreadcrumbsModel';
@@ -15,7 +9,14 @@ import {Breadcrumbs} from './Breadcrumbs';
 
 // Use `Partial` here to make `spacing` optional
 export interface BreadcrumbsListProps<T = any>
-  extends Omit<Partial<ExtractProps<typeof HStack, never>>, 'children'> {
+  extends Omit<Partial<ExtractProps<typeof Flex, never>>, 'children'> {
+  ariaLabel?: string;
+  /**
+   * The accessibility label for the dropdown menu button.
+   *
+   * Suggested value: "more links"
+   */
+  buttonAriaLabel?: string;
   /**
    * If items are passed to a `BreadcrumbsModel`, the child of `Breadcrumbs.List` should be a render prop. The
    * List will determine how and when the item will be rendered.
@@ -28,24 +29,33 @@ export interface BreadcrumbsListProps<T = any>
   children: ((item: T, index: number) => React.ReactNode) | React.ReactNode;
 }
 
-const ResponsiveHStack = styled(HStack)<BreadcrumbsListProps & StyledType>(({theme}) => ({
-  [theme.canvas.breakpoints.down('s')]: {
-    padding: space.s,
-    '> *': {
-      flex: 1,
-    },
-  },
-}));
-
-export const BreadcrumbsList = createSubcomponent('div')({
+export const BreadcrumbsList = createSubcomponent('ul')({
   displayName: 'Breadcrumbs.List',
   modelHook: useBreadcrumbsModel,
   elemPropsHook: useOverflowListMeasure,
-})<BreadcrumbsListProps>(({children, ...elemProps}, Element, model) => {
+})<BreadcrumbsListProps>(({ariaLabel, buttonAriaLabel, children, ...elemProps}, Element, model) => {
+  const items = useListRenderItems(model, children) as [];
+  const splitIndex = items.length - 2;
+
   return (
-    <ResponsiveHStack as={Element} spacing="s" {...elemProps}>
-      {useListRenderItems(model, children)}
-      <Breadcrumbs.OverflowButton />
-    </ResponsiveHStack>
+    <nav role="navigation" aria-label={ariaLabel}>
+      <Flex
+        as={Element}
+        padding="zero"
+        margin="zero"
+        display="inline-flex"
+        alignItems="center"
+        minHeight={40}
+        listStyle="none"
+        style={{boxSizing: 'border-box'}}
+        role="list"
+        width="100%"
+        {...elemProps}
+      >
+        {items.length ? items.slice(0, splitIndex) : items}
+        <Breadcrumbs.OverflowButton buttonAriaLabel={buttonAriaLabel} />
+        {items.length ? items.slice(splitIndex, items.length) : null}
+      </Flex>
+    </nav>
   );
 });

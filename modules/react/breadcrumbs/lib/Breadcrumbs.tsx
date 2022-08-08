@@ -5,6 +5,8 @@ import {useBreadcrumbsModel} from './useBreadcrumbsModel';
 import {BreadcrumbsList} from './BreadcrumbsList';
 import {BreadcrumbsOverflowButton} from './BreadcrumbsOverflowButton';
 import {BreadcrumbsItem} from './BreadcrumbsItem';
+import {BreadcrumbsLink} from './BreadcrumbsLink';
+import {BreadcrumbsCurrentItem} from './BreadcrumbsCurrentItem';
 
 export interface BreadcrumbsProps {
   /**
@@ -20,6 +22,8 @@ export const Breadcrumbs = createContainer()({
     List: BreadcrumbsList,
     Item: BreadcrumbsItem,
     OverflowButton: BreadcrumbsOverflowButton,
+    CurrentItem: BreadcrumbsCurrentItem,
+    Link: BreadcrumbsLink,
     /**
      * The overflow menu of the Breadcrumbs component. If there isn't enough room to render all the action
      * items, the extra actions that don't fit will be overflowed into this menu.
