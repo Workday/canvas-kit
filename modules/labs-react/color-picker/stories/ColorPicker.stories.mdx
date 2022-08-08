@@ -59,3 +59,102 @@ You set an intial color selected by passing an initial color to the model.
 You can render the color picker within a popup.
 
 <ExampleCodeBlock code={WithPopup} />
+
+## Components
+
+### ColorPicker
+
+#### Usage
+
+`ColorPicker` is a container component that is responsible for creating a `useColorPickerModel` and
+sharing it with its subcomponents using React context. It does not represent a real element.
+
+```tsx
+<ColorPicker items={[]}>{/* Child components */}</ColorPicker>
+```
+
+Alternatively, you may pass in a model using the hoisted model pattern. _Note_: `items` should be an
+array of objects where the `id` is set to the color. This matches similar patterns with lists.
+
+```tsx
+const model = useColorPickerModel({
+  items: [],
+});
+
+<ColorPicker model={model}>{/* Child components */}</ColorPicker>;
+```
+
+## Props
+
+Note that if you pass in a `model` configured with `useColorPickerModel`, configuration props passed
+to `ColorPicker` will be ignored.
+
+<ArgsTable of={ColorPicker} />
+
+### ColorPicker.SwatchBook
+
+#### Usage
+
+`ColorPicker.SwatchBook` is a `ListBox` element. It is a container for `ColorPicker.SwatchButton`
+subcomponents.
+
+```tsx
+<ColorPicker.SwatchBook>
+  {item => (
+    <ColorPicker.SwatchButton
+      onClick={() => console.warn(item)}
+      color={item.id}
+    ></ColorPicker.SwatchButton>
+  )}
+</ColorPicker.SwatchBook>
+```
+
+#### Props
+
+Undocumented props are spread to the underlying `ListBox` element.
+
+<ArgsTable of={ColorPicker.SwatchBook} />
+
+### ColorPicker.SwatchButton
+
+#### Usage
+
+`ColorPicker.SwatchButton` is a `button` element. passed.
+
+```tsx
+<ColorPicker.SwatchButton onClick={() => console.log('color selectedn')} color={item.id} />
+```
+
+#### Props
+
+Undocumented props are spread to the underlying `button` element.
+
+<ArgsTable of={ColorPicker.Swatch} />
+
+## Model
+
+If `ColorPicker` was stripped of all its markup, attributes, and styling, what would remain is the
+[model](/getting-started/for-developers/resources/compound-components/#models). The model is an
+object composed of two parts: `state` which describes the current snapshot in time of the component
+and `events` which describes events that can be sent to the model.
+
+By default, `ColorPicker` will create a model and share it internally with its subcomponents using
+React context. Alternatively, if you need direct access to the model's `state` and `events` outside
+of the `ColorPicker` component, you may configure your own model with `useColorPickerModel` and pass
+it to `ColorPicker` via a pattern called
+[hoisting the model](/getting-started/for-developers/resources/compound-components/#configuring-a-model).
+
+```tsx
+const model = useColorPickerModel({
+  items: [],
+  columnCount: 8,
+  initialColor: [colors.blueberry400],
+});
+
+<ActionBar model={model}>{/* Child components */}</ActionBar>;
+```
+
+### Config
+
+`useActionBarModel` accepts a configuration object with the following properties and returns a
+`ActionBarModel` with `state` and `events` properties.

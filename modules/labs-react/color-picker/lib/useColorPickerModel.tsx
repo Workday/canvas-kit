@@ -5,7 +5,13 @@ import React from 'react';
 export const useColorPickerModel = createModelHook({
   defaultConfig: {
     ...useGridModel.defaultConfig,
+    /**
+     * Sets an initial color as the selected color
+     */
     initialColor: [''],
+    /**
+     * Sets the initial column count to render the grid. This column count also defines the width of the swatch book.
+     */
     columnCount: 8,
     id: '',
     shouldVirtualize: false,
