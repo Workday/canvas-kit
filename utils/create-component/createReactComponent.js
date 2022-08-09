@@ -10,7 +10,10 @@ const model = require('./templates/react/model');
 const component = require('./templates/react/component');
 const componentTarget = require('./templates/react/component.target');
 const componentContent = require('./templates/react/component.content');
+const subcomponentContentHook = require('./templates/react/hook.content');
+const subcomponentTargetHook = require('./templates/react/hook.target');
 const index = require('./templates/react/index');
+const hooksIndex = require('./templates/react/hook.index');
 const stories = require('./templates/react/stories');
 const testingStories = require('./templates/react/stories_VisualTesting');
 const ssr = require('./templates/react/SSR');
@@ -37,19 +40,31 @@ module.exports = (modulePath, name, description, prerelease, category) => {
   const files = {
     model: {
       path: `lib/hooks/use${pascalCaseName}Model.tsx`,
-      contents: model(camelCaseName, pascalCaseName),
+      contents: model(pascalCaseName),
     },
     component: {
       path: `lib/${pascalCaseName}.tsx`,
-      contents: component(pascalCaseName),
+      contents: component(pascalCaseName, titleCaseName),
     },
     componentTarget: {
       path: `lib/${pascalCaseName}Target.tsx`,
-      contents: componentTarget(camelCaseName, pascalCaseName),
+      contents: componentTarget(pascalCaseName),
     },
     componentContent: {
       path: `lib/${pascalCaseName}Content.tsx`,
       contents: componentContent(pascalCaseName),
+    },
+    hookContent: {
+      path: `lib/hooks/use${pascalCaseName}Content.tsx`,
+      contents: subcomponentContentHook(pascalCaseName),
+    },
+    hookTarget: {
+      path: `lib/hooks/use${pascalCaseName}Target.tsx`,
+      contents: subcomponentTargetHook(pascalCaseName),
+    },
+    hookIndex: {
+      path: `lib/hooks/index.ts`,
+      contents: hooksIndex(pascalCaseName),
     },
     index: {
       path: 'index.ts',

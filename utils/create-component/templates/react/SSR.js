@@ -1,5 +1,3 @@
-// React ssr test template
-
 module.exports = pascalCaseName => `
 /**
  * @jest-environment node

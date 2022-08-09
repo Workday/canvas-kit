@@ -1,6 +1,4 @@
-// React stories template
-
-module.exports = (modulePath, storyPath, pascalCaseName, rootPath) => `import React from 'react';
+module.exports = (modulePath, storyPath, pascalCaseName) => `import React from 'react';
 
 import {${pascalCaseName}} from '${modulePath}';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';

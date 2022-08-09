@@ -1,12 +1,10 @@
-// React stories template
-
 module.exports = (modulePath, storyPath, pascalCaseName, rootPath) => `import React from 'react';
 
 import {StaticStates} from '@workday/canvas-kit-react/common;
 import {ComponentStatesTable} from '@workday/canvas-kit-labs-react/common';
 import {withSnapshotsEnabled} from '../${rootPath}/utils/storybook';
 
-import {${pascalCaseName}, use${pascalCaseName}Model} from '${modulePath}';
+import {${pascalCaseName}} from '${modulePath}';
 
 export default withSnapshotsEnabled({
   title: '${storyPath}',
@@ -14,7 +12,6 @@ export default withSnapshotsEnabled({
 });
 
 export const ${pascalCaseName}States = () => {
-  const model = use${pascalCaseName}Model();
 
   return (
     <StaticStates>
@@ -35,7 +32,7 @@ export const ${pascalCaseName}States = () => {
           const state = {open: props.open};
 
           return (
-            <${pascalCaseName} model={{...model, state}}>
+            <${pascalCaseName} {...state}>
               <${pascalCaseName}.Target>Toggle</${pascalCaseName}.Target>
               <${pascalCaseName}.Content>Content</${pascalCaseName}.Content>
             </${pascalCaseName}>
