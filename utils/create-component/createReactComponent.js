@@ -36,7 +36,7 @@ module.exports = (modulePath, name, description, prerelease, category) => {
 
   const files = {
     model: {
-      path: `lib/use${pascalCaseName}Model.tsx`,
+      path: `lib/hooks/use${pascalCaseName}Model.tsx`,
       contents: model(camelCaseName, pascalCaseName),
     },
     component: {
@@ -44,11 +44,11 @@ module.exports = (modulePath, name, description, prerelease, category) => {
       contents: component(pascalCaseName),
     },
     componentTarget: {
-      path: `lib/${pascalCaseName}.Target.tsx`,
+      path: `lib/${pascalCaseName}Target.tsx`,
       contents: componentTarget(camelCaseName, pascalCaseName),
     },
     componentContent: {
-      path: `lib/${pascalCaseName}.Content.tsx`,
+      path: `lib/${pascalCaseName}Content.tsx`,
       contents: componentContent(pascalCaseName),
     },
     index: {
