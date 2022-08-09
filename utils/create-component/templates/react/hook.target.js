@@ -8,11 +8,11 @@ import {use${pascalCaseName}Model} from './use${pascalCaseName}Model';
  */
 export const use${pascalCaseName}Target = createElemPropsHook(use${pascalCaseName}Model)(({state, events}) => {
   return {
-    onClick: (event: React.MouseEvent<HTMLElement>) {
+    onClick: (event: React.MouseEvent<HTMLElement>) => {
       if (state.open) {
-        events.close({});
+        events.close(event);
       } else {
-        events.open({});
+        events.open(event);
       }
     },
   };

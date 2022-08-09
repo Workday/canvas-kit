@@ -8,7 +8,7 @@ import {use${pascalCaseName}Model} from './use${pascalCaseName}Model';
  */
 export const use${pascalCaseName}Content = createElemPropsHook(use${pascalCaseName}Model)(({state}) => {
   return {
-    ['data-is-${pascalCaseName}-open']: \`\${state.open ? 'yes' : 'no'}\`,
+    ['data-is-it-open']: \`\${state.open ? 'yes' : 'no'}\`,
   };
 });
 `;

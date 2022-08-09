@@ -8,12 +8,13 @@ import {
   StyledType,
 } from '@workday/canvas-kit-react/common';
 import {colors, space, type} from '@workday/canvas-kit-react/tokens';
+import {Box} from '@workday/canvas-kit-react/layout';
 
 import { use${pascalCaseName}Model, use${pascalCaseName}Content } from './hooks';
 
-const StyledContainer = styled('div')<StyledType>({
-  ...type.levels.subtext.medium
-  background: colors.frenchVanilla600,
+const StyledContainer = styled(Box)<StyledType>({
+  ...type.levels.subtext.medium,
+  background: colors.frenchVanilla300,
   padding: space.s,
   border: \`1px solid \${colors.licorice600}\`,
 });

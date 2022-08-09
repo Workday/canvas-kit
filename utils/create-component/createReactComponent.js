@@ -4,7 +4,7 @@ const {consoleMessage} = require('./consoleUtils');
 
 const writeModuleFiles = require('./writeModuleFiles');
 
-const {getCamelCaseName, getPascalCaseName, getTitleCaseName} = require('./nameUtils');
+const {getPascalCaseName, getTitleCaseName} = require('./nameUtils');
 
 const model = require('./templates/react/model');
 const component = require('./templates/react/component');
@@ -14,8 +14,10 @@ const subcomponentContentHook = require('./templates/react/hook.content');
 const subcomponentTargetHook = require('./templates/react/hook.target');
 const index = require('./templates/react/index');
 const hooksIndex = require('./templates/react/hook.index');
-const stories = require('./templates/react/stories');
-const testingStories = require('./templates/react/stories_VisualTesting');
+const mdxStories = require('./templates/react/stories.mdx');
+const basicStories = require('./templates/react/stories.basic');
+const openStories = require('./templates/react/stories.open');
+const testingStories = require('./templates/react/stories.visualTesting');
 const ssr = require('./templates/react/SSR');
 const readme = require('./templates/react/readme');
 const tsconfig = require('./templates/react/tsconfig');
@@ -30,7 +32,6 @@ module.exports = (modulePath, name, description, prerelease, category) => {
   mkdirp.sync(modulePath);
 
   const prereleaseTitle = prerelease && prerelease.charAt(0).toUpperCase() + prerelease.slice(1);
-  const camelCaseName = getCamelCaseName(name);
   const pascalCaseName = getPascalCaseName(name);
   const titleCaseName = getTitleCaseName(name);
   const rootPath = '../../..';
@@ -70,12 +71,20 @@ module.exports = (modulePath, name, description, prerelease, category) => {
       path: 'index.ts',
       contents: index(pascalCaseName),
     },
-    stories: {
-      path: 'stories/stories.tsx',
-      contents: stories(moduleName, storyPath, pascalCaseName, rootPath),
+    mdxStories: {
+      path: `stories/${pascalCaseName}.stories.mdx`,
+      contents: mdxStories(moduleName, storyPath, pascalCaseName, titleCaseName, prerelease, description),
+    },
+    basicStories: {
+      path: `stories/examples/Basic.tsx`,
+      contents: basicStories(moduleName, pascalCaseName),
+    },
+    openStories: {
+      path: `stories/examples/Open.tsx`,
+      contents: openStories(moduleName, pascalCaseName),
     },
     testingStories: {
-      path: 'stories/stories_VisualTesting.tsx',
+      path: `stories/visual-testing/${pascalCaseName}.tsx`,
       contents: testingStories(moduleName, testingStoryPath, pascalCaseName, rootPath),
     },
     ssr: {
