@@ -44,7 +44,7 @@ const Container = styled(Box)<StyledType>({
 // positioning, but seems to when using flexbox centering. This messes up Popper calculations inside
 // the Modal. The centering container forces a "center" pixel calculation by making sure the width
 // is always an even number
-const ResponsiveCenteringContainer = styled('div')(({theme}) => ({
+const ResponsiveContainer = styled('div')(({theme}) => ({
   maxHeight: '100vh',
   display: 'flex',
   position: 'absolute',
@@ -90,7 +90,7 @@ const OpenModalOverlay = createSubcomponent('div')({
   const windowSize = useWindowSize();
   const content = (
     <Container as={Element} {...elemProps}>
-      <ResponsiveCenteringContainer
+      <ResponsiveContainer
         // make sure the centering container is an even number of pixels to avoid sub-pixel
         // inaccuracies due to centering
         style={{
@@ -98,7 +98,7 @@ const OpenModalOverlay = createSubcomponent('div')({
         }}
       >
         {elemProps.children}
-      </ResponsiveCenteringContainer>
+      </ResponsiveContainer>
     </Container>
   );
 
