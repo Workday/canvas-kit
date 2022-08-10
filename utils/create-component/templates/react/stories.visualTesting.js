@@ -1,9 +1,9 @@
-module.exports = (modulePath, storyPath, pascalCaseName, rootPath) => `import React from 'react';
+module.exports = (modulePath, storyPath, pascalCaseName, rootPath) => `
+import React from 'react';
 
 import {StaticStates} from '@workday/canvas-kit-react/common';
 import {ComponentStatesTable} from '@workday/canvas-kit-labs-react/common';
 import {withSnapshotsEnabled} from '../../${rootPath}/utils/storybook';
-
 
 import {${pascalCaseName}} from '${modulePath}';
 
@@ -13,12 +13,11 @@ export default withSnapshotsEnabled({
 });
 
 export const ${pascalCaseName}States = () => {
-
   return (
     <StaticStates>
       <ComponentStatesTable
-        rowProps={[{label: 'Default', props: {}}]}
-        columnProps={[
+        columnProps={[{label: 'Default', props: {}}]}
+        rowProps={[
           {
             label: 'Closed',
             props: {open: false},
@@ -29,11 +28,9 @@ export const ${pascalCaseName}States = () => {
           },
         ]}
       >
-        {props => {
-          const state = {open: props.open};
-
+        {({open, ...props}) => {
           return (
-            <${pascalCaseName} {...state}>
+            <${pascalCaseName}  initialOpen={open} {...props}>
               <${pascalCaseName}.Target>Toggle</${pascalCaseName}.Target>
               <${pascalCaseName}.Content>Content</${pascalCaseName}.Content>
             </${pascalCaseName}>

@@ -84,7 +84,7 @@ module.exports = (modulePath, name, description, prerelease, category) => {
       contents: openStories(moduleName, pascalCaseName),
     },
     testingStories: {
-      path: `stories/visual-testing/${pascalCaseName}.tsx`,
+      path: `stories/visual-testing/stories_${pascalCaseName}.tsx`,
       contents: testingStories(moduleName, testingStoryPath, pascalCaseName, rootPath),
     },
     ssr: {
