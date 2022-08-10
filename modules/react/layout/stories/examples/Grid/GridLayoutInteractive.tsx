@@ -29,7 +29,7 @@ const CellItem = (props: {children: React.ReactNode}) => {
     <Grid
       alignContent="center"
       gridAutoColumns="max-content"
-      gridGap="0 16px"
+      gridGap="xs"
       height="100%"
       gridAutoFlow="column"
       padding="xs"
@@ -70,11 +70,11 @@ export const GridLayoutInteractive = () => {
   };
 
   return (
-    <Grid gridAutoFlow="row" padding="xs" gridGap="10px 0">
+    <Grid gridAutoFlow="row" padding="xs">
       <Grid
         gridTemplateColumns="repeat(3, 1fr)"
         gridTemplateRows="repeat(3, 1fr)"
-        gridGap="10px"
+        gridGap="xs"
         padding="xs"
         border="5px solid #c860d1"
       >

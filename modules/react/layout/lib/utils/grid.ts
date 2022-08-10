@@ -1,4 +1,7 @@
 import {Property} from 'csstype';
+import {space as spaceTokens, CanvasSpace, CanvasSpaceKeys} from '@workday/canvas-kit-react/tokens';
+
+type GridSpacePropsValues = CanvasSpaceKeys | number | (string & {});
 
 /** style props to for grid container properties */
 export type GridStyleProps = {
@@ -25,12 +28,12 @@ export type GridStyleProps = {
   gridTemplateColumns?: Property.GridTemplateColumns;
   /** sets `grid-template-rows` property */
   gridTemplateRows?: Property.GridTemplateRows;
-  /** sets `gap` property */
-  gridGap?: Property.GridGap;
   /** sets `column-gap` property */
-  gridColumnGap?: Property.GridColumnGap;
+  gridColumnGap?: Property.GridColumnGap | GridSpacePropsValues;
   /** sets `row-gap` property */
-  gridRowGap?: Property.GridRowGap;
+  gridRowGap?: Property.GridRowGap | GridSpacePropsValues;
+  /** sets `gap` property */
+  gridGap?: Property.GridGap | GridSpacePropsValues;
   /** sets `place-items` property */
   gridPlaceItems?: Property.PlaceItems;
   /** sets `grid-auto-columns` property */
@@ -45,6 +48,29 @@ export type GridStyleProps = {
   grid?: Property.Grid;
 };
 
+export type GridSpaceProps = {
+  /** sets `gap` property */
+  gridGap?: Property.GridGap | GridSpacePropsValues;
+};
+
+const gridGap = (value: GridSpacePropsValues) => {
+  return {gridGap: spaceTokens[value as keyof CanvasSpace] || value};
+};
+const gridRowGap = (value: GridSpacePropsValues) => {
+  return {gridRowGap: spaceTokens[value as keyof CanvasSpace] || value};
+};
+const gridColumnGap = (value: GridSpacePropsValues) => {
+  return {gridColumnGap: spaceTokens[value as keyof CanvasSpace] || value};
+};
+
+const GridSpaceStyleProps = {
+  gridGap,
+  gridRowGap,
+  gridColumnGap,
+};
+
+export type SpaceStyleProps = GridSpaceProps & GridStyleProps;
+
 const gridProps = {
   alignContent: 'alignContent',
   alignItems: 'alignItems',
@@ -55,9 +81,9 @@ const gridProps = {
   gridTemplate: 'gridTemplate',
   gridTemplateColumns: 'gridTemplateColumns',
   gridTemplateRows: 'gridTemplateRows',
-  gridGap: 'gridGap',
   gridColumnGap: 'gridColumnGap',
   gridRowGap: 'gridRowGap',
+  gridGap: 'gridGap',
   gridPlaceItems: 'gridPlaceItems',
   gridAutoColumns: 'gridAutoColumns',
   gridAutoRows: 'gridAutoRows',
@@ -79,14 +105,22 @@ const gridProps = {
  * );
  *
  */
-export function grid<P extends GridStyleProps>(props: P) {
-  const styles = {};
+export function grid<P extends SpaceStyleProps>(props: P) {
+  let styles = {};
   for (const key in props) {
-    if (key in gridProps) {
-      const attr = gridProps[key as keyof GridStyleProps];
-      const value = props[key];
-      // @ts-ignore TS doesn't like adding a potentially unknown key to an object, but because we own this object, it's fine.
-      styles[attr] = value;
+    if (props.hasOwnProperty(key)) {
+      if (key in gridProps) {
+        const attr = gridProps[key as keyof GridStyleProps];
+        const value = props[key];
+        // @ts-ignore TS doesn't like adding a potentially unknown key to an object, but because we own this object, it's fine.
+        styles[attr] = value;
+      }
+      if (key in GridSpaceStyleProps) {
+        const value = props[key as keyof GridSpaceProps] as GridSpacePropsValues;
+        const spaceFn = GridSpaceStyleProps[key as keyof GridSpaceProps];
+        const style = spaceFn(value);
+        styles = {...styles, ...style};
+      }
     }
   }
   return styles;
