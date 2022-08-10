@@ -49,6 +49,7 @@ export const useBreadcrumbsItem = composeHooks(
 
       return {
         inert: state.nonInteractiveIds.includes(localId) ? '' : undefined,
+        disabled: undefined,
       };
     }
   )

@@ -8,12 +8,20 @@ function getBreadcrumbsList() {
   return cy.findByRole('list');
 }
 
+function getAllBreadcrumbsLink(number?: number) {
+  return number ? cy.findAllByRole('link').eq(number) : cy.findAllByRole('link');
+}
+
 function getDropdownButton() {
-  return cy.findByLabelText('more links');
+  return cy.findByLabelText('More links');
 }
 
 function getDropdownMenu() {
   return cy.findByRole('menu');
+}
+
+function getDropdownMenuItem(number?: number) {
+  return number ? cy.findAllByRole('menuitem').eq(number) : cy.findAllByRole('menuitem');
 }
 
 function openDropdownMenu() {
@@ -26,17 +34,18 @@ describe('Breadcrumbs', () => {
   before(() => {
     h.stories.visit();
   });
-  context('given the [Preview/Breadcrumbs/React, Basic] example is rendered', () => {
+
+  context('given the [Components/Navigation/Breadcrumbs/React, Basic] example is rendered', () => {
     beforeEach(() => {
-      h.stories.load('Preview/Breadcrumbs/React', 'Basic');
+      h.stories.load('Components/Navigation/Breadcrumbs/React', 'Basic');
     });
 
     it('should not have any axe errors', () => {
       cy.checkA11y();
     });
 
-    it('should have a role of "navigation" on the <nav> element', () => {
-      getBreadcrumbsNav().should('have.attr', 'role', 'navigation');
+    it('should have an element with a role of "tablist"', () => {
+      getBreadcrumbsNav().should('be.visible');
     });
 
     it('should have an aria-label on the <nav> element', () => {
@@ -44,13 +53,26 @@ describe('Breadcrumbs', () => {
     });
 
     it('should have a role of "list" on the <ul> element', () => {
-      getBreadcrumbsList().should('have.attr', 'role', 'list');
+      getBreadcrumbsList().should('be.visible');
+    });
+
+    it('should have list item elements inside the "list"', () => {
+      getBreadcrumbsList()
+        .get('li')
+        .should('be.visible');
+    });
+
+    it('should have "data-id" for list items', () => {
+      getBreadcrumbsList()
+        .find('li')
+        .each($link => {
+          expect($link).to.have.attr('data-id');
+        });
     });
 
     context('when a breadcrumb link is focused', () => {
       it('should show tooltips for truncated link items', () => {
-        cy.findAllByRole('link')
-          .eq(3)
+        getAllBreadcrumbsLink(3)
           .focus()
           .then($link => {
             const text = $link.text();
@@ -58,11 +80,21 @@ describe('Breadcrumbs', () => {
           });
       });
 
-      it('should not show tooltips for truncated link items', () => {
-        cy.findAllByRole('link')
-          .eq(1)
-          .focus();
+      it('should not show tooltips for not truncated link items', () => {
+        getAllBreadcrumbsLink(1).focus();
         cy.findByRole('tooltip').should('not.exist');
+      });
+
+      context('when the tab key is pressed', () => {
+        beforeEach(() => {
+          cy.tab();
+        });
+
+        it('should move focus to the next link', () => {
+          getAllBreadcrumbsLink(1).focus();
+          cy.tab();
+          getAllBreadcrumbsLink(2).should('have.focus');
+        });
       });
     });
 
@@ -78,41 +110,44 @@ describe('Breadcrumbs', () => {
     });
   });
 
-  context('given the [Preview/Breadcrumbs/React, Collapsible List] example is rendered', () => {
-    beforeEach(() => {
-      h.stories.load('Preview/Breadcrumbs/React', 'CollapsibleList');
-    });
-
-    it('should not have any axe errors', () => {
-      cy.checkA11y();
-    });
-
-    it('should have aria-expanded set to "false" on the dropdown button', () => {
-      getDropdownButton().should('have.attr', 'aria-expanded', 'false');
-    });
-
-    it('should have aria-haspopup set to "true" on the dropdown button', () => {
-      getDropdownButton().should('have.attr', 'aria-haspopup', 'true');
-    });
-
-    it('should have aria-controls set to "menu" on the dropdown button', () => {
-      getDropdownButton().should('have.attr', 'aria-controls', 'menu');
-    });
-
-    context('when the dropdown button is clicked', () => {
-      it("should toggle the button's aria-expanded attribute", () => {
-        const dropdownButton = getDropdownButton();
-        dropdownButton.click();
-        dropdownButton.should('have.attr', 'aria-expanded', 'true');
-        dropdownButton.click();
-        dropdownButton.should('have.attr', 'aria-expanded', 'false');
+  context(
+    'given the [Components/Navigation/Breadcrumbs/React, Collapsed] example is rendered',
+    () => {
+      beforeEach(() => {
+        h.stories.load('Components/Navigation/Breadcrumbs/React', 'Collapsed');
       });
-    });
-  });
 
-  context('given the [Preview/Breadcrumbs/React, Collapsible List] menu is rendered', () => {
+      it('should not have any axe errors', () => {
+        cy.checkA11y();
+      });
+
+      it('should have aria-expanded set to "false" on the dropdown button', () => {
+        getDropdownButton().should('have.attr', 'aria-expanded', 'false');
+      });
+
+      it('should have aria-haspopup set to "true" on the dropdown button', () => {
+        getDropdownButton().should('have.attr', 'aria-haspopup', 'true');
+      });
+
+      it('should have aria-controls set to "menu" on the dropdown button', () => {
+        getDropdownButton().should('have.attr', 'aria-controls', 'menu');
+      });
+
+      context('when the dropdown button is clicked', () => {
+        beforeEach(() => {
+          getDropdownButton().click();
+        });
+
+        it("should toggle the button's aria-expanded attribute to true", () => {
+          getDropdownButton().should('have.attr', 'aria-expanded', 'true');
+        });
+      });
+    }
+  );
+
+  context('given the [Components/Navigation/Breadcrumbs/React, Collapsed] menu is rendered', () => {
     beforeEach(() => {
-      h.stories.load('Preview/Breadcrumbs/React', 'Collapsible List');
+      h.stories.load('Components/Navigation/Breadcrumbs/React', 'Collapsed');
       openDropdownMenu();
     });
 
@@ -134,10 +169,7 @@ describe('Breadcrumbs', () => {
 
     context('when the dropdown menu is toggled with a keypress', () => {
       it('should set focus to the first menu item', () => {
-        getDropdownMenu()
-          .find('a')
-          .eq(0)
-          .should('have.focus');
+        getDropdownMenuItem(0).should('have.focus');
       });
     });
 
@@ -147,9 +179,7 @@ describe('Breadcrumbs', () => {
       });
 
       it('should toggle focus to the second menu item on down keypress', () => {
-        cy.findAllByRole('menuitem')
-          .eq(1)
-          .should('have.focus');
+        getDropdownMenuItem(1).should('have.focus');
       });
     });
 
@@ -161,9 +191,8 @@ describe('Breadcrumbs', () => {
       it('should roll the focus back to the first menu item on down keypress', () => {
         cy.focused().realType('{downarrow}');
         cy.focused().realType('{downarrow}');
-        cy.findAllByRole('menuitem')
-          .eq(0)
-          .should('have.focus');
+        cy.focused().realType('{downarrow}');
+        getDropdownMenuItem(0).should('have.focus');
       });
     });
 
@@ -173,29 +202,7 @@ describe('Breadcrumbs', () => {
       });
 
       it('should toggle focus to the next menu item on down keypress', () => {
-        cy.findAllByRole('menuitem')
-          .eq(1)
-          .should('have.focus');
-      });
-    });
-
-    context('when the right arrow key is pressed on the dropdown menu', () => {
-      beforeEach(() => {
-        cy.focused().realType('{rightarrow}');
-      });
-
-      it('should toggle focus to the next menu item', () => {
-        cy.findAllByRole('menuitem')
-          .eq(1)
-          .should('have.focus');
-      });
-
-      it('should roll the focus back from the last menu item to the first menu item', () => {
-        cy.focused().realType('{rightarrow}');
-        cy.focused().realType('{rightarrow}');
-        cy.findAllByRole('menuitem')
-          .eq(0)
-          .should('have.focus');
+        getDropdownMenuItem(1).should('have.focus');
       });
     });
 
@@ -204,36 +211,16 @@ describe('Breadcrumbs', () => {
         // set focus to the second menuitem
         cy.focused().realType('{downarrow}');
       });
+
       it('should toggle focus to the previous list item', () => {
         cy.focused().realType('{uparrow}');
-        cy.findAllByRole('menuitem')
-          .eq(0)
-          .should('have.focus');
+        getDropdownMenuItem(0).should('have.focus');
       });
 
-      it('should return focus from the first menu item to the dropdown button', () => {
+      it('should return focus from the first menu item to the last', () => {
         cy.focused().realType('{uparrow}');
         cy.focused().realType('{uparrow}');
-        getDropdownButton().should('have.focus');
-      });
-    });
-
-    context('when the left arrow key is pressed on the dropdown menu', () => {
-      beforeEach(() => {
-        // set focus to the second menuitem
-        cy.focused().realType('{downarrow}');
-      });
-      it('should toggle focus to the previous menu item', () => {
-        cy.focused().realType('{leftarrow}');
-        cy.findAllByRole('menuitem')
-          .eq(0)
-          .should('have.focus');
-      });
-
-      it('should return focus from the first menu item to the dropdown button', () => {
-        cy.focused().realType('{leftarrow}');
-        cy.focused().realType('{leftarrow}');
-        getDropdownButton().should('have.focus');
+        getDropdownMenuItem(3).should('have.focus');
       });
     });
 

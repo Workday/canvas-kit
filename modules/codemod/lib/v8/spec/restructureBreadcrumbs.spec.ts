@@ -22,7 +22,7 @@ describe('Breadcrumbs', () => {
     expectTransform(input, expected);
   });
 
-  it('should replace Breadcrumbs.Nav by Breadcrumbs', () => {
+  it('should rename Breadcrumbs components', () => {
     const input = stripIndent`
       import {Breadcrumbs} from '@workday/canvas-kit-react/breadcrumbs';
 
@@ -50,23 +50,27 @@ describe('Breadcrumbs', () => {
     expectTransform(input, expected);
   });
 
-  it('should replace Breadcrumbs.Nav by Breadcrumbs', () => {
+  it('should rename Breadcrumbs components from main', () => {
     const input = stripIndent`
-      import {Breadcrumbs as CanvasBreadcrumbs} from '@workday/canvas-kit-react/breadcrumbs';
+      import {Breadcrumbs as CanvasBreadcrumbs} from '@workday/canvas-kit-react';
 
       <CanvasBreadcrumbs.Nav aria-label="Some links">
         <CanvasBreadcrumbs.CollapsibleList maxWidth="100">
-          {items}
+          <Breadcrumbs.Item>
+            <Breadcrumbs.Link>link</Breadcrumbs.Link>
+          </Breadcrumbs.Item>
         </CanvasBreadcrumbs.CollapsibleList>
       </CanvasBreadcrumbs.Nav>
     `;
 
     const expected = stripIndent`
-      import {Breadcrumbs as CanvasBreadcrumbs} from '@workday/canvas-kit-react/breadcrumbs';
+      import {Breadcrumbs as CanvasBreadcrumbs} from '@workday/canvas-kit-react';
 
       <CanvasBreadcrumbs>
         <CanvasBreadcrumbs.List maxWidth="100" aria-label="Some links">
-          {items}
+          <Breadcrumbs.Item>
+            <Breadcrumbs.Link>link</Breadcrumbs.Link>
+          </Breadcrumbs.Item>
         </CanvasBreadcrumbs.List>
       </CanvasBreadcrumbs>
     `;

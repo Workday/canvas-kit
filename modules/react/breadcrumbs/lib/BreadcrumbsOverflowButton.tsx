@@ -48,7 +48,12 @@ export const BreadcrumbsOverflowButton = createSubcomponent('button')({
 
   return (
     <Flex alignItems="center" {...styles}>
-      <TertiaryButton as={Element} icon={relatedActionsIcon} {...elemProps} />
+      <TertiaryButton
+        as={Element}
+        icon={relatedActionsIcon}
+        aria-label={buttonAriaLabel}
+        {...elemProps}
+      />
       <SystemIcon
         icon={icon}
         color={colors.licorice200}
@@ -58,7 +63,6 @@ export const BreadcrumbsOverflowButton = createSubcomponent('button')({
         width={32}
         styles={{justifyContent: 'center', alignItems: 'center', display: 'inline-flex'}}
         aria-hidden
-        aria-label={buttonAriaLabel}
       />
     </Flex>
   );

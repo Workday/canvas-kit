@@ -21,7 +21,7 @@ export const Collapsed = () => {
   ]);
 
   const model = useBreadcrumbsModel({items});
-  const [containerWidth, setContainerWidth] = React.useState('100%');
+  const [containerWidth, setContainerWidth] = React.useState('350px');
 
   return (
     <div>
@@ -41,7 +41,9 @@ export const Collapsed = () => {
           <Breadcrumbs.Menu.Popper>
             <Breadcrumbs.Menu.Card maxWidth={300} maxHeight={200}>
               <Breadcrumbs.Menu.List>
-                {(item: Breadcrumb) => <Breadcrumbs.Menu.Item>{item.text}</Breadcrumbs.Menu.Item>}
+                {(item: Breadcrumb) => (
+                  <Breadcrumbs.Menu.Item as="a">{item.text}</Breadcrumbs.Menu.Item>
+                )}
               </Breadcrumbs.Menu.List>
             </Breadcrumbs.Menu.Card>
           </Breadcrumbs.Menu.Popper>
