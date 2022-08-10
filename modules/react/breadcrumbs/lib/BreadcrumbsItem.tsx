@@ -12,8 +12,8 @@ import {Flex} from '@workday/canvas-kit-react/layout';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {chevronLeftSmallIcon, chevronRightSmallIcon} from '@workday/canvas-system-icons-web';
 import {colors} from '@workday/canvas-kit-react/tokens';
-import {useRTL} from './useRTL';
-import {useBreadcrumbsModel} from './useBreadcrumbsModel';
+import {useRTL} from './hooks/useRTL';
+import {useBreadcrumbsModel} from './hooks/useBreadcrumbsModel';
 import {BreadcrumbsLink} from './BreadcrumbsLink';
 
 export interface BreadcrumbsItemProps {

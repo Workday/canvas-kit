@@ -6,7 +6,7 @@ import {type} from '@workday/canvas-kit-react/tokens';
 import {TooltipContainer} from '@workday/canvas-kit-react/tooltip';
 import {Popper} from '@workday/canvas-kit-react/popup';
 
-import {useTruncateTooltip} from './useTruncateTooltip';
+import {useTruncateTooltip} from './hooks/useTruncateTooltip';
 
 export interface BreadcrumbsLinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   /**

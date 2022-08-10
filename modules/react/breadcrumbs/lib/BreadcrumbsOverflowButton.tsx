@@ -14,9 +14,9 @@ import {
   createSubcomponent,
 } from '@workday/canvas-kit-react/common';
 import {useOverflowListTarget} from '@workday/canvas-kit-react/collection';
-import {useRTL} from './useRTL';
+import {useRTL} from './hooks/useRTL';
 import {useMenuTarget} from '@workday/canvas-kit-react/menu';
-import {useBreadcrumbsModel} from './useBreadcrumbsModel';
+import {useBreadcrumbsModel} from './hooks/useBreadcrumbsModel';
 import {TertiaryButton} from '@workday/canvas-kit-react/button';
 
 export interface BreadcrumbsOverflowButtonProps {

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Breadcrumbs, useBreadcrumbsModel} from '../..';
-import {Box, Grid, HStack} from '@workday/canvas-kit-react/layout';
+import {Box, Grid} from '@workday/canvas-kit-react/layout';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
 
 export interface Breadcrumb {
@@ -52,11 +52,11 @@ export const Collapsed = () => {
       <Grid gridTemplateColumns="repeat(4, 1fr)" gridGap="8px">
         <SecondaryButton onClick={() => setContainerWidth('100%')}>100%</SecondaryButton>
         <SecondaryButton onClick={() => setContainerWidth('700px')}>700px</SecondaryButton>
-        <SecondaryButton onClick={() => setContainerWidth('600px')}>600px</SecondaryButton>
+        <SecondaryButton onClick={() => setContainerWidth('550px')}>550px</SecondaryButton>
         <SecondaryButton onClick={() => setContainerWidth('475px')}>475px</SecondaryButton>
-        <SecondaryButton onClick={() => setContainerWidth('400px')}>400px</SecondaryButton>
-        <SecondaryButton onClick={() => setContainerWidth('300px')}>300px</SecondaryButton>
+        <SecondaryButton onClick={() => setContainerWidth('350px')}>350px</SecondaryButton>
         <SecondaryButton onClick={() => setContainerWidth('235px')}>235px</SecondaryButton>
+        <SecondaryButton onClick={() => setContainerWidth('150px')}>150px</SecondaryButton>
         <SecondaryButton onClick={() => setContainerWidth('100px')}>100px</SecondaryButton>
       </Grid>
     </div>

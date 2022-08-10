@@ -2,6 +2,7 @@ import React from 'react';
 import {createModelHook} from '@workday/canvas-kit-react/common';
 import {defaultGetId, useOverflowListModel} from '@workday/canvas-kit-react/collection';
 import {useMenuModel} from '@workday/canvas-kit-react/menu';
+import {reorganizeHiddenItems} from './utils';
 
 export const useBreadcrumbsModel = createModelHook({
   defaultConfig: {
@@ -22,7 +23,6 @@ export const useBreadcrumbsModel = createModelHook({
   requiredConfig: useOverflowListModel.requiredConfig,
 })(config => {
   const getId = config.getId || defaultGetId;
-
   const items = config.items;
 
   const model = useOverflowListModel(
@@ -35,30 +35,7 @@ export const useBreadcrumbsModel = createModelHook({
 
   let hiddenIds = model.state.hiddenIds;
   let nonInteractiveIds = model.state.nonInteractiveIds;
-  const totalSize = model.state.items.length;
-  const itemSpace = totalSize - hiddenIds.length;
-
-  if (itemSpace <= 1) {
-    // Keep only last items if there is place for two or less items
-    hiddenIds = items.slice(0, totalSize - 1).map(getId);
-  } else if (itemSpace === 2) {
-    // Always keep first and last item if there is place for 3 items
-    hiddenIds = items.slice(1, totalSize - 1).map(getId);
-  } else if (itemSpace === 3) {
-    // Always keep first and 2 last items if there is place for 4 items
-    hiddenIds = items.slice(1, totalSize - 2).map(getId);
-  } else {
-    const indexFirstHidden = items.findIndex(item => item.id === hiddenIds[0]);
-    // If there is space for more than 3 items, keep the first and 2 last items visible
-    // If they are hidden it should replace by non-hidden items
-    hiddenIds = hiddenIds.length
-      ? [
-          ...items.slice(indexFirstHidden - 2, indexFirstHidden).map(getId),
-          ...hiddenIds.slice(0, hiddenIds.length - 2),
-        ]
-      : hiddenIds;
-  }
-
+  hiddenIds = reorganizeHiddenItems(items, hiddenIds, getId);
   nonInteractiveIds = hiddenIds;
 
   const state = {

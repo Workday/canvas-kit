@@ -1,2 +1,2 @@
 export * from './lib/Breadcrumbs';
-export * from './lib/useBreadcrumbsModel';
+export * from './lib/hooks/useBreadcrumbsModel';

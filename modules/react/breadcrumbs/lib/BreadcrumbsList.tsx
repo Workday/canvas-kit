@@ -4,7 +4,7 @@ import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {useOverflowListMeasure, useListRenderItems} from '@workday/canvas-kit-react/collection';
 
-import {useBreadcrumbsModel} from './useBreadcrumbsModel';
+import {useBreadcrumbsModel} from './hooks/useBreadcrumbsModel';
 import {Breadcrumbs} from './Breadcrumbs';
 
 // Use `Partial` here to make `spacing` optional

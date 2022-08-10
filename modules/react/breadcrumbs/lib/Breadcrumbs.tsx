@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {createContainer} from '@workday/canvas-kit-react/common';
 import {Menu} from '@workday/canvas-kit-react/menu';
-import {useBreadcrumbsModel} from './useBreadcrumbsModel';
+import {useBreadcrumbsModel} from './hooks/useBreadcrumbsModel';
 import {BreadcrumbsList} from './BreadcrumbsList';
 import {BreadcrumbsOverflowButton} from './BreadcrumbsOverflowButton';
 import {BreadcrumbsItem} from './BreadcrumbsItem';

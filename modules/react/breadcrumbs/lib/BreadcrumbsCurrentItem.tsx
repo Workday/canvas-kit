@@ -14,8 +14,8 @@ import {
   useListItemRegister,
   useOverflowListItemMeasure,
 } from '@workday/canvas-kit-react/collection';
-import {useTruncateTooltip} from './useTruncateTooltip';
-import {useBreadcrumbsModel} from './useBreadcrumbsModel';
+import {useTruncateTooltip} from './hooks/useTruncateTooltip';
+import {useBreadcrumbsModel} from './hooks/useBreadcrumbsModel';
 
 // default max-width for truncating text
 const DEFAULT_MAX_WIDTH = 350;

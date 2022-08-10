@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
 import {Breadcrumbs} from '@workday/canvas-kit-react/breadcrumbs';
-import {Box} from '../../../layout';
+import {Box} from '@workday/canvas-kit-react/layout';
 
 export interface Breadcrumb {
   id: string;
