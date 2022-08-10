@@ -29,12 +29,10 @@ export interface BreadcrumbsOverflowButtonProps {
 }
 
 export const useBreadcrumbsOverflowButton = composeHooks(
-  createElemPropsHook(useBreadcrumbsModel)((_model, _element, elemProps) => {
-    return {
-      'aria-haspopup': true,
-      'aria-controls': 'menu',
-    };
-  }),
+  createElemPropsHook(useBreadcrumbsModel)((_model, _element) => ({
+    'aria-haspopup': true,
+    'aria-controls': 'menu',
+  })),
   useOverflowListTarget,
   subModelHook((m: ReturnType<typeof useBreadcrumbsModel>) => m.menu, useMenuTarget)
 );
@@ -43,7 +41,7 @@ export const BreadcrumbsOverflowButton = createSubcomponent('div')({
   displayName: 'Breadcrumbs.OverflowButton',
   modelHook: useBreadcrumbsModel,
   elemPropsHook: useBreadcrumbsOverflowButton,
-})<BreadcrumbsOverflowButtonProps>(({buttonAriaLabel = "'More links'", ...elemProps}, Element) => {
+})<BreadcrumbsOverflowButtonProps>(({buttonAriaLabel = 'More links', ...elemProps}, Element) => {
   const {shouldUseRTL} = useRTL();
   const icon = shouldUseRTL ? chevronLeftSmallIcon : chevronRightSmallIcon;
 

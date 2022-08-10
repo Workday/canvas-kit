@@ -12,7 +12,6 @@ import {TooltipContainer} from '@workday/canvas-kit-react/tooltip';
 import {Popper} from '@workday/canvas-kit-react/popup';
 import {
   useListItemRegister,
-  useListItemRovingFocus,
   useOverflowListItemMeasure,
 } from '@workday/canvas-kit-react/collection';
 import {useTruncateTooltip} from './useTruncateTooltip';
@@ -60,7 +59,6 @@ export const useBreadcrumbsItem = composeHooks(
     return {ref: localRef};
   }),
   useOverflowListItemMeasure,
-  useListItemRovingFocus,
   useListItemRegister
 );
 

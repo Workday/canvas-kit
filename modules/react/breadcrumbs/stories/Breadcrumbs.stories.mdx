@@ -8,12 +8,20 @@ import {RTLCollapsibleList} from './examples/RTL';
 import {CurrentItemTruncation} from './examples/CurrentItemTruncation';
 import {LinkTruncation} from './examples/LinkTruncation';
 
+import {
+  BreadcrumbsModelConfigComponent,
+  BreadcrumbsStateComponent,
+  BreadcrumbsEventsComponent,
+} from './BreadcrumbsModel.splitprops.tsx';
+
 <Meta title="Components/Navigation/Breadcrumbs/React" component={Breadcrumbs} />
 
 # Canvas Kit Breadcrumbs
 
-Breadcrumbs allow users to keep track and maintain awareness of their location as they navigate
-through pages, folders, files, etc.
+Breadcrumbs is a
+[compound component](/getting-started/for-developers/resources/compound-components/) that allow
+users to keep track and maintain awareness of their location as they navigate through pages,
+folders, files, etc.
 
 [> Workday Design Reference](https://design.workday.com/components/navigation/breadcrumbs)
 
@@ -27,30 +35,35 @@ yarn add @workday/canvas-kit-preview-react
 
 ### Basic Example
 
-`Breadcrumbs.List` is a styled unordered list `<ul>` with no additional behaviors. Use this when you
-are not concerned about collapsing the list of breadcrumb items into a dropdown menu at a specified
-width.
+`Breadcrumbs` includes a container `Breadcrumbs` component and the following subcomponents which can
+be composed in a variety of ways: `Breadcrumbs.List`, `Breadcrumbs.Item`, `Breadcrumbs.CurrentItem`
+and `Breadcrumbs.Link`.
 
 Accessibility is built into Breadcrumbs components in a way that allows you to create an inclusive
 experience with little additional configuration. The only ARIA label you'll need to add is the
-`aria-label` for `Breadcrumbs.Nav` as seen in the example. And all links require `href`s to be
+`aria-label` for `Breadcrumbs.List` as seen in the example. And all links require `href`s to be
 properly identified. All other accessible attributes are baked into the components.
 
 <ExampleCodeBlock code={Basic} />
 
 ### Collapsed List
 
-`Breadcrumbs.CollapsibleList` is built on top of `Breadcrumbs.List`. It provides additional
-functionality to collapse list items into a dropdown menu at a specified width.
+`Breadcrumbs` is a responsive component based on the width of its container. If the rendered tabs
+exceed the width of the `Breadcrumbs.List`, an overflow menu will be rendered. This only works
+against the dynamic API where you give the `BreadcrumbsModel` an array of items to be rendered. The
+dynamic API handles the React `key` for you based on the item's identifier. The dynamic API requires
+either an `id` on each item object or a `getId` function that returns an identifier based on the
+item. The below example uses an `id` property on each item.
 
-In addition to adding `aria-label` to `Breadcrumbs.Nav` and identifying all links with an `href`,
-you'll need to add `buttonAriaLabel` to `Breadcrumbs.CollapsibleList`.
+The dynamic API takes in any object, but since nothing is known about your object, a
+[render prop](https://reactjs.org/docs/render-props.html) is necessary to instruct a list how it
+should render.
 
 <ExampleCodeBlock code={Collapsed} />
 
 ### Right-to-Left (RTL)
 
-Breadcrumbs has bidirectional support out of the box. That means outside of setting the content
+`Breadcrumbs` has bidirectional support out of the box. That means outside of setting the content
 direction in your application's Canvas theme, you don't need to do anything else to make it work.
 All you need to supply is the translated text for items and ARIA labels.
 
@@ -58,73 +71,67 @@ All you need to supply is the translated text for items and ARIA labels.
 
 ## Components
 
-### Breadcrumbs.Nav
+### Breadcrumbs
 
 #### Usage
 
-`Breadcrumbs.Nav` a styled `<nav>` element. It has no intrinsic state or behaviors.
+`Breadcrumbs` is a container component that is responsible for creating a `BreadcrumbsModel` and
+sharing it with its subcomponents using React context. It does not represent a real element.
+
+```tsx
+<Breadcrumbs items={[]}>{/* Child components */}</Breadcrumbs>
+```
+
+Alternatively, you may pass in a model using the hoisted model pattern.
+
+```tsx
+const model = useBreadcrumbsModel({
+  items: [],
+});
+
+<Breadcrumbs model={model}>{/* Child components */}</Breadcrumbs>;
+```
 
 #### Props
 
-This component also supports
-[all native HTMLElement props](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes).
-
-<ArgsTable of={Breadcrumbs.Nav} />
-
----
+Note that if you pass in a `model` configured with `useBreadcrumbsModel`, configuration props passed
+to `Breadcrumbs` will be ignored.
 
 ### Breadcrumbs.List
 
 #### Usage
 
-`Breadcrumbs.List` component is a styled, unordered list (`<ul>`) with no additional behaviors. Use
-this when you're not concerned about collapsing the list of breadcrumb items into a dropdown menu at
-a specified width.
+`Breadcrumbs.List` is a `Flex` component as `ul` element wrapped by `nav` element. It is a container
+for `Breadcrumbs.Item` subcomponents.
+
+```tsx
+<Breadcrumbs.List>{/* Breadcrumbs.Items */}</Breadcrumbs.List>
+```
 
 #### Props
 
-`Breadcrumbs.List` has no component-specific props. However, it supports
-[all native `<ul>` element props](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ul#Attributes).
+`Breadcrumbs.List` has its own props such as `aria-label` for `nav` element and `buttonAriaLabel`
+for overflow button `aria-label`. All undocumented props are spread to the underlying`Flex`
+component.
+
+<ArgsTable of={Breadcrumbs.List} />
 
 ---
 
-### Breadcrumbs.CollapsibleList
+### Breadcrumbs.Item
 
 #### Usage
 
-`Breadcrumbs.CollapsibleList` is built on top of `Breadcrumbs.List`. It provides additional
-functionality to collapse list items into a dropdown menu at a specified width.
+`Breadcrumbs.Item` is a `Flex` component as `li` element. It is container for `Breadcrumbs.Link`
+component
 
-The `maxWidth` prop sets the point to collapse. If the length of the list exceeds that value, items
-will be collapsed into a dropdown menu. Note that the first (root) item and last (current) items in
-the list will never be collapsed.
-
-##### Handling Custom Dropdown Button Icons
-
-By default the icon for the dropdown button is `relatedActionsIcon`. However, you can set this to
-any [Canvas System Icon](https://design.workday.com/tokens/assets/icons/system-icons) with the
-`buttonIcon` prop. Please consult the Canvas team if you decide to do this, as we'd like to keep
-breadcrumb navigation as consistent as possible.
+```tsx
+<Breadcrumbs.Item data-id="first">First Tab</Breadcrumbs.Item>
+```
 
 #### Props
 
-This component also supports
-[all native `<ul>` element props](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ul#Attributes).
-
-<ArgsTable of={Breadcrumbs.CollapsibleList} />
-
----
-
-### Breadcrumbs.ListItem
-
-#### Usage
-
-`Breadcrumbs.ListItem` is a styled `<li>` element that contains a `SystemIcon` separator.
-
-#### Props
-
-`Breadcrumbs.ListItem` has no component-specific props. However, it supports
-[all native `<li>` element props](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/li#Attributes).
+Undocumented props are spread to the underlying `Flex` component.
 
 ---
 
@@ -152,7 +159,7 @@ prop. Note that `onAction` will not block any `onClick` if provided. Below is an
 import * as React from 'react';
 // using the history package
 import {createBrowserHistory} from 'history';
-import {Breadcrumbs} from '@workday/canvas-kit-preview-react/breadcrumbs';
+import {Breadcrumbs} from '@workday/canvas-kit-react/breadcrumbs';
 
 // this is likely being done at the root of your application and not inside this component.
 const history = createBrowserHistory();
@@ -206,6 +213,46 @@ This component also supports
 [all native `<li>` element props](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/li#Attributes).
 
 <ArgsTable of={Breadcrumbs.CurrentItem} />
+
+## Model
+
+If `Breadcrumbs` was stripped of all its markup, attributes, and styling, what would remain is the
+[model](/getting-started/for-developers/resources/compound-components/#models). The model is an
+object composed of two parts: `state` which describes the current snapshot in time of the component
+and `events` which describes events that can be sent to the model.
+
+By default, `Breadcrumbs` will create a model and share it internally with its subcomponents using
+React context. Alternatively, if you need direct access to the model's `state` and `events` outside
+of the `Breadcrumbs` component, you may configure your own model with `useBreadcrumbsModel` and pass
+it to `Breadcrumbs` via a pattern called
+[hoisting the model](/getting-started/for-developers/resources/compound-components/#configuring-a-model).
+
+```tsx
+const model = useBreadcrumbsModel({
+  items: [],
+});
+
+<Breadcrumbs model={model}>{/* Child components */}</Breadcrumbs>;
+```
+
+### Config
+
+`useBreadcrumbsModel` accepts a configuration object with the following properties and returns a
+`BreadcrumbsModel` with `state` and `events` properties.
+
+<ArgsTable of={BreadcrumbsModelConfigComponent} />
+
+### State
+
+The `BreadcrumbsModel` `state` is an object with the following properties.
+
+<ArgsTable of={BreadcrumbsStateComponent} />
+
+### Events
+
+The `BreadcrumbsModel` `events` is an object with the following properties.
+
+<ArgsTable of={BreadcrumbsEventsComponent} />
 
 ## Specifications
 

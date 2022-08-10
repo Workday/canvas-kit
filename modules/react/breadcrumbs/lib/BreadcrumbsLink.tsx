@@ -9,7 +9,6 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {
   useListItemRegister,
-  useListItemRovingFocus,
   useOverflowListItemMeasure,
 } from '@workday/canvas-kit-react/collection';
 import {Hyperlink} from '@workday/canvas-kit-react/button';
@@ -66,7 +65,6 @@ export const useBreadcrumbsItem = composeHooks(
     return {ref: localRef};
   }),
   useOverflowListItemMeasure,
-  useListItemRovingFocus,
   useListItemRegister
 );
 

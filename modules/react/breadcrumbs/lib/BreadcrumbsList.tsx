@@ -10,11 +10,11 @@ import {Breadcrumbs} from './Breadcrumbs';
 // Use `Partial` here to make `spacing` optional
 export interface BreadcrumbsListProps<T = any>
   extends Omit<Partial<ExtractProps<typeof Flex, never>>, 'children'> {
-  ariaLabel?: string;
+  'aria-label'?: string;
   /**
    * The accessibility label for the dropdown menu button.
    *
-   * Suggested value: "more links"
+   * @default "More links"
    */
   buttonAriaLabel?: string;
   /**
@@ -33,29 +33,31 @@ export const BreadcrumbsList = createSubcomponent('ul')({
   displayName: 'Breadcrumbs.List',
   modelHook: useBreadcrumbsModel,
   elemPropsHook: useOverflowListMeasure,
-})<BreadcrumbsListProps>(({ariaLabel, buttonAriaLabel, children, ...elemProps}, Element, model) => {
-  const items = useListRenderItems(model, children) as [];
-  const splitIndex = items.length - 2;
+})<BreadcrumbsListProps>(
+  ({'aria-label': ariaLabel, buttonAriaLabel, children, ...elemProps}, Element, model) => {
+    const items = useListRenderItems(model, children) as [];
+    const splitIndex = items.length - 2;
 
-  return (
-    <nav role="navigation" aria-label={ariaLabel}>
-      <Flex
-        as={Element}
-        padding="zero"
-        margin="zero"
-        display="inline-flex"
-        alignItems="center"
-        minHeight={40}
-        listStyle="none"
-        style={{boxSizing: 'border-box'}}
-        role="list"
-        width="100%"
-        {...elemProps}
-      >
-        {items.length ? items.slice(0, splitIndex) : items}
-        <Breadcrumbs.OverflowButton buttonAriaLabel={buttonAriaLabel} />
-        {items.length ? items.slice(splitIndex, items.length) : null}
-      </Flex>
-    </nav>
-  );
-});
+    return (
+      <nav role="navigation" aria-label={ariaLabel}>
+        <Flex
+          as={Element}
+          padding="zero"
+          margin="zero"
+          display="inline-flex"
+          alignItems="center"
+          minHeight={40}
+          listStyle="none"
+          style={{boxSizing: 'border-box'}}
+          role="list"
+          width="100%"
+          {...elemProps}
+        >
+          {items.length ? items.slice(0, splitIndex) : items}
+          <Breadcrumbs.OverflowButton buttonAriaLabel={buttonAriaLabel} />
+          {items.length ? items.slice(splitIndex, items.length) : null}
+        </Flex>
+      </nav>
+    );
+  }
+);
