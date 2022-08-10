@@ -6,7 +6,7 @@ import {
 } from '@workday/canvas-system-icons-web';
 import {colors} from '@workday/canvas-kit-react/tokens';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
-import {Flex} from '@workday/canvas-kit-react/layout';
+import {Flex, FlexProps} from '@workday/canvas-kit-react/layout';
 import {
   createElemPropsHook,
   composeHooks,
@@ -37,16 +37,17 @@ export const useBreadcrumbsOverflowButton = composeHooks(
   subModelHook((m: ReturnType<typeof useBreadcrumbsModel>) => m.menu, useMenuTarget)
 );
 
-export const BreadcrumbsOverflowButton = createSubcomponent('div')({
+export const BreadcrumbsOverflowButton = createSubcomponent('button')({
   displayName: 'Breadcrumbs.OverflowButton',
   modelHook: useBreadcrumbsModel,
   elemPropsHook: useBreadcrumbsOverflowButton,
 })<BreadcrumbsOverflowButtonProps>(({buttonAriaLabel = 'More links', ...elemProps}, Element) => {
   const {shouldUseRTL} = useRTL();
   const icon = shouldUseRTL ? chevronLeftSmallIcon : chevronRightSmallIcon;
+  const styles = (elemProps as typeof elemProps & {style: FlexProps}).style;
 
   return (
-    <Flex as={Element} alignItems="center" {...elemProps}>
+    <Flex alignItems="center" {...styles}>
       <TertiaryButton as={Element} icon={relatedActionsIcon} {...elemProps} />
       <SystemIcon
         icon={icon}

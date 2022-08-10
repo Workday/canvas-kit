@@ -66,7 +66,6 @@ export const useBreadcrumbsModel = createModelHook({
     hiddenIds,
     nonInteractiveIds,
     orientation: config.orientation || 'horizontal',
-    tooltip: {},
   };
 
   const overflowItems = React.useMemo(
@@ -99,11 +98,14 @@ export const useBreadcrumbsModel = createModelHook({
             // default to hard redirecting
             window.location.href = link || '#';
           }
-          // don't block the onClick event if it's provided
           if (onClick) {
-            onClick(event);
+            onClick();
           }
         }
+      },
+      onShow() {
+        // Always select the first item when the menu is opened
+        menu.events.goToFirst();
       },
     })
   );
