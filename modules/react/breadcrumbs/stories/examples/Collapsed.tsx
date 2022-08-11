@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Breadcrumbs, useBreadcrumbsModel} from '../..';
+import {Breadcrumbs, useBreadcrumbsModel} from '@workday/canvas-kit-react/breadcrumbs';
 import {Box, Grid} from '@workday/canvas-kit-react/layout';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
 

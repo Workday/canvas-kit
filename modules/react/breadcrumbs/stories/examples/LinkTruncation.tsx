@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Breadcrumbs} from '@workday/canvas-kit-preview-react/breadcrumbs';
+import {Breadcrumbs} from '@workday/canvas-kit-react/breadcrumbs';
 
 export const LinkTruncation = () => {
   return (
