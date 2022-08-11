@@ -21,7 +21,7 @@ yarn add @workday/canvas-kit-${prerelease && prerelease + '-'}react
 
 ## Usage
 
-### Basic
+### Basic Example
 
 Show and hide using a button.
 
