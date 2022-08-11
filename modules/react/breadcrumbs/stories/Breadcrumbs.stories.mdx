@@ -111,7 +111,7 @@ for `Breadcrumbs.Item` subcomponents.
 #### Props
 
 `Breadcrumbs.List` has its own props such as `aria-label` for `nav` element and `buttonAriaLabel`
-for overflow button `aria-label`. All undocumented props are spread to the underlying`Flex`
+for overflow button `aria-label`. All undocumented props are spread to the underlying `Flex`
 component.
 
 <ArgsTable of={Breadcrumbs.List} />
@@ -123,7 +123,7 @@ component.
 #### Usage
 
 `Breadcrumbs.Item` is a `Flex` component as `li` element. It is container for `Breadcrumbs.Link`
-component
+component and provides correct overflow behavior across all items.
 
 ```tsx
 <Breadcrumbs.Item data-id="first">First Tab</Breadcrumbs.Item>
