@@ -1,8 +1,7 @@
 import React from 'react';
 
 import {Modal} from '@workday/canvas-kit-react/modal';
-import {DeleteButton, PrimaryButton} from '@workday/canvas-kit-react/button';
-import {HStack} from '@workday/canvas-kit-react/layout';
+import {PrimaryButton} from '@workday/canvas-kit-react/button';
 
 export const FullOverflow = () => {
   const handleClose = () => {

@@ -1,11 +1,6 @@
 import * as React from 'react';
 
-import {
-  createSubcomponent,
-  ExtractProps,
-  StyledType,
-  styled,
-} from '@workday/canvas-kit-react/common';
+import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
 
 import {HStack} from '@workday/canvas-kit-react/layout';
 import {useModalModel} from './hooks';
