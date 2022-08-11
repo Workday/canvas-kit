@@ -1,4 +1,3 @@
-export * from './breadcrumbs';
 export * from './color-picker';
 export * from './form-field';
 export * from './menu';
