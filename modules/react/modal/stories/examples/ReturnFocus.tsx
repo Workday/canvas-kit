@@ -37,7 +37,7 @@ export const ReturnFocus = () => {
       <Modal.Overlay>
         <Modal.Card>
           <Modal.CloseIcon aria-label="Close" />
-          <Modal.Heading>Delete Item</Modal.Heading>
+          <Modal.Heading>Modal Heading</Modal.Heading>
           <Modal.Body>
             <Box as="p" marginTop={0} marginBottom="m">
               Are you sure you want to delete the item?

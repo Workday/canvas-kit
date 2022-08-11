@@ -12,13 +12,5 @@ export const ModalHeading = createSubcomponent('h2')({
   modelHook: useModalModel,
   elemPropsHook: useModalHeading,
 })<ModalHeadingProps>((elemProps, Element) => {
-  return (
-    <Popup.Heading
-      marginInlineStart="l"
-      marginInlineEnd="l"
-      marginTop="l"
-      as={Element}
-      {...elemProps}
-    />
-  );
+  return <Popup.Heading marginInlineStart="l" marginInlineEnd="l" as={Element} {...elemProps} />;
 });

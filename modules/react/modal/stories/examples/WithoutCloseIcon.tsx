@@ -30,7 +30,7 @@ export const WithoutCloseIcon = () => {
       <Modal.Target as={PrimaryButton}>Open Modal</Modal.Target>
       <Modal.Overlay>
         <Modal.Card>
-          <Modal.Heading>Delete Item</Modal.Heading>
+          <Modal.Heading>Modal Heading</Modal.Heading>
           <Modal.Body paddingBottom="zero">
             <Box as="p" marginTop={0} marginBottom="m">
               Are you sure you want to delete the item?

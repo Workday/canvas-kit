@@ -11,11 +11,11 @@ export const Basic = () => {
 
   return (
     <Modal>
-      <Modal.Target as={PrimaryButton}>Open Modal</Modal.Target>
+      <Modal.Target as={PrimaryButton}>Delete Item</Modal.Target>
       <Modal.Overlay>
         <Modal.Card>
           <Modal.CloseIcon aria-label="Close" />
-          <Modal.Heading>Modal Heading</Modal.Heading>
+          <Modal.Heading>Delete Item</Modal.Heading>
           <Modal.Body paddingBottom="xxs">
             <Box as="p" marginTop={0} marginBottom="xxs">
               Are you sure you want to delete the item?

@@ -18,11 +18,11 @@ export const CustomFocus = () => {
 
   return (
     <Modal model={model}>
-      <Modal.Target as={PrimaryButton}>Open Custom Focus Modal</Modal.Target>
+      <Modal.Target as={PrimaryButton}>Open Modal</Modal.Target>
       <Modal.Overlay>
         <Modal.Card>
           <Modal.CloseIcon aria-label="Close" />
-          <Modal.Heading>Delete Item</Modal.Heading>
+          <Modal.Heading>Modal Heading</Modal.Heading>
           <Modal.Body paddingBottom="zero">
             <Box as="p" marginTop={0} marginBottom="m">
               Enter name to confirm deletion

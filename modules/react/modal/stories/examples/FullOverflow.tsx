@@ -10,11 +10,11 @@ export const FullOverflow = () => {
 
   return (
     <Modal>
-      <Modal.Target as={PrimaryButton}>Open Full Overflow Modal</Modal.Target>
+      <Modal.Target as={PrimaryButton}>Open Modal</Modal.Target>
       <Modal.OverflowOverlay>
         <Modal.Card maxHeight="inherit" height="inherit">
           <Modal.CloseIcon aria-label="Close" />
-          <Modal.Heading>Modal Title</Modal.Heading>
+          <Modal.Heading>Modal Heading</Modal.Heading>
           <Modal.Body paddingBottom="zero">
             <p>Are you sure you want to delete the item?</p>
             <p>Are you sure you want to delete the item?</p>
