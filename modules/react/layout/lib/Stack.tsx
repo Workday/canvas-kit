@@ -62,9 +62,9 @@ export interface HStackProps extends StackProps {
 
 export const HStack = createComponent('div')({
   displayName: 'HStack',
-  Component: ({children, ...elemProps}: HStackProps, ref, Element) => {
+  Component: ({children, flexDirection = 'row', ...elemProps}: HStackProps, ref, Element) => {
     return (
-      <Stack as={Element} ref={ref} flexDirection="row" {...elemProps}>
+      <Stack as={Element} ref={ref} flexDirection={flexDirection} {...elemProps}>
         {children}
       </Stack>
     );
@@ -84,9 +84,9 @@ export interface VStackProps extends StackProps {
 
 export const VStack = createComponent('div')({
   displayName: 'VStack',
-  Component: ({children, ...elemProps}: VStackProps, ref, Element) => {
+  Component: ({children, flexDirection = 'column', ...elemProps}: VStackProps, ref, Element) => {
     return (
-      <Stack as={Element} ref={ref} flexDirection="column" {...elemProps}>
+      <Stack as={Element} ref={ref} flexDirection={flexDirection} {...elemProps}>
         {children}
       </Stack>
     );

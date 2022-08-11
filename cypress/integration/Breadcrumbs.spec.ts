@@ -19,7 +19,7 @@ function getDropdownMenu() {
 function openDropdownMenu() {
   const dropdownButton = getDropdownButton();
   dropdownButton.focus();
-  dropdownButton.type('{enter}');
+  dropdownButton.realType('{enter}');
 }
 
 describe('Breadcrumbs', () => {
@@ -30,6 +30,7 @@ describe('Breadcrumbs', () => {
     beforeEach(() => {
       h.stories.load('Preview/Breadcrumbs/React', 'Basic');
     });
+
     it('should not have any axe errors', () => {
       cy.checkA11y();
     });
@@ -142,7 +143,7 @@ describe('Breadcrumbs', () => {
 
     context('when the first menu item is focused', () => {
       beforeEach(() => {
-        cy.focused().type('{downArrow}');
+        cy.focused().realType('{downarrow}');
       });
 
       it('should toggle focus to the second menu item on down keypress', () => {
@@ -154,12 +155,12 @@ describe('Breadcrumbs', () => {
 
     context('when the last menu item is focused', () => {
       beforeEach(() => {
-        cy.focused().type('{downArrow}');
+        cy.focused().realType('{downarrow}');
       });
 
       it('should roll the focus back to the first menu item on down keypress', () => {
-        cy.focused().type('{downArrow}');
-        cy.focused().type('{downArrow}');
+        cy.focused().realType('{downarrow}');
+        cy.focused().realType('{downarrow}');
         cy.findAllByRole('menuitem')
           .eq(0)
           .should('have.focus');
@@ -168,7 +169,7 @@ describe('Breadcrumbs', () => {
 
     context('when the down arrow key is pressed on the dropdown menu', () => {
       beforeEach(() => {
-        cy.focused().type('{downArrow}');
+        cy.focused().realType('{downarrow}');
       });
 
       it('should toggle focus to the next menu item on down keypress', () => {
@@ -180,7 +181,7 @@ describe('Breadcrumbs', () => {
 
     context('when the right arrow key is pressed on the dropdown menu', () => {
       beforeEach(() => {
-        cy.focused().type('{rightArrow}');
+        cy.focused().realType('{rightarrow}');
       });
 
       it('should toggle focus to the next menu item', () => {
@@ -190,8 +191,8 @@ describe('Breadcrumbs', () => {
       });
 
       it('should roll the focus back from the last menu item to the first menu item', () => {
-        cy.focused().type('{rightArrow}');
-        cy.focused().type('{rightArrow}');
+        cy.focused().realType('{rightarrow}');
+        cy.focused().realType('{rightarrow}');
         cy.findAllByRole('menuitem')
           .eq(0)
           .should('have.focus');
@@ -201,18 +202,18 @@ describe('Breadcrumbs', () => {
     context('when the up arrow key is pressed on the dropdown menu', () => {
       beforeEach(() => {
         // set focus to the second menuitem
-        cy.focused().type('{downArrow}');
+        cy.focused().realType('{downarrow}');
       });
       it('should toggle focus to the previous list item', () => {
-        cy.focused().type('{upArrow}');
+        cy.focused().realType('{uparrow}');
         cy.findAllByRole('menuitem')
           .eq(0)
           .should('have.focus');
       });
 
       it('should return focus from the first menu item to the dropdown button', () => {
-        cy.focused().type('{upArrow}');
-        cy.focused().type('{upArrow}');
+        cy.focused().realType('{uparrow}');
+        cy.focused().realType('{uparrow}');
         getDropdownButton().should('have.focus');
       });
     });
@@ -220,25 +221,25 @@ describe('Breadcrumbs', () => {
     context('when the left arrow key is pressed on the dropdown menu', () => {
       beforeEach(() => {
         // set focus to the second menuitem
-        cy.focused().type('{downArrow}');
+        cy.focused().realType('{downarrow}');
       });
       it('should toggle focus to the previous menu item', () => {
-        cy.focused().type('{leftArrow}');
+        cy.focused().realType('{leftarrow}');
         cy.findAllByRole('menuitem')
           .eq(0)
           .should('have.focus');
       });
 
       it('should return focus from the first menu item to the dropdown button', () => {
-        cy.focused().type('{leftArrow}');
-        cy.focused().type('{leftArrow}');
+        cy.focused().realType('{leftarrow}');
+        cy.focused().realType('{leftarrow}');
         getDropdownButton().should('have.focus');
       });
     });
 
     context('when the escape key is pressed on the dropdown menu', () => {
       it('should return focus to the dropdown menu button', () => {
-        cy.focused().type('{esc}');
+        cy.focused().realType('{esc}');
         getDropdownButton().should('have.focus');
       });
     });

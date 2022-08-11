@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {render} from '@testing-library/react';
 
-import StatusIndicator from '../lib/StatusIndicator';
+import {StatusIndicator} from '../lib/StatusIndicator';
 
 describe('StatusIndicator', () => {
   it('Card should spread extra props', () => {
