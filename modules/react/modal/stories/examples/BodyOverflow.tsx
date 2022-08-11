@@ -1,23 +1,21 @@
 import React from 'react';
 
 import {Modal} from '@workday/canvas-kit-react/modal';
-import {DeleteButton} from '@workday/canvas-kit-react/button';
-import {HStack, VStack, Stack, Box} from '@workday/canvas-kit-react/layout';
-import {space} from '@workday/canvas-kit-react/tokens';
+import {PrimaryButton} from '@workday/canvas-kit-react/button';
 
 export const BodyOverflow = () => {
-  const handleDelete = () => {
-    console.log('Deleted item');
+  const handleClose = () => {
+    console.log('Close modal');
   };
 
   return (
     <Modal>
-      <Modal.Target as={DeleteButton}>Delete Item</Modal.Target>
+      <Modal.Target as={PrimaryButton}>Open Overflow Modal</Modal.Target>
       <Modal.Overlay>
         <Modal.Card>
           <Modal.CloseIcon aria-label="Close" />
-          <Modal.Heading>Delete Item</Modal.Heading>
-          <Modal.Body padding="l" paddingTop="zero">
+          <Modal.Heading>Modal Title</Modal.Heading>
+          <Modal.Body paddingBottom="zero">
             <p>Are you sure you want to delete the item?</p>
             <p>Are you sure you want to delete the item?</p>
             <p>Are you sure you want to delete the item?</p>
@@ -44,10 +42,10 @@ export const BodyOverflow = () => {
             <p>Are you sure you want to delete the item?</p>
           </Modal.Body>
           <Modal.Footer>
-            <Modal.CloseButton as={DeleteButton} onClick={handleDelete}>
-              Delete
+            <Modal.CloseButton as={PrimaryButton} onClick={handleClose}>
+              Close
             </Modal.CloseButton>
-            <Modal.CloseButton>Cancel</Modal.CloseButton>
+            <Modal.CloseButton>Secondary Action</Modal.CloseButton>
           </Modal.Footer>
         </Modal.Card>
       </Modal.Overlay>
