@@ -3,9 +3,9 @@ import * as React from 'react';
 import {createSubcomponent} from '@workday/canvas-kit-react/common';
 
 import {usePopupModel, usePopupPopper} from './hooks';
-import {Placement, PopperOptions, Popper} from './Popper';
+import {Placement, PopperOptions, Popper, PopperProps} from './Popper';
 
-export interface PopupPopperProps {
+export interface PopupPopperProps extends PopperProps {
   /**
    * The placement of the `Popper` contents relative to the `anchorElement`. Accepts `auto`, `top`,
    * `right`, `bottom`, or `left`. Each placement can also be modified using any of the following
@@ -17,7 +17,6 @@ export interface PopupPopperProps {
    * The additional options passed to the Popper's `popper.js` instance.
    */
   popperOptions?: Partial<PopperOptions>;
-  children?: React.ReactNode;
 }
 
 export const PopupPopper = createSubcomponent('div')({
