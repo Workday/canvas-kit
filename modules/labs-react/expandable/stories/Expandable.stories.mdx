@@ -26,25 +26,48 @@ yarn add @workday/canvas-kit-labs-react
 
 ### Start Icon
 
+For a basic expandable container with a chevron icon before the title, place`Expandable.Icon`
+before `Expandable.Title` as children of `Expandable.Target` and pass the `iconPosition` prop to
+`Expandable.Icon` with a value of `start`. `Expandable.Icon` will use a right chevron icon
+when collapsed and a down chevron icon when expanded.
+
 <ExampleCodeBlock code={StartIcon} />
 
 ### End Icon
+
+For an expandable container with a chevron icon after the title, place `Expandable.Title`
+before `Expandable.Icon` as children of `Expandable.Target` and pass the `iconPosition` prop to
+`Expandable.Icon` with a value of `end`. `Expandable.Icon` will use a down chevron icon
+when collapsed and an up chevron icon when expanded.
 
 <ExampleCodeBlock code={EndIcon} />
 
 ### With Avatar
 
+To include an avatar image, `Expandable.Avatar` should be placed between `Expandable.Icon` and
+`Expandable.Title`. An `iconPosition` prop with a value of either `start` or `end` should be
+passed to `Expandable.Icon` depending on whether the `Expandable.Icon` is placed before or after
+`Expandable.Title`.
+
 <ExampleCodeBlock code={Avatar} />
 
 ### Right to Left (RTL)
+
+Expandable container has bidirectional support and should function as expected with RTL languages
+as long as the content direction is set in your Canvas theme.
 
 <ExampleCodeBlock code={RTL} />
 
 ### Depth
 
+The `depth` prop passed to `Expandable` allows you to adjust the visual elevation of a component
+using our depth tokens.
+
 <ExampleCodeBlock code={Depth} />
 
 ### Title Wrap
+
+Long titles will wrap to the next line and increase the height of the container.
 
 <ExampleCodeBlock code={LongTitle} />
 
