@@ -7,6 +7,7 @@ import {BreadcrumbsOverflowButton} from './BreadcrumbsOverflowButton';
 import {BreadcrumbsItem} from './BreadcrumbsItem';
 import {BreadcrumbsLink} from './BreadcrumbsLink';
 import {BreadcrumbsCurrentItem} from './BreadcrumbsCurrentItem';
+import {BreadcrumbsMenu} from './BreadcrumbsMenu';
 
 export interface BreadcrumbsProps {
   /**
@@ -36,7 +37,7 @@ export const Breadcrumbs = createContainer()({
      *   </Breadcrumbs.Menu.Card>
      * </Breadcrumbs.Menu.Popper>
      */
-    Menu,
+    Menu: BreadcrumbsMenu,
   },
 })<BreadcrumbsProps>(({children}, _, model) => {
   return <Menu model={model.menu}>{children}</Menu>;
