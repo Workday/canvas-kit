@@ -42,12 +42,12 @@ export const FullOverflow = () => {
             <p>Are you sure you want to delete the item?</p>
             <p>Are you sure you want to delete the item?</p>
           </Modal.Body>
-          <HStack spacing="s">
+          <Modal.Footer>
             <Modal.CloseButton as={DeleteButton} onClick={handleDelete}>
               Delete
             </Modal.CloseButton>
             <Modal.CloseButton>Cancel</Modal.CloseButton>
-          </HStack>
+          </Modal.Footer>
         </Modal.Card>
       </Modal.OverflowOverlay>
     </Modal>

@@ -17,7 +17,7 @@ export const BodyOverflow = () => {
         <Modal.Card>
           <Modal.CloseIcon aria-label="Close" />
           <Modal.Heading>Delete Item</Modal.Heading>
-          <Modal.Body>
+          <Modal.Body padding="l" paddingTop="zero">
             <p>Are you sure you want to delete the item?</p>
             <p>Are you sure you want to delete the item?</p>
             <p>Are you sure you want to delete the item?</p>
@@ -43,12 +43,12 @@ export const BodyOverflow = () => {
             <p>Are you sure you want to delete the item?</p>
             <p>Are you sure you want to delete the item?</p>
           </Modal.Body>
-          <HStack spacing="s" paddingTop="s">
+          <Modal.Footer>
             <Modal.CloseButton as={DeleteButton} onClick={handleDelete}>
               Delete
             </Modal.CloseButton>
             <Modal.CloseButton>Cancel</Modal.CloseButton>
-          </HStack>
+          </Modal.Footer>
         </Modal.Card>
       </Modal.Overlay>
     </Modal>
