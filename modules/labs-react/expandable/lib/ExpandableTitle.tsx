@@ -18,12 +18,11 @@ export const ExpandableTitle = createComponent('div')({
       <Box
         as={Element}
         ref={ref}
-        padding={`3px ${space.zero} 1px`}
+        padding={`2px ${space.zero} 2px`}
         color={colors.blackPepper400}
         style={{
           ...type.levels.body.medium,
           fontWeight: type.properties.fontWeights.bold,
-          lineHeight: '27px',
           textAlign: 'left',
         }}
         {...elemProps}
