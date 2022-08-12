@@ -19,7 +19,7 @@ const StyledAvatar = styled(Avatar)<StyledType>({
   flexShrink: 0,
 });
 
-export const ExpandableAvatar = createComponent('div')({
+export const ExpandableAvatar = createComponent('button')({
   displayName: 'Expandable.Avatar',
   Component: ({...elemProps}: ExpandableAvatarProps, ref, Element) => {
     return <StyledAvatar altText={undefined} as={Element} ref={ref} size={32} {...elemProps} />;
