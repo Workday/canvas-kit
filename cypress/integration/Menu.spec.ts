@@ -119,6 +119,24 @@ describe('Menu', () => {
         });
       });
 
+      context('when the Fourth item is tabbed', () => {
+        beforeEach(() => {
+          cy.findByRole('menuitem', {name: 'Fourth Item'}).tab();
+        });
+
+        it('should have aria-expanded set to false', () => {
+          cy.findByRole('button', {name: 'Open Menu'}).should(
+            'have.attr',
+            'aria-expanded',
+            'false'
+          );
+        });
+
+        it('should not show a menu', () => {
+          cy.findByRole('menu').should('not.exist');
+        });
+      });
+
       context('when the user types a printable character "t"', () => {
         beforeEach(() => {
           cy.focused().type('t');
