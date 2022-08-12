@@ -12,12 +12,12 @@ import {
   useConstant,
   createSubcomponent,
 } from '@workday/canvas-kit-react/common';
-import {Stack, StackStyleProps} from '@workday/canvas-kit-react/layout';
+import {Flex, FlexStyleProps} from '@workday/canvas-kit-react/layout';
 
 import {getTransformFromPlacement} from './getTransformFromPlacement';
 import {usePopupCard, usePopupModel} from './hooks';
-
-export interface PopupCardProps extends ExtractProps<typeof Card, never>, Partial<StackStyleProps> {
+export type FlexAndBoxProps = ExtractProps<typeof Card, never> & FlexStyleProps;
+export interface PopupCardProps extends FlexAndBoxProps {
   children?: React.ReactNode;
 }
 
@@ -64,7 +64,7 @@ export const PopupCard = createSubcomponent('div')({
   }, [model.state.placement]);
 
   // As is a Stack that will render an element of `Element`
-  const As = useConstant(() => Stack.as(Element));
+  const As = useConstant(() => Flex.as(Element));
 
   return (
     <StyledPopupCard
@@ -74,7 +74,6 @@ export const PopupCard = createSubcomponent('div')({
       padding="l"
       depth={5}
       maxWidth={`calc(100vw - ${space.l})`}
-      spacing={0}
       flexDirection="column"
       minHeight={0}
       maxHeight={`calc(100vh - ${

@@ -20,7 +20,6 @@ export const ModalCard = createSubcomponent('div')({
       margin="xl"
       depth={6}
       padding="zero"
-      paddingTop="l"
       {...elemProps}
     />
   );
