@@ -7,7 +7,6 @@ import {searchIcon, xIcon} from '@workday/canvas-system-icons-web';
 import {FormField, FormFieldLabelPosition} from '@workday/canvas-kit-react/form-field';
 import {Combobox} from '@workday/canvas-kit-labs-react/combobox';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
-import {MenuItemProps} from '@workday/canvas-kit-preview-react/menu';
 import {searchThemes, SearchTheme, SearchThemeAttributes} from './themes';
 import chroma from 'chroma-js';
 
@@ -28,7 +27,7 @@ export interface SearchFormProps extends GrowthBehavior, React.FormHTMLAttribute
   /**
    * The autocomplete items of the SearchForm. This array of menu items is shown under the search bar.
    */
-  autocompleteItems?: React.ReactElement<MenuItemProps>[];
+  autocompleteItems?: React.ReactElement<any>[];
   /**
    * The theme of the header the search input is being rendered in.
    */

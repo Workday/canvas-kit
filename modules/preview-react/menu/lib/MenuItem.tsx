@@ -248,7 +248,7 @@ class MenuItem extends React.Component<MenuItemProps> {
     }
   };
 
-  render(): React.ReactNode {
+  render() {
     const {
       onClick,
       children,
