@@ -479,7 +479,7 @@ describe('Modal', () => {
       });
 
       it('should be the focused item on the page', () => {
-        cy.findByRole('button', {name: 'Modal Heading'}).should('have.focus');
+        cy.findByRole('button', {name: 'Open Modal'}).should('have.focus');
       });
     });
 
@@ -655,7 +655,7 @@ describe('Modal', () => {
       });
 
       it('should show the modal', () => {
-        cy.findByRole('dialog', {name: 'Modal'}).should('be.visible');
+        cy.findByRole('dialog', {name: 'Modal Heading'}).should('be.visible');
       });
 
       context('when the "Close" button is clicked', () => {
