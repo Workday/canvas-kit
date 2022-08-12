@@ -1,32 +1,9 @@
-# Canvas Kit Breadcrumbs
+# Canvas Kit React Breadcrumbs
 
+Breadcrumbs is a
+[compound component](/getting-started/for-developers/resources/compound-components/) that allow
+users to keep track and maintain awareness of their location as they navigate through pages,
+folders, files, etc.
 
-
-## Installation
-
-```sh
-yarn add @workday/canvas-kit-react
-```
-
-## Usage
-
-```tsx
-import * as React from 'react';
-import {Breadcrumbs} from '@workday/canvas-kit-react/breadcrumbs';
-
-<Breadcrumbs />;
-```
-
-## Static Properties
-
-> None
-
-## Component Props
-
-### Required
-
-> None
-
-### Optional
-
-> None
+For more detailed information on this component, please refer to the
+[storybook documentation](https://workday.github.io/canvas-kit/?path=/docs/components-navigation-breadcrumbs-react--basic)
