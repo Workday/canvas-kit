@@ -17,7 +17,7 @@ export const CustomTarget = () => {
       <Modal.Overlay>
         <Modal.Card>
           <Modal.CloseIcon aria-label="Close" />
-          <Modal.Heading>Modal Heading</Modal.Heading>
+          <Modal.Heading>Modal</Modal.Heading>
           <Modal.Body>Contents</Modal.Body>
         </Modal.Card>
       </Modal.Overlay>

@@ -1,6 +1,6 @@
 import React from 'react';
 import {Modal, useModalModel} from '@workday/canvas-kit-react/modal';
-import {PrimaryButton} from '@workday/canvas-kit-react/button';
+import {DeleteButton} from '@workday/canvas-kit-react/button';
 import FormField from '@workday/canvas-kit-react/form-field';
 import TextInput from '@workday/canvas-kit-react/text-input';
 import {Box} from '@workday/canvas-kit-react/layout';
@@ -18,11 +18,11 @@ export const CustomFocus = () => {
 
   return (
     <Modal model={model}>
-      <Modal.Target as={PrimaryButton}>Open Modal</Modal.Target>
+      <Modal.Target as={DeleteButton}>Delete Item</Modal.Target>
       <Modal.Overlay>
         <Modal.Card>
           <Modal.CloseIcon aria-label="Close" />
-          <Modal.Heading>Modal Heading</Modal.Heading>
+          <Modal.Heading>Delete Item</Modal.Heading>
           <Modal.Body paddingBottom="zero">
             <Box as="p" marginTop={0} marginBottom="m">
               Enter name to confirm deletion
@@ -32,10 +32,10 @@ export const CustomFocus = () => {
             </FormField>
           </Modal.Body>
           <Modal.Footer paddingTop="zero">
-            <Modal.CloseButton as={PrimaryButton} onClick={handleClose}>
-              Close
+            <Modal.CloseButton as={DeleteButton} onClick={handleClose}>
+              Delete
             </Modal.CloseButton>
-            <Modal.CloseButton>Secondary Action</Modal.CloseButton>
+            <Modal.CloseButton>Cancel</Modal.CloseButton>
           </Modal.Footer>
         </Modal.Card>
       </Modal.Overlay>

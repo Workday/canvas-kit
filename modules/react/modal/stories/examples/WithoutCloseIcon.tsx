@@ -9,7 +9,7 @@ import {
   useAssistiveHideSiblings,
   useDisableBodyScroll,
 } from '@workday/canvas-kit-react/popup';
-import {PrimaryButton} from '@workday/canvas-kit-react/button';
+import {DeleteButton} from '@workday/canvas-kit-react/button';
 import {Box} from '@workday/canvas-kit-react/layout';
 
 export const WithoutCloseIcon = () => {
@@ -27,20 +27,20 @@ export const WithoutCloseIcon = () => {
 
   return (
     <Modal model={model}>
-      <Modal.Target as={PrimaryButton}>Open Modal</Modal.Target>
+      <Modal.Target as={DeleteButton}>Delete Item</Modal.Target>
       <Modal.Overlay>
         <Modal.Card>
-          <Modal.Heading>Modal Heading</Modal.Heading>
+          <Modal.Heading>Delete Item</Modal.Heading>
           <Modal.Body paddingBottom="zero">
             <Box as="p" marginTop={0} marginBottom="m">
               Are you sure you want to delete the item?
             </Box>
           </Modal.Body>
           <Modal.Footer paddingTop="zero">
-            <Modal.CloseButton as={PrimaryButton} onClick={handleClose}>
-              Close
+            <Modal.CloseButton as={DeleteButton} onClick={handleClose}>
+              Delete
             </Modal.CloseButton>
-            <Modal.CloseButton>Secondary Action</Modal.CloseButton>
+            <Modal.CloseButton>Cancel</Modal.CloseButton>
           </Modal.Footer>
         </Modal.Card>
       </Modal.Overlay>
