@@ -2,7 +2,7 @@ import React, {useState, ReactNode, ReactElement, FC, ChangeEvent} from 'react';
 import {storiesOf} from '@storybook/react';
 
 import {Combobox, ComboboxProps, ComboBoxMenuItemGroup} from '@workday/canvas-kit-labs-react';
-import FormField from '@workday/canvas-kit-react/form-field';
+import {FormField} from '@workday/canvas-kit-react/form-field';
 import {MenuItem, MenuItemProps} from '@workday/canvas-kit-preview-react/menu';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
