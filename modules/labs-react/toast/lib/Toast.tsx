@@ -1,14 +1,13 @@
 import React from 'react';
 
 import {createComponent, ExtractProps} from '@workday/canvas-kit-react/common';
-import {Popup} from '@workday/canvas-kit-react';
+import {Flex, Popup} from '@workday/canvas-kit-react';
 
 import {ToastContent} from './ToastContent';
-import {ToastClose} from './ToastClose';
+import {ToastCloseIcon} from './ToastCloseIcon';
 import {ToastIcon} from './ToastIcon';
 import {ToastMessage} from './ToastMessage';
 import {ToastAction} from './ToastAction';
-import styled from '@emotion/styled';
 
 export interface ToastProps extends ExtractProps<typeof Popup.Card, never> {
   /**
@@ -22,10 +21,6 @@ export interface ToastProps extends ExtractProps<typeof Popup.Card, never> {
 }
 
 const toastWidth = 360;
-
-const ToastContainer = styled('div')({
-  display: 'flex',
-});
 
 export const Toast = createComponent('div')({
   displayName: 'Toast',
@@ -41,13 +36,13 @@ export const Toast = createComponent('div')({
         aria-atomic={mode === 'noninteractive'}
         {...elemProps}
       >
-        <ToastContainer>{children}</ToastContainer>
+        <Flex>{children}</Flex>
       </Popup.Card>
     );
   },
   subComponents: {
     Content: ToastContent,
-    Close: ToastClose,
+    CloseIcon: ToastCloseIcon,
     Icon: ToastIcon,
     Message: ToastMessage,
     Action: ToastAction,

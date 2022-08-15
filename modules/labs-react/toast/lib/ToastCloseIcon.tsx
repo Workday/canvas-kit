@@ -1,19 +1,17 @@
-/** @jsx jsx */
-import {jsx} from '@emotion/core';
-
+import React from 'react';
 import {createComponent, ExtractProps, StyledType} from '@workday/canvas-kit-react/common';
 import {Popup} from '@workday/canvas-kit-react';
 import styled from '@emotion/styled';
 
 export interface ToastCloseProps extends ExtractProps<typeof Popup.CloseIcon, never> {}
 
-const PopupCloseIcon = styled(Popup.CloseIcon)<StyledType & ToastCloseProps>({
+const StyledCloseIcon = styled(Popup.CloseIcon)<StyledType & ToastCloseProps>({
   position: 'relative',
 });
 
-export const ToastClose = createComponent('button')({
-  displayName: 'Toast.Close',
+export const ToastCloseIcon = createComponent('button')({
+  displayName: 'Toast.CloseIcon',
   Component: ({...elemProps}: ToastCloseProps, ref, Element) => {
-    return <PopupCloseIcon as={Element} ref={ref} size="small" {...elemProps} />;
+    return <StyledCloseIcon as={Element} ref={ref} size="small" {...elemProps} />;
   },
 });
