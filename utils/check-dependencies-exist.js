@@ -157,14 +157,19 @@ depCheck(modulePath, depCheckOptions, unused => {
     }
     if (key === 'missing') {
       // Self-referencing imports are only okay in stories. It allows story code more copy/paste friendly. Stories are not packaged, so no circular dependency actually exists
-      if (unused.missing[packageName]) {
-        unused.missing[packageName] = unused.missing[packageName].filter(
-          file => file.indexOf('stories') === -1
-        );
-        if (unused.missing[packageName].length === 0) {
-          delete unused.missing[packageName];
+      // Also, monorepo package names are allowed only in stories and specs
+      [packageName, '@workday/canvas-kit-labs-react', '@workday/canvas-kit-preview-react'].forEach(
+        name => {
+          if (unused.missing[name]) {
+            unused.missing[name] = unused.missing[name].filter(
+              file => !file.includes('stories') && !file.includes('spec')
+            );
+            if (unused.missing[name].length === 0) {
+              delete unused.missing[name];
+            }
+          }
         }
-      }
+      );
       if (Object.keys(unused.missing).length === 0) {
         return false;
       }

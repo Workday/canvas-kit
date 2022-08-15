@@ -9,6 +9,16 @@ on:
 
 jobs:
   verify-merge:
+    # Only run if:
+    # - branch is support/master AND the last commit was a release commit
+    # - branch is prerelease/*
+    #
+    # We don't want to run on support/master for non-release commits because that would mean the
+    #   forward merge would run twice because every commit on master/support causes a new commit
+    #   pushed back to the branch. So we ignore all non-release commits on support/master because
+    #   the release workflow will commit a release commit starting with `chore: Release ...` back to
+    #   the branch and this job will run on that commit instead.
+    if: "((github.ref_name == 'support' || github.ref_name == 'master') && startsWith(github.event.head_commit.message, 'chore: Release')) || startsWith(github.ref_name, 'prerelease/')"
     runs-on: ubuntu-latest
     outputs: # Output branch names for the make-pull-request job
       branch: ${{steps.extract-branch.outputs.branch}}
@@ -28,15 +38,15 @@ jobs:
       ## as an output for later use
       - name: Extract branch name
         id: extract-branch
-        run: echo "::set-output name=branch::$(echo ${GITHUB_REF#refs/heads/})"
-
-      - run: echo ${{steps.extract-branch.outputs.branch}}
+        run: |
+          echo "::set-output name=branch::$(echo ${GITHUB_REF#refs/heads/})"
+          echo ${{steps.extract-branch.outputs.branch}}
 
       - name: Extract next branch name
         id: extract-next-branch
-        run: echo "::set-output name=branch::$(node utils/get-forward-merge-branch.js)"
-
-      - run: echo ${{steps.extract-next-branch.outputs.branch}}
+        run: |
+          echo "::set-output name=branch::$(node utils/get-forward-merge-branch.js)"
+          echo ${{steps.extract-next-branch.outputs.branch}}
 
       ## This step installs node and sets up several matchers (regex matching for Github
       ## Annotations). See
@@ -125,7 +135,7 @@ jobs:
         run: npx http-server docs -p 9001 & npx wait-on http://localhost:9001
 
       - name: Integration tests
-        run: yarn cypress run --record --parallel
+        run: yarn cypress run --record --parallel --env skip_storybook_test=true # skip the Storybook test during forward merges
         env:
           # Github Actions doesn't support encryption on forks
           # If these keys become compromised, we will rotate and disable these features

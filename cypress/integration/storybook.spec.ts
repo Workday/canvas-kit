@@ -4,9 +4,13 @@ function getIframeBody($iframe: JQuery): JQuery {
 }
 
 describe('Storybook', () => {
-  it('should render the Getting Started page', () => {
+  it('should render the Getting Started page', function() {
+    // allow skipping this test
+    if (Cypress.env('skip_storybook_test')) {
+      this.skip();
+    }
     cy.visit('/');
-    cy.get('iframe#storybook-preview-iframe')
+    cy.get('iframe#storybook-preview-iframe', {timeout: 20000})
       .pipe(getIframeBody, {timeout: 20000})
       .should('contain', 'Workday Canvas Kit');
   });
