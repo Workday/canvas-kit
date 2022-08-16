@@ -48,7 +48,7 @@ export type GridStyleProps = {
   grid?: Property.Grid;
 };
 
-export type GridSpaceProps = {
+export type gridSpaceProps = {
   /** sets `gap` property */
   gridGap?: Property.GridGap | GridSpacePropsValues;
 };
@@ -69,7 +69,7 @@ const GridSpaceStyleProps = {
   gridColumnGap,
 };
 
-export type SpaceStyleProps = GridSpaceProps & GridStyleProps;
+export type SpaceStyleProps = gridSpaceProps & GridStyleProps;
 
 const gridProps = {
   alignContent: 'alignContent',
@@ -95,6 +95,8 @@ const gridProps = {
 /**
  * A style prop function that takes component props and returns grid styles.
  * If no `GridStyleProps` are found, it returns an empty object.
+ * Space tokens are available for `gridGap`, `gridRowGap`, `gridColumnGap` (`zero`, `xxxs`, `xxs`, `xs`, `s`, `m`, `l`, `xl`, `xxl`, `xxxl`).
+ * Values: `zero: 0px`, `xxxs: 4px`, `xxs: 8px`, `xs: 12px`, `s: 16px`, `m: 24px`, `l: 32px`, `xl: 40px`, `xxl: 64px`, `xxxl: 80px`.
  *
  * @example
  * // You'll most likely use `grid` with low-level, styled components
@@ -116,8 +118,8 @@ export function grid<P extends SpaceStyleProps>(props: P) {
         styles[attr] = value;
       }
       if (key in GridSpaceStyleProps) {
-        const value = props[key as keyof GridSpaceProps] as GridSpacePropsValues;
-        const spaceFn = GridSpaceStyleProps[key as keyof GridSpaceProps];
+        const value = props[key as keyof gridSpaceProps] as GridSpacePropsValues;
+        const spaceFn = GridSpaceStyleProps[key as keyof gridSpaceProps];
         const style = spaceFn(value);
         styles = {...styles, ...style};
       }
