@@ -146,7 +146,7 @@ const StatusLabel = styled('span')({
   textOverflow: 'ellipsis',
 });
 
-export default class StatusIndicator extends React.Component<StatusIndicatorProps> {
+export class StatusIndicator extends React.Component<StatusIndicatorProps> {
   public static Type = StatusIndicatorType;
   public static Emphasis = StatusIndicatorEmphasis;
 

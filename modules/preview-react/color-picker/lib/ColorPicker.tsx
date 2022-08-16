@@ -3,7 +3,7 @@ import {checkIcon} from '@workday/canvas-system-icons-web';
 import {ColorInput} from '@workday/canvas-kit-react/color-picker';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import * as React from 'react';
-import FormField from '@workday/canvas-kit-react/form-field';
+import {FormField} from '@workday/canvas-kit-react/form-field';
 import styled from '@emotion/styled';
 
 import {ResetButton} from './parts/ColorReset';
@@ -158,7 +158,7 @@ const isCustomColor = (colors: string[], hexCode?: string) => {
   return !colors.includes(lowercaseHex);
 };
 
-const ColorPicker = ({
+export const ColorPicker = ({
   colorSet = defaultColorSet,
   customHexInputLabel = 'Custom Hex Color',
   submitLabel = 'Submit',
@@ -215,4 +215,3 @@ const ColorPicker = ({
 };
 
 ColorPicker.defaultColorSet = defaultColorSet;
-export default ColorPicker;

@@ -88,7 +88,7 @@ const ChildrenContainer = styled('div')<Pick<DrawerProps, 'padding'>>(
   })
 );
 
-export default class Drawer extends React.Component<DrawerProps, {}> {
+export class Drawer extends React.Component<DrawerProps, {}> {
   static OpenDirection = DrawerDirection;
 
   public render() {
