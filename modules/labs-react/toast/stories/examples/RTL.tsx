@@ -13,10 +13,10 @@ export const RTL = () => {
   return (
     <CanvasProvider theme={{canvas: {direction: ContentDirection.RTL}}}>
       <Toast mode="interactive">
-        <Toast.Content>
-          <Toast.Icon icon={checkIcon} iconColor={colors.greenApple400} />
-          <Toast.Message>Your workbook was successfully processed.</Toast.Message>
-        </Toast.Content>
+        <Toast.Body>
+          <Toast.Icon icon={checkIcon} color={colors.greenApple400} />
+          Your workbook was successfully processed.
+        </Toast.Body>
         <Toast.Close aria-label="Close" onClick={handleClose} />
       </Toast>
     </CanvasProvider>

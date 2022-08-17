@@ -1,22 +1,15 @@
 import React from 'react';
 
-import {createComponent, styled} from '@workday/canvas-kit-react/common';
-import {CanvasColor, space, SystemIcon} from '@workday/canvas-kit-react';
-import {CanvasSystemIcon} from '@workday/design-assets-types';
+import {createComponent} from '@workday/canvas-kit-react/common';
+import {SystemIcon, SystemIconProps} from '@workday/canvas-kit-react';
 
-export interface ToastIconProps {
-  icon: CanvasSystemIcon;
-  iconColor?: CanvasColor | string;
-}
-
-const ToastSystemIcon = styled(SystemIcon)({
-  marginRight: space.s,
-  alignSelf: 'start',
-});
+export interface ToastIconProps extends SystemIconProps {}
 
 export const ToastIcon = createComponent('div')({
   displayName: 'Toast.Icon',
-  Component: ({icon, iconColor}: ToastIconProps, ref, Element) => {
-    return <ToastSystemIcon color={iconColor} colorHover={iconColor} icon={icon} />;
+  Component: ({...elemProps}: ToastIconProps, ref, Element) => {
+    return (
+      <SystemIcon marginInlineEnd="s" alignSelf="start" ref={ref} as={Element} {...elemProps} />
+    );
   },
 });

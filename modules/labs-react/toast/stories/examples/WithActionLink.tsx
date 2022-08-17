@@ -11,13 +11,13 @@ export const WithActionLink = () => {
 
   return (
     <Toast mode="interactive">
-      <Toast.Content>
-        <Toast.Icon icon={checkIcon} iconColor={colors.greenApple400} />
+      <Toast.Body>
+        <Toast.Icon icon={checkIcon} color={colors.greenApple400} />
         <Toast.Message>
           Your workbook was successfully processed.
           <Toast.Action onClick={handleActionClick}>Custom Action</Toast.Action>
         </Toast.Message>
-      </Toast.Content>
+      </Toast.Body>
     </Toast>
   );
 };

@@ -6,9 +6,9 @@ import {colors} from '@workday/canvas-kit-react/tokens';
 
 export const Success = () => (
   <Toast>
-    <Toast.Content>
-      <Toast.Icon icon={checkIcon} iconColor={colors.greenApple400} />
-      <Toast.Message>Your workbook was successfully processed.</Toast.Message>
-    </Toast.Content>
+    <Toast.Body>
+      <Toast.Icon icon={checkIcon} color={colors.greenApple400} />
+      Your workbook was successfully processed.
+    </Toast.Body>
   </Toast>
 );

@@ -23,10 +23,10 @@ export const WithPopper = () => {
       <SecondaryButton onClick={handleOpen}>Show Toast</SecondaryButton>
       <Popper placement="bottom-end" open={open} anchorElement={containerRef}>
         <Toast mode="interactive">
-          <Toast.Content>
-            <Toast.Icon icon={checkIcon} iconColor={colors.greenApple400} />
-            <Toast.Message>Your workbook was successfully processed.</Toast.Message>
-          </Toast.Content>
+          <Toast.Body>
+            <Toast.Icon icon={checkIcon} color={colors.greenApple400} />
+            Your workbook was successfully processed.
+          </Toast.Body>
           <Toast.Close aria-label="Close" onClick={handleClose} />
         </Toast>
       </Popper>
