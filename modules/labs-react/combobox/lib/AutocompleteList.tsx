@@ -2,7 +2,6 @@ import React, {Fragment, useState} from 'react';
 import styled from '@emotion/styled';
 import {space} from '@workday/canvas-kit-react/tokens';
 import {accessibleHide, generateUniqueId} from '@workday/canvas-kit-react/common';
-import {MenuItemProps} from '@workday/canvas-kit-preview-react/menu';
 import {ComboBoxMenuItemGroup, getOptionId, listBoxIdPart, getTextFromElement} from './Combobox';
 
 const Autocomplete = styled('ul')({
@@ -19,7 +18,7 @@ interface AutocompleteListProps {
   /**
    * The autocomplete items of the Combobox. This array of menu items is shown under the text input.
    */
-  autocompleteItems: React.ReactElement<MenuItemProps>[] | ComboBoxMenuItemGroup[];
+  autocompleteItems: React.ReactElement<any>[] | ComboBoxMenuItemGroup[];
   /**
    * Index of the active autocomplete item
    */
@@ -29,7 +28,7 @@ interface AutocompleteListProps {
    */
   handleAutocompleteClick: (
     event: React.SyntheticEvent<Element, Event>,
-    menuItemProps: MenuItemProps
+    menuItemProps: any
   ) => void;
   /**
    * The id of the form field.
@@ -65,7 +64,7 @@ const AutocompleteList = ({
   };
 
   const createListItem = (
-    listboxItem: React.ReactElement<MenuItemProps>,
+    listboxItem: React.ReactElement<any>,
     itemIndex: number,
     groupMessage?: string
   ) => {
@@ -127,7 +126,7 @@ const AutocompleteList = ({
     return (
       <Autocomplete {...listBoxProps}>
         {(autocompleteItems as React.ReactElement<
-          MenuItemProps
+          any
         >[]).map((listboxItem: React.ReactElement, index: number) =>
           createListItem(listboxItem, index)
         )}
