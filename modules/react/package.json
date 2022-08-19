@@ -65,7 +65,7 @@
     "chroma-js": "^2.1.0",
     "element-closest": "^3.0.2",
     "emotion-theming": "^10.0.10",
-    "lodash": "^4.17.14",
+    "lodash": "^4.17.21",
     "polished": "^4.1.3",
     "react-innertext": "^1.1.5",
     "resize-observer-polyfill": "^1.5.1",

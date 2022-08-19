@@ -174,5 +174,8 @@
   "workspaces": [
     "modules/**"
   ],
-  "browserslist": "> 5%, last 2 firefox versions, last 2 chrome versions, last 2 safari versions, last 2 edge versions, ie 11"
+  "browserslist": "> 5%, last 2 firefox versions, last 2 chrome versions, last 2 safari versions, last 2 edge versions, ie 11",
+  "dependencies": {
+    "lodash": "^4.17.21"
+  }
 }
