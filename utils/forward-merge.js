@@ -134,6 +134,9 @@ async function main() {
         await updateChangelog();
 
         console.log(`Resolved conflicts in ${conflict}`);
+      } else if (conflict === 'yarn.lock') {
+        // yarn resolves yarn.lock conflicts
+        console.log(`Conflicts in ${conflict} will be resolved later.`);
       } else {
         console.log('Merge cannot be resolved automatically');
         hasUnresolvedConflicts = true;
@@ -169,7 +172,8 @@ async function main() {
 }
 
 main().catch(err => {
-  console.error('Error:', err.message);
+  console.error('Error:\n', err.message);
+  console.error('Stack:\n', err.stack);
   process.exit(1);
 });
 

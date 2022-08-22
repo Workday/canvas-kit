@@ -1,7 +1,8 @@
 import React from 'react';
+import styled from '@emotion/styled';
 import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Radio, RadioGroup} from '@workday/canvas-kit-react/radio';
-import styled from '@emotion/styled';
+import {space} from '@workday/canvas-kit-react/tokens';
 
 export const Basic = () => {
   const [value, setValue] = React.useState<string | number>('deep-dish');
@@ -11,7 +12,7 @@ export const Basic = () => {
   };
 
   const StyledFormField = styled(FormField)({
-    width: '161px',
+    width: space.xl,
   });
 
   return (
@@ -21,10 +22,7 @@ export const Basic = () => {
         <Radio label="Thin" value="thin" />
         <Radio label="Gluten free" value="gluten-free" />
         <Radio label="Cauliflower" value="cauliflower" />
-        <Radio
-          label="My favorite pizza crust flavor is butter because it's the best thing to put on bread"
-          value="cauliflower"
-        />
+        <Radio label="Butter - the best thing to put on bread" value="butter" />
       </RadioGroup>
     </StyledFormField>
   );
