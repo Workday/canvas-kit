@@ -19,7 +19,8 @@ export const isFocusable = (element: HTMLElement) => {
     'iframe',
     'select',
     'textarea',
-  ].includes(nodeName);
+  ].includes(nodeName) &&
+  element.getAttribute('tabindex') !== '-1';
   const hasTabIndex = element.getAttribute('tabindex') === '0';
 
   return (
