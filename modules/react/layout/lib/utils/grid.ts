@@ -1,7 +1,7 @@
 import {Property} from 'csstype';
 import {space as spaceTokens, CanvasSpace, CanvasSpaceKeys} from '@workday/canvas-kit-react/tokens';
 
-type GridSpacePropsValues = CanvasSpaceKeys | number | (string & {});
+export type GridSpacePropsValues = CanvasSpaceKeys | number | (string & {});
 
 /** style props to for grid container properties */
 export type GridStyleProps = {
