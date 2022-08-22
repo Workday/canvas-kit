@@ -38,15 +38,22 @@ const popupAnimation = (transformOrigin: TransformOrigin) => {
 
 const StyledPopupCard = styled(Card)<
   StyledType & {width?: number | string; transformOrigin?: TransformOrigin}
->(({transformOrigin}) => {
+>(({transformOrigin, theme}) => {
   if (transformOrigin == null) {
     return {};
   }
+
   return {
     animation: popupAnimation(transformOrigin),
     animationDuration: '150ms',
     animationTimingFunction: 'ease-out',
     transformOrigin: `${transformOrigin.vertical} ${transformOrigin.horizontal}`,
+    [theme.canvas.breakpoints.down('s')]: {
+      animation: popupAnimation({vertical: 'bottom', horizontal: 'center'}),
+      animationDuration: '150ms',
+      animationTimingFunction: 'ease-out',
+      transformOrigin: 'bottom center',
+    },
     // Allow overriding of animation in special cases
     '.wd-no-animation &': {
       animation: 'none',

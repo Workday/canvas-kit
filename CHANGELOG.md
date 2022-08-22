@@ -3,6 +3,100 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v7.2.9](https://github.com/Workday/canvas-kit/releases/tag/v7.2.9) (2022-08-16)
+
+### Infrastructure
+
+- ci: Add project board automations ([#1729](https://github.com/Workday/canvas-kit/pull/1729)) ([@jaclynjessup](https://github.com/jaclynjessup))
+
+
+## [v7.2.8](https://github.com/Workday/canvas-kit/releases/tag/v7.2.8) (2022-08-15)
+
+### Components
+
+- fix: Change link URL to non-interactive examples ([#1731](https://github.com/Workday/canvas-kit/pull/1731)) ([@stefano-puzzuoli](https://github.com/stefano-puzzuoli))
+
+
+## [v7.2.7](https://github.com/Workday/canvas-kit/releases/tag/v7.2.7) (2022-08-12)
+
+### Components
+
+- fix: Ignore tabIndex to take elements out of the focus order ([#1723](https://github.com/Workday/canvas-kit/pull/1723)) ([@smopur](https://github.com/smopur))
+  Fixes tabbing out of a a control where elements in the control are excluded from the tab order
+
+
+## [v7.2.6](https://github.com/Workday/canvas-kit/releases/tag/v7.2.6) (2022-08-11)
+
+### Documentation
+
+- docs: Fix RadioGroup Basic example ([#1726](https://github.com/Workday/canvas-kit/pull/1726)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
+## [v7.2.5](https://github.com/Workday/canvas-kit/releases/tag/v7.2.5) (2022-07-28)
+
+### Infrastructure
+
+- fix: Remove circular dependencies between monorepo packages ([#1697](https://github.com/Workday/canvas-kit/pull/1697)) ([@NicholasBoll](https://github.com/NicholasBoll))
+  In order to remove circular dependencies without any breaking changes, we removed the restriction on `SearchForm`, `Combobox`, and `AutoCompleteList` (labs components) that restricted children to `MenuItem` components (preview component). This removes the Typescript error if you feed these components children that are not `MenuItem`.
+
+
+## [v7.2.4](https://github.com/Workday/canvas-kit/releases/tag/v7.2.4) (2022-07-27)
+
+### Infrastructure
+
+- ci: Allow auto-merging of the yarn.lock file ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v6.8.14](https://github.com/Workday/canvas-kit/releases/tag/v6.8.14) (2022-07-27)
+
+### Infrastructure
+
+- ci: Allow auto-merging of the yarn.lock file ([@NicholasBoll](https://github.com/NicholasBoll))
+## [v7.2.3](https://github.com/Workday/canvas-kit/releases/tag/v7.2.3) (2022-07-27)
+
+### Documentation
+
+- fix: Set types import direction for sub-directory packages ([#1695](https://github.com/Workday/canvas-kit/pull/1695)) ([@RayRedGoose](https://github.com/RayRedGoose))
+
+### Infrastructure
+
+- ci: Fix forward-merge script and optimize release/forward-merge jobs ([@NicholasBoll](https://github.com/NicholasBoll))
+- ci: Ignore Storybook test on forward-merge ([@NicholasBoll](https://github.com/NicholasBoll))
+- ci: Remove extra manual bump step ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v7.2.2](https://github.com/Workday/canvas-kit/releases/tag/v7.2.2) (2022-07-27)
+
+### Components
+
+- fix: Add missing `Popper` props to `Popup.Popper` ([#1701](https://github.com/Workday/canvas-kit/pull/1701)) ([@PrajwalBorkar](https://github.com/PrajwalBorkar))
+
+### Documentation
+
+- fix: Set types import direction for sub-directory packages ([#1695](https://github.com/Workday/canvas-kit/pull/1695)) ([@RayRedGoose](https://github.com/RayRedGoose))
+
+### Infrastructure
+
+- ci: Fix forward-merge script and optimize release/forward-merge jobs ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v6.8.13](https://github.com/Workday/canvas-kit/releases/tag/v6.8.13) (2022-07-22)
+
+### Documentation
+
+- fix: Set types import direction for sub-directory packages ([#1695](https://github.com/Workday/canvas-kit/pull/1695)) ([@RayRedGoose](https://github.com/RayRedGoose))
+
+
+## [v7.2.1](https://github.com/Workday/canvas-kit/releases/tag/v7.2.1) (2022-07-22)
+
+
+
+
+## [v6.8.12](https://github.com/Workday/canvas-kit/releases/tag/v6.8.12) (2022-07-21)
+
+### Infrastructure
+
+- ci: Fix forward-merge script and optimize release/forward-merge jobs ([@NicholasBoll](https://github.com/NicholasBoll))
 ## [v7.2.0](https://github.com/Workday/canvas-kit/releases/tag/v7.2.0) (2022-07-21)
 
 ### Components
