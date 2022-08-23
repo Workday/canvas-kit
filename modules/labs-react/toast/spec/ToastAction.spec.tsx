@@ -5,10 +5,10 @@ import React from 'react';
 describe('Toast.Action', () => {
   const cb = jest.fn();
 
-  it('should have a role of "button"', () => {
+  it('should have a role of "a"', () => {
     render(<Toast.Action>Action Button</Toast.Action>);
 
-    expect(screen.getByRole('button')).toBeInTheDocument();
+    expect(screen.getByRole('a')).toBeInTheDocument();
   });
 
   it('should call the onActionClick callback', () => {
@@ -16,7 +16,7 @@ describe('Toast.Action', () => {
 
     render(<Toast.Action onClick={cb}>{actionText}</Toast.Action>);
 
-    fireEvent.click(screen.getByRole('button', {name: actionText}));
+    fireEvent.click(screen.getByRole('a', {name: actionText}));
     expect(cb).toHaveBeenCalledTimes(1);
   });
 });

@@ -8,13 +8,13 @@ describe('Toast', () => {
   it('should render on a server without crashing', () => {
     const SimpleToast = () => (
       <Toast mode="interactive">
-        <Toast.Content>
-          <Toast.Icon icon={checkIcon} iconColor={colors.greenApple400} />
+        <Toast.Body>
+          <Toast.Icon icon={checkIcon} color={colors.greenApple400} />
           <Toast.Message>
             Your workbook was successfully processed.
             <Toast.Action>View more details</Toast.Action>
           </Toast.Message>
-        </Toast.Content>
+        </Toast.Body>
         <Toast.Close aria-label="Close" />
       </Toast>
     );
