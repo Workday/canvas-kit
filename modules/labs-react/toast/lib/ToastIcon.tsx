@@ -7,9 +7,16 @@ export interface ToastIconProps extends SystemIconProps {}
 
 export const ToastIcon = createComponent('div')({
   displayName: 'Toast.Icon',
-  Component: ({...elemProps}: ToastIconProps, ref, Element) => {
+  Component: ({colorHover, ...elemProps}: ToastIconProps, ref, Element) => {
     return (
-      <SystemIcon marginInlineEnd="s" alignSelf="start" ref={ref} as={Element} {...elemProps} />
+      <SystemIcon
+        colorHover={elemProps.color}
+        marginInlineEnd="s"
+        alignSelf="start"
+        ref={ref}
+        as={Element}
+        {...elemProps}
+      />
     );
   },
 });

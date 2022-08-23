@@ -10,7 +10,7 @@ export const WithCloseButton = () => {
   const handleClose = () => action('close button clicked');
 
   return (
-    <Toast mode="interactive">
+    <Toast>
       <Toast.Body>
         <Toast.Icon icon={checkIcon} color={colors.greenApple400} />
         Your workbook was successfully processed.

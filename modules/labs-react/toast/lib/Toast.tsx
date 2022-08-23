@@ -16,23 +16,26 @@ export interface ToastProps extends ExtractProps<typeof Popup.Card, never> {
    * Interactive toasts contain buttons user can click and take action.
    * @default 'noninteractive'
    */
-  mode?: 'noninteractive' | 'interactive';
+  mode?: 'polite' | 'assertive' | 'interactive';
 }
 
 const toastWidth = 360;
 
 export const Toast = createComponent('div')({
   displayName: 'Toast',
-  Component: ({children, mode = 'noninteractive', ...elemProps}: ToastProps, ref, Element) => {
+  Component: ({children, mode = 'polite', ...elemProps}: ToastProps, ref, Element) => {
     return (
       <Popup.Card
         ref={ref}
         as={Element}
         width={toastWidth}
         padding="0"
-        role={mode === 'interactive' ? 'dialog' : 'status'}
-        aria-live={mode === 'interactive' ? 'off' : 'polite'}
-        aria-atomic={mode === 'noninteractive'}
+        aria-label={mode === 'interactive' ? 'notification' : undefined}
+        role={mode === 'interactive' ? 'dialog' : mode === 'assertive' ? 'alert' : 'status'}
+        aria-live={
+          mode === 'interactive' ? undefined : mode === 'assertive' ? 'assertive' : 'polite'
+        }
+        aria-atomic={mode === 'polite'}
         {...elemProps}
       >
         <Flex>{children}</Flex>
