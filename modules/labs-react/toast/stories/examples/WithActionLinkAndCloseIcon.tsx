@@ -4,11 +4,9 @@ import {Toast} from '@workday/canvas-kit-labs-react/toast';
 import {checkIcon} from '@workday/canvas-system-icons-web';
 import {colors} from '@workday/canvas-kit-react/tokens';
 
-import {action} from '@storybook/addon-actions';
-
 export const WithActionLinkAndCloseIcon = () => {
-  const handleClose = () => action('close button clicked');
-  const handleActionClick = () => action('action button clicked');
+  const handleClose = () => console.log('close button clicked');
+  const handleActionClick = () => console.log('action button clicked');
 
   return (
     <Toast mode="interactive">
