@@ -212,7 +212,7 @@ interface RefForwardingComponent<T, P = {}> {
      * `never`
      */
     Element: T extends undefined ? never : T
-  ): React.ReactElement | null;
+  ): JSX.Element | null;
 }
 
 function defaultGetElemProps(input: any) {
@@ -256,7 +256,7 @@ export const createContainer = <
       props: Props & RemoveNull<ReturnType<TElemPropsHook>> & {ref: ExtractRef<E>},
       Element: E extends undefined ? never : E,
       model: TModelHook extends (config: infer TConfig) => infer TModel ? TModel : never
-    ) => React.ReactElement | null
+    ) => JSX.Element | null
   ): (TModelHook extends (config: infer TConfig) => infer TModel
     ? E extends undefined
       ? ComponentM<Props & TConfig, TModel>
@@ -356,7 +356,7 @@ export const createSubcomponent = <
             }),
       Element: E extends undefined ? never : E,
       model: TModelHook extends (...args: any[]) => infer TModel ? TModel : never
-    ) => React.ReactElement | null
+    ) => JSX.Element | null
   ): (TModelHook extends (...args: any[]) => infer TModel
     ? ElementComponentM<
         // E is not `undefined` here, but Typescript thinks it could be, so we add another `undefined`

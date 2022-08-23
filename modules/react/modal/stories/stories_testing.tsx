@@ -10,7 +10,7 @@ import {
 } from '@workday/canvas-kit-react/popup';
 import {HStack, VStack} from '@workday/canvas-kit-react/layout';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
-import Radio, {RadioGroup} from '@workday/canvas-kit-react/radio';
+import {Radio, RadioGroup} from '@workday/canvas-kit-react/radio';
 
 export default {
   title: 'Testing/React/Popups/Modal',
