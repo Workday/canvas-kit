@@ -22,48 +22,55 @@ a process or action occurring in the app.
 ## Installation
 
 ```sh
-yarn add @workday/canvas-kit-react
+yarn add @workday/canvas-kit-labs-react
 ```
 
 ## Usage
 
 ### Basic Usage
 
-Below are examples we expect will work for most use cases. Note that all examples include icons as
-they are an important signifier to communicate meaning. For this reason, Toast notifications should
-always include an icon.
-
----
-
-#### Complete Example with Popper
-
-We use Popper to position Toast. Here's an example of how to use them together.
-
-<ExampleCodeBlock code={WithPopper} />
-
----
-
-#### Success
+It is up to the consumer on how a Toast is triggered and it's contents. In a basic example, a Toast
+should provide some information. By default, a Toast's `mode` is set to `polite` but this may vary
+based on the contents of the Toast.
 
 <ExampleCodeBlock code={Success} />
 
 ---
 
-#### Error
-
-<ExampleCodeBlock code={Error} />
-
----
-
 #### WithCloseButton
+
+A Toast and can also be dismissive with a `Toast.Close`.
 
 <ExampleCodeBlock code={WithCloseButton} />
 
 ---
 
+#### Error
+
+If a Toast is to convey something urgent such as an error, it's mode should be set to `assertive`.
+This changes `aria-live` to `assertive` as well as `role` to be `alert`. Doing so provides a better
+accessibility experience.
+
+<ExampleCodeBlock code={Error} />
+
+---
+
 #### With an Action Link
 
+There are time where a Toast might have a follow up action. If a Toast has an action, it's `mode`
+should be set to `interactive`. By doing so, the `role` of the Toast is set to `dialog` and an
+`aria-label` is added to indicate that it's a notifcation of some kind.
+
 <ExampleCodeBlock code={WithActionLink} />
+
+---
+
+#### Complete Example with Popper
+
+The Toast on its own is a stylized `Card` component. However, when paired with `Popper` you can use
+it to place it wherever you like on the page.
+
+<ExampleCodeBlock code={WithPopper} />
 
 ---
 
@@ -74,6 +81,8 @@ We use Popper to position Toast. Here's an example of how to use them together.
 ---
 
 #### With RTL
+
+Toast also support right to left.
 
 <ExampleCodeBlock code={RTL} />
 

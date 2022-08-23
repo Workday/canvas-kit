@@ -22,7 +22,7 @@ export const WithPopper = () => {
     <div ref={containerRef}>
       <SecondaryButton onClick={handleOpen}>Show Toast</SecondaryButton>
       <Popper placement="bottom-end" open={open} anchorElement={containerRef}>
-        <Toast mode="interactive">
+        <Toast mode="interactive" aria-describedby="Your workbook was success">
           <Toast.Body>
             <Toast.Icon icon={checkIcon} color={colors.greenApple400} />
             Your workbook was successfully processed.

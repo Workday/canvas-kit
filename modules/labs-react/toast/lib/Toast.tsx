@@ -14,7 +14,7 @@ export interface ToastProps extends ExtractProps<typeof Popup.Card, never> {
    * Sets the mode of the toast.
    * Noninteractive toasts do not contain any buttons.
    * Interactive toasts contain buttons user can click and take action.
-   * @default 'noninteractive'
+   * @default 'polite'
    */
   mode?: 'polite' | 'assertive' | 'interactive';
 }
