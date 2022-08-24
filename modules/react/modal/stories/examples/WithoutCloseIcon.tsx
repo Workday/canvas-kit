@@ -9,7 +9,7 @@ import {
   useAssistiveHideSiblings,
   useDisableBodyScroll,
 } from '@workday/canvas-kit-react/popup';
-import {DeleteButton} from '@workday/canvas-kit-react/button';
+import {DeleteButton, PrimaryButton} from '@workday/canvas-kit-react/button';
 import {HStack, Box} from '@workday/canvas-kit-react/layout';
 
 export const WithoutCloseIcon = () => {

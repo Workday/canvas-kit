@@ -5,26 +5,31 @@ import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {HStack, Box} from '@workday/canvas-kit-react/layout';
 
 export const Basic = () => {
-  const handleAllow = () => {
-    console.log('Allow notifications');
+  const handlePrimaryClick = () => {
+    console.log('Primary Action clicked');
+  };
+
+  const handleSecondaryClick = () => {
+    console.log('Secondary Action clicked');
   };
 
   return (
     <Modal>
-      <Modal.Target as={PrimaryButton}>Edit Notification Settings</Modal.Target>
+      <Modal.Target as={PrimaryButton}>Open License</Modal.Target>
       <Modal.Overlay>
         <Modal.Card>
           <Modal.CloseIcon aria-label="Close" />
-          <Modal.Heading>Allow Notifications?</Modal.Heading>
+          <Modal.Heading>MIT License</Modal.Heading>
           <Modal.Body>
             <Box as="p" marginTop={0} marginBottom="m">
-              Notifications may include alerts, sounds, and icon badges.
+              Permission is hereby granted, free of charge, to any person obtaining a copy of this
+              software and associated documentation files (the "Software").
             </Box>
             <HStack spacing="s">
-              <Modal.CloseButton as={PrimaryButton} onClick={handleAllow}>
-                Allow
+              <Modal.CloseButton as={PrimaryButton} onClick={handlePrimaryClick}>
+                Primary Action
               </Modal.CloseButton>
-              <Modal.CloseButton>Don't Allow</Modal.CloseButton>
+              <Modal.CloseButton onClick={handleSecondaryClick}>Secondary Action</Modal.CloseButton>
             </HStack>
           </Modal.Body>
         </Modal.Card>
