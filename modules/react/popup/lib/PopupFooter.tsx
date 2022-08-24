@@ -3,14 +3,14 @@ import * as React from 'react';
 import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
 
 import {HStack} from '@workday/canvas-kit-react/layout';
-import {useModalModel} from './hooks';
+import {usePopupModel} from './hooks';
 
-export interface ModalFooterProps<T = unknown>
+export interface PopupFooterProps<T = unknown>
   extends Partial<ExtractProps<typeof HStack, never>> {}
 
-export const ModalFooter = createSubcomponent('div')({
-  displayName: 'Modal.Footer',
-  modelHook: useModalModel,
-})<ModalFooterProps>(({...elemProps}) => {
+export const PopupFooter = createSubcomponent('div')({
+  displayName: 'Popup.Footer',
+  modelHook: usePopupModel,
+})<PopupFooterProps>(({...elemProps}) => {
   return <HStack paddingX="l" paddingBottom="l" paddingTop="zero" spacing="s" {...elemProps} />;
 });

@@ -39,19 +39,21 @@ export const FocusRedirect = () => {
         <Popup.Target as={DeleteButton}>Delete Item</Popup.Target>
         <div aria-owns={popupId} style={{position: 'absolute'}} />
         <Popup.Popper>
-          <Popup.Card width={400} padding="s">
+          <Popup.Card width={400}>
             <Popup.CloseIcon aria-label="Close" />
             <Popup.Heading>Delete Item</Popup.Heading>
             <Popup.Body>
-              <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
+              <p style={{marginTop: 0}}>
+                Are you sure you'd like to delete the item titled 'My Item'?
+              </p>
+              <HStack spacing="s">
+                <Popup.CloseButton as={DeleteButton} onClick={handleDelete}>
+                  Delete
+                </Popup.CloseButton>
+                {/* Disabled elements should not be focusable and focus should move to the next focusable element */}
+                <Popup.CloseButton disabled>Cancel</Popup.CloseButton>
+              </HStack>
             </Popup.Body>
-            <HStack spacing="s">
-              <Popup.CloseButton as={DeleteButton} onClick={handleDelete}>
-                Delete
-              </Popup.CloseButton>
-              {/* Disabled elements should not be focusable and focus should move to the next focusable element */}
-              <Popup.CloseButton disabled>Cancel</Popup.CloseButton>
-            </HStack>
           </Popup.Card>
         </Popup.Popper>
         <SecondaryButton>Next Focusable Button</SecondaryButton>

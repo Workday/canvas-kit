@@ -9,6 +9,7 @@ import {PopupPopper} from './PopupPopper';
 import {PopupHeading} from './PopupHeading';
 import {PopupCloseIcon} from './PopupCloseIcon';
 import {PopupCloseButton} from './PopupCloseButton';
+import {PopupFooter} from './PopupFooter';
 import {PopupBody} from './PopupBody';
 
 export interface PopupProps {
@@ -28,6 +29,7 @@ export const Popup = createContainer()({
     CloseIcon: PopupCloseIcon,
     Target: PopupTarget,
     Popper: PopupPopper,
+    Footer: PopupFooter,
     CloseButton: PopupCloseButton,
   },
 })<PopupProps>(({children}: PopupProps) => {

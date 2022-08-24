@@ -13,14 +13,6 @@ export const ModalCard = createSubcomponent('div')({
   elemPropsHook: useModalCard,
 })<ModalCardProps>((elemProps, Element) => {
   return (
-    <Popup.Card
-      as={Element}
-      width={440}
-      borderWidth={0}
-      margin="xl"
-      depth={6}
-      padding="zero"
-      {...elemProps}
-    />
+    <Popup.Card as={Element} width={440} borderWidth={0} margin="xl" depth={6} {...elemProps} />
   );
 });

@@ -7,14 +7,12 @@ import {ModalCard} from './ModalCard';
 import {useModalModel} from './hooks';
 import {ModalHeading} from './ModalHeading';
 import {ModalOverflowOverlay} from './ModalOverflowOverlay';
-import {ModalBody} from './ModalBody';
-import {ModalFooter} from './ModalFooter';
 
 export const Modal = createContainer()({
   displayName: 'Modal',
   modelHook: useModalModel,
   subComponents: {
-    Body: ModalBody,
+    Body: Popup.Body,
     Card: ModalCard,
     CloseIcon: Popup.CloseIcon,
     Target: Popup.Target,
@@ -22,7 +20,7 @@ export const Modal = createContainer()({
     Overlay: ModalOverlay,
     OverflowOverlay: ModalOverflowOverlay,
     CloseButton: Popup.CloseButton,
-    Footer: ModalFooter,
+    Footer: Popup.Footer,
   },
 })<ExtractProps<typeof Dialog, never>>(elemProps => {
   return <>{elemProps.children}</>;
