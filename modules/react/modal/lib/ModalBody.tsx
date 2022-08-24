@@ -8,5 +8,5 @@ export const ModalBody = createSubcomponent('div')({
   displayName: 'Modal.Body',
   modelHook: usePopupModel,
 })<ExtractProps<typeof Card.Body>>(elemProps => {
-  return <Popup.Body overflowY="auto" padding={'l'} paddingTop="zero" {...elemProps} />;
+  return <Popup.Body overflowY="auto" padding={'l'} paddingY="m" {...elemProps} />;
 });

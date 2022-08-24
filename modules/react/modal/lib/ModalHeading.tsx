@@ -17,6 +17,7 @@ export const ModalHeading = createSubcomponent('h2')({
       marginInlineStart="l"
       marginInlineEnd="l"
       marginTop="l"
+      marginBottom="zero"
       as={Element}
       {...elemProps}
     />

@@ -16,12 +16,8 @@ export const Basic = () => {
         <Modal.Card>
           <Modal.CloseIcon aria-label="Close" />
           <Modal.Heading>Delete Item</Modal.Heading>
-          <Modal.Body paddingBottom="xxs">
-            <Box as="p" marginTop={0} marginBottom="xxs">
-              Are you sure you want to delete the item?
-            </Box>
-          </Modal.Body>
-          <Modal.Footer paddingTop={'xxs'}>
+          <Modal.Body>Are you sure you want to delete the item?</Modal.Body>
+          <Modal.Footer>
             <Modal.CloseButton as={DeleteButton} onClick={handleClose}>
               Delete
             </Modal.CloseButton>

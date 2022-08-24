@@ -12,5 +12,5 @@ export const ModalFooter = createSubcomponent('div')({
   displayName: 'Modal.Footer',
   modelHook: useModalModel,
 })<ModalFooterProps>(({...elemProps}) => {
-  return <HStack paddingX="l" paddingBottom="l" paddingTop="s" spacing="s" {...elemProps} />;
+  return <HStack paddingX="l" paddingBottom="l" paddingTop="zero" spacing="s" {...elemProps} />;
 });
