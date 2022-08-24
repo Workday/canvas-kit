@@ -24,14 +24,14 @@ export const CustomFocus = () => {
           <Modal.CloseIcon aria-label="Close" />
           <Modal.Heading>Delete Item</Modal.Heading>
           <Modal.Body paddingBottom="zero">
-            <Box as="p" marginTop={0} marginBottom="m">
+            <Box as="p" marginTop={0}>
               Enter name to confirm deletion
             </Box>
             <FormField label="Item name">
               <TextInput ref={ref} value={value} onChange={e => setValue(e.currentTarget.value)} />
             </FormField>
           </Modal.Body>
-          <Modal.Footer paddingTop="zero">
+          <Modal.Footer>
             <Modal.CloseButton as={DeleteButton} onClick={handleClose}>
               Delete
             </Modal.CloseButton>

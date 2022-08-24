@@ -39,7 +39,7 @@ export const ReturnFocus = () => {
           <Modal.CloseIcon aria-label="Close" />
           <Modal.Heading>Delete Item</Modal.Heading>
           <Modal.Body>
-            <Box as="p" marginTop={0} marginBottom="m">
+            <Box as="p" marginTop={0}>
               Are you sure you want to delete the item?
             </Box>
             <HStack spacing="s">

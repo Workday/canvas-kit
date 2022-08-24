@@ -101,7 +101,6 @@ export const WithRadioButtons = () => {
           <Modal.CloseIcon aria-label="Close" />
           <Modal.Heading>Select Item</Modal.Heading>
           <Modal.Body>
-            {/* <VStack spacing="s"> */}
             <RadioGroup
               name="contact"
               data-testid="radiogroup"
@@ -111,7 +110,6 @@ export const WithRadioButtons = () => {
               <Radio id="1" value="email" label="E-mail" />
               <Radio id="2" value="phone" label="Phone" />
             </RadioGroup>
-            {/* </VStack> */}
           </Modal.Body>
         </Modal.Card>
       </Modal.Overlay>

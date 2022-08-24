@@ -31,12 +31,12 @@ export const WithoutCloseIcon = () => {
       <Modal.Overlay>
         <Modal.Card>
           <Modal.Heading>Delete Item</Modal.Heading>
-          <Modal.Body paddingBottom="zero">
-            <Box as="p" marginTop={0} marginBottom="m">
+          <Modal.Body>
+            <Box as="p" marginTop={0}>
               Are you sure you want to delete the item?
             </Box>
           </Modal.Body>
-          <Modal.Footer paddingTop="zero">
+          <Modal.Footer>
             <Modal.CloseButton as={DeleteButton} onClick={handleClose}>
               Delete
             </Modal.CloseButton>
