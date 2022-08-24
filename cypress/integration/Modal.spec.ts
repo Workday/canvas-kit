@@ -17,26 +17,26 @@ describe('Modal', () => {
 
       context('when button is focused', () => {
         beforeEach(() => {
-          cy.findByRole('button', {name: 'Delete Item'}).focus();
+          cy.findByRole('button', {name: 'Open License'}).focus();
         });
 
         it('should be the focused item on the page', () => {
-          cy.findByRole('button', {name: 'Delete Item'}).should('have.focus');
+          cy.findByRole('button', {name: 'Open License'}).should('have.focus');
         });
       });
 
       context('when the target button is clicked', () => {
         beforeEach(() => {
-          cy.findByRole('button', {name: 'Delete Item'}).click();
+          cy.findByRole('button', {name: 'Open License'}).click();
         });
 
         it('should open the modal', () => {
-          cy.findByRole('dialog', {name: 'Delete Item'}).should('be.visible');
+          cy.findByRole('dialog', {name: 'MIT License'}).should('be.visible');
         });
 
         it('should place the portal as a child of the body element', () => {
           cy.get('body').then($body => {
-            cy.findByRole('dialog', {name: 'Delete Item'})
+            cy.findByRole('dialog', {name: 'MIT License'})
               .pipe(h.modal.getOverlay)
               .parent()
               .should($el => {
@@ -46,7 +46,7 @@ describe('Modal', () => {
         });
 
         it('should hide non-modal content from assistive technology', () => {
-          cy.findByRole('dialog', {name: 'Delete Item'})
+          cy.findByRole('dialog', {name: 'MIT License'})
             .pipe(h.modal.getOverlay)
             .siblings()
             .should($siblings => {
@@ -62,15 +62,15 @@ describe('Modal', () => {
 
         context('the modal', () => {
           it('should have a the role of dialog', () => {
-            cy.findByRole('dialog', {name: 'Delete Item'}).should('have.attr', 'role', 'dialog');
+            cy.findByRole('dialog', {name: 'MIT License'}).should('have.attr', 'role', 'dialog');
           });
 
           it('should have an aria-labelledby attribute', () => {
-            cy.findByRole('dialog', {name: 'Delete Item'}).should('have.attr', 'aria-labelledby');
+            cy.findByRole('dialog', {name: 'MIT License'}).should('have.attr', 'aria-labelledby');
           });
 
           it('should have an aria-modal=true', () => {
-            cy.findByRole('dialog', {name: 'Delete Item'}).should(
+            cy.findByRole('dialog', {name: 'MIT License'}).should(
               'have.attr',
               'aria-modal',
               'true'
@@ -78,13 +78,13 @@ describe('Modal', () => {
           });
 
           it('should contain the title', () => {
-            cy.findByRole('dialog', {name: 'Delete Item'})
+            cy.findByRole('dialog', {name: 'MIT License'})
               .pipe(h.modal.getTitle)
-              .should('contain', 'Delete Item');
+              .should('contain', 'MIT License');
           });
 
           it('should be labelled by the title element', () => {
-            cy.findByRole('dialog', {name: 'Delete Item'}).should($modal => {
+            cy.findByRole('dialog', {name: 'MIT License'}).should($modal => {
               const labelId = $modal.attr('aria-labelledby');
               const titleId = h.modal.getTitle($modal).attr('id');
 
@@ -93,18 +93,18 @@ describe('Modal', () => {
           });
 
           it('should transfer focus to the x icon element', () => {
-            cy.findByRole('dialog', {name: 'Delete Item'})
+            cy.findByRole('dialog', {name: 'MIT License'})
               .findByRole('button', {name: 'Close'})
               .should('have.focus');
           });
 
           it('should trap focus inside the modal element', () => {
             cy.tab()
-              .should('contain', 'Delete')
+              .should('contain', 'Primary Action')
               .tab()
-              .should('contain', 'Cancel')
+              .should('contain', 'Secondary Action')
               .tab();
-            cy.findByRole('dialog', {name: 'Delete Item'})
+            cy.findByRole('dialog', {name: 'MIT License'})
               .findByRole('button', {name: 'Close'})
               .should('have.focus');
           });
@@ -113,11 +113,11 @@ describe('Modal', () => {
         context('when clicking inside the modal', () => {
           beforeEach(() => {
             // click somewhere on the modal where there shouldn't be a close target
-            cy.findByRole('dialog', {name: 'Delete Item'}).click('top');
+            cy.findByRole('dialog', {name: 'MIT License'}).click('top');
           });
 
           it('should not close the modal', () => {
-            cy.findByRole('dialog', {name: 'Delete Item'}).should('be.visible');
+            cy.findByRole('dialog', {name: 'MIT License'}).should('be.visible');
           });
         });
 
@@ -127,11 +127,11 @@ describe('Modal', () => {
           });
 
           it('should close the modal', () => {
-            cy.findByRole('dialog', {name: 'Delete Item'}).should('not.exist');
+            cy.findByRole('dialog', {name: 'MIT License'}).should('not.exist');
           });
 
           it('should transfer focus back to the target button', () => {
-            cy.findByRole('button', {name: 'Delete Item'}).should('have.focus');
+            cy.findByRole('button', {name: 'Open License'}).should('have.focus');
           });
         });
 
@@ -143,7 +143,7 @@ describe('Modal', () => {
           });
 
           it('should close the modal', () => {
-            cy.findByRole('dialog', {name: 'Delete Item'}).should('not.exist');
+            cy.findByRole('dialog', {name: 'MIT License'}).should('not.exist');
           });
         });
 
@@ -153,7 +153,7 @@ describe('Modal', () => {
           });
 
           it('should close the modal', () => {
-            cy.findByRole('dialog', {name: 'Delete Item'}).should('not.exist');
+            cy.findByRole('dialog', {name: 'MIT License'}).should('not.exist');
           });
         });
       });
@@ -448,44 +448,55 @@ describe('Modal', () => {
 
     context('when button is focused', () => {
       beforeEach(() => {
-        cy.findByRole('button', {name: 'Delete Item'}).focus();
+        cy.findByRole('button', {name: 'Acknowledge License'}).focus();
       });
 
       it('should be the focused item on the page', () => {
-        cy.findByRole('button', {name: 'Delete Item'}).should('have.focus');
+        cy.findByRole('button', {name: 'Acknowledge License'}).should('have.focus');
       });
     });
 
     context('when the target button is clicked', () => {
       beforeEach(() => {
-        cy.findByRole('button', {name: 'Delete Item'}).click();
+        cy.findByRole('button', {name: 'Acknowledge License'}).click();
       });
 
       it('should open the modal', () => {
-        cy.findByRole('dialog', {name: 'Delete Item'}).should('be.visible');
+        cy.findByRole('dialog', {name: 'Acknowledge License'}).should('be.visible');
       });
 
       context('the modal', () => {
         it('should have a the role of dialog', () => {
-          cy.findByRole('dialog', {name: 'Delete Item'}).should('have.attr', 'role', 'dialog');
+          cy.findByRole('dialog', {name: 'Acknowledge License'}).should(
+            'have.attr',
+            'role',
+            'dialog'
+          );
         });
 
         it('should have an aria-labelledby attribute', () => {
-          cy.findByRole('dialog', {name: 'Delete Item'}).should('have.attr', 'aria-labelledby');
+          cy.findByRole('dialog', {name: 'Acknowledge License'}).should(
+            'have.attr',
+            'aria-labelledby'
+          );
         });
 
         it('should have an aria-modal=true', () => {
-          cy.findByRole('dialog', {name: 'Delete Item'}).should('have.attr', 'aria-modal', 'true');
+          cy.findByRole('dialog', {name: 'Acknowledge License'}).should(
+            'have.attr',
+            'aria-modal',
+            'true'
+          );
         });
 
         it('should contain the title', () => {
-          cy.findByRole('dialog', {name: 'Delete Item'})
+          cy.findByRole('dialog', {name: 'Acknowledge License'})
             .pipe(h.modal.getTitle)
-            .should('contain', 'Delete Item');
+            .should('contain', 'Acknowledge');
         });
 
         it('should be labelled by the title element', () => {
-          cy.findByRole('dialog', {name: 'Delete Item'}).should($modal => {
+          cy.findByRole('dialog', {name: 'Acknowledge License'}).should($modal => {
             const labelId = $modal.attr('aria-labelledby');
             const titleId = h.modal.getTitle($modal).attr('id');
 
@@ -493,20 +504,20 @@ describe('Modal', () => {
           });
         });
 
-        it('should transfer focus to the Cancel button element', () => {
-          cy.findByLabelText('Item name').should('have.focus');
+        it('should transfer focus to the Acknowledge button element', () => {
+          cy.findByLabelText('Initials').should('have.focus');
         });
 
         it('should trap focus inside the modal element', () => {
           cy.focused()
             .tab()
-            .should('contain', 'Delete')
+            .should('contain', 'Acknowledge')
             .tab()
             .should('contain', 'Cancel')
             .tab()
             .should('have.attr', 'aria-label', 'Close')
             .tab();
-          cy.findByLabelText('Item name').should('have.focus');
+          cy.findByLabelText('Initials').should('have.focus');
         });
       });
 
@@ -518,7 +529,7 @@ describe('Modal', () => {
         });
 
         it('should close the modal', () => {
-          cy.findByRole('dialog', {name: 'Delete Item'}).should('not.exist');
+          cy.findByRole('dialog', {name: 'Acknowledge License'}).should('not.exist');
         });
       });
 
@@ -528,7 +539,7 @@ describe('Modal', () => {
         });
 
         it('should close the modal', () => {
-          cy.findByRole('dialog', {name: 'Delete Item'}).should('not.exist');
+          cy.findByRole('dialog', {name: 'Acknowledge License'}).should('not.exist');
         });
       });
     });
@@ -624,7 +635,7 @@ describe('Modal', () => {
       });
 
       it('should show the modal', () => {
-        cy.findByRole('dialog', {name: 'Modal'}).should('be.visible');
+        cy.findByRole('dialog', {name: 'Modal Heading'}).should('be.visible');
       });
 
       context('when the "Close" button is clicked', () => {
