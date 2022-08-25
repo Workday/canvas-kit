@@ -11,9 +11,10 @@ import {ToastBody} from './ToastBody';
 
 export interface ToastProps extends ExtractProps<typeof Popup.Card, never> {
   /**
-   * Sets the mode of the toast.
-   * Noninteractive toasts do not contain any buttons.
-   * Interactive toasts contain buttons user can click and take action.
+   * Sets the correct aria attributes for the Toast.
+   * Alert toasts are used to convey urgency and important information. The `role` is set to `alert`
+   * Status toasts are used to convey a message or a successful action. The `role` is set to `status`
+   * Dialog toasts are used when there's an action to be taken. The `role` is set to `dialog`
    * @default 'polite'
    */
   mode?: 'alert' | 'status' | 'dialog';
