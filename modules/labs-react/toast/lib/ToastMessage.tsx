@@ -1,7 +1,13 @@
 import React from 'react';
 
-import {createComponent, styled, StyledType} from '@workday/canvas-kit-react/common';
+import {
+  createComponent,
+  createSubcomponent,
+  styled,
+  StyledType,
+} from '@workday/canvas-kit-react/common';
 import {Box, BoxProps} from '@workday/canvas-kit-react/layout';
+import {useToastModel} from './hooks/useToastModel';
 
 export interface ToastMessageProps extends BoxProps {}
 
@@ -12,13 +18,12 @@ const StyledMessage = styled(Box)<StyledType>({
   flexDirection: 'column',
 });
 
-export const ToastMessage = createComponent('div')({
-  displayName: 'Toast.Message',
-  Component: ({children, ...elemProps}: ToastMessageProps, ref, Element) => {
-    return (
-      <StyledMessage ref={ref} as={Element} {...elemProps}>
-        {children}
-      </StyledMessage>
-    );
-  },
+export const ToastMessage = createSubcomponent('div')({
+  modelHook: useToastModel,
+})<ToastMessageProps>(({children, ...elemProps}, Element, model) => {
+  return (
+    <StyledMessage id={model.state.id} as={Element} {...elemProps}>
+      {children}
+    </StyledMessage>
+  );
 });

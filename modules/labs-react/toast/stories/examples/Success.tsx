@@ -8,7 +8,7 @@ export const Success = () => (
   <Toast>
     <Toast.Body>
       <Toast.Icon icon={checkIcon} color={colors.greenApple400} />
-      Your workbook was successfully processed.
+      <Toast.Message>Your workbook was successfully processed.</Toast.Message>
     </Toast.Body>
   </Toast>
 );

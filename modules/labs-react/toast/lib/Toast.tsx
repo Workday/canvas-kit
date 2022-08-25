@@ -1,6 +1,11 @@
 import React from 'react';
 
-import {createComponent, ExtractProps, useUniqueId} from '@workday/canvas-kit-react/common';
+import {
+  createComponent,
+  createContainer,
+  ExtractProps,
+  useUniqueId,
+} from '@workday/canvas-kit-react/common';
 import {Flex, Popup} from '@workday/canvas-kit-react';
 
 import {ToastCloseIcon} from './ToastCloseIcon';
@@ -8,6 +13,7 @@ import {ToastIcon} from './ToastIcon';
 import {ToastMessage} from './ToastMessage';
 import {ToastAction} from './ToastAction';
 import {ToastBody} from './ToastBody';
+import {useToastModel} from './hooks/useToastModel';
 
 export interface ToastProps extends ExtractProps<typeof Popup.Card, never> {
   /**
@@ -22,50 +28,9 @@ export interface ToastProps extends ExtractProps<typeof Popup.Card, never> {
 
 const toastWidth = 360;
 
-export const Toast = createComponent('div')({
+export const Toast = createContainer('div')({
   displayName: 'Toast',
-  Component: ({children, mode = 'status', ...elemProps}: ToastProps, ref, Element) => {
-    const randomDescribedbyID = useUniqueId();
-
-    const getAriaAttributes = (mode: string): React.HtmlHTMLAttributes<HTMLDivElement> => {
-      switch (mode) {
-        case 'dialog':
-          return {
-            'aria-describedby': randomDescribedbyID,
-            'aria-label': 'notification',
-            role: 'dialog',
-          };
-        case 'alert':
-          return {
-            role: 'alert',
-            'aria-live': 'assertive',
-            'aria-atomic': true,
-          };
-        case 'status':
-          return {
-            role: 'status',
-            'aria-live': 'polite',
-            'aria-atomic': true,
-          };
-        default: {
-          return {};
-        }
-      }
-    };
-
-    return (
-      <Popup.Card
-        ref={ref}
-        as={Element}
-        width={toastWidth}
-        padding="0"
-        {...getAriaAttributes(mode)}
-        {...elemProps}
-      >
-        <Flex>{children}</Flex>
-      </Popup.Card>
-    );
-  },
+  modelHook: useToastModel,
   subComponents: {
     Body: ToastBody,
     Close: ToastCloseIcon,
@@ -73,4 +38,41 @@ export const Toast = createComponent('div')({
     Message: ToastMessage,
     Action: ToastAction,
   },
+})<ToastProps>(({children, mode = 'status', ...elemProps}, Element, model) => {
+  const getAriaAttributes = (mode: string): React.HtmlHTMLAttributes<HTMLDivElement> => {
+    switch (mode) {
+      case 'dialog':
+        return {
+          'aria-describedby': model.state.id,
+          'aria-label': 'notification',
+          role: 'dialog',
+        };
+      case 'alert':
+        return {
+          role: 'alert',
+          'aria-live': 'assertive',
+          'aria-atomic': true,
+        };
+      case 'status':
+        return {
+          role: 'status',
+          'aria-live': 'polite',
+          'aria-atomic': true,
+        };
+      default: {
+        return {};
+      }
+    }
+  };
+  return (
+    <Popup.Card
+      as={Element}
+      width={toastWidth}
+      padding="0"
+      {...getAriaAttributes(mode)}
+      {...elemProps}
+    >
+      <Flex>{children}</Flex>
+    </Popup.Card>
+  );
 });
