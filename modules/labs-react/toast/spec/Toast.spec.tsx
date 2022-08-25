@@ -12,7 +12,7 @@ describe('Toast', () => {
           <Toast.Icon icon={checkIcon} color={colors.greenApple400} />
           <Toast.Message>
             Your workbook was successfully processed.
-            <Toast.Action>View more details</Toast.Action>
+            <Toast.Action href="#href">View more details</Toast.Action>
           </Toast.Message>
         </Toast.Body>
         <Toast.Close aria-label="Close" />

@@ -6,7 +6,7 @@ describe('Toast.Action', () => {
   const cb = jest.fn();
 
   it('should have a role of "a"', () => {
-    render(<Toast.Action>Action Link</Toast.Action>);
+    render(<Toast.Action href="#href">Action Link</Toast.Action>);
 
     expect(screen.getByText('Action Link')).toBeInTheDocument();
   });
@@ -14,7 +14,7 @@ describe('Toast.Action', () => {
   it('should call the onActionClick callback', () => {
     const actionText = 'View more details';
 
-    render(<Toast.Action onClick={cb}>{actionText}</Toast.Action>);
+    render(<Toast.Action href="#href">{actionText}</Toast.Action>);
 
     fireEvent.click(screen.getByText(actionText));
     expect(cb).toHaveBeenCalledTimes(1);
