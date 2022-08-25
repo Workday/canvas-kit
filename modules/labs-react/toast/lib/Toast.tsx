@@ -1,11 +1,6 @@
 import React from 'react';
 
-import {
-  createComponent,
-  createContainer,
-  ExtractProps,
-  useUniqueId,
-} from '@workday/canvas-kit-react/common';
+import {createContainer, ExtractProps} from '@workday/canvas-kit-react/common';
 import {Flex, Popup} from '@workday/canvas-kit-react';
 
 import {ToastCloseIcon} from './ToastCloseIcon';
