@@ -7,8 +7,8 @@ export interface ToastBodyProps extends ExtractProps<typeof Popup.Body> {}
 
 const StyledToastBody = styled(Popup.Body)<StyledType>({
   display: 'flex',
-  alignItems: 'center',
-  padding: space.s,
+  alignItems: 'flex-start',
+  flexDirection: 'column',
   ...type.levels.subtext.large,
 });
 
@@ -16,7 +16,14 @@ export const ToastBody = createComponent('div')({
   displayName: 'Toast.Content',
   Component: ({children, ...elemProps}: ToastBodyProps, ref, Element) => {
     return (
-      <StyledToastBody ref={ref} as={Element} {...elemProps}>
+      <StyledToastBody
+        paddingInlineStart="zero"
+        paddingY="s"
+        paddingInlineEnd="s"
+        ref={ref}
+        as={Element}
+        {...elemProps}
+      >
         {children}
       </StyledToastBody>
     );

@@ -9,10 +9,8 @@ export const WithCloseButton = () => {
 
   return (
     <Toast>
-      <Toast.Body>
-        <Toast.Icon icon={checkIcon} color={colors.greenApple400} />
-        Your workbook was successfully processed.
-      </Toast.Body>
+      <Toast.Icon icon={checkIcon} color={colors.greenApple400} />
+      <Toast.Body>Your workbook was successfully processed.</Toast.Body>
       <Toast.Close aria-label="Close" onClick={handleClose} />
     </Toast>
   );

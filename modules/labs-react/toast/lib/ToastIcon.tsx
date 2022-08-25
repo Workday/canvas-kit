@@ -11,7 +11,7 @@ export const ToastIcon = createComponent('div')({
     return (
       <SystemIcon
         colorHover={elemProps.color}
-        marginInlineEnd="s"
+        margin="s"
         alignSelf="start"
         ref={ref}
         as={Element}

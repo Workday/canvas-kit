@@ -3,7 +3,12 @@ import React from 'react';
 import {createComponent, styled, StyledType} from '@workday/canvas-kit-react/common';
 import {Hyperlink, HyperlinkProps, space} from '@workday/canvas-kit-react';
 
-export interface ToastActionProps extends HyperlinkProps {}
+export interface ToastActionProps extends HyperlinkProps {
+  /**
+   * attribute for the hyperlink URL
+   */
+  href: string;
+}
 
 const StyledHyperLink = styled(Hyperlink)<StyledType>({
   marginTop: space.xxxs,
@@ -12,9 +17,9 @@ const StyledHyperLink = styled(Hyperlink)<StyledType>({
 
 export const ToastAction = createComponent('a')({
   displayName: 'Toast.Action',
-  Component: ({children, ...elemProps}: ToastActionProps, ref, Element) => {
+  Component: ({children, href, ...elemProps}: ToastActionProps, ref, Element) => {
     return (
-      <StyledHyperLink tabIndex={0} ref={ref} as={Element} {...elemProps}>
+      <StyledHyperLink ref={ref} href={href} as={Element} {...elemProps}>
         {children}
       </StyledHyperLink>
     );

@@ -6,16 +6,13 @@ import {colors} from '@workday/canvas-kit-react/tokens';
 
 export const WithActionLinkAndCloseIcon = () => {
   const handleClose = () => console.log('close button clicked');
-  const handleActionClick = () => console.log('action button clicked');
 
   return (
     <Toast mode="dialog">
+      <Toast.Icon icon={checkIcon} color={colors.greenApple400} />
       <Toast.Body>
-        <Toast.Icon icon={checkIcon} color={colors.greenApple400} />
-        <Toast.Message>
-          Your workbook was successfully processed.
-          <Toast.Action onClick={handleActionClick}>Custom Action</Toast.Action>
-        </Toast.Message>
+        <Toast.Message>Your workbook was successfully processed.</Toast.Message>
+        <Toast.Action href="#hyperlink">Custom Action</Toast.Action>
       </Toast.Body>
       <Toast.Close aria-label="Close" onClick={handleClose} />
     </Toast>
