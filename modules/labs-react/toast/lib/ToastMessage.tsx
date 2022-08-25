@@ -1,11 +1,6 @@
 import React from 'react';
 
-import {
-  createComponent,
-  createSubcomponent,
-  styled,
-  StyledType,
-} from '@workday/canvas-kit-react/common';
+import {createSubcomponent, styled, StyledType} from '@workday/canvas-kit-react/common';
 import {Box, BoxProps} from '@workday/canvas-kit-react/layout';
 import {useToastModel} from './hooks/useToastModel';
 
