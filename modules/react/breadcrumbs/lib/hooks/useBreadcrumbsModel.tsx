@@ -8,12 +8,12 @@ export const useBreadcrumbsModel = createModelHook({
   defaultConfig: {
     ...useOverflowListModel.defaultConfig,
     /**
-     * Optional id for the whole `ActionBar` group. If not provided, a unique id will be created.
+     * Optional id for the whole `Breadcrumbs` group. If not provided, a unique id will be created.
      * @default useUniqueId()
      */
     id: '',
     /**
-     * The default ActionBar sub-components only handle rendering of button group in a horizontal orientation,
+     * The default Breadcrumbs component only handle rendering of link group in a horizontal orientation,
      * but the sub-components could be replaced to handle vertical orientations.
      * @default 'horizontal'
      */
@@ -57,7 +57,7 @@ export const useBreadcrumbsModel = createModelHook({
 
   const menu = useMenuModel(
     useMenuModel.mergeConfig(config.menuConfig as Required<typeof config.menuConfig>, {
-      id: `act-bar-menu-${model.state.id}`,
+      id: `breadcrumbs-menu-${model.state.id}`,
       items: overflowItems,
       nonInteractiveIds: state.nonInteractiveIds.filter(key => !state.hiddenIds.includes(key)),
       onSelect: ({id}, {items}) => {
