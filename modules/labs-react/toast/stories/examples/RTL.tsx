@@ -10,7 +10,7 @@ export const RTL = () => {
 
   return (
     <CanvasProvider theme={{canvas: {direction: ContentDirection.RTL}}}>
-      <Toast mode="interactive">
+      <Toast mode="dialog">
         <Toast.Body>
           <Toast.Icon icon={checkIcon} color={colors.greenApple400} />
           Your workbook was successfully processed.

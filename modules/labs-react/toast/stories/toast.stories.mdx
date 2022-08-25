@@ -47,8 +47,8 @@ A Toast and can also be dismissive with a `Toast.Close`.
 
 #### Error
 
-If a Toast is to convey something urgent such as an error, it's mode should be set to `assertive`.
-This changes `aria-live` to `assertive` as well as `role` to be `alert`. Doing so provides a better
+If a Toast is to convey something urgent such as an error, it's mode should be set to `alert`. This
+changes `aria-live` to `assertive` as well as `role` to be `alert`. Doing so provides a better
 accessibility experience.
 
 <ExampleCodeBlock code={Error} />
@@ -58,7 +58,7 @@ accessibility experience.
 #### With an Action Link
 
 There are time where a Toast might have a follow up action. If a Toast has an action, it's `mode`
-should be set to `interactive`. By doing so, the `role` of the Toast is set to `dialog` and an
+should be set to `dialog`. By doing so, the `role` of the Toast is set to `dialog` and an
 `aria-label` is added to indicate that it's a notifcation of some kind.
 
 <ExampleCodeBlock code={WithActionLink} />

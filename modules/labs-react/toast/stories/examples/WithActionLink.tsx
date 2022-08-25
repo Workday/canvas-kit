@@ -8,7 +8,7 @@ export const WithActionLink = () => {
   const handleActionClick = () => console.log('action button clicked');
 
   return (
-    <Toast mode="interactive" aria-aria-describedby="Your workbook was successfully processed.">
+    <Toast mode="dialog">
       <Toast.Body>
         <Toast.Icon icon={checkIcon} color={colors.greenApple400} />
         <Toast.Message>

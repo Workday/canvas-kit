@@ -7,7 +7,7 @@ import {Toast} from '../';
 describe('Toast', () => {
   it('should render on a server without crashing', () => {
     const SimpleToast = () => (
-      <Toast mode="interactive">
+      <Toast mode="dialog">
         <Toast.Body>
           <Toast.Icon icon={checkIcon} color={colors.greenApple400} />
           <Toast.Message>

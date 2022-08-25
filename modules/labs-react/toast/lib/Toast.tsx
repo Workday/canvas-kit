@@ -27,7 +27,7 @@ export const Toast = createComponent('div')({
   Component: ({children, mode = 'status', ...elemProps}: ToastProps, ref, Element) => {
     const randomDescribedbyID = useUniqueId();
 
-    const getAriaAttributed = (mode: string): React.HtmlHTMLAttributes<HTMLDivElement> => {
+    const getAriaAttributes = (mode: string): React.HtmlHTMLAttributes<HTMLDivElement> => {
       switch (mode) {
         case 'dialog':
           return {
@@ -59,7 +59,7 @@ export const Toast = createComponent('div')({
         as={Element}
         width={toastWidth}
         padding="0"
-        {...getAriaAttributed(mode)}
+        {...getAriaAttributes(mode)}
         {...elemProps}
       >
         <Flex>{children}</Flex>

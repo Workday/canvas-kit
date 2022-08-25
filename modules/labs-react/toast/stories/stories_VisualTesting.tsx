@@ -22,13 +22,13 @@ export const ToastStates = withSnapshotsEnabled(() => {
           {
             label: 'Default',
             props: {
-              mode: 'noninteractive',
+              mode: 'polite',
             },
           },
           {
             label: 'With Icon',
             props: {
-              mode: 'noninteractive',
+              mode: 'polite',
               icon: checkIcon,
               iconColor: colors.greenApple400,
             },
@@ -36,7 +36,7 @@ export const ToastStates = withSnapshotsEnabled(() => {
           {
             label: 'On Close',
             props: {
-              mode: 'noninteractive',
+              mode: 'polite',
               hasCloseIcon: true,
             },
           },
@@ -50,7 +50,7 @@ export const ToastStates = withSnapshotsEnabled(() => {
           {
             label: 'With small padding',
             props: {
-              mode: 'noninteractive',
+              mode: 'polite',
               hasCloseIcon: true,
               padding: 's',
             },
@@ -58,7 +58,7 @@ export const ToastStates = withSnapshotsEnabled(() => {
           {
             label: 'With no depth',
             props: {
-              mode: 'noninteractive',
+              mode: 'polite',
               hasCloseIcon: true,
               depth: 'none',
             },
@@ -66,7 +66,7 @@ export const ToastStates = withSnapshotsEnabled(() => {
           {
             label: 'With depth value set to 1',
             props: {
-              mode: 'noninteractive',
+              mode: 'polite',
               hasCloseIcon: true,
               depth: 1,
             },
@@ -74,7 +74,7 @@ export const ToastStates = withSnapshotsEnabled(() => {
           {
             label: 'With depth value set to 2',
             props: {
-              mode: 'noninteractive',
+              mode: 'polite',
               hasCloseIcon: true,
               depth: 2,
             },
@@ -82,7 +82,7 @@ export const ToastStates = withSnapshotsEnabled(() => {
           {
             label: 'With depth value set to 3',
             props: {
-              mode: 'noninteractive',
+              mode: 'polite',
               hasCloseIcon: true,
               depth: 3,
             },
@@ -90,7 +90,7 @@ export const ToastStates = withSnapshotsEnabled(() => {
           {
             label: 'With depth value set to 4',
             props: {
-              mode: 'noninteractive',
+              mode: 'polite',
               hasCloseIcon: true,
               depth: 4,
             },
@@ -98,7 +98,7 @@ export const ToastStates = withSnapshotsEnabled(() => {
           {
             label: 'With depth value set to 5',
             props: {
-              mode: 'noninteractive',
+              mode: 'polite',
               hasCloseIcon: true,
               depth: 5,
             },
@@ -106,7 +106,7 @@ export const ToastStates = withSnapshotsEnabled(() => {
           {
             label: 'With depth value set to 6',
             props: {
-              mode: 'noninteractive',
+              mode: 'polite',
               hasCloseIcon: true,
               depth: 6,
             },
@@ -114,7 +114,7 @@ export const ToastStates = withSnapshotsEnabled(() => {
           {
             label: 'With custom width',
             props: {
-              mode: 'noninteractive',
+              mode: 'polite',
               hasCloseIcon: true,
               width: 300,
             },

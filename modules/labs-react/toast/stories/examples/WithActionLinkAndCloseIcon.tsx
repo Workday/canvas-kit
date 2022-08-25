@@ -9,7 +9,7 @@ export const WithActionLinkAndCloseIcon = () => {
   const handleActionClick = () => console.log('action button clicked');
 
   return (
-    <Toast mode="interactive">
+    <Toast mode="dialog">
       <Toast.Body>
         <Toast.Icon icon={checkIcon} color={colors.greenApple400} />
         <Toast.Message>
