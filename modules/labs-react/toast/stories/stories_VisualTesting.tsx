@@ -128,7 +128,7 @@ export const ToastStates = withSnapshotsEnabled(() => {
               {icon ? <Toast.Icon icon={icon} color={iconColor} /> : null}
               <Toast.Message>
                 Your workbook was successfully processed.
-                {hasAction ? <Toast.Action href="#href">Custom Action</Toast.Action> : null}
+                {hasAction ? <Toast.Link href="#href">Custom Link</Toast.Link> : null}
               </Toast.Message>
             </Toast.Body>
             {hasCloseIcon ? <Toast.Close aria-label="Close" /> : null}

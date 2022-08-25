@@ -3,7 +3,7 @@ import React from 'react';
 import {createComponent, styled, StyledType} from '@workday/canvas-kit-react/common';
 import {Hyperlink, HyperlinkProps, space} from '@workday/canvas-kit-react';
 
-export interface ToastActionProps extends HyperlinkProps {
+export interface ToastLinkProps extends HyperlinkProps {
   /**
    * attribute for the hyperlink URL
    */
@@ -15,9 +15,9 @@ const StyledHyperLink = styled(Hyperlink)<StyledType>({
   width: 'fit-content',
 });
 
-export const ToastAction = createComponent('a')({
-  displayName: 'Toast.Action',
-  Component: ({children, href, ...elemProps}: ToastActionProps, ref, Element) => {
+export const ToastLink = createComponent('a')({
+  displayName: 'Toast.Link',
+  Component: ({children, href, ...elemProps}: ToastLinkProps, ref, Element) => {
     return (
       <StyledHyperLink ref={ref} href={href} as={Element} {...elemProps}>
         {children}

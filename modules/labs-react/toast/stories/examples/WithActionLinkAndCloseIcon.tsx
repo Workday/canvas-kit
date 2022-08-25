@@ -12,7 +12,7 @@ export const WithActionLinkAndCloseIcon = () => {
       <Toast.Icon icon={checkIcon} color={colors.greenApple400} />
       <Toast.Body>
         <Toast.Message>Your workbook was successfully processed.</Toast.Message>
-        <Toast.Action href="#hyperlink">Custom Action</Toast.Action>
+        <Toast.Link href="#hyperlink">Custom Link</Toast.Link>
       </Toast.Body>
       <Toast.Close aria-label="Close" onClick={handleClose} />
     </Toast>

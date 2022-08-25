@@ -11,7 +11,7 @@ export const WithActionLink = () => {
       <Toast.Icon icon={checkIcon} color={colors.greenApple400} />
       <Toast.Body>
         <Toast.Message>Your workbook was successfully processed.</Toast.Message>
-        <Toast.Action href="#hreflink">Custom Action</Toast.Action>
+        <Toast.Link href="#hreflink">Custom Link</Toast.Link>
       </Toast.Body>
     </Toast>
   );

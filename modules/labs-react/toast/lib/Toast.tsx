@@ -6,7 +6,7 @@ import {Flex, Popup} from '@workday/canvas-kit-react';
 import {ToastCloseIcon} from './ToastCloseIcon';
 import {ToastIcon} from './ToastIcon';
 import {ToastMessage} from './ToastMessage';
-import {ToastAction} from './ToastAction';
+import {ToastLink} from './ToastLink';
 import {ToastBody} from './ToastBody';
 import {useToastModel} from './hooks/useToastModel';
 
@@ -31,7 +31,7 @@ export const Toast = createContainer('div')({
     Close: ToastCloseIcon,
     Icon: ToastIcon,
     Message: ToastMessage,
-    Action: ToastAction,
+    Link: ToastLink,
   },
 })<ToastProps>(({children, mode = 'status', ...elemProps}, Element, model) => {
   const getAriaAttributes = (mode: string): React.HtmlHTMLAttributes<HTMLDivElement> => {

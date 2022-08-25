@@ -17,7 +17,7 @@ export const ToastBody = createComponent('div')({
   Component: ({children, ...elemProps}: ToastBodyProps, ref, Element) => {
     return (
       <StyledToastBody
-        paddingInlineStart="zero"
+        paddingInlineStart="xxxs"
         paddingY="s"
         paddingInlineEnd="s"
         ref={ref}
