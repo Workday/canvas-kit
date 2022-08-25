@@ -16,28 +16,49 @@ export interface ToastProps extends ExtractProps<typeof Popup.Card, never> {
    * Interactive toasts contain buttons user can click and take action.
    * @default 'polite'
    */
-  mode?: 'polite' | 'assertive' | 'interactive';
+  mode?: 'alert' | 'status' | 'dialog';
 }
 
 const toastWidth = 360;
 
 export const Toast = createComponent('div')({
   displayName: 'Toast',
-  Component: ({children, mode = 'polite', ...elemProps}: ToastProps, ref, Element) => {
+  Component: ({children, mode = 'status', ...elemProps}: ToastProps, ref, Element) => {
     const randomDescribedbyID = useUniqueId();
+
+    const getAriaAttributed = (mode: string): React.HtmlHTMLAttributes<HTMLDivElement> => {
+      switch (mode) {
+        case 'dialog':
+          return {
+            'aria-describedby': randomDescribedbyID,
+            'aria-label': 'notification',
+            role: 'dialog',
+          };
+        case 'alert':
+          return {
+            role: 'alert',
+            'aria-live': 'assertive',
+            'aria-atomic': true,
+          };
+        case 'status':
+          return {
+            role: 'status',
+            'aria-live': 'polite',
+            'aria-atomic': true,
+          };
+        default: {
+          return {};
+        }
+      }
+    };
+
     return (
       <Popup.Card
         ref={ref}
         as={Element}
         width={toastWidth}
         padding="0"
-        aria-describedby={mode === 'interactive' ? randomDescribedbyID : undefined}
-        aria-label={mode === 'interactive' ? 'notification' : undefined}
-        role={mode === 'interactive' ? 'dialog' : mode === 'assertive' ? 'alert' : 'status'}
-        aria-live={
-          mode === 'interactive' ? undefined : mode === 'assertive' ? 'assertive' : 'polite'
-        }
-        aria-atomic={mode === 'polite'}
+        {...getAriaAttributed(mode)}
         {...elemProps}
       >
         <Flex>{children}</Flex>
