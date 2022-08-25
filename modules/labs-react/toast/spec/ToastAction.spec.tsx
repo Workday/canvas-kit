@@ -14,7 +14,11 @@ describe('Toast.Link', () => {
   it('should call the onLinkClick callback', () => {
     const linkText = 'View more details';
 
-    render(<Toast.Link href="#href">{linkText}</Toast.Link>);
+    render(
+      <Toast.Link onClick={cb} href="#href">
+        {linkText}
+      </Toast.Link>
+    );
 
     fireEvent.click(screen.getByText(linkText));
     expect(cb).toHaveBeenCalledTimes(1);
