@@ -10,16 +10,7 @@ import {ToastLink} from './ToastLink';
 import {ToastBody} from './ToastBody';
 import {useToastModel} from './hooks/useToastModel';
 
-export interface ToastProps extends ExtractProps<typeof Popup.Card, never> {
-  /**
-   * Sets the correct aria attributes for the Toast.
-   * Alert toasts are used to convey urgency and important information. The `role` is set to `alert`
-   * Status toasts are used to convey a message or a successful action. The `role` is set to `status`
-   * Dialog toasts are used when there's an action to be taken. The `role` is set to `dialog`
-   * @default 'polite'
-   */
-  mode?: 'alert' | 'status' | 'dialog';
-}
+export interface ToastProps extends ExtractProps<typeof Popup.Card, never> {}
 
 const toastWidth = 360;
 
@@ -33,7 +24,7 @@ export const Toast = createContainer('div')({
     Message: ToastMessage,
     Link: ToastLink,
   },
-})<ToastProps>(({children, mode = 'status', ...elemProps}, Element, model) => {
+})<ToastProps>(({children, ...elemProps}, Element, model) => {
   const getAriaAttributes = (mode: string): React.HtmlHTMLAttributes<HTMLDivElement> => {
     switch (mode) {
       case 'dialog':
@@ -64,7 +55,7 @@ export const Toast = createContainer('div')({
       as={Element}
       width={toastWidth}
       padding="0"
-      {...getAriaAttributes(mode)}
+      {...getAriaAttributes(model.state.mode)}
       {...elemProps}
     >
       <Flex>{children}</Flex>
