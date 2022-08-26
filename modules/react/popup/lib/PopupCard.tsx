@@ -12,11 +12,11 @@ import {
   useConstant,
   createSubcomponent,
 } from '@workday/canvas-kit-react/common';
-import {Flex, FlexStyleProps, Stack} from '@workday/canvas-kit-react/layout';
+import {StackStyleProps, Stack} from '@workday/canvas-kit-react/layout';
 
 import {getTransformFromPlacement} from './getTransformFromPlacement';
 import {usePopupCard, usePopupModel} from './hooks';
-export type FlexAndBoxProps = ExtractProps<typeof Card, never> & FlexStyleProps;
+export type FlexAndBoxProps = ExtractProps<typeof Card, never> & StackStyleProps;
 export interface PopupCardProps extends FlexAndBoxProps {
   children?: React.ReactNode;
 }
