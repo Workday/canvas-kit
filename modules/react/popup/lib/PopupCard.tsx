@@ -16,8 +16,7 @@ import {StackStyleProps, Stack} from '@workday/canvas-kit-react/layout';
 
 import {getTransformFromPlacement} from './getTransformFromPlacement';
 import {usePopupCard, usePopupModel} from './hooks';
-export type FlexAndBoxProps = ExtractProps<typeof Card, never> & StackStyleProps;
-export interface PopupCardProps extends FlexAndBoxProps {
+export interface PopupCardProps extends ExtractProps<typeof Card, never>, Partial<StackStyleProps> {
   children?: React.ReactNode;
 }
 
