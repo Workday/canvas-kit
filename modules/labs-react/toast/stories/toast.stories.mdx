@@ -91,3 +91,78 @@ Toast also support right to left.
 ## Component Props
 
 <ArgsTable of={Toast} />
+
+## Components
+
+### Toast
+
+#### Usage
+
+`Toast`renders a `Popup.Card` under the hood. This is the element that based on the `mode` will set
+the correct aria attributes. This component also accepts a `model` if you need to define a specific
+`id`.
+
+#### Props
+
+<ArgsTable of={Toast} />
+
+### Toast.Body
+
+#### Usage
+
+`Toast.Body` creates a container for the contents of the Toast, including `Toast.Message` and
+`Toast.Link`. Under the hood, this renders a `Popup.Body`.
+
+#### Props
+
+<ArgsTable of={Toast.Body} />
+
+### Toast.Icon
+
+#### Usage
+
+`Toast.Icon` provides a decorate icon for the `Toast`. Because you pass any icon to this component,
+you should consider the `mode` of the Toast based on the icon. If a Toast is displaying some error,
+the `mode` should be set to `alert` so that the correct aria attributes are added to the main
+`Toast` component. This components extends all the props from `SystemIcon`.
+
+#### Props
+
+<ArgsTable of={Toast.Icon} />
+
+### Toast.Message
+
+#### Usage
+
+`Toast.Message` creates a container for the message of your toast. You can render any
+`React.ReactNode`. By default, this element has a unique `id` set to it. This `id` is used when the
+`mode` of the Toast is set to `dialog` so that the message is read out by screen readers.
+
+#### Props
+
+<ArgsTable of={Toast.Message} />
+
+### Toast.Link
+
+#### Usage
+
+`Toast.Link` renders a `Hyperlink` commponent. This is useful when you need an action in your Toast.
+If you provide a link in your Toast, the `mode` should be set to `dialog` for accessibility to
+properly work.
+
+#### Props
+
+`href: string` An `href` must be provided to meet accessibility standards.
+
+<ArgsTable of={Toast.Link} />
+
+### Toast.Close
+
+#### Usage
+
+`Toast.Close` is used when a Toast is dismissive. You can use a `Popup` and a `usePopupmodel` to add
+a click event dismiss the Toast.
+
+#### Props
+
+<ArgsTable of={Toast.Close} />
