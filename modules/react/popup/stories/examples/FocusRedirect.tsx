@@ -10,7 +10,7 @@ import {
   useFocusRedirect,
   usePopupModel,
 } from '@workday/canvas-kit-react/popup';
-import {HStack} from '@workday/canvas-kit-react/layout';
+import {Box, HStack} from '@workday/canvas-kit-react/layout';
 
 export const FocusRedirect = () => {
   const model = usePopupModel();
@@ -43,9 +43,9 @@ export const FocusRedirect = () => {
             <Popup.CloseIcon aria-label="Close" />
             <Popup.Heading>Delete Item</Popup.Heading>
             <Popup.Body>
-              <p style={{marginTop: 0}}>
+              <Box as="p" marginTop="zero">
                 Are you sure you'd like to delete the item titled 'My Item'?
-              </p>
+              </Box>
               <HStack spacing="s">
                 <Popup.CloseButton as={DeleteButton} onClick={handleDelete}>
                   Delete

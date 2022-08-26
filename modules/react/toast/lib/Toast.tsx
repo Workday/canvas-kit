@@ -92,7 +92,6 @@ export const Toast = createComponent('div')({
         ref={ref}
         as={Element}
         width={toastWidth}
-        padding="s"
         depth={5}
         role={isInteractive ? 'dialog' : isError ? 'alert' : 'status'}
         aria-live={isInteractive ? 'off' : isError ? 'assertive' : 'polite'}
@@ -100,7 +99,7 @@ export const Toast = createComponent('div')({
         {...elemProps}
       >
         {onClose && <Popup.CloseIcon aria-label="Close" onClick={onClose} size="small" />}
-        <Popup.Body>
+        <Popup.Body padding="s">
           <ToastContentContainer onClose={onClose}>
             {icon && <ToastSystemIcon color={iconColor} colorHover={iconColor} icon={icon} />}
             <Message>
