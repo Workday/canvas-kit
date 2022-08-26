@@ -123,7 +123,7 @@ export const ToastStates = withSnapshotsEnabled(() => {
         columnProps={[{label: 'Default', props: {}}]}
       >
         {({mode, hasCloseIcon, hasAction, icon, iconColor, ...props}) => (
-          <Toast mode={mode} {...props}>
+          <Toast mode={hasAction ? 'dialog' : mode} {...props}>
             <Toast.Body>
               {icon ? <Toast.Icon icon={icon} color={iconColor} /> : null}
               <Toast.Message>
