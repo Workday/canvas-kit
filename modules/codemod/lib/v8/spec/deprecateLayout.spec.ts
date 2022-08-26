@@ -61,29 +61,21 @@ describe('Canvas Kit Deprecate Layout Codemod', () => {
       const input = `
         import {Layout, Column} from '@workday/canvas-kit-react/layout';
 
-        <Layout
-          header={
-            <Column
-              closeIconAriaLabel="Close"
-              onClose={() => console.log('onClose callback')}
-              title="Deprecated Layout Header"
-            />
-          }
-        />;
+        <Layout gutter={0}>
+          <Layout.Column spacing={0}>
+            <Card />
+          </Layout.Column>
+        </Layout>
       `;
 
       const expected = `
         import {DeprecatedLayout, DeprecatedColumn} from '@workday/canvas-kit-react/layout';
 
-        <DeprecatedLayout
-          header={
-            <DeprecatedColumn
-              closeIconAriaLabel="Close"
-              onClose={() => console.log('onClose callback')}
-              title="Deprecated Layout Header"
-            />
-          }
-        />;
+        <DeprecatedLayout gutter={0}>
+          <DeprecatedLayout.Column spacing={0}>
+            <Card />
+          </DeprecatedLayout.Column>
+        </DeprecatedLayout>
       `;
 
       expectTransform(input, expected);

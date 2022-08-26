@@ -31,7 +31,7 @@ describe('Canvas Kit Deprecate Preview Menu Codemod', () => {
   context('when transforming identifiers', () => {
     it('should properly transform Menu JSX identifiers', () => {
       const input = `
-        import {Menu} from '@workday/canvas-kit-preview-react/menu';
+        import {Menu, MenuItem} from '@workday/canvas-kit-preview-react/menu';
     
         const CustomMenu = () => {
           return (
@@ -47,7 +47,7 @@ describe('Canvas Kit Deprecate Preview Menu Codemod', () => {
       `;
 
       const expected = `
-        import {DeprecatedMenu} from '@workday/canvas-kit-preview-react/menu';
+        import {DeprecatedMenu, DeprecatedMenuItem} from '@workday/canvas-kit-preview-react/menu';
     
         const CustomMenu = () => {
           return (
