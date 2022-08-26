@@ -2,10 +2,10 @@ import * as React from 'react';
 import {DeprecatedDrawer, DeprecatedDrawerDirection, DeprecatedDrawerHeader} from '../index';
 import {space} from '@workday/canvas-kit-react/tokens';
 
-const title = 'Deprecated Drawer Header';
+const title = 'Drawer Header';
 
 export default {
-  title: 'Labs/Deprecated Drawer/React',
+  title: 'Labs/Drawer/React',
   component: DeprecatedDrawer,
   parameters: {
     ReadmePath: 'labs-react/drawer',
@@ -51,7 +51,7 @@ export const WithHeader = () => (
         <DeprecatedDrawerHeader
           closeIconAriaLabel={'Close'}
           onClose={() => console.log('onClose callback')}
-          title={'Deprecated Drawer Header'}
+          title={'Drawer Header'}
         />
       }
       openDirection={DeprecatedDrawerDirection.Left}
@@ -64,7 +64,7 @@ export const WithHeader = () => (
 export const WithHeaderNoCloseIcon = () => (
   <div style={{height: '80vh', position: 'relative'}}>
     <DeprecatedDrawer
-      header={<DeprecatedDrawerHeader title={'Deprecated Drawer Header'} />}
+      header={<DeprecatedDrawerHeader title={'Drawer Header'} />}
       openDirection={DeprecatedDrawerDirection.Left}
       padding={space.s}
       showDropShadow={true}
