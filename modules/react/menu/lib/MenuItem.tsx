@@ -73,9 +73,11 @@ const StyledItem = styled(Box.as('button'))<StyledType>(
         outline: 'none',
         backgroundColor: theme.canvas.palette.primary.main,
         color: typeColors.inverse,
-        fill: iconColors.inverse,
         '.wd-icon-fill, .wd-icon-accent, .wd-icon-accent2': {
           fill: iconColors.inverse,
+        },
+        '*:hover .wd-icon-fill': {
+          fill: `${iconColors.inverse}`,
         },
         '.wd-icon-background ~ .wd-icon-accent, .wd-icon-background ~ .wd-icon-accent2': {
           fill: iconColors.inverse,
