@@ -1,10 +1,10 @@
 import {Meta} from '@storybook/addon-docs/blocks';
 
 import {Toast} from '@workday/canvas-kit-labs-react/toast';
-import {Success} from './examples/Success';
-import {Error} from './examples/Error';
+import {ToastStatus} from './examples/ToastStatus';
+import {ToastAlert} from './examples/ToastAlert';
 import {WithCloseButton} from './examples/WithCloseButton';
-import {WithActionLink} from './examples/WithActionLink';
+import {ToastDialog} from './examples/ToastDialog';
 import {WithActionLinkAndCloseIcon} from './examples/WithActionLinkAndCloseIcon';
 import {WithPopper} from './examples/WithPopper';
 import {RTL} from './examples/RTL';
@@ -33,11 +33,11 @@ It is up to the consumer on how a Toast is triggered and it's contents. In a bas
 should provide some information. By default, a Toast's `mode` is set to `polite` but this may vary
 based on the contents of the Toast.
 
-<ExampleCodeBlock code={Success} />
+<ExampleCodeBlock code={ToastStatus} />
 
 ---
 
-#### WithCloseButton
+#### With Close Button
 
 A Toast and can also be dismissive with a `Toast.Close`.
 
@@ -45,23 +45,23 @@ A Toast and can also be dismissive with a `Toast.Close`.
 
 ---
 
-#### Error
+#### Toast Alert
 
 If a Toast is to convey something urgent such as an error, it's mode should be set to `alert`. This
 changes `aria-live` to `assertive` as well as `role` to be `alert`. Doing so provides a better
 accessibility experience.
 
-<ExampleCodeBlock code={Error} />
+<ExampleCodeBlock code={ToastAlert} />
 
 ---
 
-#### With an Action Link
+#### Toast Dialog
 
 There are time where a Toast might have a follow up action. If a Toast has an action, it's `mode`
 should be set to `dialog`. By doing so, the `role` of the Toast is set to `dialog` and an
 `aria-label` is added to indicate that it's a notifcation of some kind.
 
-<ExampleCodeBlock code={WithActionLink} />
+<ExampleCodeBlock code={ToastDialog} />
 
 ---
 
@@ -74,7 +74,7 @@ it to place it wherever you like on the page.
 
 ---
 
-#### With an Action Link and CloseIcon
+#### With an Action Link and Close
 
 <ExampleCodeBlock code={WithActionLinkAndCloseIcon} />
 

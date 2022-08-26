@@ -5,7 +5,7 @@ import {checkIcon} from '@workday/canvas-system-icons-web';
 import {colors} from '@workday/canvas-kit-react/tokens';
 import {Box} from '@workday/canvas-kit-react';
 
-export const WithActionLink = () => {
+export const ToastDialog = () => {
   return (
     <Toast mode="dialog">
       <Toast.Icon icon={checkIcon} color={colors.greenApple400} />
