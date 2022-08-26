@@ -41,6 +41,11 @@ such as a successful action.
 A `status` `Toast` will wrap the message within a `polite` ARIA live region with a `role` of
 `status`.
 
+Here's a more complete example with a button which triggers a dismissable `Toast`. The `Toast` is
+positioned using `Popper`.
+
+<ExampleCodeBlock code={WithPopper} />
+
 ### Alert
 
 Set the `mode` prop to `alert` to convey urgent and important information such as an error.
@@ -69,12 +74,6 @@ Include the `Toast.Close` subcomponent to display a close button within the Toas
 and a close button.
 
 <ExampleCodeBlock code={WithActionLinkAndCloseIcon} />
-
-### Positioning Toast with Popper
-
-Use the `Popper` component to place `Toast` anywhere on the page.
-
-<ExampleCodeBlock code={WithPopper} />
 
 ### Right-to-Left (RTL)
 
