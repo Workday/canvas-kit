@@ -86,7 +86,9 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
   root
     .find(j.JSXIdentifier, {name: (name: string) => name === 'Layout' || name === 'Column'})
     .forEach(nodePath => {
-      nodePath.node.name = `Deprecated${nodePath.node.name}`;
+      if (nodePath.name !== 'property') {
+        nodePath.node.name = `Deprecated${nodePath.node.name}`;
+      }
     });
 
   return root.toSource();

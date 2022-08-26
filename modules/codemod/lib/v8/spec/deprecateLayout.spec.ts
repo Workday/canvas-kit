@@ -62,6 +62,7 @@ describe('Canvas Kit Deprecate Layout Codemod', () => {
         import {Layout, Column} from '@workday/canvas-kit-react/layout';
 
         <Layout gutter={0}>
+          <Column />
           <Layout.Column spacing={0}>
             <Card />
           </Layout.Column>
@@ -72,6 +73,7 @@ describe('Canvas Kit Deprecate Layout Codemod', () => {
         import {DeprecatedLayout, DeprecatedColumn} from '@workday/canvas-kit-react/layout';
 
         <DeprecatedLayout gutter={0}>
+          <DeprecatedColumn />
           <DeprecatedLayout.Column spacing={0}>
             <Card />
           </DeprecatedLayout.Column>
