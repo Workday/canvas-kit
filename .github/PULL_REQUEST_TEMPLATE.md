@@ -17,16 +17,24 @@ Optional breaking changes message. If your PR includes breaking changes. It is e
 
 ---
 
-## Checklist
+## For the Reviewer
 
-<!-- Remove items that do not apply. For completed items, change [ ] to [x]. -->
+<!-- Provide a bit of context about what this PR does. -->
 
-- [ ] tests are changed or added
-- [ ] code has been documented
-- [ ] design approved final implementation
-- [ ] a11y approved final implementation
-- [ ] code adheres to the [API & Pattern guidelines](https://workday.github.io/canvas-kit/?path=/story/welcome-dev-docs-api-pattern-guidelines--page)
+## Where Should the Reviewer Start?
 
-## Additional References
+<!-- If you were reviewing this PR, where would you want to start?  -->
+<!-- e.g. `/modules/react/common/lib/utils/someUtil.ts`  -->
 
-<!-- Upload screenshots of the final component or any other artifacts that would help a reviewer understand the choices you made in the PR. -->
+## Testing Manually
+
+<!-- Explain how your reviewer could verify this change  -->
+
+## Screenshots or GIFs (if applicable)
+
+<!-- Does your change affect the UI? If so, please include a screenshot or short gif. -->
+
+## Thank You Gif (optional)
+
+<!-- Share a fun [gif](https://giphy.com) to say thanks to your reviewer! -->
+<!-- ![a smiling Shiba Inu typing on a laptop](https://media.giphy.com/media/mCRJDo24UvJMA/giphy.gif) -->
