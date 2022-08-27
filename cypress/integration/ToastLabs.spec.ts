@@ -17,7 +17,7 @@ describe('Toast', () => {
     h.stories.visit();
   });
 
-  ['Toast Alert', 'Toast Status', 'Toast Dialog'].forEach(story => {
+  ['Basic', 'Toast Alert', 'Toast Dialog'].forEach(story => {
     context(`given the '${story}' story is rendered`, () => {
       beforeEach(() => {
         h.stories.load('Labs/Toast/React', story);
@@ -31,7 +31,7 @@ describe('Toast', () => {
 
   context(`given the toast with no close icon or action button`, () => {
     beforeEach(() => {
-      h.stories.load('Labs/Toast/React', 'Toast Status');
+      h.stories.load('Labs/Toast/React', 'Basic');
     });
 
     it('should have a role of status', () => {
