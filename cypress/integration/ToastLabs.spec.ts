@@ -72,7 +72,13 @@ describe('Toast', () => {
 
     it('should have a role of dialog', () => {
       getDialogToast().should('have.attr', 'role', 'dialog');
+    });
+
+    it('should have aria-label set to notification', () => {
       getDialogToast().should('have.attr', 'aria-label', 'notification');
+    });
+
+    it('should have aria-describedby', () => {
       getDialogToast().should('have.attr', 'aria-describedby');
     });
   });
