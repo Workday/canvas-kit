@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v7.2.10](https://github.com/Workday/canvas-kit/releases/tag/v7.2.10) (2022-08-29)
+
+### Components
+
+- fix(menu): Fix issue with color change on menu item icon hover ([#1744](https://github.com/Workday/canvas-kit/pull/1744)) ([@RayRedGoose](https://github.com/RayRedGoose))
+
+
 ## [v7.2.9](https://github.com/Workday/canvas-kit/releases/tag/v7.2.9) (2022-08-16)
 
 ### Infrastructure
