@@ -12,7 +12,6 @@ export interface ToastLinkProps extends HyperlinkProps {
 
 const StyledHyperLink = styled(Hyperlink)<StyledType>({
   marginTop: space.xxxs,
-  width: 'fit-content',
 });
 
 export const ToastLink = createComponent('a')({

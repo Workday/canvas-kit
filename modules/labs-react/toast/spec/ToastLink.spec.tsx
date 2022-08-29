@@ -1,26 +1,14 @@
-import {fireEvent, render, screen} from '@testing-library/react';
+import {render, screen} from '@testing-library/react';
 import {Toast} from '../lib/Toast';
 import React from 'react';
+import {useToastModel} from '../lib/hooks/useToastModel';
 
 describe('Toast.Link', () => {
-  const cb = jest.fn();
+  verifyComponent(Toast.CloseIcon, {modelFn: useToastModel});
 
-  it('should have a role of "a"', () => {
+  it('should have a role of "link"', () => {
     render(<Toast.Link href="#href">Link Link</Toast.Link>);
 
-    expect(screen.getByText('Link Link')).toBeInTheDocument();
-  });
-
-  it('should call the onLinkClick callback', () => {
-    const linkText = 'View more details';
-
-    render(
-      <Toast.Link onClick={cb} href="#href">
-        {linkText}
-      </Toast.Link>
-    );
-
-    fireEvent.click(screen.getByText(linkText));
-    expect(cb).toHaveBeenCalledTimes(1);
+    expect(screen.getByRole('link')).toBeInTheDocument();
   });
 });
