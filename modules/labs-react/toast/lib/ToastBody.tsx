@@ -9,11 +9,12 @@ const StyledToastBody = styled(Popup.Body)<StyledType>({
   display: 'flex',
   alignItems: 'flex-start',
   flexDirection: 'column',
+  // TODO: Remove once Text props are available in v8
   ...type.levels.subtext.large,
 });
 
 export const ToastBody = createComponent('div')({
-  displayName: 'Toast.Content',
+  displayName: 'Toast.Body',
   Component: ({children, ...elemProps}: ToastBodyProps, ref, Element) => {
     return (
       <StyledToastBody

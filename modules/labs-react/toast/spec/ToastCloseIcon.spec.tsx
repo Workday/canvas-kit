@@ -4,10 +4,10 @@ import React from 'react';
 import {usePopupModel} from '@workday/canvas-kit-react';
 
 describe('Toast.Close', () => {
-  verifyComponent(Toast.Close, {modelFn: usePopupModel});
+  verifyComponent(Toast.CloseIcon, {modelFn: usePopupModel});
 
   it('should have a role of "button"', () => {
-    render(<Toast.Close aria-label="Close" />);
+    render(<Toast.CloseIcon aria-label="Close" />);
     expect(screen.getByRole('button', {name: 'Close'})).toBeInTheDocument();
   });
 });

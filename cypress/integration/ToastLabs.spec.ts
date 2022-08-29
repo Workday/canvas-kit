@@ -38,11 +38,11 @@ describe('Toast', () => {
       getStatusToast().should('have.attr', 'role', 'status');
     });
 
-    it('should have aria live set to polite', () => {
+    it('should have aria-live set to polite', () => {
       getStatusToast().should('have.attr', 'aria-live', 'polite');
     });
 
-    it('should have aria atomic set to true', () => {
+    it('should have aria-atomic set to true', () => {
       getStatusToast().should('have.attr', 'aria-atomic', 'true');
     });
   });
@@ -56,16 +56,16 @@ describe('Toast', () => {
       getAlertToast().should('have.attr', 'role', 'alert');
     });
 
-    it('should have aria live set to assertive', () => {
+    it('should have aria-live set to assertive', () => {
       getAlertToast().should('have.attr', 'aria-live', 'assertive');
     });
 
-    it('should have aria atomic set to true', () => {
+    it('should have aria-atomic set to true', () => {
       getAlertToast().should('have.attr', 'aria-atomic', 'true');
     });
   });
 
-  context(`given the toast with a close button  and action button`, () => {
+  context(`given the toast with a close button and action button`, () => {
     beforeEach(() => {
       h.stories.load('Labs/Toast/React', 'Toast Dialog');
     });

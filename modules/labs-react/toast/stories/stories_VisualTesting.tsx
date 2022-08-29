@@ -131,7 +131,7 @@ export const ToastStates = withSnapshotsEnabled(() => {
                 {hasAction ? <Toast.Link href="#href">Custom Link</Toast.Link> : null}
               </Toast.Message>
             </Toast.Body>
-            {hasCloseIcon ? <Toast.Close aria-label="Close" /> : null}
+            {hasCloseIcon ? <Toast.CloseIcon aria-label="Close" /> : null}
           </Toast>
         )}
       </ComponentStatesTable>

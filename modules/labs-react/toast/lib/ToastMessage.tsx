@@ -1,23 +1,21 @@
 import React from 'react';
 
 import {createSubcomponent, styled, StyledType} from '@workday/canvas-kit-react/common';
-import {Box, BoxProps} from '@workday/canvas-kit-react/layout';
+import {Flex, FlexProps} from '@workday/canvas-kit-react/layout';
 import {useToastModel} from './hooks/useToastModel';
 
-export interface ToastMessageProps extends BoxProps {}
+export interface ToastMessageProps extends FlexProps {}
 
-const StyledMessage = styled(Box)<StyledType>({
+const StyledMessage = styled(Flex)<StyledType>({
   wordBreak: 'break-word',
   wordWrap: 'break-word', // Needed for IE11
-  display: 'flex',
-  flexDirection: 'column',
 });
 
 export const ToastMessage = createSubcomponent('div')({
   modelHook: useToastModel,
 })<ToastMessageProps>(({children, ...elemProps}, Element, model) => {
   return (
-    <StyledMessage id={model.state.id} as={Element} {...elemProps}>
+    <StyledMessage flexDirection="column" id={model.state.id} as={Element} {...elemProps}>
       {children}
     </StyledMessage>
   );

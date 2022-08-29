@@ -57,7 +57,29 @@ An `alert` `Toast` will wrap the message within an `assertive` ARIA live region 
 
 ### Dialog
 
-Set the `mode` prop to `dialog` to convey the presence of a follow-up action.
+Set the `mode` prop to `dialog` to convey the presence of a follow-up action. You can also use the
+`useTostModel` to pass in a uniqueId:
+
+```tsx
+export const CustomIDToast = () => {
+  const model = useToastModel({
+    id: '12df5',
+    mode: 'dialog',
+  });
+  return (
+    <Toast model={model}>
+      <Toast.Icon icon={checkIcon} color={colors.greenApple400} />
+      <Toast.Body>
+        <Toast.Message>Your workbook was successfully processed.</Toast.Message>
+        <Toast.Link href="#href">View More Details</Toast.Link>
+      </Toast.Body>
+    </Toast>
+  );
+};
+```
+
+> **Note**: You must use `Toast.Message` subcomponent when the mode is `dialog` so that `id` is tied
+> to the message for accessibility
 
 <ExampleCodeBlock code={ToastDialog} />
 
@@ -151,15 +173,15 @@ conjunction with `dialog` `mode` to provide an accessible experience.
 
 <ArgsTable of={Toast.Link} />
 
-### Toast.Close
+### Toast.CloseIcon
 
 #### Usage
 
-Use `Toast.Close` to provide a close button to dismiss the `Toast`. Use it with `Popup` and
+Use `Toast.CloseIcon` to provide a close button to dismiss the `Toast`. Use it with `Popup` and
 `usePopupModel` to add a click event to dismiss the `Toast`.
 
 `Toast.Link` renders a `Popup.CloseIcon` under the hood.
 
 #### Props
 
-<ArgsTable of={Toast.Close} />
+<ArgsTable of={Toast.CloseIcon} />

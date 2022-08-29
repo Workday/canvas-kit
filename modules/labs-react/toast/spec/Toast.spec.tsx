@@ -15,7 +15,7 @@ describe('Toast', () => {
             <Toast.Link href="#href">View more details</Toast.Link>
           </Toast.Message>
         </Toast.Body>
-        <Toast.Close aria-label="Close" />
+        <Toast.CloseIcon aria-label="Close" />
       </Toast>
     );
 

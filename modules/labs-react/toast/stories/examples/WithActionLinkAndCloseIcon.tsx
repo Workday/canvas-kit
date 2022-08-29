@@ -14,7 +14,7 @@ export const WithActionLinkAndCloseIcon = () => {
         <Toast.Message>Your workbook was successfully processed.</Toast.Message>
         <Toast.Link href="#hyperlink">Custom Link</Toast.Link>
       </Toast.Body>
-      <Toast.Close aria-label="Close" onClick={handleClose} />
+      <Toast.CloseIcon aria-label="Close" onClick={handleClose} />
     </Toast>
   );
 };

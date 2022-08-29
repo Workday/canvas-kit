@@ -10,16 +10,14 @@ import {ToastLink} from './ToastLink';
 import {ToastBody} from './ToastBody';
 import {useToastModel} from './hooks/useToastModel';
 
-export interface ToastProps extends ExtractProps<typeof Popup.Card, never> {}
-
-const toastWidth = 360;
+export interface ToastProps extends Omit<ExtractProps<typeof Popup.Card, never>, 'model'> {}
 
 export const Toast = createContainer('div')({
   displayName: 'Toast',
   modelHook: useToastModel,
   subComponents: {
     Body: ToastBody,
-    Close: ToastCloseIcon,
+    CloseIcon: ToastCloseIcon,
     Icon: ToastIcon,
     Message: ToastMessage,
     Link: ToastLink,
@@ -53,7 +51,7 @@ export const Toast = createContainer('div')({
   return (
     <Popup.Card
       as={Element}
-      width={toastWidth}
+      width={360}
       padding="0"
       {...getAriaAttributes(model.state.mode)}
       {...elemProps}
