@@ -126,10 +126,8 @@ export const ToastStates = withSnapshotsEnabled(() => {
           <Toast mode={hasAction ? 'dialog' : mode} {...props}>
             <Toast.Body>
               {icon ? <Toast.Icon icon={icon} color={iconColor} /> : null}
-              <Toast.Message>
-                Your workbook was successfully processed.
-                {hasAction ? <Toast.Link href="#href">Custom Link</Toast.Link> : null}
-              </Toast.Message>
+              <Toast.Message>Your workbook was successfully processed.</Toast.Message>
+              {hasAction ? <Toast.Link href="#href">Custom Link</Toast.Link> : null}
             </Toast.Body>
             {hasCloseIcon ? <Toast.CloseIcon aria-label="Close" /> : null}
           </Toast>

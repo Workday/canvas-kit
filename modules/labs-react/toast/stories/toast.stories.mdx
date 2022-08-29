@@ -57,8 +57,16 @@ An `alert` `Toast` will wrap the message within an `assertive` ARIA live region 
 
 ### Dialog
 
-Set the `mode` prop to `dialog` to convey the presence of a follow-up action. You can also use the
-`useTostModel` to pass in a uniqueId:
+Set the `mode` prop to `dialog` to convey the presence of a follow-up action.
+
+<ExampleCodeBlock code={ToastDialog} />
+
+The `Toast` will be given a role of `dialog` along with an `aria-label` to indicate that it's a
+notification.
+
+> **Note**: You must use the `Toast.Message` subcomponent when the `mode` is `dialog` so that `id`
+> is tied to the message for accessibility. You can also pass in a `model` with `useToastModel` to
+> provide a specific `id` for the `Toast.Message`:
 
 ```tsx
 export const CustomIDToast = () => {
@@ -77,11 +85,6 @@ export const CustomIDToast = () => {
   );
 };
 ```
-
-<ExampleCodeBlock code={ToastDialog} />
-
-The `Toast` will be given a role of `dialog` along with an `aria-label` to indicate that it's a
-notification.
 
 ### Close Icon Button
 
