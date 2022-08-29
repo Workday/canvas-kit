@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {screen, render, fireEvent} from '@testing-library/react';
 
-import SidePanel from '../lib/SidePanel';
+import {SidePanel} from '../lib/SidePanel';
 
 window.resizeBy = (x: number, y: number) => {
   // @ts-ignore
