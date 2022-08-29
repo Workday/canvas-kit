@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import {renderToString} from 'react-dom/server';
-import Tooltip from '../';
+import {Tooltip} from '../';
 
 describe('Tooltip', () => {
   it('should render on a server without crashing', () => {
