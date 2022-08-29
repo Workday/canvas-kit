@@ -24,7 +24,9 @@ export const WithPopper = () => {
       <Popper placement="bottom-end" open={open} anchorElement={containerRef}>
         <Toast mode="dialog">
           <Toast.Icon icon={checkIcon} color={colors.greenApple400} />
-          <Toast.Body>Your workbook was successfully processed.</Toast.Body>
+          <Toast.Body>
+            <Toast.Message>Your workbook was successfully processed.</Toast.Message>
+          </Toast.Body>
           <Toast.CloseIcon aria-label="Close" onClick={handleClose} />
         </Toast>
       </Popper>
