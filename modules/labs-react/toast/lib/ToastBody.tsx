@@ -9,6 +9,7 @@ const StyledToastBody = styled(Popup.Body)<StyledType>({
   display: 'flex',
   alignItems: 'flex-start',
   flexDirection: 'column',
+  justifyContent: 'center',
   // TODO: Remove once Text props are available in v8
   ...type.levels.subtext.large,
 });

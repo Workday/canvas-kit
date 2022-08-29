@@ -27,7 +27,7 @@ yarn add @workday/canvas-kit-labs-react
 ### Basic Example
 
 `Toast` includes a container `Toast` component and the following subcomponents: `Toast.Body`,
-`Toast.Close`, `Toast.Icon`, `Toast.Message`, and `Toast.Link`.
+`Toast.CloseIcon`, `Toast.Icon`, `Toast.Message`, and `Toast.Link`.
 
 `Toast` supports different modes through the `mode` prop: `status`, `alert`, and `dialog`. Each mode
 conveys a different purpose of the message and assigns the necessary ARIA attributes to support that
@@ -86,14 +86,14 @@ export const CustomIDToast = () => {
 The `Toast` will be given a role of `dialog` along with an `aria-label` to indicate that it's a
 notification.
 
-### Close Button
+### Close Icon Button
 
-Include the `Toast.Close` subcomponent to display a close button within the Toast.
+Include the `Toast.CloseIcon` subcomponent to display a close button within the Toast.
 
 <ExampleCodeBlock code={WithCloseButton} />
 
-`Toast.Close` may be included within a `dialog` `Toast` to create a `Toast` with both an action link
-and a close button.
+`Toast.CloseIcon` may be included within a `dialog` `Toast` to create a `Toast` with both an action
+link and a close button.
 
 <ExampleCodeBlock code={WithActionLinkAndCloseIcon} />
 
