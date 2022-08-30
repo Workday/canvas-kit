@@ -48,7 +48,6 @@ export const BreadcrumbsList = createSubcomponent('ul')({
           alignItems="center"
           minHeight={40}
           listStyle="none"
-          style={{boxSizing: 'border-box'}}
           role="list"
           width="100%"
           {...elemProps}
