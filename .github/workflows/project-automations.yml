@@ -29,8 +29,8 @@ jobs:
       - name: Move issue to ${{ env.new }}
         uses: leonsteinhaeuser/project-beta-automations@v1.3.0
         with:
-          gh_token: ${{ secrets.GITHUB_TOKEN }}
-          organization: workday
+          gh_token: ${{ secrets.GH_RW_TOKEN }}
+          organization: Workday
           project_id: 4
           resource_node_id: ${{ github.event.issue.node_id }}
           status_value: ${{ env.new }}
@@ -42,8 +42,8 @@ jobs:
       - name: Moved issue to ${{ env.done }}
         uses: leonsteinhaeuser/project-beta-automations@v1.3.0
         with:
-          gh_token: ${{ secrets.GITHUB_TOKEN }}
-          organization: workday
+          gh_token: ${{ secrets.GH_RW_TOKEN }}
+          organization: Workday
           project_id: 4
           resource_node_id: ${{ github.event.issue.node_id }}
           status_value: ${{ env.done }}
@@ -56,8 +56,8 @@ jobs:
         if: github.event.label.name == 'good first issue' || github.event.label.name == 'help wanted'
         uses: leonsteinhaeuser/project-beta-automations@v1.3.0
         with:
-          gh_token: ${{ secrets.GITHUB_TOKEN }}
-          organization: workday
+          gh_token: ${{ secrets.GH_RW_TOKEN }}
+          organization: Workday
           project_id: 4
           resource_node_id: ${{ github.event.issue.node_id }}
           custom_field_values: '[{\"name\": \"Contributions\",\"type\": \"single_select\",\"value\": \"Yes\"}]'
@@ -65,8 +65,8 @@ jobs:
         if: github.event.label.name == 'ready for review'
         uses: leonsteinhaeuser/project-beta-automations@v1.3.0
         with:
-          gh_token: ${{ secrets.GITHUB_TOKEN }}
-          organization: workday
+          gh_token: ${{ secrets.GH_RW_TOKEN }}
+          organization: Workday
           project_id: 4
           resource_node_id: $${{ github.event.issue.node_id }}
           status_value: ${{ env.in_review }}
@@ -79,8 +79,8 @@ jobs:
         if: startsWith(github.head_ref, 'merge/prerelease/minor-into-prerelease/major')
         uses: leonsteinhaeuser/project-beta-automations@v1.3.0
         with:
-          gh_token: ${{ secrets.GITHUB_TOKEN }}
-          organization: workday
+          gh_token: ${{ secrets.GH_RW_TOKEN }}
+          organization: Workday
           project_id: 4
           resource_node_id: ${{ github.event.pull_request.node_id }}
           status_value: ${{ env.in_review }}
