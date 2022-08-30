@@ -13,8 +13,8 @@ export const useBreadcrumbsModel = createModelHook({
      */
     id: '',
     /**
-     * The default Breadcrumbs component only handle rendering of link group in a horizontal orientation,
-     * but the sub-components could be replaced to handle vertical orientations.
+     * The default Breadcrumbs component only handles rendering of the link group in a horizontal
+     * orientation, but the subcomponents could be replaced to handle vertical orientations.
      * @default 'horizontal'
      */
     orientation: 'horizontal' as typeof useOverflowListModel.defaultConfig.orientation,
