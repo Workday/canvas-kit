@@ -10,7 +10,7 @@ import {
   useDisableBodyScroll,
 } from '@workday/canvas-kit-react/popup';
 import {DeleteButton} from '@workday/canvas-kit-react/button';
-import {Box} from '@workday/canvas-kit-react/layout';
+import {Box, HStack} from '@workday/canvas-kit-react/layout';
 
 export const WithoutCloseIcon = () => {
   const model = usePopupModel();
@@ -32,16 +32,16 @@ export const WithoutCloseIcon = () => {
         <Modal.Card>
           <Modal.Heading>Delete Item</Modal.Heading>
           <Modal.Body>
-            <Box as="p" marginTop={0} marginBottom="zero">
+            <Box as="p" marginTop={0} marginBottom="m">
               Are you sure you want to delete the item?
             </Box>
+            <HStack spacing="s">
+              <Modal.CloseButton as={DeleteButton} onClick={handleClose}>
+                Delete
+              </Modal.CloseButton>
+              <Modal.CloseButton>Cancel</Modal.CloseButton>
+            </HStack>
           </Modal.Body>
-          <Modal.Footer>
-            <Modal.CloseButton as={DeleteButton} onClick={handleClose}>
-              Delete
-            </Modal.CloseButton>
-            <Modal.CloseButton>Cancel</Modal.CloseButton>
-          </Modal.Footer>
         </Modal.Card>
       </Modal.Overlay>
     </Modal>

@@ -20,7 +20,6 @@ export const Modal = createContainer()({
     Overlay: ModalOverlay,
     OverflowOverlay: ModalOverflowOverlay,
     CloseButton: Popup.CloseButton,
-    Footer: Popup.Footer,
   },
 })<ExtractProps<typeof Dialog, never>>(elemProps => {
   return <>{elemProps.children}</>;

@@ -2,7 +2,7 @@ import React from 'react';
 
 import {Modal} from '@workday/canvas-kit-react/modal';
 import {DeleteButton} from '@workday/canvas-kit-react/button';
-import {Box} from '@workday/canvas-kit-react/layout';
+import {Box, HStack} from '@workday/canvas-kit-react/layout';
 
 export const Basic = () => {
   const handleClose = () => {
@@ -16,13 +16,17 @@ export const Basic = () => {
         <Modal.Card>
           <Modal.CloseIcon aria-label="Close" />
           <Modal.Heading>Delete Item</Modal.Heading>
-          <Modal.Body>Are you sure you want to delete the item?</Modal.Body>
-          <Modal.Footer>
-            <Modal.CloseButton as={DeleteButton} onClick={handleClose}>
-              Delete
-            </Modal.CloseButton>
-            <Modal.CloseButton>Cancel</Modal.CloseButton>
-          </Modal.Footer>
+          <Modal.Body>
+            <Box as="p" marginTop="zero" marginBottom="m">
+              Are you sure you want to delete the item?
+            </Box>
+            <HStack spacing="s">
+              <Modal.CloseButton as={DeleteButton} onClick={handleClose}>
+                Delete
+              </Modal.CloseButton>
+              <Modal.CloseButton>Cancel</Modal.CloseButton>
+            </HStack>
+          </Modal.Body>
         </Modal.Card>
       </Modal.Overlay>
     </Modal>
