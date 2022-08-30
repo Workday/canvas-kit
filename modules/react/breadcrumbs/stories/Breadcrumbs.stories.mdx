@@ -39,12 +39,14 @@ yarn add @workday/canvas-kit-react
 be composed in a variety of ways: `Breadcrumbs.List`, `Breadcrumbs.Item`, `Breadcrumbs.CurrentItem`
 and `Breadcrumbs.Link`.
 
-Accessibility is built into Breadcrumbs components in a way that allows you to create an inclusive
-experience with little additional configuration. The only ARIA label you'll need to add is the
-`aria-label` for `Breadcrumbs.List` as seen in the example. And all links require `href`s to be
-properly identified. All other accessible attributes are baked into the components.
+Accessibility is built into `Breadcrumbs` in a way that allows you to create an inclusive experience
+with little additional configuration. As seen in the example below, the only ARIA attribute you'll
+need to add is an `aria-label` to the `Breadcrumbs.List`. All other accessibility attributes are
+baked into the component.
 
 <ExampleCodeBlock code={Basic} />
+
+Note that all links require an `href` to be properly identified.
 
 ### Collapsed List
 
