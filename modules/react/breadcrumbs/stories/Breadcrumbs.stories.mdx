@@ -55,13 +55,13 @@ exceed the width of the `Breadcrumbs.List`, an overflow menu will be rendered. T
 against the dynamic API where you give the `BreadcrumbsModel` an array of items to be rendered. The
 dynamic API handles the React `key` for you based on the item's identifier. The dynamic API requires
 either an `id` on each item object or a `getId` function that returns an identifier based on the
-item. The below example uses an `id` property on each item.
+item. The example below uses an `id` property on each item.
+
+<ExampleCodeBlock code={Collapsed} />
 
 The dynamic API takes in any object, but since nothing is known about your object, a
 [render prop](https://reactjs.org/docs/render-props.html) is necessary to instruct a list how it
 should render.
-
-<ExampleCodeBlock code={Collapsed} />
 
 ### Right-to-Left (RTL)
 
