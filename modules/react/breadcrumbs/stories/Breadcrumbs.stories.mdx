@@ -150,11 +150,11 @@ needed. Note that tooltips will only render when text is truncated. The example 
 
 ##### Handling Redirects
 
-`Breadcrumbs.Link` defaults to redirecting with an `href`, meaning the page will hard-redirect when
-the link is clicked. However, if you're in a single-page application (SPA) environment, you might
-want to use the internal SPA router instead. You can override this hard-redirect with the `onAction`
-prop. Note that `onAction` will not block any `onClick` if provided. Below is an example using the
-`history` package.
+`Breadcrumbs.Link` defaults to redirecting with an `href`, which means the page will hard-redirect
+when the link is clicked. However, if you're in a single-page application (SPA) environment, you
+might want to use the internal SPA router instead. You can override this hard-redirect with the
+`onAction` prop. Note that `onAction` will not block any `onClick` if provided. The example below
+uses the `history` package.
 
 ```tsx
 import * as React from 'react';
