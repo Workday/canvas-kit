@@ -12,7 +12,7 @@ export default withSnapshotsEnabled({
   component: DeprecatedDrawer,
 });
 
-export const DeprecatedDrawerStates = () => (
+export const DrawerStates = () => (
   <div>
     <h3>Drawer</h3>
     <StaticStates>
