@@ -26,8 +26,8 @@ export const Breadcrumbs = createContainer()({
     CurrentItem: BreadcrumbsCurrentItem,
     Link: BreadcrumbsLink,
     /**
-     * The overflow menu of the Breadcrumbs component. If there isn't enough room to render all the action
-     * items, the extra actions that don't fit will be overflowed into this menu.
+     * The overflow menu for Breadcrumbs. If there isn't enough room to render all links,
+     * it will automatically overflow items into this menu.
      * @example
      * <Breadcrumbs.Menu.Popper>
      *   <Breadcrumbs.Menu.Card>
