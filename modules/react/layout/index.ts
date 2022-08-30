@@ -17,4 +17,5 @@ export * from './lib/Grid';
 export * from './lib/Stack';
 export type { FlexStyleProps } from './lib/utils/flex';
 export type { GridStyleProps } from './lib/utils/grid';
+export type { GridItemStyleProps } from './lib/utils/gridItem';
 export type { StackSpacing, StackDirection, StackStyleProps } from './lib/utils/stack';
