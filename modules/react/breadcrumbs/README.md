@@ -1,7 +1,7 @@
 # Canvas Kit React Breadcrumbs
 
 Breadcrumbs is a
-[compound component](/getting-started/for-developers/resources/compound-components/) that allow
+[compound component](/getting-started/for-developers/resources/compound-components/) that allows
 users to keep track and maintain awareness of their location as they navigate through pages,
 folders, files, etc.
 
