@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v7.3.0](https://github.com/Workday/canvas-kit/releases/tag/v7.3.0) (2022-08-31)
+
+### Components
+
+- feat(labs): Add expandable container component ([#1562](https://github.com/Workday/canvas-kit/pull/1562)) ([@giulialubet](https://github.com/giulialubet))
+- fix: Update avatar on expandable component ([#1739](https://github.com/Workday/canvas-kit/pull/1739)) ([@mannycarrera4](https://github.com/mannycarrera4))
+- feat(labs): New compound toast component ([#1432](https://github.com/Workday/canvas-kit/pull/1432)) ([@ckaptan](https://github.com/ckaptan))
+- fix: Update Toast import statements ([#1760](https://github.com/Workday/canvas-kit/pull/1760)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
 ## [v7.2.11](https://github.com/Workday/canvas-kit/releases/tag/v7.2.11) (2022-08-31)
 
 ### Components
