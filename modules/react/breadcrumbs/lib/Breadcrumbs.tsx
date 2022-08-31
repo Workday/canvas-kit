@@ -13,7 +13,7 @@ export interface BreadcrumbsProps {
   /**
    * The accessibility label for the nav element.
    *
-   * @default "Breadcrumbs"
+   * @default "breadcrumbs"
    */
   'aria-label'?: string;
   /**
@@ -45,7 +45,7 @@ export const Breadcrumbs = createContainer()({
      */
     Menu: BreadcrumbsMenu,
   },
-})<BreadcrumbsProps>(({children, 'aria-label': ariaLabel = 'Breadcrumbs'}, _, model) => {
+})<BreadcrumbsProps>(({children, 'aria-label': ariaLabel = 'breadcrumbs'}, _, model) => {
   return (
     <Menu model={model.menu}>
       <nav role="navigation" aria-label={ariaLabel}>

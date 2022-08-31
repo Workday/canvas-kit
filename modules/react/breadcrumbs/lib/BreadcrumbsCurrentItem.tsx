@@ -58,7 +58,7 @@ export const useBreadcrumbsItem = composeHooks(
     const refCurrent = localRef.current;
 
     if (refCurrent) {
-      const {scrollWidth, clientWidth} = refCurrent;
+      const {scrollWidth, clientWidth} = refCurrent as {scrollWidth: number; clientWidth: number};
       shouldShowTooltip = scrollWidth > clientWidth;
     }
 
