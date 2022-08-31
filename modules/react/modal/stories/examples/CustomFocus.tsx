@@ -13,7 +13,7 @@ export const CustomFocus = () => {
   });
 
   const handleDelete = () => {
-    console.log('Close modal');
+    console.log('Deleted item');
   };
 
   return (

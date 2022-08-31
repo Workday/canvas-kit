@@ -6,7 +6,7 @@ import {HStack} from '@workday/canvas-kit-react/layout';
 
 export const BodyOverflow = () => {
   const handleDelete = () => {
-    console.log('Close modal');
+    console.log('Deleted item');
   };
 
   return (

@@ -6,7 +6,7 @@ import {Box, HStack} from '@workday/canvas-kit-react/layout';
 
 export const Basic = () => {
   const handleDelete = () => {
-    console.log('Close modal');
+    console.log('Deleted item');
   };
 
   return (
