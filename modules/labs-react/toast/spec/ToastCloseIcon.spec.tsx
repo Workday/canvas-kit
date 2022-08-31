@@ -1,7 +1,7 @@
-import {render, screen} from '@testing-library/react';
-import {Toast} from '../lib/Toast';
 import React from 'react';
-import {usePopupModel} from '@workday/canvas-kit-react';
+import {render, screen} from '@testing-library/react';
+import {usePopupModel} from '@workday/canvas-kit-react/popup';
+import {Toast} from '../lib/Toast';
 
 describe('Toast.Close', () => {
   verifyComponent(Toast.CloseIcon, {modelFn: usePopupModel});

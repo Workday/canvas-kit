@@ -1,7 +1,8 @@
 import React from 'react';
 
 import {createContainer, ExtractProps} from '@workday/canvas-kit-react/common';
-import {Flex, Popup} from '@workday/canvas-kit-react';
+import {Flex} from '@workday/canvas-kit-react/layout';
+import {Popup} from '@workday/canvas-kit-react/popup';
 
 import {ToastCloseIcon} from './ToastCloseIcon';
 import {ToastIcon} from './ToastIcon';
