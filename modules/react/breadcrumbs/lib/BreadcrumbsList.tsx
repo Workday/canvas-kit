@@ -37,23 +37,21 @@ export const BreadcrumbsList = createSubcomponent('ul')({
   const splitIndex = items.length - 2;
 
   return (
-    <nav role="navigation" aria-label="Breadcrumb">
-      <Flex
-        as={Element}
-        padding="zero"
-        margin="zero"
-        display="inline-flex"
-        alignItems="center"
-        minHeight={space.xl}
-        listStyle="none"
-        role="list"
-        width="100%"
-        {...elemProps}
-      >
-        {items.length ? items.slice(0, splitIndex) : items}
-        <Breadcrumbs.OverflowButton buttonAriaLabel={buttonAriaLabel} />
-        {items.length ? items.slice(splitIndex, items.length) : null}
-      </Flex>
-    </nav>
+    <Flex
+      as={Element}
+      padding="zero"
+      margin="zero"
+      display="inline-flex"
+      alignItems="center"
+      minHeight={space.xl}
+      listStyle="none"
+      role="list"
+      width="100%"
+      {...elemProps}
+    >
+      {items.length ? items.slice(0, splitIndex) : items}
+      <Breadcrumbs.OverflowButton buttonAriaLabel={buttonAriaLabel} />
+      {items.length ? items.slice(splitIndex, items.length) : null}
+    </Flex>
   );
 });

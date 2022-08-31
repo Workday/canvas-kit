@@ -9,7 +9,7 @@ export interface Breadcrumb {
   text: string;
 }
 
-export const Collapsed = () => {
+export const OverflowBreadcrumbs = () => {
   const [items] = React.useState<Breadcrumb[]>([
     {id: '1', text: 'Home', link: '/'},
     {id: '2', text: 'Second Link', link: '#'},

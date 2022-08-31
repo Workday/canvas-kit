@@ -34,26 +34,20 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
       }
 
       nodePath.value.openingElement = j.jsxOpeningElement(j.jsxIdentifier(importMap.Breadcrumbs));
+      nodePath.value.openingElement.attributes = attributes;
       nodePath.value.closingElement = j.jsxClosingElement(j.jsxIdentifier(importMap.Breadcrumbs));
 
       (nodePath.value.children || []).forEach(child => {
         if (
           child.type === 'JSXElement' &&
-          child.openingElement.name.type === 'JSXMemberExpression'
+          child.openingElement.name.type === 'JSXMemberExpression' &&
+          child.openingElement.name.property.name === 'CollapsibleList'
         ) {
-          if (child.openingElement.name.property.name.includes('List')) {
-            child.openingElement.attributes = [
-              ...(child.openingElement.attributes || []),
-              ...attributes,
-            ];
+          if (child.openingElement.name.type === 'JSXMemberExpression') {
+            child.openingElement.name.property.name = 'List';
           }
-          if (child.openingElement.name.property.name === 'CollapsibleList') {
-            if (child.openingElement.name.type === 'JSXMemberExpression') {
-              child.openingElement.name.property.name = 'List';
-            }
-            if (child.closingElement && child.closingElement.name.type === 'JSXMemberExpression') {
-              child.closingElement.name.property.name = 'List';
-            }
+          if (child.closingElement && child.closingElement.name.type === 'JSXMemberExpression') {
+            child.closingElement.name.property.name = 'List';
           }
         }
       });

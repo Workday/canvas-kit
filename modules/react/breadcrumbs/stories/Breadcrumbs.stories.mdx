@@ -3,8 +3,8 @@ import {Breadcrumbs} from '@workday/canvas-kit-react/breadcrumbs';
 import {Specifications} from '@workday/canvas-kit-docs';
 
 import {Basic} from './examples/Basic';
-import {Collapsed} from './examples/Collapsed';
-import {RTLCollapsibleList} from './examples/RTL';
+import {OverflowBreadcrumbs} from './examples/Overflow';
+import {RTLOverflowList} from './examples/RTL';
 import {CurrentItemTruncation} from './examples/CurrentItemTruncation';
 import {LinkTruncation} from './examples/LinkTruncation';
 
@@ -48,7 +48,7 @@ baked into the component.
 
 Note that all links require an `href` to be properly identified.
 
-### Collapsed List
+### Overflow Breadcrumbs
 
 `Breadcrumbs` is a responsive component based on the width of its container. If the rendered links
 exceed the width of the `Breadcrumbs.List`, an overflow menu will be rendered. This only works
@@ -57,7 +57,7 @@ dynamic API handles the React `key` for you based on the item's identifier. The 
 either an `id` on each item object or a `getId` function that returns an identifier based on the
 item. The example below uses an `id` property on each item.
 
-<ExampleCodeBlock code={Collapsed} />
+<ExampleCodeBlock code={OverflowBreadcrumbs} />
 
 The dynamic API takes in any object, but since nothing is known about your object, a
 [render prop](https://reactjs.org/docs/render-props.html) is necessary to instruct a list how it
@@ -69,7 +69,7 @@ should render.
 direction in your application's Canvas theme, you don't need to do anything else to make it work.
 All you need to supply is the translated text for items and ARIA labels.
 
-<ExampleCodeBlock code={RTLCollapsibleList} />
+<ExampleCodeBlock code={RTLOverflowList} />
 
 ## Components
 

@@ -9,7 +9,7 @@ export interface Breadcrumb {
   text: string;
 }
 
-export const RTLCollapsibleList = () => {
+export const RTLOverflowList = () => {
   const theme = {
     canvas: {
       direction: ContentDirection.RTL,

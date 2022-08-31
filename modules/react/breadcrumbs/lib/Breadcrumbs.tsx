@@ -11,6 +11,12 @@ import {BreadcrumbsMenu} from './BreadcrumbsMenu';
 
 export interface BreadcrumbsProps {
   /**
+   * The accessibility label for the nav element.
+   *
+   * @default "Breadcrumbs"
+   */
+  'aria-label'?: string;
+  /**
    * The contents of the Breadcrumbs. Can be `Breadcrumbs` children or any valid elements.
    */
   children: React.ReactNode;
@@ -39,6 +45,12 @@ export const Breadcrumbs = createContainer()({
      */
     Menu: BreadcrumbsMenu,
   },
-})<BreadcrumbsProps>(({children}, _, model) => {
-  return <Menu model={model.menu}>{children}</Menu>;
+})<BreadcrumbsProps>(({children, 'aria-label': ariaLabel = 'Breadcrumbs'}, _, model) => {
+  return (
+    <Menu model={model.menu}>
+      <nav role="navigation" aria-label={ariaLabel}>
+        {children}
+      </nav>
+    </Menu>
+  );
 });

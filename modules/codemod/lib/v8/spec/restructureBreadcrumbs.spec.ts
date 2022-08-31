@@ -38,8 +38,8 @@ describe('Breadcrumbs', () => {
     const expected = stripIndent`
       import {Breadcrumbs} from '@workday/canvas-kit-react/breadcrumbs';
 
-      <Breadcrumbs>
-        <Breadcrumbs.List maxWidth="100" aria-label="Some links">
+      <Breadcrumbs aria-label="Some links">
+        <Breadcrumbs.List maxWidth="100">
           <Breadcrumbs.Item>
             <Breadcrumbs.Link>link</Breadcrumbs.Link>
           </Breadcrumbs.Item>
@@ -66,8 +66,8 @@ describe('Breadcrumbs', () => {
     const expected = stripIndent`
       import {Breadcrumbs as CanvasBreadcrumbs} from '@workday/canvas-kit-react';
 
-      <CanvasBreadcrumbs>
-        <CanvasBreadcrumbs.List maxWidth="100" aria-label="Some links">
+      <CanvasBreadcrumbs aria-label="Some links">
+        <CanvasBreadcrumbs.List maxWidth="100">
           <Breadcrumbs.Item>
             <Breadcrumbs.Link>link</Breadcrumbs.Link>
           </Breadcrumbs.Item>
