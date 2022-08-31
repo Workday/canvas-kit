@@ -5,7 +5,7 @@ import {DeleteButton} from '@workday/canvas-kit-react/button';
 import {HStack} from '@workday/canvas-kit-react/layout';
 
 export const FullOverflow = () => {
-  const handleClose = () => {
+  const handleDelete = () => {
     console.log('Deleted item');
   };
 
@@ -43,7 +43,7 @@ export const FullOverflow = () => {
             <p>Are you sure you want to delete the item?</p>
           </Modal.Body>
           <HStack spacing="s" paddingX="l" paddingBottom="l">
-            <Modal.CloseButton as={DeleteButton} onClick={handleClose}>
+            <Modal.CloseButton as={DeleteButton} onClick={handleDelete}>
               Delete
             </Modal.CloseButton>
             <Modal.CloseButton>Cancel</Modal.CloseButton>

@@ -12,7 +12,7 @@ export const CustomFocus = () => {
     initialFocusRef: ref,
   });
 
-  const handleClose = () => {
+  const handleDelete = () => {
     console.log('Close modal');
   };
 
@@ -31,7 +31,7 @@ export const CustomFocus = () => {
               <TextInput ref={ref} value={value} onChange={e => setValue(e.currentTarget.value)} />
             </FormField>
             <HStack spacing="s">
-              <Modal.CloseButton as={DeleteButton} onClick={handleClose}>
+              <Modal.CloseButton as={DeleteButton} onClick={handleDelete}>
                 Delete
               </Modal.CloseButton>
               <Modal.CloseButton>Cancel</Modal.CloseButton>

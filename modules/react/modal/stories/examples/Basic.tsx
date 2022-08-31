@@ -5,7 +5,7 @@ import {DeleteButton} from '@workday/canvas-kit-react/button';
 import {Box, HStack} from '@workday/canvas-kit-react/layout';
 
 export const Basic = () => {
-  const handleClose = () => {
+  const handleDelete = () => {
     console.log('Close modal');
   };
 
@@ -21,7 +21,7 @@ export const Basic = () => {
               Are you sure you want to delete the item?
             </Box>
             <HStack spacing="s">
-              <Modal.CloseButton as={DeleteButton} onClick={handleClose}>
+              <Modal.CloseButton as={DeleteButton} onClick={handleDelete}>
                 Delete
               </Modal.CloseButton>
               <Modal.CloseButton>Cancel</Modal.CloseButton>

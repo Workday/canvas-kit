@@ -21,7 +21,7 @@ export const WithoutCloseIcon = () => {
   useFocusTrap(model);
   useAssistiveHideSiblings(model);
   useDisableBodyScroll(model);
-  const handleClose = () => {
+  const handleDelete = () => {
     console.log('Deleted item');
   };
 
@@ -36,7 +36,7 @@ export const WithoutCloseIcon = () => {
               Are you sure you want to delete the item?
             </Box>
             <HStack spacing="s">
-              <Modal.CloseButton as={DeleteButton} onClick={handleClose}>
+              <Modal.CloseButton as={DeleteButton} onClick={handleDelete}>
                 Delete
               </Modal.CloseButton>
               <Modal.CloseButton>Cancel</Modal.CloseButton>
