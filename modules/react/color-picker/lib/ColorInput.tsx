@@ -184,5 +184,3 @@ export const ColorInput = createComponent('input')({
     );
   },
 });
-
-export default ColorInput;
