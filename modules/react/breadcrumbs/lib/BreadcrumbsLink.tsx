@@ -1,12 +1,9 @@
 import React from 'react';
 import {CSSObject} from '@emotion/styled';
-import {styled} from '@workday/canvas-kit-react/common';
+import {createComponent, ellipsisStyles, styled} from '@workday/canvas-kit-react/common';
 import {Hyperlink} from '@workday/canvas-kit-react/button';
-import {type} from '@workday/canvas-kit-react/tokens';
-import {TooltipContainer} from '@workday/canvas-kit-react/tooltip';
-import {Popper} from '@workday/canvas-kit-react/popup';
-
-import {useTruncateTooltip} from './hooks/useTruncateTooltip';
+import {OverflowTooltip, OverflowTooltipProps} from '@workday/canvas-kit-react/tooltip';
+import {Text} from '@workday/canvas-kit-react/text';
 
 export interface BreadcrumbsLinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   /**
@@ -23,6 +20,7 @@ export interface BreadcrumbsLinkProps extends React.AnchorHTMLAttributes<HTMLAnc
    * A handler function for overriding hard-redirects with links
    */
   onAction?: (href: string) => void;
+  tooltipProps?: OverflowTooltipProps | {};
 }
 
 type StyledLinkProps = Pick<BreadcrumbsLinkProps, 'maxWidth' | 'href'>;
@@ -31,69 +29,57 @@ type StyledLinkProps = Pick<BreadcrumbsLinkProps, 'maxWidth' | 'href'>;
 const DEFAULT_MAX_WIDTH = 350;
 
 export const truncateStyles = (maxWidth: number = DEFAULT_MAX_WIDTH): CSSObject => ({
-  display: 'inline-block',
   maxWidth,
   overflow: 'hidden',
   textOverflow: 'ellipsis',
   whiteSpace: 'nowrap',
 });
 
-const {color, ...subtextLargeStyles} = type.levels.subtext.large;
-
-const StyledLink = styled(Hyperlink)(
-  {
-    ...subtextLargeStyles,
-  },
-  ({maxWidth}: StyledLinkProps) => ({
-    ...truncateStyles(maxWidth),
-  })
-);
-
-export const BreadcrumbsLink = ({
+const StyledLink = styled(Text.as(Hyperlink))(({maxWidth}: StyledLinkProps) => ({
   maxWidth,
-  onAction,
-  onClick,
-  href,
-  children,
-  ...props
-}: BreadcrumbsLinkProps) => {
-  const ref = React.useRef<HTMLAnchorElement>(null);
-  const {isTooltipOpen, openTooltip, closeTooltip, tooltipProps} = useTruncateTooltip(ref);
+  ...ellipsisStyles,
+}));
 
-  const handleClick = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-    event.preventDefault();
-    // allow an override to the hard redirect
-    if (onAction) {
-      onAction(href);
-    } else {
-      // default to hard redirecting
-      window.location.href = href;
-    }
-    // don't block the onClick event if it's provided
-    if (onClick) {
-      onClick(event);
-    }
-  };
+export const BreadcrumbsLink = createComponent('a')({
+  displayName: 'Breadcrumbs.Link',
+  Component: ({
+    maxWidth,
+    onAction,
+    onClick,
+    href,
+    tooltipProps = {},
+    children,
+    ...props
+  }: BreadcrumbsLinkProps) => {
+    const handleClick = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+      event.preventDefault();
+      // allow an override to the hard redirect
+      if (onAction) {
+        onAction(href);
+      } else {
+        // default to hard redirecting
+        window.location.href = href;
+      }
+      // don't block the onClick event if it's provided
+      if (onClick) {
+        onClick(event);
+      }
+    };
 
-  return (
-    <React.Fragment>
-      <StyledLink
-        ref={ref}
-        maxWidth={maxWidth}
-        onMouseEnter={openTooltip}
-        onMouseLeave={closeTooltip}
-        onFocus={openTooltip}
-        onBlur={closeTooltip}
-        href={href}
-        role="link"
-        onClick={handleClick}
-        {...props}
-      >
-        {children}
-      </StyledLink>
-      <Popper open={isTooltipOpen} anchorElement={ref} placement="top">
-        <TooltipContainer {...tooltipProps}>{children}</TooltipContainer>
-      </Popper>
-    </React.Fragment>
-  );
-};
+    return (
+      <OverflowTooltip {...tooltipProps}>
+        <StyledLink
+          typeLevel="subtext.large"
+          color="blueberry400"
+          maxWidth={maxWidth}
+          href={href}
+          role="link"
+          onClick={handleClick}
+          {...props}
+        >
+          {children}
+        </StyledLink>
+      </OverflowTooltip>
+    );
+  },
+});

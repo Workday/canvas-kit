@@ -1,10 +1,6 @@
 import * as React from 'react';
-import {
-  chevronLeftSmallIcon,
-  chevronRightSmallIcon,
-  relatedActionsIcon,
-} from '@workday/canvas-system-icons-web';
-import {colors} from '@workday/canvas-kit-react/tokens';
+import {chevronRightSmallIcon, relatedActionsIcon} from '@workday/canvas-system-icons-web';
+import {colors, space} from '@workday/canvas-kit-react/tokens';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {Flex, FlexProps} from '@workday/canvas-kit-react/layout';
 import {
@@ -12,9 +8,9 @@ import {
   composeHooks,
   subModelHook,
   createSubcomponent,
+  useIsRTL,
 } from '@workday/canvas-kit-react/common';
 import {useOverflowListTarget} from '@workday/canvas-kit-react/collection';
-import {useRTL} from './hooks/useRTL';
 import {useMenuTarget} from '@workday/canvas-kit-react/menu';
 import {useBreadcrumbsModel} from './hooks/useBreadcrumbsModel';
 import {TertiaryButton} from '@workday/canvas-kit-react/button';
@@ -42,8 +38,6 @@ export const BreadcrumbsOverflowButton = createSubcomponent('button')({
   modelHook: useBreadcrumbsModel,
   elemPropsHook: useBreadcrumbsOverflowButton,
 })<BreadcrumbsOverflowButtonProps>(({buttonAriaLabel = 'More links', ...elemProps}, Element) => {
-  const {shouldUseRTL} = useRTL();
-  const icon = shouldUseRTL ? chevronLeftSmallIcon : chevronRightSmallIcon;
   const styles = (elemProps as typeof elemProps & {style: FlexProps}).style;
 
   return (
@@ -55,12 +49,13 @@ export const BreadcrumbsOverflowButton = createSubcomponent('button')({
         {...elemProps}
       />
       <SystemIcon
-        icon={icon}
+        icon={chevronRightSmallIcon}
         color={colors.licorice200}
         colorHover={colors.licorice200}
         size={20}
-        height={32}
-        width={32}
+        height={space.l}
+        width={space.l}
+        shouldMirror={useIsRTL()}
         styles={{justifyContent: 'center', alignItems: 'center', display: 'inline-flex'}}
         aria-hidden
       />

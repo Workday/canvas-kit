@@ -44,12 +44,16 @@ describe('Breadcrumbs', () => {
       cy.checkA11y();
     });
 
-    it('should have an element with a role of "tablist"', () => {
+    it('should have an element with a role of "navigation"', () => {
       getBreadcrumbsNav().should('be.visible');
     });
 
-    it('should have an aria-label on the <nav> element', () => {
-      getBreadcrumbsNav().should('have.attr', 'aria-label');
+    it('should have an element with a label of "navigation"', () => {
+      getBreadcrumbsNav().should('be.visible');
+    });
+
+    it('should have an aria-label as Breadcrumbs on the <nav> element', () => {
+      getBreadcrumbsNav().should('aria-label', 'Breadcrumbs');
     });
 
     it('should have a role of "list" on the <ul> element', () => {

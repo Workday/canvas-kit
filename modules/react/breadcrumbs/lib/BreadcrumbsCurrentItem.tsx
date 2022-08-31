@@ -6,16 +6,17 @@ import {
   useLocalRef,
   composeHooks,
   createSubcomponent,
+  StyledType,
+  ellipsisStyles,
+  useForkRef,
 } from '@workday/canvas-kit-react/common';
-import {type} from '@workday/canvas-kit-react/tokens';
-import {TooltipContainer} from '@workday/canvas-kit-react/tooltip';
-import {Popper} from '@workday/canvas-kit-react/popup';
+import {OverflowTooltip, OverflowTooltipProps} from '@workday/canvas-kit-react/tooltip';
 import {
   useListItemRegister,
   useOverflowListItemMeasure,
 } from '@workday/canvas-kit-react/collection';
-import {useTruncateTooltip} from './hooks/useTruncateTooltip';
 import {useBreadcrumbsModel} from './hooks/useBreadcrumbsModel';
+import {Text} from '@workday/canvas-kit-react/text';
 
 // default max-width for truncating text
 const DEFAULT_MAX_WIDTH = 350;
@@ -26,7 +27,6 @@ export const truncateStyles = (maxWidth: number = DEFAULT_MAX_WIDTH): CSSObject 
   overflow: 'hidden',
   textOverflow: 'ellipsis',
   whiteSpace: 'nowrap',
-  minWidth: '94px',
 });
 
 export interface BreadcrumbsCurrentItemProps extends React.HTMLAttributes<HTMLLIElement> {
@@ -36,29 +36,36 @@ export interface BreadcrumbsCurrentItemProps extends React.HTMLAttributes<HTMLLI
    * @default 350px
    */
   maxWidth?: number;
+  tooltipProps?: OverflowTooltipProps;
 }
 
-const ListItem = styled('li')(
+const ListItem = styled(Text.as('li'))<BreadcrumbsCurrentItemProps & StyledType>(
   {
-    display: 'flex',
     alignItems: 'center',
     flexDirection: 'column',
-    textAlign: 'left',
-    ...type.levels.subtext.large,
-    fontWeight: 500,
   },
-
   ({maxWidth}: BreadcrumbsCurrentItemProps) => ({
-    ...truncateStyles(maxWidth),
+    maxWidth,
+    display: 'inline-block',
+    ...ellipsisStyles,
   })
 );
 
 export const useBreadcrumbsItem = composeHooks(
   createElemPropsHook(useBreadcrumbsModel)((_model: any, ref: any) => {
-    const {localRef} = useLocalRef(ref);
-    return {ref: localRef};
+    const {localRef} = useLocalRef(useForkRef(ref));
+    let shouldShowTooltip = false;
+    const refCurrent = localRef.current;
+
+    if (refCurrent) {
+      const {scrollWidth, clientWidth} = refCurrent;
+      shouldShowTooltip = scrollWidth > clientWidth;
+    }
+
+    return {tabIndex: shouldShowTooltip ? 0 : undefined, ref: localRef};
   }),
   useOverflowListItemMeasure,
+
   useListItemRegister
 );
 
@@ -67,34 +74,19 @@ export const BreadcrumbsCurrentItem = createSubcomponent('li')({
   modelHook: useBreadcrumbsModel,
   elemPropsHook: useBreadcrumbsItem,
 })<BreadcrumbsCurrentItemProps & {ref?: React.RefObject<HTMLLIElement>}>(
-  ({children, maxWidth, ref, ...elemProps}, Element) => {
-    const {
-      isTooltipOpen,
-      openTooltip,
-      closeTooltip,
-      shouldShowTooltip,
-      tooltipProps,
-    } = useTruncateTooltip(ref);
-
+  ({children, tooltipProps = {}, maxWidth, ...elemProps}, Element) => {
     return (
-      <>
+      <OverflowTooltip {...tooltipProps}>
         <ListItem
           as={Element}
-          ref={ref}
+          typeLevel="subtext.large"
           maxWidth={maxWidth}
-          onMouseEnter={openTooltip}
-          onMouseLeave={closeTooltip}
-          onFocus={openTooltip}
-          onBlur={closeTooltip}
-          {...(shouldShowTooltip && {tabIndex: 0})}
+          fontWeight="bold"
           {...elemProps}
         >
           {children}
         </ListItem>
-        <Popper open={isTooltipOpen} anchorElement={ref} placement="top">
-          <TooltipContainer {...tooltipProps}>{children}</TooltipContainer>
-        </Popper>
-      </>
+      </OverflowTooltip>
     );
   }
 );

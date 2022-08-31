@@ -3,6 +3,7 @@ import {
   composeHooks,
   createSubcomponent,
   createElemPropsHook,
+  useIsRTL,
 } from '@workday/canvas-kit-react/common';
 import {
   useListItemRegister,
@@ -10,9 +11,8 @@ import {
 } from '@workday/canvas-kit-react/collection';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
-import {chevronLeftSmallIcon, chevronRightSmallIcon} from '@workday/canvas-system-icons-web';
-import {colors} from '@workday/canvas-kit-react/tokens';
-import {useRTL} from './hooks/useRTL';
+import {chevronRightSmallIcon} from '@workday/canvas-system-icons-web';
+import {colors, space} from '@workday/canvas-kit-react/tokens';
 import {useBreadcrumbsModel} from './hooks/useBreadcrumbsModel';
 import {BreadcrumbsLink} from './BreadcrumbsLink';
 
@@ -63,19 +63,17 @@ export const BreadcrumbsItem = createSubcomponent('li')({
     Link: BreadcrumbsLink,
   },
 })<BreadcrumbsItemProps>(({children, ...elemProps}, Element) => {
-  const {shouldUseRTL} = useRTL();
-  const icon = shouldUseRTL ? chevronLeftSmallIcon : chevronRightSmallIcon;
-
   return (
     <Flex as={Element} alignItems="center" whiteSpace="nowrap" {...elemProps}>
       {children}
       <SystemIcon
-        icon={icon}
+        icon={chevronRightSmallIcon}
         color={colors.licorice200}
         colorHover={colors.licorice200}
         size={20}
-        height={32}
-        width={32}
+        height={space.l}
+        width={space.l}
+        shouldMirror={useIsRTL()}
         styles={{justifyContent: 'center', alignItems: 'center', display: 'inline-flex'}}
         aria-hidden
       />
