@@ -10,7 +10,7 @@ import {
   useDisableBodyScroll,
 } from '@workday/canvas-kit-react/popup';
 import {DeleteButton} from '@workday/canvas-kit-react/button';
-import {Box, HStack} from '@workday/canvas-kit-react/layout';
+import {HStack, Box} from '@workday/canvas-kit-react/layout';
 
 export const WithoutCloseIcon = () => {
   const model = usePopupModel();

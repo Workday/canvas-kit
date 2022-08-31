@@ -2,7 +2,7 @@ import React from 'react';
 
 import {Modal} from '@workday/canvas-kit-react/modal';
 import {DeleteButton} from '@workday/canvas-kit-react/button';
-import {Box, HStack} from '@workday/canvas-kit-react/layout';
+import {HStack, Box} from '@workday/canvas-kit-react/layout';
 
 export const Basic = () => {
   const handleDelete = () => {

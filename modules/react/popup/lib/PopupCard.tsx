@@ -12,7 +12,7 @@ import {
   useConstant,
   createSubcomponent,
 } from '@workday/canvas-kit-react/common';
-import {StackStyleProps, Stack} from '@workday/canvas-kit-react/layout';
+import {Stack, StackStyleProps} from '@workday/canvas-kit-react/layout';
 
 import {getTransformFromPlacement} from './getTransformFromPlacement';
 import {usePopupCard, usePopupModel} from './hooks';
@@ -72,6 +72,7 @@ export const PopupCard = createSubcomponent('div')({
       position="relative"
       depth={5}
       maxWidth={`calc(100vw - ${space.l})`}
+      spacing={0}
       flexDirection="column"
       minHeight={0}
       padding="zero"
