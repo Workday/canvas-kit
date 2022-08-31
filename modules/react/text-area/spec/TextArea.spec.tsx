@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {render, fireEvent} from '@testing-library/react';
-import TextArea from '../lib/TextArea';
+import {TextArea} from '../lib/TextArea';
 
 const id = 'Test Text Area';
 const placeholder = 'Test Text Area';

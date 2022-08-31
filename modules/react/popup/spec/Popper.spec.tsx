@@ -84,7 +84,7 @@ describe('Popper', () => {
 
     // force PopperJS to run
     // eslint-disable-next-line compat/compat
-    await act(() => new Promise(requestAnimationFrame));
+    await act(() => new Promise<any>(requestAnimationFrame));
 
     expect(renderProp).toBeCalledWith({placement: 'bottom'});
 
@@ -92,7 +92,7 @@ describe('Popper', () => {
 
     // force PopperJS to run
     // eslint-disable-next-line compat/compat
-    await act(() => new Promise(requestAnimationFrame));
+    await act(() => new Promise<any>(requestAnimationFrame));
 
     expect(renderProp).toBeCalledWith({placement: 'top'});
   });
@@ -107,7 +107,7 @@ describe('Popper', () => {
 
     // force PopperJS to run
     // eslint-disable-next-line compat/compat
-    await act(() => new Promise(requestAnimationFrame));
+    await act(() => new Promise<any>(requestAnimationFrame));
 
     expect(onFirstUpdate).toHaveBeenCalledTimes(1);
 
@@ -119,7 +119,7 @@ describe('Popper', () => {
 
     // force PopperJS to run
     // eslint-disable-next-line compat/compat
-    await act(() => new Promise(requestAnimationFrame));
+    await act(() => new Promise<any>(requestAnimationFrame));
 
     expect(onFirstUpdate).toHaveBeenCalledTimes(1);
   });

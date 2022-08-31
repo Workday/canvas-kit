@@ -2,7 +2,7 @@ import React from 'react';
 import {StaticStates} from '@workday/canvas-kit-react/common';
 import {ComponentStatesTable, permutateProps} from '@workday/canvas-kit-labs-react/common';
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
-import SidePanel from '../index';
+import {SidePanel} from '../index';
 
 export default withSnapshotsEnabled({
   title: 'Testing/React/Preview/Side Panel',
