@@ -1,7 +1,7 @@
 import React from 'react';
 import {renderToString} from 'react-dom/server';
 import {checkIcon} from '@workday/canvas-system-icons-web';
-import {colors} from '@workday/canvas-kit-react';
+import {colors} from '@workday/canvas-kit-react/tokens';
 import {Toast} from '../';
 
 describe('Toast', () => {

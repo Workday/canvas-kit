@@ -1,6 +1,6 @@
+import React from 'react';
 import {render, screen} from '@testing-library/react';
 import {Toast} from '../lib/Toast';
-import React from 'react';
 import {useToastModel} from '../lib/hooks/useToastModel';
 
 describe('Toast.Link', () => {

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {SystemIcon, SystemIconProps} from '@workday/canvas-kit-react';
+import {SystemIcon, SystemIconProps} from '@workday/canvas-kit-react/icon';
 
 export interface ToastIconProps extends Omit<SystemIconProps, 'colorHover'> {}
 

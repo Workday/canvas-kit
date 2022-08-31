@@ -1,7 +1,8 @@
 import React from 'react';
 
 import {createComponent, ExtractProps, styled, StyledType} from '@workday/canvas-kit-react/common';
-import {Popup, type} from '@workday/canvas-kit-react';
+import {Popup} from '@workday/canvas-kit-react/popup';
+import {type} from '@workday/canvas-kit-react/tokens';
 
 export interface ToastBodyProps extends ExtractProps<typeof Popup.Body> {}
 
