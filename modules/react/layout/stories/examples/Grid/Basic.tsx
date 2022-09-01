@@ -42,10 +42,9 @@ const Footer = ({children, ...props}: GridProps) => (
   </Grid>
 );
 
-export const UIExample = () => {
+export const Basic = () => {
   const parentCont = {
-    gridTemplateAreas:
-      "'Header Header Header Header' 'SideBar BodyContent BodyContent BodyContent' 'Footer Footer Footer Footer'",
+    gridTemplateAreas: "'Header Header' 'SideBar BodyContent' 'Footer Footer'",
     gridGap: fontSizes[16],
     gridTemplateColumns: '3fr 9fr',
     gridTemplateRows: 'auto 300px auto',
