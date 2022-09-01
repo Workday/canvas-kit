@@ -6,16 +6,15 @@ import {useOverflowListMeasure, useListRenderItems} from '@workday/canvas-kit-re
 import {space} from '@workday/canvas-kit-react/tokens';
 import {useBreadcrumbsModel} from './hooks/useBreadcrumbsModel';
 import {Breadcrumbs} from './Breadcrumbs';
+import {TertiaryButtonProps} from '@workday/canvas-kit-react/button';
 
 // Use `Partial` here to make `spacing` optional
 export interface BreadcrumbsListProps<T = any>
   extends Omit<Partial<ExtractProps<typeof Flex, never>>, 'children'> {
   /**
-   * The accessibility label for the dropdown menu button.
-   *
-   * @default "More links"
+   * Props passed into overflow button
    */
-  buttonAriaLabel?: string;
+  overflowButtonProps?: TertiaryButtonProps;
   /**
    * If items are passed to a `BreadcrumbsModel`, the child of `Breadcrumbs.List` should be a render prop. The
    * List will determine how and when the item will be rendered.
@@ -32,7 +31,7 @@ export const BreadcrumbsList = createSubcomponent('ul')({
   displayName: 'Breadcrumbs.List',
   modelHook: useBreadcrumbsModel,
   elemPropsHook: useOverflowListMeasure,
-})<BreadcrumbsListProps>(({buttonAriaLabel, children, ...elemProps}, Element, model) => {
+})<BreadcrumbsListProps>(({overflowButtonProps = {}, children, ...elemProps}, Element, model) => {
   const items = useListRenderItems(model, children) as [];
   const splitIndex = items.length - 2;
 
@@ -50,7 +49,7 @@ export const BreadcrumbsList = createSubcomponent('ul')({
       {...elemProps}
     >
       {items.length ? items.slice(0, splitIndex) : items}
-      <Breadcrumbs.OverflowButton buttonAriaLabel={buttonAriaLabel} />
+      <Breadcrumbs.OverflowButton {...overflowButtonProps} />
       {items.length ? items.slice(splitIndex, items.length) : null}
     </Flex>
   );

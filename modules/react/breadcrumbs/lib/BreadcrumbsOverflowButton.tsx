@@ -13,16 +13,7 @@ import {
 import {useOverflowListTarget} from '@workday/canvas-kit-react/collection';
 import {useMenuTarget} from '@workday/canvas-kit-react/menu';
 import {useBreadcrumbsModel} from './hooks/useBreadcrumbsModel';
-import {TertiaryButton} from '@workday/canvas-kit-react/button';
-
-export interface BreadcrumbsOverflowButtonProps {
-  /**
-   * The accessibility label for the dropdown menu button.
-   *
-   * Suggested value: "more links"
-   */
-  buttonAriaLabel?: string;
-}
+import {TertiaryButton, TertiaryButtonProps} from '@workday/canvas-kit-react/button';
 
 export const useBreadcrumbsOverflowButton = composeHooks(
   createElemPropsHook(useBreadcrumbsModel)((_model, _element) => ({
@@ -37,17 +28,12 @@ export const BreadcrumbsOverflowButton = createSubcomponent('button')({
   displayName: 'Breadcrumbs.OverflowButton',
   modelHook: useBreadcrumbsModel,
   elemPropsHook: useBreadcrumbsOverflowButton,
-})<BreadcrumbsOverflowButtonProps>(({buttonAriaLabel = 'More links', ...elemProps}, Element) => {
+})<TertiaryButtonProps>((elemProps, Element) => {
   const styles = (elemProps as typeof elemProps & {style: FlexProps}).style;
 
   return (
     <Flex alignItems="center" {...styles}>
-      <TertiaryButton
-        as={Element}
-        icon={relatedActionsIcon}
-        aria-label={buttonAriaLabel}
-        {...elemProps}
-      />
+      <TertiaryButton as={Element} icon={relatedActionsIcon} {...elemProps} />
       <SystemIcon
         icon={chevronRightSmallIcon}
         color={colors.licorice200}
