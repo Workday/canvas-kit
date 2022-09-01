@@ -46,6 +46,7 @@ module.exports = {
   ],
   rules: {
     'workday-custom-rules/restricted-imports': 'error',
+    'workday-custom-rules/use-ck-slash-imports': 'error',
     '@typescript-eslint/naming-convention': [
       'error',
       {selector: ['class', 'interface'], format: ['PascalCase']},
