@@ -57,7 +57,6 @@ export const OverflowBreadcrumbs = () => {
         <SecondaryButton onClick={() => setContainerWidth('350px')}>350px</SecondaryButton>
         <SecondaryButton onClick={() => setContainerWidth('235px')}>235px</SecondaryButton>
         <SecondaryButton onClick={() => setContainerWidth('150px')}>150px</SecondaryButton>
-        <SecondaryButton onClick={() => setContainerWidth('100px')}>100px</SecondaryButton>
       </Grid>
     </div>
   );

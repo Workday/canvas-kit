@@ -52,7 +52,7 @@ const ListItem = styled(Text.as('li'))<BreadcrumbsCurrentItemProps & StyledType>
 );
 
 export const useBreadcrumbsItem = composeHooks(
-  createElemPropsHook(useBreadcrumbsModel)((_model: any, ref: any) => {
+  createElemPropsHook(useBreadcrumbsModel)((_model: any, ref: any, elemProps) => {
     const {localRef} = useLocalRef(useForkRef(ref));
     let shouldShowTooltip = false;
     const refCurrent = localRef.current;
@@ -62,10 +62,12 @@ export const useBreadcrumbsItem = composeHooks(
       shouldShowTooltip = scrollWidth > clientWidth;
     }
 
-    return {tabIndex: shouldShowTooltip ? 0 : undefined, ref: localRef};
+    return {
+      tabIndex: shouldShowTooltip ? 0 : undefined,
+      ref: localRef,
+    };
   }),
   useOverflowListItemMeasure,
-
   useListItemRegister
 );
 
@@ -73,7 +75,7 @@ export const BreadcrumbsCurrentItem = createSubcomponent('li')({
   displayName: 'Breadcrumbs.Item',
   modelHook: useBreadcrumbsModel,
   elemPropsHook: useBreadcrumbsItem,
-})<BreadcrumbsCurrentItemProps & {ref?: React.RefObject<HTMLLIElement>}>(
+})<BreadcrumbsCurrentItemProps>(
   ({children, tooltipProps = {}, maxWidth, ...elemProps}, Element) => {
     return (
       <OverflowTooltip {...tooltipProps}>

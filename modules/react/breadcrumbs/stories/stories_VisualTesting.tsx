@@ -66,9 +66,9 @@ export const WithOverflowMenu = () => {
     <StaticStates>
       <ComponentStatesTable
         rowProps={[
-          {label: 'Lowest level', props: {maxWidth: 100}},
-          {label: '2 items displayed', props: {maxWidth: 150}},
-          {label: '3 items displayed', props: {maxWidth: 250}},
+          {label: 'Lowest level', props: {maxWidth: 150}},
+          {label: '2 items displayed', props: {maxWidth: 250}},
+          {label: '3 items displayed', props: {maxWidth: 350}},
         ]}
         columnProps={[{label: 'Default', props: {}}]}
       >
