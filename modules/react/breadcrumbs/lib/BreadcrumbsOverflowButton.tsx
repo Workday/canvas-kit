@@ -33,7 +33,12 @@ export const BreadcrumbsOverflowButton = createSubcomponent('button')({
 
   return (
     <Flex alignItems="center" {...styles}>
-      <TertiaryButton as={Element} icon={relatedActionsIcon} {...elemProps} />
+      <TertiaryButton
+        as={Element}
+        icon={relatedActionsIcon}
+        aria-label="More links"
+        {...elemProps}
+      />
       <SystemIcon
         icon={chevronRightSmallIcon}
         color={colors.licorice200}
