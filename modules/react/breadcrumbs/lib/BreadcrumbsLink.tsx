@@ -1,9 +1,8 @@
 import React from 'react';
-import {CSSObject} from '@emotion/styled';
-import {createComponent, ellipsisStyles, styled} from '@workday/canvas-kit-react/common';
+import {styled, createComponent, ellipsisStyles} from '@workday/canvas-kit-react/common';
 import {Hyperlink} from '@workday/canvas-kit-react/button';
 import {OverflowTooltip, OverflowTooltipProps} from '@workday/canvas-kit-react/tooltip';
-import {Text} from '@workday/canvas-kit-react/text';
+import {type} from '@workday/canvas-kit-react/tokens';
 
 export interface BreadcrumbsLinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   /**
@@ -25,25 +24,22 @@ export interface BreadcrumbsLinkProps extends React.AnchorHTMLAttributes<HTMLAnc
 
 type StyledLinkProps = Pick<BreadcrumbsLinkProps, 'maxWidth' | 'href'>;
 
-// default max-width for truncating text
-const DEFAULT_MAX_WIDTH = 350;
+const {color, ...subtextLargeStyles} = type.levels.subtext.large;
 
-export const truncateStyles = (maxWidth: number = DEFAULT_MAX_WIDTH): CSSObject => ({
-  maxWidth,
-  overflow: 'hidden',
-  textOverflow: 'ellipsis',
-  whiteSpace: 'nowrap',
-});
-
-const StyledLink = styled(Text.as(Hyperlink))(({maxWidth}: StyledLinkProps) => ({
-  maxWidth,
-  ...ellipsisStyles,
-}));
+const StyledLink = styled(Hyperlink)(
+  {
+    ...subtextLargeStyles,
+  },
+  ({maxWidth}: StyledLinkProps) => ({
+    maxWidth,
+    ...ellipsisStyles,
+  })
+);
 
 export const BreadcrumbsLink = createComponent('a')({
   displayName: 'Breadcrumbs.Link',
   Component: ({
-    maxWidth,
+    maxWidth = 350,
     onAction,
     onClick,
     href,
@@ -68,15 +64,7 @@ export const BreadcrumbsLink = createComponent('a')({
 
     return (
       <OverflowTooltip {...tooltipProps}>
-        <StyledLink
-          typeLevel="subtext.large"
-          color="blueberry400"
-          maxWidth={maxWidth}
-          href={href}
-          role="link"
-          onClick={handleClick}
-          {...props}
-        >
+        <StyledLink maxWidth={maxWidth} href={href} role="link" onClick={handleClick} {...props}>
           {children}
         </StyledLink>
       </OverflowTooltip>

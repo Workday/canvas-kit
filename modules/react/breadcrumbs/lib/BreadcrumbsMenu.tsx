@@ -13,7 +13,9 @@ export const BreadcrumbsMenu = createContainer()({
   displayName: 'Breadcrumbs.Menu',
   modelHook: useMenuModel,
   subComponents: {
-    Card: Menu.Card,
+    Card: (elemProps: any) => (
+      <Menu.Card width={280} maxWidth={280} maxHeight={296} {...elemProps} />
+    ),
     List: Menu.List,
     Item: (elemProps: any) => <Menu.Item as="a" {...elemProps} />,
     Divider: Menu.Divider,
