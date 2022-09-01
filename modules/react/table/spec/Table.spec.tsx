@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {screen, render} from '@testing-library/react';
 
-import Table from '../lib/Table';
+import {Table} from '../lib/Table';
 
 describe('Table', () => {
   it('should apply a custom class', () => {
