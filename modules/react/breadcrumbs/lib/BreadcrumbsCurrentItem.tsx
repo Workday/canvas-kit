@@ -83,7 +83,7 @@ export const BreadcrumbsCurrentItem = createSubcomponent('li')({
           as={Element}
           typeLevel="subtext.large"
           maxWidth={maxWidth}
-          fontWeight="bold"
+          fontWeight="medium"
           {...elemProps}
         >
           {children}
