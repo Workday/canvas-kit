@@ -1,8 +1,10 @@
 import React from 'react';
 import screenfull from 'screenfull';
 
-import {PopupModel} from './usePopupModel';
 import {PopupStack} from '@workday/canvas-kit-popup-stack';
+import {createElemPropsHook} from '@workday/canvas-kit-react/common';
+
+import {usePopupModel} from './usePopupModel';
 
 /**
  * Makes the popup transfer to the fullscreen element when fullscreen is entered. Without this, the
@@ -12,7 +14,7 @@ import {PopupStack} from '@workday/canvas-kit-popup-stack';
  * Don't use this in conjunction with a hook that will close the popup when entering fullscreen.
  * Doing so would open the popup when the intention was to close it.
  */
-export const useTransferOnFullscreenEnter = (model: PopupModel, elemProps = {}) => {
+export const useTransferOnFullscreenEnter = createElemPropsHook(usePopupModel)(model => {
   const handler = React.useCallback(
     event => {
       if (screenfull.isFullscreen && model.state.stackRef.current) {
@@ -40,5 +42,5 @@ export const useTransferOnFullscreenEnter = (model: PopupModel, elemProps = {}) 
     return;
   }, [handler, visible]);
 
-  return elemProps;
-};
+  return {};
+});

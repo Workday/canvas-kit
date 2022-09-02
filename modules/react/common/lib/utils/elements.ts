@@ -1,21 +1,20 @@
 /**
  * Is an element focusable? This function performs various tests to see if the element in question
- * can receive focus.
+ * can receive focus. Should skip disabled elements as they are not focusable.
  */
 export const isFocusable = (element: HTMLElement) => {
+  if (element.hasAttribute('disabled')) {
+    return null;
+  }
+
   const nodeName = element.nodeName.toLowerCase();
   const validInput = nodeName === 'input' && element.getAttribute('type') !== 'hidden';
   const validAnchor = nodeName === 'a' && element.hasAttribute('href');
   const validAudioVideo = ['audio', 'video'].includes(nodeName) && element.hasAttribute('controls');
   const validImgObject = ['img', 'object'].includes(nodeName) && element.hasAttribute('usemap');
-  const validNativelyFocusable = [
-    'button',
-    'details',
-    'embed',
-    'iframe',
-    'select',
-    'textarea',
-  ].includes(nodeName);
+  const validNativelyFocusable =
+    ['button', 'details', 'embed', 'iframe', 'select', 'textarea'].includes(nodeName) &&
+    element.getAttribute('tabindex') !== '-1';
   const hasTabIndex = element.getAttribute('tabindex') === '0';
 
   return (

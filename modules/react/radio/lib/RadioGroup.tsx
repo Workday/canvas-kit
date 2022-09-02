@@ -42,8 +42,12 @@ const Container = styled('div')<Pick<RadioGroupProps, 'error' | 'grow' | 'theme'
     margin: `-${space.xxxs} -${space.xs}`,
     '& > div': {
       margin: `${space.xxs} ${space.zero}`,
+      alignItems: 'flex-start',
+      '> div': {
+        flex: '0 0 auto',
+      },
       '&:first-of-type': {
-        marginTop: space.xxxs,
+        marginTop: '6px',
       },
       '&:last-child': {
         marginBottom: space.xxxs,

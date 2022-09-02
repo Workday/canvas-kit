@@ -1,5 +1,3 @@
-/** @jsx jsx */
-import {jsx} from '@emotion/core';
 import React from 'react';
 import {colors} from '@workday/canvas-kit-react/tokens';
 import {StaticStates} from '@workday/canvas-kit-react/common';

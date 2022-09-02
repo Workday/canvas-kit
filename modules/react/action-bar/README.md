@@ -1,55 +1,6 @@
-# Canvas Kit Action Bar
+# Canvas Kit React Action Bar
 
-Full width toolbar fixed to bottom of screen.
+`ActionBar` contains primary and secondary actions related to a page or task.
 
-Although not required, [buttons](../../button/react) are often used in in action bars. The primary
-action button should be left aligned followed by secondary buttons. The primary button is on the
-right only in task orchestration and on mobile devices.
-
-## Installation
-
-```sh
-yarn add @workday/canvas-kit-react
-```
-
-## Usage
-
-```tsx
-import * as React from 'react';
-import {PrimaryButton, SecondaryButton} from '@workday/canvas-kit-react/button';
-import {ActionBar} from '@workday/canvas-kit-react/action-bar';
-
-<ActionBar>
-  <PrimaryButton variant="primary">Button</PrimaryButton>
-  <SecondaryButton>Button</SecondaryButton>
-  <SecondaryButton>Button</SecondaryButton>
-</ActionBar>;
-```
-
-## Static Properties
-
-> None
-
-## Component Props
-
-### Required
-
-> None
-
-### Optional
-
-#### `fixed: boolean`
-
-> Fixes the toolbar to the bottom of the window (uses `position: fixed`)
-
-## Responsive Behavior
-
-At 575px, responsive styles will take effect:
-
-- Applies a flex box to the buttons
-- Makes single-button groups full width
-- All buttons will become the same width (`flex: 1`).
-- Button order will become reversed, making left-aligned primary buttons right-aligned.
-
-> When on a mobile form factor, the button placement should flip to have the primary button on the
-> far right.
+For more detailed information on this component, please refer to the
+[storybook documentation](https://workday.github.io/canvas-kit/?path=/docs/components-buttons-action-bar-react--basic)

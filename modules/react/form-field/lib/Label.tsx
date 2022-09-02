@@ -1,7 +1,6 @@
 import * as React from 'react';
-import styled from '@emotion/styled';
 import {colors, space, type} from '@workday/canvas-kit-react/tokens';
-import {accessibleHide as accessibleHideCSS} from '@workday/canvas-kit-react/common';
+import {accessibleHide as accessibleHideCSS, styled} from '@workday/canvas-kit-react/common';
 import {FormFieldLabelPosition, FormFieldLabelPositionBehavior} from './types';
 
 export interface LabelProps extends FormFieldLabelPositionBehavior {

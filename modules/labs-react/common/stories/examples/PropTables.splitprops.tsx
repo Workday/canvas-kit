@@ -9,7 +9,7 @@ import {
   LayoutStyleProps,
   PositionStyleProps,
   SpaceStyleProps,
-} from '@workday/canvas-kit-labs-react/common';
+} from '@workday/canvas-kit-react/layout';
 // border props
 export const BoxBorder = (props: BorderStyleProps) => <div />;
 export const BoxBorderShorthand = (
