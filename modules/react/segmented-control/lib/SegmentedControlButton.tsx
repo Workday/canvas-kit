@@ -1,5 +1,10 @@
 import React from 'react';
-import {BaseButton, ButtonColors} from '@workday/canvas-kit-react/button';
+import {
+  BaseButton,
+  ButtonColors,
+  ButtonSizes,
+  ButtonContainerProps,
+} from '@workday/canvas-kit-react/button';
 import {
   createComponent,
   mouseFocusBehavior,
@@ -35,12 +40,28 @@ const getIconButtonColors = (toggled?: boolean): ButtonColors => {
   };
 };
 
-const StyledButton = styled(BaseButton)<StyledType>(
+const getMinWidthStyles = (size?: ButtonSizes) => {
+  switch (size) {
+    case 'large':
+      return `calc(${space.xl} + ${space.xxs})`;
+
+    case 'medium':
+      return space.xl;
+
+    case 'small':
+      return space.l;
+
+    default:
+      return space.l;
+  }
+};
+
+const StyledButton = styled(BaseButton)<ButtonContainerProps & StyledType>(
   {
     borderRadius: borderRadius.zero,
     border: `1px solid ${colors.soap500}`,
     borderLeft: 'none',
-    minWidth: space.xl,
+
     '&:first-of-type': {
       borderRadius: `${borderRadius.m} 0 0 ${borderRadius.m}`,
       borderLeft: `1px solid ${colors.soap500}`,
@@ -79,10 +100,14 @@ const StyledButton = styled(BaseButton)<StyledType>(
         background: theme.canvas.palette.primary.main,
       },
     },
+  }),
+  ({size}: ButtonContainerProps) => ({
+    width: getMinWidthStyles(size),
+    height: getMinWidthStyles(size),
   })
 );
 
-export interface SegmentedControlButtonProps {
+export interface SegmentedControlButtonProps extends ButtonContainerProps {
   toggled?: boolean;
   icon: CanvasSystemIcon;
   value?: string | number;
@@ -101,7 +126,7 @@ export const SegmentedControlButton = createComponent('button')({
         ref={ref}
         {...props}
       >
-        <BaseButton.Icon size="large" icon={icon} />
+        <BaseButton.Icon size={props.size || 'large'} icon={icon} />
       </StyledButton>
     );
   },
