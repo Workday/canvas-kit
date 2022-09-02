@@ -78,7 +78,8 @@ All you need to supply is the translated text for items and ARIA labels.
 #### Usage
 
 `Breadcrumbs` is a container component that is responsible for creating a `BreadcrumbsModel` and
-sharing it with its subcomponents using React context. It does not represent a real element.
+sharing it with its subcomponents using React context. It also renders `nav` element with default
+`aria-label` as `breadcrumbs`
 
 ```tsx
 <Breadcrumbs items={[]}>{/* Child components */}</Breadcrumbs>
@@ -106,7 +107,8 @@ to `Breadcrumbs` will be ignored.
 #### Usage
 
 `Breadcrumbs.List` is a `Flex` component rendered as a `<ul>` element and wrapped within a `<nav>`
-element. It is a container for `Breadcrumbs.Item` subcomponents.
+element. It is a container for `Breadcrumbs.Item` subcomponents. `Breadcrumbs` accepts an
+`aria-label` prop for its `<nav>` element.
 
 ```tsx
 <Breadcrumbs.List>{/* Breadcrumbs.Items */}</Breadcrumbs.List>
@@ -114,8 +116,8 @@ element. It is a container for `Breadcrumbs.Item` subcomponents.
 
 #### Props
 
-`Breadcrumbs.List` accepts an `aria-label` prop for its `<nav>` element and a `buttonAriaLabel` prop
-which is applied as an `aria-label` to the overflow button.
+`Breadcrumbs.List` accepts a `overflowButtonProps` prop allowing to set specific props for overflow
+button.
 
 All undocumented props are spread to the underlying `Flex` component.
 
