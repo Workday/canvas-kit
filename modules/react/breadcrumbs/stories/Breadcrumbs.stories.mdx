@@ -40,9 +40,8 @@ be composed in a variety of ways: `Breadcrumbs.List`, `Breadcrumbs.Item`, `Bread
 and `Breadcrumbs.Link`.
 
 Accessibility is built into `Breadcrumbs` in a way that allows you to create an inclusive experience
-with little additional configuration. As seen in the example below, the only ARIA attribute you'll
-need to add is an `aria-label` to the `Breadcrumbs.List`. All other accessibility attributes are
-baked into the component.
+with little additional configuration. As seen in the example below, you don't need to pass any accessibility attributes, because they are
+baked into the component. You also can specifc `aria-label` attribute to a `nav` component (default value is `breadcrumbs`) through a `aria-label` prop of `Breadcrumbs` and `aria-label` to overflow button through `overflowButtonProps` of `Breadcrumbs.List` components.
 
 <ExampleCodeBlock code={Basic} />
 
@@ -106,9 +105,7 @@ to `Breadcrumbs` will be ignored.
 
 #### Usage
 
-`Breadcrumbs.List` is a `Flex` component rendered as a `<ul>` element and wrapped within a `<nav>`
-element. It is a container for `Breadcrumbs.Item` subcomponents. `Breadcrumbs` accepts an
-`aria-label` prop for its `<nav>` element.
+`Breadcrumbs.List` is a `Flex` component rendered as a `<ul>` element. It is a container for `Breadcrumbs.Item` subcomponents.
 
 ```tsx
 <Breadcrumbs.List>{/* Breadcrumbs.Items */}</Breadcrumbs.List>
