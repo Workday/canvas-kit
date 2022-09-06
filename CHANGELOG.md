@@ -3,6 +3,67 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v7.3.0](https://github.com/Workday/canvas-kit/releases/tag/v7.3.0) (2022-08-31)
+
+### Components
+
+- feat(labs): Add expandable container component ([#1562](https://github.com/Workday/canvas-kit/pull/1562)) ([@giulialubet](https://github.com/giulialubet))
+- fix: Update avatar on expandable component ([#1739](https://github.com/Workday/canvas-kit/pull/1739)) ([@mannycarrera4](https://github.com/mannycarrera4))
+- feat(labs): New compound toast component ([#1432](https://github.com/Workday/canvas-kit/pull/1432)) ([@ckaptan](https://github.com/ckaptan))
+- fix: Update Toast import statements ([#1760](https://github.com/Workday/canvas-kit/pull/1760)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
+## [v7.2.11](https://github.com/Workday/canvas-kit/releases/tag/v7.2.11) (2022-08-31)
+
+### Components
+
+- fix(pagination): Fixes onPageChange regression ([#1748](https://github.com/Workday/canvas-kit/pull/1748)) ([@alanbsmith](https://github.com/alanbsmith))
+
+### Infastructure
+
+- ci: Update secret to new token for project board actions ([#1757](https://github.com/Workday/canvas-kit/pull/1757)) ([@jaclynjessup](https://github.com/jaclynjessup))
+
+### Infrastructure
+
+- ci: Update project board automations ([@jaclynjessup](https://github.com/jaclynjessup))
+
+
+## [v7.2.10](https://github.com/Workday/canvas-kit/releases/tag/v7.2.10) (2022-08-29)
+
+### Components
+
+- fix(menu): Fix issue with color change on menu item icon hover ([#1744](https://github.com/Workday/canvas-kit/pull/1744)) ([@RayRedGoose](https://github.com/RayRedGoose))
+
+
+## [v7.2.9](https://github.com/Workday/canvas-kit/releases/tag/v7.2.9) (2022-08-16)
+
+### Infrastructure
+
+- ci: Add project board automations ([#1729](https://github.com/Workday/canvas-kit/pull/1729)) ([@jaclynjessup](https://github.com/jaclynjessup))
+
+
+## [v7.2.8](https://github.com/Workday/canvas-kit/releases/tag/v7.2.8) (2022-08-15)
+
+### Components
+
+- fix: Change link URL to non-interactive examples ([#1731](https://github.com/Workday/canvas-kit/pull/1731)) ([@stefano-puzzuoli](https://github.com/stefano-puzzuoli))
+
+
+## [v7.2.7](https://github.com/Workday/canvas-kit/releases/tag/v7.2.7) (2022-08-12)
+
+### Components
+
+- fix: Ignore tabIndex to take elements out of the focus order ([#1723](https://github.com/Workday/canvas-kit/pull/1723)) ([@smopur](https://github.com/smopur))
+  Fixes tabbing out of a a control where elements in the control are excluded from the tab order
+
+
+## [v7.2.6](https://github.com/Workday/canvas-kit/releases/tag/v7.2.6) (2022-08-11)
+
+### Documentation
+
+- docs: Fix RadioGroup Basic example ([#1726](https://github.com/Workday/canvas-kit/pull/1726)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
 ## [v7.2.5](https://github.com/Workday/canvas-kit/releases/tag/v7.2.5) (2022-07-28)
 
 ### Infrastructure
