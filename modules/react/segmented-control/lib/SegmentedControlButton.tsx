@@ -40,20 +40,14 @@ const getIconButtonColors = (toggled?: boolean): ButtonColors => {
   };
 };
 
-const getMinWidthStyles = (size?: ButtonSizes) => {
-  switch (size) {
-    case 'large':
-      return `calc(${space.xl} + ${space.xxs})`;
+const getSizeStyles = (size?: ButtonSizes) => {
+  const sizeValue =
+    size === 'large' ? `calc(${space.xl} + ${space.xxs})` : size === 'small' ? space.l : space.xl;
 
-    case 'medium':
-      return space.xl;
-
-    case 'small':
-      return space.l;
-
-    default:
-      return space.l;
-  }
+  return {
+    width: sizeValue,
+    height: sizeValue,
+  };
 };
 
 const StyledButton = styled(BaseButton)<ButtonContainerProps & StyledType>(
@@ -102,8 +96,7 @@ const StyledButton = styled(BaseButton)<ButtonContainerProps & StyledType>(
     },
   }),
   ({size}: ButtonContainerProps) => ({
-    width: getMinWidthStyles(size),
-    height: getMinWidthStyles(size),
+    ...getSizeStyles(size),
   })
 );
 
@@ -111,6 +104,7 @@ export interface SegmentedControlButtonProps extends ButtonContainerProps {
   toggled?: boolean;
   icon: CanvasSystemIcon;
   value?: string | number;
+  size?: 'small' | 'medium' | 'large';
 }
 
 export const SegmentedControlButton = createComponent('button')({
