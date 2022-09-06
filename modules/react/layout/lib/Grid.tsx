@@ -4,7 +4,7 @@ import {createComponent, StyledType} from '@workday/canvas-kit-react/common';
 import {Box, BoxProps} from './Box';
 
 import {grid, GridStyleProps} from './utils/grid';
-import {gridItem, GridItemStyleProps} from './utils/gridItem';
+import {GridItemStyleProps} from './utils/gridItem';
 
 export type GridProps = BoxProps & GridStyleProps;
 export type GridItemProps = BoxProps & GridItemStyleProps;
@@ -16,15 +16,13 @@ const StyledGrid = styled(Box)<StyledType & GridProps>(
   grid
 );
 
-const StyledGridItem = styled(Box)<StyledType & GridItemProps>(gridItem);
-
 const GridItem = createComponent('div')({
   displayName: 'Grid.Item',
-  Component: ({children, ...elemProps}: GridItemProps, ref, Element) => {
+  Component: ({children, ...elemProps}: BoxProps, ref, Element) => {
     return (
-      <StyledGridItem as={Element} ref={ref} {...elemProps}>
+      <Box as={Element} ref={ref} {...elemProps}>
         {children}
-      </StyledGridItem>
+      </Box>
     );
   },
 });
