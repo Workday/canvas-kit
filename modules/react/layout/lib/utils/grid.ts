@@ -63,7 +63,7 @@ const gridColumnGap = (value: GridSpacePropsValues) => {
   return {gridColumnGap: spaceTokens[value as keyof CanvasSpace] || value};
 };
 
-const GridSpaceStyleProps = {
+const gridSpaceStyleProps = {
   gridGap,
   gridRowGap,
   gridColumnGap,
@@ -117,9 +117,9 @@ export function grid<P extends SpaceStyleProps>(props: P) {
         // @ts-ignore TS doesn't like adding a potentially unknown key to an object, but because we own this object, it's fine.
         styles[attr] = value;
       }
-      if (key in GridSpaceStyleProps) {
+      if (key in gridSpaceStyleProps) {
         const value = props[key as keyof gridSpaceProps] as GridSpacePropsValues;
-        const spaceFn = GridSpaceStyleProps[key as keyof gridSpaceProps];
+        const spaceFn = gridSpaceStyleProps[key as keyof gridSpaceProps];
         const style = spaceFn(value);
         styles = {...styles, ...style};
       }
