@@ -116,7 +116,6 @@ export function grid<P extends SpaceStyleProps>(props: P) {
         const value = props[key];
         // @ts-ignore TS doesn't like adding a potentially unknown key to an object, but because we own this object, it's fine.
         styles[attr] = value;
-        continue;
       }
       if (key in gridSpaceStyleProps) {
         const value = props[key as keyof gridSpaceProps] as GridSpacePropsValues;
