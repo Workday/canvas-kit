@@ -48,7 +48,7 @@ export const OverflowBreadcrumbs = () => {
         </Breadcrumbs>
       </Box>
       <hr />
-      <h4>Change tab container size</h4>
+      <h4>Change Breadcrumb container size</h4>
       <Grid gridTemplateColumns="repeat(4, 1fr)" gridGap="8px">
         <SecondaryButton onClick={() => setContainerWidth('100%')}>100%</SecondaryButton>
         <SecondaryButton onClick={() => setContainerWidth('700px')}>700px</SecondaryButton>
