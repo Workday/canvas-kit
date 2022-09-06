@@ -40,8 +40,11 @@ be composed in a variety of ways: `Breadcrumbs.List`, `Breadcrumbs.Item`, `Bread
 and `Breadcrumbs.Link`.
 
 Accessibility is built into `Breadcrumbs` in a way that allows you to create an inclusive experience
-with little additional configuration. As seen in the example below, you don't need to pass any accessibility attributes, because they are
-baked into the component. You also can specifc `aria-label` attribute to a `nav` component (default value is `breadcrumbs`) through a `aria-label` prop of `Breadcrumbs` and `aria-label` to overflow button through `overflowButtonProps` of `Breadcrumbs.List` components.
+with little additional configuration. As seen in the example below, you don't need to pass any
+accessibility attributes, because they are baked into the component. You also can specifc
+`aria-label` attribute to a `nav` component (default value is `breadcrumbs`) through a `aria-label`
+prop of `Breadcrumbs` and `aria-label` to overflow button through `overflowButtonProps` of
+`Breadcrumbs.List` components.
 
 <ExampleCodeBlock code={Basic} />
 
@@ -99,13 +102,16 @@ const model = useBreadcrumbsModel({
 Note that if you pass in a `model` configured with `useBreadcrumbsModel`, configuration props passed
 to `Breadcrumbs` will be ignored.
 
+All undeclared props go to underlying `nav` component.
+
 <ArgsTable of={Breadcrumbs} />
 
 ### Breadcrumbs.List
 
 #### Usage
 
-`Breadcrumbs.List` is a `Flex` component rendered as a `<ul>` element. It is a container for `Breadcrumbs.Item` subcomponents.
+`Breadcrumbs.List` is a `Flex` component rendered as a `<ul>` element. It is a container for
+`Breadcrumbs.Item` subcomponents.
 
 ```tsx
 <Breadcrumbs.List>{/* Breadcrumbs.Items */}</Breadcrumbs.List>

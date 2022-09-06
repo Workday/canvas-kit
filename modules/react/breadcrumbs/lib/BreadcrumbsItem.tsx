@@ -9,14 +9,14 @@ import {
   useListItemRegister,
   useOverflowListItemMeasure,
 } from '@workday/canvas-kit-react/collection';
-import {Flex} from '@workday/canvas-kit-react/layout';
+import {Flex, FlexProps} from '@workday/canvas-kit-react/layout';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {chevronRightSmallIcon} from '@workday/canvas-system-icons-web';
 import {colors, space} from '@workday/canvas-kit-react/tokens';
 import {useBreadcrumbsModel} from './hooks/useBreadcrumbsModel';
 import {BreadcrumbsLink} from './BreadcrumbsLink';
 
-export interface BreadcrumbsItemProps {
+export interface BreadcrumbsItemProps extends FlexProps {
   /**
    * The contents of the action item. This will be the accessible name of the action for screen readers.
    *

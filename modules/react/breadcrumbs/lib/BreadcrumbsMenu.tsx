@@ -2,13 +2,6 @@ import * as React from 'react';
 import {createContainer, ExtractProps} from '@workday/canvas-kit-react/common';
 import {Menu, useMenuModel} from '@workday/canvas-kit-react/menu';
 
-export interface BreadcrumbsProps {
-  /**
-   * The contents of the Breadcrumbs. Can be `Breadcrumbs` children or any valid elements.
-   */
-  children: React.ReactNode;
-}
-
 export const BreadcrumbsMenu = createContainer()({
   displayName: 'Breadcrumbs.Menu',
   modelHook: useMenuModel,

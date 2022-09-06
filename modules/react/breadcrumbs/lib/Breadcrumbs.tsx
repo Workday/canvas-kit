@@ -9,7 +9,7 @@ import {BreadcrumbsLink} from './BreadcrumbsLink';
 import {BreadcrumbsCurrentItem} from './BreadcrumbsCurrentItem';
 import {BreadcrumbsMenu} from './BreadcrumbsMenu';
 
-export interface BreadcrumbsProps {
+export interface BreadcrumbsProps extends React.HTMLAttributes<HTMLElement> {
   /**
    * The accessibility label for the nav element.
    *
@@ -45,12 +45,14 @@ export const Breadcrumbs = createContainer()({
      */
     Menu: BreadcrumbsMenu,
   },
-})<BreadcrumbsProps>(({children, 'aria-label': ariaLabel = 'breadcrumbs'}, _, model) => {
-  return (
-    <Menu model={model.menu}>
-      <nav role="navigation" aria-label={ariaLabel}>
-        {children}
-      </nav>
-    </Menu>
-  );
-});
+})<BreadcrumbsProps>(
+  ({children, 'aria-label': ariaLabel = 'breadcrumbs', ...elemProps}, _, model) => {
+    return (
+      <Menu model={model.menu}>
+        <nav role="navigation" aria-label={ariaLabel} {...elemProps}>
+          {children}
+        </nav>
+      </Menu>
+    );
+  }
+);

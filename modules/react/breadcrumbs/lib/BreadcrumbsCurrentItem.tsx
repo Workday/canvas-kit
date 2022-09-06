@@ -1,5 +1,4 @@
 import React from 'react';
-import {CSSObject} from '@emotion/styled';
 import {
   styled,
   createElemPropsHook,
@@ -16,26 +15,9 @@ import {
   useOverflowListItemMeasure,
 } from '@workday/canvas-kit-react/collection';
 import {useBreadcrumbsModel} from './hooks/useBreadcrumbsModel';
-import {Text} from '@workday/canvas-kit-react/text';
+import {Text, TextProps} from '@workday/canvas-kit-react/text';
 
-// default max-width for truncating text
-const DEFAULT_MAX_WIDTH = 350;
-
-export const truncateStyles = (maxWidth: number = DEFAULT_MAX_WIDTH): CSSObject => ({
-  display: 'inline-block',
-  maxWidth,
-  overflow: 'hidden',
-  textOverflow: 'ellipsis',
-  whiteSpace: 'nowrap',
-});
-
-export interface BreadcrumbsCurrentItemProps extends React.HTMLAttributes<HTMLLIElement> {
-  /**
-   * The max-width of the text
-   *
-   * @default 350px
-   */
-  maxWidth?: number;
+export interface BreadcrumbsCurrentItemProps extends TextProps {
   tooltipProps?: OverflowTooltipProps;
 }
 
@@ -76,7 +58,7 @@ export const BreadcrumbsCurrentItem = createSubcomponent('li')({
   modelHook: useBreadcrumbsModel,
   elemPropsHook: useBreadcrumbsItem,
 })<BreadcrumbsCurrentItemProps>(
-  ({children, tooltipProps = {}, maxWidth, ...elemProps}, Element) => {
+  ({children, tooltipProps = {}, maxWidth = '350px', ...elemProps}, Element) => {
     return (
       <OverflowTooltip {...tooltipProps}>
         <ListItem
