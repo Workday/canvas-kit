@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Grid} from '@workday/canvas-kit-react/layout';
+import {Box, Grid} from '@workday/canvas-kit-react/layout';
 
 const Cell = (props: {children: React.ReactNode}) => {
   return (
@@ -36,7 +36,7 @@ const CellItem = (props: {children: React.ReactNode}) => {
 
 export const GridLayout = () => {
   return (
-    <Grid padding="xs">
+    <Box padding="xs">
       <Grid
         gridTemplateColumns="repeat(auto-fit, minmax(300px, 1fr))"
         padding="xxs"
@@ -59,6 +59,6 @@ export const GridLayout = () => {
           </Grid>
         </Grid.Item>
       </Grid>
-    </Grid>
+    </Box>
   );
 };

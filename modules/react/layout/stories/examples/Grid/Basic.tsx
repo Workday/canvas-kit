@@ -41,7 +41,7 @@ const Footer = ({children, ...props}: GridProps) => (
   </Grid>
 );
 
-export const UIExample = () => {
+export const Basic = () => {
   const parentCont = {
     gridTemplateAreas:
       "'Header Header Header Header' 'SideBar BodyContent BodyContent BodyContent' 'Footer Footer Footer Footer'",
