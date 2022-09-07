@@ -20,7 +20,7 @@ export const PopupHeading = createSubcomponent('h2')({
       marginInlineStart="l"
       marginInlineEnd="l"
       marginTop="l"
-      marginBottom="xxs"
+      marginBottom="s"
       {...elemProps}
     >
       {children}
