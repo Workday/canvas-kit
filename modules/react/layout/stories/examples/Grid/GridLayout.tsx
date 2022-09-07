@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Grid} from '@workday/canvas-kit-react/layout';
+import {Box, Grid} from '@workday/canvas-kit-react/layout';
 
 const Cell = (props: {children: React.ReactNode}) => {
   return (
@@ -21,7 +21,6 @@ const CellItem = (props: {children: React.ReactNode}) => {
     <Grid
       alignContent="center"
       gridAutoColumns="max-content"
-      gridGap="0 16px"
       height="100%"
       gridAutoFlow="column"
       padding="xs"
@@ -37,21 +36,21 @@ const CellItem = (props: {children: React.ReactNode}) => {
 
 export const GridLayout = () => {
   return (
-    <Grid gridAutoFlow="row" padding="xs" gridGap="10px 0">
+    <Box padding="xs">
       <Grid
         gridTemplateColumns="repeat(auto-fit, minmax(300px, 1fr))"
-        gridGap="10px"
         padding="xxs"
         border="5px solid #c860d1"
+        gridGap="xs"
       >
         <Grid.Item gridRowStart="2">
-          <Grid gridTemplateColumns="repeat(auto-fit, minmax(300px, 1fr))" gridGap="10px">
+          <Grid gridTemplateColumns="repeat(auto-fit, minmax(300px, 1fr))" gridGap="xxs">
             <Cell>1</Cell>
             <Cell>2</Cell>
           </Grid>
         </Grid.Item>
         <Grid.Item gridRowStart="1">
-          <Grid gridTemplateColumns="repeat(auto-fit, minmax(100px, 1fr))" gridGap="10px">
+          <Grid gridTemplateColumns="repeat(auto-fit, minmax(100px, 1fr))" gridGap="xxs">
             <CellItem>3</CellItem>
             <CellItem>4</CellItem>
             <CellItem>5</CellItem>
@@ -60,6 +59,6 @@ export const GridLayout = () => {
           </Grid>
         </Grid.Item>
       </Grid>
-    </Grid>
+    </Box>
   );
 };
