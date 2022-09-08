@@ -73,8 +73,10 @@ export const PopupCard = createSubcomponent('div')({
       depth={5}
       maxWidth={`calc(100vw - ${space.l})`}
       flexDirection="column"
+      spacing="xxs"
       minHeight={0}
-      padding="zero"
+      padding="m"
+      // margin="m"
       maxHeight={`calc(100vh - ${
         elemProps.margin ? space[elemProps.margin as CanvasSpaceKeys] || elemProps.margin : space.xl
       } * 2)`}

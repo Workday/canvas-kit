@@ -27,16 +27,16 @@ export const CustomFocus = () => {
             <Box as="p" marginTop={0} marginBottom="m">
               Enter name to confirm deletion
             </Box>
-            <FormField label="Item name">
+            <FormField label="Item name" style={{marginBottom: 0}}>
               <TextInput ref={ref} value={value} onChange={e => setValue(e.currentTarget.value)} />
             </FormField>
-            <HStack spacing="s">
-              <Modal.CloseButton as={DeleteButton} onClick={handleDelete}>
-                Delete
-              </Modal.CloseButton>
-              <Modal.CloseButton>Cancel</Modal.CloseButton>
-            </HStack>
           </Modal.Body>
+          <HStack spacing="s" padding="xxs">
+            <Modal.CloseButton as={DeleteButton} onClick={handleDelete}>
+              Delete
+            </Modal.CloseButton>
+            <Modal.CloseButton>Cancel</Modal.CloseButton>
+          </HStack>
         </Modal.Card>
       </Modal.Overlay>
     </Modal>

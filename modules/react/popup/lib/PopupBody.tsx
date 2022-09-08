@@ -8,7 +8,5 @@ export const PopupBody = createSubcomponent('div')({
   displayName: 'Popup.Body',
   modelHook: usePopupModel,
 })<ExtractProps<typeof Card.Body>>(elemProps => {
-  return (
-    <Card.Body overflowY="auto" paddingX={'l'} paddingTop="xxs" paddingBottom="l" {...elemProps} />
-  );
+  return <Card.Body overflowY="auto" padding="xxs" {...elemProps} />;
 });

@@ -42,13 +42,13 @@ export const ReturnFocus = () => {
             <Box as="p" marginTop={0} marginBottom="m">
               Are you sure you want to delete the item?
             </Box>
-            <HStack spacing="s">
-              <Modal.CloseButton as={DeleteButton} onClick={handleDelete}>
-                Delete
-              </Modal.CloseButton>
-              <Modal.CloseButton>Cancel</Modal.CloseButton>
-            </HStack>
           </Modal.Body>
+          <HStack spacing="s" padding="xxs">
+            <Modal.CloseButton as={DeleteButton} onClick={handleDelete}>
+              Delete
+            </Modal.CloseButton>
+            <Modal.CloseButton>Cancel</Modal.CloseButton>
+          </HStack>
         </Modal.Card>
       </Modal.Overlay>
     </Modal>

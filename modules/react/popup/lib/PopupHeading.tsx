@@ -17,10 +17,11 @@ export const PopupHeading = createSubcomponent('h2')({
   return (
     <Card.Heading
       as={Element}
-      marginInlineStart="l"
-      marginInlineEnd="l"
-      marginTop="l"
-      marginBottom="s"
+      // marginInlineStart="l"
+      // marginInlineEnd="l"
+      // marginTop="l"
+      marginBottom="zero"
+      padding="xxs"
       {...elemProps}
     >
       {children}
