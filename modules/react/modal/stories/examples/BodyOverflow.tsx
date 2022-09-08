@@ -17,6 +17,10 @@ export const BodyOverflow = () => {
           <Modal.CloseIcon aria-label="Close" />
           <Modal.Heading>Delete Item</Modal.Heading>
           <Modal.Body>
+            <PrimaryButton>FOCUSSSSSSSSSS</PrimaryButton>
+            <p>Are you sure you want to delete the item?</p>
+            <p>Are you sure you want to delete the item?</p>
+            <PrimaryButton>FOCUSSSSSSSSSS</PrimaryButton>
             <p>Are you sure you want to delete the item?</p>
             <p>Are you sure you want to delete the item?</p>
             <p>Are you sure you want to delete the item?</p>
@@ -39,8 +43,7 @@ export const BodyOverflow = () => {
             <p>Are you sure you want to delete the item?</p>
             <p>Are you sure you want to delete the item?</p>
             <p>Are you sure you want to delete the item?</p>
-            <p>Are you sure you want to delete the item?</p>
-            <p>Are you sure you want to delete the item?</p>
+            <PrimaryButton>FOCUSSSSSSSSSS</PrimaryButton>
           </Modal.Body>
           <HStack spacing="s" padding="xxs">
             <Modal.CloseButton as={DeleteButton} onClick={handleDelete}>
