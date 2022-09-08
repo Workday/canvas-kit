@@ -3,9 +3,9 @@ import * as React from 'react';
 import {createComponent, useModelContext} from '@workday/canvas-kit-react/common';
 
 import {PopupModel, PopupModelContext, usePopupPopper} from './hooks';
-import {Placement, PopperOptions, Popper} from './Popper';
+import {Placement, PopperOptions, Popper, PopperProps} from './Popper';
 
-export interface PopupPopperProps {
+export interface PopupPopperProps extends PopperProps {
   /**
    * Optionally pass a model directly to this component. Default is to implicitly use the same
    * model as the container component which uses React context. Only use this for advanced use-cases
@@ -22,7 +22,6 @@ export interface PopupPopperProps {
    * The additional options passed to the Popper's `popper.js` instance.
    */
   popperOptions?: Partial<PopperOptions>;
-  children?: React.ReactNode;
 }
 
 export const PopupPopper = createComponent('div')({
