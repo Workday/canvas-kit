@@ -39,7 +39,7 @@ const TestModal = () => {
             <Modal.CloseIcon aria-label="Close" />
             <Modal.Heading>Delete Item</Modal.Heading>
             <Modal.Body>
-              <Box as="p" marginY="xxs">
+              <Box as="p" marginY="zero">
                 Are you sure you want to delete the item?
               </Box>
             </Modal.Body>
