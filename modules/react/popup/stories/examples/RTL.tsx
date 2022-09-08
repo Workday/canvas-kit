@@ -12,7 +12,7 @@ export const RTL = () => {
         <Popup.CloseIcon aria-label="סגור" />
         <Popup.Heading>למחוק פריט</Popup.Heading>
         <Popup.Body>
-          <Box as="p" marginTop="zero">
+          <Box as="p" marginY="zero">
             האם ברצונך למחוק פריט זה
           </Box>
         </Popup.Body>
