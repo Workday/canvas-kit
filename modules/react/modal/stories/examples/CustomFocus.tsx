@@ -31,7 +31,7 @@ export const CustomFocus = () => {
               <TextInput ref={ref} value={value} onChange={e => setValue(e.currentTarget.value)} />
             </FormField>
           </Modal.Body>
-          <HStack spacing="s" padding="xxs">
+          <HStack spacing="s" padding="xxs" marginTop="xxs">
             <Modal.CloseButton as={DeleteButton} onClick={handleDelete}>
               Delete
             </Modal.CloseButton>

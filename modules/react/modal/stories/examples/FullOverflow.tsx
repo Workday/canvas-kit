@@ -16,7 +16,7 @@ export const FullOverflow = () => {
         <Modal.Card maxHeight="inherit" height="inherit">
           <Modal.CloseIcon aria-label="Close" />
           <Modal.Heading>Delete Item</Modal.Heading>
-          <Modal.Body paddingBottom="zero">
+          <Modal.Body>
             <p>Are you sure you want to delete the item?</p>
             <p>Are you sure you want to delete the item?</p>
             <p>Are you sure you want to delete the item?</p>
@@ -42,7 +42,7 @@ export const FullOverflow = () => {
             <p>Are you sure you want to delete the item?</p>
             <p>Are you sure you want to delete the item?</p>
           </Modal.Body>
-          <HStack spacing="s" paddingX="l" paddingBottom="l">
+          <HStack spacing="s" padding="xxs" marginTop="xxs">
             <Modal.CloseButton as={DeleteButton} onClick={handleDelete}>
               Delete
             </Modal.CloseButton>

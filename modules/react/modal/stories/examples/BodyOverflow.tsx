@@ -45,7 +45,7 @@ export const BodyOverflow = () => {
             <p>Are you sure you want to delete the item?</p>
             <PrimaryButton>FOCUSSSSSSSSSS</PrimaryButton>
           </Modal.Body>
-          <HStack spacing="s" padding="xxs">
+          <HStack spacing="s" padding="xxs" marginTop="xxs">
             <Modal.CloseButton as={DeleteButton} onClick={handleDelete}>
               Delete
             </Modal.CloseButton>
