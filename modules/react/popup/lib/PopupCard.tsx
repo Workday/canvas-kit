@@ -64,7 +64,7 @@ export const PopupCard = createSubcomponent('div')({
     return getTransformFromPlacement(model.state.placement || 'bottom');
   }, [model.state.placement]);
 
-  // As is a Stack that will render an element of `Element`
+  // As is a Flex that will render an element of `Element`
   const As = useConstant(() => Flex.as(Element));
 
   return (
