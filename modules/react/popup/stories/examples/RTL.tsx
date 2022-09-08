@@ -15,11 +15,11 @@ export const RTL = () => {
           <Box as="p" marginTop="zero">
             האם ברצונך למחוק פריט זה
           </Box>
-          <HStack spacing="s">
-            <DeleteButton>לִמְחוֹק</DeleteButton>
-            <SecondaryButton>לְבַטֵל</SecondaryButton>
-          </HStack>
         </Popup.Body>
+        <HStack spacing="s" padding="xxs" marginTop="xxs">
+          <DeleteButton>לִמְחוֹק</DeleteButton>
+          <SecondaryButton>לְבַטֵל</SecondaryButton>
+        </HStack>
       </Popup.Card>
     </CanvasProvider>
   );
