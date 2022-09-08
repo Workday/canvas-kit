@@ -29,15 +29,15 @@ export const InitialFocus = () => {
           <Popup.CloseIcon aria-label="Close" />
           <Popup.Heading>Confirmation</Popup.Heading>
           <Popup.Body>
-            <Box as="p" marginTop="zero" id="popup-message">
+            <Box as="p" marginY="zero" id="popup-message">
               Your message has been sent!
             </Box>
-            <HStack spacing="s">
-              <Popup.CloseButton ref={initialFocusRef} aria-describedby="popup-message">
-                OK
-              </Popup.CloseButton>
-            </HStack>
           </Popup.Body>
+          <HStack spacing="s" padding="xxs" marginTop="xxs">
+            <Popup.CloseButton ref={initialFocusRef} aria-describedby="popup-message">
+              OK
+            </Popup.CloseButton>
+          </HStack>
         </Popup.Card>
       </Popup.Popper>
     </Popup>

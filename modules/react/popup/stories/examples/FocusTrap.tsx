@@ -43,16 +43,16 @@ export const FocusTrap = () => {
             <Popup.CloseIcon aria-label="Close" />
             <Popup.Heading>Delete Item</Popup.Heading>
             <Popup.Body>
-              <Box as="p" marginTop="zero">
+              <Box as="p" marginY="zero">
                 Are you sure you'd like to delete the item titled 'My Item'?
               </Box>
-              <HStack spacing="s">
-                <Popup.CloseButton as={DeleteButton} onClick={handleDelete}>
-                  Delete
-                </Popup.CloseButton>
-                <Popup.CloseButton>Cancel</Popup.CloseButton>
-              </HStack>
             </Popup.Body>
+            <HStack spacing="s" padding="xxs" marginTop="xxs">
+              <Popup.CloseButton as={DeleteButton} onClick={handleDelete}>
+                Delete
+              </Popup.CloseButton>
+              <Popup.CloseButton>Cancel</Popup.CloseButton>
+            </HStack>
           </Popup.Card>
         </Popup.Popper>
         <SecondaryButton>Next Focusable Button</SecondaryButton>

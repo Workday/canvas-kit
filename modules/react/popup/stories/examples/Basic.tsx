@@ -31,7 +31,7 @@ export const Basic = () => {
           <Popup.CloseIcon aria-label="Close" />
           <Popup.Heading>Delete Item</Popup.Heading>
           <Popup.Body>
-            <Box as="p" marginTop="zero" marginBottom="zero">
+            <Box as="p" marginY="zero">
               Are you sure you'd like to delete the item titled 'My Item'?
             </Box>
           </Popup.Body>

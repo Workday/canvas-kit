@@ -12,13 +12,13 @@ import {
   useConstant,
   createSubcomponent,
 } from '@workday/canvas-kit-react/common';
-import {Flex, FlexItemStyleProps} from '@workday/canvas-kit-react/layout';
+import {Flex, FlexStyleProps} from '@workday/canvas-kit-react/layout';
 
 import {getTransformFromPlacement} from './getTransformFromPlacement';
 import {usePopupCard, usePopupModel} from './hooks';
-export interface PopupCardProps
-  extends ExtractProps<typeof Card, never>,
-    Partial<FlexItemStyleProps> {
+
+export type FlexAndBoxProps = ExtractProps<typeof Card, never> & FlexStyleProps;
+export interface PopupCardProps extends FlexAndBoxProps {
   children?: React.ReactNode;
 }
 
@@ -77,7 +77,6 @@ export const PopupCard = createSubcomponent('div')({
       flexDirection="column"
       minHeight={0}
       padding="m"
-      // margin="m"
       maxHeight={`calc(100vh - ${
         elemProps.margin ? space[elemProps.margin as CanvasSpaceKeys] || elemProps.margin : space.xl
       } * 2)`}
