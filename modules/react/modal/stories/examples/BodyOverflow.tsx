@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {Modal} from '@workday/canvas-kit-react/modal';
-import {DeleteButton, PrimaryButton} from '@workday/canvas-kit-react/button';
+import {DeleteButton} from '@workday/canvas-kit-react/button';
 import {HStack} from '@workday/canvas-kit-react/layout';
 
 export const BodyOverflow = () => {
@@ -17,10 +17,6 @@ export const BodyOverflow = () => {
           <Modal.CloseIcon aria-label="Close" />
           <Modal.Heading>Delete Item</Modal.Heading>
           <Modal.Body>
-            <PrimaryButton>FOCUSSSSSSSSSS</PrimaryButton>
-            <p>Are you sure you want to delete the item?</p>
-            <p>Are you sure you want to delete the item?</p>
-            <PrimaryButton>FOCUSSSSSSSSSS</PrimaryButton>
             <p>Are you sure you want to delete the item?</p>
             <p>Are you sure you want to delete the item?</p>
             <p>Are you sure you want to delete the item?</p>
@@ -43,7 +39,8 @@ export const BodyOverflow = () => {
             <p>Are you sure you want to delete the item?</p>
             <p>Are you sure you want to delete the item?</p>
             <p>Are you sure you want to delete the item?</p>
-            <PrimaryButton>FOCUSSSSSSSSSS</PrimaryButton>
+            <p>Are you sure you want to delete the item?</p>
+            <p>Are you sure you want to delete the item?</p>
           </Modal.Body>
           <HStack spacing="s" padding="xxs" marginTop="xxs">
             <Modal.CloseButton as={DeleteButton} onClick={handleDelete}>
