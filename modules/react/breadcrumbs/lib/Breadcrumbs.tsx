@@ -22,6 +22,31 @@ export interface BreadcrumbsProps extends React.HTMLAttributes<HTMLElement> {
   children: React.ReactNode;
 }
 
+/**
+ * ## Breadcrumbs
+ * ---
+ * [View Developer Docs](https://canvas.workdaydesign.com/components/navigation/breadcrumbs#examples)
+ * 
+ * A compound component that allows users to keep track and maintain awareness
+ * of their location as they navigate through pages, folders, files, etc.
+ * 
+ * @example
+ * ```tsx
+ * <Breadcrumbs aria-label="breadcrumbs">
+ *   <Breadcrumbs.List>
+ *     <Breadcrumbs.Item>
+ *       <Breadcrumbs.Link href="/docs">Docs</Breadcrumbs.Link>
+ *     <Breadcrumbs.Item>
+ *     <Breadcrumbs.Item>
+ *       <Breadcrumbs.Link href="/docs/components">Components</Breadcrumbs.Link>
+ *     <Breadcrumbs.Item>
+ *     <Breadcrumbs.CurrentItem>
+ *       <Breadcrumbs.Link href="/docs/components/breadcrumbs">Breadcrumbs</Breadcrumbs.Link>
+ *     <Breadcrumbs.CurrentItem>
+ *   <Breadcrumbs.List>
+ * </Breadcrumbs>
+ * ```
+ */
 export const Breadcrumbs = createContainer()({
   displayName: 'Breadcrumbs',
   modelHook: useBreadcrumbsModel,
