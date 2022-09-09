@@ -40,6 +40,11 @@ export interface ButtonContainerProps extends BoxProps, GrowthBehavior {
   fillIcon?: boolean;
 }
 
+/**
+ * Extends all the style properties from Box to our buttons
+ */
+export interface BaseButtonProps extends Omit<ButtonContainerProps, 'ref'> {}
+
 function getIconColorSelectors(
   {
     canvas: {
