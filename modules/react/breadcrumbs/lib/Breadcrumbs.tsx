@@ -51,6 +51,13 @@ export const Breadcrumbs = createContainer()({
   displayName: 'Breadcrumbs',
   modelHook: useBreadcrumbsModel,
   subComponents: {
+    /**
+     * ### Breadcrumbs List
+     * ---
+     * [View Developer Docs](https://canvas.workdaydesign.com/components/navigation/breadcrumbs/#breadcrumbslist)
+     * 
+     * The nav list containing `BreadcrumbItems`
+    */
     List: BreadcrumbsList,
     /**
      * ### Breadcrumbs Item
