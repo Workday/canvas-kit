@@ -113,6 +113,13 @@ export const Breadcrumbs = createContainer()({
      * ```
      */
     CurrentItem: BreadcrumbsCurrentItem,
+    /**
+     * ### Breadcrumbs Link
+     * ---
+     * [View Developer Docs](https://canvas.workdaydesign.com/components/navigation/breadcrumbs/#breadcrumbslink)
+     * 
+     * The hyperlink element in each `Breadcrumbs.Item`.
+     */
     Link: BreadcrumbsLink,
     /**
      * ### Breadcrumbs Menu
