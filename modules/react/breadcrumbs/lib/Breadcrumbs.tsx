@@ -115,6 +115,10 @@ export const Breadcrumbs = createContainer()({
     CurrentItem: BreadcrumbsCurrentItem,
     Link: BreadcrumbsLink,
     /**
+     * ### Breadcrumbs Menu
+     * ---
+     * [View Developer Docs](https://canvas.workdaydesign.com/components/navigation/breadcrumbs/#breadcrumbsmenu)
+     *
      * The overflow menu for Breadcrumbs. If there isn't enough room to render all links,
      * it will automatically overflow items into this menu.
      * @example
