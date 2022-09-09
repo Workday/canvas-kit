@@ -52,6 +52,22 @@ export const Breadcrumbs = createContainer()({
   modelHook: useBreadcrumbsModel,
   subComponents: {
     List: BreadcrumbsList,
+    /**
+     * ### Breadcrumbs Item
+     * ---
+     * [View Developer Docs](https://canvas.workdaydesign.com/components/navigation/breadcrumbs/#breadcrumbsitem)
+     * 
+     * List items in `Breadcrumb.List`.
+     * By default, this item is truncated with a tooltip at `350px`,
+     * but that can be customized with the `maxWidth` prop.
+     * 
+     * @example
+     * ```tsx
+     * <Breadcrumbs.Item maxWidth={200}>
+     *   <Breadcrumbs.Link href="/docs">Docs</Breadcrumbs.Link>
+     * </Breadcrumbs.Item>
+     * ```
+     */
     Item: BreadcrumbsItem,
     OverflowButton: BreadcrumbsOverflowButton,
     CurrentItem: BreadcrumbsCurrentItem,
