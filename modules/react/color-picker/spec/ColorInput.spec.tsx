@@ -1,5 +1,5 @@
 import * as React from 'react';
-import ColorInput from '../lib/ColorInput';
+import {ColorInput} from '../lib/ColorInput';
 import {render, fireEvent} from '@testing-library/react';
 
 const id = 'color-input';

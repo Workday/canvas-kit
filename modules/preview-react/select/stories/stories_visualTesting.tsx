@@ -3,9 +3,9 @@ import {StaticStates} from '@workday/canvas-kit-react/common';
 import {ComponentStatesTable, permutateProps} from '@workday/canvas-kit-labs-react/common';
 import {withSnapshotsEnabled, customColorTheme} from '../../../../utils/storybook';
 
-import Select from '../lib/Select';
-import SelectBase from '../lib/SelectBase';
-import SelectOption from '../lib/SelectOption';
+import {Select} from '../lib/Select';
+import {SelectBase} from '../lib/SelectBase';
+import {SelectOption} from '../lib/SelectOption';
 
 import {options} from './stories';
 
