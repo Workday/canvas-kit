@@ -6,7 +6,7 @@ import {useOverflowListMeasure, useListRenderItems} from '@workday/canvas-kit-re
 import {space} from '@workday/canvas-kit-react/tokens';
 import {useBreadcrumbsModel} from './hooks/useBreadcrumbsModel';
 import {Breadcrumbs} from './Breadcrumbs';
-import {TertiaryButtonProps} from '@workday/canvas-kit-react/button';
+import {BreadcrumbsOverflowButton} from './BreadcrumbsOverflowButton';
 
 // Use `Partial` here to make `spacing` optional
 export interface BreadcrumbsListProps<T = any>
