@@ -14,7 +14,7 @@ export interface BreadcrumbsListProps<T = any>
   /**
    * Props passed into overflow button
    */
-  overflowButtonProps?: TertiaryButtonProps;
+  overflowButtonProps?: ExtractProps<typeof BreadcrumbsOverflowButton>;
   /**
    * If items are passed to a `BreadcrumbsModel`, the child of `Breadcrumbs.List` should be a render prop. The
    * List will determine how and when the item will be rendered.
