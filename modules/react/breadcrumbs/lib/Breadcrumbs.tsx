@@ -69,6 +69,25 @@ export const Breadcrumbs = createContainer()({
      * ```
      */
     Item: BreadcrumbsItem,
+    /**
+     * ### Breadcrumbs Overflow Button
+     * ---
+     * [View Developer Docs](https://canvas.workdaydesign.com/components/navigation/breadcrumbs/#breadcrumbsoverflowbutton)
+     * 
+     * The toggle button for the Breadcrumbs Menu.
+     * This button is rendered implicitly in the `Breadcrumbs.List` when the list overflows.
+     * However, if you need to pass props to it, you can do so by passing `overflowButtonProps` to the List.
+     * 
+     * @example
+     * ```tsx
+     * <Breadcrumbs.List
+     *   overflowButtonProps={{
+     *     'aria-label': 'More breadcrumb links',
+     *     onClick={handleOverflowButtonClick}
+     *   }}
+     * >
+     * ```
+     */
     OverflowButton: BreadcrumbsOverflowButton,
     CurrentItem: BreadcrumbsCurrentItem,
     Link: BreadcrumbsLink,
