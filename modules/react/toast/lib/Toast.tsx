@@ -92,11 +92,11 @@ export const Toast = createComponent('div')({
         ref={ref}
         as={Element}
         width={toastWidth}
-        padding="s"
         depth={5}
         role={isInteractive ? 'dialog' : isError ? 'alert' : 'status'}
         aria-live={isInteractive ? 'off' : isError ? 'assertive' : 'polite'}
         aria-atomic={!isInteractive}
+        padding="xxs"
         {...elemProps}
       >
         {onClose && <Popup.CloseIcon aria-label="Close" onClick={onClose} size="small" />}
