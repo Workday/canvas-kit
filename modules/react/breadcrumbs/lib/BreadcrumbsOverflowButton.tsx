@@ -2,7 +2,7 @@ import * as React from 'react';
 import {chevronRightSmallIcon, relatedActionsIcon} from '@workday/canvas-system-icons-web';
 import {colors, space} from '@workday/canvas-kit-react/tokens';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
-import {Flex, FlexProps} from '@workday/canvas-kit-react/layout';
+import {Flex} from '@workday/canvas-kit-react/layout';
 import {
   createElemPropsHook,
   composeHooks,
@@ -16,7 +16,7 @@ import {useBreadcrumbsModel} from './hooks/useBreadcrumbsModel';
 import {TertiaryButton, TertiaryButtonProps} from '@workday/canvas-kit-react/button';
 
 export const useBreadcrumbsOverflowButton = composeHooks(
-  createElemPropsHook(useBreadcrumbsModel)((_model, _element) => ({
+  createElemPropsHook(useBreadcrumbsModel)(() => ({
     'aria-haspopup': true,
     'aria-controls': 'menu',
   })),
@@ -29,10 +29,8 @@ export const BreadcrumbsOverflowButton = createSubcomponent('button')({
   modelHook: useBreadcrumbsModel,
   elemPropsHook: useBreadcrumbsOverflowButton,
 })<TertiaryButtonProps>((elemProps, Element) => {
-  const styles = (elemProps as typeof elemProps & {style: FlexProps}).style;
-
   return (
-    <Flex alignItems="center" {...styles}>
+    <Flex alignItems="center">
       <TertiaryButton
         as={Element}
         icon={relatedActionsIcon}
