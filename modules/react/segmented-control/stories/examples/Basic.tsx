@@ -6,7 +6,7 @@ import {
   deviceTabletIcon,
   percentageIcon,
 } from '@workday/canvas-system-icons-web';
-import {SegmentedControl} from '@workday/canvas-kit-react/segmented-control';
+import {DeprecatedSegmentedControl} from '@workday/canvas-kit-react/segmented-control';
 
 export const Basic = () => {
   const [value, setValue] = React.useState<string | number>();
@@ -15,24 +15,24 @@ export const Basic = () => {
   };
 
   return (
-    <SegmentedControl value={value} onChange={handleToggle}>
-      <SegmentedControl.Button
+    <DeprecatedSegmentedControl value={value} onChange={handleToggle}>
+      <DeprecatedSegmentedControl.Button
         icon={listViewIcon}
         value="list-view"
         onClick={e => console.log('Existing TertiaryButton onClick callback')}
         id="test"
       />
-      <SegmentedControl.Button icon={worksheetsIcon} value="table-view" disabled={true} />
-      <SegmentedControl.Button
+      <DeprecatedSegmentedControl.Button icon={worksheetsIcon} value="table-view" disabled={true} />
+      <DeprecatedSegmentedControl.Button
         icon={deviceTabletIcon}
         value="device-view"
         aria-label="Device View"
       />
-      <SegmentedControl.Button
+      <DeprecatedSegmentedControl.Button
         icon={percentageIcon}
         value="percent-view"
         aria-label="Percent View"
       />
-    </SegmentedControl>
+    </DeprecatedSegmentedControl>
   );
 };

@@ -39,7 +39,7 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
 
   root
     .find(j.ImportDeclaration, {
-      source: {value: (value: string) => value.includes('@workday/canvas-kit-react')},
+      source: {value: (value: string) => value.includes(mainPackage)},
     })
     .forEach(nodePath => {
       nodePath.value.specifiers?.forEach(specifier => {
@@ -54,11 +54,12 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
     });
 
   // Add Deprecated in types using menu interfaces
+  const typeNames = ['LayoutProps', 'ColumnProps'];
   root
     .find(j.TSTypeReference, {
       typeName: {
         type: 'Identifier',
-        name: (name: string) => name === 'LayoutProps' || name === 'ColumnProps',
+        name: (name: string) => typeNames.includes(name),
       },
     })
     .forEach(nodePath => {
@@ -72,8 +73,7 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
     nodePath.node.extends?.forEach(typeExtension => {
       if (
         typeExtension.expression.type === 'Identifier' &&
-        (typeExtension.expression.name === 'LayoutProps' ||
-          typeExtension.expression.name === 'ColumnProps')
+        typeNames.includes(typeExtension.expression.name)
       ) {
         typeExtension.expression.name = `Deprecated${typeExtension.expression.name}`;
       }

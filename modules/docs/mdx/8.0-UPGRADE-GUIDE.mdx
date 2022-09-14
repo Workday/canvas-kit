@@ -180,6 +180,35 @@ import {DeprecatedLayout, DeprecatedColumn} from '@workday/canvas-kit-react/draw
 </DeprecatedLayout>;
 ```
 
+#### SegmentedControl
+
+We are [soft deprecating](#soft-deprecation) `SegmentedControl` and it has been renamed to
+`DeprecatedSegmentedControl`. Similarly, `SegmentedProps` has been renamed to
+`DeprecatedSegmentedProps`. You may continue to use this component, but note that we plan to
+[hard-deprecate](#hard-deprecation) it in Canvas Kit v9.
+
+🤖 The codemod will rename `SegmentedControl` and `SegmentedControlProps` to their deprecated names:
+
+```tsx
+// v7
+import {SegmentedControl} from '@workday/canvas-kit-react/segmented-control';
+
+<SegmentedControl>
+  <SegmentedControl.Button icon={deviceTabletIcon} value="device-view" aria-label="Device View" />
+</SegmentedControl>;
+
+// v8
+import {DeprecatedSegmentedControl} from '@workday/canvas-kit-react/segmented-control';
+
+<DeprecatedSegmentedControl>
+  <DeprecatedSegmentedControl.Button
+    icon={deviceTabletIcon}
+    value="device-view"
+    aria-label="Device View"
+  />
+</DeprecatedSegmentedControl>;
+```
+
 ### Box
 
 #### Updating props

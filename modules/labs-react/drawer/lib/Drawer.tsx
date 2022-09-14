@@ -55,7 +55,7 @@ export enum DeprecatedDrawerDirection {
   Right,
 }
 
-const DeprecatedDrawerContainer = styled('div')<
+const DrawerContainer = styled('div')<
   Pick<DeprecatedDrawerProps, 'width' | 'showDropShadow' | 'openDirection'>
 >(
   {
@@ -133,7 +133,7 @@ export class DeprecatedDrawer extends React.Component<DeprecatedDrawerProps, {}>
     } = this.props;
 
     return (
-      <DeprecatedDrawerContainer
+      <DrawerContainer
         role={role}
         {...elemProps}
         showDropShadow={showDropShadow}
@@ -142,7 +142,7 @@ export class DeprecatedDrawer extends React.Component<DeprecatedDrawerProps, {}>
       >
         {header}
         <ChildrenContainer padding={padding}>{children}</ChildrenContainer>
-      </DeprecatedDrawerContainer>
+      </DrawerContainer>
     );
   }
 }

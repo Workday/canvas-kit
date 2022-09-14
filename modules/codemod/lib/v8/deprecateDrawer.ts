@@ -2,6 +2,7 @@ import {API, FileInfo, Identifier, ImportDeclaration, Options} from 'jscodeshift
 
 const mainPackage = '@workday/canvas-kit-labs-react';
 const drawerPackage = '@workday/canvas-kit-labs-react/drawer';
+const drawerImportNames = ['Drawer', 'DrawerProps', 'DrawerHeaderProps', 'DrawerHeader'];
 
 export default function transformer(file: FileInfo, api: API, options: Options) {
   const j = api.jscodeshift;
@@ -23,14 +24,7 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
       (nodePath.specifiers || []).forEach(specifier => {
         if (specifier.type === 'ImportSpecifier') {
           const specifierName = specifier.imported.name;
-          if (
-            specifierName === 'Drawer' ||
-            specifierName === 'DrawerProps' ||
-            specifierName === 'DrawerHeaderProps' ||
-            specifierName === 'DrawerHeader'
-          ) {
-            hasDrawerImports = true;
-          }
+          hasDrawerImports = drawerImportNames.includes(specifierName);
         }
       });
     }
@@ -44,26 +38,17 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
 
   root
     .find(j.ImportDeclaration, {
-      source: {value: (value: string) => value.includes('@workday/canvas-kit-labs-react')},
+      source: {value: (value: string) => value.includes(mainPackage)},
     })
     .forEach(nodePath => {
       nodePath.value.specifiers?.forEach(specifier => {
         if (specifier.type === 'ImportSpecifier') {
           //  `import {Drawer}` becomes `import {DeprecatedDrawer}`
-          if (specifier.imported.name === 'Drawer') {
-            specifier.imported.name = 'DeprecatedDrawer';
-          }
           //  `import {DrawerProps}` becomes `import {DeprecatedDrawerProps}`
-          if (specifier.imported.name === 'DrawerProps') {
-            specifier.imported.name = 'DeprecatedDrawerProps';
-          }
           //  `import {DrawerHeader}` becomes `import {DeprecatedDrawerHeader}`
-          if (specifier.imported.name === 'DrawerHeader') {
-            specifier.imported.name = 'DeprecatedDrawerHeader';
-          }
           //  `import {DrawerHeaderProps}` becomes `import {DeprecatedDrawerHeaderProps}`
-          if (specifier.imported.name === 'DrawerHeaderProps') {
-            specifier.imported.name = 'DeprecatedDrawerHeaderProps';
+          if (drawerImportNames.includes(specifier.imported.name)) {
+            specifier.imported.name = `Deprecated${specifier.imported.name}`;
           }
         }
         return specifier;
@@ -72,20 +57,19 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
 
   // Transform DrawerProps type references
   // e.g. `type CustomProps = DrawerProps;` becomes `type CustomProps = DeprecatedDrawerProps;`
-  root
-    .find(j.TSTypeReference, {typeName: {type: 'Identifier', name: 'DrawerProps'}})
-    .forEach(nodePath => {
-      const identifier = nodePath.value.typeName as Identifier;
-      identifier.name = 'DeprecatedDrawerProps';
-    });
-
   // Transform DrawerHeaderProps type references
   // e.g. `type CustomProps = DrawerHeaderProps;` becomes `type CustomProps = DeprecatedDrawerHeaderProps;`
+  const typeNames = ['DrawerProps', 'DrawerHeaderProps'];
   root
-    .find(j.TSTypeReference, {typeName: {type: 'Identifier', name: 'DrawerHeaderProps'}})
+    .find(j.TSTypeReference, {
+      typeName: {
+        type: 'Identifier',
+        name: (value: string) => typeNames.includes(value),
+      },
+    })
     .forEach(nodePath => {
       const identifier = nodePath.value.typeName as Identifier;
-      identifier.name = 'DeprecatedDrawerHeaderProps';
+      identifier.name = `Deprecated${identifier.name}`;
     });
 
   // Transform DrawerProps type interface declaration references
@@ -93,25 +77,14 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
   root.find(j.TSInterfaceDeclaration).forEach(nodePath => {
     // If the interface is extending DrawerProps, transform the extension name to DeprecatedDrawerProps
     nodePath.node.extends?.forEach(typeExtension => {
-      if (
-        typeExtension.expression.type === 'Identifier' &&
-        typeExtension.expression.name === 'DrawerProps'
-      ) {
-        typeExtension.expression.name = 'DeprecatedDrawerProps';
-      }
-    });
-  });
-
-  // Transform DrawerHeaderProps type interface declaration references
-  // e.g. `interface CustomProps extends DrawerHeaderProps` becomes `interface CustomProps extends DeprecatedDrawerHeaderProps`
-  root.find(j.TSInterfaceDeclaration).forEach(nodePath => {
-    // If the interface is extending DrawerHeaderProps, transform the extension name to DeprecatedDrawerHeaderProps
-    nodePath.node.extends?.forEach(typeExtension => {
-      if (
-        typeExtension.expression.type === 'Identifier' &&
-        typeExtension.expression.name === 'DrawerHeaderProps'
-      ) {
-        typeExtension.expression.name = 'DeprecatedDrawerHeaderProps';
+      if (typeExtension.expression.type === 'Identifier') {
+        const typeExtensionName = typeExtension.expression.name;
+        if (
+          typeExtension.expression.type === 'Identifier' &&
+          typeNames.includes(typeExtensionName)
+        ) {
+          typeExtension.expression.name = `Deprecated${typeExtensionName}`;
+        }
       }
     });
   });
