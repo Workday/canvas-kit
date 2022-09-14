@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {Grid, GridProps, Box} from '@workday/canvas-kit-react/layout';
 import {type} from '@workday/canvas-kit-react/tokens';
-import {fontSizes} from '../../../../tokens/lib/type/fontSizes';
 import styled from '@emotion/styled';
 
 // temporary placeholder until type components are added to canvas-kit
@@ -44,8 +43,9 @@ const Footer = ({children, ...props}: GridProps) => (
 
 export const Basic = () => {
   const parentCont = {
-    gridTemplateAreas: "'Header Header' 'SideBar BodyContent' 'Footer Footer'",
-    gridGap: fontSizes[16],
+    gridTemplateAreas:
+      "'Header Header Header Header' 'SideBar BodyContent BodyContent BodyContent' 'Footer Footer Footer Footer'",
+    gridGap: 's',
     gridTemplateColumns: '3fr 9fr',
     gridTemplateRows: 'auto 300px auto',
   };

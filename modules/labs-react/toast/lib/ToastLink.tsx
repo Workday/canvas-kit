@@ -1,7 +1,8 @@
 import React from 'react';
 
 import {createComponent, styled, StyledType} from '@workday/canvas-kit-react/common';
-import {Hyperlink, HyperlinkProps, space} from '@workday/canvas-kit-react';
+import {Hyperlink, HyperlinkProps} from '@workday/canvas-kit-react/button';
+import {space} from '@workday/canvas-kit-react/tokens';
 
 export interface ToastLinkProps extends HyperlinkProps {
   /**

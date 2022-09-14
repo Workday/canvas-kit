@@ -26,7 +26,7 @@ export const GridStates = () => {
                 border: 'solid 2px',
                 borderColor: 'blackPepper500',
                 padding: '16px',
-                gridGap: '16px',
+                gridGap: 's',
               },
             },
             {
@@ -36,7 +36,7 @@ export const GridStates = () => {
                 border: 'solid 2px',
                 borderColor: 'blackPepper500',
                 padding: '16px',
-                gridGap: '16px',
+                gridGap: 's',
               },
             },
             {
@@ -47,7 +47,7 @@ export const GridStates = () => {
                 border: 'solid 2px',
                 borderColor: 'blackPepper500',
                 padding: '16px',
-                gridGap: '16px',
+                gridGap: 's',
               },
             },
           ]}
@@ -122,7 +122,7 @@ export const GridUILayout = () => {
                 border: 'solid 2px',
                 borderColor: 'blackPepper500',
                 padding: '16px',
-                gridGap: '16px',
+                gridGap: 's',
               },
             },
           ]}
