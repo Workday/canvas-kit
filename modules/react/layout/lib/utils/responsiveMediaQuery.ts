@@ -1,4 +1,6 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import {useEffect, useState} from 'react';
+import {breakpoints} from '@workday/canvas-kit-react/common';
 
 export const useMediaQuery = (query: string) => {
   const [matches, setMatches] = useState(false);
@@ -18,21 +20,21 @@ export const useMediaQuery = (query: string) => {
 };
 
 export const useBreakpoints = () => {
-  const breakpoints = {
-    zero: useMediaQuery('(min-width: 0)'),
-    isSm: useMediaQuery('(min-width: 320px)'),
-    isMd: useMediaQuery('(min-width: 768px)'),
-    isLg: useMediaQuery('(min-width: 1024px)'),
-    isXl: useMediaQuery('(min-width: 1440px)'),
+  const resPoints = {
+    zero: useMediaQuery(`(min-width: ${breakpoints.zero}px)`),
+    isSm: useMediaQuery(`(min-width: ${breakpoints.s}px)`),
+    isMd: useMediaQuery(`(min-width: ${breakpoints.m}px)`),
+    isLg: useMediaQuery(`(min-width: ${breakpoints.l}px)`),
+    isXl: useMediaQuery(`(min-width: ${breakpoints.xl}px)`),
     active: 'zero',
   };
   /* eslint-disable curly */
-  if (breakpoints.zero) breakpoints.active = 'zero';
-  if (breakpoints.isSm) breakpoints.active = 'sm';
-  if (breakpoints.isMd) breakpoints.active = 'md';
-  if (breakpoints.isLg) breakpoints.active = 'lg';
-  if (breakpoints.isXl) breakpoints.active = 'xl';
-  return breakpoints;
+  if (resPoints.zero) resPoints.active = 'zero';
+  if (resPoints.isSm) resPoints.active = 'sm';
+  if (resPoints.isMd) resPoints.active = 'md';
+  if (resPoints.isLg) resPoints.active = 'lg';
+  if (resPoints.isXl) resPoints.active = 'xl';
+  return resPoints;
 };
 
 export const useBreakpointValues = (breakpointValues: {[x: string]: any}) => {
