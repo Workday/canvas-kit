@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {PopupStack} from '@workday/canvas-kit-popup-stack';
-import {createElemPropsHook} from '@workday/canvas-kit-react/common';
+import {createElemPropsHook, useModalityType} from '@workday/canvas-kit-react/common';
 import {usePopupModel} from '@workday/canvas-kit-react/popup';
 
 /**
@@ -10,6 +10,7 @@ import {usePopupModel} from '@workday/canvas-kit-react/popup';
  * and `useCloseOnOverlayClick` is the Overlay is a child of a `stackRef` element and has a different
  */
 export const useCloseOnOverlayClick = createElemPropsHook(usePopupModel)(model => {
+  const modality = useModalityType();
   const onClick = React.useCallback(
     (event: MouseEvent) => {
       if (!model.state.stackRef.current) {
@@ -30,6 +31,7 @@ export const useCloseOnOverlayClick = createElemPropsHook(usePopupModel)(model =
 
       if (
         dialog &&
+        modality !== 'touch' &&
         elements.length &&
         elements[elements.length - 1] === model.state.stackRef.current &&
         elementsBetweenDialogAnBody.some(element => element === event.target)
@@ -37,7 +39,7 @@ export const useCloseOnOverlayClick = createElemPropsHook(usePopupModel)(model =
         model.events.hide(event);
       }
     },
-    [model.state.stackRef, model.events]
+    [model.state.stackRef, model.events, modality]
   );
 
   const visible = model.state.visibility !== 'hidden';

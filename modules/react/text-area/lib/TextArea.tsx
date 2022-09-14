@@ -107,5 +107,3 @@ export const TextArea = createComponent('textarea')({
     ResizeDirection: TextAreaResizeDirection,
   },
 });
-
-export default TextArea;

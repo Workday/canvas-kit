@@ -3,7 +3,7 @@ import {render} from '@testing-library/react';
 
 import {colors} from '@workday/canvas-kit-react/tokens';
 import {shieldIcon} from '@workday/canvas-accent-icons-web';
-import AccentIcon, {accentIconStyles} from '../lib/AccentIcon';
+import {AccentIcon, accentIconStyles} from '../lib/AccentIcon';
 
 describe('Accent Icon', () => {
   test('Defaults styles are set correctly', () => {

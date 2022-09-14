@@ -10,7 +10,7 @@ import {
 } from '@workday/canvas-kit-react/popup';
 import {HStack, VStack} from '@workday/canvas-kit-react/layout';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
-import Radio, {RadioGroup} from '@workday/canvas-kit-react/radio';
+import {Radio, RadioGroup} from '@workday/canvas-kit-react/radio';
 
 export default {
   title: 'Testing/React/Popups/Modal',
@@ -101,17 +101,15 @@ export const WithRadioButtons = () => {
           <Modal.CloseIcon aria-label="Close" />
           <Modal.Heading>Select Item</Modal.Heading>
           <Modal.Body>
-            <VStack spacing="s">
-              <RadioGroup
-                name="contact"
-                data-testid="radiogroup"
-                value={value}
-                onChange={value => setValue(String(value))}
-              >
-                <Radio id="1" value="email" label="E-mail" />
-                <Radio id="2" value="phone" label="Phone" />
-              </RadioGroup>
-            </VStack>
+            <RadioGroup
+              name="contact"
+              data-testid="radiogroup"
+              value={value}
+              onChange={value => setValue(String(value))}
+            >
+              <Radio id="1" value="email" label="E-mail" />
+              <Radio id="2" value="phone" label="Phone" />
+            </RadioGroup>
           </Modal.Body>
         </Modal.Card>
       </Modal.Overlay>

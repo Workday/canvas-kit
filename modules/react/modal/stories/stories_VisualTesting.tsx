@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 import {DeleteButton} from '@workday/canvas-kit-react/button';
 import {Modal, useModalModel} from '@workday/canvas-kit-react/modal';
-import {ContentDirection, CanvasProvider} from '@workday/canvas-kit-react/common';
+import {ContentDirection, CanvasProvider, useTheme} from '@workday/canvas-kit-react/common';
 import {HStack, Box} from '@workday/canvas-kit-react/layout';
 
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
@@ -39,14 +39,14 @@ const TestModal = () => {
             <Modal.CloseIcon aria-label="Close" />
             <Modal.Heading>Delete Item</Modal.Heading>
             <Modal.Body>
-              <Box as="p" marginTop={0} marginBottom="m">
+              <Box as="p" marginY="zero">
                 Are you sure you want to delete the item?
               </Box>
-              <HStack spacing="s">
-                <Modal.CloseButton as={DeleteButton}>Delete</Modal.CloseButton>
-                <Modal.CloseButton>Cancel</Modal.CloseButton>
-              </HStack>
             </Modal.Body>
+            <HStack spacing="s" padding="xxs" marginTop="xxs">
+              <Modal.CloseButton as={DeleteButton}>Delete</Modal.CloseButton>
+              <Modal.CloseButton>Cancel</Modal.CloseButton>
+            </HStack>
           </Modal.Card>
         </Modal.Overlay>
       </Modal>
@@ -57,11 +57,12 @@ const TestModal = () => {
 export const ModalSmallWidth = withSnapshotsEnabled(() => <TestModal />);
 
 export const ModalRTL = withSnapshotsEnabled(() => {
+  const theme = useTheme({canvas: {direction: ContentDirection.RTL}});
   const model = useModalModel({
     initialVisibility: 'visible',
   });
   return (
-    <CanvasProvider theme={{canvas: {direction: ContentDirection.RTL}}}>
+    <CanvasProvider theme={theme}>
       <Modal model={model}>
         <Modal.Overlay style={{animation: 'none'}}>
           <Modal.Card style={{animation: 'none'}} width={300}>

@@ -14,7 +14,7 @@ import {Box} from '@workday/canvas-kit-react/layout';
 
 import {useTabsModel} from './useTabsModel';
 
-export interface TabPanelProps<T = unknown> extends ExtractProps<typeof Box, never> {
+export interface TabPanelProps extends ExtractProps<typeof Box, never> {
   /**
    * The contents of the TabPanel.
    */
