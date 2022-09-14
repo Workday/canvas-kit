@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {render, fireEvent} from '@testing-library/react';
-import {SegmentedControl} from '../lib/SegmentedControl';
+import {DeprecatedSegmentedControl} from '../lib/SegmentedControl';
 import {listViewIcon, worksheetsIcon} from '@workday/canvas-system-icons-web';
 
 describe('Segmented Control', () => {
@@ -12,14 +12,18 @@ describe('Segmented Control', () => {
   describe('when rendered', () => {
     it('should render two buttons', () => {
       const {getAllByRole} = render(
-        <SegmentedControl>
-          <SegmentedControl.Button value="list-view" icon={listViewIcon} aria-label="List View" />
-          <SegmentedControl.Button
+        <DeprecatedSegmentedControl>
+          <DeprecatedSegmentedControl.Button
+            value="list-view"
+            icon={listViewIcon}
+            aria-label="List View"
+          />
+          <DeprecatedSegmentedControl.Button
             value="table-view"
             icon={worksheetsIcon}
             aria-label="Table View"
           />
-        </SegmentedControl>
+        </DeprecatedSegmentedControl>
       );
       expect(getAllByRole('button').length).toEqual(2);
     });
@@ -27,17 +31,21 @@ describe('Segmented Control', () => {
 
   // ensure random elements don't break anything
   describe('when clicked', () => {
-    it('should call SegmentedControl onChange callback', () => {
+    it('should call DeprecatedSegmentedControl onChange callback', () => {
       const {getAllByRole} = render(
-        <SegmentedControl onChange={cb}>
-          <SegmentedControl.Button icon={listViewIcon} value="list-view" aria-label="List View" />
-          <SegmentedControl.Button
+        <DeprecatedSegmentedControl onChange={cb}>
+          <DeprecatedSegmentedControl.Button
+            icon={listViewIcon}
+            value="list-view"
+            aria-label="List View"
+          />
+          <DeprecatedSegmentedControl.Button
             icon={worksheetsIcon}
             value="table-view"
             aria-label="Table View"
           />
           <span />
-        </SegmentedControl>
+        </DeprecatedSegmentedControl>
       );
       fireEvent.click(getAllByRole('button')[1]);
 
@@ -48,15 +56,19 @@ describe('Segmented Control', () => {
     it('should preserve existing button onClick callbacks', () => {
       const existingCb = jest.fn();
       const {getAllByRole} = render(
-        <SegmentedControl onChange={cb}>
-          <SegmentedControl.Button icon={listViewIcon} value="list-view" aria-label="List View" />
-          <SegmentedControl.Button
+        <DeprecatedSegmentedControl onChange={cb}>
+          <DeprecatedSegmentedControl.Button
+            icon={listViewIcon}
+            value="list-view"
+            aria-label="List View"
+          />
+          <DeprecatedSegmentedControl.Button
             icon={worksheetsIcon}
             value="table-view"
             aria-label="Table View"
             onClick={existingCb}
           />
-        </SegmentedControl>
+        </DeprecatedSegmentedControl>
       );
 
       fireEvent.click(getAllByRole('button')[1]);
@@ -67,19 +79,19 @@ describe('Segmented Control', () => {
 
     it('disabled buttons should trigger callback', () => {
       const {getAllByRole} = render(
-        <SegmentedControl onChange={cb}>
-          <SegmentedControl.Button
+        <DeprecatedSegmentedControl onChange={cb}>
+          <DeprecatedSegmentedControl.Button
             icon={listViewIcon}
             value="list-view"
             aria-label="List View"
             disabled={true}
           />
-          <SegmentedControl.Button
+          <DeprecatedSegmentedControl.Button
             icon={worksheetsIcon}
             value="table-view"
             aria-label="Table View"
           />
-        </SegmentedControl>
+        </DeprecatedSegmentedControl>
       );
       fireEvent.click(getAllByRole('button')[0]);
 
@@ -95,10 +107,14 @@ describe('Segmented Control', () => {
   describe('when clicked without value', () => {
     it('should call callback with index', () => {
       const {getAllByRole} = render(
-        <SegmentedControl onChange={cb}>
-          <SegmentedControl.Button value="list-view" icon={listViewIcon} aria-label="List View" />
-          <SegmentedControl.Button icon={worksheetsIcon} aria-label="Table View" />
-        </SegmentedControl>
+        <DeprecatedSegmentedControl onChange={cb}>
+          <DeprecatedSegmentedControl.Button
+            value="list-view"
+            icon={listViewIcon}
+            aria-label="List View"
+          />
+          <DeprecatedSegmentedControl.Button icon={worksheetsIcon} aria-label="Table View" />
+        </DeprecatedSegmentedControl>
       );
 
       fireEvent.click(getAllByRole('button')[1]);

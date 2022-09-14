@@ -10,11 +10,11 @@ import {
   percentageIcon,
 } from '@workday/canvas-system-icons-web';
 
-import {SegmentedControl} from '../index';
+import {DeprecatedSegmentedControl} from '../index';
 
 export default withSnapshotsEnabled({
   title: 'Testing/React/Buttons/Segmented Control',
-  component: SegmentedControl,
+  component: DeprecatedSegmentedControl,
   parameters: {
     ReadmePath: 'labs-react/header',
   },
@@ -34,32 +34,32 @@ export const SegmentedControlStates = () => (
       ]}
     >
       {props => (
-        <SegmentedControl value={props.value}>
-          <SegmentedControl.Button
+        <DeprecatedSegmentedControl value={props.value}>
+          <DeprecatedSegmentedControl.Button
             icon={listViewIcon}
             value="list-view"
             aria-label="List View"
             className={props.value === 'list-view' ? props.className : undefined}
           />
-          <SegmentedControl.Button
+          <DeprecatedSegmentedControl.Button
             icon={worksheetsIcon}
             value="table-view"
             aria-label="Table View"
             disabled={true}
           />
-          <SegmentedControl.Button
+          <DeprecatedSegmentedControl.Button
             icon={deviceTabletIcon}
             value="device-view"
             aria-label="Device View"
             className={props.value === 'device-view' ? props.className : undefined}
           />
-          <SegmentedControl.Button
+          <DeprecatedSegmentedControl.Button
             icon={percentageIcon}
             value="percent-view"
             aria-label="Percent View"
             className={props.value === 'percent-view' ? props.className : undefined}
           />
-        </SegmentedControl>
+        </DeprecatedSegmentedControl>
       )}
     </ComponentStatesTable>
   </StaticStates>
