@@ -2,7 +2,13 @@ import {API, FileInfo, Identifier, ImportDeclaration, Options} from 'jscodeshift
 
 const mainPackage = '@workday/canvas-kit-labs-react';
 const drawerPackage = '@workday/canvas-kit-labs-react/drawer';
-const drawerImportNames = ['Drawer', 'DrawerProps', 'DrawerHeaderProps', 'DrawerHeader'];
+const drawerImportNames = [
+  'Drawer',
+  'DrawerProps',
+  'DrawerHeaderProps',
+  'DrawerHeader',
+  'DrawerDirection',
+];
 
 export default function transformer(file: FileInfo, api: API, options: Options) {
   const j = api.jscodeshift;
@@ -18,13 +24,16 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
       hasDrawerImports = true;
       return false;
     }
+
     // If there's an import from the main package, check to see if Drawer or DrawerProps are among the named imports
     // e.g. import {Drawer} from '@workday/canvas-kit-react';
     if (value === mainPackage) {
       (nodePath.specifiers || []).forEach(specifier => {
-        if (specifier.type === 'ImportSpecifier') {
-          const specifierName = specifier.imported.name;
-          hasDrawerImports = drawerImportNames.includes(specifierName);
+        if (
+          specifier.type === 'ImportSpecifier' &&
+          drawerImportNames.includes(specifier.imported.name)
+        ) {
+          hasDrawerImports = true;
         }
       });
     }
@@ -87,6 +96,11 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
         }
       }
     });
+  });
+
+  // Transform `<DrawerDirection>` to `<DeprecatedDrawerDirection>`
+  root.find(j.Identifier, {name: 'DrawerDirection'}).forEach(nodePath => {
+    nodePath.value.name = 'DeprecatedDrawerDirection';
   });
 
   // Transform Drawer JSXElements

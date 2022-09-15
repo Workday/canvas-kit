@@ -50,6 +50,15 @@ export interface DeprecatedDrawerProps extends React.HTMLAttributes<HTMLDivEleme
   role?: string;
 }
 
+/**
+ * ### Deprecated Drawer Direction
+ *
+ * As of Canvas Kit v8, Drawer is being soft-deprecated.
+ * It will be hard-deprecated (completely removed) in v9. Please see the
+ * [upgrade guide](https://workday.github.io/canvas-kit/?path=/story/welcome-upgrade-guides-v8-0--page)
+ * for more information.
+ */
+
 export enum DeprecatedDrawerDirection {
   Left,
   Right,

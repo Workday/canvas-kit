@@ -14,15 +14,47 @@ describe('Canvas Kit Deprecate Drawer Codemod', () => {
     });
 
     it('should properly transform named imports from @workday/canvas-kit-labs-react', () => {
-      const input = `import {Drawer, DrawerProps, DrawerHeader, DrawerHeaderProps} from '@workday/canvas-kit-labs-react'`;
-      const expected = `import {DeprecatedDrawer, DeprecatedDrawerProps, DeprecatedDrawerHeader, DeprecatedDrawerHeaderProps} from '@workday/canvas-kit-labs-react'`;
+      const input = `
+        import {
+          Drawer,
+          DrawerProps,
+          DrawerHeader,
+          DrawerHeaderProps,
+          DrawerDirection,
+        } from '@workday/canvas-kit-labs-react'
+      `;
+      const expected = `
+        import {
+          DeprecatedDrawer,
+          DeprecatedDrawerProps,
+          DeprecatedDrawerHeader,
+          DeprecatedDrawerHeaderProps,
+          DeprecatedDrawerDirection,
+        } from '@workday/canvas-kit-labs-react'
+      `;
 
       expectTransform(input, expected);
     });
 
     it('should properly transform named imports from @workday/canvas-kit-labs-react/drawer', () => {
-      const input = `import {Drawer, DrawerHeader, DrawerHeaderProps} from '@workday/canvas-kit-labs-react/drawer'`;
-      const expected = `import {DeprecatedDrawer, DeprecatedDrawerHeader, DeprecatedDrawerHeaderProps} from '@workday/canvas-kit-labs-react/drawer'`;
+      const input = `
+        import {
+          Drawer,
+          DrawerProps,
+          DrawerHeader,
+          DrawerHeaderProps,
+          DrawerDirection,
+        } from '@workday/canvas-kit-labs-react/drawer'
+      `;
+      const expected = `
+        import {
+          DeprecatedDrawer,
+          DeprecatedDrawerProps,
+          DeprecatedDrawerHeader,
+          DeprecatedDrawerHeaderProps,
+          DeprecatedDrawerDirection,
+        } from '@workday/canvas-kit-labs-react/drawer'
+      `;
 
       expectTransform(input, expected);
     });
@@ -31,10 +63,14 @@ describe('Canvas Kit Deprecate Drawer Codemod', () => {
   context('when transforming identifiers', () => {
     it('should properly transform Drawer JSX identifiers', () => {
       const input = `
-      import {Drawer} from '@workday/canvas-kit-labs-react/drawer';
+      import {Drawer, DrawerDirection} from '@workday/canvas-kit-labs-react/drawer';
   
       const CustomDrawer = () => {
-        return <Drawer>Hello World</Drawer>;
+        return (
+          <Drawer openDirection={DrawerDirection.Left}>
+            Hello World
+          </Drawer>
+        );
       };
 
       const AnotherDrawer = (props) => {
@@ -43,10 +79,14 @@ describe('Canvas Kit Deprecate Drawer Codemod', () => {
       `;
 
       const expected = `
-      import {DeprecatedDrawer} from '@workday/canvas-kit-labs-react/drawer';
+      import {DeprecatedDrawer, DeprecatedDrawerDirection} from '@workday/canvas-kit-labs-react/drawer';
   
       const CustomDrawer = () => {
-        return <DeprecatedDrawer>Hello World</DeprecatedDrawer>;
+        return (
+          <DeprecatedDrawer openDirection={DeprecatedDrawerDirection.Left}>
+            Hello World
+          </DeprecatedDrawer>
+        );
       };
 
       const AnotherDrawer = (props) => {
