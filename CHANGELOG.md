@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v7.3.1](https://github.com/Workday/canvas-kit/releases/tag/v7.3.1) (2022-09-09)
+
+### Components
+
+- fix: Prevent focus ring from getting cut off in Popup.Body ([#1727](https://github.com/Workday/canvas-kit/pull/1727)) ([@mannycarrera4](https://github.com/mannycarrera4))
+
+
 ## [v7.3.0](https://github.com/Workday/canvas-kit/releases/tag/v7.3.0) (2022-08-31)
 
 ### Components
