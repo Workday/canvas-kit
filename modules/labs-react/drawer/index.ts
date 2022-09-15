@@ -1,5 +1,2 @@
-import Drawer from './lib/Drawer';
-import DrawerHeader from './lib/DrawerHeader';
-export {Drawer, DrawerHeader};
-export default Drawer;
+export {DrawerHeader} from './lib/DrawerHeader';
 export * from './lib/Drawer';

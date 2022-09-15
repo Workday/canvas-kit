@@ -1,7 +1,8 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import {colors, space, type, CanvasColor, typeColors} from '@workday/canvas-kit-react/tokens';
+import {colors, space, CanvasColor, typeColors} from '@workday/canvas-kit-react/tokens';
 import {TertiaryButton} from '@workday/canvas-kit-react/button';
+import {Text} from '@workday/canvas-kit-react/text';
 import {xIcon} from '@workday/canvas-system-icons-web';
 
 export interface DrawerHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -55,25 +56,11 @@ const HeaderContainer = styled('div')<Pick<DrawerHeaderProps, 'headerColor' | 'b
   })
 );
 
-const HeaderTitle = styled('h4')<Pick<DrawerHeaderProps, 'inverse'>>(
-  {
-    ...type.levels.body.small,
-    fontWeight: type.properties.fontWeights.bold,
-    whiteSpace: 'nowrap',
-    textOverflow: 'ellipsis',
-    overflow: 'hidden',
-    paddingRight: space.xxxs,
-  },
-  ({inverse}) => ({
-    color: inverse ? colors.frenchVanilla100 : typeColors.heading,
-  })
-);
-
 const CloseButton = styled(TertiaryButton)({
   margin: '-8px', // for inverse and plain button, we always want this margin
 });
 
-export default class DrawerHeader extends React.Component<DrawerHeaderProps, {}> {
+export class DrawerHeader extends React.Component<DrawerHeaderProps, {}> {
   public render() {
     const {
       closeIconAriaLabel = 'Close',
@@ -85,15 +72,27 @@ export default class DrawerHeader extends React.Component<DrawerHeaderProps, {}>
       id,
       ...elemProps
     } = this.props;
+    const variant = inverse ? 'inverse' : undefined;
 
     return (
       <HeaderContainer borderColor={borderColor} {...elemProps} headerColor={headerColor}>
-        <HeaderTitle id={id} inverse={inverse} title={title}>
+        <Text
+          as="h4"
+          typeLevel="body.small"
+          title={title}
+          fontWeight="bold"
+          color={typeColors.heading}
+          variant={variant}
+          paddingInlineEnd="xxxs"
+          whiteSpace="nowrap"
+          textOverflow="ellipsis"
+          overflow="hidden"
+        >
           {title}
-        </HeaderTitle>
+        </Text>
         {onClose && closeIconAriaLabel && (
           <CloseButton
-            variant={inverse ? 'inverse' : undefined}
+            variant={variant}
             onClick={onClose}
             aria-label={closeIconAriaLabel}
             icon={xIcon}

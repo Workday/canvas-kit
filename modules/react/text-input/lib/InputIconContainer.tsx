@@ -19,15 +19,11 @@ const IconContainer = styled('div')({
   right: space.xxs,
 });
 
-const InputIconContainer: React.FunctionComponent<InputIconContainerProps> = ({
-  grow,
-  children,
-  icon,
-}) => (
+export const InputIconContainer: React.FunctionComponent<React.PropsWithChildren<
+  InputIconContainerProps
+>> = ({grow, children, icon}) => (
   <Container grow={grow}>
     {children}
     {icon && <IconContainer>{icon}</IconContainer>}
   </Container>
 );
-
-export default InputIconContainer;
