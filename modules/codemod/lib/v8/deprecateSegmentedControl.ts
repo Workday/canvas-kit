@@ -21,10 +21,12 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
     // e.g. import {SegmentedControl} from '@workday/canvas-kit-react';
     if (value === mainPackage) {
       (nodePath.specifiers || []).forEach(specifier => {
-        if (specifier.type === 'ImportSpecifier') {
-          const specifierName = specifier.imported.name;
-          hasSegmentedControlImports =
-            specifierName === 'SegmentedControl' || specifierName === 'SegmentedControlProps';
+        if (
+          specifier.type === 'ImportSpecifier' &&
+          (specifier.imported.name === 'SegmentedControl' ||
+            specifier.imported.name === 'SegmentedControlProps')
+        ) {
+          hasSegmentedControlImports = true;
         }
       });
     }
