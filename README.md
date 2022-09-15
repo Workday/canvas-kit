@@ -100,6 +100,10 @@ Want to contribute to Canvas Kit React? Please read our
 [contributing guidelines](./modules/docs/mdx/CONTRIBUTING.mdx) to find out more and how to get
 started.
 
+## Maintaining
+
+If you're a Canvas Kit maintainer, please read our [maintaining docs](./modules/docs/mdx/MAINTAINING.mdx) to learn more about our processes.
+
 ## Open Development
 
 All work on the Canvas Kit happens directly on [GitHub](https://github.com/Workday/canvas-kit). Both
