@@ -44,7 +44,7 @@ export const useTabsList = composeHooks(
   useListResetCursorOnBlur
 );
 
-const StyledStack = styled(Stack)<StyledType>(({maskImage}) => ({
+const StyledStack = styled(Stack)<StyledType & {maskImage?: string}>(({maskImage}) => ({
   maskImage: maskImage,
 }));
 
