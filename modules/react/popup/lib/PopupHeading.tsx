@@ -15,7 +15,7 @@ export const PopupHeading = createSubcomponent('h2')({
   elemPropsHook: usePopupHeading,
 })<PopupHeadingProps>(({children, ...elemProps}, Element) => {
   return (
-    <Card.Heading as={Element} marginBottom="s" {...elemProps}>
+    <Card.Heading as={Element} marginBottom="xxs" padding="xxs" {...elemProps}>
       {children}
     </Card.Heading>
   );
