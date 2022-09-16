@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v7.3.4](https://github.com/Workday/canvas-kit/releases/tag/v7.3.4) (2022-09-16)
+
+### Components
+
+- chore: Add custom lint rule to encourage CK slash imports ([#1762](https://github.com/Workday/canvas-kit/pull/1762)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
 ## [v7.3.3](https://github.com/Workday/canvas-kit/releases/tag/v7.3.3) (2022-09-15)
 
 ### Components
