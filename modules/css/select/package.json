@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-css-select",
-  "version": "7.2.10",
+  "version": "7.3.4",
   "description": "The select css for canvas-kit-css",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -29,7 +29,7 @@
     "workday"
   ],
   "dependencies": {
-    "@workday/canvas-kit-css-common": "^7.2.10",
-    "@workday/canvas-kit-css-core": "^7.2.10"
+    "@workday/canvas-kit-css-common": "^7.3.4",
+    "@workday/canvas-kit-css-core": "^7.3.4"
   }
 }
