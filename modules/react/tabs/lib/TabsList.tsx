@@ -60,7 +60,8 @@ export const TabsList = createSubcomponent('div')({
       as={Element}
       position="relative"
       borderBottom={`1px solid ${commonColors.divider}`}
-      paddingX={modality === 'touch' ? 'zero' : 'm'}
+      paddingLeft={modality === 'touch' ? 'zero' : 'm'}
+      paddingRight="m"
       spacing="xxxs"
       maskImage={
         modality === 'touch'
