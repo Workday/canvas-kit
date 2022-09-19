@@ -1,68 +1,96 @@
 import {Property} from 'csstype';
 
-/** style props to for grid item properties */
+import {buildStyleFns, buildStylePropFn, StyleFnConfig} from './buildStyleFns';
+
+/** style props to for CSS grid item properties */
 export type GridItemStyleProps = {
-  // Child Types
-  /** sets `grid-column-start` property */
+  /** sets CSS grid-column-start property */
   gridColumnStart?: Property.GridColumnStart;
-  /** sets `grid-column-end` property */
+  /** sets CSS grid-column-end property */
   gridColumnEnd?: Property.GridColumnEnd;
-  /** sets `grid-row-start` property */
+  /** sets CSS grid-row-start property */
   gridRowStart?: Property.GridRowStart;
-  /** sets `grid-row-end` property */
+  /** sets CSS grid-row-end property */
   gridRowEnd?: Property.GridRowEnd;
-  /** sets `grid-column` property */
+  /** sets CSS grid-column property */
   gridColumn?: Property.GridColumn;
-  /** sets `grid-row` property */
+  /** sets CSS grid-row property */
   gridRow?: Property.GridRow;
-  /** sets `grid-area` property */
+  /** sets CSS grid-area property */
   gridArea?: Property.GridArea;
-  /** sets `justify-self` property */
+  /** sets CSS justify-self property */
   justifySelf?: Property.JustifySelf;
-  /** sets `align-self` property */
+  /** sets CSS align-self property */
   alignSelf?: Property.AlignSelf;
-  /** sets `place-self` property */
+  /** sets CSS place-self property */
   placeSelf?: Property.PlaceSelf;
 };
 
-/** style props to for grid item properties */
-const gridItemProps = {
-  //Child Props
-  gridColumnStart: 'gridColumnStart',
-  gridColumnEnd: 'gridColumnEnd',
-  gridRowStart: 'gridRowStart',
-  gridRowEnd: 'gridRowEnd',
-  gridColumn: 'gridColumn',
-  gridRow: 'gridRow',
-  gridArea: 'gridArea',
-  justifySelf: 'justifySelf',
-  alignSelf: 'alignSelf',
-  placeSelf: 'placeSelf',
-};
+const gridItemStyleFnConfigs: StyleFnConfig[] = [
+  {
+    name: 'gridColumnStart',
+    properties: ['gridColumnStart'],
+    system: 'none',
+  },
+  {
+    name: 'gridColumnEnd',
+    properties: ['gridColumnEnd'],
+    system: 'none',
+  },
+  {
+    name: 'gridRowStart',
+    properties: ['gridRowStart'],
+    system: 'none',
+  },
+  {
+    name: 'gridRowEnd',
+    properties: ['gridRowEnd'],
+    system: 'none',
+  },
+  {
+    name: 'gridColumn',
+    properties: ['gridColumn'],
+    system: 'none',
+  },
+  {
+    name: 'gridRow',
+    properties: ['gridRow'],
+    system: 'none',
+  },
+  {
+    name: 'gridArea',
+    properties: ['gridArea'],
+    system: 'none',
+  },
+  {
+    name: 'justifySelf',
+    properties: ['justifySelf'],
+    system: 'none',
+  },
+  {
+    name: 'alignSelf',
+    properties: ['alignSelf'],
+    system: 'none',
+  },
+  {
+    name: 'placeSelf',
+    properties: ['placeSelf'],
+    system: 'none',
+  },
+];
 
+export const gridItemStyleFns = buildStyleFns(gridItemStyleFnConfigs);
 /**
  * A style prop function that takes component props and returns grid styles.
  * If no `GridItemStyleProps` are found, it returns an empty object.
  *
  * @example
- * // You'll most likely use `grid item` with low-level, styled components
+ * ```tsx
  * const GridItemExample = () => (
  *   <Grid.Item gridRowStart="1" justifySelf="center" gridArea="Card">
  *     Hello, Grid Item!
  *   </Grid.Item>
  * );
- *
+ * ```
  */
-
-export function gridItem<P extends GridItemStyleProps>(props: P) {
-  const styles = {};
-  for (const key in props) {
-    if (key in gridItemProps) {
-      const attr = gridItemProps[key as keyof GridItemStyleProps];
-      const value = props[key];
-      // @ts-ignore TS doesn't like adding a potentially unknown key to an object, but because we own this object, it's fine.
-      styles[attr] = value;
-    }
-  }
-  return styles;
-}
+export const gridItem = buildStylePropFn<GridItemStyleProps>(gridItemStyleFns);

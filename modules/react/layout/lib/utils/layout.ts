@@ -1,70 +1,131 @@
 import {Property} from 'csstype';
+import {CanvasSpaceKeys} from '@workday/canvas-kit-react/tokens';
 
-/** style props to for layout properties */
+import {buildStyleFns, buildStylePropFn, StyleFnConfig} from './buildStyleFns';
+
+type SpacePropValues = CanvasSpaceKeys | number | (string & {});
+
+/** style props to for CSS layout properties */
 export type LayoutStyleProps = {
-  /** sets `display` property */
+  /** sets CSS display property */
   display?: Property.Display;
-  /** sets `height` property */
-  height?: number | string;
-  /** sets `list-style property */
+  /**
+   * - sets CSS height property
+   * - system tokens: `space`
+   * */
+  height?: SpacePropValues;
+  /** sets CSS list-style property */
   listStyle?: Property.ListStyle;
-  /** sets `max-height` property */
-  maxHeight?: number | string;
-  /** sets `max-width` property */
-  maxWidth?: number | string;
-  /** sets `min-height` property */
-  minHeight?: number | string;
-  /** sets `min-width` property */
-  minWidth?: number | string;
-  /** sets `overflow` property */
+  /**
+   * - sets CSS max-height property
+   * - system tokens: `space`
+   * */
+  maxHeight?: SpacePropValues;
+  /**
+   * - sets CSS max-width property
+   * - system tokens: `space`
+   * */
+  maxWidth?: SpacePropValues;
+  /**
+   * - sets CSS min-height property
+   * - system tokens: `space`
+   * */
+  minHeight?: SpacePropValues;
+  /**
+   * - sets CSS min-width property
+   * - system tokens: `space`
+   * */
+  minWidth?: SpacePropValues;
+  /** sets CSS overflow property */
   overflow?: Property.Overflow;
-  /** sets `overflow-x` property */
+  /** sets CSS overflow-x property */
   overflowX?: Property.OverflowX;
-  /** sets `overflow-y` property */
+  /** sets CSS overflow-y property */
   overflowY?: Property.OverflowY;
-  /** sets `vertical-align` property */
+  /** sets CSS vertical-align property */
   verticalAlign?: Property.VerticalAlign;
-  /** sets `width` property */
-  width?: number | string;
+  /**
+   * - sets CSS width property
+   * - system tokens: `space`
+   * */
+  width?: SpacePropValues;
 };
 
-const layoutProps = {
-  display: 'display',
-  height: 'height',
-  listStyle: 'listStyle',
-  maxHeight: 'maxHeight',
-  maxWidth: 'maxWidth',
-  minHeight: 'minHeight',
-  minWidth: 'minWidth',
-  overflow: 'overflow',
-  overflowX: 'overflowX',
-  overflowY: 'overflowY',
-  verticalAlign: 'verticalAlign',
-  width: 'width',
-};
+const layoutStyleFnConfigs: StyleFnConfig[] = [
+  {
+    name: 'display',
+    properties: ['display'],
+    system: 'none',
+  },
+  {
+    name: 'height',
+    properties: ['height'],
+    system: 'space',
+  },
+  {
+    name: 'listStyle',
+    properties: ['listStyle'],
+    system: 'none',
+  },
+  {
+    name: 'maxHeight',
+    properties: ['maxHeight'],
+    system: 'space',
+  },
+  {
+    name: 'maxWidth',
+    properties: ['maxWidth'],
+    system: 'space',
+  },
+  {
+    name: 'minHeight',
+    properties: ['minHeight'],
+    system: 'space',
+  },
+  {
+    name: 'minWidth',
+    properties: ['minWidth'],
+    system: 'space',
+  },
+  {
+    name: 'overflow',
+    properties: ['overflow'],
+    system: 'none',
+  },
+  {
+    name: 'overflowX',
+    properties: ['overflowX'],
+    system: 'none',
+  },
+  {
+    name: 'overflowY',
+    properties: ['overflowY'],
+    system: 'none',
+  },
+  {
+    name: 'verticalAlign',
+    properties: ['verticalAlign'],
+    system: 'none',
+  },
+  {
+    name: 'width',
+    properties: ['width'],
+    system: 'space',
+  },
+];
 
+export const layoutStyleFns = buildStyleFns(layoutStyleFnConfigs);
 /**
- * A style prop function that takes components props and returns layout styles.
+ * A style prop function that takes component props and returns layout styles.
  * If no `LayoutStyleProps` are found, it returns an empty object.
  *
  * @example
- * // You'll most likely use `layout` with low-level, styled components
- * const BoxExample = () => (
+ * ```tsx
+ * const LayoutExample = () => (
  *   <Box display="inline-block" height="50%">
- *     Hello, positions!
+ *     Hello, layout!
  *   </Box>
  * );
- *
+ * ```
  */
-export function layout<P extends LayoutStyleProps>(props: P) {
-  const styles = {};
-  for (const key in props) {
-    if (key in layoutProps) {
-      const attr = layoutProps[key as keyof LayoutStyleProps];
-      const value = props[key];
-      // @ts-ignore TS doesn't like adding a potentially unknown key to an object, but because we own this object, it's fine.
-      styles[attr] = value;
-    }
-  }
-  return styles;
-}
+export const layout = buildStylePropFn<LayoutStyleProps>(layoutStyleFns);

@@ -1,58 +1,77 @@
 import {Property} from 'csstype';
+import {buildStyleFns, buildStylePropFn, StyleFnConfig} from './buildStyleFns';
 
-/** style props to for flexbox container properties */
+/** style props to for CSS flexbox container properties */
 export type FlexStyleProps = {
-  /** sets `align-items` property */
+  /** sets CSS align-items property */
   alignItems?: Property.AlignItems;
-  /** sets `align-content` property */
+  /** sets CSS align-content property */
   alignContent?: Property.AlignContent;
   /**
-   * sets `display` property
-   * @default 'flex'
+   * - sets CSS display property
+   * - @default 'flex'
    * */
   display?: 'flex' | 'inline-flex';
-  /** sets `justify-items` property */
+  /** sets CSS justify-items property */
   justifyItems?: Property.JustifyItems;
-  /** sets `justify-content` property */
+  /** sets CSS justify-content property */
   justifyContent?: Property.JustifyContent;
-  /** sets `flex-wrap` property */
+  /** sets CSS flex-wrap property */
   flexWrap?: Property.FlexWrap;
-  /** sets `flex-direction` property */
+  /** sets CSS flex-direction property */
   flexDirection?: Property.FlexDirection;
 };
 
-const flexProps = {
-  alignContent: 'alignContent',
-  alignItems: 'alignItems',
-  display: 'display',
-  flexDirection: 'flexDirection',
-  flexWrap: 'flexWrap',
-  justifyContent: 'justifyContent',
-  justifyItems: 'justifyItems',
-};
+const flexStyleFnConfigs: StyleFnConfig[] = [
+  {
+    name: 'alignContent',
+    properties: ['alignContent'],
+    system: 'none',
+  },
+  {
+    name: 'alignItems',
+    properties: ['alignItems'],
+    system: 'none',
+  },
+  {
+    name: 'display',
+    properties: ['display'],
+    system: 'none',
+  },
+  {
+    name: 'flexDirection',
+    properties: ['flexDirection'],
+    system: 'none',
+  },
+  {
+    name: 'flexWrap',
+    properties: ['flexWrap'],
+    system: 'none',
+  },
+  {
+    name: 'justifyContent',
+    properties: ['justifyContent'],
+    system: 'none',
+  },
+  {
+    name: 'justifyItems',
+    properties: ['justifyItems'],
+    system: 'none',
+  },
+];
 
+export const flexStyleFns = buildStyleFns(flexStyleFnConfigs);
 /**
  * A style prop function that takes component props and returns flexbox styles.
  * If no `FlexStyleProps` are found, it returns an empty object.
  *
  * @example
- * // You'll most likely use `flex` with low-level, styled components
+ * ```tsx
  * const FlexExample = () => (
  *   <Flex justifyContent="center" alignItems="center">
  *     Hello, flex!
  *   </Flex>
  * );
- *
+ * ```
  */
-export function flex<P extends FlexStyleProps>(props: P) {
-  const styles = {};
-  for (const key in props) {
-    if (key in flexProps) {
-      const attr = flexProps[key as keyof FlexStyleProps];
-      const value = props[key];
-      // @ts-ignore TS doesn't like adding a potentially unknown key to an object, but because we own this object, it's fine.
-      styles[attr] = value;
-    }
-  }
-  return styles;
-}
+export const flex = buildStylePropFn<FlexStyleProps>(flexStyleFns);

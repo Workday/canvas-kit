@@ -1,57 +1,122 @@
 import {Property} from 'csstype';
+import {CanvasTypeProperties} from '@workday/canvas-kit-react/tokens';
 
-/** style props to for text properties */
+import {buildStyleFns, buildStylePropFn, StyleFnConfig} from './buildStyleFns';
+
+/** style props to for CSS font and text properties */
 export type TextStyleProps = {
-  /** sets `line-height` property */
+  /**
+   * - sets CSS font-family property
+   * - system tokens: `font` */
+  fontFamily?: Property.FontFamily | keyof CanvasTypeProperties['fontFamilies'];
+  /**
+   * - sets CSS font-size property
+   * - system tokens: `fontSize` */
+  fontSize?: Property.FontSize | keyof CanvasTypeProperties['fontSizes'];
+  /** sets CSS font-style property */
+  fontStyle?: Property.FontStyle;
+  /**
+   * - sets CSS font-weight property
+   * - system tokens: `fontWeight` */
+  fontWeight?: Property.FontWeight | keyof CanvasTypeProperties['fontWeights'];
+  /** sets CSS line-height property */
   lineHeight?: Property.LineHeight;
-  /** sets `letter-spacing` property */
+  /** sets CSS letter-spacing property */
   letterSpacing?: Property.LetterSpacing;
-  /** sets `text-align` property */
+  /** sets CSS text-align property */
   textAlign?: Property.TextAlign;
-  /** sets `text-decoration` property */
+  /** sets CSS text-decoration property */
   textDecoration?: Property.TextDecoration;
-  /** sets `text-overflow` property */
+  /** sets CSS text-overflow property */
   textOverflow?: Property.TextOverflow;
-  /** sets `text-transform` property */
+  /** sets CSS text-transform property */
   textTransform?: Property.TextTransform;
-  /** sets `text-shadow` property */
+  /** sets CSS text-shadow property */
   textShadow?: Property.TextShadow;
-  /** sets `white-space` property */
+  /** sets CSS white-space property */
   whiteSpace?: Property.WhiteSpace;
-  /** sets `word-break` property */
+  /** sets CSS word-break property */
   wordBreak?: Property.WordBreak;
 };
 
-const textProps = [
-  'lineHeight',
-  'letterSpacing',
-  'textAlign',
-  'textDecoration',
-  'textOverflow',
-  'textTransform',
-  'textShadow',
-  'whiteSpace',
-  'wordBreak',
+const TextStyleFnConfigs: StyleFnConfig[] = [
+  {
+    name: 'fontFamily',
+    properties: ['fontFamily'],
+    system: 'font',
+  },
+  {
+    name: 'fontSize',
+    properties: ['fontSize'],
+    system: 'fontSize',
+  },
+  {
+    name: 'fontStyle',
+    properties: ['fontStyle'],
+    system: 'none',
+  },
+  {
+    name: 'fontWeight',
+    properties: ['fontWeight'],
+    system: 'fontWeight',
+  },
+  {
+    name: 'lineHeight',
+    properties: ['lineHeight'],
+    system: 'none',
+  },
+  {
+    name: 'letterSpacing',
+    properties: ['letterSpacing'],
+    system: 'none',
+  },
+  {
+    name: 'textAlign',
+    properties: ['textAlign'],
+    system: 'none',
+  },
+  {
+    name: 'textDecoration',
+    properties: ['textDecoration'],
+    system: 'none',
+  },
+  {
+    name: 'textOverflow',
+    properties: ['textOverflow'],
+    system: 'none',
+  },
+  {
+    name: 'textTransform',
+    properties: ['textTransform'],
+    system: 'none',
+  },
+  {
+    name: 'textShadow',
+    properties: ['textShadow'],
+    system: 'none',
+  },
+  {
+    name: 'whiteSpace',
+    properties: ['whiteSpace'],
+    system: 'none',
+  },
+  {
+    name: 'wordBreak',
+    properties: ['wordBreak'],
+    system: 'none',
+  },
 ];
 
+export const textStyleFns = buildStyleFns(TextStyleFnConfigs);
 /**
- * A style prop function that takes components props and returns text styles.
+ * A style prop function that takes component props and returns font and text styles.
  * If no `TextStyleProps` are found, it returns an empty object.
  *
  * @example
- * // You'll most likely use `text-align` with low-level, styled components
+ * ```
  * const BoxExample = () => (
- *   <Box textAlign="center">Hello, alignment!</Box>
+ *   <Box textAlign="center" fontWeight="medium">Hello, alignment!</Box>
  * );
- *
+ * ```
  */
-export function text<P extends TextStyleProps>(props: P) {
-  let styles = {};
-  for (const key in props) {
-    if (textProps.includes(key)) {
-      const value = props[key as keyof TextStyleProps] as string;
-      styles = {...styles, [key]: value};
-    }
-  }
-  return styles;
-}
+export const text = buildStylePropFn<TextStyleProps>(textStyleFns);

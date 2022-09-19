@@ -3,12 +3,13 @@ import {Column} from './lib/Column';
 
 export { Layout, Column};
 export * from './lib/Box';
+export * from './lib/utils/background';
 export * from './lib/utils/border';
 export * from './lib/utils/color';
 export {DepthStyleProps} from './lib/utils/depth';
 export * from './lib/utils/flexItem';
-export * from './lib/utils/font';
 export * from './lib/utils/layout';
+export * from './lib/utils/other';
 export * from './lib/utils/position';
 export {SpaceStyleProps} from './lib/utils/space';
 export * from './lib/utils/text';
