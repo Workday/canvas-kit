@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {DeprecatedSegmentedControl} from '@workday/canvas-kit-react/segmented-control';
+import {SegmentedControl} from '@workday/canvas-kit-react/segmented-control';
 import {
   styled,
   StyledType,
@@ -49,7 +49,7 @@ const getIconButtonColors = (toggled?: boolean): ButtonColors => {
 };
 
 const StyledBaseButton = styled(BaseButton)<
-  ExtractProps<typeof DeprecatedSegmentedControl.Button> & StyledType
+  ExtractProps<typeof SegmentedControl.Button> & StyledType
 >({
   borderRadius: borderRadius.zero,
   border: `1px solid ${colors.soap500}`,
@@ -97,7 +97,7 @@ export const Basic = () => {
   const isWeekToggled = value === 'week';
 
   return (
-    <DeprecatedSegmentedControl value={value} onChange={handleToggle}>
+    <SegmentedControl value={value} onChange={handleToggle}>
       <StyledBaseButton
         icon={{...placeholderIcon}}
         colors={getIconButtonColors(isDayToggled)}
@@ -114,6 +114,6 @@ export const Basic = () => {
       >
         Week
       </StyledBaseButton>
-    </DeprecatedSegmentedControl>
+    </SegmentedControl>
   );
 };
