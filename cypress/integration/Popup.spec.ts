@@ -379,7 +379,9 @@ describe('Popup', () => {
         beforeEach(() => {
           cy.findByRole('button', {name: 'Delete'})
             .focus()
-            .tab();
+            .wait(100)
+            .tab()
+            .wait(100);
         });
 
         it('should hide the popup', () => {
@@ -388,6 +390,102 @@ describe('Popup', () => {
 
         it('should redirect focus to the "Next Focusable Button" button', () => {
           cy.findByRole('button', {name: 'Next Focusable Button'}).should('have.focus');
+        });
+      });
+    });
+  });
+
+  context('given the [Testing/React/Popups/Popup, MixedPopupTypes] story is rendered', () => {
+    beforeEach(() => {
+      h.stories.load('Testing/React/Popups/Popup', 'ReturnFocusTest');
+    });
+
+    context('when the "Open Popup" is clicked', () => {
+      beforeEach(() => {
+        cy.findByRole('button', {name: 'Open Popup'}).click();
+      });
+
+      context('when the user clicks outside', () => {
+        beforeEach(() => {
+          cy.get('body').click('top');
+        });
+
+        it('should focus the "Open Popup" button', () => {
+          cy.findByRole('button', {name: 'Open Popup'}).should('have.focus');
+        });
+      });
+
+      context('when the user clicks the input', () => {
+        beforeEach(() => {
+          cy.findByRole('textbox', {name: 'Name'}).click();
+        });
+
+        it('should not focus the "Open Popup" button', () => {
+          cy.findByRole('button', {name: 'Open Popup'}).should('not.have.focus');
+        });
+      });
+
+      context('when the user scrolls to the top', () => {
+        beforeEach(() => {
+          cy.findByTestId('scroll-area').scrollTo('top');
+        });
+
+        context('when the user clicks outside', () => {
+          beforeEach(() => {
+            cy.get('body').click('top');
+          });
+
+          it('should not focus the "Open Popup" button', () => {
+            cy.findByRole('button', {name: 'Open Popup'}).should('not.have.focus');
+          });
+        });
+      });
+
+      context('when the user scrolls to the bottom', () => {
+        beforeEach(() => {
+          cy.findByTestId('scroll-area').scrollTo('bottom');
+        });
+
+        context('when the user clicks outside', () => {
+          beforeEach(() => {
+            cy.get('body').click('top');
+          });
+
+          it('should not focus the "Open Popup" button', () => {
+            cy.findByRole('button', {name: 'Open Popup'}).should('not.have.focus');
+          });
+        });
+      });
+
+      context('when the user scrolls to the right', () => {
+        beforeEach(() => {
+          cy.findByTestId('scroll-area').scrollTo('right');
+        });
+
+        context('when the user clicks outside', () => {
+          beforeEach(() => {
+            cy.get('body').click('top');
+          });
+
+          it('should not focus the "Open Popup" button', () => {
+            cy.findByRole('button', {name: 'Open Popup'}).should('not.have.focus');
+          });
+        });
+      });
+
+      context('when the user scrolls to the left', () => {
+        beforeEach(() => {
+          cy.findByTestId('scroll-area').scrollTo('left');
+        });
+
+        context('when the user clicks outside', () => {
+          beforeEach(() => {
+            cy.get('body').click('top');
+          });
+
+          it('should not focus the "Open Popup" button', () => {
+            cy.findByRole('button', {name: 'Open Popup'}).should('not.have.focus');
+          });
         });
       });
     });
