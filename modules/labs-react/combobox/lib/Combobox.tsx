@@ -312,11 +312,8 @@ export const Combobox = ({
 
   const handleBlur = (event: React.FocusEvent) => {
     if (comboboxRef.current) {
-      let target: EventTarget | null = event.relatedTarget;
-      if (target === null) {
-        // IE11 swaps related and active target before it fires the blur event
-        target = document.activeElement;
-      }
+      const target: EventTarget | null = event.relatedTarget;
+
       if (target && comboboxRef.current.contains(target as Element)) {
         return;
       }

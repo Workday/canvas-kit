@@ -117,7 +117,7 @@ const StyledSearchForm = styled('form')<
 >(
   {
     position: 'relative',
-    flex: `1 1 auto`, // Instead of just flex-grow: 1 for IE11, see https://github.com/philipwalton/flexbugs#flexbug-1
+    flex: `1`,
     display: 'flex',
     alignItems: 'center',
     marginLeft: space.m,
@@ -160,7 +160,6 @@ const SearchContainer = styled('div')<Pick<SearchFormProps, 'height'>>(
   },
   ({height}) => ({
     minHeight: height,
-    height: height, // Needed to keep IE11 vertically centered
   })
 );
 

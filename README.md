@@ -153,7 +153,6 @@ The Workday Canvas Kits are licensed under the Apache 2.0 License.
 
 ## Supported Browsers
 
-- IE11
 - Microsoft Edge: last 2 versions
 - Mozilla Firefox: last 2 versions
 - Google Chrome: last 2 versions

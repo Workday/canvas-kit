@@ -112,7 +112,6 @@ const SwatchTile = styled(ColorSwatch)({
   position: 'absolute',
   top: 0,
   left: space.xxs,
-  marginTop: '10px', // Fix vertical alignment on IE11
   boxShadow: 'inset 0 0 0 1px rgba(0,0,0,0.25)',
   pointerEvents: 'none',
 });

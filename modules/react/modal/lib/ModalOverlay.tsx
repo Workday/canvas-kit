@@ -52,12 +52,6 @@ const ResponsiveContainer = styled('div')(({theme}) => ({
   top: 0,
   justifyContent: 'center',
   alignItems: 'center',
-  // IE11 fix for setting min-height in a flex container
-  ':before': {
-    display: 'block',
-    content: "''",
-    height: '100vh',
-  },
   [theme.canvas.breakpoints.down('s')]: {
     alignItems: 'end',
   },
