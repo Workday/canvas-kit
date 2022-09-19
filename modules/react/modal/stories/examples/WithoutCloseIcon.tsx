@@ -32,16 +32,16 @@ export const WithoutCloseIcon = () => {
         <Modal.Card>
           <Modal.Heading>Delete Item</Modal.Heading>
           <Modal.Body>
-            <Box as="p" marginTop={0} marginBottom="m">
+            <Box as="p" marginY="zero">
               Are you sure you want to delete the item?
             </Box>
-            <HStack spacing="s">
-              <Modal.CloseButton as={DeleteButton} onClick={handleDelete}>
-                Delete
-              </Modal.CloseButton>
-              <Modal.CloseButton>Cancel</Modal.CloseButton>
-            </HStack>
           </Modal.Body>
+          <HStack spacing="s" padding="xxs" marginTop="xxs">
+            <Modal.CloseButton as={DeleteButton} onClick={handleDelete}>
+              Delete
+            </Modal.CloseButton>
+            <Modal.CloseButton>Cancel</Modal.CloseButton>
+          </HStack>
         </Modal.Card>
       </Modal.Overlay>
     </Modal>
