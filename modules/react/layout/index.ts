@@ -11,6 +11,7 @@ export * from './lib/utils/flexItem';
 export * from './lib/utils/layout';
 export * from './lib/utils/other';
 export * from './lib/utils/position';
+export * from './lib/utils/pseudo';
 export {SpaceStyleProps} from './lib/utils/space';
 export * from './lib/utils/text';
 export * from './lib/Flex';

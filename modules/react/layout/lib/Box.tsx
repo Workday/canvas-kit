@@ -6,6 +6,7 @@ import {createComponent, StyledType, useConstant} from '@workday/canvas-kit-reac
 // style props
 import {background, BackgroundStyleProps} from './utils/background';
 import {border, BorderStyleProps} from './utils/border';
+import {cx, CxStyleProps} from './utils/cx';
 import {color, ColorStyleProps} from './utils/color';
 import {depth, DepthStyleProps} from './utils/depth';
 import {flexItem, FlexItemStyleProps} from './utils/flexItem';
@@ -13,18 +14,21 @@ import {gridItem, GridItemStyleProps} from './utils/gridItem';
 import {layout, LayoutStyleProps} from './utils/layout';
 import {other, OtherStyleProps} from './utils/other';
 import {position, PositionStyleProps} from './utils/position';
+import {pseudo, PseudoStyleProps} from './utils/pseudo';
 import {space, SpaceStyleProps} from './utils/space';
 import {text, TextStyleProps} from './utils/text';
 
 export type BoxProps = BackgroundStyleProps &
   BorderStyleProps &
   ColorStyleProps &
+  CxStyleProps &
   DepthStyleProps &
   FlexItemStyleProps &
   GridItemStyleProps &
   LayoutStyleProps &
   OtherStyleProps &
   PositionStyleProps &
+  PseudoStyleProps &
   SpaceStyleProps &
   TextStyleProps & {
     children?: React.ReactNode;
@@ -89,8 +93,10 @@ export const boxStyleFn = <P extends BoxProps>(props: P) => {
     layout,
     other,
     position,
+    pseudo,
     space,
     text,
+    cx,
   ].reduce((result, style) => {
     // @ts-ignore
     const temp = typeof style === 'function' ? style(props) : style;
