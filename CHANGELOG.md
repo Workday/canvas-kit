@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v7.3.2](https://github.com/Workday/canvas-kit/releases/tag/v7.3.2) (2022-09-15)
+
+### Documentation
+
+- docs: Add initial maintaining doc ([#1764](https://github.com/Workday/canvas-kit/pull/1764)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
 ## [v7.3.1](https://github.com/Workday/canvas-kit/releases/tag/v7.3.1) (2022-09-09)
 
 ### Components
