@@ -7,4 +7,13 @@ export default {
   component: SegmentedControl,
 };
 
-export const Default = () => <SegmentedControl> </SegmentedControl>;
+export const Default = () => {
+  return (
+    <SegmentedControl orientation="vertical">
+      <SegmentedControl.List>
+        <SegmentedControl.Item value="table">Table</SegmentedControl.Item>
+        <SegmentedControl.Item value="list">List</SegmentedControl.Item>
+      </SegmentedControl.List>
+    </SegmentedControl>
+  );
+};

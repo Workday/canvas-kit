@@ -1,12 +1,6 @@
 import React from 'react';
 import {createModelHook} from '@workday/canvas-kit-react/common';
-import {
-  defaultGetId,
-  useOverflowListModel,
-  useListModel,
-} from '@workday/canvas-kit-react/collection';
-
-import {useMenuModel} from '@workday/canvas-kit-react/menu';
+import {defaultGetId, useListModel} from '@workday/canvas-kit-react/collection';
 
 export const useSegmentedControlModel = createModelHook({
   defaultConfig: {
@@ -17,15 +11,21 @@ export const useSegmentedControlModel = createModelHook({
      */
     id: '',
     /**
+     * An initially selected tab. This value must match the `name` of the `Tab.Item` component. If
+     * not provided, the first tab will be selected.
+     */
+    initialTab: '',
+    /**
      * The SegmentedControl handles rendering of button group in a horizontal orientation,
      * but the icon only button variant could have a vertical orientation.
      * @default 'horizontal'
      */
     orientation: 'horizontal' as typeof useListModel.defaultConfig.orientation,
-    menuConfig: {} as Partial<typeof useMenuModel.defaultConfig>,
   },
   requiredConfig: useListModel.requiredConfig,
 })(config => {
+  const getId = config.getId || defaultGetId;
+  const initialSelectedRef = React.useRef(config.initialTab);
   const items = config.items;
 
   const model = useListModel(
@@ -33,6 +33,17 @@ export const useSegmentedControlModel = createModelHook({
       orientation: config.orientation || 'horizontal',
       items,
       shouldVirtualize: false,
+      onRegisterItem(data) {
+        if (!initialSelectedRef.current) {
+          initialSelectedRef.current = getId(data.item);
+          events.select({id: initialSelectedRef.current});
+        }
+      },
+      initialSelectedIds: config.initialTab
+        ? [config.initialTab]
+        : config.items?.length
+        ? [getId(config.items![0])]
+        : [],
     })
   );
 
@@ -45,23 +56,10 @@ export const useSegmentedControlModel = createModelHook({
     ...model.events,
   };
 
-  const menu = useMenuModel(
-    useMenuModel.mergeConfig(config.menuConfig as Required<typeof config.menuConfig>, {
-      id: `act-bar-menu-${model.state.id}`,
-      onSelect() {
-        menu.events.hide();
-      },
-      onShow() {
-        // Always select the first item when the menu is opened
-        menu.events.goToFirst();
-      },
-    })
-  );
-
   return {
     ...model,
     state,
     events,
-    menu,
+    // menu,
   };
 });
