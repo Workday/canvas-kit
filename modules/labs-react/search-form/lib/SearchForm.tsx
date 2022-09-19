@@ -228,7 +228,6 @@ const SearchInput = styled(TextInput)<
   const collapseStyles: CSSObject = isCollapsed
     ? {
         fontSize: '20px',
-        lineHeight: '20px', // For ie11, line-height needs to match font-size
         paddingLeft: spaceNumbers.xl + spaceNumbers.s,
         paddingRight: spaceNumbers.xl + spaceNumbers.s,
         maxWidth: 'none',
@@ -246,7 +245,6 @@ const SearchInput = styled(TextInput)<
       };
   return {
     fontSize: '14px',
-    lineHeight: '14px', // For ie11, line-height needs to match font-size
     boxShadow: inputColors.boxShadow,
     color: inputColors.color,
     border: 'none',
