@@ -29,30 +29,6 @@ export type BorderRadiusStyleProps = {
    * - system tokens: `shape`
    * */
   borderBottomRightRadius?: CanvasBorderRadiusKeys | number | (string & {});
-  /**
-   * - sets CSS border-top-inline-start-radius property
-   * - bidirectional support
-   * - system tokens: `shape`
-   * */
-  borderTopInlineStartRadius?: CanvasBorderRadiusKeys | number | (string & {});
-  /**
-   * - sets CSS border-top-inline-end-radius property
-   * - bidirectional support
-   * - system tokens: `shape`
-   * */
-  borderTopInlineEndRadius?: CanvasBorderRadiusKeys | number | (string & {});
-  /**
-   * - sets CSS border-bottom-inline-start-radius property
-   * - bidirectional support
-   * - system tokens: `shape`
-   * */
-  borderBottomInlineStartRadius?: CanvasBorderRadiusKeys | number | (string & {});
-  /**
-   * - sets CSS border-bottom-inline-end-radius property
-   * - bidirectional support) *
-   * - system tokens: `shape`
-   * */
-  borderBottomInlineEndRadius?: CanvasBorderRadiusKeys | number | (string & {});
 };
 
 const borderRadiusStyleFnConfigs: StyleFnConfig[] = [
@@ -79,26 +55,6 @@ const borderRadiusStyleFnConfigs: StyleFnConfig[] = [
   {
     name: 'borderBottomRightRadius',
     properties: ['borderBottomRightRadius'],
-    system: 'shape',
-  },
-  {
-    name: 'borderTopInlineStartRadius',
-    properties: ['borderTopInlineStartRadius'],
-    system: 'shape',
-  },
-  {
-    name: 'borderTopInlineEndRadius',
-    properties: ['borderTopInlineEndRadius'],
-    system: 'shape',
-  },
-  {
-    name: 'borderBottomInlineStartRadius',
-    properties: ['borderBottomInlineStartRadius'],
-    system: 'shape',
-  },
-  {
-    name: 'borderBottomInlineEndRadius',
-    properties: ['borderBottomInlineEndRadius'],
     system: 'shape',
   },
 ];

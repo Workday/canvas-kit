@@ -15,7 +15,7 @@ export type BackgroundStyleProps = {
    * - sets CSS background property
    * - system tokens: `color`
    * */
-  backgroundColor?: CanvasColor | Property.BackgroundColor;
+  backgroundColor?: CanvasColor | (string & {});
   /** sets CSS background-image property */
   backgroundImage?: Property.BackgroundImage;
   /** sets CSS background-position property */
