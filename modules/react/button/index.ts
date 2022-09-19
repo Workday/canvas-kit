@@ -12,6 +12,7 @@ export {Hyperlink, HyperlinkProps} from './lib/Hyperlink';
 export {
   BaseButton,
   ButtonContainerProps,
+  BaseButtonProps,
   getMinWidthStyles,
   getPaddingStyles,
 } from './lib/BaseButton';
