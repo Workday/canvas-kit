@@ -1,16 +1,11 @@
 import * as React from 'react';
 
-import {createComponent, useModelContext} from '@workday/canvas-kit-react/common';
+import {createSubcomponent} from '@workday/canvas-kit-react/common';
 
-import {PopupModel, PopupModelContext, usePopupPopper} from './hooks';
+import {usePopupModel, usePopupPopper} from './hooks';
 import {Placement, PopperOptions, Popper, PopperProps} from './Popper';
 
 export interface PopupPopperProps extends PopperProps {
-  /**
-   * Optionally pass a model directly to this component. Default is to implicitly use the same
-   * model as the container component which uses React context. Only use this for advanced use-cases
-   */
-  model?: PopupModel;
   /**
    * The placement of the `Popper` contents relative to the `anchorElement`. Accepts `auto`, `top`,
    * `right`, `bottom`, or `left`. Each placement can also be modified using any of the following
@@ -24,12 +19,10 @@ export interface PopupPopperProps extends PopperProps {
   popperOptions?: Partial<PopperOptions>;
 }
 
-export const PopupPopper = createComponent('div')({
+export const PopupPopper = createSubcomponent('div')({
   displayName: 'Popup.Popper',
-  Component: ({children, model, ...elemProps}: PopupPopperProps, ref) => {
-    const localModel = useModelContext(PopupModelContext, model);
-
-    const props = usePopupPopper(localModel, elemProps, ref);
-    return <Popper {...props}>{children}</Popper>;
-  },
+  modelHook: usePopupModel,
+  elemPropsHook: usePopupPopper,
+})<PopupPopperProps>(({children, ...elemProps}) => {
+  return <Popper {...elemProps}>{children}</Popper>;
 });

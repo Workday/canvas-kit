@@ -3,7 +3,7 @@ import {Modal, useModalModel} from '@workday/canvas-kit-react/modal';
 import {DeleteButton} from '@workday/canvas-kit-react/button';
 import FormField from '@workday/canvas-kit-react/form-field';
 import TextInput from '@workday/canvas-kit-react/text-input';
-import {HStack} from '@workday/canvas-kit-labs-react';
+import {HStack, Box} from '@workday/canvas-kit-react/layout';
 
 export const CustomFocus = () => {
   const ref = React.useRef<HTMLInputElement>(null);
@@ -24,17 +24,19 @@ export const CustomFocus = () => {
           <Modal.CloseIcon aria-label="Close" />
           <Modal.Heading>Delete Item</Modal.Heading>
           <Modal.Body>
-            <p>Enter name to confirm deletion</p>
-            <FormField label="Item name">
+            <Box as="p" marginTop={0} marginBottom="m">
+              Enter name to confirm deletion
+            </Box>
+            <FormField label="Item name" style={{marginBottom: 0}}>
               <TextInput ref={ref} value={value} onChange={e => setValue(e.currentTarget.value)} />
             </FormField>
-            <HStack spacing="s">
-              <Modal.CloseButton as={DeleteButton} onClick={handleDelete}>
-                Delete
-              </Modal.CloseButton>
-              <Modal.CloseButton>Cancel</Modal.CloseButton>
-            </HStack>
           </Modal.Body>
+          <HStack spacing="s" padding="xxs" marginTop="xxs">
+            <Modal.CloseButton as={DeleteButton} onClick={handleDelete}>
+              Delete
+            </Modal.CloseButton>
+            <Modal.CloseButton>Cancel</Modal.CloseButton>
+          </HStack>
         </Modal.Card>
       </Modal.Overlay>
     </Modal>

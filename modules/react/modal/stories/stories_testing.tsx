@@ -8,7 +8,7 @@ import {
   useCloseOnEscape,
   usePopupModel,
 } from '@workday/canvas-kit-react/popup';
-import {HStack, VStack} from '@workday/canvas-kit-labs-react/layout';
+import {HStack, VStack} from '@workday/canvas-kit-react/layout';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 import Radio, {RadioGroup} from '@workday/canvas-kit-react/radio';
 
@@ -101,17 +101,15 @@ export const WithRadioButtons = () => {
           <Modal.CloseIcon aria-label="Close" />
           <Modal.Heading>Select Item</Modal.Heading>
           <Modal.Body>
-            <VStack spacing="s">
-              <RadioGroup
-                name="contact"
-                data-testid="radiogroup"
-                value={value}
-                onChange={value => setValue(String(value))}
-              >
-                <Radio id="1" value="email" label="E-mail" />
-                <Radio id="2" value="phone" label="Phone" />
-              </RadioGroup>
-            </VStack>
+            <RadioGroup
+              name="contact"
+              data-testid="radiogroup"
+              value={value}
+              onChange={value => setValue(String(value))}
+            >
+              <Radio id="1" value="email" label="E-mail" />
+              <Radio id="2" value="phone" label="Phone" />
+            </RadioGroup>
           </Modal.Body>
         </Modal.Card>
       </Modal.Overlay>
@@ -150,7 +148,7 @@ export const StackedModals = () => {
                         <Modal.CloseButton
                           as={DeleteButton}
                           onClick={event => {
-                            model.events.hide({event});
+                            model.events.hide(event);
                             handleDelete();
                           }}
                         >
@@ -207,7 +205,7 @@ export const ModalWithPopup = () => {
                         <Popup.CloseButton
                           as={DeleteButton}
                           onClick={event => {
-                            modal.events.hide({event});
+                            modal.events.hide(event);
                             handleDelete();
                           }}
                         >
@@ -231,7 +229,7 @@ export const WithTooltips = () => {
   const modal = useModalModel();
   const popup1 = usePopupModel();
   const popup2 = usePopupModel();
-  const closeModal = (event: React.MouseEvent) => modal.events.hide({event});
+  const closeModal = (event: React.MouseEvent) => modal.events.hide(event);
 
   useCloseOnOutsideClick(popup1);
 

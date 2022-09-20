@@ -1,7 +1,7 @@
 import React from 'react';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {Checkbox} from '@workday/canvas-kit-react/checkbox';
-import {Box} from '@workday/canvas-kit-labs-react/common';
+import {Box} from '@workday/canvas-kit-react/layout';
 
 export const RefForwarding = () => {
   const [checked, setChecked] = React.useState(false);

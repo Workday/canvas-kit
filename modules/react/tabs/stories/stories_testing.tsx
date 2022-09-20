@@ -12,7 +12,7 @@ import {Tabs, useTabsModel} from '@workday/canvas-kit-react/tabs';
 
 import {Basic} from './examples/Basic';
 import {RightToLeft} from './examples/RightToLeft';
-import {ComponentStatesTable} from '@workday/canvas-kit-labs-react';
+import {ComponentStatesTable} from '@workday/canvas-kit-labs-react/common';
 
 const fontDelay = 150; // best guess for the font delay to prevent incorrect Chromatic regressions
 
@@ -43,8 +43,8 @@ const TabsExample = ({theme}: {theme?: PartialEmotionCanvasTheme} = {theme: unde
             {label: 'Disabled', props: {'aria-disabled': true}},
           ]}
         >
-          {props =>
-            props.hasIcon ? (
+          {({hasIcon, ...props}) =>
+            hasIcon ? (
               <Tabs.Item {...props}>
                 <Tabs.Item.Icon icon={setupIcon} />
                 <Tabs.Item.Text>Icon</Tabs.Item.Text>

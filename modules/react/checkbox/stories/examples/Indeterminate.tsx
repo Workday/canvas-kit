@@ -1,6 +1,6 @@
 import React from 'react';
 import {Checkbox} from '@workday/canvas-kit-react/checkbox';
-import {Box} from '@workday/canvas-kit-labs-react/common';
+import {Box} from '@workday/canvas-kit-react/layout';
 
 export const Indeterminate = () => {
   const [pizzaChecked, setPizzaChecked] = React.useState(false);

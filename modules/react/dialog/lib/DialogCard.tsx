@@ -1,22 +1,20 @@
 import * as React from 'react';
 
-import {createComponent, useModelContext, ExtractProps} from '@workday/canvas-kit-react/common';
-import {Popup, PopupModelContext} from '@workday/canvas-kit-react/popup';
+import {ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common';
+import {Popup} from '@workday/canvas-kit-react/popup';
 
-import {useDialogCard} from './hooks';
+import {useDialogCard, useDialogModel} from './hooks';
 
 export interface DialogCardProps extends ExtractProps<typeof Popup.Card, never> {}
 
-export const DialogCard = createComponent('div')({
+export const DialogCard = createSubcomponent('div')({
   displayName: 'Dialog.Card',
-  Component: ({children, model, ...elemProps}: DialogCardProps, ref, Element) => {
-    const localModel = useModelContext(PopupModelContext, model);
-
-    const props = useDialogCard(localModel, elemProps, ref);
-    return (
-      <Popup.Card as={Element} {...props}>
-        {children}
-      </Popup.Card>
-    );
-  },
+  modelHook: useDialogModel,
+  elemPropsHook: useDialogCard,
+})<ExtractProps<typeof Popup.Card, never>>((elemProps, Element, model) => {
+  return (
+    <Popup.Card as={Element} model={model} {...elemProps}>
+      {elemProps.children}
+    </Popup.Card>
+  );
 });
