@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v7.3.5](https://github.com/Workday/canvas-kit/releases/tag/v7.3.5) (2022-09-20)
+
+### Components
+
+- fix: Add PopperProps to PopupPopper props ([#1772](https://github.com/Workday/canvas-kit/pull/1772)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
 ## [v7.3.4](https://github.com/Workday/canvas-kit/releases/tag/v7.3.4) (2022-09-16)
 
 ### Components
