@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {ComponentStatesTable} from '@workday/canvas-kit-labs-react/common';
+import {ComponentStatesTable} from '@workday/canvas-kit-react/common';
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
 
 import {CountBadge} from '../index';

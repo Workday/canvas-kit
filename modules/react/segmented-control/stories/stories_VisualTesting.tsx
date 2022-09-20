@@ -1,6 +1,6 @@
 import * as React from 'react';
-import {StaticStates} from '@workday/canvas-kit-react/common';
-import {ComponentStatesTable} from '@workday/canvas-kit-labs-react/common';
+import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/common';
+
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
 
 import {
