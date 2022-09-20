@@ -3,7 +3,7 @@ import React from 'react';
 import {Pill} from '@workday/canvas-kit-preview-react/pill';
 // @ts-ignore: Cannot find module error
 import testAvatar from './test-avatar.png';
-import {HStack} from '@workday/canvas-kit-react';
+import {HStack} from '@workday/canvas-kit-react/layout';
 
 export const WithRemovable = () => (
   <HStack spacing="xxs">
