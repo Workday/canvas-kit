@@ -52,6 +52,7 @@ const ResponsiveContainer = styled('div')(({theme}) => ({
   top: 0,
   justifyContent: 'center',
   alignItems: 'center',
+  height: '100vh',
   [theme.canvas.breakpoints.down('s')]: {
     alignItems: 'end',
   },
