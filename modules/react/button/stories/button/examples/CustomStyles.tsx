@@ -32,7 +32,7 @@ export const CustomStyles = () => (
   <HStack spacing="s" padding="s">
     <PrimaryButton
       padding={space.l}
-      border={'`1px dotted red'}
+      border={'1px dotted red'}
       backgroundColor={'cyan'}
       color={colors.blackPepper400}
     >
