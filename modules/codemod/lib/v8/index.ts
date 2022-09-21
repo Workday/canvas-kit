@@ -1,13 +1,18 @@
 import {Transform} from 'jscodeshift';
 
-import deprecateDrawer from './deprecateDrawer';
-import deprecateLayout from './deprecateLayout';
-import deprecatePreviewMenu from './deprecatePreviewMenu';
+import softDeprecateDrawer from './softDeprecateDrawer';
+import softDeprecateLayout from './softDeprecateLayout';
+import softDeprecatePreviewMenu from './softDeprecatePreviewMenu';
 import revomeDefaultImports from './removeDefaultImports';
 
 const transform: Transform = (file, api, options) => {
   // These will run in order. If your transform depends on others, place yours after dependent transforms
-  const fixes = [revomeDefaultImports, deprecateDrawer, deprecateLayout, deprecatePreviewMenu];
+  const fixes = [
+    revomeDefaultImports,
+    softDeprecateDrawer,
+    softDeprecateLayout,
+    softDeprecatePreviewMenu,
+  ];
 
   return fixes.reduce((source, fix) => fix({...file, source}, api, options) as string, file.source);
 };

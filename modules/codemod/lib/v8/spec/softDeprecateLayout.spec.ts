@@ -1,5 +1,5 @@
 import {expectTransformFactory} from './expectTransformFactory';
-import transformer from '../deprecateLayout';
+import transformer from '../softDeprecateLayout';
 const context = describe;
 
 const expectTransform = expectTransformFactory(transformer);
