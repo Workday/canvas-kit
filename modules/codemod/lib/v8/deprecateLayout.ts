@@ -13,8 +13,8 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
   // This toggles the failsafe that prevents us from accidentally transforming something unintentionally.
   root.find(j.ImportDeclaration, (nodePath: ImportDeclaration) => {
     const value = nodePath.source.value;
-    // If there's an import from the drawer package, set the import boolean check to true
-    if (value === drawerPackage) {
+    // If there's an import from the layout package, set the import boolean check to true
+    if (value === layoutPackage) {
       hasLayoutImports = true;
       return false;
     }
@@ -53,7 +53,7 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
       });
     });
 
-  // Add Deprecated in types using menu interfaces
+  // Add Deprecated in menu types and type interfaces
   const typeNames = ['LayoutProps', 'ColumnProps'];
   root
     .find(j.TSTypeReference, {
