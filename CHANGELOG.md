@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v7.3.6](https://github.com/Workday/canvas-kit/releases/tag/v7.3.6) (2022-09-21)
+
+### Documentation
+
+- fix: Remove spellcheck from togglable password field ([#1782](https://github.com/Workday/canvas-kit/pull/1782)) ([@vibdev](https://github.com/vibdev))
+
+
 ## [v7.3.5](https://github.com/Workday/canvas-kit/releases/tag/v7.3.5) (2022-09-20)
 
 ### Components
