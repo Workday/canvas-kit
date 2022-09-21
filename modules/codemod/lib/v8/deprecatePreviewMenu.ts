@@ -19,7 +19,7 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
       return false;
     }
     // If there's an import from the main package, check to see if Menu or MenuProps are among the named imports
-    // e.g. import {Menu} from '@workday/canvas-kit-react';
+    // e.g. import {Menu} from '@workday/canvas-kit-preview-react';
     if (value === mainPackage) {
       (nodePath.specifiers || []).forEach(specifier => {
         if (specifier.type === 'ImportSpecifier') {
