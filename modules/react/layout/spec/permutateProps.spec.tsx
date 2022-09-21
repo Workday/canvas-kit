@@ -1,5 +1,4 @@
-import {permutateProps} from '../../../labs-react/common/lib/storybook-utils/permutateProps';
-import {ErrorType} from '@workday/canvas-kit-react/common';
+import {ErrorType, permutateProps} from '@workday/canvas-kit-react/common';
 
 describe('Component States Table', () => {
   const cb = jest.fn();

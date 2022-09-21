@@ -5,6 +5,7 @@ import {
   StaticStates,
   PartialEmotionCanvasTheme,
   ContentDirection,
+  ComponentStatesTable,
 } from '@workday/canvas-kit-react/common';
 import {withSnapshotsEnabled, customColorTheme} from '../../../../utils/storybook';
 
@@ -12,7 +13,6 @@ import {Tabs, useTabsModel} from '@workday/canvas-kit-react/tabs';
 
 import {Basic} from './examples/Basic';
 import {RightToLeft} from './examples/RightToLeft';
-import {ComponentStatesTable} from '@workday/canvas-kit-labs-react';
 
 const fontDelay = 150; // best guess for the font delay to prevent incorrect Chromatic regressions
 
