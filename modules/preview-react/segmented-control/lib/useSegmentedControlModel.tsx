@@ -11,10 +11,11 @@ export const useSegmentedControlModel = createModelHook({
      */
     id: '',
     /**
-     * An initially selected tab. This value must match the `name` of the `Tab.Item` component. If
-     * not provided, the first tab will be selected.
+     * An initially selected value. This value must match the `name` of the `Value.Item` component. If
+     * not provided, the first value will be selected.
      */
-    initialTab: '',
+    initialValue: '',
+    disabled: false,
     /**
      * The SegmentedControl handles rendering of button group in a horizontal orientation,
      * but the icon only button variant could have a vertical orientation.
@@ -25,7 +26,7 @@ export const useSegmentedControlModel = createModelHook({
   requiredConfig: useListModel.requiredConfig,
 })(config => {
   const getId = config.getId || defaultGetId;
-  const initialSelectedRef = React.useRef(config.initialTab);
+  const initialSelectedRef = React.useRef(config.initialValue);
   const items = config.items;
 
   const model = useListModel(
@@ -39,8 +40,8 @@ export const useSegmentedControlModel = createModelHook({
           events.select({id: initialSelectedRef.current});
         }
       },
-      initialSelectedIds: config.initialTab
-        ? [config.initialTab]
+      initialSelectedIds: config.initialValue
+        ? [config.initialValue]
         : config.items?.length
         ? [getId(config.items![0])]
         : [],
@@ -49,7 +50,7 @@ export const useSegmentedControlModel = createModelHook({
 
   const state = {
     ...model.state,
-    orientation: config.orientation || 'horizontal',
+    disabled: config.disabled,
   };
 
   const events = {
@@ -60,6 +61,5 @@ export const useSegmentedControlModel = createModelHook({
     ...model,
     state,
     events,
-    // menu,
   };
 });

@@ -1,33 +1,26 @@
 import * as React from 'react';
 
-import {colors, space, type, borderRadius, iconColors} from '@workday/canvas-kit-react/tokens';
+import {colors, borderRadius, space} from '@workday/canvas-kit-react/tokens';
 import {
-  focusRing,
-  hideMouseFocus,
-  styled,
-  StyledType,
+  // mouseFocusBehavior,
   createElemPropsHook,
   composeHooks,
-  ExtractProps,
-  ellipsisStyles,
-  EllipsisText,
   createSubcomponent,
+  styled,
+  StyledType,
 } from '@workday/canvas-kit-react/common';
-import {Box, StackProps} from '@workday/canvas-kit-react/layout';
 import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
-import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {
   useListItemRegister,
   useListItemRovingFocus,
   isSelected,
   useListItemSelect,
 } from '@workday/canvas-kit-react/collection';
+import {BaseButton, ButtonContainerProps, ButtonColors} from '@workday/canvas-kit-react/button';
 
 import {useSegmentedControlModel} from './useSegmentedControlModel';
 
-export interface TabsItemProps
-  extends ExtractProps<typeof Box, never>,
-    Partial<Pick<StackProps, 'spacing'>> {
+export interface ItemProps extends ButtonContainerProps {
   /**
    * Optionally pass index to tab item. This should be done if `Tabs.Item` components were created
    * via a `Array::map` function. This index will ensure keyboard navigation works even if items are
@@ -48,14 +41,14 @@ export interface TabsItemProps
    * </Tabs.Item>
    * ```
    */
-  children: React.ReactNode;
+  children?: React.ReactNode;
   /**
    * The identifier of the tab. This identifier will be used in change events and for `initialTab`.
    * Must match the `data-id` of the associated tab panel. If this property is not provided, it will
    * default to a string representation of the the zero-based index of the Tab when it was
    * initialized.
    */
-  value?: string;
+  'data-id'?: string;
   /**
    * Optional id. If not set, it will inherit the ID passed to the `Tabs` component and append the
    * index at the end. Only set this for advanced cases.
@@ -78,96 +71,56 @@ export interface TabsItemProps
    * set while all inactive tabs should have a `tabIndex={-1}`
    */
   tabIndex?: number;
+  icon?: any;
 }
 
-export const StyledTabItem = styled(Box.as('button'))<StyledType & Pick<TabsItemProps, 'spacing'>>(
-  ({theme, spacing}) => ({
-    ...type.levels.subtext.large,
-    '& > *:not(style) ~ *:not(style)': {
-      marginLeft: spacing || space.xxs,
+const getIconButtonColors = (toggled?: boolean): ButtonColors => {
+  return {
+    default: {
+      background: toggled ? colors.frenchVanilla100 : colors.soap200,
+      icon: toggled ? colors.blackPepper400 : colors.licorice200,
+      border: toggled ? colors.licorice200 : 'transparent',
     },
-    fontWeight: type.properties.fontWeights.medium,
-    border: 'none',
-    backgroundColor: 'transparent',
-    flex: '0 0 auto',
-    alignItems: 'center',
-    padding: `${space.xs} ${space.s}`,
-    height: 52,
-    boxSizing: 'border-box',
-    cursor: 'pointer',
-    color: colors.licorice300,
-    position: 'relative',
-    borderRadius: `${borderRadius.m} ${borderRadius.m} 0px 0px`,
-    transition: 'background 150ms ease, color 150ms ease',
-
-    ...hideMouseFocus,
-
-    '.wd-icon-background ~ .wd-icon-accent, .wd-icon-background ~ .wd-icon-accent2': {
-      fill: iconColors.active,
+    hover: {
+      background: toggled ? colors.frenchVanilla100 : colors.soap400,
+      icon: toggled ? colors.blackPepper400 : colors.licorice200,
     },
-
-    '&:hover, &:focus': {
-      backgroundColor: colors.soap200,
-      color: colors.blackPepper400,
-      '.wd-icon-fill, .wd-icon-accent, .wd-icon-accent2': {
-        fill: iconColors.hover,
-      },
-      '.wd-icon-background ~ .wd-icon-accent, .wd-icon-background ~ .wd-icon-accent2': {
-        fill: iconColors.active,
-      },
+    active: {
+      background: toggled ? colors.frenchVanilla100 : colors.soap200,
+      icon: toggled ? colors.blackPepper400 : colors.licorice200,
     },
+    focus: {
+      background: toggled ? colors.blueberry400 : undefined,
+      icon: toggled ? colors.frenchVanilla100 : colors.licorice500,
+    },
+    disabled: {},
+  };
+};
 
+const StyledButton = styled(BaseButton)<StyledType & ButtonContainerProps>(
+  {
+    borderRadius: borderRadius.m,
+    minWidth: space.xl,
     '&:focus': {
-      outline: `none`,
-      ...focusRing({inset: 'outer', width: 0, separation: 2}, theme),
+      borderRadius: borderRadius.m,
+      zIndex: 1,
+      animation: 'none', // reset focusRing animation
+      transition: 'all 120ms, border-radius 1ms',
+      // ...mouseFocusBehavior({
+      //   '&': {
+      //     borderRadius: borderRadius.m,
+      //   },
+      // }),
     },
-
-    '&:disabled, &[aria-disabled]': {
-      color: colors.licorice100,
-      '.wd-icon-fill, .wd-icon-accent, .wd-icon-accent2': {
-        fill: iconColors.disabled,
-      },
-      '&:hover': {
-        cursor: 'auto',
-        backgroundColor: `transparent`,
-        '.wd-icon-fill, .wd-icon-accent, .wd-icon-accent2': {
-          fill: iconColors.disabled,
-        },
-      },
-    },
-
-    '&[aria-selected=true]': {
-      color: theme.canvas.palette.primary.main,
-      cursor: 'default',
-      '.wd-icon-fill, .wd-icon-accent, .wd-icon-accent2': {
-        fill: theme.canvas.palette.primary.main,
-      },
-      '&:after': {
-        position: 'absolute',
-        height: space.xxxs,
-        borderRadius: `${borderRadius.m} ${borderRadius.m} 0px 0px`,
-        backgroundColor: theme.canvas.palette.primary.main,
-        bottom: 0,
-        content: `''`,
-        left: 0,
-        marginTop: '-2px',
-        width: '100%',
-      },
-      '&:hover, &:focus': {
-        backgroundColor: `transparent`,
-        color: theme.canvas.palette.primary.main,
+  },
+  ({theme}) => ({
+    '[aria-pressed="true"]': {
+      borderColor: theme.canvas.palette.primary.main,
+      '&:hover, &:focus:hover': {
+        background: theme.canvas.palette.primary.main,
       },
     },
-  }),
-  ({children}) => {
-    if (typeof children === 'string') {
-      return ellipsisStyles;
-    } else {
-      return {
-        display: 'flex',
-      };
-    }
-  }
+  })
 );
 
 export const useTabsItem = composeHooks(
@@ -195,16 +148,18 @@ export const SegmentedControlItem = createSubcomponent('button')({
   displayName: 'SegmentedControl.Item',
   modelHook: useSegmentedControlModel,
   elemPropsHook: useTabsItem,
-  subComponents: {
-    Icon: SystemIcon,
-    Text: EllipsisText,
-  },
-})<TabsItemProps>(({children, ...elemProps}, Element) => {
+})<ItemProps>(({children, icon, ...elemProps}, Element) => {
   return (
     <OverflowTooltip>
-      <StyledTabItem as={Element} {...elemProps}>
+      <StyledButton
+        as={Element}
+        colors={getIconButtonColors(elemProps['aria-selected'])}
+        fillIcon={elemProps['aria-selected']}
+        {...elemProps}
+      >
+        <BaseButton.Icon icon={icon} />
         {children}
-      </StyledTabItem>
+      </StyledButton>
     </OverflowTooltip>
   );
 });

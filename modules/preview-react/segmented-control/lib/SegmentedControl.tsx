@@ -16,5 +16,5 @@ export const SegmentedControl = createContainer()({
     Item: SegmentedControlItem,
   },
 })<SegmentedControlProps>(({children}) => {
-  return <div>{children}</div>;
+  return <>{children}</>;
 });
