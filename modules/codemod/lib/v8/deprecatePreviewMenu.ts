@@ -1,7 +1,7 @@
 import {API, FileInfo, Identifier, ImportDeclaration, Options} from 'jscodeshift';
 
 const mainPackage = '@workday/canvas-kit-preview-react';
-const drawerPackage = '@workday/canvas-kit-preview-react/menu';
+const menuPackage = '@workday/canvas-kit-preview-react/menu';
 const allImportNames = ['Menu', 'MenuProps', 'MenuState', 'MenuItem', 'MenuItemProps'];
 
 export default function transformer(file: FileInfo, api: API, options: Options) {
