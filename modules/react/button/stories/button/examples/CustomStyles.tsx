@@ -4,6 +4,8 @@ import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {HStack} from '@workday/canvas-kit-react/layout';
 import {plusIcon, caretDownIcon} from '@workday/canvas-system-icons-web';
 import {space, colors} from '@workday/canvas-kit-react/tokens';
+import {CanvasProvider} from '@workday/canvas-kit-react/common';
+import {customColorTheme} from '../../../../../../utils/storybook';
 import styled from '@emotion/styled';
 
 const getDropdownColors = () => {
@@ -32,8 +34,8 @@ export const CustomStyles = () => (
   <HStack spacing="s" padding="s">
     <PrimaryButton
       padding={space.l}
-      border={'1px dotted red'}
-      backgroundColor={'cyan'}
+      border="3px dotted red"
+      backgroundColor="cyan"
       color={colors.blackPepper400}
     >
       Styled with style properties
@@ -44,5 +46,8 @@ export const CustomStyles = () => (
     <StyledPrimaryButton icon={caretDownIcon} iconPosition="end">
       Overwrite styles with emotion
     </StyledPrimaryButton>
+    <CanvasProvider theme={{canvas: customColorTheme}}>
+      <PrimaryButton>Custom Theme</PrimaryButton>
+    </CanvasProvider>
   </HStack>
 );
