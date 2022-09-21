@@ -157,38 +157,43 @@ needed. Note that tooltips will only render when text is truncated. The example 
 
 `Breadcrumbs.Link` defaults to redirecting with an `href`, which means the page will hard-redirect
 when the link is clicked. However, if you're in a single-page application (SPA) environment, you
-might want to use the internal SPA router instead. You can override this hard-redirect with the
-`onAction` prop. Note that `onAction` will not block any `onClick` if provided. The example below
-uses the `history` package.
+might want to use the internal SPA router instead. You can override that behavior with a custom
+`onClick` handler that blocks the default behavior of the event and passes along the link path to
+your SPA router. Most of our consumers use `react-router-dom` for managing SPA routing, so below is
+an example of how to do this in V5 and V6 of `react-router-dom`.
 
-```tsx
-import * as React from 'react';
-// using the history package
-import {createBrowserHistory} from 'history';
+```ts
+// React Router DOM V5 API
+import {useHistory} from 'react-router-dom';
 import {Breadcrumbs} from '@workday/canvas-kit-react/breadcrumbs';
-
-// this is likely being done at the root of your application and not inside this component.
-const history = createBrowserHistory();
-
-const handleClick = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-  // handle any click side-effects here
-  console.log('click event', event);
+...
+const history = useHistory();
+const handleClick = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>, link?: string) => {
+      event.preventDefault();
+    // if no link is provided, default to the current path
+    history.push(link || window.location.pathname);
 }
-
-const handleRedirect = (href: string) => {
-  // redirect using the internal SPA router
-  history.push(href);
-}
-
 return (
-  <Breadcrumbs.Link
-    href="/account"
-    onAction={handleRedirect}
-    onClick={handleClick}
-  >
+  <Breadcrumbs.Link href="/account" onClick={handleClick}>
     Account
-  </Breadcrumbs.Link>;
-)
+  </Breadcrumbs.Link>
+);
+
+// React Router DOM V6 API
+import {useNavigate} from 'react-router-dom';
+import {Breadcrumbs} from '@workday/canvas-kit-react/breadcrumbs';
+...
+const navigate = useNavigate();
+const handleClick = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>, link?: string) => {
+      event.preventDefault();
+    // if no link is provided, default to the current path
+    navigate(link || window.location.pathname);
+}
+return (
+  <Breadcrumbs.Link href="/account" onClick={handleClick}>
+    Account
+  </Breadcrumbs.Link>
+);
 ```
 
 #### Props

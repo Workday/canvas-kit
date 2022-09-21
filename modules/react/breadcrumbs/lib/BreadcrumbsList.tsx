@@ -12,7 +12,7 @@ import {BreadcrumbsOverflowButton} from './BreadcrumbsOverflowButton';
 export interface BreadcrumbsListProps<T = any>
   extends Omit<Partial<ExtractProps<typeof Flex, never>>, 'children'> {
   /**
-   * Props passed into overflow button
+   * Props passed into overflow button, style prop will be ignored
    */
   overflowButtonProps?: ExtractProps<typeof BreadcrumbsOverflowButton>;
   /**

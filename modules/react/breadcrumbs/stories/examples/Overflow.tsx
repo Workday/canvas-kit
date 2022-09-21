@@ -41,7 +41,9 @@ export const OverflowBreadcrumbs = () => {
           <Breadcrumbs.Menu.Popper>
             <Breadcrumbs.Menu.Card maxWidth={300} maxHeight={200}>
               <Breadcrumbs.Menu.List>
-                {(item: Breadcrumb) => <Breadcrumbs.Menu.Item>{item.text}</Breadcrumbs.Menu.Item>}
+                {(item: Breadcrumb) => (
+                  <Breadcrumbs.Menu.Item href={item.link}>{item.text}</Breadcrumbs.Menu.Item>
+                )}
               </Breadcrumbs.Menu.List>
             </Breadcrumbs.Menu.Card>
           </Breadcrumbs.Menu.Popper>

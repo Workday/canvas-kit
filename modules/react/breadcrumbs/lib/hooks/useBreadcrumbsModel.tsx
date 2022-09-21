@@ -60,26 +60,6 @@ export const useBreadcrumbsModel = createModelHook({
       id: `breadcrumbs-menu-${model.state.id}`,
       items: overflowItems,
       nonInteractiveIds: state.nonInteractiveIds.filter(key => !state.hiddenIds.includes(key)),
-      onSelect: ({id}, {items}) => {
-        const item = items.find(item => item.id === id) || {value: null};
-        if (item.value) {
-          const {onAction, link, onClick} = item.value as {
-            onAction?: any;
-            link?: string;
-            onClick?: any;
-          };
-
-          if (onAction) {
-            onAction(link);
-          } else {
-            // default to hard redirecting
-            window.location.href = link || '#';
-          }
-          if (onClick) {
-            onClick();
-          }
-        }
-      },
       onShow() {
         // Always select the first item when the menu is opened
         menu.events.goToFirst();

@@ -2,18 +2,27 @@ import * as React from 'react';
 import {chevronRightSmallIcon, relatedActionsIcon} from '@workday/canvas-system-icons-web';
 import {colors, space} from '@workday/canvas-kit-react/tokens';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
-import {Flex} from '@workday/canvas-kit-react/layout';
+import {Flex, FlexProps} from '@workday/canvas-kit-react/layout';
 import {
-  createElemPropsHook,
   composeHooks,
-  subModelHook,
+  createElemPropsHook,
   createSubcomponent,
+  subModelHook,
   useIsRTL,
 } from '@workday/canvas-kit-react/common';
 import {useOverflowListTarget} from '@workday/canvas-kit-react/collection';
 import {useMenuTarget} from '@workday/canvas-kit-react/menu';
 import {useBreadcrumbsModel} from './hooks/useBreadcrumbsModel';
 import {TertiaryButton, TertiaryButtonProps} from '@workday/canvas-kit-react/button';
+
+export interface BreadcrumbsOverflowButtonProps extends TertiaryButtonProps {
+  /**
+   * style prop applies styles to the whole Flex component,
+   * `useOverflowListTarget` automatically adds hidden styles if list doesn't have items to hide
+   * style prop passed through `overflowButtonProps` from `Breadcrumbs.List` will ignore
+   */
+  style?: FlexProps;
+}
 
 export const useBreadcrumbsOverflowButton = composeHooks(
   createElemPropsHook(useBreadcrumbsModel)(() => ({
@@ -28,9 +37,9 @@ export const BreadcrumbsOverflowButton = createSubcomponent('button')({
   displayName: 'Breadcrumbs.OverflowButton',
   modelHook: useBreadcrumbsModel,
   elemPropsHook: useBreadcrumbsOverflowButton,
-})<TertiaryButtonProps>((elemProps, Element) => {
+})<BreadcrumbsOverflowButtonProps>(({style, ...elemProps}, Element) => {
   return (
-    <Flex alignItems="center">
+    <Flex alignItems="center" {...style}>
       <TertiaryButton
         as={Element}
         icon={relatedActionsIcon}
