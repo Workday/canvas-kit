@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {MenuItem} from '@workday/canvas-kit-preview-react/menu';
+import {DeprecatedMenuItem} from '@workday/canvas-kit-preview-react/menu';
 import {SearchForm} from '@workday/canvas-kit-labs-react/search-form';
 import {Flex} from '@workday/canvas-kit-react/layout';
 
@@ -29,7 +29,9 @@ export const Grow = () => {
   const [wineList, setWineList] = React.useState(initialWineList);
   // Tracking the input value for onSubmit
   const [searchInput, setSearchInput] = React.useState('');
-  const menuItems = wineList.map(wine => <MenuItem key={wine}>{wine}</MenuItem>);
+  const menuItems = wineList.map(wine => (
+    <DeprecatedMenuItem key={wine}>{wine}</DeprecatedMenuItem>
+  ));
 
   const filterMenuItems = e => {
     setSearchInput(e.target.value);

@@ -1,6 +1,6 @@
 import {Meta} from '@storybook/addon-docs';
 import {Specifications} from '@workday/canvas-kit-docs';
-import {Menu, MenuItem} from '@workday/canvas-kit-preview-react/menu';
+import {DeprecatedMenu, DeprecatedMenuItem} from '@workday/canvas-kit-preview-react/menu';
 
 import {Basic} from './examples/Basic';
 import {ContextMenu} from './examples/ContextMenu';
@@ -8,11 +8,12 @@ import {CustomMenuItem} from './examples/CustomMenuItem';
 import {Icons} from './examples/Icons';
 import {ManyItems} from './examples/ManyItems';
 
-<Meta title="Preview/Menu/React" component={Menu} />
+<Meta title="Preview/Menu/React" component={DeprecatedMenu} />
 
-# Canvas Kit Menu
+# Canvas Kit Menu (deprecated)
 
-`Menu` displays a list of options when triggered by an action or UI element like an icon or button.
+`DeprecatedMenu` displays a list of options when triggered by an action or UI element like an icon
+or button.
 
 [> Workday Design Reference](https://design.workday.com/components/popups/menus)
 
@@ -26,16 +27,17 @@ yarn add @workday/canvas-kit-preview-react
 
 ### Basic Example
 
-`Menu` is typically triggered by an action such as pressing a button. Here's an example of how you
-might implement that behavior using a [`Popup`](/components/popups/popup/).
+`DeprecatedMenu` is typically triggered by an action such as pressing a button. Here's an example of
+how you might implement that behavior using a [`Popup`](/components/popups/popup/).
 
 <ExampleCodeBlock code={Basic} />
 
-`Menu` will automatically assign focus to itself when it appears provided you set the `isOpen` prop
-correctly, so you do **not** need to use the `useInitialFocus` `Popup` hook. You **will**, however,
-need to use `useReturnFocus` to return focus back to the triggering button after closing the `Menu`.
+`DeprecatedMenu` will automatically assign focus to itself when it appears provided you set the
+`isOpen` prop correctly, so you do **not** need to use the `useInitialFocus` `Popup` hook. You
+**will**, however, need to use `useReturnFocus` to return focus back to the triggering button after
+closing the `DeprecatedMenu`.
 
-`Menu` follows the
+`DeprecatedMenu` follows the
 [Actions Menu pattern](https://www.w3.org/TR/wai-aria-practices/examples/menu-button/menu-button-actions-active-descendant.html)
 using `aria-activedescendant`. Below is table of supported keyboard shortcuts and associated
 actions.
@@ -50,8 +52,8 @@ actions.
 | `End`              | Moves focus to the last menu item                                                                                                                |
 | `A-Z / a-z`        | Moves focus to the next menu item with a label that starts with the typed character if such an menu item exists – otherwise, focus does not move |
 
-Note that although `Menu` includes support for keyboard shortcuts for the menu itself, you'll need
-to add your own keyboard handling and aria attributes to the triggering button.
+Note that although `DeprecatedMenu` includes support for keyboard shortcuts for the menu itself,
+you'll need to add your own keyboard handling and aria attributes to the triggering button.
 
 ### Context Menu
 
@@ -59,9 +61,10 @@ to add your own keyboard handling and aria attributes to the triggering button.
 
 ### Custom Menu Item
 
-`Menu` renders a styled `<ul>` element with a role of `menu`, and `MenuItem`s are `<li>` elements
-with the correct attributes to ensure they are accessible. If you choose to implement your own
-custom menu items, be sure to use semantic `<li>` elements with the following attributes:
+`DeprecatedMenu` renders a styled `<ul>` element with a role of `menu`, and `DeprecatedMenuItem`s
+are `<li>` elements with the correct attributes to ensure they are accessible. If you choose to
+implement your own custom menu items, be sure to use semantic `<li>` elements with the following
+attributes:
 
 - `role="menuitem"`
 - `tabindex={-1}`
@@ -80,12 +83,12 @@ Below is an example:
 
 ## Components
 
-### Menu
+### DeprecatedMenu
 
 #### Usage
 
-`Menu` renders a styled `<ul role="menu">` element within a [`Card`](/components/containers/card/)
-and follows the
+`DeprecatedMenu` renders a styled `<ul role="menu">` element within a
+[`Card`](/components/containers/card/) and follows the
 [Active Menu pattern](https://www.w3.org/TR/wai-aria-practices/examples/menu-button/menu-button-actions-active-descendant.html)
 using `aria-activedescendant`.
 
@@ -93,15 +96,15 @@ using `aria-activedescendant`.
 
 Undocumented props are spread to the underlying `<ul>` element.
 
-<ArgsTable of={Menu} />
+<ArgsTable of={DeprecatedMenu} />
 
-### MenuItem
+### DeprecatedMenuItem
 
 #### Usage
 
-`MenuItem` renders an `<li>` element with the correct attributes to ensure it is accessible. If you
-choose to implement your own custom menu items, be sure to use semantic `<li>` elements with the
-following attributes:
+`DeprecatedMenuItem` renders an `<li>` element with the correct attributes to ensure it is
+accessible. If you choose to implement your own custom menu items, be sure to use semantic `<li>`
+elements with the following attributes:
 
 - `role="menuitem"`
 - `tabindex={-1}`
@@ -111,7 +114,7 @@ following attributes:
 
 Undocumented props are spread to the underlying `<li>` element.
 
-<ArgsTable of={MenuItem} />
+<ArgsTable of={DeprecatedMenuItem} />
 
 ## Specifications
 

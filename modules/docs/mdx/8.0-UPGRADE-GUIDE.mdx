@@ -10,6 +10,7 @@ any questions.
 
 - [Codemod](#codemod)
 - [Components](#components)
+  - [Component Deprecations](#component-deprecations)
   - [Box](#box)
   - [Menu (Main)](#menu)
 - [General Changes](#general-changes) -[Remove Default Imports](#remove-default-imports)
@@ -40,6 +41,149 @@ rollback more easily if necessary.**
 encounter any issues or use cases that we've missed.
 
 ## Components
+
+### Component Deprecations
+
+#### Deprecation Types
+
+There are two types of deprecations: soft and hard.
+
+##### Soft Deprecation
+
+A soft-deprecated component is still available with its full functionality, but it will have been
+renamed with a prefix to indicate its soft-deprecated status. It will also include a console warning
+announcing its deprecation. This warning will only be triggered on the component's initial render.
+
+Soft-deprecated types and utilities will also be renamed but generally will not trigger a console
+warning.
+
+##### Hard Deprecation
+
+A hard-deprecated component or package is no longer available. You will need to follow the method
+prescribed in our upgrade guide to update your application. Please
+[reach out](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) to our team
+directly if you need additional help.
+
+#### Drawer
+
+We are [soft deprecating](#soft-deprecation) `Drawer`. It has been renamed to `DeprecatedDrawer`.
+Similarly, `DrawerProps` has been renamed to `DeprecatedDrawerProps`, `DrawerHeader` to
+`DeprecatedDrawerHeader` and `DrawerHeaderProps` to `DeprecatedDrawerHeaderProps`. You may continue
+to use this component, but note that we plan to [hard-deprecate](#hard-deprecation) it in Canvas Kit
+v9.
+
+🤖 The codemod will rename `Drawer`, `DrawerProps`, `DrawerHeader` and `DrawerHeaderProps` to their
+deprecated names:
+
+```tsx
+// v7
+import {Drawer, DrawerHeader} from '@workday/canvas-kit-labs-react/drawer';
+
+<Drawer
+  header={
+    <DrawerHeader
+      closeIconAriaLabel="Close"
+      onClose={() => console.log('onClose callback')}
+      title="Deprecated Drawer Header"
+    />
+  }
+/>;
+
+// v8
+import {DeprecatedDrawer, DeprecatedDrawerHeader} from '@workday/canvas-kit-labs-react/drawer';
+
+<DeprecatedDrawer
+  header={
+    <DeprecatedDrawerHeader
+      closeIconAriaLabel="Close"
+      onClose={() => console.log('onClose callback')}
+      title="Deprecated Drawer Header"
+    />
+  }
+/>;
+```
+
+#### Menu (preview)
+
+We are [soft deprecating](#soft-deprecation) `Menu`. It has been renamed to `DeprecatedMenu`.
+Similarly, `MenuProps` has been renamed to `DeprecatedMenuProps`, `MenuState` to
+`DeprecatedMenuState`, `MenuItem` to `DeprecatedMenuItem` and `MenuItemProps` to
+`DeprecatedMenuItemProps`. You may continue to use this component, but note that we plan to
+[hard-deprecate](#hard-deprecation) it in Canvas Kit v9.
+
+This component can be replaced by `Menu` component from `@workday/canvas-kit-react/menu`.
+
+🤖 The codemod will rename `Menu`, `MenuProps`, `MenuState`, `MenuItem` and `MenuItemProps` to their
+deprecated names:
+
+```tsx
+// v7
+import {Menu, MenuItem, MenuProps, MenuItemProps} from '@workday/canvas-kit-preview-react/menu';
+
+interface AnotherMenuProps extends MenuProps {
+  specialProp?: boolean;
+}
+type CustomMenuItemProps = MenuItemProps;
+
+const CustomMenu = () => {
+  return (
+    <Menu>
+      <MenuItem>First Item</MenuItem>
+    </Menu>
+  );
+};
+
+// v8
+import {DeprecatedMenu, DeprecatedMenuItem} from '@workday/canvas-kit-preview-react/menu';
+
+interface AnotherMenuProps extends DeprecatedMenuProps {
+  specialProp?: boolean;
+}
+
+type CustomMenuItemProps = DeprecatedMenuItemProps;
+
+const CustomMenu = () => {
+  return (
+    <DeprecatedMenu>
+      <DeprecatedMenuItem>First Item</DeprecatedMenuItem>
+    </DeprecatedMenu>
+  );
+};
+```
+
+#### Layout and Column
+
+We are [soft deprecating](#soft-deprecation) `Layout` and `Column`. It has been renamed to
+`DeprecatedLayout` and `DeprecatedColumn`. Similarly, `LayoutProps` has been renamed to
+`DeprecatedLayoutProps`, `Column` to `DeprecatedColumn` and `ColumnProps` to
+`DeprecatedColumnProps`. You may continue to use this component, but note that we plan to
+[hard-deprecate](#hard-deprecation) it in Canvas Kit v9.
+
+This components can be replaced by the new `Grid` component existing in
+`@workday/canvas-kit-react/layout`.
+
+🤖 The codemod will rename `Layout`, `LayoutProps`, `Column` and `ColumnProps` to their deprecated
+names:
+
+```tsx
+// v7
+import {Layout, Column} from '@workday/canvas-kit-react/drawer';
+
+<Layout gutter={0}>
+  <Layout.Column spacing={0}>
+    <Card />
+  </Layout.Column>
+</Layout>;
+
+// v8
+import {DeprecatedLayout, DeprecatedColumn} from '@workday/canvas-kit-react/drawer';
+
+<DeprecatedLayout gutter={0}>
+  <DeprecatedLayout.Column spacing={0}>
+    <Card />
+  </DeprecatedLayout.Column>
+</DeprecatedLayout>;
+```
 
 ### Box
 
