@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v7.3.7](https://github.com/Workday/canvas-kit/releases/tag/v7.3.7) (2022-09-21)
+
+### Infrastructure
+
+- fix(common): Add support for class components to createComponent ([#1786](https://github.com/Workday/canvas-kit/pull/1786)) ([@anicholls](https://github.com/anicholls))
+
+
+## [v7.3.6](https://github.com/Workday/canvas-kit/releases/tag/v7.3.6) (2022-09-21)
+
+### Documentation
+
+- fix: Remove spellcheck from togglable password field ([#1782](https://github.com/Workday/canvas-kit/pull/1782)) ([@vibdev](https://github.com/vibdev))
+
+
+## [v7.3.5](https://github.com/Workday/canvas-kit/releases/tag/v7.3.5) (2022-09-20)
+
+### Components
+
+- fix: Add PopperProps to PopupPopper props ([#1772](https://github.com/Workday/canvas-kit/pull/1772)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
 ## [v7.3.4](https://github.com/Workday/canvas-kit/releases/tag/v7.3.4) (2022-09-16)
 
 ### Components
@@ -10,6 +31,11 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - chore: Add custom lint rule to encourage CK slash imports ([#1762](https://github.com/Workday/canvas-kit/pull/1762)) ([@alanbsmith](https://github.com/alanbsmith))
 
 
+## [v6.8.15](https://github.com/Workday/canvas-kit/releases/tag/v6.8.15) (2022-09-15)
+
+### Components
+
+- fix: Add PopperProps to PopupPopper props ([#1772](https://github.com/Workday/canvas-kit/pull/1772)) ([@alanbsmith](https://github.com/alanbsmith))
 ## [v7.3.3](https://github.com/Workday/canvas-kit/releases/tag/v7.3.3) (2022-09-15)
 
 ### Components
