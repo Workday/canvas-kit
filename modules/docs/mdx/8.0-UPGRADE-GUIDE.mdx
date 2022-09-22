@@ -9,19 +9,26 @@ This guide contains breaking changes in Canvas Kit v8. Please
 any questions.
 
 - [Codemod](#codemod)
-- [Components](#components)
+- [General Updates](#general-updates)
+  - [Removal of Default Exports](#removal-of-default-exports)
+  - [Responsive Styles](#responsive-styles)
+- [New Components](#new-components)
+  - [Grid](#grid)
+  - [Text](#text)
+- [Component Deprecations](#component-deprecations)
+- [Component Promotions](#component-promotions)
+- [Component Updates](#component-updates)
   - [Box](#box)
   - [Menu (Main)](#menu)
-- [General Changes](#general-changes) -[Remove Default Imports](#remove-default-imports)
 
 ## Codemod
 
 Please use our [codemod package](https://github.com/Workday/canvas-kit/tree/master/modules/codemod)
 to automatically update your code to work with many of the breaking changes as you upgrade from
-Canvas Kit v6 to v7:
+Canvas Kit v7 to v8:
 
 ```sh
-> npx @workday/canvas-kit-codemod v7 [path]
+> npx @workday/canvas-kit-codemod v8 [path]
 ```
 
 > Note: This codemod only works on `.js`, `.jsx`, `.ts`, and `.tsx` extensions. You may need to make
@@ -39,15 +46,111 @@ rollback more easily if necessary.**
 [Let us know](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) if you
 encounter any issues or use cases that we've missed.
 
-## Components
+## General Updates
+
+### Removal of Default Exports
+
+We've removed all remaining default exports from our packages to maintain consistency with our newer
+(and recently updated) components and systems which favor named exports. The following components
+have moved from default exports to named exports. The following components have been updated to
+provide named exports instead of default exports (in cases where the component provided both default
+and named exports, the default export has been removed).
+
+#### Main (canvas-kit-react)
+
+- AccentIcon
+- AppletIcon
+- Avatar
+- Canvas
+- Checkbox
+- CountBadge
+- FormField
+- Graphic
+- Icon
+- LoadingDots
+- Radio
+- SegmentedControl
+- Select
+- SidePanel
+- StatusIndicator
+- Switch
+- Svg
+- SystemIcon
+- SystemIconCircle
+- Table
+- TextArea
+- TextInput
+- Toast
+- Tooltip
+
+#### Labs (canvas-kit-labs-react)
+
+- Combobox
+- Drawer
+
+#### Preview (canvas-kit-preview-react)
+
+- Breadcrumbs
+- ColorPicker
+- Menu
+- Select
+- SidePanel
+
+#### Fonts (canvas-kit-react-fonts)
+
+- fonts
+
+🤖 The codemod will rewrite your default imports to named imports.
+
+### Responsive Styles
+
+> (PLACEHOLDER) Responsive styles go here (https://github.com/Workday/canvas-kit/issues/1503)
+
+## New Components
+
+### Grid
+
+> (PLACEHOLDER) Introduction to Grid plus link to Grid docs goes here.
+
+### Text
+
+> (PLACEHOLDER) Introduction to Text plus link to Text docs goes here.
+
+## Component Deprecations
+
+### Deprecation Types
+
+There are two types of deprecations: soft and hard.
+
+#### Soft Deprecation
+
+A soft-deprecated component is still available with its full functionality, but it will have been
+renamed with a prefix to indicate its soft-deprecated status. It will also include a console warning
+announcing its deprecation. This warning will only be triggered on the component's initial render.
+
+Soft-deprecated types and utilities will also be renamed but generally will not trigger a console
+warning.
+
+#### Hard Deprecation
+
+A hard-deprecated component or package is no longer available. You will need to follow the method
+prescribed in our upgrade guide to update your application. Please
+[reach out](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) to our team
+directly if you need additional help.
+
+> (PLACEHOLDER) Soft deprecation of Drawer, Menu (Preview), Layout and Column goes here. (https://github.com/Workday/canvas-kit/pull/1747)
+
+## Component Promotions
+
+> (PLACEHOLDER) Promotion of Breadcrumbs from Preview to Main plus addition of List system goes here (https://github.com/Workday/canvas-kit/pull/1724)
+
+## Component Updates
 
 ### Box
 
-#### Updating props
-
-The following props have been added to the `Box` component to support font and text styles:
-`fontFamily`, `fontSize`, `fontStyle`, `fontWeight`, `lineHeight`, `letterSpacing`, `textAlign`,
-`textDecoration`, `textTransform`, `textShadow`, `whiteSpace`, `wordBreak`.
+`Box` now supports the following props to set font and text styles: `fontFamily`, `fontSize`,
+`fontStyle`, `fontWeight`, `lineHeight`, `letterSpacing`, `textAlign`, `textDecoration`,
+`textTransform`, `textShadow`, `whiteSpace`, and `wordBreak`.
 
 ```tsx
 // v7
@@ -63,54 +166,10 @@ const StyledBox = styled(Box)({
 <Box fontFamily="monospace" fontSize={16} fontWeight="medium" />
 ```
 
-## General Changes
+### Menu (Main)
 
-### Remove Default Imports
+The depth value of `Menu.Card` has been updated from `1` to `3`. This is a visually breaking change.
 
-As part of some cleanup, we've removed any default imports that where lingering. This change matches
-more closely what we've been doing with new components and systems. As part of this change, the
-components listed below have moved from default imports to named imports.
+### Segmented Control
 
-##### Fonts
-
-- fonts
-
-##### Main Package Components
-
-- Toast
-- Canvas
-- Tooltip
-- TextArea
-- Avatar
-- CountBadge
-- Checkbox
-- FormField
-- LoadingDots
-- Radio
-- SegmentedControl
-- Select
-- SidePanel
-- StatusIndicator
-- Switch
-- Table
-- TextInput
-
-##### Labs Components
-
-- Combobox
-- Drawer
-
-##### Preview Components
-
-- Breadcrumbs
-- ColorPicker
-- Menu
-- Select
-- SidePanel
-
-🤖 The codemod will update imports to be named imports
-
-### Menu (main)
-
-Default depth value of the main menu component has been change to depth 3 (It was depth 1 before).
-Depth update is a visual breaking change but doesn't require any actions from user.
+> (PLACEHOLDER) New compound Segmented Control goes here (https://github.com/Workday/canvas-kit/issues/1777)
