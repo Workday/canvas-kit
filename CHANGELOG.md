@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v7.3.8](https://github.com/Workday/canvas-kit/releases/tag/v7.3.8) (2022-09-22)
+
+### Components
+
+- fix: Extend BaseButtonProps to our buttons and export utility functions ([#1775](https://github.com/Workday/canvas-kit/pull/1775)) ([@mannycarrera4](https://github.com/mannycarrera4))
+  - You can now overwrite styles using style properties from `Box` on `PrimaryButton`, `SecondaryButton`, `TertiaryButton` and `DeleteButton`. This allows you to customize styles more easily.
+  - We're exporting utility functions `getMinWidthStyles` and `getPaddingStyles` to help those making custom buttons
+
+
 ## [v7.3.7](https://github.com/Workday/canvas-kit/releases/tag/v7.3.7) (2022-09-21)
 
 ### Infrastructure
