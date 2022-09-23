@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v7.3.10](https://github.com/Workday/canvas-kit/releases/tag/v7.3.10) (2022-09-23)
+
+### Components
+
+- fix: Remove use of style to style border radius on TertiaryButton ([#1803](https://github.com/Workday/canvas-kit/pull/1803)) ([@mannycarrera4](https://github.com/mannycarrera4))
+  We were using `style` to apply border radius which prevent users from overwriting styles. Using `borderRadius` allows for customization.
+
+
 ## [v7.3.9](https://github.com/Workday/canvas-kit/releases/tag/v7.3.9) (2022-09-23)
 
 ### Infrastructure
