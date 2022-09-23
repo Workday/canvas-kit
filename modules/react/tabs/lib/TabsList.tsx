@@ -9,7 +9,6 @@ import {
   useModalityType,
   styled,
   StyledType,
-  useIsRTL,
 } from '@workday/canvas-kit-react/common';
 import {Stack} from '@workday/canvas-kit-react/layout';
 import {
@@ -54,18 +53,19 @@ export const TabsList = createSubcomponent('div')({
   elemPropsHook: useTabsList,
 })<TabListProps>(({children, overflowButton, ...elemProps}, Element, model) => {
   const modality = useModalityType();
-  const isRTL = useIsRTL();
+  const touchStates = useTouchDirection();
   return (
     <StyledStack
       as={Element}
       position="relative"
       borderBottom={`1px solid ${commonColors.divider}`}
-      paddingLeft={modality === 'touch' ? 'zero' : 'm'}
-      paddingRight="m"
-      spacing="xxxs"
+      paddingX={modality === 'touch' ? '10px' : 'm'}
+      spacing="xs"
       maskImage={
-        modality === 'touch'
-          ? `linear-gradient(${isRTL ? 'to left' : 'to right'}, white 95%, transparent)`
+        modality === 'touch' && touchStates.isDragging
+          ? `linear-gradient(${
+              touchStates.direction === 'left' ? 'to left' : 'to right'
+            }, white 80%, transparent)`
           : undefined
       }
       {...elemProps}
@@ -75,3 +75,36 @@ export const TabsList = createSubcomponent('div')({
     </StyledStack>
   );
 });
+
+export const useTouchDirection = () => {
+  const [isDragging, setIsDragging] = React.useState(false);
+  const [touchDir, setTouchDirection] = React.useState('right');
+
+  React.useEffect(() => {
+    let prevXPos = window.pageXOffset;
+    const handleTouchMove = function(e: TouchEvent) {
+      const currXPos = e.touches[0].clientX;
+      setIsDragging(true);
+      if (currXPos > prevXPos) {
+        setTouchDirection('left');
+      } else if (currXPos < prevXPos) {
+        setTouchDirection('right');
+      }
+      prevXPos = currXPos;
+      e.preventDefault();
+    };
+    const handleDragEnd = function() {
+      setIsDragging(false);
+    };
+    window.addEventListener('touchmove', handleTouchMove);
+    window.addEventListener('touchstart', handleDragEnd);
+    window.addEventListener('touchend', handleDragEnd);
+    return () => {
+      window.removeEventListener('touchmove', handleTouchMove);
+      window.removeEventListener('touchstart', handleDragEnd);
+      window.removeEventListener('touchend', handleDragEnd);
+    };
+  }, []);
+
+  return {direction: touchDir, isDragging: isDragging};
+};
