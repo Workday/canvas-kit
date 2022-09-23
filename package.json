@@ -76,7 +76,7 @@
     "eslint-plugin-react": "^7.16.0",
     "eslint-plugin-react-hooks": "^4.3.0",
     "eslint-plugin-react-ssr": "^1.0.3",
-    "eslint-plugin-workday-custom-rules": "file:./utils/custom-lint-rules",
+    "eslint-plugin-workday-custom-rules": "file:./utils/custom-lint-rules/",
     "expect-type": "^0.11.0",
     "file-loader": "^1.1.5",
     "github-markdown-css": "^3.0.1",

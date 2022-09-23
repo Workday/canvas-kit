@@ -11,7 +11,7 @@ import {
 import {colors} from '@workday/canvas-kit-react/tokens';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {ButtonSizes, IconPositions} from './types';
-import {BaseButton, getMinWidthStyles, getPaddingStyles} from './BaseButton';
+import {BaseButton, BaseButtonProps, getMinWidthStyles, getPaddingStyles} from './BaseButton';
 
 const getPrimaryButtonColors = (variant: 'inverse' | undefined, theme: EmotionCanvasTheme) => {
   const {
@@ -85,7 +85,7 @@ const getPrimaryButtonColors = (variant: 'inverse' | undefined, theme: EmotionCa
   }
 };
 
-export interface PrimaryButtonProps extends Themeable, GrowthBehavior {
+export interface PrimaryButtonProps extends Themeable, GrowthBehavior, BaseButtonProps {
   /**
    * The variant of the PrimaryButton.
    * @default undefined

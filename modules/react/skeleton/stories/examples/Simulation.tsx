@@ -1,22 +1,17 @@
 import React from 'react';
 import {keyframes} from '@emotion/react';
 
-import {
-  Card,
-  Checkbox,
-  FormField,
-  SecondaryButton,
-  SystemIconCircle,
-  TextInput,
-  styled,
-} from '@workday/canvas-kit-react';
-
+import {Card} from '@workday/canvas-kit-react/card';
+import {Checkbox} from '@workday/canvas-kit-react/checkbox';
+import {FormField} from '@workday/canvas-kit-react/form-field';
+import {SecondaryButton} from '@workday/canvas-kit-react/button';
+import {SystemIconCircle} from '@workday/canvas-kit-react/icon';
+import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {Box, Flex} from '@workday/canvas-kit-react/layout';
-
 import {Skeleton} from '@workday/canvas-kit-react/skeleton';
 import {borderRadius, space} from '@workday/canvas-kit-react/tokens';
 import {patternIcon} from '@workday/canvas-system-icons-web';
-import {StyledType} from '@workday/canvas-kit-react/common';
+import {styled, StyledType} from '@workday/canvas-kit-react/common';
 import {Heading} from '@workday/canvas-kit-react/text';
 
 const fadeOut = keyframes`

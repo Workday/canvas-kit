@@ -10,6 +10,9 @@ export type StyledType = {
   as?: React.ElementType;
 };
 
+// For React class components
+type Constructor<T> = new (...args: any[]) => T;
+
 /**
  * Extract a Ref from T if it exists
  * This will return the following:
@@ -20,6 +23,8 @@ export type StyledType = {
  */
 type ExtractRef<T> = T extends undefined // test if T was even passed in
   ? never // T not passed in, we'll set the ref to `never`
+  : T extends Constructor<infer C>
+  ? React.LegacyRef<C>
   : React.Ref<
       T extends keyof ElementTagNameMap // test if T is an element string like 'button' or 'div'
         ? ElementTagNameMap[T] // if yes, the ref should be the element interface. `'button' => HTMLButtonElement`

@@ -11,9 +11,9 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {ButtonColors, ButtonSizes, IconPositions} from './types';
-import {BaseButton, getMinWidthStyles, getPaddingStyles} from './BaseButton';
+import {BaseButton, BaseButtonProps, getMinWidthStyles, getPaddingStyles} from './BaseButton';
 
-export interface SecondaryButtonProps extends Themeable, GrowthBehavior {
+export interface SecondaryButtonProps extends Themeable, GrowthBehavior, BaseButtonProps {
   /**
    * The variant of the SecondaryButton.
    * @default undefined
