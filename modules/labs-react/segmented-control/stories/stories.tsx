@@ -1,10 +1,10 @@
 import React from 'react';
 
-import {SegmentedControl} from '@workday/canvas-kit-preview-react/segmented-control';
+import {SegmentedControl} from '@workday/canvas-kit-labs-react/segmented-control';
 import {starIcon, searchIcon} from '@workday/canvas-system-icons-web';
 
 export default {
-  title: 'Preview/Segmented Control/React',
+  title: 'Labs/Segmented Control/React',
   component: SegmentedControl,
 };
 

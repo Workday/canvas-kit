@@ -7,10 +7,10 @@ import {withSnapshotsEnabled} from '../../../../utils/storybook';
 import {
   SegmentedControl,
   useSegmentedControlModel,
-} from '@workday/canvas-kit-preview-react/segmented-control';
+} from '@workday/canvas-kit-labs-react/segmented-control';
 
 export default withSnapshotsEnabled({
-  title: 'Testing/React/Preview/Segmented Control',
+  title: 'Testing/React/Labs/Segmented Control',
   component: SegmentedControl,
 });
 
@@ -33,9 +33,7 @@ export const SegmentedControlStates = () => {
         ]}
       >
         {props => {
-          const state = {open: props.open};
-
-          return <SegmentedControl model={{...model, state}}> </SegmentedControl>;
+          return <SegmentedControl model={{...model}}> </SegmentedControl>;
         }}
       </ComponentStatesTable>
     </StaticStates>
