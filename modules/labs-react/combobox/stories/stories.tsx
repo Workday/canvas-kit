@@ -3,21 +3,21 @@ import {storiesOf} from '@storybook/react';
 
 import {Combobox, ComboboxProps, ComboBoxMenuItemGroup} from '@workday/canvas-kit-labs-react';
 import {FormField} from '@workday/canvas-kit-react/form-field';
-import {MenuItem, MenuItemProps} from '@workday/canvas-kit-preview-react/menu';
+import {DeprecatedMenuItem, DeprecatedMenuItemProps} from '@workday/canvas-kit-preview-react/menu';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
 
 const autocompleteResult = (
   textModifier: number,
   isDisabled: boolean
-): ReactElement<MenuItemProps> => (
-  <MenuItem isDisabled={isDisabled}>
+): ReactElement<DeprecatedMenuItemProps> => (
+  <DeprecatedMenuItem isDisabled={isDisabled}>
     Result{' '}
     <span>
       num<span>ber</span>
     </span>{' '}
     {textModifier}
-  </MenuItem>
+  </DeprecatedMenuItem>
 );
 
 const simpleAutoComplete = (count: number, showDisabledItems, total = 5) =>
@@ -31,9 +31,9 @@ const groupOfResults = (
   groupHeading: ReactNode = 'Group'
 ): ComboBoxMenuItemGroup => ({
   header: (
-    <MenuItem>
+    <DeprecatedMenuItem>
       <strong>{groupHeading}</strong>
-    </MenuItem>
+    </DeprecatedMenuItem>
   ),
   items: simpleAutoComplete(count, showDisabledItems, 10),
 });

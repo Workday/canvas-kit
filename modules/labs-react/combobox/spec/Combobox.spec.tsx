@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Combobox, ComboboxProps} from '../lib/Combobox';
-import {MenuItem} from '@workday/canvas-kit-preview-react/menu';
+import {DeprecatedMenuItem} from '@workday/canvas-kit-preview-react/menu';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {render, fireEvent} from '@testing-library/react';
 
@@ -13,7 +13,7 @@ describe('Combobox', () => {
 
   beforeEach(() => {
     defaultProps = {
-      autocompleteItems: [<MenuItem />, <MenuItem />],
+      autocompleteItems: [<DeprecatedMenuItem />, <DeprecatedMenuItem />],
       children: <TextInput placeholder={placeholderText} />,
     };
   });
@@ -88,7 +88,7 @@ describe('Combobox', () => {
     it('should render correct status text', () => {
       const screen = renderCombobox({
         ...defaultProps,
-        autocompleteItems: [<MenuItem />, <MenuItem />],
+        autocompleteItems: [<DeprecatedMenuItem />, <DeprecatedMenuItem />],
         getStatusText(listCount: number) {
           return `Item count: ${listCount}`;
         },
@@ -113,7 +113,7 @@ describe('Combobox', () => {
 
   test('Call callback function when enter is pressed', async () => {
     const menuText = 'menuText';
-    const autocompleteItems = [<MenuItem onClick={cb}>{menuText}</MenuItem>];
+    const autocompleteItems = [<DeprecatedMenuItem onClick={cb}>{menuText}</DeprecatedMenuItem>];
     const {findByRole} = renderCombobox({
       ...defaultProps,
       autocompleteItems,
@@ -132,9 +132,9 @@ describe('Combobox', () => {
   test('Call callback function when list item is clicked', async () => {
     const menuText = 'menuText';
     const autocompleteItems = [
-      <MenuItem onClick={cb}>
+      <DeprecatedMenuItem onClick={cb}>
         <span>{menuText}</span>
-      </MenuItem>,
+      </DeprecatedMenuItem>,
     ];
     const {findByRole, findByText} = renderCombobox({
       ...defaultProps,
@@ -152,9 +152,9 @@ describe('Combobox', () => {
     const menuText = 'menuText';
     const id = 'my-id';
     const autocompleteItems = [
-      <MenuItem isDisabled={true} onClick={cb}>
+      <DeprecatedMenuItem isDisabled={true} onClick={cb}>
         {menuText}
-      </MenuItem>,
+      </DeprecatedMenuItem>,
     ];
     const {findByRole} = renderCombobox({
       ...defaultProps,
@@ -176,7 +176,7 @@ describe('Combobox', () => {
   test('Do not call callback function when meta key is pressed', async () => {
     const menuText = 'menuText';
     const id = 'my-id';
-    const autocompleteItems = [<MenuItem onClick={cb}>{menuText}</MenuItem>];
+    const autocompleteItems = [<DeprecatedMenuItem onClick={cb}>{menuText}</DeprecatedMenuItem>];
     const {findByRole} = renderCombobox({
       ...defaultProps,
       autocompleteItems,
@@ -233,9 +233,9 @@ describe('Combobox', () => {
   test('Do not call blur function when clicking on disabled menu item', async () => {
     const menuText = 'menuText';
     const autocompleteItems = [
-      <MenuItem isDisabled={true} onClick={cb}>
+      <DeprecatedMenuItem isDisabled={true} onClick={cb}>
         {menuText}
-      </MenuItem>,
+      </DeprecatedMenuItem>,
     ];
     const {findByRole, findByText} = renderCombobox({
       ...defaultProps,
