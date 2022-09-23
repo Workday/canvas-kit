@@ -1,54 +1,42 @@
-module.exports = (camelCaseName, pascalCaseName) => `import React from 'react';
+module.exports = pascalCaseName => `
+import React from 'react';
+import {createModelHook} from '@workday/canvas-kit-react/common';
 
-import {createEventMap, Model, ToModelConfig, useEventMap} from '@workday/canvas-kit-react/common';
-
-type ${pascalCaseName}State = {
-  open: boolean;
-};
-
-type ${pascalCaseName}Events = {
-  open(data: {}): void;
-  close(data: {}): void;
-};
-
-export type ${pascalCaseName}Model = Model<${pascalCaseName}State, ${pascalCaseName}Events>;
-
-const ${camelCaseName}EventMap = createEventMap<${pascalCaseName}Events>()({
-  guards: {
-    shouldOpen: 'open',
-    shouldClose: 'close',
+export const use${pascalCaseName}Model = createModelHook({
+  defaultConfig: {
+    /**
+     * The initial visibility of the content
+     * @default 'false'
+     */
+    initialOpen: false,
   },
-  callbacks: {
-    onOpen: 'open',
-    onClose: 'close',
-  },
-});
-
-export type ${pascalCaseName}ModelConfig = {
-  initialOpen?: boolean;
-} & Partial<ToModelConfig<${pascalCaseName}State, ${pascalCaseName}Events, typeof ${camelCaseName}EventMap>>;
-
-export const use${pascalCaseName}Model = (
-  config: ${pascalCaseName}ModelConfig = {}
-): ${pascalCaseName}Model => {
+})(config => {
   const [open, setOpen] = React.useState(config.initialOpen || false);
 
   const state = {
+    /**
+     * Visibility state of the disclosed content.
+     */
     open,
   };
 
-  const events = useEventMap(${camelCaseName}EventMap, state, config, {
-    open(data) {
+  const events = {
+    /**
+     * Start showing the disclosed content. If a DOM event triggered this event, the event data will
+     * be passed along. This data can be used by guards and callbacks.
+     */
+    open(event?: Event | React.SyntheticEvent) {
       setOpen(true);
     },
-    close(data) {
+    /**
+     * Start hiding this disclosed content. If a DOM event triggered this event, the event data will
+     * be passed along. This data can be used by guards and callbacks.
+     */
+    close(event?: Event | React.SyntheticEvent) {
       setOpen(false);
     },
-  });
-
-  return {
-    state,
-    events,
   };
-};
+
+  return {state, events};
+});
 `;

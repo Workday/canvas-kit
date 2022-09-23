@@ -77,6 +77,7 @@ export const TextInputWithFormik = () => {
               type={showPassword ? 'text' : 'password'}
               name="password"
               autoComplete="current-password"
+              spellCheck={false}
               ref={passwordRef}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}

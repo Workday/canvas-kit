@@ -56,9 +56,6 @@ const StyledItem = styled(Box.as('button'))<StyledType>(
       borderWidth: 0,
       textAlign: 'left',
       transition: 'background-color 80ms, color 80ms',
-      '.wd-icon-background ~ .wd-icon-accent, .wd-icon-background ~ .wd-icon-accent2': {
-        fill: iconColors.active,
-      },
       '&:hover, &[aria-selected=true]': {
         backgroundColor: theme.canvas.palette.primary.lightest,
         color: colors.blackPepper300,
@@ -66,7 +63,7 @@ const StyledItem = styled(Box.as('button'))<StyledType>(
           fill: iconColors.hover,
         },
         '.wd-icon-background ~ .wd-icon-accent, .wd-icon-background ~ .wd-icon-accent2': {
-          fill: iconColors.active,
+          fill: iconColors.hover,
         },
       },
       '&:focus': {
@@ -74,6 +71,9 @@ const StyledItem = styled(Box.as('button'))<StyledType>(
         backgroundColor: theme.canvas.palette.primary.main,
         color: typeColors.inverse,
         '.wd-icon-fill, .wd-icon-accent, .wd-icon-accent2': {
+          fill: iconColors.inverse,
+        },
+        '*:hover .wd-icon-fill': {
           fill: iconColors.inverse,
         },
         '.wd-icon-background ~ .wd-icon-accent, .wd-icon-background ~ .wd-icon-accent2': {
@@ -84,9 +84,6 @@ const StyledItem = styled(Box.as('button'))<StyledType>(
       [`[data-whatinput]`]: {
         backgroundColor: 'inherit',
         color: colors.blackPepper300,
-        '.wd-icon-background ~ .wd-icon-accent, .wd-icon-background ~ .wd-icon-accent2': {
-          fill: iconColors.active,
-        },
         '&:hover, &[aria-selected=true]': {
           backgroundColor: theme.canvas.palette.primary.lightest,
           '.wd-icon-fill, .wd-icon-accent, .wd-icon-accent2': {
@@ -95,7 +92,7 @@ const StyledItem = styled(Box.as('button'))<StyledType>(
         },
         '&:focus': {
           '.wd-icon-background ~ .wd-icon-accent, .wd-icon-background ~ .wd-icon-accent2': {
-            fill: iconColors.active,
+            fill: iconColors.hover,
           },
         },
       },
@@ -111,10 +108,13 @@ const StyledItem = styled(Box.as('button'))<StyledType>(
           '.wd-icon-background ~ .wd-icon-accent, .wd-icon-background ~ .wd-icon-accent2': {
             fill: iconColors.disabled,
           },
-          '&:hover, &[aria-selected=true]': {
-            '.wd-icon-background ~ .wd-icon-accent, .wd-icon-background ~ .wd-icon-accent2': {
-              fill: iconColors.disabled,
-            },
+        },
+        '&:hover, &[aria-selected=true]': {
+          '.wd-icon-background ~ .wd-icon-accent, .wd-icon-background ~ .wd-icon-accent2': {
+            fill: iconColors.disabled,
+          },
+          '*:hover .wd-icon-fill': {
+            fill: iconColors.disabled,
           },
         },
       },

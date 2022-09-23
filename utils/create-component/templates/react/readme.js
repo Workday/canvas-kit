@@ -1,8 +1,6 @@
-const getPascalCaseName = require('../../nameUtils').getPascalCaseName;
 const getTitleCaseName = require('../../nameUtils').getTitleCaseName;
 
 module.exports = (name, description, prerelease) => {
-  const pascalCaseName = getPascalCaseName(name);
   const titleCaseName = getTitleCaseName(name);
 
   let prereleaseMsg = '';
@@ -21,38 +19,15 @@ module.exports = (name, description, prerelease) => {
 `;
   }
 
-  return `# Canvas Kit ${titleCaseName}
+  return `
+# Canvas Kit ${titleCaseName}
 ${prereleaseMsg}
 ${description}
 
-## Installation
+View the [documentation for ${titleCaseName}](https://workday.github.io/canvas-kit/?path=/docs/${prerelease ? prerelease + '-' : ''}${name}-react)
+on Storybook.
 
-\`\`\`sh
-yarn add @workday/canvas-kit-${prerelease && prerelease + '-'}react
-\`\`\`
-
-## Usage
-
-\`\`\`tsx
-import * as React from 'react';
-import {${pascalCaseName}} from '@workday/canvas-kit-${prerelease &&
-    prerelease + '-'}react/${name}';
-
-<${pascalCaseName} />;
-\`\`\`
-
-## Static Properties
-
-> None
-
-## Component Props
-
-### Required
-
-> None
-
-### Optional
-
-> None
+[> Workday Design Reference: ${titleCaseName}](https://design.workday.com/components/)
 `;
+
 };

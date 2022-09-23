@@ -12,15 +12,9 @@ export const isFocusable = (element: HTMLElement) => {
   const validAnchor = nodeName === 'a' && element.hasAttribute('href');
   const validAudioVideo = ['audio', 'video'].includes(nodeName) && element.hasAttribute('controls');
   const validImgObject = ['img', 'object'].includes(nodeName) && element.hasAttribute('usemap');
-  const validNativelyFocusable = [
-    'button',
-    'details',
-    'embed',
-    'iframe',
-    'select',
-    'textarea',
-  ].includes(nodeName) &&
-  element.getAttribute('tabindex') !== '-1';
+  const validNativelyFocusable =
+    ['button', 'details', 'embed', 'iframe', 'select', 'textarea'].includes(nodeName) &&
+    element.getAttribute('tabindex') !== '-1';
   const hasTabIndex = element.getAttribute('tabindex') === '0';
 
   return (
