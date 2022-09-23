@@ -119,9 +119,9 @@ describe('Menu', () => {
         });
       });
 
-      context('when the Fourth item is tabbed', () => {
+      context('when the tab key is pressed', () => {
         beforeEach(() => {
-          cy.findByRole('menuitem', {name: 'Fourth Item'}).tab();
+          cy.focused().tab();
         });
 
         it('should have aria-expanded set to false', () => {
