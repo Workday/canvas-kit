@@ -16,7 +16,6 @@ import {FormField} from '@workday/canvas-kit-preview-react/form-field';
 import {useTextInputField, useTextInputModel} from './hooks';
 
 const baseStyles: CSSProperties = {
-  ...type.levels.subtext.large,
   transition: '0.2s box-shadow, 0.2s border-color',
   '&::placeholder': {
     color: inputColors.placeholder,
@@ -60,6 +59,7 @@ export const TextInputField = createSubcomponent('input')({
   return (
     <FormField.Input
       as="input"
+      {...type.levels.subtext.large}
       css={[baseStyles, focusStyles]}
       padding={space.xxs}
       margin={0}

@@ -1,0 +1,260 @@
+import {Meta} from '@storybook/addon-docs';
+
+<Meta title="Welcome/Upgrade Guides/v8.0" />
+
+# Canvas Kit 8.0 Upgrade Guide
+
+This guide contains breaking changes in Canvas Kit v8. Please
+[reach out](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) if you have
+any questions.
+
+- [Codemod](#codemod)
+- [Components](#components)
+  - [Component Deprecations](#component-deprecations)
+  - [Box](#box)
+  - [Menu (Main)](#menu)
+- [General Changes](#general-changes) -[Remove Default Imports](#remove-default-imports)
+
+## Codemod
+
+Please use our [codemod package](https://github.com/Workday/canvas-kit/tree/master/modules/codemod)
+to automatically update your code to work with many of the breaking changes as you upgrade from
+Canvas Kit v6 to v7:
+
+```sh
+> npx @workday/canvas-kit-codemod v7 [path]
+```
+
+> Note: This codemod only works on `.js`, `.jsx`, `.ts`, and `.tsx` extensions. You may need to make
+> some manual changes in other file types (`.json`, `.mdx`, `.md`, etc.).
+
+> Note: You may need to run your linter after executing the codemod, as its resulting formatting
+> (spacing, quotes, etc.) may not match your project's styling.
+
+**Breaking changes handled by this codemod will be marked with a 🤖.**
+
+**Please verify all changes made by the codemod. As a safety precaution, we recommend committing the
+changes from the codemod as a single isolated commit (separate from other changes) so you can
+rollback more easily if necessary.**
+
+[Let us know](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) if you
+encounter any issues or use cases that we've missed.
+
+## Components
+
+### Component Deprecations
+
+#### Deprecation Types
+
+There are two types of deprecations: soft and hard.
+
+##### Soft Deprecation
+
+A soft-deprecated component is still available with its full functionality, but it will have been
+renamed with a prefix to indicate its soft-deprecated status. It will also include a console warning
+announcing its deprecation. This warning will only be triggered on the component's initial render.
+
+Soft-deprecated types and utilities will also be renamed but generally will not trigger a console
+warning.
+
+##### Hard Deprecation
+
+A hard-deprecated component or package is no longer available. You will need to follow the method
+prescribed in our upgrade guide to update your application. Please
+[reach out](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) to our team
+directly if you need additional help.
+
+#### Drawer
+
+We are [soft deprecating](#soft-deprecation) `Drawer`. It has been renamed to `DeprecatedDrawer`.
+Similarly, `DrawerProps` has been renamed to `DeprecatedDrawerProps`, `DrawerHeader` to
+`DeprecatedDrawerHeader` and `DrawerHeaderProps` to `DeprecatedDrawerHeaderProps`. You may continue
+to use this component, but note that we plan to [hard-deprecate](#hard-deprecation) it in Canvas Kit
+v9.
+
+🤖 The codemod will rename `Drawer`, `DrawerProps`, `DrawerHeader` and `DrawerHeaderProps` to their
+deprecated names:
+
+```tsx
+// v7
+import {Drawer, DrawerHeader} from '@workday/canvas-kit-labs-react/drawer';
+
+<Drawer
+  header={
+    <DrawerHeader
+      closeIconAriaLabel="Close"
+      onClose={() => console.log('onClose callback')}
+      title="Deprecated Drawer Header"
+    />
+  }
+/>;
+
+// v8
+import {DeprecatedDrawer, DeprecatedDrawerHeader} from '@workday/canvas-kit-labs-react/drawer';
+
+<DeprecatedDrawer
+  header={
+    <DeprecatedDrawerHeader
+      closeIconAriaLabel="Close"
+      onClose={() => console.log('onClose callback')}
+      title="Deprecated Drawer Header"
+    />
+  }
+/>;
+```
+
+#### Menu (preview)
+
+We are [soft deprecating](#soft-deprecation) `Menu`. It has been renamed to `DeprecatedMenu`.
+Similarly, `MenuProps` has been renamed to `DeprecatedMenuProps`, `MenuState` to
+`DeprecatedMenuState`, `MenuItem` to `DeprecatedMenuItem` and `MenuItemProps` to
+`DeprecatedMenuItemProps`. You may continue to use this component, but note that we plan to
+[hard-deprecate](#hard-deprecation) it in Canvas Kit v9.
+
+This component can be replaced by `Menu` component from `@workday/canvas-kit-react/menu`.
+
+🤖 The codemod will rename `Menu`, `MenuProps`, `MenuState`, `MenuItem` and `MenuItemProps` to their
+deprecated names:
+
+```tsx
+// v7
+import {Menu, MenuItem, MenuProps, MenuItemProps} from '@workday/canvas-kit-preview-react/menu';
+
+interface AnotherMenuProps extends MenuProps {
+  specialProp?: boolean;
+}
+type CustomMenuItemProps = MenuItemProps;
+
+const CustomMenu = () => {
+  return (
+    <Menu>
+      <MenuItem>First Item</MenuItem>
+    </Menu>
+  );
+};
+
+// v8
+import {DeprecatedMenu, DeprecatedMenuItem} from '@workday/canvas-kit-preview-react/menu';
+
+interface AnotherMenuProps extends DeprecatedMenuProps {
+  specialProp?: boolean;
+}
+
+type CustomMenuItemProps = DeprecatedMenuItemProps;
+
+const CustomMenu = () => {
+  return (
+    <DeprecatedMenu>
+      <DeprecatedMenuItem>First Item</DeprecatedMenuItem>
+    </DeprecatedMenu>
+  );
+};
+```
+
+#### Layout and Column
+
+We are [soft deprecating](#soft-deprecation) `Layout` and `Column`. It has been renamed to
+`DeprecatedLayout` and `DeprecatedColumn`. Similarly, `LayoutProps` has been renamed to
+`DeprecatedLayoutProps`, `Column` to `DeprecatedColumn` and `ColumnProps` to
+`DeprecatedColumnProps`. You may continue to use this component, but note that we plan to
+[hard-deprecate](#hard-deprecation) it in Canvas Kit v9.
+
+This components can be replaced by the new `Grid` component existing in
+`@workday/canvas-kit-react/layout`.
+
+🤖 The codemod will rename `Layout`, `LayoutProps`, `Column` and `ColumnProps` to their deprecated
+names:
+
+```tsx
+// v7
+import {Layout, Column} from '@workday/canvas-kit-react/drawer';
+
+<Layout gutter={0}>
+  <Layout.Column spacing={0}>
+    <Card />
+  </Layout.Column>
+</Layout>;
+
+// v8
+import {DeprecatedLayout, DeprecatedColumn} from '@workday/canvas-kit-react/drawer';
+
+<DeprecatedLayout gutter={0}>
+  <DeprecatedLayout.Column spacing={0}>
+    <Card />
+  </DeprecatedLayout.Column>
+</DeprecatedLayout>;
+```
+
+### Box
+
+#### Updating props
+
+The following props have been added to the `Box` component to support font and text styles:
+`fontFamily`, `fontSize`, `fontStyle`, `fontWeight`, `lineHeight`, `letterSpacing`, `textAlign`,
+`textDecoration`, `textTransform`, `textShadow`, `whiteSpace`, `wordBreak`.
+
+```tsx
+// v7
+const StyledBox = styled(Box)({
+  fontFamily: 'monospace',
+  fontSize: type.properties.fontSizes[16],
+  fontWeight: type.properties.fontWeights.medium
+})
+
+<StyledBox />
+
+// v8
+<Box fontFamily="monospace" fontSize={16} fontWeight="medium" />
+```
+
+## General Changes
+
+### Remove Default Imports
+
+As part of some cleanup, we've removed any default imports that where lingering. This change matches
+more closely what we've been doing with new components and systems. As part of this change, the
+components listed below have moved from default imports to named imports.
+
+##### Fonts
+
+- fonts
+
+##### Main Package Components
+
+- Toast
+- Canvas
+- Tooltip
+- TextArea
+- Avatar
+- CountBadge
+- Checkbox
+- FormField
+- LoadingDots
+- Radio
+- SegmentedControl
+- Select
+- SidePanel
+- StatusIndicator
+- Switch
+- Table
+- TextInput
+
+##### Labs Components
+
+- Combobox
+- Drawer
+
+##### Preview Components
+
+- Breadcrumbs
+- ColorPicker
+- Menu
+- Select
+- SidePanel
+
+🤖 The codemod will update imports to be named imports
+
+### Menu (main)
+
+Default depth value of the main menu component has been change to depth 3 (It was depth 1 before).
+Depth update is a visual breaking change but doesn't require any actions from user.

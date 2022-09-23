@@ -1,5 +1,5 @@
 import {toHaveNoViolations} from 'jest-axe';
-import {matchers} from 'jest-emotion';
+import {matchers} from '@emotion/jest';
 import '@testing-library/jest-dom/extend-expect';
 import {verifyComponent} from './verifyComponent';
 import {jest} from '@jest/globals';
