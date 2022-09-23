@@ -1,5 +1,5 @@
 import React from 'react';
-import {styled} from '@workday/canvas-kit-react/common';
+import styled from '../theming/styled';
 import {PropCombination, Props} from './propTypes';
 
 /**
