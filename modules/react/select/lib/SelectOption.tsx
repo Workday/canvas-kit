@@ -20,7 +20,7 @@ export interface SelectOptionProps extends React.OptionHTMLAttributes<HTMLOption
   disabled?: boolean;
 }
 
-export default class SelectOption extends React.Component<SelectOptionProps> {
+export class SelectOption extends React.Component<SelectOptionProps> {
   public render() {
     const {disabled = false, value, label, ...elemProps} = this.props;
 

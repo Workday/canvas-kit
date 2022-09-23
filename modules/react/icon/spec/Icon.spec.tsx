@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {render} from '@testing-library/react';
-import Icon from '../lib/Icon';
+import {Icon} from '../lib/Icon';
 import {CanvasIconTypes} from '@workday/design-assets-types';
 import {shieldIcon} from '@workday/canvas-accent-icons-web';
 

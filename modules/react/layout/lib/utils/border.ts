@@ -10,7 +10,7 @@ import {
   useTheme,
 } from '@workday/canvas-kit-react/common';
 
-import {PropertyBorder} from './types';
+import {Property} from 'csstype';
 
 /** style props to set the border properties */
 export type BorderShorthandStyleProps = {
@@ -57,15 +57,15 @@ export type BorderRadiusStyleProps = {
 /** style props to set the border style properties */
 export type BorderLineStyleProps = {
   /** sets `border-style` property */
-  borderStyle?: PropertyBorder;
+  borderStyle?: Property.Border;
   /** sets `border-top-style` property */
-  borderTopStyle?: PropertyBorder;
+  borderTopStyle?: Property.Border;
   /** sets `border-right-style` property (no bidirectional support) */
-  borderRightStyle?: PropertyBorder;
+  borderRightStyle?: Property.Border;
   /** sets `border-bottom-style` property */
-  borderBottomStyle?: PropertyBorder;
+  borderBottomStyle?: Property.Border;
   /** sets `border-left-style` property (no bidirectional support) */
-  borderLeftStyle?: PropertyBorder;
+  borderLeftStyle?: Property.Border;
 };
 
 /** style props to set the border width properties */
@@ -88,7 +88,7 @@ export type BorderLogicalStyleProps = {
   /** sets `border-left-color` property (bidirectional support) */
   borderInlineStartColor?: CanvasColor | (string & {});
   /** sets `border-left-style` property (bidirectional support) */
-  borderInlineStartStyle?: PropertyBorder;
+  borderInlineStartStyle?: Property.Border;
   /** sets `border-left-width` property (bidirectional support) */
   borderInlineStartWidth?: string | number;
   /** sets `border-right` property (bidirectional support) */
@@ -96,7 +96,7 @@ export type BorderLogicalStyleProps = {
   /** sets `border-right-color` property (bidirectional support) */
   borderInlineEndColor?: CanvasColor | (string & {});
   /** sets `border-right-style` property (bidirectional support) */
-  borderInlineEndStyle?: PropertyBorder;
+  borderInlineEndStyle?: Property.Border;
   /** sets `border-right-width` property (bidirectional support) */
   borderInlineEndWidth?: string | number;
 };

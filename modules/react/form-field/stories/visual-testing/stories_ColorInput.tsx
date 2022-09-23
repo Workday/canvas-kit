@@ -4,7 +4,7 @@ import {ComponentStatesTable, permutateProps} from '@workday/canvas-kit-labs-rea
 import {withSnapshotsEnabled, customColorTheme} from '../../../../../utils/storybook';
 
 import {ColorInput} from '@workday/canvas-kit-react/color-picker';
-import FormField from '@workday/canvas-kit-react/form-field';
+import {FormField} from '@workday/canvas-kit-react/form-field';
 
 export default withSnapshotsEnabled({
   title: 'Testing/React/Inputs/Color Picker/Color Input',
