@@ -414,7 +414,7 @@ const Combobox = ({
   };
 
   const renderChildren = (inputElement: React.ReactElement<TextInputProps>): React.ReactNode => {
-    let cssOverride: CSSObject = {zIndex: 2};
+    let cssOverride: CSSObject = {':focus': {zIndex: 2}};
     if (showClearButton) {
       const paddingDirection = isRTL ? 'paddingLeft' : 'paddingRight';
       cssOverride = {

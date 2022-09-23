@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {ButtonColors} from './types';
-import {BaseButton, getMinWidthStyles, getPaddingStyles} from './BaseButton';
+import {BaseButton, BaseButtonProps, getMinWidthStyles, getPaddingStyles} from './BaseButton';
 import {
   GrowthBehavior,
   useTheme,
@@ -9,7 +9,7 @@ import {
   createComponent,
 } from '@workday/canvas-kit-react/common';
 
-export interface DeleteButtonProps extends Themeable, GrowthBehavior {
+export interface DeleteButtonProps extends Themeable, GrowthBehavior, BaseButtonProps {
   /**
    * The size of the Button.
    * @default 'medium'
