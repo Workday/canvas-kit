@@ -7,7 +7,7 @@ import {
   userIcon,
   taskContactIcon,
 } from '@workday/canvas-system-icons-web';
-import {Menu, MenuItem, MenuItemProps} from '../index';
+import {DeprecatedMenu, DeprecatedMenuItem, DeprecatedMenuItemProps} from '../index';
 
 // @ts-ignore: Cannot find module error
 import testAvatar from './test-avatar.png';
@@ -16,7 +16,7 @@ const noop = () => {};
 
 export default withSnapshotsEnabled({
   title: 'Testing/React/Preview/Menu',
-  component: Menu,
+  component: DeprecatedMenu,
   parameters: {
     chromatic: {
       diffThreshold: 0.3, // Chrome downsizes images non-deterministically. From testing, 0.28 is the minimum.
@@ -24,7 +24,7 @@ export default withSnapshotsEnabled({
   },
 });
 
-interface StoryMenuItemProps extends Omit<MenuItemProps, 'role'> {
+interface StoryMenuItemProps extends Omit<DeprecatedMenuItemProps, 'role'> {
   text: React.ReactNode;
 }
 
@@ -73,7 +73,7 @@ const createMenuItems = (hasIcons?: boolean, isFocused?: boolean): StoryMenuItem
   ];
 };
 const buildItem = (item: StoryMenuItemProps, index: number) => (
-  <MenuItem
+  <DeprecatedMenuItem
     key={index}
     onClick={noop}
     icon={item.icon}
@@ -84,7 +84,7 @@ const buildItem = (item: StoryMenuItemProps, index: number) => (
     aria-label={item['aria-label']}
   >
     {item.text}
-  </MenuItem>
+  </DeprecatedMenuItem>
 );
 
 export const MenuItemStates = () => (
@@ -102,9 +102,9 @@ export const MenuItemStates = () => (
       columnProps={[{label: 'Default', props: {}}]}
     >
       {props => (
-        <Menu width={props.width} initialSelectedItem={props.initialSelectedItem}>
+        <DeprecatedMenu width={props.width} initialSelectedItem={props.initialSelectedItem}>
           {createMenuItems(props.hasIcons).map(buildItem)}
-        </Menu>
+        </DeprecatedMenu>
       )}
     </ComponentStatesTable>
   </StaticStates>
