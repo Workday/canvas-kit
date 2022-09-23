@@ -11,9 +11,9 @@ import {
 import {borderRadius, colors, space} from '@workday/canvas-kit-react/tokens';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {ButtonColors, IconPositions, ButtonSizes} from './types';
-import {BaseButton} from './BaseButton';
+import {BaseButton, BaseButtonProps} from './BaseButton';
 
-export interface TertiaryButtonProps extends Themeable {
+export interface TertiaryButtonProps extends Themeable, BaseButtonProps {
   /**
    * The variant of the TertiaryButton.
    * @default undefined

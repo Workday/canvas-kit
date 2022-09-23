@@ -9,6 +9,12 @@ export {
 export {ToolbarIconButton, ToolbarIconButtonProps} from './lib/ToolbarIconButton';
 export {ToolbarDropdownButton, ToolbarDropdownButtonProps} from './lib/ToolbarDropdownButton';
 export {Hyperlink, HyperlinkProps} from './lib/Hyperlink';
-export {BaseButton, ButtonContainerProps} from './lib/BaseButton';
+export {
+  BaseButton,
+  ButtonContainerProps,
+  BaseButtonProps,
+  getMinWidthStyles,
+  getPaddingStyles,
+} from './lib/BaseButton';
 export {ExternalHyperlink, ExternalHyperlinkProps} from './lib/ExternalHyperlink';
 export * from './lib/types';
