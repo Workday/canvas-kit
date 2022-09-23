@@ -2,8 +2,7 @@ import React from 'react';
 
 import {Modal} from '@workday/canvas-kit-react/modal';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
-import {HStack, VStack, Stack, Box} from '@workday/canvas-kit-react/layout';
-import {space} from '@workday/canvas-kit-react/tokens';
+import {HStack} from '@workday/canvas-kit-react/layout';
 
 export const BodyOverflow = () => {
   const handlePrimaryClick = () => {
@@ -43,7 +42,7 @@ export const BodyOverflow = () => {
               OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
             </p>
           </Modal.Body>
-          <HStack spacing="s" paddingTop="s">
+          <HStack spacing="s" padding="xxs" marginTop="xxs">
             <Modal.CloseButton as={PrimaryButton} onClick={handlePrimaryClick}>
               Primary Action
             </Modal.CloseButton>

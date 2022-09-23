@@ -36,25 +36,27 @@ export const NestedPopups = () => {
           <Popup.Card aria-label="Popup 1">
             <Popup.CloseIcon aria-label="Close" size="small" />
             <Popup.Body>
-              <p>Contents of Popup 1</p>
+              <p style={{marginTop: 0, marginBottom: 0}}>Contents of Popup 1</p>
             </Popup.Body>
-            <Popup model={popup2}>
-              <Popup.Target>Open Popup 2</Popup.Target>
-              <Popup.Popper>
-                <Popup.Card aria-label="Popup 2">
-                  <Popup.CloseIcon aria-label="Close" size="small" />
-                  <Popup.Body>
-                    <p>Contents of Popup 2</p>
-                  </Popup.Body>
-                  <HStack spacing="s">
-                    <Popup.CloseButton as={Popup.CloseButton} model={popup1}>
-                      Close Both (as)
-                    </Popup.CloseButton>
-                    <SecondaryButton {...closeBothProps}>Close Both (props)</SecondaryButton>
-                  </HStack>
-                </Popup.Card>
-              </Popup.Popper>
-            </Popup>
+            <HStack spacing="s" padding="xxs" marginTop="xxs">
+              <Popup model={popup2}>
+                <Popup.Target>Open Popup 2</Popup.Target>
+                <Popup.Popper>
+                  <Popup.Card aria-label="Popup 2">
+                    <Popup.CloseIcon aria-label="Close" size="small" />
+                    <Popup.Body>
+                      <p style={{marginTop: 0, marginBottom: 0}}>Contents of Popup 2</p>
+                    </Popup.Body>
+                    <HStack spacing="s" padding="xxs" marginTop="xxs">
+                      <Popup.CloseButton as={Popup.CloseButton} model={popup1}>
+                        Close Both (as)
+                      </Popup.CloseButton>
+                      <SecondaryButton {...closeBothProps}>Close Both (props)</SecondaryButton>
+                    </HStack>
+                  </Popup.Card>
+                </Popup.Popper>
+              </Popup>
+            </HStack>
           </Popup.Card>
         </Popup.Popper>
       </Popup>

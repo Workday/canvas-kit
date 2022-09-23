@@ -42,7 +42,7 @@ export const FullOverflow = () => {
               OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
             </p>
           </Modal.Body>
-          <HStack spacing="s">
+          <HStack spacing="s" padding="xxs" marginTop="xxs">
             <Modal.CloseButton as={PrimaryButton} onClick={handlePrimaryClick}>
               Primary Action
             </Modal.CloseButton>

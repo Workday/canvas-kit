@@ -2,7 +2,7 @@ import React from 'react';
 
 import {Pill} from '@workday/canvas-kit-preview-react/pill';
 
-import {HStack} from '@workday/canvas-kit-react';
+import {HStack} from '@workday/canvas-kit-react/layout';
 
 export const Basic = () => (
   <HStack spacing="xxs">

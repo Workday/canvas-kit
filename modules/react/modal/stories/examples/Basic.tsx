@@ -21,17 +21,17 @@ export const Basic = () => {
           <Modal.CloseIcon aria-label="Close" />
           <Modal.Heading>MIT License</Modal.Heading>
           <Modal.Body>
-            <Box as="p" marginTop={0} marginBottom="m">
+            <Box as="p" marginY="zero">
               Permission is hereby granted, free of charge, to any person obtaining a copy of this
               software and associated documentation files (the "Software").
             </Box>
-            <HStack spacing="s">
-              <Modal.CloseButton as={PrimaryButton} onClick={handlePrimaryClick}>
-                Primary Action
-              </Modal.CloseButton>
-              <Modal.CloseButton onClick={handleSecondaryClick}>Secondary Action</Modal.CloseButton>
-            </HStack>
           </Modal.Body>
+          <HStack spacing="s" padding="xxs" marginTop="xxs">
+            <Modal.CloseButton as={PrimaryButton} onClick={handlePrimaryClick}>
+              Primary Action
+            </Modal.CloseButton>
+            <Modal.CloseButton onClick={handleSecondaryClick}>Secondary Action</Modal.CloseButton>
+          </HStack>
         </Modal.Card>
       </Modal.Overlay>
     </Modal>
