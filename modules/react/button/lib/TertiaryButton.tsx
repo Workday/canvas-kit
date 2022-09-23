@@ -229,7 +229,7 @@ export const TertiaryButton = createComponent('button')({
         size={size}
         padding={getPaddingStyles(icon, iconPosition, children, size)}
         minWidth={getMinWidthStyles(children, size)}
-        style={{borderRadius: children ? borderRadius.m : borderRadius.circle}}
+        borderRadius={children ? borderRadius.m : borderRadius.circle}
         {...elemProps}
       >
         {icon && iconPosition === 'start' && (
