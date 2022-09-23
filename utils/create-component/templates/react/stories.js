@@ -1,6 +1,9 @@
-// React stories template
+module.exports = (modulePath, storyPath, pascalCaseName, prerelease) => `import React from 'react';
 
-module.exports = (modulePath, storyPath, pascalCaseName, rootPath) => `import React from 'react';
+\`\`\`sh
+yarn add @workday/canvas-kit-${prerelease && prerelease + '-'}react
+\`\`\`
+
 
 import {${pascalCaseName}} from '${modulePath}';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
