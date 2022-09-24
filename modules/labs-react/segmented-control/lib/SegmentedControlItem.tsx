@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {colors, borderRadius, space} from '@workday/canvas-kit-react/tokens';
+import {colors, borderRadius, space, type} from '@workday/canvas-kit-react/tokens';
 import {
   // mouseFocusBehavior,
   createElemPropsHook,
@@ -16,9 +16,15 @@ import {
   isSelected,
   useListItemSelect,
 } from '@workday/canvas-kit-react/collection';
-import {BaseButton, ButtonContainerProps, ButtonColors} from '@workday/canvas-kit-react/button';
-
+import {
+  BaseButton,
+  ButtonContainerProps,
+  ButtonColors,
+  ButtonSizes,
+} from '@workday/canvas-kit-react/button';
+import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {useSegmentedControlModel} from './useSegmentedControlModel';
+import {Text} from '@workday/canvas-kit-react/text';
 
 export interface ItemProps extends ButtonContainerProps {
   /**
@@ -71,47 +77,76 @@ export interface ItemProps extends ButtonContainerProps {
    * set while all inactive tabs should have a `tabIndex={-1}`
    */
   tabIndex?: number;
-  icon?: any;
+  icon?: CanvasSystemIcon;
 }
 
 const getIconButtonColors = (toggled?: boolean): ButtonColors => {
   return {
     default: {
       background: toggled ? colors.frenchVanilla100 : colors.soap200,
-      icon: toggled ? colors.blackPepper400 : colors.licorice200,
       border: toggled ? colors.licorice200 : 'transparent',
+      icon: toggled ? colors.blackPepper400 : colors.licorice400,
+      label: toggled ? colors.blackPepper400 : colors.licorice400,
     },
     hover: {
       background: toggled ? colors.frenchVanilla100 : colors.soap400,
-      icon: toggled ? colors.blackPepper400 : colors.licorice200,
+      icon: colors.blackPepper400,
+      label: colors.blackPepper400,
     },
     active: {
       background: toggled ? colors.frenchVanilla100 : colors.soap200,
       icon: toggled ? colors.blackPepper400 : colors.licorice200,
     },
     focus: {
-      background: toggled ? colors.blueberry400 : undefined,
-      icon: toggled ? colors.frenchVanilla100 : colors.licorice500,
+      background: !toggled ? colors.soap400 : undefined,
+      icon: colors.blackPepper400,
+      label: colors.blackPepper400,
     },
     disabled: {},
   };
 };
 
+const getSizeStyles = (isOconOnly: boolean, size?: ButtonSizes) => {
+  const sizeValue = size === 'large' ? space.xl : size === 'small' ? space.m : space.l;
+
+  return isOconOnly
+    ? {
+        width: sizeValue,
+        height: sizeValue,
+      }
+    : {
+        minWidth: sizeValue,
+        height: sizeValue,
+      };
+};
+
+const getPaddingStyles = (
+  children: React.ReactNode,
+  size: ButtonContainerProps['size'],
+  icon?: CanvasSystemIcon
+) => {
+  if (!children) {
+    return `0 0`;
+  }
+  switch (size) {
+    case 'large':
+      return icon ? `0 ${space.m} 0 20px` : `0 ${space.m}`;
+
+    case 'medium':
+      return icon ? `0 20px 0 ${space.s}` : `0 ${space.s}`;
+
+    case 'small':
+      return icon ? `0 ${space.xs} 0 ${space.xxs}` : `0 ${space.xs}`;
+
+    default:
+      return icon ? `0 20px 0 ${space.s}` : `0 ${space.s}`;
+  }
+};
+
 const StyledButton = styled(BaseButton)<StyledType & ButtonContainerProps>(
   {
+    padding: 0,
     borderRadius: borderRadius.m,
-    minWidth: space.xl,
-    '&:focus': {
-      borderRadius: borderRadius.m,
-      zIndex: 1,
-      animation: 'none', // reset focusRing animation
-      transition: 'all 120ms, border-radius 1ms',
-      // ...mouseFocusBehavior({
-      //   '&': {
-      //     borderRadius: borderRadius.m,
-      //   },
-      // }),
-    },
   },
   ({theme}) => ({
     '[aria-pressed="true"]': {
@@ -122,6 +157,12 @@ const StyledButton = styled(BaseButton)<StyledType & ButtonContainerProps>(
     },
   })
 );
+
+// const StyledSeparator = styled('div')({
+//   width: '1px',
+//   height: '100%',
+//   backgroundColor: colors.soap600,
+// });
 
 export const useTabsItem = composeHooks(
   createElemPropsHook(useSegmentedControlModel)(
@@ -148,17 +189,26 @@ export const SegmentedControlItem = createSubcomponent('button')({
   displayName: 'SegmentedControl.Item',
   modelHook: useSegmentedControlModel,
   elemPropsHook: useTabsItem,
-})<ItemProps>(({children, icon, ...elemProps}, Element) => {
+})<ItemProps>(({children, icon, ...elemProps}, Element, {state: {size}}) => {
+  const isSmall = size === 'small';
+  const {color, ...textStyles} = type.levels.subtext[isSmall ? 'medium' : 'large'];
+
   return (
     <OverflowTooltip>
       <StyledButton
         as={Element}
         colors={getIconButtonColors(elemProps['aria-selected'])}
-        fillIcon={elemProps['aria-selected']}
+        size={size as ButtonContainerProps['size']}
+        padding={`${getPaddingStyles(children, size, icon)} !important`}
+        {...getSizeStyles(!children, size)}
         {...elemProps}
       >
-        <BaseButton.Icon icon={icon} />
-        {children}
+        {icon && <BaseButton.Icon size={isSmall ? 'extraSmall' : 'medium'} icon={icon} />}
+        {children && (
+          <Text {...textStyles} fontWeight="bold">
+            {children}
+          </Text>
+        )}
       </StyledButton>
     </OverflowTooltip>
   );

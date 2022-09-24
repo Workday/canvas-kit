@@ -3,18 +3,16 @@ import * as React from 'react';
 import {
   createSubcomponent,
   ExtractProps,
-  styled,
-  StyledType,
   composeHooks,
   createElemPropsHook,
 } from '@workday/canvas-kit-react/common';
-import {Flex} from '@workday/canvas-kit-react/layout';
+import {Stack} from '@workday/canvas-kit-react/layout';
 import {useListRenderItems, useListResetCursorOnBlur} from '@workday/canvas-kit-react/collection';
 
 import {useSegmentedControlModel} from './useSegmentedControlModel';
 
 export interface TabListProps<T = any>
-  extends Omit<Partial<ExtractProps<typeof Flex, never>>, 'children'> {
+  extends Omit<Partial<ExtractProps<typeof Stack, never>>, 'children'> {
   children: ((item: T) => React.ReactNode) | React.ReactNode;
   overflowButton?: React.ReactNode;
 }
@@ -33,16 +31,15 @@ export const useTabsList = composeHooks(
   useListResetCursorOnBlur
 );
 
-const StyledFlex = styled(Flex)<StyledType>({});
-
 export const SegmentedControlList = createSubcomponent('div')({
   displayName: 'SegmentedControl.List',
   modelHook: useSegmentedControlModel,
   elemPropsHook: useTabsList,
 })<TabListProps>(({children, overflowButton, ...elemProps}, Element, model) => {
   return (
-    <StyledFlex
+    <Stack
       as={Element}
+      spacing="2px"
       backgroundColor="soap200"
       border="1px solid transparent"
       borderColor="licorice200"
@@ -53,6 +50,6 @@ export const SegmentedControlList = createSubcomponent('div')({
     >
       {useListRenderItems(model, children)}
       {overflowButton}
-    </StyledFlex>
+    </Stack>
   );
 });

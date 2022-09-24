@@ -16,6 +16,7 @@ export const useSegmentedControlModel = createModelHook({
      */
     initialValue: '',
     disabled: false,
+    size: 'medium' as 'small' | 'medium' | 'large',
     /**
      * The SegmentedControl handles rendering of button group in a horizontal orientation,
      * but the icon only button variant could have a vertical orientation.
@@ -51,6 +52,7 @@ export const useSegmentedControlModel = createModelHook({
   const state = {
     ...model.state,
     disabled: config.disabled,
+    size: config.size,
   };
 
   const events = {
