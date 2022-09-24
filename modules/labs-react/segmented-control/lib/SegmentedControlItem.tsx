@@ -9,7 +9,7 @@ import {
   styled,
   StyledType,
 } from '@workday/canvas-kit-react/common';
-import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
+// import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
 import {
   useListItemRegister,
   useListItemRovingFocus,
@@ -158,11 +158,25 @@ const StyledButton = styled(BaseButton)<StyledType & ButtonContainerProps>(
   })
 );
 
-// const StyledSeparator = styled('div')({
-//   width: '1px',
-//   height: '100%',
-//   backgroundColor: colors.soap600,
-// });
+const StyledContainer = styled('div')<{isSelected?: boolean}>(
+  {
+    paddingLeft: '2px',
+    borderLeft: `1px solid ${colors.soap600}`,
+    marginLeft: '2px',
+    '&:first-of-type': {
+      paddingLeft: 0,
+      marginLeft: 0,
+      borderLeft: 'none',
+    },
+  },
+  ({isSelected}) =>
+    isSelected && {
+      borderColor: 'transparent',
+      '& + div': {
+        borderColor: 'transparent',
+      },
+    }
+);
 
 export const useTabsItem = composeHooks(
   createElemPropsHook(useSegmentedControlModel)(
@@ -194,7 +208,7 @@ export const SegmentedControlItem = createSubcomponent('button')({
   const {color, ...textStyles} = type.levels.subtext[isSmall ? 'medium' : 'large'];
 
   return (
-    <OverflowTooltip>
+    <StyledContainer isSelected={elemProps['aria-selected']}>
       <StyledButton
         as={Element}
         colors={getIconButtonColors(elemProps['aria-selected'])}
@@ -210,6 +224,6 @@ export const SegmentedControlItem = createSubcomponent('button')({
           </Text>
         )}
       </StyledButton>
-    </OverflowTooltip>
+    </StyledContainer>
   );
 });

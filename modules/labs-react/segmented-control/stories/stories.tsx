@@ -11,7 +11,7 @@ export default {
 export const Default = () => {
   return (
     <>
-      <SegmentedControl size="large">
+      <SegmentedControl size="small">
         <SegmentedControl.List>
           <SegmentedControl.Item data-id="table">Table</SegmentedControl.Item>
           <SegmentedControl.Item data-id="list-view">List</SegmentedControl.Item>
