@@ -10,7 +10,8 @@ any questions.
 
 - [Codemod](#codemod)
 - [Components](#components)
-  - [Component Deprecations](#component-deprecations)
+  - [Component Deprecations](#component-deprecations) -
+    [Component Promotions](#component-promotions)
   - [Box](#box)
   - [Menu (Main)](#menu)
 - [General Changes](#general-changes) -[Remove Default Imports](#remove-default-imports)
@@ -184,6 +185,15 @@ import {DeprecatedLayout, DeprecatedColumn} from '@workday/canvas-kit-react/draw
   </DeprecatedLayout.Column>
 </DeprecatedLayout>;
 ```
+
+### Component Promotions
+
+We've [promoted](https://github.com/Workday/canvas-kit/issues/1652) the following components in v8:
+
+- `ComponentStatesTable` from `@workday/canvas-kit-labs/common` to
+  `@workday/canvas-kit-react/common`
+
+🤖 The codemod will update imports for these promoted components.
 
 ### Box
 

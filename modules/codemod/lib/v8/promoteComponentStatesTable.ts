@@ -1,9 +1,9 @@
 import {Transform, ImportDeclaration, ASTPath} from 'jscodeshift';
 
 // used to filter our imports we want to keep in @workday/canvas-kit-labs-react/common
-const commonSpecifiers = ['useTheme', 'useThemeRTL', 'useThemedRing'];
+const commonLabsSpecifiers = ['useTheme', 'useThemeRTL', 'useThemedRing'];
 
-const layoutSpecifiers = [
+const labsToCommonSpecifiers = [
   'ComponentStatesTable',
   'permutateProps',
   'ComponentStatesTableProps',
@@ -13,9 +13,9 @@ const layoutSpecifiers = [
   'PropsDeclaration',
 ];
 
-// 1. Gather all import specifiers from @workday/canvas-kit-labs-react/layout
+// 1. Gather all import specifiers from @workday/canvas-kit-labs-react/common
 // 2. Filter through all imports from @workday/canvas-kit-labs-react/common and gather specifiers we care about
-// 3. If there's an existing @workday/canvas-kit-react/layout add gathered specifiers to that import
+// 3. If there's an existing @workday/canvas-kit-react/common add gathered specifiers to that import
 // 4. If no existing import, create new import with specifiers and insert before closest canvas kit import
 const transform: Transform = (file, api) => {
   const j = api.jscodeshift;
@@ -32,11 +32,11 @@ const transform: Transform = (file, api) => {
       nodePath.value.specifiers = nodePath.value.specifiers?.filter(specifier => {
         if (
           specifier.type === 'ImportSpecifier' &&
-          !commonSpecifiers.includes(specifier.imported.name)
+          !commonLabsSpecifiers.includes(specifier.imported.name)
         ) {
           if (
             specifier?.local?.name !== undefined &&
-            layoutSpecifiers.includes(specifier?.local?.name)
+            labsToCommonSpecifiers.includes(specifier?.local?.name)
           ) {
             reactLayoutSpecifiers.push({
               importedName: specifier?.local?.name,
