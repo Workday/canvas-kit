@@ -85,7 +85,7 @@ export const StyledTabItem = styled(Box.as('button'))<StyledType & Pick<TabsItem
   ({theme, spacing}) => ({
     ...type.levels.subtext.large,
     '& > *:not(style) ~ *:not(style)': {
-      marginLeft: spacing || '10px',
+      marginLeft: spacing || space.xxs,
     },
     fontWeight: type.properties.fontWeights.medium,
     border: 'none',
