@@ -10,6 +10,7 @@ any questions.
 
 - [Codemod](#codemod)
 - [Components](#components)
+  - [Component Promotions](#component-promotions)
   - [Box](#box)
   - [Menu (Main)](#menu)
 - [General Changes](#general-changes) -[Remove Default Imports](#remove-default-imports)
@@ -40,6 +41,15 @@ rollback more easily if necessary.**
 encounter any issues or use cases that we've missed.
 
 ## Components
+
+### Component Promotions
+
+We've [promoted](https://github.com/Workday/canvas-kit/issues/1652) the following components in v8:
+
+- `ComponentStatesTable` from `@workday/canvas-kit-labs/common` to
+  `@workday/canvas-kit-react/common`
+
+🤖 The codemod will update imports for these promoted components.
 
 ### Box
 
