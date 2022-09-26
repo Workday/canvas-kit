@@ -30,15 +30,18 @@ export interface ButtonContainerProps extends BoxProps, GrowthBehavior {
    */
   size?: ButtonSizes;
   /**
-   * The ref to the button that the styled component renders.
-   */
-  ref?: React.Ref<HTMLButtonElement>;
-  /**
    * Whether the icon should received filled (colored background layer) or regular styles.
    * Corresponds to `toggled` in ToolbarIconButton
    */
   fillIcon?: boolean;
 }
+
+/**
+ * Extends all the style properties from Box to our buttons as well as props from ButtonContainerProps.
+ * We omit `ref` since all of our buttons use `createComponent` and already give access to `ref`.
+ * Use this type to extend and customize any one off buttons that you want full control over styling.
+ */
+export interface BaseButtonProps extends Omit<ButtonContainerProps, 'ref'> {}
 
 function getIconColorSelectors(
   {

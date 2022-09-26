@@ -15,6 +15,7 @@ import {SecondaryInverse} from './examples/SecondaryInverse';
 import {Tertiary} from './examples/Tertiary';
 import {TertiaryInverse} from './examples/TertiaryInverse';
 import {Delete} from './examples/Delete';
+import {CustomStyles} from './examples/CustomStyles';
 
 <Meta title="Components/Buttons/Button/React" />
 
@@ -116,6 +117,15 @@ before deleting.
 Undocumented props are spread to the underlying `<button>` element.
 
 <ArgsTable of={DeleteButton} />
+
+### Custom Styles
+
+We understand that there are instances in which consumers might need to adjust styles for specific
+use cases. All of our buttons extend our lower level base button props which extends style
+properties that come from `Box`. Below are some examples in which you can overwrite styles for all
+of our buttons. Please use this sparaingly and try to adhere to the design system.
+
+<ExampleCodeBlock code={CustomStyles} />
 
 ### Accessible Use of the `as` Prop
 

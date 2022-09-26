@@ -1,2 +1,2 @@
-export {DrawerHeader} from './lib/DrawerHeader';
+export {DeprecatedDrawerHeader} from './lib/DrawerHeader';
 export * from './lib/Drawer';
