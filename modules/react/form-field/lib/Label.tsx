@@ -72,10 +72,17 @@ const RequiredAstrisk = styled('abbr')({
 });
 
 // Used inside the fieldset component instead of a label for accessible radio groups.
-const LegendComponent = styled('legend')<LabelProps>({
-  ...labelStyles,
-  float: 'left',
-  width: '100%',
+const LegendComponent = styled('legend')<LabelProps>(...labelStyles, ({labelPosition}) => {
+  if (labelPosition === Label.Position.Top) {
+    return {
+      width: '100%',
+    };
+  }
+
+  return {
+    float: 'left',
+    width: 'auto',
+  };
 });
 
 const LabelComponent = styled('label')<LabelProps>(...labelStyles);
