@@ -11,7 +11,7 @@ const transform: Transform = (file, api, options) => {
   // These will run in order. If your transform depends on others, place yours after dependent transforms
   const fixes = [
     promoteBreadcrumbs,
-    restructureBreadcrumbs
+    restructureBreadcrumbs,
     revomeDefaultImports,
     softDeprecateDrawer,
     softDeprecateLayout,
