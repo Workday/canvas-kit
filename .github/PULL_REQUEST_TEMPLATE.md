@@ -24,7 +24,12 @@ Optional breaking changes message. If your PR includes breaking changes. It is e
 
 ## For the Reviewer
 
-<!-- Provide a bit of context about what this PR does. -->
+<!-- Provide a bit of context about what this PR does. Add any additional checklist items you'd like the reviewer to check -->
+
+- [ ] PR title is short and descriptive
+- [ ] PR summary describes the change (Fixes/Resovles linked correctly)
+- [ ] PR Release Notes describes additional information useful to call out in a release message or removed if not applicable
+- [ ] Breaking Changes provides useful information to upgrade to this code or removed if not applicable
 
 ## Where Should the Reviewer Start?
 
