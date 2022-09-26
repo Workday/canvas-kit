@@ -97,27 +97,18 @@ const getIconButtonColors = (toggled?: boolean): ButtonColors => {
       background: toggled ? colors.frenchVanilla100 : colors.soap200,
       icon: toggled ? colors.blackPepper400 : colors.licorice200,
     },
-    focus: {
-      background: !toggled ? colors.soap400 : undefined,
-      icon: colors.blackPepper400,
-      label: colors.blackPepper400,
-    },
+    focus: {},
     disabled: {},
   };
 };
 
-const getSizeStyles = (isOconOnly: boolean, size?: ButtonSizes) => {
+const getSizeStyles = (size?: ButtonSizes) => {
   const sizeValue = size === 'large' ? space.xl : size === 'small' ? space.m : space.l;
 
-  return isOconOnly
-    ? {
-        width: sizeValue,
-        height: sizeValue,
-      }
-    : {
-        minWidth: sizeValue,
-        height: sizeValue,
-      };
+  return {
+    minWidth: sizeValue,
+    height: sizeValue,
+  };
 };
 
 const getPaddingStyles = (
@@ -147,6 +138,7 @@ const StyledButton = styled(BaseButton)<StyledType & ButtonContainerProps>(
   {
     padding: 0,
     borderRadius: borderRadius.m,
+    width: '100%',
   },
   ({theme}) => ({
     '[aria-pressed="true"]': {
@@ -158,17 +150,36 @@ const StyledButton = styled(BaseButton)<StyledType & ButtonContainerProps>(
   })
 );
 
-const StyledContainer = styled('div')<{isSelected?: boolean}>(
+const StyledContainer = styled('div')<{
+  isSelected?: boolean;
+  orientation: 'horizontal' | 'vertical';
+}>(
   {
-    paddingLeft: '2px',
-    borderLeft: `1px solid ${colors.soap600}`,
-    marginLeft: '2px',
-    '&:first-of-type': {
-      paddingLeft: 0,
-      marginLeft: 0,
-      borderLeft: 'none',
-    },
+    flex: '1 1 0',
+    minWidth: 0,
   },
+  ({orientation}) =>
+    orientation === 'horizontal'
+      ? {
+          paddingLeft: '2px',
+          borderLeft: `1px solid ${colors.soap600}`,
+          marginLeft: '2px',
+          '&:first-of-type': {
+            paddingLeft: 0,
+            marginLeft: 0,
+            borderLeft: 'none',
+          },
+        }
+      : {
+          paddingTop: '2px',
+          borderTop: `1px solid ${colors.soap600}`,
+          marginTop: '2px',
+          '&:first-of-type': {
+            paddingTop: 0,
+            marginTop: 0,
+            borderTop: 'none',
+          },
+        },
   ({isSelected}) =>
     isSelected && {
       borderColor: 'transparent',
@@ -203,18 +214,19 @@ export const SegmentedControlItem = createSubcomponent('button')({
   displayName: 'SegmentedControl.Item',
   modelHook: useSegmentedControlModel,
   elemPropsHook: useTabsItem,
-})<ItemProps>(({children, icon, ...elemProps}, Element, {state: {size}}) => {
+})<ItemProps>(({children, icon, ...elemProps}, Element, {state: {size, orientation}}) => {
   const isSmall = size === 'small';
+  const isSelected = elemProps['aria-selected'];
   const {color, ...textStyles} = type.levels.subtext[isSmall ? 'medium' : 'large'];
 
   return (
-    <StyledContainer isSelected={elemProps['aria-selected']}>
+    <StyledContainer isSelected={isSelected} orientation={orientation}>
       <StyledButton
         as={Element}
         colors={getIconButtonColors(elemProps['aria-selected'])}
         size={size as ButtonContainerProps['size']}
         padding={`${getPaddingStyles(children, size, icon)} !important`}
-        {...getSizeStyles(!children, size)}
+        {...getSizeStyles(size)}
         {...elemProps}
       >
         {icon && <BaseButton.Icon size={isSmall ? 'extraSmall' : 'medium'} icon={icon} />}
