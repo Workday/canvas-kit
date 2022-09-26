@@ -14,16 +14,50 @@ import {usePopupModel} from './usePopupModel';
 export const useReturnFocus = createElemPropsHook(usePopupModel)(model => {
   const visible = model.state.visibility !== 'hidden';
 
+  // This boolean tracks keyboard-driven focus changes. This is required for `useFocusRedirect` as
+  // focus redirection needs synchronous focus management and everything else needs asynchronous
+  // focus management.
+  const requiresFocusChangeRef = React.useRef(false);
+
+  const onKeyDown = React.useCallback((event: KeyboardEvent) => {
+    // The tab key changes focus
+    if (event.key === 'Tab') {
+      requiresFocusChangeRef.current = true;
+    }
+  }, []);
+
+  const onKeyUp = React.useCallback((event: KeyboardEvent) => {
+    requiresFocusChangeRef.current = false;
+  }, []);
+
   React.useLayoutEffect(() => {
     if (!visible) {
       return;
     }
     // capture the element here. The refs will be null by the time the cleanup function is called
-    const element = (model.state.returnFocusRef || model.state.targetRef).current;
+    const element = (model.state.returnFocusRef || model.state.targetRef).current as HTMLElement;
+
+    document.addEventListener('keydown', onKeyDown, true);
+    document.addEventListener('keyup', onKeyDown, true);
+
     return () => {
-      changeFocus(element);
+      document.removeEventListener('keydown', onKeyDown, true);
+      document.removeEventListener('keyup', onKeyDown, true);
+
+      if (requiresFocusChangeRef.current) {
+        // We need to change focus _before_ the browser process the default action of picking a new
+        // focus target. Doing this immediately prevents the `focus` event from firing on `element`,
+        // but that's okay because the browser will change focus anyways.
+        changeFocus(element);
+      } else {
+        // We wait a frame for the current event to process, allowing the browser to fire default
+        // actions. This delay allows the focus change to trigger a `focus` event on `element`.
+        requestAnimationFrame(() => {
+          changeFocus(element);
+        });
+      }
     };
-  }, [model.state.returnFocusRef, model.state.targetRef, visible]);
+  }, [model.state.returnFocusRef, model.state.targetRef, visible, onKeyDown, onKeyUp]);
 
   return {};
 });
