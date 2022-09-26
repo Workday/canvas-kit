@@ -47,7 +47,7 @@ export interface BreadcrumbsProps extends React.HTMLAttributes<HTMLElement> {
  * </Breadcrumbs>
  * ```
  */
-export const Breadcrumbs = createContainer()({
+export const Breadcrumbs = createContainer('nav')({
   displayName: 'Breadcrumbs',
   modelHook: useBreadcrumbsModel,
   subComponents: {
