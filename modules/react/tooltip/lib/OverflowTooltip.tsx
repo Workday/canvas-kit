@@ -41,13 +41,9 @@ export const findEllipsisElement = (element: Element): Element | null => {
   if (style.textOverflow === 'ellipsis' || Number(style.webkitLineClamp) > 0) {
     return element;
   } else if (element.children) {
-    // `children` is not defined for SVGElement in IE11 Do we still need this?
-
     for (let i = 0; i < element.children.length; i++) {
       const overflowElement = findEllipsisElement(element.children[i]);
-      if (overflowElement) {
-        return overflowElement;
-      }
+      return overflowElement;
     }
     return null;
   }
