@@ -40,14 +40,15 @@ export const findEllipsisElement = (element: Element): Element | null => {
   const style = getComputedStyle(element);
   if (style.textOverflow === 'ellipsis' || Number(style.webkitLineClamp) > 0) {
     return element;
-  } else if (element.children) {
+  } else {
     for (let i = 0; i < element.children.length; i++) {
       const overflowElement = findEllipsisElement(element.children[i]);
-      return overflowElement;
+      if (overflowElement) {
+        return overflowElement;
+      }
     }
     return null;
   }
-  return null;
 };
 
 const isOverflowed = (element: Element) => {
