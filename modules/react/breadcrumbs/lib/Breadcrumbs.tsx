@@ -9,7 +9,7 @@ import {BreadcrumbsLink} from './BreadcrumbsLink';
 import {BreadcrumbsCurrentItem} from './BreadcrumbsCurrentItem';
 import {BreadcrumbsMenu} from './BreadcrumbsMenu';
 
-export interface BreadcrumbsProps extends React.HTMLAttributes<HTMLElement> {
+export interface BreadcrumbsProps {
   /**
    * The accessibility label for the nav element.
    *
@@ -26,10 +26,10 @@ export interface BreadcrumbsProps extends React.HTMLAttributes<HTMLElement> {
  * ## Breadcrumbs
  * ---
  * [View Developer Docs](https://canvas.workdaydesign.com/components/navigation/breadcrumbs#examples)
- * 
+ *
  * A compound component that allows users to keep track and maintain awareness
  * of their location as they navigate through pages, folders, files, etc.
- * 
+ *
  * @example
  * ```tsx
  * <Breadcrumbs aria-label="breadcrumbs">
@@ -55,19 +55,19 @@ export const Breadcrumbs = createContainer('nav')({
      * ### Breadcrumbs List
      * ---
      * [View Developer Docs](https://canvas.workdaydesign.com/components/navigation/breadcrumbs/#breadcrumbslist)
-     * 
+     *
      * The nav list containing `BreadcrumbItems`
-    */
+     */
     List: BreadcrumbsList,
     /**
      * ### Breadcrumbs Item
      * ---
      * [View Developer Docs](https://canvas.workdaydesign.com/components/navigation/breadcrumbs/#breadcrumbsitem)
-     * 
+     *
      * List items in `Breadcrumb.List`.
      * By default, this item is truncated with a tooltip at `350px`,
      * but that can be customized with the `maxWidth` prop.
-     * 
+     *
      * @example
      * ```tsx
      * <Breadcrumbs.Item maxWidth={200}>
@@ -80,11 +80,11 @@ export const Breadcrumbs = createContainer('nav')({
      * ### Breadcrumbs Overflow Button
      * ---
      * [View Developer Docs](https://canvas.workdaydesign.com/components/navigation/breadcrumbs/#breadcrumbsoverflowbutton)
-     * 
+     *
      * The toggle button for the Breadcrumbs Menu.
      * This button is rendered implicitly in the `Breadcrumbs.List` when the list overflows.
      * However, if you need to pass props to it, you can do so by passing `overflowButtonProps` to the List.
-     * 
+     *
      * @example
      * ```tsx
      * <Breadcrumbs.List
@@ -100,11 +100,11 @@ export const Breadcrumbs = createContainer('nav')({
      * ### Breadcrumbs Current Item
      * ---
      * [View Developer Docs](https://canvas.workdaydesign.com/components/navigation/breadcrumbs/#breadcrumbscurrentitem)
-     * 
+     *
      * The last element in the list of `Breadcrumb.Item`s.
      * By default, this item is truncated with a tooltip at `350px`,
      * But that can be customized with the `maxWidth` prop.
-     * 
+     *
      * @example
      * ```tsx
      * <Breadcrumbs.CurrentItem maxWidth={200}>
@@ -117,7 +117,7 @@ export const Breadcrumbs = createContainer('nav')({
      * ### Breadcrumbs Link
      * ---
      * [View Developer Docs](https://canvas.workdaydesign.com/components/navigation/breadcrumbs/#breadcrumbslink)
-     * 
+     *
      * The hyperlink element in each `Breadcrumbs.Item`.
      */
     Link: BreadcrumbsLink,
