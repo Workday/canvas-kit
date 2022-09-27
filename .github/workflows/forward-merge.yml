@@ -129,7 +129,8 @@ jobs:
           appCode: dlpro96xybh
           storybookBuildDir: docs
           exitOnceUploaded: false
-          exitZeroOnChanges: true
+          exitZeroOnChanges: false
+          ignoreLastBuildOnBranch: ${{ steps.extract-next-branch.outputs.branch }}
 
       - name: Start Server
         run: npx http-server docs -p 9001 & npx wait-on http://localhost:9001
