@@ -7,11 +7,17 @@ const expectTransform = expectTransformFactory(transform);
 describe('renameIconRefs', () => {
   it('should replace default export with a named export for react package', () => {
     const input = stripIndent`
-      import { ComponentStatesTable } from '@workday/canvas-kit-labs-react/common';
+      import { ComponentStatesTable, permutateProps, Props, PropCombination, PropsDeclaration } from "@workday/canvas-kit-labs-react/common";
     `;
 
     const expected = stripIndent`
-      import { ComponentStatesTable } from "@workday/canvas-kit-react/common";
+      import {
+        ComponentStatesTable,
+        permutateProps,
+        Props,
+        PropCombination,
+        PropsDeclaration,
+      } from "@workday/canvas-kit-react/common";
     `;
 
     expectTransform(input, expected);

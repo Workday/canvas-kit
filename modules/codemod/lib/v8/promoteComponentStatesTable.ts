@@ -48,7 +48,7 @@ const transform: Transform = (file, api) => {
         return true;
       });
 
-      foundImport.push(nodePath);
+      foundImport.push(nodePath); //
     });
 
   const existingLayoutImports = root.find(j.ImportDeclaration, {
@@ -71,6 +71,7 @@ const transform: Transform = (file, api) => {
   } else {
     // create new import
     if (foundImport.length) {
+      console.log('in here');
       foundImport[0].insertBefore(
         j.importDeclaration(
           reactLayoutSpecifiers.map(mapToSpecifiers),
