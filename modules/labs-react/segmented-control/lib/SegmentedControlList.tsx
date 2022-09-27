@@ -45,6 +45,7 @@ export const SegmentedControlList = createSubcomponent('div')({
       borderRadius="l"
       padding="xxxs"
       width="min-content"
+      role="group"
       {...elemProps}
     >
       {useListRenderItems(model, children)}

@@ -155,36 +155,50 @@ const StyledContainer = styled('div')<{
   orientation: 'horizontal' | 'vertical';
 }>(
   {
-    flex: '1 1 0',
-    minWidth: 0,
+    // flex: '1 1 0',
+    // minWidth: 0,
+    position: 'relative',
+    '&::after': {
+      content: '""',
+      display: 'block',
+      backgroundColor: colors.soap600,
+      position: 'absolute',
+    },
+    '&:first-of-type': {
+      padding: 0,
+      '&::after': {
+        display: 'none',
+      },
+    },
   },
   ({orientation}) =>
     orientation === 'horizontal'
       ? {
-          paddingLeft: '2px',
-          borderLeft: `1px solid ${colors.soap600}`,
-          marginLeft: '2px',
-          '&:first-of-type': {
-            paddingLeft: 0,
-            marginLeft: 0,
-            borderLeft: 'none',
+          paddingLeft: '5px',
+          '&::after': {
+            width: '1px',
+            height: 'calc(100% - 8px)',
+            margin: '0 2px',
+            top: '4px',
+            left: '0',
           },
         }
       : {
-          paddingTop: '2px',
-          borderTop: `1px solid ${colors.soap600}`,
-          marginTop: '2px',
-          '&:first-of-type': {
-            paddingTop: 0,
-            marginTop: 0,
-            borderTop: 'none',
+          paddingTop: '5px',
+          '&::after': {
+            height: '1px',
+            width: 'calc(100% - 8px)',
+            margin: '2px 0',
+            left: '4px',
+            top: '0',
           },
         },
   ({isSelected}) =>
     isSelected && {
-      borderColor: 'transparent',
-      '& + div': {
-        borderColor: 'transparent',
+      '&, & + div': {
+        '&::after': {
+          display: 'none',
+        },
       },
     }
 );

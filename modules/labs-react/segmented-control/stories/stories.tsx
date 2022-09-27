@@ -1,7 +1,12 @@
 import React from 'react';
 
 import {SegmentedControl} from '@workday/canvas-kit-labs-react/segmented-control';
-import {gridViewIcon, listViewIcon, listDetailIcon} from '@workday/canvas-system-icons-web';
+import {
+  gridViewIcon,
+  listViewIcon,
+  listDetailIcon,
+  pieChartIcon,
+} from '@workday/canvas-system-icons-web';
 import {Box} from '@workday/canvas-kit-react/layout';
 
 export default {
@@ -17,7 +22,25 @@ export const Default = () => {
           <SegmentedControl.List>
             <SegmentedControl.Item data-id="table">Table</SegmentedControl.Item>
             <SegmentedControl.Item data-id="list-view">List</SegmentedControl.Item>
-            <SegmentedControl.Item data-id="list-detail">Detail</SegmentedControl.Item>
+            <SegmentedControl.Item data-id="list-detail">Details</SegmentedControl.Item>
+          </SegmentedControl.List>
+        </SegmentedControl>
+      </Box>
+      <Box marginBottom="s">
+        <SegmentedControl initialValue="list-detail">
+          <SegmentedControl.List>
+            <SegmentedControl.Item data-id="table" icon={gridViewIcon}>
+              Table
+            </SegmentedControl.Item>
+            <SegmentedControl.Item data-id="list-view" icon={listViewIcon}>
+              List
+            </SegmentedControl.Item>
+            <SegmentedControl.Item data-id="list-detail" icon={listDetailIcon}>
+              Detail
+            </SegmentedControl.Item>
+            <SegmentedControl.Item data-id="diagrams" icon={pieChartIcon}>
+              Diagram
+            </SegmentedControl.Item>
           </SegmentedControl.List>
         </SegmentedControl>
       </Box>
