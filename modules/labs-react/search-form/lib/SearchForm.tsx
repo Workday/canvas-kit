@@ -117,7 +117,7 @@ const StyledSearchForm = styled('form')<
 >(
   {
     position: 'relative',
-    flex: `1`,
+    flexGrow: 1,
     display: 'flex',
     alignItems: 'center',
     marginLeft: space.m,
