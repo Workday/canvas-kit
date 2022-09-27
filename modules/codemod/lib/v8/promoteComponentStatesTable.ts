@@ -83,7 +83,7 @@ const transform: Transform = (file, api) => {
   foundImport.forEach(importPath => {
     if (
       importPath.value.specifiers?.length === 0 ||
-      importPath.value.source.value === '@workday/canvas-kit-labs-react/common'
+      importPath.value.source.value === '@workday/canvas-kit-react/common'
     ) {
       importPath.prune();
     }

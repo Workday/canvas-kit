@@ -40,4 +40,30 @@ describe('renameIconRefs', () => {
 
     expectTransform(input, expected);
   });
+
+  it('should add new import', () => {
+    const input = stripIndent`
+      import { ComponentStatesTable, useThemeRTL } from "@workday/canvas-kit-labs-react/common";
+    `;
+
+    const expected = stripIndent`
+      import { ComponentStatesTable } from "@workday/canvas-kit-react/common";
+      import { useThemeRTL } from "@workday/canvas-kit-labs-react/common";
+    `;
+
+    expectTransform(input, expected);
+  });
+
+  it('should add to existing import', () => {
+    const input = stripIndent`
+      import { ComponentStatesTable } from "@workday/canvas-kit-labs-react/common";
+      import { useMountLayout } from "@workday/canvas-kit-react/common";
+    `;
+
+    const expected = stripIndent`
+      import { useMountLayout, ComponentStatesTable } from "@workday/canvas-kit-react/common";
+    `;
+
+    expectTransform(input, expected);
+  });
 });
