@@ -38,11 +38,11 @@ export const useReturnFocus = createElemPropsHook(usePopupModel)(model => {
     const element = (model.state.returnFocusRef || model.state.targetRef).current as HTMLElement;
 
     document.addEventListener('keydown', onKeyDown, true);
-    document.addEventListener('keyup', onKeyDown, true);
+    document.addEventListener('keyup', onKeyUp, true);
 
     return () => {
       document.removeEventListener('keydown', onKeyDown, true);
-      document.removeEventListener('keyup', onKeyDown, true);
+      document.removeEventListener('keyup', onKeyUp, true);
 
       if (requiresFocusChangeRef.current) {
         // We need to change focus _before_ the browser process the default action of picking a new
