@@ -336,6 +336,11 @@ export const TooltipReturnFocus = () => {
 export const ReturnFocusTest = () => {
   const model = usePopupModel();
 
+  useCloseOnOutsideClick(model);
+  useCloseOnEscape(model);
+  useInitialFocus(model);
+  useReturnFocus(model);
+
   return (
     <div
       style={{width: 400, height: 400, overflow: 'scroll', padding: 4}}
