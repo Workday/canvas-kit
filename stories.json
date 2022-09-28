@@ -6070,6 +6070,16 @@
         "__isArgsStory": false
       }
     },
+    "testing-react-popups-popup--tooltip-return-focus": {
+      "id": "testing-react-popups-popup--tooltip-return-focus",
+      "name": "Tooltip Return Focus",
+      "kind": "Testing/React/Popups/Popup",
+      "story": "Tooltip Return Focus",
+      "parameters": {
+        "__id": "testing-react-popups-popup--tooltip-return-focus",
+        "__isArgsStory": false
+      }
+    },
     "testing-react-popups-toast--toast-states-left-to-right": {
       "id": "testing-react-popups-toast--toast-states-left-to-right",
       "name": "Toast States Left To Right",
