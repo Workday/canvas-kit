@@ -12,7 +12,7 @@ import {
 import {TertiaryButton, Hyperlink} from '@workday/canvas-kit-react/button';
 import {Avatar} from '@workday/canvas-kit-react/avatar';
 import {HStack, HStackProps, StackSpacing} from '@workday/canvas-kit-react/layout';
-import {SearchForm} from '@workday/canvas-kit-labs-react';
+import {SearchForm} from '@workday/canvas-kit-labs-react/search-form';
 
 interface HeaderItemProps extends Omit<HStackProps, 'spacing'> {
   spacing?: StackSpacing;
