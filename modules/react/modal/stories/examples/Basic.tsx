@@ -23,7 +23,7 @@ export const Basic = () => {
           </Modal.Body>
           <HStack spacing="s" padding="xxxs" marginTop="xxs">
             <Modal.CloseButton as={DeleteButton} onClick={handleDelete}>
-              Delete asldjfhb asd;kfjb ask;ljbadf
+              Delete
             </Modal.CloseButton>
             <Modal.CloseButton>Cancel</Modal.CloseButton>
           </HStack>
