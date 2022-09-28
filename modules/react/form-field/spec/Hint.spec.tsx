@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {render} from '@testing-library/react';
-import Hint from '../lib/Hint';
+import {Hint} from '../lib/Hint';
 
 describe('Hint', () => {
   describe('when rendered with an ErrorType', () => {

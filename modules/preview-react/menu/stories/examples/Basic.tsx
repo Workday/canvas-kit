@@ -1,5 +1,5 @@
 import React from 'react';
-import {Menu, MenuItem} from '@workday/canvas-kit-preview-react/menu';
+import {DeprecatedMenu, DeprecatedMenuItem} from '@workday/canvas-kit-preview-react/menu';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {
   Popup,
@@ -53,19 +53,21 @@ export const Basic = () => {
       </Popup.Target>
       <Popup.Popper placement="bottom-start">
         {/*
-          isOpen must be set for focus to be properly assigned to the Menu;
-          onClose must be set in order to the Menu to close properly after
-          selecting a MenuItem
+          isOpen must be set for focus to be properly assigned to the DeprecatedMenu;
+          onClose must be set in order to the DeprecatedMenu to close properly after
+          selecting a DeprecatedMenuItem
         */}
-        <Menu id={menuId} isOpen={isOpen} onClose={model.events.hide}>
-          <MenuItem>First Item</MenuItem>
-          <MenuItem>Second Item (with a really really really long label)</MenuItem>
-          <MenuItem isDisabled>Third Item (disabled)</MenuItem>
-          <MenuItem>
+        <DeprecatedMenu id={menuId} isOpen={isOpen} onClose={model.events.hide}>
+          <DeprecatedMenuItem>First Item</DeprecatedMenuItem>
+          <DeprecatedMenuItem>
+            Second Item (with a really really really long label)
+          </DeprecatedMenuItem>
+          <DeprecatedMenuItem isDisabled>Third Item (disabled)</DeprecatedMenuItem>
+          <DeprecatedMenuItem>
             Fourth Item (<b>with markup</b>)
-          </MenuItem>
-          <MenuItem hasDivider>Fifth Item (with divider)</MenuItem>
-        </Menu>
+          </DeprecatedMenuItem>
+          <DeprecatedMenuItem hasDivider>Fifth Item (with divider)</DeprecatedMenuItem>
+        </DeprecatedMenu>
       </Popup.Popper>
     </Popup>
   );

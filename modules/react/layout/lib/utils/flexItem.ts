@@ -1,4 +1,4 @@
-import {PropertyJustifySelf, PropertyAlignSelf, PropertyOrder} from './types';
+import {Property} from 'csstype';
 
 /** style props to for flexbox item properties */
 export type FlexItemStyleProps = {
@@ -11,11 +11,11 @@ export type FlexItemStyleProps = {
   /** sets `flex-basis` property */
   flexBasis?: number | string;
   /** sets `justify-self` property */
-  justifySelf?: PropertyJustifySelf;
+  justifySelf?: Property.JustifySelf;
   /** sets `align-self` property */
-  alignSelf?: PropertyAlignSelf;
+  alignSelf?: Property.AlignSelf;
   /** sets `order` property */
-  order?: PropertyOrder;
+  order?: Property.Order;
 };
 
 /** style props to for flexbox item properties */
