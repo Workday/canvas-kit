@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v7.3.13](https://github.com/Workday/canvas-kit/releases/tag/v7.3.13) (2022-09-28)
+
+### Tests
+
+- test(menu): Add missing test case for tabbing out of a control ([#1733](https://github.com/Workday/canvas-kit/pull/1733)) ([@smopur](https://github.com/smopur))
+
+
 ## [v7.3.12](https://github.com/Workday/canvas-kit/releases/tag/v7.3.12) (2022-09-28)
 
 ### Components
