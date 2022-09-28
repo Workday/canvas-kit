@@ -95,5 +95,3 @@ export const TextInput = createComponent('input')({
     ErrorType,
   },
 });
-
-export default TextInput;

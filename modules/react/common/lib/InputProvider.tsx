@@ -1,6 +1,4 @@
 import * as React from 'react';
-// @ts-ignore
-import elementClosestPolyfill from 'element-closest';
 
 export interface InputProviderProps {
   provideIntent?: boolean;
@@ -117,7 +115,7 @@ const supportsPassive = () => {
 /**
  * This component takes heavy inspiration from what-input (https://github.com/ten1seven/what-input)
  */
-export class InputProvider extends React.Component<InputProviderProps> {
+export class InputProvider extends React.Component<React.PropsWithChildren<InputProviderProps>> {
   private eventTimer: number | undefined;
 
   private currentInput: InputType;
@@ -171,9 +169,6 @@ export class InputProvider extends React.Component<InputProviderProps> {
   }
 
   componentDidMount() {
-    // For IE11 and under, we'll need to polyfill element.closest
-    elementClosestPolyfill(window);
-
     // Check for passive event listener support
     this.supportsPassive = supportsPassive();
 
