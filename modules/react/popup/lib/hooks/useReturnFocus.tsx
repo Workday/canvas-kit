@@ -41,6 +41,22 @@ export const useReturnFocus = createElemPropsHook(usePopupModel)(model => {
   const visible = model.state.visibility !== 'hidden';
   const elementRef = React.useRef<Element | null>(null);
 
+  // This boolean tracks keyboard-driven focus changes. This is required for `useFocusRedirect` as
+  // focus redirection needs synchronous focus management and everything else needs asynchronous
+  // focus management.
+  const requiresFocusChangeRef = React.useRef(false);
+
+  const onKeyDown = React.useCallback((event: KeyboardEvent) => {
+    // The tab key changes focus
+    if (event.key === 'Tab') {
+      requiresFocusChangeRef.current = true;
+    }
+  }, []);
+
+  const onKeyUp = React.useCallback((event: KeyboardEvent) => {
+    requiresFocusChangeRef.current = false;
+  }, []);
+
   // track mousedown events to determine if the mouse target is a focusable element. If it is, we
   // should not return focus
   const onMouseDown = React.useCallback((event: MouseEvent) => {
@@ -74,12 +90,14 @@ export const useReturnFocus = createElemPropsHook(usePopupModel)(model => {
     const element = (model.state.returnFocusRef || model.state.targetRef).current as HTMLElement;
     document.addEventListener('mousedown', onMouseDown, true);
     document.addEventListener('mouseup', onMouseUp, true);
-    console.log('opening popup');
+    document.addEventListener('keydown', onKeyDown, true);
+    document.addEventListener('keyup', onKeyUp, true);
 
     return () => {
-      console.log('cleanup');
       document.removeEventListener('mousedown', onMouseDown, true);
       document.removeEventListener('mouseup', onMouseUp, true);
+      document.removeEventListener('keydown', onKeyDown, true);
+      document.removeEventListener('keyup', onKeyUp, true);
       const scrollParent = getScrollParent(element);
       const scrollParentRect = scrollParent.getBoundingClientRect();
       const elementRect = element.getBoundingClientRect();
@@ -102,11 +120,30 @@ export const useReturnFocus = createElemPropsHook(usePopupModel)(model => {
         );
         return;
       }
-      console.log('focus change', element);
-      changeFocus(element);
+
+      if (requiresFocusChangeRef.current) {
+        // We need to change focus _before_ the browser process the default action of picking a new
+        // focus target. Doing this immediately prevents the `focus` event from firing on `element`,
+        // but that's okay because the browser will change focus anyways.
+        changeFocus(element);
+      } else {
+        // We wait a frame for the current event to process, allowing the browser to fire default
+        // actions. This delay allows the focus change to trigger a `focus` event on `element`.
+        requestAnimationFrame(() => {
+          changeFocus(element);
+        });
+      }
       elementRef.current = null;
     };
-  }, [model.state.returnFocusRef, model.state.targetRef, visible, onMouseDown, onMouseUp]);
+  }, [
+    model.state.returnFocusRef,
+    model.state.targetRef,
+    visible,
+    onMouseDown,
+    onMouseUp,
+    onKeyDown,
+    onKeyUp,
+  ]);
 
   return {};
 });

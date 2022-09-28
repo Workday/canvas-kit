@@ -379,9 +379,7 @@ describe('Popup', () => {
         beforeEach(() => {
           cy.findByRole('button', {name: 'Delete'})
             .focus()
-            .wait(100)
-            .tab()
-            .wait(100);
+            .tab();
         });
 
         it('should hide the popup', () => {
@@ -402,15 +400,17 @@ describe('Popup', () => {
 
     context('when the "Open Popup" is clicked', () => {
       beforeEach(() => {
-        cy.findByRole('button', {name: 'Open Popup'}).click();
+        cy.findByRole('button', {name: 'Open Popup'})
+          .scrollIntoView()
+          .click();
       });
 
       context('when the user clicks outside', () => {
         beforeEach(() => {
-          cy.get('body').click('top');
+          cy.get('body').click('bottom');
         });
 
-        it('should focus the "Open Popup" button', () => {
+        it('should focus the "Open Popup" button', {scrollBehavior: false}, () => {
           cy.findByRole('button', {name: 'Open Popup'}).should('have.focus');
         });
       });
