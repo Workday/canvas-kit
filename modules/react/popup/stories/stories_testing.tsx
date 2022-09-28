@@ -1,6 +1,8 @@
 import * as React from 'react';
 import ReactDOM from 'react-dom';
 
+import {TextInput} from '@workday/canvas-kit-react/text-input';
+import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 import {DeleteButton, SecondaryButton} from '@workday/canvas-kit-react/button';
 import {useMount} from '@workday/canvas-kit-react/common';
@@ -304,5 +306,69 @@ export const PopupWithBodyScroll = () => {
         <SecondaryButton>Focusable Button After Popup</SecondaryButton>
       </HStack>
     </Popup>
+  );
+};
+
+export const ReturnFocusTest = () => {
+  const model = usePopupModel();
+  useCloseOnOutsideClick(model);
+  useCloseOnEscape(model);
+  useInitialFocus(model);
+  useReturnFocus(model);
+
+  const [scrollBox, setScrollBox] = React.useState({x: 0, y: 0, width: 0, height: 0});
+  const [buttonBox, setButtonBox] = React.useState({x: 0, y: 0, width: 0, height: 0});
+
+  const onScroll = () => {
+    const scrollBoxRect = document
+      .querySelector('[data-testid=scroll-area]')
+      .getBoundingClientRect();
+    const targetRect = document.querySelector('[data-testid=target]').getBoundingClientRect();
+    setScrollBox({
+      x: scrollBoxRect.x,
+      y: scrollBoxRect.y,
+      width: scrollBoxRect.width,
+      height: scrollBoxRect.height,
+    });
+    setScrollBox({
+      x: scrollBoxRect.x,
+      y: scrollBoxRect.y,
+      width: scrollBoxRect.width,
+      height: scrollBoxRect.height,
+    });
+  };
+
+  return (
+    <div
+      style={{width: 400, height: 400, overflow: 'scroll', padding: 4}}
+      data-testid="scroll-area"
+    >
+      <div style={{width: 950}}>
+        <p style={{marginBottom: 400}}>Scroll down and click on the button</p>
+        <p>Scroll right</p>
+        <Popup model={model}>
+          <FormField label="Name" style={{marginLeft: 400}}>
+            <TextInput />
+          </FormField>
+          <Popup.Target style={{marginBottom: 400, marginLeft: 410}} data-testid="target">
+            Open Popup
+          </Popup.Target>
+          <Popup.Popper>
+            <Popup.Card>
+              <Popup.CloseIcon aria-label="Close" />
+              <Popup.Body>
+                <p>The "Open Popup" button should not receive focus if:</p>
+                <ul>
+                  <li>You click on the input</li>
+                  <li>
+                    You scroll the container so that less than half of the "Open Popup" is showing
+                  </li>
+                </ul>
+              </Popup.Body>
+            </Popup.Card>
+          </Popup.Popper>
+        </Popup>
+      </div>
+    </div>
   );
 };
