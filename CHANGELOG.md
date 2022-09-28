@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v7.3.12](https://github.com/Workday/canvas-kit/releases/tag/v7.3.12) (2022-09-28)
+
+### Components
+
+- fix(popup): Fix return focus timing for tooltips and focus events ([#1806](https://github.com/Workday/canvas-kit/pull/1806)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+### Documentation
+
+- docs: Remove stale references to Icon Buttons ([#1814](https://github.com/Workday/canvas-kit/pull/1814)) ([@jamesfan](https://github.com/jamesfan))
+
+### Infrastructure
+
+- chore: Adding Epic issue template ([#1811](https://github.com/Workday/canvas-kit/pull/1811)) ([@jaclynjessup](https://github.com/jaclynjessup), [@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v7.3.11](https://github.com/Workday/canvas-kit/releases/tag/v7.3.11) (2022-09-27)
 
 ### Components
