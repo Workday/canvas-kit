@@ -20,7 +20,6 @@ export const findOverflowElement = (element: Element): Element | null => {
   ) {
     return element;
   } else if (element.children) {
-    // `children` is not defined for SVGElement in IE11
     for (let i = 0; i < element.children.length; i++) {
       const overflowElement = findOverflowElement(element.children[i]);
       if (overflowElement) {
