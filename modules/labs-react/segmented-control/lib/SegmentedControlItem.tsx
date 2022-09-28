@@ -9,7 +9,7 @@ import {
   styled,
   StyledType,
 } from '@workday/canvas-kit-react/common';
-import {OverflowTooltip, Tooltip} from '@workday/canvas-kit-react/tooltip';
+import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 import {
   useListItemRegister,
   useListItemRovingFocus,
@@ -93,6 +93,7 @@ const getSizeStyles = (size?: ButtonSizes) => {
   };
 };
 
+// USE FROM BUTTON PACKAGE
 const getPaddingStyles = (
   children: React.ReactNode,
   size: ButtonContainerProps['size'],
@@ -136,6 +137,7 @@ const StyledButton = styled(BaseButton)<StyledType & ButtonContainerProps>(
   })
 );
 
+// CAN BE REMOVED IF SEPARATING LINE IS REMOVED FROM DESIGN SPEC
 const StyledContainer = styled('div')<{
   isSelected?: boolean;
   orientation: 'horizontal' | 'vertical';
@@ -213,36 +215,35 @@ export const SegmentedControlItem = createSubcomponent('button')({
   displayName: 'SegmentedControl.Item',
   modelHook: useSegmentedControlModel,
   elemPropsHook: useTabsItem,
-})<ItemProps>(
-  ({children, icon, ...elemProps}, Element, {state: {size, orientation, isIconOnly}}) => {
-    const isSmall = size === 'small';
-    const isSelected = elemProps['aria-pressed'];
-    const {color, ...textStyles} = type.levels.subtext[isSmall ? 'medium' : 'large'];
+})<ItemProps>(({children, icon, ...elemProps}, Element, {state: {size, orientation, variant}}) => {
+  const isSmall = size === 'small';
+  const isSelected = elemProps['aria-pressed'];
+  const isIconOnly = variant === 'icon';
+  const {color, ...textStyles} = type.levels.subtext[isSmall ? 'medium' : 'large'];
 
-    const WrappedElement = icon && !children ? Tooltip : React.Fragment;
+  const WrappedElement = isIconOnly ? Tooltip : React.Fragment;
 
-    return (
-      <StyledContainer isSelected={isSelected} orientation={orientation}>
-        {
-          <WrappedElement title="text">
-            <StyledButton
-              as={Element}
-              colors={getIconButtonColors(isSelected)}
-              size={size}
-              padding={`${getPaddingStyles(children, size, icon)} !important`}
-              {...getSizeStyles(size)}
-              {...elemProps}
-            >
-              {icon && <BaseButton.Icon size={isSmall ? 'extraSmall' : 'medium'} icon={icon} />}
-              {children && (
-                <Text {...textStyles} fontWeight="bold">
-                  {children}
-                </Text>
-              )}
-            </StyledButton>
-          </WrappedElement>
-        }
-      </StyledContainer>
-    );
-  }
-);
+  return (
+    <StyledContainer isSelected={isSelected} orientation={orientation}>
+      {
+        <WrappedElement title={children}>
+          <StyledButton
+            as={Element}
+            colors={getIconButtonColors(isSelected)}
+            size={size}
+            padding={`${getPaddingStyles(!isIconOnly, size, icon)} !important`}
+            {...getSizeStyles(size)}
+            {...elemProps}
+          >
+            {icon && <BaseButton.Icon size={isSmall ? 'extraSmall' : 'medium'} icon={icon} />}
+            {!isIconOnly && (
+              <Text {...textStyles} fontWeight="bold">
+                {children}
+              </Text>
+            )}
+          </StyledButton>
+        </WrappedElement>
+      }
+    </StyledContainer>
+  );
+});

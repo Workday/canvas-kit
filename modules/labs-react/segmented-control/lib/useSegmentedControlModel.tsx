@@ -17,8 +17,9 @@ export const useSegmentedControlModel = createModelHook({
     initialValue: '',
     // PUT DESCRIPTION HERE FOR PROP disabled
     disabled: false,
-    // PUT DESCRIPTION HERE FOR PROP isIconOnly
-    isIconOnly: false,
+    // PUT DESCRIPTION HERE FOR PROP variant
+    variant: 'icon' as 'icon' | 'text',
+    // PUT DESCRIPTION HERE FOR PROP size
     size: 'medium' as 'small' | 'medium' | 'large',
     /**
      * The SegmentedControl handles rendering of button group in a horizontal orientation,
@@ -56,7 +57,7 @@ export const useSegmentedControlModel = createModelHook({
     ...model.state,
     disabled: config.disabled,
     size: config.size,
-    isIconOnly: config.isIconOnly,
+    variant: config.variant,
   };
 
   const events = {
