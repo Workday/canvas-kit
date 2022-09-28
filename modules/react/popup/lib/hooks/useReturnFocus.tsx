@@ -101,9 +101,6 @@ export const useReturnFocus = createElemPropsHook(usePopupModel)(model => {
       const scrollParent = getScrollParent(element);
       const scrollParentRect = scrollParent.getBoundingClientRect();
       const elementRect = element.getBoundingClientRect();
-      console.log('activeElement', getFocusableElement(elementRef.current!));
-
-      console.log('left', scrollParent.scrollLeft, elementRect.bottom, scrollParentRect.bottom);
 
       // Don't change focus if user focused on a different element like a `input` or the target
       // element isn't on at least halfway rendered on the screen.
@@ -114,10 +111,6 @@ export const useReturnFocus = createElemPropsHook(usePopupModel)(model => {
         elementRect.left + elementRect.width / 2 < scrollParentRect.left ||
         elementRect.right - elementRect.width / 2 > scrollParentRect.right
       ) {
-        console.log(
-          'skipping focus change',
-          elementRef.current && getFocusableElement(elementRef.current)
-        );
         return;
       }
 
