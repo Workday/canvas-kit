@@ -39,13 +39,13 @@ export const SegmentedControlList = createSubcomponent('div')({
   return (
     <Flex
       as={Element}
+      role="group"
       backgroundColor="soap200"
       border="1px solid transparent"
       borderColor="licorice200"
       borderRadius="l"
       padding="xxxs"
       width="min-content"
-      role="group"
       {...elemProps}
     >
       {useListRenderItems(model, children)}

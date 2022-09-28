@@ -19,7 +19,7 @@ export const Default = () => {
     <>
       <Box marginBottom="s">
         <SegmentedControl size="large">
-          <SegmentedControl.List>
+          <SegmentedControl.List aria-label="Content view type">
             <SegmentedControl.Item data-id="table">Table</SegmentedControl.Item>
             <SegmentedControl.Item data-id="list-view">List</SegmentedControl.Item>
             <SegmentedControl.Item data-id="list-detail">Details</SegmentedControl.Item>
@@ -54,11 +54,11 @@ export const Default = () => {
         </SegmentedControl>
       </Box>
       <Box marginBottom="s">
-        <SegmentedControl orientation="vertical">
+        <SegmentedControl orientation="vertical" disabled>
           <SegmentedControl.List>
-            <SegmentedControl.Item data-id="table" icon={gridViewIcon} />
-            <SegmentedControl.Item data-id="list-view" icon={listViewIcon} />
-            <SegmentedControl.Item data-id="list-detail" icon={listDetailIcon} />
+            <SegmentedControl.Item icon={gridViewIcon} />
+            <SegmentedControl.Item icon={listViewIcon} />
+            <SegmentedControl.Item icon={listDetailIcon} />
           </SegmentedControl.List>
         </SegmentedControl>
       </Box>

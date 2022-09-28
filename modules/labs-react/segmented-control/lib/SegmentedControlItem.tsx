@@ -9,7 +9,7 @@ import {
   styled,
   StyledType,
 } from '@workday/canvas-kit-react/common';
-// import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
+import {OverflowTooltip, Tooltip} from '@workday/canvas-kit-react/tooltip';
 import {
   useListItemRegister,
   useListItemRovingFocus,
@@ -28,55 +28,37 @@ import {Text} from '@workday/canvas-kit-react/text';
 
 export interface ItemProps extends ButtonContainerProps {
   /**
-   * Optionally pass index to tab item. This should be done if `Tabs.Item` components were created
+   * Optionally pass index to the item. This should be done if `Tabs.Item` components were created
    * via a `Array::map` function. This index will ensure keyboard navigation works even if items are
    * inserted out of order.
    */
   index?: number;
   /**
-   * The contents of the tab item. This will be the accessible name of the tab for screen readers.
-   * Often, this is text. Icons are also supported. Using `Tabs.Icon` will render an icon that is
-   * not visible to screen readers and therefore the icon should not be necessary to understand the
-   * tab. In most circumstances, `aria-label` should not be used.
-   *
-   * ```tsx
-   * <Tabs.Item>First Tab</Tabs.Item>
-   * <Tabs.Item>
-   *   <Tabs.Icon icon={canvasIcon} />
-   *   <Tabs.Text>Second Tab</Tabs.Text>
-   * </Tabs.Item>
-   * ```
+   * The contents of the item. This is text used as the accessible name of the button for screen readers.
    */
   children?: React.ReactNode;
   /**
-   * The identifier of the tab. This identifier will be used in change events and for `initialTab`.
-   * Must match the `data-id` of the associated tab panel. If this property is not provided, it will
-   * default to a string representation of the the zero-based index of the Tab when it was
-   * initialized.
+   * The identifier of the item. This identifier will be used in change events and for `initialTab`.
+   * If this property is not provided, it will default to a string representation
+   * of the the zero-based index of the item when it was initialized.
    */
   'data-id'?: string;
   /**
-   * Optional id. If not set, it will inherit the ID passed to the `Tabs` component and append the
+   * Optional id. If not set, it will inherit the ID passed to the `SegmentedControl` component and append the
    * index at the end. Only set this for advanced cases.
    */
   id?: string;
   /**
-   * Part of the ARIA specification for tabs. This attributes links a `role=tab` to a
-   * `role=tabpanel`. This value must be the same as the associated `id` attribute of the tab panel.
-   * This is automatically set by the component and should only be used in advanced cases.
-   */
-  'aria-controls'?: string;
-  /**
-   * Part of the ARIA specification for tabs. Lets screen readers know which tab is active. This
+   * Part of the ARIA specification for buttons. Lets screen readers know which button is active. This
    * should either be `true` or `undefined` and never `false`. This is automatically set by the
    * component and should only be used in advanced cases.
    */
-  'aria-selected'?: boolean;
+  'aria-pressed'?: boolean;
   /**
-   * Part of the ARIA specification for tabs. The currently active tab should not have a `tabIndex`
-   * set while all inactive tabs should have a `tabIndex={-1}`
+   * Part of the ARIA specification for buttons. The currently active button should not have a `buttonIndex`
+   * set while all inactive buttons should have a `buttonIndex={-1}`
    */
-  tabIndex?: number;
+  buttonIndex?: number;
   icon?: CanvasSystemIcon;
 }
 
@@ -139,6 +121,10 @@ const StyledButton = styled(BaseButton)<StyledType & ButtonContainerProps>(
     padding: 0,
     borderRadius: borderRadius.m,
     width: '100%',
+    // TO REFACT
+    '&:disabled': {
+      opacity: 1,
+    },
   },
   ({theme}) => ({
     '[aria-pressed="true"]': {
@@ -207,49 +193,56 @@ export const useTabsItem = composeHooks(
   createElemPropsHook(useSegmentedControlModel)(
     ({state}, _?: React.Ref<HTMLButtonElement>, elemProps: {'data-id'?: string} = {}) => {
       const name = elemProps['data-id'] || '';
-
-      const selected = !!elemProps['data-id'] && isSelected(name, state);
+      const selected = !!name && isSelected(name, state);
 
       return {
-        type: 'button',
-        role: 'tab',
         id: `${state.id}-${name}`,
-        'aria-selected': selected,
-        'aria-controls': `tabpanel-${state.id}-${name}`,
+        'aria-pressed': selected,
       };
     }
   ),
   useListItemSelect,
   useListItemRovingFocus,
-  useListItemRegister
+  useListItemRegister,
+  createElemPropsHook(useSegmentedControlModel)(({state}) => {
+    return state.disabled ? {disabled: true} : {};
+  })
 );
 
 export const SegmentedControlItem = createSubcomponent('button')({
   displayName: 'SegmentedControl.Item',
   modelHook: useSegmentedControlModel,
   elemPropsHook: useTabsItem,
-})<ItemProps>(({children, icon, ...elemProps}, Element, {state: {size, orientation}}) => {
-  const isSmall = size === 'small';
-  const isSelected = elemProps['aria-selected'];
-  const {color, ...textStyles} = type.levels.subtext[isSmall ? 'medium' : 'large'];
+})<ItemProps>(
+  ({children, icon, ...elemProps}, Element, {state: {size, orientation, isIconOnly}}) => {
+    const isSmall = size === 'small';
+    const isSelected = elemProps['aria-pressed'];
+    const {color, ...textStyles} = type.levels.subtext[isSmall ? 'medium' : 'large'];
 
-  return (
-    <StyledContainer isSelected={isSelected} orientation={orientation}>
-      <StyledButton
-        as={Element}
-        colors={getIconButtonColors(elemProps['aria-selected'])}
-        size={size as ButtonContainerProps['size']}
-        padding={`${getPaddingStyles(children, size, icon)} !important`}
-        {...getSizeStyles(size)}
-        {...elemProps}
-      >
-        {icon && <BaseButton.Icon size={isSmall ? 'extraSmall' : 'medium'} icon={icon} />}
-        {children && (
-          <Text {...textStyles} fontWeight="bold">
-            {children}
-          </Text>
-        )}
-      </StyledButton>
-    </StyledContainer>
-  );
-});
+    const WrappedElement = icon && !children ? Tooltip : React.Fragment;
+
+    return (
+      <StyledContainer isSelected={isSelected} orientation={orientation}>
+        {
+          <WrappedElement title="text">
+            <StyledButton
+              as={Element}
+              colors={getIconButtonColors(isSelected)}
+              size={size}
+              padding={`${getPaddingStyles(children, size, icon)} !important`}
+              {...getSizeStyles(size)}
+              {...elemProps}
+            >
+              {icon && <BaseButton.Icon size={isSmall ? 'extraSmall' : 'medium'} icon={icon} />}
+              {children && (
+                <Text {...textStyles} fontWeight="bold">
+                  {children}
+                </Text>
+              )}
+            </StyledButton>
+          </WrappedElement>
+        }
+      </StyledContainer>
+    );
+  }
+);
