@@ -1,7 +1,11 @@
 import React from 'react';
 
-import {CanvasProvider, StaticStates, ContentDirection} from '@workday/canvas-kit-react/common';
-import {ComponentStatesTable} from '@workday/canvas-kit-labs-react/common';
+import {
+  CanvasProvider,
+  StaticStates,
+  ContentDirection,
+  ComponentStatesTable,
+} from '@workday/canvas-kit-react/common';
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
 
 import {Breadcrumbs} from '@workday/canvas-kit-react/breadcrumbs';
