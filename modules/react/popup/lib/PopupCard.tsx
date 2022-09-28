@@ -87,7 +87,7 @@ export const PopupCard = createSubcomponent('div')({
       maxHeight={`calc(100vh - ${
         elemProps.margin ? space[elemProps.margin as CanvasSpaceKeys] || elemProps.margin : space.xl
       } * 2)`}
-      overflowY="auto" // force IE11 to limit the flex size of the card. Without this, the body isn't allowed to overflow properly: https://github.com/philipwalton/flexbugs/issues/216#issuecomment-453053557
+      overflowY="auto"
       {...type.levels.subtext.large}
       {...elemProps}
     >
