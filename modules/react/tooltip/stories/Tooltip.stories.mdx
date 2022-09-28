@@ -19,7 +19,8 @@ import {UseTooltip} from './examples/UseTooltip';
 
 A Tooltip component that renders information/text when the user hovers over an element. A tooltip is
 used to label or describe an element. By default, a tooltip will label an element. This is useful
-for icon button. A tooltip can also be used to describe additional information about an element
+for buttons with icons. A tooltip can also be used to describe additional information about an
+element
 
 [> Workday Design Reference](https://design.workday.com/components/popups/tooltips)
 
@@ -33,7 +34,7 @@ yarn add @workday/canvas-kit-react
 
 This component follows the
 [W3 Tooltip specification](https://www.w3.org/TR/wai-aria-practices/#tooltip). Tooltips are used to
-label icon buttons and provide additional context to elements.
+label buttons with icons and provide additional context to elements.
 
 ### When to use tooltips
 
@@ -58,10 +59,10 @@ tooltip being visible
 
 ### Basic Example
 
-Here is a basic example of an `TertiaryButton` that renders an icon using a tooltip to label the icon. This is labeling the
-button for both sighted users and for screen readers. A tooltip will provide an `aria-label` to
-child elements for the accessibility tree and a visual tooltip during mouse hover and focus events.
-Mouse over or focus on the x icon below. Click "Show code" to see the source code.
+Here is a basic example of a `TertiaryButton` that renders an icon using a tooltip to label the
+icon. This labels the button for both sighted users and screen readers. A tooltip provides an
+`aria-label` to child elements for the accessibility tree and a visual tooltip during mouse hover
+and focus events.
 
 <ExampleCodeBlock code={Default} />
 
