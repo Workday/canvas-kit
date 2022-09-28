@@ -19,7 +19,7 @@ const ResponsiveModalCard = styled(Popup.Card)<ModalCardProps & StyledType>(({th
   [theme.canvas.breakpoints.down('s')]: {
     margin: `0 0 ${space.xl}`,
     padding: space.s,
-    borderRadius: 24, // matches mobile specs
+    borderRadius: space.m, // matches mobile specs
   },
 }));
 
