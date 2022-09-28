@@ -490,4 +490,34 @@ describe('Popup', () => {
       });
     });
   });
+
+  context(`given the [Testing/React/Popups/Popup, TooltipReturnFocus] example is rendered`, () => {
+    beforeEach(() => {
+      h.stories.load('Testing/React/Popups/Popup', 'TooltipReturnFocus');
+    });
+
+    context('when the icon button is clicked', () => {
+      beforeEach(() => {
+        cy.findByRole('button', {name: 'Open Popup'}).click();
+      });
+
+      it('should show the popup', () => {
+        cy.findByRole('dialog', {name: 'Popup'}).should('be.visible');
+      });
+
+      context('when the "Close" icon button is clicked', () => {
+        beforeEach(() => {
+          cy.findByRole('button', {name: 'Close'}).click();
+        });
+
+        it('should focus on the icon button', () => {
+          cy.findByRole('button', {name: 'Open Popup'}).should('have.focus');
+        });
+
+        it('should show the tooltip', () => {
+          cy.findByRole('tooltip').should('be.visible');
+        });
+      });
+    });
+  });
 });

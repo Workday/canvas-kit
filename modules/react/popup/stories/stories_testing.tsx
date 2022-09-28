@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
-import {DeleteButton, SecondaryButton} from '@workday/canvas-kit-react/button';
+import {DeleteButton, SecondaryButton, TertiaryButton} from '@workday/canvas-kit-react/button';
 import {useMount} from '@workday/canvas-kit-react/common';
 import {HStack} from '@workday/canvas-kit-react/layout';
 import {
@@ -18,6 +18,7 @@ import {
   useReturnFocus,
   useFocusTrap,
 } from '@workday/canvas-kit-react/popup';
+import {menuGroupIcon} from '@workday/canvas-system-icons-web';
 
 export default {
   title: 'Testing/React/Popups/Popup',
@@ -308,35 +309,32 @@ export const PopupWithBodyScroll = () => {
     </Popup>
   );
 };
-
-export const ReturnFocusTest = () => {
+export const TooltipReturnFocus = () => {
   const model = usePopupModel();
+
   useCloseOnOutsideClick(model);
   useCloseOnEscape(model);
   useInitialFocus(model);
   useReturnFocus(model);
 
-  const [scrollBox, setScrollBox] = React.useState({x: 0, y: 0, width: 0, height: 0});
-  const [buttonBox, setButtonBox] = React.useState({x: 0, y: 0, width: 0, height: 0});
+  return (
+    <Popup model={model}>
+      <Tooltip title="Open Popup">
+        <Popup.Target as={TertiaryButton} icon={menuGroupIcon} />
+      </Tooltip>
+      <Popup.Popper>
+        <Popup.Card>
+          <Popup.CloseIcon aria-label="Close" />
+          <Popup.Heading>Popup</Popup.Heading>
+          <Popup.Body>Contents</Popup.Body>
+        </Popup.Card>
+      </Popup.Popper>
+    </Popup>
+  );
+};
 
-  const onScroll = () => {
-    const scrollBoxRect = document
-      .querySelector('[data-testid=scroll-area]')
-      .getBoundingClientRect();
-    const targetRect = document.querySelector('[data-testid=target]').getBoundingClientRect();
-    setScrollBox({
-      x: scrollBoxRect.x,
-      y: scrollBoxRect.y,
-      width: scrollBoxRect.width,
-      height: scrollBoxRect.height,
-    });
-    setScrollBox({
-      x: scrollBoxRect.x,
-      y: scrollBoxRect.y,
-      width: scrollBoxRect.width,
-      height: scrollBoxRect.height,
-    });
-  };
+export const ReturnFocusTest = () => {
+  const model = usePopupModel();
 
   return (
     <div
@@ -344,8 +342,8 @@ export const ReturnFocusTest = () => {
       data-testid="scroll-area"
     >
       <div style={{width: 950}}>
-        <p style={{marginBottom: 400}}>Scroll down and click on the button</p>
-        <p>Scroll right</p>
+        <p style={{marginBottom: 400}}>Scroll down</p>
+        <p>Scroll right and click on the button</p>
         <Popup model={model}>
           <FormField label="Name" style={{marginLeft: 400}}>
             <TextInput />

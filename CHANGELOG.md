@@ -3,6 +3,161 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v7.3.11](https://github.com/Workday/canvas-kit/releases/tag/v7.3.11) (2022-09-27)
+
+### Components
+
+- fix(combobox): Override z-index only when focus state ([#1752](https://github.com/Workday/canvas-kit/pull/1752)) ([@chaiwattsw](https://github.com/chaiwattsw))
+
+### Documentation
+
+- docs: Make release category easier to change in PR template ([#1804](https://github.com/Workday/canvas-kit/pull/1804)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+### Infrastructure
+
+- chore: Update pull request template ([#1750](https://github.com/Workday/canvas-kit/pull/1750)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
+## [v7.3.10](https://github.com/Workday/canvas-kit/releases/tag/v7.3.10) (2022-09-23)
+
+### Components
+
+- fix: Remove use of style to style border radius on TertiaryButton ([#1803](https://github.com/Workday/canvas-kit/pull/1803)) ([@mannycarrera4](https://github.com/mannycarrera4))
+  We were using `style` to apply border radius which prevent users from overwriting styles. Using `borderRadius` allows for customization.
+
+
+## [v7.3.9](https://github.com/Workday/canvas-kit/releases/tag/v7.3.9) (2022-09-23)
+
+### Infrastructure
+
+- fix: Update create-component scripts ([#1719](https://github.com/Workday/canvas-kit/pull/1719)) ([@vibdev](https://github.com/vibdev))
+  Updates the create create-component script to generate components using the new 7.x functions. It also updates the generated stories to use mdx.
+
+
+## [v7.3.8](https://github.com/Workday/canvas-kit/releases/tag/v7.3.8) (2022-09-22)
+
+### Components
+
+- fix: Extend BaseButtonProps to our buttons and export utility functions ([#1775](https://github.com/Workday/canvas-kit/pull/1775)) ([@mannycarrera4](https://github.com/mannycarrera4))
+  - You can now overwrite styles using style properties from `Box` on `PrimaryButton`, `SecondaryButton`, `TertiaryButton` and `DeleteButton`. This allows you to customize styles more easily.
+  - We're exporting utility functions `getMinWidthStyles` and `getPaddingStyles` to help those making custom buttons
+
+
+## [v7.3.7](https://github.com/Workday/canvas-kit/releases/tag/v7.3.7) (2022-09-21)
+
+### Infrastructure
+
+- fix(common): Add support for class components to createComponent ([#1786](https://github.com/Workday/canvas-kit/pull/1786)) ([@anicholls](https://github.com/anicholls))
+
+
+## [v7.3.6](https://github.com/Workday/canvas-kit/releases/tag/v7.3.6) (2022-09-21)
+
+### Documentation
+
+- fix: Remove spellcheck from togglable password field ([#1782](https://github.com/Workday/canvas-kit/pull/1782)) ([@vibdev](https://github.com/vibdev))
+
+
+## [v7.3.5](https://github.com/Workday/canvas-kit/releases/tag/v7.3.5) (2022-09-20)
+
+### Components
+
+- fix: Add PopperProps to PopupPopper props ([#1772](https://github.com/Workday/canvas-kit/pull/1772)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
+## [v7.3.4](https://github.com/Workday/canvas-kit/releases/tag/v7.3.4) (2022-09-16)
+
+### Components
+
+- chore: Add custom lint rule to encourage CK slash imports ([#1762](https://github.com/Workday/canvas-kit/pull/1762)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
+## [v6.8.15](https://github.com/Workday/canvas-kit/releases/tag/v6.8.15) (2022-09-15)
+
+### Components
+
+- fix: Add PopperProps to PopupPopper props ([#1772](https://github.com/Workday/canvas-kit/pull/1772)) ([@alanbsmith](https://github.com/alanbsmith))
+## [v7.3.3](https://github.com/Workday/canvas-kit/releases/tag/v7.3.3) (2022-09-15)
+
+### Components
+
+- fix: Enable to use size prop in SegmentedControl.Button component ([#1766](https://github.com/Workday/canvas-kit/pull/1766)) ([@RayRedGoose](https://github.com/RayRedGoose))
+
+
+## [v7.3.2](https://github.com/Workday/canvas-kit/releases/tag/v7.3.2) (2022-09-15)
+
+### Documentation
+
+- docs: Add initial maintaining doc ([#1764](https://github.com/Workday/canvas-kit/pull/1764)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
+## [v7.3.1](https://github.com/Workday/canvas-kit/releases/tag/v7.3.1) (2022-09-09)
+
+### Components
+
+- fix: Prevent focus ring from getting cut off in Popup.Body ([#1727](https://github.com/Workday/canvas-kit/pull/1727)) ([@mannycarrera4](https://github.com/mannycarrera4))
+
+
+## [v7.3.0](https://github.com/Workday/canvas-kit/releases/tag/v7.3.0) (2022-08-31)
+
+### Components
+
+- feat(labs): Add expandable container component ([#1562](https://github.com/Workday/canvas-kit/pull/1562)) ([@giulialubet](https://github.com/giulialubet))
+- fix: Update avatar on expandable component ([#1739](https://github.com/Workday/canvas-kit/pull/1739)) ([@mannycarrera4](https://github.com/mannycarrera4))
+- feat(labs): New compound toast component ([#1432](https://github.com/Workday/canvas-kit/pull/1432)) ([@ckaptan](https://github.com/ckaptan))
+- fix: Update Toast import statements ([#1760](https://github.com/Workday/canvas-kit/pull/1760)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
+## [v7.2.11](https://github.com/Workday/canvas-kit/releases/tag/v7.2.11) (2022-08-31)
+
+### Components
+
+- fix(pagination): Fixes onPageChange regression ([#1748](https://github.com/Workday/canvas-kit/pull/1748)) ([@alanbsmith](https://github.com/alanbsmith))
+
+### Infastructure
+
+- ci: Update secret to new token for project board actions ([#1757](https://github.com/Workday/canvas-kit/pull/1757)) ([@jaclynjessup](https://github.com/jaclynjessup))
+
+### Infrastructure
+
+- ci: Update project board automations ([@jaclynjessup](https://github.com/jaclynjessup))
+
+
+## [v7.2.10](https://github.com/Workday/canvas-kit/releases/tag/v7.2.10) (2022-08-29)
+
+### Components
+
+- fix(menu): Fix issue with color change on menu item icon hover ([#1744](https://github.com/Workday/canvas-kit/pull/1744)) ([@RayRedGoose](https://github.com/RayRedGoose))
+
+
+## [v7.2.9](https://github.com/Workday/canvas-kit/releases/tag/v7.2.9) (2022-08-16)
+
+### Infrastructure
+
+- ci: Add project board automations ([#1729](https://github.com/Workday/canvas-kit/pull/1729)) ([@jaclynjessup](https://github.com/jaclynjessup))
+
+
+## [v7.2.8](https://github.com/Workday/canvas-kit/releases/tag/v7.2.8) (2022-08-15)
+
+### Components
+
+- fix: Change link URL to non-interactive examples ([#1731](https://github.com/Workday/canvas-kit/pull/1731)) ([@stefano-puzzuoli](https://github.com/stefano-puzzuoli))
+
+
+## [v7.2.7](https://github.com/Workday/canvas-kit/releases/tag/v7.2.7) (2022-08-12)
+
+### Components
+
+- fix: Ignore tabIndex to take elements out of the focus order ([#1723](https://github.com/Workday/canvas-kit/pull/1723)) ([@smopur](https://github.com/smopur))
+  Fixes tabbing out of a a control where elements in the control are excluded from the tab order
+
+
+## [v7.2.6](https://github.com/Workday/canvas-kit/releases/tag/v7.2.6) (2022-08-11)
+
+### Documentation
+
+- docs: Fix RadioGroup Basic example ([#1726](https://github.com/Workday/canvas-kit/pull/1726)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
 ## [v7.2.5](https://github.com/Workday/canvas-kit/releases/tag/v7.2.5) (2022-07-28)
 
 ### Infrastructure
