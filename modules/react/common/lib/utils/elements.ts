@@ -2,9 +2,9 @@
  * Is an element focusable? This function performs various tests to see if the element in question
  * can receive focus. Should skip disabled elements as they are not focusable.
  */
-export const isFocusable = (element: Element) => {
+export const isFocusable = (element: Element): boolean => {
   if (element.hasAttribute('disabled')) {
-    return null;
+    return false;
   }
 
   const nodeName = element.nodeName.toLowerCase();
@@ -35,11 +35,7 @@ export const getFirstFocusableElement = (container: HTMLElement): HTMLElement | 
 
   for (let i = 0; i < elements.length; i++) {
     const element = elements.item(i);
-    if (
-      element &&
-      isFocusable(element as HTMLElement) &&
-      element.getAttribute('tabindex') !== '-1'
-    ) {
+    if (element && isFocusable(element) && element.getAttribute('tabindex') !== '-1') {
       return element as HTMLElement;
     }
   }
@@ -55,11 +51,7 @@ export const getLastFocusableElement = (container: HTMLElement): HTMLElement | n
 
   for (let i = elements.length - 1; i >= 0; i--) {
     const element = elements.item(i);
-    if (
-      element &&
-      isFocusable(element as HTMLElement) &&
-      element.getAttribute('tabindex') !== '-1'
-    ) {
+    if (element && isFocusable(element) && element.getAttribute('tabindex') !== '-1') {
       return element as HTMLElement;
     }
   }
