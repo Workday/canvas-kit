@@ -8,11 +8,11 @@ import {
   createSubcomponent,
   styled,
   StyledType,
+  useIsRTL,
 } from '@workday/canvas-kit-react/common';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 import {
   useListItemRegister,
-  useListItemRovingFocus,
   isSelected,
   useListItemSelect,
 } from '@workday/canvas-kit-react/collection';
@@ -61,6 +61,12 @@ export interface ItemProps extends ButtonContainerProps {
   buttonIndex?: number;
   icon?: CanvasSystemIcon;
 }
+
+type WrapProps = {
+  isIconOnly: boolean;
+  title: React.ReactNode;
+  children: React.ReactElement;
+};
 
 const getIconButtonColors = (toggled?: boolean): ButtonColors => {
   return {
@@ -122,7 +128,6 @@ const StyledButton = styled(BaseButton)<StyledType & ButtonContainerProps>(
     padding: 0,
     borderRadius: borderRadius.m,
     width: '100%',
-    // TO REFACT
     '&:disabled': {
       opacity: 1,
     },
@@ -138,112 +143,113 @@ const StyledButton = styled(BaseButton)<StyledType & ButtonContainerProps>(
 );
 
 // CAN BE REMOVED IF SEPARATING LINE IS REMOVED FROM DESIGN SPEC
-const StyledContainer = styled('div')<{
-  isSelected?: boolean;
-  orientation: 'horizontal' | 'vertical';
-}>(
-  {
-    // flex: '1 1 0',
-    // minWidth: 0,
-    position: 'relative',
-    '&::after': {
-      content: '""',
-      display: 'block',
-      backgroundColor: colors.soap600,
-      position: 'absolute',
-    },
-    '&:first-of-type': {
-      padding: 0,
-      '&::after': {
-        display: 'none',
-      },
-    },
-  },
-  ({orientation}) =>
-    orientation === 'horizontal'
-      ? {
-          paddingLeft: '5px',
-          '&::after': {
-            width: '1px',
-            height: 'calc(100% - 8px)',
-            margin: '0 2px',
-            top: '4px',
-            left: '0',
-          },
-        }
-      : {
-          paddingTop: '5px',
-          '&::after': {
-            height: '1px',
-            width: 'calc(100% - 8px)',
-            margin: '2px 0',
-            left: '4px',
-            top: '0',
-          },
-        },
-  ({isSelected}) =>
-    isSelected && {
-      '&, & + div': {
-        '&::after': {
-          display: 'none',
-        },
-      },
-    }
-);
+// const StyledContainer = styled('div')<{
+//   isSelected?: boolean;
+//   orientation: 'horizontal' | 'vertical';
+// }>(
+//   {
+//     // flex: '1 1 0',
+//     // minWidth: 0,
+//     position: 'relative',
+//     '&::after': {
+//       content: '""',
+//       display: 'block',
+//       backgroundColor: colors.soap600,
+//       position: 'absolute',
+//     },
+//     '&:first-of-type': {
+//       padding: 0,
+//       '&::after': {
+//         display: 'none',
+//       },
+//     },
+//   },
+//   ({orientation}) =>
+//     orientation === 'horizontal'
+//       ? {
+//           paddingLeft: '5px',
+//           '&::after': {
+//             width: '1px',
+//             height: 'calc(100% - 8px)',
+//             margin: '0 2px',
+//             top: '4px',
+//             left: '0',
+//           },
+//         }
+//       : {
+//           paddingTop: '5px',
+//           '&::after': {
+//             height: '1px',
+//             width: 'calc(100% - 8px)',
+//             margin: '2px 0',
+//             left: '4px',
+//             top: '0',
+//           },
+//         },
+//   ({isSelected}) =>
+//     isSelected && {
+//       '&, & + div': {
+//         '&::after': {
+//           display: 'none',
+//         },
+//       },
+//     }
+// );
 
 export const useTabsItem = composeHooks(
+  useListItemSelect,
+  useListItemRegister,
   createElemPropsHook(useSegmentedControlModel)(
     ({state}, _?: React.Ref<HTMLButtonElement>, elemProps: {'data-id'?: string} = {}) => {
       const name = elemProps['data-id'] || '';
+      const id = `${state.id}-${name}`;
       const selected = !!name && isSelected(name, state);
 
-      return {
-        id: `${state.id}-${name}`,
-        'aria-pressed': selected,
-      };
+      return state.disabled ? {id, disabled: true} : selected ? {id, 'aria-pressed': true} : {id};
     }
-  ),
-  useListItemSelect,
-  useListItemRovingFocus,
-  useListItemRegister,
-  createElemPropsHook(useSegmentedControlModel)(({state}) => {
-    return state.disabled ? {disabled: true} : {};
-  })
+  )
 );
+
+const Container = ({title, isIconOnly, children}: WrapProps) =>
+  isIconOnly ? (
+    <Tooltip title={title}>{children}</Tooltip>
+  ) : (
+    <React.Fragment>{children}</React.Fragment>
+  );
 
 export const SegmentedControlItem = createSubcomponent('button')({
   displayName: 'SegmentedControl.Item',
   modelHook: useSegmentedControlModel,
   elemPropsHook: useTabsItem,
-})<ItemProps>(({children, icon, ...elemProps}, Element, {state: {size, orientation, variant}}) => {
+})<ItemProps>(({children, icon, ...elemProps}, Element, {state: {size, variant}}) => {
   const isSmall = size === 'small';
   const isSelected = elemProps['aria-pressed'];
   const isIconOnly = variant === 'icon';
   const {color, ...textStyles} = type.levels.subtext[isSmall ? 'medium' : 'large'];
 
-  const WrappedElement = isIconOnly ? Tooltip : React.Fragment;
-
   return (
-    <StyledContainer isSelected={isSelected} orientation={orientation}>
-      {
-        <WrappedElement title={children}>
-          <StyledButton
-            as={Element}
-            colors={getIconButtonColors(isSelected)}
-            size={size}
-            padding={`${getPaddingStyles(!isIconOnly, size, icon)} !important`}
-            {...getSizeStyles(size)}
-            {...elemProps}
-          >
-            {icon && <BaseButton.Icon size={isSmall ? 'extraSmall' : 'medium'} icon={icon} />}
-            {!isIconOnly && (
-              <Text {...textStyles} fontWeight="bold">
-                {children}
-              </Text>
-            )}
-          </StyledButton>
-        </WrappedElement>
-      }
-    </StyledContainer>
+    <Container title={children} isIconOnly={isIconOnly}>
+      <StyledButton
+        as={Element}
+        colors={getIconButtonColors(isSelected)}
+        size={size}
+        padding={`${getPaddingStyles(!isIconOnly, size, icon)} !important`}
+        {...getSizeStyles(size)}
+        {...elemProps}
+      >
+        {icon && (
+          <BaseButton.Icon
+            size={isSmall ? 'extraSmall' : 'medium'}
+            icon={icon}
+            shouldMirrorIcon={useIsRTL()}
+          />
+        )}
+        {!isIconOnly && (
+          <Text {...textStyles} fontWeight="bold" whiteSpace="break-spaces">
+            {children}
+          </Text>
+        )}
+      </StyledButton>
+    </Container>
   );
 });

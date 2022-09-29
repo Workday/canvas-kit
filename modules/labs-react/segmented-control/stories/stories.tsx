@@ -8,6 +8,7 @@ import {
   pieChartIcon,
 } from '@workday/canvas-system-icons-web';
 import {Box} from '@workday/canvas-kit-react/layout';
+import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react';
 
 export default {
   title: 'Labs/Segmented Control/React',
@@ -16,13 +17,13 @@ export default {
 
 export const Default = () => {
   return (
-    <>
+    <Box maxWidth={700}>
       <Box marginBottom="s">
-        <SegmentedControl size="large" variant="text">
+        <SegmentedControl size="large" variant="text" orientation="vertical">
           <SegmentedControl.List aria-label="Content view type">
             <SegmentedControl.Item data-id="table">Table</SegmentedControl.Item>
             <SegmentedControl.Item data-id="list-view">List</SegmentedControl.Item>
-            <SegmentedControl.Item data-id="list-detail">Details</SegmentedControl.Item>
+            <SegmentedControl.Item data-id="list-detail">Detail</SegmentedControl.Item>
           </SegmentedControl.List>
         </SegmentedControl>
       </Box>
@@ -44,6 +45,26 @@ export const Default = () => {
           </SegmentedControl.List>
         </SegmentedControl>
       </Box>
+      <CanvasProvider theme={{canvas: {direction: ContentDirection.RTL}}}>
+        <Box marginBottom="s">
+          <SegmentedControl initialValue="list-detail" variant="text">
+            <SegmentedControl.List>
+              <SegmentedControl.Item data-id="table" icon={gridViewIcon}>
+                שולחן
+              </SegmentedControl.Item>
+              <SegmentedControl.Item data-id="list-view" icon={listViewIcon}>
+                רשימה
+              </SegmentedControl.Item>
+              <SegmentedControl.Item data-id="list-detail" icon={listDetailIcon}>
+                פרטים
+              </SegmentedControl.Item>
+              <SegmentedControl.Item data-id="diagrams" icon={pieChartIcon}>
+                תרשים
+              </SegmentedControl.Item>
+            </SegmentedControl.List>
+          </SegmentedControl>
+        </Box>
+      </CanvasProvider>
       <Box marginBottom="s">
         <SegmentedControl>
           <SegmentedControl.List>
@@ -83,6 +104,6 @@ export const Default = () => {
           </SegmentedControl.List>
         </SegmentedControl>
       </Box>
-    </>
+    </Box>
   );
 };
