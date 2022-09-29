@@ -7,7 +7,7 @@ import {withSnapshotsEnabled} from '../../../../utils/storybook';
 import {
   SegmentedControl,
   useSegmentedControlModel,
-} from '@workday/canvas-kit-labs-react/segmented-control';
+} from '@workday/canvas-kit-preview-react/segmented-control';
 
 export default withSnapshotsEnabled({
   title: 'Testing/React/Labs/Segmented Control',

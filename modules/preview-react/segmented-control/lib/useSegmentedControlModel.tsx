@@ -11,8 +11,8 @@ export const useSegmentedControlModel = createModelHook({
      */
     id: '',
     /**
-     * An initially selected value. This value must match the `name` of the `Value.Item` component. If
-     * not provided, the first value will be selected.
+     * An initially selected value. This value must match the `data-id` of the `SegmentedControl.Item` component.
+     * If not provided, the first value will be selected.
      */
     initialValue: '',
     // PUT DESCRIPTION HERE FOR PROP disabled

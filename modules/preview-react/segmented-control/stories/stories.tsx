@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {SegmentedControl} from '@workday/canvas-kit-labs-react/segmented-control';
+import {SegmentedControl} from '@workday/canvas-kit-preview-react/segmented-control';
 import {
   gridViewIcon,
   listViewIcon,

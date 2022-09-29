@@ -7,13 +7,7 @@ import {SegmentedControl} from '../';
 
 describe('SegmentedControl', () => {
   it('should render on a server without crashing', () => {
-    const ssrRender = () =>
-      renderToString(
-        <SegmentedControl>
-          <SegmentedControl.Target>Target</SegmentedControl.Target>
-          <SegmentedControl.Content>Content</SegmentedControl.Content>
-        </SegmentedControl>
-      );
+    const ssrRender = () => renderToString(<SegmentedControl>{}</SegmentedControl>);
     expect(ssrRender).not.toThrow();
   });
 });

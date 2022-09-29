@@ -2,7 +2,6 @@ import * as React from 'react';
 
 import {colors, borderRadius, space, type} from '@workday/canvas-kit-react/tokens';
 import {
-  // mouseFocusBehavior,
   createElemPropsHook,
   composeHooks,
   createSubcomponent,
@@ -28,7 +27,7 @@ import {Text} from '@workday/canvas-kit-react/text';
 
 export interface ItemProps extends ButtonContainerProps {
   /**
-   * Optionally pass index to the item. This should be done if `Tabs.Item` components were created
+   * Optionally pass index to the item. This should be done if `SegmentedControl.Item` components were created
    * via a `Array::map` function. This index will ensure keyboard navigation works even if items are
    * inserted out of order.
    */
@@ -54,11 +53,7 @@ export interface ItemProps extends ButtonContainerProps {
    * component and should only be used in advanced cases.
    */
   'aria-pressed'?: boolean;
-  /**
-   * Part of the ARIA specification for buttons. The currently active button should not have a `buttonIndex`
-   * set while all inactive buttons should have a `buttonIndex={-1}`
-   */
-  buttonIndex?: number;
+  // ADD DESCRIPTION HERE
   icon?: CanvasSystemIcon;
 }
 
@@ -142,61 +137,7 @@ const StyledButton = styled(BaseButton)<StyledType & ButtonContainerProps>(
   })
 );
 
-// CAN BE REMOVED IF SEPARATING LINE IS REMOVED FROM DESIGN SPEC
-// const StyledContainer = styled('div')<{
-//   isSelected?: boolean;
-//   orientation: 'horizontal' | 'vertical';
-// }>(
-//   {
-//     // flex: '1 1 0',
-//     // minWidth: 0,
-//     position: 'relative',
-//     '&::after': {
-//       content: '""',
-//       display: 'block',
-//       backgroundColor: colors.soap600,
-//       position: 'absolute',
-//     },
-//     '&:first-of-type': {
-//       padding: 0,
-//       '&::after': {
-//         display: 'none',
-//       },
-//     },
-//   },
-//   ({orientation}) =>
-//     orientation === 'horizontal'
-//       ? {
-//           paddingLeft: '5px',
-//           '&::after': {
-//             width: '1px',
-//             height: 'calc(100% - 8px)',
-//             margin: '0 2px',
-//             top: '4px',
-//             left: '0',
-//           },
-//         }
-//       : {
-//           paddingTop: '5px',
-//           '&::after': {
-//             height: '1px',
-//             width: 'calc(100% - 8px)',
-//             margin: '2px 0',
-//             left: '4px',
-//             top: '0',
-//           },
-//         },
-//   ({isSelected}) =>
-//     isSelected && {
-//       '&, & + div': {
-//         '&::after': {
-//           display: 'none',
-//         },
-//       },
-//     }
-// );
-
-export const useTabsItem = composeHooks(
+export const useSegmentedControlItem = composeHooks(
   useListItemSelect,
   useListItemRegister,
   createElemPropsHook(useSegmentedControlModel)(
@@ -220,7 +161,7 @@ const Container = ({title, isIconOnly, children}: WrapProps) =>
 export const SegmentedControlItem = createSubcomponent('button')({
   displayName: 'SegmentedControl.Item',
   modelHook: useSegmentedControlModel,
-  elemPropsHook: useTabsItem,
+  elemPropsHook: useSegmentedControlItem,
 })<ItemProps>(({children, icon, ...elemProps}, Element, {state: {size, variant}}) => {
   const isSmall = size === 'small';
   const isSelected = elemProps['aria-pressed'];
