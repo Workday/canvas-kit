@@ -3,6 +3,59 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v7.3.13](https://github.com/Workday/canvas-kit/releases/tag/v7.3.13) (2022-09-28)
+
+### Tests
+
+- test(menu): Add missing test case for tabbing out of a control ([#1733](https://github.com/Workday/canvas-kit/pull/1733)) ([@smopur](https://github.com/smopur))
+
+
+## [v7.3.12](https://github.com/Workday/canvas-kit/releases/tag/v7.3.12) (2022-09-28)
+
+### Components
+
+- fix(popup): Fix return focus timing for tooltips and focus events ([#1806](https://github.com/Workday/canvas-kit/pull/1806)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+### Documentation
+
+- docs: Remove stale references to Icon Buttons ([#1814](https://github.com/Workday/canvas-kit/pull/1814)) ([@jamesfan](https://github.com/jamesfan))
+
+### Infrastructure
+
+- chore: Adding Epic issue template ([#1811](https://github.com/Workday/canvas-kit/pull/1811)) ([@jaclynjessup](https://github.com/jaclynjessup), [@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v7.3.11](https://github.com/Workday/canvas-kit/releases/tag/v7.3.11) (2022-09-27)
+
+### Components
+
+- fix(combobox): Override z-index only when focus state ([#1752](https://github.com/Workday/canvas-kit/pull/1752)) ([@chaiwattsw](https://github.com/chaiwattsw))
+
+### Documentation
+
+- docs: Make release category easier to change in PR template ([#1804](https://github.com/Workday/canvas-kit/pull/1804)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+### Infrastructure
+
+- chore: Update pull request template ([#1750](https://github.com/Workday/canvas-kit/pull/1750)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
+## [v7.3.10](https://github.com/Workday/canvas-kit/releases/tag/v7.3.10) (2022-09-23)
+
+### Components
+
+- fix: Remove use of style to style border radius on TertiaryButton ([#1803](https://github.com/Workday/canvas-kit/pull/1803)) ([@mannycarrera4](https://github.com/mannycarrera4))
+  We were using `style` to apply border radius which prevent users from overwriting styles. Using `borderRadius` allows for customization.
+
+
+## [v7.3.9](https://github.com/Workday/canvas-kit/releases/tag/v7.3.9) (2022-09-23)
+
+### Infrastructure
+
+- fix: Update create-component scripts ([#1719](https://github.com/Workday/canvas-kit/pull/1719)) ([@vibdev](https://github.com/vibdev))
+  Updates the create create-component script to generate components using the new 7.x functions. It also updates the generated stories to use mdx.
+
+
 ## [v7.3.8](https://github.com/Workday/canvas-kit/releases/tag/v7.3.8) (2022-09-22)
 
 ### Components
