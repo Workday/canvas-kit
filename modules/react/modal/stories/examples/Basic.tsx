@@ -25,6 +25,12 @@ export const Basic = () => {
               Permission is hereby granted, free of charge, to any person obtaining a copy of this
               software and associated documentation files (the "Software").
             </Box>
+            <HStack spacing="s">
+              <Modal.CloseButton as={PrimaryButton} onClick={handlePrimaryClick}>
+                Acknowledge
+              </Modal.CloseButton>
+              <Modal.CloseButton onClick={handleSecondaryClick}>Cancel</Modal.CloseButton>
+            </HStack>
           </Modal.Body>
           <HStack spacing="s" padding="xxs" marginTop="xxs">
             <Modal.CloseButton as={PrimaryButton} onClick={handlePrimaryClick}>
