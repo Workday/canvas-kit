@@ -15,7 +15,7 @@ export const TextVariants = () => (
       <BodyText size="medium" fontWeight="bold">
         Text with icon
       </BodyText>
-      <SegmentedControl variant="text">
+      <SegmentedControl>
         <SegmentedControl.List aria-label="Content view type">
           <SegmentedControl.Item data-id="table" icon={gridIcon}>
             Table
@@ -36,7 +36,7 @@ export const TextVariants = () => (
       <BodyText size="medium" fontWeight="bold">
         Text only
       </BodyText>
-      <SegmentedControl variant="text">
+      <SegmentedControl>
         <SegmentedControl.List aria-label="Content view type">
           <SegmentedControl.Item data-id="table">Table</SegmentedControl.Item>
           <SegmentedControl.Item data-id="list-view">List</SegmentedControl.Item>

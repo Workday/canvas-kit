@@ -21,8 +21,6 @@ export const Dynamic = () => {
       {id: 'diagram', icon: pieChartIcon, label: 'Diagram'},
     ],
     size: 'small',
-    orientation: 'vertical',
-    variant: 'text',
     initialValue: viewType,
     onSelect: data => {
       console.log(`${data.id} is selected`);

@@ -16,10 +16,11 @@ export interface SegmentedControlListProps<T = any>
 }
 
 const useSegmentedControlList = createElemPropsHook(useSegmentedControlModel)(
-  ({state: {orientation, disabled, variant}}) => {
+  ({state: {orientation, disabled, items}}) => {
     return {
       // sets verrtical direction only for icon only variant
-      flexDirection: variant === 'icon' && orientation === 'vertical' ? 'column' : 'row',
+      flexDirection:
+        items.every(item => item.textValue) && orientation === 'vertical' ? 'column' : 'row',
       style: {
         opacity: disabled ? 0.4 : 1,
       },

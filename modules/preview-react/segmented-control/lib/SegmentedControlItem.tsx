@@ -9,7 +9,7 @@ import {
   StyledType,
   useIsRTL,
 } from '@workday/canvas-kit-react/common';
-import {Tooltip} from '@workday/canvas-kit-react/tooltip';
+import {Tooltip, TooltipProps} from '@workday/canvas-kit-react/tooltip';
 import {
   useListItemRegister,
   isSelected,
@@ -59,11 +59,12 @@ export interface ItemProps extends ButtonContainerProps {
    * The icon of the button.
    */
   icon?: CanvasSystemIcon;
+
+  tooltipProps?: Omit<TooltipProps, 'children'>;
 }
 
 type WrapProps = {
-  isIconOnly: boolean;
-  title: React.ReactNode;
+  tooltipProps?: Omit<TooltipProps, 'children'>;
   children: React.ReactElement;
 };
 
@@ -102,14 +103,12 @@ const getIconButtonColors = (toggled?: boolean): ButtonColors => {
   };
 };
 
-const geButtonStyles = (size: ButtonSizes, isIconOnly: boolean, icon?: CanvasSystemIcon) => {
+const geButtonStyles = (size: ButtonSizes, children: React.ReactNode, icon?: CanvasSystemIcon) => {
   const buttonSize = getButtonSize(size);
-  const hasChildren = !isIconOnly;
 
   return {
-    minWidth: getMinWidthStyles(hasChildren, buttonSize),
-    height: getMinWidthStyles(false, buttonSize),
-    padding: getPaddingStyles(hasChildren, getButtonSize(size), icon, 'start'),
+    minWidth: getMinWidthStyles(children, buttonSize),
+    padding: getPaddingStyles(children, buttonSize, icon, 'start'),
   };
 };
 
@@ -131,9 +130,9 @@ const StyledButton = styled(BaseButton)<StyledType & ButtonContainerProps>(
   })
 );
 
-const Container = ({title, isIconOnly, children}: WrapProps) =>
-  isIconOnly ? (
-    <Tooltip title={title}>{children}</Tooltip>
+const Container = ({tooltipProps, children}: WrapProps) =>
+  tooltipProps ? (
+    <Tooltip title={tooltipProps.title}>{children}</Tooltip>
   ) : (
     <React.Fragment>{children}</React.Fragment>
   );
@@ -156,18 +155,17 @@ export const SegmentedControlItem = createSubcomponent('button')({
   displayName: 'SegmentedControl.Item',
   modelHook: useSegmentedControlModel,
   elemPropsHook: useSegmentedControlItem,
-})<ItemProps>(({children, icon, ...elemProps}, Element, {state: {size, variant}}) => {
+})<ItemProps>(({children, icon, tooltipProps, ...elemProps}, Element, {state: {size}}) => {
   const isSmall = size === 'small';
-  const isIconOnly = variant === 'icon';
   const {color, ...textStyles} = type.levels.subtext[isSmall ? 'medium' : 'large'];
 
   return (
-    <Container title={children} isIconOnly={isIconOnly}>
+    <Container tooltipProps={tooltipProps}>
       <StyledButton
         as={Element}
         colors={getIconButtonColors(elemProps['aria-pressed'])}
         size={size}
-        {...geButtonStyles(size, isIconOnly, icon)}
+        {...geButtonStyles(size, children, icon)}
         {...elemProps}
       >
         {icon && (
@@ -177,7 +175,7 @@ export const SegmentedControlItem = createSubcomponent('button')({
             shouldMirrorIcon={useIsRTL()}
           />
         )}
-        {!isIconOnly && (
+        {children && (
           <Text {...textStyles} fontWeight="bold" whiteSpace="break-spaces">
             {children}
           </Text>

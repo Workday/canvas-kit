@@ -10,18 +10,22 @@ import {
 export const Vertical = () => (
   <SegmentedControl orientation="vertical">
     <SegmentedControl.List aria-label="Content view type">
-      <SegmentedControl.Item data-id="table" icon={gridIcon}>
-        Table
-      </SegmentedControl.Item>
-      <SegmentedControl.Item data-id="list-view" icon={listViewIcon}>
-        List
-      </SegmentedControl.Item>
-      <SegmentedControl.Item data-id="list-detail" icon={listDetailIcon}>
-        Detail
-      </SegmentedControl.Item>
-      <SegmentedControl.Item data-id="diagrams" icon={pieChartIcon}>
-        Diagram
-      </SegmentedControl.Item>
+      <SegmentedControl.Item data-id="table" icon={gridIcon} tooltipProps={{title: 'Title'}} />
+      <SegmentedControl.Item
+        data-id="list-view"
+        icon={listViewIcon}
+        tooltipProps={{title: 'List'}}
+      />
+      <SegmentedControl.Item
+        data-id="list-detail"
+        icon={listDetailIcon}
+        tooltipProps={{title: 'Detail'}}
+      />
+      <SegmentedControl.Item
+        data-id="diagrams"
+        icon={pieChartIcon}
+        tooltipProps={{title: 'Diagram'}}
+      />
     </SegmentedControl.List>
   </SegmentedControl>
 );

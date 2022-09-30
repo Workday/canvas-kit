@@ -17,8 +17,6 @@ export const useSegmentedControlModel = createModelHook({
     initialValue: '',
     // PUT DESCRIPTION HERE FOR PROP disabled
     disabled: false,
-    // PUT DESCRIPTION HERE FOR PROP variant
-    variant: 'icon' as 'icon' | 'text',
     // PUT DESCRIPTION HERE FOR PROP size
     size: 'medium' as 'small' | 'medium' | 'large',
     /**
@@ -57,7 +55,6 @@ export const useSegmentedControlModel = createModelHook({
     ...model.state,
     disabled: config.disabled,
     size: config.size,
-    variant: config.variant,
   };
 
   const events = {

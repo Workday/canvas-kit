@@ -10,7 +10,7 @@ import {SegmentedControl} from '@workday/canvas-kit-preview-react/segmented-cont
 
 export const RTL = () => (
   <CanvasProvider theme={{canvas: {direction: ContentDirection.RTL}}}>
-    <SegmentedControl initialValue="list-detail" variant="text">
+    <SegmentedControl initialValue="list-detail">
       <SegmentedControl.List aria-label="Content view type">
         <SegmentedControl.Item data-id="table" icon={gridIcon}>
           שולחן
