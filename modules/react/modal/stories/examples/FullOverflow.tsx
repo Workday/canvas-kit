@@ -5,12 +5,12 @@ import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {HStack} from '@workday/canvas-kit-react/layout';
 
 export const FullOverflow = () => {
-  const handlePrimaryClick = () => {
-    console.log('Primary Action clicked');
+  const handleAcknowledge = () => {
+    console.log('License Acknowledged');
   };
 
-  const handleSecondaryClick = () => {
-    console.log('Secondary Action clicked');
+  const handleCancel = () => {
+    console.log('Cancel clicked');
   };
 
   return (
@@ -82,10 +82,10 @@ export const FullOverflow = () => {
             </p>
           </Modal.Body>
           <HStack spacing="s" padding="xxs" marginTop="xxs">
-            <Modal.CloseButton as={PrimaryButton} onClick={handlePrimaryClick}>
+            <Modal.CloseButton as={PrimaryButton} onClick={handleAcknowledge}>
               Acknowledge
             </Modal.CloseButton>
-            <Modal.CloseButton onClick={handleSecondaryClick}>Cancel</Modal.CloseButton>
+            <Modal.CloseButton onClick={handleCancel}>Cancel</Modal.CloseButton>
           </HStack>
         </Modal.Card>
       </Modal.OverflowOverlay>
