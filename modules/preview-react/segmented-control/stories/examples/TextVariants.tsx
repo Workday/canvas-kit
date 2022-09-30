@@ -11,7 +11,7 @@ import {BodyText} from '@workday/canvas-kit-react/text';
 
 export const TextVariants = () => (
   <>
-    <Box marginBottom="xxs">
+    <Box marginBottom="xxs" maxWidth="450px">
       <BodyText size="medium" fontWeight="bold">
         Text with icon
       </BodyText>
@@ -25,9 +25,6 @@ export const TextVariants = () => (
           </SegmentedControl.Item>
           <SegmentedControl.Item data-id="list-detail" icon={listDetailIcon}>
             Detail
-          </SegmentedControl.Item>
-          <SegmentedControl.Item data-id="diagrams" icon={pieChartIcon}>
-            Diagram
           </SegmentedControl.Item>
         </SegmentedControl.List>
       </SegmentedControl>

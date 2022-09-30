@@ -30,7 +30,7 @@ export const Dynamic = () => {
 
   return (
     <SegmentedControl model={model}>
-      <SegmentedControl.List aria-label="Content view type">
+      <SegmentedControl.List aria-label="Content view type" maxWidth="400px">
         {item => (
           <SegmentedControl.Item data-id={item.id} icon={item.icon}>
             {item.label}

@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {colors, borderRadius, type} from '@workday/canvas-kit-react/tokens';
+import {colors, borderRadius, type, space} from '@workday/canvas-kit-react/tokens';
 import {
   createElemPropsHook,
   composeHooks,
@@ -25,7 +25,7 @@ import {
 } from '@workday/canvas-kit-react/button';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {useSegmentedControlModel} from './useSegmentedControlModel';
-import {Text} from '@workday/canvas-kit-react/text';
+// import {Text} from '@workday/canvas-kit-react/text';
 
 export interface ItemProps extends ButtonContainerProps {
   /**
@@ -110,7 +110,8 @@ const geButtonStyles = (size: ButtonSizes, children: React.ReactNode, icon?: Can
   return {
     minWidth: getMinWidthStyles(children, size),
     height: minValue,
-    padding: `${getPaddingStyles(children, buttonSize, icon, 'start')} !important`,
+    padding: getPaddingStyles(children, buttonSize, icon, 'start'),
+    paddingY: size === 'small' ? '4px' : size === 'large' ? '10px' : '6px',
   };
 };
 
@@ -167,6 +168,8 @@ export const SegmentedControlItem = createSubcomponent('button')({
         as={Element}
         colors={getIconButtonColors(elemProps['aria-pressed'])}
         size={size}
+        {...textStyles}
+        fontWeight="bold"
         {...geButtonStyles(size, children, icon)}
         {...elemProps}
       >
@@ -175,13 +178,10 @@ export const SegmentedControlItem = createSubcomponent('button')({
             size={isSmall ? 'extraSmall' : 'medium'}
             icon={icon}
             shouldMirrorIcon={useIsRTL()}
+            iconPosition="start"
           />
         )}
-        {children && (
-          <Text {...textStyles} fontWeight="bold" whiteSpace="break-spaces">
-            {children}
-          </Text>
-        )}
+        {children && <BaseButton.Label textAlign="left">{children}</BaseButton.Label>}
       </StyledButton>
     </Container>
   );
