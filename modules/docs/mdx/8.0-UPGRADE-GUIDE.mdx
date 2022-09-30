@@ -10,8 +10,10 @@ any questions.
 
 - [Codemod](#codemod)
 - [Components](#components)
+  - [Component Deprecations](#component-deprecations)
   - [Box](#box)
   - [Menu (Main)](#menu)
+  - [Breadcrumbs](#breadcrumbs)
 - [General Changes](#general-changes) -[Remove Default Imports](#remove-default-imports)
 
 ## Codemod
@@ -40,6 +42,149 @@ rollback more easily if necessary.**
 encounter any issues or use cases that we've missed.
 
 ## Components
+
+### Component Deprecations
+
+#### Deprecation Types
+
+There are two types of deprecations: soft and hard.
+
+##### Soft Deprecation
+
+A soft-deprecated component is still available with its full functionality, but it will have been
+renamed with a prefix to indicate its soft-deprecated status. It will also include a console warning
+announcing its deprecation. This warning will only be triggered on the component's initial render.
+
+Soft-deprecated types and utilities will also be renamed but generally will not trigger a console
+warning.
+
+##### Hard Deprecation
+
+A hard-deprecated component or package is no longer available. You will need to follow the method
+prescribed in our upgrade guide to update your application. Please
+[reach out](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) to our team
+directly if you need additional help.
+
+#### Drawer
+
+We are [soft deprecating](#soft-deprecation) `Drawer`. It has been renamed to `DeprecatedDrawer`.
+Similarly, `DrawerProps` has been renamed to `DeprecatedDrawerProps`, `DrawerHeader` to
+`DeprecatedDrawerHeader` and `DrawerHeaderProps` to `DeprecatedDrawerHeaderProps`. You may continue
+to use this component, but note that we plan to [hard-deprecate](#hard-deprecation) it in Canvas Kit
+v9.
+
+🤖 The codemod will rename `Drawer`, `DrawerProps`, `DrawerHeader` and `DrawerHeaderProps` to their
+deprecated names:
+
+```tsx
+// v7
+import {Drawer, DrawerHeader} from '@workday/canvas-kit-labs-react/drawer';
+
+<Drawer
+  header={
+    <DrawerHeader
+      closeIconAriaLabel="Close"
+      onClose={() => console.log('onClose callback')}
+      title="Deprecated Drawer Header"
+    />
+  }
+/>;
+
+// v8
+import {DeprecatedDrawer, DeprecatedDrawerHeader} from '@workday/canvas-kit-labs-react/drawer';
+
+<DeprecatedDrawer
+  header={
+    <DeprecatedDrawerHeader
+      closeIconAriaLabel="Close"
+      onClose={() => console.log('onClose callback')}
+      title="Deprecated Drawer Header"
+    />
+  }
+/>;
+```
+
+#### Menu (preview)
+
+We are [soft deprecating](#soft-deprecation) `Menu`. It has been renamed to `DeprecatedMenu`.
+Similarly, `MenuProps` has been renamed to `DeprecatedMenuProps`, `MenuState` to
+`DeprecatedMenuState`, `MenuItem` to `DeprecatedMenuItem` and `MenuItemProps` to
+`DeprecatedMenuItemProps`. You may continue to use this component, but note that we plan to
+[hard-deprecate](#hard-deprecation) it in Canvas Kit v9.
+
+This component can be replaced by `Menu` component from `@workday/canvas-kit-react/menu`.
+
+🤖 The codemod will rename `Menu`, `MenuProps`, `MenuState`, `MenuItem` and `MenuItemProps` to their
+deprecated names:
+
+```tsx
+// v7
+import {Menu, MenuItem, MenuProps, MenuItemProps} from '@workday/canvas-kit-preview-react/menu';
+
+interface AnotherMenuProps extends MenuProps {
+  specialProp?: boolean;
+}
+type CustomMenuItemProps = MenuItemProps;
+
+const CustomMenu = () => {
+  return (
+    <Menu>
+      <MenuItem>First Item</MenuItem>
+    </Menu>
+  );
+};
+
+// v8
+import {DeprecatedMenu, DeprecatedMenuItem} from '@workday/canvas-kit-preview-react/menu';
+
+interface AnotherMenuProps extends DeprecatedMenuProps {
+  specialProp?: boolean;
+}
+
+type CustomMenuItemProps = DeprecatedMenuItemProps;
+
+const CustomMenu = () => {
+  return (
+    <DeprecatedMenu>
+      <DeprecatedMenuItem>First Item</DeprecatedMenuItem>
+    </DeprecatedMenu>
+  );
+};
+```
+
+#### Layout and Column
+
+We are [soft deprecating](#soft-deprecation) `Layout` and `Column`. It has been renamed to
+`DeprecatedLayout` and `DeprecatedColumn`. Similarly, `LayoutProps` has been renamed to
+`DeprecatedLayoutProps`, `Column` to `DeprecatedColumn` and `ColumnProps` to
+`DeprecatedColumnProps`. You may continue to use this component, but note that we plan to
+[hard-deprecate](#hard-deprecation) it in Canvas Kit v9.
+
+This components can be replaced by the new `Grid` component existing in
+`@workday/canvas-kit-react/layout`.
+
+🤖 The codemod will rename `Layout`, `LayoutProps`, `Column` and `ColumnProps` to their deprecated
+names:
+
+```tsx
+// v7
+import {Layout, Column} from '@workday/canvas-kit-react/drawer';
+
+<Layout gutter={0}>
+  <Layout.Column spacing={0}>
+    <Card />
+  </Layout.Column>
+</Layout>;
+
+// v8
+import {DeprecatedLayout, DeprecatedColumn} from '@workday/canvas-kit-react/drawer';
+
+<DeprecatedLayout gutter={0}>
+  <DeprecatedLayout.Column spacing={0}>
+    <Card />
+  </DeprecatedLayout.Column>
+</DeprecatedLayout>;
+```
 
 ### Box
 
@@ -114,3 +259,170 @@ components listed below have moved from default imports to named imports.
 
 Default depth value of the main menu component has been change to depth 3 (It was depth 1 before).
 Depth update is a visual breaking change but doesn't require any actions from user.
+
+### Breadcrumbs
+
+Breadcrumbs component has been promoted to `canvas-kit-react` package because now it uses the same
+list system being developed for Tabs, ActionBar which provides the new overflow behavior based on
+utilizing `useBreadcrumbsModel`. Overflow is dynamic and calculated on the container width.
+
+To archive this goal some Breadcrumbs API has been reviewed and the next changes have been made:
+
+- `Breadcrumbs` has been promoted and now it lives in main react package
+- `Breadcrumbs.Nav` has been removed and replaced by `Breadcrumbs`
+- `Breadcrumbs.Nav` prop of `aria-label` has been removed to `Breadcrumbs`
+- `Breadcrumbs.CollapsibleList` has been renamed to `Breadcrumbs.List`
+- `Breadcrumbs.ListItem` has been renamed to `Breadcrumbs.Item`
+
+🤖 All the above changes can be handled by running codemod
+
+```tsx
+// v7
+
+<Breadcrumbs.Nav aria-label="breadcrumb">
+  <Breadcrumbs.List>
+    <Breadcrumbs.ListItem>
+      <Breadcrumbs.Link href="/">Home</Breadcrumbs.Link>
+    </Breadcrumbs.ListItem>
+    <Breadcrumbs.ListItem>
+      <Breadcrumbs.Link href="/menus">Menus</Breadcrumbs.Link>
+    </Breadcrumbs.ListItem>
+    <Breadcrumbs.CurrentItem>Dinner</Breadcrumbs.CurrentItem>
+  </Breadcrumbs.List>
+</Breadcrumbs.Nav>
+
+// v8
+
+<Breadcrumbs>
+  <Breadcrumbs.List>
+    <Breadcrumbs.Item>
+      <Breadcrumbs.Link href="/">Home</Breadcrumbs.Link>
+    </Breadcrumbs.Item>
+    <Breadcrumbs.Item>
+      <Breadcrumbs.Link href="/menus">Menus</Breadcrumbs.Link>
+    </Breadcrumbs.Item>
+    <Breadcrumbs.CurrentItem>Dinner</Breadcrumbs.CurrentItem>
+  </Breadcrumbs.List>
+</Breadcrumbs>
+```
+
+🙎‍♂️ The next changes will require manual changes:
+
+- Handling Redirects
+- Updated Overflow Behavior
+
+#### Handling Redirects
+
+`onAction` has been removed from `Breadcrumbs.Item`, so the way of redirection has been changed.
+
+`Breadcrumbs.Link` defaults to redirecting with an `href`, which means the page will hard-redirect
+when the link is clicked. However, if you're in a single-page application (SPA) environment, you
+might want to use the internal SPA router instead. You can override that behavior with a custom
+`onClick` handler that blocks the default behavior of the event and passes along the link path to
+your SPA router. Most of our consumers use `react-router-dom` for managing SPA routing, so below is
+an example of how to do this in V5 and V6 of `react-router-dom`.
+[Read more about moving from Router DOM v5 to v6](https://reactrouter.com/en/main/upgrading/v5)
+
+```ts
+// React Router DOM V5 API
+import {useHistory} from 'react-router-dom';
+import {Breadcrumbs} from '@workday/canvas-kit-react/breadcrumbs';
+...
+const history = useHistory();
+const handleClick = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>, link?: string) => {
+      event.preventDefault();
+    // if no link is provided, default to the current path
+    history.push(link || window.location.pathname);
+}
+return (
+  <Breadcrumbs.Link href="/account" onClick={handleClick}>
+    Account
+  </Breadcrumbs.Link>
+);
+
+// React Router DOM V6 API
+import {useNavigate} from 'react-router-dom';
+import {Breadcrumbs} from '@workday/canvas-kit-react/breadcrumbs';
+...
+const navigate = useNavigate();
+const handleClick = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>, link?: string) => {
+      event.preventDefault();
+    // if no link is provided, default to the current path
+    navigate(link || window.location.pathname);
+}
+return (
+  <Breadcrumbs.Link href="/account" onClick={handleClick}>
+    Account
+  </Breadcrumbs.Link>
+);
+```
+
+#### Overflow behavior
+
+As `Breadcrumbs.CollapsibleList` has been removed, all overflow functionality provided by this
+component has been removed too. Now overflow functionality is provided by List system and requires
+to switch to `BreadcrumbsModel` manually. In the end of this discussion you can find step-by-step
+instruction to switch to a new structure.
+
+```ts
+// v7 structure
+import {Breadcrumbs} from '@workday/canvas-kit-preview-react/breadcrumbs';
+
+export const OldCollapsibleList = () => {
+  return (
+    <Breadcrumbs.Nav aria-label="breadcrumb">
+      <Breadcrumbs.CollapsibleList buttonAriaLabel="more links" maxWidth={300}>
+        <Breadcrumbs.ListItem>
+          <Breadcrumbs.Link href="/">Home</Breadcrumbs.Link>
+        </Breadcrumbs.ListItem>
+        <Breadcrumbs.ListItem>
+          <Breadcrumbs.Link href="/menus">Menus</Breadcrumbs.Link>
+        </Breadcrumbs.ListItem>
+        <Breadcrumbs.ListItem>
+          <Breadcrumbs.Link href="/lunch">Lunch</Breadcrumbs.Link>
+        </Breadcrumbs.ListItem>
+        <Breadcrumbs.ListItem>
+          <Breadcrumbs.Link href="/small-plates-and-appetizers">
+            Small Plates & Appetizers
+          </Breadcrumbs.Link>
+        </Breadcrumbs.ListItem>
+        <Breadcrumbs.CurrentItem>Focaccia Genovese</Breadcrumbs.CurrentItem>
+      </Breadcrumbs.CollapsibleList>
+    </Breadcrumbs.Nav>
+  );
+};
+
+// v8 structure
+const NewOverflowList = () => {
+  const [items] = React.useState([
+    {id: '1', text: 'Home', link: '/'},
+    {id: '2', text: 'Menus', link: '/menus'},
+    {id: '3', text: 'Lunch', link: '/lunch'},
+    {id: '4', text: 'Small Plates & Appetizers', link: '/small-plates-and-appetizers'},
+    {id: '5', text: 'Focaccia Genovese'},
+  ]);
+
+  return (
+    <Breadcrumbs items={items}>
+      <Breadcrumbs.List>
+        {item =>
+          item.link ? (
+            <Breadcrumbs.Item>
+              <Breadcrumbs.Link href={item.link}>{item.text}</Breadcrumbs.Link>
+            </Breadcrumbs.Item>
+          ) : (
+            <Breadcrumbs.CurrentItem>{item.text}</Breadcrumbs.CurrentItem>
+          )
+        }
+      </Breadcrumbs.List>
+      <Breadcrumbs.Menu.Popper>
+        <Breadcrumbs.Menu.Card>
+          <Breadcrumbs.Menu.List>
+            {(item: Breadcrumb) => <Breadcrumbs.Menu.Item>{item.text}</Breadcrumbs.Menu.Item>}
+          </Breadcrumbs.Menu.List>
+        </Breadcrumbs.Menu.Card>
+      </Breadcrumbs.Menu.Popper>
+    </Breadcrumbs>
+  );
+};
+```

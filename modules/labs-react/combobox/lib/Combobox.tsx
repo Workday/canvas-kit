@@ -312,11 +312,8 @@ export const Combobox = ({
 
   const handleBlur = (event: React.FocusEvent) => {
     if (comboboxRef.current) {
-      let target: EventTarget | null = event.relatedTarget;
-      if (target === null) {
-        // IE11 swaps related and active target before it fires the blur event
-        target = document.activeElement;
-      }
+      const target: EventTarget | null = event.relatedTarget;
+
       if (target && comboboxRef.current.contains(target as Element)) {
         return;
       }
@@ -414,7 +411,7 @@ export const Combobox = ({
   };
 
   const renderChildren = (inputElement: React.ReactElement<TextInputProps>): React.ReactNode => {
-    let cssOverride: CSSObject = {zIndex: 2};
+    let cssOverride: CSSObject = {':focus': {zIndex: 2}};
     if (showClearButton) {
       const paddingDirection = isRTL ? 'paddingLeft' : 'paddingRight';
       cssOverride = {

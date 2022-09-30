@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const mkdirp = require('mkdirp');
 const getDirName = require('path').dirname;
+const {consoleMessage} = require('./consoleUtils');
 
 const cwd = process.cwd();
 
@@ -14,7 +15,7 @@ module.exports = (files, modulePath) => {
     const file = files[key];
     const filePath = path.join(modulePath, file.path);
 
-    console.log('Creating ' + `.${filePath.replace(cwd, '')}`.cyan);
+    consoleMessage('Creating', `.${filePath.replace(cwd, '')}`);
 
     mkdirp(getDirName(filePath)).then(() => {
       fs.writeFileSync(filePath, file.contents);
