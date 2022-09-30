@@ -105,10 +105,12 @@ const getIconButtonColors = (toggled?: boolean): ButtonColors => {
 
 const geButtonStyles = (size: ButtonSizes, children: React.ReactNode, icon?: CanvasSystemIcon) => {
   const buttonSize = getButtonSize(size);
+  const minValue = size === 'small' ? '32px' : size === 'large' ? '48px' : '40px';
 
   return {
-    minWidth: getMinWidthStyles(children, buttonSize),
-    padding: getPaddingStyles(children, buttonSize, icon, 'start'),
+    minWidth: getMinWidthStyles(children, size),
+    height: minValue,
+    padding: `${getPaddingStyles(children, buttonSize, icon, 'start')} !important`,
   };
 };
 

@@ -20,7 +20,7 @@ const useSegmentedControlList = createElemPropsHook(useSegmentedControlModel)(
     return {
       // sets verrtical direction only for icon only variant
       flexDirection:
-        items.every(item => item.textValue) && orientation === 'vertical' ? 'column' : 'row',
+        items.every(item => !item.textValue) && orientation === 'vertical' ? 'column' : 'row',
       style: {
         opacity: disabled ? 0.4 : 1,
       },
