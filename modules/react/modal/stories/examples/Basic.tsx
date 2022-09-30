@@ -21,9 +21,9 @@ export const Basic = () => {
               Are you sure you want to delete the item?
             </Box>
           </Modal.Body>
-          <HStack spacing="s" padding="xxxs" marginTop="xxs">
+          <HStack spacing="s" padding="xxs" marginTop="xxs">
             <Modal.CloseButton as={DeleteButton} onClick={handleDelete}>
-              Delete asldjfhb asd;kfjb ask;ljbadf
+              Delete
             </Modal.CloseButton>
             <Modal.CloseButton>Cancel</Modal.CloseButton>
           </HStack>
