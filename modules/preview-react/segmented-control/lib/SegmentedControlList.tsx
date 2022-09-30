@@ -10,10 +10,10 @@ import {useListRenderItems} from '@workday/canvas-kit-react/collection';
 
 import {useSegmentedControlModel} from './useSegmentedControlModel';
 
-export interface TabListProps<T = any>
+export interface SegmentedControlListProps<T = any>
   extends Omit<Partial<ExtractProps<typeof Stack, never>>, 'children'> {
+  'aria-label': string;
   children: ((item: T) => React.ReactNode) | React.ReactNode;
-  overflowButton?: React.ReactNode;
 }
 
 export const useSegmentedControlList = createElemPropsHook(useSegmentedControlModel)(
@@ -33,7 +33,7 @@ export const SegmentedControlList = createSubcomponent('div')({
   displayName: 'SegmentedControl.List',
   modelHook: useSegmentedControlModel,
   elemPropsHook: useSegmentedControlList,
-})<TabListProps>(({children, overflowButton, ...elemProps}, Element, model) => {
+})<SegmentedControlListProps>(({children, ...elemProps}, Element, model) => {
   return (
     <Stack
       as={Element}
@@ -48,7 +48,6 @@ export const SegmentedControlList = createSubcomponent('div')({
       {...elemProps}
     >
       {useListRenderItems(model, children)}
-      {overflowButton}
     </Stack>
   );
 });

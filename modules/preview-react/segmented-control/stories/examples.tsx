@@ -29,7 +29,7 @@ export const Default = () => {
       </Box>
       <Box marginBottom="s">
         <SegmentedControl initialValue="list-detail" variant="text">
-          <SegmentedControl.List>
+          <SegmentedControl.List aria-label="Content view type">
             <SegmentedControl.Item data-id="table" icon={gridViewIcon}>
               Table
             </SegmentedControl.Item>
@@ -48,7 +48,7 @@ export const Default = () => {
       <CanvasProvider theme={{canvas: {direction: ContentDirection.RTL}}}>
         <Box marginBottom="s">
           <SegmentedControl initialValue="list-detail" variant="text">
-            <SegmentedControl.List>
+            <SegmentedControl.List aria-label="Content view type">
               <SegmentedControl.Item data-id="table" icon={gridViewIcon}>
                 שולחן
               </SegmentedControl.Item>
@@ -67,7 +67,7 @@ export const Default = () => {
       </CanvasProvider>
       <Box marginBottom="s">
         <SegmentedControl>
-          <SegmentedControl.List>
+          <SegmentedControl.List aria-label="Content view type">
             <SegmentedControl.Item data-id="table" icon={gridViewIcon}>
               Table
             </SegmentedControl.Item>
@@ -82,7 +82,7 @@ export const Default = () => {
       </Box>
       <Box marginBottom="s">
         <SegmentedControl orientation="vertical" disabled>
-          <SegmentedControl.List>
+          <SegmentedControl.List aria-label="Content view type">
             <SegmentedControl.Item icon={gridViewIcon} />
             <SegmentedControl.Item icon={listViewIcon} />
             <SegmentedControl.Item icon={listDetailIcon} />
@@ -91,7 +91,7 @@ export const Default = () => {
       </Box>
       <Box marginBottom="s">
         <SegmentedControl size="small" initialValue="list-detail" variant="text">
-          <SegmentedControl.List>
+          <SegmentedControl.List aria-label="Content view type">
             <SegmentedControl.Item data-id="table" icon={gridViewIcon}>
               Table
             </SegmentedControl.Item>
