@@ -32,6 +32,16 @@ to automatically update your code to work with many of the breaking changes in v
 > npx @workday/canvas-kit-codemod v8 [path]
 ```
 
+If you're unable to run the codemod successfully using `npx`, try installing the codemod package as
+a dev dependency, running it using `yarn` instead of `npx`, and then removing the package after
+you're finished.
+
+```sh
+> yarn add @workday/canvas-kit-codemod --dev
+> yarn canvas-kit-codemod v8 [path]
+> yarn remove @workday/canvas-kit-codemod
+```
+
 > Note: The codemod only works on `.js`, `.jsx`, `.ts`, and `.tsx` files. You'll need to manually
 > edit other types of files (`.json`, `.mdx`, `.md`, etc.). You may need to run your linter after
 > executing the codemod, as its resulting formatting (spacing, quotes, etc.) may not match your
@@ -43,9 +53,6 @@ handled by the codemod are marked with 🤖 in this Upgrade Guide.**
 **Please verify all changes made by the codemod.** As a safety precaution, we recommend committing
 the changes from the codemod as a single isolated commit (separate from other changes) so you can
 roll back more easily if necessary.
-
-[Let us know](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) if you
-encounter any issues or use cases that we've missed.
 
 ## General Updates
 
