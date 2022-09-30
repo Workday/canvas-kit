@@ -26,24 +26,23 @@ any questions.
 ## Codemod
 
 Please use our [codemod package](https://github.com/Workday/canvas-kit/tree/master/modules/codemod)
-to automatically update your code to work with many of the breaking changes as you upgrade from
-Canvas Kit v7 to v8:
+to automatically update your code to work with many of the breaking changes in v8:
 
 ```sh
 > npx @workday/canvas-kit-codemod v8 [path]
 ```
 
-> Note: This codemod only works on `.js`, `.jsx`, `.ts`, and `.tsx` extensions. You may need to make
-> some manual changes in other file types (`.json`, `.mdx`, `.md`, etc.).
+> Note: The codemod only works on `.js`, `.jsx`, `.ts`, and `.tsx` files. You'll need to manually
+> edit other types of files (`.json`, `.mdx`, `.md`, etc.). You may need to run your linter after
+> executing the codemod, as its resulting formatting (spacing, quotes, etc.) may not match your
+> project conventions.
 
-> Note: You may need to run your linter after executing the codemod, as its resulting formatting
-> (spacing, quotes, etc.) may not match your project's styling.
+The codemod will handle _many_ but _not all_ of the breaking changes in v8. **Breaking changes
+handled by the codemod are marked with 🤖 in this Upgrade Guide.**
 
-**Breaking changes handled by this codemod will be marked with a 🤖.**
-
-**Please verify all changes made by the codemod. As a safety precaution, we recommend committing the
-changes from the codemod as a single isolated commit (separate from other changes) so you can
-rollback more easily if necessary.**
+**Please verify all changes made by the codemod.** As a safety precaution, we recommend committing
+the changes from the codemod as a single isolated commit (separate from other changes) so you can
+roll back more easily if necessary.
 
 [Let us know](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) if you
 encounter any issues or use cases that we've missed.
@@ -58,9 +57,8 @@ encounter any issues or use cases that we've missed.
 
 We've removed all remaining default exports from our packages to maintain consistency with our newer
 (and recently updated) components and systems which favor named exports. The following components
-have moved from default exports to named exports. The following components have been updated to
-provide named exports instead of default exports (in cases where the component provided both default
-and named exports, the default export has been removed).
+have been updated to provide named exports instead of default exports (in cases where the component
+provided both default and named exports, the default export has been removed).
 
 #### Main (canvas-kit-react)
 
@@ -144,7 +142,8 @@ prescribed in our upgrade guide to update your application. Please
 [reach out](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) to our team
 directly if you need additional help.
 
-> (PLACEHOLDER) Soft deprecation of Drawer, Menu (Preview), Layout and Column goes here. (https://github.com/Workday/canvas-kit/pull/1747)
+> (PLACEHOLDER) Soft deprecation of Drawer, Menu (Preview), Layout and Column goes here.
+> (https://github.com/Workday/canvas-kit/pull/1747)
 
 #### Drawer
 
@@ -269,7 +268,8 @@ import {DeprecatedLayout, DeprecatedColumn} from '@workday/canvas-kit-react/draw
 
 ## Component Promotions
 
-> (PLACEHOLDER) Promotion of Breadcrumbs from Preview to Main plus addition of List system goes here (https://github.com/Workday/canvas-kit/pull/1724)
+> (PLACEHOLDER) Promotion of Breadcrumbs from Preview to Main plus addition of List system goes here
+> (https://github.com/Workday/canvas-kit/pull/1724)
 
 ## Component Updates
 
@@ -466,4 +466,5 @@ The depth value of `Menu.Card` has been updated from `1` to `3`. This is a visua
 
 ### Segmented Control
 
-> (PLACEHOLDER) New compound Segmented Control goes here (https://github.com/Workday/canvas-kit/issues/1777)
+> (PLACEHOLDER) New compound Segmented Control goes here
+> (https://github.com/Workday/canvas-kit/issues/1777)
