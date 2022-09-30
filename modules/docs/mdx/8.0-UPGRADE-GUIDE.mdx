@@ -58,7 +58,12 @@ roll back more easily if necessary.
 
 ### IE11 No Longer Supported
 
-> (PLACEHOLDER) Comms for dropping support for IE 11 go here.
+Beginning with v8, Canvas Kit no longer supports IE11.
+
+We've removed all IE11-specific code including polyfills. Applications built using Canvas Kit v8 and
+above may no longer run in IE11 and fail to bootstrap with an error and/or a white screen.
+
+**Do not upgrade to v8 if your application needs to support IE11.**
 
 ### Removal of Default Exports
 
