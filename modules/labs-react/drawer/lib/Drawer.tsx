@@ -2,52 +2,70 @@ import * as React from 'react';
 import styled from '@emotion/styled';
 import {colors, space, CanvasSpaceValues} from '@workday/canvas-kit-react/tokens';
 
-export interface DrawerProps extends React.HTMLAttributes<HTMLDivElement> {
+/**
+ * ### Deprecated Drawer Props
+ *
+ * As of Canvas Kit v8, Drawer is being soft-deprecated.
+ * It will be hard-deprecated (completely removed) in v9. Please see the
+ * [upgrade guide](https://workday.github.io/canvas-kit/?path=/story/welcome-upgrade-guides-v8-0--page)
+ * for more information.
+ */
+
+export interface DeprecatedDrawerProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
-   * The padding of the Drawer contents.
+   * The padding of the DeprecatedDrawer contents.
    * @default space.s
    */
   padding?: CanvasSpaceValues;
   /**
-   * The direction from which the Drawer opens. Accepts `Left` or `Right`.
-   * @default DrawerDirection.Right
+   * The direction from which the DeprecatedDrawer opens. Accepts `Left` or `Right`.
+   * @default DeprecatedDrawerDirection.Right
    */
-  openDirection?: DrawerDirection;
+  openDirection?: DeprecatedDrawerDirection;
   /**
-   * The width of the Drawer in `px`.
+   * The width of the DeprecatedDrawer in `px`.
    * @default 360
    */
   width?: number;
   /**
-   * If true, render the Drawer with a drop shadow.
+   * If true, render the DeprecatedDrawer with a drop shadow.
    * @default false
    */
   showDropShadow?: boolean;
   /**
-   * The optional DrawerHeader component of the Drawer. Shows an optional string and close button.
+   * The optional DeprecatedDrawerHeader component of the DeprecatedDrawer. Shows an optional string and close button.
    */
   header?: React.ReactElement;
   /**
-   * The `aria-labelledby` of the Drawer. Set this when there is a `header` for accessibility. The `role` attribute should also be used when this attribute is present. This value should be the same as the `id` attribute of the `header` element.
+   * The `aria-labelledby` of the DeprecatedDrawer. Set this when there is a `header` for accessibility. The `role` attribute should also be used when this attribute is present. This value should be the same as the `id` attribute of the `header` element.
    */
   'aria-labelledby'?: string;
   /**
-   * The `aria-label` for the Drawer. Set this when there is NO `header` for accessibility.
+   * The `aria-label` for the DeprecatedDrawer. Set this when there is NO `header` for accessibility.
    */
   'aria-label'?: string;
   /**
-   * The role of the Drawer. If `role` is provided, you must also set `aria-labelledby` to link `header` to the `role`.
+   * The role of the DeprecatedDrawer. If `role` is provided, you must also set `aria-labelledby` to link `header` to the `role`.
    */
   role?: string;
 }
 
-export enum DrawerDirection {
+/**
+ * ### Deprecated Drawer Direction
+ *
+ * As of Canvas Kit v8, Drawer is being soft-deprecated.
+ * It will be hard-deprecated (completely removed) in v9. Please see the
+ * [upgrade guide](https://workday.github.io/canvas-kit/?path=/story/welcome-upgrade-guides-v8-0--page)
+ * for more information.
+ */
+
+export enum DeprecatedDrawerDirection {
   Left,
   Right,
 }
 
 const DrawerContainer = styled('div')<
-  Pick<DrawerProps, 'width' | 'showDropShadow' | 'openDirection'>
+  Pick<DeprecatedDrawerProps, 'width' | 'showDropShadow' | 'openDirection'>
 >(
   {
     height: '100%',
@@ -61,26 +79,27 @@ const DrawerContainer = styled('div')<
   }),
   ({showDropShadow, openDirection}) => ({
     boxShadow:
-      openDirection === DrawerDirection.Right && showDropShadow
+      openDirection === DeprecatedDrawerDirection.Right && showDropShadow
         ? '-8px 0px 16px 0 rgba(0,0,0,0.12)'
-        : openDirection === DrawerDirection.Left && showDropShadow
+        : openDirection === DeprecatedDrawerDirection.Left && showDropShadow
         ? '8px 0px 16px 0 rgba(0,0,0,0.12)'
         : undefined,
   }),
   ({openDirection}) => ({
-    borderLeft: openDirection === DrawerDirection.Right ? `1px solid ${colors.soap400}` : undefined,
-    borderRight: openDirection === DrawerDirection.Left ? `1px solid ${colors.soap400}` : undefined,
-    right: openDirection === DrawerDirection.Right ? space.zero : undefined,
-    left: openDirection === DrawerDirection.Left ? space.zero : undefined,
+    borderLeft:
+      openDirection === DeprecatedDrawerDirection.Right ? `1px solid ${colors.soap400}` : undefined,
+    borderRight:
+      openDirection === DeprecatedDrawerDirection.Left ? `1px solid ${colors.soap400}` : undefined,
+    right: openDirection === DeprecatedDrawerDirection.Right ? space.zero : undefined,
+    left: openDirection === DeprecatedDrawerDirection.Left ? space.zero : undefined,
   })
 );
 
-const ChildrenContainer = styled('div')<Pick<DrawerProps, 'padding'>>(
+const ChildrenContainer = styled('div')<Pick<DeprecatedDrawerProps, 'padding'>>(
   {
     height: '100%',
     overflowY: 'auto',
     wordBreak: 'break-word',
-    wordWrap: 'break-word', // Needed for IE11
     position: 'relative',
   },
   ({padding}) => ({
@@ -88,14 +107,32 @@ const ChildrenContainer = styled('div')<Pick<DrawerProps, 'padding'>>(
   })
 );
 
-export class Drawer extends React.Component<DrawerProps, {}> {
-  static OpenDirection = DrawerDirection;
+/**
+ * ### Deprecated Drawer
+ *
+ * As of Canvas Kit v8, this component is being soft-deprecated.
+ * It will be hard-deprecated (completely removed) in v9. Please see the
+ * [upgrade guide](https://workday.github.io/canvas-kit/?path=/story/welcome-upgrade-guides-v8-0--page)
+ * for more information.
+ */
+
+export class DeprecatedDrawer extends React.Component<DeprecatedDrawerProps, {}> {
+  static OpenDirection = DeprecatedDrawerDirection;
+
+  componentDidMount() {
+    console.warn(
+      `This component is being deprecated and will be removed in Canvas Kit V9.\n
+      For more information, please see the V8 upgrade guide:\n
+      https://workday.github.io/canvas-kit/?path=/story/welcome-upgrade-guides-v8-0--page
+      `
+    );
+  }
 
   public render() {
     const {
       padding = space.s,
       width = 360,
-      openDirection = DrawerDirection.Right,
+      openDirection = DeprecatedDrawerDirection.Right,
       showDropShadow = false,
       children,
       header,

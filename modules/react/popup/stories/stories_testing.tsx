@@ -2,7 +2,7 @@ import * as React from 'react';
 import ReactDOM from 'react-dom';
 
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
-import {DeleteButton, SecondaryButton} from '@workday/canvas-kit-react/button';
+import {DeleteButton, SecondaryButton, TertiaryButton} from '@workday/canvas-kit-react/button';
 import {useMount} from '@workday/canvas-kit-react/common';
 import {HStack} from '@workday/canvas-kit-react/layout';
 import {
@@ -16,6 +16,7 @@ import {
   useReturnFocus,
   useFocusTrap,
 } from '@workday/canvas-kit-react/popup';
+import {menuGroupIcon} from '@workday/canvas-system-icons-web';
 
 export default {
   title: 'Testing/React/Popups/Popup',
@@ -303,6 +304,30 @@ export const PopupWithBodyScroll = () => {
         <SecondaryButton>Next Focusable Button</SecondaryButton>
         <SecondaryButton>Focusable Button After Popup</SecondaryButton>
       </HStack>
+    </Popup>
+  );
+};
+
+export const TooltipReturnFocus = () => {
+  const model = usePopupModel();
+
+  useCloseOnOutsideClick(model);
+  useCloseOnEscape(model);
+  useInitialFocus(model);
+  useReturnFocus(model);
+
+  return (
+    <Popup model={model}>
+      <Tooltip title="Open Popup">
+        <Popup.Target as={TertiaryButton} icon={menuGroupIcon} />
+      </Tooltip>
+      <Popup.Popper>
+        <Popup.Card>
+          <Popup.CloseIcon aria-label="Close" />
+          <Popup.Heading>Popup</Popup.Heading>
+          <Popup.Body>Contents</Popup.Body>
+        </Popup.Card>
+      </Popup.Popper>
     </Popup>
   );
 };

@@ -1,15 +1,15 @@
 import React from 'react';
 
-import {Menu, MenuItem} from '@workday/canvas-kit-preview-react/menu';
+import {DeprecatedMenu, DeprecatedMenuItem} from '@workday/canvas-kit-preview-react/menu';
 
 export const CustomMenuItem = () => {
   return (
-    <Menu>
-      <MenuItem>First Item</MenuItem>
-      <MenuItem>Second Item</MenuItem>
+    <DeprecatedMenu>
+      <DeprecatedMenuItem>First Item</DeprecatedMenuItem>
+      <DeprecatedMenuItem>Second Item</DeprecatedMenuItem>
       <li role="menuitem" tabIndex={-1} style={{listStyle: 'none'}}>
         Third Item (custom)
       </li>
-    </Menu>
+    </DeprecatedMenu>
   );
 };

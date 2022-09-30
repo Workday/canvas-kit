@@ -2,13 +2,21 @@ import * as React from 'react';
 import styled from '@emotion/styled';
 import isPropValid from '@emotion/is-prop-valid';
 
-export interface ColumnProps {
+/**
+ * ### Deprecated Layout Column Props
+ *
+ * As of Canvas Kit v8, Layout is being soft-deprecated.
+ * It will be hard-deprecated (completely removed) in v9. Please see the
+ * [upgrade guide](https://workday.github.io/canvas-kit/?path=/story/welcome-upgrade-guides-v8-0--page)
+ * for more information.
+ */
+export interface DeprecatedColumnProps {
   /**
-   * The children of the Column (cannot be empty).
+   * The children of the DeprecatedColumn (cannot be empty).
    */
   children?: React.ReactNode;
   /**
-   * The left and right padding of the Column (inherits from Layout prop).
+   * The left and right padding of the DeprecatedColumn (inherits from Layout prop).
    * @default 12
    */
   spacing?: number;
@@ -24,7 +32,7 @@ export interface ColumnProps {
 
 const ColumnContainer = styled('div', {
   shouldForwardProp: prop => isPropValid(prop) && prop !== 'spacing',
-})<ColumnProps>(
+})<DeprecatedColumnProps>(
   {
     '&:first-of-type': {
       paddingLeft: 0,
@@ -58,7 +66,16 @@ const ColumnContainer = styled('div', {
   }
 );
 
-export class Column extends React.Component<ColumnProps> {
+export class DeprecatedColumn extends React.Component<DeprecatedColumnProps> {
+  componentDidMount() {
+    console.warn(
+      `This component is being deprecated and will be removed in Canvas Kit V9.\n
+      For more information, please see the V8 upgrade guide:\n
+      https://workday.github.io/canvas-kit/?path=/story/welcome-upgrade-guides-v8-0--page
+      `
+    );
+  }
+
   public render() {
     const {children, spacing, columns, width, ...elemProps} = this.props;
 
