@@ -4,9 +4,9 @@ import {PrimaryButton, SecondaryButton} from '@workday/canvas-kit-react/button';
 import {type} from '@workday/canvas-kit-react/tokens';
 import {useResizeObserver} from '@workday/canvas-kit-react/common';
 // eslint-disable-next-line workday-custom-rules/restricted-imports
-import {useBreakpointValues} from '@workday/canvas-kit-react/layout/lib/utils/responsiveMediaQuery';
+import {ResponsiveContextProvider} from '@workday/canvas-kit-react/layout/lib/utils/responsiveContext';
 // eslint-disable-next-line workday-custom-rules/restricted-imports
-import {useContainerValues} from '@workday/canvas-kit-react/layout/lib/utils/responsiveContainer';
+import {useResponsiveStyles} from '@workday/canvas-kit-react/layout/lib/utils/useResponsiveContainerStyles';
 
 // temporary placeholder until type components are added to canvas-kit
 const H3 = props => (
@@ -23,39 +23,6 @@ const H3 = props => (
 const Body = props => <p style={{...type.levels.body.small, margin: 0}} {...props} />;
 
 export const FlexCardResProps = () => {
-  const resStyles = useBreakpointValues({
-    zero: {
-      card: {
-        backgroundColor: 'Red',
-        border: '10px solid green',
-      },
-    },
-    sm: {
-      card: {
-        backgroundColor: 'Orange',
-        border: '10px solid darkblue',
-      },
-    },
-    md: {
-      card: {
-        backgroundColor: 'Yellow',
-        border: '10px solid purple',
-      },
-    },
-    lg: {
-      card: {
-        backgroundColor: 'Green',
-        border: '10px solid red',
-      },
-    },
-    xl: {
-      card: {
-        backgroundColor: 'pink',
-        border: '10px solid teal',
-      },
-    },
-  });
-
   const [isComplete, setIsComplete] = React.useState(false);
 
   const ref = React.useRef(null);
@@ -68,31 +35,56 @@ export const FlexCardResProps = () => {
     },
   });
 
-  const styles = useContainerValues(
+  const resStyles = useResponsiveStyles(
     {
-      zero: {
-        flex: {
-          backgroundColor: 'red',
+      card: {
+        flexDirection: 'column',
+        padding: 'm',
+        depth: 1,
+        borderRadius: 'l',
+        zero: {
+          backgroundColor: 'Red',
+          border: '10px solid green',
+        },
+        s: {
+          backgroundColor: 'Orange',
+          border: '10px solid darkblue',
+        },
+        m: {
+          backgroundColor: 'Yellow',
+          border: '10px solid purple',
+        },
+        l: {
+          backgroundColor: 'Green',
+          border: '10px solid red',
+        },
+        xl: {
+          backgroundColor: 'pink',
+          border: '10px solid teal',
         },
       },
-      sm: {
-        flex: {
-          backgroundColor: 'orange',
+      boxWidth: {
+        zero: {
+          backgroundColor: 'Red',
+          border: '2px solid green',
+          flexDirection: 'column',
         },
-      },
-      md: {
-        flex: {
-          backgroundColor: 'yellow',
+        s: {
+          backgroundColor: 'Orange',
+          border: '2px solid darkblue',
+          flexDirection: 'column',
         },
-      },
-      lg: {
-        flex: {
-          backgroundColor: 'green',
+        m: {
+          backgroundColor: 'Yellow',
+          border: '2px solid purple',
         },
-      },
-      xl: {
-        flex: {
-          backgroundColor: 'blue',
+        l: {
+          backgroundColor: 'Green',
+          border: '2px solid red',
+        },
+        xl: {
+          backgroundColor: 'pink',
+          border: '2px solid teal',
         },
       },
     },
@@ -100,28 +92,22 @@ export const FlexCardResProps = () => {
   );
 
   return (
-    <Box>
-      <Flex
-        ref={ref}
-        flexDirection="column"
-        padding="m"
-        depth={1}
-        borderRadius="l"
-        // maxWidth={815}
-        {...styles.flex}
-      >
-        <Box>{width}</Box>
-        <H3>Learn about Flex {isComplete && '🥳'}</H3>
-        <Box paddingY="s">
-          <Body>Complete this task when you have a functional understanding of Flex.</Body>
-        </Box>
-        <Flex justifyContent="flex-end">
-          <Box marginRight="xxs">
-            <PrimaryButton onClick={() => setIsComplete(true)}>Complete</PrimaryButton>
+    <ResponsiveContextProvider width={width}>
+      <Box ref={ref}>
+        <Flex {...resStyles.card}>
+          <Box {...resStyles.boxWidth}>{width}</Box>
+          <H3>Learn about Flex {isComplete && '🥳'}</H3>
+          <Box paddingY="s">
+            <Body>Complete this task when you have a functional understanding of Flex.</Body>
           </Box>
-          <SecondaryButton onClick={() => setIsComplete(false)}>Cancel</SecondaryButton>
+          <Flex justifyContent="flex-end">
+            <Box marginRight="xxs">
+              <PrimaryButton onClick={() => setIsComplete(true)}>Complete</PrimaryButton>
+            </Box>
+            <SecondaryButton onClick={() => setIsComplete(false)}>Cancel</SecondaryButton>
+          </Flex>
         </Flex>
-      </Flex>
-    </Box>
+      </Box>
+    </ResponsiveContextProvider>
   );
 };
