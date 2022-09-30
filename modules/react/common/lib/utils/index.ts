@@ -15,7 +15,3 @@ export * from './useIsFullscreen';
 export * from './useModalityType';
 export * from './useWindowSize';
 export * from './useResizeObserver';
-export * from './StaticStates';
-export * from './ComponentStatesTable';
-export * from './propTypes';
-export * from './permutateProps';
