@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {colors, borderRadius, space, type} from '@workday/canvas-kit-react/tokens';
+import {colors, borderRadius, type} from '@workday/canvas-kit-react/tokens';
 import {
   createElemPropsHook,
   composeHooks,
@@ -20,6 +20,8 @@ import {
   ButtonContainerProps,
   ButtonColors,
   ButtonSizes,
+  getMinWidthStyles,
+  getPaddingStyles,
 } from '@workday/canvas-kit-react/button';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {useSegmentedControlModel} from './useSegmentedControlModel';
@@ -53,7 +55,9 @@ export interface ItemProps extends ButtonContainerProps {
    * component and should only be used in advanced cases.
    */
   'aria-pressed'?: boolean;
-  // ADD DESCRIPTION HERE
+  /**
+   * The icon of the button.
+   */
   icon?: CanvasSystemIcon;
 }
 
@@ -61,6 +65,19 @@ type WrapProps = {
   isIconOnly: boolean;
   title: React.ReactNode;
   children: React.ReactElement;
+};
+
+const getButtonSize = (size: string) => {
+  switch (size) {
+    case 'large':
+      return 'medium';
+    case 'medium':
+      return 'small';
+    case 'small':
+      return 'extraSmall';
+    default:
+      return 'medium';
+  }
 };
 
 const getIconButtonColors = (toggled?: boolean): ButtonColors => {
@@ -85,42 +102,19 @@ const getIconButtonColors = (toggled?: boolean): ButtonColors => {
   };
 };
 
-const getSizeStyles = (size?: ButtonSizes) => {
-  const sizeValue = size === 'large' ? space.xl : size === 'small' ? space.m : space.l;
+const geButtonStyles = (size: ButtonSizes, isIconOnly: boolean, icon?: CanvasSystemIcon) => {
+  const buttonSize = getButtonSize(size);
+  const hasChildren = !isIconOnly;
 
   return {
-    minWidth: sizeValue,
-    height: sizeValue,
+    minWidth: getMinWidthStyles(hasChildren, buttonSize),
+    height: getMinWidthStyles(false, buttonSize),
+    padding: getPaddingStyles(hasChildren, getButtonSize(size), icon, 'start'),
   };
-};
-
-// USE FROM BUTTON PACKAGE
-const getPaddingStyles = (
-  children: React.ReactNode,
-  size: ButtonContainerProps['size'],
-  icon?: CanvasSystemIcon
-) => {
-  if (!children) {
-    return `0 0`;
-  }
-  switch (size) {
-    case 'large':
-      return icon ? `0 ${space.m} 0 20px` : `0 ${space.m}`;
-
-    case 'medium':
-      return icon ? `0 20px 0 ${space.s}` : `0 ${space.s}`;
-
-    case 'small':
-      return icon ? `0 ${space.xs} 0 ${space.xxs}` : `0 ${space.xs}`;
-
-    default:
-      return icon ? `0 20px 0 ${space.s}` : `0 ${space.s}`;
-  }
 };
 
 const StyledButton = styled(BaseButton)<StyledType & ButtonContainerProps>(
   {
-    padding: 0,
     borderRadius: borderRadius.m,
     width: '100%',
     '&:disabled': {
@@ -137,7 +131,14 @@ const StyledButton = styled(BaseButton)<StyledType & ButtonContainerProps>(
   })
 );
 
-export const useSegmentedControlItem = composeHooks(
+const Container = ({title, isIconOnly, children}: WrapProps) =>
+  isIconOnly ? (
+    <Tooltip title={title}>{children}</Tooltip>
+  ) : (
+    <React.Fragment>{children}</React.Fragment>
+  );
+
+const useSegmentedControlItem = composeHooks(
   useListItemSelect,
   useListItemRegister,
   createElemPropsHook(useSegmentedControlModel)(
@@ -151,20 +152,12 @@ export const useSegmentedControlItem = composeHooks(
   )
 );
 
-const Container = ({title, isIconOnly, children}: WrapProps) =>
-  isIconOnly ? (
-    <Tooltip title={title}>{children}</Tooltip>
-  ) : (
-    <React.Fragment>{children}</React.Fragment>
-  );
-
 export const SegmentedControlItem = createSubcomponent('button')({
   displayName: 'SegmentedControl.Item',
   modelHook: useSegmentedControlModel,
   elemPropsHook: useSegmentedControlItem,
 })<ItemProps>(({children, icon, ...elemProps}, Element, {state: {size, variant}}) => {
   const isSmall = size === 'small';
-  const isSelected = elemProps['aria-pressed'];
   const isIconOnly = variant === 'icon';
   const {color, ...textStyles} = type.levels.subtext[isSmall ? 'medium' : 'large'];
 
@@ -172,10 +165,9 @@ export const SegmentedControlItem = createSubcomponent('button')({
     <Container title={children} isIconOnly={isIconOnly}>
       <StyledButton
         as={Element}
-        colors={getIconButtonColors(isSelected)}
+        colors={getIconButtonColors(elemProps['aria-pressed'])}
         size={size}
-        padding={`${getPaddingStyles(!isIconOnly, size, icon)} !important`}
-        {...getSizeStyles(size)}
+        {...geButtonStyles(size, isIconOnly, icon)}
         {...elemProps}
       >
         {icon && (

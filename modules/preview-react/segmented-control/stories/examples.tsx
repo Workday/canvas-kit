@@ -8,7 +8,7 @@ import {
   pieChartIcon,
 } from '@workday/canvas-system-icons-web';
 import {Box} from '@workday/canvas-kit-react/layout';
-import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react';
+import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
 
 export default {
   title: 'Labs/Segmented Control/React',

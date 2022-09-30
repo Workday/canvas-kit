@@ -1,5 +1,6 @@
 import React from 'react';
 import {createContainer} from '@workday/canvas-kit-react/common';
+
 import {useSegmentedControlModel} from './useSegmentedControlModel';
 import {SegmentedControlList} from './SegmentedControlList';
 import {SegmentedControlItem} from './SegmentedControlItem';

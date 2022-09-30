@@ -7,7 +7,6 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {Stack} from '@workday/canvas-kit-react/layout';
 import {useListRenderItems} from '@workday/canvas-kit-react/collection';
-
 import {useSegmentedControlModel} from './useSegmentedControlModel';
 
 export interface SegmentedControlListProps<T = any>
@@ -16,12 +15,11 @@ export interface SegmentedControlListProps<T = any>
   children: ((item: T) => React.ReactNode) | React.ReactNode;
 }
 
-export const useSegmentedControlList = createElemPropsHook(useSegmentedControlModel)(
+const useSegmentedControlList = createElemPropsHook(useSegmentedControlModel)(
   ({state: {orientation, disabled, variant}}) => {
-    const isVertical = variant === 'icon' && orientation === 'vertical';
-
     return {
-      flexDirection: isVertical ? 'column' : 'row',
+      // sets verrtical direction only for icon only variant
+      flexDirection: variant === 'icon' && orientation === 'vertical' ? 'column' : 'row',
       style: {
         opacity: disabled ? 0.4 : 1,
       },
@@ -37,13 +35,13 @@ export const SegmentedControlList = createSubcomponent('div')({
   return (
     <Stack
       as={Element}
-      spacing="xxxs"
       role="group"
       backgroundColor="soap200"
       border="1px solid transparent"
       borderColor="licorice200"
       borderRadius="l"
-      padding="xxxs"
+      spacing="5px"
+      padding="3px"
       maxWidth="max-content"
       {...elemProps}
     >

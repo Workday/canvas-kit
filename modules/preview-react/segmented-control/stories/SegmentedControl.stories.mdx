@@ -9,6 +9,11 @@ import {Sizes} from './examples/Sizes';
 import {Vertical} from './examples/Vertical';
 import {RTL} from './examples/RTL';
 import {Dynamic} from './examples/Dynamic';
+import {
+  SegmentedControlModelConfigComponent,
+  SegmentedControlStateComponent,
+  SegmentedControlEventsComponent,
+} from './SegmentedControlModel.splitprops.tsx';
 
 <Meta title="Preview/Segmented Control/React" component={SegmentedControl} />
 
@@ -93,7 +98,7 @@ const model = useSegmentedControlModel({
 <SegmentedControl model={model}>{/* Child components */}</SegmentedControl>;
 ```
 
-## Props
+#### Props
 
 Note that if you pass in a `model` configured with `useSegmentedControlModel`, configuration props
 passed to `SegmentedControl` will be ignored.
@@ -161,3 +166,17 @@ const model = useSegmentedControlModel({
 
 `useSegmentedControlModel` accepts a configuration object with the following properties and returns
 a `SegmentedControlModel` with `state` and `events` properties.
+
+<ArgsTable of={SegmentedControlModelConfigComponent} />
+
+### State
+
+The `SegmentedControlModel` `state` is an object with the following properties.
+
+<ArgsTable of={SegmentedControlStateComponent} />
+
+### Events
+
+The `SegmentedControlModel` `events` is an object with the following properties.
+
+<ArgsTable of={SegmentedControlEventsComponent} />
