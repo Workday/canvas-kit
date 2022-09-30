@@ -5,12 +5,12 @@ import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {HStack, Box} from '@workday/canvas-kit-react/layout';
 
 export const Basic = () => {
-  const handlePrimaryClick = () => {
-    console.log('Primary Action clicked');
+  const handleAcknowledge = () => {
+    console.log('License Acknowledged');
   };
 
-  const handleSecondaryClick = () => {
-    console.log('Secondary Action clicked');
+  const handleCancel = () => {
+    console.log('Cancel clicked');
   };
 
   return (
@@ -26,18 +26,12 @@ export const Basic = () => {
               software and associated documentation files (the "Software").
             </Box>
             <HStack spacing="s">
-              <Modal.CloseButton as={PrimaryButton} onClick={handlePrimaryClick}>
+              <Modal.CloseButton as={PrimaryButton} onClick={handleAcknowledge}>
                 Acknowledge
               </Modal.CloseButton>
-              <Modal.CloseButton onClick={handleSecondaryClick}>Cancel</Modal.CloseButton>
+              <Modal.CloseButton onClick={handleCancel}>Cancel</Modal.CloseButton>
             </HStack>
           </Modal.Body>
-          <HStack spacing="s" padding="xxs" marginTop="xxs">
-            <Modal.CloseButton as={PrimaryButton} onClick={handlePrimaryClick}>
-              Primary Action
-            </Modal.CloseButton>
-            <Modal.CloseButton onClick={handleSecondaryClick}>Secondary Action</Modal.CloseButton>
-          </HStack>
         </Modal.Card>
       </Modal.Overlay>
     </Modal>
