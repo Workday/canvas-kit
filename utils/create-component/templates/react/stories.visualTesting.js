@@ -1,7 +1,7 @@
 module.exports = (modulePath, storyPath, pascalCaseName, rootPath) => `
 import React from 'react';
 
-import {StaticStates, ComponentStatesTable} from '@workday/canvas-kit-react/common';
+import {StaticStates, ComponentStatesTable} from '@workday/canvas-kit-react/testing';
 import {withSnapshotsEnabled} from '../../${rootPath}/utils/storybook';
 
 import {${pascalCaseName}} from '${modulePath}';

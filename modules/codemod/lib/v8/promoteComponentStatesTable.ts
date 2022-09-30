@@ -3,6 +3,8 @@ import {Transform, ImportDeclaration, ASTPath} from 'jscodeshift';
 // used to filter our imports we want to keep in @workday/canvas-kit-labs-react/common
 const commonLabsSpecifiers = ['useTheme', 'useThemeRTL', 'useThemedRing'];
 
+// const commonSpecifiers = ['convertToStaticStates']
+
 const labsToCommonSpecifiers = [
   'ComponentStatesTable',
   'permutateProps',

@@ -2,7 +2,7 @@ import {default as emotionStyled, CreateStyled, Interpolation, CSSObject} from '
 
 import {useTheme, EmotionCanvasTheme, ContentDirection} from './index';
 import rtlCSSJS from 'rtl-css-js';
-import {convertToStaticStates} from '../utils/StaticStates';
+import {convertToStaticStates} from '@workday/canvas-kit-react/testing';
 
 const noop = (styles: any) => styles;
 

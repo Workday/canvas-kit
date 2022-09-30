@@ -1,6 +1,10 @@
 import React from 'react';
 
-import {ComponentStatesTable, permutateProps, StaticStates} from '@workday/canvas-kit-react/common';
+import {
+  ComponentStatesTable,
+  permutateProps,
+  StaticStates,
+} from '@workday/canvas-kit-react/testing';
 import {withSnapshotsEnabled} from '../../../../../utils/storybook';
 import {deprecated_Button as DeprecatedButton} from '@workday/canvas-kit-react/button';
 import {Container, stateTableColumnProps} from './utils';

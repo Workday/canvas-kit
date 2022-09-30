@@ -1,9 +1,6 @@
 import React from 'react';
-import {
-  ComponentStatesTable,
-  ContentDirection,
-  StaticStates,
-} from '@workday/canvas-kit-react/common';
+import {ContentDirection} from '@workday/canvas-kit-react/common';
+import {StaticStates, ComponentStatesTable} from '@workday/canvas-kit-react/testing';
 
 import {customColorTheme, withSnapshotsEnabled} from '../../../../utils/storybook';
 

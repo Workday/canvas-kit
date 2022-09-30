@@ -1,9 +1,5 @@
-import {
-  convertToStaticStates,
-  CanvasTheme,
-  useIsRTL,
-  useTheme,
-} from '@workday/canvas-kit-react/common';
+import {CanvasTheme, useIsRTL, useTheme} from '@workday/canvas-kit-react/common';
+import {convertToStaticStates} from '@workday/canvas-kit-react/testing';
 import {CSSProperties} from '@workday/canvas-kit-react/tokens';
 import {useMemo} from 'react';
 import rtlCSSJS from 'rtl-css-js';

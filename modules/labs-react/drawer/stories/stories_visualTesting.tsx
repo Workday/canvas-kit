@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {StaticStates, ComponentStatesTable} from '@workday/canvas-kit-react/common';
+import {StaticStates, ComponentStatesTable} from '@workday/canvas-kit-react/testing';
 
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
 import {space} from '@workday/canvas-kit-react/tokens';

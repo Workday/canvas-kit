@@ -1,5 +1,9 @@
 import * as React from 'react';
-import {ComponentStatesTable, permutateProps, StaticStates} from '@workday/canvas-kit-react/common';
+import {
+  ComponentStatesTable,
+  permutateProps,
+  StaticStates,
+} from '@workday/canvas-kit-react/testing';
 import {withSnapshotsEnabled, customColorTheme} from '../../../../../utils/storybook';
 
 import {Switch} from '@workday/canvas-kit-react/switch';

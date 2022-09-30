@@ -1,12 +1,8 @@
 import React from 'react';
 
 import {setupIcon} from '@workday/canvas-system-icons-web';
-import {
-  StaticStates,
-  PartialEmotionCanvasTheme,
-  ContentDirection,
-  ComponentStatesTable,
-} from '@workday/canvas-kit-react/common';
+import {PartialEmotionCanvasTheme, ContentDirection} from '@workday/canvas-kit-react/common';
+import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
 import {withSnapshotsEnabled, customColorTheme} from '../../../../utils/storybook';
 
 import {Tabs, useTabsModel} from '@workday/canvas-kit-react/tabs';

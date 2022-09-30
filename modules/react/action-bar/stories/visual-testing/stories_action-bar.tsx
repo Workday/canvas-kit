@@ -1,5 +1,5 @@
 import React from 'react';
-import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/common';
+import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
 import {withSnapshotsEnabled} from '../../../../../utils/storybook';
 import {colors, space, spaceNumbers} from '@workday/canvas-kit-react/tokens';
 import {ActionBar, useActionBarModel} from '@workday/canvas-kit-react/action-bar';

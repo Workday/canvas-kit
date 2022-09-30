@@ -1,10 +1,10 @@
 import React from 'react';
+import {PartialEmotionCanvasTheme} from '@workday/canvas-kit-react/common';
 import {
   ComponentStatesTable,
   permutateProps,
   StaticStates,
-  PartialEmotionCanvasTheme,
-} from '@workday/canvas-kit-react/common';
+} from '@workday/canvas-kit-react/testing';
 import {withSnapshotsEnabled, customColorTheme} from '../../../../../utils/storybook';
 import {DeleteButton} from '@workday/canvas-kit-react/button';
 import {Container, stateTableColumnProps} from './utils';

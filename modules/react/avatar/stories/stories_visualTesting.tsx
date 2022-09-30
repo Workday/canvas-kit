@@ -1,6 +1,10 @@
 import React from 'react';
 
-import {ComponentStatesTable, permutateProps, StaticStates} from '@workday/canvas-kit-react/common';
+import {
+  ComponentStatesTable,
+  permutateProps,
+  StaticStates,
+} from '@workday/canvas-kit-react/testing';
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
 import {Avatar} from '../index';
 

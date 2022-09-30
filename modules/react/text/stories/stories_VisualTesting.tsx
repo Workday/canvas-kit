@@ -1,5 +1,5 @@
 import React from 'react';
-import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/common';
+import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
 import {colors} from '@workday/canvas-kit-react/tokens';
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
 import {BodyText, Heading, LabelText, Subtext, Text, Title} from '../';

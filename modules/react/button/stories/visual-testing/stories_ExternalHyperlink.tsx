@@ -2,13 +2,12 @@
 /** @jsx jsx */
 import {jsx} from '@emotion/react';
 import React from 'react';
+import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
 import {
   ComponentStatesTable,
   permutateProps,
-  CanvasProvider,
-  ContentDirection,
   StaticStates,
-} from '@workday/canvas-kit-react/common';
+} from '@workday/canvas-kit-react/testing';
 import {withSnapshotsEnabled} from '../../../../../utils/storybook';
 import {ExternalHyperlink} from '@workday/canvas-kit-react/button';
 import {Container} from './utils';

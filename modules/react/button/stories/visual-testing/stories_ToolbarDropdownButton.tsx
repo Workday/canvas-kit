@@ -3,11 +3,8 @@ import {withSnapshotsEnabled, customColorTheme} from '../../../../../utils/story
 import {playCircleIcon} from '@workday/canvas-system-icons-web';
 import {ToolbarDropdownButton} from '@workday/canvas-kit-react/button';
 import {Container, stateTableColumnProps} from './utils';
-import {
-  PartialEmotionCanvasTheme,
-  ComponentStatesTable,
-  StaticStates,
-} from '@workday/canvas-kit-react/common';
+import {PartialEmotionCanvasTheme} from '@workday/canvas-kit-react/common';
+import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
 
 export default withSnapshotsEnabled({
   title: 'Testing/React/Buttons/Button/Toolbar Dropdown Button',

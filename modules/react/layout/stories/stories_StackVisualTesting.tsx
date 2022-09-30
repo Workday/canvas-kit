@@ -3,11 +3,8 @@ import React from 'react';
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
 
 import {Flex, Stack, StackProps} from '@workday/canvas-kit-react/layout';
-import {
-  ComponentStatesTable,
-  ContentDirection,
-  StaticStates,
-} from '@workday/canvas-kit-react/common';
+import {ContentDirection} from '@workday/canvas-kit-react/common';
+import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
 
 export default withSnapshotsEnabled({
   title: 'Testing/React/Labs/Layout/Stack',
