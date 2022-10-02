@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {useForm, SubmitHandler, FieldErrorsImpl} from 'react-hook-form';
+import {useForm, FieldErrorsImpl} from 'react-hook-form';
 import {object, SchemaOf, string} from 'yup';
 
 import {TextInput} from '@workday/canvas-kit-preview-react/text-input';
