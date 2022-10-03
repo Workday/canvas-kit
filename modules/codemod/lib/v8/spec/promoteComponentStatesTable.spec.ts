@@ -17,7 +17,7 @@ describe('renameIconRefs', () => {
         Props,
         PropCombination,
         PropsDeclaration,
-      } from "@workday/canvas-kit-react/common";
+      } from "@workday/canvas-kit-react/testing";
     `;
 
     expectTransform(input, expected);
@@ -28,7 +28,7 @@ describe('renameIconRefs', () => {
     `;
 
     const expected = stripIndent`
-      import { ComponentStatesTable } from "@workday/canvas-kit-react/common";
+      import { ComponentStatesTable } from "@workday/canvas-kit-react/testing";
     `;
 
     expectTransform(input, expected);
@@ -40,7 +40,7 @@ describe('renameIconRefs', () => {
     `;
 
     const expected = stripIndent`
-      import { ComponentStatesTable } from "@workday/canvas-kit-react/common";
+      import { ComponentStatesTable } from "@workday/canvas-kit-react/testing";
       import { SearchForm } from "@workday/canvas-kit-labs-react";
     `;
 
@@ -53,21 +53,8 @@ describe('renameIconRefs', () => {
     `;
 
     const expected = stripIndent`
-      import { ComponentStatesTable } from "@workday/canvas-kit-react/common";
+      import { ComponentStatesTable } from "@workday/canvas-kit-react/testing";
       import { useThemeRTL } from "@workday/canvas-kit-labs-react/common";
-    `;
-
-    expectTransform(input, expected);
-  });
-
-  it('should add to existing import', () => {
-    const input = stripIndent`
-      import { ComponentStatesTable } from "@workday/canvas-kit-labs-react/common";
-      import { useMountLayout } from "@workday/canvas-kit-react/common";
-    `;
-
-    const expected = stripIndent`
-      import { useMountLayout, ComponentStatesTable } from "@workday/canvas-kit-react/common";
     `;
 
     expectTransform(input, expected);

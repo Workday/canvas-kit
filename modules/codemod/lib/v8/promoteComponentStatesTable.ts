@@ -3,9 +3,9 @@ import {Transform, ImportDeclaration, ASTPath} from 'jscodeshift';
 // used to filter our imports we want to keep in @workday/canvas-kit-labs-react/common
 const commonLabsSpecifiers = ['useTheme', 'useThemeRTL', 'useThemedRing'];
 
-// const commonSpecifiers = ['convertToStaticStates']
+const commonSpecifiers = ['convertToStaticStates'];
 
-const labsToCommonSpecifiers = [
+const labsToTestingSpecifiers = [
   'ComponentStatesTable',
   'permutateProps',
   'ComponentStatesTableProps',
@@ -38,7 +38,7 @@ const transform: Transform = (file, api) => {
         ) {
           if (
             specifier?.local?.name !== undefined &&
-            labsToCommonSpecifiers.includes(specifier?.local?.name)
+            labsToTestingSpecifiers.includes(specifier?.local?.name)
           ) {
             reactLayoutSpecifiers.push({
               importedName: specifier?.local?.name,
@@ -77,7 +77,7 @@ const transform: Transform = (file, api) => {
       foundImport[0].insertBefore(
         j.importDeclaration(
           reactLayoutSpecifiers.map(mapToSpecifiers),
-          j.stringLiteral('@workday/canvas-kit-react/common')
+          j.stringLiteral('@workday/canvas-kit-react/testing')
         )
       );
     }
@@ -86,7 +86,7 @@ const transform: Transform = (file, api) => {
   foundImport.forEach(importPath => {
     if (
       importPath.value.specifiers?.length === 0 ||
-      importPath.value.source.value === '@workday/canvas-kit-react/common'
+      importPath.value.source.value === '@workday/canvas-kit-react/testing'
     ) {
       importPath.prune();
     }

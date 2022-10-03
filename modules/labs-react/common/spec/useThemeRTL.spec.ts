@@ -1,4 +1,4 @@
-import {css} from '@emotion/react';
+import {convertToStaticStates} from '@workday/canvas-kit-react/testing';
 import {CSSObject} from '@emotion/styled';
 import {renderHook} from '@testing-library/react-hooks';
 import {useThemeRTL} from '../lib/theming';
@@ -12,7 +12,7 @@ describe('styles', () => {
       direction: {direction: 'rtl'},
     };
     const withStaticStates = {
-      _staticStates: true,
+      _styleRewriteFn: convertToStaticStates,
     };
     it('should return styles', () => {
       const expectedHeight = `100px`;
@@ -57,7 +57,7 @@ describe('styles', () => {
         const cssProp = result.current.themeRTL(style);
         expect(cssProp.paddingLeft).toEqual(expectedPadding);
       });
-      it('should NOT convert static states when _staticStates is undefined', () => {
+      it('should NOT convert static states when _styleRewriteFn is undefined', () => {
         const expectedPadding = `10px`;
         const style = {
           '&:hover': {
@@ -102,7 +102,7 @@ describe('styles', () => {
         expect(cssProp.paddingRight).toEqual(expectedPadding);
       });
 
-      it('should flip and NOT convert static states when _staticStates is undefined', () => {
+      it('should flip and NOT convert static states when _styleRewriteFn is undefined', () => {
         const expectedPadding = `10px`;
         const style = {
           '&:hover': {
@@ -139,7 +139,7 @@ describe('styles', () => {
         const {result} = renderHook(() => useThemeRTL());
         const cssProp = result.current.themeRTL(style);
 
-        expect((cssProp['&.hover'] as CSSObject).paddingLeft).toEqual(expectedPadding);
+        expect(cssProp['&.hover'].paddingLeft).toEqual(expectedPadding);
       });
     });
 
