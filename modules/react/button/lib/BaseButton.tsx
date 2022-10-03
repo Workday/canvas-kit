@@ -19,6 +19,7 @@ import {ButtonColors, ButtonSizes, IconPositions, TertiaryButtonSizes} from './t
 
 import {CSSObject} from '@emotion/styled';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
+import {convertToStaticStates} from '@workday/canvas-kit-react/testing';
 
 export interface ButtonContainerProps extends BoxProps, GrowthBehavior {
   colors?: ButtonColors;
@@ -71,7 +72,7 @@ function getIconColorSelectors(
   };
 }
 
-const ButtonContainer = styled('button')<StyledType & ButtonContainerProps>(
+const ButtonContainer = styled('button', convertToStaticStates)<StyledType & ButtonContainerProps>(
   {
     ...type.levels.subtext.large,
     cursor: 'pointer',
