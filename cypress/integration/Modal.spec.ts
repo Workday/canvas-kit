@@ -100,9 +100,9 @@ describe('Modal', () => {
 
           it('should trap focus inside the modal element', () => {
             cy.tab()
-              .should('contain', 'Primary Action')
+              .should('contain', 'Acknowledge')
               .tab()
-              .should('contain', 'Secondary Action')
+              .should('contain', 'Cancel')
               .tab();
             cy.findByRole('dialog', {name: 'MIT License'})
               .findByRole('button', {name: 'Close'})
