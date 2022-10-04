@@ -20,7 +20,6 @@ any questions.
   - [Drawer](#drawer)
   - [Menu (Preview)](#menu-preview)
   - [Layout and Column](#layout-and-column)
-- [Component Promotions](#component-promotions)
 - [Component Updates](#component-updates)
   - [Box](#box)
   - [Breadcrumbs](#breadcrumbs)
@@ -45,8 +44,8 @@ package after you're finished.
 > yarn remove @workday/canvas-kit-codemod
 ```
 
-> Note: The codemod only works on `.js`, `.jsx`, `.ts`, and `.tsx` files. You'll need to manually
-> edit other types of files (`.json`, `.mdx`, `.md`, etc.). You may need to run your linter after
+> The codemod only works on `.js`, `.jsx`, `.ts`, and `.tsx` files. You'll need to manually edit
+> other types of files (`.json`, `.mdx`, `.md`, etc.). You may need to run your linter after
 > executing the codemod, as its resulting formatting (spacing, quotes, etc.) may not match your
 > project conventions.
 
@@ -67,6 +66,8 @@ We've removed all IE11-specific code including polyfills. Applications built usi
 above may no longer run in IE11 and may fail to bootstrap with an error and/or a white screen.
 
 **Do not upgrade to v8 if your application needs to support IE11.**
+
+---
 
 ### Removal of Default Exports
 
@@ -121,6 +122,8 @@ provided both default and named exports, the default export has been removed).
 
 🤖 The codemod will rewrite your default imports to named imports.
 
+---
+
 ### Responsive Styles
 
 > Coming Soon (https://github.com/Workday/canvas-kit/issues/1503)
@@ -130,6 +133,8 @@ provided both default and named exports, the default export has been removed).
 ### Grid
 
 > (PLACEHOLDER) Introduction to Grid plus link to Grid docs goes here.
+
+---
 
 ### Text
 
@@ -154,6 +159,8 @@ A hard-deprecated component or package is no longer available. You will need to 
 prescribed in our Upgrade Guide to update your application. Please
 [reach out](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) to our team
 directly if you need additional help.
+
+---
 
 ### Drawer
 
@@ -197,6 +204,8 @@ deprecated names.
 
 You may continue to use this component, but please note that we plan to
 [hard-deprecate](#hard-deprecation) it in Canvas Kit v9.
+
+---
 
 ### Menu (Preview)
 
@@ -256,6 +265,8 @@ You may continue to use this component, but please note that we plan to
 [`Menu` component in Main](https://workday.github.io/canvas-kit/?path=/docs/components-popups-menu-react--basic)
 instead (`@workday/canvas-kit-react/menu`).
 
+---
+
 ### Layout and Column
 
 We've [soft-deprecated](#soft-deprecation) `Layout` and `Column` and renamed the following items:
@@ -292,13 +303,6 @@ You may continue to use these components, but please note that we plan to
 [hard-deprecate](#hard-deprecation) them in Canvas Kit v9. Consider using the
 [newly-released `Grid` component](#grid) instead.
 
-## Component Promotions
-
-> (PLACEHOLDER) Promotion of Breadcrumbs from Preview to Main plus addition of List system goes here
-> (https://github.com/Workday/canvas-kit/pull/1724)
-
-### Breadcrumbs
-
 ## Component Updates
 
 ### Box
@@ -321,25 +325,27 @@ const StyledBox = styled(Box)({
 <Box fontFamily="monospace" fontSize={16} fontWeight="medium" />
 ```
 
+---
+
 ### Breadcrumbs
 
-Breadcrumbs component has been promoted to `canvas-kit-react` package because now it uses the same
-list system being developed for Tabs, ActionBar which provides the new overflow behavior based on
-utilizing `useBreadcrumbsModel`. Overflow is dynamic and calculated on the container width.
+`Breadcrumbs` has been promoted to the Main (`@workday/canvas-kit-react`) package. It now uses the
+list system from our [Collection API](/getting-started/for-developers/resources/collection-api/)
+which provides new overflow behavior based on container width.
 
-To archive this goal some Breadcrumbs API has been reviewed and the next changes have been made:
+The following changes have been made to the `Breadcrumbs` API:
 
-- `Breadcrumbs` has been promoted and now it lives in main react package
-- `Breadcrumbs.Nav` has been removed and replaced by `Breadcrumbs`
-- `Breadcrumbs.Nav` prop of `aria-label` has been removed to `Breadcrumbs`
-- `Breadcrumbs.CollapsibleList` has been renamed to `Breadcrumbs.List`
-- `Breadcrumbs.ListItem` has been renamed to `Breadcrumbs.Item`
+- `Breadcrumbs` has been promoted from Preview (`@workday/canvas-kit-preview-react`) to Main
+  (`@workday/canvas-kit-react`).
+- `Breadcrumbs.Nav` has been replaced with `Breadcrumbs`. Any `aria-label` previously applied to
+  `Breadcrumbs.Nav` should now be applied to `Breadcrumbs`.
+- `Breadcrumbs.CollapsibleList` has been renamed to `Breadcrumbs.List`.
+- `Breadcrumbs.ListItem` has been renamed to `Breadcrumbs.Item`.
 
-🤖 All the above changes can be handled by running codemod
+🤖 The codemod will handle all of the changes above for you automatically.
 
 ```tsx
 // v7
-
 <Breadcrumbs.Nav aria-label="breadcrumb">
   <Breadcrumbs.List>
     <Breadcrumbs.ListItem>
@@ -353,7 +359,6 @@ To archive this goal some Breadcrumbs API has been reviewed and the next changes
 </Breadcrumbs.Nav>
 
 // v8
-
 <Breadcrumbs>
   <Breadcrumbs.List>
     <Breadcrumbs.Item>
@@ -367,10 +372,12 @@ To archive this goal some Breadcrumbs API has been reviewed and the next changes
 </Breadcrumbs>
 ```
 
-🙎‍♂️ The next changes will require manual changes:
+There are a couple additional updates to the `Breadcrumbs` API which will require manual changes.
 
 - Handling Redirects
 - Updated Overflow Behavior
+
+We've outlined them in more detail below.
 
 #### Handling Redirects
 
@@ -488,9 +495,13 @@ const NewOverflowList = () => {
 };
 ```
 
+---
+
 ### Menu (Main)
 
 The depth value of `Menu.Card` has been updated from `1` to `3`. This is a visually breaking change.
+
+---
 
 ### Segmented Control
 

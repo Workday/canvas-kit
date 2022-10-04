@@ -44,6 +44,7 @@ const routes = {
   '/getting-started/for-developers/contributing/': 'welcome-contributing--page',
   '/getting-started/for-developers/resources/api-pattern-guidelines/':
     'welcome-dev-docs-api-pattern-guidelines--page',
+  '/getting-started/for-developers/resources/collection-api/': 'welcome-dev-docs-collections--basic',
   '/getting-started/for-developers/resources/compound-components/':
     'welcome-dev-docs-compound-components--page',
   '/getting-started/for-developers/resources/creating-compound-components/':
