@@ -3,13 +3,12 @@ import {Specifications} from '@workday/canvas-kit-docs';
 
 import {Testing} from '@workday/canvas-kit-react/testing';
 import {Basic} from './examples/Basic';
-import {Open} from './examples/Open';
 
-<Meta title="Components/Containers/Testing/React" component={Testing} />
+<Meta title="Utilities/Testing" component={Testing} />
 
 # Testing
 
-A package that provides components for testing
+A package that provides components and utilities for testing
 
 ## Installation
 
@@ -21,4 +20,13 @@ yarn add @workday/canvas-kit-react
 
 ### Basic Example
 
-Show and hide using a button.
+`StaticStates` in conjunction with `ComponentStatesTable` allow consumers to visually test their
+components in different states. Below is an example of how we're using these to create a visual
+table of a `DeleteButton` component with different prop values and visual states.
+
+`StaticStates` serves similarly as a context provider where is wraps children in a `CanvasProvider`
+exposing a `theme` prop.
+
+`ComponentStatesTable` allows consumers to built up a visual table based on row and column props.
+
+<ExampleCodeBlock code={Basic} />
