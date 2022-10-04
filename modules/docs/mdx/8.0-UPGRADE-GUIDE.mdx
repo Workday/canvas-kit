@@ -24,6 +24,7 @@ any questions.
   - [Box](#box)
   - [Breadcrumbs](#breadcrumbs)
   - [Menu (Main)](#menu-main)
+  - [Segmented Control](#segmented-control)
 
 ## Codemod
 
@@ -132,13 +133,21 @@ provided both default and named exports, the default export has been removed).
 
 ### Grid
 
-> (PLACEHOLDER) Introduction to Grid plus link to Grid docs goes here.
+We've introduced a new `Grid` component to the Main package. `Grid` is a low-level layout component
+that provides a common, ergonomic API for building two-dimensional layouts (rows and columns) with
+[CSS Grid](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Grids).
+
+For more information, view the `Grid` component [docs](/components/layout/grid/).
 
 ---
 
 ### Text
 
-> (PLACEHOLDER) Introduction to Text plus link to Text docs goes here.
+We've introduced a group of Text components to the Main package: `Text`, `LabelText`, `Title`,
+`Heading`, `BodyText`, and `Subtext`. Together they provide a common, ergonomic API for rendering
+text with built-in support for our Canvas Kit type tokens.
+
+For more information, view the Text component [docs](/components/text/).
 
 ## Component Deprecations
 
@@ -431,10 +440,10 @@ Read more about [moving from Router DOM v5 to v6](https://reactrouter.com/en/mai
 #### Updated Overflow Behavior
 
 We've removed the component-specific overflow functionality from `Breadcrumbs` now that it uses the
-overflow behavior provided by the Collection API. In order to enable the new overflow behavior, you'll
-need to use the dynamic API by passing an array of items to `Breadcrumbs` (rather than passing the
-items as statically defined `children` via JSX). The items can be passed to `Breadcrumbs` via its
-`items` prop or via an `items` key within a provided `model`.
+overflow behavior provided by the Collection API. In order to enable the new overflow behavior,
+you'll need to use the dynamic API by passing an array of items to `Breadcrumbs` (rather than
+passing the items as statically defined `children` via JSX). The items can be passed to
+`Breadcrumbs` via its `items` prop or via an `items` key within a provided `model`.
 
 Here's an example of how to convert a v7 instance of overflow `Breadcrumbs` using the static API to
 the v8 equivalent using the dynamic API with the `items` prop.

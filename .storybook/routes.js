@@ -20,6 +20,7 @@ const routes = {
   '/components/containers/tabs/': 'components-containers-tabs-react--basic',
   '/components/layout/box/': 'components-containers-layout-box--as',
   '/components/layout/flex/': 'components-containers-layout-flex--usage',
+  '/components/layout/grid/': 'components-containers-layout-grid--basic',
   '/components/layout/stack/': 'components-containers-layout-stack--basic-stack',
   '/components/inputs/select/': 'preview-select-react-top-label--default',
   '/components/inputs/checkbox/': 'components-inputs-checkbox-react--basic',
@@ -41,10 +42,12 @@ const routes = {
   '/components/popups/modal/': 'components-popups-modal-react--basic',
   '/components/popups/popup/': 'components-popups-popup-react--basic',
   '/components/popups/tooltip/': 'components-popups-tooltip-react--default-story',
+  '/components/text/': 'components-text-react--basic-text',
   '/getting-started/for-developers/contributing/': 'welcome-contributing--page',
   '/getting-started/for-developers/resources/api-pattern-guidelines/':
     'welcome-dev-docs-api-pattern-guidelines--page',
-  '/getting-started/for-developers/resources/collection-api/': 'welcome-dev-docs-collections--basic',
+  '/getting-started/for-developers/resources/collection-api/':
+    'welcome-dev-docs-collections--basic',
   '/getting-started/for-developers/resources/compound-components/':
     'welcome-dev-docs-compound-components--page',
   '/getting-started/for-developers/resources/creating-compound-components/':
