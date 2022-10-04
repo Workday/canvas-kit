@@ -6070,6 +6070,16 @@
         "__isArgsStory": false
       }
     },
+    "testing-react-popups-popup--return-focus-test": {
+      "id": "testing-react-popups-popup--return-focus-test",
+      "name": "Return Focus Test",
+      "kind": "Testing/React/Popups/Popup",
+      "story": "Return Focus Test",
+      "parameters": {
+        "__id": "testing-react-popups-popup--return-focus-test",
+        "__isArgsStory": false
+      }
+    },
     "testing-react-popups-popup--tooltip-return-focus": {
       "id": "testing-react-popups-popup--tooltip-return-focus",
       "name": "Tooltip Return Focus",
