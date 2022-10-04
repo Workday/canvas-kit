@@ -23,9 +23,7 @@ const useMenuTargetBase = createElemPropsHook(useMenuModel)(model => {
       // eslint-disable-next-line default-case
       switch (event.key) {
         case 'Down':
-        case 'ArrowDown': // IE11
         case 'Up':
-        case 'ArrowUp': // IE11
           model.events.show(event);
       }
     },

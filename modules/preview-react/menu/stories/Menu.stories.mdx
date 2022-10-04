@@ -6,6 +6,7 @@ import {Basic} from './examples/Basic';
 import {ContextMenu} from './examples/ContextMenu';
 import {CustomMenuItem} from './examples/CustomMenuItem';
 import {Icons} from './examples/Icons';
+import {Headers} from './examples/Headers';
 import {ManyItems} from './examples/ManyItems';
 
 <Meta title="Preview/Menu/React" component={DeprecatedMenu} />
@@ -76,6 +77,13 @@ Below is an example:
 ### Icons
 
 <ExampleCodeBlock code={Icons} />
+
+### Headers
+
+You can group menu items logically by adding a `isHeader` attribute on your `<MenuItems>`. To make
+your new items screen reader friendly add an `aria-label` around each grouped item.
+
+<ExampleCodeBlock code={Headers} />
 
 ### Many Items
 
