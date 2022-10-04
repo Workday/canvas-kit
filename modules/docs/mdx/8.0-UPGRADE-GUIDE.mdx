@@ -329,11 +329,12 @@ const StyledBox = styled(Box)({
 
 ### Breadcrumbs
 
-`Breadcrumbs` has been promoted to the Main (`@workday/canvas-kit-react`) package. It now uses the
-list system from our [Collection API](/getting-started/for-developers/resources/collection-api/)
-which provides new overflow behavior based on container width.
+`Breadcrumbs` has been promoted to the Main package. It now uses the list system from our
+[Collection API](/getting-started/for-developers/resources/collection-api/) which provides new
+overflow behavior based on container width.
 
-The following changes have been made to the `Breadcrumbs` API:
+The following code-moddable changes have been made to the `Breadcrumbs` API (see below for
+additional changes requiring manual work):
 
 - `Breadcrumbs` has been promoted from Preview (`@workday/canvas-kit-preview-react`) to Main
   (`@workday/canvas-kit-react`).
@@ -372,27 +373,27 @@ The following changes have been made to the `Breadcrumbs` API:
 </Breadcrumbs>
 ```
 
-There are a couple additional updates to the `Breadcrumbs` API which will require manual changes.
+Additionally, there are a handful of changes to the `Breadcrumbs` API which will require manual
+updates on your part:
 
-- Handling Redirects
+- Changes to Redirects
 - Updated Overflow Behavior
 
-We've outlined them in more detail below.
+We've outlined these changes in more detail below.
 
-#### Handling Redirects
+#### Changes to Redirects
 
-`onAction` has been removed from `Breadcrumbs.Item`, so the way of redirection has been changed.
+We've removed `onAction` from `Breadcrumbs.Link`. `Breadcrumbs.Link` now defaults to redirecting
+with an `href`, which means the page will hard-redirect when the link is clicked.
 
-`Breadcrumbs.Link` defaults to redirecting with an `href`, which means the page will hard-redirect
-when the link is clicked. However, if you're in a single-page application (SPA) environment, you
-might want to use the internal SPA router instead. You can override that behavior with a custom
-`onClick` handler that blocks the default behavior of the event and passes along the link path to
-your SPA router. Most of our consumers use `react-router-dom` for managing SPA routing, so below is
-an example of how to do this in V5 and V6 of `react-router-dom`.
-[Read more about moving from Router DOM v5 to v6](https://reactrouter.com/en/main/upgrading/v5)
+If you're in a single-page application (SPA) environment, you may want to use the internal SPA
+router instead. You can override the hard-redirect with a custom `onClick` handler that blocks the
+default behavior of the event and passes the link path along to your SPA router. Most of our
+consumers use `react-router-dom` for managing SPA routing; here are examples of how to use `onClick`
+with v5 and v6 of `react-router-dom`.
 
 ```ts
-// React Router DOM V5 API
+// React Router DOM v5 API
 import {useHistory} from 'react-router-dom';
 import {Breadcrumbs} from '@workday/canvas-kit-react/breadcrumbs';
 ...
@@ -408,7 +409,7 @@ return (
   </Breadcrumbs.Link>
 );
 
-// React Router DOM V6 API
+// React Router DOM v6 API
 import {useNavigate} from 'react-router-dom';
 import {Breadcrumbs} from '@workday/canvas-kit-react/breadcrumbs';
 ...
@@ -425,15 +426,21 @@ return (
 );
 ```
 
-#### Overflow behavior
+Read more about [moving from Router DOM v5 to v6](https://reactrouter.com/en/main/upgrading/v5).
 
-As `Breadcrumbs.CollapsibleList` has been removed, all overflow functionality provided by this
-component has been removed too. Now overflow functionality is provided by List system and requires
-to switch to `BreadcrumbsModel` manually. In the end of this discussion you can find step-by-step
-instruction to switch to a new structure.
+#### Updated Overflow Behavior
+
+We've removed the component-specific overflow functionality from `Breadcrumbs` now that it uses the
+overflow behavior provided by the Collection API. In order to enable the new overflow behavior, you'll
+need to use the dynamic API by passing an array of items to `Breadcrumbs` (rather than passing the
+items as statically defined `children` via JSX). The items can be passed to `Breadcrumbs` via its
+`items` prop or via an `items` key within a provided `model`.
+
+Here's an example of how to convert a v7 instance of overflow `Breadcrumbs` using the static API to
+the v8 equivalent using the dynamic API with the `items` prop.
 
 ```ts
-// v7 structure
+// v7
 import {Breadcrumbs} from '@workday/canvas-kit-preview-react/breadcrumbs';
 
 export const OldCollapsibleList = () => {
@@ -460,7 +467,7 @@ export const OldCollapsibleList = () => {
   );
 };
 
-// v8 structure
+// v8
 const NewOverflowList = () => {
   const [items] = React.useState([
     {id: '1', text: 'Home', link: '/'},
