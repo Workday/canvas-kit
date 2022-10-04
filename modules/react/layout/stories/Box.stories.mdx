@@ -4,12 +4,14 @@ import {Box} from '@workday/canvas-kit-react/layout';
 import {As} from './examples/As';
 import {Border} from './examples/Border';
 import {Color} from './examples/Color';
+import {Font} from './examples/Font';
 import {Depth} from './examples/Depth';
 import {FlexItem} from './examples/FlexItem';
 import {Layout} from './examples/Layout';
 import {Position} from './examples/Position';
 import {Ref} from './examples/Ref';
 import {Space} from './examples/Space';
+import {Text} from './examples/Text';
 // props tables
 import {
   BoxBorder,
@@ -62,16 +64,20 @@ is highly flexible, and its primary purpose is to build other components.
       - [Example](#example-2)
     - [Flex Item](#flex-item)
       - [Example](#example-3)
-    - [Layout](#layout)
+    - [Font](#font)
       - [Example](#example-4)
+    - [Layout](#layout)
+      - [Example](#example-5)
     - [Position](#position)
       - [Position Logical Props](#position-logical-props)
       - [Position Standard Props](#position-standard-props)
-      - [Example](#example-5)
+      - [Example](#example-6)
     - [Space](#space)
       - [Space Logical Props](#space-logical-props)
       - [Space Standard Props](#space-standard-props)
-      - [Example](#example-6)
+      - [Example](#example-7)
+    - [Text](#space)
+      - [Example](#example-8)
   - [Exhaustive Style Prop List](#exhaustive-style-prop-list)
     - [Border Props](#border-props)
     - [Color Props](#color-props)
@@ -263,15 +269,21 @@ component. These props are useful when a component is a child of a
 [flex container](https://developer.mozilla.org/en-US/docs/Glossary/Flex_Container). Below is a props
 table for flex item props:
 
-> Note: IE11 does not properly support `flexBasis: 0`. If you're using the `flexBasis` prop or
-> `flex` (which implicitly sets `flex-basis` to `0`), you'll likely want to manually set flexBasis
-> to `auto`. E.g. `flex="1 1 auto"` or `flex={1} flexBasis="auto"`
-
 <ArgsTable of={BoxFlexItem} />
 
 #### Example
 
 <ExampleCodeBlock code={FlexItem} />
+
+---
+
+### Font
+
+Font style props allow you to adjust the font family, style, size or weight of components.
+
+#### Example
+
+<ExampleCodeBlock code={Font} />
 
 ---
 
@@ -373,6 +385,17 @@ Bidirectional support will only affect `marginLeft`, `marginRight`, `paddingLeft
 #### Example
 
 <ExampleCodeBlock code={Space} />
+
+### Text
+
+Text style props allow you to modify text using props such as `textDecoration` or `textTransform` or
+set line styles by `lineHeight` or `letterSpacing`, etc.
+
+#### Example
+
+<ExampleCodeBlock code={Text} />
+
+---
 
 ## Exhaustive Style Prop List
 

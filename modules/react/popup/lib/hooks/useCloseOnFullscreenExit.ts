@@ -12,7 +12,7 @@ import {usePopupModel} from './usePopupModel';
  */
 export const useCloseOnFullscreenExit = createElemPropsHook(usePopupModel)(model => {
   const handler = React.useCallback(
-    event => {
+    (event: any) => {
       if (!screenfull.isFullscreen) {
         model.events.hide(event);
       }
