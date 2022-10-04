@@ -36,8 +36,8 @@ to automatically update your code to work with many of the breaking changes in v
 ```
 
 Alternatively, if you're unable to run the codemod successfully using `npx`, you can install the
-codemod package as a dev dependency, run it using `yarn` instead of `npx`, and then remove the
-package after you're finished.
+codemod package as a dev dependency, run it with `yarn`, and then remove the package after you're
+finished.
 
 ```sh
 > yarn add @workday/canvas-kit-codemod --dev
@@ -51,7 +51,7 @@ package after you're finished.
 > project conventions.
 
 The codemod will handle _many_ but _not all_ of the breaking changes in v8. **Breaking changes
-handled by the codemod are marked with 🤖 in this Upgrade Guide.**
+handled by the codemod are marked with 🤖 in the Upgrade Guide.**
 
 **Please verify all changes made by the codemod.** As a safety precaution, we recommend committing
 the changes from the codemod as a single isolated commit (separate from other changes) so you can
@@ -270,9 +270,8 @@ const CustomMenu = () => {
 deprecated names.
 
 You may continue to use this component, but please note that we plan to
-[hard-deprecate](#hard-deprecation) it in Canvas Kit v9. Consider using the
-[`Menu` component in Main](https://workday.github.io/canvas-kit/?path=/docs/components-popups-menu-react--basic)
-instead (`@workday/canvas-kit-react/menu`).
+[hard-deprecate](#hard-deprecation) it in Canvas Kit v9. Consider using the `Menu` component in the
+Main package instead (`@workday/canvas-kit-react/menu`).
 
 ---
 
