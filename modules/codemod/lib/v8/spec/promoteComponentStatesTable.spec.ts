@@ -59,4 +59,31 @@ describe('renameIconRefs', () => {
 
     expectTransform(input, expected);
   });
+
+  it('should move common specifiers to testing', () => {
+    const input = stripIndent`
+      import { StaticStates, convertToStaticStates } from "@workday/canvas-kit-react/common";
+    `;
+
+    const expected = stripIndent`
+      import { StaticStates, convertToStaticStates } from "@workday/canvas-kit-react/testing";
+    `;
+
+    expectTransform(input, expected);
+  });
+
+  it('should handle multiple imports', () => {
+    const input = stripIndent`
+      import { StaticStates, convertToStaticStates, createModelHook } from "@workday/canvas-kit-react/common";
+      import { ComponentStatesTable, permutateProps, useThemedRing } from "@workday/canvas-kit-labs-react/common";
+    `;
+
+    const expected = stripIndent`
+    import { StaticStates, convertToStaticStates, ComponentStatesTable, permutateProps } from "@workday/canvas-kit-react/testing";
+    import { createModelHook } from "@workday/canvas-kit-react/common";
+    import { useThemedRing } from "@workday/canvas-kit-labs-react/common";
+    `;
+
+    expectTransform(input, expected);
+  });
 });

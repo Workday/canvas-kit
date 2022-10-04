@@ -1,10 +1,5 @@
 import {Transform, ImportDeclaration, ASTPath} from 'jscodeshift';
 
-// used to filter our imports we want to keep in @workday/canvas-kit-labs-react/common
-const commonLabsSpecifiers = ['useTheme', 'useThemeRTL', 'useThemedRing'];
-
-const commonSpecifiers = ['convertToStaticStates'];
-
 const labsToTestingSpecifiers = [
   'ComponentStatesTable',
   'permutateProps',
@@ -13,22 +8,28 @@ const labsToTestingSpecifiers = [
   'PropDeclaration',
   'Props',
   'PropsDeclaration',
+  'convertToStaticStates',
+  'StaticStates',
 ];
 
-// 1. Gather all import specifiers from @workday/canvas-kit-labs-react/common
+// 1. Gather all import specifiers from @workday/canvas-kit-labs-react/common & @workday/canvas-kit-react/common
 // 2. Filter through all imports from @workday/canvas-kit-labs-react/common and gather specifiers we care about
-// 3. If there's an existing @workday/canvas-kit-react/common add gathered specifiers to that import
 // 4. If no existing import, create new import with specifiers and insert before closest canvas kit import
 const transform: Transform = (file, api) => {
   const j = api.jscodeshift;
 
   const root = j(file.source);
-  const reactLayoutSpecifiers: {importedName?: string; name: string}[] = [];
+  const commonLabsSpecifiers: {importedName?: string; name: string}[] = [];
   const foundImport: ASTPath<ImportDeclaration>[] = [];
 
+  // First move specifiers from labs
   root
     .find(j.ImportDeclaration, {
-      source: {value: (value: string) => value.includes('@workday/canvas-kit-labs-react')},
+      source: {
+        value: (value: string) =>
+          value.includes('@workday/canvas-kit-labs-react') ||
+          value.includes('@workday/canvas-kit-react'),
+      },
     })
     .forEach(nodePath => {
       nodePath.value.specifiers = nodePath.value.specifiers?.filter(specifier => {
@@ -40,7 +41,7 @@ const transform: Transform = (file, api) => {
             specifier?.local?.name !== undefined &&
             labsToTestingSpecifiers.includes(specifier?.local?.name)
           ) {
-            reactLayoutSpecifiers.push({
+            commonLabsSpecifiers.push({
               importedName: specifier?.local?.name,
               name: specifier?.imported?.name,
             });
@@ -50,33 +51,33 @@ const transform: Transform = (file, api) => {
         return true;
       });
 
-      foundImport.push(nodePath); //
+      foundImport.push(nodePath);
     });
 
-  const existingLayoutImports = root.find(j.ImportDeclaration, {
-    source: {value: '@workday/canvas-kit-react/common'},
+  const existingTestingImports = root.find(j.ImportDeclaration, {
+    source: {value: '@workday/canvas-kit-react/testing'},
   });
 
-  const mapToSpecifiers = (specifier: typeof reactLayoutSpecifiers[0]) => {
+  const mapToSpecifiers = (specifier: typeof commonLabsSpecifiers[0]) => {
     return j.importSpecifier(
       j.identifier(specifier.name),
       specifier.importedName ? j.identifier(specifier.importedName) : undefined
     );
   };
-  // add to existing import
-  if (existingLayoutImports.length) {
-    existingLayoutImports.forEach(nodePath => {
+  // add to existing import testing import
+  if (existingTestingImports.length) {
+    console.log('in here');
+    existingTestingImports.forEach(nodePath => {
       nodePath.value.specifiers = nodePath.value.specifiers?.concat(
-        reactLayoutSpecifiers.map(mapToSpecifiers)
+        commonLabsSpecifiers.map(mapToSpecifiers)
       );
     });
   } else {
-    // create new import
+    // create new testing import
     if (foundImport.length) {
-      console.log('in here');
       foundImport[0].insertBefore(
         j.importDeclaration(
-          reactLayoutSpecifiers.map(mapToSpecifiers),
+          commonLabsSpecifiers.map(mapToSpecifiers),
           j.stringLiteral('@workday/canvas-kit-react/testing')
         )
       );
