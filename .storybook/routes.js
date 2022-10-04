@@ -38,7 +38,7 @@ const routes = {
   '/components/navigation/breadcrumbs/': 'components-navigation-breadcrumbs-react--basic',
   '/components/navigation/pagination/': 'components-navigation-pagination-react--basic',
   '/components/popups/toast/': 'components-popups-toast-react--with-popper',
-  '/components/popups/menu/': 'preview-menu-react--basic',
+  '/components/popups/menu/': 'components-popups-menu-react--basic',
   '/components/popups/modal/': 'components-popups-modal-react--basic',
   '/components/popups/popup/': 'components-popups-popup-react--basic',
   '/components/popups/tooltip/': 'components-popups-tooltip-react--default-story',
