@@ -41,7 +41,7 @@ export const SegmentedControlList = createSubcomponent('div')({
       border="1px solid transparent"
       borderColor="licorice200"
       borderRadius="l"
-      spacing="5px"
+      spacing="6px"
       padding="3px"
       maxWidth="max-content"
       {...elemProps}

@@ -149,7 +149,7 @@ const useSegmentedControlItem = composeHooks(
       const id = `${state.id}-${name}`;
       const selected = !!name && isSelected(name, state);
 
-      return state.disabled ? {id, disabled: true} : selected ? {id, 'aria-pressed': true} : {id};
+      return state.disabled ? {id, disabled: true} : {id, 'aria-pressed': selected};
     }
   )
 );
