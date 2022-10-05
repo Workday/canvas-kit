@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {colors, borderRadius, type, space} from '@workday/canvas-kit-react/tokens';
+import {colors, borderRadius, type} from '@workday/canvas-kit-react/tokens';
 import {
   createElemPropsHook,
   composeHooks,
