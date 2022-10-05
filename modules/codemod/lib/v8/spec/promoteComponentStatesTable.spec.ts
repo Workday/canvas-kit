@@ -4,7 +4,7 @@ import {stripIndent} from 'common-tags';
 
 const expectTransform = expectTransformFactory(transform);
 
-describe('renameIconRefs', () => {
+describe('promoteComponentsToTesting', () => {
   it('should replace default export with a named export for react package', () => {
     const input = stripIndent`
       import { ComponentStatesTable, permutateProps, Props, PropCombination, PropsDeclaration } from "@workday/canvas-kit-labs-react/common";
