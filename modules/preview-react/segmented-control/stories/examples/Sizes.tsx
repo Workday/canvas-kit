@@ -1,11 +1,6 @@
 import React from 'react';
 import {Box} from '@workday/canvas-kit-react/layout';
-import {
-  gridIcon,
-  listViewIcon,
-  listDetailIcon,
-  pieChartIcon,
-} from '@workday/canvas-system-icons-web';
+import {gridIcon, listViewIcon} from '@workday/canvas-system-icons-web';
 import {SegmentedControl} from '@workday/canvas-kit-preview-react/segmented-control';
 import {BodyText} from '@workday/canvas-kit-react/text';
 
@@ -16,7 +11,7 @@ export const Sizes = () => (
         Small
       </BodyText>
       <SegmentedControl size="small">
-        <SegmentedControl.List aria-label="Content view type">
+        <SegmentedControl.List aria-label="Content view type" maxWidth="200px">
           <SegmentedControl.Item data-id="table" icon={gridIcon}>
             Table
           </SegmentedControl.Item>
@@ -31,7 +26,7 @@ export const Sizes = () => (
         Medium
       </BodyText>
       <SegmentedControl size="medium">
-        <SegmentedControl.List aria-label="Content view type">
+        <SegmentedControl.List aria-label="Content view type" maxWidth="250px">
           <SegmentedControl.Item data-id="table" icon={gridIcon}>
             Table
           </SegmentedControl.Item>
@@ -46,7 +41,7 @@ export const Sizes = () => (
         Large
       </BodyText>
       <SegmentedControl size="large">
-        <SegmentedControl.List aria-label="Content view type">
+        <SegmentedControl.List aria-label="Content view type" maxWidth="300px">
           <SegmentedControl.Item data-id="table" icon={gridIcon}>
             Table
           </SegmentedControl.Item>

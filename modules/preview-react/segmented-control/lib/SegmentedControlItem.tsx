@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {colors, borderRadius, type} from '@workday/canvas-kit-react/tokens';
+import {colors, borderRadius, type, space} from '@workday/canvas-kit-react/tokens';
 import {
   createElemPropsHook,
   composeHooks,
@@ -21,11 +21,9 @@ import {
   ButtonColors,
   ButtonSizes,
   getMinWidthStyles,
-  getPaddingStyles,
 } from '@workday/canvas-kit-react/button';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {useSegmentedControlModel} from './useSegmentedControlModel';
-// import {Text} from '@workday/canvas-kit-react/text';
 
 export interface ItemProps extends ButtonContainerProps {
   /**
@@ -68,7 +66,7 @@ type WrapProps = {
   children: React.ReactElement;
 };
 
-const getButtonSize = (size: string) => {
+const getButtonSize = (size: ButtonContainerProps['size']) => {
   switch (size) {
     case 'large':
       return 'medium';
@@ -103,15 +101,38 @@ const getIconButtonColors = (toggled?: boolean): ButtonColors => {
   };
 };
 
-const geButtonStyles = (size: ButtonSizes, children: React.ReactNode, icon?: CanvasSystemIcon) => {
-  const buttonSize = getButtonSize(size);
-  const minValue = size === 'small' ? '32px' : size === 'large' ? '48px' : '40px';
+const getPaddingStyles = (
+  children: React.ReactNode,
+  size: ButtonContainerProps['size'],
+  icon: CanvasSystemIcon | undefined
+) => {
+  if (!children) {
+    // icon buttons do not have any padding
+    return 0;
+  }
 
+  switch (size) {
+    case 'large':
+      return icon ? `10px ${space.m} 10px 20px` : `0 ${space.m}`;
+
+    case 'medium':
+      return icon ? `6px 20px 6px ${space.s}` : `6px ${space.s}`;
+
+    case 'small':
+      return icon
+        ? `${space.xxxs} ${space.xs} ${space.xxxs} ${space.xxs}`
+        : `${space.xxxs} ${space.xs}`;
+
+    default:
+      return icon ? `6px 20px 6px ${space.s}` : `6px ${space.s}`;
+  }
+};
+
+const geButtonStyles = (size: ButtonSizes, children: React.ReactNode, icon?: CanvasSystemIcon) => {
   return {
-    minWidth: getMinWidthStyles(children, size),
-    height: minValue,
-    padding: getPaddingStyles(children, buttonSize, icon, 'start'),
-    paddingY: size === 'small' ? '4px' : size === 'large' ? '10px' : '6px',
+    minWidth: getMinWidthStyles(children, getButtonSize(size)),
+    height: getMinWidthStyles(false, getButtonSize(size)),
+    padding: getPaddingStyles(children, size, icon),
   };
 };
 
