@@ -25,7 +25,7 @@ const transform: Transform = (file, api) => {
   }[] = [];
   const foundImport: ASTPath<ImportDeclaration>[] = [];
 
-  // First move specifiers from labs
+  // First move specifiers from labs or from main common
   root
     .find(j.ImportDeclaration, {
       source: {
