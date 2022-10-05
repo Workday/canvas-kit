@@ -211,8 +211,10 @@ describe('DeprecatedMenu Keyboard Shortcuts', () => {
   it('should loop around selected items using the down arrow', () => {
     render(
       <DeprecatedMenu isOpen={false}>
+        <DeprecatedMenuItem isHeader>Beginning</DeprecatedMenuItem>
         <DeprecatedMenuItem>Alpha</DeprecatedMenuItem>
         <DeprecatedMenuItem>Bravo</DeprecatedMenuItem>
+        <DeprecatedMenuItem isHeader>End</DeprecatedMenuItem>
       </DeprecatedMenu>
     );
 
@@ -228,8 +230,10 @@ describe('DeprecatedMenu Keyboard Shortcuts', () => {
   it('should loop around selected items using the up arrow', () => {
     render(
       <DeprecatedMenu>
+        <DeprecatedMenuItem isHeader>Beginning</DeprecatedMenuItem>
         <DeprecatedMenuItem>Alpha</DeprecatedMenuItem>
         <DeprecatedMenuItem>Bravo</DeprecatedMenuItem>
+        <DeprecatedMenuItem isHeader>End</DeprecatedMenuItem>
       </DeprecatedMenu>
     );
 
@@ -245,8 +249,10 @@ describe('DeprecatedMenu Keyboard Shortcuts', () => {
   it('should select the first items when Home key is pressed', () => {
     render(
       <DeprecatedMenu initialSelectedItem={1}>
+        <DeprecatedMenuItem isHeader>Beginning</DeprecatedMenuItem>
         <DeprecatedMenuItem>Alpha</DeprecatedMenuItem>
         <DeprecatedMenuItem>Bravo</DeprecatedMenuItem>
+        <DeprecatedMenuItem isHeader>End</DeprecatedMenuItem>
       </DeprecatedMenu>
     );
 
@@ -260,8 +266,10 @@ describe('DeprecatedMenu Keyboard Shortcuts', () => {
   it('should select the last items when End key is pressed', () => {
     render(
       <DeprecatedMenu initialSelectedItem={0}>
+        <DeprecatedMenuItem isHeader>Beginning</DeprecatedMenuItem>
         <DeprecatedMenuItem>Alpha</DeprecatedMenuItem>
         <DeprecatedMenuItem>Bravo</DeprecatedMenuItem>
+        <DeprecatedMenuItem isHeader>End</DeprecatedMenuItem>
       </DeprecatedMenu>
     );
 
@@ -280,7 +288,6 @@ describe('DeprecatedMenu Keyboard Shortcuts', () => {
       </DeprecatedMenu>
     );
 
-    const firstId = screen.getByRole('menuitem', {name: 'Alpha'}).getAttribute('id');
     const secondId = screen.getByRole('menuitem', {name: 'Bravo'}).getAttribute('id');
 
     fireEvent.keyDown(screen.getByRole('menu'), {key: 'Meta'});
@@ -390,5 +397,20 @@ describe('DeprecatedMenu Initial Selected Item', () => {
     const firstId = screen.getByRole('menuitem', {name: 'Alpha'}).getAttribute('id');
 
     expect(screen.getByRole('menu')).toHaveAttribute('aria-activedescendant', firstId);
+  });
+
+  it('should select correct when headers are used', () => {
+    render(
+      <DeprecatedMenu initialSelectedItem={1}>
+        <DeprecatedMenuItem isHeader>Alpha Header</DeprecatedMenuItem>
+        <DeprecatedMenuItem>Alpha</DeprecatedMenuItem>
+        <DeprecatedMenuItem isHeader>Bravo Header</DeprecatedMenuItem>
+        <DeprecatedMenuItem>Bravo</DeprecatedMenuItem>
+      </DeprecatedMenu>
+    );
+
+    const secondId = screen.getByRole('menuitem', {name: 'Bravo'}).getAttribute('id');
+
+    expect(screen.getByRole('menu')).toHaveAttribute('aria-activedescendant', secondId);
   });
 });

@@ -1,6 +1,4 @@
 import * as React from 'react';
-// @ts-ignore
-import elementClosestPolyfill from 'element-closest';
 
 export interface InputProviderProps {
   provideIntent?: boolean;
@@ -171,9 +169,6 @@ export class InputProvider extends React.Component<React.PropsWithChildren<Input
   }
 
   componentDidMount() {
-    // For IE11 and under, we'll need to polyfill element.closest
-    elementClosestPolyfill(window);
-
     // Check for passive event listener support
     this.supportsPassive = supportsPassive();
 
