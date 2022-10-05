@@ -24,6 +24,7 @@ any questions.
   - [Box](#box)
   - [Breadcrumbs](#breadcrumbs)
   - [Menu (Main)](#menu-main)
+  - [Modal](#modal)
   - [Segmented Control](#segmented-control)
 
 ## Codemod
@@ -515,7 +516,23 @@ const NewOverflowList = () => {
 
 ### Menu (Main)
 
-The depth value of `Menu.Card` has been updated from `1` to `3`. This is a visually breaking change.
+We've updated the depth value of `Menu.Card` from `1` to `3`. This is a visually breaking change.
+
+---
+
+### Modal
+
+We've updated the `Modal` component to include new touch and responsive behaviors. The responsive
+`Modal` will be displayed when users are browsing on screen sizes between `320px` and `768px` and
+will have the following visual differences compared to the standard `Modal`:
+
+- Padding between the edge of `Modal.Card` and its contents reduced to `16px` (standard: `32px`)
+- Border radius of `Modal.Card` increased to `24px` (standard: `8px`)
+- Vertical space between `Modal.Heading` and `Modal.Body` reduced to `16px` (standard: `24px`)
+- `Modal` animates from the `bottom center` and is aligned near the bottom of the viewport
+
+Additionally, users interacting with `Modal` on touch will not be able to exit out of the modal by
+tapping on the overlay.
 
 ---
 
