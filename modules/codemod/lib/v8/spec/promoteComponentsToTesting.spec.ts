@@ -1,11 +1,11 @@
 import {expectTransformFactory} from './expectTransformFactory';
-import transform from '../promoteComponentStatesTable';
+import transform from '../promoteComponentsToTesting';
 import {stripIndent} from 'common-tags';
 
 const expectTransform = expectTransformFactory(transform);
 
 describe('promoteComponentsToTesting', () => {
-  it('should replace default export with a named export for react package', () => {
+  it('should move all intended imports from labs to testing', () => {
     const input = stripIndent`
       import { ComponentStatesTable, permutateProps, Props, PropCombination, PropsDeclaration } from "@workday/canvas-kit-labs-react/common";
     `;
@@ -22,19 +22,8 @@ describe('promoteComponentsToTesting', () => {
 
     expectTransform(input, expected);
   });
-  it('should rename imports from main labs package', () => {
-    const input = stripIndent`
-      import { ComponentStatesTable } from "@workday/canvas-kit-labs-react";
-    `;
 
-    const expected = stripIndent`
-      import { ComponentStatesTable } from "@workday/canvas-kit-react/testing";
-    `;
-
-    expectTransform(input, expected);
-  });
-
-  it('should rename imports from main labs package and remove import', () => {
+  it('should move intended imports to testing and keep those that shoudl stay', () => {
     const input = stripIndent`
       import { ComponentStatesTable, SearchForm } from "@workday/canvas-kit-labs-react";
     `;
