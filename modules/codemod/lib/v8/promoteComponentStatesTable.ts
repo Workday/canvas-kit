@@ -1,6 +1,6 @@
 import {Transform, ImportDeclaration, ASTPath} from 'jscodeshift';
 
-const labsToTestingSpecifiers = [
+const specifiersToMove = [
   'ComponentStatesTable',
   'permutateProps',
   'ComponentStatesTableProps',
@@ -19,7 +19,10 @@ const transform: Transform = (file, api) => {
   const j = api.jscodeshift;
 
   const root = j(file.source);
-  const commonLabsSpecifiers: {importedName?: string; name: string}[] = [];
+  const commonLabsSpecifiers: {
+    importedName?: string;
+    name: string;
+  }[] = [];
   const foundImport: ASTPath<ImportDeclaration>[] = [];
 
   // First move specifiers from labs
@@ -33,13 +36,10 @@ const transform: Transform = (file, api) => {
     })
     .forEach(nodePath => {
       nodePath.value.specifiers = nodePath.value.specifiers?.filter(specifier => {
-        if (
-          specifier.type === 'ImportSpecifier' &&
-          !commonLabsSpecifiers.includes(specifier.imported.name)
-        ) {
+        if (specifier.type === 'ImportSpecifier') {
           if (
             specifier?.local?.name !== undefined &&
-            labsToTestingSpecifiers.includes(specifier?.local?.name)
+            specifiersToMove.includes(specifier?.local?.name)
           ) {
             commonLabsSpecifiers.push({
               importedName: specifier?.local?.name,
@@ -66,7 +66,6 @@ const transform: Transform = (file, api) => {
   };
   // add to existing import testing import
   if (existingTestingImports.length) {
-    console.log('in here');
     existingTestingImports.forEach(nodePath => {
       nodePath.value.specifiers = nodePath.value.specifiers?.concat(
         commonLabsSpecifiers.map(mapToSpecifiers)
