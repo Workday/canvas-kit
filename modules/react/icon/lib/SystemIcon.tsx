@@ -46,7 +46,7 @@ export interface SystemIconStyles {
 
 export interface SystemIconProps
   extends SystemIconStyles,
-    Omit<IconProps, 'src' | 'color' | 'type' | 'background'> {
+    Omit<IconProps, 'src' | 'color' | 'fill' | 'type' | 'background'> {
   /**
    * The icon to display from `@workday/canvas-system-icons-web`.
    */

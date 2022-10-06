@@ -33,7 +33,6 @@ export type BoxProps = BackgroundStyleProps &
 const omittedProps = [
   'display',
   'color',
-  'cx',
   'height',
   'overflow',
   'width',
