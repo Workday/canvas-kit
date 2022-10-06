@@ -2,11 +2,11 @@ import * as React from 'react';
 import {Flex, Box} from '@workday/canvas-kit-react/layout';
 import {PrimaryButton, SecondaryButton} from '@workday/canvas-kit-react/button';
 import {type} from '@workday/canvas-kit-react/tokens';
-import {useResizeObserver} from '@workday/canvas-kit-react/common';
-// eslint-disable-next-line workday-custom-rules/restricted-imports
-import {ResponsiveContextProvider} from '@workday/canvas-kit-react/layout/lib/utils/responsiveContext';
-// eslint-disable-next-line workday-custom-rules/restricted-imports
-import {useResponsiveStyles} from '@workday/canvas-kit-react/layout/lib/utils/useResponsiveContainerStyles';
+import {
+  useResizeObserver,
+  ResponsiveContextProvider,
+  useResponsiveContainerStyles,
+} from '@workday/canvas-kit-react/common';
 
 // temporary placeholder until type components are added to canvas-kit
 const H3 = props => (
@@ -35,7 +35,7 @@ export const FlexCardResProps = () => {
     },
   });
 
-  const resStyles = useResponsiveStyles(
+  const resStyles = useResponsiveContainerStyles(
     {
       card: {
         flexDirection: 'column',

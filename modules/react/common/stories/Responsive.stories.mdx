@@ -1,0 +1,312 @@
+import {Meta} from '@storybook/addon-docs';
+import {Box} from '@workday/canvas-kit-react/layout';
+//
+import {
+  useResizeObserver,
+  ResponsiveContextProvider,
+  useResponsiveStyles,
+} from '@workday/canvas-kit-react/common';
+import {Grid} from '@workday/canvas-kit-react/layout';
+
+<Meta title="Hooks and Utilities/Responsive Styling" component={Grid} />
+
+# Responsive Styling
+
+Responsive styling is an approach to web development or a set of best practices, used to create a
+layout that can respond to the device being used to view the content.
+
+You can read more about the history of
+[Responsive Design](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Responsive_Design).
+
+## Viewport and Container Based Responsive Styling
+
+We will take a look at Viewport and Container Based Responsive Styling, what they are and which to
+use.
+
+### Viewport Based Responsive Styling
+
+The viewport is the user's visible area of a web page and it varies with the device.
+
+We can use media queries to run a series of tests that will measure the screen size or resolution
+and apply CSS styles specifically to an element.
+
+An example of CSS media queries is below:
+
+```css
+@media screen and (min-width: 800px) {
+  .container {
+    margin: 1em 2em;
+  }
+}
+```
+
+### Container Based Responsive Styling
+
+Now, where we measured the user's viewport (user's visible area of a web page), we will do the same
+with Container Based Responsive Styling but, we will just be measuring the size of the container the
+element is in.
+
+Take the below example of a component:
+
+```tsx
+<Box maxWidth={1000}>Hello World</Box>
+```
+
+In the example, we see that there is a `maxWidth` set on the Box component of `1000`. This will set
+the maximum width of that element at `1000px`. What we can do with Container Based Responsive
+Styling is measure when that container's width reaches certain breakpoints
+`(i.e. 1440px, 1024px, 768px, 320px, 0)` and apply styles based on those breakpoints. If the
+container's width were to reach `768px`, we can apply styles to that breakpoint.
+
+### Viewport vs Container
+
+If you are measuring a user's viewport size, then you should be using Viewport Based Responsive
+Styling.
+
+If you only want to measure the size of a container, then you should be using Container Based
+Responsive Styling.
+
+We will go over Canvas Kit Utilities more below.
+
+### Canvas Kit Breakpoint Sizes
+
+In Canvas Kit, there are a set of breakpoints:
+
+| Zero  | Small   | Medium  | Large    | Extra Large |
+| ----- | ------- | ------- | -------- | ----------- |
+| > 0px | > 320px | > 768px | > 1024px | > 1440px    |
+
+> Zero: This is applied from 0 - 319px
+
+> Small: This is applied from 320px - 767px
+
+> Medium: This is applied from 768px - 1023px
+
+> Large: This is applied from 1024px - 1439px
+
+> Extra Large: This is applied from 1440px and up
+
+### Applying Viewport-Based Responsive Styling
+
+We have three utilities to apply viewport-based responsive styling.
+
+`up() | down() | between() | only()`
+
+Each has a specific role in applying viewport-based responsive styles.
+
+`up()` - Returns a media query above the `min-width` for the range of a given breakpoint. Given a
+`start` breakpoint key `("zero", "s", "m", "l", "xl")`, this function returns a media query (string)
+using a `min-width`. See example below.
+
+```ts
+import {useTheme} from '@workday/canvas-kit-react/common';
+import {space} from '@workday/canvas-kit-react/tokens';
+const theme = useTheme();
+const {up} = theme.canvas.breakpoints;
+const mediaQuery = up('l'); // Returns '@media (min-width: 1024px)'
+const styles = {
+  [mediaQuery]: {
+    padding: space.m,
+  },
+};
+```
+
+`down()` - Returns a media query below the `max-width` for the range of a given breakpoint. Given an
+`end` breakpoint key `("zero", "s", "m", "l", "xl")`, this function returns a media query (string)
+using a `max-width`.
+
+> **Note**: This function subtracts `0.5px` from the next breakpoint value to prevent collisions.
+> For example, `breakpoints.values.s`, has a `min-width` of `320px`, and the `max-width` is
+> `767.5px`). If the `xl` breakpoint is provided, this function returns a media query with only a
+> `min-width` of `0`, as seen in the second example below. See example below.
+
+```ts
+import {useTheme} from '@workday/canvas-kit-react/common';
+import {space} from '@workday/canvas-kit-react/tokens';
+const theme = useTheme();
+const {up} = theme.canvas.breakpoints;
+const mediaQuery = up('l'); // Returns '@media (min-width: 1024px)'
+const styles = {
+  [mediaQuery]: {
+    padding: space.m,
+  },
+};
+```
+
+This example uses the `xl` breakpoint and only adds a `min-width` of `0` to the media query.
+
+```ts
+import {useTheme} from '@workday/canvas-kit-react/common';
+import {space} from '@workday/canvas-kit-react/tokens';
+const theme = useTheme();
+const {down} = theme.canvas.breakpoints;
+const mediaQuery = down('xl'); // Returns '@media (min-width: 0)'
+const styles = {
+  [mediaQuery]: {
+    padding: space.m,
+  },
+};
+```
+
+`between()` - Returns a media query between two given breakpoints. Given `start` and `end`
+breakpoint keys ("zero", "s", "m", "l", "xl"), this function returns a media query (string) using a
+min-width and max-width.
+
+> **Note**: This function subtracts `0.5px` from the next breakpoint value to prevent collisions.
+> For example, `breakpoints.values.s`, has a `min-width` of `320px`, and the `max-width` is
+> `767.5px`).
+
+If the `xl` breakpoint is provided, this function returns a media query with only a `min-width`, as
+seen in the second example below.
+
+```ts
+import {useTheme} from '@workday/canvas-kit-react/common';
+import {space} from '@workday/canvas-kit-react/tokens';
+const theme = useTheme();
+const {between} = theme.canvas.breakpoints;
+// Returns '@media (min-width: 320px) and (max-width: 1023.5px)'
+const mediaQuery = between('s', 'm');
+const styles = {
+  [mediaQuery]: {
+    padding: space.s,
+  },
+};
+```
+
+This example uses `xl` as the `end` breakpoint and only adds a min-width to the media query.
+
+```ts
+import {useTheme} from '@workday/canvas-kit-react/common';
+import {space} from '@workday/canvas-kit-react/tokens';
+const theme = useTheme();
+const {between} = theme.canvas.breakpoints;
+const mediaQuery = between('m', 'xl'); // Returns '@media (min-width: 768px)'
+const styles = {
+  [mediaQuery]: {
+    padding: space.s,
+  },
+};
+```
+
+`only()` - Returns a media query with a `min-width` and `max-width` for a given breakpoint. Given a
+breakpoint key ("zero", "s", "m", "l", "xl"), this function returns a media query (string) using a
+`min-width` and `max-width`.
+
+> **Note**: This function subtracts `0.5px` from the next breakpoint value to prevent collisions.
+> For example, `breakpoints.values.s`, has a `min-width` of `320px`, and the `max-width` is
+> `767.5px`).
+
+If the `xl` breakpoint is provided, this function returns a media query with only a `min-width` of
+`1440px`, as seen in the second example below.
+
+```ts
+import {useTheme} from '@workday/canvas-kit-react/common';
+import {space} from '@workday/canvas-kit-react/tokens';
+
+const theme = useTheme();
+const {only} = theme.canvas.breakpoints;
+const mediaQuery = only('s'); // Returns '@media (min-width: 320px) and (max-width: 767.5px)'
+const styles = {
+  [mediaQuery]: {
+    padding: space.s,
+  },
+};
+```
+
+This example uses the `xl` breakpoint and only adds a `min-width` of `1440px` to the media query.
+
+```ts
+import {useTheme} from '@workday/canvas-kit-react/common';
+import {space} from '@workday/canvas-kit-react/tokens';
+
+const theme = useTheme();
+const {only} = theme.canvas.breakpoints;
+const mediaQuery = only('xl'); // Returns '@media (min-width: 1440px)'
+const styles = {
+  [mediaQuery]: {
+    padding: space.s,
+  },
+};
+```
+
+### Applying Container-Based Responsive Styling
+
+For container-based responsive styling, we utilities that will allow you to apply responsive styles
+at those breakpoints. There are four utilities/hooks:
+`useResizeObserver | ResponsiveContextProvider | useResponsiveContext | useResponsiveStyles`
+
+`useResizeObserver` - This is a hook that will provide the width of the container. This can used to
+measure container size as well.
+
+`ResponsiveContextProvider` - This React Context Provider that will accept the width of the
+container from `useResizeObserver`.
+
+`useResponsiveContext` - This hook subscribes to the `ResponsiveContextProvider` and will determine
+whether the current width provided from `useResizeObserver` is within a particular theme breakpoint.
+
+`useResponsiveStyles` - This is a hook that will allow you to create container-based responsive
+styles with objects (as you can see in the example below).
+
+In the example below, we are importing three of those utilities:
+`useResizeObserver | ResponsiveContextProvider | useResponsiveStyles`
+
+See example below:
+
+```tsx
+import {Flex, Box} from '@workday/canvas-kit-react/layout';
+import {
+  useResizeObserver,
+  ResponsiveContextProvider,
+  useResponsiveStyles,
+} from '@workday/canvas-kit-react/common';
+
+const ref = React.useRef(null);
+const [containerWidth, setWidth] = React.useState(0);
+
+useResizeObserver({
+  ref: ref,
+  onResize: data => {
+    setWidth(data.containerWidth || 0);
+  },
+});
+
+const containerResponsiveStyles = useResponsiveStyles(
+  {
+    flex: {
+      flexDirection: 'column',
+      padding: 'm',
+      depth: 1,
+      borderRadius: 'l',
+      zero: {
+        backgroundColor: 'Red',
+      },
+      s: {
+        backgroundColor: 'Orange',
+      },
+      m: {
+        backgroundColor: 'Yellow',
+      },
+      l: {
+        backgroundColor: 'Green',
+      },
+      xl: {
+        backgroundColor: 'Blue',
+      },
+    },
+    box: {
+      padding: 's',
+    },
+  },
+  containerWidth
+);
+
+return (
+  <ResponsiveContextProvider width={containerWidth}>
+    <Box ref={ref}>
+      <Flex {...containerResponsiveStyles.flex}>
+        <Box {...containerResponsiveStyles.box}>Hello World</Box>
+      </Flex>
+    </Box>
+  </ResponsiveContextProvider>
+);
+```

@@ -4,8 +4,8 @@ import type {
   FlexStyleProps
 } from "@workday/canvas-kit-react/layout";
 
-export const breakpointKeys = ["zero", "s", "m", "l", "xl"] as const;
-export type BreakpointKeys = typeof breakpointKeys[number];
+export const breakpointResKeys = ["zero", "s", "m", "l", "xl"] as const;
+export type BreakpointKeys = typeof breakpointResKeys[number];
 // TODO: export just all the style props
 type AllStyleProps = Omit<BoxProps, "children" | "as"> & FlexStyleProps;
 type ResponsiveCSSObject<T> = {
@@ -26,7 +26,7 @@ const isWithinBreakpoint = (width: number, min: number, max?: number) => {
   return false;
 };
 
-export function useResponsiveStyles<T extends ResponsiveCSSObject<T>>(
+export function useResponsiveContainerStyles<T extends ResponsiveCSSObject<T>>(
   styles: ResponsiveCSSObject<T>,
   width: number,
   theme = {}
@@ -42,9 +42,9 @@ export function useResponsiveStyles<T extends ResponsiveCSSObject<T>>(
   const responsiveStyles = {} as CSSObject<T>;
 
   function getStyles(key: BreakpointKeys) {
-    const breakpointSize = breakpointKeys.indexOf(key);
+    const breakpointSize = breakpointResKeys.indexOf(key);
     for (let i = 0; i <= breakpointSize; i++) {
-      const breakpointName = breakpointKeys[i];
+      const breakpointName = breakpointResKeys[i];
       Object.keys(styles).forEach((classname) => {
         const { zero, s, m, l, xl, ...base } = styles[classname as keyof T];
         const breakpointStyles =
