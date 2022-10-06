@@ -5,7 +5,6 @@ import {Grid, GridItem} from '@workday/canvas-kit-react/layout';
 import {GridLayout} from './examples/Grid/GridLayout';
 import {Basic} from './examples/Grid/Basic';
 import {GridLayoutInteractive} from './examples/Grid/GridLayoutInteractive';
-import {GridStyle, GridItemStyle} from './examples/PropTables.splitprops.tsx';
 
 <Meta title="Components/Containers/Layout/Grid" component={Grid} />
 
@@ -91,7 +90,7 @@ layouts.
 #### Usage
 
 ```tsx
-<Grid grid gridTemplateColumns="1fr 2fr 1fr" gridGap={space.s}>
+<Grid gridTemplateColumns="1fr 2fr 1fr" gridGap={space.s}>
   <div>Implicit grid item 1</div>
   <div>Implicit grid item 2</div>
   <div>Implicit grid item 3</div>
@@ -100,15 +99,11 @@ layouts.
 
 #### Props
 
-As previously mentioned, `Grid` is built on top of `Box` and has access to all its props, including
-[grid container properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout/Basic_Concepts_of_Grid_Layout#the_grid_container)
-through style props as well.
-
-<ArgsTable of={GridStyle} />
+`Grid` exposes [grid container style props](/getting-started/for-developers/resources/style-props/#grid) and `Box` style props.
 
 ### Grid.Item
 
-`Grid.Item` is a subcomponent of Grid. It has specific grid item style props that map to CSS Grid
+`Grid.Item` is a subcomponent of `Grid`. It is a `Box` component under the hood and exposes [grid item style props](/getting-started/for-developers/resources/style-props/#grid-item) that map to CSS Grid
 Item properties. This provides greater control over how child components render in your layout.
 
 #### Usage
@@ -125,4 +120,4 @@ Item properties. This provides greater control over how child components render 
 
 #### Props
 
-<ArgsTable of={GridItemStyle} />
+`Grid.Item` exposes [grid item style props](/getting-started/for-developers/resources/style-props/#grid-item) and `Box` style props.
