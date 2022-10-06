@@ -1,6 +1,6 @@
 import React from 'react';
 import {type} from '@workday/canvas-kit-react/tokens';
-import {StaticStates, styled} from '@workday/canvas-kit-react/common';
+import {StaticStates} from '@workday/canvas-kit-react/common';
 import {Box} from '@workday/canvas-kit-react/layout';
 import {ComponentStatesTable, permutateProps} from '@workday/canvas-kit-labs-react/common';
 import {withSnapshotsEnabled} from '../../../../../utils/storybook';
@@ -10,10 +10,6 @@ import {Container} from './utils';
 export default withSnapshotsEnabled({
   title: 'Testing/React/Buttons/Button/Hyperlink',
   component: Hyperlink,
-});
-
-const StyledLinkContainer = styled(Box)({
-  ...type.levels.subtext.large,
 });
 
 export const HyperlinkStates = () => (
@@ -39,11 +35,11 @@ export const HyperlinkStates = () => (
     >
       {(props: any) => (
         <Container blue={props.variant === 'inverse'}>
-          <StyledLinkContainer>
+          <Box {...type.levels.subtext.large}>
             <Box as="span" color={props.variant === 'inverse' ? 'frenchVanilla100' : undefined}>
               Here's a <Hyperlink {...props}>Link</Hyperlink> to something
             </Box>
-          </StyledLinkContainer>
+          </Box>
         </Container>
       )}
     </ComponentStatesTable>

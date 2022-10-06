@@ -49,5 +49,3 @@ export const Svg = createComponent('span')({
     );
   },
 });
-
-export default Svg;
