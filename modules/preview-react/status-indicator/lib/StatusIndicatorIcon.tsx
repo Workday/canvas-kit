@@ -20,9 +20,8 @@ export const StatusIndicatorIcon = createComponent('span')({
     return (
       <SystemIcon
         as={Element}
-        size={14}
+        size={20}
         role="img"
-        aria-label="add"
         ref={ref}
         icon={icon || plusIcon}
         {...elemProps}

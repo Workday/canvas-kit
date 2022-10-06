@@ -7,8 +7,8 @@ import {uploadCloudIcon} from '@workday/canvas-system-icons-web';
 export const Basic = () => {
   return (
     <StatusIndicator>
-      <StatusIndicator.Icon icon={uploadCloudIcon} />
       <StatusIndicator.Label>Lorem ipsum dolor</StatusIndicator.Label>
+      <StatusIndicator.Icon icon={uploadCloudIcon} />
     </StatusIndicator>
   );
 };
