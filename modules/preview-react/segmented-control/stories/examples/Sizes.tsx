@@ -11,7 +11,7 @@ export const Sizes = () => (
         Small
       </BodyText>
       <SegmentedControl size="small">
-        <SegmentedControl.List aria-label="Content view type" maxWidth="200px">
+        <SegmentedControl.List aria-label="Content view type">
           <SegmentedControl.Item data-id="table" icon={gridIcon}>
             Table
           </SegmentedControl.Item>
@@ -26,7 +26,7 @@ export const Sizes = () => (
         Medium
       </BodyText>
       <SegmentedControl size="medium">
-        <SegmentedControl.List aria-label="Content view type" maxWidth="250px">
+        <SegmentedControl.List aria-label="Content view type">
           <SegmentedControl.Item data-id="table" icon={gridIcon}>
             Table
           </SegmentedControl.Item>
@@ -41,7 +41,7 @@ export const Sizes = () => (
         Large
       </BodyText>
       <SegmentedControl size="large">
-        <SegmentedControl.List aria-label="Content view type" maxWidth="300px">
+        <SegmentedControl.List aria-label="Content view type">
           <SegmentedControl.Item data-id="table" icon={gridIcon}>
             Table
           </SegmentedControl.Item>

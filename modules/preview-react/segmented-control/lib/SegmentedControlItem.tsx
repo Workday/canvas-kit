@@ -113,25 +113,25 @@ const getPaddingStyles = (
 
   switch (size) {
     case 'large':
-      return icon ? `10px ${space.m} 10px 20px` : `0 ${space.m}`;
+      return icon ? `0 ${space.m} 0 20px` : `0 ${space.m}`;
 
     case 'medium':
-      return icon ? `6px 20px 6px ${space.s}` : `6px ${space.s}`;
+      return icon ? `0 20px 0 ${space.s}` : `0 ${space.s}`;
 
     case 'small':
-      return icon
-        ? `${space.xxxs} ${space.xs} ${space.xxxs} ${space.xxs}`
-        : `${space.xxxs} ${space.xs}`;
+      return icon ? `0 ${space.xs} 0 ${space.xxs}` : `0 ${space.xs}`;
 
     default:
-      return icon ? `6px 20px 6px ${space.s}` : `6px ${space.s}`;
+      return icon ? `0 20px 0 ${space.s}` : `0 ${space.s}`;
   }
 };
 
 const geButtonStyles = (size: ButtonSizes, children: React.ReactNode, icon?: CanvasSystemIcon) => {
+  const value = getMinWidthStyles(false, getButtonSize(size));
+
   return {
-    minWidth: getMinWidthStyles(children, getButtonSize(size)),
-    height: getMinWidthStyles(false, getButtonSize(size)),
+    minWidth: value,
+    height: value,
     padding: getPaddingStyles(children, size, icon),
   };
 };
@@ -139,7 +139,9 @@ const geButtonStyles = (size: ButtonSizes, children: React.ReactNode, icon?: Can
 const StyledButton = styled(BaseButton)<StyledType & ButtonContainerProps>(
   {
     borderRadius: borderRadius.m,
-    width: '100%',
+    overflow: 'visible',
+    // flex: '1 1 0',
+    // width: '100%',
     '&:disabled': {
       opacity: 1,
     },

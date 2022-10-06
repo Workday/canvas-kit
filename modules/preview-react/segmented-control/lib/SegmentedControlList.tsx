@@ -36,6 +36,7 @@ export const SegmentedControlList = createSubcomponent('div')({
   return (
     <Stack
       as={Element}
+      display="inline-flex"
       role="group"
       backgroundColor="soap200"
       border="1px solid transparent"
@@ -43,7 +44,6 @@ export const SegmentedControlList = createSubcomponent('div')({
       borderRadius="l"
       spacing="6px"
       padding="3px"
-      maxWidth="max-content"
       {...elemProps}
     >
       {useListRenderItems(model, children)}
