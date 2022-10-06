@@ -54,6 +54,7 @@
     "@workday/canvas-accent-icons-web": "^3.0.0",
     "@workday/canvas-kit-labs-react": "^7.3.15",
     "formik": "^2.2.9",
-    "yup": "^0.31.1"
+    "react-hook-form": "7.36.1",
+    "yup": "^0.32.11"
   }
 }

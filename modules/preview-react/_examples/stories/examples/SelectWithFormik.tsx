@@ -6,14 +6,19 @@ import {
   useFormFieldInput,
   useFormFieldModel,
 } from '@workday/canvas-kit-preview-react/form-field';
+import {VStack} from '@workday/canvas-kit-react/layout';
+import {PrimaryButton} from '@workday/canvas-kit-react/button';
 
 export const SelectWithFormik = () => {
   const formik = useFormik({
     initialValues: {
       selectedBook: '',
     },
-    onSubmit: data => {
-      console.log(data);
+    onSubmit: values => {
+      // Send data to server
+      setTimeout(() => {
+        alert(JSON.stringify(values, null, 2));
+      }, 0);
     },
   });
 
@@ -21,18 +26,21 @@ export const SelectWithFormik = () => {
   const formFieldInputProps = useFormFieldInput(model);
 
   return (
-    <form onSubmit={formik.handleSubmit}>
-      <FormField orientation="vertical" alignItems="stretch">
-        <FormField.Label>Choose a book</FormField.Label>
-        <Select
-          name="selectedBook"
-          options={bookList}
-          onChange={event => formik.setFieldValue('selectedBook', event.currentTarget.value)}
-          value={formik.values.selectedBook}
-          grow
-          {...formFieldInputProps}
-        />
-      </FormField>
+    <form onSubmit={formik.handleSubmit} action=".">
+      <VStack spacing="xs" alignItems="flex-start">
+        <FormField orientation="vertical" alignSelf="stretch" alignItems="normal">
+          <FormField.Label>Choose a book</FormField.Label>
+          <Select
+            name="selectedBook"
+            options={bookList}
+            onChange={event => formik.setFieldValue('selectedBook', event.currentTarget.value)}
+            value={formik.values.selectedBook}
+            grow
+            {...formFieldInputProps}
+          />
+        </FormField>
+        <PrimaryButton type="submit">Submit</PrimaryButton>
+      </VStack>
     </form>
   );
 };
