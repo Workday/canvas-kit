@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v7.3.16](https://github.com/Workday/canvas-kit/releases/tag/v7.3.16) (2022-10-06)
+
+### Documentation
+
+- docs: Add uncontrolled input example using React Hook Form ([#1820](https://github.com/Workday/canvas-kit/pull/1820)) ([@vibdev](https://github.com/vibdev))
+
+
 ## [v7.3.15](https://github.com/Workday/canvas-kit/releases/tag/v7.3.15) (2022-10-04)
 
 ### Components
