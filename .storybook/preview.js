@@ -62,4 +62,8 @@ export const parameters = {
       defaultValue: defaultCanvasTheme,
     },
   },
+  // Make stories available to our internal code sandbox tool
+  tesseract: {
+    enable: true 
+  }
 };
