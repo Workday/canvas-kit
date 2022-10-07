@@ -1,31 +1,36 @@
 import React from 'react';
 
 import {Modal} from '@workday/canvas-kit-react/modal';
-import {DeleteButton} from '@workday/canvas-kit-react/button';
+import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {HStack, Box} from '@workday/canvas-kit-react/layout';
 
 export const Basic = () => {
-  const handleDelete = () => {
-    console.log('Deleted item');
+  const handleAcknowledge = () => {
+    console.log('License Acknowledged');
+  };
+
+  const handleCancel = () => {
+    console.log('Cancel clicked');
   };
 
   return (
     <Modal>
-      <Modal.Target as={DeleteButton}>Delete Item</Modal.Target>
+      <Modal.Target as={PrimaryButton}>Open License</Modal.Target>
       <Modal.Overlay>
         <Modal.Card>
           <Modal.CloseIcon aria-label="Close" />
-          <Modal.Heading marginBottom={0}>Delete Item</Modal.Heading>
+          <Modal.Heading>MIT License</Modal.Heading>
           <Modal.Body>
             <Box as="p" marginY="zero">
-              Are you sure you want to delete the item?
+              Permission is hereby granted, free of charge, to any person obtaining a copy of this
+              software and associated documentation files (the "Software").
             </Box>
           </Modal.Body>
           <HStack spacing="s" padding="xxs" marginTop="xxs">
-            <Modal.CloseButton as={DeleteButton} onClick={handleDelete}>
-              Delete
+            <Modal.CloseButton as={PrimaryButton} onClick={handleAcknowledge}>
+              Acknowledge
             </Modal.CloseButton>
-            <Modal.CloseButton>Cancel</Modal.CloseButton>
+            <Modal.CloseButton onClick={handleCancel}>Cancel</Modal.CloseButton>
           </HStack>
         </Modal.Card>
       </Modal.Overlay>
