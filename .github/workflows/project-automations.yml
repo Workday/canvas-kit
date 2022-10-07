@@ -6,7 +6,7 @@ on:
       - reopened
       - closed
       - labeled
-  pull_request:
+  pull_request_target:
     types:
       - opened
 
@@ -19,6 +19,9 @@ env:
   in_progress: 🏗 In progress
   in_review: 👀 In review
   done: ✅ Done
+  gh_project_token: ${{ secrets.CANVAS_BOARD_TOKEN }}
+  gh_organization: Workday
+  gh_project_id: 4
 
 jobs:
   issue_opened_or_reopened:
@@ -27,11 +30,11 @@ jobs:
     if: github.event_name == 'issues' && (github.event.action == 'opened' || github.event.action == 'reopened')
     steps:
       - name: Move issue to ${{ env.new }}
-        uses: leonsteinhaeuser/project-beta-automations@v1.3.0
+        uses: leonsteinhaeuser/project-beta-automations@v2.0.1
         with:
-          gh_token: ${{ secrets.CANVAS_BOARD_TOKEN }}
-          organization: Workday
-          project_id: 4
+          gh_token: ${{ env.gh_project_token }}
+          organization: ${{ env.gh_organization }}
+          project_id: ${{ env.gh_project_id }}
           resource_node_id: ${{ github.event.issue.node_id }}
           status_value: ${{ env.new }}
   issue_closed:
@@ -40,11 +43,11 @@ jobs:
     if: github.event_name == 'issues' && github.event.action == 'closed'
     steps:
       - name: Moved issue to ${{ env.done }}
-        uses: leonsteinhaeuser/project-beta-automations@v1.3.0
+        uses: leonsteinhaeuser/project-beta-automations@v2.0.1
         with:
-          gh_token: ${{ secrets.CANVAS_BOARD_TOKEN }}
-          organization: Workday
-          project_id: 4
+          gh_token: ${{ env.gh_project_token }}
+          organization: ${{ env.gh_organization }}
+          project_id: ${{ env.gh_project_id }}
           resource_node_id: ${{ github.event.issue.node_id }}
           status_value: ${{ env.done }}
   issue_labeled:
@@ -54,43 +57,59 @@ jobs:
     steps:
       - name: Add Issue to Contribution Board
         if: github.event.label.name == 'good first issue' || github.event.label.name == 'help wanted'
-        uses: leonsteinhaeuser/project-beta-automations@v1.3.0
+        uses: leonsteinhaeuser/project-beta-automations@v2.0.1
         with:
-          gh_token: ${{ secrets.CANVAS_BOARD_TOKEN }}
-          organization: Workday
-          project_id: 4
+          gh_token: ${{ env.gh_project_token }}
+          organization: ${{ env.gh_organization }}
+          project_id: ${{ env.gh_project_id }}
           resource_node_id: ${{ github.event.issue.node_id }}
           custom_field_values: '[{\"name\": \"Contributions\",\"type\": \"single_select\",\"value\": \"Yes\"}]'
       - name: Move Issue to ${{ env.in_review }}
         if: github.event.label.name == 'ready for review'
-        uses: leonsteinhaeuser/project-beta-automations@v1.3.0
+        uses: leonsteinhaeuser/project-beta-automations@v2.0.1
         with:
-          gh_token: ${{ secrets.CANVAS_BOARD_TOKEN }}
-          organization: Workday
-          project_id: 4
+          gh_token: ${{ env.gh_project_token }}
+          organization: ${{ env.gh_organization }}
+          project_id: ${{ env.gh_project_id }}
           resource_node_id: $${{ github.event.issue.node_id }}
           status_value: ${{ env.in_review }}
       - name: Add Issue type
         if: github.event.label.name == 'bug'
-        uses: leonsteinhaeuser/project-beta-automations@v1.3.0
+        uses: leonsteinhaeuser/project-beta-automations@v2.0.1
         with:
-          gh_token: ${{ secrets.CANVAS_BOARD_TOKEN }}
-          organization: Workday
-          project_id: 4
+          gh_token: ${{ env.gh_project_token }}
+          organization: ${{ env.gh_organization }}
+          project_id: ${{ env.gh_project_id }}
           resource_node_id: ${{ github.event.issue.node_id }}
           custom_field_values: '[{\"name\": \"Type\",\"type\": \"single_select\",\"value\": \"🐛 Bug\"}]'
+        if: github.event.label.name == 'epic'
+        uses: leonsteinhaeuser/project-beta-automations@v2.0.1
+        with:
+          gh_token: ${{ env.gh_project_token }}
+          organization: ${{ env.gh_organization }}
+          project_id: ${{ env.gh_project_id }}
+          resource_node_id: ${{ github.event.issue.node_id }}
+          custom_field_values: '[{\"name\": \"Type\",\"type\": \"single_select\",\"value\": \"⚓️ Epic\"}]'
+        if: github.event.label.name == 'spike'
+        uses: leonsteinhaeuser/project-beta-automations@v2.0.1
+        with:
+          gh_token: ${{ env.gh_project_token }}
+          organization: ${{ env.gh_organization }}
+          project_id: ${{ env.gh_project_id }}
+          resource_node_id: ${{ github.event.issue.node_id }}
+          custom_field_values: '[{\"name\": \"Type\",\"type\": \"single_select\",\"value\": \"🏐 Spike\"}]'
   pr_opened:
     name: pr_opened
     runs-on: ubuntu-latest
     if: github.event_name == 'pull_request' && github.event.action == 'opened'
     steps:
       - name: Move release PR to ${{ env.in_review }}
-        if: startsWith(github.head_ref, 'merge/prerelease/minor-into-prerelease/major')
-        uses: leonsteinhaeuser/project-beta-automations@v1.3.0
+        if: startsWith(github.head_ref, 'merge/prerelease/minor-into-prerelease/major') || startsWith(github.head_ref, 'merge/master-into-prerelease/minor') || startsWith(github.head_ref, 'dependabot/**')
+        uses: leonsteinhaeuser/project-beta-automations@v2.0.1
         with:
-          gh_token: ${{ secrets.CANVAS_BOARD_TOKEN }}
-          organization: Workday
-          project_id: 4
+          gh_token: ${{ env.gh_project_token }}
+          organization: ${{ env.gh_organization }}
+          project_id: ${{ env.gh_project_id }}
           resource_node_id: ${{ github.event.pull_request.node_id }}
           status_value: ${{ env.in_review }}
           custom_field_values: '[{\"name\": \"Priority\",\"type\": \"single_select\",\"value\": \"🌋 Urgent\"}, {\"name\": \"Sprint\",\"type\": \"iteration\",\"value\": \"@current\"}]'
