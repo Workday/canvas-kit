@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v7.3.14](https://github.com/Workday/canvas-kit/releases/tag/v7.3.14) (2022-10-04)
+
+### Documentation
+
+- docs: Update Modal examples ([#1621](https://github.com/Workday/canvas-kit/pull/1621)) ([@emroller16](https://github.com/emroller16), [@jamesfan](https://github.com/jamesfan))
+
+### Infrastruture
+
+- ci: Close related issues with pull requests ([#1817](https://github.com/Workday/canvas-kit/pull/1817)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v7.3.13](https://github.com/Workday/canvas-kit/releases/tag/v7.3.13) (2022-09-28)
 
 ### Tests
