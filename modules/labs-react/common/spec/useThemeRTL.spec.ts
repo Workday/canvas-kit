@@ -164,7 +164,7 @@ describe('styles', () => {
         const {result} = renderHook(() => useThemeRTL());
         const cssProp = result.current.themeRTL(style);
 
-        expect((cssProp['&.hover'] as CSSObject).paddingRight).toEqual(expectedPadding);
+        expect((cssProp['&:hover'] as CSSObject).paddingRight).toEqual(expectedPadding);
       });
     });
   });
