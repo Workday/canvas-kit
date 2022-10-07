@@ -87,7 +87,7 @@ export const useReturnFocus = createElemPropsHook(usePopupModel)(model => {
       return;
     }
     // capture the element here. The refs will be null by the time the cleanup function is called
-    const element = (model.state.returnFocusRef || model.state.targetRef).current as HTMLElement;
+    const element = (model.state.returnFocusRef || model.state.targetRef).current as HTMLElement | null;
     document.addEventListener('mousedown', onMouseDown, true);
     document.addEventListener('mouseup', onMouseUp, true);
     document.addEventListener('keydown', onKeyDown, true);
@@ -98,6 +98,9 @@ export const useReturnFocus = createElemPropsHook(usePopupModel)(model => {
       document.removeEventListener('mouseup', onMouseUp, true);
       document.removeEventListener('keydown', onKeyDown, true);
       document.removeEventListener('keyup', onKeyUp, true);
+      if (!element) {
+        return;
+      }
       const scrollParent = getScrollParent(element);
       const scrollParentRect = scrollParent.getBoundingClientRect();
       const elementRect = element.getBoundingClientRect();
