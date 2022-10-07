@@ -78,5 +78,3 @@ export const SegmentedControl = createComponent('div')({
     Button: SegmentedControlButton,
   },
 });
-
-export default SegmentedControl;

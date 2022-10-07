@@ -1,31 +1,24 @@
-import {
-  PropertyAlignItems,
-  PropertyAlignContent,
-  PropertyJustifyItems,
-  PropertyJustifyContent,
-  PropertyFlexWrap,
-  PropertyFlexDirection,
-} from './types';
+import {Property} from 'csstype';
 
 /** style props to for flexbox container properties */
 export type FlexStyleProps = {
   /** sets `align-items` property */
-  alignItems?: PropertyAlignItems;
+  alignItems?: Property.AlignItems;
   /** sets `align-content` property */
-  alignContent?: PropertyAlignContent;
+  alignContent?: Property.AlignContent;
   /**
    * sets `display` property
    * @default 'flex'
    * */
   display?: 'flex' | 'inline-flex';
   /** sets `justify-items` property */
-  justifyItems?: PropertyJustifyItems;
+  justifyItems?: Property.JustifyItems;
   /** sets `justify-content` property */
-  justifyContent?: PropertyJustifyContent;
+  justifyContent?: Property.JustifyContent;
   /** sets `flex-wrap` property */
-  flexWrap?: PropertyFlexWrap;
+  flexWrap?: Property.FlexWrap;
   /** sets `flex-direction` property */
-  flexDirection?: PropertyFlexDirection;
+  flexDirection?: Property.FlexDirection;
 };
 
 const flexProps = {

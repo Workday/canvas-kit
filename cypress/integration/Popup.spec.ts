@@ -368,7 +368,7 @@ describe('Popup', () => {
 
     context('when the "Delete Item" button is clicked', () => {
       beforeEach(() => {
-        cy.findByRole('button', {name: 'Delete Item'}).click();
+        cy.findByRole('button', {name: 'Delete Item'}).realClick();
       });
 
       it('should show the popup', () => {
@@ -379,7 +379,7 @@ describe('Popup', () => {
         beforeEach(() => {
           cy.findByRole('button', {name: 'Delete'})
             .focus()
-            .tab();
+            .realPress('Tab');
         });
 
         it('should hide the popup', () => {

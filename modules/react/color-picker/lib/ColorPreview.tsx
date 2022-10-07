@@ -1,5 +1,5 @@
 import * as React from 'react';
-import ColorInput from './ColorInput';
+import {ColorInput} from './ColorInput';
 import {createComponent, StyledType} from '@workday/canvas-kit-react/common';
 import {TextInputProps} from '@workday/canvas-kit-react/text-input';
 import styled from '@emotion/styled';
@@ -36,5 +36,3 @@ export const ColorPreview = createComponent('input')({
     />
   ),
 });
-
-export default ColorPreview;

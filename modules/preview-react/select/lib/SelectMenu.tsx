@@ -223,7 +223,7 @@ const generatePopperOptions = (
   };
 };
 
-const SelectMenu = ({
+export const SelectMenu = ({
   buttonRef,
   children,
   error,
@@ -294,5 +294,3 @@ const SelectMenu = ({
     </Popper>
   );
 };
-
-export default SelectMenu;
