@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v7.3.17](https://github.com/Workday/canvas-kit/releases/tag/v7.3.17) (2022-10-07)
+
+### Components
+
+- fix: Error handling to fix TypeError bug on models used in responsive modals/popups ([#1831](https://github.com/Workday/canvas-kit/pull/1831)) ([@ahayes91](https://github.com/ahayes91))
+
+### Infrastructure
+
+- ci: Add token to close-related-issues workflow ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v7.3.16](https://github.com/Workday/canvas-kit/releases/tag/v7.3.16) (2022-10-06)
 
 ### Documentation
