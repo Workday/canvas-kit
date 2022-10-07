@@ -24,6 +24,7 @@ import {
 } from '@workday/canvas-kit-react/button';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {useSegmentedControlModel} from './useSegmentedControlModel';
+import {Text} from '@workday/canvas-kit-react/text';
 
 export interface ItemProps extends ButtonContainerProps {
   /**
@@ -49,7 +50,7 @@ export interface ItemProps extends ButtonContainerProps {
   id?: string;
   /**
    * Part of the ARIA specification for buttons. Lets screen readers know which button is active. This
-   * should either be `true` or `undefined` and never `false`. This is automatically set by the
+   * should either be `true` or `false`. This is automatically set by the
    * component and should only be used in advanced cases.
    */
   'aria-pressed'?: boolean;
@@ -57,7 +58,9 @@ export interface ItemProps extends ButtonContainerProps {
    * The icon of the button.
    */
   icon?: CanvasSystemIcon;
-
+  /**
+   * Tooltip Props
+   */
   tooltipProps?: Omit<TooltipProps, 'children'>;
 }
 
@@ -127,11 +130,13 @@ const getPaddingStyles = (
 };
 
 const geButtonStyles = (size: ButtonSizes, children: React.ReactNode, icon?: CanvasSystemIcon) => {
-  const value = getMinWidthStyles(false, getButtonSize(size));
+  const buttonSize = getButtonSize(size);
+  const minWidthValue = getMinWidthStyles(children, children ? size : buttonSize);
 
   return {
-    minWidth: value,
-    height: value,
+    height: getMinWidthStyles(false, buttonSize),
+    minWidth: minWidthValue,
+    flex: `1 1 ${minWidthValue}`,
     padding: getPaddingStyles(children, size, icon),
   };
 };
@@ -140,8 +145,7 @@ const StyledButton = styled(BaseButton)<StyledType & ButtonContainerProps>(
   {
     borderRadius: borderRadius.m,
     overflow: 'visible',
-    // flex: '1 1 0',
-    // width: '100%',
+    whiteSpace: 'nowrap',
     '&:disabled': {
       opacity: 1,
     },
@@ -156,13 +160,6 @@ const StyledButton = styled(BaseButton)<StyledType & ButtonContainerProps>(
   })
 );
 
-const Container = ({tooltipProps, children}: WrapProps) =>
-  tooltipProps ? (
-    <Tooltip title={tooltipProps.title}>{children}</Tooltip>
-  ) : (
-    <React.Fragment>{children}</React.Fragment>
-  );
-
 const useSegmentedControlItem = composeHooks(
   useListItemSelect,
   useListItemRegister,
@@ -171,10 +168,18 @@ const useSegmentedControlItem = composeHooks(
       const name = elemProps['data-id'] || '';
       const id = `${state.id}-${name}`;
       const selected = !!name && isSelected(name, state);
+
       return state.disabled ? {id, disabled: true} : {id, 'aria-pressed': selected};
     }
   )
 );
+
+const Container = ({tooltipProps, children}: WrapProps) =>
+  tooltipProps ? (
+    <Tooltip title={tooltipProps.title}>{children}</Tooltip>
+  ) : (
+    <React.Fragment>{children}</React.Fragment>
+  );
 
 export const SegmentedControlItem = createSubcomponent('button')({
   displayName: 'SegmentedControl.Item',
@@ -190,8 +195,6 @@ export const SegmentedControlItem = createSubcomponent('button')({
         as={Element}
         colors={getIconButtonColors(elemProps['aria-pressed'])}
         size={size}
-        {...textStyles}
-        fontWeight="bold"
         {...geButtonStyles(size, children, icon)}
         {...elemProps}
       >
@@ -203,7 +206,11 @@ export const SegmentedControlItem = createSubcomponent('button')({
             iconPosition="start"
           />
         )}
-        {children && <BaseButton.Label textAlign="left">{children}</BaseButton.Label>}
+        {children && (
+          <Text {...textStyles} fontWeight="bold" textAlign="left">
+            {children}
+          </Text>
+        )}
       </StyledButton>
     </Container>
   );

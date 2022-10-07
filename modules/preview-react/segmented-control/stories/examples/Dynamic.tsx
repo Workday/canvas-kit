@@ -18,7 +18,7 @@ export const Dynamic = () => {
       {id: 'table', icon: gridIcon, label: 'Table'},
       {id: 'list', icon: listViewIcon, label: 'List'},
       {id: 'detail', icon: listDetailIcon, label: 'Detail'},
-      {id: 'diagram', icon: pieChartIcon, label: 'Diagram'},
+      {id: 'diagram', icon: pieChartIcon, label: 'Charts'},
     ],
     size: 'small',
     initialValue: viewType,
