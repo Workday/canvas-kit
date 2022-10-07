@@ -1,0 +1,39 @@
+import {Meta} from '@storybook/addon-docs';
+
+import {LabelTextExample as LabelText} from './examples/LabelText';
+
+import {LabelComponent} from './PropTables.splitprops.tsx';
+
+<Meta title="Components/Text/React" />
+
+# Canvas Kit React Label Text
+
+`LabelText` is a `label` element build based on the top of `Text` component with added ability to
+add a cursor or disabled style.
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-react
+```
+
+## Usage
+
+### Basic Example
+
+`LabelText` is a `label` element build based on the top of `Text` component with added ability to
+add a cursor or disabled style.
+
+```tsx
+<LabelText cursor="pointer" disabled={true}>
+  Text here...
+</LabelText>
+```
+
+<ExampleCodeBlock code={LabelText} />
+
+## Props
+
+In addition to `Text` component props, `LabelText` has the following props:
+
+<ArgsTable of={LabelComponent} />

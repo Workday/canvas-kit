@@ -1,7 +1,7 @@
 import React from 'react';
 import {LabelText} from '@workday/canvas-kit-react/text';
 
-export const Label = () => (
+export const LabelTextExample = () => (
   <>
     <LabelText marginBottom="s">Label</LabelText>
     <LabelText cursor="pointer" marginBottom="s">

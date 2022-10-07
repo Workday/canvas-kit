@@ -1,15 +1,14 @@
 import {Meta} from '@storybook/addon-docs';
 
 import {Basic as BasicText} from './examples/Text';
-import {Label} from './examples/Label';
 import {BodyText} from './examples/BodyText';
 import {Heading} from './examples/Heading';
 import {Subtext} from './examples/Subtext';
 import {Title} from './examples/Title';
 
-import {TextComponent, LabelComponent, TypeLevelComponent} from './PropTables.splitprops.tsx';
+import {TextComponent, TypeLevelComponent} from './PropTables.splitprops.tsx';
 
-<Meta title="Preview/Text/React" />
+<Meta title="Components/Text/React" />
 
 # Canvas Kit React Text
 
@@ -49,27 +48,6 @@ As previously mentioned, `Text` is built on top of `Box` and has access to all i
 addition `Text` has its own props:
 
 <ArgsTable of={TextComponent} />
-
-## LabelText
-
-`LabelText` is a `label` element build based on the top of `Text` component with added ability to
-add a cursor or disabled style.
-
-### Usage
-
-```tsx
-<LabelText cursor="pointer" disabled={true}>
-  Text here...
-</LabelText>
-```
-
-<ExampleCodeBlock code={Label} />
-
-### LabelText Props
-
-In addition to `Text` component props, `LabelText` has the following props:
-
-<ArgsTable of={LabelComponent} />
 
 ## Type Level Components
 
