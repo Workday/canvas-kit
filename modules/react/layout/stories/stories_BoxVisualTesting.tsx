@@ -2,7 +2,7 @@ import React from 'react';
 
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
 import {Box} from '@workday/canvas-kit-react/layout';
-import {ContentDirection} from '@workday/canvas-kit-react/common';
+import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
 import {ComponentStatesTable} from '@workday/canvas-kit-react/testing';
 
 export default withSnapshotsEnabled({
@@ -59,7 +59,11 @@ export const BoxStates = () => {
         ]}
       >
         {props => {
-          return <Box {...props}>Box</Box>;
+          return (
+            <CanvasProvider theme={props.theme}>
+              <Box {...props}>Box</Box>
+            </CanvasProvider>
+          );
         }}
       </ComponentStatesTable>
     </>
