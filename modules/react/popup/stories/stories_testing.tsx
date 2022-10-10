@@ -1,6 +1,8 @@
 import * as React from 'react';
 import ReactDOM from 'react-dom';
 
+import {TextInput} from '@workday/canvas-kit-react/text-input';
+import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 import {DeleteButton, SecondaryButton, TertiaryButton} from '@workday/canvas-kit-react/button';
 import {useMount} from '@workday/canvas-kit-react/common';
@@ -307,7 +309,6 @@ export const PopupWithBodyScroll = () => {
     </Popup>
   );
 };
-
 export const TooltipReturnFocus = () => {
   const model = usePopupModel();
 
@@ -329,5 +330,48 @@ export const TooltipReturnFocus = () => {
         </Popup.Card>
       </Popup.Popper>
     </Popup>
+  );
+};
+
+export const ReturnFocusTest = () => {
+  const model = usePopupModel();
+
+  useCloseOnOutsideClick(model);
+  useCloseOnEscape(model);
+  useInitialFocus(model);
+  useReturnFocus(model);
+
+  return (
+    <div
+      style={{width: 400, height: 400, overflow: 'scroll', padding: 4}}
+      data-testid="scroll-area"
+    >
+      <div style={{width: 950}}>
+        <p style={{marginBottom: 400}}>Scroll down</p>
+        <p>Scroll right and click on the button</p>
+        <Popup model={model}>
+          <FormField label="Name" style={{marginLeft: 400}}>
+            <TextInput />
+          </FormField>
+          <Popup.Target style={{marginBottom: 400, marginLeft: 410}} data-testid="target">
+            Open Popup
+          </Popup.Target>
+          <Popup.Popper>
+            <Popup.Card>
+              <Popup.CloseIcon aria-label="Close" />
+              <Popup.Body>
+                <p>The "Open Popup" button should not receive focus if:</p>
+                <ul>
+                  <li>You click on the input</li>
+                  <li>
+                    You scroll the container so that less than half of the "Open Popup" is showing
+                  </li>
+                </ul>
+              </Popup.Body>
+            </Popup.Card>
+          </Popup.Popper>
+        </Popup>
+      </div>
+    </div>
   );
 };
