@@ -4,10 +4,11 @@ import {
   createSubcomponent,
   ExtractProps,
   createElemPropsHook,
+  composeHooks,
 } from '@workday/canvas-kit-react/common';
 import {Stack} from '@workday/canvas-kit-react/layout';
-import {useListRenderItems} from '@workday/canvas-kit-react/collection';
-import {useSegmentedControlModel} from './useSegmentedControlModel';
+import {useListRenderItems, useOverflowListMeasure} from '@workday/canvas-kit-react/collection';
+import {useSegmentedControlModel} from './hooks/useSegmentedControlModel';
 
 export interface SegmentedControlListProps<T = any>
   extends Omit<Partial<ExtractProps<typeof Stack, never>>, 'children'> {
@@ -15,17 +16,19 @@ export interface SegmentedControlListProps<T = any>
   children: ((item: T) => React.ReactNode) | React.ReactNode;
 }
 
-const useSegmentedControlList = createElemPropsHook(useSegmentedControlModel)(
-  ({state: {orientation, disabled, items}}) => {
-    return {
-      // sets verrtical direction only for icon only variant
-      flexDirection:
-        items.every(item => !item.textValue) && orientation === 'vertical' ? 'column' : 'row',
-      style: {
-        opacity: disabled ? 0.4 : 1,
-      },
-    };
-  }
+const useSegmentedControlList = composeHooks(
+  useOverflowListMeasure,
+  createElemPropsHook(useSegmentedControlModel)(
+    ({state: {orientation, disabled, isIconOnlyVariant}}) => {
+      return {
+        // sets verrtical direction only for icon only variant
+        flexDirection: isIconOnlyVariant && orientation === 'vertical' ? 'column' : 'row',
+        style: {
+          opacity: disabled ? 0.4 : 1,
+        },
+      };
+    }
+  )
 );
 
 export const SegmentedControlList = createSubcomponent('div')({

@@ -22,7 +22,7 @@ export const Vertical = () => (
         tooltipProps={{title: 'Detail'}}
       />
       <SegmentedControl.Item
-        data-id="diagrams"
+        data-id="diagram"
         icon={pieChartIcon}
         tooltipProps={{title: 'Diagram'}}
       />

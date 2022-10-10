@@ -1,2 +1,2 @@
 export * from './lib/SegmentedControl';
-export * from './lib/useSegmentedControlModel';
+export * from './lib/hooks/useSegmentedControlModel';

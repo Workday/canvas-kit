@@ -1,20 +1,8 @@
 import * as React from 'react';
 
 import {colors, borderRadius, type, space} from '@workday/canvas-kit-react/tokens';
-import {
-  createElemPropsHook,
-  composeHooks,
-  createSubcomponent,
-  styled,
-  StyledType,
-  useIsRTL,
-} from '@workday/canvas-kit-react/common';
+import {createSubcomponent, styled, StyledType, useIsRTL} from '@workday/canvas-kit-react/common';
 import {Tooltip, TooltipProps} from '@workday/canvas-kit-react/tooltip';
-import {
-  useListItemRegister,
-  isSelected,
-  useListItemSelect,
-} from '@workday/canvas-kit-react/collection';
 import {
   BaseButton,
   ButtonContainerProps,
@@ -23,8 +11,9 @@ import {
   getMinWidthStyles,
 } from '@workday/canvas-kit-react/button';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {useSegmentedControlModel} from './useSegmentedControlModel';
+import {useSegmentedControlModel} from './hooks/useSegmentedControlModel';
 import {Text} from '@workday/canvas-kit-react/text';
+import {useSegmentedControlItem} from './hooks/useSegmentedControlItem';
 
 export interface ItemProps extends ButtonContainerProps {
   /**
@@ -136,7 +125,6 @@ const geButtonStyles = (size: ButtonSizes, children: React.ReactNode, icon?: Can
   return {
     height: getMinWidthStyles(false, buttonSize),
     minWidth: minWidthValue,
-    flex: `1 1 ${minWidthValue}`,
     padding: getPaddingStyles(children, size, icon),
   };
 };
@@ -144,8 +132,6 @@ const geButtonStyles = (size: ButtonSizes, children: React.ReactNode, icon?: Can
 const StyledButton = styled(BaseButton)<StyledType & ButtonContainerProps>(
   {
     borderRadius: borderRadius.m,
-    overflow: 'visible',
-    whiteSpace: 'nowrap',
     '&:disabled': {
       opacity: 1,
     },
@@ -158,20 +144,6 @@ const StyledButton = styled(BaseButton)<StyledType & ButtonContainerProps>(
       },
     },
   })
-);
-
-const useSegmentedControlItem = composeHooks(
-  useListItemSelect,
-  useListItemRegister,
-  createElemPropsHook(useSegmentedControlModel)(
-    ({state}, _?: React.Ref<HTMLButtonElement>, elemProps: {'data-id'?: string} = {}) => {
-      const name = elemProps['data-id'] || '';
-      const id = `${state.id}-${name}`;
-      const selected = !!name && isSelected(name, state);
-
-      return state.disabled ? {id, disabled: true} : {id, 'aria-pressed': selected};
-    }
-  )
 );
 
 const Container = ({tooltipProps, children}: WrapProps) =>
