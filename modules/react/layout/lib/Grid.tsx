@@ -4,10 +4,9 @@ import {createComponent, StyledType} from '@workday/canvas-kit-react/common';
 import {Box, BoxProps} from './Box';
 
 import {grid, GridStyleProps} from './utils/grid';
-import {GridItemStyleProps} from './utils/gridItem';
 
 export type GridProps = BoxProps & GridStyleProps;
-export type GridItemProps = BoxProps & GridItemStyleProps;
+export type GridItemProps = BoxProps;
 
 const StyledGrid = styled(Box)<StyledType & GridProps>(
   {
@@ -30,11 +29,11 @@ const GridItem = createComponent('div')({
 /**
  * `Grid` is a two-dimensional layout system for the web. It lets you lay content out in rows and columns.
  * It is highly flexible, and can be used on its own or to build other components.
+ * `Grid` is built on top of `Box` and has access to all `BoxProps`.
  *
  * @example
- * ```
+ * ```tsx
  * import { Grid } from '@workday/canvas-kit-react/layout';
- * `Grid` is built on top of `Box` and has access to all `BoxProps`.
  *
  * interface CardProps extends GridProps {
  *   // card-specific props
