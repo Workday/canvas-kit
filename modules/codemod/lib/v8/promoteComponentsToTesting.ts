@@ -14,7 +14,7 @@ const specifiersToMove = [
 
 // 1. Gather all import specifiers from @workday/canvas-kit-labs-react/common & @workday/canvas-kit-react/common
 // 2. Filter through all imports from @workday/canvas-kit-labs-react/common and gather specifiers we care about
-// 4. If no existing import, create new import with specifiers and insert before closest canvas kit import
+// 3. If no existing import, create new import with specifiers and insert before closest canvas kit import
 const transform: Transform = (file, api) => {
   const j = api.jscodeshift;
 
