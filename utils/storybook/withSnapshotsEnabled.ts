@@ -1,3 +1,5 @@
+import React from 'react';
+
 type StorybookParameters = {
   chromatic?: {
     delay?: number;
@@ -10,7 +12,7 @@ type StorybookParameters = {
 
 type StoriesDefaultExport = {
   title: string;
-  component?: React.ReactNode;
+  component?: any;
   decorators?: any[];
   parameters?: StorybookParameters;
 };

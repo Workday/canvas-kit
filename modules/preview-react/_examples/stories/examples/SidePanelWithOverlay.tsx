@@ -1,14 +1,9 @@
 import * as React from 'react';
 import {styled} from '@workday/canvas-kit-react/common';
-import {colors, depth, type} from '@workday/canvas-kit-react/tokens';
+import {depth} from '@workday/canvas-kit-react/tokens';
 import {SidePanel, useSidePanel} from '@workday/canvas-kit-preview-react/side-panel';
 import {Flex, Box} from '@workday/canvas-kit-react/layout';
-
-const StyledHeader = styled('h3')({
-  ...type.levels.body.large,
-  color: colors.licorice500,
-  fontWeight: type.properties.fontWeights.bold,
-});
+import {Text} from '@workday/canvas-kit-react/text';
 
 const StyledPanel = styled(SidePanel)({
   ...depth[6],
@@ -22,7 +17,9 @@ export const Basic = () => {
     <Flex height={320} backgroundColor="soap100" position="relative">
       <StyledPanel touched={true} variant="alternate">
         <Flex alignItems="center" paddingY="s" paddingX="s">
-          <StyledHeader {...labelProps}>Alternate Panel</StyledHeader>
+          <Text as="h3" typeLevel="body.large" fontWeight="bold" color="licorice500">
+            Alternate Panel
+          </Text>
         </Flex>
       </StyledPanel>
       <Box position="absolute" background="rgba(0,0,0,0.65)" height="100%" width="100%" />

@@ -368,7 +368,7 @@ describe('Popup', () => {
 
     context('when the "Delete Item" button is clicked', () => {
       beforeEach(() => {
-        cy.findByRole('button', {name: 'Delete Item'}).click();
+        cy.findByRole('button', {name: 'Delete Item'}).realClick();
       });
 
       it('should show the popup', () => {
@@ -379,7 +379,7 @@ describe('Popup', () => {
         beforeEach(() => {
           cy.findByRole('button', {name: 'Delete'})
             .focus()
-            .tab();
+            .realPress('Tab');
         });
 
         it('should hide the popup', () => {
@@ -400,9 +400,8 @@ describe('Popup', () => {
 
     context('when the "Open Popup" is clicked', () => {
       beforeEach(() => {
-        cy.findByRole('button', {name: 'Open Popup'})
-          .scrollIntoView()
-          .click();
+        cy.findByRole('textbox', {name: 'Name'}).scrollIntoView();
+        cy.findByRole('button', {name: 'Open Popup'}).click();
       });
 
       context('when the user clicks outside', () => {
@@ -421,6 +420,7 @@ describe('Popup', () => {
         });
 
         it('should not focus the "Open Popup" button', () => {
+          cy.findByRole('textbox', {name: 'Name'}).click();
           cy.findByRole('button', {name: 'Open Popup'}).should('not.have.focus');
         });
       });

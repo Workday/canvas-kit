@@ -1,23 +1,6 @@
 import * as React from 'react';
-import {Flex, FlexProps, Box} from '@workday/canvas-kit-react/layout';
-import {type} from '@workday/canvas-kit-react/tokens';
-
-// temporary placeholder until type components are added to canvas-kit
-const H3 = props => (
-  <h3
-    style={{
-      ...type.levels.body.large,
-      ...type.variants.inverse,
-      margin: 0,
-      fontWeight: type.properties.fontWeights.bold,
-    }}
-    {...props}
-  />
-);
-
-const Body = props => (
-  <p style={{...type.levels.body.small, ...type.variants.inverse, margin: 0}} {...props} />
-);
+import {Flex, FlexProps} from '@workday/canvas-kit-react/layout';
+import {BodyText} from '@workday/canvas-kit-react/text';
 
 const Card = ({children, ...props}: FlexProps) => (
   <Flex
@@ -40,41 +23,41 @@ export const Usage = () => {
       <h2>Canvas Principles</h2>
       <Flex alignItems="stretch" flexWrap="wrap">
         <Card backgroundColor="blueberry400">
-          <H3>Empower over Enforce</H3>
-          <Box paddingY="xs">
-            <Body>
-              Encourage our user's expression. Stay out of the way and provide them with the tools
-              and resources to build their vision.
-            </Body>
-          </Box>
+          <BodyText as="h3" size="large" variant="inverse" fontWeight="bold" margin={0}>
+            Empower over Enforce
+          </BodyText>
+          <BodyText size="small" variant="inverse" margin={0} paddingY="xs">
+            Encourage our user's expression. Stay out of the way and provide them with the tools and
+            resources to build their vision.
+          </BodyText>
         </Card>
         <Card backgroundColor="juicyPear500">
-          <H3>Evolution over Perfection</H3>
-          <Box paddingY="xs">
-            <Body>
-              Nothing is ever perfect – embrace that. Make educated assumptions, validate and test
-              our decisions, then iterate! Aim of continous rather than perfect solutions.
-            </Body>
-          </Box>
+          <BodyText as="h3" size="large" variant="inverse" fontWeight="bold" margin={0}>
+            Evolution over Perfection
+          </BodyText>
+          <BodyText size="small" variant="inverse" margin={0} paddingY="xs">
+            Nothing is ever perfect – embrace that. Make educated assumptions, validate and test our
+            decisions, then iterate! Aim of continous rather than perfect solutions.
+          </BodyText>
         </Card>
         <Card backgroundColor="chiliMango400">
-          <H3>Simple over Clever</H3>
-          <Box paddingY="xs">
-            <Body>
-              Simple solutions invite the user in - clever solutions invite complexity. Make the
-              system easy and predictable, and progressively disclose advanced functionality.
-            </Body>
-          </Box>
+          <BodyText as="h3" size="large" variant="inverse" fontWeight="bold" margin={0}>
+            Simple over Clever
+          </BodyText>
+          <BodyText size="small" variant="inverse" margin={0} paddingY="xs">
+            Simple solutions invite the user in - clever solutions invite complexity. Make the
+            system easy and predictable, and progressively disclose advanced functionality.
+          </BodyText>
         </Card>
         <Card backgroundColor="blackberry400">
-          <H3>Everyone over Every One</H3>
-          <Box paddingY="xs">
-            <Body>
-              Each piece of the system is designs and built to be accessible, while still providing
-              the best experience for all consumers. But not if something is focused on a single use
-              case and negates the usability for others.
-            </Body>
-          </Box>
+          <BodyText as="h3" size="large" variant="inverse" fontWeight="bold" margin={0}>
+            Everyone over Every One
+          </BodyText>
+          <BodyText size="small" variant="inverse" margin={0} paddingY="xs">
+            Each piece of the system is designs and built to be accessible, while still providing
+            the best experience for all consumers. But not if something is focused on a single use
+            case and negates the usability for others.
+          </BodyText>
         </Card>
       </Flex>
     </Flex>

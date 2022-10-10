@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Avatar from '../lib/Avatar';
+import {Avatar} from '../lib/Avatar';
 import {render, fireEvent} from '@testing-library/react';
 
 describe('Avatar', () => {

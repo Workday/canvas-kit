@@ -1,8 +1,8 @@
 import React from 'react';
 import {Modal, useModalModel} from '@workday/canvas-kit-react/modal';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
-import FormField from '@workday/canvas-kit-react/form-field';
-import TextInput from '@workday/canvas-kit-react/text-input';
+import {FormField} from '@workday/canvas-kit-react/form-field';
+import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {HStack, Box} from '@workday/canvas-kit-react/layout';
 
 export const CustomFocus = () => {

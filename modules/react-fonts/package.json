@@ -38,7 +38,7 @@
     "fonts"
   ],
   "peerDependencies": {
-    "react": "^16.8 || ^17.0"
+    "react": "^17.0 || ^18.0"
   },
   "dependencies": {
     "@emotion/react": "^11.7.1"

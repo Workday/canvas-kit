@@ -16,7 +16,7 @@ import {usePopupModel} from './usePopupModel';
  */
 export const useTransferOnFullscreenEnter = createElemPropsHook(usePopupModel)(model => {
   const handler = React.useCallback(
-    event => {
+    (event: any) => {
       if (screenfull.isFullscreen && model.state.stackRef.current) {
         PopupStack.transferToCurrentContext({
           element: model.state.stackRef.current,
