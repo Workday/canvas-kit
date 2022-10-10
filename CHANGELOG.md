@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v7.3.18](https://github.com/Workday/canvas-kit/releases/tag/v7.3.18) (2022-10-10)
+
+### Infrastructure
+
+- ci: Updates to Project Board Actions ([#1834](https://github.com/Workday/canvas-kit/pull/1834)) ([@jaclynjessup](https://github.com/jaclynjessup))
+
+### Test
+
+- test: Fix flaky Cypress popup specification ([#1837](https://github.com/Workday/canvas-kit/pull/1837)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v7.3.17](https://github.com/Workday/canvas-kit/releases/tag/v7.3.17) (2022-10-07)
 
 ### Components
