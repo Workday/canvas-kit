@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {useFormik} from 'formik';
+import {useForm, FieldErrorsImpl} from 'react-hook-form';
 import {object, SchemaOf, string} from 'yup';
 
 import {TextInput} from '@workday/canvas-kit-preview-react/text-input';
@@ -8,6 +8,36 @@ import {HStack, VStack} from '@workday/canvas-kit-react/layout';
 import {TertiaryButton, PrimaryButton} from '@workday/canvas-kit-react/button';
 import {visibleIcon, invisibleIcon} from '@workday/canvas-system-icons-web';
 import {useUniqueId} from '@workday/canvas-kit-react/common';
+
+type YupValidationResolver = <T extends {}>(
+  validationSchema: SchemaOf<T>
+) => (data: T) => Promise<{values: T; errors: {}} | {values: {}; errors: FieldErrorsImpl<T>}>;
+
+const useYupValidationResolver: YupValidationResolver = validationSchema => {
+  return React.useCallback(
+    async data => {
+      try {
+        const values = await validationSchema.validate(data, {abortEarly: false});
+        return {values, errors: {}};
+      } catch (errors) {
+        return {
+          values: {},
+          errors: errors.inner.reduce(
+            (allErrors, currentError) => ({
+              ...allErrors,
+              [currentError.path]: {
+                type: currentError.type ?? 'validation',
+                message: currentError.message,
+              },
+            }),
+            {}
+          ),
+        };
+      }
+    },
+    [validationSchema]
+  );
+};
 
 interface LoginSchema {
   email: string;
@@ -28,62 +58,63 @@ const validationSchema: SchemaOf<LoginSchema> = object({
     .required(passwordRequired),
 });
 
-export const TextInputWithFormik = () => {
-  const passwordRef = React.useRef<HTMLInputElement>(null);
-  const [showPassword, setShowPassword] = React.useState(false);
-  const passwordId = useUniqueId();
-
-  const formik = useFormik({
-    initialValues: {
+export const TextInputWithReactHookForm = () => {
+  const {
+    handleSubmit,
+    register,
+    formState: {errors},
+  } = useForm<LoginSchema>({
+    defaultValues: {
       email: 'example@baz.com',
       password: 'foobarbaz',
     },
-    validationSchema: validationSchema,
-    onSubmit: values => {
-      setShowPassword(false);
-      // Send data to server
-      setTimeout(() => {
-        alert(JSON.stringify(values, null, 2));
-      }, 0);
-    },
+    resolver: useYupValidationResolver(validationSchema),
+    mode: 'onTouched',
   });
 
+  const onSubmit = handleSubmit(values => {
+    setShowPassword(false);
+    // Send data to server
+    setTimeout(() => {
+      alert(JSON.stringify(values, null, 2));
+    }, 0);
+  });
+
+  const [showPassword, setShowPassword] = React.useState(false);
+  const passwordId = useUniqueId();
+  const passwordRef = React.useRef<HTMLInputElement | null>(null);
+  const {ref: passwordCallbackRef, ...passwordRegistration} = register('password');
+  const combinePasswordRef = (ref: HTMLInputElement | null) => {
+    passwordCallbackRef(ref);
+    passwordRef.current = ref;
+  };
+
   return (
-    <form onSubmit={formik.handleSubmit} action=".">
+    <form onSubmit={onSubmit} action=".">
       <VStack spacing="xs" alignItems="flex-start">
-        <TextInput
-          orientation="vertical"
-          isRequired={true}
-          hasError={formik.touched.email && !!formik.errors.email}
-        >
+        <TextInput orientation="vertical" isRequired={true} hasError={!!errors.email}>
           <TextInput.Label>Email</TextInput.Label>
           <TextInput.Field
-            name="email"
+            {...register('email')}
             autoComplete="username"
             placeholder="yourName@example.com"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.email}
           />
-          <TextInput.Hint>{formik.touched.email && formik.errors.email}</TextInput.Hint>
+          <TextInput.Hint>{errors.email?.message}</TextInput.Hint>
         </TextInput>
         <TextInput
           orientation="vertical"
           id={passwordId}
-          hasError={formik.touched.password && !!formik.errors.password}
           isRequired={true}
+          hasError={!!errors.password}
         >
           <TextInput.Label>Password</TextInput.Label>
           <HStack spacing="xxs">
             <TextInput.Field
+              {...passwordRegistration}
               type={showPassword ? 'text' : 'password'}
-              name="password"
               autoComplete="current-password"
               spellCheck={false}
-              ref={passwordRef}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.password}
+              ref={combinePasswordRef}
             />
             <TertiaryButton
               type="button"
@@ -96,9 +127,7 @@ export const TextInputWithFormik = () => {
               }}
             />
           </HStack>
-          <TextInput.Hint>
-            {(formik.touched.password && formik.errors.password) || passwordHint}
-          </TextInput.Hint>
+          <TextInput.Hint>{errors.password?.message || passwordHint}</TextInput.Hint>
         </TextInput>
 
         <PrimaryButton type="submit">Submit</PrimaryButton>
