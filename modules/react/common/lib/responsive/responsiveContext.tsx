@@ -18,6 +18,68 @@ export interface ResponsiveContextProviderProps {
   width: number;
 }
 
+/**
+ * This React Context Provider that will accept the width of the
+container from `useResizeObserver` hook (as you can see in the example below). In the example below, the `useResizeObserver` hook will measure the width of the container and set the width. The `ResponsiveContextProvider` will accept the width from `useResizeObserver`.
+ *
+ * @example
+ * ```tsx
+import {Flex, Box} from '@workday/canvas-kit-react/layout';
+import {
+  useResizeObserver, ResponsiveContextProvider, useResponsiveContainerStyles
+} from '@workday/canvas-kit-react/common';
+
+const ref = React.useRef(null);
+const [containerWidth, setWidth] = React.useState(0);
+
+useResizeObserver({
+  ref: ref,
+  onResize: data => {
+    setWidth(data.containerWidth || 0);
+  },
+});
+
+const containerResponsiveStyles = useResponsiveContainerStyles(
+  {
+    flex: {
+      flexDirection: 'column',
+      padding: 'm',
+      depth: 1,
+      borderRadius: 'l',
+      zero: {
+        backgroundColor: 'Red',
+      },
+      s: {
+        backgroundColor: 'Orange',
+      },
+      m: {
+        backgroundColor: 'Yellow',
+      },
+      l: {
+        backgroundColor: 'Green',
+      },
+      xl: {
+        backgroundColor: 'Blue',
+      },
+    },
+    box: {
+      padding: 's',
+    },
+  },
+  containerWidth
+);
+
+return (
+  <ResponsiveContextProvider width={containerWidth}>
+    <Box ref={ref}>
+      <Flex {...containerResponsiveStyles.flex}>
+        <Box {...containerResponsiveStyles.box}>Hello World</Box>
+      </Flex>
+    </Box>
+  </ResponsiveContextProvider>
+);
+```
+ */
 export const ResponsiveContextProvider = ({
   children,
   theme = {},

@@ -1,4 +1,4 @@
-import {Meta} from '@storybook/addon-docs';
+import {Meta, ArgsTable} from '@storybook/addon-docs';
 import {Box} from '@workday/canvas-kit-react/layout';
 //
 import {
@@ -6,9 +6,10 @@ import {
   ResponsiveContextProvider,
   useResponsiveStyles,
 } from '@workday/canvas-kit-react/common';
-import {Grid} from '@workday/canvas-kit-react/layout';
+import {ResponsiveContainer} from './examples/ResponsiveStyles';
+import {ResponsiveViewport} from './examples/ResponsiveViewport';
 
-<Meta title="Hooks and Utilities/Responsive Styling" component={Grid} />
+<Meta title="Hooks and Utilities/Responsive Styling" />
 
 # Responsive Styling
 
@@ -18,10 +19,122 @@ layout that can respond to the device being used to view the content.
 You can read more about the history of
 [Responsive Design](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Responsive_Design).
 
-## Viewport and Container Based Responsive Styling
+## Container and Viewport Based Responsive Styling
 
-We will take a look at Viewport and Container Based Responsive Styling, what they are and which to
-use.
+We will take a look at Container-based and Viewport-based Responsive Styling, what they are and
+which to use.
+
+### Container Based Responsive Styling
+
+Now, with viewport-based responsive styling (media queries), the user's viewport (user's visible
+area of a web page) is measured and styles are applied based on the size of that viewport. We will
+do the same with Container Based Responsive Styling but, we will just be measuring the size of the
+container the element is in instead of the user's viewport.
+
+Take the below example of a component:
+
+```tsx
+<Box maxWidth={1000}>Hello World</Box>
+```
+
+In the example above, we see that there is a `maxWidth` set on the Box component of `1000`. This
+will set the maximum width of that element at `1000px`. What we can do with Container Based
+Responsive Styling is measure when that container's width reaches certain breakpoints
+`(i.e. 1440px, 1024px, 768px, 320px, 0)` and apply styles based on those breakpoints. If the
+container's width were to reach `768px`, we can apply styles to that breakpoint.
+
+In the interactive example below, when the dropdown's value is updated, the container size will
+change to match the size shown in the dropdown. This is just an example of how container-based
+styles work and will be explained more in depth below.
+
+<ExampleCodeBlock code={ResponsiveContainer} />
+
+### Applying Container-Based Responsive Styling
+
+For container-based responsive styling, we have utilities that will allow you to apply responsive
+styles at those breakpoints. There are four utilities/hooks:
+`useResizeObserver | ResponsiveContextProvider | useResponsiveContext | useResponsiveStyles`
+
+`useResizeObserver` - This is a hook that will provide the width of the container. This can used to
+measure container size as well.
+
+`ResponsiveContextProvider` - This React Context Provider that will accept the width of the
+container from `useResizeObserver`.
+
+`useResponsiveContext` - This hook subscribes to the `ResponsiveContextProvider` and will determine
+whether the current width provided from `useResizeObserver` is within a particular theme breakpoint.
+
+`useResponsiveContainerStyles` - This is a hook that will allow you to create container-based
+responsive styles with objects (as you can see in the example below). This hook accepts three
+arguments with the third being optional (Style Objects, Container Width, Theme). In each style
+object, there are five sizes that it will accept: `zero, small, medium, large and extra large`.
+These give sizes represent the breakpoints that are at the bottom of this page. The sizes will act
+like `min-width`. For example, if you want to apply styles from `medium` and up, then you would
+write those styles under `m`.
+
+In the example below, we are importing three of those utilities:
+`useResizeObserver | ResponsiveContextProvider | useResponsiveStyles`
+
+See example below:
+
+```tsx
+import {Flex, Box} from '@workday/canvas-kit-react/layout';
+import {
+  useResizeObserver,
+  ResponsiveContextProvider,
+  useResponsiveContainerStyles,
+} from '@workday/canvas-kit-react/common';
+
+const ref = React.useRef(null);
+const [width, setWidth] = React.useState(0);
+
+useResizeObserver({
+  ref: ref,
+  onResize: data => {
+    setWidth(data.width || 0);
+  },
+});
+
+const containerResponsiveStyles = useResponsiveContainerStyles(
+  {
+    flex: {
+      flexDirection: 'column',
+      padding: 'm',
+      depth: 1,
+      borderRadius: 'l',
+      zero: {
+        backgroundColor: 'Red',
+      },
+      s: {
+        backgroundColor: 'Orange',
+      },
+      m: {
+        backgroundColor: 'Yellow',
+      },
+      l: {
+        backgroundColor: 'Green',
+      },
+      xl: {
+        backgroundColor: 'Blue',
+      },
+    },
+    box: {
+      padding: 's',
+    },
+  },
+  width
+);
+
+return (
+  <ResponsiveContextProvider width={width}>
+    <Box ref={ref}>
+      <Flex {...containerResponsiveStyles.flex}>
+        <Box {...containerResponsiveStyles.box}>Hello World</Box>
+      </Flex>
+    </Box>
+  </ResponsiveContextProvider>
+);
+```
 
 ### Viewport Based Responsive Styling
 
@@ -40,51 +153,13 @@ An example of CSS media queries is below:
 }
 ```
 
-### Container Based Responsive Styling
+In the example below, viewport-based styles are being applied by the size of the user's viewport.
+This is by using the breakpoint utilities (`up(), down(), between() and only()`). At the top of the
+code you will see `up() and down()` being used inside of the `StyledHeading` component. These
+utilities will be explained more in depth below the example. The size of the browser will have to be
+adjusted to see the changes take place on the UI Layout.
 
-Now, where we measured the user's viewport (user's visible area of a web page), we will do the same
-with Container Based Responsive Styling but, we will just be measuring the size of the container the
-element is in.
-
-Take the below example of a component:
-
-```tsx
-<Box maxWidth={1000}>Hello World</Box>
-```
-
-In the example, we see that there is a `maxWidth` set on the Box component of `1000`. This will set
-the maximum width of that element at `1000px`. What we can do with Container Based Responsive
-Styling is measure when that container's width reaches certain breakpoints
-`(i.e. 1440px, 1024px, 768px, 320px, 0)` and apply styles based on those breakpoints. If the
-container's width were to reach `768px`, we can apply styles to that breakpoint.
-
-### Viewport vs Container
-
-If you are measuring a user's viewport size, then you should be using Viewport Based Responsive
-Styling.
-
-If you only want to measure the size of a container, then you should be using Container Based
-Responsive Styling.
-
-We will go over Canvas Kit Utilities more below.
-
-### Canvas Kit Breakpoint Sizes
-
-In Canvas Kit, there are a set of breakpoints:
-
-| Zero  | Small   | Medium  | Large    | Extra Large |
-| ----- | ------- | ------- | -------- | ----------- |
-| > 0px | > 320px | > 768px | > 1024px | > 1440px    |
-
-> Zero: This is applied from 0 - 319px
-
-> Small: This is applied from 320px - 767px
-
-> Medium: This is applied from 768px - 1023px
-
-> Large: This is applied from 1024px - 1439px
-
-> Extra Large: This is applied from 1440px and up
+<ExampleCodeBlock code={ResponsiveViewport} />
 
 ### Applying Viewport-Based Responsive Styling
 
@@ -229,84 +304,30 @@ const styles = {
 };
 ```
 
-### Applying Container-Based Responsive Styling
+### Viewport vs Container
 
-For container-based responsive styling, we utilities that will allow you to apply responsive styles
-at those breakpoints. There are four utilities/hooks:
-`useResizeObserver | ResponsiveContextProvider | useResponsiveContext | useResponsiveStyles`
+If you are measuring a user's viewport size, then you should be using Viewport Based Responsive
+Styling.
 
-`useResizeObserver` - This is a hook that will provide the width of the container. This can used to
-measure container size as well.
+If you only want to measure the size of a container, then you should be using Container Based
+Responsive Styling.
 
-`ResponsiveContextProvider` - This React Context Provider that will accept the width of the
-container from `useResizeObserver`.
+We will go over Canvas Kit Utilities more below.
 
-`useResponsiveContext` - This hook subscribes to the `ResponsiveContextProvider` and will determine
-whether the current width provided from `useResizeObserver` is within a particular theme breakpoint.
+### Canvas Kit Breakpoint Sizes
 
-`useResponsiveStyles` - This is a hook that will allow you to create container-based responsive
-styles with objects (as you can see in the example below).
+In Canvas Kit, there are a set of breakpoints:
 
-In the example below, we are importing three of those utilities:
-`useResizeObserver | ResponsiveContextProvider | useResponsiveStyles`
+| Zero  | Small   | Medium  | Large    | Extra Large |
+| ----- | ------- | ------- | -------- | ----------- |
+| > 0px | > 320px | > 768px | > 1024px | > 1440px    |
 
-See example below:
+> Zero: This is applied from 0 - 319px
 
-```tsx
-import {Flex, Box} from '@workday/canvas-kit-react/layout';
-import {
-  useResizeObserver,
-  ResponsiveContextProvider,
-  useResponsiveStyles,
-} from '@workday/canvas-kit-react/common';
+> Small: This is applied from 320px - 767px
 
-const ref = React.useRef(null);
-const [containerWidth, setWidth] = React.useState(0);
+> Medium: This is applied from 768px - 1023px
 
-useResizeObserver({
-  ref: ref,
-  onResize: data => {
-    setWidth(data.containerWidth || 0);
-  },
-});
+> Large: This is applied from 1024px - 1439px
 
-const containerResponsiveStyles = useResponsiveStyles(
-  {
-    flex: {
-      flexDirection: 'column',
-      padding: 'm',
-      depth: 1,
-      borderRadius: 'l',
-      zero: {
-        backgroundColor: 'Red',
-      },
-      s: {
-        backgroundColor: 'Orange',
-      },
-      m: {
-        backgroundColor: 'Yellow',
-      },
-      l: {
-        backgroundColor: 'Green',
-      },
-      xl: {
-        backgroundColor: 'Blue',
-      },
-    },
-    box: {
-      padding: 's',
-    },
-  },
-  containerWidth
-);
-
-return (
-  <ResponsiveContextProvider width={containerWidth}>
-    <Box ref={ref}>
-      <Flex {...containerResponsiveStyles.flex}>
-        <Box {...containerResponsiveStyles.box}>Hello World</Box>
-      </Flex>
-    </Box>
-  </ResponsiveContextProvider>
-);
-```
+> Extra Large: This is applied from 1440px and up

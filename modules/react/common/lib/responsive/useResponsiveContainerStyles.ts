@@ -1,13 +1,13 @@
 import { useTheme } from "@workday/canvas-kit-react/common";
 import type {
-  BoxProps,
-  FlexStyleProps
+  FlexStyleProps,
+  GridProps
 } from "@workday/canvas-kit-react/layout";
 
 export const breakpointResKeys = ["zero", "s", "m", "l", "xl"] as const;
 export type BreakpointKeys = typeof breakpointResKeys[number];
 // TODO: export just all the style props
-type AllStyleProps = Omit<BoxProps, "children" | "as"> & FlexStyleProps;
+type AllStyleProps = Omit<GridProps, "children" | "as"> & FlexStyleProps;
 type ResponsiveCSSObject<T> = {
   [P in keyof T]: Partial<Record<BreakpointKeys, AllStyleProps>> &
     AllStyleProps;
@@ -26,6 +26,63 @@ const isWithinBreakpoint = (width: number, min: number, max?: number) => {
   return false;
 };
 
+/**
+ * `useResponsiveContainerStyles` - This is a hook that will allow you to create container-based
+responsive styles with objects (as you can see in the example below). This hook accepts three
+arguments with the third being optional (Style Objects, Container Width, Theme). In each style
+object, there are five sizes that it will accept: `zero, small, medium, large and extra large`.
+These give sizes represent the breakpoints that are at the bottom of this page. The sizes will act
+like `min-width`. For example, if you want to apply styles from `medium` and up, then you would
+write those styles under `m`.
+ *
+ * @example
+ * ```tsx
+import {Flex, Box} from '@workday/canvas-kit-react/layout';
+import {
+  useResponsiveStyles,
+} from '@workday/canvas-kit-react/common';
+
+const containerResponsiveStyles = useResponsiveStyles(
+  {
+    flex: {
+      flexDirection: 'column',
+      padding: 'm',
+      depth: 1,
+      borderRadius: 'l',
+      zero: {
+        backgroundColor: 'Red',
+      },
+      s: {
+        backgroundColor: 'Orange',
+      },
+      m: {
+        backgroundColor: 'Yellow',
+      },
+      l: {
+        backgroundColor: 'Green',
+      },
+      xl: {
+        backgroundColor: 'Blue',
+      },
+    },
+    box: {
+      padding: 's',
+    },
+  },
+  containerWidth
+);
+
+return (
+  <ResponsiveContextProvider width={containerWidth}>
+    <Box ref={ref}>
+      <Flex {...containerResponsiveStyles.flex}>
+        <Box {...containerResponsiveStyles.box}>Hello World</Box>
+      </Flex>
+    </Box>
+  </ResponsiveContextProvider>
+);
+```
+ */
 export function useResponsiveContainerStyles<T extends ResponsiveCSSObject<T>>(
   styles: ResponsiveCSSObject<T>,
   width: number,
