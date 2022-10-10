@@ -1,5 +1,3 @@
-import {convertToStaticStates} from '@workday/canvas-kit-react/testing';
-import {CSSObject} from '@emotion/styled';
 import {renderHook} from '@testing-library/react-hooks';
 import {useThemeRTL} from '../lib/theming';
 
@@ -10,9 +8,6 @@ describe('styles', () => {
     };
     const RTLTheme = {
       direction: {direction: 'rtl'},
-    };
-    const withStaticStates = {
-      _styleRewriteFn: convertToStaticStates,
     };
     it('should return styles', () => {
       const expectedHeight = `100px`;
@@ -68,7 +63,7 @@ describe('styles', () => {
         const {result} = renderHook(() => useThemeRTL());
         const cssProp = result.current.themeRTL(style);
 
-        expect((cssProp['&:hover'] as CSSObject).paddingLeft).toEqual(expectedPadding);
+        expect(cssProp).toHaveProperty('&:hover.paddingLeft', expectedPadding);
       });
     });
 
@@ -89,7 +84,7 @@ describe('styles', () => {
 
         const {result} = renderHook(() => useThemeRTL());
         const cssProp = result.current.themeRTL(style);
-        expect(cssProp.paddingLeft).toEqual(expectedPadding);
+        expect(cssProp).toHaveProperty('paddingLeft', expectedPadding);
       });
 
       it('should flip padding left to padding right the direction is RTL support', () => {
@@ -99,7 +94,7 @@ describe('styles', () => {
         };
         const {result} = renderHook(() => useThemeRTL());
         const cssProp = result.current.themeRTL(style);
-        expect(cssProp.paddingRight).toEqual(expectedPadding);
+        expect(cssProp).toHaveProperty('paddingRight', expectedPadding);
       });
 
       it('should flip and NOT convert static states when _styleRewriteFn is undefined', () => {
@@ -113,7 +108,7 @@ describe('styles', () => {
         const {result} = renderHook(() => useThemeRTL());
         const cssProp = result.current.themeRTL(style) as typeof style;
 
-        expect((cssProp['&:hover'] as CSSObject).paddingRight).toEqual(expectedPadding);
+        expect(cssProp).toHaveProperty('&:hover.paddingRight', expectedPadding);
       });
     });
 
@@ -123,7 +118,6 @@ describe('styles', () => {
           canvas: {
             theme: {
               ...LTRTheme.direction,
-              ...withStaticStates,
             },
           },
         };
@@ -138,7 +132,7 @@ describe('styles', () => {
 
         const {result} = renderHook(() => useThemeRTL());
         const cssProp = result.current.themeRTL(style);
-        expect((cssProp['&:hover'] as CSSObject).paddingLeft).toEqual(expectedPadding);
+        expect(cssProp).toHaveProperty('&:hover.paddingLeft', expectedPadding);
       });
     });
 
@@ -148,7 +142,6 @@ describe('styles', () => {
           canvas: {
             theme: {
               ...RTLTheme.direction,
-              ...withStaticStates,
             },
           },
         };
@@ -164,7 +157,7 @@ describe('styles', () => {
         const {result} = renderHook(() => useThemeRTL());
         const cssProp = result.current.themeRTL(style) as {['&:hover']: {paddingRight: string}};
 
-        expect((cssProp['&:hover'] as CSSObject).paddingRight).toEqual(expectedPadding);
+        expect(cssProp).toHaveProperty('&:hover.paddingRight', expectedPadding);
       });
     });
   });
