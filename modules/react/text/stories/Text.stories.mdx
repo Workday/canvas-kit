@@ -1,7 +1,6 @@
 import {Meta} from '@storybook/addon-docs';
 
 import {Basic as BasicText} from './examples/Text';
-import {Title} from './examples/Title';
 
 import {TextComponent, TypeLevelComponent} from './PropTables.splitprops.tsx';
 
@@ -65,13 +64,3 @@ example below:
 In addition to `Text` component props, each type level components has the following props:
 
 <ArgsTable of={TypeLevelComponent} />
-
-### Title
-
-`Title` component renders text with `type.levels.title[size]` styles.
-
-```tsx
-<Title size="small">Small Title Text</Title>
-```
-
-<ExampleCodeBlock code={Title} />

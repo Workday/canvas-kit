@@ -1,0 +1,45 @@
+import {Meta} from '@storybook/addon-docs';
+
+import {Basic} from './examples/Title/Basic';
+
+import {TypeLevelComponent} from './PropTables.splitprops.tsx';
+
+<Meta title="Components/Text/Title/React" />
+
+# Canvas Kit React Title
+
+`Title` component renders text with `type.levels.title[size]` styles.
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-react
+```
+
+## Usage
+
+### Basic Example
+
+Type Level Components, `Subtext`, `BodyText`, `Heading` and `Title`, apply type token styles to text
+element. Instead of passing type level token you can use one of Type Level Components, like in
+example below:
+
+```tsx
+// v7
+<p css={{...type.levels.subtext.small}}>Small Subtext Text</p>
+
+// v8
+<Subtext size="small">Small Subtext Text</Subtext>
+```
+
+```tsx
+<Title size="small">Small Title Text</Title>
+```
+
+<ExampleCodeBlock code={Basic} />
+
+## Props
+
+In addition to `Text` component props, each type level components has the following props:
+
+<ArgsTable of={TypeLevelComponent} />
