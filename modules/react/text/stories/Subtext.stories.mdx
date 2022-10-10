@@ -1,0 +1,45 @@
+import {Meta} from '@storybook/addon-docs';
+
+import {Basic} from './examples/Subtext/Basic';
+
+import {TypeLevelComponent} from './PropTables.splitprops.tsx';
+
+<Meta title="Components/Text/Subtext/React" />
+
+# Canvas Kit React Subtext
+
+`Subtext` component renders text with `type.levels.subtext[size]` styles.
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-react
+```
+
+## Usage
+
+### Basic Example
+
+Type Level Components, `Subtext`, `BodyText`, `Heading` and `Title`, apply type token styles to text
+element. Instead of passing type level token you can use one of Type Level Components, like in
+example below:
+
+```tsx
+// v7
+<p css={{...type.levels.subtext.small}}>Small Subtext Text</p>
+
+// v8
+<Subtext size="small">Small Subtext Text</Subtext>
+```
+
+```tsx
+<Subtext size="small">Small Subtext Text</Subtext>
+```
+
+<ExampleCodeBlock code={Basic} />
+
+## Props
+
+In addition to `Text` component props, each type level components has the following props:
+
+<ArgsTable of={TypeLevelComponent} />
