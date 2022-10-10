@@ -11,14 +11,14 @@ import {
 } from '@workday/canvas-system-icons-web';
 
 export const Dynamic = () => {
-  const [viewType, setViewType] = React.useState('detail');
+  const [viewType, setViewType] = React.useState('table');
 
   const model = useSegmentedControlModel({
     items: [
       {id: 'table', icon: gridIcon, label: 'Table'},
       {id: 'list', icon: listViewIcon, label: 'List'},
       {id: 'detail', icon: listDetailIcon, label: 'Detail'},
-      {id: 'diagram', icon: pieChartIcon, label: 'Charts'},
+      {id: 'diagram', icon: pieChartIcon, label: 'Diagram'},
     ],
     size: 'small',
     initialValue: viewType,
@@ -30,7 +30,7 @@ export const Dynamic = () => {
 
   return (
     <SegmentedControl model={model}>
-      <SegmentedControl.List aria-label="Content view type">
+      <SegmentedControl.List aria-label="View type">
         {item => (
           <SegmentedControl.Item data-id={item.id} icon={item.icon}>
             {item.label}

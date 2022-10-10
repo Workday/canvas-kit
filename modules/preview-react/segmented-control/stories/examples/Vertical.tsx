@@ -9,8 +9,8 @@ import {
 
 export const Vertical = () => (
   <SegmentedControl orientation="vertical">
-    <SegmentedControl.List aria-label="Content view type">
-      <SegmentedControl.Item data-id="table" icon={gridIcon} tooltipProps={{title: 'Title'}} />
+    <SegmentedControl.List aria-label="View type">
+      <SegmentedControl.Item data-id="table" icon={gridIcon} tooltipProps={{title: 'Table'}} />
       <SegmentedControl.Item
         data-id="list-view"
         icon={listViewIcon}

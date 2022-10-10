@@ -1,6 +1,11 @@
 import React from 'react';
 import {Box} from '@workday/canvas-kit-react/layout';
-import {gridIcon, listViewIcon} from '@workday/canvas-system-icons-web';
+import {
+  gridIcon,
+  listViewIcon,
+  listDetailIcon,
+  pieChartIcon,
+} from '@workday/canvas-system-icons-web';
 import {SegmentedControl} from '@workday/canvas-kit-preview-react/segmented-control';
 import {BodyText} from '@workday/canvas-kit-react/text';
 
@@ -11,12 +16,18 @@ export const Sizes = () => (
         Small
       </BodyText>
       <SegmentedControl size="small">
-        <SegmentedControl.List aria-label="Content view type">
+        <SegmentedControl.List aria-label="View type">
           <SegmentedControl.Item data-id="table" icon={gridIcon}>
             Table
           </SegmentedControl.Item>
           <SegmentedControl.Item data-id="list-view" icon={listViewIcon}>
             List
+          </SegmentedControl.Item>
+          <SegmentedControl.Item data-id="list-detail" icon={listDetailIcon}>
+            Detail
+          </SegmentedControl.Item>
+          <SegmentedControl.Item data-id="diagrams" icon={pieChartIcon}>
+            Diagram
           </SegmentedControl.Item>
         </SegmentedControl.List>
       </SegmentedControl>
@@ -26,12 +37,18 @@ export const Sizes = () => (
         Medium
       </BodyText>
       <SegmentedControl size="medium">
-        <SegmentedControl.List aria-label="Content view type">
+        <SegmentedControl.List aria-label="View type">
           <SegmentedControl.Item data-id="table" icon={gridIcon}>
             Table
           </SegmentedControl.Item>
           <SegmentedControl.Item data-id="list-view" icon={listViewIcon}>
             List
+          </SegmentedControl.Item>
+          <SegmentedControl.Item data-id="list-detail" icon={listDetailIcon}>
+            Detail
+          </SegmentedControl.Item>
+          <SegmentedControl.Item data-id="diagrams" icon={pieChartIcon}>
+            Diagram
           </SegmentedControl.Item>
         </SegmentedControl.List>
       </SegmentedControl>
@@ -47,6 +64,12 @@ export const Sizes = () => (
           </SegmentedControl.Item>
           <SegmentedControl.Item data-id="list-view" icon={listViewIcon}>
             List
+          </SegmentedControl.Item>
+          <SegmentedControl.Item data-id="list-detail" icon={listDetailIcon}>
+            Detail
+          </SegmentedControl.Item>
+          <SegmentedControl.Item data-id="diagrams" icon={pieChartIcon}>
+            Diagram
           </SegmentedControl.Item>
         </SegmentedControl.List>
       </SegmentedControl>

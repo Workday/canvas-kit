@@ -7,8 +7,8 @@ import {
   pieChartIcon,
 } from '@workday/canvas-system-icons-web';
 
-export const Basic = () => (
-  <SegmentedControl>
+export const Disabled = () => (
+  <SegmentedControl disabled>
     <SegmentedControl.List aria-label="View type">
       <SegmentedControl.Item data-id="table" icon={gridIcon} tooltipProps={{title: 'Table'}} />
       <SegmentedControl.Item
