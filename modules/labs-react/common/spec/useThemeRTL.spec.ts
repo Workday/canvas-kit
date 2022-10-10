@@ -111,7 +111,7 @@ describe('styles', () => {
         };
 
         const {result} = renderHook(() => useThemeRTL());
-        const cssProp = result.current.themeRTL(style);
+        const cssProp = result.current.themeRTL(style) as typeof style;
 
         expect((cssProp['&:hover'] as CSSObject).paddingRight).toEqual(expectedPadding);
       });
@@ -162,9 +162,9 @@ describe('styles', () => {
         };
 
         const {result} = renderHook(() => useThemeRTL());
-        const cssProp = result.current.themeRTL(style);
+        const cssProp = result.current.themeRTL(style) as {['&:hover']: {paddingRight: string}};
 
-        expect((cssProp['&.hover'] as CSSObject).paddingRight).toEqual(expectedPadding);
+        expect((cssProp['&:hover'] as CSSObject).paddingRight).toEqual(expectedPadding);
       });
     });
   });
