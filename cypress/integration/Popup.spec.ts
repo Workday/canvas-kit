@@ -393,12 +393,14 @@ describe('Popup', () => {
     });
   });
 
-  context('given the [Testing/React/Popups/Popup, MixedPopupTypes] story is rendered', () => {
+  context('given the [Testing/React/Popups/Popup, ReturnFocusTest] story is rendered', () => {
     beforeEach(() => {
       h.stories.load('Testing/React/Popups/Popup', 'ReturnFocusTest');
     });
 
-    context('when the "Open Popup" is clicked', () => {
+    // We disable the default scroll behavior so we can tightly control how these specs scroll. This
+    // means we'll have to manually add `scrollIntoView` to get Cypress to scroll only where we want
+    context('when the "Open Popup" is clicked', {scrollBehavior: false}, () => {
       beforeEach(() => {
         cy.findByRole('button', {name: 'Open Popup'})
           .scrollIntoView()
@@ -410,14 +412,16 @@ describe('Popup', () => {
           cy.get('body').click('bottom');
         });
 
-        it('should focus the "Open Popup" button', {scrollBehavior: false}, () => {
+        it('should focus the "Open Popup" button', () => {
           cy.findByRole('button', {name: 'Open Popup'}).should('have.focus');
         });
       });
 
       context('when the user clicks the input', () => {
         beforeEach(() => {
-          cy.findByRole('textbox', {name: 'Name'}).click();
+          cy.findByRole('textbox', {name: 'Name'})
+            .scrollIntoView()
+            .click();
         });
 
         it('should not focus the "Open Popup" button', () => {
