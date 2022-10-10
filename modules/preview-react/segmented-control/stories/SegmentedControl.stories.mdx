@@ -5,7 +5,8 @@ import {Specifications} from '@workday/canvas-kit-docs';
 
 import {Basic} from './examples/Basic';
 import {Disabled} from './examples/Disabled';
-import {TextVariants} from './examples/TextVariants';
+import {TextAndIcon} from './examples/TextAndIcon';
+import {TextOnly} from './examples/TextOnly';
 import {Sizes} from './examples/Sizes';
 import {Vertical} from './examples/Vertical';
 import {RTL} from './examples/RTL';
@@ -37,25 +38,31 @@ yarn add @workday/canvas-kit-preview-react
 
 ### Basic Example
 
+In a basic example of an `SegmentedControl` there are four icon buttons in group. Each button paired
+with tooltip to explain the button function in text. Default values of `SegmentedControl` are
+specified for size (as `medium`) and orientation (as `horizontal`). All buttons should have the same
+type amd only one of them can be active at a time.
+
 `SegmentedControl` includes a container `SegmentedControl` component and the following subcomponent:
 `SegmentedControl.List` which should contains `SegmentedControl.Item`.
 
-In a basic example of an `SegmentedControl` there are four icon buttons in group. Each button paired
-with tooltip to explain the button function in text. Default values of `SegmentedControl` are
-specified for size (as `medium`), orientation (as `horizontal`) and variant (as `icon` for icon only
-variant).
-
 <ExampleCodeBlock code={Basic} />
 
-### Text Variants Example
+### Variations Example
 
-`SegmentedControl` buttons can be rendered with only text or text and icon.
+`SegmentedControl` can be used with diferent buttons: text only, icon left or icon only.
 
-<ExampleCodeBlock code={TextVariants} />
+#### Text And Icon
 
-### Vertical Example
+<ExampleCodeBlock code={TextAndIcon} />
 
-`SegmentedControl` can be placed vertically but only for `icon` variant.
+#### Text And Icon
+
+<ExampleCodeBlock code={TextOnly} />
+
+#### Icon Only (vertical)
+
+`SegmentedControl` icon only buttons can be placed horizontally or vertically.
 
 <ExampleCodeBlock code={Vertical} />
 
@@ -67,17 +74,22 @@ variant).
 
 ### Disabled Example
 
-`SegmentedControl`can be set as a disabled.
+``SegmentedControl`can be disabled by adding`disabled` prop to the whole container. It will also
+disable all buttons.
 
 <ExampleCodeBlock code={Disabled} />
 
 ### RTL Example
 
-`SegmentedControl` supports RTL content direction.
+`SegmentedControl` supports right-to-left languages when specified in the `CanvasProvider` `theme`.
 
 <ExampleCodeBlock code={RTL} />
 
 ### Dynamic Items Example
+
+The `SegmentedControl.Item` component takes in an optional `index` property if you want to specify
+the position of a button. If not defined, by default it will append items to the end. In this
+example, our items are stored as an array in the state.
 
 <ExampleCodeBlock code={Dynamic} />
 
@@ -187,3 +199,7 @@ The `SegmentedControlModel` `state` is an object with the following properties.
 The `SegmentedControlModel` `events` is an object with the following properties.
 
 <ArgsTable of={SegmentedControlEventsComponent} />
+
+## Specifications
+
+<Specifications file="SegmentedControl.spec.ts" name="SegmentedControl" />

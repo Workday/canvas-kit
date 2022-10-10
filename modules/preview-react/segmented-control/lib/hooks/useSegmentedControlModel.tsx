@@ -19,9 +19,15 @@ export const useSegmentedControlModel = createModelHook({
      * If not provided, the first value will be selected.
      */
     initialValue: '',
-    // PUT DESCRIPTION HERE FOR PROP disabled
+    /**
+     * Sets disabled state to all segmented control buttons
+     * @default false
+     */
     disabled: false,
-    // PUT DESCRIPTION HERE FOR PROP size
+    /**
+     * Sets size of segmented control container and buttons. Can be `small`, `medium` or `large`.
+     * @default 'medium'
+     */
     size: 'medium' as 'small' | 'medium' | 'large',
     /**
      * The SegmentedControl handles rendering of button group in a horizontal orientation,
@@ -63,8 +69,6 @@ export const useSegmentedControlModel = createModelHook({
     nonInteractiveIds: [],
     hiddenIds: [],
   };
-
-  console.log(state);
 
   const events = {
     ...model.events,
