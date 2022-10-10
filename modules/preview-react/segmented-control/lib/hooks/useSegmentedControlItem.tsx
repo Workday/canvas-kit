@@ -51,11 +51,13 @@ export const useSegmentedControlItem = composeHooks(
       return state.disabled ? {id, disabled: true} : {id, 'aria-pressed': selected};
     }
   ),
-  createElemPropsHook(useSegmentedControlModel)(({state}) => {
-    const allWidths = Object.keys(state.itemWidthCache).map(e => state.itemWidthCache[e]);
-    const [longest] = allWidths.sort((a, b) => (a < b ? 1 : -1));
-    return !state.isIconOnlyVariant ? {width: `${longest}px`} : {};
-  })
+  createElemPropsHook(useSegmentedControlModel)(
+    ({state}, _, elemProps: {children?: React.ReactNode} = {}) => {
+      const allWidths = Object.keys(state.itemWidthCache).map(e => state.itemWidthCache[e]);
+      const [longest] = allWidths.sort((a, b) => (a < b ? 1 : -1));
+      return elemProps.children ? {width: `${longest}px`} : {};
+    }
+  )
 );
 
 console.log(useSegmentedControlItem);

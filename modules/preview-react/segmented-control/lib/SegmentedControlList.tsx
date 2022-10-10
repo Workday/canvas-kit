@@ -18,17 +18,14 @@ export interface SegmentedControlListProps<T = any>
 
 const useSegmentedControlList = composeHooks(
   useOverflowListMeasure,
-  createElemPropsHook(useSegmentedControlModel)(
-    ({state: {orientation, disabled, isIconOnlyVariant}}) => {
-      return {
-        // sets verrtical direction only for icon only variant
-        flexDirection: isIconOnlyVariant && orientation === 'vertical' ? 'column' : 'row',
-        style: {
-          opacity: disabled ? 0.4 : 1,
-        },
-      };
-    }
-  )
+  createElemPropsHook(useSegmentedControlModel)(({state: {orientation, disabled}}) => {
+    return {
+      flexDirection: orientation === 'vertical' ? 'column' : 'row',
+      style: {
+        opacity: disabled ? 0.4 : 1,
+      },
+    };
+  })
 );
 
 export const SegmentedControlList = createSubcomponent('div')({

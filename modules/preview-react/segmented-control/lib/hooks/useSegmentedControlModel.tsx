@@ -65,7 +65,6 @@ export const useSegmentedControlModel = createModelHook({
     ...model.state,
     disabled: config.disabled,
     size: config.size,
-    isIconOnlyVariant: model.state.items.every(item => !item.textValue),
     nonInteractiveIds: [],
     hiddenIds: [],
   };
