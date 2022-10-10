@@ -1,10 +1,10 @@
 import {Meta} from '@storybook/addon-docs';
 
-import {Basic as BasicText} from './examples/Text';
+import {Basic} from './examples/Text/Basic';
 
-import {TextComponent, TypeLevelComponent} from './PropTables.splitprops.tsx';
+import {TextComponent} from './PropTables.splitprops.tsx';
 
-<Meta title="Components/Text/React" />
+<Meta title="Components/Text/Text/React" />
 
 # Canvas Kit React Text
 
@@ -36,7 +36,7 @@ passing `as` prop.
 </Text>
 ```
 
-<ExampleCodeBlock code={BasicText} />
+<ExampleCodeBlock code={Basic} />
 
 ### Text Props
 
@@ -44,23 +44,3 @@ As previously mentioned, `Text` is built on top of `Box` and has access to all i
 addition `Text` has its own props:
 
 <ArgsTable of={TextComponent} />
-
-## Type Level Components
-
-Type Level Components, `Subtext`, `BodyText`, `Heading` and `Title`, apply type token styles to text
-element. Instead of passing type level token you can use one of Type Level Components, like in
-example below:
-
-```tsx
-// v7
-<p css={{...type.levels.subtext.small}}>Small Subtext Text</p>
-
-// v8
-<Subtext size="small">Small Subtext Text</Subtext>
-```
-
-### Props
-
-In addition to `Text` component props, each type level components has the following props:
-
-<ArgsTable of={TypeLevelComponent} />
