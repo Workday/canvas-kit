@@ -13,7 +13,7 @@ any questions.
   - [IE11 No Longer Supported](#ie11-no-longer-supported)
   - [React 18 Upgrade](#react-18-upgrade)
   - [Removal of Default Exports](#removal-of-default-exports)
-  - [Refactor Style Props](#refactor-style-props)
+  - [Reorganize Style Props](#reorganize-style-props)
   - [Responsive Styles](#responsive-styles)
   - [Testing](#testing)
 - [New Components](#new-components)
@@ -136,9 +136,42 @@ provided both default and named exports, the default export has been removed).
 
 ---
 
-### Refactor Style Props
+### Reorganize Style Props
 
-> Coming Soon (https://github.com/Workday/canvas-kit/pull/1827)
+Some style props have been reorganized and the implementation has been refactored, but the
+functionality will remain the same. This will improve the style prop documentation and allow us to
+extend style props further in the future. The style props `background` and `backgroundImage` have
+moved from the `color` style prop function to a new style prop function, `background`.
+
+These functions are only intended to be used by Canvas Kit internally. However, if you're importing
+the `color` style prop function to apply these two style props will need to update your import
+statements to import the `background` style function as well.
+
+> Note: We recommend using `Box` and style props directly instead of these style prop functions to
+> reduce the cost of upgrading in the future.
+
+```tsx
+// V7
+import {color} from '@workday/canvas-kit-react/layout';
+
+const Example = styled('div')(
+  {
+    boxSizing: 'border-box',
+  },
+  color
+);
+
+// V8
+import {background, color} from '@workday/canvas-kit-react/layout';
+
+const Example = styled('div')(
+  {
+    boxSizing: 'border-box',
+  },
+  background,
+  color
+);
+```
 
 ---
 
