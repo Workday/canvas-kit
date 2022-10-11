@@ -22,10 +22,11 @@ yarn add @workday/canvas-kit-react
 
 `Heading` is a Type Level component (along with [`Title`](/components/text/title/),
 [`BodyText`](/components/text/body-text/), and [`Subtext`](/components/text/subtext/)) built on top
-of [`Text`](/components/text/text/) which provides a simple way to render heading-level text according
-to the [Canvas type hierarchy](/tokens/type/#type-styles).
+of [`Text`](/components/text/text/) which provides a simple way to render heading-level text
+according to the [Canvas type hierarchy](/tokens/type/#type-styles).
 
-`Heading` renders an `<h2>` element by default with styles equivalent to `type.levels.heading[size]`.
+`Heading` renders an `<h2>` element by default with styles equivalent to
+`type.levels.heading[size]`. You may override the rendered element using the `as` prop.
 
 <ExampleCodeBlock code={Basic} />
 
