@@ -11,9 +11,10 @@ any questions.
 - [Codemod](#codemod)
 - [General Updates](#general-updates)
   - [IE11 No Longer Supported](#ie11-no-longer-supported)
+  - [React 18 Upgrade](#react-18-upgrade)
   - [Removal of Default Exports](#removal-of-default-exports)
-  - [Responsive Styles](#responsive-styles)
   - [Refactor Style Props](#refactor-style-props)
+  - [Responsive Styles](#responsive-styles)
   - [Testing](#testing)
 - [New Components](#new-components)
   - [Grid](#grid)
@@ -33,7 +34,7 @@ any questions.
 ## Codemod
 
 Please use our [codemod package](https://github.com/Workday/canvas-kit/tree/master/modules/codemod)
-to automatically update your code to work with many of the breaking changes in v8.
+to automatically update your code to work with most of the breaking changes in v8.
 
 ```sh
 > npx @workday/canvas-kit-codemod v8 [path]
@@ -50,11 +51,11 @@ finished.
 ```
 
 > The codemod only works on `.js`, `.jsx`, `.ts`, and `.tsx` files. You'll need to manually edit
-> other types of files (`.json`, `.mdx`, `.md`, etc.). You may need to run your linter after
-> executing the codemod, as its resulting formatting (spacing, quotes, etc.) may not match your
-> project conventions.
+> other file types (`.json`, `.mdx`, `.md`, etc.). You may need to run your linter after executing
+> the codemod, as its resulting formatting (spacing, quotes, etc.) may not match your project
+> conventions.
 
-The codemod will handle _many_ but _not all_ of the breaking changes in v8. **Breaking changes
+The codemod will handle _most_ but _not all_ of the breaking changes in v8. **Breaking changes
 handled by the codemod are marked with 🤖 in the Upgrade Guide.**
 
 **Please verify all changes made by the codemod.** As a safety precaution, we recommend committing
@@ -68,9 +69,15 @@ roll back more easily if necessary.
 Starting with v8, Canvas Kit will no longer support IE11.
 
 We've removed all IE11-specific code including polyfills. Applications built using Canvas Kit v8 and
-above may no longer run in IE11 and may fail to bootstrap with an error and/or a white screen.
+above will no longer run in IE11 and will fail to bootstrap with an error and/or a white screen.
 
 **Do not upgrade to v8 if your application needs to support IE11.**
+
+---
+
+### React 18 Upgrade
+
+> Coming Soon (https://github.com/Workday/canvas-kit/discussions/1545)
 
 ---
 
@@ -129,15 +136,15 @@ provided both default and named exports, the default export has been removed).
 
 ---
 
-### Responsive Styles
+### Refactor Style Props
 
-> Coming Soon (https://github.com/Workday/canvas-kit/pull/1779)
+> Coming Soon (https://github.com/Workday/canvas-kit/pull/1827)
 
 ---
 
-### Refactor Style Props
+### Responsive Styles
 
-> Coming Soon (https://github.com/Workday/canvas-kit/pull/1783)
+> Coming Soon (https://github.com/Workday/canvas-kit/pull/1779)
 
 ---
 
@@ -420,8 +427,9 @@ We've outlined these changes in more detail below.
 
 #### Changes to Redirects
 
-We've removed `onAction` from `Breadcrumbs.Link`. `Breadcrumbs.Link` now defaults to redirecting
-with an `href`, which means the page will hard-redirect when the link is clicked.
+We've removed `onAction` from `Breadcrumbs.Item` and `Breadcrumbs.Link`. `Breadcrumbs.Link` now
+defaults to redirecting with an `href`, which means the page will hard-redirect when the link is
+clicked.
 
 If you're in a single-page application (SPA) environment, you may want to use the internal SPA
 router instead. You can override the hard-redirect with a custom `onClick` handler that blocks the
@@ -462,8 +470,6 @@ return (
   </Breadcrumbs.Link>
 );
 ```
-
-Read more about [moving from Router DOM v5 to v6](https://reactrouter.com/en/main/upgrading/v5).
 
 #### Updated Overflow Behavior
 
