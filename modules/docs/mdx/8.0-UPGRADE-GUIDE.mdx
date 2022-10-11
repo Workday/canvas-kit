@@ -189,21 +189,32 @@ const Example = styled('div')(
 
 ### Grid
 
-We've introduced a new `Grid` component to the Main package. `Grid` is a low-level layout component
-that provides a common, ergonomic API for building two-dimensional layouts (rows and columns) with
+We've introduced a new [`Grid`](/components/layout/grid/) component to the Main package. `Grid` is a
+low-level layout component that provides a common, ergonomic API for building two-dimensional
+layouts (rows and columns) with
 [CSS Grid](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Grids).
-
-For more information, view the `Grid` component [docs](/components/layout/grid/).
 
 ---
 
 ### Text
 
-We've introduced a group of Text components to the Main package: `Text`, `LabelText`, `Title`,
-`Heading`, `BodyText`, and `Subtext`. Together they provide a common, ergonomic API for rendering
-text with built-in support for our Canvas Kit type tokens.
+We've introduced a group of Text components to the Main package: [`Text`](/components/text/text/),
+[`LabelText`](/components/text/label-text/), [`Title`](/components/text/title/),
+[`Heading`](/components/text/heading/), [`BodyText`](/components/text/body-text/), and
+[`Subtext`](/components/text/subtext/). Together they provide a common, ergonomic API for rendering
+text with built-in support for our Canvas type tokens.
 
-For more information, view the Text component [docs](/components/text/).
+```tsx
+// v7
+<h2 css={{...type.levels.title.medium}}>Medium Title Text</h2>
+<p css={{...type.levels.body.medium}}>Medium body text</p>
+<p css={{...type.levels.subtext.small}}>Small subtext text</p>
+
+// v8
+<Title as="h2" size="medium">Medium Title Text</Title>
+<BodyText size="medium">Medium body text</BodyText>
+<Subtext size="small">Small subtext text</Subtext>
+```
 
 ---
 
