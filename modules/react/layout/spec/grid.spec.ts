@@ -27,4 +27,21 @@ describe('Grid Style Props Function', () => {
 
     expect(gridStyles).toEqual(expected);
   });
+
+  it('should translate space token values to styles', () => {
+    const props = {
+      gridGap: 's',
+      gridRowGap: 'm',
+      gridColumnGap: 'l',
+    } as GridStyleProps;
+    const expected = {
+      ...props,
+      gridGap: '16px',
+      gridRowGap: '24px',
+      gridColumnGap: '32px',
+    };
+    const gridStyles = grid(props);
+
+    expect(gridStyles).toEqual(expected);
+  });
 });
