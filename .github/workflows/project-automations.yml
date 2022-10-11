@@ -73,7 +73,7 @@ jobs:
           project_id: ${{ env.gh_project_id }}
           resource_node_id: $${{ github.event.issue.node_id }}
           status_value: ${{ env.in_review }}
-      - name: Add Issue type
+      - name: Add Issue Type - Bug
         if: github.event.label.name == 'bug'
         uses: leonsteinhaeuser/project-beta-automations@v2.0.1
         with:
@@ -82,6 +82,7 @@ jobs:
           project_id: ${{ env.gh_project_id }}
           resource_node_id: ${{ github.event.issue.node_id }}
           custom_field_values: '[{\"name\": \"Type\",\"type\": \"single_select\",\"value\": \"🐛 Bug\"}]'
+      - name: Add Issue Type - Epic
         if: github.event.label.name == 'epic'
         uses: leonsteinhaeuser/project-beta-automations@v2.0.1
         with:
@@ -90,6 +91,7 @@ jobs:
           project_id: ${{ env.gh_project_id }}
           resource_node_id: ${{ github.event.issue.node_id }}
           custom_field_values: '[{\"name\": \"Type\",\"type\": \"single_select\",\"value\": \"⚓️ Epic\"}]'
+      - name: Add Issue Type - Spike
         if: github.event.label.name == 'spike'
         uses: leonsteinhaeuser/project-beta-automations@v2.0.1
         with:
