@@ -13,7 +13,7 @@ any questions.
   - [IE11 No Longer Supported](#ie11-no-longer-supported)
   - [React 18 Upgrade](#react-18-upgrade)
   - [Removal of Default Exports](#removal-of-default-exports)
-  - [Reorganize Style Props](#reorganize-style-props)
+  - [Reorganized Style Props](#reorganized-style-props)
   - [Responsive Styles](#responsive-styles)
   - [Testing](#testing)
 - [New Components](#new-components)
@@ -136,22 +136,22 @@ provided both default and named exports, the default export has been removed).
 
 ---
 
-### Reorganize Style Props
+### Reorganized Style Props
 
-Some style props have been reorganized and the implementation has been refactored, but the
-functionality will remain the same. This will improve the style prop documentation and allow us to
-extend style props further in the future. The style props `background` and `backgroundImage` have
-moved from the `color` style prop function to a new style prop function, `background`.
+We've reorganized some style props and refactored the implementation, but the functionality remains
+the same. This improves the style prop documentation and allows us to extend style props further in
+the future. We've moved the `background` and `backgroundImage` style props from the `color` style
+prop function to a new `background` style prop function.
 
 These functions are only intended to be used by Canvas Kit internally. However, if you're importing
-the `color` style prop function to apply these two style props will need to update your import
-statements to import the `background` style function as well.
+the `color` style prop function to apply these two style props, you'll need to update your import
+statements to import the `background` style prop function as well.
 
-> Note: We recommend using `Box` and style props directly instead of these style prop functions to
-> reduce the cost of upgrading in the future.
+> We recommend using `Box` and style props directly instead of these style prop functions to reduce
+> the cost of upgrading in the future.
 
 ```tsx
-// V7
+// v7
 import {color} from '@workday/canvas-kit-react/layout';
 
 const Example = styled('div')(
@@ -161,7 +161,7 @@ const Example = styled('div')(
   color
 );
 
-// V8
+// v8
 import {background, color} from '@workday/canvas-kit-react/layout';
 
 const Example = styled('div')(
