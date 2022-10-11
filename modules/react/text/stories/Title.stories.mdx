@@ -8,7 +8,7 @@ import {TypeLevelComponent} from './PropTables.splitprops.tsx';
 
 # Canvas Kit Title
 
-`Title` component renders text with `type.levels.title[size]` styles.
+`Heading` provides a simple way to render title-level text.
 
 ## Installation
 
@@ -20,26 +20,15 @@ yarn add @workday/canvas-kit-react
 
 ### Basic Example
 
-Type Level Components, `Subtext`, `BodyText`, `Heading` and `Title`, apply type token styles to text
-element. Instead of passing type level token you can use one of Type Level Components, like in
-example below:
+`Title` is a Type Level component (along with [`Heading`](/components/text/heading/),
+[`BodyText`](/components/text/body-text/), and [`Subtext`](/components/text/subtext/)) built on top
+of [`Text`](/components/text/text/) which provides a simple way to render title-level text according
+to the [Canvas type hierarchy](/tokens/type/#type-styles).
 
-```tsx
-// v7
-<p css={{...type.levels.subtext.small}}>Small Subtext Text</p>
-
-// v8
-<Subtext size="small">Small Subtext Text</Subtext>
-```
-
-```tsx
-<Title size="small">Small Title Text</Title>
-```
+`Title` renders an `<h1>` element by default with styles equivalent to `type.levels.title[size]`.
 
 <ExampleCodeBlock code={Basic} />
 
 ## Props
-
-In addition to `Text` component props, each type level components has the following props:
 
 <ArgsTable of={TypeLevelComponent} />
