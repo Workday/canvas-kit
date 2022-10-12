@@ -1,157 +1,136 @@
 import React from 'react';
 
-import {
-  createComponent,
-  ExtractProps,
-  StyledType,
-  styled,
-  PickRequired,
-} from '@workday/canvas-kit-react/common';
+import {ExtractProps, createContainer} from '@workday/canvas-kit-react/common';
 import {CSSProperties, colors} from '@workday/canvas-kit-react/tokens';
 import {HStack} from '@workday/canvas-kit-react/layout';
 import {StatusIndicatorIcon} from './StatusIndicatorIcon';
 import {StatusIndicatorLabel} from './StatusIndicatorLabel';
+import {StatusIndicatorEmphasis, StatusIndicatorVariant, useStatusIndicatorModel} from './hooks';
 
-export enum StatusIndicatorVariant {
-  Gray = 'gray',
-  Orange = 'orange',
-  Blue = 'blue',
-  Green = 'green',
-  Red = 'red',
-  Transparent = 'transparent',
-}
-
-export enum StatusIndicatorEmphasis {
-  High = 'high',
-  Low = 'low',
-}
-
-export interface StatusIndicatorGenericStyle {
-  variants: {
-    [statusType in StatusIndicatorVariant]: {
-      [statusEmphasis in StatusIndicatorEmphasis]?: CSSProperties;
-    };
-  };
-}
-
-export const statusIndicatorStyles: StatusIndicatorGenericStyle = {
-  variants: {
-    gray: {
-      high: {
+const getStuatusIndicatorColors = (
+  variant: StatusIndicatorVariant,
+  emphasis: StatusIndicatorEmphasis
+) => {
+  // let statusIndicatorTextColor = '';
+  // let statusIndicatorBackgroundColor = '';
+  switch (variant) {
+    case 'gray': {
+      if (emphasis === 'high') {
+        return {
+          color: colors.frenchVanilla100,
+          background: colors.licorice300,
+        };
+      } else {
+        return {
+          color: colors.licorice400,
+          background: colors.soap300,
+        };
+      }
+    }
+    case 'orange': {
+      if (emphasis === 'high') {
+        return {
+          color: colors.licorice500,
+          background: colors.cantaloupe400,
+        };
+      } else {
+        return {
+          color: colors.toastedMarshmallow600,
+          background: colors.cantaloupe100,
+        };
+      }
+    }
+    case 'blue': {
+      if (emphasis === 'high') {
+        return {
+          color: colors.frenchVanilla100,
+          background: colors.blueberry400,
+        };
+      } else {
+        return {
+          color: colors.blueberry500,
+          background: colors.blueberry100,
+        };
+      }
+    }
+    case 'green': {
+      if (emphasis === 'high') {
+        return {
+          color: colors.frenchVanilla100,
+          background: colors.greenApple600,
+        };
+      } else {
+        return {
+          color: colors.greenApple600,
+          background: colors.greenApple100,
+        };
+      }
+    }
+    case 'red': {
+      if (emphasis === 'high') {
+        return {
+          color: colors.frenchVanilla100,
+          background: colors.cinnamon500,
+        };
+      } else {
+        return {
+          color: colors.cinnamon600,
+          background: colors.cinnamon100,
+        };
+      }
+    }
+    case 'transparent': {
+      if (emphasis === 'high') {
+        return {
+          color: colors.frenchVanilla100,
+          background: colors.blackPepper600,
+          opacity: '.85',
+        };
+      } else {
+        return {
+          color: colors.frenchVanilla100,
+          background: colors.blackPepper600,
+        };
+      }
+    }
+    default: {
+      return {
         color: colors.frenchVanilla100,
         background: colors.licorice300,
-      },
-      low: {
-        color: colors.licorice400,
-        background: colors.soap200,
-      },
-    },
-    orange: {
-      high: {
-        color: colors.licorice500,
-        background: colors.cantaloupe400,
-      },
-      low: {
-        color: colors.toastedMarshmallow600,
-        background: colors.cantaloupe100,
-      },
-    },
-    blue: {
-      high: {
-        color: colors.frenchVanilla100,
-        background: colors.blueberry400,
-      },
-      low: {
-        color: colors.blueberry500,
-        background: colors.blueberry100,
-      },
-    },
-    green: {
-      high: {
-        color: colors.frenchVanilla100,
-        background: colors.greenApple600,
-      },
-      low: {
-        color: colors.greenApple600,
-        background: colors.greenApple100,
-      },
-    },
-    red: {
-      high: {
-        color: colors.frenchVanilla100,
-        background: colors.cinnamon500,
-      },
-      low: {
-        color: colors.cinnamon600,
-        background: colors.cinnamon100,
-      },
-    },
-    transparent: {
-      high: {
-        color: colors.frenchVanilla100,
-        background: colors.blackPepper600,
-      },
-      // Low & High emphasis are identical for transparent status indicators
-      low: {
-        color: colors.frenchVanilla100,
-        background: colors.blackPepper600,
-      },
-    },
-  },
+      };
+    }
+  }
 };
 export interface StatusIndicatorProps extends Partial<ExtractProps<typeof HStack, never>> {
   /**
    * Children of the Status Indicator. Should contain a `<StatusIndicator.Target>`, a `<StatusIndicator.Content>`
    */
   children: React.ReactNode;
-  /**
-   * The type of the StatusIndicator. Accepts `Gray`, `Orange`, `Blue`, `Green`, `Red`, or `Transparent`.
-   */
-  variant: StatusIndicatorVariant;
-  /**
-   * The emphasis of the StatusIndicator. Accepts `High` or `Low`.
-   * @default StatusIndicatorEmphasis.High
-   */
-  emphasis: StatusIndicatorEmphasis;
 }
 
-const StyledStatusIndicatorContainer = styled(HStack)<
-  StyledType & Pick<StatusIndicatorProps, 'emphasis' | 'variant'>
->(({variant, emphasis}) => ({
-  ...statusIndicatorStyles.variants[variant][emphasis],
-}));
-
-export const StatusIndicator = createComponent('div')({
+export const StatusIndicator = createContainer('div')({
   displayName: 'StatusIndicator',
-  Component: (
-    {
-      children,
-      emphasis = StatusIndicatorEmphasis.Low,
-      variant = StatusIndicatorVariant.Gray,
-      ...elemProps
-    }: StatusIndicatorProps,
-    ref,
-    Element
-  ) => (
-    <StyledStatusIndicatorContainer
+  modelHook: useStatusIndicatorModel,
+  subComponents: {
+    Icon: StatusIndicatorIcon,
+    Label: StatusIndicatorLabel,
+  },
+})<StatusIndicatorProps>(({children, ...elemProps}, Element, model) => {
+  const {state} = model;
+  return (
+    <HStack
       spacing={4}
       as={Element}
-      ref={ref}
       maxWidth={200}
-      emphasis={emphasis}
-      variant={variant}
       paddingX="xxxs"
       display="inline-flex"
       alignItems="center"
       height={20}
       borderRadius="s"
+      {...getStuatusIndicatorColors(state.variant, state.emphasis)}
       {...elemProps}
     >
       {children}
-    </StyledStatusIndicatorContainer>
-  ),
-  subComponents: {
-    Icon: StatusIndicatorIcon,
-    Label: StatusIndicatorLabel,
-  },
+    </HStack>
+  );
 });

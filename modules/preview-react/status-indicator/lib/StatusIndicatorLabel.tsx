@@ -5,8 +5,6 @@ import {BoxProps} from '@workday/canvas-kit-react/layout';
 import {OverflowTooltip, OverflowTooltipProps} from '@workday/canvas-kit-react/tooltip';
 import {Text} from '@workday/canvas-kit-react/text';
 
-import {colors} from '@workday/canvas-kit-react/tokens';
-
 export interface StatusIndicatorLabelProps extends BoxProps {
   tooltipProps?: Omit<OverflowTooltipProps, 'children'>;
 }
@@ -23,8 +21,8 @@ export const StatusIndicatorLabel = createComponent('span')({
           typeLevel="subtext.medium"
           fontWeight="bold"
           textTransform="capitalize"
-          color={colors.licorice100}
           maxWidth={200}
+          color="inherit"
           as={Element}
           {...elemProps}
         >
