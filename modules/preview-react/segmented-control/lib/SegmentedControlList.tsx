@@ -4,10 +4,9 @@ import {
   createSubcomponent,
   ExtractProps,
   createElemPropsHook,
-  composeHooks,
 } from '@workday/canvas-kit-react/common';
 import {Stack} from '@workday/canvas-kit-react/layout';
-import {useListRenderItems, useOverflowListMeasure} from '@workday/canvas-kit-react/collection';
+import {useListRenderItems} from '@workday/canvas-kit-react/collection';
 import {useSegmentedControlModel} from './hooks/useSegmentedControlModel';
 
 export interface SegmentedControlListProps<T = any>
@@ -16,16 +15,13 @@ export interface SegmentedControlListProps<T = any>
   children: ((item: T) => React.ReactNode) | React.ReactNode;
 }
 
-const useSegmentedControlList = composeHooks(
-  useOverflowListMeasure,
-  createElemPropsHook(useSegmentedControlModel)(({state: {orientation, disabled}}) => {
+const useSegmentedControlList = createElemPropsHook(useSegmentedControlModel)(
+  ({state: {orientation, disabled}}) => {
     return {
       flexDirection: orientation === 'vertical' ? 'column' : 'row',
-      style: {
-        opacity: disabled ? 0.4 : 1,
-      },
+      opacity: disabled ? 0.4 : 1,
     };
-  })
+  }
 );
 
 export const SegmentedControlList = createSubcomponent('div')({
@@ -42,7 +38,7 @@ export const SegmentedControlList = createSubcomponent('div')({
       border="1px solid transparent"
       borderColor="licorice200"
       borderRadius="l"
-      spacing="6px"
+      spacing="xxs"
       padding="3px"
       {...elemProps}
     >

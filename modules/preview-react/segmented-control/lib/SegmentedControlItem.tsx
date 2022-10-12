@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-import {colors, borderRadius, type, space} from '@workday/canvas-kit-react/tokens';
-import {createSubcomponent, styled, StyledType, useIsRTL} from '@workday/canvas-kit-react/common';
+import {colors, type, space} from '@workday/canvas-kit-react/tokens';
+import {createSubcomponent, useIsRTL} from '@workday/canvas-kit-react/common';
 import {Tooltip, TooltipProps} from '@workday/canvas-kit-react/tooltip';
 import {
   BaseButton,
@@ -53,11 +53,6 @@ export interface ItemProps extends ButtonContainerProps {
   tooltipProps?: Omit<TooltipProps, 'children'>;
 }
 
-type WrapProps = {
-  tooltipProps?: Omit<TooltipProps, 'children'>;
-  children: React.ReactElement;
-};
-
 const getButtonSize = (size: ButtonContainerProps['size']) => {
   switch (size) {
     case 'large':
@@ -71,7 +66,7 @@ const getButtonSize = (size: ButtonContainerProps['size']) => {
   }
 };
 
-const getIconButtonColors = (toggled?: boolean, disabled?: boolean): ButtonColors => {
+const getIconButtonColors = (toggled?: boolean): ButtonColors => {
   return {
     default: {
       background: toggled ? colors.frenchVanilla100 : colors.soap200,
@@ -132,60 +127,59 @@ const geButtonStyles = (size: ButtonSizes, children: React.ReactNode, icon?: Can
   };
 };
 
-const StyledButton = styled(BaseButton)<StyledType & ButtonContainerProps>(
-  {
-    borderRadius: borderRadius.m,
-  },
-  ({theme}) => ({
-    '[aria-pressed="true"]': {
-      borderColor: theme.canvas.palette.primary.main,
-      '&:hover, &:focus:hover': {
-        background: theme.canvas.palette.primary.main,
-      },
-    },
-  })
-);
+// needs some review
+// const StyledButton = styled(BaseButton)<StyledType & ButtonContainerProps>(({theme}) => ({
+//   '[aria-pressed="true"]': {
+//     borderColor: theme.canvas.palette.primary.main,
+//     '&:hover, &:focus:hover': {
+//       background: theme.canvas.palette.primary.main,
+//     },
+//   },
+// }));
 
-const Container = ({tooltipProps, children}: WrapProps) =>
-  tooltipProps ? (
+const Container = ({
+  tooltipProps,
+  children,
+}: {
+  tooltipProps?: Omit<TooltipProps, 'children'>;
+  children: React.ReactElement;
+}) => {
+  return tooltipProps ? (
     <Tooltip title={tooltipProps.title}>{children}</Tooltip>
   ) : (
     <React.Fragment>{children}</React.Fragment>
   );
+};
 
 export const SegmentedControlItem = createSubcomponent('button')({
   displayName: 'SegmentedControl.Item',
   modelHook: useSegmentedControlModel,
   elemPropsHook: useSegmentedControlItem,
-})<ItemProps>(
-  ({children, icon, tooltipProps, ...elemProps}, Element, {state: {size, disabled}}) => {
-    const isSmall = size === 'small';
-    const {color, ...textStyles} = type.levels.subtext[isSmall ? 'medium' : 'large'];
+})<ItemProps>(({children, icon, tooltipProps, ...elemProps}, Element, {state: {size}}) => {
+  const {color, ...textStyles} = type.levels.subtext[size === 'small' ? 'medium' : 'large'];
 
-    return (
-      <Container tooltipProps={tooltipProps}>
-        <StyledButton
-          as={Element}
-          colors={getIconButtonColors(elemProps['aria-pressed'], disabled)}
-          size={size}
-          {...geButtonStyles(size, children, icon)}
-          {...elemProps}
-        >
-          {icon && (
-            <BaseButton.Icon
-              size={isSmall ? 'extraSmall' : 'medium'}
-              icon={icon}
-              shouldMirrorIcon={useIsRTL()}
-              iconPosition="start"
-            />
-          )}
-          {children && (
-            <Text {...textStyles} fontWeight="bold" textAlign="left">
-              {children}
-            </Text>
-          )}
-        </StyledButton>
-      </Container>
-    );
-  }
-);
+  return (
+    <Container tooltipProps={tooltipProps}>
+      <BaseButton
+        as={Element}
+        borderRadius="m"
+        colors={getIconButtonColors(elemProps['aria-pressed'])}
+        {...geButtonStyles(size, children, icon)}
+        {...elemProps}
+      >
+        {icon && (
+          <BaseButton.Icon
+            size={size === 'small' ? 'extraSmall' : 'medium'}
+            icon={icon}
+            shouldMirrorIcon={useIsRTL()}
+          />
+        )}
+        {children && (
+          <Text {...textStyles} fontWeight="bold" textAlign="left">
+            {children}
+          </Text>
+        )}
+      </BaseButton>
+    </Container>
+  );
+});

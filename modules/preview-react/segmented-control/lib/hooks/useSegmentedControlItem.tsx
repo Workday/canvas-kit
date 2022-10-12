@@ -43,21 +43,21 @@ export const useSegmentedControlItem = composeHooks(
     }
   ),
   createElemPropsHook(useSegmentedControlModel)(
-    ({state}, _?: React.Ref<HTMLButtonElement>, elemProps: {'data-id'?: string} = {}) => {
+    ({state}, _, elemProps: {'data-id'?: string; children?: React.ReactNode} = {}) => {
       const name = elemProps['data-id'] || '';
       const id = `${state.id}-${name}`;
-      const selected = !!name && isSelected(name, state);
 
-      return state.disabled ? {id, disabled: true} : {id, 'aria-pressed': selected};
-    }
-  ),
-  createElemPropsHook(useSegmentedControlModel)(
-    ({state}, _, elemProps: {children?: React.ReactNode} = {}) => {
-      const allWidths = Object.keys(state.itemWidthCache).map(e => state.itemWidthCache[e]);
-      const [longest] = allWidths.sort((a, b) => (a < b ? 1 : -1));
-      return elemProps.children ? {width: `${longest}px`} : {};
+      const selected = !!name && isSelected(name, state);
+      const [longest] = Object.keys(state.itemWidthCache)
+        .map(e => state.itemWidthCache[e])
+        .sort((a, b) => (a < b ? 1 : -1));
+
+      return {
+        id,
+        'aria-pressed': selected,
+        disabled: state.disabled || undefined,
+        width: elemProps.children && `${longest}px`,
+      };
     }
   )
 );
-
-console.log(useSegmentedControlItem);
