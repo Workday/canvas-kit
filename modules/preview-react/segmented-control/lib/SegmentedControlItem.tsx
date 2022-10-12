@@ -71,7 +71,7 @@ const getButtonSize = (size: ButtonContainerProps['size']) => {
   }
 };
 
-const getIconButtonColors = (toggled?: boolean): ButtonColors => {
+const getIconButtonColors = (toggled?: boolean, disabled?: boolean): ButtonColors => {
   return {
     default: {
       background: toggled ? colors.frenchVanilla100 : colors.soap200,
@@ -81,15 +81,18 @@ const getIconButtonColors = (toggled?: boolean): ButtonColors => {
     },
     hover: {
       background: toggled ? colors.frenchVanilla100 : colors.soap400,
-      icon: colors.blackPepper400,
-      label: colors.blackPepper400,
+      icon: colors.licorice400,
+      label: colors.licorice400,
     },
     active: {
       background: toggled ? colors.frenchVanilla100 : colors.soap200,
       icon: toggled ? colors.blackPepper400 : colors.licorice200,
     },
     focus: {},
-    disabled: {},
+    disabled: {
+      background: colors.soap200,
+      opacity: '1',
+    },
   };
 };
 
@@ -132,9 +135,6 @@ const geButtonStyles = (size: ButtonSizes, children: React.ReactNode, icon?: Can
 const StyledButton = styled(BaseButton)<StyledType & ButtonContainerProps>(
   {
     borderRadius: borderRadius.m,
-    '&:disabled': {
-      opacity: 1,
-    },
   },
   ({theme}) => ({
     '[aria-pressed="true"]': {
@@ -157,33 +157,35 @@ export const SegmentedControlItem = createSubcomponent('button')({
   displayName: 'SegmentedControl.Item',
   modelHook: useSegmentedControlModel,
   elemPropsHook: useSegmentedControlItem,
-})<ItemProps>(({children, icon, tooltipProps, ...elemProps}, Element, {state: {size}}) => {
-  const isSmall = size === 'small';
-  const {color, ...textStyles} = type.levels.subtext[isSmall ? 'medium' : 'large'];
+})<ItemProps>(
+  ({children, icon, tooltipProps, ...elemProps}, Element, {state: {size, disabled}}) => {
+    const isSmall = size === 'small';
+    const {color, ...textStyles} = type.levels.subtext[isSmall ? 'medium' : 'large'];
 
-  return (
-    <Container tooltipProps={tooltipProps}>
-      <StyledButton
-        as={Element}
-        colors={getIconButtonColors(elemProps['aria-pressed'])}
-        size={size}
-        {...geButtonStyles(size, children, icon)}
-        {...elemProps}
-      >
-        {icon && (
-          <BaseButton.Icon
-            size={isSmall ? 'extraSmall' : 'medium'}
-            icon={icon}
-            shouldMirrorIcon={useIsRTL()}
-            iconPosition="start"
-          />
-        )}
-        {children && (
-          <Text {...textStyles} fontWeight="bold" textAlign="left">
-            {children}
-          </Text>
-        )}
-      </StyledButton>
-    </Container>
-  );
-});
+    return (
+      <Container tooltipProps={tooltipProps}>
+        <StyledButton
+          as={Element}
+          colors={getIconButtonColors(elemProps['aria-pressed'], disabled)}
+          size={size}
+          {...geButtonStyles(size, children, icon)}
+          {...elemProps}
+        >
+          {icon && (
+            <BaseButton.Icon
+              size={isSmall ? 'extraSmall' : 'medium'}
+              icon={icon}
+              shouldMirrorIcon={useIsRTL()}
+              iconPosition="start"
+            />
+          )}
+          {children && (
+            <Text {...textStyles} fontWeight="bold" textAlign="left">
+              {children}
+            </Text>
+          )}
+        </StyledButton>
+      </Container>
+    );
+  }
+);
