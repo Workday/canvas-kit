@@ -5,12 +5,14 @@ import {
   focusRing,
   mouseFocusBehavior,
   Themeable,
+  createSubcomponent,
+  createElemPropsHook,
 } from '@workday/canvas-kit-react/common';
-import {colors, inputColors, spaceNumbers} from '@workday/canvas-kit-react/tokens';
-import {RadioModel} from './useRadioModel';
+import {colors, inputColors, spaceNumbers, borderRadius} from '@workday/canvas-kit-react/tokens';
+import {useRadioModel} from './useRadioModel';
 
 export interface RadioButtonProps extends Themeable {
-  model?: RadioModel;
+  // model?: RadioModel;
   children?: React.ReactNode;
   /**
    * If true, set the Radio button to the checked state.
@@ -50,8 +52,10 @@ const radioBorderRadius = 9;
 const radioTapArea = spaceNumbers.m;
 const radioWidth = 18;
 const rippleRadius = (spaceNumbers.l - radioWidth) / 2;
+const radioDot = 8;
+const radioHeight = 18;
 
-const RadioButtonInput = styled('input')<RadioButtonProps & StyledType>(
+const RadioInput = styled('input')<RadioButtonProps & StyledType>(
   {
     borderRadius: radioBorderRadius,
     width: radioTapArea,
@@ -129,5 +133,127 @@ const RadioButtonInput = styled('input')<RadioButtonProps & StyledType>(
     }),
   })
 );
+/**
+ * Using a wrapper prevents the browser default behavior of trigging
+ * :hover on the radio when you hover on it's corresponding label.
+ * This stops the ripple from showing when you hover on the label.
+ */
+const RadioInputWrapper = styled('div')<Pick<RadioButtonProps, 'disabled'>>({
+  display: 'flex',
+  height: radioHeight,
+  width: radioWidth,
+});
+
+const RadioRipple = styled('span')<Pick<RadioButtonProps, 'disabled'>>({
+  borderRadius: borderRadius.circle,
+  boxShadow: `0 0 0 0 ${colors.soap200}`,
+  height: radioHeight,
+  transition: 'box-shadow 150ms ease-out',
+  width: radioWidth,
+  position: 'absolute',
+  pointerEvents: 'none', // This is a decorative element we don't want it to block clicks to input
+  zIndex: -1,
+});
+
+const RadioBackground = styled('div')<RadioButtonProps>(
+  {
+    alignItems: 'center',
+    backgroundColor: colors.frenchVanilla100,
+    borderRadius: radioBorderRadius,
+    borderStyle: 'solid',
+    borderWidth: '1px',
+    boxSizing: 'border-box',
+    display: 'flex',
+    height: radioHeight,
+    justifyContent: 'center',
+    padding: '0px 2px',
+    pointerEvents: 'none',
+    position: 'absolute',
+    transition: 'border 200ms ease, background 200ms',
+    width: radioWidth,
+  },
+  ({
+    checked,
+    disabled,
+    theme: {
+      canvas: {
+        palette: {primary: themePrimary},
+      },
+    },
+  }) => ({
+    borderColor: checked
+      ? themePrimary.main
+      : disabled
+      ? inputColors.disabled.border
+      : inputColors.border,
+    backgroundColor: checked
+      ? themePrimary.main
+      : disabled
+      ? inputColors.disabled.background
+      : 'white',
+  })
+);
+
+const RadioCheck = styled('div')<Pick<RadioButtonProps, 'checked'>>(
+  {
+    borderRadius: radioBorderRadius,
+    display: 'flex',
+    flexDirection: 'column',
+    height: radioDot,
+    pointerEvents: 'none',
+    transition: 'transform 200ms ease, opacity 200ms ease',
+    width: radioDot,
+  },
+  ({theme}) => ({
+    backgroundColor: theme.canvas.palette.primary.contrast,
+  }),
+  ({checked}) => ({
+    opacity: checked ? 1 : 0,
+    transform: checked ? 'scale(1)' : 'scale(0.5)',
+  })
+);
+const useRadioButtonInput = createElemPropsHook(useRadioModel)((model, ref, elemProps) => {
+  const checked = false;
+  const disabled = false;
+  return {
+    checked,
+    disabled,
+    // onChange: event => {
+    //   model.events.onChange(elemProps.value, index);
+    // },
+  };
+});
+export const RadioButtonInput = createSubcomponent('input')({
+  displayName: 'RadioButton.Input',
+  modelHook: useRadioModel,
+  elemPropsHook: useRadioButtonInput,
+})<RadioButtonProps>(({children, checked, ...elemProps}, Element, model) => {
+  return (
+    <RadioInputWrapper disabled={elemProps.disabled}>
+      <RadioInput
+        as={Element}
+        checked={elemProps.value === model.state.value}
+        // disabled={model.state.disabled}
+        // id={inputId}
+        // ref={ref}
+        // name={model.state.name}
+        // onChange={model.events.onChange}
+        type="radio"
+        // value={model.state.value}
+        aria-checked={elemProps.value === model.state.value}
+        // variant={variant}
+        {...elemProps}
+      />
+      <RadioRipple />
+      <RadioBackground
+      // checked={model.state.checked}
+      // disabled={model.state.disabled}
+      // variant={variant}
+      >
+        <RadioCheck checked={elemProps.value === model.state.value} />
+      </RadioBackground>
+    </RadioInputWrapper>
+  );
+});
 
 export default RadioButtonInput;
