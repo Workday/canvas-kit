@@ -7,6 +7,9 @@ export type StatusIndicatorEmphasis = 'high' | 'low';
 
 export const useStatusIndicatorModel = createModelHook({
   defaultConfig: {
+    /**
+     * Defines the emphasis of the StatusIndicator
+     */
     emphasis: 'low' as StatusIndicatorEmphasis,
     variant: 'gray' as StatusIndicatorVariant,
   },

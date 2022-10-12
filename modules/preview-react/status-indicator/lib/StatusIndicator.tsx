@@ -1,105 +1,95 @@
 import React from 'react';
 
 import {ExtractProps, createContainer} from '@workday/canvas-kit-react/common';
-import {CSSProperties, colors} from '@workday/canvas-kit-react/tokens';
+import {colors} from '@workday/canvas-kit-react/tokens';
 import {HStack} from '@workday/canvas-kit-react/layout';
 import {StatusIndicatorIcon} from './StatusIndicatorIcon';
 import {StatusIndicatorLabel} from './StatusIndicatorLabel';
 import {StatusIndicatorEmphasis, StatusIndicatorVariant, useStatusIndicatorModel} from './hooks';
 
-const getStuatusIndicatorColors = (
+export const getStatusIndicatorColors = (
   variant: StatusIndicatorVariant,
   emphasis: StatusIndicatorEmphasis
 ) => {
-  // let statusIndicatorTextColor = '';
-  // let statusIndicatorBackgroundColor = '';
+  let statusIndicatorTextAndIconColor = '';
+  let statusIndicatorBackgroundColor = '';
   switch (variant) {
-    case 'gray': {
-      if (emphasis === 'high') {
-        return {
-          color: colors.frenchVanilla100,
-          background: colors.licorice300,
-        };
-      } else {
-        return {
-          color: colors.licorice400,
-          background: colors.soap300,
-        };
+    case 'gray':
+      {
+        if (emphasis === 'high') {
+          statusIndicatorTextAndIconColor = colors.frenchVanilla100;
+          statusIndicatorBackgroundColor = colors.licorice300;
+        } else {
+          statusIndicatorTextAndIconColor = colors.licorice400;
+          statusIndicatorBackgroundColor = colors.soap300;
+        }
       }
-    }
-    case 'orange': {
-      if (emphasis === 'high') {
-        return {
-          color: colors.licorice500,
-          background: colors.cantaloupe400,
-        };
-      } else {
-        return {
-          color: colors.toastedMarshmallow600,
-          background: colors.cantaloupe100,
-        };
+      break;
+
+    case 'orange':
+      {
+        if (emphasis === 'high') {
+          statusIndicatorTextAndIconColor = colors.licorice500;
+          statusIndicatorBackgroundColor = colors.cantaloupe400;
+        } else {
+          statusIndicatorTextAndIconColor = colors.toastedMarshmallow600;
+          statusIndicatorBackgroundColor = colors.cantaloupe100;
+        }
       }
-    }
-    case 'blue': {
-      if (emphasis === 'high') {
-        return {
-          color: colors.frenchVanilla100,
-          background: colors.blueberry400,
-        };
-      } else {
-        return {
-          color: colors.blueberry500,
-          background: colors.blueberry100,
-        };
+      break;
+    case 'blue':
+      {
+        if (emphasis === 'high') {
+          statusIndicatorTextAndIconColor = colors.frenchVanilla100;
+          statusIndicatorBackgroundColor = colors.blueberry400;
+        } else {
+          statusIndicatorTextAndIconColor = colors.blueberry500;
+          statusIndicatorBackgroundColor = colors.blueberry100;
+        }
       }
-    }
-    case 'green': {
-      if (emphasis === 'high') {
-        return {
-          color: colors.frenchVanilla100,
-          background: colors.greenApple600,
-        };
-      } else {
-        return {
-          color: colors.greenApple600,
-          background: colors.greenApple100,
-        };
+      break;
+    case 'green':
+      {
+        if (emphasis === 'high') {
+          statusIndicatorTextAndIconColor = colors.frenchVanilla100;
+          statusIndicatorBackgroundColor = colors.greenApple600;
+        } else {
+          statusIndicatorTextAndIconColor = colors.greenApple600;
+          statusIndicatorBackgroundColor = colors.greenApple100;
+        }
       }
-    }
-    case 'red': {
-      if (emphasis === 'high') {
-        return {
-          color: colors.frenchVanilla100,
-          background: colors.cinnamon500,
-        };
-      } else {
-        return {
-          color: colors.cinnamon600,
-          background: colors.cinnamon100,
-        };
+      break;
+    case 'red':
+      {
+        if (emphasis === 'high') {
+          statusIndicatorTextAndIconColor = colors.frenchVanilla100;
+          statusIndicatorBackgroundColor = colors.cinnamon500;
+        } else {
+          statusIndicatorTextAndIconColor = colors.cinnamon600;
+          statusIndicatorBackgroundColor = colors.cinnamon100;
+        }
       }
-    }
-    case 'transparent': {
-      if (emphasis === 'high') {
-        return {
-          color: colors.frenchVanilla100,
-          background: colors.blackPepper600,
-          opacity: '.85',
-        };
-      } else {
-        return {
-          color: colors.frenchVanilla100,
-          background: colors.blackPepper600,
-        };
+      break;
+    case 'transparent':
+      {
+        if (emphasis === 'high') {
+          statusIndicatorTextAndIconColor = colors.frenchVanilla100;
+          statusIndicatorBackgroundColor = colors.blackPepper600;
+        } else {
+          statusIndicatorTextAndIconColor = colors.frenchVanilla100;
+          statusIndicatorBackgroundColor = colors.blackPepper600;
+        }
       }
-    }
+      break;
     default: {
-      return {
-        color: colors.frenchVanilla100,
-        background: colors.licorice300,
-      };
+      statusIndicatorTextAndIconColor = colors.frenchVanilla100;
+      statusIndicatorBackgroundColor = colors.licorice300;
     }
   }
+  return {
+    statusIndicatorTextAndIconColor,
+    statusIndicatorBackgroundColor,
+  };
 };
 export interface StatusIndicatorProps extends Partial<ExtractProps<typeof HStack, never>> {
   /**
@@ -117,6 +107,7 @@ export const StatusIndicator = createContainer('div')({
   },
 })<StatusIndicatorProps>(({children, ...elemProps}, Element, model) => {
   const {state} = model;
+  const colors = getStatusIndicatorColors(state.variant, state.emphasis);
   return (
     <HStack
       spacing={4}
@@ -127,7 +118,8 @@ export const StatusIndicator = createContainer('div')({
       alignItems="center"
       height={20}
       borderRadius="s"
-      {...getStuatusIndicatorColors(state.variant, state.emphasis)}
+      color={colors.statusIndicatorTextAndIconColor}
+      background={colors.statusIndicatorBackgroundColor}
       {...elemProps}
     >
       {children}

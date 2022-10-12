@@ -6,6 +6,7 @@ import {SystemIcon, SystemIconProps} from '@workday/canvas-kit-react/icon';
 import {plusIcon} from '@workday/canvas-system-icons-web';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {useStatusIndicatorModel} from './hooks';
+import {getStatusIndicatorColors} from './StatusIndicator';
 
 export interface StatusIndicatorIconProps extends Omit<SystemIconProps, 'icon'> {
   /**
@@ -15,35 +16,18 @@ export interface StatusIndicatorIconProps extends Omit<SystemIconProps, 'icon'> 
   icon: CanvasSystemIcon;
 }
 
-// export const StatusIndicatorIcon = createComponent('span')({
-//   displayName: 'StatusIndicator.Icon',
-//   Component: ({icon, ...elemProps}: StatusIndicatorIconProps, ref, Element) => {
-//     return (
-//       <SystemIcon
-//         as={Element}
-//         size={20}
-//         role="img"
-//         ref={ref}
-//         color="inherit"
-//         colorHover="initial"
-//         icon={icon || plusIcon}
-//         {...elemProps}
-//       />
-//     );
-//   },
-// });
-
 export const StatusIndicatorIcon = createSubcomponent('span')({
   modelHook: useStatusIndicatorModel,
 })<StatusIndicatorIconProps>(({icon, ...elemProps}, Element, model) => {
   const {state} = model;
+  const colors = getStatusIndicatorColors(state.variant, state.emphasis);
   return (
     <SystemIcon
       as={Element}
       size={20}
       role="img"
-      color={}
-      colorHover="initial"
+      color={colors.statusIndicatorTextAndIconColor}
+      colorHover={colors.statusIndicatorTextAndIconColor}
       icon={icon || plusIcon}
       {...elemProps}
     />
