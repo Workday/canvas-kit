@@ -26,44 +26,76 @@ yarn add @workday/canvas-kit-react
 
 ### Basic Example
 
-<ExampleCodeBlock code={Usage} />
+<ExampleCodeBlock code={Basic} />
 
-### Rows and Columns
+`Flex` is the container component for creating one-dimensional layouts with CSS Flexbox. It has
+special style props that map to CSS Flexbox style properties to provide a common, ergonomic API for
+building layouts.
 
-You can nest `Flex` components to build layouts with rows and columns.
+#### Usage
 
-<ExampleCodeBlock code={FlexLayout} />
+```tsx
+<Flex flexDirection="column" rowGap="xs">
+  <div>Implicit flex item 1</div>
+  <div>Implicit flex item 2</div>
+  <div>Implicit flex item 3</div>
+</Flex>
+```
 
-### Small Containers
-
-You can also use `Flex` to create layouts within smaller containers, such as this card example
-below:
-
-<ExampleCodeBlock code={FlexCard} />
-
-### Flex vs. Box
-
-`Flex` is built with `Box` and has access to all `BoxProps`. The main differences between `Box` and
-`Flex` are:
+#### Props
 
 - `Flex` is set to `display: flex` by default
 - The `display` prop is limited to `flex` and `inline-flex`
-- `Flex` has access to flex container properties.
+- `Flex` has access to flex container style props.
 
-In short, use `Flex` when you need a flex container to build layouts with CSS Flexbox, and use `Box`
-when you need a simple container. It's also important to note that `Flex` has no real opinion about
-how to build layouts outside of the CSS Flexbox spec. Its unopinonated nature allows it to be
+In short, use `Flex` when you need a flex container to build one-directional layouts with CSS
+Flexbox, and use `Box` when you need a simple container. It's also important to note that `Flex` has
+no real opinion about how to build layouts outside of the CSS Flexbox spec. This allows it to be
 composed into many different components.
 
-## Flex Props
+## Components
 
-As previously mentioned, `Flex` is built on top of `Box` and has access to all its props, including
-[flex item properties](https://developer.mozilla.org/en-US/docs/Glossary/Flex_Item). But `Flex` adds
-[flex container properties](https://developer.mozilla.org/en-US/docs/Glossary/Flex_Container)
-through style props as well. There are seven flex container props:
+### Flex
 
-<ArgsTable of={FlexStyle} />
+`Flex` is the container component for creating one-dimensional layouts with CSS Flexbox. It has
+special style props that map to CSS Flexbox style properties to provide a common, ergonomic API for
+building layouts.
 
-### Flex Props (Exhaustive List)
+#### Usage
 
-<ArgsTable of={Flex} />
+```tsx
+<Flex flexDirection="column" rowGap="xs">
+  <div>Implicit flex item 1</div>
+  <div>Implicit flex item 2</div>
+  <div>Implicit flex item 3</div>
+</Flex>
+```
+
+#### Props
+
+`Flex` exposes
+[flex container style props](/getting-started/for-developers/resources/style-props/#flex) and `Box`
+style props.
+
+### Flex.Item
+
+`Flex.Item` is a subcomponent of `Flex`. It is a `Box` component under the hood and exposes
+[flex item style props](/getting-started/for-developers/resources/style-props/#flex-item) that map
+to CSS Flexbox Item properties. This provides greater control over how child components render in
+your layout.
+
+#### Usage
+
+```tsx
+<Flex flexDirection="column" rowGap="xs">
+  <Flex.Item flex={1}>First Item</Flex.Item>
+  <Flex.Item flex={2}>Second Item</Flex.Item>
+  <Flex.Item flex={1}>Third Item</Flex.Item>
+</Flex>
+```
+
+#### Props
+
+`Flex.Item` exposes
+[flex item style props](/getting-started/for-developers/resources/style-props/#flex-item) and `Box`
+style props.

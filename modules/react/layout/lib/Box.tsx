@@ -4,24 +4,24 @@ import isPropValid from '@emotion/is-prop-valid';
 import {createComponent, StyledType, useConstant} from '@workday/canvas-kit-react/common';
 
 // style props
+import {background, BackgroundStyleProps} from './utils/background';
 import {border, BorderStyleProps} from './utils/border';
 import {color, ColorStyleProps} from './utils/color';
 import {depth, DepthStyleProps} from './utils/depth';
 import {flexItem, FlexItemStyleProps} from './utils/flexItem';
 import {gridItem, GridItemStyleProps} from './utils/gridItem';
-import {font, FontStyleProps} from './utils/font';
 import {layout, LayoutStyleProps} from './utils/layout';
 import {other, OtherStyleProps} from './utils/other';
 import {position, PositionStyleProps} from './utils/position';
 import {space, SpaceStyleProps} from './utils/space';
 import {text, TextStyleProps} from './utils/text';
 
-export type BoxProps = BorderStyleProps &
+export type BoxProps = BackgroundStyleProps &
+  BorderStyleProps &
   ColorStyleProps &
   DepthStyleProps &
   FlexItemStyleProps &
   GridItemStyleProps &
-  FontStyleProps &
   LayoutStyleProps &
   OtherStyleProps &
   PositionStyleProps &
@@ -60,6 +60,7 @@ const shouldForwardProp = (prop: string) => {
  * A function that allows us to call Box styles on an element and reduce the amount of elements in the React Dom tree.
  * Instead of using the `as` in a styled function, you can just call this instead to pass those props to the styled element
  * @example
+ * ```
  * import { boxStyleFn } from '@workday/canvas-kit-react/layout';
  * const StyledHeader = styled('h1')(
  *  boxStyleFn,
@@ -68,22 +69,24 @@ const shouldForwardProp = (prop: string) => {
  *  }
  * )
  *
- * ....
+ * ...
  *
  * <StyledHeader color='red'>Hello World</StyledHeader>
+ * ```
  */
 export const boxStyleFn = <P extends BoxProps>(props: P) => {
   return [
     {
       boxSizing: 'border-box',
     },
+    background,
     border,
     color,
     depth,
     flexItem,
     gridItem,
-    font,
     layout,
+    other,
     position,
     space,
     text,
@@ -100,39 +103,10 @@ export const boxStyleFn = <P extends BoxProps>(props: P) => {
 };
 
 // Meant to be used with elements. The `shouldForwardProps` will remove all style props
-const StyledBoxElement = styled('div', {shouldForwardProp})<StyledType & BoxProps>(
-  {
-    boxSizing: 'border-box',
-  },
-  border,
-  color,
-  depth,
-  flexItem,
-  gridItem,
-  font,
-  layout,
-  position,
-  space,
-  text
-);
+const StyledBoxElement = styled('div', {shouldForwardProp})<StyledType & BoxProps>(boxStyleFn);
 
 // Meant to be used with components. There is no `shouldForwardProps` - all props will be forwarded to the component
-const StyledBoxComponent = styled('div')<StyledType & BoxProps>(
-  {
-    boxSizing: 'border-box',
-  },
-  border,
-  color,
-  depth,
-  flexItem,
-  gridItem,
-  font,
-  layout,
-  other,
-  position,
-  space,
-  text
-);
+const StyledBoxComponent = styled('div')<StyledType & BoxProps>(boxStyleFn);
 
 /**
  * `Box` is a primitive component that provides a common, ergonomic API around Canvas design tokens.

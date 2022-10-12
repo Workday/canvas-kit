@@ -20,6 +20,7 @@ const StyledFlex = styled(Box)<StyledType & FlexProps>(
  * `Flex` is built on top of `Box` and has access to all `BoxProps`.
  *
  * @example
+ * ```tsx
  * import { Flex, FlexProps } from '@workday/canvas-kit-react/layout';
  *
  * interface CardProps extends FlexProps {
@@ -33,7 +34,7 @@ const StyledFlex = styled(Box)<StyledType & FlexProps>(
  *     <p>This card uses flexbox to set its layout.</p>
  *   </Flex>
  * );
- *
+ * ```
  */
 export const Flex = createComponent('div')({
   displayName: 'Flex',
@@ -43,5 +44,8 @@ export const Flex = createComponent('div')({
         {children}
       </StyledFlex>
     );
+  },
+  subComponents: {
+    Item: Box,
   },
 });
