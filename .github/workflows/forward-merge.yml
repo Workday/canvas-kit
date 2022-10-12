@@ -17,8 +17,9 @@ jobs:
     #   forward merge would run twice because every commit on master/support causes a new commit
     #   pushed back to the branch. So we ignore all non-release commits on support/master because
     #   the release workflow will commit a release commit starting with `chore: Release ...` back to
-    #   the branch and this job will run on that commit instead.
-    if: "((github.ref_name == 'support' || github.ref_name == 'master') && startsWith(github.event.head_commit.message, 'chore: Release')) || startsWith(github.ref_name, 'prerelease/')"
+    #   the branch and this job will run on that commit instead. Also, forward merges that skipped
+    #   a release
+    if: "((github.ref_name == 'support' || github.ref_name == 'master') && startsWith(github.event.head_commit.message, 'chore: Release')) || startsWith(github.ref_name, 'prerelease/') || contains(github.event.head_commit.message, '[skip release]')"
     runs-on: ubuntu-latest
     outputs: # Output branch names for the make-pull-request job
       branch: ${{steps.extract-branch.outputs.branch}}
