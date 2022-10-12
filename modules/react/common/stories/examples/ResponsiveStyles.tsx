@@ -100,11 +100,11 @@ export const ResponsiveContainer = () => {
   return (
     <ResponsiveContextProvider width={width}>
       <Box ref={ref} {...responsiveStyles.box} maxWidth={contWidth}>
-        <FormField label={'Container Size: ' + contWidth}>
+        <FormField label="Container Size">
           <Select onChange={handleChange} value={value}>
-            <SelectOption label="Desktop" value="desktop" />
-            <SelectOption label="Tablet" value="tablet" />
-            <SelectOption label="Mobile" value="mobile" />
+            <SelectOption label="1024px" value="desktop" />
+            <SelectOption label="768px" value="tablet" />
+            <SelectOption label="320px" value="mobile" />
           </Select>
         </FormField>
         <Grid as="section">
