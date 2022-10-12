@@ -18,7 +18,7 @@ import {useSegmentedControlItem} from './hooks/useSegmentedControlItem';
 export interface ItemProps extends ButtonContainerProps {
   /**
    * Optionally pass index to the item. This should be done if `SegmentedControl.Item` components were created
-   * via a `Array::map` function. This index will ensure keyboard navigation works even if items are
+   * via a `[Array::map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map)` function. This index will ensure keyboard navigation works even if items are
    * inserted out of order.
    */
   index?: number;
