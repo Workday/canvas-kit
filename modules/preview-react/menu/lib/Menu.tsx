@@ -119,6 +119,7 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
     } = this.props;
     const {selectedItemIndex} = this.state;
     const cardWidth = grow ? '100%' : width;
+    let interactiveItemIndex: number | null = null;
 
     return (
       <Card display="inline-block" padding={space.zero} width={cardWidth} depth={3}>
@@ -133,17 +134,22 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
             ref={this.menuRef}
             {...elemProps}
           >
-            {React.Children.map(children, (menuItem, index) => {
+            {React.Children.map(children, menuItem => {
               if (!React.isValidElement(menuItem)) {
                 return;
               }
-              const itemId = `${id}-${index}`;
+              let itemId = null;
+              if (!menuItem.props.isHeader) {
+                interactiveItemIndex = (interactiveItemIndex ?? -1) + 1;
+                itemId = `${id}-${interactiveItemIndex}`;
+              }
               return (
                 <React.Fragment key={itemId}>
                   {React.cloneElement(menuItem, {
                     onClick: (event: React.MouseEvent) => this.handleClick(event, menuItem.props),
                     id: itemId,
-                    isFocused: selectedItemIndex === index,
+                    isFocused:
+                      selectedItemIndex === interactiveItemIndex && !menuItem.props.isHeader,
                   })}
                 </React.Fragment>
               );
@@ -175,7 +181,9 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
     const children = React.Children.toArray(this.props.children);
     let nextSelectedIndex = 0;
     let isShortcut = false;
-    const itemCount = children.length;
+    const itemCount = children.filter(child => {
+      return !(child as React.ReactElement<MenuItemProps>)?.props?.isHeader;
+    }).length;
     const firstItem = 0;
     const lastItem = itemCount - 1;
 
@@ -308,6 +316,9 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
     };
 
     const firstCharacters = React.Children.map(this.props.children, child => {
+      if ((child as React.ReactElement<MenuItemProps>)?.props?.isHeader) {
+        return;
+      }
       return getFirstCharacter(child);
     });
 
