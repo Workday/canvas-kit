@@ -4,10 +4,11 @@ import {
   CanvasProvider,
   EmotionCanvasTheme,
   PartialEmotionCanvasTheme,
+  StyleRewriteFn,
 } from '@workday/canvas-kit-react/common';
 import {CSSProperties} from '@workday/canvas-kit-react/tokens';
 
-export const convertToStaticStates = (obj?: CSSProperties): CSSProperties | undefined => {
+export const convertToStaticStates: StyleRewriteFn = obj => {
   if (!obj) {
     return obj;
   }
@@ -26,14 +27,14 @@ export const convertToStaticStates = (obj?: CSSProperties): CSSProperties | unde
       typeof obj[key] === 'object' ? convertToStaticStates(obj[key] as CSSProperties) : obj[key];
     const newObj = {...result, [newKey]: value};
     return newObj;
-  }, {});
+  }, {} as CSSProperties);
 };
 
 export const StaticStates: React.FC<React.PropsWithChildren<
   {theme?: PartialEmotionCanvasTheme} & React.HTMLAttributes<HTMLElement>
 >> = ({children, theme, ...elemProps}) => {
-  const localTheme: EmotionCanvasTheme & {_staticStates?: boolean} = useTheme(theme);
-  localTheme._staticStates = true;
+  const localTheme: EmotionCanvasTheme & {_styleRewriteFn?: StyleRewriteFn} = useTheme(theme);
+  localTheme._styleRewriteFn = convertToStaticStates;
 
   return (
     <CanvasProvider theme={localTheme} {...elemProps}>

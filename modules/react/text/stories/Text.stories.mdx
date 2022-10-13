@@ -1,20 +1,17 @@
 import {Meta} from '@storybook/addon-docs';
 
-import {Basic as BasicText} from './examples/Text';
-import {Label} from './examples/Label';
-import {BodyText} from './examples/BodyText';
-import {Heading} from './examples/Heading';
-import {Subtext} from './examples/Subtext';
-import {Title} from './examples/Title';
+import {Basic} from './examples/Text/Basic';
+import {TypeLevel} from './examples/Text/TypeLevel';
+import {Variant} from './examples/Text/Variant';
 
-import {TextComponent, LabelComponent, TypeLevelComponent} from './PropTables.splitprops.tsx';
+import {TextComponent} from './PropTables.splitprops.tsx';
 
-<Meta title="Components/Text/React" />
+<Meta title="Components/Text/Text/React" />
 
-# Canvas Kit React Text
+# Canvas Kit Text
 
-`Text` is a group of text components that provide a common, ergonomic API to render text with
-simplified usage of Canvas Kit type token.
+`Text` provides an ergonomic API for rendering text. It includes built-in support for Canvas type
+tokens.
 
 ## Installation
 
@@ -22,111 +19,36 @@ simplified usage of Canvas Kit type token.
 yarn add @workday/canvas-kit-react
 ```
 
-## Text
+## Usage
 
-### Usage
+### Basic Example
 
-`Text` is the base component that is used to render text in the UI. It is built off of our `Box`
-component which allows the use of styles props such as `display`, `margin`, `padding` as well as the
-most common type styles such as `fontWeight`, `fontSize` amongst others. This component is an
-extension of our [type tokens](https://canvas.workdaydesign.com/tokens/type/#type-styles),
-therefore, props like `typeLevel` and `variant` all exists.
+`Text` is built on top of [`Box`](/components/layout/box/) and supports a multitude of
+[style props](/getting-started/for-developers/resources/style-props/) including spacing props such
+as `margin` and `padding`, as well as text styling props such as `fontSize` and `fontWeight`.
 
-By default `Text` component is a `span` element, but it's possible to override the element by
-passing `as` prop.
+`Text` renders a `<span>` element by default. You may override the rendered element using the `as`
+prop.
 
-```tsx
-<Text as="p" fontSize={14} fontWeight="medium">
-  Text here...
-</Text>
-```
+<ExampleCodeBlock code={Basic} />
 
-<ExampleCodeBlock code={BasicText} />
+### Type Level and Variant
 
-### Text Props
+`Text` includes built-in support for [Canvas type tokens](/tokens/type/) via the `typeLevel` and
+`variant` props.
 
-As previously mentioned, `Text` is built on top of `Box` and has access to all its props. In
-addition `Text` has its own props:
+`typeLevel` hooks into the [Canvas type hierarchy](/tokens/type/#type-styles).
+
+<ExampleCodeBlock code={TypeLevel} />
+
+`variant` allows you to layer [additional styling](/tokens/type/#variants) to aid users'
+understanding of the text being rendered.
+
+<ExampleCodeBlock code={Variant} />
+
+## Props
+
+`Text` is built on top of [`Box`](/components/layout/box) and supports all of its props in addition
+to its own.
 
 <ArgsTable of={TextComponent} />
-
-## LabelText
-
-`LabelText` is a `label` element build based on the top of `Text` component with added ability to
-add a cursor or disabled style.
-
-### Usage
-
-```tsx
-<LabelText cursor="pointer" disabled={true}>
-  Text here...
-</LabelText>
-```
-
-<ExampleCodeBlock code={Label} />
-
-### LabelText Props
-
-In addition to `Text` component props, `LabelText` has the following props:
-
-<ArgsTable of={LabelComponent} />
-
-## Type Level Components
-
-Type Level Components, `Subtext`, `BodyText`, `Heading` and `Title`, apply type token styles to text
-element. Instead of passing type level token you can use one of Type Level Components, like in
-example below:
-
-```tsx
-// v7
-<p css={{...type.levels.subtext.small}}>Small Subtext Text</p>
-
-// v8
-<Subtext size="small">Small Subtext Text</Subtext>
-```
-
-### Props
-
-In addition to `Text` component props, each type level components has the following props:
-
-<ArgsTable of={TypeLevelComponent} />
-
-### BodyText
-
-`BodyText` component renders text with `type.levels.body[size]` styles.
-
-```tsx
-<BodyText size="small">Small Body Text</BodyText>
-```
-
-<ExampleCodeBlock code={BodyText} />
-
-### Heading
-
-`Heading` component renders text with `type.levels.heading[size]` styles.
-
-```tsx
-<Heading size="small">Small Heading Text</Heading>
-```
-
-<ExampleCodeBlock code={Heading} />
-
-### Subtext
-
-`Subtext` component renders text with `type.levels.subtext[size]` styles.
-
-```tsx
-<Subtext size="small">Small Subtext Text</Subtext>
-```
-
-<ExampleCodeBlock code={Subtext} />
-
-### Title
-
-`Title` component renders text with `type.levels.title[size]` styles.
-
-```tsx
-<Title size="small">Small Title Text</Title>
-```
-
-<ExampleCodeBlock code={Title} />

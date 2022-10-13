@@ -14,7 +14,8 @@ const routes = {
   '/components/containers/table/': 'components-containers-table-react--basic',
   '/components/containers/tabs/': 'components-containers-tabs-react--basic',
   '/components/indicators/banner/': 'components-indicators-banner-react--basic',
-  '/components/indicators/loading-animation/': 'components-indicators-loading-animation-react--basic',
+  '/components/indicators/loading-animation/':
+    'components-indicators-loading-animation-react--basic',
   '/components/indicators/skeleton/': 'components-indicators-skeleton-react--basic',
   '/components/indicators/status-indicator/': 'components-indicators-status-indicator-react--basic',
   '/components/inputs/checkbox/': 'components-inputs-checkbox-react--basic',
@@ -36,13 +37,23 @@ const routes = {
   '/components/popups/popup/': 'components-popups-popup-react--basic',
   '/components/popups/toast/': 'components-popups-toast-react--with-popper',
   '/components/popups/tooltip/': 'components-popups-tooltip-react--default-story',
-  '/components/text/': 'components-text-react--basic-text',
+  '/components/text/body-text/': 'components-text-body-text-react--basic',
+  '/components/text/heading/': 'components-text-heading-react--basic',
+  '/components/text/label-text/': 'components-text-label-text-react--basic',
+  '/components/text/subtext/': 'components-text-subtext-react--basic',
+  '/components/text/text/': 'components-text-text-react--basic',
+  '/components/text/title/': 'components-text-title-react--basic',
   '/getting-started/for-developers/contributing/': 'welcome-contributing--page',
-  '/getting-started/for-developers/resources/api-pattern-guidelines/': 'welcome-dev-docs-api-pattern-guidelines--page',
-  '/getting-started/for-developers/resources/collection-api/': 'welcome-dev-docs-collections--basic',
-  '/getting-started/for-developers/resources/compound-components/': 'welcome-dev-docs-compound-components--page',
-  '/getting-started/for-developers/resources/creating-compound-components/': 'welcome-dev-docs-creating-compound-components--page',
-  '/getting-started/for-developers/resources/style-props/': 'welcome-dev-docs-style-props--background-example',
+  '/getting-started/for-developers/resources/api-pattern-guidelines/':
+    'welcome-dev-docs-api-pattern-guidelines--page',
+  '/getting-started/for-developers/resources/collection-api/':
+    'welcome-dev-docs-collections--basic',
+  '/getting-started/for-developers/resources/compound-components/':
+    'welcome-dev-docs-compound-components--page',
+  '/getting-started/for-developers/resources/creating-compound-components/':
+    'welcome-dev-docs-creating-compound-components--page',
+  '/getting-started/for-developers/resources/style-props/':
+    'welcome-dev-docs-style-props--background-example',
   '/getting-started/for-developers/resources/testing/': 'welcome-dev-docs-testing--page',
   '/getting-started/introduction/': 'welcome-getting-started--page',
   '/tokens/color/': 'tokens-tokens-react--colors',
