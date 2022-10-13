@@ -10,7 +10,7 @@ const {up, down} = theme.canvas.breakpoints;
 const small = down('m'); // Returns '@media (max-width: 768px)'
 const medium = up('m'); // Returns '@media (min-width: 768px)'
 const styles = {
-  parentContainer: {
+  parentWrapper: {
     [small]: {
       gridTemplateAreas: "'Header' 'SmallContainer' 'BodyContent' 'Footer'",
       gridTemplateColumns: '1fr',
@@ -27,8 +27,17 @@ const styles = {
       gridTemplateColumns: '1fr 3fr',
       gridTemplateRows: 'auto 300px auto',
       border: '40px solid',
-      borderRadius: 5,
+      borderRadius: '20px 20px 0 0',
       padding: space.m,
+    },
+  },
+  parentContainer: {
+    [small]: {
+      height: 0,
+    },
+    [medium]: {
+      height: 70,
+      borderRadius: '0 0 20px 20px',
     },
   },
   header: {
@@ -43,16 +52,26 @@ const styles = {
       fontWeight: type.properties.fontWeights.bold,
     },
   },
+  greyBar: {
+    [small]: {
+      display: 'none',
+    },
+    [medium]: {
+      display: 'block',
+    },
+  },
   circle: {
     [small]: {
       height: 5,
       width: 75,
       bottom: 10,
+      backgroundColor: 'grey',
     },
     [medium]: {
-      height: 10,
+      height: 40,
       width: 40,
-      bottom: -25,
+      bottom: -95,
+      backgroundColor: 'black',
     },
   },
   circleTop: {
@@ -72,9 +91,13 @@ const StyledHeading = styled(Box.as('h3'))({
   margin: 0,
 });
 
+const GreyBar = styled(Box.as('div'))({
+  ...styles.parentContainer,
+  backgroundColor: 'grey',
+});
+
 const Circle = styled(Box.as('div'))({
   ...styles.circle,
-  backgroundColor: 'grey',
   borderRadius: borderRadius.circle,
   position: 'absolute',
   left: '50%',
@@ -90,8 +113,12 @@ const CircleTop = styled(Box.as('div'))({
   transform: 'translate(-50%, 0)',
 });
 
-const StyledParentContainer = styled(Grid.as('section'))({
-  ...styles.parentContainer,
+const ParentCont = styled(Box.as('div'))({
+  position: 'relative',
+});
+
+const StyledParentWrapper = styled(Grid.as('section'))({
+  ...styles.parentWrapper,
   gridGap: space.s,
   position: 'relative',
 });
@@ -126,21 +153,24 @@ const StyledFooterContainer = styled(Grid.as('div'))({
 
 export const ResponsiveViewport = () => {
   return (
-    <StyledParentContainer>
-      <CircleTop></CircleTop>
-      <StyledHeaderContainer>
-        <StyledHeading>Header</StyledHeading>
-      </StyledHeaderContainer>
-      <StyledLeftContent>
-        <StyledHeading>Small Content</StyledHeading>
-      </StyledLeftContent>
-      <StyledRightContent>
-        <StyledHeading>Body Content</StyledHeading>
-      </StyledRightContent>
-      <StyledFooterContainer>
-        <StyledHeading>Footer</StyledHeading>
-      </StyledFooterContainer>
-      <Circle></Circle>
-    </StyledParentContainer>
+    <ParentCont>
+      <StyledParentWrapper>
+        <CircleTop></CircleTop>
+        <StyledHeaderContainer>
+          <StyledHeading>Header</StyledHeading>
+        </StyledHeaderContainer>
+        <StyledLeftContent>
+          <StyledHeading>Small Content</StyledHeading>
+        </StyledLeftContent>
+        <StyledRightContent>
+          <StyledHeading>Body Content</StyledHeading>
+        </StyledRightContent>
+        <StyledFooterContainer>
+          <StyledHeading>Footer</StyledHeading>
+        </StyledFooterContainer>
+        <Circle></Circle>
+      </StyledParentWrapper>
+      <GreyBar></GreyBar>
+    </ParentCont>
   );
 };
