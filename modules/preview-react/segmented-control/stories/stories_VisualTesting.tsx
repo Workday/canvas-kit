@@ -1,13 +1,9 @@
 import React from 'react';
 
-import {StaticStates} from '@workday/canvas-kit-react/common';
-import {ComponentStatesTable} from '@workday/canvas-kit-labs-react/common';
+import {StaticStates, ComponentStatesTable} from '@workday/canvas-kit-react/testing';
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
 
-import {
-  SegmentedControl,
-  useSegmentedControlModel,
-} from '@workday/canvas-kit-preview-react/segmented-control';
+import {SegmentedControl} from '@workday/canvas-kit-preview-react/segmented-control';
 
 import {
   gridIcon,
