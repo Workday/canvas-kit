@@ -9,3 +9,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: Workday/canvas-kit-actions/close-related-issues@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
