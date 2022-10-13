@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v7.4.1](https://github.com/Workday/canvas-kit/releases/tag/v7.4.1) (2022-10-13)
+
+### Documentation
+
+- docs: Remove dependency on Storybook utils from CustomStyles example ([#1844](https://github.com/Workday/canvas-kit/pull/1844)) ([@jamesfan](https://github.com/jamesfan))
+
+### Infrastructure
+
+- ci: Fix popup tests and ci bugs ([#1846](https://github.com/Workday/canvas-kit/pull/1846)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v7.4.0](https://github.com/Workday/canvas-kit/releases/tag/v7.4.0) (2022-10-12)
 
 ### Components
