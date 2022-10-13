@@ -33,11 +33,10 @@ const styles = {
   },
   parentContainer: {
     [small]: {
-      height: 0,
+      maxWidth: '100%',
     },
     [medium]: {
-      height: 70,
-      borderRadius: '0 0 20px 20px',
+      maxWidth: 1000,
     },
   },
   header: {
@@ -58,6 +57,7 @@ const styles = {
     },
     [medium]: {
       display: 'block',
+      borderRadius: '0 0 20px 20px',
     },
   },
   circle: {
@@ -86,22 +86,15 @@ const styles = {
   },
 };
 
-const StyledHeading = styled(Box.as('h3'))({
-  ...styles.header,
-  margin: 0,
-});
-
-const GreyBar = styled(Box.as('div'))({
+const ParentCont = styled(Box.as('div'))({
   ...styles.parentContainer,
-  backgroundColor: 'grey',
+  position: 'relative',
 });
 
-const Circle = styled(Box.as('div'))({
-  ...styles.circle,
-  borderRadius: borderRadius.circle,
-  position: 'absolute',
-  left: '50%',
-  transform: 'translate(-50%, 0)',
+const StyledParentWrapper = styled(Grid.as('section'))({
+  ...styles.parentWrapper,
+  gridGap: space.s,
+  position: 'relative',
 });
 
 const CircleTop = styled(Box.as('div'))({
@@ -113,26 +106,9 @@ const CircleTop = styled(Box.as('div'))({
   transform: 'translate(-50%, 0)',
 });
 
-const ParentCont = styled(Box.as('div'))({
-  position: 'relative',
-});
-
-const StyledParentWrapper = styled(Grid.as('section'))({
-  ...styles.parentWrapper,
-  gridGap: space.s,
-  position: 'relative',
-});
-
 const StyledHeaderContainer = styled(Grid.as('div'))({
   gridArea: 'Header',
   backgroundColor: colors.blueberry400,
-  borderRadius: borderRadius.m,
-  padding: space.s,
-});
-
-const StyledRightContent = styled(Grid.as('div'))({
-  gridArea: 'BodyContent',
-  backgroundColor: colors.plum300,
   borderRadius: borderRadius.m,
   padding: space.s,
 });
@@ -144,11 +120,37 @@ const StyledLeftContent = styled(Grid.as('div'))({
   padding: space.s,
 });
 
+const StyledRightContent = styled(Grid.as('div'))({
+  gridArea: 'BodyContent',
+  backgroundColor: colors.plum300,
+  borderRadius: borderRadius.m,
+  padding: space.s,
+});
+
 const StyledFooterContainer = styled(Grid.as('div'))({
   gridArea: 'Footer',
   backgroundColor: colors.berrySmoothie300,
   borderRadius: borderRadius.m,
   padding: space.s,
+});
+
+const StyledHeading = styled(Box.as('h3'))({
+  ...styles.header,
+  margin: 0,
+});
+
+const GreyBar = styled(Box.as('div'))({
+  ...styles.greyBar,
+  height: 70,
+  backgroundColor: 'grey',
+});
+
+const Circle = styled(Box.as('div'))({
+  ...styles.circle,
+  borderRadius: borderRadius.circle,
+  position: 'absolute',
+  left: '50%',
+  transform: 'translate(-50%, 0)',
 });
 
 export const ResponsiveViewport = () => {
