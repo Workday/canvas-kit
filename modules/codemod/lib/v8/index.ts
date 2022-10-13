@@ -4,6 +4,7 @@ import softDeprecateDrawer from './softDeprecateDrawer';
 import softDeprecateLayout from './softDeprecateLayout';
 import softDeprecatePreviewMenu from './softDeprecatePreviewMenu';
 import revomeDefaultImports from './removeDefaultImports';
+import promoteComponentsToTesting from './promoteComponentsToTesting';
 import promoteBreadcrumbs from './promoteBreadcrumbs';
 import restructureBreadcrumbs from './restructureBreadcrumbs';
 
@@ -16,6 +17,7 @@ const transform: Transform = (file, api, options) => {
     softDeprecateDrawer,
     softDeprecateLayout,
     softDeprecatePreviewMenu,
+    promoteComponentsToTesting,
   ];
 
   return fixes.reduce((source, fix) => fix({...file, source}, api, options) as string, file.source);
