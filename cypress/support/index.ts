@@ -4,6 +4,7 @@ import 'cypress-axe';
 import 'cypress-storybook/cypress';
 import 'cypress-keyboard-plugin';
 import '@testing-library/cypress/add-commands';
+import 'cypress-real-events';
 
 import './commands';
 

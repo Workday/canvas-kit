@@ -1,5 +1,4 @@
 import * as React from 'react';
-import {colors, type} from '@workday/canvas-kit-react/tokens';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {
   SidePanel,
@@ -7,15 +6,10 @@ import {
   SidePanelTransitionStates,
 } from '@workday/canvas-kit-preview-react/side-panel';
 import {Flex} from '@workday/canvas-kit-react/layout';
-import {CanvasProvider, styled} from '@workday/canvas-kit-react/common';
+import {Text} from '@workday/canvas-kit-react/text';
+import {CanvasProvider} from '@workday/canvas-kit-react/common';
 // local helper hook for setting content direction;
 import {useDirection} from './useDirection';
-
-const StyledHeader = styled('h3')({
-  ...type.levels.body.large,
-  color: colors.licorice500,
-  fontWeight: type.properties.fontWeights.bold,
-});
 
 export const AlternatePanel = () => {
   const {direction, toggleDirection} = useDirection();
@@ -31,7 +25,15 @@ export const AlternatePanel = () => {
           <SidePanel.ToggleButton {...controlProps} />
           {panelState === 'expanded' && (
             <Flex alignItems="center" paddingY="s" paddingX="s">
-              <StyledHeader {...labelProps}>Alternate Panel</StyledHeader>
+              <Text
+                as="h3"
+                typeLevel="body.large"
+                color="licorice500"
+                fontWeight="bold"
+                {...labelProps}
+              >
+                Alternate Panel
+              </Text>
             </Flex>
           )}
         </SidePanel>

@@ -66,7 +66,6 @@ const StyledActionButton = styled(Hyperlink)<StyledType>({
 
 const Message = styled('div')({
   wordBreak: 'break-word',
-  wordWrap: 'break-word', // Needed for IE11
 });
 
 export const Toast = createComponent('div')({
