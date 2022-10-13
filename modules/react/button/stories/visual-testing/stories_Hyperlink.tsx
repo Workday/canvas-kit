@@ -1,8 +1,12 @@
 import React from 'react';
 import {type} from '@workday/canvas-kit-react/tokens';
-import {StaticStates} from '@workday/canvas-kit-react/common';
+
 import {Box} from '@workday/canvas-kit-react/layout';
-import {ComponentStatesTable, permutateProps} from '@workday/canvas-kit-labs-react/common';
+import {
+  ComponentStatesTable,
+  permutateProps,
+  StaticStates,
+} from '@workday/canvas-kit-react/testing';
 import {withSnapshotsEnabled} from '../../../../../utils/storybook';
 import {Hyperlink} from '@workday/canvas-kit-react/button';
 import {Container} from './utils';
