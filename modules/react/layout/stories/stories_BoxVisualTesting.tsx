@@ -2,7 +2,7 @@ import React from 'react';
 
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
 import {Box} from '@workday/canvas-kit-react/layout';
-import {ComponentStatesTable} from '@workday/canvas-kit-labs-react/common';
+import {ComponentStatesTable} from '@workday/canvas-kit-react/testing';
 import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
 
 export default withSnapshotsEnabled({
