@@ -127,9 +127,9 @@ describe('SegmentedControl', () => {
     });
 
     context('all buttons should be disabled', () => {
-      it('should not have "[aria-pressed]" for all buttons', () => {
+      it('should have "[aria-pressed]" for all buttons', () => {
         cy.findAllByRole('button').each($el => {
-          expect($el).not.have.attr('aria-pressed');
+          expect($el).to.have.attr('aria-pressed');
         });
       });
 
@@ -142,11 +142,11 @@ describe('SegmentedControl', () => {
 
     context('when the disabled button is clicked', () => {
       beforeEach(() => {
-        cy.findByRole('button', {name: 'Table'}).click({force: true});
+        cy.findByRole('button', {name: 'List'}).click({force: true});
       });
 
       it('should not set "[aria-pressed=true]" on the disabled button', () => {
-        cy.findByRole('button', {name: 'Table'}).should('not.have.attr', 'aria-pressed');
+        cy.findByRole('button', {name: 'List'}).should('not.have.attr', 'aria-pressed', 'true');
       });
     });
   });
