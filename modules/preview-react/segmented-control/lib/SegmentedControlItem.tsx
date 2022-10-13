@@ -97,7 +97,6 @@ const getPaddingStyles = (
   icon: CanvasSystemIcon | undefined
 ) => {
   if (!children) {
-    // icon buttons do not have any padding
     return 0;
   }
 
@@ -126,16 +125,6 @@ const geButtonStyles = (size: ButtonSizes, children: React.ReactNode, icon?: Can
     padding: getPaddingStyles(children, size, icon),
   };
 };
-
-// needs some review
-// const StyledButton = styled(BaseButton)<StyledType & ButtonContainerProps>(({theme}) => ({
-//   '[aria-pressed="true"]': {
-//     borderColor: theme.canvas.palette.primary.main,
-//     '&:hover, &:focus:hover': {
-//       background: theme.canvas.palette.primary.main,
-//     },
-//   },
-// }));
 
 const Container = ({
   tooltipProps,
