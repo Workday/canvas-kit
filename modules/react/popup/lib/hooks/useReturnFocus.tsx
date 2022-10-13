@@ -3,6 +3,7 @@ import React from 'react';
 import {changeFocus, createElemPropsHook, isFocusable} from '@workday/canvas-kit-react/common';
 
 import {usePopupModel} from './usePopupModel';
+import {PopupStack} from '@workday/canvas-kit-popup-stack';
 
 function getScrollParent(element: HTMLElement): HTMLElement {
   if (element === document.body || !element.parentElement) {
@@ -53,19 +54,18 @@ export const useReturnFocus = createElemPropsHook(usePopupModel)(model => {
     }
   }, []);
 
-  const onKeyUp = React.useCallback((event: KeyboardEvent) => {
-    requiresFocusChangeRef.current = false;
-  }, []);
-
   // track mousedown events to determine if the mouse target is a focusable element. If it is, we
   // should not return focus
-  const onMouseDown = React.useCallback((event: MouseEvent) => {
-    elementRef.current = event.target as Element;
-  }, []);
-
-  const onMouseUp = React.useCallback(() => {
-    elementRef.current = null;
-  }, []);
+  const onMouseDown = React.useCallback(
+    (event: MouseEvent) => {
+      if (model.state.stackRef.current && event.target instanceof HTMLElement) {
+        if (!PopupStack.contains(model.state.stackRef.current, event.target)) {
+          elementRef.current = event.target;
+        }
+      }
+    },
+    [model.state.stackRef]
+  );
 
   // We use `useLayoutEffect` because the callback will be called _before_ the browser changes
   // focus. This allows the browser to change focus as normal. For example, if the popup closes
@@ -87,17 +87,17 @@ export const useReturnFocus = createElemPropsHook(usePopupModel)(model => {
       return;
     }
     // capture the element here. The refs will be null by the time the cleanup function is called
-    const element = (model.state.returnFocusRef || model.state.targetRef).current as HTMLElement;
+    const element = (model.state.returnFocusRef || model.state.targetRef)
+      .current as HTMLElement | null;
     document.addEventListener('mousedown', onMouseDown, true);
-    document.addEventListener('mouseup', onMouseUp, true);
     document.addEventListener('keydown', onKeyDown, true);
-    document.addEventListener('keyup', onKeyUp, true);
 
     return () => {
       document.removeEventListener('mousedown', onMouseDown, true);
-      document.removeEventListener('mouseup', onMouseUp, true);
       document.removeEventListener('keydown', onKeyDown, true);
-      document.removeEventListener('keyup', onKeyUp, true);
+      if (!element) {
+        return;
+      }
       const scrollParent = getScrollParent(element);
       const scrollParentRect = scrollParent.getBoundingClientRect();
       const elementRect = element.getBoundingClientRect();
@@ -105,12 +105,14 @@ export const useReturnFocus = createElemPropsHook(usePopupModel)(model => {
       // Don't change focus if user focused on a different element like a `input` or the target
       // element isn't on at least halfway rendered on the screen.
       if (
-        (elementRef.current && getFocusableElement(elementRef.current)) ||
-        elementRect.top + elementRect.height / 2 < scrollParentRect.top ||
-        elementRect.bottom - elementRect.height / 2 > scrollParentRect.bottom ||
-        elementRect.left + elementRect.width / 2 < scrollParentRect.left ||
-        elementRect.right - elementRect.width / 2 > scrollParentRect.right
+        (elementRef.current && getFocusableElement(elementRef.current)) || // did the user click on a focusable element?
+        elementRect.top + elementRect.height / 2 < scrollParentRect.top || // is the top half of the target element visible?
+        elementRect.bottom - elementRect.height / 2 > scrollParentRect.bottom || // is the bottom half of the target element visible?
+        elementRect.left + elementRect.width / 2 < scrollParentRect.left || // is the left half of the target element visible?
+        elementRect.right - elementRect.width / 2 > scrollParentRect.right // is the right half of the target element visible?
       ) {
+        // reset the focus element and bail early
+        elementRef.current = null;
         return;
       }
 
@@ -126,17 +128,10 @@ export const useReturnFocus = createElemPropsHook(usePopupModel)(model => {
           changeFocus(element);
         });
       }
+
       elementRef.current = null;
     };
-  }, [
-    model.state.returnFocusRef,
-    model.state.targetRef,
-    visible,
-    onMouseDown,
-    onMouseUp,
-    onKeyDown,
-    onKeyUp,
-  ]);
+  }, [model.state.returnFocusRef, model.state.targetRef, visible, onMouseDown, onKeyDown]);
 
   return {};
 });

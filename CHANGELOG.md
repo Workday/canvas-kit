@@ -3,6 +3,42 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v7.4.0](https://github.com/Workday/canvas-kit/releases/tag/v7.4.0) (2022-10-12)
+
+### Components
+
+- feat: Add menu headers for grouping items ([#1822](https://github.com/Workday/canvas-kit/pull/1822)) ([@vibdev](https://github.com/vibdev), [@NicholasBoll](https://github.com/NicholasBoll))
+  Adds the ability to mark `<MenuItems>` as headers using the `isHeader` attribute. This allows users to group menu items logically. It updates the code used for keyboard shortcuts to ignore any items marked as a header.
+- feat: Add support for opening stories in Tesseract ([#1829](https://github.com/Workday/canvas-kit/pull/1829)) ([@anicholls](https://github.com/anicholls))
+
+### Infrastructure
+
+- ci: Fixing to make workflow valid-name needed for each if ([#1842](https://github.com/Workday/canvas-kit/pull/1842)) ([@jaclynjessup](https://github.com/jaclynjessup))
+- ci: Forward merge commits that skip releases ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v7.3.18](https://github.com/Workday/canvas-kit/releases/tag/v7.3.18) (2022-10-10)
+
+### Infrastructure
+
+- ci: Updates to Project Board Actions ([#1834](https://github.com/Workday/canvas-kit/pull/1834)) ([@jaclynjessup](https://github.com/jaclynjessup))
+
+### Test
+
+- test: Fix flaky Cypress popup specification ([#1837](https://github.com/Workday/canvas-kit/pull/1837)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v7.3.17](https://github.com/Workday/canvas-kit/releases/tag/v7.3.17) (2022-10-07)
+
+### Components
+
+- fix: Error handling to fix TypeError bug on models used in responsive modals/popups ([#1831](https://github.com/Workday/canvas-kit/pull/1831)) ([@ahayes91](https://github.com/ahayes91))
+
+### Infrastructure
+
+- ci: Add token to close-related-issues workflow ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v7.3.16](https://github.com/Workday/canvas-kit/releases/tag/v7.3.16) (2022-10-06)
 
 ### Documentation
