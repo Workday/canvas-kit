@@ -14,7 +14,9 @@ any questions.
   - [Box](#box)
   - [Menu (Main)](#menu)
   - [Breadcrumbs](#breadcrumbs)
-- [General Changes](#general-changes) -[Remove Default Imports](#remove-default-imports)
+- [General Changes](#general-changes)
+  - [Remove Default Imports](#remove-default-imports)
+  - [Reorganize Style Props](#reorganize-style-props)
 
 ## Codemod
 
@@ -208,53 +210,6 @@ const StyledBox = styled(Box)({
 <Box fontFamily="monospace" fontSize={16} fontWeight="medium" />
 ```
 
-## General Changes
-
-### Remove Default Imports
-
-As part of some cleanup, we've removed any default imports that where lingering. This change matches
-more closely what we've been doing with new components and systems. As part of this change, the
-components listed below have moved from default imports to named imports.
-
-##### Fonts
-
-- fonts
-
-##### Main Package Components
-
-- Toast
-- Canvas
-- Tooltip
-- TextArea
-- Avatar
-- CountBadge
-- Checkbox
-- FormField
-- LoadingDots
-- Radio
-- SegmentedControl
-- Select
-- SidePanel
-- StatusIndicator
-- Switch
-- Table
-- TextInput
-
-##### Labs Components
-
-- Combobox
-- Drawer
-
-##### Preview Components
-
-- Breadcrumbs
-- ColorPicker
-- Menu
-- Select
-- SidePanel
-
-🤖 The codemod will update imports to be named imports
-
 ### Menu (main)
 
 Default depth value of the main menu component has been change to depth 3 (It was depth 1 before).
@@ -426,3 +381,80 @@ const NewOverflowList = () => {
   );
 };
 ```
+
+## General Changes
+
+### Remove Default Imports
+
+As part of some cleanup, we've removed any default imports that where lingering. This change matches
+more closely what we've been doing with new components and systems. As part of this change, the
+components listed below have moved from default imports to named imports.
+
+#### Fonts
+
+- fonts
+
+#### Main Package Components
+
+- Toast
+- Canvas
+- Tooltip
+- TextArea
+- Avatar
+- CountBadge
+- Checkbox
+- FormField
+- LoadingDots
+- Radio
+- SegmentedControl
+- Select
+- SidePanel
+- StatusIndicator
+- Switch
+- Table
+- TextInput
+
+#### Labs Components
+
+- Combobox
+- Drawer
+
+#### Preview Components
+
+- Breadcrumbs
+- ColorPicker
+- Menu
+- Select
+- SidePanel
+
+🤖 The codemod will update imports to be named imports
+
+### Reorganize Style Props
+
+Some style props have been reorganized and the implementation has been refactored, but the functionality will remain the same. This will improve the style prop documentation and allow us to extend style props further in the future. The style props `background` and `backgroundImage` have moved from the `color` style prop function to a new style prop function, `background`.
+
+These functions are only intended to be used by Canvas Kit internally. However, if you're importing the `color` style prop function to apply these two style props will need to update your import statements to import the `background` style function as well.
+
+> Note: We recommend using `Box` and style props directly instead of these style prop functions to reduce the cost of upgrading in the future.
+
+```tsx
+// V7
+import { color } from '@workday/canvas-kit-react/layout';
+
+const Example = styled('div')({
+  boxSizing: 'border-box',
+},
+color
+);
+
+// V8
+import { background, color } from '@workday/canvas-kit-react/layout';
+
+const Example = styled('div')({
+  boxSizing: 'border-box',
+},
+background,
+color
+);
+```
+

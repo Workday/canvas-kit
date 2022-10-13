@@ -1,96 +1,102 @@
-import {
-  ContentDirection,
-  PartialEmotionCanvasTheme,
-  useTheme,
-} from '@workday/canvas-kit-react/common';
 import {Property} from 'csstype';
 
-/** style props to for standard position properties */
-export type PositionStandardProps = {
-  /** sets `position` property  */
-  position?: Property.Position;
-  /** sets `zIndex` property  */
-  zIndex?: Property.ZIndex;
-  /** sets `top` property  */
-  top?: number | string;
-  /** sets `right` property (no bidirectional support) */
-  right?: number | string;
-  /** sets `bottom` property  */
-  bottom?: number | string;
-  /** sets `left` property (no bidirectional support)  */
-  left?: number | string;
-};
+import {buildStyleFns, buildStylePropFn, StyleFnConfig} from './buildStyleFns';
 
-export type PositionLogicalProps = {
-  /** sets `left` property (bidirectional support)  */
+/** style props to for CSS position properties */
+export type PositionStyleProps = {
+  /**
+   * - sets [CSS position property](https://developer.mozilla.org/en-US/docs/Web/CSS/position)
+   * */
+  position?: Property.Position;
+  /**
+   * - sets [CSS z-index property](https://developer.mozilla.org/en-US/docs/Web/CSS/z-index)
+   * */
+  zIndex?: Property.ZIndex;
+  /**
+   * - sets [CSS top property](https://developer.mozilla.org/en-US/docs/Web/CSS/top)
+   * */
+  top?: number | string;
+  /**
+   * - sets [CSS right property](https://developer.mozilla.org/en-US/docs/Web/CSS/right)
+   * - no bidirectional support
+   * */
+  right?: number | string;
+  /**
+   * - sets [CSS bottom property](https://developer.mozilla.org/en-US/docs/Web/CSS/bottom)
+   * */
+  bottom?: number | string;
+  /**
+   * - sets [CSS left property](https://developer.mozilla.org/en-US/docs/Web/CSS/left)
+   * - no bidirectional support
+   * */
+  left?: number | string;
+  /**
+   * - sets [CSS inset-inline-start property](https://developer.mozilla.org/en-US/docs/Web/CSS/inset-inline-start)
+   * - bidirectional support
+   * */
   insetInlineStart?: number | string;
-  /** sets `right` property (bidirectional support) */
+  /**
+   * - sets [CSS inset-inline-end property](https://developer.mozilla.org/en-US/docs/Web/CSS/inset-inline-end)
+   * - bidirectional support
+   * */
   insetInlineEnd?: number | string;
 };
 
-const getInsetInlineStartStyle = (value: number | string, isRTL = false) => {
-  const attr = isRTL ? 'right' : 'left';
-  return {[attr]: value};
-};
+export const positionStyleFnConfigs: StyleFnConfig[] = [
+  {
+    name: 'position',
+    properties: ['position'],
+    system: 'none',
+  },
+  {
+    name: 'zIndex',
+    properties: ['zIndex'],
+    system: 'none',
+  },
+  {
+    name: 'top',
+    properties: ['top'],
+    system: 'none',
+  },
+  {
+    name: 'right',
+    properties: ['right'],
+    system: 'none',
+  },
+  {
+    name: 'bottom',
+    properties: ['bottom'],
+    system: 'none',
+  },
+  {
+    name: 'left',
+    properties: ['left'],
+    system: 'none',
+  },
+  {
+    name: 'insetInlineStart',
+    properties: ['insetInlineStart'],
+    system: 'none',
+  },
+  {
+    name: 'insetInlineEnd',
+    properties: ['insetInlineEnd'],
+    system: 'none',
+  },
+];
 
-const getInsetInlineEndStyle = (value: number | string, isRTL = false) => {
-  const attr = isRTL ? 'left' : 'right';
-  return {[attr]: value};
-};
-
-const standardPositionProps = {
-  position: 'position',
-  zIndex: 'zIndex',
-  top: 'top',
-  right: 'right',
-  bottom: 'bottom',
-  left: 'left',
-};
-
-const logicalPositionProps = {
-  insetInlineStart: getInsetInlineStartStyle,
-  insetInlineEnd: getInsetInlineEndStyle,
-};
-
-export type PositionStyleProps = PositionStandardProps & PositionLogicalProps;
-
+export const positionStyleFns = buildStyleFns(positionStyleFnConfigs);
 /**
- * A style prop function that takes components props and returns position styles.
+ * A style prop function that takes component props and returns position styles.
  * If no `PositionProps` are found, it returns an empty object.
  *
  * @example
- * // You'll most likely use `position` with low-level, styled components
+ * ```
  * const BoxExample = () => (
  *   <Box position="absolute" top="50%">
  *     Hello, positions!
  *   </Box>
  * );
- *
+ * ```
  */
-export function position<P extends PositionStyleProps & {theme?: PartialEmotionCanvasTheme}>(
-  props: P
-) {
-  // position will always be used within the context of a component, but eslint doesn't know that
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const {canvas} = useTheme(props.theme);
-  let styles = {};
-  for (const key in props) {
-    if (key in props) {
-      if (key in standardPositionProps) {
-        const value = props[key];
-        const attr = standardPositionProps[key as keyof PositionStandardProps];
-        // @ts-ignore TS doesn't like adding a potentially unknown key to an object, but because we own this object, it's fine.
-        styles[attr] = value;
-        continue;
-      }
-      if (key in logicalPositionProps) {
-        const value = props[key as keyof PositionLogicalProps] as string | number;
-        const styleFn = logicalPositionProps[key as keyof PositionLogicalProps];
-        const isRTL = canvas.direction === ContentDirection.RTL;
-        const style = styleFn(value, isRTL);
-        styles = {...styles, ...style};
-      }
-    }
-  }
-  return styles;
-}
+export const position = buildStylePropFn<PositionStyleProps>(positionStyleFns);

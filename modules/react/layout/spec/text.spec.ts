@@ -16,6 +16,10 @@ describe('Color Style Props Function', () => {
 
   it('should handle generic props', () => {
     const props: TextStyleProps = {
+      fontFamily: 'Roboto',
+      fontSize: '14px',
+      fontStyle: 'italic',
+      fontWeight: 300,
       lineHeight: '1rem',
       letterSpacing: '0.25em',
       textAlign: 'center',
@@ -26,6 +30,22 @@ describe('Color Style Props Function', () => {
       wordBreak: 'break-all',
     };
     const expected = props;
+    const colorStyles = text(props);
+
+    expect(colorStyles).toEqual(expected);
+  });
+
+  it('should translate tokens to style values', () => {
+    const props: TextStyleProps = {
+      fontFamily: 'default',
+      fontSize: 14,
+      fontWeight: 'regular',
+    };
+    const expected = {
+      fontFamily: '"Roboto", "Helvetica Neue", "Helvetica", Arial, sans-serif',
+      fontSize: '0.875rem',
+      fontWeight: 400,
+    };
     const colorStyles = text(props);
 
     expect(colorStyles).toEqual(expected);

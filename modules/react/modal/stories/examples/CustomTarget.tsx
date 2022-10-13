@@ -17,8 +17,13 @@ export const CustomTarget = () => {
       <Modal.Overlay>
         <Modal.Card>
           <Modal.CloseIcon aria-label="Close" />
-          <Modal.Heading>Modal</Modal.Heading>
-          <Modal.Body>Contents</Modal.Body>
+          <Modal.Heading>Modal Heading</Modal.Heading>
+          <Modal.Body>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec semper facilisis dolor
+            quis facilisis. Aenean tempor eget quam et semper. Nam malesuada rhoncus euismod.
+            Quisque vel urna feugiat, dictum risus sed, pulvinar nulla. Sed gravida, elit non
+            iaculis blandit, ligula tortor posuere mauris, vitae cursus turpis nunc non arcu.
+          </Modal.Body>
         </Modal.Card>
       </Modal.Overlay>
     </Modal>

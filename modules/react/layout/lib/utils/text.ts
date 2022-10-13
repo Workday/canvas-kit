@@ -1,57 +1,122 @@
 import {Property} from 'csstype';
 
-/** style props to for text properties */
+import {buildStyleFns, buildStylePropFn, StyleFnConfig} from './buildStyleFns';
+import {SystemPropValues} from './systemProps';
+
+/** style props to for CSS font and text properties */
 export type TextStyleProps = {
-  /** sets `line-height` property */
+  /**
+   * - sets [CSS font-family property](https://developer.mozilla.org/en-US/docs/Web/CSS/font-family)
+   * - system tokens: `font` */
+  fontFamily?: Property.FontFamily | SystemPropValues['font'];
+  /**
+   * - sets [CSS font-size property](https://developer.mozilla.org/en-US/docs/Web/CSS/font-size)
+   * - system tokens: `fontSize` */
+  fontSize?: Property.FontSize | SystemPropValues['fontSize'];
+  /** sets [CSS font-style property](https://developer.mozilla.org/en-US/docs/Web/CSS/font-style) */
+  fontStyle?: Property.FontStyle;
+  /**
+   * - sets [CSS font-weight property](https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight)
+   * - system tokens: `fontWeight` */
+  fontWeight?: Property.FontWeight | SystemPropValues['fontWeight'];
+  /** sets [CSS line-height property](https://developer.mozilla.org/en-US/docs/Web/CSS/line-height) */
   lineHeight?: Property.LineHeight;
-  /** sets `letter-spacing` property */
+  /** sets [CSS letter-spacing property](https://developer.mozilla.org/en-US/docs/Web/CSS/letter-spacing) */
   letterSpacing?: Property.LetterSpacing;
-  /** sets `text-align` property */
+  /** sets [CSS text-align property](https://developer.mozilla.org/en-US/docs/Web/CSS/text-align) */
   textAlign?: Property.TextAlign;
-  /** sets `text-decoration` property */
+  /** sets [CSS text-decoration property](https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration) */
   textDecoration?: Property.TextDecoration;
-  /** sets `text-overflow` property */
+  /** sets [CSS text-overflow property](https://developer.mozilla.org/en-US/docs/Web/CSS/text-overflow) */
   textOverflow?: Property.TextOverflow;
-  /** sets `text-transform` property */
+  /** sets [CSS text-transform property](https://developer.mozilla.org/en-US/docs/Web/CSS/text-transform) */
   textTransform?: Property.TextTransform;
-  /** sets `text-shadow` property */
+  /** sets [CSS text-shadow property](https://developer.mozilla.org/en-US/docs/Web/CSS/text-shadow) */
   textShadow?: Property.TextShadow;
-  /** sets `white-space` property */
+  /** sets [CSS white-space property](https://developer.mozilla.org/en-US/docs/Web/CSS/white-space) */
   whiteSpace?: Property.WhiteSpace;
-  /** sets `word-break` property */
+  /** sets [CSS word-break property](https://developer.mozilla.org/en-US/docs/Web/CSS/word-break) */
   wordBreak?: Property.WordBreak;
 };
 
-const textProps = [
-  'lineHeight',
-  'letterSpacing',
-  'textAlign',
-  'textDecoration',
-  'textOverflow',
-  'textTransform',
-  'textShadow',
-  'whiteSpace',
-  'wordBreak',
+export const textStyleFnConfigs: StyleFnConfig[] = [
+  {
+    name: 'fontFamily',
+    properties: ['fontFamily'],
+    system: 'font',
+  },
+  {
+    name: 'fontSize',
+    properties: ['fontSize'],
+    system: 'fontSize',
+  },
+  {
+    name: 'fontStyle',
+    properties: ['fontStyle'],
+    system: 'none',
+  },
+  {
+    name: 'fontWeight',
+    properties: ['fontWeight'],
+    system: 'fontWeight',
+  },
+  {
+    name: 'lineHeight',
+    properties: ['lineHeight'],
+    system: 'none',
+  },
+  {
+    name: 'letterSpacing',
+    properties: ['letterSpacing'],
+    system: 'none',
+  },
+  {
+    name: 'textAlign',
+    properties: ['textAlign'],
+    system: 'none',
+  },
+  {
+    name: 'textDecoration',
+    properties: ['textDecoration'],
+    system: 'none',
+  },
+  {
+    name: 'textOverflow',
+    properties: ['textOverflow'],
+    system: 'none',
+  },
+  {
+    name: 'textTransform',
+    properties: ['textTransform'],
+    system: 'none',
+  },
+  {
+    name: 'textShadow',
+    properties: ['textShadow'],
+    system: 'none',
+  },
+  {
+    name: 'whiteSpace',
+    properties: ['whiteSpace'],
+    system: 'none',
+  },
+  {
+    name: 'wordBreak',
+    properties: ['wordBreak'],
+    system: 'none',
+  },
 ];
 
+export const textStyleFns = buildStyleFns(textStyleFnConfigs);
 /**
- * A style prop function that takes components props and returns text styles.
+ * A style prop function that takes component props and returns font and text styles.
  * If no `TextStyleProps` are found, it returns an empty object.
  *
  * @example
- * // You'll most likely use `text-align` with low-level, styled components
+ * ```
  * const BoxExample = () => (
- *   <Box textAlign="center">Hello, alignment!</Box>
+ *   <Box textAlign="center" fontWeight="medium">Hello, alignment!</Box>
  * );
- *
+ * ```
  */
-export function text<P extends TextStyleProps>(props: P) {
-  let styles = {};
-  for (const key in props) {
-    if (textProps.includes(key)) {
-      const value = props[key as keyof TextStyleProps] as string;
-      styles = {...styles, [key]: value};
-    }
-  }
-  return styles;
-}
+export const text = buildStylePropFn<TextStyleProps>(textStyleFns);
