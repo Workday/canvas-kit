@@ -16,7 +16,7 @@ const TableComponent = styled('table')(type.levels.subtext.large, {
   },
 });
 
-export default class Table extends React.Component<React.TableHTMLAttributes<HTMLTableElement>> {
+export class Table extends React.Component<React.TableHTMLAttributes<HTMLTableElement>> {
   public render() {
     const {children, ...elemProps} = this.props;
 

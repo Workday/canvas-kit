@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {keyframes} from '@emotion/react';
-import canvas, {borderRadius} from '@workday/canvas-kit-react/tokens';
+import {canvas, borderRadius} from '@workday/canvas-kit-react/tokens';
 import {styled} from '@workday/canvas-kit-react/common';
 
 /**
@@ -60,7 +60,7 @@ const Container = styled('div')({
 /**
  * A simple component that displays three horizontal dots, to be used when some data is loading.
  */
-export default function LoadingDots(props: React.HTMLAttributes<HTMLDivElement>) {
+export function LoadingDots(props: React.HTMLAttributes<HTMLDivElement>) {
   const {...elemProps} = props;
 
   return (

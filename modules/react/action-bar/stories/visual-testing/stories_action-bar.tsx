@@ -1,20 +1,19 @@
 import React from 'react';
-import {StaticStates} from '@workday/canvas-kit-react/common';
-import {ComponentStatesTable} from '@workday/canvas-kit-labs-react/common';
+import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
 import {withSnapshotsEnabled} from '../../../../../utils/storybook';
 import {colors, space, spaceNumbers} from '@workday/canvas-kit-react/tokens';
 import {ActionBar, useActionBarModel} from '@workday/canvas-kit-react/action-bar';
 import {PrimaryButton, SecondaryButton} from '@workday/canvas-kit-react/button';
 
-type MyActionItem = {
-  id: string;
-  text: React.ReactNode;
-};
-
 export default withSnapshotsEnabled({
   title: 'Testing/React/Buttons/ActionBar',
   component: ActionBar,
 });
+
+type MyActionItem = {
+  id: string;
+  text: React.ReactNode;
+};
 
 export const ActionBarStates = () => (
   <StaticStates>
