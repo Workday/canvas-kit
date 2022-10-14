@@ -12,7 +12,8 @@ import {BreadcrumbsOverflowButton} from './BreadcrumbsOverflowButton';
 export interface BreadcrumbsListProps<T = any>
   extends Omit<Partial<ExtractProps<typeof Flex, never>>, 'children'> {
   /**
-   * Props passed into overflow button, style prop will be ignored
+   * Props passed into overflow button, style prop will be ignored.
+   * It must contains `aria-label` for overflow button element.
    */
   overflowButtonProps?: ExtractProps<typeof BreadcrumbsOverflowButton>;
   /**
@@ -31,7 +32,7 @@ export const BreadcrumbsList = createSubcomponent('ul')({
   displayName: 'Breadcrumbs.List',
   modelHook: useBreadcrumbsModel,
   elemPropsHook: useOverflowListMeasure,
-})<BreadcrumbsListProps>(({overflowButtonProps = {}, children, ...elemProps}, Element, model) => {
+})<BreadcrumbsListProps>(({overflowButtonProps, children, ...elemProps}, Element, model) => {
   const items = useListRenderItems(model, children) as [];
   const splitIndex = items.length - 2;
 
@@ -49,7 +50,7 @@ export const BreadcrumbsList = createSubcomponent('ul')({
       {...elemProps}
     >
       {items.length ? items.slice(0, splitIndex) : items}
-      <Breadcrumbs.OverflowButton {...overflowButtonProps} />
+      {overflowButtonProps && <Breadcrumbs.OverflowButton {...overflowButtonProps} />}
       {items.length ? items.slice(splitIndex, items.length) : null}
     </Flex>
   );

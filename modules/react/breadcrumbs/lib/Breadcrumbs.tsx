@@ -12,10 +12,10 @@ import {BreadcrumbsMenu} from './BreadcrumbsMenu';
 export interface BreadcrumbsProps {
   /**
    * The accessibility label for the nav element.
+   * It's required to be provided by a11y guidance.
    *
-   * @default "breadcrumbs"
    */
-  'aria-label'?: string;
+  'aria-label': string;
   /**
    * The contents of the Breadcrumbs. Can be `Breadcrumbs` children or any valid elements.
    */
@@ -32,7 +32,7 @@ export interface BreadcrumbsProps {
  *
  * @example
  * ```tsx
- * <Breadcrumbs aria-label="breadcrumbs">
+ * <Breadcrumbs aria-label="Breadcrumbs">
  *   <Breadcrumbs.List>
  *     <Breadcrumbs.Item>
  *       <Breadcrumbs.Link href="/docs">Docs</Breadcrumbs.Link>
@@ -56,7 +56,7 @@ export const Breadcrumbs = createContainer('nav')({
      * ---
      * [View Developer Docs](https://canvas.workdaydesign.com/components/navigation/breadcrumbs/#breadcrumbslist)
      *
-     * The nav list containing `BreadcrumbItems`
+     * The nav list containing `Breadcrumbs.Item` components and overflow button.
      */
     List: BreadcrumbsList,
     /**
@@ -64,7 +64,7 @@ export const Breadcrumbs = createContainer('nav')({
      * ---
      * [View Developer Docs](https://canvas.workdaydesign.com/components/navigation/breadcrumbs/#breadcrumbsitem)
      *
-     * List items in `Breadcrumb.List`.
+     * List items in `Breadcrumbs.List`.
      * By default, this item is truncated with a tooltip at `350px`,
      * but that can be customized with the `maxWidth` prop.
      *
@@ -82,14 +82,15 @@ export const Breadcrumbs = createContainer('nav')({
      * [View Developer Docs](https://canvas.workdaydesign.com/components/navigation/breadcrumbs/#breadcrumbsoverflowbutton)
      *
      * The toggle button for the Breadcrumbs Menu.
-     * This button is rendered implicitly in the `Breadcrumbs.List` when the list overflows.
-     * However, if you need to pass props to it, you can do so by passing `overflowButtonProps` to the List.
+     * This button is rendered in the `Breadcrumbs.List` when `overflowButtonProps` passed
+     * and becomes visible when the list overflows. `overflowButtonProps must contain at least `aria-label`.
+     * If you need to pass other props to it, you can do so by adding it to `overflowButtonProps` passed to the List.
      *
      * @example
      * ```tsx
      * <Breadcrumbs.List
      *   overflowButtonProps={{
-     *     'aria-label': 'More breadcrumb links',
+     *     'aria-label': 'More links',
      *     onClick={handleOverflowButtonClick}
      *   }}
      * >
@@ -101,7 +102,7 @@ export const Breadcrumbs = createContainer('nav')({
      * ---
      * [View Developer Docs](https://canvas.workdaydesign.com/components/navigation/breadcrumbs/#breadcrumbscurrentitem)
      *
-     * The last element in the list of `Breadcrumb.Item`s.
+     * The last element in the list of `Breadcrumbs.Item`s.
      * By default, this item is truncated with a tooltip at `350px`,
      * But that can be customized with the `maxWidth` prop.
      *
@@ -139,14 +140,12 @@ export const Breadcrumbs = createContainer('nav')({
      */
     Menu: BreadcrumbsMenu,
   },
-})<BreadcrumbsProps>(
-  ({children, 'aria-label': ariaLabel = 'breadcrumbs', ...elemProps}, _, model) => {
-    return (
-      <Menu model={model.menu}>
-        <nav role="navigation" aria-label={ariaLabel} {...elemProps}>
-          {children}
-        </nav>
-      </Menu>
-    );
-  }
-);
+})<BreadcrumbsProps>(({children, ...elemProps}, _, model) => {
+  return (
+    <Menu model={model.menu}>
+      <nav role="navigation" {...elemProps}>
+        {children}
+      </nav>
+    </Menu>
+  );
+});

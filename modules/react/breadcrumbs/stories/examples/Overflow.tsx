@@ -26,8 +26,8 @@ export const OverflowBreadcrumbs = () => {
   return (
     <div>
       <Box width={containerWidth}>
-        <Breadcrumbs model={model}>
-          <Breadcrumbs.List>
+        <Breadcrumbs model={model} aria-label="Breadcrumbs">
+          <Breadcrumbs.List overflowButtonProps={{'aria-label': 'More links'}}>
             {item =>
               item.link ? (
                 <Breadcrumbs.Item>

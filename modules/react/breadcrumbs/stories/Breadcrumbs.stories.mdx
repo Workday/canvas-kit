@@ -80,11 +80,13 @@ All you need to supply is the translated text for items and ARIA labels.
 #### Usage
 
 `Breadcrumbs` is a container component that is responsible for creating a `BreadcrumbsModel` and
-sharing it with its subcomponents using React context. It also renders `nav` element with default
-`aria-label` as `breadcrumbs`
+sharing it with its subcomponents using React context. It also renders `nav` element, and
+`aria-label` attribute must be provided for this element.
 
 ```tsx
-<Breadcrumbs items={[]}>{/* Child components */}</Breadcrumbs>
+<Breadcrumbs items={[]} aria-label="Breadcrumbs">
+  {/* Child components */}
+</Breadcrumbs>
 ```
 
 Alternatively, you may pass in a model using the hoisted model pattern.
@@ -94,13 +96,15 @@ const model = useBreadcrumbsModel({
   items: [],
 });
 
-<Breadcrumbs model={model}>{/* Child components */}</Breadcrumbs>;
+<Breadcrumbs model={model} aria-label="Breadcrumbs">
+  {/* Child components */}
+</Breadcrumbs>;
 ```
 
 #### Props
 
 Note that if you pass in a `model` configured with `useBreadcrumbsModel`, configuration props passed
-to `Breadcrumbs` will be ignored.
+to `Breadcrumbs` will be ignored. `aria-label` attribute must be provided for `nav` element.
 
 All undeclared props go to underlying `nav` component.
 
@@ -111,7 +115,8 @@ All undeclared props go to underlying `nav` component.
 #### Usage
 
 `Breadcrumbs.List` is a `Flex` component rendered as a `<ul>` element. It is a container for
-`Breadcrumbs.Item` subcomponents.
+`Breadcrumbs.Item` subcomponents. It also renders overflow button if `overflowButtonProps` has been
+passed;
 
 ```tsx
 <Breadcrumbs.List>{/* Breadcrumbs.Items */}</Breadcrumbs.List>
@@ -120,7 +125,8 @@ All undeclared props go to underlying `nav` component.
 #### Props
 
 `Breadcrumbs.List` accepts a `overflowButtonProps` prop allowing to set specific props for overflow
-button.
+button. Breadcrumbs.List with overflow behavior should contain `overflowButtonProps` with
+`aria-label` to define overflow button function.
 
 All undocumented props are spread to the underlying `Flex` component.
 
@@ -225,7 +231,9 @@ This component also supports
 
 ### Breadcrumbs.Menu
 
-The `Breadcrumbs.Menu` uses the `Menu` component under the hood. Please view our [Menu docs](https://canvas.workdaydesign.com/components/popups/menu#component-api) for more in-depth component information.
+The `Breadcrumbs.Menu` uses the `Menu` component under the hood. Please view our
+[Menu docs](https://canvas.workdaydesign.com/components/popups/menu#component-api) for more in-depth
+component information.
 
 ## Model
 
