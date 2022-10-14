@@ -17,13 +17,7 @@ type CSSObject<T> = {
 };
 
 const isWithinBreakpoint = (width: number, min: number, max?: number) => {
-  if (width >= min && max === undefined) {
-    return true;
-  }
-  if (width >= min && max && width <= max - 1) {
-    return true;
-  }
-  return false;
+  return width >= min && (!max || (max && width <= max - 1));
 };
 
 /**
@@ -31,7 +25,7 @@ const isWithinBreakpoint = (width: number, min: number, max?: number) => {
 responsive styles with objects (as you can see in the example below). This hook accepts three
 arguments with the third being optional (Style Objects, Container Width, Theme). In each style
 object, there are five sizes that it will accept: `zero, small, medium, large and extra large`.
-These give sizes represent the breakpoints that are at the bottom of this page. The sizes will act
+These sizes represent Canvas Kit breakpoints. The sizes will act
 like `min-width`. For example, if you want to apply styles from `medium` and up, then you would
 write those styles under `m`.
  *
@@ -90,7 +84,7 @@ export function useResponsiveContainerStyles<T extends ResponsiveCSSObject<T>>(
 ) {
   const canvasTheme = useTheme(theme);
   const breakpoints = canvasTheme.canvas.breakpoints.values;
-  // scoped strictly within the breakpoint range (think of it as a min-width + max-width)
+  // scoped strictly within the breakpoint range (think of it as the sum of min-width + max-width)
   const isZero = isWithinBreakpoint(width, 0, breakpoints.s);
   const isSmall = isWithinBreakpoint(width, breakpoints.s, breakpoints.m);
   const isMedium = isWithinBreakpoint(width, breakpoints.m, breakpoints.l);

@@ -1,10 +1,9 @@
 import {Meta, ArgsTable} from '@storybook/addon-docs';
 import {Box} from '@workday/canvas-kit-react/layout';
-//
 import {
   useResizeObserver,
   ResponsiveContextProvider,
-  useResponsiveStyles,
+  useResponsiveContainerStyles,
 } from '@workday/canvas-kit-react/common';
 import {ResponsiveContainer} from './examples/ResponsiveStyles';
 import {ResponsiveViewport} from './examples/ResponsiveViewport';
@@ -14,7 +13,7 @@ import {ResponsiveViewport} from './examples/ResponsiveViewport';
 # Responsive Styling
 
 Responsive styling is an approach to web development or a set of best practices, used to create a
-layout that can respond to the device being used to view the content.
+layout that can respond to the device's viewport size.
 
 You can read more about the history of
 [Responsive Design](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Responsive_Design).
@@ -26,22 +25,20 @@ which to use.
 
 ### Container Based Responsive Styling
 
-Now, with viewport-based responsive styling (media queries), the user's viewport (user's visible
-area of a web page) is measured and styles are applied based on the size of that viewport. We will
-do the same with Container Based Responsive Styling but, we will just be measuring the size of the
+With viewport-based responsive styling (media queries), the user's viewport (user's visible area of
+a web page) is measured and styles are applied based on the size of that viewport. We will do the
+same with Container Based Responsive Styling but, we will just be measuring the size of the
 container the element is in instead of the user's viewport.
 
-Take the below example of a component:
+In the example, we see that there is a `maxWidth` set on the Box component of `1000`. This will set
+the maximum width of that element at `1000px`. What we can do with Container Based Responsive
+Styling is measure when that container's width reaches certain breakpoints
+`(i.e. 1440px, 1024px, 768px, 320px, 0)` and apply styles based on those breakpoints. If the
+container's width were to reach `768px`, we can apply styles to that breakpoint.
 
 ```tsx
 <Box maxWidth={1000}>Hello World</Box>
 ```
-
-In the example above, we see that there is a `maxWidth` set on the Box component of `1000`. This
-will set the maximum width of that element at `1000px`. What we can do with Container Based
-Responsive Styling is measure when that container's width reaches certain breakpoints
-`(i.e. 1440px, 1024px, 768px, 320px, 0)` and apply styles based on those breakpoints. If the
-container's width were to reach `768px`, we can apply styles to that breakpoint.
 
 In the interactive example below, when the dropdown's value is updated, the container size will
 change to match the size shown in the dropdown. This is just an example of how container-based
@@ -53,10 +50,10 @@ styles work and will be explained more in depth below.
 
 For container-based responsive styling, we have utilities that will allow you to apply responsive
 styles at those breakpoints. There are four utilities/hooks:
-`useResizeObserver | ResponsiveContextProvider | useResponsiveContext | useResponsiveStyles`
+`useResizeObserver | ResponsiveContextProvider | useResponsiveContext | useResponsiveContainerStyles`
 
-`useResizeObserver` - This is a hook that will provide the width of the container. This can used to
-measure container size as well.
+`useResizeObserver` - This is a hook that will provide the width of the container. This can be used
+to measure container size as well.
 
 `ResponsiveContextProvider` - This React Context Provider that will accept the width of the
 container from `useResizeObserver`.
@@ -73,7 +70,7 @@ like `min-width`. For example, if you want to apply styles from `medium` and up,
 write those styles under `m`.
 
 In the example below, we are importing three of those utilities:
-`useResizeObserver | ResponsiveContextProvider | useResponsiveStyles`
+`useResizeObserver | ResponsiveContextProvider | useResponsiveContainerStyles`
 
 See example below:
 
@@ -138,7 +135,7 @@ return (
 
 ### Viewport Based Responsive Styling
 
-The viewport is the user's visible area of a web page and it varies with the device.
+The viewport is the user's visible area of a web page and it varies with screen size.
 
 We can use media queries to run a series of tests that will measure the screen size or resolution
 and apply CSS styles specifically to an element.

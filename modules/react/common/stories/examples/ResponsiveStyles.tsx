@@ -2,6 +2,7 @@ import * as React from 'react';
 import {Box, Grid} from '@workday/canvas-kit-react/layout';
 import styled from '@emotion/styled';
 import {type} from '@workday/canvas-kit-react/tokens';
+import {Text} from '@workday/canvas-kit-react/text';
 import {
   useResponsiveContainerStyles,
   useResizeObserver,
@@ -10,12 +11,11 @@ import {
 import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Select, SelectOption} from '@workday/canvas-kit-react/select';
 
-const StyledHeading = styled(Box.as('h3'))({
-  ...type.levels.body.large,
-  ...type.variants.inverse,
-  margin: 0,
-  fontWeight: type.properties.fontWeights.bold,
-});
+const HeadingText = ({children, ...props}) => (
+  <Text as="p" fontSize={20} fontWeight="bold" color="frenchVanilla100" margin={0} {...props}>
+    {children}
+  </Text>
+);
 
 const Header = ({children, ...props}) => (
   <Grid gridArea="Header" backgroundColor="blueberry400" {...props}>
@@ -110,16 +110,16 @@ export const ResponsiveContainer = () => {
         <Grid as="section">
           <Grid {...responsiveStyles.parentContainer}>
             <Header {...responsiveStyles.childrenContainers}>
-              <StyledHeading>Header</StyledHeading>
+              <HeadingText>Header</HeadingText>
             </Header>
             <ContentLeft {...responsiveStyles.childrenContainers}>
-              <StyledHeading>Content Left</StyledHeading>
+              <HeadingText>Content Left</HeadingText>
             </ContentLeft>
             <ContentRight {...responsiveStyles.childrenContainers}>
-              <StyledHeading>Content Right</StyledHeading>
+              <HeadingText>Content Right</HeadingText>
             </ContentRight>
             <Footer {...responsiveStyles.childrenContainers}>
-              <StyledHeading>Footer</StyledHeading>
+              <HeadingText>Footer</HeadingText>
             </Footer>
           </Grid>
         </Grid>

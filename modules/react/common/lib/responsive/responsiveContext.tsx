@@ -19,8 +19,7 @@ export interface ResponsiveContextProviderProps {
 }
 
 /**
- * This React Context Provider that will accept the width of the
-container from `useResizeObserver` hook (as you can see in the example below). In the example below, the `useResizeObserver` hook will measure the width of the container and set the width. The `ResponsiveContextProvider` will accept the width from `useResizeObserver`.
+ * This React Context Provider that will accept the width of the container from `useResizeObserver` hook (as you can see in the example below). In the example below, the `useResizeObserver` hook will measure the width of the container and set the width. The `ResponsiveContextProvider` will accept the width from `useResizeObserver`.
  *
  * @example
  * ```tsx
@@ -93,18 +92,12 @@ export const ResponsiveContextProvider = ({
 };
 
 const isWithinBreakpoint = (width: number, min: number, max?: number) => {
-  if (width >= min && max === undefined) {
-    return true;
-  }
-  if (width >= min && max && width <= max - 1) {
-    return true;
-  }
-  return false;
+  return width >= min && (!max || (max && width <= max - 1));
 };
 
 export const useResponsiveContext = () => {
   const {width, breakpoints} = React.useContext(ResponsiveContext);
-  // scoped strictly within the breakpoint range (think of it as a min-width + max-width)
+  // scoped strictly within the breakpoint range (think of it as the sum of min-width + max-width)
   const isZero = isWithinBreakpoint(width, 0, breakpoints.s);
   const isSmall = isWithinBreakpoint(width, breakpoints.s, breakpoints.m);
   const isMedium = isWithinBreakpoint(width, breakpoints.m, breakpoints.l);
