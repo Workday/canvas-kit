@@ -1,6 +1,7 @@
 import React from 'react';
 
-import {CanvasProvider, ContentDirection, StaticStates} from '@workday/canvas-kit-react/common';
+import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
+import {StaticStates} from '@workday/canvas-kit-react/testing';
 import {saveAsIcon} from '@workday/canvas-system-icons-web';
 
 import {customColorTheme, withSnapshotsEnabled} from '../../../../utils/storybook';

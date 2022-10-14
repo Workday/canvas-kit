@@ -24,7 +24,7 @@ function getSpecifications() {
             const after = noop;
             const afterEach = noop;
 
-            const describe = (name, cb) => {
+            const describe = (name, optionsOrCb, cb) => {
               const childrenBefore = children;
               const obj = {};
               obj.type = 'describe';
@@ -32,10 +32,15 @@ function getSpecifications() {
               obj.children = [];
               children.push(obj);
               children = obj.children;
-              cb();
+              if (typeof optionsOrCb === 'function') {
+                optionsOrCb();
+              } else if (typeof optionsOrCb === 'function') {
+                cb();
+              }
               children = childrenBefore;
             };
             describe.skip = noop;
+            describe.only = noop;
             const context = describe;
 
             const it = name => {
@@ -45,6 +50,7 @@ function getSpecifications() {
               children.push(obj);
             };
             it.skip = noop;
+            it.only = noop;
 
             // eslint-disable-next-line no-eval
             eval(contents);
