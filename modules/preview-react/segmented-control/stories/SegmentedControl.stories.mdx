@@ -22,8 +22,8 @@ import {
 # Canvas Kit Segmented Control
 
 Segmented Control is a
-[compound component](/getting-started/for-developers/resources/compound-components/) represents a
-linear group of two, three or four buttons allowing select speciic value. This is a controlled
+[compound component](/getting-started/for-developers/resources/compound-components/) that represents
+a linear group of two, three or four buttons allowing select specific value. This is a controlled
 component.
 
 [> Workday Design Reference](https://design.workday.com/components/buttons/action-bar)
@@ -38,31 +38,32 @@ yarn add @workday/canvas-kit-preview-react
 
 ### Basic Example
 
-In a basic example of an `SegmentedControl` there are four icon buttons in group. Each button paired
-with tooltip to explain the button function in text. Default values of `SegmentedControl` are
-specified for size (as `medium`) and orientation (as `horizontal`). All buttons should have the same
-type amd only one of them can be active at a time.
+In a basic example of an `SegmentedControl` there are four icon buttons in group. Each button is
+paired with a tooltip to explain the button function in text. Default values of `SegmentedControl`
+are specified for size (as `medium`) and orientation (as `horizontal`). All buttons should have the
+same type and only one of them can be active at a time.
 
 `SegmentedControl` includes a container `SegmentedControl` component and the following subcomponent:
-`SegmentedControl.List` which should contains `SegmentedControl.Item`.
+`SegmentedControl.List` which contains a `SegmentedControl.Item`.
 
 <ExampleCodeBlock code={Basic} />
 
 ### Variations Example
 
-`SegmentedControl` can be used with diferent buttons: text only, icon left or icon only.
+`SegmentedControl` can be used with diferent buttons: text only, text with icon or icon only.
 
 #### Text And Icon
 
 <ExampleCodeBlock code={TextAndIcon} />
 
-#### Text And Icon
+#### Text Only
 
 <ExampleCodeBlock code={TextOnly} />
 
 #### Icon Only (vertical)
 
-`SegmentedControl` icon only buttons can be placed horizontally or vertically.
+`SegmentedControl` icon only buttons can be placed horizontally or vertically. Be aware that
+vertical orientation must be used only for icon only buttons.
 
 <ExampleCodeBlock code={Vertical} />
 
@@ -74,8 +75,8 @@ type amd only one of them can be active at a time.
 
 ### Disabled Example
 
-``SegmentedControl`can be disabled by adding`disabled` prop to the whole container. It will also
-disable all buttons.
+`SegmentedControl`can be disabled by adding`disabled` prop to the whole container. This will disable
+all buttons.
 
 <ExampleCodeBlock code={Disabled} />
 

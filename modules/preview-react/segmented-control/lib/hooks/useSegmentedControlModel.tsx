@@ -20,18 +20,18 @@ export const useSegmentedControlModel = createModelHook({
      */
     initialValue: '',
     /**
-     * Sets disabled state to all segmented control buttons
+     * Sets disabled state for all segmented control buttons
      * @default false
      */
     disabled: false,
     /**
-     * Sets size of segmented control container and buttons. Can be `small`, `medium` or `large`.
+     * Sets the size of the segmented control container and its buttons. Can be `small`, `medium` or `large`.
      * @default 'medium'
      */
     size: 'medium' as 'small' | 'medium' | 'large',
     /**
-     * The SegmentedControl handles rendering of button group in a horizontal orientation,
-     * but the icon only button variant could have a vertical orientation.
+     * The SegmentedControl can rendered in a horizontal or vertical orientation.
+     * We suggest to use the `vertical` orientation only for icon only variant.
      * @default 'horizontal'
      */
     orientation: 'horizontal' as typeof useListModel.defaultConfig.orientation,
