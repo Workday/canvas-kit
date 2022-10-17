@@ -1,20 +1,12 @@
 import React from 'react';
 
-import {createComponent, createSubcomponent} from '@workday/canvas-kit-react/common';
+import {createSubcomponent} from '@workday/canvas-kit-react/common';
 
 import {SystemIcon, SystemIconProps} from '@workday/canvas-kit-react/icon';
-import {plusIcon} from '@workday/canvas-system-icons-web';
-import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {useStatusIndicatorModel} from './hooks';
 import {getStatusIndicatorColors} from './StatusIndicator';
 
-export interface StatusIndicatorIconProps extends Omit<SystemIconProps, 'icon'> {
-  /**
-   * The system icon rendered by the component
-   * @default `plusIcon`
-   */
-  icon: CanvasSystemIcon;
-}
+export interface StatusIndicatorIconProps extends SystemIconProps {}
 
 export const StatusIndicatorIcon = createSubcomponent('span')({
   modelHook: useStatusIndicatorModel,
@@ -28,7 +20,7 @@ export const StatusIndicatorIcon = createSubcomponent('span')({
       role="img"
       color={colors.statusIndicatorTextAndIconColor}
       colorHover={colors.statusIndicatorTextAndIconColor}
-      icon={icon || plusIcon}
+      icon={icon}
       {...elemProps}
     />
   );

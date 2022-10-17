@@ -3,6 +3,10 @@ import {Specifications} from '@workday/canvas-kit-docs';
 
 import {StatusIndicator} from '@workday/canvas-kit-preview-react/status-indicator';
 import {Basic} from './examples/Basic';
+import {Emphasis} from './examples/Emphasis';
+import {Icon} from './examples/Icon';
+import {Overflow} from './examples/Overflow';
+import {Variants} from './examples/Variants';
 
 <Meta title="Preview/Status Indicator/React" component={StatusIndicator} />
 
@@ -18,6 +22,37 @@ yarn add @workday/canvas-kit-preview-react
 
 ### Basic Example
 
-Show and hide using a button.
+A basic status indicator will render some text with a gray background and low emphasis.
 
 <ExampleCodeBlock code={Basic} />
+
+### Emphasis
+
+Emphasis dictates the contrast between the text and background color and is typically used when you
+need to show more visual urgency.
+
+<ExampleCodeBlock code={Emphasis} />
+
+### Icon
+
+You can add an icon to the status indicator as a visual decorator. You can control the position of
+the icon depending on where you place it in the structure.
+
+<ExampleCodeBlock code={Icon} />
+
+### Overflow
+
+Although not encouraged, a status indicator will handle overflow text in cases where the text
+exceeds the max width of the container. For clarity and best experience we encourage consumers to
+place minimal amounts of text so that it is all visible. You can also control the `maxWidth` of the
+container as well as the placement of the tooltip with `tooltipProps`.
+
+<ExampleCodeBlock code={Overflow} />
+
+### Variants
+
+A status indicator has different variants which define the background color of it. The variants
+include: `gray, orange, blue, green, red, transparent`. Based on the `emphasis` the variant will
+either be dark or light.
+
+<ExampleCodeBlock code={Variants} />

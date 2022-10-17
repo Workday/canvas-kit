@@ -3,6 +3,7 @@
  */
 import React from 'react';
 import {renderToString} from 'react-dom/server';
+import {uploadCloudIcon} from '@workday/canvas-system-icons-web';
 import {StatusIndicator} from '../';
 
 describe('StatusIndicator', () => {
@@ -10,8 +11,8 @@ describe('StatusIndicator', () => {
     const ssrRender = () =>
       renderToString(
         <StatusIndicator>
-          {/* <StatusIndicator.Target>Target</StatusIndicator.Target>
-          <StatusIndicator.Content>Content</StatusIndicator.Content> */}
+          <StatusIndicator.Icon icon={uploadCloudIcon} />
+          <StatusIndicator.Label>Content</StatusIndicator.Label>
         </StatusIndicator>
       );
     expect(ssrRender).not.toThrow();
