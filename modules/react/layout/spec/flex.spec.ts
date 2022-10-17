@@ -28,4 +28,21 @@ describe('Flex Style Props Function', () => {
 
     expect(flexStyles).toEqual(expected);
   });
+
+  it('should translate space token values to styles', () => {
+    const props = {
+      gap: 's',
+      rowGap: 'm',
+      columnGap: 'l',
+    } as FlexStyleProps;
+    const expected = {
+      ...props,
+      gap: '16px',
+      rowGap: '24px',
+      columnGap: '32px',
+    };
+    const flexStyles = flex(props);
+
+    expect(flexStyles).toEqual(expected);
+  });
 });

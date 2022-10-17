@@ -3,6 +3,85 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v7.4.1](https://github.com/Workday/canvas-kit/releases/tag/v7.4.1) (2022-10-13)
+
+### Documentation
+
+- docs: Remove dependency on Storybook utils from CustomStyles example ([#1844](https://github.com/Workday/canvas-kit/pull/1844)) ([@jamesfan](https://github.com/jamesfan))
+
+### Infrastructure
+
+- ci: Fix popup tests and ci bugs ([#1846](https://github.com/Workday/canvas-kit/pull/1846)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v7.4.0](https://github.com/Workday/canvas-kit/releases/tag/v7.4.0) (2022-10-12)
+
+### Components
+
+- feat: Add menu headers for grouping items ([#1822](https://github.com/Workday/canvas-kit/pull/1822)) ([@vibdev](https://github.com/vibdev), [@NicholasBoll](https://github.com/NicholasBoll))
+  Adds the ability to mark `<MenuItems>` as headers using the `isHeader` attribute. This allows users to group menu items logically. It updates the code used for keyboard shortcuts to ignore any items marked as a header.
+- feat: Add support for opening stories in Tesseract ([#1829](https://github.com/Workday/canvas-kit/pull/1829)) ([@anicholls](https://github.com/anicholls))
+
+### Infrastructure
+
+- ci: Fixing to make workflow valid-name needed for each if ([#1842](https://github.com/Workday/canvas-kit/pull/1842)) ([@jaclynjessup](https://github.com/jaclynjessup))
+- ci: Forward merge commits that skip releases ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v7.3.18](https://github.com/Workday/canvas-kit/releases/tag/v7.3.18) (2022-10-10)
+
+### Infrastructure
+
+- ci: Updates to Project Board Actions ([#1834](https://github.com/Workday/canvas-kit/pull/1834)) ([@jaclynjessup](https://github.com/jaclynjessup))
+
+### Test
+
+- test: Fix flaky Cypress popup specification ([#1837](https://github.com/Workday/canvas-kit/pull/1837)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v7.3.17](https://github.com/Workday/canvas-kit/releases/tag/v7.3.17) (2022-10-07)
+
+### Components
+
+- fix: Error handling to fix TypeError bug on models used in responsive modals/popups ([#1831](https://github.com/Workday/canvas-kit/pull/1831)) ([@ahayes91](https://github.com/ahayes91))
+
+### Infrastructure
+
+- ci: Add token to close-related-issues workflow ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v7.3.16](https://github.com/Workday/canvas-kit/releases/tag/v7.3.16) (2022-10-06)
+
+### Documentation
+
+- docs: Add uncontrolled input example using React Hook Form ([#1820](https://github.com/Workday/canvas-kit/pull/1820)) ([@vibdev](https://github.com/vibdev))
+
+
+## [v7.3.15](https://github.com/Workday/canvas-kit/releases/tag/v7.3.15) (2022-10-04)
+
+### Components
+
+- fix: Update `useReturnFocus` to change focus if target is visible ([#1709](https://github.com/Workday/canvas-kit/pull/1709)) ([@NicholasBoll](https://github.com/NicholasBoll), [@alanbsmith](https://github.com/alanbsmith))
+
+
+## [v7.3.14](https://github.com/Workday/canvas-kit/releases/tag/v7.3.14) (2022-10-04)
+
+### Documentation
+
+- docs: Update Modal examples ([#1621](https://github.com/Workday/canvas-kit/pull/1621)) ([@emroller16](https://github.com/emroller16), [@jamesfan](https://github.com/jamesfan))
+
+### Infrastruture
+
+- ci: Close related issues with pull requests ([#1817](https://github.com/Workday/canvas-kit/pull/1817)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v7.3.13](https://github.com/Workday/canvas-kit/releases/tag/v7.3.13) (2022-09-28)
+
+### Tests
+
+- test(menu): Add missing test case for tabbing out of a control ([#1733](https://github.com/Workday/canvas-kit/pull/1733)) ([@smopur](https://github.com/smopur))
+
+
 ## [v7.3.12](https://github.com/Workday/canvas-kit/releases/tag/v7.3.12) (2022-09-28)
 
 ### Components
