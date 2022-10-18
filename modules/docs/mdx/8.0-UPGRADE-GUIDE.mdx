@@ -178,7 +178,76 @@ const Example = styled('div')(
 
 ### Responsive Styles
 
-> Coming Soon (https://github.com/Workday/canvas-kit/pull/1779)
+The following Canvas Kit responsive utilities will be released as part of v8:
+
+- **ResponsiveContextProvider**: This is a React Context Provider that will take a width and an
+  optional theme and allow components to subscribe to context changes via the `useResponsiveContext`
+  hook.
+
+- **useResponsiveContext Hook**: This hook subscribes to the `ResponsiveContextProvider` and
+  provides helpful utilities to determine whether the current width is within a particular theme
+  breakpoint. Developers can use these utilities when creating container-based responsive styles.
+
+- **useResponsiveContainerStyles**: A hook that allows developers to create container-based
+  responsive styles using style objects. These are net-new utilities that developers can opt-in to
+  start using, but no action is required to uptake this change.
+
+```tsx
+import {Flex, Box} from '@workday/canvas-kit-react/layout';
+import {
+  useResizeObserver,
+  ResponsiveContextProvider,
+  useResponsiveContainerStyles,
+} from '@workday/canvas-kit-react/common';
+const ref = React.useRef(null);
+const [width, setWidth] = React.useState(0);
+useResizeObserver({
+  ref: ref,
+  onResize: data => {
+    setWidth(data.width || 0);
+  },
+});
+const containerResponsiveStyles = useResponsiveContainerStyles(
+  {
+    flex: {
+      flexDirection: 'column',
+      padding: 'm',
+      depth: 1,
+      borderRadius: 'l',
+      zero: {
+        backgroundColor: 'Red',
+      },
+      s: {
+        backgroundColor: 'Orange',
+      },
+      m: {
+        backgroundColor: 'Yellow',
+      },
+      l: {
+        backgroundColor: 'Green',
+      },
+      xl: {
+        backgroundColor: 'Blue',
+      },
+    },
+    box: {
+      padding: 's',
+    },
+  },
+  width
+);
+return (
+  <ResponsiveContextProvider width={width}>
+    <Box ref={ref}>
+      <Flex {...containerResponsiveStyles.flex}>
+        <Box {...containerResponsiveStyles.box}>Hello World</Box>
+      </Flex>
+    </Box>
+  </ResponsiveContextProvider>
+);
+```
+
+This update is specific to Canvas Kit and will not impact existing designs.
 
 ---
 
