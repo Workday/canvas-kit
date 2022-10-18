@@ -120,7 +120,6 @@ export const StatusIndicator = createContainer('div')({
       borderRadius="s"
       color={colors.statusIndicatorTextAndIconColor}
       background={colors.statusIndicatorBackgroundColor}
-      zIndex={0}
       {...elemProps}
     >
       {children}
