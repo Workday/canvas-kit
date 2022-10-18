@@ -184,8 +184,6 @@ const Example = styled('div')(
 
 ### Testing
 
-> Coming Soon (https://github.com/Workday/canvas-kit/pull/1800)
-
 ## New Components
 
 ### Grid
@@ -227,7 +225,30 @@ text with built-in support for our Canvas type tokens.
 
 ### Status Indicator (Preview)
 
-> Coming Soon (https://github.com/Workday/canvas-kit/issues/1637)
+We've redesigned StatusIndicator to be a compound component and added it to our preview package. You
+can still use the one in our main package, but in a later date it will be replaced by the one in
+preview.
+
+```tsx
+import {StatusIndicator} from '@workday/canvas-kit-preview-react/status-indicator';
+import {uploadCloudIcon} from '@workday/canvas-system-icons-web';
+
+<StatusIndicator emphasis="low" variant="green">
+  <StatusIndicator.Label>Lorem Impsum Dolor</StatusIndicator.Label>
+  <StatusIndicator.Icon icon={uploadCloudIcon} />
+</StatusIndicator>;
+```
+
+Some key aspects of the component to note include:
+
+- Usage: Best used for helping the user quickly identify the status of a task, action, or page
+  element.
+- Instead of `type` to define the color of the StatusIndicator as we do in main, use `variant`.
+- If your StatusIndicator has overflow text, we've given you an example of how to handle that but
+  strongly discourage having long text. The component will style the text with ellipsis but it's up
+  to the consumer to implement the tooltip.
+- We've introduced a model so that you can control the `emphasis` and `variant` but it's not
+  required and these can be props on the parent component.
 
 ## Component Deprecations
 
