@@ -181,12 +181,13 @@ const Example = styled('div')(
 The following Canvas Kit responsive utilities will be released as part of v8:
 
 - **ResponsiveContextProvider**: This is a React Context Provider that will take a width and an
-  optional theme and allow components to subscribe to context changes via the `useResponsiveContext`
-  hook.
+  optional theme prop and allow components to subscribe to context changes via the
+  `useResponsiveContext` hook.
 
 - **useResponsiveContext Hook**: This hook subscribes to the `ResponsiveContextProvider` and
   provides helpful utilities to determine whether the current width is within a particular theme
-  breakpoint. Developers can use these utilities when creating container-based responsive styles.
+  breakpoint (`Small: 320px, Medium: 768px, Large: 1024px, Extra Large: 1440px`). Developers can use
+  these utilities when creating container-based responsive styles.
 
 - **useResponsiveContainerStyles**: A hook that allows developers to create container-based
   responsive styles using style objects. These are net-new utilities that developers can opt-in to
