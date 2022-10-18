@@ -1,8 +1,9 @@
 import React from 'react';
 
-import {StatusIndicator} from '@workday/canvas-kit-preview-react/status-indicator';
-import {uploadCloudIcon} from '@workday/canvas-system-icons-web';
-import {HStack, VStack} from '@workday/canvas-kit-react/layout';
+import {
+  StatusIndicator,
+  useStatusIndicatorModel,
+} from '@workday/canvas-kit-preview-react/status-indicator';
 
 export const Basic = () => {
   return (

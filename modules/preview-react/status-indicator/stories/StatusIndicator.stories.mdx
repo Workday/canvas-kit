@@ -56,3 +56,94 @@ include: `gray, orange, blue, green, red, transparent`. Based on the `emphasis` 
 either be dark or light.
 
 <ExampleCodeBlock code={Variants} />
+
+## Components
+
+### StatusIndicator
+
+#### Usage
+
+`StatusIndicator` is a container component that is responsible for creating a `StatusIndicatorModel`
+and sharing it with its subcomponents using React context. It represents a `HStack` to evenly space
+elements. This container also sets a default max width of `200px`.
+
+```tsx
+<StatusIndicator emphasis="low" variant="blue">
+  {/* Child components */}
+</StatusIndicator>
+```
+
+Alternatively, you may pass in a model using the hoisted model pattern.
+
+```tsx
+const model = useStatusIndicatorModel({
+  emphasis: 'low',
+  variant: 'blue',
+});
+
+<StatusIndicator model={model}>{/* Child components */}</StatusIndicator>;
+```
+
+#### Props
+
+Note that if you pass in a `model` configured with `useStatusIndicatorModel`, configuration props
+passed to `StatudIndicator` will be ignored.
+
+<ArgsTable of={StatusIndicator} />
+
+### StatusIndicator.Label
+
+#### Usage
+
+`StatusIndicator.Label` is a `<Text/>` component. You can use and extend all props that come from
+Text. By default it will apply ellipsis styles when the contents of it exceed the max width.
+
+```tsx
+<StatusIndicator.Label>{/*The text to be rendered*/}</StatusIndicator.Label>
+```
+
+#### Props
+
+Undocumented props are spread to the underlying `<span>` element.
+
+<ArgsTable of={StatusIndicator.Label} />
+
+### StatusIndicator.Icon
+
+#### Usage
+
+`StatusIndicator.Icon` is a `SystemIcon>` component. It's used as a decorative element to visually
+support the StatusIndicator text.
+
+```tsx
+<Tabs.Item data-id="first">First Tab</Tabs.Item>
+```
+
+#### Props
+
+Undocumented props are spread to the underlying `button` element.
+
+<ArgsTable of={StatusIndicator.Icon} />
+
+## Model
+
+If `Tabs` was stripped of all its markup, attributes, and styling, what would remain is the
+[model](/getting-started/for-developers/resources/compound-components/#models). The model is an
+object composed of two parts: `state` which describes the current snapshot in time of the component
+and `events` which describes events that can be sent to the model.
+
+By default, `Tabs` will create a model and share it internally with its subcomponents using React
+context. Alternatively, if you need direct access to the model's `state` and `events` outside of the
+`Tabs` component, you may configure your own model with `useTabsModel` and pass it to `Tabs` via a
+pattern called
+[hoisting the model](/getting-started/for-developers/resources/compound-components/#configuring-a-model).
+
+```tsx
+const model = useTabsModel({
+  onActivate({data}) {
+    console.log('Activated Tab', data);
+  },
+});
+
+<Tabs model={model}>{/* Child components */}</Tabs>;
+```

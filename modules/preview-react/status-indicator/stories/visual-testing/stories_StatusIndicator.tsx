@@ -1,41 +1,54 @@
-// import React from 'react';
+import * as React from 'react';
 
-// import {StaticStates} from '@workday/canvas-kit-react/testing';
-// import {ComponentStatesTable} from '@workday/canvas-kit-labs-react/common';
-// import {withSnapshotsEnabled} from '../../../../../utils/storybook';
+import {
+  ComponentStatesTable,
+  permutateProps,
+  StaticStates,
+} from '@workday/canvas-kit-react/testing';
+import {withSnapshotsEnabled} from '../../../../../utils/storybook';
 
-// import {StatusIndicator} from '@workday/canvas-kit-preview-react/status-indicator';
+import {StatusIndicator} from '../../index';
+import {uploadCloudIcon} from '@workday/canvas-system-icons-web';
 
-// export default withSnapshotsEnabled({
-//   title: 'Testing/React/Preview/Status Indicator',
-//   component: StatusIndicator,
-// });
+export default withSnapshotsEnabled({
+  title: 'Testing/Preview/Status Indicator',
+  component: StatusIndicator,
+});
 
-// export const StatusIndicatorStates = () => {
-//   return (
-//     <StaticStates>
-//       <ComponentStatesTable
-//         columnProps={[{label: 'Default', props: {}}]}
-//         rowProps={[
-//           {
-//             label: 'Closed',
-//             props: {open: false},
-//           },
-//           {
-//             label: 'Opened',
-//             props: {open: true},
-//           },
-//         ]}
-//       >
-//         {({open, ...props}) => {
-//           return (
-//             <StatusIndicator initialOpen={open} {...props}>
-//               <StatusIndicator.Target>Toggle</StatusIndicator.Target>
-//               <StatusIndicator.Content>Content</StatusIndicator.Content>
-//             </StatusIndicator>
-//           );
-//         }}
-//       </ComponentStatesTable>
-//     </StaticStates>
-//   );
-// };
+export const StatusIndicatorStates = () => (
+  <StaticStates>
+    <ComponentStatesTable
+      rowProps={permutateProps({
+        emphasis: [
+          {value: 'low', label: 'Low Emphasis'},
+          {value: 'high', label: 'High Emphasis'},
+        ],
+        icon: [
+          {value: undefined, label: ''},
+          {value: uploadCloudIcon, label: 'With Icon'},
+        ],
+      })}
+      columnProps={permutateProps({
+        variant: [
+          {value: 'gray', label: 'Gray'},
+          {value: 'blue', label: 'Blue'},
+          {value: 'green', label: 'Green'},
+          {value: 'orange', label: 'Orange'},
+          {value: 'red', label: 'Red'},
+          {value: 'transparent', label: 'Transparent'},
+        ],
+      })}
+    >
+      {props => {
+        console.warn(props);
+        const {emphasis, icon, variant} = props;
+        return (
+          <StatusIndicator emphasis={emphasis} variant={variant}>
+            <StatusIndicator.Icon icon={icon} />
+            <StatusIndicator.Label>Lorem impsum dolor</StatusIndicator.Label>
+          </StatusIndicator>
+        );
+      }}
+    </ComponentStatesTable>
+  </StaticStates>
+);
