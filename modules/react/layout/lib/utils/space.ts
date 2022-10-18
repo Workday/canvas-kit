@@ -1,207 +1,213 @@
-import {
-  ContentDirection,
-  PartialEmotionCanvasTheme,
-  useTheme,
-} from '@workday/canvas-kit-react/common';
-import {space as spaceTokens, CanvasSpace, CanvasSpaceKeys} from '@workday/canvas-kit-react/tokens';
+import {buildStyleFns, buildStylePropFn, StyleFnConfig} from './buildStyleFns';
+import {SystemPropValues} from './systemProps';
 
-type SpacePropValues = CanvasSpaceKeys | number | (string & {});
-
-/** These props automatically adjust for bidirectionality (LTR & RTL) */
-export type SpaceLogicalProps = {
-  /** sets margin-left property (bidirectional support) */
-  marginInlineStart?: SpacePropValues;
-  /** sets margin-right property (bidirectional support) */
-  marginInlineEnd?: SpacePropValues;
-  /** sets padding-left property (bidirectional support) */
-  paddingInlineStart?: SpacePropValues;
-  /** sets padding-right property (bidirectional support) */
-  paddingInlineEnd?: SpacePropValues;
+/** style props to for CSS space properties */
+export type SpaceStyleProps = {
+  /**
+   * - sets [CSS margin-inline-start property](https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline-start)
+   * - bidirectional support
+   * - system tokens: `space`
+   * */
+  marginInlineStart?: SystemPropValues['space'];
+  /**
+   * - sets [CSS margin-inline-end property](https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline-end)
+   * - bidirectional support
+   * - system tokens: `space`
+   * */
+  marginInlineEnd?: SystemPropValues['space'];
+  /**
+   * - sets [CSS padding-inline-start property](https://developer.mozilla.org/en-US/docs/Web/CSS/padding-inline-start)
+   * - bidirectional support
+   * - system tokens: `space`
+   * */
+  paddingInlineStart?: SystemPropValues['space'];
+  /**
+   * - sets [CSS padding-inline-end property](https://developer.mozilla.org/en-US/docs/Web/CSS/padding-inline-end)
+   * - bidirectional support
+   * - system tokens: `space`
+   * */
+  paddingInlineEnd?: SystemPropValues['space'];
+  /**
+   * - sets [CSS margin property](https://developer.mozilla.org/en-US/docs/Web/CSS/margin)
+   * - system tokens: `space`
+   * */
+  margin?: SystemPropValues['space'];
+  /**
+   * - sets [CSS margin-left](https://developer.mozilla.org/en-US/docs/Web/CSS/margin-left) and [margin-right properties](https://developer.mozilla.org/en-US/docs/Web/CSS/margin-right)
+   * - system tokens: `space`
+   * */
+  marginX?: SystemPropValues['space'];
+  /**
+   * - sets [CSS margin-top](https://developer.mozilla.org/en-US/docs/Web/CSS/margin-top) and [margin-bottom properties](https://developer.mozilla.org/en-US/docs/Web/CSS/margin-bottom)
+   * - system tokens: `space`
+   * */
+  marginY?: SystemPropValues['space'];
+  /**
+   * - sets [CSS margin-top property](https://developer.mozilla.org/en-US/docs/Web/CSS/margin-top)
+   * - system tokens: `space`
+   * */
+  marginTop?: SystemPropValues['space'];
+  /**
+   * - sets [CSS margin-right property](https://developer.mozilla.org/en-US/docs/Web/CSS/margin-right)
+   * - no bidirectional support
+   * - system tokens: `space`
+   * */
+  marginRight?: SystemPropValues['space'];
+  /**
+   * - sets [CSS margin-bottom property](https://developer.mozilla.org/en-US/docs/Web/CSS/margin-bottom)
+   * - system tokens: `space`
+   * */
+  marginBottom?: SystemPropValues['space'];
+  /**
+   * - sets [CSS margin-left property](https://developer.mozilla.org/en-US/docs/Web/CSS/margin-left)
+   * - no bidirectional support
+   * - system tokens: `space`
+   * */
+  marginLeft?: SystemPropValues['space'];
+  /**
+   * - sets [CSS padding property](https://developer.mozilla.org/en-US/docs/Web/CSS/padding)
+   * - system tokens: `space`
+   * */
+  padding?: SystemPropValues['space'];
+  /**
+   * - sets [CSS padding-left]((https://developer.mozilla.org/en-US/docs/Web/CSS/padding-left) and [padding-right properties](https://developer.mozilla.org/en-US/docs/Web/CSS/padding-right)
+   * - system tokens: `space`
+   * */
+  paddingX?: SystemPropValues['space'];
+  /**
+   * - sets [CSS padding-top](https://developer.mozilla.org/en-US/docs/Web/CSS/padding-top) and [padding-bottom properties](https://developer.mozilla.org/en-US/docs/Web/CSS/padding-bottom)
+   * - system tokens: `space`
+   * */
+  paddingY?: SystemPropValues['space'];
+  /**
+   * - sets [CSS padding-top property](https://developer.mozilla.org/en-US/docs/Web/CSS/padding-top)
+   * - system tokens: `space`
+   * */
+  paddingTop?: SystemPropValues['space'];
+  /**
+   * - sets [CSS padding-right property](https://developer.mozilla.org/en-US/docs/Web/CSS/padding-right)
+   * - no bidirectional support
+   * - system tokens: `space`
+   * */
+  paddingRight?: SystemPropValues['space'];
+  /**
+   * - sets [CSS padding-bottom](https://developer.mozilla.org/en-US/docs/Web/CSS/padding)
+   * - system tokens: `space`
+   * */
+  paddingBottom?: SystemPropValues['space'];
+  /**
+   * - sets [CSS padding-left property](https://developer.mozilla.org/en-US/docs/Web/CSS/padding-left)
+   * - no bidirectional support
+   * - system tokens: `space`
+   * */
+  paddingLeft?: SystemPropValues['space'];
 };
 
-/** These props do not adjust for bidirectionality (LTR & RTL) */
-export type SpaceStandardProps = {
-  /** sets margin property */
-  margin?: SpacePropValues;
-  /** sets margin-left and margin-right properties */
-  marginX?: SpacePropValues;
-  /** sets margin-top and margin-bottom properties */
-  marginY?: SpacePropValues;
-  /** sets margin-top property */
-  marginTop?: SpacePropValues;
-  /** sets margin-right property (no bidirectional support) */
-  marginRight?: SpacePropValues;
-  /** sets margin-bottom property */
-  marginBottom?: SpacePropValues;
-  /** sets margin-left property (no bidirectional support) */
-  marginLeft?: SpacePropValues;
-  /** sets padding property */
-  padding?: SpacePropValues;
-  /** sets padding-left and margin-right properties */
-  paddingX?: SpacePropValues;
-  /** sets padding-top and padding-bottom properties */
-  paddingY?: SpacePropValues;
-  /** sets padding-top property */
-  paddingTop?: SpacePropValues;
-  /** sets padding-right property (no bidirectional support) */
-  paddingRight?: SpacePropValues;
-  /** sets padding-bottom */
-  paddingBottom?: SpacePropValues;
-  /** sets padding-left property (no bidirectional support) */
-  paddingLeft?: SpacePropValues;
-};
+export const spaceStyleFnConfigs: StyleFnConfig[] = [
+  {
+    name: 'marginInlineStart',
+    properties: ['marginInlineStart'],
+    system: 'space',
+  },
+  {
+    name: 'marginInlineEnd',
+    properties: ['marginInlineEnd'],
+    system: 'space',
+  },
+  {
+    name: 'paddingInlineStart',
+    properties: ['paddingInlineStart'],
+    system: 'space',
+  },
+  {
+    name: 'paddingInlineEnd',
+    properties: ['paddingInlineEnd'],
+    system: 'space',
+  },
+  {
+    name: 'margin',
+    properties: ['margin'],
+    system: 'space',
+  },
+  {
+    name: 'marginX',
+    properties: ['marginLeft', 'marginRight'],
+    system: 'space',
+  },
+  {
+    name: 'marginY',
+    properties: ['marginTop', 'marginBottom'],
+    system: 'space',
+  },
+  {
+    name: 'marginTop',
+    properties: ['marginTop'],
+    system: 'space',
+  },
+  {
+    name: 'marginRight',
+    properties: ['marginRight'],
+    system: 'space',
+  },
+  {
+    name: 'marginBottom',
+    properties: ['marginBottom'],
+    system: 'space',
+  },
+  {
+    name: 'marginLeft',
+    properties: ['marginLeft'],
+    system: 'space',
+  },
+  {
+    name: 'padding',
+    properties: ['padding'],
+    system: 'space',
+  },
+  {
+    name: 'paddingX',
+    properties: ['paddingLeft', 'paddingRight'],
+    system: 'space',
+  },
+  {
+    name: 'paddingY',
+    properties: ['paddingTop', 'paddingBottom'],
+    system: 'space',
+  },
+  {
+    name: 'paddingTop',
+    properties: ['paddingTop'],
+    system: 'space',
+  },
+  {
+    name: 'paddingRight',
+    properties: ['paddingRight'],
+    system: 'space',
+  },
+  {
+    name: 'paddingBottom',
+    properties: ['paddingBottom'],
+    system: 'space',
+  },
+  {
+    name: 'paddingLeft',
+    properties: ['paddingLeft'],
+    system: 'space',
+  },
+];
 
-export type SpaceStyleProps = SpaceStandardProps & SpaceLogicalProps;
-
-const margin = (value: SpacePropValues) => {
-  return {margin: spaceTokens[value as keyof CanvasSpace] || value};
-};
-
-const marginX = (value: SpacePropValues) => {
-  return {
-    marginLeft: spaceTokens[value as CanvasSpaceKeys] || value,
-    marginRight: spaceTokens[value as CanvasSpaceKeys] || value,
-  };
-};
-
-const marginY = (value: SpacePropValues) => {
-  return {
-    marginTop: spaceTokens[value as CanvasSpaceKeys] || value,
-    marginBottom: spaceTokens[value as CanvasSpaceKeys] || value,
-  };
-};
-
-const marginTop = (value: SpacePropValues) => {
-  return {
-    marginTop: spaceTokens[value as CanvasSpaceKeys] || value,
-  };
-};
-
-const marginRight = (value: SpacePropValues, isRTL = false) => {
-  const attr = isRTL ? 'marginLeft' : 'marginRight';
-  return {
-    [attr]: spaceTokens[value as CanvasSpaceKeys] || value,
-  };
-};
-
-const marginBottom = (value: SpacePropValues) => {
-  return {
-    marginBottom: spaceTokens[value as CanvasSpaceKeys] || value,
-  };
-};
-
-const marginLeft = (value: SpacePropValues, isRTL = false) => {
-  const attr = isRTL ? 'marginRight' : 'marginLeft';
-  return {
-    [attr]: spaceTokens[value as CanvasSpaceKeys] || value,
-  };
-};
-
-const padding = (value: SpacePropValues) => {
-  return {
-    padding: spaceTokens[value as CanvasSpaceKeys] || value,
-  };
-};
-
-const paddingX = (value: SpacePropValues) => {
-  return {
-    paddingLeft: spaceTokens[value as CanvasSpaceKeys] || value,
-    paddingRight: spaceTokens[value as CanvasSpaceKeys] || value,
-  };
-};
-
-const paddingY = (value: SpacePropValues) => {
-  return {
-    paddingTop: spaceTokens[value as CanvasSpaceKeys] || value,
-    paddingBottom: spaceTokens[value as CanvasSpaceKeys] || value,
-  };
-};
-
-const paddingTop = (value: SpacePropValues) => {
-  return {
-    paddingTop: spaceTokens[value as CanvasSpaceKeys] || value,
-  };
-};
-
-const paddingRight = (value: SpacePropValues, isRTL = false) => {
-  const attr = isRTL ? 'paddingLeft' : 'paddingRight';
-  return {
-    [attr]: spaceTokens[value as CanvasSpaceKeys] || value,
-  };
-};
-
-const paddingBottom = (value: SpacePropValues) => {
-  return {
-    paddingBottom: spaceTokens[value as CanvasSpaceKeys] || value,
-  };
-};
-
-const paddingLeft = (value: SpacePropValues, isRTL = false) => {
-  const attr = isRTL ? 'paddingRight' : 'paddingLeft';
-  return {
-    [attr]: spaceTokens[value as CanvasSpaceKeys] || value,
-  };
-};
-
-const logicalSpaceStyleProps = {
-  marginInlineStart: marginLeft,
-  marginInlineEnd: marginRight,
-  paddingInlineStart: paddingLeft,
-  paddingInlineEnd: paddingRight,
-};
-
-const standardSpaceStyleProps = {
-  margin,
-  marginX,
-  marginY,
-  marginTop,
-  marginRight,
-  marginBottom,
-  marginLeft,
-  padding,
-  paddingX,
-  paddingY,
-  paddingTop,
-  paddingRight,
-  paddingBottom,
-  paddingLeft,
-};
-
+export const spaceStyleFns = buildStyleFns(spaceStyleFnConfigs);
 /**
  * A style prop function that takes component props and returns space styles.
  * If no `SpaceStyleProps` are found, it returns an empty object.
  *
  * @example
- * // You'll most likely use `space` with low-level, styled components
+ * ```tsx
  * const BoxExample = () => (
  *   <Box padding="xs" margin="m">
  *     Hello, space!
  *   </Box>
  * );
- *
+ * ```
  */
-export function space<P extends SpaceStyleProps & {theme?: PartialEmotionCanvasTheme}>(props: P) {
-  // space will always be used within the context of a component, but eslint doesn't know that
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const {canvas} = useTheme(props.theme);
-  let styles = {};
-  for (const key in props) {
-    if (props.hasOwnProperty(key)) {
-      if (key in standardSpaceStyleProps) {
-        const value = props[key as keyof SpaceStandardProps] as SpacePropValues;
-        const spaceFn = standardSpaceStyleProps[key as keyof SpaceStandardProps];
-        const style = spaceFn(value);
-        styles = {...styles, ...style};
-        continue;
-      }
-      if (key in logicalSpaceStyleProps) {
-        const value = props[key as keyof SpaceLogicalProps] as SpacePropValues;
-        const spaceFn = logicalSpaceStyleProps[key as keyof SpaceLogicalProps];
-        const isRTL = canvas.direction === ContentDirection.RTL;
-        const style = spaceFn(value, isRTL);
-        styles = {...styles, ...style};
-      }
-    }
-  }
-  return styles;
-}
+export const space = buildStylePropFn<SpaceStyleProps>(spaceStyleFns);

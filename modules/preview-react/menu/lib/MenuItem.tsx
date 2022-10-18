@@ -42,6 +42,11 @@ export interface DeprecatedMenuItemProps extends React.LiHTMLAttributes<HTMLLIEl
    */
   hasDivider?: boolean;
   /**
+   * If true, render a header to group data, this menu item will not be intractable.
+   * @default false
+   */
+  isHeader?: boolean;
+  /**
    * If true, set the DeprecatedMenuItem to the disabled state so it is not clickable.
    * @default false
    */
@@ -63,7 +68,7 @@ export interface DeprecatedMenuItemProps extends React.LiHTMLAttributes<HTMLLIEl
   shouldClose?: boolean;
 }
 
-const Item = styled('li')<Pick<DeprecatedMenuItemProps, 'isDisabled' | 'isFocused'>>(
+const Item = styled('li')<Pick<DeprecatedMenuItemProps, 'isDisabled' | 'isFocused' | 'isHeader'>>(
   {
     ...type.levels.subtext.large,
     padding: `${space.xxs} ${space.s}`,
@@ -78,6 +83,9 @@ const Item = styled('li')<Pick<DeprecatedMenuItemProps, 'isDisabled' | 'isFocuse
     '&:focus': {
       outline: 'none',
     },
+  },
+  ({isHeader}) => {
+    return {pointerEvents: isHeader ? 'none' : 'all'};
   },
   ({isFocused, isDisabled}) => {
     if (!isFocused && !isDisabled) {
@@ -283,6 +291,7 @@ export class DeprecatedMenuItem extends React.Component<DeprecatedMenuItemProps>
       hasDivider,
       isDisabled,
       isFocused,
+      isHeader,
       role,
       ...elemProps
     } = this.props;
@@ -297,11 +306,12 @@ export class DeprecatedMenuItem extends React.Component<DeprecatedMenuItemProps>
           ref={this.ref}
           tabIndex={-1}
           id={id}
-          role={role}
+          role={isHeader ? 'presentation' : role}
           onClick={this.handleClick}
           aria-disabled={isDisabled ? true : undefined}
           isDisabled={!!isDisabled}
           isFocused={!!isFocused}
+          isHeader={!!isHeader}
           {...elemProps}
         >
           {icon && iconProps && <StyledSystemIcon {...iconProps} />}

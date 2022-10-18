@@ -1,129 +1,166 @@
 import {Property} from 'csstype';
-import {space as spaceTokens, CanvasSpace, CanvasSpaceKeys} from '@workday/canvas-kit-react/tokens';
 
-export type GridSpacePropsValues = CanvasSpaceKeys | number | (string & {});
+import {buildStyleFns, buildStylePropFn, StyleFnConfig} from './buildStyleFns';
+import {SystemPropValues} from './systemProps';
 
-/** style props to for grid container properties */
+/** style props to for CSS grid container properties */
 export type GridStyleProps = {
-  /** sets `align-items` property */
+  /** sets [CSS align-items property](https://developer.mozilla.org/en-US/docs/Web/CSS/align-items) */
   alignItems?: Property.AlignItems;
-  /** sets `align-content` property */
+  /** sets [CSS align-content property](https://developer.mozilla.org/en-US/docs/Web/CSS/align-content) */
   alignContent?: Property.AlignContent;
   /**
-   * sets `display` property
-   * @default 'grid'
+   * - sets [CSS display property](https://developer.mozilla.org/en-US/docs/Web/CSS/display)
+   * - @default 'grid'
    * */
   display?: 'grid' | 'inline-grid';
-  /** sets `justify-items` property */
+  /** sets [CSS justify-items property](https://developer.mozilla.org/en-US/docs/Web/CSS/justify-items) */
   justifyItems?: Property.JustifyItems;
-  /** sets `justify-content` property */
+  /** sets [CSS justify-content property](https://developer.mozilla.org/en-US/docs/Web/CSS/justify-content) */
   justifyContent?: Property.JustifyContent;
-
-  // Container Types
-  /** sets `grid-template` property */
+  /** sets [CSS grid-template property](https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template) */
   gridTemplate?: Property.GridTemplate;
-  /** sets `grid-template-area` property */
+  /** sets [CSS grid-template-areas property](https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-areas) */
   gridTemplateAreas?: Property.GridTemplateAreas;
-  /** sets `grid-template-columns` property */
+  /** sets [CSS grid-template-columns property](https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-columns) */
   gridTemplateColumns?: Property.GridTemplateColumns;
-  /** sets `grid-template-rows` property */
+  /** sets [CSS grid-template-rows property](https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-rows) */
   gridTemplateRows?: Property.GridTemplateRows;
-  /** sets `column-gap` property */
-  gridColumnGap?: Property.GridColumnGap | GridSpacePropsValues;
-  /** sets `row-gap` property */
-  gridRowGap?: Property.GridRowGap | GridSpacePropsValues;
-  /** sets `gap` property */
-  gridGap?: Property.GridGap | GridSpacePropsValues;
-  /** sets `place-items` property */
+  /**
+   * - sets [CSS column-gap property](https://developer.mozilla.org/en-US/docs/Web/CSS/column-gap)
+   * - system tokens: `space`
+   * */
+  gridColumnGap?: Property.GridColumnGap | SystemPropValues['space'];
+  /**
+   * - sets [CSS row-gap property](https://developer.mozilla.org/en-US/docs/Web/CSS/row-gap)
+   * - system tokens: `space`
+   * */
+  gridRowGap?: Property.GridRowGap | SystemPropValues['space'];
+  /**
+   * - sets [CSS grid-gap property](https://developer.mozilla.org/en-US/docs/Web/CSS/grid-gap)
+   * - system tokens: `space`
+   * */
+  gridGap?: Property.GridGap | SystemPropValues['space'];
+  /** sets [CSS place-items property](https://developer.mozilla.org/en-US/docs/Web/CSS/place-items) */
   gridPlaceItems?: Property.PlaceItems;
-  /** sets `grid-auto-columns` property */
+  /** sets [CSS grid-auto-columns property](https://developer.mozilla.org/en-US/docs/Web/CSS/grid-auto-columns) */
   gridAutoColumns?: Property.GridAutoColumns;
-  /** sets `grid-auto-rows` property */
+  /** sets [CSS grid-auto-rows property](https://developer.mozilla.org/en-US/docs/Web/CSS/grid-auto-rows) */
   gridAutoRows?: Property.GridAutoRows;
-  /** sets `grid-area` property */
+  /** sets [CSS grid-area property](https://developer.mozilla.org/en-US/docs/Web/CSS/grid-area) */
   gridArea?: Property.GridArea;
-  /** sets `grid-auto-flow` property */
+  /** sets [CSS grid-auto-flow property](https://developer.mozilla.org/en-US/docs/Web/CSS/grid-auto-flow) */
   gridAutoFlow?: Property.GridAutoFlow;
-  /** sets `grid` property */
+  /** sets [CSS grid property](https://developer.mozilla.org/en-US/docs/Web/CSS/grid) */
   grid?: Property.Grid;
 };
 
-export type gridSpaceProps = {
-  /** sets `gap` property */
-  gridGap?: Property.GridGap | GridSpacePropsValues;
-};
+export const gridStyleFnConfigs: StyleFnConfig[] = [
+  {
+    name: 'gridGap',
+    properties: ['gridGap'],
+    system: 'space',
+  },
+  {
+    name: 'gridRowGap',
+    properties: ['gridRowGap'],
+    system: 'space',
+  },
+  {
+    name: 'gridColumnGap',
+    properties: ['gridColumnGap'],
+    system: 'space',
+  },
+  {
+    name: 'alignContent',
+    properties: ['alignContent'],
+    system: 'none',
+  },
+  {
+    name: 'alignItems',
+    properties: ['alignItems'],
+    system: 'none',
+  },
+  {
+    name: 'display',
+    properties: ['display'],
+    system: 'none',
+  },
+  {
+    name: 'justifyContent',
+    properties: ['justifyContent'],
+    system: 'none',
+  },
+  {
+    name: 'justifyItems',
+    properties: ['justifyItems'],
+    system: 'none',
+  },
+  {
+    name: 'gridTemplateAreas',
+    properties: ['gridTemplateAreas'],
+    system: 'none',
+  },
+  {
+    name: 'gridTemplate',
+    properties: ['gridTemplate'],
+    system: 'none',
+  },
+  {
+    name: 'gridTemplateColumns',
+    properties: ['gridTemplateColumns'],
+    system: 'none',
+  },
+  {
+    name: 'gridTemplateRows',
+    properties: ['gridTemplateRows'],
+    system: 'none',
+  },
+  {
+    name: 'gridPlaceItems',
+    properties: ['gridPlaceItems'],
+    system: 'none',
+  },
+  {
+    name: 'gridAutoColumns',
+    properties: ['gridAutoColumns'],
+    system: 'none',
+  },
+  {
+    name: 'gridAutoRows',
+    properties: ['gridAutoRows'],
+    system: 'none',
+  },
+  {
+    name: 'gridAutoFlow',
+    properties: ['gridAutoFlow'],
+    system: 'none',
+  },
+  {
+    name: 'gridArea',
+    properties: ['gridArea'],
+    system: 'none',
+  },
+  {
+    name: 'grid',
+    properties: ['grid'],
+    system: 'none',
+  },
+];
 
-const gridGap = (value: GridSpacePropsValues) => {
-  return {gridGap: spaceTokens[value as keyof CanvasSpace] || value};
-};
-const gridRowGap = (value: GridSpacePropsValues) => {
-  return {gridRowGap: spaceTokens[value as keyof CanvasSpace] || value};
-};
-const gridColumnGap = (value: GridSpacePropsValues) => {
-  return {gridColumnGap: spaceTokens[value as keyof CanvasSpace] || value};
-};
-
-const gridSpaceStyleProps = {
-  gridGap,
-  gridRowGap,
-  gridColumnGap,
-};
-
-export type SpaceStyleProps = gridSpaceProps & GridStyleProps;
-
-const gridProps = {
-  alignContent: 'alignContent',
-  alignItems: 'alignItems',
-  display: 'display',
-  justifyContent: 'justifyContent',
-  justifyItems: 'justifyItems',
-  gridTemplateAreas: 'gridTemplateAreas',
-  gridTemplate: 'gridTemplate',
-  gridTemplateColumns: 'gridTemplateColumns',
-  gridTemplateRows: 'gridTemplateRows',
-  gridColumnGap: 'gridColumnGap',
-  gridRowGap: 'gridRowGap',
-  gridGap: 'gridGap',
-  gridPlaceItems: 'gridPlaceItems',
-  gridAutoColumns: 'gridAutoColumns',
-  gridAutoRows: 'gridAutoRows',
-  gridAutoFlow: 'gridAutoFlow',
-  gridArea: 'gridArea',
-  grid: 'grid',
-};
-
+export const gridStyleFns = buildStyleFns(gridStyleFnConfigs);
 /**
  * A style prop function that takes component props and returns grid styles.
  * If no `GridStyleProps` are found, it returns an empty object.
- * Space tokens are available for `gridGap`, `gridRowGap`, `gridColumnGap` (`zero`, `xxxs`, `xxs`, `xs`, `s`, `m`, `l`, `xl`, `xxl`, `xxxl`).
- * Values: `zero: 0px`, `xxxs: 4px`, `xxs: 8px`, `xs: 12px`, `s: 16px`, `m: 24px`, `l: 32px`, `xl: 40px`, `xxl: 64px`, `xxxl: 80px`.
+ * Space tokens are available for gridGap, gridRowGap, gridColumnGap props.
  *
  * @example
- * // You'll most likely use `grid` with low-level, styled components
+ * ```tsx
  * const GridExample = () => (
  *   <Grid gridAutoFlow="row" justifyContent="center" alignItems="center">
  *     Hello, Grid!
  *   </Grid>
  * );
- *
+ * ```
  */
-export function grid<P extends SpaceStyleProps>(props: P) {
-  let styles = {};
-  for (const key in props) {
-    if (props.hasOwnProperty(key)) {
-      if (key in gridProps) {
-        const attr = gridProps[key as keyof GridStyleProps];
-        const value = props[key];
-        // @ts-ignore TS doesn't like adding a potentially unknown key to an object, but because we own this object, it's fine.
-        styles[attr] = value;
-      }
-      if (key in gridSpaceStyleProps) {
-        const value = props[key as keyof gridSpaceProps] as GridSpacePropsValues;
-        const spaceFn = gridSpaceStyleProps[key as keyof gridSpaceProps];
-        const style = spaceFn(value);
-        styles = {...styles, ...style};
-      }
-    }
-  }
-  return styles;
-}
+export const grid = buildStylePropFn<GridStyleProps>(gridStyleFns);
