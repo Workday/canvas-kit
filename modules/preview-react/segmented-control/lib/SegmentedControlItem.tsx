@@ -79,10 +79,7 @@ const getIconButtonColors = (toggled?: boolean): ButtonColors => {
       icon: colors.licorice400,
       label: colors.licorice400,
     },
-    active: {
-      background: toggled ? colors.frenchVanilla100 : colors.soap200,
-      icon: toggled ? colors.blackPepper400 : colors.licorice200,
-    },
+    active: {},
     focus: {},
     disabled: {
       background: colors.soap200,
