@@ -86,7 +86,7 @@ use concurrent features. Without it React behaves the same as it did in version 
 Canvas Kit doesn’t use the render API directly in our packages. But Storybook uses it to render
 Canvas Kit components. So we need to have Storybook dependencies supporting React 18 as well.
 
-**Impact on CK:** Updating to React 18 didn't cause any breaking changes in our code (only switching
+**Impact on CK:** Updating to React 18 didn't cause any breaking changes in our code. However, we did have to update some types based on some type packages that where upgraded.
 to new types). To see v18 features in action it required updating Storybook to v6.5.x supporting
 React 18.
 
