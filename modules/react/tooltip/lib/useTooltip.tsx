@@ -6,6 +6,7 @@ import {
   useCloseOnFullscreenExit,
 } from '@workday/canvas-kit-react/popup';
 import {useUniqueId} from '@workday/canvas-kit-react/common';
+import {useCloseOnTargetHidden} from '../../popup/lib/hooks/useCloseOnTargetHidden';
 
 const useIntentTimer = (fn: Function, waitMs: number = 0): {start(): void; clear(): void} => {
   const timer = React.useRef() as React.MutableRefObject<number | undefined>;
@@ -128,6 +129,7 @@ export function useTooltip<T extends Element = Element>({
   useCloseOnEscape(popupModel);
   useAlwaysCloseOnOutsideClick(popupModel);
   useCloseOnFullscreenExit(popupModel);
+  useCloseOnTargetHidden(popupModel);
 
   const visible = popupModel.state.visibility !== 'hidden';
 
