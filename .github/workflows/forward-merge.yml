@@ -100,6 +100,9 @@ jobs:
       - name: Forward merge
         run: node utils/forward-merge.js
 
+      - name: Git Log
+        run: git log
+
       # Keep steps separate for Github Actions annotation matching: https://github.com/actions/setup-node/blob/83c9f7a7df54d6b57455f7c57ac414f2ae5fb8de/src/setup-node.ts#L26-L33
       - name: Lint
         run: yarn lint
@@ -130,6 +133,7 @@ jobs:
           appCode: dlpro96xybh
           storybookBuildDir: docs
           exitOnceUploaded: false
+          debug: true
 
       - name: Start Server
         run: npx http-server docs -p 9001 & npx wait-on http://localhost:9001
