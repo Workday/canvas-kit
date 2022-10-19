@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import {createComponent, useForkRef} from '@workday/canvas-kit-react/common';
-import {Menu, MenuItem} from '@workday/canvas-kit-preview-react/menu';
+import {DeprecatedMenu, DeprecatedMenuItem} from '@workday/canvas-kit-preview-react/menu';
 import {
   Popup,
   PopupModelContext,
@@ -49,18 +49,18 @@ export const ContextMenu = () => {
         Right click on this text (Context menu target)
       </ContextMenuTarget>
       <Popup.Popper>
-        <Menu onClose={model.events.hide}>
-          <MenuItem>Back</MenuItem>
-          <MenuItem>Forward</MenuItem>
-          <MenuItem>Reload</MenuItem>
-          <MenuItem hasDivider>Bookmark Page</MenuItem>
-          <MenuItem>Save Page As...</MenuItem>
-          <MenuItem>Select All</MenuItem>
-          <MenuItem hasDivider>Take Screenshot</MenuItem>
-          <MenuItem hasDivider>View Page Source</MenuItem>
-          <MenuItem>Inspect Accessibility Properties</MenuItem>
-          <MenuItem>Inspect</MenuItem>
-        </Menu>
+        <DeprecatedMenu onClose={model.events.hide}>
+          <DeprecatedMenuItem>Back</DeprecatedMenuItem>
+          <DeprecatedMenuItem>Forward</DeprecatedMenuItem>
+          <DeprecatedMenuItem>Reload</DeprecatedMenuItem>
+          <DeprecatedMenuItem hasDivider>Bookmark Page</DeprecatedMenuItem>
+          <DeprecatedMenuItem>Save Page As...</DeprecatedMenuItem>
+          <DeprecatedMenuItem>Select All</DeprecatedMenuItem>
+          <DeprecatedMenuItem hasDivider>Take Screenshot</DeprecatedMenuItem>
+          <DeprecatedMenuItem hasDivider>View Page Source</DeprecatedMenuItem>
+          <DeprecatedMenuItem>Inspect Accessibility Properties</DeprecatedMenuItem>
+          <DeprecatedMenuItem>Inspect</DeprecatedMenuItem>
+        </DeprecatedMenu>
       </Popup.Popper>
     </Popup>
   );

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {render, fireEvent} from '@testing-library/react';
-import Checkbox from '../lib/Checkbox';
+import {Checkbox} from '../lib/Checkbox';
 
 describe('Checkbox', () => {
   const cb = jest.fn();

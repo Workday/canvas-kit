@@ -105,7 +105,7 @@ const Option = styled('li')<SelectOptionProps>(
   })
 );
 
-const SelectOption = ({
+export const SelectOption = ({
   children,
   focused = false,
   interactive = true,
@@ -126,5 +126,3 @@ const SelectOption = ({
     </Option>
   );
 };
-
-export default SelectOption;

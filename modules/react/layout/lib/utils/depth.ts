@@ -1,37 +1,41 @@
-import {depth as depthTokens} from '@workday/canvas-kit-react/tokens';
-
-export type DepthTokens = typeof depthTokens;
-export type DepthTokenKeys = keyof DepthTokens;
-export type DepthTokenValues = DepthTokens[keyof DepthTokens];
+import {Property} from 'csstype';
+import {buildStyleFns, buildStylePropFn, StyleFnConfig} from './buildStyleFns';
+import {SystemPropValues} from './systemProps';
 
 /** style props to for depth styles */
 export type DepthStyleProps = {
-  /** sets depth styles (box-shadow & border) */
-  depth?: DepthTokenKeys;
+  /** sets [CSS box-shadow styles](https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow) */
+  boxShadow?: Property.BoxShadow;
+  /**
+   * - sets [CSS box-shadow styles](https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow)
+   * - system tokens: `depth`
+   * */
+  depth?: SystemPropValues['depth'];
 };
 
-const depthProps = {
-  depth: (token: DepthTokenKeys) => depthTokens[token],
-};
+export const depthStyleFnConfigs: StyleFnConfig[] = [
+  {
+    name: 'boxShadow',
+    properties: ['boxShadow'],
+    system: 'none',
+  },
+  {
+    name: 'depth',
+    properties: ['boxShadow'],
+    system: 'depth',
+  },
+];
 
+export const depthStyleFns = buildStyleFns(depthStyleFnConfigs);
 /**
- * A style prop function that takes components props and returns depth styles from canvas token values.
+ * A style prop function that takes component props and returns depth styles from Canvas token values.
  * If no `DepthStyleProps` are found, it returns an empty object.
  *
  * @example
- * // You'll mostly likely use `depth` with low-level, styled components
- * const BoxExample = () => (
+ * ```tsx
+ * const DepthExample = () => (
  *   <Box depth={3}>Hello, box shadows!</Box>
  * );
- *
+ * ```
  */
-export function depth<P extends DepthStyleProps>(props: P): DepthTokenValues {
-  for (const key in props) {
-    if (key in depthProps) {
-      const token = props[key as keyof DepthStyleProps] as DepthTokenKeys;
-      const depthFn = depthProps[key as keyof DepthStyleProps];
-      return depthFn(token);
-    }
-  }
-  return {} as DepthTokenValues;
-}
+export const depth = buildStylePropFn<DepthStyleProps>(depthStyleFns);

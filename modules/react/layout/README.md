@@ -14,26 +14,27 @@ For more detailed information on this component, please refer to the
 # Canvas Kit Layout
 
 The layout component is used to create layouts for your application. The component comes with the
-`Layout` and `Column` component. Layout and Columns can be utilized to create a combination of
-different workday specific layouts. Layouts should be used to create the main layout on the page.
+`DeprecatedLayout` and `DeprecatedColumn` component. Layout and Columns can be utilized to create a
+combination of different workday specific layouts. Layouts should be used to create the main layout
+on the page.
 
-# Layout
+# Layout (deprecated)
 
 > Layout Container
 
 ## Usage
 
 ```tsx
-import {Layout} from '@workday/canvas-kit-react/layout';
+import {DeprecatedLayout} from '@workday/canvas-kit-react/layout';
 
 // Basic
-<Layout>...</Layout>
+<DeprecatedLayout>...</DeprecatedLayout>
 
 // No spacing and no gutter
-<Layout gutter={0} spacing={0}>...</Layout>
+<DeprecatedLayout gutter={0} spacing={0}>...</DeprecatedLayout>
 
 // Layout with a max container width
-<Layout capWidth={true}>...</Layout>
+<DeprecatedLayout capWidth={true}>...</DeprecatedLayout>
 ```
 
 ## Static Properties
@@ -70,39 +71,39 @@ Default: `12`
 
 ---
 
-# Column
+# Column (deprecated)
 
 > The column acts as a pillar for building layouts. Columns widths can be fluid, 12 columns, or a
-> fixed. Columns should be used exclusively with `Layout` to build the main page layouts. `width`
-> and `columns` props are mutually exclusive. The `width` prop will take precedence over the
+> fixed. Columns should be used exclusively with `DeprecatedLayout` to build the main page layouts.
+> `width` and `columns` props are mutually exclusive. The `width` prop will take precedence over the
 > `columns` prop.
 
 ```tsx
-import {Layout} from '@workday/canvas-kit-react/layout';
+import {DeprecatedLayout} from '@workday/canvas-kit-react/layout';
 
 // Fluid layouts
-<Layout>
-  <Layout.Column />
-  <Layout.Column />
-</Layout>
+<DeprecatedLayout>
+  <DeprecatedLayout.Column />
+  <DeprecatedLayout.Column />
+</DeprecatedLayout>
 
 // 12 column layouts
-<Layout>
-  <Layout.Column columns={4}/>
-  <Layout.Column columns={8}/>
-</Layout>
+<DeprecatedLayout>
+  <DeprecatedLayout.Column columns={4}/>
+  <DeprecatedLayout.Column columns={8}/>
+</DeprecatedLayout>
 
 // Fixed column width
-<Layout>
-  <Layout.Column width={'400px'}/>
-  <Layout.Column columns={8}/>
-</Layout>
+<DeprecatedLayout>
+  <DeprecatedLayout.Column width={'400px'}/>
+  <DeprecatedLayout.Column columns={8}/>
+</DeprecatedLayout>
 
 // Custom spacing
-<Layout>
-  <Layout.Column spacing={0}/>
-  <Layout.Column />
-</Layout>
+<DeprecatedLayout>
+  <DeprecatedLayout.Column spacing={0}/>
+  <DeprecatedLayout.Column />
+</DeprecatedLayout>
 ```
 
 ## Static Properties
