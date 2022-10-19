@@ -29,7 +29,7 @@ export const RTLOverflowList = () => {
     <CanvasProvider theme={theme}>
       <Box maxWidth="300px">
         <Breadcrumbs items={items} aria-label="Breadcrumbs">
-          <Breadcrumbs.List overflowButtonProps={{'aria-label': 'More links'}}>
+          <Breadcrumbs.List overflowButton={<Breadcrumbs.OverflowButton aria-label="More links" />}>
             {item =>
               item.link ? (
                 <Breadcrumbs.Item>

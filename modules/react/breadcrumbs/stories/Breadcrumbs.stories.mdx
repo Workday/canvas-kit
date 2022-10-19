@@ -41,10 +41,8 @@ and `Breadcrumbs.Link`.
 
 Accessibility is built into `Breadcrumbs` in a way that allows you to create an inclusive experience
 with little additional configuration. As seen in the example below, you don't need to pass any
-accessibility attributes, because they are baked into the component. You also can specifc
-`aria-label` attribute to a `nav` component (default value is `breadcrumbs`) through a `aria-label`
-prop of `Breadcrumbs` and `aria-label` to overflow button through `overflowButtonProps` of
-`Breadcrumbs.List` components.
+accessibility attributes, because they are baked into the component. You only need to add
+`aria-label` attribute to a `nav` component through a `aria-label` prop of `Breadcrumbs`.
 
 <ExampleCodeBlock code={Basic} />
 
@@ -115,18 +113,26 @@ All undeclared props go to underlying `nav` component.
 #### Usage
 
 `Breadcrumbs.List` is a `Flex` component rendered as a `<ul>` element. It is a container for
-`Breadcrumbs.Item` subcomponents. It also renders overflow button if `overflowButtonProps` has been
+`Breadcrumbs.Item` subcomponents. It also renders overflow button if `overflowButton` prop has been
 passed;
 
 ```tsx
+// without overflow
 <Breadcrumbs.List>{/* Breadcrumbs.Items */}</Breadcrumbs.List>
+```
+
+```tsx
+// with overflow
+<Breadcrumbs.List overflowButton={<Breadcrumbs.OverflowButton aria-label="More links" />}>
+  {/* Breadcrumbs.Items */}
+</Breadcrumbs.List>
 ```
 
 #### Props
 
-`Breadcrumbs.List` accepts a `overflowButtonProps` prop allowing to set specific props for overflow
-button. Breadcrumbs.List with overflow behavior should contain `overflowButtonProps` with
-`aria-label` to define overflow button function.
+`Breadcrumbs.List` accepts a `overflowButton` prop allowing to pass specific overflow button.
+Breadcrumbs.List with overflow behavior should contain `overflowButton` component with `aria-label`
+to render overflow button.
 
 All undocumented props are spread to the underlying `Flex` component.
 
