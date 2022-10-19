@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {useFormik} from 'formik';
-import * as yup from 'yup';
+import {object, SchemaOf, string} from 'yup';
 
 import {TextInput} from '@workday/canvas-kit-preview-react/text-input';
 import {HStack, VStack} from '@workday/canvas-kit-react/layout';
@@ -9,23 +9,26 @@ import {TertiaryButton, PrimaryButton} from '@workday/canvas-kit-react/button';
 import {visibleIcon, invisibleIcon} from '@workday/canvas-system-icons-web';
 import {useUniqueId} from '@workday/canvas-kit-react/common';
 
+interface LoginSchema {
+  email: string;
+  password: string;
+}
+
+const passwordMinimum = 8;
+const passwordHint = `Password should be of minimum ${passwordMinimum} characters length`;
+const emailRequired = 'Email is required';
+const passwordRequired = 'Password is required';
+
+const validationSchema: SchemaOf<LoginSchema> = object({
+  email: string()
+    .email('Enter a valid email')
+    .required(emailRequired),
+  password: string()
+    .min(passwordMinimum, passwordHint)
+    .required(passwordRequired),
+});
+
 export const TextInputWithFormik = () => {
-  const passwordMinimum = 8;
-  const passwordHint = `Password should be of minimum ${passwordMinimum} characters length`;
-  const emailRequired = 'Email is required';
-  const passwordRequired = 'Password is required';
-
-  const validationSchema = yup.object({
-    email: yup
-      .string()
-      .email('Enter a valid email')
-      .required(emailRequired),
-    password: yup
-      .string()
-      .min(passwordMinimum, passwordHint)
-      .required(passwordRequired),
-  });
-
   const passwordRef = React.useRef<HTMLInputElement>(null);
   const [showPassword, setShowPassword] = React.useState(false);
   const passwordId = useUniqueId();
@@ -37,8 +40,7 @@ export const TextInputWithFormik = () => {
     },
     validationSchema: validationSchema,
     onSubmit: values => {
-      passwordRef.current.type = 'password';
-
+      setShowPassword(false);
       // Send data to server
       setTimeout(() => {
         alert(JSON.stringify(values, null, 2));
@@ -77,6 +79,7 @@ export const TextInputWithFormik = () => {
               type={showPassword ? 'text' : 'password'}
               name="password"
               autoComplete="current-password"
+              spellCheck={false}
               ref={passwordRef}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
@@ -89,7 +92,7 @@ export const TextInputWithFormik = () => {
               aria-controls={`input-${passwordId}`}
               onClick={() => {
                 setShowPassword(state => !state);
-                passwordRef.current.focus();
+                passwordRef.current?.focus();
               }}
             />
           </HStack>

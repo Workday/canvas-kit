@@ -368,7 +368,7 @@ describe('Popup', () => {
 
     context('when the "Delete Item" button is clicked', () => {
       beforeEach(() => {
-        cy.findByRole('button', {name: 'Delete Item'}).click();
+        cy.findByRole('button', {name: 'Delete Item'}).realClick();
       });
 
       it('should show the popup', () => {
@@ -379,7 +379,7 @@ describe('Popup', () => {
         beforeEach(() => {
           cy.findByRole('button', {name: 'Delete'})
             .focus()
-            .tab();
+            .realPress('Tab');
         });
 
         it('should hide the popup', () => {
@@ -388,6 +388,138 @@ describe('Popup', () => {
 
         it('should redirect focus to the "Next Focusable Button" button', () => {
           cy.findByRole('button', {name: 'Next Focusable Button'}).should('have.focus');
+        });
+      });
+    });
+  });
+
+  context('given the [Testing/React/Popups/Popup, ReturnFocusTest] story is rendered', () => {
+    beforeEach(() => {
+      h.stories.load('Testing/React/Popups/Popup', 'ReturnFocusTest');
+    });
+
+    // We disable the default scroll behavior so we can tightly control how these specs scroll. This
+    // means we'll have to manually add `scrollIntoView` to get Cypress to scroll only where we want
+    context('when the "Open Popup" is clicked', {scrollBehavior: false}, () => {
+      beforeEach(() => {
+        cy.findByRole('button', {name: 'Open Popup'})
+          .scrollIntoView()
+          .click();
+      });
+
+      context('when the user clicks outside', () => {
+        beforeEach(() => {
+          cy.get('body').click('bottom');
+        });
+
+        it('should focus the "Open Popup" button', () => {
+          cy.findByRole('button', {name: 'Open Popup'}).should('have.focus');
+        });
+      });
+
+      context('when the user clicks the input', () => {
+        beforeEach(() => {
+          cy.findByRole('textbox', {name: 'Name'})
+            .scrollIntoView()
+            .click();
+        });
+
+        it('should not focus the "Open Popup" button', () => {
+          cy.findByRole('button', {name: 'Open Popup'}).should('not.have.focus');
+        });
+      });
+
+      context('when the user scrolls to the top', () => {
+        beforeEach(() => {
+          cy.findByTestId('scroll-area').scrollTo('top');
+        });
+
+        context('when the user clicks outside', () => {
+          beforeEach(() => {
+            cy.get('body').click('top');
+          });
+
+          it('should not focus the "Open Popup" button', () => {
+            cy.findByRole('button', {name: 'Open Popup'}).should('not.have.focus');
+          });
+        });
+      });
+
+      context('when the user scrolls to the bottom', () => {
+        beforeEach(() => {
+          cy.findByTestId('scroll-area').scrollTo('bottom');
+        });
+
+        context('when the user clicks outside', () => {
+          beforeEach(() => {
+            cy.get('body').click('top');
+          });
+
+          it('should not focus the "Open Popup" button', () => {
+            cy.findByRole('button', {name: 'Open Popup'}).should('not.have.focus');
+          });
+        });
+      });
+
+      context('when the user scrolls to the right', () => {
+        beforeEach(() => {
+          cy.findByTestId('scroll-area').scrollTo('right');
+        });
+
+        context('when the user clicks outside', () => {
+          beforeEach(() => {
+            cy.get('body').click('top');
+          });
+
+          it('should not focus the "Open Popup" button', () => {
+            cy.findByRole('button', {name: 'Open Popup'}).should('not.have.focus');
+          });
+        });
+      });
+
+      context('when the user scrolls to the left', () => {
+        beforeEach(() => {
+          cy.findByTestId('scroll-area').scrollTo('left');
+        });
+
+        context('when the user clicks outside', () => {
+          beforeEach(() => {
+            cy.get('body').click('top');
+          });
+
+          it('should not focus the "Open Popup" button', () => {
+            cy.findByRole('button', {name: 'Open Popup'}).should('not.have.focus');
+          });
+        });
+      });
+    });
+  });
+
+  context(`given the [Testing/React/Popups/Popup, TooltipReturnFocus] example is rendered`, () => {
+    beforeEach(() => {
+      h.stories.load('Testing/React/Popups/Popup', 'TooltipReturnFocus');
+    });
+
+    context('when the icon button is clicked', () => {
+      beforeEach(() => {
+        cy.findByRole('button', {name: 'Open Popup'}).click();
+      });
+
+      it('should show the popup', () => {
+        cy.findByRole('dialog', {name: 'Popup'}).should('be.visible');
+      });
+
+      context('when the "Close" icon button is clicked', () => {
+        beforeEach(() => {
+          cy.findByRole('button', {name: 'Close'}).click();
+        });
+
+        it('should focus on the icon button', () => {
+          cy.findByRole('button', {name: 'Open Popup'}).should('have.focus');
+        });
+
+        it('should show the tooltip', () => {
+          cy.findByRole('tooltip').should('be.visible');
         });
       });
     });

@@ -41,8 +41,11 @@ export const usePaginationModel = ({
   const [currentPage, setCurrentPage] = React.useState(initialCurrentPage);
 
   const changePage = (page: number) => {
-    onPageChange?.(page);
-
+    // Don't fire an `onPageChange` event if the page number is the same as the current page.
+    // `setCurrentPage` doesn't need this check, because React won't update the state if the values are the same.
+    if (currentPage !== page) {
+      onPageChange?.(page);
+    }
     setCurrentPage(page);
   };
 

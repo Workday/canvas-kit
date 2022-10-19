@@ -1,65 +1,109 @@
-import {
-  PropertyAlignItems,
-  PropertyAlignContent,
-  PropertyJustifyItems,
-  PropertyJustifyContent,
-  PropertyFlexWrap,
-  PropertyFlexDirection,
-} from './types';
+import {Property} from 'csstype';
 
-/** style props to for flexbox container properties */
+import {buildStyleFns, buildStylePropFn, StyleFnConfig} from './buildStyleFns';
+import {SystemPropValues} from './systemProps';
+
+/** style props to for CSS flexbox container properties */
 export type FlexStyleProps = {
-  /** sets `align-items` property */
-  alignItems?: PropertyAlignItems;
-  /** sets `align-content` property */
-  alignContent?: PropertyAlignContent;
+  /** sets [CSS align-items property](https://developer.mozilla.org/en-US/docs/Web/CSS/align-items) */
+  alignItems?: Property.AlignItems;
+  /** sets [CSS align-content property](https://developer.mozilla.org/en-US/docs/Web/CSS/align-content) */
+  alignContent?: Property.AlignContent;
   /**
-   * sets `display` property
-   * @default 'flex'
+   * - sets [CSS display property](https://developer.mozilla.org/en-US/docs/Web/CSS/display)
+   * - @default 'flex'
    * */
   display?: 'flex' | 'inline-flex';
-  /** sets `justify-items` property */
-  justifyItems?: PropertyJustifyItems;
-  /** sets `justify-content` property */
-  justifyContent?: PropertyJustifyContent;
-  /** sets `flex-wrap` property */
-  flexWrap?: PropertyFlexWrap;
-  /** sets `flex-direction` property */
-  flexDirection?: PropertyFlexDirection;
+  /** sets [CSS justify-items property](https://developer.mozilla.org/en-US/docs/Web/CSS/justify-items) */
+  justifyItems?: Property.JustifyItems;
+  /** sets [CSS justify-content property](https://developer.mozilla.org/en-US/docs/Web/CSS/justify-content) */
+  justifyContent?: Property.JustifyContent;
+  /** sets [CSS flex-wrap property](https://developer.mozilla.org/en-US/docs/Web/CSS/flex-wrap) */
+  flexWrap?: Property.FlexWrap;
+  /** sets [CSS flex-direction property](https://developer.mozilla.org/en-US/docs/Web/CSS/flex-direction) */
+  flexDirection?: Property.FlexDirection;
+  /**
+   * - sets [CSS gap property](https://developer.mozilla.org/en-US/docs/Web/CSS/gap)
+   * - system tokens: `space`
+   * */
+  gap?: SystemPropValues['space'];
+  /**
+   * - sets [CSS column-gap property](https://developer.mozilla.org/en-US/docs/Web/CSS/column-gap)
+   * - system tokens: `space`
+   * */
+  columnGap?: SystemPropValues['space'];
+  /**
+   * - sets [CSS row-gap property](https://developer.mozilla.org/en-US/docs/Web/CSS/row-gap)
+   * - system tokens: `space`
+   * */
+  rowGap?: SystemPropValues['space'];
 };
 
-const flexProps = {
-  alignContent: 'alignContent',
-  alignItems: 'alignItems',
-  display: 'display',
-  flexDirection: 'flexDirection',
-  flexWrap: 'flexWrap',
-  justifyContent: 'justifyContent',
-  justifyItems: 'justifyItems',
-};
+export const flexStyleFnConfigs: StyleFnConfig[] = [
+  {
+    name: 'alignContent',
+    properties: ['alignContent'],
+    system: 'none',
+  },
+  {
+    name: 'alignItems',
+    properties: ['alignItems'],
+    system: 'none',
+  },
+  {
+    name: 'display',
+    properties: ['display'],
+    system: 'none',
+  },
+  {
+    name: 'flexDirection',
+    properties: ['flexDirection'],
+    system: 'none',
+  },
+  {
+    name: 'flexWrap',
+    properties: ['flexWrap'],
+    system: 'none',
+  },
+  {
+    name: 'justifyContent',
+    properties: ['justifyContent'],
+    system: 'none',
+  },
+  {
+    name: 'justifyItems',
+    properties: ['justifyItems'],
+    system: 'none',
+  },
+  {
+    name: 'gap',
+    properties: ['gap'],
+    system: 'space',
+  },
+  {
+    name: 'columnGap',
+    properties: ['columnGap'],
+    system: 'space',
+  },
+  {
+    name: 'rowGap',
+    properties: ['rowGap'],
+    system: 'space',
+  },
+];
 
+export const flexStyleFns = buildStyleFns(flexStyleFnConfigs);
 /**
  * A style prop function that takes component props and returns flexbox styles.
  * If no `FlexStyleProps` are found, it returns an empty object.
  *
  * @example
- * // You'll most likely use `flex` with low-level, styled components
+ * ```tsx
  * const FlexExample = () => (
  *   <Flex justifyContent="center" alignItems="center">
  *     Hello, flex!
  *   </Flex>
  * );
- *
+ * ```
  */
-export function flex<P extends FlexStyleProps>(props: P) {
-  const styles = {};
-  for (const key in props) {
-    if (key in flexProps) {
-      const attr = flexProps[key as keyof FlexStyleProps];
-      const value = props[key];
-      // @ts-ignore TS doesn't like adding a potentially unknown key to an object, but because we own this object, it's fine.
-      styles[attr] = value;
-    }
-  }
-  return styles;
-}
+export const flex = buildStylePropFn<FlexStyleProps>(flexStyleFns);

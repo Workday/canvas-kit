@@ -15,6 +15,7 @@ import {SecondaryInverse} from './examples/SecondaryInverse';
 import {Tertiary} from './examples/Tertiary';
 import {TertiaryInverse} from './examples/TertiaryInverse';
 import {Delete} from './examples/Delete';
+import {CustomStyles} from './examples/CustomStyles';
 
 <Meta title="Components/Buttons/Button/React" />
 
@@ -82,13 +83,13 @@ Undocumented props are spread to the underlying `<button>` element.
 
 ### TertiaryButton
 
-Tertiary Buttons have the lowest emphasis (before Icon Buttons). Use for less important actions that
-the user may not often be looking to do. Tertiary Buttons have lower prominence as its container is
-not visible until it is interacted with. Use Tertiary Buttons for supplemental actions such as “View
-More”, “Read More” or “Select a File”. Tertiary Buttons are frequently used on Cards.
+Tertiary Buttons have the lowest emphasis. Use for less important actions that the user may not
+often be looking to do. Tertiary Buttons have lower prominence as its container is not visible until
+it is interacted with. Use Tertiary Buttons for supplemental actions such as “View More”, “Read
+More” or “Select a File”. Tertiary Buttons are frequently used on Cards.
 
-Tertiary Buttons have three sizes: `extraSmall`, `small`, and `medium`. Icons are supported for
-every size and can be positioned at the `start` or `end` with the `iconPosition` prop.
+Tertiary Buttons have three sizes: `extraSmall`, `small`, `medium` and `large`. Icons are supported
+for every size and can be positioned at the `start` or `end` with the `iconPosition` prop.
 
 <ExampleCodeBlock code={Tertiary} />
 
@@ -116,6 +117,15 @@ before deleting.
 Undocumented props are spread to the underlying `<button>` element.
 
 <ArgsTable of={DeleteButton} />
+
+### Custom Styles
+
+We understand that there are instances in which consumers might need to adjust styles for specific
+use cases. All of our buttons extend our lower level base button props which extends style
+properties that come from `Box`. Below are some examples in which you can overwrite styles for all
+of our buttons. Please use this sparaingly and try to adhere to the design system.
+
+<ExampleCodeBlock code={CustomStyles} />
 
 ### Accessible Use of the `as` Prop
 

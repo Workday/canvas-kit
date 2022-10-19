@@ -1,0 +1,123 @@
+import {Meta, ArgsTable} from '@storybook/addon-docs';
+
+import {Grid, GridItem} from '@workday/canvas-kit-react/layout';
+// examples
+import {GridLayout} from './examples/Grid/GridLayout';
+import {Basic} from './examples/Grid/Basic';
+import {GridLayoutInteractive} from './examples/Grid/GridLayoutInteractive';
+
+<Meta title="Components/Containers/Layout/Grid" component={Grid} />
+
+# Canvas Kit Grid
+
+`Grid` is a low-level layout component that provides a common, ergonomic API for building
+two-dimensional layouts (rows and columns) with
+[CSS Grid](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Grids).
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-react
+```
+
+## Usage
+
+### Basic Example
+
+> **Note**: We recommend you familiarize yourself with CSS Grid
+> ([MDN](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Grids),
+> [CSS-Tricks](https://css-tricks.com/snippets/css/complete-guide-grid/)) before diving into our
+> `Grid` component. This example makes use of
+> [Grid Areas](https://developer.mozilla.org/en-US/docs/Glossary/Grid_Areas).
+
+In this example, we set up a basic layout built with `Grid` using four child components: `Header`,
+`SideBar`, `BodyContent` and `Footer`. By assigning the same names to each child's `gridArea` prop,
+we're able to arrange them by referencing their names in the parent `Grid` container. Our example
+uses a 12-column grid with `SideBar` occupying three columns and `BodyContent` occupying the
+remaining nine.
+
+<ExampleCodeBlock code={Basic} />
+
+### Using Grid Items
+
+In the example above we nested `Grid` components to create our layout, and we controlled the layout
+structure from the top-level `Grid` container. We can also use `Grid.Item` components to allow child
+cells to have more control. While any direct child of a `Grid` component is implicitly a grid item,
+`Grid.Item` provides special CSS Grid Item style props that allow you to have more control over how
+and where each item renders.
+
+To demonstrate this behavior, the example below has a `Grid` container with nine cells. The eight
+`soap500` cells are `Grid` components, and the `peach300` cell is a `Grid.Item`. We can use the
+`Grid.Item` style props `gridRowStart` and `gridColumnStart` to manipulate where the cell renders.
+Use the `Row` and `Column` buttons to manipulate these props and see the `Grid.Item`'s position
+adjust accordingly.
+
+> **Note**: This example is solely intended to demonstrate `Grid.Item`'s functionality and is
+> **not** considered an accessibility best practice. Visually reordering content does not change the
+> tab order or the order it is read in by a screen reader. Learn more about
+> [CSS Grid layout and accessibility](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout/CSS_Grid_Layout_and_Accessibility).
+
+<ExampleCodeBlock code={GridLayoutInteractive} />
+
+Let's look at another `Grid.Item` example. Below, we have a `Grid` container with two rows: one with
+seven elements and another with two elements. Each row is a `Grid.Item` that wraps a nested `Grid`.
+This allows you to use `Grid.Item` to place a layout where needed. Here, we use `gridRowStart` to
+place the row with elements 3 through 7 before the row with elements 1 and 2.
+
+<ExampleCodeBlock code={GridLayout} />
+
+### Grid vs. Flex vs. Box
+
+`Grid` and `Flex` are built on top of `Box`, so they have access to all `BoxProps`. Additionally,
+`Grid` and `Flex` have their own specific style props that map to CSS Grid and Flexbox properties,
+respectively. When using these components to build layouts, it is not a matter of choosing `Grid`
+_or_ `Flex` _or_ `Box`, but rather deciding how to
+[use them together](https://css-tricks.com/css-grid-replace-flexbox/). They are intended to be
+complementary not exclusionary. With that said, here are general guidelines for when to use which:
+
+- Use `Grid` for **two-dimensional** layouts (rows AND columns).
+- Use `Flex` for **one-dimensional** layouts (a row OR a column).
+- Use `Box` for generic containers that don't need CSS Flexbox or Grid.
+
+## Components
+
+### Grid
+
+`Grid` is a container component for creating two-dimensional layouts with CSS Grid. It has special
+style props that map to CSS Grid style properties to provide a common, ergonomic API for building
+layouts.
+
+#### Usage
+
+```tsx
+<Grid gridTemplateColumns="1fr 2fr 1fr" gridGap={space.s}>
+  <div>Implicit grid item 1</div>
+  <div>Implicit grid item 2</div>
+  <div>Implicit grid item 3</div>
+</Grid>
+```
+
+#### Props
+
+`Grid` exposes [grid container style props](/getting-started/for-developers/resources/style-props/#grid) and `Box` style props.
+
+### Grid.Item
+
+`Grid.Item` is a subcomponent of `Grid`. It is a `Box` component under the hood and exposes [grid item style props](/getting-started/for-developers/resources/style-props/#grid-item) that map to CSS Grid
+Item properties. This provides greater control over how child components render in your layout.
+
+#### Usage
+
+```tsx
+<Grid gridGap={space.s}>
+  <Grid.Item gridColumn="1 / span 2">First item</Grid.Item>
+  <Grid.Item gridRow="1 / span 2">Second item</Grid.Item>
+  <Grid.Item gridColumn="1 / span 2" gridRow="2">
+    Third item
+  </Grid.Item>
+</Grid>
+```
+
+#### Props
+
+`Grid.Item` exposes [grid item style props](/getting-started/for-developers/resources/style-props/#grid-item) and `Box` style props.

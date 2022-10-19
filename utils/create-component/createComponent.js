@@ -6,6 +6,7 @@ const path = require('path');
 const inquirer = require('inquirer');
 const {exec} = require('child_process');
 const chalk = require('chalk');
+const {consoleMessage} = require('./consoleUtils');
 
 const createReactComponent = require('./createReactComponent');
 const addExport = require('./addExport');
@@ -73,7 +74,7 @@ const createComponent = (componentPath, componentGenerator, answers, prerelease,
   } else {
     componentGenerator(componentPath, name, description, prerelease, category);
 
-    console.log('\nAdding export to ' + chalk.cyan(`./modules/${prefix}react/index.ts`));
+    consoleMessage('\nAdding export to', `./modules/${prefix}react/index.ts`)
     addExport(name, prerelease);
 
     console.log('\nBootstrapping dependencies.');

@@ -392,4 +392,15 @@ describe('composeHooks', () => {
     const props = composeHooks(hook1, hook2)(myModel, {}, ref);
     expect(props).toHaveProperty('ref', ref);
   });
+
+  it('should type the ref of a class component as `LegacyRef`', () => {
+    class Component1 extends React.Component {}
+    const Component2 = createComponent(Component1)({
+      Component(props, ref, Element) {
+        // The `ref` of a class component is LegacyRef
+        expectTypeOf(ref).toEqualTypeOf<React.LegacyRef<Component1>>();
+        return <div />;
+      },
+    });
+  });
 });

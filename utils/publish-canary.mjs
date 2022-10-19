@@ -101,7 +101,7 @@ exec('git diff --name-only HEAD HEAD^')
         bump = 'premajor';
       } else {
         // we'll use `next` for pre minors
-        preid = 'next';
+        preid = `${process.env.GITHUB_RUN_NUMBER || 0}-next`;
         bump = 'preminor';
       }
     }

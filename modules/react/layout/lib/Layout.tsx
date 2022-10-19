@@ -1,26 +1,34 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
 import {GenericStyle} from '@workday/canvas-kit-react/common';
-import Column, {ColumnProps} from './Column';
-import canvas, {spaceNumbers} from '@workday/canvas-kit-react/tokens';
+import {DeprecatedColumn, DeprecatedColumnProps} from './Column';
+import {canvas, spaceNumbers} from '@workday/canvas-kit-react/tokens';
 import isPropValid from '@emotion/is-prop-valid';
 
-export interface LayoutProps {
+/**
+ * ### Deprecated Layout Props
+ *
+ * As of Canvas Kit v8, Layout is being soft-deprecated.
+ * It will be hard-deprecated (completely removed) in v9. Please see the
+ * [upgrade guide](https://workday.github.io/canvas-kit/?path=/story/welcome-upgrade-guides-v8-0--page)
+ * for more information.
+ */
+export interface DeprecatedLayoutProps {
   /**
-   * The children of the Layout (cannot be empty).
+   * The children of the DeprecatedLayout (cannot be empty).
    */
-  children: React.ReactElement<ColumnProps>[] | React.ReactNode;
+  children: React.ReactElement<DeprecatedColumnProps>[] | React.ReactNode;
   /**
-   * The spacing of the Layout children.
+   * The spacing of the DeprecatedLayout children.
    */
   spacing?: number;
   /**
-   * The padding of the Layout's outside container.
+   * The padding of the DeprecatedLayout's outside container.
    * @default 12
    */
   gutter?: number | string;
   /**
-   * If true, set the max width of the Layout container to `1280px`.
+   * If true, set the max width of the DeprecatedLayout container to `1280px`.
    * @default false
    */
   capWidth?: boolean;
@@ -37,7 +45,7 @@ const LayoutStyles: GenericStyle = {
 
 const LayoutContainer = styled('div', {
   shouldForwardProp: prop => isPropValid(prop) && prop !== 'spacing',
-})<LayoutProps>(
+})<DeprecatedLayoutProps>(
   LayoutStyles.styles,
   ({gutter}) => {
     if (gutter === 0) {
@@ -58,15 +66,32 @@ const LayoutContainer = styled('div', {
   }
 );
 
-class Layout extends React.Component<LayoutProps> {
-  public static Column = Column;
+/**
+ * ### Deprecated Layout
+ *
+ * As of Canvas Kit v8, Layout is being soft-deprecated.
+ * It will be hard-deprecated (completely removed) in v9. Please see the
+ * [upgrade guide](https://workday.github.io/canvas-kit/?path=/story/welcome-upgrade-guides-v8-0--page)
+ * for more information.
+ */
+export class DeprecatedLayout extends React.Component<DeprecatedLayoutProps> {
+  componentDidMount() {
+    console.warn(
+      `This component is being deprecated and will be removed in Canvas Kit V9.\n
+      For more information, please see the V8 upgrade guide:\n
+      https://workday.github.io/canvas-kit/?path=/story/welcome-upgrade-guides-v8-0--page
+      `
+    );
+  }
+
+  public static Column = DeprecatedColumn;
 
   private renderChild = (child: React.ReactNode, spacing: number): React.ReactNode => {
     if (!React.isValidElement(child)) {
       return;
     }
 
-    if (child.type === Column) {
+    if (child.type === DeprecatedColumn) {
       const childProps = child.props;
 
       if (childProps.spacing || childProps.spacing === 0) {
@@ -96,6 +121,4 @@ class Layout extends React.Component<LayoutProps> {
   }
 }
 
-Layout.Column = Column;
-
-export default Layout;
+DeprecatedLayout.Column = DeprecatedColumn;

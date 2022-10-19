@@ -10,6 +10,9 @@ export type StyledType = {
   as?: React.ElementType;
 };
 
+// For React class components
+type Constructor<T> = new (...args: any[]) => T;
+
 /**
  * Extract a Ref from T if it exists
  * This will return the following:
@@ -20,6 +23,8 @@ export type StyledType = {
  */
 type ExtractRef<T> = T extends undefined // test if T was even passed in
   ? never // T not passed in, we'll set the ref to `never`
+  : T extends Constructor<infer C>
+  ? React.LegacyRef<C>
   : React.Ref<
       T extends keyof ElementTagNameMap // test if T is an element string like 'button' or 'div'
         ? ElementTagNameMap[T] // if yes, the ref should be the element interface. `'button' => HTMLButtonElement`
@@ -212,7 +217,7 @@ interface RefForwardingComponent<T, P = {}> {
      * `never`
      */
     Element: T extends undefined ? never : T
-  ): React.ReactElement | null;
+  ): JSX.Element | null;
 }
 
 function defaultGetElemProps(input: any) {
@@ -256,7 +261,7 @@ export const createContainer = <
       props: Props & RemoveNull<ReturnType<TElemPropsHook>> & {ref: ExtractRef<E>},
       Element: E extends undefined ? never : E,
       model: TModelHook extends (config: infer TConfig) => infer TModel ? TModel : never
-    ) => React.ReactElement | null
+    ) => JSX.Element | null
   ): (TModelHook extends (config: infer TConfig) => infer TModel
     ? E extends undefined
       ? ComponentM<Props & TConfig, TModel>
@@ -356,7 +361,7 @@ export const createSubcomponent = <
             }),
       Element: E extends undefined ? never : E,
       model: TModelHook extends (...args: any[]) => infer TModel ? TModel : never
-    ) => React.ReactElement | null
+    ) => JSX.Element | null
   ): (TModelHook extends (...args: any[]) => infer TModel
     ? ElementComponentM<
         // E is not `undefined` here, but Typescript thinks it could be, so we add another `undefined`

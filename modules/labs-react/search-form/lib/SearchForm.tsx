@@ -7,7 +7,6 @@ import {searchIcon, xIcon} from '@workday/canvas-system-icons-web';
 import {FormField, FormFieldLabelPosition} from '@workday/canvas-kit-react/form-field';
 import {Combobox} from '@workday/canvas-kit-labs-react/combobox';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
-import {MenuItemProps} from '@workday/canvas-kit-preview-react/menu';
 import {searchThemes, SearchTheme, SearchThemeAttributes} from './themes';
 import chroma from 'chroma-js';
 
@@ -28,7 +27,7 @@ export interface SearchFormProps extends GrowthBehavior, React.FormHTMLAttribute
   /**
    * The autocomplete items of the SearchForm. This array of menu items is shown under the search bar.
    */
-  autocompleteItems?: React.ReactElement<MenuItemProps>[];
+  autocompleteItems?: React.ReactElement<any>[];
   /**
    * The theme of the header the search input is being rendered in.
    */
@@ -118,7 +117,7 @@ const StyledSearchForm = styled('form')<
 >(
   {
     position: 'relative',
-    flex: `1 1 auto`, // Instead of just flex-grow: 1 for IE11, see https://github.com/philipwalton/flexbugs#flexbug-1
+    flexGrow: 1,
     display: 'flex',
     alignItems: 'center',
     marginLeft: space.m,
@@ -161,7 +160,6 @@ const SearchContainer = styled('div')<Pick<SearchFormProps, 'height'>>(
   },
   ({height}) => ({
     minHeight: height,
-    height: height, // Needed to keep IE11 vertically centered
   })
 );
 
@@ -230,7 +228,6 @@ const SearchInput = styled(TextInput)<
   const collapseStyles: CSSObject = isCollapsed
     ? {
         fontSize: '20px',
-        lineHeight: '20px', // For ie11, line-height needs to match font-size
         paddingLeft: spaceNumbers.xl + spaceNumbers.s,
         paddingRight: spaceNumbers.xl + spaceNumbers.s,
         maxWidth: 'none',
@@ -248,7 +245,6 @@ const SearchInput = styled(TextInput)<
       };
   return {
     fontSize: '14px',
-    lineHeight: '14px', // For ie11, line-height needs to match font-size
     boxShadow: inputColors.boxShadow,
     color: inputColors.color,
     border: 'none',
