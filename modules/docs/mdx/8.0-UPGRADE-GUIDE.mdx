@@ -78,10 +78,11 @@ above will no longer run in IE11 and will fail to bootstrap with an error and/or
 
 ### React 18 Upgrade
 
-In this release we upgraded React to version 18. [React 18](https://reactjs.org/blog/2022/03/29/react-v18.html) introduced several new features, but the
-most impactful change is the new [concurrent render API](https://reactjs.org/blog/2022/03/29/react-v18.html#what-is-concurrent-react). In the new API, you'll use the `.createRoot()`
-method which replaces `.render()`, which adds all of the improvements of React 18 and allows you to
-use concurrent features. Without it React behaves the same as it did in version 17.
+We've upgraded Canvas Kit to [React 18](https://reactjs.org/blog/2022/03/29/react-v18.html). React
+18 introduces several new features, but the most impactful change is the new
+[concurrent render API](https://reactjs.org/blog/2022/03/29/react-v18.html#what-is-concurrent-react).
+The new `createRoot` method replaces `render` and gives you access to the improvements in React 18
+including the concurrent features. Without it, React behaves as it did in version 17.
 
 Canvas Kit doesn’t use the render API directly in our packages but Storybook uses it to render
 Canvas Kit components. Because of this, we upgraded Storybook dependencies to support React 18.
