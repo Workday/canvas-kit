@@ -8,19 +8,14 @@ export const useStatusIndicatorModel = createModelHook({
   defaultConfig: {
     /**
      * Defines the emphasis of a status indicator
-     * @param high - Defining a high emphasis will have higher contrasting colors
-     * @param low - Defining a low emphasis will have lower contrasting colors and are more subtle
+     * options include: 'high', 'low'
+     * Having a high emphasis will create more contrast between the background and text colors
+     * Having a low emphasis will create less contrast between the background and text colors
      */
 
     emphasis: 'low' as StatusIndicatorEmphasis,
     /**
-     * Defines the color of the status indicator.
-     * @param gray
-     * @param orange
-     * @param blue
-     * @param green
-     *  @param red
-     *  @param transparent
+     * Defines the color of the status indicator. options include: `gray`, 'green', 'blue', 'red', 'orange', 'transparent'
      */
     variant: 'gray' as StatusIndicatorVariant,
   },
