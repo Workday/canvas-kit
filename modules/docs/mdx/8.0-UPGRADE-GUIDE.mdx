@@ -90,7 +90,7 @@ Canvas Kit components. Because of this, we upgraded Storybook dependencies to su
 to new types). To see v18 features in action it required updating Storybook to v6.5.x supporting
 
 **Impact on users:** Canvas Kit on React 18 doesn't produce any problem if it runs on < 18 version
-react environment. Users will got console warning about deprecated legacy root. So it's possible for
+react environment. However, users will see a  console warning about `.root()` being deprecated. It's possible for
 users to use Canvas Kit 8 without upgrade to React 18 but some features can be ignored and limited
 by the legacy root API usage.
 
