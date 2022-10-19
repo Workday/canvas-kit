@@ -83,7 +83,7 @@ most impactful change is the new [concurrent render API](https://reactjs.org/blo
 method which replaces `.render()`, which adds all of the improvements of React 18 and allows you to
 use concurrent features. Without it React behaves the same as it did in version 17.
 
-Canvas Kit doesn’t use the render API directly in our packages. But Storybook uses it to render
+Canvas Kit doesn’t use the render API directly in our packages but Storybook uses it to render
 Canvas Kit components. Because of this, we upgraded Storybook dependencies to support React 18.
 
 **Impact on CK:** Updating to React 18 didn't cause any breaking changes in our code. However, we did have to update some types based on some type packages that where upgraded.
