@@ -16,6 +16,7 @@ import {useBreadcrumbsModel} from './hooks/useBreadcrumbsModel';
 import {TertiaryButton, TertiaryButtonProps} from '@workday/canvas-kit-react/button';
 
 export interface BreadcrumbsOverflowButtonProps extends TertiaryButtonProps {
+  'aria-label': string;
   /**
    * style prop applies styles to the whole Flex component,
    * `useOverflowListTarget` automatically adds hidden styles if list doesn't have items to hide
@@ -40,12 +41,7 @@ export const BreadcrumbsOverflowButton = createSubcomponent('button')({
 })<BreadcrumbsOverflowButtonProps>(({style, ...elemProps}, Element) => {
   return (
     <Flex alignItems="center" {...style}>
-      <TertiaryButton
-        as={Element}
-        icon={relatedActionsIcon}
-        aria-label="More links"
-        {...elemProps}
-      />
+      <TertiaryButton as={Element} icon={relatedActionsIcon} {...elemProps} />
       <SystemIcon
         icon={chevronRightSmallIcon}
         color={colors.licorice200}

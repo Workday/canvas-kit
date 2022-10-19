@@ -23,8 +23,8 @@ export const DefaultStates = () => {
       >
         {props => {
           return (
-            <Breadcrumbs>
-              <Breadcrumbs.List aria-label="breadcrumb">
+            <Breadcrumbs aria-label="Breadcrumbs">
+              <Breadcrumbs.List>
                 <Breadcrumbs.Item>
                   <Breadcrumbs.Link href="#">Home</Breadcrumbs.Link>
                 </Breadcrumbs.Item>
@@ -74,8 +74,11 @@ export const WithOverflowMenu = () => {
       >
         {props => {
           return (
-            <Breadcrumbs items={items}>
-              <Breadcrumbs.List aria-label="breadcrumb" maxWidth={props.maxWidth}>
+            <Breadcrumbs items={items} aria-label="Breadcrumbs">
+              <Breadcrumbs.List
+                maxWidth={props.maxWidth}
+                overflowButton={<Breadcrumbs.OverflowButton aria-label="More links" />}
+              >
                 {item =>
                   item.link ? (
                     <Breadcrumbs.Item>
@@ -116,8 +119,8 @@ export const RTLStates = () => {
         {props => {
           return (
             <CanvasProvider theme={{canvas: {direction: ContentDirection.RTL}}}>
-              <Breadcrumbs>
-                <Breadcrumbs.List aria-label="breadcrumb">
+              <Breadcrumbs aria-label="Breadcrumbs">
+                <Breadcrumbs.List>
                   <Breadcrumbs.Item>
                     <Breadcrumbs.Link href="#">תנ״ך</Breadcrumbs.Link>
                   </Breadcrumbs.Item>
