@@ -16,7 +16,6 @@ export const StatusIndicatorLabel = createComponent('span')({
         typeLevel="subtext.large"
         fontWeight="bold"
         textTransform="capitalize"
-        maxWidth={200}
         color="inherit"
         as={Element}
         {...elemProps}
