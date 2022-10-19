@@ -41,10 +41,8 @@ and `Breadcrumbs.Link`.
 
 Accessibility is built into `Breadcrumbs` in a way that allows you to create an inclusive experience
 with little additional configuration. As seen in the example below, you don't need to pass any
-accessibility attributes, because they are baked into the component. You also can specifc
-`aria-label` attribute to a `nav` component (default value is `breadcrumbs`) through a `aria-label`
-prop of `Breadcrumbs` and `aria-label` to overflow button through `overflowButtonProps` of
-`Breadcrumbs.List` components.
+accessibility attributes, because they are baked into the component. You only need to add
+`aria-label` attribute to a `nav` component through a `aria-label` prop of `Breadcrumbs`.
 
 <ExampleCodeBlock code={Basic} />
 
@@ -80,11 +78,13 @@ All you need to supply is the translated text for items and ARIA labels.
 #### Usage
 
 `Breadcrumbs` is a container component that is responsible for creating a `BreadcrumbsModel` and
-sharing it with its subcomponents using React context. It also renders `nav` element with default
-`aria-label` as `breadcrumbs`
+sharing it with its subcomponents using React context. It also renders `nav` element, and
+`aria-label` attribute must be provided for this element.
 
 ```tsx
-<Breadcrumbs items={[]}>{/* Child components */}</Breadcrumbs>
+<Breadcrumbs items={[]} aria-label="Breadcrumbs">
+  {/* Child components */}
+</Breadcrumbs>
 ```
 
 Alternatively, you may pass in a model using the hoisted model pattern.
@@ -94,13 +94,15 @@ const model = useBreadcrumbsModel({
   items: [],
 });
 
-<Breadcrumbs model={model}>{/* Child components */}</Breadcrumbs>;
+<Breadcrumbs model={model} aria-label="Breadcrumbs">
+  {/* Child components */}
+</Breadcrumbs>;
 ```
 
 #### Props
 
 Note that if you pass in a `model` configured with `useBreadcrumbsModel`, configuration props passed
-to `Breadcrumbs` will be ignored.
+to `Breadcrumbs` will be ignored. `aria-label` attribute must be provided for `nav` element.
 
 All undeclared props go to underlying `nav` component.
 
@@ -111,16 +113,26 @@ All undeclared props go to underlying `nav` component.
 #### Usage
 
 `Breadcrumbs.List` is a `Flex` component rendered as a `<ul>` element. It is a container for
-`Breadcrumbs.Item` subcomponents.
+`Breadcrumbs.Item` subcomponents. It also renders overflow button if `overflowButton` prop has been
+passed;
 
 ```tsx
+// without overflow
 <Breadcrumbs.List>{/* Breadcrumbs.Items */}</Breadcrumbs.List>
+```
+
+```tsx
+// with overflow
+<Breadcrumbs.List overflowButton={<Breadcrumbs.OverflowButton aria-label="More links" />}>
+  {/* Breadcrumbs.Items */}
+</Breadcrumbs.List>
 ```
 
 #### Props
 
-`Breadcrumbs.List` accepts a `overflowButtonProps` prop allowing to set specific props for overflow
-button.
+`Breadcrumbs.List` accepts a `overflowButton` prop allowing to pass specific overflow button.
+Breadcrumbs.List with overflow behavior should contain `overflowButton` component with `aria-label`
+to render overflow button.
 
 All undocumented props are spread to the underlying `Flex` component.
 
@@ -225,7 +237,9 @@ This component also supports
 
 ### Breadcrumbs.Menu
 
-The `Breadcrumbs.Menu` uses the `Menu` component under the hood. Please view our [Menu docs](https://canvas.workdaydesign.com/components/popups/menu#component-api) for more in-depth component information.
+The `Breadcrumbs.Menu` uses the `Menu` component under the hood. Please view our
+[Menu docs](https://canvas.workdaydesign.com/components/popups/menu#component-api) for more in-depth
+component information.
 
 ## Model
 
