@@ -7,7 +7,7 @@ export const ContextMenu = () => {
   const [selected, setSelected] = React.useState('');
   return (
     <Menu onSelect={data => setSelected(data.id)}>
-      <Menu.TargetContext>Open Menu</Menu.TargetContext>
+      <Menu.TargetContext>Right-click to Open Menu</Menu.TargetContext>
       <Menu.Popper>
         <Menu.Card>
           <Menu.List>
