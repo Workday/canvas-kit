@@ -77,6 +77,13 @@ export const TooltipContainer = styled('div')<TooltipContainerProps>(
         margin: spaceNumbers.xxxs + 2,
       },
     },
+
+    // Hide tooltip when the reference element is either clipped or fully hidden
+    '[data-popper-reference-hidden] &': {
+      visibility: 'hidden',
+      pointerEvents: 'none',
+    },
+
     // Fix offsets based on placement
     '[data-popper-placement="top-start"] &, [data-popper-placement="bottom-start"] &': {
       left: -spaceNumbers.xxxs,
