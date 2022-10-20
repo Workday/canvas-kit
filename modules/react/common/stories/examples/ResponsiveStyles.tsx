@@ -1,7 +1,5 @@
 import * as React from 'react';
 import {Box, Grid} from '@workday/canvas-kit-react/layout';
-import styled from '@emotion/styled';
-import {type} from '@workday/canvas-kit-react/tokens';
 import {Text} from '@workday/canvas-kit-react/text';
 import {
   useResponsiveContainerStyles,
@@ -79,22 +77,16 @@ export const ResponsiveContainer = () => {
   );
 
   const desktop = 1024;
-  const tablet = 768;
-  const mobile = 320;
 
   const [contWidth, setContWidth] = React.useState(desktop);
 
   const [value, setValue] = React.useState('desktop');
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedItemWidth = event.target[event.target.selectedIndex].label;
     setValue(event.target.value);
-    if (event.currentTarget.value === 'tablet') {
-      setContWidth(tablet);
-    } else if (event.currentTarget.value === 'mobile') {
-      setContWidth(mobile);
-    } else {
-      setContWidth(desktop);
-    }
+    // eslint-disable-next-line radix
+    setContWidth(parseInt(selectedItemWidth));
   };
 
   return (

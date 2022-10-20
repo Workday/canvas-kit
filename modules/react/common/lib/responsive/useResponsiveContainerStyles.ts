@@ -84,12 +84,6 @@ export function useResponsiveContainerStyles<T extends ResponsiveCSSObject<T>>(
 ) {
   const canvasTheme = useTheme(theme);
   const breakpoints = canvasTheme.canvas.breakpoints.values;
-  // scoped strictly within the breakpoint range (think of it as the sum of min-width + max-width)
-  const isZero = isWithinBreakpoint(width, 0, breakpoints.s);
-  const isSmall = isWithinBreakpoint(width, breakpoints.s, breakpoints.m);
-  const isMedium = isWithinBreakpoint(width, breakpoints.m, breakpoints.l);
-  const isLarge = isWithinBreakpoint(width, breakpoints.l, breakpoints.xl);
-  const isExtraLarge = isWithinBreakpoint(width, breakpoints.xl);
   const responsiveStyles = {} as CSSObject<T>;
 
   function getStyles(key: BreakpointKeys) {
@@ -110,28 +104,20 @@ export function useResponsiveContainerStyles<T extends ResponsiveCSSObject<T>>(
     }
   }
 
-  // eslint-disable-next-line default-case
-  switch (true) {
-    case isZero: {
-      getStyles("zero");
-      break;
-    }
-    case isSmall: {
-      getStyles("s");
-      break;
-    }
-    case isMedium: {
-      getStyles("m");
-      break;
-    }
-    case isLarge: {
-      getStyles("l");
-      break;
-    }
-    case isExtraLarge: {
-      getStyles("xl");
-      break;
-    }
+  const getSize = (width: number, breakpoints: any) => {
+    const ranges: {[key: string ]: [number, number?]} = {
+      'zero': [0, breakpoints.s],
+      's': [breakpoints.s, breakpoints.m],
+      'm': [breakpoints.m, breakpoints.l],
+      'l': [breakpoints.l, breakpoints.xl],
+      'xl': [breakpoints.xl]
+    };
+    const size = breakpointResKeys.find((size: BreakpointKeys) => isWithinBreakpoint(width, ...ranges[size]))
+
+    return size as BreakpointKeys;
   }
+
+  const size = getSize(width, breakpoints);
+  getStyles(size);
   return responsiveStyles;
 }
