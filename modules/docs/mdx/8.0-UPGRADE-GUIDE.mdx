@@ -178,20 +178,21 @@ const Example = styled('div')(
 
 ### Responsive Styles
 
-The following Canvas Kit responsive utilities will be released as part of v8:
+We've added a set of
+[responsive utilities](/getting-started/for-developers/resources/responsive-styling/) to facilitate
+container-based and viewport-based responsive styling:
 
-- **ResponsiveContextProvider**: This is a React Context Provider that will take a width and an
-  optional theme prop and allow components to subscribe to context changes via the
+- **ResponsiveContextProvider**: This is a React context provider that will take a `width` and an
+  optional `theme` prop and allow components to subscribe to context changes via the
   `useResponsiveContext` hook.
 
-- **useResponsiveContext Hook**: This hook subscribes to the `ResponsiveContextProvider` and
-  provides helpful utilities to determine whether the current width is within a particular theme
-  breakpoint (`Small: 320px, Medium: 768px, Large: 1024px, Extra Large: 1440px`). Developers can use
-  these utilities when creating container-based responsive styles.
+- **useResponsiveContext**: This hook subscribes to the `ResponsiveContextProvider` and provides
+  helpful utilities to determine whether the current width is within a particular
+  [theme breakpoint](/getting-started/for-developers/resources/responsive-styling/#canvas-kit-breakpoint-sizes).
+  Developers can use these utilities when creating container-based responsive styles.
 
 - **useResponsiveContainerStyles**: A hook that allows developers to create container-based
-  responsive styles using style objects. These are net-new utilities that developers can opt-in to
-  start using, but no action is required to uptake this change.
+  responsive styles using style objects.
 
 ```tsx
 import {Flex, Box} from '@workday/canvas-kit-react/layout';
@@ -247,8 +248,6 @@ return (
   </ResponsiveContextProvider>
 );
 ```
-
-This update is specific to Canvas Kit and will not impact existing designs.
 
 ---
 
