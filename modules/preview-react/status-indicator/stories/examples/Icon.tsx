@@ -8,12 +8,12 @@ export const Icon = () => {
   return (
     <HStack spacing="s">
       <StatusIndicator>
-        <StatusIndicator.Icon icon={uploadCloudIcon} />
+        <StatusIndicator.Icon aria-label="unpublished" icon={uploadCloudIcon} />
         <StatusIndicator.Label>Unpublished</StatusIndicator.Label>
       </StatusIndicator>
       <StatusIndicator variant="green">
         <StatusIndicator.Label>published</StatusIndicator.Label>
-        <StatusIndicator.Icon icon={uploadCloudIcon} />
+        <StatusIndicator.Icon aria-label="published" icon={uploadCloudIcon} />
       </StatusIndicator>
     </HStack>
   );
