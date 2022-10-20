@@ -459,7 +459,7 @@ additional changes requiring manual work):
 
 ```tsx
 // v7
-<Breadcrumbs.Nav aria-label="breadcrumb">
+<Breadcrumbs.Nav aria-label="Breadcrumbs">
   <Breadcrumbs.List>
     <Breadcrumbs.ListItem>
       <Breadcrumbs.Link href="/">Home</Breadcrumbs.Link>
@@ -472,7 +472,7 @@ additional changes requiring manual work):
 </Breadcrumbs.Nav>
 
 // v8
-<Breadcrumbs>
+<Breadcrumbs aria-label="Breadcrumbs">
   <Breadcrumbs.List>
     <Breadcrumbs.Item>
       <Breadcrumbs.Link href="/">Home</Breadcrumbs.Link>
@@ -556,8 +556,8 @@ import {Breadcrumbs} from '@workday/canvas-kit-preview-react/breadcrumbs';
 
 export const OldCollapsibleList = () => {
   return (
-    <Breadcrumbs.Nav aria-label="breadcrumb">
-      <Breadcrumbs.CollapsibleList buttonAriaLabel="more links" maxWidth={300}>
+    <Breadcrumbs.Nav aria-label="Breadcrumbs">
+      <Breadcrumbs.CollapsibleList buttonAriaLabel="More links" maxWidth={300}>
         <Breadcrumbs.ListItem>
           <Breadcrumbs.Link href="/">Home</Breadcrumbs.Link>
         </Breadcrumbs.ListItem>
@@ -589,8 +589,8 @@ const NewOverflowList = () => {
   ]);
 
   return (
-    <Breadcrumbs items={items}>
-      <Breadcrumbs.List>
+    <Breadcrumbs items={items} aria-label="Breadcrumbs">
+      <Breadcrumbs.List overflowButton={<Breadcrumbs.OverflowButton aria-label="More links" />}>
         {item =>
           item.link ? (
             <Breadcrumbs.Item>

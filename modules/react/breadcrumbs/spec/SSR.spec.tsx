@@ -9,7 +9,7 @@ describe('Breadcrumbs', () => {
   it('should render on a server without crashing', () => {
     const ssrRender = () =>
       renderToString(
-        <Breadcrumbs>
+        <Breadcrumbs aria-label="Breadcrumbs">
           <Breadcrumbs.List>
             <Breadcrumbs.Item>Item</Breadcrumbs.Item>
           </Breadcrumbs.List>
