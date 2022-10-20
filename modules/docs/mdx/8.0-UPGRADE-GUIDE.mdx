@@ -78,24 +78,19 @@ above will no longer run in IE11 and will fail to bootstrap with an error and/or
 
 ### React 18 Upgrade
 
-We've upgraded Canvas Kit to [React 18](https://reactjs.org/blog/2022/03/29/react-v18.html). React
-18 introduces several new features, but the most impactful change is the new
+We've upgraded Canvas Kit to [React 18](https://reactjs.org/blog/2022/03/29/react-v18.html). This
+change will not impact users who are already on v7 and are looking to upgrade to v8 as v8 will
+support the same React versions as v7 (React 16.14 and 17.X) while still giving them the ability to
+upgrade to React 18 as needed. Although we didn't use any new features from React 18 in v8, _future_
+updates to Canvas Kit may require upgrading to React 18 to support them.
+
+React 18 introduces several new features, but the most impactful change is the new
 [concurrent render API](https://reactjs.org/blog/2022/03/29/react-v18.html#what-is-concurrent-react).
 The new `createRoot` method replaces `render` and gives you access to the improvements in React 18
-including the concurrent features. Without it, React behaves as it did in version 17.
+including the concurrent features. Without it, React behaves as it did in previous versions.
 
-Canvas Kit doesn’t use the render API directly in our packages but Storybook uses it to render
-Canvas Kit components. Because of this, we upgraded Storybook dependencies to support React 18.
-
-This change will not impact product teams that are already on v7 and are looking to upgrade to v8 as
-v8 will support the same React versions as v7 while still giving teams the ability to upgrade to
-React 18 as needed. Canvas Kit will continue to support React 16.14, React 17.X in v8, so it allows
-to upgrade to Canvas Kit v8 without upgrading to React 18. But some new features may be ignored and
-limited by the legacy root API usage and a console warning about `.root()` being deprecated will be
-presented.
-
-You can read more about this upgrade in the
-[discussion](https://github.com/Workday/canvas-kit/discussions/1545)
+See our [React 18 discussion](https://github.com/Workday/canvas-kit/discussions/1545) for more
+information.
 
 ---
 
