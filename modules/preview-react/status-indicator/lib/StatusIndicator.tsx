@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {ExtractProps, createContainer} from '@workday/canvas-kit-react/common';
+import {ExtractProps, createContainer, createElemPropsHook} from '@workday/canvas-kit-react/common';
 import {colors} from '@workday/canvas-kit-react/tokens';
 import {HStack} from '@workday/canvas-kit-react/layout';
 import {StatusIndicatorIcon} from './StatusIndicatorIcon';
@@ -99,16 +99,24 @@ export interface StatusIndicatorProps extends Partial<ExtractProps<typeof HStack
   children: React.ReactNode;
 }
 
+export const useStatusIndicator = createElemPropsHook(useStatusIndicatorModel)(({state}) => {
+  const colors = getStatusIndicatorColors(state.variant, state.emphasis);
+  return {
+    opacity: state.variant === 'transparent' ? '0.85' : undefined,
+    color: colors.statusIndicatorTextAndIconColor,
+    background: colors.statusIndicatorBackgroundColor,
+  };
+});
+
 export const StatusIndicator = createContainer('div')({
   displayName: 'StatusIndicator',
   modelHook: useStatusIndicatorModel,
+  elemPropsHook: useStatusIndicator,
   subComponents: {
     Icon: StatusIndicatorIcon,
     Label: StatusIndicatorLabel,
   },
 })<StatusIndicatorProps>(({children, ...elemProps}, Element, model) => {
-  const {state} = model;
-  const colors = getStatusIndicatorColors(state.variant, state.emphasis);
   return (
     <HStack
       spacing={4}
@@ -119,9 +127,6 @@ export const StatusIndicator = createContainer('div')({
       alignItems="center"
       height={20}
       borderRadius="s"
-      color={colors.statusIndicatorTextAndIconColor}
-      background={colors.statusIndicatorBackgroundColor}
-      opacity={model.state.variant === 'transparent' ? '0.85' : undefined}
       {...elemProps}
     >
       {children}
