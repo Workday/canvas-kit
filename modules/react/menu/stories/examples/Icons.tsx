@@ -6,6 +6,7 @@ import {
   taskContactIcon,
 } from '@workday/canvas-system-icons-web';
 import {Menu} from '@workday/canvas-kit-react/menu';
+import {BodyText} from '@workday/canvas-kit-react/text';
 
 export const Icons = () => {
   const [selected, setSelected] = React.useState('');
@@ -40,9 +41,9 @@ export const Icons = () => {
           </Menu.List>
         </Menu.Card>
       </Menu.Popper>
-      <p>
+      <BodyText size="small" marginTop="s">
         Selected: <span data-testid="output">{selected}</span>
-      </p>
+      </BodyText>
     </Menu>
   );
 };
