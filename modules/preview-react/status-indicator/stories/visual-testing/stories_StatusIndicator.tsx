@@ -40,7 +40,6 @@ export const StatusIndicatorStates = () => (
       })}
     >
       {props => {
-        console.warn(props);
         const {emphasis, icon, variant} = props;
         return (
           <StatusIndicator emphasis={emphasis} variant={variant}>
