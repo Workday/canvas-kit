@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {ExtractProps, createContainer, StyledType} from '@workday/canvas-kit-react/common';
+import {ExtractProps, createContainer} from '@workday/canvas-kit-react/common';
 import {colors} from '@workday/canvas-kit-react/tokens';
 import {HStack} from '@workday/canvas-kit-react/layout';
 import {StatusIndicatorIcon} from './StatusIndicatorIcon';

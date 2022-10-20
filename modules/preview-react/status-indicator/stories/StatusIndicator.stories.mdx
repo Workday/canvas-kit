@@ -63,10 +63,9 @@ either be dark or light.
 
 #### Usage
 
-`StatusIndicator` is a container component that is responsible for creating a `StatusIndicatorModel`
-and sharing it with its subcomponents using React context. It represents a `HStack` to evenly space
-elements. This container also sets a default max width of `200px`. There are two properties that can
-be defined to set different variants. `emphasis` defines the contrast text and background. `variant`
+`StatusIndicator` is a container component it represents a `HStack` to evenly space elements. This
+container also sets a default max width of `200px`. There are two properties that can be defined to
+set different variants. `emphasis` defines the contrast between text and background. `variant`
 defines the background color of the `StatusIndicator`.
 
 ```tsx
@@ -75,21 +74,10 @@ defines the background color of the `StatusIndicator`.
 </StatusIndicator>
 ```
 
-Alternatively, you may pass in a model using the hoisted model pattern.
-
-```tsx
-const model = useStatusIndicatorModel({
-  emphasis: 'low',
-  variant: 'blue',
-});
-
-<StatusIndicator model={model}>{/* Child components */}</StatusIndicator>;
-```
-
 #### Props
 
-Note that if you pass in a `model` configured with `useStatusIndicatorModel`, configuration props
-passed to `StatudIndicator` will be ignored.
+- `emphasis` options includes `high` and `low`
+- `variant` options include: `gray, green, blue, red, orange, transparent`
 
 <ArgsTable of={StatusIndicator} />
 

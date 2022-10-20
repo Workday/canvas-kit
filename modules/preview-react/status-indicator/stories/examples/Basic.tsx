@@ -1,9 +1,6 @@
 import React from 'react';
 
-import {
-  StatusIndicator,
-  useStatusIndicatorModel,
-} from '@workday/canvas-kit-preview-react/status-indicator';
+import {StatusIndicator} from '@workday/canvas-kit-preview-react/status-indicator';
 
 export const Basic = () => {
   return (
