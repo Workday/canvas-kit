@@ -190,7 +190,76 @@ const Example = styled('div')(
 
 ### Responsive Styles
 
-> Coming Soon (https://github.com/Workday/canvas-kit/pull/1779)
+We've added a set of
+[responsive utilities](/getting-started/for-developers/resources/responsive-styling/) to facilitate
+container-based and viewport-based responsive styling:
+
+- **ResponsiveContextProvider**: This is a React context provider that will take a `width` and an
+  optional `theme` prop and allow components to subscribe to context changes via the
+  `useResponsiveContext` hook.
+
+- **useResponsiveContext**: This hook subscribes to the `ResponsiveContextProvider` and provides
+  helpful utilities to determine whether the current width is within a particular
+  [theme breakpoint](/getting-started/for-developers/resources/responsive-styling/#canvas-kit-breakpoint-sizes).
+  Developers can use these utilities when creating container-based responsive styles.
+
+- **useResponsiveContainerStyles**: A hook that allows developers to create container-based
+  responsive styles using style objects.
+
+```tsx
+import {Flex, Box} from '@workday/canvas-kit-react/layout';
+import {
+  useResizeObserver,
+  ResponsiveContextProvider,
+  useResponsiveContainerStyles,
+} from '@workday/canvas-kit-react/common';
+const ref = React.useRef(null);
+const [width, setWidth] = React.useState(0);
+useResizeObserver({
+  ref: ref,
+  onResize: data => {
+    setWidth(data.width || 0);
+  },
+});
+const containerResponsiveStyles = useResponsiveContainerStyles(
+  {
+    flex: {
+      flexDirection: 'column',
+      padding: 'm',
+      depth: 1,
+      borderRadius: 'l',
+      zero: {
+        backgroundColor: 'Red',
+      },
+      s: {
+        backgroundColor: 'Orange',
+      },
+      m: {
+        backgroundColor: 'Yellow',
+      },
+      l: {
+        backgroundColor: 'Green',
+      },
+      xl: {
+        backgroundColor: 'Blue',
+      },
+    },
+    box: {
+      padding: 's',
+    },
+  },
+  width
+);
+return (
+  <ResponsiveContextProvider width={width}>
+    <Box ref={ref}>
+      <Flex {...containerResponsiveStyles.flex}>
+        <Box {...containerResponsiveStyles.box}>Hello World</Box>
+      </Flex>
+    </Box>
+  </ResponsiveContextProvider>
+);
+```
 
 ---
 
