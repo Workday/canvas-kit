@@ -48,8 +48,8 @@ describe('Breadcrumbs', () => {
       getBreadcrumbsNav().should('be.visible');
     });
 
-    it('should have an element with a label of "breadcrumbs"', () => {
-      cy.findByLabelText('breadcrumbs').should('be.visible');
+    it('should have an element with a label of "Breadcrumbs"', () => {
+      cy.findByLabelText('Breadcrumbs').should('be.visible');
     });
 
     it('should have a role of "list" on the <ul> element', () => {

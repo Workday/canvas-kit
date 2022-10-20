@@ -495,6 +495,86 @@ describe('Popup', () => {
     });
   });
 
+  context(
+    'given the [Testing/React/Popups/Popup, CloseOnTargetHiddenTest] story is rendered',
+    () => {
+      beforeEach(() => {
+        h.stories.load('Testing/React/Popups/Popup', 'CloseOnTargetHiddenTest');
+      });
+
+      // We disable the default scroll behavior so we can tightly control how these specs scroll. This
+      // means we'll have to manually add `scrollIntoView` to get Cypress to scroll only where we want
+      context('when the "Open Popup" is clicked', {scrollBehavior: false}, () => {
+        beforeEach(() => {
+          cy.findByTestId('scroll-area').scrollTo('center');
+          cy.findByRole('button', {name: 'Open Popup'}).click();
+        });
+
+        it('should open the popup', () => {
+          cy.findByRole('dialog').should('exist');
+        });
+
+        [
+          {
+            property: 'scrollTop',
+            value: 100,
+          },
+          {
+            property: 'scrollTop',
+            value: 450,
+          },
+          {
+            property: 'scrollLeft',
+            value: 400,
+          },
+          {
+            property: 'scrollLeft',
+            value: 150,
+          },
+        ].forEach(io => {
+          context(`when the scrollable area is scrolled to ${io.property}: ${io.value}`, () => {
+            beforeEach(() => {
+              cy.findByTestId('scroll-area').pipe($el => $el.prop(io.property, io.value));
+            });
+
+            it('should not close the popup', () => {
+              cy.findByRole('dialog').should('exist');
+            });
+          });
+        });
+
+        [
+          {
+            property: 'scrollTop',
+            value: 70,
+          },
+          {
+            property: 'scrollTop',
+            value: 480,
+          },
+          {
+            property: 'scrollLeft',
+            value: 70,
+          },
+          {
+            property: 'scrollLeft',
+            value: 480,
+          },
+        ].forEach(io => {
+          context(`when the scrollable area is scrolled to ${io.property}: ${io.value}`, () => {
+            beforeEach(() => {
+              cy.findByTestId('scroll-area').pipe($el => $el.prop(io.property, io.value));
+            });
+
+            it('should close the popup', () => {
+              cy.findByRole('dialog').should('not.exist');
+            });
+          });
+        });
+      });
+    }
+  );
+
   context(`given the [Testing/React/Popups/Popup, TooltipReturnFocus] example is rendered`, () => {
     beforeEach(() => {
       h.stories.load('Testing/React/Popups/Popup', 'TooltipReturnFocus');

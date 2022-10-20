@@ -3,7 +3,7 @@ import {Breadcrumbs} from '@workday/canvas-kit-react/breadcrumbs';
 
 export const Basic = () => {
   return (
-    <Breadcrumbs>
+    <Breadcrumbs aria-label="Breadcrumbs">
       <Breadcrumbs.List>
         <Breadcrumbs.Item>
           <Breadcrumbs.Link href="/">Home</Breadcrumbs.Link>
