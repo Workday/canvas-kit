@@ -10,4 +10,3 @@ View the
 [documentation for Status Indicator](https://workday.github.io/canvas-kit/?path=/docs/preview-status-indicator-react--basic)
 on Storybook.
 
-[> Workday Design Reference: Status Indicator](https://design.workday.com/components/)
