@@ -186,7 +186,53 @@ const Example = styled('div')(
 
 We've added a new package, `@workday/canvas-kit-react/testing`, for some of our testing utilities
 and components. We've found that some of these components can be useful for consumers to use to test
-different visual states of their components.
+different visual states of their components. You can find this package under our
+`Hooks and Utilities` section under [Testing](/hooks-and-utilities-testing/)
+
+The example below creates a visual table of our `DeleteButton`. Each row shows the button in
+different states based on the column prop such as `disabled, hover, active` while applying the row
+prop of `size`.
+
+```tsx
+import {
+  ComponentStatesTable,
+  StaticStates,
+  permutateProps,
+} from '@workday/canvas-kit-react/testing';
+import {PartialEmotionCanvasTheme} from '@workday/canvas-kit-react/common';
+
+import {DeleteButton} from '@workday/canvas-kit-react/button';
+
+// Creates a columns for different states of a button
+export const stateTableColumnProps = [
+  {label: 'Default ', props: {className: '', disabled: false}},
+  {label: 'Default Disabled', props: {className: '', disabled: true}},
+  {label: 'Hover ', props: {className: 'hover', disabled: false}},
+  {label: 'Hover Disabled', props: {className: 'hover', disabled: true}},
+  {label: 'Focus ', props: {className: 'focus', disabled: false}},
+  {label: 'Focus Hover ', props: {className: 'focus hover', disabled: false}},
+  {label: 'Active ', props: {className: 'active', disabled: false}},
+  {label: 'Active Hover ', props: {className: 'active hover', disabled: false}},
+];
+
+export const Basic = (props: {theme?: PartialEmotionCanvasTheme}) => (
+  <StaticStates theme={props.theme}>
+    <ComponentStatesTable
+      rowProps={permutateProps({
+        // creates rows with values that get passed to the button
+        size: [
+          {value: 'small', label: 'Small'},
+          {value: 'medium', label: 'Medium'},
+          {value: 'large', label: 'Large'},
+        ],
+      })}
+      columnProps={stateTableColumnProps}
+    >
+      {props => <DeleteButton {...props}>Test</DeleteButton>}
+    </ComponentStatesTable>
+  </StaticStates>
+);
+```
 
 The following code-moddable changes have been made:
 
@@ -243,6 +289,17 @@ can still use the one in our main package, but in a later date it will be replac
 preview.
 
 ```tsx
+// StatusIndicator in main
+import {StatusIndicator} from '@workday/canvas-kit-react/status-indicator';
+<StatusIndicator
+  emphasis={StatusIndicator.Emphasis.Low}
+  label="unpublished"
+  type={StatusIndicator.Type.Gray}
+/>;
+```
+
+```tsx
+// New compound component StatusIndicator in preview
 import {StatusIndicator} from '@workday/canvas-kit-preview-react/status-indicator';
 import {uploadCloudIcon} from '@workday/canvas-system-icons-web';
 
