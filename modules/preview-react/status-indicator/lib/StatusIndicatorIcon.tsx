@@ -4,15 +4,15 @@ import {createElemPropsHook, createSubcomponent} from '@workday/canvas-kit-react
 
 import {SystemIcon, SystemIconProps} from '@workday/canvas-kit-react/icon';
 import {useStatusIndicatorModel} from './hooks';
-import {getStatusIndicatorColors} from './StatusIndicator';
+import {colorsMap} from './StatusIndicator';
 
 export interface StatusIndicatorIconProps extends SystemIconProps {}
 
 const useStatusIndicatorIcon = createElemPropsHook(useStatusIndicatorModel)(({state}) => {
-  const colors = getStatusIndicatorColors(state.variant, state.emphasis);
+  const colors = colorsMap[state.variant][state.emphasis];
   return {
-    color: colors.statusIndicatorTextAndIconColor,
-    colorHover: colors.statusIndicatorBackgroundColor,
+    color: colors.text,
+    colorHover: colors.background,
   };
 });
 

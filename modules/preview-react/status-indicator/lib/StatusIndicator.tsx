@@ -5,91 +5,69 @@ import {colors} from '@workday/canvas-kit-react/tokens';
 import {HStack} from '@workday/canvas-kit-react/layout';
 import {StatusIndicatorIcon} from './StatusIndicatorIcon';
 import {StatusIndicatorLabel} from './StatusIndicatorLabel';
-import {StatusIndicatorEmphasis, StatusIndicatorVariant, useStatusIndicatorModel} from './hooks';
+import {useStatusIndicatorModel} from './hooks';
 
-export const getStatusIndicatorColors = (
-  variant: StatusIndicatorVariant,
-  emphasis: StatusIndicatorEmphasis
-) => {
-  let statusIndicatorTextAndIconColor = '';
-  let statusIndicatorBackgroundColor = '';
-  switch (variant) {
-    case 'gray':
-      {
-        if (emphasis === 'high') {
-          statusIndicatorTextAndIconColor = colors.frenchVanilla100;
-          statusIndicatorBackgroundColor = colors.licorice300;
-        } else {
-          statusIndicatorTextAndIconColor = colors.licorice400;
-          statusIndicatorBackgroundColor = colors.soap300;
-        }
-      }
-      break;
-
-    case 'orange':
-      {
-        if (emphasis === 'high') {
-          statusIndicatorTextAndIconColor = colors.licorice500;
-          statusIndicatorBackgroundColor = colors.cantaloupe400;
-        } else {
-          statusIndicatorTextAndIconColor = colors.toastedMarshmallow600;
-          statusIndicatorBackgroundColor = colors.cantaloupe100;
-        }
-      }
-      break;
-    case 'blue':
-      {
-        if (emphasis === 'high') {
-          statusIndicatorTextAndIconColor = colors.frenchVanilla100;
-          statusIndicatorBackgroundColor = colors.blueberry400;
-        } else {
-          statusIndicatorTextAndIconColor = colors.blueberry500;
-          statusIndicatorBackgroundColor = colors.blueberry100;
-        }
-      }
-      break;
-    case 'green':
-      {
-        if (emphasis === 'high') {
-          statusIndicatorTextAndIconColor = colors.frenchVanilla100;
-          statusIndicatorBackgroundColor = colors.greenApple600;
-        } else {
-          statusIndicatorTextAndIconColor = colors.greenApple600;
-          statusIndicatorBackgroundColor = colors.greenApple100;
-        }
-      }
-      break;
-    case 'red':
-      {
-        if (emphasis === 'high') {
-          statusIndicatorTextAndIconColor = colors.frenchVanilla100;
-          statusIndicatorBackgroundColor = colors.cinnamon500;
-        } else {
-          statusIndicatorTextAndIconColor = colors.cinnamon600;
-          statusIndicatorBackgroundColor = colors.cinnamon100;
-        }
-      }
-      break;
-    case 'transparent':
-      {
-        if (emphasis === 'high') {
-          statusIndicatorTextAndIconColor = colors.frenchVanilla100;
-          statusIndicatorBackgroundColor = colors.blackPepper600;
-        } else {
-          statusIndicatorTextAndIconColor = colors.frenchVanilla100;
-          statusIndicatorBackgroundColor = colors.blackPepper600;
-        }
-      }
-      break;
-    default: {
-      statusIndicatorTextAndIconColor = colors.frenchVanilla100;
-      statusIndicatorBackgroundColor = colors.licorice300;
-    }
-  }
-  return {
-    statusIndicatorTextAndIconColor,
-    statusIndicatorBackgroundColor,
-  };
+export const colorsMap = {
+  gray: {
+    high: {
+      text: colors.frenchVanilla100,
+      background: colors.licorice300,
+    },
+    low: {
+      text: colors.licorice400,
+      background: colors.soap300,
+    },
+  },
+  orange: {
+    high: {
+      text: colors.licorice500,
+      background: colors.cantaloupe400,
+    },
+    low: {
+      text: colors.toastedMarshmallow600,
+      background: colors.cantaloupe100,
+    },
+  },
+  blue: {
+    high: {
+      text: colors.frenchVanilla100,
+      background: colors.blueberry400,
+    },
+    low: {
+      text: colors.blueberry500,
+      background: colors.blueberry100,
+    },
+  },
+  green: {
+    high: {
+      text: colors.frenchVanilla100,
+      background: colors.greenApple600,
+    },
+    low: {
+      text: colors.greenApple600,
+      background: colors.greenApple100,
+    },
+  },
+  red: {
+    high: {
+      text: colors.frenchVanilla100,
+      background: colors.cinnamon500,
+    },
+    low: {
+      text: colors.cinnamon600,
+      background: colors.cinnamon100,
+    },
+  },
+  transparent: {
+    high: {
+      text: colors.frenchVanilla100,
+      background: colors.blackPepper600,
+    },
+    low: {
+      text: colors.frenchVanilla100,
+      background: colors.blackPepper600,
+    },
+  },
 };
 
 export interface StatusIndicatorProps extends Partial<ExtractProps<typeof HStack, never>> {
@@ -100,11 +78,11 @@ export interface StatusIndicatorProps extends Partial<ExtractProps<typeof HStack
 }
 
 export const useStatusIndicator = createElemPropsHook(useStatusIndicatorModel)(({state}) => {
-  const colors = getStatusIndicatorColors(state.variant, state.emphasis);
+  const colors = colorsMap[state.variant][state.emphasis];
   return {
     opacity: state.variant === 'transparent' ? '0.85' : undefined,
-    color: colors.statusIndicatorTextAndIconColor,
-    background: colors.statusIndicatorBackgroundColor,
+    color: colors.text,
+    background: colors.background,
   };
 });
 
