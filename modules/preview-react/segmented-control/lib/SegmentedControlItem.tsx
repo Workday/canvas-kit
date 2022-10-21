@@ -135,7 +135,7 @@ const Container = ({
   children: React.ReactElement;
 }) => {
   return tooltipProps ? (
-    <Tooltip title={tooltipProps.title}>{children}</Tooltip>
+    <Tooltip {...tooltipProps}>{children}</Tooltip>
   ) : (
     <React.Fragment>{children}</React.Fragment>
   );
