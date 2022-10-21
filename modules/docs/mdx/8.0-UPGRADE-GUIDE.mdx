@@ -31,6 +31,7 @@ any questions.
   - [Component States Table](#component-states-table)
   - [Menu (Main)](#menu-main)
   - [Modal](#modal)
+  - [Popups](#popups)
 
 ## Codemod
 
@@ -701,3 +702,20 @@ will have the following visual differences compared to the standard `Modal`:
 
 Additionally, users interacting with `Modal` on touch will not be able to exit out of the modal by
 tapping on the overlay.
+
+---
+
+### Popups
+
+We've updated all popup `CloseIcon` and `CloseButton` to default to `type=button`. We did this so
+these close buttons did not submit the forms unintentionally. Without this change, you have to
+manually add `type="button"` to these components if you wrap popup contents in a `form` element.
+While this is a very unlikely that a `CloseButton` was intentionally used as an implicit submit
+button, it is still a breaking change. This change effects the following components:
+
+- `Popup.CloseIcon`
+- `Dialog.CloseIcon`
+- `Modal.CloseIcon`
+- `Popup.CloseButton`
+- `Dialog.CloseButton`
+- `Modal.CloseButton`
