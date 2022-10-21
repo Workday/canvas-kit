@@ -97,7 +97,7 @@ const StyledParentWrapper = styled(Grid.as('section'))({
   position: 'relative',
 });
 
-const CircleTop = styled(Box.as('div'))({
+const CircleTop = styled(Box)({
   ...styles.circleTop,
   backgroundColor: 'black',
   borderRadius: borderRadius.circle,
@@ -139,13 +139,13 @@ const StyledHeading = styled(Box.as('h3'))({
   margin: 0,
 });
 
-const GreyBar = styled(Box.as('div'))({
+const GreyBar = styled(Box)({
   ...styles.greyBar,
   height: 70,
   backgroundColor: 'grey',
 });
 
-const Circle = styled(Box.as('div'))({
+const Circle = styled(Box)({
   ...styles.circle,
   borderRadius: borderRadius.circle,
   position: 'absolute',

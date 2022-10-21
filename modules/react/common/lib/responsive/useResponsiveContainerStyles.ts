@@ -1,13 +1,13 @@
-import { useTheme } from "@workday/canvas-kit-react/common";
+import { useTheme, isWithinBreakpoint, breakpointKeys } from "@workday/canvas-kit-react/common";
 import type {
   FlexStyleProps,
   GridProps
 } from "@workday/canvas-kit-react/layout";
 
-export const breakpointResKeys = ["zero", "s", "m", "l", "xl"] as const;
-export type BreakpointKeys = typeof breakpointResKeys[number];
+export type BreakpointKeys = typeof breakpointKeys[number];
+
 // TODO: export just all the style props
-type AllStyleProps = Omit<GridProps, "children" | "as"> & FlexStyleProps;
+type AllStyleProps = FlexStyleProps & GridProps;
 type ResponsiveCSSObject<T> = {
   [P in keyof T]: Partial<Record<BreakpointKeys, AllStyleProps>> &
     AllStyleProps;
@@ -16,18 +16,28 @@ type CSSObject<T> = {
   [P in keyof T]: AllStyleProps;
 };
 
-const isWithinBreakpoint = (width: number, min: number, max?: number) => {
-  return width >= min && (!max || (max && width <= max - 1));
-};
+const getSize = (width: number, breakpoints: any) => {
+  const ranges: {[key: string ]: [number, number?]} = {
+    'zero': [0, breakpoints.s],
+    's': [breakpoints.s, breakpoints.m],
+    'm': [breakpoints.m, breakpoints.l],
+    'l': [breakpoints.l, breakpoints.xl],
+    'xl': [breakpoints.xl]
+  };
+  const size = breakpointKeys.find((size: BreakpointKeys) => isWithinBreakpoint(width, ...ranges[size]))
+
+  return size as BreakpointKeys;
+}
 
 /**
- * `useResponsiveContainerStyles` - This is a hook that will allow you to create container-based
-responsive styles with objects (as you can see in the example below). This hook accepts three
-arguments with the third being optional (Style Objects, Container Width, Theme). In each style
-object, there are five sizes that it will accept: `zero, small, medium, large and extra large`.
-These sizes represent Canvas Kit breakpoints. The sizes will act
-like `min-width`. For example, if you want to apply styles from `medium` and up, then you would
-write those styles under `m`.
+ * useResponsiveContainerStyles
+ *
+ * ---
+ *
+ * This hook allows you to create container-based responsive styles with objects.
+ * It accepts two or three arguments: the responsive style object, the container width, and (optionally) the theme object.
+ * Each style object accepts five breakpoint keys: "zero", "s", "m", "l", and "xl".
+ * The sizes will act like `min-width`. For example, if you want to apply styles from `medium` and up, then you would write those styles under `m`.
  *
  * @example
  * ```tsx
@@ -77,6 +87,7 @@ return (
 );
 ```
  */
+
 export function useResponsiveContainerStyles<T extends ResponsiveCSSObject<T>>(
   styles: ResponsiveCSSObject<T>,
   width: number,
@@ -86,10 +97,11 @@ export function useResponsiveContainerStyles<T extends ResponsiveCSSObject<T>>(
   const breakpoints = canvasTheme.canvas.breakpoints.values;
   const responsiveStyles = {} as CSSObject<T>;
 
-  function getStyles(key: BreakpointKeys) {
-    const breakpointSize = breakpointResKeys.indexOf(key);
+  const getStyles = (key: BreakpointKeys) => {
+    const breakpointSize = breakpointKeys.indexOf(key);
     for (let i = 0; i <= breakpointSize; i++) {
-      const breakpointName = breakpointResKeys[i];
+      const breakpointName = breakpointKeys[i];
+      // classname is key of the style object
       Object.keys(styles).forEach((classname) => {
         const { zero, s, m, l, xl, ...base } = styles[classname as keyof T];
         const breakpointStyles =
@@ -102,19 +114,6 @@ export function useResponsiveContainerStyles<T extends ResponsiveCSSObject<T>>(
         };
       });
     }
-  }
-
-  const getSize = (width: number, breakpoints: any) => {
-    const ranges: {[key: string ]: [number, number?]} = {
-      'zero': [0, breakpoints.s],
-      's': [breakpoints.s, breakpoints.m],
-      'm': [breakpoints.m, breakpoints.l],
-      'l': [breakpoints.l, breakpoints.xl],
-      'xl': [breakpoints.xl]
-    };
-    const size = breakpointResKeys.find((size: BreakpointKeys) => isWithinBreakpoint(width, ...ranges[size]))
-
-    return size as BreakpointKeys;
   }
 
   const size = getSize(width, breakpoints);

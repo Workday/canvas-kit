@@ -5,15 +5,20 @@ import {
   useResponsiveContainerStyles,
   useResizeObserver,
   ResponsiveContextProvider,
+  useResponsiveContext,
 } from '@workday/canvas-kit-react/common';
 import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Select, SelectOption} from '@workday/canvas-kit-react/select';
 
-const HeadingText = ({children, ...props}) => (
-  <Text as="p" fontSize={20} fontWeight="bold" color="frenchVanilla100" margin={0} {...props}>
-    {children}
-  </Text>
-);
+const HeadingText = ({children, ...props}) => {
+  const {isMedium} = useResponsiveContext();
+  return (
+    <Text as="p" fontSize={20} fontWeight="bold" color="frenchVanilla100" margin={0} {...props}>
+      {children}
+      {isMedium ? 'red' : 'blue'}
+    </Text>
+  );
+};
 
 const Header = ({children, ...props}) => (
   <Grid gridArea="Header" backgroundColor="blueberry400" {...props}>
@@ -57,7 +62,7 @@ export const ResponsiveContainer = () => {
         gridTemplateAreas: "'Header' 'ContentLeft' 'ContentRight ' 'Footer'",
         gridTemplateColumns: '1fr',
         gridTemplateRows: 'auto auto auto',
-        s: {
+        m: {
           gridTemplateAreas: "'Header Header' 'ContentLeft ContentRight ' 'Footer Footer'",
           gridGap: 's',
           gridTemplateColumns: '1fr 3fr',
@@ -91,7 +96,7 @@ export const ResponsiveContainer = () => {
 
   return (
     <ResponsiveContextProvider width={width}>
-      <Box ref={ref} {...responsiveStyles.box} maxWidth={contWidth}>
+      <Box ref={ref} maxWidth={contWidth}>
         <FormField label={'Container Size'}>
           <Select onChange={handleChange} value={value}>
             <SelectOption label="1024px" value="desktop" />
