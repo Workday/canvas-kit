@@ -94,7 +94,7 @@ export const getStatusIndicatorColors = (
 
 export interface StatusIndicatorProps extends Partial<ExtractProps<typeof HStack, never>> {
   /**
-   * Children of the Status Indicator. Should contain a `<StatusIndicator.Target>`, a `<StatusIndicator.Content>`
+   * Children of the Status Indicator. Can contain a `<StatusIndicator.Label>` and or `<StatusIndicator.Icon>`
    */
   children: React.ReactNode;
 }
