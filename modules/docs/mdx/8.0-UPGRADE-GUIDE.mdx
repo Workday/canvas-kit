@@ -78,7 +78,19 @@ above will no longer run in IE11 and will fail to bootstrap with an error and/or
 
 ### React 18 Upgrade
 
-> Coming Soon (https://github.com/Workday/canvas-kit/discussions/1545)
+We've upgraded Canvas Kit to [React 18](https://reactjs.org/blog/2022/03/29/react-v18.html). This
+change will not impact users who are already on v7 and are looking to upgrade to v8 as v8 will
+support the same React versions as v7 (React 16.14 and 17.X) while still giving them the ability to
+upgrade to React 18 as needed. Although we didn't use any new features from React 18 in v8, _future_
+updates to Canvas Kit may require upgrading to React 18 to support them.
+
+React 18 introduces several new features, but the most impactful change is the new
+[concurrent render API](https://reactjs.org/blog/2022/03/29/react-v18.html#what-is-concurrent-react).
+The new `createRoot` method replaces `render` and gives you access to the improvements in React 18
+including the concurrent features. Without it, React behaves as it did in previous versions.
+
+See our [React 18 discussion](https://github.com/Workday/canvas-kit/discussions/1545) for more
+information.
 
 ---
 
@@ -178,7 +190,76 @@ const Example = styled('div')(
 
 ### Responsive Styles
 
-> Coming Soon (https://github.com/Workday/canvas-kit/pull/1779)
+We've added a set of
+[responsive utilities](/getting-started/for-developers/resources/responsive-styling/) to facilitate
+container-based and viewport-based responsive styling:
+
+- **ResponsiveContextProvider**: This is a React context provider that will take a `width` and an
+  optional `theme` prop and allow components to subscribe to context changes via the
+  `useResponsiveContext` hook.
+
+- **useResponsiveContext**: This hook subscribes to the `ResponsiveContextProvider` and provides
+  helpful utilities to determine whether the current width is within a particular
+  [theme breakpoint](/getting-started/for-developers/resources/responsive-styling/#canvas-kit-breakpoint-sizes).
+  Developers can use these utilities when creating container-based responsive styles.
+
+- **useResponsiveContainerStyles**: A hook that allows developers to create container-based
+  responsive styles using style objects.
+
+```tsx
+import {Flex, Box} from '@workday/canvas-kit-react/layout';
+import {
+  useResizeObserver,
+  ResponsiveContextProvider,
+  useResponsiveContainerStyles,
+} from '@workday/canvas-kit-react/common';
+const ref = React.useRef(null);
+const [width, setWidth] = React.useState(0);
+useResizeObserver({
+  ref: ref,
+  onResize: data => {
+    setWidth(data.width || 0);
+  },
+});
+const containerResponsiveStyles = useResponsiveContainerStyles(
+  {
+    flex: {
+      flexDirection: 'column',
+      padding: 'm',
+      depth: 1,
+      borderRadius: 'l',
+      zero: {
+        backgroundColor: 'Red',
+      },
+      s: {
+        backgroundColor: 'Orange',
+      },
+      m: {
+        backgroundColor: 'Yellow',
+      },
+      l: {
+        backgroundColor: 'Green',
+      },
+      xl: {
+        backgroundColor: 'Blue',
+      },
+    },
+    box: {
+      padding: 's',
+    },
+  },
+  width
+);
+return (
+  <ResponsiveContextProvider width={width}>
+    <Box ref={ref}>
+      <Flex {...containerResponsiveStyles.flex}>
+        <Box {...containerResponsiveStyles.box}>Hello World</Box>
+      </Flex>
+    </Box>
+  </ResponsiveContextProvider>
+);
+```
 
 ---
 
