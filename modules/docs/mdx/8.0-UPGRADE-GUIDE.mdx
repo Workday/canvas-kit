@@ -265,14 +265,13 @@ return (
 
 ### Testing
 
-We've added a new package, `@workday/canvas-kit-react/testing`, for some of our testing utilities
-and components. We've found that some of these components can be useful for consumers to use to test
-different visual states of their components. You can find this package under our
-`Hooks and Utilities` section under [Testing](/hooks-and-utilities-testing/)
+We've added a new `@workday/canvas-kit-react/testing` slash import to house our testing utilities
+and components. You may find them useful for testing the different visual states of your components.
 
-The example below creates a visual table of our `DeleteButton`. Each row shows the button in
-different states based on the column prop such as `disabled, hover, active` while applying the row
-prop of `size`.
+View the [Testing](/utilities/testing/) documentation for more information. The example below
+creates a visual states table of our `DeleteButton`. Each row renders a different size of
+`DeleteButton` with each column representing different combinations of the `disabled`, `hover`, and
+`active` states.
 
 ```tsx
 import {

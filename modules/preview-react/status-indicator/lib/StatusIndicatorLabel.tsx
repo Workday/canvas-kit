@@ -7,7 +7,7 @@ export interface StatusIndicatorLabelProps extends TextProps {}
 
 export const StatusIndicatorLabel = createComponent('span')({
   displayName: 'StatusIndicator.Label',
-  Component: ({...elemProps}: StatusIndicatorLabelProps, ref, Element) => {
+  Component: ({children, ...elemProps}: StatusIndicatorLabelProps, ref, Element) => {
     return (
       <Text
         whiteSpace="nowrap"
@@ -21,7 +21,7 @@ export const StatusIndicatorLabel = createComponent('span')({
         as={Element}
         {...elemProps}
       >
-        {elemProps.children}
+        {children}
       </Text>
     );
   },

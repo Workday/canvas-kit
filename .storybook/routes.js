@@ -60,6 +60,7 @@ const routes = {
   '/tokens/depth/': 'tokens-tokens-react--depth',
   '/tokens/space/': 'tokens-tokens-react--space',
   '/tokens/type/': 'tokens-tokens-react--type',
+  '/utilities/testing/': 'hooks-and-utilities-testing--basic',
   '/whats-new/upgrade-guides/canvas-kit-v4-upgrade-guide/': 'welcome-upgrade-guides-v4-0--page',
   '/whats-new/upgrade-guides/canvas-kit-v5-upgrade-guide/': 'welcome-upgrade-guides-v5-0--page',
   '/whats-new/upgrade-guides/canvas-kit-v6-upgrade-guide/': 'welcome-upgrade-guides-v6-0--page',
