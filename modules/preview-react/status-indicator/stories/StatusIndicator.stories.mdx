@@ -50,10 +50,11 @@ position of the icon may be adjusted depending on where you place it in the mark
 
 ### Overflow
 
-We strongly discourage the text of a StatusIndicator exceeding its max width which is set to
-`200px`. However, in the case where text is overflowed, we suggest your wrap the StatusIndicator in
-an `OverflowTooltip` as well as adding a `tabIndex={0}` so that the overflowed text is accessible
-via keybord or mouse. You also have access to change the default `maxWidth` via style props.
+We **strongly** discourage using text in a `StatusIndicator` which will cause it to exceed its
+maximum width of `200px`. In situations where this cannot be avoided and text must be overflowed, we
+suggest wrapping `StatusIndicator` in an `OverflowTooltip` and applying `tabIndex={0}` to it so the
+overflowed text is accessible via keyboard and mouse. You may also override the default `maxWidth`
+of `StatusIndicator` via [style props](/getting-started/for-developers/resources/style-props/).
 
 <ExampleCodeBlock code={Overflow} />
 
