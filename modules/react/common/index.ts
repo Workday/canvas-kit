@@ -7,5 +7,9 @@ export * from './lib/utils';
 export * from './lib/CanvasProvider';
 export * from './lib/InputProvider';
 export * from './lib/EllipsisText';
-export * from './lib/responsive/responsiveContext';
+export {
+  ResponsiveContext,
+  ResponsiveContextProvider,
+  useResponsiveContext,
+} from './lib/responsive/responsiveContext';
 export * from './lib/responsive/useResponsiveContainerStyles';

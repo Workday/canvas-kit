@@ -17,11 +17,11 @@ const HeadingText = ({children, ...props}) => (
 );
 
 const HeadingTextResponsive = ({children, ...props}) => {
-  const {isMedium} = useResponsiveContext();
+  const {isMediumAndDown} = useResponsiveContext();
   return (
-    <Text as="p" fontSize={20} fontWeight="bold" color="frenchVanilla100" margin={0} {...props}>
+    <Text as="p" fontSize={20} fontWeight="bold" color="blackPepper500" margin={0} {...props}>
       {children}
-      {isMedium ? 'red' : 'blue'}
+      {isMediumAndDown ? 'red' : 'blue'}
     </Text>
   );
 };
@@ -111,6 +111,8 @@ export const ResponsiveContainer = () => {
           </Select>
         </FormField>
         <Grid as="section">
+          <HeadingTextResponsive>Answer: </HeadingTextResponsive>
+
           <Grid {...responsiveStyles.parentContainer}>
             <Header {...responsiveStyles.childrenContainers}>
               <HeadingText>Header</HeadingText>

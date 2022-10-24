@@ -5,84 +5,61 @@ import {
   useTheme,
 } from '@workday/canvas-kit-react/common';
 
+/**
+ * Interface to define `width` and `breakpoints` types.
+ * `width: number`
+ * `breakpoints: CanvasBreakpoints`
+ */
 interface ResponsiveContextConfig {
   width: number;
   breakpoints: CanvasBreakpoints;
 }
 
-const ResponsiveContext = React.createContext({} as ResponsiveContextConfig);
+/**
+ * React Context with a type of `ResponsiveContextConfig`.
+ *
+ * ```tsx
+ *  interface ResponsiveContextConfig {
+ *    width: number;
+ *    breakpoints: CanvasBreakpoints;
+ *  }
+ * ```
+ */
+export const ResponsiveContext = React.createContext({} as ResponsiveContextConfig);
 
 interface ResponsiveContextProviderProps {
+  width: number;
   children?: React.ReactNode;
   theme?: PartialEmotionCanvasTheme;
-  width: number;
 }
 
 /**
- * This React Context Provider that will accept the width of the container from `useResizeObserver` hook (as you can see in the example below). In the example below, the `useResizeObserver` hook will measure the width of the container and set the width. The `ResponsiveContextProvider` will accept the width from `useResizeObserver`.
+ * This is a React context provider that will take a `width` and an
+  optional `theme` prop and allow components to subscribe to context changes via the
+  `useResponsiveContext` hook. See the [Responsive Styling Story](https://workday.github.io/canvas-kit/?path=/docs/hooks-and-utilities-responsive-styling--responsive-container) for a more in depth example.
  *
  * @example
  * ```tsx
-import {Flex, Box} from '@workday/canvas-kit-react/layout';
+import {Box} from '@workday/canvas-kit-react/layout';
 import {
-  useResizeObserver, ResponsiveContextProvider, useResponsiveContainerStyles
+  ResponsiveContextProvider
 } from '@workday/canvas-kit-react/common';
 
-const ref = React.useRef(null);
 const [containerWidth, setWidth] = React.useState(0);
-
-useResizeObserver({
-  ref: ref,
-  onResize: data => {
-    setWidth(data.containerWidth || 0);
-  },
-});
-
-const containerResponsiveStyles = useResponsiveContainerStyles(
-  {
-    flex: {
-      flexDirection: 'column',
-      padding: 'm',
-      depth: 1,
-      borderRadius: 'l',
-      zero: {
-        backgroundColor: 'Red',
-      },
-      s: {
-        backgroundColor: 'Orange',
-      },
-      m: {
-        backgroundColor: 'Yellow',
-      },
-      l: {
-        backgroundColor: 'Green',
-      },
-      xl: {
-        backgroundColor: 'Blue',
-      },
-    },
-    box: {
-      padding: 's',
-    },
-  },
-  containerWidth
-);
 
 return (
   <ResponsiveContextProvider width={containerWidth}>
-    <Box ref={ref}>
-      <Flex {...containerResponsiveStyles.flex}>
-        <Box {...containerResponsiveStyles.box}>Hello World</Box>
-      </Flex>
+    <Box>
+      Hello World
     </Box>
   </ResponsiveContextProvider>
 );
 ```
  */
 export const ResponsiveContextProvider = ({
+  width,
   children,
   theme = {},
-  width,
 }: ResponsiveContextProviderProps) => {
   const canvasTheme = useTheme(theme);
   const breakpoints = canvasTheme.canvas.breakpoints.values;
@@ -99,25 +76,20 @@ export const isWithinBreakpoint = (width: number, min: number, max?: number) => 
 };
 
 /**
- * This hook subscribes to the `ResponsiveContextProvider` and will determine whether the current `width` provided from `useResizeObserver` is within a particular `theme` breakpoint. In the example below, if the breakpoint falls in between `medium` (768px) and `large` (1024px), it will write `true`. Otherwise it will write `false`.
+ * This hook subscribes to the `ResponsiveContextProvider` and provides
+  helpful utilities to determine whether the current width is within a particular
+  [theme breakpoint](/getting-started/for-developers/resources/responsive-styling/#canvas-kit-breakpoint-sizes).
+  Developers can use these utilities when creating container-based responsive styles.
  *
  * @example
  * ```tsx
-import {Flex, Box} from '@workday/canvas-kit-react/layout';
+import {Box} from '@workday/canvas-kit-react/layout';
 import {
-  useResizeObserver, ResponsiveContextProvider, useResponsiveContainerStyles
+  ResponsiveContextProvider
 } from '@workday/canvas-kit-react/common';
 
 export const ResonsiveContext = () => {
-  const ref = React.useRef(null);
   const [containerWidth, setWidth] = React.useState(0);
-
-  useResizeObserver({
-    ref: ref,
-    onResize: data => {
-      setWidth(data.containerWidth || 0);
-    },
-  });
 
   const Header = ({children, ...props}) => {
     const {isMedium} = useResponsiveContext();
@@ -131,10 +103,8 @@ export const ResonsiveContext = () => {
 
   return (
     <ResponsiveContextProvider width={containerWidth}>
-      <Box ref={ref}>
-        <Flex>
-          <Header>True or False</Header>
-        </Flex>
+      <Box>
+        <Header>True or False</Header>
       </Box>
     </ResponsiveContextProvider>
   );
@@ -150,15 +120,15 @@ export const useResponsiveContext = () => {
   const isLarge = isWithinBreakpoint(width, breakpoints.l, breakpoints.xl);
   const isExtraLarge = isWithinBreakpoint(width, breakpoints.xl);
   // scoped from the breakpoint and up (think of it as a min-width)
-  const isZeroAndUp = width >= breakpoints.zero;
-  const isSmallAndUp = width >= breakpoints.s;
-  const isMediumAndUp = width >= breakpoints.m;
-  const isLargeAndUp = width >= breakpoints.l;
+  const isZeroAndUp = isWithinBreakpoint(width, breakpoints.zero);
+  const isSmallAndUp = isWithinBreakpoint(width, breakpoints.s);
+  const isMediumAndUp = isWithinBreakpoint(width, breakpoints.m);
+  const isLargeAndUp = isWithinBreakpoint(width, breakpoints.l);
   // scoped from the breakpoint and up (think of it as a max-width)
-  const isSmallAndDown = width <= breakpoints.s;
-  const isMediumAndDown = width <= breakpoints.m;
-  const isLargeAndDown = width <= breakpoints.l;
-  const isExtraLargeAndDown = width <= breakpoints.xl;
+  const isSmallAndDown = isWithinBreakpoint(width, breakpoints.zero, breakpoints.s);
+  const isMediumAndDown = isWithinBreakpoint(width, breakpoints.zero, breakpoints.m);
+  const isLargeAndDown = isWithinBreakpoint(width, breakpoints.zero, breakpoints.l);
+  const isExtraLargeAndDown = isWithinBreakpoint(width, breakpoints.zero, breakpoints.xl);
 
   return {
     width,

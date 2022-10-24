@@ -1,8 +1,9 @@
-import { useTheme, isWithinBreakpoint, breakpointKeys } from "@workday/canvas-kit-react/common";
+import { useTheme, breakpointKeys, CanvasBreakpoints } from "@workday/canvas-kit-react/common";
 import type {
   FlexStyleProps,
   GridProps
 } from "@workday/canvas-kit-react/layout";
+import {isWithinBreakpoint} from '../responsive/responsiveContext'
 
 export type BreakpointKeys = typeof breakpointKeys[number];
 
@@ -16,7 +17,7 @@ type CSSObject<T> = {
   [P in keyof T]: AllStyleProps;
 };
 
-const getSize = (width: number, breakpoints: any) => {
+const getSize = (width: number, breakpoints: CanvasBreakpoints) => {
   const ranges: {[key: string ]: [number, number?]} = {
     'zero': [0, breakpoints.s],
     's': [breakpoints.s, breakpoints.m],
@@ -33,16 +34,16 @@ function getStyles<T>(key: BreakpointKeys, styles: any, responsiveStyles: any,) 
   const breakpointSize = breakpointKeys.indexOf(key);
   for (let i = 0; i <= breakpointSize; i++) {
     const breakpointName = breakpointKeys[i];
-    // classname is key of the style object
-    Object.keys(styles).forEach((classname) => {
-      const { zero, s, m, l, xl, ...base } = styles[classname as keyof T];
-      const breakpointStyles =
-        styles[classname as keyof T][breakpointName] ?? {};
-      const existingStyles = responsiveStyles[classname as keyof T] ?? {};
-      responsiveStyles[classname as keyof T] = {
+    // property is key of the style object
+    Object.keys(styles).forEach((property) => {
+      const { zero, s, m, l, xl, ...base } = styles[property as keyof T];
+      const currentBreakpointStyles =
+        styles[property as keyof T][breakpointName] ?? {};
+      const previouscurrentBreakpointStyles = responsiveStyles[property as keyof T] ?? {};
+      responsiveStyles[property as keyof T] = {
         ...base,
-        ...existingStyles,
-        ...breakpointStyles
+        ...previouscurrentBreakpointStyles,
+        ...currentBreakpointStyles
       };
     });
   }
@@ -97,7 +98,7 @@ const containerResponsiveStyles = useResponsiveStyles(
 
 return (
   <ResponsiveContextProvider width={containerWidth}>
-    <Box ref={ref}>
+    <Box>
       <Flex {...containerResponsiveStyles.flex}>
         <Box {...containerResponsiveStyles.box}>Hello World</Box>
       </Flex>
