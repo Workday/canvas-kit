@@ -58,5 +58,6 @@ export const useSegmentedControlItem = composeHooks(
         width: elemProps.children && `${longest}px`,
       };
     }
-  )
+  ),
+  useListItemRegister
 );
