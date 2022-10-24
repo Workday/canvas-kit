@@ -8,7 +8,7 @@ import {useStatusIndicatorModel} from './hooks';
 
 export interface StatusIndicatorProps extends Partial<ExtractProps<typeof HStack, never>> {
   /**
-   * Children of the Status Indicator. Can contain a `<StatusIndicator.Label>` and or `<StatusIndicator.Icon>`
+   * Children of the `StatusIndicator`. Can contain a `StatusIndicator.Label` and optionally a `StatusIndicator.Icon`.
    */
   children: React.ReactNode;
 }
