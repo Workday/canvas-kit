@@ -393,16 +393,8 @@ import {uploadCloudIcon} from '@workday/canvas-system-icons-web';
 </StatusIndicator>;
 ```
 
-Some key aspects of the component to note include:
-
-- Usage: Best used for helping the user quickly identify the status of a task, action, or page
-  element.
-- Instead of `type` to define the color of the StatusIndicator as we do in main, use `variant`.
-- If your StatusIndicator has overflow text, we've given you an example of how to handle that but
-  strongly discourage having long text. The component will style the text with ellipsis but it's up
-  to the consumer to implement the tooltip.
-- We've introduced a model so that you can control the `emphasis` and `variant` but it's not
-  required and these can be props on the parent component.
+You may still use `StatusIndicator` in the Main package, but note that it will be replaced by
+`StatusIndicator` in the Preview package in the future.
 
 ## Component Deprecations
 
