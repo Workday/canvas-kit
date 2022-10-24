@@ -7,10 +7,10 @@ export type StatusIndicatorEmphasis = 'high' | 'low';
 export const useStatusIndicatorModel = createModelHook({
   defaultConfig: {
     /**
-     * Defines the emphasis of a status indicator
-     * options include: high, low
-     * Having a high emphasis will create more contrast between the background and text colors
-     * Having a low emphasis will create less contrast between the background and text colors
+     * Defines the emphasis of the `StatusIndicator`.
+     * `high` emphasis will create more contrast between the background and text colors.
+     * `low` emphasis will create less contrast between the background and text colors.
+     * @default 'low'
      */
 
     emphasis: 'low' as StatusIndicatorEmphasis,
