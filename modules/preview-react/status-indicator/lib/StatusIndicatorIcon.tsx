@@ -83,6 +83,6 @@ const useStatusIndicatorIcon = createElemPropsHook(useStatusIndicatorModel)(({st
 export const StatusIndicatorIcon = createSubcomponent('span')({
   modelHook: useStatusIndicatorModel,
   elemPropsHook: useStatusIndicatorIcon,
-})<StatusIndicatorIconProps>(({icon, ...elemProps}, Element, model) => {
-  return <SystemIcon as={Element} size={20} role="img" icon={icon} {...elemProps} />;
+})<StatusIndicatorIconProps>((elemProps, Element, model) => {
+  return <SystemIcon as={Element} size={20} role="img" {...elemProps} />;
 });
