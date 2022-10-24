@@ -108,35 +108,37 @@ import {
   useResizeObserver, ResponsiveContextProvider, useResponsiveContainerStyles
 } from '@workday/canvas-kit-react/common';
 
-const ref = React.useRef(null);
-const [containerWidth, setWidth] = React.useState(0);
+export const ResonsiveContext = () => {
+  const ref = React.useRef(null);
+  const [containerWidth, setWidth] = React.useState(0);
 
-useResizeObserver({
-  ref: ref,
-  onResize: data => {
-    setWidth(data.containerWidth || 0);
-  },
-});
+  useResizeObserver({
+    ref: ref,
+    onResize: data => {
+      setWidth(data.containerWidth || 0);
+    },
+  });
 
-const Header = ({children, ...props}) => {
-  const {isMedium} = useResponsiveContext();
+  const Header = ({children, ...props}) => {
+    const {isMedium} = useResponsiveContext();
+    return (
+      <Text as="p" fontSize={20} fontWeight="bold" color="frenchVanilla100" margin={0} {...props}>
+        {children}
+        {isMedium ? 'true' : 'false'}
+      </Text>
+    );
+  };
+
   return (
-    <Text as="p" fontSize={20} fontWeight="bold" color="frenchVanilla100" margin={0} {...props}>
-      {children}
-      {isMedium ? 'true' : 'false'}
-    </Text>
+    <ResponsiveContextProvider width={containerWidth}>
+      <Box ref={ref}>
+        <Flex>
+          <Header>True or False</Header>
+        </Flex>
+      </Box>
+    </ResponsiveContextProvider>
   );
-};
-
-return (
-  <ResponsiveContextProvider width={containerWidth}>
-    <Container ref={ref}>
-      <Flex>
-        <Header>True or False</Header>
-      </Flex>
-    </Container>
-  </ResponsiveContextProvider>
-);
+}
 ```
  */
 export const useResponsiveContext = () => {

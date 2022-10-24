@@ -10,7 +10,13 @@ import {
 import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Select, SelectOption} from '@workday/canvas-kit-react/select';
 
-const HeadingText = ({children, ...props}) => {
+const HeadingText = ({children, ...props}) => (
+  <Text as="p" fontSize={20} fontWeight="bold" color="frenchVanilla100" margin={0} {...props}>
+    {children}
+  </Text>
+);
+
+const HeadingTextResponsive = ({children, ...props}) => {
   const {isMedium} = useResponsiveContext();
   return (
     <Text as="p" fontSize={20} fontWeight="bold" color="frenchVanilla100" margin={0} {...props}>

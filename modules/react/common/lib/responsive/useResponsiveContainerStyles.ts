@@ -29,6 +29,25 @@ const getSize = (width: number, breakpoints: any) => {
   return size as BreakpointKeys;
 }
 
+function getStyles<T>(key: BreakpointKeys, styles: any, responsiveStyles: any,) {
+  const breakpointSize = breakpointKeys.indexOf(key);
+  for (let i = 0; i <= breakpointSize; i++) {
+    const breakpointName = breakpointKeys[i];
+    // classname is key of the style object
+    Object.keys(styles).forEach((classname) => {
+      const { zero, s, m, l, xl, ...base } = styles[classname as keyof T];
+      const breakpointStyles =
+        styles[classname as keyof T][breakpointName] ?? {};
+      const existingStyles = responsiveStyles[classname as keyof T] ?? {};
+      responsiveStyles[classname as keyof T] = {
+        ...base,
+        ...existingStyles,
+        ...breakpointStyles
+      };
+    });
+  }
+}
+
 /**
  * useResponsiveContainerStyles
  *
@@ -88,25 +107,6 @@ return (
 ```
  */
 
-function getStyles<T>(key: BreakpointKeys, styles: any, responsiveStyles: any,) {
-  const breakpointSize = breakpointKeys.indexOf(key);
-  for (let i = 0; i <= breakpointSize; i++) {
-    const breakpointName = breakpointKeys[i];
-    // classname is key of the style object
-    Object.keys(styles).forEach((classname) => {
-      const { zero, s, m, l, xl, ...base } = styles[classname as keyof T];
-      const breakpointStyles =
-        styles[classname as keyof T][breakpointName] ?? {};
-      const existingStyles = responsiveStyles[classname as keyof T] ?? {};
-      responsiveStyles[classname as keyof T] = {
-        ...base,
-        ...existingStyles,
-        ...breakpointStyles
-      };
-    });
-  }
-}
-
 export function useResponsiveContainerStyles<T extends ResponsiveCSSObject<T>>(
   styles: ResponsiveCSSObject<T>,
   width: number,
@@ -115,25 +115,6 @@ export function useResponsiveContainerStyles<T extends ResponsiveCSSObject<T>>(
   const canvasTheme = useTheme(theme);
   const breakpoints = canvasTheme.canvas.breakpoints.values;
   const responsiveStyles = {} as CSSObject<T>;
-
-  // const getStyles = (key: BreakpointKeys) => {
-  //   const breakpointSize = breakpointKeys.indexOf(key);
-  //   for (let i = 0; i <= breakpointSize; i++) {
-  //     const breakpointName = breakpointKeys[i];
-  //     // classname is key of the style object
-  //     Object.keys(styles).forEach((classname) => {
-  //       const { zero, s, m, l, xl, ...base } = styles[classname as keyof T];
-  //       const breakpointStyles =
-  //         styles[classname as keyof T][breakpointName] ?? {};
-  //       const existingStyles = responsiveStyles[classname as keyof T] ?? {};
-  //       responsiveStyles[classname as keyof T] = {
-  //         ...base,
-  //         ...existingStyles,
-  //         ...breakpointStyles
-  //       };
-  //     });
-  //   }
-  // }
 
   const size = getSize(width, breakpoints);
   getStyles(size, styles, responsiveStyles);

@@ -1,6 +1,6 @@
 import React from 'react';
 import useResizeObserver from 'use-resize-observer';
-import {Box} from '../../layout';
+import {Box, Flex} from '../../layout';
 import {
   useResponsiveContext,
   isWithinBreakpoint,
@@ -27,13 +27,32 @@ describe('Within Breakpoint function', () => {
 
 describe('Responsive Context Hook', () => {
   it('should return true if width is within breakpoint', () => {
-    const {isMedium} = useResponsiveContext();
-    const width = 800;
-    const expected = () => {
-      if (isMedium) {
-        return true;
-      }
+    const containerWidth = 800;
+
+    const ResponsiveContextTest = () => {
+      const ref = React.useRef(null);
+
+      const Header = ({children, ...props}) => {
+        const {isMedium} = useResponsiveContext();
+        return (
+          <Box as="p" {...props}>
+            {children}
+            {isMedium ? 'true' : 'false'}
+          </Box>
+        );
+      };
+
+      return (
+        <ResponsiveContextProvider width={containerWidth}>
+          <Box ref={ref}>
+            <Flex>
+              <Header>True or False</Header>
+            </Flex>
+          </Box>
+        </ResponsiveContextProvider>
+      );
     };
-    expect();
+
+    expect(ResponsiveContextTest).toBe();
   });
 });
