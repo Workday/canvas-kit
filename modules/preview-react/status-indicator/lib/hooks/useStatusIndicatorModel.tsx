@@ -15,7 +15,8 @@ export const useStatusIndicatorModel = createModelHook({
 
     emphasis: 'low' as StatusIndicatorEmphasis,
     /**
-     * Defines the color of the status indicator. Options include: gray, green, blue, red, orange, transparent
+     * Defines the color of the `StatusIndicator`.
+     * @default 'gray'
      */
     variant: 'gray' as StatusIndicatorVariant,
   },
