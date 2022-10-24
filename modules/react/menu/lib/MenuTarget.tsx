@@ -22,8 +22,8 @@ const useMenuTargetBase = createElemPropsHook(useMenuModel)(model => {
     onKeyDown(event: React.KeyboardEvent) {
       // eslint-disable-next-line default-case
       switch (event.key) {
-        case 'Down':
-        case 'Up':
+        case 'ArrowDown':
+        case 'ArrowUp': // this follow the keys for modern browsers https://developer.mozilla.org/en-US/docs/Web/API/UI_Events/Keyboard_event_key_values#navigation_keys
           model.events.show(event);
       }
     },
