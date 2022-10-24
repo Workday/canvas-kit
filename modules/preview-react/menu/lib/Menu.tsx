@@ -240,8 +240,6 @@ export class DeprecatedMenu extends React.Component<DeprecatedMenuProps, Depreca
       switch (event.key) {
         case 'ArrowUp':
         case 'ArrowDown':
-        case 'Down': // IE/Edge specific value
-        case 'Up': // IE/Edge specific value
           const direction = event.key === 'ArrowUp' ? -1 : 1;
           isShortcut = true;
           const nextIndex = this.state.selectedItemIndex + direction;
