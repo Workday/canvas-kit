@@ -24,3 +24,16 @@ describe('Within Breakpoint function', () => {
     });
   });
 });
+
+describe('Responsive Context Hook', () => {
+  it('should return true if width is within breakpoint', () => {
+    const {isMedium} = useResponsiveContext();
+    const width = 800;
+    const expected = () => {
+      if (isMedium) {
+        return true;
+      }
+    };
+    expect();
+  });
+});
