@@ -315,14 +315,15 @@ export const Basic = (props: {theme?: PartialEmotionCanvasTheme}) => (
 );
 ```
 
-The following code-moddable changes have been made:
+For users who are currently using our testing utilities and components, the following code-moddable
+changes have been made:
 
 - `ComponentStatesTable`, `permutateProps`, `StaticStates` and `propTypes` have been moved to
   `@workday/canvas-kit-react/testing`.
-- `StaticStates` and `convertToStaticStates` have been moved from @workday/canvas-kit-react/common
+- `StaticStates` and `convertToStaticStates` have been moved from `@workday/canvas-kit-react/common`
   to `@workday/canvas-kit-react/testing`
 
-🤖 All the above changes can be handled by running codemod
+🤖 The codemod will handle all of the changes above for you automatically.
 
 ## New Components
 
