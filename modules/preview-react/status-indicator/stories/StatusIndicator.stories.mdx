@@ -80,10 +80,9 @@ The background color dictated by the `variant` will be dark or light based on th
 
 #### Usage
 
-`StatusIndicator` is a container component it represents a `HStack` to evenly space elements. This
-container also sets a default max width of `200px`. There are two properties that can be defined to
-set different variants. `emphasis` defines the contrast between text and background. `variant`
-defines the background color of the `StatusIndicator`.
+`StatusIndicator` is a container component which renders an
+[`HStack`](/components/layout/stack/#hstack) under the hood to apply spacing evenly between its
+children. It has a default maximum width of `200px`.
 
 ```tsx
 <StatusIndicator emphasis="low" variant="blue">
