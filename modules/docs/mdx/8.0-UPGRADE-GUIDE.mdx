@@ -373,22 +373,22 @@ package. `StatusIndicator` is best used for helping the user quickly identify th
 action, or page element.
 
 ```tsx
-// StatusIndicator in main
+// StatusIndicator (Main)
 import {StatusIndicator} from '@workday/canvas-kit-react/status-indicator';
+import {uploadCloudIcon} from '@workday/canvas-system-icons-web';
 <StatusIndicator
   emphasis={StatusIndicator.Emphasis.Low}
-  label="unpublished"
-  type={StatusIndicator.Type.Gray}
+  label="Published"
+  type={StatusIndicator.Type.Green}
+  icon={uploadCloudIcon}
 />;
-```
 
-```tsx
-// New compound component StatusIndicator in preview
+// StatusIndicator (Preview)
 import {StatusIndicator} from '@workday/canvas-kit-preview-react/status-indicator';
 import {uploadCloudIcon} from '@workday/canvas-system-icons-web';
 
 <StatusIndicator emphasis="low" variant="green">
-  <StatusIndicator.Label>Lorem Impsum Dolor</StatusIndicator.Label>
+  <StatusIndicator.Label>Published</StatusIndicator.Label>
   <StatusIndicator.Icon icon={uploadCloudIcon} />
 </StatusIndicator>;
 ```
