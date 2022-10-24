@@ -22,7 +22,7 @@ export type OtherStyleProps = {
   objectFit?: Property.ObjectFit;
   /** sets [CSS object-position property](https://developer.mozilla.org/en-US/docs/Web/CSS/object-position) */
   objectPosition?: Property.ObjectPosition;
-  /** sets [CSS opcity](https://developer.mozilla.org/en-US/docs/Web/CSS/opacity) */
+  /** sets [CSS opacity](https://developer.mozilla.org/en-US/docs/Web/CSS/opacity) */
   opacity?: Property.Opacity;
   /** sets [CSS outline property](https://developer.mozilla.org/en-US/docs/Web/CSS/outline) */
   outline?: Property.Outline;
