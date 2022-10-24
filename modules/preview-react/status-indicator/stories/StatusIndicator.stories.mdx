@@ -100,8 +100,8 @@ Undocumented props are spread to the underlying `HStack`.
 
 #### Usage
 
-`StatusIndicator.Label` is a `<Text/>` component. You can use and extend all props that come from
-`Text`. By default it will apply ellipsis styles when the contents of it exceed the max width.
+`StatusIndicator.Label` renders [`Text`](/components/text/text/) under the hood. It will apply an
+ellipsis if its contents exceed the component's maximum width.
 
 ```tsx
 <StatusIndicator.Label>{/*The text to be rendered*/}</StatusIndicator.Label>
