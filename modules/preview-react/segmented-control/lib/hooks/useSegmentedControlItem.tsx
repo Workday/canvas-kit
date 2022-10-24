@@ -16,7 +16,6 @@ import {useSegmentedControlModel} from './useSegmentedControlModel';
 
 export const useSegmentedControlItem = composeHooks(
   useListItemSelect,
-  useListItemRegister,
   createElemPropsHook(useOverflowListModel)(
     (model, ref?: React.Ref<HTMLElement>, elemProps: {'data-id'?: string} = {}) => {
       const {elementRef, localRef} = useLocalRef(ref);
