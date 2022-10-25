@@ -266,7 +266,64 @@ return (
 
 ### Testing
 
-> Coming Soon (https://github.com/Workday/canvas-kit/pull/1800)
+We've added a new `@workday/canvas-kit-react/testing` slash import to house our testing utilities
+and components. You may find them useful for testing the different visual states of your components.
+
+View the [Testing](/utilities/testing/) documentation for more information. The example below
+creates a visual states table of our `DeleteButton`. Each row renders a different size of
+`DeleteButton` with each column representing different combinations of the `disabled`, `hover`, and
+`active` states.
+
+```tsx
+import {
+  ComponentStatesTable,
+  StaticStates,
+  permutateProps,
+} from '@workday/canvas-kit-react/testing';
+import {PartialEmotionCanvasTheme} from '@workday/canvas-kit-react/common';
+
+import {DeleteButton} from '@workday/canvas-kit-react/button';
+
+// Creates a columns for different states of a button
+export const stateTableColumnProps = [
+  {label: 'Default ', props: {className: '', disabled: false}},
+  {label: 'Default Disabled', props: {className: '', disabled: true}},
+  {label: 'Hover ', props: {className: 'hover', disabled: false}},
+  {label: 'Hover Disabled', props: {className: 'hover', disabled: true}},
+  {label: 'Focus ', props: {className: 'focus', disabled: false}},
+  {label: 'Focus Hover ', props: {className: 'focus hover', disabled: false}},
+  {label: 'Active ', props: {className: 'active', disabled: false}},
+  {label: 'Active Hover ', props: {className: 'active hover', disabled: false}},
+];
+
+export const Basic = (props: {theme?: PartialEmotionCanvasTheme}) => (
+  <StaticStates theme={props.theme}>
+    <ComponentStatesTable
+      rowProps={permutateProps({
+        // creates rows with values that get passed to the button
+        size: [
+          {value: 'small', label: 'Small'},
+          {value: 'medium', label: 'Medium'},
+          {value: 'large', label: 'Large'},
+        ],
+      })}
+      columnProps={stateTableColumnProps}
+    >
+      {props => <DeleteButton {...props}>Test</DeleteButton>}
+    </ComponentStatesTable>
+  </StaticStates>
+);
+```
+
+For users who are currently using our testing utilities and components, the following code-moddable
+changes have been made:
+
+- `ComponentStatesTable`, `permutateProps`, `StaticStates` and `propTypes` have been moved to
+  `@workday/canvas-kit-react/testing`.
+- `StaticStates` and `convertToStaticStates` have been moved from `@workday/canvas-kit-react/common`
+  to `@workday/canvas-kit-react/testing`
+
+🤖 The codemod will handle all of the changes above for you automatically.
 
 ## New Components
 
@@ -303,13 +360,65 @@ text with built-in support for our Canvas type tokens.
 
 ### Segmented Control (Preview)
 
-> Coming Soon (https://github.com/Workday/canvas-kit/pull/1819)
+Redesigned Segmented Control has been added to
+[Preview package](https://github.com/Workday/canvas-kit/pull/1819). The main functionality change
+between this component and one from main package is supporting a text variants of buttons. The
+component has a new design that aligns to the Canvas Kit system.
+
+Some key aspects of the component to note include:
+
+- Usage: Best used for switching between different views of the same content. Use Tabs for switching
+  between content that is related but not the same. Segments are mutually exclusive and can contain
+  text and/or icons.
+- Shape: The component will continue to feature squared corners to visually distinguish these
+  controls and their purpose from standard buttons.
+- Color: Active/selected segment is white, French Vanilla 100 with a gray, Licorice 200 border
+  against a light gray, Soap 200 container to make these controls less prominent than standard
+  buttons.
+- Tooltips: Canvas Tooltips showing text labels will be added for Icon-only variants to improve
+  accessibility for ambiguous icons.
+- Container: A container around the Segmented Control component has been added. Since it will be
+  released as a net-new component in Preview and no updates will be made to the current Segmented
+  Control component in the main package for v8, this update will not impact design or development.
+
+Since it is a net-new component in the preview package and no updates will be made to the current
+Segmented Control component in the main package for v8, this update will not impact design or
+development.
 
 ---
 
 ### Status Indicator (Preview)
 
-> Coming Soon (https://github.com/Workday/canvas-kit/issues/1637)
+We've added a new version of
+[`StatusIndicator`](https://workday.github.io/canvas-kit/?path=/docs/preview-status-indicator-react--basic)
+which has been redesigned as a
+[compound component](/getting-started/for-developers/resources/compound-components/) to the Preview
+package. `StatusIndicator` is best used for helping the user quickly identify the status of a task,
+action, or page element.
+
+```tsx
+// StatusIndicator (Main)
+import {StatusIndicator} from '@workday/canvas-kit-react/status-indicator';
+import {uploadCloudIcon} from '@workday/canvas-system-icons-web';
+<StatusIndicator
+  emphasis={StatusIndicator.Emphasis.Low}
+  label="Published"
+  type={StatusIndicator.Type.Green}
+  icon={uploadCloudIcon}
+/>;
+
+// StatusIndicator (Preview)
+import {StatusIndicator} from '@workday/canvas-kit-preview-react/status-indicator';
+import {uploadCloudIcon} from '@workday/canvas-system-icons-web';
+
+<StatusIndicator emphasis="low" variant="green">
+  <StatusIndicator.Label>Published</StatusIndicator.Label>
+  <StatusIndicator.Icon icon={uploadCloudIcon} />
+</StatusIndicator>;
+```
+
+You may still use `StatusIndicator` in the Main package, but note that it will be replaced by
+`StatusIndicator` in the Preview package in the future.
 
 ## Component Deprecations
 
