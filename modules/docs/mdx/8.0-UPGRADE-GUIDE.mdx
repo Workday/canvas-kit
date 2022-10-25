@@ -359,7 +359,30 @@ text with built-in support for our Canvas type tokens.
 
 ### Segmented Control (Preview)
 
-> Coming Soon (https://github.com/Workday/canvas-kit/pull/1819)
+Redesigned Segmented Control has been added to
+[Preview package](https://github.com/Workday/canvas-kit/pull/1819). The main functionality change
+between this component and one from main package is supporting a text variants of buttons. The
+component has a new design that aligns to the Canvas Kit system.
+
+Some key aspects of the component to note include:
+
+- Usage: Best used for switching between different views of the same content. Use Tabs for switching
+  between content that is related but not the same. Segments are mutually exclusive and can contain
+  text and/or icons.
+- Shape: The component will continue to feature squared corners to visually distinguish these
+  controls and their purpose from standard buttons.
+- Color: Active/selected segment is white, French Vanilla 100 with a gray, Licorice 200 border
+  against a light gray, Soap 200 container to make these controls less prominent than standard
+  buttons.
+- Tooltips: Canvas Tooltips showing text labels will be added for Icon-only variants to improve
+  accessibility for ambiguous icons.
+- Container: A container around the Segmented Control component has been added. Since it will be
+  released as a net-new component in Preview and no updates will be made to the current Segmented
+  Control component in the main package for v8, this update will not impact design or development.
+
+Since it is a net-new component in the preview package and no updates will be made to the current
+Segmented Control component in the main package for v8, this update will not impact design or
+development.
 
 ---
 
