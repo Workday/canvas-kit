@@ -16,7 +16,7 @@ describe('FlexItem Style Props Function', () => {
   it('should handle generic props (string and number)', () => {
     const props = {
       flexGrow: 0,
-      flexShrink: '1',
+      flexShrink: 1,
       flexBasis: '330px',
       justifySelf: 'flex-start',
       alignSelf: 'center',

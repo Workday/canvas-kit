@@ -1,8 +1,8 @@
 import React from 'react';
 
-import {CanvasProvider, ContentDirection, StaticStates} from '@workday/canvas-kit-react/common';
+import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
+import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
 
-import {ComponentStatesTable} from '@workday/canvas-kit-labs-react/common';
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
 
 import {Popup, usePopupModel} from '@workday/canvas-kit-react/popup';

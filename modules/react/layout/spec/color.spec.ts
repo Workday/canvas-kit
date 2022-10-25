@@ -16,10 +16,9 @@ describe('Color Style Props Function', () => {
 
   it('should handle generic props (string)', () => {
     const props = {
-      background: 'content-box radial-gradient(crimson, skyblue)',
       backgroundColor: 'tomato',
-      backgroundImage: 'url("./workday/canvas/coffee.svg");',
       color: 'palevioletred',
+      opacity: 0.6,
     };
     const expected = props;
     const colorStyles = color(props);
@@ -29,12 +28,10 @@ describe('Color Style Props Function', () => {
 
   it('should translate tokens to style values', () => {
     const props = {
-      background: 'soap500',
       backgroundColor: 'frenchVanilla100',
       color: 'blackPepper400',
     };
     const expected = {
-      background: '#ced3d9',
       backgroundColor: '#ffffff',
       color: '#333333',
     };

@@ -53,7 +53,7 @@ const Container = styled('span')<CountBadgeProps>(
   })
 );
 
-const CountBadge = (props: CountBadgeProps) => {
+export const CountBadge = (props: CountBadgeProps) => {
   const {variant = 'default', count = 0, limit = 1000, ...elemProps} = props;
 
   const formattedCount = count < limit ? `${count}` : `${limit - 1}+`;
@@ -64,5 +64,3 @@ const CountBadge = (props: CountBadgeProps) => {
     </Container>
   );
 };
-
-export default CountBadge;

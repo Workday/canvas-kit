@@ -1,23 +1,35 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
 
-import {MenuItemProps} from './MenuItem';
+import {DeprecatedMenuItemProps} from './MenuItem';
 import {Card} from '@workday/canvas-kit-react/card';
 import {commonColors, space, borderRadius} from '@workday/canvas-kit-react/tokens';
 import {hideMouseFocus, GrowthBehavior, generateUniqueId} from '@workday/canvas-kit-react/common';
 
-export interface MenuProps extends GrowthBehavior, React.HTMLAttributes<HTMLUListElement> {
+/**
+ * ### Deprecated Menu
+ *
+ * As of Canvas Kit v8, Menu is being soft-deprecated.
+ * It will be hard-deprecated (completely removed) in v9. Please see the
+ * [upgrade guide](https://workday.github.io/canvas-kit/?path=/story/welcome-upgrade-guides-v8-0--page)
+ * for more information.
+ */
+export interface DeprecatedMenuProps
+  extends GrowthBehavior,
+    React.HTMLAttributes<HTMLUListElement> {
   /**
-   * The MenuItem children of the Menu (must be at least one). Also accepts other components which share the same interface as `MenuItem`.
+   * The DeprecatedMenuItem children of the DeprecatedMenu (must be at least one). Also accepts other components which share the same interface as `DeprecatedMenuItem`.
    */
-  children?: React.ReactElement<MenuItemProps> | React.ReactElement<MenuItemProps>[];
+  children?:
+    | React.ReactElement<DeprecatedMenuItemProps>
+    | React.ReactElement<DeprecatedMenuItemProps>[];
   /**
-   * If true, set the Menu to the open state. Useful for showing and hiding the Menu from a parent component such as a menu button.
+   * If true, set the DeprecatedMenu to the open state. Useful for showing and hiding the DeprecatedMenu from a parent component such as a menu button.
    * @default true
    */
   isOpen?: boolean;
   /**
-   * The width of the Menu. If no value is provided, the Menu will collapse around its content.
+   * The width of the DeprecatedMenu. If no value is provided, the DeprecatedMenu will collapse around its content.
    */
   width?: number | string;
   /**
@@ -25,7 +37,7 @@ export interface MenuProps extends GrowthBehavior, React.HTMLAttributes<HTMLULis
    */
   onSelect?: () => void;
   /**
-   * The function called when the Menu should close. This is called after a menu item is selected or if the escape shortcut key is used. This will not fire if the menu item sets `shouldClose` to false.
+   * The function called when the DeprecatedMenu should close. This is called after a menu item is selected or if the escape shortcut key is used. This will not fire if the menu item sets `shouldClose` to false.
    */
   onClose?: () => void;
   /**
@@ -33,16 +45,24 @@ export interface MenuProps extends GrowthBehavior, React.HTMLAttributes<HTMLULis
    */
   initialSelectedItem?: number;
   /**
-   * The unique id of the Menu used for ARIA and HTML `id` attributes.
+   * The unique id of the DeprecatedMenu used for ARIA and HTML `id` attributes.
    */
   id?: string;
   /**
-   * The HTML `id` of the element that labels the Menu. Often used with menu buttons.
+   * The HTML `id` of the element that labels the DeprecatedMenu. Often used with menu buttons.
    */
   'aria-labelledby'?: string;
 }
 
-export interface MenuState {
+/**
+ * ### Deprecated Menu State
+ *
+ * As of Canvas Kit v8, Menu is being soft-deprecated.
+ * It will be hard-deprecated (completely removed) in v9. Please see the
+ * [upgrade guide](https://workday.github.io/canvas-kit/?path=/story/welcome-upgrade-guides-v8-0--page)
+ * for more information.
+ */
+export interface DeprecatedMenuState {
   selectedItemIndex: number;
 }
 
@@ -57,14 +77,22 @@ const List = styled('ul')({
   ...hideMouseFocus,
 });
 
-export default class Menu extends React.Component<MenuProps, MenuState> {
+/**
+ * ### Deprecated Menu
+ *
+ * As of Canvas Kit v8, this component is being soft-deprecated.
+ * It will be hard-deprecated (completely removed) in v9. Please see the
+ * [upgrade guide](https://workday.github.io/canvas-kit/?path=/story/welcome-upgrade-guides-v8-0--page)
+ * for more information.
+ */
+export class DeprecatedMenu extends React.Component<DeprecatedMenuProps, DeprecatedMenuState> {
   private id = generateUniqueId();
   private animateId!: number;
 
   private menuRef: React.RefObject<HTMLUListElement>;
   private firstCharacters!: string[];
 
-  constructor(props: MenuProps) {
+  constructor(props: DeprecatedMenuProps) {
     super(props);
     this.menuRef = React.createRef();
 
@@ -79,7 +107,7 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
     };
   }
 
-  componentDidUpdate(prevProps: MenuProps) {
+  componentDidUpdate(prevProps: DeprecatedMenuProps) {
     if (this.props.children !== prevProps.children) {
       this.setFirstCharacters();
       this.setInitialSelectedItem();
@@ -95,6 +123,13 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
   }
 
   componentDidMount() {
+    console.warn(
+      `This component is being deprecated and will be removed in Canvas Kit V9.\n
+      For more information, please see the V8 upgrade guide:\n
+      https://workday.github.io/canvas-kit/?path=/story/welcome-upgrade-guides-v8-0--page
+      `
+    );
+
     this.setFirstCharacters();
     this.setInitialSelectedItem();
   }
@@ -138,7 +173,7 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
               if (!React.isValidElement(menuItem)) {
                 return;
               }
-              let itemId = null;
+              let itemId;
               if (!menuItem.props.isHeader) {
                 interactiveItemIndex = (interactiveItemIndex ?? -1) + 1;
                 itemId = `${id}-${interactiveItemIndex}`;
@@ -182,7 +217,7 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
     let nextSelectedIndex = 0;
     let isShortcut = false;
     const itemCount = children.filter(child => {
-      return !(child as React.ReactElement<MenuItemProps>)?.props?.isHeader;
+      return !(child as React.ReactElement<DeprecatedMenuItemProps>)?.props?.isHeader;
     }).length;
     const firstItem = 0;
     const lastItem = itemCount - 1;
@@ -205,8 +240,6 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
       switch (event.key) {
         case 'ArrowUp':
         case 'ArrowDown':
-        case 'Down': // IE/Edge specific value
-        case 'Up': // IE/Edge specific value
           const direction = event.key === 'ArrowUp' ? -1 : 1;
           isShortcut = true;
           const nextIndex = this.state.selectedItemIndex + direction;
@@ -239,7 +272,9 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
         case ' ':
         case 'Enter':
           nextSelectedIndex = this.state.selectedItemIndex;
-          const child = children[this.state.selectedItemIndex] as React.ReactElement<MenuItemProps>;
+          const child = children[this.state.selectedItemIndex] as React.ReactElement<
+            DeprecatedMenuItemProps
+          >;
           this.handleClick(event, child.props);
           isShortcut = true;
           break;
@@ -256,11 +291,11 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
 
   private handleClick = (
     event: React.MouseEvent | React.KeyboardEvent,
-    menuItemProps: MenuItemProps
+    menuItemProps: DeprecatedMenuItemProps
   ): void => {
     /* istanbul ignore next line for coverage */
     if (menuItemProps.isDisabled) {
-      // You should only hit this point if you are using a custom MenuItem implementation.
+      // You should only hit this point if you are using a custom DeprecatedMenuItem implementation.
       return;
     }
     if (menuItemProps.onClick) {
@@ -292,7 +327,7 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
   private setFirstCharacters = (): void => {
     const getFirstCharacter = (child: React.ReactNode): string => {
       let character = '';
-      if (!child || typeof child === 'boolean' || child === {}) {
+      if (!child || typeof child === 'boolean') {
         character = '';
       } else if (typeof child === 'string' || typeof child === 'number') {
         character = child
@@ -316,7 +351,7 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
     };
 
     const firstCharacters = React.Children.map(this.props.children, child => {
-      if ((child as React.ReactElement<MenuItemProps>)?.props?.isHeader) {
+      if ((child as React.ReactElement<DeprecatedMenuItemProps>)?.props?.isHeader) {
         return;
       }
       return getFirstCharacter(child);
