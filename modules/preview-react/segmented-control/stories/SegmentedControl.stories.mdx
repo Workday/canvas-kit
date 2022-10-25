@@ -23,10 +23,9 @@ import {
 
 Segmented Control is a
 [compound component](/getting-started/for-developers/resources/compound-components/) that represents
-a linear group of two, three or four buttons allowing the selection of a specific value. This is a
-controlled component.
+a linear group of multiple buttons allowing the selection of a specific value.
 
-[> Workday Design Reference](https://design.workday.com/components/buttons/action-bar)
+[> Workday Design Reference](https://design.workday.com/components/buttons/segmented-control)
 
 ## Installation
 
@@ -38,61 +37,85 @@ yarn add @workday/canvas-kit-preview-react
 
 ### Basic Example
 
-In a basic example of a `SegmentedControl` there are four icon buttons in group. Each button is
-paired with a tooltip to explain the button function in text. Default values of `SegmentedControl`
-are specified for size (as `medium`) and orientation (as `horizontal`). All buttons should have the
-same type and only one of them can be active at a time.
-
 `SegmentedControl` includes a container `SegmentedControl` component and the following
-subcomponents: `SegmentedControl.List` which contains a `SegmentedControl.Item`.
+subcomponents: `SegmentedControl.List` and `SegmentedControl.Item`.
+
+The example below contains a `SegmentedControl` with four icon-only buttons. Each button is rendered
+using a `SegmentedControl.Item` and is paired with a tooltip describing the button's function. Only
+one button can be active at a time.
 
 <ExampleCodeBlock code={Basic} />
 
-### Variations Example
+Note that you must provide `SegmentedControl.List` with an `aria-label` prop for accessibility
+reasons.
 
-`SegmentedControl` can be used with diferent buttons: text only, text with icon or icon only.
+### Variations
 
-#### Text And Icon
+`SegmentedControl` supports three variations based on whether or not its `SegmentedControl.Item`
+components have an `icon` prop and/or text content: icon-only, text-only, and text-and-icon.
 
-<ExampleCodeBlock code={TextAndIcon} />
+All `SegmentedControl.Item` components within a given `SegmentedControl` must be of the same
+variation.
 
-#### Text Only
+#### Icon-Only
 
-<ExampleCodeBlock code={TextOnly} />
+To render an icon-only `SegmentedControl`, apply the `icon` prop to `SegmentedControl.Item` and do
+not provide it with text content. Refer to the [basic example](#basic-example) above for an instance
+of an icon-only `SegmentedControl`.
 
-#### Icon Only (vertical)
-
-`SegmentedControl` icon only buttons can be placed horizontally or vertically. Be aware that
-vertical orientation must be used only for icon only buttons.
+The icon-only variation is the only variation which supports a vertical orientation in addition to
+the default horizontal orientation. Set the `orientation` prop of `SegmentedControl` to `vertical`
+to configure the component to render vertically.
 
 <ExampleCodeBlock code={Vertical} />
 
-### Sizes Example
+#### Text-Only
 
-`SegmentedControl` has three different size: `small`, `medium` (default size) and `large`.
+To render a text-only `SegmentedControl`, omit the `icon` prop from `SegmentedControl.Item` and
+provide it with text content.
+
+<ExampleCodeBlock code={TextOnly} />
+
+#### Text-and-Icon
+
+To render a text-and-icon `SegmentedControl`, apply the `icon` prop to `SegmentedControl.Item` and
+provide it with text content.
+
+<ExampleCodeBlock code={TextAndIcon} />
+
+### Sizes
+
+`SegmentedControl` accepts a `size` prop which supports the following values:
+
+- `small`
+- `medium` (Default)
+- `large`
 
 <ExampleCodeBlock code={Sizes} />
 
-### Disabled Example
+### Disabled
 
-`SegmentedControl`can be disabled by adding`disabled` prop to the whole container. This will disable
-all buttons.
+Set the `disabled` prop of `SegmentedControl` to disable the entire component including its buttons.
 
 <ExampleCodeBlock code={Disabled} />
 
-### RTL Example
+### Right-to-Left (RTL)
 
 `SegmentedControl` supports right-to-left languages when specified in the `CanvasProvider` `theme`.
 
 <ExampleCodeBlock code={RTL} />
 
-### Dynamic Items Example
+### Dynamic Items
 
-The `SegmentedControl.Item` component takes in an optional `index` property if you want to specify
-the position of a button. If not defined, by default it will append items to the end. In this
-example, our items are stored as an array in the state.
+`SegmentedControl` supports a
+[dynamic API](/getting-started/for-developers/resources/collection-api/#dynamic-items) where instead
+of statically providing the JSX for each `SegmentedControl.Item`, you pass an array of `items` in
+the `model` state and provide a render function to display the items.
 
 <ExampleCodeBlock code={Dynamic} />
+
+Note that `SegmentedControl.Item` accepts an optional `index` prop if you want to specify the
+position of the item. Items are appended to the end by default.
 
 ## Components
 
@@ -108,7 +131,8 @@ represent a real element.
 <SegmentedControl items={[]}>{/* Child components */}</SegmentedControl>
 ```
 
-Alternatively, you may pass in a model using the hoisted model pattern.
+Alternatively, you may pass in a model using the
+[hoisted model pattern](/getting-started/for-developers/resources/compound-components/#configuring-a-model).
 
 ```tsx
 const model = useSegmentedControlModel({
@@ -129,8 +153,8 @@ passed to `SegmentedControl` will be ignored.
 
 #### Usage
 
-`SegmentedControl.List` is a `Stack` element. It is a container for `SegmentedControl.Item`
-subcomponents.
+`SegmentedControl.List` renders [`Stack`](/components/layout/stack/) under the hood. It is a
+container for `SegmentedControl.Item` subcomponents.
 
 ```tsx
 <SegmentedControl.List>{/* SegmentedControl.Items */}</SegmentedControl.List>
@@ -138,7 +162,7 @@ subcomponents.
 
 #### Props
 
-`SegmentedControl.List` requires to set `aria-label` prop. Undocumented props are spread to the
+`SegmentedControl.List` requires the `aria-label` prop. Undocumented props are spread to the
 underlying `Stack` element.
 
 <ArgsTable of={SegmentedControl.List} />
@@ -147,7 +171,7 @@ underlying `Stack` element.
 
 #### Usage
 
-`SegmentedControl.Item` is a `button` element built on `BaseButton`. `SegmentedControl.Item` has
+`SegmentedControl.Item` is a `button` element built on `BaseButton`. `SegmentedControl.Item` has a
 `data-id` prop to handle `onSelect` properly.
 
 ```tsx
@@ -156,7 +180,7 @@ underlying `Stack` element.
 
 #### Props
 
-Undocumented props are spread to the underlying `BaseButton` component.
+Undocumented props are spread to the underlying `BaseButton`.
 
 <ArgsTable of={SegmentedControl.Item} />
 
