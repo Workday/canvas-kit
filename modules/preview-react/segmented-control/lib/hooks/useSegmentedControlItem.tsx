@@ -10,16 +10,20 @@ import {
   useListItemRegister,
   isSelected,
   useListItemSelect,
-  useOverflowListModel,
 } from '@workday/canvas-kit-react/collection';
 import {useSegmentedControlModel} from './useSegmentedControlModel';
 
 export const useSegmentedControlItem = composeHooks(
   useListItemSelect,
-  createElemPropsHook(useOverflowListModel)(
-    (model, ref?: React.Ref<HTMLElement>, elemProps: {'data-id'?: string} = {}) => {
+  createElemPropsHook(useSegmentedControlModel)(
+    (
+      model,
+      ref?: React.Ref<HTMLElement>,
+      elemProps: {'data-id'?: string; children?: React.ReactNode} = {}
+    ) => {
       const {elementRef, localRef} = useLocalRef(ref);
       const name = elemProps['data-id'] || '';
+      const id = `${model.state.id}-${name}`;
 
       useMountLayout(() => {
         if (localRef.current) {
@@ -38,26 +42,33 @@ export const useSegmentedControlItem = composeHooks(
         };
       });
 
-      return {ref: elementRef};
-    }
-  ),
-  createElemPropsHook(useSegmentedControlModel)(
-    ({state}, _, elemProps: {'data-id'?: string; children?: React.ReactNode} = {}) => {
-      const name = elemProps['data-id'] || '';
-      const id = `${state.id}-${name}`;
-
-      const selected = !!name && isSelected(name, state);
-      const [longest] = Object.keys(state.itemWidthCache)
-        .map(e => state.itemWidthCache[e])
+      const selected = !!name && isSelected(name, model.state);
+      const [longest] = Object.keys(model.state.itemWidthCache)
+        .map(e => model.state.itemWidthCache[e])
         .sort((a, b) => (a < b ? 1 : -1));
 
       return {
+        ref: elementRef,
         id,
         'aria-pressed': selected,
-        disabled: state.disabled || undefined,
+        disabled: model.state.disabled || undefined,
         width: elemProps.children && `${longest}px`,
       };
     }
   ),
-  useListItemRegister
+  useListItemRegister,
+  createElemPropsHook(useSegmentedControlModel)(
+    (
+      {state},
+      _ref,
+      elemProps: {
+        disabled?: boolean;
+      } = {}
+    ) => {
+      return {
+        // override the default disabled functionality of `useListItemRegister`
+        disabled: elemProps.disabled || state.disabled ? true : undefined,
+      };
+    }
+  )
 );
