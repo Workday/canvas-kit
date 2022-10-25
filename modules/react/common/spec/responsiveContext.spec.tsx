@@ -9,10 +9,10 @@ describe('isWithinBreakpoint', () => {
 
       expect(withinBreakpoint).toBe(false);
     });
-    it('should return false when a width is over the breakpoint', () => {
+    it('should return true when a width is over the breakpoint', () => {
       const withinBreakpoint = isWithinBreakpoint(1000, breakpoints.m);
 
-      expect(withinBreakpoint).toBe(false);
+      expect(withinBreakpoint).toBe(true);
     });
     it('should return false when a negative width is provided', () => {
       const withinBreakpoint = isWithinBreakpoint(-100, breakpoints.m);

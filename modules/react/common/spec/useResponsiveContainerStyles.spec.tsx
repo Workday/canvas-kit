@@ -10,7 +10,7 @@ describe('useResponsiveContainerStyles', () => {
 
       const result = {};
 
-      expect(responsiveStyles).toBe(result);
+      expect(responsiveStyles).toStrictEqual(result);
     });
   });
   context('When the hook receives only base styles', () => {
@@ -31,7 +31,7 @@ describe('useResponsiveContainerStyles', () => {
         },
       };
 
-      expect(responsiveStyles).toBe(result);
+      expect(responsiveStyles).toStrictEqual(result);
     });
   });
   context('When the hook receives only responsive styles', () => {
@@ -52,7 +52,7 @@ describe('useResponsiveContainerStyles', () => {
         },
       };
 
-      expect(responsiveStyles).toBe(result);
+      expect(responsiveStyles).toStrictEqual(result);
     });
   });
   context('When the hook receives base and responsive styles', () => {
@@ -79,7 +79,7 @@ describe('useResponsiveContainerStyles', () => {
         },
       };
 
-      expect(responsiveStyles).toBe(result);
+      expect(responsiveStyles).toStrictEqual(result);
     });
   });
   context('When the hook receives base and nested responsive styles', () => {
@@ -103,7 +103,7 @@ describe('useResponsiveContainerStyles', () => {
         },
       };
 
-      expect(responsiveStyles).toBe(result);
+      expect(responsiveStyles).toStrictEqual(result);
     });
   });
 });
