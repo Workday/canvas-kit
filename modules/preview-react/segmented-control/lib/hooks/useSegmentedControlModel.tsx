@@ -1,14 +1,10 @@
 import React from 'react';
 import {createModelHook} from '@workday/canvas-kit-react/common';
-import {
-  defaultGetId,
-  useListModel,
-  useOverflowListModel,
-} from '@workday/canvas-kit-react/collection';
+import {defaultGetId, useListModel} from '@workday/canvas-kit-react/collection';
 
 export const useSegmentedControlModel = createModelHook({
   defaultConfig: {
-    ...useOverflowListModel.defaultConfig,
+    ...useListModel.defaultConfig,
     /**
      * Optional id for the whole `SegmentedControl` group. If not provided, a unique id will be created.
      * @default useUniqueId()
@@ -42,8 +38,8 @@ export const useSegmentedControlModel = createModelHook({
   const initialSelectedRef = React.useRef(config.initialValue);
   const items = config.items;
 
-  const model = useOverflowListModel(
-    useOverflowListModel.mergeConfig(config, {
+  const model = useListModel(
+    useListModel.mergeConfig(config, {
       orientation: config.orientation || 'horizontal',
       items,
       onRegisterItem(data) {
@@ -65,8 +61,6 @@ export const useSegmentedControlModel = createModelHook({
     ...model.state,
     disabled: config.disabled,
     size: config.size,
-    nonInteractiveIds: [],
-    hiddenIds: [],
   };
 
   const events = {
