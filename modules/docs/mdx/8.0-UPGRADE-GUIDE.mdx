@@ -381,24 +381,16 @@ import {SegmentedControl} from '@workday/canvas-kit-react/segmented-control';
 import {listViewIcon, deviceTabletIcon} from '@workday/canvas-system-icons-web';
 
 <SegmentedControl value={value} onChange={handleToggle}>
-  <SegmentedControl.Button
-    icon={listViewIcon}
-    value="list-view"
-    onClick={e => console.log('Existing TertiaryButton onClick callback')}
-    id="test"
-  />
+  <SegmentedControl.Button icon={listViewIcon} value="list-view" aria-label="List View" />
   <SegmentedControl.Button icon={deviceTabletIcon} value="device-view" aria-label="Device View" />
-</SegmentedControl>;
+</SegmentedControl>
 
 // SegmentedControl (Preview)
 import {SegmentedControl} from '@workday/canvas-kit-preview-react/segmented-control';
 import {listViewIcon, deviceTabletIcon} from '@workday/canvas-system-icons-web';
 
 <SegmentedControl>
-  <SegmentedControl.List
-    aria-label="View type"
-    onSubmit={data => console.log('Existing TertiaryButton onClick callback')}
-  >
+  <SegmentedControl.List aria-label="View type">
     <SegmentedControl.Item
       data-id="list-view"
       icon={listViewIcon}
@@ -410,7 +402,7 @@ import {listViewIcon, deviceTabletIcon} from '@workday/canvas-system-icons-web';
       tooltipProps={{title: 'Device view'}}
     />
   </SegmentedControl.List>
-</SegmentedControl>;
+</SegmentedControl>
 ```
 
 You may still use `SegmentedControl` in the Main package, but note that it will be replaced by
@@ -437,7 +429,7 @@ import {uploadCloudIcon} from '@workday/canvas-system-icons-web';
   label="Published"
   type={StatusIndicator.Type.Green}
   icon={uploadCloudIcon}
-/>;
+/>
 
 // StatusIndicator (Preview)
 import {StatusIndicator} from '@workday/canvas-kit-preview-react/status-indicator';
@@ -446,7 +438,7 @@ import {uploadCloudIcon} from '@workday/canvas-system-icons-web';
 <StatusIndicator emphasis="low" variant="green">
   <StatusIndicator.Label>Published</StatusIndicator.Label>
   <StatusIndicator.Icon icon={uploadCloudIcon} />
-</StatusIndicator>;
+</StatusIndicator>
 ```
 
 You may still use `StatusIndicator` in the Main package, but note that it will be replaced by
