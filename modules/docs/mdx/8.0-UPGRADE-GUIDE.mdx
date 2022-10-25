@@ -708,7 +708,7 @@ tapping on the overlay.
 ### Popups
 
 We've updated all popup `CloseIcon` and `CloseButton` to default to `type=button`. We did this so
-these close buttons did not submit the forms unintentionally. Without this change, you have to
+these close buttons did not submit when a form element is present. Without this change, you have to
 manually add `type="button"` to these components if you wrap popup contents in a `form` element.
 While this is a very unlikely that a `CloseButton` was intentionally used as an implicit submit
 button, it is still a breaking change. This change effects the following components:
