@@ -4,31 +4,39 @@ import isPropValid from '@emotion/is-prop-valid';
 import {createComponent, StyledType, useConstant} from '@workday/canvas-kit-react/common';
 
 // style props
-import {background, BackgroundStyleProps} from './utils/background';
-import {border, BorderStyleProps} from './utils/border';
-import {color, ColorStyleProps} from './utils/color';
-import {depth, DepthStyleProps} from './utils/depth';
-import {flexItem, FlexItemStyleProps} from './utils/flexItem';
-import {gridItem, GridItemStyleProps} from './utils/gridItem';
-import {layout, LayoutStyleProps} from './utils/layout';
-import {other, OtherStyleProps} from './utils/other';
-import {position, PositionStyleProps} from './utils/position';
-import {space, SpaceStyleProps} from './utils/space';
-import {text, TextStyleProps} from './utils/text';
+import {background} from './utils/background';
+import {border} from './utils/border';
+import {color} from './utils/color';
+import {depth} from './utils/depth';
+import {flexItem} from './utils/flexItem';
+import {gridItem} from './utils/gridItem';
+import {layout} from './utils/layout';
+import {other} from './utils/other';
+import {position} from './utils/position';
+import {space} from './utils/space';
+import {text} from './utils/text';
+import {CommonStyleProps} from './utils/styleProps';
 
-export type BoxProps = BackgroundStyleProps &
-  BorderStyleProps &
-  ColorStyleProps &
-  DepthStyleProps &
-  FlexItemStyleProps &
-  GridItemStyleProps &
-  LayoutStyleProps &
-  OtherStyleProps &
-  PositionStyleProps &
-  SpaceStyleProps &
-  TextStyleProps & {
-    children?: React.ReactNode;
-  };
+/**
+ * Box Props
+ * ---
+ * Common style props + children
+ * 
+ * - background
+ * - border
+ * - color
+ * - depth
+ * - flexItem
+ * - gridItem
+ * - layout
+ * - other
+ * - position
+ * - space
+ * - text
+ */
+export type BoxProps = CommonStyleProps & {
+  children?: React.ReactNode;
+};
 
 const omittedProps = [
   'display',
