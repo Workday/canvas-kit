@@ -11,7 +11,6 @@ import {HStack} from '@workday/canvas-kit-react/layout';
 import {useOverflowListMeasure, useListRenderItems} from '@workday/canvas-kit-react/collection';
 
 import {useActionBarModel} from './useActionBarModel';
-import {ActionBar} from './ActionBar';
 
 // Use `Partial` here to make `spacing` optional
 export interface ActionBarListProps<T = any>
@@ -26,6 +25,7 @@ export interface ActionBarListProps<T = any>
    * </ActionBar.List>
    */
   children: ((item: T, index: number) => React.ReactNode) | React.ReactNode;
+  overflowButton?: React.ReactNode;
 }
 
 const ResponsiveHStack = styled(HStack)<ActionBarListProps & StyledType>(({theme}) => ({
@@ -37,11 +37,13 @@ const ResponsiveHStack = styled(HStack)<ActionBarListProps & StyledType>(({theme
   },
 }));
 
+export const useActionBarList = useOverflowListMeasure;
+
 export const ActionBarList = createSubcomponent('div')({
   displayName: 'ActionBar.List',
   modelHook: useActionBarModel,
-  elemPropsHook: useOverflowListMeasure,
-})<ActionBarListProps>(({children, ...elemProps}, Element, model) => {
+  elemPropsHook: useActionBarList,
+})<ActionBarListProps>(({children, overflowButton, ...elemProps}, Element, model) => {
   return (
     <ResponsiveHStack
       as={Element}
@@ -57,7 +59,7 @@ export const ActionBarList = createSubcomponent('div')({
       {...elemProps}
     >
       {useListRenderItems(model, children)}
-      <ActionBar.OverflowButton />
+      {overflowButton}
     </ResponsiveHStack>
   );
 });
