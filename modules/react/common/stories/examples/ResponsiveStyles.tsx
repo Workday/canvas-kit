@@ -87,6 +87,29 @@ export const ResponsiveContainer = () => {
     width
   );
 
+  const newWidth = 767;
+  const newresponsiveStyles = useResponsiveContainerStyles(
+    {
+      flex: {
+        backgroundColor: 'blackPepper100',
+        m: {
+          backgroundColor: 'berrySmoothie100',
+        },
+      },
+    },
+    newWidth
+  );
+
+  const result = {
+    flex: {
+      backgroundColor: 'blackPepper100',
+      m: {
+        backgroundColor: 'berrySmoothie100',
+      },
+    },
+  };
+  console.log(newresponsiveStyles);
+
   const desktop = 1024;
 
   const [contWidth, setContWidth] = React.useState(desktop);
