@@ -7,25 +7,29 @@ import {
   pieChartIcon,
 } from '@workday/canvas-system-icons-web';
 
-export const Basic = () => (
-  <SegmentedControl>
-    <SegmentedControl.List aria-label="View type">
-      <SegmentedControl.Item data-id="table" icon={gridIcon} tooltipProps={{title: 'Table'}} />
-      <SegmentedControl.Item
-        data-id="list-view"
-        icon={listViewIcon}
-        tooltipProps={{title: 'List'}}
-      />
-      <SegmentedControl.Item
-        data-id="list-detail"
-        icon={listDetailIcon}
-        tooltipProps={{title: 'Detail'}}
-      />
-      <SegmentedControl.Item
-        data-id="diagrams"
-        icon={pieChartIcon}
-        tooltipProps={{title: 'Diagram'}}
-      />
-    </SegmentedControl.List>
-  </SegmentedControl>
-);
+export const Basic = () => {
+  const [viewType, setViewType] = React.useState('table');
+
+  return (
+    <SegmentedControl initialValue={viewType} onSelect={data => setViewType(data.id)}>
+      <SegmentedControl.List aria-label="View type">
+        <SegmentedControl.Item data-id="table" icon={gridIcon} tooltipProps={{title: 'Table'}} />
+        <SegmentedControl.Item
+          data-id="list-view"
+          icon={listViewIcon}
+          tooltipProps={{title: 'List'}}
+        />
+        <SegmentedControl.Item
+          data-id="list-detail"
+          icon={listDetailIcon}
+          tooltipProps={{title: 'Detail'}}
+        />
+        <SegmentedControl.Item
+          data-id="diagrams"
+          icon={pieChartIcon}
+          tooltipProps={{title: 'Diagram'}}
+        />
+      </SegmentedControl.List>
+    </SegmentedControl>
+  );
+};
