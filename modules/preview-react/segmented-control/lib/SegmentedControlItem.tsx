@@ -28,10 +28,9 @@ export interface ItemProps extends ButtonContainerProps {
   children?: React.ReactNode;
   /**
    * The identifier of the item. This identifier will be used in change events and for `initialTab`.
-   * If this property is not provided, it will default to a string representation
-   * of the the zero-based index of the item when it was initialized.
+   * Because SegmentedControl is control component it's required to pass 'data-id' to all button elements
    */
-  'data-id'?: string;
+  'data-id': string;
   /**
    * Optional id. If not set, it will inherit the ID passed to the `SegmentedControl` component and append the
    * index at the end. Only set this for advanced cases.
