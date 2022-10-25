@@ -44,6 +44,7 @@ const omittedProps = [
   'letterSpacing',
   'lineHeight',
   'textAlign',
+  'opacity',
   'textDecoration',
   'textOverflow',
   'textTransform',
