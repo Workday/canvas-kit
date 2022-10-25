@@ -15,11 +15,10 @@ export interface ModalCardProps extends ExtractProps<typeof Popup.Card, never> {
 
 const ResponsiveModalCard = styled(Popup.Card)<ModalCardProps & StyledType>(({theme}) => ({
   margin: space.xl,
-  padding: space.l,
   [theme.canvas.breakpoints.down('s')]: {
-    margin: `0 0 ${space.xl}`,
-    padding: space.s,
-    borderRadius: space.m, // matches mobile specs
+    margin: space.s, // 16px all around margin on smaller screen sizes
+    padding: space.xxs, // brings total padding between edge and content to 16px
+    borderRadius: space.m, // 24px border radius on smaller devices.
   },
 }));
 
