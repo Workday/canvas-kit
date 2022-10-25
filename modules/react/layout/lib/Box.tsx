@@ -17,6 +17,23 @@ import {space} from './utils/space';
 import {text} from './utils/text';
 import {CommonStyleProps} from './utils/styleProps';
 
+/**
+ * Box Props
+ * ---
+ * Common style props + children
+ * 
+ * - background
+ * - border
+ * - color
+ * - depth
+ * - flexItem
+ * - gridItem
+ * - layout
+ * - other
+ * - position
+ * - space
+ * - text
+ */
 export type BoxProps = CommonStyleProps & {
   children?: React.ReactNode;
 };
