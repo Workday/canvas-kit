@@ -5,21 +5,22 @@ import {
   ExtractProps,
   createElemPropsHook,
 } from '@workday/canvas-kit-react/common';
-import {Stack} from '@workday/canvas-kit-react/layout';
+import {Grid} from '@workday/canvas-kit-react/layout';
 import {useListRenderItems} from '@workday/canvas-kit-react/collection';
 import {useSegmentedControlModel} from './hooks/useSegmentedControlModel';
 
 export interface SegmentedControlListProps<T = any>
-  extends Omit<Partial<ExtractProps<typeof Stack, never>>, 'children'> {
+  extends Omit<Partial<ExtractProps<typeof Grid, never>>, 'children'> {
   'aria-label': string;
   children: ((item: T) => React.ReactNode) | React.ReactNode;
 }
 
 const useSegmentedControlList = createElemPropsHook(useSegmentedControlModel)(
-  ({state: {orientation, disabled}}) => {
+  ({state: {orientation, disabled, items}}) => {
+    const directionName = orientation === 'vertical' ? 'Row' : 'Column';
     return {
-      flexDirection: orientation === 'vertical' ? 'column' : 'row',
-      opacity: disabled ? 0.4 : 1,
+      [`gridTemplate${directionName}s`]: `repeat(${items.length}, 1fr)`,
+      opacity: disabled ? 0.4 : undefined,
     };
   }
 );
@@ -30,19 +31,19 @@ export const SegmentedControlList = createSubcomponent('div')({
   elemPropsHook: useSegmentedControlList,
 })<SegmentedControlListProps>(({children, ...elemProps}, Element, model) => {
   return (
-    <Stack
+    <Grid
       as={Element}
-      display="inline-flex"
+      display="inline-grid"
       role="group"
       backgroundColor="soap200"
       border="1px solid transparent"
       borderColor="licorice200"
       borderRadius="l"
-      spacing="xxs"
       padding="3px"
+      gridGap="xxs"
       {...elemProps}
     >
       {useListRenderItems(model, children)}
-    </Stack>
+    </Grid>
   );
 });
