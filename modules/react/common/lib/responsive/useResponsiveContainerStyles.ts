@@ -1,14 +1,9 @@
 import { useTheme, breakpointKeys, CanvasBreakpoints } from "@workday/canvas-kit-react/common";
-import type {
-  FlexStyleProps,
-  GridProps
-} from "@workday/canvas-kit-react/layout";
+import type {AllStyleProps} from "@workday/canvas-kit-react/layout";
 import {isWithinBreakpoint} from '../responsive/responsiveContext'
 
 export type BreakpointKeys = typeof breakpointKeys[number];
 
-// TODO: export just all the style props
-type AllStyleProps = FlexStyleProps & GridProps;
 type ResponsiveCSSObject<T> = {
   [P in keyof T]: Partial<Record<BreakpointKeys, AllStyleProps>> &
     AllStyleProps;
