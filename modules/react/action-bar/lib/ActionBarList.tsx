@@ -25,6 +25,14 @@ export interface ActionBarListProps<T = any>
    * </ActionBar.List>
    */
   children: ((item: T, index: number) => React.ReactNode) | React.ReactNode;
+  /**
+   * `ActionBar.List` will render overflow button component if  it's passed in `overflowButton`.
+   *
+   * @example
+   * <ActionBar.List overflowButton={<ActionBar.OverflowButton aria-label="More actions" />}>
+   *   {(item) => <ActionBar.Item>{item.text}</ActionBar.Item>}
+   * </ActionBar.List>
+   */
   overflowButton?: React.ReactNode;
 }
 

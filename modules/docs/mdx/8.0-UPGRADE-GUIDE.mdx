@@ -26,6 +26,7 @@ any questions.
   - [Menu (Preview)](#menu-preview)
   - [Layout and Column](#layout-and-column)
 - [Component Updates](#component-updates)
+  - [Action Bar](#action-bar)
   - [Box](#box)
   - [Breadcrumbs](#breadcrumbs)
   - [Component States Table](#component-states-table)
@@ -474,6 +475,40 @@ You may continue to use these components, but please note that we plan to
 component instead.
 
 ## Component Updates
+
+### Action Bar
+
+`ActionBar.List` with overflow behavior now requires to pass a overflow button component as a value
+of `overflowButton` prop, the same way we did for `Tabs` and `Breadcrumbs` components. In Canvas Kit
+v7 the component for overflow button was placed directly inside `ActionBar.List` without passing any
+prop. We found limitation of this approach because it was not possible to modify an overflow button
+or pass any prop into it.
+
+```tsx
+// v7, an overflow button is inside ActionBar.List
+<ActionBar.List position="relative">{/* items */}</ActionBar.List>
+
+// inside ActionBar.List
+<Stack>
+  {items}
+  <ActionBar.OverflowButton /> // OverflowButton is a hard-coded component
+</Stack>
+
+
+// v8, an overflow button should be passed as a prop
+<ActionBar.List
+  position="relative"
+  overflowButton={<ActionBar.OverflowButton aria-label="More actions" />}
+>
+  {/* items */}
+</ActionBar.List>
+
+// inside ActionBar.List
+<Stack>
+  {items}
+  {overflowButton} // overflowButton prop is a passed component
+</Stack>
+```
 
 ### Box
 

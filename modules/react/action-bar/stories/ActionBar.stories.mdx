@@ -104,10 +104,17 @@ to `ActionBar` will be ignored.
 #### Usage
 
 `ActionBar.List` is a `HStack` element. It is a container for `ActionBar.Item` subcomponents. To
-apply an overflow behavior for ActionBar `showOverflowButton` prop shold be true.
+render an overflow button for ActionBar with overflow behavior `overflowButton` prop with overflow
+button component as a value shold be passed.
 
 ```tsx
+// without overflow
 <ActionBar.List>{/* ActionBar.Items */}</ActionBar.List>
+
+// with overflow
+<ActionBar.List overflowButton={<ActionBar.OverflowButton aria-label="More actions"/>}>{
+  /* ActionBar.Items */
+}</ActionBar.List>
 ```
 
 #### Props
