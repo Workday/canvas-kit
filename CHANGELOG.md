@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v7.4.2](https://github.com/Workday/canvas-kit/releases/tag/v7.4.2) (2022-10-25)
+
+### Documentation
+
+- docs: Fix multiSelectionManager import in Collections example ([#1871](https://github.com/Workday/canvas-kit/pull/1871)) ([@jamesfan](https://github.com/jamesfan))
+
+### Infrastructure
+
+- ci: Add debug logging to forward merge workflow ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v7.4.1](https://github.com/Workday/canvas-kit/releases/tag/v7.4.1) (2022-10-13)
 
 ### Documentation

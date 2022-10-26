@@ -67,7 +67,11 @@ export const ActionBarWithOverflowMenuStates = () => {
         {props => (
           <div>
             <ActionBar model={model}>
-              <ActionBar.List {...props} position="relative">
+              <ActionBar.List
+                {...props}
+                position="relative"
+                overflowButton={<ActionBar.OverflowButton aria-label="More actions" />}
+              >
                 {(item: MyActionItem, index: number) => (
                   <ActionBar.Item as={index === 0 ? PrimaryButton : undefined}>
                     {item.text}
