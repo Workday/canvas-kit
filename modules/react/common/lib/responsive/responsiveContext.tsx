@@ -10,8 +10,19 @@ import {
  * `width: number`
  * `breakpoints: CanvasBreakpoints`
  */
-interface ResponsiveContextConfig {
+export interface ResponsiveContextConfig {
+  /**
+   * The width of the container
+   */
   width: number;
+  /**
+   * Canvas Kit Breakpoints
+   * `s, m, l, xl`:
+   * - `s: 320px`
+   * - `m: 768px`
+   * - `l: 1024px`
+   * - `xl: 1440px`
+   */
   breakpoints: CanvasBreakpoints;
 }
 
@@ -27,9 +38,33 @@ interface ResponsiveContextConfig {
  */
 export const ResponsiveContext = React.createContext({} as ResponsiveContextConfig);
 
-interface ResponsiveContextProviderProps {
+/**
+ * React Context Provider Props.
+ *
+ * ```tsx
+ * interface ResponsiveContextProviderProps {
+ *
+ * `The width of the container`
+ *
+ * width: number;
+ * children?: React.ReactNode;
+ * theme?: PartialEmotionCanvasTheme;
+ * }
+ * ```
+ */
+export interface ResponsiveContextProviderProps {
+  /**
+   * The width of the container
+   */
   width: number;
+  /**
+   * The children of the ResponsiveContext Provider
+   */
   children?: React.ReactNode;
+  /**
+   * An optional Canvas theme object – You likely don't need to provide this.
+   * If no theme is provided, the provider will use the theme object in CanvasProvider.
+   */
   theme?: PartialEmotionCanvasTheme;
 }
 
@@ -69,7 +104,7 @@ export const ResponsiveContextProvider = ({
 };
 
 /**
- * This function determines whether or not a container's width is within a certain breakpoint.
+ * This function determines whether or not a container's width is within two values.
  */
 export const isWithinBreakpoint = (width: number, min: number, max?: number) => {
   return width >= min && (!max || (max && width <= max - 0.5));

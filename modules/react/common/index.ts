@@ -11,5 +11,7 @@ export {
   ResponsiveContext,
   ResponsiveContextProvider,
   useResponsiveContext,
+  ResponsiveContextConfig,
+  ResponsiveContextProviderProps,
 } from './lib/responsive/responsiveContext';
 export * from './lib/responsive/useResponsiveContainerStyles';

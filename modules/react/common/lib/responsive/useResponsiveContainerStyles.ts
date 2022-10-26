@@ -30,7 +30,8 @@ const getSize = (width: number, breakpoints: CanvasBreakpoints) => {
   return size as BreakpointKeys;
 }
 
-function getStyles<T>(key: BreakpointKeys, styles: any, responsiveStyles: any,) {
+function getStyles<T>(key: BreakpointKeys, styles: ResponsiveCSSObject<T>) {
+  const responsiveStyles = {} as CSSObject<T>;
   const breakpointSize = breakpointKeys.indexOf(key);
   for (let i = 0; i <= breakpointSize; i++) {
     const breakpointName = breakpointKeys[i];
@@ -47,6 +48,7 @@ function getStyles<T>(key: BreakpointKeys, styles: any, responsiveStyles: any,) 
       };
     });
   }
+  return responsiveStyles;
 }
 
 /**
@@ -115,9 +117,7 @@ export function useResponsiveContainerStyles<T extends ResponsiveCSSObject<T>>(
 ) {
   const canvasTheme = useTheme(theme);
   const breakpoints = canvasTheme.canvas.breakpoints.values;
-  const responsiveStyles = {} as CSSObject<T>;
 
   const size = getSize(width, breakpoints);
-  getStyles(size, styles, responsiveStyles);
-  return responsiveStyles;
+  return getStyles(size, styles);
 }

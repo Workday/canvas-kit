@@ -1,12 +1,7 @@
 import * as React from 'react';
 import {Box, Grid} from '@workday/canvas-kit-react/layout';
 import {Text} from '@workday/canvas-kit-react/text';
-import {
-  useResponsiveContainerStyles,
-  useResizeObserver,
-  ResponsiveContextProvider,
-  useResponsiveContext,
-} from '@workday/canvas-kit-react/common';
+import {useResponsiveContainerStyles, useResizeObserver} from '@workday/canvas-kit-react/common';
 import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Select, SelectOption} from '@workday/canvas-kit-react/select';
 
@@ -15,16 +10,6 @@ const HeadingText = ({children, ...props}) => (
     {children}
   </Text>
 );
-
-const HeadingTextResponsive = ({children, ...props}) => {
-  const {isMediumAndDown} = useResponsiveContext();
-  return (
-    <Text as="p" fontSize={20} fontWeight="bold" color="blackPepper500" margin={0} {...props}>
-      {children}
-      {isMediumAndDown ? 'red' : 'blue'}
-    </Text>
-  );
-};
 
 const Header = ({children, ...props}) => (
   <Grid gridArea="Header" backgroundColor="blueberry400" {...props}>
@@ -87,29 +72,6 @@ export const ResponsiveContainer = () => {
     width
   );
 
-  const newWidth = 767;
-  const newresponsiveStyles = useResponsiveContainerStyles(
-    {
-      flex: {
-        backgroundColor: 'blackPepper100',
-        m: {
-          backgroundColor: 'berrySmoothie100',
-        },
-      },
-    },
-    newWidth
-  );
-
-  const result = {
-    flex: {
-      backgroundColor: 'blackPepper100',
-      m: {
-        backgroundColor: 'berrySmoothie100',
-      },
-    },
-  };
-  console.log(newresponsiveStyles);
-
   const desktop = 1024;
 
   const [contWidth, setContWidth] = React.useState(desktop);
@@ -124,34 +86,30 @@ export const ResponsiveContainer = () => {
   };
 
   return (
-    <ResponsiveContextProvider width={width}>
-      <Box ref={ref} maxWidth={contWidth}>
-        <FormField label={'Container Size'}>
-          <Select onChange={handleChange} value={value}>
-            <SelectOption label="1024px" value="desktop" />
-            <SelectOption label="768px" value="tablet" />
-            <SelectOption label="320px" value="mobile" />
-          </Select>
-        </FormField>
-        <Grid as="section">
-          <HeadingTextResponsive>Answer: </HeadingTextResponsive>
-
-          <Grid {...responsiveStyles.parentContainer}>
-            <Header {...responsiveStyles.childrenContainers}>
-              <HeadingText>Header</HeadingText>
-            </Header>
-            <ContentLeft {...responsiveStyles.childrenContainers}>
-              <HeadingText>Content Left</HeadingText>
-            </ContentLeft>
-            <ContentRight {...responsiveStyles.childrenContainers}>
-              <HeadingText>Content Right</HeadingText>
-            </ContentRight>
-            <Footer {...responsiveStyles.childrenContainers}>
-              <HeadingText>Footer</HeadingText>
-            </Footer>
-          </Grid>
+    <Box ref={ref} maxWidth={contWidth}>
+      <FormField label={'Container Size'}>
+        <Select onChange={handleChange} value={value}>
+          <SelectOption label="1024px" value="desktop" />
+          <SelectOption label="768px" value="tablet" />
+          <SelectOption label="320px" value="mobile" />
+        </Select>
+      </FormField>
+      <Grid as="section">
+        <Grid {...responsiveStyles.parentContainer}>
+          <Header {...responsiveStyles.childrenContainers}>
+            <HeadingText>Header</HeadingText>
+          </Header>
+          <ContentLeft {...responsiveStyles.childrenContainers}>
+            <HeadingText>Content Left</HeadingText>
+          </ContentLeft>
+          <ContentRight {...responsiveStyles.childrenContainers}>
+            <HeadingText>Content Right</HeadingText>
+          </ContentRight>
+          <Footer {...responsiveStyles.childrenContainers}>
+            <HeadingText>Footer</HeadingText>
+          </Footer>
         </Grid>
-      </Box>
-    </ResponsiveContextProvider>
+      </Grid>
+    </Box>
   );
 };
