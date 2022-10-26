@@ -1,6 +1,7 @@
 import React from 'react';
 
 import {
+  multiSelectionManager,
   useListItemRegister,
   useListItemRovingFocus,
   useListItemSelect,
@@ -9,7 +10,6 @@ import {
   ListBox,
 } from '@workday/canvas-kit-react/collection';
 import {composeHooks, createSubcomponent} from '@workday/canvas-kit-react/common';
-import {multiSelectionManager} from '../../lib/useSelectionListModel';
 
 const useMultiSelectItem = composeHooks(
   useListItemSelect,
