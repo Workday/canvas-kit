@@ -482,7 +482,8 @@ component instead.
 of `overflowButton` prop, the same way we did for `Tabs` and `Breadcrumbs` components. In Canvas Kit
 v7 the component for overflow button was placed directly inside `ActionBar.List` without passing any
 prop. We found limitation of this approach because it was not possible to modify an overflow button
-or pass any prop into it.
+or pass any prop into it. To remove this limitation, `ActionBar.OverflowButton` inside
+`ActionBar.List` is replaced with an `overflowButton` prop.
 
 ```tsx
 // v7, an overflow button is inside ActionBar.List
