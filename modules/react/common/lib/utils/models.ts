@@ -225,7 +225,7 @@ export type ModelExtras<TDefaultConfig, TRequiredConfig, TState, TEvents, TModel
   /**
    * This is only a type and not a value. If you want to
    */
-  TConfig: TDefaultConfig & TRequiredConfig;
+  TConfig: Partial<TDefaultConfig> & TRequiredConfig & ToEventConfig<TState, TEvents>;
   /**
    * The context of the model. This can be used directly, but is mostly used internally by
    * `createContainer` or `createSubcomponent` to handle model context automatically.
@@ -268,7 +268,7 @@ export type ModelExtras<TDefaultConfig, TRequiredConfig, TState, TEvents, TModel
    * ```
    */
   mergeConfig: (
-    source: TDefaultConfig & TRequiredConfig,
+    source: Partial<TDefaultConfig> & TRequiredConfig,
     target: Partial<
       TDefaultConfig & TRequiredConfig & ToEventConfig<TState, TEvents>
     >
