@@ -1,4 +1,4 @@
-import {Property} from 'csstype';
+import {Property, Globals} from 'csstype';
 
 import {buildStyleFns, buildStylePropFn, StyleFnConfig} from './buildStyleFns';
 import {SystemPropValues} from './systemProps';
@@ -13,7 +13,7 @@ export type GridStyleProps = {
    * - sets [CSS display property](https://developer.mozilla.org/en-US/docs/Web/CSS/display)
    * - @default 'grid'
    * */
-  display?: 'grid' | 'inline-grid';
+  display?: 'grid' | 'inline-grid' | 'none' | Globals | (string & {});
   /** sets [CSS justify-items property](https://developer.mozilla.org/en-US/docs/Web/CSS/justify-items) */
   justifyItems?: Property.JustifyItems;
   /** sets [CSS justify-content property](https://developer.mozilla.org/en-US/docs/Web/CSS/justify-content) */

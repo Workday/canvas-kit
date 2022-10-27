@@ -5,7 +5,7 @@ import {Box, BoxProps} from './Box';
 
 import {grid, GridStyleProps} from './utils/grid';
 
-export type GridProps = BoxProps & GridStyleProps;
+export type GridProps = Omit<BoxProps, 'display'> & GridStyleProps;
 export type GridItemProps = BoxProps;
 
 const StyledGrid = styled(Box)<StyledType & GridProps>(
