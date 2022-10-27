@@ -12,6 +12,8 @@ type CSSObject<T> = {
   [P in keyof T]: AllStyleProps;
 };
 
+// Takes in CanvasBreakpoint keys and returns current breakpoint key. Current breakpoint key is determined by the `width` of the container
+
 const getSize = (width: number, breakpoints: CanvasBreakpoints) => {
   const ranges: {[key: string ]: [number, number?]} = {
     'zero': [0, breakpoints.s],
@@ -25,6 +27,8 @@ const getSize = (width: number, breakpoints: CanvasBreakpoints) => {
   return size as BreakpointKeys;
 }
 
+// Returns responsive style objects that are within the current CanvasBreakpoint size
+
 function getStyles<T>(key: BreakpointKeys, styles: ResponsiveCSSObject<T>) {
   const responsiveStyles = {} as CSSObject<T>;
   const breakpointSize = breakpointKeys.indexOf(key);
@@ -35,10 +39,10 @@ function getStyles<T>(key: BreakpointKeys, styles: ResponsiveCSSObject<T>) {
       const { zero, s, m, l, xl, ...base } = styles[property as keyof T];
       const currentBreakpointStyles =
         styles[property as keyof T][breakpointName] ?? {};
-      const previouscurrentBreakpointStyles = responsiveStyles[property as keyof T] ?? {};
+      const previousBreakpointStyles = responsiveStyles[property as keyof T] ?? {};
       responsiveStyles[property as keyof T] = {
         ...base,
-        ...previouscurrentBreakpointStyles,
+        ...previousBreakpointStyles,
         ...currentBreakpointStyles
       };
     });
