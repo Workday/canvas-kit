@@ -26,6 +26,7 @@ any questions.
   - [Menu (Preview)](#menu-preview)
   - [Layout and Column](#layout-and-column)
 - [Component Updates](#component-updates)
+  - [Action Bar](#action-bar)
   - [Box](#box)
   - [Breadcrumbs](#breadcrumbs)
   - [Component States Table](#component-states-table)
@@ -360,30 +361,53 @@ text with built-in support for our Canvas type tokens.
 
 ### Segmented Control (Preview)
 
-Redesigned Segmented Control has been added to
-[Preview package](https://github.com/Workday/canvas-kit/pull/1819). The main functionality change
-between this component and one from main package is supporting a text variants of buttons. The
-component has a new design that aligns to the Canvas Kit system.
+We've added a new version of
+[`SegmentedControl`](https://workday.github.io/canvas-kit/?path=/docs/preview-segmented-control-react--basic)
+which has been redesigned as a
+[compound component](/getting-started/for-developers/resources/compound-components/) to the Preview
+package. `SegmentedControl` represents a linear group of multiple buttons allowing the selection of
+a specific value and is best used for switching between different views of the same content.
 
-Some key aspects of the component to note include:
+The `SegmentedControl` in Preview has the following major differences compared to the
+`SegmentedControl` in Main:
 
-- Usage: Best used for switching between different views of the same content. Use Tabs for switching
-  between content that is related but not the same. Segments are mutually exclusive and can contain
-  text and/or icons.
-- Shape: The component will continue to feature squared corners to visually distinguish these
-  controls and their purpose from standard buttons.
-- Color: Active/selected segment is white, French Vanilla 100 with a gray, Licorice 200 border
-  against a light gray, Soap 200 container to make these controls less prominent than standard
-  buttons.
-- Tooltips: Canvas Tooltips showing text labels will be added for Icon-only variants to improve
-  accessibility for ambiguous icons.
-- Container: A container around the Segmented Control component has been added. Since it will be
-  released as a net-new component in Preview and no updates will be made to the current Segmented
-  Control component in the main package for v8, this update will not impact design or development.
+- Visually redesigned to better align with the Canvas Design System
+- Uses title casing (e.g., "In Progress") instead of full caps ("IN PROGRESS")
+- Supports a text-only variation
+- Includes built-in support for tooltips to improve accessibility of the icon-only variation
 
-Since it is a net-new component in the preview package and no updates will be made to the current
-Segmented Control component in the main package for v8, this update will not impact design or
-development.
+```tsx
+// SegmentedControl (Main)
+import {SegmentedControl} from '@workday/canvas-kit-react/segmented-control';
+import {listViewIcon, deviceTabletIcon} from '@workday/canvas-system-icons-web';
+
+<SegmentedControl value={value} onChange={handleToggle}>
+  <SegmentedControl.Button icon={listViewIcon} value="list-view" aria-label="List View" />
+  <SegmentedControl.Button icon={deviceTabletIcon} value="device-view" aria-label="Device View" />
+</SegmentedControl>
+
+// SegmentedControl (Preview)
+import {SegmentedControl} from '@workday/canvas-kit-preview-react/segmented-control';
+import {listViewIcon, deviceTabletIcon} from '@workday/canvas-system-icons-web';
+
+<SegmentedControl>
+  <SegmentedControl.List aria-label="View type">
+    <SegmentedControl.Item
+      data-id="list-view"
+      icon={listViewIcon}
+      tooltipProps={{title: 'List view'}}
+    />
+    <SegmentedControl.Item
+      data-id="device-view"
+      icon={deviceTabletIcon}
+      tooltipProps={{title: 'Device view'}}
+    />
+  </SegmentedControl.List>
+</SegmentedControl>
+```
+
+You may still use `SegmentedControl` in the Main package, but note that it will be replaced by
+`SegmentedControl` in the Preview package in the future.
 
 ---
 
@@ -400,12 +424,13 @@ action, or page element.
 // StatusIndicator (Main)
 import {StatusIndicator} from '@workday/canvas-kit-react/status-indicator';
 import {uploadCloudIcon} from '@workday/canvas-system-icons-web';
+
 <StatusIndicator
   emphasis={StatusIndicator.Emphasis.Low}
   label="Published"
   type={StatusIndicator.Type.Green}
   icon={uploadCloudIcon}
-/>;
+/>
 
 // StatusIndicator (Preview)
 import {StatusIndicator} from '@workday/canvas-kit-preview-react/status-indicator';
@@ -414,7 +439,7 @@ import {uploadCloudIcon} from '@workday/canvas-system-icons-web';
 <StatusIndicator emphasis="low" variant="green">
   <StatusIndicator.Label>Published</StatusIndicator.Label>
   <StatusIndicator.Icon icon={uploadCloudIcon} />
-</StatusIndicator>;
+</StatusIndicator>
 ```
 
 You may still use `StatusIndicator` in the Main package, but note that it will be replaced by
@@ -584,6 +609,41 @@ You may continue to use these components, but please note that we plan to
 component instead.
 
 ## Component Updates
+
+### Action Bar
+
+`ActionBar.List` with overflow behavior now requires to pass a overflow button component as a value
+of `overflowButton` prop, the same way we did for `Tabs` and `Breadcrumbs` components. In Canvas Kit
+v7 the component for overflow button was placed directly inside `ActionBar.List` without passing any
+prop. We found limitation of this approach because it was not possible to modify an overflow button
+or pass any prop into it. To remove this limitation, `ActionBar.OverflowButton` inside
+`ActionBar.List` is replaced with an `overflowButton` prop.
+
+```tsx
+// v7, an overflow button is inside ActionBar.List
+<ActionBar.List position="relative">{/* items */}</ActionBar.List>
+
+// inside ActionBar.List
+<Stack>
+  {items}
+  <ActionBar.OverflowButton /> // OverflowButton is a hard-coded component
+</Stack>
+
+
+// v8, an overflow button should be passed as a prop
+<ActionBar.List
+  position="relative"
+  overflowButton={<ActionBar.OverflowButton aria-label="More actions" />}
+>
+  {/* items */}
+</ActionBar.List>
+
+// inside ActionBar.List
+<Stack>
+  {items}
+  {overflowButton} // overflowButton prop is a passed component
+</Stack>
+```
 
 ### Box
 
