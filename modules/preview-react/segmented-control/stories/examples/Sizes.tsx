@@ -11,8 +11,8 @@ import {BodyText} from '@workday/canvas-kit-react/text';
 
 export const Sizes = () => (
   <>
-    <Box marginBottom="xxs">
-      <BodyText size="medium" fontWeight="bold">
+    <Box>
+      <BodyText size="medium" fontWeight="bold" marginTop={0}>
         Small
       </BodyText>
       <SegmentedControl size="small">
