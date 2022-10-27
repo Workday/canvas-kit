@@ -1,0 +1,160 @@
+import {Meta} from '@storybook/addon-docs';
+import {Specifications} from '@workday/canvas-kit-docs';
+import {DisclosureExample} from './examples/ModelAndContainer';
+
+<Meta title="Hooks and Utilities/Hooks" />
+
+# Hooks and Utilities
+
+Most of our hooks and utility functions are meant to be used together. Combined together, you can
+build highly composable and powerful components and hooks.
+
+## createModelHook
+
+When building compound components that might have some internal state or events, you typically want
+a model. A model allows a component to share information. This is where `createModelHook` comes in
+handy.
+
+`createModelHook` is a factory function that takes in `defaultConfig` and `requiredConfig` and
+returns a function which is your model hook.
+
+If we take diclosure as an example, this is how we'd use `composeModelHook`
+
+```tsx
+import React from 'react';
+import {createModelHook, useUniqueId} from '@workday/canvas-kit-react/common';
+
+export type Visibility = 'hidden' | 'visible';
+
+export const useDisclosureModel = createModelHook({
+  // This becomes the default values on the model
+  defaultConfig: {
+    /** ID reference of the list. Children ids can be derived from this id */
+    id: '',
+    /**
+     * The initial visibility of the disclosed content
+     * @default 'hidden'
+     */
+    initialVisibility: 'hidden' as Visibility,
+  },
+})(config => {
+  const id = useUniqueId(config.id);
+  const [visibility, setVisibility] = React.useState(config.initialVisibility || 'hidden');
+  //  Set the default internal state for your model.
+  const state = {
+    /** ID reference of the list. Children ids can be derived from this id */
+    id,
+    /**
+     * Visibility state of the disclosed content. Models are allowed to extend the states to fit
+     * their needs, so if you need to consistently determine "not hidden", use `visibility !==
+     * 'hidden'` rather than `visibility === 'visible'`
+     */
+    visibility,
+  };
+  // Sets events that be used across sub components
+  const events = {
+    /**
+     * Start showing the disclosed content. If a DOM event triggered this event, the event data will
+     * be passed along. This data can be used by guards and callbacks.
+     */
+    show(event?: Event | React.SyntheticEvent) {
+      setVisibility('visible');
+    },
+    /**
+     * Start hiding this disclosed content. If a DOM event triggered this event, the event data will
+     * be passed along. This data can be used by guards and callbacks.
+     */
+    hide(event?: Event | React.SyntheticEvent) {
+      setVisibility('hidden');
+    },
+  };
+
+  return {state, events};
+});
+```
+
+Typescript will infer all config from the returned `state`, `events`, `defaultConfig` and the
+`requiredConfig`.
+
+When `useDisclosureModel`is created, 5 properties are attached to it for composability:
+`defaultConfig`, `requiredConfig`, `TConfig`, `getElemProps`, `Context`.
+
+#### defaultConfig
+
+Using this can be useful when creating other models that share similar config for example:
+
+```tsx
+export const useExpandableModel = createModelHook({
+  defaultConfig: {
+    // extend the default config from the `useDisclosureModel`
+    ...useDisclosureModel.defaultConfig,
+  },
+})(config => {
+  const disclosure = useDisclosureModel(config);
+  const state = {
+    ...disclosure.state,
+  };
+  const events = {
+    ...disclosure.events,
+  };
+  return {state, events};
+});
+```
+
+#### Context
+
+This is useful when you're using components that need to share the same context. When you use
+`composeModelHook` this will create a context for you. When you're combining hooks together
+sometimes you want to share the same context. A good example of this is if you're building a `Modal`
+component but you created a `usePopupModel` that created the context for sub component to share.
+
+```tsx
+export const useModalModel = createModelHook({
+  defaultConfig: usePopupModel.defaultConfig,
+  requiredConfig: usePopupModel.requiredConfig,
+  // share context from the usePopupModel instead of the default one created by createModelHook
+  contextOverride: usePopupModel.Context,
+})(config => {
+  const model = usePopupModel(config);
+
+  useInitialFocus(model);
+  useReturnFocus(model);
+  useCloseOnOverlayClick(model);
+  useCloseOnEscape(model);
+  useFocusTrap(model);
+  useAssistiveHideSiblings(model);
+  useDisableBodyScroll(model);
+
+  return model;
+});
+```
+
+#### TConfig
+
+TConfig gives you the typings that are defined in `defaultConfig` and `requiredConfig` instead of
+having to redfine those types. This is useful when building a model that share similar config and
+you want to merge them while getting the correct typings.
+
+```tsx
+xport const useActionBarModel = createModelHook({
+  defaultConfig: {
+    // We define the config and use the typings that come from useMenuModel for when an action bar renders a menu
+    menuConfig: {} as typeof useMenuModel.TConfig,
+  },
+  requiredConfig: useOverflowListModel.requiredConfig,
+})(config => {
+// define your internal state and events
+});
+```
+
+#### getElemProps
+
+This function will separate all `elemProps` or default attributes from an element from config props.
+If a prop is both a `config` _and_ an `elemProp`, you can manually apply the prop again.
+
+By default `createModelHook` does this for you and spread the `elemProps` onto the component.
+
+## createContainer
+When building a component that has a model, you typically start with a container component. This component serves as the parent to all sub components
+
+<ExampleCodeBlock code={DisclosureExample} />
