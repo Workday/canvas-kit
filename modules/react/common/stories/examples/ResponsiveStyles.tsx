@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Box, Grid} from '@workday/canvas-kit-react/layout';
+import {Box, Grid, Flex} from '@workday/canvas-kit-react/layout';
 import {Text} from '@workday/canvas-kit-react/text';
 import {useResponsiveContainerStyles, useResizeObserver} from '@workday/canvas-kit-react/common';
 import {FormField} from '@workday/canvas-kit-react/form-field';
@@ -50,6 +50,7 @@ export const ResponsiveContainer = () => {
     {
       parentContainer: {
         gridGap: 's',
+        display: 'inline-grid',
         gridTemplateAreas: "'Header' 'ContentLeft' 'ContentRight ' 'Footer'",
         gridTemplateColumns: '1fr',
         gridTemplateRows: 'auto auto auto',
@@ -94,7 +95,9 @@ export const ResponsiveContainer = () => {
           <SelectOption label="320px" value="mobile" />
         </Select>
       </FormField>
-      <Grid as="section">
+      <Grid as="section" display="inline-grid">
+        <Flex display="inline-flex" />
+        <Box display="inline-block" />
         <Grid {...responsiveStyles.parentContainer}>
           <Header {...responsiveStyles.childrenContainers}>
             <HeadingText>Header</HeadingText>
