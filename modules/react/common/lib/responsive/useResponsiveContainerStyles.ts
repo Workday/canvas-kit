@@ -1,6 +1,6 @@
 import { useTheme, breakpointKeys, CanvasBreakpoints } from "@workday/canvas-kit-react/common";
 import type {AllStyleProps} from "@workday/canvas-kit-react/layout";
-import {isWithinBreakpoint} from '../responsive/responsiveContext'
+import {isWithinBreakpoint} from '../utils/isWithinBreakpoint'
 
 export type BreakpointKeys = typeof breakpointKeys[number];
 
@@ -63,6 +63,16 @@ import {
   useResponsiveStyles,
 } from '@workday/canvas-kit-react/common';
 
+const ref = React.useRef(null);
+const [containerWidth, setContainerWidth] = React.useState(0);
+
+useResizeObserver({
+  ref: ref,
+  onResize: data => {
+    setWidth(data.width || 0);
+  },
+});
+
 const containerResponsiveStyles = useResponsiveStyles(
   {
     flex: {
@@ -94,13 +104,11 @@ const containerResponsiveStyles = useResponsiveStyles(
 );
 
 return (
-  <ResponsiveContextProvider width={containerWidth}>
-    <Box>
+    <Box ref={ref}>
       <Flex {...containerResponsiveStyles.flex}>
         <Box {...containerResponsiveStyles.box}>Hello World</Box>
       </Flex>
     </Box>
-  </ResponsiveContextProvider>
 );
 ```
  */

@@ -1,10 +1,6 @@
 import {Meta, ArgsTable} from '@storybook/addon-docs';
 import {Box} from '@workday/canvas-kit-react/layout';
-import {
-  useResizeObserver,
-  ResponsiveContextProvider,
-  useResponsiveContainerStyles,
-} from '@workday/canvas-kit-react/common';
+import {useResizeObserver, useResponsiveContainerStyles} from '@workday/canvas-kit-react/common';
 import {ResponsiveContainer} from './examples/ResponsiveStyles';
 import {ResponsiveViewport} from './examples/ResponsiveViewport';
 
@@ -50,16 +46,10 @@ styles work and will be explained more in depth below.
 
 For container-based responsive styling, we have utilities that will allow you to apply responsive
 styles at those breakpoints. There are four utilities/hooks:
-`useResizeObserver | ResponsiveContextProvider | useResponsiveContext | useResponsiveContainerStyles`
+`useResizeObserver | useResponsiveContainerStyles`
 
 `useResizeObserver` - This is a hook that will provide the width of the container. This can be used
 to measure container size as well.
-
-`ResponsiveContextProvider` - This React Context Provider that will accept the width of the
-container from `useResizeObserver`.
-
-`useResponsiveContext` - This hook subscribes to the `ResponsiveContextProvider` and will determine
-whether the current width provided from `useResizeObserver` is within a particular theme breakpoint.
 
 `useResponsiveContainerStyles` - This is a hook that will allow you to create container-based
 responsive styles with objects (as you can see in the example below). This hook accepts three
@@ -69,18 +59,14 @@ These give sizes represent the breakpoints that are at the bottom of this page. 
 like `min-width`. For example, if you want to apply styles from `medium` and up, then you would
 write those styles under `m`.
 
-In the example below, we are importing three of those utilities:
-`useResizeObserver | ResponsiveContextProvider | useResponsiveContainerStyles`
+In the example below, we are importing these utilities:
+`useResizeObserver | useResponsiveContainerStyles`
 
 See example below:
 
 ```tsx
 import {Flex, Box} from '@workday/canvas-kit-react/layout';
-import {
-  useResizeObserver,
-  ResponsiveContextProvider,
-  useResponsiveContainerStyles,
-} from '@workday/canvas-kit-react/common';
+import {useResizeObserver, useResponsiveContainerStyles} from '@workday/canvas-kit-react/common';
 
 const ref = React.useRef(null);
 const [width, setWidth] = React.useState(0);
@@ -123,13 +109,11 @@ const containerResponsiveStyles = useResponsiveContainerStyles(
 );
 
 return (
-  <ResponsiveContextProvider width={width}>
-    <Box ref={ref}>
-      <Flex {...containerResponsiveStyles.flex}>
-        <Box {...containerResponsiveStyles.box}>Hello World</Box>
-      </Flex>
-    </Box>
-  </ResponsiveContextProvider>
+  <Box ref={ref}>
+    <Flex {...containerResponsiveStyles.flex}>
+      <Box {...containerResponsiveStyles.box}>Hello World</Box>
+    </Flex>
+  </Box>
 );
 ```
 

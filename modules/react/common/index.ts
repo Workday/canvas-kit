@@ -7,11 +7,4 @@ export * from './lib/utils';
 export * from './lib/CanvasProvider';
 export * from './lib/InputProvider';
 export * from './lib/EllipsisText';
-export {
-  ResponsiveContext,
-  ResponsiveContextProvider,
-  useResponsiveContext,
-  ResponsiveContextConfig,
-  ResponsiveContextProviderProps,
-} from './lib/responsive/responsiveContext';
 export * from './lib/responsive/useResponsiveContainerStyles';

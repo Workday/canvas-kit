@@ -95,7 +95,7 @@ export const ResponsiveContainer = () => {
           <SelectOption label="320px" value="mobile" />
         </Select>
       </FormField>
-      <Grid as="section" display="inline-grid">
+      <Grid as="section">
         <Grid {...responsiveStyles.parentContainer}>
           <Header {...responsiveStyles.childrenContainers}>
             <HeadingText>Header</HeadingText>

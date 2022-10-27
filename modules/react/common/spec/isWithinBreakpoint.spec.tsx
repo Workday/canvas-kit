@@ -1,4 +1,4 @@
-import {isWithinBreakpoint} from '../lib/responsive/responsiveContext';
+import {isWithinBreakpoint} from '../lib/utils/isWithinBreakpoint';
 import {breakpoints} from '../lib/theming';
 const context = describe;
 
