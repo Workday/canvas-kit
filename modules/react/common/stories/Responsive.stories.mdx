@@ -8,56 +8,38 @@ import {ResponsiveViewport} from './examples/ResponsiveViewport';
 
 # Responsive Styling
 
-Responsive styling is an approach to web development that adjusts layout and appearance based on the
-device's viewport size or an element's container size.
-
 ## What is Responsive Styling?
 
-Responsive Styling it is a term used to describe an approach to web design or a set of best
-practices, used to create a layout that can _respond_ to the device being used to view the content.
+Responsive styling is an approach to web development that adjusts layout and appearance based on the
+device's viewport size or an element's container size.
 
 Read more about the history of
 [Responsive Design](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Responsive_Design).
 
 ### Container vs Viewport
 
-There are two ways we will look at responsive styling below. They are container-based and
-viewport-based responsive styling.
+There are two approaches to responsive styling:
 
-> Using container-based responsive styling, we will measure the size of the container the element is
-> in and apply styles based on the size of that container.
-
-> Using viewport-based responsive styling, we will measure the size of the user's viewport and apply
-> styles based on the size of that viewport.
-
-If you are measuring a user's viewport size, then you should be using viewport-based responsive
-styling.
-
-If you only want to measure the size of a container, then you should be using container-based
-responsive styling.
-
-> **Note**: A container's size can be affected by surrounding containers or the viewport size.
+1. With **container-based** styling, we measure the size of the container an element is in and apply
+   styles based on the size of that container. **Note** that a container's size can be affected by
+   surrounding containers or the viewport size.
+2. With **viewport-based** styling, we measure the size of the user's viewport and apply styles
+   based on the size of that viewport. Both approaches use breakpoints.
 
 ### Canvas Breakpoints
 
-In Canvas Kit, there are a set of breakpoints:
+Breakpoints are the points at which the styles will change to provide an optimal user experience.
+Think of a container element's or viewport's width as a range of possible sizes broken down into
+buckets (e.g., `0-319px`, `320-767px`, `768-1023px`, etc).
 
-| Zero  | Small   | Medium  | Large    | Extra Large |
-| ----- | ------- | ------- | -------- | ----------- |
-| > 0px | > 320px | > 768px | > 1024px | > 1440px    |
+Canvas uses the following breakpoints for both container-based and viewport-based responsive
+styling:
 
-> Zero: This is applied from 0 - 319px
-
-> Small: This is applied from 320px - 767px
-
-> Medium: This is applied from 768px - 1023px
-
-> Large: This is applied from 1024px - 1439px
-
-> Extra Large: This is applied from 1440px and up
-
-These are the breakpoints we will use when we apply styles based on the size of a container or
-viewport.
+- `zero`: styles applied from `0px` up until (but not including) `320px`
+- `s`: styles applied from `320px` up until (but not including) `768px`
+- `m`: styles applied from `768px` up until (but not including) `1024px`
+- `l`: styles applied from `1024px` up until (but not including) `1440px`
+- `xl`: styles applied from `1440px` and up
 
 ## Container-based Responsive Styling
 
@@ -93,18 +75,19 @@ and apply CSS styles specifically to an element.
 ```
 
 In the interactive example below, styles are applied based on the size of the user's viewport using
-our breakpoint utilities: `up()`, `down()`, `between()` and `only()`. Note the use of `up()` and
-`down()` near the top of the example code. Adjust the width of your browser to see the layout adjust
-to the available width.
+two of our breakpoint utilities: `up` and `down`. Adjust the width of your browser to see the layout
+adjust to the available width.
 
 <ExampleCodeBlock code={ResponsiveViewport} />
 
 ### Breakpoint Utilities
 
-We have four utilities to apply viewport-based responsive styling: `up()`, `down()`, `between()`,
-and `only()`. Each has a specific role in applying viewport-based responsive styles.
+We have four utilities to apply viewport-based responsive styling: `up`, `down`, `between`, and
+`only`. Each has a specific role in applying viewport-based responsive styles.
 
-`up()` - Returns a media query above the `min-width` for the range of a given breakpoint. Given a
+#### `up`
+
+`up` returns a media query above the `min-width` for the range of a given breakpoint. Given a
 `start` breakpoint key `("zero", "s", "m", "l", "xl")`, this function returns a media query (string)
 using a `min-width`. See example below.
 
@@ -121,14 +104,16 @@ const styles = {
 };
 ```
 
-`down()` - Returns a media query below the `max-width` for the range of a given breakpoint. Given an
+#### `down`
+
+`down` returns a media query below the `max-width` for the range of a given breakpoint. Given an
 `end` breakpoint key `("zero", "s", "m", "l", "xl")`, this function returns a media query (string)
 using a `max-width`.
 
 > **Note**: This function subtracts `0.5px` from the next breakpoint value to prevent collisions.
 > For example, `breakpoints.values.s`, has a `min-width` of `320px`, and the `max-width` is
 > `767.5px`). If the `xl` breakpoint is provided, this function returns a media query with only a
-> `min-width` of `0`, as seen in the second example below. See example below.
+> `min-width` of `0`, as seen in the second example below.
 
 ```ts
 import { useTheme } from '@workday/canvas-kit-react/common';
@@ -159,9 +144,11 @@ const styles = {
 };
 ```
 
-`between()` - Returns a media query between two given breakpoints. Given `start` and `end`
-breakpoint keys ("zero", "s", "m", "l", "xl"), this function returns a media query (string) using a
-min-width and max-width.
+#### `between`
+
+`between` returns a media query between two given breakpoints. Given `start` and `end` breakpoint
+keys ("zero", "s", "m", "l", "xl"), this function returns a media query (string) using a min-width
+and max-width.
 
 > **Note**: This function subtracts `0.5px` from the next breakpoint value to prevent collisions.
 > For example, `breakpoints.values.s`, has a `min-width` of `320px`, and the `max-width` is
@@ -199,7 +186,9 @@ const styles = {
 };
 ```
 
-`only()` - Returns a media query with a `min-width` and `max-width` for a given breakpoint. Given a
+#### `only`
+
+`only` returns a media query with a `min-width` and `max-width` for a given breakpoint. Given a
 breakpoint key ("zero", "s", "m", "l", "xl"), this function returns a media query (string) using a
 `min-width` and `max-width`.
 
