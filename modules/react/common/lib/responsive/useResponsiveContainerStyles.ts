@@ -23,8 +23,6 @@ const getSize = (width: number, breakpoints: CanvasBreakpoints) => {
     'xl': [breakpoints.xl]
   };
   return breakpointKeys.find((size: BreakpointKeys) => isWithinBreakpoint(width, ...ranges[size])) || 'zero';
-
-  // return size as BreakpointKeys;
 }
 
 // Returns responsive style objects that are within the current CanvasBreakpoint size
