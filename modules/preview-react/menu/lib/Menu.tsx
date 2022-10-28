@@ -181,11 +181,12 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
     const children = React.Children.toArray(this.props.children);
     let nextSelectedIndex = 0;
     let isShortcut = false;
-    const itemCount = children.filter(child => {
+    const interactiveItems = children.filter(child => {
       return !(child as React.ReactElement<MenuItemProps>)?.props?.isHeader;
-    }).length;
+    });
+    const interactiveItemCount = interactiveItems.length;
     const firstItem = 0;
-    const lastItem = itemCount - 1;
+    const lastItem = interactiveItemCount - 1;
 
     if (event.key.length === 1 && event.key.match(/\S/)) {
       let start = this.state.selectedItemIndex + 1;
@@ -211,7 +212,7 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
           isShortcut = true;
           const nextIndex = this.state.selectedItemIndex + direction;
           nextSelectedIndex =
-            nextIndex < 0 ? lastItem : nextIndex >= itemCount ? firstItem : nextIndex;
+            nextIndex < 0 ? lastItem : nextIndex >= interactiveItemCount ? firstItem : nextIndex;
           break;
 
         case 'Home':
@@ -239,7 +240,9 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
         case ' ':
         case 'Enter':
           nextSelectedIndex = this.state.selectedItemIndex;
-          const child = children[this.state.selectedItemIndex] as React.ReactElement<MenuItemProps>;
+          const child = interactiveItems[this.state.selectedItemIndex] as React.ReactElement<
+            MenuItemProps
+          >;
           this.handleClick(event, child.props);
           isShortcut = true;
           break;

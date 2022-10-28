@@ -325,25 +325,25 @@ describe('Menu Keyboard Shortcuts', () => {
   it('should call the "onClose" event when the space key is pressed', () => {
     render(
       <Menu onClose={cb}>
-        <MenuItem>Alpha</MenuItem>
+        <MenuItem onClick={cb}>Alpha</MenuItem>
       </Menu>
     );
 
     fireEvent.keyDown(screen.getByRole('menu'), {key: ' '});
 
-    expect(cb).toHaveBeenCalled();
+    expect(cb).toHaveBeenCalledTimes(2);
   });
 
   it('should call the "onClose" event when the enter key is pressed', () => {
     render(
       <Menu onClose={cb}>
-        <MenuItem>Alpha</MenuItem>
+        <MenuItem onClick={cb}>Alpha</MenuItem>
       </Menu>
     );
 
     fireEvent.keyDown(screen.getByRole('menu'), {key: 'Enter'});
 
-    expect(cb).toHaveBeenCalled();
+    expect(cb).toHaveBeenCalledTimes(2);
   });
 });
 
