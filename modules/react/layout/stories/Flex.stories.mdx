@@ -33,16 +33,18 @@ yarn add @workday/canvas-kit-react
 - The `display` prop is limited to `flex` and `inline-flex`
 - `Flex` has access to flex container style props.
 
-In short, use `Flex` when you need a flex container to build one-directional layouts with CSS Flexbox, and use `Box`
-when you need a simple container. It's also important to note that `Flex` has no real opinion about
-how to build layouts outside of the CSS Flexbox spec. This allows it to be
+In short, use `Flex` when you need a flex container to build one-directional layouts with CSS
+Flexbox, and use `Box` when you need a simple container. It's also important to note that `Flex` has
+no real opinion about how to build layouts outside of the CSS Flexbox spec. This allows it to be
 composed into many different components.
 
 ## Components
 
 ### Flex
 
-`Flex` is the container component for creating one-dimensional layouts with CSS Flexbox. It has special style props that map to CSS Flexbox style properties to provide a common, ergonomic API for building layouts.
+`Flex` is the container component for creating one-dimensional layouts with CSS Flexbox. It has
+special style props that map to CSS Flexbox style properties to provide a common, ergonomic API for
+building layouts.
 
 #### Usage
 
@@ -56,12 +58,16 @@ composed into many different components.
 
 #### Props
 
-`Flex` exposes [flex container style props](/getting-started/for-developers/resources/style-props/#flex) and `Box` style props.
+`Flex` exposes
+[flex container style props](/getting-started/for-developers/resources/style-props/#flex) and `Box`
+style props.
 
 ### Flex.Item
 
-`Flex.Item` is a subcomponent of `Flex`. It is a `Box` component under the hood and exposes [flex item style props](/getting-started/for-developers/resources/style-props/#flex-item) that map to CSS Flexbox
-Item properties. This provides greater control over how child components render in your layout.
+`Flex.Item` is a subcomponent of `Flex`. It is a `Box` component under the hood and exposes
+[flex item style props](/getting-started/for-developers/resources/style-props/#flex-item) that map
+to CSS Flexbox Item properties. This provides greater control over how child components render in
+your layout.
 
 #### Usage
 
@@ -75,4 +81,6 @@ Item properties. This provides greater control over how child components render 
 
 #### Props
 
-`Flex.Item` exposes [flex item style props](/getting-started/for-developers/resources/style-props/#flex-item) and `Box` style props.
+`Flex.Item` exposes
+[flex item style props](/getting-started/for-developers/resources/style-props/#flex-item) and `Box`
+style props.

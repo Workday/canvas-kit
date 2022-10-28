@@ -52,6 +52,8 @@ const routes = {
     'welcome-dev-docs-compound-components--page',
   '/getting-started/for-developers/resources/creating-compound-components/':
     'welcome-dev-docs-creating-compound-components--page',
+    '/getting-started/for-developers/resources/responsive-styling/':
+    'hooks-and-utilities-responsive-styling--responsive-container',
   '/getting-started/for-developers/resources/style-props/':
     'welcome-dev-docs-style-props--background-example',
   '/getting-started/for-developers/resources/testing/': 'welcome-dev-docs-testing--page',
