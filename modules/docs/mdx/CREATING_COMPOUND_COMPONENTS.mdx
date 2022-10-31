@@ -19,51 +19,20 @@ concepts. We will cover:
 
 ## Models
 
-A model is composed of state and events. State and Event shapes are as follows:
+A model is composed of state and events. The shape of the model used by components looks like this:
 
 ```tsx
-type State = Record<string, any>;
-type Events = Record<string, (data?: object) => void>;
-```
-
-The shape of a model is as follows:
-
-```tsx
-interface Model<S extends State, E extends Events> {
-  state: S;
-  events: E;
-}
-```
-
-The `@workday/canvas-kit-react/common` module exports a `Model` type for us.
-
-Let's start by defining our state and events:
-
-```tsx
-// useDisclosureModel.tsx
-import React from 'react';
-
-import {Model} from '@workday/canvas-kit-react/common';
-
-export type DisclosureState = {
-  visible: boolean;
+type Model = {
+  state: Record<string, any>;
+  events: Record<string, (data?: any) => void>;
 };
-
-export type DisclosureEvents = {
-  show(data?: {}): void;
-  hide(data?: {}): void;
-};
-
-export type DisclosureModel = Model<DisclosureState, DisclosureEvents>;
 ```
 
-Let's add an `initialVisible` config and export a model hook:
+Our model hook will take a config for `initialVisible` and return a model.
 
 ```tsx
-// useDisclosureModel.tsx
-// ...
-
-export type DisclosureConfig = {
+// useDisclosureModel.ts
+type DisclosureConfig = {
   initialVisible?: boolean;
 };
 
@@ -87,10 +56,10 @@ export const useDisclosureModel = (config: DisclosureConfig = {}) => {
 };
 ```
 
-Models aren't very complicated so far. We have a single `visible` state property and `show` and
-`hide` events we can send to the model. So far using the model might look like this:
+The model has a single `visible` state property and `show` and `hide` events we can send to the
+model. So far using the model might look like this:
 
-```tsx
+```jsx
 const Test = () => {
   const model = useDisclosureModel();
 
@@ -118,56 +87,56 @@ You can find a working example here: https://codesandbox.io/s/basic-disclosure-m
 It would be nice to add guards and callbacks to our events. Let's add configuration to our model:
 
 ```tsx
-export type DisclosureConfig = {
+type DisclosureConfig = {
   initialVisible?: boolean;
   // guards
-  shouldShow?(event: {data?: {}; state: DisclosureState}): boolean;
-  shouldHide?(event: {data?: {}; state: DisclosureState}): boolean;
+  shouldShow?(data: void, state: DisclosureState): boolean;
+  shouldHide?(data: void, state: DisclosureState): boolean;
   // callbacks
-  onShow?(event: {data?: {}; prevState: DisclosureState}): void;
-  onHide?(event: {data?: {}; prevState: DisclosureState}): void;
+  onShow?(data: void, prevState: DisclosureState): void;
+  onHide?(data: void, prevState: DisclosureState): void;
 };
 ```
 
 We'll also have to add the runtime of the guards and actions:
 
 ```tsx
-const events: DisclosureEvents = {
-  show(data) {
-    if (config.shouldShow?.({data, state}) === false) {
+const events = {
+  show() {
+    if (config.shouldShow?.(undefined, state) === false) {
       return;
     }
     setVisible(true);
-    config.onShow?.({data, prevState: state});
+    config.onShow?.(undefined, state);
   },
-  hide(data) {
-    if (config.shouldHide?.({data, state}) === false) {
+  hide() {
+    if (config.shouldHide?.(undefined, state) === false) {
       return;
     }
     setVisible(false);
-    config.onHide?.({data, prevState: state});
+    config.onHide?.(undefined, state);
   },
 };
 ```
 
 Now we should be able to configure the model via the guards and do something in the callbacks:
 
-```tsx
+```jsx
 const Test = () => {
   const [should, setShould] = React.useState(true);
   const model = useDisclosureModel({
-    shouldShow({data, state}) {
+    shouldShow(data, state) {
       console.log('shouldShow', data, state, should);
       return should;
     },
-    shouldHide({data, state}) {
+    shouldHide(data, state) {
       console.log('shouldHide', data, state, should);
       return should;
     },
-    onShow({data, prevState}) {
+    onShow(data, prevState) {
       console.log('onShow', data, prevState);
     },
-    onHide({data, prevState}) {
+    onHide(data, prevState) {
       console.log('onHide', data, prevState);
     },
   });
@@ -210,71 +179,45 @@ You can see it in action here: https://codesandbox.io/s/basic-configurable-discl
 That's a lot of extra boilerplate code for actions and callbacks. Our events don't have any data,
 but if they did, we'd have to keep the event + guard and callback data types in sync. We are also
 creating the `events` object every render. We could use React refs and `React.useMemo` to decrease
-extra object creation. Luckily the common module has `createEventMap` and `useEventMap` functions to
-help us reduce boilerplate and reduce possibility of making mistakes.
+extra object creation. Luckily the common module has `createModelHook` factory function to help us
+reduce boilerplate and reduce possibility of making mistakes.
 
-First we need to create an event map - a map of guard and callback functions to the events they need
-to be paired with. We'll use `createEventMap` to do this:
+The `createModelHook` creates a model and infers the config, state, and events. The callbacks and
+guard types will automatically be inferred.
 
 ```tsx
-import {createEventMap} from '@workday/canvas-kit-react/common';
+// useDisclosureModel.ts
+import {createModelHook} from '@workday/canvas-kit-react/common';
 
-const disclosureEventMap = createEventMap<DisclosureEvents>()({
-  guards: {
-    shouldShow: 'show',
-    shouldHide: 'hide',
+export const useDisclosureModel = createModelHook({
+  defaultConfig: {
+    initialVisible: false,
   },
-  callbacks: {
-    onShow: 'show',
-    onHide: 'hide',
-  },
+})(config => {
+  const [visible, setVisible] = React.useState(config.initialVisible || false);
+
+  const state = {
+    visible,
+  };
+
+  const events = {
+    show() {
+      setVisible(true);
+    },
+    hide() {
+      setVisible(false);
+    },
+  };
+
+  return {state, events};
 });
 ```
 
-This part is a little weird: `createEventMap<DisclosureEvents>()({`. The reason for this is a
-Typescript issue: https://github.com/microsoft/TypeScript/issues/26242. The gist is a function with
-generics requires the caller to specify none of the generics or all of them. In this case, the only
-generic that cannot be inferred is the `DisclosureEvents`. Everything else can be inferred. The only
-way to separate defined generics vs inferred generics is to have separate, chained functions.
-
-We see that `createEventMap` takes two optional keys: `guards` and `callbacks`. The names of these
-functions are arbitrary, but should follow the convention of `should*` for guards and `on*` for
-callbacks. The event name that is passed in is type checked against the `DisclosureEvents`
-interface.
-
-Now that we have an event map, we'll need to use it for our `DisclosureConfig`:
-
-```tsx
-import {ToModelConfig} from '@workday/canvas-kit-react/common';
-
-export type DisclosureConfig = {
-  initialVisible?: boolean;
-} & Partial<ToModelConfig<DisclosureState, DisclosureEvents, typeof disclosureEventMap>>;
-```
-
-The `ToModelConfig` type takes in our `State` type, `Events` type, and our `EventMap` type (the
-event map type is extracted from the event map: `typeof disclosureEventMap`). This will give us the
-proper shape of our config object.
-
-The `disclosureEventMap` will also be used to create the `events` object using the `useEventMap`
-utility hook:
-
-```tsx
-const events = useEventMap(disclosureEventMap, state, config, {
-  show(data) {
-    setVisible(true);
-  },
-  hide(data) {
-    setVisible(false);
-  },
-});
-```
-
-You can see `useEventMap` takes in our `disclosureEventMap`, `state`, `config` objects as well as a
-list of event implementations. This is all type checked, decreasing the chances we make a mistake.
-Also notice we don't need to implement guards and callbacks directly inside our event
-implementations. `useEventMap` will return an object that has that functionality built right in!
-Neat!
+The `createModelHook` takes a config object to determine the default config and the required config.
+We only need default config. This function returns a function with a `config` object with all config
+defaults applied. This is the body of the `useDisclosureModel` hook from earlier. Notice we don't
+need to implement guards and callbacks directly inside our event implementations. `createModelHook`
+will return an object that has that functionality built right in! Neat!
 
 The full working implementation is here:
 https://codesandbox.io/s/configurable-disclosure-model-3y5qh
@@ -307,14 +250,15 @@ import React from 'react';
 
 import {DisclosureTarget} from './DisclosureTarget';
 import {DisclosureContent} from './DisclosureContent';
+import {useDisclosureModel} from './useDisclosureModel';
 
-import {DisclosureConfig, DisclosureModel, useDisclosureModel} from './useDisclosureModel';
+type DisclosureConfig = typeof useDisclosureModel.TConfig;
 
 export interface DisclosureProps extends DisclosureConfig {
   children: React.ReactNode;
 }
 
-export const DisclosureModelContext = React.createContext({} as DisclosureModel);
+const DisclosureModelContext = useDisclosureModel.Context;
 
 export const Disclosure = ({children, ...config}: DisclosureProps) => {
   const model = useDisclosureModel(config);
@@ -328,14 +272,14 @@ Disclosure.Target = DisclosureTarget;
 Disclosure.Content = DisclosureContent;
 ```
 
-We can see that the `DisclosureProps` interface extends the `DisclosureConfig` interface. This
-allows us to pass model config directly to the `<Disclosure>` component. A user of this
-`<Disclosure>` component might want to register a callback when the `show` event is called, for
-instance.
+We can see that the `DisclosureProps` interface extends the config of the `useDisclosureModel`. The
+`createModelHook` exposes a `TConfig` property to capture the config type. This allows us to pass
+model config directly to the `<Disclosure>` component. A user of this `<Disclosure>` component might
+want to register a callback when the `show` event is called, for instance.
 
-Next, a React Context object is created to represent the model of the compound component. This
-context will be used to pass the model to sub-components implicitly. This allows our compound
-component API to remain clean for consumers of compound components.
+The `createModelHook` creates a React Context that can be used by the `Disclosure` component to
+expose the disclosure model to subcomponents without having to pass via props. This allows our
+compound component API to remain clean for consumers of compound components.
 
 In this particular compound component, the container component doesn't have a real element.
 Accessibility specifications have no `role` for this component, so an element is not required.
@@ -347,14 +291,16 @@ Let's go ahead and finish out our sub-components.
 ```tsx
 // DisclosureTarget.tsx
 import React from 'react';
-import {DisclosureModelContext} from './Disclosure';
+import React from 'react';
+
+import {useDisclosureModel} from './useDisclosureModel';
 
 export interface DisclosureTargetProps {
   children: React.ReactNode;
 }
 
 export const DisclosureTarget = ({children}: DisclosureTargetProps) => {
-  const model = React.useContext(DisclosureModelContext);
+  const model = React.useContext(useDisclosureModel.Context);
 
   return (
     <button
@@ -380,14 +326,15 @@ event on the model.
 ```tsx
 // DisclosureContent.tsx
 import React from 'react';
-import {DisclosureModelContext} from './Disclosure';
+
+import {useDisclosureModel} from './useDisclosureModel';
 
 export interface DisclosureContentProps {
   children: React.ReactNode;
 }
 
 export const DisclosureContent = ({children}: DisclosureContentProps) => {
-  const model = React.useContext(DisclosureModelContext);
+  const model = React.useContext(useDisclosureModel.Context);
 
   return <div hidden={model.state.visible ? undefined : true}>{children}</div>;
 };
@@ -399,18 +346,23 @@ set a `hidden` attribute.
 The working example can be found here:
 https://codesandbox.io/s/configurable-disclosure-model-components-nvhtv
 
-These components are not fully compliant yet. They do not support `ref`, `as`, or extra props as
-HTML attributes. The boilerplate to supporting all this gets very complicated. For this reason, a
-`createComponent` utility function was created to support all this out of the box. `createComponent`
-takes a default `React.ElementType` which can be an element string like `div` or `button` or a
-component like `Button`. It also takes a config object containing the following:
+These components are not fully compliant yet. They do not support `model`, `ref`, `as`, or extra
+props as HTML attributes. Also, we have to use `typeof` to create types and a `DisclosureContext`
+variable (capitalized for JSX). We also have to worry about the `model` prop. The boilerplate to
+supporting all this gets very complicated. For this reason, `createContainer` and
+`createSubcomponent` were created to support all this out of the box. Both functions take a default
+`React.ElementType` which can be an element string like `div` or `button` or a component like
+`Button`. It also takes a config object containing the following:
 
 - `displayName`: This will be the name of the component when shown by the React Dev tools. By
   convention, we make that name be the same as typed in a render function. For example
   `Disclosure.Target` vs `DisclosureTarget`.
-- `Component`: A [forward ref component function](https://reactjs.org/docs/forwarding-refs.html)
-  with an added `Element` property. `Element` is the value passed to the Component's `as` prop. It
-  will default to the provided element.
+- `modelHook`: This is the model hook used by the compound component. `useDisclosureModel` in our
+  case. This model hook is used to determine proper prop types and seamlessly handle the option
+  `model` prop. For `createContainer`, if a `model` is not passed, a model is created and added to
+  React's context. For `createSubcomponent`, if a `model` is not passed, the model comes from React
+  Context.
+- `elemPropsHook`: This is the elemPropsHook that takes a model and elemProps and returns elemProps.
 - `subComponents`: For container components. A list of sub components to add to the returned
   component. For example, a sub component called `DisclosureTarget` will be added to the export of
   `Disclosure` so that the user can import only `Disclosure` and use `Disclosure.Target`.
@@ -418,102 +370,94 @@ component like `Button`. It also takes a config object containing the following:
   interfaces. `Disclosure.Target = DisclosureTarget` will caused a type error. This property allows
   the `createComponent` factory function to infer the final interface of the returned component.
 
-Let's convert the Disclosure example to use the `createComponent` utility function to get this extra
+Finally, a generic function is returned that takes the component configuration. The first argument
+is `elemProps` with `ref` and hook props already merged in with props handed to the component. The
+model config props will already be filtered out. We'll worry about `elemPropsHook` later. The second
+is an `Element` property. `Element` is the value passed to the Component's `as` prop. It will
+default to the provided element. The last parameter is an optional `model` reference. Ideally, the
+model is used in the `elemPropsHook` and therefore not normally needed inside the render function.
+
+Let's convert the Disclosure example to use the `createContainer` utility function to get this extra
 functionality:
 
 ```tsx
 // Disclosure.tsx
 import React from 'react';
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createContainer} from '@workday/canvas-kit-react/common';
+
 import {DisclosureTarget} from './DisclosureTarget';
 import {DisclosureContent} from './DisclosureContent';
+import {useDisclosureModel} from './useDisclosureModel';
 
-import {DisclosureConfig, DisclosureModel, useDisclosureModel} from './useDisclosureModel';
+export interface DisclosureProps {}
 
-export interface DisclosureProps extends DisclosureConfig {
-  children: React.ReactNode;
-}
-
-export const DisclosureModelContext = React.createContext({} as DisclosureModel);
-
-export const Disclosure = createComponent()({
+export const Disclosure = createContainer()({
   displayName: 'Disclosure',
-  Component: ({children, ...config}: DisclosureProps) => {
-    const model = useDisclosureModel(config);
-
-    return (
-      <DisclosureModelContext.Provider value={model}>{children}</DisclosureModelContext.Provider>
-    );
-  },
+  modelHook: useDisclosureModel,
   subComponents: {
     Target: DisclosureTarget,
     Content: DisclosureContent,
   },
+})<DisclosureProps>(({children}) => {
+  return <>{children}</>;
 });
 ```
+
+Notice we do not need to add `children` or `model` to our prop definition. `createContainer` is
+adding those prop types for us. The `displayName` helps identify the component in React developer
+tools. This is only needed by container components. The `subComponents` automatically adds a
+`displayName` to subcomponents using the property key. For example, our `DisclosureTarget` will have
+a `displayName` of `Disclosure.Target`. You can still provide a `displayName` to override this
+naming convention.
 
 ```tsx
 // DisclosureTarget.tsx
 import React from 'react';
-import {createComponent} from '@workday/canvas-kit-react/common';
-import {DisclosureModelContext} from './Disclosure';
+import {createSubcomponent} from '@workday/canvas-kit-react/common';
 
-export interface DisclosureTargetProps {
-  children: React.ReactNode;
-}
+import {useDisclosureModel} from './useDisclosureModel';
 
-export const DisclosureTarget = createComponent('button')({
-  displayName: 'Disclosure.Target',
-  Component: ({children, ...elemProps}: DisclosureTargetProps, ref, Element) => {
-    const model = React.useContext(DisclosureModelContext);
+export interface DisclosureTargetProps {}
 
-    return (
-      <Element
-        ref={ref}
-        onClick={() => {
-          if (model.state.visible) {
-            model.events.hide();
-          } else {
-            model.events.show();
-          }
-        }}
-        {...elemProps}
-      >
-        {children}
-      </Element>
-    );
-  },
+export const DisclosureTarget = createSubcomponent('button')({
+  modelHook: useDisclosureModel,
+})<DisclosureTargetProps>((elemProps, Element, model) => {
+  return (
+    <Element
+      onClick={() => {
+        if (model.state.visible) {
+          model.events.hide();
+        } else {
+          model.events.show();
+        }
+      }}
+      {...elemProps}
+    />
+  );
 });
 ```
 
 ```tsx
 // DisclosureContent.tsx
 import React from 'react';
-import {createComponent} from '@workday/canvas-kit-react/common';
-import {DisclosureModelContext} from './Disclosure';
+import {createSubcomponent} from '@workday/canvas-kit-react/common';
 
-export interface DisclosureContentProps {
-  children: React.ReactNode;
-}
+import {useDisclosureModel} from './useDisclosureModel';
 
-export const DisclosureContent = createComponent('div')({
-  displayName: 'Disclosure.Content',
-  Component: ({children, ...elemProps}: DisclosureContentProps, ref, Element) => {
-    const model = React.useContext(DisclosureModelContext);
+export interface DisclosureContentProps {}
 
-    return (
-      <Element ref={ref} hidden={model.state.open ? undefined : true} {...elemProps}>
-        {children}
-      </Element>
-    );
-  },
+export const DisclosureContent = createSubcomponent('div')({
+  modelHook: useDisclosureModel,
+})<DisclosureContentProps>(({children, ...elemProps}, Element, model) => {
+  return (
+    <Element hidden={model.state.visible ? undefined : true} {...elemProps}>
+      {children}
+    </Element>
+  );
 });
 ```
 
-The `displayName` of the components helps properly identify the sub-components by their used name.
-For example `Disclose.Target` instead of `DiscloseTarget`.
-
-The `as` prop is being passed to the 3rd argument in the and we're calling it `Element`. The
+The `as` prop is being passed to the 2rd argument in the and we're calling it `Element`. The
 variable is passed to JSX as `<Element>`. `Element` is capitalized because the JSX parser treats
 capitalized elements as variables and lower case elements as strings:
 
@@ -534,8 +478,9 @@ render `as` as an element. If we were using Emotion's `styled` components, we'd 
 not. Use `<Element>` when styling should come from the passed in element and use
 `<StyledElement as={Element}>` when the component handles styling.
 
-`createComponent` returns a component with a type interface that includes ref forwarding, the `as`
-prop for changing the underlying element, and additional props the element type normally takes.
+`createContainer` and `createSubcomponent` return a component with a type interface that includes
+ref forwarding, the `as` prop for changing the underlying element, the `model` prop, and additional
+attributes/props the element type normally takes.
 
 For example, we can now do the following:
 
@@ -563,7 +508,7 @@ common so let's make a new model and compose from it instead. We'll later use th
 reusable behavioral hook.
 
 ```tsx
-// useIDModel.tsx
+// useIDModel.ts
 import {Model, useUniqueId} from '@workday/canvas-kit-react/common';
 
 export type IDState = {
@@ -597,21 +542,19 @@ Also later we'll add behavioral hook that will require this model.
 Let's update the `DisclosureModel` to compose the `IDModel`:
 
 ```tsx
-// useDisclosureModel.tsx
-// ...
-import {IDState, IDConfig, useIDModel} from './useIDModel';
+// useDisclosureModel.ts
+import React from 'react';
 
-export type DisclosureState = IDState & {
-  visible: boolean;
-};
+import {createModelHook} from '@workday/canvas-kit-react/common';
 
-// ...
+import {useIDModel} from './useIDModel';
 
-export type DisclosureConfig = IDConfig & {
-  initialVisible?: boolean;
-} & Partial<ToModelConfig<DisclosureState, DisclosureEvents, typeof disclosureEventMap>>;
-
-export const useDisclosureModel = (config: DisclosureConfig = {}) => {
+export const useDisclosureModel = createModelHook({
+  defaultConfig: {
+    ...useIDModel.defaultConfig,
+    initialVisible: false,
+  },
+})(config => {
   const [visible, setVisible] = React.useState(config.initialVisible || false);
   const idModel = useIDModel(config);
 
@@ -620,10 +563,18 @@ export const useDisclosureModel = (config: DisclosureConfig = {}) => {
     visible,
   };
 
-  // ...
+  const events = {
+    ...idModel.events,
+    show() {
+      setVisible(true);
+    },
+    hide() {
+      setVisible(false);
+    },
+  };
 
   return {state, events};
-};
+});
 ```
 
 We can now add `aria-controls` to `DisclosureTarget` and `id` to `DisclosureContent`. We'll also add
@@ -636,7 +587,6 @@ We can now add `aria-controls` to `DisclosureTarget` and `id` to `DisclosureCont
 
 return (
   <Element
-    ref={ref}
     aria-controls={model.state.id}
     aria-expanded={model.state.visible}
     onClick={() => {
@@ -661,12 +611,7 @@ return (
 // ...
 
 return (
-  <Element
-    ref={ref}
-    id={model.state.id}
-    hidden={model.state.visible ? undefined : true}
-    {...elemProps}
-  >
+  <Element id={model.state.id} hidden={model.state.visible ? undefined : true} {...elemProps}>
     {children}
   </Element>
 );
@@ -689,10 +634,14 @@ UI of a dropdown menu look very different!
 We'll build a behavior hook for the `DisclosureTarget` component:
 
 ```tsx
-// useExpandableControls.tsx
-import {DisclosureModel} from './useDisclosureModel';
+// useExpandableControls.ts
+import {useDisclosureModel} from './useDisclosureModel';
 
-export const useExpandableControls = ({state}: DisclosureModel, elemProps: {}) => {
+export const useExpandableControls = (
+  {state}: ReturnType<typeof useDisclosureModel>,
+  elemProps = {},
+  ref?: React.Ref<any>
+) => {
   return {
     'aria-controls': state.id,
     'aria-expanded': state.visible,
@@ -710,11 +659,15 @@ won't get into that here, but it is useful and works with `composeHooks` that is
 `common` module. Let's refactor the above to use that function:
 
 ```tsx
-// useExpandableControls.tsx
+// useExpandableControls.ts
 import {mergeProps} from '@workday/canvas-kit-react/common';
-import {DisclosureModel} from './useDisclosureModel';
+import {useDisclosureModel} from './useDisclosureModel';
 
-export const useExpandableControls = ({state}: DisclosureModel, elemProps: {}) => {
+export const useExpandableControls = (
+  {state}: ReturnType<typeof useDisclosureModel>,
+  elemProps = {},
+  ref?: React.Ref<any>
+) => {
   return mergeProps(
     {
       'aria-controls': state.id,
@@ -728,73 +681,167 @@ export const useExpandableControls = ({state}: DisclosureModel, elemProps: {}) =
 Even though the `useExpandableControls` did not use any special props that need special merging, it
 is a good habit to use `mergeProps` anytime you define props.
 
+This is still a lot of boilerplate. We need the return type of the model hook, we need to specify
+that our hook can optionally accept `elemProps` and a `ref`. And we need to call `mergeProps`. The
+`createElemPropsHook` utility function helps with a lot of this boilerplate:
+
+```tsx
+import {createElemPropsHook} from '@workday/canvas-kit-react/common';
+import {useDisclosureModel} from './useDisclosureModel';
+
+export const useExpandableControls = createElemPropsHook(useDisclosureModel)(({state}) => {
+  return {
+    'aria-controls': state.id,
+    'aria-expanded': state.visible,
+  };
+});
+```
+
+The `createElemPropsHook` takes the model hook and a elem props hook body as arguments. The hook
+function body doesn't need to call `mergeProps` since `createElemPropsHook` takes care of that for
+us. Our logic can focus only on the props we need to add to an element!
+
+Now we have a reusable elemProps hook that can be composed into other hooks or used on its own.
+"expandable controls" could be used on a select component, a popup component, or any other type of
+disclosure target component. We don't add the `onClick` because how the disclosure is revealed
+depends on the disclosure target type. In a `Select` component, that could be by clicking on the
+target, or using the down arrow. On a `Tooltip` component, it could be revealed by a mouse hover or
+focus event. Lets create a `useDisclosureTarget` elemProps hook that merges in an `onClick` with
+`useExpandableControls`:
+
+```tsx
+// useDisclosureTarget.ts
+import {createElemPropsHook, mergeProps} from '@workday/canvas-kit-react/common';
+import {useDisclosureModel} from './useDisclosureModel';
+import {useExpandableControls} from './useExpandableControls';
+
+export const useDisclosureTarget = createElemPropsHook(useDisclosureModel)(
+  (model, ref, elemProps) => {
+    const props = useExpandableControls(model, elemProps, ref);
+
+    return mergeProps(
+      {
+        onClick() {
+          if (model.state.visible) {
+            model.events.hide();
+          } else {
+            model.events.show();
+          }
+        },
+      },
+      props
+    );
+  }
+);
+```
+
+Notice we still need to use `mergeProps` to compose the behavior of our two elemProps hooks? A
+`composeHooks` function was created to handle this common composition use-case. `composeHooks` takes
+two or more elemProps hooks and returns a new hook with all props merged for us:
+
+```tsx
+// useDisclosureTarget.ts
+import {createElemPropsHook, composeHooks} from '@workday/canvas-kit-react/common';
+import {useDisclosureModel} from './useDisclosureModel';
+import {useExpandableControls} from './useExpandableControls';
+
+export const useDisclosureTarget = composeHooks(
+  createElemPropsHook(useDisclosureModel)(model => {
+    return {
+      onClick() {
+        if (model.state.visible) {
+          model.events.hide();
+        } else {
+          model.events.show();
+        }
+      },
+    };
+  }),
+  useExpandableControls
+);
+```
+
+We don't even need to declare `elemProps` or `ref` parameters if we don't use them!
+
 Now we can use the behavior hook in the `DiscloseTarget` component:
 
 ```tsx
 // DisclosureTarget.tsx
-import {createComponent, mergeProps} from '@workday/canvas-kit-react/common';
-import {useExpandableControls} from './useExpandableControls';
+import React from 'react';
+import {createSubcomponent} from '@workday/canvas-kit-react/common';
 
-// ...
-const model = React.useContext(DisclosureModelContext);
-const props = mergeProps(
-  {
-    onClick() {
-      if (model.state.visible) {
-        model.events.hide();
-      } else {
-        model.events.show();
-      }
-    },
-  },
-  useExpandableControls(model, elemProps)
-);
+import {useDisclosureModel} from './useDisclosureModel';
+import {useDisclosureTarget} from './useDisclosureTarget';
 
-return (
-  <Element ref={ref} {...props}>
-    {children}
-  </Element>
-);
-// ...
+export interface DisclosureTargetProps {}
+
+export const DisclosureTarget = createSubcomponent('button')({
+  modelHook: useDisclosureModel,
+})<DisclosureTargetProps>((elemProps, Element, model) => {
+  const props = useDisclosureTarget(model, elemProps);
+  return <Element {...props} />;
+});
 ```
 
-We used `mergeProps` for the `onClick`. This way, if the user passes their own `onClick`, their
-`onClick` will be called in addition to the `onClick` we've defined here. Without this, if the user
-passes an `onClick`, it will override ours and break functionality. Definitely not what we want!
+Note: We should never use `createElemPropsHook` or `composeHooks` inside a render function as that
+would be slower. Always hoist the hook definition outside a render function.
 
-We'll also make a `useHidden` behavior hook for the `hidden` attribute on the `Disclosure.Content`
-element:
+It is very common to use an elemProps hook with a compound component, so `createContainer` and
+`createSubcomponent` both take an `elemPropsHook` configuration option. This way we don't have to
+worry about the `model` or using `mergeProps` in our component definition. Here's the final code.
 
 ```tsx
-// useHidden.tsx
-import {mergeProps} from '@workday/canvas-kit-react/common';
-import {DisclosureModel} from './useDisclosureModel';
+// DisclosureTarget.tsx
+import React from 'react';
+import {createSubcomponent} from '@workday/canvas-kit-react/common';
 
-export const useHidden = ({state}: DisclosureModel, elemProps: {}) => {
-  return mergeProps(
-    {
-      hidden: state.visible ? undefined : true,
-    },
-    elemProps
-  );
-};
+import {useDisclosureModel} from './useDisclosureModel';
+import {useDisclosureTarget} from './useDisclosureTarget';
+
+export interface DisclosureTargetProps {}
+
+export const DisclosureTarget = createSubcomponent('button')({
+  modelHook: useDisclosureModel,
+  elemPropsHook: useDisclosureTarget,
+})<DisclosureTargetProps>((elemProps, Element) => {
+  return <Element {...elemProps} />;
+});
+```
+
+We'll also make a `useDisclosureContent` behavior hook for the `hidden` attribute on the
+`Disclosure.Content` element:
+
+```tsx
+// useDisclosureContent.ts
+import {createElemPropsHook} from '@workday/canvas-kit-react/common';
+import {useDisclosureModel} from './useDisclosureModel';
+
+export const useDisclosureContent = createElemPropsHook(useDisclosureModel)(model => {
+  return {
+    id: model.state.id,
+    hidden: model.state.visible ? undefined : true,
+  };
+});
 ```
 
 The `Disclosure.Content` subcomponent can now be updated to use this hook:
 
 ```tsx
 // DisclosureContent.tsx
-import {useHidden} from './useHidden';
-// ..
+import React from 'react';
+import {createSubcomponent} from '@workday/canvas-kit-react/common';
 
-const model = React.useContext(DisclosureModelContext);
-const props = useHidden(model, elemProps);
+import {useDisclosureModel} from './useDisclosureModel';
+import {useDisclosureContent} from './useDisclosureContent';
 
-return (
-  <Element ref={ref} id={model.state.id} {...props}>
-    {children}
-  </Element>
-);
+export interface DisclosureContentProps {}
+
+export const DisclosureContent = createSubcomponent('div')({
+  modelHook: useDisclosureModel,
+  elemPropsHook: useDisclosureContent,
+})<DisclosureContentProps>(({children, ...elemProps}, Element) => {
+  return <Element {...elemProps}>{children}</Element>;
+});
 ```
 
 The full code can be found here:
@@ -810,32 +857,22 @@ mouse and focus events.
 Here's a tooltip model composing the disclosure model:
 
 ```tsx
-// useTooltipModel.tsx
-import {Model} from '@workday/canvas-kit-react/common';
+// useTooltipModel.ts
+import {createModelHook} from '@workday/canvas-kit-react/common';
 
-import {
-  DisclosureConfig,
-  DisclosureEvents,
-  DisclosureState,
-  useDisclosureModel,
-} from './useDisclosureModel';
+import {useDisclosureModel} from './useDisclosureModel';
 
-export type TooltipState = DisclosureState;
-export type TooltipEvents = DisclosureEvents;
-export type TooltipModel = Model<TooltipState, TooltipEvents>;
+const {
+  initialVisible, // tooltips are never initially visible, so remove the option
+  ...defaultConfig
+} = useDisclosureModel.defaultConfig;
 
-export type TooltipConfig = DisclosureConfig & {
-  initialVisible?: never; // tooltips never start showing
-};
-
-export const useTooltipModel = (config: TooltipConfig = {}) => {
-  const disclosure = useDisclosureModel(config);
-
-  const state = disclosure.state;
-  const events = disclosure.events;
-
-  return {state, events};
-};
+export const useTooltipModel = createModelHook({
+  defaultConfig,
+  requiredConfig: useDisclosureModel.requiredConfig,
+})(config => {
+  return useDisclosureModel(config);
+});
 ```
 
 Not much interesting is happening here. We're not adding additional state or events, but we're
@@ -855,29 +892,25 @@ The `Tooltip` container component looks almost exactly like the Disclosure compo
 ```tsx
 // Tooltip.tsx
 import React from 'react';
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createContainer} from '@workday/canvas-kit-react/common';
 
-import {useTooltipModel, TooltipModel, TooltipConfig} from './useTooltipModel';
+import {useTooltipModel} from './useTooltipModel';
 import {TooltipTarget} from './TooltipTarget';
 import {TooltipContent} from './TooltipContent';
 
-export const TooltipModelContext = React.createContext<TooltipModel>({} as any);
-
-export interface TooltipProps extends TooltipConfig {
-  children: React.ReactNode;
+export interface TooltipProps {
+  children?: React.ReactNode;
 }
 
-export const Tooltip = createComponent()({
+export const Tooltip = createContainer()({
   displayName: 'Tooltip',
-  Component: ({children, ...config}: TooltipProps) => {
-    const model = useTooltipModel(config);
-
-    return <TooltipModelContext.Provider value={model}>{children}</TooltipModelContext.Provider>;
-  },
+  modelHook: useTooltipModel,
   subComponents: {
     Target: TooltipTarget,
     Content: TooltipContent,
   },
+})(({children}: TooltipProps) => {
+  return <>{children}</>;
 });
 ```
 
@@ -885,49 +918,40 @@ The `Tooltip.Target` component is similar to the `DisclosureTarget` component, b
 behavior. The tooltip triggers on different events. Here's the code:
 
 ```tsx
+// TooltipTarget.tsx
 import React from 'react';
-import {createComponent, mergeProps} from '@workday/canvas-kit-react/common';
+import {createSubcomponent, createElemPropsHook} from '@workday/canvas-kit-react/common';
 
-import {TooltipModelContext} from './Tooltip';
-import {TooltipModel} from './useTooltipModel';
+import {useTooltipModel} from './useTooltipModel';
 
 export interface TooltipTargetProps {
   children: React.ReactNode;
 }
 
-export const useTooltipTarget = ({state, events}: TooltipModel, elemProps = {}) => {
-  return mergeProps(
-    {
-      onFocus(event: any) {
-        events.show();
-      },
-      onBlur() {
-        events.hide();
-      },
-      onMouseEnter() {
-        events.show();
-      },
-      onMouseLeave() {
-        events.hide();
-      },
-      'aria-describedby': state.id,
+export const useTooltipTarget = createElemPropsHook(useTooltipModel)(({state, events}) => {
+  return {
+    onFocus(event: any) {
+      events.show();
     },
-    elemProps
-  );
-};
+    onBlur() {
+      events.hide();
+    },
+    onMouseEnter() {
+      events.show();
+    },
+    onMouseLeave() {
+      events.hide();
+    },
+    'aria-describedby': state.id,
+  };
+});
 
-export const TooltipTarget = createComponent('button')({
+export const TooltipTarget = createSubcomponent('button')({
   displayName: 'Tooltip.Target',
-  Component: ({children, ...elemProps}: TooltipTargetProps, ref, Element) => {
-    const model = React.useContext(TooltipModelContext);
-    const props = useTooltipTarget(model, elemProps);
-
-    return (
-      <Element ref={ref} {...props}>
-        {children}
-      </Element>
-    );
-  },
+  modelHook: useTooltipModel,
+  elemPropsHook: useTooltipTarget,
+})<TooltipTargetProps>(({children, ...elemProps}, Element) => {
+  return <Element {...elemProps}>{children}</Element>;
 });
 ```
 
@@ -937,41 +961,39 @@ comes from the `IDModel`.
 The `Tooltip.Content` component is similar to the `Disclosure.Content` component, except that it
 uses a ReactDOM portal to ensure the content appears on top of other content. This example doesn't
 include a positional library and instead hard-codes positional values. Notice we can reuse our
-`useHidden` behavior hook in this component!
+`useDisclosureContent` behavior hook in this component!
 
 ```tsx
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {createComponent, mergeProps} from '@workday/canvas-kit-react/common';
+import {
+  createSubcomponent,
+  createElemPropsHook,
+  composeHooks,
+} from '@workday/canvas-kit-react/common';
 
-import {TooltipModelContext} from './Tooltip';
-import {useHidden} from './useHidden';
+import {useDisclosureContent} from './useDisclosureContent';
+import {useTooltipModel} from './useTooltipModel';
 
-export interface TooltipContentProps {
-  children: React.ReactNode;
-}
+export interface TooltipContentProps {}
 
-export const TooltipContent = createComponent('div')({
-  displayName: 'Tooltip.Content',
-  Component: ({children, ...elemProps}: TooltipContentProps, ref, Element) => {
-    const model = React.useContext(TooltipModelContext);
-    const props = mergeProps(
-      {
-        id: model.state.id,
-        style: {position: 'absolute', left: 80, top: 10},
-      },
-      useHidden(model, elemProps)
-    );
+const useTooltipContent = composeHooks(
+  createElemPropsHook(useTooltipModel)(model => {
+    return {
+      style: {position: 'absolute', left: 80, top: 10},
+    };
+  }),
+  useDisclosureContent
+);
 
-    return ReactDOM.createPortal(
-      model.state.id ? (
-        <Element ref={ref} {...props}>
-          {children}
-        </Element>
-      ) : null,
-      document.body
-    );
-  },
+export const TooltipContent = createSubcomponent('div')({
+  modelHook: useTooltipModel,
+  elemPropsHook: useTooltipContent,
+})<TooltipContentProps>(({children, ...elemProps}, Element, model) => {
+  return ReactDOM.createPortal(
+    model.state.id ? <Element {...elemProps}>{children}</Element> : null,
+    document.body
+  );
 });
 ```
 
