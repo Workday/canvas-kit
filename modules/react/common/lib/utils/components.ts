@@ -252,13 +252,22 @@ export const createContainer = <
   defaultContext?: TDefaultContext;
   subComponents?: SubComponents;
 }) => {
-  const Context =
-    modelHook.Context ||
-    React.createContext({state: {}, events: {}, defaultConfig: modelHook.defaultConfig});
+  assert(
+    modelHook.Context,
+    'createContainer only works on models with context. Please use `createModelHook` to create the `modelHook`'
+  );
+  const Context = modelHook.Context;
 
   return <Props>(
     Component: (
-      props: Props & RemoveNull<ReturnType<TElemPropsHook>> & {ref: ExtractRef<E>},
+      props: Props &
+        RemoveNull<ReturnType<TElemPropsHook>> & {ref: ExtractRef<E>} & (Props extends {
+          children: any;
+        }
+          ? {}
+          : {
+              children?: React.ReactNode;
+            }),
       Element: E extends undefined ? never : E,
       model: TModelHook extends (config: infer TConfig) => infer TModel ? TModel : never
     ) => JSX.Element | null
@@ -272,7 +281,7 @@ export const createContainer = <
           E extends undefined ? React.FC : E,
           Props & TConfig,
           TModel
-        > & {Context: React.Context<TModel>}
+        >
     : never) &
     SubComponents => {
     const ReturnedComponent = React.forwardRef<E, Props & {as?: React.ElementType} & {model?: any}>(
@@ -287,7 +296,7 @@ export const createContainer = <
           Context.Provider,
           {value: localModel},
           Component(
-            finalElemProps as Props & RemoveNull<ReturnType<TElemPropsHook>> & {ref: ExtractRef<E>},
+            finalElemProps as any,
             // Cast to `any` to avoid: "ts(2345): Type 'undefined' is not assignable to type 'E extends
             // undefined ? never : E'" I'm not sure I can actually cast to this conditional type and it
             // doesn't actually matter, so cast to `any` it is.
@@ -303,9 +312,13 @@ export const createContainer = <
       // we'll cast to `Record<string, any>` for assignment. Note the lack of type checking
       // properties. Take care when changing the runtime of this function.
       (ReturnedComponent as Record<string, any>)[key] = (subComponents as Record<string, any>)[key];
+      // Add a displayName if one isn't already created. This prevents us from having to add
+      // `displayName` to subcomponents and only container components
+      if (displayName && !(subComponents as Record<string, any>)[key].displayName) {
+        (subComponents as Record<string, any>)[key].displayName = `${displayName}.${key}`;
+      }
     });
     ReturnedComponent.displayName = displayName;
-    (ReturnedComponent as any).Context = Context;
 
     // Cast as `any`. We have already specified the return type. Be careful making changes to this
     // file due to this `any` `ReturnedComponent` is a `React.ForwardRefExoticComponent`, but we want
@@ -336,6 +349,7 @@ export const createSubcomponent = <
   elemPropsHook,
   subComponents,
 }: {
+  /** @deprecated You no longer need to use displayName. A `displayName` will be automatically added if it belongs to a container */
   displayName?: string;
   modelHook: TModelHook;
   elemPropsHook?: TElemPropsHook;
@@ -350,9 +364,7 @@ export const createSubcomponent = <
     Component: (
       props: Props &
         (TElemPropsHook extends (...args: any[]) => infer TProps // try to infer TProps returned from the elemPropsHook function
-          ? TProps extends {ref: infer R}
-            ? TProps
-            : TProps & {ref: ExtractRef<E>}
+          ? RemoveNull<TProps extends {ref: infer R} ? TProps : TProps & {ref: ExtractRef<E>}>
           : {ref: ExtractRef<E>}) &
         (Props extends {children: any}
           ? {}
@@ -398,7 +410,10 @@ export const createSubcomponent = <
       // properties. Take care when changing the runtime of this function.
       (ReturnedComponent as Record<string, any>)[key] = (subComponents as Record<string, any>)[key];
     });
-    ReturnedComponent.displayName = displayName;
+
+    if (displayName) {
+      ReturnedComponent.displayName = displayName;
+    }
 
     // Cast as `any`. We have already specified the return type. Be careful making changes to this
     // file due to this `any` `ReturnedComponent` is a `React.ForwardRefExoticComponent`, but we want

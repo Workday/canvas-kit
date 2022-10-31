@@ -1,6 +1,9 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React from 'react';
 
+/**
+ * @deprecated
+ */
 export type Model<State, Events extends IEvent> = {
   state: State;
   events: Events;
@@ -60,6 +63,7 @@ type ToCallbackConfig<
  *   // additional config your model requires goes here
  *   id?: string
  * } & Partial<ToModelConfig<State, Events, typeof eventMap>>
+ * @deprecated
  */
 export type ToModelConfig<
   TState extends Record<string, any>,
@@ -91,6 +95,7 @@ export type ToModelConfig<
  *     onOpen: 'open'
  *   }
  * })
+ * @deprecated
  */
 export const createEventMap = <TEvents extends IEvent>() => <
   TGuardMap extends Record<string, keyof TEvents>,
@@ -124,6 +129,7 @@ const keys = <T extends object>(input: T) => Object.keys(input) as (keyof T)[];
  *     }
  *   }
  * })
+ * @deprecated
  */
 export const useEventMap = <
   TEvents extends IEvent,
