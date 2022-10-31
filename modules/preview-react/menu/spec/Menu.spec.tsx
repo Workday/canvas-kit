@@ -211,7 +211,7 @@ describe('Menu Keyboard Shortcuts', () => {
 
   it('should loop around selected items using the down arrow', () => {
     render(
-      <Menu isOpen={false}>
+      <Menu>
         <MenuItem isHeader>Beginning</MenuItem>
         <MenuItem>Alpha</MenuItem>
         <MenuItem>Bravo</MenuItem>
@@ -258,7 +258,6 @@ describe('Menu Keyboard Shortcuts', () => {
     );
 
     const firstId = screen.getByRole('menuitem', {name: 'Alpha'}).getAttribute('id');
-    const secondId = screen.getByRole('menuitem', {name: 'Bravo'}).getAttribute('id');
 
     fireEvent.keyDown(screen.getByRole('menu'), {key: 'Home'});
     expect(screen.getByRole('menu')).toHaveAttribute('aria-activedescendant', firstId);
@@ -274,7 +273,6 @@ describe('Menu Keyboard Shortcuts', () => {
       </Menu>
     );
 
-    const firstId = screen.getByRole('menuitem', {name: 'Alpha'}).getAttribute('id');
     const secondId = screen.getByRole('menuitem', {name: 'Bravo'}).getAttribute('id');
 
     fireEvent.keyDown(screen.getByRole('menu'), {key: 'End'});
@@ -296,6 +294,34 @@ describe('Menu Keyboard Shortcuts', () => {
     fireEvent.keyDown(screen.getByRole('menu'), {key: 'ArrowRight'});
 
     expect(screen.getByRole('menu')).toHaveAttribute('aria-activedescendant', secondId);
+  });
+
+  it('should call the correct click event when headers are present', () => {
+    const one = jest.fn();
+    const two = jest.fn();
+    const three = jest.fn();
+    render(
+      <Menu>
+        <MenuItem isHeader>Beginning</MenuItem>
+        <MenuItem onClick={one}>Alpha</MenuItem>
+        <MenuItem isHeader>Middle</MenuItem>
+        <MenuItem isHeader>Center</MenuItem>
+        <MenuItem onClick={two}>Bravo</MenuItem>
+        <MenuItem onClick={three}>Charlie</MenuItem>
+        <MenuItem isHeader>End</MenuItem>
+      </Menu>
+    );
+
+    fireEvent.keyDown(screen.getByRole('menu'), {key: ' '});
+    fireEvent.keyDown(screen.getByRole('menu'), {key: 'ArrowDown'});
+    fireEvent.keyDown(screen.getByRole('menu'), {key: ' '});
+    fireEvent.keyDown(screen.getByRole('menu'), {key: 'ArrowDown'});
+    fireEvent.keyDown(screen.getByRole('menu'), {key: ' '});
+    fireEvent.keyDown(screen.getByRole('menu'), {key: 'ArrowDown'});
+    fireEvent.keyDown(screen.getByRole('menu'), {key: ' '});
+    expect(one).toHaveBeenCalledTimes(2);
+    expect(two).toHaveBeenCalled();
+    expect(three).toHaveBeenCalled();
   });
 
   it('should call the "onClose" event when the tab key is pressed', () => {
