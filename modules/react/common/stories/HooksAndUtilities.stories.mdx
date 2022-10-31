@@ -6,13 +6,13 @@ import {ModelAndContainerUtilities} from './examples/ModelAndContainerUtilities'
 
 # Hooks and Utilities
 
-Most of our hooks and utility functions are meant to be used together. Combined together, you can
-build highly composable and powerful components and hooks.
+Most of our hooks and utility functions are meant to be used together to build highly composable and
+powerful components and hooks.
 
 ## Installation
 
 ```sh
-yarn add @workday/canvas-kit-labs-react
+yarn add @workday/canvas-kit-react
 ```
 
 ## Model Hooks and Create Utilities
@@ -29,6 +29,7 @@ returns a function which is your model hook.
 If we take diclosure as an example, this is how we'd use `composeModelHook`
 
 ```tsx
+import {createModelHook} from '@workday/canvas-kit-react/common';
 export const useDisclosureModel = createModelHook({
   // This becomes the default values on the model
   defaultConfig: {
@@ -58,6 +59,7 @@ When `useDisclosureModel`is created, 5 properties are attached to it for composa
 Using this can be useful when creating other models that share similar config for example:
 
 ```tsx
+import {createModelHook} from '@workday/canvas-kit-react/common';
 export const useExpandableModel = createModelHook({
   defaultConfig: {
     // extend the default config from the `useDisclosureModel`
@@ -83,6 +85,7 @@ sometimes you want to share the same context. A good example of this is if you'r
 component but you created a `usePopupModel` that created the context for sub component to share.
 
 ```tsx
+import {createModelHook} from '@workday/canvas-kit-react/common';
 export const useModalModel = createModelHook({
   defaultConfig: usePopupModel.defaultConfig,
   requiredConfig: usePopupModel.requiredConfig,
@@ -110,6 +113,7 @@ having to redfine those types. This is useful when building a model that share s
 you want to merge them while getting the correct typings.
 
 ```tsx
+import {createModelHook} from '@workday/canvas-kit-react/common';
 export const useActionBarModel = createModelHook({
   defaultConfig: {
     // We define the config and use the typings that come from useMenuModel for when an action bar renders a menu
@@ -142,7 +146,10 @@ When building a component that has a model, you typically start with a container
   give it.
 
 ```tsx
+import {createContainer} from '@workday/canvas-kit-react/common';
 interface DisclosureProps {}
+
+//... useDiscloseModel
 
 export const Disclosure = createContainer('div')({
   displayName: 'Disclosure',
@@ -170,12 +177,16 @@ at the root level so that you can use any state or events at a child component l
   give it.
 
 ```tsx
+import {createSubcomponent} from '@workday/canvas-kit-react/common';
+import {PrimaryButton} from '@workday/canvas-kit-react/button';
 export interface DisclosreTargetProps {
   /**
    * The children of the `Expandable.Target`
    */
   children?: React.ReactNode;
 }
+
+//... useDiscloseModel
 
 export const DisclosureTarget = createSubcomponent('button')({
   modelHook: useDisclosureModel,
@@ -203,6 +214,9 @@ Once you create your element props hook you then attach your hook to either your
 component or `createSubcomponent` by adding it to the `elemPropsHook` property.
 
 ```tsx
+import {createSubcomponent, createElemPropsHook} from '@workday/canvas-kit-react/common';
+import {Box} from '@workday/canvas-kit-react/layout';
+
 export interface DisclosureContentProps extends BoxProps {
   /**
    * The children of the `Expandable.Content` whose visibility is controlled by the associated
@@ -210,6 +224,8 @@ export interface DisclosureContentProps extends BoxProps {
    */
   children?: React.ReactNode;
 }
+
+//...useDiscloseModel defined
 
 // Use createElemPropsHook to add style and id attribute based on the disclosure model hook state
 // These attributes will be merged with the rest of elemProps that come from DisclosureContentProps
@@ -226,12 +242,7 @@ export const DisclosureContent = createSubcomponent('div')({
   elemPropsHook: useDisclosureContent,
 })<DisclosureContentProps>(({children, ...elementProps}, Element) => {
   return (
-    <Box
-      as={Element}
-      background="none"
-      padding={`${space.s} ${space.xxs} ${space.xxs}`}
-      {...elementProps}
-    >
+    <Box as={Element} {...elementProps}>
       {children}
     </Box>
   );
