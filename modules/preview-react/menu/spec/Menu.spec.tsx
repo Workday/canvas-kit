@@ -258,7 +258,6 @@ describe('Menu Keyboard Shortcuts', () => {
     );
 
     const firstId = screen.getByRole('menuitem', {name: 'Alpha'}).getAttribute('id');
-    const secondId = screen.getByRole('menuitem', {name: 'Bravo'}).getAttribute('id');
 
     fireEvent.keyDown(screen.getByRole('menu'), {key: 'Home'});
     expect(screen.getByRole('menu')).toHaveAttribute('aria-activedescendant', firstId);
@@ -274,7 +273,6 @@ describe('Menu Keyboard Shortcuts', () => {
       </Menu>
     );
 
-    const firstId = screen.getByRole('menuitem', {name: 'Alpha'}).getAttribute('id');
     const secondId = screen.getByRole('menuitem', {name: 'Bravo'}).getAttribute('id');
 
     fireEvent.keyDown(screen.getByRole('menu'), {key: 'End'});
@@ -296,42 +294,6 @@ describe('Menu Keyboard Shortcuts', () => {
     fireEvent.keyDown(screen.getByRole('menu'), {key: 'ArrowRight'});
 
     expect(screen.getByRole('menu')).toHaveAttribute('aria-activedescendant', secondId);
-  });
-
-  it('should call the "onClose" event when the tab key is pressed', () => {
-    render(
-      <Menu onClose={cb}>
-        <MenuItem>Alpha</MenuItem>
-      </Menu>
-    );
-
-    fireEvent.keyDown(screen.getByRole('menu'), {key: 'Tab'});
-
-    expect(cb).toHaveBeenCalled();
-  });
-
-  it('should call the "onClose" event when the escape key is pressed', () => {
-    render(
-      <Menu onClose={cb}>
-        <MenuItem>Alpha</MenuItem>
-      </Menu>
-    );
-
-    fireEvent.keyDown(screen.getByRole('menu'), {key: 'Escape'});
-
-    expect(cb).toHaveBeenCalled();
-  });
-
-  it('should call the "onClose" event when the space key is pressed', () => {
-    render(
-      <Menu onClose={cb}>
-        <MenuItem onClick={cb}>Alpha</MenuItem>
-      </Menu>
-    );
-
-    fireEvent.keyDown(screen.getByRole('menu'), {key: ' '});
-
-    expect(cb).toHaveBeenCalledTimes(2);
   });
 
   it('should call the correct click event when headers are present', () => {
@@ -362,16 +324,52 @@ describe('Menu Keyboard Shortcuts', () => {
     expect(three).toHaveBeenCalled();
   });
 
+  it('should call the "onClose" event when the tab key is pressed', () => {
+    render(
+      <Menu onClose={cb}>
+        <MenuItem>Alpha</MenuItem>
+      </Menu>
+    );
+
+    fireEvent.keyDown(screen.getByRole('menu'), {key: 'Tab'});
+
+    expect(cb).toHaveBeenCalled();
+  });
+
+  it('should call the "onClose" event when the escape key is pressed', () => {
+    render(
+      <Menu onClose={cb}>
+        <MenuItem>Alpha</MenuItem>
+      </Menu>
+    );
+
+    fireEvent.keyDown(screen.getByRole('menu'), {key: 'Escape'});
+
+    expect(cb).toHaveBeenCalled();
+  });
+
+  it('should call the "onClose" event when the space key is pressed', () => {
+    render(
+      <Menu onClose={cb}>
+        <MenuItem>Alpha</MenuItem>
+      </Menu>
+    );
+
+    fireEvent.keyDown(screen.getByRole('menu'), {key: ' '});
+
+    expect(cb).toHaveBeenCalled();
+  });
+
   it('should call the "onClose" event when the enter key is pressed', () => {
     render(
       <Menu onClose={cb}>
-        <MenuItem onClick={cb}>Alpha</MenuItem>
+        <MenuItem>Alpha</MenuItem>
       </Menu>
     );
 
     fireEvent.keyDown(screen.getByRole('menu'), {key: 'Enter'});
 
-    expect(cb).toHaveBeenCalledTimes(2);
+    expect(cb).toHaveBeenCalled();
   });
 });
 
