@@ -339,7 +339,7 @@ describe('Menu Keyboard Shortcuts', () => {
     const two = jest.fn();
     const three = jest.fn();
     render(
-      <Menu onClose={cb}>
+      <Menu>
         <MenuItem isHeader>Beginning</MenuItem>
         <MenuItem onClick={one}>Alpha</MenuItem>
         <MenuItem isHeader>Middle</MenuItem>
