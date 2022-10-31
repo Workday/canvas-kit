@@ -17,6 +17,28 @@ const StyledLabel = styled(Text.as('label'))<StyledType & TypeLabelProps>(
   })
 );
 
+/**
+ * ## LabelText
+ * [View Storybook Docs](https://workday.github.io/canvas-kit/?path=/docs/preview-text-react--label-text)
+ *
+ * ---
+ * This component is intended to be used for labeling input fields.
+ * It's built on top of the `Text` component, so it has access to all `TextProps`.
+ * By default, it renders a semantic `label` element.
+ *
+ * It also uses the `subtext.large` typeLevel by default:
+ * - font-size: 14px (0.875rem)
+ * - font-weight: regular (400)
+ *
+ * @example
+ * ```tsx
+ * import { LabelText } from '@workday/canvas-kit-react/text';
+ *
+ * const CustomLabelText = () => (
+ *   <LabelText>Input Label Text</LabelText>
+ * );
+ * ```
+ */
 export const LabelText = createComponent('label')({
   displayName: 'Label',
   Component: (elemProps: TypeLabelProps, ref, Element) => {
