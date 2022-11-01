@@ -50,6 +50,32 @@ describe('renameLoadingAnimation', () => {
 
       expectTransform(input, expected);
     });
+
+    it('should update named import with multiple named imports', () => {
+      const input = stripIndent`
+        import {Grid, LoadingAnimation, Text} from "@workday/canvas-kit-react";
+      `;
+
+      const expected = stripIndent`
+        import {Grid, LoadingDots, Text} from "@workday/canvas-kit-react";
+      `;
+
+      expectTransform(input, expected);
+    });
+
+    it('should update named import with multiple import statements', () => {
+      const input = stripIndent`
+        import {Grid, Text} from "@workday/canvas-kit-react";
+        import {LoadingAnimation} from "@workday/canvas-kit-react/loading-animation";
+      `;
+
+      const expected = stripIndent`
+        import {Grid, Text} from "@workday/canvas-kit-react";
+        import {LoadingDots} from "@workday/canvas-kit-react/loading-dots";
+      `;
+
+      expectTransform(input, expected);
+    });
   });
 
   describe('when updating usages', () => {
