@@ -289,7 +289,7 @@ export const createContainer = <
           Context.Provider,
           {value: localModel},
           Component(
-            finalElemProps,
+            finalElemProps as any,
             // Cast to `any` to avoid: "ts(2345): Type 'undefined' is not assignable to type 'E extends
             // undefined ? never : E'" I'm not sure I can actually cast to this conditional type and it
             // doesn't actually matter, so cast to `any` it is.
@@ -306,7 +306,7 @@ export const createContainer = <
       // properties. Take care when changing the runtime of this function.
       (ReturnedComponent as Record<string, any>)[key] = (subComponents as Record<string, any>)[key];
       // Add a displayName if one isn't already created. This prevents us from having to add
-      // `displayName` to subcomponents if a container component has a `displayName`
+      // `displayName` to subcomponents and only container components
       if (displayName && !(subComponents as Record<string, any>)[key].displayName) {
         (subComponents as Record<string, any>)[key].displayName = `${displayName}.${key}`;
       }
