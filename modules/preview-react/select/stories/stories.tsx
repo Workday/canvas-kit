@@ -9,7 +9,7 @@ import {
   userIcon,
 } from '@workday/canvas-system-icons-web';
 import {colors, typeColors} from '@workday/canvas-kit-react/tokens';
-import FormField from '@workday/canvas-kit-react/form-field';
+import {FormField} from '@workday/canvas-kit-react/form-field';
 import {
   Select,
   RenderOptionFunction,
