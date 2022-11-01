@@ -237,7 +237,7 @@ export const createContainer = <
     Context?: React.Context<any>;
   } & {defaultConfig?: Record<string, any>},
   TDefaultContext extends {state: Record<string, any>; events: Record<string, any>},
-  TElemPropsHook extends (...args: any) => any,
+  TElemPropsHook,
   SubComponents = {}
 >({
   displayName,
@@ -260,14 +260,7 @@ export const createContainer = <
 
   return <Props>(
     Component: (
-      props: Props &
-        RemoveNull<ReturnType<TElemPropsHook>> & {ref: ExtractRef<E>} & (Props extends {
-          children: any;
-        }
-          ? {}
-          : {
-              children?: React.ReactNode;
-            }),
+      props: CompoundProps<Props, TElemPropsHook, E>,
       Element: E extends undefined ? never : E,
       model: TModelHook extends (config: infer TConfig) => infer TModel ? TModel : never
     ) => JSX.Element | null
@@ -289,14 +282,14 @@ export const createContainer = <
         const localModel = useDefaultModel(model, props, modelHook);
         const elemProps = ((modelHook as any).getElemProps || defaultGetElemProps)(props);
         const finalElemProps = elemPropsHook
-          ? elemPropsHook(localModel, elemProps, ref)
+          ? (elemPropsHook as any)(localModel, elemProps, ref)
           : elemProps;
 
         return React.createElement(
           Context.Provider,
           {value: localModel},
           Component(
-            finalElemProps as any,
+            finalElemProps,
             // Cast to `any` to avoid: "ts(2345): Type 'undefined' is not assignable to type 'E extends
             // undefined ? never : E'" I'm not sure I can actually cast to this conditional type and it
             // doesn't actually matter, so cast to `any` it is.
@@ -313,7 +306,7 @@ export const createContainer = <
       // properties. Take care when changing the runtime of this function.
       (ReturnedComponent as Record<string, any>)[key] = (subComponents as Record<string, any>)[key];
       // Add a displayName if one isn't already created. This prevents us from having to add
-      // `displayName` to subcomponents and only container components
+      // `displayName` to subcomponents if a container component has a `displayName`
       if (displayName && !(subComponents as Record<string, any>)[key].displayName) {
         (subComponents as Record<string, any>)[key].displayName = `${displayName}.${key}`;
       }
@@ -327,9 +320,30 @@ export const createContainer = <
   };
 };
 
+/**
+ * If elemProps returns `null` for a prop, that prop is to be removed from the prop
+ * list. This is useful for passing props to an elemProp hook that should not be exposed
+ * to the DOM element
+ */
 type RemoveNull<T> = {[K in keyof T]: Exclude<T[K], null>};
 
-// export type ModelComponentFn<TModelHook, TElemPropsHook, SubComponents> = <Props={}>(Component: ())
+/**
+ * Props for the compound component based on props, elemPropsHook, and element. It will
+ * return a prop interface according to all these inputs. The following will be added to
+ * the passed in `Props` type:
+ * - The prop interface returned by the `elemPropsHook` function
+ * - if there is no detected `ref` in the `Props` interface, a `ref` will be added based on the element type E
+ * - if there is no detected `children` in the `Props` interface, `children` will be added based on `ReactNode`
+ */
+type CompoundProps<Props, TElemPropsHook, E> = Props &
+  (TElemPropsHook extends (...args: any[]) => infer TProps // try to infer TProps returned from the elemPropsHook function
+    ? RemoveNull<TProps extends {ref: any} ? TProps : TProps & {ref: ExtractRef<E>}>
+    : {ref: ExtractRef<E>}) &
+  (Props extends {children: any}
+    ? {}
+    : {
+        children?: React.ReactNode;
+      });
 
 export const createSubcomponent = <
   E extends
@@ -362,15 +376,7 @@ export const createSubcomponent = <
 
   return <Props = {}>(
     Component: (
-      props: Props &
-        (TElemPropsHook extends (...args: any[]) => infer TProps // try to infer TProps returned from the elemPropsHook function
-          ? RemoveNull<TProps extends {ref: infer R} ? TProps : TProps & {ref: ExtractRef<E>}>
-          : {ref: ExtractRef<E>}) &
-        (Props extends {children: any}
-          ? {}
-          : {
-              children?: React.ReactNode;
-            }),
+      props: CompoundProps<Props, TElemPropsHook, E>,
       Element: E extends undefined ? never : E,
       model: TModelHook extends (...args: any[]) => infer TModel ? TModel : never
     ) => JSX.Element | null
