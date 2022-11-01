@@ -19,7 +19,7 @@ const StyledLabel = styled(Text.as('label'))<StyledType & TypeLabelProps>(
 
 /**
  * ## LabelText
- * [View Storybook Docs](https://workday.github.io/canvas-kit/?path=/docs/preview-text-react--label-text)
+ * [View Docs](https://canvas.workday.com/components/text/label-text)
  *
  * ---
  * This component is intended to be used for labeling input fields.
