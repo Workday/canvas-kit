@@ -16,6 +16,7 @@ any questions.
   - [Reorganized Style Props](#reorganized-style-props)
   - [Responsive Styles](#responsive-styles)
   - [Testing](#testing)
+  - [Utility Deprecations](#utility-deprecations)
 - [New Components](#new-components)
   - [Grid](#grid)
   - [Text](#text)
@@ -310,6 +311,23 @@ changes have been made:
   to `@workday/canvas-kit-react/testing`
 
 🤖 The codemod will handle all of the changes above for you automatically.
+
+### Utility Deprecations
+
+The following utility functions are being deprecated and will be removed in a later version of Canvas Kit.
+
+- Types:
+  - `Model`
+  - `ToModelConfig`
+- Functions:
+  - `createEventMap`
+  - `useEventMap`
+
+All these utility types and functions have been replaced by `createModelHook`. Typescript 4.1
+introduced
+[Template Literal Types](https://www.typescriptlang.org/docs/handbook/2/template-literal-types.html),
+so event maps are no longer needed. `createModelHook` infers all types based on the input of the
+function.
 
 ## New Components
 

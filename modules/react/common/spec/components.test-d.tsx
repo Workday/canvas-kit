@@ -206,7 +206,7 @@ describe('ExtractProps', () => {
     it('should return only props on a `ComponentM`', () => {
       const Component = createContainer()({
         modelHook: createModelHook({})((): Model => ({state: {foo: 'bar'}, events: {}})),
-      })((props: Props) => null);
+      })<Props>(props => null);
       type Expected = ExtractProps<typeof Component>;
 
       expectTypeOf<Expected>().toEqualTypeOf<Props & PropsWithModel<Model>>();
