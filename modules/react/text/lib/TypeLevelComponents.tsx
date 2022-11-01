@@ -15,7 +15,7 @@ export interface TypeLevelProps extends Omit<TextProps, 'typeLevel'> {
 
 /**
  * ## Subtext
- * [View Storybook Docs](https://workday.github.io/canvas-kit/?path=/docs/preview-text-react--subtext)
+ * [View Docs](https://canvas.workday.com/components/text/subtext)
  *
  * ---
  * This component is intended to be used for small subtext content or in tight spaces.
@@ -52,7 +52,7 @@ export const Subtext = createComponent('p')({
 
 /**
  * ## BodyText
- * [View Storybook Docs](https://workday.github.io/canvas-kit/?path=/docs/preview-text-react--body-text)
+ * [View Docs](https://canvas.workday.com/components/text/body-text)
  *
  * ---
  * This component is intended to be used for standard body text.
@@ -84,19 +84,14 @@ export const BodyText = createComponent('p')({
   Component: ({size, ...elemProps}: TypeLevelProps, ref, Element) => {
     const typeLevel = `body.${size}` as TextProps['typeLevel'];
     return (
-      <Text ref={ref} as={Element} typeLevel={typeLevel} {...elemProps}>
-        Readers usually ignore the typographic interface, gliding comfortably along literacy’s
-        habitual groove. Sometimes, however, the interface should be allowed to fail. By making
-        itself evident, typography can illuminate the construction and identity of a page, screen,
-        place, or product.
-      </Text>
+      <Text ref={ref} as={Element} typeLevel={typeLevel} {...elemProps} />
     );
   },
 });
 
 /**
  * ## Heading
- * [View Storybook Docs](https://workday.github.io/canvas-kit/?path=/docs/preview-text-react--heading)
+ * [View Docs](https://canvas.workday.com/components/text/heading)
  *
  * ---
  * This component is intended to be used for headings and large text.

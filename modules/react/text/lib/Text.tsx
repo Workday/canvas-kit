@@ -7,7 +7,7 @@ import {Box, BoxProps} from '@workday/canvas-kit-react/layout';
 export interface TextProps extends BoxProps {
   /**
    * Type token as string with level and size separated by dot.
-   * These values map to our [Canvas type levels](https://canvas.workdaydesign.com/tokens/type#type-styles).
+   * These values map to our [Canvas type levels](https://canvas.workday.com/tokens/type#type-styles).
    * 
    * @example
    * ```tsx
@@ -69,12 +69,12 @@ const validateProps = ({typeLevel, variant, ...props}: TextProps) => {
 
 /**
  * ## Text
- * [View Storybook Docs](https://workday.github.io/canvas-kit/?path=/docs/preview-text-react--text)
+ * [View Docs](https://canvas.workday.com/components/text/text)
  * 
  * ---
  * This is a generic base component intended to render any text.
- * It's built on top of the `Box` component, so it has access to all [BoxProps](https://workday.github.io/canvas-kit/?path=/docs/components-containers-layout-box--as).
- * It also has `typeLevel` and `variant` style props that simplify navigating our type hierarchy and using [Canvas type tokens](https://canvas.workdaydesign.com/tokens/type#type-styles).
+ * It's built on top of the `Box` component, so it has access to all [BoxProps](https://canvas.workday.com/components/layout/box/#props).
+ * It also has `typeLevel` and `variant` style props that simplify navigating our type hierarchy and using [Canvas type tokens](https://canvas.workday.com/tokens/type#type-styles).
  * By default, it renders a semantic `span` element, but you can adjust this as needed with the `as` prop.
  * 
  * The type hierarchy is organized into four levels, which correspond to the type levels in Figma.
