@@ -306,7 +306,7 @@ export const createContainer = <
       // properties. Take care when changing the runtime of this function.
       (ReturnedComponent as Record<string, any>)[key] = (subComponents as Record<string, any>)[key];
       // Add a displayName if one isn't already created. This prevents us from having to add
-      // `displayName` to subcomponents and only container components
+      // `displayName` to subcomponents if a container component has a `displayName`
       if (displayName && !(subComponents as Record<string, any>)[key].displayName) {
         (subComponents as Record<string, any>)[key].displayName = `${displayName}.${key}`;
       }
