@@ -33,6 +33,7 @@ any questions.
   - [Menu (Main)](#menu-main)
   - [Modal](#modal)
   - [Popups](#popups)
+  - [Loading Animation](#loading-animation)
 
 ## Codemod
 
@@ -873,3 +874,44 @@ button, it is still a breaking change. This change effects the following compone
 - `Popup.CloseButton`
 - `Dialog.CloseButton`
 - `Modal.CloseButton`
+
+### Loading Animation
+
+`LoadingAnimation` is being renamed to `LoadingDots` and is moving from of
+`@workday/canvas-kit-react/loading-animation` to
+`@workday/canvas-kit-react/loading-dots`. The component has not been modified and you may
+continue to use this component exactly as you did in v7.
+
+🤖 The codemod will handle all these changes automatically:
+
+- Rename import sources
+  - `@workday/canvas-kit-react/loading-animation` becomes `@workday/canvas-kit-react/loading-dots`
+- Rename import specifiers and identifiers
+  - `LoadingAnimation` becomes `LoadingDots`
+- Rename JSX identifiers
+  - `<LoadingAnimation />` becomes `<LoadingDots />`
+
+```tsx
+// v7
+import {
+  LoadingAnimation
+} from '@workday/canvas-kit-react/loading-animation';
+
+const MyComponent = (props: MyComponentProps) => {
+  return <LoadingAnimation />;
+};
+
+const StyledLoadingAnimation = styled(LoadingAnimation)({});
+
+// v8
+import {
+  LoadingDots
+} from '@workday/canvas-kit-react/loading-dots';
+
+const MyComponent = (props: MyComponentProps) => {
+  return <LoadingDots />;
+};
+
+const StyledLoadingAnimation = styled(LoadingDots)({});
+```
+
