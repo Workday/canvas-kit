@@ -14,7 +14,7 @@ export * from './disclosure';
 export * from './form-field';
 export * from './icon';
 export * from './layout';
-export * from './loading-animation';
+export * from './loading-dots';
 export * from './menu';
 export * from './modal';
 export * from './pagination';
