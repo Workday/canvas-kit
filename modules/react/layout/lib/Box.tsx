@@ -21,7 +21,7 @@ import {CommonStyleProps} from './utils/styleProps';
  * Box Props
  * ---
  * Common style props + children
- * 
+ *
  * - background
  * - border
  * - color
