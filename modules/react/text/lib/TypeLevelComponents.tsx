@@ -128,7 +128,7 @@ export const Heading = createComponent('h2')({
 
 /**
  * ## Title
- * [View Storybook Docs](https://workday.github.io/canvas-kit/?path=/docs/preview-text-react--title)
+ * [View Docs](https://canvas.workday.com/components/text/title)
  *
  * ---
  * This component is intended to be used large page titles.
