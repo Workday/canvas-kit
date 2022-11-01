@@ -14,8 +14,8 @@ const routes = {
   '/components/containers/table/': 'components-containers-table-react--basic',
   '/components/containers/tabs/': 'components-containers-tabs-react--basic',
   '/components/indicators/banner/': 'components-indicators-banner-react--basic',
-  '/components/indicators/loading-animation/':
-    'components-indicators-loading-animation-react--basic',
+  '/components/indicators/loading-dots/':
+    'components-indicators-loading-dots-react--basic',
   '/components/indicators/skeleton/': 'components-indicators-skeleton-react--basic',
   '/components/indicators/status-indicator/': 'components-indicators-status-indicator-react--basic',
   '/components/inputs/checkbox/': 'components-inputs-checkbox-react--basic',
