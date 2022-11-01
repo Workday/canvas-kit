@@ -289,7 +289,7 @@ export const createContainer = <
           Context.Provider,
           {value: localModel},
           Component(
-            finalElemProps as any,
+            finalElemProps,
             // Cast to `any` to avoid: "ts(2345): Type 'undefined' is not assignable to type 'E extends
             // undefined ? never : E'" I'm not sure I can actually cast to this conditional type and it
             // doesn't actually matter, so cast to `any` it is.
