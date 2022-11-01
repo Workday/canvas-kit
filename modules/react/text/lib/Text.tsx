@@ -77,7 +77,7 @@ const validateProps = ({typeLevel, variant, ...props}: TextProps) => {
  * It also has `typeLevel` and `variant` style props that simplify navigating our type hierarchy and using [Canvas type tokens](https://canvas.workday.com/tokens/type#type-styles).
  * By default, it renders a semantic `span` element, but you can adjust this as needed with the `as` prop.
  * 
- * The type hierarchy is organized into four levels, which correspond to the type levels in Figma.
+ * The type hierarchy is organized into four levels, which correspond to our [Canvas type levels](https://canvas.workday.com/tokens/type#type-styles).
  *
  * - `title`: Intended to be used for large page titles.
  * - `heading`: Intended to be used for headings and large text.
