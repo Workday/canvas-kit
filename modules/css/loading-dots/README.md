@@ -6,7 +6,7 @@ Component that displays animations while a page or component loads.
   <img src="https://img.shields.io/badge/-maintenance mode-important" alt="Mainenance Mode" />
 </a>
 
-[> Workday Design Reference](https://canvas.workday.com/components/indicators/loading-dots)
+[> Workday Design Reference](https://design.workday.com/components/indicators/loading-dots)
 
 ## Installation
 
