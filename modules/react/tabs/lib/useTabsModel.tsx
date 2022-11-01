@@ -29,7 +29,7 @@ export const useTabsModel = createModelHook({
      * @default 'horizontal'
      */
     orientation: 'horizontal' as typeof useOverflowListModel.defaultConfig.orientation,
-    menuConfig: {} as Partial<typeof useMenuModel.defaultConfig>,
+    menuConfig: {} as typeof useMenuModel.TConfig,
   },
   requiredConfig: useOverflowListModel.requiredConfig,
 })(config => {
@@ -96,7 +96,7 @@ export const useTabsModel = createModelHook({
   };
 
   const menu = useMenuModel(
-    useMenuModel.mergeConfig(config.menuConfig as Required<typeof config.menuConfig>, {
+    useMenuModel.mergeConfig(config.menuConfig, {
       id: `menu-${model.state.id}`,
       items: overflowItems,
       nonInteractiveIds: state.nonInteractiveIds.filter(key => !state.hiddenIds.includes(key)),

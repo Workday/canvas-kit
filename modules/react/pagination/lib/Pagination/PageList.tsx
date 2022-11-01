@@ -4,7 +4,7 @@ import {PaginationModel} from './types';
 import {ListItem, ListItemProps} from './common/List';
 import {HStack, HStackProps} from '@workday/canvas-kit-react/layout';
 
-export interface PageListProps extends Omit<HStackProps, 'as' | 'spacing'> {
+export interface PageListProps extends Omit<HStackProps, 'as' | 'spacing' | 'children'> {
   model: PaginationModel;
   children?: (model: PaginationModel) => React.ReactNode[] | React.ReactNode;
 }
