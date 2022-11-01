@@ -2,7 +2,7 @@ import * as React from 'react';
 import {colors} from '@workday/canvas-kit-react/tokens';
 import {CanvasAccentIcon, CanvasIconTypes} from '@workday/design-assets-types';
 import {CSSObject} from '@emotion/styled';
-import Icon, {IconProps} from './Icon';
+import {Icon, IconProps} from './Icon';
 import {createComponent} from '@workday/canvas-kit-react/common';
 
 export interface AccentIconStyles {
@@ -44,7 +44,7 @@ export const accentIconStyles = ({
   },
 });
 
-const AccentIcon = createComponent('span')({
+export const AccentIcon = createComponent('span')({
   displayName: 'AccentIcon',
   Component: (
     {transparent = false, size = 56, icon, color, shouldMirror, ...elemProps}: AccentIconProps,
@@ -65,5 +65,3 @@ const AccentIcon = createComponent('span')({
     );
   },
 });
-
-export default AccentIcon;

@@ -26,5 +26,5 @@ export const PopupCloseIcon = createSubcomponent('button')({
   modelHook: usePopupModel,
   elemPropsHook: usePopupCloseButton,
 })<PopupCloseIconProps>(({children, ...elemProps}, Element) => {
-  return <StyledCloseIcon as={Element} size="medium" icon={xIcon} {...elemProps} />;
+  return <StyledCloseIcon as={Element} size="medium" icon={xIcon} type="button" {...elemProps} />;
 });

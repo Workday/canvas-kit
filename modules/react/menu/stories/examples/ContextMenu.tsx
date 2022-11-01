@@ -1,12 +1,13 @@
 import React from 'react';
 
 import {Menu} from '@workday/canvas-kit-react/menu';
+import {BodyText} from '@workday/canvas-kit-react/text';
 
 export const ContextMenu = () => {
   const [selected, setSelected] = React.useState('');
   return (
     <Menu onSelect={data => setSelected(data.id)}>
-      <Menu.TargetContext>Open Menu</Menu.TargetContext>
+      <Menu.TargetContext>Right-click to Open Menu</Menu.TargetContext>
       <Menu.Popper>
         <Menu.Card>
           <Menu.List>
@@ -17,9 +18,9 @@ export const ContextMenu = () => {
           </Menu.List>
         </Menu.Card>
       </Menu.Popper>
-      <p>
+      <BodyText size="small" marginTop="s">
         Selected: <span data-testid="output">{selected}</span>
-      </p>
+      </BodyText>
     </Menu>
   );
 };
