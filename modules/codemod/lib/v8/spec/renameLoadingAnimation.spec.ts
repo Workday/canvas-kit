@@ -126,15 +126,18 @@ describe('renameLoadingAnimation', () => {
 
       expectTransform(input, expected);
     });
-    it('should not update non-Canvas styled components', () => {
+
+    it('should not similar update identifiers for non-Canvas styled components', () => {
       const input = stripIndent`
         import {LoadingAnimation as CanvasLoadingAnimation} from "@workday/canvas-kit-react/loading-animation";
+        import {LoadingAnimation} from "./LoadingAnimation";
 
         const StyledLoadingAnimation = styled(LoadingAnimation)({ width: space.xxs, height: space.xxs });
       `;
 
       const expected = stripIndent`
         import {LoadingDots as CanvasLoadingAnimation} from "@workday/canvas-kit-react/loading-dots";
+        import {LoadingAnimation} from "./LoadingAnimation";
 
         const StyledLoadingAnimation = styled(LoadingAnimation)({ width: space.xxs, height: space.xxs });
       `;
