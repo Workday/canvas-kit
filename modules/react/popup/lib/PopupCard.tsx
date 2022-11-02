@@ -1,27 +1,24 @@
 import * as React from 'react';
-import {keyframes} from '@emotion/core';
+import {keyframes} from '@emotion/react';
 
 import {Card} from '@workday/canvas-kit-react/card';
-import {space, type} from '@workday/canvas-kit-react/tokens';
+import {space, type, CanvasSpaceKeys} from '@workday/canvas-kit-react/tokens';
 import {
   styled,
   TransformOrigin,
   getTranslateFromOrigin,
-  createComponent,
   StyledType,
-  useModelContext,
   ExtractProps,
+  useConstant,
+  createSubcomponent,
 } from '@workday/canvas-kit-react/common';
+import {Flex, FlexStyleProps} from '@workday/canvas-kit-react/layout';
 
 import {getTransformFromPlacement} from './getTransformFromPlacement';
-import {usePopupCard, PopupModel, PopupModelContext} from './hooks';
+import {usePopupCard, usePopupModel} from './hooks';
 
-export interface PopupCardProps extends ExtractProps<typeof Card, never> {
-  /**
-   * Optionally pass a model directly to this component. Default is to implicitly use the same
-   * model as the container component which uses React context. Only use this for advanced use-cases
-   */
-  model?: PopupModel;
+export type FlexAndBoxProps = ExtractProps<typeof Card, never> & FlexStyleProps;
+export interface PopupCardProps extends FlexAndBoxProps {
   children?: React.ReactNode;
 }
 
@@ -58,27 +55,35 @@ const StyledPopupCard = styled(Card)<
   };
 });
 
-export const PopupCard = createComponent('div')({
+export const PopupCard = createSubcomponent('div')({
   displayName: 'Popup.Card',
-  Component: ({children, model, ...elemProps}: PopupCardProps, ref, Element) => {
-    const localModel = useModelContext(PopupModelContext, model);
-    const props = usePopupCard(localModel, elemProps, ref);
-    const transformOrigin = React.useMemo(() => {
-      return getTransformFromPlacement(localModel.state.placement || 'bottom');
-    }, [localModel.state.placement]);
+  modelHook: usePopupModel,
+  elemPropsHook: usePopupCard,
+})<PopupCardProps>(({children, ...elemProps}, Element, model) => {
+  const transformOrigin = React.useMemo(() => {
+    return getTransformFromPlacement(model.state.placement || 'bottom');
+  }, [model.state.placement]);
 
-    return (
-      <StyledPopupCard
-        as={Element}
-        transformOrigin={transformOrigin}
-        position="relative"
-        padding="l"
-        depth={2}
-        maxWidth={`calc(100vw - ${space.l})`}
-        {...props}
-      >
-        {children}
-      </StyledPopupCard>
-    );
-  },
+  // As is a Flex that will render an element of `Element`
+  const As = useConstant(() => Flex.as(Element));
+
+  return (
+    <StyledPopupCard
+      as={As}
+      transformOrigin={transformOrigin}
+      position="relative"
+      depth={5}
+      maxWidth={`calc(100vw - ${space.l})`}
+      flexDirection="column"
+      minHeight={0}
+      padding="m"
+      maxHeight={`calc(100vh - ${
+        elemProps.margin ? space[elemProps.margin as CanvasSpaceKeys] || elemProps.margin : space.xl
+      } * 2)`}
+      overflowY="auto" // force IE11 to limit the flex size of the card. Without this, the body isn't allowed to overflow properly: https://github.com/philipwalton/flexbugs/issues/216#issuecomment-453053557
+      {...elemProps}
+    >
+      {children}
+    </StyledPopupCard>
+  );
 });

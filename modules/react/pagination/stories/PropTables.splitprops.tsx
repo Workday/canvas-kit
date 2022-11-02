@@ -11,7 +11,7 @@ import {
 export const PaginationHoistedComponent = (_: {model: PaginationModel}) => <div />;
 
 // <ArgsTable of={Pagination.PageButton} /> generates a props table with
-// IconButton props. Use this dummy component instead to limit the props shown.
+// Button props. Use this dummy component instead to limit the props shown.
 export const PageButtonComponent = (_: {pageNumber: number}) => <div />;
 
 // <ArgsTable of={Pagination.PageListComponent} /> generates a very large props

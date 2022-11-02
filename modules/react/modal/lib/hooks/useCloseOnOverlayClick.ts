@@ -1,14 +1,15 @@
 import React from 'react';
 
 import {PopupStack} from '@workday/canvas-kit-popup-stack';
-import {PopupModel} from '@workday/canvas-kit-react/popup';
+import {createElemPropsHook} from '@workday/canvas-kit-react/common';
+import {usePopupModel} from '@workday/canvas-kit-react/popup';
 
 /**
  * Registers global listener for all clicks. It will only call the PopupModel's `hide` event if the
  * click happened outside the `[role=dialog]` of an overlay component. The difference between `useCloseOnOutsideClick`
  * and `useCloseOnOverlayClick` is the Overlay is a child of a `stackRef` element and has a different
  */
-export const useCloseOnOverlayClick = (model: PopupModel, elemProps = {}) => {
+export const useCloseOnOverlayClick = createElemPropsHook(usePopupModel)(model => {
   const onClick = React.useCallback(
     (event: MouseEvent) => {
       if (!model.state.stackRef.current) {
@@ -33,7 +34,7 @@ export const useCloseOnOverlayClick = (model: PopupModel, elemProps = {}) => {
         elements[elements.length - 1] === model.state.stackRef.current &&
         elementsBetweenDialogAnBody.some(element => element === event.target)
       ) {
-        model.events.hide({event});
+        model.events.hide(event);
       }
     },
     [model.state.stackRef, model.events]
@@ -53,5 +54,5 @@ export const useCloseOnOverlayClick = (model: PopupModel, elemProps = {}) => {
     };
   }, [model.state.stackRef, visible, onClick]);
 
-  return elemProps;
-};
+  return {};
+});

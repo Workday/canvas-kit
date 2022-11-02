@@ -279,9 +279,9 @@ describe('Tooltip', () => {
     );
   });
 
-  context('given the [Testing/React/Popups/Tooltip, NonInteractive] example is rendered', () => {
+  context('given the [Testing/React/Popups/Tooltip, Non Interactive] example is rendered', () => {
     beforeEach(() => {
-      h.stories.load('Testing/React/Popups/Tooltip', 'NonInteractive');
+      h.stories.load('Testing/React/Popups/Tooltip', 'Non Interactive');
     });
 
     context('when the "Non-interactive Tooltip" text is hovered', () => {

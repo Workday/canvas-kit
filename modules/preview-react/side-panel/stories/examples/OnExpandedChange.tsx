@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Flex} from '@workday/canvas-kit-labs-react/layout';
+import {Flex} from '@workday/canvas-kit-react/layout';
 import {SidePanel, useSidePanel} from '@workday/canvas-kit-preview-react/side-panel';
 
 export const OnExpandedChange = () => {

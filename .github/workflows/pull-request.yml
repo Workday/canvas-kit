@@ -185,7 +185,11 @@ jobs:
 
   verify:
     runs-on: ubuntu-latest
+    if: always()
     needs: ['check', 'integration-test', 'visual-test']
     steps:
-      - name: Done
-        run: echo "Done"
+      - name: Failure Test
+        if: contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled') # Test the result of all dependencies
+        run: exit 1
+      - name: Success
+        run: exit 0

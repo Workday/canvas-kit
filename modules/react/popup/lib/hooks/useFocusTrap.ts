@@ -1,7 +1,9 @@
 import React from 'react';
 import {tabTrappingKey} from './focus-trap-js';
 
-import {PopupModel} from './usePopupModel';
+import {createElemPropsHook} from '@workday/canvas-kit-react/common';
+
+import {usePopupModel} from './usePopupModel';
 
 /**
  * "Trap" or "loop" focus within a provided `stackRef` element. This is required for accessibility
@@ -12,7 +14,7 @@ import {PopupModel} from './usePopupModel';
  *
  * This should be used on popup elements that need to hide content (i.e. Modals).
  */
-export const useFocusTrap = (model: PopupModel, elemProps = {}) => {
+export const useFocusTrap = createElemPropsHook(usePopupModel)(model => {
   const onKeyDown = React.useCallback(
     (event: KeyboardEvent) => {
       if (model.state.stackRef.current) {
@@ -35,5 +37,5 @@ export const useFocusTrap = (model: PopupModel, elemProps = {}) => {
     };
   }, [visible, onKeyDown]);
 
-  return elemProps;
-};
+  return {};
+});

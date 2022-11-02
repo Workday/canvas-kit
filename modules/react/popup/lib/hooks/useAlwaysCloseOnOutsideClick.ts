@@ -1,7 +1,9 @@
 import React from 'react';
 
 import {PopupStack} from '@workday/canvas-kit-popup-stack';
-import {PopupModel} from './usePopupModel';
+import {createElemPropsHook} from '@workday/canvas-kit-react/common';
+
+import {usePopupModel} from './usePopupModel';
 
 /**
  * Registers global listener for all clicks. It will only call the PopupModel's `hide` event if the
@@ -12,7 +14,7 @@ import {PopupModel} from './usePopupModel';
  * This should be used with popup elements that should close no matter their position in the stack
  * (i.e. Tooltips).
  */
-export const useAlwaysCloseOnOutsideClick = (model: PopupModel, elemProps = {}) => {
+export const useAlwaysCloseOnOutsideClick = createElemPropsHook(usePopupModel)(model => {
   const onClick = React.useCallback(
     (event: MouseEvent) => {
       if (!model.state.stackRef.current) {
@@ -44,5 +46,5 @@ export const useAlwaysCloseOnOutsideClick = (model: PopupModel, elemProps = {}) 
     };
   }, [model.state.stackRef, visible, onClick]);
 
-  return elemProps;
-};
+  return {};
+});

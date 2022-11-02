@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useLayoutEffect, useCallback} from 'react';
 
-import {CSSObject} from '@emotion/core';
+import {CSSObject} from '@emotion/styled';
 import {EmotionCanvasTheme, ErrorType, Themeable, styled} from '@workday/canvas-kit-react/common';
 import {
   Placement,

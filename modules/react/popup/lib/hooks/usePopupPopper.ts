@@ -1,12 +1,12 @@
-import {createHook, useForkRef} from '@workday/canvas-kit-react/common';
-import {PopupModel} from './usePopupModel';
+import {createElemPropsHook, useForkRef} from '@workday/canvas-kit-react/common';
+import {usePopupModel} from './usePopupModel';
 import React from 'react';
 import {Placement} from '../Popper';
 
 /**
  * Hooks a Popper up to a PopupModel
  */
-export const usePopupPopper = createHook(({state, events}: PopupModel, ref) => {
+export const usePopupPopper = createElemPropsHook(usePopupModel)(({state, events}, ref) => {
   const elementRef = useForkRef(ref, state.stackRef);
   const onPlacementChange = React.useCallback(
     (placement: Placement) => {

@@ -119,9 +119,10 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
     } = this.props;
     const {selectedItemIndex} = this.state;
     const cardWidth = grow ? '100%' : width;
+    let interactiveItemIndex: number | null = null;
 
     return (
-      <Card style={{display: 'inline-block'}} padding={space.zero} width={cardWidth}>
+      <Card display="inline-block" padding={space.zero} width={cardWidth} depth={3}>
         <Card.Body>
           <List
             role="menu"
@@ -133,17 +134,22 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
             ref={this.menuRef}
             {...elemProps}
           >
-            {React.Children.map(children, (menuItem, index) => {
+            {React.Children.map(children, menuItem => {
               if (!React.isValidElement(menuItem)) {
                 return;
               }
-              const itemId = `${id}-${index}`;
+              let itemId = null;
+              if (!menuItem.props.isHeader) {
+                interactiveItemIndex = (interactiveItemIndex ?? -1) + 1;
+                itemId = `${id}-${interactiveItemIndex}`;
+              }
               return (
                 <React.Fragment key={itemId}>
                   {React.cloneElement(menuItem, {
                     onClick: (event: React.MouseEvent) => this.handleClick(event, menuItem.props),
                     id: itemId,
-                    isFocused: selectedItemIndex === index,
+                    isFocused:
+                      selectedItemIndex === interactiveItemIndex && !menuItem.props.isHeader,
                   })}
                 </React.Fragment>
               );
@@ -175,9 +181,12 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
     const children = React.Children.toArray(this.props.children);
     let nextSelectedIndex = 0;
     let isShortcut = false;
-    const itemCount = children.length;
-    const firstItem = 0;
-    const lastItem = itemCount - 1;
+    const interactiveItems = children.filter(child => {
+      return !(child as React.ReactElement<MenuItemProps>)?.props?.isHeader;
+    });
+    const interactiveItemCount = interactiveItems.length;
+    const firstIndex = 0;
+    const lastIndex = interactiveItemCount - 1;
 
     if (event.key.length === 1 && event.key.match(/\S/)) {
       let start = this.state.selectedItemIndex + 1;
@@ -203,12 +212,12 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
           isShortcut = true;
           const nextIndex = this.state.selectedItemIndex + direction;
           nextSelectedIndex =
-            nextIndex < 0 ? lastItem : nextIndex >= itemCount ? firstItem : nextIndex;
+            nextIndex < 0 ? lastIndex : nextIndex >= interactiveItemCount ? firstIndex : nextIndex;
           break;
 
         case 'Home':
         case 'End':
-          const skipTo = event.key === 'Home' ? firstItem : lastItem;
+          const skipTo = event.key === 'Home' ? firstIndex : lastIndex;
           isShortcut = true;
           nextSelectedIndex = skipTo;
           break;
@@ -231,7 +240,9 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
         case ' ':
         case 'Enter':
           nextSelectedIndex = this.state.selectedItemIndex;
-          const child = children[this.state.selectedItemIndex] as React.ReactElement<MenuItemProps>;
+          const child = interactiveItems[this.state.selectedItemIndex] as React.ReactElement<
+            MenuItemProps
+          >;
           this.handleClick(event, child.props);
           isShortcut = true;
           break;
@@ -308,6 +319,9 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
     };
 
     const firstCharacters = React.Children.map(this.props.children, child => {
+      if ((child as React.ReactElement<MenuItemProps>)?.props?.isHeader) {
+        return;
+      }
       return getFirstCharacter(child);
     });
 

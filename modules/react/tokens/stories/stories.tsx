@@ -1,25 +1,17 @@
-/** @jsx jsx */
-import {jsx} from '@emotion/core';
 import * as React from 'react';
 import styled from '@emotion/styled';
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
-import {pickForegroundColor} from '@workday/canvas-kit-react/common';
+import {pickForegroundColor, StyledType} from '@workday/canvas-kit-react/common';
 
 import {colors, type, depth, space, borderRadius} from '@workday/canvas-kit-react/tokens';
+import {Box, Flex} from '@workday/canvas-kit-react/layout';
 
 export default withSnapshotsEnabled({
   title: 'Tokens/Tokens/React',
   parameters: {ReadmePath: 'react/tokens'},
 });
 
-const inverseStyle = {
-  display: 'inline-block !important',
-  background: '#667380',
-  padding: '2px 8px',
-  borderRadius: '4px',
-};
-
-const Card = styled('div')({
+const StyledCard = styled(Box)<StyledType>({
   width: 200,
   height: 200,
   margin: 20,
@@ -30,43 +22,110 @@ const Card = styled('div')({
 });
 
 export const Depth = () => (
-  <div css={{display: 'flex'}}>
-    <Card css={depth.inset}>Depth -1</Card>
-    <Card css={depth['1']}>Depth 1</Card>
-    <Card css={depth['2']}>Depth 2</Card>
-    <Card css={depth['3']}>Depth 3</Card>
-    <Card css={depth['4']}>Depth 4</Card>
-  </div>
+  <Flex>
+    <StyledCard depth="none">Depth None</StyledCard>
+    <StyledCard depth={1}>Depth 1</StyledCard>
+    <StyledCard depth={2}>Depth 2</StyledCard>
+    <StyledCard depth={3}>Depth 3</StyledCard>
+    <StyledCard depth={4}>Depth 4</StyledCard>
+    <StyledCard depth={5}>Depth 5</StyledCard>
+    <StyledCard depth={6}>Depth 6</StyledCard>
+  </Flex>
 );
+
+const StyledLargeTitle = styled('h3')({
+  ...type.levels.title.large,
+});
+
+const StyledMediumTitle = styled('h3')({
+  ...type.levels.title.medium,
+});
+
+const StyledSmallTitle = styled('h3')({
+  ...type.levels.title.small,
+});
+
+const StyledLargeHeading = styled('h3')({
+  ...type.levels.heading.large,
+});
+
+const StyledMediumHeading = styled('h3')({
+  ...type.levels.heading.medium,
+});
+
+const StyledSmallHeading = styled('h3')({
+  ...type.levels.heading.small,
+});
+
+const StyledLargeBody = styled('h3')({
+  ...type.levels.body.large,
+});
+
+const StyledMediumBody = styled('h3')({
+  ...type.levels.body.medium,
+});
+const StyledSmallBody = styled('h3')({
+  ...type.levels.body.small,
+});
+
+const StyledLargeSubtext = styled('h3')({
+  ...type.levels.subtext.large,
+});
+const StyledMediumSubtext = styled('h3')({
+  ...type.levels.subtext.medium,
+});
+const StyledSmallSubtext = styled('h3')({
+  ...type.levels.subtext.small,
+});
+
+const StyledVariantsContainer = styled(Box)({
+  ...type.levels.body.medium,
+  '& > *': {display: 'block', margin: '4px 0'},
+});
+
+const StyledErrorText = styled('span')({
+  ...type.variants.error,
+});
+
+const StyledHintText = styled('span')({
+  ...type.variants.hint,
+});
+const StyledInverseText = styled('span')({
+  ...type.variants.inverse,
+  display: 'inline-block !important',
+  background: '#667380',
+  padding: '2px 8px',
+  borderRadius: '4px',
+});
 
 export const Type = () => (
   <React.Fragment>
     <h2>Levels (Hierarchy)</h2>
 
-    <h3 css={type.levels.title.large}>Title Large Heading</h3>
-    <h3 css={type.levels.title.medium}>Title Medium Heading</h3>
-    <h3 css={type.levels.title.small}>Title Small Heading</h3>
+    <StyledLargeTitle>Title Large Heading</StyledLargeTitle>
+    <StyledMediumTitle>Title Medium Heading</StyledMediumTitle>
+    <StyledSmallTitle>Title Small Heading</StyledSmallTitle>
 
-    <h3 css={type.levels.heading.large}>Heading Large Heading</h3>
-    <h3 css={type.levels.heading.medium}>Heading Medium Heading</h3>
-    <h3 css={type.levels.heading.small}>Heading Small Heading</h3>
+    <StyledLargeHeading>Heading Large Heading</StyledLargeHeading>
+    <StyledMediumHeading>Heading Medium Heading</StyledMediumHeading>
+    <StyledSmallHeading>Heading Small Heading</StyledSmallHeading>
 
-    <h3 css={type.levels.body.large}>Body Large Heading</h3>
-    <h3 css={type.levels.body.medium}>Body Medium Heading</h3>
-    <h3 css={type.levels.body.small}>Body Small Heading</h3>
+    <StyledLargeBody>Body Large Heading</StyledLargeBody>
+    <StyledMediumBody>Body Medium Heading</StyledMediumBody>
+    <StyledSmallBody>Body Small Heading</StyledSmallBody>
 
-    <h3 css={type.levels.subtext.large}>Subtext Large Heading</h3>
-    <h3 css={type.levels.subtext.medium}>Subtext Medium Heading</h3>
-    <h3 css={type.levels.subtext.small}>Subtext Small Heading</h3>
+    <StyledLargeSubtext>Subtext Large Heading</StyledLargeSubtext>
+    <StyledMediumSubtext>Subtext Medium Heading</StyledMediumSubtext>
+    <StyledSmallSubtext>Subtext Small Heading</StyledSmallSubtext>
 
     <hr />
 
     <h3>Variants</h3>
-    <div css={{...type.levels.body.medium, '& > *': {display: 'block', margin: '4px 0'}}}>
-      <span css={type.variants.error}>Error Text</span>
-      <span css={type.variants.hint}>Hint Text</span>
-      <span css={[type.variants.inverse, inverseStyle]}>Inverse Text</span>
-    </div>
+    <StyledVariantsContainer>
+      <StyledErrorText>Error Text</StyledErrorText>
+      <StyledHintText>Hint Text</StyledHintText>
+      <StyledInverseText>Inverse Text</StyledInverseText>
+    </StyledVariantsContainer>
   </React.Fragment>
 );
 
@@ -113,13 +172,13 @@ const SizeLabel = styled('div')({
 export const BorderRadius = () => (
   <React.Fragment>
     {Object.keys(borderRadius).map(size => (
-      <div css={{display: 'flex'}} key={size}>
+      <Flex key={size}>
         <SizeLabel>
           {size}
           <span>({borderRadius[size]})</span>
         </SizeLabel>
         <Shape radius={borderRadius[size]} />
-      </div>
+      </Flex>
     ))}
   </React.Fragment>
 );
@@ -127,13 +186,13 @@ export const BorderRadius = () => (
 export const Space = () => (
   <React.Fragment>
     {Object.keys(space).map(size => (
-      <div css={{display: 'flex'}} key={size}>
+      <Flex key={size}>
         <SizeLabel>
           {size}
           <span>({(space as any)[size]})</span>
         </SizeLabel>
         <Shape size={(space as any)[size]} radius={borderRadius.m} />
-      </div>
+      </Flex>
     ))}
   </React.Fragment>
 );
@@ -196,6 +255,10 @@ const colorNames = Object.keys(colors)
     return collection;
   }, []);
 
+const StyledColors = styled('span')({
+  fontFamily: type.properties.fontFamilies.monospace,
+});
+
 export const Colors = () => (
   <Palettes>
     {colorNames.map(colorName => (
@@ -209,9 +272,7 @@ export const Colors = () => (
           return (
             <Swatch bg={(colors as any)[color]} key={color}>
               <span>{level}00</span>
-              <span css={{fontFamily: type.properties.fontFamilies.monospace}}>
-                {(colors as any)[color]}
-              </span>
+              <StyledColors>{(colors as any)[color]}</StyledColors>
             </Swatch>
           );
         })}

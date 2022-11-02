@@ -6,6 +6,7 @@ import {Basic} from './examples/Basic';
 import {ContextMenu} from './examples/ContextMenu';
 import {CustomMenuItem} from './examples/CustomMenuItem';
 import {Icons} from './examples/Icons';
+import {Headers} from './examples/Headers';
 import {ManyItems} from './examples/ManyItems';
 
 <Meta title="Preview/Menu/React" component={Menu} />
@@ -74,6 +75,13 @@ Below is an example:
 
 <ExampleCodeBlock code={Icons} />
 
+### Headers
+
+You can group menu items logically by adding a `isHeader` attribute on your `<MenuItems>`. To make
+your new items screen reader friendly add an `aria-label` around each grouped item.
+
+<ExampleCodeBlock code={Headers} />
+
 ### Many Items
 
 <ExampleCodeBlock code={ManyItems} />
@@ -115,4 +123,4 @@ Undocumented props are spread to the underlying `<li>` element.
 
 ## Specifications
 
-<Specifications file="Menu.spec.ts" name="Menu" />
+<Specifications file="MenuPreview.spec.ts" name="Menu" />

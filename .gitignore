@@ -14,7 +14,6 @@ lerna-debug.log*
 # build
 modules/**/dist
 modules/**/ts-tmp
-modules/**/ts3.5
 build/*
 *.tsbuildinfo
 

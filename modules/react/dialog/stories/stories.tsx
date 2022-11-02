@@ -2,7 +2,7 @@ import React from 'react';
 
 import {Dialog} from '@workday/canvas-kit-react/dialog';
 import {DeleteButton} from '@workday/canvas-kit-react/button';
-import {HStack} from '@workday/canvas-kit-labs-react';
+import {HStack} from '@workday/canvas-kit-react/layout';
 
 export default {
   title: 'Components/Popups/Dialog/React',
@@ -25,14 +25,14 @@ export const Basic = () => {
           <Dialog.CloseIcon aria-label="Close" />
           <Dialog.Heading>Delete Item</Dialog.Heading>
           <Dialog.Body>
-            <p>Are you sure you want to delete the item?</p>
-            <HStack spacing="s">
-              <Dialog.CloseButton as={DeleteButton} onClick={handleDelete}>
-                Delete
-              </Dialog.CloseButton>
-              <Dialog.CloseButton>Cancel</Dialog.CloseButton>
-            </HStack>
+            <p style={{marginTop: 0, marginBottom: 0}}>Are you sure you want to delete the item?</p>
           </Dialog.Body>
+          <HStack spacing="s" padding="xxs" marginTop="xxs">
+            <Dialog.CloseButton as={DeleteButton} onClick={handleDelete}>
+              Delete
+            </Dialog.CloseButton>
+            <Dialog.CloseButton>Cancel</Dialog.CloseButton>
+          </HStack>
         </Dialog.Card>
       </Dialog.Popper>
     </Dialog>

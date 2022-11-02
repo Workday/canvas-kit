@@ -34,6 +34,11 @@ export interface MenuItemProps extends React.LiHTMLAttributes<HTMLLIElement> {
    */
   hasDivider?: boolean;
   /**
+   * If true, render a header to group data, this menu item will not be intractable.
+   * @default false
+   */
+  isHeader?: boolean;
+  /**
    * If true, set the MenuItem to the disabled state so it is not clickable.
    * @default false
    */
@@ -55,7 +60,7 @@ export interface MenuItemProps extends React.LiHTMLAttributes<HTMLLIElement> {
   shouldClose?: boolean;
 }
 
-const Item = styled('li')<Pick<MenuItemProps, 'isDisabled' | 'isFocused'>>(
+const Item = styled('li')<Pick<MenuItemProps, 'isDisabled' | 'isFocused' | 'isHeader'>>(
   {
     ...type.levels.subtext.large,
     padding: `${space.xxs} ${space.s}`,
@@ -70,6 +75,9 @@ const Item = styled('li')<Pick<MenuItemProps, 'isDisabled' | 'isFocused'>>(
     '&:focus': {
       outline: 'none',
     },
+  },
+  ({isHeader}) => {
+    return {pointerEvents: isHeader ? 'none' : 'all'};
   },
   ({isFocused, isDisabled}) => {
     if (!isFocused && !isDisabled) {
@@ -248,7 +256,7 @@ class MenuItem extends React.Component<MenuItemProps> {
     }
   };
 
-  render(): React.ReactNode {
+  render() {
     const {
       onClick,
       children,
@@ -258,6 +266,7 @@ class MenuItem extends React.Component<MenuItemProps> {
       hasDivider,
       isDisabled,
       isFocused,
+      isHeader,
       role,
       ...elemProps
     } = this.props;
@@ -272,11 +281,12 @@ class MenuItem extends React.Component<MenuItemProps> {
           ref={this.ref}
           tabIndex={-1}
           id={id}
-          role={role}
+          role={isHeader ? 'presentation' : role}
           onClick={this.handleClick}
           aria-disabled={isDisabled ? true : undefined}
           isDisabled={!!isDisabled}
           isFocused={!!isFocused}
+          isHeader={!!isHeader}
           {...elemProps}
         >
           {icon && iconProps && <StyledSystemIcon {...iconProps} />}

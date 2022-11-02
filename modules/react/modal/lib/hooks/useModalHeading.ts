@@ -2,15 +2,15 @@ import React from 'react';
 
 import {
   composeHooks,
-  createHook,
+  createElemPropsHook,
   useLocalRef,
   useMountLayout,
 } from '@workday/canvas-kit-react/common';
-import {usePopupHeading, PopupModel} from '@workday/canvas-kit-react/popup';
+import {usePopupHeading, usePopupModel} from '@workday/canvas-kit-react/popup';
 
 export const useModalHeading = composeHooks(
   usePopupHeading,
-  createHook((_: PopupModel, ref?: React.Ref<HTMLElement>) => {
+  createElemPropsHook(usePopupModel)((_, ref?: React.Ref<HTMLElement>) => {
     const {elementRef, localRef} = useLocalRef(ref);
 
     useMountLayout(() => {
