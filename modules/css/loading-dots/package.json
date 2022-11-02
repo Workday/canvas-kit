@@ -1,6 +1,6 @@
 {
-  "name": "@workday/canvas-kit-css-loading-animation",
-  "version": "7.4.2",
+  "name": "@workday/canvas-kit-css-loading-dots",
+  "version": "7.4.3",
   "description": "Animations used while a page or component is loading.",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -9,14 +9,15 @@
     "lib",
     "index.scss"
   ],
-  "style": "dist/canvas-kit-css-loading-animation.min.css",
-  "main": "dist/canvas-kit-css-loading-animation.min.css",
+  "style": "dist/canvas-kit-css-loading-dots.min.css",
+  "main": "dist/canvas-kit-css-loading-dots.min.css",
   "repository": {
     "type": "git",
-    "url": "http://github.com/Workday/canvas-kit/tree/master/modules/loading-animation/css"
+    "url": "https://github.com/workday/canvas-kit.git",
+    "directory": "modules/css/loading-dots"
   },
   "dependencies": {
-    "@workday/canvas-kit-css-core": "^7.4.2"
+    "@workday/canvas-kit-css-core": "^7.4.3"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
