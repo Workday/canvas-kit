@@ -1,0 +1,936 @@
+import {Meta} from '@storybook/addon-docs';
+
+<Meta title="Welcome/Upgrade Guides/v8.0" />
+
+# Canvas Kit 8.0 Upgrade Guide
+
+This guide contains an overview of the changes in Canvas Kit v8. Please
+[reach out](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) if you have
+any questions.
+
+- [Codemod](#codemod)
+- [General Updates](#general-updates)
+  - [IE11 No Longer Supported](#ie11-no-longer-supported)
+  - [React 18 Upgrade](#react-18-upgrade)
+  - [Removal of Default Exports](#removal-of-default-exports)
+  - [Reorganized Style Props](#reorganized-style-props)
+  - [Responsive Styles](#responsive-styles)
+  - [Testing](#testing)
+  - [Utility Deprecations](#utility-deprecations)
+- [New Components](#new-components)
+  - [Grid](#grid)
+  - [Text](#text)
+  - [Segmented Control (Preview)](#segmented-control-preview)
+  - [Status Indicator (Preview)](#status-indicator-preview)
+- [Component Deprecations](#component-deprecations)
+  - [Drawer](#drawer)
+  - [Menu (Preview)](#menu-preview)
+  - [Layout and Column](#layout-and-column)
+- [Component Updates](#component-updates)
+  - [Action Bar](#action-bar)
+  - [Box](#box)
+  - [Breadcrumbs](#breadcrumbs)
+  - [Component States Table](#component-states-table)
+  - [Menu (Main)](#menu-main)
+  - [Modal](#modal)
+  - [Popups](#popups)
+  - [Loading Animation](#loading-animation)
+
+## Codemod
+
+Please use our [codemod package](https://github.com/Workday/canvas-kit/tree/master/modules/codemod)
+to automatically update your code to work with most of the breaking changes in v8.
+
+```sh
+> npx @workday/canvas-kit-codemod v8 [path]
+```
+
+Alternatively, if you're unable to run the codemod successfully using `npx`, you can install the
+codemod package as a dev dependency, run it with `yarn`, and then remove the package after you're
+finished.
+
+```sh
+> yarn add @workday/canvas-kit-codemod --dev
+> yarn canvas-kit-codemod v8 [path]
+> yarn remove @workday/canvas-kit-codemod
+```
+
+> The codemod only works on `.js`, `.jsx`, `.ts`, and `.tsx` files. You'll need to manually edit
+> other file types (`.json`, `.mdx`, `.md`, etc.). You may need to run your linter after executing
+> the codemod, as its resulting formatting (spacing, quotes, etc.) may not match your project
+> conventions.
+
+The codemod will handle _most_ but _not all_ of the breaking changes in v8. **Breaking changes
+handled by the codemod are marked with 🤖 in the Upgrade Guide.**
+
+**Please verify all changes made by the codemod.** As a safety precaution, we recommend committing
+the changes from the codemod as a single isolated commit (separate from other changes) so you can
+roll back more easily if necessary.
+
+## General Updates
+
+### IE11 No Longer Supported
+
+Starting with v8, Canvas Kit will no longer support IE11.
+
+We've removed all IE11-specific code including polyfills. Applications built using Canvas Kit v8 and
+above will no longer run in IE11 and will fail to bootstrap with an error and/or a white screen.
+
+**Do not upgrade to v8 if your application needs to support IE11.**
+
+---
+
+### React 18 Upgrade
+
+We've upgraded Canvas Kit to [React 18](https://reactjs.org/blog/2022/03/29/react-v18.html). This
+change will not impact users who are already on v7 and are looking to upgrade to v8 as v8 will
+support the same React versions as v7 (React 16.14 and 17.X) while still giving them the ability to
+upgrade to React 18 as needed. Although we didn't use any new features from React 18 in v8, _future_
+updates to Canvas Kit may require upgrading to React 18 to support them.
+
+React 18 introduces several new features, but the most impactful change is the new
+[concurrent render API](https://reactjs.org/blog/2022/03/29/react-v18.html#what-is-concurrent-react).
+The new `createRoot` method replaces `render` and gives you access to the improvements in React 18
+including the concurrent features. Without it, React behaves as it did in previous versions.
+
+See our [React 18 discussion](https://github.com/Workday/canvas-kit/discussions/1545) for more
+information.
+
+---
+
+### Removal of Default Exports
+
+We've removed all remaining default exports from our packages to maintain consistency with our newer
+(and recently updated) components and systems which favor named exports. The following components
+have been updated to provide named exports instead of default exports (in cases where the component
+provided both default and named exports, the default export has been removed).
+
+#### Main (canvas-kit-react)
+
+- AccentIcon
+- AppletIcon
+- Avatar
+- Breadcrumbs (formerly in Preview)
+- Canvas
+- Checkbox
+- CountBadge
+- FormField
+- Graphic
+- Icon
+- LoadingDots
+- Radio
+- SegmentedControl
+- Select
+- SidePanel
+- StatusIndicator
+- Switch
+- Svg
+- SystemIcon
+- SystemIconCircle
+- Table
+- TextArea
+- TextInput
+- Toast
+- Tooltip
+
+#### Labs (canvas-kit-labs-react)
+
+- Combobox
+- Drawer
+
+#### Preview (canvas-kit-preview-react)
+
+- ColorPicker
+- Menu
+- Select
+- SidePanel
+
+#### Fonts (canvas-kit-react-fonts)
+
+- fonts
+
+🤖 The codemod will rewrite your default imports to named imports.
+
+---
+
+### Reorganized Style Props
+
+We've reorganized some style props and refactored the implementation, but the functionality remains
+the same. This improves the style prop documentation and allows us to extend style props further in
+the future. We've moved the `background` and `backgroundImage` style props from the `color` style
+prop function to a new `background` style prop function.
+
+These functions are only intended to be used by Canvas Kit internally. However, if you're importing
+the `color` style prop function to apply these two style props, you'll need to update your import
+statements to import the `background` style prop function as well.
+
+> We recommend using `Box` and style props directly instead of these style prop functions to reduce
+> the cost of upgrading in the future.
+
+```tsx
+// v7
+import {color} from '@workday/canvas-kit-react/layout';
+
+const Example = styled('div')(
+  {
+    boxSizing: 'border-box',
+  },
+  color
+);
+
+// v8
+import {background, color} from '@workday/canvas-kit-react/layout';
+
+const Example = styled('div')(
+  {
+    boxSizing: 'border-box',
+  },
+  background,
+  color
+);
+```
+
+---
+
+### Responsive Styles
+
+We've added a set of
+[responsive utilities](/getting-started/for-developers/resources/responsive-styling/) to facilitate
+container-based and viewport-based responsive styling:
+
+- **useResponsiveContainerStyles**: A hook that allows developers to create container-based
+  responsive styles using style objects.
+
+```tsx
+import {Flex, Box} from '@workday/canvas-kit-react/layout';
+import {useResizeObserver, useResponsiveContainerStyles} from '@workday/canvas-kit-react/common';
+const ref = React.useRef(null);
+const [width, setWidth] = React.useState(0);
+useResizeObserver({
+  ref: ref,
+  onResize: data => {
+    setWidth(data.width || 0);
+  },
+});
+const containerResponsiveStyles = useResponsiveContainerStyles(
+  {
+    flex: {
+      flexDirection: 'column',
+      padding: 'm',
+      depth: 1,
+      borderRadius: 'l',
+      zero: {
+        backgroundColor: 'Red',
+      },
+      s: {
+        backgroundColor: 'Orange',
+      },
+      m: {
+        backgroundColor: 'Yellow',
+      },
+      l: {
+        backgroundColor: 'Green',
+      },
+      xl: {
+        backgroundColor: 'Blue',
+      },
+    },
+    box: {
+      padding: 's',
+    },
+  },
+  width
+);
+return (
+  <Box ref={ref}>
+    <Flex {...containerResponsiveStyles.flex}>
+      <Box {...containerResponsiveStyles.box}>Hello World</Box>
+    </Flex>
+  </Box>
+);
+```
+
+---
+
+### Testing
+
+We've added a new `@workday/canvas-kit-react/testing` slash import to house our testing utilities
+and components. You may find them useful for testing the different visual states of your components.
+
+View the [Testing](/utilities/testing/) documentation for more information. The example below
+creates a visual states table of our `DeleteButton`. Each row renders a different size of
+`DeleteButton` with each column representing different combinations of the `disabled`, `hover`, and
+`active` states.
+
+```tsx
+import {
+  ComponentStatesTable,
+  StaticStates,
+  permutateProps,
+} from '@workday/canvas-kit-react/testing';
+import {PartialEmotionCanvasTheme} from '@workday/canvas-kit-react/common';
+
+import {DeleteButton} from '@workday/canvas-kit-react/button';
+
+// Creates a columns for different states of a button
+export const stateTableColumnProps = [
+  {label: 'Default ', props: {className: '', disabled: false}},
+  {label: 'Default Disabled', props: {className: '', disabled: true}},
+  {label: 'Hover ', props: {className: 'hover', disabled: false}},
+  {label: 'Hover Disabled', props: {className: 'hover', disabled: true}},
+  {label: 'Focus ', props: {className: 'focus', disabled: false}},
+  {label: 'Focus Hover ', props: {className: 'focus hover', disabled: false}},
+  {label: 'Active ', props: {className: 'active', disabled: false}},
+  {label: 'Active Hover ', props: {className: 'active hover', disabled: false}},
+];
+
+export const Basic = (props: {theme?: PartialEmotionCanvasTheme}) => (
+  <StaticStates theme={props.theme}>
+    <ComponentStatesTable
+      rowProps={permutateProps({
+        // creates rows with values that get passed to the button
+        size: [
+          {value: 'small', label: 'Small'},
+          {value: 'medium', label: 'Medium'},
+          {value: 'large', label: 'Large'},
+        ],
+      })}
+      columnProps={stateTableColumnProps}
+    >
+      {props => <DeleteButton {...props}>Test</DeleteButton>}
+    </ComponentStatesTable>
+  </StaticStates>
+);
+```
+
+For users who are currently using our testing utilities and components, the following code-moddable
+changes have been made:
+
+- `ComponentStatesTable`, `permutateProps`, `StaticStates` and `propTypes` have been moved to
+  `@workday/canvas-kit-react/testing`.
+- `StaticStates` and `convertToStaticStates` have been moved from `@workday/canvas-kit-react/common`
+  to `@workday/canvas-kit-react/testing`
+
+🤖 The codemod will handle all of the changes above for you automatically.
+
+### Utility Deprecations
+
+The following utility functions are being deprecated and will be removed in a later version of Canvas Kit.
+
+- Types:
+  - `Model`
+  - `ToModelConfig`
+- Functions:
+  - `createEventMap`
+  - `useEventMap`
+
+All these utility types and functions have been replaced by `createModelHook`. Typescript 4.1
+introduced
+[Template Literal Types](https://www.typescriptlang.org/docs/handbook/2/template-literal-types.html),
+so event maps are no longer needed. `createModelHook` infers all types based on the input of the
+function.
+
+## New Components
+
+### Grid
+
+We've introduced a new [`Grid`](/components/layout/grid/) component to the Main package. `Grid` is a
+low-level layout component that provides a common, ergonomic API for building two-dimensional
+layouts (rows and columns) with
+[CSS Grid](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Grids).
+
+---
+
+### Text
+
+We've introduced a group of Text components to the Main package: [`Text`](/components/text/text/),
+[`LabelText`](/components/text/label-text/), [`Title`](/components/text/title/),
+[`Heading`](/components/text/heading/), [`BodyText`](/components/text/body-text/), and
+[`Subtext`](/components/text/subtext/). Together they provide a common, ergonomic API for rendering
+text with built-in support for our Canvas type tokens.
+
+```tsx
+// v7
+<h2 css={{...type.levels.title.medium}}>Medium Title Text</h2>
+<p css={{...type.levels.body.medium}}>Medium body text</p>
+<p css={{...type.levels.subtext.small}}>Small subtext text</p>
+
+// v8
+<Title as="h2" size="medium">Medium Title Text</Title>
+<BodyText size="medium">Medium body text</BodyText>
+<Subtext size="small">Small subtext text</Subtext>
+```
+
+---
+
+### Segmented Control (Preview)
+
+We've added a new version of
+[`SegmentedControl`](https://workday.github.io/canvas-kit/?path=/docs/preview-segmented-control-react--basic)
+which has been redesigned as a
+[compound component](/getting-started/for-developers/resources/compound-components/) to the Preview
+package. `SegmentedControl` represents a linear group of multiple buttons allowing the selection of
+a specific value and is best used for switching between different views of the same content.
+
+The `SegmentedControl` in Preview has the following major differences compared to the
+`SegmentedControl` in Main:
+
+- Visually redesigned to better align with the Canvas Design System
+- Uses title casing (e.g., "In Progress") instead of full caps ("IN PROGRESS")
+- Supports a text-only variation
+- Includes built-in support for tooltips to improve accessibility of the icon-only variation
+
+```tsx
+// SegmentedControl (Main)
+import {SegmentedControl} from '@workday/canvas-kit-react/segmented-control';
+import {listViewIcon, deviceTabletIcon} from '@workday/canvas-system-icons-web';
+
+<SegmentedControl value={value} onChange={handleToggle}>
+  <SegmentedControl.Button icon={listViewIcon} value="list-view" aria-label="List View" />
+  <SegmentedControl.Button icon={deviceTabletIcon} value="device-view" aria-label="Device View" />
+</SegmentedControl>;
+
+// SegmentedControl (Preview)
+import {SegmentedControl} from '@workday/canvas-kit-preview-react/segmented-control';
+import {listViewIcon, deviceTabletIcon} from '@workday/canvas-system-icons-web';
+
+<SegmentedControl>
+  <SegmentedControl.List aria-label="View type">
+    <SegmentedControl.Item
+      data-id="list-view"
+      icon={listViewIcon}
+      tooltipProps={{title: 'List view'}}
+    />
+    <SegmentedControl.Item
+      data-id="device-view"
+      icon={deviceTabletIcon}
+      tooltipProps={{title: 'Device view'}}
+    />
+  </SegmentedControl.List>
+</SegmentedControl>;
+```
+
+You may still use `SegmentedControl` in the Main package, but note that it will be replaced by
+`SegmentedControl` in the Preview package in the future.
+
+---
+
+### Status Indicator (Preview)
+
+We've added a new version of
+[`StatusIndicator`](https://workday.github.io/canvas-kit/?path=/docs/preview-status-indicator-react--basic)
+which has been redesigned as a
+[compound component](/getting-started/for-developers/resources/compound-components/) to the Preview
+package. `StatusIndicator` is best used for helping the user quickly identify the status of a task,
+action, or page element.
+
+```tsx
+// StatusIndicator (Main)
+import {StatusIndicator} from '@workday/canvas-kit-react/status-indicator';
+import {uploadCloudIcon} from '@workday/canvas-system-icons-web';
+
+<StatusIndicator
+  emphasis={StatusIndicator.Emphasis.Low}
+  label="Published"
+  type={StatusIndicator.Type.Green}
+  icon={uploadCloudIcon}
+/>;
+
+// StatusIndicator (Preview)
+import {StatusIndicator} from '@workday/canvas-kit-preview-react/status-indicator';
+import {uploadCloudIcon} from '@workday/canvas-system-icons-web';
+
+<StatusIndicator emphasis="low" variant="green">
+  <StatusIndicator.Label>Published</StatusIndicator.Label>
+  <StatusIndicator.Icon icon={uploadCloudIcon} />
+</StatusIndicator>;
+```
+
+You may still use `StatusIndicator` in the Main package, but note that it will be replaced by
+`StatusIndicator` in the Preview package in the future.
+
+## Component Deprecations
+
+### Deprecation Types
+
+#### Soft Deprecation
+
+A soft-deprecated component is still available with its full functionality, but it will have been
+renamed with a prefix to indicate its soft-deprecated status. It will also include a console warning
+announcing its deprecation. This warning will only be triggered on the component's initial render.
+
+Soft-deprecated types and utilities will also have been renamed but generally will not trigger a
+console warning.
+
+#### Hard Deprecation
+
+A hard-deprecated component or package is no longer available. You will need to follow the method
+prescribed in our Upgrade Guide to update your application. Please
+[reach out](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) to our team
+directly if you need additional help.
+
+---
+
+### Drawer
+
+We've [soft-deprecated](#soft-deprecation) `Drawer` and renamed the following items:
+
+- `Drawer` to `DeprecatedDrawer`
+- `DrawerProps` to `DeprecatedDrawerProps`
+- `DrawerHeader` to `DeprecatedDrawerHeader`
+- `DrawerHeaderProps` to `DeprecatedDrawerHeaderProps`
+
+```tsx
+// v7
+import {Drawer, DrawerHeader} from '@workday/canvas-kit-labs-react/drawer';
+
+<Drawer
+  header={
+    <DrawerHeader
+      closeIconAriaLabel="Close"
+      onClose={() => console.log('onClose callback')}
+      title="Deprecated Drawer Header"
+    />
+  }
+/>;
+
+// v8
+import {DeprecatedDrawer, DeprecatedDrawerHeader} from '@workday/canvas-kit-labs-react/drawer';
+
+<DeprecatedDrawer
+  header={
+    <DeprecatedDrawerHeader
+      closeIconAriaLabel="Close"
+      onClose={() => console.log('onClose callback')}
+      title="Deprecated Drawer Header"
+    />
+  }
+/>;
+```
+
+🤖 The codemod will rename `Drawer`, `DrawerProps`, `DrawerHeader` and `DrawerHeaderProps` to their
+deprecated names.
+
+You may continue to use this component, but please note that we plan to
+[hard-deprecate](#hard-deprecation) it in v9. Consider using the
+[Side Panel](/components/containers/side-panel/) in the Preview package instead.
+
+---
+
+### Menu (Preview)
+
+We've [soft-deprecated](#soft-deprecation) the `Menu` in Preview and renamed the following items:
+
+- `Menu` to `DeprecatedMenu`
+- `MenuProps` to `DeprecatedMenuProps`
+- `MenuState` to `DeprecatedMenuState`
+- `MenuItem` to `DeprecatedMenuItem`
+- `MenuItemProps` to `DeprecatedMenuItemProps`
+
+```tsx
+// v7
+import {Menu, MenuItem, MenuProps, MenuItemProps} from '@workday/canvas-kit-preview-react/menu';
+
+interface AnotherMenuProps extends MenuProps {
+  specialProp?: boolean;
+}
+type CustomMenuItemProps = MenuItemProps;
+
+const CustomMenu = () => {
+  return (
+    <Menu>
+      <MenuItem>First Item</MenuItem>
+    </Menu>
+  );
+};
+
+// v8
+import {
+  DeprecatedMenu,
+  DeprecatedMenuItem,
+  DeprecatedMenuProps,
+  DeprecatedMenuItemProps,
+} from '@workday/canvas-kit-preview-react/menu';
+
+interface AnotherMenuProps extends DeprecatedMenuProps {
+  specialProp?: boolean;
+}
+
+type CustomMenuItemProps = DeprecatedMenuItemProps;
+
+const CustomMenu = () => {
+  return (
+    <DeprecatedMenu>
+      <DeprecatedMenuItem>First Item</DeprecatedMenuItem>
+    </DeprecatedMenu>
+  );
+};
+```
+
+🤖 The codemod will rename `Menu`, `MenuProps`, `MenuState`, `MenuItem` and `MenuItemProps` to their
+deprecated names.
+
+You may continue to use this component, but please note that we plan to
+[hard-deprecate](#hard-deprecation) it in v9. Consider using the [Menu](/components/popups/menu/) in
+the Main package instead.
+
+---
+
+### Layout and Column
+
+We've [soft-deprecated](#soft-deprecation) `Layout` and `Column` and renamed the following items:
+
+- `Layout` to `DeprecatedLayout`
+- `LayoutProps` to `DeprecatedLayoutProps`
+- `Column` to `DeprecatedColumn`
+- `ColumnProps` to `DeprecatedColumnProps`
+
+```tsx
+// v7
+import {Layout, Column} from '@workday/canvas-kit-react/layout';
+
+<Layout gutter={0}>
+  <Layout.Column spacing={0}>
+    <Card />
+  </Layout.Column>
+</Layout>;
+
+// v8
+import {DeprecatedLayout, DeprecatedColumn} from '@workday/canvas-kit-react/layout';
+
+<DeprecatedLayout gutter={0}>
+  <DeprecatedLayout.Column spacing={0}>
+    <Card />
+  </DeprecatedLayout.Column>
+</DeprecatedLayout>;
+```
+
+🤖 The codemod will rename `Layout`, `LayoutProps`, `Column` and `ColumnProps` to their deprecated
+names.
+
+You may continue to use these components, but please note that we plan to
+[hard-deprecate](#hard-deprecation) them in v9. Consider using the newly-released [Grid](#grid)
+component instead.
+
+## Component Updates
+
+### Action Bar
+
+`ActionBar.List` with overflow behavior now requires to pass a overflow button component as a value
+of `overflowButton` prop, the same way we did for `Tabs` and `Breadcrumbs` components. In Canvas Kit
+v7 the component for overflow button was placed directly inside `ActionBar.List` without passing any
+prop. We found limitation of this approach because it was not possible to modify an overflow button
+or pass any prop into it. To remove this limitation, `ActionBar.OverflowButton` inside
+`ActionBar.List` is replaced with an `overflowButton` prop.
+
+```tsx
+// v7, an overflow button is inside ActionBar.List
+<ActionBar.List position="relative">{/* items */}</ActionBar.List>
+
+// inside ActionBar.List
+<Stack>
+  {items}
+  <ActionBar.OverflowButton /> // OverflowButton is a hard-coded component
+</Stack>
+
+
+// v8, an overflow button should be passed as a prop
+<ActionBar.List
+  position="relative"
+  overflowButton={<ActionBar.OverflowButton aria-label="More actions" />}
+>
+  {/* items */}
+</ActionBar.List>
+
+// inside ActionBar.List
+<Stack>
+  {items}
+  {overflowButton} // overflowButton prop is a passed component
+</Stack>
+```
+
+### Box
+
+`Box` now supports the following props to set font and text styles: `fontFamily`, `fontSize`,
+`fontStyle`, `fontWeight`, `lineHeight`, `letterSpacing`, `textAlign`, `textDecoration`,
+`textTransform`, `textShadow`, `whiteSpace`, and `wordBreak`.
+
+```tsx
+// v7
+const StyledBox = styled(Box)({
+  fontFamily: 'monospace',
+  fontSize: type.properties.fontSizes[16],
+  fontWeight: type.properties.fontWeights.medium
+})
+
+<StyledBox />
+
+// v8
+<Box fontFamily="monospace" fontSize={16} fontWeight="medium" />
+```
+
+---
+
+### Breadcrumbs
+
+`Breadcrumbs` has been promoted to the Main package. It now uses the list system from our
+[Collection API](/getting-started/for-developers/resources/collection-api/) which provides new
+overflow behavior based on container width.
+
+The following code-moddable changes have been made to the `Breadcrumbs` API (see below for
+additional changes requiring manual work):
+
+- `Breadcrumbs` has been promoted from Preview (`@workday/canvas-kit-preview-react`) to Main
+  (`@workday/canvas-kit-react`).
+- `Breadcrumbs.Nav` has been replaced with `Breadcrumbs`. Any `aria-label` previously applied to
+  `Breadcrumbs.Nav` should now be applied to `Breadcrumbs`.
+- `Breadcrumbs.CollapsibleList` has been renamed to `Breadcrumbs.List`.
+- `Breadcrumbs.ListItem` has been renamed to `Breadcrumbs.Item`.
+
+🤖 The codemod will handle all of the changes above for you automatically.
+
+```tsx
+// v7
+<Breadcrumbs.Nav aria-label="Breadcrumbs">
+  <Breadcrumbs.List>
+    <Breadcrumbs.ListItem>
+      <Breadcrumbs.Link href="/">Home</Breadcrumbs.Link>
+    </Breadcrumbs.ListItem>
+    <Breadcrumbs.ListItem>
+      <Breadcrumbs.Link href="/menus">Menus</Breadcrumbs.Link>
+    </Breadcrumbs.ListItem>
+    <Breadcrumbs.CurrentItem>Dinner</Breadcrumbs.CurrentItem>
+  </Breadcrumbs.List>
+</Breadcrumbs.Nav>
+
+// v8
+<Breadcrumbs aria-label="Breadcrumbs">
+  <Breadcrumbs.List>
+    <Breadcrumbs.Item>
+      <Breadcrumbs.Link href="/">Home</Breadcrumbs.Link>
+    </Breadcrumbs.Item>
+    <Breadcrumbs.Item>
+      <Breadcrumbs.Link href="/menus">Menus</Breadcrumbs.Link>
+    </Breadcrumbs.Item>
+    <Breadcrumbs.CurrentItem>Dinner</Breadcrumbs.CurrentItem>
+  </Breadcrumbs.List>
+</Breadcrumbs>
+```
+
+Additionally, there are a handful of changes to the `Breadcrumbs` API which will require manual
+updates on your part:
+
+- Changes to Redirects
+- Updated Overflow Behavior
+
+We've outlined these changes in more detail below.
+
+#### Changes to Redirects
+
+We've removed `onAction` from `Breadcrumbs.Item` and `Breadcrumbs.Link`. `Breadcrumbs.Link` now
+defaults to redirecting with an `href`, which means the page will hard-redirect when the link is
+clicked.
+
+If you're in a single-page application (SPA) environment, you may want to use the internal SPA
+router instead. You can override the hard-redirect with a custom `onClick` handler that blocks the
+default behavior of the event and passes the link path along to your SPA router. Most of our
+consumers use `react-router-dom` for managing SPA routing; here are examples of how to use `onClick`
+with v5 and v6 of `react-router-dom`.
+
+```ts
+// React Router DOM v5 API
+import {useHistory} from 'react-router-dom';
+import {Breadcrumbs} from '@workday/canvas-kit-react/breadcrumbs';
+...
+const history = useHistory();
+const handleClick = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>, link?: string) => {
+      event.preventDefault();
+    // if no link is provided, default to the current path
+    history.push(link || window.location.pathname);
+}
+return (
+  <Breadcrumbs.Link href="/account" onClick={handleClick}>
+    Account
+  </Breadcrumbs.Link>
+);
+
+// React Router DOM v6 API
+import {useNavigate} from 'react-router-dom';
+import {Breadcrumbs} from '@workday/canvas-kit-react/breadcrumbs';
+...
+const navigate = useNavigate();
+const handleClick = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>, link?: string) => {
+      event.preventDefault();
+    // if no link is provided, default to the current path
+    navigate(link || window.location.pathname);
+}
+return (
+  <Breadcrumbs.Link href="/account" onClick={handleClick}>
+    Account
+  </Breadcrumbs.Link>
+);
+```
+
+#### Updated Overflow Behavior
+
+We've removed the component-specific overflow functionality from `Breadcrumbs` now that it uses the
+overflow behavior provided by the Collection API. In order to enable the new overflow behavior,
+you'll need to use the dynamic API by passing an array of items to `Breadcrumbs` (rather than
+passing the items as statically defined `children` via JSX). The items can be passed to
+`Breadcrumbs` via its `items` prop or via an `items` key within a provided `model`.
+
+Here's an example of how to convert a v7 instance of overflow `Breadcrumbs` using the static API to
+the v8 equivalent using the dynamic API with the `items` prop.
+
+```ts
+// v7
+import {Breadcrumbs} from '@workday/canvas-kit-preview-react/breadcrumbs';
+
+export const OldCollapsibleList = () => {
+  return (
+    <Breadcrumbs.Nav aria-label="Breadcrumbs">
+      <Breadcrumbs.CollapsibleList buttonAriaLabel="More links" maxWidth={300}>
+        <Breadcrumbs.ListItem>
+          <Breadcrumbs.Link href="/">Home</Breadcrumbs.Link>
+        </Breadcrumbs.ListItem>
+        <Breadcrumbs.ListItem>
+          <Breadcrumbs.Link href="/menus">Menus</Breadcrumbs.Link>
+        </Breadcrumbs.ListItem>
+        <Breadcrumbs.ListItem>
+          <Breadcrumbs.Link href="/lunch">Lunch</Breadcrumbs.Link>
+        </Breadcrumbs.ListItem>
+        <Breadcrumbs.ListItem>
+          <Breadcrumbs.Link href="/small-plates-and-appetizers">
+            Small Plates & Appetizers
+          </Breadcrumbs.Link>
+        </Breadcrumbs.ListItem>
+        <Breadcrumbs.CurrentItem>Focaccia Genovese</Breadcrumbs.CurrentItem>
+      </Breadcrumbs.CollapsibleList>
+    </Breadcrumbs.Nav>
+  );
+};
+
+// v8
+const NewOverflowList = () => {
+  const [items] = React.useState([
+    {id: '1', text: 'Home', link: '/'},
+    {id: '2', text: 'Menus', link: '/menus'},
+    {id: '3', text: 'Lunch', link: '/lunch'},
+    {id: '4', text: 'Small Plates & Appetizers', link: '/small-plates-and-appetizers'},
+    {id: '5', text: 'Focaccia Genovese'},
+  ]);
+
+  return (
+    <Breadcrumbs items={items} aria-label="Breadcrumbs">
+      <Breadcrumbs.List overflowButton={<Breadcrumbs.OverflowButton aria-label="More links" />}>
+        {item =>
+          item.link ? (
+            <Breadcrumbs.Item>
+              <Breadcrumbs.Link href={item.link}>{item.text}</Breadcrumbs.Link>
+            </Breadcrumbs.Item>
+          ) : (
+            <Breadcrumbs.CurrentItem>{item.text}</Breadcrumbs.CurrentItem>
+          )
+        }
+      </Breadcrumbs.List>
+      <Breadcrumbs.Menu.Popper>
+        <Breadcrumbs.Menu.Card>
+          <Breadcrumbs.Menu.List>
+            {(item: Breadcrumb) => <Breadcrumbs.Menu.Item>{item.text}</Breadcrumbs.Menu.Item>}
+          </Breadcrumbs.Menu.List>
+        </Breadcrumbs.Menu.Card>
+      </Breadcrumbs.Menu.Popper>
+    </Breadcrumbs>
+  );
+};
+```
+
+---
+
+### Component States Table
+
+We've promoted `ComponentStatesTable` from Labs (`@workday/canvas-kit-labs/common`) to Main
+(`@workday/canvas-kit-react/testing`).
+
+🤖 The codemod will handle this change for you automatically.
+
+---
+
+### Menu (Main)
+
+We've updated the depth value of `Menu.Card` from `1` to `3`. This is a visually breaking change.
+
+---
+
+### Modal
+
+We've updated the `Modal` component to include new touch and responsive behaviors. The responsive
+`Modal` will be displayed when users are browsing on screen sizes between `320px` and `768px` and
+will have the following visual differences compared to the standard `Modal`:
+
+- Padding between the edge of `Modal.Card` and its contents reduced to `16px` (standard: `32px`)
+- Border radius of `Modal.Card` increased to `24px` (standard: `8px`)
+- Vertical space between `Modal.Heading` and `Modal.Body` reduced to `16px` (standard: `24px`)
+- `Modal` animates from the `bottom center` and is aligned near the bottom of the viewport
+
+Additionally, users interacting with `Modal` on touch will not be able to exit out of the modal by
+tapping on the overlay.
+
+---
+
+### Popups
+
+We've updated all popup `CloseIcon` and `CloseButton` to default to `type=button`. We did this so
+these close buttons did not submit when a form element is present. Without this change, you have to
+manually add `type="button"` to these components if you wrap popup contents in a `form` element.
+While this is a very unlikely that a `CloseButton` was intentionally used as an implicit submit
+button, it is still a breaking change. This change effects the following components:
+
+- `Popup.CloseIcon`
+- `Dialog.CloseIcon`
+- `Modal.CloseIcon`
+- `Popup.CloseButton`
+- `Dialog.CloseButton`
+- `Modal.CloseButton`
+
+### Loading Animation
+
+`LoadingAnimation` is being renamed to `LoadingDots` and is moving from of
+`@workday/canvas-kit-react/loading-animation` to
+`@workday/canvas-kit-react/loading-dots`. The component has not been modified and you may
+continue to use this component exactly as you did in v7.
+
+The CSS package has been similarly updated for consistency, but is still in maintenance mode.
+
+🤖 The codemod will handle all these changes automatically:
+
+- Rename import sources
+  - `@workday/canvas-kit-react/loading-animation` becomes `@workday/canvas-kit-react/loading-dots`
+- Rename import specifiers and identifiers
+  - `LoadingAnimation` becomes `LoadingDots`
+- Rename JSX identifiers
+  - `<LoadingAnimation />` becomes `<LoadingDots />`
+
+```tsx
+// v7
+import {
+  LoadingAnimation
+} from '@workday/canvas-kit-react/loading-animation';
+
+const MyComponent = (props: MyComponentProps) => {
+  return <LoadingAnimation />;
+};
+
+const StyledLoadingAnimation = styled(LoadingAnimation)({});
+
+// v8
+import {
+  LoadingDots
+} from '@workday/canvas-kit-react/loading-dots';
+
+const MyComponent = (props: MyComponentProps) => {
+  return <LoadingDots />;
+};
+
+const StyledLoadingAnimation = styled(LoadingDots)({});
+```

@@ -28,7 +28,7 @@
     "@workday/canvas-kit-css-form-field": "^7.4.3",
     "@workday/canvas-kit-css-icon": "^7.4.3",
     "@workday/canvas-kit-css-layout": "^7.4.3",
-    "@workday/canvas-kit-css-loading-animation": "^7.4.3",
+    "@workday/canvas-kit-css-loading-dots": "^7.4.3",
     "@workday/canvas-kit-css-menu": "^7.4.3",
     "@workday/canvas-kit-css-modal": "^7.4.3",
     "@workday/canvas-kit-css-page-header": "^7.4.3",

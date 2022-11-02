@@ -1,0 +1,286 @@
+import {Meta} from '@storybook/addon-docs';
+import {Breadcrumbs} from '@workday/canvas-kit-react/breadcrumbs';
+import {Specifications} from '@workday/canvas-kit-docs';
+
+import {Basic} from './examples/Basic';
+import {OverflowBreadcrumbs} from './examples/Overflow';
+import {RTLOverflowList} from './examples/RTL';
+import {CurrentItemTruncation} from './examples/CurrentItemTruncation';
+import {LinkTruncation} from './examples/LinkTruncation';
+
+import {
+  BreadcrumbsModelConfigComponent,
+  BreadcrumbsStateComponent,
+  BreadcrumbsEventsComponent,
+} from './BreadcrumbsModel.splitprops.tsx';
+
+<Meta title="Components/Navigation/Breadcrumbs/React" component={Breadcrumbs} />
+
+# Canvas Kit Breadcrumbs
+
+Breadcrumbs is a
+[compound component](/getting-started/for-developers/resources/compound-components/) that allows
+users to keep track and maintain awareness of their location as they navigate through pages,
+folders, files, etc.
+
+[> Workday Design Reference](https://design.workday.com/components/navigation/breadcrumbs)
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-react
+```
+
+## Usage
+
+### Basic Example
+
+`Breadcrumbs` includes a container `Breadcrumbs` component and the following subcomponents which can
+be composed in a variety of ways: `Breadcrumbs.List`, `Breadcrumbs.Item`, `Breadcrumbs.CurrentItem`
+and `Breadcrumbs.Link`.
+
+Accessibility is built into `Breadcrumbs` in a way that allows you to create an inclusive experience
+with little additional configuration. As seen in the example below, you don't need to pass any
+accessibility attributes, because they are baked into the component. You only need to add
+`aria-label` attribute to a `nav` component through a `aria-label` prop of `Breadcrumbs`.
+
+<ExampleCodeBlock code={Basic} />
+
+Note that all links require an `href` to be properly identified.
+
+### Overflow Breadcrumbs
+
+`Breadcrumbs` is a responsive component based on the width of its container. If the rendered links
+exceed the width of the `Breadcrumbs.List`, an overflow menu will be rendered. This only works
+against the dynamic API where you give the `BreadcrumbsModel` an array of items to be rendered. The
+dynamic API handles the React `key` for you based on the item's identifier. The dynamic API requires
+either an `id` on each item object or a `getId` function that returns an identifier based on the
+item. The example below uses an `id` property on each item.
+
+<ExampleCodeBlock code={OverflowBreadcrumbs} />
+
+The dynamic API takes in any object, but since nothing is known about your object, a
+[render prop](https://reactjs.org/docs/render-props.html) is necessary to instruct a list how it
+should render.
+
+### Right-to-Left (RTL)
+
+`Breadcrumbs` has bidirectional support out of the box. That means outside of setting the content
+direction in your application's Canvas theme, you don't need to do anything else to make it work.
+All you need to supply is the translated text for items and ARIA labels.
+
+<ExampleCodeBlock code={RTLOverflowList} />
+
+## Components
+
+### Breadcrumbs
+
+#### Usage
+
+`Breadcrumbs` is a container component that is responsible for creating a `BreadcrumbsModel` and
+sharing it with its subcomponents using React context. It also renders `nav` element, and
+`aria-label` attribute must be provided for this element.
+
+```tsx
+<Breadcrumbs items={[]} aria-label="Breadcrumbs">
+  {/* Child components */}
+</Breadcrumbs>
+```
+
+Alternatively, you may pass in a model using the hoisted model pattern.
+
+```tsx
+const model = useBreadcrumbsModel({
+  items: [],
+});
+
+<Breadcrumbs model={model} aria-label="Breadcrumbs">
+  {/* Child components */}
+</Breadcrumbs>;
+```
+
+#### Props
+
+Note that if you pass in a `model` configured with `useBreadcrumbsModel`, configuration props passed
+to `Breadcrumbs` will be ignored. `aria-label` attribute must be provided for `nav` element.
+
+All undeclared props go to underlying `nav` component.
+
+<ArgsTable of={Breadcrumbs} />
+
+### Breadcrumbs.List
+
+#### Usage
+
+`Breadcrumbs.List` is a `Flex` component rendered as a `<ul>` element. It is a container for
+`Breadcrumbs.Item` subcomponents. It also renders overflow button if `overflowButton` prop has been
+passed;
+
+```tsx
+// without overflow
+<Breadcrumbs.List>{/* Breadcrumbs.Items */}</Breadcrumbs.List>
+```
+
+```tsx
+// with overflow
+<Breadcrumbs.List overflowButton={<Breadcrumbs.OverflowButton aria-label="More links" />}>
+  {/* Breadcrumbs.Items */}
+</Breadcrumbs.List>
+```
+
+#### Props
+
+`Breadcrumbs.List` accepts a `overflowButton` prop allowing to pass specific overflow button.
+Breadcrumbs.List with overflow behavior should contain `overflowButton` component with `aria-label`
+to render overflow button.
+
+All undocumented props are spread to the underlying `Flex` component.
+
+<ArgsTable of={Breadcrumbs.List} />
+
+### Breadcrumbs.Item
+
+#### Usage
+
+`Breadcrumbs.Item` is a `Flex` component rendered as an `<li>` element. It is a container for the
+`Breadcrumbs.Link` subcomponent which provides correct overflow behavior across all items.
+
+```tsx
+<Breadcrumbs.Item data-id="first">First Tab</Breadcrumbs.Item>
+```
+
+#### Props
+
+Undocumented props are spread to the underlying `Flex` component.
+
+### Breadcrumbs.Link
+
+#### Usage
+
+`Breadcrumbs.Link` is a styled `<a>` element that also renders a tooltip if the text is truncated.
+The built-in truncation and tooltip functionality provides an easy-to-use, accessible feature for
+managing the length of link text. The `maxWidth` is set to `350px` by default and can be adjusted as
+needed. Note that tooltips will only render when text is truncated. The example below uses a
+`maxWidth` of `150px`.
+
+<ExampleCodeBlock code={LinkTruncation} />
+
+##### Handling Redirects
+
+`Breadcrumbs.Link` defaults to redirecting with an `href`, which means the page will hard-redirect
+when the link is clicked. However, if you're in a single-page application (SPA) environment, you
+might want to use the internal SPA router instead. You can override that behavior with a custom
+`onClick` handler that blocks the default behavior of the event and passes along the link path to
+your SPA router. Most of our consumers use `react-router-dom` for managing SPA routing, so below is
+an example of how to do this in V5 and V6 of `react-router-dom`.
+
+```ts
+// React Router DOM V5 API
+import {useHistory} from 'react-router-dom';
+import {Breadcrumbs} from '@workday/canvas-kit-react/breadcrumbs';
+...
+const history = useHistory();
+const handleClick = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>, link?: string) => {
+      event.preventDefault();
+    // if no link is provided, default to the current path
+    history.push(link || window.location.pathname);
+}
+return (
+  <Breadcrumbs.Link href="/account" onClick={handleClick}>
+    Account
+  </Breadcrumbs.Link>
+);
+
+// React Router DOM V6 API
+import {useNavigate} from 'react-router-dom';
+import {Breadcrumbs} from '@workday/canvas-kit-react/breadcrumbs';
+...
+const navigate = useNavigate();
+const handleClick = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>, link?: string) => {
+      event.preventDefault();
+    // if no link is provided, default to the current path
+    navigate(link || window.location.pathname);
+}
+return (
+  <Breadcrumbs.Link href="/account" onClick={handleClick}>
+    Account
+  </Breadcrumbs.Link>
+);
+```
+
+#### Props
+
+This component also supports
+[all native `<a>` element props](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#Attributes).
+
+<ArgsTable of={Breadcrumbs.Link} />
+
+### Breadcrumbs.CurrentItem
+
+#### Usage
+
+`Breadcrumbs.CurrentItem` is a styled `<li>` element that also renders a tooltip if the text is
+truncated. The built-in truncation and tooltip functionality provides an easy-to-use, accessible
+feature for managing the length of the text. The `maxWidth` is set to `350px` by default and can be
+adjusted as needed. Normally, this is a non-focusable element; when truncated, however, it sets the
+`tabIndex` to `0` to enable the tooltip to appear on keyboard focus. Note that tooltips will only
+render when text is truncated. The example below uses a `maxWidth` of `100px`.
+
+<ExampleCodeBlock code={CurrentItemTruncation} />
+
+#### Props
+
+This component also supports
+[all native `<li>` element props](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/li#Attributes).
+
+<ArgsTable of={Breadcrumbs.CurrentItem} />
+
+### Breadcrumbs.Menu
+
+The `Breadcrumbs.Menu` uses the `Menu` component under the hood. Please view our
+[Menu docs](https://canvas.workdaydesign.com/components/popups/menu#component-api) for more in-depth
+component information.
+
+## Model
+
+If `Breadcrumbs` was stripped of all its markup, attributes, and styling, what would remain is the
+[model](/getting-started/for-developers/resources/compound-components/#models). The model is an
+object composed of two parts: `state` which describes the current snapshot in time of the component
+and `events` which describes events that can be sent to the model.
+
+By default, `Breadcrumbs` will create a model and share it internally with its subcomponents using
+React context. Alternatively, if you need direct access to the model's `state` and `events` outside
+of the `Breadcrumbs` component, you may configure your own model with `useBreadcrumbsModel` and pass
+it to `Breadcrumbs` via a pattern called
+[hoisting the model](/getting-started/for-developers/resources/compound-components/#configuring-a-model).
+
+```tsx
+const model = useBreadcrumbsModel({
+  items: [],
+});
+
+<Breadcrumbs model={model}>{/* Child components */}</Breadcrumbs>;
+```
+
+### Config
+
+`useBreadcrumbsModel` accepts a configuration object with the following properties and returns a
+`BreadcrumbsModel` with `state` and `events` properties.
+
+<ArgsTable of={BreadcrumbsModelConfigComponent} />
+
+### State
+
+The `BreadcrumbsModel` `state` is an object with the following properties.
+
+<ArgsTable of={BreadcrumbsStateComponent} />
+
+### Events
+
+The `BreadcrumbsModel` `events` is an object with the following properties.
+
+<ArgsTable of={BreadcrumbsEventsComponent} />
+
+## Specifications
+
+<Specifications file="Breadcrumbs.spec.ts" name="Breadcrumbs" />

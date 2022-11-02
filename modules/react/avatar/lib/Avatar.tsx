@@ -119,7 +119,7 @@ const StyledImage = styled('img')<{isLoaded: boolean}>(
   })
 );
 
-const Avatar: AvatarOverload = React.forwardRef(
+export const Avatar: AvatarOverload = React.forwardRef(
   (
     {
       variant = AvatarVariant.Light,
@@ -174,5 +174,3 @@ const Avatar: AvatarOverload = React.forwardRef(
 
 Avatar.Variant = AvatarVariant;
 Avatar.Size = SystemIconCircleSize;
-
-export default Avatar;

@@ -2,7 +2,7 @@ import * as React from 'react';
 import {iconColors} from '@workday/canvas-kit-react/tokens';
 import {CanvasSystemIcon, CanvasIconTypes} from '@workday/design-assets-types';
 import {CSSObject} from '@emotion/styled';
-import Icon, {IconProps} from './Icon';
+import {Icon, IconProps} from './Icon';
 import {createComponent} from '@workday/canvas-kit-react/common';
 
 export interface SystemIconStyles {
@@ -46,7 +46,7 @@ export interface SystemIconStyles {
 
 export interface SystemIconProps
   extends SystemIconStyles,
-    Omit<IconProps, 'src' | 'color' | 'type' | 'background'> {
+    Omit<IconProps, 'src' | 'color' | 'fill' | 'type' | 'background'> {
   /**
    * The icon to display from `@workday/canvas-system-icons-web`.
    */
@@ -88,7 +88,7 @@ export const systemIconStyles = ({
   },
 });
 
-const SystemIcon = createComponent('span')({
+export const SystemIcon = createComponent('span')({
   displayName: 'SystemIcon',
   Component: (
     {
@@ -133,5 +133,3 @@ const SystemIcon = createComponent('span')({
     );
   },
 });
-
-export default SystemIcon;
