@@ -11,6 +11,7 @@ import {Box, BoxProps} from '@workday/canvas-kit-react/layout';
 
 export type Visibility = 'hidden' | 'visible';
 
+// First we define a model using out createModelHook
 const useDisclosureModel = createModelHook({
   // This becomes the default values on the model
   defaultConfig: {
@@ -60,6 +61,8 @@ const useDisclosureModel = createModelHook({
 // Disclose Target
 export interface DisclosureTargetProps extends PrimaryButtonProps {}
 
+// Use createElemPropsHook to define an onClick prop  using the model state and events
+// This will be merged into the rest of the elemProps of the component
 const useDisclosureTarget = createElemPropsHook(useDisclosureModel)(({state, events}) => {
   return {
     onClick: (event: React.MouseEvent) => {
@@ -118,7 +121,7 @@ const Disclosure = createContainer()({
   return <>{children}</>;
 });
 
-export const ModelAndContainerUtilities = () => {
+export const CompoundDisclosureExample = () => {
   return (
     <Disclosure>
       <Disclosure.Target>Open</Disclosure.Target>

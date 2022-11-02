@@ -1,0 +1,41 @@
+import {Meta} from '@storybook/addon-docs';
+
+<Meta title="Hooks and Utilities/createContainer" />
+
+# createContainer
+
+When building a component that has a model, you typically start with a container component.
+`createContainer` is a utility function that hooks up all the pieces for you.
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-react
+```
+
+## Usage
+
+- It will wrap your component in a context provider so that `subComponents` have access to the
+  model.
+- It attaches your model hook to your component
+- It runs any `elemPropsHook` hooks defined
+- You can attach `subComponents`.
+- It will also extract the element attributes and define the `ref` type based on the element you
+  give it.
+
+```tsx
+import {createContainer} from '@workday/canvas-kit-react/common';
+interface DisclosureProps {}
+
+//... useDiscloseModel
+
+export const Disclosure = createContainer('div')({
+  displayName: 'Disclosure',
+  modelHook: useDisclosureModel,
+})<DisclosureProps>(({children, ...elemProps}, Element, model) => {
+  return (
+    // spread div attributes including ref
+    <Element {...elemProps}>{children}</Element>
+  );
+});
+```
