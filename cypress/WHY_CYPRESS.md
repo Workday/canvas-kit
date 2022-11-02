@@ -26,8 +26,8 @@ Specifications should read like specifications and loosely follow the behavior-d
 Why would we choose a solution that only works in Chrome?
 
 Cypress is primarily chosen as a specification framework. It is true that these behaviors are only
-tested in Chrome. Canvas-kit does _support_ Chrome, Safari, Firefox, Blackberry and IE11 as well as
-mobile browsers, but that doesn't translate to every test _runs_ in all those browsers.
+tested in Chrome. Canvas-kit does _support_ Chrome, Safari, Firefox and Blackberry as well as mobile
+browsers, but that doesn't translate to every test _runs_ in all those browsers.
 
 From our findings, we found cross-browser issues fell into one of the following categories:
 

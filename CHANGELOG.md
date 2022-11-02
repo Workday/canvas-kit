@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v7.4.3](https://github.com/Workday/canvas-kit/releases/tag/v7.4.3) (2022-10-31)
+
+### Components
+
+- fix: Correctly call keyboard click events when Preview Menu has headers ([#1879](https://github.com/Workday/canvas-kit/pull/1879)) ([@vibdev](https://github.com/vibdev))
+
+
 ## [v7.4.2](https://github.com/Workday/canvas-kit/releases/tag/v7.4.2) (2022-10-25)
 
 ### Documentation

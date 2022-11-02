@@ -18,7 +18,7 @@ import {
 } from '@workday/canvas-kit-react/tokens';
 import {caretDownSmallIcon} from '@workday/canvas-system-icons-web';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
-import SelectOption from './SelectOption';
+import {SelectOption} from './SelectOption';
 
 export interface SelectProps extends Themeable, GrowthBehavior {
   /**
@@ -55,7 +55,7 @@ const StyledSelect = styled('select')<SelectProps & StyledType>(
     height: space.xl,
     minWidth: 280,
     transition: '0.2s box-shadow, 0.2s border-color',
-    padding: spaceNumbers.xxs, // IE11 bugfix: add padding so text is displayed properly
+    padding: spaceNumbers.xxs,
     margin: 0, // Fix Safari
     MozAppearance: 'none', // FF bugfix: hide arrow so it doesn't show under ours
     WebkitAppearance: 'none',
@@ -147,5 +147,3 @@ export const Select = createComponent('select')({
     ErrorType,
   },
 });
-
-export default Select;
