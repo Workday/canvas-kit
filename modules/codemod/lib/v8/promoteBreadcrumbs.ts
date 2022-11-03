@@ -30,7 +30,9 @@ const transform: Transform = (file, api) => {
         return true;
       });
 
-      foundImport.push(nodePath);
+      if (reactLayoutSpecifiers.length) {
+        foundImport.push(nodePath);
+      }
     });
 
   const existingLayoutImports = root.find(j.ImportDeclaration, {

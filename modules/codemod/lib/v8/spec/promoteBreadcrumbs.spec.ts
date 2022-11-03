@@ -18,6 +18,17 @@ describe('Rename Box, Flex and Stack', () => {
       expectTransform(input, expected);
     });
 
+    it('should not transform other preview imports', () => {
+      const input = stripIndent`
+          import { Select } from "@workday/canvas-kit-preview-react/select";
+          import { SegmentedControl } from "@workday/canvas-kit-preview-react/segmented-control";
+        `;
+
+      const expected = input;
+
+      expectTransform(input, expected);
+    });
+
     it('should  properly transform preview import for Breadcrumbs to react breadcrumbs', () => {
       const input = stripIndent`
           import { Breadcrumbs } from "@workday/canvas-kit-preview-react/breadcrumbs";
