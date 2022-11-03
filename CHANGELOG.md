@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v8.0.3](https://github.com/Workday/canvas-kit/releases/tag/v8.0.3) (2022-11-03)
+
+### Documentaion
+
+- chore: Remove deadlinks, add v8 upgrade guide to README ([#1891](https://github.com/Workday/canvas-kit/pull/1891)) ([@jaclynjessup](https://github.com/jaclynjessup))
+
+
 ## [v8.0.2](https://github.com/Workday/canvas-kit/releases/tag/v8.0.2) (2022-11-03)
 
 ### Codemods
