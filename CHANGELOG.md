@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v8.0.6](https://github.com/Workday/canvas-kit/releases/tag/v8.0.6) (2022-11-03)
+
+### Components
+
+- fix: Fail gracefully if localStorage is blocked in useModalityType ([#1898](https://github.com/Workday/canvas-kit/pull/1898)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v8.0.5](https://github.com/Workday/canvas-kit/releases/tag/v8.0.5) (2022-11-03)
 
 ### Codemods
