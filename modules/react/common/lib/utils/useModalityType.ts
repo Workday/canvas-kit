@@ -6,7 +6,7 @@ function safeLocalStorageGet(key: string): string | null {
   try {
     return localStorage.get(key);
   } catch (_) {
-    return '';
+    return null;
   }
 }
 
