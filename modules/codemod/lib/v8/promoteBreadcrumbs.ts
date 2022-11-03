@@ -6,7 +6,7 @@ const transform: Transform = (file, api) => {
   const j = api.jscodeshift;
 
   const root = j(file.source);
-  const reactLayoutSpecifiers: SpecifierType[] = [];
+  const breadcrumbsSpecifiers: SpecifierType[] = [];
   const foundImport: ASTPath<ImportDeclaration>[] = [];
 
   root
@@ -20,7 +20,7 @@ const transform: Transform = (file, api) => {
           specifier.local &&
           specifier.imported.name === 'Breadcrumbs'
         ) {
-          reactLayoutSpecifiers.push({
+          breadcrumbsSpecifiers.push({
             importedName: specifier.imported.name,
             name: specifier.local.name,
           });
@@ -30,12 +30,12 @@ const transform: Transform = (file, api) => {
         return true;
       });
 
-      if (reactLayoutSpecifiers.length) {
+      if (breadcrumbsSpecifiers.length) {
         foundImport.push(nodePath);
       }
     });
 
-  const existingLayoutImports = root.find(j.ImportDeclaration, {
+  const existingBreadcrumbsImports = root.find(j.ImportDeclaration, {
     source: {value: '@workday/canvas-kit-react/breadcrumbs'},
   });
 
@@ -47,10 +47,10 @@ const transform: Transform = (file, api) => {
   };
 
   // add to existing import
-  if (existingLayoutImports.length) {
-    existingLayoutImports.forEach(nodePath => {
+  if (existingBreadcrumbsImports.length) {
+    existingBreadcrumbsImports.forEach(nodePath => {
       nodePath.value.specifiers = nodePath.value.specifiers?.concat(
-        reactLayoutSpecifiers.map(mapToSpecifiers)
+        breadcrumbsSpecifiers.map(mapToSpecifiers)
       );
     });
   } else {
@@ -58,7 +58,7 @@ const transform: Transform = (file, api) => {
     if (foundImport.length) {
       foundImport[0].insertBefore(
         j.importDeclaration(
-          reactLayoutSpecifiers.map(mapToSpecifiers),
+          breadcrumbsSpecifiers.map(mapToSpecifiers),
           j.stringLiteral('@workday/canvas-kit-react/breadcrumbs')
         )
       );
