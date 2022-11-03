@@ -75,4 +75,11 @@ describe('promoteComponentsToTesting', () => {
 
     expectTransform(input, expected);
   });
+
+  it('should not transform import statements if no relevant imports are found', () => {
+    const input = stripIndent`import { colors } from '@workday/canvas-kit-react/tokens';`;
+    const expected = input;
+
+    expectTransform(input, expected);
+  });
 });
