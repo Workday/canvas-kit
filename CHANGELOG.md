@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v8.0.4](https://github.com/Workday/canvas-kit/releases/tag/v8.0.4) (2022-11-03)
+
+### Documentation
+
+- docs: Update URL rewriting to support anchor tags ([#1893](https://github.com/Workday/canvas-kit/pull/1893)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v8.0.3](https://github.com/Workday/canvas-kit/releases/tag/v8.0.3) (2022-11-03)
 
 ### Documentaion
