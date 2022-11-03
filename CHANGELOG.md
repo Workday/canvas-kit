@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v8.0.5](https://github.com/Workday/canvas-kit/releases/tag/v8.0.5) (2022-11-03)
+
+### Codemods
+
+- fix(codemod): Fix codemod for Breadcrumbs promotion ([#1895](https://github.com/Workday/canvas-kit/pull/1895)) ([@RayRedGoose](https://github.com/RayRedGoose))
+
+
 ## [v8.0.4](https://github.com/Workday/canvas-kit/releases/tag/v8.0.4) (2022-11-03)
 
 ### Documentation
