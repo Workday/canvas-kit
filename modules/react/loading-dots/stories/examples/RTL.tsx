@@ -1,5 +1,5 @@
 import React from 'react';
-import {LoadingAnimation} from '@workday/canvas-kit-react/loading-animation';
+import {LoadingDots} from '@workday/canvas-kit-react/loading-dots';
 import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
 
 export const RTL = () => {
@@ -10,7 +10,7 @@ export const RTL = () => {
   };
   return (
     <CanvasProvider theme={theme}>
-      <LoadingAnimation />
+      <LoadingDots />
     </CanvasProvider>
   );
 };

@@ -1,12 +1,12 @@
-# Canvas Kit CSS Loading Animation
+# Canvas Kit CSS Loading Dots
 
-Components that display animations while a page or component loads.
+Component that displays animations while a page or component loads.
 
 <a href="../README.md">
   <img src="https://img.shields.io/badge/-maintenance mode-important" alt="Mainenance Mode" />
 </a>
 
-[> Workday Design Reference](https://design.workday.com/components/indicators/loading-animation)
+[> Workday Design Reference](https://design.workday.com/components/indicators/loading-dots)
 
 ## Installation
 
@@ -17,14 +17,14 @@ yarn add @workday/canvas-kit-css
 or
 
 ```sh
-yarn add @workday/canvas-kit-css-loading-animation
+yarn add @workday/canvas-kit-css-loading-dots
 ```
 
 Add your `node_modules` directory to your SASS `includePaths`. You will then be able to import
 `index.scss`.
 
 ```scss
-@import '~@workday/canvas-kit-css-loading-animation/index.scss';
+@import '~@workday/canvas-kit-css-loading-dots/index.scss';
 ```
 
 ## Usage

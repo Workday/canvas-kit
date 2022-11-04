@@ -216,11 +216,12 @@ export class DeprecatedMenu extends React.Component<DeprecatedMenuProps, Depreca
     const children = React.Children.toArray(this.props.children);
     let nextSelectedIndex = 0;
     let isShortcut = false;
-    const itemCount = children.filter(child => {
+    const interactiveItems = children.filter(child => {
       return !(child as React.ReactElement<DeprecatedMenuItemProps>)?.props?.isHeader;
-    }).length;
-    const firstItem = 0;
-    const lastItem = itemCount - 1;
+    });
+    const interactiveItemCount = interactiveItems.length;
+    const firstIndex = 0;
+    const lastIndex = interactiveItemCount - 1;
 
     if (event.key.length === 1 && event.key.match(/\S/)) {
       let start = this.state.selectedItemIndex + 1;
@@ -244,12 +245,12 @@ export class DeprecatedMenu extends React.Component<DeprecatedMenuProps, Depreca
           isShortcut = true;
           const nextIndex = this.state.selectedItemIndex + direction;
           nextSelectedIndex =
-            nextIndex < 0 ? lastItem : nextIndex >= itemCount ? firstItem : nextIndex;
+            nextIndex < 0 ? lastIndex : nextIndex >= interactiveItemCount ? firstIndex : nextIndex;
           break;
 
         case 'Home':
         case 'End':
-          const skipTo = event.key === 'Home' ? firstItem : lastItem;
+          const skipTo = event.key === 'Home' ? firstIndex : lastIndex;
           isShortcut = true;
           nextSelectedIndex = skipTo;
           break;
@@ -272,7 +273,7 @@ export class DeprecatedMenu extends React.Component<DeprecatedMenuProps, Depreca
         case ' ':
         case 'Enter':
           nextSelectedIndex = this.state.selectedItemIndex;
-          const child = children[this.state.selectedItemIndex] as React.ReactElement<
+          const child = interactiveItems[this.state.selectedItemIndex] as React.ReactElement<
             DeprecatedMenuItemProps
           >;
           this.handleClick(event, child.props);
