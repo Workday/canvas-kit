@@ -57,12 +57,12 @@ const TestModal = () => {
 export const ModalSmallWidth = withSnapshotsEnabled(() => <TestModal />);
 
 export const ModalRTL = withSnapshotsEnabled(() => {
-  const theme = useTheme({canvas: {direction: ContentDirection.RTL}});
+  // const theme = useTheme({canvas: {direction: ContentDirection.RTL}});
   const model = useModalModel({
     initialVisibility: 'visible',
   });
   return (
-    <CanvasProvider theme={theme}>
+    <CanvasProvider theme={{canvas: {direction: ContentDirection.RTL}}}>
       <Modal model={model}>
         <Modal.Overlay style={{animation: 'none'}}>
           <Modal.Card style={{animation: 'none'}} width={300}>
