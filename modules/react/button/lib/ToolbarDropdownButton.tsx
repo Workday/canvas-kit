@@ -8,6 +8,7 @@ import {
   createComponent,
   styled,
   StyledType,
+  useCanvasTheme,
 } from '@workday/canvas-kit-react/common';
 import {ButtonColors} from './types';
 import {BaseButton} from './BaseButton';
@@ -43,23 +44,16 @@ const StyledToolbarDropdownButton = styled(BaseButton)<StyledType & ToolbarDropd
 export const ToolbarDropdownButton = createComponent('button')({
   displayName: 'ToolbarDropdownButton',
   Component: (
-    {
-      // TODO: Fix useTheme and make it a real hook
-      // eslint-disable-next-line react-hooks/rules-of-hooks
-      theme = useTheme(),
-      icon,
-      shouldMirrorIcon = false,
-      children,
-      ...elemProps
-    }: ToolbarDropdownButtonProps,
+    {theme, icon, shouldMirrorIcon = false, children, ...elemProps}: ToolbarDropdownButtonProps,
     ref,
     Element
   ) => {
+    const canvas = useCanvasTheme(theme);
     return (
       <StyledToolbarDropdownButton
         ref={ref}
         as={Element}
-        colors={getToolbarDropdownButtonColors(theme)}
+        colors={getToolbarDropdownButtonColors({canvas})}
         {...elemProps}
       >
         {icon ? (

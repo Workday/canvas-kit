@@ -1,7 +1,7 @@
 /* eslint-disable compat/compat */
-export function getObjectProxy<T>(target: unknown, fallback: any): T {
+export function getObjectProxy<T extends {}>(target: unknown, fallback: T): T {
   return new Proxy(target as any, {
-    get(target, prop) {
+    get(target, prop: keyof T) {
       if (typeof fallback[prop] === 'object' && typeof target[prop] === 'object') {
         return getObjectProxy(target[prop] || {}, fallback[prop]);
       } else if (target[prop] !== undefined) {
@@ -9,6 +9,9 @@ export function getObjectProxy<T>(target: unknown, fallback: any): T {
       } else {
         return fallback[prop];
       }
+    },
+    ownKeys(target) {
+      return Object.keys(fallback);
     },
   }) as T;
 }

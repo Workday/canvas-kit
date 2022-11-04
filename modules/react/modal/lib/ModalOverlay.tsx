@@ -7,6 +7,7 @@ import {
   StyledType,
   useWindowSize,
   useForkRef,
+  useCanvasTheme,
   getCanvasTheme,
 } from '@workday/canvas-kit-react/common';
 import {usePopupModel, usePopupStack} from '@workday/canvas-kit-react/popup';
