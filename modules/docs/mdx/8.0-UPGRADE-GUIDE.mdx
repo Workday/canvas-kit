@@ -315,7 +315,8 @@ changes have been made:
 
 ### Utility Deprecations
 
-The following utility functions are being deprecated and will be removed in a later version of Canvas Kit.
+The following utility functions are being deprecated and will be removed in a later version of
+Canvas Kit.
 
 - Types:
   - `Model`
@@ -876,6 +877,54 @@ will have the following visual differences compared to the standard `Modal`:
 Additionally, users interacting with `Modal` on touch will not be able to exit out of the modal by
 tapping on the overlay.
 
+_Note_: This change is using `breakpoints` defined by a default canvas theme.
+
+There arew a couple ways to make sure this change works in your application.
+
+- You can wrap a piece of code or your application in a
+  [CanvasProvider](https://github.com/Workday/canvas-kit/blob/master/modules/react/common/README.md#canvasprovider),
+  which is a higher order component intended for theming, RTL support and a `InputProvider`.
+
+```tsx
+import * as React from 'react';
+import {CanvasProvider} from '@workday/canvas-kit-react/common';
+
+<CanvasProvider>{/* All your components containing any Canvas components */}</CanvasProvider>;
+```
+
+If you want to customize any part of the theme there are two way to do it.
+
+You can spread `defaultCanvasTheme` and then adjust your theme. This will ensure any missing
+properties are merged in:
+
+```tsx
+import * as React from 'react';
+import {CanvasProvider, defaultCanvasTheme} from '@workday/canvas-kit-react/common';
+<CanvasProvider
+		theme={{
+			canvas: {
+				...defaultCanvasTheme,
+				direction: state.isRTL ? ContentDirection.RTL : ContentDirection.LTR,
+			},
+		}}>
+		{/* All your components containing any Canvas components */}
+</CanvasProvider
+```
+
+The other way is by using `useTheme` which merges any missing properties from the `theme` object.
+
+```tsx
+import * as React from 'react';
+import {CanvasProvider} from '@workday/canvas-kit-react/common';
+
+const MyComponent = () => {
+	const theme = useTheme({canvas: {direction: ContentDirection.RTL}});
+	return (
+		<CanvasProvider theme={theme}>{/* All your components containing any Canvas components */}</CanvasProvider>;
+	)
+}
+```
+
 ---
 
 ### Popups
@@ -896,9 +945,8 @@ button, it is still a breaking change. This change effects the following compone
 ### Loading Animation
 
 `LoadingAnimation` is being renamed to `LoadingDots` and is moving from of
-`@workday/canvas-kit-react/loading-animation` to
-`@workday/canvas-kit-react/loading-dots`. The component has not been modified and you may
-continue to use this component exactly as you did in v7.
+`@workday/canvas-kit-react/loading-animation` to `@workday/canvas-kit-react/loading-dots`. The
+component has not been modified and you may continue to use this component exactly as you did in v7.
 
 The CSS package has been similarly updated for consistency, but is still in maintenance mode.
 
@@ -913,9 +961,7 @@ The CSS package has been similarly updated for consistency, but is still in main
 
 ```tsx
 // v7
-import {
-  LoadingAnimation
-} from '@workday/canvas-kit-react/loading-animation';
+import {LoadingAnimation} from '@workday/canvas-kit-react/loading-animation';
 
 const MyComponent = (props: MyComponentProps) => {
   return <LoadingAnimation />;
@@ -924,9 +970,7 @@ const MyComponent = (props: MyComponentProps) => {
 const StyledLoadingAnimation = styled(LoadingAnimation)({});
 
 // v8
-import {
-  LoadingDots
-} from '@workday/canvas-kit-react/loading-dots';
+import {LoadingDots} from '@workday/canvas-kit-react/loading-dots';
 
 const MyComponent = (props: MyComponentProps) => {
   return <LoadingDots />;

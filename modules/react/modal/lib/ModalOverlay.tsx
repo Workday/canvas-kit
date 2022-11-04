@@ -7,6 +7,7 @@ import {
   StyledType,
   useWindowSize,
   useForkRef,
+  useTheme,
 } from '@workday/canvas-kit-react/common';
 import {usePopupModel, usePopupStack} from '@workday/canvas-kit-react/popup';
 import {keyframes} from '@emotion/react';
@@ -83,6 +84,7 @@ const OpenModalOverlay = createSubcomponent('div')({
   elemPropsHook: useModalOverlay,
 })<ModalOverlayProps>((elemProps, Element, model) => {
   const windowSize = useWindowSize();
+  const theme = useTheme();
   const content = (
     <Container as={Element} {...elemProps}>
       <ResponsiveContainer
@@ -91,6 +93,7 @@ const OpenModalOverlay = createSubcomponent('div')({
         style={{
           width: windowSize.width % 2 === 1 ? 'calc(100vw - 1px)' : '100vw',
         }}
+        theme={theme}
       >
         {elemProps.children}
       </ResponsiveContainer>
