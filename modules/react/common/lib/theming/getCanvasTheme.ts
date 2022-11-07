@@ -4,9 +4,27 @@ import {getObjectProxy} from './getObjectProxy';
 import {defaultCanvasTheme} from './theme';
 
 /**
- *
- * @param theme
+ * Use this function when you have access to `theme` in styled components.
+ * This function ensures that a theme is defined via a proxy and allows access to properties on the theme object.
+ * @param theme Any partial or full theme object.
  * @returns a theme object if it is defined, otherwise it will fall back on using defaultCanvasTheme
+ * @example
+ * const ResponsiveContainer = styled('div')(({theme}) => {
+ * const canvas = getCanvasTheme(theme);
+ *  return {
+ *    maxHeight: '100vh',
+ *    display: 'flex',
+ *    position: 'absolute',
+ *    left: 0,
+ *    top: 0,
+ *    justifyContent: 'center',
+ *    alignItems: 'center',
+ *    height: '100vh',
+ *    [canvas.breakpoints.down('s')]: {
+ *      alignItems: 'end',
+ *    },
+ *  };
+ *});
  */
 export function getCanvasTheme(theme: any = {}): CanvasTheme {
   // prettier-ignore
