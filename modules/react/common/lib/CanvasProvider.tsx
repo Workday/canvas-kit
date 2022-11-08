@@ -11,7 +11,7 @@ import {
 } from './theming';
 
 export interface CanvasProviderProps {
-  theme: PartialEmotionCanvasTheme;
+  theme: PartialEmotionCanvasTheme | CanvasTheme;
   children: React.ReactNode;
 }
 
@@ -42,8 +42,8 @@ export interface CanvasProviderProps {
 // }
 
 export const CanvasProvider: React.FC<CanvasProviderProps> = ({children, theme, ...elemProps}) => {
-  const canvasTheme = useCanvasTheme(theme);
-  console.warn(canvasTheme);
+  // const canvasTheme = useCanvasTheme(theme);
+  // console.warn(canvasTheme);
   return (
     <ThemeProvider theme={theme}>
       <InputProvider />
