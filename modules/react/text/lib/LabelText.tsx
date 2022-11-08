@@ -42,6 +42,7 @@ export const LabelText = createComponent('label')({
         color={disabled && variant !== 'inverse' ? inputColors.disabled.text : undefined}
         cursor={cursor && !disabled ? cursor : 'default'}
         opacity={disabled && variant === 'inverse' ? '.4' : '1'}
+        variant={variant}
         {...elemProps}
       />
     );
