@@ -1,12 +1,9 @@
 import React from 'react';
 import {
-  styled,
   createElemPropsHook,
   useLocalRef,
   composeHooks,
   createSubcomponent,
-  StyledType,
-  ellipsisStyles,
   useForkRef,
 } from '@workday/canvas-kit-react/common';
 import {OverflowTooltip, OverflowTooltipProps} from '@workday/canvas-kit-react/tooltip';
@@ -20,18 +17,6 @@ import {Text, TextProps} from '@workday/canvas-kit-react/text';
 export interface BreadcrumbsCurrentItemProps extends TextProps {
   tooltipProps?: OverflowTooltipProps;
 }
-
-const ListItem = styled(Text)<BreadcrumbsCurrentItemProps & StyledType>(
-  {
-    alignItems: 'center',
-    flexDirection: 'column',
-  },
-  ({maxWidth}: BreadcrumbsCurrentItemProps) => ({
-    maxWidth,
-    display: 'inline-block',
-    ...ellipsisStyles,
-  })
-);
 
 export const useBreadcrumbsItem = composeHooks(
   createElemPropsHook(useBreadcrumbsModel)((_model: any, ref: any, elemProps) => {
@@ -61,15 +46,19 @@ export const BreadcrumbsCurrentItem = createSubcomponent('li')({
   ({children, tooltipProps = {}, maxWidth = '350px', ...elemProps}, Element) => {
     return (
       <OverflowTooltip {...tooltipProps}>
-        <ListItem
+        <Text
           as={Element}
           typeLevel="subtext.large"
-          maxWidth={maxWidth}
           fontWeight="medium"
+          display="inline-block"
+          maxWidth={maxWidth}
+          whiteSpace="nowrap"
+          textOverflow="ellipsis"
+          overflow="hidden"
           {...elemProps}
         >
           {children}
-        </ListItem>
+        </Text>
       </OverflowTooltip>
     );
   }
