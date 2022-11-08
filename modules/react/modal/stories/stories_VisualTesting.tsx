@@ -3,7 +3,13 @@ import ReactDOM from 'react-dom';
 
 import {DeleteButton} from '@workday/canvas-kit-react/button';
 import {Modal, useModalModel} from '@workday/canvas-kit-react/modal';
-import {ContentDirection, CanvasProvider, useTheme} from '@workday/canvas-kit-react/common';
+import {
+  ContentDirection,
+  CanvasProvider,
+  useTheme,
+  useCanvasTheme,
+  getCanvasTheme,
+} from '@workday/canvas-kit-react/common';
 import {HStack, Box} from '@workday/canvas-kit-react/layout';
 
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
@@ -57,12 +63,12 @@ const TestModal = () => {
 export const ModalSmallWidth = withSnapshotsEnabled(() => <TestModal />);
 
 export const ModalRTL = withSnapshotsEnabled(() => {
-  // const theme = useTheme({canvas: {direction: ContentDirection.RTL}});
+  const theme = getCanvasTheme({direction: ContentDirection.RTL});
   const model = useModalModel({
     initialVisibility: 'visible',
   });
   return (
-    <CanvasProvider theme={{canvas: {direction: ContentDirection.RTL}}}>
+    <CanvasProvider theme={theme}>
       <Modal model={model}>
         <Modal.Overlay style={{animation: 'none'}}>
           <Modal.Card style={{animation: 'none'}} width={300}>
