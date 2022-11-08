@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v8.0.8](https://github.com/Workday/canvas-kit/releases/tag/v8.0.8) (2022-11-08)
+
+### Components
+
+- fix: Security access error on `typeof localStorage` ([#1902](https://github.com/Workday/canvas-kit/pull/1902)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v8.0.7](https://github.com/Workday/canvas-kit/releases/tag/v8.0.7) (2022-11-08)
+
+### Components
+
+- fix(text): Update text component imports ([#1906](https://github.com/Workday/canvas-kit/pull/1906)) ([@RayRedGoose](https://github.com/RayRedGoose))
+
+
 ## [v8.0.6](https://github.com/Workday/canvas-kit/releases/tag/v8.0.6) (2022-11-03)
 
 ### Components

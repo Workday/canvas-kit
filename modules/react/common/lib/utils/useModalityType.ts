@@ -27,9 +27,7 @@ function safeLocalStorageSet(key: string, value: string): void {
 //   a. if localStorage isn't primed, use clientWidth of the browsers
 //   b. if < 768, default to 'touch'
 //   c. else default to 'mouse'
-let localStorageValue = ((typeof localStorage !== 'undefined'
-  ? safeLocalStorageGet('modality')
-  : '') ||
+let localStorageValue = (safeLocalStorageGet('modality') ||
   (typeof document !== 'undefined'
     ? document.documentElement.clientWidth < 768
       ? 'touch'
