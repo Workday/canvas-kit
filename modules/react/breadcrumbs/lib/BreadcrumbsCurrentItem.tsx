@@ -21,7 +21,7 @@ export interface BreadcrumbsCurrentItemProps extends TextProps {
   tooltipProps?: OverflowTooltipProps;
 }
 
-const ListItem = styled(Text.as('li'))<BreadcrumbsCurrentItemProps & StyledType>(
+const ListItem = styled(Text)<BreadcrumbsCurrentItemProps & StyledType>(
   {
     alignItems: 'center',
     flexDirection: 'column',

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Property} from 'csstype';
 import {createComponent, styled, StyledType} from '@workday/canvas-kit-react/common';
-import {Text, TextProps} from '@workday/canvas-kit-react/text';
+import {Text, TextProps} from './Text';
 import {inputColors} from '@workday/canvas-kit-react/tokens';
 
 export interface TypeLabelProps extends TextProps {
@@ -9,13 +9,11 @@ export interface TypeLabelProps extends TextProps {
   disabled?: boolean;
 }
 
-const StyledLabel = styled(Text.as('label'))<StyledType & TypeLabelProps>(
-  ({cursor, disabled, variant}) => ({
-    color: disabled && variant !== 'inverse' ? inputColors.disabled.text : undefined,
-    cursor: cursor && !disabled ? cursor : 'default',
-    opacity: disabled && variant === 'inverse' ? '.4' : '1',
-  })
-);
+const StyledLabel = styled(Text)<StyledType & TypeLabelProps>(({cursor, disabled, variant}) => ({
+  color: disabled && variant !== 'inverse' ? inputColors.disabled.text : undefined,
+  cursor: cursor && !disabled ? cursor : 'default',
+  opacity: disabled && variant === 'inverse' ? '.4' : '1',
+}));
 
 /**
  * ## LabelText
