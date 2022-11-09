@@ -86,6 +86,11 @@ export interface SearchFormProps extends GrowthBehavior, React.FormHTMLAttribute
    * @default false
    */
   allowEmptyStringSearch?: boolean;
+  /**
+   * Sets the `id` for the label
+   * @default unique identifier
+   */
+  labelId?: string;
 }
 
 export interface SearchFormState {
@@ -279,7 +284,7 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
 
   private inputRef = React.createRef<HTMLInputElement>();
   private openRef = React.createRef<HTMLButtonElement>();
-  private labelId = generateUniqueId();
+  private defaultLabelId = generateUniqueId();
 
   state: Readonly<SearchFormState> = {
     showForm: false,
@@ -384,6 +389,7 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
       submitAriaLabel = 'Search',
       openButtonAriaLabel = 'Open Search',
       closeButtonAriaLabel = 'Cancel',
+      labelId = this.defaultLabelId,
       showClearButton = true,
       height = 40,
       grow,
@@ -404,7 +410,7 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
         action="."
         rightAlign={rightAlign}
         grow={grow}
-        aria-labelledby={this.labelId}
+        aria-labelledby={labelId}
         isCollapsed={isCollapsed}
         onSubmit={this.handleSubmit}
         showForm={this.state.showForm}
@@ -431,8 +437,8 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
           />
           <SearchField
             grow={grow}
-            id={this.labelId}
-            inputId={`input-${this.labelId}`}
+            id={labelId}
+            inputId={`input-${labelId}`}
             label={inputLabel}
             labelPosition={FormFieldLabelPosition.Hidden}
             useFieldset={false}
@@ -449,7 +455,7 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
               onBlur={this.handleBlur}
               showClearButton={!isCollapsed && showClearButton}
               clearButtonAriaLabel={clearButtonAriaLabel}
-              labelId={this.labelId}
+              labelId={labelId}
             >
               <SearchInput
                 ref={this.inputRef}
