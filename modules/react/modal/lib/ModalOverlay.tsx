@@ -7,6 +7,7 @@ import {
   StyledType,
   useWindowSize,
   useForkRef,
+  getCanvasTheme,
 } from '@workday/canvas-kit-react/common';
 import {usePopupModel, usePopupStack} from '@workday/canvas-kit-react/popup';
 import {keyframes} from '@emotion/react';
@@ -45,7 +46,7 @@ const Container = styled(Box)<StyledType>({
 // the Modal. The centering container forces a "center" pixel calculation by making sure the width
 // is always an even number
 const ResponsiveContainer = styled('div')(({theme}) => {
-  // const canvas = getCanvasTheme(theme);
+  const canvasTheme = getCanvasTheme(theme);
   return {
     maxHeight: '100vh',
     display: 'flex',
@@ -55,7 +56,7 @@ const ResponsiveContainer = styled('div')(({theme}) => {
     justifyContent: 'center',
     alignItems: 'center',
     height: '100vh',
-    [theme.canvas.breakpoints.down('s')]: {
+    [canvasTheme.breakpoints.down('s')]: {
       alignItems: 'end',
     },
   };
