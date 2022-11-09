@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {spaceNumbers} from '@workday/canvas-kit-react/tokens';
-import {styled, Themeable, createSubcomponent} from '@workday/canvas-kit-react/common';
+import {styled, Themeable, createSubcomponent, useUniqueId} from '@workday/canvas-kit-react/common';
 
 import {useRadioModel} from './useRadioModel';
 
@@ -40,6 +40,8 @@ export interface RadioButtonProps extends Themeable {
    * The value of the Radio button.
    */
   value?: string;
+
+  variant?: 'inverse' | undefined;
 }
 
 const radioTapArea = spaceNumbers.m;
@@ -52,20 +54,22 @@ const RadioContainer = styled('div')({
   position: 'relative',
 });
 
-// const useRadioGroupButton = createElemPropsHook(useRadioModel)((model, ref, elemProps) => {
-//   const checked = false;
-//   const disabled = false;
-//   return {
-//     checked,
-//     disabled,
-//     // onChange: event => {
-//     //   model.events.onChange(elemProps.value, index);
-//     // },
-//   };
-// });
+export const RadioButtonContext = React.createContext({
+  disabled: false,
+  variant: undefined,
+  id: '',
+});
 export const RadioButton = createSubcomponent('div')({
   displayName: 'Radio.Button',
   modelHook: useRadioModel,
-})<RadioButtonProps>(({children, ...elemP}, Element, model) => {
-  return <RadioContainer {...elemP}>{children}</RadioContainer>;
+})<RadioButtonProps>(({children, ...elemProps}, Element, model) => {
+  const inputId = useUniqueId(elemProps.id);
+  return (
+    //@ts-ignore
+    <RadioButtonContext.Provider
+      value={{disabled: elemProps.disabled, variant: elemProps.variant, id: inputId}}
+    >
+      <RadioContainer>{children}</RadioContainer>
+    </RadioButtonContext.Provider>
+  );
 });

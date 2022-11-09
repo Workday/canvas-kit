@@ -1,31 +1,40 @@
 import React from 'react';
 import {styled, createSubcomponent} from '@workday/canvas-kit-react/common';
-import canvas, {inputColors, spaceNumbers} from '@workday/canvas-kit-react/tokens';
+import canvas, {inputColors, spaceNumbers, colors} from '@workday/canvas-kit-react/tokens';
 import {useRadioModel} from './useRadioModel';
+import {RadioButtonContext} from './Radio.Button';
 
-const radioLabelDistance = spaceNumbers.m;
+const radioLabelDistance = spaceNumbers.xs;
 
-const StyledLabel = styled('label')<{disabled?: boolean}>(
+const StyledLabel = styled('label')<{disabled?: boolean; variant?: 'inverse' | undefined}>(
   {
     ...canvas.type.levels.subtext.large,
     paddingLeft: radioLabelDistance,
   },
-  ({disabled}) => (disabled ? {color: inputColors.disabled.text} : {cursor: 'pointer'})
+  ({variant}) => (variant === 'inverse' ? {color: colors.frenchVanilla100} : undefined),
+  ({disabled, variant}) =>
+    disabled
+      ? {
+          color: variant === 'inverse' ? colors.frenchVanilla100 : inputColors.disabled.text,
+          opacity: variant === 'inverse' ? '.4' : '1',
+        }
+      : {cursor: 'pointer'}
 );
 
 export const RadioLabel = createSubcomponent('label')({
   displayName: 'RadioButton.Label',
   modelHook: useRadioModel,
-})(({children, ...elemProps}, Element, model) => {
-  return <StyledLabel disabled={model.state.disabled}>{children}</StyledLabel>;
+})(({children}) => {
+  const radioContext = React.useContext(RadioButtonContext);
+  return (
+    <StyledLabel
+      htmlFor={radioContext.id}
+      disabled={radioContext.disabled}
+      variant={radioContext.variant}
+    >
+      {children}
+    </StyledLabel>
+  );
 });
-
-// const RadioLabel = styled('label')<{disabled?: boolean}>(
-//   {
-//     ...canvas.type.levels.subtext.large,
-//     paddingLeft: radioLabelDistance,
-//   },
-//   ({disabled}) => (disabled ? {color: inputColors.disabled.text} : {cursor: 'pointer'})
-// );
 
 export default RadioLabel;

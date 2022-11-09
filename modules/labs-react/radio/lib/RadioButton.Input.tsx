@@ -4,49 +4,12 @@ import {
   StyledType,
   focusRing,
   mouseFocusBehavior,
-  Themeable,
   createSubcomponent,
   createElemPropsHook,
 } from '@workday/canvas-kit-react/common';
 import {colors, inputColors, spaceNumbers, borderRadius} from '@workday/canvas-kit-react/tokens';
 import {useRadioModel} from './useRadioModel';
-
-export interface RadioButtonProps extends Themeable {
-  // model?: RadioModel;
-  children?: React.ReactNode;
-  /**
-   * If true, set the Radio button to the checked state.
-   * @default false
-   */
-  checked?: boolean;
-  /**
-   * If true, set the Radio button to the disabled state.
-   * @default false
-   */
-  disabled?: boolean;
-  /**
-   * The HTML `id` of the underlying radio input element. This is required if `label` is defined as a non-empty string.
-   * @default A uniquely generated id
-   */
-  id?: string;
-  /**
-   * The text of the Radio button label.
-   * @default ''
-   */
-  label?: string;
-  /**
-   * The name of the Radio button.
-   */
-  name?: string;
-  /**
-   * The function called when the Radio button state changes.
-   */
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  /**
-   * The value of the Radio button.
-   */
-  value?: string;
-}
+import {RadioButtonProps, RadioButtonContext} from './Radio.Button';
 
 const radioBorderRadius = 9;
 const radioTapArea = spaceNumbers.m;
@@ -72,6 +35,7 @@ const RadioInput = styled('input')<RadioButtonProps & StyledType>(
   ({
     checked,
     disabled,
+    variant,
     theme: {
       canvas: {
         palette: {
@@ -101,38 +65,73 @@ const RadioInput = styled('input')<RadioButtonProps & StyledType>(
     // input (which is visually hidden)
     '&:hover ~ div:first-of-type': {
       backgroundColor: checked
-        ? themePrimary.main
+        ? variant === 'inverse'
+          ? colors.frenchVanilla100
+          : themePrimary.main
         : disabled
         ? inputColors.disabled.background
         : 'white',
       borderColor: checked
-        ? themePrimary.main
+        ? variant === 'inverse'
+          ? colors.soap300
+          : themePrimary.main
         : disabled
         ? inputColors.disabled.border
+        : variant === 'inverse'
+        ? colors.soap300
         : inputColors.hoverBorder,
       borderWidth: '1px',
     },
     '&:focus, &focus:hover': {
       '& ~ div:first-of-type': {
-        borderColor: checked ? themePrimary.main : themeFocusOutline,
         borderWidth: '2px',
+        borderColor: variant === 'inverse' ? colors.blackPepper400 : themeFocusOutline,
+        boxShadow: 'none',
+        ...focusRing({
+          width: variant === 'inverse' ? 2 : 0,
+          separation: 0,
+          animate: false,
+          innerColor: variant === 'inverse' ? colors.blackPepper400 : undefined,
+          outerColor: variant === 'inverse' ? colors.frenchVanilla100 : undefined,
+        }),
       },
     },
     '&:checked:focus ~ div:first-of-type': {
-      ...focusRing({separation: 2, outerColor: themeFocusOutline}),
+      ...focusRing({
+        separation: 2,
+        width: 2,
+        innerColor: variant === 'inverse' ? colors.blackPepper400 : undefined,
+        outerColor: variant === 'inverse' ? colors.frenchVanilla100 : themeFocusOutline,
+      }),
+      borderColor: variant === 'inverse' ? colors.frenchVanilla100 : themePrimary.main,
+      borderWidth: '2px',
     },
     ...mouseFocusBehavior({
       '&:focus ~ div:first-of-type': {
-        ...focusRing({width: 0, outerColor: themeFocusOutline}),
+        ...focusRing({
+          width: 0,
+          outerColor: variant === 'inverse' ? colors.frenchVanilla100 : themeFocusOutline,
+        }),
         borderWidth: '1px',
-        borderColor: checked ? themePrimary.main : inputColors.border,
+        borderColor: checked
+          ? variant === 'inverse'
+            ? colors.soap300
+            : themePrimary.main
+          : inputColors.border,
       },
       '&:focus:hover ~ div:first-of-type, &:focus:active ~ div:first-of-type': {
-        borderColor: checked ? themePrimary.main : inputColors.hoverBorder,
+        borderColor: checked
+          ? variant === 'inverse'
+            ? colors.soap300
+            : themePrimary.main
+          : variant === 'inverse'
+          ? colors.soap300
+          : inputColors.hoverBorder,
       },
     }),
   })
 );
+
 /**
  * Using a wrapper prevents the browser default behavior of trigging
  * :hover on the radio when you hover on it's corresponding label.
@@ -144,16 +143,20 @@ const RadioInputWrapper = styled('div')<Pick<RadioButtonProps, 'disabled'>>({
   width: radioWidth,
 });
 
-const RadioRipple = styled('span')<Pick<RadioButtonProps, 'disabled'>>({
-  borderRadius: borderRadius.circle,
-  boxShadow: `0 0 0 0 ${colors.soap200}`,
-  height: radioHeight,
-  transition: 'box-shadow 150ms ease-out',
-  width: radioWidth,
-  position: 'absolute',
-  pointerEvents: 'none', // This is a decorative element we don't want it to block clicks to input
-  zIndex: -1,
-});
+const RadioRipple = styled('span')<Pick<RadioButtonProps, 'disabled' | 'variant'>>(
+  {
+    borderRadius: borderRadius.circle,
+    boxShadow: `0 0 0 0 ${colors.soap200}`,
+    height: radioHeight,
+    transition: 'box-shadow 150ms ease-out',
+    width: radioWidth,
+    position: 'absolute',
+    pointerEvents: 'none', // This is a decorative element we don't want it to block clicks to input
+  },
+  ({variant}) => ({
+    opacity: variant === 'inverse' ? '0.4' : '1',
+  })
+);
 
 const RadioBackground = styled('div')<RadioButtonProps>(
   {
@@ -175,6 +178,7 @@ const RadioBackground = styled('div')<RadioButtonProps>(
   ({
     checked,
     disabled,
+    variant,
     theme: {
       canvas: {
         palette: {primary: themePrimary},
@@ -182,19 +186,26 @@ const RadioBackground = styled('div')<RadioButtonProps>(
     },
   }) => ({
     borderColor: checked
-      ? themePrimary.main
+      ? variant === 'inverse'
+        ? colors.soap300
+        : themePrimary.main
       : disabled
       ? inputColors.disabled.border
+      : variant === 'inverse'
+      ? colors.soap300
       : inputColors.border,
     backgroundColor: checked
-      ? themePrimary.main
+      ? variant === 'inverse'
+        ? colors.frenchVanilla100
+        : themePrimary.main
       : disabled
       ? inputColors.disabled.background
       : 'white',
+    opacity: disabled && variant === 'inverse' ? '.4' : '1',
   })
 );
 
-const RadioCheck = styled('div')<Pick<RadioButtonProps, 'checked'>>(
+const RadioCheck = styled('div')<Pick<RadioButtonProps, 'checked' | 'variant'>>(
   {
     borderRadius: radioBorderRadius,
     display: 'flex',
@@ -204,53 +215,49 @@ const RadioCheck = styled('div')<Pick<RadioButtonProps, 'checked'>>(
     transition: 'transform 200ms ease, opacity 200ms ease',
     width: radioDot,
   },
-  ({theme}) => ({
-    backgroundColor: theme.canvas.palette.primary.contrast,
+  ({theme, variant}) => ({
+    backgroundColor:
+      variant === 'inverse'
+        ? theme.canvas.palette.primary.main
+        : theme.canvas.palette.primary.contrast,
   }),
   ({checked}) => ({
     opacity: checked ? 1 : 0,
     transform: checked ? 'scale(1)' : 'scale(0.5)',
   })
 );
-const useRadioButtonInput = createElemPropsHook(useRadioModel)((model, ref, elemProps) => {
-  const checked = false;
-  const disabled = false;
-  return {
-    checked,
-    disabled,
-    // onChange: event => {
-    //   model.events.onChange(elemProps.value, index);
-    // },
-  };
-});
+
+const useRadioButtonInput = createElemPropsHook(useRadioModel)(
+  (model, ref, elemProps: {name?: string; value?: string} = {}) => {
+    const radioContext = React.useContext(RadioButtonContext);
+    return {
+      checked: elemProps.value === model.state.value,
+      'aria-checked': elemProps.value === model.state.value,
+      onChange(event: React.ChangeEvent) {
+        model.events.change(event);
+      },
+      name: model.state.name,
+      disabled: radioContext.disabled,
+      variant: radioContext.variant,
+      id: radioContext.id,
+    };
+  }
+);
 export const RadioButtonInput = createSubcomponent('input')({
   displayName: 'RadioButton.Input',
   modelHook: useRadioModel,
   elemPropsHook: useRadioButtonInput,
-})<RadioButtonProps>(({children, checked, ...elemProps}, Element, model) => {
+})<RadioButtonProps>(({children, ...elemProps}, Element, model) => {
   return (
-    <RadioInputWrapper disabled={elemProps.disabled}>
-      <RadioInput
-        as={Element}
-        checked={elemProps.value === model.state.value}
-        // disabled={model.state.disabled}
-        // id={inputId}
-        // ref={ref}
-        // name={model.state.name}
-        // onChange={model.events.onChange}
-        type="radio"
-        // value={model.state.value}
-        aria-checked={elemProps.value === model.state.value}
-        // variant={variant}
-        {...elemProps}
-      />
-      <RadioRipple />
+    <RadioInputWrapper>
+      <RadioInput as={Element} type="radio" value={model.state.value} {...elemProps} />
+      <RadioRipple variant={elemProps.variant} />
       <RadioBackground
-      // checked={model.state.checked}
-      // disabled={model.state.disabled}
-      // variant={variant}
+        checked={elemProps.checked}
+        disabled={elemProps.disabled}
+        variant={elemProps.variant}
       >
-        <RadioCheck checked={elemProps.value === model.state.value} />
+        <RadioCheck checked={elemProps.checked} variant={elemProps.variant} />
       </RadioBackground>
     </RadioInputWrapper>
   );

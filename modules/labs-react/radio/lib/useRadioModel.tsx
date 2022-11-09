@@ -9,25 +9,31 @@ import {
 } from '@workday/canvas-kit-react/common';
 
 export const useRadioModel = createModelHook({
-  defaultConfig: {name: '', value: ''},
+  defaultConfig: {
+    /**
+     * The common `name` passed to all Radio button children of the RadioGroup. This enables you to avoid specifying the `name` for each child.
+     */
+    name: '',
+    /**
+     * The initial selected value of the RadioGroup. If a string is provided, the Radio button with the corresponding value will be selected. If a number is provided, the Radio button with the corresponding index will be selected.
+     */
+    initialValue: '',
+    /**
+     * The selected value of the RadioGroup. Providing this prop will cause the model be in a controlled state
+     */
+    value: '',
+  },
 })(config => {
-  const [value, setValue] = React.useState<string | number>(config.value || '');
-  // const [checked, setChecked] = useState(false);
-  // const [disabled, setDisabled] = useState(false);
-  const state = {value};
+  const [value, setValue] = React.useState(config.value || config.initialValue);
 
+  const state = {
+    value: config.value || value,
+    name: config.name,
+  };
   const events = {
-    onChange(
-      existingOnChange: ((e: React.ChangeEvent<HTMLInputElement>) => void) | undefined,
-      index: number,
-      event: React.ChangeEvent<HTMLInputElement>
-    ): void {
-      if (existingOnChange) {
-        existingOnChange(event);
-      }
-
+    change(event: React.ChangeEvent) {
       const target = event.currentTarget;
-      if (target && target.value) {
+      if (target instanceof HTMLInputElement) {
         setValue(target.value);
       }
     },
@@ -38,53 +44,3 @@ export const useRadioModel = createModelHook({
     events,
   };
 });
-
-// type RadioState = {
-//   open: boolean;
-//   // value?: string | number;
-// };
-
-// type RadioEvents = {
-//   open(data: {}): void;
-//   close(data: {}): void;
-//   // onChange(value: string | number): void;
-// };
-
-// export type RadioModel = Model<RadioState, RadioEvents>;
-
-// const radioEventMap = createEventMap<RadioEvents>()({
-//   guards: {
-//     shouldOpen: 'open',
-//     shouldClose: 'close',
-//   },
-//   callbacks: {
-//     onOpen: 'open',
-//     onClose: 'close',
-//   },
-// });
-
-// export type RadioModelConfig = {
-//   initialOpen?: boolean;
-// } & Partial<ToModelConfig<RadioState, RadioEvents, typeof radioEventMap>>;
-
-// export const useRadioModel = (config: RadioModelConfig = {}): RadioModel => {
-//   const [open, setOpen] = React.useState(config.initialOpen || false);
-
-//   const state = {
-//     open,
-//   };
-
-//   const events = useEventMap(radioEventMap, state, config, {
-//     open(data) {
-//       setOpen(true);
-//     },
-//     close(data) {
-//       setOpen(false);
-//     },
-//   });
-
-//   return {
-//     state,
-//     events,
-//   };
-// };
