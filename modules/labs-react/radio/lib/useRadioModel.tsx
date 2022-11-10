@@ -1,12 +1,6 @@
 import React, {useState} from 'react';
 
-import {
-  createEventMap,
-  Model,
-  ToModelConfig,
-  useEventMap,
-  createModelHook,
-} from '@workday/canvas-kit-react/common';
+import {createModelHook} from '@workday/canvas-kit-react/common';
 
 export const useRadioModel = createModelHook({
   defaultConfig: {
@@ -24,7 +18,7 @@ export const useRadioModel = createModelHook({
     value: '',
   },
 })(config => {
-  const [value, setValue] = React.useState(config.value || config.initialValue);
+  const [value, setValue] = useState(config.value || config.initialValue);
 
   const state = {
     value: config.value || value,

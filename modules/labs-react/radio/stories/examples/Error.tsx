@@ -17,7 +17,7 @@ export const Error = () => {
       label="Choose Your Pizza Crust"
       useFieldset={true}
     >
-      <RadioGroup>
+      <RadioGroup name="crust">
         <RadioGroup.Button disabled>
           <RadioGroup.Input value="deep-dish" />
           <RadioGroup.Label>Deep dish (sold out)</RadioGroup.Label>

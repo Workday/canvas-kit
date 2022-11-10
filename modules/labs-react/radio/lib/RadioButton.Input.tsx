@@ -141,6 +141,7 @@ const RadioInputWrapper = styled('div')<Pick<RadioButtonProps, 'disabled'>>({
   display: 'flex',
   height: radioHeight,
   width: radioWidth,
+  flex: '0 0 auto',
 });
 
 const RadioRipple = styled('span')<Pick<RadioButtonProps, 'disabled' | 'variant'>>(

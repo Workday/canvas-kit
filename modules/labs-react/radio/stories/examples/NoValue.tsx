@@ -16,7 +16,7 @@ export const NoValue = () => {
       labelPosition={FormField.LabelPosition.Left}
       useFieldset={true}
     >
-      <RadioGroup>
+      <RadioGroup name="crust">
         <RadioGroup.Button>
           <RadioGroup.Input value="deep-dish" />
           <RadioGroup.Label>Deep Dish</RadioGroup.Label>

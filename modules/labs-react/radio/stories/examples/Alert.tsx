@@ -21,7 +21,7 @@ export const Alert = () => {
     >
       {/* <RadioGroup name="crust" onChange={handleChange} value={value}> */}
 
-      <RadioGroup>
+      <RadioGroup name="crust">
         <RadioGroup.Button disabled>
           <RadioGroup.Input value="deep-dish" />
           <RadioGroup.Label>Deep dish (sold out)</RadioGroup.Label>

@@ -10,7 +10,7 @@ export const Required = () => {
   };
   return (
     <FormField label="Choose Your Pizza Crust" required={true} useFieldset={true}>
-      <RadioGroup>
+      <RadioGroup name="crust">
         <RadioGroup.Button>
           <RadioGroup.Input value="deep-dish" />
           <RadioGroup.Label>Deep Dish</RadioGroup.Label>

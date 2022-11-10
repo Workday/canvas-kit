@@ -11,7 +11,7 @@ export const Disabled = () => {
 
   return (
     <FormField label="Choose Your Pizza Crust" useFieldset={true}>
-      <RadioGroup>
+      <RadioGroup name="crust">
         <RadioGroup.Button>
           <RadioGroup.Input value="deep-dish" />
           <RadioGroup.Label>Deep Dish</RadioGroup.Label>

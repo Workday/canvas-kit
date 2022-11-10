@@ -49,7 +49,7 @@ const radioContainerHeight = radioTapArea;
 
 const RadioContainer = styled('div')({
   display: 'flex',
-  alignItems: 'center',
+  alignItems: 'flex-start',
   minHeight: radioContainerHeight,
   position: 'relative',
 });
