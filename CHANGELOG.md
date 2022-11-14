@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v7.4.4](https://github.com/Workday/canvas-kit/releases/tag/v7.4.4) (2022-11-14)
+
+### Components
+
+- fix(search-form): Enable overriding the generated labelId ([#1909](https://github.com/Workday/canvas-kit/pull/1909)) ([@willklein](https://github.com/willklein))
+
+### Infrastructure
+
+- ci: Attempt to fix forward-merge Chromatic ([@NicholasBoll](https://github.com/NicholasBoll))
+## [v8.0.9](https://github.com/Workday/canvas-kit/releases/tag/v8.0.9) (2022-11-09)
+
+### Components
+
+- fix: Remove dividers and headers from preview MenuItem Voice Over count ([#1901](https://github.com/Workday/canvas-kit/pull/1901)) ([@vibdev](https://github.com/vibdev))
+
+
+## [v8.0.8](https://github.com/Workday/canvas-kit/releases/tag/v8.0.8) (2022-11-08)
+
+### Components
+
+- fix: Security access error on `typeof localStorage` ([#1902](https://github.com/Workday/canvas-kit/pull/1902)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v8.0.7](https://github.com/Workday/canvas-kit/releases/tag/v8.0.7) (2022-11-08)
+
+### Components
+
+- fix(text): Update text component imports ([#1906](https://github.com/Workday/canvas-kit/pull/1906)) ([@RayRedGoose](https://github.com/RayRedGoose))
+
+
 ## [v8.0.6](https://github.com/Workday/canvas-kit/releases/tag/v8.0.6) (2022-11-03)
 
 ### Components
