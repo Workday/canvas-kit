@@ -1,7 +1,7 @@
 import React from 'react';
 import {CSSObject} from '@emotion/react';
 
-import {BaseButton, BaseButtonProps} from '@workday/canvas-kit-react/button';
+import {BaseButton} from '@workday/canvas-kit-react/button';
 import {
   createContainer,
   focusRing,
@@ -20,7 +20,7 @@ import {PillCount} from './PillCount';
 import {PillAvatar} from './PillAvatar';
 import {PillLabel} from './PillLabel';
 
-export interface PillProps extends BaseButtonProps {
+export interface PillProps extends BoxProps {
   /**
    * Defines what kind of pill to render stylistically and its interaction states
    * @default 'default'
