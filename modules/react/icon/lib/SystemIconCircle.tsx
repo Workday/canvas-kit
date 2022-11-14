@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled from '@emotion/styled';
 import isPropValid from '@emotion/is-prop-valid';
 import {colors, borderRadius} from '@workday/canvas-kit-react/tokens';
-import SystemIcon, {SystemIconProps} from './SystemIcon';
+import {SystemIcon, SystemIconProps} from './SystemIcon';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {createComponent, pickForegroundColor} from '@workday/canvas-kit-react/common';
 
@@ -58,7 +58,7 @@ const Container = styled('div', {
   })
 );
 
-const SystemIconCircle = createComponent('span')({
+export const SystemIconCircle = createComponent('span')({
   displayName: 'SystemIconCircle',
   Component: (
     {
@@ -89,5 +89,3 @@ const SystemIconCircle = createComponent('span')({
     );
   },
 });
-
-export default SystemIconCircle;
