@@ -2,6 +2,22 @@ import React from 'react';
 
 type Modality = 'mouse' | 'touch' | 'pen';
 
+function safeLocalStorageGet(key: string): string | null {
+  try {
+    return localStorage.get(key);
+  } catch (_) {
+    return null;
+  }
+}
+
+function safeLocalStorageSet(key: string, value: string): void {
+  try {
+    localStorage.set(key, value);
+  } catch (_) {
+    // Do nothing
+  }
+}
+
 // Use this shared global value to reduce calls to localStorage which is a synchronous API to a
 // drive which could be slow (spinning disks could be hundreds of ms). We read only once this way.
 // The following initialization is very difficult to test via automation. Don't mess with it unless
@@ -11,9 +27,7 @@ type Modality = 'mouse' | 'touch' | 'pen';
 //   a. if localStorage isn't primed, use clientWidth of the browsers
 //   b. if < 768, default to 'touch'
 //   c. else default to 'mouse'
-let localStorageValue = ((typeof localStorage !== 'undefined'
-  ? localStorage.getItem('modality')
-  : '') ||
+let localStorageValue = (safeLocalStorageGet('modality') ||
   (typeof document !== 'undefined'
     ? document.documentElement.clientWidth < 768
       ? 'touch'
@@ -26,7 +40,7 @@ let localStorageValue = ((typeof localStorage !== 'undefined'
 // drives
 const updateLocalStorage = (value: Modality) => {
   if (localStorageValue !== value) {
-    localStorage.setItem('modality', value);
+    safeLocalStorageSet('modality', value);
   }
   localStorageValue = value;
 };

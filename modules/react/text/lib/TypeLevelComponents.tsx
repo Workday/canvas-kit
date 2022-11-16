@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {Text, TextProps} from '@workday/canvas-kit-react/text';
+import {Text, TextProps} from './Text';
 
 /**
  * Prop interface for type level specific components:
@@ -83,9 +83,7 @@ export const BodyText = createComponent('p')({
   displayName: 'BodyText',
   Component: ({size, ...elemProps}: TypeLevelProps, ref, Element) => {
     const typeLevel = `body.${size}` as TextProps['typeLevel'];
-    return (
-      <Text ref={ref} as={Element} typeLevel={typeLevel} {...elemProps} />
-    );
+    return <Text ref={ref} as={Element} typeLevel={typeLevel} {...elemProps} />;
   },
 });
 
