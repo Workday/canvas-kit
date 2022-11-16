@@ -41,7 +41,7 @@
     "workday"
   ],
   "peerDependencies": {
-    "react": "^17.0 || ^18.0"
+    "react": ">=16.14"
   },
   "dependencies": {
     "@emotion/is-prop-valid": "^1.1.1",
