@@ -301,12 +301,13 @@ export class DeprecatedMenuItem extends React.Component<DeprecatedMenuItemProps>
 
     return (
       <>
-        {hasDivider && <Divider />}
+        {hasDivider && <Divider aria-hidden="true" />}
         <Item
           ref={this.ref}
           tabIndex={-1}
           id={id}
           role={isHeader ? 'presentation' : role}
+          aria-hidden={isHeader ? true : undefined}
           onClick={this.handleClick}
           aria-disabled={isDisabled ? true : undefined}
           isDisabled={!!isDisabled}
