@@ -4,6 +4,7 @@ import {commonColors, colors, space} from '@workday/canvas-kit-react/tokens';
 import {
   createSubcomponent,
   ExtractProps,
+  getCanvasTheme,
   styled,
   StyledType,
 } from '@workday/canvas-kit-react/common';
@@ -36,14 +37,17 @@ export interface ActionBarListProps<T = any>
   overflowButton?: React.ReactNode;
 }
 
-const ResponsiveHStack = styled(HStack)<ActionBarListProps & StyledType>(({theme}) => ({
-  [theme.canvas.breakpoints.down('s')]: {
-    padding: space.s,
-    '> *': {
-      flex: 1,
+const ResponsiveHStack = styled(HStack)<ActionBarListProps & StyledType>(({theme}) => {
+  const canvasTheme = getCanvasTheme(theme);
+  return {
+    [canvasTheme.breakpoints.down('s')]: {
+      padding: space.s,
+      '> *': {
+        flex: 1,
+      },
     },
-  },
-}));
+  };
+});
 
 export const useActionBarList = useOverflowListMeasure;
 
