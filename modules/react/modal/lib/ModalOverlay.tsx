@@ -7,6 +7,7 @@ import {
   StyledType,
   useWindowSize,
   useForkRef,
+  getCanvasTheme,
 } from '@workday/canvas-kit-react/common';
 import {usePopupModel, usePopupStack} from '@workday/canvas-kit-react/popup';
 import {keyframes} from '@emotion/react';
@@ -44,19 +45,22 @@ const Container = styled(Box)<StyledType>({
 // positioning, but seems to when using flexbox centering. This messes up Popper calculations inside
 // the Modal. The centering container forces a "center" pixel calculation by making sure the width
 // is always an even number
-const ResponsiveContainer = styled('div')(({theme}) => ({
-  maxHeight: '100vh',
-  display: 'flex',
-  position: 'absolute',
-  left: 0,
-  top: 0,
-  justifyContent: 'center',
-  alignItems: 'center',
-  height: '100vh',
-  [theme.canvas.breakpoints.down('s')]: {
-    alignItems: 'end',
-  },
-}));
+const ResponsiveContainer = styled('div')(({theme}) => {
+  const canvasTheme = getCanvasTheme(theme);
+  return {
+    maxHeight: '100vh',
+    display: 'flex',
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '100vh',
+    [canvasTheme.breakpoints.down('s')]: {
+      alignItems: 'end',
+    },
+  };
+});
 
 export const ModalOverlay = createSubcomponent('div')({
   displayName: 'Modal.Overlay',
