@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v8.1.2](https://github.com/Workday/canvas-kit/releases/tag/v8.1.2) (2022-11-17)
+
+### Components
+
+- fix: Make sure to use theme in modals ([#1900](https://github.com/Workday/canvas-kit/pull/1900)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v8.1.1](https://github.com/Workday/canvas-kit/releases/tag/v8.1.1) (2022-11-16)
 
 ### Documentation
