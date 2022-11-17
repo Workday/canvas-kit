@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v8.1.1](https://github.com/Workday/canvas-kit/releases/tag/v8.1.1) (2022-11-16)
+
+### Documentation
+
+- docs: Update major release documentation ([#1888](https://github.com/Workday/canvas-kit/pull/1888)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v8.1.0](https://github.com/Workday/canvas-kit/releases/tag/v8.1.0) (2022-11-14)
 
 ### Components
