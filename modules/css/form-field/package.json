@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-css-form-field",
-  "version": "8.1.2",
+  "version": "8.2.0",
   "description": "The form css for canvas-kit-css",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -16,16 +16,16 @@
     "url": "http://github.com/Workday/canvas-kit/tree/master/modules/form-field/css"
   },
   "dependencies": {
-    "@workday/canvas-kit-css-common": "^8.1.2",
-    "@workday/canvas-kit-css-core": "^8.1.2",
+    "@workday/canvas-kit-css-common": "^8.2.0",
+    "@workday/canvas-kit-css-core": "^8.2.0",
     "@workday/canvas-system-icons-web": "^3.0.0"
   },
   "devDependencies": {
-    "@workday/canvas-kit-css-checkbox": "^8.1.2",
-    "@workday/canvas-kit-css-radio": "^8.1.2",
-    "@workday/canvas-kit-css-select": "^8.1.2",
-    "@workday/canvas-kit-css-text-area": "^8.1.2",
-    "@workday/canvas-kit-css-text-input": "^8.1.2"
+    "@workday/canvas-kit-css-checkbox": "^8.2.0",
+    "@workday/canvas-kit-css-radio": "^8.2.0",
+    "@workday/canvas-kit-css-select": "^8.2.0",
+    "@workday/canvas-kit-css-text-area": "^8.2.0",
+    "@workday/canvas-kit-css-text-input": "^8.2.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
