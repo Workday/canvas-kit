@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v8.1.3](https://github.com/Workday/canvas-kit/releases/tag/v8.1.3) (2022-11-18)
+
+### Documentation
+
+- fix: Tertiary Button Docs ([#1921](https://github.com/Workday/canvas-kit/pull/1921)) ([@josh-bagwell](https://github.com/josh-bagwell), [@RayRedGoose](https://github.com/RayRedGoose), [@mannycarrera4](https://github.com/mannycarrera4), [@alanbsmith](https://github.com/alanbsmith), manuel.carrera, [@workday-canvas-kit](https://github.com/workday-canvas-kit), [@mannycarrera4](https://github.com/mannycarrera4), [@jamesfan](https://github.com/jamesfan), [@alanbsmith](https://github.com/alanbsmith), [@NicholasBoll](https://github.com/NicholasBoll), [@jamesfan](https://github.com/jamesfan), [@alanbsmith](https://github.com/alanbsmith), [@mannycarrera4](https://github.com/mannycarrera4), [@dependabot[bot]](https://github.com/dependabot[bot]), [@chaiwattsw](https://github.com/chaiwattsw), [@NicholasBoll](https://github.com/NicholasBoll), [@jaclynjessup](https://github.com/jaclynjessup), [@emroller16](https://github.com/emroller16), [@vibdev](https://github.com/vibdev), [@ahayes91](https://github.com/ahayes91), [@stefano-puzzuoli](https://github.com/stefano-puzzuoli), [@willklein](https://github.com/willklein), [@RayRedGoose](https://github.com/RayRedGoose), [@jaclynjessup](https://github.com/jaclynjessup), [@willklein](https://github.com/willklein), [@vibdev](https://github.com/vibdev))
+
+
 ## [v8.1.2](https://github.com/Workday/canvas-kit/releases/tag/v8.1.2) (2022-11-17)
 
 ### Components
