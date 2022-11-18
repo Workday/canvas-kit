@@ -7,7 +7,7 @@ import {
   useAssistiveHideSiblings,
   useDisableBodyScroll,
 } from '@workday/canvas-kit-react/popup';
-import {createModelHook} from '../../../common';
+import {createModelHook} from '@workday/canvas-kit-react/common';
 
 import {useCloseOnOverlayClick} from './useCloseOnOverlayClick';
 
