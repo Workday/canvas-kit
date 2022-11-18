@@ -17,6 +17,6 @@ export default makeDecorator({
     const theme: PartialEmotionCanvasTheme = {
       canvas: parameters.theme || args.theme || defaultCanvasTheme,
     };
-    return <CanvasProvider theme={theme}>{storyFn(context)}</CanvasProvider>;
+    return <CanvasProvider theme={theme}>{storyFn(context) as React.ReactNode}</CanvasProvider>;
   },
 });

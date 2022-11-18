@@ -16,7 +16,7 @@ yarn add @workday/canvas-kit-react
 ```tsx
 import * as React from 'react';
 import {SecondaryButton, TertiaryButton} from '@workday/canvas-kit-react/button';
-import SidePanel from '@workday/canvas-kit-react/side-panel';
+import {SidePanel} from '@workday/canvas-kit-react/side-panel';
 
 interface SidePanelState {
   open: boolean;

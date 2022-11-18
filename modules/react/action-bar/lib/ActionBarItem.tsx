@@ -2,9 +2,8 @@ import * as React from 'react';
 import {composeHooks, createSubcomponent} from '@workday/canvas-kit-react/common';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {
-  useListItemRegister,
-  useListItemRovingFocus,
   useOverflowListItemMeasure,
+  useListItemRegister,
 } from '@workday/canvas-kit-react/collection';
 
 import {useActionBarModel} from './useActionBarModel';
@@ -26,11 +25,7 @@ export interface ActionBarItemProps {
   'data-id'?: string;
 }
 
-export const useActionBarItem = composeHooks(
-  useOverflowListItemMeasure,
-  useListItemRovingFocus,
-  useListItemRegister
-);
+export const useActionBarItem = composeHooks(useOverflowListItemMeasure, useListItemRegister);
 
 export const ActionBarItem = createSubcomponent(SecondaryButton)({
   displayName: 'ActionBar.Item',
