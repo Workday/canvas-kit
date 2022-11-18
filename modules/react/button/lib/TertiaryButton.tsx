@@ -20,7 +20,7 @@ export interface TertiaryButtonProps extends Themeable, BaseButtonProps {
    */
   variant?: 'inverse' | undefined;
   /**
-   * There are three button sizes: `extraSmall`, `small`, and `medium`.
+   * There are four button sizes: `extraSmall`, `small`, `medium`, and `large`.
    * If no size is provided, it will default to `medium`.
    *
    * @default 'medium'
