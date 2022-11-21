@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v8.2.0](https://github.com/Workday/canvas-kit/releases/tag/v8.2.0) (2022-11-18)
+
+### Documentation
+
+- fix: Made changes to docs for Tertiary button ([#1923](https://github.com/Workday/canvas-kit/pull/1923)) ([@mannycarrera4](https://github.com/mannycarrera4), [@josh-bagwell](https://github.com/josh-bagwell))
+
+
+## [v7.4.5](https://github.com/Workday/canvas-kit/releases/tag/v7.4.5) (2022-11-18)
+
+### Documentation
+
+- fix: Made changes to docs for Tertiary button ([#1923](https://github.com/Workday/canvas-kit/pull/1923)) ([@mannycarrera4](https://github.com/mannycarrera4), [@josh-bagwell](https://github.com/josh-bagwell))
+## [v8.1.2](https://github.com/Workday/canvas-kit/releases/tag/v8.1.2) (2022-11-17)
+
+### Components
+
+- fix: Make sure to use theme in modals ([#1900](https://github.com/Workday/canvas-kit/pull/1900)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v8.1.1](https://github.com/Workday/canvas-kit/releases/tag/v8.1.1) (2022-11-16)
 
 ### Documentation
