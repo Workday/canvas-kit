@@ -16,6 +16,7 @@ any questions.
   - [Reorganized Style Props](#reorganized-style-props)
   - [Responsive Styles](#responsive-styles)
   - [Testing](#testing)
+  - [Utility Deprecations](#utility-deprecations)
 - [New Components](#new-components)
   - [Grid](#grid)
   - [Text](#text)
@@ -33,6 +34,7 @@ any questions.
   - [Menu (Main)](#menu-main)
   - [Modal](#modal)
   - [Popups](#popups)
+  - [Loading Animation](#loading-animation)
 
 ## Codemod
 
@@ -310,6 +312,23 @@ changes have been made:
   to `@workday/canvas-kit-react/testing`
 
 🤖 The codemod will handle all of the changes above for you automatically.
+
+### Utility Deprecations
+
+The following utility functions are being deprecated and will be removed in a later version of Canvas Kit.
+
+- Types:
+  - `Model`
+  - `ToModelConfig`
+- Functions:
+  - `createEventMap`
+  - `useEventMap`
+
+All these utility types and functions have been replaced by `createModelHook`. Typescript 4.1
+introduced
+[Template Literal Types](https://www.typescriptlang.org/docs/handbook/2/template-literal-types.html),
+so event maps are no longer needed. `createModelHook` infers all types based on the input of the
+function.
 
 ## New Components
 
@@ -873,3 +892,45 @@ button, it is still a breaking change. This change effects the following compone
 - `Popup.CloseButton`
 - `Dialog.CloseButton`
 - `Modal.CloseButton`
+
+### Loading Animation
+
+`LoadingAnimation` is being renamed to `LoadingDots` and is moving from of
+`@workday/canvas-kit-react/loading-animation` to
+`@workday/canvas-kit-react/loading-dots`. The component has not been modified and you may
+continue to use this component exactly as you did in v7.
+
+The CSS package has been similarly updated for consistency, but is still in maintenance mode.
+
+🤖 The codemod will handle all these changes automatically:
+
+- Rename import sources
+  - `@workday/canvas-kit-react/loading-animation` becomes `@workday/canvas-kit-react/loading-dots`
+- Rename import specifiers and identifiers
+  - `LoadingAnimation` becomes `LoadingDots`
+- Rename JSX identifiers
+  - `<LoadingAnimation />` becomes `<LoadingDots />`
+
+```tsx
+// v7
+import {
+  LoadingAnimation
+} from '@workday/canvas-kit-react/loading-animation';
+
+const MyComponent = (props: MyComponentProps) => {
+  return <LoadingAnimation />;
+};
+
+const StyledLoadingAnimation = styled(LoadingAnimation)({});
+
+// v8
+import {
+  LoadingDots
+} from '@workday/canvas-kit-react/loading-dots';
+
+const MyComponent = (props: MyComponentProps) => {
+  return <LoadingDots />;
+};
+
+const StyledLoadingAnimation = styled(LoadingDots)({});
+```
