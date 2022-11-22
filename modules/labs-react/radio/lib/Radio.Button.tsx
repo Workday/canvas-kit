@@ -5,7 +5,20 @@ import {styled, Themeable, createSubcomponent, useUniqueId} from '@workday/canva
 
 import {useRadioModel} from './useRadioModel';
 
-export interface RadioButtonProps extends Themeable {
+interface RadioButtonContextInterface {
+  /**
+   * If true, set the Radio button to the disabled state.
+   * @default false
+   */
+  disabled?: boolean | undefined;
+  /**
+   * The HTML `id` of the underlying radio input element. This is required if `label` is defined as a non-empty string.
+   * @default A uniquely generated id
+   */
+  id?: string;
+  variant?: 'inverse' | undefined;
+}
+export interface RadioButtonProps extends RadioButtonContextInterface, Themeable {
   children?: React.ReactNode;
   // model?: RadioModel;
   /**
@@ -13,16 +26,7 @@ export interface RadioButtonProps extends Themeable {
    * @default false
    */
   checked?: boolean;
-  /**
-   * If true, set the Radio button to the disabled state.
-   * @default false
-   */
-  disabled?: boolean;
-  /**
-   * The HTML `id` of the underlying radio input element. This is required if `label` is defined as a non-empty string.
-   * @default A uniquely generated id
-   */
-  id?: string;
+
   /**
    * The text of the Radio button label.
    * @default ''
@@ -39,9 +43,7 @@ export interface RadioButtonProps extends Themeable {
   /**
    * The value of the Radio button.
    */
-  value?: string;
-
-  variant?: 'inverse' | undefined;
+  value?: string | number;
 }
 
 const radioTapArea = spaceNumbers.m;
@@ -54,18 +56,13 @@ const RadioContainer = styled('div')({
   position: 'relative',
 });
 
-export const RadioButtonContext = React.createContext({
-  disabled: false,
-  variant: undefined,
-  id: '',
-});
+export const RadioButtonContext = React.createContext({} as RadioButtonContextInterface);
 export const RadioButton = createSubcomponent('div')({
   displayName: 'Radio.Button',
   modelHook: useRadioModel,
-})<RadioButtonProps>(({children, ...elemProps}, Element, model) => {
+})<RadioButtonProps>(({children, ...elemProps}) => {
   const inputId = useUniqueId(elemProps.id);
   return (
-    //@ts-ignore
     <RadioButtonContext.Provider
       value={{disabled: elemProps.disabled, variant: elemProps.variant, id: inputId}}
     >

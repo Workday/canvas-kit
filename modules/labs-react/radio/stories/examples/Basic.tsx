@@ -15,7 +15,7 @@ export const Basic = () => {
   });
   return (
     <StyledFormField label="Choose Your Pizza Crust" useFieldset={true}>
-      <RadioGroup name="crust">
+      <RadioGroup name="crust" value={value} callback={handleChange}>
         <RadioGroup.Button>
           <RadioGroup.Input value="deep-dish" />
           <RadioGroup.Label>Deep Dish</RadioGroup.Label>

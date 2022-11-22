@@ -15,7 +15,8 @@ export const useRadioModel = createModelHook({
     /**
      * The selected value of the RadioGroup. Providing this prop will cause the model be in a controlled state
      */
-    value: '',
+    value: '' as string | number,
+    callback: (value: string | number) => undefined,
   },
 })(config => {
   const [value, setValue] = useState(config.value || config.initialValue);
@@ -27,8 +28,12 @@ export const useRadioModel = createModelHook({
   const events = {
     change(event: React.ChangeEvent) {
       const target = event.currentTarget;
-      if (target instanceof HTMLInputElement) {
-        setValue(target.value);
+      if (config.value && target instanceof HTMLInputElement) {
+        config.callback(target.value);
+      } else {
+        if (target instanceof HTMLInputElement) {
+          setValue(target.value);
+        }
       }
     },
   };
