@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v8.2.2](https://github.com/Workday/canvas-kit/releases/tag/v8.2.2) (2022-11-22)
+
+### Documentation
+
+- docs: Update create compound component docs ([#1883](https://github.com/Workday/canvas-kit/pull/1883)) ([@NicholasBoll](https://github.com/NicholasBoll), [@jamesfan](https://github.com/jamesfan))
+
+
 ## [v8.2.1](https://github.com/Workday/canvas-kit/releases/tag/v8.2.1) (2022-11-21)
 
 ### Dependencies
