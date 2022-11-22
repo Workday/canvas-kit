@@ -9,7 +9,7 @@ import {
 import {PrimaryButton, PrimaryButtonProps} from '@workday/canvas-kit-react/button';
 import {Box, BoxProps} from '@workday/canvas-kit-react/layout';
 
-export type Visibility = 'hidden' | 'visible';
+type Visibility = 'hidden' | 'visible';
 
 // First we define a model using out createModelHook
 const useDisclosureModel = createModelHook({
@@ -59,7 +59,7 @@ const useDisclosureModel = createModelHook({
 });
 
 // Disclose Target
-export interface DisclosureTargetProps extends PrimaryButtonProps {}
+interface DisclosureTargetProps extends PrimaryButtonProps {}
 
 // Use createElemPropsHook to define an onClick prop  using the model state and events
 // This will be merged into the rest of the elemProps of the component
@@ -75,7 +75,7 @@ const useDisclosureTarget = createElemPropsHook(useDisclosureModel)(({state, eve
   };
 });
 
-export const DisclosureTarget = createSubcomponent('button')({
+const DisclosureTarget = createSubcomponent('button')({
   modelHook: useDisclosureModel,
   elemPropsHook: useDisclosureTarget,
 })<DisclosureTargetProps>(({children, ...elemProps}, Element, model) => {
@@ -95,7 +95,7 @@ const useDisclosureContent = createElemPropsHook(useDisclosureModel)(({state}) =
   };
 });
 
-export const DisclosureContent = createSubcomponent('div')({
+const DisclosureContent = createSubcomponent('div')({
   modelHook: useDisclosureModel,
   // attached our elemPropsHook to the component
   elemPropsHook: useDisclosureContent,
@@ -121,7 +121,7 @@ const Disclosure = createContainer()({
   return <>{children}</>;
 });
 
-export const CompoundDisclosureExample = () => {
+export const CreateElemPropsHook = () => {
   return (
     <Disclosure>
       <Disclosure.Target>Open</Disclosure.Target>
