@@ -9,7 +9,21 @@ on:
 
 jobs:
   verify-merge:
+    # Only run if:
+    # - branch is support/master AND the last commit was a release commit
+    # - branch is prerelease/*
+    #
+    # We don't want to run on support/master for non-release commits because that would mean the
+    #   forward merge would run twice because every commit on master/support causes a new commit
+    #   pushed back to the branch. So we ignore all non-release commits on support/master because
+    #   the release workflow will commit a release commit starting with `chore: Release ...` back to
+    #   the branch and this job will run on that commit instead. Also, forward merges that skipped
+    #   a release
+    if: "((github.ref_name == 'support' || github.ref_name == 'master') && startsWith(github.event.head_commit.message, 'chore: Release')) || startsWith(github.ref_name, 'prerelease/') || contains(github.event.head_commit.message, '[skip release]')"
     runs-on: ubuntu-latest
+    outputs: # Output branch names for the make-pull-request job
+      branch: ${{steps.extract-branch.outputs.branch}}
+      next-branch: ${{steps.extract-next-branch.outputs.branch}}
 
     steps:
 
@@ -25,15 +39,15 @@ jobs:
       ## as an output for later use
       - name: Extract branch name
         id: extract-branch
-        run: echo "::set-output name=branch::$(echo ${GITHUB_REF#refs/heads/})"
-
-      - run: echo ${{steps.extract-branch.outputs.branch}}
+        run: |
+          echo "::set-output name=branch::$(echo ${GITHUB_REF#refs/heads/})"
+          echo ${{steps.extract-branch.outputs.branch}}
 
       - name: Extract next branch name
         id: extract-next-branch
-        run: echo "::set-output name=branch::$(node utils/get-forward-merge-branch.js)"
-
-      - run: echo ${{steps.extract-next-branch.outputs.branch}}
+        run: |
+          echo "::set-output name=branch::$(node utils/get-forward-merge-branch.js)"
+          echo ${{steps.extract-next-branch.outputs.branch}}
 
       ## This step installs node and sets up several matchers (regex matching for Github
       ## Annotations). See
@@ -86,6 +100,9 @@ jobs:
       - name: Forward merge
         run: node utils/forward-merge.js
 
+      - name: Git Log
+        run: git log
+
       # Keep steps separate for Github Actions annotation matching: https://github.com/actions/setup-node/blob/83c9f7a7df54d6b57455f7c57ac414f2ae5fb8de/src/setup-node.ts#L26-L33
       - name: Lint
         run: yarn lint
@@ -116,13 +133,15 @@ jobs:
           appCode: dlpro96xybh
           storybookBuildDir: docs
           exitOnceUploaded: false
-          exitZeroOnChanges: true
+          exitZeroOnChanges: false
+          ignoreLastBuildOnBranch: ${{ steps.extract-next-branch.outputs.branch }}
+          debug: true
 
       - name: Start Server
         run: npx http-server docs -p 9001 & npx wait-on http://localhost:9001
 
       - name: Integration tests
-        run: yarn cypress run --record --parallel
+        run: yarn cypress run --record --parallel --env skip_storybook_test=true # skip the Storybook test during forward merges
         env:
           # Github Actions doesn't support encryption on forks
           # If these keys become compromised, we will rotate and disable these features
@@ -148,4 +167,50 @@ jobs:
           token: ${{secrets.GH_RW_TOKEN}} # use PAT to force GH Actions to run the PR verify. The regular token will not
           branches: support+master,master+prerelease/minor,prerelease/minor+prerelease/major
           prefix: 'chore: '
+          body: |
+            This pull request was automatically created by an automated [forward-merge job](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}). The automated job failed automated checks and must be resolved manually.
+
+            Reasons for failure may include:
+            - Merge conflicts that cannot be automatically resolved
+            - A merge resulted in check failures
+              - Lint or type errors
+              - Test failures
+              - Unexpected visual changes
+
+            The pull request should inform you of merge conflicts before you start if any.
+
+            1. Run the following commands in your terminal. If this succeeds, skip step 2. The last command will run a script that tries to merge and resolve conflicts automatically.
+
+                ```
+                git branch -D merge/${{needs.verify-merge.outputs.branch}}-into-${{ needs.verify-merge.outputs.next-branch }} || true
+                git fetch upstream
+                git checkout merge/${{needs.verify-merge.outputs.branch}}-into-${{ needs.verify-merge.outputs.next-branch }}
+                git pull upstream merge/${{needs.verify-merge.outputs.branch}}-into-${{ needs.verify-merge.outputs.next-branch }} -f
+                node utils/forward-merge.js
+                ```
+
+            2. If the previous step succeeded, skip to step 3. Resolve conflicts manually. Then run the following.
+
+                ```
+                git add .
+                git commit -m "chore: Merge ${{needs.verify-merge.outputs.branch}} into ${{ needs.verify-merge.outputs.next-branch }}"
+                ```
+
+            3. Push the merge commit back to the pull request
+
+                ```
+                git push upstream merge/${{needs.verify-merge.outputs.branch}}-into-${{ needs.verify-merge.outputs.next-branch }}
+                ```
+
+            If there were no merge conflicts, the forward-merge job failed because of a test failure. You can wait for the pull request to give errors, or you can check the logs for failures. You'll have to update code to fix errors.
+
+            This pull request will be merged using the `merge` strategy instead of the `squash` strategy. This means any commit in the log will show in the branch's history. Any commit you make should amend the merge commit. Use the following command:
+
+            ```
+            git commit --amend --no-edit
+            ```
+
+            You must then force-push the branch and the CI will rerun verification.
+
+            Use the `automerge` label like normal and the CI will pick the correct merge strategy.
 

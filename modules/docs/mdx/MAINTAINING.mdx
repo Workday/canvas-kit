@@ -1,0 +1,260 @@
+import {Meta} from '@storybook/addon-docs';
+
+<Meta title="Welcome/Maintaining" />
+
+# Maintaining Canvas Kit
+
+If you're a Canvas Kit core maintainer, this doc is for you! Consider this a field guide to help you
+maintain Canvas Kit with confidence. If you see some information that's unclear, incomplete, or
+incorrect, please update this doc to help your future self and others. Thanks for maintaining Canvas
+Kit!
+
+- [Branches](#branches)
+- [GitHub Actions](#github-actions)
+  - [Forward Merge Workflow](#forward-merge-workflow)
+  - [Release Minor Workflow](#release-minor-workflow)
+  - [Release Workflow](#release-workflow)
+- [Releases](#releases)
+  - [Patch Releases](#patch-releases)
+  - [Minor Releases](#minor-releases)
+  - [Major Releases](#major-releases)
+  - [Canary Releases](#canary-releases)
+
+## Branches
+
+We maintain three major versions of Canvas Kit at any given time: the previous major, the current
+major, and the next major version. These versions live in four branches:
+
+- `support` - the previous major version - patches only, no new features or breaking changes
+- `master` - the current major version - patches and small updates only
+- `prerelease/minor` - the current major version - new features are added here
+- `prerelease/major` - the next major version - patches, new features, and major breaking changes
+
+## GitHub Actions
+
+We use [GitHub Actions](https://docs.github.com/en/actions) to automate our workflows and CI / CD
+processes. You can view all our workflows [here](https://github.com/Workday/canvas-kit/actions).
+
+### Forward Merge Workflow
+
+Forward merges ensure that changes made in lower-versioned branches are forwarded to
+higher-versioned branches. So for example, if a bug is patched in the `support` branch, forward
+merging propogates the fix so it's available in `master`, `prerelease/minor` and `prerelease/major`
+branches. This workflow is fully automated, which reduces opportunities for error.
+
+The
+[forward merge workflow](https://github.com/Workday/canvas-kit/actions/workflows/forward-merge.yml)
+runs on `support`, `master`, and `prerelease/minor` branches. Forward merges for `support` and
+`master` run automatically when a release commit is merged to that branch. Every release commit
+starts with `chore: Release`, and that's how the forward merge workflow identifies them. Forward
+merges will run on every merge to `prerelease/minor` regardless of the commit message.
+
+| Run Forward Merge? | Branch             | Commit Message                          |
+| ------------------ | ------------------ | --------------------------------------- |
+| ✅                 | `support`          | `chore: Release v6.8.14 [skip release]` |
+| ⛔️                | `support`          | `fix: Remove unused props`              |
+| ✅                 | `master`           | `chore: Release v7.3.0 [skip release]`  |
+| ⛔️                | `master`           | `fix: Update Popup types`               |
+| ✅                 | `prerelease/minor` | `feat: Add new Layout components`       |
+
+If the forward merge workflow fails and cannot automatically merge the update to the next branch, it
+will generate a PR with instructions on how to handle the forward merge manually. For a more
+in-depth review,
+[view the workflow source code](https://github.com/Workday/canvas-kit/blob/master/.github/workflows/forward-merge.yml).
+
+### Release Minor Workflow
+
+The
+[release minor workflow](https://github.com/Workday/canvas-kit/blob/master/.github/workflows/release-minor.yml)
+is initated manually and begins the process for [minor releases](#minor-releases). It checks out the
+`prerelease/minor` branch and pushes any commits not in `master` to the master branch. It does not
+run any tests or validations as all the commits have been verified by the previous workflows. Once
+`prerelease/minor` is merged to `master`, it will trigger the [release workflow](#release-workflow)
+which will publish a new version of Canvas Kit.
+
+This workflow will only fail if there are commits in `master` that are not included in
+`prerelease/minor`. You can verify that
+[here](https://github.com/Workday/canvas-kit/compare/prerelease/minor...master). In that case,
+you'll need to [foward merge](#forward-merge-workflow) any commits in `master` to
+`prerelease/minor`. For a more in-depth review of the workflow,
+[view the source code](https://github.com/Workday/canvas-kit/blob/master/.github/workflows/release-minor.yml).
+
+### Release Workflow
+
+The
+[release workflow](https://github.com/Workday/canvas-kit/blob/master/.github/workflows/release-minor.yml)
+is initiated automatically and runs the release process for all Canvas Kit releases (major, minor,
+and patch) on the `master` and `support` branches. This workflow will only run if:
+
+- The commit message does not contain `[skip release]`
+- OR the workflow was manually triggered and has a `version` string
+
+At a high-level, this workflow will:
+
+- checkout the repository
+- install dependencies (if they are not already cached)
+- run `yarn bump` to craete a commit and a git tag
+- bump package versions
+- generate a changeset
+- update the changelog
+- build Storybook
+- publish to npm
+- create a GitHub release
+- publish Storybook
+- update Chromatic baseline
+- notify Slack
+
+For a more in-depth review of the workflow,
+[view the source code](https://github.com/Workday/canvas-kit/blob/master/.github/workflows/release.yml)
+
+### Canary Workflow
+
+The
+[canary workflow](https://github.com/Workday/canvas-kit/blob/master/.github/workflows/release-minor.yml)
+are initiated automatically when a commit is merged to `prerelease/minor` or `prerelease/major`. For
+a more in-depth review of the workflow,
+[view the source code](https://github.com/Workday/canvas-kit/blob/master/.github/workflows/release-minor.yml).
+
+## Releases
+
+### Patch Releases
+
+Patch releases in the `support` and `master` branches go out automatically once the pull request is
+merged. These releases use the [release workflow](#release-workflow) to publish updates
+automatically.
+
+### Minor Releases
+
+Canvas Kit minor releases occur every three weeks. They are initiated manually by a maintainer with
+the [release minor workflow](#release-minor-workflow). Before you initiate a minor release, all
+branches up to `prerelease/minor` need to be [forward merged](#forward-merge-workflow). Check all of
+the following to make sure there are no commits listed:
+
+- [Compare](https://github.com/Workday/canvas-kit/compare/master...support) `master` with `support`
+- [Compare](https://github.com/Workday/canvas-kit/compare/prerelease/minor...master)
+  `prerelease/minor` with `master`
+
+If there are any commits listed, run the
+[forward merge](https://github.com/Workday/canvas-kit/actions/workflows/forward-merge.yml) for the
+branch that isn't merged forward (`support`, `master`, or `prerelease/minor`). It is safe to run
+this job even if there are no changes since the job will recognize no change and bail.
+
+### Major Releases
+
+Canvas Kit major releases occur every six months. They are manual and performed by a maintainer. The
+process is similar to minor releases, except the addition of the support branch. All branches have
+to be forward merged. Check all of the following to make sure there are no commits listed:
+
+- [Compare](https://github.com/Workday/canvas-kit/compare/master...support) `master` with `support`
+- [Compare](https://github.com/Workday/canvas-kit/compare/prerelease/minor...master)
+  `prerelease/minor` with `master`
+- [Compare](https://github.com/Workday/canvas-kit/compare/prerelease/major...prerelease/minor)
+  `prerelease/major` with `prerelease/minor`
+
+If there are any commits listed, run the
+[forward merge](https://github.com/Workday/canvas-kit/actions/workflows/forward-merge.yml) for the
+branch that isn't merged forward (`support`, `master`, or `prerelease/minor`). It is safe to run
+this job even if there are no changes since the job will recognize no change and bail.
+
+We'll be using the terms `previous major`, `current major`, and `next major` in the context of
+versions before the release process is complete. For example, if `support` is pointing to v4,
+`master` to v5 and `prerelease/major` to v6, we need to update these pointers. After these steps are
+completed, the following will happen:
+
+- `support`: v4 -> v5
+- `master`: v5 -> v6
+- `prerelease/minor`: v5 -> v6
+- `prerelease/major`: v6 -> v7
+
+Before starting the next steps, we need to disable some CI jobs
+([Disabling Workflow Docs](https://docs.github.com/en/actions/managing-workflow-runs/disabling-and-enabling-a-workflow)).
+
+- [Canary](https://github.com/Workday/canvas-kit/actions/workflows/canary.yml)
+- [forward-merge](https://github.com/Workday/canvas-kit/actions/workflows/forward-merge.yml)
+- [Release](https://github.com/Workday/canvas-kit/actions/workflows/release.yml)
+
+These jobs will only cause problems during the release cycle. We will enable them when we're done.
+
+Locally, make sure to fetch upstream.
+
+```sh
+git fetch upstream
+```
+
+1. Update `support` to point to the current major version `master` is currently pointing to. This
+   effectively moves the `HEAD` pointer of the `support` branch to the same `HEAD` of `master`
+
+   ```sh
+   git checkout master
+   git pull upstream master
+   git push upstream master:support
+   ```
+
+   Normally, this would trigger a release job, but we've disabled the job and there's nothing to
+   release anyway.
+
+1. Re-enable the [Release](https://github.com/Workday/canvas-kit/actions/workflows/release.yml) job
+   ([Enable Workflow Docs](https://docs.github.com/en/actions/managing-workflow-runs/disabling-and-enabling-a-workflow#enabling-a-workflow))
+
+1. Update `master` to point to the next major release `prerelease/major` is currently pointing to.
+   This step produces the actual release, including a Slack message.
+
+   ```sh
+   git checkout prerelease/major
+   git pull upstream prerelease/major
+   git push upstream prerelease/major:master
+   ```
+
+   This will trigger the
+   [release workflow](https://github.com/Workday/canvas-kit/actions/workflows/release.yml). Up to
+   this point, `prerelease/major` has been creating canary jobs. This will trigger the actual
+   release. We must wait for this job to finish. The job will be running against `master`. The CI
+   job will run `lerna bump` and push that commit back onto the `master` branch which will include
+   the update to `lerna.json` that we need in the next step.
+
+   **Note:** If something went wrong and a version is incorrect, you can cancel this release
+   workflow run and manually run it with a version override. For example, for the `v8.0.0` release,
+   a `lerna bump` command chose `v8.0.0` for a release version on a patch update and we had to
+   remove this release from npm. According to npm's release policy, they take down the release from
+   npm, but the version string can never be used again, so we the actual v8 release was `8.0.1`
+
+1. We need to wait for the release workflow job to finish and the slack message be announced. Once
+   the previous step is completed, we need to update `prerelease/minor` and `prerelease/major` to
+   point to the current `HEAD` of master (which should now contain the next major version release
+   commit).
+
+   ```sh
+    git checkout master
+    git pull upstream master
+    git push upstream master:prerelease/minor
+    git push upstream master:prerelease/major
+   ```
+
+1. Re-enable the [Canary](https://github.com/Workday/canvas-kit/actions/workflows/canary.yml) and
+   [forward-merge](https://github.com/Workday/canvas-kit/actions/workflows/forward-merge.yml)
+   workflows
+   ([Enable Workflow Docs](https://docs.github.com/en/actions/managing-workflow-runs/disabling-and-enabling-a-workflow#enabling-a-workflow))
+
+1. 🎉
+
+### Canary Releases
+
+Canary releases use the [canary workflow](#canary-workflow) to automatically publish test versions
+of Canvas Kit. While these releases can be unstable, they are useful for external testing or
+allowing teams to experiment with new features or fixes before a stable release is available. These
+releases only run on `prerelease/minor` and `prerelease/major` branches.
+
+#### Prerelease Minor Canaries
+
+Canary releases on the `prerelease/minor` branch go out automatically once the pull request is
+merged. The major version will be appended with `-next.{commit-count}`, where `commit-count` is the
+number of commits since the last release tag. So for example, a V7 canary would look something like
+this: `7.3.0-next.3`.
+
+#### Prerelease Major Canaries
+
+Canary releases on the `prerelease/major` branch go out automatically once the pull request is
+merged. The major version will be appended with `-alpha.{build-number}-next.{commit-count}`, where
+`build-number` is the GitHub build identifier, and `commit-count` is the number of commits since the
+last release tag. So for example, a V8 canary would look something like this:
+`8.0.0-alpha.127-next.4`.

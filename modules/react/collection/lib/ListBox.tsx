@@ -10,7 +10,7 @@ import {useListModel} from './useListModel';
 import {useListRenderItems} from './useListRenderItem';
 import {useListItemRegister} from './useListItemRegister';
 
-export interface ListBoxProps extends BoxProps {
+export interface ListBoxProps extends Omit<BoxProps, 'children'> {
   children?: React.ReactNode | ((item: any) => React.ReactNode);
 }
 

@@ -10,12 +10,6 @@
   position: relative;
   width: max-content;
 
-  // Fallback for IE11
-  @media screen and (-ms-high-contrast: active), screen and (-ms-high-contrast: none) {
-    width: auto;
-    min-width: $_wdc-menu-menu-min-width;
-  }
-
   // Fallback for Edge and browsers that don't support max-content
   @supports not (width: max-content) {
     width: auto;

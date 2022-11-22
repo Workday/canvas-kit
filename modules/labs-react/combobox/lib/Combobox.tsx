@@ -8,20 +8,19 @@ import {
   useUniqueId,
 } from '@workday/canvas-kit-react/common';
 import {space, commonColors, borderRadius} from '@workday/canvas-kit-react/tokens';
-import {MenuItemProps} from '@workday/canvas-kit-preview-react/menu';
 import {Card} from '@workday/canvas-kit-react/card';
 import {TertiaryButton, TertiaryButtonProps} from '@workday/canvas-kit-react/button';
 import {xSmallIcon} from '@workday/canvas-system-icons-web';
 import {TextInputProps} from '@workday/canvas-kit-react/text-input';
 import flatten from 'lodash.flatten';
-import AutocompleteList from './AutocompleteList';
-import Status from './Status';
+import {AutocompleteList} from './AutocompleteList';
+import {Status} from './Status';
 
 export interface ComboBoxMenuItemGroup {
   // A non intractable header that logically separates autocomplete items
-  header: React.ReactElement<MenuItemProps>;
+  header: React.ReactElement<any>;
   // A group of logically distinct autocomplete items
-  items: React.ReactElement<MenuItemProps>[];
+  items: React.ReactElement<any>[];
 }
 
 export interface ComboboxProps extends GrowthBehavior, React.HTMLAttributes<HTMLElement> {
@@ -50,7 +49,7 @@ export interface ComboboxProps extends GrowthBehavior, React.HTMLAttributes<HTML
   /**
    * The autocomplete items of the Combobox. This array of menu items is shown under the text input.
    */
-  autocompleteItems?: React.ReactElement<MenuItemProps>[] | ComboBoxMenuItemGroup[];
+  autocompleteItems?: React.ReactElement<any>[] | ComboBoxMenuItemGroup[];
   /**
    * The function called when the Combobox text input changes.
    */
@@ -138,7 +137,7 @@ export const getOptionId = (baseId?: string, index?: number) =>
 export const getTextFromElement = (children?: React.ReactNode) => {
   let text = '';
   React.Children.map(children, child => {
-    if (child == null || typeof child === 'boolean' || child === {}) {
+    if (child == null || typeof child === 'boolean') {
       text += '';
     } else if (typeof child === 'string' || typeof child === 'number') {
       text += child.toString();
@@ -161,7 +160,7 @@ const isValidSingleChild = (child: React.ReactNode) => {
   return React.isValidElement(child) && React.Children.only(child);
 };
 
-const Combobox = ({
+export const Combobox = ({
   autocompleteItems,
   children,
   grow,
@@ -182,7 +181,7 @@ const Combobox = ({
   const [showingAutocomplete, setShowingAutocomplete] = useState(false);
   const [selectedAutocompleteIndex, setSelectedAutocompleteIndex] = useState<number | null>(null);
   const [interactiveAutocompleteItems, setInteractiveAutocompleteItems] = useState<
-    React.ReactElement<MenuItemProps>[]
+    React.ReactElement<any>[]
   >([]);
   const [announcementText, setAnnouncementText] = useState('');
 
@@ -263,7 +262,7 @@ const Combobox = ({
   }, [initialValue, setInputValue]);
 
   useEffect(() => {
-    const getInteractiveAutocompleteItems = (): React.ReactElement<MenuItemProps>[] => {
+    const getInteractiveAutocompleteItems = (): React.ReactElement<any>[] => {
       if (
         autocompleteItems &&
         autocompleteItems.length &&
@@ -271,14 +270,14 @@ const Combobox = ({
       ) {
         return flatten((autocompleteItems as ComboBoxMenuItemGroup[]).map(group => group.items));
       }
-      return (autocompleteItems as React.ReactElement<MenuItemProps>[]) || [];
+      return (autocompleteItems as React.ReactElement<any>[]) || [];
     };
     setInteractiveAutocompleteItems(getInteractiveAutocompleteItems());
   }, [autocompleteItems]);
 
   const handleAutocompleteClick = (
     event: React.SyntheticEvent<Element, Event>,
-    menuItemProps: MenuItemProps
+    menuItemProps: any
   ): void => {
     if (menuItemProps.isDisabled) {
       return;
@@ -313,11 +312,8 @@ const Combobox = ({
 
   const handleBlur = (event: React.FocusEvent) => {
     if (comboboxRef.current) {
-      let target: EventTarget | null = event.relatedTarget;
-      if (target === null) {
-        // IE11 swaps related and active target before it fires the blur event
-        target = document.activeElement;
-      }
+      const target: EventTarget | null = event.relatedTarget;
+
       if (target && comboboxRef.current.contains(target as Element)) {
         return;
       }
@@ -415,7 +411,7 @@ const Combobox = ({
   };
 
   const renderChildren = (inputElement: React.ReactElement<TextInputProps>): React.ReactNode => {
-    let cssOverride: CSSObject = {zIndex: 2};
+    let cssOverride: CSSObject = {':focus': {zIndex: 2}};
     if (showClearButton) {
       const paddingDirection = isRTL ? 'paddingLeft' : 'paddingRight';
       cssOverride = {
@@ -491,5 +487,3 @@ const Combobox = ({
     </Container>
   );
 };
-
-export default Combobox;

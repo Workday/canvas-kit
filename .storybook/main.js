@@ -58,7 +58,7 @@ module.exports = {
 
     // Update @storybook/addon-docs webpack rules to load all .mdx files in storybook
     const mdxRule = config.module.rules.find(rule => rule.test.toString() === /\.mdx$/.toString());
-    mdxRule.use.find(loader => loader.loader.includes('@mdx-js')).options['compilers'] = [
+    mdxRule.use.find(loader => loader.loader.includes('mdx1-csf')).options['compilers'] = [
       createCompiler({}),
     ];
 

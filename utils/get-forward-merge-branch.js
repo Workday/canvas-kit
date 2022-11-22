@@ -1,6 +1,6 @@
 const {assert} = require('console');
 
-const {GITHUB_REF} = process.env;
+const {GITHUB_REF = ''} = process.env;
 
 const branch = GITHUB_REF.replace('refs/heads/', '');
 

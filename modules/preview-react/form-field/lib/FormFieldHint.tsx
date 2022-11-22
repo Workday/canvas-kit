@@ -1,40 +1,33 @@
 import React from 'react';
-import {
-  createSubcomponent,
-  ExtractProps,
-  useTheme,
-  styled,
-  StyledType,
-} from '@workday/canvas-kit-react/common';
-import {space, type} from '@workday/canvas-kit-react/tokens';
-import {Box, BoxProps} from '@workday/canvas-kit-labs-react/common';
+import {createSubcomponent, ExtractProps, useTheme} from '@workday/canvas-kit-react/common';
+import {space} from '@workday/canvas-kit-react/tokens';
 
 import {useFormFieldHint, useFormFieldModel} from './hooks';
-
-const StyledHint = styled(Box)<StyledType & BoxProps>({
-  ...type.levels.subtext.medium,
-});
+import {Subtext} from '@workday/canvas-kit-react/text';
 
 export const FormFieldHint = createSubcomponent('p')({
   displayName: 'FormField.Hint',
   modelHook: useFormFieldModel,
   elemPropsHook: useFormFieldHint,
-})<ExtractProps<typeof Box, never>>(({children, ...elemProps}, Element, model) => {
-  const theme = useTheme();
+})<Omit<ExtractProps<typeof Subtext, never>, 'size'>>(
+  ({children, ...elemProps}, Element, model) => {
+    const theme = useTheme();
 
-  if (!children) {
-    // If there is no hint text just skip rendering
-    return null;
+    if (!children) {
+      // If there is no hint text just skip rendering
+      return null;
+    }
+
+    return (
+      <Subtext
+        as={Element}
+        size="medium"
+        color={model.state.hasError ? theme.canvas.palette.error.main : undefined}
+        marginY={space.xxs}
+        {...elemProps}
+      >
+        {children}
+      </Subtext>
+    );
   }
-
-  return (
-    <StyledHint
-      as={Element}
-      color={localModel.state.hasError ? theme.canvas.palette.error.main : undefined}
-      marginY={space.xxs}
-      {...props}
-    >
-      {children}
-    </StyledHint>
-  );
-});
+);

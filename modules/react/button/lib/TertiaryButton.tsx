@@ -11,16 +11,16 @@ import {
 import {borderRadius, colors, space} from '@workday/canvas-kit-react/tokens';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {ButtonColors, IconPositions, ButtonSizes} from './types';
-import {BaseButton} from './BaseButton';
+import {BaseButton, BaseButtonProps} from './BaseButton';
 
-export interface TertiaryButtonProps extends Themeable {
+export interface TertiaryButtonProps extends Themeable, BaseButtonProps {
   /**
    * The variant of the TertiaryButton.
    * @default undefined
    */
   variant?: 'inverse' | undefined;
   /**
-   * There are three button sizes: `extraSmall`, `small`, and `medium`.
+   * There are four button sizes: `extraSmall`, `small`, `medium`, and `large`.
    * If no size is provided, it will default to `medium`.
    *
    * @default 'medium'
@@ -44,14 +44,23 @@ export interface TertiaryButtonProps extends Themeable {
    * @default false
    */
   shouldMirrorIcon?: boolean;
+  /**
+   * If set to `true`, transform text to all letters uppercase
+   * @default undefined
+   */
   allCaps?: boolean;
   children?: React.ReactNode;
+  /**
+   * If set to `true`, make icon button available to use theme colors instead of default
+   * @default false
+   */
+  isThemeable?: boolean;
 }
 
 const getTertiaryButtonColors = (
   variant: 'inverse' | undefined,
   theme: EmotionCanvasTheme,
-  children: React.ReactNode
+  hasThemeStyles: boolean
 ): ButtonColors => {
   const {
     canvas: {
@@ -99,27 +108,27 @@ const getTertiaryButtonColors = (
   } else {
     return {
       default: {
-        icon: children ? themePrimary.main : colors.blackPepper400,
+        icon: hasThemeStyles ? themePrimary.main : colors.blackPepper400,
         label: themePrimary.main,
       },
       hover: {
         background: colors.soap200,
-        icon: children ? themePrimary.dark : colors.blackPepper500,
+        icon: hasThemeStyles ? themePrimary.dark : colors.blackPepper500,
         label: themePrimary.dark,
       },
       active: {
         background: colors.soap300,
-        icon: children ? themePrimary.dark : colors.blackPepper500,
+        icon: hasThemeStyles ? themePrimary.dark : colors.blackPepper500,
         label: themePrimary.dark,
       },
       focus: {
-        icon: children ? themePrimary.main : colors.blackPepper500,
+        icon: hasThemeStyles ? themePrimary.main : colors.blackPepper500,
         label: themePrimary.main,
         focusRing: focusRing({innerColor: colors.blueberry400}, theme),
       },
       disabled: {
         background: 'transparent',
-        icon: children ? themePrimary.main : colors.blackPepper400,
+        icon: hasThemeStyles ? themePrimary.main : colors.blackPepper400,
         label: themePrimary.main,
       },
     };
@@ -197,6 +206,7 @@ export const TertiaryButton = createComponent('button')({
     {
       size = 'medium',
       iconPosition = 'start',
+      isThemeable = false,
       variant,
       children,
       icon,
@@ -208,17 +218,18 @@ export const TertiaryButton = createComponent('button')({
     Element
   ) => {
     const theme = useTheme();
+    const hasThemeStyles = !!children || isThemeable;
 
     return (
       <StyledTertiaryButtonContainer
         ref={ref}
         as={Element}
         allCaps={allCaps}
-        colors={getTertiaryButtonColors(variant, theme, children)}
+        colors={getTertiaryButtonColors(variant, theme, hasThemeStyles)}
         size={size}
         padding={getPaddingStyles(icon, iconPosition, children, size)}
         minWidth={getMinWidthStyles(children, size)}
-        style={{borderRadius: children ? borderRadius.m : borderRadius.circle}}
+        borderRadius={children ? borderRadius.m : borderRadius.circle}
         {...elemProps}
       >
         {icon && iconPosition === 'start' && (

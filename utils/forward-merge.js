@@ -8,22 +8,105 @@ const {promisify} = require('node:util');
 const {exec: originalExec} = require('node:child_process');
 const exec = promisify(originalExec);
 const getNextBranch = require('./get-forward-merge-branch');
+const nodeSpawn = require('node:child_process').spawn;
 
-const {GITHUB_REF = ''} = process.env;
-const branch = GITHUB_REF.replace('refs/heads/', '');
-const nextBranch = getNextBranch(branch);
+// Tokenize and parse command arguments and be aware that anything in quotes is part of a single argument
+// For example: `echo "hello there" bob` returns args like `['"hello there"', 'bob']
+function splitArgs(/** @type {string} */ input) {
+  const [name, ...rest] = input.split(' ');
+
+  /** @type {string[]} */
+  const args = [];
+  let quote = '';
+  let currentArg = '';
+  for (const l of rest.join(' ')) {
+    if (l === quote) {
+      quote = '';
+    } else if (l === '"' || l === "'") {
+      quote = l;
+    } else {
+      if (l !== ' ' || quote) {
+        currentArg += l;
+      } else {
+        args.push(currentArg);
+        currentArg = '';
+      }
+    }
+  }
+
+  if (currentArg) {
+    args.push(currentArg);
+  }
+
+  return {name, args};
+}
+
+/**  */
+async function spawn(/** @type {string} */ cmd) {
+  console.log(`Running: "${cmd}"`);
+  const {name, args} = splitArgs(cmd);
+
+  const child = nodeSpawn(name, args);
+
+  for await (const chunk of child.stdout) {
+    console.log(chunk.toString());
+  }
+  let error = '';
+  for await (const chunk of child.stderr) {
+    console.error(chunk.toString());
+    error += chunk.toString();
+  }
+
+  // eslint-disable-next-line compat/compat
+  const exitCode = await new Promise((resolve, reject) => {
+    child.on('close', resolve);
+  });
+
+  if (exitCode) {
+    throw new Error(`subprocess error exit ${exitCode}, ${error}`);
+  }
+  return;
+}
+
+function getBranches(/** @type string */ branch) {
+  if (branch.startsWith('merge')) {
+    // we're already merging, so extract branch information
+    const matches = branch.match(/merge\/(.+)-into-(.+)/);
+    if (matches) {
+      return [matches[1], matches[2]];
+    }
+    console.error(`The branch name is not valid: ${branch}`);
+    process.exit(1);
+  }
+  return [branch, getNextBranch(branch)];
+}
 
 async function main() {
+  // get the current branch
+  const {stdout: defaultBranch} = await exec(`git rev-parse --abbrev-ref HEAD`);
+  const alreadyMerging = defaultBranch.startsWith('merge');
+
+  let hasConflicts = false;
+  let hasUnresolvedConflicts = false;
+  const {GITHUB_REF: currentBranch = defaultBranch} = process.env;
+  const [branch, nextBranch] = getBranches(currentBranch.replace('refs/heads/', ''));
+
   // create a merge branch
-  await exec(`git checkout -b merge/${branch}-into-${nextBranch}`);
+  if (!alreadyMerging) {
+    console.log('Creating a merge branch');
+    await spawn(`git checkout -b merge/${branch}-into-${nextBranch}`);
+  }
 
   try {
-    const result = await exec(
-      `git merge origin/${nextBranch} -m 'chore: Merge ${branch} into ${nextBranch}'`
-    );
+    console.log(`Creating a merge branch`);
+    // The CI uses `origin` while locally we use `upstream`.
+    const remote = alreadyMerging ? 'upstream' : 'origin';
+    await exec(`git merge ${remote}/${nextBranch} -m 'chore: Merge ${branch} into ${nextBranch}'`);
 
     // The merge was successful with no merge conflicts
   } catch (result) {
+    hasConflicts = true;
+    console.log(`Attempting to automatically resolve conflicts`);
     // The merge had conflicts
 
     /** @type {{stdout: string}} */
@@ -43,29 +126,56 @@ async function main() {
 
       if (conflict === 'lerna.json' || conflict.includes('package.json')) {
         // resolve the conflicts by taking incoming file
-        await exec(`git checkout --theirs -- "${conflict}"`);
-        await exec(`git add ${conflict}`);
+        await spawn(`git checkout --theirs -- "${conflict}"`);
+        await spawn(`git add ${conflict}`);
 
         console.log(`Resolved conflicts in ${conflict}`);
       } else if (conflict === 'CHANGELOG.md') {
         await updateChangelog();
 
         console.log(`Resolved conflicts in ${conflict}`);
+      } else if (conflict === 'yarn.lock') {
+        // yarn resolves yarn.lock conflicts
+        console.log(`Conflicts in ${conflict} will be resolved later.`);
       } else {
         console.log('Merge cannot be resolved automatically');
-        process.exit(1);
+        hasUnresolvedConflicts = true;
+        if (!alreadyMerging) {
+          // If we're not already merging, we want to bail now - this is the default for CI
+          // If we are already merging, we must be doing things manually
+          process.exit(1);
+        }
       }
     }
+  }
 
-    await exec(`yarn install --production=false`);
+  await spawn(`yarn install --production=false`);
 
-    // If we're here, we've fixed all merge conflicts. We need to commit
-    await exec(`git add .`);
-    await exec(`git commit --no-verify -m "chore: Merge ${branch} into ${nextBranch}"`);
+  if (hasConflicts) {
+    if (hasUnresolvedConflicts) {
+      // We have conflicts. Inform the user
+      console.log(`Conflicts still need to be resolved manually.`);
+      console.log(`Manually resolve the conflicts, then run the following command:`);
+      console.log(
+        `git add . && git commit --no-verify -m "chore: Merge ${branch} into ${nextBranch}" && git push upstream merge/${branch}-into-${nextBranch}`
+      );
+    } else {
+      console.log('All conflicts automatically resolved.');
+
+      // If we're here, we've fixed all merge conflicts. We need to commit
+      await spawn(`git add .`);
+      await spawn(`git commit --no-verify -m "chore: Merge ${branch} into ${nextBranch}"`);
+    }
+  } else {
+    console.log('No conflicts detected');
   }
 }
 
-main();
+main().catch(err => {
+  console.error('Error:\n', err.message);
+  console.error('Stack:\n', err.stack);
+  process.exit(1);
+});
 
 /**
  * @param line {string}
