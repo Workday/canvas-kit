@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v8.2.1](https://github.com/Workday/canvas-kit/releases/tag/v8.2.1) (2022-11-21)
+
+### Dependencies
+
+- fix: Allow installing Canvas Kit with React 16.14 ([#1917](https://github.com/Workday/canvas-kit/pull/1917)) ([@willklein](https://github.com/willklein))
+
+
 ## [v8.2.0](https://github.com/Workday/canvas-kit/releases/tag/v8.2.0) (2022-11-18)
 
 ### Documentation
