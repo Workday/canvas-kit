@@ -8,7 +8,7 @@ import {
   createElemPropsHook,
 } from '@workday/canvas-kit-react/common';
 import {colors, inputColors, spaceNumbers, borderRadius} from '@workday/canvas-kit-react/tokens';
-import {useRadioModel} from './useRadioModel';
+import {useRadioModel} from './hooks/useRadioModel';
 import {RadioButtonProps, RadioButtonContext} from './Radio.Button';
 
 const radioBorderRadius = 9;

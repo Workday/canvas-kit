@@ -12,7 +12,7 @@ import {borderRadius, space} from '@workday/canvas-kit-react/tokens';
 import {RadioButton, RadioButtonProps} from './Radio.Button';
 import RadioButtonInput from './RadioButton.Input';
 import RadioLabel from './RadioButton.Label';
-import {useRadioModel} from './useRadioModel';
+import {useRadioModel} from './hooks/useRadioModel';
 
 export interface RadioGroupProps extends Themeable, GrowthBehavior {
   children: React.ReactElement<RadioButtonProps>[];
@@ -75,5 +75,5 @@ export const RadioGroup = createContainer('div')({
     Label: RadioLabel,
   },
 })<RadioGroupProps>(({children, ...elemProps}) => {
-  return <Container error={elemProps.error}>{children}</Container>;
+  return <Container {...elemProps}>{children}</Container>;
 });

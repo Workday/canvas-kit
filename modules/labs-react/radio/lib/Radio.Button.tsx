@@ -3,7 +3,7 @@ import React from 'react';
 import {spaceNumbers} from '@workday/canvas-kit-react/tokens';
 import {styled, Themeable, createSubcomponent, useUniqueId} from '@workday/canvas-kit-react/common';
 
-import {useRadioModel} from './useRadioModel';
+import {useRadioModel} from './hooks/useRadioModel';
 
 interface RadioButtonContextInterface {
   /**

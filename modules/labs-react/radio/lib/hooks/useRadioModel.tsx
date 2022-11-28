@@ -16,6 +16,7 @@ export const useRadioModel = createModelHook({
      * The selected value of the RadioGroup. Providing this prop will cause the model be in a controlled state
      */
     value: '' as string | number,
+
     callback: (value: string | number) => undefined,
   },
 })(config => {
