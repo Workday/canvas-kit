@@ -32,10 +32,6 @@ export interface RadioGroupProps extends Themeable, GrowthBehavior {
   name?: string;
 }
 
-export interface RadioGroupProps {
-  children: React.ReactElement<RadioButtonProps>[];
-}
-
 const Container = styled('div')<Pick<RadioGroupProps, 'error' | 'grow' | 'theme'>>(
   {
     display: 'inline-block',
@@ -74,6 +70,10 @@ export const RadioGroup = createContainer('div')({
     Input: RadioButtonInput,
     Label: RadioLabel,
   },
-})<RadioGroupProps>(({children, ...elemProps}) => {
-  return <Container {...elemProps}>{children}</Container>;
+})<RadioGroupProps>(({children, ...elemProps}, Element, model) => {
+  return (
+    <Container as={Element} name={model.state.name} {...elemProps}>
+      {children}
+    </Container>
+  );
 });
