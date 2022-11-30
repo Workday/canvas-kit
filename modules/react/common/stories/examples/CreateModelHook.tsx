@@ -18,14 +18,13 @@ const useDisclosureModel = createModelHook({
     /** ID reference of the list. Children ids can be derived from this id */
     id: '',
     /**
-     * The initial visibility of the disclosed content
-     * @default 'hidden'
+     * The initial visibility of the disclosed content. The `as Visibility` overrides the inferred type.
      */
     initialVisibility: 'hidden' as Visibility,
   },
 })(config => {
   const id = useUniqueId(config.id);
-  const [visibility, setVisibility] = React.useState(config.initialVisibility || 'hidden');
+  const [visibility, setVisibility] = React.useState(config.initialVisibility);
   //  Set the default internal state for your model.
   const state = {
     /** ID reference of the list. Children ids can be derived from this id */
@@ -37,7 +36,7 @@ const useDisclosureModel = createModelHook({
      */
     visibility,
   };
-  // Sets events that be used across sub components
+  // Sets events that can be used across subcomponents
   const events = {
     /**
      * Start showing the disclosed content. If a DOM event triggered this event, the event data will

@@ -37,7 +37,7 @@ const useDisclosureModel = createModelHook({
      */
     visibility,
   };
-  // Sets events that be used across sub components
+  // Sets events that can be used across subcomponents
   const events = {
     /**
      * Start showing the disclosed content. If a DOM event triggered this event, the event data will

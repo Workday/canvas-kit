@@ -44,7 +44,7 @@ export const useDisclosureModel = createModelHook({
   const state = {
     // some state
   };
-  // Sets events that be used across sub components
+  // Sets events that can be used across subcomponents
   const events = {
     // some events
   };
@@ -91,7 +91,7 @@ export const useExpandableModel = createModelHook({
 This is useful when you're using components that need to share the same context. When you use
 `composeModelHook` this will create a context for you. When you're combining hooks together
 sometimes you want to share the same context. A good example of this is if you're building a `Modal`
-component but you created a `usePopupModel` that created the context for sub component to share.
+component but you created a `usePopupModel` that created the context for subcomponent to share.
 
 ```tsx
 import {createModelHook} from '@workday/canvas-kit-react/common';
@@ -177,7 +177,7 @@ export const Disclosure = createContainer('div')({
 
 # createSubcomponent
 
-Once you've built a container component, adding sub component is easy. `createSubcomponent` is
+Once you've built a container component, adding subcomponent is easy. `createSubcomponent` is
 similar to `createContainer` in that it hooks up a lot of the piece for you. The main difference
 being that is uses the context created by `createContainer`. This allows access to the model created
 at the root level so that you can use any state or events at a child component level.
