@@ -65,7 +65,9 @@ When `useDisclosureModel`is created, 5 properties are attached to it for composa
 
 ### defaultConfig
 
-Using this can be useful when creating other models that share similar config for example:
+All config that has default values. Optional values also go here, but are represented as undefined
+as part of the union type `(undefined as undefined | string)`. Using this can be useful when
+creating other models that share similar config for example:
 
 ```tsx
 import {createModelHook} from '@workday/canvas-kit-react/common';
@@ -86,12 +88,23 @@ export const useExpandableModel = createModelHook({
 });
 ```
 
-### Context
+### requiredConfig
 
-This is useful when you're using components that need to share the same context. When you use
-`composeModelHook` this will create a context for you. When you're combining hooks together
-sometimes you want to share the same context. A good example of this is if you're building a `Modal`
-component but you created a `usePopupModel` that created the context for subcomponent to share.
+All config that is required by the model. Most config should go into default config with thoughtful
+defaults
+
+### contextOverride
+
+The React context used by components to share a model between a container component and
+subcomponents. It is used internally by createContainer and createSubcomponents and should not need
+to be referenced directly.
+
+Each subcomponent is tied to a model hook's context. For example, useModalModel extends
+usePopupModel, but <Modal> components point directly to <Popup> components. The contextOverride:
+usePopupModel.Context forces useModalModel's internal context to point to the same context reference
+as the one used in usePopupModel. This allows the model returned by useModalModel to be compatible
+with both <Modal> subcomponents and <Popup> subcomponents. If you do not override context, you must
+create a new container and subcomponent for every component using the newly created model hook.
 
 ```tsx
 import {createModelHook} from '@workday/canvas-kit-react/common';
@@ -136,8 +149,10 @@ export const useActionBarModel = createModelHook({
 
 ### getElemProps
 
-This function will separate all `elemProps` or default attributes from an element from config props.
-If a prop is both a `config` _and_ an `elemProp`, you can manually apply the prop again.
+This function will separate all `elemProps` or default attributes from an element from the model
+config props. If a prop is both a `config` _and_ an `elemProp`, you can manually apply the prop
+again. `elemProps` is called internally automatically by createContainer. If you use
+`createContainer`, you shouldn't need to use this function.
 
 By default `createModelHook` does this for you and spread the `elemProps` onto the component.
 
