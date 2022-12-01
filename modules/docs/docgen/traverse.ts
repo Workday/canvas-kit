@@ -9,7 +9,7 @@ export interface API extends KindMap, Guards {
     find<K extends keyof KindMap>(kind: K, predicate?: (node: ts.Node) => boolean): KindMap[K][];
   };
 }
-function find(node: ts.Node, predicate: (node: ts.Node) => boolean): ts.Node[] {
+export function find(node: ts.Node, predicate: (node: ts.Node) => boolean): ts.Node[] {
   const nodes: ts.Node[] = [];
   if (predicate(node)) {
     nodes.push(node);
