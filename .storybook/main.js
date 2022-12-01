@@ -1,9 +1,12 @@
-const path = require('path');
+const path = require('node:path');
 const createCompiler = require('@storybook/addon-docs/mdx-compiler-plugin');
 const DocgenPlugin = require('./docgen-plugin');
 
 const modulesPath = path.resolve(__dirname, '../modules');
 const getSpecifications = require('../modules/docs/utils/get-specifications');
+const getComponentPropMap = require('../modules/docs/utils/get-component-prop-map');
+
+const props = require('../props.json');
 
 module.exports = {
   stories: [
@@ -27,11 +30,16 @@ module.exports = {
   },
   webpackFinal: async config => {
     // Get the specifications object and replace with a real object in the spec.ts file
+    console.log('Building specs...');
     const specs = await getSpecifications();
 
-    // modules/specifications/lib/specs.ts
+    console.log('Building component prop tables...');
+    // const propMap = await getComponentPropMap();
+    const propMap = props;
+
+    // modules/docs/lib/specs.ts and modules/docs/lib/componentPropMap.ts
     config.module.rules.push({
-      test: /specs\.ts$/,
+      test: /.ts$/,
       include: [path.resolve(__dirname, '../modules/docs')],
       use: [
         {
@@ -41,8 +49,16 @@ module.exports = {
             replace: JSON.stringify(specs, null, '  '),
           },
         },
+        {
+          loader: require.resolve('string-replace-loader'),
+          options: {
+            search: '{/* PROP_MAP_REPLACE_BY_WEBPACK */}',
+            replace: JSON.stringify(propMap, null, '  '),
+          },
+        },
       ],
     });
+    // modules/
     /**
      * Added this because Storybook 6.3 is on emotion 10, so we rewrote the imports to point to emotion 11
      * https://github.com/storybookjs/storybook/issues/13145
@@ -102,6 +118,18 @@ module.exports = {
       enforce: 'pre',
     });
 
+    config.module.rules.push({
+      test: /.+\.tsx$/,
+      include: [modulesPath],
+      exclude: /examples|stories/,
+      loaders: [
+        {
+          loader: path.resolve(__dirname, `../modules/docs/webpack/inject-module-name-loader`),
+        },
+      ],
+      enforce: 'pre',
+    });
+
     // Load our scss files with postscss.
     // Note: This is the same as @storybook/preset-scss, but with postcss added.
     config.module.rules.push({
@@ -118,7 +146,7 @@ module.exports = {
       include: modulesPath,
     });
 
-    config.plugins.push(new DocgenPlugin());
+    // config.plugins.push(new DocgenPlugin());
 
     // Remove progress updates to reduce log lines in Travis
     // See: https://github.com/storybookjs/storybook/issues/2029

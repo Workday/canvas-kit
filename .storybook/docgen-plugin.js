@@ -7,38 +7,7 @@ const path = require('path');
 const tsconfigPath = path.join(__dirname, '../tsconfig.json');
 const fs = require('fs');
 
-const propFilter = (fileName, prop, component) => {
-  // `PropTables.tsx` files are okay to pass through
-  if (fileName.includes('PropTables.tsx')) {
-    return true;
-  }
-
-  if (prop.declarations) {
-    // filter out props that come from node_modules or style props
-    return !prop.declarations.some(
-      d => d.fileName.includes('react/layout/lib/utils') || d.fileName.includes('node_modules')
-    );
-  }
-
-  return false;
-};
-
-function getConfig(tsconfigPath) {
-  const basePath = path.dirname(tsconfigPath);
-  const {config, error} = ts.readConfigFile(tsconfigPath, filename =>
-    fs.readFileSync(filename, 'utf8')
-  );
-
-  const {options, errors} = ts.parseJsonConfigFileContent(
-    config,
-    ts.sys,
-    basePath,
-    {},
-    tsconfigPath
-  );
-
-  return options;
-}
+const {getTsProgram, getComponentDocs} = require('./docgen-parse-file');
 
 // Cache the tsProgram for faster updates This prevents JSDoc updates from reflecting in the doc
 // source, but that already didn't work Creating a new tsProgram takes about 1.5s. Skipping brings
@@ -64,11 +33,13 @@ class DocgenPlugin {
 
         if (moduleCount !== modulesToProcess.length) {
           // create a shared TS program of all TS files used by webpack
-          tsProgram = ts.createProgram(
-            modulesToProcess.map(v => v.userRequest),
-            getConfig(tsconfigPath)
-          );
+          tsProgram = getTsProgram(modulesToProcess.map(v => v.userRequest));
           moduleCount = modulesToProcess.length;
+          console.log('modules', moduleCount);
+          fs.writeFileSync(
+            'modules.json',
+            JSON.stringify(modulesToProcess.map(v => v.userRequest, null, '  '))
+          );
         }
 
         modulesToProcess.forEach(m => processModule(m, tsProgram));
@@ -80,30 +51,9 @@ class DocgenPlugin {
 const processModule = (module, tsProgram) => {
   if (!module) return;
 
-  const componentDocs = docGen
-    .withCustomConfig(tsconfigPath, {
-      shouldExtractValuesFromUnion: true, // Make sure Storybook recognizes the enums for controls: https://github.com/storybookjs/storybook/blob/8d7fa4249cc73f315cfc15ebd8c6f0d574f341d5/addons/docs/src/lib/convert/proptypes/convert.ts#L44-L60
-      propFilter: (prop, component) => propFilter(module.userRequest, prop, component),
-    })
-    // Using `parseWithProgramProvider` because `.parse` would create a new TS program with each module
-    // which is much slower
-    .parseWithProgramProvider(module.userRequest, () => tsProgram);
+  const componentDocs = getComponentDocs(module.userRequest, tsProgram);
 
   if (!componentDocs.length) return;
-
-  // `as` shows up as required, but it is not. This fixes it
-  componentDocs.forEach(d => {
-    if (d.props.as) {
-      d.props.as.required = false;
-      // More useful than `ElementType<any>`
-      d.props.as.type.name =
-        '"symbol" | "object" | "small" | "a" | "abbr" | "address" | "area" | "article" | "aside" | "audio" | "b" | "base" | "bdi" | "bdo" | "big" | "blockquote" | "body" | "br" | "button" | ... 156 more ... | React.ComponentType<any>';
-    }
-    if (d.props.ref) {
-      // More useful than default output
-      d.props.ref.type.name = 'React.Ref<any>';
-    }
-  });
 
   let source = module._source._value;
   source +=

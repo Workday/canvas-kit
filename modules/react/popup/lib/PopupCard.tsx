@@ -62,6 +62,9 @@ const StyledPopupCard = styled(Card)<
   };
 });
 
+/**
+ * blah
+ */
 export const PopupCard = createSubcomponent('div')({
   displayName: 'Popup.Card',
   modelHook: usePopupModel,
