@@ -1,7 +1,42 @@
 import {Meta} from '@storybook/addon-docs';
 import Readme from '../../../README.md';
 import Markdown from '../../../utils/storybook/Markdown.tsx';
+import {Test} from './welcomePage'
+import {InstallBlock} from './installBlock'
 
-<Meta title="Welcome/Getting Started" />
+<Meta title="Welcome" />
+
+<Test/>
+
+This project provides a set of components for the Workday Canvas Design System that can be used to
+implement user experiences consistent with
+[Workday's design principles](https://design.workday.com/).
+
+## Installation
+To get started using Canvas kit React first add or install the module to your existing React project
+
+<InstallBlock command='yarn add' packageName='@workday/canvas-kit-react' />
+
+or
+
+<InstallBlock command='npm install' packageName='@workday/canvas-kit-react' />
+
+After installing Canvas Kit, you need to set up the CanvasProvider at the root of your application. This can be either in your `index.jsx`,` index.tsx` or `App.jsx` depending on the framework you use.
+This ensures from styling, theming, and focus on our components.
+
+```tsx
+import * as React from 'react';
+// 1. import `CanvasProvider` component
+import { CanvasProvider } from '@workday/canvas-kit-react'
+
+function App() {
+  // 2. Wrap CanvasProvider at the root of your app
+  return (
+    <CanvasProvider>
+      <YourApp />
+    </CanvasProvider>
+  )
+}
+```
 
 <Markdown content={Readme} />

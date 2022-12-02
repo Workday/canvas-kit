@@ -19,6 +19,8 @@ const pipe = (...fns) => value => fns.reduce((result, fn) => fn(result), value);
 function storySort(a, b) {
   const prefixFn = pipe(
     prefix('welcome-', '0'),
+    prefix('guides-', '11'),
+    prefix('features-', '1'),
     prefix('getting-started', 'a'),
     prefix('tokens-', '1'),
     prefix('components-', '2'),
@@ -64,6 +66,6 @@ export const parameters = {
   },
   // Make stories available to our internal code sandbox tool
   tesseract: {
-    enable: true 
+    enable: true
   }
 };
