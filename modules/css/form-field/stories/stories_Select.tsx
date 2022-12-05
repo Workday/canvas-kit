@@ -3,7 +3,7 @@ import {storiesOf} from '@storybook/react';
 import '../index.scss';
 import '@workday/canvas-kit-css-select/index.scss';
 
-storiesOf('Components/Inputs/Select/CSS/Top Label', module)
+storiesOf('CSS/Select/Top Label', module)
   .addParameters({ReadmePath: 'css/select'})
   .add('Default', () => (
     <div className="wdc-form">
@@ -96,7 +96,7 @@ storiesOf('Components/Inputs/Select/CSS/Top Label', module)
     </div>
   ));
 
-storiesOf('Components/Inputs/Select/CSS/Left Label', module)
+storiesOf('CSS/Select/Left Label', module)
   .addParameters({ReadmePath: 'css/select'})
   .add('Default', () => (
     <div className="wdc-form wdc-form-label-position-left">

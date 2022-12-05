@@ -2,7 +2,8 @@ import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import {shieldIcon} from '@workday/canvas-accent-icons-web';
 import {benefitsIcon} from '@workday/canvas-applet-icons-web';
-import {activityStreamIcon} from '@workday/canvas-system-icons-web';
+import * as SystemIcons from '@workday/canvas-system-icons-web';
+import {Card} from '@workday/canvas-kit-react/card';
 import {CanvasGraphic, CanvasIconTypes} from '@workday/design-assets-types';
 
 import {colors} from '@workday/canvas-kit-react/tokens';
@@ -18,7 +19,7 @@ const graphicExample: CanvasGraphic = {
   tags: [],
 };
 
-storiesOf('Tokens/Icon/React', module)
+storiesOf('Assets/Icon', module)
   .addParameters({component: AccentIcon})
   .addParameters({ReadmePath: 'react/icon'})
   .add('Accent Icon', () => (
@@ -40,7 +41,7 @@ storiesOf('Tokens/Icon/React', module)
     </div>
   ));
 
-storiesOf('Tokens/Icon/React', module)
+storiesOf('Assets/Icon', module)
   .addParameters({component: AppletIcon})
   .add('Applet Icon', () => (
     <div className="story">
@@ -51,12 +52,37 @@ storiesOf('Tokens/Icon/React', module)
       <AppletIcon icon={benefitsIcon} size={60} shouldMirror={true} />
     </div>
   ));
-
-storiesOf('Tokens/Icon/React', module)
+const ImportedSystemIcons = Object.keys(SystemIcons);
+storiesOf('Assets/Icon', module)
   .addParameters({component: SystemIcon})
   .add('System Icon', () => (
     <div className="story">
-      <SystemIcon icon={activityStreamIcon} />
+      {ImportedSystemIcons.map(key => {
+        // @ts-ignore
+        const icon: CanvasSystemIcon = SystemIcons[key];
+        return icon.svg ? (
+          <Card
+            display="inline-flex"
+            width={210}
+            // style={{
+            //   display: 'inline-flex',
+            //   margin: '8px',
+            //   width: 200,
+            //   justifyContent: 'center',
+            // }}
+            key={icon.name}
+          >
+            <Card.Body display="flex">
+              <div>
+                <SystemIcon icon={icon} />
+
+                <p style={{marginBottom: 0}}>{icon.name}Icon</p>
+              </div>
+            </Card.Body>
+          </Card>
+        ) : null;
+      })}
+      {/* <SystemIcon icon={activityStreamIcon} />
       <SystemIcon icon={activityStreamIcon} color={colors.blueberry500} />
       <SystemIcon
         className="custom-class"
@@ -92,11 +118,11 @@ storiesOf('Tokens/Icon/React', module)
         icon={activityStreamIcon}
         background={colors.blueberry400}
         shouldMirror={true}
-      />
+      /> */}
     </div>
   ));
 
-storiesOf('Tokens/Icon/React', module)
+storiesOf('Assets/Icon', module)
   .addParameters({component: Graphic})
   .add('Graphic', () => (
     <div className="story">

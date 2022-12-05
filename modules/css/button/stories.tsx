@@ -40,7 +40,7 @@ class IconDemo extends Component<React.PropsWithChildren> {
   }
 }
 
-storiesOf('Components/Buttons/Button/CSS', module)
+storiesOf('CSS/Buttons', module)
   .addParameters({ReadmePath: 'css/button'})
   .add('Primary', () => (
     <div className="story">
@@ -151,7 +151,7 @@ storiesOf('Components/Buttons/Button/CSS', module)
     </div>
   ));
 
-storiesOf('Components/Buttons/Button/CSS/Dropdown', module)
+storiesOf('CSS/Buttons/Dropdown', module)
   .addParameters({ReadmePath: 'css/button'})
   .add('Default', () => (
     <div className="story">
@@ -171,7 +171,7 @@ storiesOf('Components/Buttons/Button/CSS/Dropdown', module)
     </div>
   ));
 
-storiesOf('Components/Buttons/Button/CSS/Text', module)
+storiesOf('CSS/Buttons/Text', module)
   .addParameters({ReadmePath: 'css/button'})
   .add('Default', () => (
     <div className="story">
@@ -255,7 +255,7 @@ storiesOf('Components/Buttons/Button/CSS/Text', module)
     </div>
   ));
 
-storiesOf('Components/Buttons/Button/CSS/Deprecated', module)
+storiesOf('CSS/Buttons/Deprecated', module)
   .addParameters({ReadmePath: 'css/button'})
   .add('Primary', () => (
     <div className="story">
@@ -383,7 +383,7 @@ storiesOf('Components/Buttons/Button/CSS/Deprecated', module)
     </div>
   ));
 
-storiesOf('Components/Buttons/Button/CSS/Icon Button', module)
+storiesOf('CSS/Buttons/Icon Button', module)
   .addParameters({ReadmePath: 'css/button'})
   .add('Square', () => (
     <div className="story">

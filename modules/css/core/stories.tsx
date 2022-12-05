@@ -2,7 +2,7 @@ import React from 'react';
 import {storiesOf} from '@storybook/react';
 import './index.scss';
 
-storiesOf('Tokens/Core/CSS', module)
+storiesOf('CSS/Tokens', module)
   .addParameters({ReadmePath: 'css/core'})
   .add('Typography', () => {
     const inverseStyle = {
@@ -73,7 +73,7 @@ storiesOf('Tokens/Core/CSS', module)
     );
   });
 
-storiesOf('Tokens/Core/CSS', module)
+storiesOf('CSS/Tokens', module)
   .addParameters({ReadmePath: 'css/core'})
   .add('Depth', () => {
     const cardStyle = {
@@ -109,7 +109,7 @@ storiesOf('Tokens/Core/CSS', module)
     );
   });
 
-storiesOf('Tokens/Core/CSS', module)
+storiesOf('CSS/Tokens', module)
   .addParameters({ReadmePath: 'css/core'})
   .add('Accessibility', () => (
     <div className="story">

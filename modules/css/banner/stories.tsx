@@ -3,7 +3,7 @@ import {storiesOf} from '@storybook/react';
 import './index.scss';
 import './stories.scss';
 
-storiesOf('Components/Indicators/Banner/CSS/Alert ', module)
+storiesOf('CSS/Banner ', module)
   .addParameters({ReadmePath: 'css/banner'})
   .add('Full', () => (
     <div className="banner-story">
@@ -21,7 +21,7 @@ storiesOf('Components/Indicators/Banner/CSS/Alert ', module)
     </div>
   ));
 
-storiesOf('Components/Indicators/Banner/CSS/Error ', module)
+storiesOf('CSS/Banner ', module)
   .addParameters({ReadmePath: 'css/banner'})
   .add('Full', () => (
     <div className="banner-story">

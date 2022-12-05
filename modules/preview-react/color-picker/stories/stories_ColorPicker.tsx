@@ -18,7 +18,7 @@ import {changeFocus} from '@workday/canvas-kit-react/common';
 // eslint-disable-next-line no-empty-function
 const noop = () => {};
 
-storiesOf('Preview/Color Picker/React', module)
+storiesOf('Preview/Color Picker', module)
   .addParameters({component: ColorPicker})
   .addParameters({ReadmePath: 'preview-react/color-picker'})
   .add('Default', () => <ColorPicker onColorChange={noop} />)
