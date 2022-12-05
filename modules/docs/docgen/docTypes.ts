@@ -4,63 +4,98 @@ export interface JSDoc {
   tags: Record<string, string>;
 }
 
-export interface Prop extends JSDoc {
-  type: 'prop';
+/** Object parameters are used in function parameters, component props, and model config */
+export interface ObjectParameter extends JSDoc {
+  kind: 'parameter';
   name: string;
-  defaultValue: string | undefined;
-  typeInfo: {
-    name: string;
-    raw: string;
-    value: string | {value: string}[];
-  };
+  defaultValue: Value;
+  typeInfo: Value;
   required: boolean;
 }
 
-// TODO: Symbols can be many things...
-export interface SymbolDoc extends JSDoc {
-  type: 'symbol';
+/** Members of an object type like an interface or a type alias of an object */
+export interface TypeMember extends JSDoc {
+  kind: 'member';
   name: string;
-  typeInfo: {
-    name: string;
-    raw: string;
-    value: string | {value: string}[];
-  };
+  typeInfo: Value;
 }
 
-export interface ObjectDoc extends JSDoc {
-  type: 'object';
+export interface Doc extends JSDoc {
   name: string;
   packageName: string;
-  props: Prop[];
+  fileName: string;
+  typeInfo: Value;
 }
 
-export type PrimitiveDoc = NumberLiteralDoc | StringLiteralDoc;
-
-export interface NumberLiteralDoc {
-  type: 'number';
-  value: number;
+export interface ModelValue {
+  kind: 'model';
+  defaultConfig: ObjectParameter[];
+  requiredConfig: ObjectParameter[];
+  state: TypeMember[];
+  events: TypeMember[];
 }
 
-export interface StringLiteralDoc {
-  type: 'string';
+export interface ElemPropsHookValue {
+  kind: 'elemPropsHook';
+  parameters: ObjectParameter[];
+  returnType: null;
+}
+
+export type Value =
+  | SymbolValue
+  | NumberLiteralValue
+  | StringLiteralValue
+  | PrimitiveValue
+  | UnionValue
+  | ObjectValue
+  | InterfaceValue
+  | ModelValue
+  | ElemPropsHookValue
+  | IntersectionValue
+  | UnknownValue;
+
+// TODO: Symbols can be many things...
+export interface SymbolValue {
+  kind: 'symbol';
   value: string;
 }
 
-export interface UnionDoc extends JSDoc {
-  type: 'union';
-  name: string;
-  packageName: string;
-  types: PrimitiveDoc;
+export interface ObjectValue {
+  kind: 'object';
+  properties: ObjectParameter[];
 }
 
-export interface ModelDoc extends JSDoc {
-  type: 'model';
-  name: string;
-  packageName: string;
-  defaultConfig: Prop[];
-  requiredConfig: Prop[];
-  state: Prop[];
-  events: Prop[];
+export interface InterfaceValue {
+  kind: 'interface';
+  properties: TypeMember[];
 }
 
-export type Doc = SymbolDoc | ModelDoc | ObjectDoc;
+export interface NumberLiteralValue {
+  kind: 'number';
+  value: number;
+}
+
+export interface StringLiteralValue {
+  kind: 'string';
+  value: string;
+}
+
+export interface PrimitiveValue {
+  kind: 'primitive';
+  value: 'string' | 'number' | 'null' | 'undefined' | 'boolean';
+}
+
+export interface UnknownValue {
+  kind: 'unknown';
+  value: 'unknown';
+}
+
+export interface UnionValue {
+  kind: 'union';
+  value: Value[];
+}
+
+export interface IntersectionValue {
+  kind: 'intersection';
+  value: Value[];
+}

@@ -1,5 +1,5 @@
 import ts from 'typescript';
-import {JSDoc, Doc, Prop, ObjectDoc} from './docTypes';
+import {JSDoc, Doc} from './docTypes';
 import t from './traverse';
 
 function getLiteralValueFromPropertyAssignment(

@@ -1,0 +1,188 @@
+[
+  {
+    "name": "MyInterface",
+    "packageName": "docs",
+    "fileName": "/Users/nicholas.boll/projects/canvas-kit/modules/docs/docgen/fixtures/primitives.ts",
+    "description": "interface",
+    "fullComment": "interface",
+    "tags": {},
+    "typeInfo": {
+      "type": "object",
+      "properties": [
+        {
+          "type": "property",
+          "name": "foo",
+          "typeInfo": {
+            "type": "union",
+            "value": [
+              {
+                "type": "symbol",
+                "value": "MyUnion"
+              },
+              {
+                "type": "string",
+                "value": "baz"
+              }
+            ]
+          },
+          "description": "property",
+          "fullComment": "property",
+          "tags": {}
+        },
+        {
+          "type": "property",
+          "name": "bar",
+          "typeInfo": {
+            "type": "string",
+            "value": "foo"
+          },
+          "description": "",
+          "fullComment": "",
+          "tags": {}
+        },
+        {
+          "type": "property",
+          "name": "baz",
+          "typeInfo": {
+            "type": "union",
+            "value": [
+              {
+                "type": "string",
+                "value": "foo"
+              },
+              {
+                "type": "string",
+                "value": "bar"
+              }
+            ]
+          },
+          "description": "",
+          "fullComment": "",
+          "tags": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "myObject",
+    "packageName": "docs",
+    "fileName": "/Users/nicholas.boll/projects/canvas-kit/modules/docs/docgen/fixtures/primitives.ts",
+    "description": "",
+    "fullComment": "",
+    "tags": {},
+    "typeInfo": {
+      "type": "object",
+      "properties": [
+        {
+          "type": "property",
+          "name": "foo",
+          "typeInfo": {
+            "type": "string",
+            "value": "bar"
+          },
+          "description": "foo doc",
+          "fullComment": "foo doc",
+          "tags": {}
+        },
+        {
+          "type": "property",
+          "name": "bar",
+          "typeInfo": {
+            "type": "unknown",
+            "value": "unknown"
+          },
+          "description": "",
+          "fullComment": "",
+          "tags": {}
+        },
+        {
+          "type": "property",
+          "name": "baz",
+          "typeInfo": {
+            "type": "string",
+            "value": "bar"
+          },
+          "description": "",
+          "fullComment": "",
+          "tags": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "myObject2",
+    "packageName": "docs",
+    "fileName": "/Users/nicholas.boll/projects/canvas-kit/modules/docs/docgen/fixtures/primitives.ts",
+    "description": "",
+    "fullComment": "",
+    "tags": {},
+    "typeInfo": {
+      "type": "object",
+      "properties": [
+        {
+          "type": "property",
+          "name": "foo",
+          "typeInfo": {
+            "type": "union",
+            "value": [
+              {
+                "type": "symbol",
+                "value": "MyUnion"
+              },
+              {
+                "type": "string",
+                "value": "baz"
+              }
+            ]
+          },
+          "description": "property",
+          "fullComment": "property",
+          "tags": {}
+        },
+        {
+          "type": "property",
+          "name": "bar",
+          "typeInfo": {
+            "type": "string",
+            "value": "foo"
+          },
+          "description": "",
+          "fullComment": "",
+          "tags": {}
+        },
+        {
+          "type": "property",
+          "name": "baz",
+          "typeInfo": {
+            "type": "union",
+            "value": [
+              {
+                "type": "string",
+                "value": "foo"
+              },
+              {
+                "type": "string",
+                "value": "bar"
+              }
+            ]
+          },
+          "description": "",
+          "fullComment": "",
+          "tags": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "MyUnion",
+    "packageName": "docs",
+    "fileName": "/Users/nicholas.boll/projects/canvas-kit/modules/docs/docgen/fixtures/primitives.ts",
+    "description": "",
+    "fullComment": "",
+    "tags": {},
+    "typeInfo": {
+      "type": "unknown",
+      "value": "unknown"
+    }
+  }
+]
