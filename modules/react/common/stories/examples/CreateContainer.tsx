@@ -1,13 +1,5 @@
 import React from 'react';
-import {
-  createContainer,
-  createModelHook,
-  createSubcomponent,
-  createElemPropsHook,
-  useUniqueId,
-} from '@workday/canvas-kit-react/common';
-import {PrimaryButton, PrimaryButtonProps} from '@workday/canvas-kit-react/button';
-import {Box, BoxProps} from '@workday/canvas-kit-react/layout';
+import {createContainer, createModelHook, useUniqueId} from '@workday/canvas-kit-react/common';
 
 export type Visibility = 'hidden' | 'visible';
 
