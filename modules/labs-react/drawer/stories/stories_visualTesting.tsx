@@ -7,7 +7,7 @@ import {space} from '@workday/canvas-kit-react/tokens';
 import {DeprecatedDrawer, DeprecatedDrawerHeader, DeprecatedDrawerDirection} from '../index';
 
 export default withSnapshotsEnabled({
-  title: 'Labs/Drawer/Visual Testing',
+  title: 'Testing/Labs/Drawer',
   component: DeprecatedDrawer,
 });
 

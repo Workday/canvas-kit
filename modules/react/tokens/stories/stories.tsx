@@ -7,7 +7,7 @@ import {colors, type, depth, space, borderRadius} from '@workday/canvas-kit-reac
 import {Box, Flex} from '@workday/canvas-kit-react/layout';
 
 export default withSnapshotsEnabled({
-  title: 'Tokens/Tokens/React',
+  title: 'Tokens/Foundations',
   parameters: {ReadmePath: 'react/tokens'},
 });
 
