@@ -100,10 +100,10 @@ subcomponents. It is used internally by createContainer and createSubcomponents 
 to be referenced directly.
 
 Each subcomponent is tied to a model hook's context. For example, useModalModel extends
-usePopupModel, but <Modal> components point directly to <Popup> components. The contextOverride:
+usePopupModel, but `<Modal>` components point directly to `<Popup>` components. The contextOverride:
 usePopupModel.Context forces useModalModel's internal context to point to the same context reference
 as the one used in usePopupModel. This allows the model returned by useModalModel to be compatible
-with both <Modal> subcomponents and <Popup> subcomponents. If you do not override context, you must
+with both `<Modal>` subcomponents and `<Popup>` subcomponents. If you do not override context, you must
 create a new container and subcomponent for every component using the newly created model hook.
 
 ```tsx
