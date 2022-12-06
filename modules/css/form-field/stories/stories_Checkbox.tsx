@@ -3,7 +3,7 @@ import {storiesOf} from '@storybook/react';
 import '../index.scss';
 import '@workday/canvas-kit-css-checkbox/index.scss';
 
-storiesOf('CSS/Checkbox', module)
+storiesOf('Components/Inputs/Checkbox/CSS/Top Label/Checkbox', module)
   .addParameters({ReadmePath: 'css/checkbox'})
   .add('Default', () => (
     <div className="wdc-form">
@@ -77,7 +77,7 @@ storiesOf('CSS/Checkbox', module)
     </div>
   ));
 
-storiesOf('CSS/Checkbox/Left Label', module)
+storiesOf('Components/Inputs/Checkbox/CSS/Left Label/Checkbox', module)
   .addParameters({ReadmePath: 'css/checkbox'})
   .add('Default', () => (
     <div className="wdc-form wdc-form-label-position-left">
@@ -151,7 +151,7 @@ storiesOf('CSS/Checkbox/Left Label', module)
     </div>
   ));
 
-storiesOf('CSS/Checkbox/Checkbox Group/Top Label', module)
+storiesOf('Components/Inputs/Checkbox/CSS/Top Label/Checkbox Group', module)
   .addParameters({ReadmePath: 'css/checkbox'})
   .add('Default', () => (
     <div className="wdc-form">
@@ -267,7 +267,7 @@ storiesOf('CSS/Checkbox/Checkbox Group/Top Label', module)
     </div>
   ));
 
-storiesOf('CSS/Checkbox/Checkbox Group/Left Label', module)
+storiesOf('Components/Inputs/Checkbox/CSS/Left Label/Checkbox Group', module)
   .addParameters({ReadmePath: 'css/checkbox'})
   .add('Default', () => (
     <div className="wdc-form wdc-form-label-position-left">

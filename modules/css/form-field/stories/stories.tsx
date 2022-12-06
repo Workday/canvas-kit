@@ -2,7 +2,7 @@ import React from 'react';
 import {storiesOf} from '@storybook/react';
 import '../index.scss';
 
-storiesOf('CSS/Form Field', module)
+storiesOf('Components/Inputs/Form Field/CSS', module)
   .addParameters({ReadmePath: 'css/form-field'})
   .add('Label', () => (
     <div className="story">

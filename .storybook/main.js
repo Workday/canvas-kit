@@ -9,7 +9,7 @@ module.exports = {
   stories: [
     '../modules/docs/mdx/**/*.mdx',
     '../modules/**/*.stories.mdx',
-    // '../modules/**/stories*.@(js|jsx|ts|tsx)',
+    '../modules/**/stories*.@(js|jsx|ts|tsx)',
   ],
   addons: [
     {

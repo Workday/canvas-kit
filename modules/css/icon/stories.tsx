@@ -26,7 +26,7 @@ class IconDemo extends Component<React.PropsWithChildren> {
   }
 }
 
-storiesOf('CSS/Tokens', module)
+storiesOf('Tokens/Icon/CSS', module)
   .addParameters({ReadmePath: 'css/icon'})
   .add('Accent Icon', () => (
     <div className="story">

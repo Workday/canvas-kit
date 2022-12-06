@@ -2,7 +2,7 @@ import React from 'react';
 import '../index.scss';
 
 export default {
-  title: 'CSS/CountBadge',
+  title: 'Components/Indicators/Badge/CountBadge/CSS',
   parameters: {
     ReadmePath: 'css/badge',
   },

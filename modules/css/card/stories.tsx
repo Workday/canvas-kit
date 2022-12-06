@@ -2,7 +2,7 @@ import React from 'react';
 import {storiesOf} from '@storybook/react';
 import './index.scss';
 
-storiesOf('CSS/Card', module)
+storiesOf('Components/Containers/Card/CSS', module)
   .addParameters({ReadmePath: 'css/card'})
   .add('All', () => (
     <div className="story">

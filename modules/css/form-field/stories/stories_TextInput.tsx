@@ -3,7 +3,7 @@ import {storiesOf} from '@storybook/react';
 import '../index.scss';
 import '@workday/canvas-kit-css-text-input/index.scss';
 
-storiesOf('CSS/Text Input/Top Label', module)
+storiesOf('Components/Inputs/Text Input/CSS/Top Label', module)
   .addParameters({ReadmePath: 'css/text-input'})
   .add('Default', () => (
     <div className="wdc-form">
@@ -96,7 +96,7 @@ storiesOf('CSS/Text Input/Top Label', module)
     </div>
   ));
 
-storiesOf('/CSS/Text Input/Left Label', module)
+storiesOf('Components/Inputs/Text Input/CSS/Left Label', module)
   .addParameters({ReadmePath: 'css/text-input'})
   .add('Default', () => (
     <div className="wdc-form wdc-form-label-position-left">

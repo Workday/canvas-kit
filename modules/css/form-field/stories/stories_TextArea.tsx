@@ -3,7 +3,7 @@ import {storiesOf} from '@storybook/react';
 import '../index.scss';
 import '@workday/canvas-kit-css-text-area/index.scss';
 
-storiesOf('CSS/TextArea/Top Label', module)
+storiesOf('Components/Inputs/TextArea/CSS/Top Label', module)
   .addParameters({ReadmePath: 'css/text-area'})
   .add('Default', () => (
     <div className="wdc-form">
@@ -100,7 +100,7 @@ storiesOf('CSS/TextArea/Top Label', module)
     </div>
   ));
 
-storiesOf('CSS/TextArea/Left Label', module)
+storiesOf('Components/Inputs/TextArea/CSS/Left Label', module)
   .addParameters({ReadmePath: 'css/text-area'})
   .add('Default', () => (
     <div className="wdc-form wdc-form-label-position-left">
