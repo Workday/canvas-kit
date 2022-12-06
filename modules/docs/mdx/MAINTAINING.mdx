@@ -166,66 +166,76 @@ completed, the following will happen:
 - `prerelease/minor`: v5 -> v6
 - `prerelease/major`: v6 -> v7
 
-Before starting the next steps, make sure to fetch upstream.
+Before starting the next steps, we need to disable some CI jobs
+([Disabling Workflow Docs](https://docs.github.com/en/actions/managing-workflow-runs/disabling-and-enabling-a-workflow)).
+
+- [Canary](https://github.com/Workday/canvas-kit/actions/workflows/canary.yml)
+- [forward-merge](https://github.com/Workday/canvas-kit/actions/workflows/forward-merge.yml)
+- [Release](https://github.com/Workday/canvas-kit/actions/workflows/release.yml)
+
+These jobs will only cause problems during the release cycle. We will enable them when we're done.
+
+Locally, make sure to fetch upstream.
 
 ```sh
 git fetch upstream
 ```
 
-1. Update `support` to point to the current major version `master` is currently pointing to. We need
-   an empty commit with [no-release] to skip the normal release process on the support branch. If we
-   don't add this commit, the job will fail to create an npm version that is already published.
+1. Update `support` to point to the current major version `master` is currently pointing to. This
+   effectively moves the `HEAD` pointer of the `support` branch to the same `HEAD` of `master`
 
-```sh
-git checkout support
-git pull upstream support
-git pull upstream master
-git commit --allow-empty --no-verify -m "Bump support to next major version [skip release]"
-git push upstream support
-```
+   ```sh
+   git checkout master
+   git pull upstream master
+   git push upstream master:support
+   ```
 
-This will trigger a support release job that should skip publishing. We do not need to wait for this
-job.
+   Normally, this would trigger a release job, but we've disabled the job and there's nothing to
+   release anyway.
 
-2. Update `master` to point to the next major release `prerelease/major` is currently pointing to.
+1. Re-enable the [Release](https://github.com/Workday/canvas-kit/actions/workflows/release.yml) job
+   ([Enable Workflow Docs](https://docs.github.com/en/actions/managing-workflow-runs/disabling-and-enabling-a-workflow#enabling-a-workflow))
+
+1. Update `master` to point to the next major release `prerelease/major` is currently pointing to.
    This step produces the actual release, including a Slack message.
 
-```sh
-git checkout master
-git pull upstream master
-git pull upstream prerelease/major
-git push upstream master
-```
+   ```sh
+   git checkout prerelease/major
+   git pull upstream prerelease/major
+   git push upstream prerelease/major:master
+   ```
 
-This will trigger the
-[release workflow](https://github.com/Workday/canvas-kit/actions/workflows/release.yml). Up to this
-point, `prerelease/major` has been creating canary jobs. This will trigger the actual release. We
-must wait for this job to finish. The job will be running against `master`. The CI job will run
-`lerna bump` and push that commit back onto the `master` branch which will include the update to
-`lerna.json` that we need in the next step.
+   This will trigger the
+   [release workflow](https://github.com/Workday/canvas-kit/actions/workflows/release.yml). Up to
+   this point, `prerelease/major` has been creating canary jobs. This will trigger the actual
+   release. We must wait for this job to finish. The job will be running against `master`. The CI
+   job will run `lerna bump` and push that commit back onto the `master` branch which will include
+   the update to `lerna.json` that we need in the next step.
 
-3. Once the previous step is completed, we need to update `prerelease/minor` to point to the next
-   major release. After this step, any PRs against this branch will be correct.
+   **Note:** If something went wrong and a version is incorrect, you can cancel this release
+   workflow run and manually run it with a version override. For example, for the `v8.0.0` release,
+   a `lerna bump` command chose `v8.0.0` for a release version on a patch update and we had to
+   remove this release from npm. According to npm's release policy, they take down the release from
+   npm, but the version string can never be used again, so we the actual v8 release was `8.0.1`
 
-```sh
-git checkout prerelease/minor
-git pull upstream prerelease/minor
-git pull upstream master
-git commit --allow-empty --no-verify -m "Bump prerelease/minor to new major version [skip release]"
-git push upstream prerelease/minor
-```
+1. We need to wait for the release workflow job to finish and the slack message be announced. Once
+   the previous step is completed, we need to update `prerelease/minor` and `prerelease/major` to
+   point to the current `HEAD` of master (which should now contain the next major version release
+   commit).
 
-4. Now we need to update `prerelease/major` with the changes we made to `prerelease/minor` which
-   include the major release version bump. This will point the canary build to the next next major
-   version. For example, if `prerelease/major` was pointing to v6 before our release, it will now
-   point to v7.
+   ```sh
+    git checkout master
+    git pull upstream master
+    git push upstream master:prerelease/minor
+    git push upstream master:prerelease/major
+   ```
 
-```sh
-git checkout prerelease/major
-git pull upstream prerelease/major
-git pull upstream prerelease/minor
-git push upstream prerelease/major
-```
+1. Re-enable the [Canary](https://github.com/Workday/canvas-kit/actions/workflows/canary.yml) and
+   [forward-merge](https://github.com/Workday/canvas-kit/actions/workflows/forward-merge.yml)
+   workflows
+   ([Enable Workflow Docs](https://docs.github.com/en/actions/managing-workflow-runs/disabling-and-enabling-a-workflow#enabling-a-workflow))
+
+1. 🎉
 
 ### Canary Releases
 

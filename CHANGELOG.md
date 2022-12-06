@@ -3,6 +3,53 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v8.2.3](https://github.com/Workday/canvas-kit/releases/tag/v8.2.3) (2022-12-01)
+
+### Documentation
+
+- docs: Responsive Codeblock Fix ([#1937](https://github.com/Workday/canvas-kit/pull/1937)) ([@josh-bagwell](https://github.com/josh-bagwell))
+
+
+## [v8.2.2](https://github.com/Workday/canvas-kit/releases/tag/v8.2.2) (2022-11-22)
+
+### Documentation
+
+- docs: Update create compound component docs ([#1883](https://github.com/Workday/canvas-kit/pull/1883)) ([@NicholasBoll](https://github.com/NicholasBoll), [@jamesfan](https://github.com/jamesfan))
+
+
+## [v8.2.1](https://github.com/Workday/canvas-kit/releases/tag/v8.2.1) (2022-11-21)
+
+### Dependencies
+
+- fix: Allow installing Canvas Kit with React 16.14 ([#1917](https://github.com/Workday/canvas-kit/pull/1917)) ([@willklein](https://github.com/willklein))
+
+
+## [v8.2.0](https://github.com/Workday/canvas-kit/releases/tag/v8.2.0) (2022-11-18)
+
+### Documentation
+
+- fix: Made changes to docs for Tertiary button ([#1923](https://github.com/Workday/canvas-kit/pull/1923)) ([@mannycarrera4](https://github.com/mannycarrera4), [@josh-bagwell](https://github.com/josh-bagwell))
+
+
+## [v7.4.5](https://github.com/Workday/canvas-kit/releases/tag/v7.4.5) (2022-11-18)
+
+### Documentation
+
+- fix: Made changes to docs for Tertiary button ([#1923](https://github.com/Workday/canvas-kit/pull/1923)) ([@mannycarrera4](https://github.com/mannycarrera4), [@josh-bagwell](https://github.com/josh-bagwell))
+## [v8.1.2](https://github.com/Workday/canvas-kit/releases/tag/v8.1.2) (2022-11-17)
+
+### Components
+
+- fix: Make sure to use theme in modals ([#1900](https://github.com/Workday/canvas-kit/pull/1900)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v8.1.1](https://github.com/Workday/canvas-kit/releases/tag/v8.1.1) (2022-11-16)
+
+### Documentation
+
+- docs: Update major release documentation ([#1888](https://github.com/Workday/canvas-kit/pull/1888)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v8.1.0](https://github.com/Workday/canvas-kit/releases/tag/v8.1.0) (2022-11-14)
 
 ### Components
