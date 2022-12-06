@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v8.2.4](https://github.com/Workday/canvas-kit/releases/tag/v8.2.4) (2022-12-06)
+
+
+
+
+## [v8.2.3](https://github.com/Workday/canvas-kit/releases/tag/v8.2.3) (2022-12-01)
+
+### Documentation
+
+- docs: Responsive Codeblock Fix ([#1937](https://github.com/Workday/canvas-kit/pull/1937)) ([@josh-bagwell](https://github.com/josh-bagwell))
+
+
 ## [v8.2.2](https://github.com/Workday/canvas-kit/releases/tag/v8.2.2) (2022-11-22)
 
 ### Documentation
