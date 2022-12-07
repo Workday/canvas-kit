@@ -279,9 +279,9 @@ describe('Tooltip', () => {
     );
   });
 
-  context('given the [Testing/React/Popups/Tooltip, Non Interactive] example is rendered', () => {
+  context('given the [Testing/Popups/Tooltip, Non Interactive] example is rendered', () => {
     beforeEach(() => {
-      h.stories.load('Testing/React/Popups/Tooltip', 'Non Interactive');
+      h.stories.load('Testing/Popups/Tooltip', 'Non Interactive');
     });
 
     context('when the "Non-interactive Tooltip" text is hovered', () => {
@@ -304,9 +304,9 @@ describe('Tooltip', () => {
       });
     });
   });
-  context('given the [Testing/React/Popups/Tooltip, Overflow] example is rendered', () => {
+  context('given the [Testing/Popups/Tooltip, Overflow] example is rendered', () => {
     beforeEach(() => {
-      h.stories.load('Testing/React/Popups/Tooltip', 'Overflow');
+      h.stories.load('Testing/Popups/Tooltip', 'Overflow');
     });
 
     context('when the = button is hovered', () => {

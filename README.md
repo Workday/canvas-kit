@@ -1,10 +1,10 @@
-<!-- # Workday Canvas Kit
+# Workday Canvas Kit
 
 This project provides a set of components for the Workday Canvas Design System that can be used to
 implement user experiences consistent with
-[Workday's design principles](https://design.workday.com/). -->
+[Workday's design principles](https://design.workday.com/).
 
-<!-- <a href="./LICENSE">
+<a href="./LICENSE">
   <img src="https://img.shields.io/badge/license-Apache--2.0-blue.svg" alt="Workday Canvas Kit is released under the Apache-2.0 license" />
 </a>
 <a href="https://lerna.js.org">
@@ -15,12 +15,12 @@ implement user experiences consistent with
 </a>
 <a href="./modules/docs/mdx/CONTRIBUTING.mdx">
   <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs welcome" />
-</a> -->
+</a>
 
 ---
 
 
-<!-- ## Getting started
+## Getting started
 
 ### React
 
@@ -36,16 +36,16 @@ or
 
 ```sh
 npm install @workday/canvas-kit-react
-``` -->
+```
 
-<!-- **Usage**
+**Usage**
 
 ```tsx
 import * as React from 'react';
 import {SecondaryButton} from '@workday/canvas-kit-react';
 
 <SecondaryButton>Button Label</SecondaryButton>;
-``` -->
+```
 
 ### CSS
 

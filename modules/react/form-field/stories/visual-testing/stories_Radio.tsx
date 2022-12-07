@@ -14,7 +14,7 @@ const hintText = 'Helpful text goes here.';
 const hintId = 'error-desc-id';
 
 export default withSnapshotsEnabled({
-  title: 'Testing/React/Inputs/Radio',
+  title: 'Testing/Inputs/Radio',
   component: FormField,
 });
 

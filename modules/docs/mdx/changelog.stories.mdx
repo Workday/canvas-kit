@@ -1,7 +1,8 @@
 import {Meta} from '@storybook/addon-docs';
 import Changelog from '../../../CHANGELOG.md';
 import Markdown from '../../../utils/storybook/Markdown.tsx';
+import {version} from '../../../lerna.json';
 
-<Meta title="Changelog" />
+<Meta title="Changelog" parameters={{version: {major:'1', minor:'2', patch:'3'}}} />
 
 <Markdown content={Changelog} />

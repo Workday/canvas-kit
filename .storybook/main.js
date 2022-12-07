@@ -21,6 +21,7 @@ module.exports = {
     },
     './readme-panel/preset.js',
     '@storybook/addon-storysource',
+    'storybook-version',
   ],
   typescript: {
     check: false,

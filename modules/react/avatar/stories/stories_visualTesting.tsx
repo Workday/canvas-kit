@@ -14,7 +14,7 @@ import testAvatar from './test-avatar.png';
 const noop = () => {};
 
 export default withSnapshotsEnabled({
-  title: 'Testing/React/Indicators/Avatar',
+  title: 'Testing/Indicators/Avatar',
   component: Avatar,
   parameters: {
     chromatic: {

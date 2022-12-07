@@ -160,9 +160,9 @@ describe('Modal', () => {
     });
   });
 
-  context(`given the [Testing/React/Popups/Modal, With Tooltips] story is rendered`, () => {
+  context(`given the [Testing/Popups/Modal, With Tooltips] story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Testing/React/Popups/Modal', 'With Tooltips');
+      h.stories.load('Testing/Popups/Modal', 'With Tooltips');
     });
 
     context('when the modal is open', () => {
@@ -282,9 +282,9 @@ describe('Modal', () => {
     });
   });
 
-  context(`given the [Testing/React/Popups/Modal, With Radio buttons] story is rendered`, () => {
+  context(`given the [Testing/Popups/Modal, With Radio buttons] story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Testing/React/Popups/Modal', 'With Radio buttons');
+      h.stories.load('Testing/Popups/Modal', 'With Radio buttons');
     });
 
     it('should not have any axe errors', () => {
@@ -545,9 +545,9 @@ describe('Modal', () => {
     });
   });
 
-  context(`given the [Testing/React/Popups/Modal, StackedModals] story is rendered`, () => {
+  context(`given the [Testing/Popups/Modal, StackedModals] story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Testing/React/Popups/Modal', 'StackedModals');
+      h.stories.load('Testing/Popups/Modal', 'StackedModals');
     });
 
     context('when both modals are opened', () => {
@@ -592,9 +592,9 @@ describe('Modal', () => {
     });
   });
 
-  context(`given the [Testing/React/Popups/Modal, ModalWithPopup] story is rendered`, () => {
+  context(`given the [Testing/Popups/Modal, ModalWithPopup] story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Testing/React/Popups/Modal', 'ModalWithPopup');
+      h.stories.load('Testing/Popups/Modal', 'ModalWithPopup');
     });
 
     context('when both modal and popup are opened', () => {
@@ -656,7 +656,7 @@ describe('Modal', () => {
 
   context(`given the 'Iframe Test' story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Testing/React/Popups/Modal', 'Iframe Test');
+      h.stories.load('Testing/Popups/Modal', 'Iframe Test');
     });
 
     context('when the modal is opened', () => {

@@ -6,7 +6,7 @@ import {withSnapshotsEnabled} from '../../../../utils/storybook';
 import {CountBadge} from '../index';
 
 export default withSnapshotsEnabled({
-  title: 'Testing/React/Indicators/Badge/CountBadge',
+  title: 'Testing/Indicators/Badge/CountBadge',
   component: CountBadge,
   parameters: {
     ReadmePath: 'react/badge',

@@ -229,7 +229,7 @@ describe('ColorPicker', () => {
 
   context('when the InputInteraction story is loaded', () => {
     beforeEach(() => {
-      h.stories.load('Testing/React/Preview/Color Picker', 'InputInteraction');
+      h.stories.load('Testing/Preview/Color Picker', 'InputInteraction');
     });
 
     context('when input is entered into the color input and user hits enter', () => {

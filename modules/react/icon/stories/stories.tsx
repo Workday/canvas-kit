@@ -19,7 +19,7 @@ const graphicExample: CanvasGraphic = {
   tags: [],
 };
 
-storiesOf('Assets/Icon', module)
+storiesOf('Tokens/Icon', module)
   .addParameters({component: AccentIcon})
   .addParameters({ReadmePath: 'react/icon'})
   .add('Accent Icon', () => (
@@ -41,7 +41,7 @@ storiesOf('Assets/Icon', module)
     </div>
   ));
 
-storiesOf('Assets/Icon', module)
+storiesOf('Tokens/Icon', module)
   .addParameters({component: AppletIcon})
   .add('Applet Icon', () => (
     <div className="story">
@@ -53,7 +53,7 @@ storiesOf('Assets/Icon', module)
     </div>
   ));
 const ImportedSystemIcons = Object.keys(SystemIcons);
-storiesOf('Assets/Icon', module)
+storiesOf('Tokens/Icon', module)
   .addParameters({component: SystemIcon})
   .add('System Icon', () => (
     <div className="story">
@@ -122,7 +122,7 @@ storiesOf('Assets/Icon', module)
     </div>
   ));
 
-storiesOf('Assets/Icon', module)
+storiesOf('Tokens/Icon', module)
   .addParameters({component: Graphic})
   .add('Graphic', () => (
     <div className="story">

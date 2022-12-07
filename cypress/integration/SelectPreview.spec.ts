@@ -443,7 +443,7 @@ describe('Select', () => {
 
   context('given the "Disabled Options Test" story is rendered', () => {
     beforeEach(() => {
-      h.stories.load('Testing/React/Preview/Select/Cypress', 'Disabled Options Test');
+      h.stories.load('Testing/Preview/Select/Cypress', 'Disabled Options Test');
     });
 
     context('when the menu is opened', () => {
@@ -883,7 +883,7 @@ describe('Select', () => {
 
   context(`given the "Portal Test" story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Testing/React/Preview/Select/Cypress', 'Portal Test');
+      h.stories.load('Testing/Preview/Select/Cypress', 'Portal Test');
     });
 
     context('when the page is scrolled to the bottom', () => {
@@ -930,7 +930,7 @@ describe('Select', () => {
 
   context(`given the "Accessibility Test" story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Testing/React/Preview/Select/Cypress', 'Accessibility Test');
+      h.stories.load('Testing/Preview/Select/Cypress', 'Accessibility Test');
     });
 
     context('when the select button with aria-required set to true is clicked', () => {

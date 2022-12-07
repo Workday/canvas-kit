@@ -12,7 +12,7 @@ import {Modal} from '@workday/canvas-kit-react/modal';
 import {HStack} from '@workday/canvas-kit-react/layout';
 
 export default {
-  title: 'Testing/React/Preview/Select/Cypress',
+  title: 'Testing/Preview/Select/Cypress',
   component: Select,
 };
 
