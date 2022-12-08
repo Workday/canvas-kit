@@ -40,24 +40,19 @@ export const WelcomePage = () => {
         This project provides a set of components for the Workday Canvas Design System that can be
         used to implement user experiences consistent with Workday Design Principles.
       </Text>
-
       <Heading size="medium" borderBottom={`1px solid ${colors.blueberry200}`} paddingBottom="xxs">
         Quick Links
       </Heading>
       <Grid
         gridAutoColumns="auto"
         gridTemplateColumns="repeat(auto-fill, minmax(250px, 1fr))"
-
         gridGap="s"
       >
-        <Grid as={Card} gridTemplateRows='1fr 1fr 2fr 1fr' depth="none" display='grid' >
+        <Grid as={Card} gridTemplateRows="1fr 1fr 2fr 1fr" depth="none" display="grid">
           <SystemIcon color={colors.cantaloupe400} icon={rocketIcon} size={60}></SystemIcon>
           <Card.Heading>Getting Started</Card.Heading>
           <Card.Body>
-            <Text>
-              For all things getting started including helpful guides and docs.
-            </Text>
-
+            <Text>For all things getting started including helpful guides and docs.</Text>
           </Card.Body>
           <Grid.Item
             as={Hyperlink}
@@ -69,14 +64,14 @@ export const WelcomePage = () => {
             Getting Started Guide
           </Grid.Item>
         </Grid>
-        <Grid as={Card} gridTemplateRows='1fr 1fr 2fr 1fr' depth="none" display='grid' >
+        <Grid as={Card} gridTemplateRows="1fr 1fr 2fr 1fr" depth="none" display="grid">
           <SystemIcon color={colors.blueberry400} icon={tokensIcon} size={60}></SystemIcon>
           <Card.Heading>Tokens</Card.Heading>
           <Card.Body>
             <Text>
-              Tokens are the smallest pieces of our Design System with the primary function of storing UI information.
+              Tokens are the smallest pieces of our Design System with the primary function of
+              storing UI information.
             </Text>
-
           </Card.Body>
           <Grid.Item
             alignSelf="end"
@@ -88,20 +83,20 @@ export const WelcomePage = () => {
             View Our Tokens
           </Grid.Item>
         </Grid>
-        <Grid as={Card} gridTemplateRows='1fr 1fr 2fr 1fr' depth="none" display='grid' >
+        <Grid as={Card} gridTemplateRows="1fr 1fr 2fr 1fr" depth="none" display="grid">
           <SystemIcon color={colors.greenApple400} icon={shapesIcon} size={60}></SystemIcon>
           <Card.Heading>Assets</Card.Heading>
           <Card.Body>
             <Text>
-            Assets are graphics which help communicate meaning or highlight areas of interaction to our users.
+              Assets are graphics which help communicate meaning or highlight areas of interaction
+              to our users.
             </Text>
-
           </Card.Body>
           <Grid.Item
             as={Hyperlink}
             alignSelf="end"
             marginTop="xs"
-            href="?path=/docs/guides-creating-compound-components--page"
+            href="/?path=/docs/assets-icons--icon-list"
           >
             {' '}
             View Assets
