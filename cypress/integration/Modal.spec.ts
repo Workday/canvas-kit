@@ -6,9 +6,9 @@ describe('Modal', () => {
   });
 
   ['Basic'].forEach(story => {
-    context(`given the [Components/Popups/Modal/React, ${story}] story is rendered`, () => {
+    context(`given the [Components/Popups/Modal, ${story}] story is rendered`, () => {
       beforeEach(() => {
-        h.stories.load('Components/Popups/Modal/React', story);
+        h.stories.load('Components/Popups/Modal', story);
       });
 
       it('should not have any axe errors', () => {
@@ -310,9 +310,9 @@ describe('Modal', () => {
     });
   });
 
-  context(`given the [Components/Popups/Modal/React, Without close icon] story is rendered`, () => {
+  context(`given the [Components/Popups/Modal, Without close icon] story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Components/Popups/Modal/React', 'Without close icon');
+      h.stories.load('Components/Popups/Modal', 'Without close icon');
     });
 
     it('should not have any axe errors', () => {
@@ -441,9 +441,9 @@ describe('Modal', () => {
     });
   });
 
-  context(`given the [Components/Popups/Modal/React, Custom focus] story is rendered`, () => {
+  context(`given the [Components/Popups/Modal, Custom focus] story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Components/Popups/Modal/React', 'Custom focus');
+      h.stories.load('Components/Popups/Modal', 'Custom focus');
     });
 
     context('when button is focused', () => {
@@ -623,9 +623,9 @@ describe('Modal', () => {
     });
   });
 
-  context(`given the [Components/Popups/Modal/React, CustomTarget] example is rendered`, () => {
+  context(`given the [Components/Popups/Modal, CustomTarget] example is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Components/Popups/Modal/React', 'CustomTarget');
+      h.stories.load('Components/Popups/Modal', 'CustomTarget');
     });
 
     context('when the "Open" button is clicked', () => {

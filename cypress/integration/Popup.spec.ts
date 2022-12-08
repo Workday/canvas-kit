@@ -5,9 +5,9 @@ describe('Popup', () => {
     h.stories.visit();
   });
 
-  context(`given the [Components/Popups/Popup/React, Basic] example is rendered`, () => {
+  context(`given the [Components/Popups/Popup, Basic] example is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Components/Popups/Popup/React', 'Basic');
+      h.stories.load('Components/Popups/Popup', 'Basic');
     });
 
     context('when the "Delete Item" button is clicked', () => {
@@ -71,9 +71,9 @@ describe('Popup', () => {
     });
   });
 
-  context('given the [Components/Popups/Popup/React, MultiplePopups] example is rendered', () => {
+  context('given the [Components/Popups/Popup, MultiplePopups] example is rendered', () => {
     beforeEach(() => {
-      h.stories.load('Components/Popups/Popup/React', 'MultiplePopups');
+      h.stories.load('Components/Popups/Popup', 'MultiplePopups');
     });
 
     context('when Open Popup 1 button is clicked', () => {
@@ -328,9 +328,9 @@ describe('Popup', () => {
     });
   });
 
-  context(`given the [Components/Popups/Popup/React, CustomTarget] example is rendered`, () => {
+  context(`given the [Components/Popups/Popup, CustomTarget] example is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Components/Popups/Popup/React', 'CustomTarget');
+      h.stories.load('Components/Popups/Popup', 'CustomTarget');
     });
 
     context('when the "Open" button is clicked', () => {
@@ -358,9 +358,9 @@ describe('Popup', () => {
     });
   });
 
-  context('given the [Components/Popups/Popup/React, FocusRedirect] example is rendered', () => {
+  context('given the [Components/Popups/Popup, FocusRedirect] example is rendered', () => {
     beforeEach(() => {
-      h.stories.load('Components/Popups/Popup/React', 'FocusRedirect');
+      h.stories.load('Components/Popups/Popup', 'FocusRedirect');
     });
 
     context('when the "Delete Item" button is clicked', () => {

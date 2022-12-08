@@ -11,7 +11,7 @@ describe('Checkbox', () => {
   ['Basic', 'Alert', 'Error'].forEach(story => {
     context(`given the '${story}' story is rendered`, () => {
       beforeEach(() => {
-        h.stories.load('Components/Inputs/Checkbox/React', story);
+        h.stories.load('Components/Inputs/Checkbox', story);
       });
 
       it('should not have any axe errors', () => {
@@ -32,7 +32,7 @@ describe('Checkbox', () => {
 
   context(`given the 'Disabled' story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Components/Inputs/Checkbox/React', 'Disabled');
+      h.stories.load('Components/Inputs/Checkbox', 'Disabled');
     });
 
     it('should not have any axe errors', () => {

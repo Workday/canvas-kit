@@ -5,9 +5,9 @@ describe('Tooltip', () => {
     h.stories.visit();
   });
 
-  context('given the [Components/Popups/Tooltip/React, DefaultStory] example is rendered', () => {
+  context('given the [Components/Popups/Tooltip, DefaultStory] example is rendered', () => {
     beforeEach(() => {
-      h.stories.load('Components/Popups/Tooltip/React', 'DefaultStory'); // Default gets converted to Default Story in MDX
+      h.stories.load('Components/Popups/Tooltip', 'DefaultStory'); // Default gets converted to Default Story in MDX
     });
 
     it('should not have any axe-core errors', () => {
@@ -110,9 +110,9 @@ describe('Tooltip', () => {
     });
   });
 
-  context('given the [Components/Popups/Tooltip/React, Describe Type] example is rendered', () => {
+  context('given the [Components/Popups/Tooltip, Describe Type] example is rendered', () => {
     beforeEach(() => {
-      h.stories.load('Components/Popups/Tooltip/React', 'Describe Type');
+      h.stories.load('Components/Popups/Tooltip', 'Describe Type');
     });
 
     it('should not have any axe-core errors', () => {
@@ -145,9 +145,9 @@ describe('Tooltip', () => {
     });
   });
 
-  context('given the [Components/Popups/Tooltip/React, Muted] example is rendered', () => {
+  context('given the [Components/Popups/Tooltip, Muted] example is rendered', () => {
     beforeEach(() => {
-      h.stories.load('Components/Popups/Tooltip/React', 'Muted');
+      h.stories.load('Components/Popups/Tooltip', 'Muted');
     });
 
     it('should not have any axe-core errors', () => {
@@ -185,9 +185,9 @@ describe('Tooltip', () => {
     });
   });
 
-  context('given the [Components/Popups/Tooltip/React, Ellipsis] example is rendered', () => {
+  context('given the [Components/Popups/Tooltip, Ellipsis] example is rendered', () => {
     beforeEach(() => {
-      h.stories.load('Components/Popups/Tooltip/React', 'Ellipsis');
+      h.stories.load('Components/Popups/Tooltip', 'Ellipsis');
     });
 
     it('should not have any axe-core errors', () => {

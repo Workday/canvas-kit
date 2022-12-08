@@ -6,9 +6,9 @@ describe('Banner', () => {
   });
 
   ['Error', 'Sticky'].forEach(story => {
-    context(`given the [Components/Indicators/Banner/React, ${story}] story is rendered`, () => {
+    context(`given the [Components/Indicators/Banner, ${story}] story is rendered`, () => {
       beforeEach(() => {
-        h.stories.load('Components/Indicators/Banner/React', story);
+        h.stories.load('Components/Indicators/Banner', story);
       });
 
       it('should pass axe checks', () => {

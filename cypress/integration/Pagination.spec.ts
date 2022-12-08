@@ -7,7 +7,7 @@ describe('Pagination', () => {
 
   context('given the Jump Controls story is rendered', () => {
     beforeEach(() => {
-      h.stories.load('Components/Navigation/Pagination/React', 'Jump Controls');
+      h.stories.load('Components/Navigation/Pagination', 'Jump Controls');
     });
 
     it('should not have any axe errors', () => {
@@ -284,7 +284,7 @@ describe('Pagination', () => {
 
   context('given the Custom Range story is rendered', () => {
     beforeEach(() => {
-      h.stories.load('Components/Navigation/Pagination/React', 'Custom Range');
+      h.stories.load('Components/Navigation/Pagination', 'Custom Range');
     });
 
     it('should not have any axe errors', () => {
@@ -302,7 +302,7 @@ describe('Pagination', () => {
 
   context('given the GoTo Form story is rendered', () => {
     beforeEach(() => {
-      h.stories.load('Components/Navigation/Pagination/React', 'Go To Form');
+      h.stories.load('Components/Navigation/Pagination', 'Go To Form');
     });
 
     it('should not have any axe errors', () => {
