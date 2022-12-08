@@ -2,12 +2,11 @@ import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import {shieldIcon} from '@workday/canvas-accent-icons-web';
 import {benefitsIcon} from '@workday/canvas-applet-icons-web';
-import * as SystemIcons from '@workday/canvas-system-icons-web';
-import {Card} from '@workday/canvas-kit-react/card';
 import {CanvasGraphic, CanvasIconTypes} from '@workday/design-assets-types';
 
 import {colors} from '@workday/canvas-kit-react/tokens';
 import {AccentIcon, AppletIcon, SystemIcon, SystemIconCircle, Graphic} from '../index';
+import {activityStreamIcon} from '@workday/canvas-system-icons-web';
 
 const graphicExample: CanvasGraphic = {
   name: 'badgeAchievement',
@@ -52,37 +51,12 @@ storiesOf('Tokens/Icon', module)
       <AppletIcon icon={benefitsIcon} size={60} shouldMirror={true} />
     </div>
   ));
-const ImportedSystemIcons = Object.keys(SystemIcons);
+
 storiesOf('Tokens/Icon', module)
   .addParameters({component: SystemIcon})
   .add('System Icon', () => (
     <div className="story">
-      {ImportedSystemIcons.map(key => {
-        // @ts-ignore
-        const icon: CanvasSystemIcon = SystemIcons[key];
-        return icon.svg ? (
-          <Card
-            display="inline-flex"
-            width={210}
-            // style={{
-            //   display: 'inline-flex',
-            //   margin: '8px',
-            //   width: 200,
-            //   justifyContent: 'center',
-            // }}
-            key={icon.name}
-          >
-            <Card.Body display="flex">
-              <div>
-                <SystemIcon icon={icon} />
-
-                <p style={{marginBottom: 0}}>{icon.name}Icon</p>
-              </div>
-            </Card.Body>
-          </Card>
-        ) : null;
-      })}
-      {/* <SystemIcon icon={activityStreamIcon} />
+      <SystemIcon icon={activityStreamIcon} />
       <SystemIcon icon={activityStreamIcon} color={colors.blueberry500} />
       <SystemIcon
         className="custom-class"
@@ -118,7 +92,7 @@ storiesOf('Tokens/Icon', module)
         icon={activityStreamIcon}
         background={colors.blueberry400}
         shouldMirror={true}
-      /> */}
+      />
     </div>
   ));
 

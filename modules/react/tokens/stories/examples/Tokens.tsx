@@ -1,15 +1,15 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import {withSnapshotsEnabled} from '../../../../utils/storybook';
+// import {withSnapshotsEnabled} from '../../../../../utils/storybook';
 import {pickForegroundColor, StyledType} from '@workday/canvas-kit-react/common';
 
 import {colors, type, depth, space, borderRadius} from '@workday/canvas-kit-react/tokens';
 import {Box, Flex} from '@workday/canvas-kit-react/layout';
 
-export default withSnapshotsEnabled({
-  title: 'Tokens',
-  parameters: {ReadmePath: 'react/tokens'},
-});
+// export default withSnapshotsEnabled({
+//   title: 'Tokens',
+//   parameters: {ReadmePath: 'react/tokens'},
+// });
 
 const StyledCard = styled(Box)<StyledType>({
   width: 200,

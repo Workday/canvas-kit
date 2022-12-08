@@ -1,7 +1,6 @@
 import {DocsPage, DocsContainer} from '@storybook/addon-docs';
 import 'cypress-storybook/react';
 import routes from './routes';
-import {version} from '../lerna.json';
 
 import {CanvasProviderDecorator} from '../utils/storybook';
 import theme from './theme';
@@ -16,12 +15,11 @@ const prefix = (phrase, prefix) => (/** @type {string} */ value) => {
   return index > -1 ? value.substr(0, index) + prefix + value.substr(index) : value;
 };
 const pipe = (...fns) => value => fns.reduce((result, fn) => fn(result), value);
-// Ensure the version title is always first
-const configuredVersion = version.split('.').join('-');
 function storySort(a, b) {
   const prefixFn = pipe(
     prefix('welcome-', '0'),
     prefix('guides-', '1'),
+    prefix('guides-getting-started', '1'),
     prefix('features-', '2'),
     prefix('tokens-', '3'),
     prefix('components-', '4'),
