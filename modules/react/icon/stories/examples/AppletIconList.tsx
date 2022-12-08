@@ -1,13 +1,14 @@
 import React from 'react';
-import * as CanvasIcons from '@workday/canvas-system-icons-web';
+import * as CanvasAppletIcons from '@workday/canvas-applet-icons-web';
 import {Box, Flex} from '@workday/canvas-kit-react/layout';
-import {SystemIcon} from '@workday/canvas-kit-react/icon';
+import {AppletIcon} from '@workday/canvas-kit-react/icon';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 
-const ImportedIcons = Object.keys(CanvasIcons);
+const ImportedIcons = Object.keys(CanvasAppletIcons);
 
-const allIcons = ImportedIcons.filter(icon => icon !== 'CanvasSystemIcons');
-export const IconList = () => {
+const allIcons = ImportedIcons.filter(icon => icon !== 'CanvasAppletIcons');
+
+export const AppletIconList = () => {
   const [value, setValue] = React.useState('');
 
   const handleSearch = (e: any) => {
@@ -37,7 +38,7 @@ export const IconList = () => {
                 key={index}
               >
                 <Box>
-                  <SystemIcon icon={CanvasIcons[singleIcon]} />
+                  <AppletIcon icon={CanvasAppletIcons[singleIcon]} />
                 </Box>
                 <Box>{singleIcon}</Box>
               </Flex>
