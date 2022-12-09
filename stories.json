@@ -6426,6 +6426,20 @@
         "__isArgsStory": false
       }
     },
+    "labs-expandable-react--hoisted-model": {
+      "id": "labs-expandable-react--hoisted-model",
+      "name": "Hoisted Model",
+      "title": "Labs/Expandable/React",
+      "importPath": "./modules/labs-react/expandable/stories/Expandable.stories.mdx",
+      "kind": "Labs/Expandable/React",
+      "story": "Hoisted Model",
+      "parameters": {
+        "fileName": "./modules/labs-react/expandable/stories/Expandable.stories.mdx",
+        "framework": "react",
+        "__id": "labs-expandable-react--hoisted-model",
+        "__isArgsStory": false
+      }
+    },
     "labs-expandable-react--long-title": {
       "id": "labs-expandable-react--long-title",
       "name": "Long Title",
