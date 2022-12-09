@@ -1,4 +1,5 @@
 import React from 'react';
+// @ts-ignore next-line
 import headerImage from './storybook-welcome-header.png';
 import {Flex, Grid, Box} from '@workday/canvas-kit-react/layout';
 import {InstallBlock} from './installBlock';
@@ -8,6 +9,7 @@ import {Hyperlink} from '@workday/canvas-kit-react/button';
 import {colors} from '@workday/canvas-kit-react/tokens';
 import {rocketIcon, tokensIcon, shapesIcon} from '@workday/canvas-system-icons-web';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
+// @ts-ignore next-line
 import {version} from '.../../../lerna.json';
 
 export const WelcomePage = () => {
