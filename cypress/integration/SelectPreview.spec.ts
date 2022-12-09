@@ -43,7 +43,7 @@ describe('Select', () => {
   ['Default', 'Alert', 'Error'].forEach(story => {
     context(`given the "${story}" story is rendered`, () => {
       beforeEach(() => {
-        h.stories.load('Preview/Select/React/Top Label', story);
+        h.stories.load('Preview/Select/Top Label', story);
       });
 
       it('should not have any axe errors', () => {
@@ -339,7 +339,7 @@ describe('Select', () => {
 
   context(`given the "Default" story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Preview/Select/React/Top Label', 'Default');
+      h.stories.load('Preview/Select/Top Label', 'Default');
     });
 
     context('when the menu is opened', () => {
@@ -427,7 +427,7 @@ describe('Select', () => {
 
   context(`given the "Disabled" story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Preview/Select/React/Top Label', 'Disabled');
+      h.stories.load('Preview/Select/Top Label', 'Disabled');
     });
 
     it('should not have any axe errors', () => {
@@ -555,7 +555,7 @@ describe('Select', () => {
 
   context(`given the "Scrollable" story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Preview/Select/React/Top Label', 'Scrollable');
+      h.stories.load('Preview/Select/Top Label', 'Scrollable');
     });
 
     context('when the select button is focused', () => {
