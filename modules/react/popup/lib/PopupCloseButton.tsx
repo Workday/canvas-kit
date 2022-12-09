@@ -14,5 +14,9 @@ export const PopupCloseButton = createSubcomponent(SecondaryButton)({
   modelHook: usePopupModel,
   elemPropsHook: usePopupCloseButton,
 })<PopupCloseButtonProps>(({children, ...elemProps}: PopupCloseButtonProps, Element) => {
-  return <Element {...elemProps}>{children}</Element>;
+  return (
+    <Element type="button" {...elemProps}>
+      {children}
+    </Element>
+  );
 });

@@ -1,9 +1,8 @@
 import React from 'react';
 import {colors} from '@workday/canvas-kit-react/tokens';
-import {StaticStates} from '@workday/canvas-kit-react/common';
-import {ComponentStatesTable} from '@workday/canvas-kit-labs-react/common';
+import {StaticStates, ComponentStatesTable} from '@workday/canvas-kit-react/testing';
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
-import ColorPicker from '../lib/ColorPicker';
+import {ColorPicker} from '../lib/ColorPicker';
 
 export default {
   title: 'Testing/React/Preview/Color Picker',

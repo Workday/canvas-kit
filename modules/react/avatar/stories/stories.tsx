@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 
-import Avatar from '../index';
+import {Avatar} from '../index';
 // @ts-ignore: Cannot find module error
 import testAvatar from './test-avatar.png';
 
