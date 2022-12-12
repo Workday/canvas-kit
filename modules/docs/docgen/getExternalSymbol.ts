@@ -5,6 +5,7 @@ const externalSymbols: Record<string, string> = {
   Array: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array',
   Object: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object',
   Record: 'https://www.typescriptlang.org/docs/handbook/utility-types.html#recordkeys-type',
+  'React.ReactElement': 'https://reactjs.org/docs/rendering-elements.html'
 };
 
 export function getExternalSymbol(key: string): string | undefined {

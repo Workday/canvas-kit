@@ -22,8 +22,8 @@ function isNodeExported(node: ts.Node): boolean {
 
 const defaultJSDoc: JSDoc = {
   description: '',
-  fullComment: '',
   tags: {},
+  declarations: [],
 };
 
 function formatTag(tag: ts.JSDocTagInfo) {
@@ -49,7 +49,6 @@ function getFullJsDocComment(checker: ts.TypeChecker, symbol: ts.Symbol) {
 
   const tags = symbol.getJsDocTags() || [];
 
-  const tagComments: string[] = [];
   const tagMap: Record<string, string> = {};
 
   tags.forEach(tag => {
@@ -57,15 +56,14 @@ function getFullJsDocComment(checker: ts.TypeChecker, symbol: ts.Symbol) {
     const trimmedText = (tag.text || '').trim(); //?
     const currentValue = tagMap[tag.name];
     tagMap[tag.name] = currentValue ? currentValue + '\n' + trimmedText : trimmedText;
-    tag.name; //?
-    if (!['default', 'type'].includes(tag.name)) {
-      tagComments.push(formatTag(tag));
-    }
   });
 
   return {
     description: mainComment,
-    fullComment: (mainComment + '\n' + tagComments.join('\n')).trim(),
+    declarations: (symbol?.declarations ?? []).map(d => ({
+      name: symbol?.name || '',
+      filePath: d.getSourceFile().fileName,
+    })),
     tags: tagMap,
   };
 }
@@ -73,7 +71,7 @@ function getFullJsDocComment(checker: ts.TypeChecker, symbol: ts.Symbol) {
 function findDocComment(checker: ts.TypeChecker, symbol?: ts.Symbol): JSDoc {
   if (symbol) {
     const comment = getFullJsDocComment(checker, symbol);
-    if (comment.fullComment || comment.tags.default) {
+    if (comment.description || comment.tags.default) {
       return comment;
     }
 
@@ -81,7 +79,7 @@ function findDocComment(checker: ts.TypeChecker, symbol?: ts.Symbol): JSDoc {
     const commentsOnRootSymbols = rootSymbols
       .filter(x => x !== symbol)
       .map(x => getFullJsDocComment(checker, x))
-      .filter(x => !!x.fullComment || !!comment.tags.default);
+      .filter(x => !!x.description || !!comment.tags.default);
 
     if (commentsOnRootSymbols.length) {
       return commentsOnRootSymbols[0];
@@ -459,6 +457,9 @@ function getTypeValueFromNode(checker: ts.TypeChecker, node: ts.Node): Value {
   }
 
   if (t.isTypeQuery(node)) {
+    if (isExportedSymbol(checker, node.exprName)) {
+      return {kind: 'symbol', name: node.exprName.getText()};
+    }
     const symbol = getSymbolFromNode(checker, node.exprName);
     if (symbol) {
       symbol.name; //?
@@ -542,10 +543,6 @@ function getTypeValueFromNode(checker: ts.TypeChecker, node: ts.Node): Value {
       name: symbol?.name || '',
       defaultValue: node.initializer ? getTypeValueFromNode(checker, node.initializer) : undefined,
       typeInfo,
-      declarations: (symbol?.declarations ?? []).map(d => ({
-        name: d.getText(),
-        filePath: d.getSourceFile().fileName,
-      })),
       required: isRequired,
       ...jsDoc,
     };
@@ -590,7 +587,7 @@ export function findDocs(program: ts.Program, fileName: string): ExportedSymbol[
         name: symbol.name,
         packageName: getPackageName(fileName),
         fileName,
-        ...getFullJsDocComment(checker, symbol),
+        ...findDocComment(checker, symbol),
         typeInfo: getTypeValueFromNode(checker, node),
       });
     }

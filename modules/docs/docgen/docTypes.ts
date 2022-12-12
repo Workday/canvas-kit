@@ -1,7 +1,12 @@
 export interface JSDoc {
   description: string;
-  fullComment: string;
   tags: Record<string, string>;
+  declarations: Declaration[];
+}
+
+export interface Declaration {
+  name: string;
+  filePath: string;
 }
 
 /** Object parameters are used in function parameters, component props, and model config */

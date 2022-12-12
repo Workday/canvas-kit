@@ -213,8 +213,8 @@ describe('extractDocs', () => {
       expect(docs).toHaveProperty('0.typeInfo.properties.0.name', 'foo');
       expect(docs).toHaveProperty('0.typeInfo.properties.0.kind', 'member');
       expect(docs).toHaveProperty('0.typeInfo.properties.0.typeInfo', {
-        kind: 'string',
-        value: 'baz',
+        kind: 'symbol',
+        value: 'bar',
       });
     });
 
