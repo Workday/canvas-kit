@@ -21,8 +21,7 @@ import {
 
 # Canvas Kit Segmented Control
 
-Segmented Control is a
-[compound component](/getting-started/for-developers/resources/compound-components/) that represents
+Segmented Control is a [compound component](/story/guides-compound-components--page) that represents
 a linear group of multiple buttons allowing the selection of a specific value.
 
 [> Workday Design Reference](https://design.workday.com/components/buttons/segmented-control)
@@ -109,8 +108,7 @@ Set the `disabled` prop of `SegmentedControl` to disable the entire component in
 
 ### Dynamic Items
 
-`SegmentedControl` supports a
-[dynamic API](/getting-started/for-developers/resources/collection-api/#dynamic-items) where instead
+`SegmentedControl` supports a [dynamic API](/docs/features-collections--dynamic-items) where instead
 of statically providing the JSX for each `SegmentedControl.Item`, you pass an array of `items` in
 the `model` state and provide a render function to display the items.
 
@@ -131,7 +129,7 @@ represent a real element.
 ```
 
 Alternatively, you may pass in a model using the
-[hoisted model pattern](/getting-started/for-developers/resources/compound-components/#configuring-a-model).
+[hoisted model pattern](/docs/guides-compound-components--page#configuring-a-model).
 
 ```tsx
 const model = useSegmentedControlModel({
@@ -186,15 +184,15 @@ Undocumented props are spread to the underlying `BaseButton`.
 ## Model
 
 If `SegmentedControl` was stripped of all its markup, attributes, and styling, what would remain is
-the [model](/getting-started/for-developers/resources/compound-components/#models). The model is an
-object composed of two parts: `state` which describes the current snapshot in time of the component
-and `events` which describes events that can be sent to the model.
+the [model](/docs/guides-compound-components--page#models). The model is an object composed of two
+parts: `state` which describes the current snapshot in time of the component and `events` which
+describes events that can be sent to the model.
 
 By default, `SegmentedControl` will create a model and share it internally with its subcomponents
 using React context. Alternatively, if you need direct access to the model's `state` and `events`
 outside of the `SegmentedControl` component, you may configure your own model with
 `useSegmentedControlModel` and pass it to `SegmentedControl` via a pattern called
-[hoisting the model](/getting-started/for-developers/resources/compound-components/#configuring-a-model).
+[hoisting the model](/docs/guides-compound-components--page#configuring-a-model).
 
 ```tsx
 const model = useSegmentedControlModel({

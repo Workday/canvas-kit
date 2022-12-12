@@ -18,10 +18,9 @@ import {
 
 # Canvas Kit Breadcrumbs
 
-Breadcrumbs is a
-[compound component](/getting-started/for-developers/resources/compound-components/) that allows
-users to keep track and maintain awareness of their location as they navigate through pages,
-folders, files, etc.
+Breadcrumbs is a [compound component](/docs/guides-compound-components--page) that allows users to
+keep track and maintain awareness of their location as they navigate through pages, folders, files,
+etc.
 
 [> Workday Design Reference](https://design.workday.com/components/navigation/breadcrumbs)
 
@@ -244,15 +243,15 @@ component information.
 ## Model
 
 If `Breadcrumbs` was stripped of all its markup, attributes, and styling, what would remain is the
-[model](/getting-started/for-developers/resources/compound-components/#models). The model is an
-object composed of two parts: `state` which describes the current snapshot in time of the component
-and `events` which describes events that can be sent to the model.
+[model](/docs/guides-compound-components--page#models). The model is an object composed of two
+parts: `state` which describes the current snapshot in time of the component and `events` which
+describes events that can be sent to the model.
 
 By default, `Breadcrumbs` will create a model and share it internally with its subcomponents using
 React context. Alternatively, if you need direct access to the model's `state` and `events` outside
 of the `Breadcrumbs` component, you may configure your own model with `useBreadcrumbsModel` and pass
 it to `Breadcrumbs` via a pattern called
-[hoisting the model](/getting-started/for-developers/resources/compound-components/#configuring-a-model).
+[hoisting the model](/docs/guides-compound-components--page#configuring-a-model).
 
 ```tsx
 const model = useBreadcrumbsModel({

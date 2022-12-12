@@ -23,8 +23,8 @@ import {
 
 # Canvas Kit Banner
 
-`Banner` is a [compound component](/getting-started/for-developers/resources/compound-components/)
-used surface important information and feedback to the user about a task, action, or state.
+`Banner` is a [compound component](/docs/guides-compound-components--page) used surface important
+information and feedback to the user about a task, action, or state.
 
 [> Workday Design Reference](https://design.workday.com/components/indicators/banners)
 
@@ -199,8 +199,8 @@ Undocumented props are spread to the underlying `<Box>` element.
 ## Model
 
 If `Banner` was stripped of all its markup, attributes, and styling, what would remain is the
-[model](/getting-started/for-developers/resources/compound-components/#models). The model is an
-object that holds the `state`, i.e. a description of the current snapshot in time of the component.
+[model](/docs/guides-compound-components--page#models). The model is an object that holds the
+`state`, i.e. a description of the current snapshot in time of the component.
 
 By default, `Banner` will create a model and share it internally with its subcomponents using React
 context. You may subscribe to `BannerContext` if you wish to create a custom subcomponent for your
@@ -228,7 +228,7 @@ export const CustomBanner = () => {
 
 Alternatively, if you need direct access to the model's `state` outside of the `Banner` component,
 you may configure your own model with `useBannerModel` and pass it to `Banner` via a pattern called
-[hoisting the model](/getting-started/for-developers/resources/compound-components/#configuring-a-model).
+[hoisting the model](/docs/guides-compound-components--page#configuring-a-model).
 
 ```tsx
 const model = useBannerModel({

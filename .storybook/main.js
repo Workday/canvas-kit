@@ -7,6 +7,9 @@ const getSpecifications = require('../modules/docs/utils/get-specifications');
 
 module.exports = {
   stories: [
+    // '../modules/docs/mdx/**/*.mdx',
+    // '../modules/**/*.stories.mdx',
+    // '../modules/**/stories*.@(js|jsx|ts|tsx)',
     '../modules/docs/mdx/**/*.mdx',
     '../modules/**/*.stories.mdx',
     '../modules/**/stories*.@(js|jsx|ts|tsx)',
