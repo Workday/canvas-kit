@@ -3,6 +3,41 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v8.3.0](https://github.com/Workday/canvas-kit/releases/tag/v8.3.0) (2022-12-09)
+
+### Components
+
+- fix: Fix Expandable exports and types ([#1953](https://github.com/Workday/canvas-kit/pull/1953)) ([@alanbsmith](https://github.com/alanbsmith))
+  `useExpandableModel` wasn't properly exported with the other hooks. It's been moved into the `/hooks` directory and exported from there. If you were importing this hook from `dist`, you'll  need to update the import.
+  
+  ```tsx
+  // before
+  import { useExpandableModel } from "@workday/canvas-kit-labs-react/dist/es6/expandable/lib/useExpandableModel";
+  
+  // after
+  import { useExpandableModel } from "@workday/canvas-kit-labs-react/expandable";
+  ```
+
+
+## [v7.4.6](https://github.com/Workday/canvas-kit/releases/tag/v7.4.6) (2022-12-09)
+
+### Components
+
+- fix: Fix Expandable exports and types ([#1953](https://github.com/Workday/canvas-kit/pull/1953)) ([@alanbsmith](https://github.com/alanbsmith))
+  `useExpandableModel` wasn't properly exported with the other hooks. It's been moved into the `/hooks` directory and exported from there. If you were importing this hook from `dist`, you'll  need to update the import.
+  
+  ```tsx
+  // before
+  import { useExpandableModel } from "@workday/canvas-kit-labs-react/dist/es6/expandable/lib/useExpandableModel";
+  
+  // after
+  import { useExpandableModel } from "@workday/canvas-kit-labs-react/expandable";
+  ```
+## [v8.2.4](https://github.com/Workday/canvas-kit/releases/tag/v8.2.4) (2022-12-06)
+
+
+
+
 ## [v8.2.3](https://github.com/Workday/canvas-kit/releases/tag/v8.2.3) (2022-12-01)
 
 ### Documentation
