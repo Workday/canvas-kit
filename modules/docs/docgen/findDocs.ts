@@ -71,7 +71,7 @@ function getFullJsDocComment(checker: ts.TypeChecker, symbol: ts.Symbol) {
 function findDocComment(checker: ts.TypeChecker, symbol?: ts.Symbol): JSDoc {
   if (symbol) {
     const comment = getFullJsDocComment(checker, symbol);
-    if (comment.description || comment.tags.default) {
+    if (comment.description || comment.declarations.length || comment.tags.default) {
       return comment;
     }
 
@@ -232,6 +232,51 @@ function getTypeValueFromNode(checker: ts.TypeChecker, node: ts.Node): Value {
   }
   console.log(t.getKindNameFromNode(node) || node.kind, node.getText());
 
+  if (t.isTupleType(node)) {
+    return {kind: 'tuple', value: node.elements.map(e => getTypeValueFromNode(checker, e))};
+  }
+
+  if (
+    (t.isTypeAliasDeclaration(node) && t.isTypeLiteral(node.type)) ||
+    t.isInterfaceDeclaration(node)
+  ) {
+    // Treat Interfaces and Types with TypeLiterals as interfaces
+    const type = checker.getTypeAtLocation(node);
+    checker.typeToString(type); //?
+    const properties = type.getProperties().map<TypeMember>(p => {
+      // p.parameters[0].name; //?
+      p.name; //?
+      t.getKindNameFromNode(getValueDeclaration(p)); //?
+      return getTypeValueFromNode(checker, getValueDeclaration(p)!) as TypeMember;
+    });
+
+    if (isObject(type) && properties.length) {
+      const typeParameters = (
+        (node as ts.InterfaceDeclaration).typeParameters ||
+        (node.parent as TypeAliasDeclaration).typeParameters
+      )?.map(p => getTypeValueFromNode(checker, p) as TypeParameter);
+      // type.getStringIndexType(); //?
+      // type.getNumberIndexType(); //?
+      // checker.getIndexTypeOfType(type, ts.IndexKind.String); //?
+      // t.getKindNameFromNode(checker.getIndexInfoOfType(type, ts.IndexKind.String)?.declaration); //?
+      // checker.typeToString(type); //?
+      // symbol?.getDocumentationComment();
+      const symbol = getSymbolFromNode(checker, node); //?
+      // TODO how to get index signatures?!
+
+      // symbol?.members?.size; //?
+      // checker.getSignatureFromDeclaration(node); //?
+      type.getCallSignatures().map(s => {
+        s.parameters.map(p => p.name); //?
+      });
+      type.getStringIndexType(); //?
+      // checker.symbol;
+      // checker.typeToString(type.getStringIndexType()); //?
+      // checker.typeToString(type.getNumberIndexType()); //?
+      return {kind: 'interface', properties, typeParameters: typeParameters || []};
+    }
+  }
+
   if (t.isTypeAliasDeclaration(node)) {
     const typeParameters = node.typeParameters?.map(
       p => getTypeValueFromNode(checker, p) as TypeParameter
@@ -254,29 +299,6 @@ function getTypeValueFromNode(checker: ts.TypeChecker, node: ts.Node): Value {
 
   if (t.isArrayType(node)) {
     return {kind: 'array', value: getTypeValueFromNode(checker, node.elementType)};
-  }
-
-  if (t.isInterfaceDeclaration(node) || t.isTypeLiteral(node)) {
-    const type = checker.getTypeAtLocation(node);
-    checker.typeToString(type); //?
-
-    if (isObject(type)) {
-      const typeParameters = (
-        (node as ts.InterfaceDeclaration).typeParameters ||
-        (node.parent as TypeAliasDeclaration).typeParameters
-      )?.map(p => getTypeValueFromNode(checker, p) as TypeParameter);
-      type.getStringIndexType(); //?
-      type.getNumberIndexType(); //?
-      checker.typeToString(type); //?
-      const symbol = getSymbolFromNode(checker, node)?.name; //?
-      // TODO how to get index signatures?!
-
-      const properties = type.getApparentProperties().map<TypeMember>(p => {
-        p.name; //?
-        return getTypeValueFromNode(checker, getValueDeclaration(p)!) as TypeMember;
-      });
-      return {kind: 'interface', properties, typeParameters: typeParameters || []};
-    }
   }
 
   if (t.isTypeParameter(node)) {

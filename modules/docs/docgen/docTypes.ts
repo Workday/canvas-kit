@@ -62,6 +62,7 @@ export type Value =
   | ParenthesisValue
   | InterfaceValue
   | TypeValue
+  | TupleValue
   | TypeLiteralValue
   | ModelValue
   | ElemPropsHookValue
@@ -123,12 +124,74 @@ export interface InterfaceValue {
   kind: 'interface';
   typeParameters: TypeParameter[];
   properties: TypeMember[];
+  callSignature?: FunctionValue;
+  indexSignature?: Value;
 }
 
+/**
+ * A TypeValue is anything using the `type` keyword:
+ *
+ * ```ts
+ * type Foo = 'bar'
+ *
+ * // output
+ * {
+ *   kind: 'type',
+ *   value: {
+ *     kind: 'string',
+ *     value: 'bar'
+ *   }
+ * }
+ * ```
+ */
 export interface TypeValue {
   kind: 'type';
   value: Value;
   typeParameters: TypeParameter[];
+}
+
+/**
+ * Index Signatures are signatures of an interface
+ *
+ * ```ts
+ * interface Foo {
+ *   [key: string]: boolean
+ * }
+ *
+ * // output
+ * {
+ *   kind: 'interface',
+ *   indexSignature: {
+ *     kind: 'indexSignature',
+ *     parameter: { kind: 'primitive', value: 'string' },
+ *     value: { kind: 'primitive', value: 'boolean' }
+ *   }
+ * }
+ * ```
+ */
+export interface IndexSignatureValue {
+  kind: 'indexSignature';
+  parameter: PrimitiveValue;
+  value: Value;
+}
+
+/**
+ * ```ts
+ * type Foo = [string, boolean]
+ *
+ * // output
+ * {
+ *   kind: 'type',
+ *   value: [
+ *     { kind: 'primitive', value: 'string' },
+ *     { kind: 'primitive', value: 'boolean' }
+ *   ]
+ * }
+ * ```
+ */
+export interface TupleValue {
+  kind: 'tuple';
+  value: Value[];
 }
 
 export interface TypeLiteralValue {

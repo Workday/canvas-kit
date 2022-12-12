@@ -163,6 +163,19 @@ describe('extractDocs', () => {
       });
     });
 
+    it('should handle a tuple type', () => {
+      const program = createProgramFromSource('export type Foo = [string, "bar"]');
+      const docs = findDocs(program, 'test.ts'); //?
+
+      expect(docs).toHaveProperty('0.name', 'Foo');
+      expect(docs).toHaveProperty('0.typeInfo.kind', 'type');
+      expect(docs).toHaveProperty('0.typeInfo.value.kind', 'tuple');
+      expect(docs).toHaveProperty('0.typeInfo.value.value.0.kind', 'primitive');
+      expect(docs).toHaveProperty('0.typeInfo.value.value.0.value', 'string');
+      expect(docs).toHaveProperty('0.typeInfo.value.value.1.kind', 'string');
+      expect(docs).toHaveProperty('0.typeInfo.value.value.1.value', 'bar');
+    });
+
     it('should handle exported interfaces', () => {
       const program = createProgramFromSource(`
         export interface Foo {
@@ -677,7 +690,7 @@ describe('extractDocs', () => {
     });
   });
 
-  it('should handle functions with destructured parameters', () => {
+  it('should handle functions with object parameter type', () => {
     const program = createProgramFromSource(`
       export function myFoo(input: {foo: string; bar: string;}): boolean {
         return false
@@ -703,7 +716,7 @@ describe('extractDocs', () => {
     );
   });
 
-  it.only('should handle functions with destructured parameters', () => {
+  it('should handle functions with destructured parameters', () => {
     const program = createProgramFromSource(`
       export function myFoo(input: Props): boolean {
         return false
