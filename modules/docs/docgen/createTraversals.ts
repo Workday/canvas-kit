@@ -49,6 +49,10 @@ const kindMap = guardPairs.map(([kind, typeName]) => {
   return `${kind}: {} as any as ts.${typeName}`;
 });
 
+const kindToString = guardPairs.map(([kind]) => {
+  return `[ts.SyntaxKind.${kind}]: '${kind}'`;
+});
+
 const output = `
 // This file is auto-generated from the createTraversals.ts file. Do not modify contents
 import ts from 'typescript';
@@ -59,6 +63,15 @@ export const guards = {
 
 export const kindsMap = {
   ${kindMap.join(',\n  ')}
+}
+
+const kindToString = {
+  ${kindToString.join(',\n  ')}
+}
+
+export function getKindNameFromNode(node: ts.Node): string {
+  // @ts-ignore
+  return kindToString[node.kind];
 }
 `;
 

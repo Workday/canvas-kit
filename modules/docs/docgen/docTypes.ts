@@ -8,7 +8,7 @@ export interface JSDoc {
 export interface ObjectParameter extends JSDoc {
   kind: 'parameter';
   name: string;
-  defaultValue: Value;
+  defaultValue?: Value;
   typeInfo: Value;
   required: boolean;
 }
@@ -20,7 +20,8 @@ export interface TypeMember extends JSDoc {
   typeInfo: Value;
 }
 
-export interface Doc extends JSDoc {
+/** Top level symbols exported by files */
+export interface ExportedSymbol extends JSDoc {
   name: string;
   packageName: string;
   fileName: string;
@@ -41,23 +42,41 @@ export interface ElemPropsHookValue {
   returnType: null;
 }
 
+/** All supported values of exported symbols */
 export type Value =
   | SymbolValue
+  | GenericValue
   | NumberLiteralValue
   | StringLiteralValue
   | PrimitiveValue
   | UnionValue
   | ObjectValue
+  | ArrayValue
+  | IndexedAccessValue
+  | QualifiedNameValue
+  | ParenthesisValue
   | InterfaceValue
+  | TypeValue
+  | TypeLiteralValue
   | ModelValue
   | ElemPropsHookValue
   | IntersectionValue
+  | TypeMember
+  | ObjectParameter
+  | FunctionValue
+  | TypeParameter
+  | ExternalSymbolValue
   | UnknownValue;
 
-// TODO: Symbols can be many things...
+/** A value meant to link to an exported symbol. This should be treated like a pointer to an `ExportedSymbol` by name */
 export interface SymbolValue {
   kind: 'symbol';
-  value: string;
+  name: string;
+  typeParameters?: TypeParameter[];
+}
+export interface GenericValue {
+  kind: 'generic';
+  name: string;
 }
 
 export interface ObjectValue {
@@ -65,9 +84,58 @@ export interface ObjectValue {
   properties: ObjectParameter[];
 }
 
+export interface ArrayValue {
+  kind: 'array';
+  value: Value;
+}
+
+export interface IndexedAccessValue {
+  kind: 'indexedAccess';
+  object: Value;
+  index: Value;
+}
+
+export interface QualifiedNameValue {
+  kind: 'qualifiedName';
+  left: Value;
+  right: Value;
+}
+
+export interface ParenthesisValue {
+  kind: 'parenthesis';
+  value: Value;
+}
+
+export interface TypeParameter {
+  kind: 'typeParameter';
+  name: string;
+  defaultValue?: Value;
+  constraint?: Value;
+  required: boolean;
+}
+
 export interface InterfaceValue {
   kind: 'interface';
+  typeParameters: TypeParameter[];
   properties: TypeMember[];
+}
+
+export interface TypeValue {
+  kind: 'type';
+  value: Value;
+  typeParameters: TypeParameter[];
+}
+
+export interface TypeLiteralValue {
+  kind: 'typeLiteral';
+  properties: TypeMember[];
+}
+
+export interface ExternalSymbolValue {
+  kind: 'external';
+  name: string;
+  url: string;
+  typeParameters?: TypeParameter[];
 }
 
 export interface NumberLiteralValue {
@@ -82,7 +150,12 @@ export interface StringLiteralValue {
 
 export interface PrimitiveValue {
   kind: 'primitive';
-  value: 'string' | 'number' | 'null' | 'undefined' | 'boolean';
+  value: 'string' | 'number' | 'null' | 'undefined' | 'boolean' | 'any';
+}
+
+export interface AnyValue {
+  kind: 'primitive';
+  value: 'any';
 }
 
 export interface UnknownValue {
@@ -98,4 +171,10 @@ export interface UnionValue {
 export interface IntersectionValue {
   kind: 'intersection';
   value: Value[];
+}
+
+export interface FunctionValue {
+  kind: 'function';
+  parameters: ObjectParameter[];
+  returnType: Value;
 }

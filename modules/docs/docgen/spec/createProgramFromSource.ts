@@ -5,7 +5,6 @@ import {getConfig} from '../extractDocs';
 export function createProgramFromSource(
   source: string | {filename: string; source: string}[]
 ): ts.Program {
-  const filename = 'test.ts';
   let sources: {filename: string; source: string}[];
   if (typeof source === 'string') {
     sources = [{filename: 'test.ts', source}];
@@ -17,15 +16,24 @@ export function createProgramFromSource(
     return ts.createSourceFile(filename, source, ts.ScriptTarget.Latest);
   });
 
-  const defaultCompilerHost = ts.createCompilerHost({});
+  const config = getConfig();
+
+  const defaultCompilerHost = ts.createCompilerHost(config);
 
   const customCompilerHost: ts.CompilerHost = {
     getSourceFile: (name, languageVersion) => {
-      console.log(`getSourceFile ${name}`);
-
+      name; //?
+      // Get the file from our mock list, but read source lib files
       return (
         sourceFiles.find(s => s.fileName === name) ||
-        defaultCompilerHost.getSourceFile(name, languageVersion)
+        // defaultCompilerHost.getSourceFile(name, languageVersion)
+        (name.startsWith('lib')
+          ? ts.createSourceFile(
+              name,
+              ts.sys.readFile(`node_modules/typescript/lib/${name}`),
+              languageVersion
+            )
+          : defaultCompilerHost.getSourceFile(name, languageVersion))
       );
     },
     writeFile: (filename, data) => {},
@@ -41,7 +49,7 @@ export function createProgramFromSource(
 
   return ts.createProgram(
     sources.map(s => s.filename),
-    getConfig(),
+    config,
     customCompilerHost
   );
 }

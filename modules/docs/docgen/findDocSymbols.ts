@@ -1,5 +1,5 @@
 import ts from 'typescript';
-import {JSDoc, Doc, Value, TypeMember, UnknownValue, ObjectParameter} from './docTypes';
+import {JSDoc, ExportedSymbol, Value, TypeMember, UnknownValue, ObjectParameter} from './docTypes';
 import t, {find} from './traverse';
 
 /** True if this is visible outside this file, false otherwise */
@@ -181,7 +181,7 @@ function getReachableValueFromNode(checker: ts.TypeChecker, node: ts.Node): Valu
     if (isNodeExported(type.aliasSymbol.declarations[0])) {
       type.aliasSymbol.escapedName; //?
       'here'; //?
-      return {kind: 'symbol', value: type.aliasSymbol.name};
+      return {kind: 'symbol', name: type.aliasSymbol.name};
     } else {
       'here'; //?
       if (type.isUnion()) {
@@ -226,7 +226,8 @@ function getTypeValueFromSymbol(checker: ts.TypeChecker, symbol: ts.Symbol): Val
   if (node) {
     'here'; //?
     node.name.getText(); //?
-    const expression = getExpression(node); //?
+    const expression = node; // getExpression(node); //?
+    node === expression; //?
     expression?.getText(); //?
     if (expression) {
       isExportedSymbol(checker, expression); //?
@@ -237,7 +238,7 @@ function getTypeValueFromSymbol(checker: ts.TypeChecker, symbol: ts.Symbol): Val
 
     if (expression) {
       symbol.name; //?
-      expression.kind; //?
+      t.getKindNameFromNode(expression); //?
       if (t.isStringLiteral(expression)) {
         expression.text; //?
         return {kind: 'string', value: expression.text};
@@ -261,7 +262,7 @@ function getTypeValueFromSymbol(checker: ts.TypeChecker, symbol: ts.Symbol): Val
               if (isNodeExported(t2.aliasSymbol.declarations[0])) {
                 t2.aliasSymbol.escapedName; //?
                 'here'; //?
-                return {kind: 'symbol', value: t2.aliasSymbol.name};
+                return {kind: 'symbol', name: t2.aliasSymbol.name};
               } else {
                 if (t2.isUnion()) {
                   return t2.types.map(t => getValueFromType(checker, t) || unknownValue);
@@ -293,6 +294,7 @@ function getTypeValueFromSymbol(checker: ts.TypeChecker, symbol: ts.Symbol): Val
     node.initializer &&
     t.isIdentifier(node.initializer)
   ) {
+    'here'; //?
     const value = getSymbolForNode(checker, node.initializer);
     value?.name; //?
     if (value) {
@@ -306,8 +308,9 @@ function getTypeValueFromSymbol(checker: ts.TypeChecker, symbol: ts.Symbol): Val
     };
   }
 
-  const value = getValueFromType(checker, type);
+  const value = getValueFromType(checker, type); //?
   if (value) {
+    'here'; //?
     return value;
   }
 
@@ -331,7 +334,7 @@ function getTypeValueFromSymbol(checker: ts.TypeChecker, symbol: ts.Symbol): Val
       if (t.isPropertySignature(symbolNode)) {
         // return getTypeValueFromSymbol(checker, p);
         return {
-          type: 'member',
+          kind: 'member',
           name: p.name,
           typeInfo: getTypeValueFromSymbol(checker, p),
           ...findDocComment(checker, p.valueDeclaration),
@@ -341,7 +344,7 @@ function getTypeValueFromSymbol(checker: ts.TypeChecker, symbol: ts.Symbol): Val
       const jsDoc = findDocComment(checker, p.valueDeclaration);
 
       return {
-        type: 'property',
+        kind: 'property',
         name: p.name,
         defaultValue: jsDoc.tags.default,
         typeInfo: getTypeValueFromSymbol(checker, p),
@@ -365,8 +368,8 @@ function getTypeValueFromSymbol(checker: ts.TypeChecker, symbol: ts.Symbol): Val
   return unknownValue;
 }
 
-export function findDocSymbols(program: ts.Program, fileName: string): Doc[] {
-  const docs: Doc[] = [];
+export function findDocSymbols(program: ts.Program, fileName: string): ExportedSymbol[] {
+  const docs: ExportedSymbol[] = [];
   const checker = program.getTypeChecker();
 
   const sourceFile = program.getSourceFile(fileName)!;
@@ -381,6 +384,7 @@ export function findDocSymbols(program: ts.Program, fileName: string): Doc[] {
     );
   }).forEach(node => {
     const symbol = getSymbolForNode(checker, node);
+    !!symbol; //?
     if (symbol) {
       docs.push({
         name: symbol.name,

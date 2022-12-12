@@ -5,10 +5,12 @@ import {promisify} from 'util';
 import _glob from 'glob';
 
 import t from './traverse';
+import {findDocs} from './findDocs';
 
 const glob = promisify(_glob);
 
 export function extractDocs(program: ts.Program, fileName: string) {
+  return findDocs(program, fileName);
   const checker = program.getTypeChecker();
 
   // for (const sourceFile of program.getSourceFile(fileNames[0])) {
@@ -138,15 +140,21 @@ export function getConfig() {
 
 srcFolder; //?
 
-glob(`${srcFolder}/modules/react/**/*.{ts,tsx}`, {
-  ignore: ['**/examples/**', '**/spec/**', '**/stories/**'],
-}).then(files => {
-  const fileNames = [
-    '/home/nicholas/projects/canvas-kit/modules/react/popup/lib/hooks/usePopupModel.ts',
-  ];
-  const program = ts.createProgram(fileNames, getConfig());
-  files.includes('/home/nicholas/projects/canvas-kit/modules/react/common/lib/utils/models.ts'); //?
-  files.forEach(fileName => {
-    extractDocs(program, fileNames[0]);
-  });
-});
+// glob(`${srcFolder}/modules/**/*.{ts,tsx}`, {
+//   ignore: ['**/examples/**', '**/spec/**', '**/stories/**', '**/codemod/**', '**/docs/**'],
+// })
+//   .then(files => {
+//     files.length; //?
+//     const fileNames = [
+//       '/Users/nicholas.boll/projects/canvas-kit/modules/labs-react/combobox/lib/AutocompleteList.tsx',
+//     ];
+//     const program = ts.createProgram(files, getConfig());
+//     return files.flatMap(fileName => {
+//       console.log(fileName); //?
+//       return findDocs(program, fileName);
+//     });
+//   })
+//   .then(docs => {
+//     docs; //?
+//     return fs.promises.writeFile('docs.json', JSON.stringify(docs, null, '  '));
+//   });

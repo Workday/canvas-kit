@@ -1,5 +1,5 @@
 import ts from 'typescript';
-import {JSDoc, Doc} from './docTypes';
+import {JSDoc, ExportedSymbol} from './docTypes';
 import t from './traverse';
 
 function getLiteralValueFromPropertyAssignment(
@@ -196,8 +196,8 @@ function getObjectDoc(checker: ts.TypeChecker, node: ts.Node, name: string): Obj
   return undefined;
 }
 
-export function findModel(program: ts.Program, fileName: string): Doc[] {
-  const docs: Doc[] = [];
+export function findModel(program: ts.Program, fileName: string): ExportedSymbol[] {
+  const docs: ExportedSymbol[] = [];
   const checker = program.getTypeChecker();
 
   const sourceFile = program.getSourceFile(fileName)!;
