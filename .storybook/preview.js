@@ -22,6 +22,7 @@ function storySort(a, b) {
     prefix('guides-getting-started', '1'),
     prefix('features-', '2'),
     prefix('tokens-', '3'),
+    prefix('overview', 'a'),
     prefix('components-', '4'),
     prefix('hooks-and-utilities-', '5'),
     prefix('preview-', '6'),
@@ -29,8 +30,8 @@ function storySort(a, b) {
     prefix('css-', 'zzzz'),
     prefix('basic', 'aa'),
     prefix('default', 'ab'),
-    prefix('visual-testing', 'zz'),
-    prefix('examples', 'zzz')
+    prefix('testing', 'zzz'),
+    prefix('examples', 'zz')
   );
 
   const left = prefixFn(a[0]);

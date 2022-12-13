@@ -5,7 +5,7 @@ import {Flex, Grid, Box} from '@workday/canvas-kit-react/layout';
 import {InstallBlock} from './installBlock';
 import {Text, Heading} from '@workday/canvas-kit-react/text';
 import {Card} from '@workday/canvas-kit-react/card';
-import {Hyperlink} from '@workday/canvas-kit-react/button';
+import {ExternalHyperlink, Hyperlink} from '@workday/canvas-kit-react/button';
 import {colors} from '@workday/canvas-kit-react/tokens';
 import {rocketIcon, tokensIcon, shapesIcon} from '@workday/canvas-system-icons-web';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
@@ -40,7 +40,10 @@ export const WelcomePage = () => {
       <Text typeLevel="body.medium">
         {' '}
         This project provides a set of components for the Workday Canvas Design System that can be
-        used to implement user experiences consistent with Workday Design Principles.
+        used to implement user experiences consistent with{' '}
+        <ExternalHyperlink href="https://canvas.workdaydesign.com/">
+          Workday Design Principles.
+        </ExternalHyperlink>
       </Text>
       <Heading size="medium" borderBottom={`1px solid ${colors.blueberry200}`} paddingBottom="xxs">
         Quick Links
@@ -50,8 +53,19 @@ export const WelcomePage = () => {
         gridTemplateColumns="repeat(auto-fill, minmax(250px, 1fr))"
         gridGap="s"
       >
-        <Grid as={Card} gridTemplateRows="1fr 1fr 2fr 1fr" depth="none" display="grid">
-          <SystemIcon color={colors.cantaloupe400} icon={rocketIcon} size={60}></SystemIcon>
+        <Grid
+          as={Card}
+          gridTemplateRows="1fr 1fr 2fr 1fr"
+          depth="none"
+          display="grid"
+          maxHeight={300}
+        >
+          <SystemIcon
+            color={colors.cantaloupe400}
+            colorHover={colors.cantaloupe400}
+            icon={rocketIcon}
+            size={60}
+          ></SystemIcon>
           <Card.Heading>Getting Started</Card.Heading>
           <Card.Body>
             <Text>For all things getting started including helpful guides and docs.</Text>
@@ -66,8 +80,19 @@ export const WelcomePage = () => {
             Getting Started Guide
           </Grid.Item>
         </Grid>
-        <Grid as={Card} gridTemplateRows="1fr 1fr 2fr 1fr" depth="none" display="grid">
-          <SystemIcon color={colors.blueberry400} icon={tokensIcon} size={60}></SystemIcon>
+        <Grid
+          as={Card}
+          gridTemplateRows="1fr 1fr 2fr 1fr"
+          depth="none"
+          display="grid"
+          maxHeight={300}
+        >
+          <SystemIcon
+            color={colors.blueberry400}
+            icon={tokensIcon}
+            colorHover={colors.blueberry400}
+            size={60}
+          ></SystemIcon>
           <Card.Heading>Tokens</Card.Heading>
           <Card.Body>
             <Text>
@@ -79,14 +104,25 @@ export const WelcomePage = () => {
             alignSelf="end"
             as={Hyperlink}
             marginTop="xs"
-            href="/?path=/docs/tokens--depth"
+            href="/?path=/docs/tokens--overview"
           >
             {' '}
             View Our Tokens
           </Grid.Item>
         </Grid>
-        <Grid as={Card} gridTemplateRows="1fr 1fr 2fr 1fr" depth="none" display="grid">
-          <SystemIcon color={colors.greenApple400} icon={shapesIcon} size={60}></SystemIcon>
+        <Grid
+          as={Card}
+          gridTemplateRows="1fr 1fr 2fr 1fr"
+          depth="none"
+          display="grid"
+          maxHeight={300}
+        >
+          <SystemIcon
+            color={colors.greenApple400}
+            icon={shapesIcon}
+            size={60}
+            colorHover={colors.greenApple400}
+          ></SystemIcon>
           <Card.Heading>Assets</Card.Heading>
           <Card.Body>
             <Text>
