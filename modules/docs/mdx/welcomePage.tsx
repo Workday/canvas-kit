@@ -58,7 +58,7 @@ export const WelcomePage = () => {
           gridTemplateRows="1fr 1fr 2fr 1fr"
           depth="none"
           display="grid"
-          maxHeight={300}
+          maxHeight={320}
         >
           <SystemIcon
             color={colors.cantaloupe400}
@@ -85,7 +85,7 @@ export const WelcomePage = () => {
           gridTemplateRows="1fr 1fr 2fr 1fr"
           depth="none"
           display="grid"
-          maxHeight={300}
+          maxHeight={320}
         >
           <SystemIcon
             color={colors.blueberry400}
@@ -115,7 +115,7 @@ export const WelcomePage = () => {
           gridTemplateRows="1fr 1fr 2fr 1fr"
           depth="none"
           display="grid"
-          maxHeight={300}
+          maxHeight={320}
         >
           <SystemIcon
             color={colors.greenApple400}
@@ -134,7 +134,7 @@ export const WelcomePage = () => {
             as={Hyperlink}
             alignSelf="end"
             marginTop="xs"
-            href="/?path=/docs/assets-icons--icon-list"
+            href="/?path=/docs/assets-overview"
           >
             {' '}
             View Assets
