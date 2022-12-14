@@ -134,7 +134,7 @@ export const WelcomePage = () => {
             as={Hyperlink}
             alignSelf="end"
             marginTop="xs"
-            href="/?path=/docs/assets-overview"
+            href="/?path=/docs/assets-icons--overview"
           >
             {' '}
             View Assets
