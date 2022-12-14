@@ -14,7 +14,7 @@ export interface ObjectParameter extends JSDoc {
   kind: 'parameter';
   name: string;
   defaultValue?: Value;
-  typeInfo: Value;
+  type: Value;
   required: boolean;
 }
 
@@ -22,7 +22,7 @@ export interface ObjectParameter extends JSDoc {
 export interface TypeMember extends JSDoc {
   kind: 'member';
   name: string;
-  typeInfo: Value;
+  type: Value;
 }
 
 /** Top level symbols exported by files */
@@ -30,7 +30,7 @@ export interface ExportedSymbol extends JSDoc {
   name: string;
   packageName: string;
   fileName: string;
-  typeInfo: Value;
+  type: Value;
 }
 
 export interface ModelValue {

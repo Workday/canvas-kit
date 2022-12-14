@@ -336,7 +336,7 @@ function getTypeValueFromSymbol(checker: ts.TypeChecker, symbol: ts.Symbol): Val
         return {
           kind: 'member',
           name: p.name,
-          typeInfo: getTypeValueFromSymbol(checker, p),
+          type: getTypeValueFromSymbol(checker, p),
           ...findDocComment(checker, p.valueDeclaration),
         };
       }
@@ -347,7 +347,7 @@ function getTypeValueFromSymbol(checker: ts.TypeChecker, symbol: ts.Symbol): Val
         kind: 'property',
         name: p.name,
         defaultValue: jsDoc.tags.default,
-        typeInfo: getTypeValueFromSymbol(checker, p),
+        type: getTypeValueFromSymbol(checker, p),
         ...jsDoc,
       };
     });
@@ -391,7 +391,7 @@ export function findDocSymbols(program: ts.Program, fileName: string): ExportedS
         packageName: getPackageName(fileName),
         fileName,
         ...getFullJsDocComment(checker, symbol),
-        typeInfo: getTypeValueFromSymbol(checker, symbol),
+        type: getTypeValueFromSymbol(checker, symbol),
       });
     }
   });

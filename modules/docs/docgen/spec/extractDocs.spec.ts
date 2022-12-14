@@ -8,8 +8,8 @@ describe('extractDocs', () => {
       const docs = findDocs(program, 'test.ts'); //?
 
       expect(docs).toHaveProperty('0.name', 'Foo');
-      expect(docs).toHaveProperty('0.typeInfo.kind', 'type');
-      expect(docs).toHaveProperty('0.typeInfo.value', {kind: 'string', value: 'foo'});
+      expect(docs).toHaveProperty('0.type.kind', 'type');
+      expect(docs).toHaveProperty('0.type.value', {kind: 'string', value: 'foo'});
     });
 
     it('should find an exported type of number', () => {
@@ -17,8 +17,8 @@ describe('extractDocs', () => {
       const docs = findDocs(program, 'test.ts');
 
       expect(docs).toHaveProperty('0.name', 'Foo');
-      expect(docs).toHaveProperty('0.typeInfo.kind', 'type');
-      expect(docs).toHaveProperty('0.typeInfo.value', {kind: 'number', value: 10});
+      expect(docs).toHaveProperty('0.type.kind', 'type');
+      expect(docs).toHaveProperty('0.type.value', {kind: 'number', value: 10});
     });
 
     it('should find an exported type of array', () => {
@@ -26,9 +26,9 @@ describe('extractDocs', () => {
       const docs = findDocs(program, 'test.ts'); //?
 
       expect(docs).toHaveProperty('0.name', 'Foo');
-      expect(docs).toHaveProperty('0.typeInfo.kind', 'type');
-      expect(docs).toHaveProperty('0.typeInfo.value.kind', 'array');
-      expect(docs).toHaveProperty('0.typeInfo.value.value', {kind: 'primitive', value: 'number'});
+      expect(docs).toHaveProperty('0.type.kind', 'type');
+      expect(docs).toHaveProperty('0.type.value.kind', 'array');
+      expect(docs).toHaveProperty('0.type.value.value', {kind: 'primitive', value: 'number'});
     });
 
     it('should find an exported type of a parenthesis type', () => {
@@ -36,9 +36,9 @@ describe('extractDocs', () => {
       const docs = findDocs(program, 'test.ts'); //?
 
       expect(docs).toHaveProperty('0.name', 'Foo');
-      expect(docs).toHaveProperty('0.typeInfo.kind', 'type');
-      expect(docs).toHaveProperty('0.typeInfo.value.kind', 'parenthesis');
-      expect(docs).toHaveProperty('0.typeInfo.value.value', {kind: 'primitive', value: 'number'});
+      expect(docs).toHaveProperty('0.type.kind', 'type');
+      expect(docs).toHaveProperty('0.type.value.kind', 'parenthesis');
+      expect(docs).toHaveProperty('0.type.value.value', {kind: 'primitive', value: 'number'});
     });
 
     it('should find an exported type of an exported IndexAccessType', () => {
@@ -51,12 +51,12 @@ describe('extractDocs', () => {
       const docs = findDocs(program, 'test.ts'); //?
 
       expect(docs).toHaveProperty('0.name', 'Foo');
-      expect(docs).toHaveProperty('0.typeInfo.kind', 'type');
-      expect(docs).toHaveProperty('0.typeInfo.value.kind', 'indexedAccess');
-      expect(docs).toHaveProperty('0.typeInfo.value.object.kind', 'symbol');
-      expect(docs).toHaveProperty('0.typeInfo.value.object.name', 'Bar');
-      expect(docs).toHaveProperty('0.typeInfo.value.index.kind', 'string');
-      expect(docs).toHaveProperty('0.typeInfo.value.index.value', 'bar');
+      expect(docs).toHaveProperty('0.type.kind', 'type');
+      expect(docs).toHaveProperty('0.type.value.kind', 'indexedAccess');
+      expect(docs).toHaveProperty('0.type.value.object.kind', 'symbol');
+      expect(docs).toHaveProperty('0.type.value.object.name', 'Bar');
+      expect(docs).toHaveProperty('0.type.value.index.kind', 'string');
+      expect(docs).toHaveProperty('0.type.value.index.value', 'bar');
     });
 
     it('should find an exported type of an IndexAccessType exported from another file', () => {
@@ -80,12 +80,12 @@ describe('extractDocs', () => {
       const docs = findDocs(program, 'test.ts'); //?
 
       expect(docs).toHaveProperty('0.name', 'Foo');
-      expect(docs).toHaveProperty('0.typeInfo.kind', 'type');
-      expect(docs).toHaveProperty('0.typeInfo.value.kind', 'indexedAccess');
-      expect(docs).toHaveProperty('0.typeInfo.value.object.kind', 'symbol');
-      expect(docs).toHaveProperty('0.typeInfo.value.object.name', 'Bar');
-      expect(docs).toHaveProperty('0.typeInfo.value.index.kind', 'string');
-      expect(docs).toHaveProperty('0.typeInfo.value.index.value', 'bar');
+      expect(docs).toHaveProperty('0.type.kind', 'type');
+      expect(docs).toHaveProperty('0.type.value.kind', 'indexedAccess');
+      expect(docs).toHaveProperty('0.type.value.object.kind', 'symbol');
+      expect(docs).toHaveProperty('0.type.value.object.name', 'Bar');
+      expect(docs).toHaveProperty('0.type.value.index.kind', 'string');
+      expect(docs).toHaveProperty('0.type.value.index.value', 'bar');
     });
 
     it('should find an exported type of a variable with a forced type', () => {
@@ -99,9 +99,9 @@ describe('extractDocs', () => {
       const docs = findDocs(program, 'test.ts'); //?
 
       expect(docs).toHaveProperty('0.name', 'foo');
-      expect(docs).toHaveProperty('0.typeInfo.kind', 'array');
-      expect(docs).toHaveProperty('0.typeInfo.value.kind', 'symbol');
-      expect(docs).toHaveProperty('0.typeInfo.value.name', 'Foo');
+      expect(docs).toHaveProperty('0.type.kind', 'array');
+      expect(docs).toHaveProperty('0.type.value.kind', 'symbol');
+      expect(docs).toHaveProperty('0.type.value.name', 'Foo');
     });
 
     it('should find an exported type of a variable with an imported forced type', () => {
@@ -125,9 +125,9 @@ describe('extractDocs', () => {
       const docs = findDocs(program, 'test.ts'); //?
 
       expect(docs).toHaveProperty('0.name', 'foo');
-      expect(docs).toHaveProperty('0.typeInfo.kind', 'array');
-      expect(docs).toHaveProperty('0.typeInfo.value.kind', 'symbol');
-      expect(docs).toHaveProperty('0.typeInfo.value.name', 'Bar');
+      expect(docs).toHaveProperty('0.type.kind', 'array');
+      expect(docs).toHaveProperty('0.type.value.kind', 'symbol');
+      expect(docs).toHaveProperty('0.type.value.name', 'Bar');
     });
 
     it('should add jsdoc to export declarations', () => {
@@ -153,8 +153,8 @@ describe('extractDocs', () => {
       const docs = findDocs(program, 'test.ts'); //?
 
       expect(docs).toHaveProperty('0.name', 'Foo');
-      expect(docs).toHaveProperty('0.typeInfo.kind', 'type');
-      expect(docs).toHaveProperty('0.typeInfo.value', {
+      expect(docs).toHaveProperty('0.type.kind', 'type');
+      expect(docs).toHaveProperty('0.type.value', {
         kind: 'union',
         value: [
           {kind: 'string', value: 'foo'},
@@ -168,12 +168,12 @@ describe('extractDocs', () => {
       const docs = findDocs(program, 'test.ts'); //?
 
       expect(docs).toHaveProperty('0.name', 'Foo');
-      expect(docs).toHaveProperty('0.typeInfo.kind', 'type');
-      expect(docs).toHaveProperty('0.typeInfo.value.kind', 'tuple');
-      expect(docs).toHaveProperty('0.typeInfo.value.value.0.kind', 'primitive');
-      expect(docs).toHaveProperty('0.typeInfo.value.value.0.value', 'string');
-      expect(docs).toHaveProperty('0.typeInfo.value.value.1.kind', 'string');
-      expect(docs).toHaveProperty('0.typeInfo.value.value.1.value', 'bar');
+      expect(docs).toHaveProperty('0.type.kind', 'type');
+      expect(docs).toHaveProperty('0.type.value.kind', 'tuple');
+      expect(docs).toHaveProperty('0.type.value.value.0.kind', 'primitive');
+      expect(docs).toHaveProperty('0.type.value.value.0.value', 'string');
+      expect(docs).toHaveProperty('0.type.value.value.1.kind', 'string');
+      expect(docs).toHaveProperty('0.type.value.value.1.value', 'bar');
     });
 
     it('should handle exported interfaces', () => {
@@ -184,10 +184,10 @@ describe('extractDocs', () => {
       `);
       const docs = findDocs(program, 'test.ts'); //?
       expect(docs).toHaveProperty('0.name', 'Foo');
-      expect(docs).toHaveProperty('0.typeInfo.kind', 'interface');
-      expect(docs).toHaveProperty('0.typeInfo.properties.0.name', 'foo');
-      expect(docs).toHaveProperty('0.typeInfo.properties.0.kind', 'member');
-      expect(docs).toHaveProperty('0.typeInfo.properties.0.typeInfo', {
+      expect(docs).toHaveProperty('0.type.kind', 'interface');
+      expect(docs).toHaveProperty('0.type.properties.0.name', 'foo');
+      expect(docs).toHaveProperty('0.type.properties.0.kind', 'member');
+      expect(docs).toHaveProperty('0.type.properties.0.type', {
         kind: 'primitive',
         value: 'string',
       });
@@ -203,10 +203,10 @@ describe('extractDocs', () => {
       `);
       const docs = findDocs(program, 'test.ts'); //?
       expect(docs).toHaveProperty('0.name', 'Foo');
-      expect(docs).toHaveProperty('0.typeInfo.kind', 'interface');
-      expect(docs).toHaveProperty('0.typeInfo.properties.0.name', 'foo');
-      expect(docs).toHaveProperty('0.typeInfo.properties.0.kind', 'member');
-      expect(docs).toHaveProperty('0.typeInfo.properties.0.typeInfo', {
+      expect(docs).toHaveProperty('0.type.kind', 'interface');
+      expect(docs).toHaveProperty('0.type.properties.0.name', 'foo');
+      expect(docs).toHaveProperty('0.type.properties.0.kind', 'member');
+      expect(docs).toHaveProperty('0.type.properties.0.type', {
         kind: 'string',
         value: 'baz',
       });
@@ -222,12 +222,12 @@ describe('extractDocs', () => {
       `);
       const docs = findDocs(program, 'test.ts'); //?
       expect(docs).toHaveProperty('0.name', 'Foo');
-      expect(docs).toHaveProperty('0.typeInfo.kind', 'interface');
-      expect(docs).toHaveProperty('0.typeInfo.properties.0.name', 'foo');
-      expect(docs).toHaveProperty('0.typeInfo.properties.0.kind', 'member');
-      expect(docs).toHaveProperty('0.typeInfo.properties.0.typeInfo', {
+      expect(docs).toHaveProperty('0.type.kind', 'interface');
+      expect(docs).toHaveProperty('0.type.properties.0.name', 'foo');
+      expect(docs).toHaveProperty('0.type.properties.0.kind', 'member');
+      expect(docs).toHaveProperty('0.type.properties.0.type', {
         kind: 'symbol',
-        value: 'bar',
+        name: 'bar',
       });
     });
 
@@ -239,13 +239,13 @@ describe('extractDocs', () => {
       `);
       const docs = findDocs(program, 'test.ts'); //?
       expect(docs).toHaveProperty('0.name', 'Foo');
-      expect(docs).toHaveProperty('0.typeInfo.kind', 'interface');
-      expect(docs).toHaveProperty('0.typeInfo.typeParameters.0.kind', 'typeParameter');
-      expect(docs).toHaveProperty('0.typeInfo.typeParameters.0.name', 'T');
-      expect(docs).toHaveProperty('0.typeInfo.properties.0.name', 'foo');
-      expect(docs).toHaveProperty('0.typeInfo.properties.0.kind', 'member');
-      expect(docs).toHaveProperty('0.typeInfo.properties.0.typeInfo.kind', 'generic');
-      expect(docs).toHaveProperty('0.typeInfo.properties.0.typeInfo.name', 'T');
+      expect(docs).toHaveProperty('0.type.kind', 'interface');
+      expect(docs).toHaveProperty('0.type.typeParameters.0.kind', 'typeParameter');
+      expect(docs).toHaveProperty('0.type.typeParameters.0.name', 'T');
+      expect(docs).toHaveProperty('0.type.properties.0.name', 'foo');
+      expect(docs).toHaveProperty('0.type.properties.0.kind', 'member');
+      expect(docs).toHaveProperty('0.type.properties.0.type.kind', 'generic');
+      expect(docs).toHaveProperty('0.type.properties.0.type.name', 'T');
     });
 
     it('should handle exported interfaces with an array', () => {
@@ -256,11 +256,11 @@ describe('extractDocs', () => {
       `);
       const docs = findDocs(program, 'test.ts'); //?
       expect(docs).toHaveProperty('0.name', 'Foo');
-      expect(docs).toHaveProperty('0.typeInfo.kind', 'interface');
-      expect(docs).toHaveProperty('0.typeInfo.properties.0.name', 'foo');
-      expect(docs).toHaveProperty('0.typeInfo.properties.0.kind', 'member');
-      expect(docs).toHaveProperty('0.typeInfo.properties.0.typeInfo.kind', 'array');
-      expect(docs).toHaveProperty('0.typeInfo.properties.0.typeInfo.value', {
+      expect(docs).toHaveProperty('0.type.kind', 'interface');
+      expect(docs).toHaveProperty('0.type.properties.0.name', 'foo');
+      expect(docs).toHaveProperty('0.type.properties.0.kind', 'member');
+      expect(docs).toHaveProperty('0.type.properties.0.type.kind', 'array');
+      expect(docs).toHaveProperty('0.type.properties.0.type.value', {
         kind: 'primitive',
         value: 'number',
       });
@@ -274,20 +274,20 @@ describe('extractDocs', () => {
       `);
       const docs = findDocs(program, 'test.ts'); //?
       expect(docs).toHaveProperty('0.name', 'Foo');
-      expect(docs).toHaveProperty('0.typeInfo.kind', 'interface');
-      expect(docs).toHaveProperty('0.typeInfo.typeParameters.0.kind', 'typeParameter');
-      expect(docs).toHaveProperty('0.typeInfo.typeParameters.0.name', 'T');
-      expect(docs).toHaveProperty('0.typeInfo.typeParameters.0.defaultValue', {
+      expect(docs).toHaveProperty('0.type.kind', 'interface');
+      expect(docs).toHaveProperty('0.type.typeParameters.0.kind', 'typeParameter');
+      expect(docs).toHaveProperty('0.type.typeParameters.0.name', 'T');
+      expect(docs).toHaveProperty('0.type.typeParameters.0.defaultValue', {
         kind: 'primitive',
         value: 'any',
       });
-      expect(docs).toHaveProperty('0.typeInfo.properties.0.name', 'foo');
-      expect(docs).toHaveProperty('0.typeInfo.properties.0.kind', 'member');
-      expect(docs).toHaveProperty('0.typeInfo.properties.0.typeInfo.kind', 'generic');
-      expect(docs).toHaveProperty('0.typeInfo.properties.0.typeInfo.name', 'T');
+      expect(docs).toHaveProperty('0.type.properties.0.name', 'foo');
+      expect(docs).toHaveProperty('0.type.properties.0.kind', 'member');
+      expect(docs).toHaveProperty('0.type.properties.0.type.kind', 'generic');
+      expect(docs).toHaveProperty('0.type.properties.0.type.name', 'T');
     });
 
-    it('should handle exported object types', () => {
+    it('should handle exported types with type literal values', () => {
       const program = createProgramFromSource(`
         export type Foo = {
           foo: string
@@ -295,12 +295,11 @@ describe('extractDocs', () => {
       `);
       const docs = findDocs(program, 'test.ts'); //?
       expect(docs).toHaveProperty('0.name', 'Foo');
-      expect(docs).toHaveProperty('0.typeInfo.kind', 'type');
-      expect(docs).toHaveProperty('0.typeInfo.value.kind', 'typeLiteral');
-      expect(docs).toHaveProperty('0.typeInfo.value.properties.0.name', 'foo');
-      expect(docs).toHaveProperty('0.typeInfo.value.properties.0.kind', 'member');
-      expect(docs).toHaveProperty('0.typeInfo.value.properties.0.typeInfo.kind', 'primitive');
-      expect(docs).toHaveProperty('0.typeInfo.value.properties.0.typeInfo.value', 'string');
+      expect(docs).toHaveProperty('0.type.kind', 'interface');
+      expect(docs).toHaveProperty('0.type.properties.0.name', 'foo');
+      expect(docs).toHaveProperty('0.type.properties.0.kind', 'member');
+      expect(docs).toHaveProperty('0.type.properties.0.type.kind', 'primitive');
+      expect(docs).toHaveProperty('0.type.properties.0.type.value', 'string');
     });
 
     it('should handle exported object types with a generic and "any" default value', () => {
@@ -311,18 +310,17 @@ describe('extractDocs', () => {
       `);
       const docs = findDocs(program, 'test.ts'); //?
       expect(docs).toHaveProperty('0.name', 'Foo');
-      expect(docs).toHaveProperty('0.typeInfo.kind', 'type');
-      expect(docs).toHaveProperty('0.typeInfo.typeParameters.0.kind', 'typeParameter');
-      expect(docs).toHaveProperty('0.typeInfo.typeParameters.0.name', 'T');
-      expect(docs).toHaveProperty('0.typeInfo.typeParameters.0.defaultValue', {
+      expect(docs).toHaveProperty('0.type.kind', 'interface');
+      expect(docs).toHaveProperty('0.type.typeParameters.0.kind', 'typeParameter');
+      expect(docs).toHaveProperty('0.type.typeParameters.0.name', 'T');
+      expect(docs).toHaveProperty('0.type.typeParameters.0.defaultValue', {
         kind: 'primitive',
         value: 'any',
       });
-      expect(docs).toHaveProperty('0.typeInfo.value.kind', 'typeLiteral');
-      expect(docs).toHaveProperty('0.typeInfo.value.properties.0.name', 'foo');
-      expect(docs).toHaveProperty('0.typeInfo.value.properties.0.kind', 'member');
-      expect(docs).toHaveProperty('0.typeInfo.value.properties.0.typeInfo.kind', 'generic');
-      expect(docs).toHaveProperty('0.typeInfo.value.properties.0.typeInfo.name', 'T');
+      expect(docs).toHaveProperty('0.type.properties.0.name', 'foo');
+      expect(docs).toHaveProperty('0.type.properties.0.kind', 'member');
+      expect(docs).toHaveProperty('0.type.properties.0.type.kind', 'generic');
+      expect(docs).toHaveProperty('0.type.properties.0.type.name', 'T');
     });
 
     it('should handle exported Record types', () => {
@@ -331,12 +329,12 @@ describe('extractDocs', () => {
       `);
       const docs = findDocs(program, 'test.ts'); //?
       expect(docs).toHaveProperty('0.name', 'Foo');
-      expect(docs).toHaveProperty('0.typeInfo.kind', 'type');
-      expect(docs).toHaveProperty('0.typeInfo.value.kind', 'external');
-      expect(docs).toHaveProperty('0.typeInfo.value.typeParameters.0.kind', 'primitive');
-      expect(docs).toHaveProperty('0.typeInfo.value.typeParameters.0.value', 'string');
-      expect(docs).toHaveProperty('0.typeInfo.value.typeParameters.1.kind', 'primitive');
-      expect(docs).toHaveProperty('0.typeInfo.value.typeParameters.1.value', 'string');
+      expect(docs).toHaveProperty('0.type.kind', 'type');
+      expect(docs).toHaveProperty('0.type.value.kind', 'external');
+      expect(docs).toHaveProperty('0.type.value.typeParameters.0.kind', 'primitive');
+      expect(docs).toHaveProperty('0.type.value.typeParameters.0.value', 'string');
+      expect(docs).toHaveProperty('0.type.value.typeParameters.1.kind', 'primitive');
+      expect(docs).toHaveProperty('0.type.value.typeParameters.1.value', 'string');
     });
 
     it('should handle exported interfaces with an index signature', () => {
@@ -348,9 +346,9 @@ describe('extractDocs', () => {
       `);
       const docs = findDocs(program, 'test.ts'); //?
       expect(docs).toHaveProperty('0.name', 'PropMap');
-      expect(docs).toHaveProperty('0.typeInfo.kind', 'interface');
-      expect(docs).toHaveProperty('0.typeInfo.properties.0.kind', 'member');
-      expect(docs).toHaveProperty('0.typeInfo.properties.0.name', 'foo');
+      expect(docs).toHaveProperty('0.type.kind', 'interface');
+      expect(docs).toHaveProperty('0.type.properties.0.kind', 'member');
+      expect(docs).toHaveProperty('0.type.properties.0.name', 'foo');
 
       // TODO: Index Signature...
     });
@@ -363,16 +361,16 @@ describe('extractDocs', () => {
       `);
       const docs = findDocs(program, 'test.ts'); //?
       expect(docs).toHaveProperty('0.name', 'Foo');
-      expect(docs).toHaveProperty('0.typeInfo.kind', 'interface');
-      expect(docs).toHaveProperty('0.typeInfo.typeParameters.0.kind', 'typeParameter');
-      expect(docs).toHaveProperty('0.typeInfo.typeParameters.0.name', 'T');
-      expect(docs).toHaveProperty('0.typeInfo.typeParameters.0.defaultValue', {
+      expect(docs).toHaveProperty('0.type.kind', 'interface');
+      expect(docs).toHaveProperty('0.type.typeParameters.0.kind', 'typeParameter');
+      expect(docs).toHaveProperty('0.type.typeParameters.0.name', 'T');
+      expect(docs).toHaveProperty('0.type.typeParameters.0.defaultValue', {
         kind: 'string',
         value: 'foo',
       });
-      expect(docs).toHaveProperty('0.typeInfo.typeParameters.0.required', false);
-      expect(docs).toHaveProperty('0.typeInfo.properties.0.name', 'foo');
-      expect(docs).toHaveProperty('0.typeInfo.properties.0.kind', 'member');
+      expect(docs).toHaveProperty('0.type.typeParameters.0.required', false);
+      expect(docs).toHaveProperty('0.type.properties.0.name', 'foo');
+      expect(docs).toHaveProperty('0.type.properties.0.kind', 'member');
     });
 
     it('should handle exported interfaces with a generic with constraint and defaults', () => {
@@ -385,14 +383,14 @@ describe('extractDocs', () => {
       `);
       const docs = findDocs(program, 'test.ts'); //?
       expect(docs).toHaveProperty('0.name', 'Foo');
-      expect(docs).toHaveProperty('0.typeInfo.kind', 'interface');
-      expect(docs).toHaveProperty('0.typeInfo.typeParameters.0.kind', 'typeParameter');
-      expect(docs).toHaveProperty('0.typeInfo.typeParameters.0.name', 'T');
-      expect(docs).toHaveProperty('0.typeInfo.properties.0.name', 'foo');
-      expect(docs).toHaveProperty('0.typeInfo.properties.0.kind', 'member');
-      expect(docs).toHaveProperty('0.typeInfo.properties.0.typeInfo.kind', 'symbol');
-      expect(docs).toHaveProperty('0.typeInfo.properties.0.typeInfo.name', 'Bar');
-      expect(docs).toHaveProperty('0.typeInfo.properties.0.typeInfo.typeParameters', [
+      expect(docs).toHaveProperty('0.type.kind', 'interface');
+      expect(docs).toHaveProperty('0.type.typeParameters.0.kind', 'typeParameter');
+      expect(docs).toHaveProperty('0.type.typeParameters.0.name', 'T');
+      expect(docs).toHaveProperty('0.type.properties.0.name', 'foo');
+      expect(docs).toHaveProperty('0.type.properties.0.kind', 'member');
+      expect(docs).toHaveProperty('0.type.properties.0.type.kind', 'symbol');
+      expect(docs).toHaveProperty('0.type.properties.0.type.name', 'Bar');
+      expect(docs).toHaveProperty('0.type.properties.0.type.typeParameters', [
         {kind: 'generic', name: 'T'},
       ]);
     });
@@ -406,16 +404,16 @@ describe('extractDocs', () => {
       `);
       const docs = findDocs(program, 'test.ts'); //?
       expect(docs).toHaveProperty('0.name', 'Foo');
-      expect(docs).toHaveProperty('0.typeInfo.kind', 'interface');
-      expect(docs).toHaveProperty('0.typeInfo.typeParameters.0.kind', 'typeParameter');
-      expect(docs).toHaveProperty('0.typeInfo.properties.0.name', 'foo');
-      expect(docs).toHaveProperty('0.typeInfo.properties.0.kind', 'member');
-      expect(docs).toHaveProperty('0.typeInfo.properties.0.typeInfo.kind', 'union');
-      expect(docs).toHaveProperty('0.typeInfo.properties.0.typeInfo.value.0', {
+      expect(docs).toHaveProperty('0.type.kind', 'interface');
+      expect(docs).toHaveProperty('0.type.typeParameters.0.kind', 'typeParameter');
+      expect(docs).toHaveProperty('0.type.properties.0.name', 'foo');
+      expect(docs).toHaveProperty('0.type.properties.0.kind', 'member');
+      expect(docs).toHaveProperty('0.type.properties.0.type.kind', 'union');
+      expect(docs).toHaveProperty('0.type.properties.0.type.value.0', {
         kind: 'generic',
         name: 'T',
       });
-      expect(docs).toHaveProperty('0.typeInfo.properties.0.typeInfo.value.1', {
+      expect(docs).toHaveProperty('0.type.properties.0.type.value.1', {
         kind: 'symbol',
         name: 'Bar',
         typeParameters: [{kind: 'generic', name: 'T'}],
@@ -430,16 +428,13 @@ describe('extractDocs', () => {
       `);
       const docs = findDocs(program, 'test.ts'); //?
       expect(docs).toHaveProperty('0.name', 'Foo');
-      expect(docs).toHaveProperty('0.typeInfo.kind', 'interface');
-      expect(docs).toHaveProperty('0.typeInfo.typeParameters.0.kind', 'typeParameter');
-      expect(docs).toHaveProperty('0.typeInfo.properties.0.name', 'foo');
-      expect(docs).toHaveProperty('0.typeInfo.properties.0.kind', 'member');
-      expect(docs).toHaveProperty('0.typeInfo.properties.0.typeInfo.kind', 'external');
-      expect(docs).toHaveProperty(
-        '0.typeInfo.properties.0.typeInfo.url',
-        expect.stringContaining('')
-      );
-      expect(docs).toHaveProperty('0.typeInfo.properties.0.typeInfo.typeParameters', [
+      expect(docs).toHaveProperty('0.type.kind', 'interface');
+      expect(docs).toHaveProperty('0.type.typeParameters.0.kind', 'typeParameter');
+      expect(docs).toHaveProperty('0.type.properties.0.name', 'foo');
+      expect(docs).toHaveProperty('0.type.properties.0.kind', 'member');
+      expect(docs).toHaveProperty('0.type.properties.0.type.kind', 'external');
+      expect(docs).toHaveProperty('0.type.properties.0.type.url', expect.stringContaining(''));
+      expect(docs).toHaveProperty('0.type.properties.0.type.typeParameters', [
         {kind: 'generic', name: 'T'},
       ]);
     });
@@ -452,13 +447,13 @@ describe('extractDocs', () => {
       `);
       const docs = findDocs(program, 'test.ts'); //?
       expect(docs).toHaveProperty('0.name', 'foo');
-      expect(docs).toHaveProperty('0.typeInfo.kind', 'object');
-      expect(docs).toHaveProperty('0.typeInfo.properties.0.name', 'bar');
-      expect(docs).toHaveProperty('0.typeInfo.properties.0.typeInfo', {
+      expect(docs).toHaveProperty('0.type.kind', 'object');
+      expect(docs).toHaveProperty('0.type.properties.0.name', 'bar');
+      expect(docs).toHaveProperty('0.type.properties.0.type', {
         kind: 'primitive',
         value: 'string',
       });
-      expect(docs).toHaveProperty('0.typeInfo.properties.0.defaultValue', {
+      expect(docs).toHaveProperty('0.type.properties.0.defaultValue', {
         kind: 'string',
         value: 'baz',
       });
@@ -472,13 +467,13 @@ describe('extractDocs', () => {
       `);
       const docs = findDocs(program, 'test.ts'); //?
       expect(docs).toHaveProperty('0.name', 'foo');
-      expect(docs).toHaveProperty('0.typeInfo.kind', 'object');
-      expect(docs).toHaveProperty('0.typeInfo.properties.0.name', 'bar');
-      expect(docs).toHaveProperty('0.typeInfo.properties.0.typeInfo', {
+      expect(docs).toHaveProperty('0.type.kind', 'object');
+      expect(docs).toHaveProperty('0.type.properties.0.name', 'bar');
+      expect(docs).toHaveProperty('0.type.properties.0.type', {
         kind: 'primitive',
         value: 'string',
       });
-      expect(docs).toHaveProperty('0.typeInfo.properties.0.defaultValue', {
+      expect(docs).toHaveProperty('0.type.properties.0.defaultValue', {
         kind: 'string',
         value: 'baz',
       });
@@ -492,16 +487,16 @@ describe('extractDocs', () => {
       `);
       const docs = findDocs(program, 'test.ts'); //?
       expect(docs).toHaveProperty('0.name', 'foo');
-      expect(docs).toHaveProperty('0.typeInfo.kind', 'object');
-      expect(docs).toHaveProperty('0.typeInfo.properties.0.name', 'bar');
-      expect(docs).toHaveProperty('0.typeInfo.properties.0.typeInfo', {
+      expect(docs).toHaveProperty('0.type.kind', 'object');
+      expect(docs).toHaveProperty('0.type.properties.0.name', 'bar');
+      expect(docs).toHaveProperty('0.type.properties.0.type', {
         kind: 'union',
         value: [
           {kind: 'string', value: 'bar'},
           {kind: 'string', value: 'baz'},
         ],
       });
-      expect(docs).toHaveProperty('0.typeInfo.properties.0.defaultValue', {
+      expect(docs).toHaveProperty('0.type.properties.0.defaultValue', {
         kind: 'string',
         value: 'bar',
       });
@@ -518,23 +513,14 @@ describe('extractDocs', () => {
       const docs = findDocs(program, 'test.ts'); //?
 
       expect(docs).toHaveProperty('0.name', 'foo');
-      expect(docs).toHaveProperty('0.typeInfo.kind', 'object');
-      expect(docs).toHaveProperty('0.typeInfo.properties.0.kind', 'parameter');
-      expect(docs).toHaveProperty('0.typeInfo.properties.0.name', 'getBar');
-      expect(docs).toHaveProperty('0.typeInfo.properties.0.typeInfo.kind', 'function');
-      expect(docs).toHaveProperty(
-        '0.typeInfo.properties.0.typeInfo.parameters.0.kind',
-        'parameter'
-      );
-      expect(docs).toHaveProperty('0.typeInfo.properties.0.typeInfo.parameters.0.name', 'input');
-      expect(docs).toHaveProperty(
-        '0.typeInfo.properties.0.typeInfo.parameters.0.typeInfo.kind',
-        'primitive'
-      );
-      expect(docs).toHaveProperty(
-        '0.typeInfo.properties.0.typeInfo.parameters.0.typeInfo.value',
-        'string'
-      );
+      expect(docs).toHaveProperty('0.type.kind', 'object');
+      expect(docs).toHaveProperty('0.type.properties.0.kind', 'parameter');
+      expect(docs).toHaveProperty('0.type.properties.0.name', 'getBar');
+      expect(docs).toHaveProperty('0.type.properties.0.type.kind', 'function');
+      expect(docs).toHaveProperty('0.type.properties.0.type.parameters.0.kind', 'parameter');
+      expect(docs).toHaveProperty('0.type.properties.0.type.parameters.0.name', 'input');
+      expect(docs).toHaveProperty('0.type.properties.0.type.parameters.0.type.kind', 'primitive');
+      expect(docs).toHaveProperty('0.type.properties.0.type.parameters.0.type.value', 'string');
     });
 
     it('should handle exported objects with method declarations', () => {
@@ -546,11 +532,11 @@ describe('extractDocs', () => {
       const docs = findDocs(program, 'test.ts'); //?
 
       expect(docs).toHaveProperty('0.name', 'foo');
-      expect(docs).toHaveProperty('0.typeInfo.kind', 'qualifiedName');
-      expect(docs).toHaveProperty('0.typeInfo.left.kind', 'symbol');
-      expect(docs).toHaveProperty('0.typeInfo.left.name', 'ts');
-      expect(docs).toHaveProperty('0.typeInfo.right.kind', 'string');
-      expect(docs).toHaveProperty('0.typeInfo.right.value', 'Node');
+      expect(docs).toHaveProperty('0.type.kind', 'qualifiedName');
+      expect(docs).toHaveProperty('0.type.left.kind', 'symbol');
+      expect(docs).toHaveProperty('0.type.left.name', 'ts');
+      expect(docs).toHaveProperty('0.type.right.kind', 'string');
+      expect(docs).toHaveProperty('0.type.right.value', 'Node');
     });
 
     it('should handle types that include other symbols when that symbol is exported', () => {
@@ -560,9 +546,9 @@ describe('extractDocs', () => {
       `);
       const docs = findDocs(program, 'test.ts'); //?
       expect(docs).toHaveProperty('1.name', 'Bar');
-      expect(docs).toHaveProperty('1.typeInfo.kind', 'type');
-      expect(docs).toHaveProperty('1.typeInfo.value.kind', 'symbol');
-      expect(docs).toHaveProperty('1.typeInfo.value.name', 'Foo');
+      expect(docs).toHaveProperty('1.type.kind', 'type');
+      expect(docs).toHaveProperty('1.type.value.kind', 'symbol');
+      expect(docs).toHaveProperty('1.type.value.name', 'Foo');
     });
 
     // it.only('should handle types with generics', () => {
@@ -571,7 +557,7 @@ describe('extractDocs', () => {
     //   `);
     //   const docs = findDocs(program, 'test.ts'); //?
     //   expect(docs).toHaveProperty('1.name', 'Bar');
-    //   expect(docs).toHaveProperty('1.typeInfo', {kind: 'symbol', value: 'Foo'});
+    //   expect(docs).toHaveProperty('1.type', {kind: 'symbol', value: 'Foo'});
     // });
 
     it('should handle types that include other symbols when that symbol is NOT exported', () => {
@@ -581,9 +567,9 @@ describe('extractDocs', () => {
       `);
       const docs = findDocs(program, 'test.ts'); //?
       expect(docs).toHaveProperty('0.name', 'Bar');
-      expect(docs).toHaveProperty('0.typeInfo.kind', 'type');
-      expect(docs).toHaveProperty('0.typeInfo.value.kind', 'string');
-      expect(docs).toHaveProperty('0.typeInfo.value.value', 'foo');
+      expect(docs).toHaveProperty('0.type.kind', 'type');
+      expect(docs).toHaveProperty('0.type.value.kind', 'string');
+      expect(docs).toHaveProperty('0.type.value.value', 'foo');
     });
 
     it('should handle functions with required parameters', () => {
@@ -594,12 +580,12 @@ describe('extractDocs', () => {
       `);
       const docs = findDocs(program, 'test.ts'); //?
       expect(docs).toHaveProperty('0.name', 'myFoo');
-      expect(docs).toHaveProperty('0.typeInfo.kind', 'function');
-      expect(docs).toHaveProperty('0.typeInfo.parameters.0.kind', 'parameter');
-      expect(docs).toHaveProperty('0.typeInfo.parameters.0.name', 'input');
-      expect(docs).toHaveProperty('0.typeInfo.parameters.0.defaultValue', undefined);
-      expect(docs).toHaveProperty('0.typeInfo.parameters.0.required', true);
-      expect(docs).toHaveProperty('0.typeInfo.parameters.0.typeInfo', {
+      expect(docs).toHaveProperty('0.type.kind', 'function');
+      expect(docs).toHaveProperty('0.type.parameters.0.kind', 'parameter');
+      expect(docs).toHaveProperty('0.type.parameters.0.name', 'input');
+      expect(docs).toHaveProperty('0.type.parameters.0.defaultValue', undefined);
+      expect(docs).toHaveProperty('0.type.parameters.0.required', true);
+      expect(docs).toHaveProperty('0.type.parameters.0.type', {
         kind: 'primitive',
         value: 'string',
       });
@@ -618,12 +604,12 @@ describe('extractDocs', () => {
       `);
       const docs = findDocs(program, 'test.ts'); //?
       expect(docs).toHaveProperty('0.name', 'myFoo');
-      expect(docs).toHaveProperty('0.typeInfo.kind', 'function');
-      expect(docs).toHaveProperty('0.typeInfo.parameters.0.kind', 'parameter');
-      expect(docs).toHaveProperty('0.typeInfo.parameters.0.name', 'input');
-      expect(docs).toHaveProperty('0.typeInfo.parameters.0.defaultValue', undefined);
-      expect(docs).toHaveProperty('0.typeInfo.parameters.0.required', false);
-      expect(docs).toHaveProperty('0.typeInfo.parameters.0.typeInfo', {
+      expect(docs).toHaveProperty('0.type.kind', 'function');
+      expect(docs).toHaveProperty('0.type.parameters.0.kind', 'parameter');
+      expect(docs).toHaveProperty('0.type.parameters.0.name', 'input');
+      expect(docs).toHaveProperty('0.type.parameters.0.defaultValue', undefined);
+      expect(docs).toHaveProperty('0.type.parameters.0.required', false);
+      expect(docs).toHaveProperty('0.type.parameters.0.type', {
         kind: 'primitive',
         value: 'string',
       });
@@ -637,15 +623,15 @@ describe('extractDocs', () => {
       `);
       const docs = findDocs(program, 'test.ts'); //?
       expect(docs).toHaveProperty('0.name', 'myFoo');
-      expect(docs).toHaveProperty('0.typeInfo.kind', 'function');
-      expect(docs).toHaveProperty('0.typeInfo.parameters.0.kind', 'parameter');
-      expect(docs).toHaveProperty('0.typeInfo.parameters.0.name', 'input');
-      expect(docs).toHaveProperty('0.typeInfo.parameters.0.defaultValue', {
+      expect(docs).toHaveProperty('0.type.kind', 'function');
+      expect(docs).toHaveProperty('0.type.parameters.0.kind', 'parameter');
+      expect(docs).toHaveProperty('0.type.parameters.0.name', 'input');
+      expect(docs).toHaveProperty('0.type.parameters.0.defaultValue', {
         kind: 'string',
         value: 'foo',
       });
-      expect(docs).toHaveProperty('0.typeInfo.parameters.0.required', false);
-      expect(docs).toHaveProperty('0.typeInfo.parameters.0.typeInfo', {
+      expect(docs).toHaveProperty('0.type.parameters.0.required', false);
+      expect(docs).toHaveProperty('0.type.parameters.0.type', {
         kind: 'primitive',
         value: 'string',
       });
@@ -660,12 +646,12 @@ describe('extractDocs', () => {
     `);
     const docs = findDocs(program, 'test.ts'); //?
     expect(docs).toHaveProperty('0.name', 'myFoo');
-    expect(docs).toHaveProperty('0.typeInfo.kind', 'function');
-    expect(docs).toHaveProperty('0.typeInfo.parameters.0.kind', 'parameter');
-    expect(docs).toHaveProperty('0.typeInfo.parameters.0.name', 'input');
-    expect(docs).toHaveProperty('0.typeInfo.parameters.0.defaultValue', undefined);
-    expect(docs).toHaveProperty('0.typeInfo.parameters.0.required', true);
-    expect(docs).toHaveProperty('0.typeInfo.parameters.0.typeInfo', {
+    expect(docs).toHaveProperty('0.type.kind', 'function');
+    expect(docs).toHaveProperty('0.type.parameters.0.kind', 'parameter');
+    expect(docs).toHaveProperty('0.type.parameters.0.name', 'input');
+    expect(docs).toHaveProperty('0.type.parameters.0.defaultValue', undefined);
+    expect(docs).toHaveProperty('0.type.parameters.0.required', true);
+    expect(docs).toHaveProperty('0.type.parameters.0.type', {
       kind: 'primitive',
       value: 'string',
     });
@@ -679,12 +665,12 @@ describe('extractDocs', () => {
     `);
     const docs = findDocs(program, 'test.ts'); //?
     expect(docs).toHaveProperty('0.name', 'myFoo');
-    expect(docs).toHaveProperty('0.typeInfo.kind', 'function');
-    expect(docs).toHaveProperty('0.typeInfo.parameters.0.kind', 'parameter');
-    expect(docs).toHaveProperty('0.typeInfo.parameters.0.name', 'input');
-    expect(docs).toHaveProperty('0.typeInfo.parameters.0.defaultValue', undefined);
-    expect(docs).toHaveProperty('0.typeInfo.parameters.0.required', true);
-    expect(docs).toHaveProperty('0.typeInfo.parameters.0.typeInfo', {
+    expect(docs).toHaveProperty('0.type.kind', 'function');
+    expect(docs).toHaveProperty('0.type.parameters.0.kind', 'parameter');
+    expect(docs).toHaveProperty('0.type.parameters.0.name', 'input');
+    expect(docs).toHaveProperty('0.type.parameters.0.defaultValue', undefined);
+    expect(docs).toHaveProperty('0.type.parameters.0.required', true);
+    expect(docs).toHaveProperty('0.type.parameters.0.type', {
       kind: 'primitive',
       value: 'string',
     });
@@ -698,25 +684,19 @@ describe('extractDocs', () => {
     `);
     const docs = findDocs(program, 'test.ts'); //?
     expect(docs).toHaveProperty('0.name', 'myFoo');
-    expect(docs).toHaveProperty('0.typeInfo.kind', 'function');
-    expect(docs).toHaveProperty('0.typeInfo.parameters.0.kind', 'parameter');
-    expect(docs).toHaveProperty('0.typeInfo.parameters.0.name', 'input');
-    expect(docs).toHaveProperty('0.typeInfo.parameters.0.defaultValue', undefined);
-    expect(docs).toHaveProperty('0.typeInfo.parameters.0.required', true);
-    expect(docs).toHaveProperty('0.typeInfo.parameters.0.typeInfo.kind', 'typeLiteral');
-    expect(docs).toHaveProperty('0.typeInfo.parameters.0.typeInfo.properties.0.kind', 'member');
-    expect(docs).toHaveProperty('0.typeInfo.parameters.0.typeInfo.properties.0.name', 'foo');
-    expect(docs).toHaveProperty(
-      '0.typeInfo.parameters.0.typeInfo.properties.0.typeInfo.kind',
-      'primitive'
-    );
-    expect(docs).toHaveProperty(
-      '0.typeInfo.parameters.0.typeInfo.properties.0.typeInfo.value',
-      'string'
-    );
+    expect(docs).toHaveProperty('0.type.kind', 'function');
+    expect(docs).toHaveProperty('0.type.parameters.0.kind', 'parameter');
+    expect(docs).toHaveProperty('0.type.parameters.0.name', 'input');
+    expect(docs).toHaveProperty('0.type.parameters.0.defaultValue', undefined);
+    expect(docs).toHaveProperty('0.type.parameters.0.required', true);
+    expect(docs).toHaveProperty('0.type.parameters.0.type.kind', 'typeLiteral');
+    expect(docs).toHaveProperty('0.type.parameters.0.type.properties.0.kind', 'member');
+    expect(docs).toHaveProperty('0.type.parameters.0.type.properties.0.name', 'foo');
+    expect(docs).toHaveProperty('0.type.parameters.0.type.properties.0.type.kind', 'primitive');
+    expect(docs).toHaveProperty('0.type.parameters.0.type.properties.0.type.value', 'string');
   });
 
-  it('should handle functions with destructured parameters', () => {
+  it.only('should handle functions with destructured parameters', () => {
     const program = createProgramFromSource(`
       export function myFoo(input: Props): boolean {
         return false
@@ -727,14 +707,15 @@ describe('extractDocs', () => {
     `);
     const docs = findDocs(program, 'test.ts'); //?
     expect(docs).toHaveProperty('0.name', 'myFoo');
-    expect(docs).toHaveProperty('0.typeInfo.kind', 'function');
-    expect(docs).toHaveProperty('0.typeInfo.parameters.0.kind', 'parameter');
-    expect(docs).toHaveProperty('0.typeInfo.parameters.0.name', 'input');
-    expect(docs).toHaveProperty('0.typeInfo.parameters.0.defaultValue', undefined);
-    expect(docs).toHaveProperty('0.typeInfo.parameters.0.required', true);
-    expect(docs).toHaveProperty('0.typeInfo.parameters.0.typeInfo.kind', 'symbol');
-    expect(docs).toHaveProperty('0.typeInfo.parameters.0.typeInfo.name', 'Props');
-    expect(docs).toHaveProperty('0.typeInfo.parameters.0.declarations', 'Props');
+    expect(docs).toHaveProperty('0.type.kind', 'function');
+    expect(docs).toHaveProperty('0.type.parameters.0.kind', 'parameter');
+    expect(docs).toHaveProperty('0.type.parameters.0.name', 'input');
+    expect(docs).toHaveProperty('0.type.parameters.0.defaultValue', undefined);
+    expect(docs).toHaveProperty('0.type.parameters.0.required', true);
+    expect(docs).toHaveProperty('0.type.parameters.0.type.kind', 'symbol');
+    expect(docs).toHaveProperty('0.type.parameters.0.type.name', 'Props');
+    expect(docs).toHaveProperty('0.type.parameters.0.declarations.0.name', 'input');
+    expect(docs).toHaveProperty('0.type.parameters.0.declarations.0.filePath', 'test.ts');
   });
 
   it('should add jsdoc to object properties', () => {
@@ -750,13 +731,13 @@ describe('extractDocs', () => {
   `);
     const docs = findDocs(program, 'test.ts'); //?
     expect(docs).toHaveProperty('0.name', 'foo');
-    expect(docs).toHaveProperty('0.typeInfo.kind', 'object');
-    expect(docs).toHaveProperty('0.typeInfo.properties.0.name', 'bar');
-    expect(docs).toHaveProperty('0.typeInfo.properties.0.typeInfo', {
+    expect(docs).toHaveProperty('0.type.kind', 'object');
+    expect(docs).toHaveProperty('0.type.properties.0.name', 'bar');
+    expect(docs).toHaveProperty('0.type.properties.0.type', {
       kind: 'primitive',
       value: 'string',
     });
-    expect(docs).toHaveProperty('0.typeInfo.properties.0.defaultValue', {
+    expect(docs).toHaveProperty('0.type.properties.0.defaultValue', {
       kind: 'string',
       value: 'baz',
     });

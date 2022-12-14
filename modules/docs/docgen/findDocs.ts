@@ -244,9 +244,6 @@ function getTypeValueFromNode(checker: ts.TypeChecker, node: ts.Node): Value {
     const type = checker.getTypeAtLocation(node);
     checker.typeToString(type); //?
     const properties = type.getProperties().map<TypeMember>(p => {
-      // p.parameters[0].name; //?
-      p.name; //?
-      t.getKindNameFromNode(getValueDeclaration(p)); //?
       return getTypeValueFromNode(checker, getValueDeclaration(p)!) as TypeMember;
     });
 
@@ -376,7 +373,7 @@ function getTypeValueFromNode(checker: ts.TypeChecker, node: ts.Node): Value {
     return {
       kind: 'member',
       name: symbol?.name || '',
-      typeInfo: node.type ? getTypeValueFromNode(checker, node.type) : unknownValue(node.getText()),
+      type: node.type ? getTypeValueFromNode(checker, node.type) : unknownValue(node.getText()),
       ...jsDoc,
     };
   }
@@ -395,7 +392,7 @@ function getTypeValueFromNode(checker: ts.TypeChecker, node: ts.Node): Value {
       kind: 'parameter',
       name: symbol?.name || '',
       defaultValue: getTypeValueFromNode(checker, node.initializer),
-      typeInfo: getValueFromType(checker, type) || unknownValue(node.getText()),
+      type: getValueFromType(checker, type) || unknownValue(node.getText()),
       required: symbol ? !isOptional(symbol) && !includesUndefined(type) : false,
       ...jsDoc,
     };
@@ -457,7 +454,7 @@ function getTypeValueFromNode(checker: ts.TypeChecker, node: ts.Node): Value {
         kind: 'parameter',
         name: symbol?.name || '',
         defaultValue: undefined,
-        typeInfo,
+        type: typeInfo,
         required: symbol ? !isOptional(symbol) && !includesUndefined(type) : false,
         ...jsDoc,
       };
@@ -479,7 +476,9 @@ function getTypeValueFromNode(checker: ts.TypeChecker, node: ts.Node): Value {
   }
 
   if (t.isTypeQuery(node)) {
+    'here'; //?
     if (isExportedSymbol(checker, node.exprName)) {
+      'here'; //?
       return {kind: 'symbol', name: node.exprName.getText()};
     }
     const symbol = getSymbolFromNode(checker, node.exprName);
@@ -564,7 +563,7 @@ function getTypeValueFromNode(checker: ts.TypeChecker, node: ts.Node): Value {
       kind: 'parameter',
       name: symbol?.name || '',
       defaultValue: node.initializer ? getTypeValueFromNode(checker, node.initializer) : undefined,
-      typeInfo,
+      type: typeInfo,
       required: isRequired,
       ...jsDoc,
     };
@@ -610,7 +609,7 @@ export function findDocs(program: ts.Program, fileName: string): ExportedSymbol[
         packageName: getPackageName(fileName),
         fileName,
         ...findDocComment(checker, symbol),
-        typeInfo: getTypeValueFromNode(checker, node),
+        type: getTypeValueFromNode(checker, node),
       });
     }
   });
