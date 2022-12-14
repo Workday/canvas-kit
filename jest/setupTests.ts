@@ -1,5 +1,4 @@
 import {toHaveNoViolations} from 'jest-axe';
-import {matchers} from '@emotion/jest';
 import '@testing-library/jest-dom/extend-expect';
 import {verifyComponent} from './verifyComponent';
 import {jest} from '@jest/globals';
@@ -7,7 +6,6 @@ import {jest} from '@jest/globals';
 import {setUniqueSeed, resetUniqueIdCount} from '@workday/canvas-kit-react/common';
 
 expect.extend(toHaveNoViolations);
-expect.extend(matchers);
 
 // add convenience variables to the global context
 (global as any).verifyComponent = verifyComponent;
