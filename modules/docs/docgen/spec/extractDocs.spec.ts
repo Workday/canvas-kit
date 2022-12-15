@@ -38,7 +38,80 @@ describe('extractDocs', () => {
       expect(docs).toHaveProperty('0.name', 'Foo');
       expect(docs).toHaveProperty('0.type.kind', 'type');
       expect(docs).toHaveProperty('0.type.value.kind', 'parenthesis');
-      expect(docs).toHaveProperty('0.type.value.value', {kind: 'primitive', value: 'number'});
+      expect(docs).toHaveProperty('0.type.value.value.kind', 'primitive');
+      expect(docs).toHaveProperty('0.type.value.value.value', 'number');
+    });
+
+    it('should find an exported type of a function type', () => {
+      const program = createProgramFromSource(`
+        export type Foo = (input: number) => void;
+      `);
+      const docs = findDocs(program, 'test.ts'); //?
+
+      expect(docs).toHaveProperty('0.name', 'Foo');
+      expect(docs).toHaveProperty('0.type.kind', 'type');
+      expect(docs).toHaveProperty('0.type.value.kind', 'function');
+      expect(docs).toHaveProperty('0.type.value.parameters.0.kind', 'parameter');
+      expect(docs).toHaveProperty('0.type.value.parameters.0.name', 'input');
+      expect(docs).toHaveProperty('0.type.value.parameters.0.type.kind', 'primitive');
+      expect(docs).toHaveProperty('0.type.value.parameters.0.type.value', 'number');
+      expect(docs).toHaveProperty('0.type.value.returnType.kind', 'primitive');
+      expect(docs).toHaveProperty('0.type.value.returnType.value', 'void');
+    });
+
+    it('should find an exported type of a function return type', () => {
+      const program = createProgramFromSource(`
+        export type Foo = (input: number) => Bar;
+
+        export interface Bar {
+          foo: string
+        };
+      `);
+      const docs = findDocs(program, 'test.ts'); //?
+
+      expect(docs).toHaveProperty('0.name', 'Foo');
+      expect(docs).toHaveProperty('0.type.kind', 'type');
+      expect(docs).toHaveProperty('0.type.value.kind', 'function');
+      expect(docs).toHaveProperty('0.type.value.parameters.0.kind', 'parameter');
+      expect(docs).toHaveProperty('0.type.value.parameters.0.name', 'input');
+      expect(docs).toHaveProperty('0.type.value.parameters.0.type.kind', 'primitive');
+      expect(docs).toHaveProperty('0.type.value.parameters.0.type.value', 'number');
+      expect(docs).toHaveProperty('0.type.value.returnType.kind', 'symbol');
+      expect(docs).toHaveProperty('0.type.value.returnType.name', 'Bar');
+    });
+
+    it('should find an external type of a function return type', () => {
+      const program = createProgramFromSource(`
+        export type Foo = (input: number) => Element;
+      `);
+      const docs = findDocs(program, 'test.ts'); //?
+
+      expect(docs).toHaveProperty('0.name', 'Foo');
+      expect(docs).toHaveProperty('0.type.kind', 'type');
+      expect(docs).toHaveProperty('0.type.value.kind', 'function');
+      expect(docs).toHaveProperty('0.type.value.parameters.0.kind', 'parameter');
+      expect(docs).toHaveProperty('0.type.value.parameters.0.name', 'input');
+      expect(docs).toHaveProperty('0.type.value.parameters.0.type.kind', 'primitive');
+      expect(docs).toHaveProperty('0.type.value.parameters.0.type.value', 'number');
+      expect(docs).toHaveProperty('0.type.value.returnType.kind', 'external');
+    });
+
+    it('should find an external type of a function return type with generics', () => {
+      const program = createProgramFromSource(`
+        export type Foo = (input: number) => Promise<Bar>;
+
+        interface Bar {}
+      `);
+      const docs = findDocs(program, 'test.ts'); //?
+
+      expect(docs).toHaveProperty('0.name', 'Foo');
+      expect(docs).toHaveProperty('0.type.kind', 'type');
+      expect(docs).toHaveProperty('0.type.value.kind', 'function');
+      expect(docs).toHaveProperty('0.type.value.parameters.0.kind', 'parameter');
+      expect(docs).toHaveProperty('0.type.value.parameters.0.name', 'input');
+      expect(docs).toHaveProperty('0.type.value.parameters.0.type.kind', 'primitive');
+      expect(docs).toHaveProperty('0.type.value.parameters.0.type.value', 'number');
+      expect(docs).toHaveProperty('0.type.value.returnType.kind', 'external');
     });
 
     it('should find an exported type of an exported IndexAccessType', () => {
@@ -562,8 +635,8 @@ describe('extractDocs', () => {
 
     it('should handle types that include other symbols when that symbol is NOT exported', () => {
       const program = createProgramFromSource(`
-        type Foo = 'foo';
-        export type Bar = Foo;
+        type Foo<T> = T;
+        export type Bar = Foo<'foo'>;
       `);
       const docs = findDocs(program, 'test.ts'); //?
       expect(docs).toHaveProperty('0.name', 'Bar');
@@ -651,10 +724,8 @@ describe('extractDocs', () => {
     expect(docs).toHaveProperty('0.type.parameters.0.name', 'input');
     expect(docs).toHaveProperty('0.type.parameters.0.defaultValue', undefined);
     expect(docs).toHaveProperty('0.type.parameters.0.required', true);
-    expect(docs).toHaveProperty('0.type.parameters.0.type', {
-      kind: 'primitive',
-      value: 'string',
-    });
+    expect(docs).toHaveProperty('0.type.parameters.0.type.kind', 'primitive');
+    expect(docs).toHaveProperty('0.type.parameters.0.type.value', 'string');
   });
 
   it('should handle arrow functions that are typed with required parameters', () => {
@@ -696,7 +767,7 @@ describe('extractDocs', () => {
     expect(docs).toHaveProperty('0.type.parameters.0.type.properties.0.type.value', 'string');
   });
 
-  it.only('should handle functions with destructured parameters', () => {
+  it('should handle functions with exported destructured parameters', () => {
     const program = createProgramFromSource(`
       export function myFoo(input: Props): boolean {
         return false
@@ -716,6 +787,28 @@ describe('extractDocs', () => {
     expect(docs).toHaveProperty('0.type.parameters.0.type.name', 'Props');
     expect(docs).toHaveProperty('0.type.parameters.0.declarations.0.name', 'input');
     expect(docs).toHaveProperty('0.type.parameters.0.declarations.0.filePath', 'test.ts');
+  });
+
+  it('should handle functions with destructured parameters', () => {
+    const program = createProgramFromSource(`
+      export function myFoo(input: Props): boolean {
+        return false
+      }
+      interface Props {
+        foo: string
+      }
+    `);
+    const docs = findDocs(program, 'test.ts'); //?
+    expect(docs).toHaveProperty('0.name', 'myFoo');
+    expect(docs).toHaveProperty('0.type.kind', 'function');
+    expect(docs).toHaveProperty('0.type.parameters.0.kind', 'parameter');
+    expect(docs).toHaveProperty('0.type.parameters.0.name', 'input');
+    expect(docs).toHaveProperty('0.type.parameters.0.defaultValue', undefined);
+    expect(docs).toHaveProperty('0.type.parameters.0.required', true);
+    expect(docs).toHaveProperty('0.type.parameters.0.type.kind', 'interface');
+    expect(docs).toHaveProperty('0.type.parameters.0.type.properties.0.name', 'foo');
+    expect(docs).toHaveProperty('0.type.parameters.0.type.properties.0.type.kind', 'primitive');
+    expect(docs).toHaveProperty('0.type.parameters.0.type.properties.0.type.value', 'string');
   });
 
   it('should add jsdoc to object properties', () => {

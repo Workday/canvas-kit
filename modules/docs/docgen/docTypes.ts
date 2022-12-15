@@ -218,7 +218,7 @@ export interface StringLiteralValue {
 
 export interface PrimitiveValue {
   kind: 'primitive';
-  value: 'string' | 'number' | 'null' | 'undefined' | 'boolean' | 'any';
+  value: 'string' | 'number' | 'null' | 'undefined' | 'boolean' | 'any' | 'void';
 }
 
 export interface AnyValue {
