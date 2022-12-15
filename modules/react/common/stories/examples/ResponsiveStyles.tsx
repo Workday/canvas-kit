@@ -87,7 +87,7 @@ export const ResponsiveContainer = () => {
   };
 
   return (
-    <Box ref={ref} maxWidth={contWidth}>
+    <Box ref={ref} width={contWidth}>
       <FormField label={'Container Size'}>
         <Select onChange={handleChange} value={value}>
           <SelectOption label="1024px" value="desktop" />
