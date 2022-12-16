@@ -96,6 +96,45 @@ describe('extractDocs', () => {
       expect(docs).toHaveProperty('0.type.value.returnType.kind', 'external');
     });
 
+    it('should find ', () => {
+      const program = createProgramFromSource(`
+        export const Foo = (...args: string[]) => null;
+      `);
+      const docs = findDocs(program, 'test.ts'); //?
+
+      expect(docs).toHaveProperty('0.name', 'Foo');
+      expect(docs).toHaveProperty('0.type.kind', 'function');
+      expect(docs).toHaveProperty('0.type.parameters.0.kind', 'parameter');
+      expect(docs).toHaveProperty('0.type.parameters.0.name', 'args');
+      expect(docs).toHaveProperty('0.type.parameters.0.rest', true);
+      expect(docs).toHaveProperty('0.type.parameters.0.type.kind', 'array');
+      expect(docs).toHaveProperty('0.type.parameters.0.type.value.kind', 'primitive');
+      expect(docs).toHaveProperty('0.type.parameters.0.type.value.value', 'string');
+    });
+
+    it('should find an external type of a function return union type', () => {
+      const program = createProgramFromSource(`
+        export const Foo = (input: {}) => null as Element | null;
+      `);
+      const docs = findDocs(program, 'test.ts'); //?
+
+      expect(docs).toHaveProperty('0.name', 'Foo');
+      expect(docs).toHaveProperty('0.type.kind', 'function');
+      expect(docs).toHaveProperty('0.type.parameters.0.kind', 'parameter');
+      expect(docs).toHaveProperty('0.type.parameters.0.name', 'input');
+      expect(docs).toHaveProperty('0.type.parameters.0.type.kind', 'typeLiteral');
+      expect(docs).toHaveProperty('0.type.parameters.0.type.properties', []);
+      expect(docs).toHaveProperty('0.type.returnType.kind', 'union');
+      expect(docs).toHaveProperty('0.type.returnType.value.0.kind', 'primitive');
+      expect(docs).toHaveProperty('0.type.returnType.value.0.value', 'null');
+      expect(docs).toHaveProperty('0.type.returnType.value.1.kind', 'external');
+      expect(docs).toHaveProperty('0.type.returnType.value.1.name', 'Element');
+      expect(docs).toHaveProperty(
+        '0.type.returnType.value.1.url',
+        expect.stringContaining('element')
+      );
+    });
+
     it('should find an external type of a function return type with generics', () => {
       const program = createProgramFromSource(`
         export type Foo = (input: number) => Promise<Bar>;

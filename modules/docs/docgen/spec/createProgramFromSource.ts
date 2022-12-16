@@ -24,6 +24,7 @@ export function createProgramFromSource(
     getSourceFile: (name, languageVersion) => {
       name; //?
       // Get the file from our mock list, but read source lib files
+      ts.sys.readFile;
       return (
         sourceFiles.find(s => s.fileName === name) ||
         // defaultCompilerHost.getSourceFile(name, languageVersion)
@@ -31,6 +32,12 @@ export function createProgramFromSource(
           ? ts.createSourceFile(
               name,
               ts.sys.readFile(`node_modules/typescript/lib/${name}`),
+              languageVersion
+            )
+          : name === 'node_modules/react.ts'
+          ? ts.createSourceFile(
+              name,
+              ts.sys.readFile(`node_modules/@types/react/index.d.ts`),
               languageVersion
             )
           : defaultCompilerHost.getSourceFile(name, languageVersion))

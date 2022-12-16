@@ -16,6 +16,8 @@ export interface ObjectParameter extends JSDoc {
   defaultValue?: Value;
   type: Value;
   required: boolean;
+  /** Is this a rest parameter? */
+  rest?: boolean;
 }
 
 /** Members of an object type like an interface or a type alias of an object */
@@ -31,6 +33,11 @@ export interface ExportedSymbol extends JSDoc {
   packageName: string;
   fileName: string;
   type: Value;
+}
+
+export interface ComponentValue {
+  kind: 'component';
+  props: ObjectParameter[];
 }
 
 export interface ModelValue {
@@ -64,6 +71,7 @@ export type Value =
   | TypeValue
   | TupleValue
   | TypeLiteralValue
+  | ComponentValue
   | ModelValue
   | ElemPropsHookValue
   | IntersectionValue
