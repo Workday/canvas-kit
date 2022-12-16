@@ -336,7 +336,7 @@ describe('Pagination', () => {
         it('should go to the specified page if the value is within the range', () => {
           cy.get('form')
             .find('input')
-            .clear() // clear initial value of 1
+            .clear()
             .type('8');
           cy.get('form')
             .find('input')
@@ -377,7 +377,7 @@ describe('Pagination', () => {
         it('should go to the first page if a number below the range size is submitted', () => {
           cy.get('form')
             .find('input')
-            .clear() // reset input value
+            .clear()
             .type('0');
           cy.get('form')
             .find('input')
