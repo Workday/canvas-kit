@@ -60,6 +60,7 @@ export type Value =
   | GenericValue
   | NumberLiteralValue
   | StringLiteralValue
+  | BooleanLiteralValue
   | PrimitiveValue
   | UnionValue
   | ObjectValue
@@ -222,6 +223,11 @@ export interface NumberLiteralValue {
 export interface StringLiteralValue {
   kind: 'string';
   value: string;
+}
+
+export interface BooleanLiteralValue {
+  kind: 'boolean';
+  value: boolean;
 }
 
 export interface PrimitiveValue {

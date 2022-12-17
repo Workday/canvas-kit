@@ -14,7 +14,7 @@ describe('extractDocs', () => {
 
     it('should find an exported type of number', () => {
       const program = createProgramFromSource('export type Foo = 10');
-      const docs = findDocs(program, 'test.ts');
+      const docs = findDocs(program, 'test.ts'); //?
 
       expect(docs).toHaveProperty('0.name', 'Foo');
       expect(docs).toHaveProperty('0.type.kind', 'type');
@@ -96,7 +96,7 @@ describe('extractDocs', () => {
       expect(docs).toHaveProperty('0.type.value.returnType.kind', 'external');
     });
 
-    it('should find ', () => {
+    it('should find rest parameters of a function', () => {
       const program = createProgramFromSource(`
         export const Foo = (...args: string[]) => null;
       `);
@@ -133,6 +133,20 @@ describe('extractDocs', () => {
         '0.type.returnType.value.1.url',
         expect.stringContaining('element')
       );
+    });
+
+    it('should find an external type of a function return union type', () => {
+      const program = createProgramFromSource(`
+        export const keys = ['foo', 'bar'] as const;
+      `);
+      const docs = findDocs(program, 'test.ts'); //?
+
+      expect(docs).toHaveProperty('0.name', 'keys');
+      expect(docs).toHaveProperty('0.type.kind', 'union');
+      expect(docs).toHaveProperty('0.type.value.0.kind', 'string');
+      expect(docs).toHaveProperty('0.type.value.0.value', 'foo');
+      expect(docs).toHaveProperty('0.type.value.1.kind', 'string');
+      expect(docs).toHaveProperty('0.type.value.1.value', 'bar');
     });
 
     it('should find an external type of a function return type with generics', () => {
