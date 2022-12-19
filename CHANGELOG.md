@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v8.3.2](https://github.com/Workday/canvas-kit/releases/tag/v8.3.2) (2022-12-19)
+
+### Components
+
+- fix: Set Pagination GoTo TextInput to use current page as initial value ([#1930](https://github.com/Workday/canvas-kit/pull/1930)) ([@alanbsmith](https://github.com/alanbsmith), manuel.carrera)
+
+
 ## [v8.3.1](https://github.com/Workday/canvas-kit/releases/tag/v8.3.1) (2022-12-16)
 
 ### Components
