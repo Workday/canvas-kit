@@ -37,6 +37,7 @@ export interface ExportedSymbol extends JSDoc {
 
 export interface ComponentValue {
   kind: 'component';
+  members?: Value[];
   props: ObjectParameter[];
 }
 
@@ -66,6 +67,7 @@ export type Value =
   | ObjectValue
   | ArrayValue
   | IndexedAccessValue
+  | IndexSignatureValue
   | QualifiedNameValue
   | ParenthesisValue
   | InterfaceValue
@@ -81,6 +83,7 @@ export type Value =
   | FunctionValue
   | TypeParameter
   | ExternalSymbolValue
+  | ConditionalTypeValue
   | UnknownValue;
 
 /** A value meant to link to an exported symbol. This should be treated like a pointer to an `ExportedSymbol` by name */
@@ -134,7 +137,6 @@ export interface InterfaceValue {
   typeParameters: TypeParameter[];
   properties: TypeMember[];
   callSignature?: FunctionValue;
-  indexSignature?: Value;
 }
 
 /**
@@ -159,6 +161,14 @@ export interface TypeValue {
   typeParameters: TypeParameter[];
 }
 
+export interface ConditionalTypeValue {
+  kind: 'conditional';
+  check: Value;
+  extends: Value;
+  trueType: Value;
+  falseType: Value;
+}
+
 /**
  * Index Signatures are signatures of an interface
  *
@@ -170,17 +180,21 @@ export interface TypeValue {
  * // output
  * {
  *   kind: 'interface',
- *   indexSignature: {
- *     kind: 'indexSignature',
- *     parameter: { kind: 'primitive', value: 'string' },
- *     value: { kind: 'primitive', value: 'boolean' }
- *   }
+ *   properties: [
+ *     {
+ *       kind: 'indexSignature',
+ *       name: 'key',
+ *       type: {kind: 'primitive', value: 'boolean'},
+ *       value: {kind: 'primitive', value: 'string'},
+ *     }
+ *   ]
  * }
  * ```
  */
 export interface IndexSignatureValue {
   kind: 'indexSignature';
-  parameter: PrimitiveValue;
+  name: string;
+  type: Value;
   value: Value;
 }
 
@@ -258,5 +272,6 @@ export interface IntersectionValue {
 export interface FunctionValue {
   kind: 'function';
   parameters: ObjectParameter[];
+  members?: Value[];
   returnType: Value;
 }
