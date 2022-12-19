@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v8.3.1](https://github.com/Workday/canvas-kit/releases/tag/v8.3.1) (2022-12-16)
+
+### Components
+
+- chore: Remove conventional-recommended-bump from release.yml ([#1961](https://github.com/Workday/canvas-kit/pull/1961)) ([@alanbsmith](https://github.com/alanbsmith))
+
+### Dependencies
+
+- chore: Remove @emotion/jest ([#1957](https://github.com/Workday/canvas-kit/pull/1957)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+### Infrastructure
+
+- chore: Remove question template and dead links ([#1958](https://github.com/Workday/canvas-kit/pull/1958)) ([@jaclynjessup](https://github.com/jaclynjessup))
+
+
 ## [v8.3.0](https://github.com/Workday/canvas-kit/releases/tag/v8.3.0) (2022-12-09)
 
 ### Components
