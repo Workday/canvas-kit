@@ -1,10 +1,10 @@
 import React from 'react';
 
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, ExtractProps} from '@workday/canvas-kit-react/common';
 import {Box} from '@workday/canvas-kit-react/layout';
 import {colors, space, type} from '@workday/canvas-kit-react/tokens';
 
-export interface ExpandableTitleProps {
+export interface ExpandableTitleProps extends ExtractProps<typeof Box, never> {
   /**
    * Children of the `Expandable.Title`. This should contain a string for the title
    */

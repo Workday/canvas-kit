@@ -17,7 +17,6 @@
     "@emotion/babel-plugin": "^11.9.2",
     "@emotion/eslint-plugin": "^11.7.0",
     "@emotion/is-prop-valid": "^1.1.1",
-    "@emotion/jest": "^11.9.3",
     "@storybook/addon-essentials": "^6.5.9",
     "@storybook/addon-storysource": "^6.5.9",
     "@storybook/components": "^6.5.9",
