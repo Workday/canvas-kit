@@ -1,7 +1,6 @@
 const extractExports = require('@workday/canvas-kit-docs/webpack/extract-exports');
 
 module.exports = function sourceAndPropTypeLoader(/** @type string */ source) {
-  console.log('this', this.context);
   const raw = JSON.stringify(source)
     .replace(/\u2028/g, '\\u2028')
     .replace(/\u2029/g, '\\u2029');

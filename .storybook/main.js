@@ -7,6 +7,7 @@ const getSpecifications = require('../modules/docs/utils/get-specifications');
 const getComponentPropMap = require('../modules/docs/utils/get-component-prop-map');
 
 const props = require('../props.json');
+const docs = require('../docs.json');
 
 module.exports = {
   stories: [
@@ -54,6 +55,13 @@ module.exports = {
           options: {
             search: '{/* PROP_MAP_REPLACE_BY_WEBPACK */}',
             replace: JSON.stringify(propMap, null, '  '),
+          },
+        },
+        {
+          loader: require.resolve('string-replace-loader'),
+          options: {
+            search: '[/* DOCS_REPLACE_BY_WEBPACK */]',
+            replace: JSON.stringify(docs, null, '  '),
           },
         },
       ],
@@ -118,17 +126,17 @@ module.exports = {
       enforce: 'pre',
     });
 
-    config.module.rules.push({
-      test: /.+\.tsx$/,
-      include: [modulesPath],
-      exclude: /examples|stories/,
-      loaders: [
-        {
-          loader: path.resolve(__dirname, `../modules/docs/webpack/inject-module-name-loader`),
-        },
-      ],
-      enforce: 'pre',
-    });
+    // config.module.rules.push({
+    //   test: /.+\.tsx$/,
+    //   include: [modulesPath],
+    //   exclude: /examples|stories/,
+    //   loaders: [
+    //     {
+    //       loader: path.resolve(__dirname, `../modules/docs/webpack/inject-module-name-loader`),
+    //     },
+    //   ],
+    //   enforce: 'pre',
+    // });
 
     // Load our scss files with postscss.
     // Note: This is the same as @storybook/preset-scss, but with postcss added.

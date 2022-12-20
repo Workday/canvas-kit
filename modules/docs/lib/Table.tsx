@@ -3,7 +3,7 @@ import {createComponent, StyledType} from '@workday/canvas-kit-react/common';
 import {Box, BoxProps} from '@workday/canvas-kit-react/layout';
 import {Text, TextProps} from '@workday/canvas-kit-react/text';
 import styled from '@emotion/styled';
-import {space, type} from '@workday/canvas-kit-react/tokens';
+import {type} from '@workday/canvas-kit-react/tokens';
 
 const TableHead = createComponent('thead')({
   Component: (props: BoxProps, ref, Element) => {
@@ -44,7 +44,6 @@ const TableHeader = createComponent('th')({
 
 const StyledText = styled(Text)<StyledType>({
   code: {
-    padding: `2px ${space.xxxs}`,
     fontSize: '12px',
     fontFamily: type.properties.fontFamilies.monospace,
   },

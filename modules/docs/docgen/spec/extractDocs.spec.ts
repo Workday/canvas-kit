@@ -987,4 +987,22 @@ describe('extractDocs', () => {
     expect(docs).toHaveProperty('0.type.properties.0.value.kind', 'primitive');
     expect(docs).toHaveProperty('0.type.properties.0.value.value', 'number');
   });
+
+  it.only('should handle enums', () => {
+    const program = createProgramFromSource(`
+      export enum MyEnum {
+        Foo = 'foo',
+        Bar = 'bar',
+      }
+    `);
+    const docs = findDocs(program, 'test.ts'); //?
+    expect(docs).toHaveProperty('0.name', 'MyEnum');
+    expect(docs).toHaveProperty('0.type.kind', 'interface');
+    expect(docs).toHaveProperty('0.type.properties.0.kind', 'indexSignature');
+    expect(docs).toHaveProperty('0.type.properties.0.name', 'key');
+    expect(docs).toHaveProperty('0.type.properties.0.type.kind', 'primitive');
+    expect(docs).toHaveProperty('0.type.properties.0.type.value', 'string');
+    expect(docs).toHaveProperty('0.type.properties.0.value.kind', 'primitive');
+    expect(docs).toHaveProperty('0.type.properties.0.value.value', 'number');
+  });
 });

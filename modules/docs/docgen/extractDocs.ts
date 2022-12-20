@@ -140,21 +140,21 @@ export function getConfig() {
 
 srcFolder; //?
 
-// glob(`${srcFolder}/modules/**/*.{ts,tsx}`, {
-//   ignore: ['**/examples/**', '**/spec/**', '**/stories/**', '**/codemod/**', '**/docs/**'],
-// })
-//   .then(files => {
-//     files.length; //?
-//     const fileNames = [
-//       '/Users/nicholas.boll/projects/canvas-kit/modules/labs-react/combobox/lib/AutocompleteList.tsx',
-//     ];
-//     const program = ts.createProgram(files, getConfig());
-//     return files.flatMap(fileName => {
-//       console.log(fileName); //?
-//       return findDocs(program, fileName);
-//     });
-//   })
-//   .then(docs => {
-//     docs; //?
-//     return fs.promises.writeFile('docs.json', JSON.stringify(docs, null, '  '));
-//   });
+glob(`${srcFolder}/modules/**/*.{ts,tsx}`, {
+  ignore: ['**/examples/**', '**/spec/**', '**/stories/**', '**/codemod/**', '**/docs/**'],
+})
+  .then(files => {
+    files.length; //?
+    const fileNames = [
+      '/Users/nicholas.boll/projects/canvas-kit/modules/preview-react/color-picker/lib/ColorPicker.tsx',
+    ];
+    const program = ts.createProgram(files, getConfig());
+    return files.flatMap(fileName => {
+      console.log(fileName); //?
+      return findDocs(program, fileName);
+    });
+  })
+  .then(docs => {
+    docs; //?
+    return fs.promises.writeFile('docs.json', JSON.stringify(docs, null, '  '));
+  });

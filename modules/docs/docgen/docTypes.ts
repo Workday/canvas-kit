@@ -28,11 +28,11 @@ export interface TypeMember extends JSDoc {
 }
 
 /** Top level symbols exported by files */
-export interface ExportedSymbol extends JSDoc {
+export interface ExportedSymbol<T = Value> extends JSDoc {
   name: string;
   packageName: string;
   fileName: string;
-  type: Value;
+  type: T;
 }
 
 export interface ComponentValue {
