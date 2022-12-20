@@ -1,13 +1,14 @@
 import React from 'react';
-import * as CanvasIcons from '@workday/canvas-system-icons-web';
+import * as CanvasAccenttIcons from '@workday/canvas-accent-icons-web';
 import {Box, Flex} from '@workday/canvas-kit-react/layout';
-import {SystemIcon} from '@workday/canvas-kit-react/icon';
+import {AccentIcon} from '@workday/canvas-kit-react/icon';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 
-const ImportedIcons = Object.keys(CanvasIcons);
+const ImportedIcons = Object.keys(CanvasAccenttIcons);
 
-const allIcons = ImportedIcons.filter(icon => icon !== 'CanvasSystemIcons');
-export const SystemIconList = () => {
+const allIcons = ImportedIcons.filter(icon => icon !== 'CanvasAccenttIcons');
+
+export const AccentIconList = () => {
   const [value, setValue] = React.useState('');
 
   const handleSearch = (e: any) => {
@@ -37,7 +38,7 @@ export const SystemIconList = () => {
                 key={index}
               >
                 <Box>
-                  <SystemIcon icon={CanvasIcons[singleIcon]} />
+                  <AccentIcon icon={CanvasAccenttIcons[singleIcon]} />
                 </Box>
                 <Box>{singleIcon}</Box>
               </Flex>

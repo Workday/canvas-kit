@@ -27,6 +27,8 @@ function storySort(a, b) {
     prefix('hooks-and-utilities-', '5'),
     prefix('preview-', '6'),
     prefix('labs-', '7'),
+    prefix('assets-', '8'),
+    prefix('overview', 'a'),
     prefix('css-', 'zzzz'),
     prefix('basic', 'aa'),
     prefix('default', 'ab'),
