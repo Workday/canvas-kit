@@ -7,9 +7,6 @@ const getSpecifications = require('../modules/docs/utils/get-specifications');
 
 module.exports = {
   stories: [
-    // '../modules/docs/mdx/**/*.mdx',
-    // '../modules/**/*.stories.mdx',
-    // '../modules/**/stories*.@(js|jsx|ts|tsx)',
     '../modules/docs/mdx/**/*.mdx',
     '../modules/**/*.stories.mdx',
     '../modules/**/stories*.@(js|jsx|ts|tsx)',
@@ -24,7 +21,6 @@ module.exports = {
     },
     './readme-panel/preset.js',
     '@storybook/addon-storysource',
-    'storybook-version',
   ],
   typescript: {
     check: false,

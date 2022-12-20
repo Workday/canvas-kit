@@ -20,15 +20,15 @@ export const WelcomePage = () => {
           <Text
             typeLevel="title.medium"
             color={colors.frenchVanilla100}
-            fontSize="6vw"
-            marginBottom="m"
-            style={{lineHeight: '3vw'}}
+            fontSize="6vmin"
+            marginBottom="s"
+            style={{lineHeight: '3vmin'}}
           >
             Canvas Kit
           </Text>
           <Text
             typeLevel="body.large"
-            fontSize="3vw"
+            fontSize="3vmin"
             style={{lineHeight: '2vw'}}
             color={colors.frenchVanilla100}
           >
