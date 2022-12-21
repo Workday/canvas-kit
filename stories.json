@@ -4326,6 +4326,20 @@
         "__isArgsStory": false
       }
     },
+    "components-navigation-pagination-react--responsive-range": {
+      "id": "components-navigation-pagination-react--responsive-range",
+      "name": "Responsive Range",
+      "title": "Components/Navigation/Pagination/React",
+      "importPath": "./modules/react/pagination/stories/pagination.stories.mdx",
+      "kind": "Components/Navigation/Pagination/React",
+      "story": "Responsive Range",
+      "parameters": {
+        "fileName": "./modules/react/pagination/stories/pagination.stories.mdx",
+        "framework": "react",
+        "__id": "components-navigation-pagination-react--responsive-range",
+        "__isArgsStory": false
+      }
+    },
     "components-navigation-pagination-react--rtl": {
       "id": "components-navigation-pagination-react--rtl",
       "name": "RTL",
