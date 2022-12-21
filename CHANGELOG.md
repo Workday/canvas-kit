@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v8.3.3](https://github.com/Workday/canvas-kit/releases/tag/v8.3.3) (2022-12-21)
+
+### Documentation
+
+- docs: Add Pagination responsive range example ([#1966](https://github.com/Workday/canvas-kit/pull/1966)) ([@alanbsmith](https://github.com/alanbsmith), Will Klein)
+
+
 ## [v8.3.2](https://github.com/Workday/canvas-kit/releases/tag/v8.3.2) (2022-12-19)
 
 ### Components
