@@ -34,8 +34,8 @@ export const ResponsiveRange = () => {
     onResize: ({width}) => {
       // Note: onResizeObserver only accounts for the size of the container.
       // It does not factor in margin, padding, or border widths.
-      // So, if you want to be exact, you'll need to adjust your math a bit to account for those.
-      // But if you're okay with being close enough on the measurements, this is fine.
+      // If you want to be exact, adjust your math to account for those.
+      // If you're okay with being close enough on the measurements, this is fine.
       if (width) {
         // updating the container width for the display text
         setContainerWidth(width);
