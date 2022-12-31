@@ -33,16 +33,16 @@ class DocgenPlugin {
 
         if (moduleCount !== modulesToProcess.length) {
           // create a shared TS program of all TS files used by webpack
-          tsProgram = getTsProgram(modulesToProcess.map(v => v.userRequest));
+          // tsProgram = getTsProgram(modulesToProcess.map(v => v.userRequest));
           moduleCount = modulesToProcess.length;
-          console.log('modules', moduleCount);
-          fs.writeFileSync(
-            'modules.json',
-            JSON.stringify(modulesToProcess.map(v => v.userRequest, null, '  '))
-          );
+          console.log('moduleCount', moduleCount);
+          // fs.writeFileSync(
+          //   'modules.json',
+          //   JSON.stringify(modulesToProcess.map(v => v.userRequest, null, '  '))
+          // );
         }
 
-        modulesToProcess.forEach(m => processModule(m, tsProgram));
+        // modulesToProcess.forEach(m => processModule(m, tsProgram));
       });
     });
   }

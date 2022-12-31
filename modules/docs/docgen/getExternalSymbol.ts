@@ -13,6 +13,8 @@ const externalSymbols: Record<string, Record<string, string>> = {
     Element: 'https://reactjs.org/docs/rendering-elements.html', // JSX.Element directs here
     ReactElement: 'https://reactjs.org/docs/rendering-elements.html',
     'React.ReactElement': 'https://reactjs.org/docs/rendering-elements.html',
+    ReactNode: 'https://reactjs.org/docs/rendering-elements.html',
+    'React.ReactNode': 'https://reactjs.org/docs/rendering-elements.html',
     SyntheticEvent: 'https://reactjs.org/docs/events.html',
     'React.SyntheticEvent': 'https://reactjs.org/docs/events.html',
   }

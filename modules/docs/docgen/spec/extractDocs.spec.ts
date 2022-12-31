@@ -998,11 +998,12 @@ describe('extractDocs', () => {
     const docs = findDocs(program, 'test.ts'); //?
     expect(docs).toHaveProperty('0.name', 'MyEnum');
     expect(docs).toHaveProperty('0.type.kind', 'interface');
-    expect(docs).toHaveProperty('0.type.properties.0.kind', 'indexSignature');
-    expect(docs).toHaveProperty('0.type.properties.0.name', 'key');
-    expect(docs).toHaveProperty('0.type.properties.0.type.kind', 'primitive');
-    expect(docs).toHaveProperty('0.type.properties.0.type.value', 'string');
-    expect(docs).toHaveProperty('0.type.properties.0.value.kind', 'primitive');
-    expect(docs).toHaveProperty('0.type.properties.0.value.value', 'number');
+    expect(docs).toHaveProperty('0.type.properties.0.kind', 'member');
+    expect(docs).toHaveProperty('0.type.properties.0.name', 'Foo');
+    expect(docs).toHaveProperty('0.type.properties.0.type.kind', 'string');
+    expect(docs).toHaveProperty('0.type.properties.0.type.value', 'foo');
+    expect(docs).toHaveProperty('0.type.properties.1.name', 'Bar');
+    expect(docs).toHaveProperty('0.type.properties.1.type.kind', 'string');
+    expect(docs).toHaveProperty('0.type.properties.1.type.value', 'bar');
   });
 });

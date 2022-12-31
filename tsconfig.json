@@ -23,7 +23,9 @@
   },
   "ts-node": {
     "transpileOnly": true,
-    "module": "commonjs"
+    "compilerOptions": {
+      "module": "commonjs"
+    },
   },
   "exclude": [
     "cypress",

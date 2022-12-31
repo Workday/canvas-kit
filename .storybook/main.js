@@ -1,13 +1,14 @@
 const path = require('node:path');
 const createCompiler = require('@storybook/addon-docs/mdx-compiler-plugin');
 const DocgenPlugin = require('./docgen-plugin');
+const SymbolDocPlugin = require('./symbol-doc-plugin');
 
 const modulesPath = path.resolve(__dirname, '../modules');
 const getSpecifications = require('../modules/docs/utils/get-specifications');
 const getComponentPropMap = require('../modules/docs/utils/get-component-prop-map');
 
-const props = require('../props.json');
-const docs = require('../docs.json');
+// const props = require('../props.json');
+// const docs = require('../docs.json');
 
 module.exports = {
   stories: [
@@ -15,6 +16,7 @@ module.exports = {
     '../modules/**/*.stories.mdx',
     '../modules/**/stories*.@(js|jsx|ts|tsx)',
   ],
+  // stories: ['../modules/react/button/stories/button/Button.stories.mdx'],
   addons: [
     {
       name: '@storybook/addon-essentials',
@@ -36,7 +38,7 @@ module.exports = {
 
     console.log('Building component prop tables...');
     // const propMap = await getComponentPropMap();
-    const propMap = props;
+    // const propMap = props;
 
     // modules/docs/lib/specs.ts and modules/docs/lib/componentPropMap.ts
     config.module.rules.push({
@@ -50,20 +52,22 @@ module.exports = {
             replace: JSON.stringify(specs, null, '  '),
           },
         },
-        {
-          loader: require.resolve('string-replace-loader'),
-          options: {
-            search: '{/* PROP_MAP_REPLACE_BY_WEBPACK */}',
-            replace: JSON.stringify(propMap, null, '  '),
-          },
-        },
-        {
-          loader: require.resolve('string-replace-loader'),
-          options: {
-            search: '[/* DOCS_REPLACE_BY_WEBPACK */]',
-            replace: JSON.stringify(docs, null, '  '),
-          },
-        },
+        // {
+        //   loader: require.resolve('string-replace-loader'),
+        //   options: {
+        //     search: '{/* PROP_MAP_REPLACE_BY_WEBPACK */}',
+        //     replace: JSON.stringify(propMap, null, '  '),
+        //   },
+        // },
+        // {
+        //   loader: require.resolve('string-replace-loader'),
+        //   options: {
+        //     search: '[/* DOCS_REPLACE_BY_WEBPACK */]',
+        //     replace() {
+        //       return JSON.stringify(symbolDocPlugin.docs, null, '  ');
+        //     },
+        //   },
+        // },
       ],
     });
     // modules/
@@ -137,6 +141,28 @@ module.exports = {
     //   ],
     //   enforce: 'pre',
     // });
+    const srcFolder = path.join(__dirname, '../');
+    config.module.rules.push({
+      test: /.+\.tsx?$/,
+      include: [modulesPath],
+      exclude: /examples|stories|spec|docs/,
+      loaders: [
+        {
+          loader: path.resolve(__dirname, 'symbol-doc-loader'),
+          options: {
+            glob: `${srcFolder}modules/**/*.{ts,tsx}`,
+            ignore: [
+              '**/examples/**',
+              '**/spec/**',
+              '**/stories/**',
+              '**/codemod/**',
+              '**/docs/**',
+            ],
+          },
+        },
+      ],
+      enforce: 'pre',
+    });
 
     // Load our scss files with postscss.
     // Note: This is the same as @storybook/preset-scss, but with postcss added.
@@ -154,7 +180,8 @@ module.exports = {
       include: modulesPath,
     });
 
-    // config.plugins.push(new DocgenPlugin());
+    config.plugins.push(new DocgenPlugin());
+    // config.plugins.push(new SymbolDocPlugin());
 
     // Remove progress updates to reduce log lines in Travis
     // See: https://github.com/storybookjs/storybook/issues/2029

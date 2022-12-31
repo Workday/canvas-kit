@@ -1,4 +1,4 @@
-import ts, {Type, TypeAliasDeclaration} from 'typescript';
+import ts from 'typescript';
 import {
   JSDoc,
   ExportedSymbol,
@@ -25,15 +25,6 @@ const defaultJSDoc: JSDoc = {
   tags: {},
   declarations: [],
 };
-
-function formatTag(tag: ts.JSDocTagInfo) {
-  let result = '@' + tag.name;
-  tag.name; //?
-  if (tag.text) {
-    result += ' ' + ts.displayPartsToString(tag.text);
-  }
-  return result;
-}
 
 function getFullJsDocComment(checker: ts.TypeChecker, symbol: ts.Symbol) {
   if (symbol.getDocumentationComment === undefined) {
@@ -140,7 +131,7 @@ function getValueFromType(
   filterUndefined = false
 ): Value | undefined {
   const typeToString = checker.typeToString(type);
-  console.log('typeToString', typeToString);
+  // console.log('typeToString', typeToString);
 
   // See if there is a TypeNode associated with the type. This is common in type definitions and can
   // be useful to get type parameters (for example, `Promise<boolean>`, `boolean` is a type
@@ -463,7 +454,7 @@ function getTypeValueFromNode(checker: ts.TypeChecker, node: ts.Node): Value {
     if (isObject(type) && (properties.length || indexType)) {
       const typeParameters = (
         (node as ts.InterfaceDeclaration).typeParameters ||
-        (node.parent as TypeAliasDeclaration).typeParameters
+        (node.parent as ts.TypeAliasDeclaration).typeParameters
       )?.map(p => getTypeValueFromNode(checker, p) as TypeParameter);
       // type.getStringIndexType(); //?
       // type.getNumberIndexType(); //?
@@ -879,7 +870,8 @@ export function findDocs(program: ts.Program, fileName: string): ExportedSymbol[
   const docs: ExportedSymbol[] = [];
   const checker = program.getTypeChecker();
 
-  const sourceFile = program.getSourceFile(fileName)!;
+  const sourceFile = program.getSourceFile(fileName);
+  if (!sourceFile) return docs;
 
   find(sourceFile, node => {
     const kind = node.kind;

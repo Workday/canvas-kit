@@ -1,6 +1,22 @@
 import * as ts from 'typescript';
+import path from 'path';
 
-import {getConfig} from '../extractDocs';
+function getConfig() {
+  const tsconfigPath = ts.findConfigFile(__dirname, ts.sys.fileExists) || '';
+
+  const basePath = path.dirname(tsconfigPath);
+  const {config, error} = ts.readConfigFile(tsconfigPath, ts.sys.readFile);
+
+  const {options, errors} = ts.parseJsonConfigFileContent(
+    config,
+    ts.sys,
+    basePath,
+    {},
+    tsconfigPath
+  );
+
+  return options;
+}
 
 export function createProgramFromSource(
   source: string | {filename: string; source: string}[]

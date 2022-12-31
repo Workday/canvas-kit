@@ -257,6 +257,7 @@ export interface AnyValue {
 export interface UnknownValue {
   kind: 'unknown';
   value: 'unknown';
+  text: string;
 }
 
 export interface UnionValue {

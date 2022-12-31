@@ -2,7 +2,6 @@
  * Creates `traversals.ts` from the source typescript.d.ts file for guards and the `find` function
  */
 
-import ts from 'typescript';
 import fs from 'fs';
 import path from 'path';
 import {promisify} from 'util';
