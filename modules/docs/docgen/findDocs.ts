@@ -157,7 +157,7 @@ function getValueFromType(
 
         if (declaration) {
           if (isExportedSymbol(checker, declaration)) {
-            return {kind: 'symbol', name: symbol.name};
+            return {kind: 'symbol', name: symbol.name, value: typeToString};
           }
           // return getTypeValueFromNode(checker, declaration);
         }
@@ -188,7 +188,7 @@ function getValueFromType(
     // the `as boolean` removes the type guard because the `TypeParameter` type doesn't add anything
     // to `Type`, so Typescript thinks anything after the guard is `never`
     'here'; //?
-    return {kind: 'symbol', name: type.symbol.name};
+    return {kind: 'symbol', name: type.symbol.name, value: typeToString};
   }
 
   if (type.isStringLiteral()) {
@@ -701,9 +701,10 @@ function getTypeValueFromNode(checker: ts.TypeChecker, node: ts.Node): Value {
 
   if (t.isQualifiedName(node)) {
     if (isExportedSymbol(checker, node.left)) {
+      const value = checker.typeToString(checker.getTypeAtLocation(node.left));
       return {
         kind: 'qualifiedName',
-        left: {kind: 'symbol', name: node.left.getText()},
+        left: {kind: 'symbol', name: node.left.getText(), value},
         right: {kind: 'string', value: node.right.getText()},
       };
     }
@@ -714,7 +715,8 @@ function getTypeValueFromNode(checker: ts.TypeChecker, node: ts.Node): Value {
 
   if (t.isTypeQuery(node)) {
     if (isExportedSymbol(checker, node.exprName)) {
-      return {kind: 'symbol', name: node.exprName.getText()};
+      const value = checker.typeToString(checker.getTypeAtLocation(node.exprName));
+      return {kind: 'symbol', name: node.exprName.getText(), value};
     }
     const symbol = getSymbolFromNode(checker, node.exprName);
     if (symbol) {
@@ -761,7 +763,8 @@ function getTypeValueFromNode(checker: ts.TypeChecker, node: ts.Node): Value {
     }
 
     if (isExportedSymbol(checker, symbolNode)) {
-      return {kind: 'symbol', name: safeGetText(node.typeName), typeParameters};
+      const value = checker.typeToString(checker.getTypeAtLocation(node.typeName));
+      return {kind: 'symbol', name: safeGetText(node.typeName), typeParameters, value};
     }
 
     // If it is a qualified name, handle that specially. The `left` might be a symbol

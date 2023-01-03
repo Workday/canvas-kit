@@ -6,7 +6,7 @@ import {colors, type} from '@workday/canvas-kit-react/tokens';
 import {Dialog, useDialogModel} from '@workday/canvas-kit-react/dialog';
 import {Hyperlink} from '@workday/canvas-kit-react/button';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
-import {useMount} from '@workday/canvas-kit-react';
+import {Heading} from '@workday/canvas-kit-react/text';
 
 import * as types from '../docgen/docTypes';
 
@@ -34,7 +34,18 @@ const SymbolDialog = ({value}: {value: types.SymbolValue}) => {
         <Dialog.Card>
           <Dialog.CloseIcon />
           <Dialog.Heading>{value.name}</Dialog.Heading>
-          <Dialog.Body>{symbol && <SymbolDoc name={value.name} />}</Dialog.Body>
+          <Dialog.Body>
+            {symbol ? (
+              <SymbolDoc name={value.name} />
+            ) : (
+              <>
+                <p>Basic type information:</p>
+                <pre>
+                  <code>{value.value}</code>
+                </pre>
+              </>
+            )}
+          </Dialog.Body>
         </Dialog.Card>
       </Dialog.Popper>
     </Dialog>

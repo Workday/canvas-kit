@@ -90,6 +90,7 @@ export type Value =
 export interface SymbolValue {
   kind: 'symbol';
   name: string;
+  value?: string;
   typeParameters?: TypeParameter[];
 }
 export interface GenericValue {
