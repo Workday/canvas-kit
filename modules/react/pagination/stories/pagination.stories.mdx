@@ -7,6 +7,7 @@ import {CustomRange} from './examples/CustomRange';
 import {JumpControls} from './examples/JumpControls';
 import {GoToForm} from './examples/GoToForm';
 import {HoistedModel} from './examples/HoistedModel';
+import {ResponsiveRange} from './examples/ResponsiveRange';
 import {RTL} from './examples/RTL';
 import {
   PaginationHoistedComponent,
@@ -91,6 +92,13 @@ the range.
 This example uses a custom range that allows you to control the width of the component.
 
 <ExampleCodeBlock code={CustomRange} />
+
+### Responsive Range
+
+In some situations, you might want to adjust Pagination's range based on the width of the container.
+You can use `useResizeObserver` to accomplish this as in the example below.
+
+<ExampleCodeBlock code={ResponsiveRange} />
 
 ## Components
 
