@@ -185,3 +185,5 @@ export const PlacementsFocus = withSnapshotsEnabled(() => {
     </StaticStates>
   );
 });
+
+PlacementsFocus.parameters.chromatic.delay = fontDelay + 100;
