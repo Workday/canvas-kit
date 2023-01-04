@@ -12,6 +12,11 @@ const fontDelay = 150; // best guess for the font delay to prevent incorrect Chr
 
 export default {
   title: 'Testing/React/Popups/Tooltip',
+  parameters: {
+    chromatic: {
+      delay: fontDelay + 100, // make sure chromatic waits for the timer
+    },
+  },
 };
 
 export const NonInteractive = () => {
@@ -39,7 +44,7 @@ export const Placements = withSnapshotsEnabled(() => {
   React.useEffect(() => {
     const id = setTimeout(() => {
       setOpen(true);
-    });
+    }, fontDelay);
 
     return () => {
       clearTimeout(id);
@@ -102,6 +107,8 @@ export const Placements = withSnapshotsEnabled(() => {
     </div>
   );
 });
+
+Placements.parameters.chromatic.delay = fontDelay + 100;
 
 export const PlacementsFocus = withSnapshotsEnabled(() => {
   const [open, setOpen] = React.useState(false);
