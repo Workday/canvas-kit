@@ -108,8 +108,6 @@ export const Placements = withSnapshotsEnabled(() => {
   );
 });
 
-Placements.parameters.chromatic.delay = fontDelay + 100;
-
 export const PlacementsFocus = withSnapshotsEnabled(() => {
   const [open, setOpen] = React.useState(false);
   const ref = React.useRef<HTMLButtonElement>(null);
@@ -118,7 +116,7 @@ export const PlacementsFocus = withSnapshotsEnabled(() => {
     document.body.setAttribute('data-whatinput', 'keyboard');
     const id = setTimeout(() => {
       setOpen(true);
-    });
+    }, fontDelay);
 
     return () => {
       clearTimeout(id);
@@ -185,5 +183,3 @@ export const PlacementsFocus = withSnapshotsEnabled(() => {
     </StaticStates>
   );
 });
-
-PlacementsFocus.parameters.chromatic.delay = fontDelay + 100;
