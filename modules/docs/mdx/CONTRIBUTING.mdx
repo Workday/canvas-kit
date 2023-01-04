@@ -5,8 +5,8 @@ import {Meta} from '@storybook/addon-docs';
   parameters={{
     viewMode: 'docs',
     previewTabs: {
-      canvas: { hidden: true }
-     },
+      canvas: {hidden: true},
+    },
   }}
 />
 
@@ -152,7 +152,7 @@ dependencies, then it's required.
 Canvas Kit uses [Jest](https://jestjs.io/) and
 [React Testing Library](https://testing-library.com/docs/react-testing-library/intro) to unit test
 our React components. For more information about our testing strategy and how we write unit tests,
-visit our [Testing Readme](/story/guides-testing--page).
+visit our [Testing Readme](/getting-started/for-developers/resources/testing/).
 
 Canvas Kit uses [Cypress](https://cypress.io) for UI tests. For info on why we chose Cypress, visit
 [Why Cypress?](https://github.com/Workday/canvas-kit/tree/master/cypress/WHY_CYPRESS.md) For more
@@ -167,7 +167,7 @@ Upon commit, [lint-staged](https://github.com/okonet/lint-staged) will run your 
 ### Releases
 
 - Releases are prepared by updating package versions with `lerna version`, and updating the
-  [changelog](/story/changelog--page)
+  [changelog](/docs/changelog--page)
 - A PR is created for the above updates
 - After the release PR is approved and merged, we create a release in GitHub with the contents of
   the changelog updates.
@@ -191,8 +191,9 @@ Upon commit, [lint-staged](https://github.com/okonet/lint-staged) will run your 
 7.  Begin editing your new React component in `modules/react/<MODULE_NAME>/index.ts`.
 
 If creating a React module, a new compound component will be created. To find out more about
-Compound Components, refer to [Compound Components](/story/guides-compound-components--page). To
-find out more about creating Compound Components, refer to
+Compound Components, refer to
+[Compound Components](/getting-started/for-developers/resources/compound-components/). To find out
+more about creating Compound Components, refer to
 [Creating Compound Components](/story/guides-creating-compound-components--page).
 
 ### Exporting a Module
@@ -216,7 +217,8 @@ This will start the unit tests.
 
 ### Code Style Guide
 
-Refer to the [API & Pattern Guidelines](/story/guides-api-pattern-guidelines--page).
+Refer to the
+[API & Pattern Guidelines](/getting-started/for-developers/resources/api-pattern-guidelines/).
 
 Rules are enforced using [ESLint](https://eslint.org) and code formatting is provided through
 [Prettier](https://prettier.io).

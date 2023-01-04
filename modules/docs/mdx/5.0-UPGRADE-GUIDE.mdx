@@ -5,8 +5,8 @@ import {Meta} from '@storybook/addon-docs';
   parameters={{
     viewMode: 'docs',
     previewTabs: {
-      canvas: { hidden: true }
-     },
+      canvas: {hidden: true},
+    },
   }}
 />
 
@@ -892,8 +892,9 @@ interface MyButtonProps extends ExtractProps<> {
 
 ### Card
 
-Card is now a [compound component](/docs/guides-compound-components--page) composed of a `Card.Body`
-and an optional `Card.Heading`. This allows direct access to the heading and body elements.
+Card is now a [compound component](/getting-started/for-developers/resources/compound-components/)
+composed of a `Card.Body` and an optional `Card.Heading`. This allows direct access to the heading
+and body elements.
 
 ```tsx
 // v4
@@ -1081,9 +1082,10 @@ There is no codemod for this change.
 
 ### Popups
 
-Popup has transitioned to a [compound component](/docs/guides-compound-components--page), along with
-all Popup-based behavior hooks. What was a `Popup` in v4 is now a `Popup.Card` in v5. The target
-button and `Popper` components have also been converted to subcomponents of `Popup`.
+Popup has transitioned to a
+[compound component](/getting-started/for-developers/resources/compound-components/), along with all
+Popup-based behavior hooks. What was a `Popup` in v4 is now a `Popup.Card` in v5. The target button
+and `Popper` components have also been converted to subcomponents of `Popup`.
 
 #### v4
 
@@ -1416,7 +1418,8 @@ const MyPopup = () => {
 
 ### Modal
 
-Modal has transitioned to a [compound component](/docs/guides-compound-components--page). What was
+Modal has transitioned to a
+[compound component](/getting-started/for-developers/resources/compound-components/). What was
 `Modal` in v4 is now `Modal.Card` in v5.
 
 #### v4

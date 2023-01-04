@@ -23,8 +23,9 @@ import {
 
 # Canvas Kit Pagination
 
-`Pagination` is a [compound component](/docs/guides-compound-components--page) that allows users to
-navigate between pages in a range.
+`Pagination` is a
+[compound component](/getting-started/for-developers/resources/compound-components/) that allows
+users to navigate between pages in a range.
 
 [> Workday Design Reference](https://design.workday.com/components/navigation/pagination)
 
@@ -59,8 +60,8 @@ readers.
 By default, `Pagination` will create and use its own [model](#model) internally. Alternatively, you
 may configure your own model with `usePaginationModel` and pass it to `Pagination` via the `model`
 prop. This pattern is referred to as
-[hoisting the model](/docs/guides-compound-components--page#configuring-a-model) and provides direct
-access to its `state` and `events` outside of the `Pagination` component.
+[hoisting the model](/getting-started/for-developers/resources/compound-components/#configuring-a-model)
+and provides direct access to its `state` and `events` outside of the `Pagination` component.
 
 In this example, we set up external observation of the model state and create an external button to
 trigger an event to change the current page.
@@ -418,9 +419,9 @@ Undocumented props are spread to the underlying `<div>` element.
 ## Model
 
 If `Pagination` was stripped of all its markup, attributes, and styling, what would remain is the
-[model](/docs/guides-compound-components--page#models). The model is an object composed of two
-parts: `state` which describes the current snapshot in time of the component and `events` which
-describes events that can be sent to the model.
+[model](/getting-started/for-developers/resources/compound-components/#models). The model is an
+object composed of two parts: `state` which describes the current snapshot in time of the component
+and `events` which describes events that can be sent to the model.
 
 By default, `Pagination` will create a model and share it internally with its subcomponents using
 React context. You may subscribe to `PaginationContext` if you wish to create a custom subcomponent
@@ -459,7 +460,7 @@ export const CustomPagination = () => {
 Alternatively, if you need direct access to the model's `state` and `events` outside of the
 `Pagination` component, you may configure your own model with `usePaginationModel` and pass it to
 `Pagination` via a pattern called
-[hoisting the model](/docs/guides-compound-components--page#configuring-a-model).
+[hoisting the model](/getting-started/for-developers/resources/compound-components/#configuring-a-model).
 
 ```tsx
 const model = usePaginationModel({

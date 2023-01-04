@@ -5,8 +5,8 @@ import {Meta} from '@storybook/addon-docs';
   parameters={{
     viewMode: 'docs',
     previewTabs: {
-      canvas: { hidden: true }
-     },
+      canvas: {hidden: true},
+    },
   }}
 />
 
@@ -525,9 +525,9 @@ creating `ActionBar.List` subcomponent and replacing all `ActionBar` children to
 
 ### Banner
 
-Banner is now a [compound component](/docs/guides-compound-components--page) composed of
-`Banner.Icon`, `Banner.Label`, and `Banner.ActionText`. This allows direct access to the icon,
-label, and text elements.
+Banner is now a [compound component](/getting-started/for-developers/resources/compound-components/)
+composed of `Banner.Icon`, `Banner.Label`, and `Banner.ActionText`. This allows direct access to the
+icon, label, and text elements.
 
 ```tsx
 // v6
@@ -544,8 +544,8 @@ label, and text elements.
 🤖 The codemod will rewrite your JSX to match the new API.
 
 Like all compound components, `Banner` is written using the
-[createComponent](/docs/guides-creating-compound-components--page#disclosure-component) utility from
-our
+[createComponent](/getting-started/for-developers/resources/creating-compound-components/#disclosurecontent-component)
+utility from our
 [common](https://github.com/Workday/canvas-kit/blob/ff77c5bd83e41c3ab2b9c55e41a8b7c1fde33a1b/modules/react/common/lib/utils/components.ts#L167)
 module; it supports [ref forwarding](https://reactjs.org/docs/forwarding-refs.html) and using the
 `as` prop to change the rendered element.
@@ -753,8 +753,8 @@ buttons or other buttons that aren't supported by our standard button components
 
 We've updated `AccentIcon`, `AppletIcon`, `Graphic`, `Icon`, `Svg`, `SystemIcon`, and
 `SystemIconCircle` to use the
-[createComponent](/docs/guides-creating-compound-components--page#disclosure-component) utility from
-our
+[createComponent](/getting-started/for-developers/resources/creating-compound-components/#disclosurecontent-component)
+utility from our
 [common](https://github.com/Workday/canvas-kit/blob/ff77c5bd83e41c3ab2b9c55e41a8b7c1fde33a1b/modules/react/common/lib/utils/components.ts#L167)
 module; they now support [ref forwarding](https://reactjs.org/docs/forwarding-refs.html) and using
 the `as` prop to change the rendered element.
@@ -926,7 +926,8 @@ codemod.
 
 ### Segmented Control
 
-`SegmentedControl` is now a [compound component](/docs/guides-compound-components--page).
+`SegmentedControl` is now a
+[compound component](/getting-started/for-developers/resources/compound-components/).
 
 Given the [removal of `IconButton`](#removal-of-icon-button) in v7, you'll now need to use
 `SegmentedControl.Button` instead.
