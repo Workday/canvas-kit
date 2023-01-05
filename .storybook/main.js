@@ -16,7 +16,6 @@ module.exports = {
       name: '@storybook/addon-essentials',
       options: {
         actions: false, // Disabled because actions is SLOW
-        // configureJSX: true,
       },
     },
     './readme-panel/preset.js',
