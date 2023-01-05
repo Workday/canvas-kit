@@ -125,14 +125,14 @@ describe('extractDocs', () => {
       expect(docs).toHaveProperty('0.type.parameters.0.type.kind', 'typeLiteral');
       expect(docs).toHaveProperty('0.type.parameters.0.type.properties', []);
       expect(docs).toHaveProperty('0.type.returnType.kind', 'union');
-      expect(docs).toHaveProperty('0.type.returnType.value.0.kind', 'primitive');
-      expect(docs).toHaveProperty('0.type.returnType.value.0.value', 'null');
-      expect(docs).toHaveProperty('0.type.returnType.value.1.kind', 'external');
-      expect(docs).toHaveProperty('0.type.returnType.value.1.name', 'Element');
+      expect(docs).toHaveProperty('0.type.returnType.value.0.kind', 'external');
+      expect(docs).toHaveProperty('0.type.returnType.value.0.name', 'Element');
       expect(docs).toHaveProperty(
-        '0.type.returnType.value.1.url',
+        '0.type.returnType.value.0.url',
         expect.stringContaining('element')
       );
+      expect(docs).toHaveProperty('0.type.returnType.value.1.kind', 'primitive');
+      expect(docs).toHaveProperty('0.type.returnType.value.1.value', 'null');
     });
 
     it('should find an external type of a function return union type', () => {
@@ -190,11 +190,8 @@ describe('extractDocs', () => {
 
       expect(docs).toHaveProperty('0.name', 'Foo');
       expect(docs).toHaveProperty('0.type.kind', 'type');
-      expect(docs).toHaveProperty('0.type.value.kind', 'indexedAccess');
-      expect(docs).toHaveProperty('0.type.value.object.kind', 'symbol');
-      expect(docs).toHaveProperty('0.type.value.object.name', 'Bar');
-      expect(docs).toHaveProperty('0.type.value.index.kind', 'string');
-      expect(docs).toHaveProperty('0.type.value.index.value', 'bar');
+      expect(docs).toHaveProperty('0.type.value.kind', 'primitive');
+      expect(docs).toHaveProperty('0.type.value.value', 'string');
     });
 
     it('should find an exported type of an IndexAccessType exported from another file', () => {
@@ -219,11 +216,8 @@ describe('extractDocs', () => {
 
       expect(docs).toHaveProperty('0.name', 'Foo');
       expect(docs).toHaveProperty('0.type.kind', 'type');
-      expect(docs).toHaveProperty('0.type.value.kind', 'indexedAccess');
-      expect(docs).toHaveProperty('0.type.value.object.kind', 'symbol');
-      expect(docs).toHaveProperty('0.type.value.object.name', 'Bar');
-      expect(docs).toHaveProperty('0.type.value.index.kind', 'string');
-      expect(docs).toHaveProperty('0.type.value.index.value', 'bar');
+      expect(docs).toHaveProperty('0.type.value.kind', 'primitive');
+      expect(docs).toHaveProperty('0.type.value.value', 'string');
     });
 
     it('should find an exported type of a variable with a forced type', () => {
@@ -363,10 +357,8 @@ describe('extractDocs', () => {
       expect(docs).toHaveProperty('0.type.kind', 'interface');
       expect(docs).toHaveProperty('0.type.properties.0.name', 'foo');
       expect(docs).toHaveProperty('0.type.properties.0.kind', 'member');
-      expect(docs).toHaveProperty('0.type.properties.0.type', {
-        kind: 'symbol',
-        name: 'bar',
-      });
+      expect(docs).toHaveProperty('0.type.properties.0.type.kind', 'symbol');
+      expect(docs).toHaveProperty('0.type.properties.0.type.name', 'bar');
     });
 
     it('should handle exported interfaces with a generic', () => {
@@ -551,11 +543,11 @@ describe('extractDocs', () => {
         kind: 'generic',
         name: 'T',
       });
-      expect(docs).toHaveProperty('0.type.properties.0.type.value.1', {
-        kind: 'symbol',
-        name: 'Bar',
-        typeParameters: [{kind: 'generic', name: 'T'}],
-      });
+      expect(docs).toHaveProperty('0.type.properties.0.type.value.1.kind', 'symbol');
+      expect(docs).toHaveProperty('0.type.properties.0.type.value.1.name', 'Bar');
+      expect(docs).toHaveProperty('0.type.properties.0.type.value.1.typeParameters', [
+        {kind: 'generic', name: 'T'},
+      ]);
     });
 
     it('should handle exported interfaces with external links', () => {
@@ -988,7 +980,7 @@ describe('extractDocs', () => {
     expect(docs).toHaveProperty('0.type.properties.0.value.value', 'number');
   });
 
-  it.only('should handle enums', () => {
+  it('should handle enums', () => {
     const program = createProgramFromSource(`
       export enum MyEnum {
         Foo = 'foo',
@@ -1005,5 +997,42 @@ describe('extractDocs', () => {
     expect(docs).toHaveProperty('0.type.properties.1.name', 'Bar');
     expect(docs).toHaveProperty('0.type.properties.1.type.kind', 'string');
     expect(docs).toHaveProperty('0.type.properties.1.type.value', 'bar');
+  });
+
+  it('should use the type checker evaluated value of local types', () => {
+    const program = createProgramFromSource(`
+      type ValueOf<T> = T[keyof T];
+      type Foo = {
+        foo: 'foo',
+        bar: 'bar',
+      }
+
+      export type Bar = ValueOf<Foo>
+    `);
+    const docs = findDocs(program, 'test.ts'); //?
+
+    expect(docs).toHaveProperty('0.name', 'Bar');
+    expect(docs).toHaveProperty('0.type.kind', 'type');
+    expect(docs).toHaveProperty('0.type.value.kind', 'union');
+    expect(docs).toHaveProperty('0.type.value.value.0.kind', 'string');
+    expect(docs).toHaveProperty('0.type.value.value.0.value', 'foo');
+    expect(docs).toHaveProperty('0.type.value.value.1.kind', 'string');
+    expect(docs).toHaveProperty('0.type.value.value.1.value', 'bar');
+  });
+
+  it('should handle large unions', () => {
+    const program = createProgramFromSource(`
+      type Letters = 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' |  'm' | 'n' | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z'
+      type Numbers = '1' | '2'
+      type A = \`\${Letters}\${Numbers}\`
+
+      export type B = A
+    `);
+    const docs = findDocs(program, 'test.ts'); //?
+
+    expect(docs).toHaveProperty('0.name', 'B');
+    expect(docs).toHaveProperty('0.type.kind', 'type');
+    expect(docs).toHaveProperty('0.type.value.kind', 'union');
+    expect(docs).toHaveProperty('0.type.value.value.length', 52);
   });
 });

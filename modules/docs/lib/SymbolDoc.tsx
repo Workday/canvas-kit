@@ -71,12 +71,99 @@ const Value = ({value}: {value: types.Value}) => {
           {value.value.map((v, index) => {
             return (
               <>
-                {index !== 0 && <span className="union-separator"> |&nbsp;</span>}
-                <Value value={v} />
+                {index !== 0 && (
+                  <span className="union-separator" key={index}>
+                    {' '}
+                    |&nbsp;
+                  </span>
+                )}
+                <Value value={v} key={index} />
               </>
             );
           })}
         </code>
+      );
+    case 'parenthesis':
+      return (
+        <code>
+          <span className="value-punctuation">\(</span>
+          <Value value={value.value} />
+          <span className="value-punctuation">)</span>
+        </code>
+      );
+    case 'intersection':
+      return (
+        <>
+          {value.value.map((v, i) => (
+            <>
+              {i !== 0 && (
+                <span className="value-amp" key={i}>
+                  {' '}
+                  &amp;{' '}
+                </span>
+              )}
+              <Value key={i} value={v} />
+            </>
+          ))}
+        </>
+      );
+    /*{
+  "kind": "function",
+  "parameters": [
+    {
+      "kind": "parameter",
+      "name": "key",
+      "type": {
+        "kind": "symbol",
+        "name": "BreakpointFnParam",
+        "value": "BreakpointFnParam"
+      },
+      "required": true,
+      "rest": false,
+      "description": "",
+      "declarations": [
+        {
+          "name": "key",
+          "filePath": "/Users/nicholas.boll/projects/canvas-kit/modules/react/common/lib/theming/types.ts"
+        }
+      ],
+      "tags": {}
+    }
+  ],
+  "members": [],
+  "returnType": {
+    "kind": "primitive",
+    "value": "string"
+  }
+}
+       */
+    // case 'function':
+    case 'function':
+      return (
+        <>
+          <span className="value-punctuation">(</span>
+          <>
+            {value.parameters.map((p, index) => (
+              <>
+                {index !== 0 && (
+                  <span className="value-punctuation" key={index}>
+                    ,{' '}
+                  </span>
+                )}
+                <Value value={p} key={index} />
+              </>
+            ))}
+          </>
+          <span className="value-punctuation">
+            ) =&gt; <Value value={value.returnType} />
+          </span>
+        </>
+      );
+    case 'parameter':
+      return (
+        <>
+          <span className="value-parameter">{value.name}</span>: <Value value={value.type} />
+        </>
       );
     case 'symbol':
       return <SymbolDialog value={value} />;
@@ -90,7 +177,47 @@ const Value = ({value}: {value: types.Value}) => {
   return <code className="value-unknown">unknown {JSON.stringify(value, null, '  ')}</code>;
 };
 
+function getTableRows(properties: types.TypeMember[], level: number, index: number): JSX.Element[] {
+  return properties.flatMap((property, i) => {
+    return [
+      <Table.Row key={index + i}>
+        <Table.Data color="plum600">
+          {/* Use a tooltip to help with debugging where the type sources are coming from */}
+          <Tooltip title={property.declarations[0]?.filePath}>
+            <span>
+              {[...Array(level * 6)].map(v => '\u00A0') /* non-breaking space */}
+              {level > 0 && '\u2514\u00A0'}
+              {property.name}
+            </span>
+          </Tooltip>
+        </Table.Data>
+        <Table.Data>
+          <code>
+            {['interface', 'typeLiteral'].includes(property.type.kind) ? null : (
+              <Value value={property.type} />
+            )}
+          </code>
+        </Table.Data>
+        <Table.Data></Table.Data>
+        <Table.Data>
+          <MarkdownToJSX>{property.description || ''}</MarkdownToJSX>
+        </Table.Data>
+      </Table.Row>,
+    ].concat(
+      ['interface', 'typeLiteral'].includes(property.type.kind)
+        ? [...getTableRows(property.type.properties, level + 1, index + properties.length)]
+        : []
+    );
+  });
+}
+
 const InterfaceTable = ({value}: {value: types.InterfaceValue | types.TypeLiteralValue}) => {
+  if (value.properties.length === 0) {
+    return <span>&#123;&#125;</span>;
+  }
+
+  const tableBody = getTableRows(value.properties, 0, 0);
+
   return (
     <Table>
       <Table.Head>
@@ -101,27 +228,7 @@ const InterfaceTable = ({value}: {value: types.InterfaceValue | types.TypeLitera
           <Table.Header>Description</Table.Header>
         </Table.Row>
       </Table.Head>
-      <Table.Body>
-        {value.properties.map((property, index) => {
-          return (
-            <Table.Row key={index}>
-              <Table.Data color="plum600">
-                {/* Use a tooltip to help with debugging where the type sources are coming from */}
-                <Tooltip title={property.declarations[0]?.filePath}>
-                  <span>{property.name}</span>
-                </Tooltip>
-              </Table.Data>
-              <Table.Data>
-                <Value value={property.type} />
-              </Table.Data>
-              <Table.Data></Table.Data>
-              <Table.Data>
-                <MarkdownToJSX>{property.description || ''}</MarkdownToJSX>
-              </Table.Data>
-            </Table.Row>
-          );
-        })}
-      </Table.Body>
+      <Table.Body>{tableBody}</Table.Body>
     </Table>
   );
 };

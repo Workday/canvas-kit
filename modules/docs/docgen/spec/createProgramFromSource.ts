@@ -2,7 +2,7 @@ import * as ts from 'typescript';
 import path from 'path';
 
 function getConfig() {
-  const tsconfigPath = ts.findConfigFile(__dirname, ts.sys.fileExists) || '';
+  const tsconfigPath = ts.findConfigFile('.', ts.sys.fileExists) || '';
 
   const basePath = path.dirname(tsconfigPath);
   const {config, error} = ts.readConfigFile(tsconfigPath, ts.sys.readFile);
