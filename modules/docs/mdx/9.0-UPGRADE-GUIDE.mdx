@@ -1,0 +1,74 @@
+import {Meta} from '@storybook/addon-docs';
+
+<Meta title="Welcome/Upgrade Guides/v8.0" />
+
+# Canvas Kit 9.0 Upgrade Guide
+
+This guide contains an overview of the changes in Canvas Kit v8. Please
+[reach out](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) if you have
+any questions.
+
+- [Codemod](#codemod)
+- [Component Deprecations](#component-deprecations)
+  - [Drawer](#drawer)
+
+## Codemod
+
+Please use our [codemod package](https://github.com/Workday/canvas-kit/tree/master/modules/codemod)
+to automatically update your code to work with most of the breaking changes in v9.
+
+```sh
+> npx @workday/canvas-kit-codemod v9 [path]
+```
+
+Alternatively, if you're unable to run the codemod successfully using `npx`, you can install the
+codemod package as a dev dependency, run it with `yarn`, and then remove the package after you're
+finished.
+
+```sh
+> yarn add @workday/canvas-kit-codemod --dev
+> yarn canvas-kit-codemod v9 [path]
+> yarn remove @workday/canvas-kit-codemod
+```
+
+> The codemod only works on `.js`, `.jsx`, `.ts`, and `.tsx` files. You'll need to manually edit
+> other file types (`.json`, `.mdx`, `.md`, etc.). You may need to run your linter after executing
+> the codemod, as its resulting formatting (spacing, quotes, etc.) may not match your project
+> conventions.
+
+The codemod will handle _most_ but _not all_ of the breaking changes in v8. **Breaking changes
+handled by the codemod are marked with 🤖 in the Upgrade Guide.**
+
+**Please verify all changes made by the codemod.** As a safety precaution, we recommend committing
+the changes from the codemod as a single isolated commit (separate from other changes) so you can
+roll back more easily if necessary.
+
+## Component Deprecations
+
+### Deprecation Types
+
+#### Soft Deprecation
+
+A soft-deprecated component is still available with its full functionality, but it will have been
+renamed with a prefix to indicate its soft-deprecated status. It will also include a console warning
+announcing its deprecation. This warning will only be triggered on the component's initial render.
+
+Soft-deprecated types and utilities will also have been renamed but generally will not trigger a
+console warning.
+
+#### Hard Deprecation
+
+A hard-deprecated component or package is no longer available. You will need to follow the method
+prescribed in our Upgrade Guide to update your application. Please
+[reach out](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) to our team
+directly if you need additional help.
+
+---
+
+### Drawer
+
+We've [hard-deprecated](#hard-deprecation) `Drawer` and this component was fully removed from Canvas
+Kit. Consider using the [Side Panel](/components/containers/side-panel/) in the Preview package
+instead.
+
+---
