@@ -13,7 +13,7 @@ export interface StatusProps {
 
 const Container = styled('div')(accessibleHide);
 
-const Status = ({
+export const Status = ({
   ariaLive = 'polite',
   role = 'status',
   ariaRelevant = 'additions',
@@ -44,5 +44,3 @@ const Status = ({
     </Container>
   );
 };
-
-export default Status;

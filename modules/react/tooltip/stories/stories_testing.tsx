@@ -4,7 +4,7 @@ import {TooltipContainer, Tooltip, OverflowTooltip} from '@workday/canvas-kit-re
 import {resetIcon} from '@workday/canvas-system-icons-web';
 import {Card} from '@workday/canvas-kit-react/card';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
-import {StaticStates} from '@workday/canvas-kit-react/common';
+import {StaticStates} from '@workday/canvas-kit-react/testing';
 
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
 
