@@ -8,6 +8,7 @@ import {
   UnknownValue,
   ObjectParameter,
   FunctionValue,
+  IndexSignatureValue,
 } from './docTypes';
 import {getExternalSymbol} from './getExternalSymbol';
 import t, {find} from './traverse';
@@ -28,7 +29,8 @@ function getValueFromNode(checker: ts.TypeChecker, node: ts.Node): Value {
   if (node === undefined) {
     return unknownValue('???');
   }
-  // console.log(t.getKindNameFromNode(node) || node.kind, safeGetText(checker, node));
+  // const type = checker.typeToString(checker.getTypeAtLocation(node));
+  // console.log(t.getKindNameFromNode(node) || node.kind, safeGetText(checker, node), type);
 
   /**
    * A tuple type is an array with positional types.
@@ -75,9 +77,6 @@ function getValueFromNode(checker: ts.TypeChecker, node: ts.Node): Value {
 
     // get index signature...
     const indexType = getIndexSignatureFromType(checker, type);
-    if (indexType) {
-      properties.push(indexType);
-    }
 
     if (isObject(type) && (properties.length || indexType)) {
       const typeParameters = (
@@ -102,7 +101,13 @@ function getValueFromNode(checker: ts.TypeChecker, node: ts.Node): Value {
       // checker.symbol;
       // checker.typeToString(type.getStringIndexType()); //?
       // checker.typeToString(type.getNumberIndexType()); //?
-      return {kind: 'interface', properties, typeParameters: typeParameters || []};
+      return {
+        kind: 'interface',
+        properties,
+        typeParameters: typeParameters || [],
+        callSignatures: [],
+        indexSignature: indexType,
+      };
     }
   }
 
@@ -140,9 +145,7 @@ function getValueFromNode(checker: ts.TypeChecker, node: ts.Node): Value {
 
     // If `ValueOf` was exported, the type would be documented as `ValueOf<{a: 'first', b:
     // 'second'}>`, but if it isn't exported, the value is `'first' | 'second'`
-    t.isTypeReference(node.type); //?
     // !isExportedSymbol(checker, node.type?.typeName); //?
-    node.type?.typeName?.escapedText; //?
     const isLocalTypeReference =
       t.isTypeReference(node.type) && !isExportedSymbol(checker, node.type.typeName); //?
     const value = isLocalTypeReference
@@ -280,12 +283,6 @@ function getValueFromNode(checker: ts.TypeChecker, node: ts.Node): Value {
 
     // An `AsExpression` is a type, so we'll return that
     if (node.initializer && t.isAsExpression(node.initializer)) {
-      // Specially handle 'as const' which means we want take the value literally
-      // if (node.initializer.type.getText() === 'const') {
-      //   return unknownValue('');
-      //   const type = checker.getTypeAtLocation(node);
-      //   return getValueFromType(checker, type) || unknownValue(safeGetText(checker, node));
-      // }
       return getValueFromNode(checker, node.initializer);
     }
 
@@ -380,6 +377,32 @@ function getValueFromNode(checker: ts.TypeChecker, node: ts.Node): Value {
     return getValueFromNode(checker, node.type);
   }
 
+  if (t.isTypeOperator(node) && node.operator === ts.SyntaxKind.KeyOfKeyword) {
+    node; //?
+    // We can get into trouble if `node` is a synthetic node. We'll check if we're encountering
+    // something like `keyof A`. In this case, we'll get the symbol and ask for the properties of
+    // the symbol's declaration.
+    if (t.isTypeReference(node.type)) {
+      const symbol = getSymbolFromNode(checker, node.type.typeName); //?
+      const declaration = getValueDeclaration(symbol);
+      if (symbol && declaration && isExportedSymbol(checker, declaration)) {
+        return {
+          kind: 'keyof',
+          name: {
+            kind: 'symbol',
+            name: symbol.name,
+            fileName: declaration.getSourceFile().fileName,
+            value: `keyof ${symbol.name}`,
+          },
+        };
+      }
+    }
+    return (
+      getValueFromType(checker, checker.getTypeFromTypeNode(node), node) ||
+      unknownValue(safeGetText(checker, node))
+    );
+  }
+
   // A literal type contains literals like `string` or `number` or `'foo'`
   if (t.isLiteralType(node)) {
     return getValueFromNode(checker, node.literal);
@@ -433,6 +456,15 @@ function getValueFromNode(checker: ts.TypeChecker, node: ts.Node): Value {
     return {kind: 'primitive', value: 'any'};
   }
 
+  if (node.kind === ts.SyntaxKind.UnknownKeyword) {
+    return {kind: 'primitive', value: 'unknown'};
+  }
+
+  if (t.isTemplateLiteralType(node)) {
+    const type = checker.getTypeAtLocation(node);
+    return getValueFromType(checker, type, node) || unknownValue(checker.typeToString(type));
+  }
+
   // A | B
   if (t.isUnionType(node)) {
     return {
@@ -457,12 +489,7 @@ function getValueFromNode(checker: ts.TypeChecker, node: ts.Node): Value {
   // type A = B['C']
   if (t.isIndexedAccessType(node)) {
     const type = checker.getTypeAtLocation(node);
-    return getValueFromType(checker, type) || unknownValue(safeGetText(checker, node));
-    return {
-      kind: 'indexedAccess',
-      object: getValueFromNode(checker, node.objectType),
-      index: getValueFromNode(checker, node.indexType),
-    };
+    return getValueFromType(checker, type, node) || unknownValue(safeGetText(checker, node));
   }
 
   /**
@@ -508,13 +535,13 @@ function getValueFromNode(checker: ts.TypeChecker, node: ts.Node): Value {
       const value = checker.typeToString(checker.getTypeAtLocation(node.left));
       return {
         kind: 'qualifiedName',
-        left: {kind: 'symbol', name: node.left.getText(), value},
-        right: {kind: 'string', value: node.right.getText()},
+        left: {kind: 'symbol', name: safeGetText(checker, node.left), value},
+        right: {kind: 'string', value: safeGetText(checker, node.right)},
       };
     }
     // if the node.left is not exported, we'll reduce to a type
     const type = checker.getTypeAtLocation(node);
-    return getValueFromType(checker, type) || unknownValue(checker.typeToString(type));
+    return getValueFromType(checker, type, node) || unknownValue(checker.typeToString(type));
   }
 
   /**
@@ -547,10 +574,6 @@ function getValueFromNode(checker: ts.TypeChecker, node: ts.Node): Value {
     const type = checker.getTypeAtLocation(node);
     typeInfo = getValueFromType(checker, type) || unknownValue(checker.typeToString(type));
     return {kind: 'member', name: node.name.getText(), type: typeInfo} as Value;
-  }
-
-  if (t.isImportSpecifier(node)) {
-    return {};
   }
 
   if (t.isTypeReference(node)) {
@@ -635,6 +658,7 @@ function getValueFromNode(checker: ts.TypeChecker, node: ts.Node): Value {
             : {kind: 'number', value: index},
         } as TypeMember;
       }),
+      callSignatures: [],
     };
   }
 
@@ -776,21 +800,27 @@ function isTupleType(type: ts.Type): type is ts.TupleTypeReference {
   return !!((type as any).target?.objectFlags & ts.ObjectFlags.Tuple);
 }
 
-function getIndexSignatureFromType(checker: ts.TypeChecker, type: ts.Type): Value | undefined {
-  const index =
+function getIndexSignatureFromType(
+  checker: ts.TypeChecker,
+  type: ts.Type
+): IndexSignatureValue | undefined {
+  const indexSignature =
     checker.getIndexInfoOfType(type, ts.IndexKind.String) ||
     checker.getIndexInfoOfType(type, ts.IndexKind.Number);
 
-  if (index) {
-    const parameter = index.declaration?.parameters[0];
+  indexSignature; //?
+
+  if (indexSignature) {
+    const parameter = indexSignature.declaration?.parameters[0];
     return {
       kind: 'indexSignature',
-      name: parameter?.name?.getText() || '',
+      name: parameter?.name ? safeGetText(checker, parameter?.name) : '',
       type:
-        (parameter && getValueFromType(checker, checker.getTypeAtLocation(parameter))) ||
+        (parameter && getValueFromType(checker, checker.getTypeAtLocation(parameter), parameter)) ||
         unknownValue(''),
-      value:
-        getValueFromType(checker, index.type) || unknownValue(checker.typeToString(index.type)),
+      value: indexSignature.declaration
+        ? getValueFromNode(checker, indexSignature.declaration.type)
+        : unknownValue(checker.typeToString(type)),
     };
   }
   return;
@@ -800,15 +830,16 @@ function getIndexSignatureFromType(checker: ts.TypeChecker, type: ts.Type): Valu
  *
  * @param checker The shared Typescript checker
  * @param type The type we're trying to find a Value for
- * @param node An optional node that was used to generate the Type. This is mostly useful for
- * determining if a Type's Symbol points to the node and therefore should not be considered exported
- * @returns
+ * @param node An optional node that was used to generate the Type. It should be used for all type
+ * nodes (AST nodes that are types and not JS values). This extra information can prevent errors and
+ * infinite loops.
  */
 function getValueFromType(
   checker: ts.TypeChecker,
   type: ts.Type,
   node?: ts.Node
 ): Value | undefined {
+  const originalNodeKind = node?.kind;
   const typeToString = checker.typeToString(type);
   typeToString; //?
 
@@ -842,11 +873,33 @@ function getValueFromType(
   // to get a real `Node` out of it again. The `Type` of this node is `any` making it difficult.
   // For example, I might get a `BooleanKeyword` syntax kind, but I don't have guards for that type.
   //
-  const typeNode = checker.typeToTypeNode(type, node, undefined);
 
-  if (typeNode) {
-    t.getKindNameFromNode(typeNode); //?
-    typeNode; //?
+  // A TypeNode is a synthetic node that doesn't have any associated source code. A TypeNode can
+  // contain child nodes that are linked to real AST nodes in the source code. Think of a TypeNode
+  // as an AST representation of `checker.typeToString()`. The string version is reduced to a string
+  // of characters where a TypeNode is an AST representation of that string.
+  //
+  // One interesting fact about this is when you have a union type that overflows. You may see
+  // something like:
+  // ```ts
+  // "'a' | 'b' | ...23 more... | 'z'"
+  // ```
+  // In this case, the TypeNode will be a UnionType that contains an Identifier node with a name of
+  // "...23 more..."
+  //
+  // We generally prefer TypeNodes because I'm pretty sure it is what the Typescript language
+  // service uses for the tooltips when hovering over text in your IDE. We try to go from Type to
+  // Node whenever possible, but there are some cases where interacting directly with the types is
+  // preferred. The union example is one of such examples.
+  const typeNode = checker.typeToTypeNode(type, node, undefined);
+  typeNode; //?
+
+  // We try to extract useful type information from the TypeNode and go back to recursing the AST.
+  // But, if the typeNode and original node have the same kind, we've actually lost information and
+  // should skip processing the TypeNode.
+  if (typeNode && originalNodeKind !== typeNode.kind) {
+    // t.getKindNameFromNode(typeNode); //?
+    // typeNode; //?
     // find the symbol
     if (t.isTypeReference(typeNode)) {
       'here'; //?
@@ -876,19 +929,78 @@ function getValueFromType(
       'here'; //?
       // return getValueFromNode(checker, typeNode.typeName);
       // console.log('isTypeReference', declaration?.getText(), declaration?.getSourceFile().fileName);
-    } else if (
+    }
+
+    // Figure out if we should recurse back into AST nodes with our synthetic TypeNode. There are
+    // exceptions to using the TypeNode. Exceptions where we actually lose type information. Some
+    // examples are large unions or `keyof`:
+    let exceptions = false;
+
+    // The typeNode is a UnionType, but the number of items has overflowed with an identifier `...
+    // {N} more ...`, so we don't want to use the typeNode and will use `type.types` instead which
+    // is not shortened. In this case we want to do nothing and use the type-based union check
+    if (
       t.isUnionType(typeNode) &&
       type.isUnion() &&
-      typeNode.types.length !== type.types.length
+      typeNode.types.some(
+        v =>
+          t.isIdentifier(v) ||
+          (t.isTypeReference(v) &&
+            t.isIdentifier(v.typeName) &&
+            (v.typeName.escapedText as string).includes('more'))
+      )
     ) {
-      // The typeNode is a UnionType, but the number of items has overflowed with a `... {N} more
-      // ...`, so we don't want to use the typeNode and will use `type.types` instead which is not
-      // shortened. In this case we want to do nothing and use the type-based union check
-    } else {
       'here'; //?
-      // TODO... This gets the current unit test in an infinite loop
-      return getValueFromNode(checker, typeNode);
+      exceptions = true;
     }
+
+    // A TypeNode of `keyof` looses type information
+    if (t.isTypeOperator(typeNode) && typeNode.operator === ts.SyntaxKind.KeyOfKeyword) {
+      exceptions = true;
+    }
+
+    // We want type unions to override type references that are not exported
+    if (t.isTypeReference(typeNode) && type.isUnion()) {
+      exceptions = true;
+    }
+
+    if (!exceptions) {
+      try {
+        return getValueFromNode(checker, typeNode);
+      } catch (e) {
+        // If we are here, we've run into an issue parsing the TypeNode. This could happen if a
+        // Synthetic node contains `keyof` which is a type that doesn't point to a real AST node so
+        // Typescript cannot evaluate the type and will result in an error. Under these cases, we'll
+        // fall back to extracting info from the Type rather than the TypeNode.
+        //
+        // console.error('Parse Error, exception missed in getValueFromType:', e.message);
+      }
+    }
+  }
+
+  /**
+   * If the type is a union, we want to deal with it now to avoid issues with infinite loops and a
+   * TypeNode.
+   */
+  if (type.isUnion()) {
+    // If we got here, it means a typeNode was a TypeReference that wasn't exported or a
+    // SyntheticNode UnionType that was truncated
+    'here'; //?
+    let filteredTypes = type.types;
+    // if (false) {
+    //   filteredTypes = type.types.filter(t => {
+    //     return !(t.flags & ts.TypeFlags.Undefined);
+    //   });
+    //   if (filteredTypes.length === 1) {
+    //     return getValueFromType(checker, filteredTypes[0]);
+    //   }
+    // }
+    return {
+      kind: 'union',
+      value: filteredTypes.map(
+        t => getValueFromType(checker, t) || unknownValue(checker.typeToString(t))
+      ),
+    };
   }
 
   // TODO... typeNode is a synthesized node - meaning the positions are negative and don't relate to
@@ -940,27 +1052,6 @@ function getValueFromType(
 
   if (type.flags & ts.TypeFlags.BooleanLiteral) {
     return {kind: 'boolean', value: checker.typeToString(type) === 'true' ? true : false};
-  }
-
-  if (type.isUnion()) {
-    // If we got here, it means a typeNode was a TypeReference that wasn't exported or a
-    // SyntheticNode UnionType that was truncated
-    'here'; //?
-    let filteredTypes = type.types;
-    if (false) {
-      filteredTypes = type.types.filter(t => {
-        return !(t.flags & ts.TypeFlags.Undefined);
-      });
-      if (filteredTypes.length === 1) {
-        return getValueFromType(checker, filteredTypes[0]);
-      }
-    }
-    return {
-      kind: 'union',
-      value: filteredTypes.map(
-        t => getValueFromType(checker, t) || unknownValue(checker.typeToString(t))
-      ),
-    };
   }
 
   if (isObject(type)) {
@@ -1049,7 +1140,7 @@ function safeGetText(checker: ts.TypeChecker, node: ts.Node): string {
   }
   // Try a symbol
   const symbol = getSymbolFromNode(checker, node);
-  return symbol?.name || 'SyntheticNode';
+  return symbol?.name || `SyntheticNode - ${t.getKindNameFromNode(node)}`;
 }
 
 /**

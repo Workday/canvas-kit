@@ -998,5 +998,5 @@ const kindToString = {
 
 export function getKindNameFromNode(node: ts.Node): string {
   // @ts-ignore
-  return kindToString[node.kind];
+  return kindToString[node.kind] || String(node.kind);
 }

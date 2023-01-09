@@ -84,12 +84,14 @@ export type Value =
   | TypeParameter
   | ExternalSymbolValue
   | ConditionalTypeValue
+  | KeyofValue
   | UnknownValue;
 
 /** A value meant to link to an exported symbol. This should be treated like a pointer to an `ExportedSymbol` by name */
 export interface SymbolValue {
   kind: 'symbol';
   name: string;
+  fileName?: string;
   value?: string;
   typeParameters?: TypeParameter[];
 }
@@ -137,7 +139,13 @@ export interface InterfaceValue {
   kind: 'interface';
   typeParameters: TypeParameter[];
   properties: TypeMember[];
-  callSignature?: FunctionValue;
+  callSignatures: FunctionValue[];
+  indexSignature?: IndexSignatureValue;
+}
+
+export interface KeyofValue {
+  kind: 'keyof';
+  name: SymbolValue;
 }
 
 /**
@@ -247,7 +255,7 @@ export interface BooleanLiteralValue {
 
 export interface PrimitiveValue {
   kind: 'primitive';
-  value: 'string' | 'number' | 'null' | 'undefined' | 'boolean' | 'any' | 'void';
+  value: 'string' | 'number' | 'null' | 'undefined' | 'boolean' | 'any' | 'void' | 'unknown';
 }
 
 export interface AnyValue {

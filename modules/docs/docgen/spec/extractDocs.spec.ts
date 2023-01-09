@@ -179,7 +179,7 @@ describe('extractDocs', () => {
       expect(docs).toHaveProperty('0.type.value.returnType.kind', 'external');
     });
 
-    it('should find an exported type of an exported IndexAccessType', () => {
+    it('should find an exported type of an exported IndexedAccessType', () => {
       const program = createProgramFromSource(`
         export type Foo = Bar['bar']
         export type Bar = {
@@ -194,7 +194,60 @@ describe('extractDocs', () => {
       expect(docs).toHaveProperty('0.type.value.value', 'string');
     });
 
-    it('should find an exported type of an IndexAccessType exported from another file', () => {
+    it('should handle a keyof of an exported symbol when used in conjunction with an IndexedAccessType', () => {
+      const program = createProgramFromSource(`
+        export type D = {
+          d: C['c'] | 'd'
+        }
+        type C = {
+          c: 'c' | B
+        }
+        export type A = { a: 1, b: 1} // needs to be exported for keyof to work
+        type B = keyof A
+      `);
+      const docs = findDocs(program, 'test.ts'); //?
+
+      expect(docs).toHaveProperty('0.name', 'D');
+      expect(docs).toHaveProperty('0.type.kind', 'interface');
+      expect(docs).toHaveProperty('0.type.properties.0.kind', 'member');
+      expect(docs).toHaveProperty('0.type.properties.0.name', 'd');
+      expect(docs).toHaveProperty('0.type.properties.0.type.kind', 'union');
+      expect(docs).toHaveProperty('0.type.properties.0.type.value.0.kind', 'union');
+      expect(docs).toHaveProperty('0.type.properties.0.type.value.0.value.0.kind', 'string');
+      expect(docs).toHaveProperty('0.type.properties.0.type.value.0.value.0.value', 'c');
+      expect(docs).toHaveProperty('0.type.properties.0.type.value.0.value.1.kind', 'keyof');
+      expect(docs).toHaveProperty('0.type.properties.0.type.value.0.value.1.name.kind', 'symbol');
+      expect(docs).toHaveProperty('0.type.properties.0.type.value.0.value.1.name.name', 'A');
+      expect(docs).toHaveProperty('0.type.properties.0.type.value.1.kind', 'string');
+      expect(docs).toHaveProperty('0.type.properties.0.type.value.1.value', 'd');
+    });
+
+    it('should find an exported type of an exported IndexedAccessType that uses keyof', () => {
+      const program = createProgramFromSource(`
+        type A {
+          a: 'a',
+          b: 'b'
+        }
+        export type Foo = {
+          foo: Bar['bar']
+        }
+        export type Bar = {
+          bar: keyof A
+        }
+      `);
+      const docs = findDocs(program, 'test.ts'); //?
+
+      expect(docs).toHaveProperty('0.name', 'Foo');
+      expect(docs).toHaveProperty('0.type.kind', 'interface');
+      expect(docs).toHaveProperty('0.type.properties.0.kind', 'member');
+      expect(docs).toHaveProperty('0.type.properties.0.type.kind', 'union');
+      expect(docs).toHaveProperty('0.type.properties.0.type.value.0.kind', 'string');
+      expect(docs).toHaveProperty('0.type.properties.0.type.value.0.value', 'a');
+      expect(docs).toHaveProperty('0.type.properties.0.type.value.1.kind', 'string');
+      expect(docs).toHaveProperty('0.type.properties.0.type.value.1.value', 'b');
+    });
+
+    it('should find an exported type of an IndexedAccessType exported from another file', () => {
       const program = createProgramFromSource([
         {
           filename: 'test.ts',
@@ -972,12 +1025,12 @@ describe('extractDocs', () => {
     const docs = findDocs(program, 'test.ts'); //?
     expect(docs).toHaveProperty('0.name', 'Foo');
     expect(docs).toHaveProperty('0.type.kind', 'interface');
-    expect(docs).toHaveProperty('0.type.properties.0.kind', 'indexSignature');
-    expect(docs).toHaveProperty('0.type.properties.0.name', 'key');
-    expect(docs).toHaveProperty('0.type.properties.0.type.kind', 'primitive');
-    expect(docs).toHaveProperty('0.type.properties.0.type.value', 'string');
-    expect(docs).toHaveProperty('0.type.properties.0.value.kind', 'primitive');
-    expect(docs).toHaveProperty('0.type.properties.0.value.value', 'number');
+    expect(docs).toHaveProperty('0.type.indexSignature.kind', 'indexSignature');
+    expect(docs).toHaveProperty('0.type.indexSignature.name', 'key');
+    expect(docs).toHaveProperty('0.type.indexSignature.type.kind', 'primitive');
+    expect(docs).toHaveProperty('0.type.indexSignature.type.value', 'string');
+    expect(docs).toHaveProperty('0.type.indexSignature.value.kind', 'primitive');
+    expect(docs).toHaveProperty('0.type.indexSignature.value.value', 'number');
   });
 
   it('should handle enums', () => {
@@ -1034,5 +1087,86 @@ describe('extractDocs', () => {
     expect(docs).toHaveProperty('0.type.kind', 'type');
     expect(docs).toHaveProperty('0.type.value.kind', 'union');
     expect(docs).toHaveProperty('0.type.value.value.length', 52);
+  });
+
+  it('should handle large unions', () => {
+    const program = createProgramFromSource(`
+      type Letters = 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' |  'm' | 'n' | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z'
+      type Numbers = '1' | '2'
+      type A = \`\${Letters}\${Numbers}\`
+
+      export type B = A
+    `);
+    const docs = findDocs(program, 'test.ts'); //?
+
+    expect(docs).toHaveProperty('0.name', 'B');
+    expect(docs).toHaveProperty('0.type.kind', 'type');
+    expect(docs).toHaveProperty('0.type.value.kind', 'union');
+    expect(docs).toHaveProperty('0.type.value.value.length', 52);
+  });
+
+  it('should handle keyof from an enum', () => {
+    const program = createProgramFromSource(`
+      enum A { a, b }
+
+      export type B = keyof typeof A
+    `);
+    const docs = findDocs(program, 'test.ts'); //?
+
+    expect(docs).toHaveProperty('0.name', 'B');
+    expect(docs).toHaveProperty('0.type.kind', 'type');
+    expect(docs).toHaveProperty('0.type.value.kind', 'union');
+    expect(docs).toHaveProperty('0.type.value.value.0.kind', 'string');
+    expect(docs).toHaveProperty('0.type.value.value.0.value', 'a');
+    expect(docs).toHaveProperty('0.type.value.value.1.kind', 'string');
+    expect(docs).toHaveProperty('0.type.value.value.1.value', 'b');
+  });
+
+  it('should handle keyof from a type', () => {
+    const program = createProgramFromSource(`
+      type A = {
+        a: '1';
+        b: '2';
+        c: '3';
+        d: '4';
+      };
+
+      export type B = keyof A;
+    `);
+    const docs = findDocs(program, 'test.ts'); //?
+
+    expect(docs).toHaveProperty('0.name', 'B');
+    expect(docs).toHaveProperty('0.type.kind', 'type');
+    expect(docs).toHaveProperty('0.type.value.kind', 'union');
+    expect(docs).toHaveProperty('0.type.value.value.0.kind', 'string');
+    expect(docs).toHaveProperty('0.type.value.value.0.value', 'a');
+    expect(docs).toHaveProperty('0.type.value.value.1.kind', 'string');
+    expect(docs).toHaveProperty('0.type.value.value.1.value', 'b');
+    expect(docs).toHaveProperty('0.type.value.value.2.kind', 'string');
+    expect(docs).toHaveProperty('0.type.value.value.2.value', 'c');
+    expect(docs).toHaveProperty('0.type.value.value.3.kind', 'string');
+    expect(docs).toHaveProperty('0.type.value.value.3.value', 'd');
+  });
+
+  it('should handle function value index signatures', () => {
+    const program = createProgramFromSource(`
+      export type A = {
+        [key: string]: (a: unknown) => {};
+      };
+    `);
+    const docs = findDocs(program, 'test.ts'); //?
+
+    expect(docs).toHaveProperty('0.name', 'A');
+    expect(docs).toHaveProperty('0.type.kind', 'interface');
+    expect(docs).toHaveProperty('0.type.indexSignature.kind', 'indexSignature');
+    expect(docs).toHaveProperty('0.type.indexSignature.name', 'key');
+    expect(docs).toHaveProperty('0.type.indexSignature.type.kind', 'primitive');
+    expect(docs).toHaveProperty('0.type.indexSignature.type.value', 'string');
+    expect(docs).toHaveProperty('0.type.indexSignature.value.kind', 'function');
+    expect(docs).toHaveProperty('0.type.indexSignature.value.parameters.0.kind', 'parameter');
+    expect(docs).toHaveProperty('0.type.indexSignature.value.parameters.0.name', 'a');
+    expect(docs).toHaveProperty('0.type.indexSignature.value.parameters.0.required', true);
+    expect(docs).toHaveProperty('0.type.indexSignature.value.parameters.0.type.kind', 'primitive');
+    expect(docs).toHaveProperty('0.type.indexSignature.value.parameters.0.type.value', 'unknown');
   });
 });

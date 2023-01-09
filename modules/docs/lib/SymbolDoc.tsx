@@ -198,7 +198,6 @@ function getTableRows(properties: types.TypeMember[], level: number, index: numb
             )}
           </code>
         </Table.Data>
-        <Table.Data></Table.Data>
         <Table.Data>
           <MarkdownToJSX>{property.description || ''}</MarkdownToJSX>
         </Table.Data>
@@ -224,7 +223,6 @@ const InterfaceTable = ({value}: {value: types.InterfaceValue | types.TypeLitera
         <Table.Row>
           <Table.Header>Name</Table.Header>
           <Table.Header>Type</Table.Header>
-          <Table.Header>Default</Table.Header>
           <Table.Header>Description</Table.Header>
         </Table.Row>
       </Table.Head>

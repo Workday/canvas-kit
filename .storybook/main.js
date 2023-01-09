@@ -145,7 +145,7 @@ module.exports = {
     config.module.rules.push({
       test: /.+\.tsx?$/,
       include: [modulesPath],
-      exclude: /examples|stories|spec|docs/,
+      exclude: /examples|stories|spec|codemod|docs/,
       loaders: [
         {
           loader: path.resolve(__dirname, 'symbol-doc-loader'),
