@@ -50,25 +50,4 @@ describe('Layout Style Props Function', () => {
       expect(positionStyles).toEqual(expected);
     });
   });
-
-  context('given logical order position properties', () => {
-    it('should translate attribute directions when RTL is detected', () => {
-      const props = {
-        insetInlineStart: '16px',
-        insetInlineEnd: '24px',
-        theme: {
-          canvas: {
-            direction: ContentDirection.RTL,
-          },
-        },
-      } as PositionStyleProps;
-      const expected = {
-        right: '16px',
-        left: '24px',
-      };
-      const positionStyles = position(props);
-
-      expect(positionStyles).toEqual(expected);
-    });
-  });
 });

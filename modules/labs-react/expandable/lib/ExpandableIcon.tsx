@@ -12,7 +12,8 @@ import {useExpandableIcon} from './hooks/useExpandableIcon';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {IconPositions} from '@workday/canvas-kit-react/button';
 import {colors, space} from '@workday/canvas-kit-react/tokens';
-import {useExpandableModel} from './useExpandableModel';
+
+import {useExpandableModel} from './hooks/useExpandableModel';
 
 export interface ExpandableIconProps extends Omit<ExtractProps<typeof SystemIcon, never>, 'icon'> {
   /**

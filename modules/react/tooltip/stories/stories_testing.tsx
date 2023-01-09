@@ -4,7 +4,7 @@ import {TooltipContainer, Tooltip, OverflowTooltip} from '@workday/canvas-kit-re
 import {resetIcon} from '@workday/canvas-system-icons-web';
 import {Card} from '@workday/canvas-kit-react/card';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
-import {StaticStates} from '@workday/canvas-kit-react/common';
+import {StaticStates} from '@workday/canvas-kit-react/testing';
 
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
 
@@ -12,6 +12,11 @@ const fontDelay = 150; // best guess for the font delay to prevent incorrect Chr
 
 export default {
   title: 'Testing/React/Popups/Tooltip',
+  parameters: {
+    chromatic: {
+      delay: fontDelay + 100, // make sure chromatic waits for the timer
+    },
+  },
 };
 
 export const NonInteractive = () => {
@@ -39,7 +44,7 @@ export const Placements = withSnapshotsEnabled(() => {
   React.useEffect(() => {
     const id = setTimeout(() => {
       setOpen(true);
-    });
+    }, fontDelay);
 
     return () => {
       clearTimeout(id);
@@ -111,7 +116,7 @@ export const PlacementsFocus = withSnapshotsEnabled(() => {
     document.body.setAttribute('data-whatinput', 'keyboard');
     const id = setTimeout(() => {
       setOpen(true);
-    });
+    }, fontDelay);
 
     return () => {
       clearTimeout(id);

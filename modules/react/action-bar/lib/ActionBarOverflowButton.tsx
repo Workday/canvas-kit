@@ -13,7 +13,15 @@ import {useOverflowListTarget} from '@workday/canvas-kit-react/collection';
 
 import {useMenuTarget} from '@workday/canvas-kit-react/menu';
 import {useActionBarModel} from './useActionBarModel';
-import {SecondaryButton} from '@workday/canvas-kit-react/button';
+import {SecondaryButton, SecondaryButtonProps} from '@workday/canvas-kit-react/button';
+
+export interface ActionBarOverflowButtonProps extends SecondaryButtonProps {
+  'aria-label': string;
+}
+
+const StyledSecondaryButton = styled(SecondaryButton)<StyledType>({
+  flex: 0,
+});
 
 export const useActionBarOverflowButton = composeHooks(
   createElemPropsHook(useActionBarModel)(() => ({
@@ -23,14 +31,10 @@ export const useActionBarOverflowButton = composeHooks(
   subModelHook((m: ReturnType<typeof useActionBarModel>) => m.menu, useMenuTarget)
 );
 
-const StyledSecondaryButton = styled(SecondaryButton)<StyledType>({
-  flex: 0,
-});
-
 export const ActionBarOverflowButton = createSubcomponent('button')({
   displayName: 'ActionBar.OverflowButton',
   modelHook: useActionBarModel,
   elemPropsHook: useActionBarOverflowButton,
-})((elemProps, Element) => {
+})<ActionBarOverflowButtonProps>((elemProps, Element) => {
   return <StyledSecondaryButton as={Element} icon={relatedActionsIcon} {...elemProps} />;
 });

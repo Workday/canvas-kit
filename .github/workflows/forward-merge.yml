@@ -17,8 +17,9 @@ jobs:
     #   forward merge would run twice because every commit on master/support causes a new commit
     #   pushed back to the branch. So we ignore all non-release commits on support/master because
     #   the release workflow will commit a release commit starting with `chore: Release ...` back to
-    #   the branch and this job will run on that commit instead.
-    if: "((github.ref_name == 'support' || github.ref_name == 'master') && startsWith(github.event.head_commit.message, 'chore: Release')) || startsWith(github.ref_name, 'prerelease/')"
+    #   the branch and this job will run on that commit instead. Also, forward merges that skipped
+    #   a release
+    if: "((github.ref_name == 'support' || github.ref_name == 'master') && startsWith(github.event.head_commit.message, 'chore: Release')) || startsWith(github.ref_name, 'prerelease/') || contains(github.event.head_commit.message, '[skip release]')"
     runs-on: ubuntu-latest
     outputs: # Output branch names for the make-pull-request job
       branch: ${{steps.extract-branch.outputs.branch}}
@@ -99,6 +100,9 @@ jobs:
       - name: Forward merge
         run: node utils/forward-merge.js
 
+      - name: Git Log
+        run: git log
+
       # Keep steps separate for Github Actions annotation matching: https://github.com/actions/setup-node/blob/83c9f7a7df54d6b57455f7c57ac414f2ae5fb8de/src/setup-node.ts#L26-L33
       - name: Lint
         run: yarn lint
@@ -129,7 +133,9 @@ jobs:
           appCode: dlpro96xybh
           storybookBuildDir: docs
           exitOnceUploaded: false
-          exitZeroOnChanges: true
+          exitZeroOnChanges: false
+          ignoreLastBuildOnBranch: ${{ steps.extract-next-branch.outputs.branch }}
+          debug: true
 
       - name: Start Server
         run: npx http-server docs -p 9001 & npx wait-on http://localhost:9001
