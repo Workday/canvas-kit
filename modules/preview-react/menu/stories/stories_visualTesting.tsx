@@ -15,7 +15,7 @@ import testAvatar from './test-avatar.png';
 const noop = () => {};
 
 export default withSnapshotsEnabled({
-  title: 'Testing/React/Preview/Menu',
+  title: 'Testing/Preview/Menu',
   component: DeprecatedMenu,
   parameters: {
     chromatic: {

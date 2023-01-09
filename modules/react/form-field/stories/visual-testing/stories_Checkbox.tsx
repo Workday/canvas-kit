@@ -10,7 +10,7 @@ import {withSnapshotsEnabled, customColorTheme} from '../../../../../utils/story
 import {Checkbox} from '@workday/canvas-kit-react/checkbox';
 
 export default withSnapshotsEnabled({
-  title: 'Testing/React/Inputs/Checkbox',
+  title: 'Testing/Inputs/Checkbox',
   component: Checkbox,
 });
 

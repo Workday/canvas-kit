@@ -3,7 +3,7 @@ import {storiesOf} from '@storybook/react';
 import './index.scss';
 import './stories.scss';
 
-storiesOf('Components/Containers/Layout/CSS', module)
+storiesOf('CSS/Containers', module)
   .addParameters({ReadmePath: 'css/layout'})
   .add('Responsive Layout', () => (
     <div className="story">

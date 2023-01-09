@@ -9,7 +9,7 @@ import {withSnapshotsEnabled, customColorTheme} from '../../../../../utils/story
 import {Switch} from '@workday/canvas-kit-react/switch';
 
 export default withSnapshotsEnabled({
-  title: 'Testing/React/Inputs/Switch',
+  title: 'Testing/Inputs/Switch',
   component: Switch,
 });
 

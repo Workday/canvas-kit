@@ -6,7 +6,7 @@ import {ActionBar, useActionBarModel} from '@workday/canvas-kit-react/action-bar
 import {PrimaryButton, SecondaryButton} from '@workday/canvas-kit-react/button';
 
 export default withSnapshotsEnabled({
-  title: 'Testing/React/Buttons/ActionBar',
+  title: 'Testing/Buttons/ActionBar',
   component: ActionBar,
 });
 

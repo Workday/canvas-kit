@@ -95,8 +95,8 @@ inquirer.prompt(questions).then(answers => {
                 to: `'Components/${category}/`,
               })
               .pipe({
-                from: `'Testing/React/${prereleaseTitle}`,
-                to: `'Testing/React/${category}`,
+                from: `'Testing/${prereleaseTitle}`,
+                to: `'Testing/${category}`,
               });
 
             if (prerelease === 'labs') {

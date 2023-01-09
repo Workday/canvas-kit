@@ -34,7 +34,7 @@ import {Avatar} from '@workday/canvas-kit-react/avatar';
 import {BodyText} from '@workday/canvas-kit-react/text';
 
 export default {
-  title: 'Components/Containers/Side Panel/React',
+  title: 'Components/Containers/Side Panel',
   component: SidePanel,
   parameters: {ReadmePath: 'react/side-panel'},
   argTypes: {

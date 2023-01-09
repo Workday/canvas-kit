@@ -10,7 +10,7 @@ import {DeleteButton} from '@workday/canvas-kit-react/button';
 import {Container, stateTableColumnProps} from './utils';
 
 export default withSnapshotsEnabled({
-  title: 'Testing/React/Buttons/Button/Delete Button',
+  title: 'Testing/Buttons/Button/Delete Button',
   component: DeleteButton,
 });
 

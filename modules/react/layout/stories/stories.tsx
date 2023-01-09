@@ -5,7 +5,7 @@ import {Card} from '@workday/canvas-kit-react/card';
 
 import {DeprecatedLayout} from '../index';
 
-storiesOf('Components/Containers/Layout/React/Column and Layout', module)
+storiesOf('Components/Containers/Column and Layout', module)
   .addParameters({component: DeprecatedLayout})
   .addParameters({ReadmePath: 'react/layout'})
   .add('Page Layout', () => (

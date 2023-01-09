@@ -2,11 +2,11 @@ import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import {shieldIcon} from '@workday/canvas-accent-icons-web';
 import {benefitsIcon} from '@workday/canvas-applet-icons-web';
-import {activityStreamIcon} from '@workday/canvas-system-icons-web';
 import {CanvasGraphic, CanvasIconTypes} from '@workday/design-assets-types';
 
 import {colors} from '@workday/canvas-kit-react/tokens';
 import {AccentIcon, AppletIcon, SystemIcon, SystemIconCircle, Graphic} from '../index';
+import {activityStreamIcon} from '@workday/canvas-system-icons-web';
 
 const graphicExample: CanvasGraphic = {
   name: 'badgeAchievement',
@@ -18,7 +18,7 @@ const graphicExample: CanvasGraphic = {
   tags: [],
 };
 
-storiesOf('Tokens/Icon/React', module)
+storiesOf('Tokens/Icon', module)
   .addParameters({component: AccentIcon})
   .addParameters({ReadmePath: 'react/icon'})
   .add('Accent Icon', () => (
@@ -40,7 +40,7 @@ storiesOf('Tokens/Icon/React', module)
     </div>
   ));
 
-storiesOf('Tokens/Icon/React', module)
+storiesOf('Tokens/Icon', module)
   .addParameters({component: AppletIcon})
   .add('Applet Icon', () => (
     <div className="story">
@@ -52,7 +52,7 @@ storiesOf('Tokens/Icon/React', module)
     </div>
   ));
 
-storiesOf('Tokens/Icon/React', module)
+storiesOf('Tokens/Icon', module)
   .addParameters({component: SystemIcon})
   .add('System Icon', () => (
     <div className="story">
@@ -96,7 +96,7 @@ storiesOf('Tokens/Icon/React', module)
     </div>
   ));
 
-storiesOf('Tokens/Icon/React', module)
+storiesOf('Tokens/Icon', module)
   .addParameters({component: Graphic})
   .add('Graphic', () => (
     <div className="story">
