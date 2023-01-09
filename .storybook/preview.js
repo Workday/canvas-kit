@@ -30,6 +30,7 @@ function storySort(a, b) {
     prefix('assets-', '8'),
     prefix('overview', 'a'),
     prefix('css-', 'zzzz'),
+    prefix('css-overview-page', 'zzza'),
     prefix('basic', 'aa'),
     prefix('default', 'ab'),
     prefix('testing', 'zzz'),
