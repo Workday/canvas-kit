@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v8.3.5](https://github.com/Workday/canvas-kit/releases/tag/v8.3.5) (2023-01-09)
+
+### Documentation
+
+- chore: Re organize storybook ([#1943](https://github.com/Workday/canvas-kit/pull/1943)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@jaclynjessup](https://github.com/jaclynjessup))
+  We've updated our categories and organization on storybook to better surface information.
+
+
 ## [v8.3.4](https://github.com/Workday/canvas-kit/releases/tag/v8.3.4) (2023-01-09)
 
 ### Testing
