@@ -1,10 +1,10 @@
 import {Meta} from '@storybook/addon-docs';
 
-<Meta title="Welcome/Upgrade Guides/v8.0" />
+<Meta title="Welcome/Upgrade Guides/v9.0" />
 
 # Canvas Kit 9.0 Upgrade Guide
 
-This guide contains an overview of the changes in Canvas Kit v8. Please
+This guide contains an overview of the changes in Canvas Kit v9. Please
 [reach out](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) if you have
 any questions.
 
@@ -36,7 +36,7 @@ finished.
 > the codemod, as its resulting formatting (spacing, quotes, etc.) may not match your project
 > conventions.
 
-The codemod will handle _most_ but _not all_ of the breaking changes in v8. **Breaking changes
+The codemod will handle _most_ but _not all_ of the breaking changes in v9. **Breaking changes
 handled by the codemod are marked with 🤖 in the Upgrade Guide.**
 
 **Please verify all changes made by the codemod.** As a safety precaution, we recommend committing
@@ -68,7 +68,8 @@ directly if you need additional help.
 ### Drawer
 
 We've [hard-deprecated](#hard-deprecation) `Drawer` and this component was fully removed from Canvas
-Kit. Consider using the [Side Panel](/components/containers/side-panel/) in the Preview package
-instead.
+Kit. Consider using the [Side Panel](/components/containers/side-panel/). Aware that `SidePanel`
+from main package is planned to be deprecated and replaced by one from Preview. So we suggest to use
+preview version of `SidePanel` until main version `SidePanel` hard deprecation.
 
 ---
