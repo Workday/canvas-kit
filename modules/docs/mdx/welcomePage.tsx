@@ -74,7 +74,7 @@ export const WelcomePage = () => {
             as={Hyperlink}
             alignSelf="end"
             marginTop="xs"
-            href="/?path=/docs/guides-getting-started--page"
+            href="https://workday.github.io/canvas-kit/?path=/docs/guides-getting-started--page"
           >
             {' '}
             Getting Started Guide
@@ -104,7 +104,7 @@ export const WelcomePage = () => {
             alignSelf="end"
             as={Hyperlink}
             marginTop="xs"
-            href="/?path=/docs/tokens--overview"
+            href="https://workday.github.io/canvas-kit/?path=/docs/tokens--overview"
           >
             {' '}
             View Our Tokens
@@ -134,7 +134,7 @@ export const WelcomePage = () => {
             as={Hyperlink}
             alignSelf="end"
             marginTop="xs"
-            href="/?path=/docs/assets-icons--overview"
+            href="https://workday.github.io/canvas-kit/?path=/docs/assets-icons--overview"
           >
             {' '}
             View Assets
