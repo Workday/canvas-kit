@@ -2324,34 +2324,6 @@
         "__isArgsStory": false
       }
     },
-    "components-inputs-form-field-css--hint": {
-      "id": "components-inputs-form-field-css--hint",
-      "name": "Hint",
-      "title": "Components/Inputs/Form Field/CSS",
-      "importPath": "./modules/css/form-field/stories/stories.tsx",
-      "kind": "Components/Inputs/Form Field/CSS",
-      "story": "Hint",
-      "parameters": {
-        "fileName": "./modules/css/form-field/stories/stories.tsx",
-        "framework": "react",
-        "__id": "components-inputs-form-field-css--hint",
-        "__isArgsStory": false
-      }
-    },
-    "components-inputs-form-field-css--label": {
-      "id": "components-inputs-form-field-css--label",
-      "name": "Label",
-      "title": "Components/Inputs/Form Field/CSS",
-      "importPath": "./modules/css/form-field/stories/stories.tsx",
-      "kind": "Components/Inputs/Form Field/CSS",
-      "story": "Label",
-      "parameters": {
-        "fileName": "./modules/css/form-field/stories/stories.tsx",
-        "framework": "react",
-        "__id": "components-inputs-form-field-css--label",
-        "__isArgsStory": false
-      }
-    },
     "components-inputs-radio--basic": {
       "id": "components-inputs-radio--basic",
       "name": "Basic",
@@ -8133,6 +8105,34 @@
         "fileName": "./modules/css/form-field/stories/stories_Checkbox.tsx",
         "framework": "react",
         "__id": "css-inputs-checkbox-top-label--error",
+        "__isArgsStory": false
+      }
+    },
+    "css-inputs-form-field--hint": {
+      "id": "css-inputs-form-field--hint",
+      "name": "Hint",
+      "title": "CSS/Inputs/Form Field",
+      "importPath": "./modules/css/form-field/stories/stories.tsx",
+      "kind": "CSS/Inputs/Form Field",
+      "story": "Hint",
+      "parameters": {
+        "fileName": "./modules/css/form-field/stories/stories.tsx",
+        "framework": "react",
+        "__id": "css-inputs-form-field--hint",
+        "__isArgsStory": false
+      }
+    },
+    "css-inputs-form-field--label": {
+      "id": "css-inputs-form-field--label",
+      "name": "Label",
+      "title": "CSS/Inputs/Form Field",
+      "importPath": "./modules/css/form-field/stories/stories.tsx",
+      "kind": "CSS/Inputs/Form Field",
+      "story": "Label",
+      "parameters": {
+        "fileName": "./modules/css/form-field/stories/stories.tsx",
+        "framework": "react",
+        "__id": "css-inputs-form-field--label",
         "__isArgsStory": false
       }
     },
