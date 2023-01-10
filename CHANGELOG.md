@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v8.3.7](https://github.com/Workday/canvas-kit/releases/tag/v8.3.7) (2023-01-10)
+
+### Storybook
+
+- fix: Update links on welcome and brand logo ([#1976](https://github.com/Workday/canvas-kit/pull/1976)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v8.3.6](https://github.com/Workday/canvas-kit/releases/tag/v8.3.6) (2023-01-09)
 
 ### Infrastructure
