@@ -9,7 +9,7 @@ import {withSnapshotsEnabled} from '../../../../utils/storybook';
 import {SidePanel} from '../index';
 
 export default withSnapshotsEnabled({
-  title: 'Testing/React/Preview/Side Panel',
+  title: 'Testing/Preview/Side Panel',
   component: SidePanel,
 });
 

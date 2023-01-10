@@ -11,7 +11,7 @@ import {withSnapshotsEnabled} from '../../../../utils/storybook';
 const fontDelay = 150; // best guess for the font delay to prevent incorrect Chromatic regressions
 
 export default {
-  title: 'Testing/React/Popups/Tooltip',
+  title: 'Testing/Popups/Tooltip',
   parameters: {
     chromatic: {
       delay: fontDelay + 100, // make sure chromatic waits for the timer
