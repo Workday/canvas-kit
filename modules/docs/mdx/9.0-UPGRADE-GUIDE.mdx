@@ -4,14 +4,58 @@ import {Meta} from '@storybook/addon-docs';
 
 # Canvas Kit 9.0 Upgrade Guide
 
-This guide contains an overview of the changes in Canvas Kit v8. Please
+This guide contains an overview of the changes in Canvas Kit v9. Please
 [reach out](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) if you have
 any questions.
 
 - [Codemod](#codemod)
 - [Component Updates](#component-updates)
-	- [Button Type](#button-type)
+  - [Buttons](#buttons)
+
+## Codemod
+
+Please use our [codemod package](https://github.com/Workday/canvas-kit/tree/master/modules/codemod)
+to automatically update your code to work with most of the breaking changes in v9.
+
+```sh
+> npx @workday/canvas-kit-codemod v9 [path]
+```
+
+Alternatively, if you're unable to run the codemod successfully using `npx`, you can install the
+codemod package as a dev dependency, run it with `yarn`, and then remove the package after you're
+finished.
+
+```sh
+> yarn add @workday/canvas-kit-codemod --dev
+> yarn canvas-kit-codemod v9 [path]
+> yarn remove @workday/canvas-kit-codemod
+```
+
+> The codemod only works on `.js`, `.jsx`, `.ts`, and `.tsx` files. You'll need to manually edit
+> other file types (`.json`, `.mdx`, `.md`, etc.). You may need to run your linter after executing
+> the codemod, as its resulting formatting (spacing, quotes, etc.) may not match your project
+> conventions. The codemod will handle _most_ but _not all_ of the breaking changes in v9.
+> **Breaking changes handled by the codemod are marked with 🤖 in the Upgrade Guide.**
+
+**Please verify all changes made by the codemod.** As a safety precaution, we recommend committing
+the changes from the codemod as a single isolated commit (separate from other changes) so you can
+roll back more easily if necessary.
 
 ## Component Updates
 
-### Button Type
+### Buttons
+
+We've changed the default `type` attribute of all our `buttons` to be `type="button"` instead of the
+default `type` of `submit`.
+
+We found an issue where the default action for `form` controls like `input` and `textarea` is to
+click the first `submit` `button` which in some cases was not a `submit` button.
+
+An example of this causing issues was the `Modal.CloseIcon` and `Modal.CloseButton` when the `Modal`
+was wrapped in a `form` element, the close icon would submit the `form`.
+
+This change affects all of our `buttons` including:
+`PrimaryButton, SecondaryButton, TertiaryButton, ToolbarButton`.
+
+If you still wish for a specific `button` within a `form` to submit, just add the attribute
+`type="submit"`.
