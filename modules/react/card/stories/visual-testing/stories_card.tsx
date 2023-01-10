@@ -5,7 +5,7 @@ import {withSnapshotsEnabled} from '../../../../../utils/storybook';
 import {Card} from '@workday/canvas-kit-react/card';
 
 export default withSnapshotsEnabled({
-  title: 'Testing/React/Containers/Card',
+  title: 'Testing/Containers/Card',
   component: Card,
 });
 

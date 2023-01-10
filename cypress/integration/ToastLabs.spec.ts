@@ -20,7 +20,7 @@ describe('Toast', () => {
   ['Basic', 'Toast Alert', 'Toast Dialog'].forEach(story => {
     context(`given the '${story}' story is rendered`, () => {
       beforeEach(() => {
-        h.stories.load('Labs/Toast/React', story);
+        h.stories.load('Labs/Toast', story);
       });
 
       it('should not have any axe errors', () => {
@@ -31,7 +31,7 @@ describe('Toast', () => {
 
   context(`given the toast with no close icon or action button`, () => {
     beforeEach(() => {
-      h.stories.load('Labs/Toast/React', 'Basic');
+      h.stories.load('Labs/Toast', 'Basic');
     });
 
     it('should have a role of status', () => {
@@ -49,7 +49,7 @@ describe('Toast', () => {
 
   context(`given the toast with an alert`, () => {
     beforeEach(() => {
-      h.stories.load('Labs/Toast/React', 'Toast Alert');
+      h.stories.load('Labs/Toast', 'Toast Alert');
     });
 
     it('should have a role of alert', () => {
@@ -67,7 +67,7 @@ describe('Toast', () => {
 
   context(`given the toast with a close button and action button`, () => {
     beforeEach(() => {
-      h.stories.load('Labs/Toast/React', 'Toast Dialog');
+      h.stories.load('Labs/Toast', 'Toast Dialog');
     });
 
     it('should have a role of dialog', () => {

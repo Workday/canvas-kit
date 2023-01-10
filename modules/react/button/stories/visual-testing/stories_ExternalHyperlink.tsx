@@ -15,7 +15,7 @@ import {Box, VStack} from '@workday/canvas-kit-react/layout';
 import {BodyText, Subtext} from '@workday/canvas-kit-react/text';
 
 export default withSnapshotsEnabled({
-  title: 'Testing/React/Buttons/Button/ExternalHyperlink',
+  title: 'Testing/Buttons/Button/ExternalHyperlink',
   component: ExternalHyperlink,
 });
 

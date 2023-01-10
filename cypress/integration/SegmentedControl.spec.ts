@@ -6,9 +6,9 @@ describe('SegmentedControl', () => {
   });
 
   ['Basic', 'Vertical'].forEach(story => {
-    context(`given the [Preview/Segmented Control/React, ${story}] story is rendered`, () => {
+    context(`given the [Preview/Segmented Control, ${story}] story is rendered`, () => {
       beforeEach(() => {
-        h.stories.load('Preview/Segmented Control/React', story);
+        h.stories.load('Preview/Segmented Control', story);
       });
 
       it('should pass axe checks', () => {
@@ -121,9 +121,9 @@ describe('SegmentedControl', () => {
     });
   });
 
-  context('given the [Preview/Segmented Control/React, Disabled] story is rendered', () => {
+  context('given the [Preview/Segmented Control, Disabled] story is rendered', () => {
     beforeEach(() => {
-      cy.loadStory('Preview/Segmented Control/React', 'Disabled');
+      cy.loadStory('Preview/Segmented Control', 'Disabled');
     });
 
     context('all buttons should be disabled', () => {
@@ -151,9 +151,9 @@ describe('SegmentedControl', () => {
     });
   });
 
-  context('given the [Preview/Segmented Control/React, rtl] story is rendered', () => {
+  context('given the [Preview/Segmented Control, rtl] story is rendered', () => {
     beforeEach(() => {
-      h.stories.load('Preview/Segmented Control/React', 'rtl');
+      h.stories.load('Preview/Segmented Control', 'rtl');
     });
 
     context('when the first button is active and focused', () => {

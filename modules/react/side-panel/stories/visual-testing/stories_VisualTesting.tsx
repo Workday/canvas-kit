@@ -9,7 +9,7 @@ import {
 import {space} from '@workday/canvas-kit-react/tokens';
 
 export default withSnapshotsEnabled({
-  title: 'Testing/React/Containers/Side Panel',
+  title: 'Testing/Containers/Side Panel',
   component: SidePanel,
 });
 

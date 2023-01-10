@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v8.3.7](https://github.com/Workday/canvas-kit/releases/tag/v8.3.7) (2023-01-10)
+
+### Storybook
+
+- fix: Update links on welcome and brand logo ([#1976](https://github.com/Workday/canvas-kit/pull/1976)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v8.3.6](https://github.com/Workday/canvas-kit/releases/tag/v8.3.6) (2023-01-09)
+
+### Infrastructure
+
+- fix: Storybook sidebar highlight styling ([#1975](https://github.com/Workday/canvas-kit/pull/1975)) ([@jaclynjessup](https://github.com/jaclynjessup))
+
+
+## [v8.3.5](https://github.com/Workday/canvas-kit/releases/tag/v8.3.5) (2023-01-09)
+
+### Documentation
+
+- chore: Re organize storybook ([#1943](https://github.com/Workday/canvas-kit/pull/1943)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@jaclynjessup](https://github.com/jaclynjessup))
+  We've updated our categories and organization on storybook to better surface information.
+
+
 ## [v8.3.4](https://github.com/Workday/canvas-kit/releases/tag/v8.3.4) (2023-01-09)
 
 ### Testing
