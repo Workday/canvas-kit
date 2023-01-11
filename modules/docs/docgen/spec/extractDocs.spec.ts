@@ -1,11 +1,11 @@
 import {createProgramFromSource} from './createProgramFromSource';
-import {findDocs} from '../findDocs';
+import {findSymbols} from '../findSymbols';
 
 describe('extractDocs', () => {
   describe('simple values', () => {
     it('should find an exported type of string', () => {
       const program = createProgramFromSource('export type Foo = "foo"');
-      const docs = findDocs(program, 'test.ts'); //?
+      const docs = findSymbols(program, 'test.ts'); //?
 
       expect(docs).toHaveProperty('0.name', 'Foo');
       expect(docs).toHaveProperty('0.type.kind', 'type');
@@ -14,7 +14,7 @@ describe('extractDocs', () => {
 
     it('should find an exported type of number', () => {
       const program = createProgramFromSource('export type Foo = 10');
-      const docs = findDocs(program, 'test.ts'); //?
+      const docs = findSymbols(program, 'test.ts'); //?
 
       expect(docs).toHaveProperty('0.name', 'Foo');
       expect(docs).toHaveProperty('0.type.kind', 'type');
@@ -23,7 +23,7 @@ describe('extractDocs', () => {
 
     it('should find an exported type of array', () => {
       const program = createProgramFromSource('export type Foo = number[]');
-      const docs = findDocs(program, 'test.ts'); //?
+      const docs = findSymbols(program, 'test.ts'); //?
 
       expect(docs).toHaveProperty('0.name', 'Foo');
       expect(docs).toHaveProperty('0.type.kind', 'type');
@@ -33,7 +33,7 @@ describe('extractDocs', () => {
 
     it('should find an exported type of a parenthesis type', () => {
       const program = createProgramFromSource('export type Foo = (number)');
-      const docs = findDocs(program, 'test.ts'); //?
+      const docs = findSymbols(program, 'test.ts'); //?
 
       expect(docs).toHaveProperty('0.name', 'Foo');
       expect(docs).toHaveProperty('0.type.kind', 'type');
@@ -46,7 +46,7 @@ describe('extractDocs', () => {
       const program = createProgramFromSource(`
         export type Foo = (input: number) => void;
       `);
-      const docs = findDocs(program, 'test.ts'); //?
+      const docs = findSymbols(program, 'test.ts'); //?
 
       expect(docs).toHaveProperty('0.name', 'Foo');
       expect(docs).toHaveProperty('0.type.kind', 'type');
@@ -67,7 +67,7 @@ describe('extractDocs', () => {
           foo: string
         };
       `);
-      const docs = findDocs(program, 'test.ts'); //?
+      const docs = findSymbols(program, 'test.ts'); //?
 
       expect(docs).toHaveProperty('0.name', 'Foo');
       expect(docs).toHaveProperty('0.type.kind', 'type');
@@ -84,7 +84,7 @@ describe('extractDocs', () => {
       const program = createProgramFromSource(`
         export type Foo = (input: number) => Element;
       `);
-      const docs = findDocs(program, 'test.ts'); //?
+      const docs = findSymbols(program, 'test.ts'); //?
 
       expect(docs).toHaveProperty('0.name', 'Foo');
       expect(docs).toHaveProperty('0.type.kind', 'type');
@@ -100,7 +100,7 @@ describe('extractDocs', () => {
       const program = createProgramFromSource(`
         export const Foo = (...args: string[]) => null;
       `);
-      const docs = findDocs(program, 'test.ts'); //?
+      const docs = findSymbols(program, 'test.ts'); //?
 
       expect(docs).toHaveProperty('0.name', 'Foo');
       expect(docs).toHaveProperty('0.type.kind', 'function');
@@ -116,7 +116,7 @@ describe('extractDocs', () => {
       const program = createProgramFromSource(`
         export const Foo = (input: {}) => null as Element | null;
       `);
-      const docs = findDocs(program, 'test.ts'); //?
+      const docs = findSymbols(program, 'test.ts'); //?
 
       expect(docs).toHaveProperty('0.name', 'Foo');
       expect(docs).toHaveProperty('0.type.kind', 'function');
@@ -139,7 +139,7 @@ describe('extractDocs', () => {
       const program = createProgramFromSource(`
         export const keys = ['foo', 'bar'] as const;
       `);
-      const docs = findDocs(program, 'test.ts'); //?
+      const docs = findSymbols(program, 'test.ts'); //?
 
       expect(docs).toHaveProperty('0.name', 'keys');
       expect(docs).toHaveProperty('0.type.kind', 'union');
@@ -153,7 +153,7 @@ describe('extractDocs', () => {
       const program = createProgramFromSource(`
         export const keys = ['foo', 'bar'];
       `);
-      const docs = findDocs(program, 'test.ts'); //?
+      const docs = findSymbols(program, 'test.ts'); //?
 
       expect(docs).toHaveProperty('0.name', 'keys');
       expect(docs).toHaveProperty('0.type.kind', 'array');
@@ -167,7 +167,7 @@ describe('extractDocs', () => {
 
         interface Bar {}
       `);
-      const docs = findDocs(program, 'test.ts'); //?
+      const docs = findSymbols(program, 'test.ts'); //?
 
       expect(docs).toHaveProperty('0.name', 'Foo');
       expect(docs).toHaveProperty('0.type.kind', 'type');
@@ -186,7 +186,7 @@ describe('extractDocs', () => {
           bar: string
         }
       `);
-      const docs = findDocs(program, 'test.ts'); //?
+      const docs = findSymbols(program, 'test.ts'); //?
 
       expect(docs).toHaveProperty('0.name', 'Foo');
       expect(docs).toHaveProperty('0.type.kind', 'type');
@@ -205,7 +205,7 @@ describe('extractDocs', () => {
         export type A = { a: 1, b: 1} // needs to be exported for keyof to work
         type B = keyof A
       `);
-      const docs = findDocs(program, 'test.ts'); //?
+      const docs = findSymbols(program, 'test.ts'); //?
 
       expect(docs).toHaveProperty('0.name', 'D');
       expect(docs).toHaveProperty('0.type.kind', 'interface');
@@ -235,7 +235,7 @@ describe('extractDocs', () => {
           bar: keyof A
         }
       `);
-      const docs = findDocs(program, 'test.ts'); //?
+      const docs = findSymbols(program, 'test.ts'); //?
 
       expect(docs).toHaveProperty('0.name', 'Foo');
       expect(docs).toHaveProperty('0.type.kind', 'interface');
@@ -265,7 +265,7 @@ describe('extractDocs', () => {
           `,
         },
       ]);
-      const docs = findDocs(program, 'test.ts'); //?
+      const docs = findSymbols(program, 'test.ts'); //?
 
       expect(docs).toHaveProperty('0.name', 'Foo');
       expect(docs).toHaveProperty('0.type.kind', 'type');
@@ -281,7 +281,7 @@ describe('extractDocs', () => {
           foo: string
         }
       `);
-      const docs = findDocs(program, 'test.ts'); //?
+      const docs = findSymbols(program, 'test.ts'); //?
 
       expect(docs).toHaveProperty('0.name', 'foo');
       expect(docs).toHaveProperty('0.type.kind', 'array');
@@ -307,7 +307,7 @@ describe('extractDocs', () => {
           `,
         },
       ]);
-      const docs = findDocs(program, 'test.ts'); //?
+      const docs = findSymbols(program, 'test.ts'); //?
 
       expect(docs).toHaveProperty('0.name', 'foo');
       expect(docs).toHaveProperty('0.type.kind', 'array');
@@ -326,7 +326,7 @@ describe('extractDocs', () => {
          */
         export type Foo = string
       `);
-      const docs = findDocs(program, 'test.ts'); //?
+      const docs = findSymbols(program, 'test.ts'); //?
       expect(docs).toHaveProperty('0.description', 'Foo is a type');
       expect(docs).toHaveProperty('0.tags', {
         example: expect.stringContaining('// this is an example'),
@@ -335,7 +335,7 @@ describe('extractDocs', () => {
 
     it('should handle simple type unions', () => {
       const program = createProgramFromSource('export type Foo = "foo" | "bar"');
-      const docs = findDocs(program, 'test.ts'); //?
+      const docs = findSymbols(program, 'test.ts'); //?
 
       expect(docs).toHaveProperty('0.name', 'Foo');
       expect(docs).toHaveProperty('0.type.kind', 'type');
@@ -350,7 +350,7 @@ describe('extractDocs', () => {
 
     it('should handle a tuple type', () => {
       const program = createProgramFromSource('export type Foo = [string, "bar"]');
-      const docs = findDocs(program, 'test.ts'); //?
+      const docs = findSymbols(program, 'test.ts'); //?
 
       expect(docs).toHaveProperty('0.name', 'Foo');
       expect(docs).toHaveProperty('0.type.kind', 'type');
@@ -367,7 +367,7 @@ describe('extractDocs', () => {
           foo: string
         };
       `);
-      const docs = findDocs(program, 'test.ts'); //?
+      const docs = findSymbols(program, 'test.ts'); //?
       expect(docs).toHaveProperty('0.name', 'Foo');
       expect(docs).toHaveProperty('0.type.kind', 'interface');
       expect(docs).toHaveProperty('0.type.properties.0.name', 'foo');
@@ -386,7 +386,7 @@ describe('extractDocs', () => {
 
         const bar = 'baz'
       `);
-      const docs = findDocs(program, 'test.ts'); //?
+      const docs = findSymbols(program, 'test.ts'); //?
       expect(docs).toHaveProperty('0.name', 'Foo');
       expect(docs).toHaveProperty('0.type.kind', 'interface');
       expect(docs).toHaveProperty('0.type.properties.0.name', 'foo');
@@ -405,7 +405,7 @@ describe('extractDocs', () => {
 
         export const bar = 'baz'
       `);
-      const docs = findDocs(program, 'test.ts'); //?
+      const docs = findSymbols(program, 'test.ts'); //?
       expect(docs).toHaveProperty('0.name', 'Foo');
       expect(docs).toHaveProperty('0.type.kind', 'interface');
       expect(docs).toHaveProperty('0.type.properties.0.name', 'foo');
@@ -420,7 +420,7 @@ describe('extractDocs', () => {
           foo: T
         };
       `);
-      const docs = findDocs(program, 'test.ts'); //?
+      const docs = findSymbols(program, 'test.ts'); //?
       expect(docs).toHaveProperty('0.name', 'Foo');
       expect(docs).toHaveProperty('0.type.kind', 'interface');
       expect(docs).toHaveProperty('0.type.typeParameters.0.kind', 'typeParameter');
@@ -437,7 +437,7 @@ describe('extractDocs', () => {
           foo: number[]
         };
       `);
-      const docs = findDocs(program, 'test.ts'); //?
+      const docs = findSymbols(program, 'test.ts'); //?
       expect(docs).toHaveProperty('0.name', 'Foo');
       expect(docs).toHaveProperty('0.type.kind', 'interface');
       expect(docs).toHaveProperty('0.type.properties.0.name', 'foo');
@@ -455,7 +455,7 @@ describe('extractDocs', () => {
           foo: T
         };
       `);
-      const docs = findDocs(program, 'test.ts'); //?
+      const docs = findSymbols(program, 'test.ts'); //?
       expect(docs).toHaveProperty('0.name', 'Foo');
       expect(docs).toHaveProperty('0.type.kind', 'interface');
       expect(docs).toHaveProperty('0.type.typeParameters.0.kind', 'typeParameter');
@@ -476,7 +476,7 @@ describe('extractDocs', () => {
           foo: string
         }
       `);
-      const docs = findDocs(program, 'test.ts'); //?
+      const docs = findSymbols(program, 'test.ts'); //?
       expect(docs).toHaveProperty('0.name', 'Foo');
       expect(docs).toHaveProperty('0.type.kind', 'interface');
       expect(docs).toHaveProperty('0.type.properties.0.name', 'foo');
@@ -491,7 +491,7 @@ describe('extractDocs', () => {
           foo: T
         }
       `);
-      const docs = findDocs(program, 'test.ts'); //?
+      const docs = findSymbols(program, 'test.ts'); //?
       expect(docs).toHaveProperty('0.name', 'Foo');
       expect(docs).toHaveProperty('0.type.kind', 'interface');
       expect(docs).toHaveProperty('0.type.typeParameters.0.kind', 'typeParameter');
@@ -510,7 +510,7 @@ describe('extractDocs', () => {
       const program = createProgramFromSource(`
         export type Foo = Record<string, string>
       `);
-      const docs = findDocs(program, 'test.ts'); //?
+      const docs = findSymbols(program, 'test.ts'); //?
       expect(docs).toHaveProperty('0.name', 'Foo');
       expect(docs).toHaveProperty('0.type.kind', 'type');
       expect(docs).toHaveProperty('0.type.value.kind', 'external');
@@ -527,7 +527,7 @@ describe('extractDocs', () => {
           [key: string | number]: string
         }
       `);
-      const docs = findDocs(program, 'test.ts'); //?
+      const docs = findSymbols(program, 'test.ts'); //?
       expect(docs).toHaveProperty('0.name', 'PropMap');
       expect(docs).toHaveProperty('0.type.kind', 'interface');
       expect(docs).toHaveProperty('0.type.properties.0.kind', 'member');
@@ -542,7 +542,7 @@ describe('extractDocs', () => {
           foo: T
         };
       `);
-      const docs = findDocs(program, 'test.ts'); //?
+      const docs = findSymbols(program, 'test.ts'); //?
       expect(docs).toHaveProperty('0.name', 'Foo');
       expect(docs).toHaveProperty('0.type.kind', 'interface');
       expect(docs).toHaveProperty('0.type.typeParameters.0.kind', 'typeParameter');
@@ -564,7 +564,7 @@ describe('extractDocs', () => {
 
         export type Bar<T> = {value: T}
       `);
-      const docs = findDocs(program, 'test.ts'); //?
+      const docs = findSymbols(program, 'test.ts'); //?
       expect(docs).toHaveProperty('0.name', 'Foo');
       expect(docs).toHaveProperty('0.type.kind', 'interface');
       expect(docs).toHaveProperty('0.type.typeParameters.0.kind', 'typeParameter');
@@ -585,7 +585,7 @@ describe('extractDocs', () => {
         };
         export type Bar<T> = {value: T}
       `);
-      const docs = findDocs(program, 'test.ts'); //?
+      const docs = findSymbols(program, 'test.ts'); //?
       expect(docs).toHaveProperty('0.name', 'Foo');
       expect(docs).toHaveProperty('0.type.kind', 'interface');
       expect(docs).toHaveProperty('0.type.typeParameters.0.kind', 'typeParameter');
@@ -609,7 +609,7 @@ describe('extractDocs', () => {
           foo: Promise<T>
         };
       `);
-      const docs = findDocs(program, 'test.ts'); //?
+      const docs = findSymbols(program, 'test.ts'); //?
       expect(docs).toHaveProperty('0.name', 'Foo');
       expect(docs).toHaveProperty('0.type.kind', 'interface');
       expect(docs).toHaveProperty('0.type.typeParameters.0.kind', 'typeParameter');
@@ -628,7 +628,7 @@ describe('extractDocs', () => {
           bar: 'baz'
         };
       `);
-      const docs = findDocs(program, 'test.ts'); //?
+      const docs = findSymbols(program, 'test.ts'); //?
       expect(docs).toHaveProperty('0.name', 'foo');
       expect(docs).toHaveProperty('0.type.kind', 'object');
       expect(docs).toHaveProperty('0.type.properties.0.name', 'bar');
@@ -648,7 +648,7 @@ describe('extractDocs', () => {
           bar: 'baz' as string
         };
       `);
-      const docs = findDocs(program, 'test.ts'); //?
+      const docs = findSymbols(program, 'test.ts'); //?
       expect(docs).toHaveProperty('0.name', 'foo');
       expect(docs).toHaveProperty('0.type.kind', 'object');
       expect(docs).toHaveProperty('0.type.properties.0.name', 'bar');
@@ -668,7 +668,7 @@ describe('extractDocs', () => {
           bar: 'bar' as 'bar' | 'baz'
         };
       `);
-      const docs = findDocs(program, 'test.ts'); //?
+      const docs = findSymbols(program, 'test.ts'); //?
       expect(docs).toHaveProperty('0.name', 'foo');
       expect(docs).toHaveProperty('0.type.kind', 'object');
       expect(docs).toHaveProperty('0.type.properties.0.name', 'bar');
@@ -693,7 +693,7 @@ describe('extractDocs', () => {
           }
         }
       `);
-      const docs = findDocs(program, 'test.ts'); //?
+      const docs = findSymbols(program, 'test.ts'); //?
 
       expect(docs).toHaveProperty('0.name', 'foo');
       expect(docs).toHaveProperty('0.type.kind', 'object');
@@ -712,7 +712,7 @@ describe('extractDocs', () => {
 
         export const foo: ts.Node = {}
       `);
-      const docs = findDocs(program, 'test.ts'); //?
+      const docs = findSymbols(program, 'test.ts'); //?
 
       expect(docs).toHaveProperty('0.name', 'foo');
       expect(docs).toHaveProperty('0.type.kind', 'qualifiedName');
@@ -727,7 +727,7 @@ describe('extractDocs', () => {
         export type Foo = "foo";
         export type Bar = Foo;
       `);
-      const docs = findDocs(program, 'test.ts'); //?
+      const docs = findSymbols(program, 'test.ts'); //?
       expect(docs).toHaveProperty('1.name', 'Bar');
       expect(docs).toHaveProperty('1.type.kind', 'type');
       expect(docs).toHaveProperty('1.type.value.kind', 'symbol');
@@ -738,7 +738,7 @@ describe('extractDocs', () => {
     //   const program = createProgramFromSource(`
     //     export type MaybePromise<T> = T | Promise<T>;
     //   `);
-    //   const docs = findDocs(program, 'test.ts'); //?
+    //   const docs = findSymbols(program, 'test.ts'); //?
     //   expect(docs).toHaveProperty('1.name', 'Bar');
     //   expect(docs).toHaveProperty('1.type', {kind: 'symbol', value: 'Foo'});
     // });
@@ -748,7 +748,7 @@ describe('extractDocs', () => {
         type Foo<T> = T;
         export type Bar = Foo<'foo'>;
       `);
-      const docs = findDocs(program, 'test.ts'); //?
+      const docs = findSymbols(program, 'test.ts'); //?
       expect(docs).toHaveProperty('0.name', 'Bar');
       expect(docs).toHaveProperty('0.type.kind', 'type');
       expect(docs).toHaveProperty('0.type.value.kind', 'string');
@@ -761,7 +761,7 @@ describe('extractDocs', () => {
           return false
         }
       `);
-      const docs = findDocs(program, 'test.ts'); //?
+      const docs = findSymbols(program, 'test.ts'); //?
       expect(docs).toHaveProperty('0.name', 'myFoo');
       expect(docs).toHaveProperty('0.type.kind', 'function');
       expect(docs).toHaveProperty('0.type.parameters.0.kind', 'parameter');
@@ -785,7 +785,7 @@ describe('extractDocs', () => {
           return false
         }
       `);
-      const docs = findDocs(program, 'test.ts'); //?
+      const docs = findSymbols(program, 'test.ts'); //?
       expect(docs).toHaveProperty('0.name', 'myFoo');
       expect(docs).toHaveProperty('0.type.kind', 'function');
       expect(docs).toHaveProperty('0.type.parameters.0.kind', 'parameter');
@@ -804,7 +804,7 @@ describe('extractDocs', () => {
           return false
         }
       `);
-      const docs = findDocs(program, 'test.ts'); //?
+      const docs = findSymbols(program, 'test.ts'); //?
       expect(docs).toHaveProperty('0.name', 'myFoo');
       expect(docs).toHaveProperty('0.type.kind', 'function');
       expect(docs).toHaveProperty('0.type.parameters.0.kind', 'parameter');
@@ -828,7 +828,7 @@ describe('extractDocs', () => {
         return false
       }
     `);
-    const docs = findDocs(program, 'test.ts'); //?
+    const docs = findSymbols(program, 'test.ts'); //?
     expect(docs).toHaveProperty('0.name', 'myFoo');
     expect(docs).toHaveProperty('0.type.kind', 'function');
     expect(docs).toHaveProperty('0.type.parameters.0.kind', 'parameter');
@@ -846,7 +846,7 @@ describe('extractDocs', () => {
         return false
       }
     `);
-    const docs = findDocs(program, 'test.ts'); //?
+    const docs = findSymbols(program, 'test.ts'); //?
     expect(docs).toHaveProperty('0.name', 'myFoo');
     expect(docs).toHaveProperty('0.type.kind', 'function');
     expect(docs).toHaveProperty('0.type.parameters.0.kind', 'parameter');
@@ -863,7 +863,7 @@ describe('extractDocs', () => {
         return false
       }
     `);
-    const docs = findDocs(program, 'test.ts'); //?
+    const docs = findSymbols(program, 'test.ts'); //?
     expect(docs).toHaveProperty('0.name', 'myFoo');
     expect(docs).toHaveProperty('0.type.kind', 'function');
     expect(docs).toHaveProperty('0.type.parameters.0.kind', 'parameter');
@@ -882,7 +882,7 @@ describe('extractDocs', () => {
         return false
       }
     `);
-    const docs = findDocs(program, 'test.ts'); //?
+    const docs = findSymbols(program, 'test.ts'); //?
     expect(docs).toHaveProperty('0.name', 'myFoo');
     expect(docs).toHaveProperty('0.type.kind', 'function');
     expect(docs).toHaveProperty('0.type.parameters.0.kind', 'parameter');
@@ -905,7 +905,7 @@ describe('extractDocs', () => {
         foo: string
       }
     `);
-    const docs = findDocs(program, 'test.ts'); //?
+    const docs = findSymbols(program, 'test.ts'); //?
     expect(docs).toHaveProperty('0.name', 'myFoo');
     expect(docs).toHaveProperty('0.type.kind', 'function');
     expect(docs).toHaveProperty('0.type.parameters.0.kind', 'parameter');
@@ -927,7 +927,7 @@ describe('extractDocs', () => {
         foo: string
       }
     `);
-    const docs = findDocs(program, 'test.ts'); //?
+    const docs = findSymbols(program, 'test.ts'); //?
     expect(docs).toHaveProperty('0.name', 'myFoo');
     expect(docs).toHaveProperty('0.type.kind', 'function');
     expect(docs).toHaveProperty('0.type.parameters.0.kind', 'parameter');
@@ -948,7 +948,7 @@ describe('extractDocs', () => {
 
       myFoo.myStaticMember = 'bar'
     `);
-    const docs = findDocs(program, 'test.ts'); //?
+    const docs = findSymbols(program, 'test.ts'); //?
     expect(docs).toHaveProperty('0.name', 'myFoo');
     expect(docs).toHaveProperty('0.type.kind', 'function');
     expect(docs).toHaveProperty('0.type.members.0.kind', 'member');
@@ -965,7 +965,7 @@ describe('extractDocs', () => {
 
       myFoo.myStaticMember = 'bar'
     `);
-    const docs = findDocs(program, 'test.ts'); //?
+    const docs = findSymbols(program, 'test.ts'); //?
     expect(docs).toHaveProperty('0.name', 'myFoo');
     expect(docs).toHaveProperty('0.type.kind', 'function');
     expect(docs).toHaveProperty('0.type.members.0.kind', 'member');
@@ -985,7 +985,7 @@ describe('extractDocs', () => {
       bar: 'baz'
     };
   `);
-    const docs = findDocs(program, 'test.ts'); //?
+    const docs = findSymbols(program, 'test.ts'); //?
     expect(docs).toHaveProperty('0.name', 'foo');
     expect(docs).toHaveProperty('0.type.kind', 'object');
     expect(docs).toHaveProperty('0.type.properties.0.name', 'bar');
@@ -1003,7 +1003,7 @@ describe('extractDocs', () => {
     const program = createProgramFromSource(`
       export type Foo<T> = T extends string ? true : false
     `);
-    const docs = findDocs(program, 'test.ts'); //?
+    const docs = findSymbols(program, 'test.ts'); //?
     expect(docs).toHaveProperty('0.name', 'Foo');
     expect(docs).toHaveProperty('0.type.kind', 'type');
     expect(docs).toHaveProperty('0.type.value.check.kind', 'generic');
@@ -1022,7 +1022,7 @@ describe('extractDocs', () => {
         [key: string]: number
       }
     `);
-    const docs = findDocs(program, 'test.ts'); //?
+    const docs = findSymbols(program, 'test.ts'); //?
     expect(docs).toHaveProperty('0.name', 'Foo');
     expect(docs).toHaveProperty('0.type.kind', 'interface');
     expect(docs).toHaveProperty('0.type.indexSignature.kind', 'indexSignature');
@@ -1040,7 +1040,7 @@ describe('extractDocs', () => {
         Bar = 'bar',
       }
     `);
-    const docs = findDocs(program, 'test.ts'); //?
+    const docs = findSymbols(program, 'test.ts'); //?
     expect(docs).toHaveProperty('0.name', 'MyEnum');
     expect(docs).toHaveProperty('0.type.kind', 'interface');
     expect(docs).toHaveProperty('0.type.properties.0.kind', 'member');
@@ -1062,7 +1062,7 @@ describe('extractDocs', () => {
 
       export type Bar = ValueOf<Foo>
     `);
-    const docs = findDocs(program, 'test.ts'); //?
+    const docs = findSymbols(program, 'test.ts'); //?
 
     expect(docs).toHaveProperty('0.name', 'Bar');
     expect(docs).toHaveProperty('0.type.kind', 'type');
@@ -1081,7 +1081,7 @@ describe('extractDocs', () => {
 
       export type B = A
     `);
-    const docs = findDocs(program, 'test.ts'); //?
+    const docs = findSymbols(program, 'test.ts'); //?
 
     expect(docs).toHaveProperty('0.name', 'B');
     expect(docs).toHaveProperty('0.type.kind', 'type');
@@ -1097,7 +1097,7 @@ describe('extractDocs', () => {
 
       export type B = A
     `);
-    const docs = findDocs(program, 'test.ts'); //?
+    const docs = findSymbols(program, 'test.ts'); //?
 
     expect(docs).toHaveProperty('0.name', 'B');
     expect(docs).toHaveProperty('0.type.kind', 'type');
@@ -1111,7 +1111,7 @@ describe('extractDocs', () => {
 
       export type B = keyof typeof A
     `);
-    const docs = findDocs(program, 'test.ts'); //?
+    const docs = findSymbols(program, 'test.ts'); //?
 
     expect(docs).toHaveProperty('0.name', 'B');
     expect(docs).toHaveProperty('0.type.kind', 'type');
@@ -1133,7 +1133,7 @@ describe('extractDocs', () => {
 
       export type B = keyof A;
     `);
-    const docs = findDocs(program, 'test.ts'); //?
+    const docs = findSymbols(program, 'test.ts'); //?
 
     expect(docs).toHaveProperty('0.name', 'B');
     expect(docs).toHaveProperty('0.type.kind', 'type');
@@ -1154,7 +1154,7 @@ describe('extractDocs', () => {
         [key: string]: (a: unknown) => {};
       };
     `);
-    const docs = findDocs(program, 'test.ts'); //?
+    const docs = findSymbols(program, 'test.ts'); //?
 
     expect(docs).toHaveProperty('0.name', 'A');
     expect(docs).toHaveProperty('0.type.kind', 'interface');

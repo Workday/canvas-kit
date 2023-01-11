@@ -1,5 +1,5 @@
 import {Tabs} from '@workday/canvas-kit-react/tabs';
-import {Specifications} from '@workday/canvas-kit-docs';
+import {Specifications, SymbolDoc} from '@workday/canvas-kit-docs';
 
 import {Basic} from './examples/Basic';
 import {NamedTabs} from './examples/NamedTabs';
@@ -238,24 +238,7 @@ const model = useTabsModel({
 <Tabs model={model}>{/* Child components */}</Tabs>;
 ```
 
-### Config
-
-`useTabsModel` accepts a configuration object with the following properties and returns a
-`TabsModel` with `state` and `events` properties.
-
-<ArgsTable of={TabsModelConfigComponent} />
-
-### State
-
-The `TabsModel` `state` is an object with the following properties.
-
-<ArgsTable of={TabsStateComponent} />
-
-### Events
-
-The `TabsModel` `events` is an object with the following properties.
-
-<ArgsTable of={TabsEventsComponent} />
+<SymbolDoc name="useTabsModel" />
 
 ## Specifications
 

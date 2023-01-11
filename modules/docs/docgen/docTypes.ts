@@ -45,8 +45,12 @@ export interface ModelValue {
   kind: 'model';
   defaultConfig: ObjectParameter[];
   requiredConfig: ObjectParameter[];
-  state: TypeMember[];
-  events: TypeMember[];
+  state: ObjectParameter[];
+  events: ObjectParameter[];
+  /**
+   * Additional properties on the model
+   */
+  modelProperties: ObjectParameter[];
 }
 
 export interface ElemPropsHookValue {

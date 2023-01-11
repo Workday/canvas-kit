@@ -4,7 +4,7 @@ import MarkdownToJSX from 'markdown-to-jsx';
 
 import {colors, type} from '@workday/canvas-kit-react/tokens';
 import {Dialog, useDialogModel} from '@workday/canvas-kit-react/dialog';
-import {Hyperlink} from '@workday/canvas-kit-react/button';
+import {ExternalHyperlink, Hyperlink} from '@workday/canvas-kit-react/button';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 import {Heading} from '@workday/canvas-kit-react/text';
 
@@ -25,11 +25,34 @@ const SymbolDialog = ({value}: {value: types.SymbolValue}) => {
       setSymbol(docs.find(d => value.name === d.name) || null);
     },
   });
+
   return (
     <Dialog model={model}>
-      <Dialog.Target as={Hyperlink} className="value-symbol">
-        {value.name}
-      </Dialog.Target>
+      <>
+        <Dialog.Target as={Hyperlink} className="value-symbol">
+          {value.name}
+        </Dialog.Target>
+        {value.typeParameters && value.typeParameters.length ? (
+          <>
+            <span>&lt;</span>
+            {value.typeParameters.map((p, index) => {
+              return (
+                <>
+                  {index !== 0 && (
+                    <span className="value-punctuation" key={index}>
+                      ,{' '}
+                    </span>
+                  )}
+                  <Value value={p} />
+                </>
+              );
+            })}{' '}
+            <span>&gt;</span>
+          </>
+        ) : (
+          ''
+        )}
+      </>
       <Dialog.Popper>
         <Dialog.Card>
           <Dialog.CloseIcon />
@@ -54,17 +77,22 @@ const SymbolDialog = ({value}: {value: types.SymbolValue}) => {
 
 const Value = ({value}: {value: types.Value}) => {
   switch (value.kind) {
+    case 'object':
     case 'interface':
     case 'typeLiteral':
-      return <InterfaceTable value={value} />;
+      return <PropertiesTable properties={value.properties} />;
     case 'type':
       return <Value value={value.value} />;
     case 'primitive':
-      return <code className="value-primitive">{value.value}</code>;
+      return <span className="value-primitive">{value.value}</span>;
+    case 'boolean':
+      return <span className="value-primitive">{String(value.value)}</span>;
     case 'string':
-      return <code className="value-string">'{value.value}'</code>;
+      return <span className="value-string">'{value.value}'</span>;
     case 'number':
-      return <code className="value-number">{value.value}</code>;
+      return <span className="value-number">{value.value}</span>;
+    case 'generic':
+      return <span className="value-number">{value.name}</span>;
     case 'union':
       return (
         <code className="value-union">
@@ -91,6 +119,13 @@ const Value = ({value}: {value: types.Value}) => {
           <span className="value-punctuation">)</span>
         </code>
       );
+    case 'array':
+      return (
+        <>
+          <Value value={value.value} />
+          <span className="value-punctuation">[]</span>
+        </>
+      );
     case 'intersection':
       return (
         <>
@@ -105,6 +140,19 @@ const Value = ({value}: {value: types.Value}) => {
               <Value key={i} value={v} />
             </>
           ))}
+        </>
+      );
+    case 'model':
+      return (
+        <>
+          <h3>Config:</h3>
+          <PropertiesTable properties={value.defaultConfig.concat(value.requiredConfig)} />
+          <h3>State:</h3>
+          <PropertiesTable properties={value.state} />
+          <h3>Events:</h3>
+          <PropertiesTable properties={value.events} />
+          <h3>Additional Properties:</h3>
+          <PropertiesTable properties={value.modelProperties} />
         </>
       );
     /*{
@@ -168,11 +216,7 @@ const Value = ({value}: {value: types.Value}) => {
     case 'symbol':
       return <SymbolDialog value={value} />;
     case 'external':
-      return (
-        <Hyperlink href={value.url} target="_blank">
-          {value.name}
-        </Hyperlink>
-      );
+      return <ExternalHyperlink href={value.url}>{value.name}</ExternalHyperlink>;
   }
   return <code className="value-unknown">unknown {JSON.stringify(value, null, '  ')}</code>;
 };
@@ -183,7 +227,7 @@ function getTableRows(properties: types.TypeMember[], level: number, index: numb
       <Table.Row key={index + i}>
         <Table.Data color="plum600">
           {/* Use a tooltip to help with debugging where the type sources are coming from */}
-          <Tooltip title={property.declarations[0]?.filePath}>
+          <Tooltip title={property.declarations?.[0]?.filePath || ''}>
             <span>
               {[...Array(level * 6)].map(v => '\u00A0') /* non-breaking space */}
               {level > 0 && '\u2514\u00A0'}
@@ -193,7 +237,7 @@ function getTableRows(properties: types.TypeMember[], level: number, index: numb
         </Table.Data>
         <Table.Data>
           <code>
-            {['interface', 'typeLiteral'].includes(property.type.kind) ? null : (
+            {['interface', 'typeLiteral', 'object'].includes(property.type.kind) ? null : (
               <Value value={property.type} />
             )}
           </code>
@@ -203,19 +247,25 @@ function getTableRows(properties: types.TypeMember[], level: number, index: numb
         </Table.Data>
       </Table.Row>,
     ].concat(
-      ['interface', 'typeLiteral'].includes(property.type.kind)
+      ['interface', 'typeLiteral', 'object'].includes(property.type.kind)
         ? [...getTableRows(property.type.properties, level + 1, index + properties.length)]
         : []
     );
   });
 }
 
-const InterfaceTable = ({value}: {value: types.InterfaceValue | types.TypeLiteralValue}) => {
-  if (value.properties.length === 0) {
+const PropertiesTable = ({
+  properties,
+}: {
+  properties: types.InterfaceValue[] | types.TypeLiteralValue[];
+}) => {
+  if (properties.length === 0) {
     return <span>&#123;&#125;</span>;
   }
 
-  const tableBody = getTableRows(value.properties, 0, 0);
+  console.log('properties', properties);
+
+  const tableBody = getTableRows(properties, 0, 0);
 
   return (
     <Table>

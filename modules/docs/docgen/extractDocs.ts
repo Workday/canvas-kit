@@ -5,12 +5,12 @@ import {promisify} from 'util';
 import _glob from 'glob';
 
 // import t from './traverse';
-import {findDocs} from './findDocs';
+import {findSymbols} from './findSymbols';
 
 const glob = promisify(_glob);
 
 export function extractDocs(program: ts.Program, fileName: string) {
-  return findDocs(program, fileName);
+  return findSymbols(program, fileName);
   // const checker = program.getTypeChecker();
 
   // // for (const sourceFile of program.getSourceFile(fileNames[0])) {
@@ -136,7 +136,7 @@ const srcFolder = path.join(__dirname, '../../../');
 
 srcFolder; //?
 glob(`${srcFolder}/modules/**/*.{ts,tsx}`, {
-  // glob(`${srcFolder}/modules/**/layout/lib/utils/grid.{ts,tsx}`, {
+  // glob(`${srcFolder}/modules/**/popup/lib/hooks/usePopupModel.{ts,tsx}`, {
   ignore: ['**/examples/**', '**/spec/**', '**/stories/**', '**/codemod/**', '**/docs/**'],
 })
   .then(files => {
@@ -147,7 +147,7 @@ glob(`${srcFolder}/modules/**/*.{ts,tsx}`, {
     const program = ts.createProgram(files, getConfig());
     return files.flatMap(fileName => {
       console.log(fileName); //?
-      return findDocs(program, fileName);
+      return findSymbols(program, fileName);
     });
   })
   .then(docs => {

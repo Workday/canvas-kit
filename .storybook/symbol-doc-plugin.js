@@ -6,7 +6,7 @@ const crypto = require('crypto');
 // we use TS files, so tell node to register them
 require('ts-node').register({});
 
-const {findDocs} = require('@workday/canvas-kit-docs/docgen/findDocs');
+const {findSymbols} = require('@workday/canvas-kit-docs/docgen/findSymbols');
 
 /** @typedef {import("webpack").Plugin} WebpackPlugin */
 /** @typedef {import("webpack").Compiler} Compiler */
@@ -153,7 +153,7 @@ class SymbolDocPlugin {
   processModule(module) {
     if (!module) return;
 
-    const docs = findDocs(this.program, module.userRequest);
+    const docs = findSymbols(this.program, module.userRequest);
 
     if (!docs.length) return;
 

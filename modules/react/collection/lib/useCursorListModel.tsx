@@ -62,7 +62,7 @@ export interface NavigationManager {
 export const createNavigationManager = (manager: NavigationManager) => manager;
 
 /** Function type to make it easier to define navigation functions */
-export type NavigationRequestor = (id: string, {state}: NavigationInput) => Item<Generic>;
+export type NavigationRequestor = (id: string, model: NavigationInput) => Item<Generic>;
 
 /**
  * Get the first item in a list regardless of column count

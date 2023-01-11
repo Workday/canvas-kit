@@ -1,200 +1,211 @@
-// import ts from 'typescript';
-// import {JSDoc, ExportedSymbol} from './docTypes';
-// import t from './traverse';
+import ts from 'typescript';
+import {
+  JSDoc,
+  ExportedSymbol,
+  Value,
+  ModelValue,
+  ObjectParameter,
+  TypeMember,
+  FunctionValue,
+} from './docTypes';
+import {
+  createParserPlugin,
+  getValueFromNode,
+  getValueDeclaration,
+  getPackageName,
+  defaultJSDoc,
+} from './findSymbols';
+import t from './traverse';
 
-// function getLiteralValueFromPropertyAssignment(
-//   initializer: ts.Expression | undefined
-// ): string | undefined {
-//   if (!initializer) {
-//     return undefined;
-//   }
+function capitalize(string: string) {
+  return string[0].toUpperCase() + string.substring(1);
+}
 
-//   if (t.isFalseKeyword(initializer)) {
-//     return 'false';
-//   }
-//   if (t.isTrueKeyword(initializer)) {
-//     return 'true';
-//   }
-//   if (t.isNumericLiteral(initializer)) {
-//     return `${initializer.text}`;
-//   }
-//   if (t.isStringLiteral(initializer)) {
-//     return `'${initializer.text.trim()}'`;
-//   }
-//   if (t.isAsExpression(initializer)) {
-//     return getLiteralValueFromPropertyAssignment(initializer.expression);
-//   }
-//   if (t.isNullKeyword(initializer)) {
-//     return 'null';
-//   }
-//   try {
-//     return initializer.getText();
-//   } catch (e) {
-//     // Could not figure it out
-//     return undefined;
-//   }
-// }
+export const findModel = createParserPlugin((checker, node, symbols) => {
+  t.getKindNameFromNode(node); //?
+  if (
+    t.isVariableDeclaration(node) &&
+    node.initializer &&
+    t.isIdentifier(node.name) &&
+    t.isCallExpression(node.initializer) &&
+    t.isCallExpression(node.initializer.expression) &&
+    t.isIdentifier(node.initializer.expression.expression) &&
+    node.initializer.expression.expression.escapedText === 'createModelHook'
+  ) {
+    // we have a model
+    const modelName = (node.name.escapedText as string).replace('use', ''); //?
 
-// /** True if this is visible outside this file, false otherwise */
-// function isNodeExported(node: ts.Node): boolean {
-//   return (
-//     (ts.getCombinedModifierFlags(node as ts.Declaration) & ts.ModifierFlags.Export) !== 0 ||
-//     (!!node.parent && node.parent.kind === ts.SyntaxKind.SourceFile)
-//   );
-// }
+    const options = node.initializer.expression.arguments[0]; //?
+    // let configProps: Record<string, Value[]> = {};
 
-// function getProperties(checker: ts.TypeChecker, node: ts.Node): Prop[] {
-//   return checker
-//     .getTypeAtLocation(node)
-//     .getApparentProperties()
-//     .map(p => {
-//       // Get the default value
-//       let defaultValue;
-//       if (t.isPropertyAssignment(p.valueDeclaration)) {
-//         defaultValue = getLiteralValueFromPropertyAssignment(p.valueDeclaration.initializer);
-//       }
+    const optionsType = checker.getTypeAtLocation(options);
+    const configProps = optionsType.getProperties().reduce((result, symbol) => {
+      symbol; //?
+      if (['defaultConfig', 'requiredConfig'].includes(symbol.getName())) {
+        // The declaration of the config
+        const declaration = getValueDeclaration(symbol);
+        if (declaration) {
+          result[symbol.getName()] = checker
+            .getTypeAtLocation(declaration)
+            .getProperties()
+            .map(p => {
+              // Each property of the config
+              const prop = getValueDeclaration(p);
+              return {
+                ...getValueFromNode(checker, prop!),
+                required: symbol.getName() === 'requiredConfig',
+              } as ObjectParameter;
+            });
+        }
+      }
+      return result;
+    }, {} as Record<string, ObjectParameter[]>);
 
-//       const type = checker.getTypeOfSymbolAtLocation(p, p.valueDeclaration!);
-//       const typeName = checker.typeToString(type);
-//       const constraint = type.getConstraint();
-//       let unionValues: string[] = [];
-//       if (constraint && constraint.isUnion()) {
-//         unionValues = constraint.types.map(t => {
-//           if (t.isStringLiteral()) return `"${t.value}"`;
-//           if (t.isNumberLiteral()) return `${t.value}`;
-//           return checker.typeToString(t);
-//         });
-//       }
+    const modelProps: Record<string, ObjectParameter[]> = {};
+    const returnProps: Record<string, ObjectParameter> = {};
+    const type = checker.getTypeAtLocation(node.initializer.arguments[0]); //?
+    const returnValue = type.getCallSignatures().map(s => {
+      return s
+        .getReturnType()
+        .getProperties()
+        .reduce((result, p) => {
+          const declaration = getValueDeclaration(p);
+          if (declaration) {
+            p.getName(); //?
+            t.getKindNameFromNode(declaration); //?
+            declaration; //?
+            if (['state', 'events'].includes(p.getName())) {
+              modelProps[p.getName()] = checker
+                .getTypeAtLocation(declaration)
+                .getProperties()
+                .map(prop => {
+                  prop.getName(); //?
+                  t.getKindNameFromNode(getValueDeclaration(prop)); //?
+                  return getValueFromNode(checker, getValueDeclaration(prop)!) as ObjectParameter;
+                });
+            } else {
+              returnProps[p.getName()] = getValueFromNode(checker, declaration) as ObjectParameter;
+            }
+          }
+          return result;
+        }, returnProps); //?
+    });
+    returnValue[0]; //?
 
-//       const jsDocComment = findDocComment(checker, p.valueDeclaration); //?
+    const {state, events} = modelProps;
 
-//       return {
-//         type: 'prop',
-//         name: p.escapedName,
-//         defaultValue,
-//         typeInfo: {
-//           name: typeName,
-//           raw: typeName,
-//           value: unionValues.length ? unionValues.map(u => ({value: u})) : typeName,
-//         },
-//         required: false,
-//         ...jsDocComment,
-//       } as Prop;
-//     });
-// }
+    const fileName = node.getSourceFile().fileName;
 
-// function getPackageName(fileName: string): string {
-//   const match = fileName.match(/modules\/([a-z-]+)\//i);
+    // Add special symbols
+    symbols.push({
+      name: `${modelName}State`,
+      packageName: getPackageName(fileName),
+      fileName,
+      ...defaultJSDoc,
+      type: {
+        kind: 'object',
+        properties: state,
+      },
+    });
+    symbols.push({
+      name: `${modelName}Events`,
+      packageName: getPackageName(fileName),
+      fileName,
+      ...defaultJSDoc,
+      type: {
+        kind: 'object',
+        properties: events,
+      },
+    });
 
-//   if (match) {
-//     return match[1];
-//   }
+    const eventConfig = events.reduce((result, event) => {
+      const type = event.type as FunctionValue;
+      event; //?
+      // callback of the event
+      result.push({
+        ...event,
+        defaultValue: undefined,
+        name: `on${capitalize(event.name)}`,
+        required: false,
+        type: {
+          ...type,
+          parameters: [
+            {
+              ...defaultJSDoc,
+              kind: 'parameter',
+              name: 'state',
+              required: true,
+              type: {
+                kind: 'symbol',
+                name: `${modelName}State`,
+                fileName,
+              },
+            } as ObjectParameter,
+          ].concat(...type.parameters),
+          returnType: {
+            kind: 'primitive',
+            value: 'void',
+          },
+        },
+      });
+      // guard of the event
+      result.push({
+        ...event,
+        defaultValue: undefined,
+        name: `should${capitalize(event.name)}`,
+        required: false,
+        type: {
+          ...type,
+          parameters: [
+            {
+              ...defaultJSDoc,
+              kind: 'parameter',
+              name: 'state',
+              required: true,
+              type: {
+                kind: 'symbol',
+                name: `${modelName}State`,
+                fileName,
+              },
+            } as ObjectParameter,
+          ].concat(...type.parameters),
+          returnType: {
+            kind: 'primitive',
+            value: 'boolean',
+          },
+        },
+      });
 
-//   return 'react';
-// }
+      return result;
+    }, [] as ObjectParameter[]);
 
-// const defaultJSDoc: JSDoc = {
-//   description: '',
-//   fullComment: '',
-//   tags: {},
-// };
+    symbols.push({
+      name: `${modelName}Config`,
+      packageName: getPackageName(fileName),
+      fileName,
+      ...defaultJSDoc,
+      type: {
+        kind: 'object',
+        properties: (configProps['defaultConfig'] || []).concat(
+          configProps['requiredConfig'],
+          eventConfig
+        ),
+      },
+    });
 
-// function formatTag(tag: ts.JSDocTagInfo) {
-//   let result = '@' + tag.name;
-//   if (tag.text) {
-//     result += ' ' + ts.displayPartsToString(tag.text);
-//   }
-//   return result;
-// }
+    return {
+      kind: 'model',
+      defaultConfig: configProps['defaultConfig'] || [],
+      requiredConfig: configProps['requiredConfig'] || [],
+      state,
+      events,
+      modelProperties: Object.keys(returnProps).map(p => returnProps[p]),
+    };
+  }
+  return;
 
-// function getFullJsDocComment(checker: ts.TypeChecker, symbol: ts.Symbol) {
-//   if (symbol.getDocumentationComment === undefined) {
-//     return defaultJSDoc;
-//   }
-
-//   let mainComment = ts.displayPartsToString(symbol.getDocumentationComment(checker));
-
-//   if (mainComment) {
-//     mainComment = mainComment.replace(/\r\n/g, '\n');
-//   }
-
-//   const tags = symbol.getJsDocTags() || [];
-
-//   const tagComments: string[] = [];
-//   const tagMap: Record<string, string> = {};
-
-//   tags.forEach(tag => {
-//     const trimmedText = ts.displayPartsToString(tag.text).trim();
-//     const currentValue = tagMap[tag.name];
-//     tagMap[tag.name] = currentValue ? currentValue + '\n' + trimmedText : trimmedText;
-
-//     if (['default', 'type'].indexOf(tag.name) < 0) {
-//       tagComments.push(formatTag(tag));
-//     }
-//   });
-
-//   return {
-//     description: mainComment,
-//     fullComment: (mainComment + '\n' + tagComments.join('\n')).trim(),
-//     tags: tagMap,
-//   };
-// }
-
-// function findDocComment(checker: ts.TypeChecker, node: ts.Node): JSDoc {
-//   const symbol = getSymbolForNode(checker, node);
-
-//   if (symbol) {
-//     const comment = getFullJsDocComment(checker, symbol);
-//     if (comment.fullComment || comment.tags.default) {
-//       return comment;
-//     }
-
-//     const rootSymbols = checker.getRootSymbols(symbol);
-//     const commentsOnRootSymbols = rootSymbols
-//       .filter(x => x !== symbol)
-//       .map(x => getFullJsDocComment(checker, x))
-//       .filter(x => !!x.fullComment || !!comment.tags.default);
-
-//     if (commentsOnRootSymbols.length) {
-//       return commentsOnRootSymbols[0];
-//     }
-//   }
-
-//   return defaultJSDoc;
-// }
-
-// /** Get a property identifier from */
-// function getPropertyIdentifier(node: ts.Node): ts.Identifier | null {
-//   if (
-//     (t.isShorthandPropertyAssignment(node) || t.isPropertyAssignment(node)) &&
-//     t.isIdentifier(node.name)
-//   ) {
-//     return node.name;
-//   }
-//   return null;
-// }
-
-// // https://github.com/dsherret/ts-ast-viewer/blob/c71e238123d972bae889b3829e23b44f39d8d5c2/site/src/components/PropertiesViewer.tsx#L172
-// function getSymbolForNode(checker: ts.TypeChecker, node: ts.Node): ts.Symbol | undefined {
-//   return (node as any).symbol || checker.getSymbolAtLocation(node);
-// }
-
-// function getObjectDoc(checker: ts.TypeChecker, node: ts.Node, name: string): ObjectDoc | undefined {
-//   const type = checker.getTypeAtLocation(node);
-//   const fileName = node.getSourceFile().fileName;
-
-//   if (type.flags & ts.TypeFlags.Object) {
-//     return {
-//       type: 'object',
-//       name,
-//       ...findDocComment(checker, node),
-//       packageName: getPackageName(fileName),
-//       props: getProperties(checker, node),
-//     };
-//   }
-
-//   return undefined;
-// }
+  node; //?
+});
 
 // export function findModel(program: ts.Program, fileName: string): ExportedSymbol[] {
 //   const docs: ExportedSymbol[] = [];

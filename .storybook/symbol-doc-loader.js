@@ -1,5 +1,6 @@
 // @ts-check
-const {findDocs} = require('@workday/canvas-kit-docs/docgen/findDocs');
+const {findSymbols} = require('@workday/canvas-kit-docs/docgen/findSymbols');
+const {findModel} = require('@workday/canvas-kit-docs/docgen/findModel');
 const {getOptions} = require('loader-utils');
 const {validate} = require('schema-utils');
 const ts = require('typescript');
@@ -86,7 +87,7 @@ function symbolDocLoader(source) {
   }
   filesProcessedMap.set(this.resourcePath, true);
 
-  const docs = findDocs(program, this.resourcePath);
+  const docs = findSymbols(program, this.resourcePath, [findModel]);
 
   return (
     source +
