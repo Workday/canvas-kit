@@ -22,7 +22,7 @@ import {
 import {menuGroupIcon} from '@workday/canvas-system-icons-web';
 
 export default {
-  title: 'Testing/React/Popups/Popup',
+  title: 'Testing/Popups/Popup',
   component: Popup,
 };
 

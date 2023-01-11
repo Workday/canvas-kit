@@ -11,7 +11,7 @@ describe('Switch', () => {
   ['Basic', 'Alert', 'Error'].forEach(story => {
     context(`given the '${story}' story is rendered`, () => {
       beforeEach(() => {
-        h.stories.load('Components/Inputs/Switch/React', story);
+        h.stories.load('Components/Inputs/Switch', story);
       });
 
       it('should not have any axe errors', () => {
@@ -32,7 +32,7 @@ describe('Switch', () => {
 
   context(`given the 'Disabled' story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Components/Inputs/Switch/React', 'Disabled');
+      h.stories.load('Components/Inputs/Switch', 'Disabled');
     });
 
     it('should not have any axe errors', () => {

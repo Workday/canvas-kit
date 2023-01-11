@@ -36,7 +36,7 @@ module.exports = (modulePath, name, description, prerelease, category) => {
   const titleCaseName = getTitleCaseName(name);
   const rootPath = '../../..';
   const storyPath = `${prereleaseTitle || `Components/${category}`}/${titleCaseName}/React`;
-  const testingStoryPath = `Testing/React/${prereleaseTitle || category}/${titleCaseName}`;
+  const testingStoryPath = `Testing/${prereleaseTitle || category}/${titleCaseName}`;
 
   const files = {
     model: {

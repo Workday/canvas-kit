@@ -133,7 +133,7 @@ const ThemeDemo = (props: any) => {
   );
 };
 
-storiesOf('Tokens/Common/Theming', module)
+storiesOf('Features/Theming', module)
   .addParameters({ReadmePath: 'react/common/lib/theming'})
   .add('Theme', () => {
     return <ThemeDemo />;

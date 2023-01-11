@@ -9,7 +9,7 @@ import {withSnapshotsEnabled, customColorTheme} from '../../../../../utils/story
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 
 export default withSnapshotsEnabled({
-  title: 'Testing/React/Inputs/Text Input',
+  title: 'Testing/Inputs/Text Input',
   component: TextInput,
 });
 

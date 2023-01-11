@@ -11,7 +11,7 @@ import {ColorInput} from '@workday/canvas-kit-react/color-picker';
 import {FormField} from '@workday/canvas-kit-react/form-field';
 
 export default withSnapshotsEnabled({
-  title: 'Testing/React/Inputs/Color Picker/Color Input',
+  title: 'Testing/Inputs/Color Picker/Color Input',
   component: ColorInput,
 });
 
