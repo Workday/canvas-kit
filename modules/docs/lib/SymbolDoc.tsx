@@ -18,6 +18,8 @@ export interface SymbolDocProps {
   fileName?: string;
 }
 
+const RenderContext = React.createContext<'table' | 'inline'>('table');
+
 const SymbolDialog = ({value}: {value: types.SymbolValue}) => {
   const [symbol, setSymbol] = React.useState<types.ExportedSymbol | null>(null);
   const model = useDialogModel({
@@ -46,7 +48,7 @@ const SymbolDialog = ({value}: {value: types.SymbolValue}) => {
                   <Value value={p} />
                 </>
               );
-            })}{' '}
+            })}
             <span>&gt;</span>
           </>
         ) : (
@@ -76,11 +78,16 @@ const SymbolDialog = ({value}: {value: types.SymbolValue}) => {
 };
 
 const Value = ({value}: {value: types.Value}) => {
+  const renderContext = React.useContext(RenderContext);
   switch (value.kind) {
     case 'object':
     case 'interface':
     case 'typeLiteral':
-      return <PropertiesTable properties={value.properties} />;
+      return renderContext === 'inline' ? (
+        <PropertiesInline properties={value.properties} />
+      ) : (
+        <PropertiesTable properties={value.properties} />
+      );
     case 'type':
       return <Value value={value.value} />;
     case 'primitive':
@@ -155,40 +162,9 @@ const Value = ({value}: {value: types.Value}) => {
           <PropertiesTable properties={value.modelProperties} />
         </>
       );
-    /*{
-  "kind": "function",
-  "parameters": [
-    {
-      "kind": "parameter",
-      "name": "key",
-      "type": {
-        "kind": "symbol",
-        "name": "BreakpointFnParam",
-        "value": "BreakpointFnParam"
-      },
-      "required": true,
-      "rest": false,
-      "description": "",
-      "declarations": [
-        {
-          "name": "key",
-          "filePath": "/Users/nicholas.boll/projects/canvas-kit/modules/react/common/lib/theming/types.ts"
-        }
-      ],
-      "tags": {}
-    }
-  ],
-  "members": [],
-  "returnType": {
-    "kind": "primitive",
-    "value": "string"
-  }
-}
-       */
-    // case 'function':
     case 'function':
       return (
-        <>
+        <RenderContext.Provider value="inline">
           <span className="value-punctuation">(</span>
           <>
             {value.parameters.map((p, index) => (
@@ -205,7 +181,7 @@ const Value = ({value}: {value: types.Value}) => {
           <span className="value-punctuation">
             ) =&gt; <Value value={value.returnType} />
           </span>
-        </>
+        </RenderContext.Provider>
       );
     case 'parameter':
       return (
@@ -221,7 +197,11 @@ const Value = ({value}: {value: types.Value}) => {
   return <code className="value-unknown">unknown {JSON.stringify(value, null, '  ')}</code>;
 };
 
-function getTableRows(properties: types.TypeMember[], level: number, index: number): JSX.Element[] {
+function getTableRows(
+  properties: (types.TypeMember | types.ObjectParameter)[],
+  level: number,
+  index: number
+): JSX.Element[] {
   return properties.flatMap((property, i) => {
     return [
       <Table.Row key={index + i}>
@@ -254,10 +234,40 @@ function getTableRows(properties: types.TypeMember[], level: number, index: numb
   });
 }
 
+const PropertiesInline = ({
+  properties,
+}: {
+  properties: (types.TypeMember | types.ObjectParameter)[];
+}) => {
+  if (properties.length === 0) {
+    return <span>&#123;&#125;</span>;
+  }
+
+  console.log('properties', properties);
+
+  return (
+    <>
+      <span>&#123;</span>
+      {properties.map((p, index) => {
+        return (
+          <>
+            <br />
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <span>{p.name}:</span>&nbsp;
+            <Value value={p.type} />
+          </>
+        );
+      })}
+      <br />
+      <span>&#125;</span>
+    </>
+  );
+};
+
 const PropertiesTable = ({
   properties,
 }: {
-  properties: types.InterfaceValue[] | types.TypeLiteralValue[];
+  properties: (types.TypeMember | types.ObjectParameter)[];
 }) => {
   if (properties.length === 0) {
     return <span>&#123;&#125;</span>;

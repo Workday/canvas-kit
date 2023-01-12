@@ -1,6 +1,4 @@
 // @ts-check
-const {findSymbols} = require('@workday/canvas-kit-docs/docgen/findSymbols');
-const {findModel} = require('@workday/canvas-kit-docs/docgen/findModel');
 const {getOptions} = require('loader-utils');
 const {validate} = require('schema-utils');
 const ts = require('typescript');
@@ -8,6 +6,9 @@ const glob = require('glob');
 
 // we use TS files, so tell node to register them
 require('ts-node').register({});
+
+const {DocParser} = require('@workday/canvas-kit-docs/docgen/docParser');
+const {findModel} = require('@workday/canvas-kit-docs/docgen/findModel');
 
 const schema = {
   type: 'object',
@@ -58,6 +59,9 @@ const filesProcessedMap = new Map();
 /** @type {ts.Program} */
 let program;
 
+/** @type {DocParser} */
+let parser;
+
 /** @type {ts.WatchOfConfigFile<ts.SemanticDiagnosticsBuilderProgram> } */
 let watcher;
 
@@ -76,6 +80,7 @@ function symbolDocLoader(source) {
       ignore: options.ignore,
     });
     program = ts.createProgram(files, getConfig());
+    parser = new DocParser(program, [findModel]);
   }
   if (filesProcessedMap.has(this.resourcePath)) {
     // Update the program to force Typescript to reprocess our changed files. I
@@ -84,10 +89,11 @@ function symbolDocLoader(source) {
     // Typescript only supports "incremental" via building and type-checking
     // where I only want a program - I don't need to type check or emit...
     program = ts.createProgram(files, getConfig(), undefined, program);
+    parser = new DocParser(program, [findModel]);
   }
   filesProcessedMap.set(this.resourcePath, true);
 
-  const docs = findSymbols(program, this.resourcePath, [findModel]);
+  const docs = parser.getExportedSymbols(this.resourcePath);
 
   return (
     source +

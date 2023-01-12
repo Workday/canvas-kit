@@ -13,6 +13,69 @@ import {
 import {getExternalSymbol} from './getExternalSymbol';
 import t, {find} from './traverse';
 
+export class DocParser {
+  /** A shared reference to the Typescript type checker */
+  public checker: ts.TypeChecker;
+
+  /**
+   * This is the shared mutable instance of all exported symbols already processed. You can push new
+   * symbols or search for existing symbols. If your plugin doesn't need to access existing symbols,
+   * you can ignore this parameter.
+   */
+  public symbols: ExportedSymbol[] = [];
+
+  constructor(public program: ts.Program, public plugins: ParserPlugin[] = []) {
+    this.checker = program.getTypeChecker();
+  }
+
+  getExportedSymbols(fileName: string): ExportedSymbol[] {
+    const symbols: ExportedSymbol[] = [];
+    const sourceFile = this.program.getSourceFile(fileName);
+    if (!sourceFile) return symbols;
+
+    find(sourceFile, node => {
+      const kind = node.kind;
+
+      return (
+        [
+          'VariableDeclaration',
+          'InterfaceDeclaration',
+          'TypeAliasDeclaration',
+          'FunctionDeclaration',
+          'EnumDeclaration',
+        ]
+          .map(k => (ts.SyntaxKind as any)[k])
+          .includes(kind) && isNodeExported(this.checker, node)
+      );
+    }).forEach(node => {
+      const symbol = getSymbolFromNode(this.checker, node);
+      if (symbol) {
+        'here'; //?
+        const exportedSymbol: ExportedSymbol = {
+          name: symbol.name,
+          packageName: getPackageName(fileName),
+          fileName,
+          ...findDocComment(this.checker, symbol),
+          type: this.getValueFromNode(node),
+        };
+
+        symbols.push(exportedSymbol);
+        this.symbols.push(exportedSymbol);
+      }
+    });
+
+    return symbols;
+  }
+
+  getValueFromNode(node: ts.Node): Value {
+    return getValueFromNode(this, node);
+  }
+
+  getValueFromType(type: ts.Type, node?: ts.Node): Value | undefined {
+    return getValueFromType(this, type, node);
+  }
+}
+
 /**
  * This is the main recursive function for creating docs from the Typescript AST. The AST is
  * traversed and type information is extracted from source code. The Typescript type checker is used
@@ -25,10 +88,24 @@ import t, {find} from './traverse';
  * - Iterate over property symbols and get a declaration - returns a Node
  * - Return a doc entry of the declaration node
  */
-export function getValueFromNode(checker: ts.TypeChecker, node: ts.Node): Value {
+function getValueFromNode(parser: DocParser, node: ts.Node): Value {
   if (node === undefined) {
+    // This shouldn't happen, but we'd rather see `???` in the output than crash
     return unknownValue('???');
   }
+
+  return (
+    parser.plugins.reduce((result, fn) => {
+      return result || fn(node, parser);
+    }, undefined as Value | undefined) || _getValueFromNode(parser, node)
+  );
+}
+
+/**
+ * Private recursing function. Doesn't include plugins.
+ */
+function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
+  const {checker} = parser;
   // const type = checker.typeToString(checker.getTypeAtLocation(node));
   // console.log(t.getKindNameFromNode(node) || node.kind, safeGetText(checker, node), type);
 
@@ -45,7 +122,7 @@ export function getValueFromNode(checker: ts.TypeChecker, node: ts.Node): Value 
   if (t.isTupleType(node)) {
     return {
       kind: 'tuple',
-      value: node.elements.map(e => getValueFromNode(checker, e)),
+      value: node.elements.map(e => getValueFromNode(parser, e)),
     };
   }
 
@@ -72,17 +149,17 @@ export function getValueFromNode(checker: ts.TypeChecker, node: ts.Node): Value 
     // Treat Interfaces and Types with TypeLiterals as interfaces
     const type = checker.getTypeAtLocation(node);
     const properties = type.getProperties().map<TypeMember>(p => {
-      return getValueFromNode(checker, getValueDeclaration(p)!) as TypeMember;
+      return getValueFromNode(parser, getValueDeclaration(p)!) as TypeMember;
     });
 
     // get index signature...
-    const indexType = getIndexSignatureFromType(checker, type);
+    const indexType = getIndexSignatureFromType(parser, type);
 
     if (isObject(type) && (properties.length || indexType)) {
       const typeParameters = (
         (node as ts.InterfaceDeclaration).typeParameters ||
         (node.parent as ts.TypeAliasDeclaration).typeParameters
-      )?.map(p => getValueFromNode(checker, p) as TypeParameter);
+      )?.map(p => getValueFromNode(parser, p) as TypeParameter);
       // type.getStringIndexType(); //?
       // type.getNumberIndexType(); //?
       // checker.getIndexTypeOfType(type, ts.IndexKind.String); //?
@@ -128,7 +205,7 @@ export function getValueFromNode(checker: ts.TypeChecker, node: ts.Node): Value 
    */
   if (t.isTypeAliasDeclaration(node)) {
     const typeParameters = node.typeParameters?.map(
-      p => getValueFromNode(checker, p) as TypeParameter
+      p => getValueFromNode(parser, p) as TypeParameter
     );
 
     // We need to test if the `node.type` is a TypeReference and if that TypeReference is an exported
@@ -149,9 +226,9 @@ export function getValueFromNode(checker: ts.TypeChecker, node: ts.Node): Value 
     const isLocalTypeReference =
       t.isTypeReference(node.type) && !isExportedSymbol(checker, node.type.typeName); //?
     const value = isLocalTypeReference
-      ? getValueFromType(checker, checker.getTypeAtLocation(node), node) ||
+      ? getValueFromType(parser, checker.getTypeAtLocation(node), node) ||
         unknownValue(safeGetText(checker, node))
-      : getValueFromNode(checker, node.type);
+      : getValueFromNode(parser, node.type);
 
     return {
       kind: 'type',
@@ -176,10 +253,10 @@ export function getValueFromNode(checker: ts.TypeChecker, node: ts.Node): Value 
   if (t.isTypeLiteral(node)) {
     // const type = checker.getTypeAtLocation(node);
     // const properties = type.getProperties().map<TypeMember>(p => {
-    //   return getValueFromNode(checker, getValueDeclaration(p)!) as TypeMember;
+    //   return getValueFromNode(parser, getValueDeclaration(p)!) as TypeMember;
     // });
     const properties = node.members.map<TypeMember>(member => {
-      return getValueFromNode(checker, member) as TypeMember;
+      return getValueFromNode(parser, member) as TypeMember;
     });
     return {kind: 'typeLiteral', properties};
   }
@@ -193,7 +270,7 @@ export function getValueFromNode(checker: ts.TypeChecker, node: ts.Node): Value 
    * `Array` with a `typeArgument` of a TypeReference `A`
    */
   if (t.isArrayType(node)) {
-    return {kind: 'array', value: getValueFromNode(checker, node.elementType)};
+    return {kind: 'array', value: getValueFromNode(parser, node.elementType)};
   }
 
   /**
@@ -213,9 +290,9 @@ export function getValueFromNode(checker: ts.TypeChecker, node: ts.Node): Value 
    */
   if (t.isTypeParameter(node)) {
     // t.getKindNameFromNode(node.parent); //?
-    const constraint = node.constraint ? getValueFromNode(checker, node.constraint) : undefined;
+    const constraint = node.constraint ? getValueFromNode(parser, node.constraint) : undefined;
 
-    const defaultValue = node.default ? getValueFromNode(checker, node.default) : undefined;
+    const defaultValue = node.default ? getValueFromNode(parser, node.default) : undefined;
     return {
       kind: 'typeParameter',
       name: node.name.text,
@@ -245,7 +322,7 @@ export function getValueFromNode(checker: ts.TypeChecker, node: ts.Node): Value 
    * as a `parameter` instead of a `function`
    */
   if (t.isMethodDeclaration(node)) {
-    const signature = getValueFromSignatureNode(checker, node as ts.SignatureDeclaration)!;
+    const signature = getValueFromSignatureNode(parser, node as ts.SignatureDeclaration)!;
     const symbol = getSymbolFromNode(checker, node);
     const type = checker.getTypeAtLocation(node);
     const jsDoc = findDocComment(checker, symbol);
@@ -268,7 +345,7 @@ export function getValueFromNode(checker: ts.TypeChecker, node: ts.Node): Value 
     const declaration = node;
     const signature = checker.getSignatureFromDeclaration(declaration);
     if (signature) {
-      return getValueFromSignature(checker, node, signature);
+      return getValueFromSignature(parser, node, signature);
     } else {
       // throw Error('Signature not found');
       'here'; //?
@@ -278,7 +355,7 @@ export function getValueFromNode(checker: ts.TypeChecker, node: ts.Node): Value 
       const typeParameters = node.typeParameters?.map(
         t => checker.getTypeAtLocation(t) as ts.TypeParameter
       );
-      return getValueFromSignature(checker, node, {
+      return getValueFromSignature(parser, node, {
         parameters,
         declaration: node,
         typeParameters,
@@ -309,7 +386,7 @@ export function getValueFromNode(checker: ts.TypeChecker, node: ts.Node): Value 
   // All function like have call signatures. All special function-like node
   // processing should happen before this line
   if (ts.isFunctionLike(node)) {
-    return getValueFromSignatureNode(checker, node);
+    return getValueFromSignatureNode(parser, node);
   }
 
   /**
@@ -327,12 +404,12 @@ export function getValueFromNode(checker: ts.TypeChecker, node: ts.Node): Value 
   if (t.isVariableDeclaration(node)) {
     // if the declaration already has a type node, return the value from the type node
     if (node.type) {
-      return getValueFromNode(checker, node.type);
+      return getValueFromNode(parser, node.type);
     }
 
     // An `AsExpression` is a type, so we'll return that
     if (node.initializer && t.isAsExpression(node.initializer)) {
-      return getValueFromNode(checker, node.initializer);
+      return getValueFromNode(parser, node.initializer);
     }
 
     // We have no type information in the AST. We'll get the Type from the type checker and run some
@@ -346,12 +423,12 @@ export function getValueFromNode(checker: ts.TypeChecker, node: ts.Node): Value 
       'here'; //?
       if (type.objectFlags & ts.ObjectFlags.ArrayLiteral) {
         'here'; //?
-        return getValueFromType(checker, type) || unknownValue(safeGetText(checker, node));
+        return getValueFromType(parser, type) || unknownValue(safeGetText(checker, node));
       }
-      return getObjectValueFromType(checker, type);
+      return getObjectValueFromType(parser, type);
     }
 
-    const value = getValueFromType(checker, type);
+    const value = getValueFromType(parser, type);
     if (value) return value;
   }
 
@@ -370,7 +447,7 @@ export function getValueFromNode(checker: ts.TypeChecker, node: ts.Node): Value 
       kind: 'member',
       name: symbol?.name || '',
       type: node.type
-        ? getValueFromNode(checker, node.type)
+        ? getValueFromNode(parser, node.type)
         : unknownValue(safeGetText(checker, node)),
       ...jsDoc,
     };
@@ -394,7 +471,7 @@ export function getValueFromNode(checker: ts.TypeChecker, node: ts.Node): Value 
     const symbol = getSymbolFromNode(checker, node);
     const jsDoc = findDocComment(checker, symbol);
     // checker.typeToString(type); //?
-    // getValueFromNode(checker, node.initializer); //?
+    // getValueFromNode(parser, node.initializer); //?
 
     // For default values, we want the value and not the type. An `AsExpression` redirects to types,
     // so we want to bypass it to get the value node
@@ -407,8 +484,8 @@ export function getValueFromNode(checker: ts.TypeChecker, node: ts.Node): Value 
     return {
       kind: 'parameter',
       name: symbol?.name || '',
-      defaultValue: getValueFromNode(checker, defaultValueNode),
-      type: getValueFromType(checker, type) || unknownValue(safeGetText(checker, node)),
+      defaultValue: getValueFromNode(parser, defaultValueNode),
+      type: getValueFromType(parser, type) || unknownValue(safeGetText(checker, node)),
       required: symbol ? !isOptional(symbol) && !includesUndefined(type) : false,
       ...jsDoc,
     };
@@ -420,9 +497,9 @@ export function getValueFromNode(checker: ts.TypeChecker, node: ts.Node): Value 
     node; //?
     if (safeGetText(checker, node) === 'const') {
       const type = checker.getTypeAtLocation(node.parent);
-      return getValueFromType(checker, type) || unknownValue(safeGetText(checker, node));
+      return getValueFromType(parser, type) || unknownValue(safeGetText(checker, node));
     }
-    return getValueFromNode(checker, node.type);
+    return getValueFromNode(parser, node.type);
   }
 
   if (t.isTypeOperator(node) && node.operator === ts.SyntaxKind.KeyOfKeyword) {
@@ -446,14 +523,14 @@ export function getValueFromNode(checker: ts.TypeChecker, node: ts.Node): Value 
       }
     }
     return (
-      getValueFromType(checker, checker.getTypeFromTypeNode(node), node) ||
+      getValueFromType(parser, checker.getTypeFromTypeNode(node), node) ||
       unknownValue(safeGetText(checker, node))
     );
   }
 
   // A literal type contains literals like `string` or `number` or `'foo'`
   if (t.isLiteralType(node)) {
-    return getValueFromNode(checker, node.literal);
+    return getValueFromNode(parser, node.literal);
   }
 
   // true
@@ -514,14 +591,14 @@ export function getValueFromNode(checker: ts.TypeChecker, node: ts.Node): Value 
 
   if (t.isTemplateLiteralType(node)) {
     const type = checker.getTypeAtLocation(node);
-    return getValueFromType(checker, type, node) || unknownValue(checker.typeToString(type));
+    return getValueFromType(parser, type, node) || unknownValue(checker.typeToString(type));
   }
 
   // A | B
   if (t.isUnionType(node)) {
     return {
       kind: 'union',
-      value: node.types.map(type => getValueFromNode(checker, type)),
+      value: node.types.map(type => getValueFromNode(parser, type)),
     };
   }
 
@@ -529,19 +606,19 @@ export function getValueFromNode(checker: ts.TypeChecker, node: ts.Node): Value 
   if (t.isIntersectionType(node)) {
     return {
       kind: 'intersection',
-      value: node.types.map(type => getValueFromNode(checker, type)),
+      value: node.types.map(type => getValueFromNode(parser, type)),
     };
   }
 
   // ()
   if (t.isParenthesizedType(node)) {
-    return {kind: 'parenthesis', value: getValueFromNode(checker, node.type)};
+    return {kind: 'parenthesis', value: getValueFromNode(parser, node.type)};
   }
 
   // type A = B['C']
   if (t.isIndexedAccessType(node)) {
     const type = checker.getTypeAtLocation(node);
-    return getValueFromType(checker, type, node) || unknownValue(safeGetText(checker, node));
+    return getValueFromType(parser, type, node) || unknownValue(safeGetText(checker, node));
   }
 
   /**
@@ -562,10 +639,10 @@ export function getValueFromNode(checker: ts.TypeChecker, node: ts.Node): Value 
     'here'; //?
     return {
       kind: 'conditional',
-      check: getValueFromNode(checker, node.checkType),
-      extends: getValueFromNode(checker, node.extendsType),
-      trueType: getValueFromNode(checker, node.trueType),
-      falseType: getValueFromNode(checker, node.falseType),
+      check: getValueFromNode(parser, node.checkType),
+      extends: getValueFromNode(parser, node.extendsType),
+      trueType: getValueFromNode(parser, node.trueType),
+      falseType: getValueFromNode(parser, node.falseType),
     };
   }
 
@@ -593,7 +670,7 @@ export function getValueFromNode(checker: ts.TypeChecker, node: ts.Node): Value 
     }
     // if the node.left is not exported, we'll reduce to a type
     const type = checker.getTypeAtLocation(node);
-    return getValueFromType(checker, type, node) || unknownValue(checker.typeToString(type));
+    return getValueFromType(parser, type, node) || unknownValue(checker.typeToString(type));
   }
 
   /**
@@ -614,17 +691,17 @@ export function getValueFromNode(checker: ts.TypeChecker, node: ts.Node): Value 
     const symbol = getSymbolFromNode(checker, node.exprName);
     if (symbol) {
       const declaration = getValueDeclaration(symbol)!;
-      return getValueFromNode(checker, declaration);
+      return getValueFromNode(parser, declaration);
     }
   }
 
   if (t.isPropertyAccessExpression(node)) {
     let typeInfo: Value;
     if (t.isAsExpression(node.name)) {
-      typeInfo = getValueFromNode(checker, node.name);
+      typeInfo = getValueFromNode(parser, node.name);
     }
     const type = checker.getTypeAtLocation(node);
-    typeInfo = getValueFromType(checker, type) || unknownValue(checker.typeToString(type));
+    typeInfo = getValueFromType(parser, type) || unknownValue(checker.typeToString(type));
     return {kind: 'member', name: node.name.getText(), type: typeInfo} as Value;
   }
 
@@ -632,11 +709,11 @@ export function getValueFromNode(checker: ts.TypeChecker, node: ts.Node): Value 
     // handle `as const` specially. If we don't do this, we'll get into an infinite loop
     if (safeGetText(checker, node) === 'const') {
       const type = checker.getTypeAtLocation(node.parent.parent);
-      return getValueFromType(checker, type) || unknownValue(node.parent.parent.getText());
+      return getValueFromType(parser, type) || unknownValue(node.parent.parent.getText());
     }
 
     const typeParameters = node.typeArguments?.map(
-      p => getValueFromNode(checker, p) as TypeParameter
+      p => getValueFromNode(parser, p) as TypeParameter
     );
     const symbolNode = t.isQualifiedName(node.typeName) ? node.typeName.right : node.typeName;
     const symbol = getSymbolFromNode(checker, symbolNode);
@@ -659,7 +736,7 @@ export function getValueFromNode(checker: ts.TypeChecker, node: ts.Node): Value 
 
     // If it is a qualified name, handle that specially. The `left` might be a symbol
     if (t.isQualifiedName(node.typeName)) {
-      return getValueFromNode(checker, node.typeName);
+      return getValueFromNode(parser, node.typeName);
     }
 
     // The TypeReference isn't exported, so we'll return the type of the
@@ -679,7 +756,7 @@ export function getValueFromNode(checker: ts.TypeChecker, node: ts.Node): Value 
 
       const declaration = getValueDeclaration(symbol);
       if (declaration) {
-        const typeInfo = getValueFromNode(checker, declaration);
+        const typeInfo = getValueFromNode(parser, declaration);
         // we want to embed interfaces
         if (typeInfo.kind === 'interface') {
           return typeInfo;
@@ -689,7 +766,7 @@ export function getValueFromNode(checker: ts.TypeChecker, node: ts.Node): Value 
 
     // The type reference is not external, not an exported symbol, and not generic.
     // Fall back to returning the value from it's type property
-    return getValueFromType(checker, type) || unknownValue(safeGetText(checker, node)); //?
+    return getValueFromType(parser, type) || unknownValue(safeGetText(checker, node)); //?
   }
 
   if (t.isShorthandPropertyAssignment(node)) {
@@ -703,7 +780,7 @@ export function getValueFromNode(checker: ts.TypeChecker, node: ts.Node): Value 
       kind: 'parameter',
       name: symbol?.name || '',
       defaultValue: undefined,
-      type: getValueFromType(checker, type) || unknownValue(safeGetText(checker, node)),
+      type: getValueFromType(parser, type) || unknownValue(safeGetText(checker, node)),
       required: symbol ? !isOptional(symbol) && !includesUndefined(type) : false,
       ...jsDoc,
     };
@@ -718,7 +795,7 @@ export function getValueFromNode(checker: ts.TypeChecker, node: ts.Node): Value 
           kind: 'member',
           name: safeGetText(checker, m.name),
           type: m.initializer
-            ? getValueFromNode(checker, m.initializer)
+            ? getValueFromNode(parser, m.initializer)
             : {kind: 'number', value: index},
         } as TypeMember;
       }),
@@ -743,10 +820,10 @@ export function getValueFromNode(checker: ts.TypeChecker, node: ts.Node): Value 
       : false;
 
     const typeInfo = node.type
-      ? getValueFromNode(checker, node.type)
-      : getValueFromType(checker, type) || unknownValue(safeGetText(checker, node));
+      ? getValueFromNode(parser, node.type)
+      : getValueFromType(parser, type) || unknownValue(safeGetText(checker, node));
 
-    const defaultValue = node.initializer ? getValueFromNode(checker, node.initializer) : undefined;
+    const defaultValue = node.initializer ? getValueFromNode(parser, node.initializer) : undefined;
 
     return {
       kind: 'parameter',
@@ -761,7 +838,7 @@ export function getValueFromNode(checker: ts.TypeChecker, node: ts.Node): Value 
 
   // if (ts.isTypeNode(node)) {
   //   const type = checker.getTypeAtLocation(node);
-  //   return getValueFromType(checker, type) || unknownValue(safeGetText(checker, node));
+  //   return getValueFromType(parser, type) || unknownValue(safeGetText(checker, node));
   // }
 
   const symbol = getSymbolFromNode(checker, node);
@@ -865,9 +942,10 @@ function isTupleType(type: ts.Type): type is ts.TupleTypeReference {
 }
 
 function getIndexSignatureFromType(
-  checker: ts.TypeChecker,
+  parser: DocParser,
   type: ts.Type
 ): IndexSignatureValue | undefined {
+  const {checker} = parser;
   const indexSignature =
     checker.getIndexInfoOfType(type, ts.IndexKind.String) ||
     checker.getIndexInfoOfType(type, ts.IndexKind.Number);
@@ -880,10 +958,10 @@ function getIndexSignatureFromType(
       kind: 'indexSignature',
       name: parameter?.name ? safeGetText(checker, parameter?.name) : '',
       type:
-        (parameter && getValueFromType(checker, checker.getTypeAtLocation(parameter), parameter)) ||
+        (parameter && getValueFromType(parser, checker.getTypeAtLocation(parameter), parameter)) ||
         unknownValue(''),
       value: indexSignature.declaration
-        ? getValueFromNode(checker, indexSignature.declaration.type)
+        ? getValueFromNode(parser, indexSignature.declaration.type)
         : unknownValue(checker.typeToString(type)),
     };
   }
@@ -899,10 +977,11 @@ function getIndexSignatureFromType(
  * infinite loops.
  */
 export function getValueFromType(
-  checker: ts.TypeChecker,
+  parser: DocParser,
   type: ts.Type,
   node?: ts.Node
 ): Value | undefined {
+  const {checker} = parser;
   const originalNodeKind = node?.kind;
   const typeToString = checker.typeToString(type);
   typeToString; //?
@@ -926,7 +1005,7 @@ export function getValueFromType(
     return {
       kind: 'union',
       value:
-        checker.getTypeArguments(type).map(t => getValueFromType(checker, t) || unknownValue('')) ||
+        checker.getTypeArguments(type).map(t => getValueFromType(parser, t) || unknownValue('')) ||
         [],
     };
   }
@@ -986,13 +1065,13 @@ export function getValueFromType(
           if (isExportedSymbol(checker, declaration)) {
             return {kind: 'symbol', name: symbol.name, value: typeToString};
           }
-          return getValueFromNode(checker, declaration);
+          return getValueFromNode(parser, declaration);
         }
       }
 
       // t.getKindNameFromNode(typeNode.typeName); //?
       'here'; //?
-      // return getValueFromNode(checker, typeNode.typeName);
+      // return getValueFromNode(parser, typeNode.typeName);
       // console.log('isTypeReference', declaration?.getText(), declaration?.getSourceFile().fileName);
     }
 
@@ -1042,7 +1121,7 @@ export function getValueFromType(
 
     if (!exceptions) {
       try {
-        return getValueFromNode(checker, typeNode);
+        return getValueFromNode(parser, typeNode);
       } catch (e) {
         // If we are here, we've run into an issue parsing the TypeNode. This could happen if a
         // Synthetic node contains `keyof` which is a type that doesn't point to a real AST node so
@@ -1068,13 +1147,13 @@ export function getValueFromType(
     //     return !(t.flags & ts.TypeFlags.Undefined);
     //   });
     //   if (filteredTypes.length === 1) {
-    //     return getValueFromType(checker, filteredTypes[0]);
+    //     return getValueFromType(parser, filteredTypes[0]);
     //   }
     // }
     return {
       kind: 'union',
       value: filteredTypes.map(
-        t => getValueFromType(checker, t) || unknownValue(checker.typeToString(t))
+        t => getValueFromType(parser, t) || unknownValue(checker.typeToString(t))
       ),
     };
   }
@@ -1087,7 +1166,7 @@ export function getValueFromType(
   //   t.isTypeReference(typeNode) &&
   //   typeNode.typeArguments?.map(t => {
   //     t; //?
-  //     return getValueFromNode(checker, t);
+  //     return getValueFromNode(parser, t);
   //   }); //?
 
   if (type.isStringLiteral()) {
@@ -1134,12 +1213,12 @@ export function getValueFromType(
     if (type.objectFlags & ts.ObjectFlags.ArrayLiteral) {
       const typeNode = checker.typeToTypeNode(type, undefined, undefined);
       if (typeNode) {
-        return getValueFromNode(checker, typeNode);
+        return getValueFromNode(parser, typeNode);
       }
     }
     'here'; //?
 
-    return getObjectValueFromType(checker, type);
+    return getObjectValueFromType(parser, type);
   }
 
   return;
@@ -1227,13 +1306,14 @@ function safeGetText(checker: ts.TypeChecker, node: ts.Node): string {
  * // `foo` is an export member of `myFn`
  * ```
  */
-function getExportMembers(checker: ts.TypeChecker, node: ts.Node) {
+function getExportMembers(parser: DocParser, node: ts.Node) {
+  const {checker} = parser;
   const exports = getSymbolFromNode(checker, node)?.exports || new Map();
   const members = (Array.from(exports.values() as any) as ts.Symbol[])
     .map(symbol => {
       const declaration = getValueDeclaration(symbol);
       if (declaration) {
-        return getValueFromNode(checker, declaration);
+        return getValueFromNode(parser, declaration);
       }
       return;
     })
@@ -1243,16 +1323,17 @@ function getExportMembers(checker: ts.TypeChecker, node: ts.Node) {
 }
 
 function getValueFromSignature(
-  checker: ts.TypeChecker,
+  parser: DocParser,
   declaration: ts.SignatureDeclaration,
   signature: ts.Signature
 ): Value {
-  const members = getExportMembers(checker, declaration);
+  const {checker} = parser;
+  const members = getExportMembers(parser, declaration);
 
   const parameters = signature.parameters.map(s => {
     !!getValueDeclaration(s); //?
     s; //?
-    return getValueFromNode(checker, getValueDeclaration(s)!) as ObjectParameter;
+    return getValueFromNode(parser, getValueDeclaration(s)!) as ObjectParameter;
   });
 
   if (isComponent(signature.getReturnType())) {
@@ -1265,8 +1346,8 @@ function getValueFromSignature(
 
   checker.typeToString(signature.getReturnType()); //?
   const returnType = declaration.type
-    ? getValueFromNode(checker, declaration.type)
-    : getValueFromType(checker, signature.getReturnType()) || unknownValue(declaration.getText());
+    ? getValueFromNode(parser, declaration.type)
+    : getValueFromType(parser, signature.getReturnType()) || unknownValue(declaration.getText());
 
   return {
     kind: 'function',
@@ -1277,25 +1358,26 @@ function getValueFromSignature(
 }
 
 export function getValueFromSignatureNode(
-  checker: ts.TypeChecker,
+  parser: DocParser,
   declaration: ts.SignatureDeclaration
 ): Value {
+  const {checker} = parser;
   const signature = checker.getSignatureFromDeclaration(declaration);
   if (signature) {
     signature; //?
-    return getValueFromSignature(checker, declaration, signature);
+    return getValueFromSignature(parser, declaration, signature);
   }
   return unknownValue(safeGetText(checker, declaration));
 }
 
-function getObjectValueFromType(checker: ts.TypeChecker, type: ts.Type): Value {
+function getObjectValueFromType(parser: DocParser, type: ts.Type): Value {
   const properties = type.getProperties().map(symbol => {
-    return getValueFromNode(checker, getValueDeclaration(symbol)!) as ObjectParameter;
+    return getValueFromNode(parser, getValueDeclaration(symbol)!) as ObjectParameter;
   });
   properties.length; //?
   const callSignatures = type.getCallSignatures().map(s => {
     'here'; //?
-    return getValueFromSignatureNode(checker, s.getDeclaration());
+    return getValueFromSignatureNode(parser, s.getDeclaration());
   });
   callSignatures.length; //?
 
@@ -1316,73 +1398,45 @@ function getObjectValueFromType(checker: ts.TypeChecker, type: ts.Type): Value {
  * it should return `undefined` to allow other plugins (or the general parser) to process the node.
  */
 type ParserPlugin = (
-  /** A shared reference to the Typescript type checker */
-  checker: ts.TypeChecker,
   /** The node currently being processed */
   node: ts.Node,
   /**
-   * This is the shared mutable instance of all exported symbols already processed. You can push new
-   * symbols or search for existing symbols. If your plugin doesn't need to access existing symbols,
-   * you can ignore this parameter.
+   * The parser instance. The parser gives access to symbols, the checker, etc. For example, the
+   * shared `symbols` property of the parser is the collection of symbols already processed. You can
+   * push new symbols or search for existing symbols. If your plugin doesn't need to access existing
+   * symbols, you can ignore this parameter.
    */
-  symbols: ExportedSymbol[]
+  parser: DocParser
 ) => Value | undefined;
 
-function parseNode(
-  checker: ts.TypeChecker,
-  node: ts.Node,
-  symbols: ExportedSymbol[],
-  plugins: ParserPlugin[] = []
-): Value {
-  return (
-    plugins.reduce((result, fn) => {
-      return result || fn(checker, node, symbols);
-    }, undefined as Value | undefined) || getValueFromNode(checker, node)
-  );
-}
-
+/**
+ * This factory function makes it easy to create plugins by providing Typescript types
+ *
+ * @example
+ * ```ts
+ * import ts from 'typescript'
+ *
+ * const myPlugin = createParserPlugin((node, parser) => {
+ *   // run tests on a node
+ *  if (ts.isVariableDeclaration(node))
+ * }
+ * ```
+ */
 export function createParserPlugin(fn: ParserPlugin): ParserPlugin {
   return fn;
 }
 
+/**
+ * This small function makes it easier to write tests, but generally shouldn't be used. It creates a
+ * new parser per file. Instead use the parser directly and call `parser.getExportedSymbols` for
+ * each file to share memory.
+ */
 export function findSymbols(
   program: ts.Program,
   fileName: string,
   plugins: ParserPlugin[] = []
 ): ExportedSymbol[] {
-  const symbols: ExportedSymbol[] = [];
-  const checker = program.getTypeChecker();
+  const parser = new DocParser(program, plugins);
 
-  const sourceFile = program.getSourceFile(fileName);
-  if (!sourceFile) return symbols;
-
-  find(sourceFile, node => {
-    const kind = node.kind;
-
-    return (
-      [
-        'VariableDeclaration',
-        'InterfaceDeclaration',
-        'TypeAliasDeclaration',
-        'FunctionDeclaration',
-        'EnumDeclaration',
-      ]
-        .map(k => (ts.SyntaxKind as any)[k])
-        .includes(kind) && isNodeExported(checker, node)
-    );
-  }).forEach(node => {
-    const symbol = getSymbolFromNode(checker, node);
-    if (symbol) {
-      'here'; //?
-      symbols.push({
-        name: symbol.name,
-        packageName: getPackageName(fileName),
-        fileName,
-        ...findDocComment(checker, symbol),
-        type: parseNode(checker, node, symbols, plugins),
-      });
-    }
-  });
-
-  return symbols;
+  return parser.getExportedSymbols(fileName);
 }

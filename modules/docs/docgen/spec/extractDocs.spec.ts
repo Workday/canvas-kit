@@ -1,5 +1,5 @@
 import {createProgramFromSource} from './createProgramFromSource';
-import {findSymbols} from '../findSymbols';
+import {findSymbols} from '../docParser';
 
 describe('extractDocs', () => {
   describe('simple values', () => {

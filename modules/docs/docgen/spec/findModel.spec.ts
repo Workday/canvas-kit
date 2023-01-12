@@ -1,10 +1,9 @@
 import {createProgramFromSource} from './createProgramFromSource';
-import {findSymbols} from '../findSymbols';
+import {findSymbols} from '../docParser';
 import {findModel} from '../findModel';
-import ts from 'typescript';
 
 describe('findModel', () => {
-  it.only('should find an exported type of string', () => {
+  it('should find an exported type of string', () => {
     const program = createProgramFromSource(`
       export const useIdModel = createModelHook({
         defaultConfig: {a: ''},
@@ -42,5 +41,18 @@ describe('findModel', () => {
     expect(symbols).toHaveProperty('3.type.events.0.type.returnType.kind', 'primitive');
     expect(symbols).toHaveProperty('3.type.events.0.type.returnType.value', 'undefined');
     // expect(symbols).toHaveProperty('3.type.modelProperties', 'undefined');
+  });
+
+  it.only('should replace instances of "ReturnType<typeof useMyModel>" to a symbol of MyModel', () => {
+    const program = createProgramFromSource(`
+      export type MyType = ReturnType<typeof useMyModel>
+    `);
+    const symbols = findSymbols(program, 'test.ts', [findModel]); //?
+
+    // ts.sys.writeFile('model.json', JSON.stringify(symbols, null, '  ')) // uncomment to see full JSON
+    expect(symbols).toHaveProperty('0.name', 'MyType');
+    expect(symbols).toHaveProperty('0.type.kind', 'type');
+    expect(symbols).toHaveProperty('0.type.value.kind', 'symbol');
+    expect(symbols).toHaveProperty('0.type.value.name', 'MyModel');
   });
 });
