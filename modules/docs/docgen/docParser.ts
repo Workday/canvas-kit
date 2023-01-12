@@ -324,7 +324,7 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
    * }
    * ```
    *
-   * In this example, the MethodDeclaration is `onClick(e: Event) {}` Notice
+   * In this example, the MethodDeclaration is `onClick(e: Event) {}`. Notice
    * there is no property signature like `onClick: (e: Event) => {}`
    *
    * Do before `ts.isFunctionLike` because we want to treat `MethodDeclaration`
@@ -342,6 +342,36 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
       defaultValue: undefined,
       type: signature,
       required: symbol ? !isOptional(symbol) && !includesUndefined(type) : false,
+      ...jsDoc,
+    };
+  }
+
+  /**
+   * A MethodSignature is a type of property declaration within a TS type. It is a special syntax
+   * for declaring a function property or method of a type. This includes any JSDoc.
+   *
+   * For example:
+   * ```ts
+   * type A = {
+   *   onClick(e: Event): void
+   * }
+   * ```
+   *
+   * In this example, the MethodSignature is the `onClick(e: Event): void`. An alternative might be
+   * `onClick: (e: Event) => void`.
+   *
+   * Do before `ts.isFunctionLike` because we want to treat `MethodSignature` as a `member` instead
+   * of a `function`.
+   */
+  if (t.isMethodSignature(node)) {
+    const signature = getValueFromSignatureNode(parser, node as ts.SignatureDeclaration)!;
+    const symbol = getSymbolFromNode(checker, node);
+    const jsDoc = findDocComment(checker, symbol);
+
+    return {
+      kind: 'member',
+      name: symbol?.name || '',
+      type: signature,
       ...jsDoc,
     };
   }

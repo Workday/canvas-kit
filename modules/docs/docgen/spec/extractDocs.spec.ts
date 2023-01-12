@@ -470,6 +470,20 @@ describe('extractDocs', () => {
       expect(docs).toHaveProperty('0.type.properties.0.type.name', 'T');
     });
 
+    it('should handle exported interfaces with a MethodSignature', () => {
+      const program = createProgramFromSource(`
+        export interface Foo {
+          foo(): void
+        };
+      `);
+      const docs = findSymbols(program, 'test.ts'); //?
+      expect(docs).toHaveProperty('0.name', 'Foo');
+      expect(docs).toHaveProperty('0.type.kind', 'interface');
+      expect(docs).toHaveProperty('0.type.properties.0.name', 'foo');
+      expect(docs).toHaveProperty('0.type.properties.0.kind', 'member');
+      expect(docs).toHaveProperty('0.type.properties.0.type.kind', 'function');
+    });
+
     it('should handle exported types with type literal values', () => {
       const program = createProgramFromSource(`
         export type Foo = {
