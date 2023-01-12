@@ -1,4 +1,4 @@
-import {ObjectParameter, FunctionValue} from './docTypes';
+import {ObjectParameter, FunctionValue, SymbolValue} from './docTypes';
 import {
   createParserPlugin,
   getValueDeclaration,
@@ -15,6 +15,113 @@ function capitalize(string: string) {
 
 export const findModel = createParserPlugin((node, parser) => {
   t.getKindNameFromNode(node); //?
+
+  /**
+   * Replace submenus with symbols rather than types.
+   *
+   * For example:
+   * ```ts
+   * const menu = useMenuModel()
+   *
+   * const state = {
+   *   menu
+   * }
+   * ```
+   *
+   * In this example, the `type` of `state.menu` will be `useMenuModel` instead of an object
+   * representing the return type of `useMenuModel`
+   *
+   * Before:
+   * ```json
+   * {
+   *   kind: 'object',
+   *   properties: [
+   *     {
+   *       kind: 'parameter',
+   *       name: 'state',
+   *   // ...
+   * }
+   * ```
+   *
+   * After:
+   * ```json
+   * {
+   *   kind: 'symbol',
+   *   name: 'useMenuModel'
+   * }
+   * ```
+   */
+  if (t.isShorthandPropertyAssignment(node)) {
+    const {checker} = parser;
+    const symbol = getSymbolFromNode(checker, node);
+    const declaration = getValueDeclaration(symbol);
+    const name = symbol?.name || (t.isIdentifier(node.name) && node.name.escapedText);
+    if (declaration && declaration.getSourceFile()) {
+      // ShorthandPropertyAssignment doesn't give the original variable declaration
+      const originalDeclaration = t(declaration.getSourceFile())
+        .find('VariableDeclaration')
+        .map(node => {
+          if (
+            t.isIdentifier(node.name) &&
+            node.name.escapedText === name &&
+            node.initializer &&
+            t.isCallExpression(node.initializer) &&
+            t.isIdentifier(node.initializer.expression) &&
+            (node.initializer.expression.escapedText as string).includes('Model')
+          ) {
+            node.initializer.expression.escapedText; //?
+            return {
+              kind: 'symbol',
+              name: node.initializer.expression.escapedText,
+            } as SymbolValue;
+          }
+          return;
+        })
+        .filter(v => !!v)[0]; //?
+
+      originalDeclaration; //?
+
+      if (originalDeclaration) {
+        const jsDoc = symbol ? getFullJsDocComment(checker, symbol) : defaultJSDoc;
+        return {
+          kind: 'parameter',
+          name: symbol?.name || '',
+          defaultValue: undefined,
+          type: originalDeclaration,
+          required: false,
+          ...jsDoc,
+        };
+      }
+    }
+  }
+
+  /**
+   * Replace `typeof useMyModel.TConfig` with a symbol of `MyModelConfig`. This remaps the entire
+   * type to point to a symbol of the model config instead.
+   *
+   * For example,
+   * ```ts
+   * defaultConfig: {
+   *   menuConfig: {} as typeof useMyModel.TConfig
+   * }
+   * ```
+   *
+   * Before:
+   * ```json
+   * {
+   *   kind: 'object',
+   *   properties: [...]
+   * }
+   * ```
+   *
+   * After:
+   * ```json
+   * {
+   *   kind: 'symbol',
+   *   name: 'MyModelConfig'
+   * }
+   * ```
+   */
   if (t.isTypeReference(node)) {
     const firstArgument = node.typeArguments?.[0];
     if (firstArgument && t.isTypeQuery(firstArgument) && t.isIdentifier(firstArgument.exprName)) {
@@ -39,7 +146,7 @@ export const findModel = createParserPlugin((node, parser) => {
     const jsDoc = (symbol && getFullJsDocComment(parser.checker, symbol)) || defaultJSDoc;
     return {
       kind: 'parameter',
-      name: node.name.escapedText,
+      name: node.name.escapedText as string,
       defaultValue: parser.getValueFromNode(node.initializer.expression),
       required: false,
       type: {
@@ -49,16 +156,42 @@ export const findModel = createParserPlugin((node, parser) => {
       },
       ...jsDoc,
     };
-    // [ { kind: 'parameter',
-    //         name: 'bar',
-    //         defaultValue: { kind: 'string', value: 'baz' },
-    //         type: { kind: 'primitive', value: 'string' },
-    //         required: true,
-    //         description: '',
-    //         declarations: [ [Object] ],
-    //         tags: {} } ] } }
   }
 
+  /**
+   * This parsing matcher handles models created using `createModelHook` and adds additional symbols
+   * for use by other models or components.
+   *
+   * For example:
+   * ```ts
+   * const useMyModel = createModelHook({
+   *   defaultConfig: {
+   *     // ...
+   *   },
+   *   requiredConfig: {
+   *     // ...
+   *   }
+   * })(config => {
+   *   return {
+   *     state: {
+   *       // ...
+   *     },
+   *     events: {
+   *       // ...
+   *     }
+   *   }
+   * })
+   * ```
+   *
+   * This node parser will add the following symbols:
+   * - MyModelConfig
+   * - MyModelState
+   * - MyModelEvents
+   *
+   * These symbols will be used by the model itself as well as in other models that make this model
+   * a subModel (including config) and components that use models. Without this parser, a model
+   * would be a generic function.
+   */
   if (
     t.isVariableDeclaration(node) &&
     node.initializer &&

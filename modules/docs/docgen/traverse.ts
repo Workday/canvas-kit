@@ -6,7 +6,7 @@ type Guards = typeof guards;
 
 export interface API extends KindMap, Guards {
   (node: ts.Node): {
-    find<K extends keyof KindMap>(kind: K, predicate?: (node: ts.Node) => boolean): KindMap[K][];
+    find<K extends keyof KindMap>(kind: K, predicate?: (node: KindMap[K]) => boolean): KindMap[K][];
   };
   getKindNameFromNode(node: ts.Node): string;
 }

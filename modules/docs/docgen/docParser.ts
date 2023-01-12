@@ -51,7 +51,6 @@ export class DocParser {
       const symbol = getSymbolFromNode(this.checker, node);
       const previousSymbolsLength = this.symbols.length;
       if (symbol) {
-        'here'; //?
         const exportedSymbol: ExportedSymbol = {
           name: symbol.name,
           packageName: getPackageName(fileName),
@@ -169,24 +168,7 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
         (node as ts.InterfaceDeclaration).typeParameters ||
         (node.parent as ts.TypeAliasDeclaration).typeParameters
       )?.map(p => getValueFromNode(parser, p) as TypeParameter);
-      // type.getStringIndexType(); //?
-      // type.getNumberIndexType(); //?
-      // checker.getIndexTypeOfType(type, ts.IndexKind.String); //?
-      // t.getKindNameFromNode(checker.getIndexInfoOfType(type, ts.IndexKind.String)?.declaration); //?
-      // checker.typeToString(type); //?
-      // symbol?.getDocumentationComment();
-      // const symbol = getSymbolFromNode(checker, node); //?
-      // TODO how to get index signatures?!
 
-      // symbol?.members?.size; //?
-      // checker.getSignatureFromDeclaration(node); //?
-      // type.getCallSignatures().map(s => {
-      //   s.parameters.map(p => p.name); //?
-      // });
-      // type.getStringIndexType(); //?
-      // checker.symbol;
-      // checker.typeToString(type.getStringIndexType()); //?
-      // checker.typeToString(type.getNumberIndexType()); //?
       return {
         kind: 'interface',
         properties,
@@ -614,22 +596,27 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
     return {kind: 'number', value: Number(node.text)};
   }
 
+  // void
   if (node.kind === ts.SyntaxKind.VoidKeyword) {
     return {kind: 'primitive', value: 'void'};
   }
 
+  // any
   if (node.kind === ts.SyntaxKind.AnyKeyword) {
     return {kind: 'primitive', value: 'any'};
   }
 
+  // unknown
   if (node.kind === ts.SyntaxKind.UnknownKeyword) {
     return {kind: 'primitive', value: 'unknown'};
   }
 
+  // undefined
   if (node.kind === ts.SyntaxKind.UndefinedKeyword) {
     return {kind: 'primitive', value: 'undefined'};
   }
 
+  // `{anything}`
   if (t.isTemplateLiteralType(node)) {
     const type = checker.getTypeAtLocation(node);
     return getValueFromType(parser, type, node) || unknownValue(checker.typeToString(type));
@@ -736,6 +723,17 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
     }
   }
 
+  /**
+   * A PropertyAccessExpression is an expression with a property on it.
+   *
+   * For example:
+   * ```ts
+   * foo.bar = 'bar'
+   * ```
+   *
+   * In this example, the `PropertyAccessExpression` is `foo.bar`. It can be used by functions to
+   * add additional properties on the function.
+   */
   if (t.isPropertyAccessExpression(node)) {
     let typeInfo: Value;
     if (t.isAsExpression(node.name)) {
@@ -746,6 +744,20 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
     return {kind: 'member', name: node.name.getText(), type: typeInfo} as Value;
   }
 
+  /**
+   * A TypeReference is a node that references a Typescript type rather than a JavaScript value.
+   *
+   * In the following example, `MyType` is a TypeReference (the declaration of MyType is omitted)
+   * ```ts
+   * const a = 'a' as MyType
+   * const b: MyType = 'b'
+   * type A = MyType
+   * type B = Record<MyType>
+   * ```
+   *
+   * Any time a type is referenced (not declared) is a TypeReference.
+   * ```
+   */
   if (t.isTypeReference(node)) {
     // handle `as const` specially. If we don't do this, we'll get into an infinite loop
     if (safeGetText(checker, node) === 'const') {
@@ -810,10 +822,31 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
     return getValueFromType(parser, type) || unknownValue(safeGetText(checker, node)); //?
   }
 
+  /**
+   * A ShorthandPropertyAssignment is a PropertyAssignment that is shorthanded where the `name` and
+   * `initializer` are the same value.
+   *
+   * For example:
+   * ```ts
+   * const a = {
+   *   b
+   * }
+   * ```
+   *
+   * In this example, `b` is the `ShorthandPropertyAssignment`. `b` is both the `name` and
+   * `initializer` of the PropertyAssignment.
+   *
+   * Note the symbol declaration is the PropertyAssignment and not the symbol of the initializer. In
+   * a PropertyAssignment, there are two parts, the `name` (name of the property) and an
+   * `initializer` (the value of the property). In a PropertyAssignment, the `initializer` symbol
+   * points to the VariableDeclaration.
+   */
   if (t.isShorthandPropertyAssignment(node)) {
     const type = checker.getTypeAtLocation(node);
     const symbol = getSymbolFromNode(checker, node);
     const jsDoc = findDocComment(checker, symbol);
+
+    // see if the declaration is assigned to something exported
 
     jsDoc; //?
     symbol?.name; //?
@@ -827,6 +860,17 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
     };
   }
 
+  /**
+   * Declaration of a enum
+   *
+   * For example:
+   * ```ts
+   * enum A {
+   *   a = 'a',
+   *   b = 'b'
+   * }
+   * ```
+   */
   if (t.isEnumDeclaration(node)) {
     return {
       kind: 'interface',
@@ -844,6 +888,9 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
     };
   }
 
+  /**
+   *
+   */
   if (t.isParameter(node)) {
     'here'; //?
     const type = checker.getTypeAtLocation(node);
