@@ -35,7 +35,7 @@ const SymbolDialog = ({value}: {value: types.SymbolValue}) => {
           {value.name}
         </Dialog.Target>
         {value.typeParameters && value.typeParameters.length ? (
-          <>
+          <RenderContext.Provider value="inline">
             <span>&lt;</span>
             {value.typeParameters.map((p, index) => {
               return (
@@ -50,7 +50,7 @@ const SymbolDialog = ({value}: {value: types.SymbolValue}) => {
               );
             })}
             <span>&gt;</span>
-          </>
+          </RenderContext.Provider>
         ) : (
           ''
         )}
@@ -60,16 +60,18 @@ const SymbolDialog = ({value}: {value: types.SymbolValue}) => {
           <Dialog.CloseIcon />
           <Dialog.Heading>{value.name}</Dialog.Heading>
           <Dialog.Body>
-            {symbol ? (
-              <SymbolDoc name={value.name} />
-            ) : (
-              <>
-                <p>Basic type information:</p>
-                <pre>
-                  <code>{value.value}</code>
-                </pre>
-              </>
-            )}
+            <RenderContext.Provider value="table">
+              {symbol ? (
+                <SymbolDoc name={value.name} />
+              ) : (
+                <>
+                  <p>Basic type information:</p>
+                  <pre>
+                    <code>{value.value}</code>
+                  </pre>
+                </>
+              )}
+            </RenderContext.Provider>
           </Dialog.Body>
         </Dialog.Card>
       </Dialog.Popper>
@@ -83,6 +85,9 @@ const Value = ({value}: {value: types.Value}) => {
     case 'object':
     case 'interface':
     case 'typeLiteral':
+      if (value.properties === undefined) {
+        debugger;
+      }
       return renderContext === 'inline' ? (
         <PropertiesInline properties={value.properties} />
       ) : (
@@ -203,6 +208,9 @@ function getTableRows(
   index: number
 ): JSX.Element[] {
   return properties.flatMap((property, i) => {
+    if (property.kind === 'function') {
+      console.log('properties', properties);
+    }
     return [
       <Table.Row key={index + i}>
         <Table.Data color="plum600">
@@ -253,7 +261,14 @@ const PropertiesInline = ({
           <>
             <br />
             &nbsp;&nbsp;&nbsp;&nbsp;
-            <span>{p.name}:</span>&nbsp;
+            {p.description ? (
+              <Tooltip title={<MarkdownToJSX>{p.description}</MarkdownToJSX>}>
+                <span>{p.name}:</span>
+              </Tooltip>
+            ) : (
+              <span>{p.name}:</span>
+            )}
+            &nbsp;
             <Value value={p.type} />
           </>
         );

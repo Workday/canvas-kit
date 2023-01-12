@@ -49,6 +49,7 @@ export class DocParser {
       );
     }).forEach(node => {
       const symbol = getSymbolFromNode(this.checker, node);
+      const previousSymbolsLength = this.symbols.length;
       if (symbol) {
         'here'; //?
         const exportedSymbol: ExportedSymbol = {
@@ -60,6 +61,14 @@ export class DocParser {
         };
 
         symbols.push(exportedSymbol);
+
+        const addedSymbolsLength = previousSymbolsLength - this.symbols.length;
+        // add all symbols added by the parser
+        if (addedSymbolsLength) {
+          this.symbols.slice(addedSymbolsLength).forEach(symbol => {
+            symbols.push(symbol);
+          });
+        }
         this.symbols.push(exportedSymbol);
       }
     });
@@ -443,9 +452,11 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
   if (t.isPropertySignature(node)) {
     const symbol = getSymbolFromNode(checker, node);
     const jsDoc = findDocComment(checker, symbol);
+    const name =
+      symbol?.name || ((t.isIdentifier(node.name) ? node.name.escapedText : '') as string);
     return {
       kind: 'member',
-      name: symbol?.name || '',
+      name,
       type: node.type
         ? getValueFromNode(parser, node.type)
         : unknownValue(safeGetText(checker, node)),
@@ -1103,6 +1114,13 @@ export function getValueFromType(
     if (t.isFunctionType(typeNode)) {
       exceptions = true;
     }
+
+    // A TypeNode truncates object properties, so we'll fallback to using the type
+    // if (isObject(type)) {
+    //   'here'; //?
+    //   checker.typeToString(type); //?
+    //   exceptions = true;
+    // }
 
     // A TypeNode of `keyof` looses type information
     if (t.isTypeOperator(typeNode) && typeNode.operator === ts.SyntaxKind.KeyOfKeyword) {

@@ -43,7 +43,7 @@ describe('findModel', () => {
     // expect(symbols).toHaveProperty('3.type.modelProperties', 'undefined');
   });
 
-  it.only('should replace instances of "ReturnType<typeof useMyModel>" to a symbol of MyModel', () => {
+  it('should replace instances of "ReturnType<typeof useMyModel>" to a symbol of MyModel', () => {
     const program = createProgramFromSource(`
       export type MyType = ReturnType<typeof useMyModel>
     `);
@@ -54,5 +54,25 @@ describe('findModel', () => {
     expect(symbols).toHaveProperty('0.type.kind', 'type');
     expect(symbols).toHaveProperty('0.type.value.kind', 'symbol');
     expect(symbols).toHaveProperty('0.type.value.name', 'MyModel');
+  });
+
+  it.only('should replace instances of "typeof useMyModel.TConfig" with "MyModelConfig"', () => {
+    const program = createProgramFromSource(`
+      export const useIdModel = createModelHook({
+        defaultConfig: {
+          subModelConfig: {} as typeof useMyModel.TConfig
+        },
+        requiredConfig: {},
+      })(config => {
+        return {
+          state: {},
+          events: {}
+        };
+      });
+    `);
+    const symbols = findSymbols(program, 'test.ts', [findModel]); //?
+
+    expect(symbols).toHaveProperty('3.name', 'useIdModel');
+    expect(symbols).toHaveProperty('3.type.kind', 'model');
   });
 });

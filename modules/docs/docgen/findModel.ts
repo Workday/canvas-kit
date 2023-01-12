@@ -1,5 +1,12 @@
 import {ObjectParameter, FunctionValue} from './docTypes';
-import {createParserPlugin, getValueDeclaration, getPackageName, defaultJSDoc} from './docParser';
+import {
+  createParserPlugin,
+  getValueDeclaration,
+  getPackageName,
+  defaultJSDoc,
+  getSymbolFromNode,
+  getFullJsDocComment,
+} from './docParser';
 import t from './traverse';
 
 function capitalize(string: string) {
@@ -15,6 +22,41 @@ export const findModel = createParserPlugin((node, parser) => {
 
       return {kind: 'symbol', name: modelName};
     }
+  }
+
+  if (
+    t.isPropertyAssignment(node) &&
+    t.isIdentifier(node.name) &&
+    t.isAsExpression(node.initializer) &&
+    t.isTypeQuery(node.initializer.type) &&
+    t.isQualifiedName(node.initializer.type.exprName) &&
+    t.isIdentifier(node.initializer.type.exprName.left) &&
+    t.isIdentifier(node.initializer.type.exprName.right) &&
+    // TConfig is special from models
+    node.initializer.type.exprName.right.escapedText === 'TConfig'
+  ) {
+    const symbol = getSymbolFromNode(parser.checker, node);
+    const jsDoc = (symbol && getFullJsDocComment(parser.checker, symbol)) || defaultJSDoc;
+    return {
+      kind: 'parameter',
+      name: node.name.escapedText,
+      defaultValue: parser.getValueFromNode(node.initializer.expression),
+      required: false,
+      type: {
+        kind: 'symbol',
+        name:
+          (node.initializer.type.exprName.left.escapedText as string).replace('use', '') + 'Config',
+      },
+      ...jsDoc,
+    };
+    // [ { kind: 'parameter',
+    //         name: 'bar',
+    //         defaultValue: { kind: 'string', value: 'baz' },
+    //         type: { kind: 'primitive', value: 'string' },
+    //         required: true,
+    //         description: '',
+    //         declarations: [ [Object] ],
+    //         tags: {} } ] } }
   }
 
   if (
