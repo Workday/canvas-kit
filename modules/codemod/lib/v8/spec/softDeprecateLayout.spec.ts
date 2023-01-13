@@ -13,6 +13,48 @@ describe('Canvas Kit Deprecate Layout Codemod', () => {
       expectTransform(input, expected);
     });
 
+    it('should ignore if there is no Layout import from existing layout package', () => {
+      const input = `
+        import type { NextPage } from 'next';
+        import { colors, type, space } from '@workday/canvas-kit-react/tokens';
+        import { Flex } from '@workday/canvas-kit-react/layout';
+        import { styled } from '@workday/canvas-kit-react/common';
+        import { Layout } from '../../components/Layout';
+        import { Link } from '../../components/Link';
+
+        const Containers: NextPage = () => {
+          return (
+            <Layout>
+              <Flex>
+                <Link href="/">Home</Link>
+              </Flex>
+            </Layout>
+          );
+        };
+      `;
+
+      const expected = `
+        import type { NextPage } from 'next';
+        import { colors, type, space } from '@workday/canvas-kit-react/tokens';
+        import { Flex } from '@workday/canvas-kit-react/layout';
+        import { styled } from '@workday/canvas-kit-react/common';
+        import { Layout } from '../../components/Layout';
+        import { Link } from '../../components/Link';
+
+        const Containers: NextPage = () => {
+          return (
+            <Layout>
+              <Flex>
+                <Link href="/">Home</Link>
+              </Flex>
+            </Layout>
+          );
+        };
+      `;
+
+      expectTransform(input, expected);
+    });
+
     it('should properly transform named imports from @workday/canvas-kit-react', () => {
       const input = `import {Layout, LayoutProps, Column, ColumnProps} from '@workday/canvas-kit-react'`;
       const expected = `import {DeprecatedLayout, DeprecatedLayoutProps, DeprecatedColumn, DeprecatedColumnProps} from '@workday/canvas-kit-react'`;
