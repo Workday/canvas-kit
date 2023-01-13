@@ -1,4 +1,4 @@
-import {API, FileInfo, Identifier, ImportDeclaration, JSXAttribute, Options} from 'jscodeshift';
+import {API, FileInfo, Identifier, ImportDeclaration, Options} from 'jscodeshift';
 
 const mainPackage = '@workday/canvas-kit-react';
 const stackPackage = '@workday/canvas-kit-react/layout';
