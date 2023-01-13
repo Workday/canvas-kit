@@ -6,7 +6,7 @@ import {Grid} from '../index';
 import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
 
 export default withSnapshotsEnabled({
-  title: 'Testing/React/Containers/Layout/Grid',
+  title: 'Testing/Containers/Layout/Grid',
   component: Grid,
 });
 

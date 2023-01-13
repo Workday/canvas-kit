@@ -11,7 +11,12 @@ import {withSnapshotsEnabled} from '../../../../utils/storybook';
 const fontDelay = 150; // best guess for the font delay to prevent incorrect Chromatic regressions
 
 export default {
-  title: 'Testing/React/Popups/Tooltip',
+  title: 'Testing/Popups/Tooltip',
+  parameters: {
+    chromatic: {
+      delay: fontDelay + 100, // make sure chromatic waits for the timer
+    },
+  },
 };
 
 export const NonInteractive = () => {
@@ -39,7 +44,7 @@ export const Placements = withSnapshotsEnabled(() => {
   React.useEffect(() => {
     const id = setTimeout(() => {
       setOpen(true);
-    });
+    }, fontDelay);
 
     return () => {
       clearTimeout(id);
@@ -111,7 +116,7 @@ export const PlacementsFocus = withSnapshotsEnabled(() => {
     document.body.setAttribute('data-whatinput', 'keyboard');
     const id = setTimeout(() => {
       setOpen(true);
-    });
+    }, fontDelay);
 
     return () => {
       clearTimeout(id);

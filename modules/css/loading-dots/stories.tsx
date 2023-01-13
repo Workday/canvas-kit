@@ -8,7 +8,7 @@ const containerStyle = css({
   paddingTop: '12px',
 });
 
-storiesOf('Components/Indicators/Loading Dots/CSS', module)
+storiesOf('CSS/Loading Dots', module)
   .addParameters({ReadmePath: 'css/loading-dots'})
   .add('Loading Dots', () => (
     <div className="story">

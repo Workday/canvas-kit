@@ -13,7 +13,7 @@ import {RightToLeft} from './examples/RightToLeft';
 const fontDelay = 150; // best guess for the font delay to prevent incorrect Chromatic regressions
 
 export default {
-  title: 'Testing/React/Containers/Tabs',
+  title: 'Testing/Containers/Tabs',
   component: Tabs,
   parameters: {
     chromatic: {

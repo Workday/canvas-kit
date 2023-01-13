@@ -12,7 +12,7 @@ import {Hyperlink} from '@workday/canvas-kit-react/button';
 import {Container} from './utils';
 
 export default withSnapshotsEnabled({
-  title: 'Testing/React/Buttons/Button/Hyperlink',
+  title: 'Testing/Buttons/Button/Hyperlink',
   component: Hyperlink,
 });
 

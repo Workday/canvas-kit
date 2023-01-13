@@ -11,7 +11,7 @@ describe('Form Field', () => {
 
   context(`given the Basic story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Components/Inputs/Form Field/React', 'Basic');
+      h.stories.load('Components/Inputs/Form Field', 'Basic');
     });
 
     it('should not have any axe errors', () => {
@@ -32,7 +32,7 @@ describe('Form Field', () => {
   ['Alert', 'Error'].forEach(story => {
     context(`given the '${story}' story is rendered`, () => {
       beforeEach(() => {
-        h.stories.load('Components/Inputs/Form Field/React', story);
+        h.stories.load('Components/Inputs/Form Field', story);
       });
 
       it('should not have any axe errors', () => {
@@ -47,7 +47,7 @@ describe('Form Field', () => {
 
   context(`given the Required story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Components/Inputs/Form Field/React', 'Required');
+      h.stories.load('Components/Inputs/Form Field', 'Required');
     });
 
     it('should not have any axe errors', () => {

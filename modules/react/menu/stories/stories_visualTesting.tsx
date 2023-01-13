@@ -13,7 +13,7 @@ import {HStack} from '@workday/canvas-kit-react/layout';
 const fontDelay = 150; // best guess for the font delay to prevent incorrect Chromatic regressions
 
 export default {
-  title: 'Testing/React/Popups/Menu',
+  title: 'Testing/Popups/Menu',
   component: Menu,
   parameters: {
     chromatic: {

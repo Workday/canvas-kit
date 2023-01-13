@@ -6,7 +6,7 @@ import {ComponentStatesTable} from '@workday/canvas-kit-react/testing';
 import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
 
 export default withSnapshotsEnabled({
-  title: 'Testing/React/Labs/Common',
+  title: 'Testing/Labs/Common',
   component: Box,
 });
 

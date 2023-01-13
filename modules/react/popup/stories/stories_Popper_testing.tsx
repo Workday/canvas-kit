@@ -6,7 +6,7 @@ import {withSnapshotsEnabled} from '../../../../utils/storybook';
 import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
 
 export default {
-  title: 'Testing/React/Popups/Popper',
+  title: 'Testing/Popups/Popper',
 };
 
 export const UpdateOptions = () => {

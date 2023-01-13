@@ -4,7 +4,7 @@ import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {exportIcon, fullscreenIcon} from '@workday/canvas-system-icons-web';
 import './index.scss';
 
-storiesOf('Components/Navigation/Page Header/CSS', module)
+storiesOf('Examples/PageHeader/CSS', module)
   .addParameters({ReadmePath: 'css/page-header'})
   .add('Default', () => (
     <div className="story">
