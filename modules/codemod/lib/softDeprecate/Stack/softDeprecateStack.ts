@@ -1,4 +1,4 @@
-import {API, FileInfo, Identifier, ImportDeclaration, Options} from 'jscodeshift';
+import {API, FileInfo, Identifier, ImportDeclaration, JSXAttribute, Options} from 'jscodeshift';
 
 const mainPackage = '@workday/canvas-kit-react';
 const stackPackage = '@workday/canvas-kit-react/layout';
@@ -113,10 +113,28 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
     });
   });
 
+  // Transform shouldWrapChildren prop
+  //e.g. `shouldWrapChildren` becomes `flexWrap='wrap'`
+  root
+    .findJSXElements('Stack')
+    .find(j.JSXAttribute, {
+      name: {
+        type: 'JSXIdentifier',
+        name: 'shouldWrapChildren',
+      },
+    })
+    .forEach(nodePath => {
+      nodePath.node.name.name = 'flexWrap';
+      nodePath.node.value = {
+        type: 'Literal',
+        value: 'wrap',
+      };
+    });
+
   // Transform Stack JSXElements
   // Transform `<Stack>` to `<Flex>`
   root.find(j.JSXIdentifier, {name: 'Stack'}).forEach(nodePath => {
-    nodePath.value.name = 'Flex';
+    nodePath.node.name = 'Flex';
   });
 
   // Transform Stack JSXElements

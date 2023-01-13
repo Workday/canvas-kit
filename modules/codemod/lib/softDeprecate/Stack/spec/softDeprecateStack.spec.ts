@@ -260,5 +260,41 @@ describe('Canvas Kit Deprecate Stack Codemod', () => {
 
       expectTransform(input, expected);
     });
+
+    it('should properly transform shouldWrapChildren identifiers', () => {
+      const input = `
+      import {Stack} from '@workday/canvas-kit-react/layout';
+
+      const CustomStack = () => {
+        return (
+          <Stack shouldWrapChildren>
+            Hello World
+          </Stack>
+        );
+      };
+
+      const AnotherStack = (props) => {
+        return <Stack {...props} />;
+      }
+      `;
+
+      const expected = `
+      import {Flex} from '@workday/canvas-kit-react/layout';
+
+      const CustomStack = () => {
+        return (
+          <Flex flexWrap="wrap">
+            Hello World
+          </Flex>
+        );
+      };
+
+      const AnotherStack = (props) => {
+        return <Flex {...props} />;
+      }
+      `;
+
+      expectTransform(input, expected);
+    });
   });
 });
