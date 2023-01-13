@@ -10,53 +10,30 @@ export interface Declaration {
 }
 
 /** Object parameters are used in function parameters, component props, and model config */
-export interface ObjectParameter extends JSDoc {
+export interface ObjectProperty extends JSDoc {
+  kind: 'property';
+  name: string;
+  type: Value;
+  defaultValue?: Value;
+  required?: boolean;
+}
+
+export interface FunctionParameter extends JSDoc {
   kind: 'parameter';
   name: string;
-  defaultValue?: Value;
   type: Value;
-  required: boolean;
+  defaultValue?: Value;
+  required?: boolean;
   /** Is this a rest parameter? */
   rest?: boolean;
 }
 
-/** Members of an object type like an interface or a type alias of an object */
-export interface TypeMember extends JSDoc {
-  kind: 'member';
-  name: string;
-  type: Value;
-}
-
 /** Top level symbols exported by files */
-export interface ExportedSymbol<T = Value> extends JSDoc {
+export interface ExportedSymbol<T = any> extends JSDoc {
   name: string;
   packageName: string;
   fileName: string;
-  type: T;
-}
-
-export interface ComponentValue {
-  kind: 'component';
-  members?: Value[];
-  props: ObjectParameter[];
-}
-
-export interface ModelValue {
-  kind: 'model';
-  defaultConfig: ObjectParameter[];
-  requiredConfig: ObjectParameter[];
-  state: ObjectParameter[];
-  events: ObjectParameter[];
-  /**
-   * Additional properties on the model
-   */
-  modelProperties: ObjectParameter[];
-}
-
-export interface ElemPropsHookValue {
-  kind: 'elemPropsHook';
-  parameters: ObjectParameter[];
-  returnType: null;
+  type: Value | T;
 }
 
 /** All supported values of exported symbols */
@@ -78,12 +55,9 @@ export type Value =
   | TypeValue
   | TupleValue
   | TypeLiteralValue
-  | ComponentValue
-  | ModelValue
-  | ElemPropsHookValue
   | IntersectionValue
-  | TypeMember
-  | ObjectParameter
+  | ObjectProperty
+  | FunctionParameter
   | FunctionValue
   | TypeParameter
   | ExternalSymbolValue
@@ -106,7 +80,7 @@ export interface GenericValue {
 
 export interface ObjectValue {
   kind: 'object';
-  properties: ObjectParameter[];
+  properties: ObjectProperty[];
 }
 
 export interface ArrayValue {
@@ -142,7 +116,7 @@ export interface TypeParameter {
 export interface InterfaceValue {
   kind: 'interface';
   typeParameters: TypeParameter[];
-  properties: TypeMember[];
+  properties: ObjectProperty[];
   callSignatures: FunctionValue[];
   indexSignature?: IndexSignatureValue;
 }
@@ -232,7 +206,7 @@ export interface TupleValue {
 
 export interface TypeLiteralValue {
   kind: 'typeLiteral';
-  properties: TypeMember[];
+  properties: ObjectProperty[];
 }
 
 export interface ExternalSymbolValue {
@@ -259,12 +233,16 @@ export interface BooleanLiteralValue {
 
 export interface PrimitiveValue {
   kind: 'primitive';
-  value: 'string' | 'number' | 'null' | 'undefined' | 'boolean' | 'any' | 'void' | 'unknown';
-}
-
-export interface AnyValue {
-  kind: 'primitive';
-  value: 'any';
+  value:
+    | 'string'
+    | 'number'
+    | 'null'
+    | 'undefined'
+    | 'boolean'
+    | 'any'
+    | 'void'
+    | 'unknown'
+    | 'any';
 }
 
 export interface UnknownValue {
@@ -285,7 +263,7 @@ export interface IntersectionValue {
 
 export interface FunctionValue {
   kind: 'function';
-  parameters: ObjectParameter[];
+  parameters: FunctionParameter[];
   members?: Value[];
   returnType: Value;
 }

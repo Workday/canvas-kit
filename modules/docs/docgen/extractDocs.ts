@@ -6,7 +6,7 @@ import _glob from 'glob';
 
 // import t from './traverse';
 import {DocParser} from './docParser';
-import {findModel} from './findModel';
+import {modelParser} from './modelParser';
 
 const glob = promisify(_glob);
 
@@ -41,7 +41,7 @@ glob(`${srcFolder}/modules/**/*.{ts,tsx}`, {
       '/Users/nicholas.boll/projects/canvas-kit/modules/preview-react/color-picker/lib/ColorPicker.tsx',
     ];
     const program = ts.createProgram(files, getConfig());
-    const parser = new DocParser(program, [findModel]);
+    const parser = new DocParser(program, [modelParser]);
     return files.flatMap(fileName => {
       console.log(fileName); //?
       return parser.getExportedSymbols(fileName);

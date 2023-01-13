@@ -1,0 +1,120 @@
+import ts from 'typescript';
+import {EnhanceComponentValue} from './customTypes';
+
+import {createParserPlugin, DocParser, getValueDeclaration} from './docParser';
+import {ObjectProperty, PrimitiveValue, Value} from './docTypes';
+import t from './traverse';
+
+function getDefaultFromTags(tags: ts.JSDocTagInfo[]): Value | undefined {
+  for (const tag of tags) {
+    if (tag.name === 'default') {
+      const text = (tag.text || '').replace('{', '').replace('}', ''); //?
+      if (
+        [
+          'string',
+          'number',
+          'null',
+          'undefined',
+          'boolean',
+          'any',
+          'void',
+          'unknown',
+          'any',
+        ].includes(text)
+      ) {
+        return {kind: 'primitive', value: text as PrimitiveValue['value']};
+      }
+      if (['true', 'false'].includes(text)) {
+        return {kind: 'boolean', value: Boolean(text)};
+      }
+      if (!Number.isNaN(Number(text))) {
+        return {kind: 'number', value: Number(text)};
+      }
+      if (/^['"][a-z0-9]+['"]$/.test(text)) {
+        return {kind: 'string', value: text.replace(/["']/g, '')};
+      }
+      return {kind: 'symbol', name: text, value: text};
+    }
+  }
+  return;
+}
+
+function getDefaultsFromParameter(
+  parser: DocParser,
+  node: ts.ParameterDeclaration
+): Record<string, Value> {
+  if (t.isObjectBindingPattern(node.name)) {
+    return node.name.elements.reduce((result, element) => {
+      if (t.isBindingElement(element) && t.isIdentifier(element.name) && element.initializer) {
+        result[element.name.escapedText as string] = parser.getValueFromNode(element.initializer);
+      }
+      return result;
+    }, {} as Record<string, Value>);
+  }
+
+  return {};
+}
+
+export const componentParser = createParserPlugin<EnhanceComponentValue>((node, parser) => {
+  t.getKindNameFromNode(node); //?
+
+  if (
+    t.isVariableDeclaration(node) &&
+    node.initializer &&
+    t.isCallExpression(node.initializer) &&
+    t.isCallExpression(node.initializer.expression) &&
+    t.isIdentifier(node.initializer.expression.expression) &&
+    node.initializer.expression.expression.escapedText === 'createComponent'
+  ) {
+    'here'; //?
+    let baseElement: EnhanceComponentValue | Value | undefined;
+    const baseElementNode = node.initializer.expression.arguments[0]; //?
+    if (baseElementNode && t.isStringLiteral(baseElementNode)) {
+      baseElement = {
+        kind: 'external',
+        name: baseElementNode.text,
+        url: `https://developer.mozilla.org/en-US/docs/Web/HTML/Element/${baseElementNode.text}`,
+      };
+    } else if (baseElementNode) {
+      baseElement = parser.getValueFromNode(baseElementNode);
+    }
+    baseElement; //?
+    const options = node.initializer.arguments[0];
+    if (options && t.isObjectLiteralExpression(options)) {
+      const componentExpression = options.properties.find(
+        n => n.name && t.isIdentifier(n.name) && n.name.escapedText === 'Component'
+      );
+      if (componentExpression && ts.isFunctionLike(componentExpression)) {
+        const type = parser.checker.getTypeAtLocation(componentExpression.parameters[0]);
+        const parameterDefaults = getDefaultsFromParameter(
+          parser,
+          componentExpression.parameters[0]
+        ); //?
+        const props = type.getProperties().map(symbol => {
+          const propDeclaration = getValueDeclaration(symbol);
+          const defaultValue =
+            parameterDefaults[symbol.name] || getDefaultFromTags(symbol.getJsDocTags());
+
+          return {
+            ...(parser.getValueFromNode(getValueDeclaration(symbol)!) as ObjectProperty),
+            defaultValue,
+          };
+        });
+        'here'; //?
+        componentExpression.parameters; //?
+        return {
+          kind: 'enhancedComponent',
+          props,
+          baseElement,
+        } as EnhanceComponentValue;
+      }
+    }
+  }
+  /**
+   * Parse anything using `createComponent`
+   */
+
+  node; //?
+
+  return undefined;
+});

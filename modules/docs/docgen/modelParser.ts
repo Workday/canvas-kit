@@ -1,4 +1,4 @@
-import {ObjectParameter, FunctionValue, SymbolValue} from './docTypes';
+import {ObjectProperty, FunctionValue, SymbolValue, FunctionParameter} from './docTypes';
 import {
   createParserPlugin,
   getValueDeclaration,
@@ -8,12 +8,13 @@ import {
   getFullJsDocComment,
 } from './docParser';
 import t from './traverse';
+import {ModelHookValue, ModelValue} from './customTypes';
 
 function capitalize(string: string) {
   return string[0].toUpperCase() + string.substring(1);
 }
 
-export const findModel = createParserPlugin((node, parser) => {
+export const modelParser = createParserPlugin<ModelHookValue | ModelValue>((node, parser) => {
   t.getKindNameFromNode(node); //?
 
   /**
@@ -55,7 +56,7 @@ export const findModel = createParserPlugin((node, parser) => {
     const {checker} = parser;
     const symbol = getSymbolFromNode(checker, node);
     const declaration = getValueDeclaration(symbol);
-    const name = symbol?.name || (t.isIdentifier(node.name) && node.name.escapedText);
+    const name = symbol?.name || (t.isIdentifier(node.name) && node.name.text);
     if (declaration && declaration.getSourceFile()) {
       // ShorthandPropertyAssignment doesn't give the original variable declaration
       const originalDeclaration = t(declaration.getSourceFile())
@@ -63,16 +64,16 @@ export const findModel = createParserPlugin((node, parser) => {
         .map(node => {
           if (
             t.isIdentifier(node.name) &&
-            node.name.escapedText === name &&
+            node.name.text === name &&
             node.initializer &&
             t.isCallExpression(node.initializer) &&
             t.isIdentifier(node.initializer.expression) &&
-            (node.initializer.expression.escapedText as string).includes('Model')
+            node.initializer.expression.text.includes('Model')
           ) {
-            node.initializer.expression.escapedText; //?
+            node.initializer.expression.text; //?
             return {
               kind: 'symbol',
-              name: node.initializer.expression.escapedText,
+              name: node.initializer.expression.text.replace('use', ''),
             } as SymbolValue;
           }
           return;
@@ -84,7 +85,7 @@ export const findModel = createParserPlugin((node, parser) => {
       if (originalDeclaration) {
         const jsDoc = symbol ? getFullJsDocComment(checker, symbol) : defaultJSDoc;
         return {
-          kind: 'parameter',
+          kind: 'property',
           name: symbol?.name || '',
           defaultValue: undefined,
           type: originalDeclaration,
@@ -125,9 +126,9 @@ export const findModel = createParserPlugin((node, parser) => {
   if (t.isTypeReference(node)) {
     const firstArgument = node.typeArguments?.[0];
     if (firstArgument && t.isTypeQuery(firstArgument) && t.isIdentifier(firstArgument.exprName)) {
-      const modelName = firstArgument.exprName.escapedText as string;
+      const modelName = firstArgument.exprName.text;
 
-      return {kind: 'symbol', name: modelName};
+      return {kind: 'symbol', name: modelName} as SymbolValue;
     }
   }
 
@@ -140,22 +141,22 @@ export const findModel = createParserPlugin((node, parser) => {
     t.isIdentifier(node.initializer.type.exprName.left) &&
     t.isIdentifier(node.initializer.type.exprName.right) &&
     // TConfig is special from models
-    node.initializer.type.exprName.right.escapedText === 'TConfig'
+    node.initializer.type.exprName.right.text === 'TConfig'
   ) {
     const symbol = getSymbolFromNode(parser.checker, node);
     const jsDoc = (symbol && getFullJsDocComment(parser.checker, symbol)) || defaultJSDoc;
+    const type = parser.checker.getTypeAtLocation(node.initializer.expression);
     return {
-      kind: 'parameter',
-      name: node.name.escapedText as string,
+      kind: 'property',
+      name: node.name.text,
       defaultValue: parser.getValueFromNode(node.initializer.expression),
       required: false,
       type: {
         kind: 'symbol',
-        name:
-          (node.initializer.type.exprName.left.escapedText as string).replace('use', '') + 'Config',
+        name: node.initializer.type.exprName.left.text.replace('use', '') + 'Config',
       },
       ...jsDoc,
-    };
+    } as ObjectProperty;
   }
 
   /**
@@ -199,10 +200,10 @@ export const findModel = createParserPlugin((node, parser) => {
     t.isCallExpression(node.initializer) &&
     t.isCallExpression(node.initializer.expression) &&
     t.isIdentifier(node.initializer.expression.expression) &&
-    node.initializer.expression.expression.escapedText === 'createModelHook'
+    node.initializer.expression.expression.text === 'createModelHook'
   ) {
     // we have a model
-    const modelName = (node.name.escapedText as string).replace('use', ''); //?
+    const modelName = node.name.text.replace('use', ''); //?
 
     const options = node.initializer.expression.arguments[0]; //?
     // let configProps: Record<string, Value[]> = {};
@@ -223,15 +224,15 @@ export const findModel = createParserPlugin((node, parser) => {
               return {
                 ...parser.getValueFromNode(prop!),
                 required: symbol.getName() === 'requiredConfig',
-              } as ObjectParameter;
+              } as ObjectProperty;
             });
         }
       }
       return result;
-    }, {} as Record<string, ObjectParameter[]>);
+    }, {} as Record<string, ObjectProperty[]>);
 
-    const modelProps: Record<string, ObjectParameter[]> = {};
-    const returnProps: Record<string, ObjectParameter> = {};
+    const modelProps: Record<string, ObjectProperty[]> = {};
+    const returnProps: Record<string, ObjectProperty> = {};
     const type = parser.checker.getTypeAtLocation(node.initializer.arguments[0]); //?
     const returnValue = type.getCallSignatures().map(s => {
       return s
@@ -250,10 +251,13 @@ export const findModel = createParserPlugin((node, parser) => {
                 .map(prop => {
                   prop.getName(); //?
                   t.getKindNameFromNode(getValueDeclaration(prop)!); //?
-                  return parser.getValueFromNode(getValueDeclaration(prop)!) as ObjectParameter;
+                  return {
+                    ...(parser.getValueFromNode(getValueDeclaration(prop)!) as ObjectProperty),
+                    defaultValue: undefined, // no defaults for state/events
+                  };
                 });
             } else {
-              returnProps[p.getName()] = parser.getValueFromNode(declaration) as ObjectParameter;
+              returnProps[p.getName()] = parser.getValueFromNode(declaration) as ObjectProperty;
             }
           }
           return result;
@@ -266,26 +270,22 @@ export const findModel = createParserPlugin((node, parser) => {
     const fileName = node.getSourceFile().fileName;
 
     // Add special symbols
+
+    // Model
     parser.symbols.push({
-      name: `${modelName}State`,
+      name: modelName,
       packageName: getPackageName(fileName),
       fileName,
       ...defaultJSDoc,
       type: {
-        kind: 'object',
-        properties: state,
+        kind: 'model',
+        state,
+        events,
+        modelProperties: Object.keys(returnProps).map(p => returnProps[p]),
       },
     });
-    parser.symbols.push({
-      name: `${modelName}Events`,
-      packageName: getPackageName(fileName),
-      fileName,
-      ...defaultJSDoc,
-      type: {
-        kind: 'object',
-        properties: events,
-      },
-    });
+
+    // Model config
 
     const eventConfig = events.reduce((result, event) => {
       const type = event.type as FunctionValue;
@@ -309,7 +309,7 @@ export const findModel = createParserPlugin((node, parser) => {
                 name: `${modelName}State`,
                 fileName,
               },
-            } as ObjectParameter,
+            } as FunctionParameter,
           ].concat(...type.parameters),
           returnType: {
             kind: 'primitive',
@@ -336,7 +336,7 @@ export const findModel = createParserPlugin((node, parser) => {
                 name: `${modelName}State`,
                 fileName,
               },
-            } as ObjectParameter,
+            } as FunctionParameter,
           ].concat(...type.parameters),
           returnType: {
             kind: 'primitive',
@@ -346,7 +346,7 @@ export const findModel = createParserPlugin((node, parser) => {
       });
 
       return result;
-    }, [] as ObjectParameter[]);
+    }, [] as ObjectProperty[]);
 
     parser.symbols.push({
       name: `${modelName}Config`,
@@ -362,14 +362,37 @@ export const findModel = createParserPlugin((node, parser) => {
       },
     });
 
+    // Model State
+    parser.symbols.push({
+      name: `${modelName}State`,
+      packageName: getPackageName(fileName),
+      fileName,
+      ...defaultJSDoc,
+      type: {
+        kind: 'object',
+        properties: state,
+      },
+    });
+
+    // Model Events
+    parser.symbols.push({
+      name: `${modelName}Events`,
+      packageName: getPackageName(fileName),
+      fileName,
+      ...defaultJSDoc,
+      type: {
+        kind: 'object',
+        properties: events,
+      },
+    });
+
+    // Model Hook
     return {
-      kind: 'model',
+      kind: 'modelHook',
+      name: `use${modelName}`,
       defaultConfig: configProps['defaultConfig'] || [],
       requiredConfig: configProps['requiredConfig'] || [],
-      state,
-      events,
-      modelProperties: Object.keys(returnProps).map(p => returnProps[p]),
-    };
+    } as ModelHookValue;
   }
   return;
 

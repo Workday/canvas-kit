@@ -12,6 +12,7 @@ import * as types from '../docgen/docTypes';
 
 import {docs, subscribe} from './docs';
 import {Table} from './Table';
+import {EnhanceComponentValue, ModelHookValue, ModelValue} from '../docgen/customTypes';
 
 export interface SymbolDocProps {
   name: string;
@@ -79,7 +80,11 @@ const SymbolDialog = ({value}: {value: types.SymbolValue}) => {
   );
 };
 
-const Value = ({value}: {value: types.Value}) => {
+const Value = ({
+  value,
+}: {
+  value: types.Value | ModelHookValue | ModelValue | EnhanceComponentValue;
+}) => {
   const renderContext = React.useContext(RenderContext);
   switch (value.kind) {
     case 'object':
@@ -138,6 +143,16 @@ const Value = ({value}: {value: types.Value}) => {
           <span className="value-punctuation">[]</span>
         </>
       );
+    case 'tuple':
+      return (
+        <>
+          <span className="value-punctuation">[</span>
+          {value.value.map((v, i) => (
+            <Value key={i} value={v} />
+          ))}
+          <span className="value-punctuation">]</span>
+        </>
+      );
     case 'intersection':
       return (
         <>
@@ -154,17 +169,32 @@ const Value = ({value}: {value: types.Value}) => {
           ))}
         </>
       );
+    case 'modelHook':
+      return (
+        <code>
+          <span>function </span>
+          <span>{value.name}</span> <span className="value-punctuation">(</span>
+          <span className="value-parameter">config</span>:{' '}
+          <Value value={{kind: 'symbol', name: `${value.name.replace('use', '')}Config`}} />
+          <span className="value-punctuation">): </span>
+          <Value value={{kind: 'symbol', name: `${value.name.replace('use', '')}`}} />
+        </code>
+      );
     case 'model':
       return (
         <>
-          <h3>Config:</h3>
-          <PropertiesTable properties={value.defaultConfig.concat(value.requiredConfig)} />
-          <h3>State:</h3>
-          <PropertiesTable properties={value.state} />
-          <h3>Events:</h3>
-          <PropertiesTable properties={value.events} />
-          <h3>Additional Properties:</h3>
-          <PropertiesTable properties={value.modelProperties} />
+          <Heading size="medium" as="h3">
+            State:
+          </Heading>
+          <PropertiesTable properties={value.state} showDefault={false} />
+          <Heading size="medium" as="h3">
+            Events:
+          </Heading>
+          <PropertiesTable properties={value.events} showDefault={false} />
+          <Heading size="medium" as="h3">
+            Additional Properties:
+          </Heading>
+          <PropertiesTable properties={value.modelProperties} showDefault={false} />
         </>
       );
     case 'function':
@@ -203,14 +233,12 @@ const Value = ({value}: {value: types.Value}) => {
 };
 
 function getTableRows(
-  properties: (types.TypeMember | types.ObjectParameter)[],
+  properties: types.ObjectProperty[],
+  showDefault = true,
   level: number,
   index: number
 ): JSX.Element[] {
   return properties.flatMap((property, i) => {
-    if (property.kind === 'function') {
-      console.log('properties', properties);
-    }
     return [
       <Table.Row key={index + i}>
         <Table.Data color="plum600">
@@ -225,7 +253,9 @@ function getTableRows(
         </Table.Data>
         <Table.Data>
           <code>
-            {['interface', 'typeLiteral', 'object'].includes(property.type.kind) ? null : (
+            {property.type.kind === 'typeLiteral' ||
+            property.type.kind === 'interface' ||
+            property.type.kind === 'object' ? null : (
               <Value value={property.type} />
             )}
           </code>
@@ -233,20 +263,30 @@ function getTableRows(
         <Table.Data>
           <MarkdownToJSX>{property.description || ''}</MarkdownToJSX>
         </Table.Data>
+        {showDefault ? (
+          <Table.Data>
+            <code>{property.defaultValue ? <Value value={property.defaultValue} /> : null}</code>
+          </Table.Data>
+        ) : null}
       </Table.Row>,
     ].concat(
-      ['interface', 'typeLiteral', 'object'].includes(property.type.kind)
-        ? [...getTableRows(property.type.properties, level + 1, index + properties.length)]
+      property.type.kind === 'typeLiteral' ||
+        property.type.kind === 'interface' ||
+        property.type.kind === 'object'
+        ? [
+            ...getTableRows(
+              property.type.properties,
+              showDefault,
+              level + 1,
+              index + properties.length
+            ),
+          ]
         : []
     );
   });
 }
 
-const PropertiesInline = ({
-  properties,
-}: {
-  properties: (types.TypeMember | types.ObjectParameter)[];
-}) => {
+const PropertiesInline = ({properties}: {properties: types.ObjectProperty[]}) => {
   if (properties.length === 0) {
     return <span>&#123;&#125;</span>;
   }
@@ -281,8 +321,10 @@ const PropertiesInline = ({
 
 const PropertiesTable = ({
   properties,
+  showDefault = true,
 }: {
-  properties: (types.TypeMember | types.ObjectParameter)[];
+  properties: types.ObjectProperty[];
+  showDefault?: boolean;
 }) => {
   if (properties.length === 0) {
     return <span>&#123;&#125;</span>;
@@ -290,7 +332,7 @@ const PropertiesTable = ({
 
   console.log('properties', properties);
 
-  const tableBody = getTableRows(properties, 0, 0);
+  const tableBody = getTableRows(properties, showDefault, 0, 0);
 
   return (
     <Table>
@@ -299,6 +341,7 @@ const PropertiesTable = ({
           <Table.Header>Name</Table.Header>
           <Table.Header>Type</Table.Header>
           <Table.Header>Description</Table.Header>
+          {showDefault ? <Table.Header>Default</Table.Header> : null}
         </Table.Row>
       </Table.Head>
       <Table.Body>{tableBody}</Table.Body>
