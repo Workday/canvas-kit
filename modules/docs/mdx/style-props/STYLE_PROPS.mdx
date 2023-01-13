@@ -31,21 +31,31 @@ import {PositionExample} from './examples/Position';
 import {SpaceExample} from './examples/Space';
 import {TextExample} from './examples/Text';
 
-<Meta title="Welcome/Dev Docs/Style Props" />
+<Meta title="Features/Style Props" />
 
 # Style Props
 
-Style props provide a common, ergonomic API for modifying a component's styles by passing styles with props.
+Style props provide a common, ergonomic API for modifying a component's styles by passing styles
+with props.
 
 ## System Prop Values
 
-Many style props are design-system-aware and translate `SystemPropValues` for you automatically. In the example below, the `padding` prop translates the value `s` to `16px` and `frenchVanilla100` to `#ffffff`. These `SystemPropValues` are also included in our types, so your IDE's intellisense should suggest these values as you work. This allows you to use Canvas design tokens fluidly without disrupting your workflow.
+Many style props are design-system-aware and translate `SystemPropValues` for you automatically. In
+the example below, the `padding` prop translates the value `s` to `16px` and `frenchVanilla100` to
+`#ffffff`. These `SystemPropValues` are also included in our types, so your IDE's intellisense
+should suggest these values as you work. This allows you to use Canvas design tokens fluidly without
+disrupting your workflow.
 
 ```tsx
-<Box padding="s" backgroundColor="frenchVanilla100">Hello, style props!</Box>
+<Box padding="s" backgroundColor="frenchVanilla100">
+  Hello, style props!
+</Box>
 ```
 
-There are seven types of system prop values: `color`, `depth`, `font`, `fontSize`, `fontWeight`, `shape`, and `space` — corresponding to our Canvas design tokens. Each style prop section below includes a table. The "System" column in that table will tell you which system prop values are supported.
+There are seven types of system prop values: `color`, `depth`, `font`, `fontSize`, `fontWeight`,
+`shape`, and `space` — corresponding to our Canvas design tokens. Each style prop section below
+includes a table. The "System" column in that table will tell you which system prop values are
+supported.
 
 ## Background
 

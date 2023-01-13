@@ -11,7 +11,7 @@ import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {Container, stateTableColumnProps} from './utils';
 
 export default withSnapshotsEnabled({
-  title: 'Testing/React/Buttons/Button/Primary Button',
+  title: 'Testing/Buttons/Button/Primary Button',
   component: PrimaryButton,
 });
 

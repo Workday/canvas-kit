@@ -7,7 +7,7 @@ import testAvatar from './test-avatar.png';
 
 const handleAvatarButtonClick = () => console.log('AvatarButton clicked');
 
-storiesOf('Components/Indicators/Avatar/React/Default', module)
+storiesOf('Components/Indicators/Avatar', module)
   .addParameters({ReadmePath: 'react/avatar'})
   .addParameters({component: Avatar})
   .add('Light', () => (
@@ -59,7 +59,7 @@ storiesOf('Components/Indicators/Avatar/React/Default', module)
     </div>
   ));
 
-storiesOf('Components/Indicators/Avatar/React/Avatar Button', module)
+storiesOf('Components/Indicators/Avatar/Avatar Button', module)
   .addParameters({ReadmePath: 'react/avatar'})
   .addParameters({component: Avatar})
   .add('Light', () => (
