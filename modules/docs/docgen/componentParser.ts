@@ -66,8 +66,15 @@ export const componentParser = createParserPlugin<EnhanceComponentValue>((node, 
     t.isIdentifier(node.initializer.expression.expression) &&
     node.initializer.expression.expression.escapedText === 'createComponent'
   ) {
+    console.log('matched createComponent');
     'here'; //?
     let baseElement: EnhanceComponentValue | Value | undefined;
+    /**
+     * baseElementNode is `'button'` in the following example:
+     * ```ts
+     * export const MyComponent = createComponent('button')({...})
+     * ```
+     */
     const baseElementNode = node.initializer.expression.arguments[0]; //?
     if (baseElementNode && t.isStringLiteral(baseElementNode)) {
       baseElement = {
@@ -79,34 +86,52 @@ export const componentParser = createParserPlugin<EnhanceComponentValue>((node, 
       baseElement = parser.getValueFromNode(baseElementNode);
     }
     baseElement; //?
-    const options = node.initializer.arguments[0];
+    /**
+     * options is the object containing the `Component` function
+     * ```ts
+     * export const MyComponent = createComponent('button')({
+     *   displayName: 'MyComponent',
+     *   Component() {...}
+     * })
+     * ```
+     */
+    const options = node.initializer.arguments[0]; //?
     if (options && t.isObjectLiteralExpression(options)) {
-      const componentExpression = options.properties.find(
-        n => n.name && t.isIdentifier(n.name) && n.name.escapedText === 'Component'
+      const signature = options.properties.find(
+        n => n.name && t.isIdentifier(n.name) && n.name.text === 'Component'
       );
-      if (componentExpression && ts.isFunctionLike(componentExpression)) {
-        const type = parser.checker.getTypeAtLocation(componentExpression.parameters[0]);
-        const parameterDefaults = getDefaultsFromParameter(
-          parser,
-          componentExpression.parameters[0]
-        ); //?
-        const props = type.getProperties().map(symbol => {
-          const propDeclaration = getValueDeclaration(symbol);
-          const defaultValue =
-            parameterDefaults[symbol.name] || getDefaultFromTags(symbol.getJsDocTags());
+      if (signature) {
+        const componentExpression = t.isMethodDeclaration(signature)
+          ? signature
+          : t.isPropertyAssignment(signature)
+          ? signature.initializer
+          : undefined;
+        if (componentExpression && ts.isFunctionLike(componentExpression)) {
+          const type = parser.checker.getTypeAtLocation(componentExpression.parameters[0]);
+          const parameterDefaults = getDefaultsFromParameter(
+            parser,
+            componentExpression.parameters[0]
+          ); //?
+          const props = type.getProperties().map(symbol => {
+            const propDeclaration = getValueDeclaration(symbol);
+            const defaultValue =
+              parameterDefaults[symbol.name] || getDefaultFromTags(symbol.getJsDocTags());
 
+            return {
+              ...(parser.getValueFromNode(getValueDeclaration(symbol)!) as ObjectProperty),
+              defaultValue,
+            };
+          });
+          'here'; //?
+          componentExpression.parameters; //?
+
+          console.log('still matched createComponent');
           return {
-            ...(parser.getValueFromNode(getValueDeclaration(symbol)!) as ObjectProperty),
-            defaultValue,
-          };
-        });
-        'here'; //?
-        componentExpression.parameters; //?
-        return {
-          kind: 'enhancedComponent',
-          props,
-          baseElement,
-        } as EnhanceComponentValue;
+            kind: 'enhancedComponent',
+            props,
+            baseElement,
+          } as EnhanceComponentValue;
+        }
       }
     }
   }

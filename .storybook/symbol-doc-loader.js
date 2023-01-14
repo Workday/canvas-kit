@@ -7,8 +7,9 @@ const glob = require('glob');
 // we use TS files, so tell node to register them
 require('ts-node').register({});
 
-const {DocParser} = require('@workday/canvas-kit-docs/docgen/docParser');
+const {DocParser, mergeParserPlugins} = require('@workday/canvas-kit-docs/docgen/docParser');
 const {modelParser} = require('@workday/canvas-kit-docs/docgen/modelParser');
+const {componentParser} = require('@workday/canvas-kit-docs/docgen/componentParser');
 
 const schema = {
   type: 'object',
@@ -59,6 +60,8 @@ const filesProcessedMap = new Map();
 /** @type {ts.Program} */
 let program;
 
+const plugins = mergeParserPlugins(modelParser, componentParser);
+
 /** @type {DocParser} */
 let parser;
 
@@ -80,7 +83,7 @@ function symbolDocLoader(source) {
       ignore: options.ignore,
     });
     program = ts.createProgram(files, getConfig());
-    parser = new DocParser(program, [modelParser]);
+    parser = new DocParser(program, plugins);
   }
   if (filesProcessedMap.has(this.resourcePath)) {
     // Update the program to force Typescript to reprocess our changed files. I
@@ -89,7 +92,7 @@ function symbolDocLoader(source) {
     // Typescript only supports "incremental" via building and type-checking
     // where I only want a program - I don't need to type check or emit...
     program = ts.createProgram(files, getConfig(), undefined, program);
-    parser = new DocParser(program, [modelParser]);
+    parser = new DocParser(program, plugins);
   }
   filesProcessedMap.set(this.resourcePath, true);
 

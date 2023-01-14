@@ -57,7 +57,7 @@ const SymbolDialog = ({value}: {value: types.SymbolValue}) => {
         )}
       </>
       <Dialog.Popper>
-        <Dialog.Card>
+        <Dialog.Card maxHeight="50vh" maxWidth="90vh">
           <Dialog.CloseIcon />
           <Dialog.Heading>{value.name}</Dialog.Heading>
           <Dialog.Body>
@@ -96,7 +96,9 @@ const Value = ({
       return renderContext === 'inline' ? (
         <PropertiesInline properties={value.properties} />
       ) : (
-        <PropertiesTable properties={value.properties} />
+        <RenderContext.Provider value="inline">
+          <PropertiesTable properties={value.properties} />
+        </RenderContext.Provider>
       );
     case 'type':
       return <Value value={value.value} />;
@@ -112,50 +114,52 @@ const Value = ({
       return <span className="value-number">{value.name}</span>;
     case 'union':
       return (
-        <code className="value-union">
-          {value.value.map((v, index) => {
-            return (
-              <>
-                {index !== 0 && (
-                  <span className="union-separator" key={index}>
-                    {' '}
-                    |&nbsp;
-                  </span>
-                )}
-                <Value value={v} key={index} />
-              </>
-            );
-          })}
-        </code>
+        <RenderContext.Provider value="inline">
+          <span className="value-union">
+            {value.value.map((v, index) => {
+              return (
+                <>
+                  {index !== 0 && (
+                    <span className="union-separator" key={index}>
+                      {' '}
+                      |&nbsp;
+                    </span>
+                  )}
+                  <Value value={v} key={index} />
+                </>
+              );
+            })}
+          </span>
+        </RenderContext.Provider>
       );
     case 'parenthesis':
       return (
-        <code>
+        <span>
           <span className="value-punctuation">\(</span>
           <Value value={value.value} />
           <span className="value-punctuation">)</span>
-        </code>
+        </span>
       );
     case 'array':
       return (
-        <>
+        <RenderContext.Provider value="inline">
           <Value value={value.value} />
           <span className="value-punctuation">[]</span>
-        </>
+        </RenderContext.Provider>
       );
     case 'tuple':
       return (
-        <>
+        <RenderContext.Provider value="inline">
           <span className="value-punctuation">[</span>
           {value.value.map((v, i) => (
             <Value key={i} value={v} />
           ))}
           <span className="value-punctuation">]</span>
-        </>
+        </RenderContext.Provider>
       );
     case 'intersection':
       return (
-        <>
+        <RenderContext.Provider value="inline">
           {value.value.map((v, i) => (
             <>
               {i !== 0 && (
@@ -167,7 +171,7 @@ const Value = ({
               <Value key={i} value={v} />
             </>
           ))}
-        </>
+        </RenderContext.Provider>
       );
     case 'modelHook':
       return (
@@ -197,6 +201,15 @@ const Value = ({
           <PropertiesTable properties={value.modelProperties} showDefault={false} />
         </>
       );
+    case 'enhancedComponent':
+      return (
+        <>
+          <Heading size="small" as="h3">
+            Props
+          </Heading>
+          <PropertiesTable properties={value.props}></PropertiesTable>
+        </>
+      );
     case 'function':
       return (
         <RenderContext.Provider value="inline">
@@ -220,9 +233,9 @@ const Value = ({
       );
     case 'parameter':
       return (
-        <>
+        <RenderContext.Provider value="inline">
           <span className="value-parameter">{value.name}</span>: <Value value={value.type} />
-        </>
+        </RenderContext.Provider>
       );
     case 'symbol':
       return <SymbolDialog value={value} />;
@@ -253,11 +266,13 @@ function getTableRows(
         </Table.Data>
         <Table.Data>
           <code>
-            {property.type.kind === 'typeLiteral' ||
+            {
+              /*property.type.kind === 'typeLiteral' ||
             property.type.kind === 'interface' ||
-            property.type.kind === 'object' ? null : (
-              <Value value={property.type} />
-            )}
+            property.type.kind === 'object' ? null : */ <Value
+                value={property.type}
+              />
+            }
           </code>
         </Table.Data>
         <Table.Data>
@@ -269,7 +284,7 @@ function getTableRows(
           </Table.Data>
         ) : null}
       </Table.Row>,
-    ].concat(
+    ]; /*.concat(
       property.type.kind === 'typeLiteral' ||
         property.type.kind === 'interface' ||
         property.type.kind === 'object'
@@ -282,14 +297,17 @@ function getTableRows(
             ),
           ]
         : []
-    );
+    );*/
   });
 }
+
+const LevelContext = React.createContext(0);
 
 const PropertiesInline = ({properties}: {properties: types.ObjectProperty[]}) => {
   if (properties.length === 0) {
     return <span>&#123;&#125;</span>;
   }
+  const level = React.useContext(LevelContext);
 
   console.log('properties', properties);
 
@@ -300,20 +318,27 @@ const PropertiesInline = ({properties}: {properties: types.ObjectProperty[]}) =>
         return (
           <>
             <br />
+            {[...Array(level * 4)].map(v => '\u00A0') /* non-breaking space */}
             &nbsp;&nbsp;&nbsp;&nbsp;
             {p.description ? (
-              <Tooltip title={<MarkdownToJSX>{p.description}</MarkdownToJSX>}>
+              <Tooltip
+                style={{maxWidth: '50em'}}
+                title={<MarkdownToJSX>{p.description}</MarkdownToJSX>}
+              >
                 <span>{p.name}:</span>
               </Tooltip>
             ) : (
               <span>{p.name}:</span>
             )}
             &nbsp;
-            <Value value={p.type} />
+            <LevelContext.Provider value={level + 1}>
+              <Value value={p.type} />
+            </LevelContext.Provider>
           </>
         );
       })}
       <br />
+      {[...Array(level * 4)].map(v => '\u00A0') /* non-breaking space */}
       <span>&#125;</span>
     </>
   );
@@ -366,8 +391,16 @@ function getSymbolDocChildren(doc?: types.ExportedSymbol) {
   if (!doc) {
     return <div>Not Found</div>;
   }
+
   if (doc && doc.type) {
-    return <Value value={doc.type} />;
+    return (
+      <>
+        <p>
+          <MarkdownToJSX>{doc.description}</MarkdownToJSX>
+        </p>
+        <Value value={doc.type} />
+      </>
+    );
   }
 
   return <div>Not Found</div>;

@@ -5,8 +5,9 @@ import {promisify} from 'util';
 import _glob from 'glob';
 
 // import t from './traverse';
-import {DocParser} from './docParser';
+import {DocParser, mergeParserPlugins} from './docParser';
 import {modelParser} from './modelParser';
+import {componentParser} from './componentParser';
 
 const glob = promisify(_glob);
 
@@ -31,8 +32,8 @@ function getConfig(tsconfigPath?: string) {
 const srcFolder = path.join(__dirname, '../../../');
 
 srcFolder; //?
-glob(`${srcFolder}/modules/**/*.{ts,tsx}`, {
-  // glob(`${srcFolder}/modules/**/popup/lib/hooks/usePopupModel.{ts,tsx}`, {
+// glob(`${srcFolder}/modules/**/*.{ts,tsx}`, {
+glob(`${srcFolder}/modules/**/react/button/lib/PrimaryButton.{ts,tsx}`, {
   ignore: ['**/examples/**', '**/spec/**', '**/stories/**', '**/codemod/**', '**/docs/**'],
 })
   .then(files => {
@@ -41,7 +42,7 @@ glob(`${srcFolder}/modules/**/*.{ts,tsx}`, {
       '/Users/nicholas.boll/projects/canvas-kit/modules/preview-react/color-picker/lib/ColorPicker.tsx',
     ];
     const program = ts.createProgram(files, getConfig());
-    const parser = new DocParser(program, [modelParser]);
+    const parser = new DocParser(program, mergeParserPlugins(modelParser, componentParser));
     return files.flatMap(fileName => {
       console.log(fileName); //?
       return parser.getExportedSymbols(fileName);

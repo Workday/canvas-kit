@@ -13,6 +13,26 @@ import {
 import {getExternalSymbol} from './getExternalSymbol';
 import t, {find} from './traverse';
 
+// merge function keeps Typescript happy, otherwise it complains about plugins not being compatible
+export function mergeParserPlugins<T1 extends {kind: string}, T2 extends {kind: string}>(
+  plugin1: ParserPlugin<T1>,
+  plugin2: ParserPlugin<T2>
+): ParserPlugin<T1 | T2>[];
+export function mergeParserPlugins<
+  T1 extends {kind: string},
+  T2 extends {kind: string},
+  T3 extends {kind: string}
+>(
+  plugin1: ParserPlugin<T1>,
+  plugin2: ParserPlugin<T2>,
+  plugin3: ParserPlugin<T3>
+): ParserPlugin<T1 | T2 | T3>[];
+export function mergeParserPlugins<T extends {kind: string}>(
+  ...plugins: ParserPlugin<T>[]
+): ParserPlugin<T>[] {
+  return plugins as any;
+}
+
 export class DocParser<T extends {kind: string} = any> {
   /** A shared reference to the Typescript type checker */
   public checker: ts.TypeChecker;
