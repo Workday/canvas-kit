@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v8.3.11](https://github.com/Workday/canvas-kit/releases/tag/v8.3.11) (2023-01-17)
+
+### Components
+
+- fix(tabs): Use mask image to display fade effect on tabs ([#1705](https://github.com/Workday/canvas-kit/pull/1705)) ([@anishatulai](https://github.com/anishatulai), Anisha Tulai)
+
+
 ## [v8.3.10](https://github.com/Workday/canvas-kit/releases/tag/v8.3.10) (2023-01-13)
 
 ### Documentation
