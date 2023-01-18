@@ -36,3 +36,7 @@ export interface EnhanceComponentValue {
   subComponents?: InterfaceValue;
   elemPropsHook?: Value;
 }
+
+export interface CanvasColorValue {
+  kind: 'canvasColor';
+}

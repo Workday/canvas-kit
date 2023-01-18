@@ -88,14 +88,11 @@ const getPrimaryButtonColors = (variant: 'inverse' | undefined, theme: EmotionCa
 export interface PrimaryButtonProps extends Themeable, GrowthBehavior, BaseButtonProps {
   /**
    * The variant of the PrimaryButton.
-   * @default undefined
    */
   variant?: 'inverse';
   /**
    * There are four button sizes: `extraSmall`, `small`, `medium`, and `large`.
    * If no size is provided, it will default to `medium`.
-   *
-   * @default 'medium'
    */
   size?: ButtonSizes;
   /**
@@ -106,12 +103,10 @@ export interface PrimaryButtonProps extends Themeable, GrowthBehavior, BaseButto
   /**
    * Button icon positions can either be `start` or `end`.
    * If no value is provided, it defaults to `start`.
-   * @default 'start'
    */
   iconPosition?: IconPositions;
   /**
    * If set to `true`, transform the icon's x-axis to mirror the graphic
-   * @default false
    */
   shouldMirrorIcon?: boolean;
   children?: React.ReactNode;
@@ -123,7 +118,7 @@ export const PrimaryButton = createComponent('button')({
     {
       size = 'medium',
       iconPosition = 'start',
-      variant,
+      variant = undefined,
       icon,
       shouldMirrorIcon = false,
       children,

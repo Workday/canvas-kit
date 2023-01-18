@@ -488,6 +488,7 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
     return {
       kind: 'property',
       name,
+      required: node.questionToken ? false : true,
       type: node.type
         ? getValueFromNode(parser, node.type)
         : unknownValue(safeGetText(checker, node)),

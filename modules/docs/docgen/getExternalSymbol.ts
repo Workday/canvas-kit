@@ -8,6 +8,7 @@ const externalSymbols: Record<string, Record<string, string>> = {
     Element: 'https://developer.mozilla.org/en-US/docs/Web/API/element',
     Event: 'https://developer.mozilla.org/en-US/docs/Web/API/event',
     Record: 'https://www.typescriptlang.org/docs/handbook/utility-types.html#recordkeys-type',
+    CSSObject: 'https://emotion.sh/docs/object-styles'
   },
   react: {
     Element: 'https://reactjs.org/docs/rendering-elements.html', // JSX.Element directs here

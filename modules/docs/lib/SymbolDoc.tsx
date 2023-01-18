@@ -6,17 +6,56 @@ import {colors, type} from '@workday/canvas-kit-react/tokens';
 import {Dialog, useDialogModel} from '@workday/canvas-kit-react/dialog';
 import {ExternalHyperlink, Hyperlink} from '@workday/canvas-kit-react/button';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
-import {Heading} from '@workday/canvas-kit-react/text';
+import {Heading, Text} from '@workday/canvas-kit-react/text';
+import {ColorPicker} from '@workday/canvas-kit-preview-react/color-picker';
+import {Expandable} from '@workday/canvas-kit-labs-react/expandable';
 
 import * as types from '../docgen/docTypes';
 
 import {docs, subscribe} from './docs';
 import {Table} from './Table';
-import {EnhanceComponentValue, ModelHookValue, ModelValue} from '../docgen/customTypes';
+import {
+  CanvasColorValue,
+  EnhanceComponentValue,
+  ModelHookValue,
+  ModelValue,
+} from '../docgen/customTypes';
 
 export interface SymbolDocProps {
   name: string;
   fileName?: string;
+}
+
+const fileNameToCategoryMap: Record<string, string[]> = {
+  Layout: ['utils/layout', 'utils/gridArea', 'utils/flexItem', 'utils/position', 'utils/space'],
+  Color: ['utils/color', 'utils/background'],
+  Border: ['utils/border'],
+  Depth: ['utils/depth'],
+  Text: ['utils/text'],
+  Other: ['utils/other'],
+};
+
+function groupProps(props: types.ObjectProperty[]): Record<string, types.ObjectProperty[]> {
+  const categories: Record<string, types.ObjectProperty[]> = {Local: []};
+  for (const key in fileNameToCategoryMap) {
+    categories[key] = [];
+  }
+  for (const prop of props) {
+    let found = false;
+    for (const key in fileNameToCategoryMap) {
+      if (
+        fileNameToCategoryMap[key].find(match => prop.declarations[0]?.filePath.includes(match))
+      ) {
+        found = true;
+        categories[key].push(prop);
+      }
+    }
+    if (!found) {
+      categories.Local.push(prop);
+    }
+  }
+
+  return categories;
 }
 
 const RenderContext = React.createContext<'table' | 'inline'>('table');
@@ -83,7 +122,7 @@ const SymbolDialog = ({value}: {value: types.SymbolValue}) => {
 const Value = ({
   value,
 }: {
-  value: types.Value | ModelHookValue | ModelValue | EnhanceComponentValue;
+  value: types.Value | ModelHookValue | ModelValue | EnhanceComponentValue | CanvasColorValue;
 }) => {
   const renderContext = React.useContext(RenderContext);
   switch (value.kind) {
@@ -187,27 +226,45 @@ const Value = ({
     case 'model':
       return (
         <>
-          <Heading size="medium" as="h3">
-            State:
+          <Heading size="medium" as="h5">
+            State
           </Heading>
           <PropertiesTable properties={value.state} showDefault={false} />
-          <Heading size="medium" as="h3">
-            Events:
+          <Heading size="medium" as="h5">
+            Events
           </Heading>
           <PropertiesTable properties={value.events} showDefault={false} />
-          <Heading size="medium" as="h3">
-            Additional Properties:
+          <Heading size="medium" as="h5">
+            Additional Properties
           </Heading>
           <PropertiesTable properties={value.modelProperties} showDefault={false} />
         </>
       );
     case 'enhancedComponent':
+      const groups = groupProps(value.props);
       return (
         <>
-          <Heading size="small" as="h3">
-            Props
-          </Heading>
-          <PropertiesTable properties={value.props}></PropertiesTable>
+          {Object.keys(groups).map(key => {
+            return (
+              <>
+                {key === 'Local' ? (
+                  <>
+                    <PropertiesTable properties={groups[key]}></PropertiesTable>
+                  </>
+                ) : (
+                  <Expandable>
+                    <Expandable.Target headingLevel="h5">
+                      <Expandable.Title>{key}</Expandable.Title>
+                      <Expandable.Icon iconPosition="end" />
+                    </Expandable.Target>
+                    <Expandable.Content>
+                      <PropertiesTable properties={groups[key]}></PropertiesTable>
+                    </Expandable.Content>
+                  </Expandable>
+                )}
+              </>
+            );
+          })}
         </>
       );
     case 'function':
@@ -241,6 +298,14 @@ const Value = ({
       return <SymbolDialog value={value} />;
     case 'external':
       return <ExternalHyperlink href={value.url}>{value.name}</ExternalHyperlink>;
+    case 'canvasColor':
+      return (
+        <ColorPicker
+          style={{width: 170}}
+          colorSet={Object.values(colors)}
+          onColorChange={() => {}}
+        />
+      );
   }
   return <code className="value-unknown">unknown {JSON.stringify(value, null, '  ')}</code>;
 };
@@ -261,6 +326,7 @@ function getTableRows(
               {[...Array(level * 6)].map(v => '\u00A0') /* non-breaking space */}
               {level > 0 && '\u2514\u00A0'}
               {property.name}
+              {property.required ? <Text color="chiliMango600">*</Text> : ''}
             </span>
           </Tooltip>
         </Table.Data>
@@ -308,8 +374,6 @@ const PropertiesInline = ({properties}: {properties: types.ObjectProperty[]}) =>
     return <span>&#123;&#125;</span>;
   }
   const level = React.useContext(LevelContext);
-
-  console.log('properties', properties);
 
   return (
     <>

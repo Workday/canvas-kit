@@ -3,6 +3,31 @@ import {parse} from '../docParser';
 import {componentParser} from '../componentParser';
 
 describe('componentParser', () => {
+  describe('csstype', () => {
+    it('should handle csstype Property namespace (even when exported)', () => {
+      const program = createProgramFromSource(`
+        export interface Props {
+          overflowX: Property.BorderLeft
+        }
+        export namespace Property {
+          export interface BorderLeft {}
+        }
+      `);
+      const symbols = parse(program, 'test.ts', [componentParser]); //?
+
+      expect(symbols).toHaveProperty('0.name', 'Props');
+      expect(symbols).toHaveProperty('0.type.kind', 'interface');
+      expect(symbols).toHaveProperty('0.type.properties.0.kind', 'property');
+      expect(symbols).toHaveProperty('0.type.properties.0.name', 'overflowX');
+      expect(symbols).toHaveProperty('0.type.properties.0.type.kind', 'external');
+      expect(symbols).toHaveProperty('0.type.properties.0.type.name', 'Property.BorderLeft');
+      expect(symbols).toHaveProperty(
+        '0.type.properties.0.type.url',
+        'https://developer.mozilla.org/en-US/docs/Web/CSS/border-left'
+      );
+    });
+  });
+
   describe('createComponent', () => {
     it('should handle "createComponent" utility function with a MethodSignature', () => {
       const program = createProgramFromSource(`
