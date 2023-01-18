@@ -265,33 +265,45 @@ describe('Canvas Kit Deprecate Stack Codemod', () => {
       const input = `
       import {Stack} from '@workday/canvas-kit-react/layout';
 
-      const CustomStack = () => {
-        return (
-          <Stack shouldWrapChildren>
-            Hello World
-          </Stack>
-        );
-      };
-
-      const AnotherStack = (props) => {
-        return <Stack {...props} />;
-      }
+      export const BasicStack = () => (
+        <Stack border="solid 2px" shouldWrapChildren>
+          Hello World
+        </Stack>
+      );
       `;
 
       const expected = `
       import {Flex} from '@workday/canvas-kit-react/layout';
 
-      const CustomStack = () => {
-        return (
-          <Flex flexWrap="wrap">
-            Hello World
-          </Flex>
-        );
-      };
+      export const BasicStack = () => (
+        <Flex border="solid 2px" >
+          Hello World
+        </Flex>
+      );
+      `;
 
-      const AnotherStack = (props) => {
-        return <Flex {...props} />;
-      }
+      expectTransform(input, expected);
+    });
+
+    it('should properly transform spacing identifiers to gap', () => {
+      const input = `
+      import {Stack} from '@workday/canvas-kit-react/layout';
+
+      export const BasicStack = () => (
+        <Stack border="solid 2px" spacing="l">
+          Hello World
+        </Stack>
+      );
+      `;
+
+      const expected = `
+      import {Flex} from '@workday/canvas-kit-react/layout';
+
+      export const BasicStack = () => (
+        <Flex border="solid 2px" gap="l">
+          Hello World
+        </Flex>
+      );
       `;
 
       expectTransform(input, expected);

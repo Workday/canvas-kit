@@ -113,22 +113,22 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
     });
   });
 
-  // Transform shouldWrapChildren prop
-  //e.g. `shouldWrapChildren` becomes `flexWrap='wrap'`
+  // Transform Stack JSXElements
+  // Transform `<Stack spacing="l">` to `<Flex gap="l">`
   root
     .findJSXElements('Stack')
-    .find(j.JSXAttribute, {
-      name: {
-        type: 'JSXIdentifier',
-        name: 'shouldWrapChildren',
-      },
-    })
+    .find(j.JSXIdentifier, {name: 'spacing'})
     .forEach(nodePath => {
-      nodePath.node.name.name = 'flexWrap';
-      nodePath.node.value = {
-        type: 'Literal',
-        value: 'wrap',
-      };
+      nodePath.node.name = 'gap';
+    });
+
+  // Transform Stack JSXElements
+  // Transform `<Stack shouldWrapChildren>` to `<Flex >`
+  root
+    .findJSXElements('Stack')
+    .find(j.JSXIdentifier, {name: 'shouldWrapChildren'})
+    .forEach(nodePath => {
+      nodePath.node.name = '';
     });
 
   // Transform Stack JSXElements
