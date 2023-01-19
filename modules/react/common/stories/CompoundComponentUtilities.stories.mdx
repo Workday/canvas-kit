@@ -4,6 +4,7 @@ import {CreateModelHook} from './examples/CreateModelHook';
 import {CreateContainer} from './examples/CreateContainer';
 import {CreateSubcomponent} from './examples/CreateSubcomponent';
 import {CreateElemPropsHook} from './examples/CreateElemPropsHook';
+import {CreateComponent} from './examples/CreateComponent';
 
 <Meta title="Hooks and Utilities/Compound Components" />
 
@@ -17,6 +18,16 @@ The following utilities are used to create and compose
 ```sh
 yarn add @workday/canvas-kit-react
 ```
+
+# createComponent
+
+`createComponent` is a great factory function that creates components to be exported. It enforces
+React ref forwarding, `as` prop, display name, and sub-components, and handles proper typing without
+much boiler plate. The return type is `Component<element, Props>` which looks like
+`Component<'div', Props>` which is a clean interface that tells you the default element that is
+used.
+
+<ExampleCodeBlock code={CreateComponent} />
 
 # createModelHook
 
