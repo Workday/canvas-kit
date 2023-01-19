@@ -8,7 +8,7 @@ import {Box} from '@workday/canvas-kit-react/layout';
 type TypeStateProp = {size: 'small' | 'medium' | 'large'};
 
 export default withSnapshotsEnabled({
-  title: 'Testing/React/Containers/Text',
+  title: 'Testing/Containers/Text',
   component: Text,
 });
 

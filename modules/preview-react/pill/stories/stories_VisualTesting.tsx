@@ -9,7 +9,7 @@ import {stateTableColumnProps} from '@workday/canvas-kit-react/button/stories/vi
 import testAvatar from './examples/test-avatar.png';
 
 export default withSnapshotsEnabled({
-  title: 'Testing/React/Preview/Pill',
+  title: 'Testing/Preview/Pill',
   component: Pill,
 });
 

@@ -11,7 +11,7 @@ import {TertiaryButton} from '@workday/canvas-kit-react/button';
 import {Container, stateTableColumnProps} from './utils';
 
 export default withSnapshotsEnabled({
-  title: 'Testing/React/Buttons/Button/Tertiary Button',
+  title: 'Testing/Buttons/Button/Tertiary Button',
   component: TertiaryButton,
 });
 

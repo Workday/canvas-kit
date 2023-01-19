@@ -10,7 +10,7 @@ import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {FormFieldLabelPosition, FormField} from '@workday/canvas-kit-react/form-field';
 
 export default withSnapshotsEnabled({
-  title: 'Testing/React/Inputs/Form Field',
+  title: 'Testing/Inputs/Form Field',
   component: FormField,
 });
 

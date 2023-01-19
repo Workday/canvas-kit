@@ -6,9 +6,9 @@ describe('Tabs', () => {
   });
 
   ['Basic', 'Named Tabs'].forEach(story => {
-    context(`given the [Components/Containers/Tabs/React, ${story}] story is rendered`, () => {
+    context(`given the [Components/Containers/Tabs, ${story}] story is rendered`, () => {
       beforeEach(() => {
-        h.stories.load('Components/Containers/Tabs/React', story);
+        h.stories.load('Components/Containers/Tabs', story);
       });
 
       it('should pass axe checks', () => {
@@ -225,9 +225,9 @@ describe('Tabs', () => {
     });
   });
 
-  context('given the [Components/Containers/Tabs/React, DisabledTab] story is rendered', () => {
+  context('given the [Components/Containers/Tabs, DisabledTab] story is rendered', () => {
     beforeEach(() => {
-      cy.loadStory('Components/Containers/Tabs/React', 'DisabledTab');
+      cy.loadStory('Components/Containers/Tabs', 'DisabledTab');
     });
 
     context('when the Disabled Tab is clicked', () => {
@@ -285,9 +285,9 @@ describe('Tabs', () => {
     });
   });
 
-  context('given the [Components/Containers/Tabs/React, DynamicTabs] story is rendered', () => {
+  context('given the [Components/Containers/Tabs, DynamicTabs] story is rendered', () => {
     beforeEach(() => {
-      h.stories.load('Components/Containers/Tabs/React', 'DynamicTabs');
+      h.stories.load('Components/Containers/Tabs', 'DynamicTabs');
     });
 
     context('when "Add Tab" is clicked', () => {
@@ -408,9 +408,9 @@ describe('Tabs', () => {
     });
   });
 
-  context('given the [Components/Containers/Tabs/React, LeftToRight] story is rendered', () => {
+  context('given the [Components/Containers/Tabs, LeftToRight] story is rendered', () => {
     beforeEach(() => {
-      h.stories.load('Components/Containers/Tabs/React', 'RightToLeft');
+      h.stories.load('Components/Containers/Tabs', 'RightToLeft');
     });
 
     context('when the first tab is active and focused', () => {
@@ -484,9 +484,9 @@ describe('Tabs', () => {
     });
   });
 
-  context('when [Components/Containers/Tabs/React, OverflowTabs] story is rendered', () => {
+  context('when [Components/Containers/Tabs, OverflowTabs] story is rendered', () => {
     beforeEach(() => {
-      h.stories.load('Components/Containers/Tabs/React', 'OverflowTabs');
+      h.stories.load('Components/Containers/Tabs', 'OverflowTabs');
     });
 
     it('should pass axe checks', () => {

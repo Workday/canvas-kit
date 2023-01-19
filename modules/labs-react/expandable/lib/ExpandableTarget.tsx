@@ -8,11 +8,11 @@ import {
   styled,
   StyledType,
 } from '@workday/canvas-kit-react/common';
-
-import {useExpandableTarget} from './hooks/useExpandableTarget';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {colors} from '@workday/canvas-kit-react/tokens';
-import {useExpandableModel} from './useExpandableModel';
+
+import {useExpandableTarget} from './hooks/useExpandableTarget';
+import {useExpandableModel} from './hooks/useExpandableModel';
 
 export interface ExpandableTargetProps extends ExtractProps<typeof Flex, never> {
   /**
