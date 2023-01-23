@@ -3,6 +3,68 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v8.3.11](https://github.com/Workday/canvas-kit/releases/tag/v8.3.11) (2023-01-17)
+
+### Components
+
+- fix(tabs): Use mask image to display fade effect on tabs ([#1705](https://github.com/Workday/canvas-kit/pull/1705)) ([@anishatulai](https://github.com/anishatulai), Anisha Tulai)
+
+
+## [v8.3.10](https://github.com/Workday/canvas-kit/releases/tag/v8.3.10) (2023-01-13)
+
+### Documentation
+
+- docs(TextArea): Update installation package name ([#1987](https://github.com/Workday/canvas-kit/pull/1987)) ([@roydelgado](https://github.com/roydelgado))
+
+
+## [v8.3.9](https://github.com/Workday/canvas-kit/releases/tag/v8.3.9) (2023-01-13)
+
+### Components
+
+- chore: Fix issue with changing wrong Layout ([#1986](https://github.com/Workday/canvas-kit/pull/1986)) ([@RayRedGoose](https://github.com/RayRedGoose))
+
+
+## [v8.3.8](https://github.com/Workday/canvas-kit/releases/tag/v8.3.8) (2023-01-10)
+
+### Documentation
+
+- fix: Remove react sub folder for form field ([#1979](https://github.com/Workday/canvas-kit/pull/1979)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v8.3.7](https://github.com/Workday/canvas-kit/releases/tag/v8.3.7) (2023-01-10)
+
+### Storybook
+
+- fix: Update links on welcome and brand logo ([#1976](https://github.com/Workday/canvas-kit/pull/1976)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v8.3.6](https://github.com/Workday/canvas-kit/releases/tag/v8.3.6) (2023-01-09)
+
+### Infrastructure
+
+- fix: Storybook sidebar highlight styling ([#1975](https://github.com/Workday/canvas-kit/pull/1975)) ([@jaclynjessup](https://github.com/jaclynjessup))
+
+
+## [v8.3.5](https://github.com/Workday/canvas-kit/releases/tag/v8.3.5) (2023-01-09)
+
+### Documentation
+
+- chore: Re organize storybook ([#1943](https://github.com/Workday/canvas-kit/pull/1943)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@jaclynjessup](https://github.com/jaclynjessup))
+  We've updated our categories and organization on storybook to better surface information.
+
+
+## [v8.3.4](https://github.com/Workday/canvas-kit/releases/tag/v8.3.4) (2023-01-09)
+
+### Testing
+
+- test(tooltip): Add delay to fix flaky placement tests on tooltips ([#1968](https://github.com/Workday/canvas-kit/pull/1968)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v7.4.7](https://github.com/Workday/canvas-kit/releases/tag/v7.4.7) (2023-01-06)
+
+### Testing
+
+- test(tooltip): Add delay to fix flaky placement tests on tooltips ([#1968](https://github.com/Workday/canvas-kit/pull/1968)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
 ## [v8.3.3](https://github.com/Workday/canvas-kit/releases/tag/v8.3.3) (2022-12-21)
 
 ### Documentation

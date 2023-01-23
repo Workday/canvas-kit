@@ -5,7 +5,7 @@ import {withSnapshotsEnabled} from '../../../../utils/storybook';
 import {ColorPicker} from '../lib/ColorPicker';
 
 export default {
-  title: 'Testing/React/Preview/Color Picker',
+  title: 'Testing/Preview/Color Picker',
   component: ColorPicker,
 };
 

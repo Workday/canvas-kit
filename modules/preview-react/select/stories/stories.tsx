@@ -96,7 +96,7 @@ export const customRenderSelected: RenderSelectedFunction = option => {
   );
 };
 
-storiesOf('Preview/Select/React/Top Label', module)
+storiesOf('Preview/Select/Top Label', module)
   .addParameters({component: Select})
   .addParameters({ReadmePath: 'preview-react/select'})
   .add('Default', () => (
@@ -159,7 +159,7 @@ storiesOf('Preview/Select/React/Top Label', module)
     </FormField>
   ));
 
-storiesOf('Preview/Select/React/Left Label', module)
+storiesOf('Preview/Select/Left Label', module)
   .addParameters({component: Select})
   .addParameters({ReadmePath: 'preview-react/select'})
   .add('Default', () => (

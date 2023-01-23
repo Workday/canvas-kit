@@ -4,7 +4,7 @@ import {Skeleton} from '@workday/canvas-kit-react/skeleton';
 import styled from '@emotion/styled';
 
 export default withSnapshotsEnabled({
-  title: 'Testing/React/Indicators/Skeleton',
+  title: 'Testing/Indicators/Skeleton',
   component: Skeleton,
 });
 

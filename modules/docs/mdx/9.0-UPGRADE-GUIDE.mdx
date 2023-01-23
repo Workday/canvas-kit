@@ -1,6 +1,6 @@
 import {Meta} from '@storybook/addon-docs';
 
-<Meta title="Welcome/Upgrade Guides/v9.0" />
+<Meta title="Guides/Upgrade Guides/v9.0" />
 
 # Canvas Kit 9.0 Upgrade Guide
 
@@ -9,6 +9,8 @@ This guide contains an overview of the changes in Canvas Kit v9. Please
 any questions.
 
 - [Codemod](#codemod)
+- [Component Deprecations](#component-deprecations)
+  - [Drawer](#drawer)
 - [Component Updates](#component-updates)
   - [Buttons](#buttons)
 
@@ -34,25 +36,63 @@ finished.
 > The codemod only works on `.js`, `.jsx`, `.ts`, and `.tsx` files. You'll need to manually edit
 > other file types (`.json`, `.mdx`, `.md`, etc.). You may need to run your linter after executing
 > the codemod, as its resulting formatting (spacing, quotes, etc.) may not match your project
-> conventions. The codemod will handle _most_ but _not all_ of the breaking changes in v9.
-> **Breaking changes handled by the codemod are marked with 🤖 in the Upgrade Guide.**
+> conventions.
+
+The codemod will handle _most_ but _not all_ of the breaking changes in v9. **Breaking changes
+handled by the codemod are marked with 🤖 in the Upgrade Guide.**
 
 **Please verify all changes made by the codemod.** As a safety precaution, we recommend committing
 the changes from the codemod as a single isolated commit (separate from other changes) so you can
 roll back more easily if necessary.
+
+## Component Deprecations
+
+### Deprecation Types
+
+#### Soft Deprecation
+
+A soft-deprecated component is still available with its full functionality, but it will have been
+renamed with a prefix to indicate its soft-deprecated status. It will also include a console warning
+announcing its deprecation. This warning will only be triggered on the component's initial render.
+
+Soft-deprecated types and utilities will also have been renamed but generally will not trigger a
+console warning.
+
+#### Hard Deprecation
+
+A hard-deprecated component or package is no longer available. You will need to follow the method
+prescribed in our Upgrade Guide to update your application. Please
+[reach out](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) to our team
+directly if you need additional help.
+
+---
+
+### Drawer
+
+<!---
+TODO: Please review this section with documenting SidePanel deprication
+-->
+
+We've [hard-deprecated](#hard-deprecation) `Drawer` and this component has been fully removed from
+Canvas Kit. Consider using the
+[Side Panel](https://workday.github.io/canvas-kit/?path=/story/preview-side-panel--basic). Be Aware
+that `SidePanel` from the Main package is planned to be replaced by the one from Preview. We suggest
+you use the Preview version of `SidePanel` until the one in Main is replaced with it.
+
+---
 
 ## Component Updates
 
 ### Buttons
 
 We've changed the default `type` attribute of all our `buttons` to be `type="button"` instead of the
-default `type` of `submit`.
+default `type="submit"`.
 
 We found an issue where the default action for `form` controls like `input` and `textarea` is to
-click the first `submit` `button` which in some cases was not a `submit` button.
+click the first `submit` `button` which in some cases is not a `submit` button.
 
-An example of this causing issues was the `Modal.CloseIcon` and `Modal.CloseButton` when the `Modal`
-was wrapped in a `form` element, the close icon would submit the `form`.
+An example of this causing issues was our `Modal.CloseIcon` and `Modal.CloseButton`. When the
+`Modal` is wrapped in a `form` element, the close icon would submit the `form`.
 
 This change affects all of our `buttons` including:
 `PrimaryButton, SecondaryButton, TertiaryButton, ToolbarButton`.

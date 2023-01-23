@@ -10,7 +10,7 @@ import {withSnapshotsEnabled, customColorTheme} from '../../../../../utils/story
 import {Select, SelectOption} from '@workday/canvas-kit-react/select';
 
 export default withSnapshotsEnabled({
-  title: 'Testing/React/Inputs/Select',
+  title: 'Testing/Inputs/Select',
   component: Select,
 });
 

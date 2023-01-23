@@ -12,7 +12,7 @@ import {
 } from '../lib/Pagination';
 
 export default withSnapshotsEnabled({
-  title: 'Testing/React/Navigation/Pagination',
+  title: 'Testing/Navigation/Pagination',
   component: Pagination,
 });
 

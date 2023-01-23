@@ -13,7 +13,7 @@ import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 import {Radio, RadioGroup} from '@workday/canvas-kit-react/radio';
 
 export default {
-  title: 'Testing/React/Popups/Modal',
+  title: 'Testing/Popups/Modal',
   component: Modal,
   parameters: {
     chromatic: {
