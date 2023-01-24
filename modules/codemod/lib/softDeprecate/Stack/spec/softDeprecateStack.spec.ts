@@ -16,6 +16,7 @@ describe('Canvas Kit Deprecate Stack Codemod', () => {
     it('should properly transform named imports from @workday/canvas-kit-react', () => {
       const input = `
         import {
+          Grid,
           Stack,
           HStack,
           VStack,
@@ -23,18 +24,10 @@ describe('Canvas Kit Deprecate Stack Codemod', () => {
           HStackProps,
           VStackProps,
           StackStyleProps,
-        } from '@workday/canvas-kit-react'
+        } from '@workday/canvas-kit-react';
       `;
       const expected = `
-        import {
-          Flex,
-          Flex,
-          Flex,
-          FlexProps,
-          FlexProps,
-          FlexProps,
-          FlexProps,
-        } from '@workday/canvas-kit-react'
+        import { Grid, Flex, FlexProps } from '@workday/canvas-kit-react';
       `;
 
       expectTransform(input, expected);
@@ -42,7 +35,7 @@ describe('Canvas Kit Deprecate Stack Codemod', () => {
 
     it('should properly transform named imports from @workday/canvas-kit-react/layout', () => {
       const input = `
-        import {
+        import {Grid,
           Stack,
           HStack,
           VStack,
@@ -50,18 +43,10 @@ describe('Canvas Kit Deprecate Stack Codemod', () => {
           HStackProps,
           VStackProps,
           StackStyleProps,
-        } from '@workday/canvas-kit-react/layout'
+        } from '@workday/canvas-kit-react';
       `;
       const expected = `
-        import {
-          Flex,
-          Flex,
-          Flex,
-          FlexProps,
-          FlexProps,
-          FlexProps,
-          FlexProps,
-        } from '@workday/canvas-kit-react/layout'
+        import { Grid, Flex, FlexProps } from '@workday/canvas-kit-react';
       `;
 
       expectTransform(input, expected);
@@ -71,7 +56,7 @@ describe('Canvas Kit Deprecate Stack Codemod', () => {
   context('when transforming identifiers', () => {
     it('should properly transform Stack JSX identifiers', () => {
       const input = `
-      import {Stack} from '@workday/canvas-kit-react/layout';
+      import {Stack, HStack} from '@workday/canvas-kit-react/layout';
 
       const CustomStack = () => {
         return (
@@ -87,7 +72,7 @@ describe('Canvas Kit Deprecate Stack Codemod', () => {
       `;
 
       const expected = `
-      import {Flex} from '@workday/canvas-kit-react/layout';
+      import { Flex } from '@workday/canvas-kit-react/layout';
 
       const CustomStack = () => {
         return (
@@ -141,7 +126,7 @@ describe('Canvas Kit Deprecate Stack Codemod', () => {
       expectTransform(input, expected);
     });
 
-    it('should properly transform VStack JSX identifiers', () => {
+    it('should properly transform VStack JSX identifiers and add flexDirection attr', () => {
       const input = `
       import {VStack} from '@workday/canvas-kit-react/layout';
 
@@ -163,14 +148,14 @@ describe('Canvas Kit Deprecate Stack Codemod', () => {
 
       const CustomVStack = () => {
         return (
-          <Flex>
+          <Flex flexDirection="column">
             Hello World
           </Flex>
         );
       };
 
       const AnotherVStack = (props) => {
-        return <Flex {...props} />;
+        return <Flex {...props} flexDirection="column" />;
       }
       `;
 

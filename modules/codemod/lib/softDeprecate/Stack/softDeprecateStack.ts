@@ -1,4 +1,12 @@
-import {API, FileInfo, Identifier, ImportDeclaration, Options} from 'jscodeshift';
+import {
+  API,
+  FileInfo,
+  Identifier,
+  ImportDeclaration,
+  ImportSpecifier,
+  JSXAttribute,
+  Options,
+} from 'jscodeshift';
 
 const mainPackage = '@workday/canvas-kit-react';
 const stackPackage = '@workday/canvas-kit-react/layout';
@@ -25,8 +33,10 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
     if (value === mainPackage) {
       (nodePath.specifiers || []).forEach(specifier => {
         if (
-          specifier.type === 'ImportSpecifier' &&
-          stackImportNames.includes(specifier.imported.name)
+          (specifier.type === 'ImportSpecifier' &&
+            stackImportNames.includes(specifier.imported.name)) ||
+          (specifier.type === 'ImportSpecifier' &&
+            stackImportProps.includes(specifier.imported.name))
         ) {
           hasStackImports = true;
         }
@@ -51,11 +61,31 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
           //  `import {HStack}` becomes `import {Flex}`
           //  `import {VStack}` becomes `import {Flex}`
           if (stackImportNames.includes(specifier.imported.name)) {
-            specifier.imported.name = `Flex`;
+            specifier.imported.name = 'Flex';
           }
         }
         return specifier;
       });
+      nodePath.value.specifiers = nodePath.value.specifiers?.filter(
+        (specifier, index, specifiers) => {
+          if (
+            specifier.type === 'ImportSpecifier' &&
+            specifier.imported &&
+            specifier.imported.type === 'Identifier'
+          ) {
+            return (
+              specifiers.findIndex(s => {
+                return (
+                  s.type === 'ImportSpecifier' &&
+                  s.imported.type === 'Identifier' &&
+                  s.imported.name === specifier.imported.name
+                );
+              }) === index
+            );
+          }
+          return true;
+        }
+      );
     });
 
   root
@@ -75,14 +105,34 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
         }
         return specifier;
       });
+      nodePath.value.specifiers = nodePath.value.specifiers?.filter(
+        (specifier, index, specifiers) => {
+          if (
+            specifier.type === 'ImportSpecifier' &&
+            specifier.imported &&
+            specifier.imported.type === 'Identifier'
+          ) {
+            return (
+              specifiers.findIndex(s => {
+                return (
+                  s.type === 'ImportSpecifier' &&
+                  s.imported.type === 'Identifier' &&
+                  s.imported.name === specifier.imported.name
+                );
+              }) === index
+            );
+          }
+          return true;
+        }
+      );
     });
 
   // Transform StackProps type references
-  // e.g. `type CustomProps = StackProps;` becomes `type CustomProps = DeprecatedStackProps;`
+  // e.g. `type CustomProps = StackProps;` becomes `type CustomProps = FlexProps;`
   // Transform HStackProps type references
-  // e.g. `type CustomProps = HStackProps;` becomes `type CustomProps = DeprecatedHStackProps;`
+  // e.g. `type CustomProps = HStackProps;` becomes `type CustomProps = FlexProps;`
   // Transform VStackProps type references
-  // e.g. `type CustomProps = VStackProps;` becomes `type CustomProps = DeprecatedVStackProps;`
+  // e.g. `type CustomProps = VStackProps;` becomes `type CustomProps = FlexProps;`
   const typeNames = ['StackProps', 'HStackProps', 'VStackProps', 'StackStyleProps'];
   root
     .find(j.TSTypeReference, {
@@ -126,10 +176,9 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
   // Transform `<Stack shouldWrapChildren>` to `<Flex >`
   root
     .findJSXElements('Stack')
-    .find(j.JSXIdentifier, {name: 'shouldWrapChildren'})
-    .forEach(nodePath => {
-      nodePath.node.name = '';
-    });
+    .find(j.JSXIdentifier)
+    .filter(path => path.node.name === 'shouldWrapChildren')
+    .remove();
 
   // Transform Stack JSXElements
   // Transform `<Stack>` to `<Flex>`
@@ -142,6 +191,21 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
   root.find(j.JSXIdentifier, {name: 'HStack'}).forEach(nodePath => {
     nodePath.node.name = 'Flex';
   });
+
+  // Creating new JSXAttribute to push in attribute array for VStack
+  // Since we're replacing VStack with Flex, it will need a
+  // flexDirection="column" added
+  const newVStackProp: JSXAttribute = {
+    type: 'JSXAttribute',
+    name: {type: 'JSXIdentifier', name: 'flexDirection'},
+    value: {type: 'Literal', value: 'column'},
+  };
+
+  root
+    .find(j.JSXOpeningElement, {name: {type: 'JSXIdentifier', name: 'VStack'}})
+    .forEach(nodePath => {
+      nodePath.node.attributes?.push(newVStackProp);
+    });
 
   // Transform VStack JSXElements
   // e.g. `<VStack>` becomes `<Flex>`
