@@ -3,7 +3,7 @@ import {CanvasSystemPropValues, SystemPropValues} from './systemProps';
 
 /**
  * ### ⚠️ Stack has been soft-deprecated and will be removed in v9 ⚠️
- * - If you would like resolve this now, run this codemod: `npx @workday/canvas-kit-codemod <transform> [path]`
+ * - If you would like resolve this now, run this codemod: `npx @workday/canvas-kit-codemod softDeprecate/Stack [path]`
  * - You can learn more about the codemod package [here](https://github.com/Workday/canvas-kit/tree/master/modules/codemod)
  * - There is more context [here]() as to why this decision was made
  * @deprecated
@@ -14,7 +14,7 @@ const selector = '& > *:not(style) ~ *:not(style)';
 
 /**
  * ### ⚠️ Stack has been soft-deprecated and will be removed in v9 ⚠️
- * - If you would like resolve this now, run this codemod: `npx @workday/canvas-kit-codemod <transform> [path]`
+ * - If you would like resolve this now, run this codemod: `npx @workday/canvas-kit-codemod softDeprecate/Stack [path]`
  * - You can learn more about the codemod package [here](https://github.com/Workday/canvas-kit/tree/master/modules/codemod)
  * - There is more context [here]() as to why this decision was made
  * @deprecated
@@ -23,7 +23,7 @@ export type StackSpacing = SystemPropValues['space'];
 
 /**
  * ### ⚠️ Stack has been soft-deprecated and will be removed in v9 ⚠️
- * - If you would like resolve this now, run this codemod: `npx @workday/canvas-kit-codemod <transform> [path]`
+ * - If you would like resolve this now, run this codemod: `npx @workday/canvas-kit-codemod softDeprecate/Stack [path]`
  * - You can learn more about the codemod package [here](https://github.com/Workday/canvas-kit/tree/master/modules/codemod)
  * - There is more context [here]() as to why this decision was made
  * @deprecated
@@ -52,7 +52,7 @@ const getSpace = (value: SystemPropValues['space']) => {
 
 /**
  * ### ⚠️ Stack has been soft-deprecated and will be removed in v9 ⚠️
- * - If you would like resolve this now, run this codemod: `npx @workday/canvas-kit-codemod <transform> [path]`
+ * - If you would like resolve this now, run this codemod: `npx @workday/canvas-kit-codemod softDeprecate/Stack [path]`
  * - You can learn more about the codemod package [here](https://github.com/Workday/canvas-kit/tree/master/modules/codemod)
  * - There is more context [here]() as to why this decision was made
  * @deprecated

@@ -5,7 +5,7 @@ const context = describe;
 const expectTransform = expectTransformFactory(transformer);
 
 describe('Canvas Kit Deprecate Stack Codemod', () => {
-  context('when transforming Stack imports', () => {
+  context('when transforming Stack import declaration', () => {
     it('should ignore non-canvas-kit imports', () => {
       const input = `import {Stack} from '@workday/some-other-library'`;
       const expected = `import {Stack} from '@workday/some-other-library'`;
@@ -14,6 +14,39 @@ describe('Canvas Kit Deprecate Stack Codemod', () => {
     });
 
     it('should properly transform named imports from @workday/canvas-kit-react', () => {
+      const input = `
+        import { Stack, StackProps } from '@workday/canvas-kit-react';
+      `;
+      const expected = `
+        import { Flex, FlexProps } from '@workday/canvas-kit-react';
+      `;
+
+      expectTransform(input, expected);
+    });
+
+    it('should ignore non-Stack imports transform named imports from @workday/canvas-kit-react', () => {
+      const input = `
+        import { Grid, Stack, StackProps } from '@workday/canvas-kit-react';
+      `;
+      const expected = `
+        import { Grid, Flex, FlexProps } from '@workday/canvas-kit-react';
+      `;
+
+      expectTransform(input, expected);
+    });
+
+    it('should not add Flex if it already exists in imports from @workday/canvas-kit-react', () => {
+      const input = `
+        import { Flex, Stack, StackProps } from '@workday/canvas-kit-react';
+      `;
+      const expected = `
+        import { Flex, FlexProps } from '@workday/canvas-kit-react';
+      `;
+
+      expectTransform(input, expected);
+    });
+
+    it('should properly transform mutliple imports from @workday/canvas-kit-react into one', () => {
       const input = `
         import {
           Grid,
@@ -34,6 +67,28 @@ describe('Canvas Kit Deprecate Stack Codemod', () => {
     });
 
     it('should properly transform named imports from @workday/canvas-kit-react/layout', () => {
+      const input = `
+        import { Stack, StackProps } from '@workday/canvas-kit-react';
+      `;
+      const expected = `
+        import { Flex, FlexProps } from '@workday/canvas-kit-react';
+      `;
+
+      expectTransform(input, expected);
+    });
+
+    it('should ignore non-Stack transforms named imports from @workday/canvas-kit-react/layout', () => {
+      const input = `
+        import { Grid, Stack, StackProps } from '@workday/canvas-kit-react';
+      `;
+      const expected = `
+        import { Grid, Flex, FlexProps } from '@workday/canvas-kit-react';
+      `;
+
+      expectTransform(input, expected);
+    });
+
+    it('should properly transform mutliple imports from @workday/canvas-kit-react/layout into one', () => {
       const input = `
         import {Grid,
           Stack,

@@ -8,7 +8,7 @@ import {stack, StackStyleProps} from './utils/stack';
 
 /**
  * ### ⚠️ Stack has been soft-deprecated and will be removed in v9 ⚠️
- * - If you would like resolve this now, run this codemod: `npx @workday/canvas-kit-codemod <transform> [path]`
+ * - If you would like resolve this now, run this codemod: `npx @workday/canvas-kit-codemod softDeprecate/Stack [path]`
  * - You can learn more about the codemod package [here](https://github.com/Workday/canvas-kit/tree/master/modules/codemod)
  * - There is more context [here]() as to why this decision was made
  * @deprecated
@@ -17,7 +17,7 @@ export type StackProps = FlexProps & StackStyleProps;
 
 /**
  * ### ⚠️ Stack has been soft-deprecated and will be removed in v9 ⚠️
- * - If you would like resolve this now, run this codemod: `npx @workday/canvas-kit-codemod <transform> [path]`
+ * - If you would like resolve this now, run this codemod: `npx @workday/canvas-kit-codemod softDeprecate/Stack [path]`
  * - You can learn more about the codemod package [here](https://github.com/Workday/canvas-kit/tree/master/modules/codemod)
  * - There is more context [here]() as to why this decision was made
  * @deprecated
@@ -49,7 +49,7 @@ const StyledStack = styled(Flex, {shouldForwardProp})<StyledType & StackProps>(s
 
 /**
  * ### ⚠️ Stack has been soft-deprecated and will be removed in v9 ⚠️
- * - If you would like resolve this now, run this codemod: `npx @workday/canvas-kit-codemod <transform> [path]`
+ * - If you would like resolve this now, run this codemod: `npx @workday/canvas-kit-codemod softDeprecate/Stack [path]`
  * - You can learn more about the codemod package [here](https://github.com/Workday/canvas-kit/tree/master/modules/codemod)
  * - There is more context [here]() as to why this decision was made
  * @deprecated
@@ -75,7 +75,7 @@ export const Stack = createComponent('div')({
 
 /**
  * ### ⚠️ Stack has been soft-deprecated and will be removed in v9 ⚠️
- * - If you would like resolve this now, run this codemod: `npx @workday/canvas-kit-codemod <transform> [path]`
+ * - If you would like resolve this now, run this codemod: `npx @workday/canvas-kit-codemod softDeprecate/Stack [path]`
  * - You can learn more about the codemod package [here](https://github.com/Workday/canvas-kit/tree/master/modules/codemod)
  * - There is more context [here]() as to why this decision was made
  * @deprecated
@@ -90,7 +90,7 @@ export interface HStackProps extends StackProps {
 
 /**
  * ### ⚠️ HStack has been soft-deprecated and will be removed in v9 ⚠️
- * - If you would like resolve this now, run this codemod: `npx @workday/canvas-kit-codemod <transform> [path]`
+ * - If you would like resolve this now, run this codemod: `npx @workday/canvas-kit-codemod softDeprecate/Stack [path]`
  * - You can learn more about the codemod package [here](https://github.com/Workday/canvas-kit/tree/master/modules/codemod)
  * - There is more context [here]() as to why this decision was made
  * @deprecated
@@ -111,7 +111,7 @@ export const HStack = createComponent('div')({
 
 /**
  * ### ⚠️ Stack has been soft-deprecated and will be removed in v9 ⚠️
- * - If you would like resolve this now, run this codemod: `npx @workday/canvas-kit-codemod <transform> [path]`
+ * - If you would like resolve this now, run this codemod: `npx @workday/canvas-kit-codemod softDeprecate/Stack [path]`
  * - You can learn more about the codemod package [here](https://github.com/Workday/canvas-kit/tree/master/modules/codemod)
  * - There is more context [here]() as to why this decision was made
  * @deprecated
@@ -126,7 +126,7 @@ export interface VStackProps extends StackProps {
 
 /**
  * ### ⚠️ VStack has been soft-deprecated and will be removed in v9 ⚠️
- * - If you would like resolve this now, run this codemod: `npx @workday/canvas-kit-codemod <transform> [path]`
+ * - If you would like resolve this now, run this codemod: `npx @workday/canvas-kit-codemod softDeprecate/Stack [path]`
  * - You can learn more about the codemod package [here](https://github.com/Workday/canvas-kit/tree/master/modules/codemod)
  * - There is more context [here]() as to why this decision was made
  * @deprecated
