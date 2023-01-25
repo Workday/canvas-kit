@@ -145,7 +145,6 @@ export const modelParser = createParserPlugin<ModelHookValue | ModelValue>((node
   ) {
     const symbol = getSymbolFromNode(parser.checker, node);
     const jsDoc = (symbol && getFullJsDocComment(parser.checker, symbol)) || defaultJSDoc;
-    const type = parser.checker.getTypeAtLocation(node.initializer.expression);
     return {
       kind: 'property',
       name: node.name.text,
@@ -204,6 +203,10 @@ export const modelParser = createParserPlugin<ModelHookValue | ModelValue>((node
   ) {
     // we have a model
     const modelName = node.name.text.replace('use', ''); //?
+
+    // get the symbol for the model hook
+    const symbol = getSymbolFromNode(parser.checker, node);
+    const jsDoc = symbol ? getFullJsDocComment(parser.checker, symbol) : defaultJSDoc;
 
     const options = node.initializer.expression.arguments[0]; //?
     // let configProps: Record<string, Value[]> = {};
@@ -276,7 +279,7 @@ export const modelParser = createParserPlugin<ModelHookValue | ModelValue>((node
       name: modelName,
       packageName: getPackageName(fileName),
       fileName,
-      ...defaultJSDoc,
+      ...jsDoc,
       type: {
         kind: 'model',
         state,
@@ -352,7 +355,7 @@ export const modelParser = createParserPlugin<ModelHookValue | ModelValue>((node
       name: `${modelName}Config`,
       packageName: getPackageName(fileName),
       fileName,
-      ...defaultJSDoc,
+      ...jsDoc,
       type: {
         kind: 'object',
         properties: (configProps['defaultConfig'] || []).concat(

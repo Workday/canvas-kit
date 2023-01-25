@@ -18,14 +18,17 @@ function getConfig() {
   return options;
 }
 
-export function createProgramFromSource(
-  source: string | {filename: string; source: string}[]
-): ts.Program {
+export function createProgramFromSource(source: string): ts.Program;
+export function createProgramFromSource(filename: string, source: string): ts.Program;
+export function createProgramFromSource(sources: {filename: string; source: string}[]): ts.Program;
+export function createProgramFromSource(...args: any[]) {
   let sources: {filename: string; source: string}[];
-  if (typeof source === 'string') {
-    sources = [{filename: 'test.ts', source}];
+  if (args.length === 2) {
+    sources = [{filename: args[0], source: args[1]}];
+  } else if (typeof args[0] === 'string') {
+    sources = [{filename: 'test.ts', source: args[0]}];
   } else {
-    sources = source;
+    sources = args[0];
   }
 
   const sourceFiles = sources.map(({filename, source}) => {

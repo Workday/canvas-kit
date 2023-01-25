@@ -1,4 +1,4 @@
-import {InterfaceValue, ObjectProperty, Value} from './docTypes';
+import {InterfaceValue, ObjectProperty, ObjectValue, Value, JSDoc, SymbolValue} from './docTypes';
 
 export interface ModelHookValue {
   kind: 'modelHook';
@@ -31,10 +31,14 @@ export interface ComponentValue {
 
 export interface EnhanceComponentValue {
   kind: 'enhancedComponent';
-  baseElement?: Value;
   props: ObjectProperty[];
-  subComponents?: InterfaceValue;
+  componentType: 'container' | 'subcomponent' | 'regular';
+  displayName?: string;
+  baseElement?: Value;
+  subComponents?: (JSDoc & {name: string; symbol: string})[];
   elemPropsHook?: Value;
+  model?: string;
+  styleComponent?: SymbolValue;
 }
 
 export interface CanvasColorValue {

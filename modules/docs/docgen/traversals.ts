@@ -105,7 +105,7 @@ export const guards = {
   isTypeReference(node: ts.Node): node is ts.TypeReferenceNode {
     return node.kind === ts.SyntaxKind.TypeReference;
   },
-  isFunctionType(node: ts.Node): node is ts.FunctionOrConstructorTypeNodeBase {
+  isFunctionType(node: ts.Node): node is ts.FunctionTypeNode {
     return node.kind === ts.SyntaxKind.FunctionType;
   },
   isConstructorType(node: ts.Node): node is ts.ConstructorTypeNode {
@@ -339,7 +339,7 @@ export const guards = {
   isFunctionDeclaration(node: ts.Node): node is ts.FunctionDeclaration {
     return node.kind === ts.SyntaxKind.FunctionDeclaration;
   },
-  isClassDeclaration(node: ts.Node): node is ts.ClassLikeDeclarationBase {
+  isClassDeclaration(node: ts.Node): node is ts.ClassDeclaration {
     return node.kind === ts.SyntaxKind.ClassDeclaration;
   },
   isInterfaceDeclaration(node: ts.Node): node is ts.InterfaceDeclaration {
@@ -423,7 +423,7 @@ export const guards = {
   isJsxClosingFragment(node: ts.Node): node is ts.JsxClosingFragment {
     return node.kind === ts.SyntaxKind.JsxClosingFragment;
   },
-  isJsxAttribute(node: ts.Node): node is ts.JsxAttributes {
+  isJsxAttribute(node: ts.Node): node is ts.JsxAttribute {
     return node.kind === ts.SyntaxKind.JsxAttribute;
   },
   isJsxAttributes(node: ts.Node): node is ts.JsxAttributes {
@@ -464,9 +464,6 @@ export const guards = {
   },
   isUnparsedPrepend(node: ts.Node): node is ts.UnparsedPrepend {
     return node.kind === ts.SyntaxKind.UnparsedPrepend;
-  },
-  isUnparsedText(node: ts.Node): node is ts.UnparsedTextLike {
-    return node.kind === ts.SyntaxKind.UnparsedText;
   },
   isUnparsedSyntheticReference(node: ts.Node): node is ts.UnparsedSyntheticReference {
     return node.kind === ts.SyntaxKind.UnparsedSyntheticReference;
@@ -631,7 +628,7 @@ export const kindsMap = {
   IndexSignature: {} as any as ts.IndexSignatureDeclaration,
   TypePredicate: {} as any as ts.TypePredicateNode,
   TypeReference: {} as any as ts.TypeReferenceNode,
-  FunctionType: {} as any as ts.FunctionOrConstructorTypeNodeBase,
+  FunctionType: {} as any as ts.FunctionTypeNode,
   ConstructorType: {} as any as ts.ConstructorTypeNode,
   TypeQuery: {} as any as ts.TypeQueryNode,
   TypeLiteral: {} as any as ts.TypeLiteralNode,
@@ -709,7 +706,7 @@ export const kindsMap = {
   VariableDeclaration: {} as any as ts.VariableDeclaration,
   VariableDeclarationList: {} as any as ts.VariableDeclarationList,
   FunctionDeclaration: {} as any as ts.FunctionDeclaration,
-  ClassDeclaration: {} as any as ts.ClassLikeDeclarationBase,
+  ClassDeclaration: {} as any as ts.ClassDeclaration,
   InterfaceDeclaration: {} as any as ts.InterfaceDeclaration,
   TypeAliasDeclaration: {} as any as ts.TypeAliasDeclaration,
   EnumDeclaration: {} as any as ts.EnumDeclaration,
@@ -737,7 +734,7 @@ export const kindsMap = {
   JsxFragment: {} as any as ts.JsxFragment,
   JsxOpeningFragment: {} as any as ts.JsxOpeningFragment,
   JsxClosingFragment: {} as any as ts.JsxClosingFragment,
-  JsxAttribute: {} as any as ts.JsxAttributes,
+  JsxAttribute: {} as any as ts.JsxAttribute,
   JsxAttributes: {} as any as ts.JsxAttributes,
   JsxSpreadAttribute: {} as any as ts.JsxSpreadAttribute,
   JsxExpression: {} as any as ts.JsxExpression,
@@ -751,7 +748,6 @@ export const kindsMap = {
   EnumMember: {} as any as ts.EnumMember,
   UnparsedPrologue: {} as any as ts.UnparsedPrologue,
   UnparsedPrepend: {} as any as ts.UnparsedPrepend,
-  UnparsedText: {} as any as ts.UnparsedTextLike,
   UnparsedSyntheticReference: {} as any as ts.UnparsedSyntheticReference,
   SourceFile: {} as any as ts.SourceFile,
   Bundle: {} as any as ts.Bundle,
@@ -951,7 +947,6 @@ const kindToString = {
   [ts.SyntaxKind.EnumMember]: 'EnumMember',
   [ts.SyntaxKind.UnparsedPrologue]: 'UnparsedPrologue',
   [ts.SyntaxKind.UnparsedPrepend]: 'UnparsedPrepend',
-  [ts.SyntaxKind.UnparsedText]: 'UnparsedText',
   [ts.SyntaxKind.UnparsedSyntheticReference]: 'UnparsedSyntheticReference',
   [ts.SyntaxKind.SourceFile]: 'SourceFile',
   [ts.SyntaxKind.Bundle]: 'Bundle',

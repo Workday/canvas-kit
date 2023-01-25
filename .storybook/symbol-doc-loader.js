@@ -3,6 +3,9 @@ const {getOptions} = require('loader-utils');
 const {validate} = require('schema-utils');
 const ts = require('typescript');
 const glob = require('glob');
+const routes = require('./routes');
+
+const routeKeys = Object.keys(routes);
 
 // we use TS files, so tell node to register them
 require('ts-node').register({});
@@ -107,7 +110,15 @@ function symbolDocLoader(source) {
   } else {
     window.__docs = (window.__docs || []).concat(__docs)
   }
-  `
+  `.replace(/\[([^\]]+)\]\((\/[^\)]+)\)/g, function replacer(_match, p1, p2) {
+      // replace all Markdown links from doc site links to Storybook links
+      const [url, hash] = p2.split('#');
+      if (routeKeys.includes(url)) {
+        return `[${p1}](?path=/docs/${routes[url]}${hash ? '#' + hash : ''})`;
+      }
+      // no match, return original
+      return `[${p1}](${p2})`;
+    })
   );
 }
 

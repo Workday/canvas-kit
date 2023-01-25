@@ -205,7 +205,7 @@ export type Component<P> = {
 
 interface RefForwardingComponent<T, P = {}> {
   (
-    props: React.PropsWithChildren<P> & {as?: React.ElementType},
+    props: React.PropsWithChildren<P>,
     /**
      * A ref to be forwarded. Pass it along to the root element. If no element was passed, this
      * will result in a `never`

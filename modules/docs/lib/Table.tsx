@@ -44,7 +44,6 @@ const TableHeader = createComponent('th')({
 
 const StyledText = styled(Text)<StyledType>({
   code: {
-    fontSize: '12px',
     fontFamily: type.properties.fontFamilies.monospace,
   },
 });
@@ -55,6 +54,7 @@ const TableData = createComponent('td')({
       <StyledText
         as={Element}
         ref={ref}
+        fontSize="small"
         fontWeight="normal"
         paddingX="xxs"
         paddingY="s"
@@ -69,7 +69,16 @@ const TableData = createComponent('td')({
 export const Table = createComponent('table')({
   displayName: 'Table',
   Component: (props: BoxProps, ref, Element) => {
-    return <Box as={Element} ref={ref} borderCollapse="collapse" width="100%" {...props} />;
+    return (
+      <Box
+        as={Element}
+        ref={ref}
+        borderCollapse="collapse"
+        width="100%"
+        {...props}
+        marginBottom="s"
+      />
+    );
   },
   subComponents: {
     Head: TableHead,

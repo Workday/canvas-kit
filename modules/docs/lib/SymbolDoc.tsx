@@ -6,11 +6,13 @@ import {colors, type} from '@workday/canvas-kit-react/tokens';
 import {Dialog, useDialogModel} from '@workday/canvas-kit-react/dialog';
 import {ExternalHyperlink, Hyperlink} from '@workday/canvas-kit-react/button';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
-import {Heading, Text} from '@workday/canvas-kit-react/text';
+import {Text} from '@workday/canvas-kit-react/text';
 import {ColorPicker} from '@workday/canvas-kit-preview-react/color-picker';
 import {Expandable} from '@workday/canvas-kit-labs-react/expandable';
 
+import {MDX, MdxJSToJSX} from './MDXElements';
 import * as types from '../docgen/docTypes';
+import {defaultJSDoc} from '../docgen/docParser';
 
 import {docs, subscribe} from './docs';
 import {Table} from './Table';
@@ -20,14 +22,24 @@ import {
   ModelHookValue,
   ModelValue,
 } from '../docgen/customTypes';
+import {createComponent} from '@workday/canvas-kit-react';
 
 export interface SymbolDocProps {
   name: string;
   fileName?: string;
+  headingStart?: number;
 }
 
 const fileNameToCategoryMap: Record<string, string[]> = {
-  Layout: ['utils/layout', 'utils/gridArea', 'utils/flexItem', 'utils/position', 'utils/space'],
+  Layout: [
+    'utils/layout',
+    'utils/gridArea',
+    'utils/gridItem',
+    'utils/flexItem',
+    'utils/position',
+    'utils/space',
+    'utils/stack',
+  ],
   Color: ['utils/color', 'utils/background'],
   Border: ['utils/border'],
   Depth: ['utils/depth'],
@@ -55,16 +67,36 @@ function groupProps(props: types.ObjectProperty[]): Record<string, types.ObjectP
     }
   }
 
-  return categories;
+  // clear out categories that don't have anything in them
+  return Object.keys(categories).reduce((result, key) => {
+    if (categories[key].length) {
+      result[key] = categories[key];
+    }
+    return result;
+  }, {} as typeof categories);
 }
 
 const RenderContext = React.createContext<'table' | 'inline'>('table');
+const HeadingLevelContext = React.createContext(3);
+const ParentComponentNameContext = React.createContext('');
+/**
+ * Used to keep track of JSDoc in subcomponent definitions.
+ *
+ * For example:
+ * ```tsx
+ * subComponents: {
+ *   // JSDoc goes here instead of on `TabsItem` for better dev experience
+ *   Item: TabsItem
+ * }
+ * ```
+ */
+const ParentComponentJSDocContext = React.createContext(defaultJSDoc);
 
 const SymbolDialog = ({value}: {value: types.SymbolValue}) => {
-  const [symbol, setSymbol] = React.useState<types.ExportedSymbol | null>(null);
+  const [symbol, setSymbol] = React.useState<types.ExportedSymbol | undefined>(undefined);
   const model = useDialogModel({
     onShow() {
-      setSymbol(docs.find(d => value.name === d.name) || null);
+      setSymbol(docs.find(d => value.name === d.name) || undefined);
     },
   });
 
@@ -79,14 +111,10 @@ const SymbolDialog = ({value}: {value: types.SymbolValue}) => {
             <span>&lt;</span>
             {value.typeParameters.map((p, index) => {
               return (
-                <>
-                  {index !== 0 && (
-                    <span className="value-punctuation" key={index}>
-                      ,{' '}
-                    </span>
-                  )}
+                <React.Fragment key={index}>
+                  {index !== 0 && <span className="value-punctuation">, </span>}
                   <Value value={p} />
-                </>
+                </React.Fragment>
               );
             })}
             <span>&gt;</span>
@@ -102,7 +130,10 @@ const SymbolDialog = ({value}: {value: types.SymbolValue}) => {
           <Dialog.Body>
             <RenderContext.Provider value="table">
               {symbol ? (
-                <SymbolDoc name={value.name} />
+                <>
+                  <MdxJSToJSX>{symbol.description}</MdxJSToJSX>
+                  <SymbolDoc name={value.name} headingStart={3} />
+                </>
               ) : (
                 <>
                   <p>Basic type information:</p>
@@ -119,11 +150,32 @@ const SymbolDialog = ({value}: {value: types.SymbolValue}) => {
   );
 };
 
+interface HeadingProps {
+  headingOffset?: number;
+}
+/**
+ * Special heading component that uses @mdx-js/react heading components, but is also aware of
+ * relative heading levels.
+ */
+const Heading = createComponent('h4')({
+  displayName: 'MDXHeading',
+  Component({headingOffset = 0, ...elemProps}: HeadingProps) {
+    const headingLevel = React.useContext(HeadingLevelContext);
+    const as = `h${headingLevel + headingOffset}` as 'h4'; // Make Typescript happy
+    return <MDX as={as} {...elemProps} />;
+  },
+});
+
 const Value = ({
   value,
+  doc,
 }: {
   value: types.Value | ModelHookValue | ModelValue | EnhanceComponentValue | CanvasColorValue;
+  doc?: types.ExportedSymbol<any>;
 }) => {
+  const parentComponentName = React.useContext(ParentComponentNameContext);
+  const parentComponentJSDoc = React.useContext(ParentComponentJSDocContext);
+  parentComponentJSDoc && console.log('doc', parentComponentJSDoc);
   const renderContext = React.useContext(RenderContext);
   switch (value.kind) {
     case 'object':
@@ -157,15 +209,10 @@ const Value = ({
           <span className="value-union">
             {value.value.map((v, index) => {
               return (
-                <>
-                  {index !== 0 && (
-                    <span className="union-separator" key={index}>
-                      {' '}
-                      |&nbsp;
-                    </span>
-                  )}
-                  <Value value={v} key={index} />
-                </>
+                <React.Fragment key={index}>
+                  {index !== 0 && <span className="union-separator"> |&nbsp;</span>}
+                  <Value value={v} />
+                </React.Fragment>
               );
             })}
           </span>
@@ -174,7 +221,7 @@ const Value = ({
     case 'parenthesis':
       return (
         <span>
-          <span className="value-punctuation">\(</span>
+          <span className="value-punctuation">(</span>
           <Value value={value.value} />
           <span className="value-punctuation">)</span>
         </span>
@@ -200,15 +247,10 @@ const Value = ({
       return (
         <RenderContext.Provider value="inline">
           {value.value.map((v, i) => (
-            <>
-              {i !== 0 && (
-                <span className="value-amp" key={i}>
-                  {' '}
-                  &amp;{' '}
-                </span>
-              )}
-              <Value key={i} value={v} />
-            </>
+            <React.Fragment key={i}>
+              {i !== 0 && <span className="value-amp"> &amp; </span>}
+              <Value value={v} />
+            </React.Fragment>
           ))}
         </RenderContext.Provider>
       );
@@ -226,17 +268,12 @@ const Value = ({
     case 'model':
       return (
         <>
-          <Heading size="medium" as="h5">
-            State
-          </Heading>
+          {doc ? <MdxJSToJSX>{doc.description}</MdxJSToJSX> : null}
+          <Heading>State</Heading>
           <PropertiesTable properties={value.state} showDefault={false} />
-          <Heading size="medium" as="h5">
-            Events
-          </Heading>
+          <Heading>Events</Heading>
           <PropertiesTable properties={value.events} showDefault={false} />
-          <Heading size="medium" as="h5">
-            Additional Properties
-          </Heading>
+          <Heading>Additional Properties</Heading>
           <PropertiesTable properties={value.modelProperties} showDefault={false} />
         </>
       );
@@ -244,9 +281,33 @@ const Value = ({
       const groups = groupProps(value.props);
       return (
         <>
+          {!parentComponentName && value.displayName ? (
+            <Heading>{value.displayName}</Heading>
+          ) : null}
+          <Heading headingOffset={1}>Usage</Heading>
+          <MdxJSToJSX>{doc?.description || parentComponentJSDoc.description || ''}</MdxJSToJSX>
+          {value.styleComponent ? (
+            <>
+              <Heading headingOffset={1}>Style Component</Heading>
+              <MDX as="p">
+                <code>
+                  <ParentComponentJSDocContext.Provider value={defaultJSDoc}>
+                    <Value value={value.styleComponent} />
+                  </ParentComponentJSDocContext.Provider>
+                </code>
+              </MDX>
+            </>
+          ) : null}
+          <Heading headingOffset={1}>Props</Heading>
+          {value.componentType === 'container' && value.model ? (
+            <MDX as="p">
+              Props extends <SymbolDialog value={{kind: 'symbol', name: `${value.model}Config`}} />.
+              If a <MDX as="code">model</MDX> is passed, model config is ignored.
+            </MDX>
+          ) : null}
           {Object.keys(groups).map(key => {
             return (
-              <>
+              <React.Fragment key={key}>
                 {key === 'Local' ? (
                   <>
                     <PropertiesTable properties={groups[key]}></PropertiesTable>
@@ -262,9 +323,33 @@ const Value = ({
                     </Expandable.Content>
                   </Expandable>
                 )}
-              </>
+              </React.Fragment>
             );
           })}
+          {value.subComponents
+            ? value.subComponents.map((c, i) => {
+                return (
+                  <React.Fragment key={i}>
+                    <Heading>
+                      {value.displayName || parentComponentName}.{c.name}
+                    </Heading>
+                    <ParentComponentNameContext.Provider
+                      value={`${value.displayName || parentComponentName}.${c.name}`}
+                    >
+                      <ParentComponentJSDocContext.Provider value={c}>
+                        <SymbolDoc name={c.symbol} />
+                      </ParentComponentJSDocContext.Provider>
+                    </ParentComponentNameContext.Provider>
+                  </React.Fragment>
+                );
+              })
+            : null}
+          {value.componentType === 'container' && value.model ? (
+            <>
+              <Heading headingOffset={-1}>Model</Heading>
+              <SymbolDoc name={value.model} />
+            </>
+          ) : null}
         </>
       );
     case 'function':
@@ -273,14 +358,10 @@ const Value = ({
           <span className="value-punctuation">(</span>
           <>
             {value.parameters.map((p, index) => (
-              <>
-                {index !== 0 && (
-                  <span className="value-punctuation" key={index}>
-                    ,{' '}
-                  </span>
-                )}
-                <Value value={p} key={index} />
-              </>
+              <React.Fragment key={index}>
+                {index !== 0 && <span className="value-punctuation">, </span>}
+                <Value value={p} />
+              </React.Fragment>
             ))}
           </>
           <span className="value-punctuation">
@@ -313,22 +394,25 @@ const Value = ({
 function getTableRows(
   properties: types.ObjectProperty[],
   showDefault = true,
+  showRequired = false,
   level: number,
   index: number
 ): JSX.Element[] {
   return properties.flatMap((property, i) => {
+    const title = property.declarations?.[0]?.filePath;
+    const propName = (
+      <Text as="code" whiteSpace={'nowrap !important' as any}>
+        {[...Array(level * 6)].map(v => '\u00A0') /* non-breaking space */}
+        {level > 0 && '\u2514\u00A0'}
+        {property.name}
+        {showRequired && property.required ? <Text color="chiliMango600">*</Text> : ''}
+      </Text>
+    );
     return [
       <Table.Row key={index + i}>
         <Table.Data color="plum600">
           {/* Use a tooltip to help with debugging where the type sources are coming from */}
-          <Tooltip title={property.declarations?.[0]?.filePath || ''}>
-            <span>
-              {[...Array(level * 6)].map(v => '\u00A0') /* non-breaking space */}
-              {level > 0 && '\u2514\u00A0'}
-              {property.name}
-              {property.required ? <Text color="chiliMango600">*</Text> : ''}
-            </span>
-          </Tooltip>
+          {title ? <Tooltip title={title}>{propName}</Tooltip> : propName}
         </Table.Data>
         <Table.Data>
           <code>
@@ -342,7 +426,7 @@ function getTableRows(
           </code>
         </Table.Data>
         <Table.Data>
-          <MarkdownToJSX>{property.description || ''}</MarkdownToJSX>
+          <MdxJSToJSX>{property.description || ''}</MdxJSToJSX>
         </Table.Data>
         {showDefault ? (
           <Table.Data>
@@ -380,15 +464,12 @@ const PropertiesInline = ({properties}: {properties: types.ObjectProperty[]}) =>
       <span>&#123;</span>
       {properties.map((p, index) => {
         return (
-          <>
+          <React.Fragment key={index}>
             <br />
             {[...Array(level * 4)].map(v => '\u00A0') /* non-breaking space */}
             &nbsp;&nbsp;&nbsp;&nbsp;
             {p.description ? (
-              <Tooltip
-                style={{maxWidth: '50em'}}
-                title={<MarkdownToJSX>{p.description}</MarkdownToJSX>}
-              >
+              <Tooltip style={{maxWidth: '50em'}} title={<MdxJSToJSX>{p.description}</MdxJSToJSX>}>
                 <span>{p.name}:</span>
               </Tooltip>
             ) : (
@@ -398,7 +479,7 @@ const PropertiesInline = ({properties}: {properties: types.ObjectProperty[]}) =>
             <LevelContext.Provider value={level + 1}>
               <Value value={p.type} />
             </LevelContext.Provider>
-          </>
+          </React.Fragment>
         );
       })}
       <br />
@@ -411,17 +492,17 @@ const PropertiesInline = ({properties}: {properties: types.ObjectProperty[]}) =>
 const PropertiesTable = ({
   properties,
   showDefault = true,
+  showRequired = false,
 }: {
   properties: types.ObjectProperty[];
   showDefault?: boolean;
+  showRequired?: boolean;
 }) => {
   if (properties.length === 0) {
     return <span>&#123;&#125;</span>;
   }
 
-  console.log('properties', properties);
-
-  const tableBody = getTableRows(properties, showDefault, 0, 0);
+  const tableBody = getTableRows(properties, showDefault, showRequired, 0, 0);
 
   return (
     <Table>
@@ -457,20 +538,13 @@ function getSymbolDocChildren(doc?: types.ExportedSymbol) {
   }
 
   if (doc && doc.type) {
-    return (
-      <>
-        <p>
-          <MarkdownToJSX>{doc.description}</MarkdownToJSX>
-        </p>
-        <Value value={doc.type} />
-      </>
-    );
+    return <Value value={doc.type} doc={doc} />;
   }
 
   return <div>Not Found</div>;
 }
 
-export const SymbolDoc = ({name, fileName, ...elemProps}: SymbolDocProps) => {
+export const SymbolDoc = ({name, fileName, headingStart = 3, ...elemProps}: SymbolDocProps) => {
   const [doc] = React.useState(() => {
     return docs.find(d => {
       return d.name === name && (fileName ? d.fileName.includes(fileName) : true);
@@ -479,5 +553,9 @@ export const SymbolDoc = ({name, fileName, ...elemProps}: SymbolDocProps) => {
 
   const children = getSymbolDocChildren(doc);
 
-  return <StyledSymbolDoc>{children}</StyledSymbolDoc>;
+  return (
+    <StyledSymbolDoc>
+      <HeadingLevelContext.Provider value={headingStart}>{children}</HeadingLevelContext.Provider>
+    </StyledSymbolDoc>
+  );
 };

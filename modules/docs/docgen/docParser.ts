@@ -9,6 +9,7 @@ import {
   FunctionValue,
   IndexSignatureValue,
   FunctionParameter,
+  PrimitiveValue,
 } from './docTypes';
 import {getExternalSymbol} from './getExternalSymbol';
 import t, {find} from './traverse';
@@ -337,6 +338,9 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
     const symbol = getSymbolFromNode(checker, node);
     const type = checker.getTypeAtLocation(node);
     const jsDoc = findDocComment(checker, symbol);
+
+    if (jsDoc.tags.default) {
+    }
 
     return {
       kind: 'property',
@@ -1023,7 +1027,35 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
       ? getValueFromNode(parser, node.type)
       : getValueFromType(parser, type) || unknownValue(safeGetText(checker, node));
 
+    'here'; //?
+
     const defaultValue = node.initializer ? getValueFromNode(parser, node.initializer) : undefined;
+
+    /**
+     * Set default values if an object binding pattern is found. We do this at the Parameter level,
+     * because we have all the info here.
+     *
+     * For example:
+     * ```ts
+     * function A({ a = 'a', b}: Params)
+     * ```
+     *
+     * In this example, the ObjectBindingPattern is `{ a = 'a', b }`
+     */
+    if (t.isObjectBindingPattern(node.name)) {
+      const defaults = getDefaultsFromObjectBindingParameter(parser, node);
+      if (
+        typeInfo.kind === 'typeLiteral' ||
+        typeInfo.kind === 'interface' ||
+        typeInfo.kind === 'object'
+      ) {
+        typeInfo.properties.forEach(p => {
+          if (!p.defaultValue && defaults[p.name]) {
+            p.defaultValue = defaults[p.name];
+          }
+        });
+      }
+    }
 
     return {
       kind: 'parameter',
@@ -1034,6 +1066,19 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
       rest: !!node.dotDotDotToken,
       ...jsDoc,
     };
+  }
+
+  /**
+   * A call expression is an expression calling a function. In this case, we want to get the signature
+   * and get a type for the return type
+   */
+  if (t.isCallExpression(node)) {
+    const type = checker.getTypeAtLocation(node);
+    checker.typeToString(type); //?
+    const value = getValueFromType(parser, type);
+    if (value) {
+      return value;
+    }
   }
 
   // if (ts.isTypeNode(node)) {
@@ -1141,6 +1186,87 @@ function isTupleType(type: ts.Type): type is ts.TupleTypeReference {
   return !!((type as any).target?.objectFlags & ts.ObjectFlags.Tuple);
 }
 
+/**
+ * A parameter might represent a `ObjectBindingPattern` which can be used to set defaults. This will
+ * return all defaults found within the `ObjectBindingPattern` and return them as a map of the
+ * property name to the `Value`. These defaults can be used to piece together a default. Also
+ * `getDefaultFromTags` can be used to get defaults from JSDoc tags.
+ */
+export function getDefaultsFromObjectBindingParameter(
+  parser: DocParser,
+  node: ts.ParameterDeclaration
+): Record<string, Value> {
+  if (t.isObjectBindingPattern(node.name)) {
+    return node.name.elements.reduce((result, element) => {
+      if (t.isBindingElement(element) && t.isIdentifier(element.name) && element.initializer) {
+        // this might change in the future. If the default value isn't a literal expression, it is
+        // much harder to deal with. For example, `{a = 'a'}` instead of `{a = getA(someInput)}`.
+        // Until we figure out how to mark defaults for non-literals, this might be a limitation.
+        if (ts.isLiteralExpression(element.initializer)) {
+          result[element.name.escapedText as string] = parser.getValueFromNode(element.initializer);
+        }
+      }
+      return result;
+    }, {} as Record<string, Value>);
+  }
+
+  return {};
+}
+
+/**
+ * Get defaults from JSDoc tags if available and do some simple processing to extract useful type
+ * information. JSDoc tags are not type checked, so our processing is limited.
+ */
+export function getDefaultFromTags(tags: ts.JSDocTagInfo[]): Value | undefined {
+  for (const tag of tags) {
+    if (tag.name === 'default') {
+      const text = (tag.text || '').replace('{', '').replace('}', ''); //?
+      if (
+        [
+          'string',
+          'number',
+          'null',
+          'undefined',
+          'boolean',
+          'any',
+          'void',
+          'unknown',
+          'any',
+        ].includes(text)
+      ) {
+        return {kind: 'primitive', value: text as PrimitiveValue['value']};
+      }
+      if (['true', 'false'].includes(text)) {
+        return {kind: 'boolean', value: Boolean(text)};
+      }
+      if (!Number.isNaN(Number(text))) {
+        return {kind: 'number', value: Number(text)};
+      }
+      if (/^['"][a-z0-9]+['"]$/.test(text)) {
+        return {kind: 'string', value: text.replace(/["']/g, '')};
+      }
+      return {kind: 'symbol', name: text, value: text};
+    }
+  }
+  return;
+}
+
+/**
+ * An index signature is like a "leftover" of an object. For example:
+ *
+ * ```ts
+ * interface A {
+ *   a: string,
+ *   b: string,
+ *   [key: string]: string
+ * }
+ * ```
+ *
+ * The index signature is `[key: string]: string`. It allows an interface to specify valid
+ * additional properties even though the interface has specific properties defined. Index signature
+ * types depend on the Typescript version, so this function will have to be updated to support the
+ * correct version of Typescript.
+ */
 function getIndexSignatureFromType(
   parser: DocParser,
   type: ts.Type
@@ -1183,8 +1309,7 @@ export function getValueFromType(
 ): Value | undefined {
   const {checker} = parser;
   const originalNodeKind = node?.kind;
-  const typeToString = checker.typeToString(type);
-  typeToString; //?
+  const typeToString = checker.typeToString(type); //?
 
   // check if the node is an external symbol
   // TODO: This won't work if the symbol contains a generic
@@ -1234,7 +1359,7 @@ export function getValueFromType(
   // service uses for the tooltips when hovering over text in your IDE. We try to go from Type to
   // Node whenever possible, but there are some cases where interacting directly with the types is
   // preferred. The union example is one of such examples.
-  const typeNode = checker.typeToTypeNode(type, node, undefined);
+  const typeNode = checker.typeToTypeNode(type, node, ts.NodeBuilderFlags.NoTruncation);
   // t.getKindNameFromNode(typeNode); //?
   typeNode; //?
 

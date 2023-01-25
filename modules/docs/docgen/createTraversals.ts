@@ -27,9 +27,9 @@ pairs?.forEach(pair => {
   if (matches) {
     const syntaxKind = matches[1];
 
-    const line = lines.findIndex(l => l.includes(`kind: SyntaxKind.${syntaxKind}`));
+    const line = lines.findIndex(l => l.includes(`kind: SyntaxKind.${syntaxKind};`));
     if (line > 0) {
-      const matches = lines[line - 1].match(/export interface ([a-z]+)/i);
+      const matches = lines[line - 1].match(/export interface ([a-z]+)\s/i);
 
       if (matches) {
         guardPairs.push([syntaxKind, matches[1]]);

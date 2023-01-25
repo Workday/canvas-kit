@@ -720,7 +720,7 @@ describe('docParser', () => {
       expect(docs).toHaveProperty('0.type.properties.0.type.parameters.0.type.value', 'string');
     });
 
-    it.only('should handle ObjectLiteralExpression for defaultValue', () => {
+    it('should handle ObjectLiteralExpression for defaultValue', () => {
       const program = createProgramFromSource(`
         const d = 'D'
         const e = {e: 'E'}
@@ -743,7 +743,7 @@ describe('docParser', () => {
       expect(docs).toHaveProperty('0.type.properties.0.defaultValue.properties.2.name', 'e');
     });
 
-    it.only('should handle ArrayLiteralExpression for defaultValue', () => {
+    it('should handle ArrayLiteralExpression for defaultValue', () => {
       const program = createProgramFromSource(`
         const c = ['c' as const]
         export const a = {
@@ -763,6 +763,24 @@ describe('docParser', () => {
       expect(docs).toHaveProperty('0.type.properties.0.defaultValue.value.1.value', 'c');
       expect(docs).toHaveProperty('0.type.properties.0.defaultValue.value.2.kind', 'string');
       expect(docs).toHaveProperty('0.type.properties.0.defaultValue.value.2.value', 'd');
+    });
+
+    it('should handle call expressions for defaultValue', () => {
+      const program = createProgramFromSource(`
+        export const a = {
+          a: getA();
+        }
+
+        function getA() { return 'a' }
+      `);
+      const docs = parse(program, 'test.ts'); //?
+
+      expect(docs).toHaveProperty('0.name', 'a');
+      expect(docs).toHaveProperty('0.type.kind', 'object');
+      expect(docs).toHaveProperty('0.type.properties.0.kind', 'property');
+      expect(docs).toHaveProperty('0.type.properties.0.name', 'a');
+      expect(docs).toHaveProperty('0.type.properties.0.defaultValue.kind', 'primitive');
+      expect(docs).toHaveProperty('0.type.properties.0.defaultValue.value', 'string');
     });
 
     it('should handle exported objects with method declarations', () => {
@@ -880,8 +898,7 @@ describe('docParser', () => {
     });
   });
 
-  // Figure out how to extract defaults from ObjectBindingPatterns later...
-  it.skip('should handle functions with required parameters', () => {
+  it('should handle functions with defaulted object binding property parameters with literal values', () => {
     const program = createProgramFromSource(`
       export function myFoo({foo = 'bar'}: {foo: string}): boolean {
         return false
@@ -892,11 +909,34 @@ describe('docParser', () => {
     expect(docs).toHaveProperty('0.type.kind', 'function');
     expect(docs).toHaveProperty('0.type.parameters.0.kind', 'parameter');
     expect(docs).toHaveProperty('0.type.parameters.0.type.kind', 'typeLiteral');
-    expect(docs).toHaveProperty('0.type.parameters.0.type.properties.0', 'foo');
     expect(docs).toHaveProperty('0.type.parameters.0.type.properties.0.name', 'foo');
     expect(docs).toHaveProperty('0.type.parameters.0.type.properties.0.kind', 'property');
     expect(docs).toHaveProperty('0.type.parameters.0.type.properties.0.type.kind', 'primitive');
     expect(docs).toHaveProperty('0.type.parameters.0.type.properties.0.type.value', 'string');
+    expect(docs).toHaveProperty(
+      '0.type.parameters.0.type.properties.0.defaultValue.kind',
+      'string'
+    );
+    expect(docs).toHaveProperty('0.type.parameters.0.type.properties.0.defaultValue.value', 'bar');
+  });
+
+  it('should handle functions with defaulted object binding property parameters with non-literal values', () => {
+    const program = createProgramFromSource(`
+      const bar = 'bar';
+      export function myFoo({foo = bar}: {foo: string}): boolean {
+        return false
+      }
+    `);
+    const docs = parse(program, 'test.ts'); //?
+    expect(docs).toHaveProperty('0.name', 'myFoo');
+    expect(docs).toHaveProperty('0.type.kind', 'function');
+    expect(docs).toHaveProperty('0.type.parameters.0.kind', 'parameter');
+    expect(docs).toHaveProperty('0.type.parameters.0.type.kind', 'typeLiteral');
+    expect(docs).toHaveProperty('0.type.parameters.0.type.properties.0.name', 'foo');
+    expect(docs).toHaveProperty('0.type.parameters.0.type.properties.0.kind', 'property');
+    expect(docs).toHaveProperty('0.type.parameters.0.type.properties.0.type.kind', 'primitive');
+    expect(docs).toHaveProperty('0.type.parameters.0.type.properties.0.type.value', 'string');
+    expect(docs).toHaveProperty('0.type.parameters.0.type.properties.0.defaultValue', undefined);
   });
 
   it('should handle arrow functions with required parameters', () => {
