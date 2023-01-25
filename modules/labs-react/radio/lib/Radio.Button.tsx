@@ -1,8 +1,6 @@
 import React from 'react';
-
 import {spaceNumbers} from '@workday/canvas-kit-react/tokens';
 import {styled, Themeable, createSubcomponent, useUniqueId} from '@workday/canvas-kit-react/common';
-
 import {useRadioModel} from './hooks/useRadioModel';
 
 interface RadioButtonContextInterface {
@@ -19,8 +17,10 @@ interface RadioButtonContextInterface {
   variant?: 'inverse' | undefined;
 }
 export interface RadioButtonProps extends RadioButtonContextInterface, Themeable {
+  /**
+   * The Radio input and label children of RadioButton
+   */
   children?: React.ReactNode;
-  // model?: RadioModel;
   /**
    * If true, set the Radio button to the checked state.
    * @default false

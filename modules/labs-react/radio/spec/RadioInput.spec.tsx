@@ -94,19 +94,4 @@ describe('RadioInput', () => {
       expect(getByRole('radio')).toHaveProperty('id', uniqueId);
     });
   });
-
-  //TODO: fix test after fixing radio group callback issue
-
-  //   describe('when clicked', () => {
-  //     it('should call a callback function', () => {
-  //       const {getByRole} = render(
-  //         <RadioGroup.Button>
-  //           <RadioGroup.Input onChange={cb} value="email"></RadioGroup.Input>
-  //           <RadioGroup.Label>Email</RadioGroup.Label>
-  //         </RadioGroup.Button>
-  //       );
-  //       fireEvent.click(getByRole('radio'));
-  //       expect(cb).toHaveBeenCalledTimes(1);
-  //     });
-  //   });
 });
