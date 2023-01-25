@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v8.4.0](https://github.com/Workday/canvas-kit/releases/tag/v8.4.0) (2023-01-25)
+
+### Codemods
+
+- feat: Soft Deprecate Stack ([#1981](https://github.com/Workday/canvas-kit/pull/1981)) ([@josh-bagwell](https://github.com/josh-bagwell))
+
+
 ## [v8.3.12](https://github.com/Workday/canvas-kit/releases/tag/v8.3.12) (2023-01-24)
 
 ### Components
