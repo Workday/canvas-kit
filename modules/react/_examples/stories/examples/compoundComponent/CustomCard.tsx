@@ -104,7 +104,7 @@ const CustomCard = createContainer(Card)({
 /**
  * Usage
  */
-export const Basic = () => {
+export const Template = () => {
   const [icon, setIcon] = React.useState('🌝');
   const model = useCustomCardModel({
     onToggleTheme: (_, {theme: previousTheme}) => setIcon(previousTheme === 'dark' ? '🌚' : '🌝'),
