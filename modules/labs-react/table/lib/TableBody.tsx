@@ -13,7 +13,7 @@ export interface TableBodyProps extends BoxProps {
   children?: React.ReactNode;
 }
 
-export const TableBody = createContainer('thead')({
+export const TableBody = createContainer('tbody')({
   displayName: 'TableBody',
   subComponents: {
     Tr: TableRow,
