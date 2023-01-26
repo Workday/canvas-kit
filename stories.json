@@ -5419,6 +5419,20 @@
         "__isArgsStory": false
       }
     },
+    "examples-compoundcomponent--template": {
+      "id": "examples-compoundcomponent--template",
+      "name": "Template",
+      "title": "Examples/CompoundComponent",
+      "importPath": "./modules/react/_examples/stories/CompoundComponent.stories.mdx",
+      "kind": "Examples/CompoundComponent",
+      "story": "Template",
+      "parameters": {
+        "fileName": "./modules/react/_examples/stories/CompoundComponent.stories.mdx",
+        "framework": "react",
+        "__id": "examples-compoundcomponent--template",
+        "__isArgsStory": false
+      }
+    },
     "examples-cookiebanner--basic": {
       "id": "examples-cookiebanner--basic",
       "name": "Basic",
