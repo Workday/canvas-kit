@@ -51,6 +51,7 @@
     "@workday/design-assets-types": "^0.2.8"
   },
   "devDependencies": {
+    "@tanstack/react-table": "^8.7.8",
     "@workday/canvas-accent-icons-web": "^3.0.0",
     "@workday/canvas-kit-labs-react": "^8.4.1",
     "formik": "^2.2.9",
