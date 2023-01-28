@@ -19,8 +19,16 @@ export interface ModelValue {
 
 export interface ElemPropsHookValue {
   kind: 'elemPropsHook';
-  parameters: ObjectProperty[];
-  returnType: null;
+  name?: string;
+  model: string;
+  elemProps: ObjectProperty[];
+  returnProps: ObjectProperty[];
+}
+
+export interface ComposedElemPropsHookValue {
+  kind: 'composedElemPropsHook';
+  name: string;
+  composes: (SymbolValue | ElemPropsHookValue)[];
 }
 
 export interface ComponentValue {
@@ -36,7 +44,7 @@ export interface EnhanceComponentValue {
   displayName?: string;
   baseElement?: Value;
   subComponents?: (JSDoc & {name: string; symbol: string})[];
-  elemPropsHook?: Value;
+  elemPropsHook?: string;
   model?: string;
   styleComponent?: SymbolValue;
 }

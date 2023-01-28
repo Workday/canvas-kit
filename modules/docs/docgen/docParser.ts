@@ -375,7 +375,7 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
 
     return {
       kind: 'property',
-      name: symbol?.name || '',
+      name: symbol?.name || (node.name as any).text || '',
       type: signature,
       ...jsDoc,
     };
@@ -393,37 +393,7 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
     } else {
       // throw Error('Signature not found');
       'here'; //?
-      // We couldn't find a signature, but we can make one
-      const parameters = node.parameters.map(p => getSymbolFromNode(checker, p)!);
-      node; //?
-      const typeParameters = node.typeParameters?.map(
-        t => checker.getTypeAtLocation(t) as ts.TypeParameter
-      );
-      return getValueFromSignature(parser, node, {
-        parameters,
-        declaration: node,
-        typeParameters,
-        getDeclaration() {
-          return node;
-        },
-        getParameters() {
-          return parameters;
-        },
-        getTypeParameters() {
-          return typeParameters;
-        },
-        getReturnType() {
-          return checker.getTypeAtLocation(node.type);
-        },
-        getDocumentationComment() {
-          const symbol = getSymbolFromNode(checker, node)!;
-          return symbol.getDocumentationComment(checker);
-        },
-        getJsDocTags() {
-          const symbol = getSymbolFromNode(checker, node)!;
-          return symbol.getJsDocTags();
-        },
-      });
+      return getValueFromSignature(parser, node, generateSignatureFromTypeNode(parser, node)!);
     }
   }
 
@@ -487,8 +457,14 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
   if (t.isPropertySignature(node)) {
     const symbol = getSymbolFromNode(checker, node);
     const jsDoc = findDocComment(checker, symbol);
+    // Get the name of the property - it could be a symbol or have a `name` that is an identifier or string literal
     const name =
-      symbol?.name || ((t.isIdentifier(node.name) ? node.name.escapedText : '') as string);
+      symbol?.name ||
+      ((t.isIdentifier(node.name)
+        ? node.name.text
+        : t.isStringLiteral(node.name)
+        ? node.name.text
+        : '') as string);
     return {
       kind: 'property',
       name,
@@ -990,6 +966,7 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
    */
   if (t.isIdentifier(node)) {
     if (isExportedSymbol(checker, node)) {
+      node.text; //?
       const symbol = getSymbolFromNode(checker, node);
       const declaration = getValueDeclaration(symbol);
       return {
@@ -1556,8 +1533,9 @@ export function getValueFromType(
   return;
 }
 
-const unknownValue = (nodeText: string) =>
-  ({kind: 'unknown', value: 'unknown', text: nodeText} as UnknownValue);
+export function unknownValue(nodeText: string) {
+  return {kind: 'unknown', value: 'unknown', text: nodeText} as UnknownValue;
+}
 
 function isValue(input: any): input is Value {
   return typeof input === 'object' && !!input.type;
@@ -1690,14 +1668,53 @@ function getValueFromSignature(
   };
 }
 
+function generateSignatureFromTypeNode(parser: DocParser, node: ts.Node): ts.Signature | undefined {
+  if (t.isFunctionType(node) || t.isMethodSignature(node)) {
+    const parameters = node.parameters.map(
+      p => (getSymbolFromNode(parser.checker, p) || getSymbolFromNode(parser.checker, p.name))!
+    ); //?
+    const typeParameters = node.typeParameters?.map(
+      t => parser.checker.getTypeAtLocation(t) as ts.TypeParameter
+    );
+    return {
+      parameters,
+      declaration: node as ts.SignatureDeclaration,
+      typeParameters,
+      getDeclaration() {
+        return node as ts.SignatureDeclaration;
+      },
+      getParameters() {
+        return parameters;
+      },
+      getTypeParameters() {
+        return typeParameters;
+      },
+      getReturnType() {
+        return parser.checker.getTypeAtLocation(node.type || node);
+      },
+      getDocumentationComment() {
+        const symbol = getSymbolFromNode(parser.checker, node)!;
+        return symbol.getDocumentationComment(parser.checker);
+      },
+      getJsDocTags() {
+        const symbol = getSymbolFromNode(parser.checker, node)!;
+        return symbol.getJsDocTags();
+      },
+    };
+  }
+
+  return undefined;
+}
+
 export function getValueFromSignatureNode(
   parser: DocParser,
   declaration: ts.SignatureDeclaration
 ): Value {
   const {checker} = parser;
-  const signature = checker.getSignatureFromDeclaration(declaration);
+  const signature =
+    checker.getSignatureFromDeclaration(declaration) ||
+    generateSignatureFromTypeNode(parser, declaration);
   if (signature) {
-    signature; //?
     return getValueFromSignature(parser, declaration, signature);
   }
   return unknownValue(safeGetText(checker, declaration));

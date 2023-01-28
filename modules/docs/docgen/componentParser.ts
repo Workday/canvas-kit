@@ -1,5 +1,10 @@
 import ts from 'typescript';
-import {EnhanceComponentValue, CanvasColorValue} from './customTypes';
+import {
+  EnhanceComponentValue,
+  CanvasColorValue,
+  ElemPropsHookValue,
+  ComposedElemPropsHookValue,
+} from './customTypes';
 
 import {
   createParserPlugin,
@@ -11,8 +16,9 @@ import {
   getPackageName,
   getSymbolFromNode,
   getValueDeclaration,
+  unknownValue,
 } from './docParser';
-import {ObjectProperty, SymbolValue, Value} from './docTypes';
+import {FunctionParameter, FunctionValue, ObjectProperty, SymbolValue, Value} from './docTypes';
 import t from './traverse';
 
 /** Track if we've set a custom color symbol yet */
@@ -96,213 +102,330 @@ function getBaseElement(
   return undefined;
 }
 
-export const componentParser = createParserPlugin<EnhanceComponentValue | CanvasColorValue>(
-  (node, parser) => {
-    t.getKindNameFromNode(node); //?
+export const componentParser = createParserPlugin<
+  EnhanceComponentValue | CanvasColorValue | ElemPropsHookValue | ComposedElemPropsHookValue
+>((node, parser) => {
+  t.getKindNameFromNode(node); //?
 
-    /**
-     * Find all occurrences of `SystemPropValues['color']` and rewrite to a custom color symbol
-     */
+  /**
+   * Find all occurrences of `SystemPropValues['color']` and rewrite to a custom color symbol
+   */
+  if (
+    t.isIndexedAccessType(node) &&
+    t.isTypeReference(node.objectType) &&
+    t.isIdentifier(node.objectType.typeName) &&
+    node.objectType.typeName.escapedText === 'SystemPropValues' &&
+    t.isLiteralType(node.indexType) &&
+    t.isStringLiteral(node.indexType.literal) &&
+    node.indexType.literal.text === 'color'
+  ) {
+    const fileName = node.getSourceFile()?.fileName || '';
+
+    if (shouldCreateColorSymbol) {
+      shouldCreateColorSymbol = false;
+      parser.symbols.push({
+        name: 'CanvasColorTokens',
+        packageName: getPackageName(fileName),
+        fileName,
+        ...defaultJSDoc,
+        type: {
+          kind: 'canvasColor',
+        },
+      });
+    }
+    return {kind: 'symbol', name: 'CanvasColorTokens'};
+  }
+
+  /**
+   * Find all occurrences of `Property.X` and convert to external links to MDN
+   */
+  if (
+    t.isTypeReference(node) &&
+    t.isQualifiedName(node.typeName) &&
+    t.isIdentifier(node.typeName.left) &&
+    node.typeName.left.text === 'Property' &&
+    t.isIdentifier(node.typeName.right)
+  ) {
+    return {
+      kind: 'external',
+      name: `${node.typeName.left.text}.${node.typeName.right.text}`,
+      url: `https://developer.mozilla.org/en-US/docs/Web/CSS/${dashCase(node.typeName.right.text)}`,
+    };
+  }
+
+  /**
+   * Function to get a elemPropsHook value out of a call expression. Breaking this out into a
+   * function makes it reusable for composed elemProps hooks.
+   */
+  function getElemPropsHookValue(node: ts.Node, name?: string) {
     if (
-      t.isIndexedAccessType(node) &&
-      t.isTypeReference(node.objectType) &&
-      t.isIdentifier(node.objectType.typeName) &&
-      node.objectType.typeName.escapedText === 'SystemPropValues' &&
-      t.isLiteralType(node.indexType) &&
-      t.isStringLiteral(node.indexType.literal) &&
-      node.indexType.literal.text === 'color'
+      t.isCallExpression(node) &&
+      t.isCallExpression(node.expression) &&
+      t.isIdentifier(node.expression.expression) &&
+      node.expression.expression.text === 'createElemPropsHook'
     ) {
-      const fileName = node.getSourceFile()?.fileName || '';
+      // first argument in `createElemPropsHook`
+      const modelArgument = node.expression.arguments[0];
+      // first argument in the curried function of `createElemPropsHook`
+      if (modelArgument && t.isIdentifier(modelArgument)) {
+        const modelName = modelArgument.text.replace('use', ''); //?
+        const type = parser.checker.getTypeAtLocation(node.arguments[0]);
+        const signature = type.getCallSignatures()[0];
+        const elemProps = getElemPropsFromElemPropsHook(parser, signature);
+        const returnType = getReturnTypeFromElemPropsHook(parser, signature);
 
-      if (shouldCreateColorSymbol) {
-        shouldCreateColorSymbol = false;
-        parser.symbols.push({
-          name: 'CanvasColorTokens',
-          packageName: getPackageName(fileName),
-          fileName,
-          ...defaultJSDoc,
-          type: {
-            kind: 'canvasColor',
+        const parameters: FunctionParameter[] = [
+          {
+            kind: 'parameter',
+            name: 'model',
+            ...defaultJSDoc,
+            type: {
+              kind: 'symbol',
+              name: modelName,
+            },
+            required: true,
           },
-        });
-      }
-      return {kind: 'symbol', name: 'CanvasColorTokens'};
-    }
-
-    /**
-     * Find all occurrences of `Property.X` and convert to external links to MDN
-     */
-    if (
-      t.isTypeReference(node) &&
-      t.isQualifiedName(node.typeName) &&
-      t.isIdentifier(node.typeName.left) &&
-      node.typeName.left.text === 'Property' &&
-      t.isIdentifier(node.typeName.right)
-    ) {
-      return {
-        kind: 'external',
-        name: `${node.typeName.left.text}.${node.typeName.right.text}`,
-        url: `https://developer.mozilla.org/en-US/docs/Web/CSS/${dashCase(
-          node.typeName.right.text
-        )}`,
-      };
-    }
-
-    /**
-     * Find all occurrences of:
-     * ```ts
-     * export const {ComponentName} = createComponent({defaultElement})({
-     *   displayName: {displayName},
-     *   Component(elemProps: {ComponentProps}) {
-     *     return <... />
-     *   }
-     * })
-     * ```
-     *
-     * It will also try to figure out default props:
-     * - @default {defaultValue}
-     * - `{prop: defaultValue}: Props`
-     * - `<Element prop={defaultProp} {...elemProps} />
-     */
-    if (
-      t.isVariableDeclaration(node) &&
-      node.initializer &&
-      t.isCallExpression(node.initializer) &&
-      t.isCallExpression(node.initializer.expression) &&
-      t.isIdentifier(node.initializer.expression.expression) &&
-      node.initializer.expression.expression.text === 'createComponent'
-    ) {
-      const baseElement = getBaseElement(parser, node.initializer.expression.arguments[0]);
-
-      /**
-       * options is the object containing the `Component` function
-       * ```ts
-       * export const MyComponent = createComponent('button')({
-       *   displayName: 'MyComponent',
-       *   Component() {...}
-       * })
-       * ```
-       */
-      const options = node.initializer.arguments[0]; //?
-      if (options && t.isObjectLiteralExpression(options)) {
-        const signature = options.properties.find(
-          n => n.name && t.isIdentifier(n.name) && n.name.text === 'Component'
-        );
-        const displayName = getDisplayName(parser, options);
-        const subComponents = getSubcomponents(parser, options);
-
-        if (signature) {
-          'here'; //?
-          const componentExpression = t.isMethodDeclaration(signature)
-            ? signature
-            : t.isPropertyAssignment(signature)
-            ? signature.initializer
-            : undefined;
-
-          if (componentExpression && ts.isFunctionLike(componentExpression)) {
-            const type = parser.checker.getTypeAtLocation(componentExpression.parameters[0]);
-            const props = getComponentProps(parser, componentExpression, type, baseElement);
-            const styleComponent = getStyleComponent(displayName, props);
-
-            return {
-              kind: 'enhancedComponent',
-              componentType: 'regular',
-              displayName,
-              props: getNonDefaultNonLayoutProps(displayName, props),
-              baseElement,
-              subComponents,
-              styleComponent,
-            } as EnhanceComponentValue;
-          }
-        }
-      }
-    }
-
-    if (
-      t.isVariableDeclaration(node) &&
-      node.initializer &&
-      t.isCallExpression(node.initializer) &&
-      t.isCallExpression(node.initializer.expression) &&
-      t.isCallExpression(node.initializer.expression.expression) &&
-      t.isIdentifier(node.initializer.expression.expression.expression) &&
-      node.initializer.expression.expression.expression.text === 'createContainer'
-    ) {
-      'here'; //?
-      const baseElement = getBaseElement(
-        parser,
-        node.initializer.expression.expression.arguments[0]
-      );
-      const options = node.initializer.expression.arguments[0];
-      const modelName = getModelName(parser, options); //?
-      const displayName = getDisplayName(parser, options);
-      const subComponents = getSubcomponents(parser, options);
-      t.getKindNameFromNode(options); //?
-      const signature = node.initializer.arguments[0];
-      if (ts.isFunctionLike(signature) && modelName) {
-        const type = node.initializer.typeArguments
-          ? parser.checker.getTypeAtLocation(node.initializer.typeArguments[0])
-          : undefined;
-        const props = type ? getComponentProps(parser, signature, type, baseElement) : []; //?
-        props.push(getModelProp(parser, modelName));
-        props.push(getElemProp(parser, modelName));
-        const styleComponent = getStyleComponent(displayName, props);
+          {
+            kind: 'parameter',
+            name: 'elemProps',
+            ...defaultJSDoc,
+            type: elemProps,
+            required: false,
+          },
+          {
+            kind: 'parameter',
+            name: 'ref',
+            ...defaultJSDoc,
+            type: {
+              kind: 'external',
+              name: 'React.Ref',
+              url: 'https://reactjs.org/docs/refs-and-the-dom.html',
+            },
+            required: false,
+          },
+        ];
 
         return {
-          kind: 'enhancedComponent',
-          componentType: 'container',
-          displayName,
-          props: getNonDefaultNonLayoutProps(displayName, props),
-          baseElement,
-          model: modelName,
-          styleComponent,
-          subComponents,
-        };
-      }
-    }
-
-    if (
-      t.isVariableDeclaration(node) &&
-      node.initializer &&
-      t.isCallExpression(node.initializer) &&
-      t.isCallExpression(node.initializer.expression) &&
-      t.isCallExpression(node.initializer.expression.expression) &&
-      t.isIdentifier(node.initializer.expression.expression.expression) &&
-      node.initializer.expression.expression.expression.text === 'createSubcomponent'
-    ) {
-      'here'; //?
-      const baseElement = getBaseElement(
-        parser,
-        node.initializer.expression.expression.arguments[0]
-      );
-      const options = node.initializer.expression.arguments[0];
-      const modelName = getModelName(parser, options); //?
-      const subComponents = getSubcomponents(parser, options);
-      const displayName = getDisplayName(parser, options);
-      const signature = node.initializer.arguments[0];
-      if (ts.isFunctionLike(signature) && modelName) {
-        const type = node.initializer.typeArguments
-          ? parser.checker.getTypeAtLocation(node.initializer.typeArguments[0])
-          : undefined;
-        const props = type ? getComponentProps(parser, signature, type, baseElement) : []; //?
-        props.push(getModelProp(parser, modelName));
-        props.push(getElemProp(parser, modelName));
-        const styleComponent = getStyleComponent(displayName, props);
-
-        return {
-          kind: 'enhancedComponent',
-          componentType: 'subcomponent',
-          props: getNonDefaultNonLayoutProps(displayName, props),
-          baseElement,
-          subComponents,
-          styleComponent,
-          model: modelName,
-        };
+          kind: 'function',
+          name,
+          parameters,
+          returnType,
+          // model: modelName,
+          // elemProps,
+          // returnProps,
+        } as FunctionValue;
       }
     }
 
     return undefined;
   }
-);
+
+  t.getKindNameFromNode(node); //?
+  if (
+    t.isVariableDeclaration(node) &&
+    t.isIdentifier(node.name) &&
+    node.initializer &&
+    t.isCallExpression(node.initializer) &&
+    t.isIdentifier(node.initializer.expression) &&
+    node.initializer.expression.text === 'composeHooks'
+  ) {
+    return {
+      kind: 'composedElemPropsHook',
+      name: node.name.text,
+      composes: node.initializer.arguments.map(value => parser.getValueFromNode(value)),
+    } as ComposedElemPropsHookValue;
+  }
+
+  /**
+   * Find all occurrences of:
+   * ```ts
+   * export const {HookName} = createElemPropsHook({ModelHooKName})(
+   *   (
+   *     model,
+   *     ref?: any,
+   *     elemProps: {
+   *       // elemProps required by the hook
+   *     }
+   *   ) => {
+   *     return {
+   *       // elemProps returned by the hook
+   *     }
+   *   }
+   * )
+   * ```
+   */
+  if (
+    t.isVariableDeclaration(node) &&
+    t.isIdentifier(node.name) &&
+    node.initializer &&
+    t.isCallExpression(node.initializer)
+  ) {
+    'here'; //?
+    const name = node.name.text;
+    const elemPropsHookValue = getElemPropsHookValue(node.initializer, name);
+    if (elemPropsHookValue) {
+      return elemPropsHookValue;
+    }
+  }
+
+  const elemPropsHookValue = getElemPropsHookValue(node);
+  if (elemPropsHookValue) {
+    return elemPropsHookValue;
+  }
+
+  /**
+   * Find all occurrences of:
+   * ```ts
+   * export const {ComponentName} = createComponent({defaultElement})({
+   *   displayName: {displayName},
+   *   Component(elemProps: {ComponentProps}) {
+   *     return <... />
+   *   }
+   * })
+   * ```
+   *
+   * It will also try to figure out default props:
+   * - @default {defaultValue}
+   * - `{prop: defaultValue}: Props`
+   * - `<Element prop={defaultProp} {...elemProps} />
+   */
+  if (
+    t.isVariableDeclaration(node) &&
+    node.initializer &&
+    t.isCallExpression(node.initializer) &&
+    t.isCallExpression(node.initializer.expression) &&
+    t.isIdentifier(node.initializer.expression.expression) &&
+    node.initializer.expression.expression.text === 'createComponent'
+  ) {
+    const baseElement = getBaseElement(parser, node.initializer.expression.arguments[0]);
+
+    /**
+     * options is the object containing the `Component` function
+     * ```ts
+     * export const MyComponent = createComponent('button')({
+     *   displayName: 'MyComponent',
+     *   Component() {...}
+     * })
+     * ```
+     */
+    const options = node.initializer.arguments[0]; //?
+    if (options && t.isObjectLiteralExpression(options)) {
+      const signature = options.properties.find(
+        n => n.name && t.isIdentifier(n.name) && n.name.text === 'Component'
+      );
+      const displayName = getDisplayName(parser, options);
+      const subComponents = getSubcomponents(parser, options);
+
+      if (signature) {
+        'here'; //?
+        const componentExpression = t.isMethodDeclaration(signature)
+          ? signature
+          : t.isPropertyAssignment(signature)
+          ? signature.initializer
+          : undefined;
+
+        if (componentExpression && ts.isFunctionLike(componentExpression)) {
+          const type = parser.checker.getTypeAtLocation(componentExpression.parameters[0]);
+          const props = getComponentProps(parser, componentExpression, type, baseElement);
+          const styleComponent = getStyleComponent(displayName, props);
+
+          return {
+            kind: 'enhancedComponent',
+            componentType: 'regular',
+            displayName,
+            props: getNonDefaultNonLayoutProps(displayName, props),
+            baseElement,
+            subComponents,
+            styleComponent,
+          } as EnhanceComponentValue;
+        }
+      }
+    }
+  }
+
+  if (
+    t.isVariableDeclaration(node) &&
+    node.initializer &&
+    t.isCallExpression(node.initializer) &&
+    t.isCallExpression(node.initializer.expression) &&
+    t.isCallExpression(node.initializer.expression.expression) &&
+    t.isIdentifier(node.initializer.expression.expression.expression) &&
+    node.initializer.expression.expression.expression.text === 'createContainer'
+  ) {
+    'here'; //?
+    const baseElement = getBaseElement(parser, node.initializer.expression.expression.arguments[0]);
+    const options = node.initializer.expression.arguments[0];
+    const modelName = getModelName(parser, options); //?
+    const displayName = getDisplayName(parser, options);
+    const subComponents = getSubcomponents(parser, options);
+    const elemPropsHook = getElemPropsHook(parser, options);
+    t.getKindNameFromNode(options); //?
+    const signature = node.initializer.arguments[0];
+    if (ts.isFunctionLike(signature) && modelName) {
+      const type = node.initializer.typeArguments
+        ? parser.checker.getTypeAtLocation(node.initializer.typeArguments[0])
+        : undefined;
+      const props = type ? getComponentProps(parser, signature, type, baseElement) : []; //?
+      props.push(getModelProp(parser, modelName));
+      props.push(getElemProp(parser, modelName));
+      const styleComponent = getStyleComponent(displayName, props);
+
+      return {
+        kind: 'enhancedComponent',
+        componentType: 'container',
+        displayName,
+        elemPropsHook,
+        props: getNonDefaultNonLayoutProps(displayName, props),
+        baseElement,
+        model: modelName,
+        styleComponent,
+        subComponents,
+      };
+    }
+  }
+
+  if (
+    t.isVariableDeclaration(node) &&
+    node.initializer &&
+    t.isCallExpression(node.initializer) &&
+    t.isCallExpression(node.initializer.expression) &&
+    t.isCallExpression(node.initializer.expression.expression) &&
+    t.isIdentifier(node.initializer.expression.expression.expression) &&
+    node.initializer.expression.expression.expression.text === 'createSubcomponent'
+  ) {
+    'here'; //?
+    const baseElement = getBaseElement(parser, node.initializer.expression.expression.arguments[0]);
+    const options = node.initializer.expression.arguments[0];
+    const modelName = getModelName(parser, options); //?
+    const subComponents = getSubcomponents(parser, options);
+    const elemPropsHook = getElemPropsHook(parser, options);
+    const displayName = getDisplayName(parser, options);
+    const signature = node.initializer.arguments[0];
+    if (ts.isFunctionLike(signature) && modelName) {
+      const type = node.initializer.typeArguments
+        ? parser.checker.getTypeAtLocation(node.initializer.typeArguments[0])
+        : undefined;
+      const props = type ? getComponentProps(parser, signature, type, baseElement) : []; //?
+      props.push(getModelProp(parser, modelName));
+      props.push(getElemProp(parser, modelName));
+      const styleComponent = getStyleComponent(displayName, props);
+
+      return {
+        kind: 'enhancedComponent',
+        componentType: 'subcomponent',
+        elemPropsHook,
+        displayName,
+        props: getNonDefaultNonLayoutProps(displayName, props),
+        baseElement,
+        subComponents,
+        styleComponent,
+        model: modelName,
+      };
+    }
+  }
+
+  return undefined;
+});
 
 function getDisplayName(parser: DocParser, node: ts.Expression): string | undefined {
   if (t.isObjectLiteralExpression(node)) {
@@ -336,6 +459,60 @@ function getNonDefaultNonLayoutProps(
     }
     return !p.declarations[0].filePath.includes('layout/lib/utils');
   });
+}
+
+function getReturnTypeFromElemPropsHook(parser: DocParser, signature?: ts.Signature): Value {
+  if (signature) {
+    const type = signature.getReturnType(); //?
+    // A TypeNode is a synthetic AST representation of a type. No truncation removes the `... 12 more ...`
+    const typeNode = parser.checker.typeToTypeNode(
+      type,
+      undefined,
+      ts.NodeBuilderFlags.NoTruncation
+    );
+    if (typeNode) {
+      const value = parser.getValueFromNode(typeNode);
+      if (value.kind === 'typeLiteral' || value.kind === 'object' || value.kind === 'interface') {
+        value.properties;
+      }
+      // if (value)
+      return value;
+    }
+  }
+  return unknownValue('???');
+}
+
+function getElemPropsFromElemPropsHook(parser: DocParser, signature?: ts.Signature): Value {
+  if (signature) {
+    const elemPropsParam = signature.getParameters()[2]; //?
+    if (!elemPropsParam) {
+      return {kind: 'typeLiteral', properties: []};
+    }
+    const elemPropsNode = getValueDeclaration(elemPropsParam); //?
+    if (elemPropsNode && t.isParameter(elemPropsNode)) {
+      return (parser.getValueFromNode(elemPropsNode) as FunctionParameter).type; //?
+    }
+  }
+
+  return unknownValue('elemPropsNotFound');
+}
+
+function getElemPropsHook(parser: DocParser, node: ts.Expression): string | undefined {
+  if (t.isObjectLiteralExpression(node)) {
+    const subComponentProperty = node.properties.find(
+      p => p.name && t.isIdentifier(p.name) && p.name.text === 'elemPropsHook'
+    );
+
+    if (
+      subComponentProperty &&
+      t.isPropertyAssignment(subComponentProperty) &&
+      t.isIdentifier(subComponentProperty.initializer)
+    ) {
+      return subComponentProperty.initializer.text;
+    }
+  }
+
+  return undefined;
 }
 
 function getSubcomponents(

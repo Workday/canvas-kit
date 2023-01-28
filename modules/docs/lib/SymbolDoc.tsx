@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import MarkdownToJSX from 'markdown-to-jsx';
 
 import {colors, type} from '@workday/canvas-kit-react/tokens';
 import {Dialog, useDialogModel} from '@workday/canvas-kit-react/dialog';
@@ -14,10 +13,12 @@ import {MDX, MdxJSToJSX} from './MDXElements';
 import * as types from '../docgen/docTypes';
 import {defaultJSDoc} from '../docgen/docParser';
 
-import {docs, subscribe} from './docs';
+import {docs} from './docs';
 import {Table} from './Table';
 import {
   CanvasColorValue,
+  ComposedElemPropsHookValue,
+  ElemPropsHookValue,
   EnhanceComponentValue,
   ModelHookValue,
   ModelValue,
@@ -103,7 +104,7 @@ const SymbolDialog = ({value}: {value: types.SymbolValue}) => {
   return (
     <Dialog model={model}>
       <>
-        <Dialog.Target as={Hyperlink} className="value-symbol">
+        <Dialog.Target as={Hyperlink} className="value-symbol" href="#" aria-haspopup="true">
           {value.name}
         </Dialog.Target>
         {value.typeParameters && value.typeParameters.length ? (
@@ -166,17 +167,29 @@ const Heading = createComponent('h4')({
   },
 });
 
+function space(level: number) {
+  return [...Array(level * 2)].map(v => '\u00A0').join('');
+}
+
 const Value = ({
   value,
   doc,
 }: {
-  value: types.Value | ModelHookValue | ModelValue | EnhanceComponentValue | CanvasColorValue;
+  value:
+    | types.Value
+    | ModelHookValue
+    | ModelValue
+    | EnhanceComponentValue
+    | CanvasColorValue
+    | ElemPropsHookValue
+    | ComposedElemPropsHookValue;
   doc?: types.ExportedSymbol<any>;
 }) => {
   const parentComponentName = React.useContext(ParentComponentNameContext);
   const parentComponentJSDoc = React.useContext(ParentComponentJSDocContext);
   parentComponentJSDoc && console.log('doc', parentComponentJSDoc);
   const renderContext = React.useContext(RenderContext);
+  const level = React.useContext(LevelContext);
   switch (value.kind) {
     case 'object':
     case 'interface':
@@ -254,6 +267,79 @@ const Value = ({
           ))}
         </RenderContext.Provider>
       );
+    case 'conditional':
+      return (
+        <>
+          <Value value={value.check} /> extends <Value value={value.extends} /> ?{' '}
+          <Value value={value.trueType} /> : <Value value={value.falseType} />
+        </>
+      );
+    case 'function':
+      return (
+        <RenderContext.Provider value="inline">
+          {value.name && <span>{value.name}</span>}
+          <span className="value-punctuation">(</span>
+          <>
+            {value.parameters.map((p, index) => (
+              <React.Fragment key={index}>
+                {index !== 0 && <span className="value-punctuation">, </span>}
+                {value.parameters.length > 1 && (
+                  <>
+                    <br />
+                    {space(level + 1)}
+                  </>
+                )}
+                {value.parameters.length > 1 ? (
+                  <LevelContext.Provider value={level + 1}>
+                    <Value value={p} />
+                  </LevelContext.Provider>
+                ) : (
+                  <Value value={p} />
+                )}
+                {index === value.parameters.length - 1 && index > 0 && (
+                  <>
+                    <br />
+                    {space(level)}
+                  </>
+                )}
+              </React.Fragment>
+            ))}
+          </>
+          <span className="value-punctuation">
+            )&nbsp;=&gt;&nbsp;
+            <Value value={value.returnType} />
+          </span>
+        </RenderContext.Provider>
+      );
+    case 'parameter':
+      return (
+        <RenderContext.Provider value="inline">
+          {value.description ? (
+            <Tooltip
+              style={{maxWidth: '50em'}}
+              title={<MdxJSToJSX>{value.description}</MdxJSToJSX>}
+            >
+              <span className="value-parameter">{value.name}</span>
+            </Tooltip>
+          ) : (
+            <span className="value-parameter">{value.name}</span>
+          )}
+          :&nbsp;
+          <Value value={value.type} />
+        </RenderContext.Provider>
+      );
+    case 'symbol':
+      return <SymbolDialog value={value} />;
+    case 'external':
+      return <ExternalHyperlink href={value.url}>{value.name}</ExternalHyperlink>;
+    case 'canvasColor':
+      return (
+        <ColorPicker
+          style={{width: 170}}
+          colorSet={Object.values(colors)}
+          onColorChange={() => {}}
+        />
+      );
     case 'modelHook':
       return (
         <code>
@@ -276,6 +362,57 @@ const Value = ({
           <Heading>Additional Properties</Heading>
           <PropertiesTable properties={value.modelProperties} showDefault={false} />
         </>
+      );
+    case 'elemPropsHook':
+      return (
+        <code>
+          {value.name ? (
+            <>
+              <span>const</span> <span>{value.name}</span> <span>=</span>{' '}
+            </>
+          ) : (
+            <>
+              <span>function</span>
+            </>
+          )}
+          <span className="value-punctuation">(</span>
+          <span className="value-punctuation">)</span>
+          <span className="value-punctuation"> =&gt; </span> {}
+        </code>
+      );
+    case 'composedElemPropsHook':
+      return (
+        <code>
+          {value.name} = <Value value={{kind: 'symbol', name: 'composeHooks'}} />
+          <span className="value-punctuation">(</span>
+          <>
+            {value.composes.map((p, index) => (
+              <React.Fragment key={index}>
+                {index !== 0 && <span className="value-punctuation">, </span>}
+                {value.composes.length > 1 && (
+                  <>
+                    <br />
+                    {space(level + 1)}
+                  </>
+                )}
+                {value.composes.length > 1 ? (
+                  <LevelContext.Provider value={level + 1}>
+                    <Value value={p} />
+                  </LevelContext.Provider>
+                ) : (
+                  <Value value={p} />
+                )}
+                {index === value.composes.length - 1 && index > 0 && (
+                  <>
+                    <br />
+                    {space(level)}
+                  </>
+                )}
+              </React.Fragment>
+            ))}
+          </>
+          <span className="value-punctuation">)</span>
+        </code>
       );
     case 'enhancedComponent':
       const groups = groupProps(value.props);
@@ -326,6 +463,14 @@ const Value = ({
               </React.Fragment>
             );
           })}
+          {value.elemPropsHook ? (
+            <>
+              <Heading headingOffset={1}>elemProps Hook</Heading>
+              <code>
+                <SymbolDoc name={value.elemPropsHook} />
+              </code>
+            </>
+          ) : null}
           {value.subComponents
             ? value.subComponents.map((c, i) => {
                 return (
@@ -352,43 +497,12 @@ const Value = ({
           ) : null}
         </>
       );
-    case 'function':
-      return (
-        <RenderContext.Provider value="inline">
-          <span className="value-punctuation">(</span>
-          <>
-            {value.parameters.map((p, index) => (
-              <React.Fragment key={index}>
-                {index !== 0 && <span className="value-punctuation">, </span>}
-                <Value value={p} />
-              </React.Fragment>
-            ))}
-          </>
-          <span className="value-punctuation">
-            ) =&gt; <Value value={value.returnType} />
-          </span>
-        </RenderContext.Provider>
-      );
-    case 'parameter':
-      return (
-        <RenderContext.Provider value="inline">
-          <span className="value-parameter">{value.name}</span>: <Value value={value.type} />
-        </RenderContext.Provider>
-      );
-    case 'symbol':
-      return <SymbolDialog value={value} />;
-    case 'external':
-      return <ExternalHyperlink href={value.url}>{value.name}</ExternalHyperlink>;
-    case 'canvasColor':
-      return (
-        <ColorPicker
-          style={{width: 170}}
-          colorSet={Object.values(colors)}
-          onColorChange={() => {}}
-        />
-      );
   }
-  return <code className="value-unknown">unknown {JSON.stringify(value, null, '  ')}</code>;
+  return (
+    <code className="value-unknown">
+      unknown {JSON.stringify(value, null, '  ').replace(/\n/g, '\n' + space(level))}
+    </code>
+  );
 };
 
 function getTableRows(
@@ -400,9 +514,10 @@ function getTableRows(
 ): JSX.Element[] {
   return properties.flatMap((property, i) => {
     const title = property.declarations?.[0]?.filePath;
+    console.log('title', title);
     const propName = (
       <Text as="code" whiteSpace={'nowrap !important' as any}>
-        {[...Array(level * 6)].map(v => '\u00A0') /* non-breaking space */}
+        {space(level)}
         {level > 0 && '\u2514\u00A0'}
         {property.name}
         {showRequired && property.required ? <Text color="chiliMango600">*</Text> : ''}
@@ -458,6 +573,7 @@ const PropertiesInline = ({properties}: {properties: types.ObjectProperty[]}) =>
     return <span>&#123;&#125;</span>;
   }
   const level = React.useContext(LevelContext);
+  console.log('level', level);
 
   return (
     <>
@@ -466,7 +582,7 @@ const PropertiesInline = ({properties}: {properties: types.ObjectProperty[]}) =>
         return (
           <React.Fragment key={index}>
             <br />
-            {[...Array(level * 4)].map(v => '\u00A0') /* non-breaking space */}
+            {space(level)}
             &nbsp;&nbsp;&nbsp;&nbsp;
             {p.description ? (
               <Tooltip style={{maxWidth: '50em'}} title={<MdxJSToJSX>{p.description}</MdxJSToJSX>}>
@@ -479,11 +595,12 @@ const PropertiesInline = ({properties}: {properties: types.ObjectProperty[]}) =>
             <LevelContext.Provider value={level + 1}>
               <Value value={p.type} />
             </LevelContext.Provider>
+            <span>;</span>
           </React.Fragment>
         );
       })}
       <br />
-      {[...Array(level * 4)].map(v => '\u00A0') /* non-breaking space */}
+      {space(level)}
       <span>&#125;</span>
     </>
   );
