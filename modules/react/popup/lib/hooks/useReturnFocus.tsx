@@ -116,11 +116,13 @@ export const useReturnFocus = createElemPropsHook(usePopupModel)(model => {
         return;
       }
 
-      if (
-        (document.activeElement !== document.body &&
-          !PopupStack.contains(model.state.stackRef.current, document.activeElement)) ||
-        requiresFocusChangeRef.current
-      ) {
+      const activeElementOutsidePopupStack =
+        document.activeElement !== document.body &&
+        model.state.stackRef.current &&
+        document.activeElement instanceof HTMLElement &&
+        !PopupStack.contains(model.state.stackRef.current, document.activeElement);
+
+      if (activeElementOutsidePopupStack || requiresFocusChangeRef.current) {
         // We need to change focus _before_ the browser process the default action of picking a new
         // focus target. Doing this immediately prevents the `focus` event from firing on `element`,
         // but that's okay because the browser will change focus anyways.

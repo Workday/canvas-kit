@@ -344,10 +344,7 @@ export const PopupStack = {
    * opt-in to toggling. Otherwise there is no way to opt-out of toggle behavior (because the target
    * is not inside `element`).
    */
-  contains(element: HTMLElement | null, eventTarget: Element | null): boolean {
-    if (!element || !eventTarget) {
-      return false;
-    }
+  contains(element: HTMLElement, eventTarget: HTMLElement): boolean {
     const stack = getTopStack();
     if (stack._adapter?.contains) {
       return stack._adapter.contains(element, eventTarget);
