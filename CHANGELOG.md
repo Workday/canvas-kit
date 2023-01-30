@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v8.4.2](https://github.com/Workday/canvas-kit/releases/tag/v8.4.2) (2023-01-30)
+
+### Codemods
+
+- fix: Update to soft dep stack codemod for styled component ([#2007](https://github.com/Workday/canvas-kit/pull/2007)) ([@josh-bagwell](https://github.com/josh-bagwell))
+
+
 ## [v8.4.1](https://github.com/Workday/canvas-kit/releases/tag/v8.4.1) (2023-01-26)
 
 ### Documentation
