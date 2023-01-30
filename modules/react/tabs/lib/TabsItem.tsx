@@ -14,7 +14,7 @@ import {
   createSubcomponent,
   useModalityType,
 } from '@workday/canvas-kit-react/common';
-import {Box, StackProps} from '@workday/canvas-kit-react/layout';
+import {Box, FlexProps} from '@workday/canvas-kit-react/layout';
 import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {
@@ -28,7 +28,7 @@ import {
 import {useTabsModel} from './useTabsModel';
 export interface TabsItemProps
   extends ExtractProps<typeof Box, never>,
-    Partial<Pick<StackProps, 'spacing'>> {
+    Partial<Pick<FlexProps, 'spacing'>> {
   /**
    * Optionally pass index to tab item. This should be done if `Tabs.Item` components were created
    * via a `Array::map` function. This index will ensure keyboard navigation works even if items are

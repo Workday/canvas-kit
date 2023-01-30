@@ -24,3 +24,4 @@ export type { FlexStyleProps } from './lib/utils/flex';
 export type { GridStyleProps } from './lib/utils/grid';
 export type { GridItemStyleProps, gridItemStyleFnConfigs } from './lib/utils/gridItem';
 export type { StackSpacing, StackDirection, StackStyleProps } from './lib/utils/stack';
+export * from './lib/utils/systemProps';

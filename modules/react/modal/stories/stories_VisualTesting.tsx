@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import {DeleteButton} from '@workday/canvas-kit-react/button';
 import {Modal, useModalModel} from '@workday/canvas-kit-react/modal';
 import {ContentDirection, CanvasProvider, useTheme} from '@workday/canvas-kit-react/common';
-import {HStack, Box} from '@workday/canvas-kit-react/layout';
+import {Flex, Box} from '@workday/canvas-kit-react/layout';
 
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
 
@@ -43,10 +43,10 @@ const TestModal = () => {
                 Are you sure you want to delete the item?
               </Box>
             </Modal.Body>
-            <HStack spacing="s" padding="xxs" marginTop="xxs">
+            <Flex gap="s" padding="xxs" marginTop="xxs">
               <Modal.CloseButton as={DeleteButton}>Delete</Modal.CloseButton>
               <Modal.CloseButton>Cancel</Modal.CloseButton>
-            </HStack>
+            </Flex>
           </Modal.Card>
         </Modal.Overlay>
       </Modal>

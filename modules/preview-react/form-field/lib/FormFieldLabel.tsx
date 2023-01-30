@@ -1,11 +1,11 @@
 import React from 'react';
 
 import {createSubcomponent, ExtractProps, useTheme} from '@workday/canvas-kit-react/common';
-import {HStack, StackSpacing} from '@workday/canvas-kit-react/layout';
+import {Flex, SystemPropValues} from '@workday/canvas-kit-react/layout';
 import {LabelText, Text} from '@workday/canvas-kit-react/text';
 import {useFormFieldLabel, useFormFieldModel} from './hooks';
 
-export interface FormFieldLabelProps extends Omit<ExtractProps<typeof HStack, never>, 'spacing'> {
+export interface FormFieldLabelProps extends Omit<ExtractProps<typeof Flex, never>, 'spacing'> {
   /**
    * The text of the label.
    */
@@ -14,7 +14,7 @@ export interface FormFieldLabelProps extends Omit<ExtractProps<typeof HStack, ne
    * When the input is required, this is spacing between label and asterisk.
    * @default xxxs
    */
-  spacing?: StackSpacing;
+  spacing?: SystemPropValues['space'];
 }
 
 export const FormFieldLabel = createSubcomponent('label')({
@@ -25,7 +25,7 @@ export const FormFieldLabel = createSubcomponent('label')({
   const theme = useTheme();
 
   return (
-    <HStack as={Element} spacing={spacing} minWidth="180px" {...elemProps}>
+    <Flex as={Element} gap={spacing} minWidth="180px" {...elemProps}>
       <LabelText as="span" fontWeight="medium">
         {children}
       </LabelText>
@@ -40,6 +40,6 @@ export const FormFieldLabel = createSubcomponent('label')({
           *
         </Text>
       )}
-    </HStack>
+    </Flex>
   );
 });

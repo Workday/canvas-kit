@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {Tabs, useTabsModel} from '@workday/canvas-kit-react/tabs';
-import {HStack} from '@workday/canvas-kit-react/layout';
+import {Flex} from '@workday/canvas-kit-react/layout';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
 
 type MyTabItem = {
@@ -43,12 +43,12 @@ export const OverflowTabs = () => {
       </Tabs>
       <hr />
       <h4>Change tab container size</h4>
-      <HStack spacing="xs">
+      <Flex gap="xs">
         <SecondaryButton onClick={() => setContainerWidth('100%')}>100%</SecondaryButton>
         <SecondaryButton onClick={() => setContainerWidth('500px')}>500px</SecondaryButton>
         <SecondaryButton onClick={() => setContainerWidth('235px')}>235px</SecondaryButton>
         <SecondaryButton onClick={() => setContainerWidth('150px')}>150px</SecondaryButton>
-      </HStack>
+      </Flex>
     </div>
   );
 };

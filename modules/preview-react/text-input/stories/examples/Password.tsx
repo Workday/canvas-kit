@@ -9,7 +9,7 @@ export const Password = () => {
   };
 
   return (
-    <TextInput orientation="vertical">
+    <TextInput spacing="xxxs" orientation="vertical">
       <TextInput.Label>Password</TextInput.Label>
       <TextInput.Field onChange={handleChange} value={value} type="password" />
     </TextInput>

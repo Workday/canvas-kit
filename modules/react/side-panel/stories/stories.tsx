@@ -28,7 +28,7 @@ import {
   createComponent,
   dubLogoBlue,
 } from '@workday/canvas-kit-react/common';
-import {Flex, StackSpacing, HStackProps, HStack} from '@workday/canvas-kit-react/layout';
+import {Flex, SystemPropValues, FlexProps} from '@workday/canvas-kit-react/layout';
 import {SearchForm} from '@workday/canvas-kit-labs-react/search-form';
 import {Avatar} from '@workday/canvas-kit-react/avatar';
 import {BodyText} from '@workday/canvas-kit-react/text';
@@ -70,8 +70,8 @@ interface SidePanelState {
   open: boolean;
 }
 
-interface HeaderItemProps extends Omit<HStackProps, 'spacing'> {
-  spacing?: StackSpacing;
+interface HeaderItemProps extends Omit<FlexProps, 'spacing'> {
+  spacing?: SystemPropValues['space'];
 }
 
 const ListItem = styled('li')({
@@ -106,7 +106,7 @@ const StyledListItem = styled(Flex)<StyledType>({
 const GlobalHeaderItem = createComponent('div')({
   displayName: 'GlobalHeader.Item',
   Component: ({spacing = 's', ...props}: HeaderItemProps, ref) => (
-    <HStack spacing={spacing} alignItems="center" marginX={space.xs} ref={ref} {...props} />
+    <Flex gap={spacing} alignItems="center" marginX={space.xs} ref={ref} {...props} />
   ),
 });
 

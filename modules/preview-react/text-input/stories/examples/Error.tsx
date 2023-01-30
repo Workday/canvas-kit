@@ -31,7 +31,7 @@ export const Error = () => {
   };
 
   return (
-    <TextInput hasError={hasError} orientation="vertical">
+    <TextInput gap="xxxs" hasError={hasError} orientation="vertical">
       <TextInput.Label>A three letter word</TextInput.Label>
       <TextInput.Field onChange={handleChange} value={value} />
       <TextInput.Hint paddingTop={space.xxs}>{hint}</TextInput.Hint>

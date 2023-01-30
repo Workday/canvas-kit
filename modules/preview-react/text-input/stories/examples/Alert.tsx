@@ -18,7 +18,7 @@ export const Alert = () => {
   );
 
   return (
-    <TextInput orientation="vertical">
+    <TextInput gap="xxxs" orientation="vertical">
       <TextInput.Label>Password</TextInput.Label>
       <TextInput.Field css={alertStyles} onChange={handleChange} value={value} type="password" />
       <TextInput.Hint paddingTop={space.xxs}>

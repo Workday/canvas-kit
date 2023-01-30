@@ -9,7 +9,7 @@ export const Basic = () => {
   };
 
   return (
-    <TextInput orientation="vertical">
+    <TextInput gap="xxxs" orientation="vertical">
       <TextInput.Label>Email</TextInput.Label>
       <TextInput.Field onChange={handleChange} value={value} />
     </TextInput>

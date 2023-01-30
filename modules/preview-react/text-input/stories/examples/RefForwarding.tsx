@@ -1,6 +1,6 @@
 import React from 'react';
 import {changeFocus} from '@workday/canvas-kit-react/common';
-import {VStack} from '@workday/canvas-kit-react/layout';
+import {VStack, Flex} from '@workday/canvas-kit-react/layout';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {TextInput} from '@workday/canvas-kit-preview-react/text-input';
 
@@ -17,12 +17,12 @@ export const RefForwarding = () => {
   };
 
   return (
-    <VStack spacing="xxxs" alignItems="flex-start">
+    <Flex gap="xxxs" alignItems="flex-start" flexDirection="column">
       <TextInput orientation="vertical">
         <TextInput.Label>Email</TextInput.Label>
         <TextInput.Field onChange={handleChange} value={value} ref={ref} />
       </TextInput>
       <SecondaryButton onClick={handleClick}>Focus Text Input</SecondaryButton>
-    </VStack>
+    </Flex>
   );
 };
