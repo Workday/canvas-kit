@@ -145,6 +145,28 @@ describe('Canvas Kit Deprecate Stack Codemod', () => {
       expectTransform(input, expected);
     });
 
+    it('should properly transform styled Stack JSX identifiers', () => {
+      const input = `
+      import {Stack} from '@workday/canvas-kit-react/layout';
+
+      const StyledStack = styled(Stack)({
+        alignItems: 'center',
+        justifyContent: 'space-between'
+      });
+      `;
+
+      const expected = `
+      import {Flex} from '@workday/canvas-kit-react/layout';
+
+      const StyledStack = styled(Flex)({
+        alignItems: 'center',
+        justifyContent: 'space-between'
+      });
+      `;
+
+      expectTransform(input, expected);
+    });
+
     it('should properly transform HStack JSX identifiers', () => {
       const input = `
       import {HStack} from '@workday/canvas-kit-react/layout';
