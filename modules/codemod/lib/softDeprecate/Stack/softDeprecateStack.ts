@@ -182,7 +182,7 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
       nodePath.value.init.callee.callee.type === 'Identifier' &&
       nodePath.value.init.callee.callee.name === 'styled' &&
       nodePath.value.init.callee.arguments[0].type === 'Identifier' &&
-      nodePath.value.init.callee.arguments[0].name === 'Stack'
+      stackImportNames.includes(nodePath.value.init.callee.arguments[0].name)
     ) {
       nodePath.value.init.callee.arguments[0].name = 'Flex';
     }
