@@ -172,6 +172,22 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
     .filter(path => path.node.name === 'shouldWrapChildren')
     .remove();
 
+  // Transform styled compoents
+  // e.g. `const StyledStack = styled(Stack)({});`
+  // becomes `const StyledStack = styled(Flex)({});`
+  root.find(j.VariableDeclarator).forEach(nodePath => {
+    if (
+      nodePath.value.init?.type === 'CallExpression' &&
+      nodePath.value.init.callee.type === 'CallExpression' &&
+      nodePath.value.init.callee.callee.type === 'Identifier' &&
+      nodePath.value.init.callee.callee.name === 'styled' &&
+      nodePath.value.init.callee.arguments[0].type === 'Identifier' &&
+      nodePath.value.init.callee.arguments[0].name === 'Stack'
+    ) {
+      nodePath.value.init.callee.arguments[0].name = 'Flex';
+    }
+  });
+
   // Transform Stack JSXElements
   // Transform `<Stack>` to `<Flex>`
   root.find(j.JSXIdentifier, {name: 'Stack'}).forEach(nodePath => {
