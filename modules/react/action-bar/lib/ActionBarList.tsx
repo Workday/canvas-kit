@@ -8,14 +8,14 @@ import {
   styled,
   StyledType,
 } from '@workday/canvas-kit-react/common';
-import {HStack} from '@workday/canvas-kit-react/layout';
+import {Flex} from '@workday/canvas-kit-react/layout';
 import {useOverflowListMeasure, useListRenderItems} from '@workday/canvas-kit-react/collection';
 
 import {useActionBarModel} from './useActionBarModel';
 
 // Use `Partial` here to make `spacing` optional
 export interface ActionBarListProps<T = any>
-  extends Omit<Partial<ExtractProps<typeof HStack, never>>, 'children'> {
+  extends Omit<Partial<ExtractProps<typeof Flex, never>>, 'children'> {
   /**
    * If items are passed to a `ActionBarModel`, the child of `ActionBar.List` should be a render prop. The
    * List will determine how and when the item will be rendered.
@@ -37,7 +37,7 @@ export interface ActionBarListProps<T = any>
   overflowButton?: React.ReactNode;
 }
 
-const ResponsiveHStack = styled(HStack)<ActionBarListProps & StyledType>(({theme}) => {
+const ResponsiveHStack = styled(Flex)<ActionBarListProps & StyledType>(({theme}) => {
   const canvasTheme = getCanvasTheme(theme);
   return {
     [canvasTheme.breakpoints.down('s')]: {
@@ -59,7 +59,7 @@ export const ActionBarList = createSubcomponent('div')({
   return (
     <ResponsiveHStack
       as={Element}
-      spacing="s"
+      gap="s"
       depth={1}
       background={commonColors.background}
       borderTop={`solid 1px ${colors.soap400}`}

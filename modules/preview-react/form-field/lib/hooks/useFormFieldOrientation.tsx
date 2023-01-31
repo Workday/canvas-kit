@@ -1,4 +1,4 @@
-import {StackSpacing, StackProps} from '@workday/canvas-kit-react/layout';
+import {SystemPropValues, FlexProps} from '@workday/canvas-kit-react/layout';
 import {space} from '@workday/canvas-kit-react/tokens';
 
 /**
@@ -6,9 +6,9 @@ import {space} from '@workday/canvas-kit-react/tokens';
  */
 export const useFormFieldOrientation = (orientation: 'horizontal' | 'vertical') => {
   let layoutProps: {
-    flexDirection: StackProps['flexDirection'];
-    alignItems: StackProps['alignItems'];
-    spacing: StackSpacing;
+    flexDirection: FlexProps['flexDirection'];
+    alignItems: FlexProps['alignItems'];
+    spacing: SystemPropValues['space'];
   };
 
   if (orientation === 'horizontal') {

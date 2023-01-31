@@ -1,6 +1,6 @@
 import React from 'react';
 import {changeFocus} from '@workday/canvas-kit-react/common';
-import {VStack, Flex} from '@workday/canvas-kit-react/layout';
+import {Flex} from '@workday/canvas-kit-react/layout';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {TextInput} from '@workday/canvas-kit-preview-react/text-input';
 
