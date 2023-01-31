@@ -28,7 +28,7 @@ import {
 import {useTabsModel} from './useTabsModel';
 export interface TabsItemProps
   extends ExtractProps<typeof Box, never>,
-    Partial<Pick<FlexProps, 'spacing'>> {
+    Partial<Pick<FlexProps, 'gap'>> {
   /**
    * Optionally pass index to tab item. This should be done if `Tabs.Item` components were created
    * via a `Array::map` function. This index will ensure keyboard navigation works even if items are
@@ -81,11 +81,11 @@ export interface TabsItemProps
   tabIndex?: number;
 }
 
-export const StyledTabItem = styled(Box.as('button'))<StyledType & Pick<TabsItemProps, 'spacing'>>(
-  ({theme, spacing}) => ({
+export const StyledTabItem = styled(Box.as('button'))<StyledType & Pick<TabsItemProps, 'gap'>>(
+  ({theme, gap}) => ({
     ...type.levels.subtext.large,
     '& > *:not(style) ~ *:not(style)': {
-      marginLeft: spacing || space.xxs,
+      marginLeft: gap || space.xxs,
     },
     fontWeight: type.properties.fontWeights.medium,
     border: 'none',
