@@ -11,6 +11,8 @@ any questions.
 - [Codemod](#codemod)
 - [Component Deprecations](#component-deprecations)
   - [Drawer](#drawer)
+- [Component Updates](#component-updates)
+  - [Buttons](#buttons)
 
 ## Codemod
 
@@ -71,10 +73,29 @@ directly if you need additional help.
 TODO: Please review this section with documenting SidePanel deprication
 -->
 
-We've [hard-deprecated](#hard-deprecation) `Drawer` and this component has been fully removed from Canvas
-Kit. Consider using the
+We've [hard-deprecated](#hard-deprecation) `Drawer` and this component has been fully removed from
+Canvas Kit. Consider using the
 [Side Panel](https://workday.github.io/canvas-kit/?path=/story/preview-side-panel--basic). Be Aware
-that `SidePanel` from the Main package is planned to be replaced by the one from Preview.
-We suggest you use the Preview version of `SidePanel` until the one in Main is replaced with it.
+that `SidePanel` from the Main package is planned to be replaced by the one from Preview. We suggest
+you use the Preview version of `SidePanel` until the one in Main is replaced with it.
 
 ---
+
+## Component Updates
+
+### Buttons
+
+We've changed the default `type` attribute of all our `buttons` to be `type="button"` instead of the
+default `type="submit"`. This is a breaking change if you expected a button to submit by default.
+
+We found an issue where the default action for `form` controls like `input` and `textarea` is to
+click the first `submit` `button` which in some cases is not a `submit` button.
+
+An example of this causing issues was our `Modal.CloseIcon` and `Modal.CloseButton`. When the
+`Modal` is wrapped in a `form` element, the close icon would submit the `form`.
+
+This change affects all of our `buttons` including:
+`PrimaryButton, SecondaryButton, TertiaryButton, ToolbarButton`.
+
+If you still wish for a specific `button` within a `form` to submit, just add the attribute
+`type="submit"`.
