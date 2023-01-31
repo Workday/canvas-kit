@@ -10,7 +10,13 @@ any questions.
 
 - [Codemod](#codemod)
 - [Component Deprecations](#component-deprecations)
+<<<<<<< HEAD
   - [Drawer](#drawer) - [Stack](#Stack)
+=======
+  - [Drawer](#drawer)
+- [Component Updates](#component-updates)
+  - [Buttons](#buttons)
+>>>>>>> 82b880bf3eb4d359c15b64794181b9a41473c3b5
 
 ## Codemod
 
@@ -76,6 +82,7 @@ Canvas Kit. Consider using the
 [Side Panel](https://workday.github.io/canvas-kit/?path=/story/preview-side-panel--basic). Be Aware
 that `SidePanel` from the Main package is planned to be replaced by the one from Preview. We suggest
 you use the Preview version of `SidePanel` until the one in Main is replaced with it.
+<<<<<<< HEAD
 
 ---
 
@@ -85,5 +92,26 @@ We've [hard-deprecated](#hard-deprecation) `Stack`, `HStack` and `VStack`. These
 been fully removed from Canvas Kit. Consider using the
 [Flex](https://workday.github.io/canvas-kit/?path=/docs/components-containers-flex--basic) component
 or .
+=======
+>>>>>>> 82b880bf3eb4d359c15b64794181b9a41473c3b5
 
 ---
+
+## Component Updates
+
+### Buttons
+
+We've changed the default `type` attribute of all our `buttons` to be `type="button"` instead of the
+default `type="submit"`. This is a breaking change if you expected a button to submit by default.
+
+We found an issue where the default action for `form` controls like `input` and `textarea` is to
+click the first `submit` `button` which in some cases is not a `submit` button.
+
+An example of this causing issues was our `Modal.CloseIcon` and `Modal.CloseButton`. When the
+`Modal` is wrapped in a `form` element, the close icon would submit the `form`.
+
+This change affects all of our `buttons` including:
+`PrimaryButton, SecondaryButton, TertiaryButton, ToolbarButton`.
+
+If you still wish for a specific `button` within a `form` to submit, just add the attribute
+`type="submit"`.
