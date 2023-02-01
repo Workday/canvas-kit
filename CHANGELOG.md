@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v8.4.3](https://github.com/Workday/canvas-kit/releases/tag/v8.4.3) (2023-02-01)
+
+### Documentation
+
+- docs: Fix typo in react-font README ([#2010](https://github.com/Workday/canvas-kit/pull/2010)) ([@sheelah](https://github.com/sheelah), Sheelah Brennan)
+
+
 ## [v8.4.2](https://github.com/Workday/canvas-kit/releases/tag/v8.4.2) (2023-01-30)
 
 ### Codemods
