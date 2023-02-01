@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v8.4.4](https://github.com/Workday/canvas-kit/releases/tag/v8.4.4) (2023-02-01)
+
+### Testing
+
+- test: Increase font delay to make chromatic happy ([#1996](https://github.com/Workday/canvas-kit/pull/1996)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v8.4.3](https://github.com/Workday/canvas-kit/releases/tag/v8.4.3) (2023-02-01)
 
 ### Documentation
