@@ -50,7 +50,7 @@ export const ExternalHyperlinkStates = () => (
         )}
       </ComponentStatesTable>
     </StaticStates>
-    <Flex flexDirection="column" gap="xxs">
+    <Flex flexDirection="column" gap="zero">
       <h3>Typography</h3>
       <Subtext size="large">
         The quick <ExternalHyperlink>brown fox</ExternalHyperlink> jumps over the lazy dog
@@ -66,7 +66,7 @@ export const ExternalHyperlinkStates = () => (
       </BodyText>
     </Flex>
     <CanvasProvider theme={{canvas: {direction: ContentDirection.RTL}}}>
-      <Flex flexDirection="column" gap="xxs">
+      <Flex flexDirection="column" gap="zero">
         <Subtext size="large">
           The quick <ExternalHyperlink>brown fox</ExternalHyperlink> jumps over the lazy dog
         </Subtext>
