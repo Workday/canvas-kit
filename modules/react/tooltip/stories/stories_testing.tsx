@@ -8,7 +8,7 @@ import {StaticStates} from '@workday/canvas-kit-react/testing';
 
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
 
-const fontDelay = 150; // best guess for the font delay to prevent incorrect Chromatic regressions
+const fontDelay = 500; // best guess for the font delay to prevent incorrect Chromatic regressions
 
 export default {
   title: 'Testing/Popups/Tooltip',
