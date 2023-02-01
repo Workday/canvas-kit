@@ -7,7 +7,7 @@ describe('Button', () => {
 
   context('given primary buttons are rendered', () => {
     beforeEach(() => {
-      h.stories.load('Components/Buttons/Button/React', 'Primary');
+      h.stories.load('Components/Buttons', 'Primary');
     });
 
     it('should not have any axe errors', () => {
@@ -15,7 +15,7 @@ describe('Button', () => {
     });
 
     it('should render the correct text', () => {
-      cy.get('button')
+      cy.findAllByRole('button', {name: 'Primary'})
         .first()
         .should('contain', 'Primary');
     });
@@ -23,7 +23,7 @@ describe('Button', () => {
 
   context('given delete buttons are rendered', () => {
     beforeEach(() => {
-      h.stories.load('Components/Buttons/Button/React', 'DeleteStory');
+      h.stories.load('Components/Buttons', 'DeleteStory');
     });
 
     it('should not have any axe errors', () => {
@@ -31,9 +31,7 @@ describe('Button', () => {
     });
 
     it('should render the correct text', () => {
-      cy.get('button')
-        .first()
-        .should('contain', 'Click Me');
+      cy.findByRole('button', {name: 'Click Me'}).should('contain', 'Click Me');
     });
   });
 });

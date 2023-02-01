@@ -25,7 +25,7 @@ Then in your index or main file of your project...
 
 ```tsx
 import {Global, css} from '@emotion/react';
-import fonts from '@workday/canvas-kit-react-fonts';
+import {fonts} from '@workday/canvas-kit-react-fonts';
 
 // Inject all of Canvas' @font-face declarations to <head> via emotion
 <Global styles={css(fonts)} />;

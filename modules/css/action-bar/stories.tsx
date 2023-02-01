@@ -3,7 +3,7 @@ import {storiesOf} from '@storybook/react';
 import './index.scss';
 import './stories.scss';
 
-storiesOf('Components/Buttons/Action Bar/CSS', module)
+storiesOf('CSS/Action Bar', module)
   .addParameters({ReadmePath: 'css/action-bar'})
   .add('Default', () => (
     <div className="story">

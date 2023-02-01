@@ -24,7 +24,10 @@ export const OverflowActionBar = () => {
   return (
     <div style={{width: containerWidth}}>
       <ActionBar model={model}>
-        <ActionBar.List position="relative">
+        <ActionBar.List
+          position="relative"
+          overflowButton={<ActionBar.OverflowButton aria-label="More actions" />}
+        >
           {(item: MyActionItem, index) => (
             <ActionBar.Item
               as={index === 0 ? PrimaryButton : undefined}

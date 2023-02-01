@@ -3,7 +3,7 @@ import React from 'react';
 import {CountBadge} from '../index';
 
 export default {
-  title: 'Components/Indicators/Badge/CountBadge/React',
+  title: 'Components/Indicators/Badge',
   component: CountBadge,
   parameters: {ReadmePath: 'react/badge'},
   argTypes: {

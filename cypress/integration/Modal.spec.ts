@@ -6,9 +6,9 @@ describe('Modal', () => {
   });
 
   ['Basic'].forEach(story => {
-    context(`given the [Components/Popups/Modal/React, ${story}] story is rendered`, () => {
+    context(`given the [Components/Popups/Modal, ${story}] story is rendered`, () => {
       beforeEach(() => {
-        h.stories.load('Components/Popups/Modal/React', story);
+        h.stories.load('Components/Popups/Modal', story);
       });
 
       it('should not have any axe errors', () => {
@@ -160,9 +160,9 @@ describe('Modal', () => {
     });
   });
 
-  context(`given the [Testing/React/Popups/Modal, With Tooltips] story is rendered`, () => {
+  context(`given the [Testing/Popups/Modal, With Tooltips] story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Testing/React/Popups/Modal', 'With Tooltips');
+      h.stories.load('Testing/Popups/Modal', 'With Tooltips');
     });
 
     context('when the modal is open', () => {
@@ -282,9 +282,9 @@ describe('Modal', () => {
     });
   });
 
-  context(`given the [Testing/React/Popups/Modal, With Radio buttons] story is rendered`, () => {
+  context(`given the [Testing/Popups/Modal, With Radio buttons] story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Testing/React/Popups/Modal', 'With Radio buttons');
+      h.stories.load('Testing/Popups/Modal', 'With Radio buttons');
     });
 
     it('should not have any axe errors', () => {
@@ -310,9 +310,9 @@ describe('Modal', () => {
     });
   });
 
-  context(`given the [Components/Popups/Modal/React, Without close icon] story is rendered`, () => {
+  context(`given the [Components/Popups/Modal, Without close icon] story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Components/Popups/Modal/React', 'Without close icon');
+      h.stories.load('Components/Popups/Modal', 'Without close icon');
     });
 
     it('should not have any axe errors', () => {
@@ -441,9 +441,9 @@ describe('Modal', () => {
     });
   });
 
-  context(`given the [Components/Popups/Modal/React, Custom focus] story is rendered`, () => {
+  context(`given the [Components/Popups/Modal, Custom focus] story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Components/Popups/Modal/React', 'Custom focus');
+      h.stories.load('Components/Popups/Modal', 'Custom focus');
     });
 
     context('when button is focused', () => {
@@ -545,9 +545,9 @@ describe('Modal', () => {
     });
   });
 
-  context(`given the [Testing/React/Popups/Modal, StackedModals] story is rendered`, () => {
+  context(`given the [Testing/Popups/Modal, StackedModals] story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Testing/React/Popups/Modal', 'StackedModals');
+      h.stories.load('Testing/Popups/Modal', 'StackedModals');
     });
 
     context('when both modals are opened', () => {
@@ -592,9 +592,9 @@ describe('Modal', () => {
     });
   });
 
-  context(`given the [Testing/React/Popups/Modal, ModalWithPopup] story is rendered`, () => {
+  context(`given the [Testing/Popups/Modal, ModalWithPopup] story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Testing/React/Popups/Modal', 'ModalWithPopup');
+      h.stories.load('Testing/Popups/Modal', 'ModalWithPopup');
     });
 
     context('when both modal and popup are opened', () => {
@@ -623,9 +623,9 @@ describe('Modal', () => {
     });
   });
 
-  context(`given the [Components/Popups/Modal/React, CustomTarget] example is rendered`, () => {
+  context(`given the [Components/Popups/Modal, CustomTarget] example is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Components/Popups/Modal/React', 'CustomTarget');
+      h.stories.load('Components/Popups/Modal', 'CustomTarget');
     });
 
     context('when the "Open" button is clicked', () => {
@@ -656,7 +656,7 @@ describe('Modal', () => {
 
   context(`given the 'Iframe Test' story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Testing/React/Popups/Modal', 'Iframe Test');
+      h.stories.load('Testing/Popups/Modal', 'Iframe Test');
     });
 
     context('when the modal is opened', () => {

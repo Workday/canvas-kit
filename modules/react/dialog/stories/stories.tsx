@@ -5,7 +5,7 @@ import {DeleteButton} from '@workday/canvas-kit-react/button';
 import {HStack} from '@workday/canvas-kit-react/layout';
 
 export default {
-  title: 'Components/Popups/Dialog/React',
+  title: 'Components/Popups/Dialog',
   component: Dialog,
   parameters: {
     ReadmePath: 'react/dialog',

@@ -5,9 +5,9 @@ describe('Popup', () => {
     h.stories.visit();
   });
 
-  context(`given the [Components/Popups/Popup/React, Basic] example is rendered`, () => {
+  context(`given the [Components/Popups/Popup, Basic] example is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Components/Popups/Popup/React', 'Basic');
+      h.stories.load('Components/Popups/Popup', 'Basic');
     });
 
     context('when the "Delete Item" button is clicked', () => {
@@ -71,9 +71,9 @@ describe('Popup', () => {
     });
   });
 
-  context('given the [Components/Popups/Popup/React, MultiplePopups] example is rendered', () => {
+  context('given the [Components/Popups/Popup, MultiplePopups] example is rendered', () => {
     beforeEach(() => {
-      h.stories.load('Components/Popups/Popup/React', 'MultiplePopups');
+      h.stories.load('Components/Popups/Popup', 'MultiplePopups');
     });
 
     context('when Open Popup 1 button is clicked', () => {
@@ -101,60 +101,57 @@ describe('Popup', () => {
     });
   });
 
-  context(
-    'given the [Testing/React/Popups/Popup, PopupWithNonHidablePopup] example is rendered',
-    () => {
-      beforeEach(() => {
-        h.stories.load('Testing/React/Popups/Popup', 'PopupWithNonHidablePopup');
-      });
-
-      context('when Open Popup 1 button is clicked', () => {
-        beforeEach(() => {
-          cy.findByRole('button', {name: 'Open Popup 1'}).click();
-        });
-
-        it('should open Popup 1', () => {
-          cy.findByRole('dialog', {name: 'Popup 1'}).should('be.visible');
-        });
-
-        context('then Open Popup 2 button is clicked', () => {
-          const Popup3Title = 'Popup 2 (Not hidable on outside click)';
-          beforeEach(() => {
-            cy.findByText('Open Popup 2').click();
-          });
-
-          it('should open Popup 2 in front of Popup 1', () => {
-            cy.findByRole('dialog', {name: Popup3Title}).should('be.visible');
-            cy.findByRole('dialog', {name: 'Popup 1'}).should('be.visible');
-
-            cy.findByRole('dialog', {name: Popup3Title}).should(
-              h.popup.beOnTopOfLabelledByText('Popup 1')
-            );
-          });
-
-          context('then the close button in Popup 2 is clicked', () => {
-            beforeEach(() => {
-              cy.findByRole('dialog', {name: Popup3Title})
-                .findByRole('button', {name: 'Close'})
-                .click();
-            });
-
-            it('should close Popup 2', () => {
-              cy.findByRole('dialog', {name: Popup3Title}).should('not.exist');
-            });
-
-            it('should not close Popup 1', () => {
-              cy.findByRole('dialog', {name: 'Popup 1'}).should('be.visible');
-            });
-          });
-        });
-      });
-    }
-  );
-
-  context('given the [Testing/React/Popups/Popup, MixedPopupTypes] story is rendered', () => {
+  context('given the [Testing/Popups/Popup, PopupWithNonHidablePopup] example is rendered', () => {
     beforeEach(() => {
-      h.stories.load('Testing/React/Popups/Popup', 'MixedPopupTypes');
+      h.stories.load('Testing/Popups/Popup', 'PopupWithNonHidablePopup');
+    });
+
+    context('when Open Popup 1 button is clicked', () => {
+      beforeEach(() => {
+        cy.findByRole('button', {name: 'Open Popup 1'}).click();
+      });
+
+      it('should open Popup 1', () => {
+        cy.findByRole('dialog', {name: 'Popup 1'}).should('be.visible');
+      });
+
+      context('then Open Popup 2 button is clicked', () => {
+        const Popup3Title = 'Popup 2 (Not hidable on outside click)';
+        beforeEach(() => {
+          cy.findByText('Open Popup 2').click();
+        });
+
+        it('should open Popup 2 in front of Popup 1', () => {
+          cy.findByRole('dialog', {name: Popup3Title}).should('be.visible');
+          cy.findByRole('dialog', {name: 'Popup 1'}).should('be.visible');
+
+          cy.findByRole('dialog', {name: Popup3Title}).should(
+            h.popup.beOnTopOfLabelledByText('Popup 1')
+          );
+        });
+
+        context('then the close button in Popup 2 is clicked', () => {
+          beforeEach(() => {
+            cy.findByRole('dialog', {name: Popup3Title})
+              .findByRole('button', {name: 'Close'})
+              .click();
+          });
+
+          it('should close Popup 2', () => {
+            cy.findByRole('dialog', {name: Popup3Title}).should('not.exist');
+          });
+
+          it('should not close Popup 1', () => {
+            cy.findByRole('dialog', {name: 'Popup 1'}).should('be.visible');
+          });
+        });
+      });
+    });
+  });
+
+  context('given the [Testing/Popups/Popup, MixedPopupTypes] story is rendered', () => {
+    beforeEach(() => {
+      h.stories.load('Testing/Popups/Popup', 'MixedPopupTypes');
     });
 
     it('should start with Window 3 stacked on top of 3 Windows', () => {
@@ -331,9 +328,9 @@ describe('Popup', () => {
     });
   });
 
-  context(`given the [Components/Popups/Popup/React, CustomTarget] example is rendered`, () => {
+  context(`given the [Components/Popups/Popup, CustomTarget] example is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Components/Popups/Popup/React', 'CustomTarget');
+      h.stories.load('Components/Popups/Popup', 'CustomTarget');
     });
 
     context('when the "Open" button is clicked', () => {
@@ -361,14 +358,14 @@ describe('Popup', () => {
     });
   });
 
-  context('given the [Components/Popups/Popup/React, FocusRedirect] example is rendered', () => {
+  context('given the [Components/Popups/Popup, FocusRedirect] example is rendered', () => {
     beforeEach(() => {
-      h.stories.load('Components/Popups/Popup/React', 'FocusRedirect');
+      h.stories.load('Components/Popups/Popup', 'FocusRedirect');
     });
 
     context('when the "Delete Item" button is clicked', () => {
       beforeEach(() => {
-        cy.findByRole('button', {name: 'Delete Item'}).click();
+        cy.findByRole('button', {name: 'Delete Item'}).realClick();
       });
 
       it('should show the popup', () => {
@@ -379,7 +376,7 @@ describe('Popup', () => {
         beforeEach(() => {
           cy.findByRole('button', {name: 'Delete'})
             .focus()
-            .tab();
+            .realPress('Tab');
         });
 
         it('should hide the popup', () => {
@@ -393,9 +390,9 @@ describe('Popup', () => {
     });
   });
 
-  context('given the [Testing/React/Popups/Popup, ReturnFocusTest] story is rendered', () => {
+  context('given the [Testing/Popups/Popup, ReturnFocusTest] story is rendered', () => {
     beforeEach(() => {
-      h.stories.load('Testing/React/Popups/Popup', 'ReturnFocusTest');
+      h.stories.load('Testing/Popups/Popup', 'ReturnFocusTest');
     });
 
     // We disable the default scroll behavior so we can tightly control how these specs scroll. This
@@ -495,9 +492,86 @@ describe('Popup', () => {
     });
   });
 
-  context(`given the [Testing/React/Popups/Popup, TooltipReturnFocus] example is rendered`, () => {
+  context('given the [Testing/Popups/Popup, CloseOnTargetHiddenTest] story is rendered', () => {
     beforeEach(() => {
-      h.stories.load('Testing/React/Popups/Popup', 'TooltipReturnFocus');
+      h.stories.load('Testing/Popups/Popup', 'CloseOnTargetHiddenTest');
+    });
+
+    // We disable the default scroll behavior so we can tightly control how these specs scroll. This
+    // means we'll have to manually add `scrollIntoView` to get Cypress to scroll only where we want
+    context('when the "Open Popup" is clicked', {scrollBehavior: false}, () => {
+      beforeEach(() => {
+        cy.findByTestId('scroll-area').scrollTo('center');
+        cy.findByRole('button', {name: 'Open Popup'}).click();
+      });
+
+      it('should open the popup', () => {
+        cy.findByRole('dialog').should('exist');
+      });
+
+      [
+        {
+          property: 'scrollTop',
+          value: 100,
+        },
+        {
+          property: 'scrollTop',
+          value: 450,
+        },
+        {
+          property: 'scrollLeft',
+          value: 400,
+        },
+        {
+          property: 'scrollLeft',
+          value: 150,
+        },
+      ].forEach(io => {
+        context(`when the scrollable area is scrolled to ${io.property}: ${io.value}`, () => {
+          beforeEach(() => {
+            cy.findByTestId('scroll-area').pipe($el => $el.prop(io.property, io.value));
+          });
+
+          it('should not close the popup', () => {
+            cy.findByRole('dialog').should('exist');
+          });
+        });
+      });
+
+      [
+        {
+          property: 'scrollTop',
+          value: 70,
+        },
+        {
+          property: 'scrollTop',
+          value: 480,
+        },
+        {
+          property: 'scrollLeft',
+          value: 70,
+        },
+        {
+          property: 'scrollLeft',
+          value: 480,
+        },
+      ].forEach(io => {
+        context(`when the scrollable area is scrolled to ${io.property}: ${io.value}`, () => {
+          beforeEach(() => {
+            cy.findByTestId('scroll-area').pipe($el => $el.prop(io.property, io.value));
+          });
+
+          it('should close the popup', () => {
+            cy.findByRole('dialog').should('not.exist');
+          });
+        });
+      });
+    });
+  });
+
+  context(`given the [Testing/Popups/Popup, TooltipReturnFocus] example is rendered`, () => {
+    beforeEach(() => {
+      h.stories.load('Testing/Popups/Popup', 'TooltipReturnFocus');
     });
 
     context('when the icon button is clicked', () => {

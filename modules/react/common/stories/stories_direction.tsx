@@ -6,7 +6,7 @@ import {rewind30Icon, fastForward15Icon, mediaPauseIcon} from '@workday/canvas-s
 import {TertiaryButton} from '@workday/canvas-kit-react/button';
 import {Card} from '@workday/canvas-kit-react/card';
 
-storiesOf('Tokens/Common/Theming', module)
+storiesOf('Features/Theming', module)
   .addParameters({ReadmePath: 'react/common'})
   .add('Direction', () => (
     <div className="story">

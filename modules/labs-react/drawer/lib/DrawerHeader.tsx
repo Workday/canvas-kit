@@ -1,16 +1,26 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import {colors, space, type, CanvasColor, typeColors} from '@workday/canvas-kit-react/tokens';
+import {colors, space, CanvasColor, typeColors} from '@workday/canvas-kit-react/tokens';
 import {TertiaryButton} from '@workday/canvas-kit-react/button';
+import {Text} from '@workday/canvas-kit-react/text';
 import {xIcon} from '@workday/canvas-system-icons-web';
 
-export interface DrawerHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
+/**
+ * ### Deprecated Drawer Header Props
+ *
+ * As of Canvas Kit v8, this component is being soft-deprecated.
+ * It will be hard-deprecated (completely removed) in v9. Please see the
+ * [upgrade guide](https://workday.github.io/canvas-kit/?path=/story/welcome-upgrade-guides-v8-0--page)
+ * for more information.
+ */
+
+export interface DeprecatedDrawerHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
-   * The text of the DrawerHeader. This text will also be applied as the `title` attribute of the header element.
+   * The text of the DeprecatedDrawerHeader. This text will also be applied as the `title` attribute of the header element.
    */
   title?: string;
   /**
-   * The function called when the DrawerHeader close button is clicked.
+   * The function called when the DeprecatedDrawerHeader close button is clicked.
    */
   onClose?: React.MouseEventHandler<HTMLButtonElement>;
   /**
@@ -19,11 +29,11 @@ export interface DrawerHeaderProps extends React.HTMLAttributes<HTMLDivElement> 
    */
   closeIconAriaLabel?: string;
   /**
-   * The background color of the DrawerHeader.
+   * The background color of the DeprecatedDrawerHeader.
    */
   headerColor?: CanvasColor | string;
   /**
-   * The border color of the DrawerHeader. This should match something close to `headerColor`.
+   * The border color of the DeprecatedDrawerHeader. This should match something close to `headerColor`.
    */
   borderColor?: CanvasColor | string;
   /**
@@ -32,14 +42,16 @@ export interface DrawerHeaderProps extends React.HTMLAttributes<HTMLDivElement> 
    */
   inverse?: boolean;
   /**
-   * The unique id of the DrawerHeader for accessibility.
+   * The unique id of the DeprecatedDrawerHeader for accessibility.
    */
   id?: string;
 }
 
 const headerHeight = 56;
 
-const HeaderContainer = styled('div')<Pick<DrawerHeaderProps, 'headerColor' | 'borderColor'>>(
+const HeaderContainer = styled('div')<
+  Pick<DeprecatedDrawerHeaderProps, 'headerColor' | 'borderColor'>
+>(
   {
     height: headerHeight,
     display: 'flex',
@@ -55,25 +67,29 @@ const HeaderContainer = styled('div')<Pick<DrawerHeaderProps, 'headerColor' | 'b
   })
 );
 
-const HeaderTitle = styled('h4')<Pick<DrawerHeaderProps, 'inverse'>>(
-  {
-    ...type.levels.body.small,
-    fontWeight: type.properties.fontWeights.bold,
-    whiteSpace: 'nowrap',
-    textOverflow: 'ellipsis',
-    overflow: 'hidden',
-    paddingRight: space.xxxs,
-  },
-  ({inverse}) => ({
-    color: inverse ? colors.frenchVanilla100 : typeColors.heading,
-  })
-);
-
 const CloseButton = styled(TertiaryButton)({
   margin: '-8px', // for inverse and plain button, we always want this margin
 });
 
-export default class DrawerHeader extends React.Component<DrawerHeaderProps, {}> {
+/**
+ * ### Deprecated Drawer Header
+ *
+ * As of Canvas Kit v8, this component is being soft-deprecated.
+ * It will be hard-deprecated (completely removed) in v9. Please see the
+ * [upgrade guide](https://workday.github.io/canvas-kit/?path=/story/welcome-upgrade-guides-v8-0--page)
+ * for more information.
+ */
+
+export class DeprecatedDrawerHeader extends React.Component<DeprecatedDrawerHeaderProps, {}> {
+  componentDidMount() {
+    console.warn(
+      `This component is being deprecated and will be removed in Canvas Kit V9.\n
+      For more information, please see the V8 upgrade guide:\n
+      https://workday.github.io/canvas-kit/?path=/story/welcome-upgrade-guides-v8-0--page
+      `
+    );
+  }
+
   public render() {
     const {
       closeIconAriaLabel = 'Close',
@@ -85,15 +101,27 @@ export default class DrawerHeader extends React.Component<DrawerHeaderProps, {}>
       id,
       ...elemProps
     } = this.props;
+    const variant = inverse ? 'inverse' : undefined;
 
     return (
       <HeaderContainer borderColor={borderColor} {...elemProps} headerColor={headerColor}>
-        <HeaderTitle id={id} inverse={inverse} title={title}>
+        <Text
+          as="h4"
+          typeLevel="body.small"
+          title={title}
+          fontWeight="bold"
+          color={typeColors.heading}
+          variant={variant}
+          paddingInlineEnd="xxxs"
+          whiteSpace="nowrap"
+          textOverflow="ellipsis"
+          overflow="hidden"
+        >
           {title}
-        </HeaderTitle>
+        </Text>
         {onClose && closeIconAriaLabel && (
           <CloseButton
-            variant={inverse ? 'inverse' : undefined}
+            variant={variant}
             onClick={onClose}
             aria-label={closeIconAriaLabel}
             icon={xIcon}

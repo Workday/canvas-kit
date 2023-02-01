@@ -10,8 +10,9 @@ import {ReturnFocus} from './examples/ReturnFocus';
 import {CustomTarget} from './examples/CustomTarget';
 import {BodyOverflow} from './examples/BodyOverflow';
 import {FullOverflow} from './examples/FullOverflow';
+import {FormModal} from './examples/FormModal';
 
-<Meta title="Components/Popups/Modal/React" component={Modal} />
+<Meta title="Components/Popups/Modal" component={Modal} />
 
 # Canvas Kit Modal
 
@@ -101,6 +102,13 @@ This has the effect of scrolling the heading, close button, and any action butto
 scrolling behavior is not desired, try the [Body Content Overflow](#body-content-overflow) method.
 
 <ExampleCodeBlock code={FullOverflow} />
+
+### Form Modal
+
+The `Modal.Card` can be turned into a `form` element to make a form modal. The `model` should be
+hoisted to allow for form validation and allow you to control when the modal closes.
+
+<ExampleCodeBlock code={FormModal} />
 
 ## Components
 

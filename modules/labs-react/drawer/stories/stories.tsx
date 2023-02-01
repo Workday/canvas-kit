@@ -1,12 +1,12 @@
 import * as React from 'react';
-import {Drawer, DrawerDirection, DrawerHeader} from '../index';
+import {DeprecatedDrawer, DeprecatedDrawerDirection, DeprecatedDrawerHeader} from '../index';
 import {space} from '@workday/canvas-kit-react/tokens';
 
 const title = 'Drawer Header';
 
 export default {
-  title: 'Labs/Drawer/React',
-  component: Drawer,
+  title: 'Labs/Drawer',
+  component: DeprecatedDrawer,
   parameters: {
     ReadmePath: 'labs-react/drawer',
   },
@@ -22,8 +22,8 @@ export default {
     },
     openDirection: {
       options: {
-        left: DrawerDirection.Left,
-        right: DrawerDirection.Right,
+        left: DeprecatedDrawerDirection.Left,
+        right: DeprecatedDrawerDirection.Right,
       },
       control: 'radio',
     },
@@ -35,37 +35,37 @@ export default {
 
 export const Basic = () => (
   <div style={{height: '80vh', position: 'relative'}}>
-    <Drawer openDirection={DrawerDirection.Left} padding={space.s}>
+    <DeprecatedDrawer openDirection={DeprecatedDrawerDirection.Left} padding={space.s}>
       <div style={{fontFamily: 'Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif'}}>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit
         amet blandit leo lobortis eget.
       </div>
-    </Drawer>
+    </DeprecatedDrawer>
   </div>
 );
 
 export const WithHeader = () => (
   <div style={{height: '80vh', position: 'relative'}}>
-    <Drawer
+    <DeprecatedDrawer
       header={
-        <DrawerHeader
+        <DeprecatedDrawerHeader
           closeIconAriaLabel={'Close'}
           onClose={() => console.log('onClose callback')}
           title={'Drawer Header'}
         />
       }
-      openDirection={DrawerDirection.Left}
+      openDirection={DeprecatedDrawerDirection.Left}
       padding={space.s}
       showDropShadow={true}
-    ></Drawer>
+    />
   </div>
 );
 
 export const WithHeaderNoCloseIcon = () => (
   <div style={{height: '80vh', position: 'relative'}}>
-    <Drawer
-      header={<DrawerHeader title={'Drawer Header'} />}
-      openDirection={DrawerDirection.Left}
+    <DeprecatedDrawer
+      header={<DeprecatedDrawerHeader title={'Drawer Header'} />}
+      openDirection={DeprecatedDrawerDirection.Left}
       padding={space.s}
       showDropShadow={true}
     />
@@ -74,9 +74,9 @@ export const WithHeaderNoCloseIcon = () => (
 
 const ConfigurableTemplate = props => (
   <div style={{height: '80vh', position: 'relative'}}>
-    <Drawer
+    <DeprecatedDrawer
       header={
-        <DrawerHeader
+        <DeprecatedDrawerHeader
           closeIconAriaLabel={'Close'}
           headerColor={props.headerColor}
           inverse={props.inverse}
@@ -90,7 +90,7 @@ const ConfigurableTemplate = props => (
     >
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit
       amet blandit leo lobortis eget.
-    </Drawer>
+    </DeprecatedDrawer>
   </div>
 );
 
@@ -99,30 +99,30 @@ export const Configurable = ConfigurableTemplate.bind({});
   headerColor: '#f6f7f8',
   inverse: false,
   title,
-  openDirection: DrawerDirection.Left,
+  openDirection: DeprecatedDrawerDirection.Left,
   padding: space.s,
   showDropShadow: true,
 };
 
 export const Accessible = () => (
   <div style={{height: '80vh', position: 'relative'}}>
-    <Drawer
-      aria-labelledby={'accessibleDrawer'}
+    <DeprecatedDrawer
+      aria-labelledby={'accessibleDeprecatedDrawer'}
       role={'region'}
       header={
-        <DrawerHeader
-          id={'accessibleDrawer'}
+        <DeprecatedDrawerHeader
+          id={'accessibleDeprecatedDrawer'}
           closeIconAriaLabel={'Close'}
           onClose={() => console.log('onClose callback')}
           title={title}
         />
       }
-      openDirection={DrawerDirection.Left}
+      openDirection={DeprecatedDrawerDirection.Left}
       padding={space.s}
       showDropShadow={true}
     >
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit
       amet blandit leo lobortis eget.
-    </Drawer>
+    </DeprecatedDrawer>
   </div>
 );

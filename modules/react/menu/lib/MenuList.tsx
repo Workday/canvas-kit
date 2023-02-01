@@ -11,11 +11,12 @@ import {Stack} from '@workday/canvas-kit-react/layout';
 
 import {useMenuModel} from './useMenuModel';
 
-export interface MenuListProps extends Partial<ExtractProps<typeof Stack, never>> {
+export interface MenuListProps<T = any>
+  extends Omit<Partial<ExtractProps<typeof Stack, never>>, 'children'> {
   /**
    * The label text of the MenuList.
    */
-  children: React.ReactNode;
+  children: React.ReactNode | ((item: T) => React.ReactNode);
 }
 
 export const useMenuList = createElemPropsHook(useMenuModel)(model => {

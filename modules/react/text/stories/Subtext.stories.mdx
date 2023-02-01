@@ -1,0 +1,36 @@
+import {Meta} from '@storybook/addon-docs';
+
+import {Basic} from './examples/Subtext/Basic';
+
+import {TypeLevelComponent} from './PropTables.splitprops.tsx';
+
+<Meta title="Components/Text/Subtext" />
+
+# Canvas Kit Subtext
+
+`Subtext` provides a simple way to render subtext-level text with built-in support for Canvas type
+tokens.
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-react
+```
+
+## Usage
+
+### Basic Example
+
+`Subtext` is a Type Level component (along with [`Title`](/components/text/title/),
+[`Heading`](/components/text/heading/), and [`BodyText`](/components/text/body-text/)) built on top
+of [`Text`](/components/text/text/) which provides a simple way to render subtext-level text
+according to the [Canvas type hierarchy](/tokens/type/#type-styles).
+
+`Subtext` renders a `<p>` element by default with styles equivalent to `type.levels.subtext[size]`.
+You may override the rendered element using the `as` prop.
+
+<ExampleCodeBlock code={Basic} />
+
+## Props
+
+<ArgsTable of={TypeLevelComponent} />

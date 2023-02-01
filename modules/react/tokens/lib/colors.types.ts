@@ -27,11 +27,8 @@ export enum BrandingColor {
   BlackPepper = 'blackPepper',
 }
 
-// See https://stackoverflow.com/questions/51465182/typescript-remove-index-signature-using-mapped-types/51956054
-type KnownKeys<T> = {
-  [K in keyof T]: string extends K ? never : number extends K ? never : K;
-} extends {[_ in keyof T]: infer U}
-  ? U
-  : never;
+type RemoveIndex<T> = {
+  [ K in keyof T as string extends K ? never : number extends K ? never : K ] : T[K]
+};
 
-export type CanvasColor = KnownKeys<typeof colors>;
+export type CanvasColor = keyof RemoveIndex<typeof colors>;
