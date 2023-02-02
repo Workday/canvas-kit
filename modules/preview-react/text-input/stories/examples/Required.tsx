@@ -9,7 +9,7 @@ export const Required = () => {
   };
 
   return (
-    <TextInput gap="xxxs" isRequired={true} orientation="vertical">
+    <TextInput isRequired={true} orientation="vertical">
       <TextInput.Label>Email</TextInput.Label>
       <TextInput.Field onChange={handleChange} value={value} />
     </TextInput>

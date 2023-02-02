@@ -155,6 +155,55 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
     });
   });
 
+  // Transform `spacing` key that are in type interface declaration references
+  // e.g. `interface CustomProps extends StackProps {
+  // spacing: SystemPropValues['space']
+  // }`
+  // becomes `interface CustomProps extends FlexProps {
+  // gap: FlexProps['gap']
+  // }`
+  const spacingName = ['spacing', 'space'];
+  const propVals = ['SystemPropValues', 'StackProps'];
+  root
+    .find(j.TSPropertySignature, {
+      type: 'TSPropertySignature',
+    })
+    .forEach(nodePath => {
+      if (nodePath.node.key.type === 'Identifier') {
+        if (spacingName.includes(nodePath.node.key.name)) {
+          nodePath.node.key.name = 'gap';
+        }
+      }
+      if (nodePath.node.typeAnnotation?.typeAnnotation?.type === 'TSIndexedAccessType') {
+        if (nodePath.node.typeAnnotation.typeAnnotation.objectType.type === 'TSTypeReference') {
+          if (
+            nodePath.node.typeAnnotation.typeAnnotation.objectType.typeName.type === 'Identifier'
+          ) {
+            if (
+              propVals.includes(
+                nodePath.node.typeAnnotation.typeAnnotation.objectType.typeName.name
+              )
+            ) {
+              nodePath.node.typeAnnotation.typeAnnotation.objectType.typeName.name = 'FlexProps';
+            }
+          }
+        }
+        if (nodePath.node.typeAnnotation.typeAnnotation.indexType.type === 'TSLiteralType') {
+          if (
+            nodePath.node.typeAnnotation.typeAnnotation.indexType.literal.type === 'StringLiteral'
+          ) {
+            if (
+              spacingName.includes(
+                nodePath.node.typeAnnotation.typeAnnotation.indexType.literal.value
+              )
+            ) {
+              nodePath.node.typeAnnotation.typeAnnotation.indexType.literal.value = 'gap';
+            }
+          }
+        }
+      }
+    });
+
   // Transform Stack JSXElements
   // Transform `<Stack spacing="l">` to `<Flex gap="l">`
   root

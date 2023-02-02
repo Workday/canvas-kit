@@ -260,6 +260,27 @@ describe('Canvas Kit Deprecate Stack Codemod', () => {
       expectTransform(input, expected);
     });
 
+    it('should properly transform spacing keys reference identifiers', () => {
+      const input = `
+      import { StackProps } from '@workday/canvas-kit-react/layout';
+
+      type CustomStackProps = StackProps;
+      interface AnotherStackProps extends StackProps {
+        spacing?: SystemPropValues['space'];
+      }
+      `;
+      const expected = `
+      import { FlexProps } from '@workday/canvas-kit-react/layout';
+
+      type CustomStackProps = FlexProps;
+      interface AnotherStackProps extends FlexProps {
+        gap?: FlexProps["gap"];
+      }
+      `;
+
+      expectTransform(input, expected);
+    });
+
     it('should properly transform HStackProps type reference identifiers', () => {
       const input = `
       import { HStackProps } from '@workday/canvas-kit-react/layout';

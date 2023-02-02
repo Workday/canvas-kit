@@ -25,7 +25,7 @@ export const ThemedError = () => {
 
   return (
     <CanvasProvider theme={theme}>
-      <TextInput gap="xxxs" hasError={!value} isRequired={true} orientation="vertical">
+      <TextInput hasError={!value} isRequired={true} orientation="vertical">
         <TextInput.Label>Email</TextInput.Label>
         <TextInput.Field onChange={handleChange} value={value} />
         <TextInput.Hint paddingTop={space.xxs}>{!value && 'Please enter an email.'}</TextInput.Hint>

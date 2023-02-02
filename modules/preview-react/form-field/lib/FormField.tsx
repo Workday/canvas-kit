@@ -1,14 +1,14 @@
 import React from 'react';
 
 import {createContainer, ExtractProps} from '@workday/canvas-kit-react/common';
-import {Flex, SystemPropValues} from '@workday/canvas-kit-react/layout';
+import {Flex, FlexProps} from '@workday/canvas-kit-react/layout';
 
 import {useFormFieldModel, useFormFieldOrientation} from './hooks';
 import {FormFieldInput} from './FormFieldInput';
 import {FormFieldLabel} from './FormFieldLabel';
 import {FormFieldHint} from './FormFieldHint';
 
-export interface FormFieldProps extends Omit<ExtractProps<typeof Flex, never>, 'spacing'> {
+export interface FormFieldProps extends Omit<ExtractProps<typeof Flex, never>, 'gap'> {
   /**
    * Children of the Text Input. Should contain a `<FormField.Input>`, a `<FormField.Label>` and an optional `<FormField.Hint>`
    */
@@ -18,10 +18,10 @@ export interface FormFieldProps extends Omit<ExtractProps<typeof Flex, never>, '
    */
   orientation: 'vertical' | 'horizontal';
   /**
-   * Spacing between children elements
+   * Spacing/gap between children elements
    * @default xxxs when vertical l when orientation is horizontal
    */
-  spacing?: SystemPropValues['space'];
+  gap?: FlexProps['gap'];
 }
 
 export const FormField = createContainer('div')({

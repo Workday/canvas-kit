@@ -13,7 +13,7 @@ import {useOverflowListMeasure, useListRenderItems} from '@workday/canvas-kit-re
 
 import {useActionBarModel} from './useActionBarModel';
 
-// Use `Partial` here to make `spacing` optional
+// Use `Partial` here to make `gap` optional
 export interface ActionBarListProps<T = any>
   extends Omit<Partial<ExtractProps<typeof Flex, never>>, 'children'> {
   /**

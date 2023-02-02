@@ -8,8 +8,8 @@ import {TertiaryButton} from '@workday/canvas-kit-react/button';
 import {justifyIcon, notificationsIcon} from '@workday/canvas-system-icons-web';
 import {Heading} from '@workday/canvas-kit-react/text';
 
-interface HeaderItemProps extends Omit<FlexProps, 'spacing'> {
-  spacing?: SystemPropValues['space'];
+interface HeaderItemProps extends Omit<FlexProps, 'gap'> {
+  gap?: FlexProps['gap'];
 }
 
 export const Basic = () => (
@@ -24,8 +24,8 @@ export const Basic = () => (
 
 const PageHeaderItem = createComponent('div')({
   displayName: 'PageHeader.Item',
-  Component: ({spacing = 'xxs', ...props}: HeaderItemProps, ref, Element) => (
-    <Flex gap={spacing} ref={ref} as={Element} {...props} />
+  Component: ({gap = 'xxs', ...props}: HeaderItemProps, ref, Element) => (
+    <Flex gap={gap} ref={ref} as={Element} {...props} />
   ),
 });
 

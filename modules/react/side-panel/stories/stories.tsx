@@ -70,8 +70,8 @@ interface SidePanelState {
   open: boolean;
 }
 
-interface HeaderItemProps extends Omit<FlexProps, 'spacing'> {
-  spacing?: SystemPropValues['space'];
+interface HeaderItemProps extends Omit<FlexProps, 'gap'> {
+  gap?: FlexProps['gap'];
 }
 
 const ListItem = styled('li')({
@@ -105,8 +105,8 @@ const StyledListItem = styled(Flex)<StyledType>({
 
 const GlobalHeaderItem = createComponent('div')({
   displayName: 'GlobalHeader.Item',
-  Component: ({spacing = 's', ...props}: HeaderItemProps, ref) => (
-    <Flex gap={spacing} alignItems="center" marginX={space.xs} ref={ref} {...props} />
+  Component: ({gap = 's', ...props}: HeaderItemProps, ref) => (
+    <Flex gap={gap} alignItems="center" marginX={space.xs} ref={ref} {...props} />
   ),
 });
 

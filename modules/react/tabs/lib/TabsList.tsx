@@ -19,7 +19,7 @@ import {
 
 import {useTabsModel} from './useTabsModel';
 
-// Use `Partial` here to make `spacing` optional
+// Use `Partial` here to make `gap` optional
 export interface TabListProps<T = any>
   extends Omit<Partial<ExtractProps<typeof Flex, never>>, 'children'> {
   /**

@@ -9,7 +9,7 @@ export const Grow = () => {
   };
 
   return (
-    <TextInput gap="xxxs" orientation="vertical" alignItems="stretch">
+    <TextInput orientation="vertical" alignItems="stretch">
       <TextInput.Label>Street Address</TextInput.Label>
       <TextInput.Field onChange={handleChange} value={value} />
     </TextInput>
