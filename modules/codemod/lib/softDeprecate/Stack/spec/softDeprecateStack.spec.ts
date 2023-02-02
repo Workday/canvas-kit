@@ -281,6 +281,27 @@ describe('Canvas Kit Deprecate Stack Codemod', () => {
       expectTransform(input, expected);
     });
 
+    it('should not transform other keys reference identifiers', () => {
+      const input = `
+      import { StackProps, GridProps } from '@workday/canvas-kit-react/layout';
+
+      type CustomStackProps = StackProps;
+      interface AnotherStackProps extends StackProps {
+        children?: GridProps['gridColumnGap'];
+      }
+      `;
+      const expected = `
+      import { FlexProps, GridProps } from '@workday/canvas-kit-react/layout';
+
+      type CustomStackProps = FlexProps;
+      interface AnotherStackProps extends FlexProps {
+        children?: GridProps['gridColumnGap'];
+      }
+      `;
+
+      expectTransform(input, expected);
+    });
+
     it('should properly transform HStackProps type reference identifiers', () => {
       const input = `
       import { HStackProps } from '@workday/canvas-kit-react/layout';
