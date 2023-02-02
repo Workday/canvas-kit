@@ -191,10 +191,9 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
       )?.map(p => getValueFromNode(parser, p) as TypeParameter);
 
       return {
-        kind: 'interface',
+        kind: 'object',
         properties,
-        typeParameters: typeParameters || [],
-        callSignatures: [],
+        typeParameters,
         indexSignature: indexType,
       };
     }
@@ -270,7 +269,7 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
     const properties = node.members.map<ObjectProperty>(member => {
       return getValueFromNode(parser, member) as ObjectProperty;
     });
-    return {kind: 'typeLiteral', properties};
+    return {kind: 'object', properties};
   }
 
   /**
@@ -424,6 +423,19 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
     // An `AsExpression` is a type, so we'll return that
     if (node.initializer && t.isAsExpression(node.initializer)) {
       return getValueFromNode(parser, node.initializer);
+    }
+
+    if (
+      node.initializer &&
+      t.isIdentifier(node.initializer) &&
+      isExportedSymbol(checker, node.initializer)
+    ) {
+      const symbol = getSymbolFromNode(checker, node.initializer);
+      return {
+        kind: 'symbol',
+        name: node.initializer.text,
+        fileName: symbol?.valueDeclaration?.getSourceFile().fileName,
+      };
     }
 
     // We have no type information in the AST. We'll get the Type from the type checker and run some
@@ -876,8 +888,8 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
       const declaration = getValueDeclaration(symbol);
       if (declaration) {
         const typeInfo = getValueFromNode(parser, declaration);
-        // we want to embed interfaces
-        if (typeInfo.kind === 'interface') {
+        // we want to embed objects
+        if (typeInfo.kind === 'object') {
           return typeInfo;
         }
       }
@@ -937,7 +949,7 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
    */
   if (t.isEnumDeclaration(node)) {
     return {
-      kind: 'interface',
+      kind: 'object',
       typeParameters: [],
       properties: node.members.map((m, index) => {
         return {
@@ -1021,11 +1033,7 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
      */
     if (t.isObjectBindingPattern(node.name)) {
       const defaults = getDefaultsFromObjectBindingParameter(parser, node);
-      if (
-        typeInfo.kind === 'typeLiteral' ||
-        typeInfo.kind === 'interface' ||
-        typeInfo.kind === 'object'
-      ) {
+      if (typeInfo.kind === 'object') {
         typeInfo.properties.forEach(p => {
           if (!p.defaultValue && defaults[p.name]) {
             p.defaultValue = defaults[p.name];
@@ -1296,12 +1304,13 @@ export function getValueFromType(
   }
 
   //
-  if (type.isTypeParameter() as boolean) {
-    // the `as boolean` removes the type guard because the `TypeParameter` type doesn't add anything
-    // to `Type`, so Typescript thinks anything after the guard is `never`
-    'here'; //?
-    return {kind: 'symbol', name: type.symbol.name, value: typeToString};
-  }
+  // if (type.isTypeParameter() as boolean) {
+  //   // the `as boolean` removes the type guard because the `TypeParameter` type doesn't add anything
+  //   // to `Type`, so Typescript thinks anything after the guard is `never`
+  //   'here'; //?
+  //   checker.typeToString(type.getConstraint()) //?
+  //   return {kind: 'symbol', name: type.symbol.name, value: typeToString};
+  // }
 
   if (isTupleType(type)) {
     return {
@@ -1556,7 +1565,7 @@ function isComponent(returnType: ts.Type) {
 }
 
 function isExportedSymbol(checker: ts.TypeChecker, node: ts.Node): boolean {
-  const sourceFile = node.getSourceFile();
+  const sourceFile = node.getSourceFile?.();
   if (sourceFile?.isDeclarationFile) {
     return true;
   }
@@ -1594,10 +1603,10 @@ function isOptional(symbol: ts.Symbol): boolean {
 }
 
 function safeGetText(checker: ts.TypeChecker, node: ts.Node): string {
-  if (node.getSourceFile()) {
+  if (node.getSourceFile?.()) {
     return node.getText();
   }
-  // It might be an identifier which has escaped tes
+  // It might be an identifier which has escaped text
   if (t.isIdentifier(node)) {
     return node.escapedText as string;
   }
@@ -1640,6 +1649,10 @@ function getValueFromSignature(
   const {checker} = parser;
   const members = getExportMembers(parser, declaration);
 
+  const typeParameters = signature.typeParameters
+    ?.map(p => getValueFromType(parser, p))
+    .filter((v): v is TypeParameter => v?.kind === 'typeParameter');
+
   const parameters = signature.parameters.map(s => {
     !!getValueDeclaration(s); //?
     s; //?
@@ -1662,6 +1675,7 @@ function getValueFromSignature(
 
   return {
     kind: 'function',
+    typeParameters,
     parameters,
     members,
     returnType,

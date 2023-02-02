@@ -51,14 +51,13 @@ export type Value =
   | IndexSignatureValue
   | QualifiedNameValue
   | ParenthesisValue
-  | InterfaceValue
   | TypeValue
   | TupleValue
-  | TypeLiteralValue
   | IntersectionValue
   | ObjectProperty
   | FunctionParameter
   | FunctionValue
+  | CallExpression
   | TypeParameter
   | ExternalSymbolValue
   | ConditionalTypeValue
@@ -81,6 +80,9 @@ export interface GenericValue {
 export interface ObjectValue {
   kind: 'object';
   properties: ObjectProperty[];
+  typeParameters?: TypeParameter[];
+  callSignatures?: FunctionValue[];
+  indexSignature?: IndexSignatureValue;
 }
 
 export interface ArrayValue {
@@ -111,14 +113,6 @@ export interface TypeParameter {
   defaultValue?: Value;
   constraint?: Value;
   required: boolean;
-}
-
-export interface InterfaceValue {
-  kind: 'interface';
-  typeParameters: TypeParameter[];
-  properties: ObjectProperty[];
-  callSignatures: FunctionValue[];
-  indexSignature?: IndexSignatureValue;
 }
 
 export interface KeyofValue {
@@ -204,11 +198,6 @@ export interface TupleValue {
   value: Value[];
 }
 
-export interface TypeLiteralValue {
-  kind: 'typeLiteral';
-  properties: ObjectProperty[];
-}
-
 export interface ExternalSymbolValue {
   kind: 'external';
   name: string;
@@ -264,7 +253,14 @@ export interface IntersectionValue {
 export interface FunctionValue {
   kind: 'function';
   name?: string;
+  typeParameters?: TypeParameter[];
   parameters: FunctionParameter[];
   members?: Value[];
   returnType: Value;
+}
+
+export interface CallExpression {
+  kind: 'callExpression';
+  name?: SymbolValue;
+  parameters: Value[];
 }

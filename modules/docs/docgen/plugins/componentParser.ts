@@ -4,6 +4,7 @@ import {
   CanvasColorValue,
   ElemPropsHookValue,
   ComposedElemPropsHookValue,
+  SubModelElemPropsHookValue,
 } from './customTypes';
 
 import {
@@ -17,9 +18,16 @@ import {
   getSymbolFromNode,
   getValueDeclaration,
   unknownValue,
-} from './docParser';
-import {FunctionParameter, FunctionValue, ObjectProperty, SymbolValue, Value} from './docTypes';
-import t from './traverse';
+} from '../docParser';
+import {
+  CallExpression,
+  FunctionParameter,
+  FunctionValue,
+  ObjectProperty,
+  SymbolValue,
+  Value,
+} from '../docTypes';
+import t from '../traverse';
 
 /** Track if we've set a custom color symbol yet */
 let shouldCreateColorSymbol = true;
@@ -103,7 +111,11 @@ function getBaseElement(
 }
 
 export const componentParser = createParserPlugin<
-  EnhanceComponentValue | CanvasColorValue | ElemPropsHookValue | ComposedElemPropsHookValue
+  | EnhanceComponentValue
+  | CanvasColorValue
+  | ElemPropsHookValue
+  | ComposedElemPropsHookValue
+  | SubModelElemPropsHookValue
 >((node, parser) => {
   t.getKindNameFromNode(node); //?
 
@@ -114,7 +126,7 @@ export const componentParser = createParserPlugin<
     t.isIndexedAccessType(node) &&
     t.isTypeReference(node.objectType) &&
     t.isIdentifier(node.objectType.typeName) &&
-    node.objectType.typeName.escapedText === 'SystemPropValues' &&
+    node.objectType.typeName.text === 'SystemPropValues' &&
     t.isLiteralType(node.indexType) &&
     t.isStringLiteral(node.indexType.literal) &&
     node.indexType.literal.text === 'color'
@@ -151,6 +163,63 @@ export const componentParser = createParserPlugin<
       name: `${node.typeName.left.text}.${node.typeName.right.text}`,
       url: `https://developer.mozilla.org/en-US/docs/Web/CSS/${dashCase(node.typeName.right.text)}`,
     };
+  }
+
+  /**
+   * Find all call expressions that use `subModel` hook
+   *
+   * ```ts
+   * subModel(useMyModel)(m = m.subModel, useOtherComponent)
+   * ```
+   */
+  if (
+    t.isCallExpression(node) &&
+    t.isCallExpression(node.expression) &&
+    t.isIdentifier(node.expression.expression) &&
+    node.expression.expression.text === 'createSubModelElemPropsHook'
+  ) {
+    // first argument in `subModel`
+    const modelArgument = node.expression.arguments[0];
+    const otherElemPropsHook = node.arguments[1];
+    if (
+      modelArgument &&
+      otherElemPropsHook &&
+      t.isIdentifier(modelArgument) &&
+      t.isIdentifier(otherElemPropsHook)
+    ) {
+      const modelName = modelArgument.text.replace('use', ''); //?
+      const otherElemPropsHookName = otherElemPropsHook.text; //?
+
+      return {
+        kind: 'callExpression',
+        name: {kind: 'symbol', name: node.expression.expression.text},
+        parameters: [
+          {
+            kind: 'function',
+            parameters: [
+              {
+                kind: 'parameter',
+                name: 'model',
+                ...defaultJSDoc,
+                type: {
+                  kind: 'symbol',
+                  name: modelName,
+                },
+              },
+            ],
+            returnType: {
+              kind: 'symbol',
+              name: 'Model',
+            },
+          },
+          {
+            kind: 'symbol',
+            name: otherElemPropsHookName,
+          },
+        ],
+      } as CallExpression;
+    }
+    'here'; //?
   }
 
   /**
@@ -207,7 +276,7 @@ export const componentParser = createParserPlugin<
 
         return {
           kind: 'function',
-          name,
+          name: node.expression.expression.text,
           parameters,
           returnType,
           // model: modelName,
@@ -230,10 +299,10 @@ export const componentParser = createParserPlugin<
     node.initializer.expression.text === 'composeHooks'
   ) {
     return {
-      kind: 'composedElemPropsHook',
-      name: node.name.text,
-      composes: node.initializer.arguments.map(value => parser.getValueFromNode(value)),
-    } as ComposedElemPropsHookValue;
+      kind: 'callExpression',
+      name: {kind: 'symbol', name: node.initializer.expression.text},
+      parameters: node.initializer.arguments.map(value => parser.getValueFromNode(value)),
+    } as CallExpression;
   }
 
   /**
@@ -472,7 +541,7 @@ function getReturnTypeFromElemPropsHook(parser: DocParser, signature?: ts.Signat
     );
     if (typeNode) {
       const value = parser.getValueFromNode(typeNode);
-      if (value.kind === 'typeLiteral' || value.kind === 'object' || value.kind === 'interface') {
+      if (value.kind === 'object') {
         value.properties;
       }
       // if (value)
@@ -486,7 +555,7 @@ function getElemPropsFromElemPropsHook(parser: DocParser, signature?: ts.Signatu
   if (signature) {
     const elemPropsParam = signature.getParameters()[2]; //?
     if (!elemPropsParam) {
-      return {kind: 'typeLiteral', properties: []};
+      return {kind: 'object', properties: []};
     }
     const elemPropsNode = getValueDeclaration(elemPropsParam); //?
     if (elemPropsNode && t.isParameter(elemPropsNode)) {
@@ -508,6 +577,18 @@ function getElemPropsHook(parser: DocParser, node: ts.Expression): string | unde
       t.isPropertyAssignment(subComponentProperty) &&
       t.isIdentifier(subComponentProperty.initializer)
     ) {
+      // Check if the elemProps is aliased to another hook
+      // for example, `const useMyComponent = useMyOtherComponent`
+      const symbol = getSymbolFromNode(parser.checker, subComponentProperty.initializer); //?
+      const declaration = getValueDeclaration(symbol);
+      if (
+        declaration &&
+        t.isVariableDeclaration(declaration) &&
+        declaration.initializer &&
+        t.isIdentifier(declaration.initializer)
+      ) {
+        return declaration.initializer.text;
+      }
       return subComponentProperty.initializer.text;
     }
   }

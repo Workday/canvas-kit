@@ -4,10 +4,6 @@ const DocgenPlugin = require('./docgen-plugin');
 
 const modulesPath = path.resolve(__dirname, '../modules');
 const getSpecifications = require('../modules/docs/utils/get-specifications');
-const getComponentPropMap = require('../modules/docs/utils/get-component-prop-map');
-
-// const props = require('../props.json');
-// const docs = require('../docs.json');
 
 module.exports = {
   stories: [
@@ -36,10 +32,7 @@ module.exports = {
     const specs = await getSpecifications();
 
     console.log('Building component prop tables...');
-    // const propMap = await getComponentPropMap();
-    // const propMap = props;
 
-    // modules/docs/lib/specs.ts and modules/docs/lib/componentPropMap.ts
     config.module.rules.push({
       test: /.ts$/,
       include: [path.resolve(__dirname, '../modules/docs')],
@@ -51,22 +44,6 @@ module.exports = {
             replace: JSON.stringify(specs, null, '  '),
           },
         },
-        // {
-        //   loader: require.resolve('string-replace-loader'),
-        //   options: {
-        //     search: '{/* PROP_MAP_REPLACE_BY_WEBPACK */}',
-        //     replace: JSON.stringify(propMap, null, '  '),
-        //   },
-        // },
-        // {
-        //   loader: require.resolve('string-replace-loader'),
-        //   options: {
-        //     search: '[/* DOCS_REPLACE_BY_WEBPACK */]',
-        //     replace() {
-        //       return JSON.stringify(symbolDocPlugin.docs, null, '  ');
-        //     },
-        //   },
-        // },
       ],
     });
     // modules/
@@ -129,17 +106,6 @@ module.exports = {
       enforce: 'pre',
     });
 
-    // config.module.rules.push({
-    //   test: /.+\.tsx$/,
-    //   include: [modulesPath],
-    //   exclude: /examples|stories/,
-    //   loaders: [
-    //     {
-    //       loader: path.resolve(__dirname, `../modules/docs/webpack/inject-module-name-loader`),
-    //     },
-    //   ],
-    //   enforce: 'pre',
-    // });
     const srcFolder = path.join(__dirname, '../');
     config.module.rules.push({
       test: /.+\.tsx?$/,

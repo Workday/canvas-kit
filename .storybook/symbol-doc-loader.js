@@ -11,8 +11,8 @@ const routeKeys = Object.keys(routes);
 require('ts-node').register({});
 
 const {DocParser, mergeParserPlugins} = require('@workday/canvas-kit-docs/docgen/docParser');
-const {modelParser} = require('@workday/canvas-kit-docs/docgen/modelParser');
-const {componentParser} = require('@workday/canvas-kit-docs/docgen/componentParser');
+const {modelParser} = require('@workday/canvas-kit-docs/docgen/plugins/modelParser');
+const {componentParser} = require('@workday/canvas-kit-docs/docgen/plugins/componentParser');
 
 const schema = {
   type: 'object',

@@ -1,4 +1,4 @@
-import {InterfaceValue, ObjectProperty, ObjectValue, Value, JSDoc, SymbolValue} from './docTypes';
+import {ObjectProperty, Value, JSDoc, SymbolValue, FunctionValue} from '../docTypes';
 
 export interface ModelHookValue {
   kind: 'modelHook';
@@ -28,7 +28,14 @@ export interface ElemPropsHookValue {
 export interface ComposedElemPropsHookValue {
   kind: 'composedElemPropsHook';
   name: string;
-  composes: (SymbolValue | ElemPropsHookValue)[];
+  composes: (SymbolValue | ElemPropsHookValue | SubModelElemPropsHookValue)[];
+}
+
+export interface SubModelElemPropsHookValue {
+  kind: 'subModelElemPropsHook';
+  name?: string;
+  fn: FunctionValue;
+  uses: SymbolValue;
 }
 
 export interface ComponentValue {

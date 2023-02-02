@@ -122,7 +122,7 @@ describe('docParser', () => {
       expect(docs).toHaveProperty('0.type.kind', 'function');
       expect(docs).toHaveProperty('0.type.parameters.0.kind', 'parameter');
       expect(docs).toHaveProperty('0.type.parameters.0.name', 'input');
-      expect(docs).toHaveProperty('0.type.parameters.0.type.kind', 'typeLiteral');
+      expect(docs).toHaveProperty('0.type.parameters.0.type.kind', 'object');
       expect(docs).toHaveProperty('0.type.parameters.0.type.properties', []);
       expect(docs).toHaveProperty('0.type.returnType.kind', 'union');
       expect(docs).toHaveProperty('0.type.returnType.value.0.kind', 'external');
@@ -208,7 +208,7 @@ describe('docParser', () => {
       const docs = parse(program, 'test.ts'); //?
 
       expect(docs).toHaveProperty('0.name', 'D');
-      expect(docs).toHaveProperty('0.type.kind', 'interface');
+      expect(docs).toHaveProperty('0.type.kind', 'object');
       expect(docs).toHaveProperty('0.type.properties.0.kind', 'property');
       expect(docs).toHaveProperty('0.type.properties.0.name', 'd');
       expect(docs).toHaveProperty('0.type.properties.0.type.kind', 'union');
@@ -238,7 +238,7 @@ describe('docParser', () => {
       const docs = parse(program, 'test.ts'); //?
 
       expect(docs).toHaveProperty('0.name', 'Foo');
-      expect(docs).toHaveProperty('0.type.kind', 'interface');
+      expect(docs).toHaveProperty('0.type.kind', 'object');
       expect(docs).toHaveProperty('0.type.properties.0.kind', 'property');
       expect(docs).toHaveProperty('0.type.properties.0.type.kind', 'union');
       expect(docs).toHaveProperty('0.type.properties.0.type.value.0.kind', 'string');
@@ -369,7 +369,7 @@ describe('docParser', () => {
       `);
       const docs = parse(program, 'test.ts'); //?
       expect(docs).toHaveProperty('0.name', 'Foo');
-      expect(docs).toHaveProperty('0.type.kind', 'interface');
+      expect(docs).toHaveProperty('0.type.kind', 'object');
       expect(docs).toHaveProperty('0.type.properties.0.name', 'foo');
       expect(docs).toHaveProperty('0.type.properties.0.kind', 'property');
       expect(docs).toHaveProperty('0.type.properties.0.type', {
@@ -388,7 +388,7 @@ describe('docParser', () => {
       `);
       const docs = parse(program, 'test.ts'); //?
       expect(docs).toHaveProperty('0.name', 'Foo');
-      expect(docs).toHaveProperty('0.type.kind', 'interface');
+      expect(docs).toHaveProperty('0.type.kind', 'object');
       expect(docs).toHaveProperty('0.type.properties.0.name', 'foo');
       expect(docs).toHaveProperty('0.type.properties.0.kind', 'property');
       expect(docs).toHaveProperty('0.type.properties.0.type', {
@@ -407,7 +407,7 @@ describe('docParser', () => {
       `);
       const docs = parse(program, 'test.ts'); //?
       expect(docs).toHaveProperty('0.name', 'Foo');
-      expect(docs).toHaveProperty('0.type.kind', 'interface');
+      expect(docs).toHaveProperty('0.type.kind', 'object');
       expect(docs).toHaveProperty('0.type.properties.0.name', 'foo');
       expect(docs).toHaveProperty('0.type.properties.0.kind', 'property');
       expect(docs).toHaveProperty('0.type.properties.0.type.kind', 'symbol');
@@ -422,7 +422,7 @@ describe('docParser', () => {
       `);
       const docs = parse(program, 'test.ts'); //?
       expect(docs).toHaveProperty('0.name', 'Foo');
-      expect(docs).toHaveProperty('0.type.kind', 'interface');
+      expect(docs).toHaveProperty('0.type.kind', 'object');
       expect(docs).toHaveProperty('0.type.typeParameters.0.kind', 'typeParameter');
       expect(docs).toHaveProperty('0.type.typeParameters.0.name', 'T');
       expect(docs).toHaveProperty('0.type.properties.0.name', 'foo');
@@ -439,7 +439,7 @@ describe('docParser', () => {
       `);
       const docs = parse(program, 'test.ts'); //?
       expect(docs).toHaveProperty('0.name', 'Foo');
-      expect(docs).toHaveProperty('0.type.kind', 'interface');
+      expect(docs).toHaveProperty('0.type.kind', 'object');
       expect(docs).toHaveProperty('0.type.properties.0.name', 'foo');
       expect(docs).toHaveProperty('0.type.properties.0.kind', 'property');
       expect(docs).toHaveProperty('0.type.properties.0.type.kind', 'array');
@@ -457,7 +457,7 @@ describe('docParser', () => {
       `);
       const docs = parse(program, 'test.ts'); //?
       expect(docs).toHaveProperty('0.name', 'Foo');
-      expect(docs).toHaveProperty('0.type.kind', 'interface');
+      expect(docs).toHaveProperty('0.type.kind', 'object');
       expect(docs).toHaveProperty('0.type.typeParameters.0.kind', 'typeParameter');
       expect(docs).toHaveProperty('0.type.typeParameters.0.name', 'T');
       expect(docs).toHaveProperty('0.type.typeParameters.0.defaultValue', {
@@ -478,7 +478,7 @@ describe('docParser', () => {
       `);
       const docs = parse(program, 'test.ts'); //?
       expect(docs).toHaveProperty('0.name', 'Foo');
-      expect(docs).toHaveProperty('0.type.kind', 'interface');
+      expect(docs).toHaveProperty('0.type.kind', 'object');
       expect(docs).toHaveProperty('0.type.properties.0.name', 'foo');
       expect(docs).toHaveProperty('0.type.properties.0.kind', 'property');
       expect(docs).toHaveProperty('0.type.properties.0.type.kind', 'function');
@@ -492,7 +492,7 @@ describe('docParser', () => {
       `);
       const docs = parse(program, 'test.ts'); //?
       expect(docs).toHaveProperty('0.name', 'Foo');
-      expect(docs).toHaveProperty('0.type.kind', 'interface');
+      expect(docs).toHaveProperty('0.type.kind', 'object');
       expect(docs).toHaveProperty('0.type.properties.0.name', 'foo');
       expect(docs).toHaveProperty('0.type.properties.0.kind', 'property');
       expect(docs).toHaveProperty('0.type.properties.0.type.kind', 'primitive');
@@ -507,7 +507,7 @@ describe('docParser', () => {
       `);
       const docs = parse(program, 'test.ts'); //?
       expect(docs).toHaveProperty('0.name', 'Foo');
-      expect(docs).toHaveProperty('0.type.kind', 'interface');
+      expect(docs).toHaveProperty('0.type.kind', 'object');
       expect(docs).toHaveProperty('0.type.typeParameters.0.kind', 'typeParameter');
       expect(docs).toHaveProperty('0.type.typeParameters.0.name', 'T');
       expect(docs).toHaveProperty('0.type.typeParameters.0.defaultValue', {
@@ -543,7 +543,7 @@ describe('docParser', () => {
       `);
       const docs = parse(program, 'test.ts'); //?
       expect(docs).toHaveProperty('0.name', 'PropMap');
-      expect(docs).toHaveProperty('0.type.kind', 'interface');
+      expect(docs).toHaveProperty('0.type.kind', 'object');
       expect(docs).toHaveProperty('0.type.properties.0.kind', 'property');
       expect(docs).toHaveProperty('0.type.properties.0.name', 'foo');
 
@@ -558,7 +558,7 @@ describe('docParser', () => {
       `);
       const docs = parse(program, 'test.ts'); //?
       expect(docs).toHaveProperty('0.name', 'Foo');
-      expect(docs).toHaveProperty('0.type.kind', 'interface');
+      expect(docs).toHaveProperty('0.type.kind', 'object');
       expect(docs).toHaveProperty('0.type.typeParameters.0.kind', 'typeParameter');
       expect(docs).toHaveProperty('0.type.typeParameters.0.name', 'T');
       expect(docs).toHaveProperty('0.type.typeParameters.0.defaultValue', {
@@ -580,7 +580,7 @@ describe('docParser', () => {
       `);
       const docs = parse(program, 'test.ts'); //?
       expect(docs).toHaveProperty('0.name', 'Foo');
-      expect(docs).toHaveProperty('0.type.kind', 'interface');
+      expect(docs).toHaveProperty('0.type.kind', 'object');
       expect(docs).toHaveProperty('0.type.typeParameters.0.kind', 'typeParameter');
       expect(docs).toHaveProperty('0.type.typeParameters.0.name', 'T');
       expect(docs).toHaveProperty('0.type.properties.0.name', 'foo');
@@ -601,7 +601,7 @@ describe('docParser', () => {
       `);
       const docs = parse(program, 'test.ts'); //?
       expect(docs).toHaveProperty('0.name', 'Foo');
-      expect(docs).toHaveProperty('0.type.kind', 'interface');
+      expect(docs).toHaveProperty('0.type.kind', 'object');
       expect(docs).toHaveProperty('0.type.typeParameters.0.kind', 'typeParameter');
       expect(docs).toHaveProperty('0.type.properties.0.name', 'foo');
       expect(docs).toHaveProperty('0.type.properties.0.kind', 'property');
@@ -625,7 +625,7 @@ describe('docParser', () => {
       `);
       const docs = parse(program, 'test.ts'); //?
       expect(docs).toHaveProperty('0.name', 'Foo');
-      expect(docs).toHaveProperty('0.type.kind', 'interface');
+      expect(docs).toHaveProperty('0.type.kind', 'object');
       expect(docs).toHaveProperty('0.type.typeParameters.0.kind', 'typeParameter');
       expect(docs).toHaveProperty('0.type.properties.0.name', 'foo');
       expect(docs).toHaveProperty('0.type.properties.0.kind', 'property');
@@ -908,7 +908,7 @@ describe('docParser', () => {
     expect(docs).toHaveProperty('0.name', 'myFoo');
     expect(docs).toHaveProperty('0.type.kind', 'function');
     expect(docs).toHaveProperty('0.type.parameters.0.kind', 'parameter');
-    expect(docs).toHaveProperty('0.type.parameters.0.type.kind', 'typeLiteral');
+    expect(docs).toHaveProperty('0.type.parameters.0.type.kind', 'object');
     expect(docs).toHaveProperty('0.type.parameters.0.type.properties.0.name', 'foo');
     expect(docs).toHaveProperty('0.type.parameters.0.type.properties.0.kind', 'property');
     expect(docs).toHaveProperty('0.type.parameters.0.type.properties.0.type.kind', 'primitive');
@@ -931,7 +931,7 @@ describe('docParser', () => {
     expect(docs).toHaveProperty('0.name', 'myFoo');
     expect(docs).toHaveProperty('0.type.kind', 'function');
     expect(docs).toHaveProperty('0.type.parameters.0.kind', 'parameter');
-    expect(docs).toHaveProperty('0.type.parameters.0.type.kind', 'typeLiteral');
+    expect(docs).toHaveProperty('0.type.parameters.0.type.kind', 'object');
     expect(docs).toHaveProperty('0.type.parameters.0.type.properties.0.name', 'foo');
     expect(docs).toHaveProperty('0.type.parameters.0.type.properties.0.kind', 'property');
     expect(docs).toHaveProperty('0.type.parameters.0.type.properties.0.type.kind', 'primitive');
@@ -988,7 +988,7 @@ describe('docParser', () => {
     expect(docs).toHaveProperty('0.type.parameters.0.name', 'input');
     expect(docs).toHaveProperty('0.type.parameters.0.defaultValue', undefined);
     expect(docs).toHaveProperty('0.type.parameters.0.required', true);
-    expect(docs).toHaveProperty('0.type.parameters.0.type.kind', 'typeLiteral');
+    expect(docs).toHaveProperty('0.type.parameters.0.type.kind', 'object');
     expect(docs).toHaveProperty('0.type.parameters.0.type.properties.0.kind', 'property');
     expect(docs).toHaveProperty('0.type.parameters.0.type.properties.0.name', 'foo');
     expect(docs).toHaveProperty('0.type.parameters.0.type.properties.0.type.kind', 'primitive');
@@ -1033,7 +1033,7 @@ describe('docParser', () => {
     expect(docs).toHaveProperty('0.type.parameters.0.name', 'input');
     expect(docs).toHaveProperty('0.type.parameters.0.defaultValue', undefined);
     expect(docs).toHaveProperty('0.type.parameters.0.required', true);
-    expect(docs).toHaveProperty('0.type.parameters.0.type.kind', 'interface');
+    expect(docs).toHaveProperty('0.type.parameters.0.type.kind', 'object');
     expect(docs).toHaveProperty('0.type.parameters.0.type.properties.0.name', 'foo');
     expect(docs).toHaveProperty('0.type.parameters.0.type.properties.0.type.kind', 'primitive');
     expect(docs).toHaveProperty('0.type.parameters.0.type.properties.0.type.value', 'string');
@@ -1054,6 +1054,25 @@ describe('docParser', () => {
     expect(docs).toHaveProperty('0.type.members.0.name', 'myStaticMember');
     expect(docs).toHaveProperty('0.type.members.0.type.kind', 'primitive');
     expect(docs).toHaveProperty('0.type.members.0.type.value', 'string');
+  });
+
+  it('should handle functions with type parameters properties', () => {
+    const program = createProgramFromSource(`
+      export function myFoo<T extends string = ''>(input: T): boolean {
+        return false
+      }
+
+      myFoo.myStaticMember = 'bar'
+    `);
+    const docs = parse(program, 'test.ts'); //?
+    expect(docs).toHaveProperty('0.name', 'myFoo');
+    expect(docs).toHaveProperty('0.type.kind', 'function');
+    expect(docs).toHaveProperty('0.type.typeParameters.0.kind', 'typeParameter');
+    expect(docs).toHaveProperty('0.type.typeParameters.0.name', 'T');
+    expect(docs).toHaveProperty('0.type.typeParameters.0.defaultValue.kind', 'string');
+    expect(docs).toHaveProperty('0.type.typeParameters.0.defaultValue.value', '');
+    expect(docs).toHaveProperty('0.type.typeParameters.0.constraint.kind', 'primitive');
+    expect(docs).toHaveProperty('0.type.typeParameters.0.constraint.value', 'string');
   });
 
   it('should handle variable declaration functions with additional properties', () => {
@@ -1123,7 +1142,7 @@ describe('docParser', () => {
     `);
     const docs = parse(program, 'test.ts'); //?
     expect(docs).toHaveProperty('0.name', 'Foo');
-    expect(docs).toHaveProperty('0.type.kind', 'interface');
+    expect(docs).toHaveProperty('0.type.kind', 'object');
     expect(docs).toHaveProperty('0.type.indexSignature.kind', 'indexSignature');
     expect(docs).toHaveProperty('0.type.indexSignature.name', 'key');
     expect(docs).toHaveProperty('0.type.indexSignature.type.kind', 'primitive');
@@ -1141,7 +1160,7 @@ describe('docParser', () => {
     `);
     const docs = parse(program, 'test.ts'); //?
     expect(docs).toHaveProperty('0.name', 'MyEnum');
-    expect(docs).toHaveProperty('0.type.kind', 'interface');
+    expect(docs).toHaveProperty('0.type.kind', 'object');
     expect(docs).toHaveProperty('0.type.properties.0.kind', 'property');
     expect(docs).toHaveProperty('0.type.properties.0.name', 'Foo');
     expect(docs).toHaveProperty('0.type.properties.0.type.kind', 'string');
@@ -1256,7 +1275,7 @@ describe('docParser', () => {
     const docs = parse(program, 'test.ts'); //?
 
     expect(docs).toHaveProperty('0.name', 'A');
-    expect(docs).toHaveProperty('0.type.kind', 'interface');
+    expect(docs).toHaveProperty('0.type.kind', 'object');
     expect(docs).toHaveProperty('0.type.indexSignature.kind', 'indexSignature');
     expect(docs).toHaveProperty('0.type.indexSignature.name', 'key');
     expect(docs).toHaveProperty('0.type.indexSignature.type.kind', 'primitive');

@@ -2,7 +2,7 @@ import ts from 'typescript';
 
 import {createProgramFromSource} from './createProgramFromSource';
 import {parse} from '../docParser';
-import {modelParser} from '../modelParser';
+import {modelParser} from '../plugins/modelParser';
 
 describe('modelParser', () => {
   it('should handle models', () => {

@@ -1,4 +1,4 @@
-import {ObjectProperty, FunctionValue, SymbolValue, FunctionParameter} from './docTypes';
+import {ObjectProperty, FunctionValue, SymbolValue, FunctionParameter} from '../docTypes';
 import {
   createParserPlugin,
   getValueDeclaration,
@@ -6,8 +6,8 @@ import {
   defaultJSDoc,
   getSymbolFromNode,
   getFullJsDocComment,
-} from './docParser';
-import t from './traverse';
+} from '../docParser';
+import t from '../traverse';
 import {ModelHookValue, ModelValue} from './customTypes';
 
 function capitalize(string: string) {

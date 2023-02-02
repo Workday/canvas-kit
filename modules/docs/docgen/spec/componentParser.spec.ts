@@ -1,6 +1,6 @@
 import {createProgramFromSource} from './createProgramFromSource';
 import {parse} from '../docParser';
-import {componentParser} from '../componentParser';
+import {componentParser} from '../plugins/componentParser';
 
 // prettier-ignore
 describe('componentParser', () => {
@@ -20,7 +20,7 @@ describe('componentParser', () => {
       const symbols = parse(program, 'test.tsx', [componentParser]); //?
 
       expect(symbols).toHaveProperty('0.name', 'Props');
-      expect(symbols).toHaveProperty('0.type.kind', 'interface');
+      expect(symbols).toHaveProperty('0.type.kind', 'object');
       expect(symbols).toHaveProperty('0.type.properties.0.kind', 'property');
       expect(symbols).toHaveProperty('0.type.properties.0.name', 'overflowX');
       expect(symbols).toHaveProperty('0.type.properties.0.type.kind', 'external');
@@ -63,7 +63,7 @@ describe('componentParser', () => {
       expect(symbols).toHaveProperty('0.type.parameters.0.type.name', 'MyModel');
       expect(symbols).toHaveProperty('0.type.parameters.1.name', 'elemProps');
       expect(symbols).toHaveProperty('0.type.parameters.1.kind', 'parameter');
-      expect(symbols).toHaveProperty('0.type.parameters.1.type.kind', 'typeLiteral');
+      expect(symbols).toHaveProperty('0.type.parameters.1.type.kind', 'object');
       expect(symbols).toHaveProperty('0.type.parameters.1.type.properties.0.kind', 'property');
       expect(symbols).toHaveProperty('0.type.parameters.1.type.properties.0.name', 'data-id');
       expect(symbols).toHaveProperty(
@@ -71,7 +71,7 @@ describe('componentParser', () => {
         'primitive'
       );
       expect(symbols).toHaveProperty('0.type.parameters.1.type.properties.0.type.value', 'string');
-      expect(symbols).toHaveProperty('0.type.returnType.kind', 'typeLiteral');
+      expect(symbols).toHaveProperty('0.type.returnType.kind', 'object');
       expect(symbols).toHaveProperty('0.type.returnType.properties.0.kind', 'property');
       expect(symbols).toHaveProperty('0.type.returnType.properties.0.name', 'data-id');
       expect(symbols).toHaveProperty('0.type.returnType.properties.0.type.kind', 'primitive');
@@ -114,7 +114,7 @@ describe('componentParser', () => {
       expect(symbols).toHaveProperty('0.type.parameters.0.type.name', 'MyModel');
       expect(symbols).toHaveProperty('0.type.parameters.1.name', 'elemProps');
       expect(symbols).toHaveProperty('0.type.parameters.1.kind', 'parameter');
-      expect(symbols).toHaveProperty('0.type.parameters.1.type.kind', 'typeLiteral');
+      expect(symbols).toHaveProperty('0.type.parameters.1.type.kind', 'object');
       expect(symbols).toHaveProperty('0.type.parameters.1.type.properties.0.kind', 'property');
       expect(symbols).toHaveProperty('0.type.parameters.1.type.properties.0.name', 'data-id');
       expect(symbols).toHaveProperty(
@@ -122,7 +122,7 @@ describe('componentParser', () => {
         'primitive'
       );
       expect(symbols).toHaveProperty('0.type.parameters.1.type.properties.0.type.value', 'string');
-      expect(symbols).toHaveProperty('0.type.returnType.kind', 'typeLiteral');
+      expect(symbols).toHaveProperty('0.type.returnType.kind', 'object');
       expect(symbols).toHaveProperty('0.type.returnType.properties.0.kind', 'property');
       expect(symbols).toHaveProperty('0.type.returnType.properties.0.name', 'ref');
       expect(symbols).toHaveProperty('0.type.returnType.properties.0.type.kind', 'function');
@@ -162,12 +162,12 @@ describe('componentParser', () => {
       expect(symbols).toHaveProperty('0.type.composes.0.parameters.0.type.name', 'MyModel');
       expect(symbols).toHaveProperty('0.type.composes.0.parameters.1.kind', 'parameter');
       expect(symbols).toHaveProperty('0.type.composes.0.parameters.1.name', 'elemProps');
-      expect(symbols).toHaveProperty('0.type.composes.0.parameters.1.type.kind', 'typeLiteral');
+      expect(symbols).toHaveProperty('0.type.composes.0.parameters.1.type.kind', 'object');
       expect(symbols).toHaveProperty('0.type.composes.0.parameters.1.type.properties.0.kind', 'property');
       expect(symbols).toHaveProperty('0.type.composes.0.parameters.1.type.properties.0.name', 'data-id');
       expect(symbols).toHaveProperty('0.type.composes.0.parameters.1.type.properties.0.type.kind', 'primitive');
       expect(symbols).toHaveProperty('0.type.composes.0.parameters.1.type.properties.0.type.value', 'string');
-      expect(symbols).toHaveProperty('0.type.composes.0.returnType.kind', 'typeLiteral');
+      expect(symbols).toHaveProperty('0.type.composes.0.returnType.kind', 'object');
       expect(symbols).toHaveProperty('0.type.composes.0.returnType.properties.0.kind', 'property');
       expect(symbols).toHaveProperty('0.type.composes.0.returnType.properties.0.name', 'id');
       expect(symbols).toHaveProperty('0.type.composes.0.returnType.properties.0.type.kind', 'primitive');
@@ -205,9 +205,9 @@ describe('componentParser', () => {
       expect(symbols).toHaveProperty('0.type.composes.0.parameters.0.type.name', 'MyModel');
       expect(symbols).toHaveProperty('0.type.composes.0.parameters.1.kind', 'parameter');
       expect(symbols).toHaveProperty('0.type.composes.0.parameters.1.name', 'elemProps');
-      expect(symbols).toHaveProperty('0.type.composes.0.parameters.1.type.kind', 'typeLiteral');
+      expect(symbols).toHaveProperty('0.type.composes.0.parameters.1.type.kind', 'object');
       expect(symbols).toHaveProperty('0.type.composes.0.parameters.1.type.properties.length', 0);
-      expect(symbols).toHaveProperty('0.type.composes.0.returnType.kind', 'typeLiteral');
+      expect(symbols).toHaveProperty('0.type.composes.0.returnType.kind', 'object');
       expect(symbols).toHaveProperty('0.type.composes.0.returnType.properties.0.kind', 'property');
       expect(symbols).toHaveProperty('0.type.composes.0.returnType.properties.0.name', 'id');
       expect(symbols).toHaveProperty('0.type.composes.0.returnType.properties.0.type.kind', 'primitive');
@@ -217,6 +217,39 @@ describe('componentParser', () => {
       expect(symbols).toHaveProperty('0.type.composes.2.kind', 'symbol');
       expect(symbols).toHaveProperty('0.type.composes.2.name', 'useHook2');
     });
+  });
+
+  it('should handle "composeHooks" a subModel hook', () => {
+    const program = createProgramFromSource(`
+      export const useMyComponent = composeHooks(
+        useHook1,
+        createSubModelElemPropsHook(useMyModel)(m => m.subModel, useHook2)
+      )
+
+      // make the parser consider these exported symbols
+      export const useHook1 = undefined
+      export const useHook2 = undefined
+    `);
+
+    const symbols = parse(program, 'test.ts', [componentParser]); //?
+
+    expect(symbols).toHaveProperty('0.name', 'useMyComponent');
+    expect(symbols).toHaveProperty('0.type.kind', 'callExpression');
+    expect(symbols).toHaveProperty('0.type.name.kind', 'symbol');
+    expect(symbols).toHaveProperty('0.type.name.name', 'composeHooks');
+    expect(symbols).toHaveProperty('0.type.parameters.0.kind', 'symbol');
+    expect(symbols).toHaveProperty('0.type.parameters.0.name', 'useHook1');
+    expect(symbols).toHaveProperty('0.type.parameters.1.kind', 'callExpression');
+    expect(symbols).toHaveProperty('0.type.parameters.1.name.kind', 'symbol');
+    expect(symbols).toHaveProperty('0.type.parameters.1.name.name', 'createSubModelElemPropsHook');
+    expect(symbols).toHaveProperty('0.type.parameters.1.parameters.0.kind', 'function');
+    expect(symbols).toHaveProperty('0.type.parameters.1.parameters.0.parameters.0.name', 'model');
+    expect(symbols).toHaveProperty('0.type.parameters.1.parameters.0.parameters.0.type.kind', 'symbol');
+    expect(symbols).toHaveProperty('0.type.parameters.1.parameters.0.parameters.0.type.name', 'MyModel');
+    expect(symbols).toHaveProperty('0.type.parameters.1.parameters.0.returnType.kind', 'symbol');
+    expect(symbols).toHaveProperty('0.type.parameters.1.parameters.0.returnType.name', 'Model');
+    expect(symbols).toHaveProperty('0.type.parameters.1.parameters.1.kind', 'symbol');
+    expect(symbols).toHaveProperty('0.type.parameters.1.parameters.1.name', 'useHook2');
   });
 
   describe('createComponent', () => {
@@ -463,6 +496,43 @@ describe('componentParser', () => {
       expect(symbols).toHaveProperty('0.type.model', 'MyModel');
       expect(symbols).toHaveProperty('0.type.subComponents.0.name', 'Item');
       expect(symbols).toHaveProperty('0.type.subComponents.0.symbol', 'MyComponentItem');
+    });
+
+    it('should handle "elemPropsHook" that is aliased', () => {
+      const program = createProgramFromSource(
+        'test.tsx',
+        `
+        export const MyComponent = createContainer('div')({
+          displayName: 'My.Component',
+          modelHook: useMyModel,
+          elemPropsHook: useMyComponent,
+        })<MyComponentProps>((elemProps, Element) => {
+          return <Element size="medium" {...elemProps} />
+        });
+
+        export const useMyComponent = useMyOtherComponent
+
+        export interface MyComponentProps {
+          size: string
+        }
+      `
+      );
+
+      const symbols = parse(program, 'test.tsx', [componentParser]); //?
+
+      expect(symbols).toHaveProperty('0.name', 'MyComponent');
+      expect(symbols).toHaveProperty('0.type.kind', 'enhancedComponent');
+      expect(symbols).toHaveProperty('0.type.displayName', 'My.Component');
+      expect(symbols).toHaveProperty('0.type.elemPropsHook', 'useMyOtherComponent');
+      expect(symbols).toHaveProperty('0.type.baseElement.kind', 'external');
+      expect(symbols).toHaveProperty('0.type.baseElement.name', 'div');
+      expect(symbols).toHaveProperty('0.type.props.0.kind', 'property');
+      expect(symbols).toHaveProperty('0.type.props.0.name', 'size');
+      expect(symbols).toHaveProperty('0.type.props.0.type.kind', 'primitive');
+      expect(symbols).toHaveProperty('0.type.props.0.type.value', 'string');
+      expect(symbols).toHaveProperty('0.type.props.0.defaultValue.kind', 'string');
+      expect(symbols).toHaveProperty('0.type.props.0.defaultValue.value', 'medium');
+      expect(symbols).toHaveProperty('0.type.model', 'MyModel');
     });
   });
 

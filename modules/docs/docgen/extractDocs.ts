@@ -6,8 +6,8 @@ import _glob from 'glob';
 
 // import t from './traverse';
 import {DocParser, mergeParserPlugins} from './docParser';
-import {modelParser} from './modelParser';
-import {componentParser} from './componentParser';
+import {modelParser} from './plugins/modelParser';
+import {componentParser} from './plugins/componentParser';
 
 const glob = promisify(_glob);
 
