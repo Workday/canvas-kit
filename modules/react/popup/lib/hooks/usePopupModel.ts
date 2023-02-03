@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {createModelHook} from '@workday/canvas-kit-react/common';
+import {createModelHook, ModelExtras, ToEventConfig} from '@workday/canvas-kit-react/common';
 
 import {useDisclosureModel} from '@workday/canvas-kit-react/disclosure';
 import {Placement} from '@workday/canvas-kit-react/popup';
@@ -7,7 +7,7 @@ import {Placement} from '@workday/canvas-kit-react/popup';
 // eslint-disable-next-line no-empty-function
 const noop = () => {};
 
-export const usePopupModel = createModelHook({
+export const _usePopupModel = createModelHook({
   // create enough of a model to use `Popup.Card` without a `Popup` container component.
   defaultContext: {state: {}, events: {show: noop, hide: noop}},
   defaultConfig: {
@@ -77,27 +77,27 @@ export const usePopupModel = createModelHook({
   };
 });
 
-// export type _PopupModel = ReturnType<typeof _usePopupModel>;
-// export interface PopupModel extends _PopupModel {}
-// export type _PopupState = _PopupModel['state'];
-// export type _PopupEvents = _PopupModel['events'];
-// export interface PopupState extends _PopupState {}
-// export interface PopupEvents extends _PopupEvents {}
-// export type PopupDefaultConfig = typeof _usePopupModel.defaultConfig &
-//   ToEventConfig<PopupState, PopupEvents>;
-// export type PopupRequiredConfig = typeof _usePopupModel.requiredConfig;
-// export interface PopupModelConfig extends Partial<PopupDefaultConfig>, PopupRequiredConfig {}
-// export interface PopupModelHook
-//   extends ModelExtras<
-//     typeof _usePopupModel.defaultConfig,
-//     typeof _usePopupModel.requiredConfig,
-//     PopupState,
-//     PopupEvents,
-//     PopupModel
-//   > {
-//   (config?: PopupModelConfig): PopupModel;
-// }
-// export const usePopupModel: PopupModelHook = _usePopupModel;
+export type _PopupModel = ReturnType<typeof _usePopupModel>;
+export interface PopupModel extends _PopupModel {}
+export type _PopupState = _PopupModel['state'];
+export type _PopupEvents = _PopupModel['events'];
+export interface PopupState extends _PopupState {}
+export interface PopupEvents extends _PopupEvents {}
+export type PopupDefaultConfig = typeof _usePopupModel.defaultConfig &
+  ToEventConfig<PopupState, PopupEvents>;
+export type PopupRequiredConfig = typeof _usePopupModel.requiredConfig;
+export interface PopupModelConfig extends Partial<PopupDefaultConfig>, PopupRequiredConfig {}
+export interface PopupModelHook
+  extends ModelExtras<
+    typeof _usePopupModel.defaultConfig,
+    typeof _usePopupModel.requiredConfig,
+    PopupState,
+    PopupEvents,
+    PopupModel
+  > {
+  (config?: PopupModelConfig): PopupModel;
+}
+export const usePopupModel: PopupModelHook = _usePopupModel;
 
-// // create enough of a model to use `Popup.Card` without a `Popup` container component.
-// export const PopupModelContext = usePopupModel.Context;
+// create enough of a model to use `Popup.Card` without a `Popup` container component.
+export const PopupModelContext = usePopupModel.Context;

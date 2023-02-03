@@ -634,6 +634,7 @@ export const subModelHook = <M extends Model<any, any>, SM extends Model<any, an
  * subModel. Usually only used when composing elemProps hooks.
  *
  * For example:
+ *
  * ```tsx
  * const useMySubModel = () => {}
  *

@@ -1,0 +1,471 @@
+[
+  {
+    "name": "useIdModel",
+    "packageName": "react",
+    "fileName": "test.ts",
+    "description": "",
+    "declarations": [
+      {
+        "name": "useIdModel",
+        "filePath": "test.ts"
+      }
+    ],
+    "tags": {},
+    "type": {
+      "kind": "modelHook",
+      "defaultConfig": [
+        {
+          "kind": "property",
+          "name": "a",
+          "defaultValue": {
+            "kind": "string",
+            "value": ""
+          },
+          "type": {
+            "kind": "primitive",
+            "value": "string"
+          },
+          "required": false,
+          "description": "",
+          "declarations": [
+            {
+              "name": "a",
+              "filePath": "test.ts"
+            }
+          ],
+          "tags": {}
+        }
+      ],
+      "requiredConfig": [
+        {
+          "kind": "property",
+          "name": "b",
+          "defaultValue": {
+            "kind": "string",
+            "value": ""
+          },
+          "type": {
+            "kind": "primitive",
+            "value": "string"
+          },
+          "required": true,
+          "description": "",
+          "declarations": [
+            {
+              "name": "b",
+              "filePath": "test.ts"
+            }
+          ],
+          "tags": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "IdModel",
+    "packageName": "react",
+    "fileName": "test.ts",
+    "description": "",
+    "tags": {},
+    "declarations": [],
+    "type": {
+      "kind": "model",
+      "state": [
+        {
+          "kind": "property",
+          "name": "c",
+          "type": {
+            "kind": "primitive",
+            "value": "string"
+          },
+          "description": "",
+          "declarations": [
+            {
+              "name": "c",
+              "filePath": "test.ts"
+            }
+          ],
+          "tags": {}
+        }
+      ],
+      "events": [
+        {
+          "kind": "property",
+          "name": "open",
+          "defaultValue": {
+            "kind": "function",
+            "parameters": [
+              {
+                "kind": "parameter",
+                "name": "value",
+                "type": {
+                  "kind": "primitive",
+                  "value": "string"
+                },
+                "required": true,
+                "rest": false,
+                "description": "",
+                "declarations": [
+                  {
+                    "name": "value",
+                    "filePath": "test.ts"
+                  }
+                ],
+                "tags": {}
+              }
+            ],
+            "members": [],
+            "returnType": {
+              "kind": "primitive",
+              "value": "undefined"
+            }
+          },
+          "type": {
+            "kind": "function",
+            "parameters": [
+              {
+                "kind": "parameter",
+                "name": "value",
+                "type": {
+                  "kind": "primitive",
+                  "value": "string"
+                },
+                "required": true,
+                "rest": false,
+                "description": "",
+                "declarations": [
+                  {
+                    "name": "value",
+                    "filePath": "test.ts"
+                  }
+                ],
+                "tags": {}
+              }
+            ],
+            "members": [],
+            "returnType": {
+              "kind": "primitive",
+              "value": "undefined"
+            }
+          },
+          "required": true,
+          "description": "",
+          "declarations": [
+            {
+              "name": "open",
+              "filePath": "test.ts"
+            }
+          ],
+          "tags": {}
+        }
+      ],
+      "modelProperties": [
+        {
+          "kind": "property",
+          "name": "getId",
+          "defaultValue": {
+            "kind": "function",
+            "parameters": [],
+            "members": [],
+            "returnType": {
+              "kind": "primitive",
+              "value": "boolean"
+            }
+          },
+          "type": {
+            "kind": "function",
+            "parameters": [],
+            "members": [],
+            "returnType": {
+              "kind": "primitive",
+              "value": "boolean"
+            }
+          },
+          "required": true,
+          "description": "",
+          "declarations": [
+            {
+              "name": "getId",
+              "filePath": "test.ts"
+            }
+          ],
+          "tags": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "IdModelConfig",
+    "packageName": "react",
+    "fileName": "test.ts",
+    "description": "",
+    "tags": {},
+    "declarations": [],
+    "type": {
+      "kind": "object",
+      "properties": [
+        {
+          "kind": "property",
+          "name": "a",
+          "defaultValue": {
+            "kind": "string",
+            "value": ""
+          },
+          "type": {
+            "kind": "primitive",
+            "value": "string"
+          },
+          "required": false,
+          "description": "",
+          "declarations": [
+            {
+              "name": "a",
+              "filePath": "test.ts"
+            }
+          ],
+          "tags": {}
+        },
+        {
+          "kind": "property",
+          "name": "b",
+          "defaultValue": {
+            "kind": "string",
+            "value": ""
+          },
+          "type": {
+            "kind": "primitive",
+            "value": "string"
+          },
+          "required": true,
+          "description": "",
+          "declarations": [
+            {
+              "name": "b",
+              "filePath": "test.ts"
+            }
+          ],
+          "tags": {}
+        },
+        {
+          "kind": "property",
+          "name": "onOpen",
+          "type": {
+            "kind": "function",
+            "parameters": [
+              {
+                "description": "",
+                "tags": {},
+                "declarations": [],
+                "kind": "property",
+                "name": "state",
+                "required": true,
+                "type": {
+                  "kind": "symbol",
+                  "name": "IdModelState",
+                  "fileName": "test.ts"
+                }
+              },
+              {
+                "kind": "parameter",
+                "name": "value",
+                "type": {
+                  "kind": "primitive",
+                  "value": "string"
+                },
+                "required": true,
+                "rest": false,
+                "description": "",
+                "declarations": [
+                  {
+                    "name": "value",
+                    "filePath": "test.ts"
+                  }
+                ],
+                "tags": {}
+              }
+            ],
+            "members": [],
+            "returnType": {
+              "kind": "primitive",
+              "value": "void"
+            }
+          },
+          "required": false,
+          "description": "",
+          "declarations": [
+            {
+              "name": "open",
+              "filePath": "test.ts"
+            }
+          ],
+          "tags": {}
+        },
+        {
+          "kind": "property",
+          "name": "shouldOpen",
+          "type": {
+            "kind": "function",
+            "parameters": [
+              {
+                "description": "",
+                "tags": {},
+                "declarations": [],
+                "kind": "property",
+                "name": "state",
+                "required": true,
+                "type": {
+                  "kind": "symbol",
+                  "name": "IdModelState",
+                  "fileName": "test.ts"
+                }
+              },
+              {
+                "kind": "parameter",
+                "name": "value",
+                "type": {
+                  "kind": "primitive",
+                  "value": "string"
+                },
+                "required": true,
+                "rest": false,
+                "description": "",
+                "declarations": [
+                  {
+                    "name": "value",
+                    "filePath": "test.ts"
+                  }
+                ],
+                "tags": {}
+              }
+            ],
+            "members": [],
+            "returnType": {
+              "kind": "primitive",
+              "value": "boolean"
+            }
+          },
+          "required": false,
+          "description": "",
+          "declarations": [
+            {
+              "name": "open",
+              "filePath": "test.ts"
+            }
+          ],
+          "tags": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "IdModelState",
+    "packageName": "react",
+    "fileName": "test.ts",
+    "description": "",
+    "tags": {},
+    "declarations": [],
+    "type": {
+      "kind": "object",
+      "properties": [
+        {
+          "kind": "property",
+          "name": "c",
+          "type": {
+            "kind": "primitive",
+            "value": "string"
+          },
+          "description": "",
+          "declarations": [
+            {
+              "name": "c",
+              "filePath": "test.ts"
+            }
+          ],
+          "tags": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "IdModelEvents",
+    "packageName": "react",
+    "fileName": "test.ts",
+    "description": "",
+    "tags": {},
+    "declarations": [],
+    "type": {
+      "kind": "object",
+      "properties": [
+        {
+          "kind": "property",
+          "name": "open",
+          "defaultValue": {
+            "kind": "function",
+            "parameters": [
+              {
+                "kind": "parameter",
+                "name": "value",
+                "type": {
+                  "kind": "primitive",
+                  "value": "string"
+                },
+                "required": true,
+                "rest": false,
+                "description": "",
+                "declarations": [
+                  {
+                    "name": "value",
+                    "filePath": "test.ts"
+                  }
+                ],
+                "tags": {}
+              }
+            ],
+            "members": [],
+            "returnType": {
+              "kind": "primitive",
+              "value": "undefined"
+            }
+          },
+          "type": {
+            "kind": "function",
+            "parameters": [
+              {
+                "kind": "parameter",
+                "name": "value",
+                "type": {
+                  "kind": "primitive",
+                  "value": "string"
+                },
+                "required": true,
+                "rest": false,
+                "description": "",
+                "declarations": [
+                  {
+                    "name": "value",
+                    "filePath": "test.ts"
+                  }
+                ],
+                "tags": {}
+              }
+            ],
+            "members": [],
+            "returnType": {
+              "kind": "primitive",
+              "value": "undefined"
+            }
+          },
+          "required": true,
+          "description": "",
+          "declarations": [
+            {
+              "name": "open",
+              "filePath": "test.ts"
+            }
+          ],
+          "tags": {}
+        }
+      ]
+    }
+  }
+]
