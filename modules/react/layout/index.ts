@@ -1,7 +1,3 @@
-import {DeprecatedLayout} from './lib/Layout';
-import {DeprecatedColumn} from './lib/Column';
-
-export { DeprecatedLayout, DeprecatedColumn};
 export * from './lib/Box';
 export * from './lib/utils/background';
 export * from './lib/utils/border';
