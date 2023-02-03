@@ -650,7 +650,7 @@ export const subModelHook = <M extends Model<any, any>, SM extends Model<any, an
  *
  * const useMyComponent = composeHook(
  *   createElemPropsHook(useMyModel)(model => ({ id: '' })),
- *   subModel(useMyModel)(m => m.subModel, useSomeOtherComponent)
+ *   createSubModelElemPropsHook(useMyModel)(m => m.subModel, useSomeOtherComponent)
  * )
  * ```
  */
