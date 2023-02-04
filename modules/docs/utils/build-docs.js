@@ -1,6 +1,6 @@
 // @ts-check
-const path = require('node:path');
-const fs = require('node:fs');
+const path = require('path');
+const fs = require('fs');
 const {createDocProgram} = require('../docgen/createDocProgram');
 
 let {parser} = createDocProgram();

@@ -2,7 +2,7 @@
 
 const ts = require('typescript');
 const glob = require('glob');
-const path = require('node:path');
+const path = require('path');
 
 // we use TS files, so tell node to register them
 require('ts-node').register({});

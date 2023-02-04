@@ -106,7 +106,6 @@ module.exports = {
       enforce: 'pre',
     });
 
-    const srcFolder = path.join(__dirname, '../');
     config.module.rules.push({
       test: /.+\.tsx?$/,
       include: [modulesPath],
@@ -114,16 +113,6 @@ module.exports = {
       loaders: [
         {
           loader: path.resolve(__dirname, 'symbol-doc-loader'),
-          options: {
-            glob: `${srcFolder}modules/**/*.{ts,tsx}`,
-            ignore: [
-              '**/examples/**',
-              '**/spec/**',
-              '**/stories/**',
-              '**/codemod/**',
-              '**/docs/**',
-            ],
-          },
         },
       ],
       enforce: 'pre',
