@@ -24,10 +24,10 @@
     "clean": "rimraf dist && rimraf .build-info && mkdirp dist",
     "build:mdx": "node ./utils/build-mdx.js mdx/",
     "build:es6": "tsc -p tsconfig.es6.json",
-    "build:props": "node ./utils/build-props.js",
+    "build:docs": "node ./utils/build-docs.js",
     "build:rebuild": "npm-run-all clean build",
     "build:specs": "node ./utils/build-specifications.js",
-    "build": "npm-run-all --parallel build:es6 build:mdx --sequential build:specs",
+    "build": "npm-run-all --parallel build:es6 build:mdx --parallel build:specs build:docs",
     "depcheck": "node ../../utils/check-dependencies-exist.js",
     "typecheck:src": "tsc -p . --noEmit --incremental false"
   },

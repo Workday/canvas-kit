@@ -1,5 +1,3 @@
-import ts from 'typescript';
-
 import {createProgramFromSource} from './createProgramFromSource';
 import {parse} from '../docParser';
 import {modelParser} from '../plugins/modelParser';

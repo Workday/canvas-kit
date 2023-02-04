@@ -4,10 +4,6 @@
 
 import fs from 'fs';
 import path from 'path';
-import {promisify} from 'util';
-import _glob from 'glob';
-
-const glob = promisify(_glob);
 
 ///** Create the guard fn
 const source = fs

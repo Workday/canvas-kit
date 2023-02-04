@@ -36,7 +36,7 @@ registerWidget<TypeValue>('type', ({value, doc}) => {
     <>
       <span className="token keyword">type</span>{' '}
       <span className="token symbol">{doc?.name || 'unknown'}</span>
-      {renderTypeParameters(value.typeParameters)} <span className="token operator">=</span>
+      {renderTypeParameters(value.typeParameters)} <span className="token operator">=</span>{' '}
       <Value value={value.value} />
     </>
   );

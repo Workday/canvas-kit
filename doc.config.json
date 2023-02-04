@@ -1,0 +1,8 @@
+{
+  "glob": "modules/**/*.{ts,tsx}",
+  "ignore": ["**/examples/**", "**/spec/**", "**/stories/**", "**/codemod/**", "**/docs/**"],
+  "plugins": [
+    "modules/docs/docgen/plugins/componentParser.ts",
+    "modules/docs/docgen/plugins/modelParser.ts"
+  ]
+}

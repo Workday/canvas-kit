@@ -398,6 +398,4 @@ export const modelParser = createParserPlugin<ModelHookValue | ModelValue>((node
     } as ModelHookValue;
   }
   return;
-
-  node; //?
 });

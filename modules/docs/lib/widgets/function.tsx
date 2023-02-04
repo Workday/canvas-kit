@@ -10,7 +10,7 @@ registerWidget<FunctionValue>('function', ({value}) => {
   const level = React.useContext(IndentLevelContext);
   return (
     <RenderContext.Provider value="inline">
-      {value.name && <span className="token symbol">{value.name}</span>}
+      {value.name && <Value value={value.name} />}
       {renderTypeParameters(value.typeParameters)}
       <span className="token punctuation">(</span>
       <>

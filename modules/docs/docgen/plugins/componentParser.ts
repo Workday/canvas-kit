@@ -276,7 +276,7 @@ export const componentParser = createParserPlugin<
 
         return {
           kind: 'function',
-          name: node.expression.expression.text,
+          name: {kind: 'symbol', name: node.expression.expression.text},
           parameters,
           returnType,
           // model: modelName,

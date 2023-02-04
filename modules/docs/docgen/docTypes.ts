@@ -252,7 +252,7 @@ export interface IntersectionValue {
 
 export interface FunctionValue {
   kind: 'function';
-  name?: string;
+  name?: SymbolValue;
   typeParameters?: TypeParameter[];
   parameters: FunctionParameter[];
   members?: Value[];

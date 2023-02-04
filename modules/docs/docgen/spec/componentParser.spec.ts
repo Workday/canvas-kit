@@ -56,7 +56,8 @@ describe('componentParser', () => {
 
       expect(symbols).toHaveProperty('0.name', 'useMyComponent');
       expect(symbols).toHaveProperty('0.type.kind', 'function');
-      expect(symbols).toHaveProperty('0.type.name', 'useMyComponent');
+      expect(symbols).toHaveProperty('0.type.name.kind', 'symbol');
+      expect(symbols).toHaveProperty('0.type.name.name', 'createElemPropsHook');
       expect(symbols).toHaveProperty('0.type.parameters.0.name', 'model');
       expect(symbols).toHaveProperty('0.type.parameters.0.kind', 'parameter');
       expect(symbols).toHaveProperty('0.type.parameters.0.type.kind', 'symbol');
@@ -107,7 +108,8 @@ describe('componentParser', () => {
 
       expect(symbols).toHaveProperty('0.name', 'useMyComponent');
       expect(symbols).toHaveProperty('0.type.kind', 'function');
-      expect(symbols).toHaveProperty('0.type.name', 'useMyComponent');
+      expect(symbols).toHaveProperty('0.type.name.kind', 'symbol');
+      expect(symbols).toHaveProperty('0.type.name.name', 'createElemPropsHook');
       expect(symbols).toHaveProperty('0.type.parameters.0.name', 'model');
       expect(symbols).toHaveProperty('0.type.parameters.0.kind', 'parameter');
       expect(symbols).toHaveProperty('0.type.parameters.0.type.kind', 'symbol');
@@ -151,31 +153,33 @@ describe('componentParser', () => {
       `);
 
       const symbols = parse(program, 'test.ts', [componentParser]); //?
-
       expect(symbols).toHaveProperty('0.name', 'useMyComponent');
-      expect(symbols).toHaveProperty('0.type.kind', 'composedElemPropsHook');
-      expect(symbols).toHaveProperty('0.type.name', 'useMyComponent');
-      expect(symbols).toHaveProperty('0.type.composes.0.kind', 'function');
-      expect(symbols).toHaveProperty('0.type.composes.0.parameters.0.kind', 'parameter');
-      expect(symbols).toHaveProperty('0.type.composes.0.parameters.0.name', 'model');
-      expect(symbols).toHaveProperty('0.type.composes.0.parameters.0.type.kind', 'symbol');
-      expect(symbols).toHaveProperty('0.type.composes.0.parameters.0.type.name', 'MyModel');
-      expect(symbols).toHaveProperty('0.type.composes.0.parameters.1.kind', 'parameter');
-      expect(symbols).toHaveProperty('0.type.composes.0.parameters.1.name', 'elemProps');
-      expect(symbols).toHaveProperty('0.type.composes.0.parameters.1.type.kind', 'object');
-      expect(symbols).toHaveProperty('0.type.composes.0.parameters.1.type.properties.0.kind', 'property');
-      expect(symbols).toHaveProperty('0.type.composes.0.parameters.1.type.properties.0.name', 'data-id');
-      expect(symbols).toHaveProperty('0.type.composes.0.parameters.1.type.properties.0.type.kind', 'primitive');
-      expect(symbols).toHaveProperty('0.type.composes.0.parameters.1.type.properties.0.type.value', 'string');
-      expect(symbols).toHaveProperty('0.type.composes.0.returnType.kind', 'object');
-      expect(symbols).toHaveProperty('0.type.composes.0.returnType.properties.0.kind', 'property');
-      expect(symbols).toHaveProperty('0.type.composes.0.returnType.properties.0.name', 'id');
-      expect(symbols).toHaveProperty('0.type.composes.0.returnType.properties.0.type.kind', 'primitive');
-      expect(symbols).toHaveProperty('0.type.composes.0.returnType.properties.0.type.value', 'string');
-      expect(symbols).toHaveProperty('0.type.composes.1.kind', 'symbol');
-      expect(symbols).toHaveProperty('0.type.composes.1.name', 'useHook1');
-      expect(symbols).toHaveProperty('0.type.composes.2.kind', 'symbol');
-      expect(symbols).toHaveProperty('0.type.composes.2.name', 'useHook2');
+      expect(symbols).toHaveProperty('0.type.kind', 'callExpression');
+      expect(symbols).toHaveProperty('0.type.name.kind', 'symbol');
+      expect(symbols).toHaveProperty('0.type.name.name', 'composeHooks');
+      expect(symbols).toHaveProperty('0.type.parameters.0.kind', 'function');
+      expect(symbols).toHaveProperty('0.type.parameters.0.name.kind', 'symbol');
+      expect(symbols).toHaveProperty('0.type.parameters.0.name.name', 'createElemPropsHook');
+      expect(symbols).toHaveProperty('0.type.parameters.0.parameters.0.kind', 'parameter');
+      expect(symbols).toHaveProperty('0.type.parameters.0.parameters.0.name', 'model');
+      expect(symbols).toHaveProperty('0.type.parameters.0.parameters.0.type.kind', 'symbol');
+      expect(symbols).toHaveProperty('0.type.parameters.0.parameters.0.type.name', 'MyModel');
+      expect(symbols).toHaveProperty('0.type.parameters.0.parameters.1.kind', 'parameter');
+      expect(symbols).toHaveProperty('0.type.parameters.0.parameters.1.name', 'elemProps');
+      expect(symbols).toHaveProperty('0.type.parameters.0.parameters.1.type.kind', 'object');
+      expect(symbols).toHaveProperty('0.type.parameters.0.parameters.1.type.properties.0.kind', 'property');
+      expect(symbols).toHaveProperty('0.type.parameters.0.parameters.1.type.properties.0.name', 'data-id');
+      expect(symbols).toHaveProperty('0.type.parameters.0.parameters.1.type.properties.0.type.kind', 'primitive');
+      expect(symbols).toHaveProperty('0.type.parameters.0.parameters.1.type.properties.0.type.value', 'string');
+      expect(symbols).toHaveProperty('0.type.parameters.0.returnType.kind', 'object');
+      expect(symbols).toHaveProperty('0.type.parameters.0.returnType.properties.0.kind', 'property');
+      expect(symbols).toHaveProperty('0.type.parameters.0.returnType.properties.0.name', 'id');
+      expect(symbols).toHaveProperty('0.type.parameters.0.returnType.properties.0.type.kind', 'primitive');
+      expect(symbols).toHaveProperty('0.type.parameters.0.returnType.properties.0.type.value', 'string');
+      expect(symbols).toHaveProperty('0.type.parameters.1.kind', 'symbol');
+      expect(symbols).toHaveProperty('0.type.parameters.1.name', 'useHook1');
+      expect(symbols).toHaveProperty('0.type.parameters.2.kind', 'symbol');
+      expect(symbols).toHaveProperty('0.type.parameters.2.name', 'useHook2');
     });
 
     it('should handle "composeHooks" with empty elemProps', () => {
@@ -196,26 +200,27 @@ describe('componentParser', () => {
       const symbols = parse(program, 'test.ts', [componentParser]); //?
 
       expect(symbols).toHaveProperty('0.name', 'useMyComponent');
-      expect(symbols).toHaveProperty('0.type.kind', 'composedElemPropsHook');
-      expect(symbols).toHaveProperty('0.type.name', 'useMyComponent');
-      expect(symbols).toHaveProperty('0.type.composes.0.kind', 'function');
-      expect(symbols).toHaveProperty('0.type.composes.0.parameters.0.kind', 'parameter');
-      expect(symbols).toHaveProperty('0.type.composes.0.parameters.0.name', 'model');
-      expect(symbols).toHaveProperty('0.type.composes.0.parameters.0.type.kind', 'symbol');
-      expect(symbols).toHaveProperty('0.type.composes.0.parameters.0.type.name', 'MyModel');
-      expect(symbols).toHaveProperty('0.type.composes.0.parameters.1.kind', 'parameter');
-      expect(symbols).toHaveProperty('0.type.composes.0.parameters.1.name', 'elemProps');
-      expect(symbols).toHaveProperty('0.type.composes.0.parameters.1.type.kind', 'object');
-      expect(symbols).toHaveProperty('0.type.composes.0.parameters.1.type.properties.length', 0);
-      expect(symbols).toHaveProperty('0.type.composes.0.returnType.kind', 'object');
-      expect(symbols).toHaveProperty('0.type.composes.0.returnType.properties.0.kind', 'property');
-      expect(symbols).toHaveProperty('0.type.composes.0.returnType.properties.0.name', 'id');
-      expect(symbols).toHaveProperty('0.type.composes.0.returnType.properties.0.type.kind', 'primitive');
-      expect(symbols).toHaveProperty('0.type.composes.0.returnType.properties.0.type.value', 'string');
-      expect(symbols).toHaveProperty('0.type.composes.1.kind', 'symbol');
-      expect(symbols).toHaveProperty('0.type.composes.1.name', 'useHook1');
-      expect(symbols).toHaveProperty('0.type.composes.2.kind', 'symbol');
-      expect(symbols).toHaveProperty('0.type.composes.2.name', 'useHook2');
+      expect(symbols).toHaveProperty('0.type.kind', 'callExpression');
+      expect(symbols).toHaveProperty('0.type.name.kind', 'symbol');
+      expect(symbols).toHaveProperty('0.type.name.name', 'composeHooks');
+      expect(symbols).toHaveProperty('0.type.parameters.0.kind', 'function');
+      expect(symbols).toHaveProperty('0.type.parameters.0.parameters.0.kind', 'parameter');
+      expect(symbols).toHaveProperty('0.type.parameters.0.parameters.0.name', 'model');
+      expect(symbols).toHaveProperty('0.type.parameters.0.parameters.0.type.kind', 'symbol');
+      expect(symbols).toHaveProperty('0.type.parameters.0.parameters.0.type.name', 'MyModel');
+      expect(symbols).toHaveProperty('0.type.parameters.0.parameters.1.kind', 'parameter');
+      expect(symbols).toHaveProperty('0.type.parameters.0.parameters.1.name', 'elemProps');
+      expect(symbols).toHaveProperty('0.type.parameters.0.parameters.1.type.kind', 'object');
+      expect(symbols).toHaveProperty('0.type.parameters.0.parameters.1.type.properties.length', 0);
+      expect(symbols).toHaveProperty('0.type.parameters.0.returnType.kind', 'object');
+      expect(symbols).toHaveProperty('0.type.parameters.0.returnType.properties.0.kind', 'property');
+      expect(symbols).toHaveProperty('0.type.parameters.0.returnType.properties.0.name', 'id');
+      expect(symbols).toHaveProperty('0.type.parameters.0.returnType.properties.0.type.kind', 'primitive');
+      expect(symbols).toHaveProperty('0.type.parameters.0.returnType.properties.0.type.value', 'string');
+      expect(symbols).toHaveProperty('0.type.parameters.1.kind', 'symbol');
+      expect(symbols).toHaveProperty('0.type.parameters.1.name', 'useHook1');
+      expect(symbols).toHaveProperty('0.type.parameters.2.kind', 'symbol');
+      expect(symbols).toHaveProperty('0.type.parameters.2.name', 'useHook2');
     });
   });
 

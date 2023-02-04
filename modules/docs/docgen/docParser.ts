@@ -1546,23 +1546,19 @@ export function unknownValue(nodeText: string) {
   return {kind: 'unknown', value: 'unknown', text: nodeText} as UnknownValue;
 }
 
-function isValue(input: any): input is Value {
-  return typeof input === 'object' && !!input.type;
-}
-
 /**
  * Evaluate the return type looking for a `React.ReactElement` type based on the `props`.
  */
-function isComponent(returnType: ts.Type) {
-  if (returnType.isUnion()) {
-    return returnType.types.some(isComponent);
-  }
-  if (isObject(returnType)) {
-    return returnType.getProperties().some(s => s.name === 'props');
-  }
+// function isComponent(returnType: ts.Type) {
+//   if (returnType.isUnion()) {
+//     return returnType.types.some(isComponent);
+//   }
+//   if (isObject(returnType)) {
+//     return returnType.getProperties().some(s => s.name === 'props');
+//   }
 
-  return false;
-}
+//   return false;
+// }
 
 function isExportedSymbol(checker: ts.TypeChecker, node: ts.Node): boolean {
   const sourceFile = node.getSourceFile?.();
@@ -1761,7 +1757,7 @@ function getObjectValueFromType(parser: DocParser, type: ts.Type): Value {
  * return an array of exported symbols to add to docs. If it does not know how to handle the node,
  * it should return `undefined` to allow other plugins (or the general parser) to process the node.
  */
-type ParserPlugin<TAdditionalValues extends {kind: string} = Value> = (
+export type ParserPlugin<TAdditionalValues extends {kind: string} = Value> = (
   /** The node currently being processed */
   node: ts.Node,
   /**

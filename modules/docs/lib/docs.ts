@@ -9,7 +9,12 @@ export const StorybookUrl = React.createContext(
     : '/'
 );
 
-export const docs: ExportedSymbol[] = typeof window !== 'undefined' ? (window as any).__docs : [];
+export const docs: ExportedSymbol[] =
+  typeof window !== 'undefined'
+    ? (window as any).__docs
+    : [
+        /* DOCS_REPLACED_BY_BUILD */
+      ];
 
 export function getDoc(name: string, fileName?: string) {
   return docs.find(d => {

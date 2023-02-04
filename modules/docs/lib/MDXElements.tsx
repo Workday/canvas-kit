@@ -11,7 +11,7 @@ import {createComponent} from '@workday/canvas-kit-react';
  * needing to use MDX directly.
  */
 export const MDX = createComponent('div')({
-  Component({as, children, ...elemProps}, _ref, Element) {
+  Component({children, ...elemProps}, _ref, Element) {
     const components = useMDXComponents();
     return React.createElement(components[Element], elemProps, children);
   },
