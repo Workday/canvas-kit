@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v8.4.6](https://github.com/Workday/canvas-kit/releases/tag/v8.4.6) (2023-02-06)
+
+### Documentation
+
+- fix: Update broken link in CONTRIBUTING.md ([#2019](https://github.com/Workday/canvas-kit/pull/2019)) ([@thunguyen19](https://github.com/thunguyen19))
+
+
 ## [v8.4.5](https://github.com/Workday/canvas-kit/releases/tag/v8.4.5) (2023-02-03)
 
 ### Documentation
