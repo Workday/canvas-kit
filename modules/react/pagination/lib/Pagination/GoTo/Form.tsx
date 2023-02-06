@@ -2,10 +2,7 @@ import * as React from 'react';
 import {Flex, FlexProps} from '@workday/canvas-kit-react/layout';
 import {useRTL} from '../common/utils/useRTL';
 
-export type GoToFormProps = React.FormHTMLAttributes<HTMLFormElement> &
-  Omit<FlexProps, 'gap'> & {
-    gap?: FlexProps['gap'];
-  };
+export type GoToFormProps = React.FormHTMLAttributes<HTMLFormElement> & FlexProps;
 
 export const GoToForm = ({children, onSubmit, gap = 'xxs', ...elemProps}: GoToFormProps) => {
   const {shouldUseRTL} = useRTL();

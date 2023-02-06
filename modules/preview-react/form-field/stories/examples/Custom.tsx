@@ -47,7 +47,7 @@ export const Custom = () => {
   const layoutProps = useFormFieldOrientation('vertical');
 
   return (
-    <Flex {...layoutProps} gap="xxxs">
+    <Flex {...layoutProps}>
       <Label model={model}>My Custom Field</Label>
       <Input model={model} value={value} onChange={handleChange} />
       <Hint model={model}>You can be anything</Hint>

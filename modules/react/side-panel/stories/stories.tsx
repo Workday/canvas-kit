@@ -70,9 +70,7 @@ interface SidePanelState {
   open: boolean;
 }
 
-interface HeaderItemProps extends Omit<FlexProps, 'gap'> {
-  gap?: FlexProps['gap'];
-}
+interface HeaderItemProps extends FlexProps {}
 
 const ListItem = styled('li')({
   display: 'flex',

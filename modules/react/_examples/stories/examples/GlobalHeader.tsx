@@ -14,9 +14,7 @@ import {Avatar} from '@workday/canvas-kit-react/avatar';
 import {Flex, FlexProps} from '@workday/canvas-kit-react/layout';
 import {SearchForm} from '@workday/canvas-kit-labs-react/search-form';
 
-interface HeaderItemProps extends Omit<FlexProps, 'gap'> {
-  gap?: FlexProps['gap'];
-}
+interface HeaderItemProps extends FlexProps {}
 
 export const Basic = () => (
   <GlobalHeader>

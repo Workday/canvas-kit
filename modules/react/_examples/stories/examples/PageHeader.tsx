@@ -8,9 +8,7 @@ import {TertiaryButton} from '@workday/canvas-kit-react/button';
 import {justifyIcon, notificationsIcon} from '@workday/canvas-system-icons-web';
 import {Heading} from '@workday/canvas-kit-react/text';
 
-interface HeaderItemProps extends Omit<FlexProps, 'gap'> {
-  gap?: FlexProps['gap'];
-}
+interface HeaderItemProps extends FlexProps {}
 
 export const Basic = () => (
   <PageHeader>

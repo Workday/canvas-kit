@@ -162,31 +162,22 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
   // becomes `interface CustomProps extends FlexProps {
   // gap: FlexProps['gap']
   // }`
-  const spacingName = ['spacing', 'space'];
-  const propVals = ['SystemPropValues', 'StackProps'];
+  const spacingName = ['spacing'];
 
   // Transform `spacing` key that is in type interface
   // e.g. `spacing: SystemPropValues['space']`
   // becomes `gap: FlexProps['gap']`
   root
-    .find(j.TSPropertySignature, {
-      type: 'TSPropertySignature',
+    .find(j.JSXIdentifier, {
+      type: 'JSXIdentifier',
     })
     .forEach(nodePath => {
-      if (nodePath.node.key.type === 'Identifier') {
-        if (spacingName.includes(nodePath.node.key.name)) {
-          nodePath.node.key.name = 'gap';
+      if (nodePath.node.type === 'JSXIdentifier') {
+        if (spacingName.includes(nodePath.node.name)) {
+          nodePath.node.name = 'gap';
         }
       }
     });
-
-  root.find(j.TSTypeReference, {type: 'TSTypeReference'}).forEach(nodePath => {
-    if (nodePath.node.typeName.type === 'Identifier') {
-      if (propVals.includes(nodePath.node.typeName.name)) {
-        nodePath.node.typeName.name = 'FlexProps';
-      }
-    }
-  });
 
   root.find(j.TSLiteralType, {type: 'TSLiteralType'}).forEach(nodePath => {
     if (nodePath.node.literal.type === 'StringLiteral') {

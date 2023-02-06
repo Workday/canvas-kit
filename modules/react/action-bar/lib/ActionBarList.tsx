@@ -13,9 +13,8 @@ import {useOverflowListMeasure, useListRenderItems} from '@workday/canvas-kit-re
 
 import {useActionBarModel} from './useActionBarModel';
 
-// Use `Partial` here to make `gap` optional
 export interface ActionBarListProps<T = any>
-  extends Omit<Partial<ExtractProps<typeof Flex, never>>, 'children'> {
+  extends Omit<ExtractProps<typeof Flex, never>, 'children'> {
   /**
    * If items are passed to a `ActionBarModel`, the child of `ActionBar.List` should be a render prop. The
    * List will determine how and when the item will be rendered.
@@ -37,7 +36,7 @@ export interface ActionBarListProps<T = any>
   overflowButton?: React.ReactNode;
 }
 
-const ResponsiveHStack = styled(Flex)<ActionBarListProps & StyledType>(({theme}) => {
+const ResponsiveList = styled(Flex)<ActionBarListProps & StyledType>(({theme}) => {
   const canvasTheme = getCanvasTheme(theme);
   return {
     [canvasTheme.breakpoints.down('s')]: {
@@ -57,7 +56,7 @@ export const ActionBarList = createSubcomponent('div')({
   elemPropsHook: useActionBarList,
 })<ActionBarListProps>(({children, overflowButton, ...elemProps}, Element, model) => {
   return (
-    <ResponsiveHStack
+    <ResponsiveList
       as={Element}
       gap="s"
       depth={1}
@@ -72,6 +71,6 @@ export const ActionBarList = createSubcomponent('div')({
     >
       {useListRenderItems(model, children)}
       {overflowButton}
-    </ResponsiveHStack>
+    </ResponsiveList>
   );
 });

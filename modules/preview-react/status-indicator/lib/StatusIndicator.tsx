@@ -33,7 +33,7 @@ export const StatusIndicator = createContainer('div')({
 })<StatusIndicatorProps>(({children, ...elemProps}, Element, model) => {
   return (
     <Flex
-      gap={4}
+      gap="xxxs"
       as={Element}
       maxWidth={200}
       paddingX="xxxs"

@@ -19,9 +19,7 @@ import {
 
 import {useTabsModel} from './useTabsModel';
 
-// Use `Partial` here to make `gap` optional
-export interface TabListProps<T = any>
-  extends Omit<Partial<ExtractProps<typeof Flex, never>>, 'children'> {
+export interface TabListProps<T = any> extends Omit<ExtractProps<typeof Flex, never>, 'children'> {
   /**
    * If items are passed to a `TabsModel`, the child of `Tabs.List` should be a render prop. The
    * List will determine how and when the item will be rendered.

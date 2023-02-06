@@ -11,8 +11,7 @@ import {Flex} from '@workday/canvas-kit-react/layout';
 
 import {useMenuModel} from './useMenuModel';
 
-export interface MenuListProps<T = any>
-  extends Omit<Partial<ExtractProps<typeof Flex, never>>, 'children'> {
+export interface MenuListProps<T = any> extends Omit<ExtractProps<typeof Flex, never>, 'children'> {
   /**
    * The label text of the MenuList.
    */

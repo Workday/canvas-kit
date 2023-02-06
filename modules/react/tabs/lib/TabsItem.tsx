@@ -82,11 +82,8 @@ export interface TabsItemProps
 }
 
 export const StyledTabItem = styled(Box.as('button'))<StyledType & Pick<TabsItemProps, 'gap'>>(
-  ({theme, gap}) => ({
+  ({theme}) => ({
     ...type.levels.subtext.large,
-    '& > *:not(style) ~ *:not(style)': {
-      marginLeft: gap || space.xxs,
-    },
     fontWeight: type.properties.fontWeights.medium,
     border: 'none',
     backgroundColor: 'transparent',
@@ -160,12 +157,13 @@ export const StyledTabItem = styled(Box.as('button'))<StyledType & Pick<TabsItem
       },
     },
   }),
-  ({children}) => {
+  ({children, gap = space.xxs}) => {
     if (typeof children === 'string') {
       return ellipsisStyles;
     } else {
       return {
         display: 'flex',
+        gap,
       };
     }
   }
