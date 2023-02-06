@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v8.4.5](https://github.com/Workday/canvas-kit/releases/tag/v8.4.5) (2023-02-03)
+
+### Documentation
+
+- docs: Fix Expandable prop tables ([#2016](https://github.com/Workday/canvas-kit/pull/2016)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
 ## [v8.4.4](https://github.com/Workday/canvas-kit/releases/tag/v8.4.4) (2023-02-01)
 
 ### Testing
