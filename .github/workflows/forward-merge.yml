@@ -133,6 +133,8 @@ jobs:
           appCode: dlpro96xybh
           storybookBuildDir: docs
           exitOnceUploaded: false
+          exitZeroOnChanges: false
+          ignoreLastBuildOnBranch: ${{ steps.extract-next-branch.outputs.branch }}
           debug: true
 
       - name: Start Server

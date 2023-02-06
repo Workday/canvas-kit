@@ -2,6 +2,14 @@ import {Meta} from '@storybook/addon-docs';
 import Changelog from '../../../CHANGELOG.md';
 import Markdown from '../../../utils/storybook/Markdown.tsx';
 
-<Meta title="Welcome/Changelog" />
+<Meta
+  title="Changelog"
+  parameters={{
+    viewMode: 'docs',
+    previewTabs: {
+      canvas: {hidden: true},
+    },
+  }}
+/>
 
 <Markdown content={Changelog} />

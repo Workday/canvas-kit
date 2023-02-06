@@ -51,7 +51,9 @@ const transform: Transform = (file, api) => {
         return true;
       });
 
-      foundImport.push(nodePath);
+      if (commonLabsSpecifiers.length) {
+        foundImport.push(nodePath);
+      }
     });
 
   const existingTestingImports = root.find(j.ImportDeclaration, {

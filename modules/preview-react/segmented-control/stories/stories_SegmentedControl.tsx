@@ -10,7 +10,7 @@ import {gridIcon, listViewIcon, listDetailIcon} from '@workday/canvas-system-ico
 import {useSegmentedControlModel} from '../lib/hooks/useSegmentedControlModel';
 
 export default withSnapshotsEnabled({
-  title: 'Testing/React/Preview/Segmented Control',
+  title: 'Testing/Preview/Segmented Control',
   component: SegmentedControl,
 });
 

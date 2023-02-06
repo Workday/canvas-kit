@@ -2,7 +2,7 @@ import React from 'react';
 import {storiesOf} from '@storybook/react';
 import './index.scss';
 
-storiesOf('Tokens/Core/CSS', module)
+storiesOf('CSS/Tokens', module)
   .addParameters({ReadmePath: 'css/core'})
   .add('Typography', () => {
     const inverseStyle = {
@@ -71,10 +71,22 @@ storiesOf('Tokens/Core/CSS', module)
         </section>
       </div>
     );
-  });
+  })
+  .add('Accessibility', () => (
+    <div className="story">
+      <div className="wdc-type">
+        <div>
+          <button tabIndex={0}>Default Behavior</button>
+        </div>
+      </div>
 
-storiesOf('Tokens/Core/CSS', module)
-  .addParameters({ReadmePath: 'css/core'})
+      <div className="wdc-type wdc-a11y">
+        <div>
+          <button tabIndex={0}>What-input Behavior</button>
+        </div>
+      </div>
+    </div>
+  ))
   .add('Depth', () => {
     const cardStyle = {
       width: 200,
@@ -108,21 +120,3 @@ storiesOf('Tokens/Core/CSS', module)
       </div>
     );
   });
-
-storiesOf('Tokens/Core/CSS', module)
-  .addParameters({ReadmePath: 'css/core'})
-  .add('Accessibility', () => (
-    <div className="story">
-      <div className="wdc-type">
-        <div>
-          <button tabIndex={0}>Default Behavior</button>
-        </div>
-      </div>
-
-      <div className="wdc-type wdc-a11y">
-        <div>
-          <button tabIndex={0}>What-input Behavior</button>
-        </div>
-      </div>
-    </div>
-  ));
