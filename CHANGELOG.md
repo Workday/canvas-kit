@@ -3,6 +3,41 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v8.4.6](https://github.com/Workday/canvas-kit/releases/tag/v8.4.6) (2023-02-06)
+
+### Documentation
+
+- fix: Update broken link in CONTRIBUTING.md ([#2019](https://github.com/Workday/canvas-kit/pull/2019)) ([@thunguyen19](https://github.com/thunguyen19))
+
+
+## [v8.4.5](https://github.com/Workday/canvas-kit/releases/tag/v8.4.5) (2023-02-03)
+
+### Documentation
+
+- docs: Fix Expandable prop tables ([#2016](https://github.com/Workday/canvas-kit/pull/2016)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
+## [v8.4.4](https://github.com/Workday/canvas-kit/releases/tag/v8.4.4) (2023-02-01)
+
+### Testing
+
+- test: Increase font delay to make chromatic happy ([#1996](https://github.com/Workday/canvas-kit/pull/1996)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v8.4.3](https://github.com/Workday/canvas-kit/releases/tag/v8.4.3) (2023-02-01)
+
+### Documentation
+
+- docs: Fix typo in react-font README ([#2010](https://github.com/Workday/canvas-kit/pull/2010)) ([@sheelah](https://github.com/sheelah), Sheelah Brennan)
+
+
+## [v8.4.2](https://github.com/Workday/canvas-kit/releases/tag/v8.4.2) (2023-01-30)
+
+### Codemods
+
+- fix: Update to soft dep stack codemod for styled component ([#2007](https://github.com/Workday/canvas-kit/pull/2007)) ([@josh-bagwell](https://github.com/josh-bagwell))
+
+
 ## [v8.4.1](https://github.com/Workday/canvas-kit/releases/tag/v8.4.1) (2023-01-26)
 
 ### Documentation
