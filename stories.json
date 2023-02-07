@@ -3794,6 +3794,76 @@
         "__isArgsStory": false
       }
     },
+    "hooks-and-utilities-compound-components--create-component": {
+      "id": "hooks-and-utilities-compound-components--create-component",
+      "name": "Create Component",
+      "title": "Hooks and Utilities/Compound Components",
+      "importPath": "./modules/react/common/stories/CompoundComponentUtilities.stories.mdx",
+      "kind": "Hooks and Utilities/Compound Components",
+      "story": "Create Component",
+      "parameters": {
+        "fileName": "./modules/react/common/stories/CompoundComponentUtilities.stories.mdx",
+        "framework": "react",
+        "__id": "hooks-and-utilities-compound-components--create-component",
+        "__isArgsStory": false
+      }
+    },
+    "hooks-and-utilities-compound-components--create-container": {
+      "id": "hooks-and-utilities-compound-components--create-container",
+      "name": "Create Container",
+      "title": "Hooks and Utilities/Compound Components",
+      "importPath": "./modules/react/common/stories/CompoundComponentUtilities.stories.mdx",
+      "kind": "Hooks and Utilities/Compound Components",
+      "story": "Create Container",
+      "parameters": {
+        "fileName": "./modules/react/common/stories/CompoundComponentUtilities.stories.mdx",
+        "framework": "react",
+        "__id": "hooks-and-utilities-compound-components--create-container",
+        "__isArgsStory": false
+      }
+    },
+    "hooks-and-utilities-compound-components--create-elem-props-hook": {
+      "id": "hooks-and-utilities-compound-components--create-elem-props-hook",
+      "name": "Create Elem Props Hook",
+      "title": "Hooks and Utilities/Compound Components",
+      "importPath": "./modules/react/common/stories/CompoundComponentUtilities.stories.mdx",
+      "kind": "Hooks and Utilities/Compound Components",
+      "story": "Create Elem Props Hook",
+      "parameters": {
+        "fileName": "./modules/react/common/stories/CompoundComponentUtilities.stories.mdx",
+        "framework": "react",
+        "__id": "hooks-and-utilities-compound-components--create-elem-props-hook",
+        "__isArgsStory": false
+      }
+    },
+    "hooks-and-utilities-compound-components--create-model-hook": {
+      "id": "hooks-and-utilities-compound-components--create-model-hook",
+      "name": "Create Model Hook",
+      "title": "Hooks and Utilities/Compound Components",
+      "importPath": "./modules/react/common/stories/CompoundComponentUtilities.stories.mdx",
+      "kind": "Hooks and Utilities/Compound Components",
+      "story": "Create Model Hook",
+      "parameters": {
+        "fileName": "./modules/react/common/stories/CompoundComponentUtilities.stories.mdx",
+        "framework": "react",
+        "__id": "hooks-and-utilities-compound-components--create-model-hook",
+        "__isArgsStory": false
+      }
+    },
+    "hooks-and-utilities-compound-components--create-subcomponent": {
+      "id": "hooks-and-utilities-compound-components--create-subcomponent",
+      "name": "Create Subcomponent",
+      "title": "Hooks and Utilities/Compound Components",
+      "importPath": "./modules/react/common/stories/CompoundComponentUtilities.stories.mdx",
+      "kind": "Hooks and Utilities/Compound Components",
+      "story": "Create Subcomponent",
+      "parameters": {
+        "fileName": "./modules/react/common/stories/CompoundComponentUtilities.stories.mdx",
+        "framework": "react",
+        "__id": "hooks-and-utilities-compound-components--create-subcomponent",
+        "__isArgsStory": false
+      }
+    },
     "hooks-and-utilities-testing--basic": {
       "id": "hooks-and-utilities-testing--basic",
       "name": "Basic",
