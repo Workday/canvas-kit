@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-docs",
-  "version": "8.3.12",
+  "version": "8.4.6",
   "description": "Documentation components of Canvas Kit components",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -42,7 +42,7 @@
   ],
   "dependencies": {
     "@storybook/csf": "0.0.1",
-    "@workday/canvas-kit-react": "^8.3.12",
+    "@workday/canvas-kit-react": "^8.4.6",
     "@workday/canvas-system-icons-web": "^3.0.0"
   },
   "devDependencies": {

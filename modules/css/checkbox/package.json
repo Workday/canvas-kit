@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-css-checkbox",
-  "version": "8.3.12",
+  "version": "8.4.6",
   "description": "The checkbox css for canvas-kit-css",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -29,7 +29,7 @@
     "workday"
   ],
   "dependencies": {
-    "@workday/canvas-kit-css-common": "^8.3.12",
-    "@workday/canvas-kit-css-core": "^8.3.12"
+    "@workday/canvas-kit-css-common": "^8.4.6",
+    "@workday/canvas-kit-css-core": "^8.4.6"
   }
 }
