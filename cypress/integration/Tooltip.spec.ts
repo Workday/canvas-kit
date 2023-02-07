@@ -5,9 +5,9 @@ describe('Tooltip', () => {
     h.stories.visit();
   });
 
-  context('given the [Components/Popups/Tooltip/React, DefaultStory] example is rendered', () => {
+  context('given the [Components/Popups/Tooltip, DefaultStory] example is rendered', () => {
     beforeEach(() => {
-      h.stories.load('Components/Popups/Tooltip/React', 'DefaultStory'); // Default gets converted to Default Story in MDX
+      h.stories.load('Components/Popups/Tooltip', 'DefaultStory'); // Default gets converted to Default Story in MDX
     });
 
     it('should not have any axe-core errors', () => {
@@ -15,12 +15,12 @@ describe('Tooltip', () => {
     });
 
     it('the button should have an aria-label of "Close"', () => {
-      cy.get('button').should('have.ariaLabel', 'Close');
+      cy.findByRole('button', {name: 'Close'}).should('have.ariaLabel', 'Close');
     });
 
     context('when the close icon is hovered', () => {
       beforeEach(() => {
-        cy.get('button').trigger('mouseover');
+        cy.findByRole('button', {name: 'Close'}).trigger('mouseover');
       });
 
       it('should open the tooltip', () => {
@@ -35,7 +35,7 @@ describe('Tooltip', () => {
         beforeEach(() => {
           cy.clock();
           cy.tick(300); // advance the timer by the amount of default delay time
-          cy.get('button').trigger('mouseout');
+          cy.findByRole('button', {name: 'Close'}).trigger('mouseout');
           cy.findByRole('tooltip').trigger('mouseover');
         });
 
@@ -58,7 +58,7 @@ describe('Tooltip', () => {
 
       context('when the target is clicked', () => {
         beforeEach(() => {
-          cy.get('button').click();
+          cy.findByRole('button', {name: 'Close'}).click();
         });
 
         it('should not close the tooltip', () => {
@@ -69,7 +69,7 @@ describe('Tooltip', () => {
 
     context('when the close icon gains focus', () => {
       beforeEach(() => {
-        cy.get('button').focus();
+        cy.findByRole('button', {name: 'Close'}).focus();
       });
 
       it('should open the tooltip', () => {
@@ -78,7 +78,7 @@ describe('Tooltip', () => {
 
       context('then the close icon loses focus', () => {
         beforeEach(() => {
-          cy.get('button').blur();
+          cy.findByRole('button', {name: 'Close'}).blur();
         });
 
         it('should close the tooltip', () => {
@@ -88,13 +88,13 @@ describe('Tooltip', () => {
 
       context('then the Escape key is pressed', () => {
         beforeEach(() => {
-          cy.get('button').trigger('keydown', {
+          cy.findByRole('button', {name: 'Close'}).trigger('keydown', {
             key: 'Escape',
           });
         });
 
         it('should not remove focus from the close icon button', () => {
-          cy.get('button').should('have.focus');
+          cy.findByRole('button', {name: 'Close'}).should('have.focus');
         });
       });
 
@@ -110,9 +110,9 @@ describe('Tooltip', () => {
     });
   });
 
-  context('given the [Components/Popups/Tooltip/React, Describe Type] example is rendered', () => {
+  context('given the [Components/Popups/Tooltip, Describe Type] example is rendered', () => {
     beforeEach(() => {
-      h.stories.load('Components/Popups/Tooltip/React', 'Describe Type');
+      h.stories.load('Components/Popups/Tooltip', 'Describe Type');
     });
 
     it('should not have any axe-core errors', () => {
@@ -120,12 +120,12 @@ describe('Tooltip', () => {
     });
 
     it('the "Delete" button should not have an aria-describedby', () => {
-      cy.get('button').should('not.have.attr', 'aria-describedby');
+      cy.findByRole('button', {name: 'Delete'}).should('not.have.attr', 'aria-describedby');
     });
 
     context('when the "Delete" button is hovered', () => {
       beforeEach(() => {
-        cy.get('button').trigger('mouseover');
+        cy.findByRole('button', {name: 'Delete'}).trigger('mouseover');
       });
 
       it('should show the tooltip', () => {
@@ -137,7 +137,7 @@ describe('Tooltip', () => {
       });
 
       it('the "Delete" button should have an aria-describedby linking to the role="tooltip" element', () => {
-        cy.get('button').should(
+        cy.findByRole('button', {name: 'Delete'}).should(
           'have.ariaDescription',
           'The service will restart after this action'
         );
@@ -145,9 +145,9 @@ describe('Tooltip', () => {
     });
   });
 
-  context('given the [Components/Popups/Tooltip/React, Muted] example is rendered', () => {
+  context('given the [Components/Popups/Tooltip, Muted] example is rendered', () => {
     beforeEach(() => {
-      h.stories.load('Components/Popups/Tooltip/React', 'Muted');
+      h.stories.load('Components/Popups/Tooltip', 'Muted');
     });
 
     it('should not have any axe-core errors', () => {
@@ -164,7 +164,7 @@ describe('Tooltip', () => {
 
     context('when the "Some Text" text is hovered', () => {
       beforeEach(() => {
-        cy.get('span').trigger('mouseover');
+        cy.contains('span', 'Some text').trigger('mouseover');
       });
 
       it('should show the tooltip', () => {
@@ -185,9 +185,9 @@ describe('Tooltip', () => {
     });
   });
 
-  context('given the [Components/Popups/Tooltip/React, Ellipsis] example is rendered', () => {
+  context('given the [Components/Popups/Tooltip, Ellipsis] example is rendered', () => {
     beforeEach(() => {
-      h.stories.load('Components/Popups/Tooltip/React', 'Ellipsis');
+      h.stories.load('Components/Popups/Tooltip', 'Ellipsis');
     });
 
     it('should not have any axe-core errors', () => {
@@ -195,7 +195,7 @@ describe('Tooltip', () => {
     });
 
     it('the button should not have an aria-label', () => {
-      cy.get('button').should('not.have.attr', 'aria-label');
+      cy.contains('button', 'Super Mega').should('not.have.attr', 'aria-label');
     });
 
     context('when the "Short Content" button is hovered', () => {
@@ -279,9 +279,9 @@ describe('Tooltip', () => {
     );
   });
 
-  context('given the [Testing/React/Popups/Tooltip, Non Interactive] example is rendered', () => {
+  context('given the [Testing/Popups/Tooltip, Non Interactive] example is rendered', () => {
     beforeEach(() => {
-      h.stories.load('Testing/React/Popups/Tooltip', 'Non Interactive');
+      h.stories.load('Testing/Popups/Tooltip', 'Non Interactive');
     });
 
     context('when the "Non-interactive Tooltip" text is hovered', () => {
@@ -304,9 +304,9 @@ describe('Tooltip', () => {
       });
     });
   });
-  context('given the [Testing/React/Popups/Tooltip, Overflow] example is rendered', () => {
+  context('given the [Testing/Popups/Tooltip, Overflow] example is rendered', () => {
     beforeEach(() => {
-      h.stories.load('Testing/React/Popups/Tooltip', 'Overflow');
+      h.stories.load('Testing/Popups/Tooltip', 'Overflow');
     });
 
     context('when the = button is hovered', () => {

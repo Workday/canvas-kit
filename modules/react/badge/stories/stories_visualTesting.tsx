@@ -1,12 +1,12 @@
 import React from 'react';
 
-import {ComponentStatesTable} from '@workday/canvas-kit-labs-react/common';
+import {ComponentStatesTable} from '@workday/canvas-kit-react/testing';
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
 
 import {CountBadge} from '../index';
 
 export default withSnapshotsEnabled({
-  title: 'Testing/React/Indicators/Badge/CountBadge',
+  title: 'Testing/Indicators/Badge/CountBadge',
   component: CountBadge,
   parameters: {
     ReadmePath: 'react/badge',

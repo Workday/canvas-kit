@@ -4,7 +4,7 @@ import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {chartConfigIcon, filterIcon} from '@workday/canvas-system-icons-web';
 import './index.scss';
 
-storiesOf('Components/Containers/Table/CSS', module)
+storiesOf('CSS/Table', module)
   .addParameters({ReadmePath: 'css/table'})
   .add('All', () => (
     <div className="story">

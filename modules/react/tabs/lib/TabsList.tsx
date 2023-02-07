@@ -20,7 +20,8 @@ import {
 import {useTabsModel} from './useTabsModel';
 
 // Use `Partial` here to make `spacing` optional
-export interface TabListProps<T = unknown> extends Partial<ExtractProps<typeof Stack, never>> {
+export interface TabListProps<T = any>
+  extends Omit<Partial<ExtractProps<typeof Stack, never>>, 'children'> {
   /**
    * If items are passed to a `TabsModel`, the child of `Tabs.List` should be a render prop. The
    * List will determine how and when the item will be rendered.
@@ -43,19 +44,9 @@ export const useTabsList = composeHooks(
   useListResetCursorOnBlur
 );
 
-const StyledStack = styled(Stack)<StyledType>({
-  '::after': {
-    content: '""',
-    position: 'sticky',
-    height: 52,
-    minWidth: 30,
-    background: `linear-gradient(to right,rgba(255,255,255,0),white);`,
-    zIndex: 1,
-    right: 0,
-    top: 0,
-    pointerEvents: 'none',
-  },
-});
+const StyledStack = styled(Stack)<StyledType & {maskImage?: string}>(({maskImage}) => ({
+  maskImage: maskImage,
+}));
 
 export const TabsList = createSubcomponent('div')({
   displayName: 'Tabs.List',
@@ -63,13 +54,21 @@ export const TabsList = createSubcomponent('div')({
   elemPropsHook: useTabsList,
 })<TabListProps>(({children, overflowButton, ...elemProps}, Element, model) => {
   const modality = useModalityType();
+  const touchStates = useTouchDirection();
   return (
     <StyledStack
       as={Element}
       position="relative"
       borderBottom={`1px solid ${commonColors.divider}`}
       paddingX={modality === 'touch' ? 'zero' : 'm'}
-      spacing="xxxs"
+      spacing="xs"
+      maskImage={
+        modality === 'touch' && touchStates.isDragging
+          ? `linear-gradient(${
+              touchStates.direction === 'left' ? 'to left' : 'to right'
+            }, white 80%, transparent)`
+          : undefined
+      }
       {...elemProps}
     >
       {useListRenderItems(model, children)}
@@ -77,3 +76,36 @@ export const TabsList = createSubcomponent('div')({
     </StyledStack>
   );
 });
+
+export const useTouchDirection = () => {
+  const [isDragging, setIsDragging] = React.useState(false);
+  const [touchDir, setTouchDirection] = React.useState('right');
+
+  React.useEffect(() => {
+    let prevXPos = window.pageXOffset;
+    const handleTouchMove = function(e: TouchEvent) {
+      const currXPos = e.touches[0].clientX;
+      setIsDragging(true);
+      if (currXPos > prevXPos) {
+        setTouchDirection('left');
+      } else if (currXPos < prevXPos) {
+        setTouchDirection('right');
+      }
+      prevXPos = currXPos;
+      e.preventDefault();
+    };
+    const handleDragEnd = function() {
+      setIsDragging(false);
+    };
+    window.addEventListener('touchmove', handleTouchMove);
+    window.addEventListener('touchstart', handleDragEnd);
+    window.addEventListener('touchend', handleDragEnd);
+    return () => {
+      window.removeEventListener('touchmove', handleTouchMove);
+      window.removeEventListener('touchstart', handleDragEnd);
+      window.removeEventListener('touchend', handleDragEnd);
+    };
+  }, []);
+
+  return {direction: touchDir, isDragging: isDragging};
+};

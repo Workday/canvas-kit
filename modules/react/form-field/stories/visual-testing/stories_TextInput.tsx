@@ -1,11 +1,15 @@
 import * as React from 'react';
-import {StaticStates} from '@workday/canvas-kit-react/common';
-import {ComponentStatesTable, permutateProps} from '@workday/canvas-kit-labs-react/common';
+
+import {
+  ComponentStatesTable,
+  permutateProps,
+  StaticStates,
+} from '@workday/canvas-kit-react/testing';
 import {withSnapshotsEnabled, customColorTheme} from '../../../../../utils/storybook';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 
 export default withSnapshotsEnabled({
-  title: 'Testing/React/Inputs/Text Input',
+  title: 'Testing/Inputs/Text Input',
   component: TextInput,
 });
 

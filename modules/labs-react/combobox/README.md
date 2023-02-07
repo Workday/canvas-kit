@@ -24,7 +24,7 @@ See here for
 
 ```tsx
 import {Combobox} from '@workday/canvas-kit-labs-react/combobox';
-import {MenuItem} from '@workday/canvas-kit-preview-react/menu';
+import {DeprecatedMenuItem} from '@workday/canvas-kit-preview-react/menu';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {FormField} from '@workday/canvas-kit-react/form-field';
 
@@ -32,7 +32,7 @@ const autocompleteCallback = event => console.log('Adjust menu items here')
 
 <FormField id='id-123' label='Example'>
   <Combobox
-    autocompleteItems={[<MenuItem>Item 1</MenuItem>]}
+    autocompleteItems={[<DeprecatedMenuItem>Item 1</DeprecatedMenuItem>]}
     onChange={autocompleteCallback}
     onFocus={() => { console.log('focus') }}
     onBlur={() => { console.log('blur') }}
@@ -84,9 +84,9 @@ Default: `'Reset Search Input'`
 
 ---
 
-#### `autocompleteItems: React.ReactElement<MenuItemProps>[] | ComboBoxMenuItemGroup[]`
+#### `autocompleteItems: React.ReactElement<DeprecatedMenuItemProps>[] | ComboBoxMenuItemGroup[]`
 
-> An array of MenuItems to show under the input. You can also optional group the results.
+> An array of DeprecatedMenuItems to show under the input. You can also optional group the results.
 
 ---
 

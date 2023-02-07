@@ -1,0 +1,162 @@
+import {Meta} from '@storybook/addon-docs';
+import {StylePropsTable} from '@workday/canvas-kit-docs';
+// style props for tables
+import {
+  backgroundStyleFnConfigs,
+  borderStyleFnConfigs,
+  colorStyleFnConfigs,
+  depthStyleFnConfigs,
+  flexStyleFnConfigs,
+  flexItemStyleFnConfigs,
+  gridStyleFnConfigs,
+  gridItemStyleFnConfigs,
+  layoutStyleFnConfigs,
+  otherStyleFnConfigs,
+  positionStyleFnConfigs,
+  spaceStyleFnConfigs,
+  textStyleFnConfigs,
+} from '@workday/canvas-kit-react/layout';
+// examples
+import {BackgroundExample} from './examples/Background';
+import {BorderExample} from './examples/Border';
+import {ColorExample} from './examples/Color';
+import {DepthExample} from './examples/Depth';
+import {FlexExample} from './examples/Flex';
+import {FlexItemExample} from './examples/FlexItem';
+import {GridExample} from './examples/Grid';
+import {GridItemExample} from './examples/GridItem';
+import {LayoutExample} from './examples/Layout';
+import {OtherExample} from './examples/Other';
+import {PositionExample} from './examples/Position';
+import {SpaceExample} from './examples/Space';
+import {TextExample} from './examples/Text';
+
+<Meta title="Features/Style Props" />
+
+# Style Props
+
+Style props provide a common, ergonomic API for modifying a component's styles by passing styles
+with props.
+
+## System Prop Values
+
+Many style props are design-system-aware and translate `SystemPropValues` for you automatically. In
+the example below, the `padding` prop translates the value `s` to `16px` and `frenchVanilla100` to
+`#ffffff`. These `SystemPropValues` are also included in our types, so your IDE's intellisense
+should suggest these values as you work. This allows you to use Canvas design tokens fluidly without
+disrupting your workflow.
+
+```tsx
+<Box padding="s" backgroundColor="frenchVanilla100">
+  Hello, style props!
+</Box>
+```
+
+There are seven types of system prop values: `color`, `depth`, `font`, `fontSize`, `fontWeight`,
+`shape`, and `space` — corresponding to our Canvas design tokens. Each style prop section below
+includes a table. The "System" column in that table will tell you which system prop values are
+supported.
+
+## Background
+
+Background style props allow you to adjust the background styles of components.
+
+<ExampleCodeBlock code={BackgroundExample} />
+
+<StylePropsTable styleProps={backgroundStyleFnConfigs} />
+
+## Border
+
+Border style props allow you to adjust the border styles of components.
+
+<ExampleCodeBlock code={BorderExample} />
+
+<StylePropsTable styleProps={borderStyleFnConfigs} />
+
+## Color
+
+Color style props allow you to adjust the color styles of components.
+
+<ExampleCodeBlock code={ColorExample} />
+
+<StylePropsTable styleProps={colorStyleFnConfigs} />
+
+## Depth
+
+Depth style props allow you to adjust the depth styles of components.
+
+<ExampleCodeBlock code={DepthExample} />
+
+<StylePropsTable styleProps={depthStyleFnConfigs} />
+
+## Flex
+
+Flex style props allow you to adjust the flex styles of components.
+
+<ExampleCodeBlock code={FlexExample} />
+
+<StylePropsTable styleProps={flexStyleFnConfigs} />
+
+## Flex Item
+
+Flex item style props allow you to adjust the flex item styles of components.
+
+<ExampleCodeBlock code={FlexItemExample} />
+
+<StylePropsTable styleProps={flexItemStyleFnConfigs} />
+
+## Grid
+
+Grid style props allow you to adjust the grid styles of components.
+
+<ExampleCodeBlock code={GridExample} />
+
+<StylePropsTable styleProps={gridStyleFnConfigs} />
+
+## Grid Item
+
+Grid item style props allow you to adjust the grid item styles of components.
+
+<ExampleCodeBlock code={GridItemExample} />
+
+<StylePropsTable styleProps={gridItemStyleFnConfigs} />
+
+## Layout
+
+Layout style props allow you to adjust the layout styles of components.
+
+<ExampleCodeBlock code={LayoutExample} />
+
+<StylePropsTable styleProps={layoutStyleFnConfigs} />
+
+## Other
+
+Other style props allow you to adjust the other, miscellaneous styles of components.
+
+<ExampleCodeBlock code={OtherExample} />
+
+<StylePropsTable styleProps={otherStyleFnConfigs} />
+
+## Position
+
+Position style props allow you to adjust the position styles of components.
+
+<ExampleCodeBlock code={PositionExample} />
+
+<StylePropsTable styleProps={positionStyleFnConfigs} />
+
+## Space
+
+Space style props allow you to adjust the space styles of components.
+
+<ExampleCodeBlock code={SpaceExample} />
+
+<StylePropsTable styleProps={spaceStyleFnConfigs} />
+
+## Text
+
+Text style props allow you to adjust the text styles of components.
+
+<ExampleCodeBlock code={TextExample} />
+
+<StylePropsTable styleProps={textStyleFnConfigs} />

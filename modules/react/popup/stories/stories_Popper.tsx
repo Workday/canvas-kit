@@ -7,7 +7,7 @@ import {Card} from '@workday/canvas-kit-react/card';
 import {HStack} from '@workday/canvas-kit-react/layout';
 
 export default {
-  title: 'Components/Popups/Popper/React',
+  title: 'Components/Popups/Popper',
   component: Popper,
   parameters: {
     ReadmePath: 'react/popup',

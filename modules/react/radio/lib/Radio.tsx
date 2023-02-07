@@ -8,12 +8,8 @@ import {
   Themeable,
   useUniqueId,
 } from '@workday/canvas-kit-react/common';
-import canvas, {
-  borderRadius,
-  colors,
-  inputColors,
-  spaceNumbers,
-} from '@workday/canvas-kit-react/tokens';
+import {borderRadius, colors, inputColors, spaceNumbers} from '@workday/canvas-kit-react/tokens';
+import {LabelText} from '@workday/canvas-kit-react/text';
 
 export interface RadioProps extends Themeable {
   /**
@@ -276,21 +272,6 @@ const RadioCheck = styled('div')<Pick<RadioProps, 'checked' | 'variant'>>(
   })
 );
 
-const RadioLabel = styled('label')<{disabled?: boolean; variant?: 'inverse' | undefined}>(
-  {
-    ...canvas.type.levels.subtext.large,
-    paddingLeft: radioLabelDistance,
-  },
-  ({variant}) => (variant === 'inverse' ? {color: colors.frenchVanilla100} : undefined),
-  ({disabled, variant}) =>
-    disabled
-      ? {
-          color: variant === 'inverse' ? colors.frenchVanilla100 : inputColors.disabled.text,
-          opacity: variant === 'inverse' ? '.4' : '1',
-        }
-      : {cursor: 'pointer'}
-);
-
 export const Radio = createComponent('input')({
   displayName: 'Radio',
   Component: (
@@ -332,13 +313,16 @@ export const Radio = createComponent('input')({
           </RadioBackground>
         </RadioInputWrapper>
         {label && (
-          <RadioLabel htmlFor={inputId} disabled={disabled} variant={variant}>
+          <LabelText
+            paddingLeft={radioLabelDistance}
+            htmlFor={inputId}
+            disabled={disabled}
+            variant={variant}
+          >
             {label}
-          </RadioLabel>
+          </LabelText>
         )}
       </RadioContainer>
     );
   },
 });
-
-export default Radio;
