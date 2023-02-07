@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v7.4.8](https://github.com/Workday/canvas-kit/releases/tag/v7.4.8) (2023-02-07)
+
+### Components
+
+- fix: Allow overriding of return focus when closing a popup ([#1991](https://github.com/Workday/canvas-kit/pull/1991)) ([@christine-m](https://github.com/christine-m), christine.mullins)
+
+### Testing
+
+- test: Increase font delay to make chromatic happy ([#1996](https://github.com/Workday/canvas-kit/pull/1996)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v7.4.7](https://github.com/Workday/canvas-kit/releases/tag/v7.4.7) (2023-01-06)
 
 ### Testing
