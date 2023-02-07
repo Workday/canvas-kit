@@ -21,16 +21,16 @@ yarn add @workday/canvas-kit-react
 
 # createComponent
 
-`createComponent` is a great factory function that creates components to be exported. It enforces
-React ref forwarding, `as` prop, display name, and sub-components, and handles proper typing without
-much boiler plate. The return type is `Component<element, Props>` which looks like
+`createComponent` is a factory function that creates components to be exported. It enforces React
+`ref` forwarding, `as` prop, `displayName`, `subComponents`, and handles proper typing without much
+boiler plate. The return type is `Component<element, Props>` which looks like
 `Component<'div', Props>` which is a clean interface that tells you the default element that is
 used.
 
 ## Usage
 
 `createComponent` is great to use if you want to create quick compound components or you need to set
-up components with ref forwarding.
+up components with `ref` forwarding.
 
 <ExampleCodeBlock code={CreateComponent} />
 
@@ -171,12 +171,43 @@ again. `elemProps` is called internally automatically by `createContainer`. If y
 
 By default `createModelHook` does this for you and spreads the `elemProps` onto the component.
 
-# createContainer
+# createContainer and createSubcomponent
+
+`createContainer` and `createSubcomponent` functions take a default React.ElementType which can be
+an element string like div or button or a component like Button. It also takes a config object
+containing the following:
+
+- `displayName`: This will be the name of the component when shown by the React Dev tools. By
+  convention, we make that name be the same as typed in a render function. For example
+  `Disclosure.Target` vs `DisclosureTarget`.
+- `modelHook`: This is the model hook used by the compound component (`useDisclosureModel` in our
+  case). This model hook is used to determine proper prop types and seamlessly handle the option
+  model prop. For `createContainer`, if a `model` is not passed, a `model` is created and added to
+  React Context. For `createSubcomponent`, if a `model` is not passed, the `model` comes from React
+  Context.
+- `elemPropsHook`: This is the elemPropsHook that takes a model and elemProps and returns elemProps.
+
+- `subComponents`: For container components. A list of sub components to add to the returned
+  component. For example, a sub component called `DisclosureTarget` will be added to the export of
+  `Disclosure` so that the user can import only `Disclosure` and use `Disclosure.Target`.
+  `subComponents` is needed for Typescript because static properties cannot be added to predefined
+  interfaces. `Disclosure.Target` = `DisclosureTarget` will caused a type error. This property
+  allows the createComponent factory function to infer the final interface of the returned
+  component.
+
+Finally, a generic function is returned that takes the component configuration. The first argument
+is `elemProps` with `ref` and hook props already merged in with props handed to the component. The
+model config props will already be filtered out. We'll worry about `elemPropsHook` later. The second
+is an Element property. Element is the value passed to the Component's as prop. It will default to
+the provided element. The last parameter is an optional model reference. Ideally, the model is used
+in `elemPropsHook` and therefore not normally needed inside the render function.
+
+## createContainer
 
 When building a component that has a model, you typically start with a container component.
 `createContainer` is a utility function that hooks up all the pieces for you.
 
-## Usage
+### Usage
 
 - It will wrap your component in a context provider so that `subComponents` have access to the
   model.
@@ -205,14 +236,14 @@ export const Disclosure = createContainer('div')({
 
 <ExampleCodeBlock code={CreateContainer} />
 
-# createSubcomponent
+## createSubcomponent
 
 Once you've built a container component, adding a subcomponent is easy. `createSubcomponent` is
 similar to `createContainer` in that it hooks up many of the pieces for you. The main difference is
 it uses the context created by `createContainer`. This allows access to the model created at the
 root level so that you can use any state or events at a child component level.
 
-## Usage
+### Usage
 
 - It subscribes to the parent context allowing you access to the model hook `state` and `events`
 - It attaches your model hook to your component.
