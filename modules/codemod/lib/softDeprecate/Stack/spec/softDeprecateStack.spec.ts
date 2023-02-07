@@ -277,6 +277,90 @@ describe('Canvas Kit Deprecate Stack Codemod', () => {
       expectTransform(input, expected);
     });
 
+    it('should properly transform spacing expression reference identifiers', () => {
+      const input = `
+      import { Stack } from '@workday/canvas-kit-react/layout';
+
+      <Card as={Stack} spacing="s"/>
+      `;
+      const expected = `
+      import { Flex } from '@workday/canvas-kit-react/layout';
+
+      <Card as={Flex} gap="s"/>
+      `;
+
+      expectTransform(input, expected);
+    });
+
+    it('should properly transform spacing props in createComponent', () => {
+      const input = `
+      import { StackProps } from '@workday/canvas-kit-react/layout';
+
+      export const Container = createComponent('div')({
+        displayName: 'Container',
+        Component: (
+          {
+            children,
+            flexDirection = 'row',
+            width = '100%',
+            spacing,
+            marginRight,
+            ...elemProps
+          }: StackProps,
+          ref,
+          Element
+        ) => {
+
+          return (
+            <StyledContainer
+              as={Element}
+              ref={ref}
+              flexDirection={flexDirection}
+              spacing={spacing}
+              {...elemProps}
+            >
+              {items}
+            </StyledContainer>
+          );
+        },
+      })
+      `;
+      const expected = `
+      import { FlexProps } from '@workday/canvas-kit-react/layout';
+
+      export const Container = createComponent('div')({
+        displayName: 'Container',
+        Component: (
+          {
+            children,
+            flexDirection = 'row',
+            width = '100%',
+            gap,
+            marginRight,
+            ...elemProps
+          }: FlexProps,
+          ref,
+          Element
+        ) => {
+
+          return (
+            <StyledContainer
+              as={Element}
+              ref={ref}
+              flexDirection={flexDirection}
+              gap={gap}
+              {...elemProps}
+            >
+              {items}
+            </StyledContainer>
+          );
+        },
+      })
+      `;
+
+      expectTransform(input, expected);
+    });
+
     it('should not transform other keys reference identifiers', () => {
       const input = `
       import { GridProps } from '@workday/canvas-kit-react/layout';

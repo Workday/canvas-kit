@@ -187,6 +187,61 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
     }
   });
 
+  // Transform `spacing` prop in createComponent to `gap`
+  // Component: ({spacing, ...elemProps}: StackProps,
+  // Component: ({gap, ...elemProps}: FlexProps,
+  root.find(j.ArrowFunctionExpression, {type: 'ArrowFunctionExpression'}).forEach(nodePath => {
+    nodePath.node.params?.forEach(path => {
+      if (path.type === 'ObjectPattern') {
+        path.properties?.forEach(obj => {
+          if (obj.type === 'ObjectProperty') {
+            if (obj.key.type === 'Identifier') {
+              if (spacingName.includes(obj.key.name)) {
+                obj.key.name = 'gap';
+              }
+            }
+          }
+        });
+      }
+    });
+  });
+
+  // Transform `spacing` JSXIdentifier and value to `gap`
+  // e.g. return <StyledContainer spacing={spacing} {...elemProps} />
+  // becomes return <StyledContainer gap={gap} {...elemProps} />
+  root.find(j.JSXOpeningElement, {type: 'JSXOpeningElement'}).forEach(nodePath => {
+    nodePath.node.attributes?.forEach(attr => {
+      if (attr.type === 'JSXAttribute') {
+        if (attr.value?.type === 'JSXExpressionContainer') {
+          if (attr.value.expression.type === 'Identifier') {
+            if (spacingName.includes(attr.value.expression.name)) {
+              attr.value.expression.name = 'gap';
+            }
+          }
+        }
+      }
+    });
+  });
+
+  // Transforms `as` prop Stack, HStack or VStack values to `Flex`
+  // e.g. <Card as={Stack} spacing="s" />
+  // becomes <Card as={Flex} spacing="s" />
+  root.find(j.JSXOpeningElement, {type: 'JSXOpeningElement'}).forEach(nodePath => {
+    nodePath.node.attributes?.forEach(attr => {
+      if (attr.type === 'JSXAttribute') {
+        if (attr.name.name === 'as') {
+          if (attr.value?.type === 'JSXExpressionContainer') {
+            if (attr.value.expression.type === 'Identifier') {
+              if (stackImportNames.includes(attr.value.expression.name)) {
+                attr.value.expression.name = 'Flex';
+              }
+            }
+          }
+        }
+      }
+    });
+  });
+
   // Transform Stack JSXElements
   // Transform `<Stack spacing="l">` to `<Flex gap="l">`
   root
