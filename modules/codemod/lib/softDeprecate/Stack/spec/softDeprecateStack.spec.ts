@@ -292,6 +292,69 @@ describe('Canvas Kit Deprecate Stack Codemod', () => {
       expectTransform(input, expected);
     });
 
+    it('should properly transform the spacing prop on specific components that extend Stack', () => {
+      const input = `
+      import { Breadcrumbs } from '@workday/canvas-kit-react/breadcrumbs';
+
+      <Breadcrumbs>
+        <Breadcrumbs.List spacing="s"/>
+      </Breadcrumbs>
+      `;
+      const expected = `
+      import { Breadcrumbs } from '@workday/canvas-kit-react/breadcrumbs';
+
+      <Breadcrumbs>
+        <Breadcrumbs.List gap="s"/>
+      </Breadcrumbs>
+      `;
+
+      expectTransform(input, expected);
+    });
+
+    it('should properly transform the spacing prop on specific components that extend Stack', () => {
+      const input = `
+      import { ActionBar } from '@workday/canvas-kit-react/action-bar';
+
+      <ActionBar>
+        <ActionBar.List spacing="s"/>
+      </ActionBar>
+      `;
+      const expected = `
+      import { ActionBar } from '@workday/canvas-kit-react/action-bar';
+
+      <ActionBar>
+        <ActionBar.List gap="s"/>
+      </ActionBar>
+      `;
+
+      expectTransform(input, expected);
+    });
+
+    it('should not effect specific components that do not extend Stack', () => {
+      const input = `
+      import { Grid, Flex } from '@workday/canvas-kit-react/layout';
+      import { ActionBar } from '@workday/canvas-kit-react/action-bar';
+
+      <Grid gridGap="l">
+        <ActionBar>
+          <ActionBar.List spacing="s"/>
+        </ActionBar>
+      </Grid>
+      `;
+      const expected = `
+      import { Grid, Flex } from '@workday/canvas-kit-react/layout';
+      import { ActionBar } from '@workday/canvas-kit-react/action-bar';
+
+      <Grid gridGap="l">
+        <ActionBar>
+          <ActionBar.List gap="s"/>
+        </ActionBar>
+      </Grid>
+      `;
+
+      expectTransform(input, expected);
+    });
+
     it('should properly transform spacing props in createComponent', () => {
       const input = `
       import { StackProps } from '@workday/canvas-kit-react/layout';

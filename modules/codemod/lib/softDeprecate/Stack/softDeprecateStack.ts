@@ -4,6 +4,13 @@ const mainPackage = '@workday/canvas-kit-react';
 const stackPackage = '@workday/canvas-kit-react/layout';
 const stackImportNames = ['Stack', 'HStack', 'VStack'];
 const stackImportProps = ['StackProps', 'HStackProps', 'VStackProps', 'StackStyleProps'];
+const altImportSpecifier = ['ActionBar', 'Breadcrumbs', 'Menu', 'Pagination', 'Tabs'];
+const altImportNames = ['action-bar', 'breadcrumbs', 'menu', 'pagination', 'tabs'];
+const altPackage: string[] = [];
+altImportNames.forEach(name => {
+  const importPackage = mainPackage + '/' + name;
+  altPackage.push(importPackage);
+});
 
 export default function transformer(file: FileInfo, api: API, options: Options) {
   const j = api.jscodeshift;
@@ -15,7 +22,7 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
   root.find(j.ImportDeclaration, (nodePath: ImportDeclaration) => {
     const value = nodePath.source.value;
     // If there's an import from the stack package, set the import boolean check to true
-    if (value === stackPackage) {
+    if (value === stackPackage || altPackage.includes(value)) {
       hasStackImports = true;
       return false;
     }
@@ -28,7 +35,9 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
           (specifier.type === 'ImportSpecifier' &&
             stackImportNames.includes(specifier.imported.name)) ||
           (specifier.type === 'ImportSpecifier' &&
-            stackImportProps.includes(specifier.imported.name))
+            stackImportProps.includes(specifier.imported.name)) ||
+          (specifier.type === 'ImportSpecifier' &&
+            altImportSpecifier.includes(specifier.imported.name))
         ) {
           hasStackImports = true;
         }
