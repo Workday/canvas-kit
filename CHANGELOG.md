@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v8.4.9](https://github.com/Workday/canvas-kit/releases/tag/v8.4.9) (2023-02-07)
+
+### Documentation
+
+- docs: Add docs on model hooks and create utilities ([#1881](https://github.com/Workday/canvas-kit/pull/1881)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@NicholasBoll](https://github.com/NicholasBoll))
+  To better support our consumers, we're adding documentation on our Compound Component utilities and hooks. You can find the docs under Hooks and Utilities -> Compound Components
+
+
 ## [v8.4.8](https://github.com/Workday/canvas-kit/releases/tag/v8.4.8) (2023-02-07)
 
 ### Components
