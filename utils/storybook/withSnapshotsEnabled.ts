@@ -6,7 +6,7 @@ type StorybookParameters = {
     disable?: boolean;
     pauseAnimationAtEnd?: boolean;
     diffThreshold?: number;
-    viewport?: {viewports: number[]};
+    viewports?: number[];
   };
   [key: string]: any;
 };

@@ -9,7 +9,7 @@ import {Tabs, useTabsModel} from '@workday/canvas-kit-react/tabs';
 
 import {Basic} from './examples/Basic';
 import {RightToLeft} from './examples/RightToLeft';
-import {Box} from '../../layout';
+import {Box} from '@workday/canvas-kit-react/layout';
 
 const fontDelay = 150; // best guess for the font delay to prevent incorrect Chromatic regressions
 
@@ -124,4 +124,4 @@ export const Overflow = withSnapshotsEnabled(() => {
   );
 });
 
-Overflow.parameters.chromatic.viewport.viewports = [320, 1020];
+Overflow.parameters.chromatic.viewports = [320, 1020];
