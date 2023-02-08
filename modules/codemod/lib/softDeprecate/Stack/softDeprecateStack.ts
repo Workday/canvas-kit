@@ -6,7 +6,7 @@ const stackImportNames = ['Stack', 'HStack', 'VStack'];
 const stackImportProps = ['StackProps', 'HStackProps', 'VStackProps', 'StackStyleProps'];
 const altImportSpecifier = ['ActionBar', 'Breadcrumbs', 'Menu', 'Pagination', 'Tabs'];
 const altImportNames = ['action-bar', 'breadcrumbs', 'menu', 'pagination', 'tabs'];
-const altPackage: string[] = [];
+const altPackage: any[] = [];
 altImportNames.forEach(name => {
   const importPackage = mainPackage + '/' + name;
   altPackage.push(importPackage);
@@ -22,7 +22,12 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
   root.find(j.ImportDeclaration, (nodePath: ImportDeclaration) => {
     const value = nodePath.source.value;
     // If there's an import from the stack package, set the import boolean check to true
-    if (value === stackPackage || altPackage.includes(value)) {
+    if (value === stackPackage) {
+      hasStackImports = true;
+      return false;
+    }
+
+    if (altPackage.includes(value)) {
       hasStackImports = true;
       return false;
     }
