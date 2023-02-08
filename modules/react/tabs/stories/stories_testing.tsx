@@ -9,6 +9,7 @@ import {Tabs, useTabsModel} from '@workday/canvas-kit-react/tabs';
 
 import {Basic} from './examples/Basic';
 import {RightToLeft} from './examples/RightToLeft';
+import {Box} from '../../layout';
 
 const fontDelay = 150; // best guess for the font delay to prevent incorrect Chromatic regressions
 
@@ -20,6 +21,12 @@ export default {
       delay: fontDelay,
     },
   },
+};
+
+type MyTabItem = {
+  id: string;
+  text: React.ReactNode;
+  contents: string;
 };
 
 const TabsExample = ({theme}: {theme?: PartialEmotionCanvasTheme} = {theme: undefined}) => {
@@ -81,3 +88,40 @@ export const Bidirectionality = withSnapshotsEnabled(() => {
     </>
   );
 });
+
+export const Overflow = withSnapshotsEnabled(() => {
+  const [items] = React.useState<MyTabItem[]>([
+    {id: 'first', text: 'First Tab', contents: 'Contents of First Tab'},
+    {id: 'second', text: 'Second Tab', contents: 'Contents of Second Tab'},
+    {id: 'third', text: 'Third Tab', contents: 'Contents of Third Tab'},
+    {id: 'fourth', text: 'Fourth Tab', contents: 'Contents of Fourth Tab'},
+    {id: 'fifth', text: 'Fifth Tab', contents: 'Contents of Fifth Tab'},
+    {id: 'sixth', text: 'Sixth Tab', contents: 'Contents of Sixth Tab'},
+    {id: 'seventh', text: 'Seventh Tab', contents: 'Contents of Seventh Tab'},
+  ]);
+
+  return (
+    <>
+      <h3>Overflow Tabs</h3>
+      <Box width="100%">
+        <Tabs items={items}>
+          <Tabs.List overflowButton={<Tabs.OverflowButton>More</Tabs.OverflowButton>}>
+            {(item: MyTabItem) => <Tabs.Item>{item.text}</Tabs.Item>}
+          </Tabs.List>
+          <Tabs.Menu.Popper>
+            <Tabs.Menu.Card maxWidth={300} maxHeight={200}>
+              <Tabs.Menu.List>
+                {(item: MyTabItem) => <Tabs.Menu.Item>{item.text}</Tabs.Menu.Item>}
+              </Tabs.Menu.List>
+            </Tabs.Menu.Card>
+          </Tabs.Menu.Popper>
+          <Tabs.Panels>
+            {(item: MyTabItem) => <Tabs.Panel marginTop="m">{item.contents}</Tabs.Panel>}
+          </Tabs.Panels>
+        </Tabs>
+      </Box>
+    </>
+  );
+});
+
+Overflow.parameters.chromatic.viewport = [320, 1020];
