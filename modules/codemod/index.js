@@ -7,28 +7,35 @@ const chalk = require('chalk');
 const {_: commands, path} = require('yargs')
   .scriptName('canvas-kit-codemod')
   .usage(chalk.bold.blueBright('$0 <transform> [path]'))
-  .command('v5 [path]', chalk.gray('Canvas Kit v4 > v5 migration transform'), yargs => {
+  .command('v5 [path]', chalk.gray('Canvas Kit v4 > v5 upgrade transform'), yargs => {
     yargs.positional('path', {
       type: 'string',
       default: '.',
       describe: chalk.gray('The path to execute the transform in (recursively).'),
     });
   })
-  .command('v6 [path]', chalk.gray('Canvas Kit v5 > v6 migration transform'), yargs => {
+  .command('v6 [path]', chalk.gray('Canvas Kit v5 > v6 upgrade transform'), yargs => {
     yargs.positional('path', {
       type: 'string',
       default: '.',
       describe: chalk.gray('The path to execute the transform in (recursively).'),
     });
   })
-  .command('v7 [path]', chalk.gray('Canvas Kit v6 > v7 migration transform'), yargs => {
+  .command('v7 [path]', chalk.gray('Canvas Kit v6 > v7 upgrade transform'), yargs => {
     yargs.positional('path', {
       type: 'string',
       default: '.',
       describe: chalk.gray('The path to execute the transform in (recursively).'),
     });
   })
-  .command('v8 [path]', chalk.gray('Canvas Kit v7 > v8 migration transform'), yargs => {
+  .command('v8 [path]', chalk.gray('Canvas Kit v7 > v8 upgrade transform'), yargs => {
+    yargs.positional('path', {
+      type: 'string',
+      default: '.',
+      describe: chalk.gray('The path to execute the transform in (recursively).'),
+    });
+  })
+  .command('v9 [path]', chalk.gray('Canvas Kit v8 > v9 upgrade transform'), yargs => {
     yargs.positional('path', {
       type: 'string',
       default: '.',
