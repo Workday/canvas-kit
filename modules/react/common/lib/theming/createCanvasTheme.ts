@@ -1,7 +1,7 @@
 import chroma from 'chroma-js';
-import merge from 'lodash/merge';
-import memoize from 'lodash/memoize';
-import findKey from 'lodash/findKey';
+import merge from 'lodash.merge';
+import memoize from 'lodash.memoize';
+import findKey from 'lodash.findKey';
 import colors from '@workday/canvas-colors-web';
 import {defaultCanvasTheme} from './theme';
 import {

@@ -1,7 +1,7 @@
 import {keyframes, Theme, CSSObject} from '@emotion/react';
 import {canvas} from '@workday/canvas-kit-react/tokens';
 import {defaultCanvasTheme} from '../theming/index';
-import memoize from 'lodash/memoize';
+import memoize from 'lodash.memoize';
 
 interface FocusRingOptions {
   width?: number;

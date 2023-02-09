@@ -1,4 +1,4 @@
-import get from 'lodash/get';
+import get from 'lodash.get';
 
 const inheritFont: boolean =
   typeof window !== 'undefined' && get(window, 'window.workday.canvas.inheritFontFamily');

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import throttle from 'lodash/throttle';
+import throttle from 'lodash.throttle';
 
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {colors, space, CanvasSpaceValues} from '@workday/canvas-kit-react/tokens';

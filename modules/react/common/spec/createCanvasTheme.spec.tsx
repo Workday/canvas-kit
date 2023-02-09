@@ -1,7 +1,7 @@
 import colors from '@workday/canvas-colors-web';
 import {defaultCanvasTheme, createCanvasTheme, PartialCanvasTheme} from '../lib/theming';
 import {shiftColor, ColorDirection} from '../lib/theming/createCanvasTheme';
-import lodash from 'lodash';
+import cloneDeep from 'lodash.clonedeep';
 
 describe('createCanvasTheme', () => {
   test('calling without any input provides the default theme', () => {
@@ -83,7 +83,7 @@ describe('createCanvasTheme', () => {
   });
 
   test('calling with a fully custom theme should preserve all fields', () => {
-    const expected = lodash.cloneDeep(defaultCanvasTheme);
+    const expected = cloneDeep(defaultCanvasTheme);
 
     const customizeTheme = (obj: any) => {
       for (const k in obj) {
@@ -114,7 +114,7 @@ describe('createCanvasTheme', () => {
         },
       },
     };
-    const original = lodash.cloneDeep(defaultCanvasTheme);
+    const original = cloneDeep(defaultCanvasTheme);
     createCanvasTheme(input);
 
     expect(original).toEqual(defaultCanvasTheme);
