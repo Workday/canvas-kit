@@ -55,6 +55,7 @@ const TestModal = () => {
 };
 
 export const ModalSmallWidth = withSnapshotsEnabled(() => <TestModal />);
+ModalSmallWidth.parameters.chromatic.viewports = [320, 1200];
 
 export const ModalRTL = withSnapshotsEnabled(() => {
   const theme = useTheme({canvas: {direction: ContentDirection.RTL}});

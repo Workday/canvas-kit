@@ -124,4 +124,4 @@ export const Overflow = withSnapshotsEnabled(() => {
   );
 });
 
-Overflow.parameters.chromatic.viewports = [320, 1020];
+Overflow.parameters.chromatic.viewports = [320, 1200];
