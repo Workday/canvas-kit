@@ -6,7 +6,7 @@ import {StatusIndicatorIcon, statusIndicatorColors} from './StatusIndicatorIcon'
 import {StatusIndicatorLabel} from './StatusIndicatorLabel';
 import {useStatusIndicatorModel} from './hooks';
 
-export interface StatusIndicatorProps extends Partial<ExtractProps<typeof Flex, never>> {
+export interface StatusIndicatorProps extends ExtractProps<typeof Flex, never> {
   /**
    * Children of the `StatusIndicator`. Can contain a `StatusIndicator.Label` and optionally a `StatusIndicator.Icon`.
    */
