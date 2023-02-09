@@ -1,9 +1,10 @@
-import get from 'lodash.get';
+// prettier-ignore
+//@ts-ignore
+const canvasObject = typeof window !== 'undefined' && window.workday && window.workday.canvas && window.workday.canvas;
 
-const inheritFont: boolean =
-  typeof window !== 'undefined' && get(window, 'window.workday.canvas.inheritFontFamily');
+const inheritFont: boolean = typeof canvasObject !== 'undefined' && canvasObject.inheritFontFamily;
 const inheritMonoFont: boolean | string =
-  typeof window !== 'undefined' && get(window, 'window.workday.canvas.inheritMonoFontFamily');
+  typeof canvasObject !== 'undefined' && canvasObject.inheritMonoFontFamily;
 
 export const fontFamily = inheritFont
   ? 'inherit'

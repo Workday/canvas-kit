@@ -1,4 +1,3 @@
-import get from 'lodash.get';
 import {useTheme as useEmotionTheme} from '@emotion/react';
 import {
   defaultCanvasTheme,
@@ -45,7 +44,10 @@ export function useTheme(theme?: PartialEmotionCanvasTheme): EmotionCanvasTheme 
     // Context not supported or invalid (probably called from within a class component)
   }
 
-  const windowTheme = typeof window !== 'undefined' && get(window, 'window.workday.canvas.theme');
+  // This CK support chaining?
+  // prettier-ignore
+  //@ts-ignore
+  const windowTheme = typeof window !== 'undefined' && window.workday && window.workday.canvas && window.workday.canvas.theme;
   if (windowTheme) {
     return getFilledTheme({canvas: windowTheme});
   }
