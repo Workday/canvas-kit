@@ -98,7 +98,7 @@ class PopupWrapper extends React.Component<{}, PopupWrapperState> {
   };
 }
 
-storiesOf('Components/Popups/Popup/CSS', module)
+storiesOf('CSS/Popups/Popup', module)
   .addParameters({ReadmePath: 'css/popup'})
   .add('Default', () => (
     <div className="story">

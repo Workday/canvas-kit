@@ -10,7 +10,7 @@ import {withSnapshotsEnabled, customColorTheme} from '../../../../../utils/story
 import {TextArea} from '@workday/canvas-kit-react/text-area';
 
 export default withSnapshotsEnabled({
-  title: 'Testing/React/Inputs/TextArea',
+  title: 'Testing/Inputs/TextArea',
   component: TextArea,
 });
 

@@ -5,9 +5,9 @@ describe('Menu', () => {
     h.stories.visit();
   });
 
-  context(`given the [Components/Popups/Menu/React, Basic] story is rendered`, () => {
+  context(`given the [Components/Popups/Menu, Basic] story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Components/Popups/Menu/React', 'Basic');
+      h.stories.load('Components/Popups/Menu', 'Basic');
     });
 
     it('should pass axe checks', () => {

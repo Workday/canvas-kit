@@ -8,7 +8,7 @@ export interface UseGoToFormConfig {
 }
 
 export const useGoToForm = ({onSubmit, model}: UseGoToFormConfig = {} as UseGoToFormConfig) => {
-  const [value, setValue] = React.useState<number>();
+  const [value, setValue] = React.useState<number>(model.state.currentPage);
 
   React.useEffect(() => {
     if (value !== undefined && model.state.currentPage !== value) {

@@ -8,7 +8,9 @@ on:
   workflow_dispatch: # Allow manual triggering of this job in case of failures
     inputs:
       version:
-        description: 'The version override. Example: "8.1.2". Leave blank if you want conventional commits to decide which version'
+        description:
+          'The version override. Example: "8.1.2". Leave blank if you want conventional commits to
+          decide which version'
         required: false
 
 jobs:
@@ -81,22 +83,14 @@ jobs:
         id: extract-branch
         run: echo "::set-output name=branch::$(echo ${GITHUB_REF#refs/heads/})"
 
-      - name: Get Next Bump
-        id: next-bump
-        run: |
-          echo "::set-output name=bump::$(node node_modules/conventional-recommended-bump/cli.js -p angular)"
-          echo ${{steps.next-bump.outputs.bump}}
-
-      ## On the master branch, we'll do a patch bump on every commit. This will create a commit with
-      ## of a push action to allow a PAT to bypass branch protections (pushing directly on the
-      ## branch).
+      ## On the master branch, we'll do a patch bump on every commit by default.
       - name: Lerna Bump
-        if: "!inputs.version"
-        run: yarn bump --yes ${{steps.next-bump.outputs.bump}}
+        if: '!inputs.version'
+        run: yarn bump --yes patch
 
       ## Manual version override
       - name: Lerna Bump
-        if: "inputs.version"
+        if: 'inputs.version'
         run: yarn bump --yes ${{inputs.version}}
 
       ## Capture the new tag and store it for later use
@@ -143,7 +137,9 @@ jobs:
 
       ## Publish to npm. Must be run after a build
       - name: Publish
-        run: yarn lerna publish from-package --yes --dist-tag ${{steps.extract-branch.outputs.branch == 'master' && 'latest' || 'support'}}
+        run:
+          yarn lerna publish from-package --yes --dist-tag ${{steps.extract-branch.outputs.branch ==
+          'master' && 'latest' || 'support'}}
         env:
           NODE_AUTH_TOKEN: '${{secrets.NPM_CI_PUBLISH_TOKEN}}'
 
@@ -198,4 +194,5 @@ jobs:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
           TRAVIS_BRANCH: ${{ steps.extract-branch.outputs.branch }}
           TRAVIS_TEST_RESULT: ${{ job.status }}
-          TRAVIS_BUILD_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          TRAVIS_BUILD_URL:
+            ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}

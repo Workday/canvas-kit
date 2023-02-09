@@ -13,7 +13,7 @@ import {
 import {SegmentedControl} from '../index';
 
 export default withSnapshotsEnabled({
-  title: 'Testing/React/Buttons/Segmented Control',
+  title: 'Testing/Buttons/Segmented Control',
   component: SegmentedControl,
   parameters: {
     ReadmePath: 'labs-react/header',

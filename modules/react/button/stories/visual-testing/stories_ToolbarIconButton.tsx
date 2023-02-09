@@ -7,7 +7,7 @@ import {PartialEmotionCanvasTheme} from '@workday/canvas-kit-react/common';
 import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
 
 export default withSnapshotsEnabled({
-  title: 'Testing/React/Buttons/Button/Toolbar Icon Button',
+  title: 'Testing/Buttons/Button/Toolbar Icon Button',
   component: ToolbarIconButton,
 });
 

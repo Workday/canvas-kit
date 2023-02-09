@@ -3,6 +3,215 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v8.4.9](https://github.com/Workday/canvas-kit/releases/tag/v8.4.9) (2023-02-07)
+
+### Documentation
+
+- docs: Add docs on model hooks and create utilities ([#1881](https://github.com/Workday/canvas-kit/pull/1881)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@NicholasBoll](https://github.com/NicholasBoll))
+  To better support our consumers, we're adding documentation on our Compound Component utilities and hooks. You can find the docs under Hooks and Utilities -> Compound Components
+
+
+## [v8.4.8](https://github.com/Workday/canvas-kit/releases/tag/v8.4.8) (2023-02-07)
+
+### Components
+
+- fix: Allow overriding of return focus when closing a popup ([#1991](https://github.com/Workday/canvas-kit/pull/1991)) ([@christine-m](https://github.com/christine-m), christine.mullins)
+
+
+## [v7.4.8](https://github.com/Workday/canvas-kit/releases/tag/v7.4.8) (2023-02-07)
+
+### Components
+
+- fix: Allow overriding of return focus when closing a popup ([#1991](https://github.com/Workday/canvas-kit/pull/1991)) ([@christine-m](https://github.com/christine-m), christine.mullins)
+## [v8.4.7](https://github.com/Workday/canvas-kit/releases/tag/v8.4.7) (2023-02-07)
+
+### Documentation
+
+- docs: Cards, adding notice under 'as' usage ([#2000](https://github.com/Workday/canvas-kit/pull/2000)) ([@bstanton678](https://github.com/bstanton678), william.stanton, [@myvuuu](https://github.com/myvuuu), [@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v8.4.6](https://github.com/Workday/canvas-kit/releases/tag/v8.4.6) (2023-02-06)
+
+### Documentation
+
+- fix: Update broken link in CONTRIBUTING.md ([#2019](https://github.com/Workday/canvas-kit/pull/2019)) ([@thunguyen19](https://github.com/thunguyen19))
+
+
+## [v8.4.5](https://github.com/Workday/canvas-kit/releases/tag/v8.4.5) (2023-02-03)
+
+### Documentation
+
+- docs: Fix Expandable prop tables ([#2016](https://github.com/Workday/canvas-kit/pull/2016)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
+## [v8.4.4](https://github.com/Workday/canvas-kit/releases/tag/v8.4.4) (2023-02-01)
+
+### Testing
+
+- test: Increase font delay to make chromatic happy ([#1996](https://github.com/Workday/canvas-kit/pull/1996)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v8.4.3](https://github.com/Workday/canvas-kit/releases/tag/v8.4.3) (2023-02-01)
+
+### Documentation
+
+- docs: Fix typo in react-font README ([#2010](https://github.com/Workday/canvas-kit/pull/2010)) ([@sheelah](https://github.com/sheelah), Sheelah Brennan)
+
+
+## [v8.4.2](https://github.com/Workday/canvas-kit/releases/tag/v8.4.2) (2023-01-30)
+
+### Codemods
+
+- fix: Update to soft dep stack codemod for styled component ([#2007](https://github.com/Workday/canvas-kit/pull/2007)) ([@josh-bagwell](https://github.com/josh-bagwell))
+
+
+## [v8.4.1](https://github.com/Workday/canvas-kit/releases/tag/v8.4.1) (2023-01-26)
+
+### Documentation
+
+- docs: Add example for a simple compound component ([#1998](https://github.com/Workday/canvas-kit/pull/1998)) ([@vibdev](https://github.com/vibdev))
+
+
+## [v8.4.0](https://github.com/Workday/canvas-kit/releases/tag/v8.4.0) (2023-01-25)
+
+### Codemods
+
+- feat: Soft Deprecate Stack ([#1981](https://github.com/Workday/canvas-kit/pull/1981)) ([@josh-bagwell](https://github.com/josh-bagwell))
+
+
+## [v8.3.12](https://github.com/Workday/canvas-kit/releases/tag/v8.3.12) (2023-01-24)
+
+### Components
+
+- fix: Radio button navigation does not stay within its form ([#1995](https://github.com/Workday/canvas-kit/pull/1995)) ([@thunguyen19](https://github.com/thunguyen19))
+
+
+## [v8.3.11](https://github.com/Workday/canvas-kit/releases/tag/v8.3.11) (2023-01-17)
+
+### Components
+
+- fix(tabs): Use mask image to display fade effect on tabs ([#1705](https://github.com/Workday/canvas-kit/pull/1705)) ([@anishatulai](https://github.com/anishatulai), Anisha Tulai)
+
+
+## [v8.3.10](https://github.com/Workday/canvas-kit/releases/tag/v8.3.10) (2023-01-13)
+
+### Documentation
+
+- docs(TextArea): Update installation package name ([#1987](https://github.com/Workday/canvas-kit/pull/1987)) ([@roydelgado](https://github.com/roydelgado))
+
+
+## [v8.3.9](https://github.com/Workday/canvas-kit/releases/tag/v8.3.9) (2023-01-13)
+
+### Components
+
+- chore: Fix issue with changing wrong Layout ([#1986](https://github.com/Workday/canvas-kit/pull/1986)) ([@RayRedGoose](https://github.com/RayRedGoose))
+
+
+## [v8.3.8](https://github.com/Workday/canvas-kit/releases/tag/v8.3.8) (2023-01-10)
+
+### Documentation
+
+- fix: Remove react sub folder for form field ([#1979](https://github.com/Workday/canvas-kit/pull/1979)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v8.3.7](https://github.com/Workday/canvas-kit/releases/tag/v8.3.7) (2023-01-10)
+
+### Storybook
+
+- fix: Update links on welcome and brand logo ([#1976](https://github.com/Workday/canvas-kit/pull/1976)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v8.3.6](https://github.com/Workday/canvas-kit/releases/tag/v8.3.6) (2023-01-09)
+
+### Infrastructure
+
+- fix: Storybook sidebar highlight styling ([#1975](https://github.com/Workday/canvas-kit/pull/1975)) ([@jaclynjessup](https://github.com/jaclynjessup))
+
+
+## [v8.3.5](https://github.com/Workday/canvas-kit/releases/tag/v8.3.5) (2023-01-09)
+
+### Documentation
+
+- chore: Re organize storybook ([#1943](https://github.com/Workday/canvas-kit/pull/1943)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@jaclynjessup](https://github.com/jaclynjessup))
+  We've updated our categories and organization on storybook to better surface information.
+
+
+## [v8.3.4](https://github.com/Workday/canvas-kit/releases/tag/v8.3.4) (2023-01-09)
+
+### Testing
+
+- test(tooltip): Add delay to fix flaky placement tests on tooltips ([#1968](https://github.com/Workday/canvas-kit/pull/1968)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v7.4.7](https://github.com/Workday/canvas-kit/releases/tag/v7.4.7) (2023-01-06)
+
+### Testing
+
+- test(tooltip): Add delay to fix flaky placement tests on tooltips ([#1968](https://github.com/Workday/canvas-kit/pull/1968)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+## [v8.3.3](https://github.com/Workday/canvas-kit/releases/tag/v8.3.3) (2022-12-21)
+
+### Documentation
+
+- docs: Add Pagination responsive range example ([#1966](https://github.com/Workday/canvas-kit/pull/1966)) ([@alanbsmith](https://github.com/alanbsmith), Will Klein)
+
+
+## [v8.3.2](https://github.com/Workday/canvas-kit/releases/tag/v8.3.2) (2022-12-19)
+
+### Components
+
+- fix: Set Pagination GoTo TextInput to use current page as initial value ([#1930](https://github.com/Workday/canvas-kit/pull/1930)) ([@alanbsmith](https://github.com/alanbsmith), manuel.carrera)
+
+
+## [v8.3.1](https://github.com/Workday/canvas-kit/releases/tag/v8.3.1) (2022-12-16)
+
+### Components
+
+- chore: Remove conventional-recommended-bump from release.yml ([#1961](https://github.com/Workday/canvas-kit/pull/1961)) ([@alanbsmith](https://github.com/alanbsmith))
+
+### Dependencies
+
+- chore: Remove @emotion/jest ([#1957](https://github.com/Workday/canvas-kit/pull/1957)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+### Infrastructure
+
+- chore: Remove question template and dead links ([#1958](https://github.com/Workday/canvas-kit/pull/1958)) ([@jaclynjessup](https://github.com/jaclynjessup))
+
+
+## [v8.3.0](https://github.com/Workday/canvas-kit/releases/tag/v8.3.0) (2022-12-09)
+
+### Components
+
+- fix: Fix Expandable exports and types ([#1953](https://github.com/Workday/canvas-kit/pull/1953)) ([@alanbsmith](https://github.com/alanbsmith))
+  `useExpandableModel` wasn't properly exported with the other hooks. It's been moved into the `/hooks` directory and exported from there. If you were importing this hook from `dist`, you'll  need to update the import.
+  
+  ```tsx
+  // before
+  import { useExpandableModel } from "@workday/canvas-kit-labs-react/dist/es6/expandable/lib/useExpandableModel";
+  
+  // after
+  import { useExpandableModel } from "@workday/canvas-kit-labs-react/expandable";
+  ```
+
+
+## [v7.4.6](https://github.com/Workday/canvas-kit/releases/tag/v7.4.6) (2022-12-09)
+
+### Components
+
+- fix: Fix Expandable exports and types ([#1953](https://github.com/Workday/canvas-kit/pull/1953)) ([@alanbsmith](https://github.com/alanbsmith))
+  `useExpandableModel` wasn't properly exported with the other hooks. It's been moved into the `/hooks` directory and exported from there. If you were importing this hook from `dist`, you'll  need to update the import.
+  
+  ```tsx
+  // before
+  import { useExpandableModel } from "@workday/canvas-kit-labs-react/dist/es6/expandable/lib/useExpandableModel";
+  
+  // after
+  import { useExpandableModel } from "@workday/canvas-kit-labs-react/expandable";
+  ```
+## [v8.2.4](https://github.com/Workday/canvas-kit/releases/tag/v8.2.4) (2022-12-06)
+
+
+
+
 ## [v8.2.3](https://github.com/Workday/canvas-kit/releases/tag/v8.2.3) (2022-12-01)
 
 ### Documentation

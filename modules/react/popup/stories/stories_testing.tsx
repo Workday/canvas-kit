@@ -22,7 +22,7 @@ import {
 import {menuGroupIcon} from '@workday/canvas-system-icons-web';
 
 export default {
-  title: 'Testing/React/Popups/Popup',
+  title: 'Testing/Popups/Popup',
   component: Popup,
 };
 
@@ -351,7 +351,7 @@ export const ReturnFocusTest = () => {
         <p style={{marginBottom: 400}}>Scroll down</p>
         <p>Scroll right and click on the button</p>
         <Popup model={model}>
-          <FormField label="Name" style={{marginLeft: 400}}>
+          <FormField inputId="return-focus-text-input" label="Name" style={{marginLeft: 400}}>
             <TextInput />
           </FormField>
           <Popup.Target style={{marginBottom: 400, marginLeft: 410}} data-testid="target">
@@ -366,6 +366,17 @@ export const ReturnFocusTest = () => {
                   <li>You click on the input</li>
                   <li>
                     You scroll the container so that less than half of the "Open Popup" is showing
+                  </li>
+                  <li>
+                    <TertiaryButton
+                      data-testid="focus-text-input-link"
+                      onClick={() => {
+                        model.events.hide();
+                        document.getElementById('return-focus-text-input').focus();
+                      }}
+                    >
+                      You click this link
+                    </TertiaryButton>
                   </li>
                 </ul>
               </Popup.Body>

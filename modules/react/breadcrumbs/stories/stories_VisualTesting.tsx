@@ -7,7 +7,7 @@ import {withSnapshotsEnabled} from '../../../../utils/storybook';
 import {Breadcrumbs} from '@workday/canvas-kit-react/breadcrumbs';
 
 export default withSnapshotsEnabled({
-  title: 'Testing/React/Navigation/Breadcrumbs',
+  title: 'Testing/Navigation/Breadcrumbs',
   component: Breadcrumbs,
 });
 

@@ -5,9 +5,9 @@ describe('ExpandableContainer', () => {
     h.stories.visit();
   });
 
-  context(`given the [Labs/Expandable/React, Long Title] story is rendered`, () => {
+  context(`given the [Labs/Expandable, Long Title] story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Labs/Expandable/React', 'Long Title');
+      h.stories.load('Labs/Expandable', 'Long Title');
     });
 
     it('should pass axe checks', () => {

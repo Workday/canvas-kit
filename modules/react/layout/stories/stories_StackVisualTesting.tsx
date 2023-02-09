@@ -7,7 +7,7 @@ import {ContentDirection} from '@workday/canvas-kit-react/common';
 import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
 
 export default withSnapshotsEnabled({
-  title: 'Testing/React/Labs/Layout/Stack',
+  title: 'Testing/Labs/Layout/Stack',
   component: Stack,
 });
 

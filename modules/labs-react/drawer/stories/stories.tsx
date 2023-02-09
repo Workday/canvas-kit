@@ -5,7 +5,7 @@ import {space} from '@workday/canvas-kit-react/tokens';
 const title = 'Drawer Header';
 
 export default {
-  title: 'Labs/Drawer/React',
+  title: 'Labs/Drawer',
   component: DeprecatedDrawer,
   parameters: {
     ReadmePath: 'labs-react/drawer',

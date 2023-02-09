@@ -35,9 +35,9 @@ describe('Breadcrumbs', () => {
     h.stories.visit();
   });
 
-  context('given the [Components/Navigation/Breadcrumbs/React, Basic] example is rendered', () => {
+  context('given the [Components/Navigation/Breadcrumbs, Basic] example is rendered', () => {
     beforeEach(() => {
-      h.stories.load('Components/Navigation/Breadcrumbs/React', 'Basic');
+      h.stories.load('Components/Navigation/Breadcrumbs', 'Basic');
     });
 
     it('should not have any axe errors', () => {
@@ -111,10 +111,10 @@ describe('Breadcrumbs', () => {
   });
 
   context(
-    'given the [Components/Navigation/Breadcrumbs/React, Overflow Breadcrumbs] example is rendered',
+    'given the [Components/Navigation/Breadcrumbs, Overflow Breadcrumbs] example is rendered',
     () => {
       beforeEach(() => {
-        h.stories.load('Components/Navigation/Breadcrumbs/React', 'Overflow Breadcrumbs');
+        h.stories.load('Components/Navigation/Breadcrumbs', 'Overflow Breadcrumbs');
       });
 
       it('should not have any axe errors', () => {
@@ -146,10 +146,10 @@ describe('Breadcrumbs', () => {
   );
 
   context(
-    'given the [Components/Navigation/Breadcrumbs/React, Overflow Breadcrumbs] menu is rendered',
+    'given the [Components/Navigation/Breadcrumbs, Overflow Breadcrumbs] menu is rendered',
     () => {
       beforeEach(() => {
-        h.stories.load('Components/Navigation/Breadcrumbs/React', 'Overflow Breadcrumbs');
+        h.stories.load('Components/Navigation/Breadcrumbs', 'Overflow Breadcrumbs');
         openDropdownMenu();
       });
 
