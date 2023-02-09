@@ -1,7 +1,6 @@
 import chroma from 'chroma-js';
 import merge from 'lodash.merge';
 import memoize from 'lodash.memoize';
-import findKey from 'lodash.findKey';
 import colors from '@workday/canvas-colors-web';
 import {defaultCanvasTheme} from './theme';
 import {
@@ -20,7 +19,7 @@ export enum ColorDirection {
 }
 
 export function shiftColor(hexColor: string, direction: ColorDirection) {
-  const canvasColor = findKey(colors, color => color === hexColor);
+  const canvasColor = Object.keys(colors).find(color => colors[color] === hexColor);
 
   const darken = direction === ColorDirection.Darken;
 
