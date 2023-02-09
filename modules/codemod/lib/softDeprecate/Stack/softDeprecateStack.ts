@@ -21,7 +21,8 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
   // This toggles the failsafe that prevents us from accidentally transforming something unintentionally.
   root.find(j.ImportDeclaration, (nodePath: ImportDeclaration) => {
     const value = nodePath.source.value;
-    // If there's an import from the stack package, set the import boolean check to true
+    // If there's an import from Stack, ActionBar, Breadcrumbs, Menu, Pagination or Tabs package,
+    // set the import boolean check to true
     if (value === stackPackage) {
       hasStackImports = true;
       return false;
@@ -32,8 +33,10 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
       return false;
     }
 
-    // If there's an import from the main package, check to see if Stack or Stackprops are among the named imports
+    // If there's an import from the main package, check to see if Stack, ActionBar, Breadcrumbs,
+    // Menu, Pagination or Tabs or Stackprops are among the named imports
     // e.g. import {Stack} from '@workday/canvas-kit-react/layout';
+    // e.g. import {Menu} from '@workday/canvas-kit-react/menu';
     if (value === mainPackage) {
       (nodePath.specifiers || []).forEach(specifier => {
         if (
