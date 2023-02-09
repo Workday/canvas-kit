@@ -103,7 +103,7 @@ export const Overflow = withSnapshotsEnabled(() => {
   return (
     <>
       <h3>Overflow Tabs</h3>
-      <Box width="100%">
+      <Box width="200px">
         <Tabs items={items}>
           <Tabs.List overflowButton={<Tabs.OverflowButton>More</Tabs.OverflowButton>}>
             {(item: MyTabItem) => <Tabs.Item>{item.text}</Tabs.Item>}
