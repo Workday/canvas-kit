@@ -62,6 +62,7 @@ function calculateFocusRing({
   return {boxShadow};
 }
 
+// Is memoize really needed here??
 export const memoizedFocusRing = memoize(calculateFocusRing, (...args) => JSON.stringify(args));
 
 /**
