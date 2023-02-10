@@ -30,7 +30,6 @@
     "build": "npm-run-all --parallel build:cjs build:es6",
     "prepack": "node ../../utils/publish.js pre react",
     "postpack": "node ../../utils/publish.js post react",
-    "copy:card": "rm -rf /Users/jason.lloyd/Documents/Workday/learning/packages/learning-card/node_modules/@workday/canvas-kit-react/* && cp -r * /Users/jason.lloyd/Documents/Workday/learning/packages/learning-card/node_modules/@workday/canvas-kit-react",
     "depcheck": "node ../../utils/check-dependencies-exist.js",
     "typecheck:src": "tsc -p . --noEmit --incremental false"
   },
