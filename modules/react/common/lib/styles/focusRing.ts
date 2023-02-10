@@ -1,7 +1,6 @@
 import {keyframes, Theme, CSSObject} from '@emotion/react';
 import {canvas} from '@workday/canvas-kit-react/tokens';
 import {defaultCanvasTheme} from '../theming/index';
-import memoize from 'lodash.memoize';
 
 interface FocusRingOptions {
   width?: number;
@@ -63,7 +62,7 @@ function calculateFocusRing({
 }
 
 // Is memoize really needed here??
-export const memoizedFocusRing = memoize(calculateFocusRing, (...args) => JSON.stringify(args));
+export const memoizedFocusRing = calculateFocusRing;
 
 /**
  * A utility to create a canvas style focus ring around your widget.
