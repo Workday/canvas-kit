@@ -1,5 +1,6 @@
 import {memoizedFocusRing} from '../lib/styles/focusRing';
 
+// Check to delete this test since we removed memoized
 describe('memoizedFocusRing', () => {
   test('returns same object (reference equality)', () => {
     const args = {
