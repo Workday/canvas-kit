@@ -1,6 +1,4 @@
 import chroma from 'chroma-js';
-import merge from 'lodash.merge';
-import memoize from 'lodash.memoize';
 import colors from '@workday/canvas-colors-web';
 import {defaultCanvasTheme} from './theme';
 import {
@@ -12,6 +10,7 @@ import {
 } from './types';
 import {CanvasColor} from '@workday/canvas-kit-react/tokens';
 import {pickForegroundColor} from '../utils';
+import {getObjectProxy} from './getObjectProxy';
 
 export enum ColorDirection {
   Darken,
@@ -102,7 +101,7 @@ function calculateCanvasTheme(partialTheme: PartialCanvasTheme): CanvasTheme {
     direction: direction === ContentDirection.RTL ? direction : ContentDirection.LTR,
   };
 
-  return merge({}, defaultCanvasTheme, mergeable, extraFields) as CanvasTheme;
+  return getObjectProxy({...mergeable, ...extraFields}, defaultCanvasTheme);
 }
 
-export const createCanvasTheme = memoize(calculateCanvasTheme, (...args) => JSON.stringify(args));
+export const createCanvasTheme = calculateCanvasTheme;
