@@ -1,10 +1,5 @@
 import colors from '@workday/canvas-colors-web';
-import {
-  defaultCanvasTheme,
-  createCanvasTheme,
-  PartialCanvasTheme,
-  getObjectProxy,
-} from '../lib/theming';
+import {defaultCanvasTheme, createCanvasTheme, PartialCanvasTheme} from '../lib/theming';
 import {shiftColor, ColorDirection} from '../lib/theming/createCanvasTheme';
 
 const validateDefaultThemeProps = (theme: PartialCanvasTheme) => {
@@ -102,7 +97,9 @@ describe('createCanvasTheme', () => {
     };
 
     validateDefaultThemeProps(theme);
-    expect(theme.foo).toEqual(expected.foo);
+    type ExtendedTheme = PartialCanvasTheme & {foo?: string};
+
+    expect((theme as ExtendedTheme).foo).toEqual(expected.foo);
   });
 
   test('calling with a fully custom theme should preserve all fields', () => {
