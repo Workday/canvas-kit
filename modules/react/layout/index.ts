@@ -1,7 +1,3 @@
-import {DeprecatedLayout} from './lib/Layout';
-import {DeprecatedColumn} from './lib/Column';
-
-export { DeprecatedLayout, DeprecatedColumn};
 export * from './lib/Box';
 export * from './lib/utils/background';
 export * from './lib/utils/border';
@@ -13,6 +9,7 @@ export * from './lib/utils/grid';
 export * from './lib/utils/gridItem';
 export * from './lib/utils/layout';
 export * from './lib/utils/other';
+export * from './lib/utils/systemProps';
 export * from './lib/utils/position';
 export {SpaceStyleProps, spaceStyleFnConfigs} from './lib/utils/space';
 export {AllStyleProps, CommonStyleProps} from './lib/utils/styleProps';
