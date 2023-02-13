@@ -5,7 +5,7 @@ import {PartialEmotionCanvasTheme, ContentDirection} from '@workday/canvas-kit-r
 import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
 import {withSnapshotsEnabled, customColorTheme} from '../../../../utils/storybook';
 
-import {Tabs, useTabsModel} from '@workday/canvas-kit-react/tabs';
+import {Tabs} from '@workday/canvas-kit-react/tabs';
 
 import {Basic} from './examples/Basic';
 import {RightToLeft} from './examples/RightToLeft';
@@ -73,20 +73,14 @@ export const TabStates = withSnapshotsEnabled(() => (
   </>
 ));
 
-export const Bidirectionality = withSnapshotsEnabled(() => {
-  return (
-    <>
-      <h3>Left-to-right</h3>
-      <div>
-        <Basic />
-      </div>
-      <br />
-      <h3>Right-to-left</h3>
-      <div>
-        <RightToLeft />
-      </div>
-    </>
-  );
+export const BasicTabs = withSnapshotsEnabled(() => {
+  return <Basic />;
+});
+
+BasicTabs.parameters.chromatic.viewports = [480, 768, 1200];
+
+export const RTL = withSnapshotsEnabled(() => {
+  return <RightToLeft />;
 });
 
 export const Overflow = withSnapshotsEnabled(() => {
@@ -101,27 +95,36 @@ export const Overflow = withSnapshotsEnabled(() => {
   ]);
 
   return (
-    <>
-      <h3>Overflow Tabs</h3>
-      <Box width="200px">
-        <Tabs items={items}>
-          <Tabs.List overflowButton={<Tabs.OverflowButton>More</Tabs.OverflowButton>}>
-            {(item: MyTabItem) => <Tabs.Item>{item.text}</Tabs.Item>}
-          </Tabs.List>
-          <Tabs.Menu.Popper>
-            <Tabs.Menu.Card maxWidth={300} maxHeight={200}>
-              <Tabs.Menu.List>
-                {(item: MyTabItem) => <Tabs.Menu.Item>{item.text}</Tabs.Menu.Item>}
-              </Tabs.Menu.List>
-            </Tabs.Menu.Card>
-          </Tabs.Menu.Popper>
-          <Tabs.Panels>
-            {(item: MyTabItem) => <Tabs.Panel marginTop="m">{item.contents}</Tabs.Panel>}
-          </Tabs.Panels>
-        </Tabs>
-      </Box>
-    </>
+    <StaticStates>
+      <ComponentStatesTable
+        rowProps={[
+          {label: '100%', props: {width: '100%'}},
+          {label: '500px', props: {width: '500px'}},
+          {label: '360px', props: {width: '360px'}},
+          {label: '150px', props: {width: '150px'}},
+        ]}
+        columnProps={[{label: 'Overflow Tabs', props: {}}]}
+      >
+        {({width}) => (
+          <Box width={width}>
+            <Tabs items={items}>
+              <Tabs.List overflowButton={<Tabs.OverflowButton>More</Tabs.OverflowButton>}>
+                {(item: MyTabItem) => <Tabs.Item>{item.text}</Tabs.Item>}
+              </Tabs.List>
+              <Tabs.Menu.Popper>
+                <Tabs.Menu.Card maxWidth={300} maxHeight={200}>
+                  <Tabs.Menu.List>
+                    {(item: MyTabItem) => <Tabs.Menu.Item>{item.text}</Tabs.Menu.Item>}
+                  </Tabs.Menu.List>
+                </Tabs.Menu.Card>
+              </Tabs.Menu.Popper>
+              <Tabs.Panels>
+                {(item: MyTabItem) => <Tabs.Panel marginTop="m">{item.contents}</Tabs.Panel>}
+              </Tabs.Panels>
+            </Tabs>
+          </Box>
+        )}
+      </ComponentStatesTable>
+    </StaticStates>
   );
 });
-
-Overflow.parameters.chromatic.viewports = [320, 1200];
