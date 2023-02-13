@@ -157,20 +157,41 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
 
   // Transform Stack JSXElements
   // Transform `<Stack spacing="l">` to `<Flex gap="l">`
-  root
-    .findJSXElements('Stack')
-    .find(j.JSXIdentifier, {name: 'spacing'})
-    .forEach(nodePath => {
-      nodePath.node.name = 'gap';
-    });
+  // Transform `<VStack spacing="l">` to `<Flex gap="l">`
+  // Transform `<HStack spacing="l">` to `<Flex gap="l">`
+  root.find(j.JSXOpeningElement).forEach(nodePath => {
+    if (nodePath.node.type === 'JSXOpeningElement') {
+      if (nodePath.node.name.type === 'JSXIdentifier') {
+        if (stackImportNames.includes(nodePath.node.name.name)) {
+          nodePath.node.attributes?.forEach(path => {
+            if (path.type === 'JSXAttribute') {
+              if (path.name.name === 'spacing') {
+                path.name.name = 'gap';
+              }
+            }
+          });
+        }
+      }
+    }
+  });
 
   // Transform Stack JSXElements
   // Transform `<Stack shouldWrapChildren>` to `<Flex >`
-  root
-    .findJSXElements('Stack')
-    .find(j.JSXIdentifier)
-    .filter(path => path.node.name === 'shouldWrapChildren')
-    .remove();
+  root.find(j.JSXOpeningElement).forEach(nodePath => {
+    if (nodePath.node.type === 'JSXOpeningElement') {
+      if (nodePath.node.name.type === 'JSXIdentifier') {
+        if (stackImportNames.includes(nodePath.node.name.name)) {
+          nodePath.node.attributes?.forEach(path => {
+            if (path.type === 'JSXAttribute') {
+              if (path.name.name === 'shouldWrapChildren') {
+                path.name.name = '';
+              }
+            }
+          });
+        }
+      }
+    }
+  });
 
   // Transform styled compoents
   // e.g. `const StyledStack = styled(Stack)({});`
