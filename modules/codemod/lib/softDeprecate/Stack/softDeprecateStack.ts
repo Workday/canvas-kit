@@ -15,14 +15,9 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
   root.find(j.ImportDeclaration, (nodePath: ImportDeclaration) => {
     const value = nodePath.source.value;
     // If there's an import from the stack package, set the import boolean check to true
-    if (value === stackPackage) {
-      hasStackImports = true;
-      return false;
-    }
-
     // If there's an import from the main package, check to see if Stack or Stackprops are among the named imports
     // e.g. import {Stack} from '@workday/canvas-kit-react/layout';
-    if (value === mainPackage) {
+    if (value === mainPackage || value === stackPackage) {
       (nodePath.specifiers || []).forEach(specifier => {
         if (
           (specifier.type === 'ImportSpecifier' &&
