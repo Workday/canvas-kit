@@ -77,7 +77,7 @@ export const BasicTabs = withSnapshotsEnabled(() => {
   return <Basic />;
 });
 
-BasicTabs.parameters.chromatic.viewports = [480, 768, 1200];
+BasicTabs.parameters.chromatic.viewports = [480, 1200];
 
 export const RTL = withSnapshotsEnabled(() => {
   return <RightToLeft />;
