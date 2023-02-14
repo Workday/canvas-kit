@@ -121,6 +121,12 @@ describe('Breadcrumbs', () => {
         cy.checkA11y();
       });
 
+      it('should have 7 items inside the "list"', () => {
+        cy.findByRole('list')
+          .findAllByRole('listitem')
+          .should('have.length', 7);
+      });
+
       it('should have aria-expanded set to "false" on the dropdown button', () => {
         getDropdownButton().should('have.attr', 'aria-expanded', 'false');
       });
@@ -133,13 +139,105 @@ describe('Breadcrumbs', () => {
         getDropdownButton().should('have.attr', 'aria-controls', 'menu');
       });
 
-      context('when the dropdown button is clicked', () => {
+      context('when action list container is only 440px wide', () => {
         beforeEach(() => {
-          getDropdownButton().click();
+          cy.findByRole('button', {name: '480px'}).click();
         });
 
-        it("should toggle the button's aria-expanded attribute to true", () => {
-          getDropdownButton().should('have.attr', 'aria-expanded', 'true');
+        it('should have 3 items inside the "list"', () => {
+          cy.findByRole('list')
+            .findAllByRole('listitem')
+            .should('have.length', 3);
+        });
+
+        context('when the "More" button is clicked', () => {
+          beforeEach(() => {
+            cy.findByRole('button', {name: 'More links'}).click();
+          });
+
+          it('should show the overflow menu', () => {
+            cy.findByRole('menu').should('exist');
+          });
+
+          it('should contain second link as the first menu item', () => {
+            cy.findAllByRole('menuitem')
+              .eq(0)
+              .should('contain', 'Second Link');
+          });
+
+          it('should contain fifth link as the last menu item', () => {
+            cy.findAllByRole('menuitem')
+              .eq(-1)
+              .should('contain', 'Fifth Link');
+          });
+        });
+      });
+
+      context('when action list container is only 250px wide', () => {
+        beforeEach(() => {
+          cy.findByRole('button', {name: '250px'}).click();
+        });
+
+        it('should have 2 list items inside the "list"', () => {
+          cy.findByRole('list')
+            .findAllByRole('listitem')
+            .should('have.length', 2);
+        });
+
+        context('when the "More" button is clicked', () => {
+          beforeEach(() => {
+            cy.findByRole('button', {name: 'More links'}).click();
+          });
+
+          it('should show the overflow menu', () => {
+            cy.findByRole('menu').should('exist');
+          });
+
+          it('should contain second link as the first menu item', () => {
+            cy.findAllByRole('menuitem')
+              .eq(0)
+              .should('contain', 'Second Link');
+          });
+
+          it('should contain fifth link as the last menu item', () => {
+            cy.findAllByRole('menuitem')
+              .eq(-1)
+              .should('contain', 'Sixth Link');
+          });
+        });
+      });
+
+      context('when action list container is only 150px wide', () => {
+        beforeEach(() => {
+          cy.findByRole('button', {name: '150px'}).click();
+        });
+
+        it('should have 2 list items inside the "list"', () => {
+          cy.findByRole('list')
+            .findAllByRole('listitem')
+            .should('have.length', 1);
+        });
+
+        context('when the "More" button is clicked', () => {
+          beforeEach(() => {
+            cy.findByRole('button', {name: 'More links'}).click();
+          });
+
+          it('should show the overflow menu', () => {
+            cy.findByRole('menu').should('exist');
+          });
+
+          it('should contain home link as the first menu item', () => {
+            cy.findAllByRole('menuitem')
+              .eq(0)
+              .should('contain', 'Home');
+          });
+
+          it('should contain fifth link as the last menu item', () => {
+            cy.findAllByRole('menuitem')
+              .eq(-1)
+              .should('contain', 'Sixth Link');
+          });
         });
       });
     }
@@ -150,6 +248,7 @@ describe('Breadcrumbs', () => {
     () => {
       beforeEach(() => {
         h.stories.load('Components/Navigation/Breadcrumbs', 'Overflow Breadcrumbs');
+        cy.findByRole('button', {name: '480px'}).click();
         openDropdownMenu();
       });
 
@@ -159,6 +258,10 @@ describe('Breadcrumbs', () => {
 
       it('should have role set to "menu" on the dropdown menu', () => {
         getDropdownMenu().should('have.attr', 'role', 'menu');
+      });
+
+      it("should toggle the button's aria-expanded attribute to true", () => {
+        getDropdownButton().should('have.attr', 'aria-expanded', 'true');
       });
 
       it('should have role set to "menuitem" for dropdown item link', () => {
