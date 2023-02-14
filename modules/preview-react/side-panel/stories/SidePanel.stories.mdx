@@ -1,6 +1,6 @@
-import {Meta} from '@storybook/addon-docs';
+import {SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
+
 import {SidePanel} from '@workday/canvas-kit-preview-react/side-panel';
-import {Specifications} from '@workday/canvas-kit-docs';
 // Examples
 import {Basic} from './examples/Basic';
 import {HiddenName} from './examples/HiddenName';
@@ -10,8 +10,6 @@ import {RightOrigin} from './examples/RightOrigin';
 import {AlwaysOpen} from './examples/AlwaysOpen';
 import {OnExpandedChange} from './examples/OnExpandedChange';
 import {OnStateTransition} from './examples/OnStateTransition';
-// Prop Tables
-import {UseSidePanel, Panel, Label, Control} from './examples/PropTables.splitprops.tsx';
 
 <Meta title="Preview/Side Panel" component={SidePanel} />
 
@@ -112,7 +110,7 @@ is an example:
 
 #### Props
 
-<ArgsTable of={SidePanel} />
+<SymbolDoc name="SidePanel" fileName="/preview-react/" />
 
 ### SidePanel.ToggleButton
 
@@ -135,41 +133,7 @@ This is a standard Canvas Kit `TertiaryButton` and will accept
 
 ### useSidePanel
 
-#### Usage
-
-This hook manages the state and `aria-` attributes for the SidePanel. It takes an optional
-configuration object:
-
-<ArgsTable of={UseSidePanel} />
-
-Below is an example:
-
-```tsx
-import {useSidePanel} from '@workday/canvas-kit-preview-react/side-panel';
-
-const {expanded, setExpanded, panelProps, labelProps, controlProps} = useSidePanel({
-  initialExpanded: false,
-  panelId: 'custom-panel-id',
-  labelId: 'custom-label-id',
-});
-```
-
-#### Props
-
-The hook returns an object containing `expanded`, `setExpanded`, and a props for the panel, label,
-and control.
-
-##### Panel Props
-
-<ArgsTable of={Panel} />
-
-##### Label Props
-
-<ArgsTable of={Label} />
-
-##### Control Props
-
-<ArgsTable of={Control} />
+<SymbolDoc name="useSidePanel" fileName="preview" />
 
 ## Specifications
 

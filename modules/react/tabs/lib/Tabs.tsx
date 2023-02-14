@@ -20,8 +20,8 @@ export interface TabsProps {
 }
 
 /**
- * `Tabs` is a container component that is responsible for creating a `TabsModel` and sharing it
- * with its subcomponents using React context. It does not represent a real element.
+ * `Tabs` is a container component that is responsible for creating a {@link TabsModel} and sharing
+ * it with its subcomponents using React context. It does not represent a real element.
  *
  * ```tsx
  * <Tabs onSelect={data => console.log('Selected tab', data.id)}>
@@ -50,7 +50,7 @@ export const Tabs = createContainer()({
   modelHook: useTabsModel,
   subComponents: {
     /**
-     * `Tabs.List` is a `<div role="tablist">` element. It is a container for `Tabs.Item`
+     * `Tabs.List` is a `<div role="tablist">` element. It is a container for {@link TabsItem Tabs.Item}
      * subcomponents.
      *
      * ```tsx
@@ -100,6 +100,8 @@ export const Tabs = createContainer()({
      * The overflow button of a `Tabs.List`. When a tab list overflows, this overflow button is
      * rendered. Overflow only works when the model is given an array of `items`.
      *
+     * ## Usage
+     *
      * ```tsx
      * <Tabs items={items}>
      *   <Tabs.List overflowButton={
@@ -131,7 +133,7 @@ export const Tabs = createContainer()({
      * </Tabs.Menu.Popper>
      * ```
      */
-    Menu,
+    Menu: Menu,
   },
 })<TabsProps>(({children}, _, model) => {
   return <Menu model={model.menu}>{children}</Menu>;

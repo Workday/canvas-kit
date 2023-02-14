@@ -1,7 +1,6 @@
-import {Meta, Story} from '@storybook/addon-docs';
+import {SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
 
 import {Hyperlink, ExternalHyperlink} from '@workday/canvas-kit-react/button';
-import {Specifications} from '@workday/canvas-kit-docs';
 
 import {Link} from './examples/Hyperlink';
 import {LinkInverse} from './examples/HyperlinkInverse';
@@ -33,42 +32,39 @@ the current page.
 
 #### Inverse
 
-`Hyperlink`s also have an `inverse` variant. Use this variant when you need to place a `Hyperlink` on a
-dark or colorful background such as `blueberry400`.
+`Hyperlink`s also have an `inverse` variant. Use this variant when you need to place a `Hyperlink`
+on a dark or colorful background such as `blueberry400`.
 
 <ExampleCodeBlock code={LinkInverse} />
 
-#### Props
+### Component API
 
-Undocumented props are spread to the underlying `<a>` element.
-
-<ArgsTable of={Hyperlink} />
+<SymbolDoc name="Hyperlink" hideDescription meta={{hideHeader: true}} />
 
 ### ExternalHyperlink
 
 If your link should open in a new tab or window use the `ExternalHyperlink` component. It will let
 users know about the behavior by adding an icon, `extLinkIcon`. By default, the icon has a label of
-"Opens link in new window". You can override `aria-label` of the icon by using the `iconLabel`
-prop. This override will be needed for translations.
+"Opens link in new window". You can override `aria-label` of the icon by using the `iconLabel` prop.
+This override will be needed for translations.
 
 <ExampleCodeBlock code={ExternalLink} />
 
-`ExternalHyperlink`s also have an `inverse` variant. Use this variant when you need to place the link on a dark or colorful background such as `blueberry400`.
+`ExternalHyperlink`s also have an `inverse` variant. Use this variant when you need to place the
+link on a dark or colorful background such as `blueberry400`.
 
 <ExampleCodeBlock code={ExternalLinkInverse} />
 
-#### Props
+### Component API
 
-Undocumented props are spread to the underlying `<a>` element.
-
-<ArgsTable of={ExternalHyperlink} />
+<SymbolDoc name="ExternalHyperlink" hideDescription meta={{hideHeader: true}} />
 
 ### Accessible Use of the `as` Prop
 
-Like many of our components, `Hyperlink` and `ExternalHyperlink` accept an `as` prop, which lets you change the underlying
-semantic element - usually an `<a>`, or a `<button>`. This should be done with caution to ensure the
-best accessibility. Generally, `<button>` elements should be used for actions, and `<a>` elements
-should be used for navigation.
+Like many of our components, `Hyperlink` and `ExternalHyperlink` accept an `as` prop, which lets you
+change the underlying semantic element - usually an `<a>`, or a `<button>`. This should be done with
+caution to ensure the best accessibility. Generally, `<button>` elements should be used for actions,
+and `<a>` elements should be used for navigation.
 
 ## Specifications
 

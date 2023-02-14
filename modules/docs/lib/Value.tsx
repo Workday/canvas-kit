@@ -21,6 +21,7 @@ export function registerWidget<V extends {kind: string}>(
 export interface ValueProps<T extends {kind: string} = types.Value> {
   value: T;
   doc?: types.ExportedSymbol<T>;
+  meta?: any;
 }
 
 export const Value = <T extends {kind: string} = types.Value>(props: ValueProps<T>) => {
@@ -30,7 +31,7 @@ export const Value = <T extends {kind: string} = types.Value>(props: ValueProps<
     return React.createElement(widgets[props.value.kind], props as any);
   }
   return (
-    <span className="token unknown">
+    <span className="token unknown" style={{whiteSpace: 'pre-wrap'}}>
       unknown {JSON.stringify(props.value, null, '  ').replace(/\n/g, '\n' + space(level))}
     </span>
   );
@@ -80,6 +81,10 @@ function getTableRows(
   index: number
 ): JSX.Element[] {
   return properties.flatMap((property, i) => {
+    if (!property) {
+      console.log('property not found?', i);
+      return [];
+    }
     const title = property.declarations?.[0]?.filePath;
 
     const propName = (

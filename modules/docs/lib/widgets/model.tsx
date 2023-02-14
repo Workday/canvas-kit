@@ -1,7 +1,6 @@
 import React from 'react';
 
 import {ModelHookValue, ModelValue} from '../../docgen/plugins/customTypes';
-import {MdxJSToJSX} from '../MDXElements';
 import {PropertiesTable, registerWidget, Value} from '../Value';
 import {Heading} from '../widgetUtils';
 
@@ -21,7 +20,6 @@ registerWidget<ModelValue>('model', ({value}) => {
 registerWidget<ModelHookValue>('modelHook', ({value, doc}) => {
   return (
     <>
-      {doc && <MdxJSToJSX>{doc.description}</MdxJSToJSX>}
       <code>
         <span className="token symbol">{value.name}</span>{' '}
         <span className="token punctuation">(</span>

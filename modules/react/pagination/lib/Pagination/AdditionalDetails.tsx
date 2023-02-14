@@ -1,6 +1,11 @@
 import * as React from 'react';
 import {type, space, typeColors} from '@workday/canvas-kit-react/tokens';
-import {accessibleHide, styled, StyledType} from '@workday/canvas-kit-react/common';
+import {
+  accessibleHide,
+  styled,
+  StyledType,
+  createComponent,
+} from '@workday/canvas-kit-react/common';
 
 import {PaginationModel} from './types';
 import {Flex, FlexProps} from '@workday/canvas-kit-react/layout';
@@ -28,22 +33,20 @@ const StyledAdditionalDetails = styled(Flex)<
   }
 });
 
-export const AdditionalDetails = ({
-  model,
-  children,
-  shouldAnnounceToScreenReader,
-  ...elemProps
-}: AdditionalDetailsProps) => {
-  const liveRegionProps = useLiveRegion({shouldAnnounceToScreenReader});
+export const AdditionalDetails = createComponent('div')({
+  displayName: 'Pagination.AdditionalDetails',
+  Component({model, children, shouldAnnounceToScreenReader, ...elemProps}: AdditionalDetailsProps) {
+    const liveRegionProps = useLiveRegion({shouldAnnounceToScreenReader});
 
-  return (
-    <StyledAdditionalDetails
-      {...type.levels.subtext.medium}
-      color={typeColors.hint}
-      {...liveRegionProps}
-      {...elemProps}
-    >
-      {typeof children === 'function' ? children(model) : children}
-    </StyledAdditionalDetails>
-  );
-};
+    return (
+      <StyledAdditionalDetails
+        {...type.levels.subtext.medium}
+        color={typeColors.hint}
+        {...liveRegionProps}
+        {...elemProps}
+      >
+        {typeof children === 'function' ? children(model) : children}
+      </StyledAdditionalDetails>
+    );
+  },
+});

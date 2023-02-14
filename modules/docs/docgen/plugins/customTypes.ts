@@ -44,7 +44,7 @@ export interface ComponentValue {
   props: ObjectProperty[];
 }
 
-export interface EnhanceComponentValue {
+export interface EnhancedComponentValue {
   kind: 'enhancedComponent';
   props: ObjectProperty[];
   componentType: 'container' | 'subcomponent' | 'regular';
@@ -54,6 +54,12 @@ export interface EnhanceComponentValue {
   elemPropsHook?: string;
   model?: string;
   styleComponent?: SymbolValue;
+}
+
+export interface ComponentValue {
+  kind: 'component';
+  props: ObjectProperty[];
+  displayName?: string;
 }
 
 export interface CanvasColorValue {

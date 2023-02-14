@@ -7,7 +7,7 @@ const path = require('path');
 // we use TS files, so tell node to register them
 require('ts-node').register({});
 
-const {DocParser, mergeParserPlugins} = require('./docParser');
+const {DocParser} = require('./docParser');
 
 /**@type {string[]} */
 let files = [];

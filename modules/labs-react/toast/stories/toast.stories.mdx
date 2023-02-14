@@ -1,4 +1,4 @@
-import {Meta} from '@storybook/addon-docs/blocks';
+import {SymbolDoc} from '@workday/canvas-kit-docs';
 
 import {Toast} from '@workday/canvas-kit-labs-react/toast';
 import {Basic} from './examples/Basic';
@@ -105,82 +105,4 @@ link and a close button.
 
 ## Components
 
-### Toast
-
-#### Usage
-
-`Toast` defines a container for all `Toast` subcomponents. `Toast` will render with the appropriate
-ARIA attributes based on which `mode` is selected. It also accepts a `model` if you wish to provide
-a specific `id`.
-
-`Toast` renders a `Popup.Card` under the hood.
-
-#### Props
-
-<ArgsTable of={Toast} />
-
-### Toast.Body
-
-#### Usage
-
-`Toast.Body` defines a container for the contents of the `Toast`, including `Toast.Message` and
-`Toast.Link`.
-
-`Toast.Body` renders a `Popup.Body` under the hood.
-
-#### Props
-
-<ArgsTable of={Toast.Body} />
-
-### Toast.Icon
-
-#### Usage
-
-`Toast.Icon` renders a decorative icon for the `Toast`. When using `Toast.Icon`, be sure to set a
-complementary `mode` to the `Toast`. For example, if the icon conveys an error, set the `mode` to
-`alert`.
-
-`Toast.Icon` renders a `SystemIcon` under the hood.
-
-#### Props
-
-<ArgsTable of={Toast.Icon} />
-
-### Toast.Message
-
-#### Usage
-
-`Toast.Message` defines a container for the message of the `Toast`. It accepts any `React.ReactNode`
-as its children. `Toast.Message` is assigned a unique `id` so that it may be read aloud by screen
-readers when the `Toast` `mode` is set to `dialog`.
-
-`Toast.Message` renders a `Box` under the hood.
-
-#### Props
-
-<ArgsTable of={Toast.Message} />
-
-### Toast.Link
-
-#### Usage
-
-Use `Toast.Link` to provide an action in the `Toast`. `Toast.Link` should always be used in
-conjunction with `dialog` `mode` to provide an accessible experience.
-
-`Toast.Link` renders a `Hyperlink` under the hood.
-
-#### Props
-
-<ArgsTable of={Toast.Link} />
-
-### Toast.CloseIcon
-
-#### Usage
-
-Use `Toast.CloseIcon` to provide a close button to dismiss the `Toast`.
-
-`Toast.Link` renders a `Popup.CloseIcon` under the hood.
-
-#### Props
-
-<ArgsTable of={Toast.CloseIcon} />
+<SymbolDoc name="Toast" fileName="labs" hideDescription />

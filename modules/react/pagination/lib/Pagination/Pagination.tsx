@@ -1,5 +1,6 @@
 import * as React from 'react';
-import {TertiaryButtonProps} from '@workday/canvas-kit-react/button';
+import {TertiaryButton} from '@workday/canvas-kit-react/button';
+import {ExtractProps} from '@workday/canvas-kit-react/common';
 
 import {PaginationModel} from './types';
 import {usePaginationModel, UsePaginationModelConfig} from './usePaginationModel';
@@ -14,19 +15,14 @@ import {
   ControlsProps,
 } from './Controls';
 
-import {PageList, PageListProps, PageListItem, PageListItemProps} from './PageList';
-import {PageButton, PageButtonProps} from './PageButton';
-
+import {PageList, PageListItem} from './PageList';
+import {PageButton} from './PageButton';
 import {GoTo} from './GoTo';
-import {GoToFormProps} from './GoTo/Form';
-import {GoToLabelProps} from './GoTo/Label';
-import {GoToTextInputProps} from './GoTo/TextInput';
-
-import {AdditionalDetails, AdditionalDetailsProps} from './AdditionalDetails';
+import {AdditionalDetails} from './AdditionalDetails';
 
 export const PaginationContext = React.createContext({} as PaginationModel);
 
-type PaginationConfigurationProps = PaginationNavProps & {
+export type PaginationConfigurationProps = PaginationNavProps & {
   lastPage: number;
   firstPage?: number;
   initialCurrentPage?: number;
@@ -35,7 +31,7 @@ type PaginationConfigurationProps = PaginationNavProps & {
   onPageChange?: (pageNumber: number) => void;
 };
 
-type PaginationModelProps = PaginationNavProps & {
+export type PaginationModelProps = PaginationNavProps & {
   lastPage?: never;
   firstPage?: never;
   initialCurrentPage?: never;
@@ -54,7 +50,6 @@ export const Pagination = (props: PaginationProps) => {
   const model = useDefaultModel(props.model, props as UsePaginationModelConfig, usePaginationModel);
 
   const {
-    'aria-label': ariaLabel,
     children,
     lastPage,
     firstPage,
@@ -66,9 +61,7 @@ export const Pagination = (props: PaginationProps) => {
 
   return (
     <PaginationContext.Provider value={model}>
-      <PaginationNav aria-label={ariaLabel} {...restProps}>
-        {children}
-      </PaginationNav>
+      <PaginationNav {...restProps}>{children}</PaginationNav>
     </PaginationContext.Provider>
   );
 };
@@ -77,71 +70,60 @@ Pagination.Controls = (props: ControlsProps) => {
   return <Controls {...props} />;
 };
 
-Pagination.JumpToFirstButton = (
-  props: TertiaryButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>
-) => {
+Pagination.JumpToFirstButton = (props: ExtractProps<typeof TertiaryButton>) => {
   // The linter doesn't recognize the dot syntax, so we're disabling the rule
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const model = React.useContext(PaginationContext);
   return <JumpToFirstButton model={model} {...props} />;
 };
 
-Pagination.StepToPreviousButton = (
-  props: TertiaryButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>
-) => {
+Pagination.StepToPreviousButton = (props: ExtractProps<typeof TertiaryButton>) => {
   // The linter doesn't recognize the dot syntax, so we're disabling the rule
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const model = React.useContext(PaginationContext);
   return <StepToPreviousButton model={model} {...props} />;
 };
 
-Pagination.StepToNextButton = (
-  props: TertiaryButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>
-) => {
+Pagination.StepToNextButton = (props: ExtractProps<typeof TertiaryButton>) => {
   // The linter doesn't recognize the dot syntax, so we're disabling the rule
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const model = React.useContext(PaginationContext);
   return <StepToNextButton model={model} {...props} />;
 };
 
-Pagination.JumpToLastButton = (
-  props: TertiaryButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>
-) => {
+Pagination.JumpToLastButton = (props: ExtractProps<typeof TertiaryButton>) => {
   // The linter doesn't recognize the dot syntax, so we're disabling the rule
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const model = React.useContext(PaginationContext);
   return <JumpToLastButton model={model} {...props} />;
 };
 
-Pagination.PageList = (props: Omit<PageListProps, 'model'>) => {
+Pagination.PageList = (props: Omit<ExtractProps<typeof PageList>, 'model'>) => {
   // The linter doesn't recognize the dot syntax, so we're disabling the rule
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const model = React.useContext(PaginationContext);
   return <PageList model={model} {...props} />;
 };
 
-Pagination.PageListItem = (props: PageListItemProps) => {
+Pagination.PageListItem = (props: ExtractProps<typeof PageListItem>) => {
   return <PageListItem {...props} />;
 };
 
-Pagination.PageButton = ({
-  'aria-label': ariaLabel,
-  ...elemProps
-}: Omit<PageButtonProps, 'model'>) => {
+Pagination.PageButton = (props: Omit<ExtractProps<typeof PageButton>, 'model'>) => {
   // The linter doesn't recognize the dot syntax, so we're disabling the rule
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const model = React.useContext(PaginationContext);
-  return <PageButton aria-label={ariaLabel} model={model} {...elemProps} />;
+  return <PageButton model={model} {...props} />;
 };
 
-Pagination.AdditionalDetails = (props: Omit<AdditionalDetailsProps, 'model'>) => {
+Pagination.AdditionalDetails = (props: Omit<ExtractProps<typeof AdditionalDetails>, 'model'>) => {
   // The linter doesn't recognize the dot syntax, so we're disabling the rule
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const model = React.useContext(PaginationContext);
   return <AdditionalDetails model={model} {...props} />;
 };
 
-Pagination.GoToForm = ({children}: GoToFormProps) => {
+Pagination.GoToForm = ({children}: ExtractProps<typeof GoTo.Form>) => {
   // The linter doesn't recognize the dot syntax, so we're disabling the rule
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const model = React.useContext(PaginationContext);
@@ -152,11 +134,11 @@ Pagination.GoToForm = ({children}: GoToFormProps) => {
   );
 };
 
-Pagination.GoToTextInput = (props: GoToTextInputProps) => {
+Pagination.GoToTextInput = (props: ExtractProps<typeof GoTo.TextInput>) => {
   return <GoTo.TextInput {...props} />;
 };
 
-Pagination.GoToLabel = (props: Omit<GoToLabelProps, 'model'>) => {
+Pagination.GoToLabel = (props: Omit<ExtractProps<typeof GoTo.Label>, 'model'>) => {
   // The linter doesn't recognize the dot syntax, so we're disabling the rule
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const model = React.useContext(PaginationContext);

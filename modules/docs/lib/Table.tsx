@@ -4,6 +4,7 @@ import {Box, BoxProps} from '@workday/canvas-kit-react/layout';
 import {Text, TextProps} from '@workday/canvas-kit-react/text';
 import styled from '@emotion/styled';
 import {type} from '@workday/canvas-kit-react/tokens';
+import {fontSizes} from '@workday/canvas-kit-react/tokens/lib/type/fontSizes';
 
 const TableHead = createComponent('thead')({
   Component: (props: BoxProps, ref, Element) => {
@@ -54,8 +55,6 @@ const TableData = createComponent('td')({
       <StyledText
         as={Element}
         ref={ref}
-        fontSize="small"
-        fontWeight="normal"
         paddingX="xxs"
         paddingY="s"
         textAlign="start"

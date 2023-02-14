@@ -1,13 +1,9 @@
-const docGen = require('react-docgen-typescript');
 const {
   generateDocgenCodeBlock,
 } = require('@storybook/react-docgen-typescript-plugin/dist/generateDocgenCodeBlock.js');
 const ts = require('typescript');
-const path = require('path');
-const tsconfigPath = path.join(__dirname, '../tsconfig.json');
-const fs = require('fs');
 
-const {getTsProgram, getComponentDocs} = require('./docgen-parse-file');
+const {getComponentDocs, getConfig} = require('./docgen-parse-file');
 
 // Cache the tsProgram for faster updates This prevents JSDoc updates from reflecting in the doc
 // source, but that already didn't work Creating a new tsProgram takes about 1.5s. Skipping brings
@@ -33,16 +29,15 @@ class DocgenPlugin {
 
         if (moduleCount !== modulesToProcess.length) {
           // create a shared TS program of all TS files used by webpack
-          // tsProgram = getTsProgram(modulesToProcess.map(v => v.userRequest));
+          tsProgram = ts.createProgram(
+            modulesToProcess.map(v => v.userRequest),
+            getConfig()
+          );
           moduleCount = modulesToProcess.length;
           console.log('moduleCount', moduleCount);
-          // fs.writeFileSync(
-          //   'modules.json',
-          //   JSON.stringify(modulesToProcess.map(v => v.userRequest, null, '  '))
-          // );
         }
 
-        // modulesToProcess.forEach(m => processModule(m, tsProgram));
+        modulesToProcess.forEach(m => processModule(m, tsProgram));
       });
     });
   }

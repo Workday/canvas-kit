@@ -1,5 +1,4 @@
-import {Meta} from '@storybook/addon-docs';
-import {Specifications} from '@workday/canvas-kit-docs';
+import {SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
 
 import {StatusIndicator} from '@workday/canvas-kit-preview-react/status-indicator';
 import {Basic} from './examples/Basic';
@@ -76,56 +75,4 @@ The background color dictated by the `variant` will be dark or light based on th
 
 ## Components
 
-### StatusIndicator
-
-#### Usage
-
-`StatusIndicator` is a container component which renders an
-[`HStack`](/components/layout/stack/#hstack) under the hood to apply spacing evenly between its
-children. It has a default maximum width of `200px`.
-
-```tsx
-<StatusIndicator emphasis="low" variant="blue">
-  {/* Child components */}
-</StatusIndicator>
-```
-
-#### Props
-
-Undocumented props are spread to the underlying `HStack`.
-
-<ArgsTable of={StatusIndicator} />
-
-### StatusIndicator.Label
-
-#### Usage
-
-`StatusIndicator.Label` renders [`Text`](/components/text/text/) under the hood. It will apply an
-ellipsis if its contents exceed the component's maximum width.
-
-```tsx
-<StatusIndicator.Label>{/*The text to be rendered*/}</StatusIndicator.Label>
-```
-
-#### Props
-
-Undocumented props are spread to the underlying `Text`.
-
-<ArgsTable of={StatusIndicator.Label} />
-
-### StatusIndicator.Icon
-
-#### Usage
-
-`StatusIndicator.Icon` renders [`SystemIcon`](/assets/system-icons/) under the hood. It's used as a
-decorative element to visually support the `StatusIndicator.Label` text.
-
-```tsx
-<StatusIndicator.Icon icon={uploadCloudIcon} />
-```
-
-#### Props
-
-Undocumented props are spread to the underlying `SystemIcon`.
-
-<ArgsTable of={StatusIndicator.Icon} />
+<SymbolDoc name="StatusIndicator" fileName="preview" hideDescription />

@@ -4,6 +4,8 @@ import {registerWidget, Value} from '../Value';
 import {
   BooleanLiteralValue,
   GenericValue,
+  InferValue,
+  KeyofValue,
   NumberLiteralValue,
   PrimitiveValue,
   StringLiteralValue,
@@ -34,10 +36,28 @@ registerWidget<GenericValue>('generic', ({value}) => (
 registerWidget<TypeValue>('type', ({value, doc}) => {
   return (
     <>
-      <span className="token keyword">type</span>{' '}
-      <span className="token symbol">{doc?.name || 'unknown'}</span>
-      {renderTypeParameters(value.typeParameters)} <span className="token operator">=</span>{' '}
+      {doc?.name && (
+        <>
+          <span className="token keyword">type</span>{' '}
+          <span className="token symbol">{doc?.name || 'unknown'}</span>
+          {renderTypeParameters(
+            value.typeParameters
+          )} <span className="token operator">=</span>{' '}
+        </>
+      )}
       <Value value={value.value} />
     </>
   );
 });
+
+registerWidget<InferValue>('infer', ({value}) => (
+  <>
+    <span className="token keyword">infer</span> <Value value={value.value} />
+  </>
+));
+
+registerWidget<KeyofValue>('keyof', ({value}) => (
+  <>
+    <span className="token keyword">keyof</span> <Value value={value.name} />
+  </>
+));

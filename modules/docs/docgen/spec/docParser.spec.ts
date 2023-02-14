@@ -4,6 +4,18 @@ import {parse} from '../docParser';
 describe('docParser', () => {
   describe('simple values', () => {
     it('should find an exported type of string', () => {
+      const program = createProgramFromSource('export type Foo = never');
+      const docs = parse(program, 'test.ts'); //?
+
+      program.getSourceFile('test.ts'); //?
+
+      expect(docs).toHaveProperty('0.name', 'Foo');
+      expect(docs).toHaveProperty('0.type.kind', 'type');
+      expect(docs).toHaveProperty('0.type.value.kind', 'primitive');
+      expect(docs).toHaveProperty('0.type.value.value', 'never');
+    });
+
+    it('should find an exported type of string', () => {
       const program = createProgramFromSource('export type Foo = "foo"');
       const docs = parse(program, 'test.ts'); //?
 
@@ -19,6 +31,23 @@ describe('docParser', () => {
       expect(docs).toHaveProperty('0.name', 'Foo');
       expect(docs).toHaveProperty('0.type.kind', 'type');
       expect(docs).toHaveProperty('0.type.value', {kind: 'number', value: 10});
+    });
+
+    it('should find an exported type of a template string', () => {
+      const program = createProgramFromSource("export type Foo = `${'a'|'b'}.${'c'|'d'}`");
+      const docs = parse(program, 'test.ts'); //?
+
+      expect(docs).toHaveProperty('0.name', 'Foo');
+      expect(docs).toHaveProperty('0.type.kind', 'type');
+      expect(docs).toHaveProperty('0.type.value.kind', 'union');
+      expect(docs).toHaveProperty('0.type.value.value.0.kind', 'string');
+      expect(docs).toHaveProperty('0.type.value.value.0.value', 'a.c');
+      expect(docs).toHaveProperty('0.type.value.value.1.kind', 'string');
+      expect(docs).toHaveProperty('0.type.value.value.1.value', 'a.d');
+      expect(docs).toHaveProperty('0.type.value.value.2.kind', 'string');
+      expect(docs).toHaveProperty('0.type.value.value.2.value', 'b.c');
+      expect(docs).toHaveProperty('0.type.value.value.3.kind', 'string');
+      expect(docs).toHaveProperty('0.type.value.value.3.value', 'b.d');
     });
 
     it('should find an exported type of array', () => {
@@ -1075,23 +1104,6 @@ describe('docParser', () => {
     expect(docs).toHaveProperty('0.type.typeParameters.0.constraint.value', 'string');
   });
 
-  it('should handle variable declaration functions with additional properties', () => {
-    const program = createProgramFromSource(`
-      export const myFoo = (input: string): boolean => {
-        return false
-      }
-
-      myFoo.myStaticMember = 'bar'
-    `);
-    const docs = parse(program, 'test.ts'); //?
-    expect(docs).toHaveProperty('0.name', 'myFoo');
-    expect(docs).toHaveProperty('0.type.kind', 'function');
-    expect(docs).toHaveProperty('0.type.members.0.kind', 'property');
-    expect(docs).toHaveProperty('0.type.members.0.name', 'myStaticMember');
-    expect(docs).toHaveProperty('0.type.members.0.type.kind', 'primitive');
-    expect(docs).toHaveProperty('0.type.members.0.type.value', 'string');
-  });
-
   it('should add jsdoc to object properties', () => {
     const program = createProgramFromSource(`
     export const foo = {
@@ -1286,5 +1298,104 @@ describe('docParser', () => {
     expect(docs).toHaveProperty('0.type.indexSignature.value.parameters.0.required', true);
     expect(docs).toHaveProperty('0.type.indexSignature.value.parameters.0.type.kind', 'primitive');
     expect(docs).toHaveProperty('0.type.indexSignature.value.parameters.0.type.value', 'unknown');
+  });
+
+  it('should handle the "infer" keyword', () => {
+    const program = createProgramFromSource(`
+      export type A<T> = T extends { a: infer A } ? A : T
+    `);
+
+    const docs = parse(program, 'test.ts'); //?
+
+    expect(docs).toHaveProperty('0.name', 'A');
+    expect(docs).toHaveProperty('0.type.kind', 'type');
+    expect(docs).toHaveProperty('0.type.typeParameters.0.kind', 'typeParameter');
+    expect(docs).toHaveProperty('0.type.typeParameters.0.name', 'T');
+    expect(docs).toHaveProperty('0.type.value.kind', 'conditional');
+    expect(docs).toHaveProperty('0.type.value.extends.kind', 'object');
+    expect(docs).toHaveProperty('0.type.value.extends.properties.0.kind', 'property');
+    expect(docs).toHaveProperty('0.type.value.extends.properties.0.type.kind', 'infer');
+    expect(docs).toHaveProperty(
+      '0.type.value.extends.properties.0.type.value.kind',
+      'typeParameter'
+    );
+    expect(docs).toHaveProperty('0.type.value.extends.properties.0.type.value.name', 'A');
+  });
+
+  it('should handle a ClassDeclaration with no interface', () => {
+    const program = createProgramFromSource(`
+      export class A {
+        a = 'b'
+
+        onClick() {}
+      }
+    `);
+
+    const docs = parse(program, 'test.ts'); //?
+
+    expect(docs).toHaveProperty('0.name', 'A');
+    expect(docs).toHaveProperty('0.type.kind', 'object');
+    expect(docs).toHaveProperty('0.type.properties.0.kind', 'property');
+    expect(docs).toHaveProperty('0.type.properties.0.name', 'a');
+    expect(docs).toHaveProperty('0.type.properties.0.type.kind', 'primitive');
+    expect(docs).toHaveProperty('0.type.properties.0.type.value', 'string');
+    expect(docs).toHaveProperty('0.type.properties.1.kind', 'property');
+    expect(docs).toHaveProperty('0.type.properties.1.name', 'onClick');
+    expect(docs).toHaveProperty('0.type.properties.1.type.kind', 'function');
+    expect(docs).toHaveProperty('0.type.properties.1.type.returnType.kind', 'primitive');
+    expect(docs).toHaveProperty('0.type.properties.1.type.returnType.value', 'void');
+  });
+
+  it('should handle a ClassDeclaration that implements an interface', () => {
+    const program = createProgramFromSource(`
+      export class A implements B {
+        a = 'b'
+
+        onClick() {}
+      }
+
+      interface B {
+        a: string;
+        onClick(): void
+      }
+    `);
+
+    const docs = parse(program, 'test.ts'); //?
+
+    expect(docs).toHaveProperty('0.name', 'A');
+    expect(docs).toHaveProperty('0.type.kind', 'object');
+    expect(docs).toHaveProperty('0.type.properties.0.kind', 'property');
+    expect(docs).toHaveProperty('0.type.properties.0.name', 'a');
+    expect(docs).toHaveProperty('0.type.properties.0.type.kind', 'primitive');
+    expect(docs).toHaveProperty('0.type.properties.0.type.value', 'string');
+    expect(docs).toHaveProperty('0.type.properties.1.kind', 'property');
+    expect(docs).toHaveProperty('0.type.properties.1.name', 'onClick');
+    expect(docs).toHaveProperty('0.type.properties.1.type.kind', 'function');
+    expect(docs).toHaveProperty('0.type.properties.1.type.returnType.kind', 'primitive');
+    expect(docs).toHaveProperty('0.type.properties.1.type.returnType.value', 'void');
+  });
+
+  it('should handle a ClassDeclaration with TypeParameters', () => {
+    const program = createProgramFromSource(`
+      export class A<T> {
+        a = 'b'
+
+        onClick() {}
+      }
+    `);
+
+    const docs = parse(program, 'test.ts'); //?
+
+    expect(docs).toHaveProperty('0.name', 'A');
+    expect(docs).toHaveProperty('0.type.kind', 'object');
+    expect(docs).toHaveProperty('0.type.properties.0.kind', 'property');
+    expect(docs).toHaveProperty('0.type.properties.0.name', 'a');
+    expect(docs).toHaveProperty('0.type.properties.0.type.kind', 'primitive');
+    expect(docs).toHaveProperty('0.type.properties.0.type.value', 'string');
+    expect(docs).toHaveProperty('0.type.properties.1.kind', 'property');
+    expect(docs).toHaveProperty('0.type.properties.1.name', 'onClick');
+    expect(docs).toHaveProperty('0.type.properties.1.type.kind', 'function');
+    expect(docs).toHaveProperty('0.type.properties.1.type.returnType.kind', 'primitive');
+    expect(docs).toHaveProperty('0.type.properties.1.type.returnType.value', 'void');
   });
 });

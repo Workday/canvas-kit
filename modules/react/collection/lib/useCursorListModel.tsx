@@ -5,6 +5,11 @@ import {useBaseListModel, Item, defaultGetId as getId} from './useBaseListModel'
 
 type NavigationInput = Pick<ReturnType<typeof useCursorListModel>, 'state'>;
 
+/**
+ * The list and grid models accept a `navigation` config. If one is not provided, a default will be
+ * chosen. It is possible to create a custom navigation manager to hand to the model if the default
+ * doesn't work.
+ */
 export interface NavigationManager {
   /** Get the first item in a collection. This will be called when the `Home` key is pressed for
    * Lists and `Ctrl+Home` for Grids. */
@@ -61,7 +66,9 @@ export interface NavigationManager {
  */
 export const createNavigationManager = (manager: NavigationManager) => manager;
 
-/** Function type to make it easier to define navigation functions */
+/**
+ * Given an id and a model, return an item from the collection
+ */
 export type NavigationRequestor = (id: string, model: NavigationInput) => Item<Generic>;
 
 /**

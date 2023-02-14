@@ -68,8 +68,8 @@ const Anchor = styled('a')<HyperlinkProps & StyledType>(
 
 export const Hyperlink = createComponent('a')({
   displayName: 'Hyperlink',
-  Component: ({variant, href, children, ...elemProps}: HyperlinkProps, ref, Element) => (
-    <Anchor ref={ref} as={Element} variant={variant} href={href} {...elemProps}>
+  Component: ({children, ...elemProps}: HyperlinkProps, ref, Element) => (
+    <Anchor ref={ref} as={Element} {...elemProps}>
       {children}
     </Anchor>
   ),

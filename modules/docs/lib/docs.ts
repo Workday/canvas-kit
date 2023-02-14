@@ -1,5 +1,5 @@
 import React from 'react';
-import {ExportedSymbol} from '../docgen/docTypes';
+import {ExportedSymbol, Value} from '../docgen/docTypes';
 
 export const GithubUrl = React.createContext('https://github.com/Workday/canvas-kit/');
 export const GithubBranch = React.createContext('master');
@@ -9,7 +9,7 @@ export const StorybookUrl = React.createContext(
     : '/'
 );
 
-export const docs: ExportedSymbol[] =
+export const docs: ExportedSymbol<Value>[] =
   typeof window !== 'undefined'
     ? (window as any).__docs
     : [

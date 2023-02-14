@@ -134,7 +134,7 @@ module.exports = {
       include: modulesPath,
     });
 
-    config.plugins.push(new DocgenPlugin());
+    // config.plugins.push(new DocgenPlugin());
 
     // Remove progress updates to reduce log lines in Travis
     // See: https://github.com/storybookjs/storybook/issues/2029

@@ -10,6 +10,7 @@ import {Hyperlink} from '@workday/canvas-kit-react/button';
 import {docs} from './docs';
 import {Value} from './Value';
 import * as types from '../docgen/docTypes';
+import {fontSizes} from '@workday/canvas-kit-react/tokens/lib/type/fontSizes';
 
 /** React context to track the current rendering context to avoid tables inside tables */
 export const RenderContext = React.createContext<'table' | 'inline'>('table');
@@ -74,7 +75,12 @@ export function renderTypeParameters(typeParameters?: types.TypeParameter[]) {
 
 const ButtonHyperLink = Hyperlink.as('button');
 
-export const SymbolDialog = ({value}: {value: types.SymbolValue}) => {
+export interface SymbolDialogProps {
+  value: types.SymbolValue;
+  hideDescription?: boolean;
+}
+
+export const SymbolDialog = ({value, hideDescription}: SymbolDialogProps) => {
   const [symbol, setSymbol] = React.useState<types.ExportedSymbol | undefined>(undefined);
   const model = useDialogModel({
     onShow() {
@@ -96,7 +102,7 @@ export const SymbolDialog = ({value}: {value: types.SymbolValue}) => {
           }}
           aria-haspopup="true"
         >
-          {value.name}
+          {value.displayName || value.name}
         </Dialog.Target>
         {renderTypeParameters(value.typeParameters)}
       </>
@@ -114,8 +120,11 @@ export const SymbolDialog = ({value}: {value: types.SymbolValue}) => {
               <IndentLevelContext.Provider value={0}>
                 {symbol ? (
                   <>
-                    <MdxJSToJSX>{symbol.description}</MdxJSToJSX>
-                    <SymbolDoc name={value.name} headingStart={3} />
+                    <SymbolDoc
+                      name={value.name}
+                      headingStart={3}
+                      hideDescription={hideDescription}
+                    />
                   </>
                 ) : (
                   <>
@@ -141,7 +150,15 @@ function createColor(color: CanvasColor) {
 }
 
 const StyledSymbolDoc = styled('div')({
+  'button[data-symbol]': {
+    border: 'none',
+    background: 'transparent',
+    fontSize: 'inherit',
+    fontFamily: 'inherit',
+  },
   code: {
+    fontSize: fontSizes[14],
+    lineHeight: 1.5,
     fontFamily: type.properties.fontFamilies.monospace,
     whiteSpace: 'nowrap',
     '.token': {
@@ -161,32 +178,74 @@ const StyledSymbolDoc = styled('div')({
   },
 });
 
-function getSymbolDocChildren(doc?: types.ExportedSymbol) {
+function getSymbolDocChildren(doc?: types.ExportedSymbol, meta?: any) {
   if (!doc) {
     return <div>Not Found</div>;
   }
 
   if (doc && doc.type) {
-    return <Value value={doc.type} doc={doc} />;
+    return <Value value={doc.type} doc={doc} meta={meta} />;
   }
 
   return <div>Not Found</div>;
 }
 
-export interface SymbolDocProps extends StyledType {
-  name: string;
-  fileName?: string;
-  headingStart?: number;
-  className?: string;
-}
-export const SymbolDoc = ({name, fileName, headingStart = 3, ...elemProps}: SymbolDocProps) => {
+export const useDoc = ({name, fileName}: ValueDocProps) => {
   const [doc] = React.useState(() => {
-    return docs.find(d => {
+    return (docs || []).find(d => {
       return d.name === name && (fileName ? d.fileName.includes(fileName) : true);
     });
   });
 
-  const children = getSymbolDocChildren(doc);
+  return doc;
+};
+
+export interface ValueDocProps {
+  name: string;
+  fileName?: string;
+}
+
+/**
+ * Renders the `<Value>` of a exported symbol without any wrapper. This should be used when nesting
+ * inside a `<SymbolDoc>` component.
+ */
+export const SymbolValue = (props: ValueDocProps) => {
+  const doc = useDoc(props);
+
+  return getSymbolDocChildren(doc);
+};
+
+/**
+ * Renders just the description of an exported symbol.
+ */
+export const SymbolDescription = (props: ValueDocProps) => {
+  const doc = useDoc(props);
+
+  return doc ? <MdxJSToJSX>{doc.description}</MdxJSToJSX> : null;
+};
+
+export interface SymbolDocProps extends ValueDocProps, StyledType {
+  headingStart?: number;
+  className?: string;
+  hideDescription?: boolean;
+  meta?: Record<string, any>;
+}
+
+/**
+ * Renders an exported symbol as a doc object. This will render JSDoc tags, description and setup
+ * rendering contexts for headers.
+ */
+export const SymbolDoc = ({
+  name,
+  fileName,
+  headingStart = 3,
+  hideDescription = false,
+  meta,
+  ...elemProps
+}: SymbolDocProps) => {
+  const doc = useDoc({name, fileName});
+
+  const children = getSymbolDocChildren(doc, meta);
 
   const requiresCodeWrapper = [
     'symbol',
@@ -211,13 +270,16 @@ export const SymbolDoc = ({name, fileName, headingStart = 3, ...elemProps}: Symb
     'intersection',
     'function',
     'callExpression',
-  ].includes(doc?.type.kind);
+  ].includes(doc?.type.kind || 'notFound');
 
   const contents = requiresCodeWrapper ? <code>{children}</code> : children;
 
   return (
     <StyledSymbolDoc {...elemProps}>
-      <HeadingLevelContext.Provider value={headingStart}>{contents}</HeadingLevelContext.Provider>
+      <HeadingLevelContext.Provider value={headingStart}>
+        {!hideDescription && doc && <MdxJSToJSX>{doc.description}</MdxJSToJSX>}
+        {contents}
+      </HeadingLevelContext.Provider>
     </StyledSymbolDoc>
   );
 };

@@ -64,6 +64,7 @@ export class DocParser<T extends {kind: string} = any> {
           'TypeAliasDeclaration',
           'FunctionDeclaration',
           'EnumDeclaration',
+          'ClassDeclaration',
         ]
           .map(k => (ts.SyntaxKind as any)[k])
           .includes(kind) && isNodeExported(this.checker, node)
@@ -177,9 +178,12 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
     'here'; //?
     // Treat Interfaces and Types with TypeLiterals as interfaces
     const type = checker.getTypeAtLocation(node);
-    const properties = type.getProperties().map<ObjectProperty>(p => {
-      return getValueFromNode(parser, getValueDeclaration(p)!) as ObjectProperty;
-    });
+    const properties = type
+      .getProperties()
+      .map(p => {
+        return getValueFromNode(parser, getValueDeclaration(p)!);
+      })
+      .filter(filterObjectProperties);
 
     // get index signature...
     const indexType = getIndexSignatureFromType(parser, type);
@@ -249,6 +253,27 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
   }
 
   /**
+   * We'll treat classes as objects with properties
+   * ```ts
+   * class A {}
+   * ```
+   */
+  if (t.isClassDeclaration(node)) {
+    const type = checker.getTypeAtLocation(node);
+
+    const value = getObjectValueFromType(parser, type);
+    if (value.kind === 'object') {
+      value.typeParameters = node.typeParameters
+        ?.map(p => {
+          return getValueFromNode(parser, p);
+        })
+        .filter(filterObjectTypeParameters);
+    }
+
+    return value;
+  }
+
+  /**
    * A TypeLiteral is the object syntax of a `type`. It is similar to an interface. A
    * `TypeDeclaration` with a `TypeLiteral` is already checked higher up in this function, the only
    * `TypeLiteral` matching here are used anonymously.
@@ -265,10 +290,12 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
     // const type = checker.getTypeAtLocation(node);
     // const properties = type.getProperties().map<ObjectProperty>(p => {
     //   return getValueFromNode(parser, getValueDeclaration(p)!) as ObjectProperty;
-    // });
-    const properties = node.members.map<ObjectProperty>(member => {
-      return getValueFromNode(parser, member) as ObjectProperty;
-    });
+    // }).filter(filterObjectProperties);
+    const properties = node.members
+      .map(member => {
+        return getValueFromNode(parser, member);
+      })
+      .filter(filterObjectProperties);
     return {kind: 'object', properties};
   }
 
@@ -438,17 +465,17 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
       };
     }
 
+    if (node.initializer && ts.isFunctionLike(node.initializer)) {
+      return getValueFromNode(parser, node.initializer);
+    }
+
     // We have no type information in the AST. We'll get the Type from the type checker and run some
     // tests on what we have
 
     const type = checker.getTypeAtLocation(node.initializer || node);
     // Both functions and objects are considered objects to Typescript
     if (isObject(type)) {
-      checker.typeToTypeNode(type, node, undefined); //?
-      type.objectFlags; //?
-      'here'; //?
       if (type.objectFlags & ts.ObjectFlags.ArrayLiteral) {
-        'here'; //?
         return getValueFromType(parser, type) || unknownValue(safeGetText(checker, node));
       }
       return getObjectValueFromType(parser, type);
@@ -488,6 +515,31 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
     };
   }
 
+  /**
+   * A PropertyDeclaration is a property declared in a class
+   *
+   * ```ts
+   * class A {
+   *   a = 'b'
+   * }
+   * ```
+   *
+   * In this example, the PropertyDeclaration is `a = 'b'`
+   */
+  if (t.isPropertyDeclaration(node)) {
+    const name = getNodeName(node); //?
+    const symbol = getSymbolFromNode(checker, node);
+    const jsDoc = findDocComment(checker, symbol);
+    const type = checker.getTypeAtLocation(node);
+
+    return {
+      kind: 'property',
+      name: name || symbol?.name || 'unknown',
+      type: getValueFromType(parser, type) || unknownValue(safeGetText(checker, node)),
+      ...jsDoc,
+    };
+  }
+
   if (t.isIndexSignature(node)) {
   }
 
@@ -514,7 +566,17 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
           }
           return value;
         })
-        .filter((p): p is ObjectProperty => p.kind === 'property'),
+        .filter(filterObjectProperties),
+    };
+  }
+
+  t.getKindNameFromNode(node); //?
+
+  if (t.isInferType(node)) {
+    'here'; //?
+    return {
+      kind: 'infer',
+      value: getValueFromNode(parser, node.typeParameter),
     };
   }
 
@@ -669,6 +731,10 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
     return {kind: 'primitive', value: 'null'};
   }
 
+  if (node.kind === ts.SyntaxKind.NeverKeyword) {
+    return {kind: 'primitive', value: 'never'};
+  }
+
   // 100
   if (t.isNumericLiteral(node)) {
     return {kind: 'number', value: Number(node.text)};
@@ -694,7 +760,12 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
     return {kind: 'primitive', value: 'undefined'};
   }
 
-  // `{anything}`
+  // `something`
+  if (t.isTemplateExpression(node)) {
+    return {kind: 'primitive', value: 'string'};
+  }
+
+  // type A = `{anything}`
   if (t.isTemplateLiteralType(node)) {
     const type = checker.getTypeAtLocation(node);
     return getValueFromType(parser, type, node) || unknownValue(checker.typeToString(type));
@@ -1144,6 +1215,30 @@ export function findDocComment(checker: ts.TypeChecker, symbol?: ts.Symbol): JSD
   return defaultJSDoc;
 }
 
+/**
+ * Attempt to get the name of a declaration or expression
+ */
+export function getNodeName(node: ts.Expression | ts.Declaration): string | undefined {
+  const name = ts.getNameOfDeclaration(node);
+  if (name && 'text' in name) {
+    return name.text;
+  }
+
+  return;
+}
+
+export function filterObjectProperties(value: any): value is ObjectProperty {
+  return value.kind === 'property';
+}
+
+export function filterObjectTypeParameters(value: any): value is TypeParameter {
+  return value.kind === 'typeParameter';
+}
+
+export function filterFunctionParameters(value: any): value is FunctionParameter {
+  return value.kind === 'parameter';
+}
+
 // https://github.com/dsherret/ts-ast-viewer/blob/c71e238123d972bae889b3829e23b44f39d8d5c2/site/src/components/PropertiesViewer.tsx#L172
 export function getSymbolFromNode(checker: ts.TypeChecker, node: ts.Node): ts.Symbol | undefined {
   return (node as any).symbol || checker.getSymbolAtLocation(node);
@@ -1159,7 +1254,7 @@ export function getPackageName(fileName: string): string {
   return 'react';
 }
 
-function isObject(type: ts.Type): type is ts.ObjectType {
+export function isObject(type: ts.Type): type is ts.ObjectType {
   return !!(type.flags & ts.TypeFlags.Object);
 }
 
@@ -1196,44 +1291,6 @@ export function getDefaultsFromObjectBindingParameter(
   }
 
   return {};
-}
-
-/**
- * Get defaults from JSDoc tags if available and do some simple processing to extract useful type
- * information. JSDoc tags are not type checked, so our processing is limited.
- */
-export function getDefaultFromTags(tags: ts.JSDocTagInfo[]): Value | undefined {
-  for (const tag of tags) {
-    if (tag.name === 'default') {
-      const text = (tag.text || '').replace('{', '').replace('}', ''); //?
-      if (
-        [
-          'string',
-          'number',
-          'null',
-          'undefined',
-          'boolean',
-          'any',
-          'void',
-          'unknown',
-          'any',
-        ].includes(text)
-      ) {
-        return {kind: 'primitive', value: text as PrimitiveValue['value']};
-      }
-      if (['true', 'false'].includes(text)) {
-        return {kind: 'boolean', value: Boolean(text)};
-      }
-      if (!Number.isNaN(Number(text))) {
-        return {kind: 'number', value: Number(text)};
-      }
-      if (/^['"][a-z0-9]+['"]$/.test(text)) {
-        return {kind: 'string', value: text.replace(/["']/g, '')};
-      }
-      return {kind: 'symbol', name: text, value: text};
-    }
-  }
-  return;
 }
 
 /**
@@ -1295,6 +1352,11 @@ export function getValueFromType(
   const {checker} = parser;
   const originalNodeKind = node?.kind;
   const typeToString = checker.typeToString(type); //?
+
+  // If the type is `any`, we want to bail now
+  if (type.flags & ts.TypeFlags.Any) {
+    return {kind: 'primitive', value: 'any'};
+  }
 
   // check if the node is an external symbol
   // TODO: This won't work if the symbol contains a generic
@@ -1546,20 +1608,6 @@ export function unknownValue(nodeText: string) {
   return {kind: 'unknown', value: 'unknown', text: nodeText} as UnknownValue;
 }
 
-/**
- * Evaluate the return type looking for a `React.ReactElement` type based on the `props`.
- */
-// function isComponent(returnType: ts.Type) {
-//   if (returnType.isUnion()) {
-//     return returnType.types.some(isComponent);
-//   }
-//   if (isObject(returnType)) {
-//     return returnType.getProperties().some(s => s.name === 'props');
-//   }
-
-//   return false;
-// }
-
 function isExportedSymbol(checker: ts.TypeChecker, node: ts.Node): boolean {
   const sourceFile = node.getSourceFile?.();
   if (sourceFile?.isDeclarationFile) {
@@ -1731,15 +1779,17 @@ export function getValueFromSignatureNode(
 }
 
 function getObjectValueFromType(parser: DocParser, type: ts.Type): Value {
-  const properties = type.getProperties().map(symbol => {
-    return getValueFromNode(parser, getValueDeclaration(symbol)!) as ObjectProperty;
-  });
+  const properties = type
+    .getProperties()
+    .map(symbol => {
+      return getValueFromNode(parser, getValueDeclaration(symbol)!);
+    })
+    .filter(filterObjectProperties);
   properties.length; //?
   const callSignatures = type.getCallSignatures().map(s => {
     'here'; //?
     return getValueFromSignatureNode(parser, s.getDeclaration());
   });
-  callSignatures.length; //?
 
   if (callSignatures.length) {
     // We have a function and no properties
@@ -1750,6 +1800,44 @@ function getObjectValueFromType(parser: DocParser, type: ts.Type): Value {
   }
 
   return {kind: 'object', properties};
+}
+
+/**
+ * Get defaults from JSDoc tags if available and do some simple processing to extract useful type
+ * information. JSDoc tags are not type checked, so our processing is limited.
+ */
+export function getDefaultFromTags(tags: ts.JSDocTagInfo[]): Value | undefined {
+  for (const tag of tags) {
+    if (tag.name === 'default') {
+      const text = (tag.text || '').replace('{', '').replace('}', ''); //?
+      if (
+        [
+          'string',
+          'number',
+          'null',
+          'undefined',
+          'boolean',
+          'any',
+          'void',
+          'unknown',
+          'any',
+        ].includes(text)
+      ) {
+        return {kind: 'primitive', value: text as PrimitiveValue['value']};
+      }
+      if (['true', 'false'].includes(text)) {
+        return {kind: 'boolean', value: Boolean(text)};
+      }
+      if (!Number.isNaN(Number(text))) {
+        return {kind: 'number', value: Number(text)};
+      }
+      if (/^['"][a-z0-9]+['"]$/.test(text)) {
+        return {kind: 'string', value: text.replace(/["']/g, '')};
+      }
+      return {kind: 'symbol', name: text, value: text};
+    }
+  }
+  return;
 }
 
 /**
@@ -1767,7 +1855,7 @@ export type ParserPlugin<TAdditionalValues extends {kind: string} = Value> = (
    * symbols, you can ignore this parameter.
    */
   parser: DocParser<TAdditionalValues>
-) => Value | TAdditionalValues | undefined;
+) => Value | TAdditionalValues | undefined | null;
 
 /**
  * This factory function makes it easy to create plugins by providing Typescript types

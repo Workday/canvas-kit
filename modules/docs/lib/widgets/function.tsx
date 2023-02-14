@@ -2,6 +2,7 @@ import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 import React from 'react';
 
 import {FunctionValue, FunctionParameter} from '../../docgen/docTypes';
+import {DescriptionTooltip} from '../DescriptionTooltip';
 import {MdxJSToJSX} from '../MDXElements';
 import {registerWidget, Value} from '../Value';
 import {RenderContext, IndentLevelContext, space, renderTypeParameters} from '../widgetUtils';
@@ -49,9 +50,12 @@ registerWidget<FunctionParameter>('parameter', ({value}) => {
   return (
     <RenderContext.Provider value="inline">
       {value.description ? (
-        <Tooltip style={{maxWidth: '50em'}} title={<MdxJSToJSX>{value.description}</MdxJSToJSX>}>
+        <DescriptionTooltip
+          style={{maxWidth: '50em'}}
+          title={<MdxJSToJSX>{value.description}</MdxJSToJSX>}
+        >
           <span className="token property">{value.name}</span>
-        </Tooltip>
+        </DescriptionTooltip>
       ) : (
         <span className="token property">{value.name}</span>
       )}

@@ -1,4 +1,4 @@
-import {Meta} from '@storybook/addon-docs';
+import {SymbolDoc} from '@workday/canvas-kit-docs';
 
 import {Skeleton} from '@workday/canvas-kit-react/skeleton';
 
@@ -55,47 +55,7 @@ ensure the Skeleton components are visible.
 
 <ExampleCodeBlock code={Color} />
 
-## Components
-
-### Skeleton
-
-#### Usage
-
-Skeleton subcomponents **must** be wrapped by the `Skeleton` container component.
-
-```tsx
-<Skeleton>
-  <Skeleton.Header />
-  <Skeleton.Text />
-</Skeleton>
-```
-
-`Skeleton` places its children in a container element with `aria-hidden` set to `true` and announces
-itself using a visually hidden element.
-
-#### Props
-
-Undocumented props are spread to the outermost element rendered by `Skeleton`.
-
-<ArgsTable of={Skeleton} />
-
-### Skeleton.Header
-
-#### Usage
-
-`Skeleton.Header` renders a placeholder for header content such as headings.
-
-<ExampleCodeBlock code={Header} />
-
-#### Props
-
-Undocumented props are spread to the outermost element rendered by `Skeleton.Header`.
-
-<ArgsTable of={Skeleton.Header} />
-
-### Skeleton.Text
-
-#### Usage
+### Text
 
 `Skeleton.Text` renders a placeholder for text content such as paragraphs. Each placeholder line has
 a width of `100%` and a fixed height of `21px`, with the last line having a width of `60%` if there
@@ -103,15 +63,13 @@ are multiple lines.
 
 <ExampleCodeBlock code={Text} />
 
-#### Props
+### Header
 
-Undocumented props are spread to the outermost element rendered by `Skeleton.Text`.
+`Skeleton.Header` renders a placeholder for header content such as headings.
 
-<ArgsTable of={Skeleton.Text} />
+<ExampleCodeBlock code={Header} />
 
-### Skeleton.Shape
-
-#### Usage
+### Shape
 
 `Skeleton.Shape` renders a placeholder for graphic elements such as icons, avatars and small images.
 Set the `height`, `width`, and `borderRadius` props of the `Skeleton.Shape` to create various
@@ -119,8 +77,6 @@ rectangular and circular shapes.
 
 <ExampleCodeBlock code={Shape} />
 
-#### Props
+## Component API
 
-Undocumented props are spread to the outermost element rendered by `Skeleton.Shape`.
-
-<ArgsTable of={Skeleton.Shape} />
+<SymbolDoc name="Skeleton" hideDescription />

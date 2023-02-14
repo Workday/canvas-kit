@@ -1,4 +1,4 @@
-import {Meta} from '@storybook/addon-docs';
+import {SymbolDoc} from '@workday/canvas-kit-docs';
 
 import {Pagination} from '@workday/canvas-kit-react/pagination';
 
@@ -9,15 +9,6 @@ import {GoToForm} from './examples/GoToForm';
 import {HoistedModel} from './examples/HoistedModel';
 import {ResponsiveRange} from './examples/ResponsiveRange';
 import {RTL} from './examples/RTL';
-import {
-  PaginationHoistedComponent,
-  PageButtonComponent,
-  PageListComponent,
-  AdditionalDetailsComponent,
-  PaginationModelConfigComponent,
-  PaginationStateComponent,
-  PaginationEventsComponent,
-} from './PropTables.splitprops.tsx';
 
 <Meta title="Components/Navigation/Pagination" component={Pagination} />
 
@@ -139,20 +130,6 @@ return (
 );
 ```
 
-#### Props
-
-Undocumented props are spread to the underlying `<nav>` element.
-
-<ArgsTable of={PaginationModelConfigComponent} />
-
-If you're using the hoisted model pattern, follow this table instead (refer to the [Model](#model)
-section for more information about `PaginationModel`):
-
-<ArgsTable of={PaginationHoistedComponent} />
-
-Note that you must set `aria-label` in either case to meet accessibility standards. We recommend
-setting it to `Pagination` or the translated equivalent.
-
 ### Pagination.Controls
 
 #### Usage
@@ -164,11 +141,7 @@ elements inside `Pagination`. It does not handle any internal business logic or 
 <Pagination.Controls>{/* Child components */}</Pagination.Controls>
 ```
 
-#### Props
-
-`Pagination.Controls` does not have any documented props.
-
-Undocumented props are spread to the underlying `<div>` element.
+<SymbolDoc name="Controls" fileName="pagination" hideDescription meta={{hideHeader: true}} />
 
 ### Pagination.JumpToFirstButton
 
@@ -181,7 +154,12 @@ allows it to know when to disable and set `currentPage` to the first page.
 <Pagination.JumpToFirstButton aria-label="First" />
 ```
 
-#### Props
+<SymbolDoc
+  name="JumpToFirstButton"
+  fileName="pagination"
+  hideDescription
+  meta={{hideHeader: true}}
+/>
 
 Undocumented props are spread to the underlying `<button>` element. Note that you must set
 `aria-label` to meet accessibility standards. We recommend setting it to `First` or the translated
@@ -200,7 +178,12 @@ equivalent.
 <Pagination.StepToPreviousButton aria-label="Previous" />
 ```
 
-#### Props
+<SymbolDoc
+  name="StepToPreviousButton"
+  fileName="pagination"
+  hideDescription
+  meta={{hideHeader: true}}
+/>
 
 Undocumented props are spread to the underlying `<button>` element. Note that you must set
 `aria-label` to meet accessibility standards. We recommend setting it to `Previous` or the
@@ -219,7 +202,12 @@ This allows it to know when to disable and increment the `currentPage`.
 <Pagination.StepToNextButton aria-label="Next" />
 ```
 
-#### Props
+<SymbolDoc
+  name="StepToNextButton"
+  fileName="pagination"
+  hideDescription
+  meta={{hideHeader: true}}
+/>
 
 Undocumented props are spread to the underlying `<button>` element. Note that you must set
 `aria-label` to meet accessibility standards. We recommend setting it to `Next` or the translated
@@ -238,7 +226,12 @@ equivalent.
 <Pagination.JumpToLastButton aria-label="Last" />
 ```
 
-#### Props
+<SymbolDoc
+  name="JumpToLastButton"
+  fileName="pagination"
+  hideDescription
+  meta={{hideHeader: true}}
+/>
 
 Undocumented props are spread to the underlying `<button>` element. Note that you must set
 `aria-label` to meet accessibility standards. We recommend setting it to `Last` or the translated
@@ -268,11 +261,9 @@ the render prop so you can access the `Pagination` model in order to generate th
 </Pagination.PageList>
 ```
 
-#### Props
+<SymbolDoc name="PageList" fileName="pagination" hideDescription meta={{hideHeader: true}} />
 
 Undocumented props are spread to the underlying `<ol>` element.
-
-<ArgsTable of={PageListComponent} />
 
 ### Pagination.PageListItem
 
@@ -286,7 +277,7 @@ logic or state.
 <Pagination.PageListItem>{/* Child element */}</Pagination.PageListItem>
 ```
 
-#### Props
+<SymbolDoc name="PageListItem" fileName="pagination" hideDescription meta={{hideHeader: true}} />
 
 `Pagination.PageListItem` does not have any documented props.
 
@@ -305,13 +296,11 @@ update the `currentPage` and set the `toggled` styling when it is the current it
 <Pagination.PageButton aria-label="Page 2" pageNumber={2} />
 ```
 
-#### Props
+<SymbolDoc name="PageButton" fileName="pagination" hideDescription meta={{hideHeader: true}} />
 
 Undocumented props are spread to the underlying `<button>` element. Note that you must set
 `aria-label` to meet accessibility standards. We recommend setting it to `Page ${pageNumber}` or the
 translated equivalent.
-
-<ArgsTable of={PageButtonComponent} />
 
 `Pagination.PageButton` also supports all `Button` props.
 
@@ -330,8 +319,6 @@ context to manage the form state and behavior as well as update the `currentPage
 
 #### Props
 
-`Pagination.GoToForm` does not have any documented props.
-
 Undocumented props are spread to the underlying `<form>` element.
 
 ### Pagination.GoToTextInput
@@ -344,7 +331,7 @@ Undocumented props are spread to the underlying `<form>` element.
 <Pagination.GoToTextInput aria-label="Go to page number" />
 ```
 
-#### Props
+<SymbolDoc name="GoToTextInput" fileName="pagination" hideDescription meta={{hideHeader: true}} />
 
 Undocumented props are spread to the underlying `<input type="text">` element. Note that you must
 set `aria-label` to meet accessibility standards. We recommend setting it to `Go to page number` or
@@ -366,11 +353,7 @@ the render prop so you can access the `Pagination` model when generating the lab
 <Pagination.GoToLabel>{({state}) => `of ${state.lastPage} pages`}</Pagination.GoToLabel>
 ```
 
-#### Props
-
-Undocumented props are spread to the underlying `<label>` element.
-
-<ArgsTable of={Pagination.GoToLabel} />
+<SymbolDoc name="GoToLabel" hideDescription meta={{hideHeader: true}} />
 
 ### Pagination.AdditionalDetails
 
@@ -410,11 +393,7 @@ the render prop so you can access the `Pagination` model in order to generate th
 </Pagination.AdditionalDetails>
 ```
 
-#### Props
-
-Undocumented props are spread to the underlying `<div>` element.
-
-<ArgsTable of={AdditionalDetailsComponent} />
+<SymbolDoc name="AdditionalDetails" hideDescription meta={{hideHeader: true}} />
 
 ## Model
 
@@ -473,86 +452,31 @@ const model = usePaginationModel({
 </Pagination>;
 ```
 
-### Config
+### usePaginationModel
 
 `usePaginationModel` accepts a configuration object with the following properties and returns a
 `PaginationModel` with `state` and `events` properties.
 
-<ArgsTable of={PaginationModelConfigComponent} />
-
-### State
-
-The `PaginationModel` `state` is an object with the following properties.
-
-<ArgsTable of={PaginationStateComponent} />
-
-### Events
-
-The `PaginationModel` `events` is an object with the following properties.
-
-<ArgsTable of={PaginationEventsComponent} />
+<SymbolDoc name="usePaginationModel" />
 
 ## Utilities
 
 ### getLastPage
 
-This function takes the number of results per page and the total count of results and returns the
-last page number. Here's an example:
-
-Given there are 10 results per page, and there are 128 total results, the function will return 13.
-
-```ts
-const resultCount = 10;
-const totalCount = 128;
-const lastPage = getLastPage(resultCount, totalCount); //=> 13
-```
+<SymbolDoc name="getLastPage" fileName="pagination" />
 
 ### getRangeMin
 
-This function takes the pagination range and returns its minimum value. Here's an example:
-
-Given the pagination range is 1-5, the function will return 1.
-
-```ts
-const range = [1, 2, 3, 4, 5];
-const rangeMin = getRangeMin(range); //=> 1
-```
+<SymbolDoc name="getRangeMin" fileName="pagination" />
 
 ### getRangeMax
 
-This function takes the pagination range and returns its maximum value. Here's an example:
-
-Given the pagination range is 1-5, the function will return 5.
-
-```ts
-const range = [1, 2, 3, 4, 5];
-const rangeMin = getRangeMax(range); //=> 5
-```
+<SymbolDoc name="getRangeMax" fileName="pagination" />
 
 ### getVisibleResultsMin
 
-This function takes the current page, and number of results per page, and returns the minimum value
-for that page. Here's an example:
-
-Given there are 10 results per page, and the current page is 5, the function will return 41.
-
-```ts
-const currentPage = 5;
-const resultCount = 10;
-const pageMin = getVisibleResultsMin(currentPage, resultCount); //=> 41
-```
+<SymbolDoc name="getVisibleResultsMin" fileName="pagination" />
 
 ### getVisibleResultsMax
 
-This function takes the current page, number of results per page, and the total number of results,
-and returns the maximum value for that page. Here's an example:
-
-Given there are 10 results per page, the current page is 5, and there are 42 results total, the
-function will return 42.
-
-```ts
-const currentPage = 5;
-const resultCount = 10;
-const totalCount = 42;
-const pageMax = getVisibleResultsMax(currentPage, resultCount, totalCount); //=> 42
-```
+<SymbolDoc name="getVisibleResultsMax" fileName="pagination" />

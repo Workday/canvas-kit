@@ -27,6 +27,7 @@ const sanitizeMdxFile = (inFile, outFile) => {
       .replace(/import {.*} from '@storybook\/addon-docs';/g, '')
       .replace(/<Meta.* \/>\n/g, '')
       .replace(/^\s+|\s+$/g, '')
+      // TODO: Remove this replace when there's no longer any use of `<ArgsTable>`
       // The replace below converts named imports from files in the examples
       // folder to default imports (this is required by canvas-site in order
       // for examples to work). The regex specifically targets import
@@ -38,7 +39,7 @@ const sanitizeMdxFile = (inFile, outFile) => {
       // The line above will be converted (as desired) to:
       //
       // import FlexCard from './examples/Flex/FlexCard';
-      // 
+      //
       // This build process contains logic elsewhere to convert the named
       // exports in those example files to default exports.
       //

@@ -37,15 +37,10 @@ const StyledSystemIcon = styled(SystemIcon)<StyledType>({
 export const ExternalHyperlink = createComponent('a')({
   displayName: 'ExternalHyperlink',
   Component: (
-    {
-      children,
-      variant,
-      iconLabel = 'Opens link in new window',
-      ...elemProps
-    }: ExternalHyperlinkProps,
+    {children, iconLabel = 'Opens link in new window', ...elemProps}: ExternalHyperlinkProps,
     ref
   ) => (
-    <Anchor ref={ref} target="_blank" rel="noreferrer" variant={variant} {...elemProps}>
+    <Anchor ref={ref} target="_blank" rel="noreferrer" {...elemProps}>
       <span>{children}</span>
       <StyledSystemIcon
         icon={extLinkIcon}

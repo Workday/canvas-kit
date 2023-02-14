@@ -72,7 +72,7 @@ export const statusIndicatorColors = {
   },
 };
 
-const useStatusIndicatorIcon = createElemPropsHook(useStatusIndicatorModel)(({state}) => {
+export const useStatusIndicatorIcon = createElemPropsHook(useStatusIndicatorModel)(({state}) => {
   const colors = statusIndicatorColors[state.variant][state.emphasis];
   return {
     color: colors.text,

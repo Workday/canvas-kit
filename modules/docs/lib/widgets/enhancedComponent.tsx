@@ -1,9 +1,10 @@
 import React from 'react';
 
 import {Expandable} from '@workday/canvas-kit-labs-react/expandable';
+import {Box} from '@workday/canvas-kit-react/layout';
 
 import {defaultJSDoc} from '../../docgen/docParser';
-import {EnhanceComponentValue} from '../../docgen/plugins/customTypes';
+import {EnhancedComponentValue} from '../../docgen/plugins/customTypes';
 import {MdxJSToJSX, MDX} from '../MDXElements';
 import {SymbolDoc} from '../SymbolDoc';
 import {PropertiesTable, registerWidget, Value} from '../Value';
@@ -41,16 +42,49 @@ const fileNameToCategoryMap: Record<string, string[]> = {
   Other: ['utils/other'],
 };
 
-registerWidget<EnhanceComponentValue>('enhancedComponent', ({value, doc}) => {
+registerWidget<EnhancedComponentValue>('enhancedComponent', ({value, doc, meta}) => {
   const groups = groupProps(value.props);
   const parentComponentName = React.useContext(ParentComponentNameContext);
   const parentComponentJSDoc = React.useContext(ParentComponentJSDocContext);
+  const hideHeader = meta && meta.hideHeader === true;
+
+  const intro = (
+    <>
+      {!parentComponentName && !hideHeader && value.displayName ? (
+        <Heading>{value.displayName}</Heading>
+      ) : null}
+
+      <ParentComponentNameContext.Provider value="">
+        <ParentComponentJSDocContext.Provider value={defaultJSDoc}>
+          <MdxJSToJSX>{parentComponentJSDoc.description || doc?.description || ''}</MdxJSToJSX>
+        </ParentComponentJSDocContext.Provider>
+      </ParentComponentNameContext.Provider>
+    </>
+  );
+
+  // We don't want to re-document a subcomponent that is a container component with a different
+  // model. If we detect another container, only render the intro and a link to the container
+  // component
+  if (parentComponentName && value.componentType === 'container') {
+    return (
+      <>
+        {intro}
+        <MDX as="p">
+          This component references the{' '}
+          <ParentComponentNameContext.Provider value="">
+            <ParentComponentJSDocContext.Provider value={defaultJSDoc}>
+              <SymbolDialog value={{kind: 'symbol', name: value.displayName || ''}} />
+            </ParentComponentJSDocContext.Provider>
+          </ParentComponentNameContext.Provider>{' '}
+          component.
+        </MDX>
+      </>
+    );
+  }
 
   return (
     <>
-      {!parentComponentName && value.displayName ? <Heading>{value.displayName}</Heading> : null}
-      <Heading headingOffset={1}>Usage</Heading>
-      <MdxJSToJSX>{doc?.description || parentComponentJSDoc.description || ''}</MdxJSToJSX>
+      {intro}
       {value.styleComponent ? (
         <>
           <Heading headingOffset={1}>Style Component</Heading>
@@ -64,10 +98,16 @@ registerWidget<EnhanceComponentValue>('enhancedComponent', ({value, doc}) => {
         </>
       ) : null}
       <Heading headingOffset={1}>Props</Heading>
+      {value.baseElement && (
+        <MDX as="p">
+          Props extend from <Value value={value.baseElement} />. Changing the{' '}
+          <MDX as="code">as</MDX> prop will change the element interface.
+        </MDX>
+      )}
       {value.componentType === 'container' && value.model ? (
         <MDX as="p">
-          Props extends <SymbolDialog value={{kind: 'symbol', name: `${value.model}Config`}} />. If
-          a <MDX as="code">model</MDX> is passed, model config is ignored.
+          Props extend from <SymbolDialog value={{kind: 'symbol', name: `${value.model}Config`}} />.
+          If a <MDX as="code">model</MDX> is passed, model config is ignored.
         </MDX>
       ) : null}
       {Object.keys(groups).map(key => {
@@ -93,12 +133,10 @@ registerWidget<EnhanceComponentValue>('enhancedComponent', ({value, doc}) => {
       })}
       {value.elemPropsHook ? (
         <>
-          <Heading headingOffset={1}>elemProps Hook</Heading>
-          <code>
-            <span className="token symbol">{value.elemPropsHook}</span>{' '}
-            <span className="token operator">=</span>{' '}
-            <SymbolDoc name={value.elemPropsHook} as="span" className="token symbol" />
-          </code>
+          <Heading headingOffset={1}>{value.elemPropsHook}</Heading>
+          <Box marginBottom="m">
+            <SymbolDoc name={value.elemPropsHook} />
+          </Box>
         </>
       ) : null}
       {value.subComponents
@@ -106,13 +144,15 @@ registerWidget<EnhanceComponentValue>('enhancedComponent', ({value, doc}) => {
             return (
               <React.Fragment key={i}>
                 <Heading>
-                  {value.displayName || parentComponentName}.{c.name}
+                  {parentComponentName ? parentComponentName : value.displayName}.{c.name}
                 </Heading>
                 <ParentComponentNameContext.Provider
-                  value={`${value.displayName || parentComponentName}.${c.name}`}
+                  value={`${parentComponentName ? parentComponentName : value.displayName}.${
+                    c.name
+                  }`}
                 >
                   <ParentComponentJSDocContext.Provider value={c}>
-                    <SymbolDoc name={c.symbol} />
+                    <SymbolDoc name={c.symbol} hideDescription />
                   </ParentComponentJSDocContext.Provider>
                 </ParentComponentNameContext.Provider>
               </React.Fragment>

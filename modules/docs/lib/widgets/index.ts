@@ -1,6 +1,7 @@
 import './array';
 import './callExpression';
 import './canvasColor';
+import './component';
 import './conditional';
 import './enhancedComponent';
 import './external';

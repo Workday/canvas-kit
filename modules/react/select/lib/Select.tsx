@@ -118,22 +118,9 @@ const SelectWrapper = styled('div')<Pick<SelectProps, 'grow' | 'disabled'>>(
 
 export const Select = createComponent('select')({
   displayName: 'Select',
-  Component: (
-    {disabled = false, error, grow, children, value, onChange, ...elemProps}: SelectProps,
-    ref,
-    Element
-  ) => (
+  Component: ({disabled = false, grow, children, ...elemProps}: SelectProps, ref, Element) => (
     <SelectWrapper grow={grow} disabled={disabled}>
-      <StyledSelect
-        as={Element}
-        disabled={disabled}
-        grow={grow}
-        error={error}
-        ref={ref}
-        value={value}
-        onChange={onChange}
-        {...elemProps}
-      >
+      <StyledSelect as={Element} disabled={disabled} grow={grow} ref={ref} {...elemProps}>
         {children}
       </StyledSelect>
       <SelectDropdownIcon

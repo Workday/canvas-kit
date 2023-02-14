@@ -62,12 +62,14 @@ export type Value =
   | ExternalSymbolValue
   | ConditionalTypeValue
   | KeyofValue
+  | InferValue
   | UnknownValue;
 
 /** A value meant to link to an exported symbol. This should be treated like a pointer to an `ExportedSymbol` by name */
 export interface SymbolValue {
   kind: 'symbol';
   name: string;
+  displayName?: string;
   fileName?: string;
   value?: string;
   typeParameters?: TypeParameter[];
@@ -231,6 +233,7 @@ export interface PrimitiveValue {
     | 'any'
     | 'void'
     | 'unknown'
+    | 'never'
     | 'any';
 }
 
@@ -263,4 +266,9 @@ export interface CallExpression {
   kind: 'callExpression';
   name?: SymbolValue;
   parameters: Value[];
+}
+
+export interface InferValue {
+  kind: 'infer';
+  value: Value;
 }
