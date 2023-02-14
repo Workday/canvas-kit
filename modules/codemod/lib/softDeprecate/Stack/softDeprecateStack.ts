@@ -154,6 +154,7 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
   // Transform `<Stack spacing="l">` to `<Flex gap="l">`
   // Transform `<VStack spacing="l">` to `<Flex gap="l">`
   // Transform `<HStack spacing="l">` to `<Flex gap="l">`
+  // Transform `<Stack shouldWrapChildren>` to `<Flex >`
   root.find(j.JSXOpeningElement).forEach(nodePath => {
     if (nodePath.node.type === 'JSXOpeningElement') {
       if (nodePath.node.name.type === 'JSXIdentifier') {
@@ -163,21 +164,6 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
               if (path.name.name === 'spacing') {
                 path.name.name = 'gap';
               }
-            }
-          });
-        }
-      }
-    }
-  });
-
-  // Transform Stack JSXElements
-  // Transform `<Stack shouldWrapChildren>` to `<Flex >`
-  root.find(j.JSXOpeningElement).forEach(nodePath => {
-    if (nodePath.node.type === 'JSXOpeningElement') {
-      if (nodePath.node.name.type === 'JSXIdentifier') {
-        if (stackImportNames.includes(nodePath.node.name.name)) {
-          nodePath.node.attributes?.forEach(path => {
-            if (path.type === 'JSXAttribute') {
               if (path.name.name === 'shouldWrapChildren') {
                 path.name.name = '';
               }
