@@ -114,26 +114,24 @@ describe('RadioGroup', () => {
     });
   });
 
-  //TODO: fix test after fixing radio group callback issue
+  describe('when clicked', () => {
+    it('should call a  callback function', () => {
+      const {getByLabelText} = render(
+        <RadioGroup name="contact" data-testid="radiogroup" onChange={cb}>
+          <RadioGroup.Button id="1">
+            <RadioGroup.Input value="email"></RadioGroup.Input>
+            <RadioGroup.Label>E-mail</RadioGroup.Label>
+          </RadioGroup.Button>
+          <RadioGroup.Button id="2">
+            <RadioGroup.Input value="phone"></RadioGroup.Input>
+            <RadioGroup.Label>Phone</RadioGroup.Label>
+          </RadioGroup.Button>
+        </RadioGroup>
+      );
 
-  // describe('when clicked', () => {
-  //   it.only('should call a  callback function', () => {
-  //     const {getByLabelText} = render(
-  //       <RadioGroup name="contact" data-testid="radiogroup" callback={cb}>
-  //         <RadioGroup.Button id="1">
-  //           <RadioGroup.Input value="email"></RadioGroup.Input>
-  //           <RadioGroup.Label>E-mail</RadioGroup.Label>
-  //         </RadioGroup.Button>
-  //         <RadioGroup.Button id="2">
-  //           <RadioGroup.Input value="phone"></RadioGroup.Input>
-  //           <RadioGroup.Label>Phone</RadioGroup.Label>
-  //         </RadioGroup.Button>
-  //       </RadioGroup>
-  //     );
+      fireEvent.click(getByLabelText('Phone'));
 
-  //     fireEvent.click(getByLabelText('Phone'));
-
-  //     expect(cb).toHaveBeenCalledWith('phone');
-  //   });
-  // });
+      expect(cb).toHaveBeenCalled();
+    });
+  });
 });

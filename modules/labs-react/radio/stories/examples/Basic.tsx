@@ -6,8 +6,11 @@ import styled from '@emotion/styled';
 export const Basic = () => {
   const [value, setValue] = React.useState<string | number>('deep-dish');
 
-  const handleChange = (value: string | number) => {
-    setValue(value);
+  const handleChange = (e: React.ChangeEvent) => {
+    const target = e.currentTarget;
+    if (target instanceof HTMLInputElement) {
+      setValue(target.value);
+    }
   };
 
   const StyledFormField = styled(FormField)({
@@ -15,7 +18,7 @@ export const Basic = () => {
   });
   return (
     <StyledFormField label="Choose Your Pizza Crust" useFieldset={true}>
-      <RadioGroup name="crust" value={value} callback={handleChange}>
+      <RadioGroup name="crust" value={value} onChange={handleChange}>
         <RadioGroup.Button>
           <RadioGroup.Input value="deep-dish" />
           <RadioGroup.Label>Deep Dish</RadioGroup.Label>
