@@ -489,6 +489,17 @@ describe('Popup', () => {
           });
         });
       });
+
+      context('when the user closes the popup using the link', () => {
+        beforeEach(() => {
+          cy.findByTestId('focus-text-input-link').click();
+        });
+
+        it('should focus the "Name" input', () => {
+          cy.findByRole('button', {name: 'Open Popup'}).should('not.have.focus');
+          cy.findByLabelText('Name').should('have.focus');
+        });
+      });
     });
   });
 
