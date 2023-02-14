@@ -3,6 +3,40 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v8.4.9](https://github.com/Workday/canvas-kit/releases/tag/v8.4.9) (2023-02-07)
+
+### Documentation
+
+- docs: Add docs on model hooks and create utilities ([#1881](https://github.com/Workday/canvas-kit/pull/1881)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@NicholasBoll](https://github.com/NicholasBoll))
+  To better support our consumers, we're adding documentation on our Compound Component utilities and hooks. You can find the docs under Hooks and Utilities -> Compound Components
+
+
+## [v8.4.8](https://github.com/Workday/canvas-kit/releases/tag/v8.4.8) (2023-02-07)
+
+### Components
+
+- fix: Allow overriding of return focus when closing a popup ([#1991](https://github.com/Workday/canvas-kit/pull/1991)) ([@christine-m](https://github.com/christine-m), christine.mullins)
+
+
+## [v7.4.8](https://github.com/Workday/canvas-kit/releases/tag/v7.4.8) (2023-02-07)
+
+### Components
+
+- fix: Allow overriding of return focus when closing a popup ([#1991](https://github.com/Workday/canvas-kit/pull/1991)) ([@christine-m](https://github.com/christine-m), christine.mullins)
+## [v8.4.7](https://github.com/Workday/canvas-kit/releases/tag/v8.4.7) (2023-02-07)
+
+### Documentation
+
+- docs: Cards, adding notice under 'as' usage ([#2000](https://github.com/Workday/canvas-kit/pull/2000)) ([@bstanton678](https://github.com/bstanton678), william.stanton, [@myvuuu](https://github.com/myvuuu), [@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v8.4.6](https://github.com/Workday/canvas-kit/releases/tag/v8.4.6) (2023-02-06)
+
+### Documentation
+
+- fix: Update broken link in CONTRIBUTING.md ([#2019](https://github.com/Workday/canvas-kit/pull/2019)) ([@thunguyen19](https://github.com/thunguyen19))
+
+
 ## [v8.4.5](https://github.com/Workday/canvas-kit/releases/tag/v8.4.5) (2023-02-03)
 
 ### Documentation

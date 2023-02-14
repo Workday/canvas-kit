@@ -19,6 +19,12 @@ export interface CardProps extends BoxProps {
  * {@link CardHeading Card.Heading}. `Card` wraps a non-semantic `div` element. The element can be
  * replaced using the `as` prop, or a `role` or other `aria-*` attributes can be added to give
  * `Card` semantic meaning.
+ *
+ * **Note**: Changing the `Card` container to certain semantic elements will put accessibility at
+ * risk. For example, using the `as` prop to change the cards to buttons will flatten the content in
+ * the card. Headings, calls to action, etc. will not function as expected for users with
+ * disabilities. Semantic container elements like `<section>`, or using `<li>` grouped together in a
+ * common `<ul>` can be a useful way to elevate the accessibility of your design.
  */
 export const Card = createComponent('div')({
   displayName: 'Card',
