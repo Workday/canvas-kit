@@ -98,7 +98,7 @@ Pagination.JumpToLastButton = (props: ExtractProps<typeof TertiaryButton>) => {
   return <JumpToLastButton model={model} {...props} />;
 };
 
-Pagination.PageList = (props: Omit<ExtractProps<typeof PageList>, 'model'>) => {
+Pagination.PageList = (props: Omit<ExtractProps<typeof PageList, never>, 'model'>) => {
   // The linter doesn't recognize the dot syntax, so we're disabling the rule
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const model = React.useContext(PaginationContext);
@@ -116,7 +116,9 @@ Pagination.PageButton = (props: Omit<ExtractProps<typeof PageButton>, 'model'>) 
   return <PageButton model={model} {...props} />;
 };
 
-Pagination.AdditionalDetails = (props: Omit<ExtractProps<typeof AdditionalDetails>, 'model'>) => {
+Pagination.AdditionalDetails = (
+  props: Omit<ExtractProps<typeof AdditionalDetails, never>, 'model'>
+) => {
   // The linter doesn't recognize the dot syntax, so we're disabling the rule
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const model = React.useContext(PaginationContext);
@@ -138,7 +140,7 @@ Pagination.GoToTextInput = (props: ExtractProps<typeof GoTo.TextInput>) => {
   return <GoTo.TextInput {...props} />;
 };
 
-Pagination.GoToLabel = (props: Omit<ExtractProps<typeof GoTo.Label>, 'model'>) => {
+Pagination.GoToLabel = (props: Omit<ExtractProps<typeof GoTo.Label, never>, 'model'>) => {
   // The linter doesn't recognize the dot syntax, so we're disabling the rule
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const model = React.useContext(PaginationContext);

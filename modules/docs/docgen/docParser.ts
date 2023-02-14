@@ -1608,7 +1608,7 @@ export function unknownValue(nodeText: string) {
   return {kind: 'unknown', value: 'unknown', text: nodeText} as UnknownValue;
 }
 
-function isExportedSymbol(checker: ts.TypeChecker, node: ts.Node): boolean {
+export function isExportedSymbol(checker: ts.TypeChecker, node: ts.Node): boolean {
   const sourceFile = node.getSourceFile?.();
   if (sourceFile?.isDeclarationFile) {
     return true;

@@ -788,6 +788,7 @@ function getComponentProps(
 
       const value = parser.getValueFromNode(getValueDeclaration(symbol)!);
       if (value.kind === 'property') {
+        // @ts-ignore Not sure why this only fails in typecheck
         value.defaultValue = defaultValue;
       }
 

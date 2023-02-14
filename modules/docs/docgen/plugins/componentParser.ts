@@ -8,6 +8,7 @@ import {
   getValueDeclaration,
   getDefaultFromTags,
   isObject,
+  isExportedSymbol,
 } from '../docParser';
 
 import t from '../traverse';
@@ -86,37 +87,21 @@ export const componentParser = createParserPlugin<ComponentValue>((node, parser)
   }
 
   /**
-   * Check all functions for a signature of a component
+   * ```tsx
+   * export function A(props: Props) { return <div /> }
+   * ```
    */
-  if (ts.isFunctionLike(node)) {
-    // Get a signature and test the return type for JSX props
-    const signature = parser.checker.getSignatureFromDeclaration(node);
-    if (signature) {
-      const returnType = signature.getReturnType();
-      if (isComponent(returnType)) {
-        if (signature.parameters[0]) {
-          const declaration = getValueDeclaration(signature.parameters[0]);
-          if (declaration && t.isParameter(declaration)) {
-            const type = parser.checker.getTypeAtLocation(declaration);
-            const defaults = getDefaultsFromObjectBindingPattern(parser, declaration.name); //?
-            const props = getComponentProps(parser, type, defaults);
+  if (ts.isFunctionLike(node) && isExportedSymbol(parser.checker, node)) {
+    return getComponentFromFunction(parser, node);
+  }
 
-            return {
-              kind: 'component',
-              props,
-            };
-          }
-        }
-
-        'here'; //?
-
-        // We couldn't find props
-        return {
-          kind: 'component',
-          props: [],
-        };
-      }
-    }
+  /**
+   * ```tsx
+   * export const A = (props: Props) => <div />
+   * ```
+   */
+  if (t.isVariableDeclaration(node) && node.initializer && ts.isFunctionLike(node.initializer)) {
+    return getComponentFromFunction(parser, node.initializer);
   }
 
   /**
@@ -140,9 +125,14 @@ export const componentParser = createParserPlugin<ComponentValue>((node, parser)
   ) {
     // Force evaluation of the initializer. This will result in the function being evaluated as a
     // component
-    return parser.getValueFromNode(node.initializer);
+    return getComponentFromFunction(parser, node.initializer);
   }
 
+  /**
+   * ```tsx
+   * export const A = React.forwardRef((props: Props) => <div />)
+   * ```
+   */
   if (
     t.isVariableDeclaration(node) &&
     node.initializer &&
@@ -159,7 +149,7 @@ export const componentParser = createParserPlugin<ComponentValue>((node, parser)
   ) {
     // Force evaluation of the initializer. This will result in the function being evaluated as a
     // component
-    return parser.getValueFromNode(node.initializer.arguments[0]);
+    return getComponentFromFunction(parser, node.initializer.arguments[0]);
   }
 
   return undefined;
@@ -256,4 +246,46 @@ export function getDefaultsFromObjectBindingPattern(
   }
 
   return {};
+}
+
+function getComponentFromFunction(parser: DocParser, node: ts.Node) {
+  /**
+   * Check all functions for a signature of a component
+   */
+  if (ts.isFunctionLike(node)) {
+    // Get a signature and test the return type for JSX props
+    const signature = parser.checker.getSignatureFromDeclaration(node);
+    if (signature) {
+      const returnType = signature.getReturnType();
+      if (isComponent(returnType)) {
+        if (signature.parameters[0]) {
+          const declaration = getValueDeclaration(signature.parameters[0]);
+          if (declaration && t.isParameter(declaration)) {
+            const type = parser.checker.getTypeAtLocation(declaration);
+            if (!isObject(type)) {
+              // This is not a component. We may still get some false positives, but this decreases
+              // the likelihood
+              return undefined;
+            }
+            const defaults = getDefaultsFromObjectBindingPattern(parser, declaration.name); //?
+            const props = getComponentProps(parser, type, defaults);
+
+            return {
+              kind: 'component',
+              props,
+            };
+          }
+        }
+
+        'here'; //?
+
+        // We couldn't find props
+        return {
+          kind: 'component',
+          props: [],
+        };
+      }
+    }
+  }
+  return undefined;
 }

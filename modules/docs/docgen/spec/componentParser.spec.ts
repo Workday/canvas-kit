@@ -336,4 +336,26 @@ describe('componentParser', () => {
     expect(docs).toHaveProperty('0.type.props.0.defaultValue.kind', 'string');
     expect(docs).toHaveProperty('0.type.props.0.defaultValue.value', 'b');
   })
+
+  it('should not match embedded component-like functions inside props', () => {
+    const program = createProgramFromSource('test.tsx',`
+      import React from 'react'
+
+      export function A (props: Props<any>) {
+        return <div />
+      }
+
+      interface Props<T> {
+        children: (input: T) => React.ReactNode
+      }
+    `);
+
+    const docs = parse(program, 'test.tsx', [componentParser]); //?
+
+    expect(docs).toHaveProperty('0.name', 'A');
+    expect(docs).toHaveProperty('0.type.kind', 'component');
+    expect(docs).toHaveProperty('0.type.props.0.kind', 'property');
+    expect(docs).toHaveProperty('0.type.props.0.name', 'children');
+    expect(docs).toHaveProperty('0.type.props.0.type.kind', 'function');
+  })
 });

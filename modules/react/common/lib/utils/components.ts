@@ -106,7 +106,7 @@ export type ExtractProps<
       : TElement extends keyof JSX.IntrinsicElements // `TElement` was defined, test if it is in `JSX.IntrinsicElements`
       ? P & ExtractHTMLAttributes<JSX.IntrinsicElements[TElement]> // `TElement` is in `JSX.IntrinsicElements`, return inferred props `P` + HTML attributes of `TElement`
       : P & ExtractProps<TElement> // `TElement` is not in `JSX.IntrinsicElements`, return inferred props `P` + props extracted from component `TElement`.
-    : TComponent extends Component<infer P> // test if `TComponent` is a `Component`, while inferring props `P`
+    : TComponent extends {__props: infer P} // test if `TComponent` is a `Component`, while inferring props `P`
     ? P // else attach only inferred props `P`
     : TComponent extends React.ComponentType<infer P> // test if `TComponent` is a `React.ComponentType` (class or functional component)
     ? P // it was a `React.ComponentType`, return inferred props `P`

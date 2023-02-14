@@ -1,4 +1,3 @@
-import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 import React from 'react';
 
 import {FunctionValue, FunctionParameter} from '../../docgen/docTypes';
