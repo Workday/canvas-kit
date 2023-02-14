@@ -11,8 +11,7 @@ any questions.
 - [Codemod](#codemod)
 - [Component Deprecations](#component-deprecations)
   - [Drawer](#drawer)
-  - [Layout and Column](#layout-and-column)
-	- [Stack](#stack-hstack-vstack)
+  - [Layout and Column](#layout-and-column) - [Stack](#stack-hstack-vstack)
 - [Component Updates](#component-updates)
   - [Buttons](#buttons)
 
@@ -82,6 +81,13 @@ that `SidePanel` from the Main package is planned to be replaced by the one from
 you use the Preview version of `SidePanel` until the one in Main is replaced with it.
 
 ---
+
+### Stack, HStack and vstack
+
+We've hard deprecated the `Stack`, `HStack` and `VStack` components along with it's props
+(`StackProps`, `HStackProps`, `VStackProps`, `StackStyleProps`). We recommend using the `Flex`
+component and replace the `spacing` prop with the `gap`. You can also run
+`npx @workday/canvas-kit-codemod softDeprecate/Stack`.
 
 ## Component Updates
 
