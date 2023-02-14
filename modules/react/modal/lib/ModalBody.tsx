@@ -12,23 +12,23 @@ import {space} from '@workday/canvas-kit-react/tokens';
 
 import {useModalHeading, useModalModel} from './hooks';
 
-export interface ModalHeadingProps extends ExtractProps<typeof Popup.Heading, never> {}
+export interface ModalHeadingProps extends ExtractProps<typeof Popup.Body, never> {}
 
-const ResponsiveModalHeading = styled(Popup.Heading)<ModalHeadingProps & StyledType>(({theme}) => {
+const ResponsiveModalHeading = styled(Popup.Body)<ModalHeadingProps & StyledType>(({theme}) => {
   const canvasTheme = getCanvasTheme(theme);
   return {
     [canvasTheme.breakpoints.down('s')]: {
       marginBottom: space.zero,
-      paddingTop: space.xxs,
+      paddingTop: space.xxxs,
       paddingLeft: space.xxs,
       paddingRight: space.xxs,
-      paddingBottom: space.xxxs,
+      paddingBottom: space.xxs,
     },
   };
 });
 
-export const ModalHeading = createSubcomponent('h2')({
-  displayName: 'Modal.Heading',
+export const ModalBody = createSubcomponent('div')({
+  displayName: 'Modal.Body',
   modelHook: useModalModel,
   elemPropsHook: useModalHeading,
 })<ModalHeadingProps>((elemProps, Element) => {

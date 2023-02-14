@@ -7,12 +7,13 @@ import {ModalCard} from './ModalCard';
 import {useModalModel} from './hooks';
 import {ModalHeading} from './ModalHeading';
 import {ModalOverflowOverlay} from './ModalOverflowOverlay';
+import {ModalBody} from './ModalBody';
 
 export const Modal = createContainer()({
   displayName: 'Modal',
   modelHook: useModalModel,
   subComponents: {
-    Body: Popup.Body,
+    Body: ModalBody,
     Card: ModalCard,
     CloseIcon: Popup.CloseIcon,
     Target: Popup.Target,
