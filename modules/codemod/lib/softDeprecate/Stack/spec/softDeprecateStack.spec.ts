@@ -347,6 +347,54 @@ describe('Canvas Kit Deprecate Stack Codemod', () => {
       expectTransform(input, expected);
     });
 
+    it('should properly transform shouldWrapChildren identifiers', () => {
+      const input = `
+      import {HStack} from '@workday/canvas-kit-react/layout';
+
+      export const BasicStack = () => (
+        <HStack border="solid 2px" shouldWrapChildren>
+          Hello World
+        </HStack>
+      );
+      `;
+
+      const expected = `
+      import {Flex} from '@workday/canvas-kit-react/layout';
+
+      export const BasicStack = () => (
+        <Flex border="solid 2px" >
+          Hello World
+        </Flex>
+      );
+      `;
+
+      expectTransform(input, expected);
+    });
+
+    it('should properly transform shouldWrapChildren identifiers', () => {
+      const input = `
+      import {VStack} from '@workday/canvas-kit-react/layout';
+
+      export const BasicStack = () => (
+        <VStack border="solid 2px" shouldWrapChildren>
+          Hello World
+        </VStack>
+      );
+      `;
+
+      const expected = `
+      import {Flex} from '@workday/canvas-kit-react/layout';
+
+      export const BasicStack = () => (
+        <Flex border="solid 2px"  flexDirection="column">
+          Hello World
+        </Flex>
+      );
+      `;
+
+      expectTransform(input, expected);
+    });
+
     it('should properly transform spacing identifiers to gap', () => {
       const input = `
       import {Stack} from '@workday/canvas-kit-react/layout';
@@ -355,6 +403,54 @@ describe('Canvas Kit Deprecate Stack Codemod', () => {
         <Stack border="solid 2px" spacing="l">
           Hello World
         </Stack>
+      );
+      `;
+
+      const expected = `
+      import {Flex} from '@workday/canvas-kit-react/layout';
+
+      export const BasicStack = () => (
+        <Flex border="solid 2px" gap="l">
+          Hello World
+        </Flex>
+      );
+      `;
+
+      expectTransform(input, expected);
+    });
+
+    it('should properly transform spacing identifiers to gap', () => {
+      const input = `
+      import {VStack} from '@workday/canvas-kit-react/layout';
+
+      export const BasicStack = () => (
+        <VStack border="solid 2px" spacing="l">
+          Hello World
+        </VStack>
+      );
+      `;
+
+      const expected = `
+      import {Flex} from '@workday/canvas-kit-react/layout';
+
+      export const BasicStack = () => (
+        <Flex border="solid 2px" gap="l" flexDirection="column">
+          Hello World
+        </Flex>
+      );
+      `;
+
+      expectTransform(input, expected);
+    });
+
+    it('should properly transform spacing identifiers to gap', () => {
+      const input = `
+      import {HStack} from '@workday/canvas-kit-react/layout';
+
+      export const BasicStack = () => (
+        <HStack border="solid 2px" spacing="l">
+          Hello World
+        </HStack>
       );
       `;
 
