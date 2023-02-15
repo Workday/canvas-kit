@@ -20,7 +20,6 @@ const ResponsiveModalHeading = styled(Popup.Heading)<ModalHeadingProps & StyledT
     [canvasTheme.breakpoints.down('s')]: {
       marginBottom: space.zero,
       padding: `${space.xxs} ${space.xxs} ${space.xxxs} ${space.xxs}`,
-      paddingBottom: space.xxxs,
     },
   };
 });
