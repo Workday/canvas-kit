@@ -1,6 +1,5 @@
 const path = require('node:path');
 const createCompiler = require('@storybook/addon-docs/mdx-compiler-plugin');
-const DocgenPlugin = require('./docgen-plugin');
 
 const modulesPath = path.resolve(__dirname, '../modules');
 const getSpecifications = require('../modules/docs/utils/get-specifications');
@@ -133,8 +132,6 @@ module.exports = {
       ],
       include: modulesPath,
     });
-
-    // config.plugins.push(new DocgenPlugin());
 
     // Remove progress updates to reduce log lines in Travis
     // See: https://github.com/storybookjs/storybook/issues/2029

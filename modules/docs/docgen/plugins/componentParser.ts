@@ -15,8 +15,6 @@ import t from '../traverse';
 import {ObjectProperty, Value} from '../docTypes';
 
 export const componentParser = createParserPlugin<ComponentValue>((node, parser) => {
-  t.getKindNameFromNode(node); //?
-
   /**
    * We'll look for class components that extend from `React.Component` or `Component`
    *
@@ -248,7 +246,7 @@ export function getDefaultsFromObjectBindingPattern(
   return {};
 }
 
-function getComponentFromFunction(parser: DocParser, node: ts.Node) {
+function getComponentFromFunction(parser: DocParser, node: ts.Node): ComponentValue | undefined {
   /**
    * Check all functions for a signature of a component
    */
