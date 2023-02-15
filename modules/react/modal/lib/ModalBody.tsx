@@ -10,7 +10,7 @@ import {
 import {Popup} from '@workday/canvas-kit-react/popup';
 import {space} from '@workday/canvas-kit-react/tokens';
 
-import {useModalHeading, useModalModel} from './hooks';
+import {useModalModel} from './hooks';
 
 export interface ModalHeadingProps extends ExtractProps<typeof Popup.Body, never> {}
 
