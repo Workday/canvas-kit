@@ -1,13 +1,14 @@
 name: "Reviewer Lottery"
+
 on:
   pull_request_target:
     types: [labeled]
 
 jobs:
-  test:
+  assign:
+    if: github.event.label.name == 'ready for review'
     runs-on: ubuntu-latest
     steps:
-    if: github.event.label.name == 'ready for review'
     - uses: actions/checkout@v1
     - uses: uesteibar/reviewer-lottery@v2
       with:
