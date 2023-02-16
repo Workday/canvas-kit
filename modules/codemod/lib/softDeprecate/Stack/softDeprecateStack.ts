@@ -276,24 +276,6 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
       }
     }
   });
-  root.find(j.JSXOpeningElement).forEach(nodePath => {
-    if (nodePath.node.type === 'JSXOpeningElement') {
-      if (nodePath.node.name.type === 'JSXIdentifier') {
-        if (stackImportNames.includes(nodePath.node.name.name)) {
-          nodePath.node.attributes?.forEach(path => {
-            if (path.type === 'JSXAttribute') {
-              if (path.name.name === 'spacing') {
-                path.name.name = 'gap';
-              }
-              if (path.name.name === 'shouldWrapChildren') {
-                path.name.name = '';
-              }
-            }
-          });
-        }
-      }
-    }
-  });
 
   // Transform styled compoents
   // e.g. `const StyledStack = styled(Stack)({});`

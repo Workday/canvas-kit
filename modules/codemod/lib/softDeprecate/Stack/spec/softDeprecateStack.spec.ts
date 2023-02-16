@@ -651,5 +651,33 @@ describe('Canvas Kit Deprecate Stack Codemod', () => {
 
       expectTransform(input, expected);
     });
+
+    it('should properly transform spacing identifiers to gap in nested components', () => {
+      const input = `
+      import {HStack, Stack} from '@workday/canvas-kit-react/layout';
+
+      export const BasicStack = () => (
+        <VStack spacing='xxxs'>
+          <Stack spacing='s' >
+            Hello World
+          </Stack>
+        </VStack>
+      );
+      `;
+
+      const expected = `
+      import { Flex } from '@workday/canvas-kit-react/layout';
+
+      export const BasicStack = () => (
+        <Flex gap='xxxs' flexDirection="column">
+          <Flex gap='s' >
+            Hello World
+          </Flex>
+        </Flex>
+      );
+      `;
+
+      expectTransform(input, expected);
+    });
   });
 });
