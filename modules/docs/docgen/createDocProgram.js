@@ -48,7 +48,7 @@ function getTSConfig(tsconfigPath) {
  * @return {{path: string, config: Config}}
  */
 function getConfig() {
-  const path = ts.findConfigFile('.', ts.sys.fileExists, 'doc.config.json') || '.';
+  const path = ts.findConfigFile(__dirname, ts.sys.fileExists, 'doc.config.json') || '.';
   const contents = path && ts.sys.readFile(path); //?
 
   return (contents && {path, config: JSON.parse(contents)}) || {path: '.', config: defaultConfig};
@@ -93,7 +93,7 @@ function getPlugins(basePath, config) {
     .map(plugin => {
       // figure out the relative path between this file location and the plugin location relative to
       // the config location
-      return require(path.dirname(basePath) + '/' + path.relative(__dirname, plugin));
+      return require(path.dirname(basePath) + '/' + plugin);
     })
     .map(getPluginFn);
 }

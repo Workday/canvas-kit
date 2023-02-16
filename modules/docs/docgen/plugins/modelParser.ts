@@ -290,7 +290,7 @@ export const modelParser = createParserPlugin<ModelHookValue | ModelValue>((node
 
     // Model config
 
-    const eventConfig = events.reduce((result, event) => {
+    const eventConfig = (events || []).reduce((result, event) => {
       const type = event.type as FunctionValue;
       event; //?
       // callback of the event

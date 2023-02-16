@@ -1,6 +1,15 @@
 {
   "glob": "modules/**/*.{ts,tsx}",
-  "ignore": ["**/examples/**", "**/spec/**", "**/stories/**", "**/codemod/**", "**/docs/**"],
+  "ignore": [
+    "**/examples/**",
+    "**/spec/**",
+    "**/stories/**",
+    "**/codemod/**",
+    "**/docs/**",
+    "**/css/**",
+    "*.d.ts",
+    "*.js"
+  ],
   "plugins": [
     "modules/docs/docgen/plugins/enhancedComponentParser.ts",
     "modules/docs/docgen/plugins/componentParser.ts",
