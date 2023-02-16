@@ -15,14 +15,9 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
   root.find(j.ImportDeclaration, (nodePath: ImportDeclaration) => {
     const value = nodePath.source.value;
     // If there's an import from the stack package, set the import boolean check to true
-    if (value === stackPackage) {
-      hasStackImports = true;
-      return false;
-    }
-
     // If there's an import from the main package, check to see if Stack or Stackprops are among the named imports
     // e.g. import {Stack} from '@workday/canvas-kit-react/layout';
-    if (value === mainPackage) {
+    if (value === mainPackage || value === stackPackage) {
       (nodePath.specifiers || []).forEach(specifier => {
         if (
           (specifier.type === 'ImportSpecifier' &&
@@ -157,20 +152,27 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
 
   // Transform Stack JSXElements
   // Transform `<Stack spacing="l">` to `<Flex gap="l">`
-  root
-    .findJSXElements('Stack')
-    .find(j.JSXIdentifier, {name: 'spacing'})
-    .forEach(nodePath => {
-      nodePath.node.name = 'gap';
-    });
-
-  // Transform Stack JSXElements
+  // Transform `<VStack spacing="l">` to `<Flex gap="l">`
+  // Transform `<HStack spacing="l">` to `<Flex gap="l">`
   // Transform `<Stack shouldWrapChildren>` to `<Flex >`
-  root
-    .findJSXElements('Stack')
-    .find(j.JSXIdentifier)
-    .filter(path => path.node.name === 'shouldWrapChildren')
-    .remove();
+  root.find(j.JSXOpeningElement).forEach(nodePath => {
+    if (nodePath.node.type === 'JSXOpeningElement') {
+      if (nodePath.node.name.type === 'JSXIdentifier') {
+        if (stackImportNames.includes(nodePath.node.name.name)) {
+          nodePath.node.attributes?.forEach(path => {
+            if (path.type === 'JSXAttribute') {
+              if (path.name.name === 'spacing') {
+                path.name.name = 'gap';
+              }
+              if (path.name.name === 'shouldWrapChildren') {
+                path.name.name = '';
+              }
+            }
+          });
+        }
+      }
+    }
+  });
 
   // Transform styled compoents
   // e.g. `const StyledStack = styled(Stack)({});`
