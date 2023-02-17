@@ -272,7 +272,11 @@ export const SymbolDoc = ({
     'callExpression',
   ].includes(doc?.type.kind || 'notFound');
 
-  const contents = requiresCodeWrapper ? <code>{children}</code> : children;
+  const contents = requiresCodeWrapper ? (
+    <code style={{display: 'block'}}>{children}</code>
+  ) : (
+    children
+  );
 
   return (
     <StyledSymbolDoc {...elemProps}>
