@@ -9,7 +9,7 @@ jobs:
     if: github.event.label.name == 'ready for review'
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - uses: uesteibar/reviewer-lottery@v2
       with:
         repo-token: ${{ secrets.GITHUB_TOKEN }}
