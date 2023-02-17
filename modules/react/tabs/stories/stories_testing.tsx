@@ -73,14 +73,20 @@ export const TabStates = withSnapshotsEnabled(() => (
   </>
 ));
 
-export const BasicTabs = withSnapshotsEnabled(() => {
-  return <Basic />;
-});
-
-BasicTabs.parameters.chromatic.viewports = [480, 1200];
-
-export const RTL = withSnapshotsEnabled(() => {
-  return <RightToLeft />;
+export const Bidirectionality = withSnapshotsEnabled(() => {
+  return (
+    <>
+      <h3>Left-to-right</h3>
+      <div>
+        <Basic />
+      </div>
+      <br />
+      <h3>Right-to-left</h3>
+      <div>
+        <RightToLeft />
+      </div>
+    </>
+  );
 });
 
 export const Overflow = withSnapshotsEnabled(() => {
@@ -128,3 +134,5 @@ export const Overflow = withSnapshotsEnabled(() => {
     </StaticStates>
   );
 });
+
+Overflow.parameters.chromatic.viewports = [480, 1200];
