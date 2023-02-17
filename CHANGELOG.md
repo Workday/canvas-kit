@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v8.4.10](https://github.com/Workday/canvas-kit/releases/tag/v8.4.10) (2023-02-14)
+
+### Codemods
+
+- fix: Fixed an issue with codemod not recognizing VStack or HStack ([#2036](https://github.com/Workday/canvas-kit/pull/2036)) ([@josh-bagwell](https://github.com/josh-bagwell))
+
+### Infrastructure
+
+- chore: Adding step to add label for PR review ([#2027](https://github.com/Workday/canvas-kit/pull/2027)) ([@jaclynjessup](https://github.com/jaclynjessup))
+- ci: Adding action to auto assign PR reviewer on label ([#2031](https://github.com/Workday/canvas-kit/pull/2031)) ([@jaclynjessup](https://github.com/jaclynjessup))
+
+
 ## [v8.4.9](https://github.com/Workday/canvas-kit/releases/tag/v8.4.9) (2023-02-07)
 
 ### Documentation
