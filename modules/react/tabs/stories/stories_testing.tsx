@@ -89,7 +89,7 @@ export const Bidirectionality = withSnapshotsEnabled(() => {
   );
 });
 
-export const Overflow = withSnapshotsEnabled(() => {
+const OverflowTabs = () => {
   const [items] = React.useState<MyTabItem[]>([
     {id: 'first', text: 'First Tab', contents: 'Contents of First Tab'},
     {id: 'second', text: 'Second Tab', contents: 'Contents of Second Tab'},
@@ -100,6 +100,31 @@ export const Overflow = withSnapshotsEnabled(() => {
     {id: 'seventh', text: 'Seventh Tab', contents: 'Contents of Seventh Tab'},
   ]);
 
+  return (
+    <Tabs items={items}>
+      <Tabs.List overflowButton={<Tabs.OverflowButton>More</Tabs.OverflowButton>}>
+        {(item: MyTabItem) => <Tabs.Item>{item.text}</Tabs.Item>}
+      </Tabs.List>
+      <Tabs.Menu.Popper>
+        <Tabs.Menu.Card maxWidth={300} maxHeight={200}>
+          <Tabs.Menu.List>
+            {(item: MyTabItem) => <Tabs.Menu.Item>{item.text}</Tabs.Menu.Item>}
+          </Tabs.Menu.List>
+        </Tabs.Menu.Card>
+      </Tabs.Menu.Popper>
+      <Tabs.Panels>
+        {(item: MyTabItem) => <Tabs.Panel marginTop="m">{item.contents}</Tabs.Panel>}
+      </Tabs.Panels>
+    </Tabs>
+  );
+};
+
+export const Overflow = withSnapshotsEnabled(() => {
+  return <OverflowTabs />;
+});
+Overflow.parameters.chromatic.viewports = [480, 1200];
+
+export const ContainerWidth = withSnapshotsEnabled(() => {
   return (
     <StaticStates>
       <ComponentStatesTable
@@ -113,26 +138,10 @@ export const Overflow = withSnapshotsEnabled(() => {
       >
         {({width}) => (
           <Box width={width}>
-            <Tabs items={items}>
-              <Tabs.List overflowButton={<Tabs.OverflowButton>More</Tabs.OverflowButton>}>
-                {(item: MyTabItem) => <Tabs.Item>{item.text}</Tabs.Item>}
-              </Tabs.List>
-              <Tabs.Menu.Popper>
-                <Tabs.Menu.Card maxWidth={300} maxHeight={200}>
-                  <Tabs.Menu.List>
-                    {(item: MyTabItem) => <Tabs.Menu.Item>{item.text}</Tabs.Menu.Item>}
-                  </Tabs.Menu.List>
-                </Tabs.Menu.Card>
-              </Tabs.Menu.Popper>
-              <Tabs.Panels>
-                {(item: MyTabItem) => <Tabs.Panel marginTop="m">{item.contents}</Tabs.Panel>}
-              </Tabs.Panels>
-            </Tabs>
+            <OverflowTabs />
           </Box>
         )}
       </ComponentStatesTable>
     </StaticStates>
   );
 });
-
-Overflow.parameters.chromatic.viewports = [480, 1200];
