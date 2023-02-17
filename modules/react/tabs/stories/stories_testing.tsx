@@ -120,8 +120,13 @@ const OverflowTabs = () => {
 };
 
 export const Overflow = withSnapshotsEnabled(() => {
-  return <OverflowTabs />;
+  return (
+    <Box width="360px">
+      <OverflowTabs />
+    </Box>
+  );
 });
+
 Overflow.parameters.chromatic.viewports = [480, 1200];
 
 export const ContainerWidth = withSnapshotsEnabled(() => {
