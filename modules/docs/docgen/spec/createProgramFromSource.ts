@@ -41,7 +41,6 @@ export function createProgramFromSource(...args: any[]) {
 
   const customCompilerHost: ts.CompilerHost = {
     getSourceFile: (name, languageVersion) => {
-      name; //?
       // Get the file from our mock list, but read source lib files
       ts.sys.readFile;
       return (

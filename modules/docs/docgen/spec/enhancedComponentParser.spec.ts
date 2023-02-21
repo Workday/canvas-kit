@@ -17,7 +17,7 @@ describe('enhancedComponentParser', () => {
         }
       `
       );
-      const symbols = parse(program, 'test.tsx', [enhancedComponentParser]); //?
+      const symbols = parse(program, 'test.tsx', [enhancedComponentParser]);
 
       expect(symbols).toHaveProperty('0.name', 'Props');
       expect(symbols).toHaveProperty('0.type.kind', 'object');
@@ -52,7 +52,7 @@ describe('enhancedComponentParser', () => {
         )
       `);
 
-      const symbols = parse(program, 'test.ts', [enhancedComponentParser]); //?
+      const symbols = parse(program, 'test.ts', [enhancedComponentParser]);
 
       expect(symbols).toHaveProperty('0.name', 'useMyComponent');
       expect(symbols).toHaveProperty('0.type.kind', 'function');
@@ -100,7 +100,7 @@ describe('enhancedComponentParser', () => {
         )
       `);
 
-      const symbols = parse(program, 'test.ts', [enhancedComponentParser]); //?
+      const symbols = parse(program, 'test.ts', [enhancedComponentParser]);
 
       const temp = {
         ref(instance: HTMLElement | null) { return 'foo' }
@@ -152,7 +152,7 @@ describe('enhancedComponentParser', () => {
         export const useHook2 = undefined
       `);
 
-      const symbols = parse(program, 'test.ts', [enhancedComponentParser]); //?
+      const symbols = parse(program, 'test.ts', [enhancedComponentParser]);
       expect(symbols).toHaveProperty('0.name', 'useMyComponent');
       expect(symbols).toHaveProperty('0.type.kind', 'callExpression');
       expect(symbols).toHaveProperty('0.type.name.kind', 'symbol');
@@ -197,7 +197,7 @@ describe('enhancedComponentParser', () => {
         export const useHook2 = undefined
       `);
 
-      const symbols = parse(program, 'test.ts', [enhancedComponentParser]); //?
+      const symbols = parse(program, 'test.ts', [enhancedComponentParser]);
 
       expect(symbols).toHaveProperty('0.name', 'useMyComponent');
       expect(symbols).toHaveProperty('0.type.kind', 'callExpression');
@@ -236,7 +236,7 @@ describe('enhancedComponentParser', () => {
       export const useHook2 = undefined
     `);
 
-    const symbols = parse(program, 'test.ts', [enhancedComponentParser]); //?
+    const symbols = parse(program, 'test.ts', [enhancedComponentParser]);
 
     expect(symbols).toHaveProperty('0.name', 'useMyComponent');
     expect(symbols).toHaveProperty('0.type.kind', 'callExpression');
@@ -274,7 +274,7 @@ describe('enhancedComponentParser', () => {
         }
       `
       );
-      const symbols = parse(program, 'test.tsx', [enhancedComponentParser]); //?
+      const symbols = parse(program, 'test.tsx', [enhancedComponentParser]);
 
       expect(symbols).toHaveProperty('0.name', 'MyComponent');
       expect(symbols).toHaveProperty('0.type.kind', 'enhancedComponent');
@@ -308,7 +308,7 @@ describe('enhancedComponentParser', () => {
         }
       `
       );
-      const symbols = parse(program, 'test.tsx', [enhancedComponentParser]); //?
+      const symbols = parse(program, 'test.tsx', [enhancedComponentParser]);
 
       expect(symbols).toHaveProperty('0.name', 'MyComponent');
       expect(symbols).toHaveProperty('0.type.kind', 'enhancedComponent');
@@ -342,7 +342,7 @@ describe('enhancedComponentParser', () => {
         }
       `
       );
-      const symbols = parse(program, 'test.tsx', [enhancedComponentParser]); //?
+      const symbols = parse(program, 'test.tsx', [enhancedComponentParser]);
 
       expect(symbols).toHaveProperty('0.name', 'MyComponent');
       expect(symbols).toHaveProperty('0.type.kind', 'enhancedComponent');
@@ -374,7 +374,7 @@ describe('enhancedComponentParser', () => {
         }
       `
       );
-      const symbols = parse(program, 'test.tsx', [enhancedComponentParser]); //?
+      const symbols = parse(program, 'test.tsx', [enhancedComponentParser]);
 
       expect(symbols).toHaveProperty('0.name', 'MyComponent');
       expect(symbols).toHaveProperty('0.type.kind', 'enhancedComponent');
@@ -405,7 +405,7 @@ describe('enhancedComponentParser', () => {
         }
       `
       );
-      const symbols = parse(program, 'test.tsx', [enhancedComponentParser]); //?
+      const symbols = parse(program, 'test.tsx', [enhancedComponentParser]);
 
       expect(symbols).toHaveProperty('0.name', 'MyComponent');
       expect(symbols).toHaveProperty('0.type.kind', 'enhancedComponent');
@@ -437,7 +437,7 @@ describe('enhancedComponentParser', () => {
       `
       );
 
-      const symbols = parse(program, 'test.tsx', [enhancedComponentParser]); //?
+      const symbols = parse(program, 'test.tsx', [enhancedComponentParser]);
 
       expect(symbols).toHaveProperty('0.name', 'MyComponent');
       expect(symbols).toHaveProperty('0.type.kind', 'enhancedComponent');
@@ -471,7 +471,7 @@ describe('enhancedComponentParser', () => {
       `
       );
 
-      const symbols = parse(program, 'test.tsx', [enhancedComponentParser]); //?
+      const symbols = parse(program, 'test.tsx', [enhancedComponentParser]);
 
       expect(symbols).toHaveProperty('0.name', 'MyComponent');
       expect(symbols).toHaveProperty('0.type.kind', 'enhancedComponent');
@@ -504,7 +504,7 @@ describe('enhancedComponentParser', () => {
       `
       );
 
-      const symbols = parse(program, 'test.tsx', [enhancedComponentParser]); //?
+      const symbols = parse(program, 'test.tsx', [enhancedComponentParser]);
 
       expect(symbols).toHaveProperty('0.name', 'MyComponent');
       expect(symbols).toHaveProperty('0.type.kind', 'enhancedComponent');
@@ -547,7 +547,7 @@ describe('enhancedComponentParser', () => {
       `
       );
 
-      const symbols = parse(program, 'test.tsx', [enhancedComponentParser]); //?
+      const symbols = parse(program, 'test.tsx', [enhancedComponentParser]);
 
       expect(symbols).toHaveProperty('0.name', 'MyComponent');
       expect(symbols).toHaveProperty('0.type.kind', 'enhancedComponent');
@@ -586,7 +586,7 @@ describe('enhancedComponentParser', () => {
       `
       );
 
-      const symbols = parse(program, 'test.tsx', [enhancedComponentParser]); //?
+      const symbols = parse(program, 'test.tsx', [enhancedComponentParser]);
 
       expect(symbols).toHaveProperty('0.name', 'MyComponent');
       expect(symbols).toHaveProperty('0.type.kind', 'enhancedComponent');
@@ -628,7 +628,7 @@ describe('enhancedComponentParser', () => {
       `
       );
 
-      const symbols = parse(program, 'test.tsx', [enhancedComponentParser]); //?
+      const symbols = parse(program, 'test.tsx', [enhancedComponentParser]);
 
       expect(symbols).toHaveProperty('0.name', 'MyComponent');
       expect(symbols).toHaveProperty('0.type.kind', 'enhancedComponent');
@@ -669,7 +669,7 @@ describe('enhancedComponentParser', () => {
       `
       );
 
-      const symbols = parse(program, 'test.tsx', [enhancedComponentParser]); //?      expect(symbols).toHaveProperty('0.name', 'MyComponent');
+      const symbols = parse(program, 'test.tsx', [enhancedComponentParser]);      expect(symbols).toHaveProperty('0.name', 'MyComponent');
       expect(symbols).toHaveProperty('0.type.kind', 'enhancedComponent');
       expect(symbols).toHaveProperty('0.type.displayName', 'My.Component');
       expect(symbols).toHaveProperty('0.type.elemPropsHook', 'useMyComponent');
@@ -703,7 +703,7 @@ describe('enhancedComponentParser', () => {
       `
       );
 
-      const symbols = parse(program, 'test.tsx', [enhancedComponentParser]); //?      expect(symbols).toHaveProperty('0.name', 'MyComponent');
+      const symbols = parse(program, 'test.tsx', [enhancedComponentParser]);      expect(symbols).toHaveProperty('0.name', 'MyComponent');
       expect(symbols).toHaveProperty('0.type.kind', 'enhancedComponent');
       expect(symbols).toHaveProperty('0.type.displayName', 'My.Component');
       expect(symbols).toHaveProperty('0.type.baseElement.kind', 'symbol');

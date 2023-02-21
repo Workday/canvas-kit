@@ -136,8 +136,6 @@ type SupportedValues =
   | SubModelElemPropsHookValue;
 
 export const enhancedComponentParser = createParserPlugin<SupportedValues>((node, parser) => {
-  t.getKindNameFromNode(node); //?
-
   /**
    * Filter out props from `@types/react`
    */
@@ -217,8 +215,8 @@ export const enhancedComponentParser = createParserPlugin<SupportedValues>((node
       t.isIdentifier(modelArgument) &&
       t.isIdentifier(otherElemPropsHook)
     ) {
-      const modelName = modelArgument.text.replace('use', ''); //?
-      const otherElemPropsHookName = otherElemPropsHook.text; //?
+      const modelName = modelArgument.text.replace('use', '');
+      const otherElemPropsHookName = otherElemPropsHook.text;
 
       return {
         kind: 'callExpression',
@@ -249,7 +247,6 @@ export const enhancedComponentParser = createParserPlugin<SupportedValues>((node
         ],
       } as CallExpression;
     }
-    'here'; //?
   }
 
   /**
@@ -267,7 +264,7 @@ export const enhancedComponentParser = createParserPlugin<SupportedValues>((node
       const modelArgument = node.expression.arguments[0];
       // first argument in the curried function of `createElemPropsHook`
       if (modelArgument && t.isIdentifier(modelArgument)) {
-        const modelName = modelArgument.text.replace('use', ''); //?
+        const modelName = modelArgument.text.replace('use', '');
         const type = parser.checker.getTypeAtLocation(node.arguments[0]);
         const signature = type.getCallSignatures()[0];
         const elemProps = getElemPropsFromElemPropsHook(parser, signature);
@@ -319,7 +316,6 @@ export const enhancedComponentParser = createParserPlugin<SupportedValues>((node
     return undefined;
   }
 
-  t.getKindNameFromNode(node); //?
   if (
     t.isVariableDeclaration(node) &&
     t.isIdentifier(node.name) &&
@@ -359,7 +355,6 @@ export const enhancedComponentParser = createParserPlugin<SupportedValues>((node
     node.initializer &&
     t.isCallExpression(node.initializer)
   ) {
-    'here'; //?
     const name = node.name.text;
     const elemPropsHookValue = getElemPropsHookValue(node.initializer, name);
     if (elemPropsHookValue) {
@@ -407,7 +402,7 @@ export const enhancedComponentParser = createParserPlugin<SupportedValues>((node
      * })
      * ```
      */
-    const options = node.initializer.arguments[0]; //?
+    const options = node.initializer.arguments[0];
     if (options && t.isObjectLiteralExpression(options)) {
       const signature = options.properties.find(
         n => n.name && t.isIdentifier(n.name) && n.name.text === 'Component'
@@ -416,7 +411,6 @@ export const enhancedComponentParser = createParserPlugin<SupportedValues>((node
       const subComponents = getSubcomponents(parser, options);
 
       if (signature) {
-        'here'; //?
         const componentExpression = t.isMethodDeclaration(signature)
           ? signature
           : t.isPropertyAssignment(signature)
@@ -451,20 +445,18 @@ export const enhancedComponentParser = createParserPlugin<SupportedValues>((node
     t.isIdentifier(node.initializer.expression.expression.expression) &&
     node.initializer.expression.expression.expression.text === 'createContainer'
   ) {
-    'here'; //?
     const baseElement = getBaseElement(parser, node.initializer.expression.expression.arguments[0]);
     const options = node.initializer.expression.arguments[0];
-    const modelName = getModelName(parser, options); //?
+    const modelName = getModelName(parser, options);
     const displayName = getDisplayName(parser, options);
     const subComponents = getSubcomponents(parser, options);
     const elemPropsHook = getElemPropsHook(parser, options);
-    t.getKindNameFromNode(options); //?
     const signature = node.initializer.arguments[0];
     if (ts.isFunctionLike(signature) && modelName) {
       const type = node.initializer.typeArguments
         ? parser.checker.getTypeAtLocation(node.initializer.typeArguments[0])
         : undefined;
-      const props = type ? getComponentProps(parser, signature, type, baseElement) : []; //?
+      const props = type ? getComponentProps(parser, signature, type, baseElement) : [];
       props.push(getModelProp(parser, modelName));
       props.push(getElemProp(parser, modelName));
       const styleComponent = getStyleComponent(displayName, props);
@@ -492,10 +484,9 @@ export const enhancedComponentParser = createParserPlugin<SupportedValues>((node
     t.isIdentifier(node.initializer.expression.expression.expression) &&
     node.initializer.expression.expression.expression.text === 'createSubcomponent'
   ) {
-    'here'; //?
     const baseElement = getBaseElement(parser, node.initializer.expression.expression.arguments[0]);
     const options = node.initializer.expression.arguments[0];
-    const modelName = getModelName(parser, options); //?
+    const modelName = getModelName(parser, options);
     const subComponents = getSubcomponents(parser, options);
     const elemPropsHook = getElemPropsHook(parser, options);
     const displayName = getDisplayName(parser, options);
@@ -504,7 +495,7 @@ export const enhancedComponentParser = createParserPlugin<SupportedValues>((node
       const type = node.initializer.typeArguments
         ? parser.checker.getTypeAtLocation(node.initializer.typeArguments[0])
         : undefined;
-      const props = type ? getComponentProps(parser, signature, type, baseElement) : []; //?
+      const props = type ? getComponentProps(parser, signature, type, baseElement) : [];
       props.push(getModelProp(parser, modelName));
       props.push(getElemProp(parser, modelName));
       const styleComponent = getStyleComponent(displayName, props);
@@ -568,7 +559,7 @@ function getReturnTypeFromElemPropsHook(
   signature?: ts.Signature
 ): SupportedValues | Value {
   if (signature) {
-    const type = signature.getReturnType(); //?
+    const type = signature.getReturnType();
     // A TypeNode is a synthetic AST representation of a type. No truncation removes the `... 12 more ...`
     const typeNode = parser.checker.typeToTypeNode(
       type,
@@ -592,13 +583,13 @@ function getElemPropsFromElemPropsHook(
   signature?: ts.Signature
 ): Value {
   if (signature) {
-    const elemPropsParam = signature.getParameters()[2]; //?
+    const elemPropsParam = signature.getParameters()[2];
     if (!elemPropsParam) {
       return {kind: 'object', properties: []};
     }
-    const elemPropsNode = getValueDeclaration(elemPropsParam); //?
+    const elemPropsNode = getValueDeclaration(elemPropsParam);
     if (elemPropsNode && t.isParameter(elemPropsNode)) {
-      return (parser.getValueFromNode(elemPropsNode) as FunctionParameter).type as Value; //?
+      return (parser.getValueFromNode(elemPropsNode) as FunctionParameter).type as Value;
     }
   }
 
@@ -621,7 +612,7 @@ function getElemPropsHook(
     ) {
       // Check if the elemProps is aliased to another hook
       // for example, `const useMyComponent = useMyOtherComponent`
-      const symbol = getSymbolFromNode(parser.checker, subComponentProperty.initializer); //?
+      const symbol = getSymbolFromNode(parser.checker, subComponentProperty.initializer);
       const declaration = getValueDeclaration(symbol);
       if (
         declaration &&
@@ -643,7 +634,6 @@ function getSubcomponents(
   node: ts.Expression
 ): EnhancedComponentValue['subComponents'] {
   if (t.isObjectLiteralExpression(node)) {
-    'here'; //?
     const subComponentProperty = node.properties.find(
       p => p.name && t.isIdentifier(p.name) && p.name.text === 'subComponents'
     );

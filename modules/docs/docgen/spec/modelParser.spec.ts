@@ -18,8 +18,7 @@ describe('modelParser', () => {
         };
       });
     `);
-    const symbols = parse(program, 'test.ts', [modelParser]); //?
-    // ts.sys.writeFile('model.json', JSON.stringify(symbols, null, '  '))
+    const symbols = parse(program, 'test.ts', [modelParser]);
 
     // modelHook
     expect(symbols).toHaveProperty('0.name', 'useIdModel');
@@ -99,7 +98,7 @@ describe('modelParser', () => {
     const program = createProgramFromSource(`
       export type MyType = ReturnType<typeof useMyModel>
     `);
-    const symbols = parse(program, 'test.ts', [modelParser]); //?
+    const symbols = parse(program, 'test.ts', [modelParser]);
 
     // ts.sys.writeFile('model.json', JSON.stringify(symbols, null, '  ')) // uncomment to see full JSON
     expect(symbols).toHaveProperty('0.name', 'MyType');
@@ -123,7 +122,7 @@ describe('modelParser', () => {
         };
       });
     `);
-    const symbols = parse(program, 'test.ts', [modelParser]); //?
+    const symbols = parse(program, 'test.ts', [modelParser]);
 
     expect(symbols).toHaveProperty('0.name', 'useIdModel');
     expect(symbols).toHaveProperty('0.type.kind', 'modelHook');
@@ -151,7 +150,7 @@ describe('modelParser', () => {
       });
       export const useSubModel = (config: any) => ({state: {}, events: {}})
     `);
-    const symbols = parse(program, 'test.ts', [modelParser]); //?
+    const symbols = parse(program, 'test.ts', [modelParser]);
 
     expect(symbols).toHaveProperty('1.name', 'IdModel');
     expect(symbols).toHaveProperty('1.type.kind', 'model');

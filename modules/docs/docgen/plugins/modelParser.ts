@@ -15,8 +15,6 @@ function capitalize(string: string) {
 }
 
 export const modelParser = createParserPlugin<ModelHookValue | ModelValue>((node, parser) => {
-  t.getKindNameFromNode(node); //?
-
   /**
    * Replace submenus with symbols rather than types.
    *
@@ -70,7 +68,6 @@ export const modelParser = createParserPlugin<ModelHookValue | ModelValue>((node
             t.isIdentifier(node.initializer.expression) &&
             node.initializer.expression.text.includes('Model')
           ) {
-            node.initializer.expression.text; //?
             return {
               kind: 'symbol',
               name: node.initializer.expression.text.replace('use', ''),
@@ -78,9 +75,7 @@ export const modelParser = createParserPlugin<ModelHookValue | ModelValue>((node
           }
           return;
         })
-        .filter(v => !!v)[0]; //?
-
-      originalDeclaration; //?
+        .filter(v => !!v)[0];
 
       if (originalDeclaration) {
         const jsDoc = symbol ? getFullJsDocComment(checker, symbol) : defaultJSDoc;
@@ -202,18 +197,16 @@ export const modelParser = createParserPlugin<ModelHookValue | ModelValue>((node
     node.initializer.expression.expression.text === 'createModelHook'
   ) {
     // we have a model
-    const modelName = node.name.text.replace('use', ''); //?
+    const modelName = node.name.text.replace('use', '');
 
     // get the symbol for the model hook
     const symbol = getSymbolFromNode(parser.checker, node);
     const jsDoc = symbol ? getFullJsDocComment(parser.checker, symbol) : defaultJSDoc;
 
-    const options = node.initializer.expression.arguments[0]; //?
-    // let configProps: Record<string, Value[]> = {};
+    const options = node.initializer.expression.arguments[0];
 
     const optionsType = parser.checker.getTypeAtLocation(options);
     const configProps = optionsType.getProperties().reduce((result, symbol) => {
-      symbol; //?
       if (['defaultConfig', 'requiredConfig'].includes(symbol.getName())) {
         // The declaration of the config
         const declaration = getValueDeclaration(symbol);
@@ -236,7 +229,7 @@ export const modelParser = createParserPlugin<ModelHookValue | ModelValue>((node
 
     const modelProps: Record<string, ObjectProperty[]> = {};
     const returnProps: Record<string, ObjectProperty> = {};
-    const type = parser.checker.getTypeAtLocation(node.initializer.arguments[0]); //?
+    const type = parser.checker.getTypeAtLocation(node.initializer.arguments[0]);
     const returnValue = type.getCallSignatures().map(s => {
       return s
         .getReturnType()
@@ -244,16 +237,11 @@ export const modelParser = createParserPlugin<ModelHookValue | ModelValue>((node
         .reduce((result, p) => {
           const declaration = getValueDeclaration(p);
           if (declaration) {
-            p.getName(); //?
-            t.getKindNameFromNode(declaration); //?
-            declaration; //?
             if (['state', 'events'].includes(p.getName())) {
               modelProps[p.getName()] = parser.checker
                 .getTypeAtLocation(declaration)
                 .getProperties()
                 .map(prop => {
-                  prop.getName(); //?
-                  t.getKindNameFromNode(getValueDeclaration(prop)!); //?
                   return {
                     ...(parser.getValueFromNode(getValueDeclaration(prop)!) as ObjectProperty),
                     defaultValue: undefined, // no defaults for state/events
@@ -264,9 +252,8 @@ export const modelParser = createParserPlugin<ModelHookValue | ModelValue>((node
             }
           }
           return result;
-        }, returnProps); //?
+        }, returnProps);
     });
-    returnValue[0]; //?
 
     const {state, events} = modelProps;
 
@@ -292,7 +279,6 @@ export const modelParser = createParserPlugin<ModelHookValue | ModelValue>((node
 
     const eventConfig = (events || []).reduce((result, event) => {
       const type = event.type as FunctionValue;
-      event; //?
       // callback of the event
       result.push({
         ...event,

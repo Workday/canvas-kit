@@ -185,8 +185,7 @@ export function getComponentProps(
   const props = type
     .getProperties()
     .map(symbol => {
-      symbol.getJsDocTags(); //?
-      const defaultValue = defaultProps[symbol.name] || getDefaultFromTags(symbol.getJsDocTags()); //?
+      const defaultValue = defaultProps[symbol.name] || getDefaultFromTags(symbol.getJsDocTags());
 
       const value = parser.getValueFromNode(getValueDeclaration(symbol)!);
       if (value.kind === 'property') {
@@ -265,7 +264,7 @@ function getComponentFromFunction(parser: DocParser, node: ts.Node): ComponentVa
               // the likelihood
               return undefined;
             }
-            const defaults = getDefaultsFromObjectBindingPattern(parser, declaration.name); //?
+            const defaults = getDefaultsFromObjectBindingPattern(parser, declaration.name);
             const props = getComponentProps(parser, type, defaults);
 
             return {
@@ -274,8 +273,6 @@ function getComponentFromFunction(parser: DocParser, node: ts.Node): ComponentVa
             };
           }
         }
-
-        'here'; //?
 
         // We couldn't find props
         return {

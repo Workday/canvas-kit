@@ -64,7 +64,7 @@ function rewriteHeadingLevels(input: string, startingLevel: number) {
     return input;
   }
 
-  const firstHeadingLevel = firstHeadingMatch[1]; //?
+  const firstHeadingLevel = firstHeadingMatch[1];
 
   return input.replace(
     new RegExp(firstHeadingLevel, 'g'),
