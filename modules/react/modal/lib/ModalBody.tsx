@@ -12,7 +12,7 @@ import {space} from '@workday/canvas-kit-react/tokens';
 
 import {useModalModel} from './hooks';
 
-export interface ModalHeadingProps extends ExtractProps<typeof Popup.Body, never> {}
+export interface ModalBodyProps extends ExtractProps<typeof Popup.Body, never> {}
 
 const ResponsiveModalBody = styled(Popup.Body)<ModalBodyProps & StyledType>(({theme}) => {
   const canvasTheme = getCanvasTheme(theme);
