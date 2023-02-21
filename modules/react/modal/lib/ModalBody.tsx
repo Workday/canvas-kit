@@ -14,7 +14,7 @@ import {useModalModel} from './hooks';
 
 export interface ModalHeadingProps extends ExtractProps<typeof Popup.Body, never> {}
 
-const ResponsiveModalHeading = styled(Popup.Body)<ModalHeadingProps & StyledType>(({theme}) => {
+const ResponsiveModalBody = styled(Popup.Body)<ModalBodyProps & StyledType>(({theme}) => {
   const canvasTheme = getCanvasTheme(theme);
   return {
     [canvasTheme.breakpoints.down('s')]: {
