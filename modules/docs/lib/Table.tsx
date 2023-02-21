@@ -57,7 +57,7 @@ const TableData = createComponent('td')({
         paddingX="xxs"
         paddingY="s"
         textAlign="start"
-        typeLevel="subtext.medium"
+        typeLevel="subtext.large"
         {...props}
       />
     );

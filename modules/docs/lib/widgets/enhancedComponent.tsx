@@ -100,14 +100,14 @@ registerWidget<EnhancedComponentValue>('enhancedComponent', ({value, doc, meta})
       <Heading headingOffset={1}>Props</Heading>
       {value.baseElement && (
         <MDX as="p">
-          Props extend from <Value value={value.baseElement} />. Changing the{' '}
-          <MDX as="code">as</MDX> prop will change the element interface.
+          Props extend from <Value value={value.baseElement} />. Changing the <code>as</code> prop
+          will change the element interface.
         </MDX>
       )}
       {value.componentType === 'container' && value.model ? (
         <MDX as="p">
           Props extend from <SymbolDialog value={{kind: 'symbol', name: `${value.model}Config`}} />.
-          If a <MDX as="code">model</MDX> is passed, model config is ignored.
+          If a <code>model</code> is passed, model config is ignored.
         </MDX>
       ) : null}
       {Object.keys(groups).map(key => {

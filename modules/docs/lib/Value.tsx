@@ -52,7 +52,11 @@ export const PropertiesInline = ({properties}: {properties: types.ObjectProperty
             <br />
             {space(level + 1)}
             {p.description ? (
-              <Tooltip style={{maxWidth: '50em'}} title={<MdxJSToJSX>{p.description}</MdxJSToJSX>}>
+              <Tooltip
+                type="describe"
+                style={{maxWidth: '50em'}}
+                title={<MdxJSToJSX>{p.description}</MdxJSToJSX>}
+              >
                 <span className="token property">{p.name}</span>
               </Tooltip>
             ) : (
@@ -99,7 +103,13 @@ function getTableRows(
       <Table.Row key={index + i}>
         <Table.Data color="plum600">
           {/* Use a tooltip to help with debugging where the type sources are coming from */}
-          {title ? <Tooltip title={title}>{propName}</Tooltip> : propName}
+          {title ? (
+            <Tooltip type="describe" title={title}>
+              {propName}
+            </Tooltip>
+          ) : (
+            propName
+          )}
         </Table.Data>
         <Table.Data>
           <code>
@@ -115,7 +125,11 @@ function getTableRows(
         </Table.Data>
         {showDefault ? (
           <Table.Data>
-            <code>{property.defaultValue ? <Value value={property.defaultValue} /> : null}</code>
+            {property.defaultValue ? (
+              <code>
+                <Value value={property.defaultValue} />
+              </code>
+            ) : null}
           </Table.Data>
         ) : null}
       </Table.Row>,
