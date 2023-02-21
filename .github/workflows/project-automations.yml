@@ -63,6 +63,7 @@ jobs:
           organization: ${{ env.gh_organization }}
           project_id: ${{ env.gh_project_id }}
           resource_node_id: ${{ github.event.issue.node_id }}
+          operation_mode: custom_field
           custom_field_values: '[{\"name\": \"Contributions\",\"type\": \"single_select\",\"value\": \"Yes\"}]'
       - name: Move Issue to ${{ env.in_review }}
         if: github.event.label.name == 'ready for review'
@@ -81,6 +82,7 @@ jobs:
           organization: ${{ env.gh_organization }}
           project_id: ${{ env.gh_project_id }}
           resource_node_id: ${{ github.event.issue.node_id }}
+          operation_mode: custom_field
           custom_field_values: '[{\"name\": \"Type\",\"type\": \"single_select\",\"value\": \"🐛 Bug\"}]'
       - name: Add Issue Type - Epic
         if: github.event.label.name == 'epic'
@@ -90,6 +92,7 @@ jobs:
           organization: ${{ env.gh_organization }}
           project_id: ${{ env.gh_project_id }}
           resource_node_id: ${{ github.event.issue.node_id }}
+          operation_mode: custom_field
           custom_field_values: '[{\"name\": \"Type\",\"type\": \"single_select\",\"value\": \"⚓️ Epic\"}]'
       - name: Add Issue Type - Spike
         if: github.event.label.name == 'spike'
@@ -99,14 +102,25 @@ jobs:
           organization: ${{ env.gh_organization }}
           project_id: ${{ env.gh_project_id }}
           resource_node_id: ${{ github.event.issue.node_id }}
+          operation_mode: custom_field
           custom_field_values: '[{\"name\": \"Type\",\"type\": \"single_select\",\"value\": \"🏐 Spike\"}]'
+      - name: Add Issue Type - Infrastructure
+        if: github.event.label.name == 'infra'
+        uses: leonsteinhaeuser/project-beta-automations@v2.0.1
+        with:
+          gh_token: ${{ env.gh_project_token }}
+          organization: ${{ env.gh_organization }}
+          project_id: ${{ env.gh_project_id }}
+          resource_node_id: ${{ github.event.issue.node_id }}
+          operation_mode: custom_field
+          custom_field_values: '[{\"name\": \"Type\",\"type\": \"single_select\",\"value\": \"🧰 Infrastructure\"}]'
   pr_opened:
     name: pr_opened
     runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request' && github.event.action == 'opened'
+    if: github.event_name == 'pull_request_target' && github.event.action == 'opened'
     steps:
       - name: Move release PR to ${{ env.in_review }}
-        if: startsWith(github.head_ref, 'merge/prerelease/minor-into-prerelease/major') || startsWith(github.head_ref, 'merge/master-into-prerelease/minor') || startsWith(github.head_ref, 'dependabot/**')
+        if: startsWith(github.head_ref, 'merge/**') || startsWith(github.head_ref, 'dependabot/**')
         uses: leonsteinhaeuser/project-beta-automations@v2.0.1
         with:
           gh_token: ${{ env.gh_project_token }}
@@ -114,4 +128,5 @@ jobs:
           project_id: ${{ env.gh_project_id }}
           resource_node_id: ${{ github.event.pull_request.node_id }}
           status_value: ${{ env.in_review }}
-          custom_field_values: '[{\"name\": \"Priority\",\"type\": \"single_select\",\"value\": \"🌋 Urgent\"}, {\"name\": \"Sprint\",\"type\": \"iteration\",\"value\": \"@current\"}]'
+          operation_mode: custom_field
+          custom_field_values: '[{\"name\": \"Priority\",\"type\": \"single_select\",\"value\": \"🌋 Urgent\"},{\"name\": \"Sprint\",\"type\": \"iteration\",\"value\": \"@current\"}]'
