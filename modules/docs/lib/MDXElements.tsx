@@ -78,7 +78,6 @@ function rewriteHeadingLevels(input: string, startingLevel: number) {
 export const MdxJSToJSX = (props: {children: string}) => {
   const components = useMDXComponents();
   const headingLevel = React.useContext(HeadingLevelContext);
-  console.log('heading level', headingLevel);
   return (
     <MarkdownToJSX options={{overrides: {...components, button: Button}, forceBlock: true}}>
       {rewriteHeadingLevels(convertLinkToSymbolLinks(props.children), headingLevel)}

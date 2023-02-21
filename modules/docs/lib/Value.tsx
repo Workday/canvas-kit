@@ -86,7 +86,6 @@ function getTableRows(
 ): JSX.Element[] {
   return properties.flatMap((property, i) => {
     if (!property) {
-      console.log('property not found?', i);
       return [];
     }
     const title = property.declarations?.[0]?.filePath;

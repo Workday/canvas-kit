@@ -46,7 +46,6 @@ export function updateDocs(updatedDocs: ExportedSymbol[]) {
   updatedDocs.forEach(doc => {
     const foundIndex = docs.findIndex(d => d.fileName === doc.fileName && d.name === doc.name);
     if (foundIndex !== -1) {
-      console.log('replacing', docs[foundIndex].name);
       // we need to replace the doc with updates
       subscriptions.forEach(s => {
         if (s.name === doc.name && s.fileName ? s.fileName === doc.fileName : true) {

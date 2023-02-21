@@ -136,8 +136,8 @@ function getValueFromNode(parser: DocParser, node: ts.Node): Value {
  */
 function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
   const {checker} = parser;
-  // const type = checker.typeToString(checker.getTypeAtLocation(node));
-  // console.log(t.getKindNameFromNode(node) || node.kind, safeGetText(checker, node), type);
+  // Uncomment for debugging
+  // console.log(t.getKindNameFromNode(node) || node.kind, safeGetText(checker, node), checker.typeToString(checker.getTypeAtLocation(node)));
 
   /**
    * A tuple type is an array with positional types.
