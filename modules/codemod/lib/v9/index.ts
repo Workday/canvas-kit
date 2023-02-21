@@ -1,6 +1,6 @@
 import {Transform} from 'jscodeshift';
 
-import softDeprecateStack from '../softDeprecate/Stack/softDeprecateStack';
+import softDeprecateStack from './deprecateStack';
 
 const transform: Transform = (file, api, options) => {
   // These will run in order. If your transform depends on others, place yours after dependent transforms
