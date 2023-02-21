@@ -1,70 +1,137 @@
 import React from 'react';
 
+import {checkIcon} from '@workday/canvas-system-icons-web';
 import {colors} from '@workday/canvas-kit-react/tokens';
-import {ContentDirection} from '@workday/canvas-kit-react/common';
+
 import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
-import {exclamationCircleIcon} from '@workday/canvas-system-icons-web';
 import {Toast} from '@workday/canvas-kit-react/toast';
 
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
 
 export default withSnapshotsEnabled({
-  title: 'Testing/Popups/Toast',
+  title: 'Testing/Toast',
   component: Toast,
 });
 
-const ToastStates = ({direction = ContentDirection.LTR}) => (
-  <StaticStates theme={{canvas: {direction}}}>
-    <ComponentStatesTable
-      rowProps={[
-        {label: 'Default', props: {}},
-        {label: 'Custom Icon', props: {icon: exclamationCircleIcon}},
-        {
-          label: 'Custom Icon Color',
-          props: {icon: exclamationCircleIcon, iconColor: colors.cinnamon500},
-        },
-        {label: 'On Close', props: {onClose: () => console.log('close button clicked')}},
-        {
-          label: 'With Action Link',
-          props: {
-            onActionClick: () => console.log('action button clicked'),
-            actionText: 'View More Details',
-          },
-        },
-        {
-          label: 'With Action Link and Multiple Lines',
-          props: {
-            children: 'Your workbook was successfully processed. Congratulation!',
-            onActionClick: () => console.log('action button clicked'),
-            actionText: 'View More Details',
-          },
-        },
-      ]}
-      columnProps={[{label: 'Default', props: {}}]}
-    >
-      {({children, ...props}) => (
-        <Toast style={{animation: 'none'}} aria-label="Play" {...props}>
-          {children || 'Successfully processed.'}
-        </Toast>
-      )}
-    </ComponentStatesTable>
-  </StaticStates>
-);
-
-export const ToastStatesLeftToRight = () => {
+export const ToastStates = withSnapshotsEnabled(() => {
   return (
-    <>
-      <h2>Left-To-Right Toast</h2>
-      <ToastStates />
-    </>
+    <StaticStates>
+      <ComponentStatesTable
+        rowProps={[
+          {
+            label: 'Default',
+            props: {
+              mode: 'polite',
+            },
+          },
+          {
+            label: 'With Icon',
+            props: {
+              mode: 'polite',
+              icon: checkIcon,
+              iconColor: colors.greenApple400,
+            },
+          },
+          {
+            label: 'On Close',
+            props: {
+              mode: 'polite',
+              hasCloseIcon: true,
+            },
+          },
+          {
+            label: 'With Action',
+            props: {
+              mode: 'interactive',
+              hasAction: true,
+            },
+          },
+          {
+            label: 'With small padding',
+            props: {
+              mode: 'polite',
+              hasCloseIcon: true,
+              padding: 's',
+            },
+          },
+          {
+            label: 'With no depth',
+            props: {
+              mode: 'polite',
+              hasCloseIcon: true,
+              depth: 'none',
+            },
+          },
+          {
+            label: 'With depth value set to 1',
+            props: {
+              mode: 'polite',
+              hasCloseIcon: true,
+              depth: 1,
+            },
+          },
+          {
+            label: 'With depth value set to 2',
+            props: {
+              mode: 'polite',
+              hasCloseIcon: true,
+              depth: 2,
+            },
+          },
+          {
+            label: 'With depth value set to 3',
+            props: {
+              mode: 'polite',
+              hasCloseIcon: true,
+              depth: 3,
+            },
+          },
+          {
+            label: 'With depth value set to 4',
+            props: {
+              mode: 'polite',
+              hasCloseIcon: true,
+              depth: 4,
+            },
+          },
+          {
+            label: 'With depth value set to 5',
+            props: {
+              mode: 'polite',
+              hasCloseIcon: true,
+              depth: 5,
+            },
+          },
+          {
+            label: 'With depth value set to 6',
+            props: {
+              mode: 'polite',
+              hasCloseIcon: true,
+              depth: 6,
+            },
+          },
+          {
+            label: 'With custom width',
+            props: {
+              mode: 'polite',
+              hasCloseIcon: true,
+              width: 300,
+            },
+          },
+        ]}
+        columnProps={[{label: 'Default', props: {}}]}
+      >
+        {({mode, hasCloseIcon, hasAction, icon, iconColor, ...props}) => (
+          <Toast mode={hasAction ? 'dialog' : mode} {...props}>
+            <Toast.Body>
+              {icon ? <Toast.Icon icon={icon} color={iconColor} /> : null}
+              <Toast.Message>Your workbook was successfully processed.</Toast.Message>
+              {hasAction ? <Toast.Link href="#href">Custom Link</Toast.Link> : null}
+            </Toast.Body>
+            {hasCloseIcon ? <Toast.CloseIcon aria-label="Close" /> : null}
+          </Toast>
+        )}
+      </ComponentStatesTable>
+    </StaticStates>
   );
-};
-
-export const ToastStatesRightToLeft = () => {
-  return (
-    <>
-      <h2>Right-To-Left Toast</h2>
-      <ToastStates direction={ContentDirection.RTL} />
-    </>
-  );
-};
+});

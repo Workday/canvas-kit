@@ -1,10 +1,10 @@
-import {Meta} from '@storybook/addon-docs';
+import {Meta} from '@storybook/addon-docs/blocks';
 
 import {Toast} from '@workday/canvas-kit-react/toast';
-import {Success} from './examples/Success';
-import {Error} from './examples/Error';
+import {Basic} from './examples/Basic';
+import {ToastAlert} from './examples/ToastAlert';
 import {WithCloseButton} from './examples/WithCloseButton';
-import {WithActionLink} from './examples/WithActionLink';
+import {ToastDialog} from './examples/ToastDialog';
 import {WithActionLinkAndCloseIcon} from './examples/WithActionLinkAndCloseIcon';
 import {WithPopper} from './examples/WithPopper';
 import {RTL} from './examples/RTL';
@@ -13,10 +13,8 @@ import {RTL} from './examples/RTL';
 
 # Canvas Kit Toast
 
-`Toast` is a Canvas-styled React toast component. It allows for a brief message to be be shown about
-a process or action occurring in the app.
-
-[> Workday Design Reference](https://design.workday.com/components/popups/toasts)
+`Toast` is a [compound component](/getting-started/for-developers/resources/compound-components/)
+that contains updates or messages about the status of an application's process.
 
 ## Installation
 
@@ -26,42 +24,163 @@ yarn add @workday/canvas-kit-react
 
 ## Usage
 
-### Basic Usage
+### Basic Example
 
-Below are examples we expect will work for most use cases. Note that all examples include icons as
-they are an important signifier to communicate meaning. For this reason, Toast notifications should
-always include an icon.
+`Toast` includes a container `Toast` component and the following subcomponents: `Toast.Body`,
+`Toast.CloseIcon`, `Toast.Icon`, `Toast.Message`, and `Toast.Link`.
 
-#### Complete Example with Popper
+`Toast` supports different modes through the `mode` prop: `status`, `alert`, and `dialog`. Each mode
+conveys a different purpose of the message and assigns the necessary ARIA attributes to support that
+purpose and provide an accessible experience.
 
-We use Popper to position Toast. Here's an example of how to use them together.
+By default, `mode` is set to `status`, which indicates the message contains advisory information
+such as a successful action.
+
+<ExampleCodeBlock code={Basic} />
+
+A `status` `Toast` will wrap the message within a `polite` ARIA live region with a `role` of
+`status`.
+
+Here's a more complete example with a button which triggers a dismissable `Toast`. The `Toast` is
+positioned using `Popper`.
 
 <ExampleCodeBlock code={WithPopper} />
 
-#### Success
+### Alert
 
-<ExampleCodeBlock code={Success} />
+Set the `mode` prop to `alert` to convey urgent and important information such as an error.
 
-#### Error
+<ExampleCodeBlock code={ToastAlert} />
 
-<ExampleCodeBlock code={Error} />
+An `alert` `Toast` will wrap the message within an `assertive` ARIA live region with a `role` of
+`alert`.
 
-#### WithCloseButton
+### Dialog
+
+Set the `mode` prop to `dialog` to convey the presence of a follow-up action.
+
+<ExampleCodeBlock code={ToastDialog} />
+
+The `Toast` will be given a role of `dialog` along with an `aria-label` to indicate that it's a
+notification.
+
+> **Note**: You must use the `Toast.Message` subcomponent when the `mode` is `dialog` so that `id`
+> is tied to the message for accessibility. You can also pass in a `model` with `useToastModel` to
+> provide a specific `id` for the `Toast.Message`:
+
+```tsx
+export const CustomIDToast = () => {
+  const model = useToastModel({
+    id: '12df5',
+    mode: 'dialog',
+  });
+  return (
+    <Toast model={model}>
+      <Toast.Icon icon={checkIcon} color={colors.greenApple400} />
+      <Toast.Body>
+        <Toast.Message>Your workbook was successfully processed.</Toast.Message>
+        <Toast.Link href="#href">View More Details</Toast.Link>
+      </Toast.Body>
+    </Toast>
+  );
+};
+```
+
+### Close Icon Button
+
+Include the `Toast.CloseIcon` subcomponent to display a close button within the Toast.
 
 <ExampleCodeBlock code={WithCloseButton} />
 
-#### With an Action Link
-
-<ExampleCodeBlock code={WithActionLink} />
-
-#### With an Action Link and CloseIcon
+`Toast.CloseIcon` may be included within a `dialog` `Toast` to create a `Toast` with both an action
+link and a close button.
 
 <ExampleCodeBlock code={WithActionLinkAndCloseIcon} />
 
-#### With RTL
+### Right-to-Left (RTL)
+
+`Toast` supports right-to-left languages when specified in the `CanvasProvider` `theme`.
 
 <ExampleCodeBlock code={RTL} />
 
-## Props
+## Components
+
+### Toast
+
+#### Usage
+
+`Toast` defines a container for all `Toast` subcomponents. `Toast` will render with the appropriate
+ARIA attributes based on which `mode` is selected. It also accepts a `model` if you wish to provide
+a specific `id`.
+
+`Toast` renders a `Popup.Card` under the hood.
+
+#### Props
 
 <ArgsTable of={Toast} />
+
+### Toast.Body
+
+#### Usage
+
+`Toast.Body` defines a container for the contents of the `Toast`, including `Toast.Message` and
+`Toast.Link`.
+
+`Toast.Body` renders a `Popup.Body` under the hood.
+
+#### Props
+
+<ArgsTable of={Toast.Body} />
+
+### Toast.Icon
+
+#### Usage
+
+`Toast.Icon` renders a decorative icon for the `Toast`. When using `Toast.Icon`, be sure to set a
+complementary `mode` to the `Toast`. For example, if the icon conveys an error, set the `mode` to
+`alert`.
+
+`Toast.Icon` renders a `SystemIcon` under the hood.
+
+#### Props
+
+<ArgsTable of={Toast.Icon} />
+
+### Toast.Message
+
+#### Usage
+
+`Toast.Message` defines a container for the message of the `Toast`. It accepts any `React.ReactNode`
+as its children. `Toast.Message` is assigned a unique `id` so that it may be read aloud by screen
+readers when the `Toast` `mode` is set to `dialog`.
+
+`Toast.Message` renders a `Box` under the hood.
+
+#### Props
+
+<ArgsTable of={Toast.Message} />
+
+### Toast.Link
+
+#### Usage
+
+Use `Toast.Link` to provide an action in the `Toast`. `Toast.Link` should always be used in
+conjunction with `dialog` `mode` to provide an accessible experience.
+
+`Toast.Link` renders a `Hyperlink` under the hood.
+
+#### Props
+
+<ArgsTable of={Toast.Link} />
+
+### Toast.CloseIcon
+
+#### Usage
+
+Use `Toast.CloseIcon` to provide a close button to dismiss the `Toast`.
+
+`Toast.Link` renders a `Popup.CloseIcon` under the hood.
+
+#### Props
+
+<ArgsTable of={Toast.CloseIcon} />
