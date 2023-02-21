@@ -30,6 +30,6 @@ const ResponsiveModalBody = styled(Popup.Body)<ModalBodyProps & StyledType>(({th
 export const ModalBody = createSubcomponent('div')({
   displayName: 'Modal.Body',
   modelHook: useModalModel,
-})<ModalHeadingProps>((elemProps, Element) => {
+})<ModalBodyProps>((elemProps, Element) => {
   return <ResponsiveModalHeading as={Element} {...elemProps} />;
 });
