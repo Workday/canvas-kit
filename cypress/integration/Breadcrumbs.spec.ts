@@ -139,7 +139,7 @@ describe('Breadcrumbs', () => {
         getDropdownButton().should('have.attr', 'aria-controls', 'menu');
       });
 
-      context('when action list container is only 440px wide', () => {
+      context('when action list container is only 480px wide', () => {
         beforeEach(() => {
           cy.findByRole('button', {name: '480px'}).click();
         });
