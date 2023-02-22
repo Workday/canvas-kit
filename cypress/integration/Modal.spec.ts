@@ -159,7 +159,7 @@ describe('Modal', () => {
 
         context(`when clicking outside the modal on mobile view`, () => {
           beforeEach(() => {
-            cy.viewport(380, 720);
+            cy.viewport('iphone-x');
             cy.get('body').realTouch();
           });
 
