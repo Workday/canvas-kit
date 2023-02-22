@@ -5,7 +5,6 @@ import {resetIcon} from '@workday/canvas-system-icons-web';
 import {Card} from '@workday/canvas-kit-react/card';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {StaticStates} from '@workday/canvas-kit-react/common';
-import {Text} from '@workday/canvas-kit-react/text';
 
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
 
@@ -135,9 +134,9 @@ export const PlacementsFocus = withSnapshotsEnabled(() => {
           className="focus"
           ref={ref}
         >
-          <Text whiteSpace="normal" textOverflow="initial" overflow="visible">
+          <span style={{whiteSpace: 'normal', textOverflow: 'initial', overflow: 'visible'}}>
             Target: We set font to sans serif so we don't have to wait for roboto to load
-          </Text>
+          </span>
         </SecondaryButton>
         {placements.map(placement => (
           <Popper
