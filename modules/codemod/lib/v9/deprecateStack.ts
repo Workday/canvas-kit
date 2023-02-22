@@ -5,18 +5,15 @@ const stackPackage = '@workday/canvas-kit-react/layout';
 const stackImportNames = ['Stack', 'HStack', 'VStack'];
 const stackImportProps = ['StackProps', 'HStackProps', 'VStackProps', 'StackStyleProps'];
 const altImportSpecifier = ['ActionBar', 'Breadcrumbs', 'Menu', 'Pagination', 'Tabs'];
-const altImportNames = ['action-bar', 'breadcrumbs', 'menu', 'pagination', 'tabs'];
-const altPackage: any[] = [];
-altImportNames.forEach(name => {
-  const importPackage = mainPackage + '/' + name;
-  altPackage.push(importPackage);
-});
+const altImportNamesIncludes = ['action-bar', 'breadcrumbs', 'menu', 'pagination', 'tabs'];
+const altPackages = altImportNamesIncludes.map(name => `${mainPackage}/${name}`);
 
 export default function transformer(file: FileInfo, api: API, options: Options) {
   const j = api.jscodeshift;
 
   const root = j(file.source);
   let hasStackImports = false;
+  const importedComponentNames: string[] = [];
 
   // This toggles the failsafe that prevents us from accidentally transforming something unintentionally.
   root.find(j.ImportDeclaration, (nodePath: ImportDeclaration) => {
@@ -24,16 +21,14 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
 
     // If there's an import from ActionBar, Breadcrumbs, Menu, Pagination or Tabs package,
     // set the import boolean check to true
-    if (altPackage.includes(value)) {
-      hasStackImports = true;
-      return false;
-    }
-
     // If there's an import from the main package, check to see if Stack, ActionBar, Breadcrumbs,
     // Menu, Pagination or Tabs or Stackprops are among the named imports
     // e.g. import {Stack} from '@workday/canvas-kit-react/layout';
     // e.g. import {Menu} from '@workday/canvas-kit-react/menu';
-    if (value === mainPackage || value === stackPackage) {
+    if (
+      typeof value === 'string' &&
+      (value === mainPackage || value === stackPackage || altPackages.includes(value))
+    ) {
       (nodePath.specifiers || []).forEach(specifier => {
         if (
           (specifier.type === 'ImportSpecifier' &&
@@ -43,6 +38,8 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
           (specifier.type === 'ImportSpecifier' &&
             altImportSpecifier.includes(specifier.imported.name))
         ) {
+          console.log('here!', specifier.imported.name);
+          importedComponentNames.push(specifier.imported.name);
           hasStackImports = true;
         }
       });
@@ -50,7 +47,7 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
     return false;
   });
 
-  // Failsafe to skip transforms unless a Stack import is detected
+  // Failsafe to skip transforms unless a specific import is detected
   if (!hasStackImports) {
     return root.toSource();
   }
@@ -180,18 +177,6 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
   // Transform `spacing` key that is in type interface
   // e.g. `spacing: SystemPropValues['space']`
   // becomes `gap: FlexProps['gap']`
-  root
-    .find(j.JSXIdentifier, {
-      type: 'JSXIdentifier',
-    })
-    .forEach(nodePath => {
-      if (nodePath.node.type === 'JSXIdentifier') {
-        if (spacingName.includes(nodePath.node.name)) {
-          nodePath.node.name = 'gap';
-        }
-      }
-    });
-
   root.find(j.TSLiteralType, {type: 'TSLiteralType'}).forEach(nodePath => {
     if (nodePath.node.literal.type === 'StringLiteral') {
       if (spacingName.includes(nodePath.node.literal.value)) {
@@ -200,52 +185,18 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
     }
   });
 
-  // Transform `spacing` prop in createComponent to `gap`
-  // Component: ({spacing, ...elemProps}: StackProps,
-  // Component: ({gap, ...elemProps}: FlexProps,
-  root.find(j.ArrowFunctionExpression, {type: 'ArrowFunctionExpression'}).forEach(nodePath => {
-    nodePath.node.params?.forEach(path => {
-      if (path.type === 'ObjectPattern') {
-        path.properties?.forEach(obj => {
-          if (obj.type === 'ObjectProperty') {
-            if (obj.key.type === 'Identifier') {
-              if (spacingName.includes(obj.key.name)) {
-                obj.key.name = 'gap';
-              }
-            }
-          }
-        });
-      }
-    });
-  });
-
-  // Transform `spacing` JSXIdentifier and value to `gap`
-  // e.g. return <StyledContainer spacing={spacing} {...elemProps} />
-  // becomes return <StyledContainer gap={gap} {...elemProps} />
-  root.find(j.JSXOpeningElement, {type: 'JSXOpeningElement'}).forEach(nodePath => {
-    nodePath.node.attributes?.forEach(attr => {
-      if (attr.type === 'JSXAttribute') {
-        if (attr.value?.type === 'JSXExpressionContainer') {
-          if (attr.value.expression.type === 'Identifier') {
-            if (spacingName.includes(attr.value.expression.name)) {
-              attr.value.expression.name = 'gap';
-            }
-          }
-        }
-      }
-    });
-  });
-
   // Transforms `as` prop Stack, HStack or VStack values to `Flex`
   // e.g. <Card as={Stack} spacing="s" />
-  // becomes <Card as={Flex} spacing="s" />
+  // becomes <Card as={Flex} gap="s" />
   root.find(j.JSXOpeningElement, {type: 'JSXOpeningElement'}).forEach(nodePath => {
+    let isCastAsStack = false;
     nodePath.node.attributes?.forEach(attr => {
       if (attr.type === 'JSXAttribute') {
         if (attr.name.name === 'as') {
           if (attr.value?.type === 'JSXExpressionContainer') {
             if (attr.value.expression.type === 'Identifier') {
               if (stackImportNames.includes(attr.value.expression.name)) {
+                isCastAsStack = true;
                 attr.value.expression.name = 'Flex';
               }
             }
@@ -253,6 +204,15 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
         }
       }
     });
+    if (isCastAsStack) {
+      nodePath.node.attributes?.forEach(attr => {
+        if (attr.type === 'JSXAttribute') {
+          if (attr.name.name === 'spacing') {
+            attr.name.name = 'gap';
+          }
+        }
+      });
+    }
   });
 
   // Transform Stack, HStack and VStack JSXElements
@@ -261,7 +221,7 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
   root.find(j.JSXOpeningElement).forEach(nodePath => {
     if (nodePath.node.type === 'JSXOpeningElement') {
       if (nodePath.node.name.type === 'JSXIdentifier') {
-        if (stackImportNames.includes(nodePath.node.name.name)) {
+        if (importedComponentNames.includes(nodePath.node.name.name)) {
           nodePath.node.attributes?.forEach(path => {
             if (path.type === 'JSXAttribute') {
               if (path.name.name === 'spacing') {
@@ -272,6 +232,32 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
               }
             }
           });
+        }
+      }
+    }
+  });
+
+  // Transform spacing on JSXMemberExpression
+  // Transform `<Stack.Item spacing="l">` to `<Flex.Item gap="l">`
+  root.find(j.JSXOpeningElement).forEach(nodePath => {
+    if (nodePath.node.type === 'JSXOpeningElement') {
+      if (nodePath.node.name.type === 'JSXMemberExpression') {
+        if (nodePath.node.name.object.type === 'JSXIdentifier') {
+          const nodePathName = nodePath.node.name.object.name;
+          if (altImportSpecifier.includes(nodePathName)) {
+            if (
+              nodePath.node.name.property.name === 'List' ||
+              nodePath.node.name.property.name === 'Item'
+            ) {
+              nodePath.node.attributes?.forEach(path => {
+                if (path.type === 'JSXAttribute') {
+                  if (path.name.name === 'spacing') {
+                    path.name.name = 'gap';
+                  }
+                }
+              });
+            }
+          }
         }
       }
     }
