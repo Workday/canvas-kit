@@ -19,10 +19,7 @@ const ResponsiveModalBody = styled(Popup.Body)<ModalBodyProps & StyledType>(({th
   return {
     [canvasTheme.breakpoints.down('s')]: {
       marginBottom: space.zero,
-      paddingTop: space.xxxs,
-      paddingLeft: space.xxs,
-      paddingRight: space.xxs,
-      paddingBottom: space.xxs,
+      padding: `${space.xxxs} ${space.xxs} ${space.xxs} ${space.xxs}`,
     },
   };
 });
