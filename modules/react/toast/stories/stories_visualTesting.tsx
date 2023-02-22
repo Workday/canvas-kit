@@ -9,7 +9,7 @@ import {Toast} from '@workday/canvas-kit-react/toast';
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
 
 export default withSnapshotsEnabled({
-  title: 'Testing/Toast',
+  title: 'Testing/Popups/Toast',
   component: Toast,
 });
 

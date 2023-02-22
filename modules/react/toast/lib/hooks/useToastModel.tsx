@@ -12,7 +12,7 @@ export const useToastModel = createModelHook({
      */
     mode: 'status' as AriaRoleMode,
     /**
-     * When the Toast has a `mode="dialog"` this adds a unique id to type the `Toast.Message` to the dialog.
+     * When the Toast has a `mode="dialog"` this adds a unique id to `Toast.Message` so that the message gets read out for screen readers.
      */
     id: '',
   },

@@ -13,6 +13,24 @@ import {useToastModel} from './hooks/useToastModel';
 
 export interface ToastProps extends Omit<ExtractProps<typeof Popup.Card, never>, 'model'> {}
 
+/**
+ *
+ * @example
+ * ```tsx
+ * import { Toast } from "@workday/canvas-kit-react/toast";
+ *
+ * const MyToast = (props: CardProps) => (
+ *    <Toast mode="dialog">
+ *      <Toast.Icon icon={checkIcon} color={colors.greenApple400} />
+ *      <Toast.Body>
+ *        <Toast.Message>Your workbook was successfully processed.</Toast.Message>
+ *        <Toast.Link href="#hreflink">Custom Link</Toast.Link>
+ *      </Toast.Body>
+ *      <Toast.CloseIcon aria-label="Close" onClick={handleClose} />
+ *    </Toast>
+ * );
+ *```
+ */
 export const Toast = createContainer('div')({
   displayName: 'Toast',
   modelHook: useToastModel,
