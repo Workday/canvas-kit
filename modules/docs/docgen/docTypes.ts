@@ -9,7 +9,6 @@ export interface Declaration {
   filePath: string;
 }
 
-/** Object parameters are used in function parameters, component props, and model config */
 export interface ObjectProperty extends JSDoc {
   kind: 'property';
   name: string;
@@ -28,7 +27,11 @@ export interface FunctionParameter extends JSDoc {
   rest?: boolean;
 }
 
-/** Top level symbols exported by files */
+/**
+ * Top level symbols exported by a file. An `ExportedSymbol` is some type of declaration using the
+ * `export` keyword. Exported means it could be used by other code and we may want it to be
+ * documented.
+ */
 export interface ExportedSymbol<T = any> extends JSDoc {
   name: string;
   packageName: string;
@@ -65,7 +68,10 @@ export type Value =
   | InferValue
   | UnknownValue;
 
-/** A value meant to link to an exported symbol. This should be treated like a pointer to an `ExportedSymbol` by name */
+/**
+ * A value meant to link to an exported symbol. This should be treated like a pointer to an
+ * `ExportedSymbol` by name
+ */
 export interface SymbolValue {
   kind: 'symbol';
   name: string;
@@ -74,11 +80,30 @@ export interface SymbolValue {
   value?: string;
   typeParameters?: TypeParameter[];
 }
+
+/**
+ * A generic value is a Typescript generic
+ *
+ * ```ts
+ * const A<T> = null
+ * ```
+ *
+ * I this example, the `T` is the generic
+ */
 export interface GenericValue {
   kind: 'generic';
   name: string;
 }
 
+/**
+ * All object-like values:
+ * - interface `interface A {}
+ * - type literals: `type A = {}`
+ * - enum `enum A = {}`
+ * - JS object `const a = {}`
+ *
+ * Objects have properties.
+ */
 export interface ObjectValue {
   kind: 'object';
   properties: ObjectProperty[];
@@ -87,28 +112,72 @@ export interface ObjectValue {
   indexSignature?: IndexSignatureValue;
 }
 
+/**
+ * All array-like values except for {@link TupleValue}. Could be types or values.
+ */
 export interface ArrayValue {
   kind: 'array';
   value: Value;
 }
 
+/**
+ * `IndexedAccessValue` is anything referring to a property by a sting index:
+ *
+ * ```ts
+ * A['b']
+ * ```
+ *
+ * Types access properties this way.
+ */
 export interface IndexedAccessValue {
   kind: 'indexedAccess';
   object: Value;
   index: Value;
 }
 
+/**
+ * `QualifiedNameValue` is a dot notation of property access of an object or can access types of a
+ * Typescript namespace:
+ *
+ * ```ts
+ * const a = { b: 'b' }
+ * a.b // value access via qualified name
+ *
+ * namespace A {
+ *   interface B {}
+ * }
+ * A.B // access a type from a namespace via qualified name
+ * ```
+ */
 export interface QualifiedNameValue {
   kind: 'qualifiedName';
   left: Value;
   right: Value;
 }
 
+/**
+ * Value using a parenthesis
+ *
+ * ```ts
+ * (A)
+ * ```
+ *
+ * Maintaining the parenthesis allows representation of more complex types.
+ */
 export interface ParenthesisValue {
   kind: 'parenthesis';
   value: Value;
 }
 
+/**
+ * A type parameter is a generic with optional constraints.
+ *
+ * ```ts
+ * type A<T extends string = 'a'>
+ * ```
+ *
+ * The TypeParameters is the `<T extends string = 'a'>`
+ */
 export interface TypeParameter {
   kind: 'typeParameter';
   name: string;
@@ -117,6 +186,13 @@ export interface TypeParameter {
   required: boolean;
 }
 
+/**
+ * A value representing the `keyof` keyword.
+ *
+ * ```ts
+ * keyof A
+ * ```
+ */
 export interface KeyofValue {
   kind: 'keyof';
   name: SymbolValue;
@@ -144,6 +220,34 @@ export interface TypeValue {
   typeParameters: TypeParameter[];
 }
 
+/**
+ * Conditional types in Typescript. This allows more complex representations of types:
+ *
+ * ```ts
+ * type A<T> = T extends string ? true : false
+ * ```
+ *
+ * // output
+ * {
+ *   kind: 'conditional',
+ *   check: {
+ *     kind: 'generic',
+ *     name: 'T'
+ *   },
+ *   extends: {
+ *     kind: 'primitive',
+ *     value: 'string'
+ *   },
+ *   trueType: {
+ *     kind: 'boolean',
+ *     value: true
+ *   },
+ *   falseType: {
+ *     kind: 'boolean',
+ *     value: false
+ *   }
+ * }
+ */
 export interface ConditionalTypeValue {
   kind: 'conditional';
   check: Value;

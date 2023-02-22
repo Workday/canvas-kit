@@ -14,26 +14,6 @@ import {
 import {getExternalSymbol} from './getExternalSymbol';
 import t, {find} from './traverse';
 
-// merge function keeps Typescript happy, otherwise it complains about plugins not being compatible
-export function mergeParserPlugins<T1 extends {kind: string}, T2 extends {kind: string}>(
-  plugin1: ParserPlugin<T1>,
-  plugin2: ParserPlugin<T2>
-): ParserPlugin<T1 | T2>[];
-export function mergeParserPlugins<
-  T1 extends {kind: string},
-  T2 extends {kind: string},
-  T3 extends {kind: string}
->(
-  plugin1: ParserPlugin<T1>,
-  plugin2: ParserPlugin<T2>,
-  plugin3: ParserPlugin<T3>
-): ParserPlugin<T1 | T2 | T3>[];
-export function mergeParserPlugins<T extends {kind: string}>(
-  ...plugins: ParserPlugin<T>[]
-): ParserPlugin<T>[] {
-  return plugins as any;
-}
-
 export class DocParser<T extends {kind: string} = any> {
   /** A shared reference to the Typescript type checker */
   public checker: ts.TypeChecker;
@@ -49,6 +29,9 @@ export class DocParser<T extends {kind: string} = any> {
     this.checker = program.getTypeChecker();
   }
 
+  /**
+   * Get all {@link ExportedSymbol}s from a file.
+   */
   getExportedSymbols(fileName: string): ExportedSymbol<T | Value>[] {
     const symbols: ExportedSymbol[] = [];
     const sourceFile = this.program.getSourceFile(fileName);
@@ -285,10 +268,6 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
    * In this example, the TypeLiteral is `{ C: 'c' }`.
    */
   if (t.isTypeLiteral(node)) {
-    // const type = checker.getTypeAtLocation(node);
-    // const properties = type.getProperties().map<ObjectProperty>(p => {
-    //   return getValueFromNode(parser, getValueDeclaration(p)!) as ObjectProperty;
-    // }).filter(filterObjectProperties);
     const properties = node.members
       .map(member => {
         return getValueFromNode(parser, member);
@@ -1101,11 +1080,6 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
       return value;
     }
   }
-
-  // if (ts.isTypeNode(node)) {
-  //   const type = checker.getTypeAtLocation(node);
-  //   return getValueFromType(parser, type) || unknownValue(safeGetText(checker, node));
-  // }
 
   const symbol = getSymbolFromNode(checker, node);
   if (!symbol) {

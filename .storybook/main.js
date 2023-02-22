@@ -10,7 +10,6 @@ module.exports = {
     '../modules/**/*.stories.mdx',
     '../modules/**/stories*.@(js|jsx|ts|tsx)',
   ],
-  // stories: ['../modules/react/button/stories/button/Button.stories.mdx'],
   addons: [
     {
       name: '@storybook/addon-essentials',
