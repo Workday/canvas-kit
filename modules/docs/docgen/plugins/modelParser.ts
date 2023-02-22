@@ -54,7 +54,7 @@ export const modelParser = createParserPlugin<ModelHookValue | ModelValue>((node
     const {checker} = parser;
     const symbol = getSymbolFromNode(checker, node);
     const declaration = getValueDeclaration(symbol);
-    const name = symbol?.name || (t.isIdentifier(node.name) && node.name.text);
+    const name = symbol?.name || t.isIdentifier(node.name) ? node.name.text : '';
     if (declaration && declaration.getSourceFile()) {
       // ShorthandPropertyAssignment doesn't give the original variable declaration
       const originalDeclaration = t(declaration.getSourceFile())
@@ -81,7 +81,7 @@ export const modelParser = createParserPlugin<ModelHookValue | ModelValue>((node
         const jsDoc = symbol ? getFullJsDocComment(checker, symbol) : defaultJSDoc;
         return {
           kind: 'property',
-          name: symbol?.name || '',
+          name,
           defaultValue: undefined,
           type: originalDeclaration,
           required: false,
@@ -230,15 +230,15 @@ export const modelParser = createParserPlugin<ModelHookValue | ModelValue>((node
     const modelProps: Record<string, ObjectProperty[]> = {};
     const returnProps: Record<string, ObjectProperty> = {};
     const type = parser.checker.getTypeAtLocation(node.initializer.arguments[0]);
-    type.getCallSignatures().map(s => {
-      return s
+    type.getCallSignatures().forEach(signature => {
+      signature
         .getReturnType()
         .getProperties()
-        .reduce((result, p) => {
-          const declaration = getValueDeclaration(p);
+        .forEach(property => {
+          const declaration = getValueDeclaration(property);
           if (declaration) {
-            if (['state', 'events'].includes(p.getName())) {
-              modelProps[p.getName()] = parser.checker
+            if (['state', 'events'].includes(property.getName())) {
+              modelProps[property.getName()] = parser.checker
                 .getTypeAtLocation(declaration)
                 .getProperties()
                 .map(prop => {
@@ -248,11 +248,12 @@ export const modelParser = createParserPlugin<ModelHookValue | ModelValue>((node
                   };
                 });
             } else {
-              [p.getName()] = parser.getValueFromNode(declaration) as ObjectProperty;
+              returnProps[property.getName()] = parser.getValueFromNode(
+                declaration
+              ) as ObjectProperty;
             }
           }
-          return result;
-        }, returnProps);
+        });
     });
 
     const {state, events} = modelProps;
