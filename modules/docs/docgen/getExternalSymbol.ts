@@ -20,7 +20,8 @@ const externalSymbols: Record<string, Record<string, string>> = {
     SyntheticEvent: 'https://reactjs.org/docs/events.html',
     'React.SyntheticEvent': 'https://reactjs.org/docs/events.html',
     'Ref': 'https://reactjs.org/docs/refs-and-the-dom.html',
-    'React.Ref': 'https://reactjs.org/docs/refs-and-the-dom.html'
+    'React.Ref': 'https://reactjs.org/docs/refs-and-the-dom.html',
+    PopperOptions: 'https://popper.js.org/docs/v2/constructors/#options'
   }
 };
 

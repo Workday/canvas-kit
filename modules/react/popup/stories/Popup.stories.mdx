@@ -168,25 +168,13 @@ The Popup component automatically handles right-to-left rendering.
 
 <ExampleCodeBlock code={RTL} />
 
-## Components
+## Component API
 
 ### Popper
-
-A thin wrapper component around the Popper.js positioning engine. For reference:
-https://popper.js.org/. `Popper` also automatically works with the `PopupStack` system. `Popper` has
-no UI and will render any children to the `body` element and position around a provided
-`anchorElement`.
-
-Prefer using [Popup.Popper](#popuppopper) instead. Use this to make Popups that don't utilize a
-PopupModel or any associate popup [hooks](#hooks).
-
-> **Note:** `Popper` renders any children to a `div` element created by the `PopupStack`. This
-> element is not controlled by React, so any extra element props will _not_ be forwarded. The `ref`
-> will point to the `div` element created by the `PopupStack`, however. In v4, an extra `div`
-> element was rendered and that's where extra props were spread to. In v5+, you can provide your own
-> element if you wish.
-
+<>
+<SymbolDoc name="Popper" />
 <SymbolDoc name="Popup" hideDescription />
+</>
 
 ## Hooks
 
