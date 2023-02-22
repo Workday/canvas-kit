@@ -230,7 +230,7 @@ export const modelParser = createParserPlugin<ModelHookValue | ModelValue>((node
     const modelProps: Record<string, ObjectProperty[]> = {};
     const returnProps: Record<string, ObjectProperty> = {};
     const type = parser.checker.getTypeAtLocation(node.initializer.arguments[0]);
-    const returnValue = type.getCallSignatures().map(s => {
+    type.getCallSignatures().map(s => {
       return s
         .getReturnType()
         .getProperties()
@@ -248,7 +248,7 @@ export const modelParser = createParserPlugin<ModelHookValue | ModelValue>((node
                   };
                 });
             } else {
-              returnProps[p.getName()] = parser.getValueFromNode(declaration) as ObjectProperty;
+              [p.getName()] = parser.getValueFromNode(declaration) as ObjectProperty;
             }
           }
           return result;

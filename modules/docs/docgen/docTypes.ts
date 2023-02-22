@@ -66,6 +66,7 @@ export type Value =
   | ConditionalTypeValue
   | KeyofValue
   | InferValue
+  | AliasValue
   | UnknownValue;
 
 /**
@@ -375,4 +376,19 @@ export interface CallExpression {
 export interface InferValue {
   kind: 'infer';
   value: Value;
+}
+
+/**
+ * This value aliases another value
+ *
+ * ```ts
+ * {
+ *   kind: 'alias',
+ *   name: 'OtherSymbolName'
+ * }
+ * ```
+ */
+export interface AliasValue {
+  kind: 'alias';
+  name: string;
 }

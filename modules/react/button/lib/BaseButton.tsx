@@ -21,6 +21,10 @@ import {CSSObject} from '@emotion/styled';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 
 export interface ButtonContainerProps extends BoxProps, GrowthBehavior {
+  /**
+   * Override default colors of a button. The default will depend on the button type
+   * @default {undefined}
+   */
   colors?: ButtonColors;
   /**
    * There are four button sizes: `extraSmall`, `small`, `medium`, and `large`.

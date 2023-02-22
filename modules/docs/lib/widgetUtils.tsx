@@ -190,11 +190,21 @@ function getSymbolDocChildren(doc?: types.ExportedSymbol, meta?: any) {
   return <div>Not Found</div>;
 }
 
-export const useDoc = ({name, fileName}: ValueDocProps) => {
+function findDoc({name, fileName}: ValueDocProps): types.ExportedSymbol<types.Value> | undefined {
+  const doc = (docs || []).find(d => {
+    return d.name === name && (fileName ? d.fileName.includes(fileName) : true);
+  });
+
+  if (doc?.type.kind === 'alias') {
+    return findDoc({name: doc.type.name});
+  }
+
+  return doc;
+}
+
+export const useDoc = (criteria: ValueDocProps) => {
   const [doc] = React.useState(() => {
-    return (docs || []).find(d => {
-      return d.name === name && (fileName ? d.fileName.includes(fileName) : true);
-    });
+    return findDoc(criteria);
   });
 
   return doc;

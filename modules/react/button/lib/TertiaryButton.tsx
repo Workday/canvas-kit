@@ -16,20 +16,16 @@ import {BaseButton, BaseButtonProps} from './BaseButton';
 export interface TertiaryButtonProps extends Themeable, BaseButtonProps {
   /**
    * The variant of the TertiaryButton.
-   * @default undefined
    */
   variant?: 'inverse' | undefined;
   /**
    * There are four button sizes: `extraSmall`, `small`, `medium`, and `large`.
    * If no size is provided, it will default to `medium`.
-   *
-   * @default 'medium'
    */
   size?: ButtonSizes;
   /**
    * Button icon positions can either be `start` or `end`.
    * If no value is provided, it defaults to `start`.
-   * @default 'start'
    */
   iconPosition?: IconPositions;
   /**
@@ -41,18 +37,15 @@ export interface TertiaryButtonProps extends Themeable, BaseButtonProps {
    */
   /**
    * If set to `true`, transform the icon's x-axis to mirror the graphic
-   * @default false
    */
   shouldMirrorIcon?: boolean;
   /**
    * If set to `true`, transform text to all letters uppercase
-   * @default undefined
    */
   allCaps?: boolean;
   children?: React.ReactNode;
   /**
    * If set to `true`, make icon button available to use theme colors instead of default
-   * @default false
    */
   isThemeable?: boolean;
 }
@@ -211,7 +204,6 @@ export const TertiaryButton = createComponent('button')({
       children,
       icon,
       shouldMirrorIcon = false,
-      allCaps,
       ...elemProps
     }: TertiaryButtonProps,
     ref,
@@ -224,7 +216,6 @@ export const TertiaryButton = createComponent('button')({
       <StyledTertiaryButtonContainer
         ref={ref}
         as={Element}
-        allCaps={allCaps}
         colors={getTertiaryButtonColors(variant, theme, hasThemeStyles)}
         size={size}
         padding={getPaddingStyles(icon, iconPosition, children, size)}
