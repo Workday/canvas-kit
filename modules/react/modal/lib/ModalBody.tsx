@@ -31,5 +31,5 @@ export const ModalBody = createSubcomponent('div')({
   displayName: 'Modal.Body',
   modelHook: useModalModel,
 })<ModalBodyProps>((elemProps, Element) => {
-  return <ResponsiveModalHeading as={Element} {...elemProps} />;
+  return <ResponsiveModalBody as={Element} {...elemProps} />;
 });
