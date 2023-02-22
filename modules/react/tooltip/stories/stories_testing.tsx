@@ -5,18 +5,12 @@ import {resetIcon} from '@workday/canvas-system-icons-web';
 import {Card} from '@workday/canvas-kit-react/card';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {StaticStates} from '@workday/canvas-kit-react/testing';
+import {Text} from '@workday/canvas-kit-react/text';
 
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
 
-const fontDelay = 500; // best guess for the font delay to prevent incorrect Chromatic regressions
-
 export default {
   title: 'Testing/Popups/Tooltip',
-  parameters: {
-    chromatic: {
-      delay: fontDelay + 100, // make sure chromatic waits for the timer
-    },
-  },
 };
 
 export const NonInteractive = () => {
@@ -38,18 +32,7 @@ export const Overflow = () => {
 };
 
 export const Placements = withSnapshotsEnabled(() => {
-  const [open, setOpen] = React.useState(false);
   const ref = React.useRef<HTMLDivElement>(null);
-
-  React.useEffect(() => {
-    const id = setTimeout(() => {
-      setOpen(true);
-    }, fontDelay);
-
-    return () => {
-      clearTimeout(id);
-    };
-  }, []);
 
   const placements: Placement[] = [
     'top-start',
@@ -83,7 +66,9 @@ export const Placements = withSnapshotsEnabled(() => {
           justifyContent: 'center',
         }}
       >
-        <Card.Body>Target</Card.Body>
+        <Card.Body>
+          Target: We set font to sans serif so we don't have to wait for roboto to load
+        </Card.Body>
       </Card>
       {placements.map(placement =>
         !open ? null : (
@@ -97,10 +82,12 @@ export const Placements = withSnapshotsEnabled(() => {
                 {name: 'preventOverflow', enabled: false},
               ],
             }}
-            open={open}
+            open={true}
             anchorElement={ref}
           >
-            <TooltipContainer transformOrigin={null}>{placement}</TooltipContainer>
+            <TooltipContainer style={{fontFamily: 'sans-serif'}} transformOrigin={null}>
+              {placement}
+            </TooltipContainer>
           </Popper>
         )
       )}
@@ -109,18 +96,10 @@ export const Placements = withSnapshotsEnabled(() => {
 });
 
 export const PlacementsFocus = withSnapshotsEnabled(() => {
-  const [open, setOpen] = React.useState(false);
   const ref = React.useRef<HTMLButtonElement>(null);
 
   React.useEffect(() => {
     document.body.setAttribute('data-whatinput', 'keyboard');
-    const id = setTimeout(() => {
-      setOpen(true);
-    }, fontDelay);
-
-    return () => {
-      clearTimeout(id);
-    };
   }, []);
 
   const placements: Placement[] = [
@@ -158,27 +137,29 @@ export const PlacementsFocus = withSnapshotsEnabled(() => {
           className="focus"
           ref={ref}
         >
-          Target
+          <Text whiteSpace="normal" textOverflow="initial" overflow="visible">
+            Target: We set font to sans serif so we don't have to wait for roboto to load
+          </Text>
         </SecondaryButton>
-        {placements.map(placement =>
-          !open ? null : (
-            <Popper
-              key={placement}
-              placement={placement}
-              popperOptions={{
-                modifiers: [
-                  // keep the tooltips from moving - no matter what!
-                  {name: 'flip', enabled: false},
-                  {name: 'preventOverflow', enabled: false},
-                ],
-              }}
-              open={open}
-              anchorElement={ref}
-            >
-              <TooltipContainer transformOrigin={null}>{placement}</TooltipContainer>
-            </Popper>
-          )
-        )}
+        {placements.map(placement => (
+          <Popper
+            key={placement}
+            placement={placement}
+            popperOptions={{
+              modifiers: [
+                // keep the tooltips from moving - no matter what!
+                {name: 'flip', enabled: false},
+                {name: 'preventOverflow', enabled: false},
+              ],
+            }}
+            open={true}
+            anchorElement={ref}
+          >
+            <TooltipContainer style={{fontFamily: 'sans-serif'}} transformOrigin={null}>
+              {placement}
+            </TooltipContainer>
+          </Popper>
+        ))}
       </div>
     </StaticStates>
   );
