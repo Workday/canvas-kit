@@ -3,11 +3,6 @@ import {FormField} from '@workday/canvas-kit-react/form-field';
 import {RadioGroup} from '@workday/canvas-kit-labs-react/radio';
 
 export const Required = () => {
-  const [value, setValue] = React.useState(null);
-
-  const handleChange = (value: string | number) => {
-    setValue(value);
-  };
   return (
     <FormField label="Choose Your Pizza Crust" required={true} useFieldset={true}>
       <RadioGroup name="crust">

@@ -3,12 +3,6 @@ import {FormField} from '@workday/canvas-kit-react/form-field';
 import {RadioGroup} from '@workday/canvas-kit-labs-react/radio';
 
 export const Disabled = () => {
-  const [value, setValue] = React.useState<string | number>('deep-dish');
-
-  const handleChange = (value: string | number) => {
-    setValue(value);
-  };
-
   return (
     <FormField label="Choose Your Pizza Crust" useFieldset={true}>
       <RadioGroup name="crust">

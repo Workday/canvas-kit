@@ -58,7 +58,7 @@ describe('RadioGroup', () => {
   describe('when rendered with a value', () => {
     it('should render a selected radio that matches that value of a string', async () => {
       const {getByLabelText} = render(
-        <RadioGroup name="contact" value="phone" data-testid="radiogroup">
+        <RadioGroup name="contact" initialValue="phone" data-testid="radiogroup">
           <RadioGroup.Button id="1">
             <RadioGroup.Input value="email"></RadioGroup.Input>
             <RadioGroup.Label>E-mail</RadioGroup.Label>
@@ -74,25 +74,23 @@ describe('RadioGroup', () => {
       expect(phoneRadio).toHaveProperty('checked', true);
     });
 
-    // TODO: fix test after implmenting index for RadioGroup children
+    it('should render a selected radio that matches that value of a index', async () => {
+      const {getByLabelText} = render(
+        <RadioGroup name="contact" data-testid="radiogroup" initialValue={0}>
+          <RadioGroup.Button id="1">
+            <RadioGroup.Input value="email"></RadioGroup.Input>
+            <RadioGroup.Label>E-mail</RadioGroup.Label>
+          </RadioGroup.Button>
+          <RadioGroup.Button id="2">
+            <RadioGroup.Input value="phone"></RadioGroup.Input>
+            <RadioGroup.Label>Phone</RadioGroup.Label>
+          </RadioGroup.Button>
+        </RadioGroup>
+      );
 
-    // it('should render a selected radio that matches that value of a index', async () => {
-    //   const {getByLabelText} = render(
-    //     <RadioGroup name="contact" data-testid="radiogroup" value={1}>
-    //       <RadioGroup.Button id="1">
-    //         <RadioGroup.Input value="email"></RadioGroup.Input>
-    //         <RadioGroup.Label>E-mail</RadioGroup.Label>
-    //       </RadioGroup.Button>
-    //       <RadioGroup.Button id="2">
-    //         <RadioGroup.Input value="phone"></RadioGroup.Input>
-    //         <RadioGroup.Label>Phone</RadioGroup.Label>
-    //       </RadioGroup.Button>
-    //     </RadioGroup>
-    //   );
-
-    //   const phoneRadio = await getByLabelText('Phone');
-    //   expect(phoneRadio).toHaveProperty('checked', true);
-    // });
+      const phoneRadio = await getByLabelText('E-mail');
+      expect(phoneRadio).toHaveProperty('checked', true);
+    });
   });
 
   describe('when rendered with extra, arbitrary props', () => {

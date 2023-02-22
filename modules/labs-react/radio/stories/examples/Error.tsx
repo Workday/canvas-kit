@@ -5,8 +5,11 @@ import {RadioGroup} from '@workday/canvas-kit-labs-react/radio';
 export const Error = () => {
   const [value, setValue] = React.useState<string | number>('deep-dish');
 
-  const handleChange = (value: string | number) => {
-    setValue(value);
+  const handleChange = (e: React.ChangeEvent) => {
+    const target = e.currentTarget;
+    if (target instanceof HTMLInputElement) {
+      setValue(target.value);
+    }
   };
 
   return (
@@ -17,7 +20,7 @@ export const Error = () => {
       label="Choose Your Pizza Crust"
       useFieldset={true}
     >
-      <RadioGroup name="crust">
+      <RadioGroup name="crust" onChange={handleChange} initialValue={value}>
         <RadioGroup.Button disabled>
           <RadioGroup.Input value="deep-dish" />
           <RadioGroup.Label>Deep dish (sold out)</RadioGroup.Label>

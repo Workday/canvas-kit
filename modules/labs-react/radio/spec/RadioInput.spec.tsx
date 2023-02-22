@@ -9,47 +9,75 @@ describe('RadioInput', () => {
   });
   describe('when rendered', () => {
     it('should render an input with type=radio', () => {
-      const {getByRole} = render(<RadioGroup.Input value="email"></RadioGroup.Input>);
-      expect(getByRole('radio')).toHaveProperty('type', 'radio');
+      const {getAllByRole} = render(
+        <RadioGroup>
+          <RadioGroup.Input value="email"></RadioGroup.Input>
+          <RadioGroup.Input value="phone"></RadioGroup.Input>
+        </RadioGroup>
+      );
+      expect(getAllByRole('radio')[0]).toHaveProperty('type', 'radio');
     });
 
     it('should be unchecked by default', () => {
-      const {getByRole} = render(<RadioGroup.Input value="email"></RadioGroup.Input>);
-      expect(getByRole('radio')).toHaveProperty('checked', false);
+      const {getAllByRole} = render(
+        <RadioGroup>
+          <RadioGroup.Input value="email"></RadioGroup.Input>
+          <RadioGroup.Input value="phone"></RadioGroup.Input>
+        </RadioGroup>
+      );
+      expect(getAllByRole('radio')[1]).toHaveProperty('checked', false);
     });
   });
 
   describe('when rendered with an id', () => {
     it('should render a radio input with id', () => {
       const id = 'myRadio';
-      const {getByRole} = render(<RadioGroup.Input id={id} value="email"></RadioGroup.Input>);
-      expect(getByRole('radio')).toHaveAttribute('id', id);
+      const {getAllByRole} = render(
+        <RadioGroup>
+          <RadioGroup.Input id={id} value="email"></RadioGroup.Input>
+          <RadioGroup.Input value="email"></RadioGroup.Input>
+        </RadioGroup>
+      );
+      expect(getAllByRole('radio')[0]).toHaveAttribute('id', id);
     });
   });
 
   describe('when rendered with a value', () => {
     it('should render a radio input with value', () => {
-      const value = 'myRadio';
-      const {getByDisplayValue} = render(<RadioGroup.Input value={value}></RadioGroup.Input>);
-      expect(getByDisplayValue(value)).toBeDefined();
+      const value1 = 'myRadio1';
+      const value2 = 'myRadio2';
+      const {getByDisplayValue} = render(
+        <RadioGroup>
+          <RadioGroup.Input value={value1}></RadioGroup.Input>
+          <RadioGroup.Input value={value2}></RadioGroup.Input>
+        </RadioGroup>
+      );
+      expect(getByDisplayValue(value1)).toBeDefined();
+      expect(getByDisplayValue(value2)).toBeDefined();
     });
   });
 
   describe('when rendered with checked=true', () => {
     it('should render a checked radio input', () => {
-      const {getByRole} = render(
-        <RadioGroup.Input value="email" checked={true}></RadioGroup.Input>
+      const {getAllByRole} = render(
+        <RadioGroup>
+          <RadioGroup.Input value="email" checked={true}></RadioGroup.Input>
+          <RadioGroup.Input value="email" checked={false}></RadioGroup.Input>
+        </RadioGroup>
       );
-      expect(getByRole('radio')).toHaveProperty('checked', true);
+      expect(getAllByRole('radio')[0]).toHaveProperty('checked', true);
     });
   });
 
   describe('when rendered with disabled attribute', () => {
     it('should render a disabled radio input', () => {
-      const {getByRole} = render(
-        <RadioGroup.Input value="email" disabled={true}></RadioGroup.Input>
+      const {getAllByRole} = render(
+        <RadioGroup>
+          <RadioGroup.Input value="email" disabled={true}></RadioGroup.Input>
+          <RadioGroup.Input value="phone" disabled={false}></RadioGroup.Input>
+        </RadioGroup>
       );
-      expect(getByRole('radio')).toHaveProperty('disabled', true);
+      expect(getAllByRole('radio')[0]).toHaveProperty('disabled', true);
     });
   });
 
@@ -57,14 +85,16 @@ describe('RadioInput', () => {
     it('should create a unique id for each instance', async () => {
       const {getByLabelText} = render(
         <form>
-          <RadioGroup.Button>
-            <RadioGroup.Input value="email"></RadioGroup.Input>
-            <RadioGroup.Label>Email</RadioGroup.Label>
-          </RadioGroup.Button>
-          <RadioGroup.Button>
-            <RadioGroup.Input value="phone"></RadioGroup.Input>
-            <RadioGroup.Label>Phone</RadioGroup.Label>
-          </RadioGroup.Button>
+          <RadioGroup>
+            <RadioGroup.Button>
+              <RadioGroup.Input value="email"></RadioGroup.Input>
+              <RadioGroup.Label>Email</RadioGroup.Label>
+            </RadioGroup.Button>
+            <RadioGroup.Button>
+              <RadioGroup.Input value="phone"></RadioGroup.Input>
+              <RadioGroup.Label>Phone</RadioGroup.Label>
+            </RadioGroup.Button>
+          </RadioGroup>
         </form>
       );
 
@@ -77,21 +107,27 @@ describe('RadioInput', () => {
     it('should keep the same unique id if re-rendered', () => {
       const RadioTest = isChecked => {
         return (
-          <RadioGroup.Button>
-            <RadioGroup.Input checked={isChecked} value="email"></RadioGroup.Input>
-            <RadioGroup.Label>Email</RadioGroup.Label>
-          </RadioGroup.Button>
+          <RadioGroup>
+            <RadioGroup.Button>
+              <RadioGroup.Input checked={isChecked} value="email"></RadioGroup.Input>
+              <RadioGroup.Label>Email</RadioGroup.Label>
+            </RadioGroup.Button>
+            <RadioGroup.Button>
+              <RadioGroup.Input checked={false} value="email"></RadioGroup.Input>
+              <RadioGroup.Label>Email</RadioGroup.Label>
+            </RadioGroup.Button>
+          </RadioGroup>
         );
       };
-      const {getByRole, rerender} = render(<RadioTest isChecked={false} />);
+      const {getAllByRole, rerender} = render(<RadioTest isChecked={false} />);
 
-      const uniqueId = getByRole('radio').getAttribute('id');
-      expect(getByRole('radio')).toHaveProperty('id', uniqueId);
+      const uniqueId = getAllByRole('radio')[0].getAttribute('id');
+      expect(getAllByRole('radio')[0]).toHaveProperty('id', uniqueId);
 
       rerender(<RadioTest isChecked={true} />);
 
-      expect(getByRole('radio')).toHaveProperty('checked');
-      expect(getByRole('radio')).toHaveProperty('id', uniqueId);
+      expect(getAllByRole('radio')[0]).toHaveProperty('checked');
+      expect(getAllByRole('radio')[0]).toHaveProperty('id', uniqueId);
     });
   });
 });

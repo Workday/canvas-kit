@@ -6,10 +6,16 @@ import {
   mouseFocusBehavior,
   createSubcomponent,
   createElemPropsHook,
+  composeHooks,
 } from '@workday/canvas-kit-react/common';
 import {colors, inputColors, spaceNumbers, borderRadius} from '@workday/canvas-kit-react/tokens';
 import {useRadioModel} from './hooks/useRadioModel';
 import {RadioButtonProps, RadioButtonContext} from './Radio.Button';
+import {
+  useListItemRegister,
+  useListItemSelect,
+  isSelected,
+} from '@workday/canvas-kit-react/collection';
 
 const radioBorderRadius = 9;
 const radioTapArea = spaceNumbers.m;
@@ -228,21 +234,35 @@ const RadioCheck = styled('div')<Pick<RadioButtonProps, 'checked' | 'variant'>>(
   })
 );
 
-const useRadioButtonInput = createElemPropsHook(useRadioModel)(
-  (model, ref, elemProps: {name?: string; value?: string} = {}) => {
+const useRadioButtonInput = composeHooks(
+  createElemPropsHook(useRadioModel)(
+    (model, ref, elemProps: {'data-id'?: string; value?: string | number} = {}) => {
+      const name = elemProps['data-id'] || '';
+
+      const selected = !!elemProps['data-id'] && isSelected(name, model.state);
+      const radioContext = React.useContext(RadioButtonContext);
+      return {
+        checked: selected,
+        'aria-checked': selected,
+        onChange(event: React.ChangeEvent) {
+          model.events.change(event);
+        },
+        name: model.state.name,
+        disabled: radioContext.disabled,
+        variant: radioContext.variant,
+        id: radioContext.id,
+      };
+    }
+  ),
+  useListItemSelect,
+  useListItemRegister,
+  createElemPropsHook(useRadioModel)((model, ref, elemProps: {value?: string} = {}) => {
     const radioContext = React.useContext(RadioButtonContext);
-    return {
-      checked: elemProps.value === model.state.value,
-      'aria-checked': elemProps.value === model.state.value,
-      onChange(event: React.ChangeEvent) {
-        model.events.change(event);
-      },
-      name: model.state.name,
-      disabled: radioContext.disabled,
-      variant: radioContext.variant,
-      id: radioContext.id,
-    };
-  }
+    if (elemProps.value) {
+      return {'data-id': elemProps.value, disabled: radioContext.disabled};
+    }
+    return {};
+  })
 );
 export const RadioButtonInput = createSubcomponent('input')({
   displayName: 'RadioButton.Input',

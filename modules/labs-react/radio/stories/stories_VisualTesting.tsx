@@ -13,7 +13,7 @@ const hintText = 'Helpful text goes here.';
 const hintId = 'error-desc-id';
 
 export default withSnapshotsEnabled({
-  title: 'Testing/React/Labs/Radio',
+  title: 'Testing/Labs/Radio',
   component: RadioGroup,
 });
 
@@ -75,10 +75,16 @@ export const RadioStates = () => {
           )}
         >
           {props => (
-            <RadioGroup.Button disabled={props.disabled}>
-              <RadioGroup.Input {...props} />
-              <RadioGroup.Label>Email</RadioGroup.Label>
-            </RadioGroup.Button>
+            <RadioGroup>
+              <RadioGroup.Button disabled={props.disabled}>
+                <RadioGroup.Input {...props} />
+                <RadioGroup.Label>Email</RadioGroup.Label>
+              </RadioGroup.Button>
+              <RadioGroup.Button disabled={props.disabled}>
+                <RadioGroup.Input {...props} />
+                <RadioGroup.Label>Phone</RadioGroup.Label>
+              </RadioGroup.Button>
+            </RadioGroup>
           )}
         </ComponentStatesTable>
       </StaticStates>
@@ -198,10 +204,16 @@ export const InverseRadioStates = () => (
       >
         {({disabled, ...props}) => (
           <div style={{backgroundColor: '#0875e1', padding: '12px', borderRadius: '4px'}}>
-            <RadioGroup.Button disabled={disabled} variant="inverse">
-              <RadioGroup.Input {...props} />
-              <RadioGroup.Label>Email</RadioGroup.Label>
-            </RadioGroup.Button>
+            <RadioGroup>
+              <RadioGroup.Button disabled={disabled} variant="inverse">
+                <RadioGroup.Input {...props} />
+                <RadioGroup.Label>Email</RadioGroup.Label>
+              </RadioGroup.Button>
+              <RadioGroup.Button disabled={disabled} variant="inverse">
+                <RadioGroup.Input {...props} />
+                <RadioGroup.Label>Phone</RadioGroup.Label>
+              </RadioGroup.Button>
+            </RadioGroup>
           </div>
         )}
       </ComponentStatesTable>

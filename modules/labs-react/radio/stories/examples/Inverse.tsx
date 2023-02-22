@@ -5,13 +5,16 @@ import {RadioGroup} from '@workday/canvas-kit-labs-react/radio';
 export const Inverse = () => {
   const [value, setValue] = React.useState<string | number>('deep-dish');
 
-  const handleChange = (value: string | number) => {
-    setValue(value);
+  const handleChange = (e: React.ChangeEvent) => {
+    const target = e.currentTarget;
+    if (target instanceof HTMLInputElement) {
+      setValue(target.value);
+    }
   };
 
   return (
     <Box backgroundColor="blueberry400" padding="s">
-      <RadioGroup name="crust">
+      <RadioGroup name="crust" onChange={handleChange} initialValue={value}>
         <RadioGroup.Button variant="inverse">
           <RadioGroup.Input value="deep-dish" />
           <RadioGroup.Label>Deep Dish</RadioGroup.Label>

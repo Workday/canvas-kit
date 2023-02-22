@@ -19,11 +19,6 @@ export interface RadioGroupProps extends Themeable, GrowthBehavior {
    */
   children: React.ReactElement<RadioButtonProps>[];
   /**
-   * The selected value of the RadioGroup. If a string is provided, the Radio button with the corresponding value will be selected. If a number is provided, the Radio button with the corresponding index will be selected.
-   * @default 0
-   */
-  value?: string | number;
-  /**
    * The common `name` passed to all Radio button children of the RadioGroup. This enables you to avoid specifying the `name` for each child.
    */
   name?: string;
@@ -31,6 +26,11 @@ export interface RadioGroupProps extends Themeable, GrowthBehavior {
    * The type of error associated with the RadioGroup (if applicable).
    */
   error?: ErrorType;
+  /**
+   * The initial selected value of the RadioGroup. If a string is provided, the Radio button with the corresponding value will be selected. If a number is provided, the Radio button with the corresponding index will be selected.
+   * @default 0
+   */
+  initialValue?: string | number;
 }
 
 const Container = styled('div')<Pick<RadioGroupProps, 'error' | 'grow' | 'theme'>>(

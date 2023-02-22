@@ -4,7 +4,7 @@ import {RadioGroup} from '@workday/canvas-kit-labs-react/radio';
 import styled from '@emotion/styled';
 
 export const Basic = () => {
-  const [value, setValue] = React.useState<string | number>('deep-dish');
+  const [value, setValue] = React.useState<string | number>('thin');
 
   const handleChange = (e: React.ChangeEvent) => {
     const target = e.currentTarget;
@@ -13,12 +13,9 @@ export const Basic = () => {
     }
   };
 
-  const StyledFormField = styled(FormField)({
-    width: '161px',
-  });
   return (
-    <StyledFormField label="Choose Your Pizza Crust" useFieldset={true}>
-      <RadioGroup name="crust" value={value} onChange={handleChange}>
+    <FormField label="Choose Your Pizza Crust" useFieldset={true}>
+      <RadioGroup name="pizza-crust" onChange={handleChange} initialValue={value}>
         <RadioGroup.Button>
           <RadioGroup.Input value="deep-dish" />
           <RadioGroup.Label>Deep Dish</RadioGroup.Label>
@@ -46,6 +43,6 @@ export const Basic = () => {
           </RadioGroup.Label>
         </RadioGroup.Button>
       </RadioGroup>
-    </StyledFormField>
+    </FormField>
   );
 };
