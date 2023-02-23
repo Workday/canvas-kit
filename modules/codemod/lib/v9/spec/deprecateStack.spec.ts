@@ -380,7 +380,7 @@ describe('Canvas Kit Deprecate Stack Codemod', () => {
       expectTransform(input, expected);
     });
 
-    it('should not effect specific components that do not extend Stack', () => {
+    it('should not affect specific components that do not extend Stack', () => {
       const input = `
       import { Grid, Flex } from '@workday/canvas-kit-react/layout';
       import { ActionBar } from '@workday/canvas-kit-react/action-bar';
