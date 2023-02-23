@@ -15,7 +15,6 @@ interface FocusRingOptions {
   inset?: 'inner' | 'outer';
   innerColor?: string;
   outerColor?: string;
-  memoize?: boolean;
 }
 
 function calculateFocusRing({
@@ -61,9 +60,6 @@ function calculateFocusRing({
   return {boxShadow};
 }
 
-// Is memoize really needed here??
-export const memoizedFocusRing = calculateFocusRing;
-
 /**
  * A utility to create a canvas style focus ring around your widget.
  * By default, this mixin will create a 2px focus ring tightly wrapped
@@ -96,7 +92,6 @@ export function focusRing(options: FocusRingOptions = {}, theme?: Theme): CSSObj
     outerColor = theme && theme.canvas
       ? theme.canvas.palette.common.focusOutline
       : defaultCanvasTheme.palette.common.focusOutline,
-    memoize = true,
     inset,
   } = options;
 
@@ -108,10 +103,6 @@ export function focusRing(options: FocusRingOptions = {}, theme?: Theme): CSSObj
     animate,
     inset,
   };
-
-  if (memoize) {
-    return memoizedFocusRing(args);
-  }
 
   return calculateFocusRing(args);
 }
