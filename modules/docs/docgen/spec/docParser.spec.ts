@@ -249,6 +249,35 @@ describe('docParser', () => {
       expect(docs).toHaveProperty('0.type.properties.0.type.value.1.value', 'd');
     });
 
+    it('should handle multiple layers of IndexAccessType with a `keyof` type, falling back to unions', () => {
+      const program = createProgramFromSource(`
+        export type D = {
+          d: C['c'] | 'd'
+        }
+        export type C = {
+          c: A['a'] | B
+        }
+        type A = { a: 1, b: 1} // needs to be exported for keyof to work
+        type B = keyof A
+      `);
+      const docs = parse(program, 'test.ts');
+
+      expect(docs).toHaveProperty('0.name', 'D');
+      expect(docs).toHaveProperty('0.type.kind', 'object');
+      expect(docs).toHaveProperty('0.type.properties.0.kind', 'property');
+      expect(docs).toHaveProperty('0.type.properties.0.name', 'd');
+      expect(docs).toHaveProperty('0.type.properties.0.type.kind', 'union');
+      expect(docs).toHaveProperty('0.type.properties.0.type.value.0.kind', 'union');
+      expect(docs).toHaveProperty('0.type.properties.0.type.value.0.value.0.kind', 'string');
+      expect(docs).toHaveProperty('0.type.properties.0.type.value.0.value.0.value', 'a');
+      expect(docs).toHaveProperty('0.type.properties.0.type.value.0.value.1.kind', 'number');
+      expect(docs).toHaveProperty('0.type.properties.0.type.value.0.value.1.value', 1);
+      expect(docs).toHaveProperty('0.type.properties.0.type.value.0.value.2.kind', 'string');
+      expect(docs).toHaveProperty('0.type.properties.0.type.value.0.value.2.value', 'b');
+      expect(docs).toHaveProperty('0.type.properties.0.type.value.1.kind', 'string');
+      expect(docs).toHaveProperty('0.type.properties.0.type.value.1.value', 'd');
+    });
+
     it('should find an exported type of an exported IndexedAccessType that uses keyof', () => {
       const program = createProgramFromSource(`
         type A {
@@ -837,15 +866,6 @@ describe('docParser', () => {
       expect(docs).toHaveProperty('1.type.value.kind', 'symbol');
       expect(docs).toHaveProperty('1.type.value.name', 'Foo');
     });
-
-    // it.only('should handle types with generics', () => {
-    //   const program = createProgramFromSource(`
-    //     export type MaybePromise<T> = T | Promise<T>;
-    //   `);
-    //   const docs = parse(program, 'test.ts');
-    //   expect(docs).toHaveProperty('1.name', 'Bar');
-    //   expect(docs).toHaveProperty('1.type', {kind: 'symbol', value: 'Foo'});
-    // });
 
     it('should handle types that include other symbols when that symbol is NOT exported', () => {
       const program = createProgramFromSource(`

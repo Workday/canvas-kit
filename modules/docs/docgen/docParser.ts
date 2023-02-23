@@ -120,7 +120,11 @@ function getValueFromNode(parser: DocParser, node: ts.Node): Value {
 function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
   const {checker} = parser;
   // Uncomment for debugging
-  // console.log(t.getKindNameFromNode(node) || node.kind, safeGetText(checker, node), checker.typeToString(checker.getTypeAtLocation(node)));
+  // console.log(
+  //   t.getKindNameFromNode(node) || node.kind,
+  //   safeGetText(checker, node),
+  //   checker.typeToString(checker.getTypeAtLocation(node))
+  // );
 
   /**
    * A tuple type is an array with positional types.
@@ -647,6 +651,16 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
         };
       }
     }
+    // A `keyof` in a synthetic TypeNode will cause us problems. It means a TypeNode was generated
+    // by `getValueFromType`. `checker.getTypeAtLocation` on a synthetic TypeNode will always be
+    // `any`. I means going down this tree will not work and we need to throw an error. This error
+    // will bubble to a `try...catch` in `getValueFromType` and it will instead extract a value from
+    // the `Type` and not the `TypeNode`
+    if (node.end < 0) {
+      // We're a synthetic TypeNode
+      throw Error('Cannot process a synthetic TypeNode with a `keyof`');
+    }
+
     return (
       getValueFromType(parser, checker.getTypeFromTypeNode(node), node) ||
       unknownValue(safeGetText(checker, node))
@@ -1412,8 +1426,11 @@ export function getValueFromType(
         // Synthetic node contains `keyof` which is a type that doesn't point to a real AST node so
         // Typescript cannot evaluate the type and will result in an error. Under these cases, we'll
         // fall back to extracting info from the Type rather than the TypeNode.
-        //
-        // console.error('Parse Error, exception missed in getValueFromType:', e.message);
+
+        const message =
+          e instanceof Error ? e.message : typeof e === 'string' ? e : 'Unknown Error';
+
+        console.info('Parsing of a TypeNode failed:', message);
       }
     }
   }
@@ -1423,8 +1440,8 @@ export function getValueFromType(
    * TypeNode.
    */
   if (type.isUnion()) {
-    // If we got here, it means a typeNode was a TypeReference that wasn't exported or a
-    // SyntheticNode UnionType that was truncated
+    // If we got here, it means a TypeNode was a TypeReference that wasn't exported or a synthetic
+    // TypeNode `keyof *` that `getValueFromNode` couldn't properly parse.
     let filteredTypes = type.types;
 
     return {
@@ -1531,9 +1548,11 @@ function safeGetText(checker: ts.TypeChecker, node: ts.Node): string {
   if (node.getSourceFile?.()) {
     return node.getText();
   }
-  // It might be an identifier which has escaped text
-  if (t.isIdentifier(node)) {
-    return node.escapedText as string;
+  // We have a synthetic TypeNode so we'll try to get useful text out of it.
+
+  // It might be an identifier or literal type with a `text` property
+  if ((node as any).text) {
+    return (node as any).text;
   }
   // Try a symbol
   const symbol = getSymbolFromNode(checker, node);
