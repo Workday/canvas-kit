@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import {DeleteButton} from '@workday/canvas-kit-react/button';
+import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {Modal, useModalModel} from '@workday/canvas-kit-react/modal';
 import {ContentDirection, CanvasProvider, useTheme} from '@workday/canvas-kit-react/common';
 import {HStack, Box} from '@workday/canvas-kit-react/layout';
@@ -37,14 +37,15 @@ const TestModal = () => {
         <Modal.Overlay style={{animation: 'none'}}>
           <Modal.Card style={{animation: 'none'}}>
             <Modal.CloseIcon aria-label="Close" />
-            <Modal.Heading>Delete Item</Modal.Heading>
+            <Modal.Heading>Small Width Modal</Modal.Heading>
             <Modal.Body>
               <Box as="p" marginY="zero">
-                Are you sure you want to delete the item?
+                This modal should appear on the bottom of the screen for mobile devices. Chromatic
+                uses a version of Chrome that makes it appear on the top and is a known issue.
               </Box>
             </Modal.Body>
             <HStack spacing="s" padding="xxs" marginTop="xxs">
-              <Modal.CloseButton as={DeleteButton}>Delete</Modal.CloseButton>
+              <Modal.CloseButton as={PrimaryButton}>Close</Modal.CloseButton>
               <Modal.CloseButton>Cancel</Modal.CloseButton>
             </HStack>
           </Modal.Card>
