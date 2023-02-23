@@ -216,7 +216,7 @@ describe('componentParser', () => {
       expect(docs).toHaveProperty('0.type.props.0.type.value', 'string');
     })
 
-    it('should handle an function using React.FunctionComponent', () => {
+    it('should handle a function using React.FunctionComponent', () => {
       const program = createProgramFromSource('test.tsx',`
         import React from 'react'
 
@@ -239,7 +239,7 @@ describe('componentParser', () => {
       expect(docs).toHaveProperty('0.type.props.0.type.value', 'string');
     })
 
-    it('should handle an function using React.FunctionComponent', () => {
+    it('should handle a function using React.FunctionComponent', () => {
       const program = createProgramFromSource('test.tsx',`
         import React from 'react'
 
@@ -263,7 +263,7 @@ describe('componentParser', () => {
     })
   })
 
-  it('should handle an function using React.forwardRef', () => {
+  it('should handle a function using React.forwardRef', () => {
     const program = createProgramFromSource('test.tsx',`
       import React from 'react'
 
@@ -286,7 +286,7 @@ describe('componentParser', () => {
     expect(docs).toHaveProperty('0.type.props.0.type.value', 'string');
   })
 
-  it('should handle an function using React.forwardRef and default JSDoc', () => {
+  it('should handle a function using React.forwardRef and default JSDoc', () => {
     const program = createProgramFromSource('test.tsx',`
       import React from 'react'
 
@@ -312,7 +312,7 @@ describe('componentParser', () => {
     expect(docs).toHaveProperty('0.type.props.0.defaultValue.value', 'b');
   })
 
-  it('should handle an function using React.forwardRef and default destructured props', () => {
+  it('should handle a function using React.forwardRef and default destructured props', () => {
     const program = createProgramFromSource('test.tsx',`
       import React from 'react'
 
@@ -335,6 +335,31 @@ describe('componentParser', () => {
     expect(docs).toHaveProperty('0.type.props.0.type.value', 'string');
     expect(docs).toHaveProperty('0.type.props.0.defaultValue.kind', 'string');
     expect(docs).toHaveProperty('0.type.props.0.defaultValue.value', 'b');
+  })
+
+  it('should match functions that return exotic components', () => {
+    const program = createProgramFromSource('test.tsx',`
+      import React from 'react'
+
+      const MyContext = React.createContext()
+
+      export const A = (props: Props) => {
+        return <MyContext.Provider />
+      }
+
+      interface Props {
+        a: string
+      }
+    `);
+
+    const docs = parse(program, 'test.tsx', [componentParser]); //?
+
+    expect(docs).toHaveProperty('0.name', 'A');
+    expect(docs).toHaveProperty('0.type.kind', 'component');
+    expect(docs).toHaveProperty('0.type.props.0.kind', 'property');
+    expect(docs).toHaveProperty('0.type.props.0.name', 'a');
+    expect(docs).toHaveProperty('0.type.props.0.type.kind', 'primitive');
+    expect(docs).toHaveProperty('0.type.props.0.type.value', 'string');
   })
 
   it('should not match embedded component-like functions inside props', () => {

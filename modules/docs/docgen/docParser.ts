@@ -1426,11 +1426,10 @@ export function getValueFromType(
         // Synthetic node contains `keyof` which is a type that doesn't point to a real AST node so
         // Typescript cannot evaluate the type and will result in an error. Under these cases, we'll
         // fall back to extracting info from the Type rather than the TypeNode.
-
-        const message =
-          e instanceof Error ? e.message : typeof e === 'string' ? e : 'Unknown Error';
-
-        console.info('Parsing of a TypeNode failed:', message);
+        // We don't want to log this as it spams the console...
+        // const message =
+        //   e instanceof Error ? e.message : typeof e === 'string' ? e : 'Unknown Error';
+        // console.info('Parsing of a TypeNode failed:', message);
       }
     }
   }
