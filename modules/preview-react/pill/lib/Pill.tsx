@@ -9,7 +9,7 @@ import {
   styled,
   StyledType,
 } from '@workday/canvas-kit-react/common';
-import {BoxProps, boxStyleFn, HStack, Stack} from '@workday/canvas-kit-react/layout';
+import {BoxProps, boxStyleFn, Flex} from '@workday/canvas-kit-react/layout';
 import {borderRadius, colors, space, type} from '@workday/canvas-kit-react/tokens';
 
 import {usePillModel} from './usePillModel';
@@ -190,18 +190,18 @@ export const Pill = createContainer('button')({
           {...elemProps}
           disabled={model.state.disabled}
         >
-          <HStack spacing="xxxs" display="inline-flex" alignItems="center">
+          <Flex gap="xxxs" display="inline-flex" alignItems="center">
             {React.Children.map(elemProps.children, (child, index) => {
               if (typeof child === 'string') {
                 return <PillLabel key={index}>{child}</PillLabel>;
               }
               return (
-                <Stack.Item key={index} display="inline-flex">
+                <Flex.Item key={index} display="inline-flex">
                   {child}
-                </Stack.Item>
+                </Flex.Item>
               );
             })}
-          </HStack>
+          </Flex>
         </StyledBasePill>
       )}
       {variant === 'removable' && (
@@ -211,14 +211,14 @@ export const Pill = createContainer('button')({
           variant={variant}
           {...elemProps}
         >
-          <HStack spacing="xxxs" display="inline-flex" alignItems="center" justifyContent="center">
+          <Flex gap="xxxs" display="inline-flex" alignItems="center" justifyContent="center">
             {React.Children.map(elemProps.children, (child, index) => {
               if (typeof child === 'string') {
                 return <PillLabel key={index}>{child}</PillLabel>;
               }
-              return <Stack.Item key={index}>{child}</Stack.Item>;
+              return <Flex.Item key={index}>{child}</Flex.Item>;
             })}
-          </HStack>
+          </Flex>
         </StyledNonInteractivePill>
       )}
     </>

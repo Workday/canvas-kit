@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {Modal, useModalModel} from '@workday/canvas-kit-react/modal';
 import {ContentDirection, CanvasProvider, useTheme} from '@workday/canvas-kit-react/common';
-import {HStack, Box} from '@workday/canvas-kit-react/layout';
+import {Flex, Box} from '@workday/canvas-kit-react/layout';
 
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
 
@@ -44,10 +44,10 @@ const TestModal = () => {
                 uses a version of Chrome that makes it appear on the top and is a known issue.
               </Box>
             </Modal.Body>
-            <HStack spacing="s" padding="xxs" marginTop="xxs">
-              <Modal.CloseButton as={PrimaryButton}>Close</Modal.CloseButton>
+            <Flex gap="s" padding="xxs" marginTop="xxs">
+              <Modal.CloseButton as={PrimaryButton}>Delete</Modal.CloseButton>
               <Modal.CloseButton>Cancel</Modal.CloseButton>
-            </HStack>
+            </Flex>
           </Modal.Card>
         </Modal.Overlay>
       </Modal>

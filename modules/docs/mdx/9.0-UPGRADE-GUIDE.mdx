@@ -11,7 +11,7 @@ any questions.
 - [Codemod](#codemod)
 - [Component Deprecations](#component-deprecations)
   - [Drawer](#drawer)
-  - [Layout and Column](#layout-and-column)
+  - [Layout and Column](#layout-and-column) - [Stack](#stack-hstack-vstack)
 - [Component Updates](#component-updates)
   - [Buttons](#buttons)
 
@@ -82,22 +82,15 @@ you use the Preview version of `SidePanel` until the one in Main is replaced wit
 
 ---
 
-### Layout and Column
+### Stack, HStack and vstack
 
-`Layout` and `Column` components have been [hard-deprecated](#hard-deprecation) and are no longer
-available in Canvas Kit. Please consider using
-[`Grid`](https://workday.github.io/canvas-kit/?path=/docs/components-containers-grid--basic)
-instead. While the `Grid` component is not a 1:1 replacement for `Layout`, it can be used in the
-same way and offers several benefits over the deprecated components as a more robust and flexible
-layout solution.
+We've hard deprecated the `Stack`, `HStack` and `VStack` components along with the props associated
+to those components (`StackProps`, `HStackProps`, `VStackProps`, `StackStyleProps`). We recommend
+using the `Flex` component and to replace the `spacing` prop with the `gap` prop. You can also run
+`npx @workday/canvas-kit-codemod v9 [path]`.
 
-Please refer to
-[the Examples section](https://workday.github.io/canvas-kit/?path=/docs/examples-layouts--custom-column-positioning)
-for ideas on how to replace the deprecated `Layout` component with the `Grid` component. This will
-provide you with a deeper understanding of how to set custom column width or positioning using the
-`Grid` component.
-
----
+> **Note**: If you are consuming `StackProps` for a custom component, please make sure to change the
+> `spacing` prop to the `gap` prop
 
 ## Component Updates
 
