@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v7.4.9](https://github.com/Workday/canvas-kit/releases/tag/v7.4.9) (2023-02-24)
+
+### Testing
+
+- test: Update tooltip testing story to render properly ([#2047](https://github.com/Workday/canvas-kit/pull/2047)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v7.4.8](https://github.com/Workday/canvas-kit/releases/tag/v7.4.8) (2023-02-07)
 
 ### Components
