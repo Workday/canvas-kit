@@ -27,7 +27,7 @@ import {GoToLabel} from './GoTo/Label';
 export {PaginationContext};
 
 export type PaginationProps = PaginationNavProps & {
-  lastPage: number;
+  lastPage?: number;
   firstPage?: number;
   initialCurrentPage?: number;
   rangeSize?: number;
