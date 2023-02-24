@@ -10,10 +10,10 @@ import {
 import {PaginationModel} from './types';
 import {Flex, FlexProps} from '@workday/canvas-kit-react/layout';
 import {useLiveRegion} from './common/useLiveRegion';
+import {PaginationContext} from './usePaginationModel';
 
 export interface AdditionalDetailsProps extends Omit<FlexProps, 'children'> {
   children: (model: PaginationModel) => React.ReactNode | React.ReactNode;
-  model: PaginationModel;
   shouldAnnounceToScreenReader?: boolean;
   shouldHideDetails?: boolean;
 }
@@ -35,11 +35,18 @@ const StyledAdditionalDetails = styled(Flex)<
 
 export const AdditionalDetails = createComponent('div')({
   displayName: 'Pagination.AdditionalDetails',
-  Component({model, children, shouldAnnounceToScreenReader, ...elemProps}: AdditionalDetailsProps) {
+  Component(
+    {children, shouldAnnounceToScreenReader, ...elemProps}: AdditionalDetailsProps,
+    ref,
+    Element
+  ) {
+    const model = React.useContext(PaginationContext);
     const liveRegionProps = useLiveRegion({shouldAnnounceToScreenReader});
 
     return (
       <StyledAdditionalDetails
+        ref={ref}
+        as={Element}
         {...type.levels.subtext.medium}
         color={typeColors.hint}
         {...liveRegionProps}

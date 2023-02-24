@@ -4,19 +4,21 @@ import {PaginationModel} from './types';
 import {ListItem, ListItemProps} from './common/List';
 import {HStack, HStackProps} from '@workday/canvas-kit-react/layout';
 import {createComponent} from '@workday/canvas-kit-react/common';
+import {PaginationContext} from './usePaginationModel';
 
 export interface PageListProps extends Omit<HStackProps, 'as' | 'spacing' | 'children'> {
-  model: PaginationModel;
   children?: (model: PaginationModel) => React.ReactNode[] | React.ReactNode;
 }
 
-export const PageList = createComponent('div')({
+export const PageList = createComponent('ol')({
   displayName: 'Pagination.PageList',
-  Component({model, children, ...elemProps}: PageListProps) {
+  Component({children, ...elemProps}: PageListProps, ref, Element) {
+    const model = React.useContext(PaginationContext);
     return (
       <HStack
+        ref={ref}
+        as={Element}
         margin="zero"
-        as="ol"
         role="list"
         paddingLeft="zero"
         paddingRight="zero"
@@ -29,11 +31,15 @@ export const PageList = createComponent('div')({
   },
 });
 
-export type PageListItemProps = ListItemProps;
+export interface PageListItemProps extends ListItemProps {}
 
 export const PageListItem = createComponent('li')({
   displayName: 'Pagination.PageListItem',
-  Component({children, ...elemProps}: PageListItemProps) {
-    return <ListItem {...elemProps}>{children}</ListItem>;
+  Component({children, ...elemProps}: PageListItemProps, ref, Element) {
+    return (
+      <ListItem ref={ref} as={Element} {...elemProps}>
+        {children}
+      </ListItem>
+    );
   },
 });

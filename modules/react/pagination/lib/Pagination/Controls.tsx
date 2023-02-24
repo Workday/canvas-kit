@@ -1,6 +1,6 @@
 import * as React from 'react';
-import {TertiaryButton, TertiaryButtonProps} from '@workday/canvas-kit-react/button';
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {TertiaryButton} from '@workday/canvas-kit-react/button';
+import {createComponent, ExtractProps} from '@workday/canvas-kit-react/common';
 import {
   chevronLeftSmallIcon,
   chevron2xLeftSmallIcon,
@@ -8,31 +8,27 @@ import {
   chevron2xRightSmallIcon,
 } from '@workday/canvas-system-icons-web';
 
-import {PaginationModel} from './types';
 import {HStack} from '@workday/canvas-kit-react/layout';
 import {useRTL} from './common/utils/useRTL';
+import {PaginationContext} from './usePaginationModel';
 
-export type ControlButtonProps = TertiaryButtonProps &
-  React.ButtonHTMLAttributes<HTMLButtonElement> & {
-    model: PaginationModel;
-  };
+export interface ControlButtonProps extends ExtractProps<typeof TertiaryButton, never> {
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+}
 
-export type ControlsProps = React.HTMLAttributes<HTMLDivElement>;
+export interface PaginationControlsProps {}
 
-export const Controls = createComponent('div')({
+export const PaginationControls = createComponent('div')({
   displayName: 'Pagination.Controls',
-  Component({children, ...elemProps}: ControlsProps) {
-    return (
-      <HStack spacing="xxxs" alignItems="center" {...elemProps}>
-        {children}
-      </HStack>
-    );
+  Component(elemProps: PaginationControlsProps, ref, Element) {
+    return <HStack ref={ref} as={Element} spacing="xxxs" alignItems="center" {...elemProps} />;
   },
 });
 
 export const JumpToFirstButton = createComponent('button')({
   displayName: 'Pagination.JumpToFirstButton',
-  Component({model, onClick, ...restProps}: ControlButtonProps) {
+  Component({onClick, ...restProps}: ControlButtonProps, ref, Element) {
+    const model = React.useContext(PaginationContext);
     const isDisabled = model.state.currentPage <= model.state.firstPage;
     const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
       if (isDisabled) {
@@ -45,6 +41,8 @@ export const JumpToFirstButton = createComponent('button')({
     const icon = shouldUseRTL ? chevron2xRightSmallIcon : chevron2xLeftSmallIcon;
     return (
       <TertiaryButton
+        ref={ref}
+        as={Element}
         aria-disabled={isDisabled || undefined}
         size="small"
         icon={icon}
@@ -57,7 +55,8 @@ export const JumpToFirstButton = createComponent('button')({
 
 export const StepToPreviousButton = createComponent('button')({
   displayName: 'Pagination.StepToPreviousButton',
-  Component({onClick, model, ...restProps}: ControlButtonProps) {
+  Component({onClick, ...restProps}: ControlButtonProps, ref, Element) {
+    const model = React.useContext(PaginationContext);
     const isDisabled = model.state.currentPage <= model.state.firstPage;
     const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
       if (isDisabled) {
@@ -70,6 +69,8 @@ export const StepToPreviousButton = createComponent('button')({
     const icon = shouldUseRTL ? chevronRightSmallIcon : chevronLeftSmallIcon;
     return (
       <TertiaryButton
+        ref={ref}
+        as={Element}
         aria-disabled={isDisabled || undefined}
         size="small"
         icon={icon}
@@ -82,7 +83,8 @@ export const StepToPreviousButton = createComponent('button')({
 
 export const StepToNextButton = createComponent('button')({
   displayName: 'Pagination.StepToNextButton',
-  Component({model, onClick, ...restProps}: ControlButtonProps) {
+  Component({onClick, ...restProps}: ControlButtonProps, ref, Element) {
+    const model = React.useContext(PaginationContext);
     const isDisabled = model.state.currentPage >= model.state.lastPage;
     const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
       if (isDisabled) {
@@ -95,6 +97,8 @@ export const StepToNextButton = createComponent('button')({
     const icon = shouldUseRTL ? chevronLeftSmallIcon : chevronRightSmallIcon;
     return (
       <TertiaryButton
+        ref={ref}
+        as={Element}
         aria-disabled={isDisabled || undefined}
         size="small"
         icon={icon}
@@ -107,7 +111,8 @@ export const StepToNextButton = createComponent('button')({
 
 export const JumpToLastButton = createComponent('button')({
   displayName: 'Paganation.JumpToLastButton',
-  Component({model, onClick, ...restProps}: ControlButtonProps) {
+  Component({onClick, ...restProps}: ControlButtonProps, ref, Element) {
+    const model = React.useContext(PaginationContext);
     const isDisabled = model.state.currentPage >= model.state.lastPage;
     const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
       if (isDisabled) {
@@ -120,6 +125,8 @@ export const JumpToLastButton = createComponent('button')({
     const icon = shouldUseRTL ? chevron2xLeftSmallIcon : chevron2xRightSmallIcon;
     return (
       <TertiaryButton
+        ref={ref}
+        as={Element}
         aria-disabled={isDisabled || undefined}
         size="small"
         icon={icon}

@@ -3,7 +3,6 @@
 const ts = require('typescript');
 const glob = require('glob');
 const path = require('path');
-const fs = require('fs');
 
 // we use TS files, so tell node to register them
 require('ts-node').register({});
@@ -29,7 +28,6 @@ const defaultConfig = {
  */
 function getTSConfig(basePath = '.') {
   const tsconfigPath = ts.findConfigFile(basePath, ts.sys.fileExists);
-  console.log('tsconfigPath', fs.realpathSync('.'), tsconfigPath);
 
   let config = defaultTSConfig;
   if (tsconfigPath) {
@@ -111,7 +109,6 @@ function getFiles(basePath, config) {
 function createDocProgram() {
   const {path, config} = getConfig();
   const tsConfig = getTSConfig(path);
-  console.log('tsConfig', tsConfig);
 
   const plugins = getPlugins(path, config);
   let files = getFiles(path, config);

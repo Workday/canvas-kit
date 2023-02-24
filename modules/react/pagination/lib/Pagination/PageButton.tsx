@@ -9,6 +9,7 @@ import {borderRadius, colors, space} from '@workday/canvas-kit-react/tokens';
 import {BaseButton} from '@workday/canvas-kit-react/button';
 
 import {PaginationModel} from './types';
+import {PaginationContext} from './usePaginationModel';
 
 const StyledPageButton = styled(BaseButton)<{toggled?: boolean}>(
   {
@@ -53,15 +54,15 @@ const getPaginationButtonColors = (toggled: boolean, theme: EmotionCanvasTheme) 
   };
 };
 
-export type PageButtonProps = {
-  model: PaginationModel;
+export interface PageButtonProps {
   pageNumber: number;
   children?: React.ReactNode;
-};
+}
 
 export const PageButton = createComponent('button')({
   displayName: 'Pagination.PageButton',
-  Component({model, pageNumber, children, ...elemProps}: PageButtonProps) {
+  Component({pageNumber, children, ...elemProps}: PageButtonProps) {
+    const model = React.useContext(PaginationContext);
     const isCurrentPage = pageNumber === model.state.currentPage;
     const theme = useTheme();
 

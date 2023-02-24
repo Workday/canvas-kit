@@ -1,7 +1,9 @@
 import * as React from 'react';
 
 import {TextInput, TextInputProps} from '@workday/canvas-kit-react/text-input';
-import {createComponent} from '../../../../common';
+import {createComponent} from '@workday/canvas-kit-react/common';
+
+import {GoToContext} from './useGoToForm';
 
 export type GoToTextInputProps = TextInputProps & {
   'aria-label': string;
@@ -10,7 +12,9 @@ export type GoToTextInputProps = TextInputProps & {
 
 export const GoToTextInput = createComponent('input')({
   displayName: 'Pagination.GoToTextInput',
-  Component(elemProps: GoToTextInputProps) {
-    return <TextInput size={1} value="" width={55} {...elemProps} />;
+  Component(elemProps: GoToTextInputProps, ref, Element) {
+    const {inputProps} = React.useContext(GoToContext);
+
+    return <TextInput ref={ref} as={Element} size={1} width={55} {...inputProps} {...elemProps} />;
   },
 });

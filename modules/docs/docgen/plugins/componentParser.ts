@@ -259,7 +259,7 @@ function getComponentFromFunction(parser: DocParser, node: ts.Node): ComponentVa
           const declaration = getValueDeclaration(signature.parameters[0]);
           if (declaration && t.isParameter(declaration)) {
             const type = parser.checker.getTypeAtLocation(declaration);
-            if (!isObject(type)) {
+            if (!isObject(type) && !type.isIntersection()) {
               // This is not a component. We may still get some false positives, but this decreases
               // the likelihood
               return undefined;

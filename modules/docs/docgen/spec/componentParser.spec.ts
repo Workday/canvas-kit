@@ -337,18 +337,16 @@ describe('componentParser', () => {
     expect(docs).toHaveProperty('0.type.props.0.defaultValue.value', 'b');
   })
 
-  it('should match functions that return exotic components', () => {
+  it('should match functions that use intersection types', () => {
     const program = createProgramFromSource('test.tsx',`
       import React from 'react'
 
-      const MyContext = React.createContext()
-
       export const A = (props: Props) => {
-        return <MyContext.Provider />
+        return <div />
       }
 
-      interface Props {
-        a: string
+      type Props = { a: string } & {
+        b: string
       }
     `);
 
@@ -360,6 +358,10 @@ describe('componentParser', () => {
     expect(docs).toHaveProperty('0.type.props.0.name', 'a');
     expect(docs).toHaveProperty('0.type.props.0.type.kind', 'primitive');
     expect(docs).toHaveProperty('0.type.props.0.type.value', 'string');
+    expect(docs).toHaveProperty('0.type.props.1.kind', 'property');
+    expect(docs).toHaveProperty('0.type.props.1.name', 'b');
+    expect(docs).toHaveProperty('0.type.props.1.type.kind', 'primitive');
+    expect(docs).toHaveProperty('0.type.props.1.type.value', 'string');
   })
 
   it('should not match embedded component-like functions inside props', () => {
