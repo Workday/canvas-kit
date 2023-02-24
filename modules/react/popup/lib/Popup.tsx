@@ -20,8 +20,8 @@ export interface PopupProps {
 
 /**
  * This component is a container component that has no semantic element. It provides a React Context
- * model for all Popup subcomponents. If you manually pass a `model` to all subcomponents, this
- * container component isn't needed.
+ * model for all Popup subcomponents. A `model` can be manually passed to subcomponents to override
+ * this context.
  *
  * ```tsx
  * // using Popup

@@ -5,7 +5,6 @@ export const useFormFieldModel = createModelHook({
     /**
      * Optional flag to denote if this field has an error to display. When true the `FormField.Input` will have
      * `required` set to true, and usually some subcomponents will have a error color applied.
-     * @default false
      */
     hasError: false,
     /**

@@ -1,4 +1,3 @@
-
 import {Grid, GridItem} from '@workday/canvas-kit-react/layout';
 // examples
 import {GridLayout} from './examples/Grid/GridLayout';
@@ -86,8 +85,6 @@ complementary not exclusionary. With that said, here are general guidelines for 
 style props that map to CSS Grid style properties to provide a common, ergonomic API for building
 layouts.
 
-#### Usage
-
 ```tsx
 <Grid gridTemplateColumns="1fr 2fr 1fr" gridGap={space.s}>
   <div>Implicit grid item 1</div>
@@ -107,8 +104,6 @@ style props.
 `Grid.Item` is a subcomponent of `Grid`. It is a `Box` component under the hood and exposes
 [grid item style props](/getting-started/for-developers/resources/style-props/#grid) that map to CSS
 Grid Item properties. This provides greater control over how child components render in your layout.
-
-#### Usage
 
 ```tsx
 <Grid gridGap={space.s}>

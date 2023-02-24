@@ -94,7 +94,7 @@ describe('modelParser', () => {
     expect(symbols).toHaveProperty('4.name', 'IdModelEvents');
   });
 
-  it('should replace instances of "ReturnType<typeof useMyModel>" to a symbol of MyModel', () => {
+  it('should replace instances of "ReturnType<typeof useMyModel>" with a symbol of useMyModel', () => {
     const program = createProgramFromSource(`
       export type MyType = ReturnType<typeof useMyModel>
     `);

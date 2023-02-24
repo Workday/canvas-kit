@@ -5,9 +5,9 @@ function getConfig() {
   const tsconfigPath = ts.findConfigFile('.', ts.sys.fileExists) || '';
 
   const basePath = path.dirname(tsconfigPath);
-  const {config, error} = ts.readConfigFile(tsconfigPath, ts.sys.readFile);
+  const {config} = ts.readConfigFile(tsconfigPath, ts.sys.readFile);
 
-  const {options, errors} = ts.parseJsonConfigFileContent(
+  const {options} = ts.parseJsonConfigFileContent(
     config,
     ts.sys,
     basePath,

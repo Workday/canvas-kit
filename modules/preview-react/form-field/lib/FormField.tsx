@@ -18,7 +18,8 @@ export interface FormFieldProps extends Omit<ExtractProps<typeof Stack, never>, 
    */
   orientation: 'vertical' | 'horizontal';
   /**
-   * Spacing between children elements
+   * Spacing between children elementsSpacing between children element. The default value is
+   * `'xxxs'` when orientation is vertical, `'l'` when orientation is horizontal.
    */
   spacing?: StackSpacing;
 }

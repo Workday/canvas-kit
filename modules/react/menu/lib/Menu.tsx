@@ -20,9 +20,9 @@ export interface MenuProps {
 /**
  * `Menu` is a combination of as popup and a list. It usually has some type of target element that
  * expands/collapses the menu and a `menu` role and and several `menuitem` roles. Focus is managed
- * uses [roving tabindex](https://w3c.github.io/aria-practices/#kbd_roving_tabindex) for maximum
+ * using [roving tabindex](https://w3c.github.io/aria-practices/#kbd_roving_tabindex) for maximum
  * compatibility. A `Menu` can have two modes: `single` and `multiple`. This mode determines both
- * how many items can be selected as well as the default behavior when a menuitem is clicked. For
+ * how many items can be selected as well as the default behavior when a `menuitem` is clicked. For
  * the `single` mode, selecting a `menuitem` will select and close the menu. For the `multiple`
  * mode, clicking a `menuitem` will toggle selection and will not close the menu.
  *

@@ -260,8 +260,6 @@ export const Pill = createContainer('button')({
      * This component renders a `<span>` that automatically handles overflow by rendering a tooltip.
      * There's no need to use this component directly since the overflow is handled for you automatically.
      *
-     * #### Usage
-     *
      * ```tsx
      * <Pill variant="readOnly">
      *   <Pill.Label>Read-only</Pill.Label>

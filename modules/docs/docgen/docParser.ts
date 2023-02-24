@@ -517,9 +517,6 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
     };
   }
 
-  if (t.isIndexSignature(node)) {
-  }
-
   /**
    * An ObjectLiteralExpression is a JS value of an object literal.
    *
@@ -1099,8 +1096,6 @@ function _getValueFromNode(parser: DocParser, node: ts.Node): Value {
   if (!symbol) {
     return unknownValue(safeGetText(checker, node));
   }
-  const declaration = getValueDeclaration(symbol);
-  (declaration && t.getKindNameFromNode(declaration)) || symbol.name;
 
   return unknownValue(safeGetText(checker, node));
 }

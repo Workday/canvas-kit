@@ -142,7 +142,7 @@ describe('componentParser', () => {
       expect(docs).toHaveProperty('0.type.props.0.type.value', 'string');
     })
 
-    it('should handle deconstruction defaults a function that returns JSX', () => {
+    it('should handle JSDoc defaults in a function that returns JSX', () => {
       const program = createProgramFromSource('test.tsx',`
         import React from 'react'
 
@@ -168,7 +168,7 @@ describe('componentParser', () => {
       expect(docs).toHaveProperty('0.type.props.0.defaultValue.value', 'b');
     })
 
-    it('should handle deconstruction defaults a function that returns JSX', () => {
+    it('should handle deconstructed defaults in a function that returns JSX', () => {
       const program = createProgramFromSource('test.tsx',`
         import React from 'react'
 

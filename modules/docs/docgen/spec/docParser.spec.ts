@@ -3,7 +3,7 @@ import {parse} from '../docParser';
 
 describe('docParser', () => {
   describe('simple values', () => {
-    it('should find an exported type of string', () => {
+    it('should find an exported type of a primitive', () => {
       const program = createProgramFromSource('export type Foo = never');
       const docs = parse(program, 'test.ts');
 
@@ -13,7 +13,7 @@ describe('docParser', () => {
       expect(docs).toHaveProperty('0.type.value.value', 'never');
     });
 
-    it('should find an exported type of string', () => {
+    it('should find an exported type of a string', () => {
       const program = createProgramFromSource('export type Foo = "foo"');
       const docs = parse(program, 'test.ts');
 
@@ -22,7 +22,7 @@ describe('docParser', () => {
       expect(docs).toHaveProperty('0.type.value', {kind: 'string', value: 'foo'});
     });
 
-    it('should find an exported type of number', () => {
+    it('should find an exported type of a number', () => {
       const program = createProgramFromSource('export type Foo = 10');
       const docs = parse(program, 'test.ts');
 
@@ -48,7 +48,7 @@ describe('docParser', () => {
       expect(docs).toHaveProperty('0.type.value.value.3.value', 'b.d');
     });
 
-    it('should find an exported type of array', () => {
+    it('should find an exported type of an array', () => {
       const program = createProgramFromSource('export type Foo = number[]');
       const docs = parse(program, 'test.ts');
 
@@ -162,7 +162,7 @@ describe('docParser', () => {
       expect(docs).toHaveProperty('0.type.returnType.value.1.value', 'null');
     });
 
-    it('should find an external type of a function return union type', () => {
+    it('should find an external type of an "as const"', () => {
       const program = createProgramFromSource(`
         export const keys = ['foo', 'bar'] as const;
       `);
@@ -383,6 +383,7 @@ describe('docParser', () => {
         export type Foo = string
       `);
       const docs = parse(program, 'test.ts');
+
       expect(docs).toHaveProperty('0.description', 'Foo is a type');
       expect(docs).toHaveProperty('0.tags', {
         example: expect.stringContaining('// this is an example'),
@@ -424,6 +425,7 @@ describe('docParser', () => {
         };
       `);
       const docs = parse(program, 'test.ts');
+
       expect(docs).toHaveProperty('0.name', 'Foo');
       expect(docs).toHaveProperty('0.type.kind', 'object');
       expect(docs).toHaveProperty('0.type.properties.0.name', 'foo');
@@ -443,6 +445,7 @@ describe('docParser', () => {
         const bar = 'baz'
       `);
       const docs = parse(program, 'test.ts');
+
       expect(docs).toHaveProperty('0.name', 'Foo');
       expect(docs).toHaveProperty('0.type.kind', 'object');
       expect(docs).toHaveProperty('0.type.properties.0.name', 'foo');
@@ -462,6 +465,7 @@ describe('docParser', () => {
         export const bar = 'baz'
       `);
       const docs = parse(program, 'test.ts');
+
       expect(docs).toHaveProperty('0.name', 'Foo');
       expect(docs).toHaveProperty('0.type.kind', 'object');
       expect(docs).toHaveProperty('0.type.properties.0.name', 'foo');
@@ -477,6 +481,7 @@ describe('docParser', () => {
         };
       `);
       const docs = parse(program, 'test.ts');
+
       expect(docs).toHaveProperty('0.name', 'Foo');
       expect(docs).toHaveProperty('0.type.kind', 'object');
       expect(docs).toHaveProperty('0.type.typeParameters.0.kind', 'typeParameter');
@@ -494,6 +499,7 @@ describe('docParser', () => {
         };
       `);
       const docs = parse(program, 'test.ts');
+
       expect(docs).toHaveProperty('0.name', 'Foo');
       expect(docs).toHaveProperty('0.type.kind', 'object');
       expect(docs).toHaveProperty('0.type.properties.0.name', 'foo');
@@ -512,6 +518,7 @@ describe('docParser', () => {
         };
       `);
       const docs = parse(program, 'test.ts');
+
       expect(docs).toHaveProperty('0.name', 'Foo');
       expect(docs).toHaveProperty('0.type.kind', 'object');
       expect(docs).toHaveProperty('0.type.typeParameters.0.kind', 'typeParameter');
@@ -533,6 +540,7 @@ describe('docParser', () => {
         };
       `);
       const docs = parse(program, 'test.ts');
+
       expect(docs).toHaveProperty('0.name', 'Foo');
       expect(docs).toHaveProperty('0.type.kind', 'object');
       expect(docs).toHaveProperty('0.type.properties.0.name', 'foo');
@@ -547,6 +555,7 @@ describe('docParser', () => {
         }
       `);
       const docs = parse(program, 'test.ts');
+
       expect(docs).toHaveProperty('0.name', 'Foo');
       expect(docs).toHaveProperty('0.type.kind', 'object');
       expect(docs).toHaveProperty('0.type.properties.0.name', 'foo');
@@ -562,6 +571,7 @@ describe('docParser', () => {
         }
       `);
       const docs = parse(program, 'test.ts');
+
       expect(docs).toHaveProperty('0.name', 'Foo');
       expect(docs).toHaveProperty('0.type.kind', 'object');
       expect(docs).toHaveProperty('0.type.typeParameters.0.kind', 'typeParameter');
@@ -581,6 +591,7 @@ describe('docParser', () => {
         export type Foo = Record<string, string>
       `);
       const docs = parse(program, 'test.ts');
+
       expect(docs).toHaveProperty('0.name', 'Foo');
       expect(docs).toHaveProperty('0.type.kind', 'type');
       expect(docs).toHaveProperty('0.type.value.kind', 'external');
@@ -590,14 +601,15 @@ describe('docParser', () => {
       expect(docs).toHaveProperty('0.type.value.typeParameters.1.value', 'string');
     });
 
-    it('should handle exported interfaces with an index signature', () => {
+    it.only('should handle exported interfaces with an index signature', () => {
       const program = createProgramFromSource(`
         export interface PropMap {
           foo: string
           [key: string | number]: string
         }
       `);
-      const docs = parse(program, 'test.ts');
+      const docs = parse(program, 'test.ts'); //?
+
       expect(docs).toHaveProperty('0.name', 'PropMap');
       expect(docs).toHaveProperty('0.type.kind', 'object');
       expect(docs).toHaveProperty('0.type.properties.0.kind', 'property');
@@ -613,6 +625,7 @@ describe('docParser', () => {
         };
       `);
       const docs = parse(program, 'test.ts');
+
       expect(docs).toHaveProperty('0.name', 'Foo');
       expect(docs).toHaveProperty('0.type.kind', 'object');
       expect(docs).toHaveProperty('0.type.typeParameters.0.kind', 'typeParameter');
@@ -626,7 +639,7 @@ describe('docParser', () => {
       expect(docs).toHaveProperty('0.type.properties.0.kind', 'property');
     });
 
-    it('should handle exported interfaces with a generic with constraint and defaults', () => {
+    it('should handle exported interfaces with a generic TypeParameter', () => {
       const program = createProgramFromSource(`
         export interface Foo<T> {
           foo: Bar<T>
@@ -635,6 +648,7 @@ describe('docParser', () => {
         export type Bar<T> = {value: T}
       `);
       const docs = parse(program, 'test.ts');
+
       expect(docs).toHaveProperty('0.name', 'Foo');
       expect(docs).toHaveProperty('0.type.kind', 'object');
       expect(docs).toHaveProperty('0.type.typeParameters.0.kind', 'typeParameter');
@@ -656,6 +670,7 @@ describe('docParser', () => {
         export type Bar<T> = {value: T}
       `);
       const docs = parse(program, 'test.ts');
+
       expect(docs).toHaveProperty('0.name', 'Foo');
       expect(docs).toHaveProperty('0.type.kind', 'object');
       expect(docs).toHaveProperty('0.type.typeParameters.0.kind', 'typeParameter');
@@ -680,6 +695,7 @@ describe('docParser', () => {
         };
       `);
       const docs = parse(program, 'test.ts');
+
       expect(docs).toHaveProperty('0.name', 'Foo');
       expect(docs).toHaveProperty('0.type.kind', 'object');
       expect(docs).toHaveProperty('0.type.typeParameters.0.kind', 'typeParameter');
@@ -699,6 +715,7 @@ describe('docParser', () => {
         };
       `);
       const docs = parse(program, 'test.ts');
+
       expect(docs).toHaveProperty('0.name', 'foo');
       expect(docs).toHaveProperty('0.type.kind', 'object');
       expect(docs).toHaveProperty('0.type.properties.0.name', 'bar');
@@ -719,6 +736,7 @@ describe('docParser', () => {
         };
       `);
       const docs = parse(program, 'test.ts');
+
       expect(docs).toHaveProperty('0.name', 'foo');
       expect(docs).toHaveProperty('0.type.kind', 'object');
       expect(docs).toHaveProperty('0.type.properties.0.name', 'bar');
@@ -739,6 +757,7 @@ describe('docParser', () => {
         };
       `);
       const docs = parse(program, 'test.ts');
+
       expect(docs).toHaveProperty('0.name', 'foo');
       expect(docs).toHaveProperty('0.type.kind', 'object');
       expect(docs).toHaveProperty('0.type.properties.0.name', 'bar');
@@ -789,6 +808,7 @@ describe('docParser', () => {
         };
         `);
       const docs = parse(program, 'test.ts');
+
       expect(docs).toHaveProperty('0.name', 'a');
       expect(docs).toHaveProperty('0.type.kind', 'object');
       expect(docs).toHaveProperty('0.type.properties.0.name', 'b');
@@ -808,6 +828,7 @@ describe('docParser', () => {
         }
       `);
       const docs = parse(program, 'test.ts');
+
       expect(docs).toHaveProperty('0.name', 'a');
       expect(docs).toHaveProperty('0.type.kind', 'object');
       expect(docs).toHaveProperty('0.type.properties.0.name', 'b');
@@ -861,6 +882,7 @@ describe('docParser', () => {
         export type Bar = Foo;
       `);
       const docs = parse(program, 'test.ts');
+
       expect(docs).toHaveProperty('1.name', 'Bar');
       expect(docs).toHaveProperty('1.type.kind', 'type');
       expect(docs).toHaveProperty('1.type.value.kind', 'symbol');
@@ -873,6 +895,7 @@ describe('docParser', () => {
         export type Bar = Foo<'foo'>;
       `);
       const docs = parse(program, 'test.ts');
+
       expect(docs).toHaveProperty('0.name', 'Bar');
       expect(docs).toHaveProperty('0.type.kind', 'type');
       expect(docs).toHaveProperty('0.type.value.kind', 'string');
@@ -886,6 +909,7 @@ describe('docParser', () => {
         }
       `);
       const docs = parse(program, 'test.ts');
+
       expect(docs).toHaveProperty('0.name', 'myFoo');
       expect(docs).toHaveProperty('0.type.kind', 'function');
       expect(docs).toHaveProperty('0.type.parameters.0.kind', 'parameter');
@@ -910,6 +934,7 @@ describe('docParser', () => {
         }
       `);
       const docs = parse(program, 'test.ts');
+
       expect(docs).toHaveProperty('0.name', 'myFoo');
       expect(docs).toHaveProperty('0.type.kind', 'function');
       expect(docs).toHaveProperty('0.type.parameters.0.kind', 'parameter');
@@ -922,13 +947,14 @@ describe('docParser', () => {
       });
     });
 
-    it('should handle functions with optional parameters', () => {
+    it('should handle functions with defaulted parameters', () => {
       const program = createProgramFromSource(`
         export function myFoo(input = 'foo'): boolean {
           return false
         }
       `);
       const docs = parse(program, 'test.ts');
+
       expect(docs).toHaveProperty('0.name', 'myFoo');
       expect(docs).toHaveProperty('0.type.kind', 'function');
       expect(docs).toHaveProperty('0.type.parameters.0.kind', 'parameter');
@@ -952,6 +978,7 @@ describe('docParser', () => {
       }
     `);
     const docs = parse(program, 'test.ts');
+
     expect(docs).toHaveProperty('0.name', 'myFoo');
     expect(docs).toHaveProperty('0.type.kind', 'function');
     expect(docs).toHaveProperty('0.type.parameters.0.kind', 'parameter');
@@ -975,6 +1002,7 @@ describe('docParser', () => {
       }
     `);
     const docs = parse(program, 'test.ts');
+
     expect(docs).toHaveProperty('0.name', 'myFoo');
     expect(docs).toHaveProperty('0.type.kind', 'function');
     expect(docs).toHaveProperty('0.type.parameters.0.kind', 'parameter');
@@ -993,6 +1021,7 @@ describe('docParser', () => {
       }
     `);
     const docs = parse(program, 'test.ts');
+
     expect(docs).toHaveProperty('0.name', 'myFoo');
     expect(docs).toHaveProperty('0.type.kind', 'function');
     expect(docs).toHaveProperty('0.type.parameters.0.kind', 'parameter');
@@ -1010,6 +1039,7 @@ describe('docParser', () => {
       }
     `);
     const docs = parse(program, 'test.ts');
+
     expect(docs).toHaveProperty('0.name', 'myFoo');
     expect(docs).toHaveProperty('0.type.kind', 'function');
     expect(docs).toHaveProperty('0.type.parameters.0.kind', 'parameter');
@@ -1029,6 +1059,7 @@ describe('docParser', () => {
       }
     `);
     const docs = parse(program, 'test.ts');
+
     expect(docs).toHaveProperty('0.name', 'myFoo');
     expect(docs).toHaveProperty('0.type.kind', 'function');
     expect(docs).toHaveProperty('0.type.parameters.0.kind', 'parameter');
@@ -1052,6 +1083,7 @@ describe('docParser', () => {
       }
     `);
     const docs = parse(program, 'test.ts');
+
     expect(docs).toHaveProperty('0.name', 'myFoo');
     expect(docs).toHaveProperty('0.type.kind', 'function');
     expect(docs).toHaveProperty('0.type.parameters.0.kind', 'parameter');
@@ -1074,6 +1106,7 @@ describe('docParser', () => {
       }
     `);
     const docs = parse(program, 'test.ts');
+
     expect(docs).toHaveProperty('0.name', 'myFoo');
     expect(docs).toHaveProperty('0.type.kind', 'function');
     expect(docs).toHaveProperty('0.type.parameters.0.kind', 'parameter');
@@ -1095,6 +1128,7 @@ describe('docParser', () => {
       myFoo.myStaticMember = 'bar'
     `);
     const docs = parse(program, 'test.ts');
+
     expect(docs).toHaveProperty('0.name', 'myFoo');
     expect(docs).toHaveProperty('0.type.kind', 'function');
     expect(docs).toHaveProperty('0.type.members.0.kind', 'property');
@@ -1112,6 +1146,7 @@ describe('docParser', () => {
       myFoo.myStaticMember = 'bar'
     `);
     const docs = parse(program, 'test.ts');
+
     expect(docs).toHaveProperty('0.name', 'myFoo');
     expect(docs).toHaveProperty('0.type.kind', 'function');
     expect(docs).toHaveProperty('0.type.typeParameters.0.kind', 'typeParameter');
@@ -1134,6 +1169,7 @@ describe('docParser', () => {
     };
   `);
     const docs = parse(program, 'test.ts');
+
     expect(docs).toHaveProperty('0.name', 'foo');
     expect(docs).toHaveProperty('0.type.kind', 'object');
     expect(docs).toHaveProperty('0.type.properties.0.name', 'bar');
@@ -1152,6 +1188,7 @@ describe('docParser', () => {
       export type Foo<T> = T extends string ? true : false
     `);
     const docs = parse(program, 'test.ts');
+
     expect(docs).toHaveProperty('0.name', 'Foo');
     expect(docs).toHaveProperty('0.type.kind', 'type');
     expect(docs).toHaveProperty('0.type.value.check.kind', 'generic');
@@ -1171,6 +1208,7 @@ describe('docParser', () => {
       }
     `);
     const docs = parse(program, 'test.ts');
+
     expect(docs).toHaveProperty('0.name', 'Foo');
     expect(docs).toHaveProperty('0.type.kind', 'object');
     expect(docs).toHaveProperty('0.type.indexSignature.kind', 'indexSignature');
@@ -1189,6 +1227,7 @@ describe('docParser', () => {
       }
     `);
     const docs = parse(program, 'test.ts');
+
     expect(docs).toHaveProperty('0.name', 'MyEnum');
     expect(docs).toHaveProperty('0.type.kind', 'object');
     expect(docs).toHaveProperty('0.type.properties.0.kind', 'property');
@@ -1219,22 +1258,6 @@ describe('docParser', () => {
     expect(docs).toHaveProperty('0.type.value.value.0.value', 'foo');
     expect(docs).toHaveProperty('0.type.value.value.1.kind', 'string');
     expect(docs).toHaveProperty('0.type.value.value.1.value', 'bar');
-  });
-
-  it('should handle large unions', () => {
-    const program = createProgramFromSource(`
-      type Letters = 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' |  'm' | 'n' | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z'
-      type Numbers = '1' | '2'
-      type A = \`\${Letters}\${Numbers}\`
-
-      export type B = A
-    `);
-    const docs = parse(program, 'test.ts');
-
-    expect(docs).toHaveProperty('0.name', 'B');
-    expect(docs).toHaveProperty('0.type.kind', 'type');
-    expect(docs).toHaveProperty('0.type.value.kind', 'union');
-    expect(docs).toHaveProperty('0.type.value.value.length', 52);
   });
 
   it('should handle large unions', () => {

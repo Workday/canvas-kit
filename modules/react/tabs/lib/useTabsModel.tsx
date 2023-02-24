@@ -11,7 +11,8 @@ import {useMenuModel} from '@workday/canvas-kit-react/menu';
 /**
  * The TabsModel extends the [Collection
  * System](/getting-started/for-developers/resources/collection-api/). Tabs have tab items and
- * panels. Tabs can be overflowed and a MenuModel sub-model.
+ * panels. Tabs can be overflowed if there isn't enough room to render and will overflow to a
+ * {@link MenuModel} sub-model.
  *
  * ```tsx
  * const model = useTabsModel({

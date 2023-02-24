@@ -8,7 +8,6 @@ import {
 import {borderRadius, colors, space} from '@workday/canvas-kit-react/tokens';
 import {BaseButton} from '@workday/canvas-kit-react/button';
 
-import {PaginationModel} from './types';
 import {PaginationContext} from './usePaginationModel';
 
 const StyledPageButton = styled(BaseButton)<{toggled?: boolean}>(

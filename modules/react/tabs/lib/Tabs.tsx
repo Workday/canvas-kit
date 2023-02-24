@@ -100,8 +100,6 @@ export const Tabs = createContainer()({
      * The overflow button of a `Tabs.List`. When a tab list overflows, this overflow button is
      * rendered. Overflow only works when the model is given an array of `items`.
      *
-     * ## Usage
-     *
      * ```tsx
      * <Tabs items={items}>
      *   <Tabs.List overflowButton={
