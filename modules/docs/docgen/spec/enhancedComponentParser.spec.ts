@@ -224,7 +224,7 @@ describe('enhancedComponentParser', () => {
     });
   });
 
-  it('should handle "composeHooks" a subModel hook', () => {
+  it('should handle "composeHooks" with a subModel hook', () => {
     const program = createProgramFromSource(`
       export const useMyComponent = composeHooks(
         useHook1,
@@ -604,7 +604,7 @@ describe('enhancedComponentParser', () => {
     });
 
 
-    it('should handle "elemPropsHook" that is aliased', () => {
+    it('should handle "subComponents"', () => {
       const program = createProgramFromSource(
         'test.tsx',
         `
@@ -645,6 +645,60 @@ describe('enhancedComponentParser', () => {
       expect(symbols).toHaveProperty('0.type.subComponents.0.name', 'SubComponent');
       expect(symbols).toHaveProperty('0.type.subComponents.0.symbol', 'MySubcomponent');
     });
+
+    it('should filter out "model" and "elemPropsHooks" props that are already part of a prop interface', () => {
+      const program = createProgramFromSource(
+        'test.tsx',
+        `
+        export const MyComponent = createContainer('div')({
+          displayName: 'My.Component',
+          modelHook: useMyModel,
+          elemPropsHook: useMyComponent,
+          subComponents: {
+            Item: MyComponentItem
+          }
+        })<MyComponentProps>((elemProps, Element) => {
+          return <Element {...elemProps} />
+        });
+
+        export interface MyComponentProps {
+          size: string
+          elemPropsHook: any
+          model: any
+        }
+
+        export const MyComponentItem = createSubcomponent('div')({
+          modelHook: useMyModel
+        })((elemProps, Element) => {
+          return <Element {...elemProps} />
+        })
+      `
+      );
+
+      const symbols = parse(program, 'test.tsx', [enhancedComponentParser]);
+
+      expect(symbols).toHaveProperty('0.name', 'MyComponent');
+      expect(symbols).toHaveProperty('0.type.kind', 'enhancedComponent');
+      expect(symbols).toHaveProperty('0.type.displayName', 'My.Component');
+      expect(symbols).toHaveProperty('0.type.elemPropsHook', 'useMyComponent');
+      expect(symbols).toHaveProperty('0.type.baseElement.kind', 'external');
+      expect(symbols).toHaveProperty('0.type.baseElement.name', 'div');
+      expect(symbols).toHaveProperty('0.type.props.0.kind', 'property');
+      expect(symbols).toHaveProperty('0.type.props.0.name', 'size');
+      expect(symbols).toHaveProperty('0.type.props.0.type.kind', 'primitive');
+      expect(symbols).toHaveProperty('0.type.props.0.type.value', 'string');
+      expect(symbols).toHaveProperty('0.type.props.1.kind', 'property');
+      // We're not sure which property position these are, so use asymmetric matchers
+      expect(symbols).toHaveProperty('0.type.props', expect.arrayContaining([
+        expect.objectContaining({name: 'model', type: expect.objectContaining({ kind: 'symbol' })})
+      ]));
+      expect(symbols).toHaveProperty('0.type.props', expect.arrayContaining([
+        expect.objectContaining({name: 'elemPropsHook', type: expect.objectContaining({ kind: 'function' })})
+      ]));
+      // Not sure how to test number of keys in an array using only Jest + matchers
+      expect((symbols[0].type as any).props.filter(p => p.name === 'model')).toHaveLength(1)
+      expect((symbols[0].type as any).props.filter(p => p.name === 'elemPropsHook')).toHaveLength(1)
+    });
   });
 
   describe('createSubcomponent', () => {
@@ -669,7 +723,9 @@ describe('enhancedComponentParser', () => {
       `
       );
 
-      const symbols = parse(program, 'test.tsx', [enhancedComponentParser]);      expect(symbols).toHaveProperty('0.name', 'MyComponent');
+      const symbols = parse(program, 'test.tsx', [enhancedComponentParser]);
+
+      expect(symbols).toHaveProperty('0.name', 'MyComponent');
       expect(symbols).toHaveProperty('0.type.kind', 'enhancedComponent');
       expect(symbols).toHaveProperty('0.type.displayName', 'My.Component');
       expect(symbols).toHaveProperty('0.type.elemPropsHook', 'useMyComponent');
@@ -703,7 +759,9 @@ describe('enhancedComponentParser', () => {
       `
       );
 
-      const symbols = parse(program, 'test.tsx', [enhancedComponentParser]);      expect(symbols).toHaveProperty('0.name', 'MyComponent');
+      const symbols = parse(program, 'test.tsx', [enhancedComponentParser]);
+
+      expect(symbols).toHaveProperty('0.name', 'MyComponent');
       expect(symbols).toHaveProperty('0.type.kind', 'enhancedComponent');
       expect(symbols).toHaveProperty('0.type.displayName', 'My.Component');
       expect(symbols).toHaveProperty('0.type.baseElement.kind', 'symbol');

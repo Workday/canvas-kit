@@ -124,6 +124,7 @@ export const SymbolDialog = ({value, hideDescription}: SymbolDialogProps) => {
                       name={value.name}
                       headingStart={3}
                       hideDescription={hideDescription}
+                      meta={{hideHeader: true}}
                     />
                   </>
                 ) : (

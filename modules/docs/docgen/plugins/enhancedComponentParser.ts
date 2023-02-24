@@ -456,7 +456,10 @@ export const enhancedComponentParser = createParserPlugin<SupportedValues>((node
       const type = node.initializer.typeArguments
         ? parser.checker.getTypeAtLocation(node.initializer.typeArguments[0])
         : undefined;
-      const props = type ? getComponentProps(parser, signature, type, baseElement) : [];
+      const props = (type ? getComponentProps(parser, signature, type, baseElement) : []).filter(
+        // Filter out `model` and `elemPropsHook` that might come if we extend an interface
+        p => !['model', 'elemPropsHook'].includes(p.name)
+      );
       props.push(getModelProp(parser, modelName));
       props.push(getElemProp(parser, modelName));
       const styleComponent = getStyleComponent(displayName, props);

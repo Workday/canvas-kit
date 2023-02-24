@@ -81,24 +81,18 @@ and `ToggleButton`.
 
 <ExampleCodeBlock code={AlwaysOpen} />
 
-## Components
-
-### SidePanel
-
-#### Usage
-
 The majority of `SidePanel`'s logic and funcitonality lives in this container component. Most of
 this functionality has been described in the examples above, but there a couple specific callbacks
 worth mentioning here.
 
-##### onExpandedChange
+### onExpandedChange
 
 The `onExpandedChange` callback is called when the boolean `expanded` state is updated. This is a
 handy way to hook into these updates to trigger side-effects. Below is an example:
 
 <ExampleCodeBlock code={OnExpandedChange} />
 
-##### onStateTransition
+### onStateTransition
 
 While `onExpandedChange` works well for discrete boolean state changes, there may be occasions where
 you also need transition states. In these situations, `onStateTransition` is a better fit. This
@@ -108,32 +102,15 @@ is an example:
 
 <ExampleCodeBlock code={OnStateTransition} />
 
-#### Props
+## Component API
 
-<SymbolDoc name="SidePanel" fileName="/preview-react/" />
-
-### SidePanel.ToggleButton
-
-#### Usage
-
-`<SidePanel.ToggleButton>` is a control that is meant to toggle between `expanded = true` and
-`expanded = false` states. It must be used within the `SidePanel` component as a child. Use in
-conjunction with `useSidePanel`'s `controlProps`, otherwise it does not come with explicit `onClick`
-handlers.
-
-For accessibility purposes, it must be the first focusable element. We recommend that you keep it as
-the first child of `SidePanel`.
-
-#### Props
-
-This is a standard Canvas Kit `TertiaryButton` and will accept
-[all those props](http://localhost:9001/?path=/docs/components-buttons-button-react--tertiary#props-2).
+<SymbolDoc name="SidePanel" fileName="/preview-react/" hideDescription />
 
 ## Hooks
 
 ### useSidePanel
 
-<SymbolDoc name="useSidePanel" fileName="preview" />
+<SymbolDoc name="useSidePanel" fileName="/preview-react/" />
 
 ## Specifications
 

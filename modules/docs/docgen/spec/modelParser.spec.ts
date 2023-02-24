@@ -132,7 +132,7 @@ describe('modelParser', () => {
     expect(symbols).toHaveProperty('0.type.defaultConfig.0.type.name', 'MyModelConfig');
   });
 
-  it('should replace submodel references on modelProperties with the model', () => {
+  it('should replace subModel references on modelProperties with the model', () => {
     const program = createProgramFromSource(`
       export const useIdModel = createModelHook({
         defaultConfig: {

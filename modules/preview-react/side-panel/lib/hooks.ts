@@ -1,5 +1,10 @@
 import * as React from 'react';
 
+export const SidePanelContext = React.createContext({
+  state: 'expanded',
+  origin: 'left',
+});
+
 import {useUniqueId} from '@workday/canvas-kit-react/common';
 /**
  * The optional config options for the `useSidePanel` hook
