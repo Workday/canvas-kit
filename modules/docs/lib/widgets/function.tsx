@@ -53,7 +53,16 @@ registerWidget<FunctionParameter>('parameter', ({value}) => {
           style={{maxWidth: '50em'}}
           title={<MdxJSToJSX>{value.description}</MdxJSToJSX>}
         >
-          <span className="token property">{value.name}</span>
+          <span
+            className="token property"
+            style={{
+              cursor: 'pointer',
+              textDecoration: 'underline',
+              textDecorationStyle: 'dotted',
+            }}
+          >
+            {value.name}
+          </span>
         </DescriptionTooltip>
       ) : (
         <span className="token property">{value.name}</span>

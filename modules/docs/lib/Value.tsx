@@ -7,6 +7,7 @@ import * as types from '../docgen/docTypes';
 import {MdxJSToJSX} from './MDXElements';
 import {Table} from './Table';
 import {capitalize, IndentLevelContext, RenderContext, space} from './widgetUtils';
+import {DescriptionTooltip} from './DescriptionTooltip';
 
 const widgets: Record<string, React.FC<ValueProps>> = {};
 
@@ -52,13 +53,22 @@ export const PropertiesInline = ({properties}: {properties: types.ObjectProperty
             <br />
             {space(level + 1)}
             {p.description ? (
-              <Tooltip
+              <DescriptionTooltip
                 type="describe"
                 style={{maxWidth: '50em'}}
                 title={<MdxJSToJSX>{p.description}</MdxJSToJSX>}
               >
-                <span className="token property">{p.name}</span>
-              </Tooltip>
+                <span
+                  className="token property"
+                  style={{
+                    cursor: 'pointer',
+                    textDecoration: 'underline',
+                    textDecorationStyle: 'dotted',
+                  }}
+                >
+                  {p.name}
+                </span>
+              </DescriptionTooltip>
             ) : (
               <span className="token property">{p.name}</span>
             )}
@@ -138,6 +148,7 @@ function getTableRows(
             ...getTableRows(
               property.type.properties,
               showDefault,
+              false,1
               level + 1,
               index + properties.length
             ),
