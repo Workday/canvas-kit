@@ -123,7 +123,7 @@ function getTableRows(
         <Table.Data>
           <code>
             {
-              /*property.type.kind === 'object' ? null : */ <RenderContext.Provider value="inline">
+              <RenderContext.Provider value="inline">
                 <Value value={property.type} />
               </RenderContext.Provider>
             }
@@ -135,26 +135,17 @@ function getTableRows(
         {showDefault ? (
           <Table.Data>
             {property.defaultValue ? (
-              <code>
-                <Value value={property.defaultValue} />
-              </code>
+              property.defaultValue.kind === 'primitive' &&
+              property.defaultValue.value === 'undefined' ? null : (
+                <code>
+                  <Value value={property.defaultValue} />
+                </code>
+              )
             ) : null}
           </Table.Data>
         ) : null}
       </Table.Row>,
-    ]; /*.concat(
-      property.type.kind === 'object'
-        ? [
-            ...getTableRows(
-              property.type.properties,
-              showDefault,
-              false,1
-              level + 1,
-              index + properties.length
-            ),
-          ]
-        : []
-    );*/
+    ];
   });
 }
 

@@ -25,6 +25,7 @@ export interface ButtonContainerProps extends BoxProps, GrowthBehavior {
    * Override default colors of a button. The default will depend on the button type
    * @default {undefined}
    */
+  // default marked as undefined so the doc system doesn't render out the the button colors type
   colors?: ButtonColors;
   /**
    * There are four button sizes: `extraSmall`, `small`, `medium`, and `large`.
