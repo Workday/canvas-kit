@@ -1,6 +1,14 @@
 import {Meta} from '@storybook/addon-docs';
 
-<Meta title="Welcome/Upgrade Guides/v7.0" />
+<Meta
+  title="Guides/Upgrade Guides/v7.0"
+  parameters={{
+    viewMode: 'docs',
+    previewTabs: {
+      canvas: {hidden: true},
+    },
+  }}
+/>
 
 # Canvas Kit 7.0 Upgrade Guide
 
@@ -457,9 +465,9 @@ const model = useActionBarModel({
 
 #### Responsive Container Support
 
-The `ActionBar` component can now handle responsive containers, but the support is not automatic. You
-must use the dynamic API and provide an overflow menu subcomponent. The dynamic API doesn't know the
-shape of your object, so render props must be used to instruct React how to render each item.
+The `ActionBar` component can now handle responsive containers, but the support is not automatic.
+You must use the dynamic API and provide an overflow menu subcomponent. The dynamic API doesn't know
+the shape of your object, so render props must be used to instruct React how to render each item.
 
 ```tsx
 const [items] = React.useState<MyActionItem[]>([

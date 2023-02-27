@@ -100,7 +100,7 @@ class ModalWrapper extends React.Component<{}, ModalWrapperState> {
   };
 }
 
-storiesOf('Components/Popups/Modal/CSS', module)
+storiesOf('CSS/Popups/Modal', module)
   .addParameters({ReadmePath: 'css/modal'})
   .add('Default', () => (
     <div className="story">

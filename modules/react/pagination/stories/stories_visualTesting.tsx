@@ -1,7 +1,7 @@
 import React from 'react';
-import {ContentDirection, StaticStates} from '@workday/canvas-kit-react/common';
+import {ContentDirection} from '@workday/canvas-kit-react/common';
+import {StaticStates, ComponentStatesTable} from '@workday/canvas-kit-react/testing';
 
-import {ComponentStatesTable} from '@workday/canvas-kit-labs-react/common';
 import {customColorTheme, withSnapshotsEnabled} from '../../../../utils/storybook';
 
 import {
@@ -12,7 +12,7 @@ import {
 } from '../lib/Pagination';
 
 export default withSnapshotsEnabled({
-  title: 'Testing/React/Navigation/Pagination',
+  title: 'Testing/Navigation/Pagination',
   component: Pagination,
 });
 

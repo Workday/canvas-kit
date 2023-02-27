@@ -1,4 +1,4 @@
-import {convertToStaticStates} from '../lib/utils/StaticStates';
+import {convertToStaticStates} from '@workday/canvas-kit-react/testing';
 
 describe('changeToStaticStates', () => {
   it('should convert ":hover" to "&.hover"', () => {
