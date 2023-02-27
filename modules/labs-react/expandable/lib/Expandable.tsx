@@ -20,7 +20,7 @@ export interface ExpandableProps extends ExtractProps<typeof Flex, never> {
 
 /**
  * `Expandable` wraps an `Expandable.Target` and an `Expandable.Content`. By default, it provides a
- * `DisclosureModel` for its sub components. Alternatively, a model may be passed in using the
+ * `DisclosureModel` for its subcomponents. Alternatively, a model may be passed in using the
  * hoisted model pattern.
  */
 export const Expandable = createContainer('div')({

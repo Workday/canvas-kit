@@ -131,6 +131,8 @@ export const Tabs = createContainer()({
      * </Tabs.Menu.Popper>
      * ```
      */
+    // We don't use shorthand here for documentation. The shorthand will give the `Tabs.Menu` the
+    // JSDoc of `Menu` instead of `Tabs.Menu`
     Menu: Menu,
   },
 })<TabsProps>(({children}, _, model) => {

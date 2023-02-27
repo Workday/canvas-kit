@@ -66,7 +66,7 @@ export const Card = createComponent('div')({
     Heading: CardHeading,
     /**
      * `Card.Body` is a non-semantic subcomponent that contains the body of the card. Attributes may
-     * be added to give `Card.Body` extra semantic meaning. If `Card.Body` is brief (like in a short
+     * be added to give `Card.Body` semantic meaning. If `Card.Body` is brief (like in a short
      * dialog), it may be helpful to add an `aria-describedby` referencing the `id` of the
      * `Card.Body` to the `Card` container.
      */

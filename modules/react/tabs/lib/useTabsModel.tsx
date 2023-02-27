@@ -21,7 +21,6 @@ import {useMenuModel} from '@workday/canvas-kit-react/menu';
  *   }
  * })
  *
- *
  * <Tabs model={model}>{Tabs child components}</Tabs>
  * ```
  */

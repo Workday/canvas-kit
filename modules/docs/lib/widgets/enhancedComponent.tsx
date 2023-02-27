@@ -99,24 +99,25 @@ registerWidget<EnhancedComponentValue>('enhancedComponent', ({value, doc, meta})
       ) : null}
       <Heading headingOffset={1}>Props</Heading>
       {value.baseElement && (
-        <MDX as="p">
-          Props extend from <Value value={value.baseElement} />. Changing the <code>as</code> prop
-          will change the element interface.
-        </MDX>
+        <ParentComponentJSDocContext.Provider value={defaultJSDoc}>
+          <MDX as="p">
+            Props extend from <Value value={value.baseElement} />. Changing the <code>as</code> prop
+            will change the element interface.
+          </MDX>
+        </ParentComponentJSDocContext.Provider>
       )}
       {value.componentType === 'container' && value.model ? (
         <MDX as="p">
           Props extend from <SymbolDialog value={{kind: 'symbol', name: `${value.model}Config`}} />.
-          If a <code>model</code> is passed, model config is ignored.
+          If a <code>model</code> is passed, props from <code>{value.model}Config</code> are
+          ignored.
         </MDX>
       ) : null}
       {Object.keys(groups).map(key => {
         return (
           <React.Fragment key={key}>
             {key === 'Local' ? (
-              <>
-                <PropertiesTable properties={groups[key]}></PropertiesTable>
-              </>
+              <PropertiesTable properties={groups[key]} />
             ) : (
               <Expandable>
                 <Expandable.Target headingLevel="h5">
@@ -124,7 +125,7 @@ registerWidget<EnhancedComponentValue>('enhancedComponent', ({value, doc, meta})
                   <Expandable.Icon iconPosition="end" />
                 </Expandable.Target>
                 <Expandable.Content>
-                  <PropertiesTable properties={groups[key]}></PropertiesTable>
+                  <PropertiesTable properties={groups[key]} />
                 </Expandable.Content>
               </Expandable>
             )}

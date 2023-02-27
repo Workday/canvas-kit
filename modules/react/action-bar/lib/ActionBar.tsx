@@ -14,7 +14,7 @@ export interface ActionBarProps {
 }
 
 /**
- * `ActionBar` is a container component that is responsible for creating a {@link ActionBarModel}
+ * `ActionBar` is a container component that is responsible for creating an {@link ActionBarModel}
  * and sharing it with its subcomponents using React context. It does not represent a real element.
  *
  * ```tsx
@@ -54,7 +54,7 @@ export const ActionBar = createContainer()({
     List: ActionBarList,
     /**
      * `ActionBar.Item` is a `button` element, by default it's a `SecondaryButton` unless an `as`
-     * prop passed.
+     * prop is passed.
      *
      * ```tsx
      * <ActionBar.Item as={PrimaryButton} onClick={() => console.log('first action')}>

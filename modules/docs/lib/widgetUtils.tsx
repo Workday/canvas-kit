@@ -10,7 +10,6 @@ import {Hyperlink} from '@workday/canvas-kit-react/button';
 import {docs} from './docs';
 import {Value} from './Value';
 import * as types from '../docgen/docTypes';
-import {fontSizes} from '@workday/canvas-kit-react/tokens/lib/type/fontSizes';
 
 /** React context to track the current rendering context to avoid tables inside tables */
 export const RenderContext = React.createContext<'table' | 'inline'>('table');
@@ -109,24 +108,17 @@ export const SymbolDialog = ({value, hideDescription}: SymbolDialogProps) => {
       <Dialog.Popper>
         <Dialog.Card maxHeight="50vh" maxWidth="90vh">
           <Dialog.CloseIcon />
-          <Dialog.Heading>
-            <>
-              {value.name}
-              {/* {renderTypeParameters(symbol?.type.typeParameters)} */}
-            </>
-          </Dialog.Heading>
+          <Dialog.Heading>{value.name}</Dialog.Heading>
           <Dialog.Body>
             <RenderContext.Provider value="table">
               <IndentLevelContext.Provider value={0}>
                 {symbol ? (
-                  <>
-                    <SymbolDoc
-                      name={value.name}
-                      headingStart={3}
-                      hideDescription={hideDescription}
-                      meta={{hideHeader: true}}
-                    />
-                  </>
+                  <SymbolDoc
+                    name={value.name}
+                    headingStart={3}
+                    hideDescription={hideDescription}
+                    meta={{hideHeader: true}}
+                  />
                 ) : (
                   <>
                     <p>Basic type information:</p>
@@ -158,7 +150,7 @@ const StyledSymbolDoc = styled('div')({
     fontFamily: 'inherit',
   },
   code: {
-    fontSize: fontSizes[14],
+    fontSize: type.properties.fontSizes[14],
     lineHeight: 1.5,
     fontFamily: type.properties.fontFamilies.monospace,
     whiteSpace: 'nowrap',

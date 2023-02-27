@@ -32,11 +32,11 @@ export const useListBox = createElemPropsHook(useListModel)(model => {
 });
 
 /**
- * The `ListBox` is a basic component that offers vertical rendering of a collection in the form of
- * a 2-dimension list. It understands virtualization, rendering only visible items in the DOM while
- * also providing aria attributes to allow screen readers to still navigate virtual lists. The
- * `ListBox` contains a basic `ListBox.Item` that renders list items that render correctly with
- * virtualization and adds `aria-setsize` and `aria-posinset` for screen readers.
+ * The `ListBox` component that offers vertical rendering of a collection in the form of a
+ * 2-dimension list. It supports virtualization, rendering only visible items in the DOM while also
+ * providing aria attributes to allow screen readers to still navigate virtual lists. The `ListBox`
+ * contains a basic `ListBox.Item` that renders list items that render correctly with virtualization
+ * and adds `aria-setsize` and `aria-posinset` for screen readers.
 
  * The `ListBox` is very basic and only adds enough functionality to render correctly. No additional
  * behaviors are added to navigate or select. React Hooks are provided to add this functionality and

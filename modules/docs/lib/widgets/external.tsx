@@ -6,7 +6,5 @@ import {ExternalSymbolValue} from '../../docgen/docTypes';
 import {registerWidget} from '../Value';
 
 registerWidget<ExternalSymbolValue>('external', ({value}) => (
-  <ExternalHyperlink href={value.url} style={{fontFamily: 'inherit'}}>
-    {value.name}
-  </ExternalHyperlink>
+  <ExternalHyperlink href={value.url}>{value.name}</ExternalHyperlink>
 ));

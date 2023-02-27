@@ -5,9 +5,6 @@
  * @param target Any custom theme object
  * @param fallback A fallback theme object
  */
-
-import {defaultCanvasTheme} from './theme'; // TODO: Revisit eslint rules that are no longer needed now that we don't support IE11
-
 /* eslint-disable compat/compat  */
 export function getObjectProxy<T extends {}>(target: unknown, fallback: T): T {
   return new Proxy(target as any, {
@@ -26,5 +23,3 @@ export function getObjectProxy<T extends {}>(target: unknown, fallback: T): T {
     },
   }) as T;
 }
-
-getObjectProxy({}, defaultCanvasTheme); //?
