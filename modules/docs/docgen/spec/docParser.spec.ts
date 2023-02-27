@@ -601,14 +601,14 @@ describe('docParser', () => {
       expect(docs).toHaveProperty('0.type.value.typeParameters.1.value', 'string');
     });
 
-    it.only('should handle exported interfaces with an index signature', () => {
+    it('should handle exported interfaces with an index signature', () => {
       const program = createProgramFromSource(`
         export interface PropMap {
           foo: string
           [key: string | number]: string
         }
       `);
-      const docs = parse(program, 'test.ts'); //?
+      const docs = parse(program, 'test.ts');
 
       expect(docs).toHaveProperty('0.name', 'PropMap');
       expect(docs).toHaveProperty('0.type.kind', 'object');
