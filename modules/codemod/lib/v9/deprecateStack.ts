@@ -4,27 +4,42 @@ const mainPackage = '@workday/canvas-kit-react';
 const stackPackage = '@workday/canvas-kit-react/layout';
 const stackImportNames = ['Stack', 'HStack', 'VStack'];
 const stackImportProps = ['StackProps', 'HStackProps', 'VStackProps', 'StackStyleProps'];
+const altImportSpecifier = ['ActionBar', 'Breadcrumbs', 'Menu', 'Pagination', 'Tabs'];
+const altImportNamesIncludes = ['action-bar', 'breadcrumbs', 'menu', 'pagination', 'tabs'];
+const altPackages = altImportNamesIncludes.map(name => `${mainPackage}/${name}`);
 
 export default function transformer(file: FileInfo, api: API, options: Options) {
   const j = api.jscodeshift;
 
   const root = j(file.source);
   let hasStackImports = false;
+  const importedComponentNames: string[] = [];
 
   // This toggles the failsafe that prevents us from accidentally transforming something unintentionally.
   root.find(j.ImportDeclaration, (nodePath: ImportDeclaration) => {
     const value = nodePath.source.value;
-    // If there's an import from the stack package, set the import boolean check to true
-    // If there's an import from the main package, check to see if Stack or Stackprops are among the named imports
+
+    // If there's an import from ActionBar, Breadcrumbs, Menu, Pagination or Tabs package,
+    // set the import boolean check to true
+    // If there's an import from the main package, check to see if Stack, ActionBar, Breadcrumbs,
+    // Menu, Pagination or Tabs or Stackprops are among the named imports
     // e.g. import {Stack} from '@workday/canvas-kit-react/layout';
-    if (value === mainPackage || value === stackPackage) {
+    // e.g. import {Menu} from '@workday/canvas-kit-react/menu';
+    if (
+      typeof value === 'string' &&
+      (value === mainPackage || value === stackPackage || altPackages.includes(value))
+    ) {
       (nodePath.specifiers || []).forEach(specifier => {
         if (
           (specifier.type === 'ImportSpecifier' &&
             stackImportNames.includes(specifier.imported.name)) ||
           (specifier.type === 'ImportSpecifier' &&
-            stackImportProps.includes(specifier.imported.name))
+            stackImportProps.includes(specifier.imported.name)) ||
+          (specifier.type === 'ImportSpecifier' &&
+            altImportSpecifier.includes(specifier.imported.name))
         ) {
+          console.log('here!', specifier.imported.name);
+          importedComponentNames.push(specifier.imported.name);
           hasStackImports = true;
         }
       });
@@ -32,7 +47,7 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
     return false;
   });
 
-  // Failsafe to skip transforms unless a Stack import is detected
+  // Failsafe to skip transforms unless a specific import is detected
   if (!hasStackImports) {
     return root.toSource();
   }
@@ -150,15 +165,63 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
     });
   });
 
-  // Transform Stack JSXElements
+  // Transform `spacing` key that are in type interface declaration references
+  // e.g. `interface CustomProps extends StackProps {
+  // spacing: SystemPropValues['space']
+  // }`
+  // becomes `interface CustomProps extends FlexProps {
+  // gap: FlexProps['gap']
+  // }`
+  const spacingName = ['spacing'];
+
+  // Transform `spacing` key that is in type interface
+  // e.g. `spacing: SystemPropValues['space']`
+  // becomes `gap: FlexProps['gap']`
+  root.find(j.TSLiteralType, {type: 'TSLiteralType'}).forEach(nodePath => {
+    if (nodePath.node.literal.type === 'StringLiteral') {
+      if (spacingName.includes(nodePath.node.literal.value)) {
+        nodePath.node.literal.value = 'gap';
+      }
+    }
+  });
+
+  // Transforms `as` prop Stack, HStack or VStack values to `Flex`
+  // e.g. <Card as={Stack} spacing="s" />
+  // becomes <Card as={Flex} gap="s" />
+  root.find(j.JSXOpeningElement, {type: 'JSXOpeningElement'}).forEach(nodePath => {
+    let isCastAsStack = false;
+    nodePath.node.attributes?.forEach(attr => {
+      if (attr.type === 'JSXAttribute') {
+        if (attr.name.name === 'as') {
+          if (attr.value?.type === 'JSXExpressionContainer') {
+            if (attr.value.expression.type === 'Identifier') {
+              if (stackImportNames.includes(attr.value.expression.name)) {
+                isCastAsStack = true;
+                attr.value.expression.name = 'Flex';
+              }
+            }
+          }
+        }
+      }
+    });
+    if (isCastAsStack) {
+      nodePath.node.attributes?.forEach(attr => {
+        if (attr.type === 'JSXAttribute') {
+          if (attr.name.name === 'spacing') {
+            attr.name.name = 'gap';
+          }
+        }
+      });
+    }
+  });
+
+  // Transform Stack, HStack and VStack JSXElements
   // Transform `<Stack spacing="l">` to `<Flex gap="l">`
-  // Transform `<VStack spacing="l">` to `<Flex gap="l">`
-  // Transform `<HStack spacing="l">` to `<Flex gap="l">`
   // Transform `<Stack shouldWrapChildren>` to `<Flex >`
   root.find(j.JSXOpeningElement).forEach(nodePath => {
     if (nodePath.node.type === 'JSXOpeningElement') {
       if (nodePath.node.name.type === 'JSXIdentifier') {
-        if (stackImportNames.includes(nodePath.node.name.name)) {
+        if (importedComponentNames.includes(nodePath.node.name.name)) {
           nodePath.node.attributes?.forEach(path => {
             if (path.type === 'JSXAttribute') {
               if (path.name.name === 'spacing') {
@@ -169,6 +232,32 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
               }
             }
           });
+        }
+      }
+    }
+  });
+
+  // Transform spacing on JSXMemberExpression
+  // Transform `<Stack.Item spacing="l">` to `<Flex.Item gap="l">`
+  root.find(j.JSXOpeningElement).forEach(nodePath => {
+    if (nodePath.node.type === 'JSXOpeningElement') {
+      if (nodePath.node.name.type === 'JSXMemberExpression') {
+        if (nodePath.node.name.object.type === 'JSXIdentifier') {
+          const nodePathName = nodePath.node.name.object.name;
+          if (altImportSpecifier.includes(nodePathName)) {
+            if (
+              nodePath.node.name.property.name === 'List' ||
+              nodePath.node.name.property.name === 'Item'
+            ) {
+              nodePath.node.attributes?.forEach(path => {
+                if (path.type === 'JSXAttribute') {
+                  if (path.name.name === 'spacing') {
+                    path.name.name = 'gap';
+                  }
+                }
+              });
+            }
+          }
         }
       }
     }
