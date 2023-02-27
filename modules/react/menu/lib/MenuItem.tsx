@@ -1,6 +1,13 @@
 import * as React from 'react';
 
-import {colors, iconColors, typeColors, space, type} from '@workday/canvas-kit-react/tokens';
+import {
+  colors,
+  iconColors,
+  commonColors,
+  typeColors,
+  space,
+  type,
+} from '@workday/canvas-kit-react/tokens';
 import {
   createSubcomponent,
   styled,
@@ -19,6 +26,7 @@ import {
 } from '@workday/canvas-kit-react/collection';
 
 import {useMenuModel} from './useMenuModel';
+import {CanvasSystemIcon} from '@workday/design-assets-types';
 
 export interface MenuItemProps {
   /**
@@ -40,7 +48,56 @@ export interface MenuItemProps {
   'aria-disabled'?: boolean;
 }
 
-const StyledItem = styled(Box.as('button'))<StyledType>(
+export interface StyledMenuItemProps {
+  /**
+   * The function called when the DeprecatedMenuItem is clicked. If the item is a child of the DeprecatedMenu component, this callback will be decorated with the onSelect and onClose DeprecatedMenu callbacks. This callback will not fire if the item is disabled (see below).
+   */
+  onClick?: (event: React.MouseEvent) => void;
+  /**
+   * The unique id for the DeprecatedMenuItem used for ARIA attributes. If the item is a child of the `DeprecatedMenu` component, this property will be generated and overridden.
+   */
+  id?: string;
+  /**
+   * The icon of the DeprecatedMenuItem. This icon is displayed before what you supplied for the children.
+   */
+  icon?: CanvasSystemIcon;
+  /**
+   * The secondary icon of the DeprecatedMenuItem. This icon is displayed after what you supplied for the children.
+   */
+  secondaryIcon?: CanvasSystemIcon;
+  /**
+   * If true, render a top border on the DeprecatedMenuItem.
+   * @default false
+   */
+  hasDivider?: boolean;
+  /**
+   * If true, render a header to group data, this menu item will not be intractable.
+   * @default false
+   */
+  isHeader?: boolean;
+  /**
+   * If true, set the DeprecatedMenuItem to the disabled state so it is not clickable.
+   * @default false
+   */
+  isDisabled?: boolean;
+  /**
+   * If true, set the DeprecatedMenuItem to be the currently selected item. If the item is a child of the DeprecatedMenu component, this property will be generated and overridden.
+   * @default false
+   */
+  isFocused?: boolean;
+  /**
+   * The role of the DeprecatedMenuItem. Use this to override the role of the item (e.g. you can use this element as an option in a Combobox).
+   * @default menuItem
+   */
+  role?: string;
+  /**
+   * If true, allow the onClose DeprecatedMenu callback to be fired after the DeprecatedMenuItem has been clicked.
+   * @default true
+   */
+  shouldClose?: boolean;
+}
+
+export const StyledMenuItem = styled(Box.as('button'))<StyledType & StyledMenuItemProps>(
   ({theme}) => {
     return {
       ...type.levels.subtext.large,
@@ -128,6 +185,63 @@ const StyledItem = styled(Box.as('button'))<StyledType>(
         display: 'flex',
       };
     }
+  },
+  ({isFocused, isDisabled}) => {
+    if (!isFocused && !isDisabled) {
+      return {
+        backgroundColor: 'inherit',
+        '&:hover': {
+          backgroundColor: commonColors.hoverBackground,
+          color: colors.blackPepper300,
+          '.wd-icon-fill, .wd-icon-accent, .wd-icon-accent2': {
+            fill: iconColors.hover,
+          },
+        },
+      };
+    } else if (isDisabled && !isFocused) {
+      return {
+        color: colors.licorice100,
+        cursor: 'default',
+      };
+    } else {
+      // Is focused or focused and disabled
+      return {
+        backgroundColor: isDisabled ? colors.blueberry200 : commonColors.focusBackground,
+        color: typeColors.inverse,
+        'span .wd-icon-background ~ .wd-icon-accent, .wd-icon-background ~ .wd-icon-accent2': {
+          fill: isDisabled ? iconColors.disabled : iconColors.active,
+        },
+        '&:hover': {
+          'span .wd-icon-fill, span .wd-icon-accent, span .wd-icon-accent2': {
+            fill: iconColors.inverse,
+          },
+          'span .wd-icon-background ~ .wd-icon-accent, span .wd-icon-background ~ .wd-icon-accent2': {
+            fill: isDisabled ? iconColors.disabled : iconColors.active,
+          },
+          'span .wd-icon-background': {
+            fill: iconColors.inverse,
+          },
+        },
+        [`[data-whatinput='mouse'] &,
+          [data-whatinput='touch'] &,
+          [data-whatinput='pointer'] &`]: {
+          backgroundColor: 'inherit',
+          color: colors.blackPepper300,
+          'span .wd-icon-background ~ .wd-icon-accent, span .wd-icon-background ~ .wd-icon-accent2': {
+            fill: iconColors.standard,
+          },
+          '&:hover': {
+            backgroundColor: commonColors.hoverBackground,
+            'span .wd-icon-fill, span .wd-icon-accent, span .wd-icon-accent2': {
+              fill: iconColors.hover,
+            },
+          },
+          '.wd-icon-fill, .wd-icon-accent, .wd-icon-accent2': {
+            fill: iconColors.standard,
+          },
+        },
+      };
+    }
   }
 );
 
@@ -180,9 +294,9 @@ export const MenuItem = createSubcomponent('button')({
 })<MenuItemProps>(({children, ...elemProps}, Element) => {
   return (
     <OverflowTooltip placement="left">
-      <StyledItem minHeight={space.xl} as={Element} {...elemProps}>
+      <StyledMenuItem minHeight={space.xl} as={Element} {...elemProps}>
         {children}
-      </StyledItem>
+      </StyledMenuItem>
     </OverflowTooltip>
   );
 });

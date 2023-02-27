@@ -1,5 +1,6 @@
 export {useMenuModel} from './lib/useMenuModel';
 export {Menu} from './lib/Menu';
+export {StyledMenuItem, StyledMenuItemProps} from './lib/MenuItem';
 
 export {useMenuCard} from './lib/MenuCard';
 export {useMenuItem} from './lib/MenuItem';
