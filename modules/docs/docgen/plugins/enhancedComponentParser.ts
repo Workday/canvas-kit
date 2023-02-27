@@ -19,6 +19,7 @@ import {
   unknownValue,
   filterObjectProperties,
   getDefaultFromTags,
+  getValidDefaultFromNode,
 } from '../docParser';
 import {
   CallExpression,
@@ -63,11 +64,27 @@ function getDefaultFromJSX(
 
   if (JSXElement) {
     for (const attribute of JSXElement.attributes.properties) {
+      /**
+       * A JSXAttribute is the attribute and initializer
+       *
+       * ```tsx
+       * <Element attribute={attribute} />
+       * ```
+       *
+       * In this example `attribute={attribute}` is the JSXAttribute
+       */
       if (
         t.isJsxAttribute(attribute) &&
         t.isIdentifier(attribute.name) &&
         attribute.name.text === propName
       ) {
+        /**
+         * We're filtering on JSXAttributes that have an `initializer` that is a JSXExpression.
+         * From the above example, the JSXExpression is `{attribute}`. It will either be a string
+         * with quotes, or has brackets.
+         * - `"attribute"`
+         * - `{attribute}`
+         */
         if (
           attribute.initializer &&
           t.isJsxExpression(attribute.initializer) &&
@@ -96,9 +113,9 @@ function getDefaultFromJSX(
            * <Element attribute={'default'} />
            * ```
            */
-          return parser.getValueFromNode(attribute.initializer.expression);
+          return getValidDefaultFromNode(parser, attribute.initializer.expression);
         }
-        return parser.getValueFromNode(attribute.initializer || ts.factory.createTrue());
+        return getValidDefaultFromNode(parser, attribute.initializer || ts.factory.createTrue());
       }
     }
   }

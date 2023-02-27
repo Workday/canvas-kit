@@ -9,6 +9,7 @@ import {
   getDefaultFromTags,
   isObject,
   isExportedSymbol,
+  getValidDefaultFromNode,
 } from '../docParser';
 
 import t from '../traverse';
@@ -231,11 +232,10 @@ export function getDefaultsFromObjectBindingPattern(
   if (t.isObjectBindingPattern(node)) {
     return node.elements.reduce((result, element) => {
       if (t.isBindingElement(element) && t.isIdentifier(element.name) && element.initializer) {
-        // this might change in the future. If the default value isn't a literal expression, it is
-        // much harder to deal with. For example, `{a = 'a'}` instead of `{a = getA(someInput)}`.
-        // Until we figure out how to mark defaults for non-literals, this might be a limitation.
-        if (ts.isLiteralExpression(element.initializer)) {
-          result[element.name.escapedText as string] = parser.getValueFromNode(element.initializer);
+        const defaultValue = getValidDefaultFromNode(parser, element.initializer); //?
+
+        if (defaultValue) {
+          result[element.name.text] = defaultValue;
         }
       }
       return result;

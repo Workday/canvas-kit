@@ -118,7 +118,7 @@ export const PrimaryButton = createComponent('button')({
     {
       size = 'medium',
       iconPosition = 'start',
-      variant = undefined,
+      variant,
       icon,
       shouldMirrorIcon = false,
       children,

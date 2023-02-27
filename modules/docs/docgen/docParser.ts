@@ -1215,6 +1215,32 @@ function isTupleType(type: ts.Type): type is ts.TupleTypeReference {
 }
 
 /**
+ * Given a node, extract a default value and only return a `Value` if we consider it to be
+ * a valid default. For example, a literal is valid.
+ *
+ * Valid:
+ * - `'medium'`
+ * - `true`
+ * - 10
+ *
+ * Invalid:
+ * - `string`
+ * - `{foo: string}`
+ */
+export function getValidDefaultFromNode(parser: DocParser, node: ts.Node): Value | undefined {
+  if (
+    t.isFalseKeyword(node) ||
+    t.isTrueKeyword(node) ||
+    t.isLiteralType(node) ||
+    t.isStringLiteral(node) ||
+    t.isNumericLiteral(node)
+  ) {
+    return parser.getValueFromNode(node);
+  }
+  return undefined;
+}
+
+/**
  * A parameter might represent a `ObjectBindingPattern` which can be used to set defaults. This will
  * return all defaults found within the `ObjectBindingPattern` and return them as a map of the
  * property name to the `Value`. These defaults can be used to piece together a default. Also
@@ -1227,11 +1253,9 @@ export function getDefaultsFromObjectBindingParameter(
   if (t.isObjectBindingPattern(node.name)) {
     return node.name.elements.reduce((result, element) => {
       if (t.isBindingElement(element) && t.isIdentifier(element.name) && element.initializer) {
-        // this might change in the future. If the default value isn't a literal expression, it is
-        // much harder to deal with. For example, `{a = 'a'}` instead of `{a = getA(someInput)}`.
-        // Until we figure out how to mark defaults for non-literals, this might be a limitation.
-        if (ts.isLiteralExpression(element.initializer)) {
-          result[element.name.escapedText as string] = parser.getValueFromNode(element.initializer);
+        const defaultValue = getValidDefaultFromNode(parser, element.initializer);
+        if (defaultValue) {
+          result[element.name.text] = parser.getValueFromNode(element.initializer);
         }
       }
       return result;
@@ -1705,7 +1729,7 @@ export function getDefaultFromTags(tags: ts.JSDocTagInfo[]): Value | undefined {
         return {kind: 'primitive', value: text as PrimitiveValue['value']};
       }
       if (['true', 'false'].includes(text)) {
-        return {kind: 'boolean', value: Boolean(text)};
+        return {kind: 'boolean', value: text === 'true' ? true : false};
       }
       if (!Number.isNaN(Number(text))) {
         return {kind: 'number', value: Number(text)};

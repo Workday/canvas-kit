@@ -7,13 +7,7 @@ function getConfig() {
   const basePath = path.dirname(tsconfigPath);
   const {config} = ts.readConfigFile(tsconfigPath, ts.sys.readFile);
 
-  const {options} = ts.parseJsonConfigFileContent(
-    config,
-    ts.sys,
-    basePath,
-    {},
-    tsconfigPath
-  );
+  const {options} = ts.parseJsonConfigFileContent(config, ts.sys, basePath, {}, tsconfigPath);
 
   return options;
 }
@@ -42,7 +36,6 @@ export function createProgramFromSource(...args: any[]) {
   const customCompilerHost: ts.CompilerHost = {
     getSourceFile: (name, languageVersion) => {
       // Get the file from our mock list, but read source lib files
-      ts.sys.readFile;
       return (
         sourceFiles.find(s => s.fileName === name) ||
         // defaultCompilerHost.getSourceFile(name, languageVersion)

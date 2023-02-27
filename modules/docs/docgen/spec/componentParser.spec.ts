@@ -168,15 +168,67 @@ describe('componentParser', () => {
       expect(docs).toHaveProperty('0.type.props.0.defaultValue.value', 'b');
     })
 
-    it('should handle deconstructed defaults in a function that returns JSX', () => {
+    it('should handle JSDoc defaults in a function that returns JSX', () => {
       const program = createProgramFromSource('test.tsx',`
         import React from 'react'
 
-        export function A ({a='b'}: Props) {
+        export function A (props: Props) {
           return <div />
         }
 
         interface Props {
+          /** @default {false} */
+          a: boolean
+        }
+      `);
+
+      const docs = parse(program, 'test.tsx', [componentParser]);
+
+      expect(docs).toHaveProperty('0.name', 'A');
+      expect(docs).toHaveProperty('0.type.kind', 'component');
+      expect(docs).toHaveProperty('0.type.props.0.kind', 'property');
+      expect(docs).toHaveProperty('0.type.props.0.name', 'a');
+      expect(docs).toHaveProperty('0.type.props.0.type.kind', 'primitive');
+      expect(docs).toHaveProperty('0.type.props.0.type.value', 'boolean');
+      expect(docs).toHaveProperty('0.type.props.0.defaultValue.kind', 'boolean');
+      expect(docs).toHaveProperty('0.type.props.0.defaultValue.value', false);
+    })
+
+    it('should handle deconstructed defaults "false" in a function that returns JSX', () => {
+      const program = createProgramFromSource('test.tsx',`
+        import React from 'react'
+
+        export function A ({a=false}: Props) {
+          return <div />
+        }
+
+        interface Props {
+          a: boolean
+        }
+      `);
+
+      const docs = parse(program, 'test.tsx', [componentParser]);
+
+      expect(docs).toHaveProperty('0.name', 'A');
+      expect(docs).toHaveProperty('0.type.kind', 'component');
+      expect(docs).toHaveProperty('0.type.props.0.kind', 'property');
+      expect(docs).toHaveProperty('0.type.props.0.name', 'a');
+      expect(docs).toHaveProperty('0.type.props.0.type.kind', 'primitive');
+      expect(docs).toHaveProperty('0.type.props.0.type.value', 'boolean');
+      expect(docs).toHaveProperty('0.type.props.0.defaultValue.kind', 'boolean');
+      expect(docs).toHaveProperty('0.type.props.0.defaultValue.value', false);
+    })
+
+    it('should handle JSDoc defaults "false" in a function that returns JSX', () => {
+      const program = createProgramFromSource('test.tsx',`
+        import React from 'react'
+
+        export function A (props: Props) {
+          return <div />
+        }
+
+        interface Props {
+          /** @default {false} */
           a: string
         }
       `);
@@ -189,8 +241,8 @@ describe('componentParser', () => {
       expect(docs).toHaveProperty('0.type.props.0.name', 'a');
       expect(docs).toHaveProperty('0.type.props.0.type.kind', 'primitive');
       expect(docs).toHaveProperty('0.type.props.0.type.value', 'string');
-      expect(docs).toHaveProperty('0.type.props.0.defaultValue.kind', 'string');
-      expect(docs).toHaveProperty('0.type.props.0.defaultValue.value', 'b');
+      expect(docs).toHaveProperty('0.type.props.0.defaultValue.kind', 'boolean');
+      expect(docs).toHaveProperty('0.type.props.0.defaultValue.value', false);
     })
 
     it('should handle an arrow function that returns JSX', () => {

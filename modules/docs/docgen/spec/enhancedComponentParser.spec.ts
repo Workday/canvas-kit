@@ -389,7 +389,7 @@ describe('enhancedComponentParser', () => {
       expect(symbols).toHaveProperty('0.type.props.0.defaultValue.value', 'medium');
     });
 
-    it('should handle deconstructed default props', () => {
+    it('should handle deconstructed default string props', () => {
       const program = createProgramFromSource(
         'test.tsx',
         `
@@ -418,6 +418,37 @@ describe('enhancedComponentParser', () => {
       expect(symbols).toHaveProperty('0.type.props.0.type.value', 'string');
       expect(symbols).toHaveProperty('0.type.props.0.defaultValue.kind', 'string');
       expect(symbols).toHaveProperty('0.type.props.0.defaultValue.value', 'medium');
+    });
+
+    it('should handle deconstructed default boolean props', () => {
+      const program = createProgramFromSource(
+        'test.tsx',
+        `
+        export const MyComponent = createComponent('button')({
+          displayName: 'My.Component',
+          Component({size = true}: MyComponentProps, ref, Element) {
+            return <Element />
+          }
+        });
+
+        export interface MyComponentProps {
+          size: string
+        }
+      `
+      );
+      const symbols = parse(program, 'test.tsx', [enhancedComponentParser]);
+
+      expect(symbols).toHaveProperty('0.name', 'MyComponent');
+      expect(symbols).toHaveProperty('0.type.kind', 'enhancedComponent');
+      expect(symbols).toHaveProperty('0.type.displayName', 'My.Component');
+      expect(symbols).toHaveProperty('0.type.baseElement.kind', 'external');
+      expect(symbols).toHaveProperty('0.type.baseElement.name', 'button');
+      expect(symbols).toHaveProperty('0.type.props.0.kind', 'property');
+      expect(symbols).toHaveProperty('0.type.props.0.name', 'size');
+      expect(symbols).toHaveProperty('0.type.props.0.type.kind', 'primitive');
+      expect(symbols).toHaveProperty('0.type.props.0.type.value', 'string');
+      expect(symbols).toHaveProperty('0.type.props.0.defaultValue.kind', 'boolean');
+      expect(symbols).toHaveProperty('0.type.props.0.defaultValue.value', true);
     });
 
     it('should handle default props in the JSX by detecting "elemProps"', () => {
@@ -452,7 +483,7 @@ describe('enhancedComponentParser', () => {
       expect(symbols).toHaveProperty('0.type.props.0.defaultValue.value', 'medium');
     });
 
-    it('should handle default props in the JSX by detecting "elemProps" with a call expression', () => {
+    it('should ignore default props in the JSX that are not valid', () => {
       const program = createProgramFromSource(
         'test.tsx',
         `
@@ -482,8 +513,7 @@ describe('enhancedComponentParser', () => {
       expect(symbols).toHaveProperty('0.type.props.0.name', 'size');
       expect(symbols).toHaveProperty('0.type.props.0.type.kind', 'primitive');
       expect(symbols).toHaveProperty('0.type.props.0.type.value', 'string');
-      expect(symbols).toHaveProperty('0.type.props.0.defaultValue.kind', 'primitive');
-      expect(symbols).toHaveProperty('0.type.props.0.defaultValue.value', 'string');
+      expect(symbols).toHaveProperty('0.type.props.0.defaultValue', undefined);
     });
 
 
