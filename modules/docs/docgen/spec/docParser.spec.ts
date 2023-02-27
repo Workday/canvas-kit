@@ -605,7 +605,7 @@ describe('docParser', () => {
       const program = createProgramFromSource(`
         export interface PropMap {
           foo: string
-          [key: string | number]: string
+          [key: number]: string
         }
       `);
       const docs = parse(program, 'test.ts');
@@ -614,8 +614,11 @@ describe('docParser', () => {
       expect(docs).toHaveProperty('0.type.kind', 'object');
       expect(docs).toHaveProperty('0.type.properties.0.kind', 'property');
       expect(docs).toHaveProperty('0.type.properties.0.name', 'foo');
-
-      // TODO: Index Signature...
+      expect(docs).toHaveProperty('0.type.indexSignature.name', 'key');
+      expect(docs).toHaveProperty('0.type.indexSignature.type.kind', 'primitive');
+      expect(docs).toHaveProperty('0.type.indexSignature.type.value', 'number');
+      expect(docs).toHaveProperty('0.type.indexSignature.value.kind', 'primitive');
+      expect(docs).toHaveProperty('0.type.indexSignature.value.value', 'string');
     });
 
     it('should handle exported interfaces with a generic with constraint and defaults', () => {
