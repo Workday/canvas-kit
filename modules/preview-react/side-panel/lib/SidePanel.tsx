@@ -12,12 +12,6 @@ export type SidePanelTransitionStates = 'collapsed' | 'collapsing' | 'expanded' 
 
 export interface SidePanelProps {
   /**
-   * The element the side panel will render as (e.g. 'div').
-   *
-   * @default 'section'
-   */
-  as?: React.ElementType;
-  /**
    * The width of the component (in `px` if it's a `number`) when it is collapsed.
    *
    * @default 64
