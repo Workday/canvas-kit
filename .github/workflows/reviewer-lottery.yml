@@ -1,4 +1,4 @@
-name: "Reviewer Lottery"
+name: Reviewer Lottery
 
 on:
   pull_request_target:
