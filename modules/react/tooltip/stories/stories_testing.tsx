@@ -9,7 +9,7 @@ import {StaticStates} from '@workday/canvas-kit-react/testing';
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
 
 export default {
-  title: 'Testing/React/Popups/Tooltip',
+  title: 'Testing/Popups/Tooltip',
 };
 
 export const NonInteractive = () => {
