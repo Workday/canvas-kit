@@ -127,6 +127,7 @@ export const bundleExportMap: {
   accessibleHide: '@workday/canvas-kit-react/common',
   getErrorColors: '@workday/canvas-kit-react/common',
   errorRing: '@workday/canvas-kit-react/common',
+  memoizedFocusRing: '@workday/canvas-kit-react/common',
   focusRing: '@workday/canvas-kit-react/common',
   hideMouseFocus: '@workday/canvas-kit-react/common',
   mouseFocusBehavior: '@workday/canvas-kit-react/common',
