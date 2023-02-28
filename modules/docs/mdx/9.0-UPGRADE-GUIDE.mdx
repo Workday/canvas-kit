@@ -92,6 +92,74 @@ using the `Flex` component and to replace the `spacing` prop with the `gap` prop
 > **Note**: If you are consuming `StackProps` for a custom component, please make sure to change the
 > `spacing` prop to the `gap` prop
 
+---
+
+### Menu in preview-react
+
+We've removed the `Menu` component that was located in `preview-react`. `Menu` in `main` should be
+used in place of the `Menu` in `preview-react`. Please see the
+[Menu](https://workday.github.io/canvas-kit/?path=/docs/components-popups-menu--basic) component in
+`main`. To replace `Menu` in `preview-react` with the `Menu` component in `main` please see below:
+
+Using the `DeprecatedMenu` and `DeprecatedMenuItem` component:
+
+```tsx
+import {DeprecatedMenu, DeprecatedMenuItem} from '@workday/canvas-kit-preview-react/menu';
+import {
+  Popup,
+  usePopupModel,
+  useAlwaysCloseOnOutsideClick,
+  useReturnFocus,
+  useCloseOnEscape,
+} from '@workday/canvas-kit-react/popup';
+
+export const Basic = () => {
+  return (
+    <Popup model={model}>
+      <Popup.Target>Open Menu</Popup.Target>
+      <Popup.Popper placement="bottom-start">
+        <DeprecatedMenu id={menuId} isOpen={isOpen} onClose={model.events.hide}>
+          <DeprecatedMenuItem>First Item</DeprecatedMenuItem>
+          <DeprecatedMenuItem>Second Item</DeprecatedMenuItem>
+          <DeprecatedMenuItem>Third Item</DeprecatedMenuItem>
+          <DeprecatedMenuItem>Fourth Item</DeprecatedMenuItem>
+          <DeprecatedMenuItem>Fifth Item</DeprecatedMenuItem>
+        </DeprecatedMenu>
+      </Popup.Popper>
+    </Popup>
+  );
+};
+```
+
+This will need to be updated to the below:
+
+```tsx
+import React from 'react';
+import {Menu} from '@workday/canvas-kit-react/menu';
+
+export const Basic = () => {
+  const [selected, setSelected] = React.useState('');
+  return (
+    <Menu onSelect={data => setSelected(data.id)}>
+      <Menu.Target>Open Menu</Menu.Target>
+      <Menu.Popper>
+        <Menu.Card>
+          <Menu.List>
+            <Menu.Item>First Item</Menu.Item>
+            <Menu.Item>Second Item</Menu.Item>
+            <Menu.Item>Third Item (with a really, really, really long label)</Menu.Item>
+            <Menu.Item>Fourth Item</Menu.Item>
+          </Menu.List>
+        </Menu.Card>
+      </Menu.Popper>
+    </Menu>
+  );
+};
+```
+
+> **Note**: There will be no codemod to replace this component due to varying differences in API and
+> `Menu` is a compound component.
+
 ## Component Updates
 
 ### Buttons
