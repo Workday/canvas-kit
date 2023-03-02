@@ -14,7 +14,7 @@ import {useToastModel} from './hooks/useToastModel';
 export interface ToastProps extends Omit<ExtractProps<typeof Popup.Card, never>, 'model'> {}
 
 /**
- *
+ * Toast is a compound component that has different modes based on its contents. The modes add the proper aria attributes for accessibility
  * @example
  * ```tsx
  * import { Toast } from "@workday/canvas-kit-react/toast";
@@ -69,13 +69,15 @@ export const Toast = createContainer('div')({
   };
   return (
     <Popup.Card
-      as={Element}
+      as={Flex}
       width={360}
       padding="0"
       {...getAriaAttributes(model.state.mode)}
+      flexDirection="row"
+      gap="xxxs"
       {...elemProps}
     >
-      <Flex>{children}</Flex>
+      {children}
     </Popup.Card>
   );
 });
