@@ -8,7 +8,7 @@ import {
 } from '@workday/canvas-system-icons-web';
 
 import {PaginationModel} from './types';
-import {HStack} from '@workday/canvas-kit-react/layout';
+import {Flex} from '@workday/canvas-kit-react/layout';
 import {useRTL} from './common/utils/useRTL';
 
 export type ControlButtonProps = TertiaryButtonProps &
@@ -20,9 +20,9 @@ export type ControlsProps = React.HTMLAttributes<HTMLDivElement>;
 
 export const Controls = ({children, ...elemProps}: ControlsProps) => {
   return (
-    <HStack spacing="xxxs" alignItems="center" {...elemProps}>
+    <Flex gap="xxxs" alignItems="center" {...elemProps}>
       {children}
-    </HStack>
+    </Flex>
   );
 };
 

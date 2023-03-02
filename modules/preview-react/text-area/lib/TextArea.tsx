@@ -2,7 +2,7 @@ import React from 'react';
 
 import {createContainer, ExtractProps} from '@workday/canvas-kit-react/common';
 import {FormField, useFormFieldOrientation} from '@workday/canvas-kit-preview-react/form-field';
-import {Stack} from '@workday/canvas-kit-react/layout';
+import {Flex} from '@workday/canvas-kit-react/layout';
 
 import {useTextAreaModel} from './hooks';
 import {TextAreaField} from './TextAreaField';
@@ -26,8 +26,8 @@ export const TextArea = createContainer('div')({
   const layoutProps = useFormFieldOrientation(orientation);
 
   return (
-    <Stack as={Element} {...layoutProps} {...elemProps}>
+    <Flex as={Element} {...layoutProps} {...elemProps}>
       {children}
-    </Stack>
+    </Flex>
   );
 });

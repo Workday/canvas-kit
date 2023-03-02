@@ -2,7 +2,7 @@ import React from 'react';
 
 import {Modal, useModalModel} from '@workday/canvas-kit-react/modal';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
-import {HStack} from '@workday/canvas-kit-react/layout';
+import {Flex} from '@workday/canvas-kit-react/layout';
 import {FormField} from '@workday/canvas-kit-react/form-field';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {plusIcon} from '@workday/canvas-system-icons-web';
@@ -39,10 +39,10 @@ export const FormModal = () => {
               <TextInput name="last" />
             </FormField>
           </Modal.Body>
-          <HStack spacing="s" padding="xxs" marginTop="xxs">
+          <Flex gap="s" padding="xxs" marginTop="xxs">
             <Modal.CloseButton>Cancel</Modal.CloseButton>
             <PrimaryButton type="submit">Submit</PrimaryButton>
-          </HStack>
+          </Flex>
         </Modal.Card>
       </Modal.Overlay>
     </Modal>
