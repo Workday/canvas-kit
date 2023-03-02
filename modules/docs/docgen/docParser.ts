@@ -1255,7 +1255,7 @@ export function getDefaultsFromObjectBindingParameter(
       if (t.isBindingElement(element) && t.isIdentifier(element.name) && element.initializer) {
         const defaultValue = getValidDefaultFromNode(parser, element.initializer);
         if (defaultValue) {
-          result[element.name.text] = parser.getValueFromNode(element.initializer);
+          result[element.name.text] = defaultValue;
         }
       }
       return result;
@@ -1507,7 +1507,7 @@ export function getValueFromType(
   }
 
   if (type.flags & ts.TypeFlags.BooleanLiteral) {
-    return {kind: 'boolean', value: checker.typeToString(type) === 'true' ? true : false};
+    return {kind: 'boolean', value: checker.typeToString(type) === 'true'};
   }
 
   if (isObject(type)) {
@@ -1729,7 +1729,7 @@ export function getDefaultFromTags(tags: ts.JSDocTagInfo[]): Value | undefined {
         return {kind: 'primitive', value: text as PrimitiveValue['value']};
       }
       if (['true', 'false'].includes(text)) {
-        return {kind: 'boolean', value: text === 'true' ? true : false};
+        return {kind: 'boolean', value: text === 'true'};
       }
       if (!Number.isNaN(Number(text))) {
         return {kind: 'number', value: Number(text)};

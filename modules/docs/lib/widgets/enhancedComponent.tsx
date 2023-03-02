@@ -73,7 +73,10 @@ registerWidget<EnhancedComponentValue>('enhancedComponent', ({value, doc, meta})
           This component references the{' '}
           <ParentComponentNameContext.Provider value="">
             <ParentComponentJSDocContext.Provider value={defaultJSDoc}>
-              <SymbolDialog value={{kind: 'symbol', name: value.displayName || ''}} />
+              <SymbolDialog
+                value={{kind: 'symbol', name: value.displayName || ''}}
+                hideDescription
+              />
             </ParentComponentJSDocContext.Provider>
           </ParentComponentNameContext.Provider>{' '}
           component.
@@ -87,13 +90,15 @@ registerWidget<EnhancedComponentValue>('enhancedComponent', ({value, doc, meta})
       {intro}
       {value.styleComponent ? (
         <>
-          <Heading headingOffset={1}>Style Component</Heading>
+          <Heading headingOffset={1}>Layout Component</Heading>
           <MDX as="p">
+            <code>{value.displayName}</code> supports all props from the
             <code>
               <ParentComponentJSDocContext.Provider value={defaultJSDoc}>
-                <Value value={value.styleComponent} />
+                <SymbolDialog value={value.styleComponent} hideDescription />
               </ParentComponentJSDocContext.Provider>
             </code>
+            layout component.
           </MDX>
         </>
       ) : null}

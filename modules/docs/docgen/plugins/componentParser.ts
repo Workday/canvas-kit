@@ -232,7 +232,7 @@ export function getDefaultsFromObjectBindingPattern(
   if (t.isObjectBindingPattern(node)) {
     return node.elements.reduce((result, element) => {
       if (t.isBindingElement(element) && t.isIdentifier(element.name) && element.initializer) {
-        const defaultValue = getValidDefaultFromNode(parser, element.initializer); //?
+        const defaultValue = getValidDefaultFromNode(parser, element.initializer);
 
         if (defaultValue) {
           result[element.name.text] = defaultValue;

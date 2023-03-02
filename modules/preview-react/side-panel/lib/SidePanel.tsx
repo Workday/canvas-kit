@@ -206,7 +206,7 @@ export const SidePanel = createComponent('section')({
   },
   subComponents: {
     /**
-     * `<SidePanel.ToggleButton>` is a control that is meant to toggle between `expanded = true` and
+     * `SidePanel.ToggleButton` is a control that is meant to toggle between `expanded = true` and
      * `expanded = false` states. It must be used within the `SidePanel` component as a child. Use
      * in conjunction with `useSidePanel`'s `controlProps`, otherwise it does not come with explicit
      * `onClick` handlers.
