@@ -1,21 +1,24 @@
 import React from 'react';
 
-import {createSubcomponent, styled, StyledType} from '@workday/canvas-kit-react/common';
-import {Flex, FlexProps} from '@workday/canvas-kit-react/layout';
+import {createSubcomponent} from '@workday/canvas-kit-react/common';
 import {useToastModel} from './hooks/useToastModel';
+import {Subtext} from '@workday/canvas-kit-react/text';
 
 export interface ToastMessageProps extends FlexProps {}
 
-const StyledMessage = styled(Flex)<StyledType>({
-  wordBreak: 'break-word',
-});
-
-export const ToastMessage = createSubcomponent('div')({
+export const ToastMessage = createSubcomponent('p')({
   modelHook: useToastModel,
 })<ToastMessageProps>(({children, ...elemProps}, Element, model) => {
   return (
-    <StyledMessage flexDirection="column" id={model.state.id} as={Element} {...elemProps}>
+    <Subtext
+      size="large"
+      wordBreak="break-word"
+      marginY="zero"
+      id={model.state.id}
+      as={Element}
+      {...elemProps}
+    >
       {children}
-    </StyledMessage>
+    </Subtext>
   );
 });

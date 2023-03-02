@@ -17,6 +17,7 @@ export const ToastBody = createComponent('div')({
         paddingY="s"
         ref={ref}
         as={Element}
+        flexGrow={1}
         {...elemProps}
       >
         {children}
