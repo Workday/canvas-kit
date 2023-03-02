@@ -14,6 +14,9 @@ export const DialogPopper = createSubcomponent('div')({
   ({children, placement, popperOptions, ref, ...props}, Element, model) => {
     const popperProps = usePopupPopper(model, {placement, popperOptions}, ref);
     const elemProps = useDialogPopper(model, props);
+    if (model.state.visibility === 'hidden') {
+      return null;
+    }
     return (
       <Element {...elemProps}>
         <Popper {...popperProps}>{children}</Popper>
