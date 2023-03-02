@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v8.4.12](https://github.com/Workday/canvas-kit/releases/tag/v8.4.12) (2023-03-01)
+
+
+
+
+## [v8.4.11](https://github.com/Workday/canvas-kit/releases/tag/v8.4.11) (2023-02-28)
+
+### Infrastructure
+
+- ci: Changing assign reviewer action to a lottery system ([#2039](https://github.com/Workday/canvas-kit/pull/2039)) ([@jaclynjessup](https://github.com/jaclynjessup))
+- ci: Updating project board action ([#2026](https://github.com/Workday/canvas-kit/pull/2026)) ([@jaclynjessup](https://github.com/jaclynjessup))
+- ci: Fix to invalid yml error ([#2040](https://github.com/Workday/canvas-kit/pull/2040)) ([@jaclynjessup](https://github.com/jaclynjessup))
+- ci: Updates to lottery and project actions ([#2054](https://github.com/Workday/canvas-kit/pull/2054)) ([@jaclynjessup](https://github.com/jaclynjessup))
+
+### Testing
+
+- test: Update tooltip testing story to render properly ([#2047](https://github.com/Workday/canvas-kit/pull/2047)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v7.4.9](https://github.com/Workday/canvas-kit/releases/tag/v7.4.9) (2023-02-24)
+
+### Testing
+
+- test: Update tooltip testing story to render properly ([#2047](https://github.com/Workday/canvas-kit/pull/2047)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
 ## [v8.4.10](https://github.com/Workday/canvas-kit/releases/tag/v8.4.10) (2023-02-14)
 
 ### Codemods
