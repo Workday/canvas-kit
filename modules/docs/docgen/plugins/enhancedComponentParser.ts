@@ -13,7 +13,6 @@ import {
   DocParser,
   findDocComment,
   getDefaultsFromObjectBindingParameter,
-  getPackageName,
   getSymbolFromNode,
   getValueDeclaration,
   unknownValue,
@@ -182,7 +181,6 @@ export const enhancedComponentParser = createParserPlugin<SupportedValues>((node
       shouldCreateColorSymbol = false;
       parser.symbols.push({
         name: 'CanvasColorTokens',
-        packageName: getPackageName(fileName),
         fileName,
         ...defaultJSDoc,
         type: {

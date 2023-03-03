@@ -58,7 +58,6 @@ export class DocParser<T extends {kind: string} = any> {
       if (symbol) {
         const exportedSymbol: ExportedSymbol<T> = {
           name: symbol.name,
-          packageName: getPackageName(fileName),
           fileName,
           ...findDocComment(this.checker, symbol),
           type: this.getValueFromNode(node),
@@ -1190,16 +1189,6 @@ export function filterFunctionParameters(value: any): value is FunctionParameter
 // https://github.com/dsherret/ts-ast-viewer/blob/c71e238123d972bae889b3829e23b44f39d8d5c2/site/src/components/PropertiesViewer.tsx#L172
 export function getSymbolFromNode(checker: ts.TypeChecker, node: ts.Node): ts.Symbol | undefined {
   return (node as any).symbol || checker.getSymbolAtLocation(node);
-}
-
-export function getPackageName(fileName: string): string {
-  const match = fileName.match(/modules\/([a-z-]+)\//i);
-
-  if (match) {
-    return match[1];
-  }
-
-  return 'react';
 }
 
 export function isObject(type: ts.Type): type is ts.ObjectType {

@@ -2,7 +2,6 @@ import {ObjectProperty, FunctionValue, SymbolValue, FunctionParameter} from '../
 import {
   createParserPlugin,
   getValueDeclaration,
-  getPackageName,
   defaultJSDoc,
   getSymbolFromNode,
   getFullJsDocComment,
@@ -265,7 +264,6 @@ export const modelParser = createParserPlugin<ModelHookValue | ModelValue>((node
     // Model
     parser.symbols.push({
       name: modelName,
-      packageName: getPackageName(fileName),
       fileName,
       ...jsDoc,
       type: {
@@ -340,7 +338,6 @@ export const modelParser = createParserPlugin<ModelHookValue | ModelValue>((node
 
     parser.symbols.push({
       name: `${modelName}Config`,
-      packageName: getPackageName(fileName),
       fileName,
       ...jsDoc,
       type: {
@@ -355,7 +352,6 @@ export const modelParser = createParserPlugin<ModelHookValue | ModelValue>((node
     // Model State
     parser.symbols.push({
       name: `${modelName}State`,
-      packageName: getPackageName(fileName),
       fileName,
       ...defaultJSDoc,
       type: {
@@ -367,7 +363,6 @@ export const modelParser = createParserPlugin<ModelHookValue | ModelValue>((node
     // Model Events
     parser.symbols.push({
       name: `${modelName}Events`,
-      packageName: getPackageName(fileName),
       fileName,
       ...defaultJSDoc,
       type: {

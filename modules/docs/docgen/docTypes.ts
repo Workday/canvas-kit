@@ -34,7 +34,6 @@ export interface FunctionParameter extends JSDoc {
  */
 export interface ExportedSymbol<T = any> extends JSDoc {
   name: string;
-  packageName: string;
   fileName: string;
   type: Value | T;
 }
