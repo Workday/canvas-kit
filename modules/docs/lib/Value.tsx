@@ -6,7 +6,7 @@ import {Text} from '@workday/canvas-kit-react/text';
 import * as types from '../docgen/docTypes';
 import {MdxJSToJSX} from './MDXElements';
 import {Table} from './Table';
-import {capitalize, IndentLevelContext, RenderContext, space} from './widgetUtils';
+import {capitalize, IndentLevelContext, RenderContext, indent} from './widgetUtils';
 import {DescriptionTooltip} from './DescriptionTooltip';
 
 const widgets: Record<string, React.FC<ValueProps>> = {};
@@ -33,7 +33,7 @@ export const Value = <T extends {kind: string} = types.Value>(props: ValueProps<
   }
   return (
     <span className="token unknown" style={{whiteSpace: 'pre-wrap'}}>
-      unknown {JSON.stringify(props.value, null, '  ').replace(/\n/g, '\n' + space(level))}
+      unknown {JSON.stringify(props.value, null, '  ').replace(/\n/g, '\n' + indent(level))}
     </span>
   );
 };
@@ -51,7 +51,7 @@ export const PropertiesInline = ({properties}: {properties: types.ObjectProperty
         return (
           <React.Fragment key={index}>
             <br />
-            {space(level + 1)}
+            {indent(level + 1)}
             {p.description ? (
               <DescriptionTooltip
                 type="describe"
@@ -81,7 +81,7 @@ export const PropertiesInline = ({properties}: {properties: types.ObjectProperty
         );
       })}
       <br />
-      {space(level)}
+      {indent(level)}
       <span className="token punctuation">&#125;</span>
     </>
   );
@@ -102,7 +102,7 @@ function getTableRows(
 
     const propName = (
       <Text as="code" whiteSpace={'nowrap !important' as any}>
-        {space(level)}
+        {indent(level)}
         {level > 0 && '\u2514\u00A0'}
         {property.name}
         {showRequired && property.required ? <Text color="chiliMango600">*</Text> : ''}

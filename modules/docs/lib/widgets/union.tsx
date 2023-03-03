@@ -2,7 +2,7 @@ import React from 'react';
 
 import {UnionValue} from '../../docgen/docTypes';
 import {registerWidget, Value} from '../Value';
-import {IndentLevelContext, RenderContext, space} from '../widgetUtils';
+import {IndentLevelContext, RenderContext, indent} from '../widgetUtils';
 
 registerWidget<UnionValue>('union', ({value}) => {
   const level = React.useContext(IndentLevelContext);
@@ -15,7 +15,7 @@ registerWidget<UnionValue>('union', ({value}) => {
             {value.value.length > 3 && (
               <>
                 <br />
-                {space(level + 1)}
+                {indent(level + 1)}
               </>
             )}
             {index !== 0 && <span className="token punctuation"> |&nbsp;</span>}

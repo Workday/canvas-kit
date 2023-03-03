@@ -3,7 +3,7 @@ import React from 'react';
 import {CallExpression} from '../../docgen/docTypes';
 import {registerWidget, Value} from '../Value';
 
-import {IndentLevelContext, space} from '../widgetUtils';
+import {IndentLevelContext, indent} from '../widgetUtils';
 
 registerWidget<CallExpression>('callExpression', ({value}) => {
   const level = React.useContext(IndentLevelContext);
@@ -18,7 +18,7 @@ registerWidget<CallExpression>('callExpression', ({value}) => {
             {value.parameters.length > 1 && (
               <>
                 <br />
-                {space(level + 1)}
+                {indent(level + 1)}
               </>
             )}
             {value.parameters.length > 1 ? (
@@ -31,7 +31,7 @@ registerWidget<CallExpression>('callExpression', ({value}) => {
             {index === value.parameters.length - 1 && index > 0 && (
               <>
                 <br />
-                {space(level)}
+                {indent(level)}
               </>
             )}
           </React.Fragment>

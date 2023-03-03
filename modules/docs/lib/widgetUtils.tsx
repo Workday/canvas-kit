@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 
 import {createComponent, StyledType} from '@workday/canvas-kit-react/common';
 import {useDialogModel, Dialog} from '@workday/canvas-kit-react/dialog';
-import {CanvasColor, colors, type} from '@workday/canvas-kit-react/tokens';
+import {CanvasColor, colors, space, type} from '@workday/canvas-kit-react/tokens';
 
 import {MDX, MdxJSToJSX} from './MDXElements';
 import {Hyperlink} from '@workday/canvas-kit-react/button';
@@ -29,7 +29,7 @@ export const IndentLevelContext = React.createContext(0);
  * non-breaking spaces according to the level provided. These characters are safe for a React render
  * function.
  */
-export function space(level: number) {
+export function indent(level: number) {
   return [...Array(level * 2)].map(v => '\u00A0').join('');
 }
 
@@ -76,10 +76,9 @@ const ButtonHyperLink = Hyperlink.as('button');
 
 export interface SymbolDialogProps {
   value: types.SymbolValue;
-  hideDescription?: boolean;
 }
 
-export const SymbolDialog = ({value, hideDescription}: SymbolDialogProps) => {
+export const SymbolDialog = ({value}: SymbolDialogProps) => {
   const [symbol, setSymbol] = React.useState<types.ExportedSymbol | undefined>(undefined);
   const model = useDialogModel({
     onShow() {
@@ -113,12 +112,7 @@ export const SymbolDialog = ({value, hideDescription}: SymbolDialogProps) => {
             <RenderContext.Provider value="table">
               <IndentLevelContext.Provider value={0}>
                 {symbol ? (
-                  <SymbolDoc
-                    name={value.name}
-                    headingStart={3}
-                    hideDescription={hideDescription}
-                    meta={{hideHeader: true}}
-                  />
+                  <SymbolDoc name={value.name} headingStart={3} hideHeading />
                 ) : (
                   <>
                     <p>Basic type information:</p>
@@ -143,6 +137,7 @@ function createColor(color: CanvasColor) {
 }
 
 const StyledSymbolDoc = styled('div')({
+  marginBottom: space.m,
   'button[data-symbol]': {
     border: 'none',
     background: 'transparent',
@@ -222,16 +217,37 @@ export const SymbolValue = (props: ValueDocProps) => {
  * Renders just the description of an exported symbol.
  */
 export const SymbolDescription = (props: ValueDocProps) => {
+  console.log('SymbolDescription');
   const doc = useDoc(props);
 
   return doc ? <MdxJSToJSX>{doc.description}</MdxJSToJSX> : null;
 };
 
 export interface SymbolDocProps extends ValueDocProps, StyledType {
+  /**
+   * `SymbolDoc` can support heading levels inside widgets. The `headingStart` determines the
+   * initial heading level. From there, a React.Context called `HeadingLevelContext` maintains this
+   * level to subcomponents. This helps to maintain a document hierarchy of heading levels.
+   */
   headingStart?: number;
-  className?: string;
+  /**
+   * `SymbolDoc` will render a heading at the provided `headingStart` level unless `hideHeading` is
+   * passed.
+   */
+  hideHeading?: boolean;
+  /**
+   * `SymbolDoc` will render the `descriptionOverride` if provided or the JSDoc description if
+   * found. Setting `hideDescription` will disable this rendering of the description.
+   */
   hideDescription?: boolean;
+  /**
+   * By default, `SymbolDoc` will render the JSDoc description if found. This description can be
+   * overridden to display a custom description. This can be useful if you know that the description
+   * should be given a specific context of the widget type.
+   */
+  descriptionOverride?: string;
   meta?: Record<string, any>;
+  className?: string;
 }
 
 /**
@@ -243,6 +259,8 @@ export const SymbolDoc = ({
   fileName,
   headingStart = 3,
   hideDescription = false,
+  hideHeading = false,
+  descriptionOverride,
   meta,
   ...elemProps
 }: SymbolDocProps) => {
@@ -284,7 +302,10 @@ export const SymbolDoc = ({
   return (
     <StyledSymbolDoc {...elemProps}>
       <HeadingLevelContext.Provider value={headingStart}>
-        {!hideDescription && doc && <MdxJSToJSX>{doc.description}</MdxJSToJSX>}
+        {!hideHeading && <Heading>{name}</Heading>}
+        {!hideDescription && doc && (
+          <MdxJSToJSX>{descriptionOverride || doc.description}</MdxJSToJSX>
+        )}
         {contents}
       </HeadingLevelContext.Provider>
     </StyledSymbolDoc>

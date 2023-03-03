@@ -4,7 +4,7 @@ import {FunctionValue, FunctionParameter} from '../../docgen/docTypes';
 import {DescriptionTooltip} from '../DescriptionTooltip';
 import {MdxJSToJSX} from '../MDXElements';
 import {registerWidget, Value} from '../Value';
-import {RenderContext, IndentLevelContext, space, renderTypeParameters} from '../widgetUtils';
+import {RenderContext, IndentLevelContext, indent, renderTypeParameters} from '../widgetUtils';
 
 registerWidget<FunctionValue>('function', ({value}) => {
   const level = React.useContext(IndentLevelContext);
@@ -20,7 +20,7 @@ registerWidget<FunctionValue>('function', ({value}) => {
             {value.parameters.length > 1 && (
               <>
                 <br />
-                {space(level + 1)}
+                {indent(level + 1)}
               </>
             )}
             {value.parameters.length > 1 ? (
@@ -33,7 +33,7 @@ registerWidget<FunctionValue>('function', ({value}) => {
             {index === value.parameters.length - 1 && index > 0 && (
               <>
                 <br />
-                {space(level)}
+                {indent(level)}
               </>
             )}
           </React.Fragment>

@@ -1,2 +1,2 @@
-export {SymbolDoc} from './widgetUtils';
+export {SymbolDoc, SymbolDescription} from './widgetUtils';
 import './widgets';

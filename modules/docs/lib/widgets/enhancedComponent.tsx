@@ -8,7 +8,7 @@ import {EnhancedComponentValue} from '../../docgen/plugins/customTypes';
 import {MdxJSToJSX, MDX} from '../MDXElements';
 import {SymbolDoc} from '../SymbolDoc';
 import {PropertiesTable, registerWidget, Value} from '../Value';
-import {Heading, SymbolDialog} from '../widgetUtils';
+import {Heading, HeadingLevelContext, SymbolDialog} from '../widgetUtils';
 import * as types from '../../docgen/docTypes';
 
 const ParentComponentNameContext = React.createContext('');
@@ -47,10 +47,11 @@ registerWidget<EnhancedComponentValue>('enhancedComponent', ({value, doc, meta})
   const parentComponentName = React.useContext(ParentComponentNameContext);
   const parentComponentJSDoc = React.useContext(ParentComponentJSDocContext);
   const hideHeader = meta && meta.hideHeader === true;
+  const headingLevel = React.useContext(HeadingLevelContext);
 
   const intro = (
     <>
-      {!parentComponentName && !hideHeader && value.displayName ? (
+      {false && !parentComponentName && !hideHeader && value.displayName ? (
         <Heading>{value.displayName}</Heading>
       ) : null}
 
@@ -68,15 +69,11 @@ registerWidget<EnhancedComponentValue>('enhancedComponent', ({value, doc, meta})
   if (parentComponentName && value.componentType === 'container') {
     return (
       <>
-        {intro}
         <MDX as="p">
           This component references the{' '}
           <ParentComponentNameContext.Provider value="">
             <ParentComponentJSDocContext.Provider value={defaultJSDoc}>
-              <SymbolDialog
-                value={{kind: 'symbol', name: value.displayName || ''}}
-                hideDescription
-              />
+              <SymbolDialog value={{kind: 'symbol', name: value.displayName || ''}} />
             </ParentComponentJSDocContext.Provider>
           </ParentComponentNameContext.Provider>{' '}
           component.
@@ -87,7 +84,6 @@ registerWidget<EnhancedComponentValue>('enhancedComponent', ({value, doc, meta})
 
   return (
     <>
-      {intro}
       {value.styleComponent ? (
         <>
           <Heading headingOffset={1}>Layout Component</Heading>
@@ -95,7 +91,7 @@ registerWidget<EnhancedComponentValue>('enhancedComponent', ({value, doc, meta})
             <code>{value.displayName}</code> supports all props from the
             <code>
               <ParentComponentJSDocContext.Provider value={defaultJSDoc}>
-                <SymbolDialog value={value.styleComponent} hideDescription />
+                <SymbolDialog value={value.styleComponent} />
               </ParentComponentJSDocContext.Provider>
             </code>
             layout component.
@@ -138,12 +134,7 @@ registerWidget<EnhancedComponentValue>('enhancedComponent', ({value, doc, meta})
         );
       })}
       {value.elemPropsHook ? (
-        <>
-          <Heading headingOffset={1}>{value.elemPropsHook}</Heading>
-          <Box marginBottom="m">
-            <SymbolDoc name={value.elemPropsHook} />
-          </Box>
-        </>
+        <SymbolDoc name={value.elemPropsHook} headingStart={headingLevel + 1} />
       ) : null}
       {value.subComponents
         ? value.subComponents.map((c, i) => {
@@ -158,7 +149,7 @@ registerWidget<EnhancedComponentValue>('enhancedComponent', ({value, doc, meta})
                   }`}
                 >
                   <ParentComponentJSDocContext.Provider value={c}>
-                    <SymbolDoc name={c.symbol} hideDescription />
+                    <SymbolDoc name={c.symbol} hideHeading descriptionOverride={c.description} />
                   </ParentComponentJSDocContext.Provider>
                 </ParentComponentNameContext.Provider>
               </React.Fragment>

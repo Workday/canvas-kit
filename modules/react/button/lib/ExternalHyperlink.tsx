@@ -34,6 +34,10 @@ const StyledSystemIcon = styled(SystemIcon)<StyledType>({
   marginLeft: '2px',
 });
 
+/**
+ * `ExternalHyperlink`s also have an `inverse` variant. Use this variant when you need to place the
+ * link on a dark or colorful background such as `blueberry400`.
+ */
 export const ExternalHyperlink = createComponent('a')({
   displayName: 'ExternalHyperlink',
   Component: (

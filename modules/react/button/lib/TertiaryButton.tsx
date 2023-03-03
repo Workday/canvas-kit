@@ -193,6 +193,16 @@ const getMinWidthStyles = (children: React.ReactNode, size: ButtonSizes): string
   return children ? 'auto' : minWidthNum;
 };
 
+/**
+ * Tertiary Buttons have the lowest emphasis. Use for less important actions that the user may not
+ * often be looking to do. Tertiary Buttons have lower prominence as its container is not visible
+ * until it is interacted with. Use Tertiary Buttons for supplemental actions such as “View More”,
+ * “Read More” or “Select a File”. Tertiary Buttons are frequently used on Cards.
+ *
+ * Tertiary Buttons have four sizes: `extraSmall`, `small`, `medium` and `large`. Icons are
+ * supported for every size and can be positioned at the `start` or `end` with the `iconPosition`
+ * prop.
+ */
 export const TertiaryButton = createComponent('button')({
   displayName: 'TertiaryButton',
   Component: (

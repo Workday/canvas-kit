@@ -1,4 +1,4 @@
-import {Specifications, SymbolDoc} from '@workday/canvas-kit-docs';
+import {Specifications, SymbolDoc, SymbolDescription} from '@workday/canvas-kit-docs';
 
 import {
   PrimaryButton,
@@ -34,15 +34,10 @@ yarn add @workday/canvas-kit-react
 
 ### PrimaryButton
 
+<SymbolDescription name="PrimaryButton" fileName="/react/" />
+
 Here is a basic example of a Primary Button. Buttons can be customized with several props to change
 the size, add an icon, etc.
-
-Primary Buttons are high emphasis. Use once per screen to draw attention to the highest priority
-action. Multiple primary buttons make it confusing for the user to understand what action they
-should take. Not all screens require a Primary Button.
-
-Primary Buttons have four sizes: `extraSmall`, `small`, `medium`, and `large`. Icons are supported
-for every size and can be positioned at the `start` or `end` with the `iconPosition` prop.
 
 <ExampleCodeBlock code={Primary} />
 
@@ -54,16 +49,11 @@ when you need to place a Primary Button on a dark or colorful background such as
 
 #### Component API
 
-<SymbolDoc name="PrimaryButton" fileName="/react/" hideDescription meta={{hideHeader: true}} />
+<SymbolDoc name="PrimaryButton" fileName="/react/" hideHeading hideDescription headingStart={4} />
 
 ### SecondaryButton
 
-Secondary Buttons have a medium level of emphasis. Use them for non-critical actions. Secondary
-Buttons can be used on most pages without restrictions and work well for multiple actions of equal
-weight. They can be used in conjunction with a Primary Button or independently.
-
-Secondary Buttons have four sizes: `extraSmall`, `small`, `medium`, and `large`. Icons are supported
-for every size and can be positioned at the `start` or `end` with the `iconPosition` prop.
+<SymbolDescription name="SecondaryButton" fileName="/react/" />
 
 <ExampleCodeBlock code={Secondary} />
 
@@ -74,17 +64,11 @@ on a dark or colorful background such as `blueberry400`.
 
 #### Component API
 
-<SymbolDoc name="SecondaryButton" fileName="/react/" hideDescription meta={{hideHeader: true}} />
+<SymbolDoc name="SecondaryButton" fileName="/react/" hideHeading hideDescription headingStart={4} />
 
 ### TertiaryButton
 
-Tertiary Buttons have the lowest emphasis. Use for less important actions that the user may not
-often be looking to do. Tertiary Buttons have lower prominence as its container is not visible until
-it is interacted with. Use Tertiary Buttons for supplemental actions such as “View More”, “Read
-More” or “Select a File”. Tertiary Buttons are frequently used on Cards.
-
-Tertiary Buttons have four sizes: `extraSmall`, `small`, `medium` and `large`. Icons are supported
-for every size and can be positioned at the `start` or `end` with the `iconPosition` prop.
+<SymbolDescription name="TertiaryButton" fileName="/react/" />
 
 <ExampleCodeBlock code={Tertiary} />
 
@@ -95,19 +79,17 @@ on a dark or colorful background such as `blueberry400`.
 
 #### Component API
 
-<SymbolDoc name="TertiaryButton" fileName="/react/" hideDescription meta={{hideHeader: true}} />
+<SymbolDoc name="TertiaryButton" fileName="/react/" hideHeading hideDescription headingStart={4} />
 
 ### DeleteButton
 
-Use sparingly for destructive actions that will result in data loss, can’t be undone, or will have
-significant consequences. They commonly appear in confirmation dialogs as the final confirmation
-before deleting.
+<SymbolDescription name="TertiaryButton" fileName="/react/" />
 
 <ExampleCodeBlock code={Delete} />
 
 #### Component API
 
-<SymbolDoc name="DeleteButton" fileName="/react/" hideDescription meta={{hideHeader: true}} />
+<SymbolDoc name="DeleteButton" fileName="/react/" hideHeading hideDescription headingStart={4} />
 
 ### Custom Styles
 
