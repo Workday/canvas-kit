@@ -1,11 +1,10 @@
 import React from 'react';
 
 import {Expandable} from '@workday/canvas-kit-labs-react/expandable';
-import {Box} from '@workday/canvas-kit-react/layout';
 
 import {defaultJSDoc} from '../../docgen/docParser';
 import {EnhancedComponentValue} from '../../docgen/plugins/customTypes';
-import {MdxJSToJSX, MDX} from '../MDXElements';
+import {MDX} from '../MDXElements';
 import {SymbolDoc} from '../SymbolDoc';
 import {PropertiesTable, registerWidget, Value} from '../Value';
 import {Heading, HeadingLevelContext, SymbolDialog} from '../widgetUtils';
@@ -45,23 +44,7 @@ const fileNameToCategoryMap: Record<string, string[]> = {
 registerWidget<EnhancedComponentValue>('enhancedComponent', ({value, doc, meta}) => {
   const groups = groupProps(value.props);
   const parentComponentName = React.useContext(ParentComponentNameContext);
-  const parentComponentJSDoc = React.useContext(ParentComponentJSDocContext);
-  const hideHeader = meta && meta.hideHeader === true;
   const headingLevel = React.useContext(HeadingLevelContext);
-
-  const intro = (
-    <>
-      {false && !parentComponentName && !hideHeader && value.displayName ? (
-        <Heading>{value.displayName}</Heading>
-      ) : null}
-
-      <ParentComponentNameContext.Provider value="">
-        <ParentComponentJSDocContext.Provider value={defaultJSDoc}>
-          <MdxJSToJSX>{parentComponentJSDoc.description || doc?.description || ''}</MdxJSToJSX>
-        </ParentComponentJSDocContext.Provider>
-      </ParentComponentNameContext.Provider>
-    </>
-  );
 
   // We don't want to re-document a subcomponent that is a container component with a different
   // model. If we detect another container, only render the intro and a link to the container
