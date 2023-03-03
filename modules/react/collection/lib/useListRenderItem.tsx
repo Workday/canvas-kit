@@ -4,6 +4,20 @@ import {Generic} from '@workday/canvas-kit-react/common';
 
 import {useBaseListModel} from './useBaseListModel';
 
+/**
+ * This hook is meant to be used inside the render function of `List` style components. It is used
+ * by `ListBox`. This hook gives list-based components their static and dynamic APIs to handle list
+ * items. This hook should only be used if you want to implement your own List. For example,
+ * `Tabs.List` uses this hook, but `Menu.List` uses `ListBox` which uses this hook.
+ *
+ * ```tsx
+ * const MyList = createContainer('ul')({
+ *   modelHook: useListModel,
+ * })((elemProps, Element, model) => {
+ *   return <Element {...elemProps}>{useListRenderItems(model, elemProps.children)}</Element>;
+ * });
+```
+ */
 export function useListRenderItems<T>(
   model: ReturnType<typeof useBaseListModel>,
   children: ((item: Generic, index: number) => React.ReactNode) | React.ReactNode

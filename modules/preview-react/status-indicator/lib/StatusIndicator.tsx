@@ -22,13 +22,39 @@ export const useStatusIndicator = createElemPropsHook(useStatusIndicatorModel)((
   };
 });
 
+/**
+ * `StatusIndicator` is a container component which renders an {@link HStack} under the hood to
+ * apply spacing evenly between its children. It has a default maximum width of `200px`.
+ *
+ * ```tsx
+ * <StatusIndicator emphasis="low" variant="blue">
+ *   {Child components}
+ * </StatusIndicator>
+ * ```
+ */
 export const StatusIndicator = createContainer('div')({
   displayName: 'StatusIndicator',
   modelHook: useStatusIndicatorModel,
   elemPropsHook: useStatusIndicator,
   subComponents: {
-    Icon: StatusIndicatorIcon,
+    /**
+     * `StatusIndicator.Label` renders {@link Text} under the hood. It will apply an ellipsis if its
+     * contents exceed the component's maximum width.
+     *
+     * ```tsx
+     * <StatusIndicator.Label>{The text to be rendered}</StatusIndicator.Label>
+     * ```
+     */
     Label: StatusIndicatorLabel,
+    /**
+     * `StatusIndicator.Icon` renders {@link SystemIcon} under the hood. It's used as a decorative
+     * element to visually support the {@link StatusIndicatorLabel StatusIndicator.Label} text.
+     *
+     * ```tsx
+     * <StatusIndicator.Icon icon={uploadCloudIcon} />
+     * ```
+     */
+    Icon: StatusIndicatorIcon,
   },
 })<StatusIndicatorProps>(({children, ...elemProps}, Element, model) => {
   return (

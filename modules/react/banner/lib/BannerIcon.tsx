@@ -14,7 +14,6 @@ import {useBannerIcon, useBannerModel} from './hooks';
 export interface BannerIconProps extends Omit<ExtractProps<typeof SystemIcon, never>, 'icon'> {
   /**
    * Icon to show next to label
-   * @default exclamationTriangleIcon or exclamationCircleIcon when hasError is true
    */
   icon?: CanvasSystemIcon;
 }

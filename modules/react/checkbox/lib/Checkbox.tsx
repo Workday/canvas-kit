@@ -29,7 +29,7 @@ export interface CheckboxProps extends Themeable {
   disabled?: boolean;
   /**
    * The HTML `id` of the underlying checkbox input element. This is required if `label` is defined as a non-empty string.
-   * @default A uniquely generated id
+   * @default {useUniqueId}
    */
   id?: string;
   /**
@@ -314,9 +314,6 @@ export const Checkbox = createComponent('input')({
       theme = useTheme(),
       id,
       disabled,
-      onChange,
-      value,
-      error,
       indeterminate,
       variant,
       ...elemProps
@@ -334,10 +331,7 @@ export const Checkbox = createComponent('input')({
             disabled={disabled}
             id={inputId}
             ref={ref}
-            onChange={onChange}
             type="checkbox"
-            value={value}
-            error={error}
             variant={variant}
             aria-checked={indeterminate ? 'mixed' : checked}
             {...elemProps}

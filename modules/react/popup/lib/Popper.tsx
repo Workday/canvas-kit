@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import * as PopperJS from '@popperjs/core';
 
-export type Placement = PopperJS.Placement;
+export type Placement = `${PopperJS.Placement}`; // Use template literals to make documentation list them out
 export type PopperOptions = PopperJS.Options;
 
 import {usePopupStack} from './hooks';
@@ -68,6 +68,21 @@ export interface PopperProps {
   popperInstanceRef?: React.Ref<PopperJS.Instance>;
 }
 
+/**
+ * A thin wrapper component around the Popper.js positioning engine. For reference:
+ * https://popper.js.org/. `Popper` also automatically works with the {@link PopupStack} system.
+ * `Popper` has no UI and will render any children to the `body` element and position around a
+ * provided `anchorElement`.
+ *
+ * Prefer using {@link PopupPopper Popup.Popper} instead. Use this to make Popups that don't utilize
+ * a PopupModel or any associate popup [hooks](#hooks).
+ *
+ * > **Note:** `Popper` renders any children to a `div` element created by the `PopupStack`. This
+ * > element is not controlled by React, so any extra element props will _not_ be forwarded. The
+ * > `ref` will point to the `div` element created by the `PopupStack`, however. In v4, an extra
+ * > `div` element was rendered and that's where extra props were spread to. In v5+, you can provide
+ * > your own element if you wish.
+ */
 export const Popper = React.forwardRef<HTMLDivElement, PopperProps>(
   ({portal = true, open = true, ...elemProps}: PopperProps, ref) => {
     if (!open) {

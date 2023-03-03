@@ -66,10 +66,14 @@ const Anchor = styled('a')<HyperlinkProps & StyledType>(
   anchorVariants
 );
 
+/**
+ * `Hyperlink`s should be used when you want to navigate away from the current page or to an anchor
+ * on the current page.
+ */
 export const Hyperlink = createComponent('a')({
   displayName: 'Hyperlink',
-  Component: ({variant, href, children, ...elemProps}: HyperlinkProps, ref, Element) => (
-    <Anchor ref={ref} as={Element} variant={variant} href={href} {...elemProps}>
+  Component: ({children, ...elemProps}: HyperlinkProps, ref, Element) => (
+    <Anchor ref={ref} as={Element} {...elemProps}>
       {children}
     </Anchor>
   ),

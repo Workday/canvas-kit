@@ -13,7 +13,7 @@ type YupValidationResolver = <T extends {}>(
   validationSchema: SchemaOf<T>
 ) => (data: T) => Promise<{values: T; errors: {}} | {values: {}; errors: FieldErrorsImpl<T>}>;
 
-const useYupValidationResolver: YupValidationResolver = validationSchema => {
+const useYupValidationResolver: any = validationSchema => {
   return React.useCallback(
     async data => {
       try {

@@ -6,6 +6,8 @@ type StorybookParameters = {
     disable?: boolean;
     pauseAnimationAtEnd?: boolean;
     diffThreshold?: number;
+    /** Array of screen widths to capture */
+    viewports?: number[];
   };
   [key: string]: any;
 };

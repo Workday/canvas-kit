@@ -1,5 +1,5 @@
 import {Tabs} from '@workday/canvas-kit-react/tabs';
-import {Specifications} from '@workday/canvas-kit-docs';
+import {Specifications, SymbolDoc} from '@workday/canvas-kit-docs';
 
 import {Basic} from './examples/Basic';
 import {NamedTabs} from './examples/NamedTabs';
@@ -11,18 +11,14 @@ import {SinglePanel} from './examples/SinglePanel';
 import {AlternativeTabStop} from './examples/AlternativeTabStop';
 import {HoistedModel} from './examples/HoistedModel';
 import {DynamicTabs} from './examples/DynamicTabs';
-import {
-  TabsModelConfigComponent,
-  TabsStateComponent,
-  TabsEventsComponent,
-} from './TabsModel.splitprops.tsx';
 
 <Meta title="Components/Containers/Tabs" component={Tabs} />
 
 # Canvas Kit Tabs
 
-`Tabs` is a [compound component](/getting-started/for-developers/resources/compound-components/) that allows users to navigate between
-related views of content while remaining in context of the page.
+`Tabs` is a [compound component](/getting-started/for-developers/resources/compound-components/)
+that allows users to navigate between related views of content while remaining in context of the
+page.
 
 [> Workday Design Reference](https://design.workday.com/components/navigation/tabs)
 
@@ -127,132 +123,9 @@ array.
 
 <ExampleCodeBlock code={DynamicTabs} />
 
-## Components
+## Component API
 
-### Tabs
-
-#### Usage
-
-`Tabs` is a container component that is responsible for creating a `TabsModel` and sharing it with
-its subcomponents using React context. It does not represent a real element.
-
-```tsx
-<Tabs onSelect={data => console.log('Activated tab', data.id)}>{/* Child components */}</Tabs>
-```
-
-Alternatively, you may pass in a model using the hoisted model pattern.
-
-```tsx
-const model = useTabsModel({
-  onSelect(data) {
-    console.log('Activated Tab', data.id);
-  },
-});
-
-<Tabs model={model}>{/* Child components */}</Tabs>;
-```
-
-#### Props
-
-Note that if you pass in a `model` configured with `useTabsModel`, configuration props passed to
-`Tabs` will be ignored.
-
-<ArgsTable of={Tabs} />
-
-### Tabs.List
-
-#### Usage
-
-`Tabs.List` is a `<div role="tablist">` element. It is a container for `Tabs.Item` subcomponents.
-
-```tsx
-<Tabs.List>{/* Tabs.Items */}</Tabs.List>
-```
-
-#### Props
-
-Undocumented props are spread to the underlying `<div>` element.
-
-<ArgsTable of={Tabs.List} />
-
-### Tabs.Item
-
-#### Usage
-
-`Tabs.Item` is a `<button role="tab">` element. Each `Tabs.Item` is associated with a `Tabs.Panel`
-either by a `data-id` attribute or by the position in the list. If a `data-id` is provided, it must
-match the `data-id` passed to the corresponding `Tabs.Panel` component.
-
-```tsx
-<Tabs.Item data-id="first">First Tab</Tabs.Item>
-```
-
-#### Props
-
-Undocumented props are spread to the underlying `button` element.
-
-<ArgsTable of={Tabs.Item} />
-
-### Tabs.Panel
-
-#### Usage
-
-`Tabs.Panel` is a `<div role="tabpanel">` element. It is focusable by default. Each `Tabs.Panel` is
-controlled by a `Tabs.Item` either by a `data-id` attribute or by the position in the list. If a
-`data-id` is provided, it must match the `data-id` passed to the corresponding `Tabs.Item`
-component.
-
-```tsx
-<Tabs.Panel data-id="first">{/* Contents of the tab panel */}</Tabs.Panel>
-```
-
-#### Props
-
-Undocumented props are spread to the underlying `<div>` element.
-
-<ArgsTable of={Tabs.Panel} />
-
-## Model
-
-If `Tabs` was stripped of all its markup, attributes, and styling, what would remain is the
-[model](/getting-started/for-developers/resources/compound-components/#models). The model is an
-object composed of two parts: `state` which describes the current snapshot in time of the component
-and `events` which describes events that can be sent to the model.
-
-By default, `Tabs` will create a model and share it internally with its subcomponents using React
-context. Alternatively, if you need direct access to the model's `state` and `events` outside of the
-`Tabs` component, you may configure your own model with `useTabsModel` and pass it to `Tabs` via a
-pattern called
-[hoisting the model](/getting-started/for-developers/resources/compound-components/#configuring-a-model).
-
-```tsx
-const model = useTabsModel({
-  onActivate({data}) {
-    console.log('Activated Tab', data);
-  },
-});
-
-<Tabs model={model}>{/* Child components */}</Tabs>;
-```
-
-### Config
-
-`useTabsModel` accepts a configuration object with the following properties and returns a
-`TabsModel` with `state` and `events` properties.
-
-<ArgsTable of={TabsModelConfigComponent} />
-
-### State
-
-The `TabsModel` `state` is an object with the following properties.
-
-<ArgsTable of={TabsStateComponent} />
-
-### Events
-
-The `TabsModel` `events` is an object with the following properties.
-
-<ArgsTable of={TabsEventsComponent} />
+<SymbolDoc name="Tabs" fileName="/react/" />
 
 ## Specifications
 
