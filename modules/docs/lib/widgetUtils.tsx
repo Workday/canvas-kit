@@ -217,7 +217,6 @@ export const SymbolValue = (props: ValueDocProps) => {
  * Renders just the description of an exported symbol.
  */
 export const SymbolDescription = (props: ValueDocProps) => {
-  console.log('SymbolDescription');
   const doc = useDoc(props);
 
   return doc ? <MdxJSToJSX>{doc.description}</MdxJSToJSX> : null;
