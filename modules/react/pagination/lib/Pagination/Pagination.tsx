@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {Flex} from '@workday/canvas-kit-react/layout';
+import {Flex, FlexProps} from '@workday/canvas-kit-react/layout';
 
 import {PaginationModel} from './types';
 import {
@@ -39,7 +39,7 @@ function useDefaultModel<T, C>(model: T | undefined, config: C, fn: (config: C) 
   return model || fn(config);
 }
 
-export interface PaginationNavProps {
+export interface PaginationNavProps extends FlexProps {
   'aria-label': string;
 }
 
