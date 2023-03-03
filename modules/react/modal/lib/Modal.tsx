@@ -7,6 +7,7 @@ import {ModalCard} from './ModalCard';
 import {useModalModel} from './hooks';
 import {ModalHeading} from './ModalHeading';
 import {ModalOverflowOverlay} from './ModalOverflowOverlay';
+import {ModalBody} from './ModalBody';
 
 /**
  * This component is the container component and does not render any semantic elements. It provides
@@ -80,7 +81,7 @@ export const Modal = createContainer()({
      * closes the Modal.
      */
     CloseButton: Popup.CloseButton,
-    Body: Popup.Body,
+    Body: ModalBody,
     /**
      * If content is large, scrolling the entire overlay container is an option. Use the
      * `Modal.OverflowOverlay` component instead of the {@link ModalOverlay Modal.Overlay}

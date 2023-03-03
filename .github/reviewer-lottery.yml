@@ -1,0 +1,12 @@
+groups:
+  - name: dse # name of the group
+    reviewers: 1 # how many reviewers do you want to assign?
+    internal_reviewers: 1 # how many reviewers do you want to assign when the PR author belongs to this group?
+    usernames: # github usernames of the reviewers
+      - jamesfan
+      - NicholasBoll
+      - willklein
+      - alanbsmith
+      - mannycarrera4
+      - josh-bagwell
+      - RayRedGoose
