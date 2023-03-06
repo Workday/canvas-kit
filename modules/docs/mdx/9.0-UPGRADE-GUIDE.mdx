@@ -122,10 +122,10 @@ We've promoted `Toast` from Labs (`@workday/canvas-kit-labs-react`) to the Main
 - It's sub components allow for more flexibility and access to lower level elements.
 
 ```tsx
-// v7
+// v8
 <Toast actionText="View more details" onClose={handleClose}>Your workbook was successfully processed.</Toast>
 
-// v8
+// v9
 <Toast mode="dialog">
   <Toast.Icon icon={checkIcon} color={colors.greenApple400} />
   <Toast.Body>
@@ -136,5 +136,5 @@ We've promoted `Toast` from Labs (`@workday/canvas-kit-labs-react`) to the Main
 </Toast>
 ```
 
-🤖 The codemod will will convert the `Toast` into a compound component with it's sub components
+🤖 The codemod will convert the `Toast` into a compound component with it's sub components
 having the correct props.
