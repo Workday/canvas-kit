@@ -20,7 +20,7 @@ export interface ToastProps extends Omit<ExtractProps<typeof Popup.Card, never>,
  * import { Toast } from "@workday/canvas-kit-react/toast";
  *
  * const MyToast = (props: CardProps) => (
- *    <Toast mode="dialog">
+ *    <Toast mode="dialog" aria-label="notifcation">
  *      <Toast.Icon icon={checkIcon} color={colors.greenApple400} />
  *      <Toast.Body>
  *        <Toast.Message>Your workbook was successfully processed.</Toast.Message>

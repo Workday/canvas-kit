@@ -7,7 +7,7 @@ export const useToastModel = createModelHook({
      * Sets the correct aria attributes for the Toast.
      * Alert toasts are used to convey urgency and important information. The `role` is set to `alert`
      * Status toasts are used to convey a message or a successful action. The `role` is set to `status`
-     * Dialog toasts are used when there's an action to be taken. The `role` is set to `dialog`
+     * Dialog toasts are used when there's an action to be taken. The `role` is set to `dialog`. If you use this mode, you must add an aria-label to the main `Toast` component.
      * @default 'status'
      */
     mode: 'status' as AriaRoleMode,

@@ -13,8 +13,7 @@ any questions.
   - [Drawer](#drawer)
   - [Layout and Column](#layout-and-column) - [Stack](#stack-hstack-vstack)
 - [Component Updates](#component-updates)
-  - [Buttons](#buttons)
-	- [Toast](#toast)
+  - [Buttons](#buttons) - [Toast](#toast)
 
 ## Codemod
 
@@ -114,12 +113,13 @@ If you still wish for a specific `button` within a `form` to submit, just add th
 
 ### Toast
 
-We've promoted `Toast` from Labs (`@workday/canvas-kit-labs-react`) to the Main (`@workday/canvas-kit-react`) package.
+We've promoted `Toast` from Labs (`@workday/canvas-kit-labs-react`) to the Main
+(`@workday/canvas-kit-react`) package.
 
-- This component is a [compound component](/getting-started/for-developers/resources/compound-components/).
-- It has a `mode` prop that allows for propert accessibility attributed to be defined.
+- This component is a
+  [compound component](/getting-started/for-developers/resources/compound-components/).
+- It has a `mode` prop that allows for proper accessibility attributes to be defined.
 - It's sub components allow for more flexibility and access to lower level elements.
-
 
 ```tsx
 // v7
@@ -135,3 +135,6 @@ We've promoted `Toast` from Labs (`@workday/canvas-kit-labs-react`) to the Main 
 	<Toast.CloseIcon aria-label="Close" onClick={handleClose} />
 </Toast>
 ```
+
+🤖 The codemod will will convert the `Toast` into a compound component with it's sub components
+having the correct props.
