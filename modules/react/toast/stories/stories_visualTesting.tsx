@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {checkIcon} from '@workday/canvas-system-icons-web';
+import {checkIcon, exclamationCircleIcon} from '@workday/canvas-system-icons-web';
 import {colors} from '@workday/canvas-kit-react/tokens';
 
 import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
@@ -22,6 +22,9 @@ export const ToastStates = withSnapshotsEnabled(() => {
             label: 'Default',
             props: {
               mode: 'polite',
+              icon: checkIcon,
+              iconColor: colors.greenApple400,
+              message: 'Your workbook was successfully processed.',
             },
           },
           {
@@ -30,6 +33,7 @@ export const ToastStates = withSnapshotsEnabled(() => {
               mode: 'polite',
               icon: checkIcon,
               iconColor: colors.greenApple400,
+              message: 'Your workbook was successfully processed.',
             },
           },
           {
@@ -37,6 +41,9 @@ export const ToastStates = withSnapshotsEnabled(() => {
             props: {
               mode: 'polite',
               hasCloseIcon: true,
+              icon: exclamationCircleIcon,
+              iconColor: colors.cinnamon500,
+              message: 'Your workbook was successfully processed.',
             },
           },
           {
@@ -44,6 +51,9 @@ export const ToastStates = withSnapshotsEnabled(() => {
             props: {
               mode: 'interactive',
               hasAction: true,
+              icon: checkIcon,
+              iconColor: colors.greenApple400,
+              message: 'Your workbook was successfully processed.',
             },
           },
           {
@@ -52,6 +62,9 @@ export const ToastStates = withSnapshotsEnabled(() => {
               mode: 'polite',
               hasCloseIcon: true,
               padding: 's',
+              icon: checkIcon,
+              iconColor: colors.greenApple400,
+              message: 'Your workbook was successfully processed.',
             },
           },
           {
@@ -60,6 +73,9 @@ export const ToastStates = withSnapshotsEnabled(() => {
               mode: 'polite',
               hasCloseIcon: true,
               depth: 'none',
+              icon: checkIcon,
+              iconColor: colors.greenApple400,
+              message: 'Your workbook was successfully processed.',
             },
           },
           {
@@ -68,6 +84,9 @@ export const ToastStates = withSnapshotsEnabled(() => {
               mode: 'polite',
               hasCloseIcon: true,
               depth: 1,
+              icon: checkIcon,
+              iconColor: colors.greenApple400,
+              message: 'Your workbook was successfully processed.',
             },
           },
           {
@@ -76,6 +95,9 @@ export const ToastStates = withSnapshotsEnabled(() => {
               mode: 'polite',
               hasCloseIcon: true,
               depth: 2,
+              icon: checkIcon,
+              iconColor: colors.greenApple400,
+              message: 'Your workbook was successfully processed.',
             },
           },
           {
@@ -84,6 +106,9 @@ export const ToastStates = withSnapshotsEnabled(() => {
               mode: 'polite',
               hasCloseIcon: true,
               depth: 3,
+              icon: checkIcon,
+              iconColor: colors.greenApple400,
+              message: 'Your workbook was successfully processed.',
             },
           },
           {
@@ -92,6 +117,9 @@ export const ToastStates = withSnapshotsEnabled(() => {
               mode: 'polite',
               hasCloseIcon: true,
               depth: 4,
+              icon: checkIcon,
+              iconColor: colors.greenApple400,
+              message: 'Your workbook was successfully processed.',
             },
           },
           {
@@ -100,6 +128,9 @@ export const ToastStates = withSnapshotsEnabled(() => {
               mode: 'polite',
               hasCloseIcon: true,
               depth: 5,
+              icon: checkIcon,
+              iconColor: colors.greenApple400,
+              message: 'Your workbook was successfully processed.',
             },
           },
           {
@@ -108,6 +139,9 @@ export const ToastStates = withSnapshotsEnabled(() => {
               mode: 'polite',
               hasCloseIcon: true,
               depth: 6,
+              icon: checkIcon,
+              iconColor: colors.greenApple400,
+              message: 'Your workbook was successfully processed.',
             },
           },
           {
@@ -116,6 +150,20 @@ export const ToastStates = withSnapshotsEnabled(() => {
               mode: 'polite',
               hasCloseIcon: true,
               width: 300,
+              icon: checkIcon,
+              iconColor: colors.greenApple400,
+              message: 'Your workbook was successfully processed.',
+            },
+          },
+          {
+            label: 'With short mesage',
+            props: {
+              mode: 'polite',
+              hasCloseIcon: true,
+              width: 300,
+              icon: checkIcon,
+              iconColor: colors.greenApple400,
+              message: 'There was an error',
             },
           },
         ]}
@@ -123,8 +171,8 @@ export const ToastStates = withSnapshotsEnabled(() => {
       >
         {({mode, hasCloseIcon, hasAction, icon, iconColor, ...props}) => (
           <Toast mode={hasAction ? 'dialog' : mode} {...props}>
+            <Toast.Icon icon={icon} color={iconColor} />
             <Toast.Body>
-              {icon ? <Toast.Icon icon={icon} color={iconColor} /> : null}
               <Toast.Message>Your workbook was successfully processed.</Toast.Message>
               {hasAction ? <Toast.Link href="#href">Custom Link</Toast.Link> : null}
             </Toast.Body>
