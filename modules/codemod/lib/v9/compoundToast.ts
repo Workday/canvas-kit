@@ -19,7 +19,6 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
     const localName = nodePath.value.local?.name;
 
     if (toastPackage === importSource && localName) {
-      console.log(nodePath);
       nodePath.replace(j.importSpecifier(j.identifier('Toast'), j.identifier(localName)));
     }
   });
@@ -70,13 +69,17 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
 
       const defaultIconAttributes = [
         j.jsxAttribute(j.jsxIdentifier('color'), j.stringLiteral('greenApple400')),
-        j.jsxAttribute(j.jsxIdentifier('icon'), j.stringLiteral('checkIcon')),
+        j.jsxAttribute(
+          j.jsxIdentifier('icon'),
+          j.jsxExpressionContainer(j.jsxIdentifier('checkIcon'))
+        ),
       ];
 
       const unchangedIconAttributes = attributes?.filter(
         attr =>
-          (attr.type === 'JSXAttribute' && attr.name.name === 'icon') ||
-          (attr.type === 'JSXAttribute' && attr.name.name === 'iconColor')
+          attr.type === 'JSXAttribute' &&
+          typeof attr.name.name === 'string' &&
+          /icon|iconColor/g.test(attr.name.name)
       );
 
       const updatedIconAttrs = unchangedIconAttributes?.map(specifier => {
@@ -89,7 +92,7 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
       });
 
       const chooseIconAttrs =
-        unchangedIconAttributes && unchangedIconAttributes.length > 0
+        unchangedIconAttributes && unchangedIconAttributes.length
           ? updatedIconAttrs
           : defaultIconAttributes;
 
@@ -113,7 +116,7 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
       // Add `import {checkIcon} from '@workday/canvas-system-icons-web'`
       // when there's a default toast
       const lastImport = root.find(j.ImportDeclaration).at(-1);
-      if (lastImport && unchangedIconAttributes?.length === 0) {
+      if (lastImport && !unchangedIconAttributes?.length) {
         lastImport.insertAfter(
           j.importDeclaration(
             [j.importSpecifier(j.identifier('checkIcon'))],
@@ -122,27 +125,62 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
         );
       }
 
+      const lineBreakStart = j.jsxText('\n  ');
+      const lineBreakEnd = j.jsxText('\n');
+
       // Filter out all old props
-      nodePath.value.openingElement.attributes?.filter(attr => {
+      const filterAttr = nodePath.value.openingElement.attributes?.filter(attr => {
         if (attr.type === 'JSXAttribute') {
           return (
             attr.name.name !== 'actionText' &&
             attr.name.name !== 'icon' &&
             attr.name.name !== 'onActionClick' &&
             attr.name.name !== 'iconColor' &&
-            attr.name.name !== 'icon'
+            attr.name.name !== 'icon' &&
+            attr.name.name !== 'onClose' &&
+            attr.name.name !== 'color'
           );
         }
+        return attr;
       });
 
-      const CloseElement = j.jsxElement(
-        j.jsxOpeningElement(ToastCloseJSX, closeAttributes),
-        j.jsxClosingElement(ToastCloseJSX)
+      nodePath.value.openingElement.attributes = filterAttr;
+
+      const OpeningCloseElement = j.jsxOpeningElement(ToastCloseJSX, closeAttributes);
+      OpeningCloseElement.selfClosing = true;
+
+      const CloseElement = j.jsxElement(OpeningCloseElement);
+
+      // grab the onActionClick attr
+      const onActionClickAttr = linkAttributes?.filter(
+        attr => attr.type === 'JSXAttribute' && attr.name.name === 'onActionClick'
       );
 
+      // rename onActionClick to onClick for the Toast.Link component
+      const renameOnActionClick = onActionClickAttr?.map(attr => {
+        if (attr.type === 'JSXAttribute' && attr.name.name === 'onActionClick') {
+          attr.name.name = 'onClick';
+        }
+        return attr;
+      });
+
+      // grab the actionText prop
+      const actionTextAttr = linkAttributes?.find(
+        attr => attr.type === 'JSXAttribute' && attr.name.name === 'actionText'
+      );
+
+      // Get value of the actionText prop to pass as children to the LinkElement
+      const actionText =
+        actionTextAttr &&
+        actionTextAttr.type === 'JSXAttribute' &&
+        actionTextAttr.value?.type === 'StringLiteral'
+          ? [actionTextAttr.value]
+          : [];
+
       const LinkElement = j.jsxElement(
-        j.jsxOpeningElement(ToastLinkJSX, linkAttributes),
-        j.jsxClosingElement(ToastLinkJSX)
+        j.jsxOpeningElement(ToastLinkJSX, renameOnActionClick),
+        j.jsxClosingElement(ToastLinkJSX),
+        actionText
       );
 
       // Toast Message JSX inclduing children which should be the string
@@ -152,31 +190,37 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
         nodePath.value.children
       );
 
-      // Body element including Message and its children
-      const BodyElement = j.jsxElement(
-        j.jsxOpeningElement(ToastBodyJSX),
-        j.jsxClosingElement(ToastBodyJSX),
-        [MessageElement]
-      );
-
-      // Default Toast with no Close or Link
-      nodePath.value.children = [IconElement, BodyElement];
-
-      // If there's an onClose, add the Toast.Close with its attributes
-      if (closeAttributes && closeAttributes?.length > 0) {
-        nodePath.value.children.push(CloseElement);
-      }
-
-      // If there's an actionText or onActionClick, add the Toast.Link with its attributes
-      if (linkAttributes && linkAttributes?.length > 0) {
-        nodePath.value.children.push(LinkElement);
-        // If there's a link, add mode="dialog" for accessibility
+      if (linkAttributes && linkAttributes?.length) {
+        // If there's a link, add mode="dialog" to the main Toast component for accessibility
         nodePath.value.openingElement.attributes = [
           j.jsxAttribute(j.jsxIdentifier('mode'), j.stringLiteral('dialog')),
         ];
       }
 
-      console.warn(nodePath.value.children);
+      // Body element including Message and its children
+      const BodyElement = j.jsxElement(
+        j.jsxOpeningElement(ToastBodyJSX),
+        j.jsxClosingElement(ToastBodyJSX),
+        [lineBreakStart, MessageElement, lineBreakEnd]
+      );
+      // If there's an actionText or onActionClick, add the Toast.Link with its attributes inside Toast.Body
+      if (linkAttributes && linkAttributes.length) {
+        BodyElement.children?.push(LinkElement, lineBreakEnd);
+      }
+
+      // Default Toast with no Close or Link
+      nodePath.value.children = [
+        lineBreakStart,
+        IconElement,
+        lineBreakEnd,
+        BodyElement,
+        lineBreakEnd,
+      ];
+
+      // If there's an onClose, add the Toast.Close with its attributes
+      if (closeAttributes && closeAttributes?.length) {
+        nodePath.value.children.push(CloseElement, lineBreakEnd);
+      }
     });
 
   return root.toSource();

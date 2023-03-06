@@ -5,203 +5,132 @@ import {stripIndent} from 'common-tags';
 const expectTransform = expectTransformFactory(transform);
 
 describe('Toast', () => {
-  it.only('should restructure Toast default usage with props', () => {
+  it('should ignore non-canvas-kit imports', () => {
+    const input = `import {Toast} from '@workday/some-other-library'`;
+    const expected = `import Toast from '@workday/some-other-library'`;
+
+    expectTransform(input, expected);
+  });
+
+  it('should ignore Toast from other packages', () => {
     const input = stripIndent`
-      import {Toast} from '@workday/canvas-kit-react/toast'
+      import {Toast} from '@workday/some-other-library'
 
-      const MyToast = () => {
-        return (
-          <Toast>
-            Your workbook was successfully processed.
-          </Toast>
-        )
-      }
-
+      <Toast fixed="true" />
     `;
 
     const expected = stripIndent`
-      import {Toast} from '@workday/canvas-kit-react/toast'
-      import { checkIcon } from "@workday/canvas-system-icons-web"
+      import {Toast} from '@workday/some-other-library'
 
-      const MyToast = () => {
-        return (
-          <Toast>
-            <Toast.Icon icon="checkIcon" color="greenApple400" />
-            <Toast.Body>
-              <Toast.Message>Your workbook was successfully processed.</Toast.Message>
-            </Toast.Body>
-          </Toast>
-        )
-      }
+      <Toast fixed="true" />
     `;
 
     expectTransform(input, expected);
   });
 
-  it('should restructure Toast usages with default props', () => {
+  it('should restructure Toast default usage with props', () => {
     const input = stripIndent`
-      import {Toast} from '@workday/canvas-kit-react/toast'
+      import {Toast} from '@workday/canvas-kit-react/toast';
 
-      <Toast actionText="View more details" iconColor={colors.cinnamon500} icon={exclamationCircleIcon} onActionClick={handleActionClick} onClose={handleClose}>Your workbook was successfully processed.</Toast>
+      <Toast>
+        Your workbook was successfully processed.
+      </Toast>
     `;
 
     const expected = stripIndent`
-      import {Toast} from '@workday/canvas-kit-react/toast'
+      import {Toast} from '@workday/canvas-kit-react/toast';
+
+      import { checkIcon } from "@workday/canvas-system-icons-web";
 
       <Toast>
-        <Toast.Icon icon={checkIcon} color={colors.greenApple400} />
+        <Toast.Icon color="greenApple400" icon={checkIcon} />
         <Toast.Body>
           <Toast.Message>Your workbook was successfully processed.</Toast.Message>
         </Toast.Body>
+      </Toast>
+
+    `;
+
+    expectTransform(input, expected);
+  });
+
+  it('should restructure Toast usage with onClose props', () => {
+    const input = stripIndent`
+      import {Toast} from '@workday/canvas-kit-react/toast';
+
+      <Toast onClose={handleClose}>
+        Your workbook was successfully processed.
+      </Toast>
+    `;
+
+    const expected = stripIndent`
+      import {Toast} from '@workday/canvas-kit-react/toast';
+
+      import { checkIcon } from "@workday/canvas-system-icons-web";
+
+      <Toast>
+        <Toast.Icon color="greenApple400" icon={checkIcon} />
+        <Toast.Body>
+          <Toast.Message>Your workbook was successfully processed.</Toast.Message>
+        </Toast.Body>
+        <Toast.Close onClose={handleClose} />
       </Toast>
     `;
 
     expectTransform(input, expected);
   });
 
-  it('should restructure Banner usages with no props', () => {
+  it('should restructure Toast usage with onActionClick and actionText props', () => {
     const input = stripIndent`
-      import {Banner} from '@workday/canvas-kit-react/banner';
+      import {Toast} from '@workday/canvas-kit-react/toast';
 
-      <Banner />
+      <Toast onClose={handleClose} actionText="View More Details" onActionClick={handleActionClick}>
+        Your workbook was successfully processed.
+      </Toast>
     `;
 
     const expected = stripIndent`
-      import {Banner} from '@workday/canvas-kit-react/banner';
+      import {Toast} from '@workday/canvas-kit-react/toast';
 
-      <Banner><Banner.Icon /><Banner.Label /><Banner.ActionText /></Banner>
+      import { checkIcon } from "@workday/canvas-system-icons-web";
+
+      <Toast mode="dialog">
+        <Toast.Icon color="greenApple400" icon={checkIcon} />
+        <Toast.Body>
+          <Toast.Message>Your workbook was successfully processed.</Toast.Message>
+          <Toast.Link onClick={handleActionClick}>View More Details</Toast.Link>
+        </Toast.Body>
+        <Toast.Close onClose={handleClose} />
+      </Toast>
+
     `;
 
     expectTransform(input, expected);
   });
 
-  it('should restructure Banner expression props', () => {
+  it.only('should restructure Toast usage with error icon', () => {
     const input = stripIndent`
-      import {Banner} from '@workday/canvas-kit-react/banner'
+      import {Toast} from '@workday/canvas-kit-react/toast';
+      import {exclamationCircleIcon} from '@workday/canvas-system-icons-web';
+      import {colors} from '@workday/canvas-kit-react/tokens';
 
-      <Banner error={numErrors ? Banner.ErrorType.Error : Banner.ErrorType.Alert} variant={shouldStick ? Banner.Variant.Sticky : Banner.Variant.Full} label='3 Warnings' />
+      <Toast iconColor={colors.cinnamon500} icon={exclamationCircleIcon}>
+        There was an error with your workbook.
+      </Toast>
     `;
 
     const expected = stripIndent`
-      import {Banner} from '@workday/canvas-kit-react/banner'
+      import {Toast} from '@workday/canvas-kit-react/toast';
+      import {exclamationCircleIcon} from '@workday/canvas-system-icons-web';
+      import {colors} from '@workday/canvas-kit-react/tokens';
 
-      <Banner hasError={numErrors ? true : false} isSticky={shouldStick ? true : false}><Banner.Icon /><Banner.Label>3 Warnings</Banner.Label><Banner.ActionText /></Banner>
-    `;
+      <Toast>
+        <Toast.Icon color={colors.cinnamon500} icon={exclamationCircleIcon} />
+        <Toast.Body>
+          <Toast.Message>There was an error with your workbook.</Toast.Message>
+        </Toast.Body>
+      </Toast>
 
-    expectTransform(input, expected);
-  });
-
-  it('should not restructure Banner usages already transformed', () => {
-    const input = stripIndent`
-      import {Banner} from '@workday/canvas-kit-react/banner';
-
-      <Banner>
-        <Banner.Icon />
-        <Banner.Label>3 Warnings</Banner.Label>
-        <Banner.ActionText />
-      </Banner>
-    `;
-
-    const expected = stripIndent`
-      import {Banner} from '@workday/canvas-kit-react/banner';
-
-      <Banner>
-        <Banner.Icon />
-        <Banner.Label>3 Warnings</Banner.Label>
-        <Banner.ActionText />
-      </Banner>
-    `;
-
-    expectTransform(input, expected);
-  });
-
-  it('should restructure a renamed Banner', () => {
-    const input = stripIndent`
-      import {Banner as StyledBanner} from '@workday/canvas-kit-react/banner'
-
-      <StyledBanner onClick={() => {}} label="3 Warnings" actionText="Show Details" variant={Banner.Variant.Sticky} error={Banner.ErrorType.Error} />
-    `;
-
-    const expected = stripIndent`
-      import {Banner as StyledBanner} from '@workday/canvas-kit-react/banner'
-
-      <StyledBanner onClick={() => {}} isSticky={true} hasError={true}><StyledBanner.Icon /><StyledBanner.Label>3 Warnings</StyledBanner.Label><StyledBanner.ActionText>Show Details</StyledBanner.ActionText></StyledBanner>
-    `;
-
-    expectTransform(input, expected);
-  });
-
-  it('should restructure Banner usages with JSX Element label', () => {
-    const input = stripIndent`
-      import {Banner} from '@workday/canvas-kit-react/banner'
-
-      <Banner label={<span>Banner Label</span>} />
-    `;
-
-    const expected = stripIndent`
-      import {Banner} from '@workday/canvas-kit-react/banner'
-
-      <Banner><Banner.Icon /><Banner.Label><span>Banner Label</span></Banner.Label><Banner.ActionText /></Banner>
-    `;
-
-    expectTransform(input, expected);
-  });
-
-  it('should restructure Banner usages with call expression heading', () => {
-    const input = stripIndent`
-      import {Banner} from '@workday/canvas-kit-react/banner'
-
-      <Banner label={getLabel()} />
-    `;
-
-    const expected = stripIndent`
-      import {Banner} from '@workday/canvas-kit-react/banner'
-
-      <Banner><Banner.Icon /><Banner.Label>{getLabel()}</Banner.Label><Banner.ActionText /></Banner>
-    `;
-
-    expectTransform(input, expected);
-  });
-
-  it('should restructure styled Banner usages', () => {
-    const input = stripIndent`
-      import {Banner} from '@workday/canvas-kit-react/banner'
-
-      const StyledBanner = styled(Banner)({});
-
-      <StyledBanner label="2 Warnings" />
-    `;
-
-    const expected = stripIndent`
-      import {Banner} from '@workday/canvas-kit-react/banner'
-
-      const StyledBanner = styled(Banner)({});
-
-      <StyledBanner><Banner.Icon /><Banner.Label>2 Warnings</Banner.Label><Banner.ActionText /></StyledBanner>
-    `;
-
-    expectTransform(input, expected);
-  });
-
-  it('should restructure styled template string Banner usages', () => {
-    const input = stripIndent`
-      import {Banner} from '@workday/canvas-kit-react/banner'
-
-      const StyledBanner = styled(Banner)\`
-        padding: 1px;
-      \`;
-
-      <StyledBanner label="4 Warnings" />
-    `;
-
-    const expected = stripIndent`
-      import {Banner} from '@workday/canvas-kit-react/banner'
-
-      const StyledBanner = styled(Banner)\`
-        padding: 1px;
-      \`;
-
-      <StyledBanner><Banner.Icon /><Banner.Label>4 Warnings</Banner.Label><Banner.ActionText /></StyledBanner>
     `;
 
     expectTransform(input, expected);
