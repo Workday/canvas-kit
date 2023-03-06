@@ -47,7 +47,7 @@ function getTSConfig(basePath = '.') {
  */
 function getConfig() {
   const path = ts.findConfigFile(__dirname, ts.sys.fileExists, 'doc.config.json') || '.';
-  const contents = path && ts.sys.readFile(path); //?
+  const contents = path && ts.sys.readFile(path);
 
   return (contents && {path, config: JSON.parse(contents)}) || {path: '.', config: defaultConfig};
 }
