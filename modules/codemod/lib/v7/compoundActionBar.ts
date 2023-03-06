@@ -112,8 +112,11 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
         children
       );
 
+      console.log();
+
       // Keep space for code structure
       const textLiteralStart = children.find(child => child.type === 'JSXText');
+      console.log(textLiteralStart);
       const textLiteralEnd = children
         .slice()
         .reverse()

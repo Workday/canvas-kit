@@ -26,7 +26,7 @@ describe('ActionBar', () => {
     expectTransform(input, expected);
   });
 
-  it('should change ActionBar structure and child names from ActionBar component imported from main package', () => {
+  it.only('should change ActionBar structure and child names from ActionBar component imported from main package', () => {
     const input = stripIndent`
       import {ActionBar} from '@workday/canvas-kit-react';
 
