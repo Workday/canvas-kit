@@ -1,5 +1,4 @@
-import {text} from '@workday/canvas-kit-react/layout';
-import {API, FileInfo, Options, JSXElement, ImportDeclaration, ASTPath} from 'jscodeshift';
+import {API, ASTPath, FileInfo, ImportDeclaration, JSXElement, Options} from 'jscodeshift';
 import {getImportRenameMap} from '../v7/utils/getImportRenameMap';
 import {hasImportSpecifiers} from '../v6/utils';
 
@@ -36,40 +35,16 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
           value.openingElement.name.name === styledMap.Toast)
     )
     .forEach(nodePath => {
-      // (nodePath.value.children || []).forEach((child, index) => {
-      //   if (child.type === 'JSXText') {
-      //     console.log(child);
-      //     const ToastBodyJSX = j.jsxMemberExpression(
-      //       j.jsxIdentifier(importMap.Toast),
-      //       j.jsxIdentifier('Body')
-      //     );
-
-      //     const ToastMessageJSX = j.jsxMemberExpression(
-      //       j.jsxIdentifier(importMap.Toast),
-      //       j.jsxIdentifier('Message')
-      //     );
-      //     // console.log(child.value);
-      //     const ToastMessageContainer = j.jsxElement(
-      //       j.jsxOpeningElement(ToastMessageJSX),
-      //       j.jsxClosingElement(ToastMessageJSX)
-      //       // j.jsxFragment(child.value)
-      //     );
-      //     const test = j.jsxElement(
-      //       j.jsxOpeningElement(ToastBodyJSX),
-      //       j.jsxClosingElement(ToastBodyJSX)
-      //     );
-      //     console.log(test);
-      //     // const ToastBodyJSX = j.jsxMemberExpression(j.jsxIdentifier(importMap.Toast));
-      //   }
-      // });
-
-      const children = nodePath.value.children || [];
-      console.warn(nodePath.value.children);
-
       // Toast Body JSX
       const ToastBodyJSX = j.jsxMemberExpression(
         j.jsxIdentifier(importMap.Toast),
         j.jsxIdentifier('Body')
+      );
+
+      // Toast CloseIcon JSX
+      const ToastCloseJSX = j.jsxMemberExpression(
+        j.jsxIdentifier(importMap.Toast),
+        j.jsxIdentifier('Close')
       );
 
       // Toast Message JSX
@@ -78,97 +53,130 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
         j.jsxIdentifier('Message')
       );
 
-      // Keep space for code structure
+      // Toast Icon JSX
+      const ToastIconJSX = j.jsxMemberExpression(
+        j.jsxIdentifier(importMap.Toast),
+        j.jsxIdentifier('Icon')
+      );
+      // Toast Link JSX
+      const ToastLinkJSX = j.jsxMemberExpression(
+        j.jsxIdentifier(importMap.Toast),
+        j.jsxIdentifier('Link')
+      );
+
+      // Attributes
+
+      const attributes = nodePath.value.openingElement.attributes;
+
+      const defaultIconAttributes = [
+        j.jsxAttribute(j.jsxIdentifier('color'), j.stringLiteral('greenApple400')),
+        j.jsxAttribute(j.jsxIdentifier('icon'), j.stringLiteral('checkIcon')),
+      ];
+
+      const unchangedIconAttributes = attributes?.filter(
+        attr =>
+          (attr.type === 'JSXAttribute' && attr.name.name === 'icon') ||
+          (attr.type === 'JSXAttribute' && attr.name.name === 'iconColor')
+      );
+
+      const updatedIconAttrs = unchangedIconAttributes?.map(specifier => {
+        if (specifier.type === 'JSXAttribute') {
+          if (specifier.name.name === 'iconColor') {
+            specifier.name.name = 'color';
+          }
+        }
+        return specifier;
+      });
+
+      const chooseIconAttrs =
+        unchangedIconAttributes && unchangedIconAttributes.length > 0
+          ? updatedIconAttrs
+          : defaultIconAttributes;
+
+      const closeAttributes = attributes?.filter(
+        attr => attr.type === 'JSXAttribute' && attr.name.name === 'onClose'
+      );
+
+      const linkAttributes = attributes?.filter(
+        attr =>
+          (attr.type === 'JSXAttribute' && attr.name.name === 'actionText') ||
+          (attr.type === 'JSXAttribute' && attr.name.name === 'onActionClick')
+      );
+
+      // Elements
+
+      const OpeningIconJSX = j.jsxOpeningElement(ToastIconJSX, chooseIconAttrs);
+      OpeningIconJSX.selfClosing = true;
+
+      const IconElement = j.jsxElement(OpeningIconJSX);
+
+      // Add `import {checkIcon} from '@workday/canvas-system-icons-web'`
+      // when there's a default toast
+      const lastImport = root.find(j.ImportDeclaration).at(-1);
+      if (lastImport && unchangedIconAttributes?.length === 0) {
+        lastImport.insertAfter(
+          j.importDeclaration(
+            [j.importSpecifier(j.identifier('checkIcon'))],
+            j.stringLiteral('@workday/canvas-system-icons-web')
+          )
+        );
+      }
+
+      // Filter out all old props
+      nodePath.value.openingElement.attributes?.filter(attr => {
+        if (attr.type === 'JSXAttribute') {
+          return (
+            attr.name.name !== 'actionText' &&
+            attr.name.name !== 'icon' &&
+            attr.name.name !== 'onActionClick' &&
+            attr.name.name !== 'iconColor' &&
+            attr.name.name !== 'icon'
+          );
+        }
+      });
+
+      const CloseElement = j.jsxElement(
+        j.jsxOpeningElement(ToastCloseJSX, closeAttributes),
+        j.jsxClosingElement(ToastCloseJSX)
+      );
+
+      const LinkElement = j.jsxElement(
+        j.jsxOpeningElement(ToastLinkJSX, linkAttributes),
+        j.jsxClosingElement(ToastLinkJSX)
+      );
 
       // Toast Message JSX inclduing children which should be the string
-      const Message = j.jsxElement(
+      const MessageElement = j.jsxElement(
         j.jsxOpeningElement(ToastMessageJSX),
         j.jsxClosingElement(ToastMessageJSX),
         nodePath.value.children
-        // innerText
       );
 
-      const textLiteral = children.find(child => child.type === 'JSXText');
-
-      const Body = j.jsxElement(
+      // Body element including Message and its children
+      const BodyElement = j.jsxElement(
         j.jsxOpeningElement(ToastBodyJSX),
         j.jsxClosingElement(ToastBodyJSX),
-        [Message]
+        [MessageElement]
       );
 
-      // console.log(textLiteralEnd);
+      // Default Toast with no Close or Link
+      nodePath.value.children = [IconElement, BodyElement];
 
-      // const Body = j.jsxElement(
-      //   j.jsxOpeningElement(ToastBodyJSX),
-      //   j.jsxClosingElement(ToastBodyJSX),
-      //   Message
-      // );
+      // If there's an onClose, add the Toast.Close with its attributes
+      if (closeAttributes && closeAttributes?.length > 0) {
+        nodePath.value.children.push(CloseElement);
+      }
 
-      // const MessageAndBody = j.jsxElement(
-      //   j.jsxOpeningElement(ToastBodyJSX),
-      //   j.jsxClosingElement(ToastBodyJSX),
-      //   Message
-      // );
+      // If there's an actionText or onActionClick, add the Toast.Link with its attributes
+      if (linkAttributes && linkAttributes?.length > 0) {
+        nodePath.value.children.push(LinkElement);
+        // If there's a link, add mode="dialog" for accessibility
+        nodePath.value.openingElement.attributes = [
+          j.jsxAttribute(j.jsxIdentifier('mode'), j.stringLiteral('dialog')),
+        ];
+      }
 
-      // console.log(MessageAndBody);
-      // const test = (nodePath.value.children = MessageAndBody);
-      // console.log(test.children);
-
-      // All Toast attributes
-      const attributes = nodePath.value.openingElement.attributes;
-      console.log(attributes);
-
-      // jsx.jsx
-
-      console.log(Message);
-      // console.log(child.value);
-      // const ToastMessageJSX = j.jsxElement(
-      //   j.jsxOpeningElement(ToastMessageJSX),
-      //   j.jsxClosingElement(ToastMessageJSX)
-      //   // j.jsxFragment(child.value)
-      // );
-
-      // Remove all attributes from ActionBar to replace them to ActionBar.List
-      // const attributes = nodePath.value.openingElement.attributes;
-      // console.log(attributes);
-      // if (attributes) {
-      //   nodePath.value.openingElement.attributes = attributes.filter(
-      //     item => !(item.type === 'JSXAttribute' && item.name.type === 'JSXIdentifier')
-      //   );
-      // }
-
-      // // Create closing element for ActionBar without closing tag
-      // if (nodePath.value.openingElement.selfClosing) {
-      //   nodePath.value.openingElement.selfClosing = false;
-      //   nodePath.value.closingElement = j.jsxClosingElement(nodePath.value.openingElement.name);
-      // }
-
-      // console.log(children);
-
-      // // Create ActionBar.List component
-      // const ActionBarListJSX = j.jsxMemberExpression(
-      //   j.jsxIdentifier(importMap.ActionBar),
-      //   j.jsxIdentifier('List')
-      // );
-
-      // const subComponentJSX = j.jsxElement(
-      //   j.jsxOpeningElement(
-      //     ActionBarListJSX,
-      //     // All attributes except fixed should be passed
-      //     attributes?.filter(attr => !(attr.type === 'JSXAttribute' && attr.name.name === 'fixed'))
-      //   ),
-      //   j.jsxClosingElement(ActionBarListJSX),
-      //   children
-      // );
-
-      // // Keep space for code structure
-      // const textLiteralStart = children.find(child => child.type === 'JSXText');
-      // const textLiteralEnd = children
-      //   .slice()
-      //   .reverse()
-      //   .find(child => child.type === 'JSXText');
-
-      nodePath.value.children = [Body];
+      console.warn(nodePath.value.children);
     });
 
   return root.toSource();

@@ -5,22 +5,34 @@ import {stripIndent} from 'common-tags';
 const expectTransform = expectTransformFactory(transform);
 
 describe('Toast', () => {
-  it.only('should restructure Toast usages with props', () => {
+  it.only('should restructure Toast default usage with props', () => {
     const input = stripIndent`
       import {Toast} from '@workday/canvas-kit-react/toast'
 
-      <Toast actionText="View more details">Your workbook was successfully processed.</Toast>
+      const MyToast = () => {
+        return (
+          <Toast>
+            Your workbook was successfully processed.
+          </Toast>
+        )
+      }
+
     `;
 
     const expected = stripIndent`
       import {Toast} from '@workday/canvas-kit-react/toast'
+      import { checkIcon } from "@workday/canvas-system-icons-web"
 
-      <Toast>
-        <Toast.Icon icon={checkIcon} color={colors.greenApple400} />
-        <Toast.Body>
-          <Toast.Message>Your workbook was successfully processed.</Toast.Message>
-        </Toast.Body>
-      </Toast>
+      const MyToast = () => {
+        return (
+          <Toast>
+            <Toast.Icon icon="checkIcon" color="greenApple400" />
+            <Toast.Body>
+              <Toast.Message>Your workbook was successfully processed.</Toast.Message>
+            </Toast.Body>
+          </Toast>
+        )
+      }
     `;
 
     expectTransform(input, expected);
@@ -30,7 +42,7 @@ describe('Toast', () => {
     const input = stripIndent`
       import {Toast} from '@workday/canvas-kit-react/toast'
 
-      <Toast actionText="View more details" onActionClick={handleActionClick} onClose={handleClose}>Your workbook was successfully processed.</Toast>
+      <Toast actionText="View more details" iconColor={colors.cinnamon500} icon={exclamationCircleIcon} onActionClick={handleActionClick} onClose={handleClose}>Your workbook was successfully processed.</Toast>
     `;
 
     const expected = stripIndent`

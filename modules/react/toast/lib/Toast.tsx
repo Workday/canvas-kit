@@ -47,7 +47,7 @@ export const Toast = createContainer('div')({
       case 'dialog':
         return {
           'aria-describedby': model.state.id,
-          'aria-label': 'notification',
+          'aria-labelledby': undefined,
           role: 'dialog',
         };
       case 'alert':
