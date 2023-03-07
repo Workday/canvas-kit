@@ -108,7 +108,7 @@ describe('Toast', () => {
     expectTransform(input, expected);
   });
 
-  it.only('should restructure Toast usage with error icon', () => {
+  it('should restructure Toast usage with error icon', () => {
     const input = stripIndent`
       import {Toast} from '@workday/canvas-kit-react/toast';
       import {exclamationCircleIcon} from '@workday/canvas-system-icons-web';
