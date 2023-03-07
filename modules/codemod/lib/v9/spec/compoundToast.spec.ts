@@ -7,7 +7,7 @@ const expectTransform = expectTransformFactory(transform);
 describe('Toast', () => {
   it('should ignore non-canvas-kit imports', () => {
     const input = `import {Toast} from '@workday/some-other-library'`;
-    const expected = `import Toast from '@workday/some-other-library'`;
+    const expected = `import {Toast} from '@workday/some-other-library'`;
 
     expectTransform(input, expected);
   });

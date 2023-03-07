@@ -108,8 +108,7 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
 
       // Elements
 
-      const OpeningIconJSX = j.jsxOpeningElement(ToastIconJSX, chooseIconAttrs);
-      OpeningIconJSX.selfClosing = true;
+      const OpeningIconJSX = j.jsxOpeningElement(ToastIconJSX, chooseIconAttrs, true);
 
       const IconElement = j.jsxElement(OpeningIconJSX);
 
@@ -146,8 +145,7 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
 
       nodePath.value.openingElement.attributes = filterAttr;
 
-      const OpeningCloseElement = j.jsxOpeningElement(ToastCloseJSX, closeAttributes);
-      OpeningCloseElement.selfClosing = true;
+      const OpeningCloseElement = j.jsxOpeningElement(ToastCloseJSX, closeAttributes, true);
 
       const CloseElement = j.jsxElement(OpeningCloseElement);
 
