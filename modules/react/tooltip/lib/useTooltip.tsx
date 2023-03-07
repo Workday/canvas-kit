@@ -133,15 +133,9 @@ export function useTooltip<T extends Element = Element>({
 
   const visible = popupModel.state.visibility !== 'hidden';
 
-  const targetProps: {
-    'aria-describedby'?: string;
-    'aria-label'?: string;
-    onMouseEnter: typeof onOpenFromTarget;
-    onMouseLeave: typeof onHide;
-    onMouseDown: typeof onMouseDown;
-    onFocus: typeof onFocus;
-    onBlur: typeof onHide;
-  } = {
+  const targetProps = {
+    // extra description of the target element for assistive technology
+    'aria-describedby': type === 'describe' && visible ? id : undefined,
     // This will replace the accessible name of the target element
     'aria-label': type === 'label' ? titleText : undefined,
     onMouseEnter: onOpenFromTarget,
@@ -151,10 +145,9 @@ export function useTooltip<T extends Element = Element>({
     onBlur: onHide,
   };
 
-  // Description added conditionally to avoid override of original description
-  if (type === 'describe' && visible) {
-    // extra description of the target element for assistive technology
-    targetProps['aria-describedby'] = id;
+  // remove `aria-describedby` if undefined to not override what's provided
+  if (targetProps['aria-describedby'] === undefined) {
+    delete targetProps['aria-describedby'];
   }
 
   return {
