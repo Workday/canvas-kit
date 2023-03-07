@@ -5,9 +5,9 @@ import {relatedActionsIcon} from '@workday/canvas-system-icons-web';
 import {
   createElemPropsHook,
   composeHooks,
-  subModelHook,
   createSubcomponent,
   StyledType,
+  createSubModelElemPropsHook,
 } from '@workday/canvas-kit-react/common';
 import {useOverflowListTarget} from '@workday/canvas-kit-react/collection';
 
@@ -28,7 +28,7 @@ export const useActionBarOverflowButton = composeHooks(
     'aria-haspopup': true,
   })),
   useOverflowListTarget,
-  subModelHook((m: ReturnType<typeof useActionBarModel>) => m.menu, useMenuTarget)
+  createSubModelElemPropsHook(useActionBarModel)(m => m.menu, useMenuTarget)
 );
 
 export const ActionBarOverflowButton = createSubcomponent('button')({

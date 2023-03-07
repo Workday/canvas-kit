@@ -6,8 +6,8 @@ import {createElemPropsHook} from '@workday/canvas-kit-react/common';
 import {usePopupModel} from './usePopupModel';
 
 /**
- * Registers global detection of the Escape key. It will only call the PopupModel's `hide` event if the
- * provided model's `state.stackRef` element is the topmost in the stack.
+ * Registers global detection of the Escape key. It will only call the {@link PopupModel}'s `hide`
+ * event if the provided model's `state.stackRef` element is the topmost in the stack.
  *
  * This should be used with popup elements that are dismissible like Tooltips, Modals, non-modal
  * dialogs, dropdown menus, etc.

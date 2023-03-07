@@ -1,23 +1,16 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import * as React from 'react';
-import {styled, useIsRTL} from '@workday/canvas-kit-react/common';
-import {css, jsx, keyframes, CSSObject} from '@emotion/react';
-import {TertiaryButton, TertiaryButtonProps} from '@workday/canvas-kit-react/button';
-import {space, colors, depth} from '@workday/canvas-kit-react/tokens';
-import {transformationImportIcon} from '@workday/canvas-system-icons-web';
-import {Tooltip} from '@workday/canvas-kit-react/tooltip';
+import {createComponent, styled} from '@workday/canvas-kit-react/common';
+import {jsx, keyframes, CSSObject} from '@emotion/react';
+import {colors, depth} from '@workday/canvas-kit-react/tokens';
+import {SidePanelContext} from './hooks';
+import {SidePanelToggleButton} from './SidePanelToggleButton';
 
 export type SidePanelVariant = 'standard' | 'alternate';
 export type SidePanelTransitionStates = 'collapsed' | 'collapsing' | 'expanded' | 'expanding';
 
-export interface SidePanelProps extends React.HTMLAttributes<HTMLDivElement> {
-  /**
-   * The element the side panel will render as (e.g. 'div').
-   *
-   * @default 'section'
-   */
-  as?: React.ElementType;
+export interface SidePanelProps {
   /**
    * The width of the component (in `px` if it's a `number`) when it is collapsed.
    *
@@ -67,6 +60,9 @@ export interface SidePanelProps extends React.HTMLAttributes<HTMLDivElement> {
    * @param boolean
    */
   touched: boolean;
+  children?: React.ReactNode;
+  onAnimationStart?: React.AnimationEventHandler<HTMLElement>;
+  onAnimationEnd?: React.AnimationEventHandler<HTMLElement>;
 }
 
 const createKeyframes = (from: number | string, to: number | string) => {
@@ -98,172 +94,126 @@ const containerVariantStyle: Record<SidePanelVariant, CSSObject> = {
   },
 };
 
-const Panel = styled('section')<Pick<SidePanelProps, 'as'>>({
+const Panel = styled('section')({
   overflow: 'hidden',
   position: 'relative',
   boxSizing: 'border-box',
   height: '100%',
 });
 
-export const SidePanelContext = React.createContext({
-  state: 'expanded',
-  origin: 'left',
-});
+export const SidePanel = createComponent('section')({
+  displayName: 'SidePanel',
+  Component(
+    {
+      children,
+      collapsedWidth = 64,
+      expanded = true,
+      expandedWidth = 320,
+      onAnimationEnd,
+      onAnimationStart,
+      onExpandedChange,
+      onStateTransition,
+      origin = 'left',
+      variant = 'standard',
+      touched,
+      ...elemProps
+    }: SidePanelProps,
+    ref,
+    Element
+  ) {
+    const [state, setState] = React.useState<SidePanelTransitionStates>(
+      expanded ? 'expanded' : 'collapsed'
+    );
 
-export const SidePanel = ({
-  as = 'section',
-  children,
-  collapsedWidth = 64,
-  expanded = true,
-  expandedWidth = 320,
-  onAnimationEnd,
-  onAnimationStart,
-  onExpandedChange,
-  onStateTransition,
-  origin = 'left',
-  variant = 'standard',
-  touched,
-  ...elemProps
-}: SidePanelProps) => {
-  const [state, setState] = React.useState<SidePanelTransitionStates>(
-    expanded ? 'expanded' : 'collapsed'
-  );
+    React.useEffect(() => {
+      if (typeof onExpandedChange !== 'undefined') {
+        onExpandedChange(expanded);
+      }
+    }, [expanded, onExpandedChange]);
 
-  React.useEffect(() => {
-    if (typeof onExpandedChange !== 'undefined') {
-      onExpandedChange(expanded);
-    }
-  }, [expanded, onExpandedChange]);
+    React.useEffect(() => {
+      if (typeof onStateTransition !== 'undefined') {
+        onStateTransition(state);
+      }
+    }, [state, onStateTransition]);
 
-  React.useEffect(() => {
-    if (typeof onStateTransition !== 'undefined') {
-      onStateTransition(state);
-    }
-  }, [state, onStateTransition]);
+    const motion = {
+      collapse: createKeyframes(expandedWidth, collapsedWidth),
+      expand: createKeyframes(collapsedWidth, expandedWidth),
+    };
 
-  const motion = {
-    collapse: createKeyframes(expandedWidth, collapsedWidth),
-    expand: createKeyframes(collapsedWidth, expandedWidth),
-  };
+    const handleAnimationEnd = (event: React.AnimationEvent<HTMLDivElement>) => {
+      if (event.currentTarget === event.target) {
+        if (event.animationName === motion.collapse.name) {
+          setState('collapsed');
+        }
 
-  const handleAnimationEnd = (event: React.AnimationEvent<HTMLDivElement>) => {
-    if (event.currentTarget === event.target) {
-      if (event.animationName === motion.collapse.name) {
-        setState('collapsed');
+        if (event.animationName === motion.expand.name) {
+          setState('expanded');
+        }
       }
 
-      if (event.animationName === motion.expand.name) {
-        setState('expanded');
+      if (typeof onAnimationEnd !== 'undefined') {
+        onAnimationEnd(event);
       }
-    }
+    };
 
-    if (typeof onAnimationEnd !== 'undefined') {
-      onAnimationEnd(event);
-    }
-  };
-
-  const handleAnimationStart = (event: React.AnimationEvent<HTMLDivElement>) => {
-    if (event.currentTarget === event.target) {
-      if (
-        event.animationName === motion.collapse.name ||
-        event.animationName === motion.expand.name
-      ) {
-        setState(expanded ? 'expanding' : 'collapsing');
+    const handleAnimationStart = (event: React.AnimationEvent<HTMLDivElement>) => {
+      if (event.currentTarget === event.target) {
+        if (
+          event.animationName === motion.collapse.name ||
+          event.animationName === motion.expand.name
+        ) {
+          setState(expanded ? 'expanding' : 'collapsing');
+        }
       }
-    }
 
-    if (typeof onAnimationStart !== 'undefined') {
-      onAnimationStart(event);
-    }
-  };
+      if (typeof onAnimationStart !== 'undefined') {
+        onAnimationStart(event);
+      }
+    };
 
-  return (
-    <Panel
-      as={as}
-      css={[
-        {
-          width: expanded ? expandedWidth : collapsedWidth,
-          maxWidth: expanded ? expandedWidth : collapsedWidth,
-          // mounted.current will be false on the first render, thus you won't get an unwanted animation here
-          // Will animate again if you force a re-render (like in Storybook)
-          animation: touched
-            ? `${expanded ? motion.expand : motion.collapse} 200ms ease-out`
-            : undefined,
-        },
-        containerVariantStyle[variant],
-      ]}
-      onAnimationEnd={handleAnimationEnd}
-      onAnimationStart={handleAnimationStart}
-      {...elemProps}
-    >
-      <SidePanelContext.Provider
-        value={{
-          state,
-          origin,
-        }}
+    return (
+      <Panel
+        ref={ref}
+        as={Element}
+        css={[
+          {
+            width: expanded ? expandedWidth : collapsedWidth,
+            maxWidth: expanded ? expandedWidth : collapsedWidth,
+            // mounted.current will be false on the first render, thus you won't get an unwanted animation here
+            // Will animate again if you force a re-render (like in Storybook)
+            animation: touched
+              ? `${expanded ? motion.expand : motion.collapse} 200ms ease-out`
+              : undefined,
+          },
+          containerVariantStyle[variant],
+        ]}
+        onAnimationEnd={handleAnimationEnd}
+        onAnimationStart={handleAnimationStart}
+        {...elemProps}
       >
-        {children}
-      </SidePanelContext.Provider>
-    </Panel>
-  );
-};
-
-export type ToggleButtonProps = TertiaryButtonProps & {
-  /**
-   * The tooltip text to expand the side panel
-   * @default 'Expand'
-   */
-  tooltipTextExpand?: string;
-  /**
-   * The tooltip text to collapse the side panel
-   * @default 'Collapse'
-   */
-  tooltipTextCollapse?: string;
-};
-
-/**
- * A toggle button styled specifically for the side panel container.
- */
-const ToggleButton = ({
-  variant = undefined,
-  icon = transformationImportIcon,
-  tooltipTextExpand: expandLabel = 'Expand',
-  tooltipTextCollapse: collapseLabel = 'Collapse',
-  ...rest
-}: ToggleButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>) => {
-  const context = React.useContext(SidePanelContext);
-
-  const useRTLOrigin = () => {
-    const isRTL = useIsRTL();
-    // if the direction is set to RTl, flip the origin
-    if (isRTL) {
-      return context.origin === 'left' ? 'right' : 'left';
-    }
-    // Otherwise, default to returning the origin
-    return context.origin;
-  };
-
-  const rtlOrigin = useRTLOrigin();
-
-  // Note: Depending on the collapsed width, the button could "jump" to it's final position.
-  const buttonStyle = css({
-    position: 'absolute',
-    top: space.m,
-    width: space.l,
-    right: context.state === 'collapsed' ? 0 : rtlOrigin === 'left' ? space.s : undefined,
-    left: context.state === 'collapsed' ? 0 : rtlOrigin === 'right' ? space.s : undefined,
-    margin: context.state === 'collapsed' ? 'auto' : 0, // to override the -8px margin for TertiaryButton.Plain
-    transform:
-      context.state === 'collapsed' || context.state === 'collapsing'
-        ? `scaleX(${rtlOrigin === 'left' ? '1' : '-1'})`
-        : `scaleX(${rtlOrigin === 'left' ? '-1' : '1'})`,
-  });
-
-  return (
-    <Tooltip title={context.state === 'collapsed' ? expandLabel : collapseLabel} type="muted">
-      <TertiaryButton type="button" css={buttonStyle} icon={icon} variant={variant} {...rest} />
-    </Tooltip>
-  );
-};
-
-SidePanel.ToggleButton = ToggleButton;
+        <SidePanelContext.Provider
+          value={{
+            state,
+            origin,
+          }}
+        >
+          {children}
+        </SidePanelContext.Provider>
+      </Panel>
+    );
+  },
+  subComponents: {
+    /**
+     * `SidePanel.ToggleButton` is a control that is meant to toggle between `expanded = true` and
+     * `expanded = false` states. It must be used within the `SidePanel` component as a child. Use
+     * in conjunction with `useSidePanel`'s `controlProps`, otherwise it does not come with explicit
+     * `onClick` handlers.
+     *
+     * For accessibility purposes, it must be the first focusable element. We recommend that you
+     * keep it as the first child of `SidePanel`
+     */
+    ToggleButton: SidePanelToggleButton,
+  },
+});

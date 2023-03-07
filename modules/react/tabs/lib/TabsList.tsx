@@ -36,7 +36,10 @@ export interface TabListProps<T = any> extends Omit<ExtractProps<typeof Flex, ne
 export const useTabsList = composeHooks(
   createElemPropsHook(useTabsModel)(() => {
     const modality = useModalityType();
-    return {role: 'tablist', overflowX: modality === 'touch' ? 'auto' : undefined};
+    return {
+      role: 'tablist',
+      overflowX: modality === 'touch' ? 'auto' : undefined,
+    } as const;
   }),
   useOverflowListMeasure,
   useListResetCursorOnBlur

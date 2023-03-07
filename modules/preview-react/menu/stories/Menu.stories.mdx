@@ -1,5 +1,4 @@
-import {Meta} from '@storybook/addon-docs';
-import {Specifications} from '@workday/canvas-kit-docs';
+import {SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
 import {DeprecatedMenu, DeprecatedMenuItem} from '@workday/canvas-kit-preview-react/menu';
 
 import {Basic} from './examples/Basic';
@@ -89,40 +88,15 @@ your new items screen reader friendly add an `aria-label` around each grouped it
 
 <ExampleCodeBlock code={ManyItems} />
 
-## Components
+## Component API
 
 ### DeprecatedMenu
 
-#### Usage
-
-`DeprecatedMenu` renders a styled `<ul role="menu">` element within a
-[`Card`](/components/containers/card/) and follows the
-[Active Menu pattern](https://www.w3.org/TR/wai-aria-practices/examples/menu-button/menu-button-actions-active-descendant.html)
-using `aria-activedescendant`.
-
-#### Props
-
-Undocumented props are spread to the underlying `<ul>` element.
-
-<ArgsTable of={DeprecatedMenu} />
+<SymbolDoc name="DeprecatedMenu" fileName="/preview-react/" />
 
 ### DeprecatedMenuItem
 
-#### Usage
-
-`DeprecatedMenuItem` renders an `<li>` element with the correct attributes to ensure it is
-accessible. If you choose to implement your own custom menu items, be sure to use semantic `<li>`
-elements with the following attributes:
-
-- `role="menuitem"`
-- `tabindex={-1}`
-- `id`s following this pattern: `${MenuId}-${index}`
-
-#### Props
-
-Undocumented props are spread to the underlying `<li>` element.
-
-<ArgsTable of={DeprecatedMenuItem} />
+<SymbolDoc name="DeprecatedMenuItem" fileName="/preview-react/" />
 
 ## Specifications
 
