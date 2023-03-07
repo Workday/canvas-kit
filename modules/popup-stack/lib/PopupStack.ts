@@ -188,6 +188,24 @@ function getTopStack() {
   return stacks[stacks.length - 1];
 }
 
+/**
+ * The `PopupStack` is a framework agnostic first-in-last-out (FILO) stack that tracks all popups
+ * ("floating UI" or any UI that renders on top of other content). It contains methods that interact
+ * with the stack to support all coordinating behaviors of all popups on the page. The `PopupStack`
+ * helps:
+ *
+ * - Render popups in the right order on the page
+ * - Helps accessibility with the Escape key (topmost popup is closed)
+ * - Handles transition to [Full
+ *   Screen](https://developer.mozilla.org/en-US/docs/Web/API/Fullscreen_API)
+ *
+ * The `PopupStack` supports adapters to work with existing popup systems. {@link createAdapter} is
+ * exported to accept an adapter. Only a single adapter should be used per page.
+ *
+ * The `PopupStack` is designed to handle multiple versions of `PopupStack` on the page at once
+ * while the internal FILO stack is shared between instances. You should not attempt to use the
+ * internal FILO stack. If an adapter is used, the internal FILO stack may be empty.
+ */
 export const PopupStack = {
   /**
    * Create a HTMLElement as the container for the popup stack item. The returned element reference
@@ -445,6 +463,10 @@ export function resetStack() {
 }
 
 /**
+ * An adapter is a custom implementation of the {@link PopupStack}. There is only ever a single
+ * instance of an adapter on the page. It allows an adapter to intercept any `PopupStack` method.
+ * This could bypass the internal FILO stack of the `PopupStack` and allows the FILO stack to be
+ * handled by something else.
  *
  * @param adapter The parts of the PopupStack that we want to override
  */

@@ -4,38 +4,46 @@ import {PopupStack} from '@workday/canvas-kit-popup-stack';
 import {useLocalRef, useIsRTL} from '@workday/canvas-kit-react/common';
 
 /**
- * This hook should not be used directly. Use the `Popper` component instead.
+ * **Note:** If you're using {@link Popper}, you do not need to use this hook directly.
  *
- * This hook will add the `stackRef` element to the Popup stack on mount and remove on unmount. If
- * you use `Popper`, the popper `stackRef` is automatically added/removed from the Popup stack. The
- * Popup stack is required for proper z-index values to ensure Popups are rendered correct. It is
+ * This hook will add the `stackRef` element to the {@link PopupStack} on mount and remove on unmount. If
+ * you use `Popper`, the popper `stackRef` is automatically added/removed from the `PopupStack`. The
+ * `PopupStack` is required for proper z-index values to ensure Popups are rendered correct. It is
  * also required for global listeners like click outside or escape key closing a popup. Without the
- * Popup stack, all popups will close rather than only the topmost one.
+ * `PopupStack`, all popups will close rather than only the topmost one.
  *
- * If `forwardRef` is provided, it will be the same as `stackRef`. If `forwardRef` is not provided`,
+ * If `ref` is provided, it will be the same as `stackRef`. If `ref` is not provided`,
  * this hook will create one and return it.
  *
  * This hook should be used by all stacked UIs unless using the `Popper` component.
  *
- * @param forwardRef This ref will be managed by the PopupStack and should not be managed by React. Do
+ * ```tsx
+ * const model = usePopupModel();
+ * usePopupStack(model.state.stackRef, model.state.targetRef);
+ *
+ * // add some popup functionality
+ * useCloseOnOutsideClick(model);
+ * useCloseOnEscape(model);
+ *
+ * return (
+ *   <>
+ *     <button ref={model.state.targetRef}>Open Popup</button>
+ *     {model.state.visibility !== 'hidden'
+ *       ? ReactDOM.createPortal(<div>Popup Contents</div>, model.state.stackRef.current)
+ *       : null}
+ *   </>
+ * );
+ * ```
+ *
+ * @param ref This ref will be managed by the PopupStack and should not be managed by React. Do
  * not apply this stackRef to a React element. Doing so will result in an error. Instead, use this
  * `stackRef` directly with `ReactDOM.createPortal(<YourComponent>, stackRef.current!)`. This is
  * definitely strange for React code, but is necessary for the PopupStack to remain framework
- * agnostic and flexible to integrate with existing popup stack systems. If not provided, this hook
+ * agnostic and flexible to integrate with existing `PopupStack` systems. If not provided, this hook
  * will create one and return that `stackRef` instead.
- *
  * @param target Usually the trigger of a popup. This will fix `bringToTop` and should be provided
  * by all ephemeral-type popups (like Tooltips, Select menus, etc). It will also add in clickOutside
  * detection.
- *
- * @example
- * // must be part of a component life-cycle. Use `Popup.Popper` otherwise.
- * const model = usePopupModel({visibility: 'visible'})
- * usePopupStack(model.state.stackRef)
- *
- * // add some popup functionality
- * useCloseOnOutsideClick(model)
- * useCloseOnEscape(model)
  */
 export const usePopupStack = <E extends HTMLElement>(
   ref?: React.Ref<E>,

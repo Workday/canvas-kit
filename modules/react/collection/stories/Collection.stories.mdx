@@ -1,3 +1,5 @@
+import {SymbolDoc} from '@workday/canvas-kit-docs';
+
 import {ListBox} from '@workday/canvas-kit-react/collection';
 
 import {Basic} from './examples/Basic';
@@ -9,15 +11,6 @@ import {Selection} from './examples/Selection';
 import {MultiSelection} from './examples/MultiSelection';
 import {BasicGrid} from './examples/BasicGrid';
 import {WrappingGrid} from './examples/WrappingGrid';
-import {
-  ListModelConfigComponent,
-  ListStateComponent,
-  ListEventsComponent,
-  GridModelConfigComponent,
-  GridStateComponent,
-  GridEventsComponent,
-  NavigationManager,
-} from './Collection.splitprops';
 
 <Meta title="Features/Collections" />
 
@@ -120,117 +113,18 @@ cursor wraps around columns and rows when an edge of a column or row is encounte
 
 <ExampleCodeBlock code={WrappingGrid} />
 
-## Components
+## Component API
 
 ### ListBox
 
-#### Usage
-
-The `ListBox` is a basic component that offers vertical rendering of a collection in the form of a
-2-dimension list. It understands virtualization, rendering only visible items in the DOM while also
-providing aria attributes to allow screen readers to still navigate virtual lists. The `ListBox`
-contains a basic `ListBox.Item` that renders list items that render correctly with virtualization
-and adds `aria-setsize` and `aria-posinset` for screen readers.
-
-The `ListBox` is very basic and only adds enough functionality to render correctly. No additional
-behaviors are added to navigate or select. React Hooks are provided to add this functionality and
-are used by higher level components like `Menu` and `Menu.Item` which utilize `ListBox`.
-
-#### Props
-
-<ArgsTable of={ListBox} />
-
-### ListBox.Item
-
-#### Usage
-
-The `ListBox.Item` is a simple placeholder for listbox items. The functionality of a collection item
-varies between components. For example, a `Tabs.Item` and a `Menu.Item` have shared functionality,
-but have different behavior. All collection-based components should implement a custom `Item`
-subcomponent using the collection-based behavior hooks. The [Roving Tabindex](#roving-tabindex)
-example uses the `elemPropsHook` to provide additional functionality. `elemPropsHook` is provided on
-all compound components and is useful in the example to add additional functionality without making
-a new component.
-
-#### Props
-
-<ArgsTable of={ListBox.Item} />
-
-## Models
-
-There are two supported models based on the collection system.
-
-### `useListModel`
-
-The List model contains the the state and events necessary to track items, selection, and a cursor.
-Various hooks can be used for a List model to create common behaviors associated with lists, such as
-navigating a list with a keyboard, selection (single and multiple), and virtualization.
-
-A list also has a "cursor". A cursor is often represented by focus, but it is not always a 1:1
-mapping. Think of the cursor as the focus item within the list. If the list has browser focus, the
-cursor will map to browser focus. Behaviors such as `useListRovingFocus` will map the cursor to the
-active tab stop of the list. For more information, see
-[Roving Tabindex](https://w3c.github.io/aria-practices/#kbd_roving_tabindex). `useListRovingFocus`
-adds keyboard events that map to navigation events. A [Navigation Manager](#navigation-manager) is
-used to map new cursor ids to these events. The `ListModel` takes an optional `navigation`
-configuration to change the default navigation behavior. The default navigation manager is a
-[wrappingNavigationManager](#wrappingnavigationmanager) meaning the cursor will wrap around the
-beginning and the ends. The cursor also provides a [navigationManager](#navigationmanager) that does
-not wrap. This is the default navigation for grids.
-
-The cursor also adds the concept of `orientation` which defaults to `'vertical'`. A Tab list is an
-example of a `'horizontal'` list.
-
-#### Config
-
-<ArgsTable of={ListModelConfigComponent} />
-
-#### State
-
-<ArgsTable of={ListStateComponent} />
-
-#### Events
-
-<ArgsTable of={ListEventsComponent} />
-
-### `useGridModel`
-
-The Grid model extends the List model and changes some config. For example, the `columnCount` is
-required on the grid model's configuration and `orientation` is removed.
-
-#### Config
-
-<ArgsTable of={GridModelConfigComponent} />
-
-#### State
-
-<ArgsTable of={GridStateComponent} />
-
-#### Events
-
-<ArgsTable of={GridEventsComponent} />
+<>
+<SymbolDoc name="ListBox" fileName="/react/" />
+<SymbolDoc name="useGridModel" fileName="/react/" />
+</>
 
 ### Navigation Manager
 
-The list and grid models accept a `navigation` config. If one is not provided, a default will be
-chosen. It is possible to create a custom navigation manager to hand to the model if the default
-doesn't work.
-
-<ArgsTable of={NavigationManager} />
-
-```ts
-type NavigationRequestor = <T>(id: string, model: Model) => Item<T>;
-
-interface Item<T> {
-  index: number;
-  id: string;
-  value: T;
-  /**
-   * Used by components that allow jumping to an item based on typing
-   */
-  textValue?: string;
-}
-```
+<SymbolDoc name="NavigationManager" fileName="/react/" />
 
 #### `navigationManager`
 
@@ -246,114 +140,38 @@ columns, but not rows. This is the default navigation manager for lists.
 
 ### Selection Manager
 
-The list and grid models accept a `selection` config. If one is not provided, `singleSelectManager`
-is used. You can provide a custom select manager to suite your needs. A selection manager is an
-object with a single `select` method that takes an id and previously selected ids and returns a new
-set of selected ids.
-
-The collection system provides two selection managers: `singleSelectManager` and
-`multiSelectionManager`.
-
-```ts
-interface Selection {
-  selectedIds: 'all' | string[];
-  unselectedIds: string[];
-}
-
-interface SelectionManager {
-  select(id: string, prevState: Selection): Selection;
-}
-```
+<SymbolDoc name="SelectionManager" />
 
 ## Hooks
 
 ### `useListItemRegister`
 
-This elemProps hook is the base of all item component hooks. It registers an item with a collection
-and sets the `data-id` that is used by other hooks. It should always be the last defined hook when
-using `composeHooks` (`composeHooks` executes hooks right to left and merges props left to right).
-It is used by `ListBox.Item` and all `*.Item` subcomponents.
-
-```ts
-const useMyItem = composeHooks(
-  useListItemSelect, // additional hooks go here
-  useListItemRegister // always last
-);
-```
+<SymbolDoc name="useListItemRegister" fileName="/react/" />
 
 ### `useListItemRovingFocus`
 
-This elemProps hook is used for cursor navigation by using
-[Roving Tabindex](https://w3c.github.io/aria-practices/#kbd_roving_tabindex). Only a single item in
-the collection has a tab stop. Pressing an arrow key moves the tab stop to a different item in the
-corresponding direction. See the [Roving Tabindex](#roving-tabindex) example. This elemProps hook
-should be applied to an `*.Item` component.
-
-```ts
-const useMyItem = composeHooks(
-  useListItemRovingFocus, // adds the roving tabindex support
-  useListItemRegister
-);
-```
+<SymbolDoc name="useListItemRovingFocus" fileName="/react/" />
 
 ### `useListItemSelect`
 
-This elemProps hook adds selection support to a `*.Item` subcomponent of a collection. It adds a
-click handler that toggles selection status according to the [Selection Manager](#selection-manager)
-used.
+<SymbolDoc name="useListItemSelect" fileName="/react/" />
 
-```ts
-const useMyItem = composeHooks(
-  useListItemSelect, // adds selection support to an item
-  useListItemRegister
-);
-```
+### `useListRenderItems`
 
-### `useListRenderItem`
-
-```ts
-declare function useListRenderItem<T>(
-  model: Model,
-  children: React.ReactNode | ((item: T, index: number) => React.ReactNode)
-): React.ReactNode;
-```
-
-This hook is meant to be used inside the render function of `List` style components. It is used by
-`ListBox`. This hook gives list-based components their static and dynamic APIs to handle list items.
-This hook should only be used if you want to implement your own List. For example, `Tabs.List` uses
-this hook, but `Menu.List` uses `ListBox` which uses this hook.
-
-```tsx
-const MyList = createContainer('ul')({
-  modelHook: useListModel,
-})((elemProps, Element, model) => {
-  return <Element {...elemProps}>{useListRenderItems(model, elemProps.children)}</Element>;
-});
-```
+<SymbolDoc name="useListRenderItems" fileName="/react/" />
 
 ### `useListResetCursorOnBlur`
 
-This elemProps hook resets the cursor when the list looses focus. By default,
-[useListItemRovingFocus](#use-list-item-roving-focus) will leave the last focused item as the
-focusable item in the list. Sometimes it is desireable to reset the cursor to the last selected
-item. For example, `Tabs.Item` uses this hook to reset the tab stop to the currently selected tab.
-
-```ts
-const useMyItem = composeHooks(
-  useListResetCursorOnBlur, // adds the cursor reset to selected for roving tabindex
-  useListItemRovingFocus,
-  useListItemRegister
-);
-```
+<SymbolDoc name="useListResetCursorOnBlur" fileName="/react/" />
 
 ### `useOverflowListItemMeasure`
 
-Coming Soon
+<SymbolDoc name="useOverflowListItemMeasure" fileName="/react/" />
 
 ### `useOverflowListMeasure`
 
-Coming Soon
+<SymbolDoc name="useOverflowListMeasure" fileName="/react/" />
 
 ### `useOverflowListTarget`
 
-Coming Soon
+<SymbolDoc name="useOverflowListTarget" fileName="/react/" />
