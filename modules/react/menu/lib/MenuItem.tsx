@@ -40,7 +40,7 @@ export interface MenuItemProps {
   'aria-disabled'?: boolean;
 }
 
-const StyledItem = styled(Box.as('button'))<StyledType>(
+export const StyledMenuItem = styled(Box.as('button'))<StyledType>(
   ({theme}) => {
     return {
       ...type.levels.subtext.large,
@@ -180,9 +180,9 @@ export const MenuItem = createSubcomponent('button')({
 })<MenuItemProps>(({children, ...elemProps}, Element) => {
   return (
     <OverflowTooltip placement="left">
-      <StyledItem minHeight={space.xl} as={Element} {...elemProps}>
+      <StyledMenuItem minHeight={space.xl} as={Element} {...elemProps}>
         {children}
-      </StyledItem>
+      </StyledMenuItem>
     </OverflowTooltip>
   );
 });
