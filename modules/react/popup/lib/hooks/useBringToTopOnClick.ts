@@ -6,10 +6,10 @@ import {usePopupModel} from './usePopupModel';
 
 /**
  * This hook will bring an element to the top of the stack when any element inside the provided
- * PopupModel's `state.stackRef` element is clicked. If `Popup.Popper` was used or `PopupStack.add`
- * provided an `owner`, all "child" popups will also be brought to the top. A "child" popup is a
- * Popup that was opened from another Popup. Usually this is a Tooltip or Select component inside
- * something like a Modal.
+ * {@link PopupModel}'s `state.stackRef` element is clicked. If {@link PopupPopper Popup.Popper} was
+ * used or `PopupStack.add` provided an `owner`, all "child" popups will also be brought to the top.
+ * A "child" popup is a Popup that was opened from another Popup. Usually this is a Tooltip or
+ * Select component inside something like a Modal.
  *
  * This should be used on popup elements that are meant to persist (i.e. Windows).
  */

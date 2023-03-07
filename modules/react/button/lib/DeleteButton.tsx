@@ -12,7 +12,6 @@ import {
 export interface DeleteButtonProps extends Themeable, GrowthBehavior, BaseButtonProps {
   /**
    * The size of the Button.
-   * @default 'medium'
    */
   size?: 'small' | 'medium' | 'large';
   children?: React.ReactNode;
@@ -42,6 +41,11 @@ const getDeleteButtonColors = ({
   },
 });
 
+/**
+ * Use sparingly for destructive actions that will result in data loss, can’t be undone, or will
+ * have significant consequences. They commonly appear in confirmation dialogs as the final
+ * confirmation before deleting.
+ */
 export const DeleteButton = createComponent('button')({
   displayName: 'DeleteButton',
   Component: (

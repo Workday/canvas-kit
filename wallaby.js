@@ -42,5 +42,7 @@ module.exports = wallaby => {
       }),
         w.testFramework.configure(jestConfig);
     },
+
+    maxConsoleMessagesPerTest: 10000,
   };
 };

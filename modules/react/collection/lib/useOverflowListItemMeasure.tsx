@@ -7,6 +7,17 @@ const hiddenStyles = {
   left: -99999,
 } as const;
 
+/**
+ * This elemProps hook measures a list item and reports it to an `OverflowListModel`. This is used
+ * in overflow detection.
+ *
+ * ```ts
+ * const useMyItem = composeHooks(
+ *   useOverflowListItemMeasure,
+ *   useListRegisterItem,
+ * )
+ * ```
+ */
 export const useOverflowListItemMeasure = createElemPropsHook(useOverflowListModel)(
   (model, ref?: React.Ref<HTMLElement>, elemProps: {'data-id'?: string} = {}) => {
     const {elementRef, localRef} = useLocalRef(ref);
