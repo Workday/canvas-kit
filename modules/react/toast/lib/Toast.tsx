@@ -47,7 +47,7 @@ export const Toast = createContainer('div')({
      */
     Body: ToastBody,
     /**
-     * `Toast.CloseIcon` renders a `Popup.CloseIcon`. You can pass an `onClick` when used with `Popper` to dismiss the `Toast`.
+     * `Toast.CloseIcon` renders a {@link PopupCloseIcon}. You can pass an `onClick` when used with `Popper` to dismiss the `Toast`.
      */
     CloseIcon: ToastCloseIcon,
     /**
