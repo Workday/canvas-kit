@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {DeprecatedMenu, DeprecatedMenuItem} from '@workday/canvas-kit-preview-react/menu';
+import {Menu} from '@workday/canvas-kit-react/menu';
 import {Popper} from '@workday/canvas-kit-react/popup';
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
 import {colors, space, borderRadius} from '@workday/canvas-kit-react/tokens';
@@ -66,10 +66,14 @@ export const CustomPlacement = withSnapshotsEnabled(() => {
             toJSON: () => '',
           })}
         >
-          <DeprecatedMenu>
-            <DeprecatedMenuItem>{'Custom'}</DeprecatedMenuItem>
-            <DeprecatedMenuItem>{'Placement'}</DeprecatedMenuItem>
-          </DeprecatedMenu>
+          <Menu>
+            <Menu.Card>
+              <Menu.List>
+                <Menu.Item>{'Custom'}</Menu.Item>
+                <Menu.Item>{'Placement'}</Menu.Item>
+              </Menu.List>
+            </Menu.Card>
+          </Menu>
         </Popper>
       </div>
     </div>
