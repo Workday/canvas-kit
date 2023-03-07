@@ -133,19 +133,33 @@ export function useTooltip<T extends Element = Element>({
 
   const visible = popupModel.state.visibility !== 'hidden';
 
+  const targetProps: {
+    'aria-describedby'?: string;
+    'aria-label'?: string;
+    onMouseEnter: typeof onOpenFromTarget;
+    onMouseLeave: typeof onHide;
+    onMouseDown: typeof onMouseDown;
+    onFocus: typeof onFocus;
+    onBlur: typeof onHide;
+  } = {
+    // This will replace the accessible name of the target element
+    'aria-label': type === 'label' ? titleText : undefined,
+    onMouseEnter: onOpenFromTarget,
+    onMouseLeave: onHide,
+    onMouseDown,
+    onFocus,
+    onBlur: onHide,
+  };
+
+  // Description added conditionally to avoid override of original description
+  if (type === 'describe' && visible) {
+    // extra description of the target element for assistive technology
+    targetProps['aria-describedby'] = id;
+  }
+
   return {
     /** Mix these properties into the target element. **Must be an Element** */
-    targetProps: {
-      // extra description of the target element for assistive technology
-      'aria-describedby': type === 'describe' && visible ? id : undefined,
-      // This will replace the accessible name of the target element
-      'aria-label': type === 'label' ? titleText : undefined,
-      onMouseEnter: onOpenFromTarget,
-      onMouseLeave: onHide,
-      onMouseDown,
-      onFocus,
-      onBlur: onHide,
-    },
+    targetProps,
     /** Mix these properties into the `Popper` component */
     popperProps: {
       open: visible,
