@@ -284,7 +284,7 @@ function findDoc({name, fileName}: ValueDocProps): types.ExportedSymbol<types.Va
 }
 
 export const useDoc = (criteria: ValueDocProps) => {
-  // Listen to criteria.name or file.name so that we can re fetch docs in the dialog
+  // Listen to criteria.name and criteria.fileName so that we can re-fetch docs in the dialog
   const doc = React.useMemo(() => findDoc(criteria), [criteria.name, criteria.fileName || '']);
 
   return doc;
