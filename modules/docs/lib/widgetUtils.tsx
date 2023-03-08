@@ -4,12 +4,19 @@ import styled from '@emotion/styled';
 import {createComponent, StyledType} from '@workday/canvas-kit-react/common';
 import {useDialogModel, Dialog} from '@workday/canvas-kit-react/dialog';
 import {CanvasColor, colors, space, type} from '@workday/canvas-kit-react/tokens';
+import {Breadcrumbs} from '@workday/canvas-kit-react/breadcrumbs';
 
 import {MDX, MdxJSToJSX} from './MDXElements';
 import {Hyperlink} from '@workday/canvas-kit-react/button';
 import {docs} from './docs';
 import {Value} from './Value';
 import * as types from '../docgen/docTypes';
+
+const NestedContext = React.createContext(false);
+
+const SymbolDocBreadcrumbsContext = React.createContext<
+  {breadcrumbsList: string[]; updateBreadcrumbs: (value: string[]) => void} | undefined
+>(undefined);
 
 /** React context to track the current rendering context to avoid tables inside tables */
 export const RenderContext = React.createContext<'table' | 'inline'>('table');
@@ -80,18 +87,60 @@ export interface SymbolDialogProps {
 
 export const SymbolDialog = ({value}: SymbolDialogProps) => {
   const [symbol, setSymbol] = React.useState<types.ExportedSymbol | undefined>(undefined);
+  const {breadcrumbsList, updateBreadcrumbs} = React.useContext(SymbolDocBreadcrumbsContext)!;
+  const nestedContext = React.useContext(NestedContext);
+
   const model = useDialogModel({
     onShow() {
       setSymbol(docs.find(d => value.name === d.name) || undefined);
     },
+    onHide() {
+      // Reset breadcrumbs when the dialog is closed
+      updateBreadcrumbs([]);
+    },
   });
 
+  const handleTargetClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+
+    updateBreadcrumbs(breadcrumbsList.concat(value.name));
+  };
+
+  const handleBreadcrumbClick = (e: React.MouseEvent, index: number) => {
+    e.preventDefault();
+
+    if (
+      e.currentTarget.textContent &&
+      breadcrumbsList.length &&
+      breadcrumbsList.indexOf(e.currentTarget.textContent) > -1
+    ) {
+      // Slice breadcrumbs list up to but not including the current item clicked
+      updateBreadcrumbs(breadcrumbsList.slice(0, index + 1));
+    }
+  };
+  if (nestedContext) {
+    return (
+      <ButtonHyperLink
+        style={{
+          border: 'none',
+          background: 'transparent',
+          fontSize: 'inherit',
+          fontFamily: 'inherit',
+        }}
+        onClick={handleTargetClick}
+      >
+        {' '}
+        {value.displayName || value.name}
+      </ButtonHyperLink>
+    );
+  }
   return (
-    <Dialog model={model}>
-      <>
+    <NestedContext.Provider value={true}>
+      <Dialog model={model}>
         <Dialog.Target
           as={ButtonHyperLink}
           className="token symbol"
+          onClick={(e: React.MouseEvent) => handleTargetClick(e)}
           style={{
             border: 'none',
             background: 'transparent',
@@ -102,31 +151,69 @@ export const SymbolDialog = ({value}: SymbolDialogProps) => {
         >
           {value.displayName || value.name}
         </Dialog.Target>
+
         {renderTypeParameters(value.typeParameters)}
-      </>
-      <Dialog.Popper>
-        <Dialog.Card maxHeight="50vh" maxWidth="90vh">
-          <Dialog.CloseIcon />
-          <Dialog.Heading>{value.name}</Dialog.Heading>
-          <Dialog.Body>
-            <RenderContext.Provider value="table">
-              <IndentLevelContext.Provider value={0}>
-                {symbol ? (
-                  <SymbolDoc name={value.name} headingStart={3} hideHeading />
-                ) : (
-                  <>
-                    <p>Basic type information:</p>
-                    <pre>
-                      <code>{value.value}</code>
-                    </pre>
-                  </>
-                )}
-              </IndentLevelContext.Provider>
-            </RenderContext.Provider>
-          </Dialog.Body>
-        </Dialog.Card>
-      </Dialog.Popper>
-    </Dialog>
+
+        <Dialog.Popper>
+          <Dialog.Card maxHeight="50vh" maxWidth="90vh">
+            <Dialog.CloseIcon />
+
+            <Dialog.Heading>
+              {value.name}{' '}
+              {breadcrumbsList.length >= 1 ? (
+                <Breadcrumbs aria-label="Breadcrumbs">
+                  <Breadcrumbs.List>
+                    {breadcrumbsList.map((item, index) => {
+                      return (
+                        <>
+                          {item === breadcrumbsList[breadcrumbsList.length - 1] ? (
+                            <Breadcrumbs.CurrentItem key={index}>{item}</Breadcrumbs.CurrentItem>
+                          ) : (
+                            <Breadcrumbs.Item key={index}>
+                              <Breadcrumbs.Link
+                                onClick={e => handleBreadcrumbClick(e, index)}
+                                href={'#'}
+                              >
+                                {item}
+                              </Breadcrumbs.Link>
+                            </Breadcrumbs.Item>
+                          )}
+                        </>
+                      );
+                    })}
+                  </Breadcrumbs.List>
+                </Breadcrumbs>
+              ) : null}
+            </Dialog.Heading>
+
+            <Dialog.Body>
+              <RenderContext.Provider value="table">
+                <IndentLevelContext.Provider value={0}>
+                  {symbol ? (
+                    <SymbolDoc
+                      name={
+                        breadcrumbsList.length >= 1
+                          ? breadcrumbsList[breadcrumbsList.length - 1]
+                          : value.name
+                      }
+                      headingStart={3}
+                      hideHeading
+                    />
+                  ) : (
+                    <>
+                      <p>Basic type information:</p>
+                      <pre>
+                        <code>{value.value}</code>
+                      </pre>
+                    </>
+                  )}
+                </IndentLevelContext.Provider>
+              </RenderContext.Provider>
+            </Dialog.Body>
+          </Dialog.Card>
+        </Dialog.Popper>
+      </Dialog>
+    </NestedContext.Provider>
   );
 };
 
@@ -191,9 +278,8 @@ function findDoc({name, fileName}: ValueDocProps): types.ExportedSymbol<types.Va
 }
 
 export const useDoc = (criteria: ValueDocProps) => {
-  const [doc] = React.useState(() => {
-    return findDoc(criteria);
-  });
+  // Listen to criteria.name or file.name so that we can re fetch docs in the dialog
+  const doc = React.useMemo(() => findDoc(criteria), [criteria.name, criteria.fileName || '']);
 
   return doc;
 };
@@ -264,6 +350,7 @@ export const SymbolDoc = ({
   ...elemProps
 }: SymbolDocProps) => {
   const doc = useDoc({name, fileName});
+  const symbolDocBreadcrumb = React.useContext(SymbolDocBreadcrumbsContext);
 
   const children = getSymbolDocChildren(doc, meta);
 
@@ -298,7 +385,7 @@ export const SymbolDoc = ({
     children
   );
 
-  return (
+  const symbolDocContents = (
     <StyledSymbolDoc {...elemProps}>
       <HeadingLevelContext.Provider value={headingStart}>
         {!hideHeading && <Heading>{name}</Heading>}
@@ -308,5 +395,20 @@ export const SymbolDoc = ({
         {contents}
       </HeadingLevelContext.Provider>
     </StyledSymbolDoc>
+  );
+
+  return symbolDocBreadcrumb === undefined ? (
+    <SymbolDocWrapper>{symbolDocContents}</SymbolDocWrapper>
+  ) : (
+    symbolDocContents
+  );
+};
+
+const SymbolDocWrapper = ({children}: any) => {
+  const [breadcrumbsList, updateBreadcrumbs] = React.useState<string[]>([]);
+  return (
+    <SymbolDocBreadcrumbsContext.Provider value={{breadcrumbsList, updateBreadcrumbs}}>
+      {children}
+    </SymbolDocBreadcrumbsContext.Provider>
   );
 };
