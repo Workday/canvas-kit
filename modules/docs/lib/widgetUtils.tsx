@@ -124,7 +124,7 @@ export const SymbolDialog = ({value}: SymbolDialogProps) => {
     }
   };
 
-  // If we're not within a nested context, we render a Hyperlink. This help that dialog know it's target.
+  // If we're inside a nested context, we render a Hyperlink. This button will update the dialog instead of rendering a new one.
   if (nestedContext) {
     return (
       <ButtonHyperLink
