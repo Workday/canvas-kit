@@ -12,8 +12,14 @@ import {docs} from './docs';
 import {Value} from './Value';
 import * as types from '../docgen/docTypes';
 
+/**
+ * This context allows us to keep track if we're within a nested stack of dialog
+ */
 const NestedContext = React.createContext(false);
 
+/**
+ * Context to help keep track of breadcrumbs and update them
+ */
 const SymbolDocBreadcrumbsContext = React.createContext<
   {breadcrumbsList: string[]; updateBreadcrumbs: (value: string[]) => void} | undefined
 >(undefined);
@@ -108,7 +114,6 @@ export const SymbolDialog = ({value}: SymbolDialogProps) => {
 
   const handleBreadcrumbClick = (e: React.MouseEvent, index: number) => {
     e.preventDefault();
-
     if (
       e.currentTarget.textContent &&
       breadcrumbsList.length &&
@@ -118,6 +123,8 @@ export const SymbolDialog = ({value}: SymbolDialogProps) => {
       updateBreadcrumbs(breadcrumbsList.slice(0, index + 1));
     }
   };
+
+  // If we're not within a nested context, we render a Hyperlink. This help that dialog know it's target.
   if (nestedContext) {
     return (
       <ButtonHyperLink
