@@ -11,7 +11,8 @@ any questions.
 - [Codemod](#codemod)
 - [Component Deprecations](#component-deprecations)
   - [Drawer](#drawer)
-  - [Layout and Column](#layout-and-column) - [Stack](#stack-hstack-vstack)
+  - [Layout and Column](#layout-and-column) - [Stack, HStack, VStack](#stack-hstack-vstack)
+  - [Menu in Preview](#menu-in-preview)
 - [Component Updates](#component-updates)
   - [Buttons](#buttons)
 
@@ -94,132 +95,22 @@ using the `Flex` component and to replace the `spacing` prop with the `gap` prop
 
 ---
 
-### Menu in preview-react
+### Menu in Preview
 
-We've removed the `Menu` component that was located in `preview-react` and now will be replaced with
-the `Menu` component in `main`. Please see the `Menu` documentation
+We've removed the `Menu` component that was in `@workday/canvas-kit-preview-react` and now will be
+replaced with the `Menu` component in `@workday/canvas-kit-react`. Please see the `Menu`
+documentation
 [here](https://workday.github.io/canvas-kit/?path=/docs/components-popups-menu--basic).
 
-For the migration guide from `Menu` in `preview-react` to the `Menu` in `main` component, see
-[this](https://github.com/Workday/canvas-kit/discussions/2063) discussion.
+For the migration guide from `Menu` in `@workday/canvas-kit-preview-react` to the `Menu` component
+in `@workday/canvas-kit-react`, see [this](https://github.com/Workday/canvas-kit/discussions/2063)
+discussion.
 
 If you would like to see the differences between `DeprecatedMenu` and the `Menu` compound component,
 see [this](https://codesandbox.io/s/deprecatedmenu-to-menu-migration-gwi1ov) codesandbox example.
 
-Also, a basic code example is below of `DepreacatedMenu` and the `Menu` component in `main`.
-
-Using the `DeprecatedMenu` and `DeprecatedMenuItem` component:
-
-```tsx
-import React from 'react';
-import {DeprecatedMenu, DeprecatedMenuItem} from '@workday/canvas-kit-preview-react/menu';
-import {SecondaryButton} from '@workday/canvas-kit-react/button';
-import {
-  Popup,
-  usePopupModel,
-  useAlwaysCloseOnOutsideClick,
-  useReturnFocus,
-  useCloseOnEscape,
-} from '@workday/canvas-kit-react/popup';
-
-const menuId = 'basic-menu';
-
-export const Basic = () => {
-  const model = usePopupModel();
-
-  useAlwaysCloseOnOutsideClick(model);
-  useCloseOnEscape(model);
-  useReturnFocus(model);
-
-  const isOpen = model.state.visibility !== 'hidden';
-
-  const handleButtonKeyDown = (event: React.KeyboardEvent) => {
-    let isShortcut = false;
-    if (event.key === `Spacebar` || event.key === ` ` || event.key === `Enter`) {
-      isShortcut = true;
-      if (isOpen) {
-        model.events.hide();
-      } else {
-        model.events.show();
-      }
-    } else if (event.key === `ArrowDown` || event.key === `ArrowUp`) {
-      isShortcut = true;
-      model.events.show();
-    }
-
-    if (isShortcut) {
-      // Prevent ArrowDown and ArrowUp keys from scrolling the entire page
-      event.preventDefault();
-    }
-  };
-
-  return (
-    <Popup model={model}>
-      <Popup.Target
-        as={SecondaryButton}
-        onKeyDown={handleButtonKeyDown}
-        aria-expanded={isOpen}
-        aria-haspopup={true}
-        aria-controls={isOpen ? menuId : undefined}
-      >
-        Open Menu
-      </Popup.Target>
-      <Popup.Popper placement="bottom-start">
-        {/*
-          isOpen must be set for focus to be properly assigned to the DeprecatedMenu;
-          onClose must be set in order to the DeprecatedMenu to close properly after
-          selecting a DeprecatedMenuItem
-        */}
-        <DeprecatedMenu id={menuId} isOpen={isOpen} onClose={model.events.hide}>
-          <DeprecatedMenuItem>First Item</DeprecatedMenuItem>
-          <DeprecatedMenuItem>
-            Second Item (with a really really really long label)
-          </DeprecatedMenuItem>
-          <DeprecatedMenuItem isDisabled>Third Item (disabled)</DeprecatedMenuItem>
-          <DeprecatedMenuItem>
-            Fourth Item (<b>with markup</b>)
-          </DeprecatedMenuItem>
-          <DeprecatedMenuItem hasDivider>Fifth Item (with divider)</DeprecatedMenuItem>
-        </DeprecatedMenu>
-      </Popup.Popper>
-    </Popup>
-  );
-};
-```
-
-Using the `Menu` component from `main`:
-
-```tsx
-import React from 'react';
-import {Menu} from '@workday/canvas-kit-react/menu';
-import {BodyText} from '@workday/canvas-kit-react/text';
-
-export const Basic = () => {
-  const [selected, setSelected] = React.useState('');
-  return (
-    <Menu onSelect={data => setSelected(data.id)}>
-      <Menu.Target>Open Menu</Menu.Target>
-      <Menu.Popper>
-        <Menu.Card>
-          <Menu.List>
-            <Menu.Item>First Item</Menu.Item>
-            <Menu.Item>Second Item</Menu.Item>
-            <Menu.Divider />
-            <Menu.Item>Third Item (with a really, really, really long label)</Menu.Item>
-            <Menu.Item>Fourth Item</Menu.Item>
-          </Menu.List>
-        </Menu.Card>
-      </Menu.Popper>
-      <BodyText size="small" marginTop="s">
-        Selected: <span data-testid="output">{selected}</span>
-      </BodyText>
-    </Menu>
-  );
-};
-```
-
 > **Note**: There will be no codemod to replace this component due to varying differences in API and
-> `Menu` is a compound component.
+> `Menu` being a compound component.
 
 ## Component Updates
 
