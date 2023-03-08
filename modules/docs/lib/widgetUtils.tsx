@@ -136,7 +136,6 @@ export const SymbolDialog = ({value}: SymbolDialogProps) => {
         }}
         onClick={handleTargetClick}
       >
-        {' '}
         {value.displayName || value.name}
       </ButtonHyperLink>
     );
@@ -147,7 +146,7 @@ export const SymbolDialog = ({value}: SymbolDialogProps) => {
         <Dialog.Target
           as={ButtonHyperLink}
           className="token symbol"
-          onClick={(e: React.MouseEvent) => handleTargetClick(e)}
+          onClick={handleTargetClick}
           style={{
             border: 'none',
             background: 'transparent',
