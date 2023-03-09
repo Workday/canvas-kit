@@ -1,20 +1,13 @@
 import colors from '@workday/canvas-colors-web';
 import {defaultCanvasTheme, createCanvasTheme, PartialCanvasTheme} from '../lib/theming';
 import {shiftColor} from '../lib/theming/createCanvasTheme';
-
-const validateDefaultThemeProps = (theme: PartialCanvasTheme) => {
-  expect(theme.direction).toEqual(defaultCanvasTheme.direction);
-  expect(theme.palette.alert.dark).toEqual(defaultCanvasTheme.palette.alert.dark);
-  expect(theme.palette.common.focusOutline).toEqual(defaultCanvasTheme.palette.common.focusOutline);
-  expect(theme.breakpoints.values).toEqual(defaultCanvasTheme.breakpoints.values);
-};
+import lodash from 'lodash';
 
 describe('createCanvasTheme', () => {
   test('calling without any input provides the default theme', () => {
     const theme = createCanvasTheme({});
 
-    // Since createCanvasTheme is a proxy we need to access the properties directly. I don't particular want to check every property so checking only some should be enough
-    validateDefaultThemeProps(theme);
+    expect(theme).toEqual(defaultCanvasTheme);
   });
 
   test('calling with a custom palette should replace that palette', () => {
@@ -36,10 +29,7 @@ describe('createCanvasTheme', () => {
     const expected = {...defaultCanvasTheme};
     expected.palette.primary = palette;
 
-    validateDefaultThemeProps(theme);
-    Object.keys(palette).forEach(prop => {
-      expect(theme.palette.primary[prop]).toEqual(expected.palette.primary[prop]);
-    });
+    expect(theme).toEqual(expected);
   });
 
   test('calling with a custom palette with only main specified should replace that palette with an auto-generated one', () => {
@@ -61,11 +51,7 @@ describe('createCanvasTheme', () => {
       contrast: '#494949',
     };
 
-    // Test some other default properties are available on theme
-    validateDefaultThemeProps(theme);
-    Object.keys(expected.palette.primary).forEach(prop => {
-      expect(theme.palette.primary[prop]).toEqual(expected.palette.primary[prop]);
-    });
+    expect(theme).toEqual(expected);
   });
 
   test('calling with a custom palette with only one (non-main) color should not replace that palette with an auto-generated one', () => {
@@ -80,10 +66,7 @@ describe('createCanvasTheme', () => {
     const expected = {...defaultCanvasTheme};
     expected.palette.primary.dark = 'black';
 
-    validateDefaultThemeProps(theme);
-    Object.keys(expected.palette.primary).forEach(prop => {
-      expect(theme.palette.primary[prop]).toEqual(expected.palette.primary[prop]);
-    });
+    expect(theme).toEqual(expected);
   });
 
   test('calling with a theme containing custom fields should not remove custom fields', () => {
@@ -96,14 +79,11 @@ describe('createCanvasTheme', () => {
       ...input,
     };
 
-    validateDefaultThemeProps(theme);
-    type ExtendedTheme = PartialCanvasTheme & {foo?: string};
-
-    expect((theme as ExtendedTheme).foo).toEqual(expected.foo);
+    expect(theme).toEqual(expected);
   });
 
   test('calling with a fully custom theme should preserve all fields', () => {
-    const expected = defaultCanvasTheme;
+    const expected = lodash.cloneDeep(defaultCanvasTheme);
 
     const customizeTheme = (obj: any) => {
       for (const k in obj) {
@@ -124,6 +104,20 @@ describe('createCanvasTheme', () => {
     const theme = createCanvasTheme(expected);
 
     expect(theme).toEqual(expected);
+  });
+
+  test('custom theme should not override defaultCanvasTheme when merged', () => {
+    const input = {
+      palette: {
+        primary: {
+          main: 'orange',
+        },
+      },
+    };
+    const original = lodash.cloneDeep(defaultCanvasTheme);
+    createCanvasTheme(input);
+
+    expect(original).toEqual(defaultCanvasTheme);
   });
 
   test('custom theme should have dark contrast when main does not have high enough contrast ratio', () => {
