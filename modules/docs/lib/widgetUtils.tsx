@@ -94,6 +94,7 @@ export interface SymbolDialogProps {
 export const SymbolDialog = ({value}: SymbolDialogProps) => {
   const [symbol, setSymbol] = React.useState<types.ExportedSymbol | undefined>(undefined);
   const {breadcrumbsList, updateBreadcrumbs} = React.useContext(SymbolDocBreadcrumbsContext)!;
+
   const nestedContext = React.useContext(NestedContext);
 
   const model = useDialogModel({
@@ -140,6 +141,7 @@ export const SymbolDialog = ({value}: SymbolDialogProps) => {
       </ButtonHyperLink>
     );
   }
+
   return (
     <NestedContext.Provider value={true}>
       <Dialog model={model}>
@@ -161,36 +163,34 @@ export const SymbolDialog = ({value}: SymbolDialogProps) => {
         {renderTypeParameters(value.typeParameters)}
 
         <Dialog.Popper>
-          <Dialog.Card maxHeight="50vh" maxWidth="90vh">
+          <Dialog.Card maxHeight="50vh" maxWidth="90vh" minWidth={'600px'}>
             <Dialog.CloseIcon />
 
-            <Dialog.Heading>
-              {value.name}{' '}
-              {breadcrumbsList.length >= 1 ? (
-                <Breadcrumbs aria-label="Breadcrumbs">
-                  <Breadcrumbs.List>
-                    {breadcrumbsList.map((item, index) => {
-                      return (
-                        <>
-                          {item === breadcrumbsList[breadcrumbsList.length - 1] ? (
-                            <Breadcrumbs.CurrentItem key={index}>{item}</Breadcrumbs.CurrentItem>
-                          ) : (
-                            <Breadcrumbs.Item key={index}>
-                              <Breadcrumbs.Link
-                                onClick={e => handleBreadcrumbClick(e, index)}
-                                href={'#'}
-                              >
-                                {item}
-                              </Breadcrumbs.Link>
-                            </Breadcrumbs.Item>
-                          )}
-                        </>
-                      );
-                    })}
-                  </Breadcrumbs.List>
-                </Breadcrumbs>
-              ) : null}
-            </Dialog.Heading>
+            <Dialog.Heading>{value.name} </Dialog.Heading>
+            {breadcrumbsList.length > 1 ? (
+              <Breadcrumbs aria-label="Breadcrumbs">
+                <Breadcrumbs.List paddingX="xxs">
+                  {breadcrumbsList.map((item, index) => {
+                    return (
+                      <>
+                        {item === breadcrumbsList[breadcrumbsList.length - 1] ? (
+                          <Breadcrumbs.CurrentItem key={index}>{item}</Breadcrumbs.CurrentItem>
+                        ) : (
+                          <Breadcrumbs.Item key={index}>
+                            <Breadcrumbs.Link
+                              onClick={e => handleBreadcrumbClick(e, index)}
+                              href={'#'}
+                            >
+                              {item}
+                            </Breadcrumbs.Link>
+                          </Breadcrumbs.Item>
+                        )}
+                      </>
+                    );
+                  })}
+                </Breadcrumbs.List>
+              </Breadcrumbs>
+            ) : null}
 
             <Dialog.Body>
               <RenderContext.Provider value="table">
