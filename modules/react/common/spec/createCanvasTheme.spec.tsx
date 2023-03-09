@@ -1,6 +1,6 @@
 import colors from '@workday/canvas-colors-web';
 import {defaultCanvasTheme, createCanvasTheme, PartialCanvasTheme} from '../lib/theming';
-import {shiftColor, ColorDirection} from '../lib/theming/createCanvasTheme';
+import {shiftColor} from '../lib/theming/createCanvasTheme';
 
 const validateDefaultThemeProps = (theme: PartialCanvasTheme) => {
   expect(theme.direction).toEqual(defaultCanvasTheme.direction);
@@ -141,7 +141,7 @@ describe('createCanvasTheme', () => {
   });
 
   test('shift color should darken canvas color to subsequent canvas color', () => {
-    const newColor = shiftColor(colors.soap300, ColorDirection.Darken);
+    const newColor = shiftColor(colors.soap300, 100);
 
     expect(newColor).toEqual(colors.soap400);
   });
