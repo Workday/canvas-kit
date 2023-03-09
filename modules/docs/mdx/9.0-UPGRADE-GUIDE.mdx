@@ -14,6 +14,8 @@ any questions.
   - [Layout and Column](#layout-and-column) - [Stack](#stack-hstack-vstack)
 - [Component Updates](#component-updates)
   - [Buttons](#buttons)
+- [Utility Updates](#utility-updates)
+  - [focusRing](#focusring)
 
 ## Codemod
 
@@ -110,3 +112,11 @@ This change affects all of our `buttons` including:
 
 If you still wish for a specific `button` within a `form` to submit, just add the attribute
 `type="submit"`.
+
+## Utility Updates
+
+### focusRing
+
+We're removing memoization from focus ring. The `memoize` argument passed to `focusRing` is no
+longer valid and we've removed the exported `memoizedFocusRing`. There is no codemod for this
+change. We couldn't find any example of `memoize` or `memoizedFocusRing` being used.
