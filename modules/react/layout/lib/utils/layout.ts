@@ -5,7 +5,7 @@ import {SystemPropValues} from './systemProps';
 
 /** style props to for CSS layout properties */
 export type LayoutStyleProps = {
-  /** sets [CSS display property](https://developer.mozilla.org/en-US/docs/Web/CSS/displaydisplay) */
+  /** sets [CSS display property](https://developer.mozilla.org/en-US/docs/Web/CSS/display) */
   display?: Property.Display;
   /**
    * - sets [CSS height property](https://developer.mozilla.org/en-US/docs/Web/CSS/height)

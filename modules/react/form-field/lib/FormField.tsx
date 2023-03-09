@@ -136,7 +136,7 @@ const FormFieldInputContainer = styled('div')<GrowthBehavior & FormFieldLabelPos
   }
 );
 
-class FormField extends React.Component<React.PropsWithChildren<FormFieldProps>> {
+export class FormField extends React.Component<React.PropsWithChildren<FormFieldProps>> {
   static LabelPosition = FormFieldLabelPosition;
   static ErrorType = ErrorType;
 
@@ -237,5 +237,3 @@ class FormField extends React.Component<React.PropsWithChildren<FormFieldProps>>
 
 FormField.LabelPosition = FormFieldLabelPosition;
 FormField.ErrorType = ErrorType;
-
-export {FormField};

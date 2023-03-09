@@ -1,7 +1,6 @@
-import {Meta} from '@storybook/addon-docs';
+import {SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
 
 import {ActionBar} from '@workday/canvas-kit-react/action-bar';
-import {Specifications} from '@workday/canvas-kit-docs';
 
 import {Basic} from './examples/Basic';
 import {Icons} from './examples/Icons';
@@ -69,101 +68,6 @@ should render.
 
 <ExampleCodeBlock code={OverflowActionBar} />
 
-## Components
+## Component API
 
-### ActionBar
-
-#### Usage
-
-`ActionBar` is a container component that is responsible for creating a `ActionBarModel` and sharing
-it with its subcomponents using React context. It does not represent a real element.
-
-```tsx
-<ActionBar items={[]}>{/* Child components */}</ActionBar>
-```
-
-Alternatively, you may pass in a model using the hoisted model pattern.
-
-```tsx
-const model = useActionBarModel({
-  items: [],
-});
-
-<ActionBar model={model}>{/* Child components */}</ActionBar>;
-```
-
-## Props
-
-Note that if you pass in a `model` configured with `useActionBarModel`, configuration props passed
-to `ActionBar` will be ignored.
-
-<ArgsTable of={ActionBar} />
-
-### ActionBar.List
-
-#### Usage
-
-`ActionBar.List` is a `Flex` element. It is a container for `ActionBar.Item` subcomponents. To
-render an overflow button for ActionBar with overflow behavior `overflowButton` prop with overflow
-button component as a value shold be passed.
-
-```tsx
-// without overflow
-<ActionBar.List>{/* ActionBar.Items */}</ActionBar.List>
-
-// with overflow
-<ActionBar.List overflowButton={<ActionBar.OverflowButton aria-label="More actions"/>}>{
-  /* ActionBar.Items */
-}</ActionBar.List>
-```
-
-#### Props
-
-Undocumented props are spread to the underlying `Flex` element.
-
-<ArgsTable of={ActionBar.List} />
-
-### ActionBar.Item
-
-#### Usage
-
-`ActionBar.Item` is a `button` element, by default it's a `SecondaryButton` unless an `as` prop
-passed.
-
-```tsx
-<ActionBar.Item as={PrimaryButton} onClick={() => console.log('first action')}>
-  First Action
-</ActionBar.Item>
-```
-
-#### Props
-
-Undocumented props are spread to the underlying `SecondaryButton` component.
-
-<ArgsTable of={ActionBar.Item} />
-
-## Model
-
-If `ActionBar` was stripped of all its markup, attributes, and styling, what would remain is the
-[model](/getting-started/for-developers/resources/compound-components/#models). The model is an
-object composed of two parts: `state` which describes the current snapshot in time of the component
-and `events` which describes events that can be sent to the model.
-
-By default, `ActionBar` will create a model and share it internally with its subcomponents using
-React context. Alternatively, if you need direct access to the model's `state` and `events` outside
-of the `ActionBar` component, you may configure your own model with `useActionBarModel` and pass it
-to `ActionBar` via a pattern called
-[hoisting the model](/getting-started/for-developers/resources/compound-components/#configuring-a-model).
-
-```tsx
-const model = useActionBarModel({
-  items: [],
-});
-
-<ActionBar model={model}>{/* Child components */}</ActionBar>;
-```
-
-### Config
-
-`useActionBarModel` accepts a configuration object with the following properties and returns a
-`ActionBarModel` with `state` and `events` properties.
+<SymbolDoc name="ActionBar" fileName="/react/" />

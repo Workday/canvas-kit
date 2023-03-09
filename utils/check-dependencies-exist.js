@@ -8,6 +8,7 @@ const depCheck = require('depcheck');
 
 const depCheckOptions = {
   ignoreMatches: [
+    '@mdx-js/react',
     '@testing-library/react',
     '@testing-library/react-hooks',
     '@storybook/react',

@@ -1,5 +1,10 @@
 import * as React from 'react';
 
+export const SidePanelContext = React.createContext({
+  state: 'expanded',
+  origin: 'left',
+});
+
 import {useUniqueId} from '@workday/canvas-kit-react/common';
 /**
  * The optional config options for the `useSidePanel` hook
@@ -77,6 +82,21 @@ export interface ControlProps {
   onClick: () => void;
 }
 
+/**
+ *
+ * This hook manages the state and `aria-` attributes for the SidePanel. It takes an optional
+ * configuration object:
+ *
+ * ```tsx
+ * import {useSidePanel} from '@workday/canvas-kit-preview-react/side-panel';
+ *
+ * const {expanded, setExpanded, panelProps, labelProps, controlProps} = useSidePanel({
+ *   initialExpanded: false,
+ *   panelId: 'custom-panel-id',
+ *   labelId: 'custom-label-id',
+ * });
+ * ```
+ */
 export const useSidePanel = (config?: UseSidePanelProps) => {
   const [touched, setTouched] = React.useState(false);
   const configParams = config

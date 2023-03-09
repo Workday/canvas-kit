@@ -177,8 +177,8 @@ export const useTabsItem = composeHooks(
       const selected = !!elemProps['data-id'] && isSelected(name, state);
 
       return {
-        type: 'button',
-        role: 'tab',
+        type: 'button' as const,
+        role: 'tab' as const,
         id: `${state.id}-${name}`,
         'aria-selected': selected,
         'aria-controls': `tabpanel-${state.id}-${name}`,

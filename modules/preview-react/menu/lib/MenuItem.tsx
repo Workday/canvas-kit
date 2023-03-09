@@ -254,12 +254,22 @@ const scrollIntoViewIfNeeded = (elem: HTMLElement, centerIfNeeded = true): void 
 };
 
 /**
- * ### Deprecated Menu Item
+ * `DeprecatedMenuItem` renders an `<li>` element with the correct attributes to ensure it is
+ * accessible. If you choose to implement your own custom menu items, be sure to use semantic `<li>`
+ * elements with the following attributes:
  *
- * As of Canvas Kit v8, Menu is being soft-deprecated.
- * It will be hard-deprecated (completely removed) in v9. Please see the
- * [upgrade guide](https://workday.github.io/canvas-kit/?path=/story/welcome-upgrade-guides-v8-0--page)
- * for more information.
+ * - `role="menuitem"`
+ * - `tabindex={-1}`
+ * - `id`s following this pattern: `${MenuId}-${index}`
+ *
+ * As of Canvas Kit v8, Menu is being soft-deprecated. It will be hard-deprecated (completely
+ * removed) in v9. Please see the [upgrade
+ * guide](https://workday.github.io/canvas-kit/?path=/story/welcome-upgrade-guides-v8-0--page) for
+ * more information.
+ *
+ * Undocumented props are spread to the underlying `<li>` element.
+ *
+ * @deprecated
  */
 export class DeprecatedMenuItem extends React.Component<DeprecatedMenuItemProps> {
   ref = React.createRef<HTMLLIElement>();

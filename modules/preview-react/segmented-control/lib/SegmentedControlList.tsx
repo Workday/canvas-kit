@@ -15,7 +15,7 @@ export interface SegmentedControlListProps<T = any>
   children: ((item: T) => React.ReactNode) | React.ReactNode;
 }
 
-const useSegmentedControlList = createElemPropsHook(useSegmentedControlModel)(
+export const useSegmentedControlList = createElemPropsHook(useSegmentedControlModel)(
   ({state: {orientation, disabled, items}}) => {
     const directionName = orientation === 'vertical' ? 'Row' : 'Column';
     return {

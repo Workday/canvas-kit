@@ -1,6 +1,12 @@
-module.exports = (modulePath, storyPath, pascalCaseName, titleCaseName, prerelease, description) => `
-import {Meta} from '@storybook/addon-docs';
-import {Specifications} from '@workday/canvas-kit-docs';
+module.exports = (
+  modulePath,
+  storyPath,
+  pascalCaseName,
+  titleCaseName,
+  prerelease,
+  description
+) => `
+import {SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
 
 import {${pascalCaseName}} from '${modulePath}';
 import {Basic} from './examples/Basic';
@@ -32,4 +38,8 @@ Show and hide using a button.
 You can open your component by default using the \`initialOpen\` prop.
 
 <ExampleCodeBlock code={Open} />
+
+## Component API
+
+<SymbolDoc name="${pascalCaseName}" hideDescription />
 `;

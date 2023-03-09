@@ -11,9 +11,9 @@ import {
 } from '@workday/canvas-kit-react/tokens';
 import {createSubcomponent, ExtractProps, useTheme} from '@workday/canvas-kit-react/common';
 import {useThemedRing} from '@workday/canvas-kit-labs-react/common';
-import {FormField} from '@workday/canvas-kit-preview-react/form-field';
+import {FormField, useFormFieldModel} from '@workday/canvas-kit-preview-react/form-field';
 
-import {useTextInputField, useTextInputModel} from './hooks';
+import {useTextInputField} from './hooks';
 
 const baseStyles: CSSProperties = {
   transition: '0.2s box-shadow, 0.2s border-color',
@@ -41,7 +41,7 @@ const baseStyles: CSSProperties = {
 
 export const TextInputField = createSubcomponent('input')({
   displayName: 'TextInput.Field',
-  modelHook: useTextInputModel,
+  modelHook: useFormFieldModel,
   elemPropsHook: useTextInputField,
 })<ExtractProps<typeof FormField.Input, never>>((elemProps, Element, model) => {
   const theme = useTheme();

@@ -4,6 +4,10 @@ import {useListModel} from './useListModel';
 
 const {columnCount, orientation, ...defaultConfig} = useListModel.defaultConfig;
 
+/**
+ * The Grid model extends the `ListModel` and changes some config. For example, the `columnCount` is
+ * required on the grid model's configuration and `orientation` is removed.
+ */
 export const useGridModel = createModelHook({
   defaultConfig: {
     ...defaultConfig,

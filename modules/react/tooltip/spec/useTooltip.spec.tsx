@@ -1,3 +1,4 @@
+
 import * as React from 'react';
 import {render, fireEvent} from '@testing-library/react';
 
@@ -8,7 +9,9 @@ const TooltipWithHook = ({type}: {type: 'label' | 'describe'}) => {
 
   return (
     <>
-      <button {...targetProps}>Hover</button>
+      <button aria-describedby="originalDescribedById" {...targetProps}>
+        Hover
+      </button>
       <TooltipContainer {...tooltipProps}>Tooltip Content</TooltipContainer>
     </>
   );
@@ -21,6 +24,14 @@ describe('useTooltip with type="label"', () => {
     const target = getByText('Hover');
 
     expect(target).toHaveAttribute('aria-label', 'Hover');
+  });
+
+  it('should keep original aria-describedby of target', () => {
+    const {getByText} = render(<TooltipWithHook type="label" />);
+
+    const target = getByText('Hover');
+
+    expect(target).toHaveAttribute('aria-describedby', 'originalDescribedById');
   });
 });
 

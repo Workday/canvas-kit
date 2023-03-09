@@ -4,7 +4,7 @@ import {chevronDownSmallIcon} from '@workday/canvas-system-icons-web';
 import {
   createElemPropsHook,
   composeHooks,
-  subModelHook,
+  createSubModelElemPropsHook,
   createSubcomponent,
 } from '@workday/canvas-kit-react/common';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
@@ -25,10 +25,10 @@ export const useTabsOverflowButton = composeHooks(
   createElemPropsHook(useTabsModel)(() => {
     return {
       'aria-haspopup': true,
-    };
+    } as const;
   }),
   useOverflowListTarget,
-  subModelHook((m: ReturnType<typeof useTabsModel>) => m.menu, useMenuTarget)
+  createSubModelElemPropsHook(useTabsModel)(m => m.menu, useMenuTarget)
 );
 
 export const TabsOverflowButton = createSubcomponent('button')({
