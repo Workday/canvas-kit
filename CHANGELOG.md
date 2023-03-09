@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v8.5.1](https://github.com/Workday/canvas-kit/releases/tag/v8.5.1) (2023-03-09)
+
+### Components
+
+- fix: Remove style attribute on Expandable Title ([#2074](https://github.com/Workday/canvas-kit/pull/2074)) ([@vibdev](https://github.com/vibdev))
+  Not explicitly a breaking change for `Expandable.Title`, but does alter the specificity for fontFamily, fontSize, lineHeight, fontWeight, color, and textAlign.
+
+### Infrastructure
+
+- chore: Update browserlist config for eslint compat/compat ([#2075](https://github.com/Workday/canvas-kit/pull/2075)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v8.5.0](https://github.com/Workday/canvas-kit/releases/tag/v8.5.0) (2023-03-08)
 
 ### Components
