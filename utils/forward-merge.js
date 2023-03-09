@@ -101,7 +101,11 @@ async function main() {
     console.log(`Creating a merge branch`);
     // The CI uses `origin` while locally we use `upstream`.
     const remote = alreadyMerging ? 'upstream' : 'origin';
-    await exec(`git merge ${remote}/${nextBranch} -m 'chore: Merge ${branch} into ${nextBranch}'`);
+    const {stdout} = await exec(
+      `git merge ${remote}/${nextBranch} -m 'chore: Merge ${branch} into ${nextBranch}'`
+    );
+    // exec doesn't automatically log
+    console.log(stdout);
 
     // The merge was successful with no merge conflicts
   } catch (result) {
