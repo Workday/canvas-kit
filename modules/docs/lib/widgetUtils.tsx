@@ -167,7 +167,7 @@ export const SymbolDialog = ({value}: SymbolDialogProps) => {
             <Dialog.CloseIcon />
 
             <Dialog.Heading>{value.name} </Dialog.Heading>
-            {breadcrumbsList.length > 1 ? (
+            {breadcrumbsList.length > 1 && (
               <Breadcrumbs aria-label="Breadcrumbs">
                 <Breadcrumbs.List paddingX="xxs">
                   {breadcrumbsList.map((item, index) => {
@@ -190,7 +190,7 @@ export const SymbolDialog = ({value}: SymbolDialogProps) => {
                   })}
                 </Breadcrumbs.List>
               </Breadcrumbs>
-            ) : null}
+            )}
 
             <Dialog.Body>
               <RenderContext.Provider value="table">
@@ -209,7 +209,7 @@ export const SymbolDialog = ({value}: SymbolDialogProps) => {
                     <>
                       <p>Basic type information:</p>
                       <pre>
-                        <code>{value.value}</code>
+                        <code>{value.name}</code>
                       </pre>
                     </>
                   )}
@@ -259,16 +259,24 @@ const StyledSymbolDoc = styled('div')({
   },
 });
 
-function getSymbolDocChildren(doc?: types.ExportedSymbol, meta?: any) {
+function getSymbolDocChildren(doc?: types.ExportedSymbol, meta?: any, name?: string) {
   if (!doc) {
-    return <div>Not Found</div>;
+    // We're within  a symbol doc context, but there's no information, so we still want to render the basic type information
+    return (
+      <>
+        <p>Basic type information:</p>
+        <pre>
+          <code>{name}</code>
+        </pre>
+      </>
+    );
   }
 
   if (doc && doc.type) {
     return <Value value={doc.type} doc={doc} meta={meta} />;
   }
 
-  return <div>Not Found</div>;
+  return <div>Not found</div>;
 }
 
 function findDoc({name, fileName}: ValueDocProps): types.ExportedSymbol<types.Value> | undefined {
@@ -358,7 +366,7 @@ export const SymbolDoc = ({
   const doc = useDoc({name, fileName});
   const symbolDocBreadcrumb = React.useContext(SymbolDocBreadcrumbsContext);
 
-  const children = getSymbolDocChildren(doc, meta);
+  const children = getSymbolDocChildren(doc, meta, name);
 
   const requiresCodeWrapper = [
     'symbol',
