@@ -44,10 +44,7 @@ export function useTheme(theme?: PartialEmotionCanvasTheme): EmotionCanvasTheme 
     // Context not supported or invalid (probably called from within a class component)
   }
 
-  // This CK support chaining?
-  // prettier-ignore
-  //@ts-ignore
-  const windowTheme = typeof window !== 'undefined' && window.workday && window.workday.canvas && window.workday.canvas.theme;
+  const windowTheme = typeof window !== 'undefined' && (window as any)?.workday?.canvas?.theme;
   if (windowTheme) {
     return getFilledTheme({canvas: windowTheme});
   }
