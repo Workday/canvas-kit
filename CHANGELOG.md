@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v8.5.2](https://github.com/Workday/canvas-kit/releases/tag/v8.5.2) (2023-03-09)
+
+### Infrastructure
+
+- ci: Add logging to the merge step in forward-merge ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v8.5.1](https://github.com/Workday/canvas-kit/releases/tag/v8.5.1) (2023-03-09)
 
 ### Components
