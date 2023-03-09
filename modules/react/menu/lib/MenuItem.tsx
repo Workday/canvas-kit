@@ -20,7 +20,7 @@ import {
 
 import {useMenuModel} from './useMenuModel';
 
-export interface MenuItemProps extends BoxProps {
+export interface MenuItemProps {
   /**
    * Optionally pass index to menu item. This should be done if `Menu.Item` components were created
    * via a `Array::map` function. This index will ensure keyboard navigation works even if items are
@@ -40,7 +40,7 @@ export interface MenuItemProps extends BoxProps {
   'aria-disabled'?: boolean;
 }
 
-export const StyledMenuItem = styled(Box.as('button'))<StyledType & MenuItemProps>(
+export const StyledMenuItem = styled(Box.as('button'))<StyledType & BoxProps>(
   ({theme}) => {
     return {
       ...type.levels.subtext.large,
