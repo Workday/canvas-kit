@@ -1,6 +1,12 @@
-import {Meta} from '@storybook/addon-docs';
-
-<Meta title="Welcome/Contributing" />
+<Meta
+  title="Guides/Contributing"
+  parameters={{
+    viewMode: 'docs',
+    previewTabs: {
+      canvas: {hidden: true},
+    },
+  }}
+/>
 
 # Contributing to Canvas
 
@@ -159,7 +165,7 @@ Upon commit, [lint-staged](https://github.com/okonet/lint-staged) will run your 
 ### Releases
 
 - Releases are prepared by updating package versions with `lerna version`, and updating the
-  [changelog](./CHANGELOG.md)
+  [changelog](/docs/changelog--page)
 - A PR is created for the above updates
 - After the release PR is approved and merged, we create a release in GitHub with the contents of
   the changelog updates.

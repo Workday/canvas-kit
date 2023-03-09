@@ -10,6 +10,10 @@ const hiddenStyle = {
   left: -99999,
 };
 
+/**
+ * This elemProps hook measures an overflow list target and reports it to an `OverflowListModel`.
+ * This is used in overflow detection.
+ */
 export const useOverflowListTarget = createElemPropsHook(useOverflowListModel)(
   (model, ref?: React.Ref<HTMLButtonElement>) => {
     const {elementRef, localRef} = useLocalRef(ref);

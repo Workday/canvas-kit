@@ -28,6 +28,20 @@ const {_: commands, path} = require('yargs')
       describe: chalk.gray('The path to execute the transform in (recursively).'),
     });
   })
+  .command('v8 [path]', chalk.gray('Canvas Kit v7 > v8 migration transform'), yargs => {
+    yargs.positional('path', {
+      type: 'string',
+      default: '.',
+      describe: chalk.gray('The path to execute the transform in (recursively).'),
+    });
+  })
+  .command('softDeprecate/Stack [path]', chalk.gray('Soft Deprecation of Stack transform'), yargs => {
+    yargs.positional('path', {
+      type: 'string',
+      default: '.',
+      describe: chalk.gray('The path to execute the transform in (recursively).'),
+    });
+  })
   .demandCommand(1, chalk.red.bold('You must provide a transform to apply.'))
   .strictCommands()
   .fail((msg, err, yargs) => {

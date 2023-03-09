@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {render, fireEvent} from '@testing-library/react';
-import TextInput from '../lib/TextInput';
+import {TextInput} from '../lib/TextInput';
 
 const id = 'Test Text Input';
 const placeholder = 'Test Text Input';

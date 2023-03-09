@@ -1,10 +1,13 @@
 import React from 'react';
 
 import {createContainer, ExtractProps} from '@workday/canvas-kit-react/common';
-import {FormField, useFormFieldOrientation} from '@workday/canvas-kit-preview-react/form-field';
+import {
+  FormField,
+  useFormFieldModel,
+  useFormFieldOrientation,
+} from '@workday/canvas-kit-preview-react/form-field';
 import {Stack} from '@workday/canvas-kit-react/layout';
 
-import {useTextAreaModel} from './hooks';
 import {TextAreaField} from './TextAreaField';
 
 export interface TextAreaProps extends ExtractProps<typeof FormField, never> {
@@ -16,7 +19,7 @@ export interface TextAreaProps extends ExtractProps<typeof FormField, never> {
 
 export const TextArea = createContainer('div')({
   displayName: 'TextArea',
-  modelHook: useTextAreaModel,
+  modelHook: useFormFieldModel,
   subComponents: {
     Field: TextAreaField,
     Label: FormField.Label,

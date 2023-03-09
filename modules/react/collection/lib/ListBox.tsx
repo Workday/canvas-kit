@@ -10,7 +10,7 @@ import {useListModel} from './useListModel';
 import {useListRenderItems} from './useListRenderItem';
 import {useListItemRegister} from './useListItemRegister';
 
-export interface ListBoxProps extends BoxProps {
+export interface ListBoxProps extends Omit<BoxProps, 'children'> {
   children?: React.ReactNode | ((item: any) => React.ReactNode);
 }
 
@@ -22,7 +22,7 @@ export const ListBoxItem = createSubcomponent('li')({
   return <Box as={Element} {...elemProps} />;
 });
 
-const useListBox = createElemPropsHook(useListModel)(model => {
+export const useListBox = createElemPropsHook(useListModel)(model => {
   return {
     style: {
       position: 'relative' as const,
@@ -32,8 +32,17 @@ const useListBox = createElemPropsHook(useListModel)(model => {
 });
 
 /**
- * Basic list box that supports virtualization. `ListBox.Item` contains a very simple list item
- * without much functionality. The `ListBox` contains two `Box` elements:
+ * The `ListBox` component that offers vertical rendering of a collection in the form of a
+ * 2-dimension list. It supports virtualization, rendering only visible items in the DOM while also
+ * providing aria attributes to allow screen readers to still navigate virtual lists. The `ListBox`
+ * contains a basic `ListBox.Item` that renders list items that render correctly with virtualization
+ * and adds `aria-setsize` and `aria-posinset` for screen readers.
+
+ * The `ListBox` is very basic and only adds enough functionality to render correctly. No additional
+ * behaviors are added to navigate or select. React Hooks are provided to add this functionality and
+ * are used by higher level components like `Menu` and `Menu.Item` which utilize `ListBox`. The
+ * `ListBox` contains two `Box` elements:
+ *
  * - Outer Box: Presentational container element responsible for overflow and height. `height` and
  *   `maxHeight` props will be applied here.
  * - Inner Box: The element responsible for the virtual container. Height is controlled by the model
@@ -45,9 +54,13 @@ export const ListBox = createContainer('ul')({
   elemPropsHook: useListBox,
   subComponents: {
     /**
-     * Extremely simple ListBox item that contains no functionality other than registering items and
-     * adding aria virtualization attributes. If you need more functionality, create your own
-     * component using list item hooks.
+     * The `ListBox.Item` is a simple placeholder for listbox items. The functionality of a
+     * collection item varies between components. For example, a `Tabs.Item` and a `Menu.Item` have
+     * shared functionality, but have different behavior. All collection-based components should
+     * implement a custom `Item` subcomponent using the collection-based behavior hooks. The [Roving
+     * Tabindex](#roving-tabindex) example uses the `elemPropsHook` to provide additional
+     * functionality. `elemPropsHook` is provided on all compound components and is useful in the
+     * example to add additional functionality without making a new component.
      */
     Item: ListBoxItem,
   },

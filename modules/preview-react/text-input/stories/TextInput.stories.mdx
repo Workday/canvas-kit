@@ -1,5 +1,4 @@
-import {Meta} from '@storybook/addon-docs';
-import {Specifications} from '@workday/canvas-kit-docs';
+import {SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
 
 import {TextInput} from '@workday/canvas-kit-preview-react/text-input';
 
@@ -18,7 +17,7 @@ import {ThemedError} from './examples/ThemedError';
 import {Error} from './examples/Error';
 import {Alert} from './examples/Alert';
 
-<Meta title="Preview/Inputs/Text Input/React" component={TextInput} />
+<Meta title="Preview/Inputs/Text Input" component={TextInput} />
 
 # Canvas Kit Text Input
 
@@ -129,11 +128,9 @@ used in an outer ring.
 
 <ExampleCodeBlock code={ThemedAlert} />
 
-## Props
+## Component API
 
-Undocumented props are spread to the underlying `<input>` element.
-
-<ArgsTable of={TextInput} />
+<SymbolDoc name="TextInput" fileName="/preview-react/" />
 
 ## Specifications
 

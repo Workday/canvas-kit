@@ -20,8 +20,8 @@ import {
 import {caretDownSmallIcon} from '@workday/canvas-system-icons-web';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 
-import SelectMenu from './SelectMenu';
-import SelectOption from './SelectOption';
+import {SelectMenu} from './SelectMenu';
+import {SelectOption} from './SelectOption';
 import {scrollIntoViewIfNeeded} from './scrolling';
 import {MenuPlacement, MenuVisibility} from './types';
 import {getCorrectedIndexByValue} from './utils';
@@ -288,7 +288,7 @@ const defaultRenderSelected: RenderSelectedFunction = option => {
   return option.label;
 };
 
-const SelectBase = ({
+export const SelectBase = ({
   'aria-labelledby': ariaLabelledBy,
   'aria-required': ariaRequired,
   as,
@@ -475,5 +475,3 @@ const SelectBase = ({
     </SelectWrapper>
   );
 };
-
-export default SelectBase;

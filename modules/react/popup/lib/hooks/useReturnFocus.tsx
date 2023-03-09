@@ -33,8 +33,8 @@ function getFocusableElement(element: Element | null): Element | null {
 
 /**
  * Returns focus to the target element when the popup is hidden. This works well with
- * `useInitialFocus`. This should be used with `useFocusRedirect` or `useFocusTrap` for a complete
- * focus management solution.
+ * {@link useInitialFocus}. This should be used with {@link useFocusRedirect} or
+ * {@link useFocusTrap} for a complete focus management solution.
  *
  * This should be used on popup elements that use `useInitialFocus`.
  */

@@ -1,16 +1,20 @@
+import React from 'react';
+
 type StorybookParameters = {
   chromatic?: {
     delay?: number;
     disable?: boolean;
     pauseAnimationAtEnd?: boolean;
     diffThreshold?: number;
+    /** Array of screen widths to capture */
+    viewports?: number[];
   };
   [key: string]: any;
 };
 
 type StoriesDefaultExport = {
   title: string;
-  component?: React.ReactNode;
+  component?: any;
   decorators?: any[];
   parameters?: StorybookParameters;
 };

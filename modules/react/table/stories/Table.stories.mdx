@@ -1,4 +1,4 @@
-import {Meta} from '@storybook/addon-docs';
+import {SymbolDoc} from '@workday/canvas-kit-docs';
 
 import {Table, TableRow} from '@workday/canvas-kit-react/table';
 
@@ -6,7 +6,7 @@ import {Basic} from './examples/Basic';
 import {RowHeader} from './examples/RowHeader';
 import {RowStates} from './examples/RowStates';
 
-<Meta title="Components/Containers/Table/React" component={Table} />
+<Meta title="Components/Containers/Table" component={Table} />
 
 # Canvas Kit Table
 
@@ -33,11 +33,9 @@ create your Table.
 
 <ExampleCodeBlock code={Basic} />
 
-## Components
+## Component API
 
 ### Table
-
-#### Usage
 
 `Table` is a simple wrapper of the `<table>` element with Canvas styles. Use it as you would a
 standard `<table>` element.
@@ -69,8 +67,6 @@ standard `<table>` element.
 
 ### TableRow
 
-#### Usage
-
 `TableRow` wraps `<tr>` and supports additional props to customize the style of the row. Use it as
 you would a standard `<tr>` element.
 
@@ -95,13 +91,9 @@ Set the `state` prop of the `TableRow` to display it using one of several differ
 | `TableRow.State.InputError` | When there are errors with one or more (but not all) cells in the row. |
 | `TableRow.State.Selected`   | Indicates the selected row to the user.                                |
 
+<ExampleCodeBlock code={RowStates} />
+
 `InputAlert` and `InputError` are identical to the `Alert` and `Error` states, respectively, except
 they lack a darkened border around the row.
 
-<ExampleCodeBlock code={RowStates} />
-
-#### Props
-
-Undocumented props are spread to the underlying `<tr>` element.
-
-<ArgsTable of={TableRow} />
+<SymbolDoc name="TableRow" fileName="/react/" />

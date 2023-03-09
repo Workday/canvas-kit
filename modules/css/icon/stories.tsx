@@ -16,7 +16,7 @@ const containerStyle = css({
   },
 });
 
-class IconDemo extends Component {
+class IconDemo extends Component<React.PropsWithChildren> {
   componentDidMount() {
     initializeIcons();
   }
@@ -26,7 +26,7 @@ class IconDemo extends Component {
   }
 }
 
-storiesOf('Tokens/Icon/CSS', module)
+storiesOf('CSS/Tokens/Icon', module)
   .addParameters({ReadmePath: 'css/icon'})
   .add('Accent Icon', () => (
     <div className="story">

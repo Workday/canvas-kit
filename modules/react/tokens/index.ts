@@ -33,7 +33,7 @@ import {type,
 } from './lib/type';
 import {CSSProperties} from './lib/types';
 
-const canvas = {
+export const canvas = {
   buttonColors,
   chartingColorOffsets,
   chartingColors,
@@ -67,7 +67,6 @@ export {
   CanvasDepthValues,
   CSSProperties,
 };
-export default canvas;
 
 export type {
   CanvasBorderRadius,

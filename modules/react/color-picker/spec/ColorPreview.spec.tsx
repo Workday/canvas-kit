@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {render} from '@testing-library/react';
-import ColorPreview from '../lib/ColorPreview';
+import {ColorPreview} from '../lib/ColorPreview';
 
 const id = 'color-preview';
 const value = 'eee';
