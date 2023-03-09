@@ -125,7 +125,7 @@ export const SymbolDialog = ({value}: SymbolDialogProps) => {
     }
   };
 
-  // If we're not within a nested context, we render a Hyperlink. This help that dialog know it's target.
+  // If we're inside a nested context, we render a Hyperlink. This button will update the dialog instead of rendering a new one.
   if (nestedContext) {
     return (
       <ButtonHyperLink
@@ -284,7 +284,7 @@ function findDoc({name, fileName}: ValueDocProps): types.ExportedSymbol<types.Va
 }
 
 export const useDoc = (criteria: ValueDocProps) => {
-  // Listen to criteria.name or file.name so that we can re fetch docs in the dialog
+  // Listen to criteria.name and criteria.fileName so that we can re-fetch docs in the dialog
   const doc = React.useMemo(() => findDoc(criteria), [criteria.name, criteria.fileName || '']);
 
   return doc;
