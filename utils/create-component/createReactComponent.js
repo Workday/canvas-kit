@@ -35,7 +35,7 @@ module.exports = (modulePath, name, description, prerelease, category) => {
   const pascalCaseName = getPascalCaseName(name);
   const titleCaseName = getTitleCaseName(name);
   const rootPath = '../../..';
-  const storyPath = `${prereleaseTitle || `Components/${category}`}/${titleCaseName}/React`;
+  const storyPath = `${prereleaseTitle || `Components/${category}`}/${titleCaseName}`;
   const testingStoryPath = `Testing/${prereleaseTitle || category}/${titleCaseName}`;
 
   const files = {
@@ -73,7 +73,14 @@ module.exports = (modulePath, name, description, prerelease, category) => {
     },
     mdxStories: {
       path: `stories/${pascalCaseName}.stories.mdx`,
-      contents: mdxStories(moduleName, storyPath, pascalCaseName, titleCaseName, prerelease, description),
+      contents: mdxStories(
+        moduleName,
+        storyPath,
+        pascalCaseName,
+        titleCaseName,
+        prerelease,
+        description
+      ),
     },
     basicStories: {
       path: `stories/examples/Basic.tsx`,

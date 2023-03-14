@@ -1,0 +1,28 @@
+import React from 'react';
+
+import {Combobox} from '@workday/canvas-kit-react/combobox';
+
+export const Basic = () => {
+  const [value, setValue] = React.useState('');
+  return (
+    <Combobox
+      value={value}
+      onChange={event => {
+        console.log(event.target.value);
+        setValue(event.target.value);
+      }}
+    >
+      <Combobox.Target />
+      <Combobox.Menu.Popper>
+        <Combobox.Menu.Card>
+          <Combobox.Menu.List>
+            <Combobox.Menu.Item>First Option</Combobox.Menu.Item>
+            <Combobox.Menu.Item>Second Option</Combobox.Menu.Item>
+            <Combobox.Menu.Item>Third Option</Combobox.Menu.Item>
+            <Combobox.Menu.Item>Fourth Option</Combobox.Menu.Item>
+          </Combobox.Menu.List>
+        </Combobox.Menu.Card>
+      </Combobox.Menu.Popper>
+    </Combobox>
+  );
+};

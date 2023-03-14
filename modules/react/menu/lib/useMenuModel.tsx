@@ -2,9 +2,7 @@ import {createModelHook} from '@workday/canvas-kit-react/common';
 import {
   useAlwaysCloseOnOutsideClick,
   useCloseOnEscape,
-  useFocusRedirect,
   usePopupModel,
-  useReturnFocus,
 } from '@workday/canvas-kit-react/popup';
 import {
   multiSelectionManager,
@@ -18,6 +16,7 @@ export const useMenuModel = createModelHook({
     ...usePopupModel.defaultConfig,
     /** Determines the default selection manager used as well as if the menu closes when an item is selected */
     mode: 'single' as 'single' | 'multiple',
+    focusModel: '',
   },
   requiredConfig: {
     ...useListModel.requiredConfig,
@@ -43,8 +42,6 @@ export const useMenuModel = createModelHook({
 
   useAlwaysCloseOnOutsideClick(popup);
   useCloseOnEscape(popup);
-  useReturnFocus(popup);
-  useFocusRedirect(popup);
 
   const state = {mode: config.mode, ...list.state, ...popup.state};
 
@@ -53,5 +50,5 @@ export const useMenuModel = createModelHook({
     ...popup.events,
   };
 
-  return {...list, state, events};
+  return {...list, ...popup, state, events};
 });

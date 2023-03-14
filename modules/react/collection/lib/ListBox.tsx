@@ -4,13 +4,13 @@ import {
   createElemPropsHook,
   createSubcomponent,
 } from '@workday/canvas-kit-react/common';
-import {Box, BoxProps} from '@workday/canvas-kit-react/layout';
+import {Box, Flex, FlexProps} from '@workday/canvas-kit-react/layout';
 
 import {useListModel} from './useListModel';
 import {useListRenderItems} from './useListRenderItem';
 import {useListItemRegister} from './useListItemRegister';
 
-export interface ListBoxProps extends Omit<BoxProps, 'children'> {
+export interface ListBoxProps extends Omit<FlexProps, 'children'> {
   children?: React.ReactNode | ((item: any) => React.ReactNode);
 }
 
@@ -18,7 +18,7 @@ export const ListBoxItem = createSubcomponent('li')({
   displayName: 'Item',
   modelHook: useListModel,
   elemPropsHook: useListItemRegister,
-})<BoxProps>((elemProps, Element) => {
+})<FlexProps>((elemProps, Element) => {
   return <Box as={Element} {...elemProps} />;
 });
 
@@ -75,9 +75,9 @@ export const ListBox = createContainer('ul')({
       maxHeight={maxHeight}
       overflowY={model.state.orientation === 'vertical' ? 'auto' : undefined}
     >
-      <Box as={Element} {...elemProps}>
+      <Flex as={Element} {...elemProps}>
         {useListRenderItems(model, elemProps.children)}
-      </Box>
+      </Flex>
     </Box>
   );
 });

@@ -40,7 +40,7 @@ export interface MenuItemProps {
   'aria-disabled'?: boolean;
 }
 
-const StyledItem = styled(Box.as('button'))<StyledType>(
+export const StyledMenuItem = styled(Box.as('button'))<StyledType>(
   ({theme}) => {
     return {
       ...type.levels.subtext.large,
@@ -66,7 +66,7 @@ const StyledItem = styled(Box.as('button'))<StyledType>(
           fill: iconColors.hover,
         },
       },
-      '&:focus': {
+      '&:focus, &.focus': {
         outline: 'none',
         backgroundColor: theme.canvas.palette.primary.main,
         color: typeColors.inverse,
@@ -90,7 +90,7 @@ const StyledItem = styled(Box.as('button'))<StyledType>(
             fill: iconColors.hover,
           },
         },
-        '&:focus': {
+        '&:focus, &.focus': {
           '.wd-icon-background ~ .wd-icon-accent, .wd-icon-background ~ .wd-icon-accent2': {
             fill: iconColors.hover,
           },
@@ -103,7 +103,7 @@ const StyledItem = styled(Box.as('button'))<StyledType>(
         '.wd-icon-fill, .wd-icon-accent, .wd-icon-accent2': {
           fill: iconColors.disabled,
         },
-        '&:focus': {
+        '&:focus, &.focus': {
           backgroundColor: colors.blueberry200,
           '.wd-icon-background ~ .wd-icon-accent, .wd-icon-background ~ .wd-icon-accent2': {
             fill: iconColors.disabled,
@@ -180,9 +180,9 @@ export const MenuItem = createSubcomponent('button')({
 })<MenuItemProps>(({children, ...elemProps}, Element) => {
   return (
     <OverflowTooltip placement="left">
-      <StyledItem minHeight={space.xl} as={Element} {...elemProps}>
+      <StyledMenuItem minHeight={space.xl} as={Element} {...elemProps}>
         {children}
-      </StyledItem>
+      </StyledMenuItem>
     </OverflowTooltip>
   );
 });

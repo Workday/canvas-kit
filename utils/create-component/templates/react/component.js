@@ -15,11 +15,20 @@ export interface ${pascalCaseName}Props extends ExtractProps<typeof Box, never> 
   children: React.ReactNode;
 }
 
+/**
+ * JSDoc for ${pascalCaseName}. Will be part of the Component API docs
+ */
 export const ${pascalCaseName} = createContainer('div')({
   displayName: '${pascalCaseName}',
   modelHook: use${pascalCaseName}Model,
   subComponents: {
+    /**
+     * JSDoc for the ${pascalCaseName}.Target. Will be part of the ComponentAPI docs
+     */
     Target: ${pascalCaseName}Target,
+    /**
+     * JSDoc for ${pascalCaseName}.Content. Will be part of the Component API docs
+     */
     Content: ${pascalCaseName}Content,
   },
 })<${pascalCaseName}Props>(({children, ...elemProps}, Element) => {

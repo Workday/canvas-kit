@@ -37,7 +37,11 @@ export const useListItemRegister = createElemPropsHook(useListModel)(
       virtual?: VirtualItem;
     } = {}
   ) => {
-    const [localId, setLocalId] = React.useState(elemProps['data-id'] || elemProps.item?.id || '');
+    const [localId, setLocalId] = React.useState(
+      elemProps['data-id'] || elemProps.item?.id || typeof elemProps.children === 'string'
+        ? (elemProps.children as string)
+        : ''
+    );
     const {localRef, elementRef} = useLocalRef(useForkRef(ref, elemProps.virtual?.measureRef));
 
     // if the list is virtual, force the correct styling. Without this, weird things happen...
