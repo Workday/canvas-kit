@@ -11,11 +11,9 @@ any questions.
 - [Codemod](#codemod)
 - [Component Deprecations](#component-deprecations)
   - [Drawer](#drawer)
-  - [Layout and Column](#layout-and-column)
-	- [Stack](#stack-hstack-vstack)
+  - [Layout and Column](#layout-and-column) - [Stack](#stack-hstack-vstack)
 - [Component Updates](#component-updates)
-  - [Buttons](#buttons)
-	- [Toast](#toast)
+  - [Buttons](#buttons) - [Toast](#toast)
 
 ## Codemod
 
@@ -121,7 +119,7 @@ We've promoted `Toast` from Labs (`@workday/canvas-kit-labs-react`) to the Main
 - This component is a
   [compound component](/getting-started/for-developers/resources/compound-components/).
 - It has a `mode` prop that allows for proper accessibility attributes to be defined.
-- It's sub components allow for more flexibility and access to lower level elements.
+- Its sub components allow for more flexibility and access to lower level elements.
 
 ```tsx
 // v8
@@ -138,5 +136,5 @@ We've promoted `Toast` from Labs (`@workday/canvas-kit-labs-react`) to the Main
 </Toast>
 ```
 
-🤖 The codemod will convert the `Toast` into a compound component with it's sub components
-having the correct props.
+🤖 The codemod will convert the `Toast` into a compound component with it's sub components having
+the correct props.

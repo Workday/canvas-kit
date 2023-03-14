@@ -14,6 +14,38 @@ import {useToastModel} from './hooks/useToastModel';
 export interface ToastProps extends Omit<ExtractProps<typeof Popup.Card, never>, 'model'> {}
 
 /**
+ * The function helps set the correct aria attributes based on the mode
+ * @param mode Defines what aria attributes will be added to the main container
+ * @param id Used to tie the Toast to Toast.Message for screen readers
+ */
+const getAriaAttributes = (mode: string, id: string): React.HtmlHTMLAttributes<HTMLDivElement> => {
+  switch (mode) {
+    case 'dialog':
+      return {
+        'aria-describedby': id,
+        // This is added by Popup.Card, so overwriting to remove it
+        'aria-labelledby': undefined,
+        role: 'dialog',
+      };
+    case 'alert':
+      return {
+        role: 'alert',
+        'aria-live': 'assertive',
+        'aria-atomic': true,
+      };
+    case 'status':
+      return {
+        role: 'status',
+        'aria-live': 'polite',
+        'aria-atomic': true,
+      };
+    default: {
+      return {};
+    }
+  }
+};
+
+/**
  * Toast is a compound component that has different modes based on its contents. The modes add the proper aria attributes for accessibility
  *
  * ```tsx
@@ -64,39 +96,13 @@ export const Toast = createContainer('div')({
      */
     Link: ToastLink,
   },
-})<ToastProps>(({children, ...elemProps}, Element, model) => {
-  const getAriaAttributes = (mode: string): React.HtmlHTMLAttributes<HTMLDivElement> => {
-    switch (mode) {
-      case 'dialog':
-        return {
-          'aria-describedby': model.state.id,
-          // This is added by Popup.Card, so overwriting to remove it
-          'aria-labelledby': undefined,
-          role: 'dialog',
-        };
-      case 'alert':
-        return {
-          role: 'alert',
-          'aria-live': 'assertive',
-          'aria-atomic': true,
-        };
-      case 'status':
-        return {
-          role: 'status',
-          'aria-live': 'polite',
-          'aria-atomic': true,
-        };
-      default: {
-        return {};
-      }
-    }
-  };
+})<ToastProps>(({children, ...elemProps}, _, model) => {
   return (
     <Popup.Card
       as={Flex}
       width={360}
       padding="0"
-      {...getAriaAttributes(model.state.mode)}
+      {...getAriaAttributes(model.state.mode, model.state.id)}
       flexDirection="row"
       gap="xxxs"
       {...elemProps}

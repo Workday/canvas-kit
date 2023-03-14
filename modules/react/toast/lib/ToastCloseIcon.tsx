@@ -6,7 +6,7 @@ export interface ToastCloseIconProps extends ExtractProps<typeof Popup.CloseIcon
 
 export const ToastCloseIcon = createComponent('button')({
   displayName: 'Toast.CloseIcon',
-  Component: ({...elemProps}: ToastCloseIconProps, ref, Element) => {
+  Component: (elemProps: ToastCloseIconProps, ref, Element) => {
     return (
       <Popup.CloseIcon as={Element} ref={ref} size="small" position="relative" {...elemProps} />
     );
