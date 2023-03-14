@@ -114,19 +114,21 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
       const lineBreakEnd = j.jsxText('\n');
 
       // Filter out all old props
-      const filterAttr = nodePath.value.openingElement.attributes?.filter(attr => {
-        if (attr.type === 'JSXAttribute') {
-          return (
-            attr.name.name !== 'actionText' &&
-            attr.name.name !== 'icon' &&
-            attr.name.name !== 'onActionClick' &&
-            attr.name.name !== 'iconColor' &&
-            attr.name.name !== 'icon' &&
-            attr.name.name !== 'onClose' &&
-            attr.name.name !== 'color'
-          );
-        }
-        return attr;
+      const filteredAttrNames = [
+        'actionText',
+        'icon',
+        'iconColor',
+        'onActionClick',
+        'onClose',
+        'color',
+      ];
+      
+      const filterAttr  = nodePath.value.openingElement.attributes?.filter(attr => {
+        return !(
+          attr.type === 'JSXAttribute' &&
+          typeof attr.name.name === 'string' &&
+          filteredAttrNames.includes(attr.name.name)
+        );
       });
 
       nodePath.value.openingElement.attributes = filterAttr;
