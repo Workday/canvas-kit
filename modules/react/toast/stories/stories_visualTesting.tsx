@@ -23,7 +23,7 @@ export const ToastStates = withSnapshotsEnabled(() => {
             props: {
               mode: 'polite',
               icon: checkIcon,
-              iconColor: colors.greenApple400,
+              iconColor: 'greenApple400',
               message: 'Your workbook was successfully processed.',
             },
           },
@@ -32,7 +32,7 @@ export const ToastStates = withSnapshotsEnabled(() => {
             props: {
               mode: 'polite',
               icon: checkIcon,
-              iconColor: colors.greenApple400,
+              iconColor: 'greenApple400',
               message: 'Your workbook was successfully processed.',
             },
           },
@@ -52,7 +52,7 @@ export const ToastStates = withSnapshotsEnabled(() => {
               mode: 'interactive',
               hasAction: true,
               icon: checkIcon,
-              iconColor: colors.greenApple400,
+              iconColor: 'greenApple400',
               message: 'Your workbook was successfully processed.',
             },
           },
@@ -63,7 +63,7 @@ export const ToastStates = withSnapshotsEnabled(() => {
               hasCloseIcon: true,
               padding: 's',
               icon: checkIcon,
-              iconColor: colors.greenApple400,
+              iconColor: 'greenApple400',
               message: 'Your workbook was successfully processed.',
             },
           },
@@ -74,7 +74,7 @@ export const ToastStates = withSnapshotsEnabled(() => {
               hasCloseIcon: true,
               depth: 'none',
               icon: checkIcon,
-              iconColor: colors.greenApple400,
+              iconColor: 'greenApple400',
               message: 'Your workbook was successfully processed.',
             },
           },
@@ -85,7 +85,7 @@ export const ToastStates = withSnapshotsEnabled(() => {
               hasCloseIcon: true,
               depth: 1,
               icon: checkIcon,
-              iconColor: colors.greenApple400,
+              iconColor: 'greenApple400',
               message: 'Your workbook was successfully processed.',
             },
           },
@@ -96,7 +96,7 @@ export const ToastStates = withSnapshotsEnabled(() => {
               hasCloseIcon: true,
               depth: 2,
               icon: checkIcon,
-              iconColor: colors.greenApple400,
+              iconColor: 'greenApple400',
               message: 'Your workbook was successfully processed.',
             },
           },
@@ -107,7 +107,7 @@ export const ToastStates = withSnapshotsEnabled(() => {
               hasCloseIcon: true,
               depth: 3,
               icon: checkIcon,
-              iconColor: colors.greenApple400,
+              iconColor: 'greenApple400',
               message: 'Your workbook was successfully processed.',
             },
           },
@@ -118,7 +118,7 @@ export const ToastStates = withSnapshotsEnabled(() => {
               hasCloseIcon: true,
               depth: 4,
               icon: checkIcon,
-              iconColor: colors.greenApple400,
+              iconColor: 'greenApple400',
               message: 'Your workbook was successfully processed.',
             },
           },
@@ -129,7 +129,7 @@ export const ToastStates = withSnapshotsEnabled(() => {
               hasCloseIcon: true,
               depth: 5,
               icon: checkIcon,
-              iconColor: colors.greenApple400,
+              iconColor: 'greenApple400',
               message: 'Your workbook was successfully processed.',
             },
           },
@@ -140,7 +140,7 @@ export const ToastStates = withSnapshotsEnabled(() => {
               hasCloseIcon: true,
               depth: 6,
               icon: checkIcon,
-              iconColor: colors.greenApple400,
+              iconColor: 'greenApple400',
               message: 'Your workbook was successfully processed.',
             },
           },
@@ -151,7 +151,7 @@ export const ToastStates = withSnapshotsEnabled(() => {
               hasCloseIcon: true,
               width: 300,
               icon: checkIcon,
-              iconColor: colors.greenApple400,
+              iconColor: 'greenApple400',
               message: 'Your workbook was successfully processed.',
             },
           },
@@ -162,7 +162,7 @@ export const ToastStates = withSnapshotsEnabled(() => {
               hasCloseIcon: true,
               width: 300,
               icon: checkIcon,
-              iconColor: colors.greenApple400,
+              iconColor: 'greenApple400',
               message: 'There was an error',
             },
           },
@@ -174,9 +174,9 @@ export const ToastStates = withSnapshotsEnabled(() => {
             <Toast.Icon icon={icon} color={iconColor} />
             <Toast.Body>
               <Toast.Message>Your workbook was successfully processed.</Toast.Message>
-              {hasAction ? <Toast.Link href="#href">Custom Link</Toast.Link> : null}
+              {hasAction && <Toast.Link href="#href">Custom Link</Toast.Link>}
             </Toast.Body>
-            {hasCloseIcon ? <Toast.CloseIcon aria-label="Close" /> : null}
+            {hasCloseIcon && <Toast.CloseIcon aria-label="Close" />}
           </Toast>
         )}
       </ComponentStatesTable>
