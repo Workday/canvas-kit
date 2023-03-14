@@ -12,17 +12,6 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
     return file.source;
   }
 
-  // Replace default import with named or renamed import
-  root.find(j.ImportDefaultSpecifier).forEach(nodePath => {
-    const parent = nodePath.parent as ASTPath<ImportDeclaration>;
-    const importSource = String(parent.node.source.value) as typeof toastPackage;
-    const localName = nodePath.value.local?.name;
-
-    if (toastPackage === importSource && localName) {
-      nodePath.replace(j.importSpecifier(j.identifier('Toast'), j.identifier(localName)));
-    }
-  });
-
   const {importMap, styledMap} = getImportRenameMap(j, root, '@workday/canvas-kit-react/toast');
 
   root
@@ -83,10 +72,8 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
       );
 
       const updatedIconAttrs = unchangedIconAttributes?.map(specifier => {
-        if (specifier.type === 'JSXAttribute') {
-          if (specifier.name.name === 'iconColor') {
-            specifier.name.name = 'color';
-          }
+        if (specifier.type === 'JSXAttribute' && specifier.name.name === 'iconColor') {
+          specifier.name.name = 'color';
         }
         return specifier;
       });
