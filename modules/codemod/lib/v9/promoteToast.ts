@@ -67,7 +67,7 @@ const transform: Transform = (file, api) => {
 
   foundImport.forEach(importPath => {
     if (
-      importPath.value.specifiers?.length === 0 ||
+      !importPath.value.specifiers?.length ||
       importPath.value.source.value === '@workday/canvas-kit-labs-react/toast'
     ) {
       importPath.prune();
