@@ -89,8 +89,7 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
 
       const linkAttributes = attributes?.filter(
         attr =>
-          (attr.type === 'JSXAttribute' && attr.name.name === 'actionText') ||
-          (attr.type === 'JSXAttribute' && attr.name.name === 'onActionClick')
+          (attr.type === 'JSXAttribute' && (attr.name.name === 'actionText' || attr.name.name === 'onActionClick')
       );
 
       // Elements
