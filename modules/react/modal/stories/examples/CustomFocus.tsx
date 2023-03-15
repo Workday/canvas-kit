@@ -3,7 +3,7 @@ import {Modal, useModalModel} from '@workday/canvas-kit-react/modal';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {FormField} from '@workday/canvas-kit-react/form-field';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
-import {HStack, Box} from '@workday/canvas-kit-react/layout';
+import {Flex, Box} from '@workday/canvas-kit-react/layout';
 
 export const CustomFocus = () => {
   const ref = React.useRef<HTMLInputElement>(null);
@@ -31,12 +31,12 @@ export const CustomFocus = () => {
               <TextInput ref={ref} value={value} onChange={e => setValue(e.currentTarget.value)} />
             </FormField>
           </Modal.Body>
-          <HStack spacing="s" padding="xxs" marginTop="xxs">
+          <Flex gap="s" padding="xxs" marginTop="xxs">
             <Modal.CloseButton as={PrimaryButton} onClick={handleAcknowledge}>
               Acknowledge
             </Modal.CloseButton>
             <Modal.CloseButton>Cancel</Modal.CloseButton>
-          </HStack>
+          </Flex>
         </Modal.Card>
       </Modal.Overlay>
     </Modal>

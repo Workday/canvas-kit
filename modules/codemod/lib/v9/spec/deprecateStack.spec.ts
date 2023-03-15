@@ -1,5 +1,5 @@
 import {expectTransformFactory} from './expectTransformFactory';
-import transformer from '../softDeprecateStack';
+import transformer from '../deprecateStack';
 const context = describe;
 
 const expectTransform = expectTransformFactory(transformer);
@@ -46,7 +46,7 @@ describe('Canvas Kit Deprecate Stack Codemod', () => {
       expectTransform(input, expected);
     });
 
-    it('should properly transform mutliple imports from @workday/canvas-kit-react into one', () => {
+    it('should properly transform multiple imports from @workday/canvas-kit-react into one', () => {
       const input = `
         import {
           Grid,
@@ -260,6 +260,172 @@ describe('Canvas Kit Deprecate Stack Codemod', () => {
       expectTransform(input, expected);
     });
 
+    it('should properly transform StackProps type reference identifiers', () => {
+      const input = `
+      import { Stack } from '@workday/canvas-kit-react/layout';
+      import { CustomCard } from '../components/CustomCard';
+
+      return (
+        <Stack spacing="s">
+          <CustomCard spacing="s" />
+        </Stack>
+      );
+      `;
+      const expected = `
+      import { Flex } from '@workday/canvas-kit-react/layout';
+      import { CustomCard } from '../components/CustomCard';
+
+      return (
+        <Flex gap="s">
+          <CustomCard spacing="s" />
+        </Flex>
+      );
+      `;
+
+      expectTransform(input, expected);
+    });
+
+    it('should properly transform spacing keys reference identifiers', () => {
+      const input = `
+      import { StackProps } from '@workday/canvas-kit-react/layout';
+
+      type CustomStackProps = StackProps;
+      interface AnotherStackProps extends StackProps {};
+      `;
+      const expected = `
+      import { FlexProps } from '@workday/canvas-kit-react/layout';
+
+      type CustomStackProps = FlexProps;
+      interface AnotherStackProps extends FlexProps {};
+      `;
+
+      expectTransform(input, expected);
+    });
+
+    it('should properly transform spacing expression reference identifiers', () => {
+      const input = `
+      import { Stack } from '@workday/canvas-kit-react/layout';
+
+      <Card as={Stack} spacing="s"/>
+      `;
+      const expected = `
+      import { Flex } from '@workday/canvas-kit-react/layout';
+
+      <Card as={Flex} gap="s"/>
+      `;
+
+      expectTransform(input, expected);
+    });
+
+    it('should properly transform the spacing prop on specific components that extend Stack', () => {
+      const input = `
+      import { Breadcrumbs } from '@workday/canvas-kit-react/breadcrumbs';
+
+      <Breadcrumbs spacing="s">
+        <Breadcrumbs.List spacing="s"/>
+      </Breadcrumbs>
+      `;
+      const expected = `
+      import { Breadcrumbs } from '@workday/canvas-kit-react/breadcrumbs';
+
+      <Breadcrumbs gap="s">
+        <Breadcrumbs.List gap="s"/>
+      </Breadcrumbs>
+      `;
+
+      expectTransform(input, expected);
+    });
+
+    it('should properly transform the spacing prop on specific components that extend Stack', () => {
+      const input = `
+      import { Stack } from '@workday/canvas-kit-react/layout';
+      import { Breadcrumbs } from '../components/Breadcrumbs';
+
+      return (
+        <Stack spacing="s">
+          <Breadcrumbs spacing="s" />
+        </Stack>
+      );
+      `;
+      const expected = `
+      import { Flex } from '@workday/canvas-kit-react/layout';
+      import { Breadcrumbs } from '../components/Breadcrumbs';
+
+      return (
+        <Flex gap="s">
+          <Breadcrumbs spacing="s" />
+        </Flex>
+      );
+      `;
+
+      expectTransform(input, expected);
+    });
+
+    it('should properly transform the spacing prop on specific components that extend Stack', () => {
+      const input = `
+      import { ActionBar } from '@workday/canvas-kit-react/action-bar';
+
+      <ActionBar spacing="l">
+        <ActionBar.List spacing="s"/>
+      </ActionBar>
+      `;
+      const expected = `
+      import { ActionBar } from '@workday/canvas-kit-react/action-bar';
+
+      <ActionBar gap="l">
+        <ActionBar.List gap="s"/>
+      </ActionBar>
+      `;
+
+      expectTransform(input, expected);
+    });
+
+    it('should not affect specific components that do not extend Stack', () => {
+      const input = `
+      import { Grid, Flex } from '@workday/canvas-kit-react/layout';
+      import { ActionBar } from '@workday/canvas-kit-react/action-bar';
+
+      <Grid gridGap="l">
+        <ActionBar>
+          <ActionBar.List spacing="s"/>
+        </ActionBar>
+      </Grid>
+      `;
+      const expected = `
+      import { Grid, Flex } from '@workday/canvas-kit-react/layout';
+      import { ActionBar } from '@workday/canvas-kit-react/action-bar';
+
+      <Grid gridGap="l">
+        <ActionBar>
+          <ActionBar.List gap="s"/>
+        </ActionBar>
+      </Grid>
+      `;
+
+      expectTransform(input, expected);
+    });
+
+    it('should not transform other keys reference identifiers', () => {
+      const input = `
+      import { GridProps } from '@workday/canvas-kit-react/layout';
+
+      type CustomStackProps = GridProps;
+      interface AnotherStackProps extends GridProps {
+        children?: GridProps['gridColumnGap'];
+      }
+      `;
+      const expected = `
+      import { GridProps } from '@workday/canvas-kit-react/layout';
+
+      type CustomStackProps = GridProps;
+      interface AnotherStackProps extends GridProps {
+        children?: GridProps['gridColumnGap'];
+      }
+      `;
+
+      expectTransform(input, expected);
+    });
+
     it('should properly transform HStackProps type reference identifiers', () => {
       const input = `
       import { HStackProps } from '@workday/canvas-kit-react/layout';
@@ -460,6 +626,34 @@ describe('Canvas Kit Deprecate Stack Codemod', () => {
       export const BasicStack = () => (
         <Flex border="solid 2px" gap="l">
           Hello World
+        </Flex>
+      );
+      `;
+
+      expectTransform(input, expected);
+    });
+
+    it('should properly transform spacing identifiers to gap in nested components', () => {
+      const input = `
+      import {VStack, Stack} from '@workday/canvas-kit-react/layout';
+
+      export const BasicStack = () => (
+        <VStack spacing='xxxs'>
+          <Stack spacing='s' >
+            Hello World
+          </Stack>
+        </VStack>
+      );
+      `;
+
+      const expected = `
+      import { Flex } from '@workday/canvas-kit-react/layout';
+
+      export const BasicStack = () => (
+        <Flex gap='xxxs' flexDirection="column">
+          <Flex gap='s' >
+            Hello World
+          </Flex>
         </Flex>
       );
       `;
