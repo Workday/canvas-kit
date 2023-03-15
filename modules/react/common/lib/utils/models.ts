@@ -510,10 +510,10 @@ export const createModelHook = <TDefaultConfig extends {}, TRequiredConfig exten
     const elemProps = {};
     for (const key in props) {
       if (
-        !defaultConfig.hasOwnProperty(key) &&
+        (!defaultConfig.hasOwnProperty(key) &&
         !requiredConfig.hasOwnProperty(key) &&
         !callbacksRef.current.includes(key) &&
-        !guardsRef.current.includes(key)
+        !guardsRef.current.includes(key)) || key === "id"
       ) {
         // @ts-ignore  Typescript complains about index signatures and this type is never exposed in definitions, so suppress the error
         elemProps[key] = props[key];

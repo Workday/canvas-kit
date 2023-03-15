@@ -4,11 +4,15 @@ import {
   composeHooks,
   createElemPropsHook,
   createSubcomponent,
+  dispatchInputEvent,
   ExtractProps,
 } from '@workday/canvas-kit-react/common';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {usePopupTarget} from '@workday/canvas-kit-react/popup';
-import {useListActiveDescendant} from '@workday/canvas-kit-react/collection';
+import {
+  useListActiveDescendant,
+  useListKeyboardHandler,
+} from '@workday/canvas-kit-react/collection';
 
 import {useComboboxModel} from './useComboboxModel';
 
@@ -23,7 +27,10 @@ export const useComboboxTarget = composeHooks(
           model.events.show(event);
           model.events.setWidth(event.currentTarget.clientWidth);
         }
-        if (event.key === 'Enter' && model.state.visibility === 'visible') {
+        if (event.key === 'Escape') {
+          dispatchInputEvent(event.currentTarget as HTMLElement, '');
+        }
+        if (event.key === 'Enter' && !event.metaKey && model.state.visibility === 'visible') {
           model.events.select({id: model.state.cursorId});
           if (model.state.mode === 'single') {
             model.events.hide(event);
@@ -40,9 +47,16 @@ export const useComboboxTarget = composeHooks(
         }
       },
       value: model.state.value || undefined,
+      role: 'combobox',
+      'aria-haspopup': true,
+      'aria-expanded': model.state.visibility === 'visible',
+      'aria-autocomplete': 'list',
+      'aria-controls': `${model.state.id}-list`,
+      id: model.state.id,
     };
   }),
   useListActiveDescendant,
+  useListKeyboardHandler,
   usePopupTarget
 );
 

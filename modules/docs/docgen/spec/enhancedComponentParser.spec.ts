@@ -274,7 +274,7 @@ describe('enhancedComponentParser', () => {
         }
       `
       );
-      const symbols = parse(program, 'test.tsx', [enhancedComponentParser]);
+      const symbols = parse(program, 'test.tsx', [enhancedComponentParser]); //?
 
       expect(symbols).toHaveProperty('0.name', 'MyComponent');
       expect(symbols).toHaveProperty('0.type.kind', 'enhancedComponent');
@@ -616,7 +616,7 @@ describe('enhancedComponentParser', () => {
       `
       );
 
-      const symbols = parse(program, 'test.tsx', [enhancedComponentParser]);
+      const symbols = parse(program, 'test.tsx', [enhancedComponentParser]); //?
 
       expect(symbols).toHaveProperty('0.name', 'MyComponent');
       expect(symbols).toHaveProperty('0.type.kind', 'enhancedComponent');

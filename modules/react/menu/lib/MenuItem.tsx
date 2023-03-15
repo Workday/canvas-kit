@@ -147,10 +147,7 @@ export const useMenuItem = composeHooks(
             });
           }
         }
-        // We only need to run when the ID has changed. If the static API is used, the first time
-        // this is run, the id will be blank
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-      }, [id]);
+      }, [id, localRef, model.state.cursorId, model.state.mode]);
 
       return {
         ref: elementRef,

@@ -1,8 +1,7 @@
 import React from 'react';
-import {useIsRTL, createElemPropsHook} from '@workday/canvas-kit-react/common';
+import {createElemPropsHook, slugify} from '@workday/canvas-kit-react/common';
 
 import {useCursorListModel} from './useCursorListModel';
-import {keyboardEventToCursorEvents} from './keyUtils';
 
 /**
  * This elemProps hook is used for cursor navigation by using [Active
@@ -18,14 +17,9 @@ import {keyboardEventToCursorEvents} from './keyUtils';
 ```
  */
 export const useListActiveDescendant = createElemPropsHook(useCursorListModel)(model => {
-  const isRTL = useIsRTL();
-
   return {
-    onKeyDown(event: React.KeyboardEvent) {
-      const handled = keyboardEventToCursorEvents(event, model, isRTL);
-      if (handled) {
-        event.preventDefault();
-      }
-    },
+    'aria-activedescendant': model.state.cursorId
+      ? slugify(`${model.state.id}-${model.state.cursorId}`)
+      : undefined,
   };
 });

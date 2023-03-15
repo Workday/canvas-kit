@@ -5,6 +5,7 @@ import {
   createElemPropsHook,
   useLocalRef,
   useForkRef,
+  slugify,
 } from '@workday/canvas-kit-react/common';
 
 import {Item} from './useBaseListModel';
@@ -93,6 +94,7 @@ export const useListItemRegister = createElemPropsHook(useListModel)(
       'aria-setsize': elemProps.virtual?.size,
       'aria-posinset': elemProps.virtual ? elemProps.item!.index + 1 : undefined,
       style,
+      id: slugify(`${state.id}-${localId}`),
     };
   }
 );

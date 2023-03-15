@@ -23,6 +23,9 @@ export const useComboboxMenuList = createElemPropsHook(useMenuModel)(model => {
   return {
     role: 'listbox',
     'aria-labelledby': model.state.id,
+    id: `${model.state.id}-list`,
+    'data-test': 'foobar',
+    flexDirection: model.state.orientation === 'vertical' ? 'column' : 'row',
   } as const;
 });
 
@@ -40,7 +43,6 @@ export const ComboboxMenuList = createSubcomponent('ul')({
       marginY="xxs"
       gap="zero"
       overflowY="auto"
-      flexDirection={model.state.orientation === 'vertical' ? 'column' : 'row'}
       {...elemProps}
     >
       {children}

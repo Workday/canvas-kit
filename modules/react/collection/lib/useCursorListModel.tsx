@@ -148,6 +148,15 @@ export const getWrappingOffsetItem = (offset: number) => (
   {state}: NavigationInput,
   tries = state.items.length
 ): Item<Generic> => {
+  if (!id) {
+    // we have no id. If the offset is positive, we'll return the first item
+    if (offset === 1) {
+      return getFirst(id, {state});
+    }
+    if (offset === -1) {
+      return getLast(id, {state});
+    }
+  }
   const items = state.items;
   const item = getItem(id, {state});
 
@@ -318,9 +327,6 @@ export const useCursorListModel = createModelHook({
   const [cursorId, setCursorId] = React.useState(config.initialCursorId);
   const columnCount = config.columnCount || 0;
   const list = useBaseListModel(config);
-  const initialCurrentRef = React.useRef(
-    config.initialCursorId || (config.items?.length ? getId(config.items![0]) : '')
-  );
   const navigation = config.navigation;
 
   const state = {
@@ -337,18 +343,6 @@ export const useCursorListModel = createModelHook({
 
   const events = {
     ...list.events,
-    /**
-     * Register an item to the list. Takes in an identifier, a React.Ref and an optional index. This
-     * should be called on component mount
-     */
-    registerItem(data: Parameters<typeof list.events.registerItem>[0]) {
-      // point the cursor at the first item
-      if (!initialCurrentRef.current) {
-        initialCurrentRef.current = getId(data.item);
-        setCursorId(initialCurrentRef.current);
-      }
-      list.events.registerItem(data);
-    },
     /** Directly sets the cursor to the list item by its identifier. */
     goTo(data: {id: string}) {
       setCursorId(data.id);

@@ -52,6 +52,9 @@ export const useTabsModel = createModelHook({
   const initialSelectedRef = React.useRef(config.initialTab);
   const getId = config.getId || defaultGetId;
   const modality = useModalityType();
+  const initialCurrentRef = React.useRef(
+    config.initialCursorId || (config.items?.length ? getId(config.items![0]) : '')
+  );
 
   const items = config.items;
 
@@ -101,6 +104,18 @@ export const useTabsModel = createModelHook({
 
   const events = {
     ...model.events,
+    /**
+     * Register an item to the list. Takes in an identifier, a React.Ref and an optional index. This
+     * should be called on component mount
+     */
+    registerItem(data: Parameters<typeof model.events.registerItem>[0]) {
+      // point the cursor at the first item
+      if (!initialCurrentRef.current) {
+        initialCurrentRef.current = getId(data.item);
+        model.events.goTo({id: initialCurrentRef.current});
+      }
+      model.events.registerItem(data);
+    },
     /**
      * This event registers panels with state.panels. Called when a panel is mounted.
      */

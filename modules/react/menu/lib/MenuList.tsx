@@ -22,6 +22,12 @@ export interface MenuListProps<T = any>
 
 export const useMenuList = composeHooks(
   createElemPropsHook(useMenuModel)(model => {
+    React.useLayoutEffect(() => {
+      if (!model.state.cursorId && model.state.items.length) {
+        // Select the first item
+        model.events.goTo({id: model.getId(model.state.items[0])});
+      }
+    }, [model]);
     return {
       role: 'menu',
       'aria-labelledby': model.state.id,

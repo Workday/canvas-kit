@@ -53,11 +53,11 @@ export const useListItemRovingFocus = createElemPropsHook(useCursorListModel)(
 
     return {
       onKeyDown(event: React.KeyboardEvent) {
-        if (event.key in orientationKeyMap[model.state.orientation]) {
+        const handled = keyboardEventToCursorEvents(event, model, isRTL);
+        if (handled) {
+          event.preventDefault();
           keyDownRef.current = true;
-          event.preventDefault(); // Prevent default on any matching keys
         }
-        keyboardEventToCursorEvents(event, model, isRTL);
       },
       onClick() {
         model.events.goTo({id: elemProps['data-id']!});

@@ -21,20 +21,21 @@ export interface ComboboxProps {
 export const useComboboxMenuItem = composeHooks(
   createElemPropsHook(useMenuModel)(
     (model, _?: React.Ref<HTMLElement>, elemProps: {'data-id'?: string} = {}) => {
-      const name = elemProps['data-id'] || '';
+      const id = elemProps['data-id'] || '';
       const onMouseDown = (event: React.MouseEvent<HTMLElement>) => {
         if (
-          model.state.nonInteractiveIds.includes(name) ||
+          model.state.nonInteractiveIds.includes(id) ||
           event.currentTarget.hasAttribute('aria-disabled')
         ) {
           return;
         }
-        model.events.select({id: name});
+        model.events.select({id});
         model.events.hide(event);
       };
 
       return {
         role: 'option',
+        'aria-selected': id === model.state.cursorId ? true : undefined,
         onMouseDown,
         className: model.state.cursorId === elemProps['data-id'] ? 'focus' : '',
       } as const;

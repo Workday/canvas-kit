@@ -1,5 +1,5 @@
 import React from 'react';
-import {createModelHook} from '@workday/canvas-kit-react/common';
+import {createModelHook, dispatchInputEvent} from '@workday/canvas-kit-react/common';
 import {useMenuModel} from '@workday/canvas-kit-react/menu';
 
 const useInputModel = createModelHook({
@@ -17,29 +17,6 @@ const useInputModel = createModelHook({
   };
 });
 
-function dispatchChangeEvent<T extends HTMLElement>(
-  inputRef: React.RefObject<T>,
-  value: string
-): void {
-  // Changing value prop programmatically doesn't fire an Synthetic event or trigger native onChange.
-  // We can not just update .value= in setState because React library overrides input value setter
-  // but we can call the function directly on the input as context.
-  // This will cause onChange events to fire no matter how value is updated.
-  if (inputRef.current) {
-    const nativeInputValue = Object.getOwnPropertyDescriptor(
-      Object.getPrototypeOf(inputRef.current),
-      'value'
-    );
-    if (nativeInputValue && nativeInputValue.set) {
-      nativeInputValue.set.call(inputRef.current, value);
-    }
-
-    const event = new Event('input', {bubbles: true});
-
-    inputRef.current.dispatchEvent(event);
-  }
-}
-
 export const useComboboxModel = createModelHook({
   defaultConfig: {
     ...useInputModel.defaultConfig,
@@ -54,7 +31,7 @@ export const useComboboxModel = createModelHook({
   const menu = useMenuModel(
     useMenuModel.mergeConfig(config, {
       onSelect({id}) {
-        dispatchChangeEvent(menu.state.targetRef, id);
+        dispatchInputEvent(menu.state.targetRef.current, id);
       },
     })
   );
