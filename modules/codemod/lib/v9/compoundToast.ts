@@ -89,7 +89,8 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
 
       const linkAttributes = attributes?.filter(
         attr =>
-          (attr.type === 'JSXAttribute' && (attr.name.name === 'actionText' || attr.name.name === 'onActionClick')
+          attr.type === 'JSXAttribute' &&
+          (attr.name.name === 'actionText' || attr.name.name === 'onActionClick')
       );
 
       // Elements
@@ -122,8 +123,8 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
         'onClose',
         'color',
       ];
-      
-      const filterAttr  = nodePath.value.openingElement.attributes?.filter(attr => {
+
+      const filterAttr = nodePath.value.openingElement.attributes?.filter(attr => {
         return !(
           attr.type === 'JSXAttribute' &&
           typeof attr.name.name === 'string' &&
@@ -155,7 +156,6 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
         attr => attr.type === 'JSXAttribute' && attr.name.name === 'actionText'
       );
 
-      // Get value of the actionText prop to pass as children to the LinkElement
       const actionText =
         actionTextAttr &&
         actionTextAttr.type === 'JSXAttribute' &&

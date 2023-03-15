@@ -41,6 +41,18 @@ describe('Promote Toast to main package', () => {
       expectTransform(input, expected);
     });
 
+    it('should  properly transform labs import for Toast to react toast from main packages', () => {
+      const input = stripIndent`
+          import { Toast } from "@workday/canvas-kit-labs-react";
+        `;
+
+      const expected = stripIndent`
+          import { Toast } from "@workday/canvas-kit-react/toast";
+        `;
+
+      expectTransform(input, expected);
+    });
+
     it('should properly transform named labs import for Toast only to react toast', () => {
       const input = stripIndent`
           import { Toast as CanvasToast } from "@workday/canvas-kit-labs-react/toast";
