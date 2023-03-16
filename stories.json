@@ -994,20 +994,6 @@
         "__isArgsStory": false
       }
     },
-    "components-containers-box--basic": {
-      "id": "components-containers-box--basic",
-      "name": "Basic",
-      "title": "Components/Containers/Box",
-      "importPath": "./modules/react/layout/stories/Box.stories.mdx",
-      "kind": "Components/Containers/Box",
-      "story": "Basic",
-      "parameters": {
-        "fileName": "./modules/react/layout/stories/Box.stories.mdx",
-        "framework": "react",
-        "__id": "components-containers-box--basic",
-        "__isArgsStory": false
-      }
-    },
     "components-containers-card--basic": {
       "id": "components-containers-card--basic",
       "name": "Basic",
@@ -1078,62 +1064,6 @@
         "__isArgsStory": false
       }
     },
-    "components-containers-flex--basic": {
-      "id": "components-containers-flex--basic",
-      "name": "Basic",
-      "title": "Components/Containers/Flex",
-      "importPath": "./modules/react/layout/stories/Flex.stories.mdx",
-      "kind": "Components/Containers/Flex",
-      "story": "Basic",
-      "parameters": {
-        "fileName": "./modules/react/layout/stories/Flex.stories.mdx",
-        "framework": "react",
-        "__id": "components-containers-flex--basic",
-        "__isArgsStory": false
-      }
-    },
-    "components-containers-grid--basic": {
-      "id": "components-containers-grid--basic",
-      "name": "Basic",
-      "title": "Components/Containers/Grid",
-      "importPath": "./modules/react/layout/stories/Grid.stories.mdx",
-      "kind": "Components/Containers/Grid",
-      "story": "Basic",
-      "parameters": {
-        "fileName": "./modules/react/layout/stories/Grid.stories.mdx",
-        "framework": "react",
-        "__id": "components-containers-grid--basic",
-        "__isArgsStory": false
-      }
-    },
-    "components-containers-grid--grid-layout": {
-      "id": "components-containers-grid--grid-layout",
-      "name": "Grid Layout",
-      "title": "Components/Containers/Grid",
-      "importPath": "./modules/react/layout/stories/Grid.stories.mdx",
-      "kind": "Components/Containers/Grid",
-      "story": "Grid Layout",
-      "parameters": {
-        "fileName": "./modules/react/layout/stories/Grid.stories.mdx",
-        "framework": "react",
-        "__id": "components-containers-grid--grid-layout",
-        "__isArgsStory": false
-      }
-    },
-    "components-containers-grid--grid-layout-interactive": {
-      "id": "components-containers-grid--grid-layout-interactive",
-      "name": "Grid Layout Interactive",
-      "title": "Components/Containers/Grid",
-      "importPath": "./modules/react/layout/stories/Grid.stories.mdx",
-      "kind": "Components/Containers/Grid",
-      "story": "Grid Layout Interactive",
-      "parameters": {
-        "fileName": "./modules/react/layout/stories/Grid.stories.mdx",
-        "framework": "react",
-        "__id": "components-containers-grid--grid-layout-interactive",
-        "__isArgsStory": false
-      }
-    },
     "components-containers-side-panel--default": {
       "id": "components-containers-side-panel--default",
       "name": "Default",
@@ -1160,104 +1090,6 @@
         "framework": "react",
         "__id": "components-containers-side-panel--configurable",
         "__isArgsStory": true
-      }
-    },
-    "components-containers-stack--basic-stack": {
-      "id": "components-containers-stack--basic-stack",
-      "name": "Basic Stack",
-      "title": "Components/Containers/Stack",
-      "importPath": "./modules/react/layout/stories/Stack.stories.mdx",
-      "kind": "Components/Containers/Stack",
-      "story": "Basic Stack",
-      "parameters": {
-        "fileName": "./modules/react/layout/stories/Stack.stories.mdx",
-        "framework": "react",
-        "__id": "components-containers-stack--basic-stack",
-        "__isArgsStory": false
-      }
-    },
-    "components-containers-stack--h-stack-cards": {
-      "id": "components-containers-stack--h-stack-cards",
-      "name": "H Stack Cards",
-      "title": "Components/Containers/Stack",
-      "importPath": "./modules/react/layout/stories/Stack.stories.mdx",
-      "kind": "Components/Containers/Stack",
-      "story": "H Stack Cards",
-      "parameters": {
-        "fileName": "./modules/react/layout/stories/Stack.stories.mdx",
-        "framework": "react",
-        "__id": "components-containers-stack--h-stack-cards",
-        "__isArgsStory": false
-      }
-    },
-    "components-containers-stack--nested-stacks": {
-      "id": "components-containers-stack--nested-stacks",
-      "name": "Nested Stacks",
-      "title": "Components/Containers/Stack",
-      "importPath": "./modules/react/layout/stories/Stack.stories.mdx",
-      "kind": "Components/Containers/Stack",
-      "story": "Nested Stacks",
-      "parameters": {
-        "fileName": "./modules/react/layout/stories/Stack.stories.mdx",
-        "framework": "react",
-        "__id": "components-containers-stack--nested-stacks",
-        "__isArgsStory": false
-      }
-    },
-    "components-containers-stack--should-wrap-children": {
-      "id": "components-containers-stack--should-wrap-children",
-      "name": "Should Wrap Children",
-      "title": "Components/Containers/Stack",
-      "importPath": "./modules/react/layout/stories/Stack.stories.mdx",
-      "kind": "Components/Containers/Stack",
-      "story": "Should Wrap Children",
-      "parameters": {
-        "fileName": "./modules/react/layout/stories/Stack.stories.mdx",
-        "framework": "react",
-        "__id": "components-containers-stack--should-wrap-children",
-        "__isArgsStory": false
-      }
-    },
-    "components-containers-stack--stack-card": {
-      "id": "components-containers-stack--stack-card",
-      "name": "Stack Card",
-      "title": "Components/Containers/Stack",
-      "importPath": "./modules/react/layout/stories/Stack.stories.mdx",
-      "kind": "Components/Containers/Stack",
-      "story": "Stack Card",
-      "parameters": {
-        "fileName": "./modules/react/layout/stories/Stack.stories.mdx",
-        "framework": "react",
-        "__id": "components-containers-stack--stack-card",
-        "__isArgsStory": false
-      }
-    },
-    "components-containers-stack--stack-items": {
-      "id": "components-containers-stack--stack-items",
-      "name": "Stack Items",
-      "title": "Components/Containers/Stack",
-      "importPath": "./modules/react/layout/stories/Stack.stories.mdx",
-      "kind": "Components/Containers/Stack",
-      "story": "Stack Items",
-      "parameters": {
-        "fileName": "./modules/react/layout/stories/Stack.stories.mdx",
-        "framework": "react",
-        "__id": "components-containers-stack--stack-items",
-        "__isArgsStory": false
-      }
-    },
-    "components-containers-stack--v-stack-cards": {
-      "id": "components-containers-stack--v-stack-cards",
-      "name": "V Stack Cards",
-      "title": "Components/Containers/Stack",
-      "importPath": "./modules/react/layout/stories/Stack.stories.mdx",
-      "kind": "Components/Containers/Stack",
-      "story": "V Stack Cards",
-      "parameters": {
-        "fileName": "./modules/react/layout/stories/Stack.stories.mdx",
-        "framework": "react",
-        "__id": "components-containers-stack--v-stack-cards",
-        "__isArgsStory": false
       }
     },
     "components-containers-table--basic": {
@@ -2923,6 +2755,174 @@
         "fileName": "./modules/react/text-area/stories/TextArea.stories.mdx",
         "framework": "react",
         "__id": "components-inputs-textarea--resize-constraints",
+        "__isArgsStory": false
+      }
+    },
+    "components-layout-box--basic": {
+      "id": "components-layout-box--basic",
+      "name": "Basic",
+      "title": "Components/Layout/Box",
+      "importPath": "./modules/react/layout/stories/Box.stories.mdx",
+      "kind": "Components/Layout/Box",
+      "story": "Basic",
+      "parameters": {
+        "fileName": "./modules/react/layout/stories/Box.stories.mdx",
+        "framework": "react",
+        "__id": "components-layout-box--basic",
+        "__isArgsStory": false
+      }
+    },
+    "components-layout-flex--basic": {
+      "id": "components-layout-flex--basic",
+      "name": "Basic",
+      "title": "Components/Layout/Flex",
+      "importPath": "./modules/react/layout/stories/Flex.stories.mdx",
+      "kind": "Components/Layout/Flex",
+      "story": "Basic",
+      "parameters": {
+        "fileName": "./modules/react/layout/stories/Flex.stories.mdx",
+        "framework": "react",
+        "__id": "components-layout-flex--basic",
+        "__isArgsStory": false
+      }
+    },
+    "components-layout-grid--basic": {
+      "id": "components-layout-grid--basic",
+      "name": "Basic",
+      "title": "Components/Layout/Grid",
+      "importPath": "./modules/react/layout/stories/Grid.stories.mdx",
+      "kind": "Components/Layout/Grid",
+      "story": "Basic",
+      "parameters": {
+        "fileName": "./modules/react/layout/stories/Grid.stories.mdx",
+        "framework": "react",
+        "__id": "components-layout-grid--basic",
+        "__isArgsStory": false
+      }
+    },
+    "components-layout-grid--grid-layout": {
+      "id": "components-layout-grid--grid-layout",
+      "name": "Grid Layout",
+      "title": "Components/Layout/Grid",
+      "importPath": "./modules/react/layout/stories/Grid.stories.mdx",
+      "kind": "Components/Layout/Grid",
+      "story": "Grid Layout",
+      "parameters": {
+        "fileName": "./modules/react/layout/stories/Grid.stories.mdx",
+        "framework": "react",
+        "__id": "components-layout-grid--grid-layout",
+        "__isArgsStory": false
+      }
+    },
+    "components-layout-grid--grid-layout-interactive": {
+      "id": "components-layout-grid--grid-layout-interactive",
+      "name": "Grid Layout Interactive",
+      "title": "Components/Layout/Grid",
+      "importPath": "./modules/react/layout/stories/Grid.stories.mdx",
+      "kind": "Components/Layout/Grid",
+      "story": "Grid Layout Interactive",
+      "parameters": {
+        "fileName": "./modules/react/layout/stories/Grid.stories.mdx",
+        "framework": "react",
+        "__id": "components-layout-grid--grid-layout-interactive",
+        "__isArgsStory": false
+      }
+    },
+    "components-layout-stack--basic-stack": {
+      "id": "components-layout-stack--basic-stack",
+      "name": "Basic Stack",
+      "title": "Components/Layout/Stack",
+      "importPath": "./modules/react/layout/stories/Stack.stories.mdx",
+      "kind": "Components/Layout/Stack",
+      "story": "Basic Stack",
+      "parameters": {
+        "fileName": "./modules/react/layout/stories/Stack.stories.mdx",
+        "framework": "react",
+        "__id": "components-layout-stack--basic-stack",
+        "__isArgsStory": false
+      }
+    },
+    "components-layout-stack--h-stack-cards": {
+      "id": "components-layout-stack--h-stack-cards",
+      "name": "H Stack Cards",
+      "title": "Components/Layout/Stack",
+      "importPath": "./modules/react/layout/stories/Stack.stories.mdx",
+      "kind": "Components/Layout/Stack",
+      "story": "H Stack Cards",
+      "parameters": {
+        "fileName": "./modules/react/layout/stories/Stack.stories.mdx",
+        "framework": "react",
+        "__id": "components-layout-stack--h-stack-cards",
+        "__isArgsStory": false
+      }
+    },
+    "components-layout-stack--nested-stacks": {
+      "id": "components-layout-stack--nested-stacks",
+      "name": "Nested Stacks",
+      "title": "Components/Layout/Stack",
+      "importPath": "./modules/react/layout/stories/Stack.stories.mdx",
+      "kind": "Components/Layout/Stack",
+      "story": "Nested Stacks",
+      "parameters": {
+        "fileName": "./modules/react/layout/stories/Stack.stories.mdx",
+        "framework": "react",
+        "__id": "components-layout-stack--nested-stacks",
+        "__isArgsStory": false
+      }
+    },
+    "components-layout-stack--should-wrap-children": {
+      "id": "components-layout-stack--should-wrap-children",
+      "name": "Should Wrap Children",
+      "title": "Components/Layout/Stack",
+      "importPath": "./modules/react/layout/stories/Stack.stories.mdx",
+      "kind": "Components/Layout/Stack",
+      "story": "Should Wrap Children",
+      "parameters": {
+        "fileName": "./modules/react/layout/stories/Stack.stories.mdx",
+        "framework": "react",
+        "__id": "components-layout-stack--should-wrap-children",
+        "__isArgsStory": false
+      }
+    },
+    "components-layout-stack--stack-card": {
+      "id": "components-layout-stack--stack-card",
+      "name": "Stack Card",
+      "title": "Components/Layout/Stack",
+      "importPath": "./modules/react/layout/stories/Stack.stories.mdx",
+      "kind": "Components/Layout/Stack",
+      "story": "Stack Card",
+      "parameters": {
+        "fileName": "./modules/react/layout/stories/Stack.stories.mdx",
+        "framework": "react",
+        "__id": "components-layout-stack--stack-card",
+        "__isArgsStory": false
+      }
+    },
+    "components-layout-stack--stack-items": {
+      "id": "components-layout-stack--stack-items",
+      "name": "Stack Items",
+      "title": "Components/Layout/Stack",
+      "importPath": "./modules/react/layout/stories/Stack.stories.mdx",
+      "kind": "Components/Layout/Stack",
+      "story": "Stack Items",
+      "parameters": {
+        "fileName": "./modules/react/layout/stories/Stack.stories.mdx",
+        "framework": "react",
+        "__id": "components-layout-stack--stack-items",
+        "__isArgsStory": false
+      }
+    },
+    "components-layout-stack--v-stack-cards": {
+      "id": "components-layout-stack--v-stack-cards",
+      "name": "V Stack Cards",
+      "title": "Components/Layout/Stack",
+      "importPath": "./modules/react/layout/stories/Stack.stories.mdx",
+      "kind": "Components/Layout/Stack",
+      "story": "V Stack Cards",
+      "parameters": {
+        "fileName": "./modules/react/layout/stories/Stack.stories.mdx",
+        "framework": "react",
+        "__id": "components-layout-stack--v-stack-cards",
         "__isArgsStory": false
       }
     },
@@ -6007,20 +6007,6 @@
         "__isArgsStory": false
       }
     },
-    "testing-labs-common--box-states": {
-      "id": "testing-labs-common--box-states",
-      "name": "Box States",
-      "title": "Testing/Labs/Common",
-      "importPath": "./modules/react/layout/stories/stories_BoxVisualTesting.tsx",
-      "kind": "Testing/Labs/Common",
-      "story": "Box States",
-      "parameters": {
-        "fileName": "./modules/react/layout/stories/stories_BoxVisualTesting.tsx",
-        "framework": "react",
-        "__id": "testing-labs-common--box-states",
-        "__isArgsStory": false
-      }
-    },
     "testing-labs-drawer--drawer-states": {
       "id": "testing-labs-drawer--drawer-states",
       "name": "Drawer States",
@@ -6060,34 +6046,6 @@
         "fileName": "./modules/labs-react/expandable/stories/stories_VisualTesting.tsx",
         "framework": "react",
         "__id": "testing-labs-expandable--start-icon",
-        "__isArgsStory": false
-      }
-    },
-    "testing-labs-layout-stack--stack-ltr-states": {
-      "id": "testing-labs-layout-stack--stack-ltr-states",
-      "name": "Stack LTR States",
-      "title": "Testing/Labs/Layout/Stack",
-      "importPath": "./modules/react/layout/stories/stories_StackVisualTesting.tsx",
-      "kind": "Testing/Labs/Layout/Stack",
-      "story": "Stack LTR States",
-      "parameters": {
-        "fileName": "./modules/react/layout/stories/stories_StackVisualTesting.tsx",
-        "framework": "react",
-        "__id": "testing-labs-layout-stack--stack-ltr-states",
-        "__isArgsStory": false
-      }
-    },
-    "testing-labs-layout-stack--stack-rtl-states": {
-      "id": "testing-labs-layout-stack--stack-rtl-states",
-      "name": "Stack RTL States",
-      "title": "Testing/Labs/Layout/Stack",
-      "importPath": "./modules/react/layout/stories/stories_StackVisualTesting.tsx",
-      "kind": "Testing/Labs/Layout/Stack",
-      "story": "Stack RTL States",
-      "parameters": {
-        "fileName": "./modules/react/layout/stories/stories_StackVisualTesting.tsx",
-        "framework": "react",
-        "__id": "testing-labs-layout-stack--stack-rtl-states",
         "__isArgsStory": false
       }
     },
@@ -6452,62 +6410,6 @@
         "fileName": "./modules/react/card/stories/visual-testing/stories_card.tsx",
         "framework": "react",
         "__id": "testing-containers-card--card-states",
-        "__isArgsStory": false
-      }
-    },
-    "testing-containers-layout-flex--flex-ltr-states": {
-      "id": "testing-containers-layout-flex--flex-ltr-states",
-      "name": "Flex LTR States",
-      "title": "Testing/Containers/Layout/Flex",
-      "importPath": "./modules/react/layout/stories/stories_FlexVisualTesting.tsx",
-      "kind": "Testing/Containers/Layout/Flex",
-      "story": "Flex LTR States",
-      "parameters": {
-        "fileName": "./modules/react/layout/stories/stories_FlexVisualTesting.tsx",
-        "framework": "react",
-        "__id": "testing-containers-layout-flex--flex-ltr-states",
-        "__isArgsStory": false
-      }
-    },
-    "testing-containers-layout-flex--flex-rtl-states": {
-      "id": "testing-containers-layout-flex--flex-rtl-states",
-      "name": "Flex RTL States",
-      "title": "Testing/Containers/Layout/Flex",
-      "importPath": "./modules/react/layout/stories/stories_FlexVisualTesting.tsx",
-      "kind": "Testing/Containers/Layout/Flex",
-      "story": "Flex RTL States",
-      "parameters": {
-        "fileName": "./modules/react/layout/stories/stories_FlexVisualTesting.tsx",
-        "framework": "react",
-        "__id": "testing-containers-layout-flex--flex-rtl-states",
-        "__isArgsStory": false
-      }
-    },
-    "testing-containers-layout-grid--grid-states": {
-      "id": "testing-containers-layout-grid--grid-states",
-      "name": "Grid States",
-      "title": "Testing/Containers/Layout/Grid",
-      "importPath": "./modules/react/layout/stories/stories_GridVisualTesting.tsx",
-      "kind": "Testing/Containers/Layout/Grid",
-      "story": "Grid States",
-      "parameters": {
-        "fileName": "./modules/react/layout/stories/stories_GridVisualTesting.tsx",
-        "framework": "react",
-        "__id": "testing-containers-layout-grid--grid-states",
-        "__isArgsStory": false
-      }
-    },
-    "testing-containers-layout-grid--grid-ui-layout": {
-      "id": "testing-containers-layout-grid--grid-ui-layout",
-      "name": "Grid UI Layout",
-      "title": "Testing/Containers/Layout/Grid",
-      "importPath": "./modules/react/layout/stories/stories_GridVisualTesting.tsx",
-      "kind": "Testing/Containers/Layout/Grid",
-      "story": "Grid UI Layout",
-      "parameters": {
-        "fileName": "./modules/react/layout/stories/stories_GridVisualTesting.tsx",
-        "framework": "react",
-        "__id": "testing-containers-layout-grid--grid-ui-layout",
         "__isArgsStory": false
       }
     },
@@ -6984,6 +6886,104 @@
         "fileName": "./modules/react/form-field/stories/visual-testing/stories_TextArea.tsx",
         "framework": "react",
         "__id": "testing-inputs-textarea--text-area-themed-states",
+        "__isArgsStory": false
+      }
+    },
+    "testing-layout-box--box-states": {
+      "id": "testing-layout-box--box-states",
+      "name": "Box States",
+      "title": "Testing/Layout/Box",
+      "importPath": "./modules/react/layout/stories/stories_BoxVisualTesting.tsx",
+      "kind": "Testing/Layout/Box",
+      "story": "Box States",
+      "parameters": {
+        "fileName": "./modules/react/layout/stories/stories_BoxVisualTesting.tsx",
+        "framework": "react",
+        "__id": "testing-layout-box--box-states",
+        "__isArgsStory": false
+      }
+    },
+    "testing-layout-flex--flex-ltr-states": {
+      "id": "testing-layout-flex--flex-ltr-states",
+      "name": "Flex LTR States",
+      "title": "Testing/Layout/Flex",
+      "importPath": "./modules/react/layout/stories/stories_FlexVisualTesting.tsx",
+      "kind": "Testing/Layout/Flex",
+      "story": "Flex LTR States",
+      "parameters": {
+        "fileName": "./modules/react/layout/stories/stories_FlexVisualTesting.tsx",
+        "framework": "react",
+        "__id": "testing-layout-flex--flex-ltr-states",
+        "__isArgsStory": false
+      }
+    },
+    "testing-layout-flex--flex-rtl-states": {
+      "id": "testing-layout-flex--flex-rtl-states",
+      "name": "Flex RTL States",
+      "title": "Testing/Layout/Flex",
+      "importPath": "./modules/react/layout/stories/stories_FlexVisualTesting.tsx",
+      "kind": "Testing/Layout/Flex",
+      "story": "Flex RTL States",
+      "parameters": {
+        "fileName": "./modules/react/layout/stories/stories_FlexVisualTesting.tsx",
+        "framework": "react",
+        "__id": "testing-layout-flex--flex-rtl-states",
+        "__isArgsStory": false
+      }
+    },
+    "testing-layout-grid--grid-states": {
+      "id": "testing-layout-grid--grid-states",
+      "name": "Grid States",
+      "title": "Testing/Layout/Grid",
+      "importPath": "./modules/react/layout/stories/stories_GridVisualTesting.tsx",
+      "kind": "Testing/Layout/Grid",
+      "story": "Grid States",
+      "parameters": {
+        "fileName": "./modules/react/layout/stories/stories_GridVisualTesting.tsx",
+        "framework": "react",
+        "__id": "testing-layout-grid--grid-states",
+        "__isArgsStory": false
+      }
+    },
+    "testing-layout-grid--grid-ui-layout": {
+      "id": "testing-layout-grid--grid-ui-layout",
+      "name": "Grid UI Layout",
+      "title": "Testing/Layout/Grid",
+      "importPath": "./modules/react/layout/stories/stories_GridVisualTesting.tsx",
+      "kind": "Testing/Layout/Grid",
+      "story": "Grid UI Layout",
+      "parameters": {
+        "fileName": "./modules/react/layout/stories/stories_GridVisualTesting.tsx",
+        "framework": "react",
+        "__id": "testing-layout-grid--grid-ui-layout",
+        "__isArgsStory": false
+      }
+    },
+    "testing-layout-stack--stack-ltr-states": {
+      "id": "testing-layout-stack--stack-ltr-states",
+      "name": "Stack LTR States",
+      "title": "Testing/Layout/Stack",
+      "importPath": "./modules/react/layout/stories/stories_StackVisualTesting.tsx",
+      "kind": "Testing/Layout/Stack",
+      "story": "Stack LTR States",
+      "parameters": {
+        "fileName": "./modules/react/layout/stories/stories_StackVisualTesting.tsx",
+        "framework": "react",
+        "__id": "testing-layout-stack--stack-ltr-states",
+        "__isArgsStory": false
+      }
+    },
+    "testing-layout-stack--stack-rtl-states": {
+      "id": "testing-layout-stack--stack-rtl-states",
+      "name": "Stack RTL States",
+      "title": "Testing/Layout/Stack",
+      "importPath": "./modules/react/layout/stories/stories_StackVisualTesting.tsx",
+      "kind": "Testing/Layout/Stack",
+      "story": "Stack RTL States",
+      "parameters": {
+        "fileName": "./modules/react/layout/stories/stories_StackVisualTesting.tsx",
+        "framework": "react",
+        "__id": "testing-layout-stack--stack-rtl-states",
         "__isArgsStory": false
       }
     },
