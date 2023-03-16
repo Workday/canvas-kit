@@ -16,6 +16,8 @@ any questions.
 - [Component Updates](#component-updates)
   - [Buttons](#buttons)
 	- [Toast](#toast)
+- [Utility Updates](#utility-updates)
+  - [focusRing](#focusring)
 
 ## Codemod
 
@@ -140,3 +142,10 @@ We've promoted `Toast` from Labs (`@workday/canvas-kit-labs-react`) to the Main
 
 🤖 The codemod will convert the `Toast` into a compound component with it's sub components having
 the correct props.
+## Utility Updates
+
+### focusRing
+
+We're removing memoization from focus ring. The `memoize` argument passed to `focusRing` is no
+longer valid and we've removed the exported `memoizedFocusRing`. There is no codemod for this
+change. We couldn't find any example of `memoize` or `memoizedFocusRing` being used.
