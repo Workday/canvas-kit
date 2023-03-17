@@ -1,7 +1,6 @@
 import React from 'react';
 
 import {checkIcon, exclamationCircleIcon} from '@workday/canvas-system-icons-web';
-import {colors} from '@workday/canvas-kit-react/tokens';
 
 import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
 import {Toast} from '@workday/canvas-kit-react/toast';
@@ -39,17 +38,17 @@ export const ToastStates = withSnapshotsEnabled(() => {
           {
             label: 'On Close',
             props: {
-              mode: 'polite',
+              mode: 'alert',
               hasCloseIcon: true,
               icon: exclamationCircleIcon,
-              iconColor: colors.cinnamon500,
-              message: 'Your workbook was successfully processed.',
+              iconColor: 'cinnamon500',
+              message: 'Your workbook has an error.',
             },
           },
           {
             label: 'With Action',
             props: {
-              mode: 'interactive',
+              mode: 'dialog',
               hasAction: true,
               icon: checkIcon,
               iconColor: 'greenApple400',
@@ -158,11 +157,11 @@ export const ToastStates = withSnapshotsEnabled(() => {
           {
             label: 'With short mesage',
             props: {
-              mode: 'polite',
+              mode: 'alert',
               hasCloseIcon: true,
               width: 300,
-              icon: checkIcon,
-              iconColor: 'greenApple400',
+              icon: exclamationCircleIcon,
+              iconColor: 'cinnamon500',
               message: 'There was an error',
             },
           },
@@ -170,10 +169,10 @@ export const ToastStates = withSnapshotsEnabled(() => {
         columnProps={[{label: 'Default', props: {}}]}
       >
         {({mode, hasCloseIcon, hasAction, icon, iconColor, ...props}) => (
-          <Toast mode={hasAction ? 'dialog' : mode} {...props}>
+          <Toast mode={mode} {...props}>
             <Toast.Icon icon={icon} color={iconColor} />
             <Toast.Body>
-              <Toast.Message>Your workbook was successfully processed.</Toast.Message>
+              <Toast.Message>{props.message}</Toast.Message>
               {hasAction && <Toast.Link href="#href">Custom Link</Toast.Link>}
             </Toast.Body>
             {hasCloseIcon && <Toast.CloseIcon aria-label="Close" />}

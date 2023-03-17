@@ -145,7 +145,7 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
 
       // rename onActionClick to onClick for the Toast.Link component
       const renameOnActionClick = onActionClickAttr?.map(attr => {
-        if (attr.type === 'JSXAttribute' && attr.name.name === 'onActionClick') {
+        if (attr.type === 'JSXAttribute') {
           attr.name.name = 'onClick';
         }
         return attr;
