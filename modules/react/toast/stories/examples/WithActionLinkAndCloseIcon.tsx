@@ -8,7 +8,7 @@ export const WithActionLinkAndCloseIcon = () => {
   const handleClose = () => console.log('close button clicked');
 
   return (
-    <Toast mode="dialog">
+    <Toast mode="dialog" aria-label="notification">
       <Toast.Icon icon={checkIcon} color="greenApple400" />
       <Toast.Body>
         <Toast.Message>Your workbook was successfully</Toast.Message>
