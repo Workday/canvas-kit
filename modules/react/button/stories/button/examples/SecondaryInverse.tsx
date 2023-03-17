@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
-import {HStack} from '@workday/canvas-kit-react/layout';
+import {Flex} from '@workday/canvas-kit-react/layout';
 import {
   plusIcon,
   relatedActionsVerticalIcon,
@@ -9,7 +9,7 @@ import {
 } from '@workday/canvas-system-icons-web';
 
 export const SecondaryInverse = () => (
-  <HStack spacing="s" backgroundColor="blueberry400" padding="s">
+  <Flex gap="s" backgroundColor="blueberry400" padding="s">
     <SecondaryButton variant="inverse">Secondary</SecondaryButton>
     <SecondaryButton icon={plusIcon} variant="inverse">
       Secondary
@@ -18,5 +18,5 @@ export const SecondaryInverse = () => (
       Secondary
     </SecondaryButton>
     <SecondaryButton icon={relatedActionsVerticalIcon} variant="inverse" />
-  </HStack>
+  </Flex>
 );
