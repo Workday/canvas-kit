@@ -3,9 +3,8 @@ import {render} from '@testing-library/react';
 
 import {colors, iconColors} from '@workday/canvas-kit-react/tokens';
 import {activityStreamIcon} from '@workday/canvas-system-icons-web';
-
+import {getColor} from '@workday/canvas-kit-react/common';
 import {SystemIcon, systemIconStyles} from '../lib/SystemIcon';
-import {getColor} from '../lib/utils';
 
 describe('System Icon', () => {
   test('Defaults styles are set correctly', () => {
