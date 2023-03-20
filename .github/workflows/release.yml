@@ -30,11 +30,19 @@ jobs:
           persist-credentials: false
           fetch-depth: 0 # Used for conventional commit ranges
 
-      - uses: Workday/canvas-kit-actions/release@release
+      - uses: Workday/canvas-kit-actions/install@v1
+        with:
+          node_version: 14.x
+
+      - uses: Workday/canvas-kit-actions/release@v1
         with:
           gh_token: ${{ secrets.GITHUB_TOKEN }}
           gh_rw_token: ${{ secrets.GH_RW_TOKEN }}
           publish_token: ${{ secrets.NPM_CI_PUBLISH_TOKEN }}
           chromatic_project_token: ${{ secrets.CHROMATIC_APP_CODE }}
-          slack_webhook: ${{ secrets.SLACK_WEBHOOK }}
-          node_version: '14.x'
+      # - uses: Workday/canvas-kit-actions/report-failure@v1
+      #   if: failure()
+      #   with:
+      #     slackWebhook: ${{ secrets.SLACK_WEBHOOK }}
+      #     slackMessage: |
+      #       Release job failed. Please check error logs.
