@@ -14,11 +14,11 @@ jobs:
           fetch-depth: 0 # Needed to do a proper push
           ref: prerelease/minor # This job only works on prerelease/minor
 
-      # - name: Push to master
-      #   uses: ad-m/github-push-action@master
-      #   with:
-      #     github_token: ${{ secrets.GITHUB_TOKEN }}
-      #     branch: refs/heads/master
+      - name: Push to master
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: refs/heads/master
 
       - name: Checkout master
         uses: actions/checkout@v2
