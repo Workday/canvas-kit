@@ -2,7 +2,6 @@ import React from 'react';
 
 import {Toast} from '@workday/canvas-kit-react/toast';
 import {checkIcon} from '@workday/canvas-system-icons-web';
-import {colors} from '@workday/canvas-kit-react/tokens';
 
 export const ToastDialog = () => (
   <Toast mode="dialog" aria-label="notification">

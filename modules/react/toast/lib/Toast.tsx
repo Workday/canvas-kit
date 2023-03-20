@@ -88,7 +88,7 @@ export const Toast = createContainer('div')({
     Icon: ToastIcon,
     /**
      * `Toast.Message` renders our `Subtext` component where you can style however way you'd like with style properties.
-     * This component also has an `id` so that when the `Toast` has a prop of `mode="dialog"` the message is read out by screen readers.
+     * This component also has an `id` so that when the `Toast` has a prop of `mode="dialog"` the message is read out by screen readers by adding an `aria-describedby` on the main `Toast` component.
      */
     Message: ToastMessage,
     /**
