@@ -11,7 +11,8 @@ any questions.
 - [Codemod](#codemod)
 - [Component Deprecations](#component-deprecations)
   - [Drawer](#drawer)
-  - [Layout and Column](#layout-and-column) - [Stack](#stack-hstack-vstack)
+  - [Layout and Column](#layout-and-column)
+  - [Stack](#stack-hstack-vstack)
 - [Component Updates](#component-updates)
   - [Buttons](#buttons)
 - [Utility Updates](#utility-updates)
@@ -81,6 +82,23 @@ Canvas Kit. Consider using the
 [Side Panel](https://workday.github.io/canvas-kit/?path=/story/preview-side-panel--basic). Be Aware
 that `SidePanel` from the Main package is planned to be replaced by the one from Preview. We suggest
 you use the Preview version of `SidePanel` until the one in Main is replaced with it.
+
+---
+
+### Layout and Column
+
+`Layout` and `Column` components have been [hard-deprecated](#hard-deprecation) and are no longer
+available in Canvas Kit. Please consider using
+[`Grid`](https://workday.github.io/canvas-kit/?path=/docs/components-containers-grid--basic)
+instead. While the `Grid` component is not a 1:1 replacement for `Layout`, it can be used in the
+same way and offers several benefits over the deprecated components as a more robust and flexible
+layout solution.
+
+Please refer to
+[the Examples section](https://workday.github.io/canvas-kit/?path=/docs/examples-layouts--custom-column-positioning)
+for ideas on how to replace the deprecated `Layout` component with the `Grid` component. This will
+provide you with a deeper understanding of how to set custom column width or positioning using the
+`Grid` component.
 
 ---
 
