@@ -40,7 +40,7 @@ jobs:
           gh_rw_token: ${{ secrets.GH_RW_TOKEN }}
           publish_token: ${{ secrets.NPM_CI_PUBLISH_TOKEN }}
           chromatic_project_token: ${{ secrets.CHROMATIC_APP_CODE }}
-          version: ${{ inputs.version }}
+          version: ${{ inputs.version || patch }}
 
       - uses: Workday/canvas-kit-actions/report-failure@v1
         if: failure()
