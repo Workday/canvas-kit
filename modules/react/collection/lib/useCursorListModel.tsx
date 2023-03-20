@@ -312,7 +312,7 @@ export const useCursorListModel = createModelHook({
   const columnCount = config.columnCount || 0;
   const list = useBaseListModel(config);
   const initialCurrentRef = React.useRef(
-    config.initialCursorId || (config.items?.length ? getId(config.items![0]) : '')
+    config.initialCursorId || (config.items?.length ? getId(list.state.items![0]) : '')
   );
   const navigation = config.navigation;
 
