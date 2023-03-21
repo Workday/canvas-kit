@@ -17,6 +17,8 @@ any questions.
   - [Buttons](#buttons)
 - [Utility Updates](#utility-updates)
   - [focusRing](#focusring)
+- [Token Updates](#token-updates)
+	- [Depth](#depth)
 
 ## Codemod
 
@@ -138,3 +140,10 @@ If you still wish for a specific `button` within a `form` to submit, just add th
 We're removing memoization from focus ring. The `memoize` argument passed to `focusRing` is no
 longer valid and we've removed the exported `memoizedFocusRing`. There is no codemod for this
 change. We couldn't find any example of `memoize` or `memoizedFocusRing` being used.
+
+## Token Updates
+
+### depth
+
+In `v7` we released an update to our `depth` tokens that were too bold and harsh for web applications. We've modified the `depth` token values
+to be more subtle and improve visual design. This change affects all components that use a box shadow including: `Card, Toast, Popup, Dialog, Modal, Box`.

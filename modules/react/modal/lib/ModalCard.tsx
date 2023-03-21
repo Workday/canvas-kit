@@ -31,5 +31,5 @@ export const ModalCard = createSubcomponent('div')({
   modelHook: useModalModel,
   elemPropsHook: useModalCard,
 })<ModalCardProps>((elemProps, Element) => {
-  return <ResponsiveModalCard as={Element} width={440} borderWidth={0} depth={6} {...elemProps} />;
+  return <ResponsiveModalCard as={Element} width={440} borderWidth={0} depth={5} {...elemProps} />;
 });
