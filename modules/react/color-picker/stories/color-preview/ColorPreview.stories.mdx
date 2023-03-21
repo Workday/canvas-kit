@@ -1,5 +1,4 @@
-import {Meta} from '@storybook/addon-docs';
-import {Specifications} from '@workday/canvas-kit-docs';
+import {SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
 
 import {ColorPreview} from '@workday/canvas-kit-react/color-picker';
 
@@ -7,7 +6,7 @@ import {Basic} from './examples/Basic';
 import {LabelPosition} from './examples/LabelPosition';
 import {RefForwarding} from './examples/RefForwarding';
 
-<Meta title="Components/Inputs/Color Picker/Color Preview/React" component={ColorPreview} />
+<Meta title="Components/Inputs/Color Picker/Color Preview" component={ColorPreview} />
 
 # Canvas Kit Color Preview
 
@@ -44,12 +43,10 @@ relative to the Color Preview. `labelPosition` accepts the following values:
 
 <ExampleCodeBlock code={LabelPosition} />
 
-## Color Preview Props
+## Component API
 
-Undocumented props are spread to the underlying `<input type="text">` element.
+<SymbolDoc name="ColorPreview" fileName="/react/" />
 
-<ArgsTable of={ColorPreview} />
-
-## Color Preview Specifications
+## Specifications
 
 <Specifications file="ColorPicker.spec.ts" name="ColorPreview" />

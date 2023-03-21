@@ -1,13 +1,17 @@
 import React from 'react';
-import {ComponentStatesTable, permutateProps} from '@workday/canvas-kit-labs-react/common';
+import {PartialEmotionCanvasTheme} from '@workday/canvas-kit-react/common';
+import {
+  ComponentStatesTable,
+  permutateProps,
+  StaticStates,
+} from '@workday/canvas-kit-react/testing';
 import {withSnapshotsEnabled, customColorTheme} from '../../../../../utils/storybook';
 import {playCircleIcon, relatedActionsVerticalIcon} from '@workday/canvas-system-icons-web';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {Container, stateTableColumnProps} from './utils';
-import {PartialEmotionCanvasTheme, StaticStates} from '@workday/canvas-kit-react/common';
 
 export default withSnapshotsEnabled({
-  title: 'Testing/React/Buttons/Button/Secondary Button',
+  title: 'Testing/Buttons/Button/Secondary Button',
   component: SecondaryButton,
 });
 

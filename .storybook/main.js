@@ -1,6 +1,5 @@
-const path = require('path');
+const path = require('node:path');
 const createCompiler = require('@storybook/addon-docs/mdx-compiler-plugin');
-const DocgenPlugin = require('./docgen-plugin');
 
 const modulesPath = path.resolve(__dirname, '../modules');
 const getSpecifications = require('../modules/docs/utils/get-specifications');
@@ -29,9 +28,8 @@ module.exports = {
     // Get the specifications object and replace with a real object in the spec.ts file
     const specs = await getSpecifications();
 
-    // modules/specifications/lib/specs.ts
     config.module.rules.push({
-      test: /specs\.ts$/,
+      test: /.ts$/,
       include: [path.resolve(__dirname, '../modules/docs')],
       use: [
         {
@@ -43,6 +41,7 @@ module.exports = {
         },
       ],
     });
+
     /**
      * Added this because Storybook 6.3 is on emotion 10, so we rewrote the imports to point to emotion 11
      * https://github.com/storybookjs/storybook/issues/13145
@@ -58,7 +57,7 @@ module.exports = {
 
     // Update @storybook/addon-docs webpack rules to load all .mdx files in storybook
     const mdxRule = config.module.rules.find(rule => rule.test.toString() === /\.mdx$/.toString());
-    mdxRule.use.find(loader => loader.loader.includes('@mdx-js')).options['compilers'] = [
+    mdxRule.use.find(loader => loader.loader.includes('mdx1-csf')).options['compilers'] = [
       createCompiler({}),
     ];
 
@@ -102,6 +101,18 @@ module.exports = {
       enforce: 'pre',
     });
 
+    config.module.rules.push({
+      test: /.+\.tsx?$/,
+      include: [modulesPath],
+      exclude: /examples|stories|spec|codemod|docs/,
+      loaders: [
+        {
+          loader: path.resolve(__dirname, 'symbol-doc-loader'),
+        },
+      ],
+      enforce: 'pre',
+    });
+
     // Load our scss files with postscss.
     // Note: This is the same as @storybook/preset-scss, but with postcss added.
     config.module.rules.push({
@@ -117,8 +128,6 @@ module.exports = {
       ],
       include: modulesPath,
     });
-
-    config.plugins.push(new DocgenPlugin());
 
     // Remove progress updates to reduce log lines in Travis
     // See: https://github.com/storybookjs/storybook/issues/2029

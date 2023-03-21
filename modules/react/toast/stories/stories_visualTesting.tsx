@@ -1,15 +1,15 @@
 import React from 'react';
 
 import {colors} from '@workday/canvas-kit-react/tokens';
-import {ContentDirection, StaticStates} from '@workday/canvas-kit-react/common';
+import {ContentDirection} from '@workday/canvas-kit-react/common';
+import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
 import {exclamationCircleIcon} from '@workday/canvas-system-icons-web';
 import {Toast} from '@workday/canvas-kit-react/toast';
 
-import {ComponentStatesTable} from '@workday/canvas-kit-labs-react/common';
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
 
 export default withSnapshotsEnabled({
-  title: 'Testing/React/Popups/Toast',
+  title: 'Testing/Popups/Toast',
   component: Toast,
 });
 

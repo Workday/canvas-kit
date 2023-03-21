@@ -1,77 +1,129 @@
-import {
-  PropertyDisplay,
-  PropertyListStyle,
-  PropertyOverflow,
-  PropertyOverflowX,
-  PropertyOverflowY,
-  PropertyVerticalAlign,
-} from './types';
+import {Property} from 'csstype';
 
-/** style props to for layout properties */
+import {buildStyleFns, buildStylePropFn, StyleFnConfig} from './buildStyleFns';
+import {SystemPropValues} from './systemProps';
+
+/** style props to for CSS layout properties */
 export type LayoutStyleProps = {
-  /** sets `display` property */
-  display?: PropertyDisplay;
-  /** sets `height` property */
-  height?: number | string;
-  /** sets `list-style property */
-  listStyle?: PropertyListStyle;
-  /** sets `max-height` property */
-  maxHeight?: number | string;
-  /** sets `max-width` property */
-  maxWidth?: number | string;
-  /** sets `min-height` property */
-  minHeight?: number | string;
-  /** sets `min-width` property */
-  minWidth?: number | string;
-  /** sets `overflow` property */
-  overflow?: PropertyOverflow;
-  /** sets `overflow-x` property */
-  overflowX?: PropertyOverflowX;
-  /** sets `overflow-y` property */
-  overflowY?: PropertyOverflowY;
-  /** sets `vertical-align` property */
-  verticalAlign?: PropertyVerticalAlign;
-  /** sets `width` property */
-  width?: number | string;
+  /** sets [CSS display property](https://developer.mozilla.org/en-US/docs/Web/CSS/display) */
+  display?: Property.Display;
+  /**
+   * - sets [CSS height property](https://developer.mozilla.org/en-US/docs/Web/CSS/height)
+   * - system tokens: `space`
+   * */
+  height?: SystemPropValues['space'];
+  /** sets [CSS list-style property](https://developer.mozilla.org/en-US/docs/Web/CSS/list-style) */
+  listStyle?: Property.ListStyle;
+  /**
+   * - sets [CSS max-height property](https://developer.mozilla.org/en-US/docs/Web/CSS/max-height)
+   * - system tokens: `space`
+   * */
+  maxHeight?: SystemPropValues['space'];
+  /**
+   * - sets [CSS max-width property](https://developer.mozilla.org/en-US/docs/Web/CSS/max-width)
+   * - system tokens: `space`
+   * */
+  maxWidth?: SystemPropValues['space'];
+  /**
+   * - sets [CSS min-height property](https://developer.mozilla.org/en-US/docs/Web/CSS/min-height)
+   * - system tokens: `space`
+   * */
+  minHeight?: SystemPropValues['space'];
+  /**
+   * - sets [CSS min-width property](https://developer.mozilla.org/en-US/docs/Web/CSS/min-width)
+   * - system tokens: `space`
+   * */
+  minWidth?: SystemPropValues['space'];
+  /** sets [CSS overflow property](https://developer.mozilla.org/en-US/docs/Web/CSS/overflow) */
+  overflow?: Property.Overflow;
+  /** sets [CSS overflow-x property](https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-x) */
+  overflowX?: Property.OverflowX;
+  /** sets [CSS overflow-y property](https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-y) */
+  overflowY?: Property.OverflowY;
+  /** sets [CSS vertical-align property](https://developer.mozilla.org/en-US/docs/Web/CSS/vertical-align) */
+  verticalAlign?: Property.VerticalAlign;
+  /**
+   * - sets [CSS width property](https://developer.mozilla.org/en-US/docs/Web/CSS/width)
+   * - system tokens: `space`
+   * */
+  width?: SystemPropValues['space'];
 };
 
-const layoutProps = {
-  display: 'display',
-  height: 'height',
-  listStyle: 'listStyle',
-  maxHeight: 'maxHeight',
-  maxWidth: 'maxWidth',
-  minHeight: 'minHeight',
-  minWidth: 'minWidth',
-  overflow: 'overflow',
-  overflowX: 'overflowX',
-  overflowY: 'overflowY',
-  verticalAlign: 'verticalAlign',
-  width: 'width',
-};
+export const layoutStyleFnConfigs: StyleFnConfig[] = [
+  {
+    name: 'display',
+    properties: ['display'],
+    system: 'none',
+  },
+  {
+    name: 'height',
+    properties: ['height'],
+    system: 'space',
+  },
+  {
+    name: 'listStyle',
+    properties: ['listStyle'],
+    system: 'none',
+  },
+  {
+    name: 'maxHeight',
+    properties: ['maxHeight'],
+    system: 'space',
+  },
+  {
+    name: 'maxWidth',
+    properties: ['maxWidth'],
+    system: 'space',
+  },
+  {
+    name: 'minHeight',
+    properties: ['minHeight'],
+    system: 'space',
+  },
+  {
+    name: 'minWidth',
+    properties: ['minWidth'],
+    system: 'space',
+  },
+  {
+    name: 'overflow',
+    properties: ['overflow'],
+    system: 'none',
+  },
+  {
+    name: 'overflowX',
+    properties: ['overflowX'],
+    system: 'none',
+  },
+  {
+    name: 'overflowY',
+    properties: ['overflowY'],
+    system: 'none',
+  },
+  {
+    name: 'verticalAlign',
+    properties: ['verticalAlign'],
+    system: 'none',
+  },
+  {
+    name: 'width',
+    properties: ['width'],
+    system: 'space',
+  },
+];
 
+export const layoutStyleFns = buildStyleFns(layoutStyleFnConfigs);
 /**
- * A style prop function that takes components props and returns layout styles.
+ * A style prop function that takes component props and returns layout styles.
  * If no `LayoutStyleProps` are found, it returns an empty object.
  *
  * @example
- * // You'll most likely use `layout` with low-level, styled components
- * const BoxExample = () => (
+ * ```tsx
+ * const LayoutExample = () => (
  *   <Box display="inline-block" height="50%">
- *     Hello, positions!
+ *     Hello, layout!
  *   </Box>
  * );
- *
+ * ```
  */
-export function layout<P extends LayoutStyleProps>(props: P) {
-  const styles = {};
-  for (const key in props) {
-    if (key in layoutProps) {
-      const attr = layoutProps[key as keyof LayoutStyleProps];
-      const value = props[key];
-      // @ts-ignore TS doesn't like adding a potentially unknown key to an object, but because we own this object, it's fine.
-      styles[attr] = value;
-    }
-  }
-  return styles;
-}
+export const layout = buildStylePropFn<LayoutStyleProps>(layoutStyleFns);

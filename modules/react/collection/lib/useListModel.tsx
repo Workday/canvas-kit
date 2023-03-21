@@ -15,10 +15,26 @@ export type ListItemProps = {
 };
 
 /**
- * Create a list model that includes item registration, cursors for focus, and selection. You can
- * inject navigation and selection managers to change how a user navigates or how selection works.
+ * The List model contains the the state and events necessary to track items, selection, and a cursor.
+ * Various hooks can be used for a List model to create common behaviors associated with lists, such as
+ * navigating a list with a keyboard, selection (single and multiple), and virtualization.
  *
- * @example
+ * A list also has a "cursor". A cursor is often represented by focus, but it is not always a 1:1
+ * mapping. Think of the cursor as the focus item within the list. If the list has browser focus, the
+ * cursor will map to browser focus. Behaviors such as `useListRovingFocus` will map the cursor to the
+ * active tab stop of the list. For more information, see
+ * [Roving Tabindex](https://w3c.github.io/aria-practices/#kbd_roving_tabindex). `useListRovingFocus`
+ * adds keyboard events that map to navigation events. A [Navigation Manager](#navigation-manager) is
+ * used to map new cursor ids to these events. The `ListModel` takes an optional `navigation`
+ * configuration to change the default navigation behavior. The default navigation manager is a
+ * [wrappingNavigationManager](#wrappingnavigationmanager) meaning the cursor will wrap around the
+ * beginning and the ends. The cursor also provides a [navigationManager](#navigationmanager) that does
+ * not wrap. This is the default navigation for grids.
+ *
+ * The cursor also adds the concept of `orientation` which defaults to `'vertical'`. A Tab list is an
+ * example of a `'horizontal'` list.
+ *
+ * ```tsx
  * const list = useListModel({
  *   // custom handling for selection. single and multi select are provided
  *   selection: mySelectionManager,
@@ -27,6 +43,7 @@ export type ListItemProps = {
  *   items: [{ id: '1', text: 'First'}, { id: '2', text: 'Second' }],
  *   getId: item => item.id, // get the unique identifier of your item
  * })
+ * ```
  */
 export const useListModel = createModelHook({
   defaultConfig: useSelectionListModel.defaultConfig,

@@ -1,0 +1,49 @@
+import {SymbolDoc} from '@workday/canvas-kit-docs';
+
+import {Basic} from './examples/Text/Basic';
+import {TypeLevel} from './examples/Text/TypeLevel';
+import {Variant} from './examples/Text/Variant';
+
+<Meta title="Components/Text/Text" />
+
+# Canvas Kit Text
+
+`Text` provides an ergonomic API for rendering text. It includes built-in support for Canvas type
+tokens.
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-react
+```
+
+## Usage
+
+### Basic Example
+
+`Text` is built on top of [`Box`](/components/layout/box/) and supports a multitude of
+[style props](/getting-started/for-developers/resources/style-props/) including spacing props such
+as `margin` and `padding`, as well as text styling props such as `fontSize` and `fontWeight`.
+
+`Text` renders a `<span>` element by default. You may override the rendered element using the `as`
+prop.
+
+<ExampleCodeBlock code={Basic} />
+
+### Type Level and Variant
+
+`Text` includes built-in support for [Canvas type tokens](/tokens/type/) via the `typeLevel` and
+`variant` props.
+
+`typeLevel` hooks into the [Canvas type hierarchy](/tokens/type/#type-styles).
+
+<ExampleCodeBlock code={TypeLevel} />
+
+`variant` allows you to layer [additional styling](/tokens/type/#variants) to aid users'
+understanding of the text being rendered.
+
+<ExampleCodeBlock code={Variant} />
+
+## Component API
+
+<SymbolDoc name="Text" fileName="/react/" />

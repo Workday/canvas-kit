@@ -12,8 +12,17 @@ import {VirtualItem} from './react-virtual';
 import {useListModel} from './useListModel';
 
 /**
- * Registers an item with a list. It will return elemProps with a `data-id` which can be used by other
- * hooks to identify the item in the list.
+ * This elemProps hook is the base of all item component hooks. It registers an item with a
+ * collection and sets the `data-id` that is used by other hooks. It should always be the last
+ * defined hook when using `composeHooks` (`composeHooks` executes hooks right to left and merges
+ * props left to right). It is used by `ListBox.Item` and all `*.Item` subcomponents.
+ *
+ * ```ts
+ * const useMyItem = composeHooks(
+ *   useListItemSelect, // additional hooks go here
+ *   useListItemRegister // always last
+ * );
+ * ```
  */
 export const useListItemRegister = createElemPropsHook(useListModel)(
   (

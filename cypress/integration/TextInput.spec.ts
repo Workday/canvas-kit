@@ -11,7 +11,7 @@ describe('TextInput', () => {
   ['Basic', 'Alert', 'Error'].forEach(story => {
     context(`given the '${story}' story is rendered`, () => {
       beforeEach(() => {
-        h.stories.load('Components/Inputs/Text Input/React', story);
+        h.stories.load('Components/Inputs/Text Input', story);
       });
 
       it('should not have any axe errors', () => {
@@ -44,7 +44,7 @@ describe('TextInput', () => {
 
   context(`given the 'Disabled' story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Components/Inputs/Text Input/React', 'Disabled');
+      h.stories.load('Components/Inputs/Text Input', 'Disabled');
     });
 
     it('should not have any axe errors', () => {
@@ -58,7 +58,7 @@ describe('TextInput', () => {
 
   context(`given the 'Placeholder' story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Components/Inputs/Text Input/React', 'Placeholder');
+      h.stories.load('Components/Inputs/Text Input', 'Placeholder');
     });
 
     it('should not have any axe errors', () => {

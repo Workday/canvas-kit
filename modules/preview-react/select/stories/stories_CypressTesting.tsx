@@ -5,14 +5,14 @@ import {colors} from '@workday/canvas-kit-react/tokens';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {FormField} from '@workday/canvas-kit-react/form-field';
 
-import Select from '../lib/Select';
+import {Select} from '../lib/Select';
 
 import {manyOptions, options} from './stories';
 import {Modal} from '@workday/canvas-kit-react/modal';
 import {HStack} from '@workday/canvas-kit-react/layout';
 
 export default {
-  title: 'Testing/React/Preview/Select/Cypress',
+  title: 'Testing/Preview/Select/Cypress',
   component: Select,
 };
 

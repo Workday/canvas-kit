@@ -6,7 +6,7 @@ const glob = require('glob');
 const args = process.argv.slice(2);
 const inputPath = path.resolve(args[0]);
 const distFolder = path.join(__dirname, '../dist');
-const srcFolders = ['react', 'labs-react', 'preview-react'];
+const srcFolders = ['react', 'labs-react', 'preview-react', 'docs/mdx/style-props'];
 
 if (!inputPath) {
   console.error('You must supply a valid path');
@@ -38,43 +38,10 @@ const sanitizeMdxFile = (inFile, outFile) => {
       // The line above will be converted (as desired) to:
       //
       // import FlexCard from './examples/Flex/FlexCard';
-      // 
+      //
       // This build process contains logic elsewhere to convert the named
       // exports in those example files to default exports.
-      //
-      // That said, we do NOT want to convert imports for splitprops files.
-      // Splitprops files include dummy components which are used to display
-      // prop tables for things that aren't actually components such as a
-      // model's config, state, and event objects. Splitprops files must remain
-      // named imports since they often export multiple components.
-      //
-      // Most splitprops imports span multiple lines so our regex wouldn't
-      // catch them anyway:
-      //
-      // import {
-      //   TabsModelConfigComponent,
-      //   TabsStateComponent,
-      //   TabsEventsComponent,
-      // } from './TabsModel.splitprops.tsx';
-      //
-      // Note that the TabsModel splitprops file isn't in the examples folder,
-      // so it wouldn't have been caught by the regex even if it was on a
-      // single line. However, it's possible a splitprops file may be placed in
-      // an examples folder AND fall on a single line:
-      //
-      // import {FlexStyle} from './examples/PropTables.splitprops.tsx';
-      //
-      // We add the `(?!.*splitprops)` negative lookahead to the regex to
-      // ensure the named import is preserved in this case. The part before
-      // the negative lookahead (import ... examples) will only match if
-      // "splitprops" is NOT present later in the line.
-      //
-      // More info on negative lookahead:
-      // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions/Assertions#other_assertions
-      .replace(
-        /import {\s?(\w+)\s?} from '\.\/examples(?!.*splitprops)/g,
-        "import $1 from './examples"
-      );
+      .replace(/import {\s?(\w+)\s?} from '\.\/examples/g, "import $1 from './examples");
 
     fs.writeFile(outFile, result, 'utf8', err => {
       if (err) return console.error(err);
