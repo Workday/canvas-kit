@@ -70,11 +70,10 @@ const hasOwnKey = <T extends object>(obj: T, key: any): key is keyof T => obj.ha
 ```
  */
 export const useListItemRovingFocus = createElemPropsHook(useCursorListModel)(
-  ({state, events, getId, navigation}, ref, elemProps: {'data-id'?: string} = {}) => {
+  ({state, events, navigation}, ref, elemProps: {'data-id'?: string} = {}) => {
     // Tracks when this element has focus. If this item is removed while still focused, we have to
     // inform the model to move the cursor to the next item.
     const focusRef = React.useRef(false);
-    const getIdRef = React.useRef(getId);
 
     // Create a ref out of state. We don't want to watch state on unmount, so we use a ref to get the
     // current value at the time of unmounting. Otherwise, `state.items` would be a cached value of an
@@ -93,9 +92,7 @@ export const useListItemRovingFocus = createElemPropsHook(useCursorListModel)(
         }
         requestAnimationFrame(() => {
           document
-            .querySelector<HTMLElement>(
-              `[data-focus-id="${`${state.id}-${getIdRef.current(item)}`}"]`
-            )
+            .querySelector<HTMLElement>(`[data-focus-id="${`${state.id}-${item.id}`}"]`)
             ?.focus();
         });
 

@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v8.5.6](https://github.com/Workday/canvas-kit/releases/tag/v8.5.6) (2023-03-21)
+
+### Components
+
+- fix(collection): Correctly use custom getId ([#2096](https://github.com/Workday/canvas-kit/pull/2096)) ([@NicholasBoll](https://github.com/NicholasBoll))
+  An example was incorrectly using the wrong id. Note that `state.items` in a dynamic collection wraps your provided items so there is a `.id` property on `state.items`. `model.getId` is no longer needed and will be removed in the future to avoid confusion.
+
+
+## [v7.4.10](https://github.com/Workday/canvas-kit/releases/tag/v7.4.10) (2023-03-21)
+
+### Components
+
+- fix(collection): Correctly use custom getId ([#2096](https://github.com/Workday/canvas-kit/pull/2096)) ([@NicholasBoll](https://github.com/NicholasBoll))
+  An example was incorrectly using the wrong id. Note that `state.items` in a dynamic collection wraps your provided items so there is a `.id` property on `state.items`. `model.getId` is no longer needed and will be removed in the future to avoid confusion.
 ## [v8.5.5](https://github.com/Workday/canvas-kit/releases/tag/v8.5.5) (2023-03-16)
 
 ### Components
@@ -68,6 +82,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Infrastructure
 
 - ci: Block fontawesome in Cypress tests to prevent failures ([@NicholasBoll](https://github.com/NicholasBoll))
+- ci: Add logging to the merge step in forward-merge ([@NicholasBoll](https://github.com/NicholasBoll))
 
 
 ## [v8.4.12](https://github.com/Workday/canvas-kit/releases/tag/v8.4.12) (2023-03-01)
