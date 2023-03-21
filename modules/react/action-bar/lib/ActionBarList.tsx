@@ -59,7 +59,7 @@ export const ActionBarList = createSubcomponent('div')({
     <ResponsiveList
       as={Element}
       gap="s"
-      depth={2}
+      depth={1}
       background={commonColors.background}
       borderTop={`solid 1px ${colors.soap400}`}
       padding={`${space.s} ${space.xl} `}
