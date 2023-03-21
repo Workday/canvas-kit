@@ -1,8 +1,8 @@
 import React from 'react';
 
 import {Tabs, useTabsModel} from '@workday/canvas-kit-react/tabs';
-import {HStack} from '@workday/canvas-kit-react/layout';
-import {SecondaryButton} from '@workday/canvas-kit-react/button';
+import {SegmentedControl} from '@workday/canvas-kit-preview-react/segmented-control';
+import {Box} from '@workday/canvas-kit-react/layout';
 
 type MyTabItem = {
   id: string;
@@ -25,30 +25,34 @@ export const OverflowTabs = () => {
   });
   const [containerWidth, setContainerWidth] = React.useState('100%');
   return (
-    <div style={{width: containerWidth}}>
-      <Tabs model={model}>
-        <Tabs.List overflowButton={<Tabs.OverflowButton>More</Tabs.OverflowButton>}>
-          {(item: MyTabItem) => <Tabs.Item>{item.text}</Tabs.Item>}
-        </Tabs.List>
-        <Tabs.Menu.Popper>
-          <Tabs.Menu.Card maxWidth={300} maxHeight={200}>
-            <Tabs.Menu.List>
-              {(item: MyTabItem) => <Tabs.Menu.Item>{item.text}</Tabs.Menu.Item>}
-            </Tabs.Menu.List>
-          </Tabs.Menu.Card>
-        </Tabs.Menu.Popper>
-        <Tabs.Panels>
-          {(item: MyTabItem) => <Tabs.Panel marginTop="m">{item.contents}</Tabs.Panel>}
-        </Tabs.Panels>
-      </Tabs>
+    <div>
+      <Box width={containerWidth} marginBottom="xl">
+        <Tabs model={model}>
+          <Tabs.List overflowButton={<Tabs.OverflowButton>More</Tabs.OverflowButton>}>
+            {(item: MyTabItem) => <Tabs.Item>{item.text}</Tabs.Item>}
+          </Tabs.List>
+          <Tabs.Menu.Popper>
+            <Tabs.Menu.Card maxWidth={300} maxHeight={200}>
+              <Tabs.Menu.List>
+                {(item: MyTabItem) => <Tabs.Menu.Item>{item.text}</Tabs.Menu.Item>}
+              </Tabs.Menu.List>
+            </Tabs.Menu.Card>
+          </Tabs.Menu.Popper>
+          <Tabs.Panels>
+            {(item: MyTabItem) => <Tabs.Panel marginTop="m">{item.contents}</Tabs.Panel>}
+          </Tabs.Panels>
+        </Tabs>
+      </Box>
       <hr />
-      <h4>Change tab container size</h4>
-      <HStack spacing="xs">
-        <SecondaryButton onClick={() => setContainerWidth('100%')}>100%</SecondaryButton>
-        <SecondaryButton onClick={() => setContainerWidth('500px')}>500px</SecondaryButton>
-        <SecondaryButton onClick={() => setContainerWidth('235px')}>235px</SecondaryButton>
-        <SecondaryButton onClick={() => setContainerWidth('150px')}>150px</SecondaryButton>
-      </HStack>
+      <h4>Change Tabs container size</h4>
+      <SegmentedControl onSelect={data => setContainerWidth(data.id)}>
+        <SegmentedControl.List aria-label="container width control">
+          <SegmentedControl.Item data-id="100%">100%</SegmentedControl.Item>
+          <SegmentedControl.Item data-id="500px">500px</SegmentedControl.Item>
+          <SegmentedControl.Item data-id="360px">360px</SegmentedControl.Item>
+          <SegmentedControl.Item data-id="150px">150px</SegmentedControl.Item>
+        </SegmentedControl.List>
+      </SegmentedControl>
     </div>
   );
 };

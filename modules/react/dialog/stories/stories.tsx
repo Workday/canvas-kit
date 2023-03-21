@@ -2,7 +2,7 @@ import React from 'react';
 
 import {Dialog} from '@workday/canvas-kit-react/dialog';
 import {DeleteButton} from '@workday/canvas-kit-react/button';
-import {HStack} from '@workday/canvas-kit-react/layout';
+import {Flex} from '@workday/canvas-kit-react/layout';
 
 export default {
   title: 'Components/Popups/Dialog',
@@ -27,12 +27,12 @@ export const Basic = () => {
           <Dialog.Body>
             <p style={{marginTop: 0, marginBottom: 0}}>Are you sure you want to delete the item?</p>
           </Dialog.Body>
-          <HStack spacing="s" padding="xxs" marginTop="xxs">
+          <Flex gap="s" padding="xxs" marginTop="xxs">
             <Dialog.CloseButton as={DeleteButton} onClick={handleDelete}>
               Delete
             </Dialog.CloseButton>
             <Dialog.CloseButton>Cancel</Dialog.CloseButton>
-          </HStack>
+          </Flex>
         </Dialog.Card>
       </Dialog.Popper>
     </Dialog>

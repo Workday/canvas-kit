@@ -2,7 +2,7 @@ import React from 'react';
 
 import {Modal} from '@workday/canvas-kit-react/modal';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
-import {HStack, Box} from '@workday/canvas-kit-react/layout';
+import {Flex, Box} from '@workday/canvas-kit-react/layout';
 
 export const Basic = () => {
   const handleAcknowledge = () => {
@@ -26,12 +26,12 @@ export const Basic = () => {
               software and associated documentation files (the "Software").
             </Box>
           </Modal.Body>
-          <HStack spacing="s" padding="xxs" marginTop="xxs">
+          <Flex gap="s" padding="xxs" marginTop="xxs">
             <Modal.CloseButton as={PrimaryButton} onClick={handleAcknowledge}>
               Acknowledge
             </Modal.CloseButton>
             <Modal.CloseButton onClick={handleCancel}>Cancel</Modal.CloseButton>
-          </HStack>
+          </Flex>
         </Modal.Card>
       </Modal.Overlay>
     </Modal>
