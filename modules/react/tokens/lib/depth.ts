@@ -17,7 +17,7 @@ export type CanvasDepth = {
   };
   /**
    * ### Depth 1
-   * Used for minimal offset and Cards resting on a white background
+   * Used for minimal offset and Cards
    *
    * @example
    * ```ts
@@ -65,7 +65,6 @@ export type CanvasDepth = {
   };
   /**
    * ### Depth 4
-   * Used for bottom sheets or Menus
    *
    * @example
    * ```ts
@@ -81,8 +80,7 @@ export type CanvasDepth = {
   };
   /**
    * ### Depth 5
-   * Used for Popups, Toast Messages, Dialogs, Side Panels without opacity overlay behavior as well
-   * as Snackbars and Toast Messaged
+   * Used for Popups, Toast Messages, Dialogs, Side Panels without opacity overlay behavior
    *
    * @example
    * ```ts
@@ -98,7 +96,7 @@ export type CanvasDepth = {
   };
   /**
    * ### Depth 6
-   * Used for components with opacity overlay behavior such as Modal, Dialogs or Side Panels
+   * Used for components with opacity overlay behavior such as Modal or Side Panels
    *
    * @example
    * ```ts
