@@ -31,7 +31,7 @@ jobs:
         with:
           node_version: 14.x
 
-      - uses: Workday/canvas-kit-actions/release@release
+      - uses: Workday/canvas-kit-actions/release@v1
         with:
           gh_token: ${{ secrets.GITHUB_TOKEN }}
           gh_rw_token: ${{ secrets.GH_RW_TOKEN }}
