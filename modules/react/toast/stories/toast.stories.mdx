@@ -58,14 +58,15 @@ An `alert` `Toast` will wrap the message within an `assertive` ARIA live region 
 ### Dialog
 
 Set the `mode` prop to `dialog` to convey the presence of a follow-up action. If you use this
-`mode`, you need to add an `aria-label`. This `aria-label` should be like a category label for the
+`mode`, you need to add an `aria-label`. This `aria-label` should be like additional information for the
 `Toast`. The `Toast` will also add an `aria-describedby` that links the `Toast` to `Toast.Message`
-so that it is read out to screen readers.
+so that it is read out to screen readers. The `aria-label` should be different that the contents of
+the `Toast` so there is no duplication being read out by screen readers.
 
 <ExampleCodeBlock code={ToastDialog} />
 
-The `Toast` will be given a role of `dialog`. You need to provide an `aria-label` to indicate the
-category of the notification.
+The `Toast` will be given a role of `dialog`. You need to provide an `aria-label` to add
+additional information regarding the contents.
 
 Screen readers will read it out in the following order: `"Notifcation: Your workbook was
 successfully processed."

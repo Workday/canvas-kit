@@ -9,7 +9,7 @@ export const useToastModel = createModelHook({
      * Status toasts are used to convey a message or a successful action. The `role` is set to `status`
      * Dialog toasts are used when there's an action to be taken. The `role` is set to `dialog`.
      * If you use this mode, you must add an aria-label to the main `Toast` component.
-     * The aria-label should more of a category used to describe the type of notification.
+     * The aria-label should provide additional information to the contents of the `Toast`.
      * @default 'status'
      */
     mode: 'status' as AriaRoleMode,
