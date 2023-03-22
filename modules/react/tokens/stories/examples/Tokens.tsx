@@ -6,159 +6,42 @@ import {colors, type, depth, space, borderRadius} from '@workday/canvas-kit-reac
 import {Text} from '@workday/canvas-kit-react/text';
 import {Box, Flex} from '@workday/canvas-kit-react/layout';
 
+const DepthCard = ({depth, children}) => {
+  return (
+    <Flex
+      depth={depth}
+      width={200}
+      height={200}
+      borderRadius="s"
+      alignItems="center"
+      justifyContent="center"
+      backgroundColor="frenchVanilla100"
+    >
+      {children}
+    </Flex>
+  );
+};
+
 export const Depth = () => (
   <Flex gap="m" flexDirection="column">
     <Flex gap="m" flexWrap="wrap">
-      <Flex
-        width={200}
-        height={200}
-        borderRadius="s"
-        alignItems="center"
-        justifyContent="center"
-        depth="none"
-      >
-        Depth None
-      </Flex>
-      <Flex
-        depth={1}
-        width={200}
-        height={200}
-        borderRadius="s"
-        alignItems="center"
-        justifyContent="center"
-      >
-        Depth 1
-      </Flex>
-      <Flex
-        depth={2}
-        width={200}
-        height={200}
-        borderRadius="s"
-        alignItems="center"
-        justifyContent="center"
-      >
-        Depth 2
-      </Flex>
-      <Flex
-        depth={3}
-        width={200}
-        height={200}
-        borderRadius="s"
-        alignItems="center"
-        justifyContent="center"
-      >
-        Depth 3
-      </Flex>
-      <Flex
-        depth={4}
-        width={200}
-        height={200}
-        borderRadius="s"
-        alignItems="center"
-        justifyContent="center"
-      >
-        Depth 4
-      </Flex>
-      <Flex
-        depth={5}
-        width={200}
-        height={200}
-        borderRadius="s"
-        alignItems="center"
-        justifyContent="center"
-      >
-        Depth 5
-      </Flex>
-      <Flex
-        depth={6}
-        width={200}
-        height={200}
-        borderRadius="s"
-        alignItems="center"
-        justifyContent="center"
-      >
-        Depth 6
-      </Flex>
+      <DepthCard depth="none">Depth None</DepthCard>
+      <DepthCard depth={1}>Depth 1</DepthCard>
+      <DepthCard depth={2}>Depth 2</DepthCard>
+      <DepthCard depth={3}>Depth 3</DepthCard>
+      <DepthCard depth={4}>Depth 4</DepthCard>
+      <DepthCard depth={5}>Depth 5</DepthCard>
+      <DepthCard depth={6}>Depth 6</DepthCard>
     </Flex>
     <Text>Depth on a colored background</Text>
     <Flex backgroundColor="soap400" gap="m" padding="m" flexWrap="wrap">
-      <Flex
-        width={200}
-        height={200}
-        borderRadius="s"
-        alignItems="center"
-        justifyContent="center"
-        backgroundColor="frenchVanilla100"
-        depth="none"
-      >
-        Depth None
-      </Flex>
-      <Flex
-        depth={1}
-        width={200}
-        height={200}
-        borderRadius="s"
-        alignItems="center"
-        justifyContent="center"
-        backgroundColor="frenchVanilla100"
-      >
-        Depth 1
-      </Flex>
-      <Flex
-        depth={2}
-        width={200}
-        height={200}
-        borderRadius="s"
-        alignItems="center"
-        justifyContent="center"
-        backgroundColor="frenchVanilla100"
-      >
-        Depth 2
-      </Flex>
-      <Flex
-        depth={3}
-        width={200}
-        height={200}
-        borderRadius="s"
-        alignItems="center"
-        justifyContent="center"
-        backgroundColor="frenchVanilla100"
-      >
-        Depth 3
-      </Flex>
-      <Flex
-        depth={4}
-        width={200}
-        height={200}
-        borderRadius="s"
-        alignItems="center"
-        justifyContent="center"
-        backgroundColor="frenchVanilla100"
-      >
-        Depth 4
-      </Flex>
-      <Flex
-        depth={5}
-        width={200}
-        height={200}
-        borderRadius="s"
-        alignItems="center"
-        justifyContent="center"
-        backgroundColor="frenchVanilla100"
-      >
-        Depth 5
-      </Flex>
-      <Flex
-        depth={6}
-        width={200}
-        height={200}
-        borderRadius="s"
-        alignItems="center"
-        justifyContent="center"
-        backgroundColor="frenchVanilla100"
-      >
-        Depth 6
-      </Flex>
+      <DepthCard depth="none">Depth None</DepthCard>
+      <DepthCard depth={1}>Depth 1</DepthCard>
+      <DepthCard depth={2}>Depth 2</DepthCard>
+      <DepthCard depth={3}>Depth 3</DepthCard>
+      <DepthCard depth={4}>Depth 4</DepthCard>
+      <DepthCard depth={5}>Depth 5</DepthCard>
+      <DepthCard depth={6}>Depth 6</DepthCard>
     </Flex>
   </Flex>
 );
