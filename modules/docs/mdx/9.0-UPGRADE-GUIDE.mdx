@@ -1,5 +1,7 @@
 import {Meta} from '@storybook/addon-docs';
 
+import depthTokenUpdate from './depth-tokens-update.png'
+
 <Meta title="Guides/Upgrade Guides/v9.0" />
 
 # Canvas Kit 9.0 Upgrade Guide
@@ -146,4 +148,7 @@ change. We couldn't find any example of `memoize` or `memoizedFocusRing` being u
 ### depth
 
 In `v7` we released an update to our `depth` tokens that were too bold and harsh for web applications. We've modified the `depth` token values
-to be more subtle and improve visual design. This change affects all components that use a box shadow including: `Card, Toast, Popup, Dialog, Modal, Box`.
+to be more subtle and improve visual design. These updates change the `box-shadow` value and not the `depth` value used pero component. These changes
+affects all components that use a box shadow including: `Card, Toast, Dialog, Popup, Modal, Menu`.
+
+<img src={depthTokenUpdate} atl="A before and after of depth token values" />
