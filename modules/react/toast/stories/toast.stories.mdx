@@ -33,16 +33,20 @@ purpose and provide an accessible experience.
 By default, `mode` is set to `status`, which indicates the message contains advisory information
 such as a successful action.
 
+
 <ExampleCodeBlock code={Basic} />
+
 
 A `status` `Toast` will wrap the message within a `polite` ARIA live region with a `role` of
 `status`.
+
 
 ### Alert
 
 Set the `mode` prop to `alert` to convey urgent and important information such as an error.
 
 <ExampleCodeBlock code={ToastAlert} />
+
 
 An `alert` `Toast` will wrap the message within an `assertive` ARIA live region with a `role` of
 `alert`.
@@ -55,7 +59,9 @@ Set the `mode` prop to `dialog` to convey the presence of a follow-up action. If
 so that it is read out to screen readers. The `aria-label` should be different that the contents of
 the `Toast` so there is no duplication being read out by screen readers.
 
+
 <ExampleCodeBlock code={ToastDialog} />
+
 
 Screen readers will read it out in the following order: "Notifcation: Your workbook was successfully
 processed."
@@ -87,6 +93,7 @@ export const CustomIDToast = () => {
 `Toast` supports right-to-left languages when specified in the `CanvasProvider` `theme`.
 
 <ExampleCodeBlock code={RTL} />
+
 
 ## Component API
 

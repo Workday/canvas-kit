@@ -5,7 +5,7 @@ import {checkIcon} from '@workday/canvas-system-icons-web';
 import {Popper} from '@workday/canvas-kit-react/popup';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
 
-export const WithPopper = () => {
+export const ToastDialog = () => {
   const [open, setOpen] = React.useState(false);
   const containerRef = React.useRef(null);
 
