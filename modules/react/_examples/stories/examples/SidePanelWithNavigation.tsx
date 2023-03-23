@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {styled, StyledType} from '@workday/canvas-kit-react/common';
-import {depth, colors, space, gradients, type} from '@workday/canvas-kit-react/tokens';
+import {colors, space, gradients, type} from '@workday/canvas-kit-react/tokens';
 import {SidePanel, useSidePanel} from '@workday/canvas-kit-preview-react/side-panel';
 import {Flex, Box} from '@workday/canvas-kit-react/layout';
 import {BodyText, Subtext} from '@workday/canvas-kit-react/text';
@@ -9,35 +9,54 @@ import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {rocketIcon, notificationsIcon} from '@workday/canvas-system-icons-web';
 
 const StyledPanel = styled(SidePanel)({
-  depth: 2,
   backgroundColor: colors.soap200,
   zIndex: 1,
 });
 
-const StyledLink = styled(Subtext.as('a'))<StyledType>({
+const StyledExpandable = styled(Expandable.Target)({
+  borderRadius: 0,
   ':hover': {
-    backgroundColor: 'blue',
+    backgroundColor: colors.soap500,
   },
 });
 
-const baseStyles = {
-  color: 'blackPepper300',
-  minHeight: 'xxl', //idk
-  minWidth: 'xs', //idk
-  padding: 'xs', //all around padding for individual cells?
-};
+const StyledLink = styled(Subtext.as('a'))<StyledType>({
+  color: colors.blackPepper300,
+  ':hover': {
+    backgroundColor: colors.soap500,
+  },
+});
+
+const forDesigners = [
+  {value: 'Understanding Canvas', linkValue: '#UnderstandingCanvas'},
+  {value: 'Customizing Canvas', linkValue: '#CustomizingCanvas'},
+  {value: 'Contributing to Canvas', linkValue: '#ContributingtoCanvas'},
+  {value: 'Resources', linkValue: '#Resources'},
+];
+
+const forDevelopers = [
+  {value: 'Using Canvas', linkValue: '#UsingCanvas'},
+  {value: 'Contributing', linkValue: '#Contributing'},
+  {value: 'Resources', linkValue: '#Resources'},
+];
+
+const gettingStarted = [
+  'Extended Systems',
+  'Canvas Glossary',
+  'Frequently Asked Questions',
+  'Canvas Support',
+];
 
 export const Basic = () => {
   const {labelProps} = useSidePanel();
 
   return (
-    <Flex height={600} position="relative" backgroundColor="frenchVanilla100">
+    <Flex height={800} position="relative" backgroundColor="frenchVanilla100">
       <StyledPanel touched={true} variant="alternate">
-        <Flex flexDirection="column" rowGap="zero">
-          <Flex.Item height={24}></Flex.Item>
+        <Flex flexDirection="column" rowGap="zero" paddingTop="m">
           <Flex.Item>
             <Expandable padding="zero">
-              <Expandable.Target paddingY="s" paddingX="m" textAlign="center">
+              <StyledExpandable paddingY="s" paddingX="m" textAlign="center">
                 <SystemIcon icon={rocketIcon} marginX="xxs" />
                 <Expandable.Title padding="zero">
                   <BodyText
@@ -54,8 +73,8 @@ export const Basic = () => {
                   </Subtext>
                 </Expandable.Title>
                 <Expandable.Icon iconPosition="end" />
-              </Expandable.Target>
-              <Expandable.Content paddingY="zero">
+              </StyledExpandable>
+              <Expandable.Content paddingY="zero" paddingX="zero">
                 <StyledLink
                   as="a"
                   href="#"
@@ -71,7 +90,12 @@ export const Basic = () => {
                   Introduction
                 </StyledLink>
                 <Expandable paddingBottom="9px" paddingX="zero" paddingTop="zero">
-                  <Expandable.Target alignItems="center" paddingLeft="xxl" paddingTop="10px">
+                  <StyledExpandable
+                    alignItems="center"
+                    paddingLeft="xxl"
+                    paddingTop="10px"
+                    paddingBottom="zero"
+                  >
                     <Expandable.Icon iconPosition="start" size="16px" padding="zero" />
                     <Expandable.Title>
                       <Subtext
@@ -84,65 +108,32 @@ export const Basic = () => {
                         For Designers
                       </Subtext>
                     </Expandable.Title>
-                  </Expandable.Target>
+                  </StyledExpandable>
                   <Expandable.Content padding="zero">
-                    <StyledLink
-                      as="a"
-                      href="#"
-                      size="large"
-                      color={colors.blackpepper300}
-                      textDecoration="none"
-                      display="flex"
-                      paddingLeft="112px"
-                      paddingTop="6px"
-                      paddingBottom="5px"
-                    >
-                      Understanding Canvas
-                    </StyledLink>
-                    <StyledLink
-                      as="a"
-                      href="#"
-                      size="large"
-                      color={colors.blackpepper300}
-                      textDecoration="none"
-                      display="flex"
-                      paddingLeft="112px"
-                      paddingTop="6px"
-                      paddingBottom="5px"
-                    >
-                      Customizing Canvas
-                    </StyledLink>
-                    <StyledLink
-                      as="a"
-                      href="#"
-                      size="large"
-                      color={colors.blackpepper300}
-                      textDecoration="none"
-                      display="flex"
-                      paddingLeft="112px"
-                      paddingTop="6px"
-                      paddingBottom="5px"
-                    >
-                      Contributing to Canvas
-                    </StyledLink>
-                    <StyledLink
-                      as="a"
-                      href="#"
-                      size="large"
-                      color={colors.blackpepper300}
-                      textDecoration="none"
-                      marginY="zero"
-                      display="flex"
-                      paddingTop="10px"
-                      paddingBottom="9px"
-                      paddingLeft="xxl"
-                    >
-                      Resources
-                    </StyledLink>
+                    {forDesigners.map(item => {
+                      return (
+                        <StyledLink
+                          size="large"
+                          display="flex"
+                          textDecoration="none"
+                          paddingLeft="112px"
+                          paddingTop="6px"
+                          paddingBottom="5px"
+                          href={item.linkValue}
+                        >
+                          {item.value}
+                        </StyledLink>
+                      );
+                    })}
                   </Expandable.Content>
                 </Expandable>
                 <Expandable paddingBottom="9px" paddingX="zero" paddingTop="zero">
-                  <Expandable.Target alignItems="center" paddingLeft="xxl" paddingTop="10px">
+                  <StyledExpandable
+                    alignItems="center"
+                    paddingLeft="xxl"
+                    paddingTop="10px"
+                    paddingBottom="zero"
+                  >
                     <Expandable.Icon iconPosition="start" size="16px" padding="zero" />
                     <Expandable.Title>
                       <Subtext
@@ -155,54 +146,29 @@ export const Basic = () => {
                         For Developers
                       </Subtext>
                     </Expandable.Title>
-                  </Expandable.Target>
+                  </StyledExpandable>
                   <Expandable.Content padding="zero">
-                    <Subtext
-                      as="a"
-                      href="#"
-                      size="large"
-                      color={colors.blackpepper300}
-                      textDecoration="none"
-                      display="flex"
-                      marginLeft="112px"
-                      paddingTop="6px"
-                      paddingBottom="5px"
-                    >
-                      Using Canvas
-                    </Subtext>
-                    <Subtext
-                      as="a"
-                      href="#"
-                      size="large"
-                      color={colors.blackpepper300}
-                      textDecoration="none"
-                      display="flex"
-                      marginLeft="112px"
-                      paddingTop="6px"
-                      paddingBottom="5px"
-                    >
-                      Contributing
-                    </Subtext>
-                    <Subtext
-                      as="a"
-                      href="#"
-                      size="large"
-                      color={colors.blackpepper300}
-                      textDecoration="none"
-                      display="flex"
-                      marginLeft="112px"
-                      paddingTop="6px"
-                      paddingBottom="5px"
-                    >
-                      Resources
-                    </Subtext>
+                    {forDevelopers.map(item => {
+                      return (
+                        <StyledLink
+                          size="large"
+                          display="flex"
+                          textDecoration="none"
+                          paddingLeft="112px"
+                          paddingTop="6px"
+                          paddingBottom="5px"
+                          href={item.linkValue}
+                        >
+                          {item.value}
+                        </StyledLink>
+                      );
+                    })}
                   </Expandable.Content>
                 </Expandable>
-                <Subtext
+                <StyledLink
                   as="a"
                   href="#"
                   size="large"
-                  color={colors.blackpepper300}
                   textDecoration="none"
                   marginY="zero"
                   display="flex"
@@ -211,13 +177,13 @@ export const Basic = () => {
                   paddingLeft="xxl"
                 >
                   Extended Systems
-                </Subtext>
+                </StyledLink>
               </Expandable.Content>
             </Expandable>
           </Flex.Item>
           <Flex.Item>
             <Expandable padding="zero">
-              <Expandable.Target paddingY="s" paddingX="m" textAlign="center">
+              <StyledExpandable paddingY="s" paddingX="m" textAlign="center">
                 <SystemIcon icon={notificationsIcon} marginX="xxs" />
                 <Expandable.Title padding="zero">
                   <BodyText
@@ -234,13 +200,12 @@ export const Basic = () => {
                   </Subtext>
                 </Expandable.Title>
                 <Expandable.Icon iconPosition="end" />
-              </Expandable.Target>
-              <Expandable.Content paddingY="zero">
-                <Subtext
+              </StyledExpandable>
+              <Expandable.Content paddingY="zero" paddingX="zero">
+                <StyledLink
                   as="a"
                   href="#"
                   size="large"
-                  color={colors.blackpepper300}
                   textDecoration="none"
                   marginY="zero"
                   display="flex"
@@ -249,12 +214,11 @@ export const Basic = () => {
                   paddingLeft="xxl"
                 >
                   Announcements
-                </Subtext>
-                <Subtext
+                </StyledLink>
+                <StyledLink
                   as="a"
                   href="#"
                   size="large"
-                  color={colors.blackpepper300}
                   textDecoration="none"
                   marginY="zero"
                   display="flex"
@@ -263,7 +227,7 @@ export const Basic = () => {
                   paddingLeft="xxl"
                 >
                   Upgrade Guides
-                </Subtext>
+                </StyledLink>
               </Expandable.Content>
             </Expandable>
           </Flex.Item>
