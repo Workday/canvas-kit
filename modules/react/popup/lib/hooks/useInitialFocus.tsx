@@ -11,8 +11,8 @@ import {usePopupModel} from './usePopupModel';
 
 /**
  * Moves focus within the popup when the popup becomes visible. This is useful for keyboard and
- * screen reader users alike. This should be used with `useFocusRedirect` or `useFocusTrap` for a
- * complete focus management solution.
+ * screen reader users alike. This should be used with {@link useFocusRedirect} or
+ * {@link useFocusTrap} for a complete focus management solution.
  *
  * This should be used for popups that have focusable elements inside, like Modals, non-modal
  * dialogs, menus, etc.

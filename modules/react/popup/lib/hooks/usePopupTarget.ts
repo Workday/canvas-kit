@@ -2,7 +2,7 @@ import {createElemPropsHook, useForkRef} from '@workday/canvas-kit-react/common'
 import {usePopupModel} from './usePopupModel';
 
 /**
- * Adds the necessary props to a `Target` component. Used by the Popup.Target subcomponent.
+ * Adds the necessary props to a {@link PopupTarget Popup.Target} subcomponent.
  */
 export const usePopupTarget = createElemPropsHook(usePopupModel)(({events, state}, ref) => {
   const elementRef = useForkRef(ref, state.targetRef);

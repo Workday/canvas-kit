@@ -5,7 +5,18 @@ import {orientationKeyMap} from './useListItemRovingFocus';
 import {useListModel} from './useListModel';
 
 /**
- * Reset the cursor to the selected item when the list looses focus
+ * This elemProps hook resets the cursor when the list looses focus. By default,
+ * [useListItemRovingFocus](#use-list-item-roving-focus) will leave the last focused item as the
+ * focusable item in the list. Sometimes it is desireable to reset the cursor to the last selected
+ * item. For example, `Tabs.Item` uses this hook to reset the tab stop to the currently selected tab.
+ *
+ * ```ts
+ * const useMyItem = composeHooks(
+ *   useListResetCursorOnBlur, // adds the cursor reset to selected for roving tabindex
+ *   useListItemRovingFocus,
+ *   useListItemRegister
+ * );
+```
  */
 export const useListResetCursorOnBlur = createElemPropsHook(useListModel)(({state, events}) => {
   const programmaticFocusRef = React.useRef(false);

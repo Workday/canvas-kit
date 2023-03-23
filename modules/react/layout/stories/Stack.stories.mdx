@@ -1,4 +1,4 @@
-import {Meta} from '@storybook/addon-docs';
+import {SymbolDoc} from '@workday/canvas-kit-docs';
 
 import {Stack} from '@workday/canvas-kit-react/layout';
 // examples
@@ -10,7 +10,7 @@ import {StackCard} from './examples/Stack/StackCard';
 import {HStackCards} from './examples/Stack/HStackCards';
 import {VStackCards} from './examples/Stack/VStackCards';
 
-<Meta title="Components/Containers/Stack" component={Stack} />
+<Meta title="Components/Layout/Stack" component={Stack} />
 
 ### ⚠️ Stack has been soft-deprecated in v8 and will be removed in v9 ⚠️
 
@@ -219,4 +219,8 @@ Use this approach when:
 
 ## Stack Props
 
-<ArgsTable of={Stack} />
+<SymbolDoc name="StackStyleProps" fileName="/react/" />
+
+`Stack` extends
+[flex container style props](/getting-started/for-developers/resources/style-props/#flex) and `Box`
+style props.

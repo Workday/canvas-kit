@@ -4,49 +4,51 @@ import {CanvasSystemIcon, CanvasIconTypes} from '@workday/design-assets-types';
 import {CSSObject} from '@emotion/styled';
 import {Icon, IconProps} from './Icon';
 import {createComponent} from '@workday/canvas-kit-react/common';
+import {getColor} from './utils';
+import {SystemPropValues} from '@workday/canvas-kit-react/layout';
 
 export interface SystemIconStyles {
   /**
    * The accent color of the SystemIcon. This overrides `color`.
    */
-  accent?: string;
+  accent?: SystemPropValues['color'];
   /**
    * The accent color of the SystemIcon on hover. This overrides `colorHover`.
    */
-  accentHover?: string;
+  accentHover?: SystemPropValues['color'];
   /**
    * The background color of the SystemIcon.
    * @default transparent
    */
-  background?: string;
+  background?: SystemPropValues['color'];
   /**
    * The background color of the SystemIcon on hover.
    * @default transparent
    */
-  backgroundHover?: string;
+  backgroundHover?: SystemPropValues['color'];
   /**
    * The color of the SystemIcon. This defines `accent` and `fill`. `color` may be overriden by `accent` and `fill`.
    * @default iconColors.standard
    */
-  color?: string;
+  color?: SystemPropValues['color'];
   /**
    * The hover color of the SystemIcon. This defines `accentHover` and `fillHover`. `colorHover` may be overriden by `accentHover` and `fillHover`.
    * @default iconColors.hover
    */
-  colorHover?: string;
+  colorHover?: SystemPropValues['color'];
   /**
    * The fill color of the SystemIcon. This overrides `color`.
    */
-  fill?: string;
+  fill?: SystemPropValues['color'];
   /**
    * The fill color of the SystemIcon on hover. This overrides `colorHover`.
    */
-  fillHover?: string;
+  fillHover?: SystemPropValues['color'];
 }
 
 export interface SystemIconProps
   extends SystemIconStyles,
-    Omit<IconProps, 'src' | 'color' | 'fill' | 'type' | 'background'> {
+    Omit<IconProps, 'src' | 'fill' | 'type'> {
   /**
    * The icon to display from `@workday/canvas-system-icons-web`.
    */
@@ -55,7 +57,6 @@ export interface SystemIconProps
    * The size of the SystemIcon in `px`.
    */
   size?: number | string | undefined;
-  className?: string; //investigate more
 }
 
 export const systemIconStyles = ({
@@ -69,22 +70,22 @@ export const systemIconStyles = ({
   fillHover,
 }: SystemIconStyles): CSSObject => ({
   '& .wd-icon-fill': {
-    fill: fill || color,
+    fill: getColor(fill) || getColor(color),
   },
   ':hover .wd-icon-fill': {
-    fill: fillHover || colorHover,
+    fill: getColor(fillHover) || getColor(colorHover),
   },
   '& .wd-icon-accent, & .wd-icon-accent2': {
-    fill: accent || color,
+    fill: getColor(accent) || getColor(color),
   },
   ':hover .wd-icon-accent, :hover .wd-icon-accent2': {
-    fill: accentHover || colorHover,
+    fill: getColor(accentHover) || getColor(colorHover),
   },
   '& .wd-icon-background': {
-    fill: background,
+    fill: getColor(background),
   },
   ':hover .wd-icon-background': {
-    fill: backgroundHover,
+    fill: getColor(backgroundHover),
   },
 });
 

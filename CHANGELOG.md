@@ -3,6 +3,112 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v8.5.6](https://github.com/Workday/canvas-kit/releases/tag/v8.5.6) (2023-03-21)
+
+### Components
+
+- fix(collection): Correctly use custom getId ([#2096](https://github.com/Workday/canvas-kit/pull/2096)) ([@NicholasBoll](https://github.com/NicholasBoll))
+  An example was incorrectly using the wrong id. Note that `state.items` in a dynamic collection wraps your provided items so there is a `.id` property on `state.items`. `model.getId` is no longer needed and will be removed in the future to avoid confusion.
+
+
+## [v7.4.10](https://github.com/Workday/canvas-kit/releases/tag/v7.4.10) (2023-03-21)
+
+### Components
+
+- fix(collection): Correctly use custom getId ([#2096](https://github.com/Workday/canvas-kit/pull/2096)) ([@NicholasBoll](https://github.com/NicholasBoll))
+  An example was incorrectly using the wrong id. Note that `state.items` in a dynamic collection wraps your provided items so there is a `.id` property on `state.items`. `model.getId` is no longer needed and will be removed in the future to avoid confusion.
+## [v8.5.5](https://github.com/Workday/canvas-kit/releases/tag/v8.5.5) (2023-03-16)
+
+### Components
+
+- docs: Move Box, Flex, and Grid to a new Layout Folder in Storybook ([#2078](https://github.com/Workday/canvas-kit/pull/2078)) ([@thunguyen19](https://github.com/thunguyen19))
+
+
+## [v8.5.4](https://github.com/Workday/canvas-kit/releases/tag/v8.5.4) (2023-03-15)
+
+### Documentation
+
+- docs: Filter out model props in container components ([#2085](https://github.com/Workday/canvas-kit/pull/2085)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v8.5.3](https://github.com/Workday/canvas-kit/releases/tag/v8.5.3) (2023-03-13)
+
+### Documentation
+
+- docs: Add breadcrumbs to symbol doc dialog for nested symbols ([#2072](https://github.com/Workday/canvas-kit/pull/2072)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v8.5.2](https://github.com/Workday/canvas-kit/releases/tag/v8.5.2) (2023-03-09)
+
+### Infrastructure
+
+- ci: Add logging to the merge step in forward-merge ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v8.5.1](https://github.com/Workday/canvas-kit/releases/tag/v8.5.1) (2023-03-09)
+
+### Components
+
+- fix: Remove style attribute on Expandable Title ([#2074](https://github.com/Workday/canvas-kit/pull/2074)) ([@vibdev](https://github.com/vibdev))
+  Not explicitly a breaking change for `Expandable.Title`, but does alter the specificity for fontFamily, fontSize, lineHeight, fontWeight, color, and textAlign.
+
+### Infrastructure
+
+- chore: Update browserlist config for eslint compat/compat ([#2075](https://github.com/Workday/canvas-kit/pull/2075)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v8.5.0](https://github.com/Workday/canvas-kit/releases/tag/v8.5.0) (2023-03-08)
+
+### Components
+
+- feat: Allow SystemIcon to use token colors ([#1988](https://github.com/Workday/canvas-kit/pull/1988)) ([@thunguyen19](https://github.com/thunguyen19))
+  Allow SystemIcon to use token colors for any color related props.
+- fix: Update modal padding to match mobile specs ([#2008](https://github.com/Workday/canvas-kit/pull/2008)) ([@seans-cummin](https://github.com/seans-cummin), [@mannycarrera4](https://github.com/mannycarrera4))
+  - Updating padding from 16px to 24px for smaller screen sizes, bringing the total padding between edge and content to 24px.
+  - Reduced padding between title and body from 16px to 8px for smaller screen sizes.
+
+### Documentation
+
+- docs: Add custom docgen parsing ([#1962](https://github.com/Workday/canvas-kit/pull/1962)) ([@NicholasBoll](https://github.com/NicholasBoll))
+- docs: Ignore dist directories when documenting symbols ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v8.4.13](https://github.com/Workday/canvas-kit/releases/tag/v8.4.13) (2023-03-07)
+
+### Components
+
+- fix: Allow overriding aria-describedby in useTooltip ([#2064](https://github.com/Workday/canvas-kit/pull/2064)) ([@EugeneCib](https://github.com/EugeneCib), [@NicholasBoll](https://github.com/NicholasBoll))
+
+### Infrastructure
+
+- ci: Block fontawesome in Cypress tests to prevent failures ([@NicholasBoll](https://github.com/NicholasBoll))
+- ci: Add logging to the merge step in forward-merge ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v8.4.12](https://github.com/Workday/canvas-kit/releases/tag/v8.4.12) (2023-03-01)
+
+
+
+
+## [v8.4.11](https://github.com/Workday/canvas-kit/releases/tag/v8.4.11) (2023-02-28)
+
+### Infrastructure
+
+- ci: Changing assign reviewer action to a lottery system ([#2039](https://github.com/Workday/canvas-kit/pull/2039)) ([@jaclynjessup](https://github.com/jaclynjessup))
+- ci: Updating project board action ([#2026](https://github.com/Workday/canvas-kit/pull/2026)) ([@jaclynjessup](https://github.com/jaclynjessup))
+- ci: Fix to invalid yml error ([#2040](https://github.com/Workday/canvas-kit/pull/2040)) ([@jaclynjessup](https://github.com/jaclynjessup))
+- ci: Updates to lottery and project actions ([#2054](https://github.com/Workday/canvas-kit/pull/2054)) ([@jaclynjessup](https://github.com/jaclynjessup))
+
+### Testing
+
+- test: Update tooltip testing story to render properly ([#2047](https://github.com/Workday/canvas-kit/pull/2047)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v7.4.9](https://github.com/Workday/canvas-kit/releases/tag/v7.4.9) (2023-02-24)
+
+### Testing
+
+- test: Update tooltip testing story to render properly ([#2047](https://github.com/Workday/canvas-kit/pull/2047)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
 ## [v8.4.10](https://github.com/Workday/canvas-kit/releases/tag/v8.4.10) (2023-02-14)
 
 ### Codemods

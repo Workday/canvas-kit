@@ -1,6 +1,6 @@
 import * as h from '../helpers';
 
-describe('Button', () => {
+describe('Hyperlink', () => {
   before(() => {
     h.stories.visit();
   });

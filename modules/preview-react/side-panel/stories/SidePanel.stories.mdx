@@ -1,6 +1,6 @@
-import {Meta} from '@storybook/addon-docs';
+import {SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
+
 import {SidePanel} from '@workday/canvas-kit-preview-react/side-panel';
-import {Specifications} from '@workday/canvas-kit-docs';
 // Examples
 import {Basic} from './examples/Basic';
 import {HiddenName} from './examples/HiddenName';
@@ -10,8 +10,6 @@ import {RightOrigin} from './examples/RightOrigin';
 import {AlwaysOpen} from './examples/AlwaysOpen';
 import {OnExpandedChange} from './examples/OnExpandedChange';
 import {OnStateTransition} from './examples/OnStateTransition';
-// Prop Tables
-import {UseSidePanel, Panel, Label, Control} from './examples/PropTables.splitprops.tsx';
 
 <Meta title="Preview/Side Panel" component={SidePanel} />
 
@@ -83,24 +81,18 @@ and `ToggleButton`.
 
 <ExampleCodeBlock code={AlwaysOpen} />
 
-## Components
-
-### SidePanel
-
-#### Usage
-
 The majority of `SidePanel`'s logic and funcitonality lives in this container component. Most of
 this functionality has been described in the examples above, but there a couple specific callbacks
 worth mentioning here.
 
-##### onExpandedChange
+### onExpandedChange
 
 The `onExpandedChange` callback is called when the boolean `expanded` state is updated. This is a
 handy way to hook into these updates to trigger side-effects. Below is an example:
 
 <ExampleCodeBlock code={OnExpandedChange} />
 
-##### onStateTransition
+### onStateTransition
 
 While `onExpandedChange` works well for discrete boolean state changes, there may be occasions where
 you also need transition states. In these situations, `onStateTransition` is a better fit. This
@@ -110,66 +102,15 @@ is an example:
 
 <ExampleCodeBlock code={OnStateTransition} />
 
-#### Props
+## Component API
 
-<ArgsTable of={SidePanel} />
-
-### SidePanel.ToggleButton
-
-#### Usage
-
-`<SidePanel.ToggleButton>` is a control that is meant to toggle between `expanded = true` and
-`expanded = false` states. It must be used within the `SidePanel` component as a child. Use in
-conjunction with `useSidePanel`'s `controlProps`, otherwise it does not come with explicit `onClick`
-handlers.
-
-For accessibility purposes, it must be the first focusable element. We recommend that you keep it as
-the first child of `SidePanel`.
-
-#### Props
-
-This is a standard Canvas Kit `TertiaryButton` and will accept
-[all those props](http://localhost:9001/?path=/docs/components-buttons-button-react--tertiary#props-2).
+<SymbolDoc name="SidePanel" fileName="/preview-react/" />
 
 ## Hooks
 
 ### useSidePanel
 
-#### Usage
-
-This hook manages the state and `aria-` attributes for the SidePanel. It takes an optional
-configuration object:
-
-<ArgsTable of={UseSidePanel} />
-
-Below is an example:
-
-```tsx
-import {useSidePanel} from '@workday/canvas-kit-preview-react/side-panel';
-
-const {expanded, setExpanded, panelProps, labelProps, controlProps} = useSidePanel({
-  initialExpanded: false,
-  panelId: 'custom-panel-id',
-  labelId: 'custom-label-id',
-});
-```
-
-#### Props
-
-The hook returns an object containing `expanded`, `setExpanded`, and a props for the panel, label,
-and control.
-
-##### Panel Props
-
-<ArgsTable of={Panel} />
-
-##### Label Props
-
-<ArgsTable of={Label} />
-
-##### Control Props
-
-<ArgsTable of={Control} />
+<SymbolDoc name="useSidePanel" fileName="/preview-react/" />
 
 ## Specifications
 

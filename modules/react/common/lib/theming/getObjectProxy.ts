@@ -5,10 +5,11 @@
  * @param target Any custom theme object
  * @param fallback A fallback theme object
  */
-/* eslint-disable compat/compat  */ // TODO: Revisit eslint rules that are no longer needed now that we don't support IE11
+/* eslint-disable compat/compat  */
 export function getObjectProxy<T extends {}>(target: unknown, fallback: T): T {
   return new Proxy(target as any, {
-    get(target, prop: keyof T) {
+    get(target, p: string) {
+      const prop = p as keyof T; // keep Typescript happy - the `get` signature cannot contain `keyof T`
       if (typeof fallback[prop] === 'object' && typeof target[prop] === 'object') {
         return getObjectProxy(target[prop] || {}, fallback[prop]);
       } else if (target[prop] !== undefined) {

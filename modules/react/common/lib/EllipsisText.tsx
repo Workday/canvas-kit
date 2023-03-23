@@ -1,5 +1,7 @@
+import React from 'react';
 import styled, {CSSObject} from '@emotion/styled';
-import {ElementComponent} from '..';
+
+import {createComponent} from './utils';
 
 export const ellipsisStyles: CSSObject = {
   whiteSpace: 'nowrap',
@@ -7,5 +9,11 @@ export const ellipsisStyles: CSSObject = {
   overflow: 'hidden',
 };
 
-// Recast as an `ElementComponent` due to better type support for `as` and `ref`
-export const EllipsisText = (styled('span')(ellipsisStyles) as any) as ElementComponent<'span', {}>;
+const StyledEllipsisComponent = styled('span')(ellipsisStyles);
+
+export const EllipsisText = createComponent('span')({
+  displayName: 'EllipsisText',
+  Component(elemProps = {}, ref, Element) {
+    return <StyledEllipsisComponent as={Element} ref={ref} {...elemProps} />;
+  },
+});

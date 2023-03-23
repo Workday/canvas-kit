@@ -56,17 +56,24 @@ const keys = <T extends object>(obj: T): (keyof T)[] => Object.keys(obj) as (key
 const hasOwnKey = <T extends object>(obj: T, key: any): key is keyof T => obj.hasOwnProperty(key);
 
 /**
- * Handles the roving focus behavior of a Cursor model. It should be added to the element
- * representing a list item.
+ * This elemProps hook is used for cursor navigation by using [Roving
+ * Tabindex](https://w3c.github.io/aria-practices/#kbd_roving_tabindex). Only a single item in the
+ * collection has a tab stop. Pressing an arrow key moves the tab stop to a different item in the
+ * corresponding direction. See the [Roving Tabindex](#roving-tabindex) example. This elemProps hook
+ * should be applied to an `*.Item` component.
  *
- * @see https://www.w3.org/TR/wai-aria-practices/#kbd_roving_tabindex
+ * ```ts
+ * const useMyItem = composeHooks(
+ *   useListItemRovingFocus, // adds the roving tabindex support
+ *   useListItemRegister
+ * );
+```
  */
 export const useListItemRovingFocus = createElemPropsHook(useCursorListModel)(
-  ({state, events, getId, navigation}, ref, elemProps: {'data-id'?: string} = {}) => {
+  ({state, events, navigation}, ref, elemProps: {'data-id'?: string} = {}) => {
     // Tracks when this element has focus. If this item is removed while still focused, we have to
     // inform the model to move the cursor to the next item.
     const focusRef = React.useRef(false);
-    const getIdRef = React.useRef(getId);
 
     // Create a ref out of state. We don't want to watch state on unmount, so we use a ref to get the
     // current value at the time of unmounting. Otherwise, `state.items` would be a cached value of an
@@ -85,9 +92,7 @@ export const useListItemRovingFocus = createElemPropsHook(useCursorListModel)(
         }
         requestAnimationFrame(() => {
           document
-            .querySelector<HTMLElement>(
-              `[data-focus-id="${`${state.id}-${getIdRef.current(item)}`}"]`
-            )
+            .querySelector<HTMLElement>(`[data-focus-id="${`${state.id}-${item.id}`}"]`)
             ?.focus();
         });
 

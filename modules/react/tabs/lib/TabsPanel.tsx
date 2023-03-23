@@ -57,11 +57,11 @@ export const useTabsPanel = createElemPropsHook(useTabsModel)(
     });
 
     return {
-      role: 'tabpanel',
+      role: 'tabpanel' as const,
       'aria-labelledby': `${state.id}-${localId}`,
       hidden: !!localId && localId !== state.selectedIds[0],
       id: `tabpanel-${state.id}-${localId}`,
-      tabIndex: 0,
+      tabIndex: 0 as const,
     };
   }
 );
