@@ -25,6 +25,7 @@ const getAriaAttributes = (mode: string, id: string): React.HtmlHTMLAttributes<H
         'aria-describedby': id,
         // This is added by Popup.Card, so overwriting to remove it
         'aria-labelledby': undefined,
+        'aria-live': 'polite',
         role: 'dialog',
       };
     case 'alert':
