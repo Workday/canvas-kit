@@ -29,7 +29,7 @@ export type CanvasDepth = {
    * ```
    */
   1: {
-    boxShadow: '0px 1px 4px rgba(0, 0, 0, 0.2), 0px 2px 8px rgba(0, 0, 0, 0.16)';
+    boxShadow: '0px 1px 4px rgba(31, 38, 46, 0.12), 0px 2px 8px rgba(31, 38, 46, 0.08)';
   };
   /**
    * ### Depth 2
@@ -45,7 +45,7 @@ export type CanvasDepth = {
    * ```
    */
   2: {
-    boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.2), 0px 4px 16px rgba(0, 0, 0, 0.16)';
+    boxShadow: '0px 2px 8px rgba(31, 38, 46, 0.12), 0px 4px 16px rgba(31, 38, 46, 0.08)';
   };
   /**
    * ### Depth 3
@@ -61,11 +61,10 @@ export type CanvasDepth = {
    * ```
    */
   3: {
-    boxShadow: '0px 3px 12px rgba(0, 0, 0, 0.2), 0px 6px 24px rgba(0, 0, 0, 0.16)';
+    boxShadow: '0px 3px 12px rgba(31, 38, 46, 0.12), 0px 6px 24px rgba(31, 38, 46, 0.08)';
   };
   /**
    * ### Depth 4
-   *
    *
    * @example
    * ```ts
@@ -77,7 +76,7 @@ export type CanvasDepth = {
    * ```
    */
   4: {
-    boxShadow: '0px 4px 16px rgba(0, 0, 0, 0.2), 0px 8px 32px rgba(0, 0, 0, 0.16)';
+    boxShadow: '0px 4px 16px rgba(31, 38, 46, 0.12), 0px 8px 32px rgba(31, 38, 46, 0.08)';
   };
   /**
    * ### Depth 5
@@ -93,7 +92,7 @@ export type CanvasDepth = {
    * ```
    */
   5: {
-    boxShadow: '0px 5px 20px rgba(0, 0, 0, 0.2), 0px 10px 40px rgba(0, 0, 0, 0.16)';
+    boxShadow: '0px 5px 20px rgba(31, 38, 46, 0.12), 0px 10px 40px rgba(31, 38, 46, 0.08)';
   };
   /**
    * ### Depth 6
@@ -109,7 +108,7 @@ export type CanvasDepth = {
    * ```
    */
   6: {
-    boxShadow: '0px 6px 24px rgba(0, 0, 0, 0.2), 0px 12px 48px rgba(0, 0, 0, 0.16)';
+    boxShadow: '0px 6px 24px rgba(31, 38, 46, 0.12), 0px 12px 48px rgba(31, 38, 46, 0.08)';
   };
 };
 
@@ -143,21 +142,21 @@ export const depth: CanvasDepth = {
     boxShadow: 'none',
   },
   1: {
-    boxShadow: '0px 1px 4px rgba(0, 0, 0, 0.2), 0px 2px 8px rgba(0, 0, 0, 0.16)',
+    boxShadow: '0px 1px 4px rgba(31, 38, 46, 0.12), 0px 2px 8px rgba(31, 38, 46, 0.08)',
   },
   2: {
-    boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.2), 0px 4px 16px rgba(0, 0, 0, 0.16)',
+    boxShadow: '0px 2px 8px rgba(31, 38, 46, 0.12), 0px 4px 16px rgba(31, 38, 46, 0.08)',
   },
   3: {
-    boxShadow: '0px 3px 12px rgba(0, 0, 0, 0.2), 0px 6px 24px rgba(0, 0, 0, 0.16)',
+    boxShadow: '0px 3px 12px rgba(31, 38, 46, 0.12), 0px 6px 24px rgba(31, 38, 46, 0.08)',
   },
   4: {
-    boxShadow: '0px 4px 16px rgba(0, 0, 0, 0.2), 0px 8px 32px rgba(0, 0, 0, 0.16)',
+    boxShadow: '0px 4px 16px rgba(31, 38, 46, 0.12), 0px 8px 32px rgba(31, 38, 46, 0.08)',
   },
   5: {
-    boxShadow: '0px 5px 20px rgba(0, 0, 0, 0.2), 0px 10px 40px rgba(0, 0, 0, 0.16)',
+    boxShadow: '0px 5px 20px rgba(31, 38, 46, 0.12), 0px 10px 40px rgba(31, 38, 46, 0.08)',
   },
   6: {
-    boxShadow: '0px 6px 24px rgba(0, 0, 0, 0.2), 0px 12px 48px rgba(0, 0, 0, 0.16)',
+    boxShadow: '0px 6px 24px rgba(31, 38, 46, 0.12), 0px 12px 48px rgba(31, 38, 46, 0.08)',
   },
 };
