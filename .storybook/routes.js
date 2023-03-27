@@ -28,7 +28,6 @@ const routes = {
   '/components/layout/box/': 'components-layout-box--basic',
   '/components/layout/flex/': 'components-layout-flex--basic',
   '/components/layout/grid/': 'components-layout-grid--basic',
-  '/components/layout/stack/': 'components-layout-stack--basic-stack',
   '/components/navigation/breadcrumbs/': 'components-navigation-breadcrumbs--basic',
   '/components/navigation/pagination/': 'components-navigation-pagination--basic',
   '/components/popups/menu/': 'components-popups-menu--basic',
