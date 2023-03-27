@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v8.5.8](https://github.com/Workday/canvas-kit/releases/tag/v8.5.8) (2023-03-27)
+
+### Documentation
+
+- docs: Added doc for Delete Button story ([#2113](https://github.com/Workday/canvas-kit/pull/2113)) ([@thunguyen19](https://github.com/thunguyen19))
+
+
 ## [v8.5.7](https://github.com/Workday/canvas-kit/releases/tag/v8.5.7) (2023-03-23)
 
 ### Infrastructure
