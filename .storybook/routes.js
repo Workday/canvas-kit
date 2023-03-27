@@ -33,7 +33,7 @@ const routes = {
   '/components/popups/menu/': 'components-popups-menu--basic',
   '/components/popups/modal/': 'components-popups-modal--basic',
   '/components/popups/popup/': 'components-popups-popup--basic',
-  '/components/popups/toast/': 'components-popups-toast--toast-dialog',
+  '/components/popups/toast/': 'components-popups-toast--basic',
   '/components/popups/tooltip/': 'components-popups-tooltip--default-story',
   '/components/text/body-text/': 'components-text-body-text--basic',
   '/components/text/heading/': 'components-text-heading--basic',
