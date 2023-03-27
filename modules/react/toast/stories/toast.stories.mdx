@@ -4,6 +4,8 @@ import {Toast} from '@workday/canvas-kit-react/toast';
 import {Basic} from './examples/Basic';
 import {ToastAlert} from './examples/ToastAlert';
 import {ToastDialog} from './examples/ToastDialog';
+import {WithActionLinkAndCloseIcon} from './examples/WithActionLinkAndCloseIcon';
+import {WithPopper} from './examples/WithPopper';
 import {RTL} from './examples/RTL';
 
 <Meta title="Components/Popups/Toast" component={Toast} />
@@ -33,20 +35,21 @@ purpose and provide an accessible experience.
 By default, `mode` is set to `status`, which indicates the message contains advisory information
 such as a successful action.
 
-
 <ExampleCodeBlock code={Basic} />
-
 
 A `status` `Toast` will wrap the message within a `polite` ARIA live region with a `role` of
 `status`.
 
+Here's a more complete example with a button which triggers a dismissable `Toast`. The `Toast` is
+positioned using `Popper`.
+
+<ExampleCodeBlock code={WithPopper} />
 
 ### Alert
 
 Set the `mode` prop to `alert` to convey urgent and important information such as an error.
 
 <ExampleCodeBlock code={ToastAlert} />
-
 
 An `alert` `Toast` will wrap the message within an `assertive` ARIA live region with a `role` of
 `alert`.
@@ -55,16 +58,14 @@ An `alert` `Toast` will wrap the message within an `assertive` ARIA live region 
 
 Set the `mode` prop to `dialog` to convey the presence of a follow-up action. If you use this
 `mode`, you need to add an `aria-label`. This `aria-label` should be additional information for the
-`Toast`. The `Toast` will also add an `aria-describedby` that links the `Toast` to `Toast.Message`
+`Toast` such as `notification`. The `Toast` will also add an `aria-describedby` that links the `Toast` to `Toast.Message`
 so that it is read out to screen readers. The `aria-label` should be different that the contents of
 the `Toast` so there is no duplication being read out by screen readers.
 
-
 <ExampleCodeBlock code={ToastDialog} />
 
-
-Screen readers will read it out in the following order: "Notifcation: Your workbook was successfully
-processed."
+Screen readers will read it out in the following order: Screen readers will read the `Toast` out in the following order: "Notification: Your workbook was
+successfully processed."
 
 > **Note**: You must use the `Toast.Message` subcomponent when the `mode` is `dialog` so that `id`
 > is tied to the message for accessibility. You can also pass in a `model` with `useToastModel` to
@@ -88,12 +89,16 @@ export const CustomIDToast = () => {
 };
 ```
 
+`Toast.CloseIcon` may be included within a `dialog` `Toast` to create a `Toast` with both an action
+link and a close button.
+
+<ExampleCodeBlock code={WithActionLinkAndCloseIcon} />
+
 ### Right-to-Left (RTL)
 
 `Toast` supports right-to-left languages when specified in the `CanvasProvider` `theme`.
 
 <ExampleCodeBlock code={RTL} />
-
 
 ## Component API
 
