@@ -11,7 +11,7 @@ const routes = {
   '/components/buttons/button/': 'components-buttons--primary',
   '/components/containers/card/': 'components-containers-card--basic',
   '/components/containers/side-panel/': 'preview-side-panel--basic',
-  '/components/containers/table/': 'components-containers-table--basic',
+  '/components/containers/table/': 'preview-table--basic',
   '/components/containers/tabs/': 'components-containers-tabs--basic',
   '/components/indicators/banner/': 'components-indicators-banner--basic',
   '/components/indicators/loading-dots/': 'components-indicators-loading-dots--basic',

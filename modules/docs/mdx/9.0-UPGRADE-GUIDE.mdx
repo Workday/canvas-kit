@@ -9,6 +9,8 @@ This guide contains an overview of the changes in Canvas Kit v9. Please
 any questions.
 
 - [Codemod](#codemod)
+- [New Components](#new-components)
+  - [Table](#table)
 - [Component Deprecations](#component-deprecations)
   - [Drawer](#drawer)
   - [Layout and Column](#layout-and-column)
@@ -48,6 +50,57 @@ handled by the codemod are marked with 🤖 in the Upgrade Guide.**
 **Please verify all changes made by the codemod.** As a safety precaution, we recommend committing
 the changes from the codemod as a single isolated commit (separate from other changes) so you can
 roll back more easily if necessary.
+
+## New Components
+
+### Table
+
+We've introduced a new `Table`
+[compound component](/getting-started/for-developers/resources/compound-components/) to the Preview
+package. `Table` is a compound component that is used to present information in a two-dimensional
+[table](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table) comprised of rows and
+columns of cells containing data.
+
+```tsx
+import {Table} from '@workday/canvas-kit-preview-react/table';
+
+export default function App() {
+  return (
+    <Table>
+      <Table.Caption>Table Caption</Table.Caption>
+      <Table.Head>
+        <Table.Row>
+          <Table.Header>Table Header</Table.Header>
+          <Table.Header>Table Header</Table.Header>
+        </Table.Row>
+      </Table.Head>
+      <Table.Body>
+        <Table.Row>
+          <Table.Header>Table Header</Table.Header>
+          <Table.Header>Table Header</Table.Header>
+        </Table.Row>
+        <Table.Divider />
+        <Table.Row>
+          <Table.Header>Table Header</Table.Header>
+          <Table.Cell>Table Data Cell</Table.Cell>
+        </Table.Row>
+        <Table.Divider />
+        <Table.Row>
+          <Table.Header>Table Header</Table.Header>
+          <Table.Cell>Table Data Cell</Table.Cell>
+        </Table.Row>
+      </Table.Body>
+      <Table.Divider />
+      <Table.Footer>
+        <Table.Row>
+          <Table.Header>Table Header</Table.Header>
+          <Table.Cell>Table Data Cell</Table.Cell>
+        </Table.Row>
+      </Table.Footer>
+    </Table>
+  );
+}
+```
 
 ## Component Deprecations
 
