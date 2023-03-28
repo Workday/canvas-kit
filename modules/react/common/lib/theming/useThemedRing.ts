@@ -1,5 +1,4 @@
-import {useThemeRTL} from './useThemeRTL';
-import {CanvasThemePalette, EmotionCanvasTheme} from '@workday/canvas-kit-react/common';
+import {CanvasThemePalette, EmotionCanvasTheme, useTheme} from '@workday/canvas-kit-react/common';
 import {colors, CSSProperties, inputColors, statusColors} from '@workday/canvas-kit-react/tokens';
 import chroma from 'chroma-js';
 
@@ -55,7 +54,7 @@ export function getPaletteColors(
 }
 
 export const useThemedRing = (type: paletteSelection): CSSProperties => {
-  const {themeRTL, theme} = useThemeRTL();
+  const theme = useTheme();
 
   const paletteColors = getPaletteColors(type, theme);
   if (!(paletteColors?.outer || paletteColors?.inner)) {
@@ -65,7 +64,7 @@ export const useThemedRing = (type: paletteSelection): CSSProperties => {
     paletteColors.inner
   }`;
 
-  return themeRTL({
+  return {
     borderColor: paletteColors.outer,
     transition: '100ms box-shadow',
     boxShadow: errorBoxShadow,
@@ -78,5 +77,5 @@ export const useThemedRing = (type: paletteSelection): CSSProperties => {
         0 0 0 2px ${colors.frenchVanilla100},
         0 0 0 4px ${theme ? theme.canvas.palette.common.focusOutline : inputColors.focusBorder}`,
     },
-  });
+  };
 };
