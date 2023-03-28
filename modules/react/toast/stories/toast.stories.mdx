@@ -3,7 +3,6 @@ import {SymbolDoc} from '@workday/canvas-kit-docs';
 import {Toast} from '@workday/canvas-kit-react/toast';
 import {Basic} from './examples/Basic';
 import {ToastAlert} from './examples/ToastAlert';
-import {WithCloseButton} from './examples/WithCloseButton';
 import {ToastDialog} from './examples/ToastDialog';
 import {WithActionLinkAndCloseIcon} from './examples/WithActionLinkAndCloseIcon';
 import {WithPopper} from './examples/WithPopper';
@@ -58,22 +57,19 @@ An `alert` `Toast` will wrap the message within an `assertive` ARIA live region 
 ### Dialog
 
 Set the `mode` prop to `dialog` to convey the presence of a follow-up action. If you use this
-`mode`, you need to add an `aria-label`. This `aria-label` should be like additional information for the
-`Toast`. The `Toast` will also add an `aria-describedby` that links the `Toast` to `Toast.Message`
+`mode`, you need to add an `aria-label`. This `aria-label` should be additional information for the
+`Toast` such as `notification`. The `Toast` will also add an `aria-describedby` that links the `Toast` to `Toast.Message`
 so that it is read out to screen readers. The `aria-label` should be different that the contents of
 the `Toast` so there is no duplication being read out by screen readers.
 
 <ExampleCodeBlock code={ToastDialog} />
 
-The `Toast` will be given a role of `dialog`. You need to provide an `aria-label` to add
-additional information regarding the contents.
-
-Screen readers will read it out in the following order: `"Notifcation: Your workbook was
+Screen readers will read the `Toast` out in the following order: "Notification: Your workbook was
 successfully processed."
 
 > **Note**: You must use the `Toast.Message` subcomponent when the `mode` is `dialog` so that `id`
 > is tied to the message for accessibility. You can also pass in a `model` with `useToastModel` to
-> provide a specific `id` for the `Toast.Message`:
+> provide a specific `id` for the `Toast.Message`
 
 ```tsx
 export const CustomIDToast = () => {
@@ -92,12 +88,6 @@ export const CustomIDToast = () => {
   );
 };
 ```
-
-### Close Icon Button
-
-Include the `Toast.CloseIcon` subcomponent to display a close button within the Toast.
-
-<ExampleCodeBlock code={WithCloseButton} />
 
 `Toast.CloseIcon` may be included within a `dialog` `Toast` to create a `Toast` with both an action
 link and a close button.

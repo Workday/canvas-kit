@@ -27,7 +27,7 @@ export const WithPopper = () => {
           <Toast.Body>
             <Toast.Message>Your workbook was successfully processed.</Toast.Message>
           </Toast.Body>
-          <Toast.CloseIcon aria-label="Close" onClick={handleClose} />
+          <Toast.CloseIcon aria-label="Close notification" onClick={handleClose} />
         </Toast>
       </Popper>
     </div>

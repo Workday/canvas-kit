@@ -29,7 +29,7 @@ describe('Toast', () => {
     });
   });
 
-  context(`given the toast with no close icon or action button`, () => {
+  context(`given the toast set to the default mode of "status"`, () => {
     beforeEach(() => {
       h.stories.load('Components/Popups/Toast', 'Basic');
     });
@@ -65,7 +65,7 @@ describe('Toast', () => {
     });
   });
 
-  context(`given the toast with a close button and action button`, () => {
+  context(`given the toast with a close button and action link`, () => {
     beforeEach(() => {
       h.stories.load('Components/Popups/Toast', 'Toast Dialog');
     });
