@@ -7,12 +7,11 @@ import {
   ExtractProps,
 } from '@workday/canvas-kit-react/common';
 import {ListBox} from '@workday/canvas-kit-react/collection';
-import {Stack} from '@workday/canvas-kit-react/layout';
+import {Flex} from '@workday/canvas-kit-react/layout';
 
 import {useMenuModel} from './useMenuModel';
 
-export interface MenuListProps<T = any>
-  extends Omit<Partial<ExtractProps<typeof Stack, never>>, 'children'> {
+export interface MenuListProps<T = any> extends Omit<ExtractProps<typeof Flex, never>, 'children'> {
   /**
    * The label text of the MenuList.
    */
@@ -39,7 +38,7 @@ export const MenuList = createSubcomponent('div')({
       borderRadius="zero"
       padding="zero"
       marginY="xxs"
-      spacing="zero"
+      gap="zero"
       overflowY="auto"
       flexDirection={model.state.orientation === 'vertical' ? 'column' : 'row'}
       {...elemProps}
