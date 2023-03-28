@@ -21,7 +21,6 @@ describe('Toast', () => {
     context(`given the '${story}' story is rendered`, () => {
       beforeEach(() => {
         h.stories.load('Components/Popups/Toast', story);
-        cy.findByRole('button').click();
       });
 
       it('should not have any axe errors', () => {
@@ -33,7 +32,6 @@ describe('Toast', () => {
   context(`given the toast role of status`, () => {
     beforeEach(() => {
       h.stories.load('Components/Popups/Toast', 'Basic');
-      cy.findByRole('button').click();
     });
 
     it('should have a role of status', () => {
@@ -52,7 +50,6 @@ describe('Toast', () => {
   context(`given the toast with an alert`, () => {
     beforeEach(() => {
       h.stories.load('Components/Popups/Toast', 'Toast Alert');
-      cy.findByRole('button').click();
     });
 
     it('should have a role of alert', () => {
@@ -71,7 +68,6 @@ describe('Toast', () => {
   context(`given the toast with a close button and action link`, () => {
     beforeEach(() => {
       h.stories.load('Components/Popups/Toast', 'Toast Dialog');
-      cy.findByRole('button').click();
     });
 
     it('should have a role of dialog', () => {
