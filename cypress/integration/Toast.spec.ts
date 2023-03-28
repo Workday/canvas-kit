@@ -29,7 +29,7 @@ describe('Toast', () => {
     });
   });
 
-  context(`given the toast role of status`, () => {
+  context(`given the toast set to the default mode of "status"`, () => {
     beforeEach(() => {
       h.stories.load('Components/Popups/Toast', 'Basic');
     });
