@@ -8,9 +8,9 @@ import {
   styled,
 } from '@workday/canvas-kit-react/common';
 import {borderRadius, space} from '@workday/canvas-kit-react/tokens';
-import {RadioButton, RadioButtonProps} from './Radio.Button';
-import RadioButtonInput from './RadioButton.Input';
-import RadioLabel from './RadioButton.Label';
+import {RadioButton, RadioButtonProps} from './RadioButton';
+import RadioButtonInput from './RadioInput';
+import RadioLabel from './RadioLabel';
 import {useRadioModel} from './hooks/useRadioModel';
 
 export interface RadioGroupProps extends Themeable, GrowthBehavior {

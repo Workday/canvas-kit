@@ -28,18 +28,9 @@ export interface RadioButtonProps extends RadioButtonContextInterface, Themeable
   checked?: boolean;
 
   /**
-   * The text of the Radio button label.
-   * @default ''
-   */
-  label?: string;
-  /**
    * The name of the Radio button.
    */
   name?: string;
-  /**
-   * The function called when the Radio button state changes.
-   */
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   /**
    * The value of the Radio button.
    */

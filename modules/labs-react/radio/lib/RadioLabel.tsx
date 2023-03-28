@@ -2,7 +2,7 @@ import React from 'react';
 import {styled, createSubcomponent} from '@workday/canvas-kit-react/common';
 import {canvas, inputColors, spaceNumbers, colors} from '@workday/canvas-kit-react/tokens';
 import {useRadioModel} from './hooks/useRadioModel';
-import {RadioButtonContext} from './Radio.Button';
+import {RadioButtonContext} from './RadioButton';
 
 const radioLabelDistance = spaceNumbers.xs;
 

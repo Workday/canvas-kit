@@ -10,7 +10,7 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {colors, inputColors, spaceNumbers, borderRadius} from '@workday/canvas-kit-react/tokens';
 import {useRadioModel} from './hooks/useRadioModel';
-import {RadioButtonProps, RadioButtonContext} from './Radio.Button';
+import {RadioButtonProps, RadioButtonContext} from './RadioButton';
 import {
   useListItemRegister,
   useListItemSelect,
