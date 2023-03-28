@@ -1,16 +1,20 @@
-import * as React from 'react';
+import React from 'react';
+
 import {Toast} from '@workday/canvas-kit-react/toast';
+import {checkIcon} from '@workday/canvas-system-icons-web';
+import {colors} from '@workday/canvas-kit-react/tokens';
 
 export const WithActionLinkAndCloseIcon = () => {
-  const handleActionClick = () => {
-    console.log('action button clicked');
-  };
-  const handleClose = () => {
-    console.log('close button clicked');
-  };
+  const handleClose = () => console.log('close button clicked');
+
   return (
-    <Toast actionText="View more details" onActionClick={handleActionClick} onClose={handleClose}>
-      Your workbook was successfully processed.
+    <Toast mode="dialog" aria-label="notification">
+      <Toast.Icon icon={checkIcon} color="greenApple400" />
+      <Toast.Body>
+        <Toast.Message>Your workbook was successfully</Toast.Message>
+        <Toast.Link href="#hyperlink">Custom Link</Toast.Link>
+      </Toast.Body>
+      <Toast.CloseIcon aria-label="Close notification" onClick={handleClose} />
     </Toast>
   );
 };

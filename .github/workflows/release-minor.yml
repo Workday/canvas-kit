@@ -7,7 +7,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
       - name: Checkout prerelease/minor
         uses: actions/checkout@v2
         with:
@@ -18,13 +17,31 @@ jobs:
       - name: Push to master
         uses: ad-m/github-push-action@master
         with:
-          github_token: ${{ secrets.GH_RW_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: refs/heads/master
 
-      - name: Success Message
-        run: echo "Release successful. Check out https://github.com/Workday/canvas-kit/actions/workflows/release.yml to see the release job start."
+      - name: Checkout master
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+          fetch-depth: 0 # Needed to do a proper push
+          ref: master # Release job only works on master
 
-      - name: Failure Message
+      - uses: Workday/canvas-kit-actions/install@v1
+        with:
+          node_version: 14.x
+
+      - uses: Workday/canvas-kit-actions/release@v1
+        with:
+          gh_token: ${{ secrets.GITHUB_TOKEN }}
+          gh_rw_token: ${{ secrets.GH_RW_TOKEN }}
+          publish_token: ${{ secrets.NPM_CI_PUBLISH_TOKEN }}
+          chromatic_project_token: ${{ secrets.CHROMATIC_APP_CODE }}
+          version: 'minor'
+
+      - uses: Workday/canvas-kit-actions/report-failure@v1
         if: failure()
-        run: echo "Make sure there are no changes https://github.com/Workday/canvas-kit/compare/prerelease/minor...master and try again."
-
+        with:
+          slackWebhook: ${{ secrets.SLACK_WEBHOOK }}
+          slackMessage: |
+            Minor Release job failed. Please check error logs.
