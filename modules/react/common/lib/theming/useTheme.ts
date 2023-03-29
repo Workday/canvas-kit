@@ -11,13 +11,47 @@ const getFilledTheme = (theme: PartialEmotionCanvasTheme) => ({
   canvas: createCanvasTheme(theme.canvas!),
 });
 
+function isCanvasTheme(input: object): input is EmotionCanvasTheme {
+  return input.hasOwnProperty('canvas');
+}
+
+function getThemeFromWindow(): any {
+  return typeof window !== 'undefined' && (window as any)?.workday?.canvas?.theme;
+}
+
 /**
- * Hook function to get the correct theme object.
+ * `getTheme` function should be used to get the correct theme object
+ * for `styled` and class components or functions and variables outside a component scope.
+ * @param {Object=} theme - The theme object.
+ *
+ * If you are using a class component, you MUST pass the theme.
+ * If not passed, the function will try to retrieve it from the window object.
+ * As a last resort, it will return the default Canvas theme.
+ *
+ * The resulting theme will be merged with the default Canvas theme
+ * (using memoized createCanvasTheme()) to establish any missing fields that have
+ * not been defined by the consumer's theme object.
+ */
+//
+export function getTheme(theme?: PartialEmotionCanvasTheme): EmotionCanvasTheme {
+  if (theme && isCanvasTheme(theme)) {
+    return getFilledTheme(theme);
+  }
+
+  const windowTheme = getThemeFromWindow();
+  if (windowTheme) {
+    return getFilledTheme({canvas: windowTheme});
+  }
+
+  return {canvas: defaultCanvasTheme};
+}
+
+/**
+ * Hook function to get the correct theme object for functional components.
  * @param {Object=} theme - The theme object returned from the emotion ThemeContext
  * (through ThemeProvider). The Canvas Kit theme is namespaced within this variable under the `canvas` key.
  *
- * NOTE: If you are using a class component, you MUST pass the theme.
- * If not passed, the function will try to pull the theme from ThemeContext.
+ * NOTE: If theme is not passed, the function will try to pull the theme from ThemeContext.
  * If that does not work, it will try to retrieve it from the window object.
  * As a last resort, it will return the default Canvas theme.
  *
@@ -29,6 +63,7 @@ const getFilledTheme = (theme: PartialEmotionCanvasTheme) => ({
  * ThemeProvider or context exists.
  * Tracked on https://github.com/emotion-js/emotion/issues/1193.
  */
+
 export function useTheme(theme?: PartialEmotionCanvasTheme): EmotionCanvasTheme {
   if (theme && theme.canvas) {
     return getFilledTheme(theme);
@@ -42,6 +77,11 @@ export function useTheme(theme?: PartialEmotionCanvasTheme): EmotionCanvasTheme 
     }
   } catch (e) {
     // Context not supported or invalid (probably called from within a class component)
+    if (process && process.env.NODE_ENV === 'development') {
+      console.warn(
+        'useTheme: Context not supported or invalid. Please consider to use `getTheme` function instead for `styled` and class components or functions and variables outside a component scope.'
+      );
+    }
   }
 
   const windowTheme = typeof window !== 'undefined' && (window as any)?.workday?.canvas?.theme;

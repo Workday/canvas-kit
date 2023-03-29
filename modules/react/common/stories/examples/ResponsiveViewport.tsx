@@ -2,10 +2,10 @@ import * as React from 'react';
 import {Box, Grid} from '@workday/canvas-kit-react/layout';
 import styled from '@emotion/styled';
 import {type, space, colors, borderRadius} from '@workday/canvas-kit-react/tokens';
-import {useTheme} from '@workday/canvas-kit-react/common';
+import {getTheme} from '@workday/canvas-kit-react/common';
 
 // eslint-disable-next-line react-hooks/rules-of-hooks
-const theme = useTheme();
+const theme = getTheme();
 const {up, down} = theme.canvas.breakpoints;
 const small = down('m'); // Returns '@media (max-width: 768px)'
 const medium = up('m'); // Returns '@media (min-width: 768px)'
