@@ -36,6 +36,61 @@ import {CanvasProvider} from '@workday/canvas-kit-react/common';
 
 Default: `{ canvas: defaultCanvasTheme }`
 
+## useTheme
+
+The `useTheme` hook lets to access the current theme. You can use it in components to have them
+respond to changes in the theme. You can pass the theme object returned from the emotion
+ThemeContext. If theme is not passed, the function will try to pull the theme from ThemeContext. If
+that does not work, it will try to retrieve it from the window object. As a last resort, it will
+return the default Canvas theme.
+
+The resulting theme will be merged with the default Canvas theme (using memoized
+createCanvasTheme()) to establish any missing fields that have not been defined by the consumer's
+theme object.
+
+`useTheme` should be used only inside functional component otherwise it will show a warning if the
+theme context value has not been found. In that case you will need to use `getTheme`.
+
+```tsx
+export const ErrorMessage = () => {
+  const theme = useTheme();
+  return (
+    <Subtext size="large" color={theme.canvas.palette.error.main}>
+  )
+}
+```
+
+## getTheme
+
+`getTheme` function is used to get the correct theme object. It should be used with `styled` and
+class components or functions and variables outside a component scope. You can pass the theme object
+returned from the emotion ThemeContext. If theme is not passed, the function will try to pull the
+theme from the window object or it will return the default Canvas theme.
+
+```tsx
+import {getTheme, useTheme} from '@workday/canvas-kit-react/common';
+
+const theme = getTheme();
+const {up, down} = theme.canvas.breakpoints;
+
+const small = down('m'); // Returns '@media (max-width: 768px)'
+const medium = up('m'); // Returns '@media (min-width: 768px)'
+
+const StyledHeading = styled(Box.as('h3'))({
+  [small]: {
+    ...type.levels.body.small,
+    ...type.variants.inverse,
+    fontWeight: type.properties.fontWeights.bold,
+  },
+  [medium]: {
+    ...type.levels.body.large,
+    ...type.variants.inverse,
+    fontWeight: type.properties.fontWeights.bold,
+  },
+  margin: 0,
+});
+```
+
 ## Theme Object
 
 The Canvas theme is based on the following object:
