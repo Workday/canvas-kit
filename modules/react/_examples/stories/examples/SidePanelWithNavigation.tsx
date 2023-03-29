@@ -47,7 +47,7 @@ const gettingStarted = [
   'Canvas Support',
 ];
 
-export const Basic = () => {
+export const WithNavigation = () => {
   const {labelProps} = useSidePanel();
 
   return (

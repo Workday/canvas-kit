@@ -10,7 +10,7 @@ const StyledPanel = styled(SidePanel)({
   zIndex: 1,
 });
 
-export const Basic = () => {
+export const WithOverlay = () => {
   const {labelProps} = useSidePanel();
 
   return (
