@@ -1,3 +1,5 @@
+// refactor for v5
+/// <reference types="@types/node" />
 import {useTheme as useEmotionTheme} from '@emotion/react';
 import {
   defaultCanvasTheme,
