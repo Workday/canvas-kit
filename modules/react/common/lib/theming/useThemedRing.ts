@@ -26,7 +26,7 @@ const getPaletteColorsFromTheme = (
   };
 };
 
-export function getPaletteColors(
+export function getPaletteColorsForFocusRing(
   type: paletteSelection,
   theme: EmotionCanvasTheme
 ): ContrastColors {
@@ -56,7 +56,7 @@ export function getPaletteColors(
 export const useThemedRing = (type: paletteSelection): CSSProperties => {
   const theme = useTheme();
 
-  const paletteColors = getPaletteColors(type, theme);
+  const paletteColors = getPaletteColorsForFocusRing(type, theme);
   if (!(paletteColors?.outer || paletteColors?.inner)) {
     return {};
   }
