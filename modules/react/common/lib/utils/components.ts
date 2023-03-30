@@ -32,6 +32,10 @@ type ExtractRef<T> = T extends undefined // test if T was even passed in
         ? U extends keyof ElementTagNameMap // test inferred U to see if it extends an element string
           ? ElementTagNameMap[U] // if yes, use the inferred U and convert to an element interface. `'button' => HTMLButtonElement`
           : U // if no, fall back to inferred U. Hopefully it is already an element interface
+        : T extends React.FC<{ref?: infer R}> // test if T extends a React functional component with a ref (Emotion's styled components do this)
+        ? R extends React.RefObject<infer E> // if yes, extract the element interface. This step unwraps the ref. Otherwise we'll get React.Ref<React.Ref<Element>>
+          ? E // if yes, use the inferred E
+          : never // never here prevents double refs. Basically the return would be React.Ref<E | {this value}>. I'm not entirely sure why...
         : T // if no, fall back to T. Hopefully it is already an element interface
     >;
 
