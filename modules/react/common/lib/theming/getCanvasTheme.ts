@@ -6,8 +6,12 @@ import {defaultCanvasTheme} from './theme';
 /**
  * Use this function when you have access to `theme` in styled components.
  * This function ensures that a theme is defined via a proxy and allows access to properties on the theme object.
- * @param theme Any partial or full theme object.
- * @returns a canvas theme object if it is defined, otherwise it will fall back on using defaultCanvasTheme
+ * @param theme any partial or full theme object to overwtite default theme.
+ * If theme is not passed, the function will try to pull the theme from the windows object.
+ *
+ * @returns a canvas theme object, default or updated by passed theme or retrieved from the window object.
+ *
+ *
  * @example
  * const ResponsiveContainer = styled('div')(({theme}) => {
  * const canvas = getCanvasTheme(theme);
@@ -33,15 +37,12 @@ export function getCanvasTheme(theme: any = {}): CanvasTheme {
 }
 
 /**
- * Use `useCanvasTheme` hook when you have access to `theme` in functional components.
- * @param theme Any partial or full theme object.
+ * Use `useCanvasTheme` hook when you have access to the `theme` in functional components.
+ * @param theme any partial or full theme object to overwtite default theme.
+ * If theme is not passed, the function will try to pull the theme from ThemeContext first, then from windows object.
  *
- * If theme is not passed, the function will try to pull the theme from ThemeContext.
- *
- * The resulting theme will be merged with the default Canvas theme
- * to establish any missing fields that have not been defined by the consumer's theme object.
- *
- * @returns a canvas theme object if it is defined, otherwise it will fall back on using defaultCanvasTheme
+ * @returns a canvas theme object, default or updated by passed theme or retrieved from the window object.
+
  * @example
  * const theme = useCanvasTheme();
  *
