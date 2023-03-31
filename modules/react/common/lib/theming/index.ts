@@ -8,4 +8,3 @@ export * from './useThemedRing';
 export * from './useIsRTL';
 export * from './getCanvasTheme';
 export * from './getObjectProxy';
-export * from './useThemeRTL';

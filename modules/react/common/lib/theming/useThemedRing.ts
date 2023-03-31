@@ -1,6 +1,5 @@
 import {CanvasThemePalette, EmotionCanvasTheme, useTheme} from '@workday/canvas-kit-react/common';
 import {colors, CSSProperties, inputColors, statusColors} from '@workday/canvas-kit-react/tokens';
-import {useThemeRTL} from './useThemeRTL';
 
 import chroma from 'chroma-js';
 
@@ -62,7 +61,6 @@ export function getPaletteColorsForFocusRing(
  * which case the outer ring will use the `darkest` color. This hook will also show a `focusOutline`
  * ring when the input is focused. Note: You should not rely on these colors alone to differentiate
  * alerts, but use them in combination with icons or hint text.
- * @example
  * ```tsx
  * // Add here jsx pragma to use css
  * import {jsx} from '@emotion/core';
@@ -90,7 +88,6 @@ export function getPaletteColorsForFocusRing(
  */
 export const useThemedRing = (type: paletteSelection): CSSProperties => {
   const theme = useTheme();
-  const {themeRTL} = useThemeRTL();
 
   const paletteColors = getPaletteColorsForFocusRing(type, theme);
   if (!(paletteColors?.outer || paletteColors?.inner)) {
@@ -100,7 +97,7 @@ export const useThemedRing = (type: paletteSelection): CSSProperties => {
     paletteColors.inner
   }`;
 
-  return themeRTL({
+  return {
     borderColor: paletteColors.outer,
     transition: '100ms box-shadow',
     boxShadow: errorBoxShadow,
@@ -113,5 +110,5 @@ export const useThemedRing = (type: paletteSelection): CSSProperties => {
         0 0 0 2px ${colors.frenchVanilla100},
         0 0 0 4px ${theme ? theme.canvas.palette.common.focusOutline : inputColors.focusBorder}`,
     },
-  });
+  };
 };

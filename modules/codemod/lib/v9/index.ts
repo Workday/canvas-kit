@@ -3,7 +3,6 @@ import {Transform} from 'jscodeshift';
 import softDeprecateStack from './deprecateStack';
 import promoteToast from './promoteToast';
 import compoundToast from './compoundToast';
-import promoteUseThemeRTL from './promoteUseThemeRTL';
 import promoteUseThemedRing from './promoteUseThemedRing';
 
 const transform: Transform = (file, api, options) => {
@@ -13,7 +12,6 @@ const transform: Transform = (file, api, options) => {
     softDeprecateStack,
     promoteToast,
     compoundToast,
-    promoteUseThemeRTL,
     promoteUseThemedRing,
   ];
   return fixes.reduce((source, fix) => fix({...file, source}, api, options) as string, file.source);

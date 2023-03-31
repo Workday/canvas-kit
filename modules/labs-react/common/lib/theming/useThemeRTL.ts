@@ -18,11 +18,11 @@ const getConvertedStyles = (
 };
 
 /**
- * This is a way to automatically transform CSS, applied using either Emotion's css attribute or by a
- * style attribute, when there is a RTL theme in use. Instead of authoring two sets of CSS objects, one
- * for each language direction. Now you can author the LTR version and this hook will automatically
- * create the RTL counterpart for you on the fly. This works for both object and string template
- * Emotion methods.
+ * @deprecated Now that IE11 is no longer supported, we encourage consumers to use [CSS logical properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Logical_Properties)
+ *
+ *
+ * A helpful hook for supporting bidirectional styles.
+ * * Read below for more detail or [view the docs](https://github.com/Workday/canvas-kit/blob/master/modules/labs-react/common/README.md#useThemeRTL).
  *
  * @returns
  * * `themeRTL` - a function to transform bidirectional styles

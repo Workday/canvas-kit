@@ -14,7 +14,8 @@ any questions.
   - [Layout and Column](#layout-and-column)
   - [Stack](#stack-hstack-vstack)
 - [Component Updates](#component-updates)
-  - [Buttons](#buttons) - [Toast](#toast)
+  - [Buttons](#buttons)
+	- [Toast](#toast)
 - [Utility Updates](#utility-updates)
   - [focusRing](#focusring)
 	- [useThemedRing](#useThemedRing)
@@ -175,16 +176,15 @@ change. We couldn't find any example of `memoize` or `memoizedFocusRing` being u
 
 ### useThemedRing
 
-We've promoted `useThemedRing` from our Labs package to our Main package.
+We've promoted `useThemedRing` from our Labs package to our Main package. You can use this utility
+to theme focus rings.
 
 🤖 The codemod will update the import for this utility.
 
 ### useThemeRTL
 
-We've promoted `useThemeRTL` from our Labs package to our Main package.
-When possible, try to use [CSS logical properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Logical_Properties).
-
-🤖 The codemod will update the import for this utility.
+We've [soft-deprecated](#soft-deprecation) `useThemeRTL` from our Labs package. Although you may still use this utility, we encourage consumers to use
+[CSS logical properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Logical_Properties).
 
 ## Token Updates
 
