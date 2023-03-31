@@ -136,22 +136,15 @@ describe('Toast', () => {
     expectTransform(input, expected);
   });
 
-  it('should not restructure Toast usage if it is already compound', () => {
+  it('should restructure Toast usage if it is already compound', () => {
     const input = stripIndent`
-      import {Toast} from '@workday/canvas-kit-labs-react/toast';
+      import {Toast} from '@workday/canvas-kit-react/toast';
 
-      import { checkIcon } from "@workday/canvas-system-icons-web";
-
-      <Toast>
-        <Toast.Icon color="greenApple400" icon={checkIcon} />
-        <Toast.Body>
-          <Toast.Message>There was an error with your workbook.</Toast.Message>
-        </Toast.Body>
-      </Toast>
+      <Toast>There was an error with your workbook.</Toast>
     `;
 
     const expected = stripIndent`
-      import {Toast} from '@workday/canvas-kit-labs-react/toast';
+      import {Toast} from '@workday/canvas-kit-react/toast';
 
       import { checkIcon } from "@workday/canvas-system-icons-web";
 
