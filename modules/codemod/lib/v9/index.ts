@@ -9,8 +9,8 @@ const transform: Transform = (file, api, options) => {
   const fixes = [
     // add codemods here
     softDeprecateStack,
-    promoteToast,
     compoundToast,
+    promoteToast,
   ];
   return fixes.reduce((source, fix) => fix({...file, source}, api, options) as string, file.source);
 };
