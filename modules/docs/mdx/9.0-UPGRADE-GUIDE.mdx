@@ -8,18 +8,27 @@ This guide contains an overview of the changes in Canvas Kit v9. Please
 [reach out](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) if you have
 any questions.
 
+- [Glossary](#glossary)
 - [Codemod](#codemod)
-- [Component Deprecations](#component-deprecations)
+- [Component Removals](#component-removals)
   - [Drawer](#drawer)
   - [Layout and Column](#layout-and-column)
-  - [Stack](#stack-hstack-vstack)
+  - [Stack, HStack, and VStack](#stack-hstack-and-vstack)
 - [Component Updates](#component-updates)
   - [Buttons](#buttons)
-	- [Toast](#toast)
+  - [Toast](#toast)
 - [Utility Updates](#utility-updates)
   - [focusRing](#focusring)
 - [Token Updates](#token-updates)
-	- [Depth](#depth)
+  - [Depth](#depth)
+
+## Glossary
+
+**Main:** description of Main package (@workday/canvas-kit-react)
+
+**Preview:** description of Preview package (@workday/canvas-kit-preview-react)
+
+**Labs:** description of Labs package (@workday/canvas-kit-labs-react)
 
 ## Codemod
 
@@ -52,27 +61,7 @@ handled by the codemod are marked with 🤖 in the Upgrade Guide.**
 the changes from the codemod as a single isolated commit (separate from other changes) so you can
 roll back more easily if necessary.
 
-## Component Deprecations
-
-### Deprecation Types
-
-#### Soft Deprecation
-
-A soft-deprecated component is still available with its full functionality, but it will have been
-renamed with a prefix to indicate its soft-deprecated status. It will also include a console warning
-announcing its deprecation. This warning will only be triggered on the component's initial render.
-
-Soft-deprecated types and utilities will also have been renamed but generally will not trigger a
-console warning.
-
-#### Hard Deprecation
-
-A hard-deprecated component or package is no longer available. You will need to follow the method
-prescribed in our Upgrade Guide to update your application. Please
-[reach out](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) to our team
-directly if you need additional help.
-
----
+## Component Removals
 
 ### Drawer
 
@@ -80,40 +69,70 @@ directly if you need additional help.
 TODO: Please review this section with documenting SidePanel deprication
 -->
 
-We've [hard-deprecated](#hard-deprecation) `Drawer` and this component has been fully removed from
-Canvas Kit. Consider using the
-[Side Panel](https://workday.github.io/canvas-kit/?path=/story/preview-side-panel--basic). Be Aware
-that `SidePanel` from the Main package is planned to be replaced by the one from Preview. We suggest
-you use the Preview version of `SidePanel` until the one in Main is replaced with it.
+We've removed the `Drawer` component from Canvas Kit (for reference, see the
+[`Drawer`](https://d2krrudi3mmzzw.cloudfront.net/v8/?path=/docs/labs-drawer--basic) from v8). Please
+use the [`SidePanel`](/components/containers/side-panel/) in Preview instead.
+
+> **Note:** The `SidePanel` in Main will eventually be replaced with the `SidePanel` in Preview. We
+> recommend you use the `SidePanel` in Preview until then.
 
 ---
 
 ### Layout and Column
 
-`Layout` and `Column` components have been [hard-deprecated](#hard-deprecation) and are no longer
-available in Canvas Kit. Please consider using
-[`Grid`](https://workday.github.io/canvas-kit/?path=/docs/components-containers-grid--basic)
-instead. While the `Grid` component is not a 1:1 replacement for `Layout`, it can be used in the
-same way and offers several benefits over the deprecated components as a more robust and flexible
-layout solution.
+We've removed the `Layout` and `Column` components from Canvas Kit (for reference, see
+[`Column and Layout`](https://d2krrudi3mmzzw.cloudfront.net/v8/?path=/docs/components-containers-column-and-layout--12-column-layout)
+from v8). Please use [`Grid`](/components/layout/grid/) instead. While `Grid` is not a 1:1
+replacement for `Layout` and `Column`, it can be used to generate the same types of layouts and
+offers a more robust and flexible layout solution.
 
-Please refer to
-[the Examples section](https://workday.github.io/canvas-kit/?path=/docs/examples-layouts--custom-column-positioning)
-for ideas on how to replace the deprecated `Layout` component with the `Grid` component. This will
-provide you with a deeper understanding of how to set custom column width or positioning using the
-`Grid` component.
+Please refer to our [Layout examples](/examples/layout) for examples of how to implement common
+layouts using `Grid`.
 
 ---
 
-### Stack, HStack and vstack
+### Stack, HStack and VStack
 
-We've hard deprecated the `Stack`, `HStack` and `VStack` components along with the props associated
-to those components (`StackProps`, `HStackProps`, `VStackProps`, `StackStyleProps`). We recommend
-using the `Flex` component and to replace the `spacing` prop with the `gap` prop. You can also run
-`npx @workday/canvas-kit-codemod v9 [path]`.
+We've removed the `Stack`, `HStack`, and `VStack` components from Canvas Kit (for reference, see
+[`Stack`](https://d2krrudi3mmzzw.cloudfront.net/v8/?path=/docs/components-layout-stack--basic-stack)
+from v8). We recommend using [`Flex`](/components/layout/flex/) instead. `Flex` supports the same
+consistent spacing between its elements via the `gap` prop (analogous to the `spacing` prop from
+`Stack`).
 
-> **Note**: If you are consuming `StackProps` for a custom component, please make sure to change the
-> `spacing` prop to the `gap` prop
+```tsx
+// v8
+<Stack spacing="s">
+  ...
+</Stack>
+
+// v9
+<Flex gap="s">
+  ...
+</Flex>
+```
+
+The orientation of `VStack` elements can be replicated with `Flex` using `flexDirection`.
+
+```tsx
+// v8
+<VStack>
+  ...
+</VStack>
+
+// v9
+<Flex flexDirection="column">
+  ...
+</Flex>
+```
+
+The `StackProps`, `HStackProps`, `VStackProps`, and `StackStyleProps` types have been removed as
+well. All references to these types in your custom components will need to be replaced with
+`FlexProps`.
+
+🤖 The codemod will handle all of the changes above for you automatically.
+
+> **Note:** If you were consuming `StackProps` previously for a custom component, be sure to change
+> all references to the old `spacing` prop from `StackProps` to the `gap` prop from `FlexProps`.
 
 ## Component Updates
 
