@@ -32,7 +32,7 @@ export const TableHead = createComponent('thead')({
         as={Element}
         ref={ref}
         backgroundColor="soap100"
-        borderBottom={`1px solid ${colors.soap400}`}
+        borderBottom={`1px solid ${colors.soap500}`}
         minHeight="48px"
         {...elemProps}
       >
