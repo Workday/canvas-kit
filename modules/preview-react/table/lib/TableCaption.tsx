@@ -28,7 +28,7 @@ export const TableCaption = createComponent('caption')({
   displayName: 'Table.Caption',
   Component: ({children, ...elemProps}: FlexProps, ref, Element) => {
     return (
-      <Flex as={Element} ref={ref} textAlign="left" paddingY="xxs" paddingX="l" {...elemProps}>
+      <Flex as={Element} ref={ref} paddingY="xxs" paddingX="s" textAlign="left" {...elemProps}>
         {children}
       </Flex>
     );

@@ -8,8 +8,8 @@ export const Basic = () => {
       <Table.Caption>Table Caption</Table.Caption>
       <Table.Head>
         <Table.Row>
-          <Table.Header>Table Header</Table.Header>
-          <Table.Header>Table Header</Table.Header>
+          <Table.Header backgroundColor="soap100">Table Header</Table.Header>
+          <Table.Header backgroundColor="soap100">Table Header</Table.Header>
         </Table.Row>
       </Table.Head>
       <Table.Body>

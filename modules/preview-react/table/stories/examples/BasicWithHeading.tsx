@@ -10,8 +10,8 @@ export const BasicWithHeading = () => {
       <Table>
         <Table.Head>
           <Table.Row>
-            <Table.Header>Table Header</Table.Header>
-            <Table.Header>Table Header</Table.Header>
+            <Table.Header backgroundColor="soap100">Table Header</Table.Header>
+            <Table.Header backgroundColor="soap100">Table Header</Table.Header>
           </Table.Row>
         </Table.Head>
         <Table.Body>

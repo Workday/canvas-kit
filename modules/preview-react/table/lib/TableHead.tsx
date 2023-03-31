@@ -29,11 +29,11 @@ export const TableHead = createComponent('thead')({
   Component: ({children, ...elemProps}: GridProps, ref, Element) => {
     return (
       <Grid
-        borderBottom={`1px solid ${colors.soap400}`}
-        backgroundColor="soap100"
-        minHeight="48px"
         as={Element}
         ref={ref}
+        backgroundColor="soap100"
+        borderBottom={`1px solid ${colors.soap400}`}
+        minHeight="48px"
         {...elemProps}
       >
         {children}

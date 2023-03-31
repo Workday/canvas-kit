@@ -61,12 +61,12 @@ export const Table = createComponent('table')({
   Component: ({children, ...elemProps}: GridProps, ref, Element) => {
     return (
       <Grid
-        {...type.levels.body.small}
-        border={`1px solid ${colors.soap400}`}
-        borderRadius="l"
-        overflow="scroll"
         as={Element}
         ref={ref}
+        border={`1px solid ${colors.soap500}`}
+        borderRadius="l"
+        overflow="scroll"
+        {...type.levels.subtext.large}
         {...elemProps}
       >
         {children}

@@ -34,12 +34,14 @@ export const TableCell = createComponent('td')({
       <Grid
         as={Element}
         ref={ref}
-        paddingY="xxs"
-        paddingX="l"
-        justifyContent="left"
         alignItems="center"
-        minHeight="56px"
+        backgroundColor="frenchVanilla100"
+        justifyContent="left"
+        minHeight="48px"
+        paddingY="xxs"
+        paddingX="s"
         textAlign="left"
+        wordBreak="break-word"
         {...elemProps}
       >
         {children}

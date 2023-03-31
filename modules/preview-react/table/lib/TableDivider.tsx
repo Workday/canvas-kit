@@ -32,12 +32,12 @@ export const TableDivider = createComponent('hr')({
       <Box
         as={Element}
         ref={ref}
-        display="block"
-        marginY={0}
-        marginX="m"
-        height={1}
         border={0}
         borderTop={`1px solid ${colors.soap400}`}
+        display="block"
+        height={1}
+        margin="0 auto"
+        width={`calc(100% - 24px)`}
         {...elemProps}
       />
     );

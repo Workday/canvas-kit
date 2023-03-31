@@ -9,18 +9,22 @@ export const FixedColumn = () => {
     {
       header: 'Example Header',
       cell: 'Example Cell',
+      hasDivider: true,
     },
     {
       header: 'Example Header',
       cell: 'Example Cell',
+      hasDivider: true,
     },
     {
       header: 'Example Header',
       cell: 'Example Cell',
+      hasDivider: true,
     },
     {
       header: 'Example Header',
       cell: 'Example Cell',
+      hasDivider: false,
     },
   ];
   return (
@@ -32,23 +36,47 @@ export const FixedColumn = () => {
             <Table.Header
               position="sticky"
               left="0"
-              backgroundColor="#fff"
+              backgroundColor="soap100"
               borderRight={`1px solid ${colors.soap400}`}
             >
               Header
             </Table.Header>
-            <Table.Header borderRight={`1px solid ${colors.soap400}`}>Header</Table.Header>
-            <Table.Header borderRight={`1px solid ${colors.soap400}`}>Header</Table.Header>
-            <Table.Header borderRight={`1px solid ${colors.soap400}`}>Header</Table.Header>
-            <Table.Header borderRight={`1px solid ${colors.soap400}`}>Header</Table.Header>
-            <Table.Header borderRight={`1px solid ${colors.soap400}`}>Header</Table.Header>
-            <Table.Header borderRight={`1px solid ${colors.soap400}`}>Header</Table.Header>
-            <Table.Header borderRight={`1px solid ${colors.soap400}`}>Header</Table.Header>
-            <Table.Header borderRight={`1px solid ${colors.soap400}`}>Header</Table.Header>
-            <Table.Header borderRight={`1px solid ${colors.soap400}`}>Header</Table.Header>
-            <Table.Header borderRight={`1px solid ${colors.soap400}`}>Header</Table.Header>
-            <Table.Header borderRight={`1px solid ${colors.soap400}`}>Header</Table.Header>
-            <Table.Header borderRight={`1px solid ${colors.soap400}`}>Header</Table.Header>
+            <Table.Header borderRight={`1px solid ${colors.soap400}`} backgroundColor="soap100">
+              Header
+            </Table.Header>
+            <Table.Header borderRight={`1px solid ${colors.soap400}`} backgroundColor="soap100">
+              Header
+            </Table.Header>
+            <Table.Header borderRight={`1px solid ${colors.soap400}`} backgroundColor="soap100">
+              Header
+            </Table.Header>
+            <Table.Header borderRight={`1px solid ${colors.soap400}`} backgroundColor="soap100">
+              Header
+            </Table.Header>
+            <Table.Header borderRight={`1px solid ${colors.soap400}`} backgroundColor="soap100">
+              Header
+            </Table.Header>
+            <Table.Header borderRight={`1px solid ${colors.soap400}`} backgroundColor="soap100">
+              Header
+            </Table.Header>
+            <Table.Header borderRight={`1px solid ${colors.soap400}`} backgroundColor="soap100">
+              Header
+            </Table.Header>
+            <Table.Header borderRight={`1px solid ${colors.soap400}`} backgroundColor="soap100">
+              Header
+            </Table.Header>
+            <Table.Header borderRight={`1px solid ${colors.soap400}`} backgroundColor="soap100">
+              Header
+            </Table.Header>
+            <Table.Header borderRight={`1px solid ${colors.soap400}`} backgroundColor="soap100">
+              Header
+            </Table.Header>
+            <Table.Header borderRight={`1px solid ${colors.soap400}`} backgroundColor="soap100">
+              Header
+            </Table.Header>
+            <Table.Header borderRight={`1px solid ${colors.soap400}`} backgroundColor="soap100">
+              Header
+            </Table.Header>
           </Table.Row>
         </Table.Head>
         <Table.Body>
@@ -58,7 +86,7 @@ export const FixedColumn = () => {
                 <Table.Header
                   position="sticky"
                   left="0"
-                  backgroundColor="#fff"
+                  backgroundColor="soap100"
                   borderRight={`1px solid ${colors.soap400}`}
                 >
                   {item.header}
@@ -76,7 +104,7 @@ export const FixedColumn = () => {
                 <Table.Cell borderRight={`1px solid ${colors.soap400}`}>{item.cell}</Table.Cell>
                 <Table.Cell borderRight={`1px solid ${colors.soap400}`}>{item.cell}</Table.Cell>
               </Table.Row>
-              <Table.Divider />
+              {item.hasDivider ? <Table.Divider /> : null}
             </>
           ))}
         </Table.Body>
