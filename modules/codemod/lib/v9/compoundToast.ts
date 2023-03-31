@@ -193,7 +193,6 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
       if (linkAttributes && linkAttributes.length) {
         BodyElement.children?.push(LinkElement, lineBreakEnd);
       }
-      console.log(nodePath.value.children?.includes('Toast'));
       // Default Toast with no Close or Link
       nodePath.value.children = [
         lineBreakStart,
