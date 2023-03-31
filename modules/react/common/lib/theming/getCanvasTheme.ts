@@ -7,7 +7,7 @@ import {defaultCanvasTheme} from './theme';
  * Use this function when you have access to `theme` in styled components.
  * This function ensures that a theme is defined via a proxy and allows access to properties on the theme object.
  * @param theme Any partial or full theme object.
- * @returns a theme object if it is defined, otherwise it will fall back on using defaultCanvasTheme
+ * @returns a canvas theme object if it is defined, otherwise it will fall back on using defaultCanvasTheme
  * @example
  * const ResponsiveContainer = styled('div')(({theme}) => {
  * const canvas = getCanvasTheme(theme);
@@ -27,11 +27,35 @@ import {defaultCanvasTheme} from './theme';
  *});
  */
 export function getCanvasTheme(theme: any = {}): CanvasTheme {
-  // prettier-ignore
-  //@ts-ignore
-  const windowTheme = typeof window !== 'undefined' && window.workday && window.workday.canvas && window.workday.canvas.theme;
-  return getObjectProxy(theme.canvas || windowTheme || {}, defaultCanvasTheme);
+  const windowTheme = typeof window !== 'undefined' && (window as any)?.workday?.canvas?.theme;
+
+  return getObjectProxy(theme.canvas || windowTheme, defaultCanvasTheme);
 }
+
+/**
+ * Use `useCanvasTheme` hook when you have access to `theme` in functional components.
+ * @param theme Any partial or full theme object.
+ *
+ * If theme is not passed, the function will try to pull the theme from ThemeContext.
+ *
+ * The resulting theme will be merged with the default Canvas theme
+ * to establish any missing fields that have not been defined by the consumer's theme object.
+ *
+ * @returns a canvas theme object if it is defined, otherwise it will fall back on using defaultCanvasTheme
+ * @example
+ * const theme = useCanvasTheme();
+ *
+ * return (
+ *  <Subtext
+ *    as={Element}
+ *    size="medium"
+ *    color={hasError ? theme.palette.error.main : undefined}
+ *    {...elemProps}
+ *  >
+ *    {children}
+ *  </Subtext>
+ * );
+ */
 
 export function useCanvasTheme(themeOverride?: Theme) {
   const theme = useTheme();

@@ -13,14 +13,6 @@ const getFilledTheme = (theme: PartialEmotionCanvasTheme) => ({
   canvas: createCanvasTheme(theme.canvas!),
 });
 
-function isCanvasTheme(input: object): input is EmotionCanvasTheme {
-  return input.hasOwnProperty('canvas');
-}
-
-function getThemeFromWindow(): any {
-  return typeof window !== 'undefined' && (window as any)?.workday?.canvas?.theme;
-}
-
 /**
  * `getTheme` function should be used to get the correct theme object
  * for `styled` and class components or functions and variables outside a component scope.
@@ -36,11 +28,12 @@ function getThemeFromWindow(): any {
  */
 //
 export function getTheme(theme?: PartialEmotionCanvasTheme): EmotionCanvasTheme {
-  if (theme && isCanvasTheme(theme)) {
+  if (theme?.canvas) {
     return getFilledTheme(theme);
   }
 
-  const windowTheme = getThemeFromWindow();
+  const windowTheme = typeof window !== 'undefined' && (window as any)?.workday?.canvas?.theme;
+
   if (windowTheme) {
     return getFilledTheme({canvas: windowTheme});
   }
@@ -67,29 +60,21 @@ export function getTheme(theme?: PartialEmotionCanvasTheme): EmotionCanvasTheme 
  */
 
 export function useTheme(theme?: PartialEmotionCanvasTheme): EmotionCanvasTheme {
-  if (theme && theme.canvas) {
-    return getFilledTheme(theme);
-  }
-
-  try {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const contextTheme = useEmotionTheme() as EmotionCanvasTheme;
-    if (contextTheme && contextTheme.canvas) {
-      return getFilledTheme(contextTheme);
-    }
-  } catch (e) {
-    // Context not supported or invalid (probably called from within a class component)
-    if (process && process.env.NODE_ENV === 'development') {
-      console.warn(
-        'useTheme: Context not supported or invalid. Please consider to use `getTheme` function instead for `styled` and class components or functions and variables outside a component scope.'
-      );
+  if (!theme) {
+    try {
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      const contextTheme = useEmotionTheme() as EmotionCanvasTheme;
+      if (contextTheme?.canvas) {
+        return getFilledTheme(contextTheme);
+      }
+    } catch (e) {
+      if (process && process.env.NODE_ENV === 'development') {
+        console.warn(
+          'useTheme: Context not supported or invalid. Please consider to use `getTheme` function instead for `styled` or class components.'
+        );
+      }
     }
   }
 
-  const windowTheme = typeof window !== 'undefined' && (window as any)?.workday?.canvas?.theme;
-  if (windowTheme) {
-    return getFilledTheme({canvas: windowTheme});
-  }
-
-  return {canvas: defaultCanvasTheme};
+  return getTheme(theme);
 }

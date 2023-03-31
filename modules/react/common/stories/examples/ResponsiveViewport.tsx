@@ -4,7 +4,6 @@ import styled from '@emotion/styled';
 import {type, space, colors, borderRadius} from '@workday/canvas-kit-react/tokens';
 import {getTheme} from '@workday/canvas-kit-react/common';
 
-// eslint-disable-next-line react-hooks/rules-of-hooks
 const theme = getTheme();
 const {up, down} = theme.canvas.breakpoints;
 const small = down('m'); // Returns '@media (max-width: 768px)'
