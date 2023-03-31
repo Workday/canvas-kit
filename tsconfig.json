@@ -1,13 +1,13 @@
 {
   "compilerOptions": {
     "module": "es6",
-    "target": "es5",
+    "target": "es2020",
     "allowJs": false,
     "declaration": true,
     "declarationMap": true,
     "esModuleInterop": true,
     "jsx": "react",
-    "lib": ["es2015", "es2017", "es2018", "es2019", "dom"],
+    "lib": ["dom"],
     "moduleResolution": "node",
     "forceConsistentCasingInFileNames": true,
     "removeComments": false,
