@@ -97,7 +97,7 @@ const StyledItem = styled(Box.as('button'))<StyledType>(
         },
       },
       backgroundColor: 'inherit',
-      '&:disabled, &[aria-disabled]': {
+      '&:disabled, &[aria-disabled=true]': {
         color: colors.licorice100,
         cursor: 'default',
         '.wd-icon-fill, .wd-icon-accent, .wd-icon-accent2': {
@@ -158,7 +158,10 @@ export const useMenuItem = composeHooks(
         onClick:
           model.state.mode === 'single'
             ? (event: React.SyntheticEvent) => {
-                model.events.hide(event);
+                // only hide if the item isn't disabled
+                if (event.currentTarget.getAttribute('aria-disabled') !== 'true') {
+                  model.events.hide(event);
+                }
               }
             : undefined,
       };
