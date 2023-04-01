@@ -71,9 +71,18 @@ export const PopupCard = createSubcomponent('div')({
     return getTransformFromPlacement(model.state.placement || 'bottom');
   }, [model.state.placement]);
 
+  const getMargin = (margin?: string | number) => {
+    if (margin) {
+      const result = space[margin as CanvasSpaceKeys];
+      // Get the top margin from "25px 50px" or "10px 15px 20px" format.
+      const marginTop = typeof margin === 'string' ? margin.split(' ')[0] : margin;
+      return result ? result : marginTop;
+    }
+    return space.xl;
+  };
+
   // As is a Flex that will render an element of `Element`
   const As = useConstant(() => Flex.as(Element));
-
   return (
     <StyledPopupCard
       as={As}
@@ -84,9 +93,7 @@ export const PopupCard = createSubcomponent('div')({
       flexDirection="column"
       minHeight={0}
       padding="m"
-      maxHeight={`calc(100vh - ${
-        elemProps.margin ? space[elemProps.margin as CanvasSpaceKeys] || elemProps.margin : space.xl
-      } * 2)`}
+      maxHeight={`calc(100vh - ${getMargin(elemProps.margin)} * 2)`}
       overflowY="auto"
       {...type.levels.subtext.large}
       {...elemProps}
