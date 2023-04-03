@@ -9,12 +9,11 @@ export const useListItemSelect = createElemPropsHook(useListModel)(
     const name = elemProps['data-id'] || '';
     const onClick = (event: React.MouseEvent<HTMLElement>) => {
       if (
-        state.nonInteractiveIds.includes(name) ||
-        event.currentTarget.hasAttribute('aria-disabled')
+        !state.nonInteractiveIds.includes(name) &&
+        event.currentTarget.getAttribute('aria-disabled') !== 'true'
       ) {
-        return;
+        events.select({id: name});
       }
-      events.select({id: name});
     };
 
     return {onClick};
