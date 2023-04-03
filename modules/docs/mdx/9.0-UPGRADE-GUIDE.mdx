@@ -15,7 +15,7 @@ any questions.
   - [Layout and Column](#layout-and-column)
   - [Stack, HStack, and VStack](#stack-hstack-and-vstack)
 - [Component Updates](#component-updates)
-  - [Buttons](#buttons)
+  - [Button](#button)
   - [Toast](#toast)
 - [Utility Updates](#utility-updates)
   - [focusRing](#focusring)
@@ -136,22 +136,35 @@ well. All references to these types in your custom components will need to be re
 
 ## Component Updates
 
-### Buttons
+### Button
 
-We've changed the default `type` attribute of all our `buttons` to be `type="button"` instead of the
-default `type="submit"`. This is a breaking change if you expected a button to submit by default.
+We've changed the default `type` attribute for all buttons to `type="button"`. Previously, the
+`type` attribute was not being set which resulted in the buttons
+[defaulting to `type="submit"`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attributes).
 
-We found an issue where the default action for `form` controls like `input` and `textarea` is to
-click the first `submit` `button` which in some cases is not a `submit` button.
+This affects all buttons which extend `BaseButton`:
 
-An example of this causing issues was our `Modal.CloseIcon` and `Modal.CloseButton`. When the
-`Modal` is wrapped in a `form` element, the close icon would submit the `form`.
+- `PrimaryButton`
+- `SecondaryButton`
+- `TertiaryButton`
+- `DeleteButton`
+- `ToolbarDropdownButton` and `ToolbarIconButton`
+- `Pill` and `Pill.IconButton`
+- `SegmentedControl.Button` (Main)
+- `SegmentedControl.Item` (Preview)
+- `Pagination.PageButton`
 
-This change affects all of our `buttons` including:
-`PrimaryButton, SecondaryButton, TertiaryButton, ToolbarButton`.
+Any buttons which extend any of the above are affected as well.
 
-If you still wish for a specific `button` within a `form` to submit, just add the attribute
-`type="submit"`.
+This resolves an [issue](https://github.com/Workday/canvas-kit/issues/1938) where clicking certain
+buttons within a `form` element would unexpectedly submit the form. Additionally, the default action
+of many form controls such as `input` and `textarea` is to click the first submit button; this led
+to issues if the first submit button in the form was not intended to be a submit button (an easy
+mistake to make when buttons default to `type="submit"`).
+
+This is a breaking change if you expected a button to submit by default, though we do not anticipate
+this to be the case for most developers. If you _do_ intend for a button to act as a submit button
+within a form, add `type="submit"` to the button.
 
 ### Toast
 
