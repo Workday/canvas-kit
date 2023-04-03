@@ -245,9 +245,9 @@ variable before falling back to the default theme.
 
 To access the current theme, you can use one of the following functions and hooks depending on where
 do you use it and what do you want to get back. All of these functions allow to pass a partial or
-full theme object to overwrite the default Canvas theme. If a theme is not passed, they will try to
-retrieve it from the ThemeContext (only for hooks), then from the window object and afterall they
-will fall back to the default theme.
+full theme object to overwrite the current theme. If a theme is not passed, they will try to
+retrieve it from the ThemeContext (only for hooks), then from the window object and as a last
+solution they will fall back to the default theme.
 
 Please consider to use `getTheme` and `useTheme` over `getCanvasTheme` and `useCanvasTheme`.
 
@@ -255,8 +255,7 @@ Please consider to use `getTheme` and `useTheme` over `getCanvasTheme` and `useC
 
 `getTheme` is function to get the full theme object. It should be used with `styled` and class
 components or outside components. Function returns a theme object with the Canvas Kit theme under
-the canvas key. If theme has been passed or the theme from the window object has been retrieved it
-will return updated theme object, otherwise it will return an object with default theme.
+the canvas key.
 
 **Return value**
 
@@ -296,15 +295,9 @@ const styles = {
 
 ### useTheme
 
-The `useTheme` hook lets to access the current theme. You can use it in components to have them
-respond to changes in the theme. You can pass the theme object returned from the emotion
-ThemeContext. If theme is not passed, the function will try to pull the theme from ThemeContext. If
-that does not work, it will try to retrieve it from the window object. As a last resort, it will
-return the default Canvas theme.
-
-The resulting theme will be merged with the default Canvas theme (using memoized
-createCanvasTheme()) to establish any missing fields that have not been defined by the consumer's
-theme object.
+`useTheme` is hook to get the full theme object. It should be used only with functional compoents
+wrapped in ContextProvider. Function returns a theme object with the Canvas Kit theme under the
+canvas key.
 
 `useTheme` should be used only inside functional component otherwise it will show a warning if the
 theme context value has not been found. In that case you will need to use `getTheme`.
@@ -339,15 +332,9 @@ export const ErrorMessage = () => {
 
 ### useCanvasTheme
 
-The `useCanvasTheme` hook lets to access the current theme. You can pass the theme object `theme` as
-any partial or full theme object. If theme is not passed, the function will try to pull the theme
-from ThemeContext. If that does not work, it will try to retrieve it from the window object. As a
-last resort, it will return the default Canvas theme.
-
-The resulting theme will be merged with the default Canvas theme to establish any missing fields
-that have not been defined by the consumer's theme object.
-
-`useCanvasTheme` is a hook and should be used only inside functional component.
+The `useCanvasTheme` hook lets to access the current Canvas theme and it should be used with
+functional components. You can pass the theme object `theme` as any partial or full theme object to
+overwrite the current Canvas theme.
 
 **Return value**
 
