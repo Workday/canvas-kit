@@ -1,16 +1,10 @@
 import React from 'react';
-import {TableCellProps} from './TableCell';
-import {Grid} from '@workday/canvas-kit-react/layout';
+import {Grid, GridProps} from '@workday/canvas-kit-react/layout';
 import {createComponent} from '@workday/canvas-kit-react/common';
-
-export interface TableHeaderProps extends TableCellProps {
-  abbr?: string;
-  scope?: 'row' | 'col' | 'rowgroup' | 'colgroup';
-}
 
 export const TableHeader = createComponent('th')({
   displayName: 'Table.Header',
-  Component: ({children, ...elemProps}: TableHeaderProps, ref, Element) => {
+  Component: ({children, ...elemProps}: GridProps, ref, Element) => {
     return (
       <Grid
         as={Element}

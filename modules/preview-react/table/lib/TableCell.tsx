@@ -2,13 +2,9 @@ import React from 'react';
 import {Grid, GridProps} from '@workday/canvas-kit-react/layout';
 import {createComponent} from '@workday/canvas-kit-react/common';
 
-export interface TableCellProps extends GridProps {
-  headers?: string;
-}
-
 export const TableCell = createComponent('td')({
   displayName: 'Table.Cell',
-  Component: ({children, ...elemProps}: TableCellProps, ref, Element) => {
+  Component: ({children, ...elemProps}: GridProps, ref, Element) => {
     return (
       <Grid
         as={Element}
