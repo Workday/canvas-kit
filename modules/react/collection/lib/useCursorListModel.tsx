@@ -321,10 +321,16 @@ export const useCursorListModel = createModelHook({
      * well as left/right keys to give a more consistent experience to all users.
      */
     navigation: wrappingNavigationManager,
+    /**
+     * Controls how much a pageUp/pageDown navigation request will jump. If not provided, the size
+     * of the list and number of items rendered will determine this value.
+     */
+    pageSize: 0,
   },
   requiredConfig: useBaseListModel.requiredConfig,
 })(config => {
   const [cursorId, setCursorId] = React.useState(config.initialCursorId);
+  const pageSizeRef = React.useRef(config.pageSize);
   const columnCount = config.columnCount || 0;
   const list = useBaseListModel(config);
   const navigation = config.navigation;
@@ -339,6 +345,11 @@ export const useCursorListModel = createModelHook({
      * @private Use useGridModel instead to make a grid instead of a list
      */
     columnCount,
+    /**
+     * A React.Ref of the current page size. Either provided as config, or determined at runtime
+     * based on the size of the list container and the number of items fitting within the container.
+     */
+    pageSizeRef,
   };
 
   const events = {

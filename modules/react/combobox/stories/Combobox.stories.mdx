@@ -2,12 +2,20 @@ import {SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
 
 import {Combobox} from '@workday/canvas-kit-react/combobox';
 import {Basic} from './examples/Basic';
+import {Autocomplete} from './examples/Autocomplete';
 
 <Meta title="Components/Inputs/Combobox" component={Combobox} />
 
 # Combobox
 
-Combobox
+Combobox is an abstract compound component. The term "Combobox" is based on the
+[Combobox Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/) as defined in the ARIA
+Authoring Practices Guide (APG):
+
+> A [combobox](https://w3c.github.io/aria/#combobox) is an input widget with an associated popup
+> that enables users to select a value for the combobox from a collection of possible values.
+
+Autocomplete and Select are examples of a Combobox and these components should be used instead.
 
 ## Installation
 
@@ -22,6 +30,10 @@ yarn add @workday/canvas-kit-react
 Show and hide using a button.
 
 <ExampleCodeBlock code={Basic} />
+
+### Autocomplete
+
+<ExampleCodeBlock code={Autocomplete} />
 
 ## Component API
 

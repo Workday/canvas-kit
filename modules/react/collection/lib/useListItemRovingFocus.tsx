@@ -2,7 +2,7 @@ import React from 'react';
 import {useIsRTL, createElemPropsHook} from '@workday/canvas-kit-react/common';
 
 import {useCursorListModel} from './useCursorListModel';
-import {keyboardEventToCursorEvents, orientationKeyMap} from './keyUtils';
+import {keyboardEventToCursorEvents} from './keyUtils';
 
 /**
  * This elemProps hook is used for cursor navigation by using [Roving

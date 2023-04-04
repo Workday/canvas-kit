@@ -2,15 +2,25 @@ import React from 'react';
 import {createModelHook, dispatchInputEvent} from '@workday/canvas-kit-react/common';
 import {useMenuModel} from '@workday/canvas-kit-react/menu';
 
+/**
+ * An input model can be used by compound components that need to work with form fields. Some form
+ * libraries use `onChange` and `value` to update a form object. Others use `onChange` and `ref` to
+ * avoid rerendering. Also autocomplete and test libraries may use the `value` `HTMLInputElement`
+ * property. We need to normalize these use cases so subcomponents can have correct data and all
+ * use-cases are supported.
+ */
 const useInputModel = createModelHook({
   defaultConfig: {
-    value: '',
+    value: undefined as string | undefined,
     onChange(event: React.ChangeEvent<HTMLInputElement>) {
       return;
     },
   },
 })(config => {
+  const ref = React.createRef<HTMLInputElement>();
+
   return {
+    ref,
     onChange: config.onChange,
     state: {value: config.value},
     events: {},
@@ -38,13 +48,13 @@ export const useComboboxModel = createModelHook({
   const [width, setWidth] = React.useState(0);
 
   const state = {
-    ...input.state,
-    ...menu.state,
     /**
      * The width of the combobox input. This is used to make sure the UI renders the menu the same
      * width as the input.
      */
     width,
+    ...input.state,
+    ...menu.state,
   };
 
   const events = {

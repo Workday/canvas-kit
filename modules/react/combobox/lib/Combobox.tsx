@@ -29,6 +29,5 @@ export const Combobox = createContainer()({
     },
   },
 })<ComboboxProps>(({children}, _, model) => {
-  console.log('model', model.state.cursorId);
   return <Menu model={model}>{children}</Menu>;
 });

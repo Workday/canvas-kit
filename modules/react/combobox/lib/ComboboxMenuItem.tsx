@@ -6,7 +6,10 @@ import {
   createSubcomponent,
 } from '@workday/canvas-kit-react/common';
 import {StyledMenuItem, useMenuModel} from '@workday/canvas-kit-react/menu';
-import {useListItemRegister} from '@workday/canvas-kit-react/collection';
+import {
+  useListItemActiveDescendant,
+  useListItemRegister,
+} from '@workday/canvas-kit-react/collection';
 import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
 
 import {useComboboxModel} from './useComboboxModel';
@@ -29,18 +32,26 @@ export const useComboboxMenuItem = composeHooks(
         ) {
           return;
         }
-        model.events.select({id});
-        model.events.hide(event);
+        if (event.currentTarget.getAttribute('aria-disabled') !== 'true') {
+          model.events.select({id});
+          if (model.state.mode === 'single') {
+            model.events.hide(event);
+          }
+        }
+
+        // prevent focus changes
+        event.preventDefault();
       };
 
       return {
         role: 'option',
-        'aria-selected': id === model.state.cursorId ? true : undefined,
+        'aria-selected': model.state.cursorId && id === model.state.cursorId ? true : undefined,
         onMouseDown,
         className: model.state.cursorId === elemProps['data-id'] ? 'focus' : '',
       } as const;
     }
   ),
+  useListItemActiveDescendant,
   useListItemRegister
 );
 

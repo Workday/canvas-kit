@@ -1,4 +1,3 @@
-import React from 'react';
 import {createElemPropsHook, slugify} from '@workday/canvas-kit-react/common';
 
 import {useCursorListModel} from './useCursorListModel';

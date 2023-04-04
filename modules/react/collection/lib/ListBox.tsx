@@ -11,7 +11,7 @@ import {useListRenderItems} from './useListRenderItem';
 import {useListItemRegister} from './useListItemRegister';
 
 export interface ListBoxProps extends Omit<FlexProps, 'children'> {
-  children?: React.ReactNode | ((item: any) => React.ReactNode);
+  children?: React.ReactNode | ((item: any, index: number) => React.ReactNode);
 }
 
 export const ListBoxItem = createSubcomponent('li')({
@@ -64,7 +64,10 @@ export const ListBox = createContainer('ul')({
      */
     Item: ListBoxItem,
   },
-})<ListBoxProps>(({height, maxHeight, ...elemProps}, Element, model) => {
+})<ListBoxProps>(({height, maxHeight, marginY, ...elemProps}, Element, model) => {
+  // We're moving `marginY` to the container to not interfere with the virtualization size. We set
+  // the `marginY` on the Flex to `0` to avoid inaccurate scrollbars
+
   // TODO figure out what style props should go to which `Box`
   return (
     <Box
@@ -72,10 +75,11 @@ export const ListBox = createContainer('ul')({
       height={
         height || model.state.isVirtualized ? model.state.UNSTABLE_virtual.totalSize : undefined
       }
+      marginY={marginY}
       maxHeight={maxHeight}
       overflowY={model.state.orientation === 'vertical' ? 'auto' : undefined}
     >
-      <Flex as={Element} {...elemProps}>
+      <Flex as={Element} {...elemProps} marginY={0}>
         {useListRenderItems(model, elemProps.children)}
       </Flex>
     </Box>

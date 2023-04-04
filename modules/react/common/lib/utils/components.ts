@@ -842,17 +842,22 @@ export function composeHooks<
   hook3: BehaviorHook<M, O3>
 ): BehaviorHook<M, O1 & O2 & O3>;
 export function composeHooks<
-  M extends Model<any, any>,
+  M1 extends Model<any, any>,
+  M2 extends M1,
+  M3 extends M1,
+  M4 extends M1,
+  R,
+  P extends {},
   O1 extends {},
   O2 extends {},
   O3 extends {},
   O4 extends {}
 >(
-  hook1: BehaviorHook<M, O1>,
-  hook2: BehaviorHook<M, O2>,
-  hook3: BehaviorHook<M, O3>,
-  hook4: BehaviorHook<M, O4>
-): BehaviorHook<M, O1 & O2 & O3 & O4>;
+  hook1: BehaviorHook<M1, O1>,
+  hook2: BehaviorHook<M2, O2>,
+  hook3: BehaviorHook<M3, O3>,
+  hook4: BehaviorHook<M4, O4>
+): BehaviorHook<M1, O1 & O2 & O3 & O4>;
 export function composeHooks<
   M extends Model<any, any>,
   O1 extends {},
@@ -922,6 +927,9 @@ export function composeModelHooks<
 ): BehaviorHook<M, O1 & O2 & O3>;
 export function composeModelHooks<
   M extends Model<any, any>,
+  M2 extends M,
+  M3 extends M,
+  M4 extends M,
   R,
   P extends {},
   O1 extends {},
@@ -930,9 +938,9 @@ export function composeModelHooks<
   O4 extends {}
 >(
   hook1: BehaviorHook<M, O1>,
-  hook2: BehaviorHook<M, O2>,
-  hook3: BehaviorHook<M, O3>,
-  hook4: BehaviorHook<M, O4>
+  hook2: BehaviorHook<M2, O2>,
+  hook3: BehaviorHook<M3, O3>,
+  hook4: BehaviorHook<M4, O4>
 ): BehaviorHook<M, O1 & O2 & O3 & O4>;
 export function composeModelHooks<
   M extends Model<any, any>,

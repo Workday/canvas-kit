@@ -17,6 +17,7 @@ export const useMenuModel = createModelHook({
     /** Determines the default selection manager used as well as if the menu closes when an item is selected */
     mode: 'single' as 'single' | 'multiple',
     focusModel: '',
+    shouldVirtualize: false,
   },
   requiredConfig: {
     ...useListModel.requiredConfig,
@@ -26,7 +27,6 @@ export const useMenuModel = createModelHook({
   // don't virtualize menus by default to avoid oddities with card width
   const list = useListModel(
     useListModel.mergeConfig(config, {
-      shouldVirtualize: false,
       selection: config.mode === 'single' ? singleSelectionManager : multiSelectionManager,
     })
   );

@@ -12,6 +12,7 @@ export * from './lib/useListKeyboardHandler';
 export * from './lib/useListModel';
 export * from './lib/useGridModel';
 export * from './lib/useListActiveDescendant';
+export * from './lib/useListItemActiveDescendant';
 export {ListBox} from './lib/ListBox';
 export {
   singleSelectionManager,
