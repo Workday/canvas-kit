@@ -4,8 +4,8 @@ const mainPackage = '@workday/canvas-kit-react';
 const stackPackage = '@workday/canvas-kit-react/layout';
 const stackImportNames = ['Stack', 'HStack', 'VStack'];
 const stackImportProps = ['StackProps', 'HStackProps', 'VStackProps', 'StackStyleProps'];
-const altImportSpecifier = ['ActionBar', 'Breadcrumbs', 'Menu', 'Pagination', 'Tabs'];
-const altImportNamesIncludes = ['action-bar', 'breadcrumbs', 'menu', 'pagination', 'tabs'];
+const altImportSpecifier = ['ActionBar', 'Menu', 'Pagination', 'Tabs'];
+const altImportNamesIncludes = ['action-bar', 'menu', 'pagination', 'tabs'];
 const altPackages = altImportNamesIncludes.map(name => `${mainPackage}/${name}`);
 
 export default function transformer(file: FileInfo, api: API, options: Options) {
@@ -19,9 +19,9 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
   root.find(j.ImportDeclaration, (nodePath: ImportDeclaration) => {
     const value = nodePath.source.value;
 
-    // If there's an import from ActionBar, Breadcrumbs, Menu, Pagination or Tabs package,
+    // If there's an import from ActionBar, Menu, Pagination or Tabs package,
     // set the import boolean check to true
-    // If there's an import from the main package, check to see if Stack, ActionBar, Breadcrumbs,
+    // If there's an import from the main package, check to see if Stack, ActionBar,
     // Menu, Pagination or Tabs or Stackprops are among the named imports
     // e.g. import {Stack} from '@workday/canvas-kit-react/layout';
     // e.g. import {Menu} from '@workday/canvas-kit-react/menu';

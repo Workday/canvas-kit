@@ -3,6 +3,73 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v8.5.9](https://github.com/Workday/canvas-kit/releases/tag/v8.5.9) (2023-03-30)
+
+### Components
+
+- fix: Extract the correct ref with a styled component ([#2122](https://github.com/Workday/canvas-kit/pull/2122)) ([@NicholasBoll](https://github.com/NicholasBoll))
+  The following is now allowed:
+  
+  ```tsx
+  const StyledComponent = styled('button')({})
+  
+  const MyComponnent = createComponent(StyledComponent)({
+    Component(elemProps, ref, Element) {
+      return <Box as={Element} ref={ref} {...elemProps} />
+    }
+  })
+  ```
+
+
+## [v8.5.8](https://github.com/Workday/canvas-kit/releases/tag/v8.5.8) (2023-03-27)
+
+### Documentation
+
+- docs: Added doc for Delete Button story ([#2113](https://github.com/Workday/canvas-kit/pull/2113)) ([@thunguyen19](https://github.com/thunguyen19))
+
+
+## [v8.5.7](https://github.com/Workday/canvas-kit/releases/tag/v8.5.7) (2023-03-23)
+
+### Infrastructure
+
+- chore: Update release workflows ([#2102](https://github.com/Workday/canvas-kit/pull/2102)) ([@RayRedGoose](https://github.com/RayRedGoose))
+
+
+## [v8.5.6](https://github.com/Workday/canvas-kit/releases/tag/v8.5.6) (2023-03-21)
+
+### Components
+
+- fix(collection): Correctly use custom getId ([#2096](https://github.com/Workday/canvas-kit/pull/2096)) ([@NicholasBoll](https://github.com/NicholasBoll))
+  An example was incorrectly using the wrong id. Note that `state.items` in a dynamic collection wraps your provided items so there is a `.id` property on `state.items`. `model.getId` is no longer needed and will be removed in the future to avoid confusion.
+
+
+## [v7.4.10](https://github.com/Workday/canvas-kit/releases/tag/v7.4.10) (2023-03-21)
+
+### Components
+
+- fix(collection): Correctly use custom getId ([#2096](https://github.com/Workday/canvas-kit/pull/2096)) ([@NicholasBoll](https://github.com/NicholasBoll))
+  An example was incorrectly using the wrong id. Note that `state.items` in a dynamic collection wraps your provided items so there is a `.id` property on `state.items`. `model.getId` is no longer needed and will be removed in the future to avoid confusion.
+## [v8.5.5](https://github.com/Workday/canvas-kit/releases/tag/v8.5.5) (2023-03-16)
+
+### Components
+
+- docs: Move Box, Flex, and Grid to a new Layout Folder in Storybook ([#2078](https://github.com/Workday/canvas-kit/pull/2078)) ([@thunguyen19](https://github.com/thunguyen19))
+
+
+## [v8.5.4](https://github.com/Workday/canvas-kit/releases/tag/v8.5.4) (2023-03-15)
+
+### Documentation
+
+- docs: Filter out model props in container components ([#2085](https://github.com/Workday/canvas-kit/pull/2085)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v8.5.3](https://github.com/Workday/canvas-kit/releases/tag/v8.5.3) (2023-03-13)
+
+### Documentation
+
+- docs: Add breadcrumbs to symbol doc dialog for nested symbols ([#2072](https://github.com/Workday/canvas-kit/pull/2072)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v8.5.2](https://github.com/Workday/canvas-kit/releases/tag/v8.5.2) (2023-03-09)
 
 ### Infrastructure
@@ -47,6 +114,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Infrastructure
 
 - ci: Block fontawesome in Cypress tests to prevent failures ([@NicholasBoll](https://github.com/NicholasBoll))
+- ci: Add logging to the merge step in forward-merge ([@NicholasBoll](https://github.com/NicholasBoll))
 
 
 ## [v8.4.12](https://github.com/Workday/canvas-kit/releases/tag/v8.4.12) (2023-03-01)

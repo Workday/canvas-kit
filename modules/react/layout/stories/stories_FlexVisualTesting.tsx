@@ -7,7 +7,7 @@ import {ContentDirection} from '@workday/canvas-kit-react/common';
 import {StaticStates, ComponentStatesTable} from '@workday/canvas-kit-react/testing';
 
 export default withSnapshotsEnabled({
-  title: 'Testing/Containers/Layout/Flex',
+  title: 'Testing/Layout/Flex',
   component: Flex,
 });
 

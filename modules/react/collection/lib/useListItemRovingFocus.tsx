@@ -20,8 +20,6 @@ import {keyboardEventToCursorEvents} from './keyUtils';
  */
 export const useListItemRovingFocus = createElemPropsHook(useCursorListModel)(
   (model, ref, elemProps: {'data-id'?: string} = {}) => {
-    const getIdRef = React.useRef(model.getId);
-
     // Create a ref out of state. We don't want to watch state on unmount, so we use a ref to get the
     // current value at the time of unmounting. Otherwise, `state.items` would be a cached value of an
     // empty array
@@ -39,9 +37,7 @@ export const useListItemRovingFocus = createElemPropsHook(useCursorListModel)(
         }
         requestAnimationFrame(() => {
           document
-            .querySelector<HTMLElement>(
-              `[data-focus-id="${`${model.state.id}-${getIdRef.current(item)}`}"]`
-            )
+            .querySelector<HTMLElement>(`[data-focus-id="${`${model.state.id}-${item.id}`}"]`)
             ?.focus();
         });
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from '@emotion/styled';
 import {expectTypeOf} from 'expect-type';
 
 import {
@@ -61,6 +62,17 @@ describe('createComponent', () => {
 
     // No expectation, but the next line will fail if the ref signature isn't valid and it should be
     return <Component ref={ref} />;
+  });
+
+  it('should extract the correct ref of a styled component', () => {
+    const StyledComponent = styled('button')({});
+    const Component = createComponent(StyledComponent)({
+      Component(props, ref, Element) {
+        expectTypeOf(ref).toEqualTypeOf<React.Ref<HTMLButtonElement>>();
+
+        return null;
+      },
+    });
   });
 });
 
