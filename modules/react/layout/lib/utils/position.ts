@@ -31,6 +31,10 @@ export type PositionStyleProps = {
    * */
   left?: number | string;
   /**
+   * - sets [CSS inset property](https://developer.mozilla.org/en-US/docs/Web/CSS/inset)
+   */
+  inset?: number | string;
+  /**
    * - sets [CSS inset-inline-start property](https://developer.mozilla.org/en-US/docs/Web/CSS/inset-inline-start)
    * - bidirectional support
    * */
@@ -71,6 +75,11 @@ export const positionStyleFnConfigs: StyleFnConfig[] = [
   {
     name: 'left',
     properties: ['left'],
+    system: 'none',
+  },
+  {
+    name: 'inset',
+    properties: ['inset'],
     system: 'none',
   },
   {
