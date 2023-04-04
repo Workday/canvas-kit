@@ -90,6 +90,8 @@ roll back more easily if necessary.
 
 ### Depth
 
+**PR:** [#2091](https://github.com/Workday/canvas-kit/pull/2091)
+
 In v7, we released an update to our depth tokens that was too bold and harsh for web applications.
 We've modified the depth token styles to be more subtle and improve visual design. This change
 affects all components which use depth tokens including `Card`, `Toast`, `Dialog`, `Popup`, `Modal`,
@@ -100,9 +102,7 @@ at `depth[1]`).
 
 ### Drawer
 
-<!---
-TODO: Please review this section with documenting SidePanel deprication
--->
+**PR:** [#1970](https://github.com/Workday/canvas-kit/pull/1970)
 
 We've removed the `Drawer` component from Canvas Kit (for reference, see the
 [`Drawer`](https://d2krrudi3mmzzw.cloudfront.net/v8/?path=/docs/labs-drawer--basic) from v8). Please
@@ -114,6 +114,8 @@ use the [`SidePanel`](/components/containers/side-panel/) in Preview instead.
 ---
 
 ### Layout and Column
+
+**PR:** [#2018](https://github.com/Workday/canvas-kit/pull/2018)
 
 We've removed the `Layout` and `Column` components from Canvas Kit (for reference, see
 [`Column and Layout`](https://d2krrudi3mmzzw.cloudfront.net/v8/?path=/docs/components-containers-column-and-layout--12-column-layout)
@@ -127,6 +129,8 @@ layouts using `Grid`.
 ---
 
 ### Stack, HStack and VStack
+
+**PR:** [#2012](https://github.com/Workday/canvas-kit/pull/2012)
 
 We've removed the `Stack`, `HStack`, and `VStack` components from Canvas Kit (for reference, see
 [`Stack`](https://d2krrudi3mmzzw.cloudfront.net/v8/?path=/docs/components-layout-stack--basic-stack)
@@ -173,6 +177,8 @@ well. All references to these types in your custom components will need to be re
 
 ### Button
 
+**PR:** [#1978](https://github.com/Workday/canvas-kit/pull/1978)
+
 We've changed the default `type` attribute for all buttons to `type="button"`. Previously, the
 `type` attribute was not being set which resulted in the buttons
 [defaulting to `type="submit"`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attributes).
@@ -204,6 +210,8 @@ within a form, add `type="submit"` to the button.
 ---
 
 ### Toast
+
+**PR:** [#2044](https://github.com/Workday/canvas-kit/pull/2044)
 
 We've promoted `Toast` from Labs to Main. It replaces the `Toast` that was previously in Main (for
 reference, see
@@ -243,6 +251,8 @@ instead import from Main.
 ## Utility Updates
 
 ### focusRing
+
+**PR:** [#2034](https://github.com/Workday/canvas-kit/pull/2034)
 
 We've removed memoization from `focusRing`. The `memoize` argument passed to `focusRing` is no
 longer valid and we've removed the exported `memoizedFocusRing`. We were unable to find any examples
