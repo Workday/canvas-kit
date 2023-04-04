@@ -41,6 +41,7 @@ const routes = {
   '/components/text/subtext/': 'components-text-subtext--basic',
   '/components/text/text/': 'components-text-text--basic',
   '/components/text/title/': 'components-text-title--basic',
+  '/examples/layout/': 'examples-layouts--area-column-positioning',
   '/getting-started/for-developers/contributing/': 'guides-contributing--page',
   '/getting-started/for-developers/resources/api-pattern-guidelines/':
     'guides-api-pattern-guidelines--page',
@@ -64,6 +65,8 @@ const routes = {
   '/whats-new/upgrade-guides/canvas-kit-v5-upgrade-guide/': 'guides-upgrade-guides-v5-0--page',
   '/whats-new/upgrade-guides/canvas-kit-v6-upgrade-guide/': 'guides-upgrade-guides-v6-0--page',
   '/whats-new/upgrade-guides/canvas-kit-v7-upgrade-guide/': 'guides-upgrade-guides-v7-0--page',
+  '/whats-new/upgrade-guides/canvas-kit-v8-upgrade-guide/': 'guides-upgrade-guides-v8-0--page',
+  '/whats-new/upgrade-guides/canvas-v9-upgrade-guide/': 'guides-upgrade-guides-v9-0--page',
 };
 
 module.exports = routes;
