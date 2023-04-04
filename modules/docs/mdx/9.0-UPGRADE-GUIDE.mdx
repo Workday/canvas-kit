@@ -10,6 +10,8 @@ any questions.
 
 - [Glossary](#glossary)
 - [Codemod](#codemod)
+- [Token Updates](#token-updates)
+  - [Depth](#depth)
 - [Component Removals](#component-removals)
   - [Drawer](#drawer)
   - [Layout and Column](#layout-and-column)
@@ -19,16 +21,14 @@ any questions.
   - [Toast](#toast)
 - [Utility Updates](#utility-updates)
   - [focusRing](#focusring)
-- [Token Updates](#token-updates)
-  - [Depth](#depth)
 
 ## Glossary
 
-**Main:** description of Main package (@workday/canvas-kit-react)
+**Main:** description of Main package (@workday/canvas-kit-react) goes here
 
-**Preview:** description of Preview package (@workday/canvas-kit-preview-react)
+**Preview:** description of Preview package (@workday/canvas-kit-preview-react) goes here
 
-**Labs:** description of Labs package (@workday/canvas-kit-labs-react)
+**Labs:** description of Labs package (@workday/canvas-kit-labs-react) goes here
 
 ## Codemod
 
@@ -60,6 +60,16 @@ handled by the codemod are marked with 🤖 in the Upgrade Guide.**
 **Please verify all changes made by the codemod.** As a safety precaution, we recommend committing
 the changes from the codemod as a single isolated commit (separate from other changes) so you can
 roll back more easily if necessary.
+
+## Token Updates
+
+### Depth
+
+In v7, we released an update to our depth tokens that was too bold and harsh for web applications.
+We've modified the depth token styles to be more subtle and improve visual design. This change
+affects all components which use depth tokens including `Card`, `Toast`, `Dialog`, `Popup`, `Modal`,
+and `Menu`. We have not changed which depth values each component references (i.e., `Card` remains
+at `depth[1]`).
 
 ## Component Removals
 
@@ -166,51 +176,49 @@ This is a breaking change if you expected a button to submit by default, though 
 this to be the case for most developers. If you _do_ intend for a button to act as a submit button
 within a form, add `type="submit"` to the button.
 
+---
+
 ### Toast
 
-We've promoted `Toast` from Labs (`@workday/canvas-kit-labs-react`) to the Main
-(`@workday/canvas-kit-react`) package.
+We've promoted `Toast` from Labs to Main. It replaces the `Toast` that was previously in Main (for
+reference, see
+[`Toast`](https://d2krrudi3mmzzw.cloudfront.net/v8/?path=/docs/components-popups-toast--error) in
+Main from v8).
 
-- This component is a
-  [compound component](/getting-started/for-developers/resources/compound-components/).
-- It has a `mode` prop that allows for proper accessibility attributes to be defined.
-- Its sub components allow for more flexibility and access to lower level elements.
+`Toast` is a [compound component](/getting-started/for-developers/resources/compound-components/)
+which provides a flexible API and access to its internals via its subcomponents. It supports a new
+`mode` prop which applies the proper accessibility features to the component based on the desired
+mode: `status`, `alert`, or `dialog`.
 
 ```tsx
 // v8
-<Toast actionText="View more details" onClose={handleClose}>Your workbook was successfully processed.</Toast>
+<Toast actionText="View more details" onActionClick={handleActionClick} onClose={handleClose}>
+  Your workbook was successfully processed.
+</Toast>
 
 // v9
 <Toast mode="dialog">
   <Toast.Icon icon={checkIcon} color={colors.greenApple400} />
   <Toast.Body>
     <Toast.Message>Your workbook was successfully processed.</Toast.Message>
-    <Toast.Link href="#hreflink">Custom Link</Toast.Link>
+    <Toast.Link onActionClick={handleActionClick}>View more details</Toast.Link>
   </Toast.Body>
 	<Toast.CloseIcon aria-label="Close" onClick={handleClose} />
 </Toast>
 ```
 
-🤖 The codemod will convert the `Toast` into a compound component with it's sub components having
-the correct props.
+🤖 The codemod will rewrite your usages of the previous `Toast` in Main to use the compound
+component API of the new `Toast` in Main. `mode` will be set to `dialog` if the `Toast` previously
+used `actionText` or `onActionClick`. The codemod will also update imports from the Labs `Toast` to
+instead import from Main.
 
-> **Note**: If your Toast is a warning of some kind, you'll have to manually set the `mode` to
-> `alert`.
+> **Note:** You will manually need to set `mode` to `alert` if your `Toast` conveys urgent and
+> important information such as an error.
 
 ## Utility Updates
 
 ### focusRing
 
-We're removing memoization from focus ring. The `memoize` argument passed to `focusRing` is no
-longer valid and we've removed the exported `memoizedFocusRing`. There is no codemod for this
-change. We couldn't find any example of `memoize` or `memoizedFocusRing` being used.
-
-## Token Updates
-
-### Depth
-
-In v7, we released an update to our depth tokens that was too bold and harsh for web applications.
-We've modified the depth token styles to be more subtle and improve visual design. This change
-affects all components which use depth tokens including `Card`, `Toast`, `Dialog`, `Popup`, `Modal`,
-and `Menu`. We have not changed which depth values each component references (i.e., `Card` remains
-at `depth[1]`).
+We've removed memoization from `focusRing`. The `memoize` argument passed to `focusRing` is no
+longer valid and we've removed the exported `memoizedFocusRing`. We were unable to find any examples
+of `memoize` or `memoizedFocusRing` being used by our consumers.
