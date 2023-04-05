@@ -26,19 +26,20 @@ any questions.
 
 ### Main
 
-Our Main package of Canvas Kit tokens, components, and utilities at `@workday/canvas-kit-react` have
-undergone a full design and a11y review and are approved for use in product.
+Our Main package of Canvas Kit tokens, components, and utilities at `@workday/canvas-kit-react` has
+undergone a full design and a11y review and is approved for use in product.
 
-Breaking changes to code in Main will only occur during major version updates.
+Breaking changes to code in Main will only occur during major version updates and will always be
+communicated in advance and accompanied by migration strategies.
 
 ---
 
 ### Preview
 
 Our Preview package of Canvas Kit tokens, components, and utilities at
-`@workday/canvas-kit-preview-react` have undergone a full design and a11y review and are approved
-for use in product, but may not be up to the high code standards upheld in the Main package. Think
-of Preview as a staging ground for code in beta.
+`@workday/canvas-kit-preview-react` has undergone a full design and a11y review and is approved for
+use in product, but may not be up to the high code standards upheld in the Main package. Preview is
+analagous to code in beta.
 
 Breaking changes can be deployed to Preview at any time without triggering a major version update,
 though such changes will be communicated in advance and accompanied by migration strategies.
@@ -48,12 +49,12 @@ though such changes will be communicated in advance and accompanied by migration
 ### Labs
 
 Our Labs package of Canvas Kit tokens, components, and utilities at `@workday/canvas-kit-labs-react`
-have **not** undergone a full design and a11y review. Think of Labs as an incubator space for new
-and experimental code in alpha.
+has **not** undergone a full design and a11y review. Labs serves as an incubator space for new and
+experimental code and is analagous to code in alpha.
 
 Breaking changes can be deployed to Labs at any time without triggering a major version update and
-may not be subject to the same rigor in communcation and migration strategies reserved for changes
-in Preview and Main.
+may not be subject to the same rigor in communcation and migration strategies reserved for breaking
+changes in Preview and Main.
 
 ## Codemod
 
@@ -123,7 +124,7 @@ from v8). Please use [`Grid`](/components/layout/grid/) instead. While `Grid` is
 replacement for `Layout` and `Column`, it can be used to generate the same types of layouts and
 offers a more robust and flexible layout solution.
 
-Please refer to our [Layout examples](/examples/layout) for examples of how to implement common
+Please refer to our [Layout examples](/examples/layout/) for examples of how to implement common
 layouts using `Grid`.
 
 ---
@@ -200,8 +201,8 @@ Any buttons which extend any of the above are affected as well.
 This resolves an [issue](https://github.com/Workday/canvas-kit/issues/1938) where clicking certain
 buttons within a `form` element would unexpectedly submit the form. Additionally, the default action
 of many form controls such as `input` and `textarea` is to click the first submit button; this led
-to issues if the first submit button in the form was not intended to be a submit button (an easy
-mistake to make when buttons default to `type="submit"`).
+to issues if the first submit button in the form was not intended to be a submit button (a common
+mistake when buttons default to `type="submit"`).
 
 This is a breaking change if you expected a button to submit by default, though we do not anticipate
 this to be the case for most developers. If you _do_ intend for a button to act as a submit button
