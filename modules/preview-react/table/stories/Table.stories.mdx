@@ -1,0 +1,68 @@
+import {SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
+import {Table} from '@workday/canvas-kit-preview-react/table';
+// examples
+import {Basic} from './examples/Basic';
+import {BasicWithHeading} from './examples/BasicWithHeading';
+import {FixedColumn} from './examples/FixedColumn.tsx';
+
+<Meta title="Preview/Table" component={Table} />
+
+# Canvas Kit Table
+
+`Table` is a simple styled compound component that renders a
+[table](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table) element. It is used to
+present information in a two-dimensional table comprised of rows and columns of cells containing
+data.
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-preview-react
+```
+
+## Usage
+
+### Basic Example with Heading
+
+In this example, users may not want to use a `caption` so they can import
+[Heading](/docs/components-text-heading--basic) or [Text](/docs/components-text-text--basic)
+instead. This will give the user more flexibility around the customization of the title/heading of
+their table.
+
+<ExampleCodeBlock code={BasicWithHeading} />
+
+### Basic Example with Caption
+
+In this example, we built a simple table that includes a `caption`. A `caption` is not required but
+it is good for
+[accessibility](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table#accessibility_concerns)
+purposes.
+
+<ExampleCodeBlock code={Basic} />
+
+### Fixed Column and Column Dividers
+
+In this example, users may want to have columns divided and have a fixed left column for their
+headers so users can scroll horizontally on bigger data sets.
+
+<ExampleCodeBlock code={FixedColumn} />
+
+> **Note**: `Table.Row` is built on [Grid](/docs/components-layout-grid--basic). It will look for
+> how many children are there and if those children are valid React Elements. This will adjust the
+> amount of columns automatically using the `gridTemplateColumns` style prop and the width of the
+> columns is also set using a `minmax` function in the `gridTemplateColumns` style prop. If a user
+> would like to adjust this, it can be overwritten on `Table.Row`. See the example below for how to
+> overwrite `gridTemplateColumns`.
+
+```tsx
+<Table.Row gridTemplateColumns="repeat(4, minmax(100px, 1fr))">
+  <Table.Header>Header</Table.Header>
+  <Table.Cell>Cell</Table.Cell>
+  <Table.Cell>Cell</Table.Cell>
+  <Table.Cell>Cell</Table.Cell>
+</Table.Row>
+```
+
+## Component API
+
+<SymbolDoc name="Table" fileName="/preview-react/" />
