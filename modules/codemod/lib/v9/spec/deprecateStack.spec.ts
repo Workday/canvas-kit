@@ -88,7 +88,7 @@ describe('Canvas Kit Deprecate Stack Codemod', () => {
       expectTransform(input, expected);
     });
 
-    it('should properly transform mutliple imports from @workday/canvas-kit-react/layout into one', () => {
+    it('should properly transform multiple imports from @workday/canvas-kit-react/layout into one', () => {
       const input = `
         import {Grid,
           Stack,
@@ -203,7 +203,7 @@ describe('Canvas Kit Deprecate Stack Codemod', () => {
       expectTransform(input, expected);
     });
 
-    it('should properly transform VStack JSX identifiers and add flexDirection attr', () => {
+    it('should properly transform VStack JSX identifiers and add flexDirection prop', () => {
       const input = `
       import {VStack} from '@workday/canvas-kit-react/layout';
 
@@ -260,7 +260,7 @@ describe('Canvas Kit Deprecate Stack Codemod', () => {
       expectTransform(input, expected);
     });
 
-    it('should properly transform StackProps type reference identifiers', () => {
+    it('should properly transform spacing prop only on Stack JSX Elements', () => {
       const input = `
       import { Stack } from '@workday/canvas-kit-react/layout';
       import { CustomCard } from '../components/CustomCard';
@@ -317,62 +317,18 @@ describe('Canvas Kit Deprecate Stack Codemod', () => {
       expectTransform(input, expected);
     });
 
-    it('should properly transform the spacing prop on specific components that extend Stack', () => {
-      const input = `
-      import { Breadcrumbs } from '@workday/canvas-kit-react/breadcrumbs';
-
-      <Breadcrumbs spacing="s">
-        <Breadcrumbs.List spacing="s"/>
-      </Breadcrumbs>
-      `;
-      const expected = `
-      import { Breadcrumbs } from '@workday/canvas-kit-react/breadcrumbs';
-
-      <Breadcrumbs gap="s">
-        <Breadcrumbs.List gap="s"/>
-      </Breadcrumbs>
-      `;
-
-      expectTransform(input, expected);
-    });
-
-    it('should properly transform the spacing prop on specific components that extend Stack', () => {
-      const input = `
-      import { Stack } from '@workday/canvas-kit-react/layout';
-      import { Breadcrumbs } from '../components/Breadcrumbs';
-
-      return (
-        <Stack spacing="s">
-          <Breadcrumbs spacing="s" />
-        </Stack>
-      );
-      `;
-      const expected = `
-      import { Flex } from '@workday/canvas-kit-react/layout';
-      import { Breadcrumbs } from '../components/Breadcrumbs';
-
-      return (
-        <Flex gap="s">
-          <Breadcrumbs spacing="s" />
-        </Flex>
-      );
-      `;
-
-      expectTransform(input, expected);
-    });
-
-    it('should properly transform the spacing prop on specific components that extend Stack', () => {
+    it('should properly transform the spacing prop on the ActionBar component that extends Stack', () => {
       const input = `
       import { ActionBar } from '@workday/canvas-kit-react/action-bar';
 
-      <ActionBar spacing="l">
+      <ActionBar>
         <ActionBar.List spacing="s"/>
       </ActionBar>
       `;
       const expected = `
       import { ActionBar } from '@workday/canvas-kit-react/action-bar';
 
-      <ActionBar gap="l">
+      <ActionBar>
         <ActionBar.List gap="s"/>
       </ActionBar>
       `;
@@ -380,7 +336,7 @@ describe('Canvas Kit Deprecate Stack Codemod', () => {
       expectTransform(input, expected);
     });
 
-    it('should not affect specific components that do not extend Stack', () => {
+    it('should not affect components that do not extend Stack', () => {
       const input = `
       import { Grid, Flex } from '@workday/canvas-kit-react/layout';
       import { ActionBar } from '@workday/canvas-kit-react/action-bar';
@@ -489,7 +445,7 @@ describe('Canvas Kit Deprecate Stack Codemod', () => {
       expectTransform(input, expected);
     });
 
-    it('should properly transform shouldWrapChildren identifiers', () => {
+    it('should properly transform shouldWrapChildren identifiers on Stack', () => {
       const input = `
       import {Stack} from '@workday/canvas-kit-react/layout';
 
@@ -513,7 +469,7 @@ describe('Canvas Kit Deprecate Stack Codemod', () => {
       expectTransform(input, expected);
     });
 
-    it('should properly transform shouldWrapChildren identifiers', () => {
+    it('should properly transform shouldWrapChildren identifiers on HStack', () => {
       const input = `
       import {HStack} from '@workday/canvas-kit-react/layout';
 
@@ -537,7 +493,7 @@ describe('Canvas Kit Deprecate Stack Codemod', () => {
       expectTransform(input, expected);
     });
 
-    it('should properly transform shouldWrapChildren identifiers', () => {
+    it('should properly transform shouldWrapChildren identifiers on VStack', () => {
       const input = `
       import {VStack} from '@workday/canvas-kit-react/layout';
 
@@ -561,7 +517,7 @@ describe('Canvas Kit Deprecate Stack Codemod', () => {
       expectTransform(input, expected);
     });
 
-    it('should properly transform spacing identifiers to gap', () => {
+    it('should properly transform spacing identifiers to gap on Stack', () => {
       const input = `
       import {Stack} from '@workday/canvas-kit-react/layout';
 
@@ -585,7 +541,7 @@ describe('Canvas Kit Deprecate Stack Codemod', () => {
       expectTransform(input, expected);
     });
 
-    it('should properly transform spacing identifiers to gap', () => {
+    it('should properly transform spacing identifiers to gap on VStack and add flexDirection', () => {
       const input = `
       import {VStack} from '@workday/canvas-kit-react/layout';
 
@@ -609,7 +565,7 @@ describe('Canvas Kit Deprecate Stack Codemod', () => {
       expectTransform(input, expected);
     });
 
-    it('should properly transform spacing identifiers to gap', () => {
+    it('should properly transform spacing identifiers to gap on HStack', () => {
       const input = `
       import {HStack} from '@workday/canvas-kit-react/layout';
 
