@@ -7,7 +7,7 @@
     "declarationMap": true,
     "esModuleInterop": true,
     "jsx": "react",
-    "lib": ["dom"],
+    "lib": ["es2015", "es2017", "es2018", "es2019", "dom"],
     "moduleResolution": "node",
     "forceConsistentCasingInFileNames": true,
     "removeComments": false,
