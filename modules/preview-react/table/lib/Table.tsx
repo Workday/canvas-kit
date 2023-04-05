@@ -144,6 +144,13 @@ export const Table = createComponent('table')({
     /**
      * `Table.Row` renders a [tr](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/tr) element.
      *
+     * **Note**: `Table.Row` is built on [Grid](/docs/components-layout-grid--basic). It will look for
+     * how many children are there and if those children are valid React Elements. This will adjust the
+     * amount of columns automatically using the `gridTemplateColumns` style prop and the width of the
+     * columns is also set using a `minmax` function in the `gridTemplateColumns` style prop. If a user
+     * would like to adjust this, it can be overwritten on `Table.Row`. See the example below for how to
+     * overwrite `gridTemplateColumns`.
+     *
      * @example
      * ```tsx
     import {Table} from '@workday/canvas-kit-preview-react/table';
@@ -152,7 +159,7 @@ export const Table = createComponent('table')({
       return (
         <Table>
           <Table.Head>
-            <Table.Row>
+            <Table.Row gridTemplateColumns="repeat(4, minmax(100px, 1fr))">
               <Table.Header>Table Header</Table.Header>
               <Table.Cell>Table Cell</Table.Cell>
             </Table.Row>

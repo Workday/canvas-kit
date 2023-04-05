@@ -47,22 +47,6 @@ headers so users can scroll horizontally on bigger data sets.
 
 <ExampleCodeBlock code={FixedColumn} />
 
-> **Note**: `Table.Row` is built on [Grid](/docs/components-layout-grid--basic). It will look for
-> how many children are there and if those children are valid React Elements. This will adjust the
-> amount of columns automatically using the `gridTemplateColumns` style prop and the width of the
-> columns is also set using a `minmax` function in the `gridTemplateColumns` style prop. If a user
-> would like to adjust this, it can be overwritten on `Table.Row`. See the example below for how to
-> overwrite `gridTemplateColumns`.
-
-```tsx
-<Table.Row gridTemplateColumns="repeat(4, minmax(100px, 1fr))">
-  <Table.Header>Header</Table.Header>
-  <Table.Cell>Cell</Table.Cell>
-  <Table.Cell>Cell</Table.Cell>
-  <Table.Cell>Cell</Table.Cell>
-</Table.Row>
-```
-
 ## Component API
 
 <SymbolDoc name="Table" fileName="/preview-react/" />
