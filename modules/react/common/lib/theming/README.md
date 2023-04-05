@@ -244,12 +244,10 @@ variable before falling back to the default theme.
 ## Access the theme value
 
 To access the current theme, you can use one of the following functions and hooks depending on where
-do you use it and what do you want to get back. All of these functions allow to pass a partial or
-full theme object to overwrite the current theme. If a theme is not passed, they will try to
-retrieve it from the ThemeContext (only for hooks), then from the window object and as a last
-solution they will fall back to the default theme.
-
-Please consider to use `getTheme` and `useTheme` over `getCanvasTheme` and `useCanvasTheme`.
+do you use it and what do you want to get back. These functions allow to pass a partial or full
+theme object to overwrite the current theme. If a theme is not passed, they will try to retrieve it
+from the ThemeContext (only for hooks), then from the window object and as a last solution they will
+fall back to the default theme.
 
 ### getTheme
 
@@ -328,79 +326,6 @@ export const ErrorMessage = () => {
     <Subtext size="large" color={theme.canvas.palette.error.main}>
   )
 }
-```
-
-### useCanvasTheme
-
-The `useCanvasTheme` hook lets to access the current Canvas theme and it should be used with
-functional components. You can pass the theme object `theme` as any partial or full theme object to
-overwrite the current Canvas theme.
-
-**Return value**
-
-```tsx
-{
-  palette: {
-    // ...
-  },
-  breakpoints: {
-    // ...
-  },
-  direction: ContentDirection.LTR,
-};
-```
-
-**Example**
-
-```tsx
-export const ErrorMessage = () => {
-  const theme = useCanvasTheme();
-  return (
-    <Subtext size="large" color={theme.palette.error.main}>
-  )
-}
-```
-
-### getCanvasTheme
-
-This function ensures that a theme is defined via a proxy and allows access to properties on the
-theme object. Use this function when you have access to `theme` in styled components. It takes
-`theme` as any partial or full theme object and returns a theme object if it is defined, otherwise
-it will fall back on using theme from `window` object and then on `defaultCanvasTheme`
-
-**Return value**
-
-```tsx
-{
-  palette: {
-    // ...
-  },
-  breakpoints: {
-    // ...
-  },
-  direction: ContentDirection.LTR,
-};
-```
-
-**Example**
-
-```tsx
-const ResponsiveContainer = styled('div')(({theme}) => {
-  const canvas = getCanvasTheme(theme);
-  return {
-    maxHeight: '100vh',
-    display: 'flex',
-    position: 'absolute',
-    left: 0,
-    top: 0,
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '100vh',
-    [canvas.breakpoints.down('s')]: {
-      alignItems: 'end',
-    },
-  };
-});
 ```
 
 ## Breakpoints
