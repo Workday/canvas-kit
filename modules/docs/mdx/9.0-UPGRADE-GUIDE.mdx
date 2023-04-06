@@ -14,12 +14,11 @@ any questions.
   - [Layout and Column](#layout-and-column)
   - [Stack](#stack-hstack-vstack)
 - [Component Updates](#component-updates)
-  - [Buttons](#buttons)
-	- [Toast](#toast)
+  - [Buttons](#buttons) - [Toast](#toast)
 - [Utility Updates](#utility-updates)
   - [focusRing](#focusring)
-- [Token Updates](#token-updates)
-	- [Depth](#depth)
+  - [Theme hooks](#theme-hook)
+- [Token Updates](#token-updates) - [Depth](#depth)
 
 ## Codemod
 
@@ -172,6 +171,15 @@ the correct props.
 We're removing memoization from focus ring. The `memoize` argument passed to `focusRing` is no
 longer valid and we've removed the exported `memoizedFocusRing`. There is no codemod for this
 change. We couldn't find any example of `memoize` or `memoizedFocusRing` being used.
+
+### Theme hooks
+
+We've updated `useTheme` by adding error handling if this hook has been used outside a functional
+component. Also, `getTheme` method has been added to access a theme from `styled` or class
+components instead of `useTheme`.
+
+`useCanvasTheme` and `getTheme` have been removed as it's can be safely replaced by `useTheme` and
+`getTheme` and there is no external usage of this functions found.
 
 ## Token Updates
 
