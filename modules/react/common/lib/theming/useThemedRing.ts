@@ -55,8 +55,8 @@ export function getPaletteColorsForFocusRing(
 }
 
 /**
- * This is a way to automatically add themed colors to your inputs. This is helpful when showing alerts
- * to users. It supports `error`, `alert`, and `success` states. It will try and use the corresponding
+ * This is a way to automatically add themed colors to your input and is helpful when showing alerts, success or errors to users.
+ * It supports `error`, `alert`, and `success` states. It will try and use the corresponding
  * `main` colors from your `CanvasThemePalette` unless they do not meet accessibility contrast, in
  * which case the outer ring will use the `darkest` color. This hook will also show a `focusOutline`
  * ring when the input is focused. Note: You should not rely on these colors alone to differentiate
