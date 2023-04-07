@@ -17,7 +17,9 @@ any questions.
   - [Buttons](#buttons) - [Toast](#toast)
 - [Utility Updates](#utility-updates)
   - [focusRing](#focusring)
-  - [Theme hooks](#theme-hook)
+  - [useTheme and getTheme](#theme-hook)
+  - [useCanvasTheme and getCanvasTheme] - [useThemedRing](#useThemedRing) -
+    [useThemeRTL](#useThemeRTL)
 - [Token Updates](#token-updates) - [Depth](#depth)
 
 ## Codemod
@@ -172,14 +174,29 @@ We're removing memoization from focus ring. The `memoize` argument passed to `fo
 longer valid and we've removed the exported `memoizedFocusRing`. There is no codemod for this
 change. We couldn't find any example of `memoize` or `memoizedFocusRing` being used.
 
-### Theme hooks
+### useTheme and getTheme
 
 We've updated `useTheme` by adding error handling if this hook has been used outside a functional
 component. Also, `getTheme` method has been added to access a theme from `styled` or class
 components instead of `useTheme`.
 
-`useCanvasTheme` and `getTheme` have been removed as it's can be safely replaced by `useTheme` and
-`getTheme` and there is no external usage of this functions found.
+### useCanvasTheme and getCanvasTheme
+
+`useCanvasTheme` and `getCanvasTheme` have been removed as it's can be safely replaced by `useTheme`
+and `getTheme` and there is no external usage of this functions found.
+
+### useThemedRing
+
+We've promoted `useThemedRing` from our Labs package to our Main package. You can use this utility
+to theme focus rings.
+
+🤖 The codemod will update the import for this utility.
+
+### useThemeRTL
+
+We've [soft-deprecated](#soft-deprecation) `useThemeRTL` from our Labs package. Although you may
+still use this utility, we encourage consumers to use
+[CSS logical properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Logical_Properties).
 
 ## Token Updates
 

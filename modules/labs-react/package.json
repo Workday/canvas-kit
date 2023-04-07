@@ -50,8 +50,8 @@
     "@workday/canvas-system-icons-web": "^3.0.0",
     "@workday/design-assets-types": "^0.2.8",
     "chroma-js": "^2.1.0",
-    "lodash.flatten": "^4.4.0",
-    "rtl-css-js": "^1.14.1"
+    "rtl-css-js": "^1.14.1",
+    "lodash.flatten": "^4.4.0"
   },
   "devDependencies": {
     "@types/lodash.flatten": "^4.4.6"
