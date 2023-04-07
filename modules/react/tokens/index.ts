@@ -63,9 +63,6 @@ export {
   fontFamily,
   monoFontFamily,
   BrandingColor,
-  CanvasDepth,
-  CanvasDepthValues,
-  CSSProperties,
 };
 
 export type {
@@ -73,6 +70,8 @@ export type {
   CanvasBorderRadiusKeys,
   CanvasBorderRadiusValues,
   CanvasColor,
+  CanvasDepth,
+  CanvasDepthValues,
   CanvasSpace,
   CanvasSpaceKeys,
   CanvasSpaceValues,
@@ -82,4 +81,5 @@ export type {
   CanvasTypeProperties,
   CanvasTypeVariants,
   CanvasTypeHierarchy,
+  CSSProperties,
 }
