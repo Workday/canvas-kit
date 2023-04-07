@@ -82,11 +82,12 @@ describe('Promote useThemedRing to main package', () => {
     it('should properly transform main labs import for useThemedRing only to react useThemedRing', () => {
       const input = stripIndent`
           import {useThemedRing, SearchForm} from "@workday/canvas-kit-labs-react";
+          import {styled} from "@workday/canvas-kit-react/common";
         `;
 
       const expected = stripIndent`
-          import { useThemedRing } from "@workday/canvas-kit-react/common";
           import { SearchForm } from "@workday/canvas-kit-labs-react";
+          import { styled, useThemedRing } from "@workday/canvas-kit-react/common";
         `;
 
       expectTransform(input, expected);
