@@ -43,9 +43,12 @@ export const useComboboxMenuItem = composeHooks(
         event.preventDefault();
       };
 
+      const selected =
+        model.state.selectedIds === 'all' || model.state.selectedIds.includes(id) || undefined;
+
       return {
         role: 'option',
-        'aria-selected': model.state.cursorId && id === model.state.cursorId ? true : undefined,
+        'aria-selected': selected,
         onMouseDown,
         className: model.state.cursorId === elemProps['data-id'] ? 'focus' : '',
       } as const;

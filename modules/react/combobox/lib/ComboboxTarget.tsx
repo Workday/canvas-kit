@@ -24,6 +24,7 @@ export const useComboboxTarget = composeHooks(
       if (model.state.cursorId && model.state.visibility === 'visible') {
         const item = model.navigation.getItem(model.state.cursorId, model);
         if (model.state.isVirtualized && item) {
+          console.log('scrollToIndex', item.index);
           model.state.UNSTABLE_virtual.scrollToIndex(item.index);
         } else {
           const listboxId = localRef.current?.getAttribute('aria-controls');

@@ -1,7 +1,7 @@
 import React from 'react';
 import {assert, createModelHook, Generic} from '@workday/canvas-kit-react/common';
 
-import {useBaseListModel, Item, defaultGetId as getId} from './useBaseListModel';
+import {useBaseListModel, Item} from './useBaseListModel';
 
 type NavigationInput = Pick<ReturnType<typeof useCursorListModel>, 'state'>;
 
@@ -18,7 +18,7 @@ export interface NavigationManager {
    * and `Ctrl+End` for Grids. */
   getLast: NavigationRequestor;
   /** Get an item with the provided `id`. */
-  getItem: NavigationRequestor;
+  getItem: (id: string, model: NavigationInput) => Item<Generic>;
   /** Get the next item after the provided `id`. This will be called when the `Right` arrow key is
    * pressed for RTL languages and when the `Left` arrow is pressed for LTR languages. */
   getNext: NavigationRequestor;
@@ -69,99 +69,89 @@ export const createNavigationManager = (manager: NavigationManager) => manager;
 /**
  * Given an id and a model, return an item from the collection
  */
-export type NavigationRequestor = (id: string, model: NavigationInput) => Item<Generic>;
+export type NavigationRequestor = (index: number, model: NavigationInput) => number;
 
 /**
  * Get the first item in a list regardless of column count
  */
-export const getFirst: NavigationRequestor = (_, {state}) => state.items[0];
+export const getFirst: NavigationRequestor = (_, {state}) => 0;
 /**
  * Get the last item in a list regardless of column count
  */
-export const getLast: NavigationRequestor = (_, {state}) => state.items[state.items.length - 1];
+export const getLast: NavigationRequestor = (_, {state}) => state.items.length - 1;
 
 /**
  * Get the first item in a row. If column count is 0, it will return the results of `getFirst`
  */
-export const getFirstOfRow: NavigationRequestor = (id, {state}) => {
+export const getFirstOfRow: NavigationRequestor = (index, {state}) => {
   if (state.columnCount) {
-    const item = getItem(id, {state});
-    const currentIndex = item.index;
-    const offset = currentIndex % state.columnCount;
-    return state.items[currentIndex - offset];
+    const offset = index % state.columnCount;
+    return index - offset;
   }
-  return getFirst(id, {state});
+  return getFirst(index, {state});
 };
 
 /**
  * get the last item in a row - if column count is 0, it will return the results of `getLast`
  */
-export const getLastOfRow: NavigationRequestor = (id, {state}) => {
+export const getLastOfRow: NavigationRequestor = (index, {state}) => {
   if (state.columnCount) {
-    const item = getItem(id, {state});
-    const currentIndex = item.index;
-    const offset = (currentIndex % state.columnCount) - state.columnCount + 1;
-    let nextIndex = currentIndex - offset;
+    const offset = (index % state.columnCount) - state.columnCount + 1;
+    let nextIndex = index - offset;
     if (nextIndex >= state.items.length) {
       nextIndex = state.items.length - 1;
     }
-    return state.items[nextIndex];
+    return nextIndex;
   }
-  return getLast(id, {state});
+  return getLast(index, {state});
 };
 
 /**
  * get the item in the previous page. This can be author defined. By default it will return the
  * first item for a list, and the first item in the same column for a grid.
  */
-export const getPreviousPage: NavigationRequestor = (id, {state}) => {
+export const getPreviousPage: NavigationRequestor = (index, {state}) => {
   if (state.columnCount) {
-    const item = getItem(id, {state});
-    const currentIndex = item.index;
-    return state.items[currentIndex % state.columnCount];
+    return index % state.columnCount;
   }
-  return getFirst(id, {state});
+  return getFirst(index, {state});
 };
 
 /**
  * get the item in the next page. This can be author defined. By default, it will return the last
  * item for a list, and the last item in the same column for a grid.
  */
-export const getNextPage: NavigationRequestor = (id, {state}) => {
+export const getNextPage: NavigationRequestor = (index, {state}) => {
   if (state.columnCount) {
-    const item = getItem(id, {state});
-    const currentIndex = item.index;
     const lastRowIndex = state.items.length - state.columnCount;
-    return state.items[lastRowIndex + (currentIndex % state.columnCount)];
+    return lastRowIndex + (index % state.columnCount);
   }
-  return getLast(id, {state});
+  return getLast(index, {state});
 };
 
-const getItem: NavigationRequestor = (id, {state}) => {
-  const item = id ? state.items.find(item => getId(item) === id) : getFirst(id, {state}); // no id, return first item
+const getItem: (id: string, model: NavigationInput) => Item<Generic> = (id, {state}) => {
+  const item = id ? state.items.find(item => item.id === id) : state.items[0]; // no id, return first item
   assert(item, `Item not found: ${id}`);
   return item;
 };
 
 export const getWrappingOffsetItem = (offset: number) => (
-  id: string,
+  index: number,
   {state}: NavigationInput,
   tries = state.items.length
-): Item<Generic> => {
-  if (!id) {
-    // we have no id. If the offset is positive, we'll return the first item
+): number => {
+  if (Number.isNaN(index)) {
+    // we have no valid index. If the offset is positive, we'll return the first item
     if (offset === 1) {
-      return getFirst(id, {state});
+      return getFirst(index, {state});
     }
     if (offset === -1) {
-      return getLast(id, {state});
+      return getLast(index, {state});
     }
   }
   const items = state.items;
-  const item = getItem(id, {state});
 
-  const currentIndex = item.index;
-  let nextIndex = currentIndex + offset;
+  let nextIndex = index + offset;
 
   // calculate idealLength as in if the grid was a perfect rectangle
   const rows = Math.ceil(items.length / state.columnCount);
@@ -194,34 +184,32 @@ export const getWrappingOffsetItem = (offset: number) => (
     }
   }
 
-  if (state.nonInteractiveIds.includes(getId(items[nextIndex])) && tries > 0) {
+  if (state.nonInteractiveIds.includes(items[nextIndex].id) && tries > 0) {
     // The next item is disabled, try again, but only if we haven't already tried everything.
     // Avoid an infinite loop with `tries`
-    return getWrappingOffsetItem(offset)(getId(items[nextIndex]), {state}, tries - 1);
+    return getWrappingOffsetItem(offset)(nextIndex, {state}, tries - 1);
   }
 
-  return items[nextIndex];
+  return nextIndex;
 };
 
 export const getOffsetItem = (offset: number) => (
-  id: string,
+  index: number,
   {state}: NavigationInput,
   tries = state.items.length
-): Item<Generic> => {
+): number => {
   const {items, columnCount} = state;
-  const item = getItem(id, {state});
 
-  const currentIndex = item.index;
-  let nextIndex = currentIndex + offset;
+  let nextIndex = index + offset;
 
   if (Math.abs(offset) < columnCount) {
     // if we're here, the columnCount is non-zero and the absolute value of offset is less than the
     // column count. We don't want to wrap, so we'll bound within the row
 
-    const currentIndexInRow = currentIndex % columnCount;
-    const nextIndexInRow = nextIndex - currentIndex + currentIndexInRow;
+    const currentIndexInRow = index % columnCount;
+    const nextIndexInRow = nextIndex - index + currentIndexInRow;
     if (nextIndexInRow >= columnCount || nextIndexInRow < 0) {
-      nextIndex = currentIndex;
+      nextIndex = index;
     }
   } else if (columnCount) {
     // if we're here, there's a column count, but the offset will move into another row. We need to
@@ -229,12 +217,12 @@ export const getOffsetItem = (offset: number) => (
     const nextRow = Math.floor(nextIndex / columnCount);
 
     if (nextRow < 0 || nextRow >= columnCount) {
-      nextIndex = currentIndex;
+      nextIndex = index;
     }
 
     // make sure we don't go out of bounds if the grid isn't a perfect rectangle
     if (nextIndex > items.length - 1) {
-      nextIndex = currentIndex;
+      nextIndex = index;
     }
   }
 
@@ -245,13 +233,13 @@ export const getOffsetItem = (offset: number) => (
     nextIndex = items.length - 1;
   }
 
-  if (state.nonInteractiveIds.includes(getId(items[nextIndex])) && tries > 0) {
+  if (state.nonInteractiveIds.includes(items[nextIndex].id) && tries > 0) {
     // The next item is disabled, try again, but only if we haven't already tried everything.
     // Avoid an infinite loop with `tries`
-    return getOffsetItem(offset)(getId(items[nextIndex]), {state}, tries - 1);
+    return getOffsetItem(offset)(nextIndex, {state}, tries - 1);
   }
 
-  return items[nextIndex];
+  return nextIndex;
 };
 
 /**
@@ -264,9 +252,9 @@ export const wrappingNavigationManager = createNavigationManager({
   getLast,
   getItem,
   getNext: getWrappingOffsetItem(1),
-  getNextRow: (id, {state}) => getWrappingOffsetItem(state.columnCount)(id, {state}),
+  getNextRow: (index, {state}) => getWrappingOffsetItem(state.columnCount)(index, {state}),
   getPrevious: getWrappingOffsetItem(-1),
-  getPreviousRow: (id, {state}) => getWrappingOffsetItem(-state.columnCount)(id, {state}),
+  getPreviousRow: (index, {state}) => getWrappingOffsetItem(-state.columnCount)(index, {state}),
   getPreviousPage,
   getNextPage,
   getFirstOfRow,
@@ -282,9 +270,9 @@ export const navigationManager = createNavigationManager({
   getLast,
   getItem,
   getNext: getOffsetItem(1),
-  getNextRow: (id, {state}) => getOffsetItem(state.columnCount)(id, {state}),
+  getNextRow: (index, {state}) => getOffsetItem(state.columnCount)(index, {state}),
   getPrevious: getOffsetItem(-1),
-  getPreviousRow: (id, {state}) => getOffsetItem(-state.columnCount)(id, {state}),
+  getPreviousRow: (index, {state}) => getOffsetItem(-state.columnCount)(index, {state}),
   getPreviousPage,
   getNextPage,
   getFirstOfRow,
@@ -334,6 +322,14 @@ export const useCursorListModel = createModelHook({
   const columnCount = config.columnCount || 0;
   const list = useBaseListModel(config);
   const navigation = config.navigation;
+  const [cursorIndex, setCursorIndex] = React.useState(() => {
+    return list.state.items.findIndex(item => item.id === cursorId) || 0;
+  });
+  const setCursor = (index: number) => {
+    setCursorIndex(index);
+    const id = state.items[index]?.id || '';
+    setCursorId(id);
+  };
 
   const state = {
     ...list.state,
@@ -350,12 +346,18 @@ export const useCursorListModel = createModelHook({
      * based on the size of the list container and the number of items fitting within the container.
      */
     pageSizeRef,
+    /**
+     * A
+     */
+    cursorIndex,
   };
 
   const events = {
     ...list.events,
     /** Directly sets the cursor to the list item by its identifier. */
     goTo(data: {id: string}) {
+      const index = state.items.findIndex(item => item.id === data.id);
+      setCursorIndex(index);
       setCursorId(data.id);
     },
     /**
@@ -365,14 +367,16 @@ export const useCursorListModel = createModelHook({
      * item in a row.
      */
     goToNext() {
-      setCursorId(getId(navigation.getNext(state.cursorId, {state})));
+      const index = navigation.getNext(state.cursorIndex, {state});
+      setCursor(index);
     },
     /**
      * Set the cursor to the "previous" item in the list. If the beginning of the list is detected,
      * it will wrap to the last item
      */
     goToPrevious() {
-      setCursorId(getId(navigation.getPrevious(state.cursorId, {state})));
+      const index = navigation.getPrevious(state.cursorIndex, {state});
+      setCursor(index);
     },
     /**
      * Previous item perpendicular to the orientation of a list, or the previous row in a grid. For
@@ -381,13 +385,10 @@ export const useCursorListModel = createModelHook({
      * this would be the previous row (current position - column count).
      */
     goToPreviousRow() {
-      setCursorId(
-        getId(
-          navigation.getPreviousRow(state.cursorId, {
-            state,
-          })
-        )
-      );
+      const index = navigation.getPreviousRow(state.cursorIndex, {
+        state,
+      });
+      setCursor(index);
     },
     /**
      * Next item perpendicular to the orientation of a list, or the next row in a grid. For example,
@@ -396,33 +397,36 @@ export const useCursorListModel = createModelHook({
      * next row (current position + column count).
      */
     goToNextRow() {
-      setCursorId(getId(navigation.getNextRow(state.cursorId, {state})));
+      const index = navigation.getNextRow(state.cursorIndex, {state});
+      setCursor(index);
     },
     /** Set the cursor to the first item in the list */
     goToFirst() {
-      setCursorId(getId(navigation.getFirst(state.cursorId, {state})));
+      const index = navigation.getFirst(state.cursorIndex, {state});
+      setCursor(index);
     },
     /** Set the cursor to the last item in the list */
     goToLast() {
-      setCursorId(getId(navigation.getLast(state.cursorId, {state})));
+      const index = navigation.getLast(state.cursorIndex, {state});
+      setCursor(index);
     },
     goToFirstOfRow() {
-      setCursorId(getId(navigation.getFirstOfRow(state.cursorId, {state})));
+      const index = navigation.getFirstOfRow(state.cursorIndex, {state});
+      setCursor(index);
     },
     goToLastOfRow() {
-      setCursorId(getId(navigation.getLastOfRow(state.cursorId, {state})));
+      const index = navigation.getLastOfRow(state.cursorIndex, {state});
+      setCursor(index);
     },
     goToNextPage() {
-      setCursorId(getId(navigation.getNextPage(state.cursorId, {state})));
+      const index = navigation.getNextPage(state.cursorIndex, {state});
+      setCursor(index);
     },
     goToPreviousPage() {
-      setCursorId(
-        getId(
-          navigation.getPreviousPage(state.cursorId, {
-            state,
-          })
-        )
-      );
+      const index = navigation.getPreviousPage(state.cursorIndex, {
+        state,
+      });
+      setCursor(index);
     },
   };
 
