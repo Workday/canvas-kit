@@ -29,7 +29,7 @@ describe('Promote useThemedRing to main package', () => {
       expectTransform(input, expected);
     });
 
-    it('should  properly transform labs import for useThemedRing to react common', () => {
+    it('should properly transform labs import for useThemedRing to react common', () => {
       const input = stripIndent`
           import { useThemedRing } from "@workday/canvas-kit-labs-react/common";
         `;
@@ -41,7 +41,7 @@ describe('Promote useThemedRing to main package', () => {
       expectTransform(input, expected);
     });
 
-    it('should  properly transform labs import for useThemedRing to react useThemedRing from main packages', () => {
+    it('should properly transform labs import for useThemedRing to react useThemedRing from main packages', () => {
       const input = stripIndent`
           import { useThemedRing } from "@workday/canvas-kit-labs-react";
         `;
