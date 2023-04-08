@@ -4,7 +4,7 @@ import {commonColors, colors, space} from '@workday/canvas-kit-react/tokens';
 import {
   createSubcomponent,
   ExtractProps,
-  getCanvasTheme,
+  getTheme,
   styled,
   StyledType,
 } from '@workday/canvas-kit-react/common';
@@ -37,7 +37,7 @@ export interface ActionBarListProps<T = any>
 }
 
 const ResponsiveList = styled(Flex)<ActionBarListProps & StyledType>(({theme}) => {
-  const canvasTheme = getCanvasTheme(theme);
+  const {canvas: canvasTheme} = getTheme(theme);
   return {
     [canvasTheme.breakpoints.down('s')]: {
       padding: space.s,

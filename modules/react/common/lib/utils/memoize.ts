@@ -2,7 +2,7 @@
  * Simple memoize function. It takes a function and a resolver function to generate a
  * cache key
  */
-export function memoize<T extends (...args: any) => any>(
+export function memoize<T extends (...args: any[]) => any>(
   func: T,
   resolver: (...args: Parameters<T>) => string
 ): T {

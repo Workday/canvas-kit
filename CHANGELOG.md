@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v8.5.9](https://github.com/Workday/canvas-kit/releases/tag/v8.5.9) (2023-03-30)
+
+### Components
+
+- fix: Extract the correct ref with a styled component ([#2122](https://github.com/Workday/canvas-kit/pull/2122)) ([@NicholasBoll](https://github.com/NicholasBoll))
+  The following is now allowed:
+  
+  ```tsx
+  const StyledComponent = styled('button')({})
+  
+  const MyComponnent = createComponent(StyledComponent)({
+    Component(elemProps, ref, Element) {
+      return <Box as={Element} ref={ref} {...elemProps} />
+    }
+  })
+  ```
+
+
 ## [v8.5.8](https://github.com/Workday/canvas-kit/releases/tag/v8.5.8) (2023-03-27)
 
 ### Documentation
