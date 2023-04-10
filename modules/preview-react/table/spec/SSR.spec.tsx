@@ -22,18 +22,15 @@ describe('Table', () => {
               <Table.Header>Table Header</Table.Header>
               <Table.Header>Table Header</Table.Header>
             </Table.Row>
-            <Table.Divider />
             <Table.Row>
               <Table.Header>Table Header</Table.Header>
               <Table.Cell>Table Data Cell</Table.Cell>
             </Table.Row>
-            <Table.Divider />
             <Table.Row>
               <Table.Header>Table Header</Table.Header>
               <Table.Cell>Table Data Cell</Table.Cell>
             </Table.Row>
           </Table.Body>
-          <Table.Divider />
           <Table.Footer>
             <Table.Row>
               <Table.Header>Table Header</Table.Header>
