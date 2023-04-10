@@ -29,18 +29,15 @@ const Standard = () => (
         <Table.Header>Table Header</Table.Header>
         <Table.Header>Table Header</Table.Header>
       </Table.Row>
-      <Table.Divider />
       <Table.Row>
         <Table.Header>Table Header</Table.Header>
         <Table.Cell>Table Data Cell</Table.Cell>
       </Table.Row>
-      <Table.Divider />
       <Table.Row>
         <Table.Header>Table Header</Table.Header>
         <Table.Cell>Table Data Cell</Table.Cell>
       </Table.Row>
     </Table.Body>
-    <Table.Divider />
     <Table.Footer>
       <Table.Row>
         <Table.Header>Table Header</Table.Header>
@@ -54,22 +51,18 @@ const exampleData = [
   {
     header: 'Example Header',
     cell: 'Example Cell',
-    hasDivider: true,
   },
   {
     header: 'Example Header',
     cell: 'Example Cell',
-    hasDivider: true,
   },
   {
     header: 'Example Header',
     cell: 'Example Cell',
-    hasDivider: true,
   },
   {
     header: 'Example Header',
     cell: 'Example Cell',
-    hasDivider: false,
   },
 ];
 
@@ -134,7 +127,6 @@ const FixedColumn = () => (
               <Table.Cell borderRight={`1px solid ${colors.soap400}`}>{item.cell}</Table.Cell>
               <Table.Cell borderRight={`1px solid ${colors.soap400}`}>{item.cell}</Table.Cell>
             </Table.Row>
-            {item.hasDivider ? <Table.Divider /> : null}
           </>
         ))}
       </Table.Body>
