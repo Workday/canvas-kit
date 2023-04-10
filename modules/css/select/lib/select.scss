@@ -55,7 +55,7 @@
 }
 
 [data-whatinput='keyboard'] .wdc-form-select:not([disabled]):focus {
-  @extend .wdc-form-select.wdc-form-focus;
+  @extend .wdc-form-select, .wdc-form-focus;
 }
 
 [data-whatinput='mouse'],
