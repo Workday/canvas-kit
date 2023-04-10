@@ -1,6 +1,6 @@
-import {useThemeRTL} from './useThemeRTL';
-import {CanvasThemePalette, EmotionCanvasTheme} from '@workday/canvas-kit-react/common';
+import {CanvasThemePalette, EmotionCanvasTheme, useTheme} from '@workday/canvas-kit-react/common';
 import {colors, CSSProperties, inputColors, statusColors} from '@workday/canvas-kit-react/tokens';
+
 import chroma from 'chroma-js';
 
 type paletteSelection = Exclude<keyof EmotionCanvasTheme['canvas']['palette'], 'common'>;
@@ -27,7 +27,7 @@ const getPaletteColorsFromTheme = (
   };
 };
 
-export function getPaletteColors(
+export function getPaletteColorsForFocusRing(
   type: paletteSelection,
   theme: EmotionCanvasTheme
 ): ContrastColors {
@@ -54,10 +54,42 @@ export function getPaletteColors(
   }
 }
 
+/**
+ * This is a way to automatically add themed colors to your input and is helpful when showing alerts, success or errors to users.
+ * It supports `error`, `alert`, and `success` states. It will try and use the corresponding
+ * `main` colors from your `CanvasThemePalette` unless they do not meet accessibility contrast, in
+ * which case the outer ring will use the `darkest` color. This hook will also show a `focusOutline`
+ * ring when the input is focused. Note: You should not rely on these colors alone to differentiate
+ * alerts, but use them in combination with icons or hint text.
+ * ```tsx
+ * // Add here jsx pragma to use css
+ * import {jsx} from '@emotion/core';
+ * import React from 'react';
+ * import {TextInput} from '@workday/canvas-kit-preview-react/text-input';
+ * import {useThemedRing} from '@workday/canvas-kit-react/common';
+ *
+ * export const MyInput = ({handleChange}) => {
+ *  const [value, setValue] = React.useState('invalid@email');
+ *  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+ *    setValue(event.target.value);
+ *  };
+ *
+ *  const alertStyles = useThemedRing('alert');
+ *
+ *  return (
+ *    <TextInput>
+ *     <TextInput.Label>Email</TextInput.Label>
+ *      <TextInput.Field css={alertStyles} onChange={handleChange} value={value} />
+ *      <TextInput.Hint>Please enter a valid email.</TextInput.Hint>
+ *    </TextInput>
+ *  );
+ * };
+ *```
+ */
 export const useThemedRing = (type: paletteSelection): CSSProperties => {
-  const {themeRTL, theme} = useThemeRTL();
+  const theme = useTheme();
 
-  const paletteColors = getPaletteColors(type, theme);
+  const paletteColors = getPaletteColorsForFocusRing(type, theme);
   if (!(paletteColors?.outer || paletteColors?.inner)) {
     return {};
   }
@@ -65,7 +97,7 @@ export const useThemedRing = (type: paletteSelection): CSSProperties => {
     paletteColors.inner
   }`;
 
-  return themeRTL({
+  return {
     borderColor: paletteColors.outer,
     transition: '100ms box-shadow',
     boxShadow: errorBoxShadow,
@@ -78,5 +110,5 @@ export const useThemedRing = (type: paletteSelection): CSSProperties => {
         0 0 0 2px ${colors.frenchVanilla100},
         0 0 0 4px ${theme ? theme.canvas.palette.common.focusOutline : inputColors.focusBorder}`,
     },
-  });
+  };
 };

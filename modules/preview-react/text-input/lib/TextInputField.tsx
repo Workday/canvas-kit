@@ -9,8 +9,12 @@ import {
   space,
   type,
 } from '@workday/canvas-kit-react/tokens';
-import {createSubcomponent, ExtractProps, useTheme} from '@workday/canvas-kit-react/common';
-import {useThemedRing} from '@workday/canvas-kit-labs-react/common';
+import {
+  createSubcomponent,
+  ExtractProps,
+  useTheme,
+  useThemedRing,
+} from '@workday/canvas-kit-react/common';
 import {FormField, useFormFieldModel} from '@workday/canvas-kit-preview-react/form-field';
 
 import {useTextInputField} from './hooks';
