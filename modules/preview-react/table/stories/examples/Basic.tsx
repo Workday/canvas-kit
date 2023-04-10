@@ -5,36 +5,32 @@ import {Table} from '@workday/canvas-kit-preview-react/table';
 export const Basic = () => {
   return (
     <Table>
-      <Table.Caption>Table Caption</Table.Caption>
+      <Table.Caption>Coffee Drinks and Sizes</Table.Caption>
       <Table.Head>
         <Table.Row>
-          <Table.Header backgroundColor="soap100">Table Header</Table.Header>
-          <Table.Header backgroundColor="soap100">Table Header</Table.Header>
+          <Table.Header backgroundColor="soap100">Drink</Table.Header>
+          <Table.Header backgroundColor="soap100">Size</Table.Header>
         </Table.Row>
       </Table.Head>
       <Table.Body>
         <Table.Row>
-          <Table.Cell>Table Data Cell</Table.Cell>
-          <Table.Cell>Table Data Cell</Table.Cell>
+          <Table.Cell>Espresso</Table.Cell>
+          <Table.Cell>1 oz</Table.Cell>
         </Table.Row>
-        <Table.Divider />
         <Table.Row>
-          <Table.Cell>Table Data Cell</Table.Cell>
-          <Table.Cell>Table Data Cell</Table.Cell>
+          <Table.Cell>Macchiato</Table.Cell>
+          <Table.Cell>2 oz Espresso</Table.Cell>
         </Table.Row>
-        <Table.Divider />
         <Table.Row>
-          <Table.Cell>Table Data Cell</Table.Cell>
-          <Table.Cell>Table Data Cell</Table.Cell>
+          <Table.Cell>Cortado</Table.Cell>
+          <Table.Cell>2 oz Espresso, 1 oz Foamed Milk</Table.Cell>
+        </Table.Row>
+        <Table.Row></Table.Row>
+        <Table.Row>
+          <Table.Cell>Cappuccino</Table.Cell>
+          <Table.Cell>2 oz Espresso, 2 oz Foamed Milk, 2 oz Steamed Milk</Table.Cell>
         </Table.Row>
       </Table.Body>
-      <Table.Divider />
-      <Table.Footer>
-        <Table.Row>
-          <Table.Cell>Table Data Cell</Table.Cell>
-          <Table.Cell>Table Data Cell</Table.Cell>
-        </Table.Row>
-      </Table.Footer>
     </Table>
   );
 };

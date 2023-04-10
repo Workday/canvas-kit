@@ -22,7 +22,7 @@ yarn add @workday/canvas-kit-preview-react
 
 ## Usage
 
-### Basic Example with Heading
+### Basic Example
 
 In this example, users may not want to use a `caption` so they can import
 [Heading](/docs/components-text-heading--basic) or [Text](/docs/components-text-text--basic)
@@ -31,7 +31,7 @@ their table.
 
 <ExampleCodeBlock code={BasicWithHeading} />
 
-### Basic Example with Caption
+### Example with Caption
 
 In this example, we built a simple table that includes a `caption`. A `caption` is not required but
 it is good for
@@ -40,10 +40,11 @@ purposes.
 
 <ExampleCodeBlock code={Basic} />
 
-### Fixed Column and Column Dividers
+### Fixed Column with TableContainer
 
-In this example, users may want to have columns divided and have a fixed left column for their
-headers so users can scroll horizontally on bigger data sets.
+In this example, users may want to have some padding surrounding their table and have a fixed
+column. They can use the `TableContainer` to wrap the `Table` component and some styles to make it
+so that the left column is fixed.
 
 <ExampleCodeBlock code={FixedColumn} />
 

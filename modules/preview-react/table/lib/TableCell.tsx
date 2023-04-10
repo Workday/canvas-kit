@@ -1,5 +1,6 @@
 import React from 'react';
 import {Grid, GridProps} from '@workday/canvas-kit-react/layout';
+import {colors} from '@workday/canvas-kit-react/tokens';
 import {createComponent} from '@workday/canvas-kit-react/common';
 
 export const TableCell = createComponent('td')({
@@ -11,6 +12,7 @@ export const TableCell = createComponent('td')({
         ref={ref}
         alignItems="center"
         backgroundColor="frenchVanilla100"
+        borderBottom={`1px solid ${colors.soap400}`}
         justifyContent="left"
         minHeight="48px"
         paddingY="xxs"

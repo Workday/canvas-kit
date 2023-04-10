@@ -1,5 +1,5 @@
 import React from 'react';
-import {GridProps, Grid} from '@workday/canvas-kit-react/layout';
+import {GridProps, Grid, Box, BoxProps} from '@workday/canvas-kit-react/layout';
 import {type, colors} from '@workday/canvas-kit-react/tokens';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {TableHead} from './TableHead';
@@ -9,7 +9,6 @@ import {TableHeader} from './TableHeader';
 import {TableCell} from './TableCell';
 import {TableFooter} from './TableFooter';
 import {TableCaption} from './TableCaption';
-import {TableDivider} from './TableDivider';
 
 /**
  * `Table` is a simple styled compound component that renders a [table](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table) element. It is used to present information in a two-dimensional table comprised of rows and columns of cells containing data.
@@ -33,18 +32,15 @@ export default function App() {
           <Table.Header>Table Header</Table.Header>
           <Table.Header>Table Header</Table.Header>
         </Table.Row>
-        <Table.Divider />
         <Table.Row>
           <Table.Header>Table Header</Table.Header>
           <Table.Cell>Table Data Cell</Table.Cell>
         </Table.Row>
-        <Table.Divider />
         <Table.Row>
           <Table.Header>Table Header</Table.Header>
           <Table.Cell>Table Data Cell</Table.Cell>
         </Table.Row>
       </Table.Body>
-      <Table.Divider />
       <Table.Footer>
         <Table.Row>
           <Table.Header>Table Header</Table.Header>
@@ -236,28 +232,48 @@ export const Table = createComponent('table')({
     ```
     */
     Footer: TableFooter,
-    /**
-    * `Table.Divider` renders an `hr` for dividing rows.
+  },
+});
+
+/**
+    * `TableContainer` renders a `div` and can be used to wrap the `<table>` component.
+    *
+    * This can help with styles around the `<table>` without disrupting the inner content.
     *
     * @example
     * ```tsx
-    import {Table} from '@workday/canvas-kit-preview-react/table';
+    import {Table, TableContainer} from '@workday/canvas-kit-preview-react/table';
 
     export default function App() {
       return (
-        <Table>
-          <Table.Body>
-            <Table.Row>
-              <Table.Header>Table Header</Table.Header>
-              <Table.Cell>Table Cell</Table.Cell>
-            </Table.Row>
-            <Table.Divider />
-          </Table.Body>
-        </Table>
+        <TableContainer border="1px solid black">
+          <Table border="none">
+            <Table.Body>
+              <Table.Row>
+                <Table.Header>Table Header</Table.Header>
+                <Table.Cell>Table Cell</Table.Cell>
+              </Table.Row>
+            </Table.Body>
+          </Table>
+        </TableContainer>
       );
     }
     ```
     */
-    Divider: TableDivider,
+export const TableContainer = createComponent('div')({
+  displayName: 'TableContainer',
+  Component: ({children, ...elemProps}: BoxProps, ref, Element) => {
+    return (
+      <Box
+        as={Element}
+        ref={ref}
+        border={`1px solid ${colors.soap500}`}
+        borderRadius="l"
+        padding="s"
+        {...elemProps}
+      >
+        {children}
+      </Box>
+    );
   },
 });

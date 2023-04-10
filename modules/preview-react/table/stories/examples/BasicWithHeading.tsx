@@ -6,37 +6,28 @@ import {Heading} from '@workday/canvas-kit-react/text';
 export const BasicWithHeading = () => {
   return (
     <>
-      <Heading size="small">Table Heading</Heading>
+      <Heading size="small">Pizza Toppings</Heading>
       <Table>
         <Table.Head>
           <Table.Row>
-            <Table.Header backgroundColor="soap100">Table Header</Table.Header>
-            <Table.Header backgroundColor="soap100">Table Header</Table.Header>
+            <Table.Header backgroundColor="soap100">Toppings</Table.Header>
+            <Table.Header backgroundColor="soap100">Amount</Table.Header>
           </Table.Row>
         </Table.Head>
         <Table.Body>
           <Table.Row>
-            <Table.Cell>Table Data Cell</Table.Cell>
-            <Table.Cell>Table Data Cell</Table.Cell>
+            <Table.Cell>Pepperoni</Table.Cell>
+            <Table.Cell>2.5 oz</Table.Cell>
           </Table.Row>
-          <Table.Divider />
           <Table.Row>
-            <Table.Cell>Table Data Cell</Table.Cell>
-            <Table.Cell>Table Data Cell</Table.Cell>
+            <Table.Cell>Mozzarella</Table.Cell>
+            <Table.Cell>5 oz</Table.Cell>
           </Table.Row>
-          <Table.Divider />
           <Table.Row>
-            <Table.Cell>Table Data Cell</Table.Cell>
-            <Table.Cell>Table Data Cell</Table.Cell>
+            <Table.Cell>Basil</Table.Cell>
+            <Table.Cell>10 Leaves</Table.Cell>
           </Table.Row>
         </Table.Body>
-        <Table.Divider />
-        <Table.Footer>
-          <Table.Row>
-            <Table.Cell>Table Data Cell</Table.Cell>
-            <Table.Cell>Table Data Cell</Table.Cell>
-          </Table.Row>
-        </Table.Footer>
       </Table>
     </>
   );
