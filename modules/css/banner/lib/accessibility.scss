@@ -8,7 +8,8 @@
 
 [data-whatinput='keyboard'] {
   @include wdc-focusable-banner() {
-    @extend .wdc-banner.wdc-banner-focus;
+    @extend .wdc-banner;
+    @extend .wdc-banner-focus;
   }
 }
 
