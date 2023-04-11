@@ -44,11 +44,9 @@ const StyledItem = styled(Box.as('button'))<StyledType>(
   ({theme}) => {
     return {
       ...type.levels.subtext.large,
-      '& > *:not(style) ~ *:not(style)': {
-        marginLeft: space.xxs,
-      },
-      display: 'block',
+      display: 'grid',
       width: '100%',
+      gap: space.s,
       padding: `${space.xxs} ${space.s}`,
       boxSizing: 'border-box',
       cursor: 'pointer',
