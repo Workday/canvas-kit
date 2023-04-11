@@ -30,11 +30,11 @@ jobs:
           persist-credentials: false
           fetch-depth: 0 # Used for conventional commit ranges
 
-      - uses: Workday/canvas-kit-actions/install@node-16-support
+      - uses: Workday/canvas-kit-actions/install@v1
         with:
           node_version: 16.x
 
-      - uses: Workday/canvas-kit-actions/release@node-16-support
+      - uses: Workday/canvas-kit-actions/release@v1
         with:
           gh_token: ${{ secrets.GITHUB_TOKEN }}
           gh_rw_token: ${{ secrets.GH_RW_TOKEN }}
