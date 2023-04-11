@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v8.5.10](https://github.com/Workday/canvas-kit/releases/tag/v8.5.10) (2023-04-11)
+
+### Codemods
+
+- fix(codemod): Pass codemod options to jscodeshift script ([#2137](https://github.com/Workday/canvas-kit/pull/2137)) ([@alanbsmith](https://github.com/alanbsmith))
+
+### Infrastructure
+
+- chore: Upgrade to Node 16 ([#2139](https://github.com/Workday/canvas-kit/pull/2139)) ([@alanbsmith](https://github.com/alanbsmith))
+- fix: Update release actions to use node 16 ([#2142](https://github.com/Workday/canvas-kit/pull/2142)) ([@RayRedGoose](https://github.com/RayRedGoose))
+
+
 ## [v8.5.9](https://github.com/Workday/canvas-kit/releases/tag/v8.5.9) (2023-03-30)
 
 ### Components
