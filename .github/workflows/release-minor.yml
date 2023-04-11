@@ -21,17 +21,17 @@ jobs:
           branch: refs/heads/master
 
       - name: Checkout master
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           persist-credentials: false
           fetch-depth: 0 # Needed to do a proper push
           ref: master # Release job only works on master
 
-      - uses: Workday/canvas-kit-actions/install@v1
+      - uses: Workday/canvas-kit-actions/install@node-16-support
         with:
-          node_version: 14.x
+          node_version: 16.x
 
-      - uses: Workday/canvas-kit-actions/release@v1
+      - uses: Workday/canvas-kit-actions/release@node-16-support
         with:
           gh_token: ${{ secrets.GITHUB_TOKEN }}
           gh_rw_token: ${{ secrets.GH_RW_TOKEN }}
