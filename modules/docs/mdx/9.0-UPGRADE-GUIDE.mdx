@@ -10,21 +10,21 @@ any questions.
 
 - [Glossary](#glossary)
 - [Codemod](#codemod)
-- [Token Updates](#token-updates)
-  - [Depth](#depth)
-- [Component Removals](#component-removals)
+- [Deprecations and Removals](#deprecations-and-removals)
   - [Drawer](#drawer)
   - [Layout and Column](#layout-and-column)
   - [Stack, HStack, and VStack](#stack-hstack-and-vstack)
+  - [focusRing](#focusring)
+  - [useCanvasTheme and getCanvasTheme](#usecanvastheme-and-getcanvastheme)
+  - [useThemeRTL](#usethemertl)
+- [Token Updates](#token-updates)
+  - [Depth](#depth)
 - [Component Updates](#component-updates)
   - [Button](#button)
   - [Toast](#toast)
 - [Utility Updates](#utility-updates)
-  - [focusRing](#focusring)
   - [useTheme and getTheme](#usetheme-and-gettheme)
-  - [useCanvasTheme and getCanvasTheme](#usecanvastheme-and-getcanvastheme)
   - [useThemedRing](#usethemedring)
-  - [useThemeRTL](#usethemertl)
 
 ## Glossary
 
@@ -91,19 +91,7 @@ handled by the codemod are marked with 🤖 in the Upgrade Guide.**
 the changes from the codemod as a single isolated commit (separate from other changes) so you can
 roll back more easily if necessary.
 
-## Token Updates
-
-### Depth
-
-**PR:** [#2091](https://github.com/Workday/canvas-kit/pull/2091)
-
-In v7, we released an update to our depth tokens that was too bold and harsh for web applications.
-We've modified the depth token styles to be more subtle and improve visual design. This change
-affects all components which use depth tokens including `Card`, `Toast`, `Dialog`, `Popup`, `Modal`,
-and `Menu`. We have not changed which depth values each component references (i.e., `Card` remains
-at `depth[1]`).
-
-## Component Removals
+## Deprecations and Removals
 
 ### Drawer
 
@@ -177,6 +165,48 @@ well. All references to these types in your custom components will need to be re
 
 > **Note:** If you were consuming `StackProps` previously for a custom component, be sure to change
 > all references to the old `spacing` prop from `StackProps` to the `gap` prop from `FlexProps`.
+
+---
+
+### focusRing
+
+**PR:** [#2034](https://github.com/Workday/canvas-kit/pull/2034)
+
+We've removed memoization from `focusRing`. The `memoize` argument passed to `focusRing` is no
+longer valid and we've removed the exported `memoizedFocusRing`. We were unable to find any examples
+of `memoize` or `memoizedFocusRing` being used by our consumers.
+
+---
+
+### useCanvasTheme and getCanvasTheme
+
+**PR:** [#2120](https://github.com/Workday/canvas-kit/pull/2120)
+
+`useCanvasTheme` and `getCanvasTheme` have been removed and can be safely replaced by `useTheme` and
+`getTheme`.
+
+---
+
+### useThemeRTL
+
+**PR:** [#2119](https://github.com/Workday/canvas-kit/pull/2119)
+
+We've deprecated `useThemeRTL` from Labs. Although you may still use this utility, we recommend you
+use
+[CSS logical properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Logical_Properties)
+instead.
+
+## Token Updates
+
+### Depth
+
+**PR:** [#2091](https://github.com/Workday/canvas-kit/pull/2091)
+
+In v7, we released an update to our depth tokens that was too bold and harsh for web applications.
+We've modified the depth token styles to be more subtle and improve visual design. This change
+affects all components which use depth tokens including `Card`, `Toast`, `Dialog`, `Popup`, `Modal`,
+and `Menu`. We have not changed which depth values each component references (i.e., `Card` remains
+at `depth[1]`).
 
 ## Component Updates
 
@@ -255,14 +285,6 @@ instead import from Main.
 
 ## Utility Updates
 
-### focusRing
-
-**PR:** [#2034](https://github.com/Workday/canvas-kit/pull/2034)
-
-We've removed memoization from `focusRing`. The `memoize` argument passed to `focusRing` is no
-longer valid and we've removed the exported `memoizedFocusRing`. We were unable to find any examples
-of `memoize` or `memoizedFocusRing` being used by our consumers.
-
 ### useTheme and getTheme
 
 **PR:** [#2120](https://github.com/Workday/canvas-kit/pull/2120)
@@ -271,13 +293,6 @@ We've added error handling to `useTheme` if it's been used outside a functional 
 also added `getTheme` to provide access to a theme from `styled` or class components instead of
 `useTheme`.
 
-### useCanvasTheme and getCanvasTheme
-
-**PR:** [#2120](https://github.com/Workday/canvas-kit/pull/2120)
-
-`useCanvasTheme` and `getCanvasTheme` have been removed and can be safely replaced by `useTheme` and
-`getTheme`.
-
 ### useThemedRing
 
 **PR:** [#2119](https://github.com/Workday/canvas-kit/pull/2119)
@@ -285,12 +300,3 @@ also added `getTheme` to provide access to a theme from `styled` or class compon
 We've promoted `useThemedRing` from Labs to Main. `useThemedRing` allows you to theme focus rings.
 
 🤖 The codemod will update the import for this utility.
-
-### useThemeRTL
-
-**PR:** [#2119](https://github.com/Workday/canvas-kit/pull/2119)
-
-We've deprecated `useThemeRTL` from Labs. Although you may still use this utility, we recommend you
-use
-[CSS logical properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Logical_Properties)
-instead.
