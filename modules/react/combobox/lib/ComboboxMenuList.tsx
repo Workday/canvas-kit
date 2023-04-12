@@ -24,7 +24,6 @@ export const useComboboxMenuList = createElemPropsHook(useMenuModel)(model => {
     role: 'listbox',
     'aria-labelledby': model.state.id,
     id: `${model.state.id}-list`,
-    'data-test': 'foobar',
     flexDirection: model.state.orientation === 'vertical' ? 'column' : 'row',
   } as const;
 });

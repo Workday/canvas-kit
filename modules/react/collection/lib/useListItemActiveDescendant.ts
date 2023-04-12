@@ -1,5 +1,5 @@
 import React from 'react';
-import {createElemPropsHook, useLocalRef} from '@workday/canvas-kit-react/common';
+import {createElemPropsHook} from '@workday/canvas-kit-react/common';
 
 import {useListModel} from './useListModel';
 

@@ -316,16 +316,19 @@ export type ModelFn<
  * }
  * ```
  */
+// We use the bivariance hack so models can be considered compatible even if the guard and callbacks
+// contain `state` that are incompatible. More info:
+// https://github.com/damianc/dev-notes/blob/master/typescript/bivariance-hack.md
 export type ToEventConfig<TState, TEvents extends Record<string, any>> = {
-  [K in keyof TEvents as `on${Capitalize<string & K>}`]?: (
+  [K in keyof TEvents as `on${Capitalize<string & K>}`]?: {bivarianceHack(
     data: Parameters<TEvents[K]>[0],
     prevState: TState
-  ) => void;
+  ): void}['bivarianceHack'];
 } & {
-  [K in keyof TEvents as `should${Capitalize<string & K>}`]?: (
+  [K in keyof TEvents as `should${Capitalize<string & K>}`]?: {bivarianceHack(
     data: Parameters<TEvents[K]>[0],
     state: TState
-  ) => boolean;
+  ): boolean}['bivarianceHack'];
 };
 
 function capitalize(string: string) {
