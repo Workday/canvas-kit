@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v8.5.11](https://github.com/Workday/canvas-kit/releases/tag/v8.5.11) (2023-04-12)
+
+### Infrastructure
+
+- ci: Replace install steps by composite actions ([#2146](https://github.com/Workday/canvas-kit/pull/2146)) ([@RayRedGoose](https://github.com/RayRedGoose))
+
+
 ## [v8.5.10](https://github.com/Workday/canvas-kit/releases/tag/v8.5.10) (2023-04-11)
 
 ### Codemods
