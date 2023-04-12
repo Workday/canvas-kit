@@ -97,7 +97,7 @@ roll back more easily if necessary.
 
 **PR:** [#1970](https://github.com/Workday/canvas-kit/pull/1970)
 
-We've removed the `Drawer` component from Canvas Kit (for reference, see the
+We've removed the `Drawer` component (for reference, see the
 [`Drawer`](https://d2krrudi3mmzzw.cloudfront.net/v8/?path=/docs/labs-drawer--basic) from v8). Please
 use the [`SidePanel`](/components/containers/side-panel/) in Preview instead.
 
@@ -110,7 +110,7 @@ use the [`SidePanel`](/components/containers/side-panel/) in Preview instead.
 
 **PR:** [#2018](https://github.com/Workday/canvas-kit/pull/2018)
 
-We've removed the `Layout` and `Column` components from Canvas Kit (for reference, see
+We've removed the `Layout` and `Column` components (for reference, see
 [`Column and Layout`](https://d2krrudi3mmzzw.cloudfront.net/v8/?path=/docs/components-containers-column-and-layout--12-column-layout)
 from v8). Please use [`Grid`](/components/layout/grid/) instead. While `Grid` is not a 1:1
 replacement for `Layout` and `Column`, it can be used to generate the same types of layouts and
@@ -125,11 +125,10 @@ layouts using `Grid`.
 
 **PR:** [#2012](https://github.com/Workday/canvas-kit/pull/2012)
 
-We've removed the `Stack`, `HStack`, and `VStack` components from Canvas Kit (for reference, see
+We've removed the `Stack`, `HStack`, and `VStack` components (for reference, see
 [`Stack`](https://d2krrudi3mmzzw.cloudfront.net/v8/?path=/docs/components-layout-stack--basic-stack)
-from v8). We recommend using [`Flex`](/components/layout/flex/) instead. `Flex` supports the same
-consistent spacing between its elements via the `gap` prop (analogous to the `spacing` prop from
-`Stack`).
+from v8). Please use [`Flex`](/components/layout/flex/) instead. `Flex` supports the same consistent
+spacing between its elements via the `gap` prop (analogous to the `spacing` prop from `Stack`).
 
 ```tsx
 // v8
@@ -173,8 +172,8 @@ well. All references to these types in your custom components will need to be re
 **PR:** [#2034](https://github.com/Workday/canvas-kit/pull/2034)
 
 We've removed memoization from `focusRing`. The `memoize` argument passed to `focusRing` is no
-longer valid and we've removed the exported `memoizedFocusRing`. We were unable to find any examples
-of `memoize` or `memoizedFocusRing` being used by our consumers.
+longer valid, and we've removed `memoizedFocusRing`. We were unable to find any examples of
+`memoize` or `memoizedFocusRing` in use by our consumers.
 
 ---
 
@@ -182,8 +181,7 @@ of `memoize` or `memoizedFocusRing` being used by our consumers.
 
 **PR:** [#2120](https://github.com/Workday/canvas-kit/pull/2120)
 
-`useCanvasTheme` and `getCanvasTheme` have been removed and can be safely replaced by `useTheme` and
-`getTheme`.
+We've removed `useCanvasTheme` and `getCanvasTheme`. Please use `useTheme` and `getTheme` instead.
 
 ---
 
@@ -191,8 +189,8 @@ of `memoize` or `memoizedFocusRing` being used by our consumers.
 
 **PR:** [#2119](https://github.com/Workday/canvas-kit/pull/2119)
 
-We've deprecated `useThemeRTL` from Labs. Although you may still use this utility, we recommend you
-use
+We've deprecated `useThemeRTL` from Labs. Although you may still use this utility, we recommend
+using
 [CSS logical properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Logical_Properties)
 instead.
 
