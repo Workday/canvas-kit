@@ -13,7 +13,7 @@ import {TableCaption} from './TableCaption';
 /**
  * `Table` is a simple styled compound component that renders a [table](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table) element. It is used to present information in a two-dimensional table comprised of rows and columns of cells containing data.
  *
- * @example
+ *
  * ```tsx
 import {Table} from '@workday/canvas-kit-preview-react/table';
 
@@ -73,7 +73,7 @@ export const Table = createComponent('table')({
     /**
      * `Table.Caption` renders a [caption](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/caption) element.
      *
-     * @example
+     *
      * ```tsx
       import {Table} from '@workday/canvas-kit-preview-react/table';
 
@@ -96,7 +96,7 @@ export const Table = createComponent('table')({
     /**
     * `Table.Head` renders a [thead](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/thead) element.
     *
-    * @example
+    *
     * ```tsx
     import {Table} from '@workday/canvas-kit-preview-react/table';
 
@@ -118,7 +118,7 @@ export const Table = createComponent('table')({
     /**
      * `Table.Body` renders a [tbody](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/tbody) element.
      *
-     * @example
+     *
      * ```tsx
     import {Table} from '@workday/canvas-kit-preview-react/table';
 
@@ -147,7 +147,7 @@ export const Table = createComponent('table')({
      * would like to adjust this, it can be overwritten on `Table.Row`. See the example below for how to
      * overwrite `gridTemplateColumns`.
      *
-     * @example
+     *
      * ```tsx
     import {Table} from '@workday/canvas-kit-preview-react/table';
 
@@ -169,7 +169,7 @@ export const Table = createComponent('table')({
     /**
     * `Table.Header` renders a [th](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/th) element.
     *
-    * @example
+    *
     * ```tsx
     import {Table} from '@workday/canvas-kit-preview-react/table';
 
@@ -191,7 +191,7 @@ export const Table = createComponent('table')({
     /**
     * `Table.Cell` renders a [td](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/td) element.
     *
-    * @example
+    *
     * ```tsx
     import {Table} from '@workday/canvas-kit-preview-react/table';
 
@@ -213,7 +213,7 @@ export const Table = createComponent('table')({
     /**
     * `Table.Footer` renders a [tfoot](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/tfoot) element.
     *
-    * @example
+    *
     * ```tsx
     import {Table} from '@workday/canvas-kit-preview-react/table';
 
