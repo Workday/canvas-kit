@@ -9,6 +9,7 @@ const routes = {
   '/assets/system-icons/': 'tokens-icon--system-icon',
   '/components/buttons/action-bar/': 'components-buttons-action-bar--basic',
   '/components/buttons/button/': 'components-buttons--primary',
+  '/components/buttons/segmented-control/': 'preview-segmented-control--basic',
   '/components/containers/card/': 'components-containers-card--basic',
   '/components/containers/side-panel/': 'preview-side-panel--basic',
   '/components/containers/table/': 'components-containers-table--basic',

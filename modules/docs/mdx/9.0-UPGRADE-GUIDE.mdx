@@ -9,6 +9,9 @@ This guide contains an overview of the changes in Canvas Kit v9. Please
 any questions.
 
 - [Glossary](#glossary)
+  - [Main](#main)
+  - [Preview](#preview)
+  - [Labs](#labs)
 - [Codemod](#codemod)
 - [Deprecations and Removals](#deprecations-and-removals)
   - [Drawer](#drawer)
@@ -45,8 +48,16 @@ Our Preview package of Canvas Kit tokens, components, and utilities at
 use in product, but may not be up to the high code standards upheld in the Main package. Preview is
 analagous to code in beta.
 
-Breaking changes can be deployed to Preview at any time without triggering a major version update,
-though such changes will be communicated in advance and accompanied by migration strategies.
+Breaking changes are unlikely, but possible, and can be deployed to Preview at any time without
+triggering a major version update, though such changes will be communicated in advance and
+accompanied by migration strategies.
+
+Generally speaking, our goal is to eventually promote code from Preview to Main. Occasionally, a
+component with the same name will exist in both Main and Preview (for example, see Segmented Control
+in [Preview](/components/buttons/segmented-control/) and
+[Main](https://d2krrudi3mmzzw.cloudfront.net/v8/?path=/docs/components-buttons-segmented-control--basic)).
+In these cases, Preview serves as a staging ground for an improved version of the component with a
+different API. The component in Main will eventually be replaced with the one in Preview.
 
 ---
 
