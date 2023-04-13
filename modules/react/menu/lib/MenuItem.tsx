@@ -45,6 +45,7 @@ const StyledItem = styled(Box.as('button'))<StyledType>(
     return {
       ...type.levels.subtext.large,
       display: 'grid',
+      alignItems: 'center',
       width: '100%',
       gap: space.s,
       padding: `${space.xxs} ${space.s}`,
