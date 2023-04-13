@@ -46,7 +46,7 @@
   "dependencies": {
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
-    "@workday/canvas-kit-react": "^8.5.9",
+    "@workday/canvas-kit-react": "^8.5.10",
     "@workday/canvas-system-icons-web": "^3.0.0",
     "@workday/design-assets-types": "^0.2.8"
   },

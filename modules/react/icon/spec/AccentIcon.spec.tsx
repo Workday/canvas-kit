@@ -22,6 +22,11 @@ describe('Accent Icon', () => {
     expect(componentStyle['& .color-500']).toHaveProperty('fill', colors.cinnamon500);
   });
 
+  test('Can set icon color correctly with token color as string', () => {
+    const componentStyle = accentIconStyles({color: 'cinnamon500'});
+    expect(componentStyle['& .color-500']).toHaveProperty('fill', colors.cinnamon500);
+  });
+
   it('should spread extra props to the icon element', () => {
     const {container} = render(<AccentIcon icon={shieldIcon} data-propspread="test" />);
 
