@@ -4,18 +4,17 @@ import {commonColors, colors, space} from '@workday/canvas-kit-react/tokens';
 import {
   createSubcomponent,
   ExtractProps,
-  getCanvasTheme,
+  getTheme,
   styled,
   StyledType,
 } from '@workday/canvas-kit-react/common';
-import {HStack} from '@workday/canvas-kit-react/layout';
+import {Flex} from '@workday/canvas-kit-react/layout';
 import {useOverflowListMeasure, useListRenderItems} from '@workday/canvas-kit-react/collection';
 
 import {useActionBarModel} from './useActionBarModel';
 
-// Use `Partial` here to make `spacing` optional
 export interface ActionBarListProps<T = any>
-  extends Omit<Partial<ExtractProps<typeof HStack, never>>, 'children'> {
+  extends Omit<ExtractProps<typeof Flex, never>, 'children'> {
   /**
    * If items are passed to a `ActionBarModel`, the child of `ActionBar.List` should be a render prop. The
    * List will determine how and when the item will be rendered.
@@ -37,8 +36,8 @@ export interface ActionBarListProps<T = any>
   overflowButton?: React.ReactNode;
 }
 
-const ResponsiveHStack = styled(HStack)<ActionBarListProps & StyledType>(({theme}) => {
-  const canvasTheme = getCanvasTheme(theme);
+const ResponsiveList = styled(Flex)<ActionBarListProps & StyledType>(({theme}) => {
+  const {canvas: canvasTheme} = getTheme(theme);
   return {
     [canvasTheme.breakpoints.down('s')]: {
       padding: space.s,
@@ -57,9 +56,9 @@ export const ActionBarList = createSubcomponent('div')({
   elemPropsHook: useActionBarList,
 })<ActionBarListProps>(({children, overflowButton, ...elemProps}, Element, model) => {
   return (
-    <ResponsiveHStack
+    <ResponsiveList
       as={Element}
-      spacing="s"
+      gap="s"
       depth={1}
       background={commonColors.background}
       borderTop={`solid 1px ${colors.soap400}`}
@@ -72,6 +71,6 @@ export const ActionBarList = createSubcomponent('div')({
     >
       {useListRenderItems(model, children)}
       {overflowButton}
-    </ResponsiveHStack>
+    </ResponsiveList>
   );
 });

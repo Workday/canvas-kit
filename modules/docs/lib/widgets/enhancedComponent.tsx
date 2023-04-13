@@ -32,7 +32,6 @@ const fileNameToCategoryMap: Record<string, string[]> = {
     'utils/flexItem',
     'utils/position',
     'utils/space',
-    'utils/stack',
   ],
   Color: ['utils/color', 'utils/background'],
   Border: ['utils/border'],
