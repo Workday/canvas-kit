@@ -3,7 +3,8 @@ import {Table} from '@workday/canvas-kit-preview-react/table';
 // examples
 import {Basic} from './examples/Basic';
 import {BasicWithHeading} from './examples/BasicWithHeading';
-import {FixedColumn} from './examples/FixedColumn.tsx';
+import {FixedColumn} from './examples/FixedColumn';
+import {TableWithContainer} from './examples/TableWithContainer';
 
 <Meta title="Preview/Table" component={Table} />
 
@@ -31,10 +32,18 @@ their table.
 
 <ExampleCodeBlock code={BasicWithHeading} />
 
+### Example with Container
+
+In this example, users may want to have some padding around the `table` and have inset dividers for
+their rows. This showcases how a user can achieve this with creating a styled component to wrap the
+`table`.
+
+<ExampleCodeBlock code={TableWithContainer} />
+
 ### Example with Caption
 
-In this example, we built a simple table that includes a `caption`. A `caption` is not required but
-it is good for
+In this example, we built a simple table that includes a `caption` without a Heading. A `caption` is
+not required but it is good for
 [accessibility](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table#accessibility_concerns)
 purposes.
 
