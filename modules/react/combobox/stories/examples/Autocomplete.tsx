@@ -9,6 +9,7 @@ import {FormField} from '@workday/canvas-kit-preview-react/form-field';
 
 import {InputGroup} from '../../lib/InputGroup';
 import {SystemIcon} from '../../../icon';
+import {LoadingDots} from '../../../loading-dots';
 
 function pickRandom<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
@@ -23,7 +24,7 @@ const options = Array(1000)
   });
 
 export const Autocomplete = () => {
-  const {model} = useComboboxLoader(
+  const {model, loader} = useComboboxLoader(
     {
       getId: (item: string) => item,
       getTextValue: (item: string) => item,
@@ -50,7 +51,7 @@ export const Autocomplete = () => {
               items,
               total,
             });
-          }, 300);
+          }, 500);
         });
       },
     },
@@ -67,6 +68,13 @@ export const Autocomplete = () => {
       >
         <InputGroup>
           <InputGroup.Input as={Combobox.Input} />
+          <InputGroup.End
+            pointerEvents="none"
+            style={{opacity: loader.isLoading ? 1 : 0, transition: 'opacity 100ms ease'}}
+            width={20}
+          >
+            <LoadingDots style={{display: 'flex', transform: 'scale(0.3)'}} />
+          </InputGroup.End>
           <InputGroup.End>
             <TertiaryButton
               role="presentation"
@@ -84,8 +92,9 @@ export const Autocomplete = () => {
         </InputGroup>
         <Combobox.Menu.Popper>
           <Combobox.Menu.Card>
+            {model.state.items.length === 0 && <span>No Results Found</span>}
             <Combobox.Menu.List maxHeight={200}>
-              {item => <Combobox.Menu.Item data-id={item}>{item}</Combobox.Menu.Item>}
+              {item => <Combobox.Menu.Item>{item}</Combobox.Menu.Item>}
             </Combobox.Menu.List>
           </Combobox.Menu.Card>
         </Combobox.Menu.Popper>

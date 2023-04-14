@@ -131,7 +131,6 @@ export function useListLoader<
   const [items, setItems] = React.useState<T[]>(() => {
     return resetItems(config.total);
   });
-  const [isLoading, setIsLoading] = React.useState(true);
 
   // keep track of pages that are currently loading
   const loadingRef = React.useRef<Record<number, boolean>>({});
@@ -151,7 +150,6 @@ export function useListLoader<
         return;
       }
       setItems(updater);
-      setIsLoading(false);
     },
     [total]
   );
@@ -279,7 +277,12 @@ export function useListLoader<
       updateFilter,
       sorter,
       updateSorter,
-      isLoading,
+      // we reduce the ref instead of a state variable because the loader mutates this ref and
+      // triggers state changes when loading is finished.
+      isLoading: Object.values(loadingRef.current).reduce(
+        (loading, result) => loading || result,
+        false
+      ),
     },
   };
 }

@@ -6,8 +6,6 @@ import {TextInput} from '@workday/canvas-kit-react/text-input';
 
 export const InputGroupStart = createComponent('div')({
   Component(elemProps: ExtractProps<typeof Flex>, ref, Element) {
-    const isRTL = useIsRTL();
-
     return (
       <Flex
         ref={ref}
@@ -17,8 +15,6 @@ export const InputGroupStart = createComponent('div')({
         justifyContent="center"
         height={40}
         width={40}
-        right={isRTL ? 0 : undefined}
-        left={isRTL ? undefined : 0}
         {...elemProps}
       />
     );
@@ -38,8 +34,6 @@ export const InputGroupEnd = createComponent('div')({
         justifyContent="center"
         height={40}
         width={40}
-        left={isRTL ? 0 : undefined}
-        right={isRTL ? undefined : 0}
         {...elemProps}
       />
     );
@@ -72,21 +66,44 @@ export const InputGroupInput = createComponent(TextInput)({
  */
 export const InputGroup = createComponent('div')({
   Component({children, ...elemProps}: ExtractProps<typeof Flex>, ref, Element) {
+    const isRTL = useIsRTL();
     let paddingInlineStart: number;
     let paddingInlineEnd: number;
 
     React.Children.forEach(children, child => {
       if (React.isValidElement(child) && child.type === InputGroupStart) {
-        paddingInlineStart = paddingInlineStart || 0 + (child.props.width || 40);
+        paddingInlineStart = (paddingInlineStart || 0) + (child.props.width || 40);
       }
       if (React.isValidElement(child) && child.type === InputGroupEnd) {
-        paddingInlineEnd = paddingInlineEnd || 0 + (child.props.width || 40);
+        paddingInlineEnd = (paddingInlineEnd || 0) + (child.props.width || 40);
       }
     });
 
+    let start = 0;
+    let end = paddingInlineEnd! || 0;
+
     const mappedChildren = React.Children.map(children, child => {
-      if (React.isValidElement(child) && child.type === InputGroupInput) {
-        return React.cloneElement(child, {paddingInlineStart, paddingInlineEnd});
+      if (React.isValidElement(child)) {
+        if (child.type === InputGroupInput) {
+          return React.cloneElement(child, {paddingInlineStart, paddingInlineEnd});
+        }
+        if (child.type === InputGroupStart) {
+          const offset = start;
+          start += child.props.width || 40;
+
+          return React.cloneElement(child, {
+            left: isRTL ? undefined : offset,
+            right: isRTL ? offset : undefined,
+          });
+        }
+        if (child.type === InputGroupEnd) {
+          const offset = (end -= child.props.width || 40);
+
+          return React.cloneElement(child, {
+            left: isRTL ? offset : undefined,
+            right: isRTL ? undefined : offset,
+          });
+        }
       }
       return child;
     });
