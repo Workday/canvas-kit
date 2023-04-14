@@ -14,10 +14,9 @@ export const TableCell = createComponent('td')({
         backgroundColor="frenchVanilla100"
         borderBottom={`1px solid ${colors.soap400}`}
         justifyContent="left"
-        minHeight="48px"
+        minHeight="56px"
         paddingY="xxs"
         paddingX="s"
-        textAlign="left"
         wordBreak="break-word"
         {...elemProps}
       >

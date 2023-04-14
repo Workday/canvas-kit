@@ -14,11 +14,11 @@ export const TableHeader = createComponent('th')({
         backgroundColor="frenchVanilla100"
         borderBottom={`1px solid ${colors.soap400}`}
         justifyContent="left"
-        minHeight="48px"
+        minHeight="56px"
         paddingY="xxs"
         paddingX="s"
-        textAlign="left"
         wordBreak="break-word"
+        fontWeight="medium"
         {...elemProps}
       >
         {children}

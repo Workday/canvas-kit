@@ -109,14 +109,14 @@ export const FixedColumn = () => {
                 >
                   {item.brand}
                 </Table.Header>
-                <Table.Cell>{item.model}</Table.Cell>
-                <Table.Cell>{item.year}</Table.Cell>
-                <Table.Cell>{item.price}</Table.Cell>
-                <Table.Cell>{item.engine}</Table.Cell>
-                <Table.Cell>{item.transmission}</Table.Cell>
-                <Table.Cell>{item.horsepower}</Table.Cell>
-                <Table.Cell>{item.torque}</Table.Cell>
-                <Table.Cell>{item.curbWeight}</Table.Cell>
+                <Table.Cell border="2px solid red">{item.model}</Table.Cell>
+                <Table.Cell border="2px solid red">{item.year}</Table.Cell>
+                <Table.Cell border="2px solid red">{item.price}</Table.Cell>
+                <Table.Cell border="2px solid red">{item.engine}</Table.Cell>
+                <Table.Cell border="2px solid red">{item.transmission}</Table.Cell>
+                <Table.Cell border="2px solid red">{item.horsepower}</Table.Cell>
+                <Table.Cell border="2px solid red">{item.torque}</Table.Cell>
+                <Table.Cell border="2px solid red">{item.curbWeight}</Table.Cell>
               </Table.Row>
             </>
           ))}

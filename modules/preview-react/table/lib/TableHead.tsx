@@ -6,6 +6,9 @@ const StyledHead = styled(Grid.as('thead'))<StyledType>({
   'th:last-of-type': {
     borderRight: 'none',
   },
+  'th:first-of-type': {
+    borderLeft: 'none',
+  },
 });
 
 export const TableHead = createComponent('thead')({

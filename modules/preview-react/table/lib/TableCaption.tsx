@@ -13,7 +13,6 @@ export const TableCaption = createComponent('caption')({
         borderBottom={`1px solid ${colors.soap500}`}
         paddingY="xxs"
         paddingX="s"
-        textAlign="left"
         {...elemProps}
       >
         {children}
