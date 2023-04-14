@@ -173,7 +173,7 @@ export const MenuItem = createSubcomponent('button')({
   modelHook: useMenuModel,
   elemPropsHook: useMenuItem,
   subComponents: {
-    Icon: SystemIcon,
+    Icon: styled(SystemIcon)({alignSelf: 'start'}),
     Text: styled('span')({flexGrow: 1, alignSelf: 'center'}),
   },
 })<MenuItemProps>(({children, ...elemProps}, Element) => {
