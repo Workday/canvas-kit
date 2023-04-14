@@ -19,18 +19,20 @@ jobs:
     #   the release workflow will commit a release commit starting with `chore: Release ...` back to
     #   the branch and this job will run on that commit instead. Also, forward merges that skipped
     #   a release
-    if: "((github.ref_name == 'support' || github.ref_name == 'master') && startsWith(github.event.head_commit.message, 'chore: Release')) || startsWith(github.ref_name, 'prerelease/') || contains(github.event.head_commit.message, '[skip release]')"
+    if:
+      "((github.ref_name == 'support' || github.ref_name == 'master') &&
+      startsWith(github.event.head_commit.message, 'chore: Release')) || startsWith(github.ref_name,
+      'prerelease/') || contains(github.event.head_commit.message, '[skip release]')"
     runs-on: ubuntu-latest
     outputs: # Output branch names for the make-pull-request job
       branch: ${{steps.extract-branch.outputs.branch}}
       next-branch: ${{steps.extract-next-branch.outputs.branch}}
 
     steps:
-
       ## First, we'll checkout the repository. We don't persist credentials because we need a
       ## Personal Access Token to push on a branch that is protected. See
       ## https://github.com/cycjimmy/semantic-release-action#basic-usage
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           persist-credentials: false
           fetch-depth: 0 # Needed to do merges
@@ -49,44 +51,9 @@ jobs:
           echo "::set-output name=branch::$(node utils/get-forward-merge-branch.js)"
           echo ${{steps.extract-next-branch.outputs.branch}}
 
-      ## This step installs node and sets up several matchers (regex matching for Github
-      ## Annotations). See
-      ## https://github.com/actions/setup-node/blob/25316bbc1f10ac9d8798711f44914b1cf3c4e954/src/main.ts#L58-L65
-      - uses: actions/setup-node@v2.4.0
+      - uses: Workday/canvas-kit-actions/install@v1
         with:
-          node-version: 14.x
-          registry-url: https://registry.npmjs.org
-
-      - name: Get Cypress Version
-        id: cypress-version
-        run: echo "::set-output name=version::$(node utils/get-cypress-version.js)"
-
-      ## The caching steps create a cache key based on the OS and hash of the yarn.lock file. A
-      ## cache hit will copy files from Github cache into the `node_modules` and `.cache/cypress`
-      ## folders. A cache hit will skip the cache steps
-      - name: Cache node modules
-        id: yarn-cache
-        uses: actions/cache@v2
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-node-modules-hash-${{ hashFiles('yarn.lock') }}
-
-      - name: Cache Cypress
-        id: cypress-cache
-        uses: actions/cache/@v2
-        with:
-          path: .cache/cypress
-          key: ${{ runner.os }}-cypress-cache-version-${{ steps.cypress-version.outputs.version }}
-
-      ## If both `node_modules` and `.cache/cypress` were cache hits, we're going to skip the `yarn
-      ## install` step. This effectively saves up to 3m on a cache hit build.
-      - name: Install Packages
-        if:
-          steps.yarn-cache.outputs.cache-hit != 'true' || steps.cypress-cache.outputs.cache-hit !=
-          'true'
-        run: yarn install --production=false
-        env:
-          CYPRESS_CACHE_FOLDER: .cache/cypress
+          node_version: 16.x
 
       ## A `yarn bump` will create a commit and a tag. We need to set up the git user to do this.
       ## We'll make that user be the github-actions user.
@@ -127,7 +94,7 @@ jobs:
           key: ${{ runner.os }}-build-${{ github.sha }}
 
       - name: Visual Tests
-        uses: chromaui/action@v1
+        uses: chromaui/action@main
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           appCode: dlpro96xybh
@@ -213,4 +180,3 @@ jobs:
             You must then force-push the branch and the CI will rerun verification.
 
             Use the `automerge` label like normal and the CI will pick the correct merge strategy.
-
