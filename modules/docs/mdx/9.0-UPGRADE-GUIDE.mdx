@@ -29,48 +29,6 @@ any questions.
   - [useTheme and getTheme](#usetheme-and-gettheme)
   - [useThemedRing](#usethemedring)
 
-## Glossary
-
-### Main
-
-Our Main package of Canvas Kit tokens, components, and utilities at `@workday/canvas-kit-react` has
-undergone a full design and a11y review and is approved for use in product.
-
-Breaking changes to code in Main will only occur during major version updates and will always be
-communicated in advance and accompanied by migration strategies.
-
----
-
-### Preview
-
-Our Preview package of Canvas Kit tokens, components, and utilities at
-`@workday/canvas-kit-preview-react` has undergone a full design and a11y review and is approved for
-use in product, but may not be up to the high code standards upheld in the Main package. Preview is
-analagous to code in beta.
-
-Breaking changes are unlikely, but possible, and can be deployed to Preview at any time without
-triggering a major version update, though such changes will be communicated in advance and
-accompanied by migration strategies.
-
-Generally speaking, our goal is to eventually promote code from Preview to Main. Occasionally, a
-component with the same name will exist in both Main and Preview (for example, see Segmented Control
-in [Preview](/components/buttons/segmented-control/) and
-[Main](https://d2krrudi3mmzzw.cloudfront.net/v8/?path=/docs/components-buttons-segmented-control--basic)).
-In these cases, Preview serves as a staging ground for an improved version of the component with a
-different API. The component in Main will eventually be replaced with the one in Preview.
-
----
-
-### Labs
-
-Our Labs package of Canvas Kit tokens, components, and utilities at `@workday/canvas-kit-labs-react`
-has **not** undergone a full design and a11y review. Labs serves as an incubator space for new and
-experimental code and is analagous to code in alpha.
-
-Breaking changes can be deployed to Labs at any time without triggering a major version update and
-may not be subject to the same rigor in communcation and migration strategies reserved for breaking
-changes in Preview and Main.
-
 ## Codemod
 
 Please use our [codemod package](https://github.com/Workday/canvas-kit/tree/master/modules/codemod)
@@ -119,7 +77,7 @@ Removals are deletions from our codebase and you can no longer consume this comp
 
 We've removed the `Drawer` component (for reference, see the
 [`Drawer`](https://d2krrudi3mmzzw.cloudfront.net/v8/?path=/docs/labs-drawer--basic) from v8). Please
-use the [`SidePanel`](/components/containers/side-panel/) in Preview instead.
+use the [`SidePanel`](/components/containers/side-panel/) in [Preview](#preview) instead.
 
 > **Note:** The `SidePanel` in Main will eventually be replaced with the `SidePanel` in Preview. We
 > recommend you use the `SidePanel` in Preview until then.
@@ -209,7 +167,7 @@ We've removed `useCanvasTheme` and `getCanvasTheme`. Please use `useTheme` and `
 
 **PR:** [#2119](https://github.com/Workday/canvas-kit/pull/2119)
 
-We've deprecated `useThemeRTL` from Labs. Although you may still use this utility, we recommend
+We've deprecated `useThemeRTL` from [Labs](#labs). Although you may still use this utility, we recommend
 using
 [CSS logical properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Logical_Properties)
 instead.
@@ -266,10 +224,10 @@ within a form, add `type="submit"` to the button.
 
 **PR:** [#2044](https://github.com/Workday/canvas-kit/pull/2044)
 
-We've promoted `Toast` from Labs to Main. It replaces the `Toast` that was previously in Main (for
+We've promoted `Toast` from [Labs](#labs) to [Main](#main). It replaces the `Toast` that was previously in [Main](#main) (for
 reference, see
 [`Toast`](https://d2krrudi3mmzzw.cloudfront.net/v8/?path=/docs/components-popups-toast--error) in
-Main from v8).
+[Main](#main) from v8).
 
 `Toast` is a [compound component](/getting-started/for-developers/resources/compound-components/)
 which provides a flexible API and access to its internals via its subcomponents. It supports a new
@@ -293,10 +251,10 @@ mode: `status`, `alert`, or `dialog`.
 </Toast>
 ```
 
-🤖 The codemod will rewrite your usages of the previous `Toast` in Main to use the compound
-component API of the new `Toast` in Main. `mode` will be set to `dialog` if the `Toast` previously
-used `actionText` or `onActionClick`. The codemod will also update imports from the Labs `Toast` to
-instead import from Main.
+🤖 The codemod will rewrite your usages of the previous `Toast` in [Main](#main) to use the compound
+component API of the new `Toast` in [Main](#main). `mode` will be set to `dialog` if the `Toast` previously
+used `actionText` or `onActionClick`. The codemod will also update imports from the [Labs](#labs) `Toast` to
+instead import from [Main](#main).
 
 > **Note:** You will manually need to set `mode` to `alert` if your `Toast` conveys urgent and
 > important information such as an error.
@@ -315,6 +273,48 @@ also added `getTheme` to provide access to a theme from `styled` or class compon
 
 **PR:** [#2119](https://github.com/Workday/canvas-kit/pull/2119)
 
-We've promoted `useThemedRing` from Labs to Main. `useThemedRing` allows you to theme focus rings.
+We've promoted `useThemedRing` from [Labs](#labs) to [Main](#main). `useThemedRing` allows you to theme focus rings.
 
 🤖 The codemod will update the import for this utility.
+
+## Glossary
+
+### Main
+
+Our Main package of Canvas Kit tokens, components, and utilities at `@workday/canvas-kit-react` has
+undergone a full design and a11y review and is approved for use in product.
+
+Breaking changes to code in Main will only occur during major version updates and will always be
+communicated in advance and accompanied by migration strategies.
+
+---
+
+### Preview
+
+Our Preview package of Canvas Kit tokens, components, and utilities at
+`@workday/canvas-kit-preview-react` has undergone a full design and a11y review and is approved for
+use in product, but may not be up to the high code standards upheld in the [Main](#main) package. Preview is
+analagous to code in beta.
+
+Breaking changes are unlikely, but possible, and can be deployed to Preview at any time without
+triggering a major version update, though such changes will be communicated in advance and
+accompanied by migration strategies.
+
+Generally speaking, our goal is to eventually promote code from Preview to [Main](#main). Occasionally, a
+component with the same name will exist in both [Main](#main) and Preview (for example, see Segmented Control
+in [Preview](/components/buttons/segmented-control/) and
+[Main](https://d2krrudi3mmzzw.cloudfront.net/v8/?path=/docs/components-buttons-segmented-control--basic)).
+In these cases, Preview serves as a staging ground for an improved version of the component with a
+different API. The component in [Main](#main) will eventually be replaced with the one in Preview.
+
+---
+
+### Labs
+
+Our Labs package of Canvas Kit tokens, components, and utilities at `@workday/canvas-kit-labs-react`
+has **not** undergone a full design and a11y review. Labs serves as an incubator space for new and
+experimental code and is analagous to code in alpha.
+
+Breaking changes can be deployed to Labs at any time without triggering a major version update and
+may not be subject to the same rigor in communcation and migration strategies reserved for breaking
+changes in [Preview](#preview) and [Main](#main).
