@@ -9,13 +9,14 @@ This guide contains an overview of the changes in Canvas Kit v9. Please
 any questions.
 
 - [Codemod](#codemod)
-- [Deprecations and Removals](#deprecations-and-removals)
+- [Removals](#Removals)
   - [Drawer](#drawer)
   - [Layout and Column](#layout-and-column)
   - [Stack, HStack, and VStack](#stack-hstack-and-vstack)
   - [focusRing](#focusring)
   - [useCanvasTheme and getCanvasTheme](#usecanvastheme-and-getcanvastheme)
-  - [useThemeRTL](#usethemertl)
+- [Deprecations](#deprecations)
+	- [useThemeRTL](#usethemertl)
 - [Token Updates](#token-updates)
   - [Depth](#depth)
 - [Component Updates](#component-updates)
@@ -60,18 +61,14 @@ handled by the codemod are marked with 🤖 in the Upgrade Guide.**
 the changes from the codemod as a single isolated commit (separate from other changes) so you can
 roll back more easily if necessary.
 
-## Deprecations and Removals
+## Removals
+Removals are deletions from our codebase and you can no longer consume this component.
+We've either promoted or replaced a component or utility.
 
-#### Deprecations
 
-We add the [@deprecated](https://jsdoc.app/tags-deprecated.html) from JSDoc to code that we plan to deprecate in the near future.
-Al though you can still consume this code, we want consumers to move to a utility or component that is more stable.
 
-#### Removals
 
-Removals are deletions from our codebase and you can no longer consume this component. We've either promoted or replaced a component or utility.
-
-### Drawer - _Removal_
+### Drawer
 
 **PR:** [#1970](https://github.com/Workday/canvas-kit/pull/1970)
 
@@ -84,7 +81,7 @@ use the [`SidePanel`](/components/containers/side-panel/) in [Preview](#preview)
 
 ---
 
-### Layout and Column - _Removal_
+### Layout and Column
 
 **PR:** [#2018](https://github.com/Workday/canvas-kit/pull/2018)
 
@@ -99,7 +96,7 @@ layouts using `Grid`.
 
 ---
 
-### Stack, HStack and VStack - _Removal_
+### Stack, HStack and VStack
 
 **PR:** [#2012](https://github.com/Workday/canvas-kit/pull/2012)
 
@@ -145,7 +142,7 @@ well. All references to these types in your custom components will need to be re
 
 ---
 
-### focusRing - _Removal_
+### focusRing
 
 **PR:** [#2034](https://github.com/Workday/canvas-kit/pull/2034)
 
@@ -155,15 +152,18 @@ longer valid, and we've removed `memoizedFocusRing`. We were unable to find any 
 
 ---
 
-### useCanvasTheme and getCanvasTheme - _Removal_
+### useCanvasTheme and getCanvasTheme
 
 **PR:** [#2120](https://github.com/Workday/canvas-kit/pull/2120)
 
 We've removed `useCanvasTheme` and `getCanvasTheme`. Please use `useTheme` and `getTheme` instead.
 
----
+## Deprecations
 
-### useThemeRTL - _@deprecated_
+We add the [@deprecated](https://jsdoc.app/tags-deprecated.html) from JSDoc to code that we plan to deprecate in the near future.
+Al though you can still consume this code, we want consumers to move to a utility or component that is more stable.
+
+### useThemeRTL
 
 **PR:** [#2119](https://github.com/Workday/canvas-kit/pull/2119)
 
@@ -171,6 +171,8 @@ We've deprecated `useThemeRTL` from [Labs](#labs). Although you may still use th
 using
 [CSS logical properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Logical_Properties)
 instead.
+
+---
 
 ## Token Updates
 
