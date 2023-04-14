@@ -22,6 +22,7 @@ export interface CollectionLoader {
   updateFilter(value: string): void;
   sorter: string | Record<string, string>;
   updateSorter(value: string): void;
+  isLoading: boolean;
 }
 
 /**
@@ -125,11 +126,12 @@ export function useListLoader<
 >(
   config: AsyncCollectionConfig<T> & typeof useListModel.TConfig,
   modelHook: M
-): {model: ReturnType<typeof modelHook>; loader: CollectionLoader} {
+): {model: ReturnType<M>; loader: CollectionLoader} {
   const [total, setTotal] = React.useState(config.total);
   const [items, setItems] = React.useState<T[]>(() => {
     return resetItems(config.total);
   });
+  const [isLoading, setIsLoading] = React.useState(true);
 
   // keep track of pages that are currently loading
   const loadingRef = React.useRef<Record<number, boolean>>({});
@@ -149,6 +151,7 @@ export function useListLoader<
         return;
       }
       setItems(updater);
+      setIsLoading(false);
     },
     [total]
   );
@@ -276,6 +279,7 @@ export function useListLoader<
       updateFilter,
       sorter,
       updateSorter,
+      isLoading,
     },
   };
 }

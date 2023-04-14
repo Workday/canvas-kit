@@ -14,7 +14,7 @@ import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
 
 import {useComboboxModel} from './useComboboxModel';
 
-export interface ComboboxProps {
+export interface ComboboxMenuItemProps {
   /**
    * Children of the Combobox. Should contain a `<Combobox.Target>`, a `<Combobox.Content>`
    */
@@ -58,13 +58,13 @@ export const useComboboxMenuItem = composeHooks(
   useListItemRegister
 );
 
-export const ComboboxMenuItem = createSubcomponent()({
+export const ComboboxMenuItem = createSubcomponent('li')({
   modelHook: useComboboxModel,
   elemPropsHook: useComboboxMenuItem,
-})<ComboboxProps>(({children, ...elemProps}, Element) => {
+})<ComboboxMenuItemProps>(({children, ...elemProps}, Element) => {
   return (
     <OverflowTooltip placement="left">
-      <StyledMenuItem minHeight="xl" as={Element} {...elemProps}>
+      <StyledMenuItem minHeight="xl" as={Element} {...(elemProps as any)}>
         {children}
       </StyledMenuItem>
     </OverflowTooltip>

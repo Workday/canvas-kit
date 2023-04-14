@@ -588,7 +588,8 @@ export const createModelHook = <TDefaultConfig extends {}, TRequiredConfig exten
       }, {} as Record<string, any>);
     }, []);
 
-    return { state, events: wrappedEvents, ...rest };
+  // The model context is private and should never be used
+    return { state, events: wrappedEvents, __UNSTABLE_modelContext: Context, ...rest };
   }
 
   wrappedModelHook.getElemProps = getElemProps;

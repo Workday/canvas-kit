@@ -6,7 +6,7 @@ import {
   createSubcomponent,
   dispatchInputEvent,
   ExtractProps,
-  useLocalRef,
+  useForkRef,
 } from '@workday/canvas-kit-react/common';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {usePopupTarget} from '@workday/canvas-kit-react/popup';
@@ -17,9 +17,10 @@ import {
 
 import {useComboboxModel} from './useComboboxModel';
 
-export const useComboboxTarget = composeHooks(
+export const useComboboxInput = composeHooks(
   createElemPropsHook(useComboboxModel)((model, ref?: React.Ref<HTMLInputElement>) => {
-    const {localRef, elementRef} = useLocalRef(ref);
+    const elementRef = useForkRef(ref, model.ref);
+
     React.useEffect(() => {
       if (model.state.cursorId && model.state.visibility === 'visible') {
         const item = model.navigation.getItem(model.state.cursorId, model);
@@ -27,7 +28,7 @@ export const useComboboxTarget = composeHooks(
           console.log('scrollToIndex', item.index);
           model.state.UNSTABLE_virtual.scrollToIndex(item.index);
         } else {
-          const listboxId = localRef.current?.getAttribute('aria-controls');
+          const listboxId = model.ref.current?.getAttribute('aria-controls');
           if (listboxId) {
             const menuItem = document.querySelector(
               `[id="${listboxId}"] [data-id="${model.state.cursorId}"]`
@@ -92,10 +93,9 @@ export const useComboboxTarget = composeHooks(
   usePopupTarget
 );
 
-export const ComboboxTarget = createSubcomponent(TextInput)({
-  displayName: 'Combobox.Target',
+export const ComboboxInput = createSubcomponent(TextInput)({
   modelHook: useComboboxModel,
-  elemPropsHook: useComboboxTarget,
+  elemPropsHook: useComboboxInput,
 })<ExtractProps<typeof TextInput, never>>(({children, ...elemProps}, Element) => {
   return <Element {...elemProps}>{children}</Element>;
 });

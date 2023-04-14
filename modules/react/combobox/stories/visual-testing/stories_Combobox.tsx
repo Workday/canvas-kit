@@ -29,7 +29,7 @@ export const ComboboxStates = () => {
         {({visibility, ...props}) => {
           return (
             <Combobox initialVisibility={visibility} {...props}>
-              <Combobox.Target>Toggle</Combobox.Target>
+              <Combobox.Input />
               <Combobox.Menu.Popper>
                 <Combobox.Menu.Card>
                   <Combobox.Menu.List maxHeight={200}>

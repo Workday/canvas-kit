@@ -11,7 +11,7 @@ export const Basic = () => {
         setValue(event.target.value);
       }}
     >
-      <Combobox.Target />
+      <Combobox.Input />
       <Combobox.Menu.Popper>
         <Combobox.Menu.Card>
           <Combobox.Menu.List>

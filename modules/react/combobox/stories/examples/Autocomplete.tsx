@@ -1,7 +1,14 @@
 import React from 'react';
 
+import {xSmallIcon, docIcon} from '@workday/canvas-system-icons-web';
 import {LoadReturn} from '@workday/canvas-kit-react/collection';
 import {Combobox, useComboboxModel, useComboboxLoader} from '@workday/canvas-kit-react/combobox';
+import {TertiaryButton} from '@workday/canvas-kit-react/button';
+import {dispatchInputEvent} from '@workday/canvas-kit-react/common';
+import {FormField} from '@workday/canvas-kit-preview-react/form-field';
+
+import {InputGroup} from '../../lib/InputGroup';
+import {SystemIcon} from '../../../icon';
 
 function pickRandom<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
@@ -51,15 +58,38 @@ export const Autocomplete = () => {
   );
 
   return (
-    <Combobox model={model}>
-      <Combobox.Target />
-      <Combobox.Menu.Popper>
-        <Combobox.Menu.Card>
-          <Combobox.Menu.List maxHeight={200}>
-            {item => <Combobox.Menu.Item data-id={item}>{item}</Combobox.Menu.Item>}
-          </Combobox.Menu.List>
-        </Combobox.Menu.Card>
-      </Combobox.Menu.Popper>
-    </Combobox>
+    <FormField orientation="horizontal">
+      <FormField.Label>Fruit</FormField.Label>
+      <FormField.Input
+        as={Combobox}
+        model={model}
+        onChange={event => console.log('input', event.currentTarget.value)}
+      >
+        <InputGroup>
+          <InputGroup.Input as={Combobox.Input} />
+          <InputGroup.End>
+            <TertiaryButton
+              role="presentation"
+              icon={xSmallIcon}
+              size="small"
+              tabIndex={-1}
+              onMouseDown={event => {
+                event.preventDefault(); // prevent a focus change
+              }}
+              onClick={event => {
+                dispatchInputEvent(model.ref.current, '');
+              }}
+            />
+          </InputGroup.End>
+        </InputGroup>
+        <Combobox.Menu.Popper>
+          <Combobox.Menu.Card>
+            <Combobox.Menu.List maxHeight={200}>
+              {item => <Combobox.Menu.Item data-id={item}>{item}</Combobox.Menu.Item>}
+            </Combobox.Menu.List>
+          </Combobox.Menu.Card>
+        </Combobox.Menu.Popper>
+      </FormField.Input>
+    </FormField>
   );
 };
