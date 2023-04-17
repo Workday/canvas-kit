@@ -1,0 +1,61 @@
+import {SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
+import {Table} from '@workday/canvas-kit-preview-react/table';
+// examples
+import {Basic} from './examples/Basic';
+import {BasicWithHeading} from './examples/BasicWithHeading';
+import {FixedColumn} from './examples/FixedColumn';
+import {TableWithContainer} from './examples/TableWithContainer';
+
+<Meta title="Preview/Table" component={Table} />
+
+# Canvas Kit Table
+
+`Table` is a simple styled compound component that renders a
+[table](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table) element. It is used to
+present information in a two-dimensional table comprised of rows and columns of cells containing
+data.
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-preview-react
+```
+
+## Usage
+
+### Basic Example
+
+Users may not want to use a `caption` so they can import
+[Heading](/docs/components-text-heading--basic) or [Text](/docs/components-text-text--basic)
+instead. This will give the user more flexibility around the customization of the title/heading of
+their table.
+
+<ExampleCodeBlock code={BasicWithHeading} />
+
+### Example with Container
+
+Users may want to have some padding around the `table` and have inset dividers for their rows. This
+showcases how a user can achieve this with creating a styled component to wrap the `table`.
+
+<ExampleCodeBlock code={TableWithContainer} />
+
+### Example with Caption
+
+We built a simple table that includes a `caption` without a Heading. A `caption` is not required but
+it is good for
+[accessibility](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table#accessibility_concerns)
+purposes.
+
+<ExampleCodeBlock code={Basic} />
+
+### Fixed Column with TableContainer
+
+Users may want to have some padding surrounding their table and have a fixed column. They can use
+the `TableContainer` to wrap the `Table` component and some styles to make it so that the left
+column is fixed.
+
+<ExampleCodeBlock code={FixedColumn} />
+
+## Component API
+
+<SymbolDoc name="Table" fileName="/preview-react/" />

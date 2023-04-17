@@ -9,6 +9,8 @@ This guide contains an overview of the changes in Canvas Kit v9. Please
 any questions.
 
 - [Codemod](#codemod)
+- [New Components](#new-components)
+  - [Table](#table)
 - [Removals](#Removals)
   - [Drawer](#drawer)
   - [Layout and Column](#layout-and-column)
@@ -16,7 +18,7 @@ any questions.
   - [focusRing](#focusring)
   - [useCanvasTheme and getCanvasTheme](#usecanvastheme-and-getcanvastheme)
 - [Deprecations](#deprecations)
-	- [useThemeRTL](#usethemertl)
+  - [useThemeRTL](#usethemertl)
 - [Token Updates](#token-updates)
   - [Depth](#depth)
 - [Component Updates](#component-updates)
@@ -61,12 +63,61 @@ handled by the codemod are marked with 🤖 in the Upgrade Guide.**
 the changes from the codemod as a single isolated commit (separate from other changes) so you can
 roll back more easily if necessary.
 
+## New Components
+
+### Table
+
+We've introduced a new `Table`
+[compound component](/getting-started/for-developers/resources/compound-components/) to the Preview
+package. `Table` is a compound component that is used to present information in a two-dimensional
+[table](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table) comprised of rows and
+columns of cells containing data.
+
+```tsx
+import {Table} from '@workday/canvas-kit-preview-react/table';
+
+export default function App() {
+  return (
+    <Table>
+      <Table.Caption>Table Caption</Table.Caption>
+      <Table.Head>
+        <Table.Row>
+          <Table.Header>Table Header</Table.Header>
+          <Table.Header>Table Header</Table.Header>
+        </Table.Row>
+      </Table.Head>
+      <Table.Body>
+        <Table.Row>
+          <Table.Header>Table Header</Table.Header>
+          <Table.Header>Table Header</Table.Header>
+        </Table.Row>
+        <Table.Divider />
+        <Table.Row>
+          <Table.Header>Table Header</Table.Header>
+          <Table.Cell>Table Data Cell</Table.Cell>
+        </Table.Row>
+        <Table.Divider />
+        <Table.Row>
+          <Table.Header>Table Header</Table.Header>
+          <Table.Cell>Table Data Cell</Table.Cell>
+        </Table.Row>
+      </Table.Body>
+      <Table.Divider />
+      <Table.Footer>
+        <Table.Row>
+          <Table.Header>Table Header</Table.Header>
+          <Table.Cell>Table Data Cell</Table.Cell>
+        </Table.Row>
+      </Table.Footer>
+    </Table>
+  );
+}
+```
+
 ## Removals
-Removals are deletions from our codebase and you can no longer consume this component.
-We've either promoted or replaced a component or utility.
 
-
-
+Removals are deletions from our codebase and you can no longer consume this component. We've either
+promoted or replaced a component or utility.
 
 ### Drawer
 
@@ -160,15 +211,16 @@ We've removed `useCanvasTheme` and `getCanvasTheme`. Please use `useTheme` and `
 
 ## Deprecations
 
-We add the [@deprecated](https://jsdoc.app/tags-deprecated.html) from JSDoc to code that we plan to deprecate in the near future.
-Al though you can still consume this code, we want consumers to move to a utility or component that is more stable.
+We add the [@deprecated](https://jsdoc.app/tags-deprecated.html) from JSDoc to code that we plan to
+deprecate in the near future. Al though you can still consume this code, we want consumers to move
+to a utility or component that is more stable.
 
 ### useThemeRTL
 
 **PR:** [#2119](https://github.com/Workday/canvas-kit/pull/2119)
 
-We've deprecated `useThemeRTL` from [Labs](#labs). Although you may still use this utility, we recommend
-using
+We've deprecated `useThemeRTL` from [Labs](#labs). Although you may still use this utility, we
+recommend using
 [CSS logical properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Logical_Properties)
 instead.
 
@@ -226,8 +278,8 @@ within a form, add `type="submit"` to the button.
 
 **PR:** [#2044](https://github.com/Workday/canvas-kit/pull/2044)
 
-We've promoted `Toast` from [Labs](#labs) to [Main](#main). It replaces the `Toast` that was previously in [Main](#main) (for
-reference, see
+We've promoted `Toast` from [Labs](#labs) to [Main](#main). It replaces the `Toast` that was
+previously in [Main](#main) (for reference, see
 [`Toast`](https://d2krrudi3mmzzw.cloudfront.net/v8/?path=/docs/components-popups-toast--error) in
 [Main](#main) from v8).
 
@@ -254,9 +306,9 @@ mode: `status`, `alert`, or `dialog`.
 ```
 
 🤖 The codemod will rewrite your usages of the previous `Toast` in [Main](#main) to use the compound
-component API of the new `Toast` in [Main](#main). `mode` will be set to `dialog` if the `Toast` previously
-used `actionText` or `onActionClick`. The codemod will also update imports from the [Labs](#labs) `Toast` to
-instead import from [Main](#main).
+component API of the new `Toast` in [Main](#main). `mode` will be set to `dialog` if the `Toast`
+previously used `actionText` or `onActionClick`. The codemod will also update imports from the
+[Labs](#labs) `Toast` to instead import from [Main](#main).
 
 > **Note:** You will manually need to set `mode` to `alert` if your `Toast` conveys urgent and
 > important information such as an error.
@@ -275,7 +327,8 @@ also added `getTheme` to provide access to a theme from `styled` or class compon
 
 **PR:** [#2119](https://github.com/Workday/canvas-kit/pull/2119)
 
-We've promoted `useThemedRing` from [Labs](#labs) to [Main](#main). `useThemedRing` allows you to theme focus rings.
+We've promoted `useThemedRing` from [Labs](#labs) to [Main](#main). `useThemedRing` allows you to
+theme focus rings.
 
 🤖 The codemod will update the import for this utility.
 
@@ -295,16 +348,16 @@ communicated in advance and accompanied by migration strategies.
 
 Our Preview package of Canvas Kit tokens, components, and utilities at
 `@workday/canvas-kit-preview-react` has undergone a full design and a11y review and is approved for
-use in product, but may not be up to the high code standards upheld in the [Main](#main) package. Preview is
-analagous to code in beta.
+use in product, but may not be up to the high code standards upheld in the [Main](#main) package.
+Preview is analagous to code in beta.
 
 Breaking changes are unlikely, but possible, and can be deployed to Preview at any time without
 triggering a major version update, though such changes will be communicated in advance and
 accompanied by migration strategies.
 
-Generally speaking, our goal is to eventually promote code from Preview to [Main](#main). Occasionally, a
-component with the same name will exist in both [Main](#main) and Preview (for example, see Segmented Control
-in [Preview](/components/buttons/segmented-control/) and
+Generally speaking, our goal is to eventually promote code from Preview to [Main](#main).
+Occasionally, a component with the same name will exist in both [Main](#main) and Preview (for
+example, see Segmented Control in [Preview](/components/buttons/segmented-control/) and
 [Main](https://d2krrudi3mmzzw.cloudfront.net/v8/?path=/docs/components-buttons-segmented-control--basic)).
 In these cases, Preview serves as a staging ground for an improved version of the component with a
 different API. The component in [Main](#main) will eventually be replaced with the one in Preview.
