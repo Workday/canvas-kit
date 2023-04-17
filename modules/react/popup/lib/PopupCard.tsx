@@ -70,7 +70,7 @@ function getSpace(value?: string | number) {
   }
 }
 
-function getMaxHeight(margin: PopupCardProps['margin']) {
+function getMaxHeight(margin?: string | number) {
   // set the default margin offset to space.xl
   let marginOffset: string | number = space.xl;
 
