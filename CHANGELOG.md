@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v8.5.13](https://github.com/Workday/canvas-kit/releases/tag/v8.5.13) (2023-04-17)
+
+### Components
+
+- fix: PopupCard maxHeight calc function ([#2130](https://github.com/Workday/canvas-kit/pull/2130)) ([@thunguyen19](https://github.com/thunguyen19), [@alanbsmith](https://github.com/alanbsmith))
+
+
 ## [v8.5.12](https://github.com/Workday/canvas-kit/releases/tag/v8.5.12) (2023-04-14)
 
 ### Components
