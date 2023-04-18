@@ -2,7 +2,7 @@ import * as React from 'react';
 import {keyframes} from '@emotion/react';
 
 import {Card} from '@workday/canvas-kit-react/card';
-import {space, type, CanvasSpaceKeys} from '@workday/canvas-kit-react/tokens';
+import {space, type} from '@workday/canvas-kit-react/tokens';
 import {
   styled,
   TransformOrigin,
@@ -62,6 +62,35 @@ const StyledPopupCard = styled(Card)<
   };
 });
 
+function getSpace(value?: string | number) {
+  if (value && value in space) {
+    return space[value as keyof typeof space];
+  } else {
+    return value;
+  }
+}
+
+function getMaxHeight(margin?: string | number) {
+  // set the default margin offset to space.xl
+  let marginOffset: string | number = space.xl;
+
+  if (margin) {
+    // parse the margin prop
+    if (typeof margin === 'string') {
+      const marginValues = margin.split(' ');
+      const marginTop = getSpace(marginValues[0]);
+      // If provided, use the specific margin-bottom in the shorthand, otherwise use the margin-top value
+      const marginBottom = getSpace(marginValues[2]) || marginTop;
+
+      marginOffset = `(${marginTop} + ${marginBottom})`;
+    } else {
+      // if margin is a number, double it to get the offset
+      marginOffset = `${margin * 2}px`;
+    }
+  }
+  return `calc(100vh - ${marginOffset})`;
+}
+
 export const PopupCard = createSubcomponent('div')({
   displayName: 'Popup.Card',
   modelHook: usePopupModel,
@@ -73,7 +102,6 @@ export const PopupCard = createSubcomponent('div')({
 
   // As is a Flex that will render an element of `Element`
   const As = useConstant(() => Flex.as(Element));
-
   return (
     <StyledPopupCard
       as={As}
@@ -84,9 +112,7 @@ export const PopupCard = createSubcomponent('div')({
       flexDirection="column"
       minHeight={0}
       padding="m"
-      maxHeight={`calc(100vh - ${
-        elemProps.margin ? space[elemProps.margin as CanvasSpaceKeys] || elemProps.margin : space.xl
-      } * 2)`}
+      maxHeight={getMaxHeight(elemProps.margin)}
       overflowY="auto"
       {...type.levels.subtext.large}
       {...elemProps}
