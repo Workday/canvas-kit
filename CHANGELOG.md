@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v8.5.12](https://github.com/Workday/canvas-kit/releases/tag/v8.5.12) (2023-04-14)
+
+### Components
+
+- fix(menu): Fix MenuItem icon spacing ([#2145](https://github.com/Workday/canvas-kit/pull/2145)) ([@alanbsmith](https://github.com/alanbsmith), [@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+  Updated spacing between icon and text in our menus from `8px` to `16px` to match our design specs.
+
+
 ## [v8.5.11](https://github.com/Workday/canvas-kit/releases/tag/v8.5.11) (2023-04-12)
 
 ### Infrastructure
