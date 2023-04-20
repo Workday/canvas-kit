@@ -1,0 +1,375 @@
+import {Meta} from '@storybook/addon-docs';
+
+<Meta title="Guides/Upgrade Guides/v9.0" />
+
+# Canvas Kit 9.0 Upgrade Guide
+
+This guide contains an overview of the changes in Canvas Kit v9. Please
+[reach out](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) if you have
+any questions.
+
+- [Codemod](#codemod)
+- [New Components](#new-components)
+  - [Table](#table)
+- [Removals](#Removals)
+  - [Drawer](#drawer)
+  - [Layout and Column](#layout-and-column)
+  - [Stack, HStack, and VStack](#stack-hstack-and-vstack)
+  - [focusRing](#focusring)
+  - [useCanvasTheme and getCanvasTheme](#usecanvastheme-and-getcanvastheme)
+- [Deprecations](#deprecations)
+  - [useThemeRTL](#usethemertl)
+- [Token Updates](#token-updates)
+  - [Depth](#depth)
+- [Component Updates](#component-updates)
+  - [Button](#button)
+  - [Toast](#toast)
+- [Utility Updates](#utility-updates)
+  - [useTheme and getTheme](#usetheme-and-gettheme)
+  - [useThemedRing](#usethemedring)
+- [Glossary](#glossary)
+  - [Main](#main)
+  - [Preview](#preview)
+  - [Labs](#labs)
+
+## Codemod
+
+Please use our [codemod package](https://github.com/Workday/canvas-kit/tree/master/modules/codemod)
+to automatically update your code to work with most of the breaking changes in v9.
+
+```sh
+> npx @workday/canvas-kit-codemod v9 [path]
+```
+
+Alternatively, if you're unable to run the codemod successfully using `npx`, you can install the
+codemod package as a dev dependency, run it with `yarn`, and then remove the package after you're
+finished.
+
+```sh
+> yarn add @workday/canvas-kit-codemod --dev
+> yarn canvas-kit-codemod v9 [path]
+> yarn remove @workday/canvas-kit-codemod
+```
+
+> The codemod only works on `.js`, `.jsx`, `.ts`, and `.tsx` files. You'll need to manually edit
+> other file types (`.json`, `.mdx`, `.md`, etc.). You may need to run your linter after executing
+> the codemod, as its resulting formatting (spacing, quotes, etc.) may not match your project
+> conventions.
+
+The codemod will handle _most_ but _not all_ of the breaking changes in v9. **Breaking changes
+handled by the codemod are marked with 🤖 in the Upgrade Guide.**
+
+**Please verify all changes made by the codemod.** As a safety precaution, we recommend committing
+the changes from the codemod as a single isolated commit (separate from other changes) so you can
+roll back more easily if necessary.
+
+## New Components
+
+### Table
+
+We've introduced a new `Table`
+[compound component](/getting-started/for-developers/resources/compound-components/) to the Preview
+package. `Table` is a compound component that is used to present information in a two-dimensional
+[table](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table) comprised of rows and
+columns of cells containing data.
+
+```tsx
+import {Table} from '@workday/canvas-kit-preview-react/table';
+
+export default function App() {
+  return (
+    <Table>
+      <Table.Caption>Table Caption</Table.Caption>
+      <Table.Head>
+        <Table.Row>
+          <Table.Header>Table Header</Table.Header>
+          <Table.Header>Table Header</Table.Header>
+        </Table.Row>
+      </Table.Head>
+      <Table.Body>
+        <Table.Row>
+          <Table.Header>Table Header</Table.Header>
+          <Table.Header>Table Header</Table.Header>
+        </Table.Row>
+        <Table.Divider />
+        <Table.Row>
+          <Table.Header>Table Header</Table.Header>
+          <Table.Cell>Table Data Cell</Table.Cell>
+        </Table.Row>
+        <Table.Divider />
+        <Table.Row>
+          <Table.Header>Table Header</Table.Header>
+          <Table.Cell>Table Data Cell</Table.Cell>
+        </Table.Row>
+      </Table.Body>
+      <Table.Divider />
+      <Table.Footer>
+        <Table.Row>
+          <Table.Header>Table Header</Table.Header>
+          <Table.Cell>Table Data Cell</Table.Cell>
+        </Table.Row>
+      </Table.Footer>
+    </Table>
+  );
+}
+```
+
+## Removals
+
+Removals are deletions from our codebase and you can no longer consume this component. We've either
+promoted or replaced a component or utility.
+
+### Drawer
+
+**PR:** [#1970](https://github.com/Workday/canvas-kit/pull/1970)
+
+We've removed the `Drawer` component (for reference, see the
+[`Drawer`](https://d2krrudi3mmzzw.cloudfront.net/v8/?path=/docs/labs-drawer--basic) from v8). Please
+use the [`SidePanel`](/components/containers/side-panel/) in [Preview](#preview) instead.
+
+> **Note:** The `SidePanel` in Main will eventually be replaced with the `SidePanel` in Preview. We
+> recommend you use the `SidePanel` in Preview until then.
+
+---
+
+### Layout and Column
+
+**PR:** [#2018](https://github.com/Workday/canvas-kit/pull/2018)
+
+We've removed the `Layout` and `Column` components (for reference, see
+[`Column and Layout`](https://d2krrudi3mmzzw.cloudfront.net/v8/?path=/docs/components-containers-column-and-layout--12-column-layout)
+from v8). Please use [`Grid`](/components/layout/grid/) instead. While `Grid` is not a 1:1
+replacement for `Layout` and `Column`, it can be used to generate the same types of layouts and
+offers a more robust and flexible layout solution.
+
+Please refer to our [Layout examples](/examples/layout/) for examples of how to implement common
+layouts using `Grid`.
+
+---
+
+### Stack, HStack and VStack
+
+**PR:** [#2012](https://github.com/Workday/canvas-kit/pull/2012)
+
+We've removed the `Stack`, `HStack`, and `VStack` components (for reference, see
+[`Stack`](https://d2krrudi3mmzzw.cloudfront.net/v8/?path=/docs/components-layout-stack--basic-stack)
+from v8). Please use [`Flex`](/components/layout/flex/) instead. `Flex` supports the same consistent
+spacing between its elements via the `gap` prop (analogous to the `spacing` prop from `Stack`).
+
+```tsx
+// v8
+<Stack spacing="s">
+  ...
+</Stack>
+
+// v9
+<Flex gap="s">
+  ...
+</Flex>
+```
+
+The orientation of `VStack` elements can be replicated with `Flex` using `flexDirection`.
+
+```tsx
+// v8
+<VStack>
+  ...
+</VStack>
+
+// v9
+<Flex flexDirection="column">
+  ...
+</Flex>
+```
+
+The `StackProps`, `HStackProps`, `VStackProps`, and `StackStyleProps` types have been removed as
+well. All references to these types in your custom components will need to be replaced with
+`FlexProps`.
+
+🤖 The codemod will handle all of the changes above for you automatically.
+
+> **Note:** If you were consuming `StackProps` previously for a custom component, be sure to change
+> all references to the old `spacing` prop from `StackProps` to the `gap` prop from `FlexProps`.
+
+---
+
+### focusRing
+
+**PR:** [#2034](https://github.com/Workday/canvas-kit/pull/2034)
+
+We've removed memoization from `focusRing`. The `memoize` argument passed to `focusRing` is no
+longer valid, and we've removed `memoizedFocusRing`. We were unable to find any examples of
+`memoize` or `memoizedFocusRing` in use by our consumers.
+
+---
+
+### useCanvasTheme and getCanvasTheme
+
+**PR:** [#2120](https://github.com/Workday/canvas-kit/pull/2120)
+
+We've removed `useCanvasTheme` and `getCanvasTheme`. Please use `useTheme` and `getTheme` instead.
+
+## Deprecations
+
+We add the [@deprecated](https://jsdoc.app/tags-deprecated.html) from JSDoc to code that we plan to
+deprecate in the near future. Al though you can still consume this code, we want consumers to move
+to a utility or component that is more stable.
+
+### useThemeRTL
+
+**PR:** [#2119](https://github.com/Workday/canvas-kit/pull/2119)
+
+We've deprecated `useThemeRTL` from [Labs](#labs). Although you may still use this utility, we
+recommend using
+[CSS logical properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Logical_Properties)
+instead.
+
+---
+
+## Token Updates
+
+### Depth
+
+**PR:** [#2091](https://github.com/Workday/canvas-kit/pull/2091)
+
+In v7, we released an update to our depth tokens that was too bold and harsh for web applications.
+We've modified the depth token styles to be more subtle and improve visual design. This change
+affects all components which use depth tokens including `Card`, `Toast`, `Dialog`, `Popup`, `Modal`,
+and `Menu`. We have not changed which depth values each component references (i.e., `Card` remains
+at `depth[1]`).
+
+## Component Updates
+
+### Button
+
+**PR:** [#1978](https://github.com/Workday/canvas-kit/pull/1978)
+
+We've changed the default `type` attribute for all buttons to `type="button"`. Previously, the
+`type` attribute was not being set which resulted in the buttons
+[defaulting to `type="submit"`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attributes).
+
+This affects all buttons which extend `BaseButton`:
+
+- `PrimaryButton`
+- `SecondaryButton`
+- `TertiaryButton`
+- `DeleteButton`
+- `ToolbarDropdownButton` and `ToolbarIconButton`
+- `Pill` and `Pill.IconButton`
+- `SegmentedControl.Button` (Main)
+- `SegmentedControl.Item` (Preview)
+- `Pagination.PageButton`
+
+Any buttons which extend any of the above are affected as well.
+
+This resolves an [issue](https://github.com/Workday/canvas-kit/issues/1938) where clicking certain
+buttons within a `form` element would unexpectedly submit the form. Additionally, the default action
+of many form controls such as `input` and `textarea` is to click the first submit button; this led
+to issues if the first submit button in the form was not intended to be a submit button (a common
+mistake when buttons default to `type="submit"`).
+
+This is a breaking change if you expected a button to submit by default, though we do not anticipate
+this to be the case for most developers. If you _do_ intend for a button to act as a submit button
+within a form, add `type="submit"` to the button.
+
+---
+
+### Toast
+
+**PR:** [#2044](https://github.com/Workday/canvas-kit/pull/2044)
+
+We've promoted `Toast` from [Labs](#labs) to [Main](#main). It replaces the `Toast` that was
+previously in [Main](#main) (for reference, see
+[`Toast`](https://d2krrudi3mmzzw.cloudfront.net/v8/?path=/docs/components-popups-toast--error) in
+[Main](#main) from v8).
+
+`Toast` is a [compound component](/getting-started/for-developers/resources/compound-components/)
+which provides a flexible API and access to its internals via its subcomponents. It supports a new
+`mode` prop which applies the proper accessibility features to the component based on the desired
+mode: `status`, `alert`, or `dialog`.
+
+```tsx
+// v8
+<Toast actionText="View more details" onActionClick={handleActionClick} onClose={handleClose}>
+  Your workbook was successfully processed.
+</Toast>
+
+// v9
+<Toast mode="dialog">
+  <Toast.Icon icon={checkIcon} color={colors.greenApple400} />
+  <Toast.Body>
+    <Toast.Message>Your workbook was successfully processed.</Toast.Message>
+    <Toast.Link onClick={handleActionClick}>View more details</Toast.Link>
+  </Toast.Body>
+	<Toast.CloseIcon aria-label="Close" onClick={handleClose} />
+</Toast>
+```
+
+🤖 The codemod will rewrite your usages of the previous `Toast` in [Main](#main) to use the compound
+component API of the new `Toast` in [Main](#main). `mode` will be set to `dialog` if the `Toast`
+previously used `actionText` or `onActionClick`. The codemod will also update imports from the
+[Labs](#labs) `Toast` to instead import from [Main](#main).
+
+> **Note:** You will manually need to set `mode` to `alert` if your `Toast` conveys urgent and
+> important information such as an error.
+
+## Utility Updates
+
+### useTheme and getTheme
+
+**PR:** [#2120](https://github.com/Workday/canvas-kit/pull/2120)
+
+We've added error handling to `useTheme` if it's been used outside a functional component. We've
+also added `getTheme` to provide access to a theme from `styled` or class components instead of
+`useTheme`.
+
+### useThemedRing
+
+**PR:** [#2119](https://github.com/Workday/canvas-kit/pull/2119)
+
+We've promoted `useThemedRing` from [Labs](#labs) to [Main](#main). `useThemedRing` allows you to
+theme focus rings.
+
+🤖 The codemod will update the import for this utility.
+
+## Glossary
+
+### Main
+
+Our Main package of Canvas Kit tokens, components, and utilities at `@workday/canvas-kit-react` has
+undergone a full design and a11y review and is approved for use in product.
+
+Breaking changes to code in Main will only occur during major version updates and will always be
+communicated in advance and accompanied by migration strategies.
+
+---
+
+### Preview
+
+Our Preview package of Canvas Kit tokens, components, and utilities at
+`@workday/canvas-kit-preview-react` has undergone a full design and a11y review and is approved for
+use in product, but may not be up to the high code standards upheld in the [Main](#main) package.
+Preview is analagous to code in beta.
+
+Breaking changes are unlikely, but possible, and can be deployed to Preview at any time without
+triggering a major version update, though such changes will be communicated in advance and
+accompanied by migration strategies.
+
+Generally speaking, our goal is to eventually promote code from Preview to [Main](#main).
+Occasionally, a component with the same name will exist in both [Main](#main) and Preview (for
+example, see Segmented Control in [Preview](/components/buttons/segmented-control/) and
+[Main](https://d2krrudi3mmzzw.cloudfront.net/v8/?path=/docs/components-buttons-segmented-control--basic)).
+In these cases, Preview serves as a staging ground for an improved version of the component with a
+different API. The component in [Main](#main) will eventually be replaced with the one in Preview.
+
+---
+
+### Labs
+
+Our Labs package of Canvas Kit tokens, components, and utilities at `@workday/canvas-kit-labs-react`
+has **not** undergone a full design and a11y review. Labs serves as an incubator space for new and
+experimental code and is analagous to code in alpha.
+
+Breaking changes can be deployed to Labs at any time without triggering a major version update and
+may not be subject to the same rigor in communcation and migration strategies reserved for breaking
+changes in [Preview](#preview) and [Main](#main).
