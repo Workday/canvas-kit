@@ -7,25 +7,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout prerelease/minor
-        uses: actions/checkout@v2
-        with:
-          persist-credentials: false
-          fetch-depth: 0 # Needed to do a proper push
-          ref: prerelease/minor # This job only works on prerelease/minor
-
-      - name: Push to master
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: refs/heads/master
-
       - name: Checkout master
         uses: actions/checkout@v3
         with:
           persist-credentials: false
           fetch-depth: 0 # Needed to do a proper push
           ref: master # Release job only works on master
+
+      - name: Pull minor changes
+        run: git pull origin prerelease/minor
 
       - uses: Workday/canvas-kit-actions/install@v1
         with:
