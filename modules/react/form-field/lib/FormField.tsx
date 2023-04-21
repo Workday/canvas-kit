@@ -166,6 +166,10 @@ class FormField extends React.Component<FormFieldProps> {
         }
       }
 
+      if (this.props.required) {
+        props.required = true;
+      }
+
       props.id = this.inputId;
 
       return React.cloneElement(child, props);
