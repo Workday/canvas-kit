@@ -1,22 +1,15 @@
 import React from 'react';
-import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {ButtonSizes, IconPositions} from '../types';
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {SystemIcon} from '@workday/canvas-kit-react/icon';
-import {BoxProps} from '@workday/canvas-kit-react/layout';
+import {SystemIcon, SystemIconProps} from '@workday/canvas-kit-react/icon';
 
-export interface ButtonLabelIconProps extends BoxProps {
+export interface ButtonLabelIconProps extends Partial<SystemIconProps> {
   /**
    * There are four button sizes: `extraSmall`, `small`, `medium`, and `large`.
    *
    * @default 'medium'
    */
   size?: ButtonSizes;
-  /**
-   * The icon of the Button.
-   * Note: not displayed at `small` size
-   */
-  icon?: CanvasSystemIcon;
   /**
    * Button icon positions can either be `left` or `right`.
    * If no value is provided, it defaults to `left`.
