@@ -19,6 +19,12 @@ export const useActionBarModel = createModelHook({
      */
     orientation: 'horizontal' as typeof useOverflowListModel.defaultConfig.orientation,
     menuConfig: {} as Partial<typeof useMenuModel.defaultConfig>,
+    /**
+     * The maximum number of actions that can be visible.
+     * Must be greater than 1 and less than items.length.
+     * @default 3
+     */
+    maximumVisible: 3,
   },
   requiredConfig: useOverflowListModel.requiredConfig,
 })(config => {
@@ -38,9 +44,15 @@ export const useActionBarModel = createModelHook({
   let nonInteractiveIds = model.state.nonInteractiveIds;
   const totalSize = model.state.items.length;
 
-  // Only show a maximum of 3 buttons
-  if (totalSize - hiddenIds.length >= 3) {
-    hiddenIds = items.slice(3, totalSize).map(getId);
+  // Only show maximumVisible buttons
+  const maximumVisible: number =
+    config.maximumVisible < 1
+      ? 1
+      : config.maximumVisible > totalSize
+      ? totalSize
+      : config.maximumVisible;
+  if (totalSize - hiddenIds.length >= maximumVisible) {
+    hiddenIds = items.slice(maximumVisible, totalSize).map(getId);
   }
 
   // Always show the first button and make sure it is interactive

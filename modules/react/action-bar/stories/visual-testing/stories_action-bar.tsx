@@ -56,19 +56,26 @@ export const ActionBarWithOverflowMenuStates = () => {
     {id: 'fifth', text: 'Fifth Action'},
   ]);
 
-  const model = useActionBarModel({items});
-
   return (
     <StaticStates>
       <ComponentStatesTable
-        rowProps={[{label: 'With Overflow Menu', props: {}}]}
+        rowProps={[
+          {label: 'With Overflow Menu', props: {model: useActionBarModel({items})}},
+          {
+            label: 'With Overflow Minimum',
+            props: {model: useActionBarModel({items, maximumVisible: 1})},
+          },
+          {
+            label: 'With Overflow Maximum',
+            props: {model: useActionBarModel({items, maximumVisible: items.length})},
+          },
+        ]}
         columnProps={[{label: ' ', props: {position: 'relative'}}]}
       >
         {props => (
           <div>
-            <ActionBar model={model}>
+            <ActionBar {...props}>
               <ActionBar.List
-                {...props}
                 position="relative"
                 overflowButton={<ActionBar.OverflowButton aria-label="More actions" />}
               >
