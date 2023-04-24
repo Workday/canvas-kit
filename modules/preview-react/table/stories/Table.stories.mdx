@@ -25,34 +25,31 @@ yarn add @workday/canvas-kit-preview-react
 
 ### Basic Example
 
-Users may not want to use a `caption` so they can import
-[Heading](/docs/components-text-heading--basic) or [Text](/docs/components-text-text--basic)
-instead. This will give the user more flexibility around the customization of the title/heading of
-their table.
+Users may not want to use a `caption` so they can import [Heading](/components/text/heading/) or
+[Text](/components/text/text/) instead. This will give the user more flexibility around the
+customization of the title/heading of their table.
 
 <ExampleCodeBlock code={BasicWithHeading} />
 
 ### Example with Container
 
-Users may want to have some padding around the `table` and have inset dividers for their rows. This
+Users may want to add padding around the `table` and have inset dividers for their rows. This
 showcases how a user can achieve this with creating a styled component to wrap the `table`.
 
 <ExampleCodeBlock code={TableWithContainer} />
 
 ### Example with Caption
 
-We built a simple table that includes a `caption` without a Heading. A `caption` is not required but
-it is good for
+Users are free to use a `caption` instead of a heading. A `caption` is not required but it is good
+for
 [accessibility](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table#accessibility_concerns)
 purposes.
 
 <ExampleCodeBlock code={Basic} />
 
-### Fixed Column with TableContainer
+### Fixed Column
 
-Users may want to have some padding surrounding their table and have a fixed column. They can use
-the `TableContainer` to wrap the `Table` component and some styles to make it so that the left
-column is fixed.
+Users may add styles to the `Table.Header` to render a fixed column.
 
 <ExampleCodeBlock code={FixedColumn} />
 
