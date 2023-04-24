@@ -18,7 +18,9 @@ const Container = styled(Box)({
 export const TableWithContainer = () => {
   return (
     <>
-      <Heading size="small">Pizza Toppings</Heading>
+      <Heading size="small" marginBottom="s">
+        Pizza Toppings
+      </Heading>
       <Container>
         <Table border="none">
           <Table.Head>

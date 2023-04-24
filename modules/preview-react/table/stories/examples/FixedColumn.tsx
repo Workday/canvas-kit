@@ -75,7 +75,9 @@ export const FixedColumn = () => {
   ];
   return (
     <>
-      <Heading size="small">Performance Car Specs</Heading>
+      <Heading size="small" marginBottom="s">
+        Performance Car Specs
+      </Heading>
       <Table>
         <Table.Head>
           <Table.Row>
