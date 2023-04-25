@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {ActionBar, useActionBarModel} from '@workday/canvas-kit-react/action-bar';
-import {HStack} from '@workday/canvas-kit-react/layout';
+import {Flex, HStack} from '@workday/canvas-kit-react/layout';
 import {PrimaryButton, SecondaryButton} from '@workday/canvas-kit-react/button';
 
 type MyActionItem = {
@@ -51,12 +51,12 @@ export const OverflowActionBar = () => {
       </ActionBar>
       <hr />
       <h4>Change action bar container size</h4>
-      <HStack spacing="xs">
+      <Flex gap="xs">
         <SecondaryButton onClick={() => setContainerWidth('100%')}>100%</SecondaryButton>
         <SecondaryButton onClick={() => setContainerWidth('1023px')}>Medium</SecondaryButton>
         <SecondaryButton onClick={() => setContainerWidth('767px')}>Small</SecondaryButton>
         <SecondaryButton onClick={() => setContainerWidth('320px')}>Extra Small</SecondaryButton>
-      </HStack>
+      </Flex>
     </div>
   );
 };
