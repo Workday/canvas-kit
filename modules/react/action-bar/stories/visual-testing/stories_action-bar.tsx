@@ -60,7 +60,7 @@ export const ActionBarWithOverflowMenuStates = () => {
     <StaticStates>
       <ComponentStatesTable
         rowProps={[
-          {label: 'Default Visible Items Number', props: {},
+          {label: 'Default Visible Items Number', props: {}},
           {
             label: 'With Minimum Visible Items',
             props: {maximumVisible: 1},
