@@ -60,21 +60,21 @@ export const ActionBarWithOverflowMenuStates = () => {
     <StaticStates>
       <ComponentStatesTable
         rowProps={[
-          {label: 'With Overflow Menu', props: {model: useActionBarModel({items})}},
+          {label: 'Default Visible Items Number', props: {},
           {
-            label: 'With Overflow Minimum',
-            props: {model: useActionBarModel({items, maximumVisible: 1})},
+            label: 'With Minimum Visible Items',
+            props: {maximumVisible: 1},
           },
           {
-            label: 'With Overflow Maximum',
-            props: {model: useActionBarModel({items, maximumVisible: items.length})},
+            label: 'With Overflow Maximum Visible Items',
+            props: {maximumVisible: items.length},
           },
         ]}
         columnProps={[{label: ' ', props: {position: 'relative'}}]}
       >
         {props => (
           <div>
-            <ActionBar {...props}>
+            <ActionBar items={items} {...props}>
               <ActionBar.List
                 position="relative"
                 overflowButton={<ActionBar.OverflowButton aria-label="More actions" />}
