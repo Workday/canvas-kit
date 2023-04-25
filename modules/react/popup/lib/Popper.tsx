@@ -4,6 +4,7 @@ import * as PopperJS from '@popperjs/core';
 
 export type Placement = `${PopperJS.Placement}`; // Use template literals to make documentation list them out
 export type PopperOptions = PopperJS.Options;
+export const defaultFallbackPlacements: Array<Placement> = ['top', 'right', 'bottom', 'left']
 
 import {usePopupStack} from './hooks';
 import {useLocalRef} from '@workday/canvas-kit-react/common';
@@ -43,6 +44,12 @@ export interface PopperProps {
    * @default bottom
    */
   placement?: Placement;
+  /**
+   * Define fallback placements by providing a list of {@link Placement} in array (in order of preference).
+   * The default preference is following the order of `top`, `right`, `bottom`, and `left`. Use an empty array to 
+   * disable the fallback placements.
+   */
+  fallbackPlacements?: Array<Placement>;
   /**
    * A callback function that will be called whenever PopperJS chooses a placement that is different
    * from the provided `placement` preference. If a `placement` preference doesn't fit, PopperJS
@@ -117,6 +124,7 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
       getAnchorClientRect,
       popperOptions = defaultPopperOptions,
       placement: popperPlacement = 'bottom',
+      fallbackPlacements: baseFallbackPlacements = defaultFallbackPlacements,
       onPlacementChange,
       children,
       portal,
@@ -141,6 +149,17 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
       };
     }, [setPlacement, onPlacementChange]);
 
+    const flipModifier = React.useMemo((): Partial<PopperJS.Modifier<any, any>> => {
+      return {
+        name: 'flip',
+        enabled: true,
+        phase: 'main',
+        options: {
+          fallbackPlacements: baseFallbackPlacements,
+        },
+      }
+    },[baseFallbackPlacements])
+    
     // useLayoutEffect prevents flashing of the popup before position is determined
     React.useLayoutEffect(() => {
       const anchorEl = getAnchorClientRect
@@ -157,7 +176,7 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
         const instance = PopperJS.createPopper(anchorEl, stackRef.current, {
           placement: popperPlacement,
           ...popperOptions,
-          modifiers: [...(popperOptions.modifiers || []), placementModifier],
+          modifiers: [...(popperOptions.modifiers || []), placementModifier, flipModifier],
         });
         elementRef(instance); // update the ref with the instance
 
@@ -179,11 +198,11 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
         localRef.current?.setOptions({
           placement: popperPlacement,
           ...popperOptions,
-          modifiers: [...(popperOptions.modifiers || []), placementModifier],
+          modifiers: [...(popperOptions.modifiers || []), placementModifier, flipModifier],
         });
       }
       firstRender.current = false;
-    }, [popperOptions, popperPlacement, placementModifier, localRef]);
+    }, [popperOptions, popperPlacement, placementModifier, flipModifier,localRef]);
 
     const contents = <>{isRenderProp(children) ? children({placement}) : children}</>;
 

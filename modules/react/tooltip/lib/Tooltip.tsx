@@ -1,7 +1,12 @@
 import * as React from 'react';
 import innerText from 'react-innertext';
 
-import {getTransformFromPlacement, Placement, Popper} from '@workday/canvas-kit-react/popup';
+import {
+  getTransformFromPlacement,
+  Placement,
+  Popper,
+  defaultFallbackPlacements,
+} from '@workday/canvas-kit-react/popup';
 import {createComponent, mergeCallback} from '@workday/canvas-kit-react/common';
 
 import {TooltipContainer} from './TooltipContainer';
@@ -27,6 +32,12 @@ export interface TooltipProps extends Omit<React.HTMLAttributes<HTMLDivElement>,
    * @default 'top'
    */
   placement?: Placement;
+  /**
+   * Define fallback placements by providing a list of {@link Placement} in array (in order of preference).
+   * The default preference is following the order of `top`, `right`, `bottom`, and `left`. Use an empty array to
+   * disable the fallback placements.
+   */
+  fallbackPlacements?: Array<Placement>;
   /**
    * Determines the tooltip type for accessibility.
    *
@@ -78,6 +89,7 @@ export const Tooltip = createComponent('div')({
     children,
     showDelay = 300,
     hideDelay = 100,
+    fallbackPlacements = defaultFallbackPlacements,
     ...elemProps
   }: TooltipProps) {
     const titleText = innerText(title);
@@ -97,7 +109,7 @@ export const Tooltip = createComponent('div')({
             ? {'aria-label': children.props['aria-label']}
             : {}),
         })}
-        <Popper placement={placement} {...popperProps}>
+        <Popper placement={placement} fallbackPlacements={fallbackPlacements} {...popperProps}>
           {({placement}) => {
             const transformOrigin = getTransformFromPlacement(placement);
             return (
