@@ -806,6 +806,9 @@ export function useDefaultModel<T, C>(
   modelHook: (config: C) => T
 ) {
   return model &&
+    // Make sure we don't pass the `model` to a component if it is incompatible with that component.
+    // Otherwise we'll have strange runtime failures when a component or elemProps hooks try to
+    // access the `state` or `events`
     (model as any).Context &&
     (model as any).__UNSTABLE_modelContext === (modelHook as any).Context
     ? model
@@ -825,7 +828,9 @@ export function useDefaultModel<T, C>(
  * }
  */
 export function useModelContext<T>(context: React.Context<T>, model?: T): T {
-  // The model context is private and should never be used
+  // Make sure we don't pass the `model` to a component if it is incompatible with that component.
+  // Otherwise we'll have strange runtime failures when a component or elemProps hooks try to
+  // access the `state` or `events`
   return model && (model as any).__UNSTABLE_modelContext === context
     ? model
     : // eslint-disable-next-line react-hooks/rules-of-hooks
