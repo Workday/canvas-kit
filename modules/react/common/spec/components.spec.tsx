@@ -15,8 +15,8 @@ import {
   createContainer,
   createSubcomponent,
   createModelHook,
+  useModelContext,
 } from '@workday/canvas-kit-react/common';
-import {useModelContext} from '../lib/utils';
 
 describe('createComponent', () => {
   it('should assign an element-base component as an ElementComponent', () => {
@@ -455,7 +455,7 @@ describe('composeHooks', () => {
       mergeProps({id: number, foo: number, [`hook${number}`]: model.state.foo}, props)
     );
 
-    const props = (composeHooks as any).apply(null, hooks as any)(myModel, {foo: 'baz'}, null);
+    const props = composeHooks.apply(null, hooks as any)(myModel, {foo: 'baz'}, null);
     expect(props).toHaveProperty('id', 9);
     expect(props).toHaveProperty('hook1', 'bar');
     expect(props).toHaveProperty('foo', 'baz');
