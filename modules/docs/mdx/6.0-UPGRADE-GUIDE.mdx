@@ -80,10 +80,9 @@ There is `deprecated` and `removal`.
 
 #### Deprecation
 
-We add the [@deprecated](https://jsdoc.app/tags-deprecated.html) from JSDoc to code that we plan to
-deprecate in the near future. The component name will also have a strikethrough to indicate its
-deprecated status. Although you can still consume this code, we want consumers to move to a utility
-or component that is more stable.
+We add the [@deprecated tag](https://jsdoc.app/tags-deprecated.html) from JSDoc to code that we plan
+to deprecate in the near future. Although you can still consume this code, we want consumers to move
+to a utility or component that is more stable.
 
 #### Removal
 
@@ -148,10 +147,10 @@ export const CustomCookieBanner = (props: CustomCookieBannerProps) => {
 
 ### Header & Global Header
 
-We are [deprecating](#deprecation) `Header` and `GlobalHeader` and their related exports. They has
+We are [deprecating](#deprecation) `Header` and `GlobalHeader` and their related exports. They have
 been renamed to `DeprecatedHeader` and `DeprecatedGlobalHeader`, respectively. You may continue to
-use these components exactly as you did in v5, but note that we plan to [remove](#removal) this
-package in Canvas Kit v7.
+use these components exactly as you did in v5, but note that we plan to [remove](#removal) these
+components in Canvas Kit v7.
 
 > Note: `SearchBar` is not being deprecated but will instead move to its own dedictated package. You
 > can read more [here](#search-bar).
