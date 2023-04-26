@@ -84,7 +84,8 @@ export interface OverflowTooltipProps extends Omit<React.HTMLAttributes<HTMLDivE
   placement?: Placement;
   /**
    * Define fallback placements by providing a list of {@link Placement} in array (in order of preference).
-   * The default preference is following the order of `top`, `right`, `bottom`, and `left`. Use an empty array to
+   * The default preference is following the order of `top`, `right`, `bottom`, and `left`. Once the initial
+   * and opposite placements are not available, the fallback placements will be in use. Use an empty array to
    * disable the fallback placements.
    */
   fallbackPlacements?: Array<Placement>;

@@ -8,8 +8,6 @@ export const CustomContent = () => {
     <React.Fragment>
       <Tooltip
         type="describe"
-        placement="left"
-        fallbackPlacements={['right', 'top', 'bottom']}
         title={
           <div>
             This is a <em>custom</em> tooltip with <strong>custom HTML</strong>

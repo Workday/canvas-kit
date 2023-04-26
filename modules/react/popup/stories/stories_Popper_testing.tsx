@@ -27,6 +27,7 @@ export const UpdateOptions = () => {
         </p>
         <SecondaryButton onClick={() => setPlacement('top')}>Top</SecondaryButton>
         <SecondaryButton onClick={() => setPlacement('bottom')}>Bottom</SecondaryButton>
+        <SecondaryButton onClick={() => setPlacement('left')}>Left</SecondaryButton>
         <div>Placement: {placement}</div>
       </div>
       <div

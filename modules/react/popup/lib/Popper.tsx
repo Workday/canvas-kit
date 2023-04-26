@@ -46,7 +46,8 @@ export interface PopperProps {
   placement?: Placement;
   /**
    * Define fallback placements by providing a list of {@link Placement} in array (in order of preference).
-   * The default preference is following the order of `top`, `right`, `bottom`, and `left`. Use an empty array to 
+   * The default preference is following the order of `top`, `right`, `bottom`, and `left`. Once the initial 
+   * and opposite placements are not available, the fallback placements will be in use. Use an empty array to 
    * disable the fallback placements.
    */
   fallbackPlacements?: Array<Placement>;
@@ -112,6 +113,33 @@ const getElementFromRefOrElement = (
   }
 };
 
+const getOppositePlacement = (popperPlacement: Placement): Placement => {
+  const [first, second] = popperPlacement.split('-');
+  let oppositePlacement: Placement;
+  switch (first) {
+    case 'top':
+      oppositePlacement = 'bottom';
+      break;
+    case 'bottom':
+      oppositePlacement = 'top';
+      break;
+    case 'left':
+      oppositePlacement = 'right';
+      break;
+    case 'right':
+      oppositePlacement = 'left';
+      break;
+    default:
+      oppositePlacement = 'auto';
+  }
+  if (second) {
+    oppositePlacement =
+      PopperJS.placements.find(placement => placement.includes(`${oppositePlacement}-${second}`)) ??
+      oppositePlacement;
+  }
+  return oppositePlacement;
+};
+
 // prevent unnecessary renders if popperOptions are not passed
 const defaultPopperOptions: PopperProps['popperOptions'] = {};
 
@@ -136,6 +164,11 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
     const {localRef, elementRef} = useLocalRef(popperInstanceRef);
     const [placement, setPlacement] = React.useState(popperPlacement);
     const stackRef = usePopupStack(ref, anchorElement as HTMLElement);
+    const maxRepositionCall = React.useRef(baseFallbackPlacements.length + 2) // plus one initial placement and one opposite placement
+    const nextAvailablePlacement = React.useRef<Placement>(getOppositePlacement(popperPlacement)) // store the next available fallback placement
+    const preventOverflowModifierRef = React.useRef<Partial<PopperJS.Modifier<any, any>>> ( {
+      name: 'preventOverflow'      
+    })
 
     const placementModifier = React.useMemo((): PopperJS.Modifier<any, any> => {
       return {
@@ -148,18 +181,48 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
         },
       };
     }, [setPlacement, onPlacementChange]);
-
-    const flipModifier = React.useMemo((): Partial<PopperJS.Modifier<any, any>> => {
+ 
+    const fallbackPlacementsModifier = React.useMemo((): PopperJS.Modifier<any, any> => {
       return {
-        name: 'flip',
+        name: 'fallbackPlacement',
         enabled: true,
         phase: 'main',
-        options: {
-          fallbackPlacements: baseFallbackPlacements,
+        fn({state}){
+          const placements = [popperPlacement, getOppositePlacement(popperPlacement), ...baseFallbackPlacements]
+          const overflow = PopperJS.detectOverflow(state)
+          const preventOverflowData = state.modifiersData.preventOverflow
+          const isOverflowed = preventOverflowData && 
+          ((preventOverflowData.x === 0 && (overflow.right > 0 || overflow.left > 0)) || 
+          (preventOverflowData.y === 0 && (overflow.top > 0 || overflow.bottom > 0)))
+          maxRepositionCall.current --
+
+          for(let i = 0 ; i < placements.length; i++){
+            state.placement = placements[i]
+            const key = placements[i] as keyof PopperJS.SideObject
+            if(PopperJS.detectOverflow(state)[key] <= 0){
+              nextAvailablePlacement.current = placements[i]
+              break
+            }else{
+              state.placement = popperPlacement
+            }
+          } 
+
+          if(!isOverflowed && maxRepositionCall.current < 1){
+            // reset the max call if popper keeps open
+            maxRepositionCall.current = baseFallbackPlacements.length + 2
+          } else if(isOverflowed && maxRepositionCall.current < 1){
+            // when there is no available space on the four side, use the initial placement
+            state.reset = false
+          } else{           
+            // instruct Popper to run all modifier again
+            console.log('reset')
+            state.reset = true
+          }
         },
+        requiresIfExists: ['preventOverflow']
       }
-    },[baseFallbackPlacements])
-    
+    },[baseFallbackPlacements, popperPlacement, nextAvailablePlacement, maxRepositionCall])
+
     // useLayoutEffect prevents flashing of the popup before position is determined
     React.useLayoutEffect(() => {
       const anchorEl = getAnchorClientRect
@@ -176,7 +239,7 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
         const instance = PopperJS.createPopper(anchorEl, stackRef.current, {
           placement: popperPlacement,
           ...popperOptions,
-          modifiers: [...(popperOptions.modifiers || []), placementModifier, flipModifier],
+          modifiers: [...(popperOptions.modifiers || []), placementModifier, preventOverflowModifierRef.current,  fallbackPlacementsModifier],
         });
         elementRef(instance); // update the ref with the instance
 
@@ -196,13 +259,13 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
       // Only update options if this is _not_ the first render
       if (!firstRender.current) {
         localRef.current?.setOptions({
-          placement: popperPlacement,
+          placement: nextAvailablePlacement.current,
           ...popperOptions,
-          modifiers: [...(popperOptions.modifiers || []), placementModifier, flipModifier],
+          modifiers: [...(popperOptions.modifiers || []), placementModifier, preventOverflowModifierRef.current, fallbackPlacementsModifier],
         });
       }
       firstRender.current = false;
-    }, [popperOptions, popperPlacement, placementModifier, flipModifier,localRef]);
+    }, [popperOptions, popperPlacement, placementModifier, preventOverflowModifierRef, fallbackPlacementsModifier, localRef, nextAvailablePlacement]);
 
     const contents = <>{isRenderProp(children) ? children({placement}) : children}</>;
 
