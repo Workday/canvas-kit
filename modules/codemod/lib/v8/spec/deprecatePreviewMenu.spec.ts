@@ -1,5 +1,5 @@
 import {expectTransformFactory} from './expectTransformFactory';
-import transformer from '../softDeprecatePreviewMenu';
+import transformer from '../deprecatePreviewMenu';
 const context = describe;
 
 const expectTransform = expectTransformFactory(transformer);
@@ -32,7 +32,7 @@ describe('Canvas Kit Deprecate Preview Menu Codemod', () => {
     it('should properly transform Menu JSX identifiers', () => {
       const input = `
         import {Menu, MenuItem} from '@workday/canvas-kit-preview-react/menu';
-    
+
         const CustomMenu = () => {
           return (
             <Menu>
@@ -48,7 +48,7 @@ describe('Canvas Kit Deprecate Preview Menu Codemod', () => {
 
       const expected = `
         import {DeprecatedMenu, DeprecatedMenuItem} from '@workday/canvas-kit-preview-react/menu';
-    
+
         const CustomMenu = () => {
           return (
             <DeprecatedMenu>
@@ -68,7 +68,7 @@ describe('Canvas Kit Deprecate Preview Menu Codemod', () => {
     it('should properly transform type reference identifiers', () => {
       const input = `
         import { MenuProps } from '@workday/canvas-kit-preview-react/menu';
-    
+
         type CustomMenuProps = MenuProps;
         interface AnotherMenuProps extends MenuProps {
           specialProp?: boolean;
@@ -76,7 +76,7 @@ describe('Canvas Kit Deprecate Preview Menu Codemod', () => {
       `;
       const expected = `
         import { DeprecatedMenuProps } from '@workday/canvas-kit-preview-react/menu';
-    
+
         type CustomMenuProps = DeprecatedMenuProps;
         interface AnotherMenuProps extends DeprecatedMenuProps {
           specialProp?: boolean;
@@ -89,7 +89,7 @@ describe('Canvas Kit Deprecate Preview Menu Codemod', () => {
     it('should properly transform type reference identifiers', () => {
       const input = `
         import { MenuItemProps } from '@workday/canvas-kit-preview-react/menu';
-    
+
         type CustomMenuItemProps = MenuItemProps;
         interface AnotherMenuItemProps extends MenuItemProps {
           specialProp?: boolean;
@@ -97,7 +97,7 @@ describe('Canvas Kit Deprecate Preview Menu Codemod', () => {
       `;
       const expected = `
         import { DeprecatedMenuItemProps } from '@workday/canvas-kit-preview-react/menu';
-    
+
         type CustomMenuItemProps = DeprecatedMenuItemProps;
         interface AnotherMenuItemProps extends DeprecatedMenuItemProps {
           specialProp?: boolean;
@@ -110,7 +110,7 @@ describe('Canvas Kit Deprecate Preview Menu Codemod', () => {
     it('should properly transform type reference identifiers', () => {
       const input = `
         import { MenuState } from '@workday/canvas-kit-preview-react/menu';
-    
+
         type CustomMenuState = MenuState;
         interface AnotherMenuState extends MenuState {
           specialProp?: boolean;
@@ -118,7 +118,7 @@ describe('Canvas Kit Deprecate Preview Menu Codemod', () => {
       `;
       const expected = `
         import { DeprecatedMenuState } from '@workday/canvas-kit-preview-react/menu';
-    
+
         type CustomMenuState = DeprecatedMenuState;
         interface AnotherMenuState extends DeprecatedMenuState {
           specialProp?: boolean;

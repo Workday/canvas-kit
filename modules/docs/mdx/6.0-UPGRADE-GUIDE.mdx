@@ -76,29 +76,31 @@ help us maintain additional codemod transforms to make future upgrades easier.
 
 ### Deprecation Types
 
-There are two types of deprecations: soft and hard.
+There is `deprecated` and `removal`.
 
-#### Soft Deprecation
+#### Deprecation
 
-A soft-deprecated component is still available with its full functionality, but it will have been
-renamed with a prefix to indicate its soft-deprecated status. It will also include a console warning
-to announce its deprecation. This warning will only be triggered on the component's initial render.
+We add the [@deprecated](https://jsdoc.app/tags-deprecated.html) from JSDoc to code that we plan to
+deprecate in the near future. The component name will also have a strikethrough to indicate its
+deprecated status. Although you can still consume this code, we want consumers to move to a utility
+or component that is more stable.
 
-Soft-deprecated types and utilities will also be renamed but generally will not trigger a console
-warning.
+#### Removal
 
-#### Hard Deprecation
-
-A hard-deprecated component or package is no longer available. You will need to follow the method
-prescribed in our upgrade guide to update your application. Please reach out to our team directly if
-you need additional help.
+Removals are deletions from our codebase and you can no longer consume this component. We've either
+promoted or replaced a component or utility. You will need to follow the method prescribed in our
+upgrade guide to update your application. Please reach out to our team directly if you need
+additional help.
 
 ### Cookie Banner
 
-We are [soft deprecating](#soft-deprecation) `CookieBanner`. It has been renamed to
-`DeprecatedCookieBanner`. Similarly, `CookieBannerProps` has been renamed to
-`DeprecatedCookieBannerProps`. You may continue to use this component exactly as you did in v5, but
-note that we plan to [hard-deprecate](#hard-deprecation) it in Canvas Kit v7.
+We are [deprecating](#deprecation) `CookieBanner`. It has been renamed to `DeprecatedCookieBanner`.
+Similarly, `CookieBannerProps` has been renamed to `DeprecatedCookieBannerProps`. You may continue
+to use this component exactly as you did in v5, but note that we plan to [remove](#removal) it in
+Canvas Kit v7.
+
+> **Note:** We no longer rename components or utilities when they are to be deprecated. Please see
+> the definitions of [deprecations](#deprecation) and [removals](#removal).
 
 🤖 The codemod will rename `CookieBanner` and `CookieBannerProps` to their deprecated names:
 
@@ -146,13 +148,16 @@ export const CustomCookieBanner = (props: CustomCookieBannerProps) => {
 
 ### Header & Global Header
 
-We are [soft deprecating](#soft-deprecation) `Header` and `GlobalHeader` and their related exports.
-They has been renamed to `DeprecatedHeader` and `DeprecatedGlobalHeader`, respectively. You may
-continue to use these components exactly as you did in v5, but note that we plan to
-[hard-deprecate](#hard-deprecation) this package in Canvas Kit v7.
+We are [deprecating](#deprecation) `Header` and `GlobalHeader` and their related exports. They has
+been renamed to `DeprecatedHeader` and `DeprecatedGlobalHeader`, respectively. You may continue to
+use these components exactly as you did in v5, but note that we plan to [remove](#removal) this
+package in Canvas Kit v7.
 
 > Note: `SearchBar` is not being deprecated but will instead move to its own dedictated package. You
 > can read more [here](#search-bar).
+
+> **Note:** We no longer rename components or utilities when they are to be deprecated. Please see
+> the definitions of [deprecations](#deprecation) and [removals](#removal).
 
 🤖 The codemod will handle all these changes automatically:
 
@@ -234,10 +239,13 @@ instead.
 
 ### Page Header
 
-We are [soft-deprecating](#soft-deprecation) `PageHeader`. It has been renamed to
-`DeprecatedPageHeader`. Similarly, `PageHeaderProps` has been renamed to
-`DeprecatedPageHeaderProps`. You may continue to use this component exactly as you did in v5, but
-note that we plan to [hard-deprecate](#hard-deprecation) it in Canvas Kit v7.
+We are [deprecating](#deprecation) `PageHeader`. It has been renamed to `DeprecatedPageHeader`.
+Similarly, `PageHeaderProps` has been renamed to `DeprecatedPageHeaderProps`. You may continue to
+use this component exactly as you did in v5, but note that we plan to [remove](#removal) it in
+Canvas Kit v7.
+
+> **Note:** We no longer rename components or utilities when they are to be deprecated. Please see
+> the definitions of [deprecations](#deprecation) and [removals](#removal).
 
 🤖 The codemod will rename `PageHeader` and `PageHeaderProps` to their deprecated names:
 

@@ -1,8 +1,8 @@
 import {Transform} from 'jscodeshift';
 
-import softDeprecateDrawer from './softDeprecateDrawer';
-import softDeprecateLayout from './softDeprecateLayout';
-import softDeprecatePreviewMenu from './softDeprecatePreviewMenu';
+import deprecateDrawer from './deprecateDrawer';
+import deprecateLayout from './deprecateLayout';
+import deprecatePreviewMenu from './deprecatePreviewMenu';
 import revomeDefaultImports from './removeDefaultImports';
 import promoteComponentsToTesting from './promoteComponentsToTesting';
 import promoteBreadcrumbs from './promoteBreadcrumbs';
@@ -16,9 +16,9 @@ const transform: Transform = (file, api, options) => {
     promoteBreadcrumbs,
     restructureBreadcrumbs,
     revomeDefaultImports,
-    softDeprecateDrawer,
-    softDeprecateLayout,
-    softDeprecatePreviewMenu,
+    deprecateDrawer,
+    deprecateLayout,
+    deprecatePreviewMenu,
     promoteComponentsToTesting,
     refactorActionBarOverflowButton,
     renameLoadingAnimation,
