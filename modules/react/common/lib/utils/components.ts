@@ -1,5 +1,6 @@
 import React from 'react';
 import {assert} from './assert';
+import {memoize} from './memoize';
 import {mergeProps} from './mergeProps';
 import {Model} from './models';
 
@@ -317,6 +318,16 @@ export const createContainer = <
     });
     ReturnedComponent.displayName = displayName;
 
+    // The `any`s are here because `ElementComponent` takes care of the `as` type and the
+    // `ReturnComponent` type is overridden
+    (ReturnedComponent as any).as = memoize(
+      (as: any) =>
+        createContainer(as)({displayName, subComponents, modelHook, elemPropsHook})(
+          Component as any
+        ),
+      as => as
+    );
+
     // Cast as `any`. We have already specified the return type. Be careful making changes to this
     // file due to this `any` `ReturnedComponent` is a `React.ForwardRefExoticComponent`, but we want
     // it to be either an `Component` or `ElementComponent`
@@ -425,6 +436,16 @@ export const createSubcomponent = <
       ReturnedComponent.displayName = displayName;
     }
 
+    // The `any`s are here because `ElementComponent` takes care of the `as` type and the
+    // `ReturnComponent` type is overridden
+    (ReturnedComponent as any).as = memoize(
+      (as: any) =>
+        createSubcomponent(as)({displayName, subComponents, modelHook, elemPropsHook})(
+          Component as any
+        ),
+      as => as
+    );
+
     // Cast as `any`. We have already specified the return type. Be careful making changes to this
     // file due to this `any` `ReturnedComponent` is a `React.ForwardRefExoticComponent`, but we want
     // it to be either an `Component` or `ElementComponent`
@@ -510,8 +531,10 @@ export const createComponent = <
 
   // The `any`s are here because `ElementComponent` takes care of the `as` type and the
   // `ReturnComponent` type is overridden
-  (ReturnedComponent as any).as = (as: any) =>
-    createComponent(as)({displayName, Component, subComponents});
+  (ReturnedComponent as any).as = memoize(
+    (as: any) => createComponent(as)({displayName, Component, subComponents}),
+    as => as
+  );
 
   // Cast as `any`. We have already specified the return type. Be careful making changes to this
   // file due to this `any` `ReturnedComponent` is a `React.ForwardRefExoticComponent`, but we want
