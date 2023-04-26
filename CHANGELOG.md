@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v8.6.0](https://github.com/Workday/canvas-kit/releases/tag/v8.6.0) (2023-04-20)
+
+### Components
+
+- feat: Added inset to PositionStyleProps ([#2129](https://github.com/Workday/canvas-kit/pull/2129)) ([@thunguyen19](https://github.com/thunguyen19))
+- feat: Allow Icon components to use color tokens ([#2097](https://github.com/Workday/canvas-kit/pull/2097)) ([@thunguyen19](https://github.com/thunguyen19))
+  Optional release note message. Changelog and release summaries will contain a pull request title. This section will add additional notes under that title. This section is not a summary, but something extra to point out in release notes. An example might be calling out breaking changes in a labs component or minor visual changes that need visual regression updates. Remove this section if no additional release notes are required.
+
+### Infrastructure
+
+- ci: Fix minor release action ([@RayRedGoose](https://github.com/RayRedGoose))
+
+
 ## [v8.5.13](https://github.com/Workday/canvas-kit/releases/tag/v8.5.13) (2023-04-17)
 
 ### Components
