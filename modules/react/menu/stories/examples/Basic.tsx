@@ -15,7 +15,7 @@ export const Basic = () => {
             <Menu.Item>Second Item</Menu.Item>
             <Menu.Divider />
             <Menu.Item>Third Item (with a really, really, really long label)</Menu.Item>
-            <Menu.Item>Fourth Item</Menu.Item>
+            <Menu.Item aria-disabled>Fourth Item</Menu.Item>
           </Menu.List>
         </Menu.Card>
       </Menu.Popper>
