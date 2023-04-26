@@ -10,7 +10,6 @@ import {
   ElementComponent,
   mergeProps,
   createHook,
-  Model,
   BehaviorHook,
   createContainer,
   createSubcomponent,
@@ -154,6 +153,35 @@ describe('createContainer', () => {
     })((props, Element) => <Element data-testid="test" {...props} />);
 
     expect(Component.as('button')).toBe(Component.as('button'));
+  });
+
+  it('should apply the correct model when multiple model components are used', () => {
+    const modelHook1 = createModelHook({})(() => ({state: {foo1: 'bar'}, events: {}}));
+    const modelHook2 = createModelHook({})(() => ({state: {foo2: 'bar'}, events: {}}));
+
+    const Component1 = createContainer('div')({
+      displayName: 'Test1',
+      modelHook: modelHook1,
+    })((props, Element, model) => {
+      expect(model).toHaveProperty('state.foo1', 'bar');
+      return <Element data-testid="test1" {...props} />;
+    });
+
+    const Component2 = createContainer('div')({
+      displayName: 'Test2',
+      modelHook: modelHook2,
+    })((props, Element, model) => {
+      expect(model).toHaveProperty('state.foo2', 'bar');
+      return <Element data-testid="test2" {...props} />;
+    });
+
+    const ComposedComponent = () => {
+      const model = modelHook2();
+
+      return <Component1 as={Component2} model={model} />;
+    };
+
+    render(<ComposedComponent />);
   });
 });
 
@@ -425,7 +453,7 @@ describe('composeHooks', () => {
       mergeProps({id: number, foo: number, [`hook${number}`]: model.state.foo}, props)
     );
 
-    const props = composeHooks.apply(null, hooks as any)(myModel, {foo: 'baz'}, null);
+    const props = (composeHooks as any).apply(null, hooks as any)(myModel, {foo: 'baz'}, null);
     expect(props).toHaveProperty('id', 9);
     expect(props).toHaveProperty('hook1', 'bar');
     expect(props).toHaveProperty('foo', 'baz');
