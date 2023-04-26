@@ -4,6 +4,10 @@ import {createElemPropsHook, useForkRef, useResizeObserver} from '@workday/canva
 
 import {useOverflowListModel} from './useOverflowListModel';
 
+/**
+ * This elemProps hook measures a list and reports it to an `OverflowListModel`. This is used in
+ * overflow detection.
+ */
 export const useOverflowListMeasure = createElemPropsHook(useOverflowListModel)(
   (model, ref?: React.Ref<HTMLElement>) => {
     const localRef = React.useRef(null);

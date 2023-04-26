@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 
-const sass = require('node-sass');
+const sass = require('sass');
 const path = require('path');
 const postcss = require('postcss');
 const fs = require('fs');

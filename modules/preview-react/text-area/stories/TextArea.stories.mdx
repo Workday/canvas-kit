@@ -1,5 +1,4 @@
-import {Meta} from '@storybook/addon-docs';
-import {Specifications} from '@workday/canvas-kit-docs';
+import {SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
 
 import {TextArea} from '@workday/canvas-kit-preview-react/text-area';
 
@@ -16,7 +15,7 @@ import {RefForwarding} from './examples/RefForwarding';
 import {Required} from './examples/Required';
 import {ResizeConstraints} from './examples/ResizeConstraints';
 
-<Meta title="Preview/Inputs/Text Area/React" component={TextArea} />
+<Meta title="Preview/Inputs/Text Area" component={TextArea} />
 
 # Canvas Kit Text Area
 
@@ -113,11 +112,9 @@ Use the `useThemedRing` hook to change the visual state of the `<textarea>` elem
 
 <ExampleCodeBlock code={Alert} />
 
-## Props
+## Component API
 
-Undocumented props are spread to the underlying `<textarea>` element.
-
-<ArgsTable of={TextArea} />
+<SymbolDoc name="TextArea" fileName="/preview-react/" />
 
 ## Specifications
 

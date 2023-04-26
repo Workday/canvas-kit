@@ -1,5 +1,4 @@
-import {Meta} from '@storybook/addon-docs';
-import {Specifications} from '@workday/canvas-kit-docs';
+import {SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
 
 import {ColorInput} from '@workday/canvas-kit-react/color-picker';
 
@@ -14,7 +13,7 @@ import {RefForwarding} from './examples/RefForwarding';
 import {Required} from './examples/Required';
 import {ValidColorChange} from './examples/ValidColorChange';
 
-<Meta title="Components/Inputs/Color Picker/Color Input/React" component={ColorInput} />
+<Meta title="Components/Inputs/Color Picker/Color Input" component={ColorInput} />
 
 # Canvas Kit Color Input
 
@@ -107,12 +106,10 @@ standards.
 
 <ExampleCodeBlock code={Error} />
 
-## Color Input Props
+## Component API
 
-Undocumented props are spread to the underlying `<input type="text">` element.
+<SymbolDoc name="ColorInput" fileName="/react/" />
 
-<ArgsTable of={ColorInput} />
-
-## Color Input Specifications
+## Specifications
 
 <Specifications file="ColorPicker.spec.ts" name="ColorInput" />

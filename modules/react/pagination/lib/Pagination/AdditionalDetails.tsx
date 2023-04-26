@@ -1,14 +1,19 @@
 import * as React from 'react';
-import {type, typeColors, space} from '@workday/canvas-kit-react/tokens';
-import {accessibleHide, styled, StyledType} from '@workday/canvas-kit-react/common';
+import {type, space, typeColors} from '@workday/canvas-kit-react/tokens';
+import {
+  accessibleHide,
+  styled,
+  StyledType,
+  createComponent,
+} from '@workday/canvas-kit-react/common';
 
 import {PaginationModel} from './types';
 import {Flex, FlexProps} from '@workday/canvas-kit-react/layout';
 import {useLiveRegion} from './common/useLiveRegion';
+import {PaginationContext} from './usePaginationModel';
 
-export interface AdditionalDetailsProps extends FlexProps {
+export interface AdditionalDetailsProps extends Omit<FlexProps, 'children'> {
   children: (model: PaginationModel) => React.ReactNode | React.ReactNode;
-  model: PaginationModel;
   shouldAnnounceToScreenReader?: boolean;
   shouldHideDetails?: boolean;
 }
@@ -16,35 +21,39 @@ export interface AdditionalDetailsProps extends FlexProps {
 const StyledAdditionalDetails = styled(Flex)<
   StyledType & Pick<AdditionalDetailsProps, 'shouldHideDetails'>
 >(({shouldHideDetails}) => {
-  const styles = {
-    ...type.levels.subtext.medium,
-    color: typeColors.hint,
-  };
   if (shouldHideDetails) {
     return {
-      ...styles,
       ...accessibleHide,
       marginTop: space.zero,
     };
   } else {
     return {
-      ...styles,
       marginTop: space.xs,
     };
   }
 });
 
-export const AdditionalDetails = ({
-  model,
-  children,
-  shouldAnnounceToScreenReader,
-  ...elemProps
-}: AdditionalDetailsProps) => {
-  const liveRegionProps = useLiveRegion({shouldAnnounceToScreenReader});
+export const AdditionalDetails = createComponent('div')({
+  displayName: 'Pagination.AdditionalDetails',
+  Component(
+    {children, shouldAnnounceToScreenReader, ...elemProps}: AdditionalDetailsProps,
+    ref,
+    Element
+  ) {
+    const model = React.useContext(PaginationContext);
+    const liveRegionProps = useLiveRegion({shouldAnnounceToScreenReader});
 
-  return (
-    <StyledAdditionalDetails {...liveRegionProps} {...elemProps}>
-      {typeof children === 'function' ? children(model) : children}
-    </StyledAdditionalDetails>
-  );
-};
+    return (
+      <StyledAdditionalDetails
+        ref={ref}
+        as={Element}
+        {...type.levels.subtext.medium}
+        color={typeColors.hint}
+        {...liveRegionProps}
+        {...elemProps}
+      >
+        {typeof children === 'function' ? children(model) : children}
+      </StyledAdditionalDetails>
+    );
+  },
+});

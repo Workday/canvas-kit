@@ -22,8 +22,8 @@ export const useDisclosureModel = createModelHook({
     id,
     /**
      * Visibility state of the disclosed content. Models are allowed to extend the states to fit
-     * their needs, so if you need to consistently determine "not hidden", use `visibility !==
-     * 'hidden'` rather than `visibility === 'visible'`
+     * their needs, so if you need to consistently determine "not hidden", use
+     * `visibility !== 'hidden'` rather than `visibility === 'visible'`
      */
     visibility,
   };

@@ -3,36 +3,36 @@ import {storiesOf} from '@storybook/react';
 
 import {Card} from '@workday/canvas-kit-react/card';
 
-import {Layout} from '../index';
+import {DeprecatedLayout} from '../index';
 
-storiesOf('Components/Containers/Layout/React/Column and Layout', module)
-  .addParameters({component: Layout})
+storiesOf('Components/Containers/Column and Layout', module)
+  .addParameters({component: DeprecatedLayout})
   .addParameters({ReadmePath: 'react/layout'})
   .add('Page Layout', () => (
     <div className="story">
       <h3>Full Page</h3>
       <div>
-        <Layout gutter={0}>
-          <Layout.Column spacing={0}>
+        <DeprecatedLayout gutter={0}>
+          <DeprecatedLayout.Column spacing={0}>
             <Card />
-          </Layout.Column>
-        </Layout>
+          </DeprecatedLayout.Column>
+        </DeprecatedLayout>
       </div>
       <h3>Full Page with gutter & spacing</h3>
       <div>
-        <Layout>
-          <Layout.Column>
+        <DeprecatedLayout>
+          <DeprecatedLayout.Column>
             <Card />
-          </Layout.Column>
-        </Layout>
+          </DeprecatedLayout.Column>
+        </DeprecatedLayout>
       </div>
       <h3>Full Page with a max width</h3>
       <div>
-        <Layout capWidth={true}>
-          <Layout.Column>
+        <DeprecatedLayout capWidth={true}>
+          <DeprecatedLayout.Column>
             <Card />
-          </Layout.Column>
-        </Layout>
+          </DeprecatedLayout.Column>
+        </DeprecatedLayout>
       </div>
     </div>
   ))
@@ -40,80 +40,80 @@ storiesOf('Components/Containers/Layout/React/Column and Layout', module)
     <div className="story">
       <h3>12 Columns</h3>
       <div>
-        <Layout>
-          <Layout.Column>
+        <DeprecatedLayout>
+          <DeprecatedLayout.Column>
             <Card />
-          </Layout.Column>
-        </Layout>
-        <Layout>
-          <Layout.Column>
+          </DeprecatedLayout.Column>
+        </DeprecatedLayout>
+        <DeprecatedLayout>
+          <DeprecatedLayout.Column>
             <Card />
-          </Layout.Column>
-          <Layout.Column>
+          </DeprecatedLayout.Column>
+          <DeprecatedLayout.Column>
             <Card />
-          </Layout.Column>
-        </Layout>
-        <Layout>
-          <Layout.Column>
+          </DeprecatedLayout.Column>
+        </DeprecatedLayout>
+        <DeprecatedLayout>
+          <DeprecatedLayout.Column>
             <Card />
-          </Layout.Column>
-          <Layout.Column>
+          </DeprecatedLayout.Column>
+          <DeprecatedLayout.Column>
             <Card />
-          </Layout.Column>
-          <Layout.Column>
+          </DeprecatedLayout.Column>
+          <DeprecatedLayout.Column>
             <Card />
-          </Layout.Column>
-        </Layout>
-        <Layout>
-          <Layout.Column>
+          </DeprecatedLayout.Column>
+        </DeprecatedLayout>
+        <DeprecatedLayout>
+          <DeprecatedLayout.Column>
             <Card />
-          </Layout.Column>
-          <Layout.Column>
+          </DeprecatedLayout.Column>
+          <DeprecatedLayout.Column>
             <Card />
-          </Layout.Column>
-          <Layout.Column>
+          </DeprecatedLayout.Column>
+          <DeprecatedLayout.Column>
             <Card />
-          </Layout.Column>
-          <Layout.Column>
+          </DeprecatedLayout.Column>
+          <DeprecatedLayout.Column>
             <Card />
-          </Layout.Column>
-        </Layout>
+          </DeprecatedLayout.Column>
+        </DeprecatedLayout>
       </div>
       <h3>12 Column Grid Widths</h3>
       <div>
-        <Layout>
-          <Layout.Column columns={4}>
+        <DeprecatedLayout>
+          <DeprecatedLayout.Column columns={4}>
             <Card />
-          </Layout.Column>
-          <Layout.Column columns={8}>
+          </DeprecatedLayout.Column>
+          <DeprecatedLayout.Column columns={8}>
             <Card />
-          </Layout.Column>
-        </Layout>
+          </DeprecatedLayout.Column>
+        </DeprecatedLayout>
       </div>
       <h3>Fixed Column Widths</h3>
       <div>
-        <Layout>
-          <Layout.Column width={'400px'}>
+        <DeprecatedLayout>
+          <DeprecatedLayout.Column width={'400px'}>
             <Card />
-          </Layout.Column>
-          <Layout.Column>
+          </DeprecatedLayout.Column>
+          <DeprecatedLayout.Column>
             <Card />
-          </Layout.Column>
-        </Layout>
+          </DeprecatedLayout.Column>
+        </DeprecatedLayout>
       </div>
       <h3>Custom Spacing</h3>
       <div>
-        <Layout spacing={60}>
-          <Layout.Column spacing={0}>
+        <DeprecatedLayout spacing={60}>
+          <DeprecatedLayout.Column spacing={0}>
             <Card />
-          </Layout.Column>
-          <Layout.Column>
+          </DeprecatedLayout.Column>
+          <DeprecatedLayout.Column>
             <Card />
-          </Layout.Column>
-          <Layout.Column>
+          </DeprecatedLayout.Column>
+          <DeprecatedLayout.Column>
             <Card />
-          </Layout.Column>
-        </Layout>
+          </DeprecatedLayout.Column>
+        </DeprecatedLayout>
       </div>
     </div>
   ));

@@ -73,8 +73,6 @@ const RequiredAsterisk = styled('abbr')({
 });
 
 // Used inside the fieldset component instead of a label for accessible radio groups.
-// Extra `width: 100%` style is to help IE11 wrap text properly in a top-positioned
-// FormField's legend element.
 const LegendComponent = styled('legend')<LabelProps>(...labelStyles, ({labelPosition}) => {
   if (labelPosition === Label.Position.Top) {
     return {
@@ -87,9 +85,10 @@ const LegendComponent = styled('legend')<LabelProps>(...labelStyles, ({labelPosi
     width: 'auto',
   };
 });
+
 const LabelComponent = styled('label')<LabelProps>(...labelStyles);
 
-class Label extends React.Component<LabelProps> {
+class Label extends React.Component<React.PropsWithChildren<LabelProps>> {
   static Position = FormFieldLabelPosition;
 
   public render() {
@@ -126,4 +125,4 @@ class Label extends React.Component<LabelProps> {
 
 Label.Position = FormFieldLabelPosition;
 
-export default Label;
+export {Label};

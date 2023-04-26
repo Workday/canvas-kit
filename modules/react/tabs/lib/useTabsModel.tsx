@@ -8,6 +8,22 @@ import {
 
 import {useMenuModel} from '@workday/canvas-kit-react/menu';
 
+/**
+ * The TabsModel extends the [Collection
+ * System](/getting-started/for-developers/resources/collection-api/). Tabs have tab items and
+ * panels. Tabs can be overflowed if there isn't enough room to render and will overflow to a
+ * {@link MenuModel} sub-model.
+ *
+ * ```tsx
+ * const model = useTabsModel({
+ *   onSelect(data) {
+ *     console.log('Selected Tab', data)
+ *   }
+ * })
+ *
+ * <Tabs model={model}>{Tabs child components}</Tabs>
+ * ```
+ */
 export const useTabsModel = createModelHook({
   defaultConfig: {
     ...useOverflowListModel.defaultConfig,
@@ -29,7 +45,7 @@ export const useTabsModel = createModelHook({
      * @default 'horizontal'
      */
     orientation: 'horizontal' as typeof useOverflowListModel.defaultConfig.orientation,
-    menuConfig: {} as Partial<typeof useMenuModel.defaultConfig>,
+    menuConfig: {} as typeof useMenuModel.TConfig,
   },
   requiredConfig: useOverflowListModel.requiredConfig,
 })(config => {
@@ -96,7 +112,7 @@ export const useTabsModel = createModelHook({
   };
 
   const menu = useMenuModel(
-    useMenuModel.mergeConfig(config.menuConfig as Required<typeof config.menuConfig>, {
+    useMenuModel.mergeConfig(config.menuConfig, {
       id: `menu-${model.state.id}`,
       items: overflowItems,
       nonInteractiveIds: state.nonInteractiveIds.filter(key => !state.hiddenIds.includes(key)),

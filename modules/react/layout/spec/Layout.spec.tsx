@@ -1,14 +1,14 @@
 import * as React from 'react';
 import {render} from '@testing-library/react';
 
-import Layout from '../lib/Layout';
+import {DeprecatedLayout} from '../lib/Layout';
 
-describe('Layout', () => {
+describe('DeprecatedLayout', () => {
   it('should spread extra props to the container element', () => {
     const {container} = render(
-      <Layout data-propspread="test">
-        <Layout.Column />
-      </Layout>
+      <DeprecatedLayout data-propspread="test">
+        <DeprecatedLayout.Column />
+      </DeprecatedLayout>
     );
 
     expect(container.firstChild).toHaveAttribute('data-propspread', 'test');
@@ -17,7 +17,7 @@ describe('Layout', () => {
 
 describe('Column', () => {
   it('should spread extra props to the container element', () => {
-    const {container} = render(<Layout.Column data-propspread="test" />);
+    const {container} = render(<DeprecatedLayout.Column data-propspread="test" />);
 
     expect(container.firstChild).toHaveAttribute('data-propspread', 'test');
   });

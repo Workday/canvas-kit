@@ -1,6 +1,7 @@
 import React from 'react';
 
-import {CanvasProvider, ContentDirection, StaticStates} from '@workday/canvas-kit-react/common';
+import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
+import {StaticStates} from '@workday/canvas-kit-react/testing';
 import {saveAsIcon} from '@workday/canvas-system-icons-web';
 
 import {customColorTheme, withSnapshotsEnabled} from '../../../../utils/storybook';
@@ -12,7 +13,7 @@ import {HStack} from '@workday/canvas-kit-react/layout';
 const fontDelay = 150; // best guess for the font delay to prevent incorrect Chromatic regressions
 
 export default {
-  title: 'Testing/React/Popups/Menu',
+  title: 'Testing/Popups/Menu',
   component: Menu,
   parameters: {
     chromatic: {

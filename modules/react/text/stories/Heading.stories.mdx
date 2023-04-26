@@ -1,0 +1,34 @@
+import {SymbolDoc} from '@workday/canvas-kit-docs';
+
+import {Basic} from './examples/Heading/Basic';
+
+<Meta title="Components/Text/Heading" />
+
+# Canvas Kit Heading
+
+`Heading` provides a simple way to render heading-level text with built-in support for Canvas type
+tokens.
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-react
+```
+
+## Usage
+
+### Basic Example
+
+`Heading` is a Type Level component (along with [`Title`](/components/text/title/),
+[`BodyText`](/components/text/body-text/), and [`Subtext`](/components/text/subtext/)) built on top
+of [`Text`](/components/text/text/) which provides a simple way to render heading-level text
+according to the [Canvas type hierarchy](/tokens/type/#type-styles).
+
+`Heading` renders an `<h2>` element by default with styles equivalent to
+`type.levels.heading[size]`. You may override the rendered element using the `as` prop.
+
+<ExampleCodeBlock code={Basic} />
+
+## Component API
+
+<SymbolDoc name="Heading" fileName="/react/text/" />

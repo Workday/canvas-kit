@@ -193,5 +193,3 @@ export const Switch = createComponent('input')({
     ErrorType,
   },
 });
-
-export default Switch;

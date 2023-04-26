@@ -31,9 +31,10 @@ import {
 import {Flex, StackSpacing, HStackProps, HStack} from '@workday/canvas-kit-react/layout';
 import {SearchForm} from '@workday/canvas-kit-labs-react/search-form';
 import {Avatar} from '@workday/canvas-kit-react/avatar';
+import {BodyText} from '@workday/canvas-kit-react/text';
 
 export default {
-  title: 'Components/Containers/Side Panel/React',
+  title: 'Components/Containers/Side Panel',
   component: SidePanel,
   parameters: {ReadmePath: 'react/side-panel'},
   argTypes: {
@@ -82,11 +83,7 @@ const ListItem = styled('li')({
     backgroundColor: colors.soap300,
   },
 });
-const ListTitle = styled('span')({
-  ...type.levels.body.small,
-  paddingLeft: 24,
-  fontWeight: type.properties.fontWeights.bold,
-});
+
 const UnorderedList = styled('ul')({
   paddingLeft: 0,
 });
@@ -166,7 +163,11 @@ class SidePanelWrapper extends React.Component<SidePanelProps, SidePanelState> {
             <span>
               <SystemIcon icon={homeIcon} />
             </span>
-            {open && <ListTitle>Home</ListTitle>}
+            {open && (
+              <BodyText as="span" size="small" fontWeight="bold" paddingLeft={24}>
+                Home
+              </BodyText>
+            )}
           </StyledListItem>
           <StyledListItem
             padding={open ? '15px 24px' : '15px 20px'}
@@ -177,7 +178,11 @@ class SidePanelWrapper extends React.Component<SidePanelProps, SidePanelState> {
             <span>
               <SystemIcon icon={starIcon} />
             </span>
-            {open && <ListTitle>Favorites</ListTitle>}
+            {open && (
+              <BodyText as="span" size="small" fontWeight="bold" paddingLeft={24}>
+                Favorites
+              </BodyText>
+            )}
           </StyledListItem>
           <StyledListItem
             padding={open ? '15px 24px' : '15px 20px'}
@@ -188,7 +193,11 @@ class SidePanelWrapper extends React.Component<SidePanelProps, SidePanelState> {
             <span>
               <SystemIcon icon={rocketIcon} />
             </span>
-            {open && <ListTitle>Items</ListTitle>}
+            {open && (
+              <BodyText as="span" size="small" fontWeight="bold" paddingLeft={24}>
+                Items
+              </BodyText>
+            )}
           </StyledListItem>
         </UnorderedList>
       </SidePanel>

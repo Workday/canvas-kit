@@ -1,7 +1,6 @@
-import {Meta} from '@storybook/addon-docs';
+import {SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
 
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
-import {Specifications} from '@workday/canvas-kit-docs';
 
 import {Default} from './examples/Default';
 import {CustomContent} from './examples/CustomContent';
@@ -13,7 +12,7 @@ import {Ellipsis} from './examples/Ellipsis';
 import {LineClamp} from './examples/LineClamp';
 import {UseTooltip} from './examples/UseTooltip';
 
-<Meta title="Components/Popups/Tooltip/React" component={Tooltip} />
+<Meta title="Components/Popups/Tooltip" component={Tooltip} />
 
 # Canvas Kit React Tooltips
 
@@ -164,7 +163,7 @@ element.scrollWidth > element.clientWidth || element.scrollHeight > element.clie
 ```
 
 Here's an example using the `-webkit-line-clamp` property (multi-line ellipsis which works in all
-browsers except IE11):
+browsers):
 
 <ExampleCodeBlock code={LineClamp} />
 
@@ -180,9 +179,9 @@ example uses those parts directly while being functionally equivalent to the ori
 
 <ExampleCodeBlock code={UseTooltip} />
 
-## Props
+## Component API
 
-<ArgsTable of={Tooltip} />
+<SymbolDoc name="Tooltip" fileName="/react/" />
 
 ## Specifications
 
