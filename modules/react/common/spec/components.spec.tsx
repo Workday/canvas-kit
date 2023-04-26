@@ -1,6 +1,7 @@
 import React from 'react';
 import {screen, render} from '@testing-library/react';
 import {expectTypeOf} from 'expect-type';
+import {renderHook} from '@testing-library/react-hooks';
 
 import {
   composeHooks,
@@ -15,6 +16,7 @@ import {
   createSubcomponent,
   createModelHook,
 } from '@workday/canvas-kit-react/common';
+import {useModelContext} from '../lib/utils';
 
 describe('createComponent', () => {
   it('should assign an element-base component as an ElementComponent', () => {
@@ -506,6 +508,104 @@ describe('composeHooks', () => {
         expectTypeOf(ref).toEqualTypeOf<React.LegacyRef<Component1>>();
         return <div />;
       },
+    });
+  });
+});
+
+describe('useModelContext', () => {
+  const contextValue = {value: 'context'};
+  const context = React.createContext(contextValue);
+  const createModel = (matchesContext = false) => {
+    return {
+      value: 'model',
+    };
+  };
+  const createModelWithMatchingContext = () => {
+    return {
+      value: 'model',
+      __UNSTABLE_modelContext: context,
+    };
+  };
+
+  it('should return the context if no model is provided', () => {
+    const {result} = renderHook(() => useModelContext(context));
+
+    expect(result.current).toEqual({value: 'context'});
+  });
+
+  describe('when a non-matching context model is provided', () => {
+    const model = createModel();
+
+    it('should return the model if no `as` is provided', () => {
+      const {result} = renderHook(() => useModelContext(context, model));
+
+      expect(result.current).toEqual(model);
+    });
+
+    it('should return the model if the `as` is a string', () => {
+      const {result} = renderHook(() => useModelContext(context, model, 'div'));
+
+      expect(result.current).toEqual(model);
+    });
+
+    it('should return the model if the `as` is a regular component', () => {
+      const Component = () => null;
+      const {result} = renderHook(() => useModelContext(context, model, Component));
+
+      expect(result.current).toEqual(model);
+    });
+
+    it('should return the model if the `as` is a regular component', () => {
+      const Component = () => null;
+      const {result} = renderHook(() => useModelContext(context, model, Component));
+
+      expect(result.current).toEqual(model);
+    });
+
+    it('should return the context if the `as` is a model component', () => {
+      const Component = () => null;
+      Component.__hasModel = true;
+      const {result} = renderHook(() => useModelContext(context, model, Component));
+
+      expect(result.current).toEqual(contextValue);
+    });
+  });
+
+  describe('when a context matching model is provided ', () => {
+    const model = createModelWithMatchingContext();
+
+    it('should return the model if no `as` is provided', () => {
+      const {result} = renderHook(() => useModelContext(context, model));
+
+      expect(result.current).toEqual(model);
+    });
+
+    it('should return the model if the `as` is a string', () => {
+      const {result} = renderHook(() => useModelContext(context, model, 'div'));
+
+      expect(result.current).toEqual(model);
+    });
+
+    it('should return the model if the `as` is a regular component', () => {
+      const Component = () => null;
+      const {result} = renderHook(() => useModelContext(context, model, Component));
+
+      expect(result.current).toEqual(model);
+    });
+
+    it('should return the model if the `as` is a regular component', () => {
+      const Component = () => null;
+      const {result} = renderHook(() => useModelContext(context, model, Component));
+
+      expect(result.current).toEqual(model);
+    });
+
+    it('should return the model if the `as` is a model component', () => {
+      const Component = () => null;
+      Component.__hasModel = true;
+      const {result} = renderHook(() => useModelContext(context, model, Component));
+
+      expect(result.current).toEqual(model);
     });
   });
 });
