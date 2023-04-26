@@ -12,6 +12,9 @@ import {
   createHook,
   Model,
   BehaviorHook,
+  createContainer,
+  createSubcomponent,
+  createModelHook,
 } from '@workday/canvas-kit-react/common';
 
 describe('createComponent', () => {
@@ -97,12 +100,86 @@ describe('createComponent', () => {
   it('should render whatever element is passed through the "as" prop', () => {
     const Component = createComponent('div')({
       displayName: 'Test',
-      Component: (props, ref, Element) => <Element data-testid="test" />,
+      Component: (props, ref, Element) => <Element data-testid="test" {...props} />,
     });
 
     render(<Component as="button" />);
 
     expect(screen.getByTestId('test')).toHaveProperty('tagName', 'BUTTON');
+  });
+
+  it('should provide an `as` method that changes the default element', () => {
+    const Component = createComponent('div')({
+      displayName: 'Test',
+      Component: (props, ref, Element) => <Element data-testid="test" {...props} />,
+    });
+
+    const ButtonComponent = Component.as('button');
+
+    render(<ButtonComponent />);
+
+    expect(screen.getByTestId('test')).toHaveProperty('tagName', 'BUTTON');
+  });
+
+  it('should provide a stable reference `as` method to aid in component render functions without needing to use other hooks', () => {
+    const Component = createComponent('div')({
+      displayName: 'Test',
+      Component: (props, ref, Element) => <Element data-testid="test" {...props} />,
+    });
+
+    expect(Component.as('button')).toBe(Component.as('button'));
+  });
+});
+
+describe('createContainer', () => {
+  const modelHook = createModelHook({})(() => ({state: {}, events: {}}));
+
+  it('should provide an `as` method that changes the default element', () => {
+    const Component = createContainer('div')({
+      displayName: 'Test',
+      modelHook,
+    })((props, Element) => <Element data-testid="test" {...props} />);
+
+    const ButtonComponent = Component.as('button');
+
+    render(<ButtonComponent />);
+
+    expect(screen.getByTestId('test')).toHaveProperty('tagName', 'BUTTON');
+  });
+
+  it('should provide a stable reference `as` method to aid in component render functions without needing to use other hooks', () => {
+    const Component = createContainer('div')({
+      displayName: 'Test',
+      modelHook,
+    })((props, Element) => <Element data-testid="test" {...props} />);
+
+    expect(Component.as('button')).toBe(Component.as('button'));
+  });
+});
+
+describe('createSubcomponent', () => {
+  const modelHook = createModelHook({})(() => ({state: {}, events: {}}));
+
+  it('should provide an `as` method that changes the default element', () => {
+    const Component = createSubcomponent('div')({
+      displayName: 'Test',
+      modelHook,
+    })((props, Element) => <Element data-testid="test" {...props} />);
+
+    const ButtonComponent = Component.as('button');
+
+    render(<ButtonComponent />);
+
+    expect(screen.getByTestId('test')).toHaveProperty('tagName', 'BUTTON');
+  });
+
+  it('should provide a stable reference `as` method to aid in component render functions without needing to use other hooks', () => {
+    const Component = createSubcomponent('div')({
+      displayName: 'Test',
+      modelHook,
+    })((props, Element) => <Element data-testid="test" {...props} />);
+
+    expect(Component.as('button')).toBe(Component.as('button'));
   });
 });
 
