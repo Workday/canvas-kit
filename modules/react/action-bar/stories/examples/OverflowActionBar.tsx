@@ -1,9 +1,9 @@
 import React from 'react';
 
 import {ActionBar, useActionBarModel} from '@workday/canvas-kit-react/action-bar';
-import {Flex, HStack} from '@workday/canvas-kit-react/layout';
+import {Flex} from '@workday/canvas-kit-react/layout';
 import {PrimaryButton, SecondaryButton} from '@workday/canvas-kit-react/button';
-import {breakpoints} from '../../../common';
+import {breakpoints} from '@workday/canvas-kit-react/common';
 
 type MyActionItem = {
   id: string;
@@ -20,7 +20,7 @@ export const OverflowActionBar = () => {
   ]);
 
   const model = useActionBarModel({items});
-  const [containerWidth, setContainerWidth] = React.useState('100%');
+  const [containerWidth, setContainerWidth] = React.useState<string | number>('100%');
 
   return (
     <div style={{width: containerWidth}}>
@@ -54,13 +54,9 @@ export const OverflowActionBar = () => {
       <h4>Change action bar container size</h4>
       <Flex gap="xs">
         <SecondaryButton onClick={() => setContainerWidth('100%')}>100%</SecondaryButton>
-        <SecondaryButton onClick={() => setContainerWidth(`${breakpoints.l}px`)}>
-          Medium
-        </SecondaryButton>
-        <SecondaryButton onClick={() => setContainerWidth(`${breakpoints.m}px`)}>
-          Small
-        </SecondaryButton>
-        <SecondaryButton onClick={() => setContainerWidth(`${breakpoints.s}px`)}>
+        <SecondaryButton onClick={() => setContainerWidth(breakpoints.l)}>Medium</SecondaryButton>
+        <SecondaryButton onClick={() => setContainerWidth(breakpoints.m)}>Small</SecondaryButton>
+        <SecondaryButton onClick={() => setContainerWidth(breakpoints.s)}>
           Extra Small
         </SecondaryButton>
       </Flex>

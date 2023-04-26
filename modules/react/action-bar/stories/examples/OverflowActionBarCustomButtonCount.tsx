@@ -1,7 +1,5 @@
 import React from 'react';
-
 import {ActionBar} from '@workday/canvas-kit-react/action-bar';
-import {Box} from '@workday/canvas-kit-react/layout';
 
 type MyActionItem = {
   id: string;
@@ -18,6 +16,7 @@ export const OverflowActionBarCustomButtonCount = () => {
   return (
     <ActionBar items={items} maximumVisible={2}>
       <ActionBar.List
+        aria-label="actions"
         position="relative"
         overflowButton={<ActionBar.OverflowButton aria-label="More actions" />}
       >
