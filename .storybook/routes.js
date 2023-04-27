@@ -9,9 +9,10 @@ const routes = {
   '/assets/system-icons/': 'tokens-icon--system-icon',
   '/components/buttons/action-bar/': 'components-buttons-action-bar--basic',
   '/components/buttons/button/': 'components-buttons--primary',
+  '/components/buttons/segmented-control/': 'preview-segmented-control--basic',
   '/components/containers/card/': 'components-containers-card--basic',
   '/components/containers/side-panel/': 'preview-side-panel--basic',
-  '/components/containers/table/': 'components-containers-table--basic',
+  '/components/containers/table/': 'preview-table--basic',
   '/components/containers/tabs/': 'components-containers-tabs--basic',
   '/components/indicators/banner/': 'components-indicators-banner--basic',
   '/components/indicators/loading-dots/': 'components-indicators-loading-dots--basic',
@@ -41,6 +42,7 @@ const routes = {
   '/components/text/subtext/': 'components-text-subtext--basic',
   '/components/text/text/': 'components-text-text--basic',
   '/components/text/title/': 'components-text-title--basic',
+  '/examples/layout/': 'examples-layouts--area-column-positioning',
   '/getting-started/for-developers/contributing/': 'guides-contributing--page',
   '/getting-started/for-developers/resources/api-pattern-guidelines/':
     'guides-api-pattern-guidelines--page',
@@ -64,6 +66,8 @@ const routes = {
   '/whats-new/upgrade-guides/canvas-kit-v5-upgrade-guide/': 'guides-upgrade-guides-v5-0--page',
   '/whats-new/upgrade-guides/canvas-kit-v6-upgrade-guide/': 'guides-upgrade-guides-v6-0--page',
   '/whats-new/upgrade-guides/canvas-kit-v7-upgrade-guide/': 'guides-upgrade-guides-v7-0--page',
+  '/whats-new/upgrade-guides/canvas-kit-v8-upgrade-guide/': 'guides-upgrade-guides-v8-0--page',
+  '/whats-new/upgrade-guides/canvas-v9-upgrade-guide/': 'guides-upgrade-guides-v9-0--page',
 };
 
 module.exports = routes;

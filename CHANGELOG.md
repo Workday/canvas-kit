@@ -3,6 +3,83 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v8.6.1](https://github.com/Workday/canvas-kit/releases/tag/v8.6.1) (2023-04-26)
+
+### Components
+
+- fix(menu): Menu does not close with aria-disabled=true ([#2128](https://github.com/Workday/canvas-kit/pull/2128)) ([@NicholasBoll](https://github.com/NicholasBoll), manuel.carrera)
+- fix(form-field): Forward required prop to input ([#2154](https://github.com/Workday/canvas-kit/pull/2154)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+### Dependencies
+
+- fix: Add react-dom peer-dep to main package ([#2162](https://github.com/Workday/canvas-kit/pull/2162)) ([@alanbsmith](https://github.com/alanbsmith))
+
+### Infrastructure
+
+- fix: Update release action to support node 16 ([#2170](https://github.com/Workday/canvas-kit/pull/2170)) ([@RayRedGoose](https://github.com/RayRedGoose))
+
+
+## [v7.4.11](https://github.com/Workday/canvas-kit/releases/tag/v7.4.11) (2023-04-26)
+
+### Components
+
+- fix(menu): Menu does not close with aria-disabled=true ([#2128](https://github.com/Workday/canvas-kit/pull/2128)) ([@NicholasBoll](https://github.com/NicholasBoll), manuel.carrera)
+- fix(form-field): Forward required prop to input ([#2154](https://github.com/Workday/canvas-kit/pull/2154)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+### Dependencies
+
+- fix: Add react-dom peer-dep to main package ([#2162](https://github.com/Workday/canvas-kit/pull/2162)) ([@alanbsmith](https://github.com/alanbsmith))
+
+### Infrastructure
+
+- fix: Update release action to support node 16 ([#2170](https://github.com/Workday/canvas-kit/pull/2170)) ([@RayRedGoose](https://github.com/RayRedGoose))
+## [v8.6.0](https://github.com/Workday/canvas-kit/releases/tag/v8.6.0) (2023-04-20)
+
+### Components
+
+- feat: Added inset to PositionStyleProps ([#2129](https://github.com/Workday/canvas-kit/pull/2129)) ([@thunguyen19](https://github.com/thunguyen19))
+- feat: Allow Icon components to use color tokens ([#2097](https://github.com/Workday/canvas-kit/pull/2097)) ([@thunguyen19](https://github.com/thunguyen19))
+  Optional release note message. Changelog and release summaries will contain a pull request title. This section will add additional notes under that title. This section is not a summary, but something extra to point out in release notes. An example might be calling out breaking changes in a labs component or minor visual changes that need visual regression updates. Remove this section if no additional release notes are required.
+
+### Infrastructure
+
+- ci: Fix minor release action ([@RayRedGoose](https://github.com/RayRedGoose))
+
+
+## [v8.5.13](https://github.com/Workday/canvas-kit/releases/tag/v8.5.13) (2023-04-17)
+
+### Components
+
+- fix: PopupCard maxHeight calc function ([#2130](https://github.com/Workday/canvas-kit/pull/2130)) ([@thunguyen19](https://github.com/thunguyen19), [@alanbsmith](https://github.com/alanbsmith))
+
+
+## [v8.5.12](https://github.com/Workday/canvas-kit/releases/tag/v8.5.12) (2023-04-14)
+
+### Components
+
+- fix(menu): Fix MenuItem icon spacing ([#2145](https://github.com/Workday/canvas-kit/pull/2145)) ([@alanbsmith](https://github.com/alanbsmith), [@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+  Updated spacing between icon and text in our menus from `8px` to `16px` to match our design specs.
+
+
+## [v8.5.11](https://github.com/Workday/canvas-kit/releases/tag/v8.5.11) (2023-04-12)
+
+### Infrastructure
+
+- ci: Replace install steps by composite actions ([#2146](https://github.com/Workday/canvas-kit/pull/2146)) ([@RayRedGoose](https://github.com/RayRedGoose))
+
+
+## [v8.5.10](https://github.com/Workday/canvas-kit/releases/tag/v8.5.10) (2023-04-11)
+
+### Codemods
+
+- fix(codemod): Pass codemod options to jscodeshift script ([#2137](https://github.com/Workday/canvas-kit/pull/2137)) ([@alanbsmith](https://github.com/alanbsmith))
+
+### Infrastructure
+
+- chore: Upgrade to Node 16 ([#2139](https://github.com/Workday/canvas-kit/pull/2139)) ([@alanbsmith](https://github.com/alanbsmith))
+- fix: Update release actions to use node 16 ([#2142](https://github.com/Workday/canvas-kit/pull/2142)) ([@RayRedGoose](https://github.com/RayRedGoose))
+
+
 ## [v8.5.9](https://github.com/Workday/canvas-kit/releases/tag/v8.5.9) (2023-03-30)
 
 ### Components

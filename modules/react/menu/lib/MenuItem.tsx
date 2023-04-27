@@ -44,11 +44,10 @@ export const StyledMenuItem = styled(Box.as('button'))<StyledType>(
   ({theme}) => {
     return {
       ...type.levels.subtext.large,
-      '& > *:not(style) ~ *:not(style)': {
-        marginLeft: space.xxs,
-      },
-      display: 'block',
+      display: 'grid',
+      alignItems: 'center',
       width: '100%',
+      gap: space.s,
       padding: `${space.xxs} ${space.s}`,
       boxSizing: 'border-box',
       cursor: 'pointer',
@@ -97,7 +96,7 @@ export const StyledMenuItem = styled(Box.as('button'))<StyledType>(
         },
       },
       backgroundColor: 'inherit',
-      '&:disabled, &[aria-disabled]': {
+      '&:disabled, &[aria-disabled=true]': {
         color: colors.licorice100,
         cursor: 'default',
         '.wd-icon-fill, .wd-icon-accent, .wd-icon-accent2': {
@@ -155,7 +154,10 @@ export const useMenuItem = composeHooks(
         onClick:
           model.state.mode === 'single'
             ? (event: React.SyntheticEvent) => {
-                model.events.hide(event);
+                // only hide if the item isn't disabled
+                if (event.currentTarget.getAttribute('aria-disabled') !== 'true') {
+                  model.events.hide(event);
+                }
               }
             : undefined,
       };
@@ -171,7 +173,7 @@ export const MenuItem = createSubcomponent('button')({
   modelHook: useMenuModel,
   elemPropsHook: useMenuItem,
   subComponents: {
-    Icon: SystemIcon,
+    Icon: styled(SystemIcon)({alignSelf: 'start'}),
     Text: styled('span')({flexGrow: 1, alignSelf: 'center'}),
   },
 })<MenuItemProps>(({children, ...elemProps}, Element) => {

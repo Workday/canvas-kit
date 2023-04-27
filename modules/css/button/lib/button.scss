@@ -118,7 +118,7 @@ $_wdc-btn-caret-down-icon-white: svg-load(
 
     &:after {
       @include wdc-btn-icon-inline($_wdc-btn-caret-down-icon);
-      padding: (($wdc-btn-height-l - $wdc-btn-split-icon-height)/2) 0;
+      padding: calc(($wdc-btn-height-l - $wdc-btn-split-icon-height)/2) 0;
       margin-left: $wdc-spacing-xxs;
       line-height: 0;
       float: right;

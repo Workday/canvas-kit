@@ -38,7 +38,6 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
           (specifier.type === 'ImportSpecifier' &&
             altImportSpecifier.includes(specifier.imported.name))
         ) {
-          console.log('here!', specifier.imported.name);
           importedComponentNames.push(specifier.imported.name);
           hasStackImports = true;
         }
