@@ -1,10 +1,14 @@
 import {Meta, Story} from '@storybook/addon-docs';
-import {
-  AreaColumnPositioning,
-  CustomColumnPositioning,
-  CustomColumnWidth,
-  ResponsiveColumns,
-} from './examples/Layouts';
+
+import {AreaColumnPositioning} from './examples/layout/AreaColumnPositioning';
+import {CustomColumnPositioning} from './examples/layout/CustomColumnPositioning';
+import {CustomColumnWidth} from './examples/layout/CustomColumnWidth';
+import {FullWidthWith3Columns} from './examples/layout/FullWidthWith3Columns';
+import {FullWidthWith3Columns2Rows} from './examples/layout/FullWidthWith3Columns2Rows';
+import {Masonry} from './examples/layout/Masonry';
+import {ResponsiveColumns} from './examples/layout/ResponsiveColumns';
+import {Tiled2and3Columns} from './examples/layout/Tiled2and3Columns';
+import {Tiled4and2Columns} from './examples/layout/Tiled4and2Columns';
 
 <Meta title="Examples/Layouts" />
 
@@ -26,6 +30,26 @@ Below are layout examples to reference as you build your own. For more in-depth 
 
 <ExampleCodeBlock code={CustomColumnWidth} />
 
+## Full Width With 3 Columns
+
+<ExampleCodeBlock code={FullWidthWith3Columns} />
+
+## Full Width With 3 Columns and 2 Rows
+
+<ExampleCodeBlock code={FullWidthWith3Columns2Rows} />
+
+## Mansory
+
+<ExampleCodeBlock code={Masonry} />
+
 ## Responsive Columns
 
 <ExampleCodeBlock code={ResponsiveColumns} />
+
+## Tiled 2 and 3 Columns
+
+<ExampleCodeBlock code={Tiled2and3Columns} />
+
+## Tiled 4 and 2 Columns
+
+<ExampleCodeBlock code={Tiled4and2Columns} />
