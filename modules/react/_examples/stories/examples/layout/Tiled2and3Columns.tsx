@@ -18,18 +18,18 @@ export const Tiled2and3Columns = () => (
     <Box gridArea="Heading" paddingX="s" border={`1px solid ${colors.blueberry400}`}>
       <Heading size="medium">3 and 2 Column Tiled View</Heading>
     </Box>
-    <FormSkeleton gridArea="FormThirdLeft" />
-    <FormSkeleton gridArea="FormThirdCenter" />
-    <FormSkeleton gridArea="FormThirdRight" />
-    <FormSkeleton gridArea="FormHalfRight" />
-    <FormSkeleton gridArea="FormHalfLeft" />
+    <FormSkeleton gridArea="FormThirdLeft" text="Form - Left Third" />
+    <FormSkeleton gridArea="FormThirdCenter" text="Form - Center Third" />
+    <FormSkeleton gridArea="FormThirdRight" text="Form - Right Third" />
+    <FormSkeleton gridArea="FormHalfRight" text="Form - Left Half" />
+    <FormSkeleton gridArea="FormHalfLeft" text="Form - Right Half" />
   </Grid>
 );
 
-const FormSkeleton = props => (
-  <Box border={`1px dashed ${colors.blueberry400}`} paddingX="m" {...props}>
+const FormSkeleton = ({gridArea, text}) => (
+  <Box border={`1px dashed ${colors.blueberry400}`} paddingX="m" gridArea={gridArea}>
     <BodyText size="small" fontWeight="bold">
-      {props.gridArea} Area
+      {text}
     </BodyText>
     {Array.from({length: 3}).map(() => (
       <Grid gridGap="s" marginBottom="xl">

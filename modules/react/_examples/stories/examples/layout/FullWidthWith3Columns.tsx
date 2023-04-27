@@ -12,18 +12,18 @@ export const FullWidthWith3Columns = () => (
     gridColumnGap="xxxl"
   >
     <Box gridArea="Heading" paddingX="s" border={`1px solid ${colors.blueberry400}`}>
-      <Heading size="medium">Custom Column Width</Heading>
+      <Heading size="medium">Full Width With 3 Columns</Heading>
     </Box>
-    <FormSkeleton gridArea="FormLeft" />
-    <FormSkeleton gridArea="FormCenter" />
-    <FormSkeleton gridArea="FormRight" />
+    <FormSkeleton gridArea="FormLeft" text="Form - Left Third" />
+    <FormSkeleton gridArea="FormCenter" text="Form - Center Third" />
+    <FormSkeleton gridArea="FormRight" text="Form - Right Third" />
   </Grid>
 );
 
-const FormSkeleton = props => (
-  <Box border={`1px dashed ${colors.blueberry400}`} paddingX="m" {...props}>
+const FormSkeleton = ({gridArea, text}) => (
+  <Box border={`1px dashed ${colors.blueberry400}`} paddingX="m" gridArea={gridArea}>
     <BodyText size="small" fontWeight="bold">
-      {props.gridArea} Area
+      {text}
     </BodyText>
     {Array.from({length: 5}).map(() => (
       <Grid gridGap="s" marginBottom="xl">
