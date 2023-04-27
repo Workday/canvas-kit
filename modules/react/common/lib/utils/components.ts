@@ -1,5 +1,6 @@
 import React from 'react';
 import {assert} from './assert';
+import {memoize} from './memoize';
 import {mergeProps} from './mergeProps';
 import {Model} from './models';
 
@@ -122,14 +123,18 @@ type ExtractMaybeModel<TComponent, P> = TComponent extends {__model: infer M} //
   ? P & PropsWithModel<M>
   : P;
 
-export type PropsWithModel<TModel = never> = {
+/**
+ * `PropsWithModel` adds the `model` and `elemPropsHook` props. If a model-based component has an
+ * `as` referencing another model-based component, the `model` of the `as` component should win.
+ */
+export type PropsWithModel<TModel, ElementType = {}> = {
   /**
    * Optional model to pass to the component. This will override the default model created for the
    * component. This can be useful if you want to access to the state and events of the model, or if
    * you have nested components of the same type and you need to override the model provided by
    * React Context.
    */
-  model?: TModel;
+  model?: ElementType extends {__model: infer M} ? M : TModel; // If the `ElementType` is a `ElementComponentM`, extract the model. Otherwise fall back to the `TModel` type
   /**
    * Optional hook that receives the model and all props to be applied to the element. If you use
    * this, it is your responsibility to return props, merging as appropriate. For example, returning
@@ -172,7 +177,7 @@ export type ElementComponentM<E extends React.ElementType, P, TModel> = {
   displayName?: string;
   <ElementType extends React.ElementType>(
     props: PropsWithoutAs<P, ElementType> &
-      PropsWithModel<TModel> & {
+      PropsWithModel<TModel, ElementType> & {
         /**
          * Optional override of the default element used by the component. Any valid tag or Component.
          * If you provided a Component, this component should forward the ref using `React.forwardRef`
@@ -283,7 +288,7 @@ export const createContainer = <
     SubComponents => {
     const ReturnedComponent = React.forwardRef<E, Props & {as?: React.ElementType} & {model?: any}>(
       ({as: asOverride, model, ...props}, ref) => {
-        const localModel = useDefaultModel(model, props, modelHook);
+        const localModel = useDefaultModel(model, props, modelHook, asOverride);
         const elemProps = ((modelHook as any).getElemProps || defaultGetElemProps)(props);
         const finalElemProps = elemPropsHook
           ? (elemPropsHook as any)(localModel, elemProps, ref)
@@ -316,6 +321,17 @@ export const createContainer = <
       }
     });
     ReturnedComponent.displayName = displayName;
+    (ReturnedComponent as any).__hasModel = true;
+
+    // The `any`s are here because `ElementComponent` takes care of the `as` type and the
+    // `ReturnComponent` type is overridden
+    (ReturnedComponent as any).as = memoize(
+      (as: any) =>
+        createContainer(as)({displayName, subComponents, modelHook, elemPropsHook})(
+          Component as any
+        ),
+      as => as
+    );
 
     // Cast as `any`. We have already specified the return type. Be careful making changes to this
     // file due to this `any` `ReturnedComponent` is a `React.ForwardRefExoticComponent`, but we want
@@ -399,10 +415,16 @@ export const createSubcomponent = <
       E,
       Props & {as?: React.ElementType} & {model?: any; elemPropsHook?: (...args: any) => any}
     >(({as: asOverride, model, elemPropsHook: additionalPropsHook, ...props}, ref) => {
-      const localModel = useModelContext(modelHook.Context!, model);
+      const localModel = useModelContext(modelHook.Context!, model, asOverride);
+      // maybeModelProps reattached the `model` prop if the passed model is incompatible with the
+      // modelHook's context. This fixes issues when using the `as` prop on model element components
+      // that both have a model
+      const maybeModelProps =
+        model && localModel !== model ? {...props, model, ref} : {...props, ref};
+
       const elemProps = elemPropsHook
-        ? (elemPropsHook as any)(localModel, props, ref)
-        : {...props, ref};
+        ? (elemPropsHook as any)(localModel, maybeModelProps, ref)
+        : maybeModelProps;
 
       return Component(
         additionalPropsHook ? additionalPropsHook(localModel, elemProps, ref) : elemProps,
@@ -424,6 +446,17 @@ export const createSubcomponent = <
     if (displayName) {
       ReturnedComponent.displayName = displayName;
     }
+    (ReturnedComponent as any).__hasModel = true;
+
+    // The `any`s are here because `ElementComponent` takes care of the `as` type and the
+    // `ReturnComponent` type is overridden
+    (ReturnedComponent as any).as = memoize(
+      (as: any) =>
+        createSubcomponent(as)({displayName, subComponents, modelHook, elemPropsHook})(
+          Component as any
+        ),
+      as => as
+    );
 
     // Cast as `any`. We have already specified the return type. Be careful making changes to this
     // file due to this `any` `ReturnedComponent` is a `React.ForwardRefExoticComponent`, but we want
@@ -510,8 +543,10 @@ export const createComponent = <
 
   // The `any`s are here because `ElementComponent` takes care of the `as` type and the
   // `ReturnComponent` type is overridden
-  (ReturnedComponent as any).as = (as: any) =>
-    createComponent(as)({displayName, Component, subComponents});
+  (ReturnedComponent as any).as = memoize(
+    (as: any) => createComponent(as)({displayName, Component, subComponents}),
+    as => as
+  );
 
   // Cast as `any`. We have already specified the return type. Be careful making changes to this
   // file due to this `any` `ReturnedComponent` is a `React.ForwardRefExoticComponent`, but we want
@@ -770,9 +805,22 @@ export function useLocalRef<T>(ref?: React.Ref<T>) {
 export function useDefaultModel<T, C>(
   model: T | undefined,
   config: C,
-  modelHook: (config: C) => T
+  modelHook: (config: C) => T,
+  as?: React.ElementType
 ) {
-  return model || modelHook(config);
+  // Make sure we don't pass the `model` to a component if it is incompatible with that component.
+  // Otherwise we'll have strange runtime failures when a component or elemProps hooks try to
+  // access the `state` or `events`
+  if (
+    !model ||
+    (as &&
+      (as as any).__hasModel &&
+      (model as any).__UNSTABLE_modelContext !== (modelHook as any).Context)
+  ) {
+    return modelHook(config);
+  }
+
+  return model;
 }
 
 /**
@@ -782,14 +830,25 @@ export function useDefaultModel<T, C>(
  * @param context The context of a model
  * @example
  * const SubComponent = ({children, model, ...elemProps}: SubComponentProps, ref, Element) => {
- *   const {state, events} = useModelContext(model, SubComponentModelContext);
+ *   const {state, events} = useModelContext(model, SubComponentModelContext, Element);
  *
  *   // ...
  * }
  */
-export function useModelContext<T>(context: React.Context<T>, model?: T): T {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  return model || React.useContext(context);
+export function useModelContext<T>(
+  context: React.Context<T>,
+  model?: T,
+  as?: React.ElementType
+): T {
+  const contextModel = React.useContext(context);
+  if (
+    !model ||
+    (as && (as as any).__hasModel && (model as any).__UNSTABLE_modelContext !== context)
+  ) {
+    return contextModel;
+  }
+
+  return model;
 }
 
 /**

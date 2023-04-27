@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {render} from '@testing-library/react';
+import {screen, render} from '@testing-library/react';
 import {FormField} from '../lib/FormField';
 import {ErrorType} from '@workday/canvas-kit-react/common';
 
@@ -36,15 +36,26 @@ describe('FormField', () => {
   });
 
   describe('when rendered as required', () => {
-    it('should add a required element to the label to indicate that it is required', () => {
+    it('should add a required attribute to the input', () => {
       const label = 'Label';
-      const {getByText} = render(
+      render(
         <FormField label={label} required={true}>
           <input type="text" />
         </FormField>
       );
 
-      expect(getByText('*')).toHaveAttribute('title', 'required');
+      expect(screen.getByRole('textbox', {name: 'Label'})).toHaveAttribute('required');
+    });
+
+    it('should render an asterisk', () => {
+      const label = 'Label';
+      render(
+        <FormField label={label} required={true}>
+          <input type="text" />
+        </FormField>
+      );
+
+      expect(screen.getByText('*')).toBeInTheDocument();
     });
   });
 
