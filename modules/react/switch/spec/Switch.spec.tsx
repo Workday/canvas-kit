@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {render, fireEvent} from '@testing-library/react';
-import Switch from '../lib/Switch';
+import {Switch} from '../lib/Switch';
 
 describe('Switch', () => {
   const cb = jest.fn();
@@ -34,7 +34,7 @@ describe('Switch', () => {
 
     test('should have a "pointer" cursor', () => {
       const {getByRole} = render(<Switch onChange={cb} />);
-      expect(getByRole(role)).toHaveStyleRule('cursor', 'pointer');
+      expect(getByRole(role)).toHaveStyle({cursor: 'pointer'});
     });
   });
 
@@ -90,7 +90,7 @@ describe('Switch', () => {
     });
     it('should have a "not-allowed" cursor', () => {
       const {getByRole} = render(<Switch disabled={true} onChange={cb} />);
-      expect(getByRole(role)).toHaveStyleRule('cursor', 'not-allowed');
+      expect(getByRole(role)).toHaveStyle({cursor: 'not-allowed'});
     });
   });
 

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {screen, render} from '@testing-library/react';
 
-import TableRow from '../lib/TableRow';
+import {TableRow} from '../lib/TableRow';
 
 describe('TableRow', () => {
   it('should apply a custom class', () => {

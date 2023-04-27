@@ -5,7 +5,6 @@ export const useFormFieldModel = createModelHook({
     /**
      * Optional flag to denote if this field has an error to display. When true the `FormField.Input` will have
      * `required` set to true, and usually some subcomponents will have a error color applied.
-     * @default false
      */
     hasError: false,
     /**
@@ -16,13 +15,12 @@ export const useFormFieldModel = createModelHook({
      * - `FormField.Hint` will set `id` to `hint-${id}`
      *
      * If a value is not provided, a unique id will be automatically created by `useUniqueId()`.
-     * @default `useUniqueId()`
+     * @default {useUniqueId}
      */
     id: '',
     /**
      * Optional flag to denote if this field is required. When true the `FormField.Input` will have
      * `required` set to true, and an asterisk will be appended to the `FormField.Label`.
-     * @default false
      */
     isRequired: false,
   },

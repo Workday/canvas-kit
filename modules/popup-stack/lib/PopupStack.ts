@@ -50,20 +50,6 @@ export function getValue(index: number, length: number): number {
   return Math.max(min, max - (length - index) + 1);
 }
 
-// IE11 doesn't support Array.prototype.find, so we'll polyfill here
-function find<T>(
-  items: T[],
-  predicate: (value: T, index: number, obj: T[]) => boolean
-): T | undefined {
-  const length = items.length;
-  for (let i = 0; i < length; i++) {
-    if (predicate(items[i], i, items)) {
-      return items[i];
-    }
-  }
-  return;
-}
-
 /**
  * Sets the z-index value of all elements in the stack according to the `getValue` function. This
  * will be run any time the stack changes.
@@ -82,7 +68,7 @@ function setZIndexOfElements(elements: HTMLElement[]): void {
 function getOwnerPopup(element: HTMLElement, items: PopupStackItem[]): HTMLElement | undefined {
   let parentEl: HTMLElement | null = element;
   do {
-    const owner = find(items, el => el.element === parentEl);
+    const owner = items.find(el => el.element === parentEl);
     if (owner) {
       return owner.element;
     }
@@ -202,6 +188,24 @@ function getTopStack() {
   return stacks[stacks.length - 1];
 }
 
+/**
+ * The `PopupStack` is a framework agnostic first-in-last-out (FILO) stack that tracks all popups
+ * ("floating UI" or any UI that renders on top of other content). It contains methods that interact
+ * with the stack to support all coordinating behaviors of all popups on the page. The `PopupStack`
+ * helps:
+ *
+ * - Render popups in the right order on the page
+ * - Helps accessibility with the Escape key (topmost popup is closed)
+ * - Handles transition to [Full
+ *   Screen](https://developer.mozilla.org/en-US/docs/Web/API/Fullscreen_API)
+ *
+ * The `PopupStack` supports adapters to work with existing popup systems. {@link createAdapter} is
+ * exported to accept an adapter. Only a single adapter should be used per page.
+ *
+ * The `PopupStack` is designed to handle multiple versions of `PopupStack` on the page at once
+ * while the internal FILO stack is shared between instances. You should not attempt to use the
+ * internal FILO stack. If an adapter is used, the internal FILO stack may be empty.
+ */
 export const PopupStack = {
   /**
    * Create a HTMLElement as the container for the popup stack item. The returned element reference
@@ -245,10 +249,7 @@ export const PopupStack = {
    */
   remove(element: HTMLElement): void {
     // Find the stack the popup belongs to.
-    const stack = find(
-      stacks,
-      stack => !!find(PopupStack.getElements(stack), el => el === element)
-    );
+    const stack = stacks.find(stack => !!PopupStack.getElements(stack).find(el => el === element));
     if (stack) {
       if (stack._adapter?.remove) {
         stack._adapter.remove(element);
@@ -310,7 +311,7 @@ export const PopupStack = {
       stack._adapter.bringToTop(element);
       return;
     }
-    const item = find(stack.items, i => i.element === element);
+    const item = stack.items.find(i => i.element === element);
 
     if (item) {
       stack.items = [...stack.items.filter(i => i !== item), item];
@@ -349,7 +350,7 @@ export const PopupStack = {
     if (stack._adapter?.contains) {
       return stack._adapter.contains(element, eventTarget);
     }
-    const item = find(stack.items, i => i.element === element);
+    const item = stack.items.find(i => i.element === element);
 
     const containsOwnerOfAnotherPopupTargeted = stack.items.some(currentItem => {
       return (
@@ -437,14 +438,14 @@ export const PopupStack = {
       return stack._adapter.transferToCurrentContext(item);
     }
 
-    if (find(stack.items, i => i.element === item.element)) {
+    if (stack.items.find(i => i.element === item.element)) {
       // The element is already in the stack, don't do anything
       return;
     }
 
     // Try to find the element in existing stacks. If it exists, we need to first remove from that
     // stack context
-    const oldStack = find(stacks, stack => !!find(stack.items, i => i.element === item.element));
+    const oldStack = stacks.find(stack => !!stack.items.find(i => i.element === item.element));
     if (oldStack) {
       PopupStack.remove(item.element);
     }
@@ -462,6 +463,10 @@ export function resetStack() {
 }
 
 /**
+ * An adapter is a custom implementation of the {@link PopupStack}. There is only ever a single
+ * instance of an adapter on the page. It allows an adapter to intercept any `PopupStack` method.
+ * This could bypass the internal FILO stack of the `PopupStack` and allows the FILO stack to be
+ * handled by something else.
  *
  * @param adapter The parts of the PopupStack that we want to override
  */

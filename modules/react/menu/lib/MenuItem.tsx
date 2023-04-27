@@ -44,11 +44,10 @@ const StyledItem = styled(Box.as('button'))<StyledType>(
   ({theme}) => {
     return {
       ...type.levels.subtext.large,
-      '& > *:not(style) ~ *:not(style)': {
-        marginLeft: space.xxs,
-      },
-      display: 'block',
+      display: 'grid',
+      alignItems: 'center',
       width: '100%',
+      gap: space.s,
       padding: `${space.xxs} ${space.s}`,
       boxSizing: 'border-box',
       cursor: 'pointer',
@@ -177,7 +176,7 @@ export const MenuItem = createSubcomponent('button')({
   modelHook: useMenuModel,
   elemPropsHook: useMenuItem,
   subComponents: {
-    Icon: SystemIcon,
+    Icon: styled(SystemIcon)({alignSelf: 'start'}),
     Text: styled('span')({flexGrow: 1, alignSelf: 'center'}),
   },
 })<MenuItemProps>(({children, ...elemProps}, Element) => {

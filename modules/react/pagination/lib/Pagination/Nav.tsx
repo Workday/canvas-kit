@@ -5,11 +5,10 @@ export interface PaginationNavProps extends Omit<FlexProps, 'as'> {
   'aria-label': string;
 }
 
-export const PaginationNav = ({'aria-label': ariaLabel, ...elemProps}: PaginationNavProps) => {
+export const PaginationNav = (elemProps: PaginationNavProps) => {
   return (
     <Flex
       as="nav"
-      aria-label={ariaLabel}
       display="inline-flex"
       flexDirection="column"
       alignItems="center"

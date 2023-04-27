@@ -3,7 +3,7 @@ import {storiesOf} from '@storybook/react';
 
 import {deprecated_Button as Button} from '@workday/canvas-kit-react/button';
 
-storiesOf('Components/Buttons/Button/React/Deprecated', module)
+storiesOf('Components/Buttons/Deprecated', module)
   .addParameters({component: Button})
   .addParameters({ReadmePath: 'react/button'})
   .add('Primary', () => (

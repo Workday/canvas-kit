@@ -1,27 +1,31 @@
 import * as React from 'react';
-import {type, typeColors} from '@workday/canvas-kit-react/tokens';
-
 import {PaginationModel} from '../types';
-import {StyledType, styled} from '@workday/canvas-kit-react/common';
+import {LabelText} from '@workday/canvas-kit-react/text';
+import {createComponent} from '@workday/canvas-kit-react/common';
+import {PaginationContext} from '../usePaginationModel';
 
-export interface GoToLabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> {
-  model: PaginationModel;
+export interface GoToLabelProps {
   /**
    * Accepts child elements or a render prop.
    */
   children?: (model: PaginationModel) => React.ReactNode | React.ReactNode;
 }
 
-const StyledLabel = styled('label')<StyledType>({
-  ...type.levels.subtext.medium,
-  color: typeColors.hint,
-  whiteSpace: 'nowrap',
+export const GoToLabel = createComponent('label')({
+  displayName: 'Pagination.GoToLabel',
+  Component({children, ...elemProps}: GoToLabelProps, ref, Element) {
+    const model = React.useContext(PaginationContext);
+    return (
+      <LabelText
+        ref={ref}
+        as={Element}
+        typeLevel="subtext.medium"
+        variant="hint"
+        whiteSpace="nowrap"
+        {...elemProps}
+      >
+        {typeof children === 'function' ? children(model) : children}
+      </LabelText>
+    );
+  },
 });
-
-export const GoToLabel = ({model, children, ...elemProps}: GoToLabelProps) => {
-  return (
-    <StyledLabel {...elemProps}>
-      {typeof children === 'function' ? children(model) : children}
-    </StyledLabel>
-  );
-};

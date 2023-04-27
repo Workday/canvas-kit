@@ -7,7 +7,7 @@ describe('Radio', () => {
   ['Basic', 'Alert', 'Error'].forEach(story => {
     context(`given the '${story}' story is rendered`, () => {
       beforeEach(() => {
-        h.stories.load('Components/Inputs/Radio/React', story);
+        h.stories.load('Components/Inputs/Radio', story);
       });
 
       it('should not have any axe errors', () => {
@@ -46,7 +46,7 @@ describe('Radio', () => {
 
   context(`given the 'Disabled' story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Components/Inputs/Radio/React', 'Disabled');
+      h.stories.load('Components/Inputs/Radio', 'Disabled');
     });
 
     it('should not have any axe errors', () => {

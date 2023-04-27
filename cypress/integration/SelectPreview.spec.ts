@@ -43,7 +43,7 @@ describe('Select', () => {
   ['Default', 'Alert', 'Error'].forEach(story => {
     context(`given the "${story}" story is rendered`, () => {
       beforeEach(() => {
-        h.stories.load('Preview/Select/React/Top Label', story);
+        h.stories.load('Preview/Select/Top Label', story);
       });
 
       it('should not have any axe errors', () => {
@@ -166,7 +166,7 @@ describe('Select', () => {
 
         context('when the down arrow key is pressed', () => {
           beforeEach(() => {
-            cy.focused().type('{downarrow}');
+            cy.focused().realType('{downarrow}');
           });
 
           context('the select button', () => {
@@ -191,7 +191,7 @@ describe('Select', () => {
 
           context('when the down arrow key is pressed for a second time', () => {
             beforeEach(() => {
-              cy.focused().type('{downarrow}');
+              cy.focused().realType('{downarrow}');
             });
 
             context('the menu', () => {
@@ -205,7 +205,7 @@ describe('Select', () => {
 
             context('when the down arrow key is pressed for a third time', () => {
               beforeEach(() => {
-                cy.focused().type('{downarrow}');
+                cy.focused().realType('{downarrow}');
               });
 
               context('the menu', () => {
@@ -221,7 +221,7 @@ describe('Select', () => {
                 beforeEach(() => {
                   cy.findByLabelText('Label')
                     .pipe(h.selectPreview.getMenu)
-                    .type('{enter}');
+                    .realType('{enter}');
                 });
 
                 context('the select button', () => {
@@ -248,7 +248,7 @@ describe('Select', () => {
 
                 context('when the menu is expanded again', () => {
                   beforeEach(() => {
-                    cy.focused().type('{downarrow}');
+                    cy.focused().realType('{downarrow}');
                   });
 
                   context('the menu', () => {
@@ -275,7 +275,7 @@ describe('Select', () => {
               beforeEach(() => {
                 cy.findByLabelText('Label')
                   .pipe(h.selectPreview.getMenu)
-                  .type('{uparrow}');
+                  .realType('{uparrow}');
               });
 
               context('the menu', () => {
@@ -292,7 +292,7 @@ describe('Select', () => {
 
         context('when the enter key is pressed', () => {
           beforeEach(() => {
-            cy.findByLabelText('Label').type('{enter}');
+            cy.findByLabelText('Label').realType('{enter}');
           });
 
           context('the select button', () => {
@@ -339,14 +339,14 @@ describe('Select', () => {
 
   context(`given the "Default" story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Preview/Select/React/Top Label', 'Default');
+      h.stories.load('Preview/Select/Top Label', 'Default');
     });
 
     context('when the menu is opened', () => {
       beforeEach(() => {
         cy.findByLabelText('Label')
           .focus()
-          .type('{downarrow}');
+          .realType('{downarrow}');
       });
 
       context('the menu', () => {
@@ -360,7 +360,7 @@ describe('Select', () => {
 
       context('when focus is advanced to the second option ("Phone")', () => {
         beforeEach(() => {
-          cy.focused().type('{downarrow}');
+          cy.focused().realType('{downarrow}');
         });
 
         context('the menu', () => {
@@ -376,7 +376,7 @@ describe('Select', () => {
           'when the menu is closed WITHOUT selecting the newly focused option ("Phone")',
           () => {
             beforeEach(() => {
-              cy.focused().type('{esc}');
+              cy.focused().realType('{esc}');
             });
 
             context('when the menu is re-opened AFTER it has fully closed', () => {
@@ -389,7 +389,7 @@ describe('Select', () => {
                   .should('not.exist');
                 cy.findByLabelText('Label')
                   .focus()
-                  .type('{downarrow}');
+                  .realType('{downarrow}');
               });
 
               context('the menu', () => {
@@ -404,7 +404,7 @@ describe('Select', () => {
 
             context('when the menu is re-opened BEFORE it has fully closed', () => {
               beforeEach(() => {
-                cy.focused().type('{downarrow}');
+                cy.focused().realType('{downarrow}');
               });
 
               context('the menu', () => {
@@ -427,7 +427,7 @@ describe('Select', () => {
 
   context(`given the "Disabled" story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Preview/Select/React/Top Label', 'Disabled');
+      h.stories.load('Preview/Select/Top Label', 'Disabled');
     });
 
     it('should not have any axe errors', () => {
@@ -443,14 +443,14 @@ describe('Select', () => {
 
   context('given the "Disabled Options Test" story is rendered', () => {
     beforeEach(() => {
-      h.stories.load('Testing/React/Preview/Select/Cypress', 'Disabled Options Test');
+      h.stories.load('Testing/Preview/Select/Cypress', 'Disabled Options Test');
     });
 
     context('when the menu is opened', () => {
       beforeEach(() => {
         cy.findByLabelText('Label (Disabled Options)')
           .focus()
-          .type('{downarrow}');
+          .realType('{downarrow}');
       });
 
       context('the "Carrier Pigeon" option', () => {
@@ -463,7 +463,7 @@ describe('Select', () => {
 
       context('when the down arrow key is pressed', () => {
         beforeEach(() => {
-          cy.focused().type('{downarrow}');
+          cy.focused().realType('{downarrow}');
         });
 
         context('the menu', () => {
@@ -477,7 +477,7 @@ describe('Select', () => {
 
         context('when the up arrow key is pressed', () => {
           beforeEach(() => {
-            cy.focused().type('{uparrow}');
+            cy.focused().realType('{uparrow}');
           });
 
           context('the menu', () => {
@@ -492,7 +492,7 @@ describe('Select', () => {
 
         context('when the down arrow key is pressed 2 more times', () => {
           beforeEach(() => {
-            cy.focused().type('{downarrow}{downarrow}');
+            cy.focused().realType('{downarrow}{downarrow}');
           });
 
           context('the menu', () => {
@@ -506,7 +506,7 @@ describe('Select', () => {
 
           context('when the down arrow key is pressed 2 more times', () => {
             beforeEach(() => {
-              cy.focused().type('{downarrow}{downarrow}');
+              cy.focused().realType('{downarrow}{downarrow}');
             });
 
             context('the menu', () => {
@@ -523,7 +523,7 @@ describe('Select', () => {
 
       context('when the Home key is pressed', () => {
         beforeEach(() => {
-          cy.focused().type('{home}');
+          cy.focused().realType('{home}');
         });
 
         context('the menu', () => {
@@ -538,7 +538,7 @@ describe('Select', () => {
 
       context('when the End key is pressed', () => {
         beforeEach(() => {
-          cy.focused().type('{end}');
+          cy.focused().realType('{end}');
         });
 
         context('the menu', () => {
@@ -555,7 +555,7 @@ describe('Select', () => {
 
   context(`given the "Scrollable" story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Preview/Select/React/Top Label', 'Scrollable');
+      h.stories.load('Preview/Select/Top Label', 'Scrollable');
     });
 
     context('when the select button is focused', () => {
@@ -568,7 +568,7 @@ describe('Select', () => {
         () => {
           context('when "s" is typed', () => {
             beforeEach(() => {
-              cy.findByLabelText('Label').type('s');
+              cy.findByLabelText('Label').realType('s');
             });
 
             context('the select button', () => {
@@ -584,7 +584,7 @@ describe('Select', () => {
 
           context('when "s{500ms delay}s" is typed', () => {
             beforeEach(() => {
-              cy.findByLabelText('Label').type('ss', {delay: 500});
+              cy.findByLabelText('Label').realType('ss', {delay: 500});
             });
 
             context('the select button', () => {
@@ -596,7 +596,7 @@ describe('Select', () => {
 
           context('when "s{500ms delay}d" is typed', () => {
             beforeEach(() => {
-              cy.findByLabelText('Label').type('sd', {delay: 500});
+              cy.findByLabelText('Label').realType('sd', {delay: 500});
             });
 
             context('the select button', () => {
@@ -613,7 +613,7 @@ describe('Select', () => {
         () => {
           context('when "sa" is typed', () => {
             beforeEach(() => {
-              cy.findByLabelText('Label').type('sa');
+              cy.findByLabelText('Label').realType('sa');
             });
 
             context('the select button', () => {
@@ -625,7 +625,7 @@ describe('Select', () => {
 
           context('when "san " is typed', () => {
             beforeEach(() => {
-              cy.findByLabelText('Label').type('san ');
+              cy.findByLabelText('Label').realType('san ');
             });
 
             context('the select button', () => {
@@ -637,7 +637,7 @@ describe('Select', () => {
 
           context('when "san m" is typed', () => {
             beforeEach(() => {
-              cy.findByLabelText('Label').type('san m');
+              cy.findByLabelText('Label').realType('san m');
             });
 
             context('the select button', () => {
@@ -657,7 +657,7 @@ describe('Select', () => {
       // typeahead string
       // context('when "san " is typed', () => {
       //   beforeEach(() => {
-      //     cy.findByLabelText('Label').type('san ');
+      //     cy.findByLabelText('Label').realType('san ');
       //   });
 
       //   context('the menu', () => {
@@ -682,7 +682,7 @@ describe('Select', () => {
             beforeEach(() => {
               cy.findByLabelText('Label')
                 .pipe(h.selectPreview.getMenu)
-                .type('s');
+                .realType('s');
             });
 
             context('the menu', () => {
@@ -706,7 +706,7 @@ describe('Select', () => {
             beforeEach(() => {
               cy.findByLabelText('Label')
                 .pipe(h.selectPreview.getMenu)
-                .type('ss', {delay: 500});
+                .realType('ss', {delay: 500});
             });
 
             context('the menu', () => {
@@ -730,7 +730,7 @@ describe('Select', () => {
             beforeEach(() => {
               cy.findByLabelText('Label')
                 .pipe(h.selectPreview.getMenu)
-                .type('sd', {delay: 500});
+                .realType('sd', {delay: 500});
             });
 
             context('the menu', () => {
@@ -754,7 +754,7 @@ describe('Select', () => {
             beforeEach(() => {
               cy.findByLabelText('Label')
                 .pipe(h.selectPreview.getMenu)
-                .type('the onto');
+                .realType('the onto');
             });
 
             context('the menu', () => {
@@ -786,7 +786,7 @@ describe('Select', () => {
             beforeEach(() => {
               cy.findByLabelText('Label')
                 .pipe(h.selectPreview.getMenu)
-                .type('sa');
+                .realType('sa');
             });
 
             context('the menu', () => {
@@ -803,7 +803,7 @@ describe('Select', () => {
             beforeEach(() => {
               cy.findByLabelText('Label')
                 .pipe(h.selectPreview.getMenu)
-                .type('san ');
+                .realType('san ');
             });
 
             context('the menu', () => {
@@ -820,7 +820,7 @@ describe('Select', () => {
             beforeEach(() => {
               cy.findByLabelText('Label')
                 .pipe(h.selectPreview.getMenu)
-                .type('san m');
+                .realType('san m');
             });
 
             context('the menu', () => {
@@ -883,7 +883,7 @@ describe('Select', () => {
 
   context(`given the "Portal Test" story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Testing/React/Preview/Select/Cypress', 'Portal Test');
+      h.stories.load('Testing/Preview/Select/Cypress', 'Portal Test');
     });
 
     context('when the page is scrolled to the bottom', () => {
@@ -930,7 +930,7 @@ describe('Select', () => {
 
   context(`given the "Accessibility Test" story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Testing/React/Preview/Select/Cypress', 'Accessibility Test');
+      h.stories.load('Testing/Preview/Select/Cypress', 'Accessibility Test');
     });
 
     context('when the select button with aria-required set to true is clicked', () => {

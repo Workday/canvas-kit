@@ -39,6 +39,19 @@ const SkeletonAnimator = styled('div')<SkeletonProps & StyledType>({
   position: 'relative',
 });
 
+/**
+ * Skeleton subcomponents **must** be wrapped by the `Skeleton` container component.
+ *
+ * ```tsx
+ * <Skeleton>
+ *   <Skeleton.Header />
+ *   <Skeleton.Text />
+ * </Skeleton>
+ * ```
+ *
+ * `Skeleton` places its children in a container element with `aria-hidden` set to `true` and
+ * announces itself using a visually hidden element.
+ */
 export const Skeleton = createComponent('div')({
   displayName: 'Skeleton',
   Component: (
@@ -53,8 +66,21 @@ export const Skeleton = createComponent('div')({
     </SkeletonAnimator>
   ),
   subComponents: {
+    /**
+     * `Skeleton.Header` renders a placeholder for header content such as headings.
+     */
     Header: SkeletonHeader,
-    Shape: SkeletonShape,
+    /**
+     * `Skeleton.Text` renders a placeholder for text content such as paragraphs. Each placeholder
+     * line has a width of `100%` and a fixed height of `21px`, with the last line having a width of
+     * `60%` if there are multiple lines.
+     */
     Text: SkeletonText,
+    /**
+     * `Skeleton.Shape` renders a placeholder for graphic elements such as icons, avatars and small
+     * images. Set the `height`, `width`, and `borderRadius` props of the `Skeleton.Shape` to create
+     * various rectangular and circular shapes.
+     */
+    Shape: SkeletonShape,
   },
 });

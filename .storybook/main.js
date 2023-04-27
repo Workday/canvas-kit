@@ -1,6 +1,5 @@
-const path = require('path');
+const path = require('node:path');
 const createCompiler = require('@storybook/addon-docs/mdx-compiler-plugin');
-const DocgenPlugin = require('./docgen-plugin');
 
 const modulesPath = path.resolve(__dirname, '../modules');
 const getSpecifications = require('../modules/docs/utils/get-specifications');
@@ -20,6 +19,7 @@ module.exports = {
     },
     './readme-panel/preset.js',
     '@storybook/addon-storysource',
+    '@storybook/addon-postcss',
   ],
   typescript: {
     check: false,
@@ -29,9 +29,22 @@ module.exports = {
     // Get the specifications object and replace with a real object in the spec.ts file
     const specs = await getSpecifications();
 
-    // modules/specifications/lib/specs.ts
+    /**
+     * This was added to tell webpack not to parse the typescript.js file in node_modules and suppress these warnings:
+     * WARN Module not found: Error: Can't resolve 'perf_hooks' in 'node_modules/typescript/lib'
+     * WARN resolve 'perf_hooks' in 'node_modules/typescript/lib
+     * 
+     * These warnings relate to this open GitHub issue: https://github.com/microsoft/TypeScript/issues/39436
+     * If you no longer see these warnings when this is config is removed, you can safely delete this config.
+    */ 
+    config.module = {
+      ...config.module,
+      // This solution was taken from this comment: https://github.com/microsoft/TypeScript/issues/39436#issuecomment-817029140
+      noParse: [require.resolve('typescript/lib/typescript.js')],
+    }
+
     config.module.rules.push({
-      test: /specs\.ts$/,
+      test: /.ts$/,
       include: [path.resolve(__dirname, '../modules/docs')],
       use: [
         {
@@ -43,6 +56,7 @@ module.exports = {
         },
       ],
     });
+
     /**
      * Added this because Storybook 6.3 is on emotion 10, so we rewrote the imports to point to emotion 11
      * https://github.com/storybookjs/storybook/issues/13145
@@ -58,7 +72,7 @@ module.exports = {
 
     // Update @storybook/addon-docs webpack rules to load all .mdx files in storybook
     const mdxRule = config.module.rules.find(rule => rule.test.toString() === /\.mdx$/.toString());
-    mdxRule.use.find(loader => loader.loader.includes('@mdx-js')).options['compilers'] = [
+    mdxRule.use.find(loader => loader.loader.includes('mdx1-csf')).options['compilers'] = [
       createCompiler({}),
     ];
 
@@ -102,6 +116,18 @@ module.exports = {
       enforce: 'pre',
     });
 
+    config.module.rules.push({
+      test: /.+\.tsx?$/,
+      include: [modulesPath],
+      exclude: /examples|stories|spec|codemod|docs/,
+      loaders: [
+        {
+          loader: path.resolve(__dirname, 'symbol-doc-loader'),
+        },
+      ],
+      enforce: 'pre',
+    });
+
     // Load our scss files with postscss.
     // Note: This is the same as @storybook/preset-scss, but with postcss added.
     config.module.rules.push({
@@ -117,8 +143,6 @@ module.exports = {
       ],
       include: modulesPath,
     });
-
-    config.plugins.push(new DocgenPlugin());
 
     // Remove progress updates to reduce log lines in Travis
     // See: https://github.com/storybookjs/storybook/issues/2029

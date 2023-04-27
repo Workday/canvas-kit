@@ -110,9 +110,8 @@ const PoundSignPrefix = styled('span')<Pick<ColorInputProps, 'disabled'>>(
 
 const SwatchTile = styled(ColorSwatch)({
   position: 'absolute',
-  top: 0,
+  top: '10px', // input is 40px high, and the tile is 20 x 20px, this centers the tile
   left: space.xxs,
-  marginTop: '10px', // Fix vertical alignment on IE11
   boxShadow: 'inset 0 0 0 1px rgba(0,0,0,0.25)',
   pointerEvents: 'none',
 });
@@ -184,5 +183,3 @@ export const ColorInput = createComponent('input')({
     );
   },
 });
-
-export default ColorInput;

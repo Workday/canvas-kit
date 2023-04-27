@@ -1,0 +1,119 @@
+import {SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
+
+import {SegmentedControl} from '@workday/canvas-kit-preview-react/segmented-control';
+
+import {Basic} from './examples/Basic';
+import {Disabled} from './examples/Disabled';
+import {TextAndIcon} from './examples/TextAndIcon';
+import {TextOnly} from './examples/TextOnly';
+import {Sizes} from './examples/Sizes';
+import {Vertical} from './examples/Vertical';
+import {RTL} from './examples/RTL';
+import {Dynamic} from './examples/Dynamic';
+
+<Meta title="Preview/Segmented Control" component={SegmentedControl} />
+
+# Canvas Kit Segmented Control
+
+Segmented Control is a
+[compound component](/getting-started/for-developers/resources/compound-components/) that represents
+a linear group of multiple buttons allowing the selection of a specific value.
+
+[> Workday Design Reference](https://design.workday.com/components/buttons/segmented-control)
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-preview-react
+```
+
+## Usage
+
+### Basic Example
+
+`SegmentedControl` includes a container `SegmentedControl` component and the following
+subcomponents: `SegmentedControl.List` and `SegmentedControl.Item`.
+
+The example below contains a `SegmentedControl` with four icon-only buttons. Each button is rendered
+using a `SegmentedControl.Item` and is paired with a tooltip describing the button's function. Only
+one button can be active at a time.
+
+<ExampleCodeBlock code={Basic} />
+
+Note that you must provide `SegmentedControl.List` with an `aria-label` prop for accessibility
+reasons.
+
+We **strongly** discourage including more than four buttons in a single `SegmentedControl`.
+
+### Variations
+
+`SegmentedControl` supports three variations based on whether or not its `SegmentedControl.Item`
+components have an `icon` prop and/or text content: icon-only, text-only, and text-and-icon.
+
+All `SegmentedControl.Item` components within a given `SegmentedControl` must be of the same
+variation.
+
+#### Icon-Only
+
+To render an icon-only `SegmentedControl`, apply the `icon` prop to `SegmentedControl.Item` and do
+not provide it with text content. Refer to the [basic example](#basic-example) above for an instance
+of an icon-only `SegmentedControl`.
+
+The icon-only variation is the only variation which supports a vertical orientation in addition to
+the default horizontal orientation. Set the `orientation` prop of `SegmentedControl` to `vertical`
+to configure the component to render vertically.
+
+<ExampleCodeBlock code={Vertical} />
+
+#### Text-Only
+
+To render a text-only `SegmentedControl`, omit the `icon` prop from `SegmentedControl.Item` and
+provide it with text content.
+
+<ExampleCodeBlock code={TextOnly} />
+
+#### Text-and-Icon
+
+To render a text-and-icon `SegmentedControl`, apply the `icon` prop to `SegmentedControl.Item` and
+provide it with text content.
+
+<ExampleCodeBlock code={TextAndIcon} />
+
+### Sizes
+
+`SegmentedControl` accepts a `size` prop which supports the following values:
+
+- `small`
+- `medium` (Default)
+- `large`
+
+<ExampleCodeBlock code={Sizes} />
+
+### Disabled
+
+Set the `disabled` prop of `SegmentedControl` to disable the entire component including its buttons.
+
+<ExampleCodeBlock code={Disabled} />
+
+### Right-to-Left (RTL)
+
+`SegmentedControl` supports right-to-left languages when specified in the `CanvasProvider` `theme`.
+
+<ExampleCodeBlock code={RTL} />
+
+### Dynamic Items
+
+`SegmentedControl` supports a
+[dynamic API](/getting-started/for-developers/resources/collection-api/#dynamic-items) where instead
+of statically providing the JSX for each `SegmentedControl.Item`, you pass an array of `items` in
+the `model` state and provide a render function to display the items.
+
+<ExampleCodeBlock code={Dynamic} />
+
+## Component API
+
+<SymbolDoc name="SegmentedControl" fileName="/preview-react/" />
+
+## Specifications
+
+<Specifications file="SegmentedControl.spec.ts" name="SegmentedControl" />

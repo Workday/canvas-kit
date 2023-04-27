@@ -13,7 +13,7 @@ describe('Select', () => {
   ['Basic', 'Alert', 'Error'].forEach(story => {
     context(`given the '${story}' story is rendered`, () => {
       beforeEach(() => {
-        h.stories.load('Components/Inputs/Select/React', story);
+        h.stories.load('Components/Inputs/Select', story);
       });
 
       it('should not have any axe errors', () => {
@@ -38,7 +38,7 @@ describe('Select', () => {
 
   context(`given the 'Disabled' story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Components/Inputs/Select/React', 'Disabled');
+      h.stories.load('Components/Inputs/Select', 'Disabled');
     });
 
     it('should not have any axe errors', () => {

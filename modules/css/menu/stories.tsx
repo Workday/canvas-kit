@@ -44,7 +44,7 @@ class WithIconsDemo extends Component {
   }
 }
 
-storiesOf('Components/Popups/Menu/CSS', module)
+storiesOf('CSS/Popups/Menu', module)
   .addParameters({ReadmePath: 'css/menu'})
   .add('Default', () => (
     <div className="story">

@@ -4,6 +4,7 @@ import {
   useAlwaysCloseOnOutsideClick,
   usePopupModel,
   useCloseOnFullscreenExit,
+  useCloseOnTargetHidden,
 } from '@workday/canvas-kit-react/popup';
 import {useUniqueId} from '@workday/canvas-kit-react/common';
 
@@ -128,22 +129,30 @@ export function useTooltip<T extends Element = Element>({
   useCloseOnEscape(popupModel);
   useAlwaysCloseOnOutsideClick(popupModel);
   useCloseOnFullscreenExit(popupModel);
+  useCloseOnTargetHidden(popupModel);
 
   const visible = popupModel.state.visibility !== 'hidden';
 
+  const targetProps = {
+    // extra description of the target element for assistive technology
+    'aria-describedby': type === 'describe' && visible ? id : undefined,
+    // This will replace the accessible name of the target element
+    'aria-label': type === 'label' ? titleText : undefined,
+    onMouseEnter: onOpenFromTarget,
+    onMouseLeave: onHide,
+    onMouseDown,
+    onFocus,
+    onBlur: onHide,
+  };
+
+  // remove `aria-describedby` if undefined to not override what's provided
+  if (targetProps['aria-describedby'] === undefined) {
+    delete targetProps['aria-describedby'];
+  }
+
   return {
     /** Mix these properties into the target element. **Must be an Element** */
-    targetProps: {
-      // extra description of the target element for assistive technology
-      'aria-describedby': type === 'describe' && visible ? id : undefined,
-      // This will replace the accessible name of the target element
-      'aria-label': type === 'label' ? titleText : undefined,
-      onMouseEnter: onOpenFromTarget,
-      onMouseLeave: onHide,
-      onMouseDown,
-      onFocus,
-      onBlur: onHide,
-    },
+    targetProps,
     /** Mix these properties into the `Popper` component */
     popperProps: {
       open: visible,
