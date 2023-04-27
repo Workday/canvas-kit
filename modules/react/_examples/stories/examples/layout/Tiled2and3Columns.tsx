@@ -16,7 +16,7 @@ export const Tiled2and3Columns = () => (
     gridColumnGap="xxxl"
   >
     <Box gridArea="Heading" paddingX="s" border={`1px solid ${colors.blueberry400}`}>
-      <Heading size="medium">Custom Column Width</Heading>
+      <Heading size="medium">3 and 2 Column Tiled View</Heading>
     </Box>
     <FormSkeleton gridArea="FormThirdLeft" />
     <FormSkeleton gridArea="FormThirdCenter" />

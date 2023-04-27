@@ -13,7 +13,7 @@ export const FullWidthWith3Columns2Rows = () => (
     gridColumnGap="xxxl"
   >
     <Box gridArea="Heading" paddingX="s" border={`1px solid ${colors.blueberry400}`}>
-      <Heading size="medium">Custom Column Width</Heading>
+      <Heading size="medium">Full Width With 3 Columns and 2 Rows</Heading>
     </Box>
     <FormSkeleton />
     <FormSkeleton />
