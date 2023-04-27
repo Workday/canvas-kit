@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import {renderToString} from 'react-dom/server';
-import {Flex, Stack, Box} from '../';
+import {Flex, Grid, Box} from '../';
 const context = describe;
 describe('Layout Components', () => {
   context('Flex Component', () => {
@@ -12,9 +12,9 @@ describe('Layout Components', () => {
       expect(ssrRender).not.toThrow();
     });
   });
-  context('Stack Component', () => {
+  context('Grid Component', () => {
     it('should render on a server without crashing', () => {
-      const ssrRender = () => renderToString(<Stack spacing="s">Hello, Stack!</Stack>);
+      const ssrRender = () => renderToString(<Grid gridGap="s">Hello, Grid!</Grid>);
       expect(ssrRender).not.toThrow();
     });
   });
