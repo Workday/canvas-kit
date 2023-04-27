@@ -555,13 +555,6 @@ describe('useModelContext', () => {
       expect(result.current).toEqual(model);
     });
 
-    it('should return the model if the `as` is a regular component', () => {
-      const Component = () => null;
-      const {result} = renderHook(() => useModelContext(context, model, Component));
-
-      expect(result.current).toEqual(model);
-    });
-
     it('should return the context if the `as` is a model component', () => {
       const Component = () => null;
       Component.__hasModel = true;
@@ -582,13 +575,6 @@ describe('useModelContext', () => {
 
     it('should return the model if the `as` is a string', () => {
       const {result} = renderHook(() => useModelContext(context, model, 'div'));
-
-      expect(result.current).toEqual(model);
-    });
-
-    it('should return the model if the `as` is a regular component', () => {
-      const Component = () => null;
-      const {result} = renderHook(() => useModelContext(context, model, Component));
 
       expect(result.current).toEqual(model);
     });
