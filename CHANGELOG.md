@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v8.6.2](https://github.com/Workday/canvas-kit/releases/tag/v8.6.2) (2023-04-27)
+
+### Components
+
+- fix: BaseButton and ButtonLabelIcon extend SystemIconProps ([#2157](https://github.com/Workday/canvas-kit/pull/2157)) ([@thunguyen19](https://github.com/thunguyen19))
+
+
 ## [v7.4.12](https://github.com/Workday/canvas-kit/releases/tag/v7.4.12) (2023-04-27)
 
 ### Components
