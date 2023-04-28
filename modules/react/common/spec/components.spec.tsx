@@ -1,6 +1,7 @@
 import React from 'react';
 import {screen, render} from '@testing-library/react';
 import {expectTypeOf} from 'expect-type';
+import {renderHook} from '@testing-library/react-hooks';
 
 import {
   composeHooks,
@@ -10,8 +11,11 @@ import {
   ElementComponent,
   mergeProps,
   createHook,
-  Model,
   BehaviorHook,
+  createContainer,
+  createSubcomponent,
+  createModelHook,
+  useModelContext,
 } from '@workday/canvas-kit-react/common';
 
 describe('createComponent', () => {
@@ -97,12 +101,115 @@ describe('createComponent', () => {
   it('should render whatever element is passed through the "as" prop', () => {
     const Component = createComponent('div')({
       displayName: 'Test',
-      Component: (props, ref, Element) => <Element data-testid="test" />,
+      Component: (props, ref, Element) => <Element data-testid="test" {...props} />,
     });
 
     render(<Component as="button" />);
 
     expect(screen.getByTestId('test')).toHaveProperty('tagName', 'BUTTON');
+  });
+
+  it('should provide an `as` method that changes the default element', () => {
+    const Component = createComponent('div')({
+      displayName: 'Test',
+      Component: (props, ref, Element) => <Element data-testid="test" {...props} />,
+    });
+
+    const ButtonComponent = Component.as('button');
+
+    render(<ButtonComponent />);
+
+    expect(screen.getByTestId('test')).toHaveProperty('tagName', 'BUTTON');
+  });
+
+  it('should provide a stable reference `as` method to aid in component render functions without needing to use other hooks', () => {
+    const Component = createComponent('div')({
+      displayName: 'Test',
+      Component: (props, ref, Element) => <Element data-testid="test" {...props} />,
+    });
+
+    expect(Component.as('button')).toBe(Component.as('button'));
+  });
+});
+
+describe('createContainer', () => {
+  const modelHook = createModelHook({})(() => ({state: {}, events: {}}));
+
+  it('should provide an `as` method that changes the default element', () => {
+    const Component = createContainer('div')({
+      displayName: 'Test',
+      modelHook,
+    })((props, Element) => <Element data-testid="test" {...props} />);
+
+    const ButtonComponent = Component.as('button');
+
+    render(<ButtonComponent />);
+
+    expect(screen.getByTestId('test')).toHaveProperty('tagName', 'BUTTON');
+  });
+
+  it('should provide a stable reference `as` method to aid in component render functions without needing to use other hooks', () => {
+    const Component = createContainer('div')({
+      displayName: 'Test',
+      modelHook,
+    })((props, Element) => <Element data-testid="test" {...props} />);
+
+    expect(Component.as('button')).toBe(Component.as('button'));
+  });
+
+  it('should apply the correct model when multiple model components are used', () => {
+    const modelHook1 = createModelHook({})(() => ({state: {foo1: 'bar'}, events: {}}));
+    const modelHook2 = createModelHook({})(() => ({state: {foo2: 'bar'}, events: {}}));
+
+    const Component1 = createContainer('div')({
+      displayName: 'Test1',
+      modelHook: modelHook1,
+    })((props, Element, model) => {
+      expect(model).toHaveProperty('state.foo1', 'bar');
+      return <Element data-testid="test1" {...props} />;
+    });
+
+    const Component2 = createContainer('div')({
+      displayName: 'Test2',
+      modelHook: modelHook2,
+    })((props, Element, model) => {
+      expect(model).toHaveProperty('state.foo2', 'bar');
+      return <Element data-testid="test2" {...props} />;
+    });
+
+    const ComposedComponent = () => {
+      const model = modelHook2();
+
+      return <Component1 as={Component2} model={model} />;
+    };
+
+    render(<ComposedComponent />);
+  });
+});
+
+describe('createSubcomponent', () => {
+  const modelHook = createModelHook({})(() => ({state: {}, events: {}}));
+
+  it('should provide an `as` method that changes the default element', () => {
+    const Component = createSubcomponent('div')({
+      displayName: 'Test',
+      modelHook,
+    })((props, Element) => <Element data-testid="test" {...props} />);
+
+    const ButtonComponent = Component.as('button');
+
+    render(<ButtonComponent />);
+
+    expect(screen.getByTestId('test')).toHaveProperty('tagName', 'BUTTON');
+  });
+
+  it('should provide a stable reference `as` method to aid in component render functions without needing to use other hooks', () => {
+    const Component = createSubcomponent('div')({
+      displayName: 'Test',
+      modelHook,
+    })((props, Element) => <Element data-testid="test" {...props} />);
+
+    expect(Component.as('button')).toBe(Component.as('button'));
   });
 });
 
@@ -401,6 +508,90 @@ describe('composeHooks', () => {
         expectTypeOf(ref).toEqualTypeOf<React.LegacyRef<Component1>>();
         return <div />;
       },
+    });
+  });
+});
+
+describe('useModelContext', () => {
+  const contextValue = {value: 'context'};
+  const context = React.createContext(contextValue);
+  const createModel = (matchesContext = false) => {
+    return {
+      value: 'model',
+    };
+  };
+  const createModelWithMatchingContext = () => {
+    return {
+      value: 'model',
+      __UNSTABLE_modelContext: context,
+    };
+  };
+
+  it('should return the context if no model is provided', () => {
+    const {result} = renderHook(() => useModelContext(context));
+
+    expect(result.current).toEqual({value: 'context'});
+  });
+
+  describe('when a non-matching context model is provided', () => {
+    const model = createModel();
+
+    it('should return the model if no `as` is provided', () => {
+      const {result} = renderHook(() => useModelContext(context, model));
+
+      expect(result.current).toEqual(model);
+    });
+
+    it('should return the model if the `as` is a string', () => {
+      const {result} = renderHook(() => useModelContext(context, model, 'div'));
+
+      expect(result.current).toEqual(model);
+    });
+
+    it('should return the model if the `as` is a regular component', () => {
+      const Component = () => null;
+      const {result} = renderHook(() => useModelContext(context, model, Component));
+
+      expect(result.current).toEqual(model);
+    });
+
+    it('should return the context if the `as` is a model component', () => {
+      const Component = () => null;
+      Component.__hasModel = true;
+      const {result} = renderHook(() => useModelContext(context, model, Component));
+
+      expect(result.current).toEqual(contextValue);
+    });
+  });
+
+  describe('when a context matching model is provided ', () => {
+    const model = createModelWithMatchingContext();
+
+    it('should return the model if no `as` is provided', () => {
+      const {result} = renderHook(() => useModelContext(context, model));
+
+      expect(result.current).toEqual(model);
+    });
+
+    it('should return the model if the `as` is a string', () => {
+      const {result} = renderHook(() => useModelContext(context, model, 'div'));
+
+      expect(result.current).toEqual(model);
+    });
+
+    it('should return the model if the `as` is a regular component', () => {
+      const Component = () => null;
+      const {result} = renderHook(() => useModelContext(context, model, Component));
+
+      expect(result.current).toEqual(model);
+    });
+
+    it('should return the model if the `as` is a model component', () => {
+      const Component = () => null;
+      Component.__hasModel = true;
+      const {result} = renderHook(() => useModelContext(context, model, Component));
+
+      expect(result.current).toEqual(model);
     });
   });
 });
