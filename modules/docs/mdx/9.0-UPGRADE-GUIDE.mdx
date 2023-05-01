@@ -11,6 +11,7 @@ any questions.
 - [Codemod](#codemod)
 - [New Components](#new-components)
   - [Table](#table)
+- [Updated Terms](#updated-terms)
 - [Removals](#Removals)
   - [Drawer](#drawer)
   - [Layout and Column](#layout-and-column)
@@ -114,6 +115,24 @@ export default function App() {
   );
 }
 ```
+
+## Updated Terms
+
+We have updated two terms that were used in previous versions of Canvas Kit to better reflect their
+meaning and intentions.
+
+- **"Soft-Deprecation"** is now **"Deprecation"**
+
+  - _Deprecation: We add the [@deprecated tag](https://jsdoc.app/tags-deprecated.html) from JSDoc to
+    code that we plan to deprecate in the near future. Although you can still consume this code, we
+    want consumers to move to a utility or component that is more stable.._
+
+- **"Hard-Deprecation"** is now **"Remove/Removal"**
+
+  - _Removals: Removals are deletions from our codebase and you can no longer consume this
+    component. We've either promoted or replaced a component or utility. You will need to follow the
+    method prescribed in our upgrade guide to update your application. Please reach out to our team
+    directly if you need additional help._
 
 ## Removals
 

@@ -460,26 +460,27 @@ You may still use `StatusIndicator` in the Main package, but note that it will b
 
 ### Deprecation Types
 
-There is `deprecated` and `removal`.
+#### Soft Deprecation
 
-#### Deprecation
+A soft-deprecated component is still available with its full functionality, but it will have been
+renamed with a prefix to indicate its soft-deprecated status. It will also include a console warning
+announcing its deprecation. This warning will only be triggered on the component's initial render.
 
-We add the [@deprecated tag](https://jsdoc.app/tags-deprecated.html) from JSDoc to code that we plan
-to deprecate in the near future. Although you can still consume this code, we want consumers to move
-to a utility or component that is more stable.
+Soft-deprecated types and utilities will also have been renamed but generally will not trigger a
+console warning.
 
-#### Removal
+#### Hard Deprecation
 
-Removals are deletions from our codebase and you can no longer consume this component. We've either
-promoted or replaced a component or utility. You will need to follow the method prescribed in our
-upgrade guide to update your application. Please reach out to our team directly if you need
-additional help.
+A hard-deprecated component or package is no longer available. You will need to follow the method
+prescribed in our Upgrade Guide to update your application. Please
+[reach out](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) to our team
+directly if you need additional help.
 
 ---
 
 ### Drawer
 
-We've [deprecated](#deprecation) `Drawer` and renamed the following items:
+We've [soft-deprecated](#soft-deprecation) `Drawer` and renamed the following items:
 
 - `Drawer` to `DeprecatedDrawer`
 - `DrawerProps` to `DeprecatedDrawerProps`
@@ -525,7 +526,7 @@ You may continue to use this component, but please note that we plan to
 
 ### Menu (Preview)
 
-We've [deprecated](#deprecation) the `Menu` in Preview and renamed the following items:
+We've [soft-deprecated](#soft-deprecation) the `Menu` in Preview and renamed the following items:
 
 - `Menu` to `DeprecatedMenu`
 - `MenuProps` to `DeprecatedMenuProps`
@@ -584,7 +585,7 @@ the Main package instead.
 
 ### Layout and Column
 
-We've [deprecated](#deprecation) `Layout` and `Column` and renamed the following items:
+We've [soft-deprecated](#soft-deprecation) `Layout` and `Column` and renamed the following items:
 
 - `Layout` to `DeprecatedLayout`
 - `LayoutProps` to `DeprecatedLayoutProps`

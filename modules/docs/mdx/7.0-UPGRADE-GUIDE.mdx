@@ -377,38 +377,41 @@ We've also changed the default depth for the following components:
 
 ### Component Deprecations
 
-### Deprecation Types
+#### Deprecation Types
 
-There is `deprecated` and `removal`.
+There are two types of deprecations: soft and hard.
 
-#### Deprecation
+##### Soft Deprecation
 
-We add the [@deprecated tag](https://jsdoc.app/tags-deprecated.html) from JSDoc to code that we plan
-to deprecate in the near future. Although you can still consume this code, we want consumers to move
-to a utility or component that is more stable.
+A soft-deprecated component is still available with its full functionality, but it will have been
+renamed with a prefix to indicate its soft-deprecated status. It will also include a console warning
+announcing its deprecation. This warning will only be triggered on the component's initial render.
 
-#### Removal
+Soft-deprecated types and utilities will also be renamed but generally will not trigger a console
+warning.
 
-Removals are deletions from our codebase and you can no longer consume this component. We've either
-promoted or replaced a component or utility. You will need to follow the method prescribed in our
-upgrade guide to update your application. Please reach out to our team directly if you need
-additional help.
+##### Hard Deprecation
+
+A hard-deprecated component or package is no longer available. You will need to follow the method
+prescribed in our upgrade guide to update your application. Please
+[reach out](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) to our team
+directly if you need additional help.
 
 #### Cookie Banner
 
-We are [removing](#removal) `CookieBanner`. Please reference this
+We are [hard-deprecating](#hard-deprecation) `CookieBanner`. Please reference this
 [example](https://workday.github.io/canvas-kit/?path=/story/examples-cookiebanner-react--basic) to
 migrate away from `CookieBanner`.
 
 #### Page Header
 
-We are [removing](#removal) `PageHeader`. Please reference this
+We are [hard-deprecating](#hard-deprecation) `PageHeader`. Please reference this
 [example](https://workday.github.io/canvas-kit/?path=/story/examples-pageheader-react--basic) to
 migrate away from `PageHeader`.
 
 #### Header / Global Header
 
-We are [removing](#removal) `Header`. Please reference this
+We are [hard-deprecating](#hard-deprecation) `Header`. Please reference this
 [example](https://workday.github.io/canvas-kit/?path=/story/examples-globalheader-react--basic) to
 migrate away from `Header`.
 
