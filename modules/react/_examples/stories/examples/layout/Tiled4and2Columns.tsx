@@ -8,9 +8,10 @@ export const Tiled4and2Columns = () => (
   <Grid
     gridTemplateAreas={`
         'Heading Heading Heading Heading' 
-        'FormTopHalfLeft FormTopHalfLeft FormQuaterLeft FormQuaterRight'
+        'FormTopHalfLeft FormTopHalfLeft FormQuarterLeft FormQuarterRight'
         'FormHalfLeft FormHalfLeft FormHalfRight FormHalfRight '
     `}
+    gridTemplateColumns="repeat(4, 1fr)"
     gridAutoRows="min-content"
     gridRowGap="s"
     gridColumnGap="xxxl"
@@ -19,10 +20,10 @@ export const Tiled4and2Columns = () => (
       <Heading size="medium">4 and 2 Column Tiled View</Heading>
     </Box>
     <FormSkeleton gridArea="FormTopHalfLeft" text="Form - Top Left Half" />
-    <FormSkeleton gridArea="FormQuaterLeft" text="Form - Left Quater" />
-    <FormSkeleton gridArea="FormQuaterRight" text="Form - Right Quater" />
+    <FormSkeleton gridArea="FormQuarterLeft" text="Form - Left Quarter" />
+    <FormSkeleton gridArea="FormQuarterRight" text="Form - Right Quarter" />
     <FormSkeleton gridArea="FormHalfLeft" text="Form - Left Half" />
-    <FormSkeleton gridArea="FormHalfRight" text="Form - Right Quater" />
+    <FormSkeleton gridArea="FormHalfRight" text="Form - Right Half" />
   </Grid>
 );
 

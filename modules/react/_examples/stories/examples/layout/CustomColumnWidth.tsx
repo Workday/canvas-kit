@@ -12,11 +12,6 @@ export const CustomColumnWidth = () => (
           4 column width
         </BodyText>
       </Box>
-      <Box height="120px" backgroundColor="blueberry400">
-        <BodyText size="small" textAlign="center" color="frenchVanilla100">
-          4 column width
-        </BodyText>
-      </Box>
       <Box height="120px" backgroundColor="blueberry500">
         <BodyText size="small" textAlign="center" color="frenchVanilla100">
           2 column width
