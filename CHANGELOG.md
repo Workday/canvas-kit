@@ -3,6 +3,58 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v8.6.3](https://github.com/Workday/canvas-kit/releases/tag/v8.6.3) (2023-05-01)
+
+### Dependencies
+
+- chore: Upgrade fsevents to a non-vulnerable version ([#2181](https://github.com/Workday/canvas-kit/pull/2181)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v8.6.2](https://github.com/Workday/canvas-kit/releases/tag/v8.6.2) (2023-04-27)
+
+### Components
+
+- fix: BaseButton and ButtonLabelIcon extend SystemIconProps ([#2157](https://github.com/Workday/canvas-kit/pull/2157)) ([@thunguyen19](https://github.com/thunguyen19))
+
+
+## [v7.4.12](https://github.com/Workday/canvas-kit/releases/tag/v7.4.12) (2023-04-27)
+
+### Components
+
+- fix: BaseButton and ButtonLabelIcon extend SystemIconProps ([#2157](https://github.com/Workday/canvas-kit/pull/2157)) ([@thunguyen19](https://github.com/thunguyen19))
+
+
+## [v7.4.11](https://github.com/Workday/canvas-kit/releases/tag/v7.4.11) (2023-04-26)
+## [v8.6.1](https://github.com/Workday/canvas-kit/releases/tag/v8.6.1) (2023-04-26)
+
+### Components
+
+- fix(menu): Menu does not close with aria-disabled=true ([#2128](https://github.com/Workday/canvas-kit/pull/2128)) ([@NicholasBoll](https://github.com/NicholasBoll), manuel.carrera)
+- fix(form-field): Forward required prop to input ([#2154](https://github.com/Workday/canvas-kit/pull/2154)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+### Dependencies
+
+- fix: Add react-dom peer-dep to main package ([#2162](https://github.com/Workday/canvas-kit/pull/2162)) ([@alanbsmith](https://github.com/alanbsmith))
+
+### Infrastructure
+
+- fix: Update release action to support node 16 ([#2170](https://github.com/Workday/canvas-kit/pull/2170)) ([@RayRedGoose](https://github.com/RayRedGoose))
+
+
+## [v7.4.11](https://github.com/Workday/canvas-kit/releases/tag/v7.4.11) (2023-04-26)
+
+### Components
+
+- fix(menu): Menu does not close with aria-disabled=true ([#2128](https://github.com/Workday/canvas-kit/pull/2128)) ([@NicholasBoll](https://github.com/NicholasBoll), manuel.carrera)
+- fix(form-field): Forward required prop to input ([#2154](https://github.com/Workday/canvas-kit/pull/2154)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+### Dependencies
+
+- fix: Add react-dom peer-dep to main package ([#2162](https://github.com/Workday/canvas-kit/pull/2162)) ([@alanbsmith](https://github.com/alanbsmith))
+
+### Infrastructure
+
+- fix: Update release action to support node 16 ([#2170](https://github.com/Workday/canvas-kit/pull/2170)) ([@RayRedGoose](https://github.com/RayRedGoose))
 ## [v8.6.0](https://github.com/Workday/canvas-kit/releases/tag/v8.6.0) (2023-04-20)
 
 ### Components

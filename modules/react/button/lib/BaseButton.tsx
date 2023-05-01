@@ -12,7 +12,8 @@ import {
   EmotionCanvasTheme,
   StyledType,
 } from '@workday/canvas-kit-react/common';
-import {BoxProps, boxStyleFn} from '@workday/canvas-kit-react/layout';
+import {SystemIconProps} from '@workday/canvas-kit-react/icon';
+import {boxStyleFn} from '@workday/canvas-kit-react/layout';
 import {borderRadius, space, spaceNumbers, type} from '@workday/canvas-kit-react/tokens';
 
 import {ButtonColors, ButtonSizes, IconPositions, TertiaryButtonSizes} from './types';
@@ -20,7 +21,7 @@ import {ButtonColors, ButtonSizes, IconPositions, TertiaryButtonSizes} from './t
 import {CSSObject} from '@emotion/styled';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 
-export interface ButtonContainerProps extends BoxProps, GrowthBehavior {
+export interface ButtonContainerProps extends Partial<SystemIconProps>, GrowthBehavior {
   /**
    * Override default colors of a button. The default will depend on the button type
    */
