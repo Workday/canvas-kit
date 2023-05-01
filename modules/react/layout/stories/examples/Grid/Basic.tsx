@@ -18,25 +18,25 @@ const borderPadProps = {
 };
 
 const Header = ({children, ...props}: GridProps) => (
-  <Grid gridArea="Header" depth={1} {...props} {...borderPadProps}>
+  <Grid as="header" gridArea="Header" depth={1} {...props} {...borderPadProps}>
     {children}
   </Grid>
 );
 
 const BodyContent = ({children, ...props}: GridProps) => (
-  <Grid gridArea="BodyContent" depth={1} {...props} {...borderPadProps}>
+  <Grid as="main" gridArea="BodyContent" depth={1} {...props} {...borderPadProps}>
     {children}
   </Grid>
 );
 
 const SideBar = ({children, ...props}: GridProps) => (
-  <Grid gridArea="SideBar" depth={1} {...props} {...borderPadProps}>
+  <Grid as="aside" gridArea="SideBar" depth={1} {...props} {...borderPadProps}>
     {children}
   </Grid>
 );
 
 const Footer = ({children, ...props}: GridProps) => (
-  <Grid gridArea="Footer" depth={1} {...props} {...borderPadProps}>
+  <Grid as="footer" gridArea="Footer" depth={1} {...props} {...borderPadProps}>
     {children}
   </Grid>
 );
