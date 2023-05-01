@@ -14,6 +14,7 @@ any questions.
 - [Removals](#Removals)
   - [Drawer](#drawer)
   - [Layout and Column](#layout-and-column)
+  - [composeModelHooks](#composemodelhook)
   - [Stack, HStack, and VStack](#stack-hstack-and-vstack)
   - [focusRing](#focusring)
   - [useCanvasTheme and getCanvasTheme](#usecanvastheme-and-getcanvastheme)
@@ -144,6 +145,16 @@ offers a more robust and flexible layout solution.
 
 Please refer to our [Layout examples](/examples/layout/) for examples of how to implement common
 layouts using `Grid`.
+
+---
+
+### composeModelHooks
+
+**PR:** [#2180](https://github.com/Workday/canvas-kit/pull/2180)
+
+We're removing this hook. It is a duplicate of `componseHooks` that was never used by anything. This
+should have no impact on your code. We couldn't find any references to this function in any code
+bases we have access to.
 
 ---
 
