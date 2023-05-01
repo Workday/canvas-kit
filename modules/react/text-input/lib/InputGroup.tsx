@@ -1,5 +1,6 @@
 import React from 'react';
 
+import {space} from '@workday/canvas-kit-react/tokens';
 import {createComponent, ExtractProps, useIsRTL} from '@workday/canvas-kit-react/common';
 import {Flex} from '@workday/canvas-kit-react/layout';
 
@@ -14,8 +15,8 @@ export const InputGroupStart = createComponent('div')({
         position="absolute"
         alignItems="center"
         justifyContent="center"
-        height={40}
-        width={40}
+        height="xl"
+        width="xl"
         {...elemProps}
       />
     );
@@ -31,8 +32,8 @@ export const InputGroupEnd = createComponent('div')({
         position="absolute"
         alignItems="center"
         justifyContent="center"
-        height={40}
-        width={40}
+        height="xl"
+        width="xl"
         {...elemProps}
       />
     );
@@ -45,10 +46,15 @@ export const InputGroupInput = createComponent(TextInput)({
   },
 });
 
+// make sure we always use pixels if the input is a number - this is required for `calc`
+const toPx = (input: string | number): string => {
+  return typeof input === 'number' ? `${input}px` : input;
+};
+
 /**
- * An `InputGroup` is an Input with optional start and end elements. The start and end elements are
- * usually icons or icon buttons. The `InputGroup` will add padding to the input so the
- * icons/buttons display correctly. This component uses `React.Children.map` and
+ * An `InputGroup` is a container around a {@link TextInput} with optional start and end elements.
+ * The start and end elements are usually icons or icon buttons. The `InputGroup` will add padding
+ * to the input so the icons/buttons display correctly. This component uses `React.Children.map` and
  * `React.cloneElement` from the [React.Children](https://react.dev/reference/react/Children) API.
  * This means all children must be `InputGroup.*` components. Any other direct children will cause
  * issues. You can add different elements/components inside the
@@ -68,20 +74,31 @@ export const InputGroup = createComponent('div')({
   displayName: 'InputGroup',
   Component({children, ...elemProps}: ExtractProps<typeof Flex>, ref, Element) {
     const isRTL = useIsRTL();
-    let paddingInlineStart: number;
-    let paddingInlineEnd: number;
+    let paddingInlineStart: string;
+    let paddingInlineEnd: string;
+    const offsetsStart: string[] = [];
+    const offsetsEnd: string[] = [];
 
     React.Children.forEach(children, child => {
       if (React.isValidElement<any>(child) && child.type === InputGroupStart) {
-        paddingInlineStart = (paddingInlineStart || 0) + (child.props.width || 40);
+        const width = child.props.width || space.xl;
+        offsetsStart.push(paddingInlineStart);
+        paddingInlineStart = paddingInlineStart
+          ? `calc(${toPx(paddingInlineStart)} + ${width})`
+          : width;
       }
       if (React.isValidElement<any>(child) && child.type === InputGroupEnd) {
-        paddingInlineEnd = (paddingInlineEnd || 0) + (child.props.width || 40);
+        const width = child.props.width || space.xl;
+        offsetsEnd.push(paddingInlineEnd);
+        paddingInlineEnd = paddingInlineEnd ? `calc(${toPx(paddingInlineEnd)} + ${width})` : width;
       }
     });
 
-    let start = 0;
-    let end = paddingInlineEnd! || 0;
+    // reverse the end to ensure the elements appear in the right order
+    offsetsEnd.reverse();
+
+    let startIndex = 0;
+    let endIndex = 0;
 
     const mappedChildren = React.Children.map(children, child => {
       if (React.isValidElement<any>(child)) {
@@ -89,8 +106,8 @@ export const InputGroup = createComponent('div')({
           return React.cloneElement(child, {paddingInlineStart, paddingInlineEnd});
         }
         if (child.type === InputGroupStart) {
-          const offset = start;
-          start += child.props.width || 40;
+          const offset = offsetsStart[startIndex] || 0;
+          startIndex++;
 
           return React.cloneElement(child, {
             left: isRTL ? undefined : offset,
@@ -98,7 +115,8 @@ export const InputGroup = createComponent('div')({
           });
         }
         if (child.type === InputGroupEnd) {
-          const offset = (end -= child.props.width || 40);
+          const offset = offsetsEnd[endIndex] || 0;
+          endIndex++;
 
           return React.cloneElement(child, {
             left: isRTL ? offset : undefined,

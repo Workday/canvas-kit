@@ -85,22 +85,29 @@ export const InputGroupStates = () => (
   <StaticStates>
     <ComponentStatesTable
       rowProps={[
-        {label: 'Start', props: {start: <SystemIcon icon={searchIcon} size="small" />}},
+        {label: 'Start', props: {start: [<SystemIcon icon={searchIcon} size="small" />]}},
         {
           label: 'End',
           props: {
-            end: (
-              <TertiaryButton role="presentation" icon={xSmallIcon} size="small" tabIndex={-1} />
-            ),
+            end: [
+              <TertiaryButton role="presentation" icon={xSmallIcon} size="small" tabIndex={-1} />,
+            ],
           },
         },
         {
           label: 'Both',
           props: {
-            start: <SystemIcon icon={searchIcon} size="small" />,
-            end: (
-              <TertiaryButton role="presentation" icon={xSmallIcon} size="small" tabIndex={-1} />
-            ),
+            start: [<SystemIcon icon={searchIcon} size="small" />],
+            end: [
+              <TertiaryButton role="presentation" icon={xSmallIcon} size="small" tabIndex={-1} />,
+            ],
+          },
+        },
+        {
+          label: 'Multiple',
+          props: {
+            start: [<span>1</span>, <span>2</span>, <span>3</span>],
+            end: [<span>4</span>, <span>5</span>, <span>6</span>],
           },
         },
       ]}
@@ -111,10 +118,14 @@ export const InputGroupStates = () => (
     >
       {props => (
         <CanvasProvider theme={{canvas: {direction: props.dir}}}>
-          <InputGroup width={280}>
-            {props.start && <InputGroup.Start>{props.start}</InputGroup.Start>}
+          <InputGroup width={300}>
+            {props.start &&
+              props.start.map((start, index) => (
+                <InputGroup.Start key={index}>{start}</InputGroup.Start>
+              ))}
             <InputGroup.Input value="Very Long Text. Very Long Text. Very Long Text." />
-            {props.end && <InputGroup.End>{props.end}</InputGroup.End>}
+            {props.end &&
+              props.end.map((end, index) => <InputGroup.End key={index}>{end}</InputGroup.End>)}
           </InputGroup>
         </CanvasProvider>
       )}
