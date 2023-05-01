@@ -1,0 +1,46 @@
+import {SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
+
+import {Dialog} from '@workday/canvas-kit-react/dialog';
+import {Basic} from './examples/Basic.tsx';
+import {Focus} from './examples/Focus.tsx';
+
+<Meta title="Components/Popups/Dialog" component={Dialog} />
+
+# Canvas Kit Dialog
+
+A Dialog component is a non-Modal type of Dialog that will not render the rest of the page inert
+while it is active. A Dialog should be used in situations where the task is not critical.
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-react
+```
+
+## Usage
+
+### Basic
+
+Below you will find a basic example of a Dialog. There are similarities and differences between the
+[Modal](/components/popups/modal/) and Dialog components. A Dialog does not require immeditate
+attention from the user and will not render the rest of the page inert while it is active. A
+[Modal](/components/popups/modal/) Dialog requires immediate attention and blocks interaction from
+the rest of the system.
+
+A Dialog should be used in situations where the task is not critical like in the example below.
+
+<ExampleCodeBlock code={Basic} />
+
+### Non-Focus Trapping
+
+It was referenced in the first example that Dialog and [Modal](/components/popups/modal/) have some
+similarities and differences. One difference is since Modal needs immediate attention from the user,
+it will trap the keyboard focus inside of the Modal until an action is taken. Dialog does not need
+immediate attention from the user so therefore, Dialog will not trap the keyboard focus within the
+Dialog.
+
+<ExampleCodeBlock code={Focus} />
+
+## Component API
+
+<SymbolDoc name="Dialog" fileName="/react/" />
