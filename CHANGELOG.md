@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v8.6.3](https://github.com/Workday/canvas-kit/releases/tag/v8.6.3) (2023-05-01)
+
+### Dependencies
+
+- chore: Upgrade fsevents to a non-vulnerable version ([#2181](https://github.com/Workday/canvas-kit/pull/2181)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v8.6.2](https://github.com/Workday/canvas-kit/releases/tag/v8.6.2) (2023-04-27)
 
 ### Components
