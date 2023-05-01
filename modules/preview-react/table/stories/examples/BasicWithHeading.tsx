@@ -6,7 +6,9 @@ import {Heading} from '@workday/canvas-kit-react/text';
 export const BasicWithHeading = () => {
   return (
     <>
-      <Heading size="small">Pizza Toppings</Heading>
+      <Heading size="small" marginBottom="s">
+        Pizza Toppings
+      </Heading>
       <Table>
         <Table.Head>
           <Table.Row>
