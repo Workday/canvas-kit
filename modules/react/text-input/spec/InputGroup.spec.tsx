@@ -7,11 +7,6 @@ import {TertiaryButton} from '@workday/canvas-kit-react/button';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 
 describe('InputGroup', () => {
-  const cb = jest.fn();
-  afterEach(() => {
-    cb.mockReset();
-  });
-
   verifyComponent(InputGroup, {});
 
   it('should render on a server without crashing', () => {
