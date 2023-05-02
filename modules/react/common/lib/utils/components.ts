@@ -583,9 +583,7 @@ export const createComponent = <
  * })
  * ```
  */
-export const createElemPropsHook = <
-  TModelHook extends (config: any) => {state: Record<string, any>; events: Record<string, any>}
->(
+export const createElemPropsHook = <TModelHook extends (config: any) => Model<any, any>>(
   modelHook: TModelHook
 ) => <PO extends {}, PI extends {}>(
   fn: (
@@ -596,17 +594,20 @@ export const createElemPropsHook = <
     elemProps?: PI
   ) => PO
 ): BehaviorHook<
-  TModelHook extends (config: any) => infer TModel
-    ? TModel
-    : {state: Record<string, any>; events: Record<string, any>},
+  TModelHook extends (config: any) => infer TModel ? TModel : Model<any, any>,
   PO
-> => (model, elemProps, ref) => {
-  const props = mergeProps(fn(model, ref, elemProps || ({} as any)), elemProps || ({} as any));
-  if (!props.hasOwnProperty('ref') && ref) {
-    // This is the weird "incoming ref isn't in props, but outgoing ref is in props" thing
-    props.ref = ref;
-  }
-  return props;
+> => {
+  return ((model, elemProps, ref) => {
+    const props = mergeProps(fn(model, ref, elemProps || ({} as any)), elemProps || ({} as any));
+    if (!props.hasOwnProperty('ref') && ref) {
+      // This is the weird "incoming ref isn't in props, but outgoing ref is in props" thing
+      props.ref = ref;
+    }
+    return props;
+  }) as BehaviorHook<
+    TModelHook extends (config: any) => infer TModel ? TModel : Model<any, any>,
+    PO
+  >;
 };
 
 /**
@@ -646,26 +647,26 @@ export const createElemPropsHook = <
 export const createHook = <M extends Model<any, any>, PO extends {}, PI extends {}>(
   fn: (model: M, ref?: React.Ref<any>, elemProps?: PI) => PO
 ): BehaviorHook<M, PO> => {
-  return (model, elemProps, ref) => {
+  return ((model, elemProps, ref) => {
     const props = mergeProps(fn(model, ref, elemProps || ({} as any)), elemProps || ({} as any));
     if (!props.hasOwnProperty('ref') && ref) {
       // This is the weird "incoming ref isn't in props, but outgoing ref is in props" thing
       props.ref = ref;
     }
     return props;
-  };
+  }) as BehaviorHook<M, PO>;
 };
 
 /**
- * @deprecated use `subModel` instead
+ * @deprecated use `createSubModelElemPropsHook` instead
  */
 export const subModelHook = <M extends Model<any, any>, SM extends Model<any, any>, O extends {}>(
   fn: (model: M) => SM,
   hook: BehaviorHook<SM, O>
 ): BehaviorHook<M, O> => {
-  return (model: M, props: any, ref: React.Ref<any>) => {
+  return ((model: M, props: any, ref: React.Ref<any>) => {
     return hook(fn(model), props, ref);
-  };
+  }) as BehaviorHook<M, O>;
 };
 
 /**
@@ -698,13 +699,30 @@ export function createSubModelElemPropsHook<M extends () => Model<any, any>>(mod
     fn: (model: ReturnType<M>) => SM,
     elemPropsHook: BehaviorHook<SM, O>
   ): BehaviorHook<ReturnType<M>, O> => {
-    return (model: ReturnType<M>, props: any, ref: React.Ref<any>) => {
+    return ((model: ReturnType<M>, props: any, ref: React.Ref<any>) => {
       return elemPropsHook(fn(model), props, ref);
-    };
+    }) as BehaviorHook<ReturnType<M>, O>;
   };
 }
 
-// Typescript function parameters are contravariant while return types are covariant. This is a
+/** Simplify and speed up inference by capturing types in the signature itself */
+interface BaseHook<M extends Model<any, any>, O extends {}> {
+  /**
+   * Capture the model type in TypeScript only. Do not use in runtime!
+   *
+   * @private
+   */
+  __model: M;
+  /**
+   * Capture the hook's output type in TypeScript only. Do not use in runtime! This is used to cache
+   * and speed up the output types during inference
+   *
+   * @private
+   */
+  __output: O;
+}
+
+// TypeScript function parameters are contravariant while return types are covariant. This is a
 // problem when someone hands us a model that correctly extends `Model<any, any>`, but adds extra
 // properties to the model. So `M extends Model<any, any>`. But the `BehaviorHook` is the return
 // type which will reverse the direction which is no longer true: `Model<any, any> extends M`. In
@@ -718,13 +736,11 @@ export function createSubModelElemPropsHook<M extends () => Model<any, any>>(mod
  * A BehaviorHook is a React hook that takes a model, elemProps, and a ref and returns props and
  * attributes to apply to an element or component.
  */
-export type BehaviorHook<M extends Model<any, any>, O extends {}> = {
-  bivarianceHack<P extends {}, R>(
-    model: M,
-    elemProps?: P,
-    ref?: React.Ref<R>
-  ): O & P & (R extends HTMLOrSVGElement ? {ref: React.Ref<R>} : {});
-}['bivarianceHack'];
+export interface BehaviorHook<M extends Model<any, any>, O extends {}> extends BaseHook<M, O> {
+  <P extends {}, R>(model: M, elemProps?: P, ref?: React.Ref<R>): O &
+    P &
+    (R extends HTMLOrSVGElement ? {ref: React.Ref<R>} : {});
+}
 
 function setRef<T>(ref: React.Ref<T> | undefined, value: T): void {
   if (ref) {
@@ -889,51 +905,80 @@ export function useModelContext<T>(
  * props {a: 'useHook1', b: 'useHook2', c: 'foo'}
  * ```
  */
-export function composeHooks<M extends Model<any, any>, O1 extends {}, O2 extends {}>(
-  hook1: BehaviorHook<M, O1>,
-  hook2: BehaviorHook<M, O2>
-): BehaviorHook<M, O1 & O2>;
-
-export function composeHooks<
-  M extends Model<any, any>,
-  O1 extends {},
-  O2 extends {},
-  O3 extends {}
->(
-  hook1: BehaviorHook<M, O1>,
-  hook2: BehaviorHook<M, O2>,
-  hook3: BehaviorHook<M, O3>
-): BehaviorHook<M, O1 & O2 & O3>;
-export function composeHooks<
-  M extends Model<any, any>,
-  O1 extends {},
-  O2 extends {},
-  O3 extends {},
-  O4 extends {}
->(
-  hook1: BehaviorHook<M, O1>,
-  hook2: BehaviorHook<M, O2>,
-  hook3: BehaviorHook<M, O3>,
-  hook4: BehaviorHook<M, O4>
-): BehaviorHook<M, O1 & O2 & O3 & O4>;
-export function composeHooks<
-  M extends Model<any, any>,
-  O1 extends {},
-  O2 extends {},
-  O3 extends {},
-  O4 extends {},
-  O5 extends {}
->(
-  hook1: BehaviorHook<M, O1>,
-  hook2: BehaviorHook<M, O2>,
-  hook3: BehaviorHook<M, O3>,
-  hook4: BehaviorHook<M, O4>,
-  hook5: BehaviorHook<M, O5>
-): BehaviorHook<M, O1 & O2 & O3 & O4 & O5>;
-export function composeHooks<M extends Model<any, any>, R, P extends {}, O extends {}>(
-  ...hooks: ((model: M, props: P, ref: React.Ref<R>) => O)[]
+export function composeHooks<H1, H2, H3, H4>(
+  hook1: H1,
+  hook2: H2
+): H1 extends BaseHook<infer M, infer O1>
+  ? H2 extends BaseHook<any, infer O2>
+    ? BehaviorHook<M, O1 & O2>
+    : never
+  : never;
+export function composeHooks<H1, H2, H3, H4>(
+  hook1: H1,
+  hook2: H2,
+  hook3: H3
+): H1 extends BaseHook<infer M, infer O1>
+  ? H2 extends BaseHook<any, infer O2>
+    ? H3 extends BaseHook<any, infer O3>
+      ? BehaviorHook<M, O1 & O2 & O3>
+      : never
+    : never
+  : never;
+export function composeHooks<H1, H2, H3, H4>(
+  hook1: H1,
+  hook2: H2,
+  hook3: H3,
+  hook4: H4
+): H1 extends BaseHook<infer M, infer O1>
+  ? H2 extends BaseHook<any, infer O2>
+    ? H3 extends BaseHook<any, infer O3>
+      ? H4 extends BaseHook<any, infer O4>
+        ? BehaviorHook<M, O1 & O2 & O3 & O4>
+        : never
+      : never
+    : never
+  : never;
+export function composeHooks<H1, H2, H3, H4, H5>(
+  hook1: H1,
+  hook2: H2,
+  hook3: H3,
+  hook4: H4,
+  hook5: H5
+): H1 extends BaseHook<infer M, infer O1>
+  ? H2 extends BaseHook<any, infer O2>
+    ? H3 extends BaseHook<any, infer O3>
+      ? H4 extends BaseHook<any, infer O4>
+        ? H5 extends BaseHook<any, infer O5>
+          ? BehaviorHook<M, O1 & O2 & O3 & O4 & O5>
+          : never
+        : never
+      : never
+    : never
+  : never;
+export function composeHooks<H1, H2, H3, H4, H5, H6>(
+  hook1: H1,
+  hook2: H2,
+  hook3: H3,
+  hook4: H4,
+  hook5: H5,
+  hook6: H6
+): H1 extends BaseHook<infer M, infer O1>
+  ? H2 extends BaseHook<any, infer O2>
+    ? H3 extends BaseHook<any, infer O3>
+      ? H4 extends BaseHook<any, infer O4>
+        ? H5 extends BaseHook<any, infer O5>
+          ? H6 extends BaseHook<any, infer O6>
+            ? BehaviorHook<M, O1 & O2 & O3 & O4 & O5 & O6>
+            : never
+          : never
+        : never
+      : never
+    : never
+  : never;
+export function composeHooks<M extends Model<any, any>, P extends {}, O extends {}>(
+  ...hooks: ((model: M, props: P, ref: React.Ref<unknown>) => O)[]
 ): BehaviorHook<M, O> {
-  return (model, props, ref) => {
+  return ((model, props, ref) => {
     const returnProps = [...hooks].reverse().reduce((props: any, hook) => {
       return hook(model, props, props.ref || ref);
     }, props);
@@ -944,5 +989,5 @@ export function composeHooks<M extends Model<any, any>, R, P extends {}, O exten
     }
 
     return returnProps;
-  };
+  }) as BehaviorHook<M, O>;
 }
