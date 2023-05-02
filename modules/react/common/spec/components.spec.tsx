@@ -405,17 +405,9 @@ describe('composeHooks', () => {
   });
 
   it('should merge properties from both hooks', () => {
-    const hook1 = createHook(() => {
-      return {hook1: 'hook1'};
-    });
-    const hook2 = createHook(() => {
-      return {hook2: 'hook2'};
-    });
     const props = composeHooks(hook1, hook2)(myModel, {}, null);
     expect(props).toHaveProperty('hook1', 'hook1');
     expect(props).toHaveProperty('hook2', 'hook2');
-
-    expectTypeOf(props).toEqualTypeOf<{hook1: string; hook2: string}>();
   });
 
   it('should overwrite props of the first hook with props from the second hook', () => {
@@ -516,6 +508,117 @@ describe('composeHooks', () => {
         expectTypeOf(ref).toEqualTypeOf<React.LegacyRef<Component1>>();
         return <div />;
       },
+    });
+  });
+
+  describe('composeHooks types', () => {
+    const hook1 = createHook(() => ({hook1: ''}));
+    const hook2 = createHook(() => ({hook2: ''}));
+    const hook3 = createHook(() => ({hook3: ''}));
+    const hook4 = createHook(() => ({hook4: ''}));
+    const hook5 = createHook(() => ({hook5: ''}));
+    const hook6 = createHook(() => ({hook6: ''}));
+
+    it('should return the correct prop interface for 2 hooks', () => {
+      const props = composeHooks(hook1, hook2)(myModel, {});
+
+      type Expected = {hook1: string; hook2: string};
+
+      expectTypeOf(props).toEqualTypeOf<Expected>();
+    });
+
+    it('should return the correct prop interface for 2 hooks with incoming props', () => {
+      const props = composeHooks(hook1, hook2)(myModel, {foo: ''});
+
+      type Expected = {hook1: string; hook2: string; foo: string};
+
+      expectTypeOf(props).toEqualTypeOf<Expected>();
+    });
+
+    it('should return the correct prop interface for 2 hooks', () => {
+      const props = composeHooks(hook1, hook2, hook3)(myModel, {});
+
+      type Expected = {hook1: string; hook2: string; hook3: string};
+
+      expectTypeOf(props).toEqualTypeOf<Expected>();
+    });
+
+    it('should return the correct prop interface for 2 hooks with incoming props', () => {
+      const props = composeHooks(hook1, hook2, hook3)(myModel, {foo: ''});
+
+      type Expected = {hook1: string; hook2: string; hook3: string; foo: string};
+
+      expectTypeOf(props).toEqualTypeOf<Expected>();
+    });
+
+    it('should return the correct prop interface for 2 hooks', () => {
+      const props = composeHooks(hook1, hook2, hook3, hook4)(myModel, {});
+
+      type Expected = {hook1: string; hook2: string; hook3: string; hook4: string};
+
+      expectTypeOf(props).toEqualTypeOf<Expected>();
+    });
+
+    it('should return the correct prop interface for 2 hooks with incoming props', () => {
+      const props = composeHooks(hook1, hook2, hook3, hook4)(myModel, {foo: ''});
+
+      type Expected = {hook1: string; hook2: string; hook3: string; hook4: string; foo: string};
+
+      expectTypeOf(props).toEqualTypeOf<Expected>();
+    });
+
+    it('should return the correct prop interface for 2 hooks', () => {
+      const props = composeHooks(hook1, hook2, hook3, hook4, hook5)(myModel, {});
+
+      type Expected = {hook1: string; hook2: string; hook3: string; hook4: string; hook5: string};
+
+      expectTypeOf(props).toEqualTypeOf<Expected>();
+    });
+
+    it('should return the correct prop interface for 2 hooks with incoming props', () => {
+      const props = composeHooks(hook1, hook2, hook3, hook4, hook5)(myModel, {foo: ''});
+
+      type Expected = {
+        hook1: string;
+        hook2: string;
+        hook3: string;
+        hook4: string;
+        hook5: string;
+        foo: string;
+      };
+
+      expectTypeOf(props).toEqualTypeOf<Expected>();
+    });
+
+    it('should return the correct prop interface for 2 hooks', () => {
+      const props = composeHooks(hook1, hook2, hook3, hook4, hook5, hook6)(myModel, {});
+
+      type Expected = {
+        hook1: string;
+        hook2: string;
+        hook3: string;
+        hook4: string;
+        hook5: string;
+        hook6: string;
+      };
+
+      expectTypeOf(props).toEqualTypeOf<Expected>();
+    });
+
+    it('should return the correct prop interface for 2 hooks with incoming props', () => {
+      const props = composeHooks(hook1, hook2, hook3, hook4, hook5, hook6)(myModel, {foo: ''});
+
+      type Expected = {
+        hook1: string;
+        hook2: string;
+        hook3: string;
+        hook4: string;
+        hook5: string;
+        hook6: string;
+        foo: string;
+      };
+
+      expectTypeOf(props).toEqualTypeOf<Expected>();
     });
   });
 });
