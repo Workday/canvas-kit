@@ -357,7 +357,7 @@ type RemoveNull<T> = {[K in keyof T]: Exclude<T[K], null>};
  */
 type CompoundProps<Props, TElemPropsHook, E> = Props &
   (TElemPropsHook extends (...args: any[]) => infer TProps // try to infer TProps returned from the elemPropsHook function
-    ? RemoveNull<TProps extends {ref: any} ? TProps : TProps & {ref: ExtractRef<E>}>
+    ? RemoveNull<Omit<TProps, 'ref'> & {ref: ExtractRef<E>}>
     : {ref: ExtractRef<E>}) &
   (Props extends {children: any}
     ? {}
