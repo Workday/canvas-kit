@@ -28,7 +28,7 @@ import {useListModel} from './useListModel';
 export const useListItemRegister = createElemPropsHook(useListModel)(
   (
     {state, events},
-    ref?: React.Ref<HTMLElement>,
+    ref,
     elemProps: {
       'data-id'?: string;
       children?: React.ReactNode;
@@ -43,7 +43,9 @@ export const useListItemRegister = createElemPropsHook(useListModel)(
         ? (elemProps.children as string)
         : ''
     );
-    const {localRef, elementRef} = useLocalRef(useForkRef(ref, elemProps.virtual?.measureRef));
+    const {localRef, elementRef} = useLocalRef(
+      useForkRef(ref as React.Ref<HTMLElement>, elemProps.virtual?.measureRef)
+    );
 
     // if the list is virtual, force the correct styling. Without this, weird things happen...
     const style: CSSProperties = elemProps.virtual

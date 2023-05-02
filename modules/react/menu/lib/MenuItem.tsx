@@ -133,7 +133,7 @@ export const StyledMenuItem = styled(Box.as('button'))<StyledType>(
 export const useMenuItem = composeHooks(
   createElemPropsHook(useMenuModel)(
     (model, ref, elemProps: {'data-id': string} = {'data-id': ''}) => {
-      const {localRef, elementRef} = useLocalRef(ref);
+      const {localRef, elementRef} = useLocalRef(ref as React.Ref<HTMLElement>);
       const id = elemProps['data-id'];
 
       // focus on the item with the cursor
@@ -142,7 +142,7 @@ export const useMenuItem = composeHooks(
           if (model.state.cursorId === id) {
             // delay focus changes to allow PopperJS to position
             requestAnimationFrame(() => {
-              localRef.current.focus();
+              localRef.current?.focus();
             });
           }
         }

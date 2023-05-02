@@ -170,20 +170,18 @@ export const StyledTabItem = styled(Box.as('button'))<StyledType & Pick<TabsItem
 );
 
 export const useTabsItem = composeHooks(
-  createElemPropsHook(useTabsModel)(
-    ({state}, _?: React.Ref<HTMLButtonElement>, elemProps: {'data-id'?: string} = {}) => {
-      const name = elemProps['data-id'] || '';
+  createElemPropsHook(useTabsModel)(({state}, _, elemProps: {'data-id'?: string} = {}) => {
+    const name = elemProps['data-id'] || '';
 
-      const selected = !!elemProps['data-id'] && isSelected(name, state);
+    const selected = !!elemProps['data-id'] && isSelected(name, state);
 
-      return {
-        type: 'button' as const,
-        role: 'tab' as const,
-        'aria-selected': selected,
-        'aria-controls': `tabpanel-${state.id}-${name}`,
-      };
-    }
-  ),
+    return {
+      type: 'button' as const,
+      role: 'tab' as const,
+      'aria-selected': selected,
+      'aria-controls': `tabpanel-${state.id}-${name}`,
+    };
+  }),
   useListItemSelect,
   useOverflowListItemMeasure,
   useListItemRovingFocus,

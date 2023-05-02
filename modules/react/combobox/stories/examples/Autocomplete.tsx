@@ -1,15 +1,16 @@
 import React from 'react';
 
-import {xSmallIcon, docIcon} from '@workday/canvas-system-icons-web';
+import {xSmallIcon, searchIcon} from '@workday/canvas-system-icons-web';
 import {LoadReturn} from '@workday/canvas-kit-react/collection';
 import {Combobox, useComboboxModel, useComboboxLoader} from '@workday/canvas-kit-react/combobox';
 import {TertiaryButton} from '@workday/canvas-kit-react/button';
 import {dispatchInputEvent} from '@workday/canvas-kit-react/common';
 import {FormField} from '@workday/canvas-kit-preview-react/form-field';
+import {StyledMenuItem} from '@workday/canvas-kit-react/menu';
+import {SystemIcon} from '@workday/canvas-kit-react/icon';
+import {LoadingDots} from '@workday/canvas-kit-react/loading-dots';
 
-import {InputGroup} from '../../lib/InputGroup';
-import {SystemIcon} from '../../../icon';
-import {LoadingDots} from '../../../loading-dots';
+import {InputGroup} from '@workday/canvas-kit-react/text-input';
 
 function pickRandom<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
@@ -51,31 +52,52 @@ export const Autocomplete = () => {
               items,
               total,
             });
-          }, 500);
+          }, 1500);
         });
       },
+      id: 'foo',
     },
     useComboboxModel
   );
 
   return (
-    <FormField orientation="horizontal">
+    <FormField orientation="horizontal" hasError isRequired>
       <FormField.Label>Fruit</FormField.Label>
-      <FormField.Input
-        as={Combobox}
-        model={model}
-        onChange={event => console.log('input', event.currentTarget.value)}
-      >
+      <Combobox model={model} onChange={event => console.log('input', event.currentTarget.value)}>
         <InputGroup>
-          <InputGroup.Input as={Combobox.Input} />
-          <InputGroup.End
+          <InputGroup.InnerStart pointerEvents="none">
+            <TertiaryButton
+              role="presentation"
+              icon={searchIcon}
+              size="small"
+              tabIndex={-1}
+              onMouseDown={event => {
+                event.preventDefault(); // prevent a focus change
+              }}
+              onClick={event => {
+                dispatchInputEvent(model.state.inputRef.current, '');
+              }}
+            />
+          </InputGroup.InnerStart>
+          <InputGroup.Input as={FormField.Input.as(Combobox.Input)} />
+          <Combobox.Menu.Popper>
+            <Combobox.Menu.Card>
+              {model.state.items.length === 0 && <StyledMenuItem>No Results Found</StyledMenuItem>}
+              {model.state.items.length > 0 && (
+                <Combobox.Menu.List maxHeight={200}>
+                  {item => <Combobox.Menu.Item>{item}</Combobox.Menu.Item>}
+                </Combobox.Menu.List>
+              )}
+            </Combobox.Menu.Card>
+          </Combobox.Menu.Popper>
+          <InputGroup.InnerEnd
             pointerEvents="none"
             style={{opacity: loader.isLoading ? 1 : 0, transition: 'opacity 100ms ease'}}
-            width={20}
+            width={10}
           >
             <LoadingDots style={{display: 'flex', transform: 'scale(0.3)'}} />
-          </InputGroup.End>
-          <InputGroup.End>
+          </InputGroup.InnerEnd>
+          <InputGroup.InnerEnd>
             <TertiaryButton
               role="presentation"
               icon={xSmallIcon}
@@ -85,20 +107,12 @@ export const Autocomplete = () => {
                 event.preventDefault(); // prevent a focus change
               }}
               onClick={event => {
-                dispatchInputEvent(model.ref.current, '');
+                dispatchInputEvent(model.state.inputRef.current, '');
               }}
             />
-          </InputGroup.End>
+          </InputGroup.InnerEnd>
         </InputGroup>
-        <Combobox.Menu.Popper>
-          <Combobox.Menu.Card>
-            {model.state.items.length === 0 && <span>No Results Found</span>}
-            <Combobox.Menu.List maxHeight={200}>
-              {item => <Combobox.Menu.Item>{item}</Combobox.Menu.Item>}
-            </Combobox.Menu.List>
-          </Combobox.Menu.Card>
-        </Combobox.Menu.Popper>
-      </FormField.Input>
+      </Combobox>
     </FormField>
   );
 };

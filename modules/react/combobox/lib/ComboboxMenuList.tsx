@@ -1,23 +1,13 @@
 import React from 'react';
 
 import {commonColors} from '@workday/canvas-kit-react/tokens';
-import {
-  createElemPropsHook,
-  createSubcomponent,
-  ExtractProps,
-} from '@workday/canvas-kit-react/common';
+import {createElemPropsHook, createSubcomponent} from '@workday/canvas-kit-react/common';
 import {useMenuModel} from '@workday/canvas-kit-react/menu';
-import {ListBox, ListProps} from '@workday/canvas-kit-react/collection';
+import {ListBox, ListBoxProps} from '@workday/canvas-kit-react/collection';
 
 import {useComboboxModel} from './useComboboxModel';
 
-export interface ComboboxMenuListProps<T = any>
-  extends Omit<ExtractProps<typeof ListBox>, 'children'> {
-  /**
-   * Children of the Combobox. Should contain a `<Combobox.Target>`, a `<Combobox.Content>`
-   */
-  children: ListProps<T>['children'];
-}
+export interface ComboboxMenuListProps<T = any> extends ListBoxProps<T> {}
 
 export const useComboboxMenuList = createElemPropsHook(useMenuModel)(model => {
   return {

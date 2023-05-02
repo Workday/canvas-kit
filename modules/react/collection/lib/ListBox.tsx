@@ -10,8 +10,8 @@ import {useListModel} from './useListModel';
 import {useListRenderItems} from './useListRenderItem';
 import {useListItemRegister} from './useListItemRegister';
 
-export interface ListBoxProps extends Omit<FlexProps, 'children'> {
-  children?: React.ReactNode | ((item: any, index: number) => React.ReactNode);
+export interface ListBoxProps<T = any> extends Omit<FlexProps, 'children'> {
+  children?: React.ReactNode | ((item: T, index: number) => React.ReactNode);
 }
 
 export const ListBoxItem = createSubcomponent('li')({

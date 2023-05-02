@@ -235,13 +235,11 @@ describe('createHook', () => {
 
   it('should return props that are merged together correctly when a ref is given', () => {
     const divElement = document.createElement('div');
-    const hook = createHook((model: any) => ({foo: 'bar'}));
+    const hook = createHook((model: any, ref) => ({foo: 'bar', ref}));
 
     const props = hook(emptyModel, {bar: 'baz'}, {current: divElement});
 
-    expectTypeOf(props).toEqualTypeOf<
-      {foo: string} & {bar: string} & {ref: React.Ref<HTMLDivElement>}
-    >();
+    expectTypeOf(props).toEqualTypeOf<{foo: string} & {bar: string} & {ref: React.Ref<unknown>}>();
     expect(props).toEqual({foo: 'bar', bar: 'baz', ref: {current: divElement}});
   });
 

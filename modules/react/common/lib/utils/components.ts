@@ -587,10 +587,8 @@ export const createElemPropsHook = <TModelHook extends (config: any) => Model<an
   modelHook: TModelHook
 ) => <PO extends {}, PI extends {}>(
   fn: (
-    model: TModelHook extends (config: any) => infer TModel
-      ? TModel
-      : {state: Record<string, any>; events: Record<string, any>},
-    ref?: React.Ref<any>,
+    model: TModelHook extends (config: any) => infer TModel ? TModel : Model<any, any>,
+    ref?: React.Ref<unknown>,
     elemProps?: PI
   ) => PO
 ): BehaviorHook<
@@ -628,10 +626,10 @@ export const createElemPropsHook = <TModelHook extends (config: any) => Model<an
  * });
  *
  * // Equivalent to:
- * const useMyHook = <P extends {}, R>(
+ * const useMyHook = <P extends {}>(
  *   model: MyModel,
  *   elemProps: P,
- *   ref: React.Ref<R>
+ *   ref: React.Ref<unknown>
  * ) => {
  *   const { localRef, elementRef } = useLocalRef(ref);
  *   // do whatever with `localRef` which is a RefObject
@@ -645,7 +643,7 @@ export const createElemPropsHook = <TModelHook extends (config: any) => Model<an
  * @param fn Function that takes a model and optional ref and returns props
  */
 export const createHook = <M extends Model<any, any>, PO extends {}, PI extends {}>(
-  fn: (model: M, ref?: React.Ref<any>, elemProps?: PI) => PO
+  fn: (model: M, ref?: React.Ref<unknown>, elemProps?: PI) => PO
 ): BehaviorHook<M, PO> => {
   return ((model, elemProps, ref) => {
     const props = mergeProps(fn(model, ref, elemProps || ({} as any)), elemProps || ({} as any));
@@ -659,12 +657,13 @@ export const createHook = <M extends Model<any, any>, PO extends {}, PI extends 
 
 /**
  * @deprecated use `createSubModelElemPropsHook` instead
+ * @deprecated use `createSubModelElemPropsHook` instead
  */
 export const subModelHook = <M extends Model<any, any>, SM extends Model<any, any>, O extends {}>(
   fn: (model: M) => SM,
   hook: BehaviorHook<SM, O>
 ): BehaviorHook<M, O> => {
-  return ((model: M, props: any, ref: React.Ref<any>) => {
+  return ((model: M, props: any, ref: React.Ref<unknown>) => {
     return hook(fn(model), props, ref);
   }) as BehaviorHook<M, O>;
 };
@@ -699,7 +698,7 @@ export function createSubModelElemPropsHook<M extends () => Model<any, any>>(mod
     fn: (model: ReturnType<M>) => SM,
     elemPropsHook: BehaviorHook<SM, O>
   ): BehaviorHook<ReturnType<M>, O> => {
-    return ((model: ReturnType<M>, props: any, ref: React.Ref<any>) => {
+    return ((model: ReturnType<M>, props: any, ref: React.Ref<unknown>) => {
       return elemPropsHook(fn(model), props, ref);
     }) as BehaviorHook<ReturnType<M>, O>;
   };
@@ -737,9 +736,7 @@ interface BaseHook<M extends Model<any, any>, O extends {}> {
  * attributes to apply to an element or component.
  */
 export interface BehaviorHook<M extends Model<any, any>, O extends {}> extends BaseHook<M, O> {
-  <P extends {}, R>(model: M, elemProps?: P, ref?: React.Ref<R>): O &
-    P &
-    (R extends HTMLOrSVGElement ? {ref: React.Ref<R>} : {});
+  <P extends {}>(model: M, elemProps?: P, ref?: React.Ref<unknown>): O & P;
 }
 
 function setRef<T>(ref: React.Ref<T> | undefined, value: T): void {
@@ -918,7 +915,10 @@ export function composeHooks<
   hook3?: H3,
   hook4?: H4,
   hook5?: H5,
-  hook6?: H6
+  hook6?: H6,
+  // TypeScript will only infer up to 6, but the types will still exist for those 6. The rest of the
+  // hooks won't add to the interface, but that seems to be an okay fallback
+  ...hooks: BehaviorHook<any, any>[]
 ): H1 extends BaseHook<infer M, infer O1>
   ? H2 extends BaseHook<any, infer O2>
     ? H3 extends BaseHook<any, infer O3>

@@ -17,7 +17,7 @@ export interface MenuTargetProps {
 const useMenuTargetBase = createElemPropsHook(useMenuModel)(model => {
   return {
     id: model.state.id,
-    'aria-haspopup': 'true',
+    // 'aria-haspopup': 'true',
     'aria-expanded': model.state.visibility === 'visible',
     onKeyDown(event: React.KeyboardEvent) {
       // eslint-disable-next-line default-case
@@ -38,5 +38,9 @@ export const MenuTarget = createSubcomponent(SecondaryButton)({
   modelHook: useMenuModel,
   elemPropsHook: useMenuTarget,
 })<MenuTargetProps>(({children, ...elemProps}, Element) => {
-  return <Element {...elemProps}>{children}</Element>;
+  return (
+    <Element {...elemProps} position="">
+      {children}
+    </Element>
+  );
 });

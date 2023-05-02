@@ -16,19 +16,19 @@ import {
 } from '@workday/canvas-kit-react/collection';
 
 import {useComboboxModel} from './useComboboxModel';
+import {useComboboxInputOpenWithArrowKeys} from './useComboboxInputOpenWithArrowKeys';
 
 export const useComboboxInput = composeHooks(
-  createElemPropsHook(useComboboxModel)((model, ref?: React.Ref<HTMLInputElement>) => {
-    const elementRef = useForkRef(ref, model.ref);
+  createElemPropsHook(useComboboxModel)((model, ref) => {
+    const elementRef = useForkRef(ref, model.state.inputRef);
 
     React.useEffect(() => {
       if (model.state.cursorId && model.state.visibility === 'visible') {
         const item = model.navigation.getItem(model.state.cursorId, model);
         if (model.state.isVirtualized && item) {
-          console.log('scrollToIndex', item.index);
           model.state.UNSTABLE_virtual.scrollToIndex(item.index);
         } else {
-          const listboxId = model.ref.current?.getAttribute('aria-controls');
+          const listboxId = model.state.inputRef.current?.getAttribute('aria-controls');
           if (listboxId) {
             const menuItem = document.querySelector(
               `[id="${listboxId}"] [data-id="${model.state.cursorId}"]`
@@ -46,13 +46,6 @@ export const useComboboxInput = composeHooks(
 
     return {
       onKeyDown(event: React.KeyboardEvent) {
-        if (
-          event.key === 'ArrowDown' ||
-          (event.key === 'ArrowUp' && model.state.visibility !== 'visible')
-        ) {
-          model.events.show(event);
-          model.events.setWidth(event.currentTarget.clientWidth);
-        }
         if (event.key === 'Escape') {
           dispatchInputEvent(event.currentTarget as HTMLElement, '');
         }
@@ -86,8 +79,9 @@ export const useComboboxInput = composeHooks(
       'aria-controls': `${model.state.id}-list`,
       id: model.state.id,
       ref: elementRef,
-    };
+    } as const;
   }),
+  useComboboxInputOpenWithArrowKeys,
   useListActiveDescendant,
   useListKeyboardHandler,
   usePopupTarget

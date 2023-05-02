@@ -73,6 +73,16 @@ module.exports = {
     }
 
     // Convert mdx links to point to github
+    /**
+     * This was added to tell webpack not to parse the typescript.js file in node_modules and suppress these warnings:
+     * WARN Module not found: Error: Can't resolve 'perf_hooks' in 'node_modules/typescript/lib'
+     * WARN resolve 'perf_hooks' in 'node_modules/typescript/lib
+     *
+     * These warnings relate to this open GitHub issue: https://github.com/microsoft/TypeScript/issues/39436
+     * If you no longer see these warnings when this is config is removed, you can safely delete this config.
+     */
+    config.module.noParse = [require.resolve('typescript/lib/typescript.js')];
+
     config.module.rules.push({
       test: /\.mdx?$/,
       include: [path.resolve(__dirname, '..')],

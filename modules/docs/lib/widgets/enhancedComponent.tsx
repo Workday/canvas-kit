@@ -70,7 +70,7 @@ registerWidget<EnhancedComponentValue>('enhancedComponent', ({value, doc, meta})
         <>
           <Heading headingOffset={1}>Layout Component</Heading>
           <MDX as="p">
-            <code>{value.displayName}</code> supports all props from the
+            <code>{value.displayName || parentComponentName}</code> supports all props from the
             <code>
               <ParentComponentJSDocContext.Provider value={defaultJSDoc}>
                 <SymbolDialog value={value.styleComponent} />

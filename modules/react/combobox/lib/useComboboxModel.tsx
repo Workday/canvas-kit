@@ -12,17 +12,17 @@ import {useMenuModel} from '@workday/canvas-kit-react/menu';
 const useInputModel = createModelHook({
   defaultConfig: {
     value: undefined as string | undefined,
+
     onChange(event: React.ChangeEvent<HTMLInputElement>) {
       return;
     },
   },
 })(config => {
-  const ref = React.createRef<HTMLInputElement>();
+  const inputRef = React.createRef<HTMLInputElement>();
 
   return {
-    ref,
     onChange: config.onChange,
-    state: {value: config.value},
+    state: {value: config.value, inputRef},
     events: {},
   };
 });

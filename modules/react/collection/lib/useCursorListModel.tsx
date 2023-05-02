@@ -316,6 +316,7 @@ export const useCursorListModel = createModelHook({
     pageSize: 0,
   },
   requiredConfig: useBaseListModel.requiredConfig,
+  contextOverride: useBaseListModel.Context,
 })(config => {
   const [cursorId, setCursorId] = React.useState(config.initialCursorId);
   const pageSizeRef = React.useRef(config.pageSize);

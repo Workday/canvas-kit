@@ -1,14 +1,10 @@
 import React from 'react';
 
 import {createContainer} from '@workday/canvas-kit-react/common';
-import {Menu} from '@workday/canvas-kit-react/menu';
 
 import {useComboboxModel} from './useComboboxModel';
 import {ComboboxInput} from './ComboboxInput';
-import {ComboboxMenuList} from './ComboboxMenuList';
-import {ComboboxMenuItem} from './ComboboxMenuItem';
-import {ComboboxCard} from './ComboboxCard';
-
+import {ComboboxMenu} from './ComboboxMenu';
 export interface ComboboxProps {
   /**
    * Children of the Combobox. Should contain a `<Combobox.Input>`, a `<Combobox.Content>`
@@ -20,15 +16,18 @@ export const Combobox = createContainer()({
   displayName: 'Combobox',
   modelHook: useComboboxModel,
   subComponents: {
+    /**
+     * The input of the combobox. This element will have `role="combobox"` applied, along with
+     * `aria-haspopup="true"`
+     */
     Input: ComboboxInput,
-    Menu: {
-      ...Menu,
-      List: ComboboxMenuList,
-      Item: ComboboxMenuItem,
-      Card: ComboboxCard,
-    },
+    /**
+     * A custom {@link Menu} component that uses `aria-activedescendant` instead of roving tab index
+     * to keep the focus on the {@link ComboboxInput Combobox.Input}.
+     */
+    Menu: ComboboxMenu,
   },
 })<ComboboxProps>(({children}, _, model) => {
   console.log('model', model);
-  return <Menu model={model}>{children}</Menu>;
+  return <ComboboxMenu model={model}>{children}</ComboboxMenu>;
 });

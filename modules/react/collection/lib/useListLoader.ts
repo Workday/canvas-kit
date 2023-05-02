@@ -6,15 +6,18 @@ export interface LoadReturn<T> {
   items: T[];
   total?: number;
 }
+
+export interface LoadParams {
+  pageNumber: number;
+  pageSize: number;
+  filter: CollectionLoader['filter'];
+  sorter: CollectionLoader['sorter'];
+}
 export interface AsyncCollectionConfig<T> {
   pageSize: number;
   total: number;
-  load(params: {
-    pageNumber: number;
-    pageSize: number;
-    filter: CollectionLoader['filter'];
-    sorter: CollectionLoader['sorter'];
-  }): LoadReturn<T> | Promise<LoadReturn<T>>;
+  load(params: LoadParams): LoadReturn<T> | Promise<LoadReturn<T>>;
+  shouldLoad?(params: LoadParams): boolean;
 }
 
 export interface CollectionLoader {
@@ -140,7 +143,6 @@ export function useListLoader<
 
   const updateItems = React.useCallback(
     ({updater, total: newTotal}: Updater<T>) => {
-      console.log('total', newTotal);
       if (newTotal !== undefined && total !== newTotal) {
         setTotal(newTotal);
         setItems(() => {
@@ -157,16 +159,13 @@ export function useListLoader<
   const updateFilter = (filter: CollectionLoader['filter']) => {
     loadingRef.current = {};
     setFilter(filter);
-    load(
-      {
-        pageNumber: 1,
-        pageSize: config.pageSize,
-        filter,
-        sorter,
-      },
-      loadRef.current,
-      loadingRef.current
-    ).then(updateItems);
+    const params = {
+      pageNumber: 1,
+      pageSize: config.pageSize,
+      filter,
+      sorter,
+    };
+    load(params, loadRef.current, loadingRef.current).then(updateItems);
   };
 
   const updateSorter = (sorter: CollectionLoader['sorter']) => {

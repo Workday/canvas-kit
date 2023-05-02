@@ -14,33 +14,31 @@ const hiddenStyle = {
  * This elemProps hook measures an overflow list target and reports it to an `OverflowListModel`.
  * This is used in overflow detection.
  */
-export const useOverflowListTarget = createElemPropsHook(useOverflowListModel)(
-  (model, ref?: React.Ref<HTMLButtonElement>) => {
-    const {elementRef, localRef} = useLocalRef(ref);
-    // track first render to force correct size calculations
-    const firstRender = React.useRef(true);
+export const useOverflowListTarget = createElemPropsHook(useOverflowListModel)((model, ref) => {
+  const {elementRef, localRef} = useLocalRef(ref as React.Ref<HTMLElement>);
+  // track first render to force correct size calculations
+  const firstRender = React.useRef(true);
 
-    useMountLayout(() => {
-      firstRender.current = false;
-      if (localRef.current) {
-        const styles = getComputedStyle(localRef.current);
+  useMountLayout(() => {
+    firstRender.current = false;
+    if (localRef.current) {
+      const styles = getComputedStyle(localRef.current);
 
-        model.events.setOverflowTargetWidth({
-          width:
-            localRef.current.offsetWidth +
-            parseFloat(styles.marginLeft) +
-            parseFloat(styles.marginRight),
-        });
-      }
-    });
+      model.events.setOverflowTargetWidth({
+        width:
+          localRef.current.offsetWidth +
+          parseFloat(styles.marginLeft) +
+          parseFloat(styles.marginRight),
+      });
+    }
+  });
 
-    const isHidden = !model.state.hiddenIds.length;
+  const isHidden = !model.state.hiddenIds.length;
 
-    return {
-      ref: elementRef,
-      'aria-hidden': isHidden,
-      tabIndex: isHidden ? -1 : 0,
-      style: isHidden ? hiddenStyle : {},
-    };
-  }
-);
+  return {
+    ref: elementRef,
+    'aria-hidden': isHidden,
+    tabIndex: isHidden ? -1 : 0,
+    style: isHidden ? hiddenStyle : {},
+  };
+});
