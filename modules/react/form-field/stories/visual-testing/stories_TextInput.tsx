@@ -121,11 +121,13 @@ export const InputGroupStates = () => (
           <InputGroup width={300}>
             {props.start &&
               props.start.map((start, index) => (
-                <InputGroup.Start key={index}>{start}</InputGroup.Start>
+                <InputGroup.InnerStart key={index}>{start}</InputGroup.InnerStart>
               ))}
             <InputGroup.Input value="Very Long Text. Very Long Text. Very Long Text." />
             {props.end &&
-              props.end.map((end, index) => <InputGroup.End key={index}>{end}</InputGroup.End>)}
+              props.end.map((end, index) => (
+                <InputGroup.InnerEnd key={index}>{end}</InputGroup.InnerEnd>
+              ))}
           </InputGroup>
         </CanvasProvider>
       )}

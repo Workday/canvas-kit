@@ -6,7 +6,7 @@ import {Flex} from '@workday/canvas-kit-react/layout';
 
 import {TextInput} from './TextInput';
 
-export const InputGroupStart = createComponent('div')({
+export const InputGroupInnerStart = createComponent('div')({
   Component(elemProps: ExtractProps<typeof Flex>, ref, Element) {
     return (
       <Flex
@@ -23,7 +23,7 @@ export const InputGroupStart = createComponent('div')({
   },
 });
 
-export const InputGroupEnd = createComponent('div')({
+export const InputGroupInnerEnd = createComponent('div')({
   Component(elemProps: ExtractProps<typeof Flex>, ref, Element) {
     return (
       <Flex
@@ -58,15 +58,16 @@ const toPx = (input: string | number): string => {
  * `React.cloneElement` from the [React.Children](https://react.dev/reference/react/Children) API.
  * This means all children must be `InputGroup.*` components. Any other direct children will cause
  * issues. You can add different elements/components inside the
- * {@link InputGroupStart InputGroup.Start} and {@link InputGroupEnd InputGroup.End} subcomponents.
+ * {@link InputGroupInnerStart InputGroup.InnerStart} and
+ * {@link InputGroupInnerEnd InputGroup.InnerEnd} subcomponents.
  *
  * ```tsx
  * <InputGroup>
- *   <InputGroup.Start as={SystemIcon} pointerEvents="none" icon={searchIcon} />
+ *   <InputGroup.InnerStart as={SystemIcon} pointerEvents="none" icon={searchIcon} />
  *   <InputGroup.Input />
- *   <InputGroup.End>
+ *   <InputGroup.InnerEnd>
  *     <TertiaryButton tabIndex={-1} icon={xIcon} size="small" />
- *   </InputGroup.End>
+ *   </InputGroup.InnerEnd>
  * </InputGroup>
  * ```
  */
@@ -80,14 +81,14 @@ export const InputGroup = createComponent('div')({
     const offsetsEnd: string[] = [];
 
     React.Children.forEach(children, child => {
-      if (React.isValidElement<any>(child) && child.type === InputGroupStart) {
+      if (React.isValidElement<any>(child) && child.type === InputGroupInnerStart) {
         const width = child.props.width || space.xl;
         offsetsStart.push(paddingInlineStart);
         paddingInlineStart = paddingInlineStart
           ? `calc(${toPx(paddingInlineStart)} + ${width})`
           : width;
       }
-      if (React.isValidElement<any>(child) && child.type === InputGroupEnd) {
+      if (React.isValidElement<any>(child) && child.type === InputGroupInnerEnd) {
         const width = child.props.width || space.xl;
         offsetsEnd.push(paddingInlineEnd);
         paddingInlineEnd = paddingInlineEnd ? `calc(${toPx(paddingInlineEnd)} + ${width})` : width;
@@ -105,7 +106,7 @@ export const InputGroup = createComponent('div')({
         if (child.type === InputGroupInput) {
           return React.cloneElement(child, {paddingInlineStart, paddingInlineEnd});
         }
-        if (child.type === InputGroupStart) {
+        if (child.type === InputGroupInnerStart) {
           const offset = offsetsStart[startIndex] || 0;
           startIndex++;
 
@@ -114,7 +115,7 @@ export const InputGroup = createComponent('div')({
             right: isRTL ? offset : undefined,
           });
         }
-        if (child.type === InputGroupEnd) {
+        if (child.type === InputGroupInnerEnd) {
           const offset = offsetsEnd[endIndex] || 0;
           endIndex++;
 
@@ -139,7 +140,7 @@ export const InputGroup = createComponent('div')({
      * overlap with this element. Use `width` (number of pixels only) to adjust the width offset.
      * The width defaults to 40px which is the correct width for icons or icon buttons.
      */
-    Start: InputGroupStart,
+    InnerStart: InputGroupInnerStart,
     /**
      * The input to render. By default, this is a {@link TextInput}. Use the `as` prop to change the
      * component to be rendered.
@@ -150,6 +151,6 @@ export const InputGroup = createComponent('div')({
      * overlap with this element. Use `width` (number of pixels only) to adjust the width offset.
      * The width defaults to 40px which is the correct width for icons or icon buttons.
      */
-    End: InputGroupEnd,
+    InnerEnd: InputGroupInnerEnd,
   },
 });

@@ -13,13 +13,13 @@ describe('InputGroup', () => {
     const ssrRender = () =>
       renderToString(
         <InputGroup>
-          <InputGroup.Start pointerEvents="none">
+          <InputGroup.InnerStart pointerEvents="none">
             <SystemIcon icon={searchIcon} size="small" />
-          </InputGroup.Start>
+          </InputGroup.InnerStart>
           <InputGroup.Input />
-          <InputGroup.End>
+          <InputGroup.InnerEnd>
             <TertiaryButton role="presentation" icon={xSmallIcon} size="small" tabIndex={-1} />
-          </InputGroup.End>
+          </InputGroup.InnerEnd>
         </InputGroup>
       );
 
