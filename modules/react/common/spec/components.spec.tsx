@@ -406,10 +406,10 @@ describe('composeHooks', () => {
 
   it('should merge properties from both hooks', () => {
     const hook1 = createHook(() => {
-      return {hook1: ''};
+      return {hook1: 'hook1'};
     });
     const hook2 = createHook(() => {
-      return {hook2: ''};
+      return {hook2: 'hook2'};
     });
     const props = composeHooks(hook1, hook2)(myModel, {}, null);
     expect(props).toHaveProperty('hook1', 'hook1');
