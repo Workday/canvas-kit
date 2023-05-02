@@ -6,7 +6,7 @@ const haveAttrMatchingIdOf = (name: string, selector: string) => ($el: JQuery) =
   expect($el).to.have.attr(name, $matchingEl.attr('id')!);
 };
 
-describe('Combobox', () => {
+describe('Combobox Labs', () => {
   before(() => {
     h.stories.visit();
   });
