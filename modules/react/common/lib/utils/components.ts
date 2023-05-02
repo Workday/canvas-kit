@@ -905,63 +905,20 @@ export function useModelContext<T>(
  * props {a: 'useHook1', b: 'useHook2', c: 'foo'}
  * ```
  */
-export function composeHooks<H1, H2, H3, H4>(
-  hook1: H1,
-  hook2: H2
-): H1 extends BaseHook<infer M, infer O1>
-  ? H2 extends BaseHook<any, infer O2>
-    ? BehaviorHook<M, O1 & O2>
-    : never
-  : never;
-export function composeHooks<H1, H2, H3, H4>(
-  hook1: H1,
-  hook2: H2,
-  hook3: H3
-): H1 extends BaseHook<infer M, infer O1>
-  ? H2 extends BaseHook<any, infer O2>
-    ? H3 extends BaseHook<any, infer O3>
-      ? BehaviorHook<M, O1 & O2 & O3>
-      : never
-    : never
-  : never;
-export function composeHooks<H1, H2, H3, H4>(
+export function composeHooks<
+  H1 extends BehaviorHook<any, {}>,
+  H2 extends BehaviorHook<any, {}>,
+  H3 extends BehaviorHook<any, {}>,
+  H4 extends BehaviorHook<any, {}>,
+  H5 extends BehaviorHook<any, {}>,
+  H6 extends BehaviorHook<any, {}>
+>(
   hook1: H1,
   hook2: H2,
-  hook3: H3,
-  hook4: H4
-): H1 extends BaseHook<infer M, infer O1>
-  ? H2 extends BaseHook<any, infer O2>
-    ? H3 extends BaseHook<any, infer O3>
-      ? H4 extends BaseHook<any, infer O4>
-        ? BehaviorHook<M, O1 & O2 & O3 & O4>
-        : never
-      : never
-    : never
-  : never;
-export function composeHooks<H1, H2, H3, H4, H5>(
-  hook1: H1,
-  hook2: H2,
-  hook3: H3,
-  hook4: H4,
-  hook5: H5
-): H1 extends BaseHook<infer M, infer O1>
-  ? H2 extends BaseHook<any, infer O2>
-    ? H3 extends BaseHook<any, infer O3>
-      ? H4 extends BaseHook<any, infer O4>
-        ? H5 extends BaseHook<any, infer O5>
-          ? BehaviorHook<M, O1 & O2 & O3 & O4 & O5>
-          : never
-        : never
-      : never
-    : never
-  : never;
-export function composeHooks<H1, H2, H3, H4, H5, H6>(
-  hook1: H1,
-  hook2: H2,
-  hook3: H3,
-  hook4: H4,
-  hook5: H5,
-  hook6: H6
+  hook3?: H3,
+  hook4?: H4,
+  hook5?: H5,
+  hook6?: H6
 ): H1 extends BaseHook<infer M, infer O1>
   ? H2 extends BaseHook<any, infer O2>
     ? H3 extends BaseHook<any, infer O3>
@@ -969,10 +926,10 @@ export function composeHooks<H1, H2, H3, H4, H5, H6>(
         ? H5 extends BaseHook<any, infer O5>
           ? H6 extends BaseHook<any, infer O6>
             ? BehaviorHook<M, O1 & O2 & O3 & O4 & O5 & O6>
-            : never
-          : never
-        : never
-      : never
+            : BehaviorHook<M, O1 & O2 & O3 & O4 & O5>
+          : BehaviorHook<M, O1 & O2 & O3 & O4>
+        : BehaviorHook<M, O1 & O2 & O3>
+      : BehaviorHook<M, O1 & O2>
     : never
   : never;
 export function composeHooks<M extends Model<any, any>, P extends {}, O extends {}>(
