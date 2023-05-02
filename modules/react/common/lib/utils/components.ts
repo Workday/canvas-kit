@@ -714,7 +714,7 @@ interface BaseHook<M extends Model<any, any>, O extends {}> {
    */
   __model: M;
   /**
-   * Capture the hook's output type in Typescript only. Do not use in runtime! This is used to cache
+   * Capture the hook's output type in TypeScript only. Do not use in runtime! This is used to cache
    * and speed up the output types during inference
    *
    * @private
