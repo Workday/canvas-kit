@@ -705,7 +705,7 @@ export function createSubModelElemPropsHook<M extends () => Model<any, any>>(mod
   };
 }
 
-/** Simplify and speedup inference by capturing types in the signature itself */
+/** Simplify and speed up inference by capturing types in the signature itself */
 interface BaseHook<M extends Model<any, any>, O extends {}> {
   /**
    * Capture the model type in TypeScript only. Do not use in runtime!
