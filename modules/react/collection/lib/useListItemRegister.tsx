@@ -5,6 +5,7 @@ import {
   createElemPropsHook,
   useLocalRef,
   useForkRef,
+  slugify,
 } from '@workday/canvas-kit-react/common';
 
 import {Item} from './useBaseListModel';
@@ -26,7 +27,7 @@ import {useListModel} from './useListModel';
  */
 export const useListItemRegister = createElemPropsHook(useListModel)(
   (
-    {state, events, getId},
+    {state, events},
     ref?: React.Ref<HTMLElement>,
     elemProps: {
       'data-id'?: string;
@@ -37,8 +38,14 @@ export const useListItemRegister = createElemPropsHook(useListModel)(
       virtual?: VirtualItem;
     } = {}
   ) => {
-    const [localId, setLocalId] = React.useState(elemProps['data-id'] || elemProps.item?.id || '');
-    const {localRef, elementRef} = useLocalRef(useForkRef(ref, elemProps.virtual?.measureRef));
+    const [localId, setLocalId] = React.useState(
+      elemProps['data-id'] || elemProps.item?.id || typeof elemProps.children === 'string'
+        ? (elemProps.children as string)
+        : ''
+    );
+    const {localRef, elementRef} = useLocalRef(
+      useForkRef(ref as React.Ref<HTMLElement>, elemProps.virtual?.measureRef)
+    );
 
     // if the list is virtual, force the correct styling. Without this, weird things happen...
     const style: CSSProperties = elemProps.virtual
@@ -64,7 +71,7 @@ export const useListItemRegister = createElemPropsHook(useListModel)(
 
       // TODO: Better lookup that using `items.find`. We need a more generic collection to handle seeing if an item already exists
       // bail early if item already exists. This happens if items were already provided.
-      if (state.items.find(item => getId(item) === itemId)) {
+      if (state.items.find(item => item.id === itemId)) {
         return;
       }
       events.registerItem({
@@ -89,6 +96,7 @@ export const useListItemRegister = createElemPropsHook(useListModel)(
       'aria-setsize': elemProps.virtual?.size,
       'aria-posinset': elemProps.virtual ? elemProps.item!.index + 1 : undefined,
       style,
+      id: slugify(`${state.id}-${localId}`),
     };
   }
 );
