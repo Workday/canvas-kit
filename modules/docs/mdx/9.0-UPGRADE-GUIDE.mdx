@@ -26,6 +26,7 @@ any questions.
 - [Component Updates](#component-updates)
   - [Button](#button)
   - [Toast](#toast)
+  - [Collection](#collection)
 - [Utility Updates](#utility-updates)
   - [useTheme and getTheme](#usetheme-and-gettheme)
   - [useThemedRing](#usethemedring)
@@ -291,6 +292,8 @@ return {
 `as const` instructs Typescript the type is `readonly`. Typescript knows readonly values or objects
 cannot be changed and will therefore narrow the type for you.
 
+---
+
 ## Token Updates
 
 ### Depth
@@ -377,6 +380,15 @@ previously used `actionText` or `onActionClick`. The codemod will also update im
 
 > **Note:** You will manually need to set `mode` to `alert` if your `Toast` conveys urgent and
 > important information such as an error.
+
+---
+
+### Collection
+
+Navigation was updated to use numberical indexes instead of string ids. The `model.state.cursorId`
+is left unchanged. The change is to support virtual lists where navigation knows where it needs to
+go, but the id may not be loaded yet. The mechanism for navigating is private and should not
+breaking anything. If you created a custom navigation manager, the signature has been changed.
 
 ## Utility Updates
 
