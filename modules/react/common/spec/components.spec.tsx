@@ -405,9 +405,17 @@ describe('composeHooks', () => {
   });
 
   it('should merge properties from both hooks', () => {
+    const hook1 = createHook(() => {
+      return {hook1: ''};
+    });
+    const hook2 = createHook(() => {
+      return {hook2: ''};
+    });
     const props = composeHooks(hook1, hook2)(myModel, {}, null);
     expect(props).toHaveProperty('hook1', 'hook1');
     expect(props).toHaveProperty('hook2', 'hook2');
+
+    expectTypeOf(props).toEqualTypeOf<{hook1: string; hook2: string}>();
   });
 
   it('should overwrite props of the first hook with props from the second hook', () => {
