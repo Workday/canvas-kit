@@ -357,7 +357,7 @@ type RemoveNull<T> = {[K in keyof T]: Exclude<T[K], null>};
  */
 type CompoundProps<Props, TElemPropsHook, E> = Props &
   (TElemPropsHook extends (...args: any[]) => infer TProps // try to infer TProps returned from the elemPropsHook function
-    ? RemoveNull<TProps extends {ref: any} ? TProps : TProps & {ref: ExtractRef<E>}>
+    ? RemoveNull<Omit<TProps, 'ref'> & {ref: ExtractRef<E>}>
     : {ref: ExtractRef<E>}) &
   (Props extends {children: any}
     ? {}
@@ -936,92 +936,6 @@ export function composeHooks<
   hook5: BehaviorHook<M, O5>
 ): BehaviorHook<M, O1 & O2 & O3 & O4 & O5>;
 export function composeHooks<M extends Model<any, any>, R, P extends {}, O extends {}>(
-  ...hooks: ((model: M, props: P, ref: React.Ref<R>) => O)[]
-): BehaviorHook<M, O> {
-  return (model, props, ref) => {
-    const returnProps = [...hooks].reverse().reduce((props: any, hook) => {
-      return hook(model, props, props.ref || ref);
-    }, props);
-
-    if (!returnProps.hasOwnProperty('ref') && ref) {
-      // This is the weird "incoming ref isn't in props, but outgoing ref is in props" thing
-      returnProps.ref = ref;
-    }
-
-    return returnProps;
-  };
-}
-
-/**
- * Compose many hooks together. Assumes hooks are using `mergeProps`. Returns a function that will
- * receive a model and return props to be applied to a component. These props should always be
- * applied last on the Component. The props will override as follows: rightmost hook props override
- * leftmost hook props which are overridden by props passed to the composeHooks function.
- *
- * A `ref` should be passed for hooks that require a ref. Each hook should fork the ref using
- * `useLocalRef`, passing the `elementRef` in the returned props object. This ref will be passed to
- * the next hook.
- *
- * @example
- * const MyComponent = React.forwardRef(({ children, model, ...elemProps }, ref) => {
- *   const props = composeModelHooks(useModel)(useHook1, useHook2)(model, elemProps, ref)
- *
- *   return <div id="foo" {...props}>{children}</div>
- * })
- */
-//  export function composeModelHooks<M extends
-//  TModelHook extends (config: any) => {state: Record<string, any>; events: Record<string, any>}
-// >, O1 extends {}, O2 extends {}>(
-//   hook1: BehaviorHook<M, O1>,
-//   hook2: BehaviorHook<M, O2>
-// ): BehaviorHook<M, O1 & O2>;
-
-export function composeModelHooks<
-  M extends Model<any, any>,
-  R,
-  P extends {},
-  O1 extends {},
-  O2 extends {},
-  O3 extends {}
->(
-  hook1: BehaviorHook<M, O1>,
-  hook2: BehaviorHook<M, O2>,
-  hook3: BehaviorHook<M, O3>
-): BehaviorHook<M, O1 & O2 & O3>;
-export function composeModelHooks<
-  M extends Model<any, any>,
-  M2 extends M,
-  M3 extends M,
-  M4 extends M,
-  R,
-  P extends {},
-  O1 extends {},
-  O2 extends {},
-  O3 extends {},
-  O4 extends {}
->(
-  hook1: BehaviorHook<M, O1>,
-  hook2: BehaviorHook<M2, O2>,
-  hook3: BehaviorHook<M3, O3>,
-  hook4: BehaviorHook<M4, O4>
-): BehaviorHook<M, O1 & O2 & O3 & O4>;
-export function composeModelHooks<
-  M extends Model<any, any>,
-  R,
-  P extends {},
-  O1 extends {},
-  O2 extends {},
-  O3 extends {},
-  O4 extends {},
-  O5 extends {}
->(
-  hook1: BehaviorHook<M, O1>,
-  hook2: BehaviorHook<M, O2>,
-  hook3: BehaviorHook<M, O3>,
-  hook4: BehaviorHook<M, O4>,
-  hook5: BehaviorHook<M, O5>
-): BehaviorHook<M, O1 & O2 & O3 & O4 & O5>;
-export function composeModelHooks<M extends Model<any, any>, R, P extends {}, O extends {}>(
   ...hooks: ((model: M, props: P, ref: React.Ref<R>) => O)[]
 ): BehaviorHook<M, O> {
   return (model, props, ref) => {
