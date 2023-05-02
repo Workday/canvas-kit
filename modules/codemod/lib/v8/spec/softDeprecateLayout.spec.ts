@@ -74,7 +74,7 @@ describe('Canvas Kit Deprecate Layout Codemod', () => {
     it('should properly transform Layout JSX identifiers', () => {
       const input = `
       import {Layout} from '@workday/canvas-kit-react/layout';
-
+  
       const CustomLayout = () => {
         return <Layout>Hello World</Layout>;
       };
@@ -86,7 +86,7 @@ describe('Canvas Kit Deprecate Layout Codemod', () => {
 
       const expected = `
       import {DeprecatedLayout} from '@workday/canvas-kit-react/layout';
-
+  
       const CustomLayout = () => {
         return <DeprecatedLayout>Hello World</DeprecatedLayout>;
       };
@@ -128,7 +128,7 @@ describe('Canvas Kit Deprecate Layout Codemod', () => {
     it('should properly transform type reference identifiers', () => {
       const input = `
       import { LayoutProps } from '@workday/canvas-kit-react/layout';
-
+  
       type CustomLayoutProps = LayoutProps;
       interface AnotherLayoutProps extends LayoutProps {
         specialProp?: boolean;
@@ -136,7 +136,7 @@ describe('Canvas Kit Deprecate Layout Codemod', () => {
       `;
       const expected = `
       import { DeprecatedLayoutProps } from '@workday/canvas-kit-react/layout';
-
+  
       type CustomLayoutProps = DeprecatedLayoutProps;
       interface AnotherLayoutProps extends DeprecatedLayoutProps {
         specialProp?: boolean;
@@ -149,7 +149,7 @@ describe('Canvas Kit Deprecate Layout Codemod', () => {
     it('should properly transform type reference identifiers', () => {
       const input = `
       import { ColumnProps } from '@workday/canvas-kit-react/layout';
-
+  
       type CustomColumnProps = ColumnProps;
       interface AnotherColumnProps extends ColumnProps {
         specialProp?: boolean;
@@ -157,7 +157,7 @@ describe('Canvas Kit Deprecate Layout Codemod', () => {
       `;
       const expected = `
       import { DeprecatedColumnProps } from '@workday/canvas-kit-react/layout';
-
+  
       type CustomColumnProps = DeprecatedColumnProps;
       interface AnotherColumnProps extends DeprecatedColumnProps {
         specialProp?: boolean;
