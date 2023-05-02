@@ -51,6 +51,18 @@ const toPx = (input: string | number): string => {
   return typeof input === 'number' ? `${input}px` : input;
 };
 
+// wrap an array of widths into something the browser can understand, including `calc` for multiple
+// values
+const wrapInCalc = (values: (string | number)[]): string | number | undefined => {
+  if (values.length === 0) {
+    return undefined;
+  }
+  if (values.length === 1) {
+    return values[0];
+  }
+  return `calc(${values.map(toPx).join(' + ')})`;
+};
+
 /**
  * An `InputGroup` is a container around a {@link TextInput} with optional start and end elements.
  * The start and end elements are usually icons or icon buttons. The `InputGroup` will add padding
@@ -75,40 +87,38 @@ export const InputGroup = createComponent('div')({
   displayName: 'InputGroup',
   Component({children, ...elemProps}: ExtractProps<typeof Flex>, ref, Element) {
     const isRTL = useIsRTL();
-    let paddingInlineStart: string;
-    let paddingInlineEnd: string;
-    const offsetsStart: string[] = [];
-    const offsetsEnd: string[] = [];
+    const offsetsStart: (string | number)[] = [];
+    const offsetsEnd: (string | number)[] = [];
 
+    // Collect the widths of the `InnerStart` and `InnerEnd` components into `offsetStart` and
+    // `offsetEnd` arrays
     React.Children.forEach(children, child => {
       if (React.isValidElement<any>(child) && child.type === InputGroupInnerStart) {
         const width = child.props.width || space.xl;
-        offsetsStart.push(paddingInlineStart);
-        paddingInlineStart = paddingInlineStart
-          ? `calc(${toPx(paddingInlineStart)} + ${width})`
-          : width;
+        offsetsStart.push(width);
       }
       if (React.isValidElement<any>(child) && child.type === InputGroupInnerEnd) {
         const width = child.props.width || space.xl;
-        offsetsEnd.push(paddingInlineEnd);
-        paddingInlineEnd = paddingInlineEnd ? `calc(${toPx(paddingInlineEnd)} + ${width})` : width;
+        offsetsEnd.push(width);
       }
     });
 
-    // reverse the end to ensure the elements appear in the right order
-    offsetsEnd.reverse();
+    // keep track of the index offsets to make sure we calculate the correct position offset
+    let indexStart = 0;
+    let indexEnd = 0;
 
-    let startIndex = 0;
-    let endIndex = 0;
-
+    // Loop over all the children and set the correct padding and positions
     const mappedChildren = React.Children.map(children, child => {
       if (React.isValidElement<any>(child)) {
         if (child.type === InputGroupInput) {
-          return React.cloneElement(child, {paddingInlineStart, paddingInlineEnd});
+          return React.cloneElement(child, {
+            paddingInlineStart: wrapInCalc(offsetsStart),
+            paddingInlineEnd: wrapInCalc(offsetsEnd),
+          });
         }
         if (child.type === InputGroupInnerStart) {
-          const offset = offsetsStart[startIndex] || 0;
-          startIndex++;
+          const offset = wrapInCalc(offsetsStart.slice(0, indexStart)) || 0;
+          indexStart++;
 
           return React.cloneElement(child, {
             left: isRTL ? undefined : offset,
@@ -116,8 +126,8 @@ export const InputGroup = createComponent('div')({
           });
         }
         if (child.type === InputGroupInnerEnd) {
-          const offset = offsetsEnd[endIndex] || 0;
-          endIndex++;
+          const offset = wrapInCalc(offsetsEnd.slice(indexEnd, -1)) || 0;
+          indexEnd++;
 
           return React.cloneElement(child, {
             left: isRTL ? offset : undefined,
@@ -136,9 +146,10 @@ export const InputGroup = createComponent('div')({
   },
   subComponents: {
     /**
-     * A component to show at the start of the input. The input's padding will be adjusted to not
-     * overlap with this element. Use `width` (number of pixels only) to adjust the width offset.
-     * The width defaults to 40px which is the correct width for icons or icon buttons.
+     * A component to show inside and at the start of the input. The input's padding will be
+     * adjusted to not overlap with this element. Use `width` (number of pixels only) to adjust the
+     * width offset. The width defaults to 40px which is the correct width for icons or icon
+     * buttons.
      */
     InnerStart: InputGroupInnerStart,
     /**
@@ -147,9 +158,9 @@ export const InputGroup = createComponent('div')({
      */
     Input: InputGroupInput,
     /**
-     * A component to show at the end of the input. The input's padding will be adjusted to not
-     * overlap with this element. Use `width` (number of pixels only) to adjust the width offset.
-     * The width defaults to 40px which is the correct width for icons or icon buttons.
+     * A component to show inside and at the end of the input. The input's padding will be adjusted
+     * to not overlap with this element. Use `width` (number of pixels only) to adjust the width
+     * offset. The width defaults to 40px which is the correct width for icons or icon buttons.
      */
     InnerEnd: InputGroupInnerEnd,
   },

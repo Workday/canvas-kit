@@ -53,21 +53,25 @@ const ClearInputButton = createComponent(TertiaryButton)({
     return (
       <Element
         ref={ref}
+        // This element does not need to be accessible via screen reader. The user can already clear
+        // an input
         role="presentation"
         icon={xSmallIcon}
+        // "small" is needed to render correctly within a `TextInput`
         size="small"
+        // A clear input button doesn't need focus. There's already keyboard keys to clear an input
         tabIndex={-1}
         transition="opacity 300ms ease"
+        // Use style attribute to avoid the cost of Emotion's styling solution that causes the
+        // browser to throw away style cache. The difference can be significant for large amount of
+        // elements (could be a 80ms difference)
         style={{
-          // Use style attribute to avoid the cost of Emotion's styling solution that causes the
-          // browser to throw away style cache. The difference can be significant for large amount
-          // of elements (could be a 80ms difference)
           opacity: inputHasValue ? 1 : 0,
           pointerEvents: inputHasValue ? 'auto' : 'none',
         }}
         {...elemProps}
         onMouseDown={event => {
-          event.preventDefault(); // prevent a focus change
+          event.preventDefault(); // prevent a focus change to the button. Focus should stay in the input
         }}
         onClick={_ => {
           dispatchInputEvent(inputRef.current, '');
