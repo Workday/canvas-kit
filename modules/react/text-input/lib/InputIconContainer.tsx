@@ -19,7 +19,6 @@ const IconContainer = styled('div')({
   right: space.xxs,
 });
 
-/** @deprecated Use `InputGroup` instead. */
 export const InputIconContainer: React.FunctionComponent<React.PropsWithChildren<
   InputIconContainerProps
 >> = ({grow, children, icon}) => (
