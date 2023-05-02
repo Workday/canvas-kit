@@ -1,5 +1,6 @@
 export * from './colorUtils';
 export * from './getTranslateFromOrigin';
+export * from './dispatchInputEvent';
 export * from './changeFocus';
 export * from './makeMq';
 export * from './mergeCallback';
