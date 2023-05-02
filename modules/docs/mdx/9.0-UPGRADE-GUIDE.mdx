@@ -277,7 +277,7 @@ return {
 }; // { 'position': string }
 ```
 
-Typescript doesn't know that this object interface cannot be mutated, so it will widen the
+TypeScript doesn't know that this object interface cannot be mutated, so it will widen the
 `position` type to a `string` which is now allowed when you pass the prop list to a JSX element.
 You'll have to add an `as const` to either the property or the whole object to force Typescript to
 narrow the type.

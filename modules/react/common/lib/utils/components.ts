@@ -708,21 +708,21 @@ export function createSubModelElemPropsHook<M extends () => Model<any, any>>(mod
 /** Simplify and speedup inference by capturing types in the signature itself */
 interface BaseHook<M extends Model<any, any>, O extends {}> {
   /**
-   * Capture the model type in Typescript only. Do not use in runtime!
+   * Capture the model type in TypeScript only. Do not use in runtime!
    *
    * @private
    */
   __model: M;
   /**
    * Capture the hook's output type in Typescript only. Do not use in runtime! This is used to cache
-   * and speedup the output types during inference
+   * and speed up the output types during inference
    *
    * @private
    */
   __output: O;
 }
 
-// Typescript function parameters are contravariant while return types are covariant. This is a
+// TypeScript function parameters are contravariant while return types are covariant. This is a
 // problem when someone hands us a model that correctly extends `Model<any, any>`, but adds extra
 // properties to the model. So `M extends Model<any, any>`. But the `BehaviorHook` is the return
 // type which will reverse the direction which is no longer true: `Model<any, any> extends M`. In
