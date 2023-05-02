@@ -85,16 +85,16 @@ Labels for required fields are suffixed by a red asterisk.
 ### Icons
 
 `InputGroup` is available to add icons to the `TextInput`. Internally, a container `div` element is
-used with relative position styling on the div and absolute position styling on the start and end
-icons. `InputGroup.Start` and `InputGroup.End` are used to position elements at the start and end of
-the input. "start" and "end" are used instead of "left" and "right" to match
+used with relative position styling on the `div` and absolute position styling on the start and end
+icons. `InputGroup.InnerStart` and `InputGroup.InnerEnd` are used to position elements at the start
+and end of the input. "start" and "end" are used instead of "left" and "right" to match
 [CSS Logical Properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Logical_Properties)
 and will be semantically correct in left-to-right and right-to-left languages.
 
-`InputGroup.Start` and `InputGroup.End` subcomponents can handle any child elements, but are built
-for icons. The default width is `40px`, which is perfect for icons. If you need to use something
-else, be sure to set the `width` property of `InputGroup.Start` or `InputGroup.End` to match the
-intended width of the element.
+`InputGroup.InnerStart` and `InputGroup.InnerEnd` subcomponents can handle any child elements, but
+are built for icons. The default width is `40px`, which is perfect for icons. If you need to use
+something else, be sure to set the `width` property of `InputGroup.InnerStart` or
+`InputGroup.InnerEnd` to match the intended width of the element.
 
 <ExampleCodeBlock code={Icons} />
 

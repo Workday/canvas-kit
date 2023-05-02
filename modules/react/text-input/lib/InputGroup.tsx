@@ -64,13 +64,13 @@ const wrapInCalc = (values: (string | number)[]): string | number | undefined =>
 };
 
 /**
- * An `InputGroup` is a container around a {@link TextInput} with optional start and end elements.
- * The start and end elements are usually icons or icon buttons. The `InputGroup` will add padding
- * to the input so the icons/buttons display correctly. This component uses `React.Children.map` and
- * `React.cloneElement` from the [React.Children](https://react.dev/reference/react/Children) API.
- * This means all children must be `InputGroup.*` components. Any other direct children will cause
- * issues. You can add different elements/components inside the
- * {@link InputGroupInnerStart InputGroup.InnerStart} and
+ * An `InputGroup` is a container around a {@link TextInput} with optional inner start and end
+ * elements. The inner start and end elements are usually icons or icon buttons visually represented
+ * inside the input. The `InputGroup` will add padding to the input so the icons/buttons display
+ * correctly. This component uses `React.Children.map` and `React.cloneElement` from the
+ * [React.Children](https://react.dev/reference/react/Children) API. This means all children must be
+ * `InputGroup.*` components. Any other direct children will cause issues. You can add different
+ * elements/components inside the {@link InputGroupInnerStart InputGroup.InnerStart} and
  * {@link InputGroupInnerEnd InputGroup.InnerEnd} subcomponents.
  *
  * ```tsx
@@ -160,7 +160,8 @@ export const InputGroup = createComponent('div')({
     /**
      * A component to show inside and at the end of the input. The input's padding will be adjusted
      * to not overlap with this element. Use `width` (number of pixels only) to adjust the width
-     * offset. The width defaults to 40px which is the correct width for icons or icon buttons.
+     * offset. The width defaults to 40px which is the correct width for icons or icon buttons
+     * within the input.
      */
     InnerEnd: InputGroupInnerEnd,
   },
