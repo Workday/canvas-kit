@@ -8,7 +8,7 @@ import {Focus} from './examples/Focus.tsx';
 
 # Canvas Kit Dialog
 
-A Dialog component is a non-Modal type of Dialog that will not render the rest of the page inert
+A Dialog component is a non-modal type of dialog that will not render the rest of the page inert
 while it is active. A Dialog should be used in situations where the task is not critical.
 
 ## Installation
@@ -19,27 +19,36 @@ yarn add @workday/canvas-kit-react
 
 ## Usage
 
-### Basic
+### Basic Example
 
-Below you will find a basic example of a Dialog. There are similarities and differences between the
-[Modal](/components/popups/modal/) and Dialog components. A Dialog does not require immeditate
-attention from the user and will not render the rest of the page inert while it is active. A
-[Modal](/components/popups/modal/) Dialog requires immediate attention and blocks interaction from
-the rest of the system.
+[Modal](/components/popups/modal/) and Dialog are very similar: most of the examples from Modal can
+be adapted to Dialog by changing `Modal` to `Dialog` and replacing `Modal.Overlay` with
+`Dialog.Popper`.
 
-A Dialog should be used in situations where the task is not critical like in the example below.
+Unlike Modal, Dialog does _not_ render the rest of the page inert while it is active. Dialog should
+be used in situations where the task does not require immediate attention such as in the example
+below.
 
 <ExampleCodeBlock code={Basic} />
 
-### Non-Focus Trapping
+### Focus Redirect
 
-It was referenced in the first example that Dialog and [Modal](/components/popups/modal/) have some
-similarities and differences. One difference is since Modal needs immediate attention from the user,
-it will trap the keyboard focus inside of the Modal until an action is taken. Dialog does not need
-immediate attention from the user so therefore, Dialog will not trap the keyboard focus within the
-Dialog.
+Since Modal requires immediate attention, it will trap the keyboard focus inside the Modal until an
+action is taken. Dialog manages focus differently, however, since it does not require immediate
+attention.
+
+The following example shows how Dialog manages focus in and out of the component.
 
 <ExampleCodeBlock code={Focus} />
+
+Instead of trapping focus within the Dialog, it is effectively treated as an inline element next to
+its triggering `Dialog.Target` button. Tabbing out of the Dialog will close the popup and move focus
+to the next button.
+
+Dialog also adds an `aria-owns` to a `<div>` element which is rendered as a sibling of the
+`Dialog.Target` button. The `aria-owns` references the `Dialog.Card` and allows screen readers which
+[support aria-owns](/components/popups/popup/#focus-redirect) to navigate the Dialog as if it
+weren't portalled to the bottom of the document body.
 
 ## Component API
 

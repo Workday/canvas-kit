@@ -1,11 +1,13 @@
 import React from 'react';
-
-import {Dialog} from '@workday/canvas-kit-react/dialog';
-import {PrimaryButton} from '@workday/canvas-kit-react/button';
-import {Flex} from '@workday/canvas-kit-react/layout';
-import {Basic as Input} from '../../../text-input/stories/examples/Basic';
+import {FormField, TextInput, Flex, Dialog, PrimaryButton} from '@workday/canvas-kit-react/';
 
 export const Basic = () => {
+  const [value, setValue] = React.useState('');
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(event.target.value);
+  };
+
   const handleEmail = () => {
     console.log('Email Submitted');
   };
@@ -17,7 +19,9 @@ export const Basic = () => {
           <Dialog.CloseIcon aria-label="Close" />
           <Dialog.Heading paddingTop="m">Sign Up for 15% Off Your Next Order</Dialog.Heading>
           <Dialog.Body>
-            <Input />
+            <FormField label="Email">
+              <TextInput onChange={handleChange} value={value} />
+            </FormField>
           </Dialog.Body>
           <Flex gap="s" padding="xxs" marginTop="xxs">
             <Dialog.CloseButton as={PrimaryButton} onClick={handleEmail}>
