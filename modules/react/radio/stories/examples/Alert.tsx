@@ -19,7 +19,7 @@ export const Alert = () => {
       useFieldset={true}
     >
       <RadioGroup name={useUniqueId()} onChange={handleChange} value={value}>
-        <Radio disabled={true} label="Deep dish (sold out)" value="deep-dish" />
+        <Radio label="Deep dish (sold out)" value="deep-dish" />
         <Radio label="Thin" value="thin" />
         <Radio label="Gluten free" value="gluten-free" />
         <Radio label="Cauliflower" value="cauliflower" />
