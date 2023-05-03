@@ -6,7 +6,7 @@ import {
   createSubcomponent,
 } from '@workday/canvas-kit-react/common';
 import {StyledMenuItem, useMenuModel} from '@workday/canvas-kit-react/menu';
-import {useListItemRegister} from '@workday/canvas-kit-react/collection';
+import {useListItemRegister, useListModel} from '@workday/canvas-kit-react/collection';
 import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
 
 import {useComboboxModel} from './useComboboxModel';
@@ -49,7 +49,12 @@ export const useComboboxMenuItem = composeHooks(
       className: model.state.cursorId === elemProps['data-id'] ? 'focus' : '',
     } as const;
   }),
-  useListItemRegister
+  useListItemRegister,
+  createElemPropsHook(useListModel)(
+    (model, _, elemProps: {'data-id'?: string; children?: React.ReactNode} = {}) => {
+      return {};
+    }
+  )
 );
 
 export const ComboboxMenuItem = createSubcomponent('li')({

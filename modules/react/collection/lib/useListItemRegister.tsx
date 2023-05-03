@@ -38,11 +38,7 @@ export const useListItemRegister = createElemPropsHook(useListModel)(
       virtual?: VirtualItem;
     } = {}
   ) => {
-    const [localId, setLocalId] = React.useState(
-      elemProps['data-id'] || elemProps.item?.id || typeof elemProps.children === 'string'
-        ? (elemProps.children as string)
-        : ''
-    );
+    const [localId, setLocalId] = React.useState(elemProps['data-id'] || elemProps.item?.id || '');
     const {localRef, elementRef} = useLocalRef(
       useForkRef(ref as React.Ref<HTMLElement>, elemProps.virtual?.measureRef)
     );
