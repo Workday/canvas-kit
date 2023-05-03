@@ -138,7 +138,6 @@ export const useMenuItem = composeHooks(
 
       // focus on the item with the cursor
       React.useLayoutEffect(() => {
-        console.log('focusing', id, ',', model.state.cursorId);
         if (model.state.mode === 'single') {
           if (model.state.cursorId === id) {
             // delay focus changes to allow PopperJS to position
