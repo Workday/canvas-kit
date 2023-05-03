@@ -6,7 +6,6 @@ import {useUniqueId, createModelHook, Generic} from '@workday/canvas-kit-react/c
 export type Orientation = 'horizontal' | 'vertical';
 
 export const defaultGetId = (item: any): string => {
-  // assert(item.id, 'A list item must have an `id` field or a `getId` function defined');
   return item.id || '';
 };
 
