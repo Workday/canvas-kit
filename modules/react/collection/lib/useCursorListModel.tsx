@@ -1,7 +1,7 @@
 import React from 'react';
 import {assert, createModelHook, Generic} from '@workday/canvas-kit-react/common';
 
-import {useBaseListModel, Item, defaultGetId as getId} from './useBaseListModel';
+import {useBaseListModel, Item} from './useBaseListModel';
 
 type NavigationInput = Pick<ReturnType<typeof useCursorListModel>, 'state'>;
 
@@ -365,7 +365,7 @@ export const useCursorListModel = createModelHook({
     registerItem(data: Parameters<typeof list.events.registerItem>[0]) {
       // point the cursor at the first item
       if (!initialCurrentRef.current) {
-        initialCurrentRef.current = getId(data.item);
+        initialCurrentRef.current = list.getId(data.item);
         setCursorId(initialCurrentRef.current);
       }
       list.events.registerItem(data);
