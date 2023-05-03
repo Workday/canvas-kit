@@ -14,6 +14,13 @@ export interface DialogProps {
   children: React.ReactNode;
 }
 
+/**
+ * This component is the container component and does not render any semantic elements. It provides
+ * a React Context model for the `Dialog` subcomponents. If you manually pass a `model` to all
+ * subcomponents, this container component isn't needed. If you do not pass a `model`, the `Dialog`
+ * container component will build a default one using `useDialogModel`. `Dialog` is a composition of a
+ * {@link Popup} component and has a similar structure to `Popup`.
+ */
 export const Dialog = createContainer()({
   displayName: 'Dialog',
   modelHook: useDialogModel,
@@ -72,15 +79,10 @@ export const Dialog = createContainer()({
      */
     Heading: Popup.Heading,
     /**
-     * A `Dialog.Popper` is a {@link Popper} component that is hooked up to the {@link DialogModel}
-     * automatically. The behavior hook used is called {@link useDialogPopper}.
-     *
-     * > **Note:** `Dialog.Popper` renders any children to a `div` element created by the
-     * > {@link PopupStack}. This element is not controlled by React, so any extra element props
-     * > will _not_ be forwarded. The `ref` will point to the `div` element created by the
-     * > `PopupStack`, however. If you wish to add extra props to an element, add them to the
-     * > {@link DialogCard Dialog.Card} instead.
+     * A `Dialog.Popper` is a wrapper around {@link PopupPopper Popup.Popper}. The behavior
+     * hook used is called {@link useDialogPopper}.
      */
+
     Popper: DialogPopper,
     /**
      * A `Dialog.CloseButton` is a button that will hide a dialog. By default, this is a

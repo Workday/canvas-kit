@@ -1,6 +1,10 @@
 import React from 'react';
 
-import {FormField, TextInput, Flex, Dialog, PrimaryButton} from '@workday/canvas-kit-react/';
+import {FormField} from '@workday/canvas-kit-react/form-field';
+import {TextInput} from '@workday/canvas-kit-react/text-input';
+import {Flex} from '@workday/canvas-kit-react/layout';
+import {Dialog} from '@workday/canvas-kit-react/dialog';
+import {PrimaryButton} from '@workday/canvas-kit-react/button';
 
 export const Focus = () => {
   const [value, setValue] = React.useState('');
