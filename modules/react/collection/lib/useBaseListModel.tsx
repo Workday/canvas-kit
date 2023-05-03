@@ -116,8 +116,17 @@ export const useBaseListModel = createModelHook({
 })(config => {
   const id = useUniqueId(config.id);
 
+  // Optimization to not redo items when `getId` and `getTextValue` references change. They will not
+  // likely change during the lifecycle and we don't want to recalculate items when a lamba is
+  // passed instead of a stable reference.
+  const getIdRef = React.useRef(defaultGetId);
+  const getTextValueRef = React.useRef(defaultGetTextValue);
+
   const getId = config.getId || defaultGetId;
   const getTextValue = config.getTextValue || defaultGetTextValue;
+  getIdRef.current = getId;
+  getTextValueRef.current = getTextValue;
+
   const [orientation] = React.useState(config.orientation || 'vertical');
   const [UNSTABLE_defaultItemHeight, setDefaultItemHeight] = React.useState(
     config.defaultItemHeight
@@ -129,13 +138,13 @@ export const useBaseListModel = createModelHook({
     () =>
       (config.items || []).map((item, index) => {
         return {
-          id: getId(item),
+          id: getIdRef.current(item),
           index,
           value: item,
-          textValue: getTextValue(item),
+          textValue: getTextValueRef.current(item),
         };
       }),
-    [config.items, getId, getTextValue]
+    [config.items]
   );
   const [staticItems, setStaticItems] = React.useState<Item<Generic>[]>([]);
   const UNSTABLE_virtual = useVirtual({

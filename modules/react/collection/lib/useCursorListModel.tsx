@@ -326,14 +326,18 @@ export const useCursorListModel = createModelHook({
     config.initialCursorId || (config.items?.length ? list.state.items![0].id : '')
   );
   const navigation = config.navigation;
-  const [cursorIndex, setCursorIndex] = React.useState(() => {
-    return list.state.items.findIndex(item => item.id === cursorId) || 0;
-  });
+  const cursorIndexRef = React.useRef(-1);
   const setCursor = (index: number) => {
-    setCursorIndex(index);
     const id = state.items[index]?.id || '';
     setCursorId(id);
   };
+
+  // Keep the cursorIndex up to date with the cursor ID
+  if (cursorId && list.state.items[cursorIndexRef.current]?.id !== cursorId) {
+    cursorIndexRef.current = list.state.items.findIndex(item => item.id === cursorId);
+  } else if (!cursorId) {
+    cursorIndexRef.current = -1;
+  }
 
   const state = {
     ...list.state,
@@ -350,10 +354,6 @@ export const useCursorListModel = createModelHook({
      * based on the size of the list container and the number of items fitting within the container.
      */
     pageSizeRef,
-    /**
-     * A
-     */
-    cursorIndex,
   };
 
   const events = {
@@ -373,8 +373,7 @@ export const useCursorListModel = createModelHook({
     /** Directly sets the cursor to the list item by its identifier. */
     goTo(data: {id: string}) {
       const index = state.items.findIndex(item => item.id === data.id);
-      setCursorIndex(index);
-      setCursorId(data.id);
+      setCursor(index);
     },
     /**
      * Set the cursor to the "next" item in the list. This event delegates to the `getNext` method of
@@ -383,7 +382,7 @@ export const useCursorListModel = createModelHook({
      * item in a row.
      */
     goToNext() {
-      const index = navigation.getNext(state.cursorIndex, {state});
+      const index = navigation.getNext(cursorIndexRef.current, {state});
       setCursor(index);
     },
     /**
@@ -391,7 +390,7 @@ export const useCursorListModel = createModelHook({
      * it will wrap to the last item
      */
     goToPrevious() {
-      const index = navigation.getPrevious(state.cursorIndex, {state});
+      const index = navigation.getPrevious(cursorIndexRef.current, {state});
       setCursor(index);
     },
     /**
@@ -401,7 +400,7 @@ export const useCursorListModel = createModelHook({
      * this would be the previous row (current position - column count).
      */
     goToPreviousRow() {
-      const index = navigation.getPreviousRow(state.cursorIndex, {
+      const index = navigation.getPreviousRow(cursorIndexRef.current, {
         state,
       });
       setCursor(index);
@@ -413,33 +412,33 @@ export const useCursorListModel = createModelHook({
      * next row (current position + column count).
      */
     goToNextRow() {
-      const index = navigation.getNextRow(state.cursorIndex, {state});
+      const index = navigation.getNextRow(cursorIndexRef.current, {state});
       setCursor(index);
     },
     /** Set the cursor to the first item in the list */
     goToFirst() {
-      const index = navigation.getFirst(state.cursorIndex, {state});
+      const index = navigation.getFirst(cursorIndexRef.current, {state});
       setCursor(index);
     },
     /** Set the cursor to the last item in the list */
     goToLast() {
-      const index = navigation.getLast(state.cursorIndex, {state});
+      const index = navigation.getLast(cursorIndexRef.current, {state});
       setCursor(index);
     },
     goToFirstOfRow() {
-      const index = navigation.getFirstOfRow(state.cursorIndex, {state});
+      const index = navigation.getFirstOfRow(cursorIndexRef.current, {state});
       setCursor(index);
     },
     goToLastOfRow() {
-      const index = navigation.getLastOfRow(state.cursorIndex, {state});
+      const index = navigation.getLastOfRow(cursorIndexRef.current, {state});
       setCursor(index);
     },
     goToNextPage() {
-      const index = navigation.getNextPage(state.cursorIndex, {state});
+      const index = navigation.getNextPage(cursorIndexRef.current, {state});
       setCursor(index);
     },
     goToPreviousPage() {
-      const index = navigation.getPreviousPage(state.cursorIndex, {
+      const index = navigation.getPreviousPage(cursorIndexRef.current, {
         state,
       });
       setCursor(index);
