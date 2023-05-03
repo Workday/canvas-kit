@@ -25,9 +25,9 @@ export const useMenuList = composeHooks(
     React.useLayoutEffect(() => {
       if (!model.state.cursorId && model.state.items.length) {
         // Select the first item
-        model.events.goTo({id: model.getId(model.state.items[0])});
+        model.events.goTo({id: model.state.items[0].id});
       }
-    }, [model]);
+    }, [model.state, model.events]);
     return {
       role: 'menu',
       'aria-labelledby': model.state.id,
