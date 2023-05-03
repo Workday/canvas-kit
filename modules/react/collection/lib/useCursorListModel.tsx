@@ -1,7 +1,7 @@
 import React from 'react';
 import {assert, createModelHook, Generic} from '@workday/canvas-kit-react/common';
 
-import {useBaseListModel, Item} from './useBaseListModel';
+import {useBaseListModel, Item, defaultGetId as getId} from './useBaseListModel';
 
 type NavigationInput = Pick<ReturnType<typeof useCursorListModel>, 'state'>;
 
