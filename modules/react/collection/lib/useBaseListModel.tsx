@@ -1,13 +1,12 @@
 import React from 'react';
 import {useVirtual} from './react-virtual';
 
-import {useUniqueId, assert, createModelHook, Generic} from '@workday/canvas-kit-react/common';
+import {useUniqueId, createModelHook, Generic} from '@workday/canvas-kit-react/common';
 
 export type Orientation = 'horizontal' | 'vertical';
 
 export const defaultGetId = (item: any): string => {
-  assert(item.id, 'A list item must have an `id` field or a `getId` function defined');
-  return item.id;
+  return item.id || '';
 };
 
 export const defaultGetTextValue = (item: any): string => {
@@ -79,14 +78,18 @@ export const useBaseListModel = createModelHook({
     /** IDREF of the list. Children ids can be derived from this id */
     id: '',
     /**
-     * Optional function to return an id of an item. If not provided, the default function will return
-     * the `id` property from the object of each item. If you did not provide `items`, do not override
-     * this function. If you don't provided `items` and instead provide static items via JSX, the list
-     * will create an internal array of items where `id` is the only property and the default `getId`
-     * will return the desired result.
+     * Optional function to return an id of an item. If not provided, the default function will
+     * return the `id` property from the object of each item. If you did not provide `items`, do not
+     * override this function. If you don't provided `items` and instead provide static items via
+     * JSX, the list will create an internal array of items where `id` is the only property and the
+     * default `getId` will return the desired result.
      */
     getId: (item: Generic) => item.id as string,
-
+    /**
+     * Optional function to return the text representation of an item. If not provided, the default
+     * function will return the `text` property of the object of each item or an empty string if
+     * there is no `text` property. If you did not provide `items`, do not override this function.
+     */
     getTextValue: (item: Generic) => (item.text || '') as string,
     /**
      * Array of all ids which are currently disabled. This is used for navigation to skip over items
@@ -112,8 +115,17 @@ export const useBaseListModel = createModelHook({
 })(config => {
   const id = useUniqueId(config.id);
 
+  // Optimization to not redo items when `getId` and `getTextValue` references change. They will not
+  // likely change during the lifecycle and we don't want to recalculate items when a lamba is
+  // passed instead of a stable reference.
+  const getIdRef = React.useRef(defaultGetId);
+  const getTextValueRef = React.useRef(defaultGetTextValue);
+
   const getId = config.getId || defaultGetId;
   const getTextValue = config.getTextValue || defaultGetTextValue;
+  getIdRef.current = getId;
+  getTextValueRef.current = getTextValue;
+
   const [orientation] = React.useState(config.orientation || 'vertical');
   const [UNSTABLE_defaultItemHeight, setDefaultItemHeight] = React.useState(
     config.defaultItemHeight
@@ -125,13 +137,13 @@ export const useBaseListModel = createModelHook({
     () =>
       (config.items || []).map((item, index) => {
         return {
-          id: getId(item),
+          id: getIdRef.current(item),
           index,
           value: item,
-          textValue: getTextValue(item),
+          textValue: getTextValueRef.current(item),
         };
       }),
-    [config.items, getId, getTextValue]
+    [config.items]
   );
   const [staticItems, setStaticItems] = React.useState<Item<Generic>[]>([]);
   const UNSTABLE_virtual = useVirtual({
