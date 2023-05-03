@@ -11,6 +11,7 @@ any questions.
 - [Codemod](#codemod)
 - [New Components](#new-components)
   - [Table](#table)
+- [Updated Terms](#updated-terms)
 - [Removals](#Removals)
   - [Drawer](#drawer)
   - [Layout and Column](#layout-and-column)
@@ -28,6 +29,7 @@ any questions.
 - [Utility Updates](#utility-updates)
   - [useTheme and getTheme](#usetheme-and-gettheme)
   - [useThemedRing](#usethemedring)
+  - [composeHooks](#composehooks)
 - [Glossary](#glossary)
   - [Main](#main)
   - [Preview](#preview)
@@ -114,6 +116,26 @@ export default function App() {
   );
 }
 ```
+
+## Updated Terms
+
+We have updated two terms that were used in previous versions of Canvas Kit to better reflect their
+meaning and intentions.
+
+- **"Soft-Deprecation"** is now **"Deprecate/Deprecation"**
+
+  - _Deprecate/Deprecation: We add the [@deprecated tag](https://jsdoc.app/tags-deprecated.html)
+    from JSDoc to code that we plan to deprecate in the near future. Although you can still consume
+    this code, we want consumers to move to a utility or component that is more stable._
+    - _Previously, we also added "Deprecated" to a component name. For example, from `ComponentName`
+      to `DeprecatedComponenntName`. As of 9.0, we longer do this._
+
+- **"Hard-Deprecation"** is now **"Remove/Removal"**
+
+  - _Remove/Removals: Removals are deletions from our codebase and you can no longer consume this
+    component. We've either promoted or replaced a component or utility. You will need to follow the
+    method prescribed in our upgrade guide to update your application. Please reach out to our team
+    directly if you need additional help._
 
 ## Removals
 
@@ -236,6 +258,38 @@ recommend using
 instead.
 
 ---
+
+### composeHooks
+
+The `composeHooks` types are now accurate. Before the types were incorrectly merged to equal `{}`.
+This also affects components created using `createContainer` or `createSubcomponent`. The
+`elemProps` type interface will now reflect all the incoming props from the hook properly. If you
+get an error when passing `elemProps` from a hook using `composeHooks`, you may get a Typescript
+error. Sometimes returning a generic object widens types and style or JSX attributes are more
+strict. This can cause problems with JSX attributes like `position` which expects values like
+`'relative' | 'absolute'` and doesn't accept a string.
+
+For example:
+
+```ts
+return {
+  position: 'relative',
+}; // { 'position': string }
+```
+
+TypeScript doesn't know that this object interface cannot be mutated, so it will widen the
+`position` type to a `string` which is now allowed when you pass the prop list to a JSX element.
+You'll have to add an `as const` to either the property or the whole object to force Typescript to
+narrow the type.
+
+```ts
+return {
+  position: 'relative' as const, // forces the type to be `'relative'` instead of `string`
+} as const; // OR add `as const` here to narrow the whole object.
+```
+
+`as const` instructs Typescript the type is `readonly`. Typescript knows readonly values or objects
+cannot be changed and will therefore narrow the type for you.
 
 ## Token Updates
 
