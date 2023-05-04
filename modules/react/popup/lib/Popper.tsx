@@ -165,7 +165,7 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
     const [placement, setPlacement] = React.useState(popperPlacement);
     const stackRef = usePopupStack(ref, anchorElement as HTMLElement);
     const maxRepositionCall = React.useRef(baseFallbackPlacements.length + 2) // plus one initial placement and one opposite placement
-    const nextAvailablePlacement = React.useRef<Placement>(getOppositePlacement(popperPlacement)) // store the next available fallback placement
+    const nextAvailablePlacementRef = React.useRef<Placement>(getOppositePlacement(popperPlacement)) // store the next available fallback placement
     const preventOverflowModifierRef = React.useRef<Partial<PopperJS.Modifier<any, any>>> ( {
       name: 'preventOverflow'      
     })
@@ -200,7 +200,7 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
             state.placement = placements[i]
             const key = placements[i] as keyof PopperJS.SideObject
             if(PopperJS.detectOverflow(state)[key] <= 0){
-              nextAvailablePlacement.current = placements[i]
+              nextAvailablePlacementRef.current = placements[i]
               break
             }else{
               state.placement = popperPlacement
@@ -215,13 +215,12 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
             state.reset = false
           } else{           
             // instruct Popper to run all modifier again
-            console.log('reset')
             state.reset = true
           }
         },
         requiresIfExists: ['preventOverflow']
       }
-    },[baseFallbackPlacements, popperPlacement, nextAvailablePlacement, maxRepositionCall])
+    },[baseFallbackPlacements, popperPlacement, nextAvailablePlacementRef, maxRepositionCall])
 
     // useLayoutEffect prevents flashing of the popup before position is determined
     React.useLayoutEffect(() => {
@@ -259,13 +258,13 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
       // Only update options if this is _not_ the first render
       if (!firstRender.current) {
         localRef.current?.setOptions({
-          placement: nextAvailablePlacement.current,
+          placement: nextAvailablePlacementRef.current,
           ...popperOptions,
           modifiers: [...(popperOptions.modifiers || []), placementModifier, preventOverflowModifierRef.current, fallbackPlacementsModifier],
         });
       }
       firstRender.current = false;
-    }, [popperOptions, popperPlacement, placementModifier, preventOverflowModifierRef, fallbackPlacementsModifier, localRef, nextAvailablePlacement]);
+    }, [popperOptions, popperPlacement, placementModifier, preventOverflowModifierRef, fallbackPlacementsModifier, localRef, nextAvailablePlacementRef]);
 
     const contents = <>{isRenderProp(children) ? children({placement}) : children}</>;
 
