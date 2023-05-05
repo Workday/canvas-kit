@@ -3,6 +3,7 @@ import {SymbolDoc} from '@workday/canvas-kit-docs';
 import {ListBox} from '@workday/canvas-kit-react/collection';
 
 import {Basic} from './examples/Basic';
+import {StringChildren} from './examples/StringChildren';
 import {DynamicItems} from './examples/DynamicItems';
 import {BasicVirtual} from './examples/BasicVirtual';
 import {IdentifiedItems} from './examples/IdentifiedItems';
@@ -34,7 +35,7 @@ yarn add @workday/canvas-kit-react
 The `ListBox` on its own isn't very useful. It registers each item with the model. The
 `ListBox.Item` only uses the `useListItemRegister` hook which handles registration of static items
 to the model. The `ListBox` uses `useListRenderItems` which handles rendering static items as well
-as [Dynamic List](#dynamic-list) example).
+as [Dynamic List](#dynamic-list) example.
 
 <ExampleCodeBlock code={Basic} />
 
@@ -87,6 +88,16 @@ the item to the `state.selectedIds`. The default selection manager is a single s
 uses `ListBox` and creates a custom `SelectableItem` elemProps hook and component.
 
 <ExampleCodeBlock code={Selection} />
+
+### String Children
+
+Sometimes it is desired to allow the string children to be the identifiers for each item. This could
+be useful for autocomplete components where the item's text is the desired identifier. Normally, if
+no `data-id` is provided to the item, the system will choose the registration index. This would be `'0'`, `'1'`, and so on.
+By passing `useListItemAllowChildStrings` to an item component, it will change this behavior to use the child text if no
+`data-id` is provided.
+
+<ExampleCodeBlock code={StringChildren} />
 
 #### Multiple Selection
 
@@ -147,6 +158,10 @@ columns, but not rows. This is the default navigation manager for lists.
 ### `useListItemRegister`
 
 <SymbolDoc name="useListItemRegister" fileName="/react/" />
+
+### `useListItemAllowChildStrings`
+
+<SymbolDoc name="useListItemAllowChildStrings" fileName="/react/" />
 
 ### `useListItemRovingFocus`
 

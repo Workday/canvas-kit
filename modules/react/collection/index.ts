@@ -10,7 +10,8 @@ export * from './lib/useListItemRovingFocus';
 export * from './lib/useListItemSelect';
 export * from './lib/useListModel';
 export * from './lib/useGridModel';
-export {ListBox} from './lib/ListBox';
+export * from './lib/useListItemAllowChildStrings';
+export {ListBox, ListBoxProps} from './lib/ListBox';
 export {
   singleSelectionManager,
   multiSelectionManager,
