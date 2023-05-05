@@ -4,7 +4,7 @@ import {useIsRTL, createElemPropsHook} from '@workday/canvas-kit-react/common';
 import {useCursorListModel} from './useCursorListModel';
 import {keyboardEventToCursorEvents} from './keyUtils';
 
-// retry a function each frame so we don't rely on the timing mechanism of React's render cycle
+// retry a function each frame so we don't rely on the timing mechanism of React's render cycle.
 const retryEachFrame = (cb: () => boolean, iterations: number) => {
   if (cb() === false && iterations > 1) {
     requestAnimationFrame(() => retryEachFrame(cb, iterations - 1));
@@ -43,6 +43,8 @@ export const useListItemRovingFocus = createElemPropsHook(useCursorListModel)(
           model.state.UNSTABLE_virtual.scrollToIndex(item.index);
         }
 
+        // In React concurrent mode, there could be several render attempts before the element we're
+        // looking for could be available in the DOM
         retryEachFrame(() => {
           const element = document.querySelector<HTMLElement>(
             `[data-focus-id="${`${model.state.id}-${item.id}`}"]`
