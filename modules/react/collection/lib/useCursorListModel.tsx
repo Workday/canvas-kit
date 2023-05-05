@@ -354,6 +354,11 @@ export const useCursorListModel = createModelHook({
      * based on the size of the list container and the number of items fitting within the container.
      */
     pageSizeRef,
+    /**
+     * The ref pointing to the current cursor location. This property is marked unstable and may
+     * change in the future. Do no rely on the implementation.
+     */
+    UNSTABLE_cursorIndex: cursorIndexRef,
   };
 
   const events = {

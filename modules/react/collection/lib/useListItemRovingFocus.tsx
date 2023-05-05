@@ -4,6 +4,13 @@ import {useIsRTL, createElemPropsHook} from '@workday/canvas-kit-react/common';
 import {useCursorListModel} from './useCursorListModel';
 import {keyboardEventToCursorEvents} from './keyUtils';
 
+// retry a function each frame so we don't rely on the timing mechanism of React's render cycle
+const retryEachFrame = (cb: () => boolean, iterations: number) => {
+  if (cb() === false && iterations > 1) {
+    requestAnimationFrame(() => retryEachFrame(cb, iterations - 1));
+  }
+};
+
 /**
  * This elemProps hook is used for cursor navigation by using [Roving
  * Tabindex](https://w3c.github.io/aria-practices/#kbd_roving_tabindex). Only a single item in the
@@ -19,7 +26,7 @@ import {keyboardEventToCursorEvents} from './keyUtils';
 ```
  */
 export const useListItemRovingFocus = createElemPropsHook(useCursorListModel)(
-  (model, ref, elemProps: {'data-id'?: string} = {}) => {
+  (model, _ref, elemProps: {'data-id'?: string} = {}) => {
     // Create a ref out of state. We don't want to watch state on unmount, so we use a ref to get the
     // current value at the time of unmounting. Otherwise, `state.items` would be a cached value of an
     // empty array
@@ -35,11 +42,15 @@ export const useListItemRovingFocus = createElemPropsHook(useCursorListModel)(
         if (model.state.isVirtualized) {
           model.state.UNSTABLE_virtual.scrollToIndex(item.index);
         }
-        requestAnimationFrame(() => {
-          document
-            .querySelector<HTMLElement>(`[data-focus-id="${`${model.state.id}-${item.id}`}"]`)
-            ?.focus();
-        });
+
+        retryEachFrame(() => {
+          const element = document.querySelector<HTMLElement>(
+            `[data-focus-id="${`${model.state.id}-${item.id}`}"]`
+          );
+
+          element?.focus();
+          return !!element;
+        }, 5); // 5 should be enough, right?!
 
         keyDownRef.current = false;
       }
@@ -64,7 +75,6 @@ export const useListItemRovingFocus = createElemPropsHook(useCursorListModel)(
         : !!elemProps['data-id'] && model.state.cursorId === elemProps['data-id']
         ? 0 // A name is known and cursor is here
         : -1, // A name is known an cursor is somewhere else
-      ref,
     };
   }
 );
