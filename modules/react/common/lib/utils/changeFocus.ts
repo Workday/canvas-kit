@@ -18,7 +18,8 @@ export const changeFocus = (element: unknown) => {
 
       element.dispatchEvent(event);
     }
-
-    element.focus();
   }
+
+  // Even if the element is not an HTMLElement, we should still attempt to focus it.
+  element.focus?.();
 };
