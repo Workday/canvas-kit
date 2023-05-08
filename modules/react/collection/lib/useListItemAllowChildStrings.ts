@@ -2,9 +2,9 @@ import {createElemPropsHook} from '@workday/canvas-kit-react/common';
 import {useListModel} from '@workday/canvas-kit-react/collection';
 
 /**
- * This elemProps hook allows for children values to be considered identifiers if the children
- * are strings. This can be useful for autocomplete or select components that allow string values.
- * This hook must be defined _before_ {@link useListItemRegister} because it sets the `data-id`
+ * This elemProps hook allows for children values to be considered identifiers if the children are
+ * strings. This can be useful for autocomplete or select components that allow string values. This
+ * hook must be passed _after_ {@link useListItemRegister} because this hook sets the `data-id`
  * attribute if one hasn't been defined by the application.
  *
  * An example might look like:

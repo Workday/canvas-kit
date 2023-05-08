@@ -3,7 +3,7 @@ import React from 'react';
 import {renderHook} from '@testing-library/react-hooks';
 import {useListModel, useListItemAllowChildStrings} from '@workday/canvas-kit-react/collection';
 
-describe('useListItemAllowChildSiblings', () => {
+describe('useListItemAllowChildStrings', () => {
   it('should add a [data-id] attribute equal to the string value', () => {
     const {result} = renderHook(() => {
       const model = useListModel();
