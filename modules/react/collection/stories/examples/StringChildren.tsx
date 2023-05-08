@@ -4,13 +4,14 @@ import {
   ListBox,
   useListItemRegister,
   useListItemAllowChildStrings,
+  useListItemSelect,
   useListModel,
 } from '@workday/canvas-kit-react/collection';
 import {composeHooks, createSubcomponent} from '@workday/canvas-kit-react/common';
 
-const useItem = composeHooks(useListItemAllowChildStrings, useListItemRegister);
+const useItem = composeHooks(useListItemSelect, useListItemRegister, useListItemAllowChildStrings);
 
-const Item = createSubcomponent('div')({
+const Item = createSubcomponent('button')({
   modelHook: useListModel,
   elemPropsHook: useItem,
 })((elemProps, Element) => {
@@ -26,7 +27,9 @@ export const StringChildren = () => {
         <Item>First</Item>
         <Item>Second</Item>
       </ListBox>
-      <div id="selected">{model.state.selectedIds[0]}</div>
+      <div>
+        Selected: <span id="selected">{model.state.selectedIds[0] || 'Nothing'}</span>
+      </div>
     </>
   );
 };

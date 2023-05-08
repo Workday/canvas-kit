@@ -98,6 +98,16 @@ uses `ListBox` and creates a custom `SelectableItem` elemProps hook and componen
 
 <ExampleCodeBlock code={Selection} />
 
+### String Children
+
+Sometimes it is desired to allow the string children to be the identifiers for each item. This could
+be useful for autocomplete components where the item's text is the desired identifier. Normally, if
+no `data-id` is provided to the item, the system will choose the registration index. This would be `'0'`, `'1'`, and so on.
+By passing `useListItemAllowChildStrings` to an item component, it will change this behavior to use the child text if no
+`data-id` is provided.
+
+<ExampleCodeBlock code={StringChildren} />
+
 #### Multiple Selection
 
 The `selection` manager can be passed directly to the model configuration to handle different
