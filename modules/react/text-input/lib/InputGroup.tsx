@@ -17,7 +17,7 @@ import {xSmallIcon} from '@workday/canvas-system-icons-web';
 
 import {TextInput} from './TextInput';
 
-const useInputGroupModel = createModelHook({})(() => {
+export const useInputGroupModel = createModelHook({})(() => {
   const inputRef = React.useRef<HTMLInputElement>(null);
 
   return {
