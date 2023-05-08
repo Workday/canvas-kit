@@ -279,6 +279,8 @@ export const navigationManager = createNavigationManager({
   getLastOfRow,
 });
 
+type Writeable<T> = {-readonly [P in keyof T]: T[P]};
+
 /**
  * A `CursorModel` extends a `ListModel` and adds a "cursor" to the list. A cursor is a pointer to a
  * current position in the list. The most common use-case is keeping track of which item currently
@@ -326,7 +328,7 @@ export const useCursorListModel = createModelHook({
     config.initialCursorId || (config.items?.length ? list.state.items![0].id : '')
   );
   const navigation = config.navigation;
-  const cursorIndexRef = React.useRef(-1);
+  const cursorIndexRef = React.useRef(-1) as {readonly current: number};
   const setCursor = (index: number) => {
     const id = state.items[index]?.id || '';
     setCursorId(id);
@@ -334,9 +336,11 @@ export const useCursorListModel = createModelHook({
 
   // Keep the cursorIndex up to date with the cursor ID
   if (cursorId && list.state.items[cursorIndexRef.current]?.id !== cursorId) {
-    cursorIndexRef.current = list.state.items.findIndex(item => item.id === cursorId);
+    (cursorIndexRef as Writeable<typeof cursorIndexRef>).current = list.state.items.findIndex(
+      item => item.id === cursorId
+    );
   } else if (!cursorId) {
-    cursorIndexRef.current = -1;
+    (cursorIndexRef as Writeable<typeof cursorIndexRef>).current = -1;
   }
 
   const state = {
@@ -355,10 +359,13 @@ export const useCursorListModel = createModelHook({
      */
     pageSizeRef,
     /**
-     * The ref pointing to the current cursor location. This property is marked unstable and may
-     * change in the future. Do no rely on the implementation.
+     * A readonly [React.Ref](https://react.dev/learn/referencing-values-with-refs) that tracks the
+     * index of the `state.cursorId`. This value is automatically updated when the `state.cursorId`
+     * or the `items` change.
+     *
+     * @readonly
      */
-    UNSTABLE_cursorIndex: cursorIndexRef,
+    cursorIndexRef,
   };
 
   const events = {
