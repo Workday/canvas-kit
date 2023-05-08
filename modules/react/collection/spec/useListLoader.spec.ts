@@ -19,7 +19,7 @@ describe('getPageNumber', () => {
 });
 
 describe('getPagesToLoad', () => {
-  it('should load page 1 when no data is loaded and the loading buffer', () => {
+  it('should load page 1 when no data is loaded and the loading buffer is 3', () => {
     const items = Array(20).fill(undefined);
 
     const actual = getPagesToLoad(0, 9, 20, items, 3);
@@ -48,7 +48,7 @@ describe('getPagesToLoad', () => {
     expect(actual).toEqual(expected);
   });
 
-  it('should return page 1 if page 1 is not loaded and we are on page 2 and page 1 ', () => {
+  it('should return page 1 if page 1 is not loaded and we are on page 2 and page 1 is included in the loading buffer', () => {
     const items = Array(10)
       .fill(undefined)
       .concat(Array(10).fill(true));
