@@ -324,9 +324,6 @@ export const useCursorListModel = createModelHook({
   const pageSizeRef = React.useRef(config.pageSize);
   const columnCount = config.columnCount || 0;
   const list = useBaseListModel(config);
-  const initialCurrentRef = React.useRef(
-    config.initialCursorId || (config.items?.length ? list.state.items![0].id : '')
-  );
   const navigation = config.navigation;
   // Cast as a readonly to signify this value should never be set
   const cursorIndexRef = React.useRef(-1) as {readonly current: number};
@@ -372,18 +369,6 @@ export const useCursorListModel = createModelHook({
 
   const events = {
     ...list.events,
-    /**
-     * Register an item to the list. Takes in an identifier, a React.Ref and an optional index. This
-     * should be called on component mount
-     */
-    registerItem(data: Parameters<typeof list.events.registerItem>[0]) {
-      // point the cursor at the first item
-      if (!initialCurrentRef.current) {
-        initialCurrentRef.current = list.getId(data.item);
-        setCursorId(initialCurrentRef.current);
-      }
-      list.events.registerItem(data);
-    },
     /** Directly sets the cursor to the list item by its identifier. */
     goTo(data: {id: string}) {
       const index = state.items.findIndex(item => item.id === data.id);
