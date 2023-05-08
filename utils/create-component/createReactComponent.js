@@ -73,14 +73,7 @@ module.exports = (modulePath, name, description, prerelease, category) => {
     },
     mdxStories: {
       path: `stories/${pascalCaseName}.stories.mdx`,
-      contents: mdxStories(
-        moduleName,
-        storyPath,
-        pascalCaseName,
-        titleCaseName,
-        prerelease,
-        description
-      ),
+      contents: mdxStories(moduleName, storyPath, pascalCaseName, titleCaseName, prerelease, description),
     },
     basicStories: {
       path: `stories/examples/Basic.tsx`,
