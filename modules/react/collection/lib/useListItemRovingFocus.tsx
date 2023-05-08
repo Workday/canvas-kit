@@ -47,6 +47,13 @@ export const useListItemRovingFocus = createElemPropsHook(useCursorListModel)(
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [model.state.cursorId]);
 
+    // Roving focus must always have a focus stop to function correctly
+    React.useEffect(() => {
+      if (!model.state.cursorId && model.state.items.length) {
+        model.events.goTo({id: model.state.items[0].id});
+      }
+    }, [model.state.cursorId, model.state.items, model.events]);
+
     return {
       onKeyDown(event: React.KeyboardEvent) {
         const handled = keyboardEventToCursorEvents(event, model, isRTL);
