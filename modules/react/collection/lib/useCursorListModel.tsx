@@ -328,6 +328,7 @@ export const useCursorListModel = createModelHook({
     config.initialCursorId || (config.items?.length ? list.state.items![0].id : '')
   );
   const navigation = config.navigation;
+  // Cast as a readonly to signify this value should never be set
   const cursorIndexRef = React.useRef(-1) as {readonly current: number};
   const setCursor = (index: number) => {
     const id = state.items[index]?.id || '';
@@ -336,6 +337,7 @@ export const useCursorListModel = createModelHook({
 
   // Keep the cursorIndex up to date with the cursor ID
   if (cursorId && list.state.items[cursorIndexRef.current]?.id !== cursorId) {
+    // We cast back as a writeable because this is the only place the value should be changed.
     (cursorIndexRef as Writeable<typeof cursorIndexRef>).current = list.state.items.findIndex(
       item => item.id === cursorId
     );
