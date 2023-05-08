@@ -10,14 +10,12 @@ export const changeFocus = (element: unknown) => {
     return;
   }
 
-  if (element instanceof HTMLElement) {
-    // Dispatch an unidentified keyboard event for an input provider prior to a focus change so that
-    // the ring will appear.
-    if (typeof KeyboardEvent === 'function') {
-      const event = new KeyboardEvent('keydown', {bubbles: true, key: 'Unidentified'});
+  // Dispatch an unidentified keyboard event for an input provider prior to a focus change so that
+  // the ring will appear.
+  if (typeof KeyboardEvent === 'function') {
+    const event = new KeyboardEvent('keydown', {bubbles: true, key: 'Unidentified'});
 
-      element.dispatchEvent(event);
-    }
+    element.dispatchEvent?.(event);
   }
 
   // Even if the element is not an HTMLElement, we should still attempt to focus it.
