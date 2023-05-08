@@ -388,6 +388,23 @@ knows where it needs to go, but the identifier may not be loaded yet. The mechan
 is private and should not breaking anything. If you created a custom navigation manager, the
 signature has been changed.
 
+The `useListModel` modelHook no longers sets the initial `cursorId` to the first item if no
+`initialCursorId` config option is set. This functionality has been moved to the
+`useListItemRovingFocus` elemProps hook. If you use `useListItemRovingFocus`, the behavior is
+unchanged. If you need the first item to be set as the `cursorId` and you do not use
+`useListItemRovingFocus`, you will have to add this functionality back to your collection logic.
+
+The logic to set the `cursorId` to the first item should go into an item elemProps hook that
+contains the following:
+
+```ts
+React.useEffect(() => {
+  if (!model.state.cursorId && model.state.items.length) {
+    model.events.goTo({id: model.state.items[0].id});
+  }
+}, [model.state.cursorId, model.state.items, model.events]);
+```
+
 ## Utility Updates
 
 ### useTheme and getTheme
