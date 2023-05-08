@@ -35,7 +35,7 @@ export const DataLoader = () => {
       shouldVirtualize: true,
       total: 1000,
       pageSize: 20,
-      async load({pageNumber, pageSize, filter}) {
+      async load({pageNumber, pageSize}) {
         setMessages(messages => messages.concat(`Page ${pageNumber} loading`));
 
         // Return a promise, but use setTimeout to mock a delayed server response
@@ -43,15 +43,9 @@ export const DataLoader = () => {
           setTimeout(() => {
             const start = (pageNumber - 1) * pageSize;
             const end = start + pageSize;
-            const filteredItems = options.filter(item => {
-              if (filter === '' || typeof filter !== 'string') {
-                return true;
-              }
-              return item.toLowerCase().includes(filter.toLowerCase());
-            });
 
-            const total = filteredItems.length;
-            const items = filteredItems.slice(start, end);
+            const total = options.length;
+            const items = options.slice(start, end);
 
             setMessages(messages => messages.concat(`Page ${pageNumber} loaded`));
 
