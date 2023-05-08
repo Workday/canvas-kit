@@ -13,7 +13,7 @@ describe('Combobox Labs', () => {
 
   context(`given the 'Basic' story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Components/Inputs/Combobox', 'Basic');
+      h.stories.load('Components/Inputs/Combobox', 'Autocomplete');
     });
 
     it('should have aria-haspopup set to true', () => {
@@ -91,10 +91,9 @@ describe('Combobox Labs', () => {
             cy.findByRole('combobox').should('have.focus');
           });
 
-          // no clear button yet
-          // it('should not show the clear button', () => {
-          //   cy.findByLabelText('Reset Search Input').should('not.be.visible');
-          // });
+          it.only('should not show the clear button', () => {
+            cy.findByTestId('clear').should('not.be.visible');
+          });
         });
 
         // no clear button yet

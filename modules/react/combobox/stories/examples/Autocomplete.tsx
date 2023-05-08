@@ -99,6 +99,7 @@ export const Autocomplete = () => {
           </InputGroup.InnerEnd>
           <InputGroup.InnerEnd>
             <TertiaryButton
+              data-id="clear"
               role="presentation"
               icon={xSmallIcon}
               size="small"

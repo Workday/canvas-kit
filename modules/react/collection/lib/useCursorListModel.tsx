@@ -279,6 +279,8 @@ export const navigationManager = createNavigationManager({
   getLastOfRow,
 });
 
+type Writeable<T> = {-readonly [P in keyof T]: T[P]};
+
 /**
  * A `CursorModel` extends a `ListModel` and adds a "cursor" to the list. A cursor is a pointer to a
  * current position in the list. The most common use-case is keeping track of which item currently
@@ -322,11 +324,9 @@ export const useCursorListModel = createModelHook({
   const pageSizeRef = React.useRef(config.pageSize);
   const columnCount = config.columnCount || 0;
   const list = useBaseListModel(config);
-  const initialCurrentRef = React.useRef(
-    config.initialCursorId || (config.items?.length ? list.state.items![0].id : '')
-  );
   const navigation = config.navigation;
-  const cursorIndexRef = React.useRef(-1);
+  // Cast as a readonly to signify this value should never be set
+  const cursorIndexRef = React.useRef(-1) as {readonly current: number};
   const setCursor = (index: number) => {
     const id = state.items[index]?.id || '';
     setCursorId(id);
@@ -334,9 +334,12 @@ export const useCursorListModel = createModelHook({
 
   // Keep the cursorIndex up to date with the cursor ID
   if (cursorId && list.state.items[cursorIndexRef.current]?.id !== cursorId) {
-    cursorIndexRef.current = list.state.items.findIndex(item => item.id === cursorId);
+    // We cast back as a writeable because this is the only place the value should be changed.
+    (cursorIndexRef as Writeable<typeof cursorIndexRef>).current = list.state.items.findIndex(
+      item => item.id === cursorId
+    );
   } else if (!cursorId) {
-    cursorIndexRef.current = -1;
+    (cursorIndexRef as Writeable<typeof cursorIndexRef>).current = -1;
   }
 
   const state = {
@@ -354,7 +357,14 @@ export const useCursorListModel = createModelHook({
      * based on the size of the list container and the number of items fitting within the container.
      */
     pageSizeRef,
-    UNSTABLE_cursorIndex: cursorIndexRef,
+    /**
+     * A readonly [React.Ref](https://react.dev/learn/referencing-values-with-refs) that tracks the
+     * index of the `state.cursorId`. This value is automatically updated when the `state.cursorId`
+     * or the `items` change.
+     *
+     * @readonly
+     */
+    cursorIndexRef,
   };
 
   const events = {

@@ -17,7 +17,6 @@ export interface AsyncCollectionConfig<T> {
   pageSize: number;
   total: number;
   load(params: LoadParams): LoadReturn<T> | Promise<LoadReturn<T>>;
-  shouldLoad?(params: LoadParams): boolean;
 }
 
 export interface CollectionLoader {
@@ -122,6 +121,33 @@ export function getPagesToLoad<T>(
 
 const resetItems = (total: number) => Array(total).fill(undefined);
 
+/**
+ * Create a data loader and a model. The model should be passed to a collection component. The
+ * loader can be used to manipulate filters, sorters, and clear cache.
+ *
+ * A simple loader using [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
+ * could look like the following:
+ *
+ * ```ts
+ * const {model, loader} = useListLoader(
+ *   {
+ *     total: 1000,
+ *     pageSize: 20,
+ *     async load({pageNumber, pageSize}) {
+ *       return fetch('/myUrl')
+ *         .then(response => response.json())
+ *         .then(response => {
+ *           return {total: response.total, items: response.items};
+ *         });
+ *     },
+ *   },
+ *   useListModel
+ * );
+ * ```
+ *
+ * @param config Config that contains the loader config and the model config
+ * @param modelHook A model hook that describes which model should be returned.
+ */
 export function useListLoader<
   T,
   // I cannot get Typescript to accept models that extend from `useListModel` to be considered valid
@@ -197,10 +223,7 @@ export function useListLoader<
     eventKey: keyof ReturnType<typeof useListModel>['events']
   ) => {
     return (data: any) => {
-      const index = model.navigation[navigationMethod](
-        model.state.UNSTABLE_cursorIndex.current,
-        model
-      );
+      const index = model.navigation[navigationMethod](model.state.cursorIndexRef.current, model);
       if (!items[index]) {
         load(
           {

@@ -5,6 +5,7 @@ import {ListBox} from '@workday/canvas-kit-react/collection';
 import {Basic} from './examples/Basic';
 import {StringChildren} from './examples/StringChildren';
 import {DynamicItems} from './examples/DynamicItems';
+import {DataLoader} from './examples/DataLoader';
 import {BasicVirtual} from './examples/BasicVirtual';
 import {IdentifiedItems} from './examples/IdentifiedItems';
 import {RovingFocus} from './examples/RovingFocus';
@@ -68,6 +69,19 @@ item, which could cause problems for popup menus. If your item count is low, pas
 `shouldVirtualize={false}` to disable virtualization.
 
 <ExampleCodeBlock code={DynamicItems} />
+
+### DataLoader
+
+The collection system comes with a data loader to help with dynamic collections. You must provide
+`total`, `pageSize`, and an asynchronous `load` function. The loader will call the `load` function
+when the user navigates the collection and needs more data. This example shows how to hook up a
+simple data loader and mocks a `load` function to simulate an asynchronous response.
+
+The data loader also takes a model argument to know which model to create. The loader configures
+the model to handle asynchronous keyboard navigation and will return the configured model to you
+to pass along to the collection component.
+
+<ExampleCodeBlock code={DataLoader} />
 
 #### Roving Tabindex
 
@@ -164,38 +178,15 @@ columns, but not rows. This is the default navigation manager for lists.
 
 ## Hooks
 
-### `useListItemRegister`
-
+<>
 <SymbolDoc name="useListItemRegister" fileName="/react/" />
-
-### `useListItemAllowChildStrings`
-
 <SymbolDoc name="useListItemAllowChildStrings" fileName="/react/" />
-
-### `useListItemRovingFocus`
-
 <SymbolDoc name="useListItemRovingFocus" fileName="/react/" />
-
-### `useListItemSelect`
-
 <SymbolDoc name="useListItemSelect" fileName="/react/" />
-
-### `useListRenderItems`
-
 <SymbolDoc name="useListRenderItems" fileName="/react/" />
-
-### `useListResetCursorOnBlur`
-
 <SymbolDoc name="useListResetCursorOnBlur" fileName="/react/" />
-
-### `useOverflowListItemMeasure`
-
 <SymbolDoc name="useOverflowListItemMeasure" fileName="/react/" />
-
-### `useOverflowListMeasure`
-
 <SymbolDoc name="useOverflowListMeasure" fileName="/react/" />
-
-### `useOverflowListTarget`
-
 <SymbolDoc name="useOverflowListTarget" fileName="/react/" />
+<SymbolDoc name="useListLoader" fileName="/react/" />
+</>
