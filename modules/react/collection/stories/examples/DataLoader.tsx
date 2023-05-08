@@ -4,12 +4,12 @@ import {
   ListBox,
   useListLoader,
   useListModel,
+  useListItemSelect,
+  useListItemRovingFocus,
   LoadReturn,
 } from '@workday/canvas-kit-react/collection';
-import {Box} from '@workday/canvas-kit-react/layout';
+import {Box, Flex} from '@workday/canvas-kit-react/layout';
 import {composeHooks} from '@workday/canvas-kit-react/common';
-import {useListItemSelect} from '../../lib/useListItemSelect';
-import {useListItemRovingFocus} from '../../lib/useListItemRovingFocus';
 
 function pickRandom<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
@@ -61,26 +61,32 @@ export const DataLoader = () => {
   );
 
   return (
-    <>
-      <ListBox model={model} maxHeight={400}>
-        {item => (
-          <ListBox.Item
-            as="button"
-            role="listitem"
-            elemPropsHook={useListItem}
-            height={20}
-            background="transparent"
-            border="none"
-          >
-            {item}
-          </ListBox.Item>
-        )}
-      </ListBox>
-      <Box as="ul" maxHeight={400} overflowY="auto">
-        {messages.map(message => (
-          <li key={message}>{message}</li>
-        ))}
-      </Box>
-    </>
+    <Flex gap="xl">
+      <Flex flexDirection="column" gap="zero">
+        <p>Scroll or focus and use keys to navigate</p>
+        <ListBox model={model} maxHeight={400} width={300}>
+          {item => (
+            <ListBox.Item
+              as="button"
+              role="listitem"
+              elemPropsHook={useListItem}
+              height={20}
+              background="transparent"
+              border="none"
+            >
+              {item}
+            </ListBox.Item>
+          )}
+        </ListBox>
+      </Flex>
+      <Flex flexDirection="column" gap="zero">
+        <p>Events:</p>
+        <Box as="ul" maxHeight={400} overflowY="auto">
+          {messages.map(message => (
+            <li key={message}>{message}</li>
+          ))}
+        </Box>
+      </Flex>
+    </Flex>
   );
 };
