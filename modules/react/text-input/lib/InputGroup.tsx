@@ -1,10 +1,23 @@
 import React from 'react';
 
 import {space} from '@workday/canvas-kit-react/tokens';
-import {createComponent, ExtractProps, useIsRTL} from '@workday/canvas-kit-react/common';
+import {
+  createComponent,
+  dispatchInputEvent,
+  ExtractProps,
+  mergeProps,
+  useForkRef,
+  useIsRTL,
+} from '@workday/canvas-kit-react/common';
 import {Flex} from '@workday/canvas-kit-react/layout';
+import {TertiaryButton} from '@workday/canvas-kit-react/button';
+import {xSmallIcon} from '@workday/canvas-system-icons-web';
 
 import {TextInput} from './TextInput';
+
+const InputGroupContext = React.createContext<React.RefObject<HTMLInputElement>>({
+  current: null,
+});
 
 export const InputGroupInnerStart = createComponent('div')({
   Component(elemProps: ExtractProps<typeof Flex>, ref, Element) {
@@ -42,7 +55,69 @@ export const InputGroupInnerEnd = createComponent('div')({
 
 export const InputGroupInput = createComponent(TextInput)({
   Component(elemProps: ExtractProps<typeof Flex>, ref, Element) {
-    return <Flex ref={ref} as={Element} width="100%" {...elemProps} />;
+    const inputRef = React.useContext(InputGroupContext);
+    const elementRef = useForkRef(ref, inputRef);
+    return <Flex ref={elementRef} as={Element} width="100%" {...elemProps} />;
+  },
+});
+
+export interface ClearInputButtonProps {}
+
+/**
+ * A clear input button. This can be a component later.
+ */
+export const ClearInputButton = createComponent(TertiaryButton)({
+  Component(elemProps: ClearInputButtonProps, ref, Element) {
+    const inputRef = React.useContext(InputGroupContext);
+    const localRef = React.useRef<HTMLButtonElement>(null);
+    const elementRef = useForkRef(localRef, ref);
+    const [inputHasValue, setInputHasValue] = React.useState(false);
+
+    React.useLayoutEffect(() => {
+      const input = inputRef.current;
+      const button = localRef.current;
+
+      if (input && button) {
+        input.addEventListener('input', () => {
+          setInputHasValue(!!input.value);
+        });
+      }
+    }, [inputRef, localRef]);
+
+    const props = mergeProps(
+      {
+        onMouseDown(event: React.MouseEvent) {
+          event.preventDefault();
+        },
+        onClick() {
+          dispatchInputEvent(inputRef.current, '');
+        },
+      },
+      elemProps
+    );
+
+    return (
+      <Element
+        ref={elementRef}
+        // This element does not need to be accessible via screen reader. The user can already clear
+        // an input
+        role="presentation"
+        icon={xSmallIcon}
+        // "small" is needed to render correctly within a `TextInput`
+        size="small"
+        // A clear input button doesn't need focus. There's already keyboard keys to clear an input
+        tabIndex={-1}
+        transition="opacity 300ms ease"
+        // Use style attribute to avoid the cost of Emotion's styling solution that causes the
+        // browser to throw away style cache. The difference can be significant for large amount of
+        // elements (could be a 80ms difference)
+        style={{
+          opacity: inputHasValue ? 1 : 0,
+          pointerEvents: inputHasValue ? 'auto' : 'none',
+        }}
+        {...props}
+      />
+    );
   },
 });
 
@@ -164,5 +239,10 @@ export const InputGroup = createComponent('div')({
      * within the input.
      */
     InnerEnd: InputGroupInnerEnd,
+    /**
+     * A component that can be added to an input group that will clear the input. It will only render
+     * when the input has a value and will fade when a value is entered.
+     */
+    ClearInputButton: ClearInputButton,
   },
 });
