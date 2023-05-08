@@ -11,7 +11,7 @@ describe('Combobox Labs', () => {
     h.stories.visit();
   });
 
-  context(`given the 'Basic' story is rendered`, () => {
+  context(`given the 'Autocomplete' story is rendered`, () => {
     beforeEach(() => {
       h.stories.load('Components/Inputs/Combobox', 'Autocomplete');
     });
@@ -92,7 +92,7 @@ describe('Combobox Labs', () => {
           });
 
           it.only('should not show the clear button', () => {
-            cy.findByTestId('clear').should('not.be.visible');
+            cy.get('[data-testid=clear]').should('not.be.visible');
           });
         });
 
