@@ -354,6 +354,7 @@ export const useCursorListModel = createModelHook({
      * based on the size of the list container and the number of items fitting within the container.
      */
     pageSizeRef,
+    UNSTABLE_cursorIndex: cursorIndexRef,
   };
 
   const events = {

@@ -197,7 +197,10 @@ export function useListLoader<
     eventKey: keyof ReturnType<typeof useListModel>['events']
   ) => {
     return (data: any) => {
-      const index = model.navigation[navigationMethod](model.state.cursorIndex, model);
+      const index = model.navigation[navigationMethod](
+        model.state.UNSTABLE_cursorIndex.current,
+        model
+      );
       if (!items[index]) {
         load(
           {

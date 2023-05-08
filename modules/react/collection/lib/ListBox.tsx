@@ -79,7 +79,7 @@ export const ListBox = createContainer('ul')({
       maxHeight={maxHeight}
       overflowY={model.state.orientation === 'vertical' ? 'auto' : undefined}
     >
-      <Flex as={Element} {...elemProps} marginY={0}>
+      <Flex as={Element} flexDirection="column" {...elemProps} marginY={0}>
         {useListRenderItems(model, elemProps.children)}
       </Flex>
     </Box>

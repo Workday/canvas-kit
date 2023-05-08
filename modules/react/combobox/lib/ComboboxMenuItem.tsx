@@ -6,7 +6,10 @@ import {
   createSubcomponent,
 } from '@workday/canvas-kit-react/common';
 import {StyledMenuItem, useMenuModel} from '@workday/canvas-kit-react/menu';
-import {useListItemRegister, useListModel} from '@workday/canvas-kit-react/collection';
+import {
+  useListItemAllowChildStrings,
+  useListItemRegister,
+} from '@workday/canvas-kit-react/collection';
 import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
 
 import {useComboboxModel} from './useComboboxModel';
@@ -50,11 +53,7 @@ export const useComboboxMenuItem = composeHooks(
     } as const;
   }),
   useListItemRegister,
-  createElemPropsHook(useListModel)(
-    (model, _, elemProps: {'data-id'?: string; children?: React.ReactNode} = {}) => {
-      return {};
-    }
-  )
+  useListItemAllowChildStrings
 );
 
 export const ComboboxMenuItem = createSubcomponent('li')({

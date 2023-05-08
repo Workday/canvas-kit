@@ -3,6 +3,7 @@ import {SymbolDoc} from '@workday/canvas-kit-docs';
 import {ListBox} from '@workday/canvas-kit-react/collection';
 
 import {Basic} from './examples/Basic';
+import {StringChildren} from './examples/StringChildren';
 import {DynamicItems} from './examples/DynamicItems';
 import {BasicVirtual} from './examples/BasicVirtual';
 import {IdentifiedItems} from './examples/IdentifiedItems';
@@ -34,9 +35,18 @@ yarn add @workday/canvas-kit-react
 The `ListBox` on its own isn't very useful. It registers each item with the model. The
 `ListBox.Item` only uses the `useListItemRegister` hook which handles registration of static items
 to the model. The `ListBox` uses `useListRenderItems` which handles rendering static items as well
-as [Dynamic List](#dynamic-list) example).
+as [Dynamic List](#dynamic-list) example.
 
 <ExampleCodeBlock code={Basic} />
+
+### String Children
+
+The `ListBox` on its own isn't very useful. It registers each item with the model. The
+`ListBox.Item` only uses the `useListItemRegister` hook which handles registration of static items
+to the model. The `ListBox` uses `useListRenderItems` which handles rendering static items as well
+as [Dynamic List](#dynamic-list) example.
+
+<ExampleCodeBlock code={StringChildren} />
 
 ### Identifying Items
 
@@ -147,6 +157,10 @@ columns, but not rows. This is the default navigation manager for lists.
 ### `useListItemRegister`
 
 <SymbolDoc name="useListItemRegister" fileName="/react/" />
+
+### `useListItemAllowChildStrings`
+
+<SymbolDoc name="useListItemAllowChildStrings" fileName="/react/" />
 
 ### `useListItemRovingFocus`
 
