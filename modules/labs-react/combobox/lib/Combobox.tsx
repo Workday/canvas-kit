@@ -319,7 +319,7 @@ export const Combobox = ({
       }
     }
 
-    // setIsOpened(false);
+    setIsOpened(false);
 
     if (onBlur) {
       onBlur(event);

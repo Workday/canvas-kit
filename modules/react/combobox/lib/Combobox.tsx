@@ -28,6 +28,5 @@ export const Combobox = createContainer()({
     Menu: ComboboxMenu,
   },
 })<ComboboxProps>(({children}, _, model) => {
-  console.log('model', model);
   return <ComboboxMenu model={model}>{children}</ComboboxMenu>;
 });
