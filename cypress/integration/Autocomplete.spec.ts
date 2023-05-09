@@ -173,6 +173,7 @@ describe('Autocomplete', () => {
             context('when the use hits the "2" key', () => {
               beforeEach(() => {
                 cy.findAllByRole('combobox').type('2');
+                waitForAutocompleteReady();
               });
 
               it('should open the listbox', () => {
