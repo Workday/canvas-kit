@@ -18,6 +18,12 @@ import {
 import {useComboboxModel} from './useComboboxModel';
 import {useComboboxInputOpenWithArrowKeys} from './useComboboxInputOpenWithArrowKeys';
 
+/**
+ * Adds all the attributes necessary to start with a combobox input. It opens the menu with arrows
+ * keys, uses {@link useListActiveDescendant}, and handles keyboard arrows to navigate items of the
+ * menu. You may also compose this hook to add more specific behaviors for your combobox input
+ * component.
+ */
 export const useComboboxInput = composeHooks(
   createElemPropsHook(useComboboxModel)((model, ref) => {
     const elementRef = useForkRef(ref, model.state.inputRef);

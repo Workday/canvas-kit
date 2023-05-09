@@ -9,6 +9,11 @@ import {useComboboxModel} from './useComboboxModel';
 
 export interface ComboboxMenuListProps<T = any> extends ListBoxProps<T> {}
 
+/**
+ * The `listbox` uses `aria-labelledby` pointing to the input of a combobox. This input should be
+ * labelled by a form field label for proper accessibility. Use {@link FormField} to ensure proper
+ * accessibility.
+ */
 export const useComboboxMenuList = createElemPropsHook(useMenuModel)(model => {
   return {
     role: 'listbox',

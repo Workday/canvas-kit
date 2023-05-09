@@ -73,9 +73,6 @@ export const ListBox = createContainer('ul')({
   return (
     <Box
       ref={model.state.containerRef}
-      height={
-        height || model.state.isVirtualized ? model.state.UNSTABLE_virtual.totalSize : undefined
-      }
       marginY={marginY}
       maxHeight={maxHeight}
       overflowY={model.state.orientation === 'vertical' ? 'auto' : undefined}

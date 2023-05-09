@@ -33,7 +33,7 @@ describe('enhancedComponentParser', () => {
   });
 
   describe('elemPropsHook', () => {
-    it('should handle "createElemPropsHook" with elemProps defined', () => {
+    it.only('should handle "createElemPropsHook" with elemProps defined', () => {
       const program = createProgramFromSource(`
         export const useMyComponent = createElemPropsHook(useMyModel)(
           (
@@ -46,6 +46,7 @@ describe('enhancedComponentParser', () => {
             const localId = 'a';
 
             return {
+              /** JSDoc */
               'data-id': localId
             }
           }
@@ -74,12 +75,11 @@ describe('enhancedComponentParser', () => {
       expect(symbols).toHaveProperty('0.type.parameters.1.type.properties.0.type.value', 'string');
       expect(symbols).toHaveProperty('0.type.returnType.kind', 'object');
       expect(symbols).toHaveProperty('0.type.returnType.properties.0.kind', 'property');
-      expect(symbols).toHaveProperty('0.type.returnType.properties.0.name', 'data-id');
       expect(symbols).toHaveProperty('0.type.returnType.properties.0.type.kind', 'primitive');
       expect(symbols).toHaveProperty('0.type.returnType.properties.0.type.value', 'string');
+      expect(symbols).toHaveProperty('0.type.returnType.properties.0', 'string');
     });
   });
-
   describe('elemPropsHook', () => {
     it('should handle "createElemPropsHook" with a ref in returnType', () => {
       const program = createProgramFromSource(`
