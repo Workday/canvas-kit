@@ -1,8 +1,6 @@
 import React from 'react';
 
-import {searchIcon} from '@workday/canvas-system-icons-web';
 import {
-  createComponent,
   createElemPropsHook,
   createSubcomponent,
   composeHooks,
@@ -15,7 +13,6 @@ import {
   useComboboxLoader,
   useComboboxInput,
 } from '@workday/canvas-kit-react/combobox';
-import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {FormField} from '@workday/canvas-kit-preview-react/form-field';
 import {StyledMenuItem} from '@workday/canvas-kit-react/menu';
 import {LoadingDots} from '@workday/canvas-kit-react/loading-dots';
@@ -51,14 +48,25 @@ const AutoCompleteInput = createSubcomponent(TextInput)({
 export const Autocomplete = () => {
   const {model, loader} = useComboboxLoader(
     {
+      // We're using strings, so tell the collection system the item is the identifier
       getId: (item: string) => item,
+
+      // We're using strings, so tell the collection system the text is the string
       getTextValue: (item: string) => item,
-      shouldVirtualize: true,
+
+      // You can start with any number that makes sense.
       total: 0,
+
+      // Pick whatever number makes sense for your API
       pageSize: 20,
+
+      // A load function that will be called by the loader. You must return a promise that returns
+      // an object like `{items: [], total: 0}`. The `items` will be merged into the loader's cache
       async load({pageNumber, pageSize, filter}) {
         return new Promise<LoadReturn<string>>(resolve => {
+          // simulate a server response by resolving after a period of time
           setTimeout(() => {
+            // simulate paging and filtering based on pre-computed items
             const start = (pageNumber - 1) * pageSize;
             const end = start + pageSize;
             const filteredItems = options.filter(item => {
@@ -78,7 +86,9 @@ export const Autocomplete = () => {
           }, 300);
         });
       },
-      onShow(data, state) {
+      onShow() {
+        // The `shouldLoad` cancels while the combobox menu is hidden, so let's load when it is
+        // visible
         loader.load();
       },
     },

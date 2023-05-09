@@ -26,8 +26,19 @@ yarn add @workday/canvas-kit-react
 
 ### Autocomplete
 
+This example shows an Autocomplete example using `FormField`, `InputGroup`, and the `Combobox`
+components to make an autocomplete form field. It uses the `useComboboxLoader` to make mock API
+calls using `setTimeout`. Your application may use
+[fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API),
+[WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API), or other means of
+communicating with a server.
+
 <ExampleCodeBlock code={Autocomplete} />
 
 ## Component API
 
 <SymbolDoc name="Combobox" fileName="/react/" hideDescription />
+
+## Hooks
+
+<SymbolDoc name="useComboboxLoader" fileName="/react/" />
