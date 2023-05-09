@@ -19,7 +19,7 @@ describe('Autocomplete', () => {
 
   context(`given the 'Autocomplete' story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Components/Inputs/Combobox', 'Autocomplete');
+      h.stories.load('Features/Combobox', 'Autocomplete');
     });
 
     it('should have aria-haspopup set to true', () => {
