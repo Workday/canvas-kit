@@ -16,8 +16,24 @@ export interface LoadParams {
   sorter: CollectionLoader['sorter'];
 }
 export interface AsyncCollectionConfig<T, M extends Model<any, any>> {
+  /**
+   * The desired results per page.
+   */
   pageSize: number;
-  total: number;
+  /**
+   * The total items in the collection. If you do not have this information before making an API
+   * call, leave it blank and it will default to `0` and be updated when `load` comes back with
+   * results.
+   * @default 0
+   */
+  total?: number;
+  /**
+   * This function acts like a guard similar to model events. If you provide this function and it
+   * returns `false`, the `load` call from the loader will be cancelled. Be aware, this function can
+   * cause a loader to not function properly. You will need to call `loader.load(pageNumber)` on
+   * your own if a valid load event is cancelled. An example of using this function is in
+   * {@link useComboboxLoader} where the load calls are only allowed when the menu is open.
+   */
   shouldLoad?(
     /**
      * Parameters that are being sent to the `load` function
@@ -28,6 +44,17 @@ export interface AsyncCollectionConfig<T, M extends Model<any, any>> {
      */
     prevState: M['state']
   ): boolean;
+  /**
+   * A `load` callback function provides an easier way to hook up loader requests for data to an
+   * API. It will be called when the user is ready for more of the virtual data set. The `load`
+   * function will be called when:
+   * - The list UI initially loads. It will request as many pages as necessary to render enough
+   *   items in the viewport
+   * - The user is scrolling the list and has run out of cached data
+   * - The user is using the keyboard to navigate the list and has run out of cached data
+   * - A filter or sorter value has changed and the cached data is now invalid
+   * - `loader.load` was called by the developer, manually requesting a page number
+   */
   load(params: LoadParams): LoadReturn<T> | Promise<LoadReturn<T>>;
 }
 
@@ -135,11 +162,12 @@ export function getPagesToLoad<T>(
 const resetItems = (total: number) => Array(total).fill(undefined);
 
 /**
- * Create a data loader and a model. The model should be passed to a collection component. The
- * loader can be used to manipulate filters, sorters, and clear cache.
+ * Create a data loader and a model. The list loader should be used on virtual data sets with
+ * possibly large amounts of data. The model should be passed to a collection component. The loader
+ * can be used to manipulate filters, sorters, and clear cache.
  *
- * A simple loader using [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
- * could look like the following:
+ * A simple loader using [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) could
+ * look like the following:
  *
  * ```ts
  * const {model, loader} = useListLoader(
@@ -169,9 +197,9 @@ export function useListLoader<
   config: AsyncCollectionConfig<T, ReturnType<M>> & M['TConfig'],
   modelHook: M
 ): {model: ReturnType<M>; loader: CollectionLoader} {
-  const [total, setTotal] = React.useState(config.total);
+  const [total, setTotal] = React.useState(config.total || 0);
   const [items, setItems] = React.useState<T[]>(() => {
-    return resetItems(config.total);
+    return resetItems(config.total || 0);
   });
 
   // keep track of pages that are currently loading
