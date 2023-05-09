@@ -242,10 +242,10 @@ export const createContainer = <
 >(
   as?: E
 ) => <
-  TModelHook extends ((config: any) => {state: any; events: any}) & {
+  TModelHook extends ((config: any) => Model<any, any>) & {
     Context?: React.Context<any>;
   } & {defaultConfig?: Record<string, any>},
-  TDefaultContext extends {state: Record<string, any>; events: Record<string, any>},
+  TDefaultContext extends Model<any, any>,
   TElemPropsHook,
   SubComponents = {}
 >({
@@ -380,7 +380,7 @@ export const createSubcomponent = <
   as?: E
 ) => <
   TElemPropsHook, // normally we'd put a constraint here, but doing so causes the `infer` below to fail to infer the return props
-  TModelHook extends ((config: any) => {state: any; events: any}) & {Context?: React.Context<any>},
+  TModelHook extends ((config: any) => Model<any, any>) & {Context?: React.Context<any>},
   SubComponents = {}
 >({
   displayName,
