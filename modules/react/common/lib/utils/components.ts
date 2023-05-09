@@ -294,6 +294,11 @@ export const createContainer = <
           ? (elemPropsHook as any)(localModel, elemProps, ref)
           : elemProps;
 
+        // make sure there's always a ref being passed, even if there are no elemProps hooks to run
+        if (ref && !finalElemProps.hasOwnProperty('ref')) {
+          finalElemProps.ref = ref;
+        }
+
         return React.createElement(
           Context.Provider,
           {value: localModel},

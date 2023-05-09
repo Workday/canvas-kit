@@ -1,3 +1,3 @@
 export * from './lib/InputIconContainer';
 export * from './lib/TextInput';
-export {InputGroup} from './lib/InputGroup';
+export {InputGroup, useInputGroupModel} from './lib/InputGroup';
