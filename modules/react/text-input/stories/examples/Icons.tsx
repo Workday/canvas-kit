@@ -22,7 +22,7 @@ const InputGroupFormFieldForwarder = (props: {}) => {
       </InputGroup.InnerStart>
       <InputGroup.Input {...props} />
       <InputGroup.InnerEnd>
-        <InputGroup.ClearInputButton />
+        <InputGroup.ClearButton />
       </InputGroup.InnerEnd>
     </InputGroup>
   );

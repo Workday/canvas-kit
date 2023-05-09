@@ -91,29 +91,28 @@ describe('Combobox Labs', () => {
             cy.findByRole('combobox').should('have.focus');
           });
 
-          it.only('should not show the clear button', () => {
+          it('should not show the clear button', () => {
             cy.get('[data-testid=clear]').should('not.be.visible');
           });
         });
 
-        // no clear button yet
-        //   context('when the clear button is clicked', () => {
-        //     beforeEach(() => {
-        //       cy.findByLabelText('Reset Search Input').click();
-        //     });
+        context('when the clear button is clicked', () => {
+          beforeEach(() => {
+            cy.get('[data-testid=clear]').click();
+          });
 
-        //     it('should clear the combobox', () => {
-        //       cy.findByRole('combobox').should('have.value', '');
-        //     });
+          it('should clear the combobox', () => {
+            cy.findByRole('combobox').should('have.value', '');
+          });
 
-        //     it('should close the listbox', () => {
-        //       cy.findByRole('listbox').should('not.exist');
-        //     });
+          it('should close the listbox', () => {
+            cy.findByRole('listbox').should('not.exist');
+          });
 
-        //     it('should keep focus on the combobox', () => {
-        //       cy.findByRole('combobox').should('have.focus');
-        //     });
-        //   });
+          it('should keep focus on the combobox', () => {
+            cy.findByRole('combobox').should('have.focus');
+          });
+        });
 
         context('when down arrow key is pressed', () => {
           beforeEach(() => {
@@ -169,9 +168,9 @@ describe('Combobox Labs', () => {
               cy.findByRole('listbox').should('not.exist');
             });
 
-            context('when the use hits the "a" key', () => {
+            context.only('when the use hits the "R" key', () => {
               beforeEach(() => {
-                cy.findAllByRole('combobox').type('a');
+                cy.findAllByRole('combobox').type('R');
               });
 
               // Not hooked up to autocomplete yet
@@ -191,7 +190,7 @@ describe('Combobox Labs', () => {
             });
 
             it('should not set the combobox value to the option text value', () => {
-              cy.findByRole('combobox').should('have.value', 'Test');
+              cy.findByRole('combobox').should('have.value', 'Red');
             });
 
             it('should not close the listbox', () => {

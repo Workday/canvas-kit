@@ -1,10 +1,9 @@
 import React from 'react';
 
-import {xSmallIcon, searchIcon} from '@workday/canvas-system-icons-web';
+import {searchIcon} from '@workday/canvas-system-icons-web';
 import {LoadReturn} from '@workday/canvas-kit-react/collection';
 import {Combobox, useComboboxModel, useComboboxLoader} from '@workday/canvas-kit-react/combobox';
-import {TertiaryButton} from '@workday/canvas-kit-react/button';
-import {createComponent, dispatchInputEvent} from '@workday/canvas-kit-react/common';
+import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {FormField} from '@workday/canvas-kit-preview-react/form-field';
 import {StyledMenuItem} from '@workday/canvas-kit-react/menu';
 import {LoadingDots} from '@workday/canvas-kit-react/loading-dots';
@@ -59,33 +58,15 @@ export const Autocomplete = () => {
     useComboboxModel
   );
 
-  const inputRef = React.useRef(null);
-  const [inputHasValue, setInputHasValue] = React.useState(false);
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInputHasValue(!!event.currentTarget.value);
-  };
-
   return (
     <FormField orientation="horizontal" hasError isRequired>
       <FormField.Label>Fruit</FormField.Label>
       <Combobox model={model} onChange={event => console.log('input', event.currentTarget.value)}>
         <InputGroup>
           <InputGroup.InnerStart pointerEvents="none">
-            <TertiaryButton
-              role="presentation"
-              icon={searchIcon}
-              size="small"
-              tabIndex={-1}
-              onMouseDown={event => {
-                event.preventDefault(); // prevent a focus change
-              }}
-              onClick={event => {
-                dispatchInputEvent(model.state.inputRef.current, '');
-              }}
-            />
+            <SystemIcon icon={searchIcon} size="small" />
           </InputGroup.InnerStart>
-          <InputGroup.Input as={FormField.Input.as(Combobox.Input)} onChange={handleChange} />
+          <InputGroup.Input as={FormField.Input.as(Combobox.Input)} />
           <Combobox.Menu.Popper>
             <Combobox.Menu.Card>
               {model.state.items.length === 0 && <StyledMenuItem>No Results Found</StyledMenuItem>}
@@ -104,58 +85,10 @@ export const Autocomplete = () => {
             <LoadingDots style={{display: 'flex', transform: 'scale(0.3)'}} />
           </InputGroup.InnerEnd>
           <InputGroup.InnerEnd>
-            <ClearInputButton
-              inputRef={inputRef}
-              inputHasValue={inputHasValue}
-              data-testid="clear"
-            />
+            <InputGroup.ClearButton data-testid="clear" />
           </InputGroup.InnerEnd>
         </InputGroup>
       </Combobox>
     </FormField>
   );
 };
-
-/**
- * A clear input button. This can be a component later.
- */
-const ClearInputButton = createComponent(TertiaryButton)({
-  Component(
-    {
-      inputRef,
-      inputHasValue,
-      ...elemProps
-    }: {inputRef: React.RefObject<HTMLInputElement>; inputHasValue: boolean},
-    ref,
-    Element
-  ) {
-    return (
-      <Element
-        ref={ref}
-        // This element does not need to be accessible via screen reader. The user can already clear
-        // an input
-        role="presentation"
-        icon={xSmallIcon}
-        // "small" is needed to render correctly within a `TextInput`
-        size="small"
-        // A clear input button doesn't need focus. There's already keyboard keys to clear an input
-        tabIndex={-1}
-        transition="opacity 300ms ease"
-        // Use style attribute to avoid the cost of Emotion's styling solution that causes the
-        // browser to throw away style cache. The difference can be significant for large amount of
-        // elements (could be a 80ms difference)
-        style={{
-          opacity: inputHasValue ? 1 : 0,
-          pointerEvents: inputHasValue ? 'auto' : 'none',
-        }}
-        {...elemProps}
-        onMouseDown={event => {
-          event.preventDefault(); // prevent a focus change to the button. Focus should stay in the input
-        }}
-        onClick={_ => {
-          dispatchInputEvent(inputRef.current, '');
-        }}
-      />
-    );
-  },
-});
