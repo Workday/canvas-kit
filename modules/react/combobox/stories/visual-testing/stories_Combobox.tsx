@@ -6,7 +6,7 @@ import {withSnapshotsEnabled} from '../../../../../utils/storybook';
 import {Combobox} from '@workday/canvas-kit-react/combobox';
 
 export default withSnapshotsEnabled({
-  title: 'Testing/Inputs/Combobox',
+  title: 'Testing/Combobox',
   component: Combobox,
 });
 

@@ -39,6 +39,6 @@ export const useOverflowListTarget = createElemPropsHook(useOverflowListModel)((
     ref: elementRef,
     'aria-hidden': isHidden,
     tabIndex: isHidden ? -1 : 0,
-    style: isHidden ? hiddenStyle : {},
+    style: isHidden ? hiddenStyle : undefined,
   };
 });

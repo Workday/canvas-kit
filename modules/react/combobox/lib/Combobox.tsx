@@ -7,7 +7,7 @@ import {ComboboxInput} from './ComboboxInput';
 import {ComboboxMenu} from './ComboboxMenu';
 export interface ComboboxProps {
   /**
-   * Children of the Combobox. Should contain a `<Combobox.Input>`, a `<Combobox.Content>`
+   * Children of the Combobox. Should contain a `<Combobox.Input>` and a `<Combobox.Menu>`
    */
   children: React.ReactNode;
 }
