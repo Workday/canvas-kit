@@ -48,12 +48,6 @@ const AutoCompleteInput = createSubcomponent(TextInput)({
 export const Autocomplete = () => {
   const {model, loader} = useComboboxLoader(
     {
-      // We're using strings, so tell the collection system the item is the identifier
-      getId: (item: string) => item,
-
-      // We're using strings, so tell the collection system the text is the string
-      getTextValue: (item: string) => item,
-
       // You can start with any number that makes sense.
       total: 0,
 

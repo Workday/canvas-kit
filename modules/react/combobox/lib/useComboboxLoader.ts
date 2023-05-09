@@ -23,6 +23,30 @@ const useDebounce = () => {
   };
 };
 
+/**
+ * Create a combobox data loader and a model. The combobox loader extends the {@link useListLoader}
+ * and connects a combobox input to the filter of the data loader. A simple loader using
+ * [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) could look like the
+ * following:
+ *
+ * ```ts
+ * const {model, loader} = useComboboxLoader(
+ *   {
+ *     total: 0,
+ *     pageSize: 20,
+ *     async load({pageNumber, pageSize, filter}) {
+ *       // `filter` will be a `string`
+ *       return fetch(`/myUrl?filter=${filter}`)
+ *         .then(response => response.json())
+ *         .then(response => {
+ *           return {total: response.total, items: response.items};
+ *         });
+ *     },
+ *   },
+ *   useComboboxModel
+ * );
+ * ```
+ */
 export const useComboboxLoader: typeof useListLoader = (config, modelHook) => {
   const debounce = useDebounce();
   const list = useListLoader(

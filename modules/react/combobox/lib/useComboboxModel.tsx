@@ -27,6 +27,18 @@ const useInputModel = createModelHook({
   };
 });
 
+/**
+ * The ComboboxModel extends the {@link ListModel} and the {@link InputModel}. Selecting items from
+ * the menu will dispatch an
+ * [input](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/input_event) event on the
+ * input which should work with form libraries, automation, and autofill.
+ *
+ * ```tsx
+ * const model = useComboboxModel()
+ *
+ * <Combobox model={model}>{Combobox child components}</Combobox>
+ * ```
+ */
 export const useComboboxModel = createModelHook({
   defaultConfig: {
     ...useInputModel.defaultConfig,
@@ -62,7 +74,7 @@ export const useComboboxModel = createModelHook({
     ...input.events,
     ...menu.events,
     /**
-     * Change the width of the menu
+     * Change the width of the menu. Usually this is set to the width of the input.
      */
     setWidth(width: number) {
       setWidth(width);

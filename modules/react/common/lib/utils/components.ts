@@ -662,7 +662,6 @@ export const createHook = <M extends Model<any, any>, PO extends {}, PI extends 
 
 /**
  * @deprecated use `createSubModelElemPropsHook` instead
- * @deprecated use `createSubModelElemPropsHook` instead
  */
 export const subModelHook = <M extends Model<any, any>, SM extends Model<any, any>, O extends {}>(
   fn: (model: M) => SM,
