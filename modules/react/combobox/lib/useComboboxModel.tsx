@@ -40,6 +40,7 @@ export const useComboboxModel = createModelHook({
   const input = useInputModel(config);
   const menu = useMenuModel(
     useMenuModel.mergeConfig(config, {
+      shouldVirtualize: true,
       onSelect({id}) {
         dispatchInputEvent(menu.state.targetRef.current, id);
       },

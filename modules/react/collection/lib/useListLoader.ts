@@ -1,5 +1,7 @@
 import React from 'react';
 
+import {Model} from '@workday/canvas-kit-react/common';
+
 import {useListModel} from './useListModel';
 
 export interface LoadReturn<T> {
@@ -13,9 +15,19 @@ export interface LoadParams {
   filter: CollectionLoader['filter'];
   sorter: CollectionLoader['sorter'];
 }
-export interface AsyncCollectionConfig<T> {
+export interface AsyncCollectionConfig<T, M extends Model<any, any>> {
   pageSize: number;
   total: number;
+  shouldLoad?(
+    /**
+     * Parameters that are being sent to the `load` function
+     */
+    params: LoadParams,
+    /**
+     * State coming from the model
+     */
+    prevState: M['state']
+  ): boolean;
   load(params: LoadParams): LoadReturn<T> | Promise<LoadReturn<T>>;
 }
 
@@ -25,6 +37,7 @@ export interface CollectionLoader {
   sorter: string | Record<string, string>;
   updateSorter(value: string): void;
   isLoading: boolean;
+  load(pageNumber?: number): void;
 }
 
 /**
@@ -57,7 +70,7 @@ function load<T>(
     filter: CollectionLoader['filter'];
     sorter: CollectionLoader['sorter'];
   },
-  loadCb: AsyncCollectionConfig<T>['load'],
+  loadCb: AsyncCollectionConfig<T, any>['load'],
   loadingCache: Record<number, boolean>
 ): Promise<Updater<T>> {
   if (loadingCache[params.pageNumber]) {
@@ -151,9 +164,9 @@ const resetItems = (total: number) => Array(total).fill(undefined);
 export function useListLoader<
   T,
   // I cannot get Typescript to accept models that extend from `useListModel` to be considered valid
-  M extends ((...args: any[]) => any) & Omit<typeof useListModel, 'TConfig' | 'Context'>
+  M extends ((...args: any[]) => any) & Omit<typeof useListModel, 'Context'>
 >(
-  config: AsyncCollectionConfig<T> & typeof useListModel.TConfig,
+  config: AsyncCollectionConfig<T, ReturnType<M>> & M['TConfig'],
   modelHook: M
 ): {model: ReturnType<M>; loader: CollectionLoader} {
   const [total, setTotal] = React.useState(config.total);
@@ -182,33 +195,6 @@ export function useListLoader<
     [total]
   );
 
-  const updateFilter = (filter: CollectionLoader['filter']) => {
-    loadingRef.current = {};
-    setFilter(filter);
-    const params = {
-      pageNumber: 1,
-      pageSize: config.pageSize,
-      filter,
-      sorter,
-    };
-    load(params, loadRef.current, loadingRef.current).then(updateItems);
-  };
-
-  const updateSorter = (sorter: CollectionLoader['sorter']) => {
-    loadingRef.current = {};
-    setSorter(sorter);
-    load(
-      {
-        pageNumber: 1,
-        pageSize: config.pageSize,
-        filter,
-        sorter,
-      },
-      loadRef.current,
-      loadingRef.current
-    ).then(updateItems);
-  };
-
   // Our `useEffect` functions use `config.load`, but we don't want to rerun the effects if the user
   // sends a different load function every render
   const loadRef = React.useRef(config.load);
@@ -216,25 +202,29 @@ export function useListLoader<
 
   const itemsRef = React.useRef(items);
   itemsRef.current = items;
+
+  const shouldLoadRef = React.useRef(config.shouldLoad);
+  shouldLoadRef.current = config.shouldLoad;
+
   const requestAnimationFrameRef = React.useRef(0);
 
   const shouldLoadIndex = (
     navigationMethod: Exclude<keyof ReturnType<typeof useListModel>['navigation'], 'getItem'>,
     eventKey: keyof ReturnType<typeof useListModel>['events']
   ) => {
-    return (data: any) => {
+    return (data: any, prevState: any) => {
       const index = model.navigation[navigationMethod](model.state.cursorIndexRef.current, model);
+      const params = {
+        pageNumber: Math.floor(index / config.pageSize) + 1,
+        pageSize: config.pageSize,
+        filter,
+        sorter,
+      };
       if (!items[index]) {
-        load(
-          {
-            pageNumber: Math.floor(index / config.pageSize) + 1,
-            pageSize: config.pageSize,
-            filter,
-            sorter,
-          },
-          loadRef.current,
-          loadingRef.current
-        )
+        if (config.shouldLoad && !config.shouldLoad(params, prevState)) {
+          return false;
+        }
+        load(params, loadRef.current, loadingRef.current)
           .then(updateItems)
           .then(() => {
             cancelAnimationFrame(requestAnimationFrameRef.current);
@@ -262,6 +252,40 @@ export function useListLoader<
 
   const {virtualItems} = model.state.UNSTABLE_virtual;
 
+  const {state} = model;
+  const stateRef = React.useRef(state);
+  stateRef.current = state;
+
+  const updateFilter = (filter: CollectionLoader['filter']) => {
+    loadingRef.current = {};
+    setFilter(filter);
+    const params = {
+      pageNumber: 1,
+      pageSize: config.pageSize,
+      filter,
+      sorter,
+    };
+    if (config.shouldLoad && !config.shouldLoad(params, state)) {
+      return;
+    }
+    load(params, loadRef.current, loadingRef.current).then(updateItems);
+  };
+
+  const updateSorter = (sorter: CollectionLoader['sorter']) => {
+    loadingRef.current = {};
+    setSorter(sorter);
+    const params = {
+      pageNumber: 1,
+      pageSize: config.pageSize,
+      filter,
+      sorter,
+    };
+    if (config.shouldLoad && !config.shouldLoad(params, state)) {
+      return;
+    }
+    load(params, loadRef.current, loadingRef.current).then(updateItems);
+  };
+
   // Our only signal to trigger loading is if our virtual indexes are too close to boundaries.
   React.useEffect(() => {
     if (!virtualItems.length) {
@@ -280,17 +304,26 @@ export function useListLoader<
     );
 
     pagesToLoad.forEach(pageNumber => {
-      load(
-        {pageNumber, pageSize: config.pageSize, filter, sorter},
-        loadRef.current,
-        loadingRef.current
-      ).then(updateItems);
+      const params = {pageNumber, pageSize: config.pageSize, filter, sorter};
+      const shouldLoad = shouldLoadRef.current;
+      if (shouldLoad && !shouldLoad(params, stateRef.current)) {
+        return;
+      }
+      load(params, loadRef.current, loadingRef.current).then(updateItems);
     });
 
     return () => {
       cancelAnimationFrame(requestAnimationFrameRef.current);
     };
   }, [virtualItems, config.pageSize, filter, sorter, updateItems]);
+
+  const loaderLoad: CollectionLoader['load'] = (pageNumber = 1) => {
+    return load<T>(
+      {pageNumber, pageSize: config.pageSize, filter, sorter},
+      loadRef.current,
+      loadingRef.current
+    ).then(updateItems);
+  };
 
   // Typescript won't allow me to say the included model extends `useListModel` for some reason, so
   // we have no way to type check it. Without the constraint, Typescript doesn't know how type it
@@ -308,6 +341,7 @@ export function useListLoader<
         (loading, result) => loading || result,
         false
       ),
+      load: loaderLoad,
     },
   };
 }

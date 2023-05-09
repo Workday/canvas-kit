@@ -42,14 +42,14 @@ export const useComboboxMenuItem = composeHooks(
       event.preventDefault();
     };
 
-    const selected =
-      model.state.selectedIds === 'all' || model.state.selectedIds.includes(id) || undefined;
+    const selected = model.state.cursorId === id;
 
     return {
       role: 'option',
-      'aria-selected': selected,
+      'aria-selected': selected || undefined,
       onMouseDown,
-      className: model.state.cursorId === elemProps['data-id'] ? 'focus' : '',
+      className:
+        model.state.cursorId && model.state.cursorId === elemProps['data-id'] ? 'focus' : '',
     } as const;
   }),
   useListItemRegister,

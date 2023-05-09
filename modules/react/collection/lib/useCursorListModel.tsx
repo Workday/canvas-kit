@@ -184,7 +184,7 @@ export const getWrappingOffsetItem = (offset: number) => (
     }
   }
 
-  if (state.nonInteractiveIds.includes(items[nextIndex].id) && tries > 0) {
+  if (items.length > 1 && state.nonInteractiveIds.includes(items[nextIndex].id) && tries > 0) {
     // The next item is disabled, try again, but only if we haven't already tried everything.
     // Avoid an infinite loop with `tries`
     return getWrappingOffsetItem(offset)(nextIndex, {state}, tries - 1);

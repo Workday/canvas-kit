@@ -26,13 +26,20 @@ const useDebounce = () => {
 export const useComboboxLoader: typeof useListLoader = (config, modelHook) => {
   const debounce = useDebounce();
   const list = useListLoader(
-    modelHook.mergeConfig(config, {
-      onChange(event) {
-        console.log('onChange', event);
-        const value = event.currentTarget.value;
-        debounce(() => list.loader.updateFilter(value), 200);
+    {
+      shouldLoad(params, state) {
+        return (
+          (config.shouldLoad ? config.shouldLoad(params, state) : true) &&
+          state.visibility !== 'hidden'
+        );
       },
-    } as typeof useComboboxModel.TConfig) as typeof config,
+      ...(modelHook.mergeConfig(config, {
+        onChange(event) {
+          const value = event.currentTarget.value;
+          debounce(() => list.loader.updateFilter(value), 150);
+        },
+      } as typeof useComboboxModel.TConfig) as typeof config),
+    },
     modelHook
   );
 

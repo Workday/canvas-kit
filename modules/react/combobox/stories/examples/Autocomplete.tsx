@@ -1,26 +1,52 @@
 import React from 'react';
 
 import {searchIcon} from '@workday/canvas-system-icons-web';
+import {
+  createComponent,
+  createElemPropsHook,
+  createSubcomponent,
+  composeHooks,
+  ExtractProps,
+} from '@workday/canvas-kit-react/common';
 import {LoadReturn} from '@workday/canvas-kit-react/collection';
-import {Combobox, useComboboxModel, useComboboxLoader} from '@workday/canvas-kit-react/combobox';
+import {
+  Combobox,
+  useComboboxModel,
+  useComboboxLoader,
+  useComboboxInput,
+} from '@workday/canvas-kit-react/combobox';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {FormField} from '@workday/canvas-kit-preview-react/form-field';
 import {StyledMenuItem} from '@workday/canvas-kit-react/menu';
 import {LoadingDots} from '@workday/canvas-kit-react/loading-dots';
+import {InputGroup, TextInput} from '@workday/canvas-kit-react/text-input';
 
-import {InputGroup} from '@workday/canvas-kit-react/text-input';
-
-function pickRandom<T>(arr: T[]): T {
-  return arr[Math.floor(Math.random() * arr.length)];
-}
-
-const colors = ['Blue', 'Red', 'Purple', 'Green', 'Pink'];
+const colors = ['Red', 'Blue', 'Purple', 'Green', 'Pink'];
 const fruits = ['Apple', 'Orange', 'Banana', 'Grape', 'Lemon', 'Lime'];
 const options = Array(1000)
   .fill('')
   .map((_, index) => {
-    return `${pickRandom(colors)} ${pickRandom(fruits)} ${index + 1}`;
+    return `${colors[index % colors.length]} ${fruits[index % fruits.length]} ${index + 1}`;
   });
+
+const useAutocompleteInput = composeHooks(
+  createElemPropsHook(useComboboxModel)(model => {
+    console.log('model', model);
+    return {
+      onKeyPress(event: React.KeyboardEvent) {
+        model.events.show(event);
+      },
+    };
+  }),
+  useComboboxInput
+);
+
+const AutoCompleteInput = createSubcomponent(TextInput)({
+  modelHook: useComboboxModel,
+  elemPropsHook: useAutocompleteInput,
+})<ExtractProps<typeof Combobox.Input, never>>((elemProps, Element) => {
+  return <Combobox.Input as={Element} {...elemProps} />;
+});
 
 export const Autocomplete = () => {
   const {model, loader} = useComboboxLoader(
@@ -28,10 +54,9 @@ export const Autocomplete = () => {
       getId: (item: string) => item,
       getTextValue: (item: string) => item,
       shouldVirtualize: true,
-      total: 1000,
+      total: 0,
       pageSize: 20,
       async load({pageNumber, pageSize, filter}) {
-        console.log('loading', pageNumber, filter);
         return new Promise<LoadReturn<string>>(resolve => {
           setTimeout(() => {
             const start = (pageNumber - 1) * pageSize;
@@ -50,10 +75,12 @@ export const Autocomplete = () => {
               items,
               total,
             });
-          }, 1500);
+          }, 300);
         });
       },
-      id: 'foo',
+      onShow(data, state) {
+        loader.load();
+      },
     },
     useComboboxModel
   );
@@ -63,13 +90,12 @@ export const Autocomplete = () => {
       <FormField.Label>Fruit</FormField.Label>
       <Combobox model={model} onChange={event => console.log('input', event.currentTarget.value)}>
         <InputGroup>
-          <InputGroup.InnerStart pointerEvents="none">
-            <SystemIcon icon={searchIcon} size="small" />
-          </InputGroup.InnerStart>
-          <InputGroup.Input as={FormField.Input.as(Combobox.Input)} />
+          <InputGroup.Input as={FormField.Input.as(AutoCompleteInput)} />
           <Combobox.Menu.Popper>
             <Combobox.Menu.Card>
-              {model.state.items.length === 0 && <StyledMenuItem>No Results Found</StyledMenuItem>}
+              {model.state.items.length === 0 && (
+                <StyledMenuItem as="span">No Results Found</StyledMenuItem>
+              )}
               {model.state.items.length > 0 && (
                 <Combobox.Menu.List maxHeight={200}>
                   {item => <Combobox.Menu.Item>{item}</Combobox.Menu.Item>}
@@ -80,7 +106,8 @@ export const Autocomplete = () => {
           <InputGroup.InnerEnd
             pointerEvents="none"
             style={{opacity: loader.isLoading ? 1 : 0, transition: 'opacity 100ms ease'}}
-            width={10}
+            width={20}
+            data-loading={loader.isLoading}
           >
             <LoadingDots style={{display: 'flex', transform: 'scale(0.3)'}} />
           </InputGroup.InnerEnd>

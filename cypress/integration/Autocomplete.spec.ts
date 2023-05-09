@@ -6,7 +6,13 @@ const haveAttrMatchingIdOf = (name: string, selector: string) => ($el: JQuery) =
   expect($el).to.have.attr(name, $matchingEl.attr('id')!);
 };
 
-describe('Combobox Labs', () => {
+function waitForAutocompleteReady() {
+  cy.wait(150); // debounce timer
+  // wait for loading to be complete
+  cy.get('[data-loading]').should('have.attr', 'data-loading', 'false');
+}
+
+describe('Autocomplete', () => {
   before(() => {
     h.stories.visit();
   });
@@ -65,13 +71,33 @@ describe('Combobox Labs', () => {
         cy.get('[aria-selected=true]').should('not.exist');
       });
 
+      context('when the user types a printable character "b"', () => {
+        beforeEach(() => {
+          cy.findByRole('combobox')
+            .clear()
+            .type('b');
+          waitForAutocompleteReady();
+        });
+
+        it('should clear activedescendant', () => {
+          cy.findAllByRole('combobox').should('not.have.attr', 'aria-activedescendant');
+        });
+
+        it('should not set aria-selected to the first option', () => {
+          cy.findAllByRole('option')
+            .eq(0)
+            .should('have.not.attr', 'aria-selected');
+        });
+      });
+
       context('when a value is entered', () => {
         beforeEach(() => {
-          cy.findByRole('combobox').type('Test', {delay: 1});
+          cy.findByRole('combobox').type('Red', {delay: 1});
+          waitForAutocompleteReady();
         });
 
         it('should have the value entered as the value', () => {
-          cy.findByRole('combobox').should('have.value', 'Test');
+          cy.findByRole('combobox').should('have.value', 'Red');
         });
 
         context('when escape key is pressed', () => {
@@ -131,55 +157,34 @@ describe('Combobox Labs', () => {
               .should('have.attr', 'aria-selected', 'true');
           });
 
-          // No group/section support yet
-          // it('should announce a group was entered', () => {
-          //   cy.findAllByRole('option')
-          //     .eq(0)
-          //     .should('contain', 'Entering group Animals, with 2 options');
-          // });
-
-          // Not hooked up to autocomplete yet
-          // context('when the user types a printable character "b"', () => {
-          //   beforeEach(() => {
-          //     cy.findByRole('combobox').type('b');
-          //   });
-
-          //   it('should clear activedescendant', () => {
-          //     cy.findAllByRole('combobox').should('not.have.attr', 'aria-activedescendant');
-          //   });
-
-          //   it('should not set aria-selected to the first option', () => {
-          //     cy.findAllByRole('option')
-          //       .eq(0)
-          //       .should('have.not.attr', 'aria-selected');
-          //   });
-          // });
-
           context('when the user presses the enter key', () => {
             beforeEach(() => {
               cy.findByRole('combobox').type('{enter}');
             });
 
             it('should set the combobox value to the option text value', () => {
-              cy.findByRole('combobox').should('have.value', 'First Option');
+              cy.findByRole('combobox').should('have.value', 'Red Apple 1');
             });
 
             it('should close the listbox', () => {
               cy.findByRole('listbox').should('not.exist');
             });
 
-            context.only('when the use hits the "R" key', () => {
+            context('when the use hits the "2" key', () => {
               beforeEach(() => {
-                cy.findAllByRole('combobox').type('R');
+                cy.findAllByRole('combobox').type('2');
               });
 
-              // Not hooked up to autocomplete yet
-              // it('should open the listbox', () => {
-              //   cy.findByRole('listbox').should('be.visible');
-              // });
+              it('should open the listbox', () => {
+                cy.findByRole('listbox').should('be.visible');
+              });
 
               it('should change the combobox value to reflect the key entered', () => {
-                cy.findByRole('combobox').should('have.value', 'First Optiona');
+                cy.findByRole('combobox').should('have.value', 'Red Apple 12');
+              });
+
+              it('should change the filtered results', () => {
+                cy.findByRole('option', {name: 'Red Apple 121'}).should('be.visible');
               });
             });
           });
@@ -199,21 +204,6 @@ describe('Combobox Labs', () => {
           });
         });
 
-        // No groups/sections yet
-        //   context('when the user clicks on the "Animals" group', () => {
-        //     beforeEach(() => {
-        //       cy.findByText('Animals').click({force: true});
-        //     });
-
-        //     it('should not close the listbox', () => {
-        //       cy.findByRole('listbox').should('be.visible');
-        //     });
-
-        //     it('should not change the combobox value', () => {
-        //       cy.findByRole('combobox').should('have.value', 'Test');
-        //     });
-        //   });
-
         context('when the user clicks on the first option', () => {
           beforeEach(() => {
             cy.findAllByRole('option')
@@ -222,7 +212,7 @@ describe('Combobox Labs', () => {
           });
 
           it('should set the combobox value to the option text value', () => {
-            cy.findByRole('combobox').should('have.value', 'First Option');
+            cy.findByRole('combobox').should('have.value', 'Red Apple 1');
           });
 
           it('should close the listbox', () => {
@@ -262,82 +252,82 @@ describe('Combobox Labs', () => {
           });
         });
 
-        context('when down arrow key is pressed five times', () => {
+        context('when the value is "Red Apple 1"', () => {
           beforeEach(() => {
-            cy.findByRole('combobox').type(
-              '{downarrow}{downarrow}{downarrow}{downarrow}{downarrow}'
-            );
-          });
-          it('should have activedecendant set to the first option', () => {
-            cy.findByRole('combobox').should(
-              haveAttrMatchingIdOf('aria-activedescendant', '[role=option]:eq(0)')
-            );
+            cy.findByRole('combobox').type(' Apple 1', {delay: 1});
+            waitForAutocompleteReady();
           });
 
-          it('should set aria-selected to the first option', () => {
-            cy.findAllByRole('option')
-              .eq(0)
-              .should('have.attr', 'aria-selected', 'true');
-          });
-        });
+          context('when the value is "Red Apple 1" and down arrow key is pressed six times', () => {
+            beforeEach(() => {
+              cy.findByRole('combobox').type(
+                '{downarrow}{downarrow}{downarrow}{downarrow}{downarrow}'
+              );
+            });
+            it('should have activedecendant set to the first option', () => {
+              cy.findByRole('combobox').should(
+                haveAttrMatchingIdOf('aria-activedescendant', '[role=option]:eq(0)')
+              );
+            });
 
-        context('when up arrow key is pressed', () => {
-          beforeEach(() => {
-            cy.findByRole('combobox').type('{uparrow}');
-          });
-
-          it('should have activedecendant set to the last option', () => {
-            cy.findByRole('combobox').should(
-              haveAttrMatchingIdOf('aria-activedescendant', '[role=option]:eq(3)')
-            );
-          });
-
-          it('should set aria-selected to the last option', () => {
-            cy.findAllByRole('option')
-              .eq(3)
-              .should('have.attr', 'aria-selected', 'true');
+            it('should set aria-selected to the first option', () => {
+              cy.findAllByRole('option')
+                .eq(0)
+                .should('have.attr', 'aria-selected', 'true');
+            });
           });
 
-          // No group/section yet
-          // it('should announce a group was entered', () => {
-          //   cy.findAllByRole('option')
-          //     .eq(2)
-          //     .should('contain', 'Entering group Cars, with 1 option');
-          // });
-        });
+          context('when up arrow key is pressed', () => {
+            beforeEach(() => {
+              cy.findByRole('combobox').type('{uparrow}');
+            });
 
-        context('when up arrow key is pressed two times', () => {
-          beforeEach(() => {
-            cy.findByRole('combobox').type('{uparrow}{uparrow}');
+            it('should have activedecendant set to the last option', () => {
+              cy.findByRole('combobox').should(
+                haveAttrMatchingIdOf('aria-activedescendant', '[role=option]:eq(3)')
+              );
+            });
+
+            it('should set aria-selected to the last option', () => {
+              cy.findAllByRole('option')
+                .eq(3)
+                .should('have.attr', 'aria-selected', 'true');
+            });
           });
 
-          it('should have activedecendant set to the third option', () => {
-            cy.findByRole('combobox').should(
-              haveAttrMatchingIdOf('aria-activedescendant', '[role=option]:eq(2)')
-            );
+          context('when up arrow key is pressed two times', () => {
+            beforeEach(() => {
+              cy.findByRole('combobox').type('{uparrow}{uparrow}');
+            });
+
+            it('should have activedecendant set to the third option', () => {
+              cy.findByRole('combobox').should(
+                haveAttrMatchingIdOf('aria-activedescendant', '[role=option]:eq(2)')
+              );
+            });
+
+            it('should set aria-selected to the third option', () => {
+              cy.findAllByRole('option')
+                .eq(2)
+                .should('have.attr', 'aria-selected', 'true');
+            });
           });
 
-          it('should set aria-selected to the third option', () => {
-            cy.findAllByRole('option')
-              .eq(2)
-              .should('have.attr', 'aria-selected', 'true');
-          });
-        });
+          context('when up arrow key is pressed four times', () => {
+            beforeEach(() => {
+              cy.findByRole('combobox').type('{uparrow}{uparrow}{uparrow}{uparrow}');
+            });
+            it('should have activedecendant set to the first option', () => {
+              cy.findByRole('combobox').should(
+                haveAttrMatchingIdOf('aria-activedescendant', '[role=option]:eq(0)')
+              );
+            });
 
-        context('when up arrow key is pressed four times', () => {
-          beforeEach(() => {
-            cy.findByRole('combobox').type('{uparrow}{uparrow}{uparrow}{uparrow}');
-          });
-          it('should have activedecendant set to the first option', () => {
-            cy.findByRole('combobox').should(
-              haveAttrMatchingIdOf('aria-activedescendant', '[role=option]:eq(0)')
-            );
-          });
-
-          it('should set aria-selected to the first option', () => {
-            cy.findAllByRole('option')
-              .eq(0)
-              .should('have.attr', 'aria-selected', 'true');
+            it('should set aria-selected to the first option', () => {
+              cy.findAllByRole('option')
+                .eq(0)
+                .should('have.attr', 'aria-selected', 'true');
+            });
           });
         });
       });
