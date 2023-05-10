@@ -68,9 +68,9 @@ The collection system comes with a data loader to help with dynamic collections.
 when the user navigates the collection and needs more data. This example shows how to hook up a
 simple data loader and mocks a `load` function to simulate an asynchronous response.
 
-The data loader also takes a model argument to know which model to create. The loader configures
-the model to handle asynchronous keyboard navigation and will return the configured model to you
-to pass along to the collection component.
+The data loader also takes a model argument to know which model to create. The loader configures the
+model to handle asynchronous keyboard navigation and will return the configured model to you to pass
+along to the collection component.
 
 <ExampleCodeBlock code={DataLoader} />
 
@@ -107,9 +107,9 @@ uses `ListBox` and creates a custom `SelectableItem` elemProps hook and componen
 
 Sometimes it is desired to allow the string children to be the identifiers for each item. This could
 be useful for autocomplete components where the item's text is the desired identifier. Normally, if
-no `data-id` is provided to the item, the system will choose the registration index. This would be `'0'`, `'1'`, and so on.
-By passing `useListItemAllowChildStrings` to an item component, it will change this behavior to use the child text if no
-`data-id` is provided.
+no `data-id` is provided to the item, the system will choose the registration index. This would be
+`'0'`, `'1'`, and so on. By passing `useListItemAllowChildStrings` to an item component, it will
+change this behavior to use the child text if no `data-id` is provided.
 
 <ExampleCodeBlock code={StringChildren} />
 
@@ -142,10 +142,8 @@ cursor wraps around columns and rows when an edge of a column or row is encounte
 
 ### ListBox
 
-<>
 <SymbolDoc name="ListBox" fileName="/react/" />
 <SymbolDoc name="useGridModel" fileName="/react/" />
-</>
 
 ### Navigation Manager
 
@@ -169,7 +167,6 @@ columns, but not rows. This is the default navigation manager for lists.
 
 ## Hooks
 
-<>
 <SymbolDoc name="useListItemRegister" fileName="/react/" />
 <SymbolDoc name="useListItemAllowChildStrings" fileName="/react/" />
 <SymbolDoc name="useListItemRovingFocus" fileName="/react/" />
@@ -180,4 +177,3 @@ columns, but not rows. This is the default navigation manager for lists.
 <SymbolDoc name="useOverflowListMeasure" fileName="/react/" />
 <SymbolDoc name="useOverflowListTarget" fileName="/react/" />
 <SymbolDoc name="useListLoader" fileName="/react/" />
-</>

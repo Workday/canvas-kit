@@ -6,11 +6,11 @@ import {useUniqueId, createModelHook, Generic} from '@workday/canvas-kit-react/c
 export type Orientation = 'horizontal' | 'vertical';
 
 export const defaultGetId = (item: any): string => {
-  return item.id || '';
+  return typeof item === 'string' ? item : item.id || '';
 };
 
 export const defaultGetTextValue = (item: any): string => {
-  return item.text || '';
+  return typeof item === 'string' ? item : item.text || '';
 };
 
 export interface Item<T> {
@@ -84,13 +84,15 @@ export const useBaseListModel = createModelHook({
      * JSX, the list will create an internal array of items where `id` is the only property and the
      * default `getId` will return the desired result.
      */
-    getId: (item: Generic) => item.id as string,
+    getId: (item: Generic) =>
+      typeof item === 'string' ? item : item === undefined ? '' : (item.id as string),
     /**
      * Optional function to return the text representation of an item. If not provided, the default
      * function will return the `text` property of the object of each item or an empty string if
      * there is no `text` property. If you did not provide `items`, do not override this function.
      */
-    getTextValue: (item: Generic) => (item.text || '') as string,
+    getTextValue: (item: Generic) =>
+      (typeof item === 'string' ? item : item === undefined ? '' : item.text || '') as string,
     /**
      * Array of all ids which are currently disabled. This is used for navigation to skip over items
      * which are not focusable.

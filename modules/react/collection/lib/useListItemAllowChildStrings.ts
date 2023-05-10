@@ -8,12 +8,13 @@ import {useListModel} from '@workday/canvas-kit-react/collection';
  * attribute if one hasn't been defined by the application.
  *
  * An example might look like:
+ *
  * ```tsx
  * const useMyListItem = composeHooks(
  *   // any other hooks here
  *   useListItemSelect,
  *   useListItemRegister,
- *   useListItemAllowChildStrings
+ *   useListItemAllowChildStrings // always the last in the list
  * )
  *
  *

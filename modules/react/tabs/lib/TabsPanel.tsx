@@ -39,11 +39,7 @@ export interface TabPanelProps extends ExtractProps<typeof Box, never> {
 const StyledTabsPanel = styled(Box)<StyledType>(hideMouseFocus);
 
 export const useTabsPanel = createElemPropsHook(useTabsModel)(
-  (
-    {state, events},
-    _?: React.Ref<HTMLElement>,
-    elemProps: {'data-id'?: string; item?: Item<any>} = {}
-  ) => {
+  ({state, events}, _, elemProps: {'data-id'?: string; item?: Item<any>} = {}) => {
     const [localId, setLocalId] = React.useState(elemProps['data-id'] || elemProps.item?.id || '');
 
     useMountLayout(() => {
