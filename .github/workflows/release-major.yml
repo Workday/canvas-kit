@@ -19,7 +19,6 @@ jobs:
         with:
           github_token: ${{ secrets.GH_RW_TOKEN }}
           branch: support
-          tags: true
 
       # Get and save the current major version tag
       # before the next major version is released
@@ -53,7 +52,6 @@ jobs:
         with:
           github_token: ${{ secrets.GH_RW_TOKEN }}
           branch: prerelease/minor
-          tags: true
 
       # Update prerelease/major with the changes from prerelease/minor which include the major release version bump.
       - name: Push changes
@@ -61,7 +59,6 @@ jobs:
         with:
           github_token: ${{ secrets.GH_RW_TOKEN }}
           branch: prerelease/major
-          tags: true
 
       # Update npm dist tag for support by adding a current major release version
       - name: Update support dist tag
