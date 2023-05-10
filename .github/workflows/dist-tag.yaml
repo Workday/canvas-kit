@@ -1,4 +1,6 @@
 name: 'Dist Tag Update'
+## Action to update an existing npm dist-tag by the entered package version
+## or to create a new dist-tag if you enter not-existing name
 
 on:
   workflow_dispatch:
