@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v8.6.5](https://github.com/Workday/canvas-kit/releases/tag/v8.6.5) (2023-05-10)
+
+### Infrastructure
+
+- chore: Add actions for major release ([#2211](https://github.com/Workday/canvas-kit/pull/2211)) ([@RayRedGoose](https://github.com/RayRedGoose), [@mannycarrera4](https://github.com/mannycarrera4))
+
+
 ## [v8.6.4](https://github.com/Workday/canvas-kit/releases/tag/v8.6.4) (2023-05-01)
 
 ### BREAKING CHANGES
