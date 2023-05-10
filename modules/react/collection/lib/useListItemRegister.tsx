@@ -31,6 +31,7 @@ export const useListItemRegister = createElemPropsHook(useListModel)(
     ref,
     elemProps: {
       'data-id'?: string;
+      'data-text'?: string;
       children?: React.ReactNode;
       index?: number;
       disabled?: boolean;
@@ -74,7 +75,11 @@ export const useListItemRegister = createElemPropsHook(useListModel)(
         item: {
           id: itemId,
         },
-        textValue: typeof elemProps.children === 'string' ? elemProps.children : '',
+        textValue: elemProps['data-text']
+          ? elemProps['data-text']
+          : typeof elemProps.children === 'string'
+          ? elemProps.children
+          : '',
       });
       setLocalId(itemId);
 
