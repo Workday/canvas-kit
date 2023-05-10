@@ -1,0 +1,69 @@
+name: Major Release
+
+on:
+  workflow_dispatch:
+
+jobs:
+  release-major:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+          fetch-depth: 0 # Needed to do a proper push
+
+      # Update support to point to the current major version
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GH_RW_TOKEN }}
+          branch: support
+
+      # Get and save the current major version tag
+      # before the next major version is released
+      # to use it for updating dist-tag on support branch.
+      - name: Get previous tag
+        id: previous-tag
+        run: echo "::set-output name=tag::$(node -p 'require("./lerna.json").version')"
+
+      # Pull changes from prerelease/major into master.
+      # Changes will be pushed with a release commit
+      - name: Pull changes >> prerelease/major -> master
+        run: git pull origin prerelease/major
+
+      - uses: Workday/canvas-kit-actions/install@v1
+        with:
+          node_version: 16.x
+
+      # Run the release job to publish the next major version to npm
+      - uses: Workday/canvas-kit-actions/release@v1
+        with:
+          gh_token: ${{ secrets.GITHUB_TOKEN }}
+          gh_rw_token: ${{ secrets.GH_RW_TOKEN }}
+          publish_token: ${{ secrets.NPM_CI_PUBLISH_TOKEN }}
+          chromatic_project_token: ${{ secrets.CHROMATIC_APP_CODE }}
+          version: 'major'
+          toRef: 'prerelease/major'
+
+      # Update prerelease/minor to point to the next major release.
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GH_RW_TOKEN }}
+          branch: prerelease/minor
+
+      # Update prerelease/major with the changes from prerelease/minor which include the major release version bump.
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GH_RW_TOKEN }}
+          branch: prerelease/major
+
+      # Update npm dist tag for support by adding a current major release version
+      - name: Update support dist tag
+        run: node utils/dist-tag.mjs
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_CI_PUBLISH_TOKEN }}
+          DIST_TAG: 'support'
+          VERSION: ${{ steps.previous-tag.outputs.tag }}
