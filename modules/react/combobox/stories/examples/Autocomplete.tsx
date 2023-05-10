@@ -95,18 +95,6 @@ export const Autocomplete = () => {
       <Combobox model={model} onChange={event => console.log('input', event.currentTarget.value)}>
         <InputGroup>
           <InputGroup.Input as={FormField.Input.as(AutoCompleteInput)} />
-          <Combobox.Menu.Popper>
-            <Combobox.Menu.Card>
-              {model.state.items.length === 0 && (
-                <StyledMenuItem as="span">No Results Found</StyledMenuItem>
-              )}
-              {model.state.items.length > 0 && (
-                <Combobox.Menu.List maxHeight={200}>
-                  {item => <Combobox.Menu.Item>{item}</Combobox.Menu.Item>}
-                </Combobox.Menu.List>
-              )}
-            </Combobox.Menu.Card>
-          </Combobox.Menu.Popper>
           <InputGroup.InnerEnd
             pointerEvents="none"
             style={{opacity: loader.isLoading ? 1 : 0, transition: 'opacity 100ms ease'}}
@@ -119,6 +107,18 @@ export const Autocomplete = () => {
             <InputGroup.ClearButton data-testid="clear" />
           </InputGroup.InnerEnd>
         </InputGroup>
+        <Combobox.Menu.Popper>
+          <Combobox.Menu.Card>
+            {model.state.items.length === 0 && (
+              <StyledMenuItem as="span">No Results Found</StyledMenuItem>
+            )}
+            {model.state.items.length > 0 && (
+              <Combobox.Menu.List maxHeight={200}>
+                {item => <Combobox.Menu.Item>{item}</Combobox.Menu.Item>}
+              </Combobox.Menu.List>
+            )}
+          </Combobox.Menu.Card>
+        </Combobox.Menu.Popper>
       </Combobox>
     </FormField>
   );
