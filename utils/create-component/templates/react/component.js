@@ -23,7 +23,7 @@ export const ${pascalCaseName} = createContainer('div')({
   modelHook: use${pascalCaseName}Model,
   subComponents: {
     /**
-     * JSDoc for the ${pascalCaseName}.Target. Will be part of the ComponentAPI docs
+     * JSDoc for ${pascalCaseName}.Target. Will be part of the Component API docs
      */
     Target: ${pascalCaseName}Target,
     /**

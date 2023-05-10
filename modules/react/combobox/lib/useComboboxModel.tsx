@@ -28,7 +28,7 @@ const useInputModel = createModelHook({
 });
 
 /**
- * The ComboboxModel extends the {@link ListModel} and the {@link InputModel}. Selecting items from
+ * `ComboboxModel` extends the {@link ListModel} and the {@link InputModel}. Selecting items from
  * the menu will dispatch an
  * [input](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/input_event) event on the
  * input which should work with form libraries, automation, and autofill.

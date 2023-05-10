@@ -3,8 +3,9 @@ import {createElemPropsHook} from '@workday/canvas-kit-react/common';
 import {useComboboxModel} from './useComboboxModel';
 
 /**
- * Opens a combobox with the up/down arrow keys. This should be used only on the input element of a
- * combobox. It adds a keydown listener for the up/down arrow keys.
+* Opens a `Combobox` with the up/down arrow keys. This should be used only on a
+ * {@link ComboboxInput Combobox.Input}. It adds a keydown listener for the
+ * up/down arrow keys.
  */
 export const useComboboxInputOpenWithArrowKeys = createElemPropsHook(useComboboxModel)(model => {
   return {
