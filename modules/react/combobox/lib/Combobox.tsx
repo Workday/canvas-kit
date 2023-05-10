@@ -7,7 +7,7 @@ import {ComboboxInput} from './ComboboxInput';
 import {ComboboxMenu} from './ComboboxMenu';
 export interface ComboboxProps {
   /**
-   * Children of the Combobox. Should contain a `<Combobox.Input>` and a `<Combobox.Menu>`
+   * Children of the `Combobox`. Should contain a `Combobox.Input` and a `Combobox.Menu`
    */
   children: React.ReactNode;
 }
@@ -17,7 +17,7 @@ export const Combobox = createContainer()({
   modelHook: useComboboxModel,
   subComponents: {
     /**
-     * The input of the combobox. This element will have `role="combobox"` applied, along with
+     * The input of the `Combobox`. This element will have `role="combobox"` applied, along with
      * `aria-haspopup="true"`
      */
     Input: ComboboxInput,

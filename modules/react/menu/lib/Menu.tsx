@@ -92,8 +92,8 @@ export const Menu = createContainer()({
      */
     List: MenuList,
     /**
-     * A menu item has an optional `data-id` prop that identifies the item in the menu list and will
-     * be passed to the optional `onSelect` callback of the menu model. A menu item can contain any
+     * A `Menu.Item` has an optional `data-id` prop that identifies the item in the `Menu.List` and will
+     * be passed to the optional `onSelect` callback of the `Menu` model. A `Menu.Item` can contain any
      * HTML. If more complex HTML is provided, consider
      */
     Item: MenuItem,
