@@ -24,8 +24,9 @@ const useDebounce = () => {
 };
 
 /**
-* Creates a `Combobox` data loader and a model. The `Combobox` loader extends the {@link useListLoader}
- * and connects a {@link ComboboxInput Combobox.Input} to the filter of the data loader. A simple loader using
+ * Creates a `Combobox` data loader and a model. The `Combobox` loader extends the
+ * {@link useListLoader} and connects a {@link ComboboxInput Combobox.Input} to the filter of the
+ * data loader. A simple loader using
  * [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) could look like the
  * following:
  *

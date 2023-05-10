@@ -9,8 +9,12 @@ import {Menu} from '@workday/canvas-kit-react/menu';
 
 import {useComboboxModel} from './useComboboxModel';
 
-export interface ComboboxCardProps<T = any> extends ExtractProps<typeof Menu.Card> {}
+export interface ComboboxCardProps extends ExtractProps<typeof Menu.Card> {}
 
+/**
+ * This hook sets the `minWidth` style attribute to match the width of the
+ * {@link ComboboxInput Combobox.Input} component.
+ */
 export const useComboboxCard = createElemPropsHook(useComboboxModel)(model => {
   return {
     minWidth: model.state.width,

@@ -10,7 +10,7 @@ import {ComboboxCard} from './ComboboxCard';
 
 export interface ComboboxMenuProps {
   /**
-   * Children of the `Combobox.Menu`.
+   * Children of the {@link ComboboxMenu Combobox.Menu}.
    */
   children: React.ReactNode;
 }
@@ -19,7 +19,7 @@ export const ComboboxMenu = createSubcomponent()({
   modelHook: useComboboxModel,
   subComponents: {
     /**
-     * The "Popper" of a `Combobox.Menu`. The popper will appear around the
+     * The "Popper" of a {@link ComboboxMenu Combobox.Menu}. The popper will appear around the
      * {@link ComboboxInput Combobox.Input}. It renders a `div` element that is portalled to the
      * `document.body` which is controlled by the {@link PopupStack}. The `PopupStack` is not part
      * of React. This means no extra props given to this component will be forwarded to the `div`

@@ -9,7 +9,7 @@ import {useMenuModel} from '@workday/canvas-kit-react/menu';
  * property. We need to normalize these use cases so subcomponents can have correct data and all
  * use-cases are supported.
  */
-const useInputModel = createModelHook({
+export const useInputModel = createModelHook({
   defaultConfig: {
     value: undefined as string | undefined,
 

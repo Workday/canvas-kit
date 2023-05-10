@@ -18,6 +18,13 @@ export interface ComboboxMenuItemProps {
   children: React.ReactNode;
 }
 
+/**
+ * This hook sets up accessibility and behavior of a {@link ComboboxMenuItem Combobox.Menu.Item}
+ * component. It prevents focus when clicking so the focus stays on the
+ * {@link ComboboxInput Combobox.Input} component and selects an item when the user clicks on it. It
+ * also prevents items with an `aria-disabled` attribute from being selected. A `focus` CSS class is
+ * added when the item has "focus" (when the cursor is on the item).
+ */
 export const useComboboxMenuItem = composeHooks(
   createElemPropsHook(useMenuModel)((model, _, elemProps: {'data-id'?: string} = {}) => {
     const id = elemProps['data-id'] || '';
