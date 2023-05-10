@@ -28,7 +28,7 @@ jobs:
         id: previous-tag
         run: echo "::set-output name=tag::$(node -p 'require("./lerna.json").version')"
 
-      # Update master to point to the next major release prerelease/major is currently pointing to.
+      # Pull changes from prerelease/major into master.
       # Changes will be pushed with release commit
       - name: Pull changes >> prerelease/major -> master
         run: git pull origin prerelease/major
