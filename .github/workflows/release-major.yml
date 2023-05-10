@@ -21,7 +21,7 @@ jobs:
           branch: support
           tags: true
 
-      # Get and save current major version tag
+      # Get and save the current major version tag
       # before the next major version is released
       # to use it for dist-tag update
       - name: Get previous tag
