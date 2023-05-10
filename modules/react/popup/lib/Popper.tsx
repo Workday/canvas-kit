@@ -140,6 +140,23 @@ const getOppositePlacement = (popperPlacement: Placement): Placement => {
   return oppositePlacement;
 };
 
+const getNextAvailablePlacement = (placements: Array<Placement>, state: PopperJS.State, 
+  popperPlacement: Placement): Placement | undefined => {
+  if (placements.length === 0){
+    state.placement = popperPlacement
+    return
+  }
+
+  const key = placements[0] as keyof PopperJS.SideObject
+  state.placement = placements[0]
+  if (PopperJS.detectOverflow(state)[key] <= 0){
+    return placements[0]
+  } else {
+    placements.shift()
+    return getNextAvailablePlacement(placements, state, popperPlacement)
+  }
+}
+
 // prevent unnecessary renders if popperOptions are not passed
 const defaultPopperOptions: PopperProps['popperOptions'] = {};
 
@@ -164,10 +181,10 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
     const {localRef, elementRef} = useLocalRef(popperInstanceRef);
     const [placement, setPlacement] = React.useState(popperPlacement);
     const stackRef = usePopupStack(ref, anchorElement as HTMLElement);
-    const maxRepositionCall = React.useRef(baseFallbackPlacements.length + 2) // plus one initial placement and one opposite placement
+    const maxRepositionCall = React.useRef(10)
     const nextAvailablePlacementRef = React.useRef<Placement>(getOppositePlacement(popperPlacement)) // store the next available fallback placement
     const preventOverflowModifierRef = React.useRef<Partial<PopperJS.Modifier<any, any>>> ( {
-      name: 'preventOverflow'      
+      name: 'preventOverflow',
     })
 
     const placementModifier = React.useMemo((): PopperJS.Modifier<any, any> => {
@@ -194,26 +211,17 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
           const isOverflowed = preventOverflowData && 
           ((preventOverflowData.x === 0 && (overflow.right > 0 || overflow.left > 0)) || 
           (preventOverflowData.y === 0 && (overflow.top > 0 || overflow.bottom > 0)))
-          maxRepositionCall.current --
+          maxRepositionCall.current -= 1
 
-          for(let i = 0 ; i < placements.length; i++){
-            state.placement = placements[i]
-            const key = placements[i] as keyof PopperJS.SideObject
-            if(PopperJS.detectOverflow(state)[key] <= 0){
-              nextAvailablePlacementRef.current = placements[i]
-              break
-            }else{
-              state.placement = popperPlacement
-            }
-          } 
+          nextAvailablePlacementRef.current = getNextAvailablePlacement(placements, state, popperPlacement) ?? popperPlacement
 
-          if(!isOverflowed && maxRepositionCall.current < 1){
+          if (!isOverflowed && maxRepositionCall.current < 1){
             // reset the max call if popper keeps open
-            maxRepositionCall.current = baseFallbackPlacements.length + 2
-          } else if(isOverflowed && maxRepositionCall.current < 1){
+            maxRepositionCall.current = 10
+          } else if (isOverflowed && maxRepositionCall.current < 1){
             // when there is no available space on the four side, use the initial placement
             state.reset = false
-          } else{           
+          } else {           
             // instruct Popper to run all modifier again
             state.reset = true
           }
@@ -238,7 +246,7 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
         const instance = PopperJS.createPopper(anchorEl, stackRef.current, {
           placement: popperPlacement,
           ...popperOptions,
-          modifiers: [...(popperOptions.modifiers || []), placementModifier, preventOverflowModifierRef.current,  fallbackPlacementsModifier],
+          modifiers: [...(popperOptions.modifiers || []), placementModifier, preventOverflowModifierRef.current, fallbackPlacementsModifier],
         });
         elementRef(instance); // update the ref with the instance
 
