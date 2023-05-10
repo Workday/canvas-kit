@@ -37,7 +37,7 @@ jobs:
         with:
           node_version: 16.x
 
-      # Run release job to launch the next major version
+      # Run the release job to publish the next major version to npm
       - uses: Workday/canvas-kit-actions/release@v1
         with:
           gh_token: ${{ secrets.GITHUB_TOKEN }}
