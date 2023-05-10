@@ -7,14 +7,18 @@ import {Autocomplete} from './examples/Autocomplete';
 
 # Combobox
 
-Combobox is an abstract compound component. The term "Combobox" is based on the
+Combobox is an _abstract_ compound component - it should not be used on its own, but used as a base
+to create combobox components. The Combobox system provides components, models, loaders, and
+elemProps hooks.
+
+The term "Combobox" is based on the
 [Combobox Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/) as defined in the ARIA
 Authoring Practices Guide (APG):
 
 > A [combobox](https://w3c.github.io/aria/#combobox) is an input widget with an associated popup
 > that enables users to select a value for the combobox from a collection of possible values.
 
-Autocomplete and Select are examples of a Combobox and these components should be used instead.
+Examples of a "combobox" would be date pickers, autocomplete, and select components.
 
 ## Installation
 
@@ -27,8 +31,8 @@ yarn add @workday/canvas-kit-react
 ### Autocomplete
 
 This example shows an Autocomplete example using `FormField`, `InputGroup`, and the `Combobox`
-components to make an autocomplete form field. It uses `useComboboxLoader` to make mock API
-calls using `setTimeout`. Your application may use
+components to make an autocomplete form field. It uses `useComboboxLoader` to make mock API calls
+using `setTimeout`. Your application may use
 [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API),
 [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API), or other means of
 communicating with a server.
