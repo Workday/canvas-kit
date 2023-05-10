@@ -13,7 +13,7 @@ jobs:
           persist-credentials: false
           fetch-depth: 0 # Needed to do a proper push
 
-      # Update support to point to the current major version on master before updating master with the next major version.
+      # Update support to point to the current major version
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
