@@ -23,7 +23,7 @@ jobs:
 
       # Get and save the current major version tag
       # before the next major version is released
-      # to use it for dist-tag update
+      # to use it for updating dist-tag on support branch.
       - name: Get previous tag
         id: previous-tag
         run: echo "::set-output name=tag::$(node -p 'require("./lerna.json").version')"
