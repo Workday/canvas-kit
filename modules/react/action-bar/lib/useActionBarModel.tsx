@@ -44,13 +44,18 @@ export const useActionBarModel = createModelHook({
   let nonInteractiveIds = model.state.nonInteractiveIds;
   const totalSize = model.state.items.length;
 
+  console.log(config.maximumVisible);
+
   // Only show maximumVisible buttons
   const maximumVisible: number =
-    config.maximumVisible < 1
-      ? 1
+    !config.maximumVisible || config.maximumVisible < 1
+      ? 3 // should fallback to default value
       : config.maximumVisible > totalSize
       ? totalSize
       : config.maximumVisible;
+
+  console.log('maximumVisible', maximumVisible);
+
   if (totalSize - hiddenIds.length >= maximumVisible) {
     hiddenIds = items.slice(maximumVisible, totalSize).map(getId);
   }

@@ -72,9 +72,9 @@ describe('Action Bar', () => {
       cy.findByLabelText('More actions').should('have.attr', 'aria-expanded', 'false');
     });
 
-    context('when action list container is only 440px wide', () => {
+    context('when action list container is only 420px wide', () => {
       beforeEach(() => {
-        cy.findByRole('button', {name: '440px'}).click();
+        cy.findByRole('button', {name: '420px'}).click();
       });
 
       it('should have 3 buttons inside the "actions"', () => {
@@ -113,7 +113,7 @@ describe('Action Bar', () => {
 
     context('when action list container is only 320px wide', () => {
       beforeEach(() => {
-        cy.findByRole('button', {name: '320px'}).click();
+        cy.findByRole('button', {name: 'Extra Small'}).click();
       });
 
       it('should have 2 buttons inside the "actions"', () => {

@@ -2,7 +2,7 @@ import React from 'react';
 import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
 import {withSnapshotsEnabled} from '../../../../../utils/storybook';
 import {colors, space, spaceNumbers} from '@workday/canvas-kit-react/tokens';
-import {ActionBar, useActionBarModel} from '@workday/canvas-kit-react/action-bar';
+import {ActionBar} from '@workday/canvas-kit-react/action-bar';
 import {PrimaryButton, SecondaryButton} from '@workday/canvas-kit-react/button';
 
 export default withSnapshotsEnabled({
@@ -61,25 +61,42 @@ export const ActionBarWithOverflowMenuStates = () => {
       <ComponentStatesTable
         rowProps={[
           {label: 'Default Action Bar', props: {}},
+          {label: 'Default Action Bar (400px width container)', props: {containerWidth: 400}},
           {
-            label: 'With Minimum Visible Items',
+            label: 'Default Action Bar (280px width container)',
+            props: {containerWidth: 280},
+          },
+          {
+            label: 'Minimum Visible Items (as 1 button)',
             props: {maximumVisible: 1},
           },
           {
-            label: 'With Overflow Maximum Visible Items',
+            label: 'Custom Number Visible Items (as 4 button)',
+            props: {maximumVisible: 2},
+          },
+          {
+            label: 'Maximum Visible Items (as 5 buttons)',
             props: {maximumVisible: items.length},
+          },
+          {
+            label: 'Maximum Visible Items (400px width)',
+            props: {maximumVisible: items.length, containerWidth: 400},
+          },
+          {
+            label: 'Maximum Visible Items (280px width)',
+            props: {maximumVisible: items.length, containerWidth: 280},
           },
         ]}
         columnProps={[
-          {label: '100% container width', props: {containerWidth: '100%'}},
-          {label: '440px container width', props: {containerWidth: '440px'}},
-          {label: '320px container width', props: {containerWidth: '320px'}},
+          {label: 'Example', props: {}},
+          // {label: '440px container width', props: {containerWidth: '440px'}},
+          // {label: '320px container width', props: {containerWidth: '320px'}},
         ]}
       >
         {({containerWidth, maximumVisible}) => (
           <ActionBar items={items} maximumVisible={maximumVisible}>
             <ActionBar.List
-              maxWidth={containerWidth}
+              width={containerWidth}
               position="relative"
               overflowButton={<ActionBar.OverflowButton aria-label="More actions" />}
             >
