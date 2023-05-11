@@ -60,7 +60,7 @@ export const ActionBarWithOverflowMenuStates = () => {
     <StaticStates>
       <ComponentStatesTable
         rowProps={[
-          {label: 'Default Visible Items Number', props: {}},
+          {label: 'Default Action Bar', props: {}},
           {
             label: 'With Minimum Visible Items',
             props: {maximumVisible: 1},
@@ -70,30 +70,33 @@ export const ActionBarWithOverflowMenuStates = () => {
             props: {maximumVisible: items.length},
           },
         ]}
-        columnProps={[{label: ' ', props: {position: 'relative'}}]}
+        columnProps={[
+          {label: '100% container width', props: {containerWidth: '100%'}},
+          {label: '440px container width', props: {containerWidth: '440px'}},
+          {label: '320px container width', props: {containerWidth: '320px'}},
+        ]}
       >
-        {props => (
-          <div>
-            <ActionBar items={items} {...props}>
-              <ActionBar.List
-                position="relative"
-                overflowButton={<ActionBar.OverflowButton aria-label="More actions" />}
-              >
-                {(item: MyActionItem, index: number) => (
-                  <ActionBar.Item as={index === 0 ? PrimaryButton : undefined}>
-                    {item.text}
-                  </ActionBar.Item>
-                )}
-              </ActionBar.List>
-              <ActionBar.Menu.Popper>
-                <ActionBar.Menu.Card maxWidth={300} maxHeight={200}>
-                  <ActionBar.Menu.List>
-                    {(item: MyActionItem) => <ActionBar.Menu.Item>{item.text}</ActionBar.Menu.Item>}
-                  </ActionBar.Menu.List>
-                </ActionBar.Menu.Card>
-              </ActionBar.Menu.Popper>
-            </ActionBar>
-          </div>
+        {({containerWidth, maximumVisible}) => (
+          <ActionBar items={items} maximumVisible={maximumVisible}>
+            <ActionBar.List
+              maxWidth={containerWidth}
+              position="relative"
+              overflowButton={<ActionBar.OverflowButton aria-label="More actions" />}
+            >
+              {(item: MyActionItem, index: number) => (
+                <ActionBar.Item as={index === 0 ? PrimaryButton : undefined}>
+                  {item.text}
+                </ActionBar.Item>
+              )}
+            </ActionBar.List>
+            <ActionBar.Menu.Popper>
+              <ActionBar.Menu.Card maxWidth={300} maxHeight={200}>
+                <ActionBar.Menu.List>
+                  {(item: MyActionItem) => <ActionBar.Menu.Item>{item.text}</ActionBar.Menu.Item>}
+                </ActionBar.Menu.List>
+              </ActionBar.Menu.Card>
+            </ActionBar.Menu.Popper>
+          </ActionBar>
         )}
       </ComponentStatesTable>
     </StaticStates>

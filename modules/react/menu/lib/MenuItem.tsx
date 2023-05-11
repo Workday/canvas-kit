@@ -40,7 +40,7 @@ export interface MenuItemProps {
   'aria-disabled'?: boolean;
 }
 
-const StyledItem = styled(Box.as('button'))<StyledType>(
+export const StyledMenuItem = styled(Box.as('button'))<StyledType>(
   ({theme}) => {
     return {
       ...type.levels.subtext.large,
@@ -65,7 +65,7 @@ const StyledItem = styled(Box.as('button'))<StyledType>(
           fill: iconColors.hover,
         },
       },
-      '&:focus': {
+      '&:focus, &.focus': {
         outline: 'none',
         backgroundColor: theme.canvas.palette.primary.main,
         color: typeColors.inverse,
@@ -89,20 +89,20 @@ const StyledItem = styled(Box.as('button'))<StyledType>(
             fill: iconColors.hover,
           },
         },
-        '&:focus': {
+        '&:focus, &.focus': {
           '.wd-icon-background ~ .wd-icon-accent, .wd-icon-background ~ .wd-icon-accent2': {
             fill: iconColors.hover,
           },
         },
       },
       backgroundColor: 'inherit',
-      '&:disabled, &[aria-disabled]': {
+      '&:disabled, &[aria-disabled=true]': {
         color: colors.licorice100,
         cursor: 'default',
         '.wd-icon-fill, .wd-icon-accent, .wd-icon-accent2': {
           fill: iconColors.disabled,
         },
-        '&:focus': {
+        '&:focus, &.focus': {
           backgroundColor: colors.blueberry200,
           '.wd-icon-background ~ .wd-icon-accent, .wd-icon-background ~ .wd-icon-accent2': {
             fill: iconColors.disabled,
@@ -133,7 +133,7 @@ const StyledItem = styled(Box.as('button'))<StyledType>(
 export const useMenuItem = composeHooks(
   createElemPropsHook(useMenuModel)(
     (model, ref, elemProps: {'data-id': string} = {'data-id': ''}) => {
-      const {localRef, elementRef} = useLocalRef(ref);
+      const {localRef, elementRef} = useLocalRef(ref as React.Ref<HTMLElement>);
       const id = elemProps['data-id'];
 
       // focus on the item with the cursor
@@ -142,14 +142,11 @@ export const useMenuItem = composeHooks(
           if (model.state.cursorId === id) {
             // delay focus changes to allow PopperJS to position
             requestAnimationFrame(() => {
-              localRef.current.focus();
+              localRef.current?.focus();
             });
           }
         }
-        // We only need to run when the ID has changed. If the static API is used, the first time
-        // this is run, the id will be blank
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-      }, [id]);
+      }, [id, localRef, model.state.cursorId, model.state.mode]);
 
       return {
         ref: elementRef,
@@ -157,7 +154,10 @@ export const useMenuItem = composeHooks(
         onClick:
           model.state.mode === 'single'
             ? (event: React.SyntheticEvent) => {
-                model.events.hide(event);
+                // only hide if the item isn't disabled
+                if (event.currentTarget.getAttribute('aria-disabled') !== 'true') {
+                  model.events.hide(event);
+                }
               }
             : undefined,
       };
@@ -179,9 +179,9 @@ export const MenuItem = createSubcomponent('button')({
 })<MenuItemProps>(({children, ...elemProps}, Element) => {
   return (
     <OverflowTooltip placement="left">
-      <StyledItem minHeight={space.xl} as={Element} {...elemProps}>
+      <StyledMenuItem minHeight={space.xl} as={Element} {...elemProps}>
         {children}
-      </StyledItem>
+      </StyledMenuItem>
     </OverflowTooltip>
   );
 });

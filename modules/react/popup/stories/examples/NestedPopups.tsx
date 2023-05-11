@@ -10,7 +10,7 @@ import {
   useReturnFocus,
 } from '@workday/canvas-kit-react/popup';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
-import {HStack} from '@workday/canvas-kit-react/layout';
+import {Flex} from '@workday/canvas-kit-react/layout';
 
 export const NestedPopups = () => {
   const popup1 = usePopupModel();
@@ -38,7 +38,7 @@ export const NestedPopups = () => {
             <Popup.Body>
               <p style={{marginTop: 0, marginBottom: 0}}>Contents of Popup 1</p>
             </Popup.Body>
-            <HStack spacing="s" padding="xxs" marginTop="xxs">
+            <Flex gap="s" padding="xxs" marginTop="xxs">
               <Popup model={popup2}>
                 <Popup.Target>Open Popup 2</Popup.Target>
                 <Popup.Popper>
@@ -47,16 +47,16 @@ export const NestedPopups = () => {
                     <Popup.Body>
                       <p style={{marginTop: 0, marginBottom: 0}}>Contents of Popup 2</p>
                     </Popup.Body>
-                    <HStack spacing="s" padding="xxs" marginTop="xxs">
+                    <Flex gap="s" padding="xxs" marginTop="xxs">
                       <Popup.CloseButton as={Popup.CloseButton} model={popup1}>
                         Close Both (as)
                       </Popup.CloseButton>
                       <SecondaryButton {...closeBothProps}>Close Both (props)</SecondaryButton>
-                    </HStack>
+                    </Flex>
                   </Popup.Card>
                 </Popup.Popper>
               </Popup>
-            </HStack>
+            </Flex>
           </Popup.Card>
         </Popup.Popper>
       </Popup>
