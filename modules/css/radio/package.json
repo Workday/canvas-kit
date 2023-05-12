@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-css-radio",
-  "version": "8.6.5",
+  "version": "8.6.6",
   "description": "The radio css for canvas-kit-css",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -29,7 +29,7 @@
     "workday"
   ],
   "dependencies": {
-    "@workday/canvas-kit-css-common": "^8.6.5",
-    "@workday/canvas-kit-css-core": "^8.6.5"
+    "@workday/canvas-kit-css-common": "^8.6.6",
+    "@workday/canvas-kit-css-core": "^8.6.6"
   }
 }

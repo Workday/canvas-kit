@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v8.6.6](https://github.com/Workday/canvas-kit/releases/tag/v8.6.6) (2023-05-12)
+
+### Components
+
+- fix: Fix Checkbox label padding to support RTL ([#2216](https://github.com/Workday/canvas-kit/pull/2216)) ([@alanbsmith](https://github.com/alanbsmith), Alex Nicholls)
+
+
 ## [v8.6.5](https://github.com/Workday/canvas-kit/releases/tag/v8.6.5) (2023-05-10)
 
 ### Infrastructure
