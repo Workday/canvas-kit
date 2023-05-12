@@ -11,7 +11,7 @@ import {
 import {withSnapshotsEnabled} from '../../../../../utils/storybook';
 import {ExternalHyperlink} from '@workday/canvas-kit-react/button';
 import {Container} from './utils';
-import {Box, VStack} from '@workday/canvas-kit-react/layout';
+import {Box, Flex} from '@workday/canvas-kit-react/layout';
 import {BodyText, Subtext} from '@workday/canvas-kit-react/text';
 
 export default withSnapshotsEnabled({
@@ -50,7 +50,7 @@ export const ExternalHyperlinkStates = () => (
         )}
       </ComponentStatesTable>
     </StaticStates>
-    <VStack spacing="xxs">
+    <Flex flexDirection="column" gap="xxs">
       <h3>Typography</h3>
       <Subtext size="large">
         The quick <ExternalHyperlink>brown fox</ExternalHyperlink> jumps over the lazy dog
@@ -64,9 +64,9 @@ export const ExternalHyperlinkStates = () => (
       <BodyText size="large">
         The quick <ExternalHyperlink>brown fox</ExternalHyperlink> jumps over the lazy dog
       </BodyText>
-    </VStack>
+    </Flex>
     <CanvasProvider theme={{canvas: {direction: ContentDirection.RTL}}}>
-      <VStack spacing="xxs">
+      <Flex flexDirection="column" gap="xxs">
         <Subtext size="large">
           The quick <ExternalHyperlink>brown fox</ExternalHyperlink> jumps over the lazy dog
         </Subtext>
@@ -79,7 +79,7 @@ export const ExternalHyperlinkStates = () => (
         <BodyText size="large">
           The quick <ExternalHyperlink>brown fox</ExternalHyperlink> jumps over the lazy dog
         </BodyText>
-      </VStack>
+      </Flex>
     </CanvasProvider>
   </React.Fragment>
 );

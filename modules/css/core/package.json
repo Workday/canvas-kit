@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-css-core",
-  "version": "8.5.8",
+  "version": "9.0.0",
   "description": "The core css for canvas-kit-css",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",

@@ -9,7 +9,7 @@ export const LabelPositionVertical = () => {
   };
 
   return (
-    <TextArea orientation="vertical" spacing="xxxs">
+    <TextArea orientation="vertical" gap="xxxs">
       <TextArea.Label>Leave a review</TextArea.Label>
       <TextArea.Field onChange={handleChange} value={value} />
     </TextArea>

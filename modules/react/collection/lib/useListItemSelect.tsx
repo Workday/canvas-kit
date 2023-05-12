@@ -17,16 +17,15 @@ import {useListModel} from './useListModel';
  * ```
  */
 export const useListItemSelect = createElemPropsHook(useListModel)(
-  ({state, events}, _?: React.Ref<HTMLElement>, elemProps: {'data-id'?: string} = {}) => {
+  ({state, events}, _, elemProps: {'data-id'?: string} = {}) => {
     const name = elemProps['data-id'] || '';
     const onClick = (event: React.MouseEvent<HTMLElement>) => {
       if (
-        state.nonInteractiveIds.includes(name) ||
-        event.currentTarget.hasAttribute('aria-disabled')
+        !state.nonInteractiveIds.includes(name) &&
+        event.currentTarget.getAttribute('aria-disabled') !== 'true'
       ) {
-        return;
+        events.select({id: name});
       }
-      events.select({id: name});
     };
 
     return {onClick};

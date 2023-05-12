@@ -241,6 +241,103 @@ window.workday = {
 If the theme is not available via a context, Canvas Kit components will attempt to pull it from this
 variable before falling back to the default theme.
 
+## Accessing the theme value
+
+Canvas Kit provides two functions to access the current theme, `getTheme` and `useTheme`. If you
+need to access the theme within a function component, use the hook, `useTheme`. If you need to
+access the theme within a `styled` component, a class component, or outside a component, use
+`getTheme`. The main difference is `useTheme` is intended to work within the `CanvasProvider` and
+will check the `ThemeContext` for the theme first. Both functions check the window for the theme and
+fall back to the default theme is nothing is found. Both functions will return a full theme object
+in this shape:
+
+**Return value**
+
+```tsx
+{
+  canvas: {
+    palette: {
+      // ...
+    },
+    breakpoints: {
+      // ...
+    },
+    direction: ContentDirection.LTR,
+  },
+  // other themes can be placed here
+}
+```
+
+### getTheme
+
+`getTheme` is a function that returns the full theme object with the Canvas Kit theme under the
+`canvas` key. It should be used with `styled` components, class components, or outside components.
+
+Below is an example of how to use `getTheme` to build responsive media query styles with the
+breakpoint functions provided in the theme.
+
+```tsx
+import {getTheme} from '@workday/canvas-kit-react/common';
+
+const theme = getTheme();
+const {up, down} = theme.canvas.breakpoints;
+const small = down('m'); // Returns '@media (max-width: 768px)'
+const medium = up('m'); // Returns '@media (min-width: 768px)'
+const styles = {
+  [small]: {
+    margin: space.m,
+  },
+  [medium]: {
+    margin: space.l,
+  },
+};
+```
+
+### useTheme
+
+`useTheme` is hook to get the full theme object. It should be used only with functional compoents
+wrapped in ContextProvider. Function returns a theme object with the Canvas Kit theme under the
+canvas key.
+
+`useTheme` should be used only inside functional component otherwise it will show a warning if the
+theme context value has not been found. In that case you will need to use `getTheme`.
+
+Below is an example showing how to use `useTheme` in a function component to set `Subtext`'s color
+to the error color provided by the theme.
+
+```tsx
+export const ErrorMessage = () => {
+  const theme = useTheme();
+  return (
+    <Subtext size="large" color={theme.canvas.palette.error.main}>
+  )
+}
+```
+
+### Overwriting the theme
+
+You can also use both functions to overwrite the theme object by providing a partial or full theme
+object to overwrite the current theme. In the example below, we're setting a custom content
+direction, which can be passed to either `useTheme` or `getTheme`. These functions will properly
+merge your the partial theme with the default Canvas theme and return a complete theme object.
+
+```tsx
+import {ContentDirection, useTheme, getTheme} from '@workday/canvas-kit-react/common';
+
+const customTheme = {
+  canvas: {
+    // set the content direction to right-to-left
+    direction: ContentDirection.RTL,
+  },
+};
+
+// Overwriting the theme with useTheme
+const customTheme = useTheme(customTheme);
+
+// Overwriting the theme with getTheme
+const customTheme = getTheme(customTheme);
+```
+
 ## Breakpoints
 
 Breakpoints are used by media queries to conditionally apply or modify styles based on the viewport
