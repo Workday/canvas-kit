@@ -104,6 +104,7 @@ export const Popper = React.forwardRef<HTMLDivElement, PopperProps>(
 const getElementFromRefOrElement = (
   input: React.RefObject<Element> | Element | null
 ): Element | undefined => {
+  console.log('input ', input)
   if (input === null) {
     return undefined;
   } else if ('current' in input) {
@@ -185,6 +186,9 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
     const nextAvailablePlacementRef = React.useRef<Placement>(getOppositePlacement(popperPlacement)) // store the next available fallback placement
     const preventOverflowModifierRef = React.useRef<Partial<PopperJS.Modifier<any, any>>> ( {
       name: 'preventOverflow',
+      options: {
+        rootBoundary: 'document'
+      }
     })
 
     const placementModifier = React.useMemo((): PopperJS.Modifier<any, any> => {
@@ -208,6 +212,7 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
           const placements = [popperPlacement, getOppositePlacement(popperPlacement), ...baseFallbackPlacements]
           const overflow = PopperJS.detectOverflow(state)
           const preventOverflowData = state.modifiersData.preventOverflow
+          console.log('preventOverflow', preventOverflowData)
           const isOverflowed = preventOverflowData && 
           ((preventOverflowData.x === 0 && (overflow.right > 0 || overflow.left > 0)) || 
           (preventOverflowData.y === 0 && (overflow.top > 0 || overflow.bottom > 0)))
