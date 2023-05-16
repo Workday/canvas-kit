@@ -10,14 +10,27 @@ export const changeFocus = (element: unknown) => {
     return;
   }
 
-  // Dispatch an unidentified keyboard event for an input provider prior to a focus change so that
-  // the ring will appear.
-  if (typeof KeyboardEvent === 'function') {
-    const event = new KeyboardEvent('keydown', {bubbles: true, key: 'Unidentified'});
+  if (hasCallableProperty(element, 'focus')) {
+    // Dispatch an unidentified keyboard event for an input provider prior to a focus change so that
+    // the ring will appear.
+    if (typeof KeyboardEvent === 'function' && hasCallableProperty(element, 'dispatchEvent')) {
+      const event = new KeyboardEvent('keydown', {bubbles: true, key: 'Unidentified'});
+      element.dispatchEvent(event);
+    }
 
-    element.dispatchEvent?.(event);
+    element.focus();
   }
-
-  // Even if the element is not an HTMLElement, we should still attempt to focus it.
-  element.focus?.();
 };
+
+type Callable<K extends string> = {
+  [P in K]: Function;
+};
+
+function hasCallableProperty<K extends string>(input: unknown, method: K): input is Callable<K> {
+  return (
+    !!input &&
+    typeof input === 'object' &&
+    input!.hasOwnProperty(method) &&
+    typeof (input as any)[method] === 'function'
+  );
+}
