@@ -10,7 +10,7 @@ import {
   useReturnFocus,
   Placement,
 } from '@workday/canvas-kit-react/popup';
-import {Box, HStack} from '@workday/canvas-kit-react/layout';
+import {Box, Flex} from '@workday/canvas-kit-react/layout';
 
 const customViewports = {
   noAvailable: {
@@ -102,12 +102,12 @@ export const FallbackPlacements = withSnapshotsEnabled(() => {
                     Are you sure you'd like to delete the item titled 'My Item'?
                   </Box>
                 </Popup.Body>
-                <HStack spacing="s" padding="xxs" marginTop="xxs">
+                <Flex gap="s" padding="xxs" marginTop="xxs">
                   <Popup.CloseButton as={DeleteButton} onClick={handleDelete}>
                     Delete
                   </Popup.CloseButton>
                   <Popup.CloseButton>Cancel</Popup.CloseButton>
-                </HStack>
+                </Flex>
               </Popup.Card>
             </Popup.Popper>
           </Popup>
