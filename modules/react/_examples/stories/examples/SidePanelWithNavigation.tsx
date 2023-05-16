@@ -58,12 +58,12 @@ export const WithNavigation = () => {
           <Flex.Item as="li" listStyle="none">
             <Expandable padding="zero">
               <StyledExpandable paddingTop="m" paddingBottom="xxs" paddingX="s" textAlign="center">
-                <SystemIcon icon={ribbonIcon} marginX="xxs" />
+                <SystemIcon icon={ribbonIcon} marginRight="s" marginLeft="zero" />
                 <Expandable.Title padding="zero">
                   <BodyText size="small" fontWeight="bold" color="blackpepper300" marginY="zero">
                     Bestsellers
                   </BodyText>
-                  <Subtext size="small" color="blackpepper300" marginY="zero">
+                  <Subtext size="medium" color="blackpepper300" marginY="zero">
                     Award winning sweet treats
                   </Subtext>
                 </Expandable.Title>
@@ -93,12 +93,12 @@ export const WithNavigation = () => {
           <Flex.Item as="li" listStyle="none">
             <Expandable padding="zero">
               <StyledExpandable paddingTop="m" paddingBottom="xxs" paddingX="s" textAlign="center">
-                <SystemIcon icon={birthdayIcon} marginX="xxs" />
+                <SystemIcon icon={birthdayIcon} marginRight="s" marginLeft="zero" />
                 <Expandable.Title padding="zero">
                   <BodyText size="small" fontWeight="bold" color="blackpepper300" marginY="zero">
                     Custom Cakes
                   </BodyText>
-                  <Subtext size="small" color="blackpepper300" marginY="zero">
+                  <Subtext size="medium" color="blackpepper300" marginY="zero">
                     To celebrate all the milestones in life!
                   </Subtext>
                 </Expandable.Title>
