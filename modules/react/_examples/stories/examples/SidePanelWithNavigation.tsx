@@ -53,7 +53,7 @@ export const WithNavigation = () => {
 
   return (
     <Flex height={800} position="relative" backgroundColor="frenchVanilla100">
-      <StyledPanel aria-label="Main navigation" touched={true} variant="alternate">
+      <StyledPanel touched={true} variant="alternate">
         <Flex as="ul" flexDirection="column" rowGap="zero" paddingInlineStart="zero">
           <Flex.Item as="li" listStyle="none">
             <Expandable padding="zero">
@@ -67,7 +67,7 @@ export const WithNavigation = () => {
                     Award winning sweet treats
                   </Subtext>
                 </Expandable.Title>
-                <Expandable.Icon iconPosition="end" flex="1" />
+                <Expandable.Icon iconPosition="end" />
               </StyledExpandable>
               <Expandable.Content paddingY="zero" paddingX="zero" as="ul">
                 {bestsellers.map(item => {
