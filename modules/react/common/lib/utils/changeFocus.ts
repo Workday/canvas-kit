@@ -30,7 +30,7 @@ function hasCallableProperty<K extends string>(input: unknown, method: K): input
   return (
     !!input &&
     typeof input === 'object' &&
-    input!.hasOwnProperty(method) &&
+    method in input! &&
     typeof (input as any)[method] === 'function'
   );
 }
