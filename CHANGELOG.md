@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v9.0.1](https://github.com/Workday/canvas-kit/releases/tag/v9.0.1) (2023-05-17)
+
+### Components
+
+- fix: Fix Checkbox label padding to support RTL ([#2216](https://github.com/Workday/canvas-kit/pull/2216)) ([@alanbsmith](https://github.com/alanbsmith), Alex Nicholls)
+- fix: Focusable elements not always focused ([#2204](https://github.com/Workday/canvas-kit/pull/2204)) ([@TylerCharlesworth](https://github.com/TylerCharlesworth), [@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v8.6.7](https://github.com/Workday/canvas-kit/releases/tag/v8.6.7) (2023-05-17)
 
 ### Components
