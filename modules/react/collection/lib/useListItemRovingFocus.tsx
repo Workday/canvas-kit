@@ -81,22 +81,26 @@ export const useListItemRovingFocus = createElemPropsHook(useCursorListModel)(
     const stateRef = React.useRef(state);
     stateRef.current = state;
 
-    const keyDownRef = React.useRef(false);
+    const keyElementRef = React.useRef<Element | null>(null);
     const isRTL = useIsRTL();
 
     React.useEffect(() => {
-      if (keyDownRef.current) {
+      if (keyElementRef.current) {
         const item = navigation.getItem(state.cursorId, {state});
         if (state.isVirtualized) {
           state.UNSTABLE_virtual.scrollToIndex(item.index);
         }
         requestAnimationFrame(() => {
-          document
-            .querySelector<HTMLElement>(`[data-focus-id="${`${state.id}-${item.id}`}"]`)
-            ?.focus();
-        });
+          // Attempt to extract the ID from the DOM element. This fixes issues where the server and client
+          // do not agree on a generated ID
+          const clientId = keyElementRef.current?.getAttribute('data-focus-id')?.split('-')[0];
 
-        keyDownRef.current = false;
+          [clientId, state.id].forEach(id => {
+            document.querySelector<HTMLElement>(`[data-focus-id="${`${id}-${item.id}`}"]`)?.focus();
+          });
+
+          keyElementRef.current = null;
+        });
       }
       // we only want to run this effect if the cursor changes and not any other time
       // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -109,7 +113,7 @@ export const useListItemRovingFocus = createElemPropsHook(useCursorListModel)(
           for (const key in ctrlKeyMap) {
             if (hasOwnKey(ctrlKeyMap, key)) {
               if (event.key === key) {
-                keyDownRef.current = true;
+                keyElementRef.current = event.currentTarget;
                 events[ctrlKeyMap[key]]?.();
                 event.preventDefault();
                 return;
@@ -123,7 +127,7 @@ export const useListItemRovingFocus = createElemPropsHook(useCursorListModel)(
             if (isRTL ? event.key === rightToLeftMap[key] : event.key === key) {
               const eventName =
                 state.columnCount > 0 ? gridKeyMap[key] : orientationKeyMap[state.orientation][key];
-              keyDownRef.current = true;
+              keyElementRef.current = event.currentTarget;
               if (events[eventName]) {
                 events[eventName]?.();
                 event.preventDefault();
