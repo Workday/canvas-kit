@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-css-text-area",
-  "version": "8.6.7",
+  "version": "8.6.8",
   "description": "The text-area css for canvas-kit-css",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -30,7 +30,7 @@
     "workday"
   ],
   "dependencies": {
-    "@workday/canvas-kit-css-common": "^8.6.7",
-    "@workday/canvas-kit-css-core": "^8.6.7"
+    "@workday/canvas-kit-css-common": "^8.6.8",
+    "@workday/canvas-kit-css-core": "^8.6.8"
   }
 }

@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v8.6.8](https://github.com/Workday/canvas-kit/releases/tag/v8.6.8) (2023-05-17)
+
+### Components
+
+- fix(collection): Fix SSR focus and multiple tab stops ([#2223](https://github.com/Workday/canvas-kit/pull/2223)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v8.6.7](https://github.com/Workday/canvas-kit/releases/tag/v8.6.7) (2023-05-17)
 
 ### Components
