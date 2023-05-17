@@ -50,6 +50,13 @@ using roving tabindex. Below is table of supported keyboard shortcuts and associ
 
 ### Icons
 
+Menu supports more complex children, including icons, but the text of the item will no longer be
+known. In this case, add a `data-text` attribute to inform the collection system what the text of
+the item is. The text is used for components that filter based on text. For example, a Select
+component will jump to an item based on the keys the user types. If the user types "C", the
+component will jump to the first item that starts with a "C". This functionality requires knowledge
+about the text of the item.
+
 <ExampleCodeBlock code={Icons} />
 
 ## Component API

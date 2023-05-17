@@ -422,7 +422,7 @@ describe('componentParser', () => {
     `
     );
 
-    const docs = parse(program, 'test.tsx', [componentParser]); //?
+    const docs = parse(program, 'test.tsx', [componentParser]);
 
     expect(docs).toHaveProperty('0.name', 'A');
     expect(docs).toHaveProperty('0.type.kind', 'component');
