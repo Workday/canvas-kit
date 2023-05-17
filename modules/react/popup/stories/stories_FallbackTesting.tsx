@@ -1,6 +1,6 @@
 import React from 'react';
-import {withSnapshotsEnabled, PopperController} from '../../../../utils/storybook';
-import {DeleteButton, SecondaryButton} from '@workday/canvas-kit-react/button';
+import {withSnapshotsEnabled, PopperController, customViewport} from '../../../../utils/storybook';
+import {DeleteButton} from '@workday/canvas-kit-react/button';
 import {
   Popup,
   usePopupModel,
@@ -12,35 +12,18 @@ import {
 } from '@workday/canvas-kit-react/popup';
 import {Box, Flex} from '@workday/canvas-kit-react/layout';
 
-const customViewports = {
-  noAvailable: {
-    name: 'No Available space',
-    styles: {
-      width: '300px',
-      height: '300px',
-    },
-  },
-  default: {
-    name: 'Initial viewport',
-    styles: {
-      width: '500px',
-      height: '700px',
-    },
-  },
-};
-
 export default {
   title: 'Testing/Popups/Popup',
   component: Popup,
   parameters: {
     viewport: {
-      viewports: customViewports,
-      defaultViewport: 'default',
+      viewports: customViewport,
+      defaultViewport: 'landscape',
     },
   },
 };
 
-export const FallbackPlacements = withSnapshotsEnabled(() => {
+export const PopupWithFallbackPlacements = withSnapshotsEnabled(() => {
   const [placement, setPlacement] = React.useState<Placement>('top');
   const [marginLeftBtn, setMarginLeftBtn] = React.useState(0);
   const [marginRightBtn, setMarginRightBtn] = React.useState(0);
@@ -77,15 +60,7 @@ export const FallbackPlacements = withSnapshotsEnabled(() => {
         onSetMarginLeftBtn={handleMarginLeftBtn}
         onSetMarginRightBtn={handleMarginRightBtn}
       >
-        <div
-          style={{
-            width: '100%',
-            marginTop: 280,
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'start',
-          }}
-        >
+        <Flex width="100%" marginTop={240} justifyContent="center" alignItems="start">
           <Popup model={model}>
             <Popup.Target
               as={DeleteButton}
@@ -111,7 +86,7 @@ export const FallbackPlacements = withSnapshotsEnabled(() => {
               </Popup.Card>
             </Popup.Popper>
           </Popup>
-        </div>
+        </Flex>
       </PopperController>
     </div>
   );
