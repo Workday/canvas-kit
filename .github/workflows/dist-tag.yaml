@@ -1,0 +1,32 @@
+name: 'Dist Tag Update'
+## Action to update an existing npm dist-tag by the entered package version
+## or to create a new dist-tag if you enter not-existing name
+
+on:
+  workflow_dispatch:
+    inputs:
+      dist-tag:
+        required: true
+        description: Dist tag name
+      version:
+        required: true
+        description: Package version number
+
+jobs:
+  release-major:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - uses: Workday/canvas-kit-actions/install@v1
+        with:
+          node_version: 16.x
+
+      - name: Check packages
+        run: node utils/dist-tag.mjs
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_CI_PUBLISH_TOKEN }}
+          DIST_TAG: ${{ inputs.dist-tag }}
+          VERSION: ${{ inputs.version }}

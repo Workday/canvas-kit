@@ -32,7 +32,6 @@ const fileNameToCategoryMap: Record<string, string[]> = {
     'utils/flexItem',
     'utils/position',
     'utils/space',
-    'utils/stack',
   ],
   Color: ['utils/color', 'utils/background'],
   Border: ['utils/border'],
@@ -71,7 +70,7 @@ registerWidget<EnhancedComponentValue>('enhancedComponent', ({value, doc, meta})
         <>
           <Heading headingOffset={1}>Layout Component</Heading>
           <MDX as="p">
-            <code>{value.displayName}</code> supports all props from the
+            <code>{value.displayName || parentComponentName}</code> supports all props from the
             <code>
               <ParentComponentJSDocContext.Provider value={defaultJSDoc}>
                 <SymbolDialog value={value.styleComponent} />
