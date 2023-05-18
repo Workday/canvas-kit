@@ -8,12 +8,12 @@ import {
   useCloseOnEscape,
   usePopupModel,
 } from '@workday/canvas-kit-react/popup';
-import {HStack, VStack} from '@workday/canvas-kit-react/layout';
+import {Flex} from '@workday/canvas-kit-react/layout';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
-import Radio, {RadioGroup} from '@workday/canvas-kit-react/radio';
+import {Radio, RadioGroup} from '@workday/canvas-kit-react/radio';
 
 export default {
-  title: 'Testing/React/Popups/Modal',
+  title: 'Testing/Popups/Modal',
   component: Modal,
   parameters: {
     chromatic: {
@@ -35,10 +35,10 @@ export const AccessibilityTest = () => {
             <Modal.Heading>Delete Item</Modal.Heading>
             <Modal.Body>
               <p>Are you sure you want to delete the item?</p>
-              <HStack spacing="s">
+              <Flex gap="s">
                 <Modal.CloseButton as={DeleteButton}>Delete</Modal.CloseButton>
                 <Modal.CloseButton>Cancel</Modal.CloseButton>
-              </HStack>
+              </Flex>
             </Modal.Body>
           </Modal.Card>
         </Modal.Overlay>
@@ -101,17 +101,15 @@ export const WithRadioButtons = () => {
           <Modal.CloseIcon aria-label="Close" />
           <Modal.Heading>Select Item</Modal.Heading>
           <Modal.Body>
-            <VStack spacing="s">
-              <RadioGroup
-                name="contact"
-                data-testid="radiogroup"
-                value={value}
-                onChange={value => setValue(String(value))}
-              >
-                <Radio id="1" value="email" label="E-mail" />
-                <Radio id="2" value="phone" label="Phone" />
-              </RadioGroup>
-            </VStack>
+            <RadioGroup
+              name="contact"
+              data-testid="radiogroup"
+              value={value}
+              onChange={value => setValue(String(value))}
+            >
+              <Radio id="1" value="email" label="E-mail" />
+              <Radio id="2" value="phone" label="Phone" />
+            </RadioGroup>
           </Modal.Body>
         </Modal.Card>
       </Modal.Overlay>
@@ -135,7 +133,7 @@ export const StackedModals = () => {
           <Modal.Heading>Delete Item</Modal.Heading>
           <Modal.Body>
             <p>Are you sure you want to delete the item?</p>
-            <HStack spacing="s">
+            <Flex gap="s">
               <Modal>
                 <Modal.Target as={DeleteButton}>Yes, Delete</Modal.Target>
                 <Modal.Overlay>
@@ -146,7 +144,7 @@ export const StackedModals = () => {
                       <p>
                         Are you <em>really</em> sure you want to delete the item?
                       </p>
-                      <HStack spacing="s">
+                      <Flex gap="s">
                         <Modal.CloseButton
                           as={DeleteButton}
                           onClick={event => {
@@ -157,13 +155,13 @@ export const StackedModals = () => {
                           Yes, Really Delete
                         </Modal.CloseButton>
                         <Modal.CloseButton>Cancel</Modal.CloseButton>
-                      </HStack>
+                      </Flex>
                     </Modal.Body>
                   </Modal.Card>
                 </Modal.Overlay>
               </Modal>
               <Modal.CloseButton>Cancel</Modal.CloseButton>
-            </HStack>
+            </Flex>
           </Modal.Body>
         </Modal.Card>
       </Modal.Overlay>
@@ -193,17 +191,17 @@ export const ModalWithPopup = () => {
             <Modal.Body>
               <p>Are you sure you want to delete the item?</p>
               <Popup model={popup}>
-                <HStack spacing="s">
+                <Flex gap="s">
                   <Popup.Target as={DeleteButton}>Yes, Delete</Popup.Target>
                   <Popup.CloseButton>Cancel</Popup.CloseButton>
-                </HStack>
+                </Flex>
                 <Popup.Popper>
                   <Popup.Card>
                     <Popup.CloseIcon aria-label="Close" />
                     <Popup.Heading>Really Delete Item</Popup.Heading>
                     <Popup.Body>
                       <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
-                      <HStack spacing="s">
+                      <Flex gap="s">
                         <Popup.CloseButton
                           as={DeleteButton}
                           onClick={event => {
@@ -214,7 +212,7 @@ export const ModalWithPopup = () => {
                           Yes, Really Delete
                         </Popup.CloseButton>
                         <Popup.CloseButton>Cancel</Popup.CloseButton>
-                      </HStack>
+                      </Flex>
                     </Popup.Body>
                   </Popup.Card>
                 </Popup.Popper>
@@ -245,13 +243,13 @@ export const WithTooltips = () => {
             <Modal.Heading>Open Modal</Modal.Heading>
             <Modal.Body>
               <p>Open a hidable and non-hidable popups</p>
-              <HStack spacing="s">
+              <Flex gap="s">
                 <Popup.Target model={popup1}>Hidable Popup</Popup.Target>
                 <Popup.Target model={popup2}>Non-hidable Popup</Popup.Target>
                 <Tooltip title="Not so sure" type="muted">
                   <Popup.CloseButton onClick={closeModal}>Cancel</Popup.CloseButton>
                 </Tooltip>
-              </HStack>
+              </Flex>
             </Modal.Body>
           </Modal.Card>
         </Modal.Overlay>
@@ -306,10 +304,10 @@ export const IframeTest = () => {
           <Modal.Heading>Delete Item</Modal.Heading>
           <Modal.Body>
             <p>Are you sure you want to delete the item?</p>
-            <HStack spacing="s">
+            <Flex gap="s">
               <Modal.CloseButton as={DeleteButton}>Delete</Modal.CloseButton>
               <Modal.CloseButton>Cancel</Modal.CloseButton>
-            </HStack>
+            </Flex>
             <iframe srcDoc="<html><body>Hello, <b>world</b>.<button>iframe button 1</button><button>iframe button 2</button></body></html>" />
           </Modal.Body>
         </Modal.Card>

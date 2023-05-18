@@ -1,20 +1,20 @@
 import React from 'react';
-import {StaticStates} from '@workday/canvas-kit-react/common';
-import {ComponentStatesTable} from '@workday/canvas-kit-labs-react/common';
+import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
 import {withSnapshotsEnabled} from '../../../../../utils/storybook';
 import {colors, space, spaceNumbers} from '@workday/canvas-kit-react/tokens';
 import {ActionBar, useActionBarModel} from '@workday/canvas-kit-react/action-bar';
 import {PrimaryButton, SecondaryButton} from '@workday/canvas-kit-react/button';
+import {Box} from '@workday/canvas-kit-react/layout';
+
+export default withSnapshotsEnabled({
+  title: 'Testing/Buttons/ActionBar',
+  component: ActionBar,
+});
 
 type MyActionItem = {
   id: string;
   text: React.ReactNode;
 };
-
-export default withSnapshotsEnabled({
-  title: 'Testing/React/Buttons/ActionBar',
-  component: ActionBar,
-});
 
 export const ActionBarStates = () => (
   <StaticStates>
@@ -62,28 +62,35 @@ export const ActionBarWithOverflowMenuStates = () => {
   return (
     <StaticStates>
       <ComponentStatesTable
-        rowProps={[{label: 'With Overflow Menu', props: {}}]}
-        columnProps={[{label: ' ', props: {position: 'relative'}}]}
+        rowProps={[
+          {label: '100% container width', props: {containerWidth: '100%'}},
+          {label: '440px container width', props: {containerWidth: '440px'}},
+          {label: '320px container width', props: {containerWidth: '320px'}},
+        ]}
+        columnProps={[{label: 'With Overflow Menu', props: {position: 'relative'}}]}
       >
         {props => (
-          <div>
-            <ActionBar model={model}>
-              <ActionBar.List {...props} position="relative">
-                {(item: MyActionItem, index: number) => (
-                  <ActionBar.Item as={index === 0 ? PrimaryButton : undefined}>
-                    {item.text}
-                  </ActionBar.Item>
-                )}
-              </ActionBar.List>
-              <ActionBar.Menu.Popper>
-                <ActionBar.Menu.Card maxWidth={300} maxHeight={200}>
-                  <ActionBar.Menu.List>
-                    {(item: MyActionItem) => <ActionBar.Menu.Item>{item.text}</ActionBar.Menu.Item>}
-                  </ActionBar.Menu.List>
-                </ActionBar.Menu.Card>
-              </ActionBar.Menu.Popper>
-            </ActionBar>
-          </div>
+          <ActionBar items={items}>
+            <ActionBar.List
+              {...props}
+              maxWidth={props.containerWidth}
+              position="relative"
+              overflowButton={<ActionBar.OverflowButton aria-label="More actions" />}
+            >
+              {(item: MyActionItem, index: number) => (
+                <ActionBar.Item as={index === 0 ? PrimaryButton : undefined}>
+                  {item.text}
+                </ActionBar.Item>
+              )}
+            </ActionBar.List>
+            <ActionBar.Menu.Popper>
+              <ActionBar.Menu.Card maxWidth={300} maxHeight={200}>
+                <ActionBar.Menu.List>
+                  {(item: MyActionItem) => <ActionBar.Menu.Item>{item.text}</ActionBar.Menu.Item>}
+                </ActionBar.Menu.List>
+              </ActionBar.Menu.Card>
+            </ActionBar.Menu.Popper>
+          </ActionBar>
         )}
       </ComponentStatesTable>
     </StaticStates>

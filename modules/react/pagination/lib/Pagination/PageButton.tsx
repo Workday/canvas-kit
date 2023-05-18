@@ -1,9 +1,14 @@
 import * as React from 'react';
-import {EmotionCanvasTheme, styled, useTheme} from '@workday/canvas-kit-react/common';
+import {
+  EmotionCanvasTheme,
+  styled,
+  useTheme,
+  createComponent,
+} from '@workday/canvas-kit-react/common';
 import {borderRadius, colors, space} from '@workday/canvas-kit-react/tokens';
 import {BaseButton} from '@workday/canvas-kit-react/button';
 
-import {PaginationModel} from './types';
+import {PaginationContext} from './usePaginationModel';
 
 const StyledPageButton = styled(BaseButton)<{toggled?: boolean}>(
   {
@@ -48,37 +53,34 @@ const getPaginationButtonColors = (toggled: boolean, theme: EmotionCanvasTheme) 
   };
 };
 
-export type PageButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
-  model: PaginationModel;
+export interface PageButtonProps {
   pageNumber: number;
-};
+  children?: React.ReactNode;
+}
 
-export const PageButton = ({
-  model,
-  onClick,
-  pageNumber,
-  children,
-  ...elemProps
-}: PageButtonProps) => {
-  const isCurrentPage = pageNumber === model.state.currentPage;
-  const theme = useTheme();
+export const PageButton = createComponent('button')({
+  displayName: 'Pagination.PageButton',
+  Component({pageNumber, children, ...elemProps}: PageButtonProps) {
+    const model = React.useContext(PaginationContext);
+    const isCurrentPage = pageNumber === model.state.currentPage;
+    const theme = useTheme();
 
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    onClick?.(e);
-    model.events.goTo(pageNumber);
-  };
-  console.warn(theme);
+    const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+      (elemProps as any).onClick?.(e);
+      model.events.goTo(pageNumber);
+    };
 
-  return (
-    <StyledPageButton
-      aria-current={isCurrentPage ? 'page' : undefined}
-      colors={getPaginationButtonColors(isCurrentPage, theme)}
-      aria-pressed={undefined}
-      onClick={handleClick}
-      toggled={isCurrentPage}
-      {...elemProps}
-    >
-      {children || pageNumber}
-    </StyledPageButton>
-  );
-};
+    return (
+      <StyledPageButton
+        aria-current={isCurrentPage ? 'page' : undefined}
+        colors={getPaginationButtonColors(isCurrentPage, theme)}
+        aria-pressed={undefined}
+        onClick={handleClick}
+        toggled={isCurrentPage}
+        {...elemProps}
+      >
+        {children || pageNumber}
+      </StyledPageButton>
+    );
+  },
+});

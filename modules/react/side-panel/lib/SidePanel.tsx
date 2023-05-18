@@ -1,11 +1,11 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import throttle from 'lodash/throttle';
 
 import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {colors, space, type, CanvasSpaceValues} from '@workday/canvas-kit-react/tokens';
+import {colors, space, CanvasSpaceValues} from '@workday/canvas-kit-react/tokens';
 import {TertiaryButton, TertiaryButtonProps} from '@workday/canvas-kit-react/button';
 import {chevronLeftIcon, chevronRightIcon} from '@workday/canvas-system-icons-web';
+import {Heading} from '@workday/canvas-kit-react/text';
 
 export interface SidePanelProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -77,11 +77,6 @@ export enum SidePanelBackgroundColor {
 }
 
 const closedWidth = space.xxl;
-
-const Header = styled('h2')({
-  ...type.levels.heading.small,
-  marginTop: space.zero,
-});
 
 const SidePanelContainer = styled('div')<
   Pick<SidePanelProps, 'open' | 'backgroundColor' | 'padding' | 'openWidth' | 'openDirection'>
@@ -167,13 +162,13 @@ const SidePanelFooter = styled('div')<Pick<SidePanelProps, 'open' | 'openWidth'>
   })
 );
 
-export default class SidePanel extends React.Component<SidePanelProps, SidePanelState> {
+export class SidePanel extends React.Component<SidePanelProps, SidePanelState> {
   static OpenDirection = SidePanelOpenDirection;
   static BackgroundColor = SidePanelBackgroundColor;
 
   constructor(props: SidePanelProps) {
     super(props);
-    this.handleResize = throttle(this.handleResize.bind(this), 150);
+    this.handleResize = this.handleResize.bind(this);
   }
 
   state = {
@@ -214,7 +209,11 @@ export default class SidePanel extends React.Component<SidePanelProps, SidePanel
         {...elemProps}
       >
         <ChildrenContainer open={open} openWidth={openWidth}>
-          {header && open ? <Header>{header}</Header> : null}
+          {header && open ? (
+            <Heading as="h2" size="small" marginTop="zero">
+              {header}
+            </Heading>
+          ) : null}
           {this.props.children}
         </ChildrenContainer>
         <SidePanelFooter openWidth={openWidth} open={open}>

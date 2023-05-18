@@ -1,22 +1,18 @@
 import React from 'react';
 import {keyframes} from '@emotion/react';
 
-import {
-  Card,
-  Checkbox,
-  FormField,
-  SecondaryButton,
-  SystemIconCircle,
-  TextInput,
-  styled,
-} from '@workday/canvas-kit-react';
-
+import {Card} from '@workday/canvas-kit-react/card';
+import {Checkbox} from '@workday/canvas-kit-react/checkbox';
+import {FormField} from '@workday/canvas-kit-react/form-field';
+import {SecondaryButton} from '@workday/canvas-kit-react/button';
+import {SystemIconCircle} from '@workday/canvas-kit-react/icon';
+import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {Box, Flex} from '@workday/canvas-kit-react/layout';
-
 import {Skeleton} from '@workday/canvas-kit-react/skeleton';
-import {borderRadius, space, type} from '@workday/canvas-kit-react/tokens';
+import {borderRadius, space} from '@workday/canvas-kit-react/tokens';
 import {patternIcon} from '@workday/canvas-system-icons-web';
-import {StyledType} from '@workday/canvas-kit-react/common';
+import {styled, StyledType} from '@workday/canvas-kit-react/common';
+import {Heading} from '@workday/canvas-kit-react/text';
 
 const fadeOut = keyframes`
   from {
@@ -79,18 +75,35 @@ export const Simulation = () => {
       <Card>
         <Card.Body>
           <Box minHeight={180} position="relative">
-            {!loading && (
+            {loading ? (
+              <StyledSimulation
+                position="absolute"
+                top={0}
+                left={0}
+                width="100%"
+                animation={!loading ? `${fadeOut} 150ms ease-out forwards` : undefined}
+              >
+                <Skeleton>
+                  <Flex alignItems="center">
+                    <Skeleton.Shape
+                      width={space.xl}
+                      height={space.xl}
+                      borderRadius={borderRadius.circle}
+                    />
+                    <Box flex={1} marginLeft="xs">
+                      <Skeleton.Header />
+                    </Box>
+                  </Flex>
+                  <Skeleton.Text lineCount={3} />
+                </Skeleton>
+              </StyledSimulation>
+            ) : (
               <Box>
                 <Flex alignItems="center" display="inline-flex" marginBottom="s">
                   <SystemIconCircle icon={patternIcon} />
-                  <h3
-                    style={{
-                      ...type.levels.heading.small,
-                      margin: `0 0 0 ${space.xxs}`,
-                    }}
-                  >
+                  <Heading as="h3" size="small" margin={`0 0 0 ${space.xxs}`}>
                     Patterns
-                  </h3>
+                  </Heading>
                 </Flex>
                 <p>
                   Canvas Patterns classify and document reusable solutions built to respond to
@@ -100,28 +113,6 @@ export const Simulation = () => {
                 </p>
               </Box>
             )}
-
-            <StyledSimulation
-              position="absolute"
-              top={0}
-              left={0}
-              width="100%"
-              animation={!loading ? `${fadeOut} 150ms ease-out forwards` : undefined}
-            >
-              <Skeleton>
-                <Flex alignItems="center">
-                  <Skeleton.Shape
-                    width={space.xl}
-                    height={space.xl}
-                    borderRadius={borderRadius.circle}
-                  />
-                  <Box flex={1} marginLeft="xs">
-                    <Skeleton.Header />
-                  </Box>
-                </Flex>
-                <Skeleton.Text lineCount={3} />
-              </Skeleton>
-            </StyledSimulation>
           </Box>
         </Card.Body>
       </Card>

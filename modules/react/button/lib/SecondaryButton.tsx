@@ -11,9 +11,9 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {ButtonColors, ButtonSizes, IconPositions} from './types';
-import {BaseButton, getMinWidthStyles, getPaddingStyles} from './BaseButton';
+import {BaseButton, BaseButtonProps, getMinWidthStyles, getPaddingStyles} from './BaseButton';
 
-export interface SecondaryButtonProps extends Themeable, GrowthBehavior {
+export interface SecondaryButtonProps extends Themeable, GrowthBehavior, BaseButtonProps {
   /**
    * The variant of the SecondaryButton.
    * @default undefined
@@ -45,6 +45,15 @@ export interface SecondaryButtonProps extends Themeable, GrowthBehavior {
   children?: React.ReactNode;
 }
 
+/**
+ * Secondary Buttons have a medium level of emphasis. Use them for non-critical actions. Secondary
+ * Buttons can be used on most pages without restrictions and work well for multiple actions of
+ * equal weight. They can be used in conjunction with a Primary Button or independently.
+ *
+ * Secondary Buttons have four sizes: `extraSmall`, `small`, `medium`, and `large`. Icons are
+ * supported for every size and can be positioned at the `start` or `end` with the `iconPosition`
+ * prop.
+ */
 export const SecondaryButton = createComponent('button')({
   displayName: 'SecondaryButton',
   Component: (

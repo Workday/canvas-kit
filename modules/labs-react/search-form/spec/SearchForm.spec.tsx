@@ -115,7 +115,7 @@ describe('SearchForm', () => {
     expect(openButton).toHaveFocus();
   });
 
-  test('Search Bar can accept custom themes', () => {
+  test('SearchForm can accept custom themes', () => {
     const inputLabelText = `label`;
     render(
       <SearchForm
@@ -148,7 +148,7 @@ describe('SearchForm', () => {
     expect(styleFocused.boxShadow).toBe('0 0 0 1px white');
   });
 
-  test('Search Bar can accept default themes', () => {
+  test('SearchForm can accept default themes', () => {
     const inputLabelText = `label`;
     const theme = SearchTheme.Dark;
     render(<SearchForm onSubmit={jest.fn()} inputLabel={inputLabelText} searchTheme={theme} />);
@@ -161,11 +161,20 @@ describe('SearchForm', () => {
     expect(style.boxShadow).toBe(searchThemes[theme].boxShadow);
   });
 
-  test('Search Bar should spread extra props', async () => {
+  test('SearchForm should spread extra props', () => {
     const cb = jest.fn();
     const data = 'test';
     render(<SearchForm onSubmit={cb} data-propspread={data} />);
 
     expect(screen.getByRole('search')).toHaveAttribute('data-propspread', data);
+  });
+
+  test('SearchForm supports overriding the generated labelId', () => {
+    const cb = jest.fn();
+    const labelId = 'search-form-fixed-label-id';
+
+    const {container} = render(<SearchForm onSubmit={cb} labelId={labelId} />);
+
+    expect(container.querySelector(`#${labelId}`)).toHaveTextContent('Search');
   });
 });

@@ -11,51 +11,64 @@ import {
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {SystemIcon, SystemIconProps} from '@workday/canvas-kit-react/icon';
 
-export interface MenuItemProps extends React.LiHTMLAttributes<HTMLLIElement> {
+/**
+ * ### Deprecated Menu Item Props
+ *
+ * As of Canvas Kit v8, Menu is being deprecated.
+ * It will be removed in v10. Please see the
+ * [upgrade guide](https://workday.github.io/canvas-kit/?path=/story/welcome-upgrade-guides-v8-0--page)
+ * for more information.
+ */
+export interface DeprecatedMenuItemProps extends React.LiHTMLAttributes<HTMLLIElement> {
   /**
-   * The function called when the MenuItem is clicked. If the item is a child of the Menu component, this callback will be decorated with the onSelect and onClose Menu callbacks. This callback will not fire if the item is disabled (see below).
+   * The function called when the DeprecatedMenuItem is clicked. If the item is a child of the DeprecatedMenu component, this callback will be decorated with the onSelect and onClose DeprecatedMenu callbacks. This callback will not fire if the item is disabled (see below).
    */
   onClick?: (event: React.MouseEvent) => void;
   /**
-   * The unique id for the MenuItem used for ARIA attributes. If the item is a child of the `Menu` component, this property will be generated and overridden.
+   * The unique id for the DeprecatedMenuItem used for ARIA attributes. If the item is a child of the `DeprecatedMenu` component, this property will be generated and overridden.
    */
   id?: string;
   /**
-   * The icon of the MenuItem. This icon is displayed before what you supplied for the children.
+   * The icon of the DeprecatedMenuItem. This icon is displayed before what you supplied for the children.
    */
   icon?: CanvasSystemIcon;
   /**
-   * The secondary icon of the MenuItem. This icon is displayed after what you supplied for the children.
+   * The secondary icon of the DeprecatedMenuItem. This icon is displayed after what you supplied for the children.
    */
   secondaryIcon?: CanvasSystemIcon;
   /**
-   * If true, render a top border on the MenuItem.
+   * If true, render a top border on the DeprecatedMenuItem.
    * @default false
    */
   hasDivider?: boolean;
   /**
-   * If true, set the MenuItem to the disabled state so it is not clickable.
+   * If true, render a header to group data, this menu item will not be intractable.
+   * @default false
+   */
+  isHeader?: boolean;
+  /**
+   * If true, set the DeprecatedMenuItem to the disabled state so it is not clickable.
    * @default false
    */
   isDisabled?: boolean;
   /**
-   * If true, set the MenuItem to be the currently selected item. If the item is a child of the Menu component, this property will be generated and overridden.
+   * If true, set the DeprecatedMenuItem to be the currently selected item. If the item is a child of the DeprecatedMenu component, this property will be generated and overridden.
    * @default false
    */
   isFocused?: boolean;
   /**
-   * The role of the MenuItem. Use this to override the role of the item (e.g. you can use this element as an option in a Combobox).
+   * The role of the DeprecatedMenuItem. Use this to override the role of the item (e.g. you can use this element as an option in a Combobox).
    * @default menuItem
    */
   role?: string;
   /**
-   * If true, allow the onClose Menu callback to be fired after the MenuItem has been clicked.
+   * If true, allow the onClose DeprecatedMenu callback to be fired after the DeprecatedMenuItem has been clicked.
    * @default true
    */
   shouldClose?: boolean;
 }
 
-const Item = styled('li')<Pick<MenuItemProps, 'isDisabled' | 'isFocused'>>(
+const Item = styled('li')<Pick<DeprecatedMenuItemProps, 'isDisabled' | 'isFocused' | 'isHeader'>>(
   {
     ...type.levels.subtext.large,
     padding: `${space.xxs} ${space.s}`,
@@ -70,6 +83,9 @@ const Item = styled('li')<Pick<MenuItemProps, 'isDisabled' | 'isFocused'>>(
     '&:focus': {
       outline: 'none',
     },
+  },
+  ({isHeader}) => {
+    return {pointerEvents: isHeader ? 'none' : 'all'};
   },
   ({isFocused, isDisabled}) => {
     if (!isFocused && !isDisabled) {
@@ -237,10 +253,37 @@ const scrollIntoViewIfNeeded = (elem: HTMLElement, centerIfNeeded = true): void 
   }
 };
 
-class MenuItem extends React.Component<MenuItemProps> {
+/**
+ * `DeprecatedMenuItem` renders an `<li>` element with the correct attributes to ensure it is
+ * accessible. If you choose to implement your own custom menu items, be sure to use semantic `<li>`
+ * elements with the following attributes:
+ *
+ * - `role="menuitem"`
+ * - `tabindex={-1}`
+ * - `id`s following this pattern: `${MenuId}-${index}`
+ *
+ * As of Canvas Kit v8, Menu is being deprecated.
+ * It will be removed in v10. Please see the [upgrade
+ * guide](https://workday.github.io/canvas-kit/?path=/story/welcome-upgrade-guides-v8-0--page) for
+ * more information.
+ *
+ * Undocumented props are spread to the underlying `<li>` element.
+ *
+ * @deprecated
+ */
+export class DeprecatedMenuItem extends React.Component<DeprecatedMenuItemProps> {
   ref = React.createRef<HTMLLIElement>();
 
-  componentDidUpdate = (prevProps: MenuItemProps) => {
+  componentDidMount() {
+    console.warn(
+      `This component is being deprecated and will be removed in Canvas Kit V9.\n
+      For more information, please see the V8 upgrade guide:\n
+      https://workday.github.io/canvas-kit/?path=/story/welcome-upgrade-guides-v8-0--page
+      `
+    );
+  }
+
+  componentDidUpdate = (prevProps: DeprecatedMenuItemProps) => {
     if (!prevProps.isFocused && this.props.isFocused) {
       if (this.ref.current) {
         scrollIntoViewIfNeeded(this.ref.current);
@@ -248,7 +291,7 @@ class MenuItem extends React.Component<MenuItemProps> {
     }
   };
 
-  render(): React.ReactNode {
+  render() {
     const {
       onClick,
       children,
@@ -258,6 +301,7 @@ class MenuItem extends React.Component<MenuItemProps> {
       hasDivider,
       isDisabled,
       isFocused,
+      isHeader,
       role,
       ...elemProps
     } = this.props;
@@ -267,16 +311,18 @@ class MenuItem extends React.Component<MenuItemProps> {
 
     return (
       <>
-        {hasDivider && <Divider />}
+        {hasDivider && <Divider aria-hidden="true" />}
         <Item
           ref={this.ref}
           tabIndex={-1}
           id={id}
-          role={role}
+          role={isHeader ? 'presentation' : role}
+          aria-hidden={isHeader ? true : undefined}
           onClick={this.handleClick}
           aria-disabled={isDisabled ? true : undefined}
           isDisabled={!!isDisabled}
           isFocused={!!isFocused}
+          isHeader={!!isHeader}
           {...elemProps}
         >
           {icon && iconProps && <StyledSystemIcon {...iconProps} />}
@@ -306,9 +352,7 @@ class MenuItem extends React.Component<MenuItemProps> {
  */
 // TODO: Remove this ts-ignore when we convert to a functional component
 // @ts-ignore
-MenuItem.defaultProps = {
+DeprecatedMenuItem.defaultProps = {
   shouldClose: true,
   role: 'menuitem',
 };
-
-export default MenuItem;

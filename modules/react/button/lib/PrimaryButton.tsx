@@ -11,7 +11,7 @@ import {
 import {colors} from '@workday/canvas-kit-react/tokens';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {ButtonSizes, IconPositions} from './types';
-import {BaseButton, getMinWidthStyles, getPaddingStyles} from './BaseButton';
+import {BaseButton, BaseButtonProps, getMinWidthStyles, getPaddingStyles} from './BaseButton';
 
 const getPrimaryButtonColors = (variant: 'inverse' | undefined, theme: EmotionCanvasTheme) => {
   const {
@@ -85,17 +85,14 @@ const getPrimaryButtonColors = (variant: 'inverse' | undefined, theme: EmotionCa
   }
 };
 
-export interface PrimaryButtonProps extends Themeable, GrowthBehavior {
+export interface PrimaryButtonProps extends Themeable, GrowthBehavior, BaseButtonProps {
   /**
    * The variant of the PrimaryButton.
-   * @default undefined
    */
   variant?: 'inverse';
   /**
    * There are four button sizes: `extraSmall`, `small`, `medium`, and `large`.
    * If no size is provided, it will default to `medium`.
-   *
-   * @default 'medium'
    */
   size?: ButtonSizes;
   /**
@@ -106,17 +103,24 @@ export interface PrimaryButtonProps extends Themeable, GrowthBehavior {
   /**
    * Button icon positions can either be `start` or `end`.
    * If no value is provided, it defaults to `start`.
-   * @default 'start'
    */
   iconPosition?: IconPositions;
   /**
    * If set to `true`, transform the icon's x-axis to mirror the graphic
-   * @default false
    */
   shouldMirrorIcon?: boolean;
   children?: React.ReactNode;
 }
 
+/**
+ * Primary Buttons are high emphasis. Use once per screen to draw attention to the highest priority
+ * action. Multiple primary buttons make it confusing for the user to understand what action they
+ * should take. Not all screens require a Primary Button.
+ *
+ * Primary Buttons have four sizes: `extraSmall`, `small`, `medium`, and `large`. Icons are
+ * supported for every size and can be positioned at the `start` or `end` with the `iconPosition`
+ * prop.
+ */
 export const PrimaryButton = createComponent('button')({
   displayName: 'PrimaryButton',
   Component: (

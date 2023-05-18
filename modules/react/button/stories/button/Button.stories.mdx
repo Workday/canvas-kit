@@ -1,4 +1,4 @@
-import {Meta, Story} from '@storybook/addon-docs';
+import {Specifications, SymbolDoc, SymbolDescription} from '@workday/canvas-kit-docs';
 
 import {
   PrimaryButton,
@@ -6,7 +6,6 @@ import {
   TertiaryButton,
   DeleteButton,
 } from '@workday/canvas-kit-react/button';
-import {Specifications} from '@workday/canvas-kit-docs';
 
 import {Primary} from './examples/Primary';
 import {PrimaryInverse} from './examples/PrimaryInverse';
@@ -15,8 +14,9 @@ import {SecondaryInverse} from './examples/SecondaryInverse';
 import {Tertiary} from './examples/Tertiary';
 import {TertiaryInverse} from './examples/TertiaryInverse';
 import {Delete} from './examples/Delete';
+import {CustomStyles} from './examples/CustomStyles';
 
-<Meta title="Components/Buttons/Button/React" />
+<Meta title="Components/Buttons" />
 
 # Canvas Kit Button
 
@@ -34,15 +34,10 @@ yarn add @workday/canvas-kit-react
 
 ### PrimaryButton
 
+<SymbolDescription name="PrimaryButton" fileName="/react/" />
+
 Here is a basic example of a Primary Button. Buttons can be customized with several props to change
 the size, add an icon, etc.
-
-Primary Buttons are high emphasis. Use once per screen to draw attention to the highest priority
-action. Multiple primary buttons make it confusing for the user to understand what action they
-should take. Not all screens require a Primary Button.
-
-Primary Buttons have four sizes: `extraSmall`, `small`, `medium`, and `large`. Icons are supported
-for every size and can be positioned at the `start` or `end` with the `iconPosition` prop.
 
 <ExampleCodeBlock code={Primary} />
 
@@ -52,20 +47,13 @@ when you need to place a Primary Button on a dark or colorful background such as
 
 <ExampleCodeBlock code={PrimaryInverse} />
 
-#### Props
+#### Component API
 
-Undocumented props are spread to the underlying `<button>` element.
-
-<ArgsTable of={PrimaryButton} />
+<SymbolDoc name="PrimaryButton" fileName="/react/" hideHeading hideDescription headingStart={4} />
 
 ### SecondaryButton
 
-Secondary Buttons have a medium level of emphasis. Use them for non-critical actions. Secondary
-Buttons can be used on most pages without restrictions and work well for multiple actions of equal
-weight. They can be used in conjunction with a Primary Button or independently.
-
-Secondary Buttons have four sizes: `extraSmall`, `small`, `medium`, and `large`. Icons are supported
-for every size and can be positioned at the `start` or `end` with the `iconPosition` prop.
+<SymbolDescription name="SecondaryButton" fileName="/react/" />
 
 <ExampleCodeBlock code={Secondary} />
 
@@ -74,21 +62,13 @@ on a dark or colorful background such as `blueberry400`.
 
 <ExampleCodeBlock code={SecondaryInverse} />
 
-#### Props
+#### Component API
 
-Undocumented props are spread to the underlying `<button>` element.
-
-<ArgsTable of={SecondaryButton} />
+<SymbolDoc name="SecondaryButton" fileName="/react/" hideHeading hideDescription headingStart={4} />
 
 ### TertiaryButton
 
-Tertiary Buttons have the lowest emphasis (before Icon Buttons). Use for less important actions that
-the user may not often be looking to do. Tertiary Buttons have lower prominence as its container is
-not visible until it is interacted with. Use Tertiary Buttons for supplemental actions such as “View
-More”, “Read More” or “Select a File”. Tertiary Buttons are frequently used on Cards.
-
-Tertiary Buttons have three sizes: `extraSmall`, `small`, and `medium`. Icons are supported for
-every size and can be positioned at the `start` or `end` with the `iconPosition` prop.
+<SymbolDescription name="TertiaryButton" fileName="/react/" />
 
 <ExampleCodeBlock code={Tertiary} />
 
@@ -97,25 +77,28 @@ on a dark or colorful background such as `blueberry400`.
 
 <ExampleCodeBlock code={TertiaryInverse} />
 
-#### Props
+#### Component API
 
-Undocumented props are spread to the underlying `<button>` element.
-
-<ArgsTable of={TertiaryButton} />
+<SymbolDoc name="TertiaryButton" fileName="/react/" hideHeading hideDescription headingStart={4} />
 
 ### DeleteButton
 
-Use sparingly for destructive actions that will result in data loss, can’t be undone, or will have
-significant consequences. They commonly appear in confirmation dialogs as the final confirmation
-before deleting.
+<SymbolDescription name="DeleteButton" fileName="/react/" />
 
 <ExampleCodeBlock code={Delete} />
 
-#### Props
+#### Component API
 
-Undocumented props are spread to the underlying `<button>` element.
+<SymbolDoc name="DeleteButton" fileName="/react/" hideHeading hideDescription headingStart={4} />
 
-<ArgsTable of={DeleteButton} />
+### Custom Styles
+
+We understand that there are instances in which consumers might need to adjust styles for specific
+use cases. All of our buttons extend our lower level base button props which extends style
+properties that come from `Box`. Below are some examples in which you can overwrite styles for all
+of our buttons. Please use this sparingly and try to adhere to the design system.
+
+<ExampleCodeBlock code={CustomStyles} />
 
 ### Accessible Use of the `as` Prop
 

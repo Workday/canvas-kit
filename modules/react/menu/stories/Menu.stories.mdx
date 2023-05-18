@@ -1,11 +1,11 @@
-import {Specifications} from '@workday/canvas-kit-docs';
+import {SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
 import {Menu} from '@workday/canvas-kit-react/menu';
 
 import {Basic} from './examples/Basic';
 import {ContextMenu} from './examples/ContextMenu';
 import {Icons} from './examples/Icons';
 
-<Meta title="Components/Popups/Menu/React" component={Menu} />
+<Meta title="Components/Popups/Menu" component={Menu} />
 
 # Canvas Kit Menu
 
@@ -50,74 +50,18 @@ using roving tabindex. Below is table of supported keyboard shortcuts and associ
 
 ### Icons
 
+Menu supports more complex children, including icons, but the text of the item will no longer be
+known. In this case, add a `data-text` attribute to inform the collection system what the text of
+the item is. The text is used for components that filter based on text. For example, a Select
+component will jump to an item based on the keys the user types. If the user types "C", the
+component will jump to the first item that starts with a "C". This functionality requires knowledge
+about the text of the item.
+
 <ExampleCodeBlock code={Icons} />
 
-## Components
+## Component API
 
-### Menu
-
-### Usage
-
-`Menu` is a combination of as popup and a list. It usually has some type of target element that
-expands/collapses the menu and a `menu` role and and several `menuitem` roles. Focus is managed uses
-[roving tabindex](https://w3c.github.io/aria-practices/#kbd_roving_tabindex) for maximum
-compatibility. A `Menu` can have two modes: `single` and `multiple`. This mode determines both how
-many items can be selected as well as the default behavior when a menuitem is clicked. For the
-`single` mode, selecting a `menuitem` will select and close the menu. For the `multiple` mode,
-clicking a `menuitem` will toggle selection and will not close the menu.
-
-#### Props
-
-<ArgsTable of={Menu} />
-
-#### Usage
-
-Like all compound components, the `Menu` component is a container component. It is responsible for
-putting a `MenuModel` in the React context for all the menu subcomponents. You can either pass this
-component model config or a "hoisted" model.
-
-With model config:
-
-```tsx
-<Menu mode="multiple">{/* Child components */}</Menu>
-```
-
-With a hoisted model:
-
-```tsx
-const model = useMenuModel({
-  mode: 'multiple',
-});
-
-// we now have access to `model.state` and `model.events`
-
-<Menu model={model}>{/* Child components */}</Menu>;
-```
-
-### Menu.Target
-
-#### Usage
-
-`Menu.Target` is similar to all `Popup.Target` types. The component only provides behavior and no
-styling. The `as` prop is used to determine which component is rendered. This component should
-forward the `ref` and apply any additional props directly to an element. The default `as` is a
-`SecondaryButton`. Any Canvas Kit component should work with an `as`.
-
-An example changing to a `PrimaryButton`
-
-```tsx
-<Menu.Target as={PrimaryButton}>Primary Button Text</Menu.Target>
-```
-
-This element will apply `aria-haspopup` and `aria-expanded` to inform screen readers there's a popup
-associated with the element.
-
-#### Props
-
-Undocumented props are spread to the element provided by the `as` which is a `SecondaryButton` by
-default.
-
-<ArgsTable of={Menu.Target} />
+<SymbolDoc name="Menu" fileName="/react/" />
 
 ## Specifications
 

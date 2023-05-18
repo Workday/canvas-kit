@@ -9,7 +9,7 @@ const customElementStyles = {
   fontSize: 14,
 };
 
-storiesOf('Components/Buttons/Button/React/Toolbar', module)
+storiesOf('Components/Buttons/Toolbar', module)
   .addParameters({component: ToolbarIconButton})
   .addParameters({ReadmePath: 'react/button'})
   .add('Toolbar Icon Button', () => {

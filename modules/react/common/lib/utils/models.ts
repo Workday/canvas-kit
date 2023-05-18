@@ -1,6 +1,9 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React from 'react';
 
+/**
+ * @deprecated The returned model is now inferred from `createModelHook`
+ */
 export type Model<State, Events extends IEvent> = {
   state: State;
   events: Events;
@@ -60,6 +63,8 @@ type ToCallbackConfig<
  *   // additional config your model requires goes here
  *   id?: string
  * } & Partial<ToModelConfig<State, Events, typeof eventMap>>
+ *
+ * @deprecated `createModelHook` now infers the config type
  */
 export type ToModelConfig<
   TState extends Record<string, any>,
@@ -91,6 +96,8 @@ export type ToModelConfig<
  *     onOpen: 'open'
  *   }
  * })
+ *
+ * @deprecated `createModelHook` uses Template Literal Types to create event map types
  */
 export const createEventMap = <TEvents extends IEvent>() => <
   TGuardMap extends Record<string, keyof TEvents>,
@@ -124,6 +131,7 @@ const keys = <T extends object>(input: T) => Object.keys(input) as (keyof T)[];
  *     }
  *   }
  * })
+ * @deprecated Use `createModelHook` instead
  */
 export const useEventMap = <
   TEvents extends IEvent,
@@ -225,7 +233,7 @@ export type ModelExtras<TDefaultConfig, TRequiredConfig, TState, TEvents, TModel
   /**
    * This is only a type and not a value. If you want to
    */
-  TConfig: TDefaultConfig & TRequiredConfig;
+  TConfig: Partial<TDefaultConfig> & TRequiredConfig & ToEventConfig<TState, TEvents>;
   /**
    * The context of the model. This can be used directly, but is mostly used internally by
    * `createContainer` or `createSubcomponent` to handle model context automatically.
@@ -268,7 +276,7 @@ export type ModelExtras<TDefaultConfig, TRequiredConfig, TState, TEvents, TModel
    * ```
    */
   mergeConfig: (
-    source: TDefaultConfig & TRequiredConfig,
+    source: Partial<TDefaultConfig> & TRequiredConfig,
     target: Partial<
       TDefaultConfig & TRequiredConfig & ToEventConfig<TState, TEvents>
     >
@@ -308,16 +316,19 @@ export type ModelFn<
  * }
  * ```
  */
+// We use the bivariance hack so models can be considered compatible even if the guard and callbacks
+// contain `state` that are incompatible. More info:
+// https://github.com/damianc/dev-notes/blob/master/typescript/bivariance-hack.md
 export type ToEventConfig<TState, TEvents extends Record<string, any>> = {
-  [K in keyof TEvents as `on${Capitalize<string & K>}`]?: (
+  [K in keyof TEvents as `on${Capitalize<string & K>}`]?: {bivarianceHack(
     data: Parameters<TEvents[K]>[0],
     prevState: TState
-  ) => void;
+  ): void}['bivarianceHack'];
 } & {
-  [K in keyof TEvents as `should${Capitalize<string & K>}`]?: (
+  [K in keyof TEvents as `should${Capitalize<string & K>}`]?: {bivarianceHack(
     data: Parameters<TEvents[K]>[0],
     state: TState
-  ) => boolean;
+  ): boolean}['bivarianceHack'];
 };
 
 function capitalize(string: string) {
@@ -502,10 +513,10 @@ export const createModelHook = <TDefaultConfig extends {}, TRequiredConfig exten
     const elemProps = {};
     for (const key in props) {
       if (
-        !defaultConfig.hasOwnProperty(key) &&
+        (!defaultConfig.hasOwnProperty(key) &&
         !requiredConfig.hasOwnProperty(key) &&
         !callbacksRef.current.includes(key) &&
-        !guardsRef.current.includes(key)
+        !guardsRef.current.includes(key)) || key === 'id'
       ) {
         // @ts-ignore  Typescript complains about index signatures and this type is never exposed in definitions, so suppress the error
         elemProps[key] = props[key];
@@ -577,7 +588,8 @@ export const createModelHook = <TDefaultConfig extends {}, TRequiredConfig exten
       }, {} as Record<string, any>);
     }, []);
 
-    return { state, events: wrappedEvents, ...rest };
+  // The model context is private and should never be used
+    return { state, events: wrappedEvents, __UNSTABLE_modelContext: Context, ...rest };
   }
 
   wrappedModelHook.getElemProps = getElemProps;

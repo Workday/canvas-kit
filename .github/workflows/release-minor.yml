@@ -1,0 +1,37 @@
+name: 'Minor Release'
+on:
+  workflow_dispatch:
+
+jobs:
+  release-minor:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout master
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+          fetch-depth: 0 # Needed to do a proper push
+          ref: master # Release job only works on master
+
+      - name: Pull minor changes
+        run: git pull origin prerelease/minor
+
+      - uses: Workday/canvas-kit-actions/install@v1
+        with:
+          node_version: 16.x
+
+      - uses: Workday/canvas-kit-actions/release@v1
+        with:
+          gh_token: ${{ secrets.GITHUB_TOKEN }}
+          gh_rw_token: ${{ secrets.GH_RW_TOKEN }}
+          publish_token: ${{ secrets.NPM_CI_PUBLISH_TOKEN }}
+          chromatic_project_token: ${{ secrets.CHROMATIC_APP_CODE }}
+          version: 'minor'
+
+      - uses: Workday/canvas-kit-actions/report-failure@v1
+        if: failure()
+        with:
+          slackWebhook: ${{ secrets.SLACK_WEBHOOK }}
+          slackMessage: |
+            Minor Release job failed. Please check error logs.

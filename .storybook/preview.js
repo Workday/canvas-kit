@@ -15,19 +15,26 @@ const prefix = (phrase, prefix) => (/** @type {string} */ value) => {
   return index > -1 ? value.substr(0, index) + prefix + value.substr(index) : value;
 };
 const pipe = (...fns) => value => fns.reduce((result, fn) => fn(result), value);
-
 function storySort(a, b) {
   const prefixFn = pipe(
     prefix('welcome-', '0'),
-    prefix('getting-started', 'a'),
-    prefix('tokens-', '1'),
-    prefix('components-', '2'),
-    prefix('preview-', '3'),
-    prefix('labs-', '4'),
+    prefix('guides-', '1'),
+    prefix('guides-getting-started', '1'),
+    prefix('features-', '2'),
+    prefix('tokens-', '3'),
+    prefix('overview', 'a'),
+    prefix('components-', '4'),
+    prefix('hooks-and-utilities-', '5'),
+    prefix('preview-', '6'),
+    prefix('labs-', '7'),
+    prefix('assets-', '8'),
+    prefix('overview', 'a'),
+    prefix('css-', 'zzzz'),
+    prefix('css-overview-page', 'zzza'),
     prefix('basic', 'aa'),
     prefix('default', 'ab'),
-    prefix('visual-testing', 'zz'),
-    prefix('examples', 'zzz')
+    prefix('testing', 'zzz'),
+    prefix('examples', 'zz')
   );
 
   const left = prefixFn(a[0]);
@@ -61,5 +68,10 @@ export const parameters = {
       control: 'object',
       defaultValue: defaultCanvasTheme,
     },
+  },
+
+  // Make stories available to our internal code sandbox tool
+  tesseract: {
+    enable: true,
   },
 };

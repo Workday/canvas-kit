@@ -4,6 +4,8 @@ import {buildPageRange} from './buildPageRange';
 import {getRangeMax, getRangeMin} from './common/utils/helpers';
 import {PaginationModel} from './types';
 
+export const PaginationContext = React.createContext({} as PaginationModel);
+
 export type UsePaginationModelConfig = {
   /**
    * The page number for the last page (it can also be used as a total page
@@ -31,18 +33,16 @@ export type UsePaginationModelConfig = {
   rangeSize?: number;
 };
 
-export const usePaginationModel = ({
-  firstPage = 1,
-  initialCurrentPage = 1,
-  lastPage,
-  rangeSize = 5,
-  onPageChange,
-}: UsePaginationModelConfig): PaginationModel => {
+export const usePaginationModel = (config: UsePaginationModelConfig): PaginationModel => {
+  const {firstPage = 1, initialCurrentPage = 1, lastPage, rangeSize = 5, onPageChange} = config;
   const [currentPage, setCurrentPage] = React.useState(initialCurrentPage);
 
   const changePage = (page: number) => {
-    onPageChange?.(page);
-
+    // Don't fire an `onPageChange` event if the page number is the same as the current page.
+    // `setCurrentPage` doesn't need this check, because React won't update the state if the values are the same.
+    if (currentPage !== page) {
+      onPageChange?.(page);
+    }
     setCurrentPage(page);
   };
 

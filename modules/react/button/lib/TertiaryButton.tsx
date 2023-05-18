@@ -11,25 +11,21 @@ import {
 import {borderRadius, colors, space} from '@workday/canvas-kit-react/tokens';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {ButtonColors, IconPositions, ButtonSizes} from './types';
-import {BaseButton} from './BaseButton';
+import {BaseButton, BaseButtonProps} from './BaseButton';
 
-export interface TertiaryButtonProps extends Themeable {
+export interface TertiaryButtonProps extends Themeable, BaseButtonProps {
   /**
    * The variant of the TertiaryButton.
-   * @default undefined
    */
   variant?: 'inverse' | undefined;
   /**
-   * There are three button sizes: `extraSmall`, `small`, and `medium`.
+   * There are four button sizes: `extraSmall`, `small`, `medium`, and `large`.
    * If no size is provided, it will default to `medium`.
-   *
-   * @default 'medium'
    */
   size?: ButtonSizes;
   /**
    * Button icon positions can either be `start` or `end`.
    * If no value is provided, it defaults to `start`.
-   * @default 'start'
    */
   iconPosition?: IconPositions;
   /**
@@ -41,17 +37,23 @@ export interface TertiaryButtonProps extends Themeable {
    */
   /**
    * If set to `true`, transform the icon's x-axis to mirror the graphic
-   * @default false
    */
   shouldMirrorIcon?: boolean;
+  /**
+   * If set to `true`, transform text to all letters uppercase
+   */
   allCaps?: boolean;
   children?: React.ReactNode;
+  /**
+   * If set to `true`, make icon button available to use theme colors instead of default
+   */
+  isThemeable?: boolean;
 }
 
 const getTertiaryButtonColors = (
   variant: 'inverse' | undefined,
   theme: EmotionCanvasTheme,
-  children: React.ReactNode
+  hasThemeStyles: boolean
 ): ButtonColors => {
   const {
     canvas: {
@@ -99,27 +101,27 @@ const getTertiaryButtonColors = (
   } else {
     return {
       default: {
-        icon: children ? themePrimary.main : colors.blackPepper400,
+        icon: hasThemeStyles ? themePrimary.main : colors.blackPepper400,
         label: themePrimary.main,
       },
       hover: {
         background: colors.soap200,
-        icon: children ? themePrimary.dark : colors.blackPepper500,
+        icon: hasThemeStyles ? themePrimary.dark : colors.blackPepper500,
         label: themePrimary.dark,
       },
       active: {
         background: colors.soap300,
-        icon: children ? themePrimary.dark : colors.blackPepper500,
+        icon: hasThemeStyles ? themePrimary.dark : colors.blackPepper500,
         label: themePrimary.dark,
       },
       focus: {
-        icon: children ? themePrimary.main : colors.blackPepper500,
+        icon: hasThemeStyles ? themePrimary.main : colors.blackPepper500,
         label: themePrimary.main,
         focusRing: focusRing({innerColor: colors.blueberry400}, theme),
       },
       disabled: {
         background: 'transparent',
-        icon: children ? themePrimary.main : colors.blackPepper400,
+        icon: hasThemeStyles ? themePrimary.main : colors.blackPepper400,
         label: themePrimary.main,
       },
     };
@@ -191,34 +193,44 @@ const getMinWidthStyles = (children: React.ReactNode, size: ButtonSizes): string
   return children ? 'auto' : minWidthNum;
 };
 
+/**
+ * Tertiary Buttons have the lowest emphasis. Use for less important actions that the user may not
+ * often be looking to do. Tertiary Buttons have lower prominence as its container is not visible
+ * until it is interacted with. Use Tertiary Buttons for supplemental actions such as “View More”,
+ * “Read More” or “Select a File”. Tertiary Buttons are frequently used on Cards.
+ *
+ * Tertiary Buttons have four sizes: `extraSmall`, `small`, `medium` and `large`. Icons are
+ * supported for every size and can be positioned at the `start` or `end` with the `iconPosition`
+ * prop.
+ */
 export const TertiaryButton = createComponent('button')({
   displayName: 'TertiaryButton',
   Component: (
     {
       size = 'medium',
       iconPosition = 'start',
+      isThemeable = false,
       variant,
       children,
       icon,
       shouldMirrorIcon = false,
-      allCaps,
       ...elemProps
     }: TertiaryButtonProps,
     ref,
     Element
   ) => {
     const theme = useTheme();
+    const hasThemeStyles = !!children || isThemeable;
 
     return (
       <StyledTertiaryButtonContainer
         ref={ref}
         as={Element}
-        allCaps={allCaps}
-        colors={getTertiaryButtonColors(variant, theme, children)}
+        colors={getTertiaryButtonColors(variant, theme, hasThemeStyles)}
         size={size}
         padding={getPaddingStyles(icon, iconPosition, children, size)}
         minWidth={getMinWidthStyles(children, size)}
-        style={{borderRadius: children ? borderRadius.m : borderRadius.circle}}
+        borderRadius={children ? borderRadius.m : borderRadius.circle}
         {...elemProps}
       >
         {icon && iconPosition === 'start' && (

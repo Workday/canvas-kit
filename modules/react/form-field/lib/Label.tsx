@@ -15,7 +15,7 @@ export interface LabelProps extends FormFieldLabelPositionBehavior {
    */
   isLegend?: boolean;
   /**
-   * The id of a labelable form-related element. Synonymous with `for`.
+   * The id of the form-related element. Synonymous with `for`.
    */
   htmlFor?: string;
   /**
@@ -24,8 +24,9 @@ export interface LabelProps extends FormFieldLabelPositionBehavior {
    */
   required?: boolean;
   /**
-   * The title of the required label.
-   * @default required
+   * The required label is not visible to screen readers and should have no label. This prop will be
+   * ignored.
+   * @deprecated
    */
   requiredLabel?: string;
   /**
@@ -62,7 +63,7 @@ const labelStyles = [
   },
 ];
 
-const RequiredAstrisk = styled('abbr')({
+const RequiredAsterisk = styled('abbr')({
   color: colors.cinnamon500,
   fontSize: '16px',
   fontWeight: 400,
@@ -72,8 +73,6 @@ const RequiredAstrisk = styled('abbr')({
 });
 
 // Used inside the fieldset component instead of a label for accessible radio groups.
-// Extra `width: 100%` style is to help IE11 wrap text properly in a top-positioned
-// FormField's legend element.
 const LegendComponent = styled('legend')<LabelProps>(...labelStyles, ({labelPosition}) => {
   if (labelPosition === Label.Position.Top) {
     return {
@@ -86,25 +85,26 @@ const LegendComponent = styled('legend')<LabelProps>(...labelStyles, ({labelPosi
     width: 'auto',
   };
 });
+
 const LabelComponent = styled('label')<LabelProps>(...labelStyles);
 
-class Label extends React.Component<LabelProps> {
+class Label extends React.Component<React.PropsWithChildren<LabelProps>> {
   static Position = FormFieldLabelPosition;
 
   public render() {
     const {
       labelPosition = Label.Position.Top,
       isLegend = false,
-      requiredLabel = 'required',
+      required,
       ...elemProps
     } = this.props;
-    const children = !this.props.required
+    const children = !required
       ? this.props.children
       : [
           this.props.children,
-          <RequiredAstrisk key={'0'} title={requiredLabel}>
+          <RequiredAsterisk key={'0'} aria-hidden>
             *
-          </RequiredAstrisk>,
+          </RequiredAsterisk>,
         ];
     return (
       <>
@@ -125,4 +125,4 @@ class Label extends React.Component<LabelProps> {
 
 Label.Position = FormFieldLabelPosition;
 
-export default Label;
+export {Label};

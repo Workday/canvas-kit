@@ -2,25 +2,19 @@ import * as React from 'react';
 
 import {commonColors, colors, space} from '@workday/canvas-kit-react/tokens';
 import {
-  composeHooks,
   createSubcomponent,
   ExtractProps,
+  getTheme,
   styled,
   StyledType,
 } from '@workday/canvas-kit-react/common';
-import {HStack} from '@workday/canvas-kit-react/layout';
-import {
-  useOverflowListMeasure,
-  useListRenderItems,
-  useListResetCursorOnBlur,
-} from '@workday/canvas-kit-react/collection';
+import {Flex} from '@workday/canvas-kit-react/layout';
+import {useOverflowListMeasure, useListRenderItems} from '@workday/canvas-kit-react/collection';
 
 import {useActionBarModel} from './useActionBarModel';
-import {ActionBar} from './ActionBar';
 
-// Use `Partial` here to make `spacing` optional
-export interface ActionBarListProps<T = unknown>
-  extends Partial<ExtractProps<typeof HStack, never>> {
+export interface ActionBarListProps<T = any>
+  extends Omit<ExtractProps<typeof Flex, never>, 'children'> {
   /**
    * If items are passed to a `ActionBarModel`, the child of `ActionBar.List` should be a render prop. The
    * List will determine how and when the item will be rendered.
@@ -30,29 +24,41 @@ export interface ActionBarListProps<T = unknown>
    *   {(item) => <ActionBar.Item key={item.id} name={item.name}>{item.text}</ActionBar.Item>}
    * </ActionBar.List>
    */
-  children: ((item: T) => React.ReactNode) | React.ReactNode;
+  children: ((item: T, index: number) => React.ReactNode) | React.ReactNode;
+  /**
+   * `ActionBar.List` will render overflow button component if  it's passed in `overflowButton`.
+   *
+   * @example
+   * <ActionBar.List overflowButton={<ActionBar.OverflowButton aria-label="More actions" />}>
+   *   {(item) => <ActionBar.Item>{item.text}</ActionBar.Item>}
+   * </ActionBar.List>
+   */
+  overflowButton?: React.ReactNode;
 }
 
-const ResponsiveHStack = styled(HStack)<ActionBarListProps & StyledType>(({theme}) => ({
-  [theme.canvas.breakpoints.down('s')]: {
-    padding: space.s,
-    '> *': {
-      flex: 1,
+const ResponsiveList = styled(Flex)<ActionBarListProps & StyledType>(({theme}) => {
+  const {canvas: canvasTheme} = getTheme(theme);
+  return {
+    [canvasTheme.breakpoints.down('s')]: {
+      padding: space.s,
+      '> *': {
+        flex: 1,
+      },
     },
-  },
-}));
+  };
+});
 
-export const useActionBarList = composeHooks(useOverflowListMeasure, useListResetCursorOnBlur);
+export const useActionBarList = useOverflowListMeasure;
 
 export const ActionBarList = createSubcomponent('div')({
   displayName: 'ActionBar.List',
   modelHook: useActionBarModel,
   elemPropsHook: useActionBarList,
-})<ActionBarListProps>(({children, ...elemProps}, Element, model) => {
+})<ActionBarListProps>(({children, overflowButton, ...elemProps}, Element, model) => {
   return (
-    <ResponsiveHStack
+    <ResponsiveList
       as={Element}
-      spacing="s"
+      gap="s"
       depth={1}
       background={commonColors.background}
       borderTop={`solid 1px ${colors.soap400}`}
@@ -64,7 +70,7 @@ export const ActionBarList = createSubcomponent('div')({
       {...elemProps}
     >
       {useListRenderItems(model, children)}
-      <ActionBar.OverflowButton />
-    </ResponsiveHStack>
+      {overflowButton}
+    </ResponsiveList>
   );
 });

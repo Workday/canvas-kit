@@ -1,7 +1,6 @@
 import {keyframes, Theme, CSSObject} from '@emotion/react';
-import canvas from '@workday/canvas-kit-react/tokens';
+import {canvas} from '@workday/canvas-kit-react/tokens';
 import {defaultCanvasTheme} from '../theming/index';
-import memoize from 'lodash/memoize';
 
 interface FocusRingOptions {
   width?: number;
@@ -16,7 +15,6 @@ interface FocusRingOptions {
   inset?: 'inner' | 'outer';
   innerColor?: string;
   outerColor?: string;
-  memoize?: boolean;
 }
 
 function calculateFocusRing({
@@ -62,8 +60,6 @@ function calculateFocusRing({
   return {boxShadow};
 }
 
-export const memoizedFocusRing = memoize(calculateFocusRing, (...args) => JSON.stringify(args));
-
 /**
  * A utility to create a canvas style focus ring around your widget.
  * By default, this mixin will create a 2px focus ring tightly wrapped
@@ -96,7 +92,6 @@ export function focusRing(options: FocusRingOptions = {}, theme?: Theme): CSSObj
     outerColor = theme && theme.canvas
       ? theme.canvas.palette.common.focusOutline
       : defaultCanvasTheme.palette.common.focusOutline,
-    memoize = true,
     inset,
   } = options;
 
@@ -108,10 +103,6 @@ export function focusRing(options: FocusRingOptions = {}, theme?: Theme): CSSObj
     animate,
     inset,
   };
-
-  if (memoize) {
-    return memoizedFocusRing(args);
-  }
 
   return calculateFocusRing(args);
 }

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Radio, {RadioProps} from './Radio';
+import {Radio, RadioProps} from './Radio';
 import {borderRadius, space} from '@workday/canvas-kit-react/tokens';
 import {
   ErrorType,
@@ -42,8 +42,12 @@ const Container = styled('div')<Pick<RadioGroupProps, 'error' | 'grow' | 'theme'
     margin: `-${space.xxxs} -${space.xs}`,
     '& > div': {
       margin: `${space.xxs} ${space.zero}`,
+      alignItems: 'flex-start',
+      '> div': {
+        flex: '0 0 auto',
+      },
       '&:first-of-type': {
-        marginTop: space.xxxs,
+        marginTop: '6px',
       },
       '&:last-child': {
         marginBottom: space.xxxs,
@@ -63,7 +67,7 @@ const Container = styled('div')<Pick<RadioGroupProps, 'error' | 'grow' | 'theme'
   }
 );
 
-class RadioGroup extends React.Component<RadioGroupProps> {
+export class RadioGroup extends React.Component<RadioGroupProps> {
   static ErrorType = ErrorType;
 
   render(): React.ReactNode {
@@ -116,5 +120,3 @@ class RadioGroup extends React.Component<RadioGroupProps> {
 }
 
 RadioGroup.ErrorType = ErrorType;
-
-export default RadioGroup;

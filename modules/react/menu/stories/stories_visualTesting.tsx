@@ -1,18 +1,19 @@
 import React from 'react';
 
-import {CanvasProvider, ContentDirection, StaticStates} from '@workday/canvas-kit-react/common';
+import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
+import {StaticStates} from '@workday/canvas-kit-react/testing';
 import {saveAsIcon} from '@workday/canvas-system-icons-web';
 
 import {customColorTheme, withSnapshotsEnabled} from '../../../../utils/storybook';
 
 // unreleased path
 import {Menu} from '@workday/canvas-kit-react/menu';
-import {HStack} from '@workday/canvas-kit-react/layout';
+import {Flex} from '@workday/canvas-kit-react/layout';
 
 const fontDelay = 150; // best guess for the font delay to prevent incorrect Chromatic regressions
 
 export default {
-  title: 'Testing/React/Popups/Menu',
+  title: 'Testing/Popups/Menu',
   component: Menu,
   parameters: {
     chromatic: {
@@ -67,7 +68,7 @@ const AllStates = () => (
 export const MenuStates = withSnapshotsEnabled(() => {
   return (
     <StaticStates>
-      <HStack spacing="xs">
+      <Flex gap="xs">
         <div>
           <h3>Normal</h3>
           <AllStates />
@@ -84,7 +85,7 @@ export const MenuStates = withSnapshotsEnabled(() => {
             <AllStates />
           </CanvasProvider>
         </div>
-      </HStack>
+      </Flex>
     </StaticStates>
   );
 });

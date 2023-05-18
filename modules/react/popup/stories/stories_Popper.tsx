@@ -4,10 +4,10 @@ import {PrimaryButton, SecondaryButton} from '@workday/canvas-kit-react/button';
 import {Popper} from '@workday/canvas-kit-react/popup';
 import {Card} from '@workday/canvas-kit-react/card';
 
-import {HStack} from '@workday/canvas-kit-react/layout';
+import {Flex} from '@workday/canvas-kit-react/layout';
 
 export default {
-  title: 'Components/Popups/Popper/React',
+  title: 'Components/Popups/Popper',
   component: Popper,
   parameters: {
     ReadmePath: 'react/popup',
@@ -43,7 +43,7 @@ export const PopperStory = () => {
           <Card.Body>
             <p>A card positioned by Popper!</p>
             <div style={big ? {width: 500} : {}}></div>
-            <HStack spacing="s">
+            <Flex gap="s">
               <SecondaryButton
                 onClick={() => {
                   setBig(!big);
@@ -55,7 +55,7 @@ export const PopperStory = () => {
                 Toggle size
               </SecondaryButton>
               <SecondaryButton onClick={onClose}>Close</SecondaryButton>
-            </HStack>
+            </Flex>
           </Card.Body>
         </Card>
       </Popper>

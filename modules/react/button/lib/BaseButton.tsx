@@ -12,7 +12,8 @@ import {
   EmotionCanvasTheme,
   StyledType,
 } from '@workday/canvas-kit-react/common';
-import {BoxProps, boxStyleFn} from '@workday/canvas-kit-react/layout';
+import {SystemIconProps} from '@workday/canvas-kit-react/icon';
+import {boxStyleFn} from '@workday/canvas-kit-react/layout';
 import {borderRadius, space, spaceNumbers, type} from '@workday/canvas-kit-react/tokens';
 
 import {ButtonColors, ButtonSizes, IconPositions, TertiaryButtonSizes} from './types';
@@ -20,25 +21,29 @@ import {ButtonColors, ButtonSizes, IconPositions, TertiaryButtonSizes} from './t
 import {CSSObject} from '@emotion/styled';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 
-export interface ButtonContainerProps extends BoxProps, GrowthBehavior {
+export interface ButtonContainerProps extends Partial<SystemIconProps>, GrowthBehavior {
+  /**
+   * Override default colors of a button. The default will depend on the button type
+   */
   colors?: ButtonColors;
   /**
    * There are four button sizes: `extraSmall`, `small`, `medium`, and `large`.
    * If no size is provided, it will default to `medium`.
-   *
-   * @default 'medium'
    */
   size?: ButtonSizes;
-  /**
-   * The ref to the button that the styled component renders.
-   */
-  ref?: React.Ref<HTMLButtonElement>;
   /**
    * Whether the icon should received filled (colored background layer) or regular styles.
    * Corresponds to `toggled` in ToolbarIconButton
    */
   fillIcon?: boolean;
 }
+
+/**
+ * Extends all the style properties from Box to our buttons as well as props from ButtonContainerProps.
+ * We omit `ref` since all of our buttons use `createComponent` and already give access to `ref`.
+ * Use this type to extend and customize any one off buttons that you want full control over styling.
+ */
+export interface BaseButtonProps extends Omit<ButtonContainerProps, 'ref'> {}
 
 function getIconColorSelectors(
   {
@@ -291,7 +296,7 @@ export const BaseButton = createComponent('button')({
   displayName: 'Button',
   Component: ({children, ...elemProps}: ButtonContainerProps, ref, Element) => {
     return (
-      <ButtonContainer as={Element} ref={ref} {...elemProps}>
+      <ButtonContainer as={Element} ref={ref} type="button" {...elemProps}>
         {children}
       </ButtonContainer>
     );

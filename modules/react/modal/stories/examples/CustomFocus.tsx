@@ -1,9 +1,9 @@
 import React from 'react';
 import {Modal, useModalModel} from '@workday/canvas-kit-react/modal';
-import {DeleteButton} from '@workday/canvas-kit-react/button';
-import FormField from '@workday/canvas-kit-react/form-field';
-import TextInput from '@workday/canvas-kit-react/text-input';
-import {HStack, Box} from '@workday/canvas-kit-react/layout';
+import {PrimaryButton} from '@workday/canvas-kit-react/button';
+import {FormField} from '@workday/canvas-kit-react/form-field';
+import {TextInput} from '@workday/canvas-kit-react/text-input';
+import {Flex, Box} from '@workday/canvas-kit-react/layout';
 
 export const CustomFocus = () => {
   const ref = React.useRef<HTMLInputElement>(null);
@@ -12,31 +12,31 @@ export const CustomFocus = () => {
     initialFocusRef: ref,
   });
 
-  const handleDelete = () => {
-    console.log('Deleted item');
+  const handleAcknowledge = () => {
+    console.log('Acknowledged license');
   };
 
   return (
     <Modal model={model}>
-      <Modal.Target as={DeleteButton}>Delete Item</Modal.Target>
+      <Modal.Target as={PrimaryButton}>Acknowledge License</Modal.Target>
       <Modal.Overlay>
         <Modal.Card>
           <Modal.CloseIcon aria-label="Close" />
-          <Modal.Heading>Delete Item</Modal.Heading>
+          <Modal.Heading>Acknowledge License</Modal.Heading>
           <Modal.Body>
             <Box as="p" marginTop={0} marginBottom="m">
-              Enter name to confirm deletion
+              Enter your initials to acknowledge the license.
             </Box>
-            <FormField label="Item name">
+            <FormField label="Initials" style={{marginBottom: 0}}>
               <TextInput ref={ref} value={value} onChange={e => setValue(e.currentTarget.value)} />
             </FormField>
-            <HStack spacing="s">
-              <Modal.CloseButton as={DeleteButton} onClick={handleDelete}>
-                Delete
-              </Modal.CloseButton>
-              <Modal.CloseButton>Cancel</Modal.CloseButton>
-            </HStack>
           </Modal.Body>
+          <Flex gap="s" padding="xxs" marginTop="xxs">
+            <Modal.CloseButton as={PrimaryButton} onClick={handleAcknowledge}>
+              Acknowledge
+            </Modal.CloseButton>
+            <Modal.CloseButton>Cancel</Modal.CloseButton>
+          </Flex>
         </Modal.Card>
       </Modal.Overlay>
     </Modal>

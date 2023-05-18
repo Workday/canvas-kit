@@ -13,7 +13,7 @@ const containerStyle = css({
   },
 });
 
-storiesOf('Components/Popups/Tooltip/CSS', module)
+storiesOf('CSS/Popups/Tooltip', module)
   .addParameters({ReadmePath: 'css/tooltip'})
   .add('Default', () => (
     <div className="story">

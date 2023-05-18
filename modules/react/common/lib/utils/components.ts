@@ -1,5 +1,6 @@
 import React from 'react';
 import {assert} from './assert';
+import {memoize} from './memoize';
 import {mergeProps} from './mergeProps';
 import {Model} from './models';
 
@@ -9,6 +10,9 @@ import {Model} from './models';
 export type StyledType = {
   as?: React.ElementType;
 };
+
+// For React class components
+type Constructor<T> = new (...args: any[]) => T;
 
 /**
  * Extract a Ref from T if it exists
@@ -20,6 +24,8 @@ export type StyledType = {
  */
 type ExtractRef<T> = T extends undefined // test if T was even passed in
   ? never // T not passed in, we'll set the ref to `never`
+  : T extends Constructor<infer C>
+  ? React.LegacyRef<C>
   : React.Ref<
       T extends keyof ElementTagNameMap // test if T is an element string like 'button' or 'div'
         ? ElementTagNameMap[T] // if yes, the ref should be the element interface. `'button' => HTMLButtonElement`
@@ -27,6 +33,10 @@ type ExtractRef<T> = T extends undefined // test if T was even passed in
         ? U extends keyof ElementTagNameMap // test inferred U to see if it extends an element string
           ? ElementTagNameMap[U] // if yes, use the inferred U and convert to an element interface. `'button' => HTMLButtonElement`
           : U // if no, fall back to inferred U. Hopefully it is already an element interface
+        : T extends React.FC<{ref?: infer R}> // test if T extends a React functional component with a ref (Emotion's styled components do this)
+        ? R extends React.RefObject<infer E> // if yes, extract the element interface. This step unwraps the ref. Otherwise we'll get React.Ref<React.Ref<Element>>
+          ? E // if yes, use the inferred E
+          : never // never here prevents double refs. Basically the return would be React.Ref<E | {this value}>. I'm not entirely sure why...
         : T // if no, fall back to T. Hopefully it is already an element interface
     >;
 
@@ -101,7 +111,7 @@ export type ExtractProps<
       : TElement extends keyof JSX.IntrinsicElements // `TElement` was defined, test if it is in `JSX.IntrinsicElements`
       ? P & ExtractHTMLAttributes<JSX.IntrinsicElements[TElement]> // `TElement` is in `JSX.IntrinsicElements`, return inferred props `P` + HTML attributes of `TElement`
       : P & ExtractProps<TElement> // `TElement` is not in `JSX.IntrinsicElements`, return inferred props `P` + props extracted from component `TElement`.
-    : TComponent extends Component<infer P> // test if `TComponent` is a `Component`, while inferring props `P`
+    : TComponent extends {__props: infer P} // test if `TComponent` is a `Component`, while inferring props `P`
     ? P // else attach only inferred props `P`
     : TComponent extends React.ComponentType<infer P> // test if `TComponent` is a `React.ComponentType` (class or functional component)
     ? P // it was a `React.ComponentType`, return inferred props `P`
@@ -113,14 +123,18 @@ type ExtractMaybeModel<TComponent, P> = TComponent extends {__model: infer M} //
   ? P & PropsWithModel<M>
   : P;
 
-export type PropsWithModel<TModel = never> = {
+/**
+ * `PropsWithModel` adds the `model` and `elemPropsHook` props. If a model-based component has an
+ * `as` referencing another model-based component, the `model` of the `as` component should win.
+ */
+export type PropsWithModel<TModel, ElementType = {}> = {
   /**
    * Optional model to pass to the component. This will override the default model created for the
    * component. This can be useful if you want to access to the state and events of the model, or if
    * you have nested components of the same type and you need to override the model provided by
    * React Context.
    */
-  model?: TModel;
+  model?: ElementType extends {__model: infer M} ? M : TModel; // If the `ElementType` is a `ElementComponentM`, extract the model. Otherwise fall back to the `TModel` type
   /**
    * Optional hook that receives the model and all props to be applied to the element. If you use
    * this, it is your responsibility to return props, merging as appropriate. For example, returning
@@ -163,7 +177,7 @@ export type ElementComponentM<E extends React.ElementType, P, TModel> = {
   displayName?: string;
   <ElementType extends React.ElementType>(
     props: PropsWithoutAs<P, ElementType> &
-      PropsWithModel<TModel> & {
+      PropsWithModel<TModel, ElementType> & {
         /**
          * Optional override of the default element used by the component. Any valid tag or Component.
          * If you provided a Component, this component should forward the ref using `React.forwardRef`
@@ -200,7 +214,7 @@ export type Component<P> = {
 
 interface RefForwardingComponent<T, P = {}> {
   (
-    props: React.PropsWithChildren<P> & {as?: React.ElementType},
+    props: React.PropsWithChildren<P>,
     /**
      * A ref to be forwarded. Pass it along to the root element. If no element was passed, this
      * will result in a `never`
@@ -212,7 +226,7 @@ interface RefForwardingComponent<T, P = {}> {
      * `never`
      */
     Element: T extends undefined ? never : T
-  ): React.ReactElement | null;
+  ): JSX.Element | null;
 }
 
 function defaultGetElemProps(input: any) {
@@ -228,11 +242,11 @@ export const createContainer = <
 >(
   as?: E
 ) => <
-  TModelHook extends ((config: any) => {state: any; events: any}) & {
+  TModelHook extends ((config: any) => Model<any, any>) & {
     Context?: React.Context<any>;
   } & {defaultConfig?: Record<string, any>},
-  TDefaultContext extends {state: Record<string, any>; events: Record<string, any>},
-  TElemPropsHook extends (...args: any) => any,
+  TDefaultContext extends Model<any, any>,
+  TElemPropsHook,
   SubComponents = {}
 >({
   displayName,
@@ -247,16 +261,18 @@ export const createContainer = <
   defaultContext?: TDefaultContext;
   subComponents?: SubComponents;
 }) => {
-  const Context =
-    modelHook.Context ||
-    React.createContext({state: {}, events: {}, defaultConfig: modelHook.defaultConfig});
+  assert(
+    modelHook.Context,
+    'createContainer only works on models with context. Please use `createModelHook` to create the `modelHook`'
+  );
+  const Context = modelHook.Context;
 
   return <Props>(
     Component: (
-      props: Props & RemoveNull<ReturnType<TElemPropsHook>> & {ref: ExtractRef<E>},
+      props: CompoundProps<Props, TElemPropsHook, E>,
       Element: E extends undefined ? never : E,
       model: TModelHook extends (config: infer TConfig) => infer TModel ? TModel : never
-    ) => React.ReactElement | null
+    ) => JSX.Element | null
   ): (TModelHook extends (config: infer TConfig) => infer TModel
     ? E extends undefined
       ? ComponentM<Props & TConfig, TModel>
@@ -267,22 +283,27 @@ export const createContainer = <
           E extends undefined ? React.FC : E,
           Props & TConfig,
           TModel
-        > & {Context: React.Context<TModel>}
+        >
     : never) &
     SubComponents => {
     const ReturnedComponent = React.forwardRef<E, Props & {as?: React.ElementType} & {model?: any}>(
       ({as: asOverride, model, ...props}, ref) => {
-        const localModel = useDefaultModel(model, props, modelHook);
+        const localModel = useDefaultModel(model, props, modelHook, asOverride);
         const elemProps = ((modelHook as any).getElemProps || defaultGetElemProps)(props);
         const finalElemProps = elemPropsHook
-          ? elemPropsHook(localModel, elemProps, ref)
+          ? (elemPropsHook as any)(localModel, elemProps, ref)
           : elemProps;
+
+        // make sure there's always a ref being passed, even if there are no elemProps hooks to run
+        if (ref && !finalElemProps.hasOwnProperty('ref')) {
+          finalElemProps.ref = ref;
+        }
 
         return React.createElement(
           Context.Provider,
           {value: localModel},
           Component(
-            finalElemProps as Props & RemoveNull<ReturnType<TElemPropsHook>> & {ref: ExtractRef<E>},
+            finalElemProps,
             // Cast to `any` to avoid: "ts(2345): Type 'undefined' is not assignable to type 'E extends
             // undefined ? never : E'" I'm not sure I can actually cast to this conditional type and it
             // doesn't actually matter, so cast to `any` it is.
@@ -298,9 +319,24 @@ export const createContainer = <
       // we'll cast to `Record<string, any>` for assignment. Note the lack of type checking
       // properties. Take care when changing the runtime of this function.
       (ReturnedComponent as Record<string, any>)[key] = (subComponents as Record<string, any>)[key];
+      // Add a displayName if one isn't already created. This prevents us from having to add
+      // `displayName` to subcomponents if a container component has a `displayName`
+      if (displayName && !(subComponents as Record<string, any>)[key].displayName) {
+        (subComponents as Record<string, any>)[key].displayName = `${displayName}.${key}`;
+      }
     });
     ReturnedComponent.displayName = displayName;
-    (ReturnedComponent as any).Context = Context;
+    (ReturnedComponent as any).__hasModel = true;
+
+    // The `any`s are here because `ElementComponent` takes care of the `as` type and the
+    // `ReturnComponent` type is overridden
+    (ReturnedComponent as any).as = memoize(
+      (as: any) =>
+        createContainer(as)({displayName, subComponents, modelHook, elemPropsHook})(
+          Component as any
+        ),
+      as => as
+    );
 
     // Cast as `any`. We have already specified the return type. Be careful making changes to this
     // file due to this `any` `ReturnedComponent` is a `React.ForwardRefExoticComponent`, but we want
@@ -309,9 +345,30 @@ export const createContainer = <
   };
 };
 
+/**
+ * If elemProps returns `null` for a prop, that prop is to be removed from the prop
+ * list. This is useful for passing props to an elemProp hook that should not be exposed
+ * to the DOM element
+ */
 type RemoveNull<T> = {[K in keyof T]: Exclude<T[K], null>};
 
-// export type ModelComponentFn<TModelHook, TElemPropsHook, SubComponents> = <Props={}>(Component: ())
+/**
+ * Props for the compound component based on props, elemPropsHook, and element. It will
+ * return a prop interface according to all these inputs. The following will be added to
+ * the passed in `Props` type:
+ * - The prop interface returned by the `elemPropsHook` function
+ * - if there is no detected `ref` in the `Props` interface, a `ref` will be added based on the element type E
+ * - if there is no detected `children` in the `Props` interface, `children` will be added based on `ReactNode`
+ */
+type CompoundProps<Props, TElemPropsHook, E> = Props &
+  (TElemPropsHook extends (...args: any[]) => infer TProps // try to infer TProps returned from the elemPropsHook function
+    ? RemoveNull<Omit<TProps, 'ref'> & {ref: ExtractRef<E>}>
+    : {ref: ExtractRef<E>}) &
+  (Props extends {children: any}
+    ? {}
+    : {
+        children?: React.ReactNode;
+      });
 
 export const createSubcomponent = <
   E extends
@@ -323,7 +380,7 @@ export const createSubcomponent = <
   as?: E
 ) => <
   TElemPropsHook, // normally we'd put a constraint here, but doing so causes the `infer` below to fail to infer the return props
-  TModelHook extends ((config: any) => {state: any; events: any}) & {Context?: React.Context<any>},
+  TModelHook extends ((config: any) => Model<any, any>) & {Context?: React.Context<any>},
   SubComponents = {}
 >({
   displayName,
@@ -331,6 +388,7 @@ export const createSubcomponent = <
   elemPropsHook,
   subComponents,
 }: {
+  /** @deprecated You no longer need to use displayName. A `displayName` will be automatically added if it belongs to a container */
   displayName?: string;
   modelHook: TModelHook;
   elemPropsHook?: TElemPropsHook;
@@ -343,20 +401,10 @@ export const createSubcomponent = <
 
   return <Props = {}>(
     Component: (
-      props: Props &
-        (TElemPropsHook extends (...args: any[]) => infer TProps // try to infer TProps returned from the elemPropsHook function
-          ? TProps extends {ref: infer R}
-            ? TProps
-            : TProps & {ref: ExtractRef<E>}
-          : {ref: ExtractRef<E>}) &
-        (Props extends {children: any}
-          ? {}
-          : {
-              children?: React.ReactNode;
-            }),
+      props: CompoundProps<Props, TElemPropsHook, E>,
       Element: E extends undefined ? never : E,
       model: TModelHook extends (...args: any[]) => infer TModel ? TModel : never
-    ) => React.ReactElement | null
+    ) => JSX.Element | null
   ): (TModelHook extends (...args: any[]) => infer TModel
     ? ElementComponentM<
         // E is not `undefined` here, but Typescript thinks it could be, so we add another `undefined`
@@ -372,10 +420,16 @@ export const createSubcomponent = <
       E,
       Props & {as?: React.ElementType} & {model?: any; elemPropsHook?: (...args: any) => any}
     >(({as: asOverride, model, elemPropsHook: additionalPropsHook, ...props}, ref) => {
-      const localModel = useModelContext(modelHook.Context!, model);
+      const localModel = useModelContext(modelHook.Context!, model, asOverride);
+      // maybeModelProps reattached the `model` prop if the passed model is incompatible with the
+      // modelHook's context. This fixes issues when using the `as` prop on model element components
+      // that both have a model
+      const maybeModelProps =
+        model && localModel !== model ? {...props, model, ref} : {...props, ref};
+
       const elemProps = elemPropsHook
-        ? (elemPropsHook as any)(localModel, props, ref)
-        : {...props, ref};
+        ? (elemPropsHook as any)(localModel, maybeModelProps, ref)
+        : maybeModelProps;
 
       return Component(
         additionalPropsHook ? additionalPropsHook(localModel, elemProps, ref) : elemProps,
@@ -393,7 +447,21 @@ export const createSubcomponent = <
       // properties. Take care when changing the runtime of this function.
       (ReturnedComponent as Record<string, any>)[key] = (subComponents as Record<string, any>)[key];
     });
-    ReturnedComponent.displayName = displayName;
+
+    if (displayName) {
+      ReturnedComponent.displayName = displayName;
+    }
+    (ReturnedComponent as any).__hasModel = true;
+
+    // The `any`s are here because `ElementComponent` takes care of the `as` type and the
+    // `ReturnComponent` type is overridden
+    (ReturnedComponent as any).as = memoize(
+      (as: any) =>
+        createSubcomponent(as)({displayName, subComponents, modelHook, elemPropsHook})(
+          Component as any
+        ),
+      as => as
+    );
 
     // Cast as `any`. We have already specified the return type. Be careful making changes to this
     // file due to this `any` `ReturnedComponent` is a `React.ForwardRefExoticComponent`, but we want
@@ -480,8 +548,10 @@ export const createComponent = <
 
   // The `any`s are here because `ElementComponent` takes care of the `as` type and the
   // `ReturnComponent` type is overridden
-  (ReturnedComponent as any).as = (as: any) =>
-    createComponent(as)({displayName, Component, subComponents});
+  (ReturnedComponent as any).as = memoize(
+    (as: any) => createComponent(as)({displayName, Component, subComponents}),
+    as => as
+  );
 
   // Cast as `any`. We have already specified the return type. Be careful making changes to this
   // file due to this `any` `ReturnedComponent` is a `React.ForwardRefExoticComponent`, but we want
@@ -489,30 +559,58 @@ export const createComponent = <
   return ReturnedComponent as any;
 };
 
-export const createElemPropsHook = <
-  TModelHook extends (config: any) => {state: Record<string, any>; events: Record<string, any>}
->(
+/**
+ * An `elemPropsHook` is a React hook that takes a model, ref, and elemProps and returns props and
+ * attributes to be spread to an element or component.
+ *
+ * ```tsx
+ * const useMyHook = createElemPropsHook(useMyModel)((model) => {
+ *   return {
+ *     id: model.state.id
+ *   }
+ * })
+ * ```
+ *
+ * **Note:** If your hook needs to use a ref, it must be forked using `useLocalRef` or `useForkRef`
+ * and return the forked ref:
+ *
+ * ```tsx
+ * const useMyHook = createElemPropsHook(useMyModel)((model, ref, elemProps) => {
+ *   const {localRef, elementRef} = useLocalRef(ref);
+ *
+ *   React.useLayoutEffect(() => {
+ *     console.log('element', localRef.current) // logs the DOM element
+ *   }, [])
+ *
+ *   return {
+ *     ref: elementRef
+ *   }
+ * })
+ * ```
+ */
+export const createElemPropsHook = <TModelHook extends (config: any) => Model<any, any>>(
   modelHook: TModelHook
 ) => <PO extends {}, PI extends {}>(
   fn: (
-    model: TModelHook extends (config: any) => infer TModel
-      ? TModel
-      : {state: Record<string, any>; events: Record<string, any>},
-    ref?: React.Ref<any>,
+    model: TModelHook extends (config: any) => infer TModel ? TModel : Model<any, any>,
+    ref?: React.Ref<unknown>,
     elemProps?: PI
   ) => PO
 ): BehaviorHook<
-  TModelHook extends (config: any) => infer TModel
-    ? TModel
-    : {state: Record<string, any>; events: Record<string, any>},
+  TModelHook extends (config: any) => infer TModel ? TModel : Model<any, any>,
   PO
-> => (model, elemProps, ref) => {
-  const props = mergeProps(fn(model, ref, elemProps || ({} as any)), elemProps || ({} as any));
-  if (!props.hasOwnProperty('ref') && ref) {
-    // This is the weird "incoming ref isn't in props, but outgoing ref is in props" thing
-    props.ref = ref;
-  }
-  return props;
+> => {
+  return ((model, elemProps, ref) => {
+    const props = mergeProps(fn(model, ref, elemProps || ({} as any)), elemProps || ({} as any));
+    if (!props.hasOwnProperty('ref') && ref) {
+      // This is the weird "incoming ref isn't in props, but outgoing ref is in props" thing
+      props.ref = ref;
+    }
+    return props;
+  }) as BehaviorHook<
+    TModelHook extends (config: any) => infer TModel ? TModel : Model<any, any>,
+    PO
+  >;
 };
 
 /**
@@ -533,10 +631,10 @@ export const createElemPropsHook = <
  * });
  *
  * // Equivalent to:
- * const useMyHook = <P extends {}, R>(
+ * const useMyHook = <P extends {}>(
  *   model: MyModel,
  *   elemProps: P,
- *   ref: React.Ref<R>
+ *   ref: React.Ref<unknown>
  * ) => {
  *   const { localRef, elementRef } = useLocalRef(ref);
  *   // do whatever with `localRef` which is a RefObject
@@ -550,28 +648,84 @@ export const createElemPropsHook = <
  * @param fn Function that takes a model and optional ref and returns props
  */
 export const createHook = <M extends Model<any, any>, PO extends {}, PI extends {}>(
-  fn: (model: M, ref?: React.Ref<any>, elemProps?: PI) => PO
+  fn: (model: M, ref?: React.Ref<unknown>, elemProps?: PI) => PO
 ): BehaviorHook<M, PO> => {
-  return (model, elemProps, ref) => {
+  return ((model, elemProps, ref) => {
     const props = mergeProps(fn(model, ref, elemProps || ({} as any)), elemProps || ({} as any));
     if (!props.hasOwnProperty('ref') && ref) {
       // This is the weird "incoming ref isn't in props, but outgoing ref is in props" thing
       props.ref = ref;
     }
     return props;
-  };
+  }) as BehaviorHook<M, PO>;
 };
 
+/**
+ * @deprecated use `createSubModelElemPropsHook` instead
+ */
 export const subModelHook = <M extends Model<any, any>, SM extends Model<any, any>, O extends {}>(
   fn: (model: M) => SM,
   hook: BehaviorHook<SM, O>
 ): BehaviorHook<M, O> => {
-  return (model: M, props: any, ref: React.Ref<any>) => {
+  return ((model: M, props: any, ref: React.Ref<unknown>) => {
     return hook(fn(model), props, ref);
-  };
+  }) as BehaviorHook<M, O>;
 };
 
-// Typescript function parameters are contravariant while return types are covariant. This is a
+/**
+ * Creates an elemPropsHook that returns the elemProps from another hook that is meant for a
+ * subModel. Usually only used when composing elemProps hooks.
+ *
+ * For example:
+ *
+ * ```tsx
+ * const useMySubModel = () => {}
+ *
+ * const useMyModel = () => {
+ *   const subModel = useMySubModel()
+ *
+ *   return {
+ *     state,
+ *     events,
+ *     subModel,
+ *   }
+ * }
+ *
+ * const useMyComponent = composeHook(
+ *   createElemPropsHook(useMyModel)(model => ({ id: '' })),
+ *   createSubModelElemPropsHook(useMyModel)(m => m.subModel, useSomeOtherComponent)
+ * )
+ * ```
+ */
+export function createSubModelElemPropsHook<M extends () => Model<any, any>>(modelHook: M) {
+  return <SM extends Model<any, any>, O extends {}>(
+    fn: (model: ReturnType<M>) => SM,
+    elemPropsHook: BehaviorHook<SM, O>
+  ): BehaviorHook<ReturnType<M>, O> => {
+    return ((model: ReturnType<M>, props: any, ref: React.Ref<unknown>) => {
+      return elemPropsHook(fn(model), props, ref);
+    }) as BehaviorHook<ReturnType<M>, O>;
+  };
+}
+
+/** Simplify and speed up inference by capturing types in the signature itself */
+interface BaseHook<M extends Model<any, any>, O extends {}> {
+  /**
+   * Capture the model type in TypeScript only. Do not use in runtime!
+   *
+   * @private
+   */
+  __model: M;
+  /**
+   * Capture the hook's output type in TypeScript only. Do not use in runtime! This is used to cache
+   * and speed up the output types during inference
+   *
+   * @private
+   */
+  __output: O;
+}
+
+// TypeScript function parameters are contravariant while return types are covariant. This is a
 // problem when someone hands us a model that correctly extends `Model<any, any>`, but adds extra
 // properties to the model. So `M extends Model<any, any>`. But the `BehaviorHook` is the return
 // type which will reverse the direction which is no longer true: `Model<any, any> extends M`. In
@@ -581,13 +735,13 @@ export const subModelHook = <M extends Model<any, any>, SM extends Model<any, an
 // isn't a real issue. Not 100% this is a bug, but the "hack" is a bit messy.
 // https://www.stephanboyer.com/post/132/what-are-covariance-and-contravariance
 // https://stackoverflow.com/questions/52667959/what-is-the-purpose-of-bivariancehack-in-typescript-types/52668133
-export type BehaviorHook<M extends Model<any, any>, O extends {}> = {
-  bivarianceHack<P extends {}, R>(
-    model: M,
-    elemProps?: P,
-    ref?: React.Ref<R>
-  ): O & P & (R extends HTMLOrSVGElement ? {ref: React.Ref<R>} : {});
-}['bivarianceHack'];
+/**
+ * A BehaviorHook is a React hook that takes a model, elemProps, and a ref and returns props and
+ * attributes to apply to an element or component.
+ */
+export interface BehaviorHook<M extends Model<any, any>, O extends {}> extends BaseHook<M, O> {
+  <P extends {}>(model: M, elemProps?: P, ref?: React.Ref<unknown>): O & P;
+}
 
 function setRef<T>(ref: React.Ref<T> | undefined, value: T): void {
   if (ref) {
@@ -668,9 +822,22 @@ export function useLocalRef<T>(ref?: React.Ref<T>) {
 export function useDefaultModel<T, C>(
   model: T | undefined,
   config: C,
-  modelHook: (config: C) => T
+  modelHook: (config: C) => T,
+  as?: React.ElementType
 ) {
-  return model || modelHook(config);
+  // Make sure we don't pass the `model` to a component if it is incompatible with that component.
+  // Otherwise we'll have strange runtime failures when a component or elemProps hooks try to
+  // access the `state` or `events`
+  if (
+    !model ||
+    (as &&
+      (as as any).__hasModel &&
+      (model as any).__UNSTABLE_modelContext !== (modelHook as any).Context)
+  ) {
+    return modelHook(config);
+  }
+
+  return model;
 }
 
 /**
@@ -680,84 +847,99 @@ export function useDefaultModel<T, C>(
  * @param context The context of a model
  * @example
  * const SubComponent = ({children, model, ...elemProps}: SubComponentProps, ref, Element) => {
- *   const {state, events} = useModelContext(model, SubComponentModelContext);
+ *   const {state, events} = useModelContext(model, SubComponentModelContext, Element);
  *
  *   // ...
  * }
  */
-export function useModelContext<T>(context: React.Context<T>, model?: T): T {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  return model || React.useContext(context);
+export function useModelContext<T>(
+  context: React.Context<T>,
+  model?: T,
+  as?: React.ElementType
+): T {
+  const contextModel = React.useContext(context);
+  if (
+    !model ||
+    (as && (as as any).__hasModel && (model as any).__UNSTABLE_modelContext !== context)
+  ) {
+    return contextModel;
+  }
+
+  return model;
 }
 
 /**
- * Compose many hooks together. Assumes hooks are using `mergeProps`. Returns a function that will
- * receive a model and return props to be applied to a component. These props should always be
- * applied last on the Component. The props will override as follows: rightmost hook props override
- * leftmost hook props which are overridden by props passed to the composeHooks function.
+ * Compose many hooks together. Each hook should make a call to `mergeProps` which is automatically
+ * done by `createElemPropsHook` and `createHook. Returns a function that will receive a model and
+ * return props to be applied to a component. Hooks run from right to left, but props override from
+ * left to right.
  *
- * A `ref` should be passed for hooks that require a ref. Each hook should fork the ref using
- * `useLocalRef`, passing the `elementRef` in the returned props object. This ref will be passed to
- * the next hook.
+ * For example:
  *
- * @example
- * const MyComponent = React.forwardRef(({ children, model, ...elemProps }, ref) => {
- *   const props = composeHooks(useHook1, useHook2)(model, elemProps, ref)
- *
- *   return <div id="foo" {...props}>{children}</div>
+ * ```ts
+ * const useHook1 = createElemPropsHook(useMyModel)((model, ref, elemProps) => {
+ *   console.log('useHook1', elemProps)
+ *   return {
+ *     a: 'useHook1',
+ *     c: 'useHook1'
+ *   }
  * })
+ *
+ * const useHook2 = createElemPropsHook(useMyModel)((model, ref, elemProps) => {
+ *   console.log('useHook2', elemProps)
+ *   return {
+ *     b: 'useHook2',
+ *     c: 'useHook2'
+ *   }
+ * })
+ *
+ * const useHook3 = composeHooks(useHook1, useHook2)
+ * const props = composeHooks(model, { c: 'props' })
+ * console.log('props', props)
+ * ```
+ *
+ * The output would be:
+ *
+ * ```ts
+ * useHook2 {c: 'foo'}
+ * useHook1 {b: 'useHook2', c: 'foo'}
+ * props {a: 'useHook1', b: 'useHook2', c: 'foo'}
+ * ```
  */
-export function composeHooks<M extends Model<any, any>, O1 extends {}, O2 extends {}>(
-  hook1: BehaviorHook<M, O1>,
-  hook2: BehaviorHook<M, O2>
-): BehaviorHook<M, O1 & O2>;
-
 export function composeHooks<
-  M extends Model<any, any>,
-  R,
-  P extends {},
-  O1 extends {},
-  O2 extends {},
-  O3 extends {}
+  H1 extends BehaviorHook<any, {}>,
+  H2 extends BehaviorHook<any, {}>,
+  H3 extends BehaviorHook<any, {}>,
+  H4 extends BehaviorHook<any, {}>,
+  H5 extends BehaviorHook<any, {}>,
+  H6 extends BehaviorHook<any, {}>
 >(
-  hook1: BehaviorHook<M, O1>,
-  hook2: BehaviorHook<M, O2>,
-  hook3: BehaviorHook<M, O3>
-): BehaviorHook<M, O1 & O2 & O3>;
-export function composeHooks<
-  M extends Model<any, any>,
-  R,
-  P extends {},
-  O1 extends {},
-  O2 extends {},
-  O3 extends {},
-  O4 extends {}
->(
-  hook1: BehaviorHook<M, O1>,
-  hook2: BehaviorHook<M, O2>,
-  hook3: BehaviorHook<M, O3>,
-  hook4: BehaviorHook<M, O4>
-): BehaviorHook<M, O1 & O2 & O3 & O4>;
-export function composeHooks<
-  M extends Model<any, any>,
-  R,
-  P extends {},
-  O1 extends {},
-  O2 extends {},
-  O3 extends {},
-  O4 extends {},
-  O5 extends {}
->(
-  hook1: BehaviorHook<M, O1>,
-  hook2: BehaviorHook<M, O2>,
-  hook3: BehaviorHook<M, O3>,
-  hook4: BehaviorHook<M, O4>,
-  hook5: BehaviorHook<M, O5>
-): BehaviorHook<M, O1 & O2 & O3 & O4 & O5>;
-export function composeHooks<M extends Model<any, any>, R, P extends {}, O extends {}>(
-  ...hooks: ((model: M, props: P, ref: React.Ref<R>) => O)[]
+  hook1: H1,
+  hook2: H2,
+  hook3?: H3,
+  hook4?: H4,
+  hook5?: H5,
+  hook6?: H6,
+  // TypeScript will only infer up to 6, but the types will still exist for those 6. The rest of the
+  // hooks won't add to the interface, but that seems to be an okay fallback
+  ...hooks: BehaviorHook<any, any>[]
+): H1 extends BaseHook<infer M, infer O1>
+  ? H2 extends BaseHook<any, infer O2>
+    ? H3 extends BaseHook<any, infer O3>
+      ? H4 extends BaseHook<any, infer O4>
+        ? H5 extends BaseHook<any, infer O5>
+          ? H6 extends BaseHook<any, infer O6>
+            ? BehaviorHook<M, O1 & O2 & O3 & O4 & O5 & O6>
+            : BehaviorHook<M, O1 & O2 & O3 & O4 & O5>
+          : BehaviorHook<M, O1 & O2 & O3 & O4>
+        : BehaviorHook<M, O1 & O2 & O3>
+      : BehaviorHook<M, O1 & O2>
+    : never
+  : never;
+export function composeHooks<M extends Model<any, any>, P extends {}, O extends {}>(
+  ...hooks: ((model: M, props: P, ref: React.Ref<unknown>) => O)[]
 ): BehaviorHook<M, O> {
-  return (model, props, ref) => {
+  return ((model, props, ref) => {
     const returnProps = [...hooks].reverse().reduce((props: any, hook) => {
       return hook(model, props, props.ref || ref);
     }, props);
@@ -768,88 +950,5 @@ export function composeHooks<M extends Model<any, any>, R, P extends {}, O exten
     }
 
     return returnProps;
-  };
-}
-
-/**
- * Compose many hooks together. Assumes hooks are using `mergeProps`. Returns a function that will
- * receive a model and return props to be applied to a component. These props should always be
- * applied last on the Component. The props will override as follows: rightmost hook props override
- * leftmost hook props which are overridden by props passed to the composeHooks function.
- *
- * A `ref` should be passed for hooks that require a ref. Each hook should fork the ref using
- * `useLocalRef`, passing the `elementRef` in the returned props object. This ref will be passed to
- * the next hook.
- *
- * @example
- * const MyComponent = React.forwardRef(({ children, model, ...elemProps }, ref) => {
- *   const props = composeModelHooks(useModel)(useHook1, useHook2)(model, elemProps, ref)
- *
- *   return <div id="foo" {...props}>{children}</div>
- * })
- */
-//  export function composeModelHooks<M extends
-//  TModelHook extends (config: any) => {state: Record<string, any>; events: Record<string, any>}
-// >, O1 extends {}, O2 extends {}>(
-//   hook1: BehaviorHook<M, O1>,
-//   hook2: BehaviorHook<M, O2>
-// ): BehaviorHook<M, O1 & O2>;
-
-export function composeModelHooks<
-  M extends Model<any, any>,
-  R,
-  P extends {},
-  O1 extends {},
-  O2 extends {},
-  O3 extends {}
->(
-  hook1: BehaviorHook<M, O1>,
-  hook2: BehaviorHook<M, O2>,
-  hook3: BehaviorHook<M, O3>
-): BehaviorHook<M, O1 & O2 & O3>;
-export function composeModelHooks<
-  M extends Model<any, any>,
-  R,
-  P extends {},
-  O1 extends {},
-  O2 extends {},
-  O3 extends {},
-  O4 extends {}
->(
-  hook1: BehaviorHook<M, O1>,
-  hook2: BehaviorHook<M, O2>,
-  hook3: BehaviorHook<M, O3>,
-  hook4: BehaviorHook<M, O4>
-): BehaviorHook<M, O1 & O2 & O3 & O4>;
-export function composeModelHooks<
-  M extends Model<any, any>,
-  R,
-  P extends {},
-  O1 extends {},
-  O2 extends {},
-  O3 extends {},
-  O4 extends {},
-  O5 extends {}
->(
-  hook1: BehaviorHook<M, O1>,
-  hook2: BehaviorHook<M, O2>,
-  hook3: BehaviorHook<M, O3>,
-  hook4: BehaviorHook<M, O4>,
-  hook5: BehaviorHook<M, O5>
-): BehaviorHook<M, O1 & O2 & O3 & O4 & O5>;
-export function composeModelHooks<M extends Model<any, any>, R, P extends {}, O extends {}>(
-  ...hooks: ((model: M, props: P, ref: React.Ref<R>) => O)[]
-): BehaviorHook<M, O> {
-  return (model, props, ref) => {
-    const returnProps = [...hooks].reverse().reduce((props: any, hook) => {
-      return hook(model, props, props.ref || ref);
-    }, props);
-
-    if (!returnProps.hasOwnProperty('ref') && ref) {
-      // This is the weird "incoming ref isn't in props, but outgoing ref is in props" thing
-      returnProps.ref = ref;
-    }
-
-    return returnProps;
-  };
+  }) as BehaviorHook<M, O>;
 }

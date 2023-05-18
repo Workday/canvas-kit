@@ -1,15 +1,14 @@
 import * as React from 'react';
 import {createComponent, styled} from '@workday/canvas-kit-react/common';
 
-import {colors, gradients, space, type} from '@workday/canvas-kit-react/tokens';
+import {colors, gradients, space} from '@workday/canvas-kit-react/tokens';
 
-import {HStack, HStackProps, StackSpacing} from '@workday/canvas-kit-react/layout';
+import {Flex, FlexProps, SystemPropValues} from '@workday/canvas-kit-react/layout';
 import {TertiaryButton} from '@workday/canvas-kit-react/button';
 import {justifyIcon, notificationsIcon} from '@workday/canvas-system-icons-web';
+import {Heading} from '@workday/canvas-kit-react/text';
 
-interface HeaderItemProps extends Omit<HStackProps, 'spacing'> {
-  spacing?: StackSpacing;
-}
+interface HeaderItemProps extends FlexProps {}
 
 export const Basic = () => (
   <PageHeader>
@@ -23,17 +22,26 @@ export const Basic = () => (
 
 const PageHeaderItem = createComponent('div')({
   displayName: 'PageHeader.Item',
-  Component: ({spacing = 'xxs', ...props}: HeaderItemProps, ref, Element) => (
-    <HStack spacing={spacing} ref={ref} as={Element} {...props} />
+  Component: ({gap = 'xxs', ...props}: HeaderItemProps, ref, Element) => (
+    <Flex gap={gap} ref={ref} as={Element} {...props} />
   ),
 });
 
 const PageHeaderTitle = createComponent('h2')({
   displayName: 'PageHeader.Title',
   Component: ({children, ...props}, ref, Element) => (
-    <Title ref={ref} as={Element} {...props}>
+    <Heading
+      as={Element}
+      ref={ref}
+      size="medium"
+      variant="inverse"
+      padding={`${space.xs} 0`}
+      margin={0}
+      whiteSpace="nowrap"
+      {...props}
+    >
       {children}
-    </Title>
+    </Heading>
   ),
 });
 
@@ -52,12 +60,4 @@ const Header = styled('header')({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
-});
-
-const Title = styled('h2')({
-  ...type.levels.heading.medium,
-  color: colors.frenchVanilla100,
-  padding: `${space.xs} 0`,
-  margin: 0,
-  whiteSpace: 'nowrap',
 });

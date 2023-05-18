@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from '@emotion/styled';
 import {expectTypeOf} from 'expect-type';
 
 import {
@@ -6,6 +7,7 @@ import {
   createContainer,
   createSubcomponent,
   ElementComponent,
+  ElementComponentM,
   ExtractProps,
   PropsWithModel,
 } from '../lib/utils/components';
@@ -61,6 +63,17 @@ describe('createComponent', () => {
 
     // No expectation, but the next line will fail if the ref signature isn't valid and it should be
     return <Component ref={ref} />;
+  });
+
+  it('should extract the correct ref of a styled component', () => {
+    const StyledComponent = styled('button')({});
+    const Component = createComponent(StyledComponent)({
+      Component(props, ref, Element) {
+        expectTypeOf(ref).toEqualTypeOf<React.Ref<HTMLButtonElement>>();
+
+        return null;
+      },
+    });
   });
 });
 
@@ -206,7 +219,7 @@ describe('ExtractProps', () => {
     it('should return only props on a `ComponentM`', () => {
       const Component = createContainer()({
         modelHook: createModelHook({})((): Model => ({state: {foo: 'bar'}, events: {}})),
-      })((props: Props) => null);
+      })<Props>(props => null);
       type Expected = ExtractProps<typeof Component>;
 
       expectTypeOf<Expected>().toEqualTypeOf<Props & PropsWithModel<Model>>();
@@ -217,6 +230,74 @@ describe('ExtractProps', () => {
       type Expected = ExtractProps<typeof Component>;
 
       expectTypeOf<Expected>().toEqualTypeOf<Props>();
+    });
+
+    describe('when passed `as={NonModelComponent}`', () => {
+      it('should type the `model` prop as `Model | undefined`', () => {
+        const NonModelComponent = createComponent('div')({
+          Component() {
+            return <div />;
+          },
+        });
+
+        // no expectation. I can't get to the parameter of an overloaded function with a generic
+        ElementComponent({
+          foo: 'bar',
+          as: NonModelComponent,
+          model: {state: {foo: 'bar'}, events: {}}, // `model` should be `Model | undefined`
+        });
+      });
+
+      it('should type the `model` prop as `Model2 | undefined`');
+    });
+
+    describe('when passed `as={ModelComponent}`', () => {
+      it('should type the `model` prop as `Model2 | undefined`', () => {
+        type Model2 = {
+          state: {
+            bar: string;
+          };
+          events: {};
+        };
+        const ModelComponent = createSubcomponent('div')({
+          modelHook: createModelHook({})((): Model2 => ({state: {bar: 'bar'}, events: {}})),
+        })<Props>(props => null);
+
+        // no expectation. I can't get to the parameter of an overloaded function with a generic
+        ElementComponent({
+          foo: 'bar',
+          as: ModelComponent,
+          model: {state: {bar: ''}, events: {}}, // `model` should be `Model2 | undefined`
+        });
+      });
+    });
+  });
+
+  // These are unit specific tests for model components when using the `as` prop. Failures here can
+  // indicate something wrong with `PropsWithModel`, but if all other tests pass, these tests should
+  // be suspect. Check other tests to make sure the type of `model` is not `unknown` which will
+  // allow any model to be passed. Thus the previous tests will pass with false positives.
+  describe('PropsWithModel', () => {
+    type Model1 = 'foo';
+    type Model2 = 'bar';
+    type ModelComponent = ElementComponentM<'div', {}, Model2>;
+
+    it('should return `Model1` if no component is passed', () => {
+      type Expected = PropsWithModel<Model1>['model'];
+
+      expectTypeOf<Expected>().toEqualTypeOf<Model1 | undefined>();
+    });
+
+    it('should return `Model1` if the passed component is not an `ElementComponentM`', () => {
+      type Expected = PropsWithModel<Model1, ElementComponent<'div', {}>>['model'];
+
+      expectTypeOf<Expected>().toEqualTypeOf<Model1 | undefined>();
+    });
+
+    it('should return `Model2` if the passed component is an `ElementComponentM`', () => {
+      type Expected = PropsWithModel<Model1, ModelComponent>['model'];
+
+      expectTypeOf<Expected>().toEqualTypeOf<Model2 | undefined>();
     });
   });
 });

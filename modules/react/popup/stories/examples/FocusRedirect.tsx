@@ -10,7 +10,7 @@ import {
   useFocusRedirect,
   usePopupModel,
 } from '@workday/canvas-kit-react/popup';
-import {HStack} from '@workday/canvas-kit-react/layout';
+import {Box, Flex} from '@workday/canvas-kit-react/layout';
 
 export const FocusRedirect = () => {
   const model = usePopupModel();
@@ -35,28 +35,30 @@ export const FocusRedirect = () => {
 
   return (
     <Popup model={model}>
-      <HStack spacing="s">
+      <Flex gap="s">
         <Popup.Target as={DeleteButton}>Delete Item</Popup.Target>
         <div aria-owns={popupId} style={{position: 'absolute'}} />
         <Popup.Popper>
-          <Popup.Card width={400} padding="s">
+          <Popup.Card width={400}>
             <Popup.CloseIcon aria-label="Close" />
             <Popup.Heading>Delete Item</Popup.Heading>
             <Popup.Body>
-              <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
+              <Box as="p" marginY="zero">
+                Are you sure you'd like to delete the item titled 'My Item'?
+              </Box>
             </Popup.Body>
-            <HStack spacing="s">
+            <Flex gap="s" padding="xxs" marginTop="xxs">
               <Popup.CloseButton as={DeleteButton} onClick={handleDelete}>
                 Delete
               </Popup.CloseButton>
               {/* Disabled elements should not be focusable and focus should move to the next focusable element */}
               <Popup.CloseButton disabled>Cancel</Popup.CloseButton>
-            </HStack>
+            </Flex>
           </Popup.Card>
         </Popup.Popper>
         <SecondaryButton>Next Focusable Button</SecondaryButton>
         <SecondaryButton>Focusable Button After Popup</SecondaryButton>
-      </HStack>
+      </Flex>
     </Popup>
   );
 };

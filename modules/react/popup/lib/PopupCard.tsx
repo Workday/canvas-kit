@@ -2,7 +2,7 @@ import * as React from 'react';
 import {keyframes} from '@emotion/react';
 
 import {Card} from '@workday/canvas-kit-react/card';
-import {space, type, CanvasSpaceKeys} from '@workday/canvas-kit-react/tokens';
+import {space, type} from '@workday/canvas-kit-react/tokens';
 import {
   styled,
   TransformOrigin,
@@ -12,12 +12,13 @@ import {
   useConstant,
   createSubcomponent,
 } from '@workday/canvas-kit-react/common';
-import {Stack, StackStyleProps} from '@workday/canvas-kit-react/layout';
+import {Flex, FlexStyleProps} from '@workday/canvas-kit-react/layout';
 
 import {getTransformFromPlacement} from './getTransformFromPlacement';
 import {usePopupCard, usePopupModel} from './hooks';
 
-export interface PopupCardProps extends ExtractProps<typeof Card, never>, Partial<StackStyleProps> {
+export type FlexAndBoxProps = ExtractProps<typeof Card, never> & FlexStyleProps;
+export interface PopupCardProps extends FlexAndBoxProps {
   children?: React.ReactNode;
 }
 
@@ -38,21 +39,57 @@ const popupAnimation = (transformOrigin: TransformOrigin) => {
 
 const StyledPopupCard = styled(Card)<
   StyledType & {width?: number | string; transformOrigin?: TransformOrigin}
->(type.levels.subtext.large, ({transformOrigin}) => {
+>(({transformOrigin, theme}) => {
   if (transformOrigin == null) {
     return {};
   }
+
   return {
     animation: popupAnimation(transformOrigin),
     animationDuration: '150ms',
     animationTimingFunction: 'ease-out',
     transformOrigin: `${transformOrigin.vertical} ${transformOrigin.horizontal}`,
+    [theme.canvas.breakpoints.down('s')]: {
+      animation: popupAnimation({vertical: 'bottom', horizontal: 'center'}),
+      animationDuration: '150ms',
+      animationTimingFunction: 'ease-out',
+      transformOrigin: 'bottom center',
+    },
     // Allow overriding of animation in special cases
     '.wd-no-animation &': {
       animation: 'none',
     },
   };
 });
+
+function getSpace(value?: string | number) {
+  if (value && value in space) {
+    return space[value as keyof typeof space];
+  } else {
+    return value;
+  }
+}
+
+function getMaxHeight(margin?: string | number) {
+  // set the default margin offset to space.xl
+  let marginOffset: string | number = space.xl;
+
+  if (margin) {
+    // parse the margin prop
+    if (typeof margin === 'string') {
+      const marginValues = margin.split(' ');
+      const marginTop = getSpace(marginValues[0]);
+      // If provided, use the specific margin-bottom in the shorthand, otherwise use the margin-top value
+      const marginBottom = getSpace(marginValues[2]) || marginTop;
+
+      marginOffset = `(${marginTop} + ${marginBottom})`;
+    } else {
+      // if margin is a number, double it to get the offset
+      marginOffset = `${margin * 2}px`;
+    }
+  }
+  return `calc(100vh - ${marginOffset})`;
+}
 
 export const PopupCard = createSubcomponent('div')({
   displayName: 'Popup.Card',
@@ -63,24 +100,21 @@ export const PopupCard = createSubcomponent('div')({
     return getTransformFromPlacement(model.state.placement || 'bottom');
   }, [model.state.placement]);
 
-  // As is a Stack that will render an element of `Element`
-  const As = useConstant(() => Stack.as(Element));
-
+  // As is a Flex that will render an element of `Element`
+  const As = useConstant(() => Flex.as(Element));
   return (
     <StyledPopupCard
       as={As}
       transformOrigin={transformOrigin}
       position="relative"
-      padding="l"
       depth={5}
       maxWidth={`calc(100vw - ${space.l})`}
-      spacing={0}
       flexDirection="column"
       minHeight={0}
-      maxHeight={`calc(100vh - ${
-        elemProps.margin ? space[elemProps.margin as CanvasSpaceKeys] || elemProps.margin : space.xl
-      } * 2)`}
-      overflowY="auto" // force IE11 to limit the flex size of the card. Without this, the body isn't allowed to overflow properly: https://github.com/philipwalton/flexbugs/issues/216#issuecomment-453053557
+      padding="m"
+      maxHeight={getMaxHeight(elemProps.margin)}
+      overflowY="auto"
+      {...type.levels.subtext.large}
       {...elemProps}
     >
       {children}

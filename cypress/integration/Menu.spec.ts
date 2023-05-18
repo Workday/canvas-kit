@@ -5,9 +5,9 @@ describe('Menu', () => {
     h.stories.visit();
   });
 
-  context(`given the [Components/Popups/Menu/React, Basic] story is rendered`, () => {
+  context(`given the [Components/Popups/Menu, Basic] story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Components/Popups/Menu/React', 'Basic');
+      h.stories.load('Components/Popups/Menu', 'Basic');
     });
 
     it('should pass axe checks', () => {
@@ -41,6 +41,14 @@ describe('Menu', () => {
 
       it('should transfer focus to the first menu item', () => {
         cy.findByRole('menuitem', {name: 'First Item'}).should('have.focus');
+      });
+
+      it('should have aria-disabled=true', () => {
+        cy.findByRole('menuitem', {name: 'Fourth Item'}).should(
+          'have.attr',
+          'aria-disabled',
+          'true'
+        );
       });
 
       context('when escape key is pressed', () => {
@@ -119,6 +127,42 @@ describe('Menu', () => {
         });
       });
 
+      context('when the fourth item is clicked', () => {
+        beforeEach(() => {
+          cy.contains('button', 'Fourth Item').click();
+        });
+
+        it('should not close the menu', () => {
+          cy.findByRole('menu').should('be.visible');
+        });
+
+        it('should have aria-expanded set to true', () => {
+          cy.findByRole('button', {name: 'Open Menu'}).should('have.attr', 'aria-expanded', 'true');
+        });
+
+        it('should not select the fourth item', () => {
+          cy.findByTestId('output').should('not.contain', '4');
+        });
+      });
+
+      context('when the tab key is pressed', () => {
+        beforeEach(() => {
+          cy.focused().tab();
+        });
+
+        it('should have aria-expanded set to false', () => {
+          cy.findByRole('button', {name: 'Open Menu'}).should(
+            'have.attr',
+            'aria-expanded',
+            'false'
+          );
+        });
+
+        it('should not show a menu', () => {
+          cy.findByRole('menu').should('not.exist');
+        });
+      });
+
       context('when the user types a printable character "t"', () => {
         beforeEach(() => {
           cy.focused().type('t');
@@ -136,6 +180,28 @@ describe('Menu', () => {
 
         it('should focus on the last option', () => {
           cy.findByRole('menuitem', {name: 'Fourth Item'}).should('have.focus');
+        });
+
+        context('when the enter key is pressed', () => {
+          beforeEach(() => {
+            cy.focused().type('{enter}');
+          });
+
+          it('should not close the menu', () => {
+            cy.findByRole('menu').should('be.visible');
+          });
+
+          it('should have aria-expanded set to true', () => {
+            cy.findByRole('button', {name: 'Open Menu'}).should(
+              'have.attr',
+              'aria-expanded',
+              'true'
+            );
+          });
+
+          it('should not select the fourth item', () => {
+            cy.findByTestId('output').should('not.contain', '4');
+          });
         });
       });
     });

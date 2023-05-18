@@ -10,7 +10,7 @@ import {
   useReturnFocus,
 } from '@workday/canvas-kit-react/popup';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
-import {HStack} from '@workday/canvas-kit-react/layout';
+import {Flex} from '@workday/canvas-kit-react/layout';
 
 export const NestedPopups = () => {
   const popup1 = usePopupModel();
@@ -36,25 +36,27 @@ export const NestedPopups = () => {
           <Popup.Card aria-label="Popup 1">
             <Popup.CloseIcon aria-label="Close" size="small" />
             <Popup.Body>
-              <p>Contents of Popup 1</p>
+              <p style={{marginTop: 0, marginBottom: 0}}>Contents of Popup 1</p>
             </Popup.Body>
-            <Popup model={popup2}>
-              <Popup.Target>Open Popup 2</Popup.Target>
-              <Popup.Popper>
-                <Popup.Card aria-label="Popup 2">
-                  <Popup.CloseIcon aria-label="Close" size="small" />
-                  <Popup.Body>
-                    <p>Contents of Popup 2</p>
-                  </Popup.Body>
-                  <HStack spacing="s">
-                    <Popup.CloseButton as={Popup.CloseButton} model={popup1}>
-                      Close Both (as)
-                    </Popup.CloseButton>
-                    <SecondaryButton {...closeBothProps}>Close Both (props)</SecondaryButton>
-                  </HStack>
-                </Popup.Card>
-              </Popup.Popper>
-            </Popup>
+            <Flex gap="s" padding="xxs" marginTop="xxs">
+              <Popup model={popup2}>
+                <Popup.Target>Open Popup 2</Popup.Target>
+                <Popup.Popper>
+                  <Popup.Card aria-label="Popup 2">
+                    <Popup.CloseIcon aria-label="Close" size="small" />
+                    <Popup.Body>
+                      <p style={{marginTop: 0, marginBottom: 0}}>Contents of Popup 2</p>
+                    </Popup.Body>
+                    <Flex gap="s" padding="xxs" marginTop="xxs">
+                      <Popup.CloseButton as={Popup.CloseButton} model={popup1}>
+                        Close Both (as)
+                      </Popup.CloseButton>
+                      <SecondaryButton {...closeBothProps}>Close Both (props)</SecondaryButton>
+                    </Flex>
+                  </Popup.Card>
+                </Popup.Popper>
+              </Popup>
+            </Flex>
           </Popup.Card>
         </Popup.Popper>
       </Popup>

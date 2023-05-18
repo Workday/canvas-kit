@@ -4,7 +4,7 @@ import {chevronDownSmallIcon} from '@workday/canvas-system-icons-web';
 import {
   createElemPropsHook,
   composeHooks,
-  subModelHook,
+  createSubModelElemPropsHook,
   createSubcomponent,
 } from '@workday/canvas-kit-react/common';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
@@ -25,10 +25,10 @@ export const useTabsOverflowButton = composeHooks(
   createElemPropsHook(useTabsModel)(() => {
     return {
       'aria-haspopup': true,
-    };
+    } as const;
   }),
   useOverflowListTarget,
-  subModelHook((m: ReturnType<typeof useTabsModel>) => m.menu, useMenuTarget)
+  createSubModelElemPropsHook(useTabsModel)(m => m.menu, useMenuTarget)
 );
 
 export const TabsOverflowButton = createSubcomponent('button')({
@@ -37,7 +37,7 @@ export const TabsOverflowButton = createSubcomponent('button')({
   elemPropsHook: useTabsOverflowButton,
 })<OverflowButtonProps>(({children, ...elemProps}, Element) => {
   return (
-    <StyledTabItem type="button" spacing="xxxs" as={Element} {...elemProps}>
+    <StyledTabItem type="button" gap="xxxs" as={Element} {...elemProps}>
       <span>{children}</span>
       <SystemIcon icon={chevronDownSmallIcon} />
     </StyledTabItem>

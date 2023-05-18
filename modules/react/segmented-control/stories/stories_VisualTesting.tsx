@@ -1,6 +1,6 @@
 import * as React from 'react';
-import {StaticStates} from '@workday/canvas-kit-react/common';
-import {ComponentStatesTable} from '@workday/canvas-kit-labs-react/common';
+import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
+
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
 
 import {
@@ -13,7 +13,7 @@ import {
 import {SegmentedControl} from '../index';
 
 export default withSnapshotsEnabled({
-  title: 'Testing/React/Buttons/Segmented Control',
+  title: 'Testing/Buttons/Segmented Control',
   component: SegmentedControl,
   parameters: {
     ReadmePath: 'labs-react/header',

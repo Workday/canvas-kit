@@ -1,1 +1,1 @@
-export {default, default as ColorPicker, ColorPickerProps} from './lib/ColorPicker';
+export {ColorPicker, ColorPickerProps} from './lib/ColorPicker';

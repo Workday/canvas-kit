@@ -7,7 +7,6 @@ import {searchIcon, xIcon} from '@workday/canvas-system-icons-web';
 import {FormField, FormFieldLabelPosition} from '@workday/canvas-kit-react/form-field';
 import {Combobox} from '@workday/canvas-kit-labs-react/combobox';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
-import {MenuItemProps} from '@workday/canvas-kit-preview-react/menu';
 import {searchThemes, SearchTheme, SearchThemeAttributes} from './themes';
 import chroma from 'chroma-js';
 
@@ -28,7 +27,7 @@ export interface SearchFormProps extends GrowthBehavior, React.FormHTMLAttribute
   /**
    * The autocomplete items of the SearchForm. This array of menu items is shown under the search bar.
    */
-  autocompleteItems?: React.ReactElement<MenuItemProps>[];
+  autocompleteItems?: React.ReactElement<any>[];
   /**
    * The theme of the header the search input is being rendered in.
    */
@@ -87,6 +86,11 @@ export interface SearchFormProps extends GrowthBehavior, React.FormHTMLAttribute
    * @default false
    */
   allowEmptyStringSearch?: boolean;
+  /**
+   * Sets the `id` for the label
+   * @default unique identifier
+   */
+  labelId?: string;
 }
 
 export interface SearchFormState {
@@ -118,7 +122,7 @@ const StyledSearchForm = styled('form')<
 >(
   {
     position: 'relative',
-    flex: `1 1 auto`, // Instead of just flex-grow: 1 for IE11, see https://github.com/philipwalton/flexbugs#flexbug-1
+    flexGrow: 1,
     display: 'flex',
     alignItems: 'center',
     marginLeft: space.m,
@@ -161,7 +165,6 @@ const SearchContainer = styled('div')<Pick<SearchFormProps, 'height'>>(
   },
   ({height}) => ({
     minHeight: height,
-    height: height, // Needed to keep IE11 vertically centered
   })
 );
 
@@ -230,7 +233,6 @@ const SearchInput = styled(TextInput)<
   const collapseStyles: CSSObject = isCollapsed
     ? {
         fontSize: '20px',
-        lineHeight: '20px', // For ie11, line-height needs to match font-size
         paddingLeft: spaceNumbers.xl + spaceNumbers.s,
         paddingRight: spaceNumbers.xl + spaceNumbers.s,
         maxWidth: 'none',
@@ -248,7 +250,6 @@ const SearchInput = styled(TextInput)<
       };
   return {
     fontSize: '14px',
-    lineHeight: '14px', // For ie11, line-height needs to match font-size
     boxShadow: inputColors.boxShadow,
     color: inputColors.color,
     border: 'none',
@@ -280,7 +281,7 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
 
   private inputRef = React.createRef<HTMLInputElement>();
   private openRef = React.createRef<HTMLButtonElement>();
-  private labelId = generateUniqueId();
+  private defaultLabelId = generateUniqueId();
 
   state: Readonly<SearchFormState> = {
     showForm: false,
@@ -385,6 +386,7 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
       submitAriaLabel = 'Search',
       openButtonAriaLabel = 'Open Search',
       closeButtonAriaLabel = 'Cancel',
+      labelId = this.defaultLabelId,
       showClearButton = true,
       height = 40,
       grow,
@@ -405,7 +407,7 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
         action="."
         rightAlign={rightAlign}
         grow={grow}
-        aria-labelledby={this.labelId}
+        aria-labelledby={labelId}
         isCollapsed={isCollapsed}
         onSubmit={this.handleSubmit}
         showForm={this.state.showForm}
@@ -432,8 +434,8 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
           />
           <SearchField
             grow={grow}
-            id={this.labelId}
-            inputId={`input-${this.labelId}`}
+            id={labelId}
+            inputId={`input-${labelId}`}
             label={inputLabel}
             labelPosition={FormFieldLabelPosition.Hidden}
             useFieldset={false}
@@ -450,7 +452,7 @@ export class SearchForm extends React.Component<SearchFormProps, SearchFormState
               onBlur={this.handleBlur}
               showClearButton={!isCollapsed && showClearButton}
               clearButtonAriaLabel={clearButtonAriaLabel}
-              labelId={this.labelId}
+              labelId={labelId}
             >
               <SearchInput
                 ref={this.inputRef}

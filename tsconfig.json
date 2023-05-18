@@ -1,13 +1,13 @@
 {
   "compilerOptions": {
     "module": "es6",
-    "target": "es5",
+    "target": "es2019",
     "allowJs": false,
     "declaration": true,
     "declarationMap": true,
     "esModuleInterop": true,
     "jsx": "react",
-    "lib": ["es2015", "es2017", "dom"],
+    "lib": ["es2015", "es2017", "es2018", "es2019", "dom"],
     "moduleResolution": "node",
     "forceConsistentCasingInFileNames": true,
     "removeComments": false,
@@ -19,10 +19,23 @@
     "allowSyntheticDefaultImports": true,
     "types": [],
     "incremental": true,
+    "skipLibCheck": true
   },
   "ts-node": {
     "transpileOnly": true,
-    "module": "commonjs"
+    "compilerOptions": {
+      "module": "commonjs"
+    }
   },
-  "exclude": ["cypress", "node_modules", "modules/**/dist/*", "modules/**/ts-tmp/*", "docs", "utils/**/spec/*", "modules/**/spec/*", "modules/**/stories/*", "jest/**/*"]
+  "exclude": [
+    "cypress",
+    "node_modules",
+    "modules/**/dist/*",
+    "modules/**/ts-tmp/*",
+    "docs",
+    "utils/**/spec/*",
+    "modules/**/spec/*",
+    "modules/**/stories/*",
+    "jest/**/*"
+  ]
 }

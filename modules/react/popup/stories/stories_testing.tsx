@@ -1,14 +1,17 @@
 import * as React from 'react';
 import ReactDOM from 'react-dom';
 
+import {TextInput} from '@workday/canvas-kit-react/text-input';
+import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
-import {DeleteButton, SecondaryButton} from '@workday/canvas-kit-react/button';
+import {DeleteButton, SecondaryButton, TertiaryButton} from '@workday/canvas-kit-react/button';
 import {useMount} from '@workday/canvas-kit-react/common';
-import {HStack} from '@workday/canvas-kit-react/layout';
+import {Flex} from '@workday/canvas-kit-react/layout';
 import {
   Popup,
   useCloseOnOutsideClick,
   useCloseOnEscape,
+  useCloseOnTargetHidden,
   usePopupModel,
   usePopupStack,
   useBringToTopOnClick,
@@ -16,9 +19,10 @@ import {
   useReturnFocus,
   useFocusTrap,
 } from '@workday/canvas-kit-react/popup';
+import {menuGroupIcon} from '@workday/canvas-system-icons-web';
 
 export default {
-  title: 'Testing/React/Popups/Popup',
+  title: 'Testing/Popups/Popup',
   component: Popup,
 };
 
@@ -160,7 +164,7 @@ export const PopupWithNonHidablePopup = () => {
   useCloseOnEscape(popup1);
 
   return (
-    <HStack spacing="s">
+    <Flex gap="s">
       <Popup model={popup1}>
         <Popup.Target>Open Popup 1</Popup.Target>
         <Popup.Popper>
@@ -182,7 +186,7 @@ export const PopupWithNonHidablePopup = () => {
           </Popup.Card>
         </Popup.Popper>
       </Popup>
-    </HStack>
+    </Flex>
   );
 };
 
@@ -284,7 +288,7 @@ export const PopupWithBodyScroll = () => {
         <br />
         <br />
       </div>
-      <HStack spacing="s">
+      <Flex gap="s">
         <Popup.Target as={DeleteButton}>Delete Item</Popup.Target>
         <div aria-owns={popupId} style={{position: 'absolute'}} />
         <Popup.Popper>
@@ -294,15 +298,139 @@ export const PopupWithBodyScroll = () => {
             <Popup.Body>
               <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
             </Popup.Body>
-            <HStack spacing="s">
+            <Flex gap="s">
               <Popup.CloseButton as={DeleteButton}>Delete</Popup.CloseButton>
               <Popup.CloseButton>Cancel</Popup.CloseButton>
-            </HStack>
+            </Flex>
           </Popup.Card>
         </Popup.Popper>
         <SecondaryButton>Next Focusable Button</SecondaryButton>
         <SecondaryButton>Focusable Button After Popup</SecondaryButton>
-      </HStack>
+      </Flex>
     </Popup>
+  );
+};
+export const TooltipReturnFocus = () => {
+  const model = usePopupModel();
+
+  useCloseOnOutsideClick(model);
+  useCloseOnEscape(model);
+  useInitialFocus(model);
+  useReturnFocus(model);
+
+  return (
+    <Popup model={model}>
+      <Tooltip title="Open Popup">
+        <Popup.Target as={TertiaryButton} icon={menuGroupIcon} />
+      </Tooltip>
+      <Popup.Popper>
+        <Popup.Card>
+          <Popup.CloseIcon aria-label="Close" />
+          <Popup.Heading>Popup</Popup.Heading>
+          <Popup.Body>Contents</Popup.Body>
+        </Popup.Card>
+      </Popup.Popper>
+    </Popup>
+  );
+};
+
+export const ReturnFocusTest = () => {
+  const model = usePopupModel();
+
+  useCloseOnOutsideClick(model);
+  useCloseOnEscape(model);
+  useInitialFocus(model);
+  useReturnFocus(model);
+
+  return (
+    <div
+      style={{width: 400, height: 400, overflow: 'scroll', padding: 4}}
+      data-testid="scroll-area"
+    >
+      <div style={{width: 950}}>
+        <p style={{marginBottom: 400}}>Scroll down</p>
+        <p>Scroll right and click on the button</p>
+        <Popup model={model}>
+          <FormField inputId="return-focus-text-input" label="Name" style={{marginLeft: 400}}>
+            <TextInput />
+          </FormField>
+          <Popup.Target style={{marginBottom: 400, marginLeft: 410}} data-testid="target">
+            Open Popup
+          </Popup.Target>
+          <Popup.Popper>
+            <Popup.Card>
+              <Popup.CloseIcon aria-label="Close" />
+              <Popup.Body>
+                <p>The "Open Popup" button should not receive focus if:</p>
+                <ul>
+                  <li>You click on the input</li>
+                  <li>
+                    You scroll the container so that less than half of the "Open Popup" is showing
+                  </li>
+                  <li>
+                    <TertiaryButton
+                      data-testid="focus-text-input-link"
+                      onClick={() => {
+                        model.events.hide();
+                        document.getElementById('return-focus-text-input').focus();
+                      }}
+                    >
+                      You click this link
+                    </TertiaryButton>
+                  </li>
+                </ul>
+              </Popup.Body>
+            </Popup.Card>
+          </Popup.Popper>
+        </Popup>
+      </div>
+    </div>
+  );
+};
+
+export const CloseOnTargetHiddenTest = () => {
+  const model = usePopupModel();
+
+  useCloseOnEscape(model);
+  useCloseOnTargetHidden(model);
+
+  return (
+    <div
+      style={{width: 400, height: 400, overflow: 'scroll', padding: 4, position: 'relative'}}
+      data-testid="scroll-area"
+    >
+      <div style={{width: 950, height: 950}}>
+        <p style={{marginBottom: 400}}>Scroll down</p>
+        <p>Scroll right and click on the button</p>
+        <Popup model={model}>
+          <div
+            style={{
+              position: 'absolute',
+              width: 950,
+              height: 950,
+              display: 'flex',
+              top: 0,
+              left: 0,
+              justifyContent: 'center',
+            }}
+          >
+            <Popup.Target data-testid="target" style={{alignSelf: 'center'}}>
+              Open Popup
+            </Popup.Target>
+          </div>
+          <Popup.Popper>
+            <Popup.Card>
+              <Popup.CloseIcon aria-label="Close" />
+              <Popup.Body>
+                <p>
+                  Scroll in any direction. The popup should close when at least 50% of the target
+                  button is hidden from view
+                </p>
+              </Popup.Body>
+            </Popup.Card>
+          </Popup.Popper>
+        </Popup>
+      </div>
+    </div>
   );
 };

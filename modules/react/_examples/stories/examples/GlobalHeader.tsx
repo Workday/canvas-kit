@@ -11,12 +11,10 @@ import {
 
 import {TertiaryButton, Hyperlink} from '@workday/canvas-kit-react/button';
 import {Avatar} from '@workday/canvas-kit-react/avatar';
-import {HStack, HStackProps, StackSpacing} from '@workday/canvas-kit-react/layout';
-import {SearchForm} from '@workday/canvas-kit-labs-react';
+import {Flex, FlexProps} from '@workday/canvas-kit-react/layout';
+import {SearchForm} from '@workday/canvas-kit-labs-react/search-form';
 
-interface HeaderItemProps extends Omit<HStackProps, 'spacing'> {
-  spacing?: StackSpacing;
-}
+interface HeaderItemProps extends FlexProps {}
 
 export const Basic = () => (
   <GlobalHeader>
@@ -40,8 +38,8 @@ export const Basic = () => (
 
 const GlobalHeaderItem = createComponent('div')({
   displayName: 'GlobalHeader.Item',
-  Component: ({spacing = 's', ...props}: HeaderItemProps, ref) => (
-    <HStack spacing={spacing} alignItems="center" marginX={space.xs} ref={ref} {...props} />
+  Component: ({gap = 's', ...props}: HeaderItemProps, ref) => (
+    <Flex gap={gap} alignItems="center" marginX={space.xs} ref={ref} {...props} />
   ),
 });
 

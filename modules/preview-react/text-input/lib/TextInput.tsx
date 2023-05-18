@@ -1,10 +1,13 @@
 import React from 'react';
 
 import {createContainer, ExtractProps} from '@workday/canvas-kit-react/common';
-import {FormField, useFormFieldOrientation} from '@workday/canvas-kit-preview-react/form-field';
-import {Stack} from '@workday/canvas-kit-react/layout';
+import {
+  FormField,
+  useFormFieldModel,
+  useFormFieldOrientation,
+} from '@workday/canvas-kit-preview-react/form-field';
+import {Flex} from '@workday/canvas-kit-react/layout';
 
-import {useTextInputModel} from './hooks';
 import {TextInputField} from './TextInputField';
 
 export interface TextInputProps extends ExtractProps<typeof FormField, never> {
@@ -16,7 +19,7 @@ export interface TextInputProps extends ExtractProps<typeof FormField, never> {
 
 export const TextInput = createContainer('div')({
   displayName: 'TextInput',
-  modelHook: useTextInputModel,
+  modelHook: useFormFieldModel,
   subComponents: {
     Field: TextInputField,
     Label: FormField.Label,
@@ -26,8 +29,8 @@ export const TextInput = createContainer('div')({
   const layoutProps = useFormFieldOrientation(orientation);
 
   return (
-    <Stack as={Element} {...layoutProps} {...elemProps}>
+    <Flex as={Element} {...layoutProps} {...elemProps}>
       {children}
-    </Stack>
+    </Flex>
   );
 });

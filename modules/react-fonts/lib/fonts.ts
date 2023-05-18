@@ -1,7 +1,7 @@
-import {CSSObject} from '@emotion/styled';
+import {CSSObject} from '@emotion/react';
 const fontsPath = 'https://design.workdaycdn.com/beta/assets/fonts@1.0.0/roboto/ttf';
 
-const fonts: CSSObject[] = [
+export const fonts: CSSObject[] = [
   {
     '@font-face': {
       fontFamily: 'Roboto',
@@ -43,5 +43,3 @@ const fonts: CSSObject[] = [
     },
   },
 ];
-
-export default fonts;

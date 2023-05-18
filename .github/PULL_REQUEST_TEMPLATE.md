@@ -6,8 +6,9 @@ Fixes: #1234 <!-- For bug fixes, use "Fixes". For new features use "Resolves". T
 
 <!-- Explain the **motivation** for making this change. What existing problem does the pull request solve? Anything in the Summary section will be attached to the squashed commit when this PR is merged. -->
 
-<!-- This is the category in the release notes. Common categories are Components, Infrastructure, and Documentation -->
-![category](https://img.shields.io/badge/release_category-Components-blue)
+<!-- This is the category in the release notes. Common categories are Components, Infrastructure, Documentation, Dependencies, Codemods, and Tokens -->
+## Release Category
+Components
 
 ### Release Note
 Optional release note message. Changelog and release summaries will contain a pull request title. This section will add additional notes under that title. This section is not a summary, but something extra to point out in release notes. An example might be calling out breaking changes in a labs component or minor visual changes that need visual regression updates. Remove this section if no additional release notes are required.
@@ -19,14 +20,42 @@ Optional breaking changes message. If your PR includes breaking changes. It is e
 
 ## Checklist
 
-<!-- Remove items that do not apply. For completed items, change [ ] to [x]. -->
+- [ ] MDX documentation adheres to Canvas Kit's [standard MDX template](https://github.com/Workday/canvas-kit/discussions/1131)
+- [ ] Label `ready for review` has been added to PR
 
-- [ ] tests are changed or added
-- [ ] code has been documented
-- [ ] design approved final implementation
-- [ ] a11y approved final implementation
-- [ ] code adheres to the [API & Pattern guidelines](https://workday.github.io/canvas-kit/?path=/story/welcome-dev-docs-api-pattern-guidelines--page)
+## For the Reviewer
 
-## Additional References
+<!-- Provide a bit of context about what this PR does. Add any additional checklist items you'd like the reviewer to check -->
 
-<!-- Upload screenshots of the final component or any other artifacts that would help a reviewer understand the choices you made in the PR. -->
+- [ ] PR title is short and descriptive
+- [ ] PR summary describes the change (Fixes/Resolves linked correctly)
+- [ ] PR Release Notes describes additional information useful to call out in a release message or removed if not applicable
+- [ ] Breaking Changes provides useful information to upgrade to this code or removed if not applicable
+
+## Where Should the Reviewer Start?
+
+<!-- If you were reviewing this PR, where would you want to start?  -->
+<!-- e.g. `/modules/react/common/lib/utils/someUtil.ts`  -->
+
+## Areas for Feedback? (optional)
+
+<!-- Do you have any particular areas where you'd like additional focus or feedback from reviewers? -->
+
+- [ ] Code
+- [ ] Documentation
+- [ ] Testing
+- [ ] Codemods
+
+<!-- If you would like to provide more context for where you'd like reviewer feedback, or if there are areas where you specifically do not want feedback, please describe below.  -->
+## Testing Manually
+
+<!-- Explain how your reviewer could verify this change  -->
+
+## Screenshots or GIFs (if applicable)
+
+<!-- Does your change affect the UI? If so, please include a screenshot or short gif. -->
+
+## Thank You Gif (optional)
+
+<!-- Share a fun [gif](https://giphy.com) to say thanks to your reviewer! -->
+<!-- ![a smiling Shiba Inu typing on a laptop](https://media.giphy.com/media/mCRJDo24UvJMA/giphy.gif) -->

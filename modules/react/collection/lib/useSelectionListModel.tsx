@@ -11,9 +11,21 @@ export type Selection = {
 };
 
 /**
- * A SelectionManager is used
+ * The list and grid models accept a `selection` config. If one is not provided,
+ * `singleSelectManager` is used. You can provide a custom select manager to suite your needs. A
+ * selection manager is an object with a single `select` method that takes an id and previously
+ * selected ids and returns a new set of selected ids.
+ *
+ * The collection system provides two selection managers: `singleSelectManager` and
+ * `multiSelectionManager`.
  */
 export interface SelectionManager {
+  /**
+   * Sets a new `Selection` state based on the current ID passed and the previous state. Each
+   * selection manager can implement this differently. For example, a single select manager may
+   * unselect all other items and select only the passed in id. A multiselect manager may toggle the
+   * passed id.
+   */
   select(id: string, prevState: Selection): Selection;
 }
 
@@ -59,6 +71,7 @@ export const useSelectionListModel = createModelHook({
     selection: singleSelectionManager,
   },
   requiredConfig: useCursorListModel.requiredConfig,
+  contextOverride: useCursorListModel.Context,
 })(config => {
   const cursor = useCursorListModel(config);
   const [selectedIds, setSelectedIds] = React.useState(config.initialSelectedIds);

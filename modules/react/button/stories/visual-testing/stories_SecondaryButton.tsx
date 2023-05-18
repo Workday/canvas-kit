@@ -1,13 +1,17 @@
 import React from 'react';
-import {ComponentStatesTable, permutateProps} from '@workday/canvas-kit-labs-react/common';
+import {PartialEmotionCanvasTheme} from '@workday/canvas-kit-react/common';
+import {
+  ComponentStatesTable,
+  permutateProps,
+  StaticStates,
+} from '@workday/canvas-kit-react/testing';
 import {withSnapshotsEnabled, customColorTheme} from '../../../../../utils/storybook';
 import {playCircleIcon, relatedActionsVerticalIcon} from '@workday/canvas-system-icons-web';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {Container, stateTableColumnProps} from './utils';
-import {PartialEmotionCanvasTheme, StaticStates} from '@workday/canvas-kit-react/common';
 
 export default withSnapshotsEnabled({
-  title: 'Testing/React/Buttons/Button/Secondary Button',
+  title: 'Testing/Buttons/Button/Secondary Button',
   component: SecondaryButton,
 });
 
@@ -38,12 +42,7 @@ export const SecondaryButtonStates = (props: {theme?: PartialEmotionCanvasTheme}
           ],
         },
         // Filter out permutations where `iconPosition` is provided and not `icon`, and vice versa
-        props => {
-          if ((props.iconPosition && !props.icon) || (props.icon && !props.iconPosition)) {
-            return false;
-          }
-          return true;
-        }
+        props => (props.iconPosition && props.icon) || (!props.icon && !props.iconPosition)
       )}
       columnProps={stateTableColumnProps}
     >
@@ -56,31 +55,22 @@ export const SecondaryButtonStates = (props: {theme?: PartialEmotionCanvasTheme}
   </StaticStates>
 );
 
-export const SecondaryButtonIconStates = (props: {theme?: PartialEmotionCanvasTheme}) => (
+export const SecondaryIconButtonStates = (props: {theme?: PartialEmotionCanvasTheme}) => (
   <StaticStates theme={props.theme}>
     <ComponentStatesTable
-      rowProps={permutateProps(
-        {
-          variant: [
-            {value: undefined, label: ''},
-            {value: 'inverse', label: 'Inverse'},
-          ],
-          size: [
-            {value: 'extraSmall', label: 'Extra Small'},
-            {value: 'small', label: 'Small'},
-            {value: 'medium', label: 'Medium'},
-            {value: 'large', label: 'Large'},
-          ],
-          icon: [
-            // We don't need a label here, because `iconPosition` provides it
-            {value: relatedActionsVerticalIcon, label: ''},
-          ],
-        },
-        // Filter out permutations where `iconPosition` is provided and not `icon`, and vice versa
-        props => {
-          return true;
-        }
-      )}
+      rowProps={permutateProps({
+        variant: [
+          {value: undefined, label: ''},
+          {value: 'inverse', label: 'Inverse'},
+        ],
+        size: [
+          {value: 'extraSmall', label: 'Extra Small'},
+          {value: 'small', label: 'Small'},
+          {value: 'medium', label: 'Medium'},
+          {value: 'large', label: 'Large'},
+        ],
+        icon: [{value: relatedActionsVerticalIcon, label: ''}],
+      })}
       columnProps={stateTableColumnProps}
     >
       {props => (
@@ -94,4 +84,8 @@ export const SecondaryButtonIconStates = (props: {theme?: PartialEmotionCanvasTh
 
 export const SecondaryButtonThemedStates = () => (
   <SecondaryButtonStates theme={{canvas: customColorTheme}} />
+);
+
+export const SecondaryIconButtonThemedStates = () => (
+  <SecondaryIconButtonStates theme={{canvas: customColorTheme}} />
 );

@@ -11,14 +11,10 @@ import {
   useTheme,
   Themeable,
 } from '@workday/canvas-kit-react/common';
-import canvas, {
-  borderRadius,
-  colors,
-  inputColors,
-  spaceNumbers,
-} from '@workday/canvas-kit-react/tokens';
+import {borderRadius, colors, inputColors, spaceNumbers} from '@workday/canvas-kit-react/tokens';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {checkSmallIcon} from '@workday/canvas-system-icons-web';
+import {LabelText} from '@workday/canvas-kit-react/text';
 
 export interface CheckboxProps extends Themeable {
   /**
@@ -33,7 +29,7 @@ export interface CheckboxProps extends Themeable {
   disabled?: boolean;
   /**
    * The HTML `id` of the underlying checkbox input element. This is required if `label` is defined as a non-empty string.
-   * @default A uniquely generated id
+   * @default {useUniqueId}
    */
   id?: string;
   /**
@@ -307,21 +303,6 @@ const IndeterminateBox = styled('div')<CheckboxProps>(
   })
 );
 
-const CheckboxLabel = styled('label')<{disabled?: boolean; variant?: string}>(
-  {
-    ...canvas.type.levels.subtext.large,
-    paddingLeft: checkboxLabelDistance,
-  },
-  ({variant}) => (variant === 'inverse' ? {color: colors.frenchVanilla100} : undefined),
-  ({disabled, variant}) =>
-    disabled
-      ? {
-          color: variant === 'inverse' ? colors.frenchVanilla100 : inputColors.disabled.text,
-          opacity: variant === 'inverse' ? '.4' : '1',
-        }
-      : {cursor: 'pointer'}
-);
-
 export const Checkbox = createComponent('input')({
   displayName: 'Checkbox',
   Component: (
@@ -333,9 +314,6 @@ export const Checkbox = createComponent('input')({
       theme = useTheme(),
       id,
       disabled,
-      onChange,
-      value,
-      error,
       indeterminate,
       variant,
       ...elemProps
@@ -353,10 +331,7 @@ export const Checkbox = createComponent('input')({
             disabled={disabled}
             id={inputId}
             ref={ref}
-            onChange={onChange}
             type="checkbox"
-            value={value}
-            error={error}
             variant={variant}
             aria-checked={indeterminate ? 'mixed' : checked}
             {...elemProps}
@@ -380,9 +355,14 @@ export const Checkbox = createComponent('input')({
           </CheckboxBackground>
         </CheckboxInputWrapper>
         {label && (
-          <CheckboxLabel variant={variant} htmlFor={inputId} disabled={disabled}>
+          <LabelText
+            htmlFor={inputId}
+            disabled={disabled}
+            variant={variant}
+            paddingInlineStart={checkboxLabelDistance}
+          >
             {label}
-          </CheckboxLabel>
+          </LabelText>
         )}
       </CheckboxContainer>
     );
@@ -391,5 +371,3 @@ export const Checkbox = createComponent('input')({
     ErrorType,
   },
 });
-
-export default Checkbox;

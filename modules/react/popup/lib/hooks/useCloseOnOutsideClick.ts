@@ -6,14 +6,14 @@ import {createElemPropsHook} from '@workday/canvas-kit-react/common';
 import {usePopupModel} from './usePopupModel';
 
 /**
- * Registers global listener for all clicks. It will only call the PopupModel's `hide` event if the
- * click happened outside the PopupModel's `state.stackRef` element and its children _and_ the
- * provided `stackRef` element is the topmost element with this behavior applied in the stack. Adds
- * a `data-behavior-click-outside-close="topmost"` attribute to ensure proper functionality.
+ * Registers global listener for all clicks. It will only call the {@link PopupModel}'s `hide` event
+ * if the click happened outside the PopupModel's `state.stackRef` element and its children _and_
+ * the provided `stackRef` element is the topmost element with this behavior applied in the stack.
+ * Adds a `data-behavior-click-outside-close="topmost"` attribute to ensure proper functionality.
  *
  * This should be used with popup elements that are dismissible like Modals, non-modal dialogs,
- * dropdown menus, etc. Tooltips and hierarchical menus should use `useAlwaysCloseOnClickOutside`
- * instead.
+ * dropdown menus, etc. Tooltips and hierarchical menus should use
+ * {@link useAlwaysCloseOnClickOutside} instead.
  */
 export const useCloseOnOutsideClick = createElemPropsHook(usePopupModel)(model => {
   const onClick = React.useCallback(

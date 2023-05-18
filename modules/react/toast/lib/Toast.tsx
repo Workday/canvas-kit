@@ -1,119 +1,113 @@
-import * as React from 'react';
+import React from 'react';
 
+import {createContainer, ExtractProps} from '@workday/canvas-kit-react/common';
+import {Flex} from '@workday/canvas-kit-react/layout';
 import {Popup} from '@workday/canvas-kit-react/popup';
-import {space, colors, type, CanvasColor} from '@workday/canvas-kit-react/tokens';
-import {SystemIcon} from '@workday/canvas-kit-react/icon';
-import {checkIcon, exclamationCircleIcon} from '@workday/canvas-system-icons-web';
-import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {createComponent, ExtractProps, styled, StyledType} from '@workday/canvas-kit-react/common';
-import {Hyperlink} from '@workday/canvas-kit-react/button';
 
-export interface ToastProps extends ExtractProps<typeof Popup.Card, never> {
-  /**
-   * The icon of the Toast.
-   * @default checkIcon
-   */
-  icon?: CanvasSystemIcon;
-  /**
-   * The color of the Toast icon.
-   * @default colors.greenApple400
-   */
-  iconColor?: CanvasColor | string; // TODO: Fix
-  /**
-   * The text of the Toast message.
-   */
-  children: string;
-  /**
-   * The function called when the Toast is closed.
-   */
-  onClose?: () => void;
-  /**
-   * The function called when the Toast action is clicked.
-   */
-  onActionClick?: () => void;
-  /**
-   * The text of the Toast action.
-   */
-  actionText?: string;
-}
-const toastWidth = 360;
+import {ToastCloseIcon} from './ToastCloseIcon';
+import {ToastIcon} from './ToastIcon';
+import {ToastMessage} from './ToastMessage';
+import {ToastLink} from './ToastLink';
+import {ToastBody} from './ToastBody';
+import {useToastModel} from './hooks/useToastModel';
 
-const ToastContentContainer = styled('div')<Pick<ToastProps, 'onClose'>>(
-  {
-    display: 'flex',
-    alignItems: 'center',
-    ...type.levels.subtext.large,
-  },
-  ({onClose}) => ({
-    marginRight: onClose ? space.m : undefined,
-  })
-);
+export interface ToastProps extends Omit<ExtractProps<typeof Popup.Card, never>, 'model'> {}
 
-const ToastSystemIcon = styled(SystemIcon)({
-  marginRight: space.s,
-  alignSelf: 'start',
-});
+/**
+ * The function helps set the correct aria attributes based on the mode
+ * @param mode Defines what aria attributes will be added to the main container
+ * @param id Used to tie the Toast to Toast.Message for screen readers
+ */
+const getAriaAttributes = (mode: string, id: string): React.HtmlHTMLAttributes<HTMLDivElement> => {
+  switch (mode) {
+    case 'dialog':
+      return {
+        'aria-describedby': id,
+        // This is added by Popup.Card, so overwriting to remove it
+        'aria-labelledby': undefined,
+        role: 'dialog',
+      };
+    case 'alert':
+      return {
+        role: 'alert',
+        'aria-live': 'assertive',
+        'aria-atomic': true,
+      };
+    case 'status':
+      return {
+        role: 'status',
+        'aria-live': 'polite',
+        'aria-atomic': true,
+      };
+    default: {
+      return {};
+    }
+  }
+};
 
-const {color, ...subTextLargeStyles} = type.levels.subtext.large;
-
-const StyledActionButton = styled(Hyperlink)<StyledType>({
-  ...subTextLargeStyles,
-  display: 'block',
-  backgroundColor: 'transparent', // To prevent Safari from rendering grey 'buttonface' as bgcolor
-  border: 'none',
-  marginTop: space.xxxs,
-});
-
-const Message = styled('div')({
-  wordBreak: 'break-word',
-  wordWrap: 'break-word', // Needed for IE11
-});
-
-export const Toast = createComponent('div')({
+/**
+ * Toast is a compound component that has different modes based on its contents. The modes add the proper aria attributes for accessibility
+ *
+ * ```tsx
+ * import { Toast } from "@workday/canvas-kit-react/toast";
+ *
+ * const MyToast = (props: CardProps) => (
+ *    <Toast mode="dialog" aria-label="notifcation">
+ *      <Toast.Icon icon={checkIcon} color={colors.greenApple400} />
+ *      <Toast.Body>
+ *        <Toast.Message>Your workbook was successfully processed.</Toast.Message>
+ *        <Toast.Link href="#hreflink">Custom Link</Toast.Link>
+ *      </Toast.Body>
+ *      <Toast.CloseIcon aria-label="Close" onClick={handleClose} />
+ *    </Toast>
+ * );
+ *```
+ */
+export const Toast = createContainer('div')({
   displayName: 'Toast',
-  Component: (
-    {
-      icon = checkIcon, // needed for TS2742 - https://github.com/microsoft/TypeScript/issues/29808
-      iconColor = colors.greenApple400,
-      onClose,
-      onActionClick,
-      actionText,
-      children,
-      ...elemProps
-    }: ToastProps,
-    ref,
-    Element
-  ) => {
-    const isInteractive = onClose || onActionClick;
-    const isError = iconColor === colors.cinnamon500 && icon === exclamationCircleIcon;
-
-    return (
-      <Popup.Card
-        ref={ref}
-        as={Element}
-        width={toastWidth}
-        padding="s"
-        depth={5}
-        role={isInteractive ? 'dialog' : isError ? 'alert' : 'status'}
-        aria-live={isInteractive ? 'off' : isError ? 'assertive' : 'polite'}
-        aria-atomic={!isInteractive}
-        {...elemProps}
-      >
-        {onClose && <Popup.CloseIcon aria-label="Close" onClick={onClose} size="small" />}
-        <Popup.Body>
-          <ToastContentContainer onClose={onClose}>
-            {icon && <ToastSystemIcon color={iconColor} colorHover={iconColor} icon={icon} />}
-            <Message>
-              {children}
-              {onActionClick && (
-                <StyledActionButton as="button" onClick={onActionClick}>
-                  {actionText}
-                </StyledActionButton>
-              )}
-            </Message>
-          </ToastContentContainer>
-        </Popup.Body>
-      </Popup.Card>
-    );
+  modelHook: useToastModel,
+  subComponents: {
+    /**
+     * `Toast.Body` should container `Toast.Message` and `Toast.Link`. This ensures proper styling and spacing between elements.
+     *
+     * ```tsx
+     * <Toast.Body>
+     *  <Toast.Message>Your workbook was successfully processed.</Toast.Message>
+     *  <Toast.Link href="#hreflink">Custom Link</Toast.Link>
+     * </Toast.Body>
+     * ```
+     */
+    Body: ToastBody,
+    /**
+     * `Toast.CloseIcon` renders a {@link PopupCloseIcon}. You can pass an `onClick` when used with `Popper` to dismiss the `Toast`.
+     */
+    CloseIcon: ToastCloseIcon,
+    /**
+     * `ToastIcon` renders a `SystemIcon` where you have access to all styling properties from `SystemIcon`.
+     */
+    Icon: ToastIcon,
+    /**
+     * `Toast.Message` renders our `Subtext` component where you can style however way you'd like with style properties.
+     * This component also has an `id` so that when the `Toast` has a prop of `mode="dialog"` the message is read out by screen readers by adding an `aria-describedby` on the main `Toast` component.
+     */
+    Message: ToastMessage,
+    /**
+     * `Toast.Link` renders our `Hyperlink` component. If you need to link to more information, use this component.
+     */
+    Link: ToastLink,
   },
+})<ToastProps>(({children, ...elemProps}, _, model) => {
+  return (
+    <Popup.Card
+      as={Flex}
+      width={360}
+      padding="0"
+      {...getAriaAttributes(model.state.mode, model.state.id)}
+      flexDirection="row"
+      gap="xxxs"
+      {...elemProps}
+    >
+      {children}
+    </Popup.Card>
+  );
 });

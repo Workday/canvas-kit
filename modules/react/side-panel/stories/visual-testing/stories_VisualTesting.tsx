@@ -1,6 +1,5 @@
 import React from 'react';
-import {StaticStates} from '@workday/canvas-kit-react/common';
-import {ComponentStatesTable} from '@workday/canvas-kit-labs-react/common';
+import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
 import {withSnapshotsEnabled} from '../../../../../utils/storybook';
 import {
   SidePanel,
@@ -10,7 +9,7 @@ import {
 import {space} from '@workday/canvas-kit-react/tokens';
 
 export default withSnapshotsEnabled({
-  title: 'Testing/React/Containers/Side Panel',
+  title: 'Testing/Containers/Side Panel',
   component: SidePanel,
 });
 

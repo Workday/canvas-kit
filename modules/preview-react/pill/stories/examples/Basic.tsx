@@ -2,10 +2,10 @@ import React from 'react';
 
 import {Pill} from '@workday/canvas-kit-preview-react/pill';
 
-import {HStack} from '@workday/canvas-kit-react';
+import {Flex} from '@workday/canvas-kit-react/layout';
 
 export const Basic = () => (
-  <HStack spacing="xxs">
+  <Flex gap="xxs">
     <Pill onClick={() => console.warn('clicked')}>
       <Pill.Icon />
       <Pill.Label>Regina Skeltor</Pill.Label>
@@ -14,5 +14,5 @@ export const Basic = () => (
       <Pill.Icon />
       <Pill.Label>Regina Skeltor</Pill.Label>
     </Pill>
-  </HStack>
+  </Flex>
 );

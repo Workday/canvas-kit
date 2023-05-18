@@ -2,7 +2,7 @@ import * as React from 'react';
 import innerText from 'react-innertext';
 
 import {getTransformFromPlacement, Placement, Popper} from '@workday/canvas-kit-react/popup';
-import {mergeCallback} from '@workday/canvas-kit-react/common';
+import {createComponent, mergeCallback} from '@workday/canvas-kit-react/common';
 
 import {TooltipContainer} from './TooltipContainer';
 import {useTooltip} from './useTooltip';
@@ -69,42 +69,45 @@ function mergeCallbacks<T extends {[key: string]: any}>(
   }, {} as {[key: string]: any});
 }
 
-export const Tooltip = ({
-  type = 'label',
-  placement = 'top',
-  title,
-  children,
-  showDelay = 300,
-  hideDelay = 100,
-  ...elemProps
-}: TooltipProps) => {
-  const titleText = innerText(title);
-  const {targetProps, popperProps, tooltipProps} = useTooltip({
-    type,
-    titleText,
-    showDelay,
-    hideDelay,
-  });
+export const Tooltip = createComponent('div')({
+  displayName: 'Tooltip',
+  Component({
+    type = 'label',
+    placement = 'top',
+    title,
+    children,
+    showDelay = 300,
+    hideDelay = 100,
+    ...elemProps
+  }: TooltipProps) {
+    const titleText = innerText(title);
+    const {targetProps, popperProps, tooltipProps} = useTooltip({
+      type,
+      titleText,
+      showDelay,
+      hideDelay,
+    });
 
-  return (
-    <React.Fragment>
-      {React.cloneElement(children, {
-        ...targetProps,
-        ...mergeCallbacks(children.props, targetProps),
-        ...(type === 'muted' && children.props['aria-label']
-          ? {'aria-label': children.props['aria-label']}
-          : {}),
-      })}
-      <Popper placement={placement} {...popperProps}>
-        {({placement}) => {
-          const transformOrigin = getTransformFromPlacement(placement);
-          return (
-            <TooltipContainer transformOrigin={transformOrigin} {...elemProps} {...tooltipProps}>
-              {title}
-            </TooltipContainer>
-          );
-        }}
-      </Popper>
-    </React.Fragment>
-  );
-};
+    return (
+      <React.Fragment>
+        {React.cloneElement(children, {
+          ...targetProps,
+          ...mergeCallbacks(children.props, targetProps),
+          ...(type === 'muted' && children.props['aria-label']
+            ? {'aria-label': children.props['aria-label']}
+            : {}),
+        })}
+        <Popper placement={placement} {...popperProps}>
+          {({placement}) => {
+            const transformOrigin = getTransformFromPlacement(placement);
+            return (
+              <TooltipContainer transformOrigin={transformOrigin} {...elemProps} {...tooltipProps}>
+                {title}
+              </TooltipContainer>
+            );
+          }}
+        </Popper>
+      </React.Fragment>
+    );
+  },
+});
