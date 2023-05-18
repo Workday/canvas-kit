@@ -4,7 +4,7 @@ import * as PopperJS from '@popperjs/core';
 
 export type Placement = `${PopperJS.Placement}`; // Use template literals to make documentation list them out
 export type PopperOptions = PopperJS.Options;
-export const defaultFallbackPlacements: Array<Placement> = ['top', 'right', 'bottom', 'left'];
+export const defaultFallbackPlacements: Placement[] = ['top', 'right', 'bottom', 'left'];
 
 import {usePopupStack} from './hooks';
 import {useLocalRef} from '@workday/canvas-kit-react/common';
@@ -50,7 +50,7 @@ export interface PopperProps {
    * and opposite placements are not available, the fallback placements will be in use. Use an empty array to
    * disable the fallback placements.
    */
-  fallbackPlacements?: Array<Placement>;
+  fallbackPlacements?: Placement[];
   /**
    * A callback function that will be called whenever PopperJS chooses a placement that is different
    * from the provided `placement` preference. If a `placement` preference doesn't fit, PopperJS
@@ -141,7 +141,7 @@ const getOppositePlacement = (popperPlacement: Placement): Placement => {
 };
 
 const getNextAvailablePlacement = (
-  placements: Array<Placement>,
+  placements: Placement[],
   state: PopperJS.State,
   popperPlacement: Placement
 ): Placement | undefined => {
