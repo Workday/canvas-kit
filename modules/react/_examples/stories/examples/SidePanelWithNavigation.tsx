@@ -57,8 +57,8 @@ export const WithNavigation = () => {
         <Flex as="ul" flexDirection="column" rowGap="zero" paddingInlineStart="zero">
           <Flex.Item as="li" listStyle="none">
             <Expandable padding="zero">
-              <StyledExpandable paddingTop="m" paddingBottom="xxs" paddingX="s" textAlign="center">
-                <SystemIcon icon={ribbonIcon} marginRight="s" marginLeft="zero" />
+              <StyledExpandable paddingTop="m" paddingBottom="xxs" paddingX="m" textAlign="center">
+                <SystemIcon icon={ribbonIcon} paddingRight="s" />
                 <Expandable.Title padding="zero">
                   <BodyText size="small" fontWeight="bold" color="blackpepper300" marginY="zero">
                     Bestsellers
@@ -92,32 +92,34 @@ export const WithNavigation = () => {
           </Flex.Item>
           <Flex.Item as="li" listStyle="none">
             <Expandable padding="zero">
-              <StyledExpandable paddingTop="m" paddingBottom="xxs" paddingX="s" textAlign="center">
-                <SystemIcon icon={birthdayIcon} marginRight="s" marginLeft="zero" />
+              <StyledExpandable paddingTop="m" paddingBottom="xxs" paddingX="m" textAlign="center">
+                <SystemIcon icon={birthdayIcon} paddingRight="s" />
                 <Expandable.Title padding="zero">
                   <BodyText size="small" fontWeight="bold" color="blackpepper300" marginY="zero">
                     Custom Cakes
                   </BodyText>
                   <Subtext size="medium" color="blackpepper300" marginY="zero">
-                    To celebrate all the milestones in life!
+                    To celebrate your life milestones
                   </Subtext>
                 </Expandable.Title>
-                <Expandable.Icon iconPosition="end" flex="1" />
+                <Expandable.Icon iconPosition="end" />
               </StyledExpandable>
-              <Expandable.Content paddingY="zero" paddingX="zero">
+              <Expandable.Content paddingY="zero" paddingX="zero" as="ul">
                 {cakes.map(item => {
                   return (
-                    <StyledLink
-                      size="large"
-                      display="flex"
-                      textDecoration="none"
-                      paddingLeft="xxl"
-                      paddingTop="xxs"
-                      paddingBottom="zero"
-                      href={item.linkValue}
-                    >
-                      {item.value}
-                    </StyledLink>
+                    <li>
+                      <StyledLink
+                        size="large"
+                        display="flex"
+                        textDecoration="none"
+                        paddingLeft="xxl"
+                        paddingTop="xxs"
+                        paddingBottom="zero"
+                        href={item.linkValue}
+                      >
+                        {item.value}
+                      </StyledLink>
+                    </li>
                   );
                 })}
               </Expandable.Content>
