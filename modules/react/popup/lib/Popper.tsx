@@ -4,7 +4,7 @@ import * as PopperJS from '@popperjs/core';
 
 export type Placement = `${PopperJS.Placement}`; // Use template literals to make documentation list them out
 export type PopperOptions = PopperJS.Options;
-export const defaultFallbackPlacements: Array<Placement> = ['top', 'right', 'bottom', 'left']
+export const defaultFallbackPlacements: Array<Placement> = ['top', 'right', 'bottom', 'left'];
 
 import {usePopupStack} from './hooks';
 import {useLocalRef} from '@workday/canvas-kit-react/common';
@@ -46,8 +46,8 @@ export interface PopperProps {
   placement?: Placement;
   /**
    * Define fallback placements by providing a list of {@link Placement} in array (in order of preference).
-   * The default preference is following the order of `top`, `right`, `bottom`, and `left`. Once the initial 
-   * and opposite placements are not available, the fallback placements will be in use. Use an empty array to 
+   * The default preference is following the order of `top`, `right`, `bottom`, and `left`. Once the initial
+   * and opposite placements are not available, the fallback placements will be in use. Use an empty array to
    * disable the fallback placements.
    */
   fallbackPlacements?: Array<Placement>;
@@ -140,30 +140,36 @@ const getOppositePlacement = (popperPlacement: Placement): Placement => {
   return oppositePlacement;
 };
 
-const getNextAvailablePlacement = (placements: Array<Placement>, state: PopperJS.State,
-  popperPlacement: Placement): Placement | undefined => {
-  if (placements.length === 0 || placements[0].split('-')[0] === 'auto'){
-    state.placement = popperPlacement
-    return
+const getNextAvailablePlacement = (
+  placements: Array<Placement>,
+  state: PopperJS.State,
+  popperPlacement: Placement
+): Placement | undefined => {
+  if (placements.length === 0 || placements[0].split('-')[0] === 'auto') {
+    state.placement = popperPlacement;
+    return;
   }
 
-  state.placement = placements[0]
+  state.placement = placements[0];
 
-  const {reference, popper} = state.rects
-  const overflow = PopperJS.detectOverflow(state)
-  const direction = /left|right/.test(placements[0].split('-')[0]) ? 'horizontal' : 'vertical'
-  const isOverflowed = direction === 'horizontal' ? 
-  (popper.height/2 - overflow.top < reference.height || popper.height/2 - overflow.bottom < reference.height) :
-  (popper.width - overflow.left < reference.width || popper.width - overflow.right < reference.width)
-  const key = placements[0].split('-')[0] as keyof PopperJS.SideObject
+  const {reference, popper} = state.rects;
+  const overflow = PopperJS.detectOverflow(state);
+  const direction = /left|right/.test(placements[0].split('-')[0]) ? 'horizontal' : 'vertical';
+  const isOverflowed =
+    direction === 'horizontal'
+      ? popper.height / 2 - overflow.top < reference.height ||
+        popper.height / 2 - overflow.bottom < reference.height
+      : popper.width - overflow.left < reference.width ||
+        popper.width - overflow.right < reference.width;
+  const key = placements[0].split('-')[0] as keyof PopperJS.SideObject;
 
-  if (!isOverflowed && PopperJS.detectOverflow(state)[key] <= 0){
-    return placements[0]
+  if (!isOverflowed && PopperJS.detectOverflow(state)[key] <= 0) {
+    return placements[0];
   } else {
-    placements.shift()
-    return getNextAvailablePlacement(placements, state, popperPlacement)
+    placements.shift();
+    return getNextAvailablePlacement(placements, state, popperPlacement);
   }
-}
+};
 
 // prevent unnecessary renders if popperOptions are not passed
 const defaultPopperOptions: PopperProps['popperOptions'] = {};
@@ -189,8 +195,10 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
     const {localRef, elementRef} = useLocalRef(popperInstanceRef);
     const [placement, setPlacement] = React.useState(popperPlacement);
     const stackRef = usePopupStack(ref, anchorElement as HTMLElement);
-    const maxRepositionCall = React.useRef(10)
-    const nextAvailablePlacementRef = React.useRef<Placement>(getOppositePlacement(popperPlacement)) // store the next available fallback placement
+    const maxRepositionCall = React.useRef(10);
+    const nextAvailablePlacementRef = React.useRef<Placement>(
+      getOppositePlacement(popperPlacement)
+    ); // store the next available fallback placement
 
     const placementModifier = React.useMemo((): PopperJS.Modifier<any, any> => {
       return {
@@ -203,27 +211,32 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
         },
       };
     }, [setPlacement, onPlacementChange]);
- 
+
     const fallbackPlacementsModifier = React.useMemo((): PopperJS.Modifier<any, any> => {
       return {
         name: 'fallbackPlacement',
         enabled: true,
         phase: 'main',
-        fn({state}){
-          const placements = [popperPlacement, getOppositePlacement(popperPlacement), ...baseFallbackPlacements]
-          nextAvailablePlacementRef.current = getNextAvailablePlacement(placements, state, popperPlacement) ?? popperPlacement  
-          maxRepositionCall.current -= 1
-                 
-          if (getNextAvailablePlacement(placements, state, popperPlacement) === undefined){
-            state.reset = false
-          } else if (maxRepositionCall.current < 1){
-            maxRepositionCall.current = 10            
+        fn({state}) {
+          const placements = [
+            popperPlacement,
+            getOppositePlacement(popperPlacement),
+            ...baseFallbackPlacements,
+          ];
+          nextAvailablePlacementRef.current =
+            getNextAvailablePlacement(placements, state, popperPlacement) ?? popperPlacement;
+          maxRepositionCall.current -= 1;
+
+          if (getNextAvailablePlacement(placements, state, popperPlacement) === undefined) {
+            state.reset = false;
+          } else if (maxRepositionCall.current < 1) {
+            maxRepositionCall.current = 10;
           } else {
-            state.reset = true
+            state.reset = true;
           }
         },
-      }
-    },[baseFallbackPlacements, popperPlacement, nextAvailablePlacementRef, maxRepositionCall])
+      };
+    }, [baseFallbackPlacements, popperPlacement, nextAvailablePlacementRef, maxRepositionCall]);
 
     // useLayoutEffect prevents flashing of the popup before position is determined
     React.useLayoutEffect(() => {
@@ -241,7 +254,11 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
         const instance = PopperJS.createPopper(anchorEl, stackRef.current, {
           placement: popperPlacement,
           ...popperOptions,
-          modifiers: [...(popperOptions.modifiers || []), placementModifier, fallbackPlacementsModifier],
+          modifiers: [
+            ...(popperOptions.modifiers || []),
+            placementModifier,
+            fallbackPlacementsModifier,
+          ],
         });
         elementRef(instance); // update the ref with the instance
 
@@ -263,11 +280,22 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
         localRef.current?.setOptions({
           placement: nextAvailablePlacementRef.current,
           ...popperOptions,
-          modifiers: [...(popperOptions.modifiers || []), placementModifier, fallbackPlacementsModifier],
+          modifiers: [
+            ...(popperOptions.modifiers || []),
+            placementModifier,
+            fallbackPlacementsModifier,
+          ],
         });
       }
       firstRender.current = false;
-    }, [popperOptions, popperPlacement, placementModifier, fallbackPlacementsModifier, localRef, nextAvailablePlacementRef]);
+    }, [
+      popperOptions,
+      popperPlacement,
+      placementModifier,
+      fallbackPlacementsModifier,
+      localRef,
+      nextAvailablePlacementRef,
+    ]);
 
     const contents = <>{isRenderProp(children) ? children({placement}) : children}</>;
 
