@@ -62,7 +62,7 @@ const StyledTextArea = styled('textarea')<TextAreaProps & StyledType>(
     minHeight: 64,
     minWidth: 280,
     transition: '0.2s box-shadow, 0.2s border-color',
-    padding: spaceNumbers.xxs, // Compensate for border
+    padding: `${spaceNumbers.xxs}rem`, // Compensate for border
     margin: 0, // Fix Safari
     '&::webkit-resizer': {
       display: 'none',

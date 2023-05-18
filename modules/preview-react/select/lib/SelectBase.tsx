@@ -14,6 +14,7 @@ import {
   borderRadius,
   inputColors,
   spaceNumbers,
+  remToPxValue,
   type,
   space,
 } from '@workday/canvas-kit-react/tokens';
@@ -181,7 +182,7 @@ export const buttonBorderWidth = 1;
 export const buttonDefaultWidth = 280;
 
 const menuIconSize = 24;
-const buttonPadding = spaceNumbers.xxs - buttonBorderWidth;
+const buttonPadding = remToPxValue(spaceNumbers.xxs) - buttonBorderWidth;
 
 const SelectButton = styled('button')<
   Pick<SelectBaseProps, 'error' | 'grow' | 'menuVisibility' | 'theme'> & StyledType
@@ -198,7 +199,7 @@ const SelectButton = styled('button')<
     outline: 'none',
     overflow: 'hidden',
     padding: buttonPadding,
-    paddingRight: spaceNumbers.xxs + menuIconSize + buttonPadding,
+    paddingRight: remToPxValue(spaceNumbers.xxs) + menuIconSize + buttonPadding,
     textAlign: 'left',
     textOverflow: 'ellipsis',
     transition: '0.2s box-shadow, 0.2s border-color',

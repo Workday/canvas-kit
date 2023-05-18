@@ -71,7 +71,7 @@ export const TextAreaField = createSubcomponent('textarea')({
       borderRadius={borderRadius.m}
       minHeight={64}
       minWidth={280}
-      padding={spaceNumbers.xxs} // Compensate for border
+      padding={`${spaceNumbers.xxs}rem`} // Compensate for border
       margin={0} // Fix Safari
     />
   );

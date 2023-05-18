@@ -11,7 +11,13 @@ import {
   useTheme,
   Themeable,
 } from '@workday/canvas-kit-react/common';
-import {borderRadius, colors, inputColors, spaceNumbers} from '@workday/canvas-kit-react/tokens';
+import {
+  borderRadius,
+  colors,
+  inputColors,
+  spaceNumbers,
+  remToPxValue,
+} from '@workday/canvas-kit-react/tokens';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {checkSmallIcon} from '@workday/canvas-system-icons-web';
 import {LabelText} from '@workday/canvas-kit-react/text';
@@ -61,11 +67,11 @@ export interface CheckboxProps extends Themeable {
 }
 
 const checkboxHeight = 18;
-const checkboxTapArea = spaceNumbers.m;
+const checkboxTapArea = `${spaceNumbers.m}rem`;
 const checkboxContainerHeight = checkboxTapArea;
-const checkboxLabelDistance = spaceNumbers.xs;
+const checkboxLabelDistance = `${spaceNumbers.xs}rem`;
 const checkboxWidth = 18;
-const rippleRadius = (spaceNumbers.l - checkboxWidth) / 2;
+const rippleRadius = (remToPxValue(spaceNumbers.l) - checkboxWidth) / 2;
 
 const CheckboxContainer = styled('div')({
   display: 'flex',

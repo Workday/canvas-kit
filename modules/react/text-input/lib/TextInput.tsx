@@ -33,7 +33,7 @@ const StyledTextInput = styled('input')<
     boxSizing: 'border-box',
     height: 40,
     transition: '0.2s box-shadow, 0.2s border-color',
-    padding: spaceNumbers.xxs, // Compensate for border
+    padding: `${spaceNumbers.xxs}rem`, // Compensate for border
     margin: 0, // Fix Safari
     '&::placeholder': {
       color: inputColors.placeholder,
