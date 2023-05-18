@@ -3,8 +3,11 @@
 import {jsx} from '@emotion/react';
 import React from 'react';
 import {TextInput} from '@workday/canvas-kit-preview-react/text-input';
-import {useThemedRing} from '@workday/canvas-kit-labs-react/common';
-import {CanvasProvider, PartialEmotionCanvasTheme} from '@workday/canvas-kit-react/common';
+import {
+  CanvasProvider,
+  PartialEmotionCanvasTheme,
+  useThemedRing,
+} from '@workday/canvas-kit-react/common';
 import {colors, space} from '@workday/canvas-kit-react/tokens';
 
 export const ThemedAlert = () => {

@@ -27,10 +27,10 @@ const getPaletteColorsFromTheme = (
   };
 };
 
-export function getPaletteColors(
+export const getPaletteColors = (
   type: paletteSelection,
   theme: EmotionCanvasTheme
-): BackgroundColors {
+): BackgroundColors => {
   const palette = theme.canvas.palette[type];
 
   switch (type) {
@@ -44,7 +44,7 @@ export function getPaletteColors(
       return getPaletteColorsFromTheme(palette);
     }
   }
-}
+};
 
 export const useThemedPalette = (type: paletteSelection) => {
   const theme = useTheme();

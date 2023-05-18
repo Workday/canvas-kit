@@ -1,5 +1,6 @@
 export * from './colorUtils';
 export * from './getTranslateFromOrigin';
+export * from './dispatchInputEvent';
 export * from './changeFocus';
 export * from './makeMq';
 export * from './mergeCallback';
@@ -9,6 +10,7 @@ export * from './assert';
 export * from './useMount';
 export * from './components';
 export * from './models';
+export * from './slugify';
 export * from './elements';
 export * from './useConstant';
 export * from './useIsFullscreen';

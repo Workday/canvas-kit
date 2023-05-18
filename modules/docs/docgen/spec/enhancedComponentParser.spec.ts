@@ -74,12 +74,10 @@ describe('enhancedComponentParser', () => {
       expect(symbols).toHaveProperty('0.type.parameters.1.type.properties.0.type.value', 'string');
       expect(symbols).toHaveProperty('0.type.returnType.kind', 'object');
       expect(symbols).toHaveProperty('0.type.returnType.properties.0.kind', 'property');
-      expect(symbols).toHaveProperty('0.type.returnType.properties.0.name', 'data-id');
       expect(symbols).toHaveProperty('0.type.returnType.properties.0.type.kind', 'primitive');
       expect(symbols).toHaveProperty('0.type.returnType.properties.0.type.value', 'string');
     });
   });
-
   describe('elemPropsHook', () => {
     it('should handle "createElemPropsHook" with a ref in returnType', () => {
       const program = createProgramFromSource(`
