@@ -183,7 +183,7 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
       getAnchorClientRect,
       popperOptions = defaultPopperOptions,
       placement: popperPlacement = 'bottom',
-      fallbackPlacements: baseFallbackPlacements = defaultFallbackPlacements,
+      fallbackPlacements = defaultFallbackPlacements,
       onPlacementChange,
       children,
       portal,
@@ -221,7 +221,7 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
           const placements = [
             popperPlacement,
             getOppositePlacement(popperPlacement),
-            ...baseFallbackPlacements,
+            ...fallbackPlacements,
           ];
           nextAvailablePlacementRef.current =
             getNextAvailablePlacement(placements, state, popperPlacement) ?? popperPlacement;
@@ -236,7 +236,7 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
           }
         },
       };
-    }, [baseFallbackPlacements, popperPlacement, nextAvailablePlacementRef, maxRepositionCall]);
+    }, [fallbackPlacements, popperPlacement]);
 
     // useLayoutEffect prevents flashing of the popup before position is determined
     React.useLayoutEffect(() => {
@@ -294,7 +294,6 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
       placementModifier,
       fallbackPlacementsModifier,
       localRef,
-      nextAvailablePlacementRef,
     ]);
 
     const contents = <>{isRenderProp(children) ? children({placement}) : children}</>;
