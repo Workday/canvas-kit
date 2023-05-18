@@ -19,7 +19,7 @@ export interface PopupPopperProps extends PopperProps {
    * and opposite placements are not available, the fallback placements will be in use. Use an empty array to
    * disable the fallback placements.
    */
-  fallbackPlacements?: Array<Placement>;
+  fallbackPlacements?: Placement[];
   /**
    * The additional options passed to the Popper's `popper.js` instance.
    */

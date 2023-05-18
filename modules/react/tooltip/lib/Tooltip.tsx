@@ -38,7 +38,7 @@ export interface TooltipProps extends Omit<React.HTMLAttributes<HTMLDivElement>,
    * and opposite placements are not available, the fallback placements will be in use. Use an empty array to
    * disable the fallback placements.
    */
-  fallbackPlacements?: Array<Placement>;
+  fallbackPlacements?: Placement[];
   /**
    * Determines the tooltip type for accessibility.
    *

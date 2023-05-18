@@ -278,7 +278,7 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
       // Only update options if this is _not_ the first render
       if (!firstRender.current) {
         localRef.current?.setOptions({
-          placement: nextAvailablePlacementRef.current,
+          placement: popperPlacement,
           ...popperOptions,
           modifiers: [
             ...(popperOptions.modifiers || []),
