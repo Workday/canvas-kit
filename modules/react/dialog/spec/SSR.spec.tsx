@@ -4,7 +4,6 @@
 import React from 'react';
 import {renderToString} from 'react-dom/server';
 import {Dialog} from '@workday/canvas-kit-react/dialog';
-import {Basic} from '../stories/stories';
 
 describe('Dialog', () => {
   it('should render on a server without crashing', () => {

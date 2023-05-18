@@ -2,7 +2,7 @@ import React from 'react';
 
 import {Modal} from '@workday/canvas-kit-react/modal';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
-import {HStack} from '@workday/canvas-kit-react/layout';
+import {Flex} from '@workday/canvas-kit-react/layout';
 
 export const FullOverflow = () => {
   const handleAcknowledge = () => {
@@ -81,12 +81,12 @@ export const FullOverflow = () => {
               ut aliquam purus sit.
             </p>
           </Modal.Body>
-          <HStack spacing="s" padding="xxs" marginTop="xxs">
+          <Flex gap="s" padding="xxs" marginTop="xxs">
             <Modal.CloseButton as={PrimaryButton} onClick={handleAcknowledge}>
               Acknowledge
             </Modal.CloseButton>
             <Modal.CloseButton onClick={handleCancel}>Cancel</Modal.CloseButton>
-          </HStack>
+          </Flex>
         </Modal.Card>
       </Modal.OverflowOverlay>
     </Modal>
