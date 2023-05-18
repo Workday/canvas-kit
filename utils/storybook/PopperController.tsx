@@ -78,7 +78,7 @@ export const PopperController = ({children, ...props}: PopperControllerProps) =>
             type="range"
             name="margin-left"
             min={0}
-            max={200}
+            max={700}
             defaultValue={0}
             value={marginLeftBtn}
             onChange={e => onSetMarginLeftBtn?.(parseInt(e.target.value, 10))}
@@ -94,7 +94,7 @@ export const PopperController = ({children, ...props}: PopperControllerProps) =>
             type="range"
             name="margin-right"
             min={0}
-            max={200}
+            max={700}
             defaultValue={0}
             value={marginRightBtn}
             onChange={e => onSetMarginRightBtn?.(parseInt(e.target.value, 10))}

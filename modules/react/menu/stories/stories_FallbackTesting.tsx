@@ -44,10 +44,18 @@ export const MenuWithFallbackPlacements = withSnapshotsEnabled(() => {
         onSetMarginLeftBtn={handleMarginLeftBtn}
         onSetMarginRightBtn={handleMarginRightBtn}
       >
-        <Flex width="100%" marginTop={240} justifyContent="center" alignItems="start">
+        <Flex
+          width="100%"
+          marginTop={240}
+          justifyContent="center"
+          alignItems="center"
+          flexDirection="column"
+        >
           <Menu onSelect={data => setSelected(data.id)}>
-            <Menu.Target>Open Menu</Menu.Target>
-            <Menu.Popper>
+            <Menu.Target style={{marginLeft: marginLeftBtn, marginRight: marginRightBtn}}>
+              Open Menu
+            </Menu.Target>
+            <Menu.Popper placement={placement}>
               <Menu.Card>
                 <Menu.List>
                   <Menu.Item>First Item</Menu.Item>
