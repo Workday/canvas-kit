@@ -142,7 +142,7 @@ const getOppositePlacement = (popperPlacement: Placement): Placement => {
 
 const getNextAvailablePlacement = (placements: Array<Placement>, state: PopperJS.State,
   popperPlacement: Placement): Placement | undefined => {
-  if (placements.length === 0){
+  if (placements.length === 0 || placements[0].split('-')[0] === 'auto'){
     state.placement = popperPlacement
     return
   }
@@ -155,7 +155,7 @@ const getNextAvailablePlacement = (placements: Array<Placement>, state: PopperJS
   const isOverflowed = direction === 'horizontal' ? 
   (popper.height/2 - overflow.top < reference.height || popper.height/2 - overflow.bottom < reference.height) :
   (popper.width - overflow.left < reference.width || popper.width - overflow.right < reference.width)
-  const key = placements[0] as keyof PopperJS.SideObject
+  const key = placements[0].split('-')[0] as keyof PopperJS.SideObject
 
   if (!isOverflowed && PopperJS.detectOverflow(state)[key] <= 0){
     return placements[0]
