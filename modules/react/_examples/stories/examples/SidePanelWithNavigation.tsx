@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {styled, StyledType} from '@workday/canvas-kit-react/common';
 import {colors, space, gradients, type} from '@workday/canvas-kit-react/tokens';
-import {SidePanel, useSidePanel} from '@workday/canvas-kit-preview-react/side-panel';
+import {SidePanel} from '@workday/canvas-kit-preview-react/side-panel';
 import {Flex, Box} from '@workday/canvas-kit-react/layout';
 import {BodyText, Subtext} from '@workday/canvas-kit-react/text';
 import {Expandable} from '@workday/canvas-kit-labs-react/expandable';
