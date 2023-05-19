@@ -5560,17 +5560,31 @@
         "__isArgsStory": false
       }
     },
-    "examples-sidepanel-with-overlay--basic": {
-      "id": "examples-sidepanel-with-overlay--basic",
-      "name": "Basic",
-      "title": "Examples/SidePanel With Overlay",
-      "importPath": "./modules/preview-react/_examples/stories/SidePanelWithOverlay.stories.mdx",
-      "kind": "Examples/SidePanel With Overlay",
-      "story": "Basic",
+    "examples-side-panel--with-navigation": {
+      "id": "examples-side-panel--with-navigation",
+      "name": "With Navigation",
+      "title": "Examples/Side Panel",
+      "importPath": "./modules/react/_examples/stories/SidePanel.stories.mdx",
+      "kind": "Examples/Side Panel",
+      "story": "With Navigation",
       "parameters": {
-        "fileName": "./modules/preview-react/_examples/stories/SidePanelWithOverlay.stories.mdx",
+        "fileName": "./modules/react/_examples/stories/SidePanel.stories.mdx",
         "framework": "react",
-        "__id": "examples-sidepanel-with-overlay--basic",
+        "__id": "examples-side-panel--with-navigation",
+        "__isArgsStory": false
+      }
+    },
+    "examples-side-panel--with-overlay": {
+      "id": "examples-side-panel--with-overlay",
+      "name": "With Overlay",
+      "title": "Examples/Side Panel",
+      "importPath": "./modules/react/_examples/stories/SidePanel.stories.mdx",
+      "kind": "Examples/Side Panel",
+      "story": "With Overlay",
+      "parameters": {
+        "fileName": "./modules/react/_examples/stories/SidePanel.stories.mdx",
+        "framework": "react",
+        "__id": "examples-side-panel--with-overlay",
         "__isArgsStory": false
       }
     },
