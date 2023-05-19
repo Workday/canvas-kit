@@ -33,28 +33,34 @@ export const useListItemRovingFocus = createElemPropsHook(useCursorListModel)(
     const stateRef = React.useRef(model.state);
     stateRef.current = model.state;
 
-    const keyDownRef = React.useRef(false);
+    const keyElementRef = React.useRef<Element | null>(null);
     const isRTL = useIsRTL();
 
     React.useEffect(() => {
-      if (keyDownRef.current) {
+      if (keyElementRef.current) {
         const item = model.navigation.getItem(model.state.cursorId, model);
         if (model.state.isVirtualized) {
           model.state.UNSTABLE_virtual.scrollToIndex(item.index);
         }
 
+        const selector = (id?: string) => {
+          return document.querySelector<HTMLElement>(`[data-focus-id="${`${id}-${item.id}`}"]`);
+        };
+
         // In React concurrent mode, there could be several render attempts before the element we're
         // looking for could be available in the DOM
         retryEachFrame(() => {
-          const element = document.querySelector<HTMLElement>(
-            `[data-focus-id="${`${model.state.id}-${item.id}`}"]`
-          );
+          // Attempt to extract the ID from the DOM element. This fixes issues where the server and client
+          // do not agree on a generated ID
+          const clientId = keyElementRef.current?.getAttribute('data-focus-id')?.split('-')[0];
+          const element = selector(clientId) || selector(model.state.id);
 
           element?.focus();
+          if (element) {
+            keyElementRef.current = null;
+          }
           return !!element;
         }, 5); // 5 should be enough, right?!
-
-        keyDownRef.current = false;
       }
       // we only want to run this effect if the cursor changes and not any other time
       // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -72,7 +78,7 @@ export const useListItemRovingFocus = createElemPropsHook(useCursorListModel)(
         const handled = keyboardEventToCursorEvents(event, model, isRTL);
         if (handled) {
           event.preventDefault();
-          keyDownRef.current = true;
+          keyElementRef.current = event.currentTarget;
         }
       },
       onClick() {
