@@ -49,7 +49,6 @@ const gettingStarted = [
 ];
 
 export const WithNavigation = () => {
-  const {labelProps} = useSidePanel();
 
   return (
     <Flex height={800} position="relative" backgroundColor="frenchVanilla100">
