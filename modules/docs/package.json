@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-docs",
-  "version": "9.0.2",
+  "version": "9.0.3",
   "description": "Documentation components of Canvas Kit components",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -44,9 +44,9 @@
   "dependencies": {
     "@emotion/styled": "^11.6.0",
     "@storybook/csf": "0.0.1",
-    "@workday/canvas-kit-labs-react": "^9.0.2",
-    "@workday/canvas-kit-preview-react": "^9.0.2",
-    "@workday/canvas-kit-react": "^9.0.2",
+    "@workday/canvas-kit-labs-react": "^9.0.3",
+    "@workday/canvas-kit-preview-react": "^9.0.3",
+    "@workday/canvas-kit-react": "^9.0.3",
     "@workday/canvas-system-icons-web": "^3.0.0",
     "markdown-to-jsx": "^6.10.3",
     "ts-node": "^10.9.1"
