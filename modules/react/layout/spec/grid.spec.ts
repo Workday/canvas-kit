@@ -36,9 +36,9 @@ describe('Grid Style Props Function', () => {
     } as GridStyleProps;
     const expected = {
       ...props,
-      gridGap: '16px',
-      gridRowGap: '24px',
-      gridColumnGap: '32px',
+      gridGap: '1rem',
+      gridRowGap: '1.5rem',
+      gridColumnGap: '2rem',
     };
     const gridStyles = grid(props);
 
