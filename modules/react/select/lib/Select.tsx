@@ -8,14 +8,7 @@ import {
   styled,
   Themeable,
 } from '@workday/canvas-kit-react/common';
-import {
-  colors,
-  borderRadius,
-  inputColors,
-  spaceNumbers,
-  type,
-  space,
-} from '@workday/canvas-kit-react/tokens';
+import {colors, borderRadius, inputColors, type, space} from '@workday/canvas-kit-react/tokens';
 import {caretDownSmallIcon} from '@workday/canvas-system-icons-web';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {SelectOption} from './SelectOption';
