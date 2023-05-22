@@ -8,6 +8,7 @@ export const defaultFallbackPlacements: Placement[] = ['top', 'right', 'bottom',
 
 import {usePopupStack} from './hooks';
 import {useLocalRef} from '@workday/canvas-kit-react/common';
+import {fallbackPlacementsModifier} from './fallbackPlacements';
 
 export interface PopperProps {
   /**
@@ -113,64 +114,6 @@ const getElementFromRefOrElement = (
   }
 };
 
-const getOppositePlacement = (popperPlacement: Placement): Placement => {
-  const [first, second] = popperPlacement.split('-');
-  let oppositePlacement: Placement;
-  switch (first) {
-    case 'top':
-      oppositePlacement = 'bottom';
-      break;
-    case 'bottom':
-      oppositePlacement = 'top';
-      break;
-    case 'left':
-      oppositePlacement = 'right';
-      break;
-    case 'right':
-      oppositePlacement = 'left';
-      break;
-    default:
-      oppositePlacement = 'auto';
-  }
-  if (second) {
-    oppositePlacement =
-      PopperJS.placements.find(placement => placement.includes(`${oppositePlacement}-${second}`)) ??
-      oppositePlacement;
-  }
-  return oppositePlacement;
-};
-
-const getNextAvailablePlacement = (
-  placements: Placement[],
-  state: PopperJS.State,
-  popperPlacement: Placement
-): Placement | undefined => {
-  if (placements.length === 0 || placements[0].split('-')[0] === 'auto') {
-    state.placement = popperPlacement;
-    return;
-  }
-
-  state.placement = placements[0];
-
-  const {reference, popper} = state.rects;
-  const overflow = PopperJS.detectOverflow(state);
-  const direction = /left|right/.test(placements[0].split('-')[0]) ? 'horizontal' : 'vertical';
-  const isOverflowed =
-    direction === 'horizontal'
-      ? popper.height / 2 - overflow.top < reference.height ||
-        popper.height / 2 - overflow.bottom < reference.height
-      : popper.width - overflow.left < reference.width ||
-        popper.width - overflow.right < reference.width;
-  const key = placements[0].split('-')[0] as keyof PopperJS.SideObject;
-
-  if (!isOverflowed && PopperJS.detectOverflow(state)[key] <= 0) {
-    return placements[0];
-  } else {
-    placements.shift();
-    return getNextAvailablePlacement(placements, state, popperPlacement);
-  }
-};
-
 // prevent unnecessary renders if popperOptions are not passed
 const defaultPopperOptions: PopperProps['popperOptions'] = {};
 
@@ -195,48 +138,23 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
     const {localRef, elementRef} = useLocalRef(popperInstanceRef);
     const [placement, setPlacement] = React.useState(popperPlacement);
     const stackRef = usePopupStack(ref, anchorElement as HTMLElement);
-    const maxRepositionCall = React.useRef(10);
-    const nextAvailablePlacementRef = React.useRef<Placement>(
-      getOppositePlacement(popperPlacement)
-    ); // store the next available fallback placement
+
+    const placementRef = React.useRef(popperPlacement);
+    placementRef.current = placement;
 
     const placementModifier = React.useMemo((): PopperJS.Modifier<any, any> => {
       return {
         name: 'setPlacement',
         enabled: true,
-        phase: 'main',
+        phase: 'afterWrite',
         fn({state}) {
-          setPlacement(state.placement);
-          onPlacementChange?.(state.placement);
-        },
-      };
-    }, [setPlacement, onPlacementChange]);
-
-    const fallbackPlacementsModifier = React.useMemo((): PopperJS.Modifier<any, any> => {
-      return {
-        name: 'fallbackPlacement',
-        enabled: true,
-        phase: 'main',
-        fn({state}) {
-          const placements = [
-            popperPlacement,
-            getOppositePlacement(popperPlacement),
-            ...fallbackPlacements,
-          ];
-          nextAvailablePlacementRef.current =
-            getNextAvailablePlacement(placements, state, popperPlacement) ?? popperPlacement;
-          maxRepositionCall.current -= 1;
-
-          if (getNextAvailablePlacement(placements, state, popperPlacement) === undefined) {
-            state.reset = false;
-          } else if (maxRepositionCall.current < 1) {
-            maxRepositionCall.current = 10;
-          } else {
-            state.reset = true;
+          if (placementRef.current !== state.placement) {
+            setPlacement(state.placement);
+            onPlacementChange?.(state.placement);
           }
         },
       };
-    }, [fallbackPlacements, popperPlacement]);
+    }, [setPlacement, onPlacementChange]);
 
     // useLayoutEffect prevents flashing of the popup before position is determined
     React.useLayoutEffect(() => {
@@ -257,7 +175,13 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
           modifiers: [
             ...(popperOptions.modifiers || []),
             placementModifier,
-            fallbackPlacementsModifier,
+            PopperJS.preventOverflow,
+            {
+              ...fallbackPlacementsModifier,
+              options: {
+                fallbackPlacements,
+              },
+            },
           ],
         });
         elementRef(instance); // update the ref with the instance
@@ -278,23 +202,22 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
       // Only update options if this is _not_ the first render
       if (!firstRender.current) {
         localRef.current?.setOptions({
-          placement: nextAvailablePlacementRef.current,
+          placement: popperPlacement,
           ...popperOptions,
           modifiers: [
             ...(popperOptions.modifiers || []),
             placementModifier,
-            fallbackPlacementsModifier,
+            {
+              ...fallbackPlacementsModifier,
+              options: {
+                fallbackPlacements,
+              },
+            },
           ],
         });
       }
       firstRender.current = false;
-    }, [
-      popperOptions,
-      popperPlacement,
-      placementModifier,
-      fallbackPlacementsModifier,
-      localRef,
-    ]);
+    }, [popperOptions, popperPlacement, fallbackPlacements, placementModifier, localRef]);
 
     const contents = <>{isRenderProp(children) ? children({placement}) : children}</>;
 
