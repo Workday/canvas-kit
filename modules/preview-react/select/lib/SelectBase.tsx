@@ -470,7 +470,7 @@ export const SelectBase = ({
         icon={caretDownSmallIcon}
         color={disabled ? colors.licorice100 : colors.licorice200}
         colorHover={disabled ? colors.licorice100 : colors.licorice500}
-        size={menuIconSize}
+        size={`${menuIconSize}rem`}
       />
     </SelectWrapper>
   );
