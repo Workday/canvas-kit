@@ -195,17 +195,17 @@ jobs:
                 git branch -D merge/${{needs.get-branch-names.outputs.branch}}-into-${{ needs.get-branch-names.outputs.next-branch }} || true
                 git fetch upstream
                 git checkout merge/${{needs.get-branch-names.outputs.branch}}-into-${{ needs.get-branch-names.outputs.next-branch }}
-                git pull upstream merge/${{needs.get-branch-names.outputs.branch}}-into-${{ needs.test-ff-only.outputs.next-branch }} -f
+                git pull upstream merge/${{needs.get-branch-names.outputs.branch}}-into-${{ needs.get-branch-names.outputs.next-branch }} -f
                 node utils/forward-merge.js
                 ```
             2. If the previous step succeeded, skip to step 3. Resolve conflicts manually. Then run the following.
                 ```
                 git add .
-                git commit -m "chore: Merge ${{needs.test-ff-only.outputs.branch}} into ${{ needs.test-ff-only.outputs.next-branch }}"
+                git commit -m "chore: Merge ${{needs.get-branch-names.outputs.branch}} into ${{ needs.get-branch-names.outputs.next-branch }}"
                 ```
             3. Push the merge commit back to the pull request
                 ```
-                git push upstream merge/${{needs.test-ff-only.outputs.branch}}-into-${{ needs.test-ff-only.outputs.next-branch }}
+                git push upstream merge/${{needs.get-branch-names.outputs.branch}}-into-${{ needs.get-branch-names.outputs.next-branch }}
                 ```
             If there were no merge conflicts, the forward-merge job failed because of a test failure. You can wait for the pull request to give errors, or you can check the logs for failures. You'll have to update code to fix errors.
             This pull request will be merged using the `merge` strategy instead of the `squash` strategy. This means any commit in the log will show in the branch's history. Any commit you make should amend the merge commit. Use the following command:
