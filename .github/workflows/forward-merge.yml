@@ -10,19 +10,18 @@ on:
 jobs:
   test-ff-only:
     # Only run if:
-    # - branch is support/master AND the last commit was a release commit
-    # - branch is prerelease/*
+    # - commit contains '[skip release]' (release commits or commits that skipped a release)
+    # - branch is prerelease/minor
     #
-    # We don't want to run on support/master for non-release commits because that would mean the
-    #   forward merge would run twice because every commit on master/support causes a new commit
-    #   pushed back to the branch. So we ignore all non-release commits on support/master because
-    #   the release workflow will commit a release commit starting with `chore: Release ...` back to
-    #   the branch and this job will run on that commit instead. Also, forward merges that skipped
-    #   a release
+    # We don't want to run a forward merge on support/master on commits that will trigger a release.
+    # This would cause forward merge to run twice (once for normal commit, and one for the release)
+    # commit. `prerelease/minor` branch does not create release commits, so those branches are safe
+    # to forward-merge. A release commit looks like "chore: Release vx.x.x [skip release]" and all
+    # commits that skip the release action also contain "[skip release]". We will run forward merge
+    # on any commit that will not trigger another commit
     if:
-      "((github.ref_name == 'support' || github.ref_name == 'master') &&
-      startsWith(github.event.head_commit.message, 'chore: Release')) || startsWith(github.ref_name,
-      'prerelease/') || contains(github.event.head_commit.message, '[skip release]')"
+      startsWith(github.ref_name, 'prerelease/') || contains(github.event.head_commit.message,
+      '[skip release]')
     runs-on: ubuntu-latest
     outputs: # Output branch names for the make-pull-request job
       branch: ${{steps.extract-branch.outputs.branch}}
@@ -35,7 +34,6 @@ jobs:
         id: extract-branch
         run: |
           echo "branch=$(echo ${GITHUB_REF#refs/heads/})" >> "$GITHUB_OUTPUT"
-          echo ${{steps.extract-branch.outputs.branch}}
 
       - name: Extract next branch name
         id: extract-next-branch
@@ -45,11 +43,11 @@ jobs:
 
       - name: Current Branch
         run: |
-          echo ${{needs.test-ff-only.outputs.branch}}
+          echo ${{steps.extract-branch.outputs.branch}}
 
       - name: Next Branch
         run: |
-          echo ${{needs.test-ff-only.outputs.next-branch}}
+          echo ${{steps.extract-next-branch.outputs.branch}}
 
       ## First, we'll checkout the repository. We don't persist credentials because we need a
       ## Personal Access Token to push on a branch that is protected. See
@@ -62,11 +60,11 @@ jobs:
 
       ## Attempt to do a fast-forward-only merge. If this succeeds, there is no divergence
       ## between the branches and we do not need to retest. The commit has already been
-      ## verified
+      ## verified. If this line fails, it will trigger `verify-merge`
       - name: Test ff-only merge
         run: git merge origin/${{ steps.extract-branch.outputs.branch }} --ff-only
 
-      ## Push the verified commit directly to the next branch
+      ## If the previous step passed, push the verified commit directly to the next branch
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
