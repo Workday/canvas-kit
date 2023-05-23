@@ -97,12 +97,19 @@ async function main() {
     await spawn(`git checkout -b merge/${branch}-into-${nextBranch}`);
   }
 
+  // get last commit message. If it was a skip release, we'll try to make the merge commit a skip
+  // release as well.
+  const {stdout: commitMessage} = await exec(`git log -1 --pretty=%B | cat`);
+  const isSkipRelease = commitMessage.includes('[skip release]');
+
   try {
     console.log(`Creating a merge branch`);
     // The CI uses `origin` while locally we use `upstream`.
     const remote = alreadyMerging ? 'upstream' : 'origin';
     const {stdout} = await exec(
-      `git merge ${remote}/${nextBranch} -m 'chore: Merge ${branch} into ${nextBranch}'`
+      `git merge ${remote}/${nextBranch} -m 'chore: Merge ${branch} into ${nextBranch}${
+        isSkipRelease ? ' [skip release]' : '' // continue the skip release if applicable
+      }'`
     );
     // exec doesn't automatically log
     console.log(stdout);
