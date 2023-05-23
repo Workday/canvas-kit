@@ -8,13 +8,7 @@ import {
   Themeable,
   useUniqueId,
 } from '@workday/canvas-kit-react/common';
-import {
-  borderRadius,
-  colors,
-  inputColors,
-  spaceNumbers,
-  remToPxValue,
-} from '@workday/canvas-kit-react/tokens';
+import {borderRadius, colors, inputColors, spaceNumbers} from '@workday/canvas-kit-react/tokens';
 import {LabelText} from '@workday/canvas-kit-react/text';
 
 export interface RadioProps extends Themeable {
@@ -55,12 +49,12 @@ export interface RadioProps extends Themeable {
 
 const radioBorderRadius = 9;
 const radioDot = 8;
-const radioHeight = 18;
+const radioHeight = (spaceNumbers.xl - spaceNumbers.xxxs) / 2;
 const radioTapArea = `${spaceNumbers.m}rem`;
 const radioContainerHeight = radioTapArea;
 const radioLabelDistance = `${spaceNumbers.xs}rem`;
-const radioWidth = 18;
-const rippleRadius = (remToPxValue(spaceNumbers.l) - radioWidth) / 2;
+const radioWidth = radioHeight;
+const rippleRadius = (spaceNumbers.l - radioWidth) / 2;
 
 const RadioContainer = styled('div')({
   display: 'flex',
@@ -76,17 +70,17 @@ const RadioContainer = styled('div')({
  */
 const RadioInputWrapper = styled('div')<Pick<RadioProps, 'disabled'>>({
   display: 'flex',
-  height: radioHeight,
-  width: radioWidth,
+  height: `${radioHeight}rem`,
+  width: `${radioWidth}rem`,
 });
 
 const RadioRipple = styled('span')<Pick<RadioProps, 'disabled' | 'variant'>>(
   {
     borderRadius: borderRadius.circle,
     boxShadow: `0 0 0 0 ${colors.soap200}`,
-    height: radioHeight,
+    height: `${radioHeight}rem`,
     transition: 'box-shadow 150ms ease-out',
-    width: radioWidth,
+    width: `${radioWidth}rem`,
     position: 'absolute',
     pointerEvents: 'none', // This is a decorative element we don't want it to block clicks to input
   },
@@ -135,7 +129,7 @@ const RadioInput = styled('input')<RadioProps & StyledType>(
     // `span:first-of-type` refers to `RadioRipple`, the light grey
     // element that animates around the component on hover
     '&:hover ~ span:first-of-type': {
-      boxShadow: disabled ? undefined : `0 0 0 ${rippleRadius}px ${colors.soap200}`,
+      boxShadow: disabled ? undefined : `0 0 0 ${rippleRadius}rem ${colors.soap200}`,
     },
 
     // `div:first-of-type` refers to the `RadioBackground`, the visual facade of the
@@ -218,13 +212,13 @@ const RadioBackground = styled('div')<RadioProps>(
     borderWidth: '1px',
     boxSizing: 'border-box',
     display: 'flex',
-    height: radioHeight,
+    height: `${radioHeight}rem`,
     justifyContent: 'center',
     padding: '0px 2px',
     pointerEvents: 'none',
     position: 'absolute',
     transition: 'border 200ms ease, background 200ms',
-    width: radioWidth,
+    width: `${radioWidth}rem`,
   },
   ({
     checked,

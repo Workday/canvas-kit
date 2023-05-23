@@ -21,9 +21,7 @@ import {
   CanvasSpaceValues,
   CanvasSpaceNumberValues,
   CanvasSpaceNumbers,
-  spaceNumbers,
-  remToPxValue
-} from './lib/space';
+  spaceNumbers} from './lib/space';
 import {type,
   fontFamily,
   monoFontFamily,
@@ -60,7 +58,6 @@ export {
   depth,
   space,
   spaceNumbers,
-  remToPxValue,
   type,
   fontFamily,
   monoFontFamily,

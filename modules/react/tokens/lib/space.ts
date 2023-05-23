@@ -75,11 +75,3 @@ export const spaceNumbers: CanvasSpaceNumbers = {
   xxl: 4,
   xxxl: 5,
 };
-
-/**
- * A function that will return a 1:1 px value from rem value
- */
-export const remToPxValue = (remValue: number) => {
-  const pxValue = remValue * 16;
-  return pxValue;
-};
