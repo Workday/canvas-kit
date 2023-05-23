@@ -2,12 +2,12 @@ import React from 'react';
 
 import {StatusIndicator} from '@workday/canvas-kit-preview-react/status-indicator';
 import {uploadCloudIcon} from '@workday/canvas-system-icons-web';
-import {HStack, VStack} from '@workday/canvas-kit-react/layout';
+import {Flex} from '@workday/canvas-kit-react/layout';
 
 export const Variants = () => {
   return (
-    <VStack spacing="s">
-      <HStack spacing="s">
+    <Flex gap="s" flexDirection="column">
+      <Flex gap="s">
         <StatusIndicator>
           <StatusIndicator.Label>Lorem ipsum dolor</StatusIndicator.Label>
           <StatusIndicator.Icon icon={uploadCloudIcon} />
@@ -32,8 +32,8 @@ export const Variants = () => {
           <StatusIndicator.Label>Lorem ipsum dolor</StatusIndicator.Label>
           <StatusIndicator.Icon icon={uploadCloudIcon} />
         </StatusIndicator>
-      </HStack>
-      <HStack spacing="s">
+      </Flex>
+      <Flex gap="s">
         <StatusIndicator emphasis="high">
           <StatusIndicator.Label>Lorem ipsum dolor</StatusIndicator.Label>
           <StatusIndicator.Icon icon={uploadCloudIcon} />
@@ -58,7 +58,7 @@ export const Variants = () => {
           <StatusIndicator.Label>Lorem ipsum dolor</StatusIndicator.Label>
           <StatusIndicator.Icon icon={uploadCloudIcon} />
         </StatusIndicator>
-      </HStack>
-    </VStack>
+      </Flex>
+    </Flex>
   );
 };
