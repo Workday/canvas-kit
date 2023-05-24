@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v9.0.5](https://github.com/Workday/canvas-kit/releases/tag/v9.0.5) (2023-05-23)
+
+### Infrastructure
+
+- ci: Support fast-forward-merges [skip-release] ([#2232](https://github.com/Workday/canvas-kit/pull/2232)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v8.6.9](https://github.com/Workday/canvas-kit/releases/tag/v8.6.9) (2023-05-23)
+
+### Infrastructure
+
+- ci: Support fast-forward-merges [skip-release] ([#2232](https://github.com/Workday/canvas-kit/pull/2232)) ([@NicholasBoll](https://github.com/NicholasBoll))
+## [v9.0.4](https://github.com/Workday/canvas-kit/releases/tag/v9.0.4) (2023-05-23)
+
+### Components
+
+- fix: Associating FormField hint while not in error state ([#2199](https://github.com/Workday/canvas-kit/pull/2199)) ([@bstanton678](https://github.com/bstanton678))
+
+
 ## [v9.0.3](https://github.com/Workday/canvas-kit/releases/tag/v9.0.3) (2023-05-19)
 
 ### Examples
