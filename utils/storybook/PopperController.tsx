@@ -25,15 +25,15 @@ export const customViewport = {
   portrait: {
     name: 'Portrait',
     styles: {
-      width: '500px',
-      height: '950px',
+      width: '660px',
+      height: '1000px',
     },
   },
   landscape: {
     name: 'Landscape',
     styles: {
-      width: '950px',
-      height: '500px',
+      width: '1000px',
+      height: '660px',
     },
   },
 };
@@ -53,22 +53,22 @@ export const PopperController = ({children, ...props}: PopperControllerProps) =>
       <Flex gap="m" padding="xxs">
         <Flex.Item>
           <SecondaryButton size="small" onClick={() => onSetPlacement('top')}>
-            Top
+            top
           </SecondaryButton>
         </Flex.Item>
         <Flex.Item>
           <SecondaryButton size="small" onClick={() => onSetPlacement('bottom')}>
-            Bottom
+            bottom
           </SecondaryButton>
         </Flex.Item>
         <Flex.Item>
           <SecondaryButton size="small" onClick={() => onSetPlacement('left')}>
-            Left
+            left
           </SecondaryButton>
         </Flex.Item>
         <Flex.Item>
           <SecondaryButton size="small" onClick={() => onSetPlacement('right')}>
-            Right
+            right
           </SecondaryButton>
         </Flex.Item>
       </Flex>
@@ -76,7 +76,8 @@ export const PopperController = ({children, ...props}: PopperControllerProps) =>
         <Flex.Item>
           <input
             type="range"
-            name="margin-left"
+            data-testid="slide-right"
+            id="margin-left"
             min={0}
             max={700}
             defaultValue={0}
@@ -92,7 +93,8 @@ export const PopperController = ({children, ...props}: PopperControllerProps) =>
         <Flex.Item>
           <input
             type="range"
-            name="margin-right"
+            data-testid="slide-left"
+            id="margin-right"
             min={0}
             max={700}
             defaultValue={0}
