@@ -18,7 +18,7 @@ export const Basic = () => {
         <Radio label="Thin" value="thin" />
         <Radio label="Gluten free" value="gluten-free" />
         <Radio label="Cauliflower" value="cauliflower" />
-        <Radio style={{width: space.xl}} label="Butter - the best thing to put on bread" value="butter" />
+        <Radio label="Butter - the best thing to put on bread" value="butter" />
       </RadioGroup>
     </FormField>
   );
