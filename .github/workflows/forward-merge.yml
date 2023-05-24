@@ -8,25 +8,80 @@ on:
       - prerelease/minor
 
 jobs:
-  verify-merge:
+  get-branch-names:
     # Only run if:
-    # - branch is support/master AND the last commit was a release commit
-    # - branch is prerelease/*
+    # - commit contains '[skip release]' (release commits or commits that skipped a release)
+    # - branch is prerelease/minor
     #
-    # We don't want to run on support/master for non-release commits because that would mean the
-    #   forward merge would run twice because every commit on master/support causes a new commit
-    #   pushed back to the branch. So we ignore all non-release commits on support/master because
-    #   the release workflow will commit a release commit starting with `chore: Release ...` back to
-    #   the branch and this job will run on that commit instead. Also, forward merges that skipped
-    #   a release
+    # We don't want to run a forward merge on support/master on commits that will trigger a release.
+    # This would cause forward merge to run twice (once for normal commit, and one for the release)
+    # commit. `prerelease/minor` branch does not create release commits, so those branches are safe
+    # to forward-merge. A release commit looks like "chore: Release vx.x.x [skip release]" and all
+    # commits that skip the release action also contain "[skip release]". We will run forward merge
+    # on any commit that will not trigger another commit
     if:
-      "((github.ref_name == 'support' || github.ref_name == 'master') &&
-      startsWith(github.event.head_commit.message, 'chore: Release')) || startsWith(github.ref_name,
-      'prerelease/') || contains(github.event.head_commit.message, '[skip release]')"
+      startsWith(github.ref_name, 'prerelease/') || contains(github.event.head_commit.message,
+      '[skip release]')
     runs-on: ubuntu-latest
     outputs: # Output branch names for the make-pull-request job
       branch: ${{steps.extract-branch.outputs.branch}}
       next-branch: ${{steps.extract-next-branch.outputs.branch}}
+
+    steps:
+      ## `github.ref` is in the form of `refs/head/{name}`. This step extracts `{name}` and saves it
+      ## as an output for later use
+      - name: Extract branch name
+        id: extract-branch
+        run: |
+          echo "branch=$(echo ${GITHUB_REF#refs/heads/})" >> "$GITHUB_OUTPUT"
+
+      - name: Extract next branch name
+        id: extract-next-branch
+        uses: Workday/canvas-kit-actions/get-next-branch@v1
+        with:
+          branch: ${{github.ref_name}}
+
+      - name: Current Branch
+        run: |
+          echo ${{steps.extract-branch.outputs.branch}}
+
+      - name: Next Branch
+        run: |
+          echo ${{steps.extract-next-branch.outputs.branch}}
+
+  test-ff-only:
+    needs: ['get-branch-names']
+    runs-on: ubuntu-latest
+
+    steps:
+      ## First, we'll checkout the repository. We don't persist credentials because we need a
+      ## Personal Access Token to push on a branch that is protected. See
+      ## https://github.com/cycjimmy/semantic-release-action#basic-usage
+      - uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+          ref: ${{needs.get-branch-names.outputs.next-branch}} # checkout the next branch
+          fetch-depth: 0 # Needed to do merges
+
+      ## Attempt to do a fast-forward-only merge. If this succeeds, there is no divergence
+      ## between the branches and we do not need to retest. The commit has already been
+      ## verified. If this line fails, it will trigger `verify-merge`
+      - name: Test ff-only merge
+        run: git merge origin/${{ needs.get-branch-names.outputs.branch }} --ff-only
+
+      ## If the previous step passed, push the verified commit directly to the next branch
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GH_RW_TOKEN }}
+          branch: refs/heads/${{ needs.get-branch-names.outputs.next-branch }}
+
+  ## If the previous step failed, it means the fast-forward attempt failed. There is a
+  ## divergence and we will need to merge the branches and verify everything works.
+  verify-merge:
+    runs-on: ubuntu-latest
+    if: failure()
+    needs: ['get-branch-names', 'test-ff-only']
 
     steps:
       ## First, we'll checkout the repository. We don't persist credentials because we need a
@@ -36,20 +91,6 @@ jobs:
         with:
           persist-credentials: false
           fetch-depth: 0 # Needed to do merges
-
-      ## `github.ref` is in the form of `refs/head/{name}`. This step extracts `{name}` and saves it
-      ## as an output for later use
-      - name: Extract branch name
-        id: extract-branch
-        run: |
-          echo "::set-output name=branch::$(echo ${GITHUB_REF#refs/heads/})"
-          echo ${{steps.extract-branch.outputs.branch}}
-
-      - name: Extract next branch name
-        id: extract-next-branch
-        run: |
-          echo "::set-output name=branch::$(node utils/get-forward-merge-branch.js)"
-          echo ${{steps.extract-next-branch.outputs.branch}}
 
       - uses: Workday/canvas-kit-actions/install@v1
         with:
@@ -93,16 +134,17 @@ jobs:
           path: docs
           key: ${{ runner.os }}-build-${{ github.sha }}
 
-      - name: Visual Tests
-        uses: chromaui/action@main
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          appCode: dlpro96xybh
-          storybookBuildDir: docs
-          exitOnceUploaded: false
-          exitZeroOnChanges: false
-          ignoreLastBuildOnBranch: ${{ steps.extract-next-branch.outputs.branch }}
-          debug: true
+      # Not working for now...
+      # - name: Visual Tests
+      #   uses: chromaui/action@main
+      #   with:
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+      #     appCode: dlpro96xybh
+      #     storybookBuildDir: docs
+      #     exitOnceUploaded: false
+      #     exitZeroOnChanges: false
+      #     ignoreLastBuildOnBranch: ${{ needs.get-branch-names.outputs.next-branch }}
+      #     debug: true
 
       - name: Start Server
         run: npx http-server docs -p 9001 & npx wait-on http://localhost:9001
@@ -121,12 +163,17 @@ jobs:
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GH_RW_TOKEN }}
-          branch: refs/heads/${{ steps.extract-next-branch.outputs.branch }}
+          branch: refs/heads/${{ needs.get-branch-names.outputs.next-branch }}
 
+  ## If we get here, it means the branches are not fast-forward mergeable, OR the merge commit
+  ## failed verification. We will need manual intervention, so we'll create a pull request to
+  ## be verified by a person.
   make-pull-request:
     runs-on: ubuntu-latest
-    if: failure()
-    needs: ['verify-merge']
+    # Run only if the verify-merge job failed. If the test-ff-only fails, but verify-merge passes, we should skip
+    if: failure() && needs.verify-merge.result == 'failure'
+    needs: ['get-branch-names', 'verify-merge']
+
     steps:
       ## If we've failed any previous step, we'll need to create a PR instead
       - uses: NicholasBoll/action-forward-merge-pr@main
@@ -136,47 +183,34 @@ jobs:
           prefix: 'chore: '
           body: |
             This pull request was automatically created by an automated [forward-merge job](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}). The automated job failed automated checks and must be resolved manually.
-
             Reasons for failure may include:
             - Merge conflicts that cannot be automatically resolved
             - A merge resulted in check failures
               - Lint or type errors
               - Test failures
               - Unexpected visual changes
-
             The pull request should inform you of merge conflicts before you start if any.
-
             1. Run the following commands in your terminal. If this succeeds, skip step 2. The last command will run a script that tries to merge and resolve conflicts automatically.
-
                 ```
-                git branch -D merge/${{needs.verify-merge.outputs.branch}}-into-${{ needs.verify-merge.outputs.next-branch }} || true
+                git branch -D merge/${{needs.get-branch-names.outputs.branch}}-into-${{ needs.get-branch-names.outputs.next-branch }} || true
                 git fetch upstream
-                git checkout merge/${{needs.verify-merge.outputs.branch}}-into-${{ needs.verify-merge.outputs.next-branch }}
-                git pull upstream merge/${{needs.verify-merge.outputs.branch}}-into-${{ needs.verify-merge.outputs.next-branch }} -f
+                git checkout merge/${{needs.get-branch-names.outputs.branch}}-into-${{ needs.get-branch-names.outputs.next-branch }}
+                git pull upstream merge/${{needs.get-branch-names.outputs.branch}}-into-${{ needs.get-branch-names.outputs.next-branch }} -f
                 node utils/forward-merge.js
                 ```
-
             2. If the previous step succeeded, skip to step 3. Resolve conflicts manually. Then run the following.
-
                 ```
                 git add .
-                git commit -m "chore: Merge ${{needs.verify-merge.outputs.branch}} into ${{ needs.verify-merge.outputs.next-branch }}"
+                git commit -m "chore: Merge ${{needs.get-branch-names.outputs.branch}} into ${{ needs.get-branch-names.outputs.next-branch }}"
                 ```
-
             3. Push the merge commit back to the pull request
-
                 ```
-                git push upstream merge/${{needs.verify-merge.outputs.branch}}-into-${{ needs.verify-merge.outputs.next-branch }}
+                git push upstream merge/${{needs.get-branch-names.outputs.branch}}-into-${{ needs.get-branch-names.outputs.next-branch }}
                 ```
-
             If there were no merge conflicts, the forward-merge job failed because of a test failure. You can wait for the pull request to give errors, or you can check the logs for failures. You'll have to update code to fix errors.
-
             This pull request will be merged using the `merge` strategy instead of the `squash` strategy. This means any commit in the log will show in the branch's history. Any commit you make should amend the merge commit. Use the following command:
-
             ```
             git commit --amend --no-edit
             ```
-
             You must then force-push the branch and the CI will rerun verification.
-
             Use the `automerge` label like normal and the CI will pick the correct merge strategy.
