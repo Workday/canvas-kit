@@ -12,7 +12,7 @@ export const Basic = () => {
   };
 
   return (
-    <FormField label="Choose Your Pizza Crust" useFieldset={true}>
+    <FormField label="Choose Your Pizza Crust" useFieldset={true} style={{width: space.xl}}>
       <RadioGroup name={useUniqueId()} onChange={handleChange} value={value}>
         <Radio label="Deep dish" value="deep-dish" />
         <Radio label="Thin" value="thin" />
