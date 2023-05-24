@@ -3,6 +3,51 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v9.0.6](https://github.com/Workday/canvas-kit/releases/tag/v9.0.6) (2023-05-24)
+
+### Component
+
+- fix: Fixing focus blur problem on basic radio group example ([#2198](https://github.com/Workday/canvas-kit/pull/2198)) ([@bstanton678](https://github.com/bstanton678), [@mannycarrera4](https://github.com/mannycarrera4))
+
+
+## [v9.0.5](https://github.com/Workday/canvas-kit/releases/tag/v9.0.5) (2023-05-23)
+
+### Infrastructure
+
+- ci: Support fast-forward-merges [skip-release] ([#2232](https://github.com/Workday/canvas-kit/pull/2232)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v8.6.9](https://github.com/Workday/canvas-kit/releases/tag/v8.6.9) (2023-05-23)
+
+### Infrastructure
+
+- ci: Support fast-forward-merges [skip-release] ([#2232](https://github.com/Workday/canvas-kit/pull/2232)) ([@NicholasBoll](https://github.com/NicholasBoll))
+## [v9.0.4](https://github.com/Workday/canvas-kit/releases/tag/v9.0.4) (2023-05-23)
+
+### Components
+
+- fix: Associating FormField hint while not in error state ([#2199](https://github.com/Workday/canvas-kit/pull/2199)) ([@bstanton678](https://github.com/bstanton678))
+
+
+## [v9.0.3](https://github.com/Workday/canvas-kit/releases/tag/v9.0.3) (2023-05-19)
+
+### Examples
+
+- fix: Add Side Panel with Navigation Example ([#2106](https://github.com/Workday/canvas-kit/pull/2106)) ([@myvuuu](https://github.com/myvuuu), manuel.carrera, [@mannycarrera4](https://github.com/mannycarrera4))
+
+
+## [v9.0.2](https://github.com/Workday/canvas-kit/releases/tag/v9.0.2) (2023-05-18)
+
+### Components
+
+- fix(collection): Fix SSR focus and multiple tab stops ([#2223](https://github.com/Workday/canvas-kit/pull/2223)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v8.6.8](https://github.com/Workday/canvas-kit/releases/tag/v8.6.8) (2023-05-17)
+
+### Components
+
+- fix(collection): Fix SSR focus and multiple tab stops ([#2223](https://github.com/Workday/canvas-kit/pull/2223)) ([@NicholasBoll](https://github.com/NicholasBoll))
 ## [v9.0.1](https://github.com/Workday/canvas-kit/releases/tag/v9.0.1) (2023-05-17)
 
 ### Components
