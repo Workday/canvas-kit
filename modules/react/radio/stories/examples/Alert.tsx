@@ -14,12 +14,12 @@ export const Alert = () => {
     <FormField
       error={FormField.ErrorType.Alert}
       hintId="hint-alert"
-      hintText="Deep Dish is no longer available. Please select a different crust."
+      hintText="Deep dish is an extra $2.99"
       label="Choose Your Pizza Crust"
       useFieldset={true}
     >
       <RadioGroup name={useUniqueId()} onChange={handleChange} value={value}>
-        <Radio label="Deep dish (sold out)" value="deep-dish" />
+        <Radio label="Deep dish" value="deep-dish" />
         <Radio label="Thin" value="thin" />
         <Radio label="Gluten free" value="gluten-free" />
         <Radio label="Cauliflower" value="cauliflower" />
