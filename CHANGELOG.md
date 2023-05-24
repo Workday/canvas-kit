@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v9.0.6](https://github.com/Workday/canvas-kit/releases/tag/v9.0.6) (2023-05-24)
+
+### Component
+
+- fix: Fixing focus blur problem on basic radio group example ([#2198](https://github.com/Workday/canvas-kit/pull/2198)) ([@bstanton678](https://github.com/bstanton678), [@mannycarrera4](https://github.com/mannycarrera4))
+
+
 ## [v9.0.5](https://github.com/Workday/canvas-kit/releases/tag/v9.0.5) (2023-05-23)
 
 ### Infrastructure
