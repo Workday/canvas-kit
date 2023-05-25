@@ -1,5 +1,5 @@
 import React from 'react';
-import {withSnapshotsEnabled, PopperController, customViewport} from '../../../../utils/storybook';
+import {PopperController, customViewport} from '../../../../utils/storybook';
 import {DeleteButton} from '@workday/canvas-kit-react/button';
 import {
   Popup,
@@ -23,7 +23,7 @@ export default {
   },
 };
 
-export const PopupWithFallbackPlacements = withSnapshotsEnabled(() => {
+export const PopupWithFallbackPlacements = () => {
   const [placement, setPlacement] = React.useState<Placement>('top');
   const [marginLeftBtn, setMarginLeftBtn] = React.useState(0);
   const [marginRightBtn, setMarginRightBtn] = React.useState(0);
@@ -90,4 +90,4 @@ export const PopupWithFallbackPlacements = withSnapshotsEnabled(() => {
       </PopperController>
     </div>
   );
-});
+};

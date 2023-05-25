@@ -1,5 +1,5 @@
 import React from 'react';
-import {withSnapshotsEnabled, PopperController, customViewport} from '../../../../utils/storybook';
+import {PopperController, customViewport} from '../../../../utils/storybook';
 import {Placement} from '@workday/canvas-kit-react/popup';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
@@ -16,7 +16,7 @@ export default {
   },
 };
 
-export const TooltipWithFallbackPlacements = withSnapshotsEnabled(() => {
+export const TooltipWithFallbackPlacements = () => {
   const [placement, setPlacement] = React.useState<Placement>('top');
   const [marginLeftBtn, setMarginLeftBtn] = React.useState(0);
   const [marginRightBtn, setMarginRightBtn] = React.useState(0);
@@ -63,4 +63,4 @@ export const TooltipWithFallbackPlacements = withSnapshotsEnabled(() => {
       </PopperController>
     </div>
   );
-});
+};

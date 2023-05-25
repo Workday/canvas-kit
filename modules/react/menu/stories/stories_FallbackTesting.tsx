@@ -1,5 +1,5 @@
 import React from 'react';
-import {withSnapshotsEnabled, PopperController, customViewport} from '../../../../utils/storybook';
+import {PopperController, customViewport} from '../../../../utils/storybook';
 import {Placement} from '@workday/canvas-kit-react/popup';
 import {Menu} from '@workday/canvas-kit-react/menu';
 import {BodyText} from '@workday/canvas-kit-react/text';
@@ -16,7 +16,7 @@ export default {
   },
 };
 
-export const MenuWithFallbackPlacements = withSnapshotsEnabled(() => {
+export const MenuWithFallbackPlacements = () => {
   const [placement, setPlacement] = React.useState<Placement>('top');
   const [marginLeftBtn, setMarginLeftBtn] = React.useState(0);
   const [marginRightBtn, setMarginRightBtn] = React.useState(0);
@@ -74,4 +74,4 @@ export const MenuWithFallbackPlacements = withSnapshotsEnabled(() => {
       </PopperController>
     </div>
   );
-});
+};

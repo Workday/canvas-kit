@@ -6,7 +6,7 @@ import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 import {DeleteButton, SecondaryButton, TertiaryButton} from '@workday/canvas-kit-react/button';
 import {useMount} from '@workday/canvas-kit-react/common';
-import {Box, HStack} from '@workday/canvas-kit-react/layout';
+import {HStack} from '@workday/canvas-kit-react/layout';
 import {
   Popup,
   useCloseOnOutsideClick,
