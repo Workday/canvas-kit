@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v9.0.7](https://github.com/Workday/canvas-kit/releases/tag/v9.0.7) (2023-05-25)
+
+### Components
+
+- fix: Fixing Alert and Error radio button examples ([#2197](https://github.com/Workday/canvas-kit/pull/2197)) ([@bstanton678](https://github.com/bstanton678))
+
+
 ## [v9.0.6](https://github.com/Workday/canvas-kit/releases/tag/v9.0.6) (2023-05-24)
 
 ### Component
