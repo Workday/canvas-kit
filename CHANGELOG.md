@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v8.6.10](https://github.com/Workday/canvas-kit/releases/tag/v8.6.10) (2023-05-25)
+
+### Components
+
+- docs: Add Media Modal to examples ([#2226](https://github.com/Workday/canvas-kit/pull/2226)) ([@dgubko](https://github.com/dgubko))
+
+
 ## [v8.6.9](https://github.com/Workday/canvas-kit/releases/tag/v8.6.9) (2023-05-23)
 
 ### Infrastructure
