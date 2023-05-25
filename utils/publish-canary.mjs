@@ -109,7 +109,6 @@ exec('git diff --name-only HEAD HEAD^')
     const lernaFlags = [
       `--yes`,
       `--force-publish="*"`,
-      `--canary`,
       `--preid ${preid}`,
       `--dist-tag ${distTag}`,
       bump,
