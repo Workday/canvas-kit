@@ -8,7 +8,7 @@ import {
   styled,
   Themeable,
 } from '@workday/canvas-kit-react/common';
-import {borderRadius, inputColors, spaceNumbers, type} from '@workday/canvas-kit-react/tokens';
+import {borderRadius, inputColors, space, type} from '@workday/canvas-kit-react/tokens';
 
 export interface TextAreaProps extends Themeable, GrowthBehavior {
   /**
@@ -62,7 +62,7 @@ const StyledTextArea = styled('textarea')<TextAreaProps & StyledType>(
     minHeight: 64,
     minWidth: 280,
     transition: '0.2s box-shadow, 0.2s border-color',
-    padding: `${spaceNumbers.xxs}rem`, // Compensate for border
+    padding: space.xxs, // Compensate for border
     margin: 0, // Fix Safari
     '&::webkit-resizer': {
       display: 'none',

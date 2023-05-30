@@ -8,7 +8,13 @@ import {
   Themeable,
   useUniqueId,
 } from '@workday/canvas-kit-react/common';
-import {borderRadius, colors, inputColors, spaceNumbers} from '@workday/canvas-kit-react/tokens';
+import {
+  borderRadius,
+  colors,
+  inputColors,
+  space,
+  spaceNumbers,
+} from '@workday/canvas-kit-react/tokens';
 import {LabelText} from '@workday/canvas-kit-react/text';
 
 export interface RadioProps extends Themeable {
@@ -50,7 +56,7 @@ export interface RadioProps extends Themeable {
 const radioBorderRadius = 9;
 const radioDot = 8;
 const radioHeight = (spaceNumbers.xl - spaceNumbers.xxxs) / 2;
-const radioTapArea = `${spaceNumbers.m}rem`;
+const radioTapArea = space.m;
 const radioContainerHeight = radioTapArea;
 const radioLabelDistance = `${spaceNumbers.xs}rem`;
 const radioWidth = radioHeight;
