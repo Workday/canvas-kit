@@ -1,0 +1,42 @@
+import {Meta} from '@storybook/addon-docs';
+
+<Meta title="Guides/Upgrade Guides/v10.0" />
+
+# Canvas Kit 10.0 Upgrade Guide
+
+This guide contains an overview of the changes in Canvas Kit v10. Please
+[reach out](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) if you have
+any questions.
+
+- [Codemod](#codemod)
+
+## Codemod
+
+Please use our [codemod package](https://github.com/Workday/canvas-kit/tree/master/modules/codemod)
+to automatically update your code to work with most of the breaking changes in v10.
+
+```sh
+> npx @workday/canvas-kit-codemod v10 [path]
+```
+
+Alternatively, if you're unable to run the codemod successfully using `npx`, you can install the
+codemod package as a dev dependency, run it with `yarn`, and then remove the package after you're
+finished.
+
+```sh
+> yarn add @workday/canvas-kit-codemod --dev
+> yarn canvas-kit-codemod v10 [path]
+> yarn remove @workday/canvas-kit-codemod
+```
+
+> The codemod only works on `.js`, `.jsx`, `.ts`, and `.tsx` files. You'll need to manually edit
+> other file types (`.json`, `.mdx`, `.md`, etc.). You may need to run your linter after executing
+> the codemod, as its resulting formatting (spacing, quotes, etc.) may not match your project
+> conventions.
+
+The codemod will handle _most_ but _not all_ of the breaking changes in 10. **Breaking changes
+handled by the codemod are marked with 🤖 in the Upgrade Guide.**
+
+**Please verify all changes made by the codemod.** As a safety precaution, we recommend committing
+the changes from the codemod as a single isolated commit (separate from other changes) so you can
+roll back more easily if necessary.
