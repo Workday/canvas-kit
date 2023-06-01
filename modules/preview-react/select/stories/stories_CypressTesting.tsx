@@ -30,11 +30,11 @@ const Container = ({children, style = {}, ...elemProps}) => {
   return (
     <div
       style={{
+        ...style,
         border: `1px solid ${colors.soap600}`,
         marginTop: 50,
         overflow: 'hidden',
         padding: 20,
-        ...style,
       }}
       {...elemProps}
     >
