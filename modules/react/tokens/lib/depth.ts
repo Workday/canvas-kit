@@ -29,7 +29,7 @@ export type CanvasDepth = {
    * ```
    */
   1: {
-    boxShadow: '0 0.063rem 0.25rem rgba(31, 38, 46, 0.12), 0 0.125rem 0.5rem rgba(31, 38, 46, 0.08)';
+    boxShadow: '0 0.0625rem 0.25rem rgba(31, 38, 46, 0.12), 0 0.125rem 0.5rem rgba(31, 38, 46, 0.08)';
   };
   /**
    * ### Depth 2
@@ -61,7 +61,7 @@ export type CanvasDepth = {
    * ```
    */
   3: {
-    boxShadow: '0 0.188rem 0.75rem rgba(31, 38, 46, 0.12), 0 0.375rem 1.5rem rgba(31, 38, 46, 0.08)';
+    boxShadow: '0 0.1875rem 0.75rem rgba(31, 38, 46, 0.12), 0 0.375rem 1.5rem rgba(31, 38, 46, 0.08)';
   };
   /**
    * ### Depth 4
@@ -92,7 +92,7 @@ export type CanvasDepth = {
    * ```
    */
   5: {
-    boxShadow: '0 0.313rem 1.25rem rgba(31, 38, 46, 0.12), 0 0.625rem 2.5rem rgba(31, 38, 46, 0.08)';
+    boxShadow: '0 0.3125rem 1.25rem rgba(31, 38, 46, 0.12), 0 0.625rem 2.5rem rgba(31, 38, 46, 0.08)';
   };
   /**
    * ### Depth 6
@@ -144,21 +144,21 @@ export const depth: CanvasDepth = {
   },
   1: {
     boxShadow:
-      '0 0.063rem 0.25rem rgba(31, 38, 46, 0.12), 0 0.125rem 0.5rem rgba(31, 38, 46, 0.08)',
+      '0 0.0625rem 0.25rem rgba(31, 38, 46, 0.12), 0 0.125rem 0.5rem rgba(31, 38, 46, 0.08)',
   },
   2: {
     boxShadow: '0 0.125rem 0.5rem rgba(31, 38, 46, 0.12), 0 0.25rem 1rem rgba(31, 38, 46, 0.08)',
   },
   3: {
     boxShadow:
-      '0 0.188rem 0.75rem rgba(31, 38, 46, 0.12), 0 0.375rem 1.5rem rgba(31, 38, 46, 0.08)',
+      '0 0.1875rem 0.75rem rgba(31, 38, 46, 0.12), 0 0.375rem 1.5rem rgba(31, 38, 46, 0.08)',
   },
   4: {
     boxShadow: '0 0.25rem 1rem rgba(31, 38, 46, 0.12), 0 0.5rem 2rem rgba(31, 38, 46, 0.08)',
   },
   5: {
     boxShadow:
-      '0 0.313rem 1.25rem rgba(31, 38, 46, 0.12), 0 0.625rem 2.5rem rgba(31, 38, 46, 0.08)',
+      '0 0.3125rem 1.25rem rgba(31, 38, 46, 0.12), 0 0.625rem 2.5rem rgba(31, 38, 46, 0.08)',
   },
   6: {
     boxShadow: '0 0.375rem 1.5rem rgba(31, 38, 46, 0.12), 0 0.75rem 3rem rgba(31, 38, 46, 0.08)',

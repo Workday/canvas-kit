@@ -177,7 +177,7 @@ export interface SelectBaseProps extends CoreSelectBaseProps, StyledType {
   shouldMenuAutoFocus?: boolean;
 }
 
-export const buttonBorderWidth = 0.063;
+export const buttonBorderWidth = 0.0625;
 export const buttonDefaultWidth = `${(spaceNumbers.xxxl * 7) / 2}rem`;
 
 const menuIconSize = spaceNumbers.m;
