@@ -1,7 +1,7 @@
 import React from 'react';
-
+import {breakpoints} from '@workday/canvas-kit-react/common';
 import {ActionBar, useActionBarModel} from '@workday/canvas-kit-react/action-bar';
-import {PrimaryButton, SecondaryButton} from '@workday/canvas-kit-react/button';
+import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {SegmentedControl} from '@workday/canvas-kit-preview-react/segmented-control';
 import {Box} from '@workday/canvas-kit-react/layout';
 
@@ -20,11 +20,11 @@ export const OverflowActionBar = () => {
   ]);
 
   const model = useActionBarModel({items});
-  const [containerWidth, setContainerWidth] = React.useState('100%');
+  const [containerWidth, setContainerWidth] = React.useState<string | number>('100%');
 
   return (
     <div>
-      <Box width={containerWidth} marginBottom="xl">
+      <Box maxWidth={containerWidth} marginBottom="xl">
         <ActionBar model={model}>
           <ActionBar.List
             position="relative"
@@ -58,8 +58,9 @@ export const OverflowActionBar = () => {
       <SegmentedControl onSelect={data => setContainerWidth(data.id)}>
         <SegmentedControl.List aria-label="container width control" marginBottom="m">
           <SegmentedControl.Item data-id="100%">100%</SegmentedControl.Item>
-          <SegmentedControl.Item data-id="440px">440px</SegmentedControl.Item>
-          <SegmentedControl.Item data-id="320px">320px</SegmentedControl.Item>
+          <SegmentedControl.Item data-id={`${breakpoints.m}px`}>Small</SegmentedControl.Item>
+          <SegmentedControl.Item data-id="420px">420px</SegmentedControl.Item>
+          <SegmentedControl.Item data-id={`${breakpoints.s}px`}>Extra Small</SegmentedControl.Item>
         </SegmentedControl.List>
       </SegmentedControl>
     </div>
