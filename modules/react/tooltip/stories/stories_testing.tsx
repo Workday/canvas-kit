@@ -78,6 +78,7 @@ export const Placements = withSnapshotsEnabled(() => {
               // keep the tooltips from moving - no matter what!
               {name: 'flip', enabled: false},
               {name: 'preventOverflow', enabled: false},
+              {name: 'fallbackModifier', enabled: false},
             ],
           }}
           open={true}

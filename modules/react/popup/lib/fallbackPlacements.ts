@@ -42,11 +42,12 @@ const choseAvailablePlacement = (
   const overflow = PopperJS.detectOverflow({...state, placement: placements[0]});
   const direction = /left|right/.test(placements[0].split('-')[0]) ? 'horizontal' : 'vertical';
   const isOverflowed =
-    direction === 'horizontal'
+    (overflow.top > 0 || overflow.bottom > 0 || overflow.left > 0 || overflow.right > 0) &&
+    (direction === 'horizontal'
       ? popper.height / 2 - overflow.top < reference.height ||
         popper.height / 2 - overflow.bottom < reference.height
       : popper.width - overflow.left < reference.width ||
-        popper.width - overflow.right < reference.width;
+        popper.width - overflow.right < reference.width);
   const key = placements[0].split('-')[0] as keyof PopperJS.SideObject;
 
   if (!isOverflowed && overflow[key] <= 0) {

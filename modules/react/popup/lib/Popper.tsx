@@ -173,15 +173,14 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
           placement: popperPlacement,
           ...popperOptions,
           modifiers: [
-            ...(popperOptions.modifiers || []),
-            placementModifier,
-            PopperJS.preventOverflow,
+            placementModifier,      
             {
               ...fallbackPlacementsModifier,
               options: {
                 fallbackPlacements,
               },
             },
+            ...(popperOptions.modifiers || []),
           ],
         });
         elementRef(instance); // update the ref with the instance
@@ -205,7 +204,6 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
           placement: popperPlacement,
           ...popperOptions,
           modifiers: [
-            ...(popperOptions.modifiers || []),
             placementModifier,
             {
               ...fallbackPlacementsModifier,
@@ -213,6 +211,7 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
                 fallbackPlacements,
               },
             },
+            ...(popperOptions.modifiers || []),
           ],
         });
       }
