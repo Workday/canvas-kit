@@ -53,12 +53,12 @@ export interface RadioProps extends Themeable {
   variant?: 'inverse' | undefined;
 }
 
-const radioBorderRadius = 9;
-const radioDot = 8;
+const radioBorderRadius = `${spaceNumbers.xxs + 0.0625}rem`;
+const radioDot = space.xxs;
 const radioHeight = (spaceNumbers.xl - spaceNumbers.xxxs) / 2;
 const radioTapArea = space.m;
 const radioContainerHeight = radioTapArea;
-const radioLabelDistance = `${spaceNumbers.xs}rem`;
+const radioLabelDistance = space.xs;
 const radioWidth = radioHeight;
 const rippleRadius = (spaceNumbers.l - radioWidth) / 2;
 

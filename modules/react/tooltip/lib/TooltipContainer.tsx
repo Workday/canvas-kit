@@ -50,7 +50,7 @@ export const TooltipContainer = styled('div')<TooltipContainerProps>(
     ...type.levels.subtext.medium,
     display: 'inline-flex',
     position: 'relative',
-    padding: `${spaceNumbers.xs}`,
+    padding: space.xs,
     color: colors.frenchVanilla100,
     a: {
       color: colors.frenchVanilla100,
@@ -86,16 +86,16 @@ export const TooltipContainer = styled('div')<TooltipContainerProps>(
 
     // Fix offsets based on placement
     '[data-popper-placement="top-start"] &, [data-popper-placement="bottom-start"] &': {
-      left: `${-space.xxxs}`,
+      left: `-${space.xxxs}`,
     },
     '[data-popper-placement="top-end"] &, [data-popper-placement="bottom-end"] &': {
-      right: `${-space.xxxs}`,
+      right: `-${space.xxxs}`,
     },
     '[data-popper-placement="left-start"] &, [data-popper-placement="right-start"] &': {
-      top: `${-space.xxxs}`,
+      top: `-${space.xxxs}`,
     },
     '[data-popper-placement="left-end"] &, [data-popper-placement="right-end"] &': {
-      bottom: `${-space.xxxs}`,
+      bottom: `-${space.xxxs}`,
     },
   },
   ({transformOrigin = defaultTransformOrigin}) => {
