@@ -61,7 +61,7 @@ export const Table = createComponent('table')({
         ref={ref}
         border={`1px solid ${colors.soap500}`}
         borderRadius="l"
-        overflow="scroll"
+        overflow="auto"
         {...type.levels.subtext.large}
         {...elemProps}
       >

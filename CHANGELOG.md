@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v9.0.8](https://github.com/Workday/canvas-kit/releases/tag/v9.0.8) (2023-06-01)
+
+### Components
+
+- fix: Replace overflow on Table ([#2240](https://github.com/Workday/canvas-kit/pull/2240)) ([@dgubko](https://github.com/dgubko))
+  We replaced overflow: scroll with overflow: auto to hide scrollbars unless needed. It would allow Table to not have scrollbars unless needed.
+
+
 ## [v9.0.7](https://github.com/Workday/canvas-kit/releases/tag/v9.0.7) (2023-05-25)
 
 ### Components
