@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
-import {HStack} from '@workday/canvas-kit-react/layout';
+import {Flex} from '@workday/canvas-kit-react/layout';
 import {
   plusIcon,
   relatedActionsVerticalIcon,
@@ -9,7 +9,7 @@ import {
 } from '@workday/canvas-system-icons-web';
 
 export const Secondary = () => (
-  <HStack spacing="s" padding="s">
+  <Flex gap="s" padding="s">
     <SecondaryButton>Secondary</SecondaryButton>
     <SecondaryButton icon={plusIcon} iconPosition="start">
       Secondary
@@ -18,5 +18,5 @@ export const Secondary = () => (
       Secondary
     </SecondaryButton>
     <SecondaryButton icon={relatedActionsVerticalIcon} />
-  </HStack>
+  </Flex>
 );

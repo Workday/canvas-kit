@@ -50,7 +50,7 @@ export const Popup = createContainer()({
      * const model = usePopupModel();
      *
      * // using this component
-     * <Popup.Target>Show Popup</PopupTarget>
+     * <Popup.Target>Show Popup</Popup.Target>
      *
      * // using props instead
      * const popupTargetButtonProps = usePopupTarget(model);

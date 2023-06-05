@@ -21,7 +21,7 @@ export function verifyComponent(
   Component: React.ComponentType<any>,
   {modelFn, props}: {modelFn?: Function; props: object}
 ) {
-  describe('verifyComponent', () => {
+  describe(`verifyComponent "${Component.displayName}"`, () => {
     const Test = React.forwardRef(({...elemProps}: {as?: React.ElementType}, ref) => {
       const model = modelFn?.() || null;
 
