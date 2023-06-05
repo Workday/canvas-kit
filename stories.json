@@ -5518,6 +5518,20 @@
         "__isArgsStory": false
       }
     },
+    "examples-media-modal--basic": {
+      "id": "examples-media-modal--basic",
+      "name": "Basic",
+      "title": "Examples/Media Modal",
+      "importPath": "./modules/react/_examples/stories/MediaModal.stories.mdx",
+      "kind": "Examples/Media Modal",
+      "story": "Basic",
+      "parameters": {
+        "fileName": "./modules/react/_examples/stories/MediaModal.stories.mdx",
+        "framework": "react",
+        "__id": "examples-media-modal--basic",
+        "__isArgsStory": false
+      }
+    },
     "examples-pageheader--basic": {
       "id": "examples-pageheader--basic",
       "name": "Basic",
@@ -7044,6 +7058,20 @@
         "__isArgsStory": false
       }
     },
+    "testing-popups-dialog--dialog-with-fallback-placements": {
+      "id": "testing-popups-dialog--dialog-with-fallback-placements",
+      "name": "Dialog With Fallback Placements",
+      "title": "Testing/Popups/Dialog",
+      "importPath": "./modules/react/dialog/stories/stories_FallbackTesting.tsx",
+      "kind": "Testing/Popups/Dialog",
+      "story": "Dialog With Fallback Placements",
+      "parameters": {
+        "fileName": "./modules/react/dialog/stories/stories_FallbackTesting.tsx",
+        "framework": "react",
+        "__id": "testing-popups-dialog--dialog-with-fallback-placements",
+        "__isArgsStory": false
+      }
+    },
     "testing-popups-menu--menu-states": {
       "id": "testing-popups-menu--menu-states",
       "name": "Menu States",
@@ -7055,6 +7083,20 @@
         "fileName": "./modules/react/menu/stories/stories_visualTesting.tsx",
         "framework": "react",
         "__id": "testing-popups-menu--menu-states",
+        "__isArgsStory": false
+      }
+    },
+    "testing-popups-menu--menu-with-fallback-placements": {
+      "id": "testing-popups-menu--menu-with-fallback-placements",
+      "name": "Menu With Fallback Placements",
+      "title": "Testing/Popups/Menu",
+      "importPath": "./modules/react/menu/stories/stories_FallbackTesting.tsx",
+      "kind": "Testing/Popups/Menu",
+      "story": "Menu With Fallback Placements",
+      "parameters": {
+        "fileName": "./modules/react/menu/stories/stories_FallbackTesting.tsx",
+        "framework": "react",
+        "__id": "testing-popups-menu--menu-with-fallback-placements",
         "__isArgsStory": false
       }
     },
@@ -7268,6 +7310,20 @@
         "__isArgsStory": false
       }
     },
+    "testing-popups-popup--popup-with-fallback-placements": {
+      "id": "testing-popups-popup--popup-with-fallback-placements",
+      "name": "Popup With Fallback Placements",
+      "title": "Testing/Popups/Popup",
+      "importPath": "./modules/react/popup/stories/stories_FallbackTesting.tsx",
+      "kind": "Testing/Popups/Popup",
+      "story": "Popup With Fallback Placements",
+      "parameters": {
+        "fileName": "./modules/react/popup/stories/stories_FallbackTesting.tsx",
+        "framework": "react",
+        "__id": "testing-popups-popup--popup-with-fallback-placements",
+        "__isArgsStory": false
+      }
+    },
     "testing-popups-popup--popup-with-non-hidable-popup": {
       "id": "testing-popups-popup--popup-with-non-hidable-popup",
       "name": "Popup With Non Hidable Popup",
@@ -7377,6 +7433,20 @@
         "fileName": "./modules/react/tooltip/stories/stories_testing.tsx",
         "framework": "react",
         "__id": "testing-popups-tooltip--placements-focus",
+        "__isArgsStory": false
+      }
+    },
+    "testing-popups-tooltip--tooltip-with-fallback-placements": {
+      "id": "testing-popups-tooltip--tooltip-with-fallback-placements",
+      "name": "Tooltip With Fallback Placements",
+      "title": "Testing/Popups/Tooltip",
+      "importPath": "./modules/react/tooltip/stories/stories_FallbackTesting.tsx",
+      "kind": "Testing/Popups/Tooltip",
+      "story": "Tooltip With Fallback Placements",
+      "parameters": {
+        "fileName": "./modules/react/tooltip/stories/stories_FallbackTesting.tsx",
+        "framework": "react",
+        "__id": "testing-popups-tooltip--tooltip-with-fallback-placements",
         "__isArgsStory": false
       }
     },
