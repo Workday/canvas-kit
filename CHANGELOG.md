@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v9.0.9](https://github.com/Workday/canvas-kit/releases/tag/v9.0.9) (2023-06-05)
+
+### Components
+
+- docs: Add Media Modal to examples ([#2226](https://github.com/Workday/canvas-kit/pull/2226)) ([@dgubko](https://github.com/dgubko))
+- fix: Add custom fallback placements modifier ([#2200](https://github.com/Workday/canvas-kit/pull/2200)) ([@clarehuang](https://github.com/clarehuang), clare.huang, [@NicholasBoll](https://github.com/NicholasBoll))
+  This fix adds additional fallback placements to prevent popups from rendering off screen. This behavior is different than before and might result in a popup rendering in an unexpected position. `fallbackPlacements` was added as a prop to `Popper` and `Popup.Popper` to allow you to override the default fallback placements (which are top/right/bottom/left in that order). This shouldn't be considered a breaking change unless your popup position needs to be restricted.
+
+
 ## [v8.6.11](https://github.com/Workday/canvas-kit/releases/tag/v8.6.11) (2023-06-05)
 
 ### Components
