@@ -319,4 +319,60 @@ describe('Tooltip', () => {
       });
     });
   });
+
+  context(
+    `given the [Testing/Popups/Tooltip, TooltipWithFallbackPlacements] example is rendered`,
+    () => {
+      beforeEach(() => {
+        h.stories.load('Testing/Popups/Tooltip', 'TooltipWithFallbackPlacements');
+      });
+
+      context('check the fallback placements', () => {
+        [
+          {
+            placement: 'top',
+            fallbackPlacement: 'bottom',
+            x: 0,
+            y: 350,
+            isMovedToSide: false,
+          },
+          {
+            placement: 'left',
+            fallbackPlacement: 'right',
+            x: 0,
+            y: 0,
+            isMovedToSide: true,
+          },
+          {
+            placement: 'left',
+            fallbackPlacement: 'bottom',
+            x: 0,
+            y: 350,
+            isMovedToSide: true,
+          },
+        ].forEach(io => {
+          context(`when the preferred placement is set to ${io.placement}`, () => {
+            beforeEach(() => {
+              if (io.isMovedToSide) {
+                cy.findByTestId(`slide-${io.placement}`)
+                  .type('500')
+                  .trigger('change');
+              }
+              cy.findByRole('button', {name: io.placement}).click();
+              cy.scrollTo(io.x, io.y);
+            });
+
+            it(`should show the fallback placement: ${io.fallbackPlacement}`, () => {
+              cy.findByRole('button', {name: 'Hover Me'}).trigger('mouseover', {
+                scrollBehavior: false,
+              });
+              cy.findByRole('tooltip')
+                .parents('div[data-popper-placement]')
+                .should('have.attr', 'data-popper-placement', io.fallbackPlacement);
+            });
+          });
+        });
+      });
+    }
+  );
 });
