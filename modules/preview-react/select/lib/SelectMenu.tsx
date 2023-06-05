@@ -207,6 +207,12 @@ const generatePopperOptions = (
         mainAxis: false,
       },
     },
+    {
+      // Disable the fallbackModifier as SelectMenu is properly handled by the
+      // flip modifier through shouldAutoFlip prop
+      name: 'fallbackModifier',
+      enabled: false,
+    },
   ];
 
   return {

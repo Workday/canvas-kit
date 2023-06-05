@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-css-loading-dots",
-  "version": "9.0.8",
+  "version": "9.0.9",
   "description": "Animations used while a page or component is loading.",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -17,7 +17,7 @@
     "directory": "modules/css/loading-dots"
   },
   "dependencies": {
-    "@workday/canvas-kit-css-core": "^9.0.8"
+    "@workday/canvas-kit-css-core": "^9.0.9"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
