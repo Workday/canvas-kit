@@ -1,8 +1,13 @@
 import * as React from 'react';
 import innerText from 'react-innertext';
 
-import {getTransformFromPlacement, Placement, Popper} from '@workday/canvas-kit-react/popup';
-import {mergeCallback} from '@workday/canvas-kit-react/common';
+import {
+  getTransformFromPlacement,
+  Placement,
+  Popper,
+  defaultFallbackPlacements,
+} from '@workday/canvas-kit-react/popup';
+import {createComponent, mergeCallback} from '@workday/canvas-kit-react/common';
 
 import {TooltipContainer} from './TooltipContainer';
 import {useTooltip} from './useTooltip';
@@ -27,6 +32,13 @@ export interface TooltipProps extends Omit<React.HTMLAttributes<HTMLDivElement>,
    * @default 'top'
    */
   placement?: Placement;
+  /**
+   * Define fallback placements by providing a list of {@link Placement} in array (in order of preference).
+   * The default preference is following the order of `top`, `right`, `bottom`, and `left`. Once the initial
+   * and opposite placements are not available, the fallback placements will be in use. Use an empty array to
+   * disable the fallback placements.
+   */
+  fallbackPlacements?: Placement[];
   /**
    * Determines the tooltip type for accessibility.
    *
@@ -69,42 +81,46 @@ function mergeCallbacks<T extends {[key: string]: any}>(
   }, {} as {[key: string]: any});
 }
 
-export const Tooltip = ({
-  type = 'label',
-  placement = 'top',
-  title,
-  children,
-  showDelay = 300,
-  hideDelay = 100,
-  ...elemProps
-}: TooltipProps) => {
-  const titleText = innerText(title);
-  const {targetProps, popperProps, tooltipProps} = useTooltip({
-    type,
-    titleText,
-    showDelay,
-    hideDelay,
-  });
+export const Tooltip = createComponent('div')({
+  displayName: 'Tooltip',
+  Component({
+    type = 'label',
+    placement = 'top',
+    title,
+    children,
+    showDelay = 300,
+    hideDelay = 100,
+    fallbackPlacements = defaultFallbackPlacements,
+    ...elemProps
+  }: TooltipProps) {
+    const titleText = innerText(title);
+    const {targetProps, popperProps, tooltipProps} = useTooltip({
+      type,
+      titleText,
+      showDelay,
+      hideDelay,
+    });
 
-  return (
-    <React.Fragment>
-      {React.cloneElement(children, {
-        ...targetProps,
-        ...mergeCallbacks(children.props, targetProps),
-        ...(type === 'muted' && children.props['aria-label']
-          ? {'aria-label': children.props['aria-label']}
-          : {}),
-      })}
-      <Popper placement={placement} {...popperProps}>
-        {({placement}) => {
-          const transformOrigin = getTransformFromPlacement(placement);
-          return (
-            <TooltipContainer transformOrigin={transformOrigin} {...elemProps} {...tooltipProps}>
-              {title}
-            </TooltipContainer>
-          );
-        }}
-      </Popper>
-    </React.Fragment>
-  );
-};
+    return (
+      <React.Fragment>
+        {React.cloneElement(children, {
+          ...targetProps,
+          ...mergeCallbacks(children.props, targetProps),
+          ...(type === 'muted' && children.props['aria-label']
+            ? {'aria-label': children.props['aria-label']}
+            : {}),
+        })}
+        <Popper placement={placement} fallbackPlacements={fallbackPlacements} {...popperProps}>
+          {({placement}) => {
+            const transformOrigin = getTransformFromPlacement(placement);
+            return (
+              <TooltipContainer transformOrigin={transformOrigin} {...elemProps} {...tooltipProps}>
+                {title}
+              </TooltipContainer>
+            );
+          }}
+        </Popper>
+      </React.Fragment>
+    );
+  },
+});

@@ -1,5 +1,17 @@
-import {colors} from '@workday/canvas-kit-react/tokens';
+import {CanvasColor, colors} from '@workday/canvas-kit-react/tokens';
 import chroma from 'chroma-js';
+
+/**
+ * The function takes in a color string or an enum value of CanvasColor and returns its hex value color.
+ * @param value a string or an enum value of CanvasColor
+ * @returns the hex value color
+ */
+export function getColor(value?: CanvasColor | string) {
+  if (value! in colors) {
+    return colors[value as keyof typeof colors];
+  }
+  return value;
+}
 
 // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
 export const expandHex = (hex: string) => {
@@ -31,16 +43,17 @@ export const pickForegroundColor = (
   darkColor?: string,
   lightColor?: string
 ) => {
-  if (chroma.valid(background)) {
-    if (lightColor && chroma.contrast(background, lightColor) >= 4.5) {
-      return lightColor;
-    } else if (darkColor && chroma.contrast(background, darkColor) >= 4.5) {
-      return darkColor;
+  const [bg, dark, light] = [getColor(background), getColor(darkColor), getColor(lightColor)];
+  if (bg && chroma.valid(bg)) {
+    if (light && chroma.contrast(bg, light) >= 4.5) {
+      return light;
+    } else if (dark && chroma.contrast(bg, dark) >= 4.5) {
+      return dark;
     } else {
       for (let i = 0; i < colorPriority.length; i++) {
         const color = colorPriority[i];
 
-        if (chroma.contrast(background, color) >= 4.5) {
+        if (chroma.contrast(bg, color) >= 4.5) {
           return color;
         }
       }

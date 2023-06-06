@@ -1,12 +1,10 @@
-import {Meta} from '@storybook/addon-docs';
-
 <Meta
   title="Guides/Maintaining"
   parameters={{
     viewMode: 'docs',
     previewTabs: {
-      canvas: { hidden: true }
-     },
+      canvas: {hidden: true},
+    },
   }}
 />
 
@@ -27,6 +25,8 @@ Kit!
   - [Minor Releases](#minor-releases)
   - [Major Releases](#major-releases)
   - [Canary Releases](#canary-releases)
+- [Codemods](#codemods)
+  - [Add a New Codemod](#add-a-new-codemod)
 
 ## Branches
 
@@ -266,3 +266,117 @@ merged. The major version will be appended with `-alpha.{build-number}-next.{com
 `build-number` is the GitHub build identifier, and `commit-count` is the number of commits since the
 last release tag. So for example, a V8 canary would look something like this:
 `8.0.0-alpha.127-next.4`.
+
+## Codemods
+
+We use codemods to reduce friction for consumers as they make changes and do upgrades. Codemods are
+accompany major version releases since v5, and can also be released in minor releases if users want to apply some changes sooner.
+
+### Add a New Codemod
+
+Adding a new codemod is pretty straightforward, but this guide will make sure you don't miss any steps
+along the way.
+
+First, you need to add a new command to the root CLI. For this example, we'll pretend you're adding
+a new v10 codemod.
+
+#### Initial Setup
+
+```js
+// modules/codemod/lib/index.js
+.command('v10 [path]', chalk.gray('Canvas Kit v9 > v10 upgrade transform'), yargs => {
+  yargs.positional('path', {
+    type: 'string',
+    default: '.',
+    describe: chalk.gray('The path to execute the transform in (recursively).'),
+  });
+})
+```
+
+Next, you'll want to add new v10 files and directories.
+
+```sh
+# add code and spec directories
+mkdir modules/codemod/v10 modules/codemod/spec
+# add code files
+touch modules/codemod/v10/index.ts modules/codemod/v10/__example__.ts
+## add spec files
+touch modules/codemod/v10/spec/__example__.spec.ts modules/codemod/v10/spec/expectTransformFactory.spec.ts
+```
+
+#### Add the Codemod
+
+Now you can add your first (placeholder) codemod.
+
+```ts
+// modules/codemod/v10/__example__.ts
+import {Transform} from 'jscodeshift';
+
+// placeholder codemod
+const transform: Transform = (file, api) => {
+  const j = api.jscodeshift;
+
+  const root = j(file.source);
+  return root.toSource();
+};
+
+export default transform;
+```
+
+And add a codemod runner:
+
+```ts
+// modules/codemod/v10/index.ts
+import {Transform} from 'jscodeshift';
+
+// TODO: Remove this
+import placeholderCodemod from './__example__';
+
+const transform: Transform = (file, api, options) => {
+  // These will run in order. If your transform depends on others, place yours after dependent transforms
+  const fixes = [
+    // TODO: Remove this
+    placeholderCodemod,
+    // add codemods here
+  ];
+  return fixes.reduce((source, fix) => fix({...file, source}, api, options) as string, file.source);
+};
+
+export default transform;
+```
+
+#### Add Tests
+
+Now you're ready to add your tests. First, we'll add this test factory to make your tests easier to
+write.
+
+```ts
+// modules/codemod/v10/spec/expectTransformFactory.spec.ts
+import {runInlineTest} from 'jscodeshift/dist/testUtils';
+
+export const expectTransformFactory = (fn: Function) => (
+  input: string,
+  expected: string,
+  options?: Record<string, any>
+) => {
+  return runInlineTest(fn, options, {source: input}, expected, {parser: 'tsx'});
+};
+```
+
+```ts
+// modules/codemod/v10/spec/__example__.spec.ts
+import {expectTransformFactory} from './expectTransformFactory';
+import transform from '../__remove_this__';
+
+const expectTransform = expectTransformFactory(transform);
+
+describe('Example Codemod', () => {
+  it('should not modify the code', () => {
+    const input = "const foo = 'bar';";
+    const expected = "const foo = 'bar';";
+    expectTransform(input, expected);
+  });
+});
+```
+
+And that's it! You're done. Stage your changes, commit, and push up a PR.

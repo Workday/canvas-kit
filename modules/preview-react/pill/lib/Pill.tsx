@@ -9,7 +9,7 @@ import {
   styled,
   StyledType,
 } from '@workday/canvas-kit-react/common';
-import {BoxProps, boxStyleFn, HStack, Stack} from '@workday/canvas-kit-react/layout';
+import {BoxProps, boxStyleFn, Flex} from '@workday/canvas-kit-react/layout';
 import {borderRadius, colors, space, type} from '@workday/canvas-kit-react/tokens';
 
 import {usePillModel} from './usePillModel';
@@ -160,14 +160,113 @@ const StyledNonInteractivePill = styled(StyledBasePill)<StyledType>({
   position: 'relative',
 });
 
+/**
+ * By default, a `Pill` renders an interactive element that accepts subcomponents. By "interactive"
+ * we mean that the Pill container is a focusable element (a `<button>`). All leading elements
+ * (icons or avatars) are intended to be descriptive, helping support the label. They should not
+ * receive focus.
+ *
+ * `Pill` is the container component. It also provides a React context model for its subcomponents.
+ * Based on the `variant` prop this component will render different styled `Pill`s.
+ *
+ * Example of read only:
+ *
+ * ```tsx
+ * <Pill variant="readOnly">This is a read only</Pill>
+ * ```
+ *
+ * Example of interactive:
+ *
+ * ```tsx
+ * <Pill onClick={() => console.log('clicked')}>
+ *   <Pill.Avatar /> Regina Skeltor
+ * </Pill>
+ * ```
+ *
+ * Example of removable:
+ *
+ * ```tsx
+ * <Pill variant="removable">
+ *   <Pill.Avatar /> Regina Skeltor
+ *   <Pill.IconButton onClick={() => console.log('clicked')} />
+ * </Pill>
+ * ```
+ *
+ * If you set the `Pill` `variant` to `removable`, it will render a `<span>` element. You can then
+ * provide a `Pill.IconButton` that acts as the focus target. This creates a smaller, more
+ * intentional click target that prevents users from accidentally deleting an item.
+ *
+ * ```tsx
+ * <Pill variant="removable">
+ *   Shoes
+ *   <Pill.IconButton onClick={() => console.log('handle remove')} />
+ * </Pill>
+ * ```
+ */
 export const Pill = createContainer('button')({
+  displayName: 'Pill',
   modelHook: usePillModel,
   subComponents: {
-    Icon: PillIcon,
+    /**
+     * This component renders an avatar. It supports all props of the `Avatar` component.
+     *
+     * ```tsx
+     * <Pill variant="removable">
+     *   <Pill.Avatar url={avatarUrl} />
+     *   Regina Skeltor
+     *   <Pill.IconButton onClick={() => console.log('handle remove')} />
+     * </Pill>
+     * ```
+     */
     Avatar: PillAvatar,
+    /**
+     * This component renders its `children` as the count.
+     *
+     * ```tsx
+     * <Pill onClick={() => console.warn('clicked')}>
+     *   Shoes
+     *   <Pill.Count>30</Pill.Count>
+     * </Pill>
+     * ```
+     */
     Count: PillCount,
-    Label: PillLabel,
+    /**
+     * This component renders an `icon`. It not be used with the `default` styling – not `readOnly`
+     * or `removable` variants. By default it renders a `plusIcon` but it can be overridden by
+     * providing an icon to the `icon` prop.
+     *
+     * ```tsx
+     * <Pill onClick={() => console.warn('clicked')}>
+     *   <Pill.Icon />
+     *   <Pill.Label>Regina Skeltor</Pill.Label>
+     * </Pill>
+     * ```
+     */
+    Icon: PillIcon,
+    /**
+     * This component renders a custom icon button. It is only intended to be used with the
+     * `removable` variant. By default, it renders a `xSmallIcon` but can be overridden by providing
+     * an icon to the `icon` prop.
+     *
+     * ```tsx
+     * <Pill variant="removable">
+     *   Pink Shirts
+     *   <Pill.IconButton onClick={() => console.warn('clicked')} />
+     * </Pill>
+     * ```
+     */
     IconButton: PillIconButton,
+    /**
+     * This component renders a `<span>` that automatically handles overflow by rendering a tooltip.
+     * There's no need to use this component directly since the overflow is handled for you automatically.
+     *
+     * ```tsx
+     * <Pill variant="readOnly">
+     *   <Pill.Label>Read-only</Pill.Label>
+     * </Pill>
+     * ```
+     */
+    Label: PillLabel,
   },
 })<PillProps>(({variant = 'default', maxWidth, ...elemProps}, Element, model) => {
   return (
@@ -190,18 +289,18 @@ export const Pill = createContainer('button')({
           {...elemProps}
           disabled={model.state.disabled}
         >
-          <HStack spacing="xxxs" display="inline-flex" alignItems="center">
+          <Flex gap="xxxs" display="inline-flex" alignItems="center">
             {React.Children.map(elemProps.children, (child, index) => {
               if (typeof child === 'string') {
                 return <PillLabel key={index}>{child}</PillLabel>;
               }
               return (
-                <Stack.Item key={index} display="inline-flex">
+                <Flex.Item key={index} display="inline-flex">
                   {child}
-                </Stack.Item>
+                </Flex.Item>
               );
             })}
-          </HStack>
+          </Flex>
         </StyledBasePill>
       )}
       {variant === 'removable' && (
@@ -211,14 +310,14 @@ export const Pill = createContainer('button')({
           variant={variant}
           {...elemProps}
         >
-          <HStack spacing="xxxs" display="inline-flex" alignItems="center" justifyContent="center">
+          <Flex gap="xxxs" display="inline-flex" alignItems="center" justifyContent="center">
             {React.Children.map(elemProps.children, (child, index) => {
               if (typeof child === 'string') {
                 return <PillLabel key={index}>{child}</PillLabel>;
               }
-              return <Stack.Item key={index}>{child}</Stack.Item>;
+              return <Flex.Item key={index}>{child}</Flex.Item>;
             })}
-          </HStack>
+          </Flex>
         </StyledNonInteractivePill>
       )}
     </>

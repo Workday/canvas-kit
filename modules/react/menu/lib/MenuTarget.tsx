@@ -14,7 +14,7 @@ export interface MenuTargetProps {
   children?: React.ReactNode;
 }
 
-const useMenuTargetBase = createElemPropsHook(useMenuModel)(model => {
+export const useMenuTargetBase = createElemPropsHook(useMenuModel)(model => {
   return {
     id: model.state.id,
     'aria-haspopup': 'true',
@@ -27,7 +27,7 @@ const useMenuTargetBase = createElemPropsHook(useMenuModel)(model => {
           model.events.show(event);
       }
     },
-  };
+  } as const;
 });
 
 export const useMenuTarget = composeHooks(useMenuTargetBase, usePopupTarget);

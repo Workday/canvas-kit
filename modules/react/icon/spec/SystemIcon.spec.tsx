@@ -3,7 +3,7 @@ import {render} from '@testing-library/react';
 
 import {colors, iconColors} from '@workday/canvas-kit-react/tokens';
 import {activityStreamIcon} from '@workday/canvas-system-icons-web';
-
+import {getColor} from '@workday/canvas-kit-react/common';
 import {SystemIcon, systemIconStyles} from '../lib/SystemIcon';
 
 describe('System Icon', () => {
@@ -61,5 +61,32 @@ describe('System Icon', () => {
 
     // container is not a semantic element
     expect(container.firstChild).toHaveAttribute('data-propspread', 'test');
+  });
+
+  test('accent and fill props override color if set - use token color as string', () => {
+    const color = 'peachpuff';
+    const colorHover = 'goldenrod';
+    const accent = 'blueberry200';
+    const accentHover = 'blueberry500';
+    const fill = 'cinnamon200';
+    const fillHover = 'cinnamon500';
+    const componentStyle = systemIconStyles({
+      color,
+      colorHover,
+      accent,
+      accentHover,
+      fill,
+      fillHover,
+    });
+    expect(componentStyle['& .wd-icon-fill']).toHaveProperty('fill', getColor(fill));
+    expect(componentStyle[':hover .wd-icon-fill']).toHaveProperty('fill', getColor(fillHover));
+    expect(componentStyle['& .wd-icon-accent, & .wd-icon-accent2']).toHaveProperty(
+      'fill',
+      getColor(accent)
+    );
+    expect(componentStyle[':hover .wd-icon-accent, :hover .wd-icon-accent2']).toHaveProperty(
+      'fill',
+      getColor(accentHover)
+    );
   });
 });

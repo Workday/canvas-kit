@@ -32,9 +32,9 @@ export const DynamicTabs = () => {
    * @param id The id of the item that will be removed
    */
   const removeItem = <T extends unknown>(id: string, model: ReturnType<typeof useTabsModel>) => {
-    const index = model.state.items.findIndex(item => model.getId(item) === model.state.cursorId);
+    const index = model.state.items.findIndex(item => item.id === model.state.cursorId);
     const nextIndex = index === model.state.items.length - 1 ? index - 1 : index + 1;
-    const nextId = model.getId(model.state.items[nextIndex]);
+    const nextId = model.state.items[nextIndex].id;
     if (model.state.selectedIds[0] === id) {
       // We're removing the currently selected item. Select next item
       model.events.select({id: nextId});
@@ -69,7 +69,6 @@ export const DynamicTabs = () => {
           addTab
         );
       });
-      model.events.goTo({id: 'add'});
     }
   };
 

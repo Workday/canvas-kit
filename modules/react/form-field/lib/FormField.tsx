@@ -136,7 +136,7 @@ const FormFieldInputContainer = styled('div')<GrowthBehavior & FormFieldLabelPos
   }
 );
 
-class FormField extends React.Component<React.PropsWithChildren<FormFieldProps>> {
+export class FormField extends React.Component<React.PropsWithChildren<FormFieldProps>> {
   static LabelPosition = FormFieldLabelPosition;
   static ErrorType = ErrorType;
 
@@ -157,13 +157,17 @@ class FormField extends React.Component<React.PropsWithChildren<FormFieldProps>>
       if (typeof this.props.error !== 'undefined') {
         props.error = this.props.error;
 
-        if (this.props.hintId) {
-          props['aria-describedby'] = this.props.hintId;
-        }
-
         if (this.props.error === ErrorType.Error) {
           props['aria-invalid'] = true;
         }
+      }
+
+      if (this.props.hintId) {
+        props['aria-describedby'] = this.props.hintId;
+      }
+
+      if (this.props.required) {
+        props.required = true;
       }
 
       props.id = this.inputId;
@@ -237,5 +241,3 @@ class FormField extends React.Component<React.PropsWithChildren<FormFieldProps>>
 
 FormField.LabelPosition = FormFieldLabelPosition;
 FormField.ErrorType = ErrorType;
-
-export {FormField};

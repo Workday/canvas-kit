@@ -3,6 +3,477 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v9.0.9](https://github.com/Workday/canvas-kit/releases/tag/v9.0.9) (2023-06-05)
+
+### Components
+
+- docs: Add Media Modal to examples ([#2226](https://github.com/Workday/canvas-kit/pull/2226)) ([@dgubko](https://github.com/dgubko))
+- fix: Add custom fallback placements modifier ([#2200](https://github.com/Workday/canvas-kit/pull/2200)) ([@clarehuang](https://github.com/clarehuang), clare.huang, [@NicholasBoll](https://github.com/NicholasBoll))
+  This fix adds additional fallback placements to prevent popups from rendering off screen. This behavior is different than before and might result in a popup rendering in an unexpected position. `fallbackPlacements` was added as a prop to `Popper` and `Popup.Popper` to allow you to override the default fallback placements (which are top/right/bottom/left in that order). This shouldn't be considered a breaking change unless your popup position needs to be restricted.
+
+
+## [v8.6.11](https://github.com/Workday/canvas-kit/releases/tag/v8.6.11) (2023-06-05)
+
+### Components
+
+- fix: Add custom fallback placements modifier ([#2200](https://github.com/Workday/canvas-kit/pull/2200)) ([@clarehuang](https://github.com/clarehuang), clare.huang, [@NicholasBoll](https://github.com/NicholasBoll))
+  This fix adds additional fallback placements to prevent popups from rendering off screen. This behavior is different than before and might result in a popup rendering in an unexpected position. `fallbackPlacements` was added as a prop to `Popper` and `Popup.Popper` to allow you to override the default fallback placements (which are top/right/bottom/left in that order). This shouldn't be considered a breaking change unless your popup position needs to be restricted.
+
+
+## [v9.0.8](https://github.com/Workday/canvas-kit/releases/tag/v9.0.8) (2023-06-01)
+
+### Components
+
+- fix: Replace overflow on Table ([#2240](https://github.com/Workday/canvas-kit/pull/2240)) ([@dgubko](https://github.com/dgubko))
+  We replaced overflow: scroll with overflow: auto to hide scrollbars unless needed. It would allow Table to not have scrollbars unless needed.
+
+
+## [v8.6.10](https://github.com/Workday/canvas-kit/releases/tag/v8.6.10) (2023-05-25)
+
+### Components
+
+- docs: Add Media Modal to examples ([#2226](https://github.com/Workday/canvas-kit/pull/2226)) ([@dgubko](https://github.com/dgubko))
+## [v9.0.7](https://github.com/Workday/canvas-kit/releases/tag/v9.0.7) (2023-05-25)
+
+### Components
+
+- fix: Fixing Alert and Error radio button examples ([#2197](https://github.com/Workday/canvas-kit/pull/2197)) ([@bstanton678](https://github.com/bstanton678))
+
+
+## [v9.0.6](https://github.com/Workday/canvas-kit/releases/tag/v9.0.6) (2023-05-24)
+
+### Component
+
+- fix: Fixing focus blur problem on basic radio group example ([#2198](https://github.com/Workday/canvas-kit/pull/2198)) ([@bstanton678](https://github.com/bstanton678), [@mannycarrera4](https://github.com/mannycarrera4))
+
+
+## [v9.0.5](https://github.com/Workday/canvas-kit/releases/tag/v9.0.5) (2023-05-23)
+
+### Infrastructure
+
+- ci: Support fast-forward-merges [skip-release] ([#2232](https://github.com/Workday/canvas-kit/pull/2232)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v8.6.9](https://github.com/Workday/canvas-kit/releases/tag/v8.6.9) (2023-05-23)
+
+### Infrastructure
+
+- ci: Support fast-forward-merges [skip-release] ([#2232](https://github.com/Workday/canvas-kit/pull/2232)) ([@NicholasBoll](https://github.com/NicholasBoll))
+## [v9.0.4](https://github.com/Workday/canvas-kit/releases/tag/v9.0.4) (2023-05-23)
+
+### Components
+
+- fix: Associating FormField hint while not in error state ([#2199](https://github.com/Workday/canvas-kit/pull/2199)) ([@bstanton678](https://github.com/bstanton678))
+
+
+## [v9.0.3](https://github.com/Workday/canvas-kit/releases/tag/v9.0.3) (2023-05-19)
+
+### Examples
+
+- fix: Add Side Panel with Navigation Example ([#2106](https://github.com/Workday/canvas-kit/pull/2106)) ([@myvuuu](https://github.com/myvuuu), manuel.carrera, [@mannycarrera4](https://github.com/mannycarrera4))
+
+
+## [v9.0.2](https://github.com/Workday/canvas-kit/releases/tag/v9.0.2) (2023-05-18)
+
+### Components
+
+- fix(collection): Fix SSR focus and multiple tab stops ([#2223](https://github.com/Workday/canvas-kit/pull/2223)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v8.6.8](https://github.com/Workday/canvas-kit/releases/tag/v8.6.8) (2023-05-17)
+
+### Components
+
+- fix(collection): Fix SSR focus and multiple tab stops ([#2223](https://github.com/Workday/canvas-kit/pull/2223)) ([@NicholasBoll](https://github.com/NicholasBoll))
+## [v9.0.1](https://github.com/Workday/canvas-kit/releases/tag/v9.0.1) (2023-05-17)
+
+### Components
+
+- fix: Fix Checkbox label padding to support RTL ([#2216](https://github.com/Workday/canvas-kit/pull/2216)) ([@alanbsmith](https://github.com/alanbsmith), Alex Nicholls)
+- fix: Focusable elements not always focused ([#2204](https://github.com/Workday/canvas-kit/pull/2204)) ([@TylerCharlesworth](https://github.com/TylerCharlesworth), [@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v8.6.7](https://github.com/Workday/canvas-kit/releases/tag/v8.6.7) (2023-05-17)
+
+### Components
+
+- fix: Focusable elements not always focused ([#2204](https://github.com/Workday/canvas-kit/pull/2204)) ([@TylerCharlesworth](https://github.com/TylerCharlesworth), [@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v8.6.6](https://github.com/Workday/canvas-kit/releases/tag/v8.6.6) (2023-05-12)
+
+### Components
+
+- fix: Fix Checkbox label padding to support RTL ([#2216](https://github.com/Workday/canvas-kit/pull/2216)) ([@alanbsmith](https://github.com/alanbsmith), Alex Nicholls)
+## [v9.0.0](https://github.com/Workday/canvas-kit/releases/tag/v9.0.0) (2023-05-10)
+
+### BREAKING CHANGES
+
+- [#1970](https://github.com/Workday/canvas-kit/pull/1970) The `Drawer` component was hard deprecated and fully removed from Canvas Kit. Please replace the deprecated `Drawer` component with `SidePanel` from the Preview package.
+- [#1978](https://github.com/Workday/canvas-kit/pull/1978) If you expected a button to submit by default, you'll have to add the attribute `type="submit"` in order to submit.
+- [#2018](https://github.com/Workday/canvas-kit/pull/2018) We have hard deprecated the Layout and Column components and they have been fully removed from our codebase in v9. We recommend using the `Grid` component as an alternative.
+- [#2012](https://github.com/Workday/canvas-kit/pull/2012) We've hard deprecated the `Stack`, `HStack` and `VStack` components. We recommend using the `Flex` component as a replacement and replacing the `spacing` prop with the `gap` prop. You can also run `npx @workday/canvas-kit-codemod softDeprecate/Stack` as well.
+- [#2034](https://github.com/Workday/canvas-kit/pull/2034) - Lodash is no longer required for Canvas kit
+  - memoized is removed from FocusRingOptions
+- [#2044](https://github.com/Workday/canvas-kit/pull/2044) If you're using Toast from Labs already, the package will be updated to point to `@workday/canvas-kit-react/toast`. If you're using the Toast from Main, we've replaced it with the compound Toast from labs. `v9` codemod should handle these changes for you or you can reference our v9 upgrade guide for more details.
+- [#2120](https://github.com/Workday/canvas-kit/pull/2120) - We've removed `getCanvasTheme` and `useCanvasTheme`.
+  - Use `useTheme` when you have a `CanvasProvider` or you're inside of a functional component
+  - Use `getTheme` when inside a styled component and you need access to theme.
+- [#2180](https://github.com/Workday/canvas-kit/pull/2180) - Removed `composeModelHooks` from `@workday/canvas-kit-react/common`
+- [#2190](https://github.com/Workday/canvas-kit/pull/2190) The type signature of `composeHooks` was changed to give more accurate return prop types. This may cause issues with Typescript if your code expected the incorrect return types.
+- [#2194](https://github.com/Workday/canvas-kit/pull/2194) The signature of the `NavigationManaget` and `NavigationRequestor` was changed to use numeric indexes instead of string identifiers. This will only break for those who created a custom navigation manager.
+
+### Codemod
+
+- test: Update Toast codemod to transform before promote ([#2125](https://github.com/Workday/canvas-kit/pull/2125)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+### Codemods
+
+- fix: Stack Codemod Fix ([#2127](https://github.com/Workday/canvas-kit/pull/2127)) ([@josh-bagwell](https://github.com/josh-bagwell))
+
+### Components
+
+- chore: Hard deprecate Drawer component ([#1970](https://github.com/Workday/canvas-kit/pull/1970)) ([@RayRedGoose](https://github.com/RayRedGoose), [@mannycarrera4](https://github.com/mannycarrera4))
+- fix: Update button type for all canvas kit buttons ([#1978](https://github.com/Workday/canvas-kit/pull/1978)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+  We've changed the default button type for all of our buttons from `submit` to `button`
+- chore: Hard deprecate Layout and Column components ([#2018](https://github.com/Workday/canvas-kit/pull/2018)) ([@RayRedGoose](https://github.com/RayRedGoose))
+- feat: Remove Stack, HStack and VStack ([#2012](https://github.com/Workday/canvas-kit/pull/2012)) ([@josh-bagwell](https://github.com/josh-bagwell))
+- feat: Promote labs Toast to Main ([#2044](https://github.com/Workday/canvas-kit/pull/2044)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@RayRedGoose](https://github.com/RayRedGoose))
+  We've promoted Toast from labs to the main package. This is a replacement from what was in the main package to our compound component version in labs.
+- feat: Update useTheme hook ([#2120](https://github.com/Workday/canvas-kit/pull/2120)) ([@RayRedGoose](https://github.com/RayRedGoose), [@mannycarrera4](https://github.com/mannycarrera4))
+- feat: Tables Component ([#2118](https://github.com/Workday/canvas-kit/pull/2118)) ([@josh-bagwell](https://github.com/josh-bagwell))
+  We've built a new `Table` compound component that will have more flexibility and has access to lower level components like [Grid](https://canvas.workdaydesign.com/components/layout/grid) and [Flex](https://canvas.workdaydesign.com/components/layout/flex).
+- feat: Add 'as' method with a stable reference to all component utilities ([#2166](https://github.com/Workday/canvas-kit/pull/2166)) ([@NicholasBoll](https://github.com/NicholasBoll))
+- fix: Only pass correct model to model components when using 'as' ([#2168](https://github.com/Workday/canvas-kit/pull/2168)) ([@NicholasBoll](https://github.com/NicholasBoll), [@josh-bagwell](https://github.com/josh-bagwell))
+- chore: Remove unused composeModelHooks function ([#2180](https://github.com/Workday/canvas-kit/pull/2180)) ([@NicholasBoll](https://github.com/NicholasBoll))
+- feat: Add more layout examples ([#2178](https://github.com/Workday/canvas-kit/pull/2178)) ([@RayRedGoose](https://github.com/RayRedGoose))
+- feat(text-input): Add InputGroup component ([#2182](https://github.com/Workday/canvas-kit/pull/2182)) ([@NicholasBoll](https://github.com/NicholasBoll))
+  `InputGroup` will replace `InputIconContainer`. `InputIconContainer` does not handle bidirectionality or icons at the start of an input. `InputIconContainer` will be deprecated and later removed in future versions.
+  
+  Before:
+  ```tsx
+  <InputIconContainer icon={<SystemIcon icon={exclamationCircleIcon} />} />
+  ```
+  
+  After
+  ```tsx
+  <InputGroup>
+    <InputGroup.Input />
+    <InputGroup.InnerEnd>
+      <SystemIcon icon={exclamationCircleIcon} />
+    </InputGroup.InnerEnd>
+  </InputGroup>
+  ```
+- fix: Return the correct props from composeHooks ([#2190](https://github.com/Workday/canvas-kit/pull/2190)) ([@NicholasBoll](https://github.com/NicholasBoll), [@alanbsmith](https://github.com/alanbsmith))
+- chore: Simplify composeHooks function ([#2191](https://github.com/Workday/canvas-kit/pull/2191)) ([@NicholasBoll](https://github.com/NicholasBoll))
+- chore: Rename Combobox.spec to ComboboxLabs.spec ([#2193](https://github.com/Workday/canvas-kit/pull/2193)) ([@NicholasBoll](https://github.com/NicholasBoll))
+- chore: Extract keyUtils to be used in other key-based collection hooks ([#2192](https://github.com/Workday/canvas-kit/pull/2192)) ([@NicholasBoll](https://github.com/NicholasBoll))
+- chore: Use index instead of identifier for cursor navigation ([#2194](https://github.com/Workday/canvas-kit/pull/2194)) ([@NicholasBoll](https://github.com/NicholasBoll))
+- feat(collection): Add support for string items ([#2195](https://github.com/Workday/canvas-kit/pull/2195)) ([@NicholasBoll](https://github.com/NicholasBoll), [@alanbsmith](https://github.com/alanbsmith))
+
+### Dependencies
+
+- chore: Remove lodash dependency from canvas-kit ([#2034](https://github.com/Workday/canvas-kit/pull/2034)) ([@jaslloyd](https://github.com/jaslloyd), [@NicholasBoll](https://github.com/NicholasBoll))
+
+### Documentation
+
+- docs: Revert removal of Layout section ([#2094](https://github.com/Workday/canvas-kit/pull/2094)) ([@RayRedGoose](https://github.com/RayRedGoose))
+- fix: Clean up toast documentation ([#2108](https://github.com/Workday/canvas-kit/pull/2108)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@jamesfan](https://github.com/jamesfan))
+- docs: Clean up v9 Upgrade Guide ([#2132](https://github.com/Workday/canvas-kit/pull/2132)) ([@jamesfan](https://github.com/jamesfan), manuel.carrera)
+- docs: Fix Preview Table docs ([#2159](https://github.com/Workday/canvas-kit/pull/2159)) ([@jamesfan](https://github.com/jamesfan))
+- fix: Removed Table Container Example ([#2164](https://github.com/Workday/canvas-kit/pull/2164)) ([@josh-bagwell](https://github.com/josh-bagwell))
+- fix: Replaced Soft and Hard Deprecation Naming ([#2165](https://github.com/Workday/canvas-kit/pull/2165)) ([@josh-bagwell](https://github.com/josh-bagwell), manuel.carrera)
+  Changed definition of `soft-deprecation` and `hard-deprecation` to `deprecation/deprecate` and `removal/remove`.
+- feat: Dialog Update to MDX ([#2184](https://github.com/Workday/canvas-kit/pull/2184)) ([@josh-bagwell](https://github.com/josh-bagwell), [@jamesfan](https://github.com/jamesfan))
+
+### Infrastructure
+
+- chore: Add initial V9 codemod ([#2021](https://github.com/Workday/canvas-kit/pull/2021)) ([@alanbsmith](https://github.com/alanbsmith), [@willklein](https://github.com/willklein))
+- test: Modify visual testing ([#2028](https://github.com/Workday/canvas-kit/pull/2028)) ([@RayRedGoose](https://github.com/RayRedGoose))
+- chore: Update the TSconfig target to es2019 ([#2135](https://github.com/Workday/canvas-kit/pull/2135)) ([@NicholasBoll](https://github.com/NicholasBoll))
+  We're updating our build target from `es5` to `es2019`. This changes the syntax generated by allowing syntax supported up to `es2019`. This may impact older environments that do not support `es2019` syntax like older versions of nodejs. This could also impact older AST build parsers that don't understand newer JavasScript syntax. This could include old versions of Webpack or outdated babel parsers for Jest. If you see a message like "Syntax Error", you may have to upgrade your bundler or babel parser.
+- chore: Add option to skip docgen ([#2176](https://github.com/Workday/canvas-kit/pull/2176)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+### Tokens
+
+- fix: Modify depth values to improve visual design ([#2091](https://github.com/Workday/canvas-kit/pull/2091)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+  We've updated our `depth` tokens to be more subtle rather than harsh. Any component using these depth tokens will be updated, including `Card, Menu, Toast, Box, Dialog, Popup`.
+
+### Utilities
+
+- chore: Move useThemedRing to main package and deprecate useThemeRTL ([#2119](https://github.com/Workday/canvas-kit/pull/2119)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+  - We've promoted `useThemedRing` to our Main package.
+  - We've deprecated `useThemeRTL` from our Labs package. You may still use this utility but we encourage consumers to use [CSS logical properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Logical_Properties).
+
+
+## [v8.6.5](https://github.com/Workday/canvas-kit/releases/tag/v8.6.5) (2023-05-10)
+
+### Infrastructure
+
+- chore: Add actions for major release ([#2211](https://github.com/Workday/canvas-kit/pull/2211)) ([@RayRedGoose](https://github.com/RayRedGoose), [@mannycarrera4](https://github.com/mannycarrera4))
+
+
+## [v8.6.4](https://github.com/Workday/canvas-kit/releases/tag/v8.6.4) (2023-05-01)
+
+### BREAKING CHANGES
+
+- [#2173](https://github.com/Workday/canvas-kit/pull/2173) Optional breaking changes message. If your PR includes breaking changes. It is extremely rare to put breaking changes outside a `prerelease/major` branch. Anything in this section will show up in release notes. Remove this section if no breaking changes are present.
+
+### Documentation
+
+- fix: Basic Grid Example with landmark regions for screen readers ([#2173](https://github.com/Workday/canvas-kit/pull/2173)) ([@bstanton678](https://github.com/bstanton678))
+  Optional release note message. Changelog and release summaries will contain a pull request title. This section will add additional notes under that title. This section is not a summary, but something extra to point out in release notes. An example might be calling out breaking changes in a labs component or minor visual changes that need visual regression updates. Remove this section if no additional release notes are required.
+
+
+## [v8.6.3](https://github.com/Workday/canvas-kit/releases/tag/v8.6.3) (2023-05-01)
+
+### Dependencies
+
+- chore: Upgrade fsevents to a non-vulnerable version ([#2181](https://github.com/Workday/canvas-kit/pull/2181)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v8.6.2](https://github.com/Workday/canvas-kit/releases/tag/v8.6.2) (2023-04-27)
+
+### Components
+
+- fix: BaseButton and ButtonLabelIcon extend SystemIconProps ([#2157](https://github.com/Workday/canvas-kit/pull/2157)) ([@thunguyen19](https://github.com/thunguyen19))
+
+
+## [v7.4.12](https://github.com/Workday/canvas-kit/releases/tag/v7.4.12) (2023-04-27)
+
+### Components
+
+- fix: BaseButton and ButtonLabelIcon extend SystemIconProps ([#2157](https://github.com/Workday/canvas-kit/pull/2157)) ([@thunguyen19](https://github.com/thunguyen19))
+
+
+## [v7.4.11](https://github.com/Workday/canvas-kit/releases/tag/v7.4.11) (2023-04-26)
+## [v8.6.1](https://github.com/Workday/canvas-kit/releases/tag/v8.6.1) (2023-04-26)
+
+### Components
+
+- fix(menu): Menu does not close with aria-disabled=true ([#2128](https://github.com/Workday/canvas-kit/pull/2128)) ([@NicholasBoll](https://github.com/NicholasBoll), manuel.carrera)
+- fix(form-field): Forward required prop to input ([#2154](https://github.com/Workday/canvas-kit/pull/2154)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+### Dependencies
+
+- fix: Add react-dom peer-dep to main package ([#2162](https://github.com/Workday/canvas-kit/pull/2162)) ([@alanbsmith](https://github.com/alanbsmith))
+
+### Infrastructure
+
+- fix: Update release action to support node 16 ([#2170](https://github.com/Workday/canvas-kit/pull/2170)) ([@RayRedGoose](https://github.com/RayRedGoose))
+
+
+## [v7.4.11](https://github.com/Workday/canvas-kit/releases/tag/v7.4.11) (2023-04-26)
+
+### Components
+
+- fix(menu): Menu does not close with aria-disabled=true ([#2128](https://github.com/Workday/canvas-kit/pull/2128)) ([@NicholasBoll](https://github.com/NicholasBoll), manuel.carrera)
+- fix(form-field): Forward required prop to input ([#2154](https://github.com/Workday/canvas-kit/pull/2154)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+### Dependencies
+
+- fix: Add react-dom peer-dep to main package ([#2162](https://github.com/Workday/canvas-kit/pull/2162)) ([@alanbsmith](https://github.com/alanbsmith))
+
+### Infrastructure
+
+- fix: Update release action to support node 16 ([#2170](https://github.com/Workday/canvas-kit/pull/2170)) ([@RayRedGoose](https://github.com/RayRedGoose))
+## [v8.6.0](https://github.com/Workday/canvas-kit/releases/tag/v8.6.0) (2023-04-20)
+
+### Components
+
+- feat: Added inset to PositionStyleProps ([#2129](https://github.com/Workday/canvas-kit/pull/2129)) ([@thunguyen19](https://github.com/thunguyen19))
+- feat: Allow Icon components to use color tokens ([#2097](https://github.com/Workday/canvas-kit/pull/2097)) ([@thunguyen19](https://github.com/thunguyen19))
+  Optional release note message. Changelog and release summaries will contain a pull request title. This section will add additional notes under that title. This section is not a summary, but something extra to point out in release notes. An example might be calling out breaking changes in a labs component or minor visual changes that need visual regression updates. Remove this section if no additional release notes are required.
+
+### Infrastructure
+
+- ci: Fix minor release action ([@RayRedGoose](https://github.com/RayRedGoose))
+
+
+## [v8.5.13](https://github.com/Workday/canvas-kit/releases/tag/v8.5.13) (2023-04-17)
+
+### Components
+
+- fix: PopupCard maxHeight calc function ([#2130](https://github.com/Workday/canvas-kit/pull/2130)) ([@thunguyen19](https://github.com/thunguyen19), [@alanbsmith](https://github.com/alanbsmith))
+
+
+## [v8.5.12](https://github.com/Workday/canvas-kit/releases/tag/v8.5.12) (2023-04-14)
+
+### Components
+
+- fix(menu): Fix MenuItem icon spacing ([#2145](https://github.com/Workday/canvas-kit/pull/2145)) ([@alanbsmith](https://github.com/alanbsmith), [@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+  Updated spacing between icon and text in our menus from `8px` to `16px` to match our design specs.
+
+
+## [v8.5.11](https://github.com/Workday/canvas-kit/releases/tag/v8.5.11) (2023-04-12)
+
+### Infrastructure
+
+- ci: Replace install steps by composite actions ([#2146](https://github.com/Workday/canvas-kit/pull/2146)) ([@RayRedGoose](https://github.com/RayRedGoose))
+
+
+## [v8.5.10](https://github.com/Workday/canvas-kit/releases/tag/v8.5.10) (2023-04-11)
+
+### Codemods
+
+- fix(codemod): Pass codemod options to jscodeshift script ([#2137](https://github.com/Workday/canvas-kit/pull/2137)) ([@alanbsmith](https://github.com/alanbsmith))
+
+### Infrastructure
+
+- chore: Upgrade to Node 16 ([#2139](https://github.com/Workday/canvas-kit/pull/2139)) ([@alanbsmith](https://github.com/alanbsmith))
+- fix: Update release actions to use node 16 ([#2142](https://github.com/Workday/canvas-kit/pull/2142)) ([@RayRedGoose](https://github.com/RayRedGoose))
+
+
+## [v8.5.9](https://github.com/Workday/canvas-kit/releases/tag/v8.5.9) (2023-03-30)
+
+### Components
+
+- fix: Extract the correct ref with a styled component ([#2122](https://github.com/Workday/canvas-kit/pull/2122)) ([@NicholasBoll](https://github.com/NicholasBoll))
+  The following is now allowed:
+  
+  ```tsx
+  const StyledComponent = styled('button')({})
+  
+  const MyComponnent = createComponent(StyledComponent)({
+    Component(elemProps, ref, Element) {
+      return <Box as={Element} ref={ref} {...elemProps} />
+    }
+  })
+  ```
+
+
+## [v8.5.8](https://github.com/Workday/canvas-kit/releases/tag/v8.5.8) (2023-03-27)
+
+### Documentation
+
+- docs: Added doc for Delete Button story ([#2113](https://github.com/Workday/canvas-kit/pull/2113)) ([@thunguyen19](https://github.com/thunguyen19))
+
+
+## [v8.5.7](https://github.com/Workday/canvas-kit/releases/tag/v8.5.7) (2023-03-23)
+
+### Infrastructure
+
+- chore: Update release workflows ([#2102](https://github.com/Workday/canvas-kit/pull/2102)) ([@RayRedGoose](https://github.com/RayRedGoose))
+
+
+## [v8.5.6](https://github.com/Workday/canvas-kit/releases/tag/v8.5.6) (2023-03-21)
+
+### Components
+
+- fix(collection): Correctly use custom getId ([#2096](https://github.com/Workday/canvas-kit/pull/2096)) ([@NicholasBoll](https://github.com/NicholasBoll))
+  An example was incorrectly using the wrong id. Note that `state.items` in a dynamic collection wraps your provided items so there is a `.id` property on `state.items`. `model.getId` is no longer needed and will be removed in the future to avoid confusion.
+
+
+## [v7.4.10](https://github.com/Workday/canvas-kit/releases/tag/v7.4.10) (2023-03-21)
+
+### Components
+
+- fix(collection): Correctly use custom getId ([#2096](https://github.com/Workday/canvas-kit/pull/2096)) ([@NicholasBoll](https://github.com/NicholasBoll))
+  An example was incorrectly using the wrong id. Note that `state.items` in a dynamic collection wraps your provided items so there is a `.id` property on `state.items`. `model.getId` is no longer needed and will be removed in the future to avoid confusion.
+## [v8.5.5](https://github.com/Workday/canvas-kit/releases/tag/v8.5.5) (2023-03-16)
+
+### Components
+
+- docs: Move Box, Flex, and Grid to a new Layout Folder in Storybook ([#2078](https://github.com/Workday/canvas-kit/pull/2078)) ([@thunguyen19](https://github.com/thunguyen19))
+
+
+## [v8.5.4](https://github.com/Workday/canvas-kit/releases/tag/v8.5.4) (2023-03-15)
+
+### Documentation
+
+- docs: Filter out model props in container components ([#2085](https://github.com/Workday/canvas-kit/pull/2085)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v8.5.3](https://github.com/Workday/canvas-kit/releases/tag/v8.5.3) (2023-03-13)
+
+### Documentation
+
+- docs: Add breadcrumbs to symbol doc dialog for nested symbols ([#2072](https://github.com/Workday/canvas-kit/pull/2072)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v8.5.2](https://github.com/Workday/canvas-kit/releases/tag/v8.5.2) (2023-03-09)
+
+### Infrastructure
+
+- ci: Add logging to the merge step in forward-merge ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v8.5.1](https://github.com/Workday/canvas-kit/releases/tag/v8.5.1) (2023-03-09)
+
+### Components
+
+- fix: Remove style attribute on Expandable Title ([#2074](https://github.com/Workday/canvas-kit/pull/2074)) ([@vibdev](https://github.com/vibdev))
+  Not explicitly a breaking change for `Expandable.Title`, but does alter the specificity for fontFamily, fontSize, lineHeight, fontWeight, color, and textAlign.
+
+### Infrastructure
+
+- chore: Update browserlist config for eslint compat/compat ([#2075](https://github.com/Workday/canvas-kit/pull/2075)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v8.5.0](https://github.com/Workday/canvas-kit/releases/tag/v8.5.0) (2023-03-08)
+
+### Components
+
+- feat: Allow SystemIcon to use token colors ([#1988](https://github.com/Workday/canvas-kit/pull/1988)) ([@thunguyen19](https://github.com/thunguyen19))
+  Allow SystemIcon to use token colors for any color related props.
+- fix: Update modal padding to match mobile specs ([#2008](https://github.com/Workday/canvas-kit/pull/2008)) ([@seans-cummin](https://github.com/seans-cummin), [@mannycarrera4](https://github.com/mannycarrera4))
+  - Updating padding from 16px to 24px for smaller screen sizes, bringing the total padding between edge and content to 24px.
+  - Reduced padding between title and body from 16px to 8px for smaller screen sizes.
+
+### Documentation
+
+- docs: Add custom docgen parsing ([#1962](https://github.com/Workday/canvas-kit/pull/1962)) ([@NicholasBoll](https://github.com/NicholasBoll))
+- docs: Ignore dist directories when documenting symbols ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v8.4.13](https://github.com/Workday/canvas-kit/releases/tag/v8.4.13) (2023-03-07)
+
+### Components
+
+- fix: Allow overriding aria-describedby in useTooltip ([#2064](https://github.com/Workday/canvas-kit/pull/2064)) ([@EugeneCib](https://github.com/EugeneCib), [@NicholasBoll](https://github.com/NicholasBoll))
+
+### Infrastructure
+
+- ci: Block fontawesome in Cypress tests to prevent failures ([@NicholasBoll](https://github.com/NicholasBoll))
+- ci: Add logging to the merge step in forward-merge ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v8.4.12](https://github.com/Workday/canvas-kit/releases/tag/v8.4.12) (2023-03-01)
+
+
+
+
+## [v8.4.11](https://github.com/Workday/canvas-kit/releases/tag/v8.4.11) (2023-02-28)
+
+### Infrastructure
+
+- ci: Changing assign reviewer action to a lottery system ([#2039](https://github.com/Workday/canvas-kit/pull/2039)) ([@jaclynjessup](https://github.com/jaclynjessup))
+- ci: Updating project board action ([#2026](https://github.com/Workday/canvas-kit/pull/2026)) ([@jaclynjessup](https://github.com/jaclynjessup))
+- ci: Fix to invalid yml error ([#2040](https://github.com/Workday/canvas-kit/pull/2040)) ([@jaclynjessup](https://github.com/jaclynjessup))
+- ci: Updates to lottery and project actions ([#2054](https://github.com/Workday/canvas-kit/pull/2054)) ([@jaclynjessup](https://github.com/jaclynjessup))
+
+### Testing
+
+- test: Update tooltip testing story to render properly ([#2047](https://github.com/Workday/canvas-kit/pull/2047)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v7.4.9](https://github.com/Workday/canvas-kit/releases/tag/v7.4.9) (2023-02-24)
+
+### Testing
+
+- test: Update tooltip testing story to render properly ([#2047](https://github.com/Workday/canvas-kit/pull/2047)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+## [v8.4.10](https://github.com/Workday/canvas-kit/releases/tag/v8.4.10) (2023-02-14)
+
+### Codemods
+
+- fix: Fixed an issue with codemod not recognizing VStack or HStack ([#2036](https://github.com/Workday/canvas-kit/pull/2036)) ([@josh-bagwell](https://github.com/josh-bagwell))
+
+### Infrastructure
+
+- chore: Adding step to add label for PR review ([#2027](https://github.com/Workday/canvas-kit/pull/2027)) ([@jaclynjessup](https://github.com/jaclynjessup))
+- ci: Adding action to auto assign PR reviewer on label ([#2031](https://github.com/Workday/canvas-kit/pull/2031)) ([@jaclynjessup](https://github.com/jaclynjessup))
+
+
 ## [v8.4.9](https://github.com/Workday/canvas-kit/releases/tag/v8.4.9) (2023-02-07)
 
 ### Documentation

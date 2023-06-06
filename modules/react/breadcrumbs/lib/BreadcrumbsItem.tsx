@@ -35,11 +35,10 @@ export interface BreadcrumbsItemProps extends FlexProps {
 
 export const useBreadcrumbsItem = composeHooks(
   useOverflowListItemMeasure,
-  useListItemRegister,
   createElemPropsHook(useBreadcrumbsModel)(
     (
       {state},
-      _?: React.Ref<HTMLElement>,
+      _,
       elemProps: {
         'data-id'?: string;
         item?: {id: string};
@@ -52,7 +51,8 @@ export const useBreadcrumbsItem = composeHooks(
         disabled: undefined,
       };
     }
-  )
+  ),
+  useListItemRegister
 );
 
 export const BreadcrumbsItem = createSubcomponent('li')({

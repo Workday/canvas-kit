@@ -8,6 +8,7 @@ import {
   ExtractProps,
   hideMouseFocus,
   StyledType,
+  slugify,
 } from '@workday/canvas-kit-react/common';
 import {Item} from '@workday/canvas-kit-react/collection';
 import {Box} from '@workday/canvas-kit-react/layout';
@@ -38,11 +39,7 @@ export interface TabPanelProps extends ExtractProps<typeof Box, never> {
 const StyledTabsPanel = styled(Box)<StyledType>(hideMouseFocus);
 
 export const useTabsPanel = createElemPropsHook(useTabsModel)(
-  (
-    {state, events},
-    _?: React.Ref<HTMLElement>,
-    elemProps: {'data-id'?: string; item?: Item<any>} = {}
-  ) => {
+  ({state, events}, _, elemProps: {'data-id'?: string; item?: Item<any>} = {}) => {
     const [localId, setLocalId] = React.useState(elemProps['data-id'] || elemProps.item?.id || '');
 
     useMountLayout(() => {
@@ -57,11 +54,11 @@ export const useTabsPanel = createElemPropsHook(useTabsModel)(
     });
 
     return {
-      role: 'tabpanel',
-      'aria-labelledby': `${state.id}-${localId}`,
+      role: 'tabpanel' as const,
+      'aria-labelledby': slugify(`${state.id}-${localId}`),
       hidden: !!localId && localId !== state.selectedIds[0],
-      id: `tabpanel-${state.id}-${localId}`,
-      tabIndex: 0,
+      id: slugify(`tabpanel-${state.id}-${localId}`),
+      tabIndex: 0 as const,
     };
   }
 );

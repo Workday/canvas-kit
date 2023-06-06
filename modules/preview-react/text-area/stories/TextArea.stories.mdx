@@ -1,5 +1,4 @@
-import {Meta} from '@storybook/addon-docs';
-import {Specifications} from '@workday/canvas-kit-docs';
+import {SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
 
 import {TextArea} from '@workday/canvas-kit-preview-react/text-area';
 
@@ -80,7 +79,7 @@ extend full width, e.g. setting width prop to 100%, or you can set the `alignIte
 ### Label Position
 
 Use the `orientation` property to set `TextArea.Label`'s position. You can override the default
-spacing using the `spacing` prop. Below are examples of both positions:
+spacing using the `gap` prop. Below are examples of both positions:
 
 #### Horizontal
 
@@ -93,7 +92,7 @@ spacing using the `spacing` prop. Below are examples of both positions:
 ### Visually Hiding The Label
 
 If your label is just for screen reader users you can use the `accessibleHide` utility class from
-`@workday/canvas-kit-react/common`. You will likely want to set the `spacing` prop on `TextArea` to
+`@workday/canvas-kit-react/common`. You will likely want to set the `gap` prop on `TextArea` to
 `zero`.
 
 <ExampleCodeBlock code={HiddenLabel} />
@@ -113,11 +112,9 @@ Use the `useThemedRing` hook to change the visual state of the `<textarea>` elem
 
 <ExampleCodeBlock code={Alert} />
 
-## Props
+## Component API
 
-Undocumented props are spread to the underlying `<textarea>` element.
-
-<ArgsTable of={TextArea} />
+<SymbolDoc name="TextArea" fileName="/preview-react/" />
 
 ## Specifications
 

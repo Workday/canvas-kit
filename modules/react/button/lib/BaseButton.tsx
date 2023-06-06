@@ -12,7 +12,8 @@ import {
   EmotionCanvasTheme,
   StyledType,
 } from '@workday/canvas-kit-react/common';
-import {BoxProps, boxStyleFn} from '@workday/canvas-kit-react/layout';
+import {SystemIconProps} from '@workday/canvas-kit-react/icon';
+import {boxStyleFn} from '@workday/canvas-kit-react/layout';
 import {borderRadius, space, spaceNumbers, type} from '@workday/canvas-kit-react/tokens';
 
 import {ButtonColors, ButtonSizes, IconPositions, TertiaryButtonSizes} from './types';
@@ -20,13 +21,14 @@ import {ButtonColors, ButtonSizes, IconPositions, TertiaryButtonSizes} from './t
 import {CSSObject} from '@emotion/styled';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 
-export interface ButtonContainerProps extends BoxProps, GrowthBehavior {
+export interface ButtonContainerProps extends Partial<SystemIconProps>, GrowthBehavior {
+  /**
+   * Override default colors of a button. The default will depend on the button type
+   */
   colors?: ButtonColors;
   /**
    * There are four button sizes: `extraSmall`, `small`, `medium`, and `large`.
    * If no size is provided, it will default to `medium`.
-   *
-   * @default 'medium'
    */
   size?: ButtonSizes;
   /**
@@ -294,7 +296,7 @@ export const BaseButton = createComponent('button')({
   displayName: 'Button',
   Component: ({children, ...elemProps}: ButtonContainerProps, ref, Element) => {
     return (
-      <ButtonContainer as={Element} ref={ref} {...elemProps}>
+      <ButtonContainer as={Element} ref={ref} type="button" {...elemProps}>
         {children}
       </ButtonContainer>
     );

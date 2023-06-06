@@ -14,7 +14,7 @@ import {
   createSubcomponent,
   useModalityType,
 } from '@workday/canvas-kit-react/common';
-import {Box, StackProps} from '@workday/canvas-kit-react/layout';
+import {Box, FlexProps} from '@workday/canvas-kit-react/layout';
 import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {
@@ -28,7 +28,7 @@ import {
 import {useTabsModel} from './useTabsModel';
 export interface TabsItemProps
   extends ExtractProps<typeof Box, never>,
-    Partial<Pick<StackProps, 'spacing'>> {
+    Partial<Pick<FlexProps, 'gap'>> {
   /**
    * Optionally pass index to tab item. This should be done if `Tabs.Item` components were created
    * via a `Array::map` function. This index will ensure keyboard navigation works even if items are
@@ -81,12 +81,9 @@ export interface TabsItemProps
   tabIndex?: number;
 }
 
-export const StyledTabItem = styled(Box.as('button'))<StyledType & Pick<TabsItemProps, 'spacing'>>(
-  ({theme, spacing}) => ({
+export const StyledTabItem = styled(Box.as('button'))<StyledType & Pick<TabsItemProps, 'gap'>>(
+  ({theme}) => ({
     ...type.levels.subtext.large,
-    '& > *:not(style) ~ *:not(style)': {
-      marginLeft: spacing || space.xxs,
-    },
     fontWeight: type.properties.fontWeights.medium,
     border: 'none',
     backgroundColor: 'transparent',
@@ -160,33 +157,31 @@ export const StyledTabItem = styled(Box.as('button'))<StyledType & Pick<TabsItem
       },
     },
   }),
-  ({children}) => {
+  ({children, gap = space.xxs}) => {
     if (typeof children === 'string') {
       return ellipsisStyles;
     } else {
       return {
         display: 'flex',
+        gap,
       };
     }
   }
 );
 
 export const useTabsItem = composeHooks(
-  createElemPropsHook(useTabsModel)(
-    ({state}, _?: React.Ref<HTMLButtonElement>, elemProps: {'data-id'?: string} = {}) => {
-      const name = elemProps['data-id'] || '';
+  createElemPropsHook(useTabsModel)(({state}, _, elemProps: {'data-id'?: string} = {}) => {
+    const name = elemProps['data-id'] || '';
 
-      const selected = !!elemProps['data-id'] && isSelected(name, state);
+    const selected = !!elemProps['data-id'] && isSelected(name, state);
 
-      return {
-        type: 'button',
-        role: 'tab',
-        id: `${state.id}-${name}`,
-        'aria-selected': selected,
-        'aria-controls': `tabpanel-${state.id}-${name}`,
-      };
-    }
-  ),
+    return {
+      type: 'button' as const,
+      role: 'tab' as const,
+      'aria-selected': selected,
+      'aria-controls': `tabpanel-${state.id}-${name}`,
+    };
+  }),
   useListItemSelect,
   useOverflowListItemMeasure,
   useListItemRovingFocus,

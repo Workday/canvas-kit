@@ -2,147 +2,94 @@ import React from 'react';
 import {useIsRTL, createElemPropsHook} from '@workday/canvas-kit-react/common';
 
 import {useCursorListModel} from './useCursorListModel';
+import {keyboardEventToCursorEvents} from './keyUtils';
 
-export const orientationKeyMap = {
-  horizontal: {
-    ArrowLeft: 'goToPrevious',
-    Left: 'goToPrevious',
-    ArrowRight: 'goToNext',
-    Right: 'goToNext',
-    Home: 'goToFirst',
-    End: 'goToLast',
-    PageDown: 'goToNextPage',
-    PageUp: 'goToPreviousPage',
-  },
-  vertical: {
-    ArrowUp: 'goToPrevious',
-    Up: 'goToPrevious',
-    ArrowDown: 'goToNext',
-    Down: 'goToNext',
-    Home: 'goToFirst',
-    End: 'goToLast',
-    PageDown: 'goToNextPage',
-    PageUp: 'goToPreviousPage',
-  },
-} as const;
-
-const rightToLeftMap = {
-  ArrowLeft: 'ArrowRight',
-  Left: 'Right',
-  ArrowRight: 'ArrowLeft',
-  Right: 'Left',
-  Home: 'Home',
-  End: 'End',
-  PageDown: 'PageDown',
-  PageUp: 'PageUp',
-} as const;
-
-const gridKeyMap = {
-  ...orientationKeyMap.horizontal,
-  Home: 'goToFirstOfRow',
-  End: 'goToLastOfRow',
-  ArrowUp: 'goToPreviousRow',
-  Up: 'goToPreviousRow',
-  ArrowDown: 'goToNextRow',
-  Down: 'goToNextRow',
-} as const;
-
-const ctrlKeyMap = {
-  Home: 'goToFirst',
-  End: 'goToLast',
-} as const;
-
-const keys = <T extends object>(obj: T): (keyof T)[] => Object.keys(obj) as (keyof T)[];
-const hasOwnKey = <T extends object>(obj: T, key: any): key is keyof T => obj.hasOwnProperty(key);
+// retry a function each frame so we don't rely on the timing mechanism of React's render cycle.
+const retryEachFrame = (cb: () => boolean, iterations: number) => {
+  if (cb() === false && iterations > 1) {
+    requestAnimationFrame(() => retryEachFrame(cb, iterations - 1));
+  }
+};
 
 /**
- * Handles the roving focus behavior of a Cursor model. It should be added to the element
- * representing a list item.
+ * This elemProps hook is used for cursor navigation by using [Roving
+ * Tabindex](https://w3c.github.io/aria-practices/#kbd_roving_tabindex). Only a single item in the
+ * collection has a tab stop. Pressing an arrow key moves the tab stop to a different item in the
+ * corresponding direction. See the [Roving Tabindex](#roving-tabindex) example. This elemProps hook
+ * should be applied to an `*.Item` component.
  *
- * @see https://www.w3.org/TR/wai-aria-practices/#kbd_roving_tabindex
+ * ```ts
+ * const useMyItem = composeHooks(
+ *   useListItemRovingFocus, // adds the roving tabindex support
+ *   useListItemRegister
+ * );
+```
  */
 export const useListItemRovingFocus = createElemPropsHook(useCursorListModel)(
-  ({state, events, getId, navigation}, ref, elemProps: {'data-id'?: string} = {}) => {
-    // Tracks when this element has focus. If this item is removed while still focused, we have to
-    // inform the model to move the cursor to the next item.
-    const focusRef = React.useRef(false);
-    const getIdRef = React.useRef(getId);
-
+  (model, _ref, elemProps: {'data-id'?: string} = {}) => {
     // Create a ref out of state. We don't want to watch state on unmount, so we use a ref to get the
     // current value at the time of unmounting. Otherwise, `state.items` would be a cached value of an
     // empty array
-    const stateRef = React.useRef(state);
-    stateRef.current = state;
+    const stateRef = React.useRef(model.state);
+    stateRef.current = model.state;
 
-    const keyDownRef = React.useRef(false);
+    const keyElementRef = React.useRef<Element | null>(null);
     const isRTL = useIsRTL();
 
     React.useEffect(() => {
-      if (keyDownRef.current) {
-        const item = navigation.getItem(state.cursorId, {state});
-        if (state.isVirtualized) {
-          state.UNSTABLE_virtual.scrollToIndex(item.index);
+      if (keyElementRef.current) {
+        const item = model.navigation.getItem(model.state.cursorId, model);
+        if (model.state.isVirtualized) {
+          model.state.UNSTABLE_virtual.scrollToIndex(item.index);
         }
-        requestAnimationFrame(() => {
-          document
-            .querySelector<HTMLElement>(
-              `[data-focus-id="${`${state.id}-${getIdRef.current(item)}`}"]`
-            )
-            ?.focus();
-        });
 
-        keyDownRef.current = false;
+        const selector = (id?: string) => {
+          return document.querySelector<HTMLElement>(`[data-focus-id="${`${id}-${item.id}`}"]`);
+        };
+
+        // In React concurrent mode, there could be several render attempts before the element we're
+        // looking for could be available in the DOM
+        retryEachFrame(() => {
+          // Attempt to extract the ID from the DOM element. This fixes issues where the server and client
+          // do not agree on a generated ID
+          const clientId = keyElementRef.current?.getAttribute('data-focus-id')?.split('-')[0];
+          const element = selector(clientId) || selector(model.state.id);
+
+          element?.focus();
+          if (element) {
+            keyElementRef.current = null;
+          }
+          return !!element;
+        }, 5); // 5 should be enough, right?!
       }
       // we only want to run this effect if the cursor changes and not any other time
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [state.cursorId]);
+    }, [model.state.cursorId]);
+
+    // Roving focus must always have a focus stop to function correctly
+    React.useEffect(() => {
+      if (!model.state.cursorId && model.state.items.length) {
+        model.events.goTo({id: model.state.items[0].id});
+      }
+    }, [model.state.cursorId, model.state.items, model.events]);
 
     return {
       onKeyDown(event: React.KeyboardEvent) {
-        // Test ctrl key first
-        if (event.ctrlKey) {
-          for (const key in ctrlKeyMap) {
-            if (hasOwnKey(ctrlKeyMap, key)) {
-              if (event.key === key) {
-                keyDownRef.current = true;
-                events[ctrlKeyMap[key]]?.();
-                event.preventDefault();
-                return;
-              }
-            }
-          }
+        const handled = keyboardEventToCursorEvents(event, model, isRTL);
+        if (handled) {
+          event.preventDefault();
+          keyElementRef.current = event.currentTarget;
         }
-        // Try regular keys
-        keys(state.columnCount > 0 ? gridKeyMap : orientationKeyMap[state.orientation]).forEach(
-          key => {
-            if (isRTL ? event.key === rightToLeftMap[key] : event.key === key) {
-              const eventName =
-                state.columnCount > 0 ? gridKeyMap[key] : orientationKeyMap[state.orientation][key];
-              keyDownRef.current = true;
-              if (events[eventName]) {
-                events[eventName]?.();
-                event.preventDefault();
-              }
-            }
-          }
-        );
-      },
-      onFocus() {
-        focusRef.current = true;
-      },
-      onBlur() {
-        focusRef.current = false;
       },
       onClick() {
-        events.goTo({id: elemProps['data-id']!});
+        model.events.goTo({id: elemProps['data-id']!});
       },
-      'data-focus-id': `${state.id}-${elemProps['data-id']}`,
-      tabIndex: !state.cursorId
+      'data-focus-id': `${model.state.id}-${elemProps['data-id']}`,
+      tabIndex: !model.state.cursorId
         ? 0 // cursor isn't known yet, be safe and mark this as focusable
-        : !!elemProps['data-id'] && state.cursorId === elemProps['data-id']
+        : !!elemProps['data-id'] && model.state.cursorId === elemProps['data-id']
         ? 0 // A name is known and cursor is here
         : -1, // A name is known an cursor is somewhere else
-      ref,
     };
   }
 );

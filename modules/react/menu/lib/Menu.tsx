@@ -18,9 +18,15 @@ export interface MenuProps {
 }
 
 /**
- * An accessible dropdown menu component. A dropdown menu usually contains a target element that
- * opens to a menu.
- * @example
+ * `Menu` is a combination of a popup and a list. It usually has some type of target element that
+ * expands/collapses the menu and a `menu` role and and several `menuitem` roles. Focus is managed
+ * using [roving tabindex](https://w3c.github.io/aria-practices/#kbd_roving_tabindex) for maximum
+ * compatibility. A `Menu` can have two modes: `single` and `multiple`. This mode determines both
+ * how many items can be selected as well as the default behavior when a `menuitem` is clicked. For
+ * the `single` mode, selecting a `menuitem` will select and close the menu. For the `multiple`
+ * mode, clicking a `menuitem` will toggle selection and will not close the menu.
+ *
+ * ```tsx
  * <Menu>
  *   <Menu.Target>Open</Menu.Target>
  *   <Menu.Popper>
@@ -32,11 +38,29 @@ export interface MenuProps {
  *     </Menu.Card>
  *   </Menu.Popper>
  * </Menu>
+ * ```
  */
 export const Menu = createContainer()({
   displayName: 'Menu',
   modelHook: useMenuModel,
   subComponents: {
+    /**
+     * `Menu.Target` is similar to all {@link PopupTarget Popup.Target} types. The component only
+     * provides behavior and no styling. The `as` prop is used to determine which component is
+     * rendered. This component should forward the `ref` and apply any additional props directly to
+     * an element. The default `as` is a {@link SecondaryButton}. Any Canvas Kit component should
+     * work with an `as`.
+     *
+     * An example changing to a {@link PrimaryButton}
+     *
+     * ```tsx
+     * <Menu.Target as={PrimaryButton}>Primary Button Text</Menu.Target>
+     * ```
+     *
+     * This element will apply `aria-haspopup` and `aria-expanded` to inform screen readers there's
+     * a popup associated with the element.
+     */
+    Target: MenuTarget,
     /**
      * The menu card is a non-semantic element used to give the dropdown menu its distinct visual
      * cue that the dropdown menu is floating above other content. A menu card usually contains a
@@ -47,7 +71,7 @@ export const Menu = createContainer()({
      * The menu list follows the Collections API. A list can either contain static items
      * or a render prop and `items` to the model.
      *
-     * @example
+     * ```tsx
      * const MyComponent = () => {
      *   const model = useMenuModel({
      *     items: [
@@ -59,27 +83,33 @@ export const Menu = createContainer()({
      *   return (
      *     <Menu model={model}>
      *       <Menu.List>
-     *         {(item) => <Menu.Item name={item.id}>{item.text}</Menu.Item>}
+     *         {(item) => <Menu.Item data-id={item.id}>{item.text}</Menu.Item>}
      *       </Menu.List>
      *     </Menu>
      *   )
      * }
+     * ```
      */
     List: MenuList,
     /**
-     * A menu item has an optional `name` prop that identifies the item in the menu list and will be
-     * passed to the optional `onSelect` callback of the menu model. A menu item can contain any
-     * HTML. If more complex HTML is provided, consider
+     * A `Menu.Item` has an optional `data-id` prop that identifies the item in the `Menu.List` and
+     * will be passed to the optional `onSelect` callback of the `Menu` model. A `Menu.Item` can
+     * contain any HTML. If more complex HTML is provided, add `data-text` to the `Menu.Item`
+     * component if using the static API. If you're using the dynamic API, pass `getTextValue` to
+     * the model.
      */
     Item: MenuItem,
     Divider: MenuDivider,
-    Target: MenuTarget,
+    /**
+     * A `Menu.TargetContext` is the same as a {@link MenuTarget Menu.Target}, except it adds a
+     * `context` event handler instead of a `click` handler to trigger context menus.
+     */
     TargetContext: MenuTargetContext,
     /**
-     * The "Popper" of a menu. The popper will appear around the `Menu.Target`. It renders a `div`
-     * element that is portalled to the `document.body` which is controlled by the `PopupStack. The
-     * `PopupStack` is not part of React. This means no extra props given to this component will be
-     * forwarded to the `div` element, but the `ref` will be forwarded.
+     * The "Popper" of a menu. The popper will appear around the {@link MenuTarget Menu.Target}. It
+     * renders a `div` element that is portalled to the `document.body` which is controlled by the
+     * {@link PopupStack}. The `PopupStack` is not part of React. This means no extra props given to
+     * this component will be forwarded to the `div` element, but the `ref` will be forwarded.
      */
     Popper: MenuPopper,
   },

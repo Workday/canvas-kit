@@ -59,7 +59,7 @@ $_wdc-btn-deprecated-caret-down-icon-hover: svg-load(
   }
 
   .wdc-btn-icon-inline {
-    padding: (($wdc-btn-deprecated-height-l - $wdc-btn-deprecated-split-icon-height)/2) 0;
+    padding: calc(($wdc-btn-deprecated-height-l - $wdc-btn-deprecated-split-icon-height)/2) 0;
     margin-left: $wdc-spacing-xxs;
     line-height: 0;
     float: right;
@@ -120,7 +120,7 @@ $_wdc-btn-deprecated-caret-down-icon-hover: svg-load(
 
     &:after {
       @include wdc-btn-deprecated-icon-inline($_wdc-btn-deprecated-caret-down-icon);
-      padding: (($wdc-btn-deprecated-height-l - $wdc-btn-deprecated-split-icon-height)/2) 0;
+      padding: calc(($wdc-btn-deprecated-height-l - $wdc-btn-deprecated-split-icon-height)/2) 0;
       margin-left: $wdc-spacing-xxs;
       line-height: 0;
       float: right;

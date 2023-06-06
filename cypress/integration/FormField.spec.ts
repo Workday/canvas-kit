@@ -54,8 +54,8 @@ describe('Form Field', () => {
       cy.checkA11y();
     });
 
-    it('the asterisk should a title attribute set to "required"', () => {
-      cy.get('abbr').should('have.attr', 'title', 'required');
+    it('the input should have a "required" attribute', () => {
+      cy.findByRole('textbox', {name: 'Email'}).should('have.attr', 'required');
     });
   });
 });

@@ -2,7 +2,7 @@ import React from 'react';
 
 import {Modal} from '@workday/canvas-kit-react/modal';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
-import {HStack} from '@workday/canvas-kit-react/layout';
+import {Flex} from '@workday/canvas-kit-react/layout';
 
 export const BodyOverflow = () => {
   const handleAcknowledge = () => {
@@ -20,7 +20,7 @@ export const BodyOverflow = () => {
         <Modal.Card>
           <Modal.CloseIcon aria-label="Close" />
           <Modal.Heading>MIT License</Modal.Heading>
-          <Modal.Body>
+          <Modal.Body tabIndex={0}>
             <p style={{marginTop: 0}}>
               Permission is hereby granted, free of charge, to any person obtaining a copy of this
               software and associated documentation files (the "Software"), to deal in the Software
@@ -81,12 +81,12 @@ export const BodyOverflow = () => {
               ut aliquam purus sit.
             </p>
           </Modal.Body>
-          <HStack spacing="s" padding="xxs" marginTop="xxs">
+          <Flex gap="s" padding="xxs" marginTop="xxs">
             <Modal.CloseButton as={PrimaryButton} onClick={handleAcknowledge}>
               Acknowledge
             </Modal.CloseButton>
             <Modal.CloseButton onClick={handleCancel}>Cancel</Modal.CloseButton>
-          </HStack>
+          </Flex>
         </Modal.Card>
       </Modal.Overlay>
     </Modal>

@@ -7,6 +7,8 @@ export interface UseGoToFormConfig {
   onSubmit?: (event: React.FormEvent<HTMLFormElement>) => void;
 }
 
+export const GoToContext = React.createContext({} as ReturnType<typeof useGoToForm>);
+
 export const useGoToForm = ({onSubmit, model}: UseGoToFormConfig = {} as UseGoToFormConfig) => {
   const [value, setValue] = React.useState<number>(model.state.currentPage);
 
