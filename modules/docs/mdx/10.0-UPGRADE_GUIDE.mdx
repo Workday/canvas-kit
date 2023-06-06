@@ -49,10 +49,11 @@ roll back more easily if necessary.
 
 **PR:** [#2229](https://github.com/Workday/canvas-kit/pull/2229)
 
-In v10, we have updated our `space` and `depth` token values to `rem` from `px`.
+In v10, we have updated our `space` and `depth` token values from `px` to `rem`. This is based on
+the default browser font size which is `16px`.
 
 These updates just mean that we have moved the values from `px` to `rem`. The values have been
-updated on a 1:1 basis. This just means that, none of the base value has changed just the unit.
+updated on a 1:1 basis. None of the base value have changed, just the unit.
 
 Below is a table to show what each token value is, what is corresponds too and what the new `rem`
 value is in `px`:
@@ -80,3 +81,10 @@ For example:
 | `16px/16px` | `1rem`    |
 | `32px/16px` | `2rem`    |
 | `8px/16px`  | `0.5rem`  |
+
+#### Why Did We Make This Change?
+
+We wanted to move away from absolute units in tokens to relative units for better accessibility and
+adaptability to different viewport/screen sizes. If a user changes their default browser font size,
+these sizes should change along with it. Since `px` are a fixed unit and do not scale, utilizing
+`rem` will allow these tokens to scale with a new default font size.

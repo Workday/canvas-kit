@@ -29,6 +29,7 @@ export type CanvasSpaceValues = ValueOf<CanvasSpace>;
  * An object of space keys and rem values (strings)
  *
  * Below is a table to show the equivalent values from `px` to `rem`.
+ * This is based on the default browser font size which is `16px`.
  *
  * | px Value  | rem Value | space token |
  * | --------- | --------- | ----------- |
@@ -84,6 +85,7 @@ export type CanvasSpaceNumberValues = ValueOf<CanvasSpaceNumbers>;
  * ```
  *
  * Below is a table to show the equivalent values from `px` to `rem`.
+ * This is based on the default browser font size which is `16px`.
  *
  * | px Value  | rem Value | space token |
  * | --------- | --------- | ----------- |
