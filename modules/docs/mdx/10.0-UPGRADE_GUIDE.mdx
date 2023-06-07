@@ -9,6 +9,8 @@ This guide contains an overview of the changes in Canvas Kit v10. Please
 any questions.
 
 - [Codemod](#codemod)
+- [Removals](#removals)
+  - [Menu in Preview](#menu-in-preview)
 - [Token Updates](#token-updates)
   - [Space and Depth](#space-and-depth)
 
@@ -42,6 +44,23 @@ handled by the codemod are marked with 🤖 in the Upgrade Guide.**
 **Please verify all changes made by the codemod.** As a safety precaution, we recommend committing
 the changes from the codemod as a single isolated commit (separate from other changes) so you can
 roll back more easily if necessary.
+
+## Removals
+
+Removals are deletions from our codebase and you can no longer consume this component. We've either
+promoted or replaced a component or utility.
+
+### Menu (Preview)
+
+We've removed the `Menu` component in Preview. We recommend using the
+[Menu](/components/popups/menu/) in the Main package instead; it is a
+[compound component](/getting-started/for-developers/resources/compound-components/) and offers a
+more flexible API. Please refer to this
+[discussion](https://github.com/Workday/canvas-kit/discussions/2063) for instructions on how to
+migrate from the `Menu` in Preview to the `Menu` in Main.
+
+This change is **not** handled by the codemod due to the differences in API between the `Menu` in
+Preview and the `Menu` in Main.
 
 ## Token Updates
 
