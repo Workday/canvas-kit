@@ -1,9 +1,9 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import * as PopperJS from '@popperjs/core';
+import { Placement as PopperJSPlacement, Options, Instance, Modifier, createPopper } from '@popperjs/core';
 
-export type Placement = `${PopperJS.Placement}`; // Use template literals to make documentation list them out
-export type PopperOptions = PopperJS.Options;
+export type Placement = `${PopperJSPlacement}`; // Use template literals to make documentation list them out
+export type PopperOptions = Options;
 export const defaultFallbackPlacements: Placement[] = ['top', 'right', 'bottom', 'left'];
 
 import {usePopupStack} from './hooks';
@@ -74,7 +74,7 @@ export interface PopperProps {
    * Reference to the PopperJS instance. Useful for making direct method calls on the popper
    * instance like `update`.
    */
-  popperInstanceRef?: React.Ref<PopperJS.Instance>;
+  popperInstanceRef?: React.Ref<Instance>;
 }
 
 /**
@@ -142,7 +142,7 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
     const placementRef = React.useRef(popperPlacement);
     placementRef.current = placement;
 
-    const placementModifier = React.useMemo((): PopperJS.Modifier<any, any> => {
+    const placementModifier = React.useMemo((): Modifier<any, any> => {
       return {
         name: 'setPlacement',
         enabled: true,
@@ -169,7 +169,7 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
       }
 
       if (stackRef.current) {
-        const instance = PopperJS.createPopper(anchorEl, stackRef.current, {
+        const instance = createPopper(anchorEl, stackRef.current, {
           placement: popperPlacement,
           ...popperOptions,
           modifiers: [
