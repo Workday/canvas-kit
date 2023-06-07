@@ -41,7 +41,7 @@ export interface RadioLabelProps
 }
 
 export const RadioLabelContext = React.createContext({} as RadioLabelContextInterface);
-export const RadioLabel = createSubcomponent('div')({
+export const RadioLabel = createSubcomponent('label')({
   displayName: 'Radio.Label',
   modelHook: useRadioModel,
   subComponents: {

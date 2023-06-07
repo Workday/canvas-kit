@@ -10,6 +10,7 @@ import {borderRadius, space} from '@workday/canvas-kit-react/tokens';
 import {useRadioModel} from './hooks/useRadioModel';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {RadioLabel} from './RadioLabel';
+import {Radio} from './Radio';
 
 // export interface RadioGroupProps extends Themeable, GrowthBehavior {
 //   /**
@@ -89,6 +90,7 @@ export const RadioGroup2 = createContainer(Flex)({
   modelHook: useRadioModel,
   subComponents: {
     RadioLabel: RadioLabel,
+    Radio: Radio,
   },
 })<RadioGroupProps2>(({children, error, theme, ...elemProps}, Element, model) => {
   const errorColors = getErrorColors(error, theme);

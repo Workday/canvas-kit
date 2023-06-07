@@ -67,6 +67,7 @@ export const Basic = () => {
               My favorite pizza crust flavor is butter because it's the best thing to put on bread
             </RadioGroup2.RadioLabel.Text>
           </RadioGroup2.RadioLabel>
+          <RadioGroup2.Radio value="test">Test</RadioGroup2.Radio>
 
           {/* <RadioGroup2.RadioBaseButton>
             <RadioGroup2.RadioBaseButton.Input value="thin" />
