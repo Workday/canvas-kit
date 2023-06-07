@@ -207,7 +207,7 @@ export const ColorPicker = ({
               showCheck={value === validHexValue || value === customHexValue}
             />
           </ColorInputAndLabel>
-          <CheckButton aria-label={submitLabel} icon={checkIcon} />
+          <CheckButton aria-label={submitLabel} icon={checkIcon} type="submit" />
         </ColorInputWrapper>
       )}
     </ColorPickerContainer>

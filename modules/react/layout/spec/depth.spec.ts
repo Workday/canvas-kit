@@ -18,7 +18,7 @@ describe('Depth Style Props Function', () => {
       depth: 4,
     } as DepthStyleProps;
     const expected = {
-      boxShadow: '0px 4px 16px rgba(0, 0, 0, 0.2), 0px 8px 32px rgba(0, 0, 0, 0.16)',
+      boxShadow: '0px 4px 16px rgba(31, 38, 46, 0.12), 0px 8px 32px rgba(31, 38, 46, 0.08)',
     };
     const depthStyles = depth(props);
 
