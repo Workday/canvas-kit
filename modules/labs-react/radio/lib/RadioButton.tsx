@@ -3,7 +3,7 @@ import {spaceNumbers} from '@workday/canvas-kit-react/tokens';
 import {styled, Themeable, createSubcomponent, useUniqueId} from '@workday/canvas-kit-react/common';
 import {useRadioModel} from './hooks/useRadioModel';
 
-interface RadioButtonContextInterface {
+interface RadioLabelContextInterface {
   /**
    * If true, set the Radio button to the disabled state.
    * @default false
@@ -16,7 +16,7 @@ interface RadioButtonContextInterface {
   id?: string;
   variant?: 'inverse' | undefined;
 }
-export interface RadioButtonProps extends RadioButtonContextInterface, Themeable {
+export interface RadioLabelProps extends RadioLabelContextInterface, Themeable {
   /**
    * The Radio input and label children of RadioButton
    */
@@ -47,17 +47,17 @@ const RadioContainer = styled('div')({
   position: 'relative',
 });
 
-export const RadioButtonContext = React.createContext({} as RadioButtonContextInterface);
+export const RadioLabelContext = React.createContext({} as RadioLabelContextInterface);
 export const RadioButton = createSubcomponent('div')({
   displayName: 'Radio.Button',
   modelHook: useRadioModel,
-})<RadioButtonProps>(({children, ...elemProps}) => {
+})<RadioLabelProps>(({children, ...elemProps}) => {
   const inputId = useUniqueId(elemProps.id);
   return (
-    <RadioButtonContext.Provider
+    <RadioLabelContext.Provider
       value={{disabled: elemProps.disabled, variant: elemProps.variant, id: inputId}}
     >
       <RadioContainer>{children}</RadioContainer>
-    </RadioButtonContext.Provider>
+    </RadioLabelContext.Provider>
   );
 });

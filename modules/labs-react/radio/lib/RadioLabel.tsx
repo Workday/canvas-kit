@@ -1,40 +1,68 @@
 import React from 'react';
-import {styled, createSubcomponent} from '@workday/canvas-kit-react/common';
-import {canvas, inputColors, spaceNumbers, colors} from '@workday/canvas-kit-react/tokens';
+
+import {Themeable, createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
 import {useRadioModel} from './hooks/useRadioModel';
-import {RadioButtonContext} from './RadioButton';
+import {Flex} from '@workday/canvas-kit-react/layout';
+import {RadioInput} from './RadioInput';
+import {RadioText} from './RadioText';
 
-const radioLabelDistance = spaceNumbers.xs;
+interface RadioLabelContextInterface {
+  /**
+   * If true, set the Radio button to the disabled state.
+   * @default false
+   */
+  disabled?: boolean | undefined;
+  variant?: 'inverse' | undefined;
+  checked?: boolean;
+}
+export interface RadioLabelProps
+  extends Themeable,
+    ExtractProps<typeof Flex, never>,
+    RadioLabelContextInterface {
+  /**
+   * The Radio input and label children of RadioButton
+   */
+  children?: React.ReactNode;
+  disabled?: boolean;
+  /**
+   * If true, set the Radio button to the checked state.
+   * @default false
+   */
+  checked?: boolean;
 
-const StyledLabel = styled('label')<{disabled?: boolean; variant?: 'inverse' | undefined}>(
-  {
-    ...canvas.type.levels.subtext.large,
-    paddingLeft: radioLabelDistance,
-  },
-  ({variant}) => (variant === 'inverse' ? {color: colors.frenchVanilla100} : undefined),
-  ({disabled, variant}) =>
-    disabled
-      ? {
-          color: variant === 'inverse' ? colors.frenchVanilla100 : inputColors.disabled.text,
-          opacity: variant === 'inverse' ? '.4' : '1',
-        }
-      : {cursor: 'pointer'}
-);
+  /**
+   * The name of the Radio button.
+   */
+  name?: string;
+  /**
+   * The value of the Radio button.
+   */
+  value?: string | number;
+}
 
-export const RadioLabel = createSubcomponent('label')({
-  displayName: 'RadioButton.Label',
+export const RadioLabelContext = React.createContext({} as RadioLabelContextInterface);
+export const RadioLabel = createSubcomponent('div')({
+  displayName: 'Radio.Label',
   modelHook: useRadioModel,
-})(({children}) => {
-  const radioContext = React.useContext(RadioButtonContext);
+  subComponents: {
+    Input: RadioInput,
+    Text: RadioText,
+  },
+})<RadioLabelProps>(({children, checked, ...elemProps}, Element, model) => {
   return (
-    <StyledLabel
-      htmlFor={radioContext.id}
-      disabled={radioContext.disabled}
-      variant={radioContext.variant}
+    <RadioLabelContext.Provider
+      value={{variant: elemProps.variant, disabled: elemProps.disabled, checked}}
     >
-      {children}
-    </StyledLabel>
+      <Flex
+        as={Element}
+        alignItems="flex-start"
+        minHeight="m"
+        position="relative"
+        gap="xxs"
+        {...elemProps}
+      >
+        {children}
+      </Flex>
+    </RadioLabelContext.Provider>
   );
 });
-
-export default RadioLabel;

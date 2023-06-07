@@ -10,12 +10,7 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {colors, inputColors, spaceNumbers, borderRadius} from '@workday/canvas-kit-react/tokens';
 import {useRadioModel} from './hooks/useRadioModel';
-import {RadioButtonProps, RadioButtonContext} from './RadioButton';
-import {
-  useListItemRegister,
-  useListItemSelect,
-  isSelected,
-} from '@workday/canvas-kit-react/collection';
+import {RadioLabelProps, RadioLabelContext} from './RadioLabel';
 
 const radioBorderRadius = 9;
 const radioTapArea = spaceNumbers.m;
@@ -24,7 +19,7 @@ const rippleRadius = (spaceNumbers.l - radioWidth) / 2;
 const radioDot = 8;
 const radioHeight = 18;
 
-const RadioInput = styled('input')<RadioButtonProps & StyledType>(
+const StyledRadioInput = styled('input')<RadioLabelProps & StyledType>(
   {
     borderRadius: radioBorderRadius,
     width: radioTapArea,
@@ -143,14 +138,14 @@ const RadioInput = styled('input')<RadioButtonProps & StyledType>(
  * :hover on the radio when you hover on it's corresponding label.
  * This stops the ripple from showing when you hover on the label.
  */
-const RadioInputWrapper = styled('div')<Pick<RadioButtonProps, 'disabled'>>({
+const RadioInputWrapper = styled('div')<Pick<RadioLabelProps, 'disabled'>>({
   display: 'flex',
   height: radioHeight,
   width: radioWidth,
   flex: '0 0 auto',
 });
 
-const RadioRipple = styled('span')<Pick<RadioButtonProps, 'disabled' | 'variant'>>(
+const RadioRipple = styled('span')<Pick<RadioLabelProps, 'disabled' | 'variant'>>(
   {
     borderRadius: borderRadius.circle,
     boxShadow: `0 0 0 0 ${colors.soap200}`,
@@ -165,7 +160,7 @@ const RadioRipple = styled('span')<Pick<RadioButtonProps, 'disabled' | 'variant'
   })
 );
 
-const RadioBackground = styled('div')<RadioButtonProps>(
+const RadioBackground = styled('div')<RadioLabelProps>(
   {
     alignItems: 'center',
     backgroundColor: colors.frenchVanilla100,
@@ -212,7 +207,7 @@ const RadioBackground = styled('div')<RadioButtonProps>(
   })
 );
 
-const RadioCheck = styled('div')<Pick<RadioButtonProps, 'checked' | 'variant'>>(
+const RadioCheck = styled('div')<Pick<RadioLabelProps, 'checked' | 'variant'>>(
   {
     borderRadius: radioBorderRadius,
     display: 'flex',
@@ -234,44 +229,28 @@ const RadioCheck = styled('div')<Pick<RadioButtonProps, 'checked' | 'variant'>>(
   })
 );
 
-const useRadioButtonInput = composeHooks(
-  createElemPropsHook(useRadioModel)(
-    (model, ref, elemProps: {'data-id'?: string; value?: string | number} = {}) => {
-      const name = elemProps['data-id'] || '';
-
-      const selected = !!elemProps['data-id'] && isSelected(name, model.state);
-      const radioContext = React.useContext(RadioButtonContext);
-      return {
-        checked: selected,
-        'aria-checked': selected,
-        onChange(event: React.ChangeEvent) {
-          model.events.change(event);
-        },
-        name: model.state.name,
-        disabled: radioContext.disabled,
-        variant: radioContext.variant,
-        id: radioContext.id,
-      };
-    }
-  ),
-  useListItemSelect,
-  useListItemRegister,
-  createElemPropsHook(useRadioModel)((model, ref, elemProps: {value?: string} = {}) => {
-    const radioContext = React.useContext(RadioButtonContext);
-    if (elemProps.value) {
-      return {'data-id': elemProps.value, disabled: radioContext.disabled};
-    }
-    return {};
-  })
+const useRadioInput = createElemPropsHook(useRadioModel)(
+  (model, ref, elemProps: {value?: string} = {}) => {
+    const {disabled, variant} = React.useContext(RadioLabelContext);
+    return {
+      disabled: disabled,
+      variant: variant,
+      checked: elemProps.value === model.state.value,
+      'aria-checked': elemProps.value === model.state.value,
+      onChange(event: React.ChangeEvent<HTMLInputElement>) {
+        model.onChange(event);
+      },
+      name: model.state.name,
+    };
+  }
 );
-export const RadioButtonInput = createSubcomponent('input')({
-  displayName: 'RadioButton.Input',
+export const RadioInput = createSubcomponent('input')({
   modelHook: useRadioModel,
-  elemPropsHook: useRadioButtonInput,
-})<RadioButtonProps>(({children, ...elemProps}, Element, model) => {
+  elemPropsHook: useRadioInput,
+})<RadioLabelProps>(({children, ...elemProps}, Element, model) => {
   return (
     <RadioInputWrapper>
-      <RadioInput as={Element} type="radio" value={model.state.value} {...elemProps} />
+      <StyledRadioInput as={Element} type="radio" {...elemProps} />
       <RadioRipple variant={elemProps.variant} />
       <RadioBackground
         checked={elemProps.checked}
@@ -284,4 +263,4 @@ export const RadioButtonInput = createSubcomponent('input')({
   );
 });
 
-export default RadioButtonInput;
+export default StyledRadioInput;
