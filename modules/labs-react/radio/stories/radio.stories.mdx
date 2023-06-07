@@ -4,6 +4,9 @@ import {Specifications} from '@workday/canvas-kit-docs';
 import {RadioGroup2} from '@workday/canvas-kit-labs-react/radio';
 
 import {Basic} from './examples/Basic';
+import {Alert} from './examples/Alert';
+import {Error} from './examples/Error';
+import {Inverse} from './examples/Inverse';
 
 <Meta title="Labs/Radio" component={RadioGroup2} />
 
@@ -29,3 +32,22 @@ Radio Group should be used in tandem with [Form Field](/components/inputs/form-f
 `useFieldset` prop is set to `true` to meet accessibility standards.
 
 <ExampleCodeBlock code={Basic} />
+
+#### Alert
+
+<ExampleCodeBlock code={Alert} />
+
+### Error
+
+Set the `error` prop of the wrapping Form Field to `FormField.ErrorType.Error` or
+`FormField.ErrorType.Error` to set the Radio Group to the Alert or Error state, respectively. You
+will also need to set the `hintId` and `hintText` props on the Form Field to meet accessibility
+standards.
+
+<ExampleCodeBlock code={Error} />
+
+### Inverse
+
+Radio with inverse variant
+
+<ExampleCodeBlock code={Inverse} />

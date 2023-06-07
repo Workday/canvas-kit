@@ -6,7 +6,6 @@ import {
   mouseFocusBehavior,
   createSubcomponent,
   createElemPropsHook,
-  composeHooks,
 } from '@workday/canvas-kit-react/common';
 import {colors, inputColors, spaceNumbers, borderRadius} from '@workday/canvas-kit-react/tokens';
 import {useRadioModel} from './hooks/useRadioModel';
@@ -235,7 +234,8 @@ const useRadioInput = createElemPropsHook(useRadioModel)(
     return {
       disabled: disabled,
       variant: variant,
-      checked: elemProps.value === model.state.value,
+      checked:
+        elemProps.value === model.state.value || elemProps.value === model.state.initialValue,
       'aria-checked': elemProps.value === model.state.value,
       onChange(event: React.ChangeEvent<HTMLInputElement>) {
         model.onChange(event);

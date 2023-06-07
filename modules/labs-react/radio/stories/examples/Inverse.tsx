@@ -15,22 +15,21 @@ export const Inverse = () => {
   return (
     <Box backgroundColor="blueberry400" padding="s">
       <RadioGroup name="crust" onChange={handleChange} initialValue={value}>
-        <RadioGroup.Button variant="inverse">
-          <RadioGroup.Input value="deep-dish" />
-          <RadioGroup.Label>Deep Dish</RadioGroup.Label>
-        </RadioGroup.Button>
-        <RadioGroup.Button variant="inverse">
-          <RadioGroup.Input value="thin" />
-          <RadioGroup.Label>Thin</RadioGroup.Label>
-        </RadioGroup.Button>
-        <RadioGroup.Button variant="inverse">
-          <RadioGroup.Input value="gluten-free" />
-          <RadioGroup.Label>Gluten free (sold out)</RadioGroup.Label>
-        </RadioGroup.Button>
-        <RadioGroup.Button variant="inverse">
-          <RadioGroup.Input value="cauliflower" />
-          <RadioGroup.Label>Cauliflower</RadioGroup.Label>
-        </RadioGroup.Button>
+        <RadioGroup.Radio variant="inverse" value="deep-dish">
+          Deep Dish
+        </RadioGroup.Radio>
+
+        <RadioGroup.Radio variant="inverse" value="thin">
+          Thin
+        </RadioGroup.Radio>
+
+        <RadioGroup.Radio variant="inverse" value="gluten-free">
+          Gluten Free
+        </RadioGroup.Radio>
+
+        <RadioGroup.Radio variant="inverse" value="cauliflower">
+          Cauliflower
+        </RadioGroup.Radio>
       </RadioGroup>
     </Box>
   );

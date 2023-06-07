@@ -4,24 +4,17 @@ import {RadioGroup} from '@workday/canvas-kit-labs-react/radio';
 
 export const Disabled = () => {
   return (
-    <FormField label="Choose Your Pizza Crust" useFieldset={true}>
-      <RadioGroup name="crust">
-        <RadioGroup.Button>
-          <RadioGroup.Input value="deep-dish" />
-          <RadioGroup.Label>Deep Dish</RadioGroup.Label>
-        </RadioGroup.Button>
-        <RadioGroup.Button>
-          <RadioGroup.Input value="thin" />
-          <RadioGroup.Label>Thin</RadioGroup.Label>
-        </RadioGroup.Button>
-        <RadioGroup.Button disabled>
-          <RadioGroup.Input value="gluten-free" />
-          <RadioGroup.Label>Gluten free (sold out)</RadioGroup.Label>
-        </RadioGroup.Button>
-        <RadioGroup.Button>
-          <RadioGroup.Input value="cauliflower" />
-          <RadioGroup.Label>Cauliflower</RadioGroup.Label>
-        </RadioGroup.Button>
+    <FormField
+      label="Choose Your Pizza Crust"
+      useFieldset={true}
+      error={FormField.ErrorType.Error}
+      hintText="Deep Dish is currently sold out."
+    >
+      <RadioGroup name="crust" initialValue="deep-dish">
+        <RadioGroup.Radio value="deep-dish">Deep Dish (Sold Out)</RadioGroup.Radio>
+        <RadioGroup.Radio value="thin">Thin</RadioGroup.Radio>
+        <RadioGroup.Radio value="gluten-free">Gluten Free</RadioGroup.Radio>
+        <RadioGroup.Radio value="cauliflower">Cauliflower</RadioGroup.Radio>
       </RadioGroup>
     </FormField>
   );

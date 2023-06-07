@@ -14,29 +14,16 @@ export const Error = () => {
 
   return (
     <FormField
-      error={FormField.ErrorType.Error}
-      hintId="hint-error"
-      hintText="Deep Dish is no longer available. Please select a different crust."
       label="Choose Your Pizza Crust"
       useFieldset={true}
+      error={FormField.ErrorType.Error}
+      hintText="Deep Dish is currently sold out."
     >
-      <RadioGroup name="crust" onChange={handleChange} initialValue={value}>
-        <RadioGroup.Button disabled>
-          <RadioGroup.Input value="deep-dish" />
-          <RadioGroup.Label>Deep dish (sold out)</RadioGroup.Label>
-        </RadioGroup.Button>
-        <RadioGroup.Button>
-          <RadioGroup.Input value="thin" />
-          <RadioGroup.Label>Thin</RadioGroup.Label>
-        </RadioGroup.Button>
-        <RadioGroup.Button>
-          <RadioGroup.Input value="gluten-free" />
-          <RadioGroup.Label>Gluten Free</RadioGroup.Label>
-        </RadioGroup.Button>
-        <RadioGroup.Button>
-          <RadioGroup.Input value="cauliflower" />
-          <RadioGroup.Label>Cauliflower</RadioGroup.Label>
-        </RadioGroup.Button>
+      <RadioGroup name="crust" initialValue="deep-dish">
+        <RadioGroup.Radio value="deep-dish">Deep Dish (Sold Out)</RadioGroup.Radio>
+        <RadioGroup.Radio value="thin">Thin</RadioGroup.Radio>
+        <RadioGroup.Radio value="gluten-free">Gluten Free</RadioGroup.Radio>
+        <RadioGroup.Radio value="cauliflower">Cauliflower</RadioGroup.Radio>
       </RadioGroup>
     </FormField>
   );
