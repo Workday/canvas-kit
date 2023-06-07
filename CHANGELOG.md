@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v9.0.10](https://github.com/Workday/canvas-kit/releases/tag/v9.0.10) (2023-06-07)
+
+### Components
+
+- fix: Fix Popper imports ([#2245](https://github.com/Workday/canvas-kit/pull/2245)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
 ## [v8.6.12](https://github.com/Workday/canvas-kit/releases/tag/v8.6.12) (2023-06-07)
 
 ### Components
