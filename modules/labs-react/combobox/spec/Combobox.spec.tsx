@@ -152,7 +152,7 @@ describe('Combobox', () => {
     const menuText = 'menuText';
     const id = 'my-id';
     const autocompleteItems = [
-      <StyledMenuItem disabled={true} onClick={cb}>
+      <StyledMenuItem disabled onClick={cb}>
         {menuText}
       </StyledMenuItem>,
     ];
@@ -233,7 +233,7 @@ describe('Combobox', () => {
   test('Do not call blur function when clicking on disabled menu item', async () => {
     const menuText = 'menuText';
     const autocompleteItems = [
-      <StyledMenuItem disabled={true} onClick={cb}>
+      <StyledMenuItem disabled onClick={cb}>
         {menuText}
       </StyledMenuItem>,
     ];
