@@ -9,6 +9,8 @@ This guide contains an overview of the changes in Canvas Kit v10. Please
 any questions.
 
 - [Codemod](#codemod)
+- [Token Updates](#token-updates)
+  - [Space and Depth](#space-and-depth)
 
 ## Codemod
 
@@ -40,3 +42,49 @@ handled by the codemod are marked with 🤖 in the Upgrade Guide.**
 **Please verify all changes made by the codemod.** As a safety precaution, we recommend committing
 the changes from the codemod as a single isolated commit (separate from other changes) so you can
 roll back more easily if necessary.
+
+## Token Updates
+
+### Space and Depth
+
+**PR:** [#2229](https://github.com/Workday/canvas-kit/pull/2229)
+
+In v10, we have updated our `space` and `depth` token values from `px` to `rem`. This is based on
+the default browser font size which is `16px`.
+
+These updates just mean that we have moved the values from `px` to `rem`. The values have been
+updated on a 1:1 basis. None of the base value have changed, just the unit.
+
+Below is a table to show what each token value is, what is corresponds too and what the new `rem`
+value is in `px`:
+
+| px Value | rem Value | space Token |
+| -------- | --------- | ----------- |
+| 0        | 0         | zero        |
+| 4px      | 0.25rem   | xxxs        |
+| 8px      | 0.5rem    | xxs         |
+| 12px     | 0.75rem   | xs          |
+| 16px     | 1rem      | s           |
+| 24px     | 1.5rem    | m           |
+| 32px     | 2rem      | l           |
+| 40px     | 2.5rem    | xl          |
+| 64px     | 4rem      | xxl         |
+| 80px     | 5rem      | xxxl        |
+
+You can convert a `px` value to a `rem` value by dividing your `px` value by `16`(if your default
+browser font size hasn't been updated, the value will be `16`).
+
+For example:
+
+| Equation    | rem Value |
+| ----------- | --------- |
+| `16px/16px` | `1rem`    |
+| `32px/16px` | `2rem`    |
+| `8px/16px`  | `0.5rem`  |
+
+#### Why Did We Make This Change?
+
+We wanted to move away from absolute units in tokens to relative units for better accessibility and
+adaptability to different viewport/screen sizes. If a user changes their default browser font size,
+these sizes should change along with it. Since `px` are a fixed unit and do not scale, utilizing
+`rem` will allow these tokens to scale with a new default font size.

@@ -21,8 +21,7 @@ import {
   CanvasSpaceValues,
   CanvasSpaceNumberValues,
   CanvasSpaceNumbers,
-  spaceNumbers,
-} from './lib/space';
+  spaceNumbers} from './lib/space';
 import {type,
   fontFamily,
   monoFontFamily,
