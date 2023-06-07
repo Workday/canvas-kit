@@ -6,7 +6,7 @@ import {
   borderRadius,
   CSSProperties,
   inputColors,
-  spaceNumbers,
+  space,
   type,
 } from '@workday/canvas-kit-react/tokens';
 import {
@@ -71,7 +71,7 @@ export const TextAreaField = createSubcomponent('textarea')({
       borderRadius={borderRadius.m}
       minHeight={64}
       minWidth={280}
-      padding={spaceNumbers.xxs} // Compensate for border
+      padding={space.xxs} // Compensate for border
       margin={0} // Fix Safari
     />
   );

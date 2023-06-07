@@ -8,14 +8,7 @@ import {
   styled,
   Themeable,
 } from '@workday/canvas-kit-react/common';
-import {
-  colors,
-  borderRadius,
-  inputColors,
-  spaceNumbers,
-  type,
-  space,
-} from '@workday/canvas-kit-react/tokens';
+import {colors, borderRadius, inputColors, type, space} from '@workday/canvas-kit-react/tokens';
 import {caretDownSmallIcon} from '@workday/canvas-system-icons-web';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {SelectOption} from './SelectOption';
@@ -55,7 +48,7 @@ const StyledSelect = styled('select')<SelectProps & StyledType>(
     height: space.xl,
     minWidth: 280,
     transition: '0.2s box-shadow, 0.2s border-color',
-    padding: spaceNumbers.xxs,
+    padding: space.xxs,
     margin: 0, // Fix Safari
     MozAppearance: 'none', // FF bugfix: hide arrow so it doesn't show under ours
     WebkitAppearance: 'none',

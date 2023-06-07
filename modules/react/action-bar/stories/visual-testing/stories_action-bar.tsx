@@ -30,7 +30,7 @@ export const ActionBarStates = () => (
           style={{
             background: colors.soap100,
             position: 'relative',
-            height: `${spaceNumbers.xl * 2.5}px`,
+            height: `${spaceNumbers.xxl + 2.25}rem`,
             marginBottom: space.xs,
           }}
         >
@@ -87,9 +87,7 @@ export const ActionBarWithOverflowMenuStates = () => {
             props: {maximumVisible: items.length, containerWidth: 280},
           },
         ]}
-        columnProps={[
-          {label: 'Example', props: {}},
-        ]}
+        columnProps={[{label: 'Example', props: {}}]}
       >
         {({containerWidth, maximumVisible}) => (
           <ActionBar items={items} maximumVisible={maximumVisible}>

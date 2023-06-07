@@ -14,7 +14,6 @@ import {
 import {colors, borderRadius, inputColors} from '@workday/canvas-kit-react/tokens';
 
 import {SelectProps} from './Select';
-import {buttonBorderWidth} from './SelectBase';
 import {MenuPlacement, MenuVisibility} from './types';
 
 interface SelectMenuProps
@@ -251,7 +250,7 @@ export const SelectMenu = ({
 
   const handleWidthChange = useCallback(() => {
     if (buttonRef && buttonRef.current && visibility !== 'closed') {
-      const newMenuWidth = buttonRef.current.clientWidth + 2 * buttonBorderWidth;
+      const newMenuWidth = buttonRef.current.clientWidth + 2;
       setWidth(newMenuWidth);
     }
   }, [buttonRef, visibility]);
