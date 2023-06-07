@@ -1,6 +1,6 @@
 import React from 'react';
 import {render, getByTestId, act} from '@testing-library/react';
-import * as PopperJS from '@popperjs/core';
+import {Instance} from '@popperjs/core';
 
 import {Popper} from '../';
 
@@ -125,7 +125,7 @@ describe('Popper', () => {
   });
 
   it('should forward the popperInstanceRef prop to the PopperJS instance', () => {
-    const ref = React.createRef<PopperJS.Instance>();
+    const ref = React.createRef<Instance>();
     render(
       <Popper anchorElement={document.body} popperInstanceRef={ref}>
         Contents
