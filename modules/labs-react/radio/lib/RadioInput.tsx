@@ -10,6 +10,7 @@ import {
 import {colors, inputColors, spaceNumbers, borderRadius} from '@workday/canvas-kit-react/tokens';
 import {useRadioModel} from './hooks/useRadioModel';
 import {RadioLabelProps, RadioLabelContext} from './RadioLabel';
+import {Box, Flex} from '@workday/canvas-kit-react/layout';
 
 const radioBorderRadius = 9;
 const radioTapArea = spaceNumbers.m;
@@ -18,16 +19,8 @@ const rippleRadius = (spaceNumbers.l - radioWidth) / 2;
 const radioDot = 8;
 const radioHeight = 18;
 
-const StyledRadioInput = styled('input')<RadioLabelProps & StyledType>(
+const StyledRadioInput = styled(Box.as('input'))<RadioLabelProps & StyledType>(
   {
-    borderRadius: radioBorderRadius,
-    width: radioTapArea,
-    height: radioTapArea,
-    margin: 0,
-    marginTop: '-3px',
-    marginLeft: '-3px',
-    position: 'absolute',
-    opacity: 0,
     '&:focus, &:active': {
       outline: 'none',
     },
@@ -57,9 +50,6 @@ const StyledRadioInput = styled('input')<RadioLabelProps & StyledType>(
 
     // `span:first-of-type` refers to `RadioRipple`, the light grey
     // element that animates around the component on hover
-    '&:hover ~ span:first-of-type': {
-      boxShadow: disabled ? undefined : `0 0 0 ${rippleRadius}px ${colors.soap200}`,
-    },
 
     // `div:first-of-type` refers to the `RadioBackground`, the visual facade of the
     // input (which is visually hidden)
@@ -132,34 +122,33 @@ const StyledRadioInput = styled('input')<RadioLabelProps & StyledType>(
   })
 );
 
-/**
- * Using a wrapper prevents the browser default behavior of trigging
- * :hover on the radio when you hover on it's corresponding label.
- * This stops the ripple from showing when you hover on the label.
- */
-const RadioInputWrapper = styled('div')<Pick<RadioLabelProps, 'disabled'>>({
-  display: 'flex',
-  height: radioHeight,
-  width: radioWidth,
-  flex: '0 0 auto',
-});
-
-const RadioRipple = styled('span')<Pick<RadioLabelProps, 'disabled' | 'variant'>>(
+const RadioInputWrapper = styled('div')<Pick<RadioLabelProps, 'disabled' | 'variant'>>(
   {
-    borderRadius: borderRadius.circle,
-    boxShadow: `0 0 0 0 ${colors.soap200}`,
+    display: 'flex',
     height: radioHeight,
-    transition: 'box-shadow 150ms ease-out',
     width: radioWidth,
-    position: 'absolute',
-    pointerEvents: 'none', // This is a decorative element we don't want it to block clicks to input
+    flex: '0 0 auto',
+    //Ripple element
+    '::before': {
+      content: "''",
+      borderRadius: borderRadius.circle,
+      height: radioHeight,
+      transition: 'box-shadow 150ms ease-out',
+      width: radioWidth,
+      pointerEvents: 'none', //
+    },
+    '&:hover:before': {
+      boxShadow: `0 0 0 ${rippleRadius}px ${colors.soap200}`,
+    },
   },
   ({variant}) => ({
-    opacity: variant === 'inverse' ? '0.4' : '1',
+    '::before': {
+      opacity: variant === 'inverse' ? '0.4' : '1',
+    },
   })
 );
 
-const RadioBackground = styled('div')<RadioLabelProps>(
+const RadioBackground = styled(Flex)<RadioLabelProps>(
   {
     alignItems: 'center',
     backgroundColor: colors.frenchVanilla100,
@@ -249,10 +238,33 @@ export const RadioInput = createSubcomponent('input')({
   elemPropsHook: useRadioInput,
 })<RadioLabelProps>(({children, ...elemProps}, Element, model) => {
   return (
-    <RadioInputWrapper>
-      <StyledRadioInput as={Element} type="radio" {...elemProps} />
-      <RadioRipple variant={elemProps.variant} />
+    <RadioInputWrapper variant={elemProps.variant}>
+      <StyledRadioInput
+        borderRadius="circle"
+        width="m"
+        height="m"
+        position="absolute"
+        top="-3px"
+        left="-3px"
+        opacity="0"
+        margin="zero"
+        as={Element}
+        type="radio"
+        {...elemProps}
+      />
+      alignItems: 'center', backgroundColor: colors.frenchVanilla100, borderRadius:
+      radioBorderRadius, borderStyle: 'solid', borderWidth: '1px', boxSizing: 'border-box', display:
+      'flex', height: radioHeight, justifyContent: 'center', padding: '0px 2px', pointerEvents:
+      'none', position: 'absolute', transition: 'border 200ms ease, background 200ms', width:
+      radioWidth,
       <RadioBackground
+        id="background"
+        alignItems="center"
+        backgroundColor="frenchVanilla100"
+        borderRadius="circle"
+        boxSizing="border-box"
+        border="1px solid"
+        // height={radi}
         checked={elemProps.checked}
         disabled={elemProps.disabled}
         variant={elemProps.variant}

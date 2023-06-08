@@ -17,7 +17,7 @@ interface RadioLabelContextInterface {
 }
 export interface RadioLabelProps
   extends Themeable,
-    ExtractProps<typeof Flex, 'label'>,
+    ExtractProps<typeof Flex, never>,
     RadioLabelContextInterface {
   /**
    * The Radio input and label children of RadioButton
