@@ -18,22 +18,10 @@ export const LabelPosition = () => {
       useFieldset={true}
     >
       <RadioGroup name="crust" onChange={handleChange} initialValue={value}>
-        <RadioGroup.Button>
-          <RadioGroup.Input value="deep-dish" />
-          <RadioGroup.Label>Deep Dish</RadioGroup.Label>
-        </RadioGroup.Button>
-        <RadioGroup.Button>
-          <RadioGroup.Input value="thin" />
-          <RadioGroup.Label>Thin</RadioGroup.Label>
-        </RadioGroup.Button>
-        <RadioGroup.Button>
-          <RadioGroup.Input value="gluten-free" />
-          <RadioGroup.Label>Gluten free</RadioGroup.Label>
-        </RadioGroup.Button>
-        <RadioGroup.Button>
-          <RadioGroup.Input value="cauliflower" />
-          <RadioGroup.Label>Cauliflower</RadioGroup.Label>
-        </RadioGroup.Button>
+        <RadioGroup.Radio value="deep-dish">Deep Dish</RadioGroup.Radio>
+        <RadioGroup.Radio value="thin">Thin</RadioGroup.Radio>
+        <RadioGroup.Radio value="gluten-free">Gluten free</RadioGroup.Radio>
+        <RadioGroup.Radio value="cauliflower">Cauliflower</RadioGroup.Radio>
       </RadioGroup>
     </FormField>
   );

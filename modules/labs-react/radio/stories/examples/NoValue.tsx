@@ -18,23 +18,11 @@ export const NoValue = () => {
       labelPosition={FormField.LabelPosition.Left}
       useFieldset={true}
     >
-      <RadioGroup name="crust" initialValue={value} onChange={handleChange}>
-        <RadioGroup.Button>
-          <RadioGroup.Input />
-          <RadioGroup.Label>Deep Dish</RadioGroup.Label>
-        </RadioGroup.Button>
-        <RadioGroup.Button>
-          <RadioGroup.Input />
-          <RadioGroup.Label>Thin</RadioGroup.Label>
-        </RadioGroup.Button>
-        <RadioGroup.Button>
-          <RadioGroup.Input />
-          <RadioGroup.Label>Gluten free</RadioGroup.Label>
-        </RadioGroup.Button>
-        <RadioGroup.Button>
-          <RadioGroup.Input />
-          <RadioGroup.Label>Cauliflower</RadioGroup.Label>
-        </RadioGroup.Button>
+      <RadioGroup name="crust" onChange={handleChange} initialValue={value}>
+        <RadioGroup.Radio value="deep-dish">Deep Dish</RadioGroup.Radio>
+        <RadioGroup.Radio value="thin">Thin</RadioGroup.Radio>
+        <RadioGroup.Radio value="gluten-free">Gluten free</RadioGroup.Radio>
+        <RadioGroup.Radio value="cauliflower">Cauliflower</RadioGroup.Radio>
       </RadioGroup>
     </FormField>
   );
