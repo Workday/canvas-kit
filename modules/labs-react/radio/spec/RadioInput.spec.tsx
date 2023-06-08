@@ -11,8 +11,8 @@ describe('RadioInput', () => {
     it('should render an input with type=radio', () => {
       const {getAllByRole} = render(
         <RadioGroup>
-          <RadioGroup.Input value="email"></RadioGroup.Input>
-          <RadioGroup.Input value="phone"></RadioGroup.Input>
+          <RadioGroup.Label.Input value="email"></RadioGroup.Label.Input>
+          <RadioGroup.Label.Input value="phone"></RadioGroup.Label.Input>
         </RadioGroup>
       );
       expect(getAllByRole('radio')[0]).toHaveProperty('type', 'radio');
@@ -21,8 +21,8 @@ describe('RadioInput', () => {
     it('should be unchecked by default', () => {
       const {getAllByRole} = render(
         <RadioGroup>
-          <RadioGroup.Input value="email"></RadioGroup.Input>
-          <RadioGroup.Input value="phone"></RadioGroup.Input>
+          <RadioGroup.Label.Input value="email"></RadioGroup.Label.Input>
+          <RadioGroup.Label.Input value="phone"></RadioGroup.Label.Input>
         </RadioGroup>
       );
       expect(getAllByRole('radio')[1]).toHaveProperty('checked', false);
@@ -34,8 +34,8 @@ describe('RadioInput', () => {
       const id = 'myRadio';
       const {getAllByRole} = render(
         <RadioGroup>
-          <RadioGroup.Input id={id} value="email"></RadioGroup.Input>
-          <RadioGroup.Input value="email"></RadioGroup.Input>
+          <RadioGroup.Label.Input id={id} value="email"></RadioGroup.Label.Input>
+          <RadioGroup.Label.Input value="email"></RadioGroup.Label.Input>
         </RadioGroup>
       );
       expect(getAllByRole('radio')[0]).toHaveAttribute('id', id);
@@ -48,8 +48,8 @@ describe('RadioInput', () => {
       const value2 = 'myRadio2';
       const {getByDisplayValue} = render(
         <RadioGroup>
-          <RadioGroup.Input value={value1}></RadioGroup.Input>
-          <RadioGroup.Input value={value2}></RadioGroup.Input>
+          <RadioGroup.Label.Input value={value1}></RadioGroup.Label.Input>
+          <RadioGroup.Label.Input value={value2}></RadioGroup.Label.Input>
         </RadioGroup>
       );
       expect(getByDisplayValue(value1)).toBeDefined();
@@ -61,8 +61,8 @@ describe('RadioInput', () => {
     it('should render a checked radio input', () => {
       const {getAllByRole} = render(
         <RadioGroup>
-          <RadioGroup.Input value="email" checked={true}></RadioGroup.Input>
-          <RadioGroup.Input value="email" checked={false}></RadioGroup.Input>
+          <RadioGroup.Label.Input value="email" checked={true}></RadioGroup.Label.Input>
+          <RadioGroup.Label.Input value="email" checked={false}></RadioGroup.Label.Input>
         </RadioGroup>
       );
       expect(getAllByRole('radio')[0]).toHaveProperty('checked', true);
@@ -73,8 +73,8 @@ describe('RadioInput', () => {
     it('should render a disabled radio input', () => {
       const {getAllByRole} = render(
         <RadioGroup>
-          <RadioGroup.Input value="email" disabled={true}></RadioGroup.Input>
-          <RadioGroup.Input value="phone" disabled={false}></RadioGroup.Input>
+          <RadioGroup.Label.Input value="email" disabled={true}></RadioGroup.Label.Input>
+          <RadioGroup.Label.Input value="phone" disabled={false}></RadioGroup.Label.Input>
         </RadioGroup>
       );
       expect(getAllByRole('radio')[0]).toHaveProperty('disabled', true);
@@ -86,14 +86,14 @@ describe('RadioInput', () => {
       const {getByLabelText} = render(
         <form>
           <RadioGroup>
-            <RadioGroup.Button>
-              <RadioGroup.Input value="email"></RadioGroup.Input>
-              <RadioGroup.Label>Email</RadioGroup.Label>
-            </RadioGroup.Button>
-            <RadioGroup.Button>
-              <RadioGroup.Input value="phone"></RadioGroup.Input>
-              <RadioGroup.Label>Phone</RadioGroup.Label>
-            </RadioGroup.Button>
+            <RadioGroup.Label>
+              <RadioGroup.Label.Input value="email"></RadioGroup.Label.Input>
+              <RadioGroup.Label.Text>Email</RadioGroup.Label.Text>
+            </RadioGroup.Label>
+            <RadioGroup.Label>
+              <RadioGroup.Label.Input value="phone"></RadioGroup.Label.Input>
+              <RadioGroup.Label.Text>Phone</RadioGroup.Label.Text>
+            </RadioGroup.Label>
           </RadioGroup>
         </form>
       );
@@ -108,14 +108,14 @@ describe('RadioInput', () => {
       const RadioTest = isChecked => {
         return (
           <RadioGroup>
-            <RadioGroup.Button>
-              <RadioGroup.Input checked={isChecked} value="email"></RadioGroup.Input>
-              <RadioGroup.Label>Email</RadioGroup.Label>
-            </RadioGroup.Button>
-            <RadioGroup.Button>
-              <RadioGroup.Input checked={false} value="email"></RadioGroup.Input>
-              <RadioGroup.Label>Email</RadioGroup.Label>
-            </RadioGroup.Button>
+            <RadioGroup.Label>
+              <RadioGroup.Label.Input checked={isChecked} value="email"></RadioGroup.Label.Input>
+              <RadioGroup.Label.Text>Email</RadioGroup.Label.Text>
+            </RadioGroup.Label>
+            <RadioGroup.Label>
+              <RadioGroup.Label.Input checked={false} value="email"></RadioGroup.Label.Input>
+              <RadioGroup.Label.Text>Email</RadioGroup.Label.Text>
+            </RadioGroup.Label>
           </RadioGroup>
         );
       };

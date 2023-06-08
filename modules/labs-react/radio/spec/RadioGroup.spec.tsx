@@ -11,24 +11,24 @@ describe('RadioGroup', () => {
   it('should render on a server without crashing', () => {
     const RadioGroupComponent = () => (
       <RadioGroup name="contact" value={'email'}>
-        <RadioGroup.Button id="1">
-          <RadioGroup.Input value="email" />
-          <RadioGroup.Label>Email</RadioGroup.Label>
-        </RadioGroup.Button>
-        <RadioGroup.Button id="2">
-          <RadioGroup.Input value="phone" />
-          <RadioGroup.Label>Phone</RadioGroup.Label>
-        </RadioGroup.Button>
-        <RadioGroup.Button id="3" disabled={true}>
-          <RadioGroup.Input value="fax" />
-          <RadioGroup.Label>Fax (disabled)</RadioGroup.Label>
-        </RadioGroup.Button>
-        <RadioGroup.Button id="4">
-          <RadioGroup.Input value="mail" />
-          <RadioGroup.Label>
-            "Mail (US Postal Service aka USPS), a longer than normal label"
-          </RadioGroup.Label>
-        </RadioGroup.Button>
+        <RadioGroup.Label id="1">
+          <RadioGroup.Label.Input value="email" />
+          <RadioGroup.Label.Text>Email</RadioGroup.Label.Text>
+        </RadioGroup.Label>
+        <RadioGroup.Label id="2">
+          <RadioGroup.Label.Input value="phone" />
+          <RadioGroup.Label.Text>Phone</RadioGroup.Label.Text>
+        </RadioGroup.Label>
+        <RadioGroup.Label id="3" disabled={true}>
+          <RadioGroup.Label.Input value="fax" />
+          <RadioGroup.Label.Text>Fax (disabled)</RadioGroup.Label.Text>
+        </RadioGroup.Label>
+        <RadioGroup.Label id="4">
+          <RadioGroup.Label.Input value="mail" />
+          <RadioGroup.Label.Text>
+            "Mail (US Postal Service aka USPS), a longer than normal Text"
+          </RadioGroup.Label.Text>
+        </RadioGroup.Label>
       </RadioGroup>
     );
 
@@ -41,14 +41,14 @@ describe('RadioGroup', () => {
     it('should render a radio group with a name', () => {
       const {getByTestId} = render(
         <RadioGroup name="contact" data-testid="radiogroup">
-          <RadioGroup.Button id="1">
-            <RadioGroup.Input value="email"></RadioGroup.Input>
-            <RadioGroup.Label>E-mail</RadioGroup.Label>
-          </RadioGroup.Button>
-          <RadioGroup.Button id="2">
-            <RadioGroup.Input value="phone"></RadioGroup.Input>
-            <RadioGroup.Label>Phone</RadioGroup.Label>
-          </RadioGroup.Button>
+          <RadioGroup.Label id="1">
+            <RadioGroup.Label.Input value="email"></RadioGroup.Label.Input>
+            <RadioGroup.Label.Text>E-mail</RadioGroup.Label.Text>
+          </RadioGroup.Label>
+          <RadioGroup.Label id="2">
+            <RadioGroup.Label.Input value="phone"></RadioGroup.Label.Input>
+            <RadioGroup.Label.Text>Phone</RadioGroup.Label.Text>
+          </RadioGroup.Label>
         </RadioGroup>
       );
       expect(getByTestId('radiogroup')).toHaveAttribute('name');
@@ -59,14 +59,14 @@ describe('RadioGroup', () => {
     it('should render a selected radio that matches that value of a string', async () => {
       const {getByLabelText} = render(
         <RadioGroup name="contact" initialValue="phone" data-testid="radiogroup">
-          <RadioGroup.Button id="1">
-            <RadioGroup.Input value="email"></RadioGroup.Input>
-            <RadioGroup.Label>E-mail</RadioGroup.Label>
-          </RadioGroup.Button>
-          <RadioGroup.Button id="2">
-            <RadioGroup.Input value="phone"></RadioGroup.Input>
-            <RadioGroup.Label>Phone</RadioGroup.Label>
-          </RadioGroup.Button>
+          <RadioGroup.Label id="1">
+            <RadioGroup.Label.Input value="email"></RadioGroup.Label.Input>
+            <RadioGroup.Label.Text>E-mail</RadioGroup.Label.Text>
+          </RadioGroup.Label>
+          <RadioGroup.Label id="2">
+            <RadioGroup.Label.Input value="phone"></RadioGroup.Label.Input>
+            <RadioGroup.Label.Text>Phone</RadioGroup.Label.Text>
+          </RadioGroup.Label>
         </RadioGroup>
       );
 
@@ -77,14 +77,14 @@ describe('RadioGroup', () => {
     it('should render a selected radio that matches that value of a index', async () => {
       const {getByLabelText} = render(
         <RadioGroup name="contact" data-testid="radiogroup" initialValue={0}>
-          <RadioGroup.Button id="1">
-            <RadioGroup.Input value="email"></RadioGroup.Input>
-            <RadioGroup.Label>E-mail</RadioGroup.Label>
-          </RadioGroup.Button>
-          <RadioGroup.Button id="2">
-            <RadioGroup.Input value="phone"></RadioGroup.Input>
-            <RadioGroup.Label>Phone</RadioGroup.Label>
-          </RadioGroup.Button>
+          <RadioGroup.Label id="1">
+            <RadioGroup.Label.Input value="email"></RadioGroup.Label.Input>
+            <RadioGroup.Label.Text>E-mail</RadioGroup.Label.Text>
+          </RadioGroup.Label>
+          <RadioGroup.Label id="2">
+            <RadioGroup.Label.Input value="phone"></RadioGroup.Label.Input>
+            <RadioGroup.Label.Text>Phone</RadioGroup.Label.Text>
+          </RadioGroup.Label>
         </RadioGroup>
       );
 
@@ -98,14 +98,14 @@ describe('RadioGroup', () => {
       const attr = 'test';
       const {getByTestId} = render(
         <RadioGroup data-propspread={attr} name="contact" data-testid="radiogroup">
-          <RadioGroup.Button id="1">
-            <RadioGroup.Input value="email"></RadioGroup.Input>
-            <RadioGroup.Label>E-mail</RadioGroup.Label>
-          </RadioGroup.Button>
-          <RadioGroup.Button id="2">
-            <RadioGroup.Input value="phone"></RadioGroup.Input>
-            <RadioGroup.Label>Phone</RadioGroup.Label>
-          </RadioGroup.Button>
+          <RadioGroup.Label id="1">
+            <RadioGroup.Label.Input value="email"></RadioGroup.Label.Input>
+            <RadioGroup.Label.Text>E-mail</RadioGroup.Label.Text>
+          </RadioGroup.Label>
+          <RadioGroup.Label id="2">
+            <RadioGroup.Label.Input value="phone"></RadioGroup.Label.Input>
+            <RadioGroup.Label.Text>Phone</RadioGroup.Label.Text>
+          </RadioGroup.Label>
         </RadioGroup>
       );
       expect(getByTestId('radiogroup')).toHaveAttribute('data-propspread', attr);
@@ -116,14 +116,14 @@ describe('RadioGroup', () => {
     it('should call a  callback function', () => {
       const {getByLabelText} = render(
         <RadioGroup name="contact" data-testid="radiogroup" onChange={cb}>
-          <RadioGroup.Button id="1">
-            <RadioGroup.Input value="email"></RadioGroup.Input>
-            <RadioGroup.Label>E-mail</RadioGroup.Label>
-          </RadioGroup.Button>
-          <RadioGroup.Button id="2">
-            <RadioGroup.Input value="phone"></RadioGroup.Input>
-            <RadioGroup.Label>Phone</RadioGroup.Label>
-          </RadioGroup.Button>
+          <RadioGroup.Label id="1">
+            <RadioGroup.Label.Input value="email"></RadioGroup.Label.Input>
+            <RadioGroup.Label.Text>E-mail</RadioGroup.Label.Text>
+          </RadioGroup.Label>
+          <RadioGroup.Label id="2">
+            <RadioGroup.Label.Input value="phone"></RadioGroup.Label.Input>
+            <RadioGroup.Label.Text>Phone</RadioGroup.Label.Text>
+          </RadioGroup.Label>
         </RadioGroup>
       );
 
