@@ -40,7 +40,15 @@ export interface MenuItemProps {
   'aria-disabled'?: boolean;
 }
 
-export const StyledMenuItem = styled(Box.as('button'))<StyledType>(
+interface StyledMenuProps {
+  /**
+   * If true, set the StyledMenuItem to the disabled state so it is not clickable.
+   * @default false
+   */
+  isDisabled?: boolean;
+}
+
+export const StyledMenuItem = styled(Box.as('button'))<StyledType & StyledMenuProps>(
   ({theme}) => {
     return {
       ...type.levels.subtext.large,

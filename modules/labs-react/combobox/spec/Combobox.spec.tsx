@@ -152,7 +152,7 @@ describe('Combobox', () => {
     const menuText = 'menuText';
     const id = 'my-id';
     const autocompleteItems = [
-      <StyledMenuItem disabled onClick={cb}>
+      <StyledMenuItem isDisabled={true} onClick={cb}>
         {menuText}
       </StyledMenuItem>,
     ];
