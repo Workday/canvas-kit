@@ -10,9 +10,15 @@ any questions.
 
 - [Codemod](#codemod)
 - [Removals](#removals)
-  - [Menu in Preview](#menu-in-preview)
+  - [Menu (Preview)](#menu-preview)
+- [Deprecations](#deprecations)
 - [Token Updates](#token-updates)
   - [Space and Depth](#space-and-depth)
+- [Component Updates](#component-updates)
+- [Glossary](#glossary)
+  - [Main](#main)
+  - [Preview](#preview)
+  - [Labs](#labs)
 
 ## Codemod
 
@@ -62,6 +68,8 @@ migrate from the `Menu` in Preview to the `Menu` in Main.
 This change is **not** handled by the codemod due to the differences in API between the `Menu` in
 Preview and the `Menu` in Main.
 
+## Deprecations
+
 ## Token Updates
 
 ### Space and Depth
@@ -107,3 +115,47 @@ We wanted to move away from absolute units in tokens to relative units for bette
 adaptability to different viewport/screen sizes. If a user changes their default browser font size,
 these sizes should change along with it. Since `px` are a fixed unit and do not scale, utilizing
 `rem` will allow these tokens to scale with a new default font size.
+
+## Component Updates
+
+## Glossary
+
+### Main
+
+Our Main package of Canvas Kit tokens, components, and utilities at `@workday/canvas-kit-react` has
+undergone a full design and a11y review and is approved for use in product.
+
+Breaking changes to code in Main will only occur during major version updates and will always be
+communicated in advance and accompanied by migration strategies.
+
+---
+
+### Preview
+
+Our Preview package of Canvas Kit tokens, components, and utilities at
+`@workday/canvas-kit-preview-react` has undergone a full design and a11y review and is approved for
+use in product, but may not be up to the high code standards upheld in the [Main](#main) package.
+Preview is analagous to code in beta.
+
+Breaking changes are unlikely, but possible, and can be deployed to Preview at any time without
+triggering a major version update, though such changes will be communicated in advance and
+accompanied by migration strategies.
+
+Generally speaking, our goal is to eventually promote code from Preview to [Main](#main).
+Occasionally, a component with the same name will exist in both [Main](#main) and Preview (for
+example, see Segmented Control in [Preview](/components/buttons/segmented-control/) and
+[Main](https://d2krrudi3mmzzw.cloudfront.net/v8/?path=/docs/components-buttons-segmented-control--basic)).
+In these cases, Preview serves as a staging ground for an improved version of the component with a
+different API. The component in [Main](#main) will eventually be replaced with the one in Preview.
+
+---
+
+### Labs
+
+Our Labs package of Canvas Kit tokens, components, and utilities at `@workday/canvas-kit-labs-react`
+has **not** undergone a full design and a11y review. Labs serves as an incubator space for new and
+experimental code and is analagous to code in alpha.
+
+Breaking changes can be deployed to Labs at any time without triggering a major version update and
+may not be subject to the same rigor in communcation and migration strategies reserved for breaking
+changes in [Preview](#preview) and [Main](#main).
