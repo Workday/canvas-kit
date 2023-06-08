@@ -7,13 +7,18 @@ import {
   createSubcomponent,
   createElemPropsHook,
 } from '@workday/canvas-kit-react/common';
-import {colors, inputColors, spaceNumbers, borderRadius} from '@workday/canvas-kit-react/tokens';
+import {
+  colors,
+  inputColors,
+  spaceNumbers,
+  borderRadius,
+  space,
+} from '@workday/canvas-kit-react/tokens';
 import {useRadioModel} from './hooks/useRadioModel';
 import {RadioLabelProps, RadioLabelContext} from './RadioLabel';
 import {Box, Flex} from '@workday/canvas-kit-react/layout';
 
 const radioBorderRadius = 9;
-const radioTapArea = spaceNumbers.m;
 const radioWidth = 18;
 const rippleRadius = (spaceNumbers.l - radioWidth) / 2;
 const radioDot = 8;
@@ -122,12 +127,8 @@ const StyledRadioInput = styled(Box.as('input'))<RadioLabelProps & StyledType>(
   })
 );
 
-const RadioInputWrapper = styled('div')<Pick<RadioLabelProps, 'disabled' | 'variant'>>(
+const RadioInputWrapper = styled(Flex)<Pick<RadioLabelProps, 'disabled' | 'variant'>>(
   {
-    display: 'flex',
-    height: radioHeight,
-    width: radioWidth,
-    flex: '0 0 auto',
     //Ripple element
     '::before': {
       content: "''",
@@ -150,21 +151,32 @@ const RadioInputWrapper = styled('div')<Pick<RadioLabelProps, 'disabled' | 'vari
 
 const RadioBackground = styled(Flex)<RadioLabelProps>(
   {
-    alignItems: 'center',
-    backgroundColor: colors.frenchVanilla100,
-    borderRadius: radioBorderRadius,
-    borderStyle: 'solid',
-    borderWidth: '1px',
-    boxSizing: 'border-box',
-    display: 'flex',
-    height: radioHeight,
-    justifyContent: 'center',
-    padding: '0px 2px',
-    pointerEvents: 'none',
-    position: 'absolute',
-    transition: 'border 200ms ease, background 200ms',
-    width: radioWidth,
+    // Radio Selected Circle
+    '::after': {
+      content: "''",
+      borderRadius: radioBorderRadius,
+      display: 'flex',
+      flexDirection: 'column',
+      height: space.xxs,
+      pointerEvents: 'none',
+      transition: 'transform 200ms ease, opacity 200ms ease',
+      width: space.xxs,
+    },
   },
+  ({theme, variant}) => ({
+    '::after': {
+      backgroundColor:
+        variant === 'inverse'
+          ? theme.canvas.palette.primary.main
+          : theme.canvas.palette.primary.contrast,
+    },
+  }),
+  ({checked}) => ({
+    '::after': {
+      opacity: checked ? 1 : 0,
+      transform: checked ? 'scale(1)' : 'scale(0.5)',
+    },
+  }),
   ({
     checked,
     disabled,
@@ -195,28 +207,6 @@ const RadioBackground = styled(Flex)<RadioLabelProps>(
   })
 );
 
-const RadioCheck = styled('div')<Pick<RadioLabelProps, 'checked' | 'variant'>>(
-  {
-    borderRadius: radioBorderRadius,
-    display: 'flex',
-    flexDirection: 'column',
-    height: radioDot,
-    pointerEvents: 'none',
-    transition: 'transform 200ms ease, opacity 200ms ease',
-    width: radioDot,
-  },
-  ({theme, variant}) => ({
-    backgroundColor:
-      variant === 'inverse'
-        ? theme.canvas.palette.primary.main
-        : theme.canvas.palette.primary.contrast,
-  }),
-  ({checked}) => ({
-    opacity: checked ? 1 : 0,
-    transform: checked ? 'scale(1)' : 'scale(0.5)',
-  })
-);
-
 const useRadioInput = createElemPropsHook(useRadioModel)(
   (model, ref, elemProps: {value?: string} = {}) => {
     const {disabled, variant} = React.useContext(RadioLabelContext);
@@ -238,7 +228,7 @@ export const RadioInput = createSubcomponent('input')({
   elemPropsHook: useRadioInput,
 })<RadioLabelProps>(({children, ...elemProps}, Element, model) => {
   return (
-    <RadioInputWrapper variant={elemProps.variant}>
+    <RadioInputWrapper height="18px" width="18px" flex="0 0 auto" variant={elemProps.variant}>
       <StyledRadioInput
         borderRadius="circle"
         width="m"
@@ -252,11 +242,6 @@ export const RadioInput = createSubcomponent('input')({
         type="radio"
         {...elemProps}
       />
-      alignItems: 'center', backgroundColor: colors.frenchVanilla100, borderRadius:
-      radioBorderRadius, borderStyle: 'solid', borderWidth: '1px', boxSizing: 'border-box', display:
-      'flex', height: radioHeight, justifyContent: 'center', padding: '0px 2px', pointerEvents:
-      'none', position: 'absolute', transition: 'border 200ms ease, background 200ms', width:
-      radioWidth,
       <RadioBackground
         id="background"
         alignItems="center"
@@ -264,13 +249,18 @@ export const RadioInput = createSubcomponent('input')({
         borderRadius="circle"
         boxSizing="border-box"
         border="1px solid"
-        // height={radi}
+        height={'18px'}
+        width="18px"
+        justifyContent="center"
+        paddingY="zero"
+        paddingX="2px"
+        pointerEvents="none"
+        position="absolute"
+        transition="border 200ms ease, background 200ms"
         checked={elemProps.checked}
         disabled={elemProps.disabled}
         variant={elemProps.variant}
-      >
-        <RadioCheck checked={elemProps.checked} variant={elemProps.variant} />
-      </RadioBackground>
+      ></RadioBackground>
     </RadioInputWrapper>
   );
 });
