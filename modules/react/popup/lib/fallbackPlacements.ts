@@ -1,6 +1,14 @@
-import * as PopperJS from '@popperjs/core';
+import {
+  Placement as PopperJSPlacement,
+  placements,
+  State,
+  detectOverflow,
+  SideObject,
+  Modifier,
+  ModifierArguments,
+} from '@popperjs/core';
 
-export type Placement = PopperJS.Placement; // Use template literals to make documentation list them out
+export type Placement = PopperJSPlacement; // Use template literals to make documentation list them out
 
 const getOppositePlacement = (popperPlacement: Placement): Placement => {
   const [first, second] = popperPlacement.split('-');
@@ -23,7 +31,7 @@ const getOppositePlacement = (popperPlacement: Placement): Placement => {
   }
   if (second) {
     oppositePlacement =
-      PopperJS.placements.find(placement => placement.includes(`${oppositePlacement}-${second}`)) ??
+      placements.find(placement => placement.includes(`${oppositePlacement}-${second}`)) ??
       oppositePlacement;
   }
   return oppositePlacement;
@@ -31,7 +39,7 @@ const getOppositePlacement = (popperPlacement: Placement): Placement => {
 
 const choseAvailablePlacement = (
   placements: Placement[],
-  state: PopperJS.State,
+  state: State,
   preferredPlacement: Placement
 ): Placement => {
   if (placements.length === 0 || placements[0].split('-')[0] === 'auto') {
@@ -39,7 +47,7 @@ const choseAvailablePlacement = (
   }
 
   const {reference, popper} = state.rects;
-  const overflow = PopperJS.detectOverflow({...state, placement: placements[0]});
+  const overflow = detectOverflow({...state, placement: placements[0]});
   const direction = /left|right/.test(placements[0].split('-')[0]) ? 'horizontal' : 'vertical';
   const isOverflowed =
     (overflow.top > 0 || overflow.bottom > 0 || overflow.left > 0 || overflow.right > 0) &&
@@ -48,7 +56,7 @@ const choseAvailablePlacement = (
         popper.height / 2 - overflow.bottom < reference.height
       : popper.width - overflow.left < reference.width ||
         popper.width - overflow.right < reference.width);
-  const key = placements[0].split('-')[0] as keyof PopperJS.SideObject;
+  const key = placements[0].split('-')[0] as keyof SideObject;
 
   if (!isOverflowed && overflow[key] <= 0) {
     return placements[0];
@@ -63,14 +71,14 @@ export type Options = {
 
 const name = 'fallbackModifier';
 
-export const fallbackPlacementsModifier: PopperJS.Modifier<typeof name, Options> = {
+export const fallbackPlacementsModifier: Modifier<typeof name, Options> = {
   name: name,
   enabled: true,
   phase: 'main',
   data: {
     _skip: false,
   },
-  fn({state, options}: PopperJS.ModifierArguments<Options>) {
+  fn({state, options}: ModifierArguments<Options>) {
     const preferredPlacement = state.options.placement;
     const {fallbackPlacements} = options;
 
