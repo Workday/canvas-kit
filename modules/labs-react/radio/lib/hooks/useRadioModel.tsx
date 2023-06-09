@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 
 import {createModelHook} from '@workday/canvas-kit-react/common';
 
