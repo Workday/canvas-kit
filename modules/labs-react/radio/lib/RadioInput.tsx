@@ -21,7 +21,6 @@ import {Box, Flex} from '@workday/canvas-kit-react/layout';
 const radioBorderRadius = 9;
 const radioWidth = 18;
 const rippleRadius = (spaceNumbers.l - radioWidth) / 2;
-const radioDot = 8;
 const radioHeight = 18;
 
 const StyledRadioInput = styled(Box.as('input'))<RadioLabelProps & StyledType>(

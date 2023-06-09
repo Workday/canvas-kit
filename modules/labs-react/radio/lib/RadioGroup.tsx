@@ -6,7 +6,7 @@ import {
   getErrorColors,
   ExtractProps,
 } from '@workday/canvas-kit-react/common';
-import {borderRadius, space} from '@workday/canvas-kit-react/tokens';
+import {space} from '@workday/canvas-kit-react/tokens';
 import {useRadioModel} from './hooks/useRadioModel';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {RadioLabel} from './RadioLabel';
