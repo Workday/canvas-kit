@@ -11,6 +11,7 @@ import {LabelPosition} from './examples/LabelPosition';
 import {Placeholder} from './examples/Placeholder';
 import {RefForwarding} from './examples/RefForwarding';
 import {Required} from './examples/Required';
+import {Icons} from './examples/Icons';
 
 <Meta title="Components/Inputs/Text Input" component={TextInput} />
 
@@ -81,6 +82,22 @@ Labels for required fields are suffixed by a red asterisk.
 
 <ExampleCodeBlock code={Required} />
 
+### Icons
+
+`InputGroup` is available to add icons to the `TextInput`. Internally, a container `div` element is
+used with relative position styling on the `div` and absolute position styling on the start and end
+icons. `InputGroup.InnerStart` and `InputGroup.InnerEnd` are used to position elements at the start
+and end of the input. "start" and "end" are used instead of "left" and "right" to match
+[CSS Logical Properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Logical_Properties)
+and will be semantically correct in left-to-right and right-to-left languages.
+
+`InputGroup.InnerStart` and `InputGroup.InnerEnd` subcomponents can handle any child elements, but
+are built for icons. The default width is `40px`, which is perfect for icons. If you need to use
+something else, be sure to set the `width` property of `InputGroup.InnerStart` or
+`InputGroup.InnerEnd` to match the intended width of the element.
+
+<ExampleCodeBlock code={Icons} />
+
 ### Error States
 
 Set the `error` prop of the wrapping Form Field to `FormField.ErrorType.Alert` or
@@ -102,6 +119,7 @@ The `error` prop may be applied directly to the Text Input with a value of
 ## Component API
 
 <SymbolDoc name="TextInput" fileName="/react/" />
+<SymbolDoc name="InputGroup" fileName="/react/" />
 
 ## Specifications
 
