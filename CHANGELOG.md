@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v8.6.14](https://github.com/Workday/canvas-kit/releases/tag/v8.6.14) (2023-06-12)
+
+### Components
+
+- fix: Change Popup imports to prevent circular dependencies ([#2251](https://github.com/Workday/canvas-kit/pull/2251)) ([@MarcoASedano](https://github.com/MarcoASedano), marco.sedano)
+
+
 ## [v8.6.13](https://github.com/Workday/canvas-kit/releases/tag/v8.6.13) (2023-06-12)
 
 ### Documentation
