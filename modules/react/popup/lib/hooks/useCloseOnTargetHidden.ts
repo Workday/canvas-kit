@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {createElemPropsHook} from '@workday/canvas-kit-react/common';
-import {usePopupModel} from '@workday/canvas-kit-react/popup';
+import {usePopupModel} from './usePopupModel';
 
 function getScrollParent(element: HTMLElement): HTMLElement {
   if (element === document.body || !element.parentElement) {
