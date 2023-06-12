@@ -1569,6 +1569,20 @@
         "__isArgsStory": false
       }
     },
+    "components-indicators-loading-dots--accessible": {
+      "id": "components-indicators-loading-dots--accessible",
+      "name": "Accessible",
+      "title": "Components/Indicators/Loading Dots",
+      "importPath": "./modules/react/loading-dots/stories/LoadingDots.stories.mdx",
+      "kind": "Components/Indicators/Loading Dots",
+      "story": "Accessible",
+      "parameters": {
+        "fileName": "./modules/react/loading-dots/stories/LoadingDots.stories.mdx",
+        "framework": "react",
+        "__id": "components-indicators-loading-dots--accessible",
+        "__isArgsStory": false
+      }
+    },
     "components-indicators-loading-dots--rtl": {
       "id": "components-indicators-loading-dots--rtl",
       "name": "RTL",
