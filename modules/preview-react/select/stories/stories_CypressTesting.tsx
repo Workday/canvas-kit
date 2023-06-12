@@ -9,7 +9,7 @@ import {Select} from '../lib/Select';
 
 import {manyOptions, options} from './stories';
 import {Modal} from '@workday/canvas-kit-react/modal';
-import {HStack} from '@workday/canvas-kit-react/layout';
+import {Flex} from '@workday/canvas-kit-react/layout';
 
 export default {
   title: 'Testing/Preview/Select/Cypress',
@@ -56,10 +56,10 @@ const SelectModal = () => {
             <FormField label="Label" inputId="select-modal">
               {controlComponent(<Select name="city" options={manyOptions} />)}
             </FormField>
-            <HStack spacing="s">
+            <Flex gap="s">
               <Modal.CloseButton as={PrimaryButton}>Submit</Modal.CloseButton>
               <Modal.CloseButton>Cancel</Modal.CloseButton>
-            </HStack>
+            </Flex>
           </Modal.Body>
         </Modal.Card>
       </Modal.Overlay>

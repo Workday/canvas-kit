@@ -3,22 +3,23 @@ import {
   createContainer,
   createElemPropsHook,
   createSubcomponent,
+  ExtractProps,
 } from '@workday/canvas-kit-react/common';
-import {Box, BoxProps} from '@workday/canvas-kit-react/layout';
+import {Box, Flex} from '@workday/canvas-kit-react/layout';
 
 import {useListModel} from './useListModel';
 import {useListRenderItems} from './useListRenderItem';
 import {useListItemRegister} from './useListItemRegister';
 
-export interface ListBoxProps extends Omit<BoxProps, 'children'> {
-  children?: React.ReactNode | ((item: any) => React.ReactNode);
+export interface ListBoxProps<T = any> extends Omit<ExtractProps<typeof Flex, never>, 'children'> {
+  children?: React.ReactNode | ((item: T, index: number) => React.ReactNode);
 }
 
 export const ListBoxItem = createSubcomponent('li')({
   displayName: 'Item',
   modelHook: useListModel,
   elemPropsHook: useListItemRegister,
-})<BoxProps>((elemProps, Element) => {
+})<ExtractProps<typeof Flex, never>>((elemProps, Element) => {
   return <Box as={Element} {...elemProps} />;
 });
 
@@ -64,20 +65,21 @@ export const ListBox = createContainer('ul')({
      */
     Item: ListBoxItem,
   },
-})<ListBoxProps>(({height, maxHeight, ...elemProps}, Element, model) => {
+})<ListBoxProps>(({height, maxHeight, marginY, ...elemProps}, Element, model) => {
+  // We're moving `marginY` to the container to not interfere with the virtualization size. We set
+  // the `marginY` on the Flex to `0` to avoid inaccurate scrollbars
+
   // TODO figure out what style props should go to which `Box`
   return (
     <Box
       ref={model.state.containerRef}
-      height={
-        height || model.state.isVirtualized ? model.state.UNSTABLE_virtual.totalSize : undefined
-      }
+      marginY={marginY}
       maxHeight={maxHeight}
       overflowY={model.state.orientation === 'vertical' ? 'auto' : undefined}
     >
-      <Box as={Element} {...elemProps}>
+      <Flex as={Element} flexDirection="column" {...elemProps} marginY={0}>
         {useListRenderItems(model, elemProps.children)}
-      </Box>
+      </Flex>
     </Box>
   );
 });

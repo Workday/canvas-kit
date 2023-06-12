@@ -19,8 +19,8 @@ const hiddenStyles = {
  * ```
  */
 export const useOverflowListItemMeasure = createElemPropsHook(useOverflowListModel)(
-  (model, ref?: React.Ref<HTMLElement>, elemProps: {'data-id'?: string} = {}) => {
-    const {elementRef, localRef} = useLocalRef(ref);
+  (model, ref, elemProps: {'data-id'?: string} = {}) => {
+    const {elementRef, localRef} = useLocalRef(ref as React.Ref<HTMLElement>);
     const name = elemProps['data-id'] || '';
 
     useMountLayout(() => {

@@ -1,29 +1,48 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import {pickForegroundColor, StyledType} from '@workday/canvas-kit-react/common';
+import {pickForegroundColor} from '@workday/canvas-kit-react/common';
 
 import {colors, type, depth, space, borderRadius} from '@workday/canvas-kit-react/tokens';
+import {Text} from '@workday/canvas-kit-react/text';
 import {Box, Flex} from '@workday/canvas-kit-react/layout';
 
-const StyledCard = styled(Box)<StyledType>({
-  width: 200,
-  height: 200,
-  margin: 20,
-  borderRadius: 4,
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-});
+const DepthCard = ({depth, children}) => {
+  return (
+    <Flex
+      depth={depth}
+      width={200}
+      height={200}
+      borderRadius="s"
+      alignItems="center"
+      justifyContent="center"
+      backgroundColor="frenchVanilla100"
+    >
+      {children}
+    </Flex>
+  );
+};
 
 export const Depth = () => (
-  <Flex>
-    <StyledCard depth="none">Depth None</StyledCard>
-    <StyledCard depth={1}>Depth 1</StyledCard>
-    <StyledCard depth={2}>Depth 2</StyledCard>
-    <StyledCard depth={3}>Depth 3</StyledCard>
-    <StyledCard depth={4}>Depth 4</StyledCard>
-    <StyledCard depth={5}>Depth 5</StyledCard>
-    <StyledCard depth={6}>Depth 6</StyledCard>
+  <Flex gap="m" flexDirection="column">
+    <Flex gap="m" flexWrap="wrap">
+      <DepthCard depth="none">Depth None</DepthCard>
+      <DepthCard depth={1}>Depth 1</DepthCard>
+      <DepthCard depth={2}>Depth 2</DepthCard>
+      <DepthCard depth={3}>Depth 3</DepthCard>
+      <DepthCard depth={4}>Depth 4</DepthCard>
+      <DepthCard depth={5}>Depth 5</DepthCard>
+      <DepthCard depth={6}>Depth 6</DepthCard>
+    </Flex>
+    <Text>Depth on a colored background</Text>
+    <Flex backgroundColor="soap400" gap="m" padding="m" flexWrap="wrap">
+      <DepthCard depth="none">Depth None</DepthCard>
+      <DepthCard depth={1}>Depth 1</DepthCard>
+      <DepthCard depth={2}>Depth 2</DepthCard>
+      <DepthCard depth={3}>Depth 3</DepthCard>
+      <DepthCard depth={4}>Depth 4</DepthCard>
+      <DepthCard depth={5}>Depth 5</DepthCard>
+      <DepthCard depth={6}>Depth 6</DepthCard>
+    </Flex>
   </Flex>
 );
 

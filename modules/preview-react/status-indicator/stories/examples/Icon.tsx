@@ -2,11 +2,11 @@ import React from 'react';
 
 import {StatusIndicator} from '@workday/canvas-kit-preview-react/status-indicator';
 import {uploadCloudIcon} from '@workday/canvas-system-icons-web';
-import {HStack} from '@workday/canvas-kit-react/layout';
+import {Flex} from '@workday/canvas-kit-react/layout';
 
 export const Icon = () => {
   return (
-    <HStack spacing="s">
+    <Flex gap="s">
       <StatusIndicator>
         <StatusIndicator.Icon aria-label="unpublished" icon={uploadCloudIcon} />
         <StatusIndicator.Label>Unpublished</StatusIndicator.Label>
@@ -15,6 +15,6 @@ export const Icon = () => {
         <StatusIndicator.Label>published</StatusIndicator.Label>
         <StatusIndicator.Icon aria-label="published" icon={uploadCloudIcon} />
       </StatusIndicator>
-    </HStack>
+    </Flex>
   );
 };
