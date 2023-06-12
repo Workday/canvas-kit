@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v8.6.13](https://github.com/Workday/canvas-kit/releases/tag/v8.6.13) (2023-06-12)
+
+### Documentation
+
+- docs: Add accessible example for LoadingDots ([#2248](https://github.com/Workday/canvas-kit/pull/2248)) ([@dgubko](https://github.com/dgubko))
+
+
 ## [v8.6.12](https://github.com/Workday/canvas-kit/releases/tag/v8.6.12) (2023-06-07)
 
 ### Components
