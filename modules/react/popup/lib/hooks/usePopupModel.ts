@@ -2,7 +2,7 @@ import * as React from 'react';
 import {createModelHook} from '@workday/canvas-kit-react/common';
 
 import {useDisclosureModel} from '@workday/canvas-kit-react/disclosure';
-import {Placement} from '@workday/canvas-kit-react/popup';
+import {Placement} from '../Popper';
 
 // eslint-disable-next-line no-empty-function
 const noop = () => {};
