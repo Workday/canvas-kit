@@ -208,13 +208,12 @@ const RadioBackground = styled(Flex)<RadioLabelProps>(
 
 const useRadioInput = createElemPropsHook(useRadioModel)(
   (model, ref, elemProps: {value?: string} = {}) => {
-    const {disabled, variant} = React.useContext(RadioLabelContext);
+    const {disabled, variant, value} = React.useContext(RadioLabelContext);
     return {
       disabled: disabled,
       variant: variant,
-      checked:
-        elemProps.value === model.state.value || elemProps.value === model.state.initialValue,
-      'aria-checked': elemProps.value === model.state.value,
+      checked: value === model.state.value || value === model.state.initialValue,
+      'aria-checked': value === model.state.value,
       onChange(event: React.ChangeEvent<HTMLInputElement>) {
         model.onChange(event);
       },
@@ -263,5 +262,3 @@ export const RadioInput = createSubcomponent('input')({
     </RadioInputWrapper>
   );
 });
-
-export default StyledRadioInput;

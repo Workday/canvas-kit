@@ -29,8 +29,8 @@ export const Basic = () => {
             <RadioGroup.Label.Input value="gluten-free" />
             <RadioGroup.Label.Text>Gluten Free</RadioGroup.Label.Text>
           </RadioGroup.Label>
-          <RadioGroup.Label>
-            <RadioGroup.Label.Input value="custom" />
+          <RadioGroup.Label value="custom">
+            <RadioGroup.Label.Input />
             <RadioGroup.Label.Text>
               My favorite pizza crust flavor is butter because it's the best thing to put on bread
             </RadioGroup.Label.Text>
