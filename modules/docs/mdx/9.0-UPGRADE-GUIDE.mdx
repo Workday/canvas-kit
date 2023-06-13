@@ -38,6 +38,38 @@ any questions.
 
 ## Codemod
 
+A codemod is a script that makes programatic transformations on your codebase by traversing the AST,
+identifying patterns, and making prescribed changes. This greatly decreases opportunities for error
+and reduces the number of manual updates. This helps you focus your effort on changes that need your
+attention. We highly recommend you use the codemod for these reasons.
+
+If you're new to running codemods or if it's been a minute since you've used one, there are a few
+things you'll want to keep in mind.
+
+- Our codemods are meant to be run sequentially.
+  - If you're using v7 of `@workday/canvas-kit-react`, you'll need to run the v8 codemod before you
+    run v9.
+- The codemod will not remove outdated dependencies or upgrade dependencies to the latest version.
+  - The codemod will update your code to be compatible with the specified version, but you'll still
+    need to upgrade package dependencies on your own.
+  - Always review your `package.json` files to make sure your dependency versions look correct.
+  - We recommend updating dependency versions first, then running the codemod.
+- Codemods are not bulletproof.
+  - You will likely still need to make some manual changes to be compatible. Use the guide below as
+    a checklist.
+  - You should always have a thorough PR and QA review of all changes to ensure no regressions were
+    introduced.
+- You should give the codemod specific directories that need to be updated.
+  - If your source code lives in `src/` use `src/` as your `[path]` in the codemod script.
+  - If you have a monorepo with three packages using Canvas Kit, provide those specific packages as
+    the path.
+  - This decreases the amount of AST the codemod needs to traverse and reduces the chances of the
+    script having an error.
+- We're here to help.
+  - Automatic changes to your codebase can feel scary.
+  - You can always reach out to our team. We're very happy to walk you through the process to set
+    you up for success.
+
 Please use our [codemod package](https://github.com/Workday/canvas-kit/tree/master/modules/codemod)
 to automatically update your code to work with most of the breaking changes in v9.
 
