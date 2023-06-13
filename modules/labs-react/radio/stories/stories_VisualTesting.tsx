@@ -70,12 +70,12 @@ export const RadioStates = () => {
         >
           {props => (
             <RadioGroup>
-              <RadioGroup.Label disabled={props.disabled}>
-                <RadioGroup.Label.Input {...props} />
+              <RadioGroup.Label disabled={props.disabled} {...props}>
+                <RadioGroup.Label.Input checked={props.checked} />
                 <RadioGroup.Label.Text>Email</RadioGroup.Label.Text>
               </RadioGroup.Label>
-              <RadioGroup.Label disabled={props.disabled}>
-                <RadioGroup.Label.Input {...props} />
+              <RadioGroup.Label disabled={props.disabled} {...props}>
+                <RadioGroup.Label.Input checked={props.checked} />
                 <RadioGroup.Label.Text>Phone</RadioGroup.Label.Text>
               </RadioGroup.Label>
             </RadioGroup>
