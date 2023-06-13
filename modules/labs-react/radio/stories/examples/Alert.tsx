@@ -12,8 +12,6 @@ export const Alert = () => {
     }
   };
 
-  const model = {value, change: handleChange};
-
   return (
     <FormField
       error={FormField.ErrorType.Alert}

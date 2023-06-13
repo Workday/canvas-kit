@@ -7,10 +7,11 @@ import {RadioLabelProps} from './RadioLabel';
 export const Radio = createSubcomponent('input')({
   displayName: 'Radio',
   modelHook: useRadioModel,
-})<RadioLabelProps>(({children, ref, ...elemProps}) => {
+})<RadioLabelProps>(({children, value, checked, variant, ref, ...elemProps}) => {
+  console.log(value);
   return (
-    <RadioGroup.Label {...elemProps}>
-      <RadioGroup.Label.Input {...elemProps} ref={ref} />
+    <RadioGroup.Label variant={variant} {...elemProps}>
+      <RadioGroup.Label.Input value={value} {...elemProps} ref={ref} />
       <RadioGroup.Label.Text>{children}</RadioGroup.Label.Text>
     </RadioGroup.Label>
   );

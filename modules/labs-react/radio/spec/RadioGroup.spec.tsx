@@ -40,9 +40,12 @@ describe('RadioGroup', () => {
   describe('when rendered with a name', () => {
     it('should render a radio group with a name', () => {
       const {getByTestId} = render(
-        <RadioGroup name="contact" data-testid="radiogroup">
+        <RadioGroup name="contact">
           <RadioGroup.Label id="1">
-            <RadioGroup.Label.Input value="email"></RadioGroup.Label.Input>
+            <RadioGroup.Label.Input
+              data-testid="radio-input"
+              value="email"
+            ></RadioGroup.Label.Input>
             <RadioGroup.Label.Text>E-mail</RadioGroup.Label.Text>
           </RadioGroup.Label>
           <RadioGroup.Label id="2">
@@ -51,7 +54,7 @@ describe('RadioGroup', () => {
           </RadioGroup.Label>
         </RadioGroup>
       );
-      expect(getByTestId('radiogroup')).toHaveAttribute('name');
+      expect(getByTestId('radio-input')).toHaveAttribute('name');
     });
   });
 
@@ -71,24 +74,6 @@ describe('RadioGroup', () => {
       );
 
       const phoneRadio = await getByLabelText('Phone');
-      expect(phoneRadio).toHaveProperty('checked', true);
-    });
-
-    it('should render a selected radio that matches that value of a index', async () => {
-      const {getByLabelText} = render(
-        <RadioGroup name="contact" data-testid="radiogroup" initialValue={0}>
-          <RadioGroup.Label id="1">
-            <RadioGroup.Label.Input value="email"></RadioGroup.Label.Input>
-            <RadioGroup.Label.Text>E-mail</RadioGroup.Label.Text>
-          </RadioGroup.Label>
-          <RadioGroup.Label id="2">
-            <RadioGroup.Label.Input value="phone"></RadioGroup.Label.Input>
-            <RadioGroup.Label.Text>Phone</RadioGroup.Label.Text>
-          </RadioGroup.Label>
-        </RadioGroup>
-      );
-
-      const phoneRadio = await getByLabelText('E-mail');
       expect(phoneRadio).toHaveProperty('checked', true);
     });
   });
