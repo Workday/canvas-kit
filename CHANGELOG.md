@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v8.6.15](https://github.com/Workday/canvas-kit/releases/tag/v8.6.15) (2023-06-14)
+
+### Components
+
+- fix(collection): Default `T` to `any` to allow overriding children types ([#2254](https://github.com/Workday/canvas-kit/pull/2254)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v8.6.14](https://github.com/Workday/canvas-kit/releases/tag/v8.6.14) (2023-06-12)
 
 ### Components
