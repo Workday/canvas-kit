@@ -69,7 +69,6 @@ export const DynamicTabs = () => {
           addTab
         );
       });
-      model.events.goTo({id: 'add'});
     }
   };
 

@@ -4,7 +4,7 @@ import {useForm, FieldErrorsImpl} from 'react-hook-form';
 import {object, SchemaOf, string} from 'yup';
 
 import {TextInput} from '@workday/canvas-kit-preview-react/text-input';
-import {HStack, VStack} from '@workday/canvas-kit-react/layout';
+import {Flex} from '@workday/canvas-kit-react/layout';
 import {TertiaryButton, PrimaryButton} from '@workday/canvas-kit-react/button';
 import {visibleIcon, invisibleIcon} from '@workday/canvas-system-icons-web';
 import {useUniqueId} from '@workday/canvas-kit-react/common';
@@ -91,7 +91,7 @@ export const TextInputWithReactHookForm = () => {
 
   return (
     <form onSubmit={onSubmit} action=".">
-      <VStack spacing="xs" alignItems="flex-start">
+      <Flex gap="xs" flexDirection="column" alignItems="flex-start">
         <TextInput orientation="vertical" isRequired={true} hasError={!!errors.email}>
           <TextInput.Label>Email</TextInput.Label>
           <TextInput.Field
@@ -108,7 +108,7 @@ export const TextInputWithReactHookForm = () => {
           hasError={!!errors.password}
         >
           <TextInput.Label>Password</TextInput.Label>
-          <HStack spacing="xxs">
+          <Flex gap="xxs">
             <TextInput.Field
               {...passwordRegistration}
               type={showPassword ? 'text' : 'password'}
@@ -126,12 +126,12 @@ export const TextInputWithReactHookForm = () => {
                 passwordRef.current?.focus();
               }}
             />
-          </HStack>
+          </Flex>
           <TextInput.Hint>{errors.password?.message || passwordHint}</TextInput.Hint>
         </TextInput>
 
         <PrimaryButton type="submit">Submit</PrimaryButton>
-      </VStack>
+      </Flex>
     </form>
   );
 };

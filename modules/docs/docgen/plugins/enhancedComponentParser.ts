@@ -569,7 +569,7 @@ function getNonDefaultNonLayoutProps(
   displayName: string | undefined,
   props: ObjectProperty[]
 ): ObjectProperty[] {
-  if (displayName && ['Stack', 'Flex', 'Box', 'Grid'].includes(displayName)) {
+  if (displayName && ['Flex', 'Box', 'Grid'].includes(displayName)) {
     return props;
   }
   return props.filter(p => {
@@ -875,15 +875,6 @@ function getStyleComponent(
     return {
       kind: 'symbol',
       name: 'Grid',
-    };
-  }
-  if (
-    props.some(p => p.declarations[0]?.filePath.includes('utils/stack.ts')) &&
-    displayName !== 'Stack'
-  ) {
-    return {
-      kind: 'symbol',
-      name: 'Stack',
     };
   }
   if (

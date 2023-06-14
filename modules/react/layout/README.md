@@ -141,17 +141,11 @@ Default: `12`
 # Flex
 
 View the
-[documentation for Flex](http://workday.github.io/canvas-kit/?path=/docs/components-containers-layout-flex--usage)
-on Storybook.
-
-# Stack
-
-View the
-[documentation for Stack](http://workday.github.io/canvas-kit/?path=/docs/components-containers-layout-stack--basic-stack)
+[documentation for Flex](https://workday.github.io/canvas-kit/?path=/docs/components-containers-flex--basic)
 on Storybook.
 
 # Box
 
 View the
-[documentation for Stack](http://workday.github.io/canvas-kit/?path=/docs/components-containers-layout-box--as#box)
+[documentation for Box](https://workday.github.io/canvas-kit/?path=/docs/components-containers-box--basic)
 on Storybook.

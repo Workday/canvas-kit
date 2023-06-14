@@ -83,7 +83,7 @@ export const Menu = createContainer()({
      *   return (
      *     <Menu model={model}>
      *       <Menu.List>
-     *         {(item) => <Menu.Item name={item.id}>{item.text}</Menu.Item>}
+     *         {(item) => <Menu.Item data-id={item.id}>{item.text}</Menu.Item>}
      *       </Menu.List>
      *     </Menu>
      *   )
@@ -92,9 +92,11 @@ export const Menu = createContainer()({
      */
     List: MenuList,
     /**
-     * A menu item has an optional `name` prop that identifies the item in the menu list and will be
-     * passed to the optional `onSelect` callback of the menu model. A menu item can contain any
-     * HTML. If more complex HTML is provided, consider
+     * A `Menu.Item` has an optional `data-id` prop that identifies the item in the `Menu.List` and
+     * will be passed to the optional `onSelect` callback of the `Menu` model. A `Menu.Item` can
+     * contain any HTML. If more complex HTML is provided, add `data-text` to the `Menu.Item`
+     * component if using the static API. If you're using the dynamic API, pass `getTextValue` to
+     * the model.
      */
     Item: MenuItem,
     Divider: MenuDivider,

@@ -4,7 +4,7 @@ import {useFormik} from 'formik';
 import {object, SchemaOf, string} from 'yup';
 
 import {TextInput} from '@workday/canvas-kit-preview-react/text-input';
-import {HStack, VStack} from '@workday/canvas-kit-react/layout';
+import {Flex} from '@workday/canvas-kit-react/layout';
 import {TertiaryButton, PrimaryButton} from '@workday/canvas-kit-react/button';
 import {visibleIcon, invisibleIcon} from '@workday/canvas-system-icons-web';
 import {useUniqueId} from '@workday/canvas-kit-react/common';
@@ -50,7 +50,7 @@ export const TextInputWithFormik = () => {
 
   return (
     <form onSubmit={formik.handleSubmit} action=".">
-      <VStack spacing="xs" alignItems="flex-start">
+      <Flex gap="xs" flexDirection="column" alignItems="flex-start">
         <TextInput
           orientation="vertical"
           isRequired={true}
@@ -74,7 +74,7 @@ export const TextInputWithFormik = () => {
           isRequired={true}
         >
           <TextInput.Label>Password</TextInput.Label>
-          <HStack spacing="xxs">
+          <Flex gap="xxs">
             <TextInput.Field
               type={showPassword ? 'text' : 'password'}
               name="password"
@@ -95,14 +95,14 @@ export const TextInputWithFormik = () => {
                 passwordRef.current?.focus();
               }}
             />
-          </HStack>
+          </Flex>
           <TextInput.Hint>
             {(formik.touched.password && formik.errors.password) || passwordHint}
           </TextInput.Hint>
         </TextInput>
 
         <PrimaryButton type="submit">Submit</PrimaryButton>
-      </VStack>
+      </Flex>
     </form>
   );
 };

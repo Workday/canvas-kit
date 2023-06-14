@@ -1,13 +1,12 @@
 import * as React from 'react';
 import {createComponent, useIsRTL} from '@workday/canvas-kit-react/common';
-import {HStack, HStackProps, StackSpacing} from '@workday/canvas-kit-react/layout';
+import {Flex, FlexProps} from '@workday/canvas-kit-react/layout';
 
 import {PaginationContext} from '../usePaginationModel';
 import {GoToContext, useGoToForm} from './useGoToForm';
 
-export interface GoToFormProps extends Omit<HStackProps, 'spacing'> {
+export interface GoToFormProps extends FlexProps {
   onSubmit?: React.FormEventHandler<HTMLFormElement>;
-  spacing?: StackSpacing;
 }
 
 export const GoToForm = createComponent('form')({
@@ -19,18 +18,18 @@ export const GoToForm = createComponent('form')({
 
     return (
       <GoToContext.Provider value={goToContext}>
-        <HStack
+        <Flex
           ref={ref}
           as={Element}
           alignItems="center"
-          spacing="xxs"
+          gap="xxs"
           paddingLeft={shouldUseRTL ? 'xxs' : undefined}
           paddingRight={shouldUseRTL ? 'xxs' : undefined}
           {...formProps}
           {...elemProps}
         >
           {children}
-        </HStack>
+        </Flex>
       </GoToContext.Provider>
     );
   },
