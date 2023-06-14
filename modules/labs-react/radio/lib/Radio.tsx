@@ -8,7 +8,6 @@ export const Radio = createSubcomponent('input')({
   displayName: 'Radio',
   modelHook: useRadioModel,
 })<RadioLabelProps>(({children, value, variant, ref, ...elemProps}) => {
-  // console.log(value);
   return (
     <RadioGroup.Label variant={variant} {...elemProps}>
       <RadioGroup.Label.Input value={value} {...elemProps} ref={ref} />
