@@ -5,7 +5,7 @@ import {useSelectionListModel} from './useSelectionListModel';
 // `SelectionListModel` and renames to `List*`. Without interfaces like this, the result would be
 // `SelectionList*` which is confusing to users, but the separation is easier to maintain
 
-export type ListProps<T = unknown> = {
+export type ListProps<T = any> = {
   children: React.ReactNode | ((item: T) => React.ReactNode);
 };
 
