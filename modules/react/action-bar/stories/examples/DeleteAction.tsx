@@ -6,7 +6,7 @@ import {DeleteButton} from '@workday/canvas-kit-react/button';
 export const DeleteAction = () => {
   return (
     <ActionBar>
-      <ActionBar.List position="relative">
+      <ActionBar.List position="relative" aria-label="actions">
         <ActionBar.Item as={DeleteButton}>Delete Action</ActionBar.Item>
         <ActionBar.Item>Second Action</ActionBar.Item>
       </ActionBar.List>

@@ -157,15 +157,15 @@ export class FormField extends React.Component<React.PropsWithChildren<FormField
       if (typeof this.props.error !== 'undefined') {
         props.error = this.props.error;
 
-        if (this.props.hintId) {
-          props['aria-describedby'] = this.props.hintId;
-        }
-
         if (this.props.error === ErrorType.Error) {
           props['aria-invalid'] = true;
         }
       }
 
+      if (this.props.hintId) {
+        props['aria-describedby'] = this.props.hintId;
+      }
+      
       if (this.props.required) {
         props.required = true;
       }

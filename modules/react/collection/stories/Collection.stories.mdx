@@ -3,7 +3,9 @@ import {SymbolDoc} from '@workday/canvas-kit-docs';
 import {ListBox} from '@workday/canvas-kit-react/collection';
 
 import {Basic} from './examples/Basic';
+import {StringChildren} from './examples/StringChildren';
 import {DynamicItems} from './examples/DynamicItems';
+import {DataLoader} from './examples/DataLoader';
 import {BasicVirtual} from './examples/BasicVirtual';
 import {IdentifiedItems} from './examples/IdentifiedItems';
 import {RovingFocus} from './examples/RovingFocus';
@@ -34,7 +36,7 @@ yarn add @workday/canvas-kit-react
 The `ListBox` on its own isn't very useful. It registers each item with the model. The
 `ListBox.Item` only uses the `useListItemRegister` hook which handles registration of static items
 to the model. The `ListBox` uses `useListRenderItems` which handles rendering static items as well
-as [Dynamic List](#dynamic-list) example).
+as [Dynamic List](#dynamic-list) example.
 
 <ExampleCodeBlock code={Basic} />
 
@@ -58,6 +60,19 @@ item, which could cause problems for popup menus. If your item count is low, pas
 `shouldVirtualize={false}` to disable virtualization.
 
 <ExampleCodeBlock code={DynamicItems} />
+
+### DataLoader
+
+The collection system comes with a data loader to help with dynamic collections. You must provide
+`total`, `pageSize`, and an asynchronous `load` function. The loader will call the `load` function
+when the user navigates the collection and needs more data. This example shows how to hook up a
+simple data loader and mocks a `load` function to simulate an asynchronous response.
+
+The data loader also takes a model argument to know which model to create. The loader configures the
+model to handle asynchronous keyboard navigation and will return the configured model to you to pass
+along to the collection component.
+
+<ExampleCodeBlock code={DataLoader} />
 
 #### Roving Tabindex
 
@@ -88,6 +103,16 @@ uses `ListBox` and creates a custom `SelectableItem` elemProps hook and componen
 
 <ExampleCodeBlock code={Selection} />
 
+### String Children
+
+Sometimes it is desired to allow the string children to be the identifiers for each item. This could
+be useful for autocomplete components where the item's text is the desired identifier. Normally, if
+no `data-id` is provided to the item, the system will choose the registration index. This would be
+`'0'`, `'1'`, and so on. By passing `useListItemAllowChildStrings` to an item component, it will
+change this behavior to use the child text if no `data-id` is provided.
+
+<ExampleCodeBlock code={StringChildren} />
+
 #### Multiple Selection
 
 The `selection` manager can be passed directly to the model configuration to handle different
@@ -117,10 +142,8 @@ cursor wraps around columns and rows when an edge of a column or row is encounte
 
 ### ListBox
 
-<>
 <SymbolDoc name="ListBox" fileName="/react/" />
 <SymbolDoc name="useGridModel" fileName="/react/" />
-</>
 
 ### Navigation Manager
 
@@ -144,34 +167,13 @@ columns, but not rows. This is the default navigation manager for lists.
 
 ## Hooks
 
-### `useListItemRegister`
-
 <SymbolDoc name="useListItemRegister" fileName="/react/" />
-
-### `useListItemRovingFocus`
-
+<SymbolDoc name="useListItemAllowChildStrings" fileName="/react/" />
 <SymbolDoc name="useListItemRovingFocus" fileName="/react/" />
-
-### `useListItemSelect`
-
 <SymbolDoc name="useListItemSelect" fileName="/react/" />
-
-### `useListRenderItems`
-
 <SymbolDoc name="useListRenderItems" fileName="/react/" />
-
-### `useListResetCursorOnBlur`
-
 <SymbolDoc name="useListResetCursorOnBlur" fileName="/react/" />
-
-### `useOverflowListItemMeasure`
-
 <SymbolDoc name="useOverflowListItemMeasure" fileName="/react/" />
-
-### `useOverflowListMeasure`
-
 <SymbolDoc name="useOverflowListMeasure" fileName="/react/" />
-
-### `useOverflowListTarget`
-
 <SymbolDoc name="useOverflowListTarget" fileName="/react/" />
+<SymbolDoc name="useListLoader" fileName="/react/" />

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {createElemPropsHook} from '@workday/canvas-kit-react/common';
-import {orientationKeyMap} from './useListItemRovingFocus';
+import {orientationKeyMap} from './keyUtils';
 import {useListModel} from './useListModel';
 
 /**

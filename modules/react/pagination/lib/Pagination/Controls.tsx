@@ -8,7 +8,7 @@ import {
   chevron2xRightSmallIcon,
 } from '@workday/canvas-system-icons-web';
 
-import {HStack} from '@workday/canvas-kit-react/layout';
+import {Flex} from '@workday/canvas-kit-react/layout';
 import {useRTL} from './common/utils/useRTL';
 import {PaginationContext} from './usePaginationModel';
 
@@ -21,7 +21,7 @@ export interface PaginationControlsProps {}
 export const PaginationControls = createComponent('div')({
   displayName: 'Pagination.Controls',
   Component(elemProps: PaginationControlsProps, ref, Element) {
-    return <HStack ref={ref} as={Element} spacing="xxxs" alignItems="center" {...elemProps} />;
+    return <Flex ref={ref} as={Element} gap="xxxs" alignItems="center" {...elemProps} />;
   },
 });
 

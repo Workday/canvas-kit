@@ -1,5 +1,4 @@
 import {getTransformFromPlacement} from '../lib/getTransformFromPlacement';
-import each from 'lodash/each';
 import {Placement} from '@popperjs/core';
 
 describe('getTransformFromPlacement', () => {
@@ -54,7 +53,8 @@ describe('getTransformFromPlacement', () => {
     },
   } as const;
 
-  each(io, (expected, placement) => {
+  Object.keys(io).forEach(placement => {
+    const expected = io[placement];
     it(`given a placement of '${placement}' should return vertical of '${expected.vertical}' and horizontal of '${expected.horizontal}'`, () => {
       expect(getTransformFromPlacement(placement as Placement)).toEqual(expected);
     });

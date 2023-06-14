@@ -296,7 +296,7 @@ export const BaseButton = createComponent('button')({
   displayName: 'Button',
   Component: ({children, ...elemProps}: ButtonContainerProps, ref, Element) => {
     return (
-      <ButtonContainer as={Element} ref={ref} {...elemProps}>
+      <ButtonContainer as={Element} ref={ref} type="button" {...elemProps}>
         {children}
       </ButtonContainer>
     );
