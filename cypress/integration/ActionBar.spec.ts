@@ -72,9 +72,9 @@ describe('Action Bar', () => {
       cy.findByLabelText('More actions').should('have.attr', 'aria-expanded', 'false');
     });
 
-    context('when action list container is only 440px wide', () => {
+    context('when action list container is only 420px wide', () => {
       beforeEach(() => {
-        cy.findByRole('button', {name: '440px'}).click();
+        cy.findByRole('button', {name: '420px'}).click();
       });
 
       it('should have 3 buttons inside the "actions"', () => {
@@ -113,7 +113,7 @@ describe('Action Bar', () => {
 
     context('when action list container is only 320px wide', () => {
       beforeEach(() => {
-        cy.findByRole('button', {name: '320px'}).click();
+        cy.findByRole('button', {name: 'Extra Small'}).click();
       });
 
       it('should have 2 buttons inside the "actions"', () => {
@@ -150,4 +150,34 @@ describe('Action Bar', () => {
       });
     });
   });
+
+  context(
+    'when [Components/Buttons/Action Bar, Overflow Action Bar Custom Button Count] story is rendered',
+    () => {
+      beforeEach(() => {
+        h.stories.load('Components/Buttons/Action Bar', 'Overflow Action Bar Custom Button Count');
+      });
+
+      it('should pass axe checks', () => {
+        cy.checkA11y();
+      });
+
+      it('should have 3 visible buttons inside the "actions"', () => {
+        cy.findByLabelText('actions')
+          .findAllByRole('button')
+          .should('have.length', 3);
+      });
+
+      it('should focus on the "More" button', () => {
+        cy.findByRole('button', {name: 'More actions'}).should('be.visible');
+      });
+
+      it('should have button inside the "menu"', () => {
+        cy.findByRole('button', {name: 'More actions'}).click();
+        cy.findByRole('menu')
+          .findAllByRole('menuitem')
+          .should('have.length', 1);
+      });
+    }
+  );
 });
