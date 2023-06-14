@@ -8,7 +8,7 @@ import {Text} from '@workday/canvas-kit-react/text';
 export const RadioText = createSubcomponent('span')({
   displayName: 'RadioButton.Text',
   modelHook: useRadioModel,
-})(({children}: ExtractProps<typeof Text>, Element) => {
+})(({children, ...elemProps}: ExtractProps<typeof Text>, Element) => {
   const {disabled, variant} = React.useContext(RadioLabelContext);
 
   return (
@@ -23,9 +23,10 @@ export const RadioText = createSubcomponent('span')({
             : inputColors.disabled.text
           : variant === 'inverse'
           ? colors.frenchVanilla100
-          : 'inherit',
+          : elemProps.color,
       }}
       typeLevel="subtext.large"
+      {...elemProps}
     >
       {children}
     </Text>

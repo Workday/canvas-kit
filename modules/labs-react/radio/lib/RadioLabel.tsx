@@ -17,12 +17,13 @@ export interface RadioLabelProps
     ExtractProps<typeof Flex, never>,
     RadioLabelContextInterface {
   /**
-   * The Radio input and label children of RadioButton
+   * The Radio input and label children of RadioLabel
    */
   children?: React.ReactNode;
 }
 
 export const RadioLabelContext = React.createContext({} as RadioLabelContextInterface);
+
 export const RadioLabel = createSubcomponent('label')({
   displayName: 'Radio.Label',
   modelHook: useRadioModel,

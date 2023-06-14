@@ -19,7 +19,7 @@ export const Error = () => {
       error={FormField.ErrorType.Error}
       hintText="Deep Dish is currently sold out."
     >
-      <RadioGroup name="crust" initialValue="deep-dish">
+      <RadioGroup name="crust" initialValue={value}>
         <RadioGroup.Radio value="deep-dish">Deep Dish (Sold Out)</RadioGroup.Radio>
         <RadioGroup.Radio value="thin">Thin</RadioGroup.Radio>
         <RadioGroup.Radio value="gluten-free">Gluten Free</RadioGroup.Radio>

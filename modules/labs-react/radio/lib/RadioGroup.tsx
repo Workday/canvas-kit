@@ -19,11 +19,46 @@ export interface RadioGroupProps extends Themeable, ExtractProps<typeof Flex, ne
   error?: ErrorType;
 }
 
+/**
+ * When you have a group of radio inputs, use RadioGroup
+ * **Note:** You must provide a `name`. This ensures that each `input` has a `name` attribute which groups the inputs.
+ *
+ * ```tsx
+ * <RadioGroup name="pizza-crust" initialValue="thin">
+ *    <RadioGroup.Radio value="deep-dish">Deep Dish</RadioGroup.Radio>
+ *    <RadioGroup.Radio value="thin">Thin</RadioGroup.Radio>
+ * </RadioGroup>
+ * ```
+ */
 export const RadioGroup = createContainer(Flex)({
   displayName: 'RadioGroup',
   modelHook: useRadioModel,
   subComponents: {
+    /**
+     * Use this if you want more control over the text and input.
+     * This will render a `label` element that wraps its subcomponents of `Text` and `Input`
+     *
+     * ```tsx
+     * <RadioGroup name"pizza-crust"" initialValue="deep-dish">
+     *    <RadioGroup.Label>
+     *      <RadioGroup.Label.Input checked value="deep-dish" />
+     *      <RadioGroup.Label.Text>Deep Dish</RadioGroup.Label.Text>
+     *    </RadioGroup.Label>
+     * </RadioGroup>
+     * ```
+     */
     Label: RadioLabel,
+    /**
+     * This a simplified component that renders a `label` and `input` element with children being the text for the radio.
+     * In most cases you will use this component
+     *
+     * ```tsx
+     * <RadioGroup name="pizza-crust" initialValue="thin">
+     *    <RadioGroup.Radio value="deep-dish">Deep Dish</RadioGroup.Radio>
+     *    <RadioGroup.Radio value="thin">Thin</RadioGroup.Radio>
+     * </RadioGroup>
+     * ```
+     */
     Radio: Radio,
   },
 })<RadioGroupProps>(({children, error, theme, ...elemProps}, Element, model) => {

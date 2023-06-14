@@ -7,13 +7,7 @@ import {
   createSubcomponent,
   createElemPropsHook,
 } from '@workday/canvas-kit-react/common';
-import {
-  colors,
-  inputColors,
-  spaceNumbers,
-  borderRadius,
-  space,
-} from '@workday/canvas-kit-react/tokens';
+import {colors, inputColors, spaceNumbers, borderRadius} from '@workday/canvas-kit-react/tokens';
 import {useRadioModel} from './hooks/useRadioModel';
 import {RadioLabelProps, RadioLabelContext} from './RadioLabel';
 import {Box, Flex} from '@workday/canvas-kit-react/layout';
@@ -146,15 +140,19 @@ const RadioInputWrapper = styled(Flex)<Pick<RadioLabelProps, 'disabled' | 'varia
 );
 
 const useRadioInput = createElemPropsHook(useRadioModel)(
-  (model, ref, elemProps: {value?: string} = {}) => {
+  (model, ref, elemProps: {value?: string; checked?: boolean} = {}) => {
     const {disabled, variant} = React.useContext(RadioLabelContext);
     return {
       disabled: disabled,
       variant: variant,
       checked:
-        elemProps.value === model.state.value || elemProps.value === model.state.initialValue,
+        elemProps.value === model.state.value ||
+        elemProps.value === model.state.initialValue ||
+        elemProps.checked,
       'aria-checked':
-        elemProps.value === model.state.value || elemProps.value === model.state.initialValue,
+        elemProps.value === model.state.value ||
+        elemProps.value === model.state.initialValue ||
+        elemProps.checked,
       onChange(event: React.ChangeEvent<HTMLInputElement>) {
         model.onChange(event);
       },
@@ -165,21 +163,17 @@ const useRadioInput = createElemPropsHook(useRadioModel)(
 export const RadioInput = createSubcomponent('input')({
   modelHook: useRadioModel,
   elemPropsHook: useRadioInput,
-})<RadioLabelProps>(({children, ...elemProps}, Element, model) => {
+})<RadioLabelProps>(({children, disabled, checked, ...elemProps}, Element, model) => {
   return (
-    <RadioInputWrapper
-      height="18px"
-      width="18px"
-      flex="0 0 auto"
-      variant={elemProps.variant}
-      className={elemProps.className}
-    >
+    <RadioInputWrapper height="18px" width="18px" flex="0 0 auto" {...elemProps}>
       <StyledRadioInput
         borderRadius="circle"
         position="absolute"
         margin="zero"
         as={Element}
         type="radio"
+        checked={checked}
+        disabled={disabled}
         {...elemProps}
       />
     </RadioInputWrapper>
