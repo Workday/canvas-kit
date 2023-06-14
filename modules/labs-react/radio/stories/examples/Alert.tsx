@@ -20,8 +20,6 @@ export const Alert = () => {
       label="Choose Your Pizza Crust"
       useFieldset={true}
     >
-      {/* <RadioGroup name="crust" onChange={handleChange} value={value}> */}
-
       <RadioGroup name="crust" onChange={handleChange} initialValue={value}>
         <RadioGroup.Label>
           <RadioGroup.Label.Input value="deep-dish" />

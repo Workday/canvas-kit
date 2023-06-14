@@ -16,26 +16,16 @@ export const Basic = () => {
   return (
     <Flex flexDirection="column">
       <FormField label="Choose Your Pizza Crust" useFieldset={true}>
-        <RadioGroup name="pizza-crust" onChange={handleChange} initialValue={value} value={value}>
-          <RadioGroup.Label>
-            <RadioGroup.Label.Input value="deep-dish" />
-            <RadioGroup.Label.Text>Deep Dish Poop</RadioGroup.Label.Text>
-          </RadioGroup.Label>
-          <RadioGroup.Label>
-            <RadioGroup.Label.Input value="thin" />
-            <RadioGroup.Label.Text>Thin</RadioGroup.Label.Text>
-          </RadioGroup.Label>
-          <RadioGroup.Label>
-            <RadioGroup.Label.Input value="gluten-free" />
-            <RadioGroup.Label.Text>Gluten Free</RadioGroup.Label.Text>
-          </RadioGroup.Label>
-          <RadioGroup.Label>
-            <RadioGroup.Label.Input value="custom" />
-            <RadioGroup.Label.Text>
-              My favorite pizza crust flavor is butter because it's the best thing to put on bread
-            </RadioGroup.Label.Text>
-          </RadioGroup.Label>
-          <RadioGroup.Radio value="cauliflower">Cauliflower</RadioGroup.Radio>
+        <RadioGroup name="pizza-crust" onChange={handleChange} width="200px">
+          <RadioGroup.Radio value="deep-dish">Deep Dish</RadioGroup.Radio>
+          <RadioGroup.Radio value="gluten-free">Gluten Free</RadioGroup.Radio>
+          <RadioGroup.Radio checked={true} value="cauliflower">
+            Cauliflower
+          </RadioGroup.Radio>
+          <RadioGroup.Radio value="custom">
+            My favorite pizza crust flavor is butter because it's the best thing to put on bread
+          </RadioGroup.Radio>
+          <RadioGroup.Radio value="thin">Thin</RadioGroup.Radio>
         </RadioGroup>
       </FormField>
       Value selected: {value}
