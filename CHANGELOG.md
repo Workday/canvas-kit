@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v9.0.13](https://github.com/Workday/canvas-kit/releases/tag/v9.0.13) (2023-06-14)
+
+### Components
+
+- fix: Popper placements export in fallbackPlacements ([#2255](https://github.com/Workday/canvas-kit/pull/2255)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v8.6.16](https://github.com/Workday/canvas-kit/releases/tag/v8.6.16) (2023-06-14)
 
 ### Components
