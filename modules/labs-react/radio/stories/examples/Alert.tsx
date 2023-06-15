@@ -16,27 +16,21 @@ export const Alert = () => {
     <FormField
       error={FormField.ErrorType.Alert}
       hintId="hint-alert"
+      inputId="alert"
       hintText="Deep dish is an extra $2.99"
       label="Choose Your Pizza Crust"
       useFieldset={true}
     >
-      <RadioGroup name="crust" onChange={handleChange} initialValue={value}>
-        <RadioGroup.Label>
-          <RadioGroup.Label.Input value="deep-dish" />
-          <RadioGroup.Label.Text>Deep dish</RadioGroup.Label.Text>
-        </RadioGroup.Label>
-        <RadioGroup.Label>
-          <RadioGroup.Label.Input value="thin" />
-          <RadioGroup.Label.Text>Thin</RadioGroup.Label.Text>
-        </RadioGroup.Label>
-        <RadioGroup.Label>
-          <RadioGroup.Label.Input value="gluten-free" />
-          <RadioGroup.Label.Text>Gluten Free</RadioGroup.Label.Text>
-        </RadioGroup.Label>
-        <RadioGroup.Label>
-          <RadioGroup.Label.Input value="cauliflower" />
-          <RadioGroup.Label.Text>Cauliflower</RadioGroup.Label.Text>
-        </RadioGroup.Label>
+      <RadioGroup
+        name="crust"
+        onChange={handleChange}
+        initialValue={value}
+        aria-describedby="hint-alert"
+      >
+        <RadioGroup.Radio value="deep-dish">Deep dish</RadioGroup.Radio>
+        <RadioGroup.Radio value="thin">Thin</RadioGroup.Radio>
+        <RadioGroup.Radio value="gluten-free">Gluten Free</RadioGroup.Radio>
+        <RadioGroup.Radio value="cauliflower">Cauliflower</RadioGroup.Radio>
       </RadioGroup>
     </FormField>
   );

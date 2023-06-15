@@ -17,10 +17,14 @@ export const Error = () => {
       label="Choose Your Pizza Crust"
       useFieldset={true}
       error={FormField.ErrorType.Error}
+      hintId="error"
       hintText="Deep Dish is currently sold out."
+      aria-describedby="error"
     >
       <RadioGroup name="crust" initialValue={value}>
-        <RadioGroup.Radio value="deep-dish">Deep Dish (Sold Out)</RadioGroup.Radio>
+        <RadioGroup.Radio aria-describedby="error" value="deep-dish">
+          Deep Dish (Sold Out)
+        </RadioGroup.Radio>
         <RadioGroup.Radio value="thin">Thin</RadioGroup.Radio>
         <RadioGroup.Radio value="gluten-free">Gluten Free</RadioGroup.Radio>
         <RadioGroup.Radio value="cauliflower">Cauliflower</RadioGroup.Radio>

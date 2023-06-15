@@ -143,6 +143,7 @@ const useRadioInput = createElemPropsHook(useRadioModel)(
   (model, ref, elemProps: {value?: string; checked?: boolean} = {}) => {
     const {disabled, variant} = React.useContext(RadioLabelContext);
     return {
+      'aria-describedby': model.state['aria-describedby'],
       disabled: disabled,
       variant: variant,
       checked:
@@ -163,19 +164,38 @@ const useRadioInput = createElemPropsHook(useRadioModel)(
 export const RadioInput = createSubcomponent('input')({
   modelHook: useRadioModel,
   elemPropsHook: useRadioInput,
-})<RadioLabelProps>(({children, disabled, checked, ...elemProps}, Element, model) => {
-  return (
-    <RadioInputWrapper height="18px" width="18px" flex="0 0 auto" {...elemProps}>
-      <StyledRadioInput
-        borderRadius="circle"
-        position="absolute"
-        margin="zero"
-        as={Element}
-        type="radio"
-        checked={checked}
-        disabled={disabled}
-        {...elemProps}
-      />
-    </RadioInputWrapper>
-  );
-});
+})<RadioLabelProps>(
+  (
+    {
+      children,
+      disabled,
+      checked,
+      value,
+      name,
+      'aria-checked': ariaChecked,
+      'aria-describedby': ariaDescribedby,
+      ...elemProps
+    },
+    Element,
+    model
+  ) => {
+    return (
+      <RadioInputWrapper height="18px" width="18px" flex="0 0 auto" {...elemProps}>
+        <StyledRadioInput
+          borderRadius="circle"
+          position="absolute"
+          margin="zero"
+          as={Element}
+          value={value}
+          name={name}
+          type="radio"
+          checked={checked}
+          aria-checked={ariaChecked}
+          aria-describedby={ariaDescribedby}
+          disabled={disabled}
+          {...elemProps}
+        />
+      </RadioInputWrapper>
+    );
+  }
+);
