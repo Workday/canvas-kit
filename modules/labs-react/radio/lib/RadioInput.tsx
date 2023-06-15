@@ -172,6 +172,7 @@ export const RadioInput = createSubcomponent('input')({
       checked,
       value,
       name,
+      variant,
       'aria-checked': ariaChecked,
       'aria-describedby': ariaDescribedby,
       ...elemProps
@@ -185,7 +186,7 @@ export const RadioInput = createSubcomponent('input')({
         width="18px"
         flex="0 0 auto"
         disabled={disabled}
-        {...elemProps}
+        variant={variant}
       >
         <StyledRadioInput
           borderRadius="circle"
@@ -197,6 +198,7 @@ export const RadioInput = createSubcomponent('input')({
           type="radio"
           checked={checked}
           aria-checked={ariaChecked}
+          variant={variant}
           aria-describedby={ariaDescribedby}
           disabled={disabled}
           {...elemProps}
