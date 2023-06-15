@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v9.0.14](https://github.com/Workday/canvas-kit/releases/tag/v9.0.14) (2023-06-15)
+
+### Documentation
+
+- docs: Update comment describing accessibleHide utility ([#2260](https://github.com/Workday/canvas-kit/pull/2260)) ([@vibdev](https://github.com/vibdev))
+
+
 ## [v9.0.13](https://github.com/Workday/canvas-kit/releases/tag/v9.0.13) (2023-06-14)
 
 ### Components
