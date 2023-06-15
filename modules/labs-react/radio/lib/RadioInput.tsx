@@ -128,13 +128,13 @@ const RadioInputWrapper = styled(Flex)<Pick<RadioLabelProps, 'disabled' | 'varia
       width: radioWidth,
       pointerEvents: 'none',
     },
-    '&:hover:before': {
-      boxShadow: `0 0 0 ${rippleRadius}px ${colors.soap200}`,
-    },
   },
-  ({variant}) => ({
+  ({variant, disabled}) => ({
     '::before': {
       opacity: variant === 'inverse' ? '0.4' : '1',
+    },
+    '&:hover:before': {
+      boxShadow: disabled ? undefined : `0 0 0 ${rippleRadius}px ${colors.soap200}`,
     },
   })
 );
@@ -180,7 +180,13 @@ export const RadioInput = createSubcomponent('input')({
     model
   ) => {
     return (
-      <RadioInputWrapper height="18px" width="18px" flex="0 0 auto" {...elemProps}>
+      <RadioInputWrapper
+        height="18px"
+        width="18px"
+        flex="0 0 auto"
+        disabled={disabled}
+        {...elemProps}
+      >
         <StyledRadioInput
           borderRadius="circle"
           position="absolute"

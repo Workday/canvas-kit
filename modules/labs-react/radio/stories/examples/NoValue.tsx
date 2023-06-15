@@ -8,7 +8,6 @@ export const NoValue = () => {
   const handleChange = (e: React.ChangeEvent) => {
     const target = e.currentTarget;
     if (target instanceof HTMLInputElement) {
-      console.log(target.value);
       setValue(target.value);
     }
   };

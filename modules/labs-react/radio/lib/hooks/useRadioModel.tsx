@@ -4,7 +4,7 @@ import {createModelHook} from '@workday/canvas-kit-react/common';
 
 export const useRadioModel = createModelHook({
   defaultConfig: {
-    'aria-describedby': '' as string | undefined,
+    'aria-describedby': undefined as string | undefined,
     /**
      * The common `name` passed to all Radio button children of the RadioGroup. This enables you to avoid specifying the `name` for each child.
      */
