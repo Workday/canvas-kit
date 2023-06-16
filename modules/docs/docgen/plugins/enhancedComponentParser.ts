@@ -678,6 +678,18 @@ function getSubcomponents(
           ) {
             const symbol = getSymbolFromNode(parser.checker, p.name);
             const jsDoc = findDocComment(parser.checker, symbol);
+
+            const initializerSymbol = getSymbolFromNode(parser.checker, p.initializer);
+
+            // Make sure the symbol exists AND the symbol has an alias
+            if (initializerSymbol && initializerSymbol.flags & ts.SymbolFlags.Alias) {
+              const initializerJsDoc = findDocComment(
+                parser.checker,
+                parser.checker.getAliasedSymbol(initializerSymbol)
+              );
+              jsDoc.declarations.push(initializerJsDoc.declarations[0]);
+            }
+
             return {
               name: p.name.text,
               symbol: p.initializer.text,
