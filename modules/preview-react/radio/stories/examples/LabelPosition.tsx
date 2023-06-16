@@ -1,9 +1,9 @@
 import React from 'react';
 import {FormField} from '@workday/canvas-kit-react/form-field';
-import {RadioGroup} from '@workday/canvas-kit-labs-react/radio';
+import {RadioGroup} from '@workday/canvas-kit-preview-react/radio';
 
-export const NoValue = () => {
-  const [value, setValue] = React.useState<string | number>(0);
+export const LabelPosition = () => {
+  const [value, setValue] = React.useState<string | number>('deep-dish');
 
   const handleChange = (e: React.ChangeEvent) => {
     const target = e.currentTarget;

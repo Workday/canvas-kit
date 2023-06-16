@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {render, fireEvent} from '@testing-library/react';
-import {RadioGroup} from '@workday/canvas-kit-labs-react/radio';
+import {RadioGroup} from '@workday/canvas-kit-preview-react/radio';
 
 describe('RadioInput', () => {
   const cb = jest.fn();

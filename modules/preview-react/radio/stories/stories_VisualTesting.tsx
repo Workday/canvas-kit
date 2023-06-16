@@ -7,13 +7,13 @@ import {
 } from '@workday/canvas-kit-react/testing';
 import {withSnapshotsEnabled, customColorTheme} from '../../../../utils/storybook';
 import {FormField} from '@workday/canvas-kit-react/form-field';
-import {RadioGroup} from '@workday/canvas-kit-labs-react/radio';
+import {RadioGroup} from '@workday/canvas-kit-preview-react/radio';
 
 const hintText = 'Helpful text goes here.';
 const hintId = 'error-desc-id';
 
 export default withSnapshotsEnabled({
-  title: 'Testing/Labs/Radio',
+  title: 'Testing/Preview/Radio',
   component: RadioGroup,
 });
 

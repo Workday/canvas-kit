@@ -1,6 +1,6 @@
 import React from 'react';
 import {FormField} from '@workday/canvas-kit-react/form-field';
-import {RadioGroup} from '@workday/canvas-kit-labs-react/radio';
+import {RadioGroup} from '@workday/canvas-kit-preview-react/radio';
 import {Flex} from '@workday/canvas-kit-react/layout';
 
 export const Basic = () => {

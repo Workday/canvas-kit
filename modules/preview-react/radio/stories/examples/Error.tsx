@@ -1,9 +1,9 @@
 import React from 'react';
 import {FormField} from '@workday/canvas-kit-react/form-field';
-import {RadioGroup} from '@workday/canvas-kit-labs-react/radio';
+import {RadioGroup} from '@workday/canvas-kit-preview-react/radio';
 
-export const Required = () => {
-  const [value, setValue] = React.useState<string | number>('');
+export const Error = () => {
+  const [value, setValue] = React.useState<string | number>('deep-dish');
 
   const handleChange = (e: React.ChangeEvent) => {
     const target = e.currentTarget;
@@ -11,23 +11,24 @@ export const Required = () => {
       setValue(target.value);
     }
   };
+
   return (
     <FormField
       label="Choose Your Pizza Crust"
-      required={true}
       useFieldset={true}
-      hintText="You must choose a crust"
-      hintId="choose-crust"
+      error={FormField.ErrorType.Error}
+      hintId="error"
+      hintText="Deep Dish is currently sold out."
     >
       <RadioGroup
         name="crust"
         onChange={handleChange}
-        value={value}
-        aria-describedby="choose-crust"
+        initialValue={value}
+        aria-describedby="error"
       >
-        <RadioGroup.Radio value="deep-dish">Deep Dish</RadioGroup.Radio>
+        <RadioGroup.Radio value="deep-dish">Deep Dish (Sold Out)</RadioGroup.Radio>
         <RadioGroup.Radio value="thin">Thin</RadioGroup.Radio>
-        <RadioGroup.Radio value="gluten-free">Gluten free</RadioGroup.Radio>
+        <RadioGroup.Radio value="gluten-free">Gluten Free</RadioGroup.Radio>
         <RadioGroup.Radio value="cauliflower">Cauliflower</RadioGroup.Radio>
       </RadioGroup>
     </FormField>

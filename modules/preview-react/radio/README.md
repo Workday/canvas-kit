@@ -16,7 +16,7 @@ yarn add @workday/canvas-kit-labs-react
 
 ```tsx
 import * as React from 'react';
-import {Radio} from '@workday/canvas-kit-labs-react/radio';
+import {Radio} from '@workday/canvas-kit-preview-react/radio';
 
 <Radio />;
 ```
