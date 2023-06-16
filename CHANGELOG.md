@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v9.0.15](https://github.com/Workday/canvas-kit/releases/tag/v9.0.15) (2023-06-16)
+
+### Documentation
+
+- docs: Add codemod preamble ([#2252](https://github.com/Workday/canvas-kit/pull/2252)) ([@alanbsmith](https://github.com/alanbsmith), [@jamesfan](https://github.com/jamesfan))
+
+
 ## [v9.0.14](https://github.com/Workday/canvas-kit/releases/tag/v9.0.14) (2023-06-15)
 
 ### Documentation
