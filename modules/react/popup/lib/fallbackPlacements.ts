@@ -1,6 +1,5 @@
 import {
   Placement as PopperJSPlacement,
-  placements,
   State,
   detectOverflow,
   SideObject,
@@ -9,6 +8,26 @@ import {
 } from '@popperjs/core';
 
 export type Placement = PopperJSPlacement; // Use template literals to make documentation list them out
+
+// We must use our own copy because the commonjs version of Popper doesn't export enums
+// https://github.com/floating-ui/floating-ui/issues/1325
+const placements: Placement[] = [
+  'top',
+  'top-start',
+  'top-end',
+  'bottom',
+  'bottom-start',
+  'bottom-end',
+  'right',
+  'right-start',
+  'right-end',
+  'left',
+  'left-start',
+  'left-end',
+  'auto',
+  'auto-start',
+  'auto-end'
+];
 
 const getOppositePlacement = (popperPlacement: Placement): Placement => {
   const [first, second] = popperPlacement.split('-');
