@@ -14,7 +14,7 @@ export const Inverse = () => {
 
   return (
     <Box backgroundColor="blueberry400" padding="s">
-      <RadioGroup name="crust" onChange={handleChange} initialValue={value}>
+      <RadioGroup name="crust" onChange={handleChange}>
         <RadioGroup.Radio variant="inverse" value="deep-dish">
           Deep Dish
         </RadioGroup.Radio>

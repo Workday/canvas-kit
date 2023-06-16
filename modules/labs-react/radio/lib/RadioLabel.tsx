@@ -31,19 +31,21 @@ export const RadioLabel = createSubcomponent('label')({
     Input: RadioInput,
     Text: RadioText,
   },
-})<RadioLabelProps>(({children, checked, variant, disabled, ...elemProps}, Element, model) => {
-  return (
-    <RadioLabelContext.Provider value={{variant, disabled, checked}}>
-      <Flex
-        as={Element}
-        alignItems="flex-start"
-        minHeight="m"
-        position="relative"
-        gap="xxs"
-        {...elemProps}
-      >
-        {children}
-      </Flex>
-    </RadioLabelContext.Provider>
-  );
-});
+})<RadioLabelProps>(
+  ({children, checked, variant, disabled, value, ...elemProps}, Element, model) => {
+    return (
+      <RadioLabelContext.Provider value={{variant, disabled, checked}}>
+        <Flex
+          as={Element}
+          alignItems="flex-start"
+          minHeight="m"
+          position="relative"
+          gap="xxs"
+          {...elemProps}
+        >
+          {children}
+        </Flex>
+      </RadioLabelContext.Provider>
+    );
+  }
+);

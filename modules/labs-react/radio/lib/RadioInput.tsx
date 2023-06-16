@@ -55,15 +55,28 @@ const StyledRadioInput = styled(Box.as('input'))<RadioLabelProps & StyledType>(
         ? colors.soap300
         : inputColors.border,
       height: '18px',
-
       width: '18px',
       justifyContent: 'center',
-      paddingY: '0px',
-      paddingX: '2px',
       pointerEvents: 'none',
       position: 'absolute',
       transition: 'border 200ms ease, background 200ms',
       opacity: disabled && variant === 'inverse' ? '.4' : '1',
+    },
+
+    '&:hover:after': {
+      borderColor: disabled
+        ? inputColors.disabled.border
+        : variant === 'inverse'
+        ? colors.soap300
+        : colors.licorice500,
+    },
+
+    '&:focus:after': {
+      borderColor: disabled
+        ? inputColors.disabled.border
+        : variant === 'inverse'
+        ? colors.soap300
+        : colors.blueberry400,
     },
 
     '&:checked:after': {
@@ -74,8 +87,9 @@ const StyledRadioInput = styled(Box.as('input'))<RadioLabelProps & StyledType>(
 
     '&:focus:after, &:focus:hover:after': {
       outline: 'transparent',
+
       ...focusRing({
-        width: variant === 'inverse' ? 2 : 2,
+        width: variant === 'inverse' ? 2 : 1,
         separation: 0,
         animate: false,
         innerColor: variant === 'inverse' ? colors.blackPepper400 : colors.frenchVanilla100,
