@@ -21,7 +21,7 @@ export const Alert = () => {
       useFieldset={true}
     >
       <RadioGroup
-        name="crust"
+        name="crust-alert"
         onChange={handleChange}
         initialValue={value}
         aria-describedby="hint-alert"

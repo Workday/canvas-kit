@@ -20,7 +20,7 @@ export const Required = () => {
       hintId="choose-crust"
     >
       <RadioGroup
-        name="crust"
+        name="crust-required"
         onChange={handleChange}
         value={value}
         aria-describedby="choose-crust"

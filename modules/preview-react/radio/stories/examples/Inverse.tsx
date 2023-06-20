@@ -28,7 +28,7 @@ export const Inverse = () => {
         labelPosition={FormField.LabelPosition.Top}
         useFieldset={true}
       >
-        <RadioGroup name="crust" onChange={handleChange} initialValue={value}>
+        <RadioGroup name="crust-inverse" onChange={handleChange} initialValue={value}>
           <RadioGroup.Radio variant="inverse" value="deep-dish">
             Deep Dish
           </RadioGroup.Radio>

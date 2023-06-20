@@ -21,7 +21,7 @@ export const Error = () => {
       hintText="Deep Dish is currently sold out."
     >
       <RadioGroup
-        name="crust"
+        name="crust-error"
         onChange={handleChange}
         initialValue={value}
         aria-describedby="error"
