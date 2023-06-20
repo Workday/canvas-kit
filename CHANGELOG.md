@@ -3,6 +3,106 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v9.0.15](https://github.com/Workday/canvas-kit/releases/tag/v9.0.15) (2023-06-16)
+
+### Documentation
+
+- docs: Add codemod preamble ([#2252](https://github.com/Workday/canvas-kit/pull/2252)) ([@alanbsmith](https://github.com/alanbsmith), [@jamesfan](https://github.com/jamesfan))
+
+
+## [v9.0.14](https://github.com/Workday/canvas-kit/releases/tag/v9.0.14) (2023-06-15)
+
+### Documentation
+
+- docs: Update comment describing accessibleHide utility ([#2260](https://github.com/Workday/canvas-kit/pull/2260)) ([@vibdev](https://github.com/vibdev))
+
+
+## [v9.0.13](https://github.com/Workday/canvas-kit/releases/tag/v9.0.13) (2023-06-14)
+
+### Components
+
+- fix: Popper placements export in fallbackPlacements ([#2255](https://github.com/Workday/canvas-kit/pull/2255)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v8.6.16](https://github.com/Workday/canvas-kit/releases/tag/v8.6.16) (2023-06-14)
+
+### Components
+
+- fix: Popper placements export in fallbackPlacements ([#2255](https://github.com/Workday/canvas-kit/pull/2255)) ([@NicholasBoll](https://github.com/NicholasBoll))
+## [v9.0.12](https://github.com/Workday/canvas-kit/releases/tag/v9.0.12) (2023-06-14)
+
+### Components
+
+- fix: Change Popup imports to prevent circular dependencies ([#2251](https://github.com/Workday/canvas-kit/pull/2251)) ([@MarcoASedano](https://github.com/MarcoASedano), marco.sedano)
+- fix(collection): Default `T` to `any` to allow overriding children types ([#2254](https://github.com/Workday/canvas-kit/pull/2254)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v8.6.15](https://github.com/Workday/canvas-kit/releases/tag/v8.6.15) (2023-06-14)
+
+### Components
+
+- fix(collection): Default `T` to `any` to allow overriding children types ([#2254](https://github.com/Workday/canvas-kit/pull/2254)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v8.6.14](https://github.com/Workday/canvas-kit/releases/tag/v8.6.14) (2023-06-12)
+
+### Components
+
+- fix: Change Popup imports to prevent circular dependencies ([#2251](https://github.com/Workday/canvas-kit/pull/2251)) ([@MarcoASedano](https://github.com/MarcoASedano), marco.sedano)
+## [v9.0.11](https://github.com/Workday/canvas-kit/releases/tag/v9.0.11) (2023-06-12)
+
+### Documentation
+
+- docs: Add accessible example for LoadingDots ([#2248](https://github.com/Workday/canvas-kit/pull/2248)) ([@dgubko](https://github.com/dgubko))
+
+
+## [v8.6.13](https://github.com/Workday/canvas-kit/releases/tag/v8.6.13) (2023-06-12)
+
+### Documentation
+
+- docs: Add accessible example for LoadingDots ([#2248](https://github.com/Workday/canvas-kit/pull/2248)) ([@dgubko](https://github.com/dgubko))
+## [v9.0.10](https://github.com/Workday/canvas-kit/releases/tag/v9.0.10) (2023-06-07)
+
+### Components
+
+- fix: Fix Popper imports ([#2245](https://github.com/Workday/canvas-kit/pull/2245)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
+## [v8.6.12](https://github.com/Workday/canvas-kit/releases/tag/v8.6.12) (2023-06-07)
+
+### Components
+
+- fix: Fix Popper imports ([#2245](https://github.com/Workday/canvas-kit/pull/2245)) ([@alanbsmith](https://github.com/alanbsmith))
+## [v9.0.9](https://github.com/Workday/canvas-kit/releases/tag/v9.0.9) (2023-06-05)
+
+### Components
+
+- docs: Add Media Modal to examples ([#2226](https://github.com/Workday/canvas-kit/pull/2226)) ([@dgubko](https://github.com/dgubko))
+- fix: Add custom fallback placements modifier ([#2200](https://github.com/Workday/canvas-kit/pull/2200)) ([@clarehuang](https://github.com/clarehuang), clare.huang, [@NicholasBoll](https://github.com/NicholasBoll))
+  This fix adds additional fallback placements to prevent popups from rendering off screen. This behavior is different than before and might result in a popup rendering in an unexpected position. `fallbackPlacements` was added as a prop to `Popper` and `Popup.Popper` to allow you to override the default fallback placements (which are top/right/bottom/left in that order). This shouldn't be considered a breaking change unless your popup position needs to be restricted.
+
+
+## [v8.6.11](https://github.com/Workday/canvas-kit/releases/tag/v8.6.11) (2023-06-05)
+
+### Components
+
+- fix: Add custom fallback placements modifier ([#2200](https://github.com/Workday/canvas-kit/pull/2200)) ([@clarehuang](https://github.com/clarehuang), clare.huang, [@NicholasBoll](https://github.com/NicholasBoll))
+  This fix adds additional fallback placements to prevent popups from rendering off screen. This behavior is different than before and might result in a popup rendering in an unexpected position. `fallbackPlacements` was added as a prop to `Popper` and `Popup.Popper` to allow you to override the default fallback placements (which are top/right/bottom/left in that order). This shouldn't be considered a breaking change unless your popup position needs to be restricted.
+
+
+## [v9.0.8](https://github.com/Workday/canvas-kit/releases/tag/v9.0.8) (2023-06-01)
+
+### Components
+
+- fix: Replace overflow on Table ([#2240](https://github.com/Workday/canvas-kit/pull/2240)) ([@dgubko](https://github.com/dgubko))
+  We replaced overflow: scroll with overflow: auto to hide scrollbars unless needed. It would allow Table to not have scrollbars unless needed.
+
+
+## [v8.6.10](https://github.com/Workday/canvas-kit/releases/tag/v8.6.10) (2023-05-25)
+
+### Components
+
+- docs: Add Media Modal to examples ([#2226](https://github.com/Workday/canvas-kit/pull/2226)) ([@dgubko](https://github.com/dgubko))
 ## [v9.0.7](https://github.com/Workday/canvas-kit/releases/tag/v9.0.7) (2023-05-25)
 
 ### Components

@@ -1,6 +1,11 @@
 import * as React from 'react';
 
-import {getTransformFromPlacement, Placement, Popper} from '@workday/canvas-kit-react/popup';
+import {
+  getTransformFromPlacement,
+  Placement,
+  Popper,
+  defaultFallbackPlacements,
+} from '@workday/canvas-kit-react/popup';
 import {mergeCallback} from '@workday/canvas-kit-react/common';
 
 import {TooltipContainer} from './TooltipContainer';
@@ -77,6 +82,13 @@ export interface OverflowTooltipProps extends Omit<React.HTMLAttributes<HTMLDivE
    * @default 'top'
    */
   placement?: Placement;
+  /**
+   * Define fallback placements by providing a list of {@link Placement} in array (in order of preference).
+   * The default preference is following the order of `top`, `right`, `bottom`, and `left`. Once the initial
+   * and opposite placements are not available, the fallback placements will be in use. Use an empty array to
+   * disable the fallback placements.
+   */
+  fallbackPlacements?: Placement[];
 }
 
 function mergeCallbacks<T extends {[key: string]: any}>(
@@ -96,6 +108,7 @@ function mergeCallbacks<T extends {[key: string]: any}>(
 
 export const OverflowTooltip = ({
   placement = 'top',
+  fallbackPlacements = defaultFallbackPlacements,
   children,
   ...elemProps
 }: OverflowTooltipProps) => {
@@ -126,7 +139,7 @@ export const OverflowTooltip = ({
         'aria-label': undefined, // we don't need a label, the accessible name will be the content
         ...mergeCallbacks({...targetProps, onMouseEnter, onFocus}, children.props),
       })}
-      <Popper placement={placement} {...popperProps}>
+      <Popper placement={placement} fallbackPlacements={fallbackPlacements} {...popperProps}>
         {({placement}) => {
           const transformOrigin = getTransformFromPlacement(placement);
           return (
