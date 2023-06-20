@@ -131,7 +131,12 @@ registerWidget<EnhancedComponentValue>('enhancedComponent', ({value, doc, meta})
                   }`}
                 >
                   <ParentComponentJSDocContext.Provider value={c}>
-                    <SymbolDoc name={c.symbol} hideHeading descriptionOverride={c.description} />
+                    <SymbolDoc
+                      name={c.symbol}
+                      fileName={c.declarations[c.declarations.length - 1].filePath}
+                      hideHeading
+                      descriptionOverride={c.description}
+                    />
                   </ParentComponentJSDocContext.Provider>
                 </ParentComponentNameContext.Provider>
               </React.Fragment>
