@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v9.0.16](https://github.com/Workday/canvas-kit/releases/tag/v9.0.16) (2023-06-20)
+
+### Documentation
+
+- docs: Fixed Doc Parser Naming Collision ([#2261](https://github.com/Workday/canvas-kit/pull/2261)) ([@josh-bagwell](https://github.com/josh-bagwell))
+
+
 ## [v9.0.15](https://github.com/Workday/canvas-kit/releases/tag/v9.0.15) (2023-06-16)
 
 ### Documentation
