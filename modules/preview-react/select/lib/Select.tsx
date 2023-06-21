@@ -27,7 +27,7 @@ export interface SelectProps extends CoreSelectBaseProps {
    *
    * The `data` object is carried over to the `option` passed into the `renderOption` function where it may then be used to customize how each option is rendered.
    */
-  options: (Option | string)[];
+  options: Option[] | string[];
 }
 
 interface SelectContainerProps extends SelectProps, StyledType {
