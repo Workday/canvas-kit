@@ -31,42 +31,74 @@ yarn add @workday/canvas-kit-react
 
 ### Basic Example
 
-Radio Buttons are intended to be grouped together using a Radio Group.
+`Radio` buttons are intended to be grouped together using a wrapping `RadioGroup` element with a
+`name` attribute. This will ensure that all `<input type="radio" />` will share the same `name`,
+grouping them together.
 
-Radio Group should be used in tandem with [Form Field](/components/inputs/form-field/) where the
-`useFieldset` prop is set to `true` to meet accessibility standards.
+Additionally, you can provide an `initialValue` to the `RadioGroup` element so that a value is pre
+selected from the group.
+
+To tie it all together, provide an `onChange` to `RadioGroup` element that sets the selected value
+on [state](https://react.dev/learn/state-a-components-memory).
+
+Also, each `RadioGroup.Radio` must have a unique `value`. This is used to determine which radio has
+been selected.
+
+`RadioGroup` should be used in tandem with [Form Field](/components/inputs/form-field/) where the
+`useFieldset` prop is set to `true` to meet accessibility standards. This ensures that the `label`
+text from `FormField` is attached to the `RadioGroup` and read out as a group for voiceover.
+
+Because the `RadioGroup` and `RadioGroup.Radio` have the correct WAI-ARIA
+[properties](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/radiogroup_role#associated_wai-aria_roles_states_and_properties),
+keyboard navigation is supported.
 
 <ExampleCodeBlock code={Basic} />
 
 #### Alert
 
+To set a `RadioGroup` in an alert state, you must set a few props on the `FormField` element
+including the `error` prop to `FormField.ErrorType.Alert`, provide `hintText` for the message
+associated to the error as well as a `hintId`. You must also set an `aria-describedby` attribute on
+the `RadioGroup` element that matches the value of `hintId` set on the `FormField` element. These
+attributes ensure that the error message is associated to the `RadioGroup` and read out by
+voiceover.
+
+Use alert when a selection is still valid but there might be addiotional information that might be
+important to show.
+
 <ExampleCodeBlock code={Alert} />
 
 ### Error
 
-Set the `error` prop of the wrapping Form Field to `FormField.ErrorType.Error` or
-`FormField.ErrorType.Error` to set the Radio Group to the Alert or Error state, respectively. You
-will also need to set the `hintId` and `hintText` props on the Form Field to meet accessibility
-standards.
+To set a `RadioGroup` in an error state, you must set a few props on the `FormField` element
+including the `error` prop to `FormField.ErrorType.Error`, provide `hintText` for the message
+associated to the error as well as a `hintId`. You must also set an `aria-describedby` attribute on
+the `RadioGroup` element that matches the value of `hintId` set on the `FormField` element. These
+attributes ensure that the error message is associated to the `RadioGroup` and read out by
+voiceover.
+
+Use error when the selection is no longer valid.
 
 <ExampleCodeBlock code={Error} />
 
 ### Inverse
 
-Radio with inverse variant
+In cases where you need to render radio groups on dark backgrounds, you can set the `variant` prop
+to `inverse` on the `RadioGroup.Radio`. This will change the colors on the text and input so that
+they can be used on different backgrounds.
 
 <ExampleCodeBlock code={Inverse} />
 
 ### Radio Buttons with No Values
 
-The `value` prop may be omitted from Radio Buttons, in which case the `value` prop of the Radio
-Group should be set using the zero-based index of the selected Radio Button.
+The `value` or `initialValue` props may be omitted from `RadioGroup` to render the group with no
+selected radios.
 
 <ExampleCodeBlock code={NoValue} />
 
 ### Ref Forwarding
 
-Radio Button supports [ref forwarding](https://reactjs.org/docs/forwarding-refs.html). It will
+Radio buttons supports [ref forwarding](https://reactjs.org/docs/forwarding-refs.html). It will
 forward `ref` to its underlying `<input type="radio">` element.
 
 <ExampleCodeBlock code={RefForwarding} />
@@ -83,16 +115,16 @@ relative to the Radio Group. `labelPosition` accepts the following values:
 
 ### Required
 
-Set the `required` prop of the wrapping Form Field to `true` to indicate that the field is required.
-Labels for required fields are suffixed by a red asterisk.
+Set the `required` prop of the wrapping `FormField` to `true` to indicate that the field is
+required. Labels for required fields are suffixed by a red asterisk.
 
 <ExampleCodeBlock code={Required} />
 
 ### Disabled
 
-Set the `disabled` prop of the Radio Button to prevent users from interacting with it. Be careful
-not to disable a pre-selected Radio Button, this will block keyboard access from the entire Radio
-Group.
+Set the `disabled` prop of the Radio Button `<RadioGroup.Radio value="gluten-free" disabled />` to
+prevent users from interacting with it. Be careful not to disable a pre-selected Radio Button, this
+will block keyboard access from the entire Radio Group.
 
 <ExampleCodeBlock code={Disabled} />
 

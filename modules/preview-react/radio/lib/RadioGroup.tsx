@@ -20,7 +20,8 @@ export interface RadioGroupProps extends Themeable, ExtractProps<typeof Flex, ne
 }
 
 /**
- * When you have a group of radio inputs, use RadioGroup
+ * When you have a group of radio inputs, use RadioGroup.
+ *
  * **Note:** You must provide a `name`. This ensures that each `input` has a `name` attribute which groups the inputs.
  *
  * ```tsx
@@ -35,8 +36,8 @@ export const RadioGroup = createContainer(Flex)({
   modelHook: useRadioModel,
   subComponents: {
     /**
-     * Use this if you want more control over the text and input.
-     * This will render a `label` element that wraps its subcomponents of `Text` and `Input`
+     * Use this if you want more control over styling the text and input.
+     * This will render a `label` element that wraps its sub components of `Text` which renders a `span` and `Input`.
      *
      * ```tsx
      * <RadioGroup name"pizza-crust"" initialValue="deep-dish">
@@ -49,8 +50,8 @@ export const RadioGroup = createContainer(Flex)({
      */
     Label: RadioLabel,
     /**
-     * This a simplified component that renders a `label` and `input` element with children being the text for the radio.
-     * In most cases you will use this component
+     * This a simplified component that renders a `label` and `input` element with children being the text associated to the radio input.
+     * In most cases you will use this component.
      *
      * ```tsx
      * <RadioGroup name="pizza-crust" initialValue="thin">
