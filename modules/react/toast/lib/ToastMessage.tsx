@@ -14,7 +14,6 @@ export const ToastMessage = createSubcomponent('p')({
       size="large"
       wordBreak="break-word"
       marginY="zero"
-      paddingInlineEnd="s"
       id={model.state.id}
       as={Element}
       {...elemProps}
