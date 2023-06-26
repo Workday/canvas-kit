@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v9.0.17](https://github.com/Workday/canvas-kit/releases/tag/v9.0.17) (2023-06-26)
+
+### Documentation
+
+- docs: Update comments about Select options prop to match actual use ([#2271](https://github.com/Workday/canvas-kit/pull/2271)) ([@JeffreyRuder](https://github.com/JeffreyRuder))
+
+
 ## [v9.0.16](https://github.com/Workday/canvas-kit/releases/tag/v9.0.16) (2023-06-20)
 
 ### Documentation
