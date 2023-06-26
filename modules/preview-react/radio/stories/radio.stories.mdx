@@ -1,7 +1,7 @@
 import {Meta} from '@storybook/addon-docs';
 import {Specifications, SymbolDoc} from '@workday/canvas-kit-docs';
 
-import {RadioGroup2} from '@workday/canvas-kit-preview-react/radio';
+import {RadioGroup} from '@workday/canvas-kit-preview-react/radio';
 
 import {Basic} from './examples/Basic';
 import {Alert} from './examples/Alert';
@@ -13,7 +13,7 @@ import {RefForwarding} from './examples/RefForwarding';
 import {Disabled} from './examples/Disabled';
 import {Required} from './examples/Required';
 
-<Meta title="Preview/Radio" component={RadioGroup2} />
+<Meta title="Preview/Inputs/Radio" component={RadioGroup} />
 
 # Canvas Kit Radio
 
@@ -33,26 +33,21 @@ yarn add @workday/canvas-kit-react
 
 `Radio` buttons are intended to be grouped together using a wrapping `RadioGroup` element with a
 `name` attribute. This will ensure that all `<input type="radio" />` will share the same `name`,
-grouping them together.
-
-Additionally, you can provide an `initialValue` to the `RadioGroup` element so that a value is pre
-selected from the group.
-
-To tie it all together, provide an `onChange` to `RadioGroup` element that sets the selected value
-on [state](https://react.dev/learn/state-a-components-memory).
-
-Also, each `RadioGroup.Radio` must have a unique `value`. This is used to determine which radio has
-been selected.
+grouping them together. Also, each `RadioGroup.Radio` must have a unique `value`. This is used to
+determine which radio has been selected. You can provide an `initialValue` to the `RadioGroup`
+element so that a value is pre selected from the group. To tie it all together, provide an
+`onChange` to `RadioGroup` element that sets the selected value on
+[state](https://react.dev/learn/state-a-components-memory).
 
 `RadioGroup` should be used in tandem with [Form Field](/components/inputs/form-field/) where the
 `useFieldset` prop is set to `true` to meet accessibility standards. This ensures that the `label`
 text from `FormField` is attached to the `RadioGroup` and read out as a group for voiceover.
 
+<ExampleCodeBlock code={Basic} />
+
 Because the `RadioGroup` and `RadioGroup.Radio` have the correct WAI-ARIA
 [properties](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/radiogroup_role#associated_wai-aria_roles_states_and_properties),
 keyboard navigation is supported.
-
-<ExampleCodeBlock code={Basic} />
 
 #### Alert
 
@@ -60,10 +55,10 @@ To set a `RadioGroup` in an alert state, you must set a few props on the `FormFi
 including the `error` prop to `FormField.ErrorType.Alert`, provide `hintText` for the message
 associated to the error as well as a `hintId`. You must also set an `aria-describedby` attribute on
 the `RadioGroup` element that matches the value of `hintId` set on the `FormField` element. These
-attributes ensure that the error message is associated to the `RadioGroup` and read out by
+attributes ensure that the alert message is associated to the `RadioGroup` and read out by
 voiceover.
 
-Use alert when a selection is still valid but there might be addiotional information that might be
+Use alert when a selection is still valid but there might be additional information that might be
 important to show.
 
 <ExampleCodeBlock code={Alert} />
