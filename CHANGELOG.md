@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v9.0.18](https://github.com/Workday/canvas-kit/releases/tag/v9.0.18) (2023-06-27)
+
+### Components
+
+- fix: Move spreading of CSS styles to the top of a style block ([#2244](https://github.com/Workday/canvas-kit/pull/2244)) ([@thunguyen19](https://github.com/thunguyen19))
+
+
 ## [v9.0.17](https://github.com/Workday/canvas-kit/releases/tag/v9.0.17) (2023-06-26)
 
 ### Documentation
