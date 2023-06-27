@@ -25,7 +25,7 @@ export interface RadioGroupProps extends Themeable, ExtractProps<typeof Flex, ne
  * **Note:** You must provide a `name`. This ensures that each `input` has a `name` attribute which groups the inputs.
  *
  * ```tsx
- * <RadioGroup name="pizza-crust" initialValue="thin">
+ * <RadioGroup name="pizza-crust" value="thin">
  *    <RadioGroup.Radio value="deep-dish">Deep Dish</RadioGroup.Radio>
  *    <RadioGroup.Radio value="thin">Thin</RadioGroup.Radio>
  * </RadioGroup>
@@ -36,11 +36,23 @@ export const RadioGroup = createContainer(Flex)({
   modelHook: useRadioModel,
   subComponents: {
     /**
-     * Use this if you want more control over styling the text and input.
-     * This will render a `label` element that wraps its sub components of `Text` which renders a `span` and `Input`.
+     * This a simplified component that renders a `label` and `input` element with children being the text associated to the radio input.
+     * In most cases you will use this component.
      *
      * ```tsx
-     * <RadioGroup name"pizza-crust"" initialValue="deep-dish">
+     * <RadioGroup name="pizza-crust" value="thin">
+     *    <RadioGroup.Radio value="deep-dish">Deep Dish</RadioGroup.Radio>
+     *    <RadioGroup.Radio value="thin">Thin</RadioGroup.Radio>
+     * </RadioGroup>
+     * ```
+     */
+    Radio: Radio,
+    /**
+     * Use this if you want more control over styling the text and input.
+     * This will render a `label` element that wraps an `input` and `span`.
+     *
+     * ```tsx
+     * <RadioGroup name"pizza-crust"" value="deep-dish">
      *    <RadioGroup.Label>
      *      <RadioGroup.Label.Input checked value="deep-dish" />
      *      <RadioGroup.Label.Text>Deep Dish</RadioGroup.Label.Text>
@@ -49,18 +61,6 @@ export const RadioGroup = createContainer(Flex)({
      * ```
      */
     Label: RadioLabel,
-    /**
-     * This a simplified component that renders a `label` and `input` element with children being the text associated to the radio input.
-     * In most cases you will use this component.
-     *
-     * ```tsx
-     * <RadioGroup name="pizza-crust" initialValue="thin">
-     *    <RadioGroup.Radio value="deep-dish">Deep Dish</RadioGroup.Radio>
-     *    <RadioGroup.Radio value="thin">Thin</RadioGroup.Radio>
-     * </RadioGroup>
-     * ```
-     */
-    Radio: Radio,
   },
 })<RadioGroupProps>(({children, error, theme, ...elemProps}, Element, model) => {
   const errorColors = getErrorColors(error, theme);

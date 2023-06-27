@@ -16,7 +16,7 @@ export const Basic = () => {
   return (
     <Flex flexDirection="column">
       <FormField label="Choose Your Pizza Crust" useFieldset={true}>
-        <RadioGroup name="pizza-crust" onChange={handleChange} width="200px" initialValue={value}>
+        <RadioGroup name="pizza-crust" onChange={handleChange} width="200px" value={value}>
           <RadioGroup.Radio value="deep-dish">Deep Dish</RadioGroup.Radio>
           <RadioGroup.Radio value="gluten-free">Gluten Free</RadioGroup.Radio>
           <RadioGroup.Radio value="cauliflower">Cauliflower</RadioGroup.Radio>

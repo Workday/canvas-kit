@@ -21,7 +21,7 @@ export const RefForwarding = () => {
   return (
     <>
       <FormField label="Choose Your Pizza Crust" useFieldset={true}>
-        <RadioGroup name="crust-ref" onChange={handleChange} initialValue={value}>
+        <RadioGroup name="crust-ref" onChange={handleChange} value={value}>
           <RadioGroup.Radio value="deep-dish">Deep Dish</RadioGroup.Radio>
           <RadioGroup.Radio value="thin">Thin</RadioGroup.Radio>
           <RadioGroup.Radio value="gluten-free" ref={glutenFreeRef}>

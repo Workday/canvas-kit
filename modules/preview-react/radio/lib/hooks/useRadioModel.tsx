@@ -36,10 +36,6 @@ export const useRadioModel = createModelHook({
      */
     name: '',
     /**
-     * The initial selected value of the RadioGroup. If a string is provided, the Radio button with the corresponding value will be selected.
-     */
-    initialValue: undefined as string | undefined | number,
-    /**
      * The selected value of the RadioGroup. Providing this prop will cause the model be in a controlled state
      */
     value: undefined as string | number | undefined,
@@ -55,7 +51,6 @@ export const useRadioModel = createModelHook({
   const state = {
     value: config.value,
     name: config.name,
-    initialValue: config.initialValue,
     'aria-describedby': config['aria-describedby'],
     inputRef,
   };

@@ -20,12 +20,7 @@ export const Error = () => {
       hintId="error"
       hintText="Deep Dish is currently sold out."
     >
-      <RadioGroup
-        name="crust-error"
-        onChange={handleChange}
-        initialValue={value}
-        aria-describedby="error"
-      >
+      <RadioGroup name="crust-error" onChange={handleChange} value={value} aria-describedby="error">
         <RadioGroup.Radio value="deep-dish">Deep Dish (Sold Out)</RadioGroup.Radio>
         <RadioGroup.Radio value="thin">Thin</RadioGroup.Radio>
         <RadioGroup.Radio value="gluten-free">Gluten Free</RadioGroup.Radio>

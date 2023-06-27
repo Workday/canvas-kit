@@ -23,7 +23,7 @@ export const Alert = () => {
       <RadioGroup
         name="crust-alert"
         onChange={handleChange}
-        initialValue={value}
+        value={value}
         aria-describedby="hint-alert"
       >
         <RadioGroup.Radio value="deep-dish">Deep dish</RadioGroup.Radio>

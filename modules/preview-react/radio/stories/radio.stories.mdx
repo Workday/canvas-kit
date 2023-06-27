@@ -12,6 +12,7 @@ import {NoValue} from './examples/NoValue';
 import {RefForwarding} from './examples/RefForwarding';
 import {Disabled} from './examples/Disabled';
 import {Required} from './examples/Required';
+import {WithReactHookForm} from './examples/WithReactHookForm';
 
 <Meta title="Preview/Inputs/Radio" component={RadioGroup} />
 
@@ -34,9 +35,9 @@ yarn add @workday/canvas-kit-react
 `Radio` buttons are intended to be grouped together using a wrapping `RadioGroup` element with a
 `name` attribute. This will ensure that all `<input type="radio" />` will share the same `name`,
 grouping them together. Also, each `RadioGroup.Radio` must have a unique `value`. This is used to
-determine which radio has been selected. You can provide an `initialValue` to the `RadioGroup`
-element so that a value is pre selected from the group. To tie it all together, provide an
-`onChange` to `RadioGroup` element that sets the selected value on
+determine which radio has been selected. You can provide a `value` to the `RadioGroup` element so
+that a value is pre selected from the group. To tie it all together, provide an `onChange` to
+`RadioGroup` element that sets the selected value on
 [state](https://react.dev/learn/state-a-components-memory).
 
 `RadioGroup` should be used in tandem with [Form Field](/components/inputs/form-field/) where the
@@ -86,8 +87,7 @@ they can be used on different backgrounds.
 
 ### Radio Buttons with No Values
 
-The `value` or `initialValue` props may be omitted from `RadioGroup` to render the group with no
-selected radios.
+The `value` prop may be omitted from `RadioGroup` to render the group with no selected radios.
 
 <ExampleCodeBlock code={NoValue} />
 
@@ -122,6 +122,14 @@ prevent users from interacting with it. Be careful not to disable a pre-selected
 will block keyboard access from the entire Radio Group.
 
 <ExampleCodeBlock code={Disabled} />
+
+### With React Hook Formm
+
+It's common to use input elements with a form library such as
+[React Hook Form](https://react-hook-form.com/docs/useform). Here's an example of how to hook
+everything up!
+
+<ExampleCodeBlock code={WithReactHookForm} />
 
 ## Component API
 
