@@ -47,6 +47,7 @@
     "@emotion/is-prop-valid": "^1.1.1",
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
+    "@emotion/css": "^11.7.1",
     "@popperjs/core": "^2.5.4",
     "@workday/canvas-colors-web": "^2.0.0",
     "@workday/canvas-kit-popup-stack": "^9.0.18",
