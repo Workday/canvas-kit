@@ -20,7 +20,7 @@ export interface RadioGroupProps extends Themeable, ExtractProps<typeof Flex, ne
 }
 
 /**
-* Use `RadioGroup` to group a collection of `RadioGroup.Radio` components under a common `name`.
+ * Use `RadioGroup` to group a collection of `RadioGroup.Radio` components under a common `name`.
  *
  * ```tsx
  * <RadioGroup name="pizza-crust" value="thin">
@@ -52,7 +52,7 @@ export const RadioGroup = createContainer(Flex)({
      * ```tsx
      * <RadioGroup name"pizza-crust" value="deep-dish">
      *   <RadioGroup.Label>
-     *     <RadioGroup.Label.Input checked value="deep-dish" />
+     *     <RadioGroup.Label.Input value="deep-dish" />
      *     <RadioGroup.Label.Text>Deep Dish</RadioGroup.Label.Text>
      *   </RadioGroup.Label>
      * </RadioGroup>

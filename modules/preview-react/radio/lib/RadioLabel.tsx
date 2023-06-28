@@ -9,7 +9,6 @@ import {RadioText} from './RadioText';
 interface RadioLabelContextInterface {
   disabled?: boolean | undefined;
   variant?: 'inverse' | undefined;
-  checked?: boolean;
   value?: string | number;
 }
 export interface RadioLabelProps
@@ -55,21 +54,19 @@ export const RadioLabel = createSubcomponent('label')({
      */
     Text: RadioText,
   },
-})<RadioLabelProps>(
-  ({children, checked, variant, disabled, value, ...elemProps}, Element, model) => {
-    return (
-      <RadioLabelContext.Provider value={{variant, disabled, checked}}>
-        <Flex
-          as={Element}
-          alignItems="flex-start"
-          minHeight="m"
-          position="relative"
-          gap="xxs"
-          {...elemProps}
-        >
-          {children}
-        </Flex>
-      </RadioLabelContext.Provider>
-    );
-  }
-);
+})<RadioLabelProps>(({children, variant, disabled, value, ...elemProps}, Element, model) => {
+  return (
+    <RadioLabelContext.Provider value={{variant, disabled}}>
+      <Flex
+        as={Element}
+        alignItems="flex-start"
+        minHeight="m"
+        position="relative"
+        gap="xxs"
+        {...elemProps}
+      >
+        {children}
+      </Flex>
+    </RadioLabelContext.Provider>
+  );
+});

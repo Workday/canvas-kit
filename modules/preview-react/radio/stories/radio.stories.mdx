@@ -12,7 +12,7 @@ import {NoValue} from './examples/NoValue';
 import {RefForwarding} from './examples/RefForwarding';
 import {Disabled} from './examples/Disabled';
 import {Required} from './examples/Required';
-import {WithReactHookForm} from './examples/WithReactHookForm';
+import {Custom} from './examples/Custom';
 
 <Meta title="Preview/Inputs/Radio" component={RadioGroup} />
 
@@ -50,30 +50,24 @@ Because the `RadioGroup` and `RadioGroup.Radio` have the correct WAI-ARIA
 [properties](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/radiogroup_role#associated_wai-aria_roles_states_and_properties),
 keyboard navigation is supported.
 
+### Error States
+
+Set the error prop of the wrapping `FormField` to `FormField.ErrorType.Alert` or
+`FormField.ErrorType.Error` to set the `RadioGroup` to the alert or error state, respectively. You
+will also need to set the `hintId` and `hintText` props on the `FormField` to meet accessibility
+standards. You must set an `aria-describedby` attribute on the `RadioGroup` element that matches the
+value of `hintId` set on the `FormField` element. These attributes ensure that the alert message is
+associated to the `RadioGroup` and read out by voiceover.
+
 #### Alert
 
-To set a `RadioGroup` in an alert state, you must set a few props on the `FormField` element
-including the `error` prop to `FormField.ErrorType.Alert`, provide `hintText` for the message
-associated to the error as well as a `hintId`. You must also set an `aria-describedby` attribute on
-the `RadioGroup` element that matches the value of `hintId` set on the `FormField` element. These
-attributes ensure that the alert message is associated to the `RadioGroup` and read out by
-voiceover.
-
-Use alert when a selection is still valid but there might be additional information that might be
-important to show.
+Use the alert state when a selection is valid but there is additional information.
 
 <ExampleCodeBlock code={Alert} />
 
 ### Error
 
-To set a `RadioGroup` in an error state, you must set a few props on the `FormField` element
-including the `error` prop to `FormField.ErrorType.Error`, provide `hintText` for the message
-associated to the error as well as a `hintId`. You must also set an `aria-describedby` attribute on
-the `RadioGroup` element that matches the value of `hintId` set on the `FormField` element. These
-attributes ensure that the error message is associated to the `RadioGroup` and read out by
-voiceover.
-
-Use error when the selection is no longer valid.
+Use the error state when the selection is no longer valid.
 
 <ExampleCodeBlock code={Error} />
 
@@ -122,13 +116,12 @@ will block keyboard access from the entire Radio Group.
 
 <ExampleCodeBlock code={Disabled} />
 
-### With React Hook Formm
+### Custom
 
-It's common to use input elements with a form library such as
-[React Hook Form](https://react-hook-form.com/docs/useform). Here's an example of how to hook
-everything up!
+Use `RadioGroup.Label` and its sub components when you want more control over styling the text or
+input elements.
 
-<ExampleCodeBlock code={WithReactHookForm} />
+<ExampleCodeBlock code={Custom} />
 
 ## Component API
 

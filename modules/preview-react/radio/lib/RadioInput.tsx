@@ -160,8 +160,8 @@ const useRadioInput = createElemPropsHook(useRadioModel)(
       'aria-describedby': model.state['aria-describedby'],
       disabled: disabled,
       variant: variant,
-      checked: elemProps.value === model.state.value || elemProps.checked,
-      'aria-checked': elemProps.value === model.state.value || elemProps.checked,
+      checked: elemProps.value === model.state.value,
+      'aria-checked': elemProps.value === model.state.value,
       onChange(event: React.ChangeEvent<HTMLInputElement>) {
         model.onChange(event);
       },

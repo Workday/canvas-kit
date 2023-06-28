@@ -39,13 +39,10 @@ describe('RadioGroup', () => {
 
   describe('when rendered with a name', () => {
     it('should render a radio group with a name', () => {
-      const {getByTestId} = render(
+      const {getByRole} = render(
         <RadioGroup name="contact">
           <RadioGroup.Label id="1">
-            <RadioGroup.Label.Input
-              data-testid="radio-input"
-              value="email"
-            ></RadioGroup.Label.Input>
+            <RadioGroup.Label.Input value="email"></RadioGroup.Label.Input>
             <RadioGroup.Label.Text>E-mail</RadioGroup.Label.Text>
           </RadioGroup.Label>
           <RadioGroup.Label id="2">
@@ -54,14 +51,14 @@ describe('RadioGroup', () => {
           </RadioGroup.Label>
         </RadioGroup>
       );
-      expect(getByTestId('radio-input')).toHaveAttribute('name');
+      expect(getByRole('radio', {name: 'E-mail'})).toHaveAttribute('name');
     });
   });
 
   describe('when rendered with a value', () => {
     it('should render a selected radio that matches that value of a string', async () => {
       const {getByLabelText} = render(
-        <RadioGroup name="contact" initialValue="phone" data-testid="radiogroup">
+        <RadioGroup name="contact" value="phone" data-testid="radiogroup">
           <RadioGroup.Label id="1">
             <RadioGroup.Label.Input value="email"></RadioGroup.Label.Input>
             <RadioGroup.Label.Text>E-mail</RadioGroup.Label.Text>
