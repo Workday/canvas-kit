@@ -20,14 +20,12 @@ export interface RadioGroupProps extends Themeable, ExtractProps<typeof Flex, ne
 }
 
 /**
- * When you have a group of radio inputs, use RadioGroup.
- *
- * **Note:** You must provide a `name`. This ensures that each `input` has a `name` attribute which groups the inputs.
+* Use `RadioGroup` to group a collection of `RadioGroup.Radio` components under a common `name`.
  *
  * ```tsx
  * <RadioGroup name="pizza-crust" value="thin">
- *    <RadioGroup.Radio value="deep-dish">Deep Dish</RadioGroup.Radio>
- *    <RadioGroup.Radio value="thin">Thin</RadioGroup.Radio>
+ *   <RadioGroup.Radio value="deep-dish">Deep Dish</RadioGroup.Radio>
+ *   <RadioGroup.Radio value="thin">Thin</RadioGroup.Radio>
  * </RadioGroup>
  * ```
  */
@@ -36,27 +34,27 @@ export const RadioGroup = createContainer(Flex)({
   modelHook: useRadioModel,
   subComponents: {
     /**
-     * This a simplified component that renders a `label` and `input` element with children being the text associated to the radio input.
-     * In most cases you will use this component.
+     * `RadioGroup.Radio` renders an `<input type="radio" />` and its associated `<label>` (using `children` as the label's contents).
+     * This component should satisfy most use cases; use `RadioGroup.Label` if you require more flexibility.
      *
      * ```tsx
      * <RadioGroup name="pizza-crust" value="thin">
-     *    <RadioGroup.Radio value="deep-dish">Deep Dish</RadioGroup.Radio>
-     *    <RadioGroup.Radio value="thin">Thin</RadioGroup.Radio>
+     *   <RadioGroup.Radio value="deep-dish">Deep Dish</RadioGroup.Radio>
+     *   <RadioGroup.Radio value="thin">Thin</RadioGroup.Radio>
      * </RadioGroup>
      * ```
      */
     Radio: Radio,
     /**
-     * Use this if you want more control over styling the text and input.
-     * This will render a `label` element that wraps an `input` and `span`.
+     * Use `RadioGroup.Label` instead of `RadioGroup.Radio` if you need direct access to the label and the radio input.
+     * This will render a `<label>` that wraps an `<input type="radio" />` and a `<span>` for the label text.
      *
      * ```tsx
-     * <RadioGroup name"pizza-crust"" value="deep-dish">
-     *    <RadioGroup.Label>
-     *      <RadioGroup.Label.Input checked value="deep-dish" />
-     *      <RadioGroup.Label.Text>Deep Dish</RadioGroup.Label.Text>
-     *    </RadioGroup.Label>
+     * <RadioGroup name"pizza-crust" value="deep-dish">
+     *   <RadioGroup.Label>
+     *     <RadioGroup.Label.Input checked value="deep-dish" />
+     *     <RadioGroup.Label.Text>Deep Dish</RadioGroup.Label.Text>
+     *   </RadioGroup.Label>
      * </RadioGroup>
      * ```
      */

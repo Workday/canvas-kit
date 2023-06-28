@@ -79,29 +79,28 @@ Use error when the selection is no longer valid.
 
 ### Inverse
 
-In cases where you need to render radio groups on dark backgrounds, you can set the `variant` prop
-to `inverse` on the `RadioGroup.Radio`. This will change the colors on the text and input so that
-they can be used on different backgrounds.
+Set the `variant` prop of `RadioGroup.Radio` to `inverse` to ensure proper contrast on dark
+backgrounds.
 
 <ExampleCodeBlock code={Inverse} />
 
-### Radio Buttons with No Values
+### Radio Group with No Value
 
-The `value` prop may be omitted from `RadioGroup` to render the group with no selected radios.
+Omit the `value` prop from `RadioGroup` to render the group with no selected `RadioGroup.Radio`.
 
 <ExampleCodeBlock code={NoValue} />
 
 ### Ref Forwarding
 
-Radio buttons supports [ref forwarding](https://reactjs.org/docs/forwarding-refs.html). It will
+`RadioGroup.Radio` supports [ref forwarding](https://reactjs.org/docs/forwarding-refs.html). It will
 forward `ref` to its underlying `<input type="radio">` element.
 
 <ExampleCodeBlock code={RefForwarding} />
 
 ### Label Position
 
-Set the `labelPosition` prop of the wrapping Form Field to designate the position of the label
-relative to the Radio Group. `labelPosition` accepts the following values:
+Set the `labelPosition` prop of the wrapping `FormField` to designate the position of the label
+relative to the `RadioGroup`. `labelPosition` accepts the following values:
 
 - `FormField.LabelPosition.Top` (Default)
 - `FormField.LabelPosition.Left`

@@ -28,7 +28,31 @@ export const RadioLabel = createSubcomponent('label')({
   displayName: 'Radio.Label',
   modelHook: useRadioModel,
   subComponents: {
+    /**
+     * Use `RadioGroup.Label.Input` within a `RadioGroup.Label` to render the input portion of a radio button.
+     *
+     * ```tsx
+     * <RadioGroup name"pizza-crust" value="deep-dish">
+     *   <RadioGroup.Label>
+     *     <RadioGroup.Label.Input value="deep-dish" />
+     *     <RadioGroup.Label.Text>Deep Dish</RadioGroup.Label.Text>
+     *   </RadioGroup.Label>
+     * </RadioGroup>
+     * ```
+     */
     Input: RadioInput,
+    /**
+     * Use `RadioGroup.Label.Text` within a `RadioGroup.Label` to render the label text portion of a radio button.
+     *
+     * ```tsx
+     * <RadioGroup name"pizza-crust" value="deep-dish">
+     *   <RadioGroup.Label>
+     *     <RadioGroup.Label.Input value="deep-dish" />
+     *     <RadioGroup.Label.Text>Deep Dish</RadioGroup.Label.Text>
+     *   </RadioGroup.Label>
+     * </RadioGroup>
+     * ```
+     */
     Text: RadioText,
   },
 })<RadioLabelProps>(
