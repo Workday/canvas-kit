@@ -1,13 +1,9 @@
 import React from 'react';
 import {CommonStyleProps} from '@workday/canvas-kit-react/layout';
 // import {colors, space, type} from '@workday/canvas-kit-react/tokens';
-import {generateUniqueId} from '@workday/canvas-kit-react/common';
+import {generateUniqueId} from './utils/useUniqueId';
 // eslint-disable-next-line @emotion/no-vanilla
-// import {css} from '@emotion/css';
-// import { Box } from "./Box";
-// import { css } from "./styles";
-
-const css = (input: any) => `css-${generateUniqueId()}`;
+import {css} from '@emotion/css';
 
 export const theme = {
   palette: {
