@@ -239,13 +239,18 @@ export interface CSProps {
  * small runtime.
  */
 
-export function cs(styles: StyleProps, ...args: CS[]): CS {
-  const convertedStyles = replaceAllWithTokens(styles);
+export function cs(...args: (StyleProps | string)[]): string {
+  return args
+    .map(input => {
+      if (typeof input === 'string') {
+        return input;
+      }
 
-  const className = css(convertedStyles as any);
-  // const className = emotionCSS(convertedStyles as any);
+      const convertedStyles = replaceAllWithTokens(input);
 
-  return args.length ? `${args.map(s => s).join(' ')} ${className}` : className;
+      return css(convertedStyles as any);
+    })
+    .join(' ');
 }
 
 /**
@@ -289,7 +294,8 @@ export function useCs<
   }
 >({cs, style, className, ...props}: T) {
   return {
-    ...csToProps(cs),
+    // @ts-ignore // fix this later
+    ...csToProps([cs, className, style]),
     ...props,
   } as Omit<T, 'cs' | 'csVars'>;
 }

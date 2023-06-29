@@ -1,7 +1,13 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
 import isPropValid from '@emotion/is-prop-valid';
-import {createComponent, StyledType, useConstant} from '@workday/canvas-kit-react/common';
+import {
+  createComponent,
+  CSProps,
+  StyledType,
+  useConstant,
+  useCs,
+} from '@workday/canvas-kit-react/common';
 
 // style props
 import {background} from './utils/background';
@@ -34,9 +40,10 @@ import {CommonStyleProps} from './utils/styleProps';
  * - space
  * - text
  */
-export type BoxProps = CommonStyleProps & {
-  children?: React.ReactNode;
-};
+export type BoxProps = CommonStyleProps &
+  CSProps & {
+    children?: React.ReactNode;
+  };
 
 const omittedProps = [
   'display',
@@ -136,10 +143,12 @@ const StyledBoxComponent = styled('div')<StyledType & BoxProps>(boxStyleFn);
  */
 export const Box = createComponent('div')({
   displayName: 'Box',
-  Component: ({children, ...elemProps}: BoxProps, ref, Element) => {
+  Component: ({children, ...props}: BoxProps, ref, Element) => {
     const BoxComponent = useConstant(() =>
       typeof Element === 'string' ? StyledBoxElement : StyledBoxComponent
     );
+
+    const elemProps = useCs(props as any); // useCs doesn't recognize the token-adapted props of BoxProps
 
     return (
       <BoxComponent as={Element} ref={ref} {...elemProps}>

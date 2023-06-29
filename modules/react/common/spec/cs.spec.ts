@@ -11,7 +11,7 @@ describe.only('cs', () => {
 
   describe('cs', () => {
     it('should accept an object of CSS Properties', () => {
-      type Input = Parameters<typeof cs>[0];
+      type Input = Exclude<Parameters<typeof cs>[0], string>;
       type PositionProperty = Input['position'];
       expectTypeOf<PositionProperty>().toMatchTypeOf<Properties['position']>();
     });
