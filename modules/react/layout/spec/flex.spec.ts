@@ -37,9 +37,9 @@ describe('Flex Style Props Function', () => {
     } as FlexStyleProps;
     const expected = {
       ...props,
-      gap: '16px',
-      rowGap: '24px',
-      columnGap: '32px',
+      gap: '1rem',
+      rowGap: '1.5rem',
+      columnGap: '2rem',
     };
     const flexStyles = flex(props);
 
