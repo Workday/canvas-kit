@@ -10,7 +10,7 @@ import {
   useFocusRedirect,
   usePopupModel,
 } from '@workday/canvas-kit-react/popup';
-import {Box, HStack} from '@workday/canvas-kit-react/layout';
+import {Box, Flex} from '@workday/canvas-kit-react/layout';
 
 export const FocusRedirect = () => {
   const model = usePopupModel();
@@ -35,7 +35,7 @@ export const FocusRedirect = () => {
 
   return (
     <Popup model={model}>
-      <HStack spacing="s">
+      <Flex gap="s">
         <Popup.Target as={DeleteButton}>Delete Item</Popup.Target>
         <div aria-owns={popupId} style={{position: 'absolute'}} />
         <Popup.Popper>
@@ -47,18 +47,18 @@ export const FocusRedirect = () => {
                 Are you sure you'd like to delete the item titled 'My Item'?
               </Box>
             </Popup.Body>
-            <HStack spacing="s" padding="xxs" marginTop="xxs">
+            <Flex gap="s" padding="xxs" marginTop="xxs">
               <Popup.CloseButton as={DeleteButton} onClick={handleDelete}>
                 Delete
               </Popup.CloseButton>
               {/* Disabled elements should not be focusable and focus should move to the next focusable element */}
               <Popup.CloseButton disabled>Cancel</Popup.CloseButton>
-            </HStack>
+            </Flex>
           </Popup.Card>
         </Popup.Popper>
         <SecondaryButton>Next Focusable Button</SecondaryButton>
         <SecondaryButton>Focusable Button After Popup</SecondaryButton>
-      </HStack>
+      </Flex>
     </Popup>
   );
 };

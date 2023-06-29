@@ -1,9 +1,8 @@
 import React from 'react';
 
-import {colors} from '@workday/canvas-kit-react/tokens';
-import {ContentDirection} from '@workday/canvas-kit-react/common';
+import {checkIcon, exclamationCircleIcon} from '@workday/canvas-system-icons-web';
+
 import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
-import {exclamationCircleIcon} from '@workday/canvas-system-icons-web';
 import {Toast} from '@workday/canvas-kit-react/toast';
 
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
@@ -13,58 +12,173 @@ export default withSnapshotsEnabled({
   component: Toast,
 });
 
-const ToastStates = ({direction = ContentDirection.LTR}) => (
-  <StaticStates theme={{canvas: {direction}}}>
-    <ComponentStatesTable
-      rowProps={[
-        {label: 'Default', props: {}},
-        {label: 'Custom Icon', props: {icon: exclamationCircleIcon}},
-        {
-          label: 'Custom Icon Color',
-          props: {icon: exclamationCircleIcon, iconColor: colors.cinnamon500},
-        },
-        {label: 'On Close', props: {onClose: () => console.log('close button clicked')}},
-        {
-          label: 'With Action Link',
-          props: {
-            onActionClick: () => console.log('action button clicked'),
-            actionText: 'View More Details',
-          },
-        },
-        {
-          label: 'With Action Link and Multiple Lines',
-          props: {
-            children: 'Your workbook was successfully processed. Congratulation!',
-            onActionClick: () => console.log('action button clicked'),
-            actionText: 'View More Details',
-          },
-        },
-      ]}
-      columnProps={[{label: 'Default', props: {}}]}
-    >
-      {({children, ...props}) => (
-        <Toast style={{animation: 'none'}} aria-label="Play" {...props}>
-          {children || 'Successfully processed.'}
-        </Toast>
-      )}
-    </ComponentStatesTable>
-  </StaticStates>
-);
-
-export const ToastStatesLeftToRight = () => {
+export const ToastStates = withSnapshotsEnabled(() => {
   return (
-    <>
-      <h2>Left-To-Right Toast</h2>
-      <ToastStates />
-    </>
+    <StaticStates>
+      <ComponentStatesTable
+        rowProps={[
+          {
+            label: 'Default',
+            props: {
+              mode: 'polite',
+              icon: checkIcon,
+              iconColor: 'greenApple400',
+              message: 'Your workbook was successfully processed.',
+            },
+          },
+          {
+            label: 'With Icon',
+            props: {
+              mode: 'polite',
+              icon: checkIcon,
+              iconColor: 'greenApple400',
+              message: 'Your workbook was successfully processed.',
+            },
+          },
+          {
+            label: 'On Close',
+            props: {
+              mode: 'alert',
+              hasCloseIcon: true,
+              icon: exclamationCircleIcon,
+              iconColor: 'cinnamon500',
+              message: 'Your workbook has an error.',
+            },
+          },
+          {
+            label: 'With Action',
+            props: {
+              mode: 'dialog',
+              hasAction: true,
+              icon: checkIcon,
+              iconColor: 'greenApple400',
+              message: 'Your workbook was successfully processed.',
+            },
+          },
+          {
+            label: 'With small padding',
+            props: {
+              mode: 'polite',
+              hasCloseIcon: true,
+              padding: 's',
+              icon: checkIcon,
+              iconColor: 'greenApple400',
+              message: 'Your workbook was successfully processed.',
+            },
+          },
+          {
+            label: 'With no depth',
+            props: {
+              mode: 'polite',
+              hasCloseIcon: true,
+              depth: 'none',
+              icon: checkIcon,
+              iconColor: 'greenApple400',
+              message: 'Your workbook was successfully processed.',
+            },
+          },
+          {
+            label: 'With depth value set to 1',
+            props: {
+              mode: 'polite',
+              hasCloseIcon: true,
+              depth: 1,
+              icon: checkIcon,
+              iconColor: 'greenApple400',
+              message: 'Your workbook was successfully processed.',
+            },
+          },
+          {
+            label: 'With depth value set to 2',
+            props: {
+              mode: 'polite',
+              hasCloseIcon: true,
+              depth: 2,
+              icon: checkIcon,
+              iconColor: 'greenApple400',
+              message: 'Your workbook was successfully processed.',
+            },
+          },
+          {
+            label: 'With depth value set to 3',
+            props: {
+              mode: 'polite',
+              hasCloseIcon: true,
+              depth: 3,
+              icon: checkIcon,
+              iconColor: 'greenApple400',
+              message: 'Your workbook was successfully processed.',
+            },
+          },
+          {
+            label: 'With depth value set to 4',
+            props: {
+              mode: 'polite',
+              hasCloseIcon: true,
+              depth: 4,
+              icon: checkIcon,
+              iconColor: 'greenApple400',
+              message: 'Your workbook was successfully processed.',
+            },
+          },
+          {
+            label: 'With depth value set to 5',
+            props: {
+              mode: 'polite',
+              hasCloseIcon: true,
+              depth: 5,
+              icon: checkIcon,
+              iconColor: 'greenApple400',
+              message: 'Your workbook was successfully processed.',
+            },
+          },
+          {
+            label: 'With depth value set to 6',
+            props: {
+              mode: 'polite',
+              hasCloseIcon: true,
+              depth: 6,
+              icon: checkIcon,
+              iconColor: 'greenApple400',
+              message: 'Your workbook was successfully processed.',
+            },
+          },
+          {
+            label: 'With custom width',
+            props: {
+              mode: 'polite',
+              hasCloseIcon: true,
+              width: 300,
+              icon: checkIcon,
+              iconColor: 'greenApple400',
+              message: 'Your workbook was successfully processed.',
+            },
+          },
+          {
+            label: 'With short mesage',
+            props: {
+              mode: 'alert',
+              hasCloseIcon: true,
+              width: 300,
+              icon: exclamationCircleIcon,
+              iconColor: 'cinnamon500',
+              message: 'There was an error',
+            },
+          },
+        ]}
+        columnProps={[{label: 'Default', props: {}}]}
+      >
+        {({mode, hasCloseIcon, hasAction, icon, iconColor, ...props}) => (
+          <Toast mode={mode} {...props}>
+            <Toast.Icon icon={icon} color={iconColor} />
+            <Toast.Body>
+              <Toast.Message>{props.message}</Toast.Message>
+              {hasAction && <Toast.Link href="#href">Custom Link</Toast.Link>}
+            </Toast.Body>
+            {hasCloseIcon && <Toast.CloseIcon aria-label="Close" />}
+          </Toast>
+        )}
+      </ComponentStatesTable>
+    </StaticStates>
   );
-};
-
-export const ToastStatesRightToLeft = () => {
-  return (
-    <>
-      <h2>Right-To-Left Toast</h2>
-      <ToastStates direction={ContentDirection.RTL} />
-    </>
-  );
-};
+});
