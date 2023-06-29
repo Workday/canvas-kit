@@ -21,10 +21,10 @@ export const Error = () => {
       hintText="Deep Dish is currently sold out."
     >
       <RadioGroup name="crust-error" onChange={handleChange} value={value} aria-describedby="error">
-        <RadioGroup.Radio value="deep-dish">Deep Dish (Sold Out)</RadioGroup.Radio>
-        <RadioGroup.Radio value="thin">Thin</RadioGroup.Radio>
-        <RadioGroup.Radio value="gluten-free">Gluten Free</RadioGroup.Radio>
-        <RadioGroup.Radio value="cauliflower">Cauliflower</RadioGroup.Radio>
+        <RadioGroup.RadioButton value="deep-dish">Deep Dish (Sold Out)</RadioGroup.RadioButton>
+        <RadioGroup.RadioButton value="thin">Thin</RadioGroup.RadioButton>
+        <RadioGroup.RadioButton value="gluten-free">Gluten Free</RadioGroup.RadioButton>
+        <RadioGroup.RadioButton value="cauliflower">Cauliflower</RadioGroup.RadioButton>
       </RadioGroup>
     </FormField>
   );

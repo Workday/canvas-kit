@@ -13,6 +13,7 @@ import {RefForwarding} from './examples/RefForwarding';
 import {Disabled} from './examples/Disabled';
 import {Required} from './examples/Required';
 import {Custom} from './examples/Custom';
+import {StandaloneRadio} from './examples/StandaloneRadio';
 
 <Meta title="Preview/Inputs/Radio" component={RadioGroup} />
 
@@ -34,8 +35,8 @@ yarn add @workday/canvas-kit-react
 
 `Radio` buttons are intended to be grouped together using a wrapping `RadioGroup` element with a
 `name` attribute. This will ensure that all `<input type="radio" />` will share the same `name`,
-grouping them together. Also, each `RadioGroup.Radio` must have a unique `value`. This is used to
-determine which radio has been selected. You can provide a `value` to the `RadioGroup` element so
+grouping them together. Also, each `RadioGroup.RadioButton` must have a unique `value`. This is used
+to determine which radio has been selected. You can provide a `value` to the `RadioGroup` element so
 that a value is pre selected from the group. To tie it all together, provide an `onChange` to
 `RadioGroup` element that sets the selected value on
 [state](https://react.dev/learn/state-a-components-memory).
@@ -46,7 +47,7 @@ text from `FormField` is attached to the `RadioGroup` and read out as a group fo
 
 <ExampleCodeBlock code={Basic} />
 
-Because the `RadioGroup` and `RadioGroup.Radio` have the correct WAI-ARIA
+Because the `RadioGroup` and `RadioGroupButton` have the correct WAI-ARIA
 [properties](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/radiogroup_role#associated_wai-aria_roles_states_and_properties),
 keyboard navigation is supported.
 
@@ -73,21 +74,22 @@ Use the error state when the selection is no longer valid.
 
 ### Inverse
 
-Set the `variant` prop of `RadioGroup.Radio` to `inverse` to ensure proper contrast on dark
+Set the `variant` prop of `RadioGroup.RadioButton` to `inverse` to ensure proper contrast on dark
 backgrounds.
 
 <ExampleCodeBlock code={Inverse} />
 
 ### Radio Group with No Value
 
-Omit the `value` prop from `RadioGroup` to render the group with no selected `RadioGroup.Radio`.
+Omit the `value` prop from `RadioGroup` to render the group with no selected
+`RadioGroup.RadioButton`.
 
 <ExampleCodeBlock code={NoValue} />
 
 ### Ref Forwarding
 
-`RadioGroup.Radio` supports [ref forwarding](https://reactjs.org/docs/forwarding-refs.html). It will
-forward `ref` to its underlying `<input type="radio">` element.
+`RadioGroup.RadioButton` supports [ref forwarding](https://reactjs.org/docs/forwarding-refs.html).
+It will forward `ref` to its underlying `<input type="radio">` element.
 
 <ExampleCodeBlock code={RefForwarding} />
 
@@ -110,11 +112,19 @@ required. Labels for required fields are suffixed by a red asterisk.
 
 ### Disabled
 
-Set the `disabled` prop of the Radio Button `<RadioGroup.Radio value="gluten-free" disabled />` to
-prevent users from interacting with it. Be careful not to disable a pre-selected Radio Button, this
-will block keyboard access from the entire Radio Group.
+Set the `disabled` prop of the Radio Button
+`<RadioGroup.RadioButton value="gluten-free" disabled />` to prevent users from interacting with it.
+Be careful not to disable a pre-selected Radio Button, this will block keyboard access from the
+entire Radio Group.
 
 <ExampleCodeBlock code={Disabled} />
+
+### Standalone Radio
+
+<ExampleCodeBlock code={StandaloneRadio} />
+
+Use `RadioGroup.Label` and its sub components when you want more control over styling the text or
+input elements.
 
 ### Custom
 

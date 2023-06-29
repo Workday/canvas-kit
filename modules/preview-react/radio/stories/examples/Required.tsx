@@ -25,10 +25,10 @@ export const Required = () => {
         value={value}
         aria-describedby="choose-crust"
       >
-        <RadioGroup.Radio value="deep-dish">Deep Dish</RadioGroup.Radio>
-        <RadioGroup.Radio value="thin">Thin</RadioGroup.Radio>
-        <RadioGroup.Radio value="gluten-free">Gluten free</RadioGroup.Radio>
-        <RadioGroup.Radio value="cauliflower">Cauliflower</RadioGroup.Radio>
+        <RadioGroup.RadioButton value="deep-dish">Deep Dish</RadioGroup.RadioButton>
+        <RadioGroup.RadioButton value="thin">Thin</RadioGroup.RadioButton>
+        <RadioGroup.RadioButton value="gluten-free">Gluten free</RadioGroup.RadioButton>
+        <RadioGroup.RadioButton value="cauliflower">Cauliflower</RadioGroup.RadioButton>
       </RadioGroup>
     </FormField>
   );

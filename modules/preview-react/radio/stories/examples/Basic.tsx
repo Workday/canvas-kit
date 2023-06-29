@@ -17,13 +17,13 @@ export const Basic = () => {
     <Flex flexDirection="column">
       <FormField label="Choose Your Pizza Crust" useFieldset={true}>
         <RadioGroup name="pizza-crust" onChange={handleChange} width="200px" value={value}>
-          <RadioGroup.Radio value="deep-dish">Deep Dish</RadioGroup.Radio>
-          <RadioGroup.Radio value="gluten-free">Gluten Free</RadioGroup.Radio>
-          <RadioGroup.Radio value="cauliflower">Cauliflower</RadioGroup.Radio>
-          <RadioGroup.Radio value="custom">
+          <RadioGroup.RadioButton value="deep-dish">Deep Dish</RadioGroup.RadioButton>
+          <RadioGroup.RadioButton value="gluten-free">Gluten Free</RadioGroup.RadioButton>
+          <RadioGroup.RadioButton value="cauliflower">Cauliflower</RadioGroup.RadioButton>
+          <RadioGroup.RadioButton value="custom">
             My favorite pizza crust flavor is butter because it's the best thing to put on bread
-          </RadioGroup.Radio>
-          <RadioGroup.Radio value="thin">Thin</RadioGroup.Radio>
+          </RadioGroup.RadioButton>
+          <RadioGroup.RadioButton value="thin">Thin</RadioGroup.RadioButton>
         </RadioGroup>
       </FormField>
       Value selected: {value}

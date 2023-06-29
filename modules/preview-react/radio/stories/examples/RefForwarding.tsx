@@ -22,12 +22,12 @@ export const RefForwarding = () => {
     <>
       <FormField label="Choose Your Pizza Crust" useFieldset={true}>
         <RadioGroup name="crust-ref" onChange={handleChange} value={value}>
-          <RadioGroup.Radio value="deep-dish">Deep Dish</RadioGroup.Radio>
-          <RadioGroup.Radio value="thin">Thin</RadioGroup.Radio>
-          <RadioGroup.Radio value="gluten-free" ref={glutenFreeRef}>
+          <RadioGroup.RadioButton value="deep-dish">Deep Dish</RadioGroup.RadioButton>
+          <RadioGroup.RadioButton value="thin">Thin</RadioGroup.RadioButton>
+          <RadioGroup.RadioButton value="gluten-free" ref={glutenFreeRef}>
             Gluten free
-          </RadioGroup.Radio>
-          <RadioGroup.Radio value="cauliflower">Cauliflower</RadioGroup.Radio>
+          </RadioGroup.RadioButton>
+          <RadioGroup.RadioButton value="cauliflower">Cauliflower</RadioGroup.RadioButton>
         </RadioGroup>
       </FormField>
       <PrimaryButton onClick={handleClick}>Select Gluten Free</PrimaryButton>

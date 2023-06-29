@@ -19,18 +19,18 @@ export default withSnapshotsEnabled({
 
 const testGroup = (
   <RadioGroup name="contact" value={'email'}>
-    <RadioGroup.Radio id="1" value="email">
+    <RadioGroup.RadioButton id="1" value="email">
       Email
-    </RadioGroup.Radio>
-    <RadioGroup.Radio id="2" value="phone">
+    </RadioGroup.RadioButton>
+    <RadioGroup.RadioButton id="2" value="phone">
       Phone
-    </RadioGroup.Radio>
-    <RadioGroup.Radio id="3" disabled={true} value="fax">
+    </RadioGroup.RadioButton>
+    <RadioGroup.RadioButton id="3" disabled={true} value="fax">
       Fax (disabled)
-    </RadioGroup.Radio>
-    <RadioGroup.Radio id="4" value="mail">
+    </RadioGroup.RadioButton>
+    <RadioGroup.RadioButton id="4" value="mail">
       "Mail (US Postal Service aka USPS), a longer than normal label"
-    </RadioGroup.Radio>
+    </RadioGroup.RadioButton>
   </RadioGroup>
 );
 
@@ -70,12 +70,12 @@ export const RadioStates = () => {
         >
           {props => (
             <RadioGroup>
-              <RadioGroup.Radio disabled={props.disabled} {...props}>
+              <RadioGroup.RadioButton disabled={props.disabled} {...props}>
                 Email
-              </RadioGroup.Radio>
-              <RadioGroup.Radio disabled={props.disabled} {...props}>
+              </RadioGroup.RadioButton>
+              <RadioGroup.RadioButton disabled={props.disabled} {...props}>
                 Phone
-              </RadioGroup.Radio>
+              </RadioGroup.RadioButton>
               {/* <RadioGroup.Label.Input checked={props.checked} {...props} />
                 <RadioGroup.Label.Text>Email</RadioGroup.Label.Text>
               </RadioGroup.Label> */}

@@ -10,7 +10,7 @@ import {space} from '@workday/canvas-kit-react/tokens';
 import {useRadioModel} from './hooks/useRadioModel';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {RadioLabel} from './RadioLabel';
-import {Radio} from './Radio';
+import {RadioButton} from './RadioButton';
 
 export interface RadioGroupProps extends Themeable, ExtractProps<typeof Flex, never> {
   /**
@@ -20,12 +20,12 @@ export interface RadioGroupProps extends Themeable, ExtractProps<typeof Flex, ne
 }
 
 /**
- * Use `RadioGroup` to group a collection of `RadioGroup.Radio` components under a common `name`.
+ * Use `RadioGroup` to group a collection of `RadioGroup.RadioButton` components under a common `name`.
  *
  * ```tsx
  * <RadioGroup name="pizza-crust" value="thin">
- *   <RadioGroup.Radio value="deep-dish">Deep Dish</RadioGroup.Radio>
- *   <RadioGroup.Radio value="thin">Thin</RadioGroup.Radio>
+ *   <RadioGroup.RadioButton value="deep-dish">Deep Dish</RadioGroup.RadioButton>
+ *   <RadioGroup.RadioButton value="thin">Thin</RadioGroup.RadioButton>
  * </RadioGroup>
  * ```
  */
@@ -39,12 +39,12 @@ export const RadioGroup = createContainer(Flex)({
      *
      * ```tsx
      * <RadioGroup name="pizza-crust" value="thin">
-     *   <RadioGroup.Radio value="deep-dish">Deep Dish</RadioGroup.Radio>
-     *   <RadioGroup.Radio value="thin">Thin</RadioGroup.Radio>
+     *   <RadioGroup.RadioButton value="deep-dish">Deep Dish</RadioGroup.RadioButton>
+     *   <RadioGroup.RadioButton value="thin">Thin</RadioGroup.RadioButton>
      * </RadioGroup>
      * ```
      */
-    Radio: Radio,
+    RadioButton: RadioButton,
     /**
      * Use `RadioGroup.Label` instead of `RadioGroup.Radio` if you need direct access to the label and the radio input.
      * This will render a `<label>` that wraps an `<input type="radio" />` and a `<span>` for the label text.

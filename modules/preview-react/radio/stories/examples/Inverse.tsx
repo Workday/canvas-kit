@@ -29,18 +29,18 @@ export const Inverse = () => {
         useFieldset={true}
       >
         <RadioGroup name="crust-inverse" onChange={handleChange} value={value}>
-          <RadioGroup.Radio variant="inverse" value="deep-dish">
+          <RadioGroup.RadioButton variant="inverse" value="deep-dish">
             Deep Dish
-          </RadioGroup.Radio>
-          <RadioGroup.Radio variant="inverse" value="thin">
+          </RadioGroup.RadioButton>
+          <RadioGroup.RadioButton variant="inverse" value="thin">
             Thin
-          </RadioGroup.Radio>
-          <RadioGroup.Radio variant="inverse" value="gluten-free">
+          </RadioGroup.RadioButton>
+          <RadioGroup.RadioButton variant="inverse" value="gluten-free">
             Gluten Free
-          </RadioGroup.Radio>
-          <RadioGroup.Radio variant="inverse" value="cauliflower">
+          </RadioGroup.RadioButton>
+          <RadioGroup.RadioButton variant="inverse" value="cauliflower">
             Cauliflower
-          </RadioGroup.Radio>
+          </RadioGroup.RadioButton>
         </RadioGroup>
       </StyledFormField>
     </Box>

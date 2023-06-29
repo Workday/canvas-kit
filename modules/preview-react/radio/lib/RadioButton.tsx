@@ -4,7 +4,7 @@ import {useRadioModel} from './hooks/useRadioModel';
 import {RadioGroup} from './RadioGroup';
 import {RadioLabelProps} from './RadioLabel';
 
-export const Radio = createSubcomponent('input')({
+export const RadioButton = createSubcomponent('input')({
   displayName: 'Radio',
   modelHook: useRadioModel,
 })<RadioLabelProps>(({children, variant, ref, value, disabled, ...elemProps}) => {
