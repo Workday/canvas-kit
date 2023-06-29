@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v9.0.19](https://github.com/Workday/canvas-kit/releases/tag/v9.0.19) (2023-06-29)
+
+### Components
+
+- fix: Update status indicator icon color on hover ([#2278](https://github.com/Workday/canvas-kit/pull/2278)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v8.6.17](https://github.com/Workday/canvas-kit/releases/tag/v8.6.17) (2023-06-29)
 
 ### Components
