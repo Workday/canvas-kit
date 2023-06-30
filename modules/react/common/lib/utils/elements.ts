@@ -68,7 +68,7 @@ export const getLastFocusableElement = (container: HTMLElement): Element[] | Ele
       if (isRadioInput(element)) {
         const radioGroup = getRadioGroup(container, element);
 
-        return radioGroup.length > 0 ? Array.from(radioGroup) : element;
+        return radioGroup.length > 1 ? Array.from(radioGroup) : element;
       }
       return element as HTMLElement;
     }
