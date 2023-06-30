@@ -52,27 +52,6 @@ value of the `RadioGroup`.
 `RadioGroup` and `RadioGroup.Radio` support keyboard navigation through the proper use of WAI-ARIA
 [properties](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/radiogroup_role#associated_wai-aria_roles_states_and_properties).
 
-### Error States
-
-Set the error prop of the wrapping `FormField` to `FormField.ErrorType.Alert` or
-`FormField.ErrorType.Error` to set the `RadioGroup` to the alert or error state, respectively. You
-will also need to set the `hintId` and `hintText` props on the `FormField` to meet accessibility
-standards. You must set an `aria-describedby` attribute on the `RadioGroup` element that matches the
-value of `hintId` set on the `FormField` element. These attributes ensure that the alert message is
-associated to the `RadioGroup` and read out by voiceover.
-
-#### Alert
-
-Use the alert state when a selection is valid but there is additional information.
-
-<ExampleCodeBlock code={Alert} />
-
-### Error
-
-Use the error state when the selection is no longer valid.
-
-<ExampleCodeBlock code={Error} />
-
 ### Inverse
 
 Set the `variant` prop of `RadioGroup.RadioButton` to `inverse` to ensure proper contrast on dark
@@ -136,6 +115,27 @@ Use `RadioGroup.Label` and its sub components when you want more control over st
 input elements.
 
 <ExampleCodeBlock code={Custom} />
+
+### Error States
+
+Set the error prop of the wrapping `FormField` to `FormField.ErrorType.Alert` or
+`FormField.ErrorType.Error` to set the `RadioGroup` to the alert or error state, respectively. You
+will also need to set the `hintId` and `hintText` props on the `FormField` to meet accessibility
+standards. You must set an `aria-describedby` attribute on the `RadioGroup` element that matches the
+value of `hintId` set on the `FormField` element. These attributes ensure that the alert message is
+associated to the `RadioGroup` and read out by voiceover.
+
+#### Alert
+
+Use the alert state when a selection is valid but there is additional information.
+
+<ExampleCodeBlock code={Alert} />
+
+#### Error
+
+Use the error state when the selection is no longer valid.
+
+<ExampleCodeBlock code={Error} />
 
 ## Component API
 
