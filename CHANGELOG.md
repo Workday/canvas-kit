@@ -3,6 +3,53 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v9.0.19](https://github.com/Workday/canvas-kit/releases/tag/v9.0.19) (2023-06-29)
+
+### Components
+
+- fix: Update status indicator icon color on hover ([#2278](https://github.com/Workday/canvas-kit/pull/2278)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v8.6.17](https://github.com/Workday/canvas-kit/releases/tag/v8.6.17) (2023-06-29)
+
+### Components
+
+- fix: Update status indicator icon color on hover ([#2278](https://github.com/Workday/canvas-kit/pull/2278)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+## [v9.0.18](https://github.com/Workday/canvas-kit/releases/tag/v9.0.18) (2023-06-27)
+
+### Components
+
+- fix: Move spreading of CSS styles to the top of a style block ([#2244](https://github.com/Workday/canvas-kit/pull/2244)) ([@thunguyen19](https://github.com/thunguyen19))
+
+
+## [v9.0.17](https://github.com/Workday/canvas-kit/releases/tag/v9.0.17) (2023-06-26)
+
+### Documentation
+
+- docs: Update comments about Select options prop to match actual use ([#2271](https://github.com/Workday/canvas-kit/pull/2271)) ([@JeffreyRuder](https://github.com/JeffreyRuder))
+
+
+## [v9.0.16](https://github.com/Workday/canvas-kit/releases/tag/v9.0.16) (2023-06-20)
+
+### Documentation
+
+- docs: Fixed Doc Parser Naming Collision ([#2261](https://github.com/Workday/canvas-kit/pull/2261)) ([@josh-bagwell](https://github.com/josh-bagwell))
+
+
+## [v9.0.15](https://github.com/Workday/canvas-kit/releases/tag/v9.0.15) (2023-06-16)
+
+### Documentation
+
+- docs: Add codemod preamble ([#2252](https://github.com/Workday/canvas-kit/pull/2252)) ([@alanbsmith](https://github.com/alanbsmith), [@jamesfan](https://github.com/jamesfan))
+
+
+## [v9.0.14](https://github.com/Workday/canvas-kit/releases/tag/v9.0.14) (2023-06-15)
+
+### Documentation
+
+- docs: Update comment describing accessibleHide utility ([#2260](https://github.com/Workday/canvas-kit/pull/2260)) ([@vibdev](https://github.com/vibdev))
+
+
 ## [v9.0.13](https://github.com/Workday/canvas-kit/releases/tag/v9.0.13) (2023-06-14)
 
 ### Components
