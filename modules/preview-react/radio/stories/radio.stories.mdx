@@ -33,23 +33,24 @@ yarn add @workday/canvas-kit-react
 
 ### Basic Example
 
-`Radio` buttons are intended to be grouped together using a wrapping `RadioGroup` element with a
-`name` attribute. This will ensure that all `<input type="radio" />` will share the same `name`,
-grouping them together. Also, each `RadioGroup.RadioButton` must have a unique `value`. This is used
-to determine which radio has been selected. You can provide a `value` to the `RadioGroup` element so
-that a value is pre selected from the group. To tie it all together, provide an `onChange` to
-`RadioGroup` element that sets the selected value on
-[state](https://react.dev/learn/state-a-components-memory).
+Our radio component includes a `RadioGroup` container and `RadioGroup.RadioButton`, which renders an
+individual radio button. Nest related `RadioGroup.RadioButton` buttons within a `RadioGroup` and
+provide a `name` prop to the `RadioGroup` to group the radio buttons together. Each
+`RadioGroup.Radio` must have a unique `value`. This value is used in conjunction with the `value`
+prop set on the `RadioGroup` to determine which radio button is selected. To tie it all together,
+provide an `onChange` handler to the `RadioGroup` to track the selected value as it changes.
 
 `RadioGroup` should be used in tandem with [Form Field](/components/inputs/form-field/) where the
-`useFieldset` prop is set to `true` to meet accessibility standards. This ensures that the `label`
-text from `FormField` is attached to the `RadioGroup` and read out as a group for voiceover.
+`useFieldset` prop is set to `true` to meet accessibility standards. This ensures the `label` text
+from `FormField` is attached to the `RadioGroup` and read out as a group for voiceover.
 
 <ExampleCodeBlock code={Basic} />
 
-Because the `RadioGroup` and `RadioGroupButton` have the correct WAI-ARIA
-[properties](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/radiogroup_role#associated_wai-aria_roles_states_and_properties),
-keyboard navigation is supported.
+Our example uses [React state](<(https://react.dev/learn/state-a-components-memory)>) to track the
+value of the `RadioGroup`.
+
+`RadioGroup` and `RadioGroup.Radio` support keyboard navigation through the proper use of WAI-ARIA
+[properties](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/radiogroup_role#associated_wai-aria_roles_states_and_properties).
 
 ### Error States
 
@@ -121,10 +122,13 @@ entire Radio Group.
 
 ### Standalone Radio
 
+Use `StyledRadio` when you want a standalone styled radio input and full control of the behavior and
+accessibility.
+
 <ExampleCodeBlock code={StandaloneRadio} />
 
 Use `RadioGroup.Label` and its sub components when you want more control over styling the text or
-input elements.
+input elements but still want some behavior handled for you.
 
 ### Custom
 

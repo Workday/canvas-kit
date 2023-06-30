@@ -16,14 +16,25 @@ export const StandaloneRadio = () => {
   return (
     <Flex flexDirection="column">
       <FormField label="Choose Your Pizza Crust" useFieldset={true}>
-        <Flex flexDirection="row" gap="m">
-          <Flex>
-            <label>
-              <StyledRadio />
-              Deep Dish
-            </label>
+        <Flex gap="m">
+          <Flex as="label" gap="xs">
+            <StyledRadio
+              onChange={handleChange}
+              value="deep-dish"
+              name="pizza-crust-standalone"
+              checked={value === 'deep-dish'}
+            />
+            Deep Dish
           </Flex>
-          <StyledRadio />
+          <Flex as="label" gap="xs">
+            <StyledRadio
+              onChange={handleChange}
+              value="gluten-free"
+              checked={value === 'gluten-free'}
+              name="pizza-crust-standalone"
+            />
+            Gluten Free
+          </Flex>
         </Flex>
       </FormField>
       Value selected: {value}
