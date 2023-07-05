@@ -100,7 +100,7 @@ const StyledTableRow = styled('tr')<TableRowProps>(
       fontSize: 13,
       borderRight: cellBorder,
       borderBottom: cellBorder,
-      height: spaceNumbers.xl + spaceNumbers.xxs,
+      height: `${spaceNumbers.xl + spaceNumbers.xxs}rem`,
       boxSizing: 'border-box',
       transition: 'background-color 0.2s',
     },
