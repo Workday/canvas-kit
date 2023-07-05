@@ -1,21 +1,8 @@
 import React from 'react';
-import {
-  styled,
-  StyledType,
-  focusRing,
-  mouseFocusBehavior,
-  createSubcomponent,
-  createElemPropsHook,
-} from '@workday/canvas-kit-react/common';
-import {colors, inputColors, spaceNumbers, borderRadius} from '@workday/canvas-kit-react/tokens';
+import {createSubcomponent, createElemPropsHook} from '@workday/canvas-kit-react/common';
 import {useRadioModel} from './hooks/useRadioModel';
 import {RadioLabelProps, RadioLabelContext} from './RadioLabel';
-import {Box, Flex} from '@workday/canvas-kit-react/layout';
 import {RadioInputWrapper, StyledRadioInput} from './StyledRadioButton';
-
-const radioWidth = 18;
-const rippleRadius = (spaceNumbers.l - radioWidth) / 2;
-const radioHeight = 18;
 
 const useRadioInput = createElemPropsHook(useRadioModel)(
   (model, ref, elemProps: {value?: string; checked?: boolean} = {}) => {

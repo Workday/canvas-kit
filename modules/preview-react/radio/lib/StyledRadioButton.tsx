@@ -38,7 +38,7 @@ export const StyledRadioInput = styled(Box.as('input'))<StyledRadioButtonProps &
       },
     },
   }) => ({
-    cursor: disabled ? undefined : 'pointer',
+    cursor: !disabled ? 'pointer' : undefined,
     opacity: disabled && variant === 'inverse' ? '.4' : '1',
     height: '18px',
     width: '18px',
@@ -85,7 +85,7 @@ export const StyledRadioInput = styled(Box.as('input'))<StyledRadioButtonProps &
 
     '&:checked:after': {
       backgroundColor: variant === 'inverse' ? themePrimary.main : colors.frenchVanilla100,
-      border: `5px solid`,
+      border: `5px solid`, // this is the selected inner circle of the radio input
       borderColor: variant === 'inverse' ? colors.frenchVanilla100 : themePrimary.main,
     },
 
@@ -104,7 +104,7 @@ export const StyledRadioInput = styled(Box.as('input'))<StyledRadioButtonProps &
     '&:focus:checked:after, &:focus:hover:checked:after': {
       outline: 'transparent',
       ...focusRing({
-        width: variant === 'inverse' ? 2 : 2,
+        width: 2,
         separation: 2,
         animate: false,
         innerColor: variant === 'inverse' ? colors.blackPepper400 : colors.frenchVanilla100,
@@ -113,19 +113,7 @@ export const StyledRadioInput = styled(Box.as('input'))<StyledRadioButtonProps &
     },
 
     ...mouseFocusBehavior({
-      '&:focus:after': {
-        ...focusRing({
-          width: 0,
-          outerColor: variant === 'inverse' ? colors.frenchVanilla100 : themeFocusOutline,
-        }),
-      },
-      '&:focus:hover:after, &:focus:active:after': {
-        ...focusRing({
-          width: 0,
-          outerColor: variant === 'inverse' ? colors.frenchVanilla100 : themeFocusOutline,
-        }),
-      },
-      '&:focus:hover:checked:after, &:focus:active:checked:after': {
+      '&:focus:after, &:focus:hover:after, &:focus:active:after, &:focus:hover:checked:after, &:focus:active:checked:after': {
         ...focusRing({
           width: 0,
           outerColor: variant === 'inverse' ? colors.frenchVanilla100 : themeFocusOutline,
