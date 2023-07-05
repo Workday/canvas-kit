@@ -16,7 +16,7 @@ export const RadioText = createSubcomponent('span')({
       as={Element}
       style={{
         cursor: disabled ? undefined : 'pointer',
-        opacity: disabled ? (variant === 'inverse' ? '.4' : '1') : undefined,
+        opacity: disabled && inversed ? '.4' : '1'
         color: variant === 'inverse'
           ? colors.frenchVanilla100
           : disabled
