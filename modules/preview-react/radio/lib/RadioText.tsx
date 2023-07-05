@@ -10,19 +10,18 @@ export const RadioText = createSubcomponent('span')({
   modelHook: useRadioModel,
 })(({children, ...elemProps}: ExtractProps<typeof Text>, Element) => {
   const {disabled, variant} = React.useContext(RadioLabelContext);
-  const inversed = variant === 'inverse';
+  const inverse = variant === 'inverse';
   return (
     <Text
       as={Element}
       style={{
-        cursor: disabled ? undefined : 'pointer',
-        opacity: disabled && inversed ? '.4' : '1',
-        color:
-          variant === 'inverse'
-            ? colors.frenchVanilla100
-            : disabled
-            ? inputColors.disabled.text
-            : elemProps.color,
+        cursor: !disabled ? 'pointer' : undefined,
+        opacity: disabled && inverse ? '.4' : '1',
+        color: inverse
+          ? colors.frenchVanilla100
+          : disabled
+          ? inputColors.disabled.text
+          : elemProps.color,
       }}
       typeLevel="subtext.large"
       {...elemProps}

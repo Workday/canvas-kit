@@ -140,7 +140,7 @@ export const RadioInputWrapper = styled(Flex)<Pick<StyledRadioButtonProps, 'disa
       opacity: variant === 'inverse' ? '0.4' : '1',
     },
     '&:hover:before': {
-      boxShadow: disabled ? undefined : `0 0 0 ${rippleRadius}px ${colors.soap200}`,
+      boxShadow: !disabled ? `0 0 0 ${rippleRadius}px ${colors.soap200}` : undefined,
     },
   })
 );
