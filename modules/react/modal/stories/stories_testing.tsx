@@ -107,7 +107,7 @@ export const WithRadioButtons = () => {
               value={value}
               onChange={value => setValue(String(value))}
             >
-              <Radio id="1" value="email" label="E-mail" />
+              <Radio disabled id="1" value="email" label="E-mail" />
               <Radio id="2" value="phone" label="Phone" />
             </RadioGroup>
           </Modal.Body>

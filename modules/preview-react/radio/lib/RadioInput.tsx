@@ -100,7 +100,7 @@ const StyledRadioInput = styled(Box.as('input'))<RadioLabelProps & StyledType>(
     '&:focus:checked:after, &:focus:hover:checked:after': {
       outline: 'transparent',
       ...focusRing({
-        width: variant === 'inverse' ? 2 : 2,
+        width: 2,
         separation: 2,
         animate: false,
         innerColor: variant === 'inverse' ? colors.blackPepper400 : colors.frenchVanilla100,
@@ -109,19 +109,7 @@ const StyledRadioInput = styled(Box.as('input'))<RadioLabelProps & StyledType>(
     },
 
     ...mouseFocusBehavior({
-      '&:focus:after': {
-        ...focusRing({
-          width: 0,
-          outerColor: variant === 'inverse' ? colors.frenchVanilla100 : themeFocusOutline,
-        }),
-      },
-      '&:focus:hover:after, &:focus:active:after': {
-        ...focusRing({
-          width: 0,
-          outerColor: variant === 'inverse' ? colors.frenchVanilla100 : themeFocusOutline,
-        }),
-      },
-      '&:focus:hover:checked:after, &:focus:active:checked:after': {
+      '&:focus:after, &:focus:hover:after, &:focus:active:after, &:focus:hover:checked:after, &:focus:active:checked:after': {
         ...focusRing({
           width: 0,
           outerColor: variant === 'inverse' ? colors.frenchVanilla100 : themeFocusOutline,
