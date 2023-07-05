@@ -88,7 +88,7 @@ export const ActionBarWithOverflowMenuStates = () => {
           },
         ]}
         columnProps={[
-           {label: 'Example', props: {}},
+          {label: 'Example', props: {}},
         ]}
       >
         {({containerWidth, maximumVisible}) => (
