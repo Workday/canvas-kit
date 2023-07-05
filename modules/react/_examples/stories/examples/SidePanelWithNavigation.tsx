@@ -49,6 +49,7 @@ const gettingStarted = [
 ];
 
 export const WithNavigation = () => {
+
   return (
     <Flex height={800} position="relative" backgroundColor="frenchVanilla100">
       <StyledPanel touched={true} variant="alternate">
