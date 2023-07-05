@@ -87,7 +87,9 @@ export const ActionBarWithOverflowMenuStates = () => {
             props: {maximumVisible: items.length, containerWidth: 280},
           },
         ]}
-        columnProps={[{label: 'Example', props: {}}]}
+        columnProps={[
+           {label: 'Example', props: {}},
+        ]}
       >
         {({containerWidth, maximumVisible}) => (
           <ActionBar items={items} maximumVisible={maximumVisible}>
