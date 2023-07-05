@@ -10,7 +10,7 @@ export const RadioText = createSubcomponent('span')({
   modelHook: useRadioModel,
 })(({children, ...elemProps}: ExtractProps<typeof Text>, Element) => {
   const {disabled, variant} = React.useContext(RadioLabelContext);
-
+    const inversed = variant === 'inverse';
   return (
     <Text
       as={Element}
