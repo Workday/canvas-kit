@@ -98,22 +98,22 @@ careful not to disable a pre-selected radio button as this will block keyboard a
 
 <ExampleCodeBlock code={Disabled} />
 
-### Standalone Radio
+### Custom Radio Button
 
-Use `StyledRadio` when you want a standalone styled radio input and full control of the behavior and
-accessibility.
+Use `RadioGroup.Label` instead of `RadioGroup.RadioButton` if you need direct access to the label
+and the radio input. This will allow you to apply custom styling to the text and radio input.
+
+<ExampleCodeBlock code={Custom} />
+
+### Standalone Radio Button
+
+Use `StyledRadio` when you want a styled radio button on its own without using `RadioGroup`. You
+will need to handle behavior and accessibility.
 
 <ExampleCodeBlock code={StandaloneRadio} />
 
-Use `RadioGroup.Label` and its sub components when you want more control over styling the text or
-input elements but still want some behavior handled for you.
-
-### Custom
-
-Use `RadioGroup.Label` and its sub components when you want more control over styling the text or
-input elements.
-
-<ExampleCodeBlock code={Custom} />
+Use `RadioGroup.Label` when you want more control styling the text and radio input but still want
+some behavior handled for you.
 
 ### Error States
 
