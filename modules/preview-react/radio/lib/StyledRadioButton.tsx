@@ -84,9 +84,9 @@ const StyledRadioInput = styled(Box.as('input'))<StyledRadioButtonProps & Styled
     },
 
     '&:checked:after': {
-      backgroundColor: variant === 'inverse' ? themePrimary.main : colors.frenchVanilla100,
-      border: `5px solid`, // this is the selected inner circle of the radio input
-      borderColor: variant === 'inverse' ? colors.frenchVanilla100 : themePrimary.main,
+      backgroundColor: variant === 'inverse' ? themePrimary.main : themePrimary.contrast, // inner circle color
+      border: `5px solid`, // this creates the inner circle
+      borderColor: variant === 'inverse' ? colors.frenchVanilla100 : themePrimary.main, // outer circle color
     },
 
     '&:focus:after, &:focus:hover:after': {
@@ -97,7 +97,7 @@ const StyledRadioInput = styled(Box.as('input'))<StyledRadioButtonProps & Styled
         separation: 0,
         animate: false,
         innerColor: variant === 'inverse' ? colors.blackPepper400 : colors.frenchVanilla100,
-        outerColor: variant === 'inverse' ? colors.frenchVanilla100 : colors.blueberry400,
+        outerColor: variant === 'inverse' ? colors.frenchVanilla100 : themeFocusOutline,
       }),
     },
 
@@ -108,7 +108,7 @@ const StyledRadioInput = styled(Box.as('input'))<StyledRadioButtonProps & Styled
         separation: 2,
         animate: false,
         innerColor: variant === 'inverse' ? colors.blackPepper400 : colors.frenchVanilla100,
-        outerColor: variant === 'inverse' ? colors.frenchVanilla100 : colors.blueberry400,
+        outerColor: variant === 'inverse' ? colors.frenchVanilla100 : themeFocusOutline,
       }),
     },
 
