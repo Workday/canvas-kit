@@ -21,7 +21,6 @@ export const Custom = () => {
           onChange={handleChange}
           width="200px"
           value={value}
-          gap="m"
         >
           <RadioGroup.Label>
             <RadioGroup.Label.Input value="deep-dish" />
