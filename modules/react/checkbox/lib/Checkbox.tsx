@@ -324,7 +324,7 @@ export const Checkbox = createComponent('input')({
     Element
   ) => {
     const inputId = useUniqueId(id);
-    const {localRef} = useLocalRef(useForkRef(ref));
+    const {localRef, elementRef} = useLocalRef(ref);
     React.useEffect(() => {
       if (typeof indeterminate === 'boolean' && localRef.current) {
         localRef.current.indeterminate = indeterminate;
@@ -339,7 +339,7 @@ export const Checkbox = createComponent('input')({
             checked={checked}
             disabled={disabled}
             id={inputId}
-            ref={localRef}
+            ref={elementRef}
             type="checkbox"
             variant={variant}
             aria-checked={indeterminate ? 'mixed' : checked}
