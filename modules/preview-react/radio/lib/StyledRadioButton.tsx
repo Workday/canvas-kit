@@ -20,7 +20,7 @@ export interface StyledRadioButtonProps extends ExtractProps<typeof Box, 'input'
   variant?: 'inverse' | undefined;
 }
 
-export const StyledRadioInput = styled(Box.as('input'))<StyledRadioButtonProps & StyledType>(
+const StyledRadioInput = styled(Box.as('input'))<StyledRadioButtonProps & StyledType>(
   {
     '&:focus, &:active': {
       outline: 'transparent',
@@ -123,7 +123,7 @@ export const StyledRadioInput = styled(Box.as('input'))<StyledRadioButtonProps &
   })
 );
 
-export const RadioInputWrapper = styled(Flex)<Pick<StyledRadioButtonProps, 'disabled' | 'variant'>>(
+const RadioInputWrapper = styled(Flex)<Pick<StyledRadioButtonProps, 'disabled' | 'variant'>>(
   {
     // Hover Ripple element
     '::before': {
@@ -151,28 +151,12 @@ export interface StyledRadioButtonProps extends ExtractProps<typeof Box, 'input'
 
 export const StyledRadioButton = createComponent('input')({
   displayName: 'Radio',
-  Component: (
-    {
-      children,
-      disabled,
-      checked,
-      value,
-      name,
-      variant,
-      'aria-checked': ariaChecked,
-      'aria-describedby': ariaDescribedby,
-      ...elemProps
-    }: StyledRadioButtonProps,
-    ref,
-    Element
-  ) => {
+  Component: ({...elemProps}: StyledRadioButtonProps, ref, Element) => {
     return (
       <RadioInputWrapper
         height="18px"
         width="18px"
         flex="0 0 auto"
-        disabled={disabled}
-        variant={variant}
         {...elemProps} // This ensures our visual testing stories work properly
       >
         <StyledRadioInput
@@ -181,10 +165,6 @@ export const StyledRadioButton = createComponent('input')({
           margin="zero"
           as={Element}
           type="radio"
-          checked={checked}
-          aria-checked={checked}
-          variant={variant}
-          disabled={disabled}
           ref={ref}
           {...elemProps}
         />
