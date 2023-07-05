@@ -16,11 +16,11 @@ const radioWidth = 18;
 const rippleRadius = (spaceNumbers.l - radioWidth) / 2;
 const radioHeight = 18;
 
-export interface StyledRadioProps extends ExtractProps<typeof Box, 'input'>, Themeable {
+export interface StyledRadioButtonProps extends ExtractProps<typeof Box, 'input'>, Themeable {
   variant?: 'inverse' | undefined;
 }
 
-const StyledRadioInput = styled(Box.as('input'))<StyledRadioProps & StyledType>(
+const StyledRadioInput = styled(Box.as('input'))<StyledRadioButtonProps & StyledType>(
   {
     '&:focus, &:active': {
       outline: 'transparent',
@@ -135,7 +135,7 @@ const StyledRadioInput = styled(Box.as('input'))<StyledRadioProps & StyledType>(
   })
 );
 
-const RadioInputWrapper = styled(Flex)<Pick<StyledRadioProps, 'disabled' | 'variant'>>(
+const RadioInputWrapper = styled(Flex)<Pick<StyledRadioButtonProps, 'disabled' | 'variant'>>(
   {
     // Hover Ripple element
     '::before': {
@@ -157,13 +157,13 @@ const RadioInputWrapper = styled(Flex)<Pick<StyledRadioProps, 'disabled' | 'vari
   })
 );
 
-export interface StyledRadioProps extends ExtractProps<typeof Box, 'input'> {
+export interface StyledRadioButtonProps extends ExtractProps<typeof Box, 'input'> {
   variant?: 'inverse' | undefined;
 }
 
-export const StyledRadio = createComponent('input')({
+export const StyledRadioButton = createComponent('input')({
   displayName: 'Radio',
-  Component: ({children, variant, ...elemProps}: StyledRadioProps, ref, Element) => {
+  Component: ({children, variant, ...elemProps}: StyledRadioButtonProps, ref, Element) => {
     return (
       <RadioInputWrapper
         height="18px"

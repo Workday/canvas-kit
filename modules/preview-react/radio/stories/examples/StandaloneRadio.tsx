@@ -1,6 +1,6 @@
 import React from 'react';
 import {FormField} from '@workday/canvas-kit-react/form-field';
-import {StyledRadio} from '@workday/canvas-kit-preview-react/radio';
+import {StyledRadioButton} from '@workday/canvas-kit-preview-react/radio';
 import {Flex} from '@workday/canvas-kit-react/layout';
 
 export const StandaloneRadio = () => {
@@ -18,7 +18,7 @@ export const StandaloneRadio = () => {
       <FormField label="Choose Your Pizza Crust" useFieldset={true}>
         <Flex gap="m">
           <Flex as="label" gap="xs">
-            <StyledRadio
+            <StyledRadioButton
               onChange={handleChange}
               value="deep-dish"
               name="pizza-crust-standalone"
@@ -27,7 +27,7 @@ export const StandaloneRadio = () => {
             Deep Dish
           </Flex>
           <Flex as="label" gap="xs">
-            <StyledRadio
+            <StyledRadioButton
               onChange={handleChange}
               value="gluten-free"
               checked={value === 'gluten-free'}

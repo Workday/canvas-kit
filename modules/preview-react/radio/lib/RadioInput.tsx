@@ -183,7 +183,7 @@ export const RadioInput = createSubcomponent('input')({
         flex="0 0 auto"
         disabled={disabled}
         variant={variant}
-        {...elemProps}
+        {...elemProps} // This ensures our visual testing stories work properly
       >
         <StyledRadioInput
           borderRadius="circle"
