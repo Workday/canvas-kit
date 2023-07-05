@@ -17,12 +17,10 @@ export const RadioText = createSubcomponent('span')({
       style={{
         cursor: disabled ? undefined : 'pointer',
         opacity: disabled ? (variant === 'inverse' ? '.4' : '1') : undefined,
-        color: disabled
-          ? variant === 'inverse'
-            ? colors.frenchVanilla100
-            : inputColors.disabled.text
-          : variant === 'inverse'
+        color: variant === 'inverse'
           ? colors.frenchVanilla100
+          : disabled
+          ? inputColors.disabled.text
           : elemProps.color,
       }}
       typeLevel="subtext.large"
