@@ -20,7 +20,7 @@ export interface StyledRadioButtonProps extends ExtractProps<typeof Box, 'input'
   variant?: 'inverse' | undefined;
 }
 
-const StyledRadioInput = styled(Box.as('input'))<StyledRadioButtonProps & StyledType>(
+export const StyledRadioInput = styled(Box.as('input'))<StyledRadioButtonProps & StyledType>(
   {
     '&:focus, &:active': {
       outline: 'transparent',
@@ -135,7 +135,7 @@ const StyledRadioInput = styled(Box.as('input'))<StyledRadioButtonProps & Styled
   })
 );
 
-const RadioInputWrapper = styled(Flex)<Pick<StyledRadioButtonProps, 'disabled' | 'variant'>>(
+export const RadioInputWrapper = styled(Flex)<Pick<StyledRadioButtonProps, 'disabled' | 'variant'>>(
   {
     // Hover Ripple element
     '::before': {
@@ -163,15 +163,29 @@ export interface StyledRadioButtonProps extends ExtractProps<typeof Box, 'input'
 
 export const StyledRadioButton = createComponent('input')({
   displayName: 'Radio',
-  Component: ({children, variant, ...elemProps}: StyledRadioButtonProps, ref, Element) => {
+  Component: (
+    {
+      children,
+      disabled,
+      checked,
+      value,
+      name,
+      variant,
+      'aria-checked': ariaChecked,
+      'aria-describedby': ariaDescribedby,
+      ...elemProps
+    }: StyledRadioButtonProps,
+    ref,
+    Element
+  ) => {
     return (
       <RadioInputWrapper
         height="18px"
         width="18px"
         flex="0 0 auto"
-        disabled={elemProps.disabled}
+        disabled={disabled}
         variant={variant}
-        {...elemProps}
+        {...elemProps} // This ensures our visual testing stories work properly
       >
         <StyledRadioInput
           borderRadius="circle"
@@ -179,10 +193,11 @@ export const StyledRadioButton = createComponent('input')({
           margin="zero"
           as={Element}
           type="radio"
-          checked={elemProps.checked}
-          aria-checked={elemProps.checked}
+          checked={checked}
+          aria-checked={checked}
           variant={variant}
-          disabled={elemProps.disabled}
+          disabled={disabled}
+          ref={ref}
           {...elemProps}
         />
       </RadioInputWrapper>
