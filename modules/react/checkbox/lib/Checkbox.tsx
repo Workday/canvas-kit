@@ -220,7 +220,7 @@ const CheckboxInput = styled('input')<CheckboxProps & StyledType>(
           variant === 'inverse' ? `1px solid ${colors.soap300}` : `1px solid ${errorColors.inner}`,
         boxShadow: `0 0 0 1px ${errorColors.inner}, 0 0 0 2px ${errorColors.outer}`,
       },
-      '&:not(:checked):not(:indeterminate):not(:disabled):not(:focus):hover, &:not(:checked):not(indeterminate):not(:disabled):active': {
+      '&:not(:checked):not(:indeterminate):not(:disabled):not(:focus):hover, &:not(:checked):not(:indeterminate):not(:disabled):active': {
         '~ div:first-of-type': {
           borderColor: variant === 'inverse' ? `1px solid ${colors.soap300}` : errorColors.inner,
         },
