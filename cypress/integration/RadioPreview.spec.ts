@@ -57,4 +57,18 @@ describe('Radio Preview', () => {
       cy.findByLabelText('Gluten Free (No longer Available)').should('be.disabled');
     });
   });
+
+  context(`given the 'Alert' story is rendered`, () => {
+    beforeEach(() => {
+      h.stories.load('Preview/Inputs/Radio', 'Alert');
+    });
+
+    it('should not have any axe errors', () => {
+      cy.checkA11y();
+    });
+
+    it(`the "Deep Dish" radio button should have an aria-describedby`, () => {
+      cy.findByLabelText('Deep Dish').should('have.attr', 'aria-describedby', 'hint-alert');
+    });
+  });
 });
