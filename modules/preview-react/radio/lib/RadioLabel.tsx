@@ -62,7 +62,7 @@ export const RadioLabel = createSubcomponent('label')({
         alignItems="flex-start"
         minHeight="m"
         position="relative"
-        gap="xxs"
+        gap="xs"
         {...elemProps}
       >
         {children}
