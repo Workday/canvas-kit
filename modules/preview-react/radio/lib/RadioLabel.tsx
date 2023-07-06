@@ -34,7 +34,7 @@ export const RadioLabel = createSubcomponent('label')({
      * <RadioGroup name"pizza-crust" value="deep-dish">
      *   <RadioGroup.Label>
      *     <RadioGroup.Label.Input value="deep-dish" />
-     *     <RadioGroup.Label.Text>Deep Dish</RadioGroup.Label.Text>
+     *     <RadioGroup.Label.Text>Deep dish</RadioGroup.Label.Text>
      *   </RadioGroup.Label>
      * </RadioGroup>
      * ```
@@ -47,7 +47,7 @@ export const RadioLabel = createSubcomponent('label')({
      * <RadioGroup name"pizza-crust" value="deep-dish">
      *   <RadioGroup.Label>
      *     <RadioGroup.Label.Input value="deep-dish" />
-     *     <RadioGroup.Label.Text>Deep Dish</RadioGroup.Label.Text>
+     *     <RadioGroup.Label.Text>Deep dish</RadioGroup.Label.Text>
      *   </RadioGroup.Label>
      * </RadioGroup>
      * ```

@@ -14,10 +14,10 @@ export const Disabled = () => {
   return (
     <FormField label="Choose Your Pizza Crust" useFieldset={true}>
       <RadioGroup name="crust-disabled" onChange={handleChange} value={value}>
-        <RadioGroup.RadioButton value="deep-dish">Deep Dish</RadioGroup.RadioButton>
+        <RadioGroup.RadioButton value="deep-dish">Deep dish</RadioGroup.RadioButton>
         <RadioGroup.RadioButton value="thin">Thin</RadioGroup.RadioButton>
         <RadioGroup.RadioButton disabled value="gluten-free">
-          Gluten Free (No longer Available)
+          Gluten free (sold out)
         </RadioGroup.RadioButton>
         <RadioGroup.RadioButton value="cauliflower">Cauliflower</RadioGroup.RadioButton>
       </RadioGroup>

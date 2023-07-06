@@ -16,19 +16,14 @@ export const Custom = () => {
   return (
     <Flex flexDirection="column">
       <FormField label="Choose Your Pizza Crust" useFieldset={true}>
-        <RadioGroup
-          name="pizza-crust-custom"
-          onChange={handleChange}
-          width="200px"
-          value={value}
-        >
+        <RadioGroup name="pizza-crust-custom" onChange={handleChange} width="200px" value={value}>
           <RadioGroup.Label>
             <RadioGroup.Label.Input value="deep-dish" />
-            <RadioGroup.Label.Text color="berrySmoothie400">Deep Dish</RadioGroup.Label.Text>
+            <RadioGroup.Label.Text color="berrySmoothie400">Deep dish</RadioGroup.Label.Text>
           </RadioGroup.Label>
           <RadioGroup.Label>
             <RadioGroup.Label.Input value="gluten-free" />
-            <RadioGroup.Label.Text color="berrySmoothie400">Gluten Free</RadioGroup.Label.Text>
+            <RadioGroup.Label.Text color="berrySmoothie400">Gluten free</RadioGroup.Label.Text>
           </RadioGroup.Label>
           <RadioGroup.Label>
             <RadioGroup.Label.Input value="cauliflower" />

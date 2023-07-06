@@ -24,7 +24,7 @@ export interface RadioGroupProps extends Themeable, ExtractProps<typeof Flex, ne
  *
  * ```tsx
  * <RadioGroup name="pizza-crust" value="thin">
- *   <RadioGroup.RadioButton value="deep-dish">Deep Dish</RadioGroup.RadioButton>
+ *   <RadioGroup.RadioButton value="deep-dish">Deep dish</RadioGroup.RadioButton>
  *   <RadioGroup.RadioButton value="thin">Thin</RadioGroup.RadioButton>
  * </RadioGroup>
  * ```
@@ -39,7 +39,7 @@ export const RadioGroup = createContainer(Flex)({
      *
      * ```tsx
      * <RadioGroup name="pizza-crust" value="thin">
-     *   <RadioGroup.RadioButton value="deep-dish">Deep Dish</RadioGroup.RadioButton>
+     *   <RadioGroup.RadioButton value="deep-dish">Deep dish</RadioGroup.RadioButton>
      *   <RadioGroup.RadioButton value="thin">Thin</RadioGroup.RadioButton>
      * </RadioGroup>
      * ```
@@ -53,7 +53,7 @@ export const RadioGroup = createContainer(Flex)({
      * <RadioGroup name"pizza-crust" value="deep-dish">
      *   <RadioGroup.Label>
      *     <RadioGroup.Label.Input value="deep-dish" />
-     *     <RadioGroup.Label.Text>Deep Dish</RadioGroup.Label.Text>
+     *     <RadioGroup.Label.Text>Deep dish</RadioGroup.Label.Text>
      *   </RadioGroup.Label>
      * </RadioGroup>
      * ```

@@ -18,7 +18,7 @@ export const LabelPosition = () => {
       useFieldset={true}
     >
       <RadioGroup name="crust-label" onChange={handleChange} value={value}>
-        <RadioGroup.RadioButton value="deep-dish">Deep Dish</RadioGroup.RadioButton>
+        <RadioGroup.RadioButton value="deep-dish">Deep dish</RadioGroup.RadioButton>
         <RadioGroup.RadioButton value="thin">Thin</RadioGroup.RadioButton>
         <RadioGroup.RadioButton value="gluten-free">Gluten free</RadioGroup.RadioButton>
         <RadioGroup.RadioButton value="cauliflower">Cauliflower</RadioGroup.RadioButton>

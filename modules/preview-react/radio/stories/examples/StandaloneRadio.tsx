@@ -24,7 +24,7 @@ export const StandaloneRadio = () => {
               name="pizza-crust-standalone"
               checked={value === 'deep-dish'}
             />
-            Deep Dish
+            Deep dish
           </Flex>
           <Flex as="label" gap="xs">
             <StyledRadioButton
@@ -33,7 +33,7 @@ export const StandaloneRadio = () => {
               checked={value === 'gluten-free'}
               name="pizza-crust-standalone"
             />
-            Gluten Free
+            Gluten free
           </Flex>
         </Flex>
       </FormField>

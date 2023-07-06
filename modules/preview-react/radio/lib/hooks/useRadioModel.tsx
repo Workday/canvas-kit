@@ -24,7 +24,7 @@ export const useRadioModel = createModelHook({
      *    >
      *      <RadioGroup.RadioButton value="deep-dish">Deep dish</RadioGroup.RadioButton>
      *      <RadioGroup.RadioButton value="thin">Thin</RadioGroup.RadioButton>
-     *      <RadioGroup.RadioButton value="gluten-free">Gluten Free</RadioGroup.RadioButton>
+     *      <RadioGroup.RadioButton value="gluten-free">Gluten free</RadioGroup.RadioButton>
      *      <RadioGroup.RadioButton value="cauliflower">Cauliflower</RadioGroup.RadioButton>
      *    </RadioGroup>
      * </FormField>

@@ -30,13 +30,13 @@ export const Inverse = () => {
       >
         <RadioGroup name="crust-inverse" onChange={handleChange} value={value}>
           <RadioGroup.RadioButton variant="inverse" value="deep-dish">
-            Deep Dish
+            Deep dish
           </RadioGroup.RadioButton>
           <RadioGroup.RadioButton variant="inverse" value="thin">
             Thin
           </RadioGroup.RadioButton>
           <RadioGroup.RadioButton variant="inverse" value="gluten-free">
-            Gluten Free
+            Gluten free
           </RadioGroup.RadioButton>
           <RadioGroup.RadioButton variant="inverse" value="cauliflower">
             Cauliflower

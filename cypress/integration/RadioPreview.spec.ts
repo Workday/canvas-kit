@@ -16,24 +16,24 @@ describe('Radio Preview', () => {
 
       context(`when the "Gluten free" radio button is clicked`, () => {
         beforeEach(() => {
-          cy.findByLabelText('Gluten Free').click();
+          cy.findByLabelText('Gluten free').click();
         });
 
-        it(`the "Gluten Free" radio button should be checked`, () => {
-          cy.findByLabelText('Gluten Free').should('be.checked');
+        it(`the "Gluten free" radio button should be checked`, () => {
+          cy.findByLabelText('Gluten free').should('be.checked');
         });
       });
 
       context(
-        `when clicking the "Gluten Free" radio button and then clicking the "Thin" radio button`,
+        `when clicking the "Gluten free" radio button and then clicking the "Thin" radio button`,
         () => {
           beforeEach(() => {
-            cy.findByLabelText('Gluten Free').click();
+            cy.findByLabelText('Gluten free').click();
             cy.findByLabelText('Thin').click();
           });
 
-          it(`the "Gluten Free" radio button should not be checked`, () => {
-            cy.findByLabelText('Gluten Free').should('not.be.checked');
+          it(`the "Gluten free" radio button should not be checked`, () => {
+            cy.findByLabelText('Gluten free').should('not.be.checked');
           });
 
           it(`the "Thin" radio button should be checked`, () => {
@@ -53,8 +53,8 @@ describe('Radio Preview', () => {
       cy.checkA11y();
     });
 
-    it(`the "Gluten Free (No longer Available)" radio button should be disabled`, () => {
-      cy.findByLabelText('Gluten Free (No longer Available)').should('be.disabled');
+    it(`the "Gluten free (sold out)" radio button should be disabled`, () => {
+      cy.findByLabelText('Gluten free (sold out)').should('be.disabled');
     });
   });
 

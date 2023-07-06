@@ -18,12 +18,12 @@ export const Error = () => {
       useFieldset={true}
       error={FormField.ErrorType.Error}
       hintId="error"
-      hintText="Deep Dish is currently sold out."
+      hintText="Deep dish is currently sold out."
     >
       <RadioGroup name="crust-error" onChange={handleChange} value={value} aria-describedby="error">
-        <RadioGroup.RadioButton value="deep-dish">Deep Dish (Sold Out)</RadioGroup.RadioButton>
+        <RadioGroup.RadioButton value="deep-dish">Deep dish</RadioGroup.RadioButton>
         <RadioGroup.RadioButton value="thin">Thin</RadioGroup.RadioButton>
-        <RadioGroup.RadioButton value="gluten-free">Gluten Free</RadioGroup.RadioButton>
+        <RadioGroup.RadioButton value="gluten-free">Gluten free</RadioGroup.RadioButton>
         <RadioGroup.RadioButton value="cauliflower">Cauliflower</RadioGroup.RadioButton>
       </RadioGroup>
     </FormField>

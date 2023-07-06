@@ -148,6 +148,10 @@ export interface StyledRadioButtonProps extends ExtractProps<typeof Box, 'input'
   variant?: 'inverse' | undefined;
 }
 
+/**
+ * Use `StyledRadioButton` when you want a styled radio button on its own without using `RadioGroup`.
+ * You will need to handle behavior and accessibility.
+ */
 export const StyledRadioButton = createComponent('input')({
   displayName: 'Radio',
   Component: ({...elemProps}: StyledRadioButtonProps, ref, Element) => {

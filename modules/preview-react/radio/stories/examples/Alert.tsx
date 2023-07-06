@@ -16,7 +16,7 @@ export const Alert = () => {
     <FormField
       error={FormField.ErrorType.Alert}
       hintId="hint-alert"
-      hintText="Deep dish is an extra $2.99"
+      hintText="Deep dish is an extra $2.99."
       label="Choose Your Pizza Crust"
       useFieldset={true}
     >
@@ -28,7 +28,7 @@ export const Alert = () => {
       >
         <RadioGroup.RadioButton value="deep-dish">Deep dish</RadioGroup.RadioButton>
         <RadioGroup.RadioButton value="thin">Thin</RadioGroup.RadioButton>
-        <RadioGroup.RadioButton value="gluten-free">Gluten Free</RadioGroup.RadioButton>
+        <RadioGroup.RadioButton value="gluten-free">Gluten free</RadioGroup.RadioButton>
         <RadioGroup.RadioButton value="cauliflower">Cauliflower</RadioGroup.RadioButton>
       </RadioGroup>
     </FormField>
