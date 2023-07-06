@@ -11,7 +11,6 @@ import {
   useTheme,
   Themeable,
   useLocalRef,
-  useForkRef,
 } from '@workday/canvas-kit-react/common';
 import {borderRadius, colors, inputColors, spaceNumbers} from '@workday/canvas-kit-react/tokens';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
