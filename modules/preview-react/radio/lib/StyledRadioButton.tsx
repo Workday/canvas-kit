@@ -44,8 +44,7 @@ const StyledRadioInput = styled(Box.as('input'))<StyledRadioButtonProps & Styled
     width: '18px',
 
     // Circle element styles the radio as checked or unchecked
-    ':after': {
-      content: "''",
+    '+ #ck-radio-check': {
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
@@ -67,7 +66,7 @@ const StyledRadioInput = styled(Box.as('input'))<StyledRadioButtonProps & Styled
       opacity: disabled && variant === 'inverse' ? '.4' : '1',
     },
 
-    '&:hover:after': {
+    '&:hover + #ck-radio-check': {
       borderColor: disabled
         ? inputColors.disabled.border
         : variant === 'inverse'
@@ -75,7 +74,7 @@ const StyledRadioInput = styled(Box.as('input'))<StyledRadioButtonProps & Styled
         : colors.licorice500,
     },
 
-    '&:focus:after': {
+    '&:focus + #ck-radio-check': {
       borderColor: disabled
         ? inputColors.disabled.border
         : variant === 'inverse'
@@ -83,13 +82,13 @@ const StyledRadioInput = styled(Box.as('input'))<StyledRadioButtonProps & Styled
         : colors.blueberry400,
     },
 
-    '&:checked:after': {
+    '&:checked + #ck-radio-check': {
       backgroundColor: variant === 'inverse' ? themePrimary.main : themePrimary.contrast, // inner circle color
       border: `5px solid`, // this creates the inner circle
       borderColor: variant === 'inverse' ? colors.frenchVanilla100 : themePrimary.main, // outer circle color
     },
 
-    '&:focus:after, &:focus:hover:after': {
+    '&:focus + #ck-radio-check, &:focus:hover + #ck-radio-check': {
       outline: 'transparent',
 
       ...focusRing({
@@ -101,7 +100,7 @@ const StyledRadioInput = styled(Box.as('input'))<StyledRadioButtonProps & Styled
       }),
     },
 
-    '&:focus:checked:after, &:focus:hover:checked:after': {
+    '&:focus:checked + #ck-radio-check, &:focus:hover:checked + #ck-radio-check': {
       outline: 'transparent',
       ...focusRing({
         width: 2,
@@ -113,7 +112,7 @@ const StyledRadioInput = styled(Box.as('input'))<StyledRadioButtonProps & Styled
     },
 
     ...mouseFocusBehavior({
-      '&:focus:after, &:focus:hover:after, &:focus:active:after, &:focus:hover:checked:after, &:focus:active:checked:after': {
+      '&:focus + #ck-radio-check, &:focus:hover + #ck-radio-check, &:focus:active + #ck-radio-check, &:focus:hover:checked + #ck-radio-check, &:focus:active:checked + #ck-radio-check': {
         ...focusRing({
           width: 0,
           outerColor: variant === 'inverse' ? colors.frenchVanilla100 : themeFocusOutline,
@@ -168,6 +167,7 @@ export const StyledRadioButton = createComponent('input')({
           ref={ref}
           {...elemProps}
         />
+        <span id="ck-radio-check"></span>
       </RadioInputWrapper>
     );
   },
