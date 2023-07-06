@@ -368,6 +368,7 @@ export const Checkbox = createComponent('input')({
             disabled={disabled}
             variant={variant}
             paddingInlineStart={checkboxLabelDistance}
+            cursor="pointer"
           >
             {label}
           </LabelText>
