@@ -14,7 +14,7 @@ export const Error = () => {
     <FormField
       error={FormField.ErrorType.Error}
       hintId="hint-error"
-      hintText="Deep Dish is currently sold out."
+      hintText="Deep dish is currently sold out."
       label="Choose Your Pizza Crust"
       useFieldset={true}
     >
