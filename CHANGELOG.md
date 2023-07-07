@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v9.0.21](https://github.com/Workday/canvas-kit/releases/tag/v9.0.21) (2023-07-07)
+
+### Components
+
+- fix(checkbox): Fix indeterminate state not getting correctly applied ([#2281](https://github.com/Workday/canvas-kit/pull/2281)) ([@vibdev](https://github.com/vibdev))
+
+
 ## [v9.0.20](https://github.com/Workday/canvas-kit/releases/tag/v9.0.20) (2023-06-30)
 
 ### Components
