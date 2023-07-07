@@ -177,10 +177,10 @@ export interface SelectBaseProps extends CoreSelectBaseProps, StyledType {
   shouldMenuAutoFocus?: boolean;
 }
 
-export const buttonBorderWidth = 1;
-export const buttonDefaultWidth = 280;
+export const buttonBorderWidth = 0.0625;
+export const buttonDefaultWidth = `${(spaceNumbers.xxxl * 7) / 2}rem`;
 
-const menuIconSize = 24;
+const menuIconSize = spaceNumbers.m;
 const buttonPadding = spaceNumbers.xxs - buttonBorderWidth;
 
 const SelectButton = styled('button')<
@@ -188,7 +188,7 @@ const SelectButton = styled('button')<
 >(
   {
     ...type.levels.subtext.large,
-    border: `${buttonBorderWidth}px solid ${inputColors.border}`,
+    border: `${buttonBorderWidth}rem solid ${inputColors.border}`,
     cursor: 'default',
     display: 'block',
     backgroundColor: inputColors.background,
@@ -197,8 +197,8 @@ const SelectButton = styled('button')<
     height: space.xl,
     outline: 'none',
     overflow: 'hidden',
-    padding: buttonPadding,
-    paddingRight: spaceNumbers.xxs + menuIconSize + buttonPadding,
+    padding: `${buttonPadding}rem`,
+    paddingRight: `${spaceNumbers.xxs + menuIconSize + buttonPadding}rem`,
     textAlign: 'left',
     textOverflow: 'ellipsis',
     transition: '0.2s box-shadow, 0.2s border-color',
@@ -470,7 +470,7 @@ export const SelectBase = ({
         icon={caretDownSmallIcon}
         color={disabled ? colors.licorice100 : colors.licorice200}
         colorHover={disabled ? colors.licorice100 : colors.licorice500}
-        size={menuIconSize}
+        size={`${menuIconSize}rem`}
       />
     </SelectWrapper>
   );
