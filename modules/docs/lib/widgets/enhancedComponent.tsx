@@ -68,7 +68,10 @@ registerWidget<EnhancedComponentValue>('enhancedComponent', ({value, doc, meta})
     <>
       {value.styleComponent ? (
         <>
-          <Heading headingOffset={1} id={`${value.displayName?.toLowerCase()}-layout-component`}>
+          <Heading
+            headingOffset={1}
+            id={`${value.displayName?.toLowerCase()}-layout-component-api`}
+          >
             Layout Component
           </Heading>
           <MDX as="p">
@@ -82,7 +85,7 @@ registerWidget<EnhancedComponentValue>('enhancedComponent', ({value, doc, meta})
           </MDX>
         </>
       ) : null}
-      <Heading headingOffset={1} id={`${value.displayName?.toLowerCase()}-props`}>
+      <Heading headingOffset={1} id={`${value.displayName?.toLowerCase()}-props-api`}>
         Props
       </Heading>
       {value.baseElement && (
@@ -126,7 +129,7 @@ registerWidget<EnhancedComponentValue>('enhancedComponent', ({value, doc, meta})
         ? value.subComponents.map((c, i) => {
             return (
               <React.Fragment key={i}>
-                <Heading id={`${value.displayName?.toLowerCase()}.${c.name.toLowerCase()}`}>
+                <Heading id={`${value.displayName?.toLowerCase()}.${c.name.toLowerCase()}-api`}>
                   {parentComponentName ? parentComponentName : value.displayName}.{c.name}
                 </Heading>
                 <ParentComponentNameContext.Provider
@@ -149,7 +152,7 @@ registerWidget<EnhancedComponentValue>('enhancedComponent', ({value, doc, meta})
         : null}
       {value.componentType === 'container' && value.model ? (
         <>
-          <Heading id={`${value.displayName?.toLowerCase()}-model`} headingOffset={-1}>
+          <Heading id={`${value.displayName?.toLowerCase()}-model-api`} headingOffset={-1}>
             Model
           </Heading>
           <SymbolDoc name={`use${value.model}`} />
