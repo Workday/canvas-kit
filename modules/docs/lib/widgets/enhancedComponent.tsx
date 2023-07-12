@@ -68,11 +68,8 @@ registerWidget<EnhancedComponentValue>('enhancedComponent', ({value, doc, meta})
     <>
       {value.styleComponent ? (
         <>
-          <Heading
-            headingOffset={1}
-            id={`${value.displayName?.toLocaleLowerCase()}-layout-component`}
-          >
-            Layout Component
+          <Heading headingOffset={1} id={`${value.displayName?.toLowerCase()}-layout-component`}>
+            Layout Component {value.displayName}
           </Heading>
           <MDX as="p">
             <code>{value.displayName || parentComponentName}</code> supports all props from the
@@ -85,7 +82,7 @@ registerWidget<EnhancedComponentValue>('enhancedComponent', ({value, doc, meta})
           </MDX>
         </>
       ) : null}
-      <Heading headingOffset={1} id={`${value.displayName?.toLocaleLowerCase()}-props`}>
+      <Heading headingOffset={1} id={`${value.displayName?.toLowerCase()}-props`}>
         Props
       </Heading>
       {value.baseElement && (
@@ -129,9 +126,7 @@ registerWidget<EnhancedComponentValue>('enhancedComponent', ({value, doc, meta})
         ? value.subComponents.map((c, i) => {
             return (
               <React.Fragment key={i}>
-                <Heading
-                  id={`${value.displayName?.toLocaleLowerCase()}-${c.name.toLocaleLowerCase}`}
-                >
+                <Heading id={`${value.displayName?.toLowerCase()}.${c.name.toLowerCase()}`}>
                   {parentComponentName ? parentComponentName : value.displayName}.{c.name}
                 </Heading>
                 <ParentComponentNameContext.Provider
@@ -154,7 +149,7 @@ registerWidget<EnhancedComponentValue>('enhancedComponent', ({value, doc, meta})
         : null}
       {value.componentType === 'container' && value.model ? (
         <>
-          <Heading id={`${value.displayName?.toLocaleLowerCase()}-model`} headingOffset={-1}>
+          <Heading id={`${value.displayName?.toLowerCase()}-model`} headingOffset={-1}>
             Model
           </Heading>
           <SymbolDoc name={`use${value.model}`} />
