@@ -69,7 +69,7 @@ registerWidget<EnhancedComponentValue>('enhancedComponent', ({value, doc, meta})
       {value.styleComponent ? (
         <>
           <Heading headingOffset={1} id={`${value.displayName?.toLowerCase()}-layout-component`}>
-            Layout Component {value.displayName}
+            Layout Component
           </Heading>
           <MDX as="p">
             <code>{value.displayName || parentComponentName}</code> supports all props from the
