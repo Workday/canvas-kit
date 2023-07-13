@@ -17,7 +17,7 @@ const routes = {
   '/components/indicators/banner/': 'components-indicators-banner--basic',
   '/components/indicators/loading-dots/': 'components-indicators-loading-dots--basic',
   '/components/indicators/skeleton/': 'components-indicators-skeleton--basic',
-  '/components/indicators/status-indicator/': 'components-indicators-status-indicator--basic',
+  '/components/indicators/status-indicator/': 'preview-status-indicator--basic',
   '/components/inputs/checkbox/': 'components-inputs-checkbox--basic',
   '/components/inputs/color-input/': 'components-inputs-color-picker-color-input--basic',
   '/components/inputs/form-field/': 'components-inputs-form-field--basic',
