@@ -68,9 +68,14 @@ registerWidget<EnhancedComponentValue>('enhancedComponent', ({value, doc, meta})
     <>
       {value.styleComponent ? (
         <>
+          {console.log(parentComponentName)}
           <Heading
             headingOffset={1}
-            id={`${value.displayName?.toLowerCase()}-layout-component-api`}
+            id={
+              parentComponentName
+                ? `${parentComponentName.toLowerCase()}-layout-component-api`
+                : `${value.displayName?.toLowerCase()}-layout-component-api`
+            }
           >
             Layout Component
           </Heading>
@@ -85,7 +90,14 @@ registerWidget<EnhancedComponentValue>('enhancedComponent', ({value, doc, meta})
           </MDX>
         </>
       ) : null}
-      <Heading headingOffset={1} id={`${value.displayName?.toLowerCase()}-props-api`}>
+      <Heading
+        headingOffset={1}
+        id={
+          parentComponentName
+            ? `${parentComponentName.toLowerCase()}-props-api`
+            : `${value.displayName?.toLowerCase()}-props-api`
+        }
+      >
         Props
       </Heading>
       {value.baseElement && (
