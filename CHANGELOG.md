@@ -3,6 +3,38 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v9.1.0](https://github.com/Workday/canvas-kit/releases/tag/v9.1.0) (2023-07-12)
+
+
+
+
+## [v9.0.21](https://github.com/Workday/canvas-kit/releases/tag/v9.0.21) (2023-07-07)
+
+### Components
+
+- fix(checkbox): Fix indeterminate state not getting correctly applied ([#2281](https://github.com/Workday/canvas-kit/pull/2281)) ([@vibdev](https://github.com/vibdev))
+
+
+## [v9.0.20](https://github.com/Workday/canvas-kit/releases/tag/v9.0.20) (2023-06-30)
+
+### Components
+
+- fix: Fix for useFocusRedirect ([#2258](https://github.com/Workday/canvas-kit/pull/2258)) ([@pablobirukov](https://github.com/pablobirukov), Pavel Birukov, [@mannycarrera4](https://github.com/mannycarrera4))
+  `useFocusRedirect` handles focus leave from radio group within Popup
+
+
+## [v9.0.19](https://github.com/Workday/canvas-kit/releases/tag/v9.0.19) (2023-06-29)
+
+### Components
+
+- fix: Update status indicator icon color on hover ([#2278](https://github.com/Workday/canvas-kit/pull/2278)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v8.6.17](https://github.com/Workday/canvas-kit/releases/tag/v8.6.17) (2023-06-29)
+
+### Components
+
+- fix: Update status indicator icon color on hover ([#2278](https://github.com/Workday/canvas-kit/pull/2278)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
 ## [v9.0.18](https://github.com/Workday/canvas-kit/releases/tag/v9.0.18) (2023-06-27)
 
 ### Components
