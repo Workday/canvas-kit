@@ -11,17 +11,20 @@ import {
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 
 import {
-  BaseButton,
-  BaseButtonProps,
+  Button,
+  ButtonProps,
   ButtonSizes,
   IconPositions,
 } from '@workday/canvas-kit-labs-react/button';
+import {plusIcon} from '@workday/canvas-system-icons-web';
+import {Box} from '@workday/canvas-kit-react/layout';
+import {start} from 'repl';
 
-export interface PrimaryButtonProps extends Themeable, GrowthBehavior, BaseButtonProps {
+export interface PrimaryButtonProps extends Themeable, GrowthBehavior, ButtonProps {
   /**
    * The variant of the PrimaryButton.
    */
-  variant?: 'inverse';
+  // variant?: 'inverse';
   /**
    * There are four button sizes: `extraSmall`, `small`, `medium`, and `large`.
    * If no size is provided, it will default to `medium`.
@@ -53,54 +56,45 @@ export interface PrimaryButtonProps extends Themeable, GrowthBehavior, BaseButto
  * supported for every size and can be positioned at the `start` or `end` with the `iconPosition`
  * prop.
  */
-export const BaseButtonExample = createComponent('button')({
-  displayName: 'BaseButtonExample',
-  Component: (
-    {
-      size = 'medium',
-      iconPosition = 'start',
-      variant,
-      icon,
-      shouldMirrorIcon = false,
-      children,
-      ...elemProps
-    }: PrimaryButtonProps,
-    ref,
-    Element
-  ) => {
-    const theme = useTheme();
-    return (
-      <BaseButton
-        ref={ref}
-        size={size}
-        as={Element}
-        {...elemProps}
-        colors={{
-          default: {
-            label: cssVar(newTheme.colors.primary.contrast),
-            background: cssVar(newTheme.colors.primary.main),
-          },
-        }}
-      >
-        {icon && iconPosition === 'start' && (
-          <BaseButton.Icon
-            size={size}
-            iconPosition={iconPosition}
-            icon={icon}
-            shouldMirrorIcon={shouldMirrorIcon}
-          />
-        )}
-        {children && <BaseButton.Label>{children}</BaseButton.Label>}
-        Button
-        {icon && iconPosition === 'end' && (
-          <BaseButton.Icon
-            size={size}
-            iconPosition={iconPosition}
-            icon={icon}
-            shouldMirrorIcon={shouldMirrorIcon}
-          />
-        )}
-      </BaseButton>
-    );
-  },
-});
+// export const ButtonExample = createComponent('button')({
+//   displayName: 'ButtonExample',
+//   Component: (
+//     {
+//       size = 'medium',
+//       iconPosition = 'start',
+//       variant,
+//       icon,
+//       shouldMirrorIcon = false,
+//       children,
+//       ...elemProps
+//     }: PrimaryButtonProps,
+//     ref,
+//     Element
+//   ) => {
+//     const theme = useTheme();
+//     return (
+//       <Button
+//         ref={ref}
+//         size={size}
+//         as={Element}
+//         {...elemProps}
+//         colors={{
+//           default: {
+//             label: cssVar(newTheme.colors.primary.contrast),
+//             background: cssVar(newTheme.colors.primary.main),
+//           },
+//         }}
+//       >
+//         <Box>Hello</Box>
+//       </Button>
+//     );
+//   },
+// });
+
+export const ButtonExample = () => {
+  return (
+    <Button size="large" icon={plusIcon} iconPosition="end" variant="secondaryInverse">
+      Button
+    </Button>
+  );
+};

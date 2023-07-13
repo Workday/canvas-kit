@@ -276,7 +276,7 @@ export function cs(...args: (StyleProps | string)[]): string {
  *   style={{ padding: 10 }}
  *   cs={styles}
  *   csVars
- ={vars({background: 'red'})}
+ * ={vars({background: 'red'})}
  * />
  *
  * // Output

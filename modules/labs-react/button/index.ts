@@ -1,2 +1,2 @@
-export {BaseButton, ButtonContainerProps, BaseButtonProps} from './lib/BaseButton';
+export {Button, ButtonContainerProps, ButtonProps} from './lib/Button';
 export * from './lib/types';
