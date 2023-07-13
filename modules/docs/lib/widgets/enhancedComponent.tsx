@@ -68,7 +68,6 @@ registerWidget<EnhancedComponentValue>('enhancedComponent', ({value, doc, meta})
     <>
       {value.styleComponent ? (
         <>
-          {console.log(parentComponentName)}
           <Heading
             headingOffset={1}
             id={
