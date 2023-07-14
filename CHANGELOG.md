@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v9.1.1](https://github.com/Workday/canvas-kit/releases/tag/v9.1.1) (2023-07-14)
+
+### Documentation
+
+- fix: Add ids to docs headings ([#2284](https://github.com/Workday/canvas-kit/pull/2284)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@jamesfan](https://github.com/jamesfan))
+
+
 ## [v9.1.0](https://github.com/Workday/canvas-kit/releases/tag/v9.1.0) (2023-07-12)
 
 
