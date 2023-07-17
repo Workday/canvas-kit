@@ -332,6 +332,22 @@ describe('Autocomplete', () => {
           });
         });
       });
+      
+      context('when the user types in a value not found', () => {
+        beforeEach(() => {
+          cy.findByRole('combobox').type('Peach');
+        });
+
+        context('when the user hits the enter key', () => {
+          beforeEach(() => {
+            cy.findByRole('combobox').type('{enter}');
+          });
+        });
+
+        it('should not clear the input', () => {
+          cy.findByRole('combobox').should('have.value', 'Peach');
+        });
+      });
     });
   });
 });
