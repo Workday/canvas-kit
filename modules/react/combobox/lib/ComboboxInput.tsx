@@ -56,11 +56,8 @@ export const useComboboxInput = composeHooks(
           dispatchInputEvent(event.currentTarget as HTMLElement, '');
         }
         if (event.key === 'Enter' && !event.metaKey && model.state.visibility === 'visible') {
-          if (
-            document
-              .querySelector(`[data-id="${model.state.cursorId}"]`)
-              ?.getAttribute('aria-disabled') !== 'true'
-          ) {
+          const element = document.querySelector(`[data-id="${model.state.cursorId}"]`);
+          if (element && element?.getAttribute('aria-disabled') !== 'true') {
             model.events.select({id: model.state.cursorId});
             if (model.state.mode === 'single') {
               model.events.hide(event);

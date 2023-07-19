@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v9.1.2](https://github.com/Workday/canvas-kit/releases/tag/v9.1.2) (2023-07-17)
+
+### Components
+
+- fix(combobox): Do not clear the input when no item is selected ([#2289](https://github.com/Workday/canvas-kit/pull/2289)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v9.1.1](https://github.com/Workday/canvas-kit/releases/tag/v9.1.1) (2023-07-14)
 
 ### Documentation
