@@ -8,12 +8,11 @@ import {
   GrowthBehavior,
   cs,
   createVars,
-  newTheme,
   cssVar,
 } from '@workday/canvas-kit-react/common';
 import {SystemIconProps} from '@workday/canvas-kit-react/icon';
 import {Box} from '@workday/canvas-kit-react/layout';
-import {borderRadius, space, type} from '@workday/canvas-kit-react/tokens';
+import {borderRadius, space} from '@workday/canvas-kit-react/tokens';
 
 import {ButtonColors, ButtonSizes} from './types';
 
@@ -37,15 +36,69 @@ export interface BaseButtonContainerProps extends Partial<SystemIconProps>, Grow
 export interface BaseButtonProps extends Omit<BaseButtonContainerProps, 'ref'> {}
 
 export const buttonVars = {
-  default: createVars('background', 'border', 'icon', 'iconFill', 'color', 'opacity'),
-  hover: createVars('background', 'border', 'icon', 'iconFill', 'color', 'opacity'),
-  active: createVars('background', 'border', 'icon', 'iconFill', 'color', 'opacity'),
-  focus: createVars('background', 'border', 'icon', 'iconFill', 'color', 'opacity'),
-  disabled: createVars('background', 'border', 'icon', 'iconFill', 'color', 'opacity'),
+  default: createVars(
+    'background',
+    'border',
+    'boxShadowInner',
+    'boxShadowOuter',
+    'icon',
+    'iconFill',
+    'color',
+    'opacity',
+    'borderRadius'
+  ),
+  hover: createVars(
+    'background',
+    'border',
+    'boxShadowInner',
+    'boxShadowOuter',
+    'icon',
+    'iconFill',
+    'color',
+    'opacity',
+    'borderRadius'
+  ),
+  active: createVars(
+    'background',
+    'border',
+    'boxShadowInner',
+    'boxShadowOuter',
+    'icon',
+    'iconFill',
+    'color',
+    'opacity',
+    'borderRadius'
+  ),
+  focus: createVars(
+    'background',
+    'border',
+    'boxShadowInner',
+    'boxShadowOuter',
+    'icon',
+    'iconFill',
+    'color',
+    'opacity',
+    'borderRadius'
+  ),
+  disabled: createVars(
+    'background',
+    'border',
+    'boxShadowInner',
+    'boxShadowOuter',
+    'icon',
+    'iconFill',
+    'color',
+    'opacity',
+    'borderRadius'
+  ),
 };
 
 const BaseButtonStyles = cs({
-  ...type.levels.subtext.large,
+  fontFamily: '"Roboto", "Helvetica Neue", "Helvetica", Arial, sans-serif',
+  fontSize: '0.875rem',
+  lineHeight: '1.25rem',
+  letterSpacing: '0.015rem',
+  fontWeight: 'bold',
   backgroundColor: cssVar(buttonVars.default.background),
   color: cssVar(buttonVars.default.color),
   border: `1px solid ${cssVar(buttonVars.default.border)}`,
@@ -59,12 +112,10 @@ const BaseButtonStyles = cs({
   boxShadow: 'none',
   outline: 'none',
   paddingInline: space.m,
-  fontWeight: cssVar(newTheme.fontWeights.bold),
-  lineHeight: 'normal',
   whiteSpace: 'nowrap',
   WebkitFontSmoothing: 'antialiased',
   MozOsxFontSmoothing: 'grayscale',
-  borderRadius: borderRadius.circle,
+  borderRadius: cssVar(buttonVars.default.borderRadius),
   position: 'relative',
   verticalAlign: 'middle',
   overflow: 'hidden',
@@ -83,6 +134,13 @@ const BaseButtonStyles = cs({
   '&:focus-visible': {
     backgroundColor: cssVar(buttonVars.focus.background),
     border: `1px solid ${cssVar(buttonVars.focus.border)}`,
+    boxShadow: `${cssVar(buttonVars.focus.boxShadowInner)} 0px 0px 0px 2px, ${cssVar(
+      buttonVars.focus.boxShadowOuter
+    )} 0px 0px 0px 4px`,
+    color: cssVar(buttonVars.focus.color),
+    '& span .wd-icon-fill': {
+      fill: cssVar(buttonVars.focus.icon),
+    },
   },
   '& span .wd-icon-fill': {
     transitionDuration: '40ms',
@@ -99,11 +157,7 @@ const BaseButtonStyles = cs({
 
 export const BaseButton = createComponent('button')({
   displayName: 'Button',
-  Component: (
-    {children, colors, size, cs, ...elemProps}: BaseButtonContainerProps,
-    ref,
-    Element
-  ) => {
+  Component: ({children, cs, ...elemProps}: BaseButtonContainerProps, ref, Element) => {
     return (
       <Box as={Element} ref={ref} type="button" cs={[BaseButtonStyles, cs]} {...elemProps}>
         {children}

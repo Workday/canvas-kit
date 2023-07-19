@@ -231,6 +231,7 @@
     --canvas-color-base-black-pepper-400: #333333;
     --canvas-color-base-black-pepper-500: #1e1e1e;
     --canvas-color-base-black-pepper-600: #000000;
+    --canvas-color-transparent: 'rgba(0,0,0,0)';
 
     --canvas-font-family-default: 'Roboto', 'Helvetica Neue', 'Helvetica', Arial, sans-serif;
     --canvas-font-family-monospace: 'Roboto Mono', 'Courier New', Courier, monospace;
@@ -258,6 +259,13 @@
     --canvas-colors-selectHighlight: var(--canvas-color-base-blueberry-200);
     --canvas-colors-selectHighlightInverse: var(--canvas-color-base-french-vanilla-100);
 
+    /* Border Radius */
+    --canvas-border-radius-zero: 0;
+    --canvas-border-radius-small: 0.125rem;
+    --canvas-border-radius-medium: 0.25rem;
+    --canvas-border-radius-large: 0.5rem;
+    --canvas-border-radius-circle: 999px;
+
     /* Primary Button Styles */
     --canvas-colors-primary-button-background-base: var(--canvas-color-base-blueberry-400);
     --canvas-colors-primary-button-border-base: var(--canvas-color-base-blueberry-400);
@@ -280,8 +288,8 @@
     --canvas-colors-primaryInverse-button-background-base: var(--canvas-color-base-french-vanilla-100);
     --canvas-colors-primaryInverse-button-border-base: var(--canvas-color-base-french-vanilla-100);
     --canvas-colors-primaryInverse-button-color-base: var(--canvas-color-base-black-pepper-400);
-    --canvas-colors-primaryInverse-button-background-focus: var(--canvas-color-base-soap-400);
-    --canvas-colors-primaryInverse-button-border-focus: var(--canvas-color-base-black-pepper-400);
+    --canvas-colors-primaryInverse-button-background-focus: var(--canvas-color-base-french-vanilla-100);
+    --canvas-colors-primaryInverse-button-border-focus: var(--canvas-color-base-french-vanilla-100);
     --canvas-colors-primaryInverse-button-color-focus: var(--canvas-color-base-black-pepper-400);
     --canvas-colors-primaryInverse-button-background-active: var(--canvas-color-base-soap-400);
     --canvas-colors-primaryInverse-button-border-active: var(--canvas-color-base-black-pepper-400);
@@ -291,15 +299,15 @@
     --canvas-colors-primaryInverse-button-color-hover: var(--canvas-color-base-black-pepper-500);
     --canvas-colors-primaryInverse-icon-fill-base: var(--canvas-color-base-black-pepper-400);
     --canvas-colors-primaryInverse-icon-fill-hover: var(--canvas-color-base-french-vanilla-400);
-    --canvas-colors-primaryInverse-icon-fill-focus: var(--canvas-color-base-french-vanilla-400);
+    --canvas-colors-primaryInverse-icon-fill-focus: var(--canvas-color-base-black-pepper-500);
     --canvas-colors-primaryInverse-icon-fill-active: var(--canvas-color-base-black-pepper-500);
 
     /* Secondary Button Styles */
     --canvas-colors-secondary-button-background-base: 'transparent';
     --canvas-colors-secondary-button-border-base: var(--canvas-color-base-black-pepper-400);
     --canvas-colors-secondary-button-color-base: var(--canvas-color-base-black-pepper-400);
-    --canvas-colors-secondary-button-background-focus: var(--canvas-color-base-black-pepper-500);
-    --canvas-colors-secondary-button-border-focus: var(--canvas-color-base-soap-300);
+    --canvas-colors-secondary-button-background-focus: 'transparent';
+    --canvas-colors-secondary-button-border-focus: var(--canvas-color-base-black-pepper-400);
     --canvas-colors-secondary-button-color-focus: var(--canvas-color-base-black-pepper-400);
     --canvas-colors-secondary-button-background-active: var(--canvas-color-base-black-pepper-500);
     --canvas-colors-secondary-button-border-active: var(--canvas-color-base-black-pepper-500);
@@ -309,16 +317,16 @@
     --canvas-colors-secondary-button-color-hover: var(--canvas-color-base-french-vanilla-100);
     --canvas-colors-secondary-icon-fill-base: var(--canvas-color-base-black-pepper-400);
     --canvas-colors-secondary-icon-fill-hover: var(--canvas-color-base-french-vanilla-100);
-    --canvas-colors-secondary-icon-fill-focus: var(--canvas-color-base-french-vanilla-100);
+    --canvas-colors-secondary-icon-fill-focus: var(--canvas-color-base-black-pepper-400);
     --canvas-colors-secondary-icon-fill-active: var(--canvas-color-base-french-vanilla-100);
 
     /* Secondary Inverse Button Styles */
     --canvas-colors-secondaryInverse-button-background-base: 'transparent';
     --canvas-colors-secondaryInverse-button-border-base: var(--canvas-color-base-french-vanilla-100);
     --canvas-colors-secondaryInverse-button-color-base: var(--canvas-color-base-french-vanilla-100);
-    --canvas-colors-secondaryInverse-button-background-focus: var(--canvas-color-base-black-pepper-500);
-    --canvas-colors-secondaryInverse-button-border-focus: var(--canvas-color-base-soap-300);
-    --canvas-colors-secondaryInverse-button-color-focus: var(--canvas-color-base-black-pepper-400);
+    --canvas-colors-secondaryInverse-button-background-focus: var(--canvas-color-base-french-vanilla-100);
+    --canvas-colors-secondaryInverse-button-border-focus: var(--canvas-color-base-french-vanilla-100);
+    --canvas-colors-secondaryInverse-button-color-focus: var(--canvas-color-base-black-pepper-500);
     --canvas-colors-secondaryInverse-button-background-active: var(--canvas-color-base-soap-400);
     --canvas-colors-secondaryInverse-button-border-active: var(--canvas-color-base-soap-400);
     --canvas-colors-secondaryInverse-button-color-active: var(--canvas-color-base-black-pepper-500);
@@ -327,8 +335,46 @@
     --canvas-colors-secondaryInverse-button-color-hover: var(--canvas-color-base-black-pepper-500);
     --canvas-colors-secondaryInverse-icon-fill-base: var(--canvas-color-base-french-vanilla-100);
     --canvas-colors-secondaryInverse-icon-fill-hover: var(--canvas-color-base-black-pepper-500);
-    --canvas-colors-secondaryInverse-icon-fill-focus: var(--canvas-color-base-french-vanilla-100);
+    --canvas-colors-secondaryInverse-icon-fill-focus: var(--canvas-color-base-black-pepper-500);
     --canvas-colors-secondaryInverse-icon-fill-active: var(--canvas-color-base-black-pepper-500);
+
+    /* Tertiary Button Styles */
+    --canvas-colors-tertiary-button-background-base:
+      var(--canvas-color-base-french-vanilla-100);
+    --canvas-colors-tertiary-button-border-base: var(--canvas-color-base-french-vanilla-100);
+    --canvas-colors-tertiary-button-color-base: var(--canvas-color-base-blueberry-400);
+    --canvas-colors-tertiary-button-background-focus:
+      var(--canvas-color-base-french-vanilla-100);
+    --canvas-colors-tertiary-button-border-focus: var(--canvas-color-base-french-vanilla-100);
+    --canvas-colors-tertiary-button-color-focus: var(--canvas-color-base-blueberry-400);
+    --canvas-colors-tertiary-button-background-active: var(--canvas-color-base-soap-400);
+    --canvas-colors-tertiary-button-border-active: var(--canvas-color-base-french-vanilla-100);
+    --canvas-colors-tertiary-button-color-active: var(--canvas-color-base-blueberry-500);
+    --canvas-colors-tertiary-button-background-hover: var(--canvas-color-base-soap-300);
+    --canvas-colors-tertiary-button-border-hover: var(--canvas-color-base-soap-300);
+    --canvas-colors-tertiary-button-color-hover: var(--canvas-color-base-blueberry-500);
+    --canvas-colors-tertiary-icon-fill-base: var(--canvas-color-base-blueberry-400);
+    --canvas-colors-tertiary-icon-fill-hover: var(--canvas-color-base-blueberry-500);
+    --canvas-colors-tertiary-icon-fill-focus: var(--canvas-color-base-blueberry-400);
+    --canvas-colors-tertiary-icon-fill-active: var(--canvas-color-base-blueberry-500);
+
+    /* Tertiary Inverse Button Styles */
+    --canvas-colors-tertiaryInverse-button-background-base: 'transparent';
+    --canvas-colors-tertiaryInverse-button-border-base: var(--canvas-color-base-blueberry-400);
+    --canvas-colors-tertiaryInverse-button-color-base: var(--canvas-color-base-french-vanilla-100);
+    --canvas-colors-tertiaryInverse-button-background-focus: var(--canvas-color-base-french-vanilla-100);
+    --canvas-colors-tertiaryInverse-button-border-focus: var(--canvas-color-base-soap-300);
+    --canvas-colors-tertiaryInverse-button-color-focus: var(--canvas-color-base-black-pepper-400);
+    --canvas-colors-tertiaryInverse-button-background-active: var(--canvas-color-base-soap-400);
+    --canvas-colors-tertiaryInverse-button-border-active: var(--canvas-color-base-soap-400);
+    --canvas-colors-tertiaryInverse-button-color-active: var(--canvas-color-base-black-pepper-500);
+    --canvas-colors-tertiaryInverse-button-background-hover: var(--canvas-color-base-soap-300);
+    --canvas-colors-tertiaryInverse-button-border-hover: var(--canvas-color-base-soap-300);
+    --canvas-colors-tertiaryInverse-button-color-hover: var(--canvas-color-base-black-pepper-500);
+    --canvas-colors-tertiaryInverse-icon-fill-base: var(--canvas-color-base-french-vanilla-100);
+    --canvas-colors-tertiaryInverse-icon-fill-hover: var(--canvas-color-base-black-pepper-500);
+    --canvas-colors-tertiaryInverse-icon-fill-focus: var(--canvas-color-base-black-pepper-400);
+    --canvas-colors-tertiaryInverse-icon-fill-active: var(--canvas-color-base-black-pepper-500);
 
     --canvas-colors-primary-lightest: var(--canvas-color-base-blueberry-100);
     --canvas-colors-primary-light: var(--canvas-color-base-blueberry-200);
