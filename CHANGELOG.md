@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v9.1.3](https://github.com/Workday/canvas-kit/releases/tag/v9.1.3) (2023-07-18)
+
+### Documentation
+
+- docs: Update w3.org links ([#2287](https://github.com/Workday/canvas-kit/pull/2287)) ([@willklein](https://github.com/willklein))
+
+
 ## [v9.1.2](https://github.com/Workday/canvas-kit/releases/tag/v9.1.2) (2023-07-17)
 
 ### Components
