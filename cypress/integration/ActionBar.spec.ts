@@ -15,12 +15,12 @@ describe('Action Bar', () => {
         cy.checkA11y();
       });
 
-      it('should have an element with a role of "actions"', () => {
-        cy.findByLabelText('actions').should('be.visible');
+      it('should have an element with a role of "region"', () => {
+        cy.findByRole('region').should('be.visible');
       });
 
-      it('should have 2 buttons inside the "actions"', () => {
-        cy.findByLabelText('actions')
+      it('should have 2 buttons inside the "region"', () => {
+        cy.findByRole('region')
           .findAllByRole('button')
           .should('have.length', 2);
       });
