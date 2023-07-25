@@ -34,11 +34,13 @@ describe('ExpandableContainer', () => {
       });
 
       it('should set aria-expanded to true', () => {
-        cy.findByRole('button', {name: 'expand container'}).should(
-          'have.attr',
-          'aria-expanded',
-          'true'
-        );
+        cy.findByRole('heading')
+          .findByRole('button')
+          .should(
+            'have.attr',
+            'aria-expanded',
+            'true'
+          );
       });
 
       it('should show expanded content', () => {
