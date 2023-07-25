@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v9.1.5](https://github.com/Workday/canvas-kit/releases/tag/v9.1.5) (2023-07-21)
+
+
+
+
+## [v9.1.4](https://github.com/Workday/canvas-kit/releases/tag/v9.1.4) (2023-07-19)
+
+### Components
+
+- chore: Ditch a few console logs from useActionBarModel that can clutter up test logs ([#2295](https://github.com/Workday/canvas-kit/pull/2295)) ([@ahayes91](https://github.com/ahayes91))
+
+
+## [v9.1.3](https://github.com/Workday/canvas-kit/releases/tag/v9.1.3) (2023-07-18)
+
+### Documentation
+
+- docs: Update w3.org links ([#2287](https://github.com/Workday/canvas-kit/pull/2287)) ([@willklein](https://github.com/willklein))
+
+
 ## [v9.1.2](https://github.com/Workday/canvas-kit/releases/tag/v9.1.2) (2023-07-17)
 
 ### Components

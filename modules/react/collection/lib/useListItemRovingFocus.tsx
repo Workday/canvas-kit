@@ -13,7 +13,7 @@ const retryEachFrame = (cb: () => boolean, iterations: number) => {
 
 /**
  * This elemProps hook is used for cursor navigation by using [Roving
- * Tabindex](https://w3c.github.io/aria-practices/#kbd_roving_tabindex). Only a single item in the
+ * Tabindex](https://www.w3.org/WAI/ARIA/apg/practices/keyboard-interface/#kbd_roving_tabindex). Only a single item in the
  * collection has a tab stop. Pressing an arrow key moves the tab stop to a different item in the
  * corresponding direction. See the [Roving Tabindex](#roving-tabindex) example. This elemProps hook
  * should be applied to an `*.Item` component.
