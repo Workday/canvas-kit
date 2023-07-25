@@ -15,8 +15,7 @@ describe('ExpandableContainer', () => {
     });
 
     it('should have aria-expanded set to false', () => {
-      cy.findByRole('heading')
-        .findByRole('button')
+      cy.findByRole('button')
         .should(
           'have.attr',
           'aria-expanded',
@@ -30,13 +29,11 @@ describe('ExpandableContainer', () => {
 
     context('when the container is clicked', () => {
       beforeEach(() => {
-        cy.findByRole('heading')
-          .findByRole('button').click();
+        cy.findByRole('button').click();
       });
 
       it('should set aria-expanded to true', () => {
-        cy.findByRole('heading')
-          .findByRole('button')
+        cy.findByRole('button')
           .should(
             'have.attr',
             'aria-expanded',
@@ -49,7 +46,7 @@ describe('ExpandableContainer', () => {
       });
 
       it(`should have an aria-controls attribute pointing to the id of content`, () => {
-        cy.findByRole('button', {name: 'expand container'}).then(button => {
+        cy.findByRole('button').then(button => {
           const buttonAriaControlsValue = button.attr('aria-controls');
           cy.findByText('Content').should('have.attr', 'id', buttonAriaControlsValue);
         });
@@ -57,7 +54,7 @@ describe('ExpandableContainer', () => {
 
       context('when the container is clicked again', () => {
         beforeEach(() => {
-          cy.findByRole('button', {name: 'expand container'}).click();
+          cy.findByRole('button').click();
         });
 
         it('should hide expanded content', () => {
@@ -65,10 +62,11 @@ describe('ExpandableContainer', () => {
         });
 
         it('should have aria-expanded set to false', () => {
-          cy.findByRole('button', {name: 'expand container'}).should(
-            'have.attr',
-            'aria-expanded',
-            'false'
+          cy.findByRole('button')
+            .should(
+              'have.attr',
+              'aria-expanded',
+              'false'
           );
         });
       });
