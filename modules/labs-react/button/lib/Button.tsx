@@ -11,14 +11,13 @@ import {
   tokenTheme,
 } from '@workday/canvas-kit-react/common';
 import {SystemIconProps} from '@workday/canvas-kit-react/icon';
-import {colors, space, spaceNumbers} from '@workday/canvas-kit-react/tokens';
+import {space, spaceNumbers} from '@workday/canvas-kit-react/tokens';
 
 import {ButtonColors, ButtonSizes, IconPositions} from './types';
 
 import {CanvasSystemIcon} from '@workday/design-assets-types';
-import chroma from 'chroma-js';
 
-type ButtonVariant =
+export type ButtonVariant =
   | 'primary'
   | 'primaryInverse'
   | 'secondary'
@@ -166,7 +165,8 @@ export const ButtonModifiers = createModifiers({
         [buttonVars.focus.background]: cssVar(newTheme.colors.secondary.button.background.focus),
         [buttonVars.focus.border]: cssVar(newTheme.colors.secondary.button.border.focus),
         [buttonVars.focus.color]: cssVar(newTheme.colors.secondary.button.color.focus),
-        boxShadow: 'rgb(255, 255, 255) 0px 0px 0px 2px, rgb(8, 117, 225) 0px 0px 0px 4px',
+        [buttonVars.focus.boxShadowInner]: cssVar(tokenTheme.primaryColorContrast),
+        [buttonVars.focus.boxShadowOuter]: cssVar(tokenTheme.primaryColor),
         '& span .wd-icon-fill': {
           [buttonVars.focus.icon]: cssVar(newTheme.colors.secondary.icon.focus),
         },
@@ -301,7 +301,7 @@ export const ButtonModifiers = createModifiers({
       height: '48px',
       '&.canvas-button-icon-only': {
         padding: '0',
-        minWidth: space.xl,
+        minWidth: `${spaceNumbers.xl + spaceNumbers.xxs}rem`,
       },
       '&.canvas-button-icon-start': {
         paddingInlineStart: `${spaceNumbers.xl / 2}rem`,

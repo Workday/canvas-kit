@@ -654,7 +654,8 @@ cs({
     '--canvas-colors-tertiary-button-background-active': 'var(--canvas-color-base-soap-400)',
     '--canvas-colors-tertiary-button-border-active': 'var(--canvas-color-base-french-vanilla-100)',
     '--canvas-colors-tertiary-button-color-active': 'var(--canvas-color-base-blueberry-500)',
-    '--canvas-colors-tertiary-button-background-hover': 'var(--canvas-color-base-soap-300)',
+    '--canvas-colors-tertiary-button-background-hover':
+      'var(--canvas-color-base-french-vanilla-100)',
     '--canvas-colors-tertiary-button-border-hover': 'var(--canvas-color-base-soap-300)',
     '--canvas-colors-tertiary-button-color-hover': 'var(--canvas-color-base-blueberry-500)',
     '--canvas-colors-tertiary-icon-fill-base': 'var(--canvas-color-base-blueberry-400)',
