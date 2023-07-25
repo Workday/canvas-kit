@@ -30,7 +30,8 @@ describe('ExpandableContainer', () => {
 
     context('when the container is clicked', () => {
       beforeEach(() => {
-        cy.findByRole('button', {name: 'expand container'}).click();
+        cy.findByRole('heading')
+          .findByRole('button').click();
       });
 
       it('should set aria-expanded to true', () => {
