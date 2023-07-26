@@ -5,4 +5,5 @@ export {useComboboxMenuList} from './lib/ComboboxMenuList';
 export {useComboboxInput} from './lib/ComboboxInput';
 export {useComboboxLoader} from './lib/useComboboxLoader';
 export {useComboboxModel} from './lib/useComboboxModel';
+export {useComboboxTypeAhead} from './lib/useComboboxTypeAhead';
 export {useComboboxInputOpenWithArrowKeys as useComboboxOpenWithArrowKeys} from './lib/useComboboxInputOpenWithArrowKeys';

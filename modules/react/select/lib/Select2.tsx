@@ -12,6 +12,7 @@ import {
   Combobox,
   useComboboxModel,
   useComboboxLoader,
+  useComboboxTypeAhead,
   useComboboxInput,
 } from '@workday/canvas-kit-react/combobox';
 import {FormField} from '@workday/canvas-kit-preview-react/form-field';
@@ -22,6 +23,7 @@ import {ComboboxInput} from '../../combobox/lib/ComboboxInput';
 import {SystemIcon} from '../../icon';
 import {caretDownSmallIcon, caretTopSmallIcon} from '@workday/canvas-system-icons-web';
 import {ComboboxProps} from '../../combobox/lib/Combobox';
+import {time} from 'console';
 
 // const colors = ['Red', 'Blue', 'Purple', 'Green', 'Pink'];
 // const fruits = ['Apple', 'Orange', 'Banana', 'Grape', 'Lemon', 'Lime'];
@@ -132,71 +134,96 @@ import {ComboboxProps} from '../../combobox/lib/Combobox';
 const useSelectInput = composeHooks(
   createElemPropsHook(useComboboxModel)(model => {
     const keySofar = React.useRef('');
-    const timer = React.useRef();
+    const timer = React.useRef<ReturnType<typeof setTimeout>>();
 
-    const [value, setValue] = React.useState('');
-    const [visibility, setVisibility] = React.useState(false);
     React.useLayoutEffect(() => {
       if (model.state.visibility !== 'visible' && !model.state.selectedIds.length) {
-        console.log(' in hereee');
         model.events.goTo({id: model.state.items[0].id});
       }
       if (model.state.visibility !== 'visible') {
         keySofar.current = '';
       }
 
-      if (model.state.visibility === 'visible' && model.state.selectedIds.length) {
-        const currentSelection = model.state.items.findIndex(
-          item => item.id.toLowerCase() === model.state.selectedIds[0].toLowerCase()
-        );
-        model.events.goTo({id: model.state.items[currentSelection].id});
-      }
-
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [model.state.visibility]);
-    console.log(!model.state.selectedIds.length);
 
-    // Create an array of strings from model items
+    // // Create an array of strings from model items
     const normalizedOptions = model.state.items.map(item => {
       return item.id.toLowerCase();
     });
 
+    const startClearKeysSoFarTimer = () => {
+      if (timer.current) {
+        clearTimeout(timer.current);
+      }
+      timer.current = setTimeout(() => {
+        keySofar.current = '';
+      }, 500);
+    };
+
+    const getIndexByStartString = (
+      startIndex: number,
+      startString: string,
+      endIndex: number = normalizedOptions.length,
+      ignoreDisabled: boolean = true
+    ): number => {
+      for (let i = startIndex; i < endIndex; i++) {
+        const label = model.state.items[i].id.toLowerCase();
+        if (label.indexOf(startString.toLowerCase()) === 0) {
+          if (!ignoreDisabled || ignoreDisabled) {
+            return i;
+          }
+        }
+      }
+
+      return -1;
+    };
+
+    const handleKeyboardTypeAhead = (key: string, numOptions: number) => {
+      const cursorFocusedIndex = model.state.items.findIndex(
+        item => item.id.toLowerCase() === model.state.cursorId.toLowerCase()
+      );
+
+      let start = keySofar.current.length === 0 ? cursorFocusedIndex + 1 : cursorFocusedIndex;
+
+      start = start === numOptions ? 0 : start;
+
+      keySofar.current += key;
+      startClearKeysSoFarTimer();
+
+      let matchIndex;
+      matchIndex = getIndexByStartString(start, keySofar.current);
+
+      //   // If a match isn't found between start and end, wrap the search
+      //   // around and search again from the beginning (0) to start
+      if (matchIndex === -1) {
+        matchIndex = getIndexByStartString(0, keySofar.current, start);
+      }
+
+      // A match was found...
+      if (matchIndex > -1) {
+        if (model.state.visibility === 'hidden') {
+          // If the menu is closed, fire the change event
+          model.events.select({id: model.state.items[matchIndex].id});
+        } else {
+          // Otherwise the menu is visible (or at least partially visible);
+          // focus the matched option
+          model.events.goTo({id: model.state.items[matchIndex].id});
+        }
+      }
+    };
+
     return {
       onChange(event: React.SyntheticEvent<HTMLInputElement>) {
-        setValue((event.target as HTMLInputElement).value);
-        console.log('value>>', value);
-        const indexExists = normalizedOptions.indexOf(
-          (event.target as HTMLInputElement).value.toLowerCase()
-        );
-        setVisibility(indexExists !== -1);
+        event.preventDefault();
       },
       onKeyDown(event: React.KeyboardEvent) {
-        // Keep track of current event key
-        keySofar.current += event.key;
-
-        console.warn('>>>', keySofar.current);
-        let matchedIndex;
-        // Find index of item based on the keys typed so far
-        // if they type `co` use that to find `co` in the array of items
-        matchedIndex = normalizedOptions.findIndex(item => {
-          return (
-            item.toLowerCase().slice(0, keySofar.current.length) === keySofar.current.toLowerCase()
-          );
-        });
-
-        if (matchedIndex === -1) {
-          keySofar.current = '';
-        }
-        if (matchedIndex > -1) {
-          // Based on the matchedIndex, go to that item in the array
-          model.events.goTo({id: model.state.items[matchedIndex].id});
+        event.preventDefault();
+        if (event.key.length === 1 && event.key.match(/\S/)) {
+          handleKeyboardTypeAhead(event.key, model.state.items.length);
         }
       },
-      style: {
-        caretColor: 'transparent',
-        cursor: 'default',
-        // color: model.state.selectedIds.length && visibility ? 'inherit' : 'transparent',
-      },
+      style: {caretColor: 'transparent', cursor: 'default'},
     };
   }),
 
