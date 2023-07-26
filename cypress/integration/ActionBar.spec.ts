@@ -54,8 +54,8 @@ describe('Action Bar', () => {
       cy.checkA11y();
     });
 
-    it('should have 4 buttons inside the "actions"', () => {
-      cy.findByLabelText('actions')
+    it('should have 4 buttons inside the "region"', () => {
+      cy.findByRole('region')
         .findAllByRole('button')
         .should('have.length', 4);
     });
@@ -77,8 +77,8 @@ describe('Action Bar', () => {
         cy.findByRole('button', {name: '420px'}).click();
       });
 
-      it('should have 3 buttons inside the "actions"', () => {
-        cy.findByLabelText('actions')
+      it('should have 3 buttons inside the "region"', () => {
+        cy.findByRole('region')
           .findAllByRole('button')
           .should('have.length', 3);
       });
@@ -116,8 +116,8 @@ describe('Action Bar', () => {
         cy.findByRole('button', {name: 'Extra Small'}).click();
       });
 
-      it('should have 2 buttons inside the "actions"', () => {
-        cy.findByLabelText('actions')
+      it('should have 2 buttons inside the "region"', () => {
+        cy.findByRole('region')
           .findAllByRole('button')
           .should('have.length', 2);
       });
@@ -162,8 +162,8 @@ describe('Action Bar', () => {
         cy.checkA11y();
       });
 
-      it('should have 3 visible buttons inside the "actions"', () => {
-        cy.findByLabelText('actions')
+      it('should have 3 visible buttons inside the "region"', () => {
+        cy.findByRole('region')
           .findAllByRole('button')
           .should('have.length', 3);
       });
