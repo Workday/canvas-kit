@@ -3,6 +3,7 @@ import {FormField} from '@workday/canvas-kit-react/form-field';
 import {SelectBase} from '@workday/canvas-kit-react/select';
 import {Box} from '@workday/canvas-kit-react/layout';
 import {useComboboxModel} from '../../../combobox';
+import {Combobox} from '@workday/canvas-kit-react/combobox';
 
 const states = [
   'Alabama',
@@ -67,16 +68,10 @@ const states = [
 ];
 
 export const Basic = () => {
-  const [value, setValue] = React.useState('medium');
-
-  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setValue(event.target.value);
-  };
-
   const model = useComboboxModel({
     items: states,
   });
-  // console.log(model);
+
   return (
     <Box>
       <FormField label="Pizza Size">
@@ -93,13 +88,20 @@ export const Basic = () => {
             </SelectBase.Card>
           </SelectBase.Popup>
         </SelectBase>
-        Selected: {model.state.selectedIds[0]}
-        {/* <Select onChange={handleChange} value={value}>
-        <SelectOption label="Small" value="small" />
-        <SelectOption label="Medium" value="medium" />
-        <SelectOption label="Large" value="large" />
-      </Select> */}
+        {/* Selected: {model.state.selectedIds[0]} */}
       </FormField>
+      {/* <Combobox>
+        <Combobox.Input />
+        <Combobox.Menu.Popper>
+          <Combobox.Menu.Card maxHeight="200px">
+            <Combobox.Menu.List>
+              <Combobox.Menu.Item>Small</Combobox.Menu.Item>
+              <Combobox.Menu.Item>Medium</Combobox.Menu.Item>
+              <Combobox.Menu.Item>Large</Combobox.Menu.Item>
+            </Combobox.Menu.List>
+          </Combobox.Menu.Card>
+        </Combobox.Menu.Popper>
+      </Combobox> */}
     </Box>
   );
 };
