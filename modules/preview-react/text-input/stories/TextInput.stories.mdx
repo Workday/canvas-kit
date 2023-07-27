@@ -10,6 +10,8 @@ import {LabelPositionVertical} from './examples/LabelPositionVertical';
 import {Placeholder} from './examples/Placeholder';
 import {RefForwarding} from './examples/RefForwarding';
 import {Required} from './examples/Required';
+import {Hidden} from './examples/Hidden';
+import {ReadOnly} from './examples/ReadOnly';
 import {Password} from './examples/Password';
 import {HiddenLabel} from './examples/HiddenLabel';
 import {ThemedAlert} from './examples/ThemedAlert';
@@ -56,6 +58,21 @@ Use `TextInput.Field`'s `isRequired` prop (or use with the `useTextInputModel` h
 that the field is required. This will also add a red asterisk to `TextInput.Label`.
 
 <ExampleCodeBlock code={Required} />
+
+### ReadOnly
+
+Use `TextInput.Field`'s `readOnly` prop to indicate that the field can not be changed. We reccommend
+setting the background and border color to tranparent and the cursor to default to help inform users
+of the immutiblity.
+
+<ExampleCodeBlock code={ReadOnly} />
+
+### Hidden
+
+Set `TextInput.Field`'s `type` prop to
+`hidden to completly hide a field while still submitting its value, often used for things like security tokens. Note: You will likely need to manually set`aria-describedby={undefined}`and`id={undefined}`
+
+<ExampleCodeBlock code={Hidden} />
 
 ### Ref Forwarding
 
