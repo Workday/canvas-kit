@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v9.1.7](https://github.com/Workday/canvas-kit/releases/tag/v9.1.7) (2023-07-27)
+
+### Documentation
+
+- fix: Adding landmark regions to Action Bar examples ([#2291](https://github.com/Workday/canvas-kit/pull/2291)) ([@bstanton678](https://github.com/bstanton678))
+
+
 ## [v9.1.6](https://github.com/Workday/canvas-kit/releases/tag/v9.1.6) (2023-07-25)
 
 ### Components
