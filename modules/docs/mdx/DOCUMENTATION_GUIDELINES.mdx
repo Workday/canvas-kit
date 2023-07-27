@@ -1,0 +1,85 @@
+<Meta
+  title="Guides/Documentation Guidelines"
+  parameters={{
+    viewMode: 'docs',
+    previewTabs: {
+      canvas: {hidden: true},
+    },
+  }}
+/>
+
+# Documentation Guidelines
+
+## Component Documentation
+
+Every MDX should begin the same way with imports, the `<Meta />` tag, the name and description of
+the component, and installation instructions.
+
+Reference the following examples: [Tabs](/tabs), [Modal](/modal).
+
+````md
+<!--
+Import components which will be used to render documentation in the MDX file.
+The Specifications import is optional; only include it if the Specifications
+section exists (see below).
+-->
+import {Specifications, SymbolDoc} from '@workday/canvas-kit-docs';
+
+<!--- Import component -->
+import {[Component]} from '@workday/canvas-kit-[preview-|labs-]react/[component]';
+
+<!--- Import examples -->
+import {Basic} from './examples/Basic';
+import {AnotherExample} from './examples/AnotherExample';
+import ...
+
+<Meta title="storybook/path/..." component={[Component]} />
+
+# Canvas Kit [Component]
+
+Short description of Component.
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-[preview-|labs-]react
+```
+
+## Usage
+
+<!--
+Every component should have a Basic example as the first example in the 
+-->
+### Basic Example
+
+Description of Basic example.
+
+### Another Example
+
+...More examples...
+
+## Component API
+
+<SymbolDoc name="[Component]" fileName="/[preview-|labs-]react/" />
+
+<!--
+Specifications section is optional. Only include it if the component has
+Cypress integration tests (i.e., a spec.ts file in the cypress/integration
+folder).
+-->
+## Specifications
+
+<Specifications file="[Component].spec.ts" name="[Component]" />
+````
+
+#### Multiple Components
+
+##### Different Examples for Each Component
+
+##### Multiple SymbolDocs in Compnent API
+
+Top portion of document will be stripped out on Canvas Site.
+
+Link to Google writing style guide.
+
+Should I change "Usage" to "Examples" and update `mdx-content-rewrite.js` in canvas-site?
