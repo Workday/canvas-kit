@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {DeprecatedMenuItem} from '@workday/canvas-kit-preview-react/menu';
+import {StyledMenuItem} from '@workday/canvas-kit-react/menu';
 import {SearchForm, SearchThemeAttributes} from '@workday/canvas-kit-labs-react/search-form';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {colors} from '@workday/canvas-kit-react/tokens';
@@ -30,9 +30,7 @@ export const CustomTheme = () => {
   const [wineList, setWineList] = React.useState(initialWineList);
   // Tracking the input value for onSubmit
   const [searchInput, setSearchInput] = React.useState('');
-  const menuItems = wineList.map(wine => (
-    <DeprecatedMenuItem key={wine}>{wine}</DeprecatedMenuItem>
-  ));
+  const menuItems = wineList.map(wine => <StyledMenuItem key={wine}>{wine}</StyledMenuItem>);
 
   const filterMenuItems = e => {
     setSearchInput(e.target.value);
