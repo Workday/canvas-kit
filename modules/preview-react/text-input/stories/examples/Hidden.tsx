@@ -5,7 +5,7 @@ export const Hidden = () => {
   return (
     <>
       <h2>Inspect Element to see the markup</h2>
-      <TextInput.Field value={'Secret'} type="hidden" aria-describedby={undefined} id={undefined} />
+      <TextInput.Field value={'Secret'} type="hidden" />
     </>
   );
 };
