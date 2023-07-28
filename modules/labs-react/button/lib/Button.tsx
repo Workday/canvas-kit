@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {BaseButton, buttonVars} from './BaseButton';
+import {BaseButton} from './BaseButton';
 import {
   createComponent,
   GrowthBehavior,

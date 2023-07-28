@@ -9,7 +9,7 @@ import {
   cssVar,
   tokenTheme,
 } from '@workday/canvas-kit-react/common';
-import {ButtonContainerProps, Button} from './Button';
+import {ButtonContainerProps} from './Button';
 
 export type PrimaryButtonVariant = 'primary' | 'inverse';
 
