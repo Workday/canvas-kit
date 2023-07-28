@@ -1,6 +1,10 @@
 import * as React from 'react';
 
-import {Button} from '@workday/canvas-kit-labs-react/button';
+import {
+  PrimaryButton,
+  SecondaryButton,
+  TertiaryButton,
+} from '@workday/canvas-kit-labs-react/button';
 import {plusIcon} from '@workday/canvas-system-icons-web';
 import {Flex, Grid} from '@workday/canvas-kit-react/layout';
 
@@ -10,52 +14,44 @@ export const ButtonExample = () => {
       <Flex flexDirection="column" padding="xxs" gap="s">
         Primary
         <Flex flexDirection="row" gap="s">
-          <Button size="extraSmall" variant="primary">
+          <PrimaryButton size="extraSmall">Button</PrimaryButton>
+          <PrimaryButton size="extraSmall" icon={plusIcon} iconPosition="start">
             Button
-          </Button>
-          <Button size="extraSmall" icon={plusIcon} iconPosition="start" variant="primary">
+          </PrimaryButton>
+          <PrimaryButton size="extraSmall" icon={plusIcon} iconPosition="end">
             Button
-          </Button>
-          <Button size="extraSmall" icon={plusIcon} iconPosition="end" variant="primary">
-            Button
-          </Button>
-          <Button size="extraSmall" icon={plusIcon} iconPosition="only" variant="primary" />
+          </PrimaryButton>
+          <PrimaryButton size="extraSmall" icon={plusIcon} iconPosition="only" />
         </Flex>
         <Flex flexDirection="row" gap="s">
-          <Button size="small" variant="primary">
+          <PrimaryButton size="small">Button</PrimaryButton>
+          <PrimaryButton size="small" icon={plusIcon} iconPosition="start">
             Button
-          </Button>
-          <Button size="small" icon={plusIcon} iconPosition="start" variant="primary">
+          </PrimaryButton>
+          <PrimaryButton size="small" icon={plusIcon} iconPosition="end">
             Button
-          </Button>
-          <Button size="small" icon={plusIcon} iconPosition="end" variant="primary">
-            Button
-          </Button>
-          <Button size="small" icon={plusIcon} iconPosition="only" variant="primary" />
+          </PrimaryButton>
+          <PrimaryButton size="small" icon={plusIcon} iconPosition="only" />
         </Flex>
         <Flex flexDirection="row" gap="s">
-          <Button size="medium" variant="primary">
+          <PrimaryButton size="medium">Button</PrimaryButton>
+          <PrimaryButton size="medium" icon={plusIcon} iconPosition="start">
             Button
-          </Button>
-          <Button size="medium" icon={plusIcon} iconPosition="start" variant="primary">
+          </PrimaryButton>
+          <PrimaryButton size="medium" icon={plusIcon} iconPosition="end">
             Button
-          </Button>
-          <Button size="medium" icon={plusIcon} iconPosition="end" variant="primary">
-            Button
-          </Button>
-          <Button size="medium" icon={plusIcon} iconPosition="only" variant="primary" />
+          </PrimaryButton>
+          <PrimaryButton size="medium" icon={plusIcon} iconPosition="only" />
         </Flex>
         <Flex flexDirection="row" gap="s">
-          <Button size="large" variant="primary">
+          <PrimaryButton size="large">Button</PrimaryButton>
+          <PrimaryButton size="large" icon={plusIcon} iconPosition="start">
             Button
-          </Button>
-          <Button size="large" icon={plusIcon} iconPosition="start" variant="primary">
+          </PrimaryButton>
+          <PrimaryButton size="large" icon={plusIcon} iconPosition="end">
             Button
-          </Button>
-          <Button size="large" icon={plusIcon} iconPosition="end" variant="primary">
-            Button
-          </Button>
-          <Button size="large" icon={plusIcon} iconPosition="only" variant="primary" />
+          </PrimaryButton>
+          <PrimaryButton size="large" icon={plusIcon} iconPosition="only" />
         </Flex>
       </Flex>
       <Flex
@@ -68,103 +64,95 @@ export const ButtonExample = () => {
       >
         Primary Inverse
         <Flex flexDirection="row" gap="s">
-          <Button size="extraSmall" variant="primaryInverse">
+          <PrimaryButton size="extraSmall" variant="inverse">
             Button
-          </Button>
-          <Button size="extraSmall" icon={plusIcon} iconPosition="start" variant="primaryInverse">
+          </PrimaryButton>
+          <PrimaryButton size="extraSmall" icon={plusIcon} iconPosition="start" variant="inverse">
             Button
-          </Button>
-          <Button size="extraSmall" icon={plusIcon} iconPosition="end" variant="primaryInverse">
+          </PrimaryButton>
+          <PrimaryButton size="extraSmall" icon={plusIcon} iconPosition="end" variant="inverse">
             Button
-          </Button>
-          <Button size="extraSmall" icon={plusIcon} iconPosition="only" variant="primaryInverse" />
+          </PrimaryButton>
+          <PrimaryButton size="extraSmall" icon={plusIcon} iconPosition="only" variant="inverse" />
         </Flex>
         <Flex flexDirection="row" gap="s">
-          <Button size="small" variant="primaryInverse">
+          <PrimaryButton size="small" variant="inverse">
             Button
-          </Button>
-          <Button size="small" icon={plusIcon} iconPosition="start" variant="primaryInverse">
+          </PrimaryButton>
+          <PrimaryButton size="small" icon={plusIcon} iconPosition="start" variant="inverse">
             Button
-          </Button>
-          <Button size="small" icon={plusIcon} iconPosition="end" variant="primaryInverse">
+          </PrimaryButton>
+          <PrimaryButton size="small" icon={plusIcon} iconPosition="end" variant="inverse">
             Button
-          </Button>
-          <Button size="small" icon={plusIcon} iconPosition="only" variant="primaryInverse" />
+          </PrimaryButton>
+          <PrimaryButton size="small" icon={plusIcon} iconPosition="only" variant="inverse" />
         </Flex>
         <Flex flexDirection="row" gap="s">
-          <Button size="medium" variant="primaryInverse">
+          <PrimaryButton size="medium" variant="inverse">
             Button
-          </Button>
-          <Button size="medium" icon={plusIcon} iconPosition="start" variant="primaryInverse">
+          </PrimaryButton>
+          <PrimaryButton size="medium" icon={plusIcon} iconPosition="start" variant="inverse">
             Button
-          </Button>
-          <Button size="medium" icon={plusIcon} iconPosition="end" variant="primaryInverse">
+          </PrimaryButton>
+          <PrimaryButton size="medium" icon={plusIcon} iconPosition="end" variant="inverse">
             Button
-          </Button>
-          <Button size="medium" icon={plusIcon} iconPosition="only" variant="primaryInverse" />
+          </PrimaryButton>
+          <PrimaryButton size="medium" icon={plusIcon} iconPosition="only" variant="inverse" />
         </Flex>
         <Flex flexDirection="row" gap="s">
-          <Button size="large" variant="primaryInverse">
+          <PrimaryButton size="large" variant="inverse">
             Button
-          </Button>
-          <Button size="large" icon={plusIcon} iconPosition="start" variant="primaryInverse">
+          </PrimaryButton>
+          <PrimaryButton size="large" icon={plusIcon} iconPosition="start" variant="inverse">
             Button
-          </Button>
-          <Button size="large" icon={plusIcon} iconPosition="end" variant="primaryInverse">
+          </PrimaryButton>
+          <PrimaryButton size="large" icon={plusIcon} iconPosition="end" variant="inverse">
             Button
-          </Button>
-          <Button size="large" icon={plusIcon} iconPosition="only" variant="primaryInverse" />
+          </PrimaryButton>
+          <PrimaryButton size="large" icon={plusIcon} iconPosition="only" variant="inverse" />
         </Flex>
       </Flex>
       <Flex flexDirection="column" padding="xxs" gap="s">
         Secondary
         <Flex flexDirection="row" gap="s">
-          <Button size="extraSmall" variant="secondary">
+          <SecondaryButton size="extraSmall">Button</SecondaryButton>
+          <SecondaryButton size="extraSmall" icon={plusIcon} iconPosition="start">
             Button
-          </Button>
-          <Button size="extraSmall" icon={plusIcon} iconPosition="start" variant="secondary">
+          </SecondaryButton>
+          <SecondaryButton size="extraSmall" icon={plusIcon} iconPosition="end">
             Button
-          </Button>
-          <Button size="extraSmall" icon={plusIcon} iconPosition="end" variant="secondary">
-            Button
-          </Button>
-          <Button size="extraSmall" icon={plusIcon} iconPosition="only" variant="secondary" />
+          </SecondaryButton>
+          <SecondaryButton size="extraSmall" icon={plusIcon} iconPosition="only" />
         </Flex>
         <Flex flexDirection="row" gap="s">
-          <Button size="small" variant="secondary">
+          <SecondaryButton size="small">Button</SecondaryButton>
+          <SecondaryButton size="small" icon={plusIcon} iconPosition="start">
             Button
-          </Button>
-          <Button size="small" icon={plusIcon} iconPosition="start" variant="secondary">
+          </SecondaryButton>
+          <SecondaryButton size="small" icon={plusIcon} iconPosition="end">
             Button
-          </Button>
-          <Button size="small" icon={plusIcon} iconPosition="end" variant="secondary">
-            Button
-          </Button>
-          <Button size="small" icon={plusIcon} iconPosition="only" variant="secondary" />
+          </SecondaryButton>
+          <SecondaryButton size="small" icon={plusIcon} iconPosition="only" />
         </Flex>
         <Flex flexDirection="row" gap="s">
-          <Button size="medium" variant="secondary">
+          <SecondaryButton size="medium">Button</SecondaryButton>
+          <SecondaryButton size="medium" icon={plusIcon} iconPosition="start">
             Button
-          </Button>
-          <Button size="medium" icon={plusIcon} iconPosition="start" variant="secondary">
+          </SecondaryButton>
+          <SecondaryButton size="medium" icon={plusIcon} iconPosition="end">
             Button
-          </Button>
-          <Button size="medium" icon={plusIcon} iconPosition="end" variant="secondary">
-            Button
-          </Button>
-          <Button size="medium" icon={plusIcon} iconPosition="only" variant="secondary" />
+          </SecondaryButton>
+          <SecondaryButton size="medium" icon={plusIcon} iconPosition="only" />
         </Flex>
         <Flex flexDirection="row" gap="s">
-          <Button size="large" variant="secondary">
+          <SecondaryButton size="large">Button</SecondaryButton>
+          <SecondaryButton size="large" icon={plusIcon} iconPosition="start">
             Button
-          </Button>
-          <Button size="large" icon={plusIcon} iconPosition="start" variant="secondary">
+          </SecondaryButton>
+          <SecondaryButton size="large" icon={plusIcon} iconPosition="end">
             Button
-          </Button>
-          <Button size="large" icon={plusIcon} iconPosition="end" variant="secondary">
-            Button
-          </Button>
-          <Button size="large" icon={plusIcon} iconPosition="only" variant="secondary" />
+          </SecondaryButton>
+          <SecondaryButton size="large" icon={plusIcon} iconPosition="only" />
         </Flex>
       </Flex>
       <Flex
@@ -177,108 +165,100 @@ export const ButtonExample = () => {
       >
         Secondary Inverse
         <Flex flexDirection="row" gap="s">
-          <Button size="extraSmall" variant="secondaryInverse">
+          <SecondaryButton size="extraSmall" variant="inverse">
             Button
-          </Button>
-          <Button size="extraSmall" icon={plusIcon} iconPosition="start" variant="secondaryInverse">
+          </SecondaryButton>
+          <SecondaryButton size="extraSmall" icon={plusIcon} iconPosition="start" variant="inverse">
             Button
-          </Button>
-          <Button size="extraSmall" icon={plusIcon} iconPosition="end" variant="secondaryInverse">
+          </SecondaryButton>
+          <SecondaryButton size="extraSmall" icon={plusIcon} iconPosition="end" variant="inverse">
             Button
-          </Button>
-          <Button
+          </SecondaryButton>
+          <SecondaryButton
             size="extraSmall"
             icon={plusIcon}
             iconPosition="only"
-            variant="secondaryInverse"
+            variant="inverse"
           />
         </Flex>
         <Flex flexDirection="row" gap="s">
-          <Button size="small" variant="secondaryInverse">
+          <SecondaryButton size="small" variant="inverse">
             Button
-          </Button>
-          <Button size="small" icon={plusIcon} iconPosition="start" variant="secondaryInverse">
+          </SecondaryButton>
+          <SecondaryButton size="small" icon={plusIcon} iconPosition="start" variant="inverse">
             Button
-          </Button>
-          <Button size="small" icon={plusIcon} iconPosition="end" variant="secondaryInverse">
+          </SecondaryButton>
+          <SecondaryButton size="small" icon={plusIcon} iconPosition="end" variant="inverse">
             Button
-          </Button>
-          <Button size="small" icon={plusIcon} iconPosition="only" variant="secondaryInverse" />
+          </SecondaryButton>
+          <SecondaryButton size="small" icon={plusIcon} iconPosition="only" variant="inverse" />
         </Flex>
         <Flex flexDirection="row" gap="s">
-          <Button size="medium" variant="secondaryInverse">
+          <SecondaryButton size="medium" variant="inverse">
             Button
-          </Button>
-          <Button size="medium" icon={plusIcon} iconPosition="start" variant="secondaryInverse">
+          </SecondaryButton>
+          <SecondaryButton size="medium" icon={plusIcon} iconPosition="start" variant="inverse">
             Button
-          </Button>
-          <Button size="medium" icon={plusIcon} iconPosition="end" variant="secondaryInverse">
+          </SecondaryButton>
+          <SecondaryButton size="medium" icon={plusIcon} iconPosition="end" variant="inverse">
             Button
-          </Button>
-          <Button size="medium" icon={plusIcon} iconPosition="only" variant="secondaryInverse" />
+          </SecondaryButton>
+          <SecondaryButton size="medium" icon={plusIcon} iconPosition="only" variant="inverse" />
         </Flex>
         <Flex flexDirection="row" gap="s">
-          <Button size="large" variant="secondaryInverse">
+          <SecondaryButton size="large" variant="inverse">
             Button
-          </Button>
-          <Button size="large" icon={plusIcon} iconPosition="start" variant="secondaryInverse">
+          </SecondaryButton>
+          <SecondaryButton size="large" icon={plusIcon} iconPosition="start" variant="inverse">
             Button
-          </Button>
-          <Button size="large" icon={plusIcon} iconPosition="end" variant="secondaryInverse">
+          </SecondaryButton>
+          <SecondaryButton size="large" icon={plusIcon} iconPosition="end" variant="inverse">
             Button
-          </Button>
-          <Button size="large" icon={plusIcon} iconPosition="only" variant="secondaryInverse" />
+          </SecondaryButton>
+          <SecondaryButton size="large" icon={plusIcon} iconPosition="only" variant="inverse" />
         </Flex>
       </Flex>
       <Flex flexDirection="column" padding="xxs" gap="s">
         Tertiary
         <Flex flexDirection="row" gap="s">
-          <Button size="extraSmall" variant="tertiary">
+          <TertiaryButton size="extraSmall">Button</TertiaryButton>
+          <TertiaryButton size="extraSmall" icon={plusIcon} iconPosition="start">
             Button
-          </Button>
-          <Button size="extraSmall" icon={plusIcon} iconPosition="start" variant="tertiary">
+          </TertiaryButton>
+          <TertiaryButton size="extraSmall" icon={plusIcon} iconPosition="end">
             Button
-          </Button>
-          <Button size="extraSmall" icon={plusIcon} iconPosition="end" variant="tertiary">
-            Button
-          </Button>
-          <Button size="extraSmall" icon={plusIcon} iconPosition="only" variant="tertiary" />
+          </TertiaryButton>
+          <TertiaryButton size="extraSmall" icon={plusIcon} iconPosition="only" />
         </Flex>
         <Flex flexDirection="row" gap="s">
-          <Button size="small" variant="tertiary">
+          <TertiaryButton size="small">Button</TertiaryButton>
+          <TertiaryButton size="small" icon={plusIcon} iconPosition="start">
             Button
-          </Button>
-          <Button size="small" icon={plusIcon} iconPosition="start" variant="tertiary">
+          </TertiaryButton>
+          <TertiaryButton size="small" icon={plusIcon} iconPosition="end">
             Button
-          </Button>
-          <Button size="small" icon={plusIcon} iconPosition="end" variant="tertiary">
-            Button
-          </Button>
-          <Button size="small" icon={plusIcon} iconPosition="only" variant="tertiary" />
+          </TertiaryButton>
+          <TertiaryButton size="small" icon={plusIcon} iconPosition="only" />
         </Flex>
         <Flex flexDirection="row" gap="s">
-          <Button size="medium" variant="tertiary">
+          <TertiaryButton size="medium">Button</TertiaryButton>
+          <TertiaryButton size="medium" icon={plusIcon} iconPosition="start">
             Button
-          </Button>
-          <Button size="medium" icon={plusIcon} iconPosition="start" variant="tertiary">
+          </TertiaryButton>
+          <TertiaryButton size="medium" icon={plusIcon} iconPosition="end">
             Button
-          </Button>
-          <Button size="medium" icon={plusIcon} iconPosition="end" variant="tertiary">
-            Button
-          </Button>
-          <Button size="medium" icon={plusIcon} iconPosition="only" variant="tertiary" />
+          </TertiaryButton>
+          <TertiaryButton size="medium" icon={plusIcon} iconPosition="only" />
         </Flex>
         <Flex flexDirection="row" gap="s">
-          <Button size="large" variant="tertiary">
+          <TertiaryButton size="large">Button</TertiaryButton>
+          <TertiaryButton size="large" icon={plusIcon} iconPosition="start">
             Button
-          </Button>
-          <Button size="large" icon={plusIcon} iconPosition="start" variant="tertiary">
+          </TertiaryButton>
+          <TertiaryButton size="large" icon={plusIcon} iconPosition="end">
             Button
-          </Button>
-          <Button size="large" icon={plusIcon} iconPosition="end" variant="tertiary">
-            Button
-          </Button>
-          <Button size="large" icon={plusIcon} iconPosition="only" variant="tertiary" />
+          </TertiaryButton>
+          <TertiaryButton size="large" icon={plusIcon} iconPosition="only" />
         </Flex>
       </Flex>
       <Flex
@@ -291,52 +271,52 @@ export const ButtonExample = () => {
       >
         Tertiary Inverse
         <Flex flexDirection="row" gap="s">
-          <Button size="extraSmall" variant="tertiaryInverse">
+          <TertiaryButton size="extraSmall" variant="inverse">
             Button
-          </Button>
-          <Button size="extraSmall" icon={plusIcon} iconPosition="start" variant="tertiaryInverse">
+          </TertiaryButton>
+          <TertiaryButton size="extraSmall" icon={plusIcon} iconPosition="start" variant="inverse">
             Button
-          </Button>
-          <Button size="extraSmall" icon={plusIcon} iconPosition="end" variant="tertiaryInverse">
+          </TertiaryButton>
+          <TertiaryButton size="extraSmall" icon={plusIcon} iconPosition="end" variant="inverse">
             Button
-          </Button>
-          <Button size="extraSmall" icon={plusIcon} iconPosition="only" variant="tertiaryInverse" />
+          </TertiaryButton>
+          <TertiaryButton size="extraSmall" icon={plusIcon} iconPosition="only" variant="inverse" />
         </Flex>
         <Flex flexDirection="row" gap="s">
-          <Button size="small" variant="tertiaryInverse">
+          <TertiaryButton size="small" variant="inverse">
             Button
-          </Button>
-          <Button size="small" icon={plusIcon} iconPosition="start" variant="tertiaryInverse">
+          </TertiaryButton>
+          <TertiaryButton size="small" icon={plusIcon} iconPosition="start" variant="inverse">
             Button
-          </Button>
-          <Button size="small" icon={plusIcon} iconPosition="end" variant="tertiaryInverse">
+          </TertiaryButton>
+          <TertiaryButton size="small" icon={plusIcon} iconPosition="end" variant="inverse">
             Button
-          </Button>
-          <Button size="small" icon={plusIcon} iconPosition="only" variant="tertiaryInverse" />
+          </TertiaryButton>
+          <TertiaryButton size="small" icon={plusIcon} iconPosition="only" variant="inverse" />
         </Flex>
         <Flex flexDirection="row" gap="s">
-          <Button size="medium" variant="tertiaryInverse">
+          <TertiaryButton size="medium" variant="inverse">
             Button
-          </Button>
-          <Button size="medium" icon={plusIcon} iconPosition="start" variant="tertiaryInverse">
+          </TertiaryButton>
+          <TertiaryButton size="medium" icon={plusIcon} iconPosition="start" variant="inverse">
             Button
-          </Button>
-          <Button size="medium" icon={plusIcon} iconPosition="end" variant="tertiaryInverse">
+          </TertiaryButton>
+          <TertiaryButton size="medium" icon={plusIcon} iconPosition="end" variant="inverse">
             Button
-          </Button>
-          <Button size="medium" icon={plusIcon} iconPosition="only" variant="tertiaryInverse" />
+          </TertiaryButton>
+          <TertiaryButton size="medium" icon={plusIcon} iconPosition="only" variant="inverse" />
         </Flex>
         <Flex flexDirection="row" gap="s">
-          <Button size="large" variant="tertiaryInverse">
+          <TertiaryButton size="large" variant="inverse">
             Button
-          </Button>
-          <Button size="large" icon={plusIcon} iconPosition="start" variant="tertiaryInverse">
+          </TertiaryButton>
+          <TertiaryButton size="large" icon={plusIcon} iconPosition="start" variant="inverse">
             Button
-          </Button>
-          <Button size="large" icon={plusIcon} iconPosition="end" variant="tertiaryInverse">
+          </TertiaryButton>
+          <TertiaryButton size="large" icon={plusIcon} iconPosition="end" variant="inverse">
             Button
-          </Button>
-          <Button size="large" icon={plusIcon} iconPosition="only" variant="tertiaryInverse" />
+          </TertiaryButton>
+          <TertiaryButton size="large" icon={plusIcon} iconPosition="only" variant="inverse" />
         </Flex>
       </Flex>
     </Grid>

@@ -9,10 +9,11 @@ import {
   cs,
   createVars,
   cssVar,
+  createModifiers,
 } from '@workday/canvas-kit-react/common';
 import {SystemIconProps} from '@workday/canvas-kit-react/icon';
 import {Box} from '@workday/canvas-kit-react/layout';
-import {space} from '@workday/canvas-kit-react/tokens';
+import {space, spaceNumbers} from '@workday/canvas-kit-react/tokens';
 
 import {ButtonColors, ButtonSizes} from './types';
 
@@ -155,11 +156,96 @@ const BaseButtonStyles = cs({
   },
 });
 
+export const SizeModifiers = createModifiers({
+  size: {
+    large: cs({
+      fontSize: space.s,
+      lineHeight: space.m,
+      letterSpacing: '0.01rem',
+      height: '48px',
+      '&.canvas-button-icon-only': {
+        padding: '0',
+        minWidth: `${spaceNumbers.xl + spaceNumbers.xxs}rem`,
+      },
+      '&.canvas-button-icon-start': {
+        paddingInlineStart: `${spaceNumbers.xl / 2}rem`,
+        paddingInlineEnd: space.m,
+      },
+      '&.canvas-button-icon-end': {
+        paddingInlineStart: space.m,
+        paddingInlineEnd: `${spaceNumbers.xl / 2}rem`,
+      },
+    }),
+    medium: cs({
+      fontSize: '0.875rem',
+      lineHeight: '1.25rem',
+      letterSpacing: '0.015rem',
+      height: space.xl,
+      '&.canvas-button-icon-only': {
+        padding: '0',
+        minWidth: space.xl,
+      },
+      '&.canvas-button-icon-start': {
+        paddingInlineStart: `${spaceNumbers.xl / 2}rem`,
+        paddingInlineEnd: space.m,
+      },
+      '&.canvas-button-icon-end': {
+        paddingInlineStart: space.m,
+        paddingInlineEnd: `${spaceNumbers.xl / 2}rem`,
+      },
+    }),
+    small: cs({
+      fontSize: '0.875rem',
+      lineHeight: '1.25rem',
+      letterSpacing: '0.015rem',
+      height: space.l,
+      paddingInline: space.s,
+      '&.canvas-button-icon-only': {
+        padding: '0',
+        minWidth: space.l,
+      },
+      '&.canvas-button-icon-start': {
+        paddingInlineStart: space.xs,
+        paddingInlineEnd: space.s,
+      },
+      '&.canvas-button-icon-end': {
+        paddingInlineStart: space.s,
+        paddingInlineEnd: space.xs,
+      },
+    }),
+    extraSmall: cs({
+      fontSize: '0.75rem',
+      lineHeight: space.s,
+      letterSpacing: '0.02rem',
+      height: space.m,
+      paddingInline: space.s,
+      '&.canvas-button-icon-only': {
+        padding: '0',
+        minWidth: space.m,
+      },
+      '&.canvas-button-icon-start': {
+        paddingInlineStart: space.xxs,
+        paddingInlineEnd: space.xs,
+      },
+      '&.canvas-button-icon-end': {
+        paddingInlineStart: space.xs,
+        paddingInlineEnd: space.xxs,
+      },
+    }),
+  },
+});
+
 export const BaseButton = createComponent('button')({
-  displayName: 'Button',
-  Component: ({children, cs, ...elemProps}: BaseButtonContainerProps, ref, Element) => {
+  displayName: 'BaseButton',
+  Component: ({children, cs, size, ...elemProps}: BaseButtonContainerProps, ref, Element) => {
     return (
-      <Box as={Element} ref={ref} type="button" cs={[BaseButtonStyles, cs]} {...elemProps}>
+      <Box
+        as={Element}
+        ref={ref}
+        type="button"
+        cs={[BaseButtonStyles, cs, SizeModifiers({size: size})]}
+        {...elemProps}
+      >
         {children}
       </Box>
     );
