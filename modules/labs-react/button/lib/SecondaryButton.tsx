@@ -75,6 +75,9 @@ export const SecondaryButtonModifiers = createModifiers({
           newTheme.colors.secondaryInverse.button.background.hover
         ),
         [buttonVars.hover.color]: cssVar(newTheme.colors.secondaryInverse.button.color.hover),
+        '& span .wd-icon-fill': {
+          [buttonVars.hover.icon]: cssVar(newTheme.colors.secondaryInverse.icon.hover),
+        },
       },
       '&:active': {
         [buttonVars.active.background]: cssVar(
