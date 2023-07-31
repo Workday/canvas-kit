@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v9.1.7](https://github.com/Workday/canvas-kit/releases/tag/v9.1.7) (2023-07-27)
+
+### Documentation
+
+- fix: Adding landmark regions to Action Bar examples ([#2291](https://github.com/Workday/canvas-kit/pull/2291)) ([@bstanton678](https://github.com/bstanton678))
+
+
+## [v9.1.6](https://github.com/Workday/canvas-kit/releases/tag/v9.1.6) (2023-07-25)
+
+### Components
+
+- fix: Polishing the expandable container component ([#2293](https://github.com/Workday/canvas-kit/pull/2293)) ([@bstanton678](https://github.com/bstanton678))
+  Update aria attributes on example for expandable container for better accessibility and remove alt text on avatar.
+
+
 ## [v9.1.5](https://github.com/Workday/canvas-kit/releases/tag/v9.1.5) (2023-07-21)
 
 
