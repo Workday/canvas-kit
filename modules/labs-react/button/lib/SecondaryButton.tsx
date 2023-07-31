@@ -33,7 +33,7 @@ const SecondaryStyles = cs({
     [buttonVars.hover.border]: cssVar(newTheme.colors.secondary.button.border.hover),
     [buttonVars.hover.color]: cssVar(newTheme.colors.secondary.button.color.hover),
     '& span .wd-icon-fill': {
-      [buttonVars.hover.icon]: cssVar(newTheme.colors.secondary.icon.base),
+      [buttonVars.hover.icon]: cssVar(newTheme.colors.secondary.icon.hover),
     },
   },
   '&:active': {

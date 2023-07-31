@@ -590,7 +590,7 @@ cs({
     '--canvas-colors-primaryInverse-button-color-hover':
       'var(--canvas-color-base-black-pepper-500)',
     '--canvas-colors-primaryInverse-icon-fill-base': 'var(--canvas-color-base-black-pepper-400)',
-    '--canvas-colors-primaryInverse-icon-fill-hover': 'var(--canvas-color-base-french-vanilla-400)',
+    '--canvas-colors-primaryInverse-icon-fill-hover': 'var(--canvas-color-base-black-pepper-500)',
     '--canvas-colors-primaryInverse-icon-fill-focus': 'var(--canvas-color-base-black-pepper-500)',
     '--canvas-colors-primaryInverse-icon-fill-active': 'var(--canvas-color-base-black-pepper-500)',
 
