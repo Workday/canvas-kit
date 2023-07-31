@@ -544,6 +544,7 @@ class SelectContainer extends React.Component<SelectContainerProps, SelectContai
       buttonRef,
       options,
       onKeyDown,
+      onBlur,
 
       ...elemProps
     } = this.props;
