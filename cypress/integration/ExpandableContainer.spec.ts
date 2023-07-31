@@ -15,11 +15,7 @@ describe('ExpandableContainer', () => {
     });
 
     it('should have aria-expanded set to false', () => {
-      cy.findByRole('button', {name: 'expand container'}).should(
-        'have.attr',
-        'aria-expanded',
-        'false'
-      );
+      cy.findByRole('button').should('have.attr', 'aria-expanded', 'false');
     });
 
     it('should not show expanded content', () => {
@@ -28,15 +24,11 @@ describe('ExpandableContainer', () => {
 
     context('when the container is clicked', () => {
       beforeEach(() => {
-        cy.findByRole('button', {name: 'expand container'}).click();
+        cy.findByRole('button').click();
       });
 
       it('should set aria-expanded to true', () => {
-        cy.findByRole('button', {name: 'expand container'}).should(
-          'have.attr',
-          'aria-expanded',
-          'true'
-        );
+        cy.findByRole('button').should('have.attr', 'aria-expanded', 'true');
       });
 
       it('should show expanded content', () => {
@@ -44,7 +36,7 @@ describe('ExpandableContainer', () => {
       });
 
       it(`should have an aria-controls attribute pointing to the id of content`, () => {
-        cy.findByRole('button', {name: 'expand container'}).then(button => {
+        cy.findByRole('button').then(button => {
           const buttonAriaControlsValue = button.attr('aria-controls');
           cy.findByText('Content').should('have.attr', 'id', buttonAriaControlsValue);
         });
@@ -52,7 +44,7 @@ describe('ExpandableContainer', () => {
 
       context('when the container is clicked again', () => {
         beforeEach(() => {
-          cy.findByRole('button', {name: 'expand container'}).click();
+          cy.findByRole('button').click();
         });
 
         it('should hide expanded content', () => {
@@ -60,11 +52,7 @@ describe('ExpandableContainer', () => {
         });
 
         it('should have aria-expanded set to false', () => {
-          cy.findByRole('button', {name: 'expand container'}).should(
-            'have.attr',
-            'aria-expanded',
-            'false'
-          );
+          cy.findByRole('button').should('have.attr', 'aria-expanded', 'false');
         });
       });
     });
