@@ -304,6 +304,7 @@ export const SelectBase = ({
   menuVisibility = 'closed',
   onChange,
   onKeyDown,
+  onBlur,
   onClose,
   onOptionSelection,
   options,
@@ -432,6 +433,14 @@ export const SelectBase = ({
         grow={grow}
         menuVisibility={menuVisibility}
         onKeyDown={onKeyDown}
+        onBlur={event => {
+          if (menuVisibility === 'closed') {
+            onBlur?.(event);
+          } else {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+        }}
         // Prevent Firefox from triggering click handler on spacebar during
         // type-ahead when the menu is closed (and, thus, incorrectly displaying
         // the menu)
