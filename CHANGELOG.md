@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v9.1.8](https://github.com/Workday/canvas-kit/releases/tag/v9.1.8) (2023-07-31)
+
+### Components
+
+- fix(preview): Blur firing incorrectly onClick ([#2304](https://github.com/Workday/canvas-kit/pull/2304)) ([@vibdev](https://github.com/vibdev))
+
+
 ## [v9.1.7](https://github.com/Workday/canvas-kit/releases/tag/v9.1.7) (2023-07-27)
 
 ### Documentation
