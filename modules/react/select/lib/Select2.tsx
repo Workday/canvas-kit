@@ -26,9 +26,12 @@ const useSelectInput = composeHooks(
       if (
         model.state.visibility !== 'visible' &&
         !model.state.selectedIds.length &&
-        model.state.items.length > 0
+        model.state.items.length === 0
       ) {
+        console.log('NO ITEMS SELECTED');
+
         model.events.goTo({id: model.state.items[0].id});
+        model.events.select({id: model.state.items[0].id});
       }
       // if (model.state.visibility !== 'visible') {
       //   keySofar.current = '';
@@ -54,8 +57,6 @@ const useSelectInput = composeHooks(
     ): number => {
       for (let i = startIndex; i < endIndex; i++) {
         const label = model.state.items[i].id.toLowerCase();
-        console.log(startString);
-        console.log('label', label);
         if (label.indexOf(startString.toLowerCase()) === 0) {
           if (!ignoreDisabled || ignoreDisabled) {
             return i;
@@ -67,12 +68,11 @@ const useSelectInput = composeHooks(
     };
 
     const handleKeyboardTypeAhead = (key: string, numOptions: number) => {
-      console.log('in type ahead');
       const cursorFocusedIndex = model.state.items.findIndex(
-        item => item.id.toLowerCase() === model.state.cursorId.toLowerCase()
+        item => item.id.toLowerCase() === model.state.selectedIds[0]
       );
-
-      let start = keySofar.current.length === 0 ? cursorFocusedIndex + 1 : cursorFocusedIndex;
+      console.log('cursorId', model.state.cursorId);
+      let start = keySofar.current.length === 0 ? cursorFocusedIndex : cursorFocusedIndex;
 
       start = start === numOptions ? 0 : start;
 
@@ -85,34 +85,54 @@ const useSelectInput = composeHooks(
       //   // If a match isn't found between start and end, wrap the search
       //   // around and search again from the beginning (0) to start
       if (matchIndex === -1) {
-        console.log('not in a found index');
-        console.log(model);
         matchIndex = getIndexByStartString(0, keySofar.current, start);
       }
 
       // A match was found...
       if (matchIndex > -1) {
         if (model.state.visibility === 'hidden') {
-          console.log('in here hidden modal');
           // If the menu is closed, fire the change event
-          model.events.select({id: model.state.items[matchIndex].id});
+          // model.events.select({id: model.state.items[matchIndex].id});
+          model.events.goTo({id: model.state.items[matchIndex].id});
         } else {
           // Otherwise the menu is visible (or at least partially visible);
           // focus the matched option
+
           model.events.goTo({id: model.state.items[matchIndex].id});
+          model.events.select({id: model.state.items[matchIndex].id});
         }
       }
     };
 
     return {
-      // onChange(event: React.SyntheticEvent<HTMLInputElement>) {
-      //   event.preventDefault();
-      // },
-      onKeyDown(event: React.KeyboardEvent) {
-        // if(model.state.items)
+      onClick(event: React.MouseEvent) {
+        if (model.state.selectedIds.length > 0) {
+          const foundIndex = model.state.items.findIndex(
+            item => item.id === model.state.selectedIds[0]
+          );
+
+          model.events.goTo({id: model.state.items[foundIndex].id});
+          model.events.select({id: model.state.items[foundIndex].id});
+        }
+      },
+      onChange(event: React.SyntheticEvent<HTMLInputElement>) {
         event.preventDefault();
+      },
+
+      onKeyDown(event: React.KeyboardEvent) {
+        event.preventDefault();
+        console.log(event);
+
+        if (event.key === 'Enter' && model.state.visibility === 'hidden') {
+          model.events.show();
+        }
         if (event.key.length === 1 && event.key.match(/\S/)) {
           handleKeyboardTypeAhead(event.key, model.state.items.length);
+        }
+        // model.events.go;
+        if (model.state.visibility === 'visible') {
+          // console.log('item', model.state.selectedIds);
+          // model.event.goTo()
         }
       },
       style: {caretColor: 'transparent', cursor: 'default'},
@@ -126,16 +146,18 @@ const useSelectInput = composeHooks(
 export const SelectInput = createSubcomponent(TextInput)({
   modelHook: useComboboxModel,
   elemPropsHook: useSelectInput,
-})((props, Element, model) => {
-  return (
-    <InputGroup>
-      <InputGroup.Input as={Element} {...props}></InputGroup.Input>
-      <InputGroup.InnerEnd>
-        <SystemIcon icon={caretDownSmallIcon} />
-      </InputGroup.InnerEnd>
-    </InputGroup>
-  );
-});
+})<ExtractProps<typeof TextInput>>(
+  ({placeholder = 'Choose and Option', ...props}, Element, model) => {
+    return (
+      <InputGroup>
+        <InputGroup.Input as={Element} {...props}></InputGroup.Input>
+        <InputGroup.InnerEnd>
+          <SystemIcon icon={caretDownSmallIcon} />
+        </InputGroup.InnerEnd>
+      </InputGroup>
+    );
+  }
+);
 
 export const SelectBase = createContainer()({
   displayName: 'Select2',
@@ -151,13 +173,13 @@ export const SelectBase = createContainer()({
   return <Combobox model={model}>{useListRenderItems(model, children)}</Combobox>;
 });
 
-export const useSelectModel = createModelHook({
-  defaultConfig: useComboboxModel.defaultConfig,
-  requiredConfig: useComboboxModel.requiredConfig,
-})(config => {
-  const model = useMenuModel();
+// export const useSelectModel = createModelHook({
+//   defaultConfig: useComboboxModel.defaultConfig,
+//   requiredConfig: useComboboxModel.requiredConfig,
+// })(config => {
+//   const model = useMenuModel();
 
-  console.log(model);
+//   console.log(model);
 
-  return model;
-});
+//   return model;
+// });

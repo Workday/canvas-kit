@@ -49,6 +49,7 @@ export const useComboboxInput = composeHooks(
       // we only want to run this effect if the cursor changes and not any other time
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [model.state.cursorId]);
+    const item = model.navigation.getItem(model.state.cursorId, model);
 
     return {
       onKeyDown(event: React.KeyboardEvent) {
@@ -77,7 +78,7 @@ export const useComboboxInput = composeHooks(
           model.events.setWidth(event.currentTarget.clientWidth);
         }
       },
-      value: model.state.value,
+      value: model.state.value || item.textValue,
       role: 'combobox',
       'aria-haspopup': true,
       'aria-expanded': model.state.visibility === 'visible',

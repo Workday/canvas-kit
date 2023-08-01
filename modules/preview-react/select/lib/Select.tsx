@@ -459,7 +459,7 @@ class SelectContainer extends React.Component<SelectContainerProps, SelectContai
     let isShortcut = false;
 
     // Check for type-ahead first
-    console.log(event.key);
+
     if (event.key.length === 1 && event.key.match(/\S/)) {
       isShortcut = true;
       this.handleKeyboardTypeAhead(event.key, numOptions);

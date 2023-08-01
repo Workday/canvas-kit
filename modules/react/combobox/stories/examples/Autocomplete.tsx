@@ -88,7 +88,7 @@ export const Autocomplete = () => {
     },
     useComboboxModel
   );
-
+  console.log(model);
   return (
     <FormField orientation="horizontal" hasError isRequired>
       <FormField.Label>Fruit</FormField.Label>
