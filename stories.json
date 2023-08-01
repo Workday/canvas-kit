@@ -4313,6 +4313,20 @@
         "__isArgsStory": false
       }
     },
+    "preview-inputs-text-input--hidden": {
+      "id": "preview-inputs-text-input--hidden",
+      "name": "Hidden",
+      "title": "Preview/Inputs/Text Input",
+      "importPath": "./modules/preview-react/text-input/stories/TextInput.stories.mdx",
+      "kind": "Preview/Inputs/Text Input",
+      "story": "Hidden",
+      "parameters": {
+        "fileName": "./modules/preview-react/text-input/stories/TextInput.stories.mdx",
+        "framework": "react",
+        "__id": "preview-inputs-text-input--hidden",
+        "__isArgsStory": false
+      }
+    },
     "preview-inputs-text-input--hidden-label": {
       "id": "preview-inputs-text-input--hidden-label",
       "name": "Hidden Label",
@@ -4380,6 +4394,20 @@
         "fileName": "./modules/preview-react/text-input/stories/TextInput.stories.mdx",
         "framework": "react",
         "__id": "preview-inputs-text-input--placeholder",
+        "__isArgsStory": false
+      }
+    },
+    "preview-inputs-text-input--read-only": {
+      "id": "preview-inputs-text-input--read-only",
+      "name": "Read Only",
+      "title": "Preview/Inputs/Text Input",
+      "importPath": "./modules/preview-react/text-input/stories/TextInput.stories.mdx",
+      "kind": "Preview/Inputs/Text Input",
+      "story": "Read Only",
+      "parameters": {
+        "fileName": "./modules/preview-react/text-input/stories/TextInput.stories.mdx",
+        "framework": "react",
+        "__id": "preview-inputs-text-input--read-only",
         "__isArgsStory": false
       }
     },
