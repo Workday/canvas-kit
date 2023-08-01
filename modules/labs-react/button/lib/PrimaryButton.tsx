@@ -78,7 +78,7 @@ export const PrimaryButtonModifiers = createModifiers({
         ),
         [buttonVars.hover.color]: cssVar(newTheme.colors.primaryInverse.button.color.hover),
         '& span .wd-icon-fill': {
-          [buttonVars.focus.icon]: cssVar(newTheme.colors.primaryInverse.icon.hover),
+          [buttonVars.hover.icon]: cssVar(newTheme.colors.primaryInverse.icon.hover),
         },
       },
       '&:active': {
