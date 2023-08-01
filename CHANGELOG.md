@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v9.1.9](https://github.com/Workday/canvas-kit/releases/tag/v9.1.9) (2023-08-01)
+
+### Documentation
+
+- fix(preview): Fixes undefined id and aria-describedby in TextInput ([#2305](https://github.com/Workday/canvas-kit/pull/2305)) ([@vibdev](https://github.com/vibdev), [@mannycarrera4](https://github.com/mannycarrera4))
+
+
 ## [v9.1.8](https://github.com/Workday/canvas-kit/releases/tag/v9.1.8) (2023-07-31)
 
 ### Components
