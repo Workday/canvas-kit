@@ -120,7 +120,7 @@ const ButtonContainer = styled('button')<StyledType & ButtonContainerProps>(
           fontWeight: type.properties.fontWeights.bold,
           height: '48px',
           '& > * ': {
-            margin: `0 ${spaceNumbers.xxs / 2}px`,
+            margin: `0 ${space.xxxs}`,
           },
         };
       case 'medium':
@@ -128,14 +128,14 @@ const ButtonContainer = styled('button')<StyledType & ButtonContainerProps>(
         return {
           height: space.xl,
           '& > * ': {
-            margin: `0 ${spaceNumbers.xxs / 2}px`,
+            margin: `0 ${space.xxxs}`,
           },
         };
       case 'small':
         return {
           height: space.l,
           '& > * ': {
-            margin: `0 ${spaceNumbers.xxxs / 2}px`,
+            margin: `0 ${spaceNumbers.xxxs / 2}rem`,
           },
         };
       case 'extraSmall':
@@ -144,7 +144,7 @@ const ButtonContainer = styled('button')<StyledType & ButtonContainerProps>(
           fontWeight: type.properties.fontWeights.bold,
           height: space.m,
           '& > * ': {
-            margin: `0 ${spaceNumbers.xxxs / 2}px`,
+            margin: `0 ${spaceNumbers.xxxs / 2}rem`,
           },
         };
     }
