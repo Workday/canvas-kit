@@ -129,12 +129,13 @@ _not_ subcomponents) on a single page. For example, we document `PrimaryButton`,
 `SecondaryButton`, `TertiaryButton`, and `DeleteButton` on a single page for all
 [Button](/components/buttons/button/) components since they're all similar.
 
-Upon identifying a `ComponentFamily` (e.g., `Button`) to designate a label for the collection of
+Upon identifying a `ComponentFamily` name (e.g., `Button`) for the collection of
 related components, you'll then follow the same document structure
 defined above with slight modifications.
 
 ````md
-import {Specifications, SymbolDoc} from '@workday/canvas-kit-docs';
+<!-- Only import SymbolDescription if necessary (see below) -->
+import {Specifications, SymbolDoc, SymbolDescription} from '@workday/canvas-kit-docs';
 
 <!-- TODO: Again, figure out if we need to import the components -->
 <!-- Import components in component family -->
@@ -164,9 +165,18 @@ more examples for that particular component.
 ## Usage
 
 <!--
-Each section is named after the comopnent.
+Each section is named after the component.
 -->
 ### Component1
+
+<!--
+Unlike SymbolDoc which renders the entire component API for a given component,
+SymbolDescription will only render the JSDoc description for that component.
+When writing an example for a component within a family, you _may_ (optional)
+want to render its SymbolDescription alongside the example description to
+reduce duplicate content between the Usage and Component API sections.
+-->
+<SymbolDescription name="Component1" fileName="/[preview-|labs-]react/" />
 
 Description of Component1Example.
 
@@ -187,6 +197,12 @@ Description of Component2Example.
 <ExampleCodeBlock code={Component2Example} />
 
 ### More Components...
+
+<!--
+You may include more examples at the end of the Usage section for examples
+which are not comopnent-specific and apply to every component in the family.
+-->
+### More Examples...
 
 <!--
 Unlike the Component API section for a single component, the Component API
