@@ -10,12 +10,24 @@
 
 # Documentation Guidelines
 
+## Introduction
+
+Placeholder content throughout this document is enclosed in brackets as `[placeholder]`. For example, if
+you were writing component documentation for `Tabs`, you would replace:
+
+```tsx
+import {[Component]} from '@workday/canvas-kit-[preview-|labs-]react/[component]';
+```
+
+with:
+
+```tsx
+import {Tabs} from '@workday/canvas-kit-react/tabs';
+```
+
 ## Component Documentation
 
-Every MDX should begin the same way with imports, the `<Meta />` tag, the name and description of
-the component, and installation instructions.
-
-Reference the following examples: [Tabs](/tabs), [Modal](/modal).
+Every component MDX (with a few [exceptions](#component-families)) should follow the structure outlined below.
 
 ````md
 <!--
@@ -25,15 +37,17 @@ section exists (see below).
 -->
 import {Specifications, SymbolDoc} from '@workday/canvas-kit-docs';
 
-<!--- Import component -->
+<!-- TODO: Figure out if we need to import the component -->
+<!-- Import component -->
 import {[Component]} from '@workday/canvas-kit-[preview-|labs-]react/[component]';
 
-<!--- Import examples -->
+<!-- Import component examples -->
 import {Basic} from './examples/Basic';
 import {AnotherExample} from './examples/AnotherExample';
 import ...
 
-<Meta title="storybook/path/..." component={[Component]} />
+<!-- TODO: Figure out if we need the component prop for the Meta tag -->
+<Meta title="Components/[desired/storybook/path]" component={[Component]} />
 
 # Canvas Kit [Component]
 
@@ -45,25 +59,59 @@ Short description of Component.
 yarn add @workday/canvas-kit-[preview-|labs-]react
 ```
 
+<!--
+The Usage section should be a list of examples of how to use the component.
+Aside from having a Basic Example, there are no set rules on how many examples
+to include for a given component. Try to include enough examples to illustrate
+all common use cases and anything which may not be obvious based on the
+component API.
+-->
 ## Usage
 
 <!--
-Every component should have a Basic example as the first example in the 
+Every component should have a basic example as its first example in the Usage
+section. Title the section "Basic Example" for consistency.
 -->
 ### Basic Example
 
-Description of Basic example.
+Description of the Basic Example.
+
+<!--
+Every example should include an ExampleCodeBlock which renders the example
+along with its associated code.
+-->
+<ExampleCodeBlock code={Basic} />
+
+<!--
+Feel free to include supplemental or follow-up information about the example
+underneath the ExampleCodeBlock (if necessary).
+-->
+More information about the Basic Example.
 
 ### Another Example
 
-...More examples...
+Description of Another Example.
 
+<ExampleCodeBlock code={AnotherExample} />
+
+### More Examples...
+
+<!--
+The SymbolDoc component will generate the entire Component API section using
+the component's JSDocs. This includes descriptions and props tables for the
+component, as well as its subcomponents if it's a compound component.
+Documentation for the model will also be included if the component has a model.
+-->
 ## Component API
 
+<!--
+The fileName prop is used to disambiguate between components which exist in
+multiple Canvas Kit packages.
+-->
 <SymbolDoc name="[Component]" fileName="/[preview-|labs-]react/" />
 
 <!--
-Specifications section is optional. Only include it if the component has
+The Specifications section is optional. Only include it if the component has
 Cypress integration tests (i.e., a spec.ts file in the cypress/integration
 folder).
 -->
@@ -72,14 +120,100 @@ folder).
 <Specifications file="[Component].spec.ts" name="[Component]" />
 ````
 
-#### Multiple Components
+> **Note:** Refer to [Tabs](/components/containers/tabs/) and [Modal](/components/popups/modal/) for good examples of how to write well-structured component documentation.
 
-##### Different Examples for Each Component
+### Component Families
 
-##### Multiple SymbolDocs in Compnent API
+Occasionally, you may want to document multiple top-level components (i.e.,
+_not_ subcomponents) on a single page. For example, we document `PrimaryButton`,
+`SecondaryButton`, `TertiaryButton`, and `DeleteButton` on a single page for all
+[Button](/components/buttons/button/) components since they're all similar.
 
-Top portion of document will be stripped out on Canvas Site.
+Upon identifying a `ComponentFamily` (e.g., `Button`) to designate a label for the collection of
+related components, you'll then follow the same document structure
+defined above with slight modifications.
 
-Link to Google writing style guide.
+````md
+import {Specifications, SymbolDoc} from '@workday/canvas-kit-docs';
 
-Should I change "Usage" to "Examples" and update `mdx-content-rewrite.js` in canvas-site?
+<!-- TODO: Again, figure out if we need to import the components -->
+<!-- Import components in component family -->
+import {
+  Component1,
+  Component2,
+  ...
+} from '@workday/canvas-kit-[preview-|labs-]react/[componentfamily]';
+
+<!-- Import component examples -->
+import {Component1Example} from './examples/Component1Example';
+import {Component2Example} from './examples/Component2Example';
+import ...
+
+<Meta title="Components/[desired/storybook/path]" />
+
+# Canvas Kit [ComponentFamily]
+
+Short description of ComponentFamily.
+
+<!--
+Unlike the Usage section for a single component, the Usage section for a
+component family will not have a Basic Example. Instead, it will have one
+section for each component in the family; each section will contain one or
+more examples for that particular component.
+-->
+## Usage
+
+<!--
+Each section is named after the comopnent.
+-->
+### Component1
+
+Description of Component1Example.
+
+<ExampleCodeBlock code={Component1Example} />
+
+More information about Component1Example.
+
+<!--
+If necessary, you may add more examples for a single component within that
+component's Usage section.
+-->
+#### Another Component1 Example
+
+### Component2
+
+Description of Component2Example.
+
+<ExampleCodeBlock code={Component2Example} />
+
+### More Components...
+
+<!--
+Unlike the Component API section for a single component, the Component API
+section for a component family will include multiple SymbolDocs, one for each
+component in the family.
+-->
+## Component API
+
+<SymbolDoc name="[Component1]" fileName="/[preview-|labs-]react/" />
+<SymbolDoc name="[Component2]" fileName="/[preview-|labs-]react/" />
+...
+
+<!--
+Typically, all components within a family will share the same specifications
+file.
+-->
+## Specifications
+
+<Specifications file="[ComponentFamily].spec.ts" name="[ComponentFamily]" />
+````
+
+> **Note:** Refer to [Button](/components/buttons/button/) for a good example of how to write well-structured component family documentation.
+
+## To-dos
+
+- Update Pull Request template in .github folder
+- Top portion of document will be stripped out on Canvas Site.
+- Link to Google writing style guide.
+- Consider fixing Pagination docs
+- Should I change "Usage" to "Examples" and update `mdx-content-rewrite.js` in canvas-site?

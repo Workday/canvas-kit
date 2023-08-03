@@ -91,6 +91,16 @@ module.exports = {
         {
           loader: path.resolve(__dirname, 'webpack-loader-redirect-mdx-to-github'),
         },
+      ],
+    });
+
+    config.module.rules.push({
+      test: /\.mdx?$/,
+      include: [path.resolve(__dirname, '..')],
+      // Don't replace `<ExampleCodeBlock>` with Storybook tags in the
+      // documentation guidelines
+      exclude: [/node_modules/, /DOCUMENTATION_GUIDELINES/],
+      use: [
         {
           loader: path.resolve(__dirname, 'mdx-code-block-rewrite'),
         },
