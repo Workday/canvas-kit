@@ -106,6 +106,61 @@ export const WithOverflowMenu = () => {
   );
 };
 
+export const WithOverflowMenuHavingTwoItems = () => {
+  interface Breadcrumb {
+    id: string;
+    link?: string;
+    text: string;
+  }
+
+  const [items] = React.useState<Breadcrumb[]>([
+    {id: '1', text: 'Home', link: '/'},
+    {id: '2', text: 'Second Link', link: '#'},
+  ]);
+
+  return (
+    <StaticStates>
+      <ComponentStatesTable
+        rowProps={[
+          {label: 'Lowest level', props: {maxWidth: 150}},
+          {label: '2 items displayed', props: {maxWidth: 250}},
+        ]}
+        columnProps={[{label: 'Default', props: {}}]}
+      >
+        {props => {
+          return (
+            <Breadcrumbs items={items} aria-label="Breadcrumbs">
+              <Breadcrumbs.List
+                maxWidth={props.maxWidth}
+                overflowButton={<Breadcrumbs.OverflowButton aria-label="More links" />}
+              >
+                {item =>
+                  item.link ? (
+                    <Breadcrumbs.Item>
+                      <Breadcrumbs.Link href={item.link}>{item.text}</Breadcrumbs.Link>
+                    </Breadcrumbs.Item>
+                  ) : (
+                    <Breadcrumbs.CurrentItem>{item.text}</Breadcrumbs.CurrentItem>
+                  )
+                }
+              </Breadcrumbs.List>
+              <Breadcrumbs.Menu.Popper>
+                <Breadcrumbs.Menu.Card maxWidth={300} maxHeight={200}>
+                  <Breadcrumbs.Menu.List>
+                    {(item: Breadcrumb) => (
+                      <Breadcrumbs.Menu.Item>{item.text}</Breadcrumbs.Menu.Item>
+                    )}
+                  </Breadcrumbs.Menu.List>
+                </Breadcrumbs.Menu.Card>
+              </Breadcrumbs.Menu.Popper>
+            </Breadcrumbs>
+          );
+        }}
+      </ComponentStatesTable>
+    </StaticStates>
+  );
+};
+
 export const RTLStates = () => {
   return (
     <StaticStates>
