@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v8.6.18](https://github.com/Workday/canvas-kit/releases/tag/v8.6.18) (2023-08-03)
+
+### Components
+
+- fix: Breadcrumbs first item gets cut-off when two items in array ([#2308](https://github.com/Workday/canvas-kit/pull/2308)) ([@thelightbringer](https://github.com/thelightbringer), Abhijit Misra)
+
+
 ## [v8.6.17](https://github.com/Workday/canvas-kit/releases/tag/v8.6.17) (2023-06-29)
 
 ### Components
