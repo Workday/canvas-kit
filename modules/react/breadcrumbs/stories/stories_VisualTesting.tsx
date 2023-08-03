@@ -115,7 +115,7 @@ export const WithOverflowMenuHavingTwoItems = () => {
 
   const [items] = React.useState<Breadcrumb[]>([
     {id: '1', text: 'Home', link: '/'},
-    {id: '2', text: 'Second Link', link: '#'},
+    {id: '2', text: 'Second Link'},
   ]);
 
   return (
