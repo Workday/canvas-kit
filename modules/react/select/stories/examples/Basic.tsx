@@ -1,7 +1,7 @@
 import React from 'react';
 import {FormField} from '@workday/canvas-kit-react/form-field';
 import {SelectBase} from '@workday/canvas-kit-react/select';
-import {Box} from '@workday/canvas-kit-react/layout';
+import {Box, Flex} from '@workday/canvas-kit-react/layout';
 import {useComboboxModel} from '../../../combobox';
 import {Combobox} from '@workday/canvas-kit-react/combobox';
 
@@ -49,29 +49,29 @@ export interface Item<T> {
    * Used by components that allow jumping to an item based on typing
    */
   text?: string;
+  disabled: boolean;
 }
 
 export const options = [
-  {text: 'E-mail', id: 'email'},
-  {text: 'Phone', id: 'phone'},
+  {text: 'E-mail', id: 'email', disabled: false},
+  {text: 'Phone', id: 'phone', disabled: false},
   {text: 'Fax (disabled)', id: 'fax', disabled: true},
-  {text: 'Mail', id: 'mail'},
-  {text: 'Mobile Phone', id: 'mobile_phone'},
+  {text: 'Mail', id: 'mail', disabled: false},
+  {text: 'Mobile Phone', id: 'mobile_phone', disabled: false},
   {
     text: 'The Ontologically Anthropocentric Sensory Immersive Simulation',
     id: 'oasis',
+    disabled: false,
   },
 ];
 
 export const Basic = () => {
   const model = useComboboxModel({
     items: options,
-    initialSelectedIds: ['email'],
-    initialCursorId: 'email',
   });
 
   return (
-    <Box>
+    <Flex>
       <FormField label="How Can We Reach You">
         <SelectBase model={model}>
           <SelectBase.Input />
@@ -80,16 +80,23 @@ export const Basic = () => {
               {model.state.items.length === 0 && <span>No Results Found</span>}
               {model.state.items.length > 0 && (
                 <SelectBase.List>
-                  {(item: Item<T>) => (
-                    <SelectBase.Item data-id={item.id}>{item.text}</SelectBase.Item>
-                  )}
+                  {(item: Item<T>) => {
+                    return (
+                      <SelectBase.Item
+                        aria-disabled={item.disabled ? item.disabled : undefined}
+                        data-id={item.id}
+                      >
+                        {item.text}
+                      </SelectBase.Item>
+                    );
+                  }}
                 </SelectBase.List>
               )}
             </SelectBase.Card>
           </SelectBase.Popup>
         </SelectBase>
-        {/* Selected: {model.state.selectedIds[0]} */}
       </FormField>
+      <Box>Selected: {model.state.selectedIds[0]}</Box>
       {/* <Combobox
         items={[
           {text: 'Foo', id: 'foo'},
@@ -107,6 +114,6 @@ export const Basic = () => {
           </Combobox.Menu.Card>
         </Combobox.Menu.Popper>
       </Combobox> */}
-    </Box>
+    </Flex>
   );
 };

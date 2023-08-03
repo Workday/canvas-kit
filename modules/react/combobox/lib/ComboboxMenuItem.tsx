@@ -37,6 +37,8 @@ export const useComboboxMenuItem = composeHooks(
       }
       if (event.currentTarget.getAttribute('aria-disabled') !== 'true') {
         model.events.select({id});
+        model.events.goTo({id});
+
         if (model.state.mode === 'single') {
           model.events.hide(event);
         }

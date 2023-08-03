@@ -50,6 +50,7 @@ export const useComboboxModel = createModelHook({
   },
 })(config => {
   const input = useInputModel(config);
+
   const menu = useMenuModel(
     useMenuModel.mergeConfig(config, {
       shouldVirtualize: true,
