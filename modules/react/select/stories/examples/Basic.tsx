@@ -53,14 +53,14 @@ export interface Item<T> {
 }
 
 export const options = [
-  {text: 'E-mail', id: 'email', disabled: false},
-  {text: 'Phone', id: 'phone', disabled: false},
-  {text: 'Fax (disabled)', id: 'fax', disabled: true},
-  {text: 'Mail', id: 'mail', disabled: false},
-  {text: 'Mobile Phone', id: 'mobile_phone', disabled: false},
+  {text: 'E-mail', id: 'E-mail', disabled: false},
+  {text: 'Phone', id: 'Phone', disabled: false},
+  {text: 'Fax (disabled)', id: 'Fax (disabled)', disabled: true},
+  {text: 'Mail', id: 'Mail', disabled: false},
+  {text: 'Mobile Phone', id: 'Mobile Phone', disabled: false},
   {
     text: 'The Ontologically Anthropocentric Sensory Immersive Simulation',
-    id: 'oasis',
+    id: 'The Ontologically Anthropocentric Sensory Immersive Simulation',
     disabled: false,
   },
 ];

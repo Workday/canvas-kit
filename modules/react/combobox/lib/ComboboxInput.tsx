@@ -50,8 +50,6 @@ export const useComboboxInput = composeHooks(
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [model.state.cursorId]);
 
-    const currentValue = model.state.items.findIndex(item => item.id === model.state.cursorId);
-
     return {
       onKeyDown(event: React.KeyboardEvent) {
         if (event.key === 'Escape') {
@@ -79,10 +77,7 @@ export const useComboboxInput = composeHooks(
           model.events.setWidth(event.currentTarget.clientWidth);
         }
       },
-      value:
-        model.state.selectedIds.length > 0 && model.state.cursorId !== ''
-          ? model.state.items[currentValue].textValue
-          : model.state.value,
+      value: model.state.value,
       role: 'combobox',
       'aria-haspopup': true,
       'aria-expanded': model.state.visibility === 'visible',

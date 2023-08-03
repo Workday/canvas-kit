@@ -371,6 +371,7 @@ export const useCursorListModel = createModelHook({
     ...list.events,
     /** Directly sets the cursor to the list item by its identifier. */
     goTo(data: {id: string}) {
+      // console.log('go to >> called');
       const index = state.items.findIndex(item => item.id === data.id);
       setCursor(index);
     },
@@ -381,6 +382,7 @@ export const useCursorListModel = createModelHook({
      * item in a row.
      */
     goToNext() {
+      console.log('go to next called');
       const index = navigation.getNext(cursorIndexRef.current, {state});
       setCursor(index);
     },
