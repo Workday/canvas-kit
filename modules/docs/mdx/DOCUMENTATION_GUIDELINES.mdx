@@ -14,12 +14,14 @@
 
 ### Writing Style
 
-Google provides [helpful resources](https://developers.google.com/tech-writing/overview) for how to write technical documentation. We highly recommend you familiarize yourself with their materials when authoring documentation for Canvas Kit.
+Google provides [helpful resources](https://developers.google.com/tech-writing/overview) for how to
+write technical documentation. We highly recommend you familiarize yourself with their materials
+when authoring documentation for Canvas Kit.
 
 ### Conventions
 
-Placeholder content throughout this document is enclosed in brackets as `[placeholder]`. For example, if
-you were writing component documentation for `Tabs`, you would replace:
+Placeholder content throughout this document is enclosed in brackets as `[placeholder]`. For
+example, if you were writing component documentation for `Tabs`, you would replace:
 
 ```tsx
 import {[Component]} from '@workday/canvas-kit-[preview-|labs-]react/[component]';
@@ -33,7 +35,8 @@ import {Tabs} from '@workday/canvas-kit-react/tabs';
 
 ## Component Documentation
 
-Every component MDX (with a few [exceptions](#component-families)) should follow the structure outlined below.
+Every component MDX (with a few [exceptions](#component-families)) should follow the structure
+outlined below.
 
 ````md
 <!--
@@ -48,8 +51,7 @@ import {Specifications, SymbolDoc} from '@workday/canvas-kit-docs';
 import {[Component]} from '@workday/canvas-kit-[preview-|labs-]react/[component]';
 
 <!-- Import component examples -->
-import {Basic} from './examples/Basic';
-import {AnotherExample} from './examples/AnotherExample';
+import {Basic} from './examples/Basic'; import {AnotherExample} from './examples/AnotherExample';
 import ...
 
 <!-- TODO: Figure out if we need the component prop for the Meta tag -->
@@ -126,18 +128,18 @@ folder).
 <Specifications file="[Component].spec.ts" name="[Component]" />
 ````
 
-> **Note:** Refer to [Tabs](/components/containers/tabs/) and [Modal](/components/popups/modal/) for examples of how to write well-structured component documentation.
+> **Note:** Refer to [Tabs](/components/containers/tabs/) and [Modal](/components/popups/modal/) for
+> examples of how to write well-structured component documentation.
 
 ### Component Families
 
-Occasionally, you may want to document multiple top-level components (i.e.,
-_not_ subcomponents) on a single page. For example, we document `PrimaryButton`,
-`SecondaryButton`, `TertiaryButton`, and `DeleteButton` on a single page for all
-[Button](/components/buttons/button/) components since they're all similar.
+Occasionally, you may want to document multiple top-level components (i.e., _not_ subcomponents) on
+a single page. For example, we document `PrimaryButton`, `SecondaryButton`, `TertiaryButton`, and
+`DeleteButton` on a single page for all [Button](/components/buttons/button/) components since
+they're all similar.
 
-Upon identifying a `ComponentFamily` name (e.g., `Button`) for the collection of
-related components, you'll then follow the same document structure
-defined above with slight modifications.
+Upon identifying a `ComponentFamily` name (e.g., `Button`) for the collection of related components,
+you'll then follow the same document structure defined above with slight modifications.
 
 ````md
 <!-- Only import SymbolDescription if necessary (see below) -->
@@ -145,22 +147,24 @@ import {Specifications, SymbolDoc, SymbolDescription} from '@workday/canvas-kit-
 
 <!-- TODO: Again, figure out if we need to import the components -->
 <!-- Import components in component family -->
-import {
-  Component1,
-  Component2,
-  ...
-} from '@workday/canvas-kit-[preview-|labs-]react/[componentfamily]';
+import { Component1, Component2, ... } from
+'@workday/canvas-kit-[preview-|labs-]react/[componentfamily]';
 
 <!-- Import component examples -->
-import {Component1Example} from './examples/Component1Example';
-import {Component2Example} from './examples/Component2Example';
-import ...
+import {Component1Example} from './examples/Component1Example'; import {Component2Example} from
+'./examples/Component2Example'; import ...
 
 <Meta title="Components/[desired/storybook/path]" />
 
 # Canvas Kit [ComponentFamily]
 
 Short description of ComponentFamily.
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-[preview-|labs-]react
+```
 
 <!--
 Unlike the Usage section for a single component, the Usage section for a
@@ -230,4 +234,5 @@ file.
 <Specifications file="[ComponentFamily].spec.ts" name="[ComponentFamily]" />
 ````
 
-> **Note:** Refer to [Button](/components/buttons/button/) for an example of how to write well-structured component family documentation.
+> **Note:** Refer to [Button](/components/buttons/button/) for an example of how to write
+> well-structured component family documentation.
