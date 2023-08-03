@@ -13,7 +13,7 @@ import {
   useTransferOnFullscreenExit,
   useTransferOnFullscreenEnter,
 } from '@workday/canvas-kit-react/popup';
-import {HStack, Flex} from '@workday/canvas-kit-react/layout';
+import {Flex} from '@workday/canvas-kit-react/layout';
 import {useIsFullscreen} from '@workday/canvas-kit-react/common';
 import screenfull from 'screenfull';
 
@@ -102,13 +102,13 @@ export const FullScreen = () => {
         justifyContent="center"
         background="white"
       >
-        <HStack spacing="s">
+        <Flex gap="s">
           <SelfClosePopup />
           <TransferClosePopup />
           {isFullscreen ? (
             <SecondaryButton onClick={exitFullscreen}>Exit fullscreen</SecondaryButton>
           ) : null}
-        </HStack>
+        </Flex>
       </Flex>
     </>
   );

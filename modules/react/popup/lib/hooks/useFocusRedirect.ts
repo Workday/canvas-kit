@@ -33,7 +33,10 @@ export const useFocusRedirect = createElemPropsHook(usePopupModel)(model => {
           model.events.hide(event);
         } else if (
           !event.getModifierState('Shift') &&
-          document.activeElement === lastFocusableElement
+          ((Array.isArray(lastFocusableElement) &&
+            document.activeElement &&
+            lastFocusableElement.includes(document.activeElement)) ||
+            document.activeElement === lastFocusableElement)
         ) {
           model.events.hide(event);
         }

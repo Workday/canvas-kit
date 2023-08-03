@@ -5,7 +5,7 @@ import {
   ExtractProps,
   StyledType,
   styled,
-  getCanvasTheme,
+  getTheme,
 } from '@workday/canvas-kit-react/common';
 import {space} from '@workday/canvas-kit-react/tokens';
 import {Popup} from '@workday/canvas-kit-react/popup';
@@ -15,7 +15,7 @@ import {useModalCard, useModalModel} from './hooks';
 export interface ModalCardProps extends ExtractProps<typeof Popup.Card, never> {}
 
 const ResponsiveModalCard = styled(Popup.Card)<ModalCardProps & StyledType>(({theme}) => {
-  const canvasTheme = getCanvasTheme(theme);
+  const {canvas: canvasTheme} = getTheme(theme);
   return {
     margin: space.xl,
     [canvasTheme.breakpoints.down('s')]: {

@@ -34,6 +34,32 @@ export type OtherStyleProps = {
   pointerEvents?: Property.PointerEvents;
   /** sets [CSS resize property](https://developer.mozilla.org/en-US/docs/Web/CSS/resize) */
   resize?: Property.Resize;
+  /** sets [CSS scroll margin property](https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin) */
+  scrollMargin?: Property.ScrollMargin;
+  /** sets [CSS scroll margin bottom property](https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-bottom) */
+  scrollMarginBottom?: Property.ScrollMarginBottom;
+  /** sets [CSS scroll margin top property](https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-top) */
+  scrollMarginTop?: Property.ScrollMarginTop;
+  /** sets [CSS scroll margin inline start property](https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-inline-start) */
+  scrollMarginInlineStart?: Property.ScrollMarginInlineStart;
+  /** sets [CSS scroll margin inline end property](https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-inline-end) */
+  scrollMarginInlineEnd?: Property.ScrollMarginInlineEnd;
+  /** sets [CSS scroll padding property](https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding) */
+  scrollPadding?: Property.ScrollPadding;
+  /** sets [CSS scroll padding bottom property](https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding-bottom) */
+  scrollPaddingBottom?: Property.ScrollPaddingBottom;
+  /** sets [CSS scroll padding top property](https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding-top) */
+  scrollPaddingTop?: Property.ScrollPaddingTop;
+  /** sets [CSS scroll padding inline start property](https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding-inline-start) */
+  scrollPaddingInlineStart?: Property.ScrollPaddingInlineStart;
+  /** sets [CSS scroll padding inline end property](https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding-inline-end) */
+  scrollPaddingInlineEnd?: Property.ScrollPaddingInlineEnd;
+  /** sets [CSS scroll snap align property](https://developer.mozilla.org/docs/Web/CSS/scroll-snap-align) */
+  scrollSnapAlign?: Property.ScrollSnapAlign;
+  /** sets [CSS scroll snap stop property](https://developer.mozilla.org/docs/Web/CSS/scroll-snap-stop) */
+  scrollSnapStop?: Property.ScrollSnapStop;
+  /** sets [CSS scroll snap type property](https://developer.mozilla.org/docs/Web/CSS/scroll-snap-type) */
+  scrollSnapType?: Property.ScrollSnapType;
   /** sets [CSS stroke property](https://developer.mozilla.org/en-US/docs/Web/CSS/stroke) */
   stroke?: Property.Stroke;
   /** sets [CSS transform property](https://developer.mozilla.org/en-US/docs/Web/CSS/transform) */

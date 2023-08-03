@@ -27,8 +27,8 @@ const StyledLink = styled(Hyperlink)(
     ...subtextLargeStyles,
   },
   ({maxWidth}: StyledLinkProps) => ({
-    maxWidth,
     ...ellipsisStyles,
+    maxWidth,
   })
 );
 
