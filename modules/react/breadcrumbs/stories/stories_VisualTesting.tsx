@@ -113,23 +113,29 @@ export const WithOverflowMenuHavingTwoItems = () => {
     text: string;
   }
 
-  const [items] = React.useState<Breadcrumb[]>([
+  const [twoItems] = React.useState<Breadcrumb[]>([
     {id: '1', text: 'Home', link: '/'},
-    {id: '2', text: 'Second Link'},
+    {id: '2', text: 'Current'},
+  ]);
+
+  const [threeItems] = React.useState<Breadcrumb[]>([
+    {id: '1', text: 'Home', link: '/'},
+    {id: '2', text: 'Second Link', link: '#'},
+    {id: '3', text: 'Current'},
   ]);
 
   return (
     <StaticStates>
       <ComponentStatesTable
         rowProps={[
-          {label: 'Lowest level', props: {maxWidth: 150}},
-          {label: '2 items displayed', props: {maxWidth: 250}},
+          {label: 'Overflow with only 2 items total', props: {maxWidth: 150, items: twoItems}},
+          {label: 'Overflow with only 3 items total', props: {maxWidth: 250, items: threeItems}},
         ]}
         columnProps={[{label: 'Default', props: {}}]}
       >
         {props => {
           return (
-            <Breadcrumbs items={items} aria-label="Breadcrumbs">
+            <Breadcrumbs items={props.items} aria-label="Breadcrumbs">
               <Breadcrumbs.List
                 maxWidth={props.maxWidth}
                 overflowButton={<Breadcrumbs.OverflowButton aria-label="More links" />}
