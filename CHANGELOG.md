@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v9.1.11](https://github.com/Workday/canvas-kit/releases/tag/v9.1.11) (2023-08-04)
+
+### Documentation
+
+- fix: Fix color util typo ([#2312](https://github.com/Workday/canvas-kit/pull/2312)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
 ## [v9.1.10](https://github.com/Workday/canvas-kit/releases/tag/v9.1.10) (2023-08-03)
 
 ### Components
