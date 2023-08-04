@@ -7282,6 +7282,20 @@
         "__isArgsStory": false
       }
     },
+    "testing-navigation-breadcrumbs--with-overflow-menu-having-two-items": {
+      "id": "testing-navigation-breadcrumbs--with-overflow-menu-having-two-items",
+      "name": "With Overflow Menu Having Two Items",
+      "title": "Testing/Navigation/Breadcrumbs",
+      "importPath": "./modules/react/breadcrumbs/stories/stories_VisualTesting.tsx",
+      "kind": "Testing/Navigation/Breadcrumbs",
+      "story": "With Overflow Menu Having Two Items",
+      "parameters": {
+        "fileName": "./modules/react/breadcrumbs/stories/stories_VisualTesting.tsx",
+        "framework": "react",
+        "__id": "testing-navigation-breadcrumbs--with-overflow-menu-having-two-items",
+        "__isArgsStory": false
+      }
+    },
     "testing-navigation-pagination--visual-states-left-to-right": {
       "id": "testing-navigation-pagination--visual-states-left-to-right",
       "name": "Visual States Left To Right",
