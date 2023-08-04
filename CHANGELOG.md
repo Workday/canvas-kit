@@ -3,6 +3,47 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v9.1.10](https://github.com/Workday/canvas-kit/releases/tag/v9.1.10) (2023-08-03)
+
+### Components
+
+- fix: Breadcrumbs first item gets cut-off when two items in array ([#2308](https://github.com/Workday/canvas-kit/pull/2308)) ([@thelightbringer](https://github.com/thelightbringer), Abhijit Misra)
+
+
+## [v8.6.18](https://github.com/Workday/canvas-kit/releases/tag/v8.6.18) (2023-08-03)
+
+### Components
+
+- fix: Breadcrumbs first item gets cut-off when two items in array ([#2308](https://github.com/Workday/canvas-kit/pull/2308)) ([@thelightbringer](https://github.com/thelightbringer), Abhijit Misra)
+## [v9.1.9](https://github.com/Workday/canvas-kit/releases/tag/v9.1.9) (2023-08-01)
+
+### Documentation
+
+- fix(preview): Fixes undefined id and aria-describedby in TextInput ([#2305](https://github.com/Workday/canvas-kit/pull/2305)) ([@vibdev](https://github.com/vibdev), [@mannycarrera4](https://github.com/mannycarrera4))
+
+
+## [v9.1.8](https://github.com/Workday/canvas-kit/releases/tag/v9.1.8) (2023-07-31)
+
+### Components
+
+- fix(preview): Blur firing incorrectly onClick ([#2304](https://github.com/Workday/canvas-kit/pull/2304)) ([@vibdev](https://github.com/vibdev))
+
+
+## [v9.1.7](https://github.com/Workday/canvas-kit/releases/tag/v9.1.7) (2023-07-27)
+
+### Documentation
+
+- fix: Adding landmark regions to Action Bar examples ([#2291](https://github.com/Workday/canvas-kit/pull/2291)) ([@bstanton678](https://github.com/bstanton678))
+
+
+## [v9.1.6](https://github.com/Workday/canvas-kit/releases/tag/v9.1.6) (2023-07-25)
+
+### Components
+
+- fix: Polishing the expandable container component ([#2293](https://github.com/Workday/canvas-kit/pull/2293)) ([@bstanton678](https://github.com/bstanton678))
+  Update aria attributes on example for expandable container for better accessibility and remove alt text on avatar.
+
+
 ## [v9.1.5](https://github.com/Workday/canvas-kit/releases/tag/v9.1.5) (2023-07-21)
 
 

@@ -7,7 +7,7 @@ import {PrimaryButton} from '@workday/canvas-kit-react/button';
 export const Icons = () => {
   return (
     <ActionBar>
-      <ActionBar.List position="relative" aria-label="actions">
+      <ActionBar.List position="relative" as="section" aria-label="Icons example actions">
         <ActionBar.Item as={PrimaryButton} icon={notificationsIcon}>
           First Action
         </ActionBar.Item>
