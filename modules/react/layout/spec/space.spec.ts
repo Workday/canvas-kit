@@ -7,9 +7,9 @@ describe('Space Style Props Function', () => {
     const props = {
       position: 'absolute',
       children: null,
-      margin: '12px',
+      margin: '0.75rem',
     };
-    const expected = {margin: '12px'};
+    const expected = {margin: '0.75rem'};
     const colorStyles = space(props);
 
     expect(colorStyles).toEqual(expected);
@@ -18,16 +18,16 @@ describe('Space Style Props Function', () => {
   context('given standard space props', () => {
     it('should handle generic props (string and number)', () => {
       const props = {
-        margin: 24,
-        marginTop: '12px',
-        marginRight: 12,
-        marginBottom: '12px',
-        marginLeft: 12,
-        padding: '32px',
-        paddingTop: 16,
-        paddingRight: '16px',
-        paddingBottom: 16,
-        paddingLeft: '16px',
+        margin: 1.5,
+        marginTop: '0.75rem',
+        marginRight: 0.75,
+        marginBottom: '0.75rem',
+        marginLeft: 0.75,
+        padding: '2rem',
+        paddingTop: 1,
+        paddingRight: '1rem',
+        paddingBottom: 1,
+        paddingLeft: '1rem',
       };
       const expected = props;
       const spaceStyles = space(props);
@@ -49,16 +49,16 @@ describe('Space Style Props Function', () => {
         paddingLeft: 'xxxl',
       };
       const expected = {
-        margin: '0px',
-        marginTop: '4px',
-        marginRight: '8px',
-        marginBottom: '12px',
-        marginLeft: '16px',
-        padding: '24px',
-        paddingTop: '32px',
-        paddingRight: '40px',
-        paddingBottom: '64px',
-        paddingLeft: '80px',
+        margin: '0',
+        marginTop: '0.25rem',
+        marginRight: '0.5rem',
+        marginBottom: '0.75rem',
+        marginLeft: '1rem',
+        padding: '1.5rem',
+        paddingTop: '2rem',
+        paddingRight: '2.5rem',
+        paddingBottom: '4rem',
+        paddingLeft: '5rem',
       };
       const spaceStyles = space(props);
 
@@ -71,10 +71,10 @@ describe('Space Style Props Function', () => {
         paddingY: 'm',
       };
       const expected = {
-        paddingTop: '24px',
-        paddingRight: '16px',
-        paddingBottom: '24px',
-        paddingLeft: '16px',
+        paddingTop: '1.5rem',
+        paddingRight: '1rem',
+        paddingBottom: '1.5rem',
+        paddingLeft: '1rem',
       };
       const spaceStyles = space(props);
 
@@ -87,10 +87,10 @@ describe('Space Style Props Function', () => {
         marginY: 'xl',
       };
       const expected = {
-        marginTop: '40px',
-        marginRight: '32px',
-        marginBottom: '40px',
-        marginLeft: '32px',
+        marginTop: '2.5rem',
+        marginRight: '2rem',
+        marginBottom: '2.5rem',
+        marginLeft: '2rem',
       };
       const spaceStyles = space(props);
 
