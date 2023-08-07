@@ -55,19 +55,22 @@ const hasOwnKey = <T extends object>(obj: T, key: any): key is keyof T => obj.ha
 export function keyboardEventToCursorEvents(
   event: React.KeyboardEvent,
   model: ReturnType<typeof useCursorListModel>,
-  isRTL: boolean
+  isRTL: boolean,
+  visibility?: 'hidden' | 'visibile'
 ): boolean {
   // Test ctrl key first
   if (event.ctrlKey) {
     for (const key in ctrlKeyMap) {
       if (hasOwnKey(ctrlKeyMap, key)) {
         if (event.key === key) {
+          console.warn(ctrlKeyMap[key]);
           model.events[ctrlKeyMap[key]]?.();
           return true;
         }
       }
     }
   }
+
   // Try regular keys
   const map = model.state.columnCount > 0 ? gridKeyMap : orientationKeyMap[model.state.orientation];
   for (const key in map) {
@@ -78,6 +81,9 @@ export function keyboardEventToCursorEvents(
             ? gridKeyMap[key]
             : orientationKeyMap[model.state.orientation][key];
         if (model.events[eventName]) {
+          if (model.state.visibility === 'hidden') {
+            return false;
+          }
           model.events[eventName]?.();
           return true;
         }

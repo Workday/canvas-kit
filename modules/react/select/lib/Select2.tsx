@@ -185,7 +185,7 @@ import {usePopupTarget} from '@workday/canvas-kit-react/popup';
 //     };
 //   })
 // );
-
+const count = 0;
 export const useSelectInput = composeHooks(
   createElemPropsHook(useComboboxModel)((model, ref) => {
     const elementRef = useForkRef(ref, model.state.inputRef);
@@ -333,14 +333,17 @@ export const useSelectInput = composeHooks(
           }
         }
         if (event.key === 'ArrowDown') {
-          // if (model.state.visibility === 'hidden') {
-          //   const foundIndex = model.state.items.findIndex(
-          //     item => item.id === model.state.cursorId
-          //   );
-          //   console.log(foundIndex);
-          //   model.events.goTo({id: model.state.items[foundIndex].id});
-          //   model.events.select({id: model.state.items[foundIndex].id});
-          // }
+          return;
+          if (model.state.visibility === 'hidden') {
+            console.log('still hidden', model.events);
+
+            const foundIndex = model.state.items.findIndex(
+              item => item.id === model.state.cursorId
+            );
+            // console.log(foundIndex);
+            model.events.goTo({id: model.state.items[foundIndex].id});
+            model.events.select({id: model.state.items[foundIndex].id});
+          }
         }
 
         if (event.key === 'Enter' && !event.metaKey && model.state.visibility === 'visible') {
@@ -355,6 +358,8 @@ export const useSelectInput = composeHooks(
           // We don't want to submit forms while the combobox is open
           event.preventDefault();
         }
+
+        // const next = model.navigation.getNext();
       },
       onBlur(event: React.FocusEvent) {
         model.events.hide(event);
@@ -409,6 +414,20 @@ export const SelectInput = createSubcomponent(TextInput)({
   }
 );
 
+export const useSelectModel = createModelHook({
+  defaultConfig: useComboboxModel.defaultConfig,
+  requiredConfig: useComboboxModel.requiredConfig,
+})(config => {
+  // console.log('config');
+  const model = useComboboxModel();
+  // console.log('model>>>>>>>>>>>', model.state.visibility);
+  const state = {
+    ...model.state,
+    listVisibility: model.state.visibility,
+  };
+  return {state, events: model.events};
+});
+
 export const SelectBase = createContainer()({
   displayName: 'Select2',
   modelHook: useComboboxModel,
@@ -420,5 +439,11 @@ export const SelectBase = createContainer()({
     Item: Combobox.Menu.Item,
   },
 })<ComboboxProps>(({children}, _, model) => {
-  return <Combobox model={model}>{useListRenderItems(model, children)}</Combobox>;
+  return (
+    <Combobox model={model} visibility={model.state.visibility}>
+      {children}
+    </Combobox>
+  );
 });
+
+// const {navigation, ...rest} = useComboboxModel.defaultConfig;

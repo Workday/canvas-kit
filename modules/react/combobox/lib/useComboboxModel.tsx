@@ -1,6 +1,7 @@
 import React from 'react';
 import {createModelHook, dispatchInputEvent} from '@workday/canvas-kit-react/common';
 import {useMenuModel} from '@workday/canvas-kit-react/menu';
+import {usePopupModel} from '../../popup';
 
 /**
  * An input model can be used by compound components that need to work with form fields. Some form
@@ -44,6 +45,7 @@ export const useComboboxModel = createModelHook({
     ...useInputModel.defaultConfig,
     ...useMenuModel.defaultConfig,
   },
+
   requiredConfig: {
     ...useInputModel.requiredConfig,
     ...useMenuModel.requiredConfig,
@@ -59,6 +61,12 @@ export const useComboboxModel = createModelHook({
       },
     })
   );
+
+  // const updatedMenu = useMenuModel(menu.mergeConfig(config, {
+
+  // }))
+
+  // console.log(menu.state.v);
   const [width, setWidth] = React.useState(0);
 
   const state = {
