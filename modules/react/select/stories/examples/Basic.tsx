@@ -64,10 +64,12 @@ export const options = [
     disabled: false,
   },
 ];
+const disabledItems = options.filter(item => item.disabled === true).map(item => item.id);
 
 export const Basic = () => {
   const model = useComboboxModel({
     items: options,
+    nonInteractiveIds: disabledItems,
   });
 
   return (
@@ -95,23 +97,6 @@ export const Basic = () => {
           </SelectBase.Card>
         </SelectBase.Popup>
       </SelectBase>
-      {/* <Combobox
-        items={[
-          {text: 'Foo', id: 'foo'},
-          {text: 'Bar', id: 'bar'},
-          {text: 'Baz', id: 'baz'},
-          {text: 'Test', id: 'test'},
-        ]}
-      >
-        <Combobox.Input id="contact-select" />
-        <Combobox.Menu.Popper>
-          <Combobox.Menu.Card maxHeight="200px">
-            <Combobox.Menu.List>
-              {item => <Combobox.Menu.Item>{item.text}</Combobox.Menu.Item>}
-            </Combobox.Menu.List>
-          </Combobox.Menu.Card>
-        </Combobox.Menu.Popper>
-      </Combobox> */}
     </FormField>
   );
 };

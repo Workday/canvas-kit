@@ -2,9 +2,6 @@ import React from 'react';
 import {assert, createModelHook, Generic} from '@workday/canvas-kit-react/common';
 
 import {useBaseListModel, Item} from './useBaseListModel';
-import {useMenuModel} from '../../menu';
-import {usePopupModel} from '../../popup';
-import {useComboboxModel} from '../../combobox';
 
 type NavigationInput = Pick<ReturnType<typeof useCursorListModel>, 'state'>;
 
@@ -319,7 +316,7 @@ export const useCursorListModel = createModelHook({
      * of the list and number of items rendered will determine this value.
      */
     pageSize: 0,
-    listVisibility: 'visible' as 'hidden' | 'visible',
+    // listVisibility: 'visible' as 'hidden' | 'visible',
   },
   requiredConfig: useBaseListModel.requiredConfig,
   contextOverride: useBaseListModel.Context,
@@ -330,7 +327,7 @@ export const useCursorListModel = createModelHook({
   const list = useBaseListModel(config);
   const navigation = config.navigation;
 
-  console.warn('CURSOR MODEL>>>', config.listVisibility);
+  // console.warn('CURSOR MODEL>>>', config.listVisibility);
 
   // Cast as a readonly to signify this value should never be set
   const cursorIndexRef = React.useRef(-1) as {readonly current: number};
@@ -388,9 +385,6 @@ export const useCursorListModel = createModelHook({
      * item in a row.
      */
     goToNext() {
-      if (config.listVisibility === 'hidden') {
-        return;
-      }
       const index = navigation.getNext(cursorIndexRef.current, {state});
 
       setCursor(index);

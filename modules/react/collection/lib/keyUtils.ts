@@ -80,9 +80,6 @@ export function keyboardEventToCursorEvents(
             ? gridKeyMap[key]
             : orientationKeyMap[model.state.orientation][key];
         if (model.events[eventName]) {
-          // if (model.state.visibility && model.state.visibility === 'hidden') {
-          //   return false;
-          // }
           model.events[eventName]?.();
           return true;
         }

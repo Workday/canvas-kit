@@ -36,7 +36,6 @@ export const useMenuModel = createModelHook({
   const list = useListModel(
     useListModel.mergeConfig(config, {
       selection: config.mode === 'single' ? singleSelectionManager : multiSelectionManager,
-      listVisibility: popup.state.visibility,
     })
   );
 

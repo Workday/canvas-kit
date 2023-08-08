@@ -188,6 +188,7 @@ import {ComboboxMenuItemProps} from '../../combobox/lib/ComboboxMenuItem';
 // );
 
 export const useSelectInput = composeHooks(
+  useListKeyboardHandler,
   createElemPropsHook(useComboboxModel)((model, ref) => {
     const elementRef = useForkRef(ref, model.state.inputRef);
 
@@ -256,9 +257,12 @@ export const useSelectInput = composeHooks(
     ): number => {
       for (let i = startIndex; i < endIndex; i++) {
         const label = model.state.items[i].id.toLowerCase();
-
+        console.log(model.state.items[i].value.disabled);
         if (label.indexOf(startString.toLowerCase()) === 0) {
-          if (!ignoreDisabled || (ignoreDisabled && !model.state.items[i].value.disabled)) {
+          if (
+            !ignoreDisabled ||
+            (ignoreDisabled && model.state.items[i].value.disabled === false)
+          ) {
             return i;
           }
         }
@@ -272,6 +276,7 @@ export const useSelectInput = composeHooks(
       const cursorFocusedIndex = model.state.items.findIndex(
         item => item.id.toLowerCase() === model.state.cursorId
       );
+      console.log('in here');
 
       // If the starting point is beyond the list of options, reset it
       // to the beginning of the list
@@ -319,6 +324,7 @@ export const useSelectInput = composeHooks(
           event.key === 'Enter' ||
           (event.key === 'Spacebar' && model.state.visibility === 'hidden')
         ) {
+          model.events.setWidth(event.currentTarget.clientWidth);
           //show the menu when enter is typed
           model.events.show();
         }
@@ -333,18 +339,16 @@ export const useSelectInput = composeHooks(
             model.events.select({id: model.state.items[foundIndex].id});
           }
         }
-        // if (event.key === 'ArrowDown') {
-        //   if (model.state.visibility === 'hidden') {
-        //     console.log('still hidden', model.events);
+        if (event.key === 'ArrowDown') {
+          if (model.state.visibility === 'hidden') {
+            const foundIndex = model.state.items.findIndex(
+              item => item.id === model.state.cursorId
+            );
 
-        //     const foundIndex = model.state.items.findIndex(
-        //       item => item.id === model.state.cursorId
-        //     );
-        //     // console.log(foundIndex);
-        //     model.events.goTo({id: model.state.items[foundIndex].id});
-        //     model.events.select({id: model.state.items[foundIndex].id});
-        //   }
-        // }
+            model.events.goTo({id: model.state.items[foundIndex].id});
+            // model.events.select({id: model.state.items[foundIndex].id});
+          }
+        }
 
         if (event.key === 'Enter' && !event.metaKey && model.state.visibility === 'visible') {
           const element = document.querySelector(`[data-id="${model.state.cursorId}"]`);
@@ -379,7 +383,7 @@ export const useSelectInput = composeHooks(
           model.state.UNSTABLE_virtual.scrollToIndex(foundIndex);
         }
       },
-      value: model.state.value,
+      value: model.state.selectedIds.length > 0 ? model.state.selectedIds[0] : model.state.value,
       role: 'combobox',
       'aria-haspopup': true,
       'aria-expanded': model.state.visibility === 'visible',
@@ -392,7 +396,6 @@ export const useSelectInput = composeHooks(
   }),
   useComboboxOpenWithArrowKeys,
   useListActiveDescendant,
-  useListKeyboardHandler,
   usePopupTarget
 );
 
