@@ -62,11 +62,6 @@ export const useComboboxModel = createModelHook({
     })
   );
 
-  // const updatedMenu = useMenuModel(menu.mergeConfig(config, {
-
-  // }))
-
-  // console.log(menu.state.v);
   const [width, setWidth] = React.useState(0);
 
   const state = {

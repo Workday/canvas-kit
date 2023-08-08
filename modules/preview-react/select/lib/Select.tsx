@@ -122,8 +122,7 @@ class SelectContainer extends React.Component<SelectContainerProps, SelectContai
   ): number => {
     for (let i = startIndex; i < endIndex; i++) {
       const label = this.normalizedOptions[i].label.toLowerCase();
-      console.log(startString);
-      console.log('label', label);
+
       if (label.indexOf(startString.toLowerCase()) === 0) {
         if (!ignoreDisabled || (ignoreDisabled && !this.normalizedOptions[i].disabled)) {
           return i;

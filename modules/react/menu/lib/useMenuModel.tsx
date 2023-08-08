@@ -25,12 +25,6 @@ export const useMenuModel = createModelHook({
     ...usePopupModel.requiredConfig,
   },
 })(config => {
-  const list = useListModel(
-    useListModel.mergeConfig(config, {
-      selection: config.mode === 'single' ? singleSelectionManager : multiSelectionManager,
-      // listVisibility: config.listVisibility,
-    })
-  );
   const popup = usePopupModel(
     usePopupModel.mergeConfig(config, {
       onHide() {
@@ -39,8 +33,12 @@ export const useMenuModel = createModelHook({
       },
     })
   );
-
-  // console.log('list visibility', list.state.visibility);
+  const list = useListModel(
+    useListModel.mergeConfig(config, {
+      selection: config.mode === 'single' ? singleSelectionManager : multiSelectionManager,
+      listVisibility: popup.state.visibility,
+    })
+  );
 
   useAlwaysCloseOnOutsideClick(popup);
   useCloseOnEscape(popup);

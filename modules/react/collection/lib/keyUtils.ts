@@ -1,3 +1,4 @@
+import {usePopupModel} from '@workday/canvas-kit-react/popup';
 import React from 'react';
 import {useCursorListModel} from './useCursorListModel';
 
@@ -55,15 +56,13 @@ const hasOwnKey = <T extends object>(obj: T, key: any): key is keyof T => obj.ha
 export function keyboardEventToCursorEvents(
   event: React.KeyboardEvent,
   model: ReturnType<typeof useCursorListModel>,
-  isRTL: boolean,
-  visibility?: 'hidden' | 'visibile'
+  isRTL: boolean
 ): boolean {
   // Test ctrl key first
   if (event.ctrlKey) {
     for (const key in ctrlKeyMap) {
       if (hasOwnKey(ctrlKeyMap, key)) {
         if (event.key === key) {
-          console.warn(ctrlKeyMap[key]);
           model.events[ctrlKeyMap[key]]?.();
           return true;
         }
@@ -81,9 +80,9 @@ export function keyboardEventToCursorEvents(
             ? gridKeyMap[key]
             : orientationKeyMap[model.state.orientation][key];
         if (model.events[eventName]) {
-          if (model.state.visibility === 'hidden') {
-            return false;
-          }
+          // if (model.state.visibility && model.state.visibility === 'hidden') {
+          //   return false;
+          // }
           model.events[eventName]?.();
           return true;
         }

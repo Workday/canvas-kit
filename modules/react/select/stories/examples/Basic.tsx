@@ -1,5 +1,5 @@
 import React from 'react';
-import {FormField} from '@workday/canvas-kit-react/form-field';
+import {FormField} from '@workday/canvas-kit-preview-react/form-field';
 import {SelectBase} from '@workday/canvas-kit-react/select';
 import {Box, Flex} from '@workday/canvas-kit-react/layout';
 import {useComboboxModel} from '../../../combobox';
@@ -71,32 +71,30 @@ export const Basic = () => {
   });
 
   return (
-    <Flex>
-      <FormField label="How Can We Reach You">
-        <SelectBase model={model}>
-          <SelectBase.Input />
-          <SelectBase.Popup>
-            <SelectBase.Card maxHeight="200px">
-              {model.state.items.length === 0 && <span>No Results Found</span>}
-              {model.state.items.length > 0 && (
-                <SelectBase.List>
-                  {(item: Item<T>) => {
-                    return (
-                      <SelectBase.Item
-                        aria-disabled={item.disabled ? item.disabled : undefined}
-                        data-id={item.id}
-                      >
-                        {item.text}
-                      </SelectBase.Item>
-                    );
-                  }}
-                </SelectBase.List>
-              )}
-            </SelectBase.Card>
-          </SelectBase.Popup>
-        </SelectBase>
-      </FormField>
-      <Box>Selected: {model.state.selectedIds[0]}</Box>
+    <FormField orientation="vertical" hasError>
+      <FormField.Label htmlFor="contact-select">Contact</FormField.Label>
+      <SelectBase model={model}>
+        <SelectBase.Input id="contact-select" />
+        <SelectBase.Popup>
+          <SelectBase.Card maxHeight="200px">
+            {model.state.items.length === 0 && <span>No Results Found</span>}
+            {model.state.items.length > 0 && (
+              <SelectBase.List>
+                {(item: Item<T>) => {
+                  return (
+                    <SelectBase.Item
+                      aria-disabled={item.disabled ? item.disabled : undefined}
+                      data-id={item.id}
+                    >
+                      {item.text}
+                    </SelectBase.Item>
+                  );
+                }}
+              </SelectBase.List>
+            )}
+          </SelectBase.Card>
+        </SelectBase.Popup>
+      </SelectBase>
       {/* <Combobox
         items={[
           {text: 'Foo', id: 'foo'},
@@ -105,7 +103,7 @@ export const Basic = () => {
           {text: 'Test', id: 'test'},
         ]}
       >
-        <Combobox.Input />
+        <Combobox.Input id="contact-select" />
         <Combobox.Menu.Popper>
           <Combobox.Menu.Card maxHeight="200px">
             <Combobox.Menu.List>
@@ -114,6 +112,6 @@ export const Basic = () => {
           </Combobox.Menu.Card>
         </Combobox.Menu.Popper>
       </Combobox> */}
-    </Flex>
+    </FormField>
   );
 };

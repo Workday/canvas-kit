@@ -319,7 +319,7 @@ export const useCursorListModel = createModelHook({
      * of the list and number of items rendered will determine this value.
      */
     pageSize: 0,
-    listVisibility: 'hidden' as 'visible' | 'hidden',
+    listVisibility: 'visible' as 'hidden' | 'visible',
   },
   requiredConfig: useBaseListModel.requiredConfig,
   contextOverride: useBaseListModel.Context,
@@ -329,16 +329,15 @@ export const useCursorListModel = createModelHook({
   const columnCount = config.columnCount || 0;
   const list = useBaseListModel(config);
   const navigation = config.navigation;
-  const [listVisibility, setVisibility] = React.useState<'visible' | 'hidden'>(
-    config.listVisibility
-  );
+
+  console.warn('CURSOR MODEL>>>', config.listVisibility);
+
   // Cast as a readonly to signify this value should never be set
   const cursorIndexRef = React.useRef(-1) as {readonly current: number};
   const setCursor = (index: number) => {
     const id = state.items[index]?.id || '';
     setCursorId(id);
   };
-  console.log('listVisibility>>>>', listVisibility);
 
   // Keep the cursorIndex up to date with the cursor ID
   if (cursorId && list.state.items[cursorIndexRef.current]?.id !== cursorId) {
@@ -373,15 +372,12 @@ export const useCursorListModel = createModelHook({
      * @readonly
      */
     cursorIndexRef,
-    listVisibility,
   };
-  // console.warn('state>>>>>', list.state);
 
   const events = {
     ...list.events,
     /** Directly sets the cursor to the list item by its identifier. */
     goTo(data: {id: string}) {
-      // console.log('go to >> called');
       const index = state.items.findIndex(item => item.id === data.id);
       setCursor(index);
     },
@@ -392,6 +388,9 @@ export const useCursorListModel = createModelHook({
      * item in a row.
      */
     goToNext() {
+      if (config.listVisibility === 'hidden') {
+        return;
+      }
       const index = navigation.getNext(cursorIndexRef.current, {state});
 
       setCursor(index);

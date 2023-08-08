@@ -27,6 +27,7 @@ import {
 } from '@workday/canvas-kit-react/collection';
 
 import {usePopupTarget} from '@workday/canvas-kit-react/popup';
+import {ComboboxMenuItemProps} from '../../combobox/lib/ComboboxMenuItem';
 
 // const useSelectInput = composeHooks(
 //   createElemPropsHook(useComboboxModel)((model, ref) => {
@@ -185,7 +186,7 @@ import {usePopupTarget} from '@workday/canvas-kit-react/popup';
 //     };
 //   })
 // );
-const count = 0;
+
 export const useSelectInput = composeHooks(
   createElemPropsHook(useComboboxModel)((model, ref) => {
     const elementRef = useForkRef(ref, model.state.inputRef);
@@ -332,19 +333,18 @@ export const useSelectInput = composeHooks(
             model.events.select({id: model.state.items[foundIndex].id});
           }
         }
-        if (event.key === 'ArrowDown') {
-          return;
-          if (model.state.visibility === 'hidden') {
-            console.log('still hidden', model.events);
+        // if (event.key === 'ArrowDown') {
+        //   if (model.state.visibility === 'hidden') {
+        //     console.log('still hidden', model.events);
 
-            const foundIndex = model.state.items.findIndex(
-              item => item.id === model.state.cursorId
-            );
-            // console.log(foundIndex);
-            model.events.goTo({id: model.state.items[foundIndex].id});
-            model.events.select({id: model.state.items[foundIndex].id});
-          }
-        }
+        //     const foundIndex = model.state.items.findIndex(
+        //       item => item.id === model.state.cursorId
+        //     );
+        //     // console.log(foundIndex);
+        //     model.events.goTo({id: model.state.items[foundIndex].id});
+        //     model.events.select({id: model.state.items[foundIndex].id});
+        //   }
+        // }
 
         if (event.key === 'Enter' && !event.metaKey && model.state.visibility === 'visible') {
           const element = document.querySelector(`[data-id="${model.state.cursorId}"]`);
@@ -362,7 +362,7 @@ export const useSelectInput = composeHooks(
         // const next = model.navigation.getNext();
       },
       onBlur(event: React.FocusEvent) {
-        model.events.hide(event);
+        // model.events.hide(event);
       },
       onChange(event: React.SyntheticEvent<HTMLInputElement>) {
         // prevent typing in the input
@@ -423,9 +423,21 @@ export const useSelectModel = createModelHook({
   // console.log('model>>>>>>>>>>>', model.state.visibility);
   const state = {
     ...model.state,
-    listVisibility: model.state.visibility,
   };
   return {state, events: model.events};
+});
+
+export const useSelectMenuItem = createElemPropsHook(useComboboxModel)(({state}) => {
+  return {
+    role: 'option',
+  };
+});
+
+export const SelectItem = createSubcomponent('li')({
+  modelHook: useComboboxModel,
+  elemPropsHook: useSelectMenuItem,
+})<ComboboxMenuItemProps>(({children, ...elemProps}, Element) => {
+  return <Combobox.Menu.Item {...elemProps}>{children}</Combobox.Menu.Item>;
 });
 
 export const SelectBase = createContainer()({
@@ -436,14 +448,10 @@ export const SelectBase = createContainer()({
     Popup: Combobox.Menu.Popper,
     Card: Combobox.Menu.Card,
     List: Combobox.Menu.List,
-    Item: Combobox.Menu.Item,
+    Item: SelectItem,
   },
 })<ComboboxProps>(({children}, _, model) => {
-  return (
-    <Combobox model={model} visibility={model.state.visibility}>
-      {children}
-    </Combobox>
-  );
+  return <Combobox model={model}>{children}</Combobox>;
 });
 
 // const {navigation, ...rest} = useComboboxModel.defaultConfig;
