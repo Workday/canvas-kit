@@ -76,10 +76,14 @@ export const Basic = () => {
     <FormField orientation="vertical" hasError>
       <FormField.Label htmlFor="contact-select">Contact</FormField.Label>
       <SelectBase model={model}>
-        <SelectBase.Input id="contact-select" />
+        <SelectBase.Input
+          id="contact-select"
+          value={
+            model.state.selectedIds.length > 0 ? model.state.selectedIds[0] : model.state.value
+          }
+        />
         <SelectBase.Popup>
           <SelectBase.Card maxHeight="200px">
-            {model.state.items.length === 0 && <span>No Results Found</span>}
             {model.state.items.length > 0 && (
               <SelectBase.List>
                 {(item: Item<T>) => {

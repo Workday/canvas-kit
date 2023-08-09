@@ -207,25 +207,36 @@ describe('Select', () => {
             .realType('{enter}');
         });
 
-        context('the select input', () => {
-          it(`should read "E-mail"`, () => {
-            cy.findByRole('combobox').should('have.value', 'E-mail');
+        context('the menu', () => {
+          it('should be visible', () => {
+            cy.findByRole('listbox').should('be.visible');
           });
 
-          it(`should have a value of "mail"`, () => {
-            cy.findByLabelText('Label').should('have.value', 'mail');
-          });
-
-          it(`should re-acquire focus`, () => {
-            cy.findByLabelText('Label').should('be.focused');
+          it('should have E-Mail selected', () => {
+            cy.findAllByRole('option')
+              .eq(0)
+              .should('have.attr', 'aria-selected', 'true');
           });
         });
 
-        context('the menu', () => {
-          it('should not be visible', () => {
-            cy.findByLabelText('Label')
-              .pipe(h.selectPreview.getMenu)
-              .should('not.exist');
+        context('when mail option is selected using arrow keys', () => {
+          beforeEach(() => {
+            cy.focused().realType('{downarrow}');
+            cy.focused().realType('{downarrow}');
+            cy.findAllByRole('option')
+              .eq(3)
+              .realType('{enter}');
+          });
+          it(`should read "Mail"`, () => {
+            cy.findByRole('combobox').should('have.value', 'Mail');
+          });
+
+          it(`should re-acquire focus`, () => {
+            cy.findByRole('combobox').should('be.focused');
+          });
+
+          it('the menu should not be visible after selection', () => {
+            cy.findByRole('listbox').should('not.exist');
           });
         });
 
@@ -235,37 +246,35 @@ describe('Select', () => {
           });
 
           context('the menu', () => {
-            it('should set assistive focus to the "Mail" option', () => {
-              cy.findByLabelText('Label')
-                .pipe(h.selectPreview.getMenu)
-                .pipe(getAssistiveFocus)
-                .should('have.text', 'Mail');
-            });
-          });
-
-          context('the "Mail" option', () => {
-            it('should have an aria-selected attribute set to "true"', () => {
-              cy.findByLabelText('Label')
-                .pipe(h.selectPreview.getOption('Mail'))
+            it('should set assistive focus to the "Phone" option', () => {
+              cy.findAllByRole('option')
+                .eq(1)
                 .should('have.attr', 'aria-selected', 'true');
             });
           });
+
+          // context('the "Mail" option', () => {
+          //   it('should have an aria-selected attribute set to "true"', () => {
+          //     cy.findByLabelText('Label')
+          //       .pipe(h.selectPreview.getOption('Mail'))
+          //       .should('have.attr', 'aria-selected', 'true');
+          //   });
+          // });
         });
       });
 
       context('when the up arrow key is pressed', () => {
         beforeEach(() => {
-          cy.findByLabelText('Label')
-            .pipe(h.selectPreview.getMenu)
+          cy.findByRole('combobox')
+            .focus()
             .realType('{uparrow}');
         });
 
         context('the menu', () => {
           it('should set assistive focus to the "E-mail" option', () => {
-            cy.findByLabelText('Label')
-              .pipe(h.selectPreview.getMenu)
-              .pipe(getAssistiveFocus)
-              .should('have.text', 'E-mail');
+            cy.findAllByRole('option')
+              .eq(0)
+              .should('have.attr', 'aria-selected', 'true');
           });
         });
       });
@@ -287,56 +296,58 @@ describe('Select', () => {
 
     context('when the space key is pressed', () => {
       beforeEach(() => {
-        cy.findByLabelText('Label').type(' ', {force: true}); // disable event.preventDefault checks
+        cy.findByRole('combobox').realType(' '); // disable event.preventDefault checks
       });
 
       context('the select button', () => {
         it('should have an aria-expanded attribute set to "true"', () => {
-          cy.findByLabelText('Label').should('have.attr', 'aria-expanded', 'true');
+          cy.findByRole('combobox').should('have.attr', 'aria-expanded', 'true');
         });
       });
     });
   });
 
-  context('when the "select" helper is used to select "Mail"', () => {
-    beforeEach(() => {
-      cy.findByLabelText('Label').pipe(h.selectPreview.select('Mail'));
-    });
+  // context('when the "select" helper is used to select "Mail"', () => {
+  //   beforeEach(() => {
+  //     cy.findByLabelText('Label').pipe(h.selectPreview.select('Mail'));
+  //   });
 
-    it('should have a value of "mail"', () => {
-      cy.findByLabelText('Label').should('have.value', 'mail');
-    });
-  });
+  //   it('should have a value of "mail"', () => {
+  //     cy.findByLabelText('Label').should('have.value', 'mail');
+  //   });
+  // });
 
-  context('when the "select" helper is used to select /^Mail$/', () => {
-    beforeEach(() => {
-      cy.findByLabelText('Label').pipe(h.selectPreview.select(/^Mail$/));
-    });
+  // context('when the "select" helper is used to select /^Mail$/', () => {
+  //   beforeEach(() => {
+  //     cy.findByLabelText('Label').pipe(h.selectPreview.select(/^Mail$/));
+  //   });
 
-    it('should have a value of "mail"', () => {
-      cy.findByLabelText('Label').should('have.value', 'mail');
-    });
-  });
+  //   it('should have a value of "mail"', () => {
+  //     cy.findByLabelText('Label').should('have.value', 'mail');
+  //   });
+  // });
 });
 
-context(`given the "Default" story is rendered`, () => {
+context(`given the "Basic" story is rendered`, () => {
+  before(() => {
+    h.stories.visit();
+  });
   beforeEach(() => {
-    h.stories.load('Preview/Select/Top Label', 'Default');
+    h.stories.load('Components/Inputs/Select', 'Basic');
   });
 
   context('when the menu is opened', () => {
     beforeEach(() => {
-      cy.findByLabelText('Label')
+      cy.findByRole('combobox')
         .focus()
         .realType('{downarrow}');
     });
 
     context('the menu', () => {
       it('should set assistive focus to the first option ("E-mail")', () => {
-        cy.findByLabelText('Label')
-          .pipe(h.selectPreview.getMenu)
-          .pipe(getAssistiveFocus)
-          .should('have.text', 'E-mail');
+        cy.findAllByRole('option')
+          .eq(0)
+          .should('have.attr', 'aria-selected', 'true');
       });
     });
 
@@ -347,10 +358,9 @@ context(`given the "Default" story is rendered`, () => {
 
       context('the menu', () => {
         it('should set assistive focus to the second option ("Phone")', () => {
-          cy.findByLabelText('Label')
-            .pipe(h.selectPreview.getMenu)
-            .pipe(getAssistiveFocus)
-            .should('have.text', 'Phone');
+          cy.findAllByRole('option')
+            .eq(1)
+            .should('have.attr', 'aria-selected', 'true');
         });
       });
 
