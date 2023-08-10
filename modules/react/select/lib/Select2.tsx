@@ -81,6 +81,7 @@ export const useSelectInput = composeHooks(
     // Reset after each keystroke to support type ahead
     const startClearKeysSoFarTimer = () => {
       if (timer.current) {
+        console.log('timer clear');
         clearTimeout(timer.current);
       }
       timer.current = setTimeout(() => {
@@ -96,8 +97,15 @@ export const useSelectInput = composeHooks(
       endIndex: number = model.state.items.length,
       ignoreDisabled: boolean = true
     ): number => {
+      console.warn('STARTINDEX', startIndex);
+      console.warn('startString', startString);
+      console.warn('endIndex', model.state.items.length);
+      console.warn('ignoreDisabled', ignoreDisabled);
       for (let i = startIndex; i < endIndex; i++) {
         const label = model.state.items[i].id.toLowerCase();
+        console.warn('model.state.items[i].id', model.state.items[i].id);
+        // console.warn('label', label);
+
         if (label.indexOf(startString.toLowerCase()) === 0) {
           if (
             !ignoreDisabled ||
@@ -111,31 +119,40 @@ export const useSelectInput = composeHooks(
       return -1;
     };
 
+    const currentItem = model.navigation.getItem(model.state.cursorId, model);
+
+    const cursorFocusedIndex = model.state.items.findIndex(item => item.id === currentItem.id);
+
     const handleKeyboardTypeAhead = (key: string, numOptions: number) => {
+      // const cursorFocusedIndex = model.state.items.findIndex(
+      //   item => item.id.toLowerCase() === model.state.cursorId
+      // );
       // returns the index at which the cursor is located
-      const cursorFocusedIndex = model.state.items.findIndex(
-        item => item.id.toLowerCase() === model.state.cursorId
-      );
-      console.log('in here');
+
+      console.log('cursorFocusedIndex', cursorFocusedIndex);
 
       // If the starting point is beyond the list of options, reset it
       // to the beginning of the list
       let start = keySofar.current.length === 0 ? cursorFocusedIndex + 1 : cursorFocusedIndex;
 
       start = start === numOptions ? 0 : start;
+      // console.log('START', start);
 
       // Keeps track of the current key types and adds to it
       // if you type `de` vs `d` for denver
       keySofar.current += key;
       startClearKeysSoFarTimer();
+      // console.log(keySofar.current);
 
       // First, look for a match from start to end
       let matchIndex;
+      // console.log('key so far', keySofar.current);
       matchIndex = getIndexByStartString(start, keySofar.current);
 
       // If a match isn't found between start and end, wrap the search
       // around and search again from the beginning (0) to start
       if (matchIndex === -1) {
+        console.log('no match');
         matchIndex = getIndexByStartString(0, keySofar.current, start);
       }
 
@@ -177,6 +194,7 @@ export const useSelectInput = composeHooks(
         // }
 
         if (event.key.length === 1 && event.key.match(/\S/)) {
+          console.log('key that is passed', event.key, model.state.items.length);
           handleKeyboardTypeAhead(event.key, model.state.items.length);
         }
         if (event.key === 'Escape') {

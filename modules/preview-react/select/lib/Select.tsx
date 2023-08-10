@@ -122,7 +122,7 @@ class SelectContainer extends React.Component<SelectContainerProps, SelectContai
   ): number => {
     for (let i = startIndex; i < endIndex; i++) {
       const label = this.normalizedOptions[i].label.toLowerCase();
-
+      console.log(startString);
       if (label.indexOf(startString.toLowerCase()) === 0) {
         if (!ignoreDisabled || (ignoreDisabled && !this.normalizedOptions[i].disabled)) {
           return i;
@@ -461,6 +461,7 @@ class SelectContainer extends React.Component<SelectContainerProps, SelectContai
 
     if (event.key.length === 1 && event.key.match(/\S/)) {
       isShortcut = true;
+      console.log('key passed', event.key);
       this.handleKeyboardTypeAhead(event.key, numOptions);
     } else {
       switch (event.key) {
