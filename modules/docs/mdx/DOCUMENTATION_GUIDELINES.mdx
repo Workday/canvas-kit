@@ -46,15 +46,22 @@ section exists (see below).
 -->
 import {Specifications, SymbolDoc} from '@workday/canvas-kit-docs';
 
-<!-- TODO: Figure out if we need to import the component -->
-<!-- Import component -->
+<!--
+Import the component so we can pass it into the Storybook Meta tag (see
+below).
+-->
 import {[Component]} from '@workday/canvas-kit-[preview-|labs-]react/[component]';
 
 <!-- Import component examples -->
 import {Basic} from './examples/Basic'; import {AnotherExample} from './examples/AnotherExample';
 import ...
 
-<!-- TODO: Figure out if we need the component prop for the Meta tag -->
+<!--
+Use the Storybook Meta tag to designate where to display the component in the
+Storybook navigation hierarchy. The title prop specifies where to show the
+component in the hierarchy. The component prop is required to get the component
+to show up at the end of that path.
+-->
 <Meta title="Components/[desired/storybook/path]" component={[Component]} />
 
 # Canvas Kit [Component]
@@ -145,15 +152,15 @@ you'll then follow the same document structure defined above with slight modific
 <!-- Only import SymbolDescription if necessary (see below) -->
 import {Specifications, SymbolDoc, SymbolDescription} from '@workday/canvas-kit-docs';
 
-<!-- TODO: Again, figure out if we need to import the components -->
-<!-- Import components in component family -->
-import { Component1, Component2, ... } from
-'@workday/canvas-kit-[preview-|labs-]react/[componentfamily]';
-
 <!-- Import component examples -->
-import {Component1Example} from './examples/Component1Example'; import {Component2Example} from
-'./examples/Component2Example'; import ...
+import {Component1Example} from './examples/Component1Example';
+import {Component2Example} from './examples/Component2Example';
+import ...
 
+<!--
+We are unable to use the component prop here since a component family
+represents multiple components.
+-->
 <Meta title="Components/[desired/storybook/path]" />
 
 # Canvas Kit [ComponentFamily]
