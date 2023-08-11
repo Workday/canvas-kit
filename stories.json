@@ -91,6 +91,21 @@
         "__isArgsStory": false
       }
     },
+    "guides-documentation-guidelines--page": {
+      "id": "guides-documentation-guidelines--page",
+      "name": "Page",
+      "title": "Guides/Documentation Guidelines",
+      "importPath": "./modules/docs/mdx/DOCUMENTATION_GUIDELINES.mdx",
+      "kind": "Guides/Documentation Guidelines",
+      "story": "Page",
+      "parameters": {
+        "fileName": "./modules/docs/mdx/DOCUMENTATION_GUIDELINES.mdx",
+        "docsOnly": true,
+        "framework": "react",
+        "__id": "guides-documentation-guidelines--page",
+        "__isArgsStory": false
+      }
+    },
     "guides-maintaining--page": {
       "id": "guides-maintaining--page",
       "name": "Page",
