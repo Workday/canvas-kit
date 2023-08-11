@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v9.1.11](https://github.com/Workday/canvas-kit/releases/tag/v9.1.11) (2023-08-04)
+
+### Documentation
+
+- fix: Fix color util typo ([#2312](https://github.com/Workday/canvas-kit/pull/2312)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
+## [v9.1.10](https://github.com/Workday/canvas-kit/releases/tag/v9.1.10) (2023-08-03)
+
+### Components
+
+- fix: Breadcrumbs first item gets cut-off when two items in array ([#2308](https://github.com/Workday/canvas-kit/pull/2308)) ([@thelightbringer](https://github.com/thelightbringer), Abhijit Misra)
+
+
+## [v8.6.18](https://github.com/Workday/canvas-kit/releases/tag/v8.6.18) (2023-08-03)
+
+### Components
+
+- fix: Breadcrumbs first item gets cut-off when two items in array ([#2308](https://github.com/Workday/canvas-kit/pull/2308)) ([@thelightbringer](https://github.com/thelightbringer), Abhijit Misra)
+## [v9.1.9](https://github.com/Workday/canvas-kit/releases/tag/v9.1.9) (2023-08-01)
+
+### Documentation
+
+- fix(preview): Fixes undefined id and aria-describedby in TextInput ([#2305](https://github.com/Workday/canvas-kit/pull/2305)) ([@vibdev](https://github.com/vibdev), [@mannycarrera4](https://github.com/mannycarrera4))
+
+
 ## [v9.1.8](https://github.com/Workday/canvas-kit/releases/tag/v9.1.8) (2023-07-31)
 
 ### Components
