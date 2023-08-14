@@ -1,58 +1,53 @@
 import * as React from 'react';
 
-import {BaseButton, buttonVars} from './BaseButton';
-import {ButtonContainerProps} from './Button';
-import {
-  createComponent,
-  cs,
-  createModifiers,
-  newTheme,
-  cssVar,
-  tokenTheme,
-} from '@workday/canvas-kit-react/common';
+import {BaseButton, buttonVars, BaseButtonContainerProps} from './BaseButton';
+import {createComponent, cs, createModifiers, getTheme} from '@workday/canvas-kit-react/common';
+import {borderRadius, colors} from '@workday/canvas-kit-react/tokens';
 
 /**
- * Extends all the style properties from Box to our buttons as well as props from ButtonContainerProps.
+ * Extends all the style properties from Box to our buttons as well as props from BaseButtonContainerProps.
  * We omit `ref` since all of our buttons use `createComponent` and already give access to `ref`.
  * Use this type to extend and customize any one off buttons that you want full control over styling.
  */
-export interface SecondaryButtonProps extends Omit<ButtonContainerProps, 'ref'> {
+export interface SecondaryButtonProps extends Omit<BaseButtonContainerProps, 'ref'> {
   /**
    * Variant has an option for `inverse` which will inverse the styling
    */
   variant?: 'inverse';
 }
 
+const theme = getTheme();
+
 const SecondaryStyles = cs({
-  [buttonVars.default.background]: cssVar(newTheme.colors.secondary.button.background.base),
-  [buttonVars.default.border]: cssVar(newTheme.colors.secondary.button.border.base),
-  [buttonVars.default.borderRadius]: cssVar(newTheme.theme.borderRadius.circle),
-  [buttonVars.default.color]: cssVar(newTheme.colors.secondary.button.color.base),
+  [buttonVars.default.background]: 'transparent',
+  [buttonVars.default.border]: colors.blackPepper400,
+  [buttonVars.default.borderRadius]: borderRadius.circle,
+  [buttonVars.default.color]: colors.blackPepper400,
   '&:hover': {
-    [buttonVars.hover.background]: cssVar(newTheme.colors.secondary.button.background.hover),
-    [buttonVars.hover.border]: cssVar(newTheme.colors.secondary.button.border.hover),
-    [buttonVars.hover.color]: cssVar(newTheme.colors.secondary.button.color.hover),
+    [buttonVars.hover.background]: colors.blackPepper400,
+    [buttonVars.hover.border]: colors.blackPepper400,
+    [buttonVars.hover.color]: theme.canvas.palette.neutral.contrast,
     '& span .wd-icon-fill': {
-      [buttonVars.hover.icon]: cssVar(newTheme.colors.secondary.icon.hover),
+      [buttonVars.hover.icon]: theme.canvas.palette.neutral.contrast,
+    },
+  },
+  '&:focus-visible': {
+    [buttonVars.focus.background]: 'transparent',
+    [buttonVars.focus.border]: colors.blackPepper400,
+    [buttonVars.focus.color]: colors.blackPepper400,
+    [buttonVars.focus.boxShadowInner]: theme.canvas.palette.neutral.contrast,
+    [buttonVars.focus.boxShadowOuter]: theme.canvas.palette.primary.main,
+    '& span .wd-icon-fill': {
+      [buttonVars.focus.icon]: colors.blackPepper400,
     },
   },
   '&:active': {
-    [buttonVars.active.background]: cssVar(newTheme.colors.secondary.button.background.active),
-    [buttonVars.active.border]: cssVar(newTheme.colors.secondary.button.border.active),
-    [buttonVars.active.color]: cssVar(newTheme.colors.secondary.button.color.active),
-  },
-  '&:focus-visible': {
-    [buttonVars.focus.background]: cssVar(newTheme.colors.secondary.button.background.focus),
-    [buttonVars.focus.border]: cssVar(newTheme.colors.secondary.button.border.focus),
-    [buttonVars.focus.color]: cssVar(newTheme.colors.secondary.button.color.focus),
-    [buttonVars.focus.boxShadowInner]: cssVar(tokenTheme.secondaryColorContrast),
-    [buttonVars.focus.boxShadowOuter]: cssVar(tokenTheme.primaryColor),
-    '& span .wd-icon-fill': {
-      [buttonVars.focus.icon]: cssVar(newTheme.colors.secondary.icon.focus),
-    },
+    [buttonVars.active.background]: colors.blackPepper500,
+    [buttonVars.active.border]: colors.blackPepper500,
+    [buttonVars.active.color]: theme.canvas.palette.neutral.contrast,
   },
   '& span .wd-icon-fill': {
-    [buttonVars.default.icon]: cssVar(newTheme.colors.secondary.icon.base),
+    [buttonVars.default.icon]: colors.blackPepper400,
   },
 });
 
@@ -64,42 +59,34 @@ export const SecondaryButtonModifiers = createModifiers({
   },
   variant: {
     inverse: cs({
-      [buttonVars.default.background]: cssVar(
-        newTheme.colors.secondaryInverse.button.background.base
-      ),
-      [buttonVars.default.border]: cssVar(newTheme.colors.secondaryInverse.button.border.base),
-      [buttonVars.default.borderRadius]: cssVar(newTheme.theme.borderRadius.circle),
-      [buttonVars.default.color]: cssVar(newTheme.colors.secondaryInverse.button.color.base),
+      [buttonVars.default.background]: 'transparent',
+      [buttonVars.default.border]: colors.frenchVanilla100,
+      [buttonVars.default.borderRadius]: borderRadius.circle,
+      [buttonVars.default.color]: colors.frenchVanilla100,
       '&:hover': {
-        [buttonVars.hover.background]: cssVar(
-          newTheme.colors.secondaryInverse.button.background.hover
-        ),
-        [buttonVars.hover.color]: cssVar(newTheme.colors.secondaryInverse.button.color.hover),
+        [buttonVars.hover.background]: colors.soap300,
+        [buttonVars.hover.color]: colors.blackPepper500,
         '& span .wd-icon-fill': {
-          [buttonVars.hover.icon]: cssVar(newTheme.colors.secondaryInverse.icon.hover),
+          [buttonVars.hover.icon]: colors.blackPepper500,
+        },
+      },
+      '&:focus-visible': {
+        [buttonVars.focus.background]: colors.frenchVanilla100,
+        [buttonVars.focus.border]: colors.frenchVanilla100,
+        [buttonVars.focus.boxShadowInner]: 'currentColor',
+        [buttonVars.focus.boxShadowOuter]: colors.frenchVanilla100,
+        [buttonVars.focus.color]: colors.blackPepper500,
+        '& span .wd-icon-fill': {
+          [buttonVars.focus.icon]: colors.blackPepper500,
         },
       },
       '&:active': {
-        [buttonVars.active.background]: cssVar(
-          newTheme.colors.secondaryInverse.button.background.active
-        ),
-        [buttonVars.active.border]: cssVar(newTheme.colors.secondaryInverse.button.border.active),
-        [buttonVars.active.color]: cssVar(newTheme.colors.secondaryInverse.button.color.active),
-      },
-      '&:focus-visible': {
-        [buttonVars.focus.background]: cssVar(
-          newTheme.colors.secondaryInverse.button.background.focus
-        ),
-        [buttonVars.focus.border]: cssVar(newTheme.colors.secondaryInverse.button.border.focus),
-        [buttonVars.focus.boxShadowInner]: cssVar(tokenTheme.darkContrast),
-        [buttonVars.focus.boxShadowOuter]: cssVar(tokenTheme.secondaryColorContrast),
-        [buttonVars.focus.color]: cssVar(newTheme.colors.secondaryInverse.button.color.focus),
-        '& span .wd-icon-fill': {
-          [buttonVars.focus.icon]: cssVar(newTheme.colors.secondaryInverse.icon.focus),
-        },
+        [buttonVars.active.background]: colors.soap400,
+        [buttonVars.active.border]: colors.soap400,
+        [buttonVars.active.color]: colors.blackPepper500,
       },
       '& span .wd-icon-fill': {
-        [buttonVars.default.icon]: cssVar(newTheme.colors.secondaryInverse.icon.base),
+        [buttonVars.default.icon]: colors.frenchVanilla100,
       },
     }),
   },

@@ -4,6 +4,7 @@ import {
   PrimaryButton,
   SecondaryButton,
   TertiaryButton,
+  DeleteButton,
 } from '@workday/canvas-kit-labs-react/button';
 import {plusIcon} from '@workday/canvas-system-icons-web';
 import {Flex, Grid} from '@workday/canvas-kit-react/layout';
@@ -317,6 +318,18 @@ export const ButtonExample = () => {
             Button
           </TertiaryButton>
           <TertiaryButton size="large" icon={plusIcon} iconPosition="only" variant="inverse" />
+        </Flex>
+      </Flex>
+      <Flex flexDirection="column" padding="xxs" gap="s" borderRadius="l">
+        Delete Button
+        <Flex flexDirection="row" gap="s">
+          <DeleteButton size="extraSmall">Button</DeleteButton>
+          <DeleteButton size="small" icon={plusIcon} iconPosition="start">
+            Button
+          </DeleteButton>
+          <DeleteButton size="medium" icon={plusIcon} iconPosition="end">
+            Button
+          </DeleteButton>
         </Flex>
       </Flex>
     </Grid>

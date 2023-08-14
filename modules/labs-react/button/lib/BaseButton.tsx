@@ -15,7 +15,8 @@ import {SystemIconProps} from '@workday/canvas-kit-react/icon';
 import {Box} from '@workday/canvas-kit-react/layout';
 import {space, spaceNumbers} from '@workday/canvas-kit-react/tokens';
 
-import {ButtonColors, ButtonSizes} from './types';
+import {ButtonColors, ButtonSizes, IconPositions} from './types';
+import {CanvasSystemIcon} from '@workday/design-assets-types';
 
 export interface BaseButtonContainerProps extends Partial<SystemIconProps>, GrowthBehavior {
   /**
@@ -25,8 +26,33 @@ export interface BaseButtonContainerProps extends Partial<SystemIconProps>, Grow
   /**
    * There are four button sizes: `extraSmall`, `small`, `medium`, and `large`.
    * If no size is provided, it will default to `medium`.
+   *
+   * @default 'medium
    */
   size?: ButtonSizes;
+  /**
+   * Whether the icon should received filled (colored background layer) or regular styles.
+   * Corresponds to `toggled` in ToolbarIconButton
+   */
+  fillIcon?: boolean;
+  /**
+   * The icon of the Button.
+   * Note: not displayed at `small` size
+   */
+  icon?: CanvasSystemIcon;
+  /**
+   * Button icon positions can either be `start` or `end`.
+   * If no value is provided, it defaults to `start`.
+   *
+   * @default 'start'
+   */
+  iconPosition?: IconPositions;
+  /**
+   * If set to `true`, transform the icon's x-axis to mirror the graphic
+   * @default false
+   */
+  shouldMirrorIcon?: boolean;
+  children?: React.ReactNode;
 }
 
 /**
@@ -104,6 +130,7 @@ const BaseButtonStyles = cs({
   color: cssVar(buttonVars.default.color),
   border: `1px solid ${cssVar(buttonVars.default.border)}`,
   maxWidth: 'min-content',
+  minWidth: '96px',
   cursor: 'pointer',
   display: 'inline-flex',
   gap: space.xxs,
@@ -127,11 +154,6 @@ const BaseButtonStyles = cs({
     boxShadow: 'none',
     opacity: 0.4,
   },
-  '&:hover:active': {transitionDuration: '40ms'},
-  '&:active': {
-    backgroundColor: cssVar(buttonVars.active.background),
-    border: `1px solid ${cssVar(buttonVars.active.border)}`,
-  },
   '&:focus-visible': {
     backgroundColor: cssVar(buttonVars.focus.background),
     border: `1px solid ${cssVar(buttonVars.focus.border)}`,
@@ -154,6 +176,11 @@ const BaseButtonStyles = cs({
       fill: cssVar(buttonVars.hover.icon),
     },
   },
+  '&:hover:active': {transitionDuration: '40ms'},
+  '&:active': {
+    backgroundColor: cssVar(buttonVars.active.background),
+    border: `1px solid ${cssVar(buttonVars.active.border)}`,
+  },
 });
 
 export const SizeModifiers = createModifiers({
@@ -163,6 +190,8 @@ export const SizeModifiers = createModifiers({
       lineHeight: space.m,
       letterSpacing: '0.01rem',
       height: '48px',
+      paddingInline: space.l,
+      minWidth: '112px',
       '&.canvas-button-icon-only': {
         padding: '0',
         minWidth: `${spaceNumbers.xl + spaceNumbers.xxs}rem`,
@@ -199,6 +228,7 @@ export const SizeModifiers = createModifiers({
       lineHeight: '1.25rem',
       letterSpacing: '0.015rem',
       height: space.l,
+      minWidth: space.xxxl,
       paddingInline: space.s,
       '&.canvas-button-icon-only': {
         padding: '0',
@@ -218,7 +248,8 @@ export const SizeModifiers = createModifiers({
       lineHeight: space.s,
       letterSpacing: '0.02rem',
       height: space.m,
-      paddingInline: space.s,
+      minWidth: 'auto',
+      paddingInline: space.xs,
       '&.canvas-button-icon-only': {
         padding: '0',
         minWidth: space.m,
@@ -237,7 +268,19 @@ export const SizeModifiers = createModifiers({
 
 export const BaseButton = createComponent('button')({
   displayName: 'BaseButton',
-  Component: ({children, cs, size, ...elemProps}: BaseButtonContainerProps, ref, Element) => {
+  Component: (
+    {
+      children,
+      cs,
+      size = 'medium',
+      iconPosition = 'start',
+      icon,
+      shouldMirrorIcon = false,
+      ...elemProps
+    }: BaseButtonContainerProps,
+    ref,
+    Element
+  ) => {
     return (
       <Box
         as={Element}

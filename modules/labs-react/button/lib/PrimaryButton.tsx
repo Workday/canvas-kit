@@ -1,15 +1,8 @@
 import * as React from 'react';
 
-import {BaseButton, buttonVars} from './BaseButton';
-import {
-  createComponent,
-  cs,
-  createModifiers,
-  newTheme,
-  cssVar,
-  tokenTheme,
-} from '@workday/canvas-kit-react/common';
-import {ButtonContainerProps} from './Button';
+import {BaseButton, buttonVars, BaseButtonContainerProps} from './BaseButton';
+import {createComponent, cs, createModifiers, getTheme} from '@workday/canvas-kit-react/common';
+import {borderRadius, colors} from '@workday/canvas-kit-react/tokens';
 
 export type PrimaryButtonVariant = 'primary' | 'inverse';
 
@@ -18,43 +11,44 @@ export type PrimaryButtonVariant = 'primary' | 'inverse';
  * We omit `ref` since all of our buttons use `createComponent` and already give access to `ref`.
  * Use this type to extend and customize any one off buttons that you want full control over styling.
  */
-export interface PrimaryButtonProps extends Omit<ButtonContainerProps, 'ref'> {
+export interface PrimaryButtonProps extends Omit<BaseButtonContainerProps, 'ref'> {
   /**
    * Variant has an option for `inverse` which will inverse the styling
    */
   variant?: 'inverse';
 }
+const theme = getTheme();
 
 const PrimaryStyles = cs({
-  [buttonVars.default.background]: cssVar(tokenTheme.primaryColor),
-  [buttonVars.default.border]: cssVar(tokenTheme.primaryColor),
-  [buttonVars.default.borderRadius]: cssVar(newTheme.theme.borderRadius.circle),
-  [buttonVars.default.color]: cssVar(tokenTheme.primaryColorContrast),
+  [buttonVars.default.background]: theme.canvas.palette.primary.main,
+  [buttonVars.default.border]: theme.canvas.palette.primary.main,
+  [buttonVars.default.borderRadius]: borderRadius.circle,
+  [buttonVars.default.color]: theme.canvas.palette.primary.contrast,
   '&:hover': {
-    [buttonVars.hover.background]: cssVar(newTheme.colors.primary.button.background.hover),
-    [buttonVars.hover.border]: cssVar(newTheme.colors.primary.button.border.hover),
-    [buttonVars.hover.color]: cssVar(newTheme.colors.primary.button.color.hover),
+    [buttonVars.hover.background]: theme.canvas.palette.primary.dark,
+    [buttonVars.hover.border]: theme.canvas.palette.primary.dark,
+    [buttonVars.hover.color]: theme.canvas.palette.primary.contrast,
     '& span .wd-icon-fill': {
-      [buttonVars.hover.icon]: cssVar(newTheme.colors.primary.icon.base),
+      [buttonVars.hover.icon]: theme.canvas.palette.primary.contrast,
+    },
+  },
+  '&:focus-visible': {
+    [buttonVars.focus.background]: theme.canvas.palette.primary.main,
+    [buttonVars.focus.border]: theme.canvas.palette.primary.main,
+    [buttonVars.focus.color]: theme.canvas.palette.primary.contrast,
+    [buttonVars.focus.boxShadowInner]: theme.canvas.palette.primary.contrast,
+    [buttonVars.focus.boxShadowOuter]: theme.canvas.palette.primary.main,
+    '& span .wd-icon-fill': {
+      [buttonVars.focus.icon]: theme.canvas.palette.primary.contrast,
     },
   },
   '&:active': {
-    [buttonVars.active.background]: cssVar(newTheme.colors.primary.button.background.active),
-    [buttonVars.active.border]: cssVar(newTheme.colors.primary.button.border.active),
-    [buttonVars.active.color]: cssVar(newTheme.colors.primary.button.color.active),
-  },
-  '&:focus-visible': {
-    [buttonVars.focus.background]: cssVar(newTheme.colors.primary.button.background.focus),
-    [buttonVars.focus.border]: cssVar(newTheme.colors.primary.button.border.focus),
-    [buttonVars.focus.color]: cssVar(newTheme.colors.primary.button.color.focus),
-    [buttonVars.focus.boxShadowInner]: cssVar(tokenTheme.primaryColorContrast),
-    [buttonVars.focus.boxShadowOuter]: cssVar(tokenTheme.primaryColor),
-    '& span .wd-icon-fill': {
-      [buttonVars.focus.icon]: cssVar(newTheme.colors.primary.icon.focus),
-    },
+    [buttonVars.active.background]: theme.canvas.palette.primary.darkest,
+    [buttonVars.active.border]: theme.canvas.palette.primary.darkest,
+    [buttonVars.active.color]: theme.canvas.palette.primary.contrast,
   },
   '& span .wd-icon-fill': {
-    [buttonVars.default.icon]: cssVar(newTheme.colors.primary.icon.base),
+    [buttonVars.default.icon]: theme.canvas.palette.primary.contrast,
   },
 });
 
@@ -66,42 +60,34 @@ export const PrimaryButtonModifiers = createModifiers({
   },
   variant: {
     inverse: cs({
-      [buttonVars.default.background]: cssVar(
-        newTheme.colors.primaryInverse.button.background.base
-      ),
-      [buttonVars.default.border]: cssVar(newTheme.colors.primaryInverse.button.border.base),
-      [buttonVars.default.borderRadius]: cssVar(newTheme.theme.borderRadius.circle),
-      [buttonVars.default.color]: cssVar(newTheme.colors.primaryInverse.button.color.base),
+      [buttonVars.default.background]: theme.canvas.palette.primary.contrast,
+      [buttonVars.default.border]: theme.canvas.palette.primary.contrast,
+      [buttonVars.default.borderRadius]: borderRadius.circle,
+      [buttonVars.default.color]: colors.blackPepper400,
       '&:hover': {
-        [buttonVars.hover.background]: cssVar(
-          newTheme.colors.primaryInverse.button.background.hover
-        ),
-        [buttonVars.hover.color]: cssVar(newTheme.colors.primaryInverse.button.color.hover),
+        [buttonVars.hover.background]: colors.soap300,
+        [buttonVars.hover.color]: colors.blackPepper500,
         '& span .wd-icon-fill': {
-          [buttonVars.hover.icon]: cssVar(newTheme.colors.primaryInverse.icon.hover),
+          [buttonVars.hover.icon]: colors.blackPepper500,
         },
       },
-      '&:active': {
-        [buttonVars.active.background]: cssVar(
-          newTheme.colors.primaryInverse.button.background.active
-        ),
-        [buttonVars.active.border]: cssVar(newTheme.colors.primaryInverse.button.border.active),
-        [buttonVars.active.color]: cssVar(newTheme.colors.primaryInverse.button.color.active),
-      },
       '&:focus-visible': {
-        [buttonVars.focus.background]: cssVar(
-          newTheme.colors.primaryInverse.button.background.focus
-        ),
-        [buttonVars.focus.border]: cssVar(newTheme.colors.primaryInverse.button.border.focus),
-        [buttonVars.focus.boxShadowInner]: cssVar(tokenTheme.darkContrast),
-        [buttonVars.focus.boxShadowOuter]: cssVar(tokenTheme.primaryColorContrast),
-        [buttonVars.focus.color]: cssVar(newTheme.colors.primaryInverse.button.color.focus),
+        [buttonVars.focus.background]: theme.canvas.palette.primary.contrast,
+        [buttonVars.focus.border]: colors.blackPepper400,
+        [buttonVars.focus.boxShadowInner]: colors.blackPepper400,
+        [buttonVars.focus.boxShadowOuter]: theme.canvas.palette.primary.contrast,
+        [buttonVars.focus.color]: colors.blackPepper400,
         '& span .wd-icon-fill': {
-          [buttonVars.focus.icon]: cssVar(newTheme.colors.primaryInverse.icon.focus),
+          [buttonVars.focus.icon]: colors.blackPepper400,
         },
       },
       '& span .wd-icon-fill': {
-        [buttonVars.default.icon]: cssVar(newTheme.colors.primaryInverse.icon.base),
+        [buttonVars.default.icon]: colors.blackPepper400,
+      },
+      '&:active': {
+        [buttonVars.active.background]: colors.soap400,
+        [buttonVars.active.border]: colors.soap400,
+        [buttonVars.active.color]: colors.blackPepper500,
       },
     }),
   },
@@ -168,21 +154,3 @@ export const PrimaryButton = createComponent('button')({
     );
   },
 });
-
-// export const PrimaryButtonOption = createComponent(Button)({
-//   displayName: 'PrimaryButtonOption',
-//   Component: ({children, icon, iconPosition, ...elemprops}: PrimaryButtonProps, ref, Element) => {
-//     return (
-//       <Button
-//         as={Element}
-//         ref={ref}
-//         type="button"
-//         icon={icon}
-//         iconPosition={iconPosition}
-//         {...elemprops}
-//       >
-//         {children}
-//       </Button>
-//     );
-//   },
-// });

@@ -1,62 +1,71 @@
 import * as React from 'react';
 
-import {BaseButton, buttonVars} from './BaseButton';
-import {
-  createComponent,
-  cs,
-  createModifiers,
-  newTheme,
-  cssVar,
-  tokenTheme,
-} from '@workday/canvas-kit-react/common';
-import {ButtonContainerProps} from './Button';
+import {BaseButton, buttonVars, BaseButtonContainerProps} from './BaseButton';
+import {createComponent, cs, createModifiers, getTheme} from '@workday/canvas-kit-react/common';
 
-import {borderRadius, space, spaceNumbers} from '@workday/canvas-kit-react/tokens';
+import {borderRadius, space, spaceNumbers, colors} from '@workday/canvas-kit-react/tokens';
 
 /**
  * Extends all the style properties from Box to our buttons as well as props from ButtonContainerProps.
  * We omit `ref` since all of our buttons use `createComponent` and already give access to `ref`.
  * Use this type to extend and customize any one off buttons that you want full control over styling.
  */
-export interface TertiaryButtonProps extends Omit<ButtonContainerProps, 'ref'> {
+export interface TertiaryButtonProps extends Omit<BaseButtonContainerProps, 'ref'> {
   /**
    * Variant has an option for `inverse` which will inverse the styling
    */
   variant?: 'inverse';
 }
 
+const theme = getTheme();
+
 const TertiaryStyles = cs({
-  [buttonVars.default.background]: cssVar(newTheme.colors.tertiary.button.background.base),
-  [buttonVars.default.border]: cssVar(newTheme.colors.tertiary.button.border.base),
-  [buttonVars.default.borderRadius]: cssVar(newTheme.theme.borderRadius.m),
-  [buttonVars.default.color]: cssVar(newTheme.colors.tertiary.button.color.base),
+  [buttonVars.default.background]: 'transparent',
+  [buttonVars.default.border]: 'transparent',
+  [buttonVars.default.borderRadius]: borderRadius.m,
+  [buttonVars.default.color]: theme.canvas.palette.primary.main,
   paddingInline: space.xxs,
   textDecoration: 'underline',
   '&:hover': {
-    [buttonVars.hover.background]: cssVar(newTheme.colors.tertiary.button.background.hover),
-    [buttonVars.hover.border]: cssVar(newTheme.colors.tertiary.button.border.hover),
-    [buttonVars.hover.color]: cssVar(newTheme.colors.tertiary.button.color.hover),
+    [buttonVars.hover.background]: colors.soap200,
+    [buttonVars.hover.border]: 'transparent',
+    [buttonVars.hover.color]: theme.canvas.palette.primary.dark,
     '& span .wd-icon-fill': {
-      [buttonVars.hover.icon]: cssVar(newTheme.colors.tertiary.icon.hover),
+      [buttonVars.hover.icon]: theme.canvas.palette.primary.dark,
+    },
+    '&.canvas-tertiary-button-icon-only': {
+      '& span .wd-icon-fill': {
+        [buttonVars.hover.icon]: colors.blackPepper500,
+      },
+    },
+  },
+  '&:focus-visible': {
+    [buttonVars.focus.background]: 'transparent',
+    [buttonVars.focus.border]: 'transparent',
+    [buttonVars.focus.boxShadowInner]: theme.canvas.palette.primary.main,
+    [buttonVars.focus.boxShadowOuter]: 'transparent',
+    [buttonVars.focus.color]: theme.canvas.palette.primary.main,
+    '& span .wd-icon-fill': {
+      [buttonVars.focus.icon]: theme.canvas.palette.primary.main,
+    },
+    '&.canvas-tertiary-button-icon-only': {
+      '& span .wd-icon-fill': {
+        [buttonVars.focus.icon]: colors.blackPepper400,
+      },
     },
   },
   '&:active': {
-    [buttonVars.active.background]: cssVar(newTheme.colors.tertiary.button.background.active),
-    [buttonVars.active.border]: cssVar(newTheme.colors.tertiary.button.border.active),
-    [buttonVars.active.color]: cssVar(newTheme.colors.tertiary.button.color.active),
-  },
-  '&:focus-visible': {
-    [buttonVars.focus.background]: cssVar(newTheme.colors.tertiary.button.background.focus),
-    [buttonVars.focus.border]: cssVar(newTheme.colors.tertiary.button.border.focus),
-    [buttonVars.focus.boxShadowInner]: cssVar(tokenTheme.tertiaryColorContrast),
-    [buttonVars.focus.boxShadowOuter]: cssVar(tokenTheme.primaryColor),
-    [buttonVars.focus.color]: cssVar(newTheme.colors.tertiary.button.color.focus),
-    '& span .wd-icon-fill': {
-      [buttonVars.focus.icon]: cssVar(newTheme.colors.tertiary.icon.focus),
-    },
+    [buttonVars.active.background]: colors.soap300,
+    [buttonVars.active.border]: 'transparent',
+    [buttonVars.active.color]: theme.canvas.palette.primary.dark,
   },
   '& span .wd-icon-fill': {
-    [buttonVars.default.icon]: cssVar(newTheme.colors.tertiary.icon.base),
+    [buttonVars.default.icon]: theme.canvas.palette.primary.main,
+  },
+  '&.canvas-tertiary-button-icon-only': {
+    '& span .wd-icon-fill': {
+      [buttonVars.default.icon]: colors.blackPepper400,
+    },
   },
 });
 
@@ -68,44 +77,44 @@ export const TertiaryButtonModifiers = createModifiers({
   },
   variant: {
     inverse: cs({
-      [buttonVars.default.background]: cssVar(
-        newTheme.colors.tertiaryInverse.button.background.base
-      ),
-      [buttonVars.default.border]: cssVar(newTheme.colors.tertiaryInverse.button.border.base),
-      [buttonVars.default.borderRadius]: cssVar(newTheme.theme.borderRadius.m),
-      [buttonVars.default.color]: cssVar(newTheme.colors.tertiaryInverse.button.color.base),
+      [buttonVars.default.background]: 'transparent',
+      [buttonVars.default.border]: 'transparent',
+      [buttonVars.default.borderRadius]: borderRadius.m,
+      [buttonVars.default.color]: colors.frenchVanilla100,
       textDecoration: 'underline',
       '&:hover': {
-        [buttonVars.hover.background]: cssVar(
-          newTheme.colors.tertiaryInverse.button.background.hover
-        ),
-        [buttonVars.hover.border]: cssVar(newTheme.colors.tertiaryInverse.button.border.hover),
-        [buttonVars.hover.color]: cssVar(newTheme.colors.tertiaryInverse.button.color.hover),
+        [buttonVars.hover.background]: colors.frenchVanilla100,
+        [buttonVars.hover.border]: 'transparent',
+        [buttonVars.hover.color]: colors.blackPepper400,
         '& span .wd-icon-fill': {
-          [buttonVars.hover.icon]: cssVar(newTheme.colors.tertiaryInverse.icon.hover),
+          [buttonVars.hover.icon]: colors.blackPepper400,
+        },
+      },
+      '&:focus-visible': {
+        [buttonVars.focus.background]: colors.frenchVanilla100,
+        [buttonVars.focus.border]: 'transparent',
+        [buttonVars.focus.boxShadowInner]: 'currentColor',
+        [buttonVars.focus.boxShadowOuter]: colors.frenchVanilla100,
+        [buttonVars.focus.color]: colors.blackPepper400,
+        '& span .wd-icon-fill': {
+          [buttonVars.focus.icon]: colors.blackPepper400,
         },
       },
       '&:active': {
-        [buttonVars.active.background]: cssVar(
-          newTheme.colors.tertiaryInverse.button.background.active
-        ),
-        [buttonVars.active.border]: cssVar(newTheme.colors.tertiaryInverse.button.border.active),
-        [buttonVars.active.color]: cssVar(newTheme.colors.tertiaryInverse.button.color.active),
-      },
-      '&:focus-visible': {
-        [buttonVars.focus.background]: cssVar(
-          newTheme.colors.tertiaryInverse.button.background.focus
-        ),
-        [buttonVars.focus.border]: cssVar(newTheme.colors.tertiaryInverse.button.border.focus),
-        [buttonVars.focus.boxShadowInner]: cssVar(tokenTheme.darkContrast),
-        [buttonVars.focus.boxShadowOuter]: cssVar(tokenTheme.tertiaryColorContrast),
-        [buttonVars.focus.color]: cssVar(newTheme.colors.tertiaryInverse.button.color.focus),
+        [buttonVars.active.background]: colors.soap200,
+        [buttonVars.active.border]: 'transparent',
+        [buttonVars.active.color]: colors.blackPepper400,
         '& span .wd-icon-fill': {
-          [buttonVars.focus.icon]: cssVar(newTheme.colors.tertiaryInverse.icon.focus),
+          [buttonVars.default.icon]: colors.blackPepper400,
         },
       },
       '& span .wd-icon-fill': {
-        [buttonVars.default.icon]: cssVar(newTheme.colors.tertiaryInverse.icon.base),
+        [buttonVars.default.icon]: colors.frenchVanilla100,
+      },
+      '&.canvas-tertiary-button-icon-only': {
+        '& span .wd-icon-fill': {
+          [buttonVars.default.icon]: colors.frenchVanilla100,
+        },
       },
     }),
   },
