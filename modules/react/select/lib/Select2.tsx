@@ -152,9 +152,8 @@ export const useSelectInput = composeHooks(
           model.events.goTo({id: model.state.items[matchIndex].id});
           model.events.select({id: model.state.items[matchIndex].id});
         } else {
-          // Otherwise the menu is visible (or at least partially visible);
+          // Otherwise the menu is visible
           // focus the matched option and select it
-
           model.events.goTo({id: model.state.items[matchIndex].id});
         }
       }
@@ -167,7 +166,7 @@ export const useSelectInput = composeHooks(
         );
 
         event.preventDefault();
-        // Select should open if Enter, ArrowUp, ArrowDown and Spacebar is types
+        // Select should open if Enter, ArrowUp, ArrowDown and Spacebar is typed
         if (
           event.key === 'Enter' ||
           event.key === 'Spacebar' ||
@@ -192,9 +191,15 @@ export const useSelectInput = composeHooks(
           }
         }
 
-        // If the dropdown is NOT visible and either ArrowUp or ArrowDown is typed, when the dropdown opens
+        // If the dropdown is NOT visible and ArrowUp, ArrowDown, Enter and Spacebar is typed, when the dropdown opens
         // it should go to the current selected item in the dropdown.
-        if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
+        if (
+          event.key === 'ArrowUp' ||
+          event.key === 'ArrowDown' ||
+          event.key === 'Spacebar' ||
+          event.key === ' ' ||
+          event.key === 'Enter'
+        ) {
           if (model.state.visibility === 'hidden') {
             model.events.goTo({id: model.state.items[foundIndex].id});
 
@@ -213,10 +218,6 @@ export const useSelectInput = composeHooks(
               model.events.hide(event);
             }
           }
-        }
-
-        if (event.key === 'Enter' && model.state.visibility === 'hidden') {
-          model.events.goTo({id: model.state.items[foundIndex].id});
         }
 
         // If spacebar is typed
@@ -240,14 +241,10 @@ export const useSelectInput = composeHooks(
           model.state.visibility === 'hidden' &&
           keySofar.current !== ''
         ) {
-          const foundIndex = model.state.items.findIndex(item => item.id === model.state.cursorId);
           // If the user is in the middle of typing a string, treat
           // space key as type-ahead rather than option selection
           if (keySofar.current !== '') {
             handleKeyboardTypeAhead(' ', model.state.items.length);
-          } else {
-            model.events.select({id: model.state.items[foundIndex].id});
-            model.events.hide();
           }
         }
       },
