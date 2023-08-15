@@ -6,8 +6,6 @@ import {
   composeHooks,
   ExtractProps,
   createContainer,
-  createModelHook,
-  dispatchInputEvent,
   useForkRef,
 } from '@workday/canvas-kit-react/common';
 import {
@@ -81,7 +79,6 @@ export const useSelectInput = composeHooks(
     // Reset after each keystroke to support type ahead
     const startClearKeysSoFarTimer = () => {
       if (timer.current) {
-        console.log('timer clear');
         clearTimeout(timer.current);
       }
       timer.current = setTimeout(() => {
@@ -97,14 +94,8 @@ export const useSelectInput = composeHooks(
       endIndex: number = model.state.items.length,
       ignoreDisabled: boolean = true
     ): number => {
-      console.warn('STARTINDEX', startIndex);
-      console.warn('startString', startString);
-      console.warn('endIndex', model.state.items.length);
-      console.warn('ignoreDisabled', ignoreDisabled);
       for (let i = startIndex; i < endIndex; i++) {
         const label = model.state.items[i].id.toLowerCase();
-        console.warn('model.state.items[i].id', model.state.items[i].id);
-        // console.warn('label', label);
 
         if (label.indexOf(startString.toLowerCase()) === 0) {
           if (
@@ -129,14 +120,11 @@ export const useSelectInput = composeHooks(
       // );
       // returns the index at which the cursor is located
 
-      console.log('cursorFocusedIndex', cursorFocusedIndex);
-
       // If the starting point is beyond the list of options, reset it
       // to the beginning of the list
       let start = keySofar.current.length === 0 ? cursorFocusedIndex + 1 : cursorFocusedIndex;
 
       start = start === numOptions ? 0 : start;
-      // console.log('START', start);
 
       // Keeps track of the current key types and adds to it
       // if you type `de` vs `d` for denver
@@ -148,11 +136,11 @@ export const useSelectInput = composeHooks(
       let matchIndex;
       // console.log('key so far', keySofar.current);
       matchIndex = getIndexByStartString(start, keySofar.current);
+      // console.log('matchIndex', matchIndex);
 
       // If a match isn't found between start and end, wrap the search
       // around and search again from the beginning (0) to start
       if (matchIndex === -1) {
-        console.log('no match');
         matchIndex = getIndexByStartString(0, keySofar.current, start);
       }
 
@@ -168,55 +156,55 @@ export const useSelectInput = composeHooks(
           // focus the matched option and select it
 
           model.events.goTo({id: model.state.items[matchIndex].id});
-          // model.events.select({id: model.state.items[matchIndex].id});
         }
       }
     };
 
     return {
       onKeyDown(event: React.KeyboardEvent) {
-        event.preventDefault();
+        const foundIndex = model.state.items.findIndex(
+          item => item.id === model.state.selectedIds[0]
+        );
 
+        event.preventDefault();
+        // Select should open if Enter, ArrowUp, ArrowDown and Spacebar is types
         if (
           event.key === 'Enter' ||
           event.key === 'Spacebar' ||
-          (event.key === ' ' && model.state.visibility === 'hidden')
+          event.key === 'ArrowUp' ||
+          event.key === 'ArrowDown' ||
+          (event.key === ' ' && model.state.visibility === 'hidden' && keySofar.current === '')
         ) {
           model.events.setWidth(event.currentTarget.clientWidth);
           //show the menu when enter is typed
           model.events.show();
         }
 
-        // if (event.key === 'Spacebar' && model.state.visibility === 'visible') {
-        //   const foundIndex = model.state.items.findIndex(item => item.id === model.state.cursorId);
-
-        //   model.events.select({id: model.state.items[foundIndex].id});
-        // }
-
+        // Call type ahead excluding backspace
         if (event.key.length === 1 && event.key.match(/\S/)) {
-          console.log('key that is passed', event.key, model.state.items.length);
           handleKeyboardTypeAhead(event.key, model.state.items.length);
         }
+
+        // If Escape is typed, it should not select where the cursor was, instead what was previously selected
         if (event.key === 'Escape') {
           if (model.state.selectedIds.length > 0) {
-            const foundIndex = model.state.items.findIndex(
-              item => item.id === model.state.selectedIds[0]
-            );
             model.events.select({id: model.state.items[foundIndex].id});
           }
         }
 
+        // If the dropdown is NOT visible and either ArrowUp or ArrowDown is typed, when the dropdown opens
+        // it should go to the current selected item in the dropdown.
         if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
           if (model.state.visibility === 'hidden') {
-            const foundIndex = model.state.items.findIndex(
-              item => item.id === model.state.selectedIds[0]
-            );
-
             model.events.goTo({id: model.state.items[foundIndex].id});
-            // model.events.select({id: model.state.items[foundIndex].id});
+
+            if (model.state.isVirtualized && model.state.selectedIds.length > 0) {
+              model.state.UNSTABLE_virtual.scrollToIndex(foundIndex);
+            }
           }
         }
 
+        // If the dropdown is visible and Enter is typed, it should select that item where the cursor is located in the list and close the dropdown
         if (event.key === 'Enter' && !event.metaKey && model.state.visibility === 'visible') {
           const element = document.querySelector(`[data-id="${model.state.cursorId}"]`);
           if (element && element?.getAttribute('aria-disabled') !== 'true') {
@@ -225,20 +213,43 @@ export const useSelectInput = composeHooks(
               model.events.hide(event);
             }
           }
-
-          // We don't want to submit forms while the combobox is open
-          event.preventDefault();
         }
 
         if (event.key === 'Enter' && model.state.visibility === 'hidden') {
-          const foundIndex = model.state.items.findIndex(
-            item => item.id === model.state.selectedIds[0]
-          );
-
           model.events.goTo({id: model.state.items[foundIndex].id});
         }
 
-        // const next = model.navigation.getNext();
+        // If spacebar is typed
+        if (
+          (event.key === 'Spacebar' || event.key === ' ') &&
+          model.state.visibility === 'visible'
+        ) {
+          const foundIndex = model.state.items.findIndex(item => item.id === model.state.cursorId);
+          // If the user is in the middle of typing a string, treat
+          // space key as type-ahead rather than option selection
+          if (keySofar.current !== '') {
+            handleKeyboardTypeAhead(' ', model.state.items.length);
+          } else {
+            model.events.select({id: model.state.items[foundIndex].id});
+            model.events.hide();
+          }
+        }
+
+        if (
+          (event.key === 'Spacebar' || event.key === ' ') &&
+          model.state.visibility === 'hidden' &&
+          keySofar.current !== ''
+        ) {
+          const foundIndex = model.state.items.findIndex(item => item.id === model.state.cursorId);
+          // If the user is in the middle of typing a string, treat
+          // space key as type-ahead rather than option selection
+          if (keySofar.current !== '') {
+            handleKeyboardTypeAhead(' ', model.state.items.length);
+          } else {
+            model.events.select({id: model.state.items[foundIndex].id});
+            model.events.hide();
+          }
+        }
       },
       onBlur(event: React.FocusEvent) {
         // model.events.hide(event);
