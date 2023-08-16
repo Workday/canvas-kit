@@ -7,18 +7,18 @@ export interface ButtonStateColors {
   background?: string;
   border?: string;
   icon?: string;
-  iconFill?: boolean;
+  // iconFill?: boolean;
   label?: string;
   opacity?: string;
 }
 export interface ButtonColors {
-  default: ButtonStateColors;
-  hover: ButtonStateColors;
-  active: ButtonStateColors;
-  focus: ButtonStateColors & {
+  default?: ButtonStateColors;
+  hover?: ButtonStateColors;
+  active?: ButtonStateColors;
+  focus?: ButtonStateColors & {
     focusRing?: CSSObject;
   };
-  disabled: ButtonStateColors;
+  disabled?: ButtonStateColors;
 }
 
 /**

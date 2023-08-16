@@ -7,7 +7,7 @@ import {
 } from '@workday/canvas-kit-react/testing';
 import {withSnapshotsEnabled, customColorTheme} from '../../../../../utils/storybook';
 import {playCircleIcon, relatedActionsVerticalIcon} from '@workday/canvas-system-icons-web';
-import {SecondaryButton} from '@workday/canvas-kit-react/button';
+import {SecondaryButton} from '@workday/canvas-kit-labs-react/button';
 import {Container, stateTableColumnProps} from './utils';
 
 export default withSnapshotsEnabled({
@@ -70,6 +70,7 @@ export const SecondaryIconButtonStates = (props: {theme?: PartialEmotionCanvasTh
           {value: 'large', label: 'Large'},
         ],
         icon: [{value: relatedActionsVerticalIcon, label: ''}],
+        iconPosition: [{value: 'only', label: '& Only Icon'}],
       })}
       columnProps={stateTableColumnProps}
     >

@@ -229,8 +229,15 @@ export function csToProps(
   }, {} as CsToPropsReturn);
 }
 
+export type CSToPropsInput =
+  | undefined
+  | CS
+  | CsToPropsReturn
+  | React.CSSProperties
+  | CSToPropsInput[];
+
 export interface CSProps {
-  cs?: CS | (CS | undefined)[];
+  cs?: CSToPropsInput;
 }
 
 /**

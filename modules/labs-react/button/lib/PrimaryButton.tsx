@@ -17,6 +17,7 @@ export interface PrimaryButtonProps extends Omit<BaseButtonContainerProps, 'ref'
    */
   variant?: 'inverse';
 }
+
 const theme = getTheme();
 
 const PrimaryStyles = cs({
@@ -24,7 +25,7 @@ const PrimaryStyles = cs({
   [buttonVars.default.border]: theme.canvas.palette.primary.main,
   [buttonVars.default.borderRadius]: borderRadius.circle,
   [buttonVars.default.color]: theme.canvas.palette.primary.contrast,
-  '&:hover': {
+  '&:hover, &.hover': {
     [buttonVars.hover.background]: theme.canvas.palette.primary.dark,
     [buttonVars.hover.border]: theme.canvas.palette.primary.dark,
     [buttonVars.hover.color]: theme.canvas.palette.primary.contrast,
@@ -32,7 +33,7 @@ const PrimaryStyles = cs({
       [buttonVars.hover.icon]: theme.canvas.palette.primary.contrast,
     },
   },
-  '&:focus-visible': {
+  '&:focus-visible, &.focus': {
     [buttonVars.focus.background]: theme.canvas.palette.primary.main,
     [buttonVars.focus.border]: theme.canvas.palette.primary.main,
     [buttonVars.focus.color]: theme.canvas.palette.primary.contrast,
@@ -42,13 +43,24 @@ const PrimaryStyles = cs({
       [buttonVars.focus.icon]: theme.canvas.palette.primary.contrast,
     },
   },
-  '&:active': {
+  '&:active, &.active': {
     [buttonVars.active.background]: theme.canvas.palette.primary.darkest,
     [buttonVars.active.border]: theme.canvas.palette.primary.darkest,
     [buttonVars.active.color]: theme.canvas.palette.primary.contrast,
+    '& span .wd-icon-fill': {
+      [buttonVars.active.icon]: theme.canvas.palette.primary.contrast,
+    },
   },
   '& span .wd-icon-fill': {
     [buttonVars.default.icon]: theme.canvas.palette.primary.contrast,
+  },
+  '&:disabled, &:active:disabled, &:focus:disabled, &:hover:disabled': {
+    [buttonVars.disabled.background]: theme.canvas.palette.primary.main,
+    [buttonVars.disabled.border]: theme.canvas.palette.primary.main,
+    [buttonVars.disabled.color]: theme.canvas.palette.primary.contrast,
+    '& span .wd-icon-fill': {
+      [buttonVars.disabled.icon]: theme.canvas.palette.primary.contrast,
+    },
   },
 });
 
@@ -64,14 +76,14 @@ export const PrimaryButtonModifiers = createModifiers({
       [buttonVars.default.border]: theme.canvas.palette.primary.contrast,
       [buttonVars.default.borderRadius]: borderRadius.circle,
       [buttonVars.default.color]: colors.blackPepper400,
-      '&:hover': {
+      '&:hover, &.hover': {
         [buttonVars.hover.background]: colors.soap300,
         [buttonVars.hover.color]: colors.blackPepper500,
         '& span .wd-icon-fill': {
           [buttonVars.hover.icon]: colors.blackPepper500,
         },
       },
-      '&:focus-visible': {
+      '&:focus-visible, &.focus': {
         [buttonVars.focus.background]: theme.canvas.palette.primary.contrast,
         [buttonVars.focus.border]: colors.blackPepper400,
         [buttonVars.focus.boxShadowInner]: colors.blackPepper400,
@@ -84,10 +96,17 @@ export const PrimaryButtonModifiers = createModifiers({
       '& span .wd-icon-fill': {
         [buttonVars.default.icon]: colors.blackPepper400,
       },
-      '&:active': {
+      '&:active, &.active': {
         [buttonVars.active.background]: colors.soap400,
         [buttonVars.active.border]: colors.soap400,
         [buttonVars.active.color]: colors.blackPepper500,
+      },
+      '&:disabled, &:active:disabled, &:focus:disabled, &:hover:disabled': {
+        [buttonVars.disabled.background]: colors.frenchVanilla100,
+        [buttonVars.disabled.color]: colors.blackPepper400,
+        '& span .wd-icon-fill': {
+          [buttonVars.disabled.icon]: colors.blackPepper400,
+        },
       },
     }),
   },
@@ -98,7 +117,6 @@ export const PrimaryButton = createComponent('button')({
   Component: (
     {
       children,
-      colors,
       icon,
       iconPosition,
       shouldMirrorIcon,

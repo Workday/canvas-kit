@@ -26,7 +26,7 @@ const TertiaryStyles = cs({
   [buttonVars.default.color]: theme.canvas.palette.primary.main,
   paddingInline: space.xxs,
   textDecoration: 'underline',
-  '&:hover': {
+  '&:hover, &.hover': {
     [buttonVars.hover.background]: colors.soap200,
     [buttonVars.hover.border]: 'transparent',
     [buttonVars.hover.color]: theme.canvas.palette.primary.dark,
@@ -39,7 +39,7 @@ const TertiaryStyles = cs({
       },
     },
   },
-  '&:focus-visible': {
+  '&:focus-visible, &.focus': {
     [buttonVars.focus.background]: 'transparent',
     [buttonVars.focus.border]: 'transparent',
     [buttonVars.focus.boxShadowInner]: theme.canvas.palette.primary.main,
@@ -54,10 +54,18 @@ const TertiaryStyles = cs({
       },
     },
   },
-  '&:active': {
+  '&:active, &.active': {
     [buttonVars.active.background]: colors.soap300,
     [buttonVars.active.border]: 'transparent',
     [buttonVars.active.color]: theme.canvas.palette.primary.dark,
+    '& span .wd-icon-fill': {
+      [buttonVars.active.icon]: theme.canvas.palette.primary.main,
+    },
+    '&.canvas-tertiary-button-icon-only': {
+      '& span .wd-icon-fill': {
+        [buttonVars.active.icon]: colors.blackPepper500,
+      },
+    },
   },
   '& span .wd-icon-fill': {
     [buttonVars.default.icon]: theme.canvas.palette.primary.main,
@@ -65,6 +73,14 @@ const TertiaryStyles = cs({
   '&.canvas-tertiary-button-icon-only': {
     '& span .wd-icon-fill': {
       [buttonVars.default.icon]: colors.blackPepper400,
+    },
+  },
+  '&:disabled, &:active:disabled, &:focus:disabled, &:hover:disabled': {
+    [buttonVars.disabled.background]: 'transparent',
+    [buttonVars.disabled.border]: colors.frenchVanilla100,
+    [buttonVars.disabled.color]: theme.canvas.palette.primary.main,
+    '& span .wd-icon-fill': {
+      [buttonVars.disabled.icon]: theme.canvas.palette.primary.main,
     },
   },
 });
@@ -82,7 +98,7 @@ export const TertiaryButtonModifiers = createModifiers({
       [buttonVars.default.borderRadius]: borderRadius.m,
       [buttonVars.default.color]: colors.frenchVanilla100,
       textDecoration: 'underline',
-      '&:hover': {
+      '&:hover, &.hover': {
         [buttonVars.hover.background]: colors.frenchVanilla100,
         [buttonVars.hover.border]: 'transparent',
         [buttonVars.hover.color]: colors.blackPepper400,
@@ -90,7 +106,7 @@ export const TertiaryButtonModifiers = createModifiers({
           [buttonVars.hover.icon]: colors.blackPepper400,
         },
       },
-      '&:focus-visible': {
+      '&:focus-visible, &.focus': {
         [buttonVars.focus.background]: colors.frenchVanilla100,
         [buttonVars.focus.border]: 'transparent',
         [buttonVars.focus.boxShadowInner]: 'currentColor',
@@ -100,12 +116,17 @@ export const TertiaryButtonModifiers = createModifiers({
           [buttonVars.focus.icon]: colors.blackPepper400,
         },
       },
-      '&:active': {
+      '&:active, &.active': {
         [buttonVars.active.background]: colors.soap200,
         [buttonVars.active.border]: 'transparent',
         [buttonVars.active.color]: colors.blackPepper400,
         '& span .wd-icon-fill': {
-          [buttonVars.default.icon]: colors.blackPepper400,
+          [buttonVars.active.icon]: colors.blackPepper400,
+        },
+        '&.canvas-tertiary-button-icon-only': {
+          '& span .wd-icon-fill': {
+            [buttonVars.active.icon]: colors.blackPepper500,
+          },
         },
       },
       '& span .wd-icon-fill': {
@@ -114,6 +135,14 @@ export const TertiaryButtonModifiers = createModifiers({
       '&.canvas-tertiary-button-icon-only': {
         '& span .wd-icon-fill': {
           [buttonVars.default.icon]: colors.frenchVanilla100,
+        },
+      },
+      '&:disabled, &:active:disabled, &:focus:disabled, &:hover:disabled': {
+        [buttonVars.disabled.background]: 'transparent',
+        [buttonVars.disabled.border]: colors.frenchVanilla100,
+        [buttonVars.disabled.color]: colors.frenchVanilla100,
+        '& span .wd-icon-fill': {
+          [buttonVars.disabled.icon]: colors.frenchVanilla100,
         },
       },
     }),

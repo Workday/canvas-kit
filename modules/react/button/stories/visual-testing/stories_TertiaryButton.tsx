@@ -7,7 +7,7 @@ import {
 } from '@workday/canvas-kit-react/testing';
 import {withSnapshotsEnabled, customColorTheme} from '../../../../../utils/storybook';
 import {playCircleIcon, relatedActionsVerticalIcon} from '@workday/canvas-system-icons-web';
-import {TertiaryButton} from '@workday/canvas-kit-react/button';
+import {TertiaryButton} from '@workday/canvas-kit-labs-react/button';
 import {Container, stateTableColumnProps} from './utils';
 
 export default withSnapshotsEnabled({
@@ -74,6 +74,7 @@ export const TertiaryIconButtonStates = (props: {
           {value: 'large', label: 'Large'},
         ],
         icon: [{value: relatedActionsVerticalIcon, label: ''}],
+        iconPosition: [{value: 'only', label: '& Only Icon'}],
       })}
       columnProps={stateTableColumnProps}
     >

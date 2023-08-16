@@ -23,7 +23,7 @@ const SecondaryStyles = cs({
   [buttonVars.default.border]: colors.blackPepper400,
   [buttonVars.default.borderRadius]: borderRadius.circle,
   [buttonVars.default.color]: colors.blackPepper400,
-  '&:hover': {
+  '&:hover, &.hover': {
     [buttonVars.hover.background]: colors.blackPepper400,
     [buttonVars.hover.border]: colors.blackPepper400,
     [buttonVars.hover.color]: theme.canvas.palette.neutral.contrast,
@@ -31,7 +31,7 @@ const SecondaryStyles = cs({
       [buttonVars.hover.icon]: theme.canvas.palette.neutral.contrast,
     },
   },
-  '&:focus-visible': {
+  '&:focus-visible, &.focus': {
     [buttonVars.focus.background]: 'transparent',
     [buttonVars.focus.border]: colors.blackPepper400,
     [buttonVars.focus.color]: colors.blackPepper400,
@@ -41,13 +41,24 @@ const SecondaryStyles = cs({
       [buttonVars.focus.icon]: colors.blackPepper400,
     },
   },
-  '&:active': {
+  '&:active, &.active': {
     [buttonVars.active.background]: colors.blackPepper500,
     [buttonVars.active.border]: colors.blackPepper500,
     [buttonVars.active.color]: theme.canvas.palette.neutral.contrast,
+    '& span .wd-icon-fill': {
+      [buttonVars.active.icon]: theme.canvas.palette.neutral.contrast,
+    },
   },
   '& span .wd-icon-fill': {
     [buttonVars.default.icon]: colors.blackPepper400,
+  },
+  '&:disabled, &:active:disabled, &:focus:disabled, &:hover:disabled': {
+    [buttonVars.disabled.background]: 'transparent',
+    [buttonVars.disabled.border]: colors.blackPepper400,
+    [buttonVars.disabled.color]: colors.blackPepper400,
+    '& span .wd-icon-fill': {
+      [buttonVars.disabled.icon]: colors.blackPepper400,
+    },
   },
 });
 
@@ -63,14 +74,14 @@ export const SecondaryButtonModifiers = createModifiers({
       [buttonVars.default.border]: colors.frenchVanilla100,
       [buttonVars.default.borderRadius]: borderRadius.circle,
       [buttonVars.default.color]: colors.frenchVanilla100,
-      '&:hover': {
+      '&:hover, &.hover': {
         [buttonVars.hover.background]: colors.soap300,
         [buttonVars.hover.color]: colors.blackPepper500,
         '& span .wd-icon-fill': {
           [buttonVars.hover.icon]: colors.blackPepper500,
         },
       },
-      '&:focus-visible': {
+      '&:focus-visible, &.focus': {
         [buttonVars.focus.background]: colors.frenchVanilla100,
         [buttonVars.focus.border]: colors.frenchVanilla100,
         [buttonVars.focus.boxShadowInner]: 'currentColor',
@@ -80,13 +91,24 @@ export const SecondaryButtonModifiers = createModifiers({
           [buttonVars.focus.icon]: colors.blackPepper500,
         },
       },
-      '&:active': {
+      '&:active, &.active': {
         [buttonVars.active.background]: colors.soap400,
         [buttonVars.active.border]: colors.soap400,
         [buttonVars.active.color]: colors.blackPepper500,
+        '& span .wd-icon-fill': {
+          [buttonVars.active.icon]: colors.blackPepper500,
+        },
       },
       '& span .wd-icon-fill': {
         [buttonVars.default.icon]: colors.frenchVanilla100,
+      },
+      '&:disabled, &:active:disabled, &:focus:disabled, &:hover:disabled': {
+        [buttonVars.disabled.background]: 'transparent',
+        [buttonVars.disabled.border]: colors.frenchVanilla100,
+        [buttonVars.disabled.color]: colors.frenchVanilla100,
+        '& span .wd-icon-fill': {
+          [buttonVars.disabled.icon]: colors.frenchVanilla100,
+        },
       },
     }),
   },

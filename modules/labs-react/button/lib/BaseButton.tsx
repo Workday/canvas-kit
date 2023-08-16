@@ -154,7 +154,7 @@ const BaseButtonStyles = cs({
     boxShadow: 'none',
     opacity: 0.4,
   },
-  '&:focus-visible': {
+  '&:focus-visible, &.focus': {
     backgroundColor: cssVar(buttonVars.focus.background),
     border: `1px solid ${cssVar(buttonVars.focus.border)}`,
     boxShadow: `${cssVar(buttonVars.focus.boxShadowInner)} 0px 0px 0px 2px, ${cssVar(
@@ -169,7 +169,7 @@ const BaseButtonStyles = cs({
     transitionDuration: '40ms',
     fill: cssVar(buttonVars.default.icon),
   },
-  '&:hover': {
+  '&:hover, &.hover': {
     backgroundColor: cssVar(buttonVars.hover.background),
     color: cssVar(buttonVars.hover.color),
     '& span .wd-icon-fill': {
@@ -177,9 +177,21 @@ const BaseButtonStyles = cs({
     },
   },
   '&:hover:active': {transitionDuration: '40ms'},
-  '&:active': {
+  '&:active, &.active': {
     backgroundColor: cssVar(buttonVars.active.background),
     border: `1px solid ${cssVar(buttonVars.active.border)}`,
+    color: cssVar(buttonVars.active.color),
+    '& span .wd-icon-fill': {
+      fill: cssVar(buttonVars.active.icon),
+    },
+  },
+  '&:disabled, &:active:disabled, &:focus:disabled, &:hover:disabled': {
+    backgroundColor: cssVar(buttonVars.disabled.background),
+    borderColor: cssVar(buttonVars.disabled.border),
+    color: cssVar(buttonVars.disabled.color),
+    '& span .wd-icon-fill': {
+      fill: cssVar(buttonVars.disabled.icon),
+    },
   },
 });
 
@@ -275,6 +287,7 @@ export const BaseButton = createComponent('button')({
       size = 'medium',
       iconPosition = 'start',
       icon,
+      colors,
       shouldMirrorIcon = false,
       ...elemProps
     }: BaseButtonContainerProps,
@@ -286,7 +299,16 @@ export const BaseButton = createComponent('button')({
         as={Element}
         ref={ref}
         type="button"
-        cs={[BaseButtonStyles, cs, SizeModifiers({size: size})]}
+        cs={[
+          BaseButtonStyles,
+          cs,
+          SizeModifiers({size: size}),
+          buttonVars.active(colors?.active || {}),
+          buttonVars.default(colors?.default || {}),
+          buttonVars.disabled(colors?.disabled || {}),
+          buttonVars.focus(colors?.focus || {}),
+          buttonVars.hover(colors?.hover || {}),
+        ]}
         {...elemProps}
       >
         {children}
