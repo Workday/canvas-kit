@@ -1,8 +1,8 @@
 import React from 'react';
 import {FormField} from '@workday/canvas-kit-preview-react/form-field';
 import {SelectBase} from '@workday/canvas-kit-react/select';
-import {Box, Flex} from '@workday/canvas-kit-react/layout';
-import {useComboboxModel} from '../../../combobox';
+import {Flex} from '@workday/canvas-kit-react/layout';
+import {useComboboxModel} from '@workday/canvas-kit-react/combobox';
 
 export interface Item {
   index: number;
