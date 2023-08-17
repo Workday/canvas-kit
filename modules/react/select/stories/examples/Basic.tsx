@@ -7,7 +7,7 @@ import {useComboboxModel} from '../../../combobox';
 export interface Item {
   index: number;
   id: string;
-  value: T;
+  value: any;
   /**
    * Used by components that allow jumping to an item based on typing
    */
