@@ -30,7 +30,7 @@ const useAutocompleteInput = composeHooks(
   createElemPropsHook(useComboboxModel)(model => {
     return {
       onKeyPress(event: React.KeyboardEvent) {
-        // model.events.show(event);
+        model.events.show(event);
       },
     };
   }),

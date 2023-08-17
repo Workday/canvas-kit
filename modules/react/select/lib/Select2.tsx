@@ -72,7 +72,7 @@ export const useSelectInput = composeHooks(
         }
       }
 
-      //   // we only want to run this effect if the cursor changes and not any other time
+      // We only want to run this effect if the cursor changes and not any other time
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [model.state.cursorId]);
 
@@ -86,7 +86,7 @@ export const useSelectInput = composeHooks(
       }, 500);
     };
 
-    // based on the the key typed, this will try and find an index in the array where it matches the string
+    // Based on the the key typed, this will try and find an index in the array where it matches the string
     // so if a user types `de` it will try and find an index in the array whose id matches `de` like denver
     const getIndexByStartString = (
       startIndex: number,
@@ -115,11 +115,6 @@ export const useSelectInput = composeHooks(
     const cursorFocusedIndex = model.state.items.findIndex(item => item.id === currentItem.id);
 
     const handleKeyboardTypeAhead = (key: string, numOptions: number) => {
-      // const cursorFocusedIndex = model.state.items.findIndex(
-      //   item => item.id.toLowerCase() === model.state.cursorId
-      // );
-      // returns the index at which the cursor is located
-
       // If the starting point is beyond the list of options, reset it
       // to the beginning of the list
       let start = keySofar.current.length === 0 ? cursorFocusedIndex + 1 : cursorFocusedIndex;
@@ -281,8 +276,6 @@ export const useSelectInput = composeHooks(
   useListActiveDescendant,
   usePopupTarget
 );
-
-// check for value property and handle onChange
 
 export const SelectInput = createSubcomponent(TextInput)({
   modelHook: useComboboxModel,

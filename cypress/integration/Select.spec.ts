@@ -1,42 +1,6 @@
 import * as h from '../helpers';
 
-function getAssistiveFocus($menu: JQuery): JQuery {
-  const activeId = $menu.attr('aria-activedescendant');
-  return $menu.find(`[id="${activeId}"]`);
-}
-
-function assertOptionInView($option: JQuery) {
-  const option = $option[0];
-  const $menu = $option.parent();
-  const menu = $menu[0];
-
-  const menuBorderTopWidth = parseInt($menu.css('borderTopWidth'), 10);
-
-  const menuViewTop = menu.scrollTop + menuBorderTopWidth;
-  const menuViewBottom = menuViewTop + menu.clientHeight;
-  const optionTop = option.offsetTop;
-  const optionBottom = optionTop + option.offsetHeight;
-
-  const optionInView = optionTop >= menuViewTop && optionBottom <= menuViewBottom;
-
-  expect(optionInView).to.equal(true);
-}
-
-function assertOptionCenteredInView($option: JQuery) {
-  const option = $option[0];
-  const $menu = $option.parent();
-  const menu = $menu[0];
-
-  const menuBorderTopWidth = parseInt($menu.css('borderTopWidth'), 10);
-
-  const expectedMenuScrollTop = Math.floor(
-    option.offsetTop - menu.clientHeight / 2 - menuBorderTopWidth + option.clientHeight / 2
-  );
-
-  expect(menu.scrollTop).to.equal(expectedMenuScrollTop);
-}
-
-describe('Select', () => {
+describe.only('Select', () => {
   before(() => {
     h.stories.visit();
   });
