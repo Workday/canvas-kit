@@ -1,7 +1,6 @@
 import React from 'react';
 import {createModelHook, dispatchInputEvent} from '@workday/canvas-kit-react/common';
 import {useMenuModel} from '@workday/canvas-kit-react/menu';
-import {usePopupModel} from '../../popup';
 
 /**
  * An input model can be used by compound components that need to work with form fields. Some form

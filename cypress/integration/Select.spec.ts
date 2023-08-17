@@ -487,7 +487,7 @@ context('given the "Basic" story with a disabled option', () => {
     // });
   });
 });
-describe('Select', () => {
+describe.only('Select', () => {
   before(() => {
     h.stories.visit();
   });
@@ -735,8 +735,9 @@ describe('Select', () => {
 
           context('when "san " is typed', () => {
             beforeEach(() => {
+              cy.wait(500);
               cy.findByRole('combobox').realType('san ');
-              // cy.wait(150);
+              cy.wait(150);
             });
 
             context('the select input', () => {
@@ -748,6 +749,7 @@ describe('Select', () => {
 
           context('when "san m" is typed', () => {
             beforeEach(() => {
+              cy.wait(500);
               cy.findByRole('combobox')
                 .focus()
                 .realType('san m');
