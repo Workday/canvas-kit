@@ -71,7 +71,7 @@ describe('Select', () => {
 
           context('the select input', () => {
             it(`should read "Phone"`, () => {
-              cy.findByRole('combobox').should('have.value', 'Phone');
+              cy.findByRole('combobox').should('have.property', 'value', 'Phone');
             });
 
             it(`should re-acquire focus`, () => {

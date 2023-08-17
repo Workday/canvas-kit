@@ -48,9 +48,9 @@ export const Scrollable = () => {
               <SelectBase.List>
                 {item => (
                   <SelectBase.Item
-                    aria-disabled={item.disabled}
-                    data-text={item.id}
                     data-id={item.id}
+                    aria-disabled={item.disabled ? item.disabled : undefined}
+                    data-text={item.id}
                   >
                     {item.id}
                   </SelectBase.Item>

@@ -7,6 +7,7 @@ import {
   ExtractProps,
   createContainer,
   useForkRef,
+  createModelHook,
 } from '@workday/canvas-kit-react/common';
 import {
   Combobox,
@@ -26,9 +27,24 @@ import {
 import {usePopupTarget} from '@workday/canvas-kit-react/popup';
 import {ComboboxMenuItemProps} from '../../combobox/lib/ComboboxMenuItem';
 
+export const useSelectModel = createModelHook({
+  defaultConfig: {
+    ...useComboboxModel.defaultConfig,
+  },
+  requiredConfig: {
+    ...useComboboxModel.requiredConfig,
+  },
+  contextOverride: useComboboxModel.Context,
+})(config => {
+  const model = useComboboxModel(config);
+  return {
+    ...model,
+  };
+});
+
 export const useSelectInput = composeHooks(
   useListKeyboardHandler,
-  createElemPropsHook(useComboboxModel)((model, ref) => {
+  createElemPropsHook(useSelectModel)((model, ref) => {
     const elementRef = useForkRef(ref, model.state.inputRef);
 
     const keySofar = React.useRef('');
@@ -100,7 +116,8 @@ export const useSelectInput = composeHooks(
         if (label.indexOf(startString.toLowerCase()) === 0) {
           if (
             !ignoreDisabled ||
-            (ignoreDisabled && model.state.items[i].value.disabled === false)
+            (ignoreDisabled && model.state.items[i].value.disabled === false) ||
+            (ignoreDisabled && !model.state.nonInteractiveIds.includes(model.state.items[i].id))
           ) {
             return i;
           }
@@ -281,7 +298,7 @@ export const useSelectInput = composeHooks(
 );
 
 export const SelectInput = createSubcomponent(TextInput)({
-  modelHook: useComboboxModel,
+  modelHook: useSelectModel,
   elemPropsHook: useSelectInput,
 })<ExtractProps<typeof TextInput>>(
   ({placeholder = 'Choose and Option', ...props}, Element, model) => {
@@ -296,7 +313,7 @@ export const SelectInput = createSubcomponent(TextInput)({
   }
 );
 
-export const useSelectMenuItem = createElemPropsHook(useComboboxModel)(({state}) => {
+export const useSelectMenuItem = createElemPropsHook(useSelectModel)(({state}) => {
   return {
     role: 'option',
   };
@@ -309,9 +326,16 @@ export const SelectItem = createSubcomponent('li')({
   return <Combobox.Menu.Item {...elemProps}>{children}</Combobox.Menu.Item>;
 });
 
+export interface SelectProps {
+  /**
+   * Children of the `Combobox`. Should contain a `Combobox.Input` and a `Combobox.Menu`
+   */
+  children: React.ReactNode;
+}
+
 export const SelectBase = createContainer()({
   displayName: 'Select2',
-  modelHook: useComboboxModel,
+  modelHook: useSelectModel,
   subComponents: {
     Input: SelectInput,
     Popup: Combobox.Menu.Popper,
@@ -320,5 +344,6 @@ export const SelectBase = createContainer()({
     Item: SelectItem,
   },
 })<ComboboxProps>(({children}, _, model) => {
+  console.log(model);
   return <Combobox model={model}>{children}</Combobox>;
 });

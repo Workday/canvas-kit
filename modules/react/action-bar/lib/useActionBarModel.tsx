@@ -44,8 +44,6 @@ export const useActionBarModel = createModelHook({
   let nonInteractiveIds = model.state.nonInteractiveIds;
   const totalSize = model.state.items.length;
 
-  console.log(config.maximumVisible);
-
   // Only show maximumVisible buttons
   const maximumVisible: number =
     !config.maximumVisible || config.maximumVisible < 1
