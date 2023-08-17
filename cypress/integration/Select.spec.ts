@@ -1,6 +1,6 @@
 import * as h from '../helpers';
 
-describe.only('Select', () => {
+describe('Select', () => {
   before(() => {
     h.stories.visit();
   });
@@ -92,9 +92,7 @@ describe.only('Select', () => {
 
             context('the menu', () => {
               it('should set assistive focus to the "Phone" option', () => {
-                cy.findAllByRole('option')
-                  .eq(1)
-                  .should('have.attr', 'aria-selected', 'true');
+                cy.findByText('Phone').should('have.attr', 'aria-selected', 'true');
               });
             });
 
