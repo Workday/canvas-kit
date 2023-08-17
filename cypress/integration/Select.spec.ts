@@ -567,7 +567,7 @@ describe.only('Select', () => {
 
           context('when "san " is typed', () => {
             beforeEach(() => {
-              cy.findByRole('combobox').realType('san');
+              cy.findByRole('combobox').realType('san ');
             });
 
             context('the select button', () => {
@@ -686,30 +686,6 @@ describe.only('Select', () => {
               });
             });
           });
-
-          context('when "the onto" is typed', () => {
-            beforeEach(() => {
-              cy.findByRole('combobox')
-                .focus()
-                .realType('the onto');
-            });
-
-            // context('the menu', () => {
-            //   it('should set assistive focus to "The Ontologically..."', () => {
-            //     cy.findByRole('combobox').should(
-            //       'have.value',
-            //       'The Ontologically Anthropocentric Sensory Immersive Simulation (Virtual Reality)'
-            //     );
-            //   });
-
-            //   it('should scroll so that the "The Ontologically..." (text wrapped) option is fully visible', () => {
-            //     cy.findByLabelText('Label')
-            //       .pipe(h.selectPreview.getMenu)
-            //       .pipe(getAssistiveFocus)
-            //       .should(assertOptionInView);
-            //   });
-            // });
-          });
         }
       );
 
@@ -719,7 +695,7 @@ describe.only('Select', () => {
           context('when "sa" is typed', () => {
             beforeEach(() => {
               cy.findByRole('combobox').realType('sa');
-              cy.wait(150);
+              // cy.wait(150);
             });
 
             context('the menu', () => {
@@ -735,21 +711,22 @@ describe.only('Select', () => {
 
           context('when "san " is typed', () => {
             beforeEach(() => {
-              cy.wait(500);
               cy.findByRole('combobox').realType('san ');
-              cy.wait(150);
             });
 
             context('the select input', () => {
               it('should set assistive focus to the "San Francisco (United States)" option', () => {
-                cy.findByRole('combobox').should('have.value', 'San Francisco (United States)');
+                cy.findByText('San Francisco (United States)').should(
+                  'have.attr',
+                  'aria-selected',
+                  'true'
+                );
               });
             });
           });
 
           context('when "san m" is typed', () => {
             beforeEach(() => {
-              cy.wait(500);
               cy.findByRole('combobox')
                 .focus()
                 .realType('san m');
@@ -758,7 +735,11 @@ describe.only('Select', () => {
 
             context('the select input', () => {
               it('should set assistive focus to the "San Mateo (United States)" option', () => {
-                cy.findByRole('combobox').should('have.value', 'San Mateo (United States)');
+                cy.findByText('San Mateo (United States)').should(
+                  'have.attr',
+                  'aria-selected',
+                  'true'
+                );
               });
             });
           });
