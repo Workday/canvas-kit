@@ -1,4 +1,3 @@
-import {usePopupModel} from '@workday/canvas-kit-react/popup';
 import React from 'react';
 import {useCursorListModel} from './useCursorListModel';
 

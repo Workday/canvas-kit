@@ -257,7 +257,10 @@ export const useSelectInput = composeHooks(
         // When you click the menu and there's a selected item
         // scroll to that selected item
         if (model.state.selectedIds.length > 0) {
-          const foundIndex = model.state.items.findIndex(item => item.id === model.state.cursorId);
+          const foundIndex = model.state.items.findIndex(
+            item => item.id === model.state.selectedIds[0]
+          );
+          model.events.goTo({id: model.state.items[foundIndex].id});
           model.state.UNSTABLE_virtual.scrollToIndex(foundIndex);
         }
       },
