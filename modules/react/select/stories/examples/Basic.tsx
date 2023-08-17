@@ -4,7 +4,7 @@ import {SelectBase} from '@workday/canvas-kit-react/select';
 import {Box, Flex} from '@workday/canvas-kit-react/layout';
 import {useComboboxModel} from '../../../combobox';
 
-export interface Item<T> {
+export interface Item {
   index: number;
   id: string;
   value: T;
@@ -49,7 +49,7 @@ export const Basic = () => {
             <SelectBase.Card maxHeight="200px">
               {model.state.items.length > 0 && (
                 <SelectBase.List>
-                  {(item: Item<T>) => {
+                  {(item: Item) => {
                     return (
                       <SelectBase.Item
                         aria-disabled={item.disabled ? item.disabled : undefined}
