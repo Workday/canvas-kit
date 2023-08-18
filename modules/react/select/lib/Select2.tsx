@@ -11,7 +11,7 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {Combobox, useComboboxInput, useComboboxModel} from '@workday/canvas-kit-react/combobox';
 import {InputGroup, TextInput} from '@workday/canvas-kit-react/text-input';
-import {SystemIcon} from '../../icon';
+import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {caretDownSmallIcon} from '@workday/canvas-system-icons-web';
 import {ComboboxProps} from '../../combobox/lib/Combobox';
 
@@ -19,9 +19,6 @@ import {
   createNavigationManager,
   wrappingNavigationManager,
 } from '@workday/canvas-kit-react/collection';
-
-import {ComboboxMenuItemProps} from '../../combobox/lib/ComboboxMenuItem';
-import {getWrappingOffsetItem} from '../../collection/lib/useCursorListModel';
 
 export const useSelectModel = createModelHook({
   defaultConfig: {
@@ -44,7 +41,6 @@ export const useSelectModel = createModelHook({
         if (model.state.visibility === 'hidden') {
           return cursorFocusedIndex;
         } else {
-          getWrappingOffsetItem(1);
           return wrappingNavigationManager.getPrevious(index, model);
         }
       },
@@ -52,11 +48,10 @@ export const useSelectModel = createModelHook({
         const cursorFocusedIndex = model.state.items.findIndex(
           (item: {id: string}) => item.id === model.state.cursorId
         );
-        console.log(model.state.visibility);
+
         if (model.state.visibility === 'hidden') {
           return cursorFocusedIndex;
         } else {
-          getWrappingOffsetItem(1);
           return wrappingNavigationManager.getNext(index, model);
         }
       },
@@ -322,7 +317,7 @@ export const useSelectMenuItem = createElemPropsHook(useSelectModel)(({state}) =
 export const SelectItem = createSubcomponent('li')({
   modelHook: useComboboxModel,
   elemPropsHook: useSelectMenuItem,
-})<ComboboxMenuItemProps>(({children, ...elemProps}, Element) => {
+})<ExtractProps<typeof Combobox.Menu.Item>>(({children, ...elemProps}, Element) => {
   return <Combobox.Menu.Item {...elemProps}>{children}</Combobox.Menu.Item>;
 });
 
