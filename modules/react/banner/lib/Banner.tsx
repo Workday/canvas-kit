@@ -70,7 +70,6 @@ const styles: CSSProperties = {
 export const Banner = createContainer('button')({
   displayName: 'Banner',
   modelHook: useBannerModel,
-  elemPropsHook: useBanner,
   subComponents: {
     /**
      * `Banner.Icon` is a styled {@link SystemIcon}. The icon defaults to exclamationTriangleIcon or
