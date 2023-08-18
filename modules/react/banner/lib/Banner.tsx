@@ -13,7 +13,7 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {Flex} from '@workday/canvas-kit-react/layout';
 
-import {useBanner, useBannerModel, useThemedPalette} from './hooks';
+import {useBannerModel, useThemedPalette} from './hooks';
 
 import {BannerIcon} from './BannerIcon';
 import {BannerLabel} from './BannerLabel';
