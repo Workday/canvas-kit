@@ -8,9 +8,11 @@ import {
   createContainer,
   useForkRef,
   createModelHook,
+  dispatchInputEvent,
 } from '@workday/canvas-kit-react/common';
 import {
   Combobox,
+  useComboboxInput,
   useComboboxModel,
   useComboboxOpenWithArrowKeys,
 } from '@workday/canvas-kit-react/combobox';
@@ -22,10 +24,21 @@ import {ComboboxProps} from '../../combobox/lib/Combobox';
 import {
   useListActiveDescendant,
   useListKeyboardHandler,
+  createNavigationManager,
+  wrappingNavigationManager,
 } from '@workday/canvas-kit-react/collection';
 
 import {usePopupTarget} from '@workday/canvas-kit-react/popup';
 import {ComboboxMenuItemProps} from '../../combobox/lib/ComboboxMenuItem';
+import {getWrappingOffsetItem} from '../../collection/lib/useCursorListModel';
+
+// export const selectNavigationManager = createNavigationManager({
+//   ...wrappingNavigationManager,
+//   getNext: (index, state) => {
+//     console.log('STATE', state);
+//     return index;
+//   },
+// });
 
 export const useSelectModel = createModelHook({
   defaultConfig: {
@@ -36,17 +49,44 @@ export const useSelectModel = createModelHook({
   },
   contextOverride: useComboboxModel.Context,
 })(config => {
-  const model = useComboboxModel(config);
+  const model = useComboboxModel({
+    ...config,
+    navigation: createNavigationManager({
+      ...wrappingNavigationManager,
+      getPrevious: (index, state) => {
+        const cursorFocusedIndex = model.state.items.findIndex(
+          item => item.id === model.state.cursorId
+        );
+        console.log(model.state.visibility);
+        if (model.state.visibility === 'hidden') {
+          return cursorFocusedIndex;
+        } else {
+          getWrappingOffsetItem(1);
+          return wrappingNavigationManager.getPrevious(index, model);
+        }
+      },
+      getNext: (index, state) => {
+        const cursorFocusedIndex = model.state.items.findIndex(
+          item => item.id === model.state.cursorId
+        );
+        console.log(model.state.visibility);
+        if (model.state.visibility === 'hidden') {
+          return cursorFocusedIndex;
+        } else {
+          getWrappingOffsetItem(1);
+          return wrappingNavigationManager.getNext(index, model);
+        }
+      },
+    }),
+  });
   return {
     ...model,
   };
 });
 
 export const useSelectInput = composeHooks(
-  useListKeyboardHandler,
+  useComboboxInput,
   createElemPropsHook(useSelectModel)((model, ref) => {
-    const elementRef = useForkRef(ref, model.state.inputRef);
-
     const keySofar = React.useRef('');
     const timer = React.useRef<ReturnType<typeof setTimeout>>();
 
@@ -69,28 +109,6 @@ export const useSelectInput = composeHooks(
 
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-
-    React.useEffect(() => {
-      if (model.state.cursorId && model.state.visibility === 'visible') {
-        const item = model.navigation.getItem(model.state.cursorId, model);
-        if (model.state.isVirtualized && item) {
-          model.state.UNSTABLE_virtual.scrollToIndex(item.index);
-        } else {
-          const listboxId = model.state.inputRef.current?.getAttribute('aria-controls');
-          if (listboxId) {
-            const menuItem = document.querySelector(
-              `[id="${listboxId}"] [data-id="${model.state.cursorId}"]`
-            );
-            if (menuItem) {
-              menuItem.scrollIntoView({block: 'nearest'});
-            }
-          }
-        }
-      }
-
-      // We only want to run this effect if the cursor changes and not any other time
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [model.state.cursorId]);
 
     // Reset after each keystroke to support type ahead
     const startClearKeysSoFarTimer = () => {
@@ -199,6 +217,13 @@ export const useSelectInput = composeHooks(
         // If Escape is typed, it should not select where the cursor was, instead what was previously selected
         if (event.key === 'Escape') {
           if (model.state.selectedIds.length > 0) {
+            console.log('event targer', event.currentTarget);
+            console.log('value', model.state.items[foundIndex].id);
+            console.log('in escape');
+            dispatchInputEvent(
+              event.currentTarget as HTMLElement,
+              model.state.items[foundIndex].id
+            );
             model.events.select({id: model.state.items[foundIndex].id});
           }
         }
@@ -221,7 +246,8 @@ export const useSelectInput = composeHooks(
           }
         }
 
-        // If the dropdown is visible and Enter is typed, it should select that item where the cursor is located in the list and close the dropdown
+        // If the dropdown is visible and Enter is typed, it should select that item
+        // where the cursor is located in the list and close the dropdown
         if (event.key === 'Enter' && !event.metaKey && model.state.visibility === 'visible') {
           const element = document.querySelector(`[data-id="${model.state.cursorId}"]`);
           if (element && element?.getAttribute('aria-disabled') !== 'true') {
@@ -281,20 +307,9 @@ export const useSelectInput = composeHooks(
           model.state.UNSTABLE_virtual.scrollToIndex(foundIndex);
         }
       },
-      value: model.state.value,
-      role: 'combobox',
-      'aria-haspopup': true,
-      'aria-expanded': model.state.visibility === 'visible',
-      'aria-autocomplete': 'list',
-      'aria-controls': `${model.state.id}-list`,
-      id: model.state.id,
-      ref: elementRef,
       style: {caretColor: 'transparent', cursor: 'default'},
     } as const;
-  }),
-  useComboboxOpenWithArrowKeys,
-  useListActiveDescendant,
-  usePopupTarget
+  })
 );
 
 export const SelectInput = createSubcomponent(TextInput)({
@@ -344,6 +359,6 @@ export const SelectBase = createContainer()({
     Item: SelectItem,
   },
 })<ComboboxProps>(({children}, _, model) => {
-  console.log(model);
+  // console.log(model);
   return <Combobox model={model}>{children}</Combobox>;
 });

@@ -57,6 +57,7 @@ export const Basic = () => {
           </SelectBase.Popup>
         </SelectBase>
       </FormField>
+      Selected:{model.state.selectedIds[0]}
     </Flex>
   );
 };
