@@ -6,39 +6,22 @@ import {
   composeHooks,
   ExtractProps,
   createContainer,
-  useForkRef,
   createModelHook,
   dispatchInputEvent,
 } from '@workday/canvas-kit-react/common';
-import {
-  Combobox,
-  useComboboxInput,
-  useComboboxModel,
-  useComboboxOpenWithArrowKeys,
-} from '@workday/canvas-kit-react/combobox';
+import {Combobox, useComboboxInput, useComboboxModel} from '@workday/canvas-kit-react/combobox';
 import {InputGroup, TextInput} from '@workday/canvas-kit-react/text-input';
 import {SystemIcon} from '../../icon';
 import {caretDownSmallIcon} from '@workday/canvas-system-icons-web';
 import {ComboboxProps} from '../../combobox/lib/Combobox';
 
 import {
-  useListActiveDescendant,
-  useListKeyboardHandler,
   createNavigationManager,
   wrappingNavigationManager,
 } from '@workday/canvas-kit-react/collection';
 
-import {usePopupTarget} from '@workday/canvas-kit-react/popup';
 import {ComboboxMenuItemProps} from '../../combobox/lib/ComboboxMenuItem';
 import {getWrappingOffsetItem} from '../../collection/lib/useCursorListModel';
-
-// export const selectNavigationManager = createNavigationManager({
-//   ...wrappingNavigationManager,
-//   getNext: (index, state) => {
-//     console.log('STATE', state);
-//     return index;
-//   },
-// });
 
 export const useSelectModel = createModelHook({
   defaultConfig: {
@@ -49,13 +32,13 @@ export const useSelectModel = createModelHook({
   },
   contextOverride: useComboboxModel.Context,
 })(config => {
-  const model = useComboboxModel({
+  const model: ReturnType<typeof useComboboxModel> = useComboboxModel({
     ...config,
     navigation: createNavigationManager({
       ...wrappingNavigationManager,
       getPrevious: (index, state) => {
-        const cursorFocusedIndex = model.state.items.findIndex(
-          item => item.id === model.state.cursorId
+        const cursorFocusedIndex: number = model.state.items.findIndex(
+          (item: {id: string}) => item.id === model.state.cursorId
         );
         console.log(model.state.visibility);
         if (model.state.visibility === 'hidden') {
@@ -67,7 +50,7 @@ export const useSelectModel = createModelHook({
       },
       getNext: (index, state) => {
         const cursorFocusedIndex = model.state.items.findIndex(
-          item => item.id === model.state.cursorId
+          (item: {id: string}) => item.id === model.state.cursorId
         );
         console.log(model.state.visibility);
         if (model.state.visibility === 'hidden') {
@@ -100,7 +83,7 @@ export const useSelectInput = composeHooks(
         // If the user wants an items selected by default by passing `initialSelectedId` we select that item
         if (model.state.selectedIds.length > 0) {
           const selectedItem = model.state.items.findIndex(
-            item => item.id === model.state.selectedIds[0]
+            (item: {id: string}) => item.id === model.state.selectedIds[0]
           );
           model.events.goTo({id: model.state.items[selectedItem].id});
           model.events.select({id: model.state.items[selectedItem].id});
@@ -192,7 +175,7 @@ export const useSelectInput = composeHooks(
     return {
       onKeyDown(event: React.KeyboardEvent) {
         const foundIndex = model.state.items.findIndex(
-          item => item.id === model.state.selectedIds[0]
+          (item: {id: string}) => item.id === model.state.selectedIds[0]
         );
 
         event.preventDefault();
@@ -263,7 +246,9 @@ export const useSelectInput = composeHooks(
           (event.key === 'Spacebar' || event.key === ' ') &&
           model.state.visibility === 'visible'
         ) {
-          const foundIndex = model.state.items.findIndex(item => item.id === model.state.cursorId);
+          const foundIndex = model.state.items.findIndex(
+            (item: {id: string}) => item.id === model.state.cursorId
+          );
           // If the user is in the middle of typing a string, treat
           // space key as type-ahead rather than option selection
           if (keySofar.current !== '') {
@@ -301,7 +286,7 @@ export const useSelectInput = composeHooks(
         // scroll to that selected item
         if (model.state.selectedIds.length > 0) {
           const foundIndex = model.state.items.findIndex(
-            item => item.id === model.state.selectedIds[0]
+            (item: {id: string}) => item.id === model.state.selectedIds[0]
           );
           model.events.goTo({id: model.state.items[foundIndex].id});
           model.state.UNSTABLE_virtual.scrollToIndex(foundIndex);
@@ -341,13 +326,6 @@ export const SelectItem = createSubcomponent('li')({
   return <Combobox.Menu.Item {...elemProps}>{children}</Combobox.Menu.Item>;
 });
 
-export interface SelectProps {
-  /**
-   * Children of the `Combobox`. Should contain a `Combobox.Input` and a `Combobox.Menu`
-   */
-  children: React.ReactNode;
-}
-
 export const SelectBase = createContainer()({
   displayName: 'Select2',
   modelHook: useSelectModel,
@@ -359,6 +337,5 @@ export const SelectBase = createContainer()({
     Item: SelectItem,
   },
 })<ComboboxProps>(({children}, _, model) => {
-  // console.log(model);
   return <Combobox model={model}>{children}</Combobox>;
 });
