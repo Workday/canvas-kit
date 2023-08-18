@@ -1,5 +1,4 @@
 import React from 'react';
-
 import {
   createElemPropsHook,
   createSubcomponent,
@@ -33,24 +32,16 @@ export const useSelectModel = createModelHook({
     ...config,
     navigation: createNavigationManager({
       ...wrappingNavigationManager,
-      getPrevious: (index, state) => {
-        const cursorFocusedIndex: number = model.state.items.findIndex(
-          (item: {id: string}) => item.id === model.state.cursorId
-        );
-        console.log(model.state.visibility);
+      getPrevious: index => {
         if (model.state.visibility === 'hidden') {
-          return cursorFocusedIndex;
+          return index;
         } else {
           return wrappingNavigationManager.getPrevious(index, model);
         }
       },
-      getNext: (index, state) => {
-        const cursorFocusedIndex = model.state.items.findIndex(
-          (item: {id: string}) => item.id === model.state.cursorId
-        );
-
+      getNext: index => {
         if (model.state.visibility === 'hidden') {
-          return cursorFocusedIndex;
+          return index;
         } else {
           return wrappingNavigationManager.getNext(index, model);
         }
@@ -119,7 +110,6 @@ export const useSelectInput = composeHooks(
           }
         }
       }
-
       return -1;
     };
 
@@ -172,7 +162,7 @@ export const useSelectInput = composeHooks(
         const foundIndex = model.state.items.findIndex(
           (item: {id: string}) => item.id === model.state.selectedIds[0]
         );
-
+        // Prevent the keys from being enter in the input
         event.preventDefault();
         // Select should open if Enter, ArrowUp, ArrowDown and Spacebar is typed
         if (
@@ -190,20 +180,6 @@ export const useSelectInput = composeHooks(
         // Call type ahead excluding backspace
         if (event.key.length === 1 && event.key.match(/\S/)) {
           handleKeyboardTypeAhead(event.key, model.state.items.length);
-        }
-
-        // If Escape is typed, it should not select where the cursor was, instead what was previously selected
-        if (event.key === 'Escape') {
-          if (model.state.selectedIds.length > 0) {
-            console.log('event targer', event.currentTarget);
-            console.log('value', model.state.items[foundIndex].id);
-            console.log('in escape');
-            dispatchInputEvent(
-              event.currentTarget as HTMLElement,
-              model.state.items[foundIndex].id
-            );
-            model.events.select({id: model.state.items[foundIndex].id});
-          }
         }
 
         // If the dropdown is NOT visible and ArrowUp, ArrowDown, Enter and Spacebar is typed, when the dropdown opens
@@ -231,6 +207,7 @@ export const useSelectInput = composeHooks(
           if (element && element?.getAttribute('aria-disabled') !== 'true') {
             model.events.select({id: model.state.cursorId});
             if (model.state.mode === 'single') {
+              console.log(' in enter hide');
               model.events.hide(event);
             }
           }
@@ -266,9 +243,13 @@ export const useSelectInput = composeHooks(
           }
         }
       },
-      onBlur(event: React.FocusEvent) {
-        // model.events.hide(event);
-      },
+      // onBlur(event: React.FocusEvent) {
+      //   if (model.state.nonInteractiveIds.length > 0) {
+      //     return;
+      //   } else {
+      //     model.events.hide(event);
+      //   }
+      // },
       onChange(event: React.SyntheticEvent<HTMLInputElement>) {
         // prevent typing in the input
         event.preventDefault();
@@ -300,7 +281,7 @@ export const SelectInput = createSubcomponent(TextInput)({
     return (
       <InputGroup>
         <InputGroup.Input as={Element} placeholder={placeholder} {...props}></InputGroup.Input>
-        <InputGroup.InnerEnd>
+        <InputGroup.InnerEnd position="absolute" pointerEvents="none">
           <SystemIcon icon={caretDownSmallIcon} />
         </InputGroup.InnerEnd>
       </InputGroup>

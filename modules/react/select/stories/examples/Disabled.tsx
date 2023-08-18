@@ -1,25 +1,43 @@
 import React from 'react';
 import {FormField} from '@workday/canvas-kit-react/form-field';
-import {SelectBase} from '@workday/canvas-kit-react/select';
+import {SelectBase, useSelectModel} from '@workday/canvas-kit-react/select';
+
+export const options = [
+  {id: 'E-mail'},
+  {id: 'Phone'},
+  {id: 'Fax (disabled)', disabled: true},
+  {id: 'Mail'},
+  {id: 'Mobile Phone', disabled: true},
+  {
+    id: 'The Ontologically Anthropocentric Sensory Immersive Simulation',
+  },
+];
+
+const disabledItems = options.filter(item => item.disabled === true).map(item => item.id);
 
 export const Disabled = () => {
-  const [value, setValue] = React.useState('small');
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(event.target.value);
-  };
+  const model = useSelectModel({
+    items: options,
+    nonInteractiveIds: disabledItems,
+  });
 
   return (
-    <FormField label="Pizza Size">
-      <SelectBase>
-        <SelectBase.Input onChange={handleChange} value={value} />
+    <FormField label="Contact">
+      <SelectBase model={model}>
+        <SelectBase.Input id="contact-select" disabled />
         <SelectBase.Popup>
           <SelectBase.Card maxHeight="200px">
-            <SelectBase.List>
-              <SelectBase.Item>Small</SelectBase.Item>
-              <SelectBase.Item>Medium</SelectBase.Item>
-              <SelectBase.Item>Large</SelectBase.Item>
-            </SelectBase.List>
+            {model.state.items.length > 0 && (
+              <SelectBase.List>
+                {item => {
+                  return (
+                    <SelectBase.Item aria-disabled={item.disabled ? item.disabled : undefined}>
+                      {item.id}
+                    </SelectBase.Item>
+                  );
+                }}
+              </SelectBase.List>
+            )}
           </SelectBase.Card>
         </SelectBase.Popup>
       </SelectBase>

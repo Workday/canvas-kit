@@ -52,9 +52,6 @@ export const useComboboxInput = composeHooks(
 
     return {
       onKeyDown(event: React.KeyboardEvent) {
-        if (event.key === 'Escape') {
-          dispatchInputEvent(event.currentTarget as HTMLElement, '');
-        }
         if (event.key === 'Enter' && !event.metaKey && model.state.visibility === 'visible') {
           const element = document.querySelector(`[data-id="${model.state.cursorId}"]`);
           if (element && element?.getAttribute('aria-disabled') !== 'true') {
@@ -69,7 +66,11 @@ export const useComboboxInput = composeHooks(
         }
       },
       onBlur(event: React.FocusEvent) {
-        model.events.hide(event);
+        if (model.state.nonInteractiveIds.length > 0) {
+          return;
+        } else {
+          model.events.hide(event);
+        }
       },
       onChange: model.onChange,
       onClick(event: React.MouseEvent) {
