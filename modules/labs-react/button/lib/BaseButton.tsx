@@ -138,7 +138,7 @@ const BaseButtonStyles = cs({
   justifyContent: 'center',
   boxSizing: 'border-box',
   boxShadow: 'none',
-  outline: 'none',
+  outline: '2px transparent',
   paddingInline: space.m,
   whiteSpace: 'nowrap',
   WebkitFontSmoothing: 'antialiased',
