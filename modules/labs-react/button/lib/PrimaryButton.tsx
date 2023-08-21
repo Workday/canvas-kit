@@ -100,6 +100,9 @@ export const PrimaryButtonModifiers = createModifiers({
         [buttonVars.active.background]: colors.soap400,
         [buttonVars.active.border]: colors.soap400,
         [buttonVars.active.color]: colors.blackPepper500,
+        '& span .wd-icon-fill': {
+          [buttonVars.active.icon]: colors.blackPepper500,
+        },
       },
       '&:disabled, &:active:disabled, &:focus:disabled, &:hover:disabled': {
         [buttonVars.disabled.background]: colors.frenchVanilla100,
