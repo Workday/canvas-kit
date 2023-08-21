@@ -7,6 +7,7 @@ import {
   createContainer,
   createModelHook,
   dispatchInputEvent,
+  createComponent,
 } from '@workday/canvas-kit-react/common';
 import {Combobox, useComboboxInput, useComboboxModel} from '@workday/canvas-kit-react/combobox';
 import {InputGroup, TextInput} from '@workday/canvas-kit-react/text-input';
@@ -314,4 +315,59 @@ export const SelectBase = createContainer()({
   },
 })<ComboboxProps>(({children}, _, model) => {
   return <Combobox model={model}>{children}</Combobox>;
+});
+
+export const SelectOption2 = createComponent('li')({
+  displayName: 'SelectOption',
+  Component: ({children, ...elemProps}: ExtractProps<typeof SelectBase.Item>, ref, Element) => {
+    return <SelectBase.Item {...elemProps}>{children}</SelectBase.Item>;
+  },
+});
+
+export const Select2 = createComponent(TextInput)({
+  displayName: 'Select2',
+  Component: ({children, ...elemProps}: ExtractProps<typeof TextInput>, ref, Element) => {
+    const arr = [];
+
+    const test = React.Children.forEach(children, (child, index) => {
+      console.log(typeof child);
+      // return child;
+      if (child && typeof child === 'object') {
+        const foo = {
+          id: child.props.children,
+          ...child.props,
+        };
+        arr.push(foo);
+      }
+    });
+
+    const model = useSelectModel({items: arr});
+
+    console.log('MODEL', model);
+    return (
+      <SelectBase model={model}>
+        <SelectBase.Input id="contact-select" />
+        <SelectBase.Popup>
+          <SelectBase.Card maxHeight="200px">
+            {/* {model.state.items.length > 0 && ( */}
+            <SelectBase.List>
+              {item => {
+                console.log('ITEM', item);
+                const {children, id, ...rest} = item;
+                return (
+                  <SelectBase.Item data-id={id} {...rest}>
+                    {children}
+                  </SelectBase.Item>
+                );
+              }}
+              {/* {React.Children.map(children, (child, index) => {
+                return <SelectBase.Item key={index}>{child}</SelectBase.Item>;
+              })} */}
+            </SelectBase.List>
+            {/* )} */}
+          </SelectBase.Card>
+        </SelectBase.Popup>
+      </SelectBase>
+    );
+  },
 });
