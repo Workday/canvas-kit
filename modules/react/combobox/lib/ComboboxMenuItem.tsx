@@ -4,8 +4,10 @@ import {
   composeHooks,
   createElemPropsHook,
   createSubcomponent,
+  styled,
 } from '@workday/canvas-kit-react/common';
 import {StyledMenuItem, useMenuModel} from '@workday/canvas-kit-react/menu';
+import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {
   useListItemAllowChildStrings,
   useListItemRegister,
@@ -66,6 +68,9 @@ export const useComboboxMenuItem = composeHooks(
 export const ComboboxMenuItem = createSubcomponent('li')({
   modelHook: useComboboxModel,
   elemPropsHook: useComboboxMenuItem,
+  subComponents: {
+    Icon: styled(SystemIcon)({alignSelf: 'start'}),
+  },
 })<ComboboxMenuItemProps>(({children, ...elemProps}, Element) => {
   return (
     <OverflowTooltip placement="left">

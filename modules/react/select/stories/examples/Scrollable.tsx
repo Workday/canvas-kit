@@ -41,7 +41,10 @@ export const Scrollable = () => {
   return (
     <Box>
       <FormField label="Choose a City">
-        <SelectBase items={cities}>
+        <SelectBase
+          items={cities}
+          nonInteractiveIds={cities.filter(item => item.disabled === true).map(item => item.id)}
+        >
           <SelectBase.Input />
           <SelectBase.Popup>
             <SelectBase.Card maxHeight="200px">

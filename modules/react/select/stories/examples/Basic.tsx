@@ -1,22 +1,10 @@
 import React from 'react';
 import {FormField} from '@workday/canvas-kit-preview-react/form-field';
-import {SelectBase, Select2, SelectOption2} from '@workday/canvas-kit-react/select';
+import {SelectBase, useSelectModel} from '@workday/canvas-kit-react/select';
 import {Flex} from '@workday/canvas-kit-react/layout';
-import {useSelectModel} from '../../index';
-
-export interface Item {
-  index: number;
-  id: string;
-  value: any;
-  /**
-   * Used by components that allow jumping to an item based on typing
-   */
-  text?: string;
-  disabled: boolean;
-}
 
 export const options = [
-  {id: 'E-mail'},
+  {id: 'E-mail', data: {textValue: 'foo'}},
   {id: 'Phone'},
   {id: 'Fax (disabled)', disabled: true},
   {id: 'Mail'},
@@ -26,6 +14,8 @@ export const options = [
     disabled: false,
   },
 ];
+
+export const options2 = ['Foo', 'Bar', 'Baz'];
 const disabledItems = options.filter(item => item.disabled === true).map(item => item.id);
 
 export const Basic = () => {
@@ -38,13 +28,13 @@ export const Basic = () => {
     <Flex>
       <FormField orientation="vertical" hasError>
         <FormField.Label htmlFor="contact-select">Contact</FormField.Label>
-        {/* <SelectBase model={model}>
+        <SelectBase model={model}>
           <SelectBase.Input id="contact-select" />
           <SelectBase.Popup>
             <SelectBase.Card maxHeight="200px">
               {model.state.items.length > 0 && (
                 <SelectBase.List>
-                  {(item: Item) => {
+                  {item => {
                     return (
                       <SelectBase.Item aria-disabled={item.disabled ? item.disabled : undefined}>
                         {item.id}
@@ -55,12 +45,7 @@ export const Basic = () => {
               )}
             </SelectBase.Card>
           </SelectBase.Popup>
-        </SelectBase> */}
-        <Select2>
-          <SelectOption2 aria-disabled>Foo</SelectOption2>
-          <SelectOption2>Bar</SelectOption2>
-          <SelectOption2>Baz</SelectOption2>
-        </Select2>
+        </SelectBase>
       </FormField>
     </Flex>
   );
