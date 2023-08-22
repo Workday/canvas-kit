@@ -103,7 +103,7 @@ export const StyledTabItem = styled(Box.as('button'))<StyledType & Pick<TabsItem
 
     ...hideMouseFocus,
 
-    '.wd-icon-background ~ .wd-icon-accent, .wd-icon-background ~ .wd-icon-accent2': {
+    '.wd-icon-background .wd-icon-accent, .wd-icon-background .wd-icon-accent2': {
       fill: iconColors.active,
     },
 
@@ -113,7 +113,7 @@ export const StyledTabItem = styled(Box.as('button'))<StyledType & Pick<TabsItem
       '.wd-icon-fill, .wd-icon-accent, .wd-icon-accent2': {
         fill: iconColors.hover,
       },
-      '.wd-icon-background ~ .wd-icon-accent, .wd-icon-background ~ .wd-icon-accent2': {
+      '.wd-icon-background .wd-icon-accent, .wd-icon-background .wd-icon-accent2': {
         fill: iconColors.active,
       },
     },
