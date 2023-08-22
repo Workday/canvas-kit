@@ -80,7 +80,7 @@ export const FixedColumn = () => {
       <Heading as="h3" id={headingID} size="small" marginBottom="s">
         Performance Car Specs
       </Heading>
-      <Table width={690} aria-labelledby={headingID}>
+      <Table width={690} aria-labelledby={headingID} tabIndex={0}>
         <Table.Head>
           <Table.Row>
             <Table.Header
