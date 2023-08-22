@@ -56,7 +56,7 @@ const tokens = {}; /*{
   // etc
 };*/
 
-type NestedStyles =
+export type NestedStyles =
   | string
   | number
   | undefined
