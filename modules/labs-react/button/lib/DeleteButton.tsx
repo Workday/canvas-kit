@@ -34,8 +34,8 @@ const DeleteStyles = cs({
     [buttonVars.focus.background]: theme.canvas.palette.error.main,
     [buttonVars.focus.border]: theme.canvas.palette.error.main,
     [buttonVars.focus.color]: theme.canvas.palette.error.contrast,
-    [buttonVars.focus.boxShadowInner]: theme.canvas.palette.error.contrast,
-    [buttonVars.focus.boxShadowOuter]: theme.canvas.palette.error.main,
+    [buttonVars.focus.boxShadowInner]: theme.canvas.palette.primary.contrast,
+    [buttonVars.focus.boxShadowOuter]: theme.canvas.palette.primary.main,
   },
 });
 
