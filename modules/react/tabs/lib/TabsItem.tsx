@@ -103,18 +103,11 @@ export const StyledTabItem = styled(Box.as('button'))<StyledType & Pick<TabsItem
 
     ...hideMouseFocus,
 
-    '.wd-icon-background .wd-icon-accent, .wd-icon-background .wd-icon-accent2': {
-      fill: iconColors.active,
-    },
-
     '&:hover, &:focus': {
       backgroundColor: colors.soap200,
       color: colors.blackPepper400,
       '.wd-icon-fill, .wd-icon-accent, .wd-icon-accent2': {
         fill: iconColors.hover,
-      },
-      '.wd-icon-background .wd-icon-accent, .wd-icon-background .wd-icon-accent2': {
-        fill: iconColors.active,
       },
     },
 
