@@ -3,14 +3,12 @@ import {createComponent, styled} from '@workday/canvas-kit-react/common';
 
 import {colors, gradients, space} from '@workday/canvas-kit-react/tokens';
 
-import {HStack, HStackProps, StackSpacing} from '@workday/canvas-kit-react/layout';
+import {Flex, FlexProps, SystemPropValues} from '@workday/canvas-kit-react/layout';
 import {TertiaryButton} from '@workday/canvas-kit-react/button';
 import {justifyIcon, notificationsIcon} from '@workday/canvas-system-icons-web';
 import {Heading} from '@workday/canvas-kit-react/text';
 
-interface HeaderItemProps extends Omit<HStackProps, 'spacing'> {
-  spacing?: StackSpacing;
-}
+interface HeaderItemProps extends FlexProps {}
 
 export const Basic = () => (
   <PageHeader>
@@ -24,8 +22,8 @@ export const Basic = () => (
 
 const PageHeaderItem = createComponent('div')({
   displayName: 'PageHeader.Item',
-  Component: ({spacing = 'xxs', ...props}: HeaderItemProps, ref, Element) => (
-    <HStack spacing={spacing} ref={ref} as={Element} {...props} />
+  Component: ({gap = 'xxs', ...props}: HeaderItemProps, ref, Element) => (
+    <Flex gap={gap} ref={ref} as={Element} {...props} />
   ),
 });
 

@@ -497,6 +497,16 @@ describe('Tabs', () => {
       cy.findByRole('button', {name: 'More'}).should('not.exist');
     });
 
+    it('should have 7 tab items', () => {
+      cy.findAllByRole('tab').should('have.length', 7);
+    });
+
+    it('should not have scroll', () => {
+      cy.findByRole('tablist')
+        .its('scrollX')
+        .should('not.exist');
+    });
+
     context('when the "First Tab" is focused', () => {
       beforeEach(() => {
         cy.findByRole('tab', {name: 'First Tab'})
@@ -528,6 +538,16 @@ describe('Tabs', () => {
         cy.findByRole('button', {name: 'More'}).should('exist');
       });
 
+      it('should show only 3 tab items', () => {
+        cy.findAllByRole('tab').should('have.length', 3);
+      });
+
+      it('should not have scroll', () => {
+        cy.findByRole('tablist')
+          .its('scrollX')
+          .should('not.exist');
+      });
+
       context('when the "First Tab" is focused', () => {
         beforeEach(() => {
           cy.findByRole('tab', {name: 'First Tab'})
@@ -555,6 +575,12 @@ describe('Tabs', () => {
           cy.findByRole('menu', {name: 'More'}).should('exist');
         });
 
+        it('should have the fourth Tab as the first menu item', () => {
+          cy.findAllByRole('menuitem')
+            .eq(0)
+            .should('contain', 'Fourth Tab');
+        });
+
         context('when the "Sixth Tab" is clicked', () => {
           beforeEach(() => {
             cy.findByRole('menuitem', {name: 'Sixth Tab'}).click();
@@ -568,6 +594,103 @@ describe('Tabs', () => {
             cy.findByRole('button', {name: 'More'}).should('have.focus');
           });
         });
+      });
+    });
+
+    context('when tab list container is only 360px wide', () => {
+      beforeEach(() => {
+        cy.findByRole('button', {name: '360px'}).click();
+      });
+
+      it('should pass axe checks', () => {
+        cy.checkA11y();
+      });
+
+      it('should show the "More" button', () => {
+        cy.findByRole('button', {name: 'More'}).should('exist');
+      });
+
+      it('should not have scroll', () => {
+        cy.findByRole('tablist')
+          .its('scrollX')
+          .should('not.exist');
+      });
+
+      it('should show only 2 tab items', () => {
+        cy.findAllByRole('tab').should('have.length', 2);
+      });
+
+      context('when the "More" button is clicked', () => {
+        beforeEach(() => {
+          cy.findByRole('button', {name: 'More'}).click();
+        });
+
+        it('should show the Tab overflow menu', () => {
+          cy.findByRole('menu', {name: 'More'}).should('exist');
+        });
+
+        it('should have the third Tab as the first menu item', () => {
+          cy.findAllByRole('menuitem')
+            .eq(0)
+            .should('contain', 'Third Tab');
+        });
+      });
+    });
+
+    context('when tab list container is only 150px wide', () => {
+      beforeEach(() => {
+        cy.findByRole('button', {name: '150px'}).click();
+      });
+
+      it('should pass axe checks', () => {
+        cy.checkA11y();
+      });
+
+      it('should show the "More" button', () => {
+        cy.findByRole('button', {name: 'More'}).should('exist');
+      });
+
+      it('should not have scroll', () => {
+        cy.findByRole('tablist')
+          .its('scrollX')
+          .should('not.exist');
+      });
+
+      it('should show no tab items', () => {
+        cy.findAllByRole('tab').should('have.length', 0);
+      });
+
+      context('when the "More" button is clicked', () => {
+        beforeEach(() => {
+          cy.findByRole('button', {name: 'More'}).click();
+        });
+
+        it('should show the Tab overflow menu', () => {
+          cy.findByRole('menu', {name: 'More'}).should('exist');
+        });
+
+        it('should have the third Tab as the first menu item', () => {
+          cy.findAllByRole('menuitem')
+            .eq(0)
+            .should('contain', 'First Tab');
+        });
+      });
+    });
+
+    context('mobile viewport', () => {
+      beforeEach(() => {
+        cy.viewport('iphone-6');
+        cy.findByRole('button', {name: '500px'}).realTouch();
+      });
+
+      it('should not show the "More" button', () => {
+        cy.findByRole('button', {name: 'More'}).should('not.exist');
+      });
+
+      it('should have scroll behavior', () => {
+        cy.findByRole('tablist')
+          .its('scrollX')
+          .should('not.equal', 0);
       });
     });
   });

@@ -1,7 +1,7 @@
 import {CSSProperties} from '@workday/canvas-kit-react/tokens';
 
 /**
- * A utility to hide content normal users while still making accessible to screenreaders
+ * A utility to visually hide content, while still making accessible to screenreaders
  * See https://a11y-101.com/development/skip-link
  */
 export const accessibleHide: CSSProperties = {

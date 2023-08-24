@@ -6,7 +6,7 @@ import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 import {DeleteButton, SecondaryButton, TertiaryButton} from '@workday/canvas-kit-react/button';
 import {useMount} from '@workday/canvas-kit-react/common';
-import {HStack} from '@workday/canvas-kit-react/layout';
+import {Flex} from '@workday/canvas-kit-react/layout';
 import {
   Popup,
   useCloseOnOutsideClick,
@@ -164,7 +164,7 @@ export const PopupWithNonHidablePopup = () => {
   useCloseOnEscape(popup1);
 
   return (
-    <HStack spacing="s">
+    <Flex gap="s">
       <Popup model={popup1}>
         <Popup.Target>Open Popup 1</Popup.Target>
         <Popup.Popper>
@@ -186,7 +186,7 @@ export const PopupWithNonHidablePopup = () => {
           </Popup.Card>
         </Popup.Popper>
       </Popup>
-    </HStack>
+    </Flex>
   );
 };
 
@@ -288,7 +288,7 @@ export const PopupWithBodyScroll = () => {
         <br />
         <br />
       </div>
-      <HStack spacing="s">
+      <Flex gap="s">
         <Popup.Target as={DeleteButton}>Delete Item</Popup.Target>
         <div aria-owns={popupId} style={{position: 'absolute'}} />
         <Popup.Popper>
@@ -298,15 +298,15 @@ export const PopupWithBodyScroll = () => {
             <Popup.Body>
               <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
             </Popup.Body>
-            <HStack spacing="s">
+            <Flex gap="s">
               <Popup.CloseButton as={DeleteButton}>Delete</Popup.CloseButton>
               <Popup.CloseButton>Cancel</Popup.CloseButton>
-            </HStack>
+            </Flex>
           </Popup.Card>
         </Popup.Popper>
         <SecondaryButton>Next Focusable Button</SecondaryButton>
         <SecondaryButton>Focusable Button After Popup</SecondaryButton>
-      </HStack>
+      </Flex>
     </Popup>
   );
 };

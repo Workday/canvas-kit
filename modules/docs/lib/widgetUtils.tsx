@@ -402,7 +402,7 @@ export const SymbolDoc = ({
   const symbolDocContents = (
     <StyledSymbolDoc {...elemProps}>
       <HeadingLevelContext.Provider value={headingStart}>
-        {!hideHeading && <Heading>{name}</Heading>}
+        {!hideHeading && <Heading id={`${name.toLowerCase()}-api`}>{name}</Heading>}
         {!hideDescription && doc && (
           <MdxJSToJSX>{descriptionOverride || doc.description}</MdxJSToJSX>
         )}

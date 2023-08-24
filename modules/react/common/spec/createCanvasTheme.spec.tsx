@@ -1,7 +1,7 @@
 import colors from '@workday/canvas-colors-web';
 import {defaultCanvasTheme, createCanvasTheme, PartialCanvasTheme} from '../lib/theming';
-import {shiftColor, ColorDirection} from '../lib/theming/createCanvasTheme';
-import lodash from 'lodash';
+import {shiftColor} from '../lib/theming/createCanvasTheme';
+import {deepMerge} from '../lib/utils/deepMerge';
 
 describe('createCanvasTheme', () => {
   test('calling without any input provides the default theme', () => {
@@ -83,7 +83,7 @@ describe('createCanvasTheme', () => {
   });
 
   test('calling with a fully custom theme should preserve all fields', () => {
-    const expected = lodash.cloneDeep(defaultCanvasTheme);
+    const expected = deepMerge({}, defaultCanvasTheme);
 
     const customizeTheme = (obj: any) => {
       for (const k in obj) {
@@ -114,7 +114,7 @@ describe('createCanvasTheme', () => {
         },
       },
     };
-    const original = lodash.cloneDeep(defaultCanvasTheme);
+    const original = deepMerge({}, defaultCanvasTheme);
     createCanvasTheme(input);
 
     expect(original).toEqual(defaultCanvasTheme);
@@ -135,7 +135,7 @@ describe('createCanvasTheme', () => {
   });
 
   test('shift color should darken canvas color to subsequent canvas color', () => {
-    const newColor = shiftColor(colors.soap300, ColorDirection.Darken);
+    const newColor = shiftColor(colors.soap300, 100);
 
     expect(newColor).toEqual(colors.soap400);
   });

@@ -8,7 +8,7 @@ import {
   useInitialFocus,
   useReturnFocus,
 } from '@workday/canvas-kit-react/popup';
-import {Box, HStack} from '@workday/canvas-kit-react/layout';
+import {Box, Flex} from '@workday/canvas-kit-react/layout';
 
 export const InitialFocus = () => {
   const initialFocusRef = React.useRef(null);
@@ -33,11 +33,11 @@ export const InitialFocus = () => {
               Your message has been sent!
             </Box>
           </Popup.Body>
-          <HStack spacing="s" padding="xxs" marginTop="xxs">
+          <Flex gap="s" padding="xxs" marginTop="xxs">
             <Popup.CloseButton ref={initialFocusRef} aria-describedby="popup-message">
               OK
             </Popup.CloseButton>
-          </HStack>
+          </Flex>
         </Popup.Card>
       </Popup.Popper>
     </Popup>
