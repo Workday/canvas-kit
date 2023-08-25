@@ -1,6 +1,6 @@
 import React from 'react';
 import {FormField} from '@workday/canvas-kit-preview-react/form-field';
-import {SelectBase, useSelectModel} from '@workday/canvas-kit-react/select';
+import {Select, useSelectModel} from '@workday/canvas-kit-react/select';
 import {Flex} from '@workday/canvas-kit-react/layout';
 
 export const options = [
@@ -27,24 +27,24 @@ export const Basic = () => {
     <Flex>
       <FormField orientation="vertical" hasError>
         <FormField.Label htmlFor="contact-select">Contact</FormField.Label>
-        <SelectBase model={model}>
-          <SelectBase.Input id="contact-select" />
-          <SelectBase.Popup>
-            <SelectBase.Card maxHeight="200px">
+        <Select model={model}>
+          <Select.Input id="contact-select" />
+          <Select.Popup>
+            <Select.Card maxHeight="200px">
               {model.state.items.length > 0 && (
-                <SelectBase.List>
+                <Select.List>
                   {item => {
                     return (
-                      <SelectBase.Item aria-disabled={item.disabled ? item.disabled : undefined}>
+                      <Select.Item aria-disabled={item.disabled ? item.disabled : undefined}>
                         {item.id}
-                      </SelectBase.Item>
+                      </Select.Item>
                     );
                   }}
-                </SelectBase.List>
+                </Select.List>
               )}
-            </SelectBase.Card>
-          </SelectBase.Popup>
-        </SelectBase>
+            </Select.Card>
+          </Select.Popup>
+        </Select>
       </FormField>
     </Flex>
   );

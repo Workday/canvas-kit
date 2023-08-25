@@ -9,8 +9,8 @@ import {DisabledOption} from './examples/DisabledOption';
 import {Error} from './examples/Error';
 import {Grow} from './examples/Grow';
 import {LabelPosition} from './examples/LabelPosition';
-import {RefForwarding} from './examples/RefForwarding';
-import {Required} from './examples/Required';
+// import {RefForwarding} from './examples/RefForwarding';
+// import {Required} from './examples/Required';
 import {Scrollable} from './examples/Scrollable';
 
 <Meta title="Components/Inputs/Select" component={Select} />
@@ -62,8 +62,6 @@ remain unselectable by the user.
 Select supports [ref forwarding](https://reactjs.org/docs/forwarding-refs.html). It will forward
 `ref` to its underlying `<select>` element.
 
-<ExampleCodeBlock code={RefForwarding} />
-
 ### Grow
 
 Set the `grow` prop of the wrapping Form Field to `true` to configure the Select to expand to the
@@ -87,8 +85,6 @@ relative to the Select. `labelPosition` accepts the following values:
 
 Set the `required` prop of the wrapping Form Field to `true` to indicate that the field is required.
 Labels for required fields are suffixed by a red asterisk.
-
-<ExampleCodeBlock code={Required} />
 
 ### Error States
 

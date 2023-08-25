@@ -1,6 +1,6 @@
 import React from 'react';
 import {FormField} from '@workday/canvas-kit-react/form-field';
-import {SelectBase} from '@workday/canvas-kit-react/select';
+import {Select} from '@workday/canvas-kit-react/select';
 import {Box} from '@workday/canvas-kit-react/layout';
 import {useComboboxModel} from '../../../combobox';
 import {Combobox} from '@workday/canvas-kit-react/combobox';
@@ -41,27 +41,27 @@ export const Scrollable = () => {
   return (
     <Box>
       <FormField label="Choose a City">
-        <SelectBase
+        <Select
           items={cities}
           nonInteractiveIds={cities.filter(item => item.disabled === true).map(item => item.id)}
         >
-          <SelectBase.Input />
-          <SelectBase.Popup>
-            <SelectBase.Card maxHeight="200px">
-              <SelectBase.List>
+          <Select.Input />
+          <Select.Popup>
+            <Select.Card maxHeight="200px">
+              <Select.List>
                 {item => (
-                  <SelectBase.Item
+                  <Select.Item
                     data-id={item.id}
                     aria-disabled={item.disabled ? item.disabled : undefined}
                     data-text={item.id}
                   >
                     {item.id}
-                  </SelectBase.Item>
+                  </Select.Item>
                 )}
-              </SelectBase.List>
-            </SelectBase.Card>
-          </SelectBase.Popup>
-        </SelectBase>
+              </Select.List>
+            </Select.Card>
+          </Select.Popup>
+        </Select>
         {/* Selected: {model.state.selectedIds[0]} */}
       </FormField>
     </Box>

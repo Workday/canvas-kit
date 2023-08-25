@@ -1,6 +1,6 @@
 import React from 'react';
 import {FormField} from '@workday/canvas-kit-react/form-field';
-import {SelectBase, useSelectModel} from '@workday/canvas-kit-react/select';
+import {Select, useSelectModel} from '@workday/canvas-kit-react/select';
 
 export const options = [
   {id: 'E-mail'},
@@ -23,24 +23,24 @@ export const Disabled = () => {
 
   return (
     <FormField label="Contact">
-      <SelectBase model={model}>
-        <SelectBase.Input id="contact-select" disabled />
-        <SelectBase.Popup>
-          <SelectBase.Card maxHeight="200px">
+      <Select model={model}>
+        <Select.Input id="contact-select" disabled />
+        <Select.Popup>
+          <Select.Card maxHeight="200px">
             {model.state.items.length > 0 && (
-              <SelectBase.List>
+              <Select.List>
                 {item => {
                   return (
-                    <SelectBase.Item aria-disabled={item.disabled ? item.disabled : undefined}>
+                    <Select.Item aria-disabled={item.disabled ? item.disabled : undefined}>
                       {item.id}
-                    </SelectBase.Item>
+                    </Select.Item>
                   );
                 }}
-              </SelectBase.List>
+              </Select.List>
             )}
-          </SelectBase.Card>
-        </SelectBase.Popup>
-      </SelectBase>
+          </Select.Card>
+        </Select.Popup>
+      </Select>
       {/* Selected: {model.state.selectedIds[0]} */}
     </FormField>
   );

@@ -201,17 +201,7 @@ export const useSelectInput = composeHooks(
           }
         }
       },
-      // onBlur(event: React.FocusEvent) {
-      //   if (model.state.nonInteractiveIds.length > 0) {
-      //     return;
-      //   } else {
-      //     model.events.hide(event);
-      //   }
-      // },
-      onChange(event: React.SyntheticEvent<HTMLInputElement>) {
-        // prevent typing in the input
-        event.preventDefault();
-      },
+
       onClick(event: React.MouseEvent) {
         if (model.state.visibility === 'hidden') {
           model.events.setWidth(event.currentTarget.clientWidth);
@@ -226,7 +216,6 @@ export const useSelectInput = composeHooks(
           model.state.UNSTABLE_virtual.scrollToIndex(foundIndex);
         }
       },
-      style: {caretColor: 'transparent', cursor: 'default'},
     } as const;
   })
 );

@@ -14,6 +14,9 @@ import {caretDownSmallIcon} from '@workday/canvas-system-icons-web';
 import {useSelectModel, useSelectOption} from './hooks';
 import {useSelectInput} from './hooks/useSelectInput';
 
+/*
+ * The Select input is a select only combobox that handles the single select pattern that is [defined](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select) by HTML `<select>`.
+ */
 export const SelectInput = createSubcomponent(TextInput)({
   modelHook: useSelectModel,
   elemPropsHook: useSelectInput,
@@ -25,6 +28,7 @@ export const SelectInput = createSubcomponent(TextInput)({
           width={width}
           as={Element}
           placeholder={placeholder}
+          style={{caretColor: 'transparent', cursor: 'default'}}
           {...props}
         ></InputGroup.Input>
         <InputGroup.InnerEnd position="absolute" pointerEvents="none">
@@ -50,8 +54,8 @@ export const SelectItem = createSubcomponent('li')({
 
 export interface Select2Props extends Themeable, ExtractProps<typeof Combobox> {}
 
-export const SelectBase = createContainer()({
-  displayName: 'SelectBase',
+export const Select = createContainer()({
+  displayName: 'Select',
   modelHook: useSelectModel,
   subComponents: {
     Input: SelectInput,
