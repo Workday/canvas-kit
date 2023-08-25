@@ -25,6 +25,7 @@ const TertiaryStyles = cs({
   [buttonVars.default.borderRadius]: borderRadius.m,
   [buttonVars.default.color]: theme.canvas.palette.primary.main,
   paddingInline: space.xxs,
+  minWidth: 'auto',
   textDecoration: 'underline',
   '&:hover, &.hover': {
     [buttonVars.hover.background]: colors.soap200,

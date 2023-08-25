@@ -1,34 +1,48 @@
 import * as React from 'react';
 import {Theme, ThemeProvider} from '@emotion/react';
 import {InputProvider} from './InputProvider';
-import {defaultCanvasTheme, PartialEmotionCanvasTheme} from './theming';
+import {defaultCanvasTheme, newTheme, PartialEmotionCanvasTheme, useTheme} from './theming';
 
 export interface CanvasProviderProps {
   theme: PartialEmotionCanvasTheme;
 }
 
-export class CanvasProvider extends React.Component<
-  CanvasProviderProps & React.HTMLAttributes<HTMLElement>
-> {
-  static defaultProps = {
-    theme: {
-      canvas: defaultCanvasTheme,
+const useCanvasThemeToCssVars = (
+  theme: PartialEmotionCanvasTheme,
+  elemProps: React.HTMLAttributes<HTMLElement>
+) => {
+  const filledTheme = useTheme(theme);
+  const {palette} = filledTheme.canvas;
+  const style = (['common', 'primary', 'error', 'alert', 'success', 'neutral'] as const).reduce(
+    (result, color) => {
+      if (color === 'common') {
+        result[newTheme.colors.common.focusOutline] = palette.common.focusOutline;
+      }
+      (['lightest', 'light', 'main', 'dark', 'darkest', 'contrast'] as const).forEach(key => {
+        result[newTheme.colors[color][key]] = palette[color][key];
+      });
+      return result;
     },
-  };
+    elemProps.style || {}
+  );
+  return {...elemProps, style};
+};
 
-  render() {
-    const {children, theme, ...elemProps} = this.props;
-
-    return (
-      <ThemeProvider theme={theme as Theme}>
-        <InputProvider />
-        <div
-          dir={(theme.canvas && theme.canvas.direction) || defaultCanvasTheme.direction}
-          {...(elemProps as React.HTMLAttributes<HTMLDivElement>)}
-        >
-          {children}
-        </div>
-      </ThemeProvider>
-    );
-  }
-}
+export const CanvasProvider = ({
+  children,
+  theme,
+  ...props
+}: CanvasProviderProps & React.HTMLAttributes<HTMLElement>) => {
+  const elemProps = useCanvasThemeToCssVars(theme, props);
+  return (
+    <ThemeProvider theme={theme as Theme}>
+      <InputProvider />
+      <div
+        dir={(theme.canvas && theme.canvas.direction) || defaultCanvasTheme.direction}
+        {...(elemProps as React.HTMLAttributes<HTMLDivElement>)}
+      >
+        {children}
+      </div>
+    </ThemeProvider>
+  );
+};

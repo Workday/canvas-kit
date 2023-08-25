@@ -83,217 +83,7 @@ export const newTheme = {
     medium: '--canvas-font-weights-medium',
     bold: '--canvas-font-weights-bold',
   },
-  theme: {
-    primary: {
-      lightest: '--canvas-color-base-blueberry-100',
-      light: '--canvas-color-base-blueberry-200',
-      main: '--canvas-color-base-blueberry-400',
-      dark: '--canvas-color-base-blueberry-500',
-      darkest: '--canvas-color-base-blueberry-600',
-      contrast: '--canvas-color-base-french-vanilla-100',
-    },
-    secondary: {
-      lightest: '--canvas-color-base-cantaloupe-100',
-      light: '--canvas-color-base-cantaloupe-200',
-      main: '--canvas-color-base-cantaloupe-400',
-      dark: '--canvas-color-base-cantaloupe-500',
-      darkest: '--canvas-color-base-cantaloupe-600',
-      contrast: '--canvas-color-base-french-vanilla-100',
-    },
-    tertiary: {
-      lightest: '--canvas-color-base-black-pepper-100',
-      light: '--canvas-color-base-black-pepper-200',
-      main: '--canvas-color-base-black-pepper-400',
-      dark: '--canvas-color-base-black-pepper-500',
-      darkest: '--canvas-color-base-black-pepper-600',
-      contrast: '--canvas-color-base-french-vanilla-100',
-    },
-    transparent: '--canvas-color-transparent',
-    borderRadius: {
-      zero: '--canvas-border-radius-zero',
-      s: '--canvas-border-radius-small',
-      m: '--canvas-border-radius-medium',
-      l: '--canvas-border-radius-large',
-      circle: '--canvas-border-radius-circle',
-    },
-  },
   colors: {
-    body: '--canvas-colors-body',
-    heading: '--canvas-colors-heading',
-    hint: '--canvas-colors-hint',
-    inverse: '--canvas-colors-inverse',
-    label: '--canvas-colors-label',
-    link: '--canvas-colors-link',
-    selectHighlight: '--canvas-colors-selectHighlight',
-    selectHighlightInverse: '--canvas-colors-selectHighlightInverse',
-    primary: {
-      button: {
-        background: {
-          base: '--canvas-colors-primary-button-background-base',
-          focus: '--canvas-colors-primary-button-background-focus',
-          active: '--canvas-colors-primary-button-background-active',
-          hover: '--canvas-colors-primary-button-background-hover',
-        },
-        border: {
-          base: '--canvas-colors-primary-button-border-base',
-          focus: '--canvas-colors-primary-button-border-focus',
-          active: '--canvas-colors-primary-button-border-active',
-          hover: '--canvas-colors-primary-button-border-hover',
-        },
-        color: {
-          base: '--canvas-colors-primary-button-color-base',
-          focus: '--canvas-colors-primary-button-color-focus',
-          active: '--canvas-colors-primary-button-color-active',
-          hover: '--canvas-colors-primary-button-color-hover',
-        },
-      },
-      icon: {
-        base: '--canvas-colors-primary-icon-fill-base',
-        focus: '--canvas-colors-primary-icon-fill-focus',
-        active: '--canvas-colors-primary-icon-fill-active',
-        hover: '--canvas-colors-primary-icon-fill-hover',
-      },
-    },
-    primaryInverse: {
-      button: {
-        background: {
-          base: '--canvas-colors-primaryInverse-button-background-base',
-          focus: '--canvas-colors-primaryInverse-button-background-focus',
-          active: '--canvas-colors-primaryInverse-button-background-active',
-          hover: '--canvas-colors-primaryInverse-button-background-hover',
-        },
-        border: {
-          base: '--canvas-colors-primaryInverse-button-border-base',
-          focus: '--canvas-colors-primaryInverse-button-border-focus',
-          active: '--canvas-colors-primaryInverse-button-border-active',
-          hover: '--canvas-colors-primaryInverse-button-border-hover',
-        },
-        color: {
-          base: '--canvas-colors-primaryInverse-button-color-base',
-          focus: '--canvas-colors-primaryInverse-button-color-focus',
-          active: '--canvas-colors-primaryInverse-button-color-active',
-          hover: '--canvas-colors-primaryInverse-button-color-hover',
-        },
-      },
-      icon: {
-        base: '--canvas-colors-primaryInverse-icon-fill-base',
-        focus: '--canvas-colors-primaryInverse-icon-fill-focus',
-        active: '--canvas-colors-primaryInverse-icon-fill-active',
-        hover: '--canvas-colors-primaryInverse-icon-fill-hover',
-      },
-    },
-    secondary: {
-      button: {
-        background: {
-          base: '--canvas-colors-secondary-button-background-base',
-          focus: '--canvas-colors-secondary-button-background-focus',
-          active: '--canvas-colors-secondary-button-background-active',
-          hover: '--canvas-colors-secondary-button-background-hover',
-        },
-        border: {
-          base: '--canvas-colors-secondary-button-border-base',
-          focus: '--canvas-colors-secondary-button-border-focus',
-          active: '--canvas-colors-secondary-button-border-active',
-          hover: '--canvas-colors-secondary-button-border-hover',
-        },
-        color: {
-          base: '--canvas-colors-secondary-button-color-base',
-          focus: '--canvas-colors-secondary-button-color-focus',
-          active: '--canvas-colors-secondary-button-color-active',
-          hover: '--canvas-colors-secondary-button-color-hover',
-        },
-      },
-      icon: {
-        base: '--canvas-colors-secondary-icon-fill-base',
-        focus: '--canvas-colors-secondary-icon-fill-focus',
-        active: '--canvas-colors-secondary-icon-fill-active',
-        hover: '--canvas-colors-secondary-icon-fill-hover',
-      },
-    },
-    secondaryInverse: {
-      button: {
-        background: {
-          base: '--canvas-colors-secondaryInverse-button-background-base',
-          focus: '--canvas-colors-secondaryInverse-button-background-focus',
-          active: '--canvas-colors-secondaryInverse-button-background-active',
-          hover: '--canvas-colors-secondaryInverse-button-background-hover',
-        },
-        border: {
-          base: '--canvas-colors-secondaryInverse-button-border-base',
-          focus: '--canvas-colors-secondaryInverse-button-border-focus',
-          active: '--canvas-colors-secondaryInverse-button-border-active',
-          hover: '--canvas-colors-secondaryInverse-button-border-hover',
-        },
-        color: {
-          base: '--canvas-colors-secondaryInverse-button-color-base',
-          focus: '--canvas-colors-secondaryInverse-button-color-focus',
-          active: '--canvas-colors-secondaryInverse-button-color-active',
-          hover: '--canvas-colors-secondaryInverse-button-color-hover',
-        },
-      },
-      icon: {
-        base: '--canvas-colors-secondaryInverse-icon-fill-base',
-        focus: '--canvas-colors-secondaryInverse-icon-fill-focus',
-        active: '--canvas-colors-secondaryInverse-icon-fill-active',
-        hover: '--canvas-colors-secondaryInverse-icon-fill-hover',
-      },
-    },
-    tertiary: {
-      button: {
-        background: {
-          base: '--canvas-colors-tertiary-button-background-base',
-          focus: '--canvas-colors-tertiary-button-background-focus',
-          active: '--canvas-colors-tertiary-button-background-active',
-          hover: '--canvas-colors-tertiary-button-background-hover',
-        },
-        border: {
-          base: '--canvas-colors-tertiary-button-border-base',
-          focus: '--canvas-colors-tertiary-button-border-focus',
-          active: '--canvas-colors-tertiary-button-border-active',
-          hover: '--canvas-colors-tertiary-button-border-hover',
-        },
-        color: {
-          base: '--canvas-colors-tertiary-button-color-base',
-          focus: '--canvas-colors-tertiary-button-color-focus',
-          active: '--canvas-colors-tertiary-button-color-active',
-          hover: '--canvas-colors-tertiary-button-color-hover',
-        },
-      },
-      icon: {
-        base: '--canvas-colors-tertiary-icon-fill-base',
-        focus: '--canvas-colors-tertiary-icon-fill-focus',
-        active: '--canvas-colors-tertiary-icon-fill-active',
-        hover: '--canvas-colors-tertiary-icon-fill-hover',
-      },
-    },
-    tertiaryInverse: {
-      button: {
-        background: {
-          base: '--canvas-colors-tertiaryInverse-button-background-base',
-          focus: '--canvas-colors-tertiaryInverse-button-background-focus',
-          active: '--canvas-colors-tertiaryInverse-button-background-active',
-          hover: '--canvas-colors-tertiaryInverse-button-background-hover',
-        },
-        border: {
-          base: '--canvas-colors-tertiaryInverse-button-border-base',
-          focus: '--canvas-colors-tertiaryInverse-button-border-focus',
-          active: '--canvas-colors-tertiaryInverse-button-border-active',
-          hover: '--canvas-colors-tertiaryInverse-button-border-hover',
-        },
-        color: {
-          base: '--canvas-colors-tertiaryInverse-button-color-base',
-          focus: '--canvas-colors-tertiaryInverse-button-color-focus',
-          active: '--canvas-colors-tertiaryInverse-button-color-active',
-          hover: '--canvas-colors-tertiaryInverse-button-color-hover',
-        },
-      },
-      icon: {
-        base: '--canvas-colors-tertiaryInverse-icon-fill-base',
-        focus: '--canvas-colors-tertiaryInverse-icon-fill-focus',
-        active: '--canvas-colors-tertiaryInverse-icon-fill-active',
-        hover: '--canvas-colors-tertiaryInverse-icon-fill-hover',
-      },
-    },
     alert: {
       lightest: '--canvas-colors-alert-lightest',
       light: '--canvas-colors-alert-light',
@@ -326,26 +116,24 @@ export const newTheme = {
       darkest: '--canvas-colors-neutral-darkest',
       contrast: '--canvas-colors-neutral-contrast',
     },
+    primary: {
+      lightest: '--canvas-colors-primary-lightest',
+      light: '--canvas-colors-primary-light',
+      main: '--canvas-colors-primary-main',
+      dark: '--canvas-colors-primary-dark',
+      darkest: '--canvas-colors-primary-darkest',
+      contrast: '--canvas-colors-primary-contrast',
+    },
+    common: {
+      focusOutline: '--canvas-colors-primary-main',
+    },
   },
-} as const;
-
-export const tokenTheme = {
-  primaryColor: newTheme.theme.primary.main,
-  primaryColorContrast: newTheme.theme.primary.contrast,
-  secondaryColor: newTheme.theme.secondary.main,
-  secondaryColorContrast: newTheme.theme.secondary.contrast,
-  tertiaryColor: newTheme.theme.tertiary.main,
-  tertiaryColorContrast: newTheme.theme.tertiary.contrast,
-  darkContrast: newTheme.theme.tertiary.dark,
-  transparent: newTheme.theme.transparent,
-
-  //Border Radius
   borderRadius: {
-    zero: newTheme.theme.borderRadius.zero,
-    small: newTheme.theme.borderRadius.s,
-    medium: newTheme.theme.borderRadius.m,
-    large: newTheme.theme.borderRadius.l,
-    circle: newTheme.theme.borderRadius.circle,
+    zero: '--canvas-border-radius-zero',
+    small: '--canvas-border-radius-small',
+    medium: '--canvas-border-radius-medium',
+    large: '--canvas-border-radius-large',
+    circle: '--canvas-border-radius-circle',
   },
 } as const;
 
@@ -549,168 +337,12 @@ cs({
     '--canvas-border-radius-large': '0.5rem',
     '--canvas-border-radius-circle': '999px',
 
-    // Primary Button
-    '--canvas-colors-primary-button-background-base': 'var(--canvas-color-base-blueberry-400)',
-    '--canvas-colors-primary-button-border-base': 'var(--canvas-color-base-blueberry-400)',
-    '--canvas-colors-primary-button-color-base': 'var(--canvas-color-base-french-vanilla-100)',
-    '--canvas-colors-primary-button-background-focus': 'var(--canvas-color-base-blueberry-500)',
-    '--canvas-colors-primary-button-border-focus': 'var(--canvas-color-base-blueberry-500)',
-    '--canvas-colors-primary-button-color-focus': 'var(--canvas-color-base-french-vanilla-100)',
-    '--canvas-colors-primary-button-background-active': 'var(--canvas-color-base-blueberry-600)',
-    '--canvas-colors-primary-button-border-active': 'transparent',
-    '--canvas-colors-primary-button-color-active': 'var(--canvas-color-base-french-vanilla-100)',
-    '--canvas-colors-primary-button-background-hover': 'var(--canvas-color-base-blueberry-500)',
-    '--canvas-colors-primary-button-border-hover': 'transparent',
-    '--canvas-colors-primary-button-color-hover': 'var(--canvas-color-base-french-vanilla-100)',
-    '--canvas-colors-primary-icon-fill-base': 'var(--canvas-color-base-french-vanilla-100)',
-    '--canvas-colors-primary-icon-fill-hover': 'var(--canvas-color-base-french-vanilla-100)',
-    '--canvas-colors-primary-icon-fill-focus': 'var(--canvas-color-base-french-vanilla-100)',
-    '--canvas-colors-primary-icon-fill-active': 'var(--canvas-color-base-french-vanilla-100)',
-
-    // Primary Inverse Button
-    '--canvas-colors-primaryInverse-button-background-base':
-      'var(--canvas-color-base-french-vanilla-100)',
-    '--canvas-colors-primaryInverse-button-border-base':
-      'var(--canvas-color-base-french-vanilla-100)',
-    '--canvas-colors-primaryInverse-button-color-base':
-      'var(--canvas-color-base-french-vanilla-100)',
-    '--canvas-colors-primaryInverse-button-background-focus':
-      'var(--canvas-color-base-french-vanilla-100)',
-    '--canvas-colors-primaryInverse-button-border-focus':
-      'var(--canvas-color-base-french-vanilla-100)',
-    '--canvas-colors-primaryInverse-button-color-focus':
-      'var(--canvas-color-base-black-pepper-400)',
-    '--canvas-colors-primaryInverse-button-background-active': 'var(--canvas-color-base-soap-400)',
-    '--canvas-colors-primaryInverse-button-border-active':
-      'var(--canvas-color-base-black-pepper-400)',
-    '--canvas-colors-primaryInverse-button-color-active':
-      'var(--canvas-color-base-black-pepper-500)',
-    '--canvas-colors-primaryInverse-button-background-hover': 'var(--canvas-color-base-soap-300)',
-    '--canvas-colors-primaryInverse-button-border-hover': 'var(--canvas-color-base-soap-300)',
-    '--canvas-colors-primaryInverse-button-color-hover':
-      'var(--canvas-color-base-black-pepper-500)',
-    '--canvas-colors-primaryInverse-icon-fill-base': 'var(--canvas-color-base-black-pepper-400)',
-    '--canvas-colors-primaryInverse-icon-fill-hover': 'var(--canvas-color-base-black-pepper-500)',
-    '--canvas-colors-primaryInverse-icon-fill-focus': 'var(--canvas-color-base-black-pepper-500)',
-    '--canvas-colors-primaryInverse-icon-fill-active': 'var(--canvas-color-base-black-pepper-500)',
-
-    // Secondary Button
-    '--canvas-colors-secondary-button-background-base': 'transparent',
-    '--canvas-colors-secondary-button-border-base': 'var(--canvas-color-base-black-pepper-400)',
-    '--canvas-colors-secondary-button-color-base': 'var(--canvas-color-base-black-pepper-400)',
-    '--canvas-colors-secondary-button-background-focus': 'transparent',
-    '--canvas-colors-secondary-button-border-focus': 'var(--canvas-color-base-black-pepper-400)',
-    '--canvas-colors-secondary-button-color-focus': 'var(--canvas-color-base-black-pepper-400)',
-    '--canvas-colors-secondary-button-background-active':
-      'var(--canvas-color-base-black-pepper-500)',
-    '--canvas-colors-secondary-button-border-active': 'var(--canvas-color-base-black-pepper-500)',
-    '--canvas-colors-secondary-button-color-active': 'var(--canvas-color-base-french-vanilla-100)',
-    '--canvas-colors-secondary-button-background-hover':
-      'var(--canvas-color-base-black-pepper-400)',
-    '--canvas-colors-secondary-button-border-hover': 'var(--canvas-color-base-soap-300)',
-    '--canvas-colors-secondary-button-color-hover': 'var(--canvas-color-base-french-vanilla-100)',
-    '--canvas-colors-secondary-icon-fill-base': 'var(--canvas-color-base-black-pepper-400)',
-    '--canvas-colors-secondary-icon-fill-hover': 'var(--canvas-color-base-french-vanilla-100)',
-    '--canvas-colors-secondary-icon-fill-focus': 'var(--canvas-color-base-black-pepper-400)',
-    '--canvas-colors-secondary-icon-fill-active': 'var(--canvas-color-base-french-vanilla-100)',
-
-    // Secondary Inverse Button
-    '--canvas-colors-secondaryInverse-button-background-base': 'transparent',
-    '--canvas-colors-secondaryInverse-button-border-base':
-      'var(--canvas-color-base-french-vanilla-100)',
-    '--canvas-colors-secondaryInverse-button-color-base':
-      'var(--canvas-color-base-french-vanilla-100)',
-    '--canvas-colors-secondaryInverse-button-background-focus':
-      'var(--canvas-color-base-french-vanilla-100)',
-    '--canvas-colors-secondaryInverse-button-border-focus':
-      'var(--canvas-color-base-french-vanilla-100)',
-    '--canvas-colors-secondaryInverse-button-color-focus':
-      'var(--canvas-color-base-black-pepper-400)',
-    '--canvas-colors-secondaryInverse-button-background-active':
-      'var(--canvas-color-base-soap-400)',
-    '--canvas-colors-secondaryInverse-button-border-active': 'var(--canvas-color-base-soap-400)',
-    '--canvas-colors-secondaryInverse-button-color-active':
-      'var(--canvas-color-base-black-pepper-500)',
-    '--canvas-colors-secondaryInverse-button-background-hover': 'var(--canvas-color-base-soap-300)',
-    '--canvas-colors-secondaryInverse-button-border-hover': 'var(--canvas-color-base-soap-300)',
-    '--canvas-colors-secondaryInverse-button-color-hover':
-      'var(--canvas-color-base-black-pepper-500)',
-    '--canvas-colors-secondaryInverse-icon-fill-base':
-      'var(--canvas-color-base-french-vanilla-100)',
-    '--canvas-colors-secondaryInverse-icon-fill-hover': 'var(--canvas-color-base-black-pepper-500)',
-    '--canvas-colors-secondaryInverse-icon-fill-focus': 'var(--canvas-color-base-black-pepper-400)',
-    '--canvas-colors-secondaryInverse-icon-fill-active':
-      'var(--canvas-color-base-black-pepper-500)',
-
-    // Tertiary Button
-    '--canvas-colors-tertiary-button-background-base':
-      'var(--canvas-color-base-french-vanilla-100)',
-    '--canvas-colors-tertiary-button-border-base': 'var(--canvas-color-base-french-vanilla-100)',
-    '--canvas-colors-tertiary-button-color-base': 'var(--canvas-color-base-blueberry-400)',
-    '--canvas-colors-tertiary-button-background-focus':
-      'var(--canvas-color-base-french-vanilla-100)',
-    '--canvas-colors-tertiary-button-border-focus': 'var(--canvas-color-base-french-vanilla-100)',
-    '--canvas-colors-tertiary-button-color-focus': 'var(--canvas-color-base-blueberry-400)',
-    '--canvas-colors-tertiary-button-background-active': 'var(--canvas-color-base-soap-400)',
-    '--canvas-colors-tertiary-button-border-active': 'var(--canvas-color-base-french-vanilla-100)',
-    '--canvas-colors-tertiary-button-color-active': 'var(--canvas-color-base-blueberry-500)',
-    '--canvas-colors-tertiary-button-background-hover':
-      'var(--canvas-color-base-french-vanilla-100)',
-    '--canvas-colors-tertiary-button-border-hover': 'var(--canvas-color-base-soap-300)',
-    '--canvas-colors-tertiary-button-color-hover': 'var(--canvas-color-base-blueberry-500)',
-    '--canvas-colors-tertiary-icon-fill-base': 'var(--canvas-color-base-blueberry-400)',
-    '--canvas-colors-tertiary-icon-fill-hover': 'var(--canvas-color-base-blueberry-500)',
-    '--canvas-colors-tertiary-icon-fill-focus': 'var(--canvas-color-base-blueberry-400)',
-    '--canvas-colors-tertiary-icon-fill-active': 'var(--canvas-color-base-blueberry-500)',
-
-    // Tertiary Inverse Button
-    '--canvas-colors-tertiaryInverse-button-background-base':
-      'var(--canvas-color-base-french-vanilla-100)',
-    '--canvas-colors-tertiaryInverse-button-border-base': 'var(--canvas-color-base-blueberry-400)',
-    '--canvas-colors-tertiaryInverse-button-color-base': 'var(--canvas-color-base-blueberry-400)',
-    '--canvas-colors-tertiaryInverse-button-background-focus':
-      'var(--canvas-color-base-french-vanilla-100)',
-    '--canvas-colors-tertiaryInverse-button-border-focus':
-      'var(--canvas-color-base-french-vanilla-100)',
-    '--canvas-colors-tertiaryInverse-button-color-focus': 'var(--canvas-color-base-blueberry-400)',
-    '--canvas-colors-tertiaryInverse-button-background-active': 'var(--canvas-color-base-soap-400)',
-    '--canvas-colors-tertiaryInverse-button-border-active':
-      'var(--canvas-color-base-french-vanilla-100)',
-    '--canvas-colors-tertiaryInverse-button-color-active': 'var(--canvas-color-base-blueberry-500)',
-    '--canvas-colors-tertiaryInverse-button-background-hover': 'var(--canvas-color-base-soap-300)',
-    '--canvas-colors-tertiaryInverse-button-border-hover': 'var(--canvas-color-base-soap-300)',
-    '--canvas-colors-tertiaryInverse-button-color-hover': 'var(--canvas-color-base-blueberry-500)',
-    '--canvas-colors-tertiaryInverse-icon-fill-base': 'var(--canvas-color-base-french-vanilla-100)',
-    '--canvas-colors-tertiaryInverse-icon-fill-hover': 'var(--canvas-color-base-black-pepper-500)',
-    '--canvas-colors-tertiaryInverse-icon-fill-focus': 'var(--canvas-color-base-black-pepper-500)',
-    '--canvas-colors-tertiaryInverse-icon-fill-active': 'var(--canvas-color-base-black-pepper-500)',
-
     '--canvas-colors-primary-lightest': 'var(--canvas-color-base-blueberry-100)',
     '--canvas-colors-primary-light': 'var(--canvas-color-base-blueberry-200)',
     '--canvas-colors-primary-main': 'var(--canvas-color-base-blueberry-400)',
     '--canvas-colors-primary-dark': 'var(--canvas-color-base-blueberry-500)',
     '--canvas-colors-primary-darkest': 'var(--canvas-color-base-blueberry-600)',
     '--canvas-colors-primary-contrast': 'var(--canvas-color-base-french-vanilla-100)',
-    '--canvas-colors-primary-inverse-lightest': 'var(--canvas-color-base-black-pepper-100)',
-    '--canvas-colors-primary-inverse-light': 'var(--canvas-color-base-black-pepper-200)',
-    '--canvas-colors-primary-inverse-main': 'var(--canvas-color-base-black-pepper-400)',
-    '--canvas-colors-primary-inverse-dark': 'var(--canvas-color-base-black-pepper-500)',
-    '--canvas-colors-primary-inverse-darkest': 'var(--canvas-color-base-black-pepper-600)',
-    '--canvas-colors-primary-inverse-contrast': 'var(--canvas-color-base-french-vanilla-100)',
-    '--canvas-colors-primary-inverse-hover': 'var(--canvas-color-base-soap-300)',
-    '--canvas-colors-primary-inverse-focus': 'var(--canvas-color-base-soap-400)',
-    '--canvas-colors-secondary-lightest': 'var(--canvas-color-base-black-pepper-100)',
-    '--canvas-colors-secondary-light': 'var(--canvas-color-base-black-pepper-200)',
-    '--canvas-colors-secondary-main': 'var(--canvas-color-base-black-pepper-400)',
-    '--canvas-colors-secondary-dark': 'var(--canvas-color-base-black-pepper-500)',
-    '--canvas-colors-secondary-darkest': 'var(--canvas-color-base-black-pepper-600)',
-    '--canvas-colors-secondary-contrast': 'var(--canvas-color-base-french-vanilla-100)',
-    '--canvas-colors-secondaryInverse-lightest': 'var(--canvas-color-base-black-pepper-100)',
-    '--canvas-colors-secondaryInverse-light': 'var(--canvas-color-base-black-pepper-200)',
-    '--canvas-colors-secondaryInverse-main': 'var(--canvas-color-base-black-pepper-400)',
-    '--canvas-colors-secondaryInverse-dark': 'var(--canvas-color-base-black-pepper-500)',
-    '--canvas-colors-secondaryInverse-darkest': 'var(--canvas-color-base-black-pepper-600)',
-    '--canvas-colors-secondaryInverse-contrast': 'var(--canvas-color-base-french-vanilla-100)',
     '--canvas-colors-alert-lightest': 'var(--canvas-color-base-cantaloupe-100)',
     '--canvas-colors-alert-light': 'var(--canvas-color-base-cantaloupe-300)',
     '--canvas-colors-alert-main': 'var(--canvas-color-base-cantaloupe-400)',

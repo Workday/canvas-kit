@@ -1,8 +1,7 @@
 import * as React from 'react';
 
 import {BaseButton, buttonVars, BaseButtonContainerProps} from './BaseButton';
-import {createComponent, cs, getTheme} from '@workday/canvas-kit-react/common';
-import {borderRadius} from '@workday/canvas-kit-react/tokens';
+import {createComponent, cs, cssVar, newTheme} from '@workday/canvas-kit-react/common';
 
 export type DeleteButtonVariant = 'primary' | 'inverse';
 
@@ -13,29 +12,27 @@ export type DeleteButtonVariant = 'primary' | 'inverse';
  */
 export interface DeleteButtonProps extends Omit<BaseButtonContainerProps, 'ref'> {}
 
-const theme = getTheme();
-
 const DeleteStyles = cs({
-  [buttonVars.default.background]: theme.canvas.palette.error.main,
-  [buttonVars.default.border]: theme.canvas.palette.error.main,
-  [buttonVars.default.borderRadius]: borderRadius.circle,
-  [buttonVars.default.color]: theme.canvas.palette.error.contrast,
+  [buttonVars.default.background]: cssVar(newTheme.colors.error.main),
+  [buttonVars.default.border]: cssVar(newTheme.colors.error.main),
+  [buttonVars.default.borderRadius]: cssVar(newTheme.borderRadius.circle),
+  [buttonVars.default.color]: cssVar(newTheme.colors.error.contrast),
   '&:hover, &.hover': {
-    [buttonVars.hover.background]: theme.canvas.palette.error.dark,
-    [buttonVars.hover.border]: theme.canvas.palette.error.dark,
-    [buttonVars.hover.color]: theme.canvas.palette.error.contrast,
+    [buttonVars.hover.background]: cssVar(newTheme.colors.error.dark),
+    [buttonVars.hover.border]: cssVar(newTheme.colors.error.dark),
+    [buttonVars.hover.color]: cssVar(newTheme.colors.error.contrast),
   },
   '&:active, &.active': {
-    [buttonVars.active.background]: theme.canvas.palette.error.darkest,
-    [buttonVars.active.border]: theme.canvas.palette.error.darkest,
-    [buttonVars.active.color]: theme.canvas.palette.error.contrast,
+    [buttonVars.active.background]: cssVar(newTheme.colors.error.darkest),
+    [buttonVars.active.border]: cssVar(newTheme.colors.error.darkest),
+    [buttonVars.active.color]: cssVar(newTheme.colors.error.contrast),
   },
   '&:focus-visible, &.focus': {
-    [buttonVars.focus.background]: theme.canvas.palette.error.main,
-    [buttonVars.focus.border]: theme.canvas.palette.error.main,
-    [buttonVars.focus.color]: theme.canvas.palette.error.contrast,
-    [buttonVars.focus.boxShadowInner]: theme.canvas.palette.primary.contrast,
-    [buttonVars.focus.boxShadowOuter]: theme.canvas.palette.primary.main,
+    [buttonVars.focus.background]: cssVar(newTheme.colors.error.main),
+    [buttonVars.focus.border]: cssVar(newTheme.colors.error.main),
+    [buttonVars.focus.color]: cssVar(newTheme.colors.error.contrast),
+    [buttonVars.focus.boxShadowInner]: cssVar(newTheme.colors.primary.contrast),
+    [buttonVars.focus.boxShadowOuter]: cssVar(newTheme.colors.primary.dark),
   },
 });
 
