@@ -13,6 +13,11 @@ import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {caretDownSmallIcon} from '@workday/canvas-system-icons-web';
 import {useSelectModel, useSelectOption} from './hooks';
 import {useSelectInput} from './hooks/useSelectInput';
+import {CanvasSystemIcon} from '@workday/design-assets-types';
+
+export interface SelectInputProps extends ExtractProps<typeof TextInput> {
+  startIcon?: CanvasSystemIcon;
+}
 
 /*
  * The Select input is a select only combobox that handles the single select pattern that is [defined](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select) by HTML `<select>`.
@@ -20,10 +25,15 @@ import {useSelectInput} from './hooks/useSelectInput';
 export const SelectInput = createSubcomponent(TextInput)({
   modelHook: useSelectModel,
   elemPropsHook: useSelectInput,
-})<ExtractProps<typeof TextInput>>(
-  ({placeholder = 'Choose an Option', width, ...props}, Element, model) => {
+})<SelectInputProps>(
+  ({placeholder = 'Choose an Option', width, startIcon, ...props}, Element, model) => {
     return (
       <InputGroup width={width}>
+        {startIcon && model.state.selectedIds.length > 0 && (
+          <InputGroup.InnerStart pointerEvents="none">
+            <SystemIcon icon={startIcon} />
+          </InputGroup.InnerStart>
+        )}
         <InputGroup.Input
           width={width}
           as={Element}

@@ -13,13 +13,11 @@ export const useSelectInput = composeHooks(
     const timer = React.useRef<ReturnType<typeof setTimeout>>();
 
     React.useLayoutEffect(() => {
-      // If there is no selected item and items exists we want to select the first item in the array
-      // A select should always have a value selected, by default it should be the first item
+      // If there is no selected item and items exists we want to set the cursor to the first item in the array
       if (model.state.selectedIds.length === 0 && model.state.items.length > 0) {
         model.events.goTo({id: model.state.items[0].id});
-        // model.events.select({id: model.state.items[0].id});
       } else {
-        // If the user wants an items selected by default by passing `initialSelectedId` we select that item
+        // If the user wants an item selected by default by passing `initialSelectedId` we select that item
         if (model.state.selectedIds.length > 0) {
           const selectedItem = model.state.items.findIndex(
             (item: {id: string}) => item.id === model.state.selectedIds[0]
@@ -65,9 +63,8 @@ export const useSelectInput = composeHooks(
       }
       return -1;
     };
-
+    // just use the index you dummy squid
     const currentItem = model.navigation.getItem(model.state.cursorId, model);
-
     const cursorFocusedIndex = model.state.items.findIndex(item => item.id === currentItem.id);
 
     const handleKeyboardTypeAhead = (key: string, numOptions: number) => {
@@ -81,13 +78,10 @@ export const useSelectInput = composeHooks(
       // if you type `de` vs `d` for denver
       keySofar.current += key;
       startClearKeysSoFarTimer();
-      // console.log(keySofar.current);
 
       // First, look for a match from start to end
       let matchIndex;
-      // console.log('key so far', keySofar.current);
       matchIndex = getIndexByStartString(start, keySofar.current);
-      // console.log('matchIndex', matchIndex);
 
       // If a match isn't found between start and end, wrap the search
       // around and search again from the beginning (0) to start
@@ -104,7 +98,7 @@ export const useSelectInput = composeHooks(
           model.events.select({id: model.state.items[matchIndex].id});
         } else {
           // Otherwise the menu is visible
-          // focus the matched option and select it
+          // move the cursor to that matched item
           model.events.goTo({id: model.state.items[matchIndex].id});
         }
       }
@@ -119,18 +113,18 @@ export const useSelectInput = composeHooks(
             return item.id === model.state.cursorId;
           }
         });
+
         // Prevent the keys from being enter in the input
         event.preventDefault();
+
         // Select should open if Enter, ArrowUp, ArrowDown and Spacebar is typed
+        const keysToOpenSelect = ['Enter', 'Spacebar', 'ArrowUp', 'ArrowDown'];
         if (
-          event.key === 'Enter' ||
-          event.key === 'Spacebar' ||
-          event.key === 'ArrowUp' ||
-          event.key === 'ArrowDown' ||
+          keysToOpenSelect.includes(event.key) ||
           (event.key === ' ' && model.state.visibility === 'hidden' && keySofar.current === '')
         ) {
+          // set the width of the popup when the select is triggered to open by a specified key
           model.events.setWidth(event.currentTarget.clientWidth);
-
           //show the menu when enter is typed
           model.events.show();
         }
@@ -142,13 +136,7 @@ export const useSelectInput = composeHooks(
 
         // If the dropdown is NOT visible and ArrowUp, ArrowDown, Enter and Spacebar is typed, when the dropdown opens
         // it should go to the current selected item in the dropdown.
-        if (
-          event.key === 'ArrowUp' ||
-          event.key === 'ArrowDown' ||
-          event.key === 'Spacebar' ||
-          event.key === ' ' ||
-          event.key === 'Enter'
-        ) {
+        if (keysToOpenSelect.includes(event.key) || event.key === ' ') {
           if (model.state.visibility === 'hidden') {
             model.events.goTo({id: model.state.items[foundIndex].id});
 

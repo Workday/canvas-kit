@@ -7,16 +7,34 @@ import {
   dispatchInputEvent,
   ExtractProps,
   useForkRef,
+  useIsRTL,
 } from '@workday/canvas-kit-react/common';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {usePopupTarget} from '@workday/canvas-kit-react/popup';
+
 import {
   useListActiveDescendant,
-  useListKeyboardHandler,
+  keyboardEventToCursorEvents,
+  // useListKeyboardHandler,
 } from '@workday/canvas-kit-react/collection';
 
 import {useComboboxModel} from './useComboboxModel';
 import {useComboboxInputOpenWithArrowKeys} from './useComboboxInputOpenWithArrowKeys';
+
+export const useListKeyboardHandler = createElemPropsHook(useComboboxModel)(model => {
+  const isRTL = useIsRTL();
+
+  return {
+    onKeyDown(event: React.KeyboardEvent) {
+      if (model.state.visibility === 'visible') {
+        const handled = keyboardEventToCursorEvents(event, model, isRTL);
+        if (handled) {
+          event.preventDefault();
+        }
+      }
+    },
+  };
+});
 
 /**
  * Adds all attributes necessary to start with a {@link ComboboxInput Combobox.Input}. It opens the

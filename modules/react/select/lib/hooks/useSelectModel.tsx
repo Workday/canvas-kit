@@ -1,9 +1,5 @@
-import {createModelHook, ErrorType} from '@workday/canvas-kit-react/common';
+import {createModelHook} from '@workday/canvas-kit-react/common';
 import {useComboboxModel} from '@workday/canvas-kit-react/combobox';
-import {
-  createNavigationManager,
-  wrappingNavigationManager,
-} from '@workday/canvas-kit-react/collection';
 
 /**
  * `SelectModel` extends the {@link ComboboxModel}. Selecting items from
@@ -26,31 +22,6 @@ export const useSelectModel = createModelHook({
   },
   contextOverride: useComboboxModel.Context,
 })(config => {
-  const model: ReturnType<typeof useComboboxModel> = useComboboxModel({
-    ...config,
-    navigation: createNavigationManager({
-      ...wrappingNavigationManager,
-      // Override getPrevious to return current index when the menu is hidden and ArrowUp is typed.
-      // This prevents the navigation manager from going to previous before the menu is open.
-      getPrevious: index => {
-        if (model.state.visibility === 'hidden') {
-          return index;
-        } else {
-          return wrappingNavigationManager.getPrevious(index, model);
-        }
-      },
-      // Override getNext to return current index when the menu is hidden and ArrowDown is typed.
-      // This prevents the navigation manager from going to next item before the menu is open.
-      getNext: index => {
-        if (model.state.visibility === 'hidden') {
-          return index;
-        } else {
-          return wrappingNavigationManager.getNext(index, model);
-        }
-      },
-    }),
-  });
-  return {
-    ...model,
-  };
+  const model = useComboboxModel(config);
+  return model;
 });
