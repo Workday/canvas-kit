@@ -16,9 +16,11 @@ const useCanvasThemeToCssVars = (
   const style = (['common', 'primary', 'error', 'alert', 'success', 'neutral'] as const).reduce(
     (result, color) => {
       if (color === 'common') {
+        // @ts-ignore
         result[newTheme.colors.common.focusOutline] = palette.common.focusOutline;
       }
       (['lightest', 'light', 'main', 'dark', 'darkest', 'contrast'] as const).forEach(key => {
+        // @ts-ignore
         result[newTheme.colors[color][key]] = palette[color][key];
       });
       return result;
