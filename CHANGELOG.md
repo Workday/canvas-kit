@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v9.1.14](https://github.com/Workday/canvas-kit/releases/tag/v9.1.14) (2023-08-24)
+
+### Components
+
+- fix(Tabs): Fix tab item icon accent styles ([#2323](https://github.com/Workday/canvas-kit/pull/2323)) ([@alanbsmith](https://github.com/alanbsmith), emma.okeeffe)
+
+
+## [v8.6.19](https://github.com/Workday/canvas-kit/releases/tag/v8.6.19) (2023-08-24)
+
+### Components
+
+- fix(Tabs): Fix tab item icon accent styles ([#2323](https://github.com/Workday/canvas-kit/pull/2323)) ([@alanbsmith](https://github.com/alanbsmith), emma.okeeffe)
 ## [v9.1.13](https://github.com/Workday/canvas-kit/releases/tag/v9.1.13) (2023-08-14)
 
 ### Components
