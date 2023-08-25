@@ -130,6 +130,7 @@ export const useSelectInput = composeHooks(
           (event.key === ' ' && model.state.visibility === 'hidden' && keySofar.current === '')
         ) {
           model.events.setWidth(event.currentTarget.clientWidth);
+
           //show the menu when enter is typed
           model.events.show();
         }

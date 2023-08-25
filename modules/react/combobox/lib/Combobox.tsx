@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {createContainer} from '@workday/canvas-kit-react/common';
+import {createContainer, ErrorType} from '@workday/canvas-kit-react/common';
 
 import {useComboboxModel} from './useComboboxModel';
 import {ComboboxInput} from './ComboboxInput';
@@ -27,6 +27,10 @@ export const Combobox = createContainer()({
      */
     Menu: ComboboxMenu,
   },
-})<ComboboxProps>(({children}, _, model) => {
-  return <ComboboxMenu model={model}>{children}</ComboboxMenu>;
+})<ComboboxProps>(({children, ...elemProps}, _, model) => {
+  return (
+    <ComboboxMenu model={model} {...elemProps}>
+      {children}
+    </ComboboxMenu>
+  );
 });

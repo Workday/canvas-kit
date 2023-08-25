@@ -1,11 +1,16 @@
 import React from 'react';
-import {createSubcomponent, ExtractProps, createContainer} from '@workday/canvas-kit-react/common';
+import {
+  createSubcomponent,
+  ExtractProps,
+  createContainer,
+  Themeable,
+  ErrorType,
+} from '@workday/canvas-kit-react/common';
 import {Combobox, useComboboxModel} from '@workday/canvas-kit-react/combobox';
 
 import {InputGroup, TextInput} from '@workday/canvas-kit-react/text-input';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {caretDownSmallIcon} from '@workday/canvas-system-icons-web';
-import {ComboboxProps} from '../../combobox/lib/Combobox';
 import {useSelectModel, useSelectOption} from './hooks';
 import {useSelectInput} from './hooks/useSelectInput';
 
@@ -13,10 +18,15 @@ export const SelectInput = createSubcomponent(TextInput)({
   modelHook: useSelectModel,
   elemPropsHook: useSelectInput,
 })<ExtractProps<typeof TextInput>>(
-  ({placeholder = 'Choose and Option', ...props}, Element, model) => {
+  ({placeholder = 'Choose an Option', width, ...props}, Element, model) => {
     return (
-      <InputGroup>
-        <InputGroup.Input as={Element} placeholder={placeholder} {...props}></InputGroup.Input>
+      <InputGroup width={width}>
+        <InputGroup.Input
+          width={width}
+          as={Element}
+          placeholder={placeholder}
+          {...props}
+        ></InputGroup.Input>
         <InputGroup.InnerEnd position="absolute" pointerEvents="none">
           <SystemIcon icon={caretDownSmallIcon} />
         </InputGroup.InnerEnd>
@@ -38,6 +48,8 @@ export const SelectItem = createSubcomponent('li')({
   return <Combobox.Menu.Item {...elemProps}>{children}</Combobox.Menu.Item>;
 });
 
+export interface Select2Props extends Themeable, ExtractProps<typeof Combobox> {}
+
 export const SelectBase = createContainer()({
   displayName: 'SelectBase',
   modelHook: useSelectModel,
@@ -48,8 +60,12 @@ export const SelectBase = createContainer()({
     List: Combobox.Menu.List,
     Item: SelectItem,
   },
-})<ComboboxProps>(({children}, _, model) => {
-  return <Combobox model={model}>{children}</Combobox>;
+})<Select2Props>(({children, ...elemProps}, _, model) => {
+  return (
+    <Combobox model={model} {...elemProps}>
+      {children}
+    </Combobox>
+  );
 });
 
 // export interface SelectOption2Props extends ExtractProps<typeof SelectBase.Item> {

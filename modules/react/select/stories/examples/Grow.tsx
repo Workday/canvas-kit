@@ -1,24 +1,48 @@
 import React from 'react';
 import {FormField} from '@workday/canvas-kit-react/form-field';
-import {Select, SelectOption} from '@workday/canvas-kit-react/select';
+import {SelectBase, useSelectModel} from '@workday/canvas-kit-react/select';
+import {Flex} from '@workday/canvas-kit-react/layout';
+
+export const options = [
+  {id: 'E-mail', data: {textValue: 'foo'}},
+  {id: 'Phone'},
+  {id: 'Fax (disabled)', disabled: true},
+  {id: 'Mail'},
+  {id: 'Mobile Phone'},
+  {
+    id: 'The Ontologically Anthropocentric Sensory Immersive Simulation',
+    disabled: false,
+  },
+];
+
+const disabledItems = options.filter(item => item.disabled === true).map(item => item.id);
 
 export const Grow = () => {
-  const [value, setValue] = React.useState('home');
-
-  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setValue(event.target.value);
-  };
+  const model = useSelectModel({
+    items: options,
+    nonInteractiveIds: disabledItems,
+  });
 
   return (
-    <FormField grow={true} label="Delivery Address">
-      <Select onChange={handleChange} value={value}>
-        <SelectOption label="Home - 2950 S Delaware St #200, San Mateo, CA 94403" value="home" />
-        <SelectOption
-          label="Parent's House - 6110 Stoneridge Mall Rd, Pleasanton, CA 94588"
-          value="parents-house"
-        />
-        <SelectOption label="Office - 160 Spear St #1700, San Francisco, CA 94105" value="office" />
-      </Select>
-    </FormField>
+    <SelectBase model={model}>
+      <FormField label="Contact">
+        <SelectBase.Input width="100%" id="contact-select" />
+        <SelectBase.Popup>
+          <SelectBase.Card maxHeight="200px">
+            {model.state.items.length > 0 && (
+              <SelectBase.List>
+                {item => {
+                  return (
+                    <SelectBase.Item aria-disabled={item.disabled ? item.disabled : undefined}>
+                      {item.id}
+                    </SelectBase.Item>
+                  );
+                }}
+              </SelectBase.List>
+            )}
+          </SelectBase.Card>
+        </SelectBase.Popup>
+      </FormField>
+    </SelectBase>
   );
 };

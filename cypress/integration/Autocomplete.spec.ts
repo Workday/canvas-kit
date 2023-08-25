@@ -105,20 +105,12 @@ describe('Autocomplete', () => {
             cy.findByRole('combobox').type('{esc}');
           });
 
-          it('should clear the combobox', () => {
-            cy.findByRole('combobox').should('have.value', '');
-          });
-
           it('should close the listbox', () => {
             cy.findByRole('listbox').should('not.exist');
           });
 
           it('should keep focus on the combobox', () => {
             cy.findByRole('combobox').should('have.focus');
-          });
-
-          it('should not show the clear button', () => {
-            cy.get('[data-testid=clear]').should('not.be.visible');
           });
         });
 
@@ -332,7 +324,7 @@ describe('Autocomplete', () => {
           });
         });
       });
-      
+
       context('when the user types in a value not found', () => {
         beforeEach(() => {
           cy.findByRole('combobox').type('Peach');

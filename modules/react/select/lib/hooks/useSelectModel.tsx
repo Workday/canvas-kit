@@ -1,4 +1,4 @@
-import {createModelHook} from '@workday/canvas-kit-react/common';
+import {createModelHook, ErrorType} from '@workday/canvas-kit-react/common';
 import {useComboboxModel} from '@workday/canvas-kit-react/combobox';
 import {
   createNavigationManager,

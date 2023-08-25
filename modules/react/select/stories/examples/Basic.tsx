@@ -15,7 +15,6 @@ export const options = [
   },
 ];
 
-export const options2 = ['Foo', 'Bar', 'Baz'];
 const disabledItems = options.filter(item => item.disabled === true).map(item => item.id);
 
 export const Basic = () => {

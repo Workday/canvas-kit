@@ -149,6 +149,7 @@ export class FormField extends React.Component<React.PropsWithChildren<FormField
         React.InputHTMLAttributes<HTMLInputElement> = {
         ...child.props,
       };
+      console.log('props', props);
 
       if (this.props.grow) {
         props.grow = this.props.grow;
