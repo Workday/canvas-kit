@@ -4,7 +4,6 @@ import {
   ExtractProps,
   createContainer,
   Themeable,
-  ErrorType,
 } from '@workday/canvas-kit-react/common';
 import {Combobox, useComboboxModel} from '@workday/canvas-kit-react/combobox';
 

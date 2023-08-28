@@ -4,7 +4,6 @@ import {
   composeHooks,
   createElemPropsHook,
   createSubcomponent,
-  dispatchInputEvent,
   ExtractProps,
   useForkRef,
   useIsRTL,

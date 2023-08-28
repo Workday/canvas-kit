@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {createContainer, ErrorType} from '@workday/canvas-kit-react/common';
+import {createContainer} from '@workday/canvas-kit-react/common';
 
 import {useComboboxModel} from './useComboboxModel';
 import {ComboboxInput} from './ComboboxInput';
