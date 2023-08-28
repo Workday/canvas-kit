@@ -154,7 +154,6 @@ export const useSelectInput = composeHooks(
           if (element && element?.getAttribute('aria-disabled') !== 'true') {
             model.events.select({id: model.state.cursorId});
             if (model.state.mode === 'single') {
-              console.log(' in enter hide');
               model.events.hide(event);
             }
           }

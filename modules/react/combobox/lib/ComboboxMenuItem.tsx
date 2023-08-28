@@ -35,14 +35,12 @@ export const useComboboxMenuItem = composeHooks(
         model.state.nonInteractiveIds.includes(id) ||
         event.currentTarget.hasAttribute('aria-disabled')
       ) {
-        console.log('in here ');
         return;
       }
       if (event.currentTarget.getAttribute('aria-disabled') !== 'true') {
         model.events.select({id});
 
         if (model.state.mode === 'single') {
-          console.log(' in hide');
           model.events.hide(event);
         }
       }
