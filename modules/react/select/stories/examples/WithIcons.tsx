@@ -27,7 +27,7 @@ export const WithIcons = () => {
       <FormField orientation="vertical" hasError>
         <FormField.Label htmlFor="contact-select">Contact</FormField.Label>
         <Select model={model}>
-          <Select.Input startIcon={currentItem.value.icon} id="contact-select" />
+          <Select.Input inputStartIcon={currentItem.value.icon} id="contact-select" />
           <Select.Popup>
             <Select.Card maxHeight="200px">
               {model.state.items.length > 0 && (

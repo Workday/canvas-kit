@@ -16,22 +16,29 @@ import {useSelectInput} from './hooks/useSelectInput';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 
 export interface SelectInputProps extends ExtractProps<typeof TextInput> {
-  startIcon?: CanvasSystemIcon;
+  /**
+   * The Icon to render at the start of the input. Use this prob if your options
+   * include icons that you would like to render in the input when selected.
+   * An option was must be select in order to render and icon.
+   */
+  inputStartIcon?: CanvasSystemIcon;
 }
 
-/*
- * The Select input is a select only combobox that handles the single select pattern that is [defined](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select) by HTML `<select>`.
+/**
+ * The SelectInput renders a custom `ComboboxInput` with additional support for keyboard navigation
+ * and interaction as defined by [WAI](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/examples/combobox-select-only/).
+ * All valid attributes are spread to the underlying `<input>` element.
  */
 export const SelectInput = createSubcomponent(TextInput)({
   modelHook: useSelectModel,
   elemPropsHook: useSelectInput,
 })<SelectInputProps>(
-  ({placeholder = 'Choose an Option', width, startIcon, ...props}, Element, model) => {
+  ({placeholder = 'Choose an Option', width, inputStartIcon, ...props}, Element, model) => {
     return (
       <InputGroup width={width}>
-        {startIcon && model.state.selectedIds.length > 0 && (
+        {inputStartIcon && model.state.selectedIds.length > 0 && (
           <InputGroup.InnerStart pointerEvents="none">
-            <SystemIcon icon={startIcon} />
+            <SystemIcon icon={inputStartIcon} />
           </InputGroup.InnerStart>
         )}
         <InputGroup.Input

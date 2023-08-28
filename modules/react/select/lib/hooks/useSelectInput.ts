@@ -13,6 +13,7 @@ export const useSelectInput = composeHooks(
     const timer = React.useRef<ReturnType<typeof setTimeout>>();
 
     React.useLayoutEffect(() => {
+      model.events.setWidth(model.state.targetRef.current?.clientWidth || 0);
       // If there is no selected item and items exists we want to set the cursor to the first item in the array
       if (model.state.selectedIds.length === 0 && model.state.items.length > 0) {
         model.events.goTo({id: model.state.items[0].id});

@@ -22,7 +22,6 @@ export const Basic = () => {
   const model = useSelectModel({
     items: options,
     nonInteractiveIds: disabledItems,
-    shouldVirtualize: false,
   });
 
   return (
@@ -48,7 +47,6 @@ export const Basic = () => {
           </Select.Popup>
         </Select>
       </FormField>
-      {model.state.selectedIds}
     </Flex>
   );
 };

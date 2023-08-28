@@ -1,2 +1,2 @@
-export * from './lib/Select2';
+export * from './lib/Select';
 export * from './lib/hooks';
