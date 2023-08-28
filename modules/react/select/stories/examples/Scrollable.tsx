@@ -46,7 +46,7 @@ export const Scrollable = () => {
           nonInteractiveIds={cities.filter(item => item.disabled === true).map(item => item.id)}
         >
           <Select.Input />
-          <Select.Popup>
+          <Select.Popper>
             <Select.Card maxHeight="200px">
               <Select.List>
                 {item => (
@@ -60,7 +60,7 @@ export const Scrollable = () => {
                 )}
               </Select.List>
             </Select.Card>
-          </Select.Popup>
+          </Select.Popper>
         </Select>
         {/* Selected: {model.state.selectedIds[0]} */}
       </FormField>

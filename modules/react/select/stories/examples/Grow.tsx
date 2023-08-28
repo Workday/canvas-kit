@@ -27,7 +27,7 @@ export const Grow = () => {
     <Select model={model}>
       <FormField label="Contact">
         <Select.Input width="100%" id="contact-select" />
-        <Select.Popup>
+        <Select.Popper>
           <Select.Card maxHeight="200px">
             {model.state.items.length > 0 && (
               <Select.List>
@@ -41,7 +41,7 @@ export const Grow = () => {
               </Select.List>
             )}
           </Select.Card>
-        </Select.Popup>
+        </Select.Popper>
       </FormField>
     </Select>
   );

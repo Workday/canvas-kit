@@ -55,7 +55,6 @@ export const useSelectInput = composeHooks(
         if (label.indexOf(startString.toLowerCase()) === 0) {
           if (
             !ignoreDisabled ||
-            (ignoreDisabled && model.state.items[i].value.disabled === false) ||
             (ignoreDisabled && !model.state.nonInteractiveIds.includes(model.state.items[i].id))
           ) {
             return i;

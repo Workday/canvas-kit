@@ -28,7 +28,7 @@ export const WithIcons = () => {
         <FormField.Label htmlFor="contact-select">Contact</FormField.Label>
         <Select model={model}>
           <Select.Input inputStartIcon={currentItem.value.icon} id="contact-select" />
-          <Select.Popup>
+          <Select.Popper>
             <Select.Card maxHeight="200px">
               {model.state.items.length > 0 && (
                 <Select.List>
@@ -43,7 +43,7 @@ export const WithIcons = () => {
                 </Select.List>
               )}
             </Select.Card>
-          </Select.Popup>
+          </Select.Popper>
         </Select>
       </FormField>
     </Flex>

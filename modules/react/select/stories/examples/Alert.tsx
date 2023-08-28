@@ -34,7 +34,7 @@ export const Alert = () => {
           inputId="contact-select"
         >
           <Select.Input id="contact-select" />
-          <Select.Popup>
+          <Select.Popper>
             <Select.Card maxHeight="200px">
               {model.state.items.length > 0 && (
                 <Select.List>
@@ -48,7 +48,7 @@ export const Alert = () => {
                 </Select.List>
               )}
             </Select.Card>
-          </Select.Popup>
+          </Select.Popper>
         </FormField>
       </Select>
     </Flex>

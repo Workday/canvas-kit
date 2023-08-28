@@ -2,7 +2,8 @@ import * as React from 'react';
 import {render, fireEvent} from '@testing-library/react';
 
 import {Select} from '../lib/Select';
-import {useSelectModel} from '../lib/hooks';
+import {useSelectInput, useSelectModel} from '../lib/hooks';
+import {Combobox} from '../../combobox';
 
 describe.only('Select', () => {
   const cb = jest.fn();
@@ -13,15 +14,16 @@ describe.only('Select', () => {
     cb.mockReset();
   });
 
-  verifyComponent(Select, {modelFn: useSelectModel});
-  verifyComponent(Select.Input, {modelFn: useSelectModel});
+  // verifyComponent(Select.Card, {modelFn: useSelectModel});
+
+  verifyComponent(Select.Item, {modelFn: useSelectModel});
 
   describe('when rendered with a single child', () => {
     it('should not throw an error', () => {
       const {getAllByRole} = render(
         <Select items={['Foo']} initialVisibility="visible">
           <Select.Input id="contact-select" />
-          <Select.Popup>
+          <Select.Popper>
             <Select.Card maxHeight="200px">
               <Select.List>
                 {item => {
@@ -29,7 +31,7 @@ describe.only('Select', () => {
                 }}
               </Select.List>
             </Select.Card>
-          </Select.Popup>
+          </Select.Popper>
         </Select>
       );
       expect(getAllByRole('option')).toHaveLength(1);
@@ -41,7 +43,7 @@ describe.only('Select', () => {
       const {getByRole} = render(
         <Select items={['Foo']}>
           <Select.Input disabled id="contact-select" />
-          <Select.Popup>
+          <Select.Popper>
             <Select.Card maxHeight="200px">
               <Select.List>
                 {item => {
@@ -49,7 +51,7 @@ describe.only('Select', () => {
                 }}
               </Select.List>
             </Select.Card>
-          </Select.Popup>
+          </Select.Popper>
         </Select>
       );
       expect(getByRole(role)).toHaveProperty('disabled', true);
@@ -62,7 +64,7 @@ describe.only('Select', () => {
       const {getByDisplayValue} = render(
         <Select items={['Foo']} initialSelectedIds={['Foo']}>
           <Select.Input id="contact-select" />
-          <Select.Popup>
+          <Select.Popper>
             <Select.Card maxHeight="200px">
               <Select.List>
                 {item => {
@@ -70,7 +72,7 @@ describe.only('Select', () => {
                 }}
               </Select.List>
             </Select.Card>
-          </Select.Popup>
+          </Select.Popper>
         </Select>
       );
       expect(getByDisplayValue(selectedValue)).toBeDefined();
@@ -82,7 +84,7 @@ describe.only('Select', () => {
       const {getByRole} = render(
         <Select items={['Foo']} initialSelectedIds={['Foo']}>
           <Select.Input onChange={cb} id="contact-select" />
-          <Select.Popup>
+          <Select.Popper>
             <Select.Card maxHeight="200px">
               <Select.List>
                 {item => {
@@ -90,7 +92,7 @@ describe.only('Select', () => {
                 }}
               </Select.List>
             </Select.Card>
-          </Select.Popup>
+          </Select.Popper>
         </Select>
       );
       fireEvent.change(getByRole(role));

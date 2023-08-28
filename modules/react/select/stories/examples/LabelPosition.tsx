@@ -28,7 +28,7 @@ export const LabelPosition = () => {
       <Select model={model}>
         <FormField label="Contact" labelPosition={FormField.LabelPosition.Left}>
           <Select.Input id="contact-select" />
-          <Select.Popup>
+          <Select.Popper>
             <Select.Card maxHeight="200px">
               {model.state.items.length > 0 && (
                 <Select.List>
@@ -42,7 +42,7 @@ export const LabelPosition = () => {
                 </Select.List>
               )}
             </Select.Card>
-          </Select.Popup>
+          </Select.Popper>
         </FormField>
       </Select>
     </Flex>

@@ -69,7 +69,7 @@ export const SelectStates = () => {
           <FormField label="Contact">
             <Select model={model}>
               <Select.Input {...props} id="contact-select" />
-              <Select.Popup>
+              <Select.Popper>
                 <Select.Card maxHeight="200px">
                   {model.state.items.length > 0 && (
                     <Select.List>
@@ -83,7 +83,7 @@ export const SelectStates = () => {
                     </Select.List>
                   )}
                 </Select.Card>
-              </Select.Popup>
+              </Select.Popper>
             </Select>
           </FormField>
         )}
@@ -112,7 +112,7 @@ export const SelectOpenMenuStates = () => {
           <FormField label="Contact" style={{marginBottom: '250px'}}>
             <Select model={model}>
               <Select.Input {...props} id="contact-select" />
-              <Select.Popup>
+              <Select.Popper>
                 <Select.Card maxHeight="200px">
                   {model.state.items.length > 0 && (
                     <Select.List>
@@ -126,7 +126,7 @@ export const SelectOpenMenuStates = () => {
                     </Select.List>
                   )}
                 </Select.Card>
-              </Select.Popup>
+              </Select.Popper>
             </Select>
           </FormField>
         )}

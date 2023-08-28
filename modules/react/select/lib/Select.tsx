@@ -10,7 +10,7 @@ import {Combobox, useComboboxModel} from '@workday/canvas-kit-react/combobox';
 import {InputGroup, TextInput} from '@workday/canvas-kit-react/text-input';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {caretDownSmallIcon} from '@workday/canvas-system-icons-web';
-import {useSelectModel, useSelectOption} from './hooks';
+import {useSelectModel, useSelectItem} from './hooks';
 import {useSelectInput} from './hooks/useSelectInput';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 
@@ -59,13 +59,17 @@ export const SelectInput = createSubcomponent(TextInput)({
  * This renders a `Combobox.Menu.Item` while adding the additional `role="option"` attribute for accessibility.
  */
 export const SelectItem = createSubcomponent('li')({
-  modelHook: useComboboxModel,
-  elemPropsHook: useSelectOption,
+  modelHook: useSelectModel,
+  elemPropsHook: useSelectItem,
   subComponents: {
     Icon: Combobox.Menu.Item.Icon,
   },
 })<ExtractProps<typeof Combobox.Menu.Item>>(({children, ...elemProps}, Element) => {
-  return <Combobox.Menu.Item {...elemProps}>{children}</Combobox.Menu.Item>;
+  return (
+    <Combobox.Menu.Item as={Element} {...elemProps}>
+      {children}
+    </Combobox.Menu.Item>
+  );
 });
 
 export interface Select2Props extends Themeable, ExtractProps<typeof Combobox> {}
@@ -75,7 +79,7 @@ export const Select = createContainer()({
   modelHook: useSelectModel,
   subComponents: {
     Input: SelectInput,
-    Popup: Combobox.Menu.Popper,
+    Popper: Combobox.Menu.Popper,
     Card: Combobox.Menu.Card,
     List: Combobox.Menu.List,
     Item: SelectItem,

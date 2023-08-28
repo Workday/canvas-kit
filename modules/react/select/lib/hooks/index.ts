@@ -1,3 +1,3 @@
 export * from './useSelectModel';
-export * from './useSelectOption';
+export * from './useSelectItem';
 export * from './useSelectInput';

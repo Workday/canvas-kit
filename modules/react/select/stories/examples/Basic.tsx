@@ -30,13 +30,16 @@ export const Basic = () => {
         <FormField.Label htmlFor="contact-select">Contact</FormField.Label>
         <Select model={model}>
           <Select.Input id="contact-select" />
-          <Select.Popup>
+          <Select.Popper>
             <Select.Card maxHeight="200px">
               {model.state.items.length > 0 && (
                 <Select.List>
                   {item => {
                     return (
-                      <Select.Item aria-disabled={item.disabled ? item.disabled : undefined}>
+                      <Select.Item
+                        model={model}
+                        aria-disabled={item.disabled ? item.disabled : undefined}
+                      >
                         {item.id}
                       </Select.Item>
                     );
@@ -44,7 +47,7 @@ export const Basic = () => {
                 </Select.List>
               )}
             </Select.Card>
-          </Select.Popup>
+          </Select.Popper>
         </Select>
       </FormField>
     </Flex>
