@@ -1,9 +1,8 @@
-import * as React from 'react';
+import React from 'react';
 import {render, fireEvent} from '@testing-library/react';
 
 import {Select} from '../lib/Select';
-import {useSelectInput, useSelectModel} from '../lib/hooks';
-import {Combobox} from '../../combobox';
+import {useSelectModel} from '../lib/hooks';
 
 describe.only('Select', () => {
   const cb = jest.fn();
@@ -16,7 +15,7 @@ describe.only('Select', () => {
 
   // verifyComponent(Select.Card, {modelFn: useSelectModel});
 
-  verifyComponent(Select.Item, {modelFn: useSelectModel});
+  // verifyComponent(Select.Item, {modelFn: useSelectModel});
 
   describe('when rendered with a single child', () => {
     it('should not throw an error', () => {

@@ -87,11 +87,11 @@ export const ResponsiveContainer = () => {
       <FormField label={'Container Size'}>
         <Select items={['1024px', '768px', '320px']} initialSelectedIds={['1024px']}>
           <Select.Input onChange={handleChange} />
-          <Select.Popup>
+          <Select.Popper>
             <Select.Card>
               <Select.List>{item => <Select.Item>{item}</Select.Item>}</Select.List>
             </Select.Card>
-          </Select.Popup>
+          </Select.Popper>
         </Select>
       </FormField>
       <Grid as="section">

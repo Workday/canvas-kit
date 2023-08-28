@@ -5,7 +5,7 @@ import {
   createContainer,
   Themeable,
 } from '@workday/canvas-kit-react/common';
-import {Combobox, useComboboxModel} from '@workday/canvas-kit-react/combobox';
+import {Combobox} from '@workday/canvas-kit-react/combobox';
 
 import {InputGroup, TextInput} from '@workday/canvas-kit-react/text-input';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
