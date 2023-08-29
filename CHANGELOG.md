@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v9.1.16](https://github.com/Workday/canvas-kit/releases/tag/v9.1.16) (2023-08-29)
+
+### Documentation
+
+- fix: Accessibility enhancements to preview table examples ([#2321](https://github.com/Workday/canvas-kit/pull/2321)) ([@williamjstanton](https://github.com/williamjstanton))
+
+
 ## [v9.1.15](https://github.com/Workday/canvas-kit/releases/tag/v9.1.15) (2023-08-29)
 
 ### Components
