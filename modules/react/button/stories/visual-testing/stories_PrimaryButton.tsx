@@ -70,7 +70,6 @@ export const PrimaryIconButtonStates = (props: {theme?: PartialEmotionCanvasThem
           {value: 'large', label: 'Large'},
         ],
         icon: [{value: relatedActionsVerticalIcon, label: ''}],
-        iconPosition: [{value: 'only', label: '& Icon Only'}],
       })}
       columnProps={stateTableColumnProps}
     >

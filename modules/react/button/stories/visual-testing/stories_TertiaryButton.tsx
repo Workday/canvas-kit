@@ -74,7 +74,6 @@ export const TertiaryIconButtonStates = (props: {
           {value: 'large', label: 'Large'},
         ],
         icon: [{value: relatedActionsVerticalIcon, label: ''}],
-        iconPosition: [{value: 'only', label: '& Only Icon'}],
       })}
       columnProps={stateTableColumnProps}
     >

@@ -242,6 +242,7 @@ export const SizeModifiers = createModifiers({
       height: space.l,
       minWidth: space.xxxl,
       paddingInline: space.s,
+      gap: space.xxxs,
       '&.canvas-button-icon-only': {
         padding: '0',
         minWidth: space.l,
@@ -262,6 +263,7 @@ export const SizeModifiers = createModifiers({
       height: space.m,
       minWidth: 'auto',
       paddingInline: space.xs,
+      gap: space.xxxs,
       '&.canvas-button-icon-only': {
         padding: '0',
         minWidth: space.m,
