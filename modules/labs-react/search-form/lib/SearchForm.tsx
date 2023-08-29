@@ -139,8 +139,8 @@ const StyledSearchForm = styled('form')<
           position: showForm ? 'absolute' : 'relative',
           backgroundColor: showForm ? formCollapsedBackground : 'rgba(0, 0, 0, 0)',
           transition: 'background-color 120ms',
-          maxWidth: showForm ? 'none' : spaceNumbers.xl + spaceNumbers.xxs,
-          minWidth: spaceNumbers.xl + spaceNumbers.xs,
+          maxWidth: showForm ? 'none' : `${spaceNumbers.xl + spaceNumbers.xxs}rem`,
+          minWidth: `${spaceNumbers.xl + spaceNumbers.xs}rem`,
           overflow: showForm ? 'visible' : 'hidden',
           zIndex: 1,
         }
@@ -233,8 +233,8 @@ const SearchInput = styled(TextInput)<
   const collapseStyles: CSSObject = isCollapsed
     ? {
         fontSize: '20px',
-        paddingLeft: spaceNumbers.xl + spaceNumbers.s,
-        paddingRight: spaceNumbers.xl + spaceNumbers.s,
+        paddingLeft: `${spaceNumbers.xl + spaceNumbers.s}rem`,
+        paddingRight: `${spaceNumbers.xl + spaceNumbers.s}rem`,
         maxWidth: 'none',
         minWidth: 0,
         backgroundColor: `rgba(0, 0, 0, 0)`,
@@ -243,7 +243,7 @@ const SearchInput = styled(TextInput)<
     : {
         maxWidth: grow ? '100%' : maxWidth,
         minWidth: minWidth,
-        paddingLeft: spaceNumbers.xl + spaceNumbers.xxs,
+        paddingLeft: `${spaceNumbers.xl + spaceNumbers.xxs}rem`,
         paddingRight: space.xl,
         backgroundColor: inputColors.background,
         height: height,
