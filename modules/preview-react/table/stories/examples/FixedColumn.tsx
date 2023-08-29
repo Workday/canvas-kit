@@ -3,8 +3,10 @@ import React from 'react';
 import {Table} from '@workday/canvas-kit-preview-react/table';
 import {Heading} from '@workday/canvas-kit-react/text';
 import {colors} from '@workday/canvas-kit-react/tokens';
+import {useUniqueId} from '@workday/canvas-kit-react/common';
 
 export const FixedColumn = () => {
+  const headingID = useUniqueId();
   const exampleData = [
     {
       brand: 'Porsche',
@@ -75,13 +77,14 @@ export const FixedColumn = () => {
   ];
   return (
     <>
-      <Heading size="small" marginBottom="s">
+      <Heading as="h3" id={headingID} size="small" marginBottom="s">
         Performance Car Specs
       </Heading>
-      <Table width={690}>
+      <Table width={690} aria-labelledby={headingID} tabIndex={0}>
         <Table.Head>
           <Table.Row>
             <Table.Header
+              scope="col"
               position="sticky"
               left="0"
               backgroundColor="soap100"
@@ -89,14 +92,14 @@ export const FixedColumn = () => {
             >
               Brand
             </Table.Header>
-            <Table.Header>Model</Table.Header>
-            <Table.Header>Year</Table.Header>
-            <Table.Header>Price</Table.Header>
-            <Table.Header>Engine</Table.Header>
-            <Table.Header>Transmission</Table.Header>
-            <Table.Header>Horsepower</Table.Header>
-            <Table.Header>Torque</Table.Header>
-            <Table.Header>Tires</Table.Header>
+            <Table.Header scope="col">Model</Table.Header>
+            <Table.Header scope="col">Year</Table.Header>
+            <Table.Header scope="col">Price</Table.Header>
+            <Table.Header scope="col">Engine</Table.Header>
+            <Table.Header scope="col">Transmission</Table.Header>
+            <Table.Header scope="col">Horsepower</Table.Header>
+            <Table.Header scope="col">Torque</Table.Header>
+            <Table.Header scope="col">Tires</Table.Header>
           </Table.Row>
         </Table.Head>
         <Table.Body>
@@ -104,6 +107,7 @@ export const FixedColumn = () => {
             <>
               <Table.Row>
                 <Table.Header
+                  scope="row"
                   position="sticky"
                   left="0"
                   backgroundColor="soap100"
