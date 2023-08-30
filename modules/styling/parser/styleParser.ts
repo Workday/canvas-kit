@@ -49,6 +49,9 @@ function parseStyleObjValue(
   variables: Record<string, string>,
   checker: ts.TypeChecker
 ) {
+  /**
+   * String literals like 'red' or empty Template Expressions like `red`
+   */
   if (ts.isStringLiteral(initializer) || ts.isNoSubstitutionTemplateLiteral(initializer)) {
     return initializer.text;
   }
@@ -65,6 +68,13 @@ function parseStyleObjValue(
     return getStyleValueFromType(initializer, type, checker);
   }
 
+  /**
+   * ```ts
+   * PropertyAccessExpressions are dot-notation
+   *
+   * foo.bar.baz
+   * ```
+   */
   if (ts.isPropertyAccessExpression(initializer)) {
     const type = checker.getTypeAtLocation(initializer);
     return getStyleValueFromType(initializer, type, checker);
@@ -116,6 +126,11 @@ function parseStyleObjValue(
     }
   }
 
+  /**
+   * ```ts
+   * `border 1px ${myVars.colors.border}`
+   * ```
+   */
   if (ts.isTemplateExpression(initializer)) {
     return getStyleValueFromTemplateExpression(initializer, variables, checker);
   }
@@ -123,6 +138,9 @@ function parseStyleObjValue(
   return '';
 }
 
+/**
+ * Gets a static string value from a template expression. It could recurse.
+ */
 function getStyleValueFromTemplateExpression(
   node: ts.Node | undefined,
   variables: Record<string, string>,
