@@ -22,17 +22,22 @@ const DeleteStyles = cs({
     [buttonVars.hover.border]: cssVar(newTheme.colors.error.dark),
     [buttonVars.hover.color]: cssVar(newTheme.colors.error.contrast),
   },
-  '&:active, &.active': {
-    [buttonVars.active.background]: cssVar(newTheme.colors.error.darkest),
-    [buttonVars.active.border]: cssVar(newTheme.colors.error.darkest),
-    [buttonVars.active.color]: cssVar(newTheme.colors.error.contrast),
-  },
   '&:focus-visible, &.focus': {
     [buttonVars.focus.background]: cssVar(newTheme.colors.error.main),
     [buttonVars.focus.border]: cssVar(newTheme.colors.error.main),
     [buttonVars.focus.color]: cssVar(newTheme.colors.error.contrast),
     [buttonVars.focus.boxShadowInner]: cssVar(newTheme.colors.primary.contrast),
     [buttonVars.focus.boxShadowOuter]: cssVar(newTheme.colors.primary.dark),
+  },
+  '&:active, &.active': {
+    [buttonVars.active.background]: cssVar(newTheme.colors.error.darkest),
+    [buttonVars.active.border]: cssVar(newTheme.colors.error.darkest),
+    [buttonVars.active.color]: cssVar(newTheme.colors.error.contrast),
+  },
+  '&:disabled, &:active:disabled, &:focus:disabled, &:hover:disabled': {
+    [buttonVars.disabled.background]: cssVar(newTheme.colors.error.light),
+    [buttonVars.disabled.color]: cssVar(newTheme.colors.error.contrast),
+    opacity: 1,
   },
 });
 

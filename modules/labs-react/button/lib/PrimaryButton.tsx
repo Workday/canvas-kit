@@ -94,6 +94,9 @@ export const PrimaryButtonModifiers = createModifiers({
         [buttonVars.focus.boxShadowInner]: colors.blackPepper400,
         [buttonVars.focus.boxShadowOuter]: theme.canvas.palette.primary.contrast,
         [buttonVars.focus.color]: colors.blackPepper400,
+        boxShadow: `${cssVar(buttonVars.focus.boxShadowInner)} 0px 0px 0px 1px, ${cssVar(
+          buttonVars.focus.boxShadowOuter
+        )} 0px 0px 0px 3px`,
         '& span .wd-icon-fill': {
           [buttonVars.focus.icon]: colors.blackPepper400,
         },
