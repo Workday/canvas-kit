@@ -32,7 +32,7 @@ const PrimaryStyles = cs({
   [buttonVars.default.color]: cssVar(newTheme.colors.primary.contrast),
   '&:hover, &.hover': {
     [buttonVars.hover.background]: cssVar(newTheme.colors.primary.dark),
-    [buttonVars.hover.border]: 'transparent',
+    // [buttonVars.hover.border]: 'transparent',
     [buttonVars.hover.color]: cssVar(newTheme.colors.primary.contrast),
     '& span .wd-icon-fill': {
       [buttonVars.hover.icon]: cssVar(newTheme.colors.primary.contrast),
@@ -50,7 +50,7 @@ const PrimaryStyles = cs({
   },
   '&:active, &.active': {
     [buttonVars.active.background]: cssVar(newTheme.colors.primary.darkest),
-    [buttonVars.active.border]: 'transparent',
+    // [buttonVars.active.border]: 'transparent',
     [buttonVars.active.color]: cssVar(newTheme.colors.primary.contrast),
     '& span .wd-icon-fill': {
       [buttonVars.active.icon]: cssVar(newTheme.colors.primary.contrast),
@@ -61,7 +61,7 @@ const PrimaryStyles = cs({
   },
   '&:disabled, &:active:disabled, &:focus:disabled, &:hover:disabled': {
     [buttonVars.disabled.background]: cssVar(newTheme.colors.primary.main),
-    [buttonVars.disabled.border]: 'transparent',
+    // [buttonVars.disabled.border]: 'transparent',
     [buttonVars.disabled.color]: cssVar(newTheme.colors.primary.contrast),
     '& span .wd-icon-fill': {
       [buttonVars.disabled.icon]: cssVar(newTheme.colors.primary.contrast),

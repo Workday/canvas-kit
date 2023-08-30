@@ -128,7 +128,8 @@ const BaseButtonStyles = cs({
   fontWeight: 'bold',
   backgroundColor: cssVar(buttonVars.default.background),
   color: cssVar(buttonVars.default.color),
-  border: `1px solid ${cssVar(buttonVars.default.border)}`,
+  border: '1px solid transparent',
+  borderColor: cssVar(buttonVars.default.border),
   maxWidth: 'min-content',
   minWidth: '96px',
   cursor: 'pointer',
@@ -156,7 +157,7 @@ const BaseButtonStyles = cs({
   },
   '&:focus-visible, &.focus': {
     backgroundColor: cssVar(buttonVars.focus.background),
-    border: `1px solid ${cssVar(buttonVars.focus.border)}`,
+    borderColor: cssVar(buttonVars.focus.border),
     boxShadow: `${cssVar(buttonVars.focus.boxShadowInner)} 0px 0px 0px 2px, ${cssVar(
       buttonVars.focus.boxShadowOuter
     )} 0px 0px 0px 4px`,
@@ -171,6 +172,7 @@ const BaseButtonStyles = cs({
   },
   '&:hover, &.hover': {
     backgroundColor: cssVar(buttonVars.hover.background),
+    borderColor: cssVar(buttonVars.hover.border),
     color: cssVar(buttonVars.hover.color),
     '& span .wd-icon-fill': {
       fill: cssVar(buttonVars.hover.icon),
@@ -179,7 +181,7 @@ const BaseButtonStyles = cs({
   '&:hover:active': {transitionDuration: '40ms'},
   '&:active, &.active': {
     backgroundColor: cssVar(buttonVars.active.background),
-    border: `1px solid ${cssVar(buttonVars.active.border)}`,
+    borderColor: cssVar(buttonVars.active.border),
     color: cssVar(buttonVars.active.color),
     '& span .wd-icon-fill': {
       fill: cssVar(buttonVars.active.icon),
