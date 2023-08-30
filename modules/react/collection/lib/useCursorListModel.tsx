@@ -325,7 +325,6 @@ export const useCursorListModel = createModelHook({
   const columnCount = config.columnCount || 0;
   const list = useBaseListModel(config);
   const navigation = config.navigation;
-
   // Cast as a readonly to signify this value should never be set
   const cursorIndexRef = React.useRef(-1) as {readonly current: number};
   const setCursor = (index: number) => {

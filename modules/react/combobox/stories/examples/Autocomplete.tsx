@@ -28,6 +28,7 @@ const options = Array(1000)
 
 const useAutocompleteInput = composeHooks(
   createElemPropsHook(useComboboxModel)(model => {
+    console.log('model', model);
     return {
       onKeyPress(event: React.KeyboardEvent) {
         model.events.show(event);

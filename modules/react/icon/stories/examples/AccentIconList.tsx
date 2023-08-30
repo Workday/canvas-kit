@@ -19,7 +19,7 @@ export const AccentIconList = () => {
     <Flex flexDirection="column" alignItems="center" gap="m">
       <TextInput onKeyDown={e => handleSearch(e)} placeholder="Search for an icon" />
       <Flex flexWrap="wrap">
-       {allIcons
+        {allIcons
           .filter(icon => {
             if (value === '') {
               return 'No icons found';
