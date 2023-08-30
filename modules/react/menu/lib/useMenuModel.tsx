@@ -25,17 +25,18 @@ export const useMenuModel = createModelHook({
     ...usePopupModel.requiredConfig,
   },
 })(config => {
+  const list = useListModel(
+    useListModel.mergeConfig(config, {
+      selection: config.mode === 'single' ? singleSelectionManager : multiSelectionManager,
+    })
+  );
+
   const popup = usePopupModel(
     usePopupModel.mergeConfig(config, {
       onHide() {
         // reset the index ref to 0 again so registration doesn't start where it left off
         list.state.indexRef.current = 0;
       },
-    })
-  );
-  const list = useListModel(
-    useListModel.mergeConfig(config, {
-      selection: config.mode === 'single' ? singleSelectionManager : multiSelectionManager,
     })
   );
 

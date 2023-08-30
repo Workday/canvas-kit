@@ -68,7 +68,6 @@ export function keyboardEventToCursorEvents(
       }
     }
   }
-
   // Try regular keys
   const map = model.state.columnCount > 0 ? gridKeyMap : orientationKeyMap[model.state.orientation];
   for (const key in map) {

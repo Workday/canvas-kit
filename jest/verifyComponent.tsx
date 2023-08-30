@@ -24,7 +24,6 @@ export function verifyComponent(
   describe(`verifyComponent "${Component.displayName}"`, () => {
     const Test = React.forwardRef(({...elemProps}: {as?: React.ElementType}, ref) => {
       const model = modelFn?.() || null;
-      model //?
 
       return <Component model={model} ref={ref} {...props} {...elemProps} />;
     });

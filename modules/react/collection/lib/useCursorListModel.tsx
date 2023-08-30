@@ -316,7 +316,6 @@ export const useCursorListModel = createModelHook({
      * of the list and number of items rendered will determine this value.
      */
     pageSize: 0,
-    // listVisibility: 'visible' as 'hidden' | 'visible',
   },
   requiredConfig: useBaseListModel.requiredConfig,
   contextOverride: useBaseListModel.Context,
@@ -326,8 +325,6 @@ export const useCursorListModel = createModelHook({
   const columnCount = config.columnCount || 0;
   const list = useBaseListModel(config);
   const navigation = config.navigation;
-
-  // console.warn('CURSOR MODEL>>>', config.listVisibility);
 
   // Cast as a readonly to signify this value should never be set
   const cursorIndexRef = React.useRef(-1) as {readonly current: number};
@@ -386,7 +383,6 @@ export const useCursorListModel = createModelHook({
      */
     goToNext() {
       const index = navigation.getNext(cursorIndexRef.current, {state});
-
       setCursor(index);
     },
     /**
