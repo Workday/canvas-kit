@@ -1,7 +1,8 @@
 import React from 'react';
 import {FormField} from '@workday/canvas-kit-react/form-field';
-import {Select, useSelectModel} from '@workday/canvas-kit-react/select';
+import {Select} from '@workday/canvas-kit-react/select';
 import {Flex} from '@workday/canvas-kit-react/layout';
+import {useSelectModel} from '../../lib/hooks';
 
 const options = [
   {id: 'E-mail', data: {textValue: 'foo'}},
@@ -17,23 +18,28 @@ const options = [
 
 const disabledItems = options.filter(item => item.disabled === true).map(item => item.id);
 
-export const Error = () => {
+export const ControlledVsUncontrolled = () => {
   const [value, setValue] = React.useState('');
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
   };
+
+  const model = useSelectModel({
+    items: options,
+    nonInteractiveIds: disabledItems,
+  });
+
   return (
-    <Flex>
+    <Flex flexDirection="row" gap="m">
       <Select items={options} nonInteractiveIds={disabledItems}>
-        <FormField
-          error={FormField.ErrorType.Error}
-          hintId="contact-select"
-          hintText="Fax is disabled, choose a different option"
-          label="Contact"
-          inputId="contact-select"
-        >
-          <Select.Input onChange={e => handleChange(e)} id="contact-select" />
+        <FormField label="Controlled" inputId="contact-select">
+          <Select.Input
+            width="200px"
+            value={value}
+            onChange={e => handleChange(e)}
+            id="contact-select"
+          />
           <Select.Popper>
             <Select.Card maxHeight="200px">
               <Select.List>
@@ -49,7 +55,24 @@ export const Error = () => {
           </Select.Popper>
         </FormField>
       </Select>
-      Selected Value: {value}
+      <Select model={model}>
+        <FormField label="Uncontrolled" inputId="contact-select">
+          <Select.Input width="200px" id="contact-select" />
+          <Select.Popper>
+            <Select.Card maxHeight="200px">
+              <Select.List>
+                {item => {
+                  return (
+                    <Select.Item aria-disabled={item.disabled ? item.disabled : undefined}>
+                      {item.id}
+                    </Select.Item>
+                  );
+                }}
+              </Select.List>
+            </Select.Card>
+          </Select.Popper>
+        </FormField>
+      </Select>
     </Flex>
   );
 };

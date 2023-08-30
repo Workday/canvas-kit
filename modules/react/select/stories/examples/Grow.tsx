@@ -3,7 +3,7 @@ import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Select, useSelectModel} from '@workday/canvas-kit-react/select';
 import {Flex} from '@workday/canvas-kit-react/layout';
 
-export const options = [
+const options = [
   {id: 'E-mail', data: {textValue: 'foo'}},
   {id: 'Phone'},
   {id: 'Fax (disabled)', disabled: true},
@@ -24,25 +24,27 @@ export const Grow = () => {
   });
 
   return (
-    <Select model={model}>
-      <FormField label="Contact">
-        <Select.Input width="100%" id="contact-select" />
-        <Select.Popper>
-          <Select.Card maxHeight="200px">
-            {model.state.items.length > 0 && (
-              <Select.List>
-                {item => {
-                  return (
-                    <Select.Item aria-disabled={item.disabled ? item.disabled : undefined}>
-                      {item.id}
-                    </Select.Item>
-                  );
-                }}
-              </Select.List>
-            )}
-          </Select.Card>
-        </Select.Popper>
-      </FormField>
-    </Select>
+    <Flex>
+      <Select model={model}>
+        <FormField label="Contact" grow>
+          <Select.Input width="100%" id="contact-select" />
+          <Select.Popper>
+            <Select.Card maxHeight="200px">
+              {model.state.items.length > 0 && (
+                <Select.List>
+                  {item => {
+                    return (
+                      <Select.Item aria-disabled={item.disabled ? item.disabled : undefined}>
+                        {item.id}
+                      </Select.Item>
+                    );
+                  }}
+                </Select.List>
+              )}
+            </Select.Card>
+          </Select.Popper>
+        </FormField>
+      </Select>
+    </Flex>
   );
 };

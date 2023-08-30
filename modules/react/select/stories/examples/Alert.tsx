@@ -1,9 +1,9 @@
 import React from 'react';
 import {FormField} from '@workday/canvas-kit-react/form-field';
-import {Select, useSelectModel} from '@workday/canvas-kit-react/select';
+import {Select} from '@workday/canvas-kit-react/select';
 import {Flex} from '@workday/canvas-kit-react/layout';
 
-export const options = [
+const options = [
   {id: 'E-mail', data: {textValue: 'foo'}},
   {id: 'Phone'},
   {id: 'Fax (disabled)', disabled: true},
@@ -18,14 +18,14 @@ export const options = [
 const disabledItems = options.filter(item => item.disabled === true).map(item => item.id);
 
 export const Alert = () => {
-  const model = useSelectModel({
-    items: options,
-    nonInteractiveIds: disabledItems,
-  });
+  const [value, setValue] = React.useState('');
 
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(event.target.value);
+  };
   return (
-    <Flex>
-      <Select model={model}>
+    <Flex flexDirection="column">
+      <Select items={options} nonInteractiveIds={disabledItems}>
         <FormField
           error={FormField.ErrorType.Alert}
           hintId="contact-select"
@@ -33,24 +33,23 @@ export const Alert = () => {
           label="Contact"
           inputId="contact-select"
         >
-          <Select.Input id="contact-select" />
+          <Select.Input onChange={e => handleChange(e)} id="contact-select" />
           <Select.Popper>
             <Select.Card maxHeight="200px">
-              {model.state.items.length > 0 && (
-                <Select.List>
-                  {item => {
-                    return (
-                      <Select.Item aria-disabled={item.disabled ? item.disabled : undefined}>
-                        {item.id}
-                      </Select.Item>
-                    );
-                  }}
-                </Select.List>
-              )}
+              <Select.List>
+                {item => {
+                  return (
+                    <Select.Item aria-disabled={item.disabled ? item.disabled : undefined}>
+                      {item.id}
+                    </Select.Item>
+                  );
+                }}
+              </Select.List>
             </Select.Card>
           </Select.Popper>
         </FormField>
       </Select>
+      Selected value: {value}
     </Flex>
   );
 };

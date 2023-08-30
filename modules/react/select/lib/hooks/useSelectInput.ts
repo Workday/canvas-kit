@@ -203,6 +203,7 @@ export const useSelectInput = composeHooks(
           model.state.UNSTABLE_virtual.scrollToIndex(foundIndex);
         }
       },
+      autoComplete: 'off',
     } as const;
   })
 );

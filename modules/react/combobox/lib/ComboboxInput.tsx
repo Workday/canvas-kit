@@ -14,7 +14,6 @@ import {usePopupTarget} from '@workday/canvas-kit-react/popup';
 import {
   useListActiveDescendant,
   keyboardEventToCursorEvents,
-  // useListKeyboardHandler,
 } from '@workday/canvas-kit-react/collection';
 
 import {useComboboxModel} from './useComboboxModel';

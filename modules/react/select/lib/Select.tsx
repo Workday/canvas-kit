@@ -4,6 +4,7 @@ import {
   ExtractProps,
   createContainer,
   Themeable,
+  styled,
 } from '@workday/canvas-kit-react/common';
 import {Combobox} from '@workday/canvas-kit-react/combobox';
 
@@ -13,6 +14,7 @@ import {caretDownSmallIcon} from '@workday/canvas-system-icons-web';
 import {useSelectModel, useSelectItem} from './hooks';
 import {useSelectInput} from './hooks/useSelectInput';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
+import {space} from '../../tokens';
 
 export interface SelectInputProps extends ExtractProps<typeof TextInput> {
   /**
@@ -55,9 +57,6 @@ export const SelectInput = createSubcomponent(TextInput)({
   }
 );
 
-/**
- * This renders a `Combobox.Menu.Item` while adding the additional `role="option"` attribute for accessibility.
- */
 export const SelectItem = createSubcomponent('li')({
   modelHook: useSelectModel,
   elemPropsHook: useSelectItem,
@@ -72,8 +71,29 @@ export const SelectItem = createSubcomponent('li')({
   );
 });
 
-export interface Select2Props extends Themeable, ExtractProps<typeof Combobox> {}
-
+export interface SelectProps extends Themeable, ExtractProps<typeof Combobox> {}
+/**
+ * Use `Select` to allow users to choose an option from a list or type characters to select a matching option.
+ *
+ * ```tsx
+ * <Select items={options}>
+ *  <Select.Input onChange={e => handleChange(e)} id="contact-select" />
+ *  <Select.Popper>
+ *    <Select.Card maxHeight="200px">
+ *      <Select.List>
+ *        {item => {
+ *          return (
+ *            <Select.Item aria-disabled={item.disabled ? item.disabled : undefined}>
+ *              {item.id}
+ *            </Select.Item>
+ *          );
+ *         }}
+ *      </Select.List>
+ *     </Select.Card>
+ *    </Select.Popper>
+ *  </Select>
+ * ```
+ */
 export const Select = createContainer()({
   displayName: 'Select',
   modelHook: useSelectModel,
@@ -84,7 +104,7 @@ export const Select = createContainer()({
     List: Combobox.Menu.List,
     Item: SelectItem,
   },
-})<Select2Props>(({children, ...elemProps}, _, model) => {
+})<SelectProps>(({children, ...elemProps}, _, model) => {
   return (
     <Combobox model={model} {...elemProps}>
       {children}

@@ -3,7 +3,7 @@ import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Select, useSelectModel} from '@workday/canvas-kit-react/select';
 import {Flex} from '@workday/canvas-kit-react/layout';
 
-export const options = [
+const options = [
   {id: 'E-mail', data: {textValue: 'foo'}},
   {id: 'Phone'},
   {id: 'Fax (disabled)', disabled: true},

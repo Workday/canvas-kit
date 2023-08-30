@@ -5,13 +5,14 @@ import {Select} from '@workday/canvas-kit-react/select';
 import {Alert} from './examples/Alert';
 import {Basic} from './examples/Basic';
 import {Disabled} from './examples/Disabled';
-import {DisabledOption} from './examples/DisabledOption';
+import {DisabledOptions} from './examples/DisabledOption';
 import {Error} from './examples/Error';
 import {Grow} from './examples/Grow';
 import {LabelPosition} from './examples/LabelPosition';
 import {WithIcons} from './examples/WithIcons';
-// import {Required} from './examples/Required';
+import {Required} from './examples/Required';
 import {Scrollable} from './examples/Scrollable';
+import {ControlledVsUncontrolled} from './examples/ControlledVsUncontrolled';
 
 <Meta title="Components/Inputs/Select" component={Select} />
 
@@ -55,7 +56,7 @@ Option. Note that the value of a Select may be programmatically set to a disable
 the Select's `value` prop to the value of the disabled Option. The disabled Option, however, will
 remain unselectable by the user.
 
-<ExampleCodeBlock code={DisabledOption} />
+<ExampleCodeBlock code={DisabledOptions} />
 
 ### Ref Forwarding
 
@@ -86,9 +87,15 @@ relative to the Select. `labelPosition` accepts the following values:
 Set the `required` prop of the wrapping Form Field to `true` to indicate that the field is required.
 Labels for required fields are suffixed by a red asterisk.
 
+<ExampleCodeBlock code={Required} />
+
 ### With Icons
 
 <ExampleCodeBlock code={WithIcons} />
+
+### Controlled vs Uncontrolled
+
+<ExampleCodeBlock code={ControlledVsUncontrolled} />
 
 ### Error States
 

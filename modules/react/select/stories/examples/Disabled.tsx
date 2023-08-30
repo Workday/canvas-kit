@@ -1,33 +1,36 @@
 import React from 'react';
 import {FormField} from '@workday/canvas-kit-react/form-field';
-import {Select, useSelectModel} from '@workday/canvas-kit-react/select';
+import {Select} from '@workday/canvas-kit-react/select';
+import {Flex} from '@workday/canvas-kit-react/layout';
 
-export const options = [
-  {id: 'E-mail'},
+const options = [
+  {id: 'E-mail', data: {textValue: 'foo'}},
   {id: 'Phone'},
   {id: 'Fax (disabled)', disabled: true},
   {id: 'Mail'},
-  {id: 'Mobile Phone', disabled: true},
+  {id: 'Mobile Phone'},
   {
     id: 'The Ontologically Anthropocentric Sensory Immersive Simulation',
+    disabled: false,
   },
 ];
 
 const disabledItems = options.filter(item => item.disabled === true).map(item => item.id);
 
 export const Disabled = () => {
-  const model = useSelectModel({
-    items: options,
-    nonInteractiveIds: disabledItems,
-  });
+  const [value, setValue] = React.useState('');
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(event.target.value);
+  };
 
   return (
-    <FormField label="Contact">
-      <Select model={model}>
-        <Select.Input id="contact-select" disabled />
-        <Select.Popper>
-          <Select.Card maxHeight="200px">
-            {model.state.items.length > 0 && (
+    <Flex flexDirection="column">
+      <Select items={options} nonInteractiveIds={disabledItems}>
+        <FormField label="Contact" inputId="contact-select">
+          <Select.Input disabled onChange={e => handleChange(e)} id="contact-select" />
+          <Select.Popper>
+            <Select.Card maxHeight="200px">
               <Select.List>
                 {item => {
                   return (
@@ -37,11 +40,11 @@ export const Disabled = () => {
                   );
                 }}
               </Select.List>
-            )}
-          </Select.Card>
-        </Select.Popper>
+            </Select.Card>
+          </Select.Popper>
+        </FormField>
       </Select>
-      {/* Selected: {model.state.selectedIds[0]} */}
-    </FormField>
+      Selected Value: {value}
+    </Flex>
   );
 };
