@@ -6,7 +6,7 @@ import {
   StaticStates,
 } from '@workday/canvas-kit-react/testing';
 import {withSnapshotsEnabled, customColorTheme} from '../../../../../utils/storybook';
-import {DeleteButton} from '@workday/canvas-kit-labs-react/button';
+import {DeleteButton} from '@workday/canvas-kit-react/button';
 import {Container, stateTableColumnProps} from './utils';
 
 export default withSnapshotsEnabled({

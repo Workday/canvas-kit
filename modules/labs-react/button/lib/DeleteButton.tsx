@@ -14,24 +14,24 @@ export interface DeleteButtonProps extends Omit<BaseButtonContainerProps, 'ref'>
 
 const DeleteStyles = cs({
   [buttonVars.default.background]: cssVar(newTheme.colors.error.main),
-  [buttonVars.default.border]: cssVar(newTheme.colors.error.main),
+  [buttonVars.default.border]: 'transparent',
   [buttonVars.default.borderRadius]: cssVar(newTheme.borderRadius.circle),
   [buttonVars.default.color]: cssVar(newTheme.colors.error.contrast),
   '&:hover, &.hover': {
     [buttonVars.hover.background]: cssVar(newTheme.colors.error.dark),
-    [buttonVars.hover.border]: cssVar(newTheme.colors.error.dark),
+    [buttonVars.hover.border]: 'transparent',
     [buttonVars.hover.color]: cssVar(newTheme.colors.error.contrast),
   },
   '&:focus-visible, &.focus': {
     [buttonVars.focus.background]: cssVar(newTheme.colors.error.main),
-    [buttonVars.focus.border]: cssVar(newTheme.colors.error.main),
+    [buttonVars.focus.border]: 'transparent',
     [buttonVars.focus.color]: cssVar(newTheme.colors.error.contrast),
     [buttonVars.focus.boxShadowInner]: cssVar(newTheme.colors.primary.contrast),
     [buttonVars.focus.boxShadowOuter]: cssVar(newTheme.colors.primary.dark),
   },
   '&:active, &.active': {
     [buttonVars.active.background]: cssVar(newTheme.colors.error.darkest),
-    [buttonVars.active.border]: cssVar(newTheme.colors.error.darkest),
+    [buttonVars.active.border]: 'transparent',
     [buttonVars.active.color]: cssVar(newTheme.colors.error.contrast),
   },
   '&:disabled, &:active:disabled, &:focus:disabled, &:hover:disabled': {
