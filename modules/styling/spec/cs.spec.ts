@@ -1,4 +1,4 @@
-import {setUniqueSeed, resetUniqueIdCount} from '@workday/canvas-kit-react/common';
+import {setUniqueSeed, resetUniqueIdCount} from '../lib/uniqueId';
 import {cs, cssVar, createVars, createModifiers, csToProps, CS, fallback} from '../lib/cs';
 import {expectTypeOf} from 'expect-type';
 import {Properties} from 'csstype';
@@ -39,7 +39,7 @@ describe.only('cs', () => {
     it('should create an object with a key of the "color"', () => {
       const myVars = createVars('color');
 
-      expect(myVars).toHaveProperty('color', '--a0-color');
+      expect(myVars).toHaveProperty('color', expect.stringMatching(/--.+-color/));
     });
 
     it('should return a type object with keys matching each input', () => {

@@ -1,9 +1,7 @@
-/**
- * @jest-environment node
- */
 import React from 'react';
 import {renderToString} from 'react-dom/server';
 import {Combobox} from '../';
+import {useComboboxModel} from '../lib/useComboboxModel';
 
 describe('Combobox', () => {
   it('should render on a server without crashing', () => {

@@ -19,7 +19,10 @@
     "allowSyntheticDefaultImports": true,
     "types": [],
     "incremental": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "plugins": [
+      {"transform": "../styling/parser/styleParser.ts", "prefix": "css", "fallbackFiles": []}
+    ]
   },
   "ts-node": {
     "transpileOnly": true,

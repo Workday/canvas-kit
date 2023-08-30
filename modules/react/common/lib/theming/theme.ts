@@ -1,7 +1,7 @@
 import colors from '@workday/canvas-colors-web';
 import {CanvasTheme, ContentDirection} from './types';
 import {breakpoints, up, down, between, only} from './breakpoints';
-import {cs} from '../cs';
+import {cs} from '@workday/canvas-kit-styling';
 
 export const defaultCanvasTheme: CanvasTheme = {
   palette: {

@@ -3,23 +3,13 @@ import * as React from 'react';
 import {ButtonLabelIcon} from './parts/ButtonLabelIcon';
 import {ButtonLabel} from './parts/ButtonLabel';
 
-import {
-  createComponent,
-  GrowthBehavior,
-  cs,
-  createVars,
-  fallback,
-  createModifiers,
-  newTheme,
-  cssVar,
-} from '@workday/canvas-kit-react/common';
+import {cs, createVars, fallback, createModifiers, cssVar} from '@workday/canvas-kit-styling';
+import {createComponent, GrowthBehavior, newTheme} from '@workday/canvas-kit-react/common';
 import {SystemIconProps} from '@workday/canvas-kit-react/icon';
 import {Box} from '@workday/canvas-kit-react/layout';
 import {borderRadius, space} from '@workday/canvas-kit-react/tokens';
 
-import {ButtonColors, ButtonSizes, IconPositions, TertiaryButtonSizes} from './types';
-
-import {CanvasSystemIcon} from '@workday/design-assets-types';
+import {ButtonColors, ButtonSizes} from './types';
 
 export interface ButtonContainerProps extends Partial<SystemIconProps>, GrowthBehavior {
   /**
@@ -63,8 +53,6 @@ const newType = {
   },
 };
 
-function createDataClass(...args: string[]) {}
-
 const baseButtonVars = createVars('background', 'label');
 
 const baseButtonModifiers = createModifiers({
@@ -78,7 +66,7 @@ const baseButtonModifiers = createModifiers({
         paddingInlineEnd: space.xs,
       },
       '&.canvas-button-icon-start': {
-        paddingInlineStart: space.m,
+        paddingInlineStart: 'm',
       },
       '&.canvas-button-icon-end': {
         paddingInlineEnd: space.m,
@@ -123,7 +111,7 @@ const baseButtonStyles = cs(newType.levels.subtext.large, {
 
 export const BaseButton = createComponent('button')({
   displayName: 'Button',
-  Component: ({children, colors, ...elemProps}: ButtonContainerProps, ref, Element) => {
+  Component: ({children, colors, cs, ...elemProps}: ButtonContainerProps, ref, Element) => {
     return (
       <Box
         as={Element}

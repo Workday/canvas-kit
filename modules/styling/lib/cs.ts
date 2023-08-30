@@ -1,66 +1,18 @@
 import React from 'react';
 import {CommonStyleProps} from '@workday/canvas-kit-react/layout';
-// import {colors, space, type} from '@workday/canvas-kit-react/tokens';
-import {generateUniqueId} from './utils/useUniqueId';
+import {generateUniqueId} from './uniqueId';
+import {Properties} from 'csstype';
 // eslint-disable-next-line @emotion/no-vanilla
 import {css} from '@emotion/css';
 
-export const theme = {
-  palette: {
-    primary: {
-      lightest: 'var(--ck-palette-primary-lightest)',
-      light: 'var(--ck-palette-primary-light)',
-      main: 'var(--ck-palette-primary-main)',
-      dark: 'var(--ck-palette-primary-dark)',
-      darkest: 'var(--ck-palette-primary-darkest)',
-    },
-    alert: {
-      lightest: 'var(--ck-palette-alert-lightest)',
-      light: 'var(--ck-palette-alert-light)',
-      main: 'var(--ck-palette-alert-main)',
-      dark: 'var(--ck-palette-alert-dark)',
-      darkest: 'var(--ck-palette-alert-darkest)',
-    },
-    error: {
-      lightest: 'var(--ck-palette-error-lightest)',
-      light: 'var(--ck-palette-error-light)',
-      main: 'var(--ck-palette-error-main)',
-      dark: 'var(--ck-palette-error-dark)',
-      darkest: 'var(--ck-palette-error-darkest)',
-    },
-    success: {
-      lightest: 'var(--ck-palette-success-lightest)',
-      light: 'var(--ck-palette-success-light)',
-      main: 'var(--ck-palette-success-main)',
-      dark: 'var(--ck-palette-success-dark)',
-      darkest: 'var(--ck-palette-success-darkest)',
-    },
-    neutral: {
-      lightest: 'var(--ck-palette-neutral-lightest)',
-      light: 'var(--ck-palette-neutral-light)',
-      main: 'var(--ck-palette-neutral-main)',
-      dark: 'var(--ck-palette-neutral-dark)',
-      darkest: 'var(--ck-palette-neutral-darkest)',
-    },
-    common: {
-      focusOutline: '#0875e1',
-    },
-  },
-} as const;
-
-// get all tokens for lookup... We might need to watch for duplicates and separate by key
-const tokens = {}; /*{
-  ...colors,
-  ...space,
-  ...type.properties.fontFamilies,
-  // etc
-};*/
+// future placeholder for token replacement
+const tokens = {};
 
 type NestedStyles =
   | string
   | number
   | undefined
-  | (CommonStyleProps & {
+  | (Properties & {
       [propertyName: string]: NestedStyles;
     });
 
@@ -136,7 +88,7 @@ export function createVars<T extends string, ID extends string>(input: {
 }): CsVars<T, ID>;
 export function createVars<T extends string, ID extends string>(...args: T[]): CsVars<T, ID>;
 export function createVars<T extends string, ID extends string>(...args: T[]): CsVars<T, ID> {
-  const id = (args[0] as any).id || generateUniqueId();
+  const id = (args[0] as any).id || generateUniqueId(); //?
   // eslint-disable-next-line no-param-reassign
   args = (args[0] as any).args || args;
   const result = (input: Record<T, string>) => {
