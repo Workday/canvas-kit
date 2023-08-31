@@ -24,7 +24,7 @@ export const Error = () => {
     setValue(event.target.value);
   };
   return (
-    <Flex>
+    <Flex flexDirection="column">
       <Select items={options} nonInteractiveIds={disabledItems}>
         <FormField
           error={FormField.ErrorType.Error}

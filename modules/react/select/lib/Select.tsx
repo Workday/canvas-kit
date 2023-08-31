@@ -4,7 +4,6 @@ import {
   ExtractProps,
   createContainer,
   Themeable,
-  styled,
 } from '@workday/canvas-kit-react/common';
 import {Combobox} from '@workday/canvas-kit-react/combobox';
 
@@ -14,22 +13,15 @@ import {caretDownSmallIcon} from '@workday/canvas-system-icons-web';
 import {useSelectModel, useSelectItem} from './hooks';
 import {useSelectInput} from './hooks/useSelectInput';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {space} from '../../tokens';
 
 export interface SelectInputProps extends ExtractProps<typeof TextInput> {
   /**
-   * The Icon to render at the start of the input. Use this prob if your options
+   * The Icon to render at the start of the input. Use this prop if your options
    * include icons that you would like to render in the input when selected.
-   * An option was must be select in order to render and icon.
+   * An option must be selected in order to render and icon.
    */
   inputStartIcon?: CanvasSystemIcon;
 }
-
-/**
- * The SelectInput renders a custom `ComboboxInput` with additional support for keyboard navigation
- * and interaction as defined by [WAI](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/examples/combobox-select-only/).
- * All valid attributes are spread to the underlying `<input>` element.
- */
 export const SelectInput = createSubcomponent(TextInput)({
   modelHook: useSelectModel,
   elemPropsHook: useSelectInput,
@@ -98,10 +90,76 @@ export const Select = createContainer()({
   displayName: 'Select',
   modelHook: useSelectModel,
   subComponents: {
+    /**
+     * `Select.Input` renders a `Combobox.Input` that handles keyboard navigation and interaction defined by [WAI](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/examples/combobox-select-only/).
+     * This component can either be [controlled or un controlled](https://react.dev/learn/sharing-state-between-components#controlled-and-uncontrolled-components).
+     * **Note: An `id` must be provided that matches the `inputId` attribute on the `FormField` component from Main in order the `label` element to be associated with the `input` element.**
+     *
+     * ```tsx
+     * <Select items={options}>
+     *   <Select.Input id="matching-formfield-inputId" onChange={(event) => handleChange(event)}>
+     *   ...
+     * </Select>
+     * ```
+     */
     Input: SelectInput,
+    /**
+     * `Select.Popper` renders a `Combobox.Menu.Popper`. You have access to all `Popper` props.
+     * ```tsx
+     * <Select item={options}>
+     *  <Select.Input id="matching-formfield-inputId" onChange={(event) => handleChange(event)}>
+     *  <Select.Popper>
+     *    ...
+     *  </Select.Popper>
+     * </Select>
+     * ```
+     */
     Popper: Combobox.Menu.Popper,
+    /**
+     * `Select.Card` renders a `Combobox.Menu.Card`. You have access to all `Card` props.
+     * ```tsx
+     * <Select item={options}>
+     *  <Select.Input id="matching-formfield-inputId" onChange={(event) => handleChange(event)}>
+     *  <Select.Popper>
+     *    <Select.Card>
+     *      ...
+     *    </Select.Card>
+     *  </Select.Popper>
+     * </Select>
+     * ```
+     */
     Card: Combobox.Menu.Card,
+    /**
+     * `Select.List` renders a `Combobox.Menu.List`. You have access to all `ListBox` props.
+     * ```tsx
+     * <Select item={options}>
+     *  <Select.Input id="matching-formfield-inputId" onChange={(event) => handleChange(event)}>
+     *  <Select.Popper>
+     *    <Select.Card>
+     *      <Select.List>
+     *        {(item) => <Select.Item>{item}</Select.Item>}
+     *      </Select.List
+     *    </Select.Card>
+     *  </Select.Popper>
+     * </Select>
+     * ```
+     */
     List: Combobox.Menu.List,
+    /**
+     * `Select.Item` renders a `Combobox.Menu.Item` with aria role of `option`. You can optionally render a `Icon`.
+     * ```tsx
+     * <Select item={options}>
+     *  <Select.Input id="matching-formfield-inputId" onChange={(event) => handleChange(event)}>
+     *  <Select.Popper>
+     *    <Select.Card>
+     *      <Select.List>
+     *        {(item) => <Select.Item><Select.Item.Icon icon={icon} />{item}</Select.Item>}
+     *      </Select.List
+     *    </Select.Card>
+     *  </Select.Popper>
+     * </Select>
+     * ```
+     */
     Item: SelectItem,
   },
 })<SelectProps>(({children, ...elemProps}, _, model) => {
@@ -111,110 +169,3 @@ export const Select = createContainer()({
     </Combobox>
   );
 });
-
-// export interface SelectOption2Props extends ExtractProps<typeof SelectBase.Item> {
-//   // This ensures that each option in the select is registered to enable keyboard navigation
-//   // selection, and type ahead. Try to match this value to the text value of your option.
-//   // If you're rendering states, and an option is `Alabama`, then `data-id` should be
-//   // `data-id="Alabama"`. This value is also used to determine if an option is disabled or non interactive.
-//   'data-id': string;
-// }
-
-// export const SelectOption2 = createComponent('li')({
-//   displayName: 'SelectOption',
-//   Component: ({children, ...elemProps}: SelectOption2Props, ref, Element) => {
-//     return (
-//       <SelectBase.Item {...elemProps} ref={ref}>
-//         {children}
-//       </SelectBase.Item>
-//     );
-//   },
-// });
-
-// interface OptionData {
-//   // This allows developers to include arbitrary keys in their
-//   // Options data and to utilize those keys in their renderOption
-//   // function without encountering TypeScript errors
-//   [key: string]: any;
-// }
-// export interface Option {
-//   data?: OptionData;
-//   id: string;
-//   icon?: CanvasSystemIcon;
-//   disabled?: boolean;
-// }
-// export interface Select2Props extends ExtractProps<typeof TextInput> {
-//   options?: (Option | string)[];
-// }
-
-// export const Select2 = createComponent(TextInput)({
-//   displayName: 'Select2',
-//   Component: ({children, options, ...elemProps}: Select2Props, ref, Element) => {
-//     const baseOptionsItems: any = [];
-//     console.log(options);
-//     let normalizedOptions;
-
-//     React.Children.forEach(children, (child, index) => {
-//       if (child && typeof child === 'object' && 'props' in child) {
-//         const baseOption = {
-//           id: child.props['data-id'],
-//           ...child.props,
-//         };
-//         baseOptionsItems.push(baseOption);
-//       }
-//     });
-
-//     if (options?.length) {
-//       normalizedOptions = options.map(option => {
-//         let data = {};
-//         let disabled, id;
-
-//         if (typeof option === 'string') {
-//           disabled = false;
-//           id = option;
-//         } else {
-//           data = option.data || data;
-//           disabled = !!option.disabled;
-//           id = option.id;
-//         }
-
-//         return {
-//           ...data,
-//           disabled,
-//           id,
-//         };
-//       });
-//     }
-
-//     const model = useSelectModel({
-//       items: options?.length ? normalizedOptions : baseOptionsItems,
-//       nonInteractiveIds: options?.length
-//         ? normalizedOptions?.filter(item => item.disabled === true).map(item => item.id)
-//         : baseOptionsItems
-//             .filter(item => item['aria-disabled'] === true)
-//             .map(item => item['data-id']),
-//     });
-
-//     console.log('MODEL', model);
-//     return (
-//       <SelectBase model={model}>
-//         <SelectBase.Input id="contact-select" ref={ref} {...elemProps} />
-//         <SelectBase.Popup>
-//           <SelectBase.Card maxHeight="200px">
-//             <SelectBase.List>
-//               {item => {
-//                 const {children, id, disabled, ...rest} = item;
-//                 console.warn(item);
-//                 return (
-//                   <SelectBase.Item data-id={id} aria-disabled={disabled ? disabled : undefined}>
-//                     {id}
-//                   </SelectBase.Item>
-//                 );
-//               }}
-//             </SelectBase.List>
-//           </SelectBase.Card>
-//         </SelectBase.Popup>
-//       </SelectBase>
-//     );
-//   },
-// });

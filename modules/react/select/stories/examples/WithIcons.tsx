@@ -8,7 +8,6 @@ import {
   uploadCloudIcon,
   userIcon,
 } from '@workday/canvas-system-icons-web';
-import {SystemIcon} from '../../../icon';
 
 export const customOptions = [
   {id: 'Activity Stream', icon: activityStreamIcon},
