@@ -1,3 +1,4 @@
+import {Meta} from '@storybook/addon-docs';
 import {SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
 
 import {Select} from '@workday/canvas-kit-react/select';
@@ -18,13 +19,9 @@ import {ControlledVsUncontrolled} from './examples/ControlledVsUncontrolled';
 
 # Canvas Kit Select
 
-Select menus allow users to choose one option from a list of items.
+Select inputs allow users to choose one option from a list of items or type a matching option.
 
-[> Workday Design Reference](https://design.workday.com/components/inputs/select-drop-down)
-
-> Consider using the [Select in Preview](/components/inputs/select/) instead. It utilizes a
-> Canvas-styled menu with theming support and a more flexible API for defining options. The Select
-> in Preview will replace this component in the future.
+[> Workday Design Reference](https://design.workday.com/components/inputs/select)
 
 ## Installation
 
@@ -36,46 +33,20 @@ yarn add @workday/canvas-kit-react
 
 ### Basic Example
 
-Select should be used in tandem with [Form Field](/components/inputs/form-field/) to meet
-accessibility standards.
+`Select` should be used in tandem with [Form Field](/components/inputs/form-field/) where the
+`inputId` prop matches an `id` on the `<Select.Input/>` to meet accessibility standards. This
+ensures the `label` text from `FormField` is attached to the `Select.Input` and read out as a group
+for voiceover.
 
 <ExampleCodeBlock code={Basic} />
 
-### Scrollable
-
-<ExampleCodeBlock code={Scrollable} />
-
-### Disabled
-
-Set the `disabled` prop of the Select to prevent users from interacting with it.
-
-<ExampleCodeBlock code={Disabled} />
-
-You may also set the `disabled` prop of the Select Option to prevent users from selecting that
-Option. Note that the value of a Select may be programmatically set to a disabled Option by setting
-the Select's `value` prop to the value of the disabled Option. The disabled Option, however, will
-remain unselectable by the user.
-
-<ExampleCodeBlock code={DisabledOptions} />
-
-### Ref Forwarding
-
-Select supports [ref forwarding](https://reactjs.org/docs/forwarding-refs.html). It will forward
-`ref` to its underlying `<select>` element.
-
-### Grow
-
-Set the `grow` prop of the wrapping Form Field to `true` to configure the Select to expand to the
-width of its container.
-
-<ExampleCodeBlock code={Grow} />
-
-The `grow` prop may also be applied directly to the Select if Form Field is not being used.
+Our example uses [React state](<(https://react.dev/learn/state-a-components-memory)>) to track the
+value of the `Select`.
 
 ### Label Position
 
-Set the `labelPosition` prop of the wrapping Form Field to designate the position of the label
-relative to the Select. `labelPosition` accepts the following values:
+Set the `labelPosition` prop of the wrapping `FormField` to designate the position of the label
+relative to the `Select`. `labelPosition` accepts the following values:
 
 - `FormField.LabelPosition.Top` (Default)
 - `FormField.LabelPosition.Left`
@@ -84,41 +55,38 @@ relative to the Select. `labelPosition` accepts the following values:
 
 ### Required
 
-Set the `required` prop of the wrapping Form Field to `true` to indicate that the field is required.
-Labels for required fields are suffixed by a red asterisk.
+Set the `required` prop of the wrapping `FormField` to `true` to indicate that the field is
+required. Labels for required fields are suffixed by a red asterisk.
 
 <ExampleCodeBlock code={Required} />
 
-### With Icons
+### Disabled
 
-<ExampleCodeBlock code={WithIcons} />
+Set the `disabled` prop of `Select.Input` to prevent users from interacting with it.
 
-### Controlled vs Uncontrolled
-
-<ExampleCodeBlock code={ControlledVsUncontrolled} />
+<ExampleCodeBlock code={Disabled} />
 
 ### Error States
 
-Set the `error` prop of the wrapping Form Field to `FormField.ErrorType.Alert` or
-`FormField.ErrorType.Error` to set the Select to the Alert or Error state, respectively. You will
-also need to set the `hintId` and `hintText` props on the Form Field to meet accessibility
-standards.
-
-The `error` prop may be applied directly to the Select with a value of `Select.ErrorType.Alert` or
-`Select.ErrorType.Error` if Form Field is not being used.
+Set the error prop of the wrapping `FormField` to `FormField.ErrorType.Alert` or
+`FormField.ErrorType.Error` to set the `RadioGroup` to the alert or error state, respectively. You
+will also need to set the `hintId` and `hintText` props on the `FormField` to meet accessibility
+standards. You must set an `aria-describedby` attribute on the `RadioGroup` element that matches the
+value of `hintId` set on the `FormField` element. These attributes ensure that the alert message is
+associated to the `RadioGroup` and read out by voiceover.
 
 #### Alert
+
+Use the alert state when a selection is valid but there is additional information.
 
 <ExampleCodeBlock code={Alert} />
 
 #### Error
+
+Use the error state when the selection is no longer valid.
 
 <ExampleCodeBlock code={Error} />
 
 ## Component API
 
 <SymbolDoc name="Select" fileName="/react/" />
-
-## Specifications
-
-<Specifications file="Select.spec.ts" name="Select" />
