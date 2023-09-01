@@ -28,12 +28,12 @@ export const Error = () => {
       <Select items={options} nonInteractiveIds={disabledItems}>
         <FormField
           error={FormField.ErrorType.Error}
-          hintId="contact-select"
+          hintId="error-select"
           hintText="Fax is disabled, choose a different option"
           label="Contact"
-          inputId="contact-select"
+          inputId="error-select"
         >
-          <Select.Input onChange={e => handleChange(e)} id="contact-select" />
+          <Select.Input onChange={e => handleChange(e)} id="error-select" />
           <Select.Popper>
             <Select.Card maxHeight="200px">
               <Select.List>

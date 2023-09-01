@@ -1,5 +1,5 @@
 import React from 'react';
-import {FormField} from '@workday/canvas-kit-preview-react/form-field';
+import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Select, useSelectModel} from '@workday/canvas-kit-react/select';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {
@@ -23,10 +23,9 @@ export const WithIcons = () => {
   const currentItem = model.navigation.getItem(model.state.selectedIds[0], model);
   return (
     <Flex>
-      <FormField orientation="vertical" hasError>
-        <FormField.Label htmlFor="contact-select">Contact</FormField.Label>
-        <Select model={model}>
-          <Select.Input inputStartIcon={currentItem.value.icon} id="contact-select" />
+      <Select model={model}>
+        <FormField label="Contact" inputId="with-icons-select">
+          <Select.Input inputStartIcon={currentItem.value.icon} id="with-icons-select" />
           <Select.Popper>
             <Select.Card maxHeight="200px">
               {model.state.items.length > 0 && (
@@ -43,8 +42,8 @@ export const WithIcons = () => {
               )}
             </Select.Card>
           </Select.Popper>
-        </Select>
-      </FormField>
+        </FormField>
+      </Select>
     </Flex>
   );
 };

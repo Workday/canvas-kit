@@ -27,8 +27,8 @@ export const Disabled = () => {
   return (
     <Flex flexDirection="column">
       <Select items={options} nonInteractiveIds={disabledItems}>
-        <FormField label="Contact" inputId="contact-select">
-          <Select.Input disabled onChange={e => handleChange(e)} id="contact-select" />
+        <FormField label="Contact" inputId="disabled-select">
+          <Select.Input disabled onChange={e => handleChange(e)} id="disabled-select" />
           <Select.Popper>
             <Select.Card maxHeight="200px">
               <Select.List>
@@ -44,7 +44,6 @@ export const Disabled = () => {
           </Select.Popper>
         </FormField>
       </Select>
-      Selected Value: {value}
     </Flex>
   );
 };

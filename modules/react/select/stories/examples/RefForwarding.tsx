@@ -1,8 +1,7 @@
 import React from 'react';
+import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Select} from '@workday/canvas-kit-react/select';
-import {Flex} from '@workday/canvas-kit-react/layout';
-import {useSelectModel} from '../../lib/hooks';
 
 const options = [
   {id: 'E-mail', data: {textValue: 'foo'}},
@@ -15,20 +14,27 @@ const options = [
     disabled: false,
   },
 ];
-
 const disabledItems = options.filter(item => item.disabled === true).map(item => item.id);
 
-export const Dynamic = () => {
-  const model = useSelectModel({
-    items: options,
-    nonInteractiveIds: disabledItems,
-  });
+export const RefForwarding = () => {
+  const [value, setValue] = React.useState('medium');
+  const ref = React.useRef(null);
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(event.target.value);
+  };
+
+  const handleClick = () => {
+    if (ref && ref.current) {
+      ref.current.focus();
+    }
+  };
 
   return (
-    <Flex flexDirection="column">
-      <Select model={model}>
+    <>
+      <Select items={options} nonInteractiveIds={disabledItems}>
         <FormField label="Contact" inputId="contact-select">
-          <Select.Input id="contact-select" />
+          <Select.Input ref={ref} onChange={e => handleChange(e)} id="contact-select" />
           <Select.Popper>
             <Select.Card maxHeight="200px">
               <Select.List>
@@ -44,7 +50,7 @@ export const Dynamic = () => {
           </Select.Popper>
         </FormField>
       </Select>
-      Selected Value: {model.state.selectedIds[0]}
-    </Flex>
+      <PrimaryButton onClick={handleClick}>Focus Select</PrimaryButton>
+    </>
   );
 };

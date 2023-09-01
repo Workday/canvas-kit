@@ -26,9 +26,9 @@ export const Required = () => {
 
   return (
     <Flex flexDirection="column">
-      <FormField label="Contact" inputId="contact-select" required>
+      <FormField label="Contact" inputId="required-select" required>
         <Select items={options} nonInteractiveIds={disabledItems}>
-          <Select.Input onChange={e => handleChange(e)} id="contact-select" />
+          <Select.Input onChange={e => handleChange(e)} id="required-select" />
           <Select.Popper>
             <Select.Card maxHeight="200px">
               <Select.List>

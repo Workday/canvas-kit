@@ -40,12 +40,13 @@ export const cities = [
 export const Scrollable = () => {
   return (
     <Box>
-      <FormField label="Choose a City">
+      <FormField label="Choose a City" inputId="scrollable">
         <Select
           items={cities}
+          id="scrollable-select"
           nonInteractiveIds={cities.filter(item => item.disabled === true).map(item => item.id)}
         >
-          <Select.Input />
+          <Select.Input id="scrollable-select" />
           <Select.Popper>
             <Select.Card maxHeight="200px">
               <Select.List>
@@ -62,7 +63,6 @@ export const Scrollable = () => {
             </Select.Card>
           </Select.Popper>
         </Select>
-        {/* Selected: {model.state.selectedIds[0]} */}
       </FormField>
     </Box>
   );

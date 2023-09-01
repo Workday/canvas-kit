@@ -28,12 +28,12 @@ export const Alert = () => {
       <Select items={options} nonInteractiveIds={disabledItems}>
         <FormField
           error={FormField.ErrorType.Alert}
-          hintId="contact-select"
+          hintId="alert-select"
           hintText="Please choose a form of contact"
           label="Contact"
-          inputId="contact-select"
+          inputId="alert-select"
         >
-          <Select.Input onChange={e => handleChange(e)} id="contact-select" />
+          <Select.Input onChange={e => handleChange(e)} id="alert-select" />
           <Select.Popper>
             <Select.Card maxHeight="200px">
               <Select.List>
