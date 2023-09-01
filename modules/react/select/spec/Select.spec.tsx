@@ -4,7 +4,7 @@ import {render, fireEvent} from '@testing-library/react';
 import {Select} from '../lib/Select';
 import {useSelectModel} from '../lib/hooks';
 
-describe.only('Select', () => {
+describe('Select', () => {
   const cb = jest.fn();
 
   const role = 'combobox';
@@ -12,10 +12,6 @@ describe.only('Select', () => {
   afterEach(() => {
     cb.mockReset();
   });
-
-  // verifyComponent(Select.Card, {modelFn: useSelectModel});
-
-  // verifyComponent(Select.Item, {modelFn: useSelectModel});
 
   describe('when rendered with a single child', () => {
     it('should not throw an error', () => {
