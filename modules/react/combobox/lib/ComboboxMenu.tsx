@@ -7,7 +7,6 @@ import {useComboboxModel} from './useComboboxModel';
 import {ComboboxMenuList} from './ComboboxMenuList';
 import {ComboboxMenuItem} from './ComboboxMenuItem';
 import {ComboboxCard} from './ComboboxCard';
-import {ComboboxMenuPopper} from './ComboboxMenuPopper';
 
 export interface ComboboxMenuProps {
   /**
@@ -26,7 +25,7 @@ export const ComboboxMenu = createSubcomponent()({
      * of React. This means no extra props given to this component will be forwarded to the `div`
      * element, but the `ref` will be forwarded.
      */
-    Popper: ComboboxMenuPopper,
+    Popper: Menu.Popper,
     /**
      * The combobox menu list follows the Collections API. A list can either contain static items or
      * a render prop and `items` to the model.
