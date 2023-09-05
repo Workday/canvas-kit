@@ -43,6 +43,7 @@ export const useComboboxModel = createModelHook({
   defaultConfig: {
     ...useInputModel.defaultConfig,
     ...useMenuModel.defaultConfig,
+    shouldVirtualize: true,
   },
 
   requiredConfig: {
@@ -54,7 +55,6 @@ export const useComboboxModel = createModelHook({
 
   const menu = useMenuModel(
     useMenuModel.mergeConfig(config, {
-      shouldVirtualize: true,
       onSelect({id}) {
         dispatchInputEvent(menu.state.targetRef.current, id);
       },

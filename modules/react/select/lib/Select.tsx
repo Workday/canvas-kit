@@ -13,6 +13,7 @@ import {caretDownSmallIcon} from '@workday/canvas-system-icons-web';
 import {useSelectModel, useSelectItem} from './hooks';
 import {useSelectInput} from './hooks/useSelectInput';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
+import {useSelectCard} from './hooks/useSelectCard';
 
 export interface SelectInputProps extends ExtractProps<typeof TextInput> {
   /**
@@ -60,6 +61,17 @@ export const SelectItem = createSubcomponent('li')({
     <Combobox.Menu.Item as={Element} {...elemProps}>
       {children}
     </Combobox.Menu.Item>
+  );
+});
+
+export const SelectCard = createSubcomponent('div')({
+  modelHook: useSelectModel,
+  elemPropsHook: useSelectCard,
+})<ExtractProps<typeof Combobox.Menu.Card>>(({children, ...elemProps}, Element) => {
+  return (
+    <Combobox.Menu.Card as={Element} {...elemProps}>
+      {children}
+    </Combobox.Menu.Card>
   );
 });
 
@@ -117,6 +129,7 @@ export const Select = createContainer()({
     Popper: Combobox.Menu.Popper,
     /**
      * `Select.Card` renders a {@link ComboboxCard Combobox.Card}. You have access to all `Card` props.
+     * The card will be the width of the select input.
      * ```tsx
      * <Select item={options}>
      *  <Select.Input id="matching-formfield-inputId" onChange={(event) => handleChange(event)}>
@@ -128,7 +141,7 @@ export const Select = createContainer()({
      * </Select>
      * ```
      */
-    Card: Combobox.Menu.Card,
+    Card: SelectCard,
     /**
      * `Select.List` renders a {@link ComboboxMenuList Combobox.Menu.List}. You have access to all `ListBox` props.
      * ```tsx

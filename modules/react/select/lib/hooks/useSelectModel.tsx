@@ -16,12 +16,14 @@ import {useComboboxModel} from '@workday/canvas-kit-react/combobox';
 export const useSelectModel = createModelHook({
   defaultConfig: {
     ...useComboboxModel.defaultConfig,
+    shouldVirtualize: false,
   },
   requiredConfig: {
     ...useComboboxModel.requiredConfig,
   },
   contextOverride: useComboboxModel.Context,
 })(config => {
+  console.log(config);
   const model = useComboboxModel(config);
   return model;
 });

@@ -94,7 +94,7 @@ export const useListItemRegister = createElemPropsHook(useListModel)(
       disabled: elemProps.disabled || state.nonInteractiveIds.includes(localId) ? true : undefined,
       item: null, // remove `item` from prop list
       virtual: null, // remove `virtual` from prop list
-      'aria-setsize': state.items.length || elemProps.virtual?.size,
+      'aria-setsize': elemProps.virtual?.size,
       'aria-posinset': elemProps.virtual ? elemProps.item!.index + 1 : undefined,
       style,
       id: slugify(`${state.id}-${localId}`),
