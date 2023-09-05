@@ -4,7 +4,7 @@ import {useComboboxInput} from '@workday/canvas-kit-react/combobox';
 import {useSelectModel} from './useSelectModel';
 
 /**
- * `useSelectInput` extends `useComboboxInput` while adding type ahead functionality and adding select specific [keyboard support](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/examples/combobox-select-only/)
+ * `useSelectInput` extends {@link useComboboxInput useComboboxInput}  and adds type ahead functionality and select specific [keyboard support](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/examples/combobox-select-only/).
  */
 export const useSelectInput = composeHooks(
   useComboboxInput,

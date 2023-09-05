@@ -5,12 +5,12 @@ import {useComboboxModel} from '@workday/canvas-kit-react/combobox';
  * `SelectModel` extends the {@link ComboboxModel}. Selecting items from
  * the menu will dispatch an
  * [input](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/input_event) event on the
- * input which should work with form libraries, automation, and autofill.
+ * input which should work with form libraries, automation and autofill.
  *
  * ```tsx
- * const model = useSelectModel()
+ * const model = useSelectModel({items: ['Mobile', 'Phone', 'E-Mail']})
  *
- * <SelectBase model={model}>{Select child components}</SelectBase>
+ * <Select model={model}>{Select child components}</Select>
  * ```
  */
 export const useSelectModel = createModelHook({

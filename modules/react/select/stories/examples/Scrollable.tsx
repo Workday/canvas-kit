@@ -40,10 +40,9 @@ export const cities = [
 export const Scrollable = () => {
   return (
     <Box>
-      <FormField label="Choose a City" inputId="scrollable">
+      <FormField label="Choose a City" inputId="scrollable-select">
         <Select
           items={cities}
-          id="scrollable-select"
           nonInteractiveIds={cities.filter(item => item.disabled === true).map(item => item.id)}
         >
           <Select.Input id="scrollable-select" />
