@@ -18,7 +18,7 @@ const disabledItems = options.filter(item => item.disabled === true).map(item =>
 
 export const RefForwarding = () => {
   const [value, setValue] = React.useState('medium');
-  const ref = React.useRef(null);
+  const ref = React.useRef<HTMLInputElement>(null);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
