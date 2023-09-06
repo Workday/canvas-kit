@@ -27,7 +27,7 @@ export const SelectInput = createSubcomponent(TextInput)({
   modelHook: useSelectModel,
   elemPropsHook: useSelectInput,
 })<SelectInputProps>(
-  ({placeholder = 'Choose an Option', inputStartIcon, ...props}, Element, model) => {
+  ({placeholder = 'Choose an Option', inputStartIcon, ...elemProps}, Element, model) => {
     return (
       <InputGroup>
         {inputStartIcon && model.state.selectedIds.length > 0 && (
@@ -39,7 +39,7 @@ export const SelectInput = createSubcomponent(TextInput)({
           as={Element}
           placeholder={placeholder}
           style={{caretColor: 'transparent', cursor: 'default'}}
-          {...props}
+          {...elemProps}
         ></InputGroup.Input>
         <InputGroup.InnerEnd position="absolute" pointerEvents="none">
           <SystemIcon icon={caretDownSmallIcon} />
