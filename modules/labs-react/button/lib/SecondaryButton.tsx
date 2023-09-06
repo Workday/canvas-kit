@@ -1,7 +1,14 @@
 import * as React from 'react';
 
 import {BaseButton, buttonVars, BaseButtonContainerProps} from './BaseButton';
-import {createComponent, cs, createModifiers, getTheme} from '@workday/canvas-kit-react/common';
+import {
+  createComponent,
+  cs,
+  createModifiers,
+  getTheme,
+  cssVar,
+  newTheme,
+} from '@workday/canvas-kit-react/common';
 import {borderRadius, colors} from '@workday/canvas-kit-react/tokens';
 
 /**
@@ -26,9 +33,9 @@ const SecondaryStyles = cs({
   '&:hover, &.hover': {
     [buttonVars.hover.background]: colors.blackPepper400,
     [buttonVars.hover.border]: colors.blackPepper400,
-    [buttonVars.hover.color]: theme.canvas.palette.neutral.contrast,
+    [buttonVars.hover.color]: cssVar(newTheme.colors.neutral.contrast),
     '& span .wd-icon-fill': {
-      [buttonVars.hover.icon]: theme.canvas.palette.neutral.contrast,
+      [buttonVars.hover.icon]: cssVar(newTheme.colors.neutral.contrast),
     },
   },
   '&:focus-visible, &.focus': {
@@ -44,9 +51,9 @@ const SecondaryStyles = cs({
   '&:active, &.active': {
     [buttonVars.active.background]: colors.blackPepper500,
     [buttonVars.active.border]: colors.blackPepper500,
-    [buttonVars.active.color]: theme.canvas.palette.neutral.contrast,
+    [buttonVars.active.color]: cssVar(newTheme.colors.neutral.contrast),
     '& span .wd-icon-fill': {
-      [buttonVars.active.icon]: theme.canvas.palette.neutral.contrast,
+      [buttonVars.active.icon]: cssVar(newTheme.colors.neutral.contrast),
     },
   },
   '& span .wd-icon-fill': {

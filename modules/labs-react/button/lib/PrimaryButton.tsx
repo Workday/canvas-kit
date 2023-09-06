@@ -10,6 +10,7 @@ import {
   cssVar,
 } from '@workday/canvas-kit-react/common';
 import {borderRadius, colors} from '@workday/canvas-kit-react/tokens';
+import {brand, system} from '@workday/canvas-tokens-web';
 
 /**
  * Extends all the style properties from Box to our buttons as well as props from ButtonContainerProps.
@@ -26,7 +27,7 @@ export interface PrimaryButtonProps extends Omit<BaseButtonContainerProps, 'ref'
 const theme = getTheme();
 
 const PrimaryStyles = cs({
-  [buttonVars.default.background]: cssVar(newTheme.colors.primary.main),
+  [buttonVars.default.background]: cssVar(brand.primary.base),
   [buttonVars.default.border]: 'transparent',
   [buttonVars.default.borderRadius]: cssVar(newTheme.borderRadius.circle),
   [buttonVars.default.color]: cssVar(newTheme.colors.primary.contrast),
