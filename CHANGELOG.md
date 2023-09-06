@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v9.1.17](https://github.com/Workday/canvas-kit/releases/tag/v9.1.17) (2023-09-06)
+
+### Components
+
+- fix(color-picker): Disable submit button when custom hex is invalid ([#2328](https://github.com/Workday/canvas-kit/pull/2328)) ([@kennethjang34](https://github.com/kennethjang34))
+
+
 ## [v9.1.16](https://github.com/Workday/canvas-kit/releases/tag/v9.1.16) (2023-08-29)
 
 ### Documentation
