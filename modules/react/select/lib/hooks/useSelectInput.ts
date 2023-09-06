@@ -1,6 +1,6 @@
 import React from 'react';
 import {composeHooks, createElemPropsHook} from '@workday/canvas-kit-react/common';
-import {useComboboxInput} from '@workday/canvas-kit-react/combobox';
+import {useComboboxInput, useScrollToIndexOnClick} from '@workday/canvas-kit-react/combobox';
 import {useSelectModel} from './useSelectModel';
 
 /**
@@ -8,28 +8,10 @@ import {useSelectModel} from './useSelectModel';
  */
 export const useSelectInput = composeHooks(
   useComboboxInput,
+  useScrollToIndexOnClick,
   createElemPropsHook(useSelectModel)((model, ref) => {
     const keySofar = React.useRef('');
     const timer = React.useRef<ReturnType<typeof setTimeout>>();
-
-    React.useLayoutEffect(() => {
-      model.events.setWidth(model.state.targetRef.current?.clientWidth || 0);
-      // If there is no selected item and items exists we want to set the cursor to the first item in the array
-      if (model.state.selectedIds.length === 0 && model.state.items.length > 0) {
-        model.events.goTo({id: model.state.items[0].id});
-      } else {
-        // If the user wants an item selected by default by passing `initialSelectedId` we select that item
-        if (model.state.selectedIds.length > 0) {
-          const selectedItem = model.state.items.findIndex(
-            (item: {id: string}) => item.id === model.state.selectedIds[0]
-          );
-          model.events.goTo({id: model.state.items[selectedItem].id});
-          model.events.select({id: model.state.items[selectedItem].id});
-        }
-      }
-
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
 
     // Reset after each keystroke to support type ahead
     const startClearKeysSoFarTimer = () => {
@@ -118,9 +100,8 @@ export const useSelectInput = composeHooks(
         event.preventDefault();
 
         // Select should open if Enter, ArrowUp, ArrowDown and Spacebar is typed
-        const keysToOpenSelect = ['Enter', 'Spacebar', 'ArrowUp', 'ArrowDown'];
         if (
-          keysToOpenSelect.includes(event.key) ||
+          event.key === 'Spacebar' ||
           (event.key === ' ' && model.state.visibility === 'hidden' && keySofar.current === '')
         ) {
           //show the menu when enter is typed
@@ -134,24 +115,12 @@ export const useSelectInput = composeHooks(
 
         // If the dropdown is NOT visible and ArrowUp, ArrowDown, Enter and Spacebar is typed, when the dropdown opens
         // it should go to the current selected item in the dropdown.
-        if (keysToOpenSelect.includes(event.key) || event.key === ' ') {
+        if (event.key === 'Spacebar' || event.key === ' ') {
           if (model.state.visibility === 'hidden') {
             model.events.goTo({id: model.state.items[foundIndex].id});
 
             if (model.state.selectedIds.length > 0) {
               model.state.UNSTABLE_virtual.scrollToIndex(foundIndex);
-            }
-          }
-        }
-
-        // If the dropdown is visible and Enter is typed, it should select that item
-        // where the cursor is located in the list and close the dropdown
-        if (event.key === 'Enter' && !event.metaKey && model.state.visibility === 'visible') {
-          const element = document.querySelector(`[data-id="${model.state.cursorId}"]`);
-          if (element && element?.getAttribute('aria-disabled') !== 'true') {
-            model.events.select({id: model.state.cursorId});
-            if (model.state.mode === 'single') {
-              model.events.hide(event);
             }
           }
         }
@@ -184,18 +153,6 @@ export const useSelectInput = composeHooks(
           if (keySofar.current !== '') {
             handleKeyboardTypeAhead(' ', model.state.items.length);
           }
-        }
-      },
-
-      onClick(event: React.MouseEvent) {
-        // When you click the menu and there's a selected item
-        // scroll to that selected item
-        if (model.state.selectedIds.length > 0) {
-          const foundIndex = model.state.items.findIndex(
-            (item: {id: string}) => item.id === model.state.selectedIds[0]
-          );
-          model.events.goTo({id: model.state.items[foundIndex].id});
-          model.state.UNSTABLE_virtual.scrollToIndex(foundIndex);
         }
       },
       autoComplete: 'off',

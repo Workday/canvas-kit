@@ -27,8 +27,8 @@ export const DisabledOptions = () => {
   return (
     <Flex flexDirection="column">
       <Select items={options} nonInteractiveIds={disabledItems}>
-        <FormField label="Contact" inputId="disabled-option-select">
-          <Select.Input onChange={e => handleChange(e)} id="disabled-option-select" />
+        <FormField label="Contact" inputId="contact-select">
+          <Select.Input onChange={e => handleChange(e)} id="contact-select" />
           <Select.Popper>
             <Select.Card maxHeight="200px">
               <Select.List>

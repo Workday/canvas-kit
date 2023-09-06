@@ -10,10 +10,9 @@ import {Combobox} from '@workday/canvas-kit-react/combobox';
 import {InputGroup, TextInput} from '@workday/canvas-kit-react/text-input';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {caretDownSmallIcon} from '@workday/canvas-system-icons-web';
-import {useSelectModel, useSelectItem} from './hooks';
+import {useSelectModel, useSelectItem, useSelectCard} from './hooks';
 import {useSelectInput} from './hooks/useSelectInput';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {useSelectCard} from './hooks/useSelectCard';
 
 export interface SelectInputProps extends ExtractProps<typeof TextInput> {
   /**

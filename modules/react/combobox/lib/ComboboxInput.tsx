@@ -16,8 +16,12 @@ import {
   keyboardEventToCursorEvents,
 } from '@workday/canvas-kit-react/collection';
 
-import {useComboboxModel} from './useComboboxModel';
-import {useComboboxInputOpenWithArrowKeys} from './useComboboxInputOpenWithArrowKeys';
+import {
+  useComboboxModel,
+  useComboboxInputOpenWithArrowKeys,
+  useMoveCursorToIndex,
+  useSetPopupWidth,
+} from './hooks';
 
 export const useListKeyboardHandler = createElemPropsHook(useComboboxModel)(model => {
   const isRTL = useIsRTL();
@@ -104,6 +108,8 @@ export const useComboboxInput = composeHooks(
       ref: elementRef,
     } as const;
   }),
+  useSetPopupWidth,
+  useMoveCursorToIndex,
   useComboboxInputOpenWithArrowKeys,
   useListActiveDescendant,
   useListKeyboardHandler,
