@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v9.1.18](https://github.com/Workday/canvas-kit/releases/tag/v9.1.18) (2023-09-06)
+
+### Components
+
+- fix(popup): Allow SVG elements in focus calculations ([#2331](https://github.com/Workday/canvas-kit/pull/2331)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
 ## [v8.6.20](https://github.com/Workday/canvas-kit/releases/tag/v8.6.20) (2023-09-06)
 
 ### Components
