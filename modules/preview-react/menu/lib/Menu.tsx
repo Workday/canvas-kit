@@ -85,7 +85,7 @@ const List = styled('ul')({
  *
  * `DeprecatedMenu` renders a styled `<ul role="menu">` element within a {@link Card} and follows
  * the [Active Menu
- * pattern](https://www.w3.org/TR/wai-aria-practices/examples/menu-button/menu-button-actions-active-descendant.html)
+ * pattern](https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/examples/menu-button-actions-active-descendant/)
  * using `aria-activedescendant`.
  *
  * Undocumented props are spread to the underlying `<ul>` element.
@@ -108,7 +108,7 @@ export class DeprecatedMenu extends React.Component<DeprecatedMenuProps, Depreca
     // We track the active menu item by index so we can avoid setting a bunch of refs
     // for doing things like selecting an item by first character (or really calling .focus() at all)
     // It allows us to use the activedescendant design pattern
-    // https://www.w3.org/TR/wai-aria-practices/examples/menu-button/menu-button-actions-active-descendant.html
+    // https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/examples/menu-button-actions-active-descendant/
     this.state = {
       selectedItemIndex: selected,
     };

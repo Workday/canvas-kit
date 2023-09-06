@@ -5,7 +5,7 @@ import {useSelectionListModel} from './useSelectionListModel';
 // `SelectionListModel` and renames to `List*`. Without interfaces like this, the result would be
 // `SelectionList*` which is confusing to users, but the separation is easier to maintain
 
-export type ListProps<T = unknown> = {
+export type ListProps<T = any> = {
   children: React.ReactNode | ((item: T) => React.ReactNode);
 };
 
@@ -23,7 +23,7 @@ export type ListItemProps = {
  * mapping. Think of the cursor as the focus item within the list. If the list has browser focus, the
  * cursor will map to browser focus. Behaviors such as `useListRovingFocus` will map the cursor to the
  * active tab stop of the list. For more information, see
- * [Roving Tabindex](https://w3c.github.io/aria-practices/#kbd_roving_tabindex). `useListRovingFocus`
+ * [Roving Tabindex](https://www.w3.org/WAI/ARIA/apg/practices/keyboard-interface/#kbd_roving_tabindex). `useListRovingFocus`
  * adds keyboard events that map to navigation events. A [Navigation Manager](#navigation-manager) is
  * used to map new cursor ids to these events. The `ListModel` takes an optional `navigation`
  * configuration to change the default navigation behavior. The default navigation manager is a

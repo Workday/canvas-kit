@@ -13,6 +13,7 @@ export const TableCell = createComponent('td')({
         alignItems="center"
         backgroundColor="frenchVanilla100"
         borderBottom={`1px solid ${colors.soap400}`}
+        gridTemplateColumns="1fr"
         justifyContent="left"
         minHeight="56px"
         paddingY="xxs"

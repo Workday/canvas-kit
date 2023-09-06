@@ -106,6 +106,67 @@ export const WithOverflowMenu = () => {
   );
 };
 
+export const WithOverflowMenuHavingTwoItems = () => {
+  interface Breadcrumb {
+    id: string;
+    link?: string;
+    text: string;
+  }
+
+  const [twoItems] = React.useState<Breadcrumb[]>([
+    {id: '1', text: 'Home', link: '/'},
+    {id: '2', text: 'Current'},
+  ]);
+
+  const [threeItems] = React.useState<Breadcrumb[]>([
+    {id: '1', text: 'Home', link: '/'},
+    {id: '2', text: 'Second Link', link: '#'},
+    {id: '3', text: 'Current'},
+  ]);
+
+  return (
+    <StaticStates>
+      <ComponentStatesTable
+        rowProps={[
+          {label: 'Overflow with only 2 items total', props: {maxWidth: 150, items: twoItems}},
+          {label: 'Overflow with only 3 items total', props: {maxWidth: 250, items: threeItems}},
+        ]}
+        columnProps={[{label: 'Default', props: {}}]}
+      >
+        {props => {
+          return (
+            <Breadcrumbs items={props.items} aria-label="Breadcrumbs">
+              <Breadcrumbs.List
+                maxWidth={props.maxWidth}
+                overflowButton={<Breadcrumbs.OverflowButton aria-label="More links" />}
+              >
+                {item =>
+                  item.link ? (
+                    <Breadcrumbs.Item>
+                      <Breadcrumbs.Link href={item.link}>{item.text}</Breadcrumbs.Link>
+                    </Breadcrumbs.Item>
+                  ) : (
+                    <Breadcrumbs.CurrentItem>{item.text}</Breadcrumbs.CurrentItem>
+                  )
+                }
+              </Breadcrumbs.List>
+              <Breadcrumbs.Menu.Popper>
+                <Breadcrumbs.Menu.Card maxWidth={300} maxHeight={200}>
+                  <Breadcrumbs.Menu.List>
+                    {(item: Breadcrumb) => (
+                      <Breadcrumbs.Menu.Item>{item.text}</Breadcrumbs.Menu.Item>
+                    )}
+                  </Breadcrumbs.Menu.List>
+                </Breadcrumbs.Menu.Card>
+              </Breadcrumbs.Menu.Popper>
+            </Breadcrumbs>
+          );
+        }}
+      </ComponentStatesTable>
+    </StaticStates>
+  );
+};
+
 export const RTLStates = () => {
   return (
     <StaticStates>

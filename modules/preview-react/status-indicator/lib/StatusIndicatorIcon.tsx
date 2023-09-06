@@ -76,7 +76,7 @@ export const useStatusIndicatorIcon = createElemPropsHook(useStatusIndicatorMode
   const colors = statusIndicatorColors[state.variant][state.emphasis];
   return {
     color: colors.text,
-    colorHover: colors.background,
+    colorHover: colors.text,
   };
 });
 

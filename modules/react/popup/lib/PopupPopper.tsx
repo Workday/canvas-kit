@@ -14,6 +14,13 @@ export interface PopupPopperProps extends PopperProps {
    */
   placement?: Placement;
   /**
+   * Define fallback placements by providing a list of {@link Placement} in array (in order of preference).
+   * The default preference is following the order of `top`, `right`, `bottom`, and `left`. Once the initial
+   * and opposite placements are not available, the fallback placements will be in use. Use an empty array to
+   * disable the fallback placements.
+   */
+  fallbackPlacements?: Placement[];
+  /**
    * The additional options passed to the Popper's `popper.js` instance.
    */
   popperOptions?: Partial<PopperOptions>;

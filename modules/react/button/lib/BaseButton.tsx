@@ -156,62 +156,62 @@ const ButtonContainer = styled('button')<StyledType & ButtonContainerProps>(
     }
 
     const baseStyles = {
-      backgroundColor: colors.default.background,
-      borderColor: colors.default.border,
-      color: colors.default.label,
       ...(colors.default.icon && {
         '.wd-icon-fill, .wd-icon-accent, .wd-icon-accent2, .wd-icon-background': {
           transition: 'fill 120ms ease-in',
         },
         ...getIconColorSelectors(theme, colors.default.icon, fillIcon),
       }),
+      backgroundColor: colors.default.background,
+      borderColor: colors.default.border,
+      color: colors.default.label,
     };
 
     const hoverStyles = {
       '&:hover': {
+        ...(colors.hover.icon && getIconColorSelectors(theme, colors.hover.icon, fillIcon)),
         backgroundColor: colors.hover.background,
         borderColor: colors.hover.border,
         color: colors.hover.label,
-        ...(colors.hover.icon && getIconColorSelectors(theme, colors.hover.icon, fillIcon)),
       },
     };
 
     const activeStyles = {
       '&:active, &:focus:active, &:hover:active': {
+        ...(colors.active.icon && getIconColorSelectors(theme, colors.active.icon, fillIcon)),
         backgroundColor: colors.active.background,
         borderColor: colors.active.border,
         color: colors.active.label,
-        ...(colors.active.icon && getIconColorSelectors(theme, colors.active.icon, fillIcon)),
       },
     };
 
     return {
       ...baseStyles,
       '&:focus': {
+        ...(colors.focus.focusRing || focusRing({separation: 2}, theme)),
+        ...(colors.focus.icon && getIconColorSelectors(theme, colors.focus.icon, fillIcon)),
         backgroundColor: colors.focus.background,
         borderColor: colors.focus.border,
         color: colors.focus.label,
-        ...(colors.focus.focusRing || focusRing({separation: 2}, theme)),
-        ...(colors.focus.icon && getIconColorSelectors(theme, colors.focus.icon, fillIcon)),
       },
 
       ...activeStyles,
       ...hoverStyles,
       '&:disabled, &:active:disabled, &:focus:disabled, &:hover:disabled': {
+        ...(colors.disabled.icon && getIconColorSelectors(theme, colors.disabled.icon, fillIcon)),
         backgroundColor: colors.disabled.background,
         borderColor: colors.disabled.border,
         color: colors.disabled.label,
         opacity: colors.disabled.opacity,
-        ...(colors.disabled.icon && getIconColorSelectors(theme, colors.disabled.icon, fillIcon)),
       },
       ...mouseFocusBehavior({
         '&:focus': {
           ...baseStyles,
+          ...hoverStyles,
+          ...activeStyles,
           outline: 'none',
           boxShadow: 'none',
           animation: 'none',
-          ...hoverStyles,
-          ...activeStyles,
         },
       }),
     };

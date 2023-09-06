@@ -43,15 +43,33 @@ export const getFirstFocusableElement = (container: HTMLElement): HTMLElement | 
   return null;
 };
 
+const isRadioInput = (element: Element): element is HTMLInputElement => {
+  return element.nodeName.toLowerCase() === 'input' && element.getAttribute('type') === 'radio';
+};
+
+const getRadioGroup = (
+  container: HTMLElement,
+  element: HTMLInputElement
+): NodeListOf<HTMLInputElement> => {
+  return container.querySelectorAll(`input[type="radio"][name="${element.getAttribute('name')}"]`);
+};
+
 /**
  * Get the last focusable element in a container.
+ *
+ * Returns an array of elements if the last focusable element is a radio group
  */
-export const getLastFocusableElement = (container: HTMLElement): HTMLElement | null => {
+export const getLastFocusableElement = (container: HTMLElement): Element[] | Element | null => {
   const elements = container.querySelectorAll('*');
 
   for (let i = elements.length - 1; i >= 0; i--) {
     const element = elements.item(i);
     if (element && isFocusable(element) && element.getAttribute('tabindex') !== '-1') {
+      if (isRadioInput(element)) {
+        const radioGroup = getRadioGroup(container, element);
+
+        return radioGroup.length > 1 ? Array.from(radioGroup) : element;
+      }
       return element as HTMLElement;
     }
   }

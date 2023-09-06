@@ -20,7 +20,7 @@ export const BodyOverflow = () => {
         <Modal.Card>
           <Modal.CloseIcon aria-label="Close" />
           <Modal.Heading>MIT License</Modal.Heading>
-          <Modal.Body>
+          <Modal.Body tabIndex={0}>
             <p style={{marginTop: 0}}>
               Permission is hereby granted, free of charge, to any person obtaining a copy of this
               software and associated documentation files (the "Software"), to deal in the Software
