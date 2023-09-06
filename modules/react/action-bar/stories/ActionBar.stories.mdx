@@ -6,6 +6,7 @@ import {Basic} from './examples/Basic';
 import {Icons} from './examples/Icons';
 import {DeleteAction} from './examples/DeleteAction';
 import {OverflowActionBar} from './examples/OverflowActionBar';
+import {OverflowActionBarCustomButtonCount} from './examples/OverflowActionBarCustomButtonCount';
 
 <Meta title="Components/Buttons/Action Bar" component={ActionBar} />
 
@@ -67,6 +68,11 @@ The dynamic API takes in any object, but since nothing is known about your objec
 should render.
 
 <ExampleCodeBlock code={OverflowActionBar} />
+
+The number of visible buttons can also be adjusted by using the model's `maximumVisible` attribute.
+You can change it from the default of 3 to any number greater than 1 and less than items.length.
+
+<ExampleCodeBlock code={OverflowActionBarCustomButtonCount} />
 
 ## Component API
 

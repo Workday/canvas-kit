@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {Expandable, useExpandableModel} from '@workday/canvas-kit-labs-react/expandable';
-import {Flex, HStack, VStack} from '@workday/canvas-kit-react/layout';
+import {Flex} from '@workday/canvas-kit-react/layout';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
 
 export const HoistedModel = () => {
@@ -22,11 +22,11 @@ export const HoistedModel = () => {
   };
 
   return (
-    <VStack spacing="m">
-      <HStack spacing="s">
+    <Flex gap="m" flexDirection="column">
+      <Flex gap="s">
         <SecondaryButton onClick={handleExpandAll}>Expand All</SecondaryButton>
         <SecondaryButton onClick={handleCollapseAll}>Collapse All</SecondaryButton>
-      </HStack>
+      </Flex>
       <Flex flexDirection="column">
         <Expandable model={modelOne}>
           <Expandable.Target headingLevel="h4">
@@ -49,7 +49,15 @@ export const HoistedModel = () => {
           </Expandable.Target>
 
           <Expandable.Content>
-            <VStack as="ul" spacing="xxs" maxWidth="60ch" padding="zero" marginX="s" marginY="zero">
+            <Flex
+              flexDirection="column"
+              as="ul"
+              gap="xxs"
+              maxWidth="60ch"
+              padding="zero"
+              marginX="s"
+              marginY="zero"
+            >
               <li>
                 The state of a component being open or closed must be conveyed to assistive
                 technologies.
@@ -79,7 +87,7 @@ export const HoistedModel = () => {
                 non-changing, persistent label and the state (pressed or unpressed) is conveyed
                 visually as well as to assistive technology once the state is changed.
               </li>
-            </VStack>
+            </Flex>
           </Expandable.Content>
         </Expandable>
         <Expandable model={modelThree}>
@@ -94,6 +102,6 @@ export const HoistedModel = () => {
           </Expandable.Content>
         </Expandable>
       </Flex>
-    </VStack>
+    </Flex>
   );
 };

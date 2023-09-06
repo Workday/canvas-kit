@@ -20,7 +20,7 @@ Optional breaking changes message. If your PR includes breaking changes. It is e
 
 ## Checklist
 
-- [ ] MDX documentation adheres to Canvas Kit's [standard MDX template](https://github.com/Workday/canvas-kit/discussions/1131)
+- [ ] MDX documentation adheres to Canvas Kit's [Documentation Guidelines](https://workday.github.io/canvas-kit/?path=/docs/guides-documentation-guidelines--page)
 - [ ] Label `ready for review` has been added to PR
 
 ## For the Reviewer

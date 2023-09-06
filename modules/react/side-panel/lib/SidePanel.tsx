@@ -1,6 +1,5 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import throttle from 'lodash/throttle';
 
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {colors, space, CanvasSpaceValues} from '@workday/canvas-kit-react/tokens';
@@ -169,7 +168,7 @@ export class SidePanel extends React.Component<SidePanelProps, SidePanelState> {
 
   constructor(props: SidePanelProps) {
     super(props);
-    this.handleResize = throttle(this.handleResize.bind(this), 150);
+    this.handleResize = this.handleResize.bind(this);
   }
 
   state = {

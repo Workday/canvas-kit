@@ -6,7 +6,7 @@ import {
   useFormFieldInput,
   useFormFieldModel,
 } from '@workday/canvas-kit-preview-react/form-field';
-import {VStack} from '@workday/canvas-kit-react/layout';
+import {Flex} from '@workday/canvas-kit-react/layout';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
 
 export const SelectWithFormik = () => {
@@ -27,7 +27,7 @@ export const SelectWithFormik = () => {
 
   return (
     <form onSubmit={formik.handleSubmit} action=".">
-      <VStack spacing="xs" alignItems="flex-start">
+      <Flex gap="xs" flexDirection="column" alignItems="flex-start">
         <FormField orientation="vertical" alignSelf="stretch" alignItems="normal">
           <FormField.Label>Choose a book</FormField.Label>
           <Select
@@ -40,7 +40,7 @@ export const SelectWithFormik = () => {
           />
         </FormField>
         <PrimaryButton type="submit">Submit</PrimaryButton>
-      </VStack>
+      </Flex>
     </form>
   );
 };
