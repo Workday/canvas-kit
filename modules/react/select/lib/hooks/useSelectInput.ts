@@ -123,8 +123,6 @@ export const useSelectInput = composeHooks(
           keysToOpenSelect.includes(event.key) ||
           (event.key === ' ' && model.state.visibility === 'hidden' && keySofar.current === '')
         ) {
-          // set the width of the popup when the select is triggered to open by a specified key
-          model.events.setWidth(event.currentTarget.clientWidth);
           //show the menu when enter is typed
           model.events.show();
         }
@@ -140,7 +138,7 @@ export const useSelectInput = composeHooks(
           if (model.state.visibility === 'hidden') {
             model.events.goTo({id: model.state.items[foundIndex].id});
 
-            if (model.state.isVirtualized && model.state.selectedIds.length > 0) {
+            if (model.state.selectedIds.length > 0) {
               model.state.UNSTABLE_virtual.scrollToIndex(foundIndex);
             }
           }
@@ -190,9 +188,6 @@ export const useSelectInput = composeHooks(
       },
 
       onClick(event: React.MouseEvent) {
-        if (model.state.visibility === 'hidden') {
-          model.events.setWidth(event.currentTarget.clientWidth);
-        }
         // When you click the menu and there's a selected item
         // scroll to that selected item
         if (model.state.selectedIds.length > 0) {
