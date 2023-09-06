@@ -177,8 +177,7 @@ export const Switch = createComponent('input')({
           id={inputId}
           ref={ref}
           onChange={onChange}
-          role="checkbox"
-          tabIndex={0}
+          role="switch"
           type="checkbox"
           value={value}
           {...elemProps}
