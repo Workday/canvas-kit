@@ -5,7 +5,7 @@ import {Flex} from '@workday/canvas-kit-react/layout';
 import {useSelectModel} from '../../lib/hooks';
 
 const options = [
-  {id: 'E-mail', data: {textValue: 'foo'}},
+  {id: 'E-mail'},
   {id: 'Phone'},
   {id: 'Fax (disabled)', disabled: true},
   {id: 'Mail'},
@@ -18,7 +18,7 @@ const options = [
 
 const disabledItems = options.filter(item => item.disabled === true).map(item => item.id);
 
-export const Dynamic = () => {
+export const UseSelectModel = () => {
   const model = useSelectModel({
     items: options,
     nonInteractiveIds: disabledItems,
