@@ -25,7 +25,11 @@ export const WithIcons = () => {
     <Flex>
       <Select model={model}>
         <FormField label="Contact" inputId="with-icons-select">
-          <Select.Input inputStartIcon={currentItem.value.icon} id="with-icons-select" />
+          <Select.Input
+            width="300px"
+            inputStartIcon={currentItem.value.icon}
+            id="with-icons-select"
+          />
           <Select.Popper>
             <Select.Card maxHeight="200px">
               {model.state.items.length > 0 && (
