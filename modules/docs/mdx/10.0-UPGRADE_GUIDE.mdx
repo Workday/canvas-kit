@@ -12,6 +12,7 @@ any questions.
 - [Removals](#removals)
   - [Menu (Preview)](#menu-preview)
 - [Deprecations](#deprecations)
+  - [InputIconContainer](#input-icon-container)
 - [Token Updates](#token-updates)
   - [Space and Depth](#space-and-depth)
 - [Component Updates](#component-updates)
@@ -69,6 +70,12 @@ This change is **not** handled by the codemod due to the differences in API betw
 Preview and the `Menu` in Main.
 
 ## Deprecations
+
+### Input Icon Container
+
+We've deprecated `InputIconContainer` from `TextInput` component, because it doesn't handle
+bidirectionality or icons at the start of an input. `InputGroup` should be used instead of
+deprecated `InputIconContainer`.
 
 ## Token Updates
 
