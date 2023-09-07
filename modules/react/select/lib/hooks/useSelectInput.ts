@@ -98,6 +98,7 @@ export const useSelectInput = composeHooks(
 
         // Prevent the keys from being enter in the input
         event.preventDefault();
+        const keysToOpenSelect = ['Enter', 'Spacebar', 'ArrowUp', 'ArrowDown'];
 
         // Select should open if Enter, ArrowUp, ArrowDown and Spacebar is typed
         if (
@@ -115,7 +116,7 @@ export const useSelectInput = composeHooks(
 
         // If the dropdown is NOT visible and ArrowUp, ArrowDown, Enter and Spacebar is typed, when the dropdown opens
         // it should go to the current selected item in the dropdown.
-        if (event.key === 'Spacebar' || event.key === ' ') {
+        if (keysToOpenSelect.includes(event.key) || event.key === ' ') {
           if (model.state.visibility === 'hidden') {
             model.events.goTo({id: model.state.items[foundIndex].id});
 
