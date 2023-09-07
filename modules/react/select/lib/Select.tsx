@@ -50,13 +50,12 @@ export const SelectInput = createSubcomponent(TextInput)({
 
 export const SelectItem = createSubcomponent('li')({
   modelHook: useSelectModel,
-  elemPropsHook: useSelectItem,
   subComponents: {
     Icon: Combobox.Menu.Item.Icon,
   },
-})<ExtractProps<typeof Combobox.Menu.Item>>(({children, ...elemProps}, Element) => {
+})<ExtractProps<typeof Combobox.Menu.Item>>(({children, ...elemProps}, Element, _model) => {
   return (
-    <Combobox.Menu.Item as={Element} {...elemProps}>
+    <Combobox.Menu.Item as={Element} role="option" elemPropsHook={useSelectItem} {...elemProps}>
       {children}
     </Combobox.Menu.Item>
   );

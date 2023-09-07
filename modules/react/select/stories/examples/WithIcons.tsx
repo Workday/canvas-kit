@@ -32,7 +32,7 @@ export const WithIcons = () => {
                 <Select.List>
                   {item => {
                     return (
-                      <Select.Item aria-disabled={item.disabled ? item.disabled : undefined}>
+                      <Select.Item>
                         <Select.Item.Icon icon={item.icon} />
                         {item.id}
                       </Select.Item>

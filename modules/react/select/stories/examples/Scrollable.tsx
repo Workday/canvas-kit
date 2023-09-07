@@ -50,11 +50,7 @@ export const Scrollable = () => {
             <Select.Card maxHeight="200px">
               <Select.List>
                 {item => (
-                  <Select.Item
-                    data-id={item.id}
-                    aria-disabled={item.disabled ? item.disabled : undefined}
-                    data-text={item.id}
-                  >
+                  <Select.Item data-id={item.id} data-text={item.id}>
                     {item.id}
                   </Select.Item>
                 )}
