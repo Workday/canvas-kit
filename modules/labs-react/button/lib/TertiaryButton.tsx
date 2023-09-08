@@ -19,7 +19,7 @@ export interface TertiaryButtonProps extends Omit<BaseButtonContainerProps, 'ref
 
 const theme = getTheme();
 
-const TertiaryStyles = cs({
+const tertiaryStyles = cs({
   [buttonVars.default.background]: 'transparent',
   [buttonVars.default.border]: 'transparent',
   [buttonVars.default.borderRadius]: borderRadius.m,
@@ -235,7 +235,7 @@ export const TertiaryButton = createComponent('button')({
         type="button"
         size={size}
         cs={[
-          TertiaryStyles,
+          tertiaryStyles,
           TertiaryButtonModifiers({
             iconPosition: iconPosition,
             variant: variant,

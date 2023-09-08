@@ -7,7 +7,7 @@ export const Delete = () => {
   return (
     <Grid gridTemplateColumns="repeat(2, min-content)" gridGap="s">
       <Flex flexDirection="column" padding="xxs" gap="s">
-        Primary
+        Delete
         <Flex flexDirection="row" gap="s">
           <DeleteButton size="extraSmall">Button</DeleteButton>
         </Flex>

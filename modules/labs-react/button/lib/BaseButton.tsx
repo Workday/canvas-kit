@@ -120,7 +120,7 @@ export const buttonVars = {
   ),
 };
 
-const BaseButtonStyles = cs({
+const baseButtonStyles = cs({
   fontFamily: '"Roboto", "Helvetica Neue", "Helvetica", Arial, sans-serif',
   fontSize: '0.875rem',
   lineHeight: '1.25rem',
@@ -304,7 +304,7 @@ export const BaseButton = createComponent('button')({
         ref={ref}
         type="button"
         cs={[
-          BaseButtonStyles,
+          baseButtonStyles,
           cs,
           SizeModifiers({size: size}),
           buttonVars.active(colors?.active || {}),

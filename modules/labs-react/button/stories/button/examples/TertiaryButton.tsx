@@ -8,7 +8,7 @@ export const Tertiary = () => {
   return (
     <Grid gridTemplateColumns="repeat(2, min-content)" gridGap="s">
       <Flex flexDirection="column" padding="xxs" gap="s">
-        Primary
+        Tertiary
         <Flex flexDirection="row" gap="s">
           <TertiaryButton size="extraSmall">Button</TertiaryButton>
           <TertiaryButton size="extraSmall" icon={plusIcon} iconPosition="start">
@@ -58,7 +58,7 @@ export const Tertiary = () => {
         color="frenchVanilla100"
         borderRadius="l"
       >
-        Primary Inverse
+        Tertiary Inverse
         <Flex flexDirection="row" gap="s">
           <TertiaryButton size="extraSmall" variant="inverse">
             Button

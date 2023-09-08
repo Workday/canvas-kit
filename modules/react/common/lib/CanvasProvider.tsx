@@ -1,7 +1,8 @@
 import * as React from 'react';
 import {Theme, ThemeProvider} from '@emotion/react';
 import {InputProvider} from './InputProvider';
-import {defaultCanvasTheme, newTheme, PartialEmotionCanvasTheme, useTheme} from './theming';
+import {defaultCanvasTheme, PartialEmotionCanvasTheme, useTheme} from './theming';
+import {brand} from '@workday/canvas-tokens-web';
 
 export interface CanvasProviderProps {
   theme: PartialEmotionCanvasTheme;
@@ -17,11 +18,14 @@ const useCanvasThemeToCssVars = (
     (result, color) => {
       if (color === 'common') {
         // @ts-ignore
-        result[newTheme.colors.common.focusOutline] = palette.common.focusOutline;
+        result[brand.common.focusOutline] = palette.common.focusOutline;
       }
+      const mappedKeys = {
+        main: 'base',
+      };
       (['lightest', 'light', 'main', 'dark', 'darkest', 'contrast'] as const).forEach(key => {
         // @ts-ignore
-        result[newTheme.colors[color][key]] = palette[color][key];
+        result[brand[color][key]] = palette[color][key];
       });
       return result;
     },

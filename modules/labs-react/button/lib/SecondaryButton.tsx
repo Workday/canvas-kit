@@ -7,9 +7,9 @@ import {
   createModifiers,
   getTheme,
   cssVar,
-  newTheme,
 } from '@workday/canvas-kit-react/common';
 import {borderRadius, colors} from '@workday/canvas-kit-react/tokens';
+import {base, brand, system} from '@workday/canvas-tokens-web';
 
 /**
  * Extends all the style properties from Box to our buttons as well as props from BaseButtonContainerProps.
@@ -25,46 +25,46 @@ export interface SecondaryButtonProps extends Omit<BaseButtonContainerProps, 're
 
 const theme = getTheme();
 
-const SecondaryStyles = cs({
+const secondaryStyles = cs({
   [buttonVars.default.background]: 'transparent',
-  [buttonVars.default.border]: colors.blackPepper400,
-  [buttonVars.default.borderRadius]: borderRadius.circle,
-  [buttonVars.default.color]: colors.blackPepper400,
+  [buttonVars.default.border]: cssVar(base.blackPepper400),
+  [buttonVars.default.borderRadius]: cssVar(system.shape.circle),
+  [buttonVars.default.color]: cssVar(base.blackPepper400),
+  '& span .wd-icon-fill': {
+    [buttonVars.default.icon]: cssVar(base.blackPepper400),
+  },
   '&:hover, &.hover': {
-    [buttonVars.hover.background]: colors.blackPepper400,
-    [buttonVars.hover.border]: colors.blackPepper400,
-    [buttonVars.hover.color]: cssVar(newTheme.colors.neutral.contrast),
+    [buttonVars.hover.background]: cssVar(base.blackPepper400),
+    [buttonVars.hover.border]: cssVar(base.blackPepper400),
+    [buttonVars.hover.color]: cssVar(brand.primary.accent),
     '& span .wd-icon-fill': {
-      [buttonVars.hover.icon]: cssVar(newTheme.colors.neutral.contrast),
+      [buttonVars.hover.icon]: cssVar(brand.primary.accent),
     },
   },
   '&:focus-visible, &.focus': {
     [buttonVars.focus.background]: 'transparent',
-    [buttonVars.focus.border]: colors.blackPepper400,
-    [buttonVars.focus.color]: colors.blackPepper400,
-    [buttonVars.focus.boxShadowInner]: theme.canvas.palette.neutral.contrast,
-    [buttonVars.focus.boxShadowOuter]: theme.canvas.palette.primary.main,
+    [buttonVars.focus.border]: cssVar(base.blackPepper400),
+    [buttonVars.focus.color]: cssVar(base.blackPepper400),
+    [buttonVars.focus.boxShadowInner]: cssVar(brand.primary.accent),
+    [buttonVars.focus.boxShadowOuter]: cssVar(brand.primary.base),
     '& span .wd-icon-fill': {
-      [buttonVars.focus.icon]: colors.blackPepper400,
+      [buttonVars.focus.icon]: cssVar(base.blackPepper400),
     },
   },
   '&:active, &.active': {
-    [buttonVars.active.background]: colors.blackPepper500,
-    [buttonVars.active.border]: colors.blackPepper500,
-    [buttonVars.active.color]: cssVar(newTheme.colors.neutral.contrast),
+    [buttonVars.active.background]: cssVar(base.blackPepper500),
+    [buttonVars.active.border]: cssVar(base.blackPepper500),
+    [buttonVars.active.color]: cssVar(brand.primary.accent),
     '& span .wd-icon-fill': {
-      [buttonVars.active.icon]: cssVar(newTheme.colors.neutral.contrast),
+      [buttonVars.active.icon]: cssVar(brand.primary.accent),
     },
-  },
-  '& span .wd-icon-fill': {
-    [buttonVars.default.icon]: colors.blackPepper400,
   },
   '&:disabled, &:active:disabled, &:focus:disabled, &:hover:disabled': {
     [buttonVars.disabled.background]: 'transparent',
-    [buttonVars.disabled.border]: colors.blackPepper400,
-    [buttonVars.disabled.color]: colors.blackPepper400,
+    [buttonVars.disabled.border]: cssVar(base.blackPepper400),
+    [buttonVars.disabled.color]: cssVar(base.blackPepper400),
     '& span .wd-icon-fill': {
-      [buttonVars.disabled.icon]: colors.blackPepper400,
+      [buttonVars.disabled.icon]: cssVar(base.blackPepper400),
     },
   },
 });
@@ -83,6 +83,7 @@ export const SecondaryButtonModifiers = createModifiers({
       [buttonVars.default.color]: colors.frenchVanilla100,
       '&:hover, &.hover': {
         [buttonVars.hover.background]: colors.soap300,
+        [buttonVars.hover.border]: colors.soap300,
         [buttonVars.hover.color]: colors.blackPepper500,
         '& span .wd-icon-fill': {
           [buttonVars.hover.icon]: colors.blackPepper500,
@@ -144,7 +145,7 @@ export const SecondaryButton = createComponent('button')({
         type="button"
         size={size}
         cs={[
-          SecondaryStyles,
+          secondaryStyles,
           SecondaryButtonModifiers({
             iconPosition: iconPosition,
             variant: variant,

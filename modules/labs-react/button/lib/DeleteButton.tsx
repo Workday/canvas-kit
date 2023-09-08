@@ -12,7 +12,7 @@ export type DeleteButtonVariant = 'primary' | 'inverse';
  */
 export interface DeleteButtonProps extends Omit<BaseButtonContainerProps, 'ref'> {}
 
-const DeleteStyles = cs({
+const deleteStyles = cs({
   [buttonVars.default.background]: cssVar(newTheme.colors.error.main),
   [buttonVars.default.border]: 'transparent',
   [buttonVars.default.borderRadius]: cssVar(newTheme.borderRadius.circle),
@@ -50,7 +50,7 @@ export const DeleteButton = createComponent('button')({
         ref={ref}
         type="button"
         size={size}
-        cs={[DeleteStyles]}
+        cs={[deleteStyles]}
         {...elemProps}
       >
         {children}

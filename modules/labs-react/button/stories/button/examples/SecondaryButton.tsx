@@ -8,7 +8,7 @@ export const Secondary = () => {
   return (
     <Grid gridTemplateColumns="repeat(2, min-content)" gridGap="s">
       <Flex flexDirection="column" padding="xxs" gap="s">
-        Primary
+        Secondary
         <Flex flexDirection="row" gap="s">
           <SecondaryButton size="extraSmall">Button</SecondaryButton>
           <SecondaryButton size="extraSmall" icon={plusIcon} iconPosition="start">
@@ -58,7 +58,7 @@ export const Secondary = () => {
         color="frenchVanilla100"
         borderRadius="l"
       >
-        Primary Inverse
+        Secondary Inverse
         <Flex flexDirection="row" gap="s">
           <SecondaryButton size="extraSmall" variant="inverse">
             Button
