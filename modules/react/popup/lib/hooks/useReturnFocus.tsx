@@ -58,8 +58,8 @@ export const useReturnFocus = createElemPropsHook(usePopupModel)(model => {
   // should not return focus
   const onMouseDown = React.useCallback(
     (event: MouseEvent) => {
-      if (model.state.stackRef.current && event.target instanceof HTMLElement) {
-        if (!PopupStack.contains(model.state.stackRef.current, event.target)) {
+      if (model.state.stackRef.current && event.target instanceof Element) {
+        if (!PopupStack.contains(model.state.stackRef.current, event.target as HTMLElement)) {
           elementRef.current = event.target;
         }
       }
@@ -119,8 +119,8 @@ export const useReturnFocus = createElemPropsHook(usePopupModel)(model => {
       const activeElementOutsidePopupStack =
         document.activeElement !== document.body &&
         model.state.stackRef.current &&
-        document.activeElement instanceof HTMLElement &&
-        !PopupStack.contains(model.state.stackRef.current, document.activeElement);
+        document.activeElement instanceof Element &&
+        !PopupStack.contains(model.state.stackRef.current, document.activeElement as HTMLElement);
 
       if (activeElementOutsidePopupStack || requiresFocusChangeRef.current) {
         // We need to change focus _before_ the browser process the default action of picking a new
