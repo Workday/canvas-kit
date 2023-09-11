@@ -33,7 +33,7 @@ const primaryStyles = cs({
     [buttonVars.focus.background]: cssVar(brand.primary.base),
     [buttonVars.focus.border]: 'transparent',
     [buttonVars.focus.color]: cssVar(brand.primary.accent),
-    [buttonVars.focus.boxShadowInner]: cssVar(brand.primary.accent),
+    [buttonVars.focus.boxShadowInner]: cssVar(base.frenchVanilla100),
     [buttonVars.focus.boxShadowOuter]: cssVar(brand.primary.base),
     '& span .wd-icon-fill': {
       [buttonVars.focus.icon]: cssVar(brand.primary.accent),
@@ -69,7 +69,6 @@ export const PrimaryButtonModifiers = createModifiers({
   variant: {
     inverse: cs({
       [buttonVars.default.background]: cssVar(system.color.bg.default),
-      [buttonVars.default.border]: 'transparent',
       [buttonVars.default.borderRadius]: cssVar(system.shape.circle),
       [buttonVars.default.color]: cssVar(base.blackPepper400),
       '&:hover, &.hover': {
@@ -81,13 +80,12 @@ export const PrimaryButtonModifiers = createModifiers({
       },
       '&:focus-visible, &.focus': {
         [buttonVars.focus.background]: cssVar(base.frenchVanilla100),
-        [buttonVars.focus.border]: cssVar(base.blackPepper400),
         [buttonVars.focus.boxShadowInner]: cssVar(base.blackPepper400),
         [buttonVars.focus.boxShadowOuter]: cssVar(base.frenchVanilla100),
         [buttonVars.focus.color]: cssVar(base.blackPepper400),
-        boxShadow: `${cssVar(buttonVars.focus.boxShadowInner)} 0px 0px 0px 1px, ${cssVar(
+        boxShadow: `${cssVar(buttonVars.focus.boxShadowInner)} 0px 0px 0px 2px, ${cssVar(
           buttonVars.focus.boxShadowOuter
-        )} 0px 0px 0px 3px`,
+        )} 0px 0px 0px 4px`,
         '& span .wd-icon-fill': {
           [buttonVars.focus.icon]: cssVar(base.blackPepper400),
         },
@@ -97,7 +95,6 @@ export const PrimaryButtonModifiers = createModifiers({
       },
       '&:active, &.active': {
         [buttonVars.active.background]: cssVar(system.color.bg.active),
-        [buttonVars.active.border]: 'transparent',
         [buttonVars.active.color]: cssVar(base.blackPepper500),
         '& span .wd-icon-fill': {
           [buttonVars.active.icon]: cssVar(base.blackPepper500),

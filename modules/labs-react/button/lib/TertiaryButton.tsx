@@ -1,8 +1,8 @@
 import * as React from 'react';
 
 import {BaseButton, buttonVars, BaseButtonContainerProps} from './BaseButton';
-import {createComponent, cs, createModifiers, getTheme} from '@workday/canvas-kit-react/common';
-
+import {createComponent, cs, createModifiers, cssVar} from '@workday/canvas-kit-react/common';
+import {system, brand, base} from '@workday/canvas-tokens-web';
 import {borderRadius, space, spaceNumbers, colors} from '@workday/canvas-kit-react/tokens';
 
 /**
@@ -17,71 +17,73 @@ export interface TertiaryButtonProps extends Omit<BaseButtonContainerProps, 'ref
   variant?: 'inverse';
 }
 
-const theme = getTheme();
-
 const tertiaryStyles = cs({
   [buttonVars.default.background]: 'transparent',
   [buttonVars.default.border]: 'transparent',
-  [buttonVars.default.borderRadius]: borderRadius.m,
-  [buttonVars.default.color]: theme.canvas.palette.primary.main,
+  [buttonVars.default.borderRadius]: cssVar(system.shape.medium),
+  [buttonVars.default.color]: cssVar(brand.primary.base),
   paddingInline: space.xxs,
   minWidth: 'auto',
   textDecoration: 'underline',
+  border: 0,
   '&:hover, &.hover': {
-    [buttonVars.hover.background]: colors.soap200,
+    [buttonVars.hover.background]: cssVar(base.soap200),
     [buttonVars.hover.border]: 'transparent',
-    [buttonVars.hover.color]: theme.canvas.palette.primary.dark,
+    [buttonVars.hover.color]: cssVar(brand.primary.dark),
     '& span .wd-icon-fill': {
-      [buttonVars.hover.icon]: theme.canvas.palette.primary.dark,
+      [buttonVars.hover.icon]: cssVar(brand.primary.dark),
     },
     '&.canvas-tertiary-button-icon-only': {
       '& span .wd-icon-fill': {
-        [buttonVars.hover.icon]: colors.blackPepper500,
+        [buttonVars.hover.icon]: cssVar(base.blackPepper500),
       },
     },
   },
   '&:focus-visible, &.focus': {
     [buttonVars.focus.background]: 'transparent',
     [buttonVars.focus.border]: 'transparent',
-    [buttonVars.focus.boxShadowInner]: theme.canvas.palette.primary.main,
-    [buttonVars.focus.boxShadowOuter]: 'transparent',
-    [buttonVars.focus.color]: theme.canvas.palette.primary.main,
+    [buttonVars.focus.boxShadowInner]: cssVar(brand.primary.base),
+    [buttonVars.focus.boxShadowOuter]: cssVar(brand.primary.base),
+    [buttonVars.focus.color]: cssVar(brand.primary.base),
+    boxShadow: `${cssVar(buttonVars.focus.boxShadowInner)} 0px 0px 0px 0px, ${cssVar(
+      buttonVars.focus.boxShadowOuter
+    )} 0px 0px 0px 2px`,
     '& span .wd-icon-fill': {
-      [buttonVars.focus.icon]: theme.canvas.palette.primary.main,
+      [buttonVars.focus.icon]: cssVar(brand.primary.base),
     },
     '&.canvas-tertiary-button-icon-only': {
       '& span .wd-icon-fill': {
-        [buttonVars.focus.icon]: colors.blackPepper400,
+        [buttonVars.focus.icon]: cssVar(base.blackPepper500),
       },
     },
   },
   '&:active, &.active': {
     [buttonVars.active.background]: colors.soap300,
     [buttonVars.active.border]: 'transparent',
-    [buttonVars.active.color]: theme.canvas.palette.primary.dark,
+    [buttonVars.active.color]: cssVar(brand.primary.dark),
     '& span .wd-icon-fill': {
-      [buttonVars.active.icon]: theme.canvas.palette.primary.main,
+      [buttonVars.active.icon]: cssVar(brand.primary.base),
     },
     '&.canvas-tertiary-button-icon-only': {
       '& span .wd-icon-fill': {
-        [buttonVars.active.icon]: colors.blackPepper500,
+        [buttonVars.active.icon]: cssVar(base.blackPepper500),
       },
     },
   },
   '& span .wd-icon-fill': {
-    [buttonVars.default.icon]: theme.canvas.palette.primary.main,
+    [buttonVars.default.icon]: cssVar(brand.primary.base),
   },
   '&.canvas-tertiary-button-icon-only': {
     '& span .wd-icon-fill': {
-      [buttonVars.default.icon]: colors.blackPepper400,
+      [buttonVars.default.icon]: cssVar(base.blackPepper500),
     },
   },
   '&:disabled, &:active:disabled, &:focus:disabled, &:hover:disabled': {
     [buttonVars.disabled.background]: 'transparent',
-    [buttonVars.disabled.border]: colors.frenchVanilla100,
-    [buttonVars.disabled.color]: theme.canvas.palette.primary.main,
+    [buttonVars.disabled.border]: cssVar(base.frenchVanilla100),
+    [buttonVars.disabled.color]: cssVar(brand.primary.base),
     '& span .wd-icon-fill': {
-      [buttonVars.disabled.icon]: theme.canvas.palette.primary.main,
+      [buttonVars.disabled.icon]: cssVar(brand.primary.base),
     },
   },
 });
@@ -96,54 +98,56 @@ export const TertiaryButtonModifiers = createModifiers({
     inverse: cs({
       [buttonVars.default.background]: 'transparent',
       [buttonVars.default.border]: 'transparent',
-      [buttonVars.default.borderRadius]: borderRadius.m,
-      [buttonVars.default.color]: colors.frenchVanilla100,
+      [buttonVars.default.color]: cssVar(base.frenchVanilla100),
       textDecoration: 'underline',
       '&:hover, &.hover': {
-        [buttonVars.hover.background]: colors.frenchVanilla100,
+        [buttonVars.hover.background]: cssVar(base.frenchVanilla100),
         [buttonVars.hover.border]: 'transparent',
-        [buttonVars.hover.color]: colors.blackPepper400,
+        [buttonVars.hover.color]: cssVar(base.blackPepper500),
         '& span .wd-icon-fill': {
-          [buttonVars.hover.icon]: colors.blackPepper400,
+          [buttonVars.hover.icon]: cssVar(base.blackPepper500),
         },
       },
       '&:focus-visible, &.focus': {
-        [buttonVars.focus.background]: colors.frenchVanilla100,
+        [buttonVars.focus.background]: cssVar(base.frenchVanilla100),
         [buttonVars.focus.border]: 'transparent',
         [buttonVars.focus.boxShadowInner]: 'currentColor',
-        [buttonVars.focus.boxShadowOuter]: colors.frenchVanilla100,
-        [buttonVars.focus.color]: colors.blackPepper400,
+        [buttonVars.focus.boxShadowOuter]: cssVar(base.frenchVanilla100),
+        [buttonVars.focus.color]: cssVar(base.blackPepper500),
+        boxShadow: `inset 0px 0px 0px 2px currentColor, ${cssVar(
+          buttonVars.focus.boxShadowOuter
+        )} 0px 0px 0px 2px`,
         '& span .wd-icon-fill': {
-          [buttonVars.focus.icon]: colors.blackPepper400,
+          [buttonVars.focus.icon]: cssVar(base.blackPepper500),
         },
       },
       '&:active, &.active': {
-        [buttonVars.active.background]: colors.soap200,
+        [buttonVars.active.background]: cssVar(base.soap200),
         [buttonVars.active.border]: 'transparent',
-        [buttonVars.active.color]: colors.blackPepper400,
+        [buttonVars.active.color]: cssVar(base.blackPepper500),
         '& span .wd-icon-fill': {
-          [buttonVars.active.icon]: colors.blackPepper400,
+          [buttonVars.active.icon]: cssVar(base.blackPepper500),
         },
         '&.canvas-tertiary-button-icon-only': {
           '& span .wd-icon-fill': {
-            [buttonVars.active.icon]: colors.blackPepper500,
+            [buttonVars.active.icon]: cssVar(base.blackPepper500),
           },
         },
       },
       '& span .wd-icon-fill': {
-        [buttonVars.default.icon]: colors.frenchVanilla100,
+        [buttonVars.default.icon]: cssVar(base.frenchVanilla100),
       },
       '&.canvas-tertiary-button-icon-only': {
         '& span .wd-icon-fill': {
-          [buttonVars.default.icon]: colors.frenchVanilla100,
+          [buttonVars.default.icon]: cssVar(base.frenchVanilla100),
         },
       },
       '&:disabled, &:active:disabled, &:focus:disabled, &:hover:disabled': {
         [buttonVars.disabled.background]: 'transparent',
-        [buttonVars.disabled.border]: colors.frenchVanilla100,
-        [buttonVars.disabled.color]: colors.frenchVanilla100,
+        [buttonVars.disabled.border]: cssVar(base.frenchVanilla100),
+        [buttonVars.disabled.color]: cssVar(base.frenchVanilla100),
         '& span .wd-icon-fill': {
-          [buttonVars.disabled.icon]: colors.frenchVanilla100,
+          [buttonVars.disabled.icon]: cssVar(base.frenchVanilla100),
         },
       },
     }),

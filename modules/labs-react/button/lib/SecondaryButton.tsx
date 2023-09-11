@@ -1,13 +1,7 @@
 import * as React from 'react';
 
 import {BaseButton, buttonVars, BaseButtonContainerProps} from './BaseButton';
-import {
-  createComponent,
-  cs,
-  createModifiers,
-  getTheme,
-  cssVar,
-} from '@workday/canvas-kit-react/common';
+import {createComponent, cs, createModifiers, cssVar} from '@workday/canvas-kit-react/common';
 import {borderRadius, colors} from '@workday/canvas-kit-react/tokens';
 import {base, brand, system} from '@workday/canvas-tokens-web';
 
@@ -22,8 +16,6 @@ export interface SecondaryButtonProps extends Omit<BaseButtonContainerProps, 're
    */
   variant?: 'inverse';
 }
-
-const theme = getTheme();
 
 const secondaryStyles = cs({
   [buttonVars.default.background]: 'transparent',
@@ -45,7 +37,7 @@ const secondaryStyles = cs({
     [buttonVars.focus.background]: 'transparent',
     [buttonVars.focus.border]: cssVar(base.blackPepper400),
     [buttonVars.focus.color]: cssVar(base.blackPepper400),
-    [buttonVars.focus.boxShadowInner]: cssVar(brand.primary.accent),
+    [buttonVars.focus.boxShadowInner]: cssVar(base.frenchVanilla100),
     [buttonVars.focus.boxShadowOuter]: cssVar(brand.primary.base),
     '& span .wd-icon-fill': {
       [buttonVars.focus.icon]: cssVar(base.blackPepper400),

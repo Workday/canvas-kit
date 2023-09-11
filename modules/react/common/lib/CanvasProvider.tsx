@@ -8,6 +8,15 @@ export interface CanvasProviderProps {
   theme: PartialEmotionCanvasTheme;
 }
 
+const mappedKeys = {
+  lightest: 'lightest',
+  light: 'light',
+  main: 'base',
+  dark: 'dark',
+  darkest: 'darkest',
+  contrast: 'accent',
+};
+
 const useCanvasThemeToCssVars = (
   theme: PartialEmotionCanvasTheme,
   elemProps: React.HTMLAttributes<HTMLElement>
@@ -20,12 +29,9 @@ const useCanvasThemeToCssVars = (
         // @ts-ignore
         result[brand.common.focusOutline] = palette.common.focusOutline;
       }
-      const mappedKeys = {
-        main: 'base',
-      };
       (['lightest', 'light', 'main', 'dark', 'darkest', 'contrast'] as const).forEach(key => {
         // @ts-ignore
-        result[brand[color][key]] = palette[color][key];
+        result[brand[color][mappedKeys[key]]] = palette[color][key];
       });
       return result;
     },
