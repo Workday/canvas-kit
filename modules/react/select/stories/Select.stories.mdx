@@ -13,7 +13,7 @@ import {LabelPosition} from './examples/LabelPosition';
 import {WithIcons} from './examples/WithIcons';
 import {Required} from './examples/Required';
 import {Scrollable} from './examples/Scrollable';
-import {UseSelectModel} from './examples/UseSelectModel';
+import {HoistedModel} from './examples/HoistedModel';
 import {RefForwarding} from './examples/RefForwarding';
 
 <Meta title="Components/Inputs/Select" component={Select} />
@@ -67,14 +67,17 @@ Set the `disabled` prop of `<Select.Input/>` to prevent users from interacting w
 
 <ExampleCodeBlock code={Disabled} />
 
-### Disabled Options
+### Disabled Items
+
+To disable items and prevent them from being interactive, you must set two properties.
 
 Set `nonInteractiveIds` to an array of `id`s that you want to disable interaction as well as
 searchability when typing into the `Select`.
 
 You will also need to set the aria attribute `aria-disabled` on the
 `<Select.Item aria-disabled={item.disabled ? item.disabled : undefined}/>` if the item is disabled,
-otherwise set the attribute to `undefined`. This ensures that the item is styled as disabled.
+otherwise set the attribute to `undefined`. `disabled` in this case is a property on the item's
+object. This ensures that the item is styled as disabled.
 
 <ExampleCodeBlock code={DisabledOptions} />
 
@@ -118,7 +121,7 @@ forward `ref` to its underlying `<input type="text" role="combobox">` element.
 
 <ExampleCodeBlock code={RefForwarding} />
 
-### UseSelectModel
+### Hoisted Model
 
 `<Select>` supports a
 [dynamic API](/getting-started/for-developers/resources/collection-api/#dynamic-items) where you
@@ -190,7 +193,7 @@ Selected Value: {model.state.selectedIds[0]}
 </>
 ```
 
-<ExampleCodeBlock code={UseSelectModel} />
+<ExampleCodeBlock code={HoistedModel} />
 
 ### Error States
 

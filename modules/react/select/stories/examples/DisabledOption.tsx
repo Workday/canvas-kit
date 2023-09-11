@@ -4,7 +4,7 @@ import {Select} from '@workday/canvas-kit-react/select';
 import {Flex} from '@workday/canvas-kit-react/layout';
 
 const options = [
-  {id: 'E-mail', data: {textValue: 'foo'}},
+  {id: 'E-mail'},
   {id: 'Phone'},
   {id: 'Fax (disabled)', disabled: true},
   {id: 'Mail'},
@@ -33,7 +33,7 @@ export const DisabledOptions = () => {
             <Select.Card maxHeight="200px">
               <Select.List>
                 {item => {
-                  return <Select.Item>{item.id}</Select.Item>;
+                  return <Select.Item aria-disabled={item.disabled}>{item.id}</Select.Item>;
                 }}
               </Select.List>
             </Select.Card>

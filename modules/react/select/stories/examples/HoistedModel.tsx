@@ -18,7 +18,7 @@ const options = [
 
 const disabledItems = options.filter(item => item.disabled === true).map(item => item.id);
 
-export const UseSelectModel = () => {
+export const HoistedModel = () => {
   const model = useSelectModel({
     items: options,
     nonInteractiveIds: disabledItems,
