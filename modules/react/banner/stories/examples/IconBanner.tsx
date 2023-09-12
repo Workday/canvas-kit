@@ -5,13 +5,12 @@ import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 import {styled} from '@workday/canvas-kit-react/common';
 
 export const IconBanner = () => {
-  const StyledBanner = styled(Banner)({width: '4em'});
 
   return (
     <Tooltip title="Warning">
-      <StyledBanner>
+      <Banner width="4em">
         <Banner.Icon />
-      </StyledBanner>
+      </Banner>
     </Tooltip>
   );
 };
