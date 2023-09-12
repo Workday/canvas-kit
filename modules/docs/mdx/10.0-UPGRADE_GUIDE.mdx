@@ -11,6 +11,7 @@ any questions.
 - [Codemod](#codemod)
 - [Removals](#removals)
   - [Menu (Preview)](#menu-preview)
+	- [useBanner](#useBanner)
 - [Deprecations](#deprecations)
 - [Token Updates](#token-updates)
   - [Space and Depth](#space-and-depth)
@@ -67,6 +68,12 @@ migrate from the `Menu` in Preview to the `Menu` in Main.
 
 This change is **not** handled by the codemod due to the differences in API between the `Menu` in
 Preview and the `Menu` in Main.
+
+## useBanner
+
+We have removed the `useBanner` hook, the only function of which was to add `aria-labelledby` and
+`aria-describedby` references to the text inside of the Banner. This was not required for accessibility,
+and browsers can compute the name of the Banner from the text given inside.
 
 ## Deprecations
 
