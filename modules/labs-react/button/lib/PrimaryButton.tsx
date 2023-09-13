@@ -34,7 +34,7 @@ const primaryStyles = cs({
     [buttonVars.focus.border]: 'transparent',
     [buttonVars.focus.color]: cssVar(brand.primary.accent),
     [buttonVars.focus.boxShadowInner]: cssVar(base.frenchVanilla100),
-    [buttonVars.focus.boxShadowOuter]: cssVar(brand.primary.base),
+    [buttonVars.focus.boxShadowOuter]: cssVar(brand.common.focusOutline),
     '& span .wd-icon-fill': {
       [buttonVars.focus.icon]: cssVar(brand.primary.accent),
     },
@@ -83,9 +83,6 @@ export const PrimaryButtonModifiers = createModifiers({
         [buttonVars.focus.boxShadowInner]: cssVar(base.blackPepper400),
         [buttonVars.focus.boxShadowOuter]: cssVar(base.frenchVanilla100),
         [buttonVars.focus.color]: cssVar(base.blackPepper400),
-        boxShadow: `${cssVar(buttonVars.focus.boxShadowInner)} 0px 0px 0px 2px, ${cssVar(
-          buttonVars.focus.boxShadowOuter
-        )} 0px 0px 0px 4px`,
         '& span .wd-icon-fill': {
           [buttonVars.focus.icon]: cssVar(base.blackPepper400),
         },

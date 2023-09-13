@@ -2,7 +2,6 @@ import * as React from 'react';
 
 import {BaseButton, buttonVars, BaseButtonContainerProps} from './BaseButton';
 import {createComponent, cs, createModifiers, cssVar} from '@workday/canvas-kit-react/common';
-import {borderRadius, colors} from '@workday/canvas-kit-react/tokens';
 import {base, brand, system} from '@workday/canvas-tokens-web';
 
 /**
@@ -38,7 +37,7 @@ const secondaryStyles = cs({
     [buttonVars.focus.border]: cssVar(base.blackPepper400),
     [buttonVars.focus.color]: cssVar(base.blackPepper400),
     [buttonVars.focus.boxShadowInner]: cssVar(base.frenchVanilla100),
-    [buttonVars.focus.boxShadowOuter]: cssVar(brand.primary.base),
+    [buttonVars.focus.boxShadowOuter]: cssVar(brand.common.focusOutline),
     '& span .wd-icon-fill': {
       [buttonVars.focus.icon]: cssVar(base.blackPepper400),
     },
@@ -70,44 +69,43 @@ export const SecondaryButtonModifiers = createModifiers({
   variant: {
     inverse: cs({
       [buttonVars.default.background]: 'transparent',
-      [buttonVars.default.border]: colors.frenchVanilla100,
-      [buttonVars.default.borderRadius]: borderRadius.circle,
-      [buttonVars.default.color]: colors.frenchVanilla100,
+      [buttonVars.default.border]: cssVar(base.frenchVanilla100),
+      [buttonVars.default.color]: cssVar(base.frenchVanilla100),
       '&:hover, &.hover': {
-        [buttonVars.hover.background]: colors.soap300,
-        [buttonVars.hover.border]: colors.soap300,
-        [buttonVars.hover.color]: colors.blackPepper500,
+        [buttonVars.hover.background]: cssVar(base.soap300),
+        [buttonVars.hover.border]: cssVar(base.soap300),
+        [buttonVars.hover.color]: cssVar(base.blackPepper500),
         '& span .wd-icon-fill': {
-          [buttonVars.hover.icon]: colors.blackPepper500,
+          [buttonVars.hover.icon]: cssVar(base.blackPepper500),
         },
       },
       '&:focus-visible, &.focus': {
-        [buttonVars.focus.background]: colors.frenchVanilla100,
-        [buttonVars.focus.border]: colors.frenchVanilla100,
-        [buttonVars.focus.boxShadowInner]: 'currentColor',
-        [buttonVars.focus.boxShadowOuter]: colors.frenchVanilla100,
-        [buttonVars.focus.color]: colors.blackPepper500,
+        [buttonVars.focus.background]: cssVar(base.frenchVanilla100),
+        [buttonVars.focus.border]: cssVar(base.frenchVanilla100),
+        [buttonVars.focus.boxShadowInner]: cssVar(base.blackPepper500),
+        [buttonVars.focus.boxShadowOuter]: cssVar(base.frenchVanilla100),
+        [buttonVars.focus.color]: cssVar(base.blackPepper500),
         '& span .wd-icon-fill': {
-          [buttonVars.focus.icon]: colors.blackPepper500,
+          [buttonVars.focus.icon]: cssVar(base.blackPepper500),
         },
       },
       '&:active, &.active': {
-        [buttonVars.active.background]: colors.soap400,
-        [buttonVars.active.border]: colors.soap400,
-        [buttonVars.active.color]: colors.blackPepper500,
+        [buttonVars.active.background]: cssVar(base.soap400),
+        [buttonVars.active.border]: cssVar(base.soap400),
+        [buttonVars.active.color]: cssVar(base.blackPepper500),
         '& span .wd-icon-fill': {
-          [buttonVars.active.icon]: colors.blackPepper500,
+          [buttonVars.active.icon]: cssVar(base.blackPepper500),
         },
       },
       '& span .wd-icon-fill': {
-        [buttonVars.default.icon]: colors.frenchVanilla100,
+        [buttonVars.default.icon]: cssVar(base.frenchVanilla100),
       },
       '&:disabled, &:active:disabled, &:focus:disabled, &:hover:disabled': {
         [buttonVars.disabled.background]: 'transparent',
-        [buttonVars.disabled.border]: colors.frenchVanilla100,
-        [buttonVars.disabled.color]: colors.frenchVanilla100,
+        [buttonVars.disabled.border]: cssVar(base.frenchVanilla100),
+        [buttonVars.disabled.color]: cssVar(base.frenchVanilla100),
         '& span .wd-icon-fill': {
-          [buttonVars.disabled.icon]: colors.frenchVanilla100,
+          [buttonVars.disabled.icon]: cssVar(base.frenchVanilla100),
         },
       },
     }),

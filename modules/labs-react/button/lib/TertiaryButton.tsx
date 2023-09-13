@@ -3,7 +3,7 @@ import * as React from 'react';
 import {BaseButton, buttonVars, BaseButtonContainerProps} from './BaseButton';
 import {createComponent, cs, createModifiers, cssVar} from '@workday/canvas-kit-react/common';
 import {system, brand, base} from '@workday/canvas-tokens-web';
-import {borderRadius, space, spaceNumbers, colors} from '@workday/canvas-kit-react/tokens';
+import {borderRadius, space, spaceNumbers} from '@workday/canvas-kit-react/tokens';
 
 /**
  * Extends all the style properties from Box to our buttons as well as props from ButtonContainerProps.
@@ -42,8 +42,8 @@ const tertiaryStyles = cs({
   '&:focus-visible, &.focus': {
     [buttonVars.focus.background]: 'transparent',
     [buttonVars.focus.border]: 'transparent',
-    [buttonVars.focus.boxShadowInner]: cssVar(brand.primary.base),
-    [buttonVars.focus.boxShadowOuter]: cssVar(brand.primary.base),
+    [buttonVars.focus.boxShadowInner]: cssVar(brand.common.focusOutline),
+    [buttonVars.focus.boxShadowOuter]: cssVar(brand.common.focusOutline),
     [buttonVars.focus.color]: cssVar(brand.primary.base),
     boxShadow: `${cssVar(buttonVars.focus.boxShadowInner)} 0px 0px 0px 0px, ${cssVar(
       buttonVars.focus.boxShadowOuter
@@ -58,7 +58,7 @@ const tertiaryStyles = cs({
     },
   },
   '&:active, &.active': {
-    [buttonVars.active.background]: colors.soap300,
+    [buttonVars.active.background]: cssVar(base.soap300),
     [buttonVars.active.border]: 'transparent',
     [buttonVars.active.color]: cssVar(brand.primary.dark),
     '& span .wd-icon-fill': {
