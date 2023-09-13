@@ -141,7 +141,7 @@ describe('Select', () => {
         beforeEach(() => {
           cy.findByRole('combobox')
             .focus()
-            .realType('{enter}');
+            .realType('{downarrow}');
         });
 
         context('the menu', () => {
