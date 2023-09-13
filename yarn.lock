@@ -5040,6 +5040,11 @@
   dependencies:
     "@workday/design-assets-types" "0.2.8"
 
+"@workday/canvas-tokens-web@0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@workday/canvas-tokens-web/-/canvas-tokens-web-0.1.1.tgz#284438b64054c9e8c1e365e43831516778c47fff"
+  integrity sha512-O0LyNhI5c+Slv2tr7CuhgqirdCocLHHLQH7seWs9MO0EZlIY7KyUbq1VnLvtTDv6S3FgqSKSNiVwSVNbPgmatg==
+
 "@workday/design-assets-types@0.2.8", "@workday/design-assets-types@^0.2.8":
   version "0.2.8"
   resolved "https://registry.yarnpkg.com/@workday/design-assets-types/-/design-assets-types-0.2.8.tgz#54026b4e6ea79861b12837a7deb83db9a16caad4"

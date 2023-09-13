@@ -10,7 +10,11 @@ export type DeleteButtonVariant = 'primary' | 'inverse';
  * We omit `ref` since all of our buttons use `createComponent` and already give access to `ref`.
  * Use this type to extend and customize any one off buttons that you want full control over styling.
  */
-export interface DeleteButtonProps extends Omit<BaseButtonContainerProps, 'ref'> {}
+export interface DeleteButtonProps
+  extends Omit<
+    BaseButtonContainerProps,
+    'ref' | 'icon' | 'iconPosition' | 'shouldMirrorIcon' | 'fillIcon'
+  > {}
 
 const deleteStyles = cs({
   [buttonVars.default.background]: cssVar(newTheme.colors.error.main),
