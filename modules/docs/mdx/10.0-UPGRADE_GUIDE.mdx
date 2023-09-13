@@ -10,7 +10,7 @@ any questions.
 
 - [Codemod](#codemod)
 - [Removals](#removals)
-  - [Menu (Preview)](#menu-preview)
+	- [useBanner](#useBanner)
 - [Deprecations](#deprecations)
 - [Token Updates](#token-updates)
   - [Space and Depth](#space-and-depth)
@@ -56,17 +56,11 @@ roll back more easily if necessary.
 Removals are deletions from our codebase and you can no longer consume this component. We've either
 promoted or replaced a component or utility.
 
-### Menu (Preview)
+## useBanner
 
-We've removed the `Menu` component in Preview. We recommend using the
-[Menu](/components/popups/menu/) in the Main package instead; it is a
-[compound component](/getting-started/for-developers/resources/compound-components/) and offers a
-more flexible API. Please refer to this
-[discussion](https://github.com/Workday/canvas-kit/discussions/2063) for instructions on how to
-migrate from the `Menu` in Preview to the `Menu` in Main.
-
-This change is **not** handled by the codemod due to the differences in API between the `Menu` in
-Preview and the `Menu` in Main.
+We have removed the `useBanner` hook, the only function of which was to add `aria-labelledby` and
+`aria-describedby` references to the text inside of the Banner. This was not required for accessibility,
+and browsers can compute the name of the Banner from the text given inside.
 
 ## Deprecations
 
