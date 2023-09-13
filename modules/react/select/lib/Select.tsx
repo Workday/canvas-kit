@@ -102,7 +102,7 @@ export const Select = createContainer()({
     /**
      * `Select.Input` renders a {@link ComboboxMenu Combobox.Input} that handles keyboard navigation and interaction defined by [WAI](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/examples/combobox-select-only/).
      * This component can either be [controlled or un controlled](https://react.dev/learn/sharing-state-between-components#controlled-and-uncontrolled-components).
-     * **Note: An `id` must be provided that matches the `inputId` attribute on the `FormField` component from Main in order the `label` element to be associated with the `input` element.**
+     * **Note: An `id` must be provided that matches the `inputId` attribute on the `FormField` component from Main in order for the `label` element to be associated with the `input` element.**
      *
      * ```tsx
      * <Select items={options}>

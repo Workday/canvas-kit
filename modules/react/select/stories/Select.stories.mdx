@@ -87,9 +87,9 @@ Add `<Select.Item.Icon icon={yourIcon}/>` as a sub component of `<Select.Item/>`
 render an icon for each item. The `<Select.Item.Icon/>` takes in an `icon` prop of type
 `CanvasSystemIcon`. You can import icons from `@workday/canvas-system-icons-web`.
 
-If you want to render the selected item's icon in the `<Select.Input/>` add the `iconStart` prop. To
-get the current selected item's icon:
+If you want to render the selected item's icon in the `<Select.Input/>` add the `inputStartIcon` prop.
 
+To get the current selected item's icon:
 - Register your `items` with the `useSelectModel`
 - Get current item by
   `const currentItem = model.navigation.getItem(model.state.selectedIds[0], model)`
@@ -102,7 +102,7 @@ get the current selected item's icon:
 
 ### Grow
 
-Set the `grow` prop of the wrapping Form Field to `true` to configure the `<Select.Input/>` to
+Set the `grow` prop of the wrapping `FormField` to `true` to configure the `<Select.Input/>` to
 expand to the width of its container.
 
 <ExampleCodeBlock code={Grow} />
@@ -202,8 +202,9 @@ Set the error prop of the wrapping `FormField` to `FormField.ErrorType.Alert` or
 will also need to set the `hintId` and `hintText` props on the `FormField` to meet accessibility
 standards. You must set an `id` attribute on the `<Select.Input/>` element that matches the value of
 `inputId` set on the `FormField` element. These attributes ensure that the alert message is
-associated to the `<Select>` and read out by voiceover. **Note: The Select container component,
-`<Select>` must wrap the `FormField` element to ensure prop styling on the `<Select.Input/>`
+associated to the `<Select>` and read out by voiceover.
+
+**Note: The Select container component, `<Select>` must wrap the `FormField` element to ensure correct styling on the `<Select.Input/>`
 element.**
 
 ```tsx
