@@ -1,3 +1,8 @@
+/**
+ * ### ⚠️ Select in Preview has been deprecated and will be removed in a future major version. ⚠️
+ * - Please consider using [`Select`](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-select--basic) in Main
+ * @deprecated
+ */
 // Modified from https://gist.github.com/hsablonniere/2581101
 export const scrollIntoViewIfNeeded = (elem: HTMLElement, centerIfNeeded = true): void => {
   const parent = elem.parentElement;

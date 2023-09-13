@@ -40,7 +40,11 @@ export interface Option {
   label?: string;
   value: string;
 }
-
+/**
+ * ### ⚠️ Select in Preview has been deprecated and will be removed in a future major version. ⚠️
+ * - Please consider using [`Select`](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-select--basic) in Main
+ * @deprecated
+ */
 export interface NormalizedOption extends Option {
   // Optional keys in Option are required in NormalizedOption
   data: OptionData;
@@ -48,20 +52,36 @@ export interface NormalizedOption extends Option {
   id: string;
   label: string;
 }
-
+/**
+ * ### ⚠️ Select in Preview has been deprecated and will be removed in a future major version. ⚠️
+ * - Please consider using [`Select`](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-select--basic) in Main
+ * @deprecated
+ */
 export interface RenderSelectedFunction {
   (option: NormalizedOption): React.ReactNode;
 }
-
+/**
+ * ### ⚠️ Select in Preview has been deprecated and will be removed in a future major version. ⚠️
+ * - Please consider using [`Select`](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-select--basic) in Main
+ * @deprecated
+ */
 export interface RenderableOption extends NormalizedOption {
   focused: boolean;
   selected: boolean;
 }
-
+/**
+ * ### ⚠️ Select in Preview has been deprecated and will be removed in a future major version. ⚠️
+ * - Please consider using [`Select`](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-select--basic) in Main
+ * @deprecated
+ */
 export interface RenderOptionFunction {
   (option: RenderableOption): React.ReactNode;
 }
-
+/**
+ * ### ⚠️ Select in Preview has been deprecated and will be removed in a future major version. ⚠️
+ * - Please consider using [`Select`](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-select--basic) in Main
+ * @deprecated
+ */
 export interface CoreSelectBaseProps
   extends Themeable,
     GrowthBehavior,
@@ -111,7 +131,11 @@ export interface CoreSelectBaseProps
    */
   value?: string;
 }
-
+/**
+ * ### ⚠️ Select in Preview has been deprecated and will be removed in a future major version. ⚠️
+ * - Please consider using [`Select`](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-select--basic) in Main
+ * @deprecated
+ */
 export interface SelectBaseProps extends CoreSelectBaseProps, StyledType {
   /**
    * The ref to be forwarded to the underlying button element. Use this to imperatively manipulate the button.
@@ -287,7 +311,11 @@ const defaultRenderOption: RenderOptionFunction = option => {
 const defaultRenderSelected: RenderSelectedFunction = option => {
   return option.label;
 };
-
+/**
+ * ### ⚠️ Select in Preview has been deprecated and will be removed in a future major version. ⚠️
+ * - Please consider using [`Select`](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-select--basic) in Main
+ * @deprecated
+ */
 export const SelectBase = ({
   'aria-labelledby': ariaLabelledBy,
   'aria-required': ariaRequired,

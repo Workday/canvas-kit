@@ -8,7 +8,11 @@ import {
   styled,
 } from '@workday/canvas-kit-react/common';
 import {colors, commonColors, type} from '@workday/canvas-kit-react/tokens';
-
+/**
+ * ### ⚠️ Select in Preview has been deprecated and will be removed in a future major version. ⚠️
+ * - Please consider using [`Select`](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-select--basic) in Main
+ * @deprecated
+ */
 export interface SelectOptionProps extends Themeable, React.LiHTMLAttributes<HTMLLIElement> {
   /**
    * The type of error associated with the SelectOption (if applicable).
@@ -105,6 +109,11 @@ const Option = styled('li')<SelectOptionProps>(
   })
 );
 
+/**
+ * ### ⚠️ Select in Preview has been deprecated and will be removed in a future major version. ⚠️
+ * - Please consider using [`Select`](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-select--basic) in Main
+ * @deprecated
+ */
 export const SelectOption = ({
   children,
   focused = false,
