@@ -32,7 +32,9 @@ interface OptionData {
   // function without encountering TypeScript errors
   [key: string]: any;
 }
-
+/**
+ * @deprecated
+ */
 export interface Option {
   data?: OptionData;
   disabled?: boolean;
