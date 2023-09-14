@@ -35,9 +35,9 @@ yarn add @workday/canvas-kit-react
 ### Basic Example
 
 `Select` should be used in tandem with [Form Field](/components/inputs/form-field/) where the
-`inputId` prop matches an `id` on the `<Select.Input/>` to meet accessibility standards. This
-ensures the `label` text from `FormField` is attached to the `<Select.Input/>` and read out as a
-group for voiceover.
+`inputId` prop matches an `id` on the `Select.Input` to meet accessibility standards. This ensures
+the `label` text from `FormField` is attached to the `Select.Input` and read out as a group for
+voiceover.
 
 <ExampleCodeBlock code={Basic} />
 
@@ -63,7 +63,7 @@ required. Labels for required fields are suffixed by a red asterisk.
 
 ### Disabled
 
-Set the `disabled` prop of `<Select.Input/>` to prevent users from interacting with it.
+Set the `disabled` prop of `Select.Input` to prevent users from interacting with it.
 
 <ExampleCodeBlock code={Disabled} />
 
@@ -74,49 +74,49 @@ To disable items and prevent them from being interactive, you must set two prope
 Set `nonInteractiveIds` to an array of `id`s that you want to disable interaction as well as
 searchability when typing into the `Select`.
 
-You will also need to set the aria attribute `aria-disabled` on the
-`<Select.Item aria-disabled={item.disabled ? item.disabled : undefined}/>` if the item is disabled,
-otherwise set the attribute to `undefined`. `disabled` in this case is a property on the item's
-object. This ensures that the item is styled as disabled.
+You will also need to set the aria attribute `aria-disabled` on the `Select.Item` if the item is
+disabled, otherwise set the attribute to `undefined`. `disabled` in this case is a property on the
+item's object. This ensures that the item is styled as disabled.
 
 <ExampleCodeBlock code={DisabledOptions} />
 
 ### With Icons
 
-Add `<Select.Item.Icon icon={yourIcon}/>` as a sub component of `<Select.Item/>` if you want to
-render an icon for each item. The `<Select.Item.Icon/>` takes in an `icon` prop of type
-`CanvasSystemIcon`. You can import icons from `@workday/canvas-system-icons-web`.
+Add `Select.Item.Icon` as a sub component of `Select.Item` if you want to render an icon for each
+item. The `Select.Item.Icon` takes in an `icon` prop of type `CanvasSystemIcon`. You can import
+icons from `@workday/canvas-system-icons-web`.
 
-If you want to render the selected item's icon in the `<Select.Input/>` add the `inputStartIcon` prop.
+If you want to render the selected item's icon in the `Select.Input` add the `inputStartIcon` prop.
 
 To get the current selected item's icon:
+
 - Register your `items` with the `useSelectModel`
 - Get current item by
   `const currentItem = model.navigation.getItem(model.state.selectedIds[0], model)`
 - Pass the value to the input in the following way:
   `<Select.Input inputStartIcon={currentItem.value.icon} id="form-field-input-id" />`
 
-**Notes: The `<Select.Input/>` will only render an icon when there is an item selected.**
+**Notes: The `Select.Input` will only render an icon when there is an item selected.**
 
 <ExampleCodeBlock code={WithIcons} />
 
 ### Grow
 
-Set the `grow` prop of the wrapping `FormField` to `true` to configure the `<Select.Input/>` to
-expand to the width of its container.
+Set the `grow` prop of the wrapping `FormField` to `true` to configure the `Select.Input` to expand
+to the width of its container.
 
 <ExampleCodeBlock code={Grow} />
 
 ### Scrollable
 
-Set `maxHeight` prop on the `<Select.Card>` to determine the height of the dropdown menu. This will
+Set `maxHeight` prop on the `Select.Card` to determine the height of the dropdown menu. This will
 allow the menu to scroll if there are enough items.
 
 <ExampleCodeBlock code={Scrollable} />
 
 ### Ref Forwarding
 
-`<Select.Input/>` supports [ref forwarding](https://reactjs.org/docs/forwarding-refs.html). It will
+`Select.Input` supports [ref forwarding](https://reactjs.org/docs/forwarding-refs.html). It will
 forward `ref` to its underlying `<input type="text" role="combobox">` element.
 
 <ExampleCodeBlock code={RefForwarding} />
@@ -200,12 +200,12 @@ Selected Value: {model.state.selectedIds[0]}
 Set the error prop of the wrapping `FormField` to `FormField.ErrorType.Alert` or
 `FormField.ErrorType.Error` to set the `<Select>` to the alert or error state, respectively. You
 will also need to set the `hintId` and `hintText` props on the `FormField` to meet accessibility
-standards. You must set an `id` attribute on the `<Select.Input/>` element that matches the value of
+standards. You must set an `id` attribute on the `Select.Input` element that matches the value of
 `inputId` set on the `FormField` element. These attributes ensure that the alert message is
-associated to the `<Select>` and read out by voiceover.
+associated to the `Select` and read out by voiceover.
 
-**Note: The Select container component, `<Select>` must wrap the `FormField` element to ensure correct styling on the `<Select.Input/>`
-element.**
+**Note: The Select container component, `Select` must wrap the `FormField` element to ensure correct
+styling on the `Select.Input` element.**
 
 ```tsx
 <Select items={options}>

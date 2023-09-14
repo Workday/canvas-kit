@@ -233,7 +233,6 @@ export class FormField extends React.Component<React.PropsWithChildren<FormField
     } else {
       return (
         <FormFieldContainer
-          id="foo"
           useFieldset={useFieldset}
           labelPosition={labelPosition}
           grow={grow}
