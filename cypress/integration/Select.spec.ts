@@ -266,8 +266,11 @@ context(`given the "Basic" story is rendered`, () => {
 });
 
 context(`given the "Disabled" story is rendered`, () => {
+  before(() => {
+    h.stories.visit();
+  });
   beforeEach(() => {
-    h.stories.load('Components/Input/Select', 'Disabled');
+    h.stories.load('Components/Inputs/Select', 'Disabled');
   });
 
   it('should not have any axe errors', () => {
@@ -282,6 +285,9 @@ context(`given the "Disabled" story is rendered`, () => {
 });
 
 context('given the "Basic" story with a disabled option', () => {
+  before(() => {
+    h.stories.visit();
+  });
   beforeEach(() => {
     h.stories.load('Components/Inputs/Select', 'Basic');
   });
