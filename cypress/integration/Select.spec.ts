@@ -252,9 +252,9 @@ context(`given the "Basic" story is rendered`, () => {
             });
 
             context('the menu', () => {
-              it('should have reset assistive focus to the first option ("Mail") since that is where the cursor was', () => {
+              it('should have reset assistive focus to the first option ("Phone") since that is where the cursor was', () => {
                 cy.findAllByRole('option')
-                  .eq(3)
+                  .eq(1)
                   .should('have.attr', 'aria-selected', 'true');
               });
             });
