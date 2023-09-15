@@ -7,7 +7,7 @@ import {SystemIcon} from '@workday/canvas-kit-react/icon';
 /**
  * We've deprecated `InputIconContainer` from `TextInput` component
  * together with `InputIconContainerProps`.
-  Please consider using [`InputGroup`](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-text-input--icons).
+ * Please consider using [`InputGroup`](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-text-input--icons).
  * @deprecated
  */
 export interface InputIconContainerProps extends GrowthBehavior {
@@ -28,7 +28,7 @@ const IconContainer = styled('div')({
 /**
  * We've deprecated `InputIconContainer` from `TextInput` component, because it doesn't handle
  * bidirectionality or icons at the start of an input.
-Please consider using [`InputGroup`](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-text-input--icons).
+ * Please consider using [`InputGroup`](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-text-input--icons).
  * @deprecated
  */
 
