@@ -4,6 +4,11 @@ import {GrowthBehavior} from '@workday/canvas-kit-react/common';
 import {space} from '@workday/canvas-kit-react/tokens';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 
+/**
+ * We've deprecated `InputIconContainer` from `TextInput` component
+ * together with `InputIconContainerProps`.
+ * @deprecated
+ */
 export interface InputIconContainerProps extends GrowthBehavior {
   icon?: React.ReactElement<typeof SystemIcon>;
 }
@@ -20,6 +25,9 @@ const IconContainer = styled('div')({
 });
 
 /**
+ * We've deprecated `InputIconContainer` from `TextInput` component, because it doesn't handle
+ * bidirectionality or icons at the start of an input. `InputGroup` should be used instead of
+ * deprecated `InputIconContainer`.
  * @deprecated
  */
 
