@@ -5,6 +5,7 @@ import {
   createElemPropsHook,
   createSubcomponent,
   styled,
+  useLocalRef,
 } from '@workday/canvas-kit-react/common';
 import {StyledMenuItem, useMenuModel} from '@workday/canvas-kit-react/menu';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
@@ -28,8 +29,22 @@ export interface ComboboxMenuItemProps {
  * added when the item has "focus" (when the cursor is on the item).
  */
 export const useComboboxMenuItem = composeHooks(
-  createElemPropsHook(useMenuModel)((model, _, elemProps: {'data-id'?: string} = {}) => {
+  createElemPropsHook(useMenuModel)((model, ref, elemProps: {'data-id'?: string} = {}) => {
     const id = elemProps['data-id'] || '';
+    const {localRef, elementRef} = useLocalRef(ref as React.Ref<HTMLElement>);
+
+    // focus on the item with the cursor
+    React.useLayoutEffect(() => {
+      if (model.state.mode === 'single') {
+        if (model.state.cursorId === id) {
+          // delay focus changes to allow PopperJS to position
+          requestAnimationFrame(() => {
+            localRef.current?.focus();
+          });
+        }
+      }
+    }, [id, localRef, model.state.cursorId, model.state.mode]);
+
     const onMouseDown = (event: React.MouseEvent<HTMLElement>) => {
       if (
         model.state.nonInteractiveIds.includes(id) ||
@@ -52,6 +67,7 @@ export const useComboboxMenuItem = composeHooks(
     const selected = model.state.cursorId === id;
 
     return {
+      ref: elementRef,
       role: 'option',
       'aria-selected': selected || undefined,
       onMouseDown,

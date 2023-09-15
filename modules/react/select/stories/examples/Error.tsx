@@ -38,7 +38,11 @@ export const Error = () => {
             <Select.Card maxHeight="200px">
               <Select.List>
                 {item => {
-                  return <Select.Item>{item.id}</Select.Item>;
+                  return (
+                    <Select.Item aria-disabled={item.disabled ? item.disabled : undefined}>
+                      {item.id}
+                    </Select.Item>
+                  );
                 }}
               </Select.List>
             </Select.Card>

@@ -60,7 +60,9 @@ export const useComboboxInput = composeHooks(
               `[id="${listboxId}"] [data-id="${model.state.cursorId}"]`
             );
             if (menuItem) {
-              menuItem.scrollIntoView({block: 'nearest'});
+              requestAnimationFrame(() => {
+                menuItem.scrollIntoView({block: 'nearest'});
+              });
             }
           }
         }

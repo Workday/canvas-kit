@@ -9,8 +9,8 @@ export const useScrollToIndexOnClick = createElemPropsHook(useComboboxModel)(mod
         const foundIndex = model.state.items.findIndex(
           (item: {id: string}) => item.id === model.state.selectedIds[0]
         );
+
         model.events.goTo({id: model.state.items[foundIndex].id});
-        model.state.UNSTABLE_virtual.scrollToIndex(foundIndex);
       }
     },
   };

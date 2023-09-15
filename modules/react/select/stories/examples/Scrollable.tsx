@@ -2,8 +2,6 @@ import React from 'react';
 import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Select} from '@workday/canvas-kit-react/select';
 import {Box} from '@workday/canvas-kit-react/layout';
-import {useComboboxModel} from '../../../combobox';
-import {Combobox} from '@workday/canvas-kit-react/combobox';
 
 export const cities = [
   {id: 'Atlanta (United States)', disabled: false},
@@ -13,7 +11,7 @@ export const cities = [
   {id: 'Belfast (Europe)', disabled: false},
   {id: 'Berlin (Europe)', disabled: false},
   {id: 'Boston (United States)', disabled: false},
-  {id: 'Boulder (United States)', disabled: true},
+  {id: 'Boulder (United States)', disabled: false},
   {id: 'Chicago (United States)', disabled: false},
   {id: 'Dallas (United States)', disabled: false},
   {id: 'Denver (United States)', disabled: false},
@@ -50,7 +48,11 @@ export const Scrollable = () => {
             <Select.Card maxHeight="200px">
               <Select.List>
                 {item => (
-                  <Select.Item data-id={item.id} data-text={item.id}>
+                  <Select.Item
+                    aria-disabled={item.disabled ? item.disabled : undefined}
+                    data-id={item.id}
+                    data-text={item.id}
+                  >
                     {item.id}
                   </Select.Item>
                 )}

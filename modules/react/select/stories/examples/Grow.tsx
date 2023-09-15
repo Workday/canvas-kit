@@ -31,9 +31,13 @@ export const Grow = () => {
           <Select.Popper>
             <Select.Card maxHeight="200px">
               {model.state.items.length > 0 && (
-                <Select.List>
+                <Select.List scrollMargin="10px">
                   {item => {
-                    return <Select.Item>{item.id}</Select.Item>;
+                    return (
+                      <Select.Item aria-disabled={item.disabled ? item.disabled : undefined}>
+                        {item.id}
+                      </Select.Item>
+                    );
                   }}
                 </Select.List>
               )}
