@@ -57,6 +57,18 @@ storiesOf('Components/Indicators/Avatar', module)
       <h3>Extra Small</h3>
       <Avatar as="div" size={Avatar.Size.xs} url={testAvatar} />
     </div>
+  ))
+  .add('Non-Square Image', () => (
+    <div className="story">
+      <h3>Rectangle Image</h3>
+      <img alt="" src="https://placekitten.com/g/450/200" />
+      <h3>Round Image</h3>
+      <Avatar as="div" size={200} url="https://placekitten.com/g/450/200" objectFit="contain" />
+      <h3>Square Image</h3>
+      <img alt="" src="https://placekitten.com/g/450/450" />
+      <h3>Round Image</h3>
+      <Avatar as="div" size={200} url="https://placekitten.com/g/450/450" objectFit="contain" />
+    </div>
   ));
 
 storiesOf('Components/Indicators/Avatar/Avatar Button', module)
