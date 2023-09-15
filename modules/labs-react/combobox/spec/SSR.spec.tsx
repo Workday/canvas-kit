@@ -4,12 +4,12 @@
 import React from 'react';
 import {renderToString} from 'react-dom/server';
 import {Combobox} from '../lib/Combobox';
-import {DeprecatedMenuItem} from '@workday/canvas-kit-preview-react/menu';
+import {StyledMenuItem} from '@workday/canvas-kit-react/menu';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 
 describe('InputProvider', () => {
   it('should render on a server without crashing', () => {
-    const autocompleteItems = [<DeprecatedMenuItem>test</DeprecatedMenuItem>];
+    const autocompleteItems = [<StyledMenuItem>test</StyledMenuItem>];
     const ssrRender = () =>
       renderToString(
         <Combobox autocompleteItems={autocompleteItems}>
