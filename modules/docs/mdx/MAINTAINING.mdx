@@ -20,6 +20,8 @@ Kit!
   - [Forward Merge Workflow](#forward-merge-workflow)
   - [Release Minor Workflow](#release-minor-workflow)
   - [Release Workflow](#release-workflow)
+- [Deprecations](#deprecations)
+	- [How To Deprecate](#how-to-deprecate)
 - [Releases](#releases)
   - [Patch Releases](#patch-releases)
   - [Minor Releases](#minor-releases)
@@ -122,6 +124,28 @@ The
 are initiated automatically when a commit is merged to `prerelease/minor` or `prerelease/major`. For
 a more in-depth review of the workflow,
 [view the source code](https://github.com/Workday/canvas-kit/blob/master/.github/workflows/release-minor.yml).
+
+## Deprecations
+
+We add the [@deprecated](https://jsdoc.app/tags-deprecated.html) from JSDoc to code that we plan to
+remove in the near future. Al though you can still consume this code, we want consumers to move to a
+utility or component that is more stable.
+
+### How To Deprecate
+
+When deprecating a component or utility use the following pattern:
+
+```tsx
+/**
+ * ### ⚠️ ${ComponentName/Utility} has been deprecated. Optionally give a reason as to why. ⚠️
+ * - Please consider using [`${OtherComponent/Utility}`](insert link to  documentation) in ${packageName}.
+ * @deprecated
+ */
+```
+
+Attach this block of JSDoc directly above to all exported members that relate to the deprecation.
+
+Be sure to add any additional information to an upgrade guide if necessary.
 
 ## Releases
 
@@ -270,12 +294,13 @@ last release tag. So for example, a V8 canary would look something like this:
 ## Codemods
 
 We use codemods to reduce friction for consumers as they make changes and do upgrades. Codemods are
-accompany major version releases since v5, and can also be released in minor releases if users want to apply some changes sooner.
+accompany major version releases since v5, and can also be released in minor releases if users want
+to apply some changes sooner.
 
 ### Add a New Codemod
 
-Adding a new codemod is pretty straightforward, but this guide will make sure you don't miss any steps
-along the way.
+Adding a new codemod is pretty straightforward, but this guide will make sure you don't miss any
+steps along the way.
 
 First, you need to add a new command to the root CLI. For this example, we'll pretend you're adding
 a new v10 codemod.
