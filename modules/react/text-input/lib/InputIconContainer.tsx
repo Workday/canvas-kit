@@ -4,6 +4,11 @@ import {GrowthBehavior} from '@workday/canvas-kit-react/common';
 import {space} from '@workday/canvas-kit-react/tokens';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 
+/**
+ * ### ⚠️ We've deprecated `InputIconContainerProps` from Main because it doesn't handle bidirectionality or icons at the start of an input. ⚠️
+ * Please consider using [`InputGroup`](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-text-input--icons) instead.
+ * @deprecated
+ */
 export interface InputIconContainerProps extends GrowthBehavior {
   icon?: React.ReactElement<typeof SystemIcon>;
 }
@@ -19,6 +24,11 @@ const IconContainer = styled('div')({
   right: space.xxs,
 });
 
+/**
+ * ### ⚠️ We've deprecated `InputIconContainer` from Main because it doesn't handle bidirectionality or icons at the start of an input. ⚠️
+ * Please consider using [`InputGroup`](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-text-input--icons) instead.
+ * @deprecated
+ */
 export const InputIconContainer: React.FunctionComponent<React.PropsWithChildren<
   InputIconContainerProps
 >> = ({grow, children, icon}) => (
