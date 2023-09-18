@@ -2,18 +2,21 @@ import React from 'react';
 
 import {Table} from '@workday/canvas-kit-preview-react/table';
 import {Heading} from '@workday/canvas-kit-react/text';
+import {useUniqueId} from '@workday/canvas-kit-react/common';
 
 export const BasicWithHeading = () => {
+  const headingID = useUniqueId();
+  
   return (
     <>
-      <Heading size="small" marginBottom="s">
+      <Heading as="h3" id={headingID} size="small" marginBottom="s">
         Pizza Toppings
       </Heading>
-      <Table>
+      <Table aria-labelledby={headingID}>
         <Table.Head>
           <Table.Row>
-            <Table.Header backgroundColor="soap100">Toppings</Table.Header>
-            <Table.Header backgroundColor="soap100">Amount</Table.Header>
+            <Table.Header scope="col" backgroundColor="soap100">Toppings</Table.Header>
+            <Table.Header scope="col" backgroundColor="soap100">Amount</Table.Header>
           </Table.Row>
         </Table.Head>
         <Table.Body>

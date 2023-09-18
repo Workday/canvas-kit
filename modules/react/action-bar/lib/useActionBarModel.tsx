@@ -52,8 +52,6 @@ export const useActionBarModel = createModelHook({
       ? totalSize
       : config.maximumVisible;
 
-  console.log('maximumVisible', maximumVisible);
-
   if (totalSize - hiddenIds.length >= maximumVisible) {
     hiddenIds = items.slice(maximumVisible, totalSize).map(getId);
   }

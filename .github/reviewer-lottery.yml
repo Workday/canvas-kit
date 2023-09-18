@@ -5,7 +5,6 @@ groups:
     usernames: # github usernames of the reviewers
       - jamesfan
       - NicholasBoll
-      - willklein
       - alanbsmith
       - mannycarrera4
       - josh-bagwell
