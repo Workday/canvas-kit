@@ -61,7 +61,12 @@ export function createProgramFromSource(...args: any[]) {
     getCurrentDirectory: () => '',
     getNewLine: () => '\n',
     getDirectories: () => [],
-    fileExists: () => true,
+    // This should be kept up to date with getSourceFile()
+    fileExists: fileName =>
+      fileName.startsWith('lib') ||
+      fileName === 'node_modules/react.ts' ||
+      fileName === 'node_modules/@types/react/index.d.ts' ||
+      !!sourceFiles.find(s => s.fileName === fileName),
     readFile: () => '',
   };
 

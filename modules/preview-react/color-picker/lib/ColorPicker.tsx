@@ -172,6 +172,7 @@ export const ColorPicker = ({
   ...elemProps
 }: ColorPickerProps) => {
   const [validHexValue, setValidHexValue] = React.useState('');
+  const [disabled, setDisabled] = React.useState(true);
   const [customHexValue, setCustomHexValue] = React.useState(
     isCustomColor(colorSet, value) ? value : ''
   );
@@ -179,9 +180,13 @@ export const ColorPicker = ({
   const onCustomHexChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCustomHexValue(event.target.value);
     setValidHexValue('');
+    setDisabled(true);
   };
 
-  const onValidCustomHexChange = (validHexValue: string) => setValidHexValue(validHexValue);
+  const onValidCustomHexChange = (validHexValue: string) => {
+    setValidHexValue(validHexValue);
+    setDisabled(false);
+  };
 
   const onSubmit = (event: React.FormEvent) => {
     if (onSubmitClick) {
@@ -207,7 +212,12 @@ export const ColorPicker = ({
               showCheck={value === validHexValue || value === customHexValue}
             />
           </ColorInputAndLabel>
-          <CheckButton aria-label={submitLabel} icon={checkIcon} />
+          <CheckButton
+            aria-label={submitLabel}
+            icon={checkIcon}
+            type="submit"
+            disabled={disabled}
+          />
         </ColorInputWrapper>
       )}
     </ColorPickerContainer>

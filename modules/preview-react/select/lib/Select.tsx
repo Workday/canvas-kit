@@ -13,9 +13,10 @@ import {getCorrectedIndexByValue} from './utils';
 
 export interface SelectProps extends CoreSelectBaseProps {
   /**
-   * The options of the Select. `options` may be an array of objects or an array of strings.
+   * The options of the Select. `options` may be an array of objects, an array of strings,
+   * or an array that contains both objects and strings.
    *
-   * If `options` is an array of objects, each object must adhere to the `Option` interface:
+   * If `options` includes objects, each included object must adhere to the `Option` interface:
    *
    * * `data: object` (optional)
    * * `disabled: boolean` (optional)
@@ -76,8 +77,8 @@ class SelectContainer extends React.Component<SelectContainerProps, SelectContai
   };
 
   // Store normalized options since the options prop can take on multiple
-  // forms: an array of strings or an array of objects (sometimes with
-  // arbitrary keys)
+  // forms. It can be an array of strings, an array of objects (sometimes with
+  // arbitrary keys), or an array that contains both strings and objects
   private setNormalizedOptions = (): void => {
     const {options} = this.props;
 
@@ -543,6 +544,7 @@ class SelectContainer extends React.Component<SelectContainerProps, SelectContai
       buttonRef,
       options,
       onKeyDown,
+      onBlur,
 
       ...elemProps
     } = this.props;

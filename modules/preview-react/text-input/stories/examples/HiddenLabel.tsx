@@ -14,7 +14,7 @@ export const HiddenLabel = () => {
   };
 
   return (
-    <TextInput orientation="vertical" spacing="zero">
+    <TextInput orientation="vertical" gap="zero">
       <StyledTextAreaLabel>Email</StyledTextAreaLabel>
       <TextInput.Field onChange={handleChange} value={value} />
     </TextInput>

@@ -20,7 +20,7 @@ export interface MenuProps {
 /**
  * `Menu` is a combination of a popup and a list. It usually has some type of target element that
  * expands/collapses the menu and a `menu` role and and several `menuitem` roles. Focus is managed
- * using [roving tabindex](https://w3c.github.io/aria-practices/#kbd_roving_tabindex) for maximum
+ * using [roving tabindex](https://www.w3.org/WAI/ARIA/apg/practices/keyboard-interface/#kbd_roving_tabindex) for maximum
  * compatibility. A `Menu` can have two modes: `single` and `multiple`. This mode determines both
  * how many items can be selected as well as the default behavior when a `menuitem` is clicked. For
  * the `single` mode, selecting a `menuitem` will select and close the menu. For the `multiple`
@@ -83,7 +83,7 @@ export const Menu = createContainer()({
      *   return (
      *     <Menu model={model}>
      *       <Menu.List>
-     *         {(item) => <Menu.Item name={item.id}>{item.text}</Menu.Item>}
+     *         {(item) => <Menu.Item data-id={item.id}>{item.text}</Menu.Item>}
      *       </Menu.List>
      *     </Menu>
      *   )
@@ -92,9 +92,11 @@ export const Menu = createContainer()({
      */
     List: MenuList,
     /**
-     * A menu item has an optional `name` prop that identifies the item in the menu list and will be
-     * passed to the optional `onSelect` callback of the menu model. A menu item can contain any
-     * HTML. If more complex HTML is provided, consider
+     * A `Menu.Item` has an optional `data-id` prop that identifies the item in the `Menu.List` and
+     * will be passed to the optional `onSelect` callback of the `Menu` model. A `Menu.Item` can
+     * contain any HTML. If more complex HTML is provided, add `data-text` to the `Menu.Item`
+     * component if using the static API. If you're using the dynamic API, pass `getTextValue` to
+     * the model.
      */
     Item: MenuItem,
     Divider: MenuDivider,
