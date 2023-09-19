@@ -211,12 +211,12 @@ export const SizeModifiers = createModifiers({
         minWidth: `${spaceNumbers.xl + spaceNumbers.xxs}rem`,
       },
       '&.canvas-button-icon-start': {
-        paddingInlineStart: `${spaceNumbers.xl / 2}rem`,
-        paddingInlineEnd: space.m,
+        paddingInlineStart: space.m,
+        paddingInlineEnd: space.l,
       },
       '&.canvas-button-icon-end': {
-        paddingInlineStart: space.m,
-        paddingInlineEnd: `${spaceNumbers.xl / 2}rem`,
+        paddingInlineStart: space.l,
+        paddingInlineEnd: space.m,
       },
     }),
     medium: cs({
