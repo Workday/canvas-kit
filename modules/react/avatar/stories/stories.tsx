@@ -67,7 +67,7 @@ storiesOf('Components/Indicators/Avatar', module)
       <h3>Original Square Image</h3>
       <img alt="" src="https://placekitten.com/g/450/450" />
       <h3>using Object Fit on a Square Image</h3>
-      <Avatar as="div" size={200} url="https://placekitten.com/g/450/450" objectFit="contain" />
+      <Avatar as="div" size={200} url="https://placekitten.com/g/450/450" />
     </div>
   ));
 
