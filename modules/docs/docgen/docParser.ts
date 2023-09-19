@@ -14,9 +14,6 @@ import {
 import {getExternalSymbol} from './getExternalSymbol';
 import t, {find} from './traverse';
 
-// track symbols to ensure we don't get stuck in an infinite loop
-let visitedTypeScriptSymbols: Record<string, ts.SyntaxKind> = {};
-
 export class DocParser<T extends {kind: string} = any> {
   /** A shared reference to the Typescript type checker */
   public checker: ts.TypeChecker;
@@ -60,7 +57,6 @@ export class DocParser<T extends {kind: string} = any> {
       );
     }).forEach(node => {
       // reset visited symbols for every exported symbol to prevent accidental short-circuiting of non-exported symbols of the same name across files or scopes.
-      visitedTypeScriptSymbols = {};
       this.visitedTypeScriptSymbols = {};
       const symbol = getSymbolFromNode(this, node);
       const previousSymbolsLength = this.symbols.length;
@@ -1537,12 +1533,12 @@ export function isExportedSymbol(parser: DocParser, node: ts.Node): boolean {
 
   // Prevent circular types that aren't exported
   if (symbol && declarationNode) {
-    if (visitedTypeScriptSymbols[symbol.name]) {
+    if (parser.visitedTypeScriptSymbols[symbol.name]) {
       return true;
     }
     // We don't consider type parameter declarations to be visited. These are generics like `T`
     if (!t.isTypeParameter(declarationNode)) {
-      visitedTypeScriptSymbols[symbol.name] = declarationNode.kind;
+      parser.visitedTypeScriptSymbols[symbol.name] = declarationNode.kind;
     }
     // Check if the declaration's sourcefile is a declaration file
     if (declarationNode.getSourceFile().isDeclarationFile) {
@@ -1595,7 +1591,6 @@ function safeGetText(parser: DocParser, node: ts.Node): string {
  * ```
  */
 function getExportMembers(parser: DocParser, node: ts.Node) {
-  const {checker} = parser;
   const exports = getSymbolFromNode(parser, node)?.exports || new Map();
   const members = (Array.from(exports.values() as any) as ts.Symbol[])
     .map(symbol => {
