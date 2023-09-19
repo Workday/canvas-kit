@@ -60,13 +60,13 @@ storiesOf('Components/Indicators/Avatar', module)
   ))
   .add('Non-Square Image', () => (
     <div className="story">
-      <h3>Rectangle Image</h3>
+      <h3>Original Rectangle Image</h3>
       <img alt="" src="https://placekitten.com/g/450/200" />
-      <h3>Round Image</h3>
+      <h3>Using Object Fit on a Rectangle Image</h3>
       <Avatar as="div" size={200} url="https://placekitten.com/g/450/200" objectFit="contain" />
-      <h3>Square Image</h3>
+      <h3>Original Square Image</h3>
       <img alt="" src="https://placekitten.com/g/450/450" />
-      <h3>Round Image</h3>
+      <h3>using Object Fit on a Square Image</h3>
       <Avatar as="div" size={200} url="https://placekitten.com/g/450/450" objectFit="contain" />
     </div>
   ));
