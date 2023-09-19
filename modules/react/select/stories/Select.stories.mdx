@@ -69,14 +69,16 @@ Set the `disabled` prop of `Select.Input` to prevent users from interacting with
 
 ### Disabled Items
 
-To disable items and prevent them from being interactive, you must set two properties.
+In order to disable items and prevent users from interacting with them:
 
-Set `nonInteractiveIds` to an array of `id`s that you want to disable interaction as well as
-searchability when typing into the `Select`.
+1. Set the `nonInteractiveIds` prop of `Select` to an array of disabled item `id`s. This will
+   disable interaction for those items and exclude them from type-ahead.
 
-You will also need to set the aria attribute `aria-disabled` on the `Select.Item` if the item is
-disabled, otherwise set the attribute to `undefined`. `disabled` in this case is a property on the
-item's object. This ensures that the item is styled as disabled.
+2. Set the `aria-disabled` attribute of all disabled `Select.Item`s to `true`. This ensures the
+   items are styled as disabled.
+
+The following example assigns a `disabled` property to the disabled items in the `items` array.
+`disabled` is used to populate `nonInteractiveIds` and set `aria-disabled` for the disabled items.
 
 <ExampleCodeBlock code={DisabledOptions} />
 
@@ -133,7 +135,7 @@ It's important to set up the object in your items array in a way for the
 
 If you have an array of `strings`, the collection system will handle asigning an `id`, `index` and
 `textValue` to each item in the array. This ensures that both type ahead and keyboard navigation
-work correclty.
+work correctly.
 
 ```tsx
 const model = useSelectModel({
@@ -225,6 +227,13 @@ Use the alert state when a selection is valid but there is additional informatio
 #### Error
 
 Use the error state when the selection is no longer valid.
+
+> **Note**
+>
+> The blade-old package has been moved to it's own repo.
+> [github.com/razorpay/blade-old](https://github.com/razorpay/blade-old) (Only accessible to Razorpay employees)
+>
+> It is under **maintenance** and it won't have any major releases.
 
 <ExampleCodeBlock code={Error} />
 
