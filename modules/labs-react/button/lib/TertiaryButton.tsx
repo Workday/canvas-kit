@@ -89,7 +89,7 @@ const tertiaryStyles = cs({
   },
 });
 
-export const TertiaryButtonModifiers = createModifiers({
+export const tertiaryButtonModifiers = createModifiers({
   iconPosition: {
     start: 'canvas-tertiary-button-icon-start',
     end: 'canvas-tertiary-button-icon-end',
@@ -240,7 +240,7 @@ export const TertiaryButton = createComponent('button')({
         size={size}
         cs={[
           tertiaryStyles,
-          TertiaryButtonModifiers({
+          tertiaryButtonModifiers({
             iconPosition: iconPosition,
             variant: variant,
             size: size,

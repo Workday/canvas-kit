@@ -61,7 +61,7 @@ const secondaryStyles = cs({
   },
 });
 
-export const SecondaryButtonModifiers = createModifiers({
+export const secondaryButtonModifiers = createModifiers({
   iconPosition: {
     start: 'canvas-button-icon-start',
     end: 'canvas-button-icon-end',
@@ -134,7 +134,7 @@ export const SecondaryButton = createComponent('button')({
         iconPosition={iconPosition}
         cs={[
           secondaryStyles,
-          SecondaryButtonModifiers({iconPosition: iconPosition, variant: variant}),
+          secondaryButtonModifiers({iconPosition: iconPosition, variant: variant}),
         ]}
         {...elemProps}
       >

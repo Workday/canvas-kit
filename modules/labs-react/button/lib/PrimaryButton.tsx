@@ -61,7 +61,7 @@ const primaryStyles = cs({
   },
 });
 
-export const PrimaryButtonModifiers = createModifiers({
+export const primaryButtonModifiers = createModifiers({
   iconPosition: {
     start: 'canvas-button-icon-start',
     end: 'canvas-button-icon-end',
@@ -128,7 +128,7 @@ export const PrimaryButton = createComponent('button')({
         ref={ref}
         icon={icon}
         iconPosition={iconPosition}
-        cs={[primaryStyles, PrimaryButtonModifiers({iconPosition: iconPosition, variant: variant})]}
+        cs={[primaryStyles, primaryButtonModifiers({iconPosition: iconPosition, variant: variant})]}
         {...elemProps}
       >
         {children}
