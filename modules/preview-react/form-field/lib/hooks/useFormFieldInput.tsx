@@ -9,7 +9,7 @@ export const useFormFieldInput = createElemPropsHook(useFormFieldModel)(({state}
   return {
     required: state.isRequired ? true : undefined,
     'aria-invalid': state.hasError ? true : undefined,
-    'aria-describedby': `hint-${state.id}`,
-    id: `input-${state.id}`,
+    'aria-describedby': state.id ? `hint-${state.id}` : undefined,
+    id: state.id ? `input-${state.id}` : undefined,
   };
 });

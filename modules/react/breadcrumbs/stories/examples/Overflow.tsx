@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Breadcrumbs, useBreadcrumbsModel} from '@workday/canvas-kit-react/breadcrumbs';
-import {Box, Grid} from '@workday/canvas-kit-react/layout';
-import {SecondaryButton} from '@workday/canvas-kit-react/button';
+import {Box} from '@workday/canvas-kit-react/layout';
+import {SegmentedControl} from '@workday/canvas-kit-preview-react/segmented-control';
 
 export interface Breadcrumb {
   id: string;
@@ -25,7 +25,7 @@ export const OverflowBreadcrumbs = () => {
 
   return (
     <div>
-      <Box width={containerWidth}>
+      <Box width={containerWidth} marginBottom="xl">
         <Breadcrumbs model={model} aria-label="Breadcrumbs">
           <Breadcrumbs.List overflowButton={<Breadcrumbs.OverflowButton aria-label="More links" />}>
             {item =>
@@ -50,16 +50,15 @@ export const OverflowBreadcrumbs = () => {
         </Breadcrumbs>
       </Box>
       <hr />
-      <h4>Change Breadcrumb container size</h4>
-      <Grid gridTemplateColumns="repeat(4, 1fr)" gridGap="8px">
-        <SecondaryButton onClick={() => setContainerWidth('100%')}>100%</SecondaryButton>
-        <SecondaryButton onClick={() => setContainerWidth('700px')}>700px</SecondaryButton>
-        <SecondaryButton onClick={() => setContainerWidth('550px')}>550px</SecondaryButton>
-        <SecondaryButton onClick={() => setContainerWidth('475px')}>475px</SecondaryButton>
-        <SecondaryButton onClick={() => setContainerWidth('350px')}>350px</SecondaryButton>
-        <SecondaryButton onClick={() => setContainerWidth('235px')}>235px</SecondaryButton>
-        <SecondaryButton onClick={() => setContainerWidth('150px')}>150px</SecondaryButton>
-      </Grid>
+      <h4>Change Breadcrumbs container size</h4>
+      <SegmentedControl onSelect={data => setContainerWidth(data.id)}>
+        <SegmentedControl.List aria-label="container width control" marginBottom="m">
+          <SegmentedControl.Item data-id="100%">100%</SegmentedControl.Item>
+          <SegmentedControl.Item data-id="480px">480px</SegmentedControl.Item>
+          <SegmentedControl.Item data-id="250px">250px</SegmentedControl.Item>
+          <SegmentedControl.Item data-id="150px">150px</SegmentedControl.Item>
+        </SegmentedControl.List>
+      </SegmentedControl>
     </div>
   );
 };

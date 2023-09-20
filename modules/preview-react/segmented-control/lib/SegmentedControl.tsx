@@ -34,8 +34,8 @@ export const SegmentedControl = createContainer()({
   modelHook: useSegmentedControlModel,
   subComponents: {
     /**
-     * `SegmentedControl.List` renders {@link Stack} under the hood. It is a
-     * container for {@link SegmentedControlItem SegmentedControl.Item} subcomponents.
+     * `SegmentedControl.List` renders {@link Grid} under the hood. It is a container for
+     * {@link SegmentedControlItem SegmentedControl.Item} subcomponents.
      *
      * ```tsx
      * <SegmentedControl.List>{SegmentedControl.Items}</SegmentedControl.List>

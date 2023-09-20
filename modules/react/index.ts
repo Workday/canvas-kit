@@ -8,6 +8,7 @@ export * from './card';
 export * from './checkbox';
 export * from './collection';
 export * from './color-picker';
+export * from './combobox';
 export * from './common';
 export * from './dialog';
 export * from './disclosure';

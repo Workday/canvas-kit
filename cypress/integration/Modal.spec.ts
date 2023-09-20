@@ -156,6 +156,17 @@ describe('Modal', () => {
             cy.findByRole('dialog', {name: 'MIT License'}).should('not.exist');
           });
         });
+
+        context(`when clicking outside the modal on mobile view`, () => {
+          beforeEach(() => {
+            cy.viewport('iphone-x');
+            cy.get('body').realTouch();
+          });
+
+          it(`should not close the modal`, () => {
+            cy.findByRole('dialog', {name: 'MIT License'}).should('be.visible');
+          });
+        });
       });
     });
   });

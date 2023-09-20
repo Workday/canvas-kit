@@ -5,6 +5,11 @@ import {GenericStyle, PickRequired} from '@workday/canvas-kit-react/common';
 import {borderRadius, colors, type, space, CSSProperties} from '@workday/canvas-kit-react/tokens';
 import styled from '@emotion/styled';
 
+/**
+ * ### ⚠️ Status Indicator has been deprecated and will be removed in v11 ⚠️
+ * - Please consider using [`Status Indicator`](https://workday.github.io/canvas-kit/?path=/docs/preview-status-indicator--basic) in preview
+ * @deprecated
+ */
 export enum StatusIndicatorType {
   Gray = 'gray',
   Orange = 'orange',
@@ -14,11 +19,21 @@ export enum StatusIndicatorType {
   Transparent = 'transparent',
 }
 
+/**
+ * ### ⚠️ Status Indicator has been deprecated and will be removed in v11 ⚠️
+ * - Please consider using [`Status Indicator`](https://workday.github.io/canvas-kit/?path=/docs/preview-status-indicator--basic) in preview
+ * @deprecated
+ */
 export enum StatusIndicatorEmphasis {
   High = 'high',
   Low = 'low',
 }
 
+/**
+ * ### ⚠️ Status Indicator has been deprecated and will be removed in v11 ⚠️
+ * - Please consider using [`Status Indicator`](https://workday.github.io/canvas-kit/?path=/docs/preview-status-indicator--basic) in preview
+ * @deprecated
+ */
 export interface StatusIndicatorGenericStyle extends GenericStyle {
   styles: CSSProperties;
   variants: {
@@ -28,6 +43,11 @@ export interface StatusIndicatorGenericStyle extends GenericStyle {
   };
 }
 
+/**
+ * ### ⚠️ Status Indicator has been deprecated and will be removed in v11 ⚠️
+ * - Please consider using [`Status Indicator`](https://workday.github.io/canvas-kit/?path=/docs/preview-status-indicator--basic) in preview
+ * @deprecated
+ */
 export const statusIndicatorStyles: StatusIndicatorGenericStyle = {
   classname: 'status-indicator',
   styles: {
@@ -105,6 +125,11 @@ export const statusIndicatorStyles: StatusIndicatorGenericStyle = {
   },
 };
 
+/**
+ * ### ⚠️ Status Indicator has been deprecated and will be removed in v11 ⚠️
+ * - Please consider using [`Status Indicator`](https://workday.github.io/canvas-kit/?path=/docs/preview-status-indicator--basic) in preview
+ * @deprecated
+ */
 export interface StatusIndicatorProps extends React.HTMLAttributes<HTMLSpanElement> {
   /**
    * The type of the StatusIndicator. Accepts `Gray`, `Orange`, `Blue`, `Green`, `Red`, or `Transparent`.
@@ -146,6 +171,11 @@ const StatusLabel = styled('span')({
   textOverflow: 'ellipsis',
 });
 
+/**
+ * ### ⚠️ Status Indicator has been deprecated and will be removed in v11 ⚠️
+ * - Please consider using [`Status Indicator`](https://workday.github.io/canvas-kit/?path=/docs/preview-status-indicator--basic) in preview
+ * @deprecated
+ */
 export class StatusIndicator extends React.Component<StatusIndicatorProps> {
   public static Type = StatusIndicatorType;
   public static Emphasis = StatusIndicatorEmphasis;
