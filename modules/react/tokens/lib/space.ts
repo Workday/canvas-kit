@@ -58,58 +58,69 @@ export const space: CanvasSpace = {
   xxxl: '5rem',
 };
 
-/** Type for the `spaceNumbers` object with keys and numeric rem values (numbers) */
+/**
+ * ### ⚠️ `spaceNumbers` has been deprecated. We recommend switching over to using our `rem` based [`space`](https://workday.github.io/canvas-kit/?path=/docs/tokens--space) tokens.⚠️
+ * In the case where you need to calculate a value, use [CSS calc()](https://developer.mozilla.org/en-US/docs/Web/CSS/calc).
+ *
+ * Example using `space` instead of `spaceNumbers` with calc.
+ * // With deprecated `spaceNumbers`
+ * ```tsx
+ * {
+ *  paddingLeft: spaceNumbers.xl + 2 // 42px
+ * }
+ * ```
+ * // With `rem` based `space` tokens.
+ * ```tsx
+ * {
+ *  padding: `calc(${space.xl} + 2px)` // 42px
+ * }
+ * ```
+ * @deprecated
+ */
 export type CanvasSpaceNumbers = {
   zero: 0;
-  xxxs: 0.25;
-  xxs: 0.5;
-  xs: 0.75;
-  s: 1;
-  m: 1.5;
-  l: 2;
-  xl: 2.5;
-  xxl: 4;
-  xxxl: 5;
+  xxxs: 4;
+  xxs: 8;
+  xs: 12;
+  s: 16;
+  m: 24;
+  l: 32;
+  xl: 40;
+  xxl: 64;
+  xxxl: 80;
 };
 
 /** The numeric rem values for CanvasSpaceNumbers (numbers) */
 export type CanvasSpaceNumberValues = ValueOf<CanvasSpaceNumbers>;
 
 /**
- * An object of space keys and their numeric rem values (numbers)
- * - These are helpful when you need a raw numeric rem value.
- * - Here's an example usage to perform calculations:
- * @example
+ * ### ⚠️ `spaceNumbers` has been deprecated. We recommend switching over to using our `rem` based [`space`](https://workday.github.io/canvas-kit/?path=/docs/tokens--space) tokens.⚠️
+ * In the case where you need to calculate a value, use [CSS calc()](https://developer.mozilla.org/en-US/docs/Web/CSS/calc).
+ *
+ * Example using `space` instead of `spaceNumbers` with calc.
+ * // With deprecated `spaceNumbers`
  * ```tsx
- * const buttonPaddingLeft = `${spaceNumbers.s + iconSize}rem`;
+ * {
+ *  paddingLeft: spaceNumbers.xl + 2 // 42px
+ * }
  * ```
- *
- * Below is a table to show the equivalent values from `px` to `rem`.
- * This is based on the default browser font size which is `16px`.
- *
- * | px Value  | rem Value | space token |
- * | --------- | --------- | ----------- |
- * | 0         | 0         | zero        |
- * | 4px       | 0.25rem   | xxxs        |
- * | 8px       | 0.5rem    | xxs         |
- * | 12px      | 0.75rem   | xs          |
- * | 16px      | 1rem      | s           |
- * | 24px      | 1.5rem    | m           |
- * | 32px      | 2rem      | l           |
- * | 40px      | 2.5rem    | xl          |
- * | 64px      | 4rem      | xxl         |
- * | 80px      | 5rem      | xxxl        |
- *
+ * // With `rem` based `space` tokens.
+ * ```tsx
+ * {
+ *  padding: `calc(${space.xl} + 2px)` // 42px
+ * }
+ * ```
+ * @deprecated
  */
 export const spaceNumbers: CanvasSpaceNumbers = {
   zero: 0,
-  xxxs: 0.25,
-  xxs: 0.5,
-  xs: 0.75,
-  s: 1,
-  m: 1.5,
-  l: 2,
-  xl: 2.5,
-  xxl: 4,
-  xxxl: 5,
+  xxxs: 4,
+  xxs: 8,
+  xs: 12,
+  s: 16,
+  m: 24,
+  l: 32,
+  xl: 40,
+  xxl: 64,
+  xxxl: 80,
 };
