@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {Property} from 'csstype';
 import {styled, focusRing, hideMouseFocus} from '@workday/canvas-kit-react/common';
 import isPropValid from '@emotion/is-prop-valid';
 import {borderRadius, colors} from '@workday/canvas-kit-react/tokens';
@@ -35,6 +36,13 @@ export interface AvatarProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
    * Will render an `div` tag instead of a `button` when defined.
    */
   as?: 'div';
+  /**
+   * The object-fit CSS property sets how the content of a replaced element,
+   * such as an <img> or <video>, should be resized to fit its container.
+   * See [object-fit](https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit).
+   * If your image is not a square, you can use this property to ensure the image is rendered properly.
+   */
+  objectFit?: Property.ObjectFit;
 }
 
 /**
@@ -107,15 +115,16 @@ const StyledIcon = styled(SystemIconCircle)<{isImageLoaded: boolean}>(
   })
 );
 
-const StyledImage = styled('img')<{isLoaded: boolean}>(
+const StyledImage = styled('img')<{isLoaded: boolean; objectFit?: Property.ObjectFit}>(
   {
     width: '100%',
     height: '100%',
     borderRadius: borderRadius.circle,
     transition: fadeTransition,
   },
-  ({isLoaded}) => ({
+  ({isLoaded, objectFit}) => ({
     opacity: isLoaded ? 1 : 0,
+    objectFit,
   })
 );
 
@@ -127,6 +136,7 @@ export const Avatar: AvatarOverload = React.forwardRef(
       altText = 'Avatar',
       url,
       onClick,
+      objectFit,
       ...elemProps
     }: AvatarProps,
     ref: React.Ref<HTMLButtonElement>
@@ -164,7 +174,13 @@ export const Avatar: AvatarOverload = React.forwardRef(
         </StyledStack>
         {url && (
           <StyledStack size={size}>
-            <StyledImage src={url} alt={altText} onLoad={loadImage} isLoaded={imageLoaded} />
+            <StyledImage
+              src={url}
+              alt={altText}
+              onLoad={loadImage}
+              isLoaded={imageLoaded}
+              objectFit={objectFit}
+            />
           </StyledStack>
         )}
       </StyledContainer>
