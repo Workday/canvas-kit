@@ -1,9 +1,10 @@
 import * as React from 'react';
 
-import {BaseButton, buttonVars, BaseButtonContainerProps} from './BaseButton';
+import {buttonVars, BaseButtonContainerProps} from './BaseButton';
 import {createComponent, cs, createModifiers, cssVar} from '@workday/canvas-kit-react/common';
 import {system, brand, base} from '@workday/canvas-tokens-web';
 import {borderRadius, space, spaceNumbers} from '@workday/canvas-kit-react/tokens';
+import {Button} from './Button';
 
 /**
  * Extends all the style properties from Box to our buttons as well as props from ButtonContainerProps.
@@ -221,11 +222,9 @@ export const TertiaryButton = createComponent('button')({
   Component: (
     {
       children,
-      colors,
       icon,
-      iconPosition = children ? undefined : 'only',
-      shouldMirrorIcon,
       size,
+      iconPosition = children ? undefined : 'only',
       variant,
       ...elemProps
     }: TertiaryButtonProps,
@@ -233,10 +232,11 @@ export const TertiaryButton = createComponent('button')({
     Element
   ) => {
     return (
-      <BaseButton
+      <Button
         as={Element}
         ref={ref}
-        type="button"
+        icon={icon}
+        iconPosition={iconPosition}
         size={size}
         cs={[
           tertiaryStyles,
@@ -248,33 +248,8 @@ export const TertiaryButton = createComponent('button')({
         ]}
         {...elemProps}
       >
-        {icon && iconPosition === 'start' && (
-          <BaseButton.Icon
-            size={size}
-            iconPosition={iconPosition}
-            icon={icon}
-            shouldMirrorIcon={shouldMirrorIcon}
-          />
-        )}
-        {children && <BaseButton.Label>{children}</BaseButton.Label>}
-
-        {icon && iconPosition === 'only' && (
-          <BaseButton.Icon
-            size={size}
-            iconPosition={iconPosition}
-            icon={icon}
-            shouldMirrorIcon={shouldMirrorIcon}
-          />
-        )}
-        {icon && iconPosition === 'end' && (
-          <BaseButton.Icon
-            size={size}
-            iconPosition={iconPosition}
-            icon={icon}
-            shouldMirrorIcon={shouldMirrorIcon}
-          />
-        )}
-      </BaseButton>
+        {children}
+      </Button>
     );
   },
 });

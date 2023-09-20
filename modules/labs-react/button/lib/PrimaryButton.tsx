@@ -1,8 +1,9 @@
 import * as React from 'react';
 
-import {BaseButton, buttonVars, BaseButtonContainerProps} from './BaseButton';
+import {buttonVars, BaseButtonContainerProps} from './BaseButton';
 import {createComponent, cs, createModifiers, cssVar} from '@workday/canvas-kit-react/common';
 import {base, brand, system} from '@workday/canvas-tokens-web';
+import {Button} from './Button';
 
 /**
  * Extends all the style properties from Box to our buttons as well as props from ButtonContainerProps.
@@ -68,11 +69,11 @@ export const PrimaryButtonModifiers = createModifiers({
   },
   variant: {
     inverse: cs({
-      [buttonVars.default.background]: cssVar(system.color.bg.default),
+      [buttonVars.default.background]: cssVar(base.frenchVanilla100),
       [buttonVars.default.borderRadius]: cssVar(system.shape.circle),
       [buttonVars.default.color]: cssVar(base.blackPepper400),
       '&:hover, &.hover': {
-        [buttonVars.hover.background]: cssVar(system.color.bg.hover),
+        [buttonVars.hover.background]: cssVar(base.soap300),
         [buttonVars.hover.color]: cssVar(base.blackPepper500),
         '& span .wd-icon-fill': {
           [buttonVars.hover.icon]: cssVar(base.blackPepper500),
@@ -91,7 +92,7 @@ export const PrimaryButtonModifiers = createModifiers({
         [buttonVars.default.icon]: cssVar(base.blackPepper400),
       },
       '&:active, &.active': {
-        [buttonVars.active.background]: cssVar(system.color.bg.active),
+        [buttonVars.active.background]: cssVar(base.soap400),
         [buttonVars.active.color]: cssVar(base.blackPepper500),
         '& span .wd-icon-fill': {
           [buttonVars.active.icon]: cssVar(base.blackPepper500),
@@ -115,8 +116,6 @@ export const PrimaryButton = createComponent('button')({
       children,
       icon,
       iconPosition = children ? undefined : 'only',
-      shouldMirrorIcon,
-      size,
       variant,
       ...elemProps
     }: PrimaryButtonProps,
@@ -124,47 +123,16 @@ export const PrimaryButton = createComponent('button')({
     Element
   ) => {
     return (
-      <BaseButton
+      <Button
         as={Element}
         ref={ref}
-        type="button"
-        size={size}
-        cs={[
-          primaryStyles,
-          PrimaryButtonModifiers({
-            iconPosition: iconPosition,
-            variant: variant,
-          }),
-        ]}
+        icon={icon}
+        iconPosition={iconPosition}
+        cs={[primaryStyles, PrimaryButtonModifiers({iconPosition: iconPosition, variant: variant})]}
         {...elemProps}
       >
-        {icon && iconPosition === 'start' && (
-          <BaseButton.Icon
-            size={size}
-            iconPosition={iconPosition}
-            icon={icon}
-            shouldMirrorIcon={shouldMirrorIcon}
-          />
-        )}
-        {children && <BaseButton.Label>{children}</BaseButton.Label>}
-
-        {icon && iconPosition === 'only' && (
-          <BaseButton.Icon
-            size={size}
-            iconPosition={iconPosition}
-            icon={icon}
-            shouldMirrorIcon={shouldMirrorIcon}
-          />
-        )}
-        {icon && iconPosition === 'end' && (
-          <BaseButton.Icon
-            size={size}
-            iconPosition={iconPosition}
-            icon={icon}
-            shouldMirrorIcon={shouldMirrorIcon}
-          />
-        )}
-      </BaseButton>
+        {children}
+      </Button>
     );
   },
 });
