@@ -1374,6 +1374,20 @@
         "__isArgsStory": false
       }
     },
+    "components-indicators-avatar--non-square-image": {
+      "id": "components-indicators-avatar--non-square-image",
+      "name": "Non-Square Image",
+      "title": "Components/Indicators/Avatar",
+      "importPath": "./modules/react/avatar/stories/stories.tsx",
+      "kind": "Components/Indicators/Avatar",
+      "story": "Non-Square Image",
+      "parameters": {
+        "fileName": "./modules/react/avatar/stories/stories.tsx",
+        "framework": "react",
+        "__id": "components-indicators-avatar--non-square-image",
+        "__isArgsStory": false
+      }
+    },
     "components-indicators-avatar-avatar-button--dark": {
       "id": "components-indicators-avatar-avatar-button--dark",
       "name": "Dark",
