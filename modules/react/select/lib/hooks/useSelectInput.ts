@@ -33,7 +33,6 @@ export const useSelectInput = composeHooks(
     ): number => {
       for (let i = startIndex; i < endIndex; i++) {
         const label = model.state.items[i].id.toLowerCase();
-
         if (label.indexOf(startString.toLowerCase()) === 0) {
           if (
             !ignoreDisabled ||
@@ -52,9 +51,10 @@ export const useSelectInput = composeHooks(
     const handleKeyboardTypeAhead = (key: string, numOptions: number) => {
       // If the starting point is beyond the list of options, reset it
       // to the beginning of the list
-      let start = keySofar.current.length === 0 ? cursorFocusedIndex + 1 : cursorFocusedIndex;
+      const startNumber =
+        keySofar.current.length === 0 ? cursorFocusedIndex + 1 : cursorFocusedIndex;
 
-      start = start === numOptions ? 0 : start;
+      const start = startNumber === numOptions ? 0 : startNumber;
 
       // Keeps track of the current key types and adds to it
       // if you type `de` vs `d` for denver
