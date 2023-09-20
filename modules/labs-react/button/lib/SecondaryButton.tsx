@@ -119,7 +119,7 @@ export const SecondaryButton = createComponent('button')({
       children,
       colors,
       icon,
-      iconPosition,
+      iconPosition = children ? undefined : 'only',
       shouldMirrorIcon,
       size,
       variant,
