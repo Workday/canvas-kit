@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v9.1.20](https://github.com/Workday/canvas-kit/releases/tag/v9.1.20) (2023-09-20)
+
+### Components
+
+- fix(Avatar): Support for Non-Square Input Image for Avatar component ([#2337](https://github.com/Workday/canvas-kit/pull/2337)) ([@thunguyen19](https://github.com/thunguyen19), [@mannycarrera4](https://github.com/mannycarrera4))
+
+
 ## [v8.6.22](https://github.com/Workday/canvas-kit/releases/tag/v8.6.22) (2023-09-20)
 
 ### Components
