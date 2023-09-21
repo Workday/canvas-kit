@@ -20,14 +20,14 @@ export const WithIcons = () => {
   const model = useSelectModel({
     items: customOptions,
   });
-  const currentItem = model.navigation.getItem(model.state.selectedIds[0], model);
+  const selectedItem = model.navigation.getItem(model.state.selectedIds[0], model);
   return (
     <Flex>
       <Select model={model}>
         <FormField label="Contact" inputId="with-icons-select">
           <Select.Input
             width="300px"
-            inputStartIcon={currentItem.value.icon}
+            inputStartIcon={selectedItem.value.icon}
             id="with-icons-select"
           />
           <Select.Popper>
