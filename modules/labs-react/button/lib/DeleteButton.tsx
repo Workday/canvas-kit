@@ -4,8 +4,6 @@ import {BaseButton, buttonVars, BaseButtonContainerProps} from './BaseButton';
 import {createComponent, cs, cssVar} from '@workday/canvas-kit-react/common';
 import {base, brand, system} from '@workday/canvas-tokens-web';
 
-export type DeleteButtonVariant = 'primary' | 'inverse';
-
 /**
  * Extends all the style properties from Box to our buttons as well as props from ButtonContainerProps.
  * We omit `ref` since all of our buttons use `createComponent` and already give access to `ref`.
