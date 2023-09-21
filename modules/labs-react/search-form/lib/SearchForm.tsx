@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {CSSObject} from '@emotion/styled';
-import {colors, space, spaceNumbers} from '@workday/canvas-kit-react/tokens';
+import {colors, space} from '@workday/canvas-kit-react/tokens';
 import {GrowthBehavior, styled, generateUniqueId} from '@workday/canvas-kit-react/common';
 import {TertiaryButton, TertiaryButtonProps} from '@workday/canvas-kit-react/button';
 import {searchIcon, xIcon} from '@workday/canvas-system-icons-web';

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled, {CSSObject} from '@emotion/styled';
 import {rgba} from 'polished';
-import {colors, space, spaceNumbers, statusColors} from '@workday/canvas-kit-react/tokens';
+import {colors, space, statusColors} from '@workday/canvas-kit-react/tokens';
 import {createComponent, StyledType} from '@workday/canvas-kit-react/common';
 import {borderColor, borderWidth, cellBorder} from './Table';
 
@@ -100,7 +100,7 @@ const StyledTableRow = styled('tr')<TableRowProps>(
       fontSize: 13,
       borderRight: cellBorder,
       borderBottom: cellBorder,
-      height: `${spaceNumbers.xl + spaceNumbers.xxs}rem`,
+      height: `calc(${space.xl} + ${space.xxs})`,
       boxSizing: 'border-box',
       transition: 'background-color 0.2s',
     },

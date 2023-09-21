@@ -150,12 +150,12 @@ The following space types are also provided: `CanvasSpace`, `CanvasSpaceValues`,
 
 Below are descriptions of these types:
 
-| Name                      | Description                                   |
-| ------------------------- | --------------------------------------------- |
-| `CanvasSpace`             | `space` object with string rem values         |
-| `CanvasSpaceValues`       | string rem values for CanvasSpace             |
-| `CanvasSpaceNumbers`      | `spaceNumbers` object with numeric rem values |
-| `CanvasSpaceNumberValues` | numeric rem values for CanvasSpaceNumbers     |
+| Name                      | Description                                                   |
+| ------------------------- | ------------------------------------------------------------- |
+| `CanvasSpace`             | `space` object with string rem values                         |
+| `CanvasSpaceValues`       | string rem values for CanvasSpace                             |
+| `CanvasSpaceNumbers`      | (@deprecated) `spaceNumbers` object with numeric pixel values |
+| `CanvasSpaceNumberValues` | (@deprecated) numeric pixel values for CanvasSpaceNumbers     |
 
 ### Usage
 
@@ -165,7 +165,7 @@ import {space, spaceNumbers} from '@workday/canvas-kit-react/tokens';
 const iconSize = 1.25;
 
 const buttonSyles = {
-  paddingTop: space.xs,
+  paddingTop: `calc(${space.xs} + 2px)`,
   paddingRight: space.s,
   paddingBottom: space.xs,
   paddingLeft: `${spaceNumbers.s + iconSize}rem`,

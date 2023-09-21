@@ -14,7 +14,7 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {SystemIconProps} from '@workday/canvas-kit-react/icon';
 import {boxStyleFn} from '@workday/canvas-kit-react/layout';
-import {borderRadius, space, spaceNumbers, type} from '@workday/canvas-kit-react/tokens';
+import {borderRadius, space, type} from '@workday/canvas-kit-react/tokens';
 
 import {ButtonColors, ButtonSizes, IconPositions, TertiaryButtonSizes} from './types';
 
@@ -135,7 +135,7 @@ const ButtonContainer = styled('button')<StyledType & ButtonContainerProps>(
         return {
           height: space.l,
           '& > * ': {
-            margin: `0 ${spaceNumbers.xxxs / 2}rem`,
+            margin: `0 calc(${space.xxxs} / 2)`,
           },
         };
       case 'extraSmall':
@@ -144,7 +144,7 @@ const ButtonContainer = styled('button')<StyledType & ButtonContainerProps>(
           fontWeight: type.properties.fontWeights.bold,
           height: space.m,
           '& > * ': {
-            margin: `0 ${spaceNumbers.xxxs / 2}rem`,
+            margin: `0 calc(${space.xxxs} / 2)`,
           },
         };
     }
