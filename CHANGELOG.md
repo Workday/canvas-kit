@@ -3,6 +3,206 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v9.1.20](https://github.com/Workday/canvas-kit/releases/tag/v9.1.20) (2023-09-20)
+
+### Components
+
+- fix(Avatar): Support for Non-Square Input Image for Avatar component ([#2337](https://github.com/Workday/canvas-kit/pull/2337)) ([@thunguyen19](https://github.com/thunguyen19), [@mannycarrera4](https://github.com/mannycarrera4))
+
+
+## [v8.6.22](https://github.com/Workday/canvas-kit/releases/tag/v8.6.22) (2023-09-20)
+
+### Components
+
+- fix(Avatar): Support for Non-Square Input Image for Avatar component ([#2337](https://github.com/Workday/canvas-kit/pull/2337)) ([@thunguyen19](https://github.com/thunguyen19), [@mannycarrera4](https://github.com/mannycarrera4))
+## [v9.1.19](https://github.com/Workday/canvas-kit/releases/tag/v9.1.19) (2023-09-18)
+
+### Documentation
+
+- docs: Render type parameters in external SymbolDoc symbols ([#2340](https://github.com/Workday/canvas-kit/pull/2340)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+### Infrastructure
+
+- ci: Remove non-collaborator from reviewer lottery ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v8.6.21](https://github.com/Workday/canvas-kit/releases/tag/v8.6.21) (2023-09-18)
+
+### Documentation
+
+- docs: Render type parameters in external SymbolDoc symbols ([#2340](https://github.com/Workday/canvas-kit/pull/2340)) ([@NicholasBoll](https://github.com/NicholasBoll))
+## [v9.1.18](https://github.com/Workday/canvas-kit/releases/tag/v9.1.18) (2023-09-06)
+
+### Components
+
+- fix(popup): Allow SVG elements in focus calculations ([#2331](https://github.com/Workday/canvas-kit/pull/2331)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v8.6.20](https://github.com/Workday/canvas-kit/releases/tag/v8.6.20) (2023-09-06)
+
+### Components
+
+- fix(popup): Allow SVG elements in focus calculations ([#2331](https://github.com/Workday/canvas-kit/pull/2331)) ([@NicholasBoll](https://github.com/NicholasBoll))
+## [v9.1.17](https://github.com/Workday/canvas-kit/releases/tag/v9.1.17) (2023-09-06)
+
+### Components
+
+- fix(color-picker): Disable submit button when custom hex is invalid ([#2328](https://github.com/Workday/canvas-kit/pull/2328)) ([@kennethjang34](https://github.com/kennethjang34))
+
+
+## [v9.1.16](https://github.com/Workday/canvas-kit/releases/tag/v9.1.16) (2023-08-29)
+
+### Documentation
+
+- fix: Accessibility enhancements to preview table examples ([#2321](https://github.com/Workday/canvas-kit/pull/2321)) ([@williamjstanton](https://github.com/williamjstanton))
+
+
+## [v9.1.15](https://github.com/Workday/canvas-kit/releases/tag/v9.1.15) (2023-08-29)
+
+### Components
+
+- test: Add cypress tests for Pill component ([#2325](https://github.com/Workday/canvas-kit/pull/2325)) ([@dgubko](https://github.com/dgubko))
+
+
+## [v9.1.14](https://github.com/Workday/canvas-kit/releases/tag/v9.1.14) (2023-08-24)
+
+### Components
+
+- fix(Tabs): Fix tab item icon accent styles ([#2323](https://github.com/Workday/canvas-kit/pull/2323)) ([@alanbsmith](https://github.com/alanbsmith), emma.okeeffe)
+
+
+## [v8.6.19](https://github.com/Workday/canvas-kit/releases/tag/v8.6.19) (2023-08-24)
+
+### Components
+
+- fix(Tabs): Fix tab item icon accent styles ([#2323](https://github.com/Workday/canvas-kit/pull/2323)) ([@alanbsmith](https://github.com/alanbsmith), emma.okeeffe)
+## [v9.1.13](https://github.com/Workday/canvas-kit/releases/tag/v9.1.13) (2023-08-14)
+
+### Components
+
+- fix: Table cell empty fix ([#2313](https://github.com/Workday/canvas-kit/pull/2313)) ([@kennethjang34](https://github.com/kennethjang34))
+
+
+## [v9.1.12](https://github.com/Workday/canvas-kit/releases/tag/v9.1.12) (2023-08-11)
+
+### Documentation
+
+- docs: Add documentation guidelines ([#2310](https://github.com/Workday/canvas-kit/pull/2310)) ([@jamesfan](https://github.com/jamesfan))
+
+
+## [v9.1.11](https://github.com/Workday/canvas-kit/releases/tag/v9.1.11) (2023-08-04)
+
+### Documentation
+
+- fix: Fix color util typo ([#2312](https://github.com/Workday/canvas-kit/pull/2312)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
+## [v9.1.10](https://github.com/Workday/canvas-kit/releases/tag/v9.1.10) (2023-08-03)
+
+### Components
+
+- fix: Breadcrumbs first item gets cut-off when two items in array ([#2308](https://github.com/Workday/canvas-kit/pull/2308)) ([@thelightbringer](https://github.com/thelightbringer), Abhijit Misra)
+
+
+## [v8.6.18](https://github.com/Workday/canvas-kit/releases/tag/v8.6.18) (2023-08-03)
+
+### Components
+
+- fix: Breadcrumbs first item gets cut-off when two items in array ([#2308](https://github.com/Workday/canvas-kit/pull/2308)) ([@thelightbringer](https://github.com/thelightbringer), Abhijit Misra)
+## [v9.1.9](https://github.com/Workday/canvas-kit/releases/tag/v9.1.9) (2023-08-01)
+
+### Documentation
+
+- fix(preview): Fixes undefined id and aria-describedby in TextInput ([#2305](https://github.com/Workday/canvas-kit/pull/2305)) ([@vibdev](https://github.com/vibdev), [@mannycarrera4](https://github.com/mannycarrera4))
+
+
+## [v9.1.8](https://github.com/Workday/canvas-kit/releases/tag/v9.1.8) (2023-07-31)
+
+### Components
+
+- fix(preview): Blur firing incorrectly onClick ([#2304](https://github.com/Workday/canvas-kit/pull/2304)) ([@vibdev](https://github.com/vibdev))
+
+
+## [v9.1.7](https://github.com/Workday/canvas-kit/releases/tag/v9.1.7) (2023-07-27)
+
+### Documentation
+
+- fix: Adding landmark regions to Action Bar examples ([#2291](https://github.com/Workday/canvas-kit/pull/2291)) ([@bstanton678](https://github.com/bstanton678))
+
+
+## [v9.1.6](https://github.com/Workday/canvas-kit/releases/tag/v9.1.6) (2023-07-25)
+
+### Components
+
+- fix: Polishing the expandable container component ([#2293](https://github.com/Workday/canvas-kit/pull/2293)) ([@bstanton678](https://github.com/bstanton678))
+  Update aria attributes on example for expandable container for better accessibility and remove alt text on avatar.
+
+
+## [v9.1.5](https://github.com/Workday/canvas-kit/releases/tag/v9.1.5) (2023-07-21)
+
+
+
+
+## [v9.1.4](https://github.com/Workday/canvas-kit/releases/tag/v9.1.4) (2023-07-19)
+
+### Components
+
+- chore: Ditch a few console logs from useActionBarModel that can clutter up test logs ([#2295](https://github.com/Workday/canvas-kit/pull/2295)) ([@ahayes91](https://github.com/ahayes91))
+
+
+## [v9.1.3](https://github.com/Workday/canvas-kit/releases/tag/v9.1.3) (2023-07-18)
+
+### Documentation
+
+- docs: Update w3.org links ([#2287](https://github.com/Workday/canvas-kit/pull/2287)) ([@willklein](https://github.com/willklein))
+
+
+## [v9.1.2](https://github.com/Workday/canvas-kit/releases/tag/v9.1.2) (2023-07-17)
+
+### Components
+
+- fix(combobox): Do not clear the input when no item is selected ([#2289](https://github.com/Workday/canvas-kit/pull/2289)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v9.1.1](https://github.com/Workday/canvas-kit/releases/tag/v9.1.1) (2023-07-14)
+
+### Documentation
+
+- fix: Add ids to docs headings ([#2284](https://github.com/Workday/canvas-kit/pull/2284)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@jamesfan](https://github.com/jamesfan))
+
+
+## [v9.1.0](https://github.com/Workday/canvas-kit/releases/tag/v9.1.0) (2023-07-12)
+
+
+
+
+## [v9.0.21](https://github.com/Workday/canvas-kit/releases/tag/v9.0.21) (2023-07-07)
+
+### Components
+
+- fix(checkbox): Fix indeterminate state not getting correctly applied ([#2281](https://github.com/Workday/canvas-kit/pull/2281)) ([@vibdev](https://github.com/vibdev))
+
+
+## [v9.0.20](https://github.com/Workday/canvas-kit/releases/tag/v9.0.20) (2023-06-30)
+
+### Components
+
+- fix: Fix for useFocusRedirect ([#2258](https://github.com/Workday/canvas-kit/pull/2258)) ([@pablobirukov](https://github.com/pablobirukov), Pavel Birukov, [@mannycarrera4](https://github.com/mannycarrera4))
+  `useFocusRedirect` handles focus leave from radio group within Popup
+
+
+## [v9.0.19](https://github.com/Workday/canvas-kit/releases/tag/v9.0.19) (2023-06-29)
+
+### Components
+
+- fix: Update status indicator icon color on hover ([#2278](https://github.com/Workday/canvas-kit/pull/2278)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v8.6.17](https://github.com/Workday/canvas-kit/releases/tag/v8.6.17) (2023-06-29)
+
+### Components
+
+- fix: Update status indicator icon color on hover ([#2278](https://github.com/Workday/canvas-kit/pull/2278)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
 ## [v9.0.18](https://github.com/Workday/canvas-kit/releases/tag/v9.0.18) (2023-06-27)
 
 ### Components

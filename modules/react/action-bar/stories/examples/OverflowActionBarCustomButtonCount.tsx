@@ -16,7 +16,8 @@ export const OverflowActionBarCustomButtonCount = () => {
   return (
     <ActionBar items={items} maximumVisible={2}>
       <ActionBar.List
-        aria-label="actions"
+        as="section"
+        aria-label="Custom button count overflow example"
         position="relative"
         overflowButton={<ActionBar.OverflowButton aria-label="More actions" />}
       >

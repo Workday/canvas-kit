@@ -77,10 +77,11 @@ along to the collection component.
 #### Roving Tabindex
 
 The list system also includes a cursor that extends the list. A cursor is mostly used for focusing
-items. The [roving tabindex](https://w3c.github.io/aria-practices/#kbd_roving_tabindex) is a
-well-supported way to accomplish accessibility requirements for focusing items within a list. This
-example shows how to use `useListRovingFocus`. This example uses the `ListBox` component, but the
-default `ListBox.Item` is very basic. We have two options, we can either pass additional
+items. The
+[roving tabindex](https://www.w3.org/WAI/ARIA/apg/practices/keyboard-interface/#kbd_roving_tabindex)
+is a well-supported way to accomplish accessibility requirements for focusing items within a list.
+This example shows how to use `useListRovingFocus`. This example uses the `ListBox` component, but
+the default `ListBox.Item` is very basic. We have two options, we can either pass additional
 functionality via `elemPropsHook` or by creating a new item using our elemProps hook primitives.
 Both will be demonstrated. Creating a custom item is recommended if you create a custom component
 and export it. Using `elemPropsHook` with `ListBox.Item` is recommended only for one-off instances.

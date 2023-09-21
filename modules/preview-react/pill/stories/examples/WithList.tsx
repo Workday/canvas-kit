@@ -17,15 +17,19 @@ const data = [
   'Jewelry',
 ];
 
-export const WithList = () => (
-  <Flex flexWrap="wrap">
-    {data.map((cat, index) => {
-      return (
-        <Pill key={index} variant="removable" marginBottom="xxs" marginInlineEnd="xxs">
-          <Pill.Label>{cat}</Pill.Label>
-          <Pill.IconButton onClick={() => console.log(`delete ${cat}`)} />
-        </Pill>
-      );
-    })}
-  </Flex>
-);
+export const WithList = () => {
+  const [items, setItems] = React.useState(data);
+
+  return (
+    <Flex flexWrap="wrap">
+      {items.map((cat, index) => {
+        return (
+          <Pill key={index} variant="removable" marginBottom="xxs" marginInlineEnd="xxs">
+            <Pill.Label>{cat}</Pill.Label>
+            <Pill.IconButton onClick={() => setItems(items.filter(i => i !== cat))} />
+          </Pill>
+        );
+      })}
+    </Flex>
+  );
+};
