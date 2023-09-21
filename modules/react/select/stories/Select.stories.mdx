@@ -84,23 +84,18 @@ The following example assigns a `disabled` property to the disabled items in the
 
 ### With Icons
 
-Add `Select.Item.Icon` as a sub component of `Select.Item` if you want to render an icon for each
-item. The `Select.Item.Icon` takes in an `icon` prop of type `CanvasSystemIcon`. You can import
-icons from `@workday/canvas-system-icons-web`.
+Use `Select.Item.Icon` to render an icon for a `Select.Item`. The `icon` prop for `Select.Item.Icon` accepts
+[system icons](/assets/system-icons/) from `@workday/canvas-system-icons-web`.
 
-If you want to render the selected item's icon in the `Select.Input` add the `inputStartIcon` prop.
+In order to render the icon for the selected item in the `Select.Input`:
 
-To get the current selected item's icon:
-
-- Register your `items` with the `useSelectModel`
-- Get current item by
-  `const currentItem = model.navigation.getItem(model.state.selectedIds[0], model)`
-- Pass the value to the input in the following way:
-  `<Select.Input inputStartIcon={currentItem.value.icon} id="form-field-input-id" />`
-
-**Notes: The `Select.Input` will only render an icon when there is an item selected.**
+1. Obtain a reference to the `model` by registering your `items` with `useSelectModel`.
+2. Get the selected item: `const selectedItem = model.navigation.getItem(model.state.selectedIds[0], model)`
+3. Pass the icon for the selected item to the input: `<Select.Input inputStartIcon={selectedItem.value.icon}>`
 
 <ExampleCodeBlock code={WithIcons} />
+
+Note that `Select.Input` will only render an icon if an item is selected.
 
 ### Grow
 
