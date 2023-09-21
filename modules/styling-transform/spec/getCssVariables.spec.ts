@@ -1,4 +1,4 @@
-import {getVariablesFromFiles, getFallbackVariable} from '../getCssVariables';
+import {getVariablesFromFiles, getFallbackVariable} from '../lib/getCssVariables';
 
 describe('getVariablesFromFiles', () => {
   it('should get a variable from a single file', () => {

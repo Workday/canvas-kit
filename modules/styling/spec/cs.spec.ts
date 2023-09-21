@@ -1,9 +1,10 @@
 import {setUniqueSeed, resetUniqueIdCount} from '../lib/uniqueId';
-import {cs, cssVar, createVars, createModifiers, csToProps, CS, fallback} from '../lib/cs';
+import {cs, cssVar, createVars, createModifiers, csToProps, CS} from '../lib/cs';
 import {expectTypeOf} from 'expect-type';
 import {Properties} from 'csstype';
+import {SerializedStyles} from '@emotion/serialize';
 
-describe.only('cs', () => {
+describe('cs', () => {
   beforeEach(() => {
     setUniqueSeed('a');
     resetUniqueIdCount();
@@ -11,9 +12,15 @@ describe.only('cs', () => {
 
   describe('cs', () => {
     it('should accept an object of CSS Properties', () => {
-      type Input = Exclude<Parameters<typeof cs>[0], string>;
+      type Input = Exclude<Parameters<typeof cs>[0], string | number | boolean | SerializedStyles>;
       type PositionProperty = Input['position'];
-      expectTypeOf<PositionProperty>().toMatchTypeOf<Properties['position']>();
+      const temp: PositionProperty = 'absolute';
+      cs({
+        position: 'absolute', //
+      });
+      expectTypeOf<PositionProperty>().toMatchTypeOf<
+        Properties['position'] | Properties['position'][]
+      >();
     });
   });
 
@@ -24,12 +31,10 @@ describe.only('cs', () => {
 
       expect(expected).toEqual('var(--my-var)');
     });
-  });
 
-  describe('fallback', () => {
     it('should return a css var wrapper that includes a fallback', () => {
       const input = '--my-var';
-      const expected = fallback(input, 'red');
+      const expected = cssVar(input, 'red');
 
       expect(expected).toEqual('var(--my-var, red)');
     });
@@ -59,6 +64,11 @@ describe.only('cs', () => {
       const myVars = createVars('color');
 
       expect(myVars({color: 'red'})).toHaveProperty('--a0-color', 'red');
+    });
+
+    it('should type optimized style functions correctly so they can be consumed by other repositories', () => {
+      const vars = createVars({id: 'foo', args: ['one']});
+      expectTypeOf(vars.one).toMatchTypeOf<'--foo-one'>();
     });
   });
 

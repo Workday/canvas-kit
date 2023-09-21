@@ -1,11 +1,11 @@
 import {compile, Element} from 'stylis';
-import fs from 'fs/promises';
+// import fs from 'fs/promises';
 
-export async function readCssFiles(fileNames: string[]): Promise<string[]> {
-  return (await Promise.all(fileNames.map(fileName => fs.readFile(fileName)))).map(v =>
-    v.toString()
-  );
-}
+// export async function readCssFiles(fileNames: string[]): Promise<string[]> {
+//   return (await Promise.all(fileNames.map(fileName => fs.readFile(fileName)))).map(v =>
+//     v.toString()
+//   );
+// }
 
 export function getVariablesFromFiles(files: string[]): Record<string, string> {
   return files.reduce((result, file) => {
@@ -42,7 +42,7 @@ export function extractVariables(
         return result;
       },
       {...variables}
-    );
+    ); //?
 }
 
 export function getFallbackVariable(
@@ -71,23 +71,23 @@ export function getFallbackVariable(
   return;
 }
 
-const input = `:root {
-  --cnvs-sys-line-error: 1px solid var(--cnvs-base-palette-cinnamon-500);
-  --cnvs-sys-line-color: var(--cnvs-base-palette-cinnamon-400);
+// const input = `:root {
+//   --cnvs-sys-line-error: 1px solid var(--cnvs-base-palette-cinnamon-500);
+//   --cnvs-sys-line-color: var(--cnvs-base-palette-cinnamon-400);
 
-  --cnvs-base-palette-cinnamon-400: rgba(255, 84, 71, 1);
-  --cnvs-base-palette-cinnamon-500: rgba(222, 46, 33, 1);
-  --cnvs-base-palette-cinnamon-600: rgba(161, 27, 18, 1);
+//   --cnvs-base-palette-cinnamon-400: rgba(255, 84, 71, 1);
+//   --cnvs-base-palette-cinnamon-500: rgba(222, 46, 33, 1);
+//   --cnvs-base-palette-cinnamon-600: rgba(161, 27, 18, 1);
 
-  --var-1: var(--var-2);
-  --var-2: var(--var-3);
-  --var-3: red;
-}
-`;
+//   --var-1: var(--var-2);
+//   --var-2: var(--var-3);
+//   --var-3: red;
+// }
+// `;
 
-const variables = extractVariables(compile(input));
+// const variables = extractVariables(compile(input)); //?
 
-getFallbackVariable('--cnvs-base-palette-cinnamon-400', variables); //?
-getFallbackVariable('--cnvs-sys-line-error', variables); //?
-getFallbackVariable('--cnvs-sys-line-color', variables); //?
-getFallbackVariable('--var-1', variables); //?
+// getFallbackVariable('--cnvs-base-palette-cinnamon-400', variables); //?
+// getFallbackVariable('--cnvs-sys-line-error', variables); //?
+// getFallbackVariable('--cnvs-sys-line-color', variables); //?
+// getFallbackVariable('--var-1', variables); //?

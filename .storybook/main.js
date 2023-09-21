@@ -24,10 +24,11 @@ module.exports = {
     '@storybook/addon-postcss',
   ],
   typescript: {
+    skipBabel: true,
     check: false,
     reactDocgen: false, // we'll handle this ourselves
   },
-  webpackFinal: async config => {
+  webpackFinal: async (config, {configType}) => {
     // Get the specifications object and replace with a real object in the spec.ts file
     if (processDocs) {
       const specs = await getSpecifications();
@@ -143,6 +144,24 @@ module.exports = {
       ],
       include: modulesPath,
     });
+
+    if (process.env.STATIC_CSS || configType === 'PRODUCTION') {
+      config.module.rules.push({
+        test: /.+react.+\.tsx?$/, // only React packages
+        include: [modulesPath],
+        loaders: [
+          {
+            loader: require.resolve('ts-loader'),
+            options: {
+              compiler: 'ttypescript',
+              // transpileOnly: true,
+              // happyPackMode: true,
+            },
+          },
+        ],
+        enforce: 'pre',
+      });
+    }
 
     return config;
   },

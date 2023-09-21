@@ -1,23 +1,24 @@
+/// <reference types="node" />
 import ts from 'typescript';
 import {serializeStyles} from '@emotion/serialize';
+import path from 'node:path';
 
-import {slugify} from './slugify';
-import {getFallbackVariable} from './getCssVariables';
+import {slugify} from '@workday/canvas-kit-styling';
+import {getFallbackVariable, getVariablesFromFiles} from './getCssVariables';
 
 const styleExpressionName = 'cs';
 const cssVarExpressionName = 'cssVar';
-const fallbackExpressionName = 'fallback';
 const createVarExpressionName = 'createVars';
 const styleImportString = '@workday/canvas-kit-styling';
 
-const styles: NestedStyleObject = {};
+// const styles: NestedStyleObject = {};
 const vars: Record<string, string> = {};
 
 export type NestedStyleObject = {[key: string]: string | NestedStyleObject};
 
 function getStyleValueFromType(node: ts.Node, type: ts.Type, checker: ts.TypeChecker) {
   node.getText(); //?
-  checker.typeToString(type); //?
+  // checker.typeToString(type); //?
   if (type.isNumberLiteral()) {
     return `${type.value}px`;
   }
@@ -25,8 +26,10 @@ function getStyleValueFromType(node: ts.Node, type: ts.Type, checker: ts.TypeChe
     return type.value;
   }
 
+  const typeValue = checker.typeToString(type);
+
   throw new Error(
-    `Unknown type at: "${node.getText()}".\n${getErrorMessage(
+    `Unknown type at: "${node.getText()}". Received "${typeValue}"\n${getErrorMessage(
       node
     )}\nFor static analysis of styles, please make sure all types resolve to string or numeric literals. Please use 'const' instead of 'let'. If using an object, cast using "as const" or use an interface with string or numeric literals.`
   );
@@ -94,35 +97,18 @@ function parseStyleObjValue(
     initializer.expression.text === cssVarExpressionName
   ) {
     const value = getCSSValueAtLocation(initializer.arguments[0], checker); //?
+    const value2 = initializer.arguments[1]
+      ? getCSSValueAtLocation(initializer.arguments[1], checker)
+      : undefined; //?
 
     // handle fallback variables
-    const fallbackValue = getFallbackVariable(value, variables);
-    if (value && fallbackValue) {
-      return `var(${value}, ${fallbackValue})`;
+    const fallbackValue = getFallbackVariable(value, variables); //?
+    if (value && (value2 || fallbackValue)) {
+      return `var(${value}, ${value2 || fallbackValue})`;
     }
 
     if (value) {
       return `var(${value})`;
-    }
-  }
-
-  /**
-   * This will find patterns like:
-   *
-   * ```ts
-   * fallback(myVars.color, 'red');
-   * fallback(myVars.colors.background, myVars.colors.default)
-   * ```
-   */
-  if (
-    ts.isCallExpression(initializer) &&
-    ts.isIdentifier(initializer.expression) &&
-    initializer.expression.text === fallbackExpressionName
-  ) {
-    const value1 = getCSSValueAtLocation(initializer.arguments[0], checker); //?
-    const value2 = getCSSValueAtLocation(initializer.arguments[1], checker); //?
-    if (value1 && value2) {
-      return `var(${value1}, ${value2})`;
     }
   }
 
@@ -152,14 +138,16 @@ function getStyleValueFromTemplateExpression(
   if (ts.isTemplateExpression(node)) {
     return (
       getStyleValueFromTemplateExpression(node.head, variables, checker) +
-      node.templateSpans.map(value =>
-        getStyleValueFromTemplateExpression(value, variables, checker)
-      )
+      node.templateSpans
+        .map(
+          value => getStyleValueFromTemplateExpression(value, variables, checker) //?
+        )
+        .join('')
     );
   }
 
-  if (ts.isTemplateHead(node) || ts.isTemplateTail(node)) {
-    return node.text;
+  if (ts.isTemplateHead(node) || ts.isTemplateTail(node) || ts.isTemplateMiddle(node)) {
+    return node.text; //?
   }
 
   if (ts.isTemplateSpan(node)) {
@@ -205,6 +193,7 @@ function getModuleSpecifierFromDeclaration(node?: ts.Declaration) {
 
 function getStyleFromProperty(
   property: ts.Node,
+  prefix: string,
   variables: Record<string, string>,
   checker: ts.TypeChecker
 ): NestedStyleObject {
@@ -232,7 +221,7 @@ function getStyleFromProperty(
           } else {
             const expressionText = getPropertyAccessExpressionText(property.name.expression); //?
             const [id, name] = getVariableNameParts(expressionText); //?
-            return {[`--${slugify(id)}-${slugify(name)}`]: value};
+            return {[`--${prefix}-${slugify(id)}-${name}`]: value};
           }
         }
       }
@@ -242,7 +231,12 @@ function getStyleFromProperty(
     // {'&:hover': {}}
     if (ts.isStringLiteral(property.name)) {
       return {
-        [property.name.text]: parseStyleObjFromNode(property.initializer, variables, checker),
+        [property.name.text]: parseStyleObjFromNode(
+          property.initializer,
+          prefix,
+          variables,
+          checker
+        ),
       };
     }
   }
@@ -250,31 +244,30 @@ function getStyleFromProperty(
   if (ts.isSpreadAssignment(property)) {
     const type = checker.getTypeAtLocation(property.expression);
 
-    type.getProperties().forEach(prop => {
+    return type.getProperties().reduce((result, prop) => {
       const propType = checker.getTypeOfSymbolAtLocation(prop, prop.valueDeclaration);
       checker.typeToString(propType); //?
-      return {[prop.name]: getStyleValueFromType(prop.valueDeclaration, propType, checker)};
-    });
-
-    checker.typeToString(type); //?
+      return {
+        ...result,
+        [prop.name]: getStyleValueFromType(prop.valueDeclaration, propType, checker),
+      };
+    }, {});
   }
   return {};
 }
 
 function parseStyleObjFromType(
   type: ts.Type,
+  prefix: string,
   variables: Record<string, string>,
   checker: ts.TypeChecker
 ) {
   const styleObj: Record<string, any> = {};
 
   return type.getProperties().reduce((result, property) => {
-    property.name; //?
     const declaration = property.declarations[0];
     if (declaration) {
-      declaration.kind; //?
-
-      return {...result, ...getStyleFromProperty(declaration, variables, checker)};
+      return {...result, ...getStyleFromProperty(declaration, prefix, variables, checker)};
     }
     return result;
   }, styleObj);
@@ -282,13 +275,14 @@ function parseStyleObjFromType(
 
 function parseStyleObjFromNode(
   node: ts.Node,
+  prefix: string,
   variables: Record<string, string>,
   checker: ts.TypeChecker
 ) {
   const styleObj: Record<string, any> = {};
   if (ts.isObjectLiteralExpression(node)) {
     return node.properties.reduce((result, property) => {
-      return {...result, ...getStyleFromProperty(property, variables, checker)};
+      return {...result, ...getStyleFromProperty(property, prefix, variables, checker)};
     }, styleObj); //?
   }
 
@@ -317,17 +311,35 @@ function createStyleObjectNode(styleObj: Record<string, string>) {
   );
 }
 
-const variables: Record<string, string> = {};
-const errors: Error[] = [];
+// const variables: Record<string, string> = {};
+// const errors: Error[] = [];
 
 export interface StyleTransformerOptions {
   prefix: string;
+  variables: Record<string, string>;
+  fallbackFiles?: string[];
 }
 
 export default function styleTransformer(
   program: ts.Program,
-  {prefix = 'css'}: StyleTransformerOptions = {prefix: 'css'}
+  {prefix = 'css', variables = {}, fallbackFiles}: Partial<StyleTransformerOptions> = {
+    prefix: 'css',
+    variables: {},
+  }
 ): ts.TransformerFactory<ts.SourceFile> {
+  if (fallbackFiles) {
+    const files = fallbackFiles
+      .filter(file => file) // don't process empty files
+      .map(file => {
+        // Find the fully-qualified path name. This could error which should give "module not found" errors
+        return file.startsWith('.') ? path.resolve(process.cwd(), file) : require.resolve(file);
+      })
+      .map(file => ts.sys.readFile(file) || ''); //?
+
+    // eslint-disable-next-line no-param-reassign
+    variables = getVariablesFromFiles(files);
+  }
+
   const checker = program.getTypeChecker();
   return context => {
     const visit: ts.Visitor = node => {
@@ -348,7 +360,7 @@ export default function styleTransformer(
         if (getModuleSpecifierFromDeclaration(declaration) === styleImportString) {
           const newArguments = [...node.arguments].map((arg, index) => {
             if (ts.isObjectLiteralExpression(arg)) {
-              const styleObj = parseStyleObjFromNode(arg, variables, checker); //?
+              const styleObj = parseStyleObjFromNode(arg, prefix, variables, checker); //?
 
               return createStyleObjectNode(styleObj);
             }
@@ -360,7 +372,7 @@ export default function styleTransformer(
               }
 
               checker.typeToString(type); //?
-              const styleObj = parseStyleObjFromType(type, variables, checker); //?
+              const styleObj = parseStyleObjFromType(type, prefix, variables, checker); //?
 
               return createStyleObjectNode(styleObj);
             }
@@ -390,10 +402,9 @@ export default function styleTransformer(
         node.expression.text === createVarExpressionName
       ) {
         const id = slugify(getVarName(node)); //?
-        console.log('id', id);
         const variables = node.arguments
-          .map(arg => ts.isStringLiteral(arg) && slugify(arg.text))
-          .filter(Boolean) as string[];
+          .map(arg => ts.isStringLiteral(arg) && arg.text)
+          .filter(Boolean) as string[]; //?
 
         variables.forEach(v => {
           vars[`${id}-${v}`] = `--${prefix}-${id}-${v}`;
@@ -434,7 +445,7 @@ export default function styleTransformer(
 export function transform(
   program: ts.Program,
   fileName: string,
-  variables: Record<string, string> = {}
+  options?: Partial<StyleTransformerOptions>
 ) {
   const source =
     program.getSourceFile(fileName) || ts.createSourceFile(fileName, '', ts.ScriptTarget.ES2019);
@@ -443,7 +454,7 @@ export function transform(
 
   return printer.printFile(
     ts
-      .transform(source, [styleTransformer(program, {prefix: 'css'})])
+      .transform(source, [styleTransformer(program, options)])
       .transformed.find(s => (s.fileName = fileName)) || source
   );
 }
@@ -477,7 +488,7 @@ function getVarName(node: ts.Node): string {
 function getErrorMessage(node: ts.Node) {
   const sourceFile = node.getSourceFile();
 
-  const {line, character} = node.getSourceFile().getLineAndCharacterOfPosition(node.pos);
+  const {line} = node.getSourceFile().getLineAndCharacterOfPosition(node.pos);
   const lineStarts = sourceFile.getLineStarts();
 
   const lineStartIndex = lineStarts.findIndex(s => s >= node.pos) - 1;
@@ -509,9 +520,10 @@ function getErrorMessage(node: ts.Node) {
    * })
    * ```
    */
-  const fullContext = lineBefore + lineCurrent + highlightedLine + lineAfter; //?
+  const fullContext = lineBefore + lineCurrent + highlightedLine + lineAfter;
 
-  return `File: ${sourceFile.fileName}:${line}:${character}.\n${fullContext}`;
+  const character = node.getStart() - lineStarts[lineStartIndex] + 1;
+  return `File: ${sourceFile.fileName}:${line + 1}:${character}.\n${fullContext}`;
 }
 
 function getVariableNameParts(input: string): [string, string] {
@@ -529,7 +541,7 @@ function getVarsKeyFromNode(node: ts.Node): string {
   }
 
   if (ts.isPropertyAccessExpression(node) && ts.isIdentifier(node.name)) {
-    return `${getVarsKeyFromNode(node.expression)}-${slugify(node.name.text)}`; //?
+    return `${getVarsKeyFromNode(node.expression)}-${node.name.text}`; //?
   }
 
   return '';

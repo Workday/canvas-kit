@@ -1,24 +1,34 @@
 import React from 'react';
-import {CommonStyleProps} from '@workday/canvas-kit-react/layout';
 import {generateUniqueId} from './uniqueId';
 import {Properties} from 'csstype';
 // eslint-disable-next-line @emotion/no-vanilla
 import {css} from '@emotion/css';
+import type {Keyframes, SerializedStyles, CSSObject} from '@emotion/serialize';
+
+import {slugify} from './slugify';
 
 // future placeholder for token replacement
 const tokens = {};
 
-type NestedStyles =
-  | string
+export type NestedStyles =
+  | (string & {})
   | number
   | undefined
   | (Properties & {
       [propertyName: string]: NestedStyles;
     });
 
-export interface StyleProps extends CommonStyleProps {
-  [propertiesName: string]: NestedStyles;
-}
+/**
+ * Style props
+ */
+export type StyleProps =
+  | undefined
+  | boolean
+  | number
+  | string
+  | Keyframes
+  | SerializedStyles
+  | CSSObject;
 
 function replaceWithToken<T>(value: T): T {
   return (tokens as any)[value] || value;
@@ -42,7 +52,11 @@ function replaceAllWithTokens<T extends unknown>(obj: T): T {
 
 export type CS = string | Record<string, string>;
 
-export type CsVars<T extends string, ID extends string> = Record<T, string> & {
+export type CsVarsMap<T extends string, ID extends string | never> = [ID] extends [never]
+  ? Record<T, string>
+  : {[K in T]: `--${ID}-${K}`};
+
+export type CsVars<T extends string, ID extends string | never> = CsVarsMap<T, ID> & {
   (input: Partial<Record<T, string>>): Record<T, string>;
 };
 
@@ -53,12 +67,24 @@ export type CsVars<T extends string, ID extends string> = Record<T, string> & {
  * const myVars = createVars('color')
  *
  * const myStyles = cs({
- *   color: cssVar(myVars.color) // color: var(--{hash}-color)
+ *   color: cssVar(myVars.color) // color: 'var(--{hash}-color)'
  * })
  * ```
+ *
+ * It can also support an optional fallback. Fallbacks should only be used if it is reasonable to
+ * expect a CSS variable isn't defined.
+ * ```ts
+ * const myStyles = cs({
+ *   color: cssVar(myVars.color, 'red') // color: 'var(--{hash}-color, red)'
+ * })
+ * ```
+ *
+ * If the project is set up for parsing with fallback files, a fallback will automatically be filled
+ * during the parsing phase. This is helpful for cases when CSS variables are expected, but not set
+ * in the environment.
  */
-export function cssVar(input: string) {
-  return `var(${input})`;
+export function cssVar(input: string, fallback?: string) {
+  return fallback ? `var(${input}, ${fallback})` : `var(${input})`;
 }
 
 /**
@@ -86,7 +112,7 @@ export function createVars<T extends string, ID extends string>(input: {
   id: ID;
   args: T[];
 }): CsVars<T, ID>;
-export function createVars<T extends string, ID extends string>(...args: T[]): CsVars<T, ID>;
+export function createVars<T extends string>(...args: T[]): CsVars<T, never>;
 export function createVars<T extends string, ID extends string>(...args: T[]): CsVars<T, ID> {
   const id = (args[0] as any).id || generateUniqueId(); //?
   // eslint-disable-next-line no-param-reassign
@@ -104,7 +130,7 @@ export function createVars<T extends string, ID extends string>(...args: T[]): C
 
   args.forEach(key => {
     // @ts-ignore
-    result[key] = `--${id}-${key}`;
+    result[key] = `--${id}-${slugify(key)}`;
   }, {});
 
   return result as CsVars<T, ID>;
@@ -201,11 +227,22 @@ export interface CSProps {
 }
 
 /**
- * The cs function is curried into 2 parts. The first function could be done at
- * build time. The returned function combines classnames and will remain as a
- * small runtime.
+ * Creates CSS styles based on object-style input. It has a side-effect of adding CSS to the page
+ * and will return a space-delimitated string of CSS class names meant to be added to an element.
+ *
+ * It can take a number of inputs of various types. The simplest is object-styles.
+ *
+ * ```ts
+ * const myStyles = cs({
+ *   backgroundColor: 'red'
+ * })
+ * ```
+ *
+ *
+ *
+ * The cs function is curried into 2 parts. The first function could be done at build time. The
+ * returned function combines classnames and will remain as a small runtime.
  */
-
 export function cs(...args: (StyleProps | string)[]): string {
   return args
     .map(input => {
@@ -264,12 +301,4 @@ export function useCs<
     ...csToProps([cs, className, style]),
     ...props,
   } as Omit<T, 'cs' | 'csVars'>;
-}
-
-/**
- * Takes in a CSS Variable created by `createVars` and a fallback value and returns `var({input},
- * {fallback})`. This can be used inside `cs` functions to generated fallback values for properties.
- */
-export function fallback(input: string, fallbackValue: string) {
-  return `var(${input}, ${fallbackValue})`;
 }

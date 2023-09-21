@@ -84,22 +84,6 @@ export const newTheme = {
     bold: '--canvas-font-weights-bold',
   },
   colors: {
-    body: '--canvas-colors-body',
-    heading: '--canvas-colors-heading',
-    hint: '--canvas-colors-hint',
-    inverse: '--canvas-colors-inverse',
-    label: '--canvas-colors-label',
-    link: '--canvas-colors-link',
-    selectHighlight: '--canvas-colors-selectHighlight',
-    selectHighlightInverse: '--canvas-colors-selectHighlightInverse',
-    primary: {
-      lightest: '--canvas-colors-primary-lightest',
-      light: '--canvas-colors-primary-light',
-      main: '--canvas-colors-primary-main',
-      dark: '--canvas-colors-primary-dark',
-      darkest: '--canvas-colors-primary-darkest',
-      contrast: '--canvas-colors-primary-contrast',
-    },
     alert: {
       lightest: '--canvas-colors-alert-lightest',
       light: '--canvas-colors-alert-light',
@@ -132,6 +116,24 @@ export const newTheme = {
       darkest: '--canvas-colors-neutral-darkest',
       contrast: '--canvas-colors-neutral-contrast',
     },
+    primary: {
+      lightest: '--canvas-colors-primary-lightest',
+      light: '--canvas-colors-primary-light',
+      main: '--canvas-colors-primary-main',
+      dark: '--canvas-colors-primary-dark',
+      darkest: '--canvas-colors-primary-darkest',
+      contrast: '--canvas-colors-primary-contrast',
+    },
+    common: {
+      focusOutline: '--canvas-colors-primary-main',
+    },
+  },
+  borderRadius: {
+    zero: '--canvas-border-radius-zero',
+    small: '--canvas-border-radius-small',
+    medium: '--canvas-border-radius-medium',
+    large: '--canvas-border-radius-large',
+    circle: '--canvas-border-radius-circle',
   },
 } as const;
 
@@ -300,6 +302,7 @@ cs({
     '--canvas-color-base-black-pepper-400': '#333333',
     '--canvas-color-base-black-pepper-500': '#1e1e1e',
     '--canvas-color-base-black-pepper-600': '#000000',
+    '--canvas-color-transparent': 'rgba(0,0,0,0)',
 
     '--canvas-font-family-default': '"Roboto", "Helvetica Neue", "Helvetica", Arial, sans-serif',
     '--canvas-font-family-monospace': '"Roboto Mono", "Courier New", Courier, monospace',
@@ -326,6 +329,14 @@ cs({
     '--canvas-colors-link': 'var(--canvas-color-base-blueberry-400)',
     '--canvas-colors-selectHighlight': 'var(--canvas-color-base-blueberry-200)',
     '--canvas-colors-selectHighlightInverse': 'var(--canvas-color-base-french-vanilla-100)',
+
+    //Border Radius
+    '--canvas-border-radius-zero': '0',
+    '--canvas-border-radius-small': '0.125rem',
+    '--canvas-border-radius-medium': '0.25rem',
+    '--canvas-border-radius-large': '0.5rem',
+    '--canvas-border-radius-circle': '999px',
+
     '--canvas-colors-primary-lightest': 'var(--canvas-color-base-blueberry-100)',
     '--canvas-colors-primary-light': 'var(--canvas-color-base-blueberry-200)',
     '--canvas-colors-primary-main': 'var(--canvas-color-base-blueberry-400)',

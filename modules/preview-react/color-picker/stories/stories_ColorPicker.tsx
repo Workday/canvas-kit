@@ -62,7 +62,7 @@ storiesOf('Preview/Color Picker', module)
     );
   })
   .add('Color Input Popup', () => {
-    const defaultColor = colors.blueberry400;
+    const defaultColor = colors.blueberry400 as string;
 
     const [color, setColor] = React.useState(defaultColor);
     const [colorInputValidColor, setColorInputValidColor] = React.useState(defaultColor);

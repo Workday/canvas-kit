@@ -1,13 +1,9 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
 import isPropValid from '@emotion/is-prop-valid';
-import {
-  createComponent,
-  CSProps,
-  StyledType,
-  useConstant,
-  useCs,
-} from '@workday/canvas-kit-react/common';
+import {createComponent, StyledType, useConstant} from '@workday/canvas-kit-react/common';
+
+import {useCs, CSProps} from '@workday/canvas-kit-styling';
 
 // style props
 import {background} from './utils/background';

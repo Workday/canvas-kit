@@ -21,7 +21,11 @@
     "incremental": true,
     "skipLibCheck": true,
     "plugins": [
-      {"transform": "../styling/parser/styleParser.ts", "prefix": "css", "fallbackFiles": []}
+      {
+        "transform": "@workday/canvas-kit-styling-transform",
+        "prefix": "css",
+        "fallbackFiles": []
+      }
     ]
   },
   "ts-node": {

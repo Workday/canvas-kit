@@ -12,6 +12,46 @@ import {borderRadius, colors, space} from '@workday/canvas-kit-react/tokens';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {ButtonColors, IconPositions, ButtonSizes} from './types';
 import {BaseButton, BaseButtonProps} from './BaseButton';
+import {Box} from '@workday/canvas-kit-react/layout';
+
+import {cs, cssVar, createVars, createModifiers, CSProps} from '@workday/canvas-kit-styling';
+
+// component variables
+const buttonVars = createVars('backgroundColor');
+
+//
+
+// main styles
+export const buttonStyles = cs({
+  backgroundColor: cssVar(buttonVars.backgroundColor),
+});
+
+// modifiers - like if/switch statements inside Emotion style blocks
+export const buttonModifiers = createModifiers({
+  size: {
+    small: cs({
+      padding: 8,
+    }),
+    medium: cs({
+      padding: 12,
+    }),
+  },
+});
+
+export interface ButtonProps extends CSProps, React.ButtonHTMLAttributes<HTMLButtonElement> {
+  size: 'small' | 'medium'; // or "keyof typeof buttonModifiers.size",
+  backgroundColor: string;
+}
+
+export const Button = ({cs, size, backgroundColor, ...elemProps}: ButtonProps) => {
+  return (
+    <Box
+      as="button"
+      {...elemProps}
+      cs={[cs, buttonStyles, buttonModifiers({size}), buttonVars({backgroundColor})]}
+    />
+  );
+};
 
 export interface TertiaryButtonProps extends Themeable, BaseButtonProps {
   /**
