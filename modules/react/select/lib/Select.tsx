@@ -127,7 +127,7 @@ export const Select = createContainer()({
     Popper: Combobox.Menu.Popper,
     /**
      * `Select.Card` renders a {@link ComboboxCard Combobox.Card}. You have access to all `Card` props.
-     * The card will be the width of the select input.
+     * **Note: The Card will be the width of the `Select.Input`**.
      * ```tsx
      * <Select item={options}>
      *  <Select.Input id="matching-formfield-inputId" onChange={(event) => handleChange(event)}>
