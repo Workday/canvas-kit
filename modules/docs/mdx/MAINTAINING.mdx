@@ -20,8 +20,6 @@ Kit!
   - [Forward Merge Workflow](#forward-merge-workflow)
   - [Release Minor Workflow](#release-minor-workflow)
   - [Release Workflow](#release-workflow)
-- [Deprecations](#deprecations)
-	- [How To Deprecate](#how-to-deprecate)
 - [Releases](#releases)
   - [Patch Releases](#patch-releases)
   - [Minor Releases](#minor-releases)
@@ -29,6 +27,8 @@ Kit!
   - [Canary Releases](#canary-releases)
 - [Codemods](#codemods)
   - [Add a New Codemod](#add-a-new-codemod)
+- [Deprecations](#deprecations)
+	- [How To Deprecate](#how-to-deprecate)
 
 ## Branches
 
@@ -125,27 +125,6 @@ are initiated automatically when a commit is merged to `prerelease/minor` or `pr
 a more in-depth review of the workflow,
 [view the source code](https://github.com/Workday/canvas-kit/blob/master/.github/workflows/release-minor.yml).
 
-## Deprecations
-
-We add the [@deprecated](https://jsdoc.app/tags-deprecated.html) from JSDoc to code that we plan to
-remove in the near future. Al though you can still consume this code, we want consumers to move to a
-utility or component that is more stable.
-
-### How To Deprecate
-
-When deprecating a component or utility use the following pattern:
-
-```tsx
-/**
- * ### ⚠️ ${ComponentName/Utility} has been deprecated. Optionally give a reason as to why. ⚠️
- * - Please consider using [`${OtherComponent/Utility}`](insert link to  documentation) in ${packageName}.
- * @deprecated
- */
-```
-
-Attach this block of JSDoc directly above to all exported members that relate to the deprecation.
-
-Be sure to add any additional information to an upgrade guide if necessary.
 
 ## Releases
 
@@ -405,3 +384,25 @@ describe('Example Codemod', () => {
 ```
 
 And that's it! You're done. Stage your changes, commit, and push up a PR.
+
+## Deprecations
+
+We add the [@deprecated](https://jsdoc.app/tags-deprecated.html) from JSDoc to code that we plan to
+remove in the near future. Al though you can still consume this code, we want consumers to move to a
+utility or component that is more stable.
+
+### How To Deprecate
+
+When deprecating a component or utility use the following pattern:
+
+```tsx
+/**
+ * ### ⚠️ ${ComponentName/Utility} has been deprecated. Optionally give a reason as to why. ⚠️
+ * - Please consider using [`${OtherComponent/Utility}`](insert link to  documentation) in ${packageName}.
+ * @deprecated
+ */
+```
+
+Attach this block of JSDoc directly above to all exported members that relate to the deprecation.
+
+Be sure to add any additional information to an upgrade guide if necessary.
