@@ -16,9 +16,9 @@ import {CanvasSystemIcon} from '@workday/design-assets-types';
 
 export interface SelectInputProps extends ExtractProps<typeof TextInput> {
   /**
-   * The Icon to render at the start of the input. Use this prop if your options
-   * include icons that you would like to render in the input when selected.
-   * An option must be selected in order to render and icon.
+   * The Icon to render at the start of the `input`. Use this prop if your options
+   * include icons that you would like to render in the `input` when selected.
+   * ** Note:An option must be selected in order to render and icon.**
    */
   inputStartIcon?: CanvasSystemIcon;
 }
@@ -26,7 +26,7 @@ export const SelectInput = createSubcomponent(TextInput)({
   modelHook: useSelectModel,
   elemPropsHook: useSelectInput,
 })<SelectInputProps>(
-  ({placeholder = 'Choose an Option', inputStartIcon, ...elemProps}, Element, model) => {
+  ({placeholder = 'Choose an option', inputStartIcon, ...elemProps}, Element, model) => {
     return (
       <InputGroup>
         {inputStartIcon && model.state.selectedIds.length > 0 && (
@@ -50,12 +50,13 @@ export const SelectInput = createSubcomponent(TextInput)({
 
 export const SelectItem = createSubcomponent('li')({
   modelHook: useSelectModel,
+  elemPropsHook: useSelectItem,
   subComponents: {
     Icon: Combobox.Menu.Item.Icon,
   },
 })<ExtractProps<typeof Combobox.Menu.Item>>(({children, ...elemProps}, Element, _model) => {
   return (
-    <Combobox.Menu.Item as={Element} role="option" elemPropsHook={useSelectItem} {...elemProps}>
+    <Combobox.Menu.Item as={Element} {...elemProps}>
       {children}
     </Combobox.Menu.Item>
   );
