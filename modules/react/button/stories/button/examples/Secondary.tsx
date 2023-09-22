@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {SecondaryButton} from '@workday/canvas-kit-labs-react/button';
+import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {
   plusIcon,

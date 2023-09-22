@@ -1,171 +1,140 @@
 import * as React from 'react';
 
-import {
-  GrowthBehavior,
-  useTheme,
-  Themeable,
-  EmotionCanvasTheme,
-  createComponent,
-  focusRing,
-} from '@workday/canvas-kit-react/common';
-import {colors} from '@workday/canvas-kit-react/tokens';
-import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {ButtonSizes, IconPositions} from './types';
-import {BaseButton, BaseButtonProps, getMinWidthStyles, getPaddingStyles} from './BaseButton';
-
-const getPrimaryButtonColors = (variant: 'inverse' | undefined, theme: EmotionCanvasTheme) => {
-  const {
-    canvas: {
-      palette: {primary: themePrimary},
-    },
-  } = theme;
-
-  switch (variant) {
-    case undefined:
-    default:
-      return {
-        default: {
-          background: themePrimary.main,
-          icon: themePrimary.contrast,
-          label: themePrimary.contrast,
-        },
-        hover: {
-          background: themePrimary.dark,
-        },
-        active: {
-          background: themePrimary.darkest,
-        },
-        focus: {
-          background: themePrimary.main,
-        },
-        disabled: {
-          background: themePrimary.main,
-        },
-      };
-
-    case 'inverse':
-      return {
-        default: {
-          background: colors.frenchVanilla100,
-          icon: colors.blackPepper400,
-          label: colors.blackPepper400,
-        },
-        hover: {
-          background: colors.soap300,
-          icon: colors.blackPepper500,
-          label: colors.blackPepper500,
-        },
-        active: {
-          background: colors.soap400,
-          icon: colors.blackPepper500,
-          label: colors.blackPepper500,
-        },
-        focus: {
-          background: colors.frenchVanilla100,
-          border: colors.blackPepper400,
-          icon: colors.blackPepper400,
-          label: colors.blackPepper400,
-
-          focusRing: focusRing(
-            {
-              separation: 1,
-              innerColor: colors.blackPepper400,
-              outerColor: colors.frenchVanilla100,
-            },
-            theme
-          ),
-        },
-        // Identical to inverse 'default' styles. ButtonContainer will set opacity to 40%
-        disabled: {
-          background: colors.frenchVanilla100,
-          icon: colors.blackPepper400,
-          label: colors.blackPepper400,
-        },
-      };
-  }
-};
-
-export interface PrimaryButtonProps extends Themeable, GrowthBehavior, BaseButtonProps {
-  /**
-   * The variant of the PrimaryButton.
-   */
-  variant?: 'inverse';
-  /**
-   * There are four button sizes: `extraSmall`, `small`, `medium`, and `large`.
-   * If no size is provided, it will default to `medium`.
-   */
-  size?: ButtonSizes;
-  /**
-   * The icon of the Button.
-   * Note: not displayed at `small` size
-   */
-  icon?: CanvasSystemIcon;
-  /**
-   * Button icon positions can either be `start` or `end`.
-   * If no value is provided, it defaults to `start`.
-   */
-  iconPosition?: IconPositions;
-  /**
-   * If set to `true`, transform the icon's x-axis to mirror the graphic
-   */
-  shouldMirrorIcon?: boolean;
-  children?: React.ReactNode;
-}
+import {buttonVars, BaseButtonContainerProps} from './BaseButton';
+import {createComponent, cs, createModifiers, cssVar} from '@workday/canvas-kit-react/common';
+import {base, brand, system} from '@workday/canvas-tokens-web';
+import {Button} from './Button';
 
 /**
- * Primary Buttons are high emphasis. Use once per screen to draw attention to the highest priority
- * action. Multiple primary buttons make it confusing for the user to understand what action they
- * should take. Not all screens require a Primary Button.
- *
- * Primary Buttons have four sizes: `extraSmall`, `small`, `medium`, and `large`. Icons are
- * supported for every size and can be positioned at the `start` or `end` with the `iconPosition`
- * prop.
+ * Extends all the style properties from Box to our buttons as well as props from ButtonContainerProps.
+ * We omit `ref` since all of our buttons use `createComponent` and already give access to `ref`.
+ * Use this type to extend and customize any one off buttons that you want full control over styling.
  */
+export interface PrimaryButtonProps extends Omit<BaseButtonContainerProps, 'ref'> {
+  /**
+   * Variant has an option for `inverse` which will inverse the styling
+   */
+  variant?: 'inverse';
+}
+
+const primaryStyles = cs({
+  [buttonVars.default.background]: cssVar(brand.primary.base),
+  [buttonVars.default.border]: 'transparent',
+  [buttonVars.default.borderRadius]: cssVar(system.shape.circle),
+  [buttonVars.default.color]: cssVar(brand.primary.accent),
+  '&:hover, &.hover': {
+    [buttonVars.hover.background]: cssVar(brand.primary.dark),
+    [buttonVars.hover.border]: 'transparent',
+    [buttonVars.hover.color]: cssVar(brand.primary.accent),
+    '& span .wd-icon-fill': {
+      [buttonVars.hover.icon]: cssVar(brand.primary.accent),
+    },
+  },
+  '&:focus-visible, &.focus': {
+    [buttonVars.focus.background]: cssVar(brand.primary.base),
+    [buttonVars.focus.border]: 'transparent',
+    [buttonVars.focus.color]: cssVar(brand.primary.accent),
+    [buttonVars.focus.boxShadowInner]: cssVar(base.frenchVanilla100),
+    [buttonVars.focus.boxShadowOuter]: cssVar(brand.common.focusOutline),
+    '& span .wd-icon-fill': {
+      [buttonVars.focus.icon]: cssVar(brand.primary.accent),
+    },
+  },
+  '&:active, &.active': {
+    [buttonVars.active.background]: cssVar(brand.primary.darkest),
+    [buttonVars.active.border]: 'transparent',
+    [buttonVars.active.color]: cssVar(brand.primary.accent),
+    '& span .wd-icon-fill': {
+      [buttonVars.active.icon]: cssVar(brand.primary.accent),
+    },
+  },
+  '& span .wd-icon-fill': {
+    [buttonVars.default.icon]: cssVar(brand.primary.accent),
+  },
+  '&:disabled, &:active:disabled, &:focus:disabled, &:hover:disabled': {
+    [buttonVars.disabled.background]: cssVar(brand.primary.base),
+    [buttonVars.disabled.border]: 'transparent',
+    [buttonVars.disabled.color]: cssVar(brand.primary.accent),
+    '& span .wd-icon-fill': {
+      [buttonVars.disabled.icon]: cssVar(brand.primary.accent),
+    },
+  },
+});
+
+export const primaryButtonModifiers = createModifiers({
+  iconPosition: {
+    start: 'canvas-button-icon-start',
+    end: 'canvas-button-icon-end',
+    only: 'canvas-button-icon-only',
+  },
+  variant: {
+    inverse: cs({
+      [buttonVars.default.background]: cssVar(base.frenchVanilla100),
+      [buttonVars.default.borderRadius]: cssVar(system.shape.circle),
+      [buttonVars.default.color]: cssVar(base.blackPepper400),
+      '&:hover, &.hover': {
+        [buttonVars.hover.background]: cssVar(base.soap300),
+        [buttonVars.hover.color]: cssVar(base.blackPepper500),
+        '& span .wd-icon-fill': {
+          [buttonVars.hover.icon]: cssVar(base.blackPepper500),
+        },
+      },
+      '&:focus-visible, &.focus': {
+        [buttonVars.focus.background]: cssVar(base.frenchVanilla100),
+        [buttonVars.focus.boxShadowInner]: cssVar(base.blackPepper400),
+        [buttonVars.focus.boxShadowOuter]: cssVar(base.frenchVanilla100),
+        [buttonVars.focus.color]: cssVar(base.blackPepper400),
+        '& span .wd-icon-fill': {
+          [buttonVars.focus.icon]: cssVar(base.blackPepper400),
+        },
+      },
+      '& span .wd-icon-fill': {
+        [buttonVars.default.icon]: cssVar(base.blackPepper400),
+      },
+      '&:active, &.active': {
+        [buttonVars.active.background]: cssVar(base.soap400),
+        [buttonVars.active.color]: cssVar(base.blackPepper500),
+        '& span .wd-icon-fill': {
+          [buttonVars.active.icon]: cssVar(base.blackPepper500),
+        },
+      },
+      '&:disabled, &:active:disabled, &:focus:disabled, &:hover:disabled': {
+        [buttonVars.disabled.background]: cssVar(base.frenchVanilla100),
+        [buttonVars.disabled.color]: cssVar(base.blackPepper400),
+        '& span .wd-icon-fill': {
+          [buttonVars.disabled.icon]: cssVar(base.blackPepper400),
+        },
+      },
+    }),
+  },
+});
+
 export const PrimaryButton = createComponent('button')({
   displayName: 'PrimaryButton',
   Component: (
     {
-      size = 'medium',
-      iconPosition = 'start',
-      variant,
-      icon,
-      shouldMirrorIcon = false,
       children,
+      icon,
+      iconPosition = children ? undefined : 'only',
+      variant,
+      size,
       ...elemProps
     }: PrimaryButtonProps,
     ref,
     Element
   ) => {
-    const theme = useTheme();
     return (
-      <BaseButton
+      <Button
+        as={Element}
         ref={ref}
         size={size}
-        colors={getPrimaryButtonColors(variant, theme)}
-        padding={getPaddingStyles(children, size, icon, iconPosition)}
-        minWidth={getMinWidthStyles(children, size)}
-        as={Element}
+        icon={icon}
+        iconPosition={iconPosition}
+        cs={[primaryStyles, primaryButtonModifiers({iconPosition: iconPosition, variant: variant})]}
         {...elemProps}
       >
-        {icon && iconPosition === 'start' && (
-          <BaseButton.Icon
-            size={size}
-            iconPosition={iconPosition}
-            icon={icon}
-            shouldMirrorIcon={shouldMirrorIcon}
-          />
-        )}
-        {children && <BaseButton.Label>{children}</BaseButton.Label>}
-
-        {icon && iconPosition === 'end' && (
-          <BaseButton.Icon
-            size={size}
-            iconPosition={iconPosition}
-            icon={icon}
-            shouldMirrorIcon={shouldMirrorIcon}
-          />
-        )}
-      </BaseButton>
+        {children}
+      </Button>
     );
   },
 });

@@ -1,193 +1,145 @@
 import * as React from 'react';
 
-import {colors} from '@workday/canvas-kit-react/tokens';
-import {
-  GrowthBehavior,
-  useTheme,
-  Themeable,
-  EmotionCanvasTheme,
-  createComponent,
-  focusRing,
-} from '@workday/canvas-kit-react/common';
-import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {ButtonColors, ButtonSizes, IconPositions} from './types';
-import {BaseButton, BaseButtonProps, getMinWidthStyles, getPaddingStyles} from './BaseButton';
-
-export interface SecondaryButtonProps extends Themeable, GrowthBehavior, BaseButtonProps {
-  /**
-   * The variant of the SecondaryButton.
-   * @default undefined
-   */
-  variant?: 'inverse' | undefined;
-  /**
-   * There are four button sizes: `extraSmall`, `small`, `medium`, and `large`.
-   * If no size is provided, it will default to `medium`.
-   *
-   * @default 'medium'
-   */
-  size?: ButtonSizes;
-  /**
-   * The icon of the Button.
-   * Note: not displayed at `small` size
-   */
-  icon?: CanvasSystemIcon;
-  /**
-   * Button icon positions can either be `start` or `end`.
-   * If no value is provided, it defaults to `start`.
-   * @default 'start'
-   */
-  iconPosition?: IconPositions;
-  /**
-   * If set to `true`, transform the icon's x-axis to mirror the graphic
-   * @default false
-   */
-  shouldMirrorIcon?: boolean;
-  children?: React.ReactNode;
-}
+import {buttonVars, BaseButtonContainerProps} from './BaseButton';
+import {createComponent, cs, createModifiers, cssVar} from '@workday/canvas-kit-react/common';
+import {base, brand, system} from '@workday/canvas-tokens-web';
+import {Button} from './Button';
 
 /**
- * Secondary Buttons have a medium level of emphasis. Use them for non-critical actions. Secondary
- * Buttons can be used on most pages without restrictions and work well for multiple actions of
- * equal weight. They can be used in conjunction with a Primary Button or independently.
- *
- * Secondary Buttons have four sizes: `extraSmall`, `small`, `medium`, and `large`. Icons are
- * supported for every size and can be positioned at the `start` or `end` with the `iconPosition`
- * prop.
+ * Extends all the style properties from Box to our buttons as well as props from BaseButtonContainerProps.
+ * We omit `ref` since all of our buttons use `createComponent` and already give access to `ref`.
+ * Use this type to extend and customize any one off buttons that you want full control over styling.
  */
+export interface SecondaryButtonProps extends Omit<BaseButtonContainerProps, 'ref'> {
+  /**
+   * Variant has an option for `inverse` which will inverse the styling
+   */
+  variant?: 'inverse';
+}
+
+const secondaryStyles = cs({
+  [buttonVars.default.background]: 'transparent',
+  [buttonVars.default.border]: cssVar(base.blackPepper400),
+  [buttonVars.default.borderRadius]: cssVar(system.shape.circle),
+  [buttonVars.default.color]: cssVar(base.blackPepper400),
+  '& span .wd-icon-fill': {
+    [buttonVars.default.icon]: cssVar(base.blackPepper400),
+  },
+  '&:hover, &.hover': {
+    [buttonVars.hover.background]: cssVar(base.blackPepper400),
+    [buttonVars.hover.border]: cssVar(base.blackPepper400),
+    [buttonVars.hover.color]: cssVar(brand.primary.accent),
+    '& span .wd-icon-fill': {
+      [buttonVars.hover.icon]: cssVar(brand.primary.accent),
+    },
+  },
+  '&:focus-visible, &.focus': {
+    [buttonVars.focus.background]: 'transparent',
+    [buttonVars.focus.border]: cssVar(base.blackPepper400),
+    [buttonVars.focus.color]: cssVar(base.blackPepper400),
+    [buttonVars.focus.boxShadowInner]: cssVar(base.frenchVanilla100),
+    [buttonVars.focus.boxShadowOuter]: cssVar(brand.common.focusOutline),
+    '& span .wd-icon-fill': {
+      [buttonVars.focus.icon]: cssVar(base.blackPepper400),
+    },
+  },
+  '&:active, &.active': {
+    [buttonVars.active.background]: cssVar(base.blackPepper500),
+    [buttonVars.active.border]: cssVar(base.blackPepper500),
+    [buttonVars.active.color]: cssVar(brand.primary.accent),
+    '& span .wd-icon-fill': {
+      [buttonVars.active.icon]: cssVar(brand.primary.accent),
+    },
+  },
+  '&:disabled, &:active:disabled, &:focus:disabled, &:hover:disabled': {
+    [buttonVars.disabled.background]: 'transparent',
+    [buttonVars.disabled.border]: cssVar(base.blackPepper400),
+    [buttonVars.disabled.color]: cssVar(base.blackPepper400),
+    '& span .wd-icon-fill': {
+      [buttonVars.disabled.icon]: cssVar(base.blackPepper400),
+    },
+  },
+});
+
+export const secondaryButtonModifiers = createModifiers({
+  iconPosition: {
+    start: 'canvas-button-icon-start',
+    end: 'canvas-button-icon-end',
+    only: 'canvas-button-icon-only',
+  },
+  variant: {
+    inverse: cs({
+      [buttonVars.default.background]: 'transparent',
+      [buttonVars.default.border]: cssVar(base.frenchVanilla100),
+      [buttonVars.default.color]: cssVar(base.frenchVanilla100),
+      '&:hover, &.hover': {
+        [buttonVars.hover.background]: cssVar(base.soap300),
+        [buttonVars.hover.border]: cssVar(base.soap300),
+        [buttonVars.hover.color]: cssVar(base.blackPepper500),
+        '& span .wd-icon-fill': {
+          [buttonVars.hover.icon]: cssVar(base.blackPepper500),
+        },
+      },
+      '&:focus-visible, &.focus': {
+        [buttonVars.focus.background]: cssVar(base.frenchVanilla100),
+        [buttonVars.focus.border]: cssVar(base.frenchVanilla100),
+        [buttonVars.focus.boxShadowInner]: cssVar(base.blackPepper500),
+        [buttonVars.focus.boxShadowOuter]: cssVar(base.frenchVanilla100),
+        [buttonVars.focus.color]: cssVar(base.blackPepper500),
+        '& span .wd-icon-fill': {
+          [buttonVars.focus.icon]: cssVar(base.blackPepper500),
+        },
+      },
+      '&:active, &.active': {
+        [buttonVars.active.background]: cssVar(base.soap400),
+        [buttonVars.active.border]: cssVar(base.soap400),
+        [buttonVars.active.color]: cssVar(base.blackPepper500),
+        '& span .wd-icon-fill': {
+          [buttonVars.active.icon]: cssVar(base.blackPepper500),
+        },
+      },
+      '& span .wd-icon-fill': {
+        [buttonVars.default.icon]: cssVar(base.frenchVanilla100),
+      },
+      '&:disabled, &:active:disabled, &:focus:disabled, &:hover:disabled': {
+        [buttonVars.disabled.background]: 'transparent',
+        [buttonVars.disabled.border]: cssVar(base.frenchVanilla100),
+        [buttonVars.disabled.color]: cssVar(base.frenchVanilla100),
+        '& span .wd-icon-fill': {
+          [buttonVars.disabled.icon]: cssVar(base.frenchVanilla100),
+        },
+      },
+    }),
+  },
+});
+
 export const SecondaryButton = createComponent('button')({
   displayName: 'SecondaryButton',
   Component: (
     {
-      size = 'medium',
-      iconPosition = 'start',
-      variant,
-      icon,
-      shouldMirrorIcon = false,
       children,
+      icon,
+      iconPosition = children ? undefined : 'only',
+      variant,
       ...elemProps
     }: SecondaryButtonProps,
     ref,
     Element
   ) => {
-    const theme = useTheme();
-
     return (
-      <BaseButton
-        ref={ref}
-        size={size}
-        colors={getSecondaryButtonColors(variant, theme)}
-        padding={getPaddingStyles(children, size, icon, iconPosition)}
-        minWidth={getMinWidthStyles(children, size)}
+      <Button
         as={Element}
+        ref={ref}
+        icon={icon}
+        iconPosition={iconPosition}
+        cs={[
+          secondaryStyles,
+          secondaryButtonModifiers({iconPosition: iconPosition, variant: variant}),
+        ]}
         {...elemProps}
       >
-        {icon && iconPosition === 'start' && (
-          <BaseButton.Icon
-            size={size}
-            iconPosition={iconPosition}
-            icon={icon}
-            shouldMirrorIcon={shouldMirrorIcon}
-          />
-        )}
-        {children && <BaseButton.Label>{children}</BaseButton.Label>}
-        {icon && iconPosition === 'end' && (
-          <BaseButton.Icon
-            size={size}
-            iconPosition={iconPosition}
-            icon={icon}
-            shouldMirrorIcon={shouldMirrorIcon}
-          />
-        )}
-      </BaseButton>
+        {children}
+      </Button>
     );
   },
 });
-
-export const getSecondaryButtonColors = (
-  variant: 'inverse' | undefined,
-  theme: EmotionCanvasTheme
-): ButtonColors => {
-  const {
-    canvas: {
-      palette: {primary: themePrimary},
-    },
-  } = theme;
-
-  switch (variant) {
-    case undefined:
-    default:
-      return {
-        default: {
-          background: 'transparent',
-          border: colors.blackPepper400,
-          icon: colors.blackPepper400,
-          label: colors.blackPepper400,
-        },
-        hover: {
-          background: colors.blackPepper400,
-          border: colors.blackPepper400,
-          icon: themePrimary.contrast,
-          label: themePrimary.contrast,
-        },
-        active: {
-          background: colors.blackPepper500,
-          border: colors.blackPepper500,
-          icon: themePrimary.contrast,
-          label: themePrimary.contrast,
-        },
-        focus: {
-          border: colors.blackPepper400,
-          icon: colors.blackPepper400,
-          label: colors.blackPepper400,
-        },
-        // Identical to 'default' styles. ButtonContainer will set opacity to 40%
-        disabled: {
-          background: 'transparent',
-          border: colors.blackPepper400,
-          icon: colors.blackPepper400,
-          label: colors.blackPepper400,
-        },
-      };
-    case 'inverse':
-      return {
-        default: {
-          background: 'transparent',
-          border: colors.frenchVanilla100,
-          icon: colors.frenchVanilla100,
-          label: colors.frenchVanilla100,
-        },
-        hover: {
-          background: colors.soap300,
-          border: colors.soap300,
-          icon: colors.blackPepper500,
-          label: colors.blackPepper500,
-        },
-        active: {
-          background: colors.soap400,
-          border: colors.soap400,
-          icon: colors.blackPepper500,
-          label: colors.blackPepper500,
-        },
-        focus: {
-          background: colors.frenchVanilla100,
-          icon: colors.blackPepper500,
-          label: colors.blackPepper500,
-          focusRing: focusRing(
-            {
-              separation: 2,
-              innerColor: 'currentColor',
-              outerColor: colors.frenchVanilla100,
-            },
-            theme
-          ),
-        },
-        // Identical to inverse 'default' styles. ButtonContainer will set opacity to 40%
-        disabled: {
-          background: 'transparent',
-          border: colors.frenchVanilla100,
-          icon: colors.frenchVanilla100,
-          label: colors.frenchVanilla100,
-        },
-      };
-  }
-};

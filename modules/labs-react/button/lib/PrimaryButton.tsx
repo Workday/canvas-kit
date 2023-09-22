@@ -117,6 +117,7 @@ export const PrimaryButton = createComponent('button')({
       icon,
       iconPosition = children ? undefined : 'only',
       variant,
+      size,
       ...elemProps
     }: PrimaryButtonProps,
     ref,
@@ -126,6 +127,7 @@ export const PrimaryButton = createComponent('button')({
       <Button
         as={Element}
         ref={ref}
+        size={size}
         icon={icon}
         iconPosition={iconPosition}
         cs={[primaryStyles, primaryButtonModifiers({iconPosition: iconPosition, variant: variant})]}

@@ -1,27 +1,24 @@
 import * as React from 'react';
 
-import {ButtonLabelIcon} from './parts/ButtonLabelIcon';
-import {ButtonLabel} from './parts/ButtonLabel';
+import {ButtonLabelIcon} from '../lib/parts/ButtonLabelIcon';
+import {ButtonLabel} from '../lib/parts/ButtonLabel';
 
 import {
   createComponent,
   GrowthBehavior,
-  mouseFocusBehavior,
-  focusRing,
-  styled,
-  EmotionCanvasTheme,
-  StyledType,
+  cs,
+  createVars,
+  cssVar,
+  createModifiers,
 } from '@workday/canvas-kit-react/common';
 import {SystemIconProps} from '@workday/canvas-kit-react/icon';
-import {boxStyleFn} from '@workday/canvas-kit-react/layout';
-import {borderRadius, space, spaceNumbers, type} from '@workday/canvas-kit-react/tokens';
+import {Box} from '@workday/canvas-kit-react/layout';
+import {space, spaceNumbers} from '@workday/canvas-kit-react/tokens';
 
-import {ButtonColors, ButtonSizes, IconPositions, TertiaryButtonSizes} from './types';
-
-import {CSSObject} from '@emotion/styled';
+import {ButtonColors, ButtonSizes, IconPositions} from './types';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 
-export interface ButtonContainerProps extends Partial<SystemIconProps>, GrowthBehavior {
+export interface BaseButtonContainerProps extends Partial<SystemIconProps>, GrowthBehavior {
   /**
    * Override default colors of a button. The default will depend on the button type
    */
@@ -29,276 +26,292 @@ export interface ButtonContainerProps extends Partial<SystemIconProps>, GrowthBe
   /**
    * There are four button sizes: `extraSmall`, `small`, `medium`, and `large`.
    * If no size is provided, it will default to `medium`.
+   *
+   * @default 'medium
    */
   size?: ButtonSizes;
   /**
-   * Whether the icon should received filled (colored background layer) or regular styles.
-   * Corresponds to `toggled` in ToolbarIconButton
+   * The icon of the Button.
+   * Note: not displayed at `small` size
    */
-  fillIcon?: boolean;
+  icon?: CanvasSystemIcon;
+  /**
+   * Button icon positions can either be `start` or `end`.
+   * If no value is provided, it defaults to `start`.
+   *
+   * @default 'start'
+   */
+  iconPosition?: IconPositions;
+  /**
+   * If set to `true`, transform the icon's x-axis to mirror the graphic
+   * @default false
+   */
+  shouldMirrorIcon?: boolean;
+  children?: React.ReactNode;
 }
 
 /**
- * Extends all the style properties from Box to our buttons as well as props from ButtonContainerProps.
+ * Extends all the style properties from Box to our buttons as well as props from BaseButtonContainerProps.
  * We omit `ref` since all of our buttons use `createComponent` and already give access to `ref`.
  * Use this type to extend and customize any one off buttons that you want full control over styling.
  */
-export interface BaseButtonProps extends Omit<ButtonContainerProps, 'ref'> {}
+export interface BaseButtonProps extends Omit<BaseButtonContainerProps, 'ref'> {}
 
-function getIconColorSelectors(
-  {
-    canvas: {
-      palette: {primary: themePrimary},
-    },
-  }: EmotionCanvasTheme,
-  color: string,
-  fill?: boolean
-): CSSObject {
-  return {
-    '&:focus span, &:hover span, & span': {
-      '.wd-icon-fill, .wd-icon-accent, .wd-icon-accent2': {
-        fill: color,
-      },
-      '.wd-icon-background': {
-        fill: fill ? color : undefined,
-      },
-      '.wd-icon-background ~ .wd-icon-accent, .wd-icon-background ~ .wd-icon-accent2': {
-        fill: fill
-          ? color === themePrimary.contrast
-            ? themePrimary.main
-            : themePrimary.contrast
-          : color,
-      },
-    },
-  };
-}
+export const buttonVars = {
+  default: createVars(
+    'background',
+    'border',
+    'boxShadowInner',
+    'boxShadowOuter',
+    'icon',
+    'iconFill',
+    'color',
+    'opacity',
+    'borderRadius'
+  ),
+  hover: createVars(
+    'background',
+    'border',
+    'boxShadowInner',
+    'boxShadowOuter',
+    'icon',
+    'iconFill',
+    'color',
+    'opacity',
+    'borderRadius'
+  ),
+  active: createVars(
+    'background',
+    'border',
+    'boxShadowInner',
+    'boxShadowOuter',
+    'icon',
+    'iconFill',
+    'color',
+    'opacity',
+    'borderRadius'
+  ),
+  focus: createVars(
+    'background',
+    'border',
+    'boxShadowInner',
+    'boxShadowOuter',
+    'icon',
+    'iconFill',
+    'color',
+    'opacity',
+    'borderRadius'
+  ),
+  disabled: createVars(
+    'background',
+    'border',
+    'boxShadowInner',
+    'boxShadowOuter',
+    'icon',
+    'iconFill',
+    'color',
+    'opacity',
+    'borderRadius'
+  ),
+};
 
-const ButtonContainer = styled('button')<StyledType & ButtonContainerProps>(
-  {
-    ...type.levels.subtext.large,
-    cursor: 'pointer',
-    display: 'inline-flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    boxSizing: 'border-box',
+const baseButtonStyles = cs({
+  fontFamily: '"Roboto", "Helvetica Neue", "Helvetica", Arial, sans-serif',
+  fontSize: '0.875rem',
+  lineHeight: '1.25rem',
+  letterSpacing: '0.015rem',
+  fontWeight: 'bold',
+  backgroundColor: cssVar(buttonVars.default.background),
+  color: cssVar(buttonVars.default.color),
+  border: '1px solid transparent',
+  borderColor: cssVar(buttonVars.default.border),
+  maxWidth: 'min-content',
+  minWidth: '96px',
+  cursor: 'pointer',
+  display: 'inline-flex',
+  gap: space.xxs,
+  alignItems: 'center',
+  justifyContent: 'center',
+  boxSizing: 'border-box',
+  boxShadow: 'none',
+  outline: '2px transparent',
+  paddingInline: space.m,
+  whiteSpace: 'nowrap',
+  WebkitFontSmoothing: 'antialiased',
+  MozOsxFontSmoothing: 'grayscale',
+  borderRadius: cssVar(buttonVars.default.borderRadius),
+  position: 'relative',
+  verticalAlign: 'middle',
+  overflow: 'hidden',
+  transition:
+    'box-shadow 120ms linear, border 120ms linear, background-color 120ms linear, color 120ms linear',
+  '&:disabled, &:disabled:active': {
+    cursor: 'default',
     boxShadow: 'none',
-    outline: 'none',
-    fontWeight: type.properties.fontWeights.bold,
-    lineHeight: 'normal',
-    whiteSpace: 'nowrap',
-    WebkitFontSmoothing: 'antialiased',
-    MozOsxFontSmoothing: 'grayscale',
-    borderRadius: borderRadius.circle,
-    position: 'relative',
-    verticalAlign: 'middle',
-    overflow: 'hidden',
-    border: '1px solid transparent',
-    background: 'transparent',
-    transition:
-      'box-shadow 120ms linear, border 120ms linear, background-color 120ms linear, color 120ms linear',
-    '&:disabled, &:disabled:active': {
-      cursor: 'default',
-      boxShadow: 'none',
-      opacity: 0.4,
-    },
-
-    '&:hover:active': {transitionDuration: '40ms'},
-
-    '& > *:first-of-type': {
-      marginLeft: '0',
-    },
-
-    '& > *:last-of-type': {
-      marginRight: 0,
+    opacity: 0.4,
+  },
+  '&:focus-visible, &.focus': {
+    backgroundColor: cssVar(buttonVars.focus.background),
+    borderColor: cssVar(buttonVars.focus.border),
+    boxShadow: `${cssVar(buttonVars.focus.boxShadowInner)} 0px 0px 0px 2px, ${cssVar(
+      buttonVars.focus.boxShadowOuter
+    )} 0px 0px 0px 4px`,
+    color: cssVar(buttonVars.focus.color),
+    '& span .wd-icon-fill': {
+      fill: cssVar(buttonVars.focus.icon),
     },
   },
-  ({size}) => {
-    switch (size) {
-      case 'large':
-        return {
-          ...type.levels.body.small,
-          fontWeight: type.properties.fontWeights.bold,
-          height: '48px',
-          '& > * ': {
-            margin: `0 ${space.xxxs}`,
-          },
-        };
-      case 'medium':
-      default:
-        return {
-          height: space.xl,
-          '& > * ': {
-            margin: `0 ${space.xxxs}`,
-          },
-        };
-      case 'small':
-        return {
-          height: space.l,
-          '& > * ': {
-            margin: `0 ${spaceNumbers.xxxs / 2}rem`,
-          },
-        };
-      case 'extraSmall':
-        return {
-          ...type.levels.subtext.medium,
-          fontWeight: type.properties.fontWeights.bold,
-          height: space.m,
-          '& > * ': {
-            margin: `0 ${spaceNumbers.xxxs / 2}rem`,
-          },
-        };
-    }
+  '& span .wd-icon-fill': {
+    transitionDuration: '40ms',
+    fill: cssVar(buttonVars.default.icon),
   },
-  ({grow}) => grow && {width: '100%', maxWidth: '100%'},
-  ({colors, fillIcon, theme}) => {
-    if (!colors) {
-      return;
-    }
-
-    const baseStyles = {
-      ...(colors.default.icon && {
-        '.wd-icon-fill, .wd-icon-accent, .wd-icon-accent2, .wd-icon-background': {
-          transition: 'fill 120ms ease-in',
-        },
-        ...getIconColorSelectors(theme, colors.default.icon, fillIcon),
-      }),
-      backgroundColor: colors.default.background,
-      borderColor: colors.default.border,
-      color: colors.default.label,
-    };
-
-    const hoverStyles = {
-      '&:hover': {
-        ...(colors.hover.icon && getIconColorSelectors(theme, colors.hover.icon, fillIcon)),
-        backgroundColor: colors.hover.background,
-        borderColor: colors.hover.border,
-        color: colors.hover.label,
-      },
-    };
-
-    const activeStyles = {
-      '&:active, &:focus:active, &:hover:active': {
-        ...(colors.active.icon && getIconColorSelectors(theme, colors.active.icon, fillIcon)),
-        backgroundColor: colors.active.background,
-        borderColor: colors.active.border,
-        color: colors.active.label,
-      },
-    };
-
-    return {
-      ...baseStyles,
-      '&:focus': {
-        ...(colors.focus.focusRing || focusRing({separation: 2}, theme)),
-        ...(colors.focus.icon && getIconColorSelectors(theme, colors.focus.icon, fillIcon)),
-        backgroundColor: colors.focus.background,
-        borderColor: colors.focus.border,
-        color: colors.focus.label,
-      },
-
-      ...activeStyles,
-      ...hoverStyles,
-      '&:disabled, &:active:disabled, &:focus:disabled, &:hover:disabled': {
-        ...(colors.disabled.icon && getIconColorSelectors(theme, colors.disabled.icon, fillIcon)),
-        backgroundColor: colors.disabled.background,
-        borderColor: colors.disabled.border,
-        color: colors.disabled.label,
-        opacity: colors.disabled.opacity,
-      },
-      ...mouseFocusBehavior({
-        '&:focus': {
-          ...baseStyles,
-          ...hoverStyles,
-          ...activeStyles,
-          outline: 'none',
-          boxShadow: 'none',
-          animation: 'none',
-        },
-      }),
-    };
+  '&:hover, &.hover': {
+    backgroundColor: cssVar(buttonVars.hover.background),
+    borderColor: cssVar(buttonVars.hover.border),
+    color: cssVar(buttonVars.hover.color),
+    '& span .wd-icon-fill': {
+      fill: cssVar(buttonVars.hover.icon),
+    },
   },
-  boxStyleFn
-);
+  '&:hover:active': {transitionDuration: '40ms'},
+  '&:active, &.active': {
+    backgroundColor: cssVar(buttonVars.active.background),
+    borderColor: cssVar(buttonVars.active.border),
+    color: cssVar(buttonVars.active.color),
+    '& span .wd-icon-fill': {
+      fill: cssVar(buttonVars.active.icon),
+    },
+  },
+  '&:disabled, &:active:disabled, &:focus:disabled, &:hover:disabled': {
+    backgroundColor: cssVar(buttonVars.disabled.background),
+    borderColor: cssVar(buttonVars.disabled.border),
+    color: cssVar(buttonVars.disabled.color),
+    '& span .wd-icon-fill': {
+      fill: cssVar(buttonVars.disabled.icon),
+    },
+  },
+});
 
-export const getMinWidthStyles = (
-  children: React.ReactNode,
-  size: ButtonSizes | TertiaryButtonSizes
-) => {
-  switch (size) {
-    case 'large':
-      return children ? '112px' : '48px';
-    case 'medium':
-      return children ? '96px' : space.xl;
-    case 'small':
-      return children ? space.xxxl : space.l;
-    case 'extraSmall':
-      return children ? 'auto' : space.m;
-    default:
-      return children ? '96px' : space.xl;
-  }
-};
-
-export const getPaddingStyles = (
-  children: React.ReactNode,
-  size: ButtonSizes | TertiaryButtonSizes,
-  icon: CanvasSystemIcon | undefined,
-  iconPosition: IconPositions | undefined
-) => {
-  // In order to calculate the correct padding, we need to know its children
-  // and what side the icon is on and if there's an icon provided
-  if (!children) {
-    // icon buttons do not have any padding
-    return 0;
-  }
-  // If there are children AND an icon
-  // 1. We check what side the icon is in
-  // 2. Adjust padding to visually center the icon and text
-  // If there is children (most likely just text)
-  // 1. We keep the padding the same on both side
-  switch (size) {
-    case 'large':
-      return icon
-        ? iconPosition === 'start'
-          ? `0 ${space.l} 0 ${space.m}`
-          : `0 ${space.m} 0 ${space.l}`
-        : `0 ${space.l}`;
-
-    case 'medium':
-      return icon
-        ? iconPosition === 'start'
-          ? `0 ${space.m} 0 20px`
-          : `0 20px 0 ${space.m}`
-        : `0 ${space.m}`;
-
-    case 'small':
-      return icon
-        ? iconPosition === 'start'
-          ? `0 ${space.s} 0 ${space.xs}`
-          : `0 ${space.xs} 0 ${space.s}`
-        : `0 ${space.s}`;
-
-    case 'extraSmall':
-      return icon
-        ? iconPosition === 'start'
-          ? `0 ${space.xs} 0 ${space.xxs}`
-          : `0 ${space.xxs} 0 ${space.xs}`
-        : `0 ${space.xs}`;
-
-    default:
-      return icon
-        ? iconPosition === 'start'
-          ? `0 ${space.m} 0 20px`
-          : `0 20px 0 ${space.m}`
-        : `0 ${space.m}`;
-  }
-};
+export const SizeModifiers = createModifiers({
+  size: {
+    large: cs({
+      fontSize: space.s,
+      lineHeight: space.m,
+      letterSpacing: '0.01rem',
+      height: '48px',
+      paddingInline: space.l,
+      minWidth: '112px',
+      '&.canvas-button-icon-only': {
+        padding: '0',
+        minWidth: `${spaceNumbers.xl + spaceNumbers.xxs}rem`,
+      },
+      '&.canvas-button-icon-start': {
+        paddingInlineStart: space.m,
+        paddingInlineEnd: space.l,
+      },
+      '&.canvas-button-icon-end': {
+        paddingInlineStart: space.l,
+        paddingInlineEnd: space.m,
+      },
+    }),
+    medium: cs({
+      fontSize: '0.875rem',
+      lineHeight: '1.25rem',
+      letterSpacing: '0.015rem',
+      height: space.xl,
+      '&.canvas-button-icon-only': {
+        padding: '0',
+        minWidth: space.xl,
+      },
+      '&.canvas-button-icon-start': {
+        paddingInlineStart: `${spaceNumbers.xl / 2}rem`,
+        paddingInlineEnd: space.m,
+      },
+      '&.canvas-button-icon-end': {
+        paddingInlineStart: space.m,
+        paddingInlineEnd: `${spaceNumbers.xl / 2}rem`,
+      },
+    }),
+    small: cs({
+      fontSize: '0.875rem',
+      lineHeight: '1.25rem',
+      letterSpacing: '0.015rem',
+      height: space.l,
+      minWidth: space.xxxl,
+      paddingInline: space.s,
+      gap: space.xxxs,
+      '&.canvas-button-icon-only': {
+        padding: '0',
+        minWidth: space.l,
+      },
+      '&.canvas-button-icon-start': {
+        paddingInlineStart: space.xs,
+        paddingInlineEnd: space.s,
+      },
+      '&.canvas-button-icon-end': {
+        paddingInlineStart: space.s,
+        paddingInlineEnd: space.xs,
+      },
+    }),
+    extraSmall: cs({
+      fontSize: '0.75rem',
+      lineHeight: space.s,
+      letterSpacing: '0.02rem',
+      height: space.m,
+      minWidth: 'auto',
+      paddingInline: space.xs,
+      gap: space.xxxs,
+      '&.canvas-button-icon-only': {
+        padding: '0',
+        minWidth: space.m,
+      },
+      '&.canvas-button-icon-start': {
+        paddingInlineStart: space.xxs,
+        paddingInlineEnd: space.xs,
+      },
+      '&.canvas-button-icon-end': {
+        paddingInlineStart: space.xs,
+        paddingInlineEnd: space.xxs,
+      },
+    }),
+  },
+});
 
 export const BaseButton = createComponent('button')({
-  displayName: 'Button',
-  Component: ({children, ...elemProps}: ButtonContainerProps, ref, Element) => {
+  displayName: 'BaseButton',
+  Component: (
+    {
+      children,
+      cs,
+      size = 'medium',
+      iconPosition = 'start',
+      icon,
+      colors,
+      shouldMirrorIcon = false,
+      ...elemProps
+    }: BaseButtonContainerProps,
+    ref,
+    Element
+  ) => {
     return (
-      <ButtonContainer as={Element} ref={ref} type="button" {...elemProps}>
+      <Box
+        as={Element}
+        ref={ref}
+        type="button"
+        cs={[
+          baseButtonStyles,
+          cs,
+          SizeModifiers({size: size}),
+          buttonVars.active(colors?.active || {}),
+          buttonVars.default(colors?.default || {}),
+          buttonVars.disabled(colors?.disabled || {}),
+          buttonVars.focus(colors?.focus || {}),
+          buttonVars.hover(colors?.hover || {}),
+        ]}
+        {...elemProps}
+      >
         {children}
-      </ButtonContainer>
+      </Box>
     );
   },
   subComponents: {

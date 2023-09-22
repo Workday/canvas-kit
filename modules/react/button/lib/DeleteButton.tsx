@@ -1,75 +1,59 @@
 import * as React from 'react';
-import {ButtonColors} from './types';
-import {BaseButton, BaseButtonProps, getMinWidthStyles, getPaddingStyles} from './BaseButton';
-import {
-  GrowthBehavior,
-  useTheme,
-  Themeable,
-  EmotionCanvasTheme,
-  createComponent,
-} from '@workday/canvas-kit-react/common';
 
-export interface DeleteButtonProps extends Themeable, GrowthBehavior, BaseButtonProps {
-  /**
-   * The size of the Button.
-   */
-  size?: 'small' | 'medium' | 'large';
-  children?: React.ReactNode;
-}
+import {BaseButton, buttonVars, BaseButtonContainerProps} from './BaseButton';
+import {createComponent, cs, cssVar} from '@workday/canvas-kit-react/common';
+import {base, brand, system} from '@workday/canvas-tokens-web';
 
-const getDeleteButtonColors = ({
-  canvas: {
-    palette: {error: themeError},
+/**
+ * Extends all the style properties from Box to our buttons as well as props from ButtonContainerProps.
+ * We omit `ref` since all of our buttons use `createComponent` and already give access to `ref`.
+ * Use this type to extend and customize any one off buttons that you want full control over styling.
+ */
+export interface DeleteButtonProps extends Omit<BaseButtonContainerProps, 'ref'> {}
+
+const deleteStyles = cs({
+  [buttonVars.default.background]: cssVar(brand.error.base),
+  [buttonVars.default.border]: 'transparent',
+  [buttonVars.default.borderRadius]: cssVar(system.shape.circle),
+  [buttonVars.default.color]: cssVar(brand.error.accent),
+  '&:hover, &.hover': {
+    [buttonVars.hover.background]: cssVar(brand.error.dark),
+    [buttonVars.hover.border]: 'transparent',
+    [buttonVars.hover.color]: cssVar(brand.error.accent),
   },
-}: EmotionCanvasTheme): ButtonColors => ({
-  default: {
-    background: themeError.main,
-    label: themeError.contrast,
+  '&:focus-visible, &.focus': {
+    [buttonVars.focus.background]: cssVar(brand.error.base),
+    [buttonVars.focus.border]: 'transparent',
+    [buttonVars.focus.color]: cssVar(brand.error.accent),
+    [buttonVars.focus.boxShadowInner]: cssVar(base.frenchVanilla100),
+    [buttonVars.focus.boxShadowOuter]: cssVar(brand.common.focusOutline),
   },
-  hover: {
-    background: themeError.dark,
+  '&:active, &.active': {
+    [buttonVars.active.background]: cssVar(brand.error.darkest),
+    [buttonVars.active.border]: 'transparent',
+    [buttonVars.active.color]: cssVar(brand.error.accent),
   },
-  active: {
-    background: themeError.darkest,
-  },
-  focus: {
-    background: themeError.main,
-  },
-  disabled: {
-    background: themeError.light,
-    opacity: '1', // allows for overriding the default opacity of 0.4
+  '&:disabled, &:active:disabled, &:focus:disabled, &:hover:disabled': {
+    [buttonVars.disabled.background]: cssVar(brand.error.light),
+    [buttonVars.disabled.color]: cssVar(brand.error.accent),
+    opacity: 1,
   },
 });
 
-/**
- * Use sparingly for destructive actions that will result in data loss, can’t be undone, or will
- * have significant consequences. They commonly appear in confirmation dialogs as the final
- * confirmation before deleting.
- */
 export const DeleteButton = createComponent('button')({
   displayName: 'DeleteButton',
-  Component: (
-    {
-      // TODO: Fix useTheme and make it a real hook
-      // eslint-disable-next-line react-hooks/rules-of-hooks
-      theme = useTheme(),
-      size = 'medium',
-      children,
-      ...elemProps
-    }: DeleteButtonProps,
-    ref,
-    Element
-  ) => (
-    <BaseButton
-      padding={getPaddingStyles(children, size, undefined, undefined)}
-      minWidth={getMinWidthStyles(children, size)}
-      ref={ref}
-      as={Element}
-      colors={getDeleteButtonColors(theme)}
-      size={size}
-      {...elemProps}
-    >
-      <BaseButton.Label>{children}</BaseButton.Label>
-    </BaseButton>
-  ),
+  Component: ({children, colors, size, ...elemProps}: DeleteButtonProps, ref, Element) => {
+    return (
+      <BaseButton
+        as={Element}
+        ref={ref}
+        type="button"
+        size={size}
+        cs={[deleteStyles]}
+        {...elemProps}
+      >
+        {children}
+      </BaseButton>
+    );
+  },
 });

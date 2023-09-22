@@ -31,11 +31,6 @@ export interface BaseButtonContainerProps extends Partial<SystemIconProps>, Grow
    */
   size?: ButtonSizes;
   /**
-   * Whether the icon should received filled (colored background layer) or regular styles.
-   * Corresponds to `toggled` in ToolbarIconButton
-   */
-  fillIcon?: boolean;
-  /**
    * The icon of the Button.
    * Note: not displayed at `small` size
    */
