@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v9.1.20](https://github.com/Workday/canvas-kit/releases/tag/v9.1.20) (2023-09-20)
+
+### Components
+
+- fix(Avatar): Support for Non-Square Input Image for Avatar component ([#2337](https://github.com/Workday/canvas-kit/pull/2337)) ([@thunguyen19](https://github.com/thunguyen19), [@mannycarrera4](https://github.com/mannycarrera4))
+
+
+## [v8.6.22](https://github.com/Workday/canvas-kit/releases/tag/v8.6.22) (2023-09-20)
+
+### Components
+
+- fix(Avatar): Support for Non-Square Input Image for Avatar component ([#2337](https://github.com/Workday/canvas-kit/pull/2337)) ([@thunguyen19](https://github.com/thunguyen19), [@mannycarrera4](https://github.com/mannycarrera4))
+## [v9.1.19](https://github.com/Workday/canvas-kit/releases/tag/v9.1.19) (2023-09-18)
+
+### Documentation
+
+- docs: Render type parameters in external SymbolDoc symbols ([#2340](https://github.com/Workday/canvas-kit/pull/2340)) ([@NicholasBoll](https://github.com/NicholasBoll))
+
+### Infrastructure
+
+- ci: Remove non-collaborator from reviewer lottery ([@NicholasBoll](https://github.com/NicholasBoll))
+
+
+## [v8.6.21](https://github.com/Workday/canvas-kit/releases/tag/v8.6.21) (2023-09-18)
+
+### Documentation
+
+- docs: Render type parameters in external SymbolDoc symbols ([#2340](https://github.com/Workday/canvas-kit/pull/2340)) ([@NicholasBoll](https://github.com/NicholasBoll))
 ## [v9.1.18](https://github.com/Workday/canvas-kit/releases/tag/v9.1.18) (2023-09-06)
 
 ### Components
