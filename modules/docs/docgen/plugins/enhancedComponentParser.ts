@@ -156,7 +156,7 @@ export const enhancedComponentParser = createParserPlugin<SupportedValues>((node
    * Filter out props from `@types/react`
    */
   if (t.isPropertySignature(node)) {
-    const symbol = getSymbolFromNode(parser.checker, node);
+    const symbol = getSymbolFromNode(parser, node);
     const declaration = getValueDeclaration(symbol);
     if (declaration && declaration.getSourceFile().fileName.includes('@types/react')) {
       return {kind: 'unknown', value: 'unknown', text: 'empty'};
@@ -638,7 +638,7 @@ function getElemPropsHook(
     ) {
       // Check if the elemProps is aliased to another hook
       // for example, `const useMyComponent = useMyOtherComponent`
-      const symbol = getSymbolFromNode(parser.checker, subComponentProperty.initializer);
+      const symbol = getSymbolFromNode(parser, subComponentProperty.initializer);
       const declaration = getValueDeclaration(symbol);
       if (
         declaration &&
@@ -676,10 +676,10 @@ function getSubcomponents(
             t.isIdentifier(p.name) &&
             t.isIdentifier(p.initializer)
           ) {
-            const symbol = getSymbolFromNode(parser.checker, p.name);
+            const symbol = getSymbolFromNode(parser, p.name);
             const jsDoc = findDocComment(parser.checker, symbol);
 
-            const initializerSymbol = getSymbolFromNode(parser.checker, p.initializer);
+            const initializerSymbol = getSymbolFromNode(parser, p.initializer);
 
             // Make sure the symbol exists AND the symbol has an alias
             if (initializerSymbol && initializerSymbol.flags & ts.SymbolFlags.Alias) {
@@ -697,7 +697,7 @@ function getSubcomponents(
             };
           }
           if (t.isShorthandPropertyAssignment(p) && t.isIdentifier(p.name)) {
-            const symbol = getSymbolFromNode(parser.checker, p.name);
+            const symbol = getSymbolFromNode(parser, p.name);
             const jsDoc = findDocComment(parser.checker, symbol);
             return {
               name: p.name.text,
