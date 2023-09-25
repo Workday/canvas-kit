@@ -12,12 +12,7 @@ import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {SystemIcon, SystemIconProps} from '@workday/canvas-kit-react/icon';
 
 /**
- * ### Deprecated Menu Item Props
- *
- * As of Canvas Kit v8, Menu is being deprecated.
- * It will be removed in v10. Please see the
- * [upgrade guide](https://workday.github.io/canvas-kit/?path=/story/welcome-upgrade-guides-v8-0--page)
- * for more information.
+ * @deprecated ⚠️ `DeprecatedMenuItemProps` has been deprecated and will be removed in a future major version. Please use [Menu in Main](https://workday.github.io/canvas-kit/?path=/docs/components-popups-menu--basic) instead.
  */
 export interface DeprecatedMenuItemProps extends React.LiHTMLAttributes<HTMLLIElement> {
   /**
@@ -264,7 +259,7 @@ const scrollIntoViewIfNeeded = (elem: HTMLElement, centerIfNeeded = true): void 
  *
  * Undocumented props are spread to the underlying `<li>` element.
  *
- * @deprecated ⚠️ `DeprecatedMenuItem` has been deprecated and will be removed in a future major version. Please see the [Upgrade Guide](https://workday.github.io/canvas-kit/?path=/story/welcome-upgrade-guides-v8-0--page) for more information.
+ * @deprecated ⚠️ `DeprecatedMenuItem` has been deprecated and will be removed in a future major version. Please use [Menu in Main](https://workday.github.io/canvas-kit/?path=/docs/components-popups-menu--basic) instead.
  *
  */
 export class DeprecatedMenuItem extends React.Component<DeprecatedMenuItemProps> {
