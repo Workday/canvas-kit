@@ -29,6 +29,8 @@ Kit!
   - [Add a New Codemod](#add-a-new-codemod)
 - [Deprecations](#deprecations)
 	- [How To Deprecate](#how-to-deprecate)
+	- [With No Existing JSDoc Block](#with-no-existing-jsdoc-block)
+	- [With Existing JSDoc Block](#with-existing-jsdoc-block)
 
 ## Branches
 
@@ -124,7 +126,6 @@ The
 are initiated automatically when a commit is merged to `prerelease/minor` or `prerelease/major`. For
 a more in-depth review of the workflow,
 [view the source code](https://github.com/Workday/canvas-kit/blob/master/.github/workflows/release-minor.yml).
-
 
 ## Releases
 
@@ -395,11 +396,19 @@ utility or component that is more stable.
 
 When deprecating a component or utility use the following pattern:
 
+#### With No Existing JSDoc Block
+
 ```tsx
 /**
- * ### ⚠️ ${ComponentName/Utility} has been deprecated. Optionally give a reason as to why. ⚠️
- * - Please consider using [`${OtherComponent/Utility}`](insert link to  documentation) in ${packageName}.
- * @deprecated
+ * @deprecated ⚠️ ${ComponentName/Utility} has been deprecated. ${Provide an explanation and/or alternative}.
+ */
+```
+
+#### With an Existing JSDoc Block
+
+```tsx
+/** ${Existing JSDOC code block for Component/Utility}
+ * @deprecated ⚠️ ${ComponentName/Utility} has been deprecated. ${Provide an explanation and/or alternative}.
  */
 ```
 
