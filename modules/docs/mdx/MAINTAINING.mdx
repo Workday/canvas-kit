@@ -405,8 +405,9 @@ The provided migration strategy can take on any form as long as it gives the con
 once the deprecated code is removed.
 
 For example, we'll deprecate a component in our Main package before replacing it with an updated
-version of the component in our Preview or Labs packages. Note the optional Storybook link to the
-updated component.
+version of the component in our Preview or Labs packages. Note the inclusion of package names
+(Main/Preview/Labs) for disambiguation as well as the optional Storybook link to the updated
+component.
 
 ```tsx
 /**
