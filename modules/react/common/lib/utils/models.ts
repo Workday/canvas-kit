@@ -2,7 +2,7 @@
 import React from 'react';
 
 /**
- * @deprecated ⚠️ `Model` type has been deprecated and will be removed in a future major version. The returned model is now inferred from `createModelHook`
+ * @deprecated ⚠️ `Model` has been deprecated and will be removed in a future major version. The returned model is now inferred from `createModelHook`.
  */
 export type Model<State, Events extends IEvent> = {
   state: State;
