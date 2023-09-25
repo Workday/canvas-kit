@@ -905,6 +905,21 @@ describe('docParser', () => {
       expect(docs).toHaveProperty('0.type.value.value', 'foo');
     });
 
+    it('should consider non-exported types that are recursive as symbols to prevent JavaScript call stack overflows', () => {
+      const program = createProgramFromSource(`
+        export type Bar = Foo
+        type Foo = {
+          foo: Foo
+        };
+      `);
+      const docs = parse(program, 'test.ts'); //?
+
+      expect(docs).toHaveProperty('0.name', 'Bar');
+      expect(docs).toHaveProperty('0.type.kind', 'type');
+      expect(docs).toHaveProperty('0.type.value.kind', 'symbol');
+      expect(docs).toHaveProperty('0.type.value.value', 'Foo');
+    });
+
     it('should handle functions with required parameters', () => {
       const program = createProgramFromSource(`
         export function myFoo(input: string): boolean {
