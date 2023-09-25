@@ -18,7 +18,7 @@ const getConvertedStyles = (
 };
 
 /**
- * @deprecated Now that IE11 is no longer supported, we encourage consumers to use [CSS logical properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Logical_Properties)
+ * @deprecated ⚠️ `useThemeRTL` has been deprecated. Now that IE11 is no longer supported, we encourage consumers to use [CSS logical properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Logical_Properties)
  *
  *
  * A helpful hook for supporting bidirectional styles.

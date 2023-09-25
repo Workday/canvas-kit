@@ -78,7 +78,7 @@ const List = styled('ul')({
 });
 
 /**
- * As of Canvas Kit v8, Menu is being deprecated.
+ * @deprecated ⚠️ `DeprecatedMenu` has been deprecated. As of Canvas Kit v8, `Menu` is being deprecated.
  * It will be removed in v10. Please see the [upgrade
  * guide](https://workday.github.io/canvas-kit/?path=/story/welcome-upgrade-guides-v8-0--page) for
  * more information.
@@ -90,7 +90,6 @@ const List = styled('ul')({
  *
  * Undocumented props are spread to the underlying `<ul>` element.
  *
- * @deprecated
  */
 export class DeprecatedMenu extends React.Component<DeprecatedMenuProps, DeprecatedMenuState> {
   private id = generateUniqueId();

@@ -112,7 +112,7 @@ export const Tabs = createContainer()({
      */
     OverflowButton: TabsOverflowButton,
     /**
-     * @deprecated Use `Tabs.Menu.Popper` instead
+     * @deprecated ⚠️ `MenuPopper` has been deprecated. Please use `Tabs.Menu.Popper` instead.
      */
     MenuPopper: TabsMenuPopper,
     /**

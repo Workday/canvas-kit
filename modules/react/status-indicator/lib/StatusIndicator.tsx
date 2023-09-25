@@ -6,9 +6,7 @@ import {borderRadius, colors, type, space, CSSProperties} from '@workday/canvas-
 import styled from '@emotion/styled';
 
 /**
- * ### ⚠️ Status Indicator has been deprecated and will be removed in v11 ⚠️
- * - Please consider using [`Status Indicator`](https://workday.github.io/canvas-kit/?path=/docs/preview-status-indicator--basic) in preview
- * @deprecated
+ * @deprecated ⚠️ Status Indicator has been deprecated and will be removed in a future major version. Please consider using [`Status Indicator`](https://workday.github.io/canvas-kit/?path=/docs/preview-status-indicator--basic) in preview
  */
 export enum StatusIndicatorType {
   Gray = 'gray',
@@ -20,9 +18,7 @@ export enum StatusIndicatorType {
 }
 
 /**
- * ### ⚠️ Status Indicator has been deprecated and will be removed in v11 ⚠️
- * - Please consider using [`Status Indicator`](https://workday.github.io/canvas-kit/?path=/docs/preview-status-indicator--basic) in preview
- * @deprecated
+ * @deprecated ⚠️ Status Indicator has been deprecated and will be removed in a future major version. Please consider using [`Status Indicator`](https://workday.github.io/canvas-kit/?path=/docs/preview-status-indicator--basic) in preview
  */
 export enum StatusIndicatorEmphasis {
   High = 'high',
@@ -30,9 +26,7 @@ export enum StatusIndicatorEmphasis {
 }
 
 /**
- * ### ⚠️ Status Indicator has been deprecated and will be removed in v11 ⚠️
- * - Please consider using [`Status Indicator`](https://workday.github.io/canvas-kit/?path=/docs/preview-status-indicator--basic) in preview
- * @deprecated
+ * @deprecated ⚠️ Status Indicator has been deprecated and will be removed in a future major version. Please consider using [`Status Indicator`](https://workday.github.io/canvas-kit/?path=/docs/preview-status-indicator--basic) in preview
  */
 export interface StatusIndicatorGenericStyle extends GenericStyle {
   styles: CSSProperties;
@@ -44,9 +38,7 @@ export interface StatusIndicatorGenericStyle extends GenericStyle {
 }
 
 /**
- * ### ⚠️ Status Indicator has been deprecated and will be removed in v11 ⚠️
- * - Please consider using [`Status Indicator`](https://workday.github.io/canvas-kit/?path=/docs/preview-status-indicator--basic) in preview
- * @deprecated
+ * @deprecated ⚠️ Status Indicator has been deprecated and will be removed in a future major version. Please consider using [`Status Indicator`](https://workday.github.io/canvas-kit/?path=/docs/preview-status-indicator--basic) in preview
  */
 export const statusIndicatorStyles: StatusIndicatorGenericStyle = {
   classname: 'status-indicator',
@@ -126,9 +118,7 @@ export const statusIndicatorStyles: StatusIndicatorGenericStyle = {
 };
 
 /**
- * ### ⚠️ Status Indicator has been deprecated and will be removed in v11 ⚠️
- * - Please consider using [`Status Indicator`](https://workday.github.io/canvas-kit/?path=/docs/preview-status-indicator--basic) in preview
- * @deprecated
+ * @deprecated ⚠️ Status Indicator has been deprecated and will be removed in a future major version. Please consider using [`Status Indicator`](https://workday.github.io/canvas-kit/?path=/docs/preview-status-indicator--basic) in preview
  */
 export interface StatusIndicatorProps extends React.HTMLAttributes<HTMLSpanElement> {
   /**
@@ -172,9 +162,7 @@ const StatusLabel = styled('span')({
 });
 
 /**
- * ### ⚠️ Status Indicator has been deprecated and will be removed in v11 ⚠️
- * - Please consider using [`Status Indicator`](https://workday.github.io/canvas-kit/?path=/docs/preview-status-indicator--basic) in preview
- * @deprecated
+ * @deprecated ⚠️ Status Indicator has been deprecated and will be removed in a future major version. Please consider using [`Status Indicator`](https://workday.github.io/canvas-kit/?path=/docs/preview-status-indicator--basic) in preview
  */
 export class StatusIndicator extends React.Component<StatusIndicatorProps> {
   public static Type = StatusIndicatorType;

@@ -2,7 +2,7 @@
 import React from 'react';
 
 /**
- * @deprecated The returned model is now inferred from `createModelHook`
+ * @deprecated ⚠️ `Model` type has been deprecated. The returned model is now inferred from `createModelHook`
  */
 export type Model<State, Events extends IEvent> = {
   state: State;
@@ -64,7 +64,7 @@ type ToCallbackConfig<
  *   id?: string
  * } & Partial<ToModelConfig<State, Events, typeof eventMap>>
  *
- * @deprecated `createModelHook` now infers the config type
+ * @deprecated ⚠️ `ToModelConfig` has been deprecated. `createModelHook` now infers the config type
  */
 export type ToModelConfig<
   TState extends Record<string, any>,
@@ -97,7 +97,7 @@ export type ToModelConfig<
  *   }
  * })
  *
- * @deprecated `createModelHook` uses Template Literal Types to create event map types
+ * @deprecated ⚠️ `createEventMap` has been deprecated. Use `createModelHook` instead. It uses Template Literal Types to create event map types
  */
 export const createEventMap = <TEvents extends IEvent>() => <
   TGuardMap extends Record<string, keyof TEvents>,
@@ -131,7 +131,7 @@ const keys = <T extends object>(input: T) => Object.keys(input) as (keyof T)[];
  *     }
  *   }
  * })
- * @deprecated Use `createModelHook` instead
+ * @deprecated ⚠️ `useEventMap` has been deprecated. Please use `createModelHook` instead.
  */
 export const useEventMap = <
   TEvents extends IEvent,

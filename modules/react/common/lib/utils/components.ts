@@ -388,7 +388,7 @@ export const createSubcomponent = <
   elemPropsHook,
   subComponents,
 }: {
-  /** @deprecated You no longer need to use displayName. A `displayName` will be automatically added if it belongs to a container */
+  /** @deprecated ⚠️ `displayName` has been deprecated. You no longer need to use displayName. A `displayName` will be automatically added if it belongs to a container */
   displayName?: string;
   modelHook: TModelHook;
   elemPropsHook?: TElemPropsHook;
@@ -661,7 +661,7 @@ export const createHook = <M extends Model<any, any>, PO extends {}, PI extends 
 };
 
 /**
- * @deprecated use `createSubModelElemPropsHook` instead
+ * @deprecated ⚠️ `subModelHook` has been deprecated. Use `createSubModelElemPropsHook` instead.
  */
 export const subModelHook = <M extends Model<any, any>, SM extends Model<any, any>, O extends {}>(
   fn: (model: M) => SM,
