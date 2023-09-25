@@ -5,9 +5,9 @@ import {
   useTheme,
   Themeable,
   createComponent,
-  cssVar,
   newTheme,
 } from '@workday/canvas-kit-react/common';
+import {cssVar} from '@workday/canvas-kit-styling';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 
 import {
