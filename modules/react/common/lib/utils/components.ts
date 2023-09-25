@@ -388,7 +388,7 @@ export const createSubcomponent = <
   elemPropsHook,
   subComponents,
 }: {
-  /** @deprecated ⚠️ `displayName` has been deprecated and will be removed in a future major version. You no longer need to use displayName. A `displayName` will be automatically added if it belongs to a container. */
+  /** @deprecated ⚠️ `displayName` has been deprecated and will be removed in a future major version. You no longer need to use `displayName`. A `displayName` will be automatically added if it belongs to a container. */
   displayName?: string;
   modelHook: TModelHook;
   elemPropsHook?: TElemPropsHook;
