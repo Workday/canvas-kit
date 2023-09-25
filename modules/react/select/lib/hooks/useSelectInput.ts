@@ -88,13 +88,10 @@ export const useSelectInput = composeHooks(
 
     return {
       onKeyDown(event: React.KeyboardEvent) {
-        const foundIndex = model.state.items.findIndex((item: {id: string}) => {
-          if (model.state.selectedIds.length > 0) {
-            return item.id === model.state.selectedIds[0];
-          } else {
-            return item.id === model.state.cursorId;
-          }
-        });
+        const foundIndex = model.state.items.findIndex(
+          (item: {id: string}) => 
+            (model.state.selectedIds.length > 0 && item.id === model.state.selectedIds[0]) || item.id === model.state.cursorId
+        );
 
         // Prevent the keys from being enter in the input
         event.preventDefault();
