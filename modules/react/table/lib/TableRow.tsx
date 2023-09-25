@@ -5,6 +5,9 @@ import {colors, space, statusColors} from '@workday/canvas-kit-react/tokens';
 import {createComponent, StyledType} from '@workday/canvas-kit-react/common';
 import {borderColor, borderWidth, cellBorder} from './Table';
 
+/**
+ * @deprecated ⚠️ `Table` has been deprecated and will be removed in a future major version. Please use [`Table`](https://workday.github.io/canvas-kit/?path=/docs/preview-table--basic) in Preview instead.
+ */
 export enum TableRowState {
   Error,
   Alert,
@@ -14,6 +17,9 @@ export enum TableRowState {
   Selected,
 }
 
+/**
+ * @deprecated ⚠️ `Table` has been deprecated and will be removed in a future major version. Please use [`Table`](https://workday.github.io/canvas-kit/?path=/docs/preview-table--basic) in Preview instead.
+ */
 export interface TableRowProps extends React.HTMLAttributes<HTMLTableRowElement> {
   /**
    * The state of the TableRow. Accepts `Error`, `Alert`, `InputError`, `InputAlert`, `Hover`, or `Selected`.
@@ -192,6 +198,9 @@ const StyledTableRow = styled('tr')<TableRowProps>(
   }
 );
 
+/**
+ * @deprecated ⚠️ `Table` has been deprecated and will be removed in a future major version. Please use [`Table`](https://workday.github.io/canvas-kit/?path=/docs/preview-table--basic) in Preview instead.
+ */
 export const TableRow = createComponent('tr')({
   displayName: 'TableRow',
   Component: (

@@ -53,10 +53,14 @@ export const componentParser = createParserPlugin<ComponentValue>((node, parser)
           t.isTypeReference(clause.typeArguments[0])
         ) {
           const type = parser.checker.getTypeAtLocation(clause.typeArguments[0]);
-          const defaultPropNode = (node.members.find(
-            m =>
-              t.isPropertyDeclaration(m) && t.isIdentifier(m.name) && m.name.text === 'defaultProps'
-          ) as ts.PropertyDeclaration)?.initializer;
+          const defaultPropNode = (
+            node.members.find(
+              m =>
+                t.isPropertyDeclaration(m) &&
+                t.isIdentifier(m.name) &&
+                m.name.text === 'defaultProps'
+            ) as ts.PropertyDeclaration
+          )?.initializer;
 
           const defaultProps = getDefaultsFromDefaultProps(parser, defaultPropNode);
           const props = getComponentProps(parser, type, defaultProps);
@@ -64,14 +68,16 @@ export const componentParser = createParserPlugin<ComponentValue>((node, parser)
           /**
            * Get a displayName if there is one
            */
-          const displayName: string = (node.members.find(
-            m =>
-              t.isPropertyDeclaration(m) &&
-              t.isIdentifier(m.name) &&
-              m.name.text === 'displayName' &&
-              m.initializer &&
-              t.isStringLiteral(m.initializer)
-          ) as any)?.initializer.text;
+          const displayName: string = (
+            node.members.find(
+              m =>
+                t.isPropertyDeclaration(m) &&
+                t.isIdentifier(m.name) &&
+                m.name.text === 'displayName' &&
+                m.initializer &&
+                t.isStringLiteral(m.initializer)
+            ) as any
+          )?.initializer.text;
 
           return {kind: 'component', props, displayName};
         }
@@ -90,7 +96,7 @@ export const componentParser = createParserPlugin<ComponentValue>((node, parser)
    * export function A(props: Props) { return <div /> }
    * ```
    */
-  if (ts.isFunctionLike(node) && isExportedSymbol(parser.checker, node)) {
+  if (ts.isFunctionLike(node) && isExportedSymbol(parser, node)) {
     return getComponentFromFunction(parser, node);
   }
 
