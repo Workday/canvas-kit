@@ -6,9 +6,8 @@ import {createComponent, StyledType} from '@workday/canvas-kit-react/common';
 import {borderColor, borderWidth, cellBorder} from './Table';
 
 /**
- * ### ⚠️ `Table` has been deprecated and will be removed in a future major version. ⚠️
- * - Please consider using [`Table`](https://workday.github.io/canvas-kit/?path=/docs/preview-table--basic) in Preview.
- * @deprecated
+ * @deprecated ⚠️ `Table` has been deprecated and will be removed in a future major version.
+ * Please consider using [`Table in Preview`](https://workday.github.io/canvas-kit/?path=/docs/preview-table--basic) instead.
  */
 export enum TableRowState {
   Error,
@@ -20,9 +19,8 @@ export enum TableRowState {
 }
 
 /**
- * ### ⚠️ `Table` has been deprecated and will be removed in a future major version. ⚠️
- * - Please consider using [`Table`](https://workday.github.io/canvas-kit/?path=/docs/preview-table--basic) in Preview.
- * @deprecated
+ * @deprecated ⚠️ `Table` has been deprecated and will be removed in a future major version.
+ * Please consider using [`Table in Preview`](https://workday.github.io/canvas-kit/?path=/docs/preview-table--basic) instead.
  */
 export interface TableRowProps extends React.HTMLAttributes<HTMLTableRowElement> {
   /**
@@ -203,9 +201,8 @@ const StyledTableRow = styled('tr')<TableRowProps>(
 );
 
 /**
- * ### ⚠️ `Table` has been deprecated and will be removed in a future major version. ⚠️
- * - Please consider using [`Table`](https://workday.github.io/canvas-kit/?path=/docs/preview-table--basic) in Preview.
- * @deprecated
+ * @deprecated ⚠️ `Table` has been deprecated and will be removed in a future major version.
+ * Please consider using [`Table in Preview`](https://workday.github.io/canvas-kit/?path=/docs/preview-table--basic) instead.
  */
 export const TableRow = createComponent('tr')({
   displayName: 'TableRow',
