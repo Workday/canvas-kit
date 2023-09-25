@@ -9,10 +9,9 @@ This guide contains an overview of the changes in Canvas Kit v10. Please
 any questions.
 
 - [Codemod](#codemod)
-- [Removals](#removals)
-	- [useBanner](#useBanner)
+- [Removals](#removals) - [useBanner](#useBanner)
 - [Deprecations](#deprecations)
-  - [InputIconContainer](#input-icon-container)
+  - [Input Icon Container](#input-icon-container) - [Space Numbers](#space-numbers)
 - [Token Updates](#token-updates)
   - [Space and Depth](#space-and-depth)
 - [Component Updates](#component-updates)
@@ -60,15 +59,44 @@ promoted or replaced a component or utility.
 ## useBanner
 
 We have removed the `useBanner` hook, the only function of which was to add `aria-labelledby` and
-`aria-describedby` references to the text inside of the Banner. This was not required for accessibility,
-and browsers can compute the name of the Banner from the text given inside.
+`aria-describedby` references to the text inside of the Banner. This was not required for
+accessibility, and browsers can compute the name of the Banner from the text given inside.
 
 ## Deprecations
 
 ### Input Icon Container
 
-We've deprecated `InputIconContainer` from [Main](#main) because it doesn't handle
-bidirectionality or icons at the start of an input. Please consider using [`InputGroup`](https://workday.github.io/canvas-kit/?path=/story/components-inputs-text-input--icons) instead.
+**PR:** [#2332](https://github.com/Workday/canvas-kit/pull/2332)
+
+We've deprecated `InputIconContainer` from [Main](#main) because it doesn't handle bidirectionality
+or icons at the start of an input. Please use
+[`InputGroup`](https://workday.github.io/canvas-kit/?path=/story/components-inputs-text-input--icons)
+instead.
+
+### Space Numbers
+
+**PR:** [#2345](https://github.com/Workday/canvas-kit/pull/2345)
+
+We've deprecated `spaceNumbers`. Please use our `rem` based
+[`space`](https://workday.github.io/canvas-kit/?path=/docs/tokens--space) tokens. In the case where
+you need to calculate a value, use
+[CSS calc()](https://developer.mozilla.org/en-US/docs/Web/CSS/calc) instead.
+
+Example using `space` with calc instead of deprecated `spaceNumbers`.
+
+```tsx
+// With deprecated `spaceNumbers`
+{
+  paddingLeft: spaceNumbers.xl + 2; // 42px
+}
+```
+
+```tsx
+// With `rem` based `space` tokens
+{
+  padding: `calc(${space.xl} + 2px)`; // 42px
+}
+```
 
 ## Token Updates
 

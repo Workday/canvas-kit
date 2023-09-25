@@ -59,23 +59,23 @@ export const space: CanvasSpace = {
 };
 
 /**
- * ### ⚠️ `spaceNumbers` has been deprecated. We recommend switching over to using our `rem` based [`space`](https://workday.github.io/canvas-kit/?path=/docs/tokens--space) tokens.⚠️
- * In the case where you need to calculate a value, use [CSS calc()](https://developer.mozilla.org/en-US/docs/Web/CSS/calc).
+ * Example using `space` with calc instead of deprecated `spaceNumbers`.
  *
- * Example using `space` instead of `spaceNumbers` with calc.
- * // With deprecated `spaceNumbers`
  * ```tsx
+ *  // With deprecated `spaceNumbers`
  * {
  *  paddingLeft: spaceNumbers.xl + 2 // 42px
  * }
  * ```
- * // With `rem` based `space` tokens.
+ *
  * ```tsx
+ * // With `rem` based `space` tokens
  * {
  *  padding: `calc(${space.xl} + 2px)` // 42px
  * }
  * ```
- * @deprecated
+ *
+ * @deprecated ⚠️ `spaceNumbers` has been deprecated in a future major version. Please use our `rem` based [`space`](https://workday.github.io/canvas-kit/?path=/docs/tokens--space) tokens. In the case where you need to calculate a value, use [CSS calc()](https://developer.mozilla.org/en-US/docs/Web/CSS/calc).
  */
 export type CanvasSpaceNumbers = {
   zero: 0;
@@ -94,23 +94,23 @@ export type CanvasSpaceNumbers = {
 export type CanvasSpaceNumberValues = ValueOf<CanvasSpaceNumbers>;
 
 /**
- * ### ⚠️ `spaceNumbers` has been deprecated. We recommend switching over to using our `rem` based [`space`](https://workday.github.io/canvas-kit/?path=/docs/tokens--space) tokens.⚠️
- * In the case where you need to calculate a value, use [CSS calc()](https://developer.mozilla.org/en-US/docs/Web/CSS/calc).
+ * Example using `space` with calc instead of deprecated `spaceNumbers`.
  *
- * Example using `space` instead of `spaceNumbers` with calc.
- * // With deprecated `spaceNumbers`
  * ```tsx
+ *  // With deprecated `spaceNumbers`
  * {
  *  paddingLeft: spaceNumbers.xl + 2 // 42px
  * }
  * ```
- * // With `rem` based `space` tokens.
+ *
  * ```tsx
+ * // With `rem` based `space` tokens
  * {
  *  padding: `calc(${space.xl} + 2px)` // 42px
  * }
  * ```
- * @deprecated
+ *
+ * @deprecated ⚠️ `spaceNumbers` has been deprecated in a future major version. Please use our `rem` based [`space`](https://workday.github.io/canvas-kit/?path=/docs/tokens--space) tokens. In the case where you need to calculate a value, use [CSS calc()](https://developer.mozilla.org/en-US/docs/Web/CSS/calc).
  */
 export const spaceNumbers: CanvasSpaceNumbers = {
   zero: 0,
