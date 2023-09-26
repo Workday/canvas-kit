@@ -10,7 +10,7 @@ import {Combobox} from '@workday/canvas-kit-react/combobox';
 import {InputGroup, TextInput} from '@workday/canvas-kit-react/text-input';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {caretDownSmallIcon} from '@workday/canvas-system-icons-web';
-import {useSelectModel, useSelectItem, useSelectCard} from './hooks';
+import {useSelectModel, useSelectCard} from './hooks';
 import {useSelectInput} from './hooks/useSelectInput';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 
@@ -50,13 +50,12 @@ export const SelectInput = createSubcomponent(TextInput)({
 
 export const SelectItem = createSubcomponent('li')({
   modelHook: useSelectModel,
-  elemPropsHook: useSelectItem,
   subComponents: {
     Icon: Combobox.Menu.Item.Icon,
   },
 })<ExtractProps<typeof Combobox.Menu.Item>>(({children, ...elemProps}, Element, _model) => {
   return (
-    <Combobox.Menu.Item as={Element} {...elemProps}>
+    <Combobox.Menu.Item role="option" as={Element} {...elemProps}>
       {children}
     </Combobox.Menu.Item>
   );

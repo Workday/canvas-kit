@@ -1,6 +1,13 @@
+import {useKeyboardTypeAhead} from './../../../combobox/lib/hooks/useKeyboardTypeAhead';
 import React from 'react';
-import {composeHooks, createElemPropsHook} from '@workday/canvas-kit-react/common';
-import {useComboboxInput, useScrollToIndexOnClick} from '@workday/canvas-kit-react/combobox';
+import {
+  composeHooks,
+  createElemPropsHook,
+  useForkRef,
+  useLocalRef,
+  useResizeObserver,
+} from '@workday/canvas-kit-react/common';
+import {useComboboxInput} from '@workday/canvas-kit-react/combobox';
 import {useSelectModel} from './useSelectModel';
 
 /**
@@ -8,89 +15,30 @@ import {useSelectModel} from './useSelectModel';
  */
 export const useSelectInput = composeHooks(
   useComboboxInput,
-  useScrollToIndexOnClick,
+  useKeyboardTypeAhead,
   createElemPropsHook(useSelectModel)((model, ref) => {
     const keySofar = React.useRef('');
-    const timer = React.useRef<ReturnType<typeof setTimeout>>();
 
-    // Reset after each keystroke to support type ahead
-    const startClearKeysSoFarTimer = () => {
-      if (timer.current) {
-        clearTimeout(timer.current);
-      }
-      timer.current = setTimeout(() => {
-        keySofar.current = '';
-      }, 500);
-    };
+    const {localRef, elementRef} = useLocalRef<HTMLInputElement>(
+      useForkRef(ref as React.Ref<HTMLElement>, ref)
+    );
 
-    // Based on the the key typed, this will try and find an index in the array where it matches the string
-    // so if a user types `de` it will try and find an index in the array whose id matches `de` like denver
-    const getIndexByStartString = (
-      startIndex: number,
-      startString: string,
-      endIndex: number = model.state.items.length,
-      ignoreDisabled: boolean = true
-    ): number => {
-      for (let i = startIndex; i < endIndex; i++) {
-        const label = model.state.items[i].id.toLowerCase();
-        if (label.indexOf(startString.toLowerCase()) === 0) {
-          if (
-            !ignoreDisabled ||
-            (ignoreDisabled && !model.state.nonInteractiveIds.includes(model.state.items[i].id))
-          ) {
-            return i;
-          }
+    useResizeObserver({
+      ref: localRef,
+      onResize: data => {
+        if (model.state.visibility === 'visible') {
+          const calculatedWidth = data.width ? data.width + 40 + 8 : 0;
+          model.events.setWidth(calculatedWidth);
         }
-      }
-      return -1;
-    };
-    // just use the index you dummy squid
-    const currentItem = model.navigation.getItem(model.state.cursorId, model);
-    const cursorFocusedIndex = model.state.items.findIndex(item => item.id === currentItem.id);
-
-    const handleKeyboardTypeAhead = (key: string, numOptions: number) => {
-      // If the starting point is beyond the list of options, reset it
-      // to the beginning of the list
-      const startNumber =
-        keySofar.current.length === 0 ? cursorFocusedIndex + 1 : cursorFocusedIndex;
-
-      const start = startNumber === numOptions ? 0 : startNumber;
-
-      // Keeps track of the current key types and adds to it
-      // if you type `de` vs `d` for denver
-      keySofar.current += key;
-      startClearKeysSoFarTimer();
-
-      // First, look for a match from start to end
-      let matchIndex;
-      matchIndex = getIndexByStartString(start, keySofar.current);
-
-      // If a match isn't found between start and end, wrap the search
-      // around and search again from the beginning (0) to start
-      if (matchIndex === -1) {
-        matchIndex = getIndexByStartString(0, keySofar.current, start);
-      }
-
-      // A match was found...
-      if (matchIndex > -1) {
-        if (model.state.visibility === 'hidden') {
-          // If the menu is closed, fire the change event
-          // go to that item and select based on its id
-          model.events.goTo({id: model.state.items[matchIndex].id});
-          model.events.select({id: model.state.items[matchIndex].id});
-        } else {
-          // Otherwise the menu is visible
-          // move the cursor to that matched item
-          model.events.goTo({id: model.state.items[matchIndex].id});
-        }
-      }
-    };
+      },
+    });
 
     return {
       onKeyDown(event: React.KeyboardEvent) {
         const foundIndex = model.state.items.findIndex(
-          (item: {id: string}) => 
-            (model.state.selectedIds.length > 0 && item.id === model.state.selectedIds[0]) || item.id === model.state.cursorId
+          (item: {id: string}) =>
+            (model.state.selectedIds.length > 0 && item.id === model.state.selectedIds[0]) ||
+            item.id === model.state.cursorId
         );
 
         // Prevent the keys from being enter in the input
@@ -104,11 +52,6 @@ export const useSelectInput = composeHooks(
         ) {
           //show the menu when enter is typed
           model.events.show();
-        }
-
-        // Call type ahead excluding backspace
-        if (event.key.length === 1 && event.key.match(/\S/)) {
-          handleKeyboardTypeAhead(event.key, model.state.items.length);
         }
 
         // If the dropdown is NOT visible and ArrowUp, ArrowDown, Enter and Spacebar is typed, when the dropdown opens
@@ -134,25 +77,14 @@ export const useSelectInput = composeHooks(
           // If the user is in the middle of typing a string, treat
           // space key as type-ahead rather than option selection
           if (keySofar.current !== '') {
-            handleKeyboardTypeAhead(' ', model.state.items.length);
+            // handleKeyboardTypeAhead(' ', model.state.items.length);
           } else {
             model.events.select({id: model.state.items[foundIndex].id});
             model.events.hide();
           }
         }
-
-        if (
-          (event.key === 'Spacebar' || event.key === ' ') &&
-          model.state.visibility === 'hidden' &&
-          keySofar.current !== ''
-        ) {
-          // If the user is in the middle of typing a string, treat
-          // space key as type-ahead rather than option selection
-          if (keySofar.current !== '') {
-            handleKeyboardTypeAhead(' ', model.state.items.length);
-          }
-        }
       },
+      ref: elementRef,
       autoComplete: 'off',
     } as const;
   })

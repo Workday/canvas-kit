@@ -3,7 +3,7 @@ import {createElemPropsHook} from '@workday/canvas-kit-react/common';
 import {useComboboxModel} from './useComboboxModel';
 
 export const useMoveCursorToIndex = createElemPropsHook(useComboboxModel)(model => {
-  React.useLayoutEffect(() => {
+  React.useEffect(() => {
     // If there is no selected item and items exists we want to set the cursor to the first item in the array
     if (model.state.selectedIds.length === 0 && model.state.items.length > 0) {
       model.events.goTo({id: model.state.items[0].id});
@@ -13,10 +13,9 @@ export const useMoveCursorToIndex = createElemPropsHook(useComboboxModel)(model 
         (item: {id: string}) => item.id === model.state.selectedIds[0]
       );
       model.events.goTo({id: model.state.items[selectedItem].id});
-      model.events.select({id: model.state.items[selectedItem].id});
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [model.state.selectedIds]);
   return {};
 });

@@ -60,6 +60,7 @@ export const useComboboxInput = composeHooks(
               `[id="${listboxId}"] [data-id="${model.state.cursorId}"]`
             );
             if (menuItem) {
+              console.log('in here');
               requestAnimationFrame(() => {
                 menuItem.scrollIntoView({block: 'nearest'});
               });
@@ -70,7 +71,7 @@ export const useComboboxInput = composeHooks(
 
       // we only want to run this effect if the cursor changes and not any other time
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [model.state.cursorId]);
+    }, [model.state.cursorId, model.state.selectedIds, model.state.visibility]);
 
     return {
       onKeyDown(event: React.KeyboardEvent) {
