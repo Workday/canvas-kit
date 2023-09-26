@@ -22,7 +22,7 @@
     "skipLibCheck": true,
     "plugins": [
       {
-        "transform": "@workday/canvas-kit-styling-transform",
+        "transform": "./modules/styling-transform/lib/styleTransform.ts",
         "prefix": "css",
         "fallbackFiles": []
       }

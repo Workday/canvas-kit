@@ -114,7 +114,7 @@ export const buttonVars = {
   ),
 };
 
-const BaseButtonStyles = cs({
+const baseButtonStyles = cs({
   fontFamily: '"Roboto", "Helvetica Neue", "Helvetica", Arial, sans-serif',
   fontSize: '0.875rem',
   lineHeight: '1.25rem',
@@ -191,7 +191,7 @@ const BaseButtonStyles = cs({
   },
 });
 
-export const SizeModifiers = createModifiers({
+export const sizeModifiers = createModifiers({
   size: {
     large: cs({
       fontSize: space.s,
@@ -298,14 +298,14 @@ export const BaseButton = createComponent('button')({
         ref={ref}
         type="button"
         cs={[
-          BaseButtonStyles,
-          cs,
-          SizeModifiers({size: size}),
+          baseButtonStyles,
+          sizeModifiers({size: size}),
           buttonVars.active(colors?.active || {}),
           buttonVars.default(colors?.default || {}),
           buttonVars.disabled(colors?.disabled || {}),
           buttonVars.focus(colors?.focus || {}),
           buttonVars.hover(colors?.hover || {}),
+          cs,
         ]}
         {...elemProps}
       >

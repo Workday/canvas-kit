@@ -1,6 +1,5 @@
 import React from 'react';
 import {generateUniqueId} from './uniqueId';
-import {Properties} from 'csstype';
 // eslint-disable-next-line @emotion/no-vanilla
 import {css} from '@emotion/css';
 import type {Keyframes, SerializedStyles, CSSObject} from '@emotion/serialize';
@@ -9,14 +8,6 @@ import {slugify} from './slugify';
 
 // future placeholder for token replacement
 const tokens = {};
-
-export type NestedStyles =
-  | (string & {})
-  | number
-  | undefined
-  | (Properties & {
-      [propertyName: string]: NestedStyles;
-    });
 
 /**
  * Style props
