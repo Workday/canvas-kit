@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {buttonVars, BaseButtonContainerProps} from './BaseButton';
+import {buttonVars, ButtonContainerProps} from './BaseButton';
 import {createComponent, cs, createModifiers, cssVar} from '@workday/canvas-kit-react/common';
 import {base, brand, system} from '@workday/canvas-tokens-web';
 import {Button} from './Button';
@@ -10,7 +10,7 @@ import {Button} from './Button';
  * We omit `ref` since all of our buttons use `createComponent` and already give access to `ref`.
  * Use this type to extend and customize any one off buttons that you want full control over styling.
  */
-export interface PrimaryButtonProps extends Omit<BaseButtonContainerProps, 'ref'> {
+export interface PrimaryButtonProps extends Omit<ButtonContainerProps, 'ref'> {
   /**
    * Variant has an option for `inverse` which will inverse the styling
    */

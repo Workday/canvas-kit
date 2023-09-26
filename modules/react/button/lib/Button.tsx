@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {BaseButton, BaseButtonContainerProps} from './BaseButton';
+import {BaseButton, ButtonContainerProps} from './BaseButton';
 import {createComponent} from '@workday/canvas-kit-react/common';
 
 /**
@@ -8,7 +8,7 @@ import {createComponent} from '@workday/canvas-kit-react/common';
  * We omit `ref` since all of our buttons use `createComponent` and already give access to `ref`.
  * Use this type to extend and customize any one off buttons that you want full control over styling.
  */
-export interface ButtonProps extends Omit<BaseButtonContainerProps, 'ref'> {}
+export interface ButtonProps extends Omit<ButtonContainerProps, 'ref'> {}
 
 export const Button = createComponent('button')({
   displayName: 'Button',

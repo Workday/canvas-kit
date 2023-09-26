@@ -36,6 +36,11 @@ export interface ButtonContainerProps extends Partial<SystemIconProps>, GrowthBe
    */
   icon?: CanvasSystemIcon;
   /**
+   * Whether the icon should received filled (colored background layer) or regular styles.
+   * Corresponds to `toggled` in ToolbarIconButton
+   */
+  fillIcon?: boolean;
+  /**
    * Button icon positions can either be `start` or `end`.
    * If no value is provided, it defaults to `start`.
    *
@@ -64,7 +69,6 @@ export const buttonVars = {
     'boxShadowInner',
     'boxShadowOuter',
     'icon',
-    'iconFill',
     'color',
     'opacity',
     'borderRadius'
@@ -75,7 +79,6 @@ export const buttonVars = {
     'boxShadowInner',
     'boxShadowOuter',
     'icon',
-    'iconFill',
     'color',
     'opacity',
     'borderRadius'
@@ -86,7 +89,6 @@ export const buttonVars = {
     'boxShadowInner',
     'boxShadowOuter',
     'icon',
-    'iconFill',
     'color',
     'opacity',
     'borderRadius'
@@ -97,7 +99,6 @@ export const buttonVars = {
     'boxShadowInner',
     'boxShadowOuter',
     'icon',
-    'iconFill',
     'color',
     'opacity',
     'borderRadius'
@@ -108,7 +109,6 @@ export const buttonVars = {
     'boxShadowInner',
     'boxShadowOuter',
     'icon',
-    'iconFill',
     'color',
     'opacity',
     'borderRadius'
