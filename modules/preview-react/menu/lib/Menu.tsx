@@ -7,12 +7,7 @@ import {commonColors, space, borderRadius} from '@workday/canvas-kit-react/token
 import {hideMouseFocus, GrowthBehavior, generateUniqueId} from '@workday/canvas-kit-react/common';
 
 /**
- * ### Deprecated Menu
- *
- * As of Canvas Kit v8, Menu is being deprecated.
- * It will be removed in v10. Please see the
- * [upgrade guide](https://workday.github.io/canvas-kit/?path=/story/welcome-upgrade-guides-v8-0--page)
- * for more information.
+ * @deprecated ⚠️ `DeprecatedMenuProps` has been deprecated and will be removed in a future major version. Please use [Menu in Main](https://workday.github.io/canvas-kit/?path=/docs/components-popups-menu--basic) instead.
  */
 export interface DeprecatedMenuProps
   extends GrowthBehavior,
@@ -55,12 +50,8 @@ export interface DeprecatedMenuProps
 }
 
 /**
- * ### Deprecated Menu State
  *
- * As of Canvas Kit v8, Menu is being deprecated.
- * It will be removed in v10. Please see the
- * [upgrade guide](https://workday.github.io/canvas-kit/?path=/story/welcome-upgrade-guides-v8-0--page)
- * for more information.
+ * @deprecated ⚠️ `DeprecatedMenuState` has been deprecated and will be removed in a future major version. Please use [Menu in Main](https://workday.github.io/canvas-kit/?path=/docs/components-popups-menu--basic) instead.
  */
 export interface DeprecatedMenuState {
   selectedItemIndex: number;
@@ -78,11 +69,6 @@ const List = styled('ul')({
 });
 
 /**
- * As of Canvas Kit v8, Menu is being deprecated.
- * It will be removed in v10. Please see the [upgrade
- * guide](https://workday.github.io/canvas-kit/?path=/story/welcome-upgrade-guides-v8-0--page) for
- * more information.
- *
  * `DeprecatedMenu` renders a styled `<ul role="menu">` element within a {@link Card} and follows
  * the [Active Menu
  * pattern](https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/examples/menu-button-actions-active-descendant/)
@@ -90,7 +76,7 @@ const List = styled('ul')({
  *
  * Undocumented props are spread to the underlying `<ul>` element.
  *
- * @deprecated
+ * @deprecated ⚠️ Deprecated Menu has been deprecated and will be removed in a future major version. Please use [Menu in Main](https://workday.github.io/canvas-kit/?path=/docs/components-popups-menu--basic) instead.
  */
 export class DeprecatedMenu extends React.Component<DeprecatedMenuProps, DeprecatedMenuState> {
   private id = generateUniqueId();
