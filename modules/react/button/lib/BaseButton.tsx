@@ -18,7 +18,7 @@ import {space, spaceNumbers} from '@workday/canvas-kit-react/tokens';
 import {ButtonColors, ButtonSizes, IconPositions} from './types';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 
-export interface BaseButtonContainerProps extends Partial<SystemIconProps>, GrowthBehavior {
+export interface ButtonContainerProps extends Partial<SystemIconProps>, GrowthBehavior {
   /**
    * Override default colors of a button. The default will depend on the button type
    */
@@ -55,7 +55,7 @@ export interface BaseButtonContainerProps extends Partial<SystemIconProps>, Grow
  * We omit `ref` since all of our buttons use `createComponent` and already give access to `ref`.
  * Use this type to extend and customize any one off buttons that you want full control over styling.
  */
-export interface BaseButtonProps extends Omit<BaseButtonContainerProps, 'ref'> {}
+export interface BaseButtonProps extends Omit<ButtonContainerProps, 'ref'> {}
 
 export const buttonVars = {
   default: createVars(
@@ -113,6 +113,76 @@ export const buttonVars = {
     'opacity',
     'borderRadius'
   ),
+};
+
+export const getMinWidthStyles = (children: React.ReactNode, size: ButtonSizes) => {
+  switch (size) {
+    case 'large':
+      return children ? '112px' : '48px';
+    case 'medium':
+      return children ? '96px' : space.xl;
+    case 'small':
+      return children ? space.xxxl : space.l;
+    case 'extraSmall':
+      return children ? 'auto' : space.m;
+    default:
+      return children ? '96px' : space.xl;
+  }
+};
+
+export const getPaddingStyles = (
+  children: React.ReactNode,
+  size: ButtonSizes,
+  icon: CanvasSystemIcon | undefined,
+  iconPosition: IconPositions | undefined
+) => {
+  // In order to calculate the correct padding, we need to know its children
+  // and what side the icon is on and if there's an icon provided
+  if (!children) {
+    // icon buttons do not have any padding
+    return 0;
+  }
+  // If there are children AND an icon
+  // 1. We check what side the icon is in
+  // 2. Adjust padding to visually center the icon and text
+  // If there is children (most likely just text)
+  // 1. We keep the padding the same on both side
+  switch (size) {
+    case 'large':
+      return icon
+        ? iconPosition === 'start'
+          ? `0 ${space.l} 0 ${space.m}`
+          : `0 ${space.m} 0 ${space.l}`
+        : `0 ${space.l}`;
+
+    case 'medium':
+      return icon
+        ? iconPosition === 'start'
+          ? `0 ${space.m} 0 20px`
+          : `0 20px 0 ${space.m}`
+        : `0 ${space.m}`;
+
+    case 'small':
+      return icon
+        ? iconPosition === 'start'
+          ? `0 ${space.s} 0 ${space.xs}`
+          : `0 ${space.xs} 0 ${space.s}`
+        : `0 ${space.s}`;
+
+    case 'extraSmall':
+      return icon
+        ? iconPosition === 'start'
+          ? `0 ${space.xs} 0 ${space.xxs}`
+          : `0 ${space.xxs} 0 ${space.xs}`
+        : `0 ${space.xs}`;
+
+    default:
+      return icon
+        ? iconPosition === 'start'
+          ? `0 ${space.m} 0 20px`
+          : `0 20px 0 ${space.m}`
+        : `0 ${space.m}`;
+  }
 };
 
 const baseButtonStyles = cs({
@@ -289,7 +359,7 @@ export const BaseButton = createComponent('button')({
       colors,
       shouldMirrorIcon = false,
       ...elemProps
-    }: BaseButtonContainerProps,
+    }: ButtonContainerProps,
     ref,
     Element
   ) => {
