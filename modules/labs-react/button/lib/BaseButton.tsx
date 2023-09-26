@@ -41,6 +41,7 @@ export interface BaseButtonContainerProps extends Partial<SystemIconProps>, Grow
    *
    * @default 'start'
    */
+  fillIcon?: boolean;
   iconPosition?: IconPositions;
   /**
    * If set to `true`, transform the icon's x-axis to mirror the graphic
