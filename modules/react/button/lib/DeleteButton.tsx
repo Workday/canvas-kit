@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {BaseButton, buttonVars, BaseButtonContainerProps} from './BaseButton';
+import {BaseButton, buttonVars, ButtonContainerProps} from './BaseButton';
 import {createComponent, cs, cssVar} from '@workday/canvas-kit-react/common';
 import {base, brand, system} from '@workday/canvas-tokens-web';
 
@@ -9,7 +9,7 @@ import {base, brand, system} from '@workday/canvas-tokens-web';
  * We omit `ref` since all of our buttons use `createComponent` and already give access to `ref`.
  * Use this type to extend and customize any one off buttons that you want full control over styling.
  */
-export interface DeleteButtonProps extends Omit<BaseButtonContainerProps, 'ref'> {}
+export interface DeleteButtonProps extends Omit<ButtonContainerProps, 'ref'> {}
 
 const deleteStyles = cs({
   [buttonVars.default.background]: cssVar(brand.error.base),
