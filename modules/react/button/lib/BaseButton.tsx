@@ -196,7 +196,6 @@ const baseButtonStyles = cs({
   border: '1px solid transparent',
   borderColor: cssVar(buttonVars.default.border),
   maxWidth: 'min-content',
-  minWidth: '96px',
   cursor: 'pointer',
   display: 'inline-flex',
   gap: space.xxs,
@@ -288,6 +287,7 @@ export const SizeModifiers = createModifiers({
       fontSize: '0.875rem',
       lineHeight: '1.25rem',
       letterSpacing: '0.015rem',
+      minWidth: '96px',
       height: space.xl,
       '&.canvas-button-icon-only': {
         padding: '0',
@@ -353,8 +353,8 @@ export const BaseButton = createComponent('button')({
     {
       children,
       cs,
-      size = 'medium',
-      iconPosition = 'start',
+      size,
+      iconPosition,
       icon,
       colors,
       shouldMirrorIcon = false,

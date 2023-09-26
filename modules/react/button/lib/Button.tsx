@@ -13,7 +13,14 @@ export interface ButtonProps extends Omit<ButtonContainerProps, 'ref'> {}
 export const Button = createComponent('button')({
   displayName: 'Button',
   Component: (
-    {children, icon, iconPosition, shouldMirrorIcon, size, ...elemProps}: ButtonProps,
+    {
+      children,
+      icon,
+      iconPosition = 'start',
+      shouldMirrorIcon,
+      size = 'medium',
+      ...elemProps
+    }: ButtonProps,
     ref,
     Element
   ) => {
