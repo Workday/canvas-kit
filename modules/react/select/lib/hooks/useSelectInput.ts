@@ -57,6 +57,7 @@ export const useSelectInput = composeHooks(
       },
       ref: elementRef,
       autoComplete: 'off',
+      defaultValue: model.state.selectedIds[0] || model.state.value,
     } as const;
   }),
   useKeyboardTypeAhead,

@@ -77,7 +77,7 @@ describe('Select', () => {
     it('should call a callback function', () => {
       const {getByRole} = render(
         <Select items={['Foo']} initialSelectedIds={['Foo']}>
-          <Select.Input onChange={() => cb} id="contact-select" />
+          <Select.Input onChange={cb} id="contact-select" />
           <Select.Popper>
             <Select.Card maxHeight="200px">
               <Select.List>
@@ -89,7 +89,9 @@ describe('Select', () => {
           </Select.Popper>
         </Select>
       );
-      fireEvent.change(getByRole(role));
+      fireEvent.change(getByRole(role), {
+        target: {value: 'F'},
+      });
       expect(cb).toHaveBeenCalledTimes(1);
     });
   });
