@@ -30,7 +30,7 @@ export const Required = () => {
         <Select items={options} nonInteractiveIds={disabledItems}>
           <Select.Input onChange={e => handleChange(e)} id="required-select" />
           <Select.Popper>
-            <Select.Card maxHeight="200px">
+            <Select.Card>
               <Select.List>
                 {item => {
                   return (

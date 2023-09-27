@@ -35,7 +35,7 @@ export const Error = () => {
         >
           <Select.Input onChange={e => handleChange(e)} id="error-select" />
           <Select.Popper>
-            <Select.Card maxHeight="200px">
+            <Select.Card>
               <Select.List>
                 {item => {
                   return (

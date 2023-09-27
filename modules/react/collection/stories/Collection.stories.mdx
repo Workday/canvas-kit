@@ -13,6 +13,7 @@ import {Selection} from './examples/Selection';
 import {MultiSelection} from './examples/MultiSelection';
 import {BasicGrid} from './examples/BasicGrid';
 import {WrappingGrid} from './examples/WrappingGrid';
+import {RegisteringItems} from './examples/RegisteringItems';
 
 <Meta title="Features/Collections" />
 
@@ -59,72 +60,66 @@ This example adds a `maxHeight` to ensure overflow. Virtualization uses absolute
 item, which could cause problems for popup menus. If your item count is low, pass
 `shouldVirtualize={false}` to disable virtualization.
 
-There are two ways tor structure your items so that the collection system can understand it.
+<ExampleCodeBlock code={DynamicItems} />
 
-#### Array of strings
+### Registering Items
 
-If you have an array of `strings`, the collection system will handle asigning an `id`, `index` and
-`textValue` to each item in the array.
+There are two ways to register items via the `items` prop or model config.
+
+1. Array of Objects
+   - Use this format when your data has additional information.
+2. Array of Strings
+   - Use this format when your data is a simple list of options.
+
+If you have an array of `strings`, the collection system will handle registering items. Each string
+value is used as the unique identifer.
 
 ```tsx
-const model = useSelectModel({
-	items: ['Mobile', 'E-mail', 'Fax']
-})
-<>
-<Select model={model}>
-	<Select.Input id="dyamic-select" />
-	<Select.Popper>
-		<Select.Card maxHeight="200px">
-			<Select.List>
-				{item => {
-					return (
-						<Select.Item>
-							{item}
-						</Select.Item>
-					);
-				}}
-			</Select.List>
-		</Select.Card>
-	</Select.Popper>
-</Select>
-Selected Value: {model.state.selectedIds[0]}
-</>
+<ListBox items={['Pizza', 'Chocolate', 'Cheeseburgers']}>
+  {item => {
+    return <ListBox.Item>{item}</ListBox.Item>;
+  }}
+</ListBox>
 ```
-
-#### Array of objects
 
 If you have an array of `objects`, the collection system needs an `id` to ensure items are
-registered and searchable. In most cases, the `id` should match your text value for each item. Any
-additional information like icons or if the item is disabled can exist on the object and be used in
-the render function.
+registered and searchable. Any additional information like icons or if the item is disabled can
+exist on the object and be used in the render function.
+
+> **Note: The `id` should match your text value for each item. This ensures proper selection of
+> items in components like `Select` and `Autocomplete`. If your `id` is different from your text
+> value, you'll have to add a
+> [translation layer](https://codesandbox.io/s/combobox-object-items-forked-mc7tm4). **
 
 ```tsx
-const model = useSelectModel({
-	items: [{id: 'Mobile' icon: mobileIcon},{id:'E-mail', icon: emailIcon}, {id:'Fax' icon: faxIcon}]
-})
-<>
-<Select model={model}>
-	<Select.Input id="dynamic-select" />
-	<Select.Popper>
-		<Select.Card maxHeight="200px">
-			<Select.List>
-				{item => {
-					return (
-						<Select.Item>
-							<Select.Item.Icon icon={item.icon} />
-							{item.id}
-						</Select.Item>
-					);
-				}}
-			</Select.List>
-		</Select.Card>
-	</Select.Popper>
-</Select>
-Selected Value: {model.state.selectedIds[0]}
-</>
+<ListBox
+  items={[
+    {id: 'Atlanta (United States)', disabled: false},
+    {id: 'Amsterdam (Europe)', disabled: false},
+    {id: 'Austin (United States)', disabled: false},
+    {id: 'Beaverton (United States)', disabled: false},
+    {id: 'Belfast (Europe)', disabled: false},
+    {id: 'Berlin (Europe)', disabled: false},
+    {id: 'Boston (United States)', disabled: false},
+    {id: 'Boulder (United States)', disabled: false},
+    {id: 'Chicago (United States)', disabled: false},
+  ]}
+  width="200px"
+  maxHeight={200}
+>
+  {item => (
+    <ListBox.Item
+      aria-disabled={item.disabled ? item.disabled : undefined}
+      paddingBottom="s"
+      data-id={item.id}
+    >
+      {item.id}
+    </ListBox.Item>
+  )}
+</ListBox>
 ```
 
-<ExampleCodeBlock code={DynamicItems} />
+<ExampleCodeBlock code={RegisteringItems} />
 
 ### DataLoader
 

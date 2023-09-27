@@ -35,7 +35,7 @@ export const Alert = () => {
         >
           <Select.Input onChange={e => handleChange(e)} id="alert-select" />
           <Select.Popper>
-            <Select.Card maxHeight="200px">
+            <Select.Card>
               <Select.List>
                 {item => {
                   return (

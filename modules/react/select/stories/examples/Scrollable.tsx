@@ -45,7 +45,7 @@ export const Scrollable = () => {
         >
           <Select.Input id="scrollable-select" />
           <Select.Popper>
-            <Select.Card maxHeight="200px">
+            <Select.Card>
               <Select.List>
                 {item => (
                   <Select.Item

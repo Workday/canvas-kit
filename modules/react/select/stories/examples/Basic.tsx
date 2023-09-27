@@ -10,7 +10,11 @@ const options = [
   {id: 'Mail'},
   {id: 'Mobile Phone'},
   {
-    id: 'The Ontologically Anthropocentric Sensory Immersive Simulation',
+    id: 'test',
+    disabled: false,
+  },
+  {
+    id: 'foo',
     disabled: false,
   },
 ];
@@ -31,7 +35,7 @@ export const Basic = () => {
         <FormField label="Contact" inputId="contact-select">
           <Select.Input onChange={e => handleChange(e)} id="contact-select" />
           <Select.Popper>
-            <Select.Card maxHeight="200px">
+            <Select.Card>
               <Select.List>
                 {item => {
                   return (

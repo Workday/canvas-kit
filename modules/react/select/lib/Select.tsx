@@ -66,7 +66,7 @@ export const SelectCard = createSubcomponent('div')({
   elemPropsHook: useSelectCard,
 })<ExtractProps<typeof Combobox.Menu.Card>>(({children, ...elemProps}, Element) => {
   return (
-    <Combobox.Menu.Card as={Element} {...elemProps}>
+    <Combobox.Menu.Card maxHeight={300} as={Element} {...elemProps}>
       {children}
     </Combobox.Menu.Card>
   );

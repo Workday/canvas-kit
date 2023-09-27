@@ -33,7 +33,7 @@ export const LabelPosition = () => {
         >
           <Select.Input id="label-position-select" />
           <Select.Popper>
-            <Select.Card maxHeight="200px">
+            <Select.Card>
               {model.state.items.length > 0 && (
                 <Select.List>
                   {item => {

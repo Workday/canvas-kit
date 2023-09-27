@@ -36,7 +36,7 @@ export const RefForwarding = () => {
         <FormField label="Contact" inputId="refforwarding-select">
           <Select.Input ref={ref} onChange={e => handleChange(e)} id="refforwarding-select" />
           <Select.Popper>
-            <Select.Card maxHeight="200px">
+            <Select.Card>
               <Select.List>
                 {item => {
                   return (

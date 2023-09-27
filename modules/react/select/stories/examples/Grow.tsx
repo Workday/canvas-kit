@@ -29,7 +29,7 @@ export const Grow = () => {
         <FormField label="Contact" grow inputId="grow-select">
           <Select.Input id="grow-select" />
           <Select.Popper>
-            <Select.Card maxHeight="200px">
+            <Select.Card>
               {model.state.items.length > 0 && (
                 <Select.List scrollMargin="10px">
                   {item => {

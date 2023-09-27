@@ -30,7 +30,7 @@ export const HoistedModel = () => {
         <FormField label="Contact" inputId="dyamic-select">
           <Select.Input id="dyamic-select" />
           <Select.Popper>
-            <Select.Card maxHeight="200px">
+            <Select.Card>
               <Select.List>
                 {item => {
                   return (

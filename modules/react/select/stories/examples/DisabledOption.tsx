@@ -30,7 +30,7 @@ export const DisabledOptions = () => {
         <FormField label="Contact" inputId="disabled-options-contact-select">
           <Select.Input onChange={e => handleChange(e)} id="disabled-options-contact-select" />
           <Select.Popper>
-            <Select.Card maxHeight="200px">
+            <Select.Card>
               <Select.List>
                 {item => {
                   return <Select.Item aria-disabled={item.disabled}>{item.id}</Select.Item>;

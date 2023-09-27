@@ -30,7 +30,7 @@ export const Disabled = () => {
         <FormField label="Contact" inputId="disabled-select">
           <Select.Input disabled onChange={e => handleChange(e)} id="disabled-select" />
           <Select.Popper>
-            <Select.Card maxHeight="200px">
+            <Select.Card>
               <Select.List>
                 {item => {
                   return (
