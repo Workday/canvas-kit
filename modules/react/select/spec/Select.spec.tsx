@@ -2,7 +2,6 @@ import React from 'react';
 import {render, fireEvent} from '@testing-library/react';
 
 import {Select} from '../lib/Select';
-import {useSelectModel} from '../lib/hooks';
 
 describe('Select', () => {
   const cb = jest.fn();
@@ -22,7 +21,7 @@ describe('Select', () => {
             <Select.Card maxHeight="200px">
               <Select.List>
                 {item => {
-                  return <Select.Item>{item.id}</Select.Item>;
+                  return <Select.Item>{item}</Select.Item>;
                 }}
               </Select.List>
             </Select.Card>
@@ -42,7 +41,7 @@ describe('Select', () => {
             <Select.Card maxHeight="200px">
               <Select.List>
                 {item => {
-                  return <Select.Item>{item.id}</Select.Item>;
+                  return <Select.Item>{item}</Select.Item>;
                 }}
               </Select.List>
             </Select.Card>
@@ -63,7 +62,7 @@ describe('Select', () => {
             <Select.Card maxHeight="200px">
               <Select.List>
                 {item => {
-                  return <Select.Item>{item.id}</Select.Item>;
+                  return <Select.Item>{item}</Select.Item>;
                 }}
               </Select.List>
             </Select.Card>
@@ -78,12 +77,12 @@ describe('Select', () => {
     it('should call a callback function', () => {
       const {getByRole} = render(
         <Select items={['Foo']} initialSelectedIds={['Foo']}>
-          <Select.Input onChange={cb} id="contact-select" />
+          <Select.Input onChange={() => cb} id="contact-select" />
           <Select.Popper>
             <Select.Card maxHeight="200px">
               <Select.List>
                 {item => {
-                  return <Select.Item>{item.id}</Select.Item>;
+                  return <Select.Item>{item}</Select.Item>;
                 }}
               </Select.List>
             </Select.Card>

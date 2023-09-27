@@ -22,6 +22,7 @@ export const useSelectInput = composeHooks(
       ref: localRef,
       onResize: data => {
         if (model.state.visibility === 'visible') {
+          // Width of the Input + 2px border + 8px padding
           const calculatedWidth = data.width ? data.width + 42 + 8 : 0;
           model.events.setWidth(calculatedWidth);
         }
