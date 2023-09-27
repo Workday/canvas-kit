@@ -2,16 +2,21 @@ import React from 'react';
 import {createElemPropsHook} from '@workday/canvas-kit-react/common';
 import {useComboboxModel} from './useComboboxModel';
 
+/**
+ * `useKeyboardTypeAhead` handles type-ahead. It will try and find a matching item in the list. It also returns the keys types so far.
+ */
 export const useKeyboardTypeAhead = createElemPropsHook(useComboboxModel)(model => {
   const keySofar = React.useRef('');
   const timer = React.useRef<ReturnType<typeof setTimeout>>();
-  // Reset after each keystroke to support type ahead
+  const [keyTypedSofar, setKeyTypedSofar] = React.useState(keySofar.current);
+
   const startClearKeysSoFarTimer = () => {
     if (timer.current) {
       clearTimeout(timer.current);
     }
     timer.current = setTimeout(() => {
       keySofar.current = '';
+      setKeyTypedSofar(keySofar.current);
     }, 500);
   };
 
@@ -50,6 +55,7 @@ export const useKeyboardTypeAhead = createElemPropsHook(useComboboxModel)(model 
     // Keeps track of the current key types and adds to it
     // if you type `de` vs `d` for denver
     keySofar.current += key;
+    setKeyTypedSofar(keySofar.current);
     startClearKeysSoFarTimer();
 
     // First, look for a match from start to end
@@ -76,6 +82,7 @@ export const useKeyboardTypeAhead = createElemPropsHook(useComboboxModel)(model 
       }
     }
   };
+
   return {
     onKeyDown(event: React.KeyboardEvent) {
       // Call type ahead excluding backspace
@@ -84,12 +91,14 @@ export const useKeyboardTypeAhead = createElemPropsHook(useComboboxModel)(model 
       }
 
       // If spacebar is typed
-      if ((event.key === 'Spacebar' || event.key === ' ') && model.state.visibility === 'visible') {
+      if (
+        (event.key === 'Spacebar' || event.key === ' ') &&
+        model.state.visibility === 'visible' &&
+        keySofar.current !== ''
+      ) {
         // If the user is in the middle of typing a string, treat
         // space key as type-ahead rather than option selection
-        if (keySofar.current !== '') {
-          handleKeyboardTypeAhead(' ', model.state.items.length);
-        }
+        handleKeyboardTypeAhead(' ', model.state.items.length);
       }
 
       if (
@@ -99,10 +108,9 @@ export const useKeyboardTypeAhead = createElemPropsHook(useComboboxModel)(model 
       ) {
         // If the user is in the middle of typing a string, treat
         // space key as type-ahead rather than option selection
-        if (keySofar.current !== '') {
-          handleKeyboardTypeAhead(' ', model.state.items.length);
-        }
+        handleKeyboardTypeAhead(' ', model.state.items.length);
       }
     },
+    keySofar: keyTypedSofar,
   };
 });

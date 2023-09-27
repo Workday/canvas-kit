@@ -7,7 +7,7 @@ export {
   useComboboxLoader,
   useComboboxModel,
   useComboboxInputOpenWithArrowKeys as useComboboxOpenWithArrowKeys,
-  useScrollToIndexOnClick,
+  useKeyboardTypeAhead,
   useSetPopupWidth,
   useMoveCursorToIndex,
 } from './lib/hooks';

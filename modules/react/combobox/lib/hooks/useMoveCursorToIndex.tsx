@@ -9,13 +9,10 @@ export const useMoveCursorToIndex = createElemPropsHook(useComboboxModel)(model 
       model.events.goTo({id: model.state.items[0].id});
     } else if (model.state.selectedIds.length > 0) {
       // If the user wants an item selected by default by passing `initialSelectedId` we select that item
-      const selectedItem = model.state.items.findIndex(
-        (item: {id: string}) => item.id === model.state.selectedIds[0]
-      );
-      model.events.goTo({id: model.state.items[selectedItem].id});
+      model.events.goTo({id: model.state.selectedIds[0]});
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [model.state.selectedIds]);
+  }, [model.state.selectedIds, model.state.visibility]);
   return {};
 });
