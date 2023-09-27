@@ -22,7 +22,7 @@ const tertiaryStyles = cs({
   [buttonVars.default.background]: 'transparent',
   [buttonVars.default.border]: 'transparent',
   [buttonVars.default.borderRadius]: cssVar(system.shape.medium),
-  [buttonVars.default.color]: cssVar(brand.primary.base),
+  [buttonVars.default.label]: cssVar(brand.primary.base),
   paddingInline: space.xxs,
   minWidth: 'auto',
   textDecoration: 'underline',
@@ -30,7 +30,7 @@ const tertiaryStyles = cs({
   '&:hover, &.hover': {
     [buttonVars.hover.background]: cssVar(base.soap200),
     [buttonVars.hover.border]: 'transparent',
-    [buttonVars.hover.color]: cssVar(brand.primary.dark),
+    [buttonVars.hover.label]: cssVar(brand.primary.dark),
     '& span .wd-icon-fill': {
       [buttonVars.hover.icon]: cssVar(brand.primary.dark),
     },
@@ -45,7 +45,7 @@ const tertiaryStyles = cs({
     [buttonVars.focus.border]: 'transparent',
     [buttonVars.focus.boxShadowInner]: cssVar(brand.common.focusOutline),
     [buttonVars.focus.boxShadowOuter]: cssVar(brand.common.focusOutline),
-    [buttonVars.focus.color]: cssVar(brand.primary.base),
+    [buttonVars.focus.label]: cssVar(brand.primary.base),
     boxShadow: `${cssVar(buttonVars.focus.boxShadowInner)} 0px 0px 0px 0px, ${cssVar(
       buttonVars.focus.boxShadowOuter
     )} 0px 0px 0px 2px`,
@@ -61,7 +61,7 @@ const tertiaryStyles = cs({
   '&:active, &.active': {
     [buttonVars.active.background]: cssVar(base.soap300),
     [buttonVars.active.border]: 'transparent',
-    [buttonVars.active.color]: cssVar(brand.primary.dark),
+    [buttonVars.active.label]: cssVar(brand.primary.dark),
     '& span .wd-icon-fill': {
       [buttonVars.active.icon]: cssVar(brand.primary.base),
     },
@@ -82,7 +82,7 @@ const tertiaryStyles = cs({
   '&:disabled, &:active:disabled, &:focus:disabled, &:hover:disabled': {
     [buttonVars.disabled.background]: 'transparent',
     [buttonVars.disabled.border]: cssVar(base.frenchVanilla100),
-    [buttonVars.disabled.color]: cssVar(brand.primary.base),
+    [buttonVars.disabled.label]: cssVar(brand.primary.base),
     '& span .wd-icon-fill': {
       [buttonVars.disabled.icon]: cssVar(brand.primary.base),
     },
@@ -99,12 +99,12 @@ export const tertiaryButtonModifiers = createModifiers({
     inverse: cs({
       [buttonVars.default.background]: 'transparent',
       [buttonVars.default.border]: 'transparent',
-      [buttonVars.default.color]: cssVar(base.frenchVanilla100),
+      [buttonVars.default.label]: cssVar(base.frenchVanilla100),
       textDecoration: 'underline',
       '&:hover, &.hover': {
         [buttonVars.hover.background]: cssVar(base.frenchVanilla100),
         [buttonVars.hover.border]: 'transparent',
-        [buttonVars.hover.color]: cssVar(base.blackPepper500),
+        [buttonVars.hover.label]: cssVar(base.blackPepper500),
         '& span .wd-icon-fill': {
           [buttonVars.hover.icon]: cssVar(base.blackPepper500),
         },
@@ -114,7 +114,7 @@ export const tertiaryButtonModifiers = createModifiers({
         [buttonVars.focus.border]: 'transparent',
         [buttonVars.focus.boxShadowInner]: 'currentColor',
         [buttonVars.focus.boxShadowOuter]: cssVar(base.frenchVanilla100),
-        [buttonVars.focus.color]: cssVar(base.blackPepper500),
+        [buttonVars.focus.label]: cssVar(base.blackPepper500),
         boxShadow: `inset 0px 0px 0px 2px currentColor, ${cssVar(
           buttonVars.focus.boxShadowOuter
         )} 0px 0px 0px 2px`,
@@ -125,7 +125,7 @@ export const tertiaryButtonModifiers = createModifiers({
       '&:active, &.active': {
         [buttonVars.active.background]: cssVar(base.soap200),
         [buttonVars.active.border]: 'transparent',
-        [buttonVars.active.color]: cssVar(base.blackPepper500),
+        [buttonVars.active.label]: cssVar(base.blackPepper500),
         '& span .wd-icon-fill': {
           [buttonVars.active.icon]: cssVar(base.blackPepper500),
         },
@@ -146,7 +146,7 @@ export const tertiaryButtonModifiers = createModifiers({
       '&:disabled, &:active:disabled, &:focus:disabled, &:hover:disabled': {
         [buttonVars.disabled.background]: 'transparent',
         [buttonVars.disabled.border]: cssVar(base.frenchVanilla100),
-        [buttonVars.disabled.color]: cssVar(base.frenchVanilla100),
+        [buttonVars.disabled.label]: cssVar(base.frenchVanilla100),
         '& span .wd-icon-fill': {
           [buttonVars.disabled.icon]: cssVar(base.frenchVanilla100),
         },

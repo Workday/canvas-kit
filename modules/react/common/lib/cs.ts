@@ -1,72 +1,24 @@
 import React from 'react';
-import {CommonStyleProps} from '@workday/canvas-kit-react/layout';
-// import {colors, space, type} from '@workday/canvas-kit-react/tokens';
-import {generateUniqueId} from './utils/useUniqueId';
+import {generateUniqueId} from '@workday/canvas-kit-react/common';
 // eslint-disable-next-line @emotion/no-vanilla
 import {css} from '@emotion/css';
+import type {Keyframes, SerializedStyles, CSSObject} from '@emotion/serialize';
 
-export const theme = {
-  palette: {
-    primary: {
-      lightest: 'var(--ck-palette-primary-lightest)',
-      light: 'var(--ck-palette-primary-light)',
-      main: 'var(--ck-palette-primary-main)',
-      dark: 'var(--ck-palette-primary-dark)',
-      darkest: 'var(--ck-palette-primary-darkest)',
-    },
-    alert: {
-      lightest: 'var(--ck-palette-alert-lightest)',
-      light: 'var(--ck-palette-alert-light)',
-      main: 'var(--ck-palette-alert-main)',
-      dark: 'var(--ck-palette-alert-dark)',
-      darkest: 'var(--ck-palette-alert-darkest)',
-    },
-    error: {
-      lightest: 'var(--ck-palette-error-lightest)',
-      light: 'var(--ck-palette-error-light)',
-      main: 'var(--ck-palette-error-main)',
-      dark: 'var(--ck-palette-error-dark)',
-      darkest: 'var(--ck-palette-error-darkest)',
-    },
-    success: {
-      lightest: 'var(--ck-palette-success-lightest)',
-      light: 'var(--ck-palette-success-light)',
-      main: 'var(--ck-palette-success-main)',
-      dark: 'var(--ck-palette-success-dark)',
-      darkest: 'var(--ck-palette-success-darkest)',
-    },
-    neutral: {
-      lightest: 'var(--ck-palette-neutral-lightest)',
-      light: 'var(--ck-palette-neutral-light)',
-      main: 'var(--ck-palette-neutral-main)',
-      dark: 'var(--ck-palette-neutral-dark)',
-      darkest: 'var(--ck-palette-neutral-darkest)',
-    },
-    common: {
-      focusOutline: '#0875e1',
-    },
-  },
-} as const;
+// future placeholder for token replacement
+const tokens = {};
 
-// get all tokens for lookup... We might need to watch for duplicates and separate by key
-const tokens = {}; /*{
-  ...colors,
-  ...space,
-  ...type.properties.fontFamilies,
-  // etc
-};*/
-
-export type NestedStyles =
-  | string
-  | number
+/**
+ * Style properties in a JavaScript camelCase. Everything Emotion allows is also
+ * allowed here.
+ */
+export type StyleProps =
   | undefined
-  | (CommonStyleProps & {
-      [propertyName: string]: NestedStyles;
-    });
-
-export interface StyleProps extends CommonStyleProps {
-  [propertiesName: string]: NestedStyles;
-}
+  | boolean
+  | number
+  | string
+  | Keyframes
+  | SerializedStyles
+  | CSSObject;
 
 function replaceWithToken<T>(value: T): T {
   return (tokens as any)[value] || value;
@@ -90,7 +42,11 @@ function replaceAllWithTokens<T extends unknown>(obj: T): T {
 
 export type CS = string | Record<string, string>;
 
-export type CsVars<T extends string> = Record<T, string> & {
+export type CsVarsMap<T extends string, ID extends string | never> = [ID] extends [never]
+  ? Record<T, string>
+  : {[K in T]: `--${ID}-${K}`};
+
+export type CsVars<T extends string, ID extends string | never> = CsVarsMap<T, ID> & {
   (input: Partial<Record<T, string>>): Record<T, string>;
 };
 
@@ -101,14 +57,37 @@ export type CsVars<T extends string> = Record<T, string> & {
  * const myVars = createVars('color')
  *
  * const myStyles = cs({
- *   color: cssVar(myVars.color) // color: var(--{hash}-color)
+ *   color: cssVar(myVars.color) // color: 'var(--{hash}-color)'
  * })
  * ```
+ *
+ * It can also support an optional fallback. Fallbacks should only be used if it is reasonable to
+ * expect a CSS variable isn't defined.
+ * ```ts
+ * const myStyles = cs({
+ *   color: cssVar(myVars.color, 'red') // color: 'var(--{hash}-color, red)'
+ * })
+ * ```
+ *
+ * If the project is set up for parsing with fallback files, a fallback will automatically be filled
+ * during the parsing phase. This is helpful for cases when CSS variables are expected, but not set
+ * in the environment.
  */
-export function cssVar(input: string) {
-  return `var(${input})`;
+export function cssVar(input: string, fallback?: string) {
+  return fallback ? `var(${input}, ${fallback})` : `var(${input})`;
 }
 
+/**
+ * Util function to fix an issue with Emotion by
+ * appending `EmotionIssue#3066` to end of css variable
+ * See issue: [#3066](https://github.com/emotion-js/emotion/issues/3066)
+ */
+const emotionSafe = (input: string)=> {
+  if(input.endsWith('label')){
+    return input + 'EmotionFix'
+  }
+  return input;
+}
 /**
  * Create temporary CSS variables to use in components. The CSS variable names will
  * be unique at runtime to avoid collisions. The return value is a function and a
@@ -130,12 +109,19 @@ export function cssVar(input: string) {
  * div.style = myVars({ color: 'red' }) // <div style="--{hash}-color: red;" />
  * ```
  */
-export function createVars<T extends string>(...args: T[]): CsVars<T> {
-  const id = generateUniqueId();
+export function createVars<T extends string, ID extends string>(input: {
+  id: ID;
+  args: T[];
+}): CsVars<T, ID>;
+export function createVars<T extends string>(...args: T[]): CsVars<T, never>;
+export function createVars<T extends string, ID extends string>(...args: T[]): CsVars<T, ID> {
+  const id = (args[0] as any).id || generateUniqueId(); //?
+  // eslint-disable-next-line no-param-reassign
+  args = (args[0] as any).args || args;
   const result = (input: Record<T, string>) => {
     const vars = {};
     args.forEach(key => {
-      if (input[key]) {
+      if (input[key])  {
         // @ts-ignore TS complains about `key` not in object `{}`
         vars[result[key]] = input[key];
       }
@@ -145,10 +131,10 @@ export function createVars<T extends string>(...args: T[]): CsVars<T> {
 
   args.forEach(key => {
     // @ts-ignore
-    result[key] = `--${id}-${key}`;
+    result[key] = `--${id}-${emotionSafe(key)}`;
   }, {});
 
-  return result as CsVars<T>;
+  return result as CsVars<T, ID>;
 }
 
 type ModifierConfig = Record<string, Record<string, CS>>;
@@ -160,6 +146,22 @@ type ModifierValues<T extends ModifierConfig> = {
 type ModifierReturn<T extends ModifierConfig> = T &
   ((modifiers: Partial<ModifierValues<T>>) => string);
 
+/**
+ * Creates a modifier function that takes in a modifier config and will return a CSS class name
+ * that matches the result. Modifiers can be thought as `if` or `switch` statements
+ *
+ * ```tsx
+ * const myModifiers = createModifiers({
+ *   // a modifier called 'size'
+ *   size: {
+ *     small: cs({ fontSize: 12 }),
+ *     medium: cs({ fontSize: 14 })
+ *   }
+ * })
+ *
+ * myModifiers({ size: 'medium' }) // returns the medium class name
+ * ```
+ */
 export function createModifiers<T extends ModifierConfig>(input: T): ModifierReturn<T> {
   const modifierFn = (modifiers: Partial<ModifierValues<T>>) => {
     return Object.keys(modifiers)
@@ -180,6 +182,16 @@ function isCsPropsReturn(input: {}): input is CsToPropsReturn {
   return input.hasOwnProperty('style') || input.hasOwnProperty('className');
 }
 
+/**
+ * All acceptable values of the `cs` prop.
+ */
+export type CSToPropsInput =
+  | undefined
+  | CS
+  | CsToPropsReturn
+  | React.CSSProperties
+  | CSToPropsInput[];
+
 export type CsToPropsReturn = {className?: string; style?: React.CSSProperties};
 /**
  * A function that takes in a single input, or an array. The type of the input is either:
@@ -195,9 +207,7 @@ export type CsToPropsReturn = {className?: string; style?: React.CSSProperties};
  * @param input
  * @returns
  */
-export function csToProps(
-  input: undefined | CS | CsToPropsReturn | (undefined | CS | CsToPropsReturn)[]
-): CsToPropsReturn {
+export function csToProps(input: CSToPropsInput): CsToPropsReturn {
   // input is a string, so it must only be a class name
   if (typeof input === 'string') {
     return {className: input};
@@ -229,23 +239,27 @@ export function csToProps(
   }, {} as CsToPropsReturn);
 }
 
-export type CSToPropsInput =
-  | undefined
-  | CS
-  | CsToPropsReturn
-  | React.CSSProperties
-  | CSToPropsInput[];
-
 export interface CSProps {
   cs?: CSToPropsInput;
 }
 
 /**
- * The cs function is curried into 2 parts. The first function could be done at
- * build time. The returned function combines classnames and will remain as a
- * small runtime.
+ * Creates CSS styles based on object-style input. It has a side-effect of adding CSS to the page
+ * and will return a space-delimitated string of CSS class names meant to be added to an element.
+ *
+ * It can take a number of inputs of various types. The simplest is object-styles.
+ *
+ * ```ts
+ * const myStyles = cs({
+ *   backgroundColor: 'red'
+ * })
+ * ```
+ *
+ *
+ *
+ * The cs function is curried into 2 parts. The first function could be done at build time. The
+ * returned function combines classnames and will remain as a small runtime.
  */
-
 export function cs(...args: (StyleProps | string)[]): string {
   return args
     .map(input => {
@@ -283,7 +297,7 @@ export function cs(...args: (StyleProps | string)[]): string {
  *   style={{ padding: 10 }}
  *   cs={styles}
  *   csVars
- * ={vars({background: 'red'})}
+ ={vars({background: 'red'})}
  * />
  *
  * // Output
@@ -301,16 +315,7 @@ export function useCs<
   }
 >({cs, style, className, ...props}: T) {
   return {
-    // @ts-ignore // fix this later
     ...csToProps([cs, className, style]),
     ...props,
   } as Omit<T, 'cs' | 'csVars'>;
-}
-
-/**
- * Takes in a CSS Variable created by `createVars` and a fallback value and returns `var({input},
- * {fallback})`. This can be used inside `cs` functions to generated fallback values for properties.
- */
-export function fallback(input: string, fallbackValue: string) {
-  return `var(${input}, ${fallbackValue})`;
 }

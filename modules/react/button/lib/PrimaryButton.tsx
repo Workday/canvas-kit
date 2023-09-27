@@ -21,11 +21,11 @@ const primaryStyles = cs({
   [buttonVars.default.background]: cssVar(brand.primary.base),
   [buttonVars.default.border]: 'transparent',
   [buttonVars.default.borderRadius]: cssVar(system.shape.circle),
-  [buttonVars.default.color]: cssVar(brand.primary.accent),
+  [buttonVars.default.label]: cssVar(brand.primary.accent),
   '&:hover, &.hover': {
     [buttonVars.hover.background]: cssVar(brand.primary.dark),
     [buttonVars.hover.border]: 'transparent',
-    [buttonVars.hover.color]: cssVar(brand.primary.accent),
+    [buttonVars.hover.label]: cssVar(brand.primary.accent),
     '& span .wd-icon-fill': {
       [buttonVars.hover.icon]: cssVar(brand.primary.accent),
     },
@@ -33,7 +33,7 @@ const primaryStyles = cs({
   '&:focus-visible, &.focus': {
     [buttonVars.focus.background]: cssVar(brand.primary.base),
     [buttonVars.focus.border]: 'transparent',
-    [buttonVars.focus.color]: cssVar(brand.primary.accent),
+    [buttonVars.focus.label]: cssVar(brand.primary.accent),
     [buttonVars.focus.boxShadowInner]: cssVar(base.frenchVanilla100),
     [buttonVars.focus.boxShadowOuter]: cssVar(brand.common.focusOutline),
     '& span .wd-icon-fill': {
@@ -43,7 +43,7 @@ const primaryStyles = cs({
   '&:active, &.active': {
     [buttonVars.active.background]: cssVar(brand.primary.darkest),
     [buttonVars.active.border]: 'transparent',
-    [buttonVars.active.color]: cssVar(brand.primary.accent),
+    [buttonVars.active.label]: cssVar(brand.primary.accent),
     '& span .wd-icon-fill': {
       [buttonVars.active.icon]: cssVar(brand.primary.accent),
     },
@@ -54,7 +54,7 @@ const primaryStyles = cs({
   '&:disabled, &:active:disabled, &:focus:disabled, &:hover:disabled': {
     [buttonVars.disabled.background]: cssVar(brand.primary.base),
     [buttonVars.disabled.border]: 'transparent',
-    [buttonVars.disabled.color]: cssVar(brand.primary.accent),
+    [buttonVars.disabled.label]: cssVar(brand.primary.accent),
     '& span .wd-icon-fill': {
       [buttonVars.disabled.icon]: cssVar(brand.primary.accent),
     },
@@ -71,10 +71,10 @@ export const primaryButtonModifiers = createModifiers({
     inverse: cs({
       [buttonVars.default.background]: cssVar(base.frenchVanilla100),
       [buttonVars.default.borderRadius]: cssVar(system.shape.circle),
-      [buttonVars.default.color]: cssVar(base.blackPepper400),
+      [buttonVars.default.label]: cssVar(base.blackPepper400),
       '&:hover, &.hover': {
         [buttonVars.hover.background]: cssVar(base.soap300),
-        [buttonVars.hover.color]: cssVar(base.blackPepper500),
+        [buttonVars.hover.label]: cssVar(base.blackPepper500),
         '& span .wd-icon-fill': {
           [buttonVars.hover.icon]: cssVar(base.blackPepper500),
         },
@@ -83,7 +83,7 @@ export const primaryButtonModifiers = createModifiers({
         [buttonVars.focus.background]: cssVar(base.frenchVanilla100),
         [buttonVars.focus.boxShadowInner]: cssVar(base.blackPepper400),
         [buttonVars.focus.boxShadowOuter]: cssVar(base.frenchVanilla100),
-        [buttonVars.focus.color]: cssVar(base.blackPepper400),
+        [buttonVars.focus.label]: cssVar(base.blackPepper400),
         '& span .wd-icon-fill': {
           [buttonVars.focus.icon]: cssVar(base.blackPepper400),
         },
@@ -93,14 +93,14 @@ export const primaryButtonModifiers = createModifiers({
       },
       '&:active, &.active': {
         [buttonVars.active.background]: cssVar(base.soap400),
-        [buttonVars.active.color]: cssVar(base.blackPepper500),
+        [buttonVars.active.label]: cssVar(base.blackPepper500),
         '& span .wd-icon-fill': {
           [buttonVars.active.icon]: cssVar(base.blackPepper500),
         },
       },
       '&:disabled, &:active:disabled, &:focus:disabled, &:hover:disabled': {
         [buttonVars.disabled.background]: cssVar(base.frenchVanilla100),
-        [buttonVars.disabled.color]: cssVar(base.blackPepper400),
+        [buttonVars.disabled.label]: cssVar(base.blackPepper400),
         '& span .wd-icon-fill': {
           [buttonVars.disabled.icon]: cssVar(base.blackPepper400),
         },

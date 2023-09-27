@@ -7,7 +7,7 @@ import {usePillModel} from './usePillModel';
 import {xSmallIcon} from '@workday/canvas-system-icons-web';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {colors, space} from '@workday/canvas-kit-react/tokens';
-import {BaseButton} from '@workday/canvas-kit-react/button';
+import {BaseButton, focusRingVars} from '@workday/canvas-kit-react/button';
 
 export interface PillIconButtonProps extends Omit<SystemIconProps, 'icon'> {
   /**
@@ -26,6 +26,7 @@ const getIconColors = () => {
   return {
     default: {
       icon: colors.licorice200,
+      border: 'initial',
     },
 
     hover: {
@@ -49,6 +50,9 @@ const getIconColors = () => {
 };
 
 const StyledIconButton = styled(BaseButton)<StyledType & PillIconButtonProps>({
+  [focusRingVars.innerColor]: 'transparent',
+  [focusRingVars.outerColor]: colors.blueberry400,
+  [focusRingVars.width]: '0px',
   marginInlineEnd: '-7px', // visually pull in the pill to the right size
   marginInlineStart: `-2px`, // visually create space between label and the button
   overflow: 'visible',

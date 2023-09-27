@@ -14,7 +14,7 @@ import {
 import {SystemIconProps} from '@workday/canvas-kit-react/icon';
 import {Box} from '@workday/canvas-kit-react/layout';
 import {space, spaceNumbers} from '@workday/canvas-kit-react/tokens';
-
+import {base, system} from '@workday/canvas-tokens-web';
 import {ButtonColors, ButtonSizes, IconPositions} from './types';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 
@@ -53,10 +53,11 @@ export interface ButtonContainerProps extends Partial<SystemIconProps>, GrowthBe
    */
   shouldMirrorIcon?: boolean;
   children?: React.ReactNode;
+  focusRing?: keyof typeof buttonModifiers.focusRing;
 }
 
 /**
- * Extends all the style properties from Box to our buttons as well as props from BaseButtonContainerProps.
+ * Extends all the style properties from Box to our buttons as well as props from ButtonContainerProps.
  * We omit `ref` since all of our buttons use `createComponent` and already give access to `ref`.
  * Use this type to extend and customize any one off buttons that you want full control over styling.
  */
@@ -69,7 +70,7 @@ export const buttonVars = {
     'boxShadowInner',
     'boxShadowOuter',
     'icon',
-    'color',
+    'label',
     'opacity',
     'borderRadius'
   ),
@@ -79,7 +80,7 @@ export const buttonVars = {
     'boxShadowInner',
     'boxShadowOuter',
     'icon',
-    'color',
+    'label',
     'opacity',
     'borderRadius'
   ),
@@ -89,7 +90,7 @@ export const buttonVars = {
     'boxShadowInner',
     'boxShadowOuter',
     'icon',
-    'color',
+    'label',
     'opacity',
     'borderRadius'
   ),
@@ -99,7 +100,7 @@ export const buttonVars = {
     'boxShadowInner',
     'boxShadowOuter',
     'icon',
-    'color',
+    'label',
     'opacity',
     'borderRadius'
   ),
@@ -109,10 +110,42 @@ export const buttonVars = {
     'boxShadowInner',
     'boxShadowOuter',
     'icon',
-    'color',
+    'label',
     'opacity',
     'borderRadius'
   ),
+};
+
+export const focusRingVars = createVars('separation', 'width', 'innerColor', 'outerColor');
+
+export const focusRing = {
+  inset: cs({
+    '&:focus-visible, &.focus': {
+      boxShadow: `inset ${cssVar(focusRingVars.innerColor)} 0px 0px 0px ${cssVar(
+        focusRingVars.width
+      )}, ${cssVar(focusRingVars.outerColor)} 0px 0px 0px calc(${cssVar(
+        focusRingVars.width
+      )} + ${cssVar(focusRingVars.separation)})`,
+    },
+  }),
+  outer: cs({
+    '&:focus-visible, &.focus': {
+      boxShadow: `${cssVar(focusRingVars.innerColor)} 0px 0px 0px ${cssVar(
+        focusRingVars.width
+      )}, ${cssVar(focusRingVars.outerColor)} 0px 0px 0px calc(${cssVar(
+        focusRingVars.width
+      )} + ${cssVar(focusRingVars.separation)})`,
+    },
+  }),
+  both: cs({
+    '&:focus-visible, &.focus': {
+      boxShadow: `${cssVar(focusRingVars.innerColor)} 0px 0px 0px ${cssVar(
+        focusRingVars.width
+      )}, ${cssVar(focusRingVars.outerColor)} 0px 0px 0px calc(${cssVar(
+        focusRingVars.width
+      )} + ${cssVar(focusRingVars.separation)})`,
+    },
+  }),
 };
 
 export const getMinWidthStyles = (children: React.ReactNode, size: ButtonSizes) => {
@@ -191,24 +224,24 @@ const baseButtonStyles = cs({
   lineHeight: '1.25rem',
   letterSpacing: '0.015rem',
   fontWeight: 'bold',
-  backgroundColor: cssVar(buttonVars.default.background),
-  color: cssVar(buttonVars.default.color),
-  border: '1px solid transparent',
-  borderColor: cssVar(buttonVars.default.border),
+  backgroundColor: cssVar(buttonVars.default.background, 'transparent'),
+  color: cssVar(buttonVars.default.label, base.frenchVanilla100),
+  borderWidth: '1px',
+  borderStyle: 'solid',
+  borderColor: cssVar(buttonVars.default.border, 'transparent'),
   maxWidth: 'min-content',
   cursor: 'pointer',
   display: 'inline-flex',
-  gap: space.xxs,
+  gap: cssVar(system.space.x2),
+  boxShadow: 'none',
   alignItems: 'center',
   justifyContent: 'center',
   boxSizing: 'border-box',
-  boxShadow: 'none',
   outline: '2px transparent',
-  paddingInline: space.m,
   whiteSpace: 'nowrap',
   WebkitFontSmoothing: 'antialiased',
   MozOsxFontSmoothing: 'grayscale',
-  borderRadius: cssVar(buttonVars.default.borderRadius),
+  borderRadius: cssVar(buttonVars.default.borderRadius, system.shape.circle),
   position: 'relative',
   verticalAlign: 'middle',
   overflow: 'hidden',
@@ -219,13 +252,14 @@ const baseButtonStyles = cs({
     boxShadow: 'none',
     opacity: 0.4,
   },
+  [focusRingVars.width]: '2px',
+  [focusRingVars.separation]: '2px',
+  [focusRingVars.innerColor]: cssVar(buttonVars.focus.boxShadowInner),
+  [focusRingVars.outerColor]: cssVar(buttonVars.focus.boxShadowOuter),
   '&:focus-visible, &.focus': {
-    backgroundColor: cssVar(buttonVars.focus.background),
-    borderColor: cssVar(buttonVars.focus.border),
-    boxShadow: `${cssVar(buttonVars.focus.boxShadowInner)} 0px 0px 0px 2px, ${cssVar(
-      buttonVars.focus.boxShadowOuter
-    )} 0px 0px 0px 4px`,
-    color: cssVar(buttonVars.focus.color),
+    backgroundColor: cssVar(buttonVars.focus.background, 'transparent'),
+    borderColor: cssVar(buttonVars.focus.border, 'transparent'),
+    color: cssVar(buttonVars.focus.label),
     '& span .wd-icon-fill': {
       fill: cssVar(buttonVars.focus.icon),
     },
@@ -236,8 +270,8 @@ const baseButtonStyles = cs({
   },
   '&:hover, &.hover': {
     backgroundColor: cssVar(buttonVars.hover.background),
-    borderColor: cssVar(buttonVars.hover.border),
-    color: cssVar(buttonVars.hover.color),
+    borderColor: cssVar(buttonVars.hover.border, 'transparent'),
+    color: cssVar(buttonVars.hover.label),
     '& span .wd-icon-fill': {
       fill: cssVar(buttonVars.hover.icon),
     },
@@ -245,23 +279,28 @@ const baseButtonStyles = cs({
   '&:hover:active': {transitionDuration: '40ms'},
   '&:active, &.active': {
     backgroundColor: cssVar(buttonVars.active.background),
-    borderColor: cssVar(buttonVars.active.border),
-    color: cssVar(buttonVars.active.color),
+    borderColor: cssVar(buttonVars.active.border, 'transparent'),
+    color: cssVar(buttonVars.active.label),
     '& span .wd-icon-fill': {
       fill: cssVar(buttonVars.active.icon),
     },
   },
   '&:disabled, &:active:disabled, &:focus:disabled, &:hover:disabled': {
     backgroundColor: cssVar(buttonVars.disabled.background),
-    borderColor: cssVar(buttonVars.disabled.border),
-    color: cssVar(buttonVars.disabled.color),
+    borderColor: cssVar(buttonVars.disabled.border, 'transparent'),
+    color: cssVar(buttonVars.disabled.label),
     '& span .wd-icon-fill': {
       fill: cssVar(buttonVars.disabled.icon),
     },
   },
 });
 
-export const SizeModifiers = createModifiers({
+export const buttonModifiers = createModifiers({
+  focusRing: {
+    inset: focusRing.inset,
+    outer: focusRing.outer,
+    both: focusRing.both,
+  },
   size: {
     large: cs({
       fontSize: space.s,
@@ -288,6 +327,7 @@ export const SizeModifiers = createModifiers({
       lineHeight: '1.25rem',
       letterSpacing: '0.015rem',
       minWidth: '96px',
+      paddingInline: space.m,
       height: space.xl,
       '&.canvas-button-icon-only': {
         padding: '0',
@@ -354,6 +394,7 @@ export const BaseButton = createComponent('button')({
       children,
       cs,
       size,
+      focusRing = 'both',
       iconPosition,
       icon,
       colors,
@@ -363,6 +404,7 @@ export const BaseButton = createComponent('button')({
     ref,
     Element
   ) => {
+    console.log(cs);
     return (
       <Box
         as={Element}
@@ -371,7 +413,7 @@ export const BaseButton = createComponent('button')({
         cs={[
           baseButtonStyles,
           cs,
-          SizeModifiers({size: size}),
+          buttonModifiers({focusRing: focusRing, size: size}),
           buttonVars.active(colors?.active || {}),
           buttonVars.default(colors?.default || {}),
           buttonVars.disabled(colors?.disabled || {}),
