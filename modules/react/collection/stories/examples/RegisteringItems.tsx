@@ -25,7 +25,7 @@ export const RegisteringItems = () => {
         <Text marginBottom="m" fontWeight="bold">
           An Array of Objects
         </Text>
-        <ListBox items={items} width="200px" maxHeight={200}>
+        <ListBox items={items} width="200px">
           {item => (
             <ListBox.Item paddingBottom="s" data-id={item.id}>
               {item.id}
