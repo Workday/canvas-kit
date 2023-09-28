@@ -118,7 +118,7 @@ export const buttonVars = {
 
 export const focusRingVars = createVars('separation', 'width', 'innerColor', 'outerColor');
 
-export const focusRing = {
+export const focusRingStyles = {
   inset: cs({
     '&:focus-visible, &.focus': {
       boxShadow: `inset ${cssVar(focusRingVars.innerColor)} 0px 0px 0px ${cssVar(
@@ -297,9 +297,9 @@ const baseButtonStyles = cs({
 
 export const buttonModifiers = createModifiers({
   focusRing: {
-    inset: focusRing.inset,
-    outer: focusRing.outer,
-    both: focusRing.both,
+    inset: focusRingStyles.inset,
+    outer: focusRingStyles.outer,
+    both: focusRingStyles.both,
   },
   size: {
     large: cs({
