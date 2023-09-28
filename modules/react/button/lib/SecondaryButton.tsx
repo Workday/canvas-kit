@@ -55,6 +55,7 @@ const secondaryStyles = cs({
     [buttonVars.disabled.background]: 'transparent',
     [buttonVars.disabled.border]: cssVar(base.blackPepper400),
     [buttonVars.disabled.label]: cssVar(base.blackPepper400),
+    [buttonVars.disabled.opacity]: '0.4',
     '& span .wd-icon-fill': {
       [buttonVars.disabled.icon]: cssVar(base.blackPepper400),
     },

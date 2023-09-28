@@ -4,6 +4,7 @@ import {
   ButtonColors,
   ButtonSizes,
   ButtonContainerProps,
+  focusRingVars,
 } from '@workday/canvas-kit-react/button';
 import {
   createComponent,
@@ -34,6 +35,7 @@ const getIconButtonColors = (toggled?: boolean): ButtonColors => {
     },
     disabled: {
       background: toggled ? colors.soap100 : colors.soap100,
+      border: colors.soap500,
       icon: colors.soap600,
       opacity: '1',
     },
@@ -52,6 +54,9 @@ const getSizeStyles = (size?: ButtonSizes) => {
 
 const StyledButton = styled(BaseButton)<ButtonContainerProps & StyledType>(
   {
+    [focusRingVars.innerColor]: colors.frenchVanilla100,
+    [focusRingVars.outerColor]: colors.blueberry400,
+    [focusRingVars.width]: '2px',
     borderRadius: borderRadius.zero,
     border: `1px solid ${colors.soap500}`,
     borderLeft: 'none',

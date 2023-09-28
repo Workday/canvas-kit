@@ -229,7 +229,6 @@ const baseButtonStyles = cs({
   borderWidth: '1px',
   borderStyle: 'solid',
   borderColor: cssVar(buttonVars.default.border, 'transparent'),
-  maxWidth: 'min-content',
   cursor: 'pointer',
   display: 'inline-flex',
   gap: cssVar(system.space.x2),
@@ -250,7 +249,7 @@ const baseButtonStyles = cs({
   '&:disabled, &:disabled:active': {
     cursor: 'default',
     boxShadow: 'none',
-    opacity: 0.4,
+    opacity: cssVar(buttonVars.disabled.opacity),
   },
   [focusRingVars.width]: '2px',
   [focusRingVars.separation]: '2px',
@@ -404,7 +403,6 @@ export const BaseButton = createComponent('button')({
     ref,
     Element
   ) => {
-    console.log(cs);
     return (
       <Box
         as={Element}

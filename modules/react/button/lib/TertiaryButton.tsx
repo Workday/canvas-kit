@@ -83,6 +83,7 @@ const tertiaryStyles = cs({
     [buttonVars.disabled.background]: 'transparent',
     [buttonVars.disabled.border]: cssVar(base.frenchVanilla100),
     [buttonVars.disabled.label]: cssVar(brand.primary.base),
+    [buttonVars.disabled.opacity]: '0.4',
     '& span .wd-icon-fill': {
       [buttonVars.disabled.icon]: cssVar(brand.primary.base),
     },

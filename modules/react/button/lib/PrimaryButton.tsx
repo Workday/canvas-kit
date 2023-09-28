@@ -55,6 +55,7 @@ const primaryStyles = cs({
     [buttonVars.disabled.background]: cssVar(brand.primary.base),
     [buttonVars.disabled.border]: 'transparent',
     [buttonVars.disabled.label]: cssVar(brand.primary.accent),
+    [buttonVars.disabled.opacity]: '0.4',
     '& span .wd-icon-fill': {
       [buttonVars.disabled.icon]: cssVar(brand.primary.accent),
     },
