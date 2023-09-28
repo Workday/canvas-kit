@@ -20,9 +20,13 @@ export type StyleProps =
   | SerializedStyles
   | CSSObject;
 
-function replaceWithToken<T>(value: T): T {
-  return (tokens as any)[value] || value;
-}
+  function replaceWithToken<T>(value: T): T {
+    // Handle the case where the value is a variable without the `var()` wrapping function. A common mistake.
+    if (typeof value === 'string' && value.startsWith('--')) {
+      return `var(${value})` as any as T;
+    }
+    return (tokens as any)[value] || value;
+  }
 
 // This function current replaces token values like "blueberry400" with a color value
 // but it can be used to replace other things if we want or remove it entirely
