@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v9.1.21](https://github.com/Workday/canvas-kit/releases/tag/v9.1.21) (2023-09-26)
+
+### Documentation
+
+- docs: Update the docParser to prevent max call stack errors ([#2342](https://github.com/Workday/canvas-kit/pull/2342)) ([@NicholasBoll](https://github.com/NicholasBoll))
+- docs: Add info to maintaining doc about deprecations ([#2339](https://github.com/Workday/canvas-kit/pull/2339)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@jamesfan](https://github.com/jamesfan))
+
+
 ## [v9.1.20](https://github.com/Workday/canvas-kit/releases/tag/v9.1.20) (2023-09-20)
 
 ### Components
