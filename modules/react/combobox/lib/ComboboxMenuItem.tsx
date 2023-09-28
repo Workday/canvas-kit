@@ -33,16 +33,6 @@ export const useComboboxMenuItem = composeHooks(
     const id = elemProps['data-id'] || '';
     const {localRef, elementRef} = useLocalRef(ref as React.Ref<HTMLElement>);
 
-    // focus on the item with the cursor
-    React.useLayoutEffect(() => {
-      if (model.state.mode === 'single' && model.state.cursorId === id) {
-          // delay focus changes to allow PopperJS to position
-          requestAnimationFrame(() => {
-            localRef.current?.focus();
-          });
-      }
-    }, [id, localRef, model.state.cursorId, model.state.mode]);
-
     const onMouseDown = (event: React.MouseEvent<HTMLElement>) => {
       if (
         model.state.nonInteractiveIds.includes(id) ||

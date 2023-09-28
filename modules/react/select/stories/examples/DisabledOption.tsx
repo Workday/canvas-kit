@@ -11,7 +11,6 @@ const options = [
   {id: 'Mobile Phone', disabled: true},
   {
     id: 'The Ontologically Anthropocentric Sensory Immersive Simulation',
-    disabled: false,
   },
 ];
 
