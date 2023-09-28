@@ -27,8 +27,8 @@ export const HoistedModel = () => {
   return (
     <Flex flexDirection="column">
       <Select model={model}>
-        <FormField label="Contact" inputId="dyamic-select">
-          <Select.Input id="dyamic-select" />
+        <FormField label="Contact" inputId="hoisted-select">
+          <Select.Input id="hoisted-select" />
           <Select.Popper>
             <Select.Card>
               <Select.List>
