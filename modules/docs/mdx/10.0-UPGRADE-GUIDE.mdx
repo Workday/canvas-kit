@@ -170,7 +170,7 @@ a flexible API and access to its internals via its subcomponents.
 // v10
 <Select items={['Small', 'Medium', 'Large']}>
   <FormField label="Pizza Size" inputId="pizza">
-    <Select.Input onChange={e => handleChange(e)} id="pizza" />
+    <Select.Input id="pizza" onChange={e => handleChange(e)} id="pizza" />
     <Select.Popper>
       <Select.Card maxHeight="200px">
         <Select.List>
@@ -184,7 +184,7 @@ a flexible API and access to its internals via its subcomponents.
 </Select>
 ```
 
-This component also does not havea border around the `Menu` component as the
+This component also does not have a border around the `Menu` component as the
 [Select in Preview](https://workday.github.io/canvas-kit/?path=/story/preview-select-left-label--default)
 has.
 
