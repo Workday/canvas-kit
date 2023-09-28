@@ -10,11 +10,7 @@ const options = [
   {id: 'Mail'},
   {id: 'Mobile Phone'},
   {
-    id: 'test',
-    disabled: false,
-  },
-  {
-    id: 'foo',
+    id: 'The Ontologically Anthropocentric Sensory Immersive Simulation',
     disabled: false,
   },
 ];
@@ -25,6 +21,7 @@ export const Basic = () => {
   const [value, setValue] = React.useState('');
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(event);
     setValue(event.target.value);
   };
 
