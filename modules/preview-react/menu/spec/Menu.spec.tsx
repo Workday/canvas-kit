@@ -116,7 +116,7 @@ describe('DeprecatedMenu', () => {
 });
 
 describe('DeprecatedMenu Accessibility', () => {
-  // https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/examples/menu-button-actions-active-descendant/
+  // https://www.w3.org/TR/wai-aria-practices-1.1/examples/menu-button/menu-button-actions-active-descendant.html
 
   it('should render DeprecatedMenu as [role="menu"]', () => {
     render(<DeprecatedMenu />);

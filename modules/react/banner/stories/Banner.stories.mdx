@@ -5,6 +5,7 @@ import {Banner} from '@workday/canvas-kit-react/banner';
 import {ActionText} from './examples/ActionText';
 import {Basic} from './examples/Basic';
 import {Error} from './examples/Error';
+import {IconBanner} from './examples/IconBanner';
 import {Sticky} from './examples/Sticky';
 import {ThemedAlert} from './examples/ThemedAlert';
 import {ThemedError} from './examples/ThemedError';
@@ -48,6 +49,12 @@ Set the `hasError` prop of the `Banner` to designate the severity of the message
 banner. This will change the defualt icon to `exclamationCircleIcon`.
 
 <ExampleCodeBlock code={Error} />
+
+### Icon Banner
+
+When only using an icon in the `Banner`, use our `Tooltip` component to both show a visible text alternative, and assign an `aria-label` string to the child `Banner`.
+
+<ExampleCodeBlock code={IconBanner} />
 
 ### Sticky
 
