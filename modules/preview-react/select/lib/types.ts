@@ -7,6 +7,8 @@
  * https://github.com/popperjs/popper-core/blob/38914aae7a2e91715c6eb2b563517082a40cfa64/src/utils/computeOffsets.js#L68-L81
  * This rounding causes problems with browsers that allow subpixel values for elements
  * like Firefox and Edge.
+ *
+ * @deprecated ⚠️ `MenuPlacement` in Preview has been deprecated and will be removed in a future major version. Please use [`Select` in Main](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-select--basic) instead.
  */
 export type MenuPlacement = 'bottom' | 'top';
 
@@ -29,5 +31,7 @@ export type MenuPlacement = 'bottom' | 'top';
  * However, it's possible for a user to open a menu while it's in the process of
  * closing in which case the menu can transition from `closing` > `opening` (and
  * vice-versa).
+ *
+ * @deprecated ⚠️ `MenuVisibility` in Preview has been deprecated and will be removed in a future major version. Please use [`Select` in Main](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-select--basic) instead.
  */
 export type MenuVisibility = 'closed' | 'open' | 'opening' | 'opened' | 'close' | 'closing';
