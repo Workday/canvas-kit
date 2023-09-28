@@ -21,8 +21,4 @@ export {
   multiSelectionManager,
   isSelected,
 } from './lib/useSelectionListModel';
-export {
-  wrappingNavigationManager,
-  navigationManager,
-  createNavigationManager,
-} from './lib/useCursorListModel';
+export {wrappingNavigationManager, navigationManager} from './lib/useCursorListModel';

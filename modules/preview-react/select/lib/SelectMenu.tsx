@@ -229,7 +229,7 @@ const generatePopperOptions = (
 };
 
 /**
- * @deprecated ⚠️ `SelectMenu` in Preview has been deprecated and will be removed in a future major version. Please consider using [`Select in Main](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-select--basic) instead.
+ * @deprecated ⚠️ `SelectMenu` in Preview has been deprecated and will be removed in a future major version. Please use [`Select` in Main](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-select--basic) instead.
  */
 export const SelectMenu = ({
   buttonRef,
