@@ -173,7 +173,6 @@ export const Select = createContainer()({
     Item: SelectItem,
   },
 })<SelectProps>(({children, ...elemProps}, _, model) => {
-  console.log(model);
   return (
     <Combobox model={model} {...elemProps}>
       {children}
