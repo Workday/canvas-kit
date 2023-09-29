@@ -5,7 +5,6 @@ import {
   createElemPropsHook,
   createSubcomponent,
   styled,
-  useLocalRef,
 } from '@workday/canvas-kit-react/common';
 import {StyledMenuItem, useMenuModel} from '@workday/canvas-kit-react/menu';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
@@ -31,7 +30,6 @@ export interface ComboboxMenuItemProps {
 export const useComboboxMenuItem = composeHooks(
   createElemPropsHook(useMenuModel)((model, ref, elemProps: {'data-id'?: string} = {}) => {
     const id = elemProps['data-id'] || '';
-    const {localRef, elementRef} = useLocalRef(ref as React.Ref<HTMLElement>);
 
     const onMouseDown = (event: React.MouseEvent<HTMLElement>) => {
       if (
@@ -55,7 +53,6 @@ export const useComboboxMenuItem = composeHooks(
     const selected = model.state.cursorId === id;
 
     return {
-      ref: elementRef,
       role: 'option',
       'aria-selected': selected || undefined,
       onMouseDown,

@@ -4,6 +4,22 @@ import {useComboboxModel} from './useComboboxModel';
 
 /**
  * `useKeyboardTypeAhead` handles type-ahead. It will try and find a matching item in the list. It also returns the keys types so far.
+ * This hook is best used when composing hooks and in conjunction with `useComboboxInput`.
+ *
+ * ```tsx
+ * // Example for a `Select` input
+ * export const useSelectInput = composeHooks(
+ * createElemPropsHook(useComboboxModel)((model, ref, elemProps: {keySofar?: string} = {}) => {
+ *  return {
+ *    onKeyDown(event: React.KeyboardEvent) {
+ *     // onKeyDown logic ...
+ *    },
+ *  } as const;
+ * }),
+ * useKeyboardTypeAhead,
+ * useComboboxInput
+ * );
+ * ```
  */
 export const useKeyboardTypeAhead = createElemPropsHook(useComboboxModel)(model => {
   const keySofar = React.useRef('');
