@@ -13,7 +13,7 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {SystemIconProps} from '@workday/canvas-kit-react/icon';
 import {Box} from '@workday/canvas-kit-react/layout';
-import {space, spaceNumbers} from '@workday/canvas-kit-react/tokens';
+import {space, spaceNumbers, type} from '@workday/canvas-kit-react/tokens';
 import {base, system} from '@workday/canvas-tokens-web';
 import {ButtonColors, ButtonSizes, IconPositions} from './types';
 import {CanvasSystemIcon} from '@workday/design-assets-types';

@@ -114,7 +114,7 @@
     "yargs": "^16.2.0"
   },
   "scripts": {
-    "start": "node utils/download-fonts.js && node --max-old-space-size=2048 node_modules/.bin/start-storybook -p 9001 -c .storybook",
+    "start": "node utils/download-fonts.js && node --max-old-space-size=2048 node_modules/.bin/start-storybook -p 9001 -c .storybook -s ./public",
     "watch": "TSC_NONPOLLING_WATCHER=1 lerna run watch --parallel --stream",
     "clean": "lerna run clean",
     "depcheck": "lerna run depcheck",
@@ -128,7 +128,7 @@
     "chromatic": "chromatic",
     "commit": "git-cz",
     "commitmsg": "commitlint --edit $HUSKY_GIT_PARAMS",
-    "build-storybook": "node utils/download-fonts.js && build-storybook -c .storybook -o docs",
+    "build-storybook": "node utils/download-fonts.js && build-storybook -c .storybook -o docs -s ./public",
     "lint": "node utils/check-lockfile.js && node utils/check-mismatched-dependencies.js && eslint -c ./.eslintrc.js --ext=jsx,ts,tsx .",
     "typecheck": "npm-run-all --parallel typecheck:src typecheck:cypress typecheck:types typecheck:specs typecheck:stories",
     "typecheck:src": "lerna run typecheck:src",
