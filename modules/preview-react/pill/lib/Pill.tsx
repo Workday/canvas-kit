@@ -40,6 +40,7 @@ const getButtonPillColors = () => {
       icon: colors.licorice500,
       background: colors.soap300,
       border: colors.blueberry400,
+      label: colors.blackPepper400,
       focusRing: focusRing({
         width: 0,
         inset: 'inner',
@@ -52,11 +53,13 @@ const getButtonPillColors = () => {
       icon: colors.licorice500,
       background: colors.soap400,
       border: colors.licorice400,
+      label: colors.blackPepper400,
     },
     active: {
       icon: colors.licorice500,
       background: colors.soap500,
       border: colors.licorice500,
+      label: colors.blackPepper400,
     },
     disabled: {
       icon: colors.licorice100,

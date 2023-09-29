@@ -39,7 +39,7 @@ const getIconColors = () => {
     },
     focus: {
       icon: colors.licorice500,
-
+      border: 'transparent',
       focusRing: focusRing({
         innerColor: 'transparent',
       }),
