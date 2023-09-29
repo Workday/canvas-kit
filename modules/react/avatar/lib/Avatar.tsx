@@ -38,7 +38,7 @@ export interface AvatarProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   as?: 'div';
   /**
    * The object-fit CSS property sets how the content of a replaced element,
-   * such as an <img> or <video>, should be resized to fit its container.
+   * such as an `<img>` or `<video>`, should be resized to fit its container.
    * See [object-fit](https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit).
    * If your image is not a square, you can use this property to ensure the image is rendered properly.
    */
