@@ -92,6 +92,7 @@ const getRemovablePillColors = (disabled?: boolean) => {
       icon: colors.licorice200,
       background: colors.soap300,
       label: colors.blackPepper400,
+      border: colors.licorice200,
 
       focusRing: focusRing({
         width: 0,
@@ -104,8 +105,8 @@ const getRemovablePillColors = (disabled?: boolean) => {
 };
 
 const pillBaseStyles: CSSObject = {
-  [focusRingVars.separation]: '1px',
-  [focusRingVars.width]: '0px',
+  [focusRingVars.separation]: '-1px',
+  [focusRingVars.width]: '1px',
   [focusRingVars.innerColor]: colors.blueberry400,
   [focusRingVars.outerColor]: colors.blueberry400,
   display: 'inline-flex',
@@ -151,8 +152,10 @@ const StyledBasePill = styled(BaseButton.as('button'))<StyledType & PillProps>(
     }),
   },
   ({variant}) => ({
-    '&:focus': {
+    '&:focus, &:focus-visible': {
       borderColor: variant === 'removable' ? undefined : colors.blueberry400,
+      [focusRingVars.separation]: '0px',
+      [focusRingVars.width]: '0px',
     },
   }),
   boxStyleFn

@@ -31,9 +31,11 @@ const getIconColors = () => {
 
     hover: {
       icon: colors.licorice500,
+      border: 'initial',
     },
     active: {
       icon: colors.licorice500,
+      border: 'initial',
     },
     focus: {
       icon: colors.licorice500,

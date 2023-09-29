@@ -77,20 +77,25 @@ const getIconButtonColors = (toggled?: boolean): ButtonColors => {
     },
     hover: {
       background: toggled ? colors.frenchVanilla100 : colors.soap400,
+      border: toggled ? colors.licorice200 : 'transparent',
       icon: colors.licorice400,
       label: colors.licorice400,
     },
     active: {
       background: toggled ? colors.frenchVanilla100 : colors.soap400,
+      border: toggled ? colors.licorice200 : 'transparent',
       icon: colors.licorice400,
       label: colors.licorice400,
     },
     focus: {
       border: toggled ? colors.licorice200 : 'transparent',
+      icon: colors.licorice400,
     },
     disabled: {
       background: colors.soap200,
       opacity: '1',
+      icon: colors.licorice400,
+      border: toggled ? colors.licorice200 : 'transparent',
     },
   };
 };

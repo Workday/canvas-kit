@@ -63,7 +63,7 @@ const tertiaryStyles = cs({
     [buttonVars.active.border]: 'transparent',
     [buttonVars.active.label]: cssVar(brand.primary.dark),
     '& span .wd-icon-fill': {
-      [buttonVars.active.icon]: cssVar(brand.primary.base),
+      [buttonVars.active.icon]: cssVar(brand.primary.dark),
     },
     '&.canvas-tertiary-button-icon-only': {
       '& span .wd-icon-fill': {
