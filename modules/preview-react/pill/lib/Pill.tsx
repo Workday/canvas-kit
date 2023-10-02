@@ -157,8 +157,8 @@ const StyledBasePill = styled(BaseButton.as('button'))<StyledType & PillProps>(
   ({variant}) => ({
     '&:focus, &:focus-visible': {
       borderColor: variant === 'removable' ? undefined : colors.blueberry400,
-      [focusRingVars.separation]: '0px',
-      [focusRingVars.width]: '0px',
+      [focusRingVars.separation]: '-1px',
+      [focusRingVars.width]: '1px',
     },
   }),
   boxStyleFn
