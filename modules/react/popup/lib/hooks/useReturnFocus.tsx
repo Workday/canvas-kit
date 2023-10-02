@@ -32,6 +32,20 @@ function getFocusableElement(element: Element | null): Element | null {
 }
 
 /**
+ * Is the element outside of bounds. An element is outside of bounds if it is less than half visible.
+ */
+function isElementOutsideOfBounds(element: HTMLElement, boundingRect: DOMRect) {
+  const elementRect = element.getBoundingClientRect();
+
+  return (
+    elementRect.top + elementRect.height / 2 < boundingRect.top || // is the top half of the target element visible?
+    elementRect.bottom - elementRect.height / 2 > boundingRect.bottom || // is the bottom half of the target element visible?
+    elementRect.left + elementRect.width / 2 < boundingRect.left || // is the left half of the target element visible?
+    elementRect.right - elementRect.width / 2 > boundingRect.right // is the right half of the target element visible?
+  );
+}
+
+/**
  * Returns focus to the target element when the popup is hidden. This works well with
  * {@link useInitialFocus}. This should be used with {@link useFocusRedirect} or
  * {@link useFocusTrap} for a complete focus management solution.
@@ -100,16 +114,14 @@ export const useReturnFocus = createElemPropsHook(usePopupModel)(model => {
       }
       const scrollParent = getScrollParent(element);
       const scrollParentRect = scrollParent.getBoundingClientRect();
-      const elementRect = element.getBoundingClientRect();
+      const viewportRect = DOMRect.fromRect({width: window.innerWidth, height: window.innerHeight});
 
       // Don't change focus if user focused on a different element like a `input` or the target
       // element isn't on at least halfway rendered on the screen.
       if (
         (elementRef.current && getFocusableElement(elementRef.current)) || // did the user click on a focusable element?
-        elementRect.top + elementRect.height / 2 < scrollParentRect.top || // is the top half of the target element visible?
-        elementRect.bottom - elementRect.height / 2 > scrollParentRect.bottom || // is the bottom half of the target element visible?
-        elementRect.left + elementRect.width / 2 < scrollParentRect.left || // is the left half of the target element visible?
-        elementRect.right - elementRect.width / 2 > scrollParentRect.right // is the right half of the target element visible?
+        isElementOutsideOfBounds(element, scrollParentRect) || // Is the element not visible in its scroll parent?
+        isElementOutsideOfBounds(element, viewportRect) // Is the element not visible in the viewport?
       ) {
         // reset the focus element and bail early
         elementRef.current = null;
