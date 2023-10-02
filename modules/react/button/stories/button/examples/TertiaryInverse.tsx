@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {TertiaryButton} from '@workday/canvas-kit-react/button';
-import {HStack} from '@workday/canvas-kit-react/layout';
+import {Flex} from '@workday/canvas-kit-react/layout';
 import {
   plusIcon,
   relatedActionsVerticalIcon,
@@ -10,7 +10,7 @@ import {
 } from '@workday/canvas-system-icons-web';
 
 export const TertiaryInverse = () => (
-  <HStack spacing="s" backgroundColor="blueberry400" padding="s">
+  <Flex gap="s" backgroundColor="blueberry400" padding="s">
     <TertiaryButton variant="inverse">Tertiary</TertiaryButton>
     <TertiaryButton icon={plusIcon} iconPosition="start" variant="inverse">
       Tertiary
@@ -19,5 +19,5 @@ export const TertiaryInverse = () => (
       Tertiary
     </TertiaryButton>
     <TertiaryButton icon={relatedActionsVerticalIcon} variant="inverse" />
-  </HStack>
+  </Flex>
 );

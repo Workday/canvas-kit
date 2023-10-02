@@ -10,7 +10,7 @@ import {
   styled,
   StyledType,
 } from '@workday/canvas-kit-react/common';
-import {Stack} from '@workday/canvas-kit-react/layout';
+import {Flex} from '@workday/canvas-kit-react/layout';
 import {
   useOverflowListMeasure,
   useListRenderItems,
@@ -19,9 +19,7 @@ import {
 
 import {useTabsModel} from './useTabsModel';
 
-// Use `Partial` here to make `spacing` optional
-export interface TabListProps<T = any>
-  extends Omit<Partial<ExtractProps<typeof Stack, never>>, 'children'> {
+export interface TabListProps<T = any> extends Omit<ExtractProps<typeof Flex, never>, 'children'> {
   /**
    * If items are passed to a `TabsModel`, the child of `Tabs.List` should be a render prop. The
    * List will determine how and when the item will be rendered.
@@ -47,7 +45,7 @@ export const useTabsList = composeHooks(
   useListResetCursorOnBlur
 );
 
-const StyledStack = styled(Stack)<StyledType & {maskImage?: string}>(({maskImage}) => ({
+const StyledStack = styled(Flex)<StyledType & {maskImage?: string}>(({maskImage}) => ({
   maskImage: maskImage,
 }));
 
@@ -64,7 +62,7 @@ export const TabsList = createSubcomponent('div')({
       position="relative"
       borderBottom={`1px solid ${commonColors.divider}`}
       paddingX={modality === 'touch' ? 'zero' : 'm'}
-      spacing="xs"
+      gap="xs"
       maskImage={
         modality === 'touch' && touchStates.isDragging
           ? `linear-gradient(${

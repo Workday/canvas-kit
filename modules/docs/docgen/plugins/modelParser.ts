@@ -51,7 +51,7 @@ export const modelParser = createParserPlugin<ModelHookValue | ModelValue>((node
    */
   if (t.isShorthandPropertyAssignment(node)) {
     const {checker} = parser;
-    const symbol = getSymbolFromNode(checker, node);
+    const symbol = getSymbolFromNode(parser, node);
     const declaration = getValueDeclaration(symbol);
     const name = symbol?.name || t.isIdentifier(node.name) ? node.name.text : '';
     if (declaration && declaration.getSourceFile()) {
@@ -137,7 +137,7 @@ export const modelParser = createParserPlugin<ModelHookValue | ModelValue>((node
     // TConfig is special from models
     node.initializer.type.exprName.right.text === 'TConfig'
   ) {
-    const symbol = getSymbolFromNode(parser.checker, node);
+    const symbol = getSymbolFromNode(parser, node);
     const jsDoc = (symbol && getFullJsDocComment(parser.checker, symbol)) || defaultJSDoc;
     return {
       kind: 'property',
@@ -199,7 +199,7 @@ export const modelParser = createParserPlugin<ModelHookValue | ModelValue>((node
     const modelName = node.name.text.replace('use', '');
 
     // get the symbol for the model hook
-    const symbol = getSymbolFromNode(parser.checker, node);
+    const symbol = getSymbolFromNode(parser, node);
     const jsDoc = symbol ? getFullJsDocComment(parser.checker, symbol) : defaultJSDoc;
 
     const options = node.initializer.expression.arguments[0];

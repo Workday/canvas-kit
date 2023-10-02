@@ -7,12 +7,7 @@ import {commonColors, space, borderRadius} from '@workday/canvas-kit-react/token
 import {hideMouseFocus, GrowthBehavior, generateUniqueId} from '@workday/canvas-kit-react/common';
 
 /**
- * ### Deprecated Menu
- *
- * As of Canvas Kit v8, Menu is being soft-deprecated.
- * It will be hard-deprecated (completely removed) in v9. Please see the
- * [upgrade guide](https://workday.github.io/canvas-kit/?path=/story/welcome-upgrade-guides-v8-0--page)
- * for more information.
+ * @deprecated ⚠️ `DeprecatedMenuProps` has been deprecated and will be removed in a future major version. Please use [Menu in Main](https://workday.github.io/canvas-kit/?path=/docs/components-popups-menu--basic) instead.
  */
 export interface DeprecatedMenuProps
   extends GrowthBehavior,
@@ -55,12 +50,8 @@ export interface DeprecatedMenuProps
 }
 
 /**
- * ### Deprecated Menu State
  *
- * As of Canvas Kit v8, Menu is being soft-deprecated.
- * It will be hard-deprecated (completely removed) in v9. Please see the
- * [upgrade guide](https://workday.github.io/canvas-kit/?path=/story/welcome-upgrade-guides-v8-0--page)
- * for more information.
+ * @deprecated ⚠️ `DeprecatedMenuState` has been deprecated and will be removed in a future major version. Please use [Menu in Main](https://workday.github.io/canvas-kit/?path=/docs/components-popups-menu--basic) instead.
  */
 export interface DeprecatedMenuState {
   selectedItemIndex: number;
@@ -78,19 +69,14 @@ const List = styled('ul')({
 });
 
 /**
- * As of Canvas Kit v8, this component is being soft-deprecated. It will be hard-deprecated
- * (completely removed) in v9. Please see the [upgrade
- * guide](https://workday.github.io/canvas-kit/?path=/story/welcome-upgrade-guides-v8-0--page) for
- * more information.
- *
  * `DeprecatedMenu` renders a styled `<ul role="menu">` element within a {@link Card} and follows
  * the [Active Menu
- * pattern](https://www.w3.org/TR/wai-aria-practices/examples/menu-button/menu-button-actions-active-descendant.html)
+ * pattern](https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/examples/menu-button-actions-active-descendant/)
  * using `aria-activedescendant`.
  *
  * Undocumented props are spread to the underlying `<ul>` element.
  *
- * @deprecated
+ * @deprecated ⚠️ Deprecated Menu has been deprecated and will be removed in a future major version. Please use [Menu in Main](https://workday.github.io/canvas-kit/?path=/docs/components-popups-menu--basic) instead.
  */
 export class DeprecatedMenu extends React.Component<DeprecatedMenuProps, DeprecatedMenuState> {
   private id = generateUniqueId();
@@ -108,7 +94,7 @@ export class DeprecatedMenu extends React.Component<DeprecatedMenuProps, Depreca
     // We track the active menu item by index so we can avoid setting a bunch of refs
     // for doing things like selecting an item by first character (or really calling .focus() at all)
     // It allows us to use the activedescendant design pattern
-    // https://www.w3.org/TR/wai-aria-practices/examples/menu-button/menu-button-actions-active-descendant.html
+    // https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/examples/menu-button-actions-active-descendant/
     this.state = {
       selectedItemIndex: selected,
     };

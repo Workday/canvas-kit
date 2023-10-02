@@ -24,8 +24,8 @@ const StyledIconSpan = styled(Box.as('span'))<
     '> svg': {display: 'block'},
   },
   ({shouldMirror, styles}) => ({
-    transform: shouldMirror ? 'scaleX(-1)' : undefined,
     ...styles,
+    transform: shouldMirror ? 'scaleX(-1)' : undefined,
   })
 );
 

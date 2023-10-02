@@ -5,26 +5,31 @@ import {
   createSubcomponent,
   createElemPropsHook,
   ExtractProps,
+  composeHooks,
 } from '@workday/canvas-kit-react/common';
-import {ListBox} from '@workday/canvas-kit-react/collection';
-import {Stack} from '@workday/canvas-kit-react/layout';
+import {ListBox, ListProps} from '@workday/canvas-kit-react/collection';
+import {useReturnFocus, useFocusRedirect} from '@workday/canvas-kit-react/popup';
 
 import {useMenuModel} from './useMenuModel';
 
 export interface MenuListProps<T = any>
-  extends Omit<Partial<ExtractProps<typeof Stack, never>>, 'children'> {
+  extends Omit<ExtractProps<typeof ListBox, never>, 'children'> {
   /**
    * The label text of the MenuList.
    */
-  children: React.ReactNode | ((item: T) => React.ReactNode);
+  children: ListProps<T>['children'];
 }
 
-export const useMenuList = createElemPropsHook(useMenuModel)(model => {
-  return {
-    role: 'menu',
-    'aria-labelledby': model.state.id,
-  };
-});
+export const useMenuList = composeHooks(
+  createElemPropsHook(useMenuModel)(model => {
+    return {
+      role: 'menu',
+      'aria-labelledby': model.state.id,
+    };
+  }),
+  useReturnFocus,
+  useFocusRedirect
+);
 
 export const MenuList = createSubcomponent('div')({
   displayName: 'Menu.List',
@@ -39,7 +44,7 @@ export const MenuList = createSubcomponent('div')({
       borderRadius="zero"
       padding="zero"
       marginY="xxs"
-      spacing="zero"
+      gap="zero"
       overflowY="auto"
       flexDirection={model.state.orientation === 'vertical' ? 'column' : 'row'}
       {...elemProps}

@@ -1,0 +1,147 @@
+import {Meta} from '@storybook/addon-docs';
+import {Specifications, SymbolDoc} from '@workday/canvas-kit-docs';
+
+import {RadioGroup} from '@workday/canvas-kit-preview-react/radio';
+
+import {Basic} from './examples/Basic';
+import {Alert} from './examples/Alert';
+import {Error} from './examples/Error';
+import {Inverse} from './examples/Inverse';
+import {LabelPosition} from './examples/LabelPosition';
+import {NoValue} from './examples/NoValue';
+import {RefForwarding} from './examples/RefForwarding';
+import {Disabled} from './examples/Disabled';
+import {Required} from './examples/Required';
+import {Custom} from './examples/Custom';
+import {StandaloneRadio} from './examples/StandaloneRadio';
+
+<Meta title="Preview/Inputs/Radio" component={RadioGroup} />
+
+# Canvas Kit Radio
+
+Radio Buttons allow a user to select one value from a predefined list of 7 or fewer options.
+
+[> Workday Design Reference](https://design.workday.com/components/inputs/radio-buttons)
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-react
+```
+
+## Usage
+
+### Basic Example
+
+Our radio component includes a `RadioGroup` container and `RadioGroup.RadioButton`, which renders an
+individual radio button. Nest related `RadioGroup.RadioButton` buttons within a `RadioGroup` and
+provide a `name` prop to the `RadioGroup` to group the radio buttons together. Each
+`RadioGroup.Radio` must have a unique `value`. This value is used in conjunction with the `value`
+prop set on the `RadioGroup` to determine which radio button is selected. To tie it all together,
+provide an `onChange` handler to the `RadioGroup` to track the selected value as it changes.
+
+`RadioGroup` should be used in tandem with [Form Field](/components/inputs/form-field/) where the
+`useFieldset` prop is set to `true` to meet accessibility standards. This ensures the `label` text
+from `FormField` is attached to the `RadioGroup` and read out as a group for voiceover.
+
+<ExampleCodeBlock code={Basic} />
+
+Our example uses [React state](<(https://react.dev/learn/state-a-components-memory)>) to track the
+value of the `RadioGroup`.
+
+`RadioGroup` and `RadioGroup.Radio` support keyboard navigation through the proper use of WAI-ARIA
+[properties](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/radiogroup_role#associated_wai-aria_roles_states_and_properties).
+
+### Inverse
+
+Set the `variant` prop of `RadioGroup.RadioButton` to `inverse` to ensure proper contrast on dark
+backgrounds.
+
+<ExampleCodeBlock code={Inverse} />
+
+### Radio Group with No Value
+
+Omit the `value` prop from `RadioGroup` to render the group with no selected
+`RadioGroup.RadioButton`.
+
+<ExampleCodeBlock code={NoValue} />
+
+### Ref Forwarding
+
+`RadioGroup.RadioButton` supports [ref forwarding](https://reactjs.org/docs/forwarding-refs.html).
+It will forward `ref` to its underlying `<input type="radio">` element.
+
+<ExampleCodeBlock code={RefForwarding} />
+
+### Label Position
+
+Set the `labelPosition` prop of the wrapping `FormField` to designate the position of the label
+relative to the `RadioGroup`. `labelPosition` accepts the following values:
+
+- `FormField.LabelPosition.Top` (Default)
+- `FormField.LabelPosition.Left`
+
+<ExampleCodeBlock code={LabelPosition} />
+
+### Required
+
+Set the `required` prop of the wrapping `FormField` to `true` to indicate that the field is
+required. Labels for required fields are suffixed by a red asterisk.
+
+<ExampleCodeBlock code={Required} />
+
+### Disabled
+
+Set the `disabled` prop of `RadioGroup.RadioButton` to prevent users from interacting with it. Be
+careful not to disable a pre-selected radio button as this will block keyboard access to the entire
+`RadioGroup`.
+
+<ExampleCodeBlock code={Disabled} />
+
+### Custom Radio Button
+
+Use `RadioGroup.Label` instead of `RadioGroup.RadioButton` if you need direct access to the label
+and the radio input. This will allow you to apply custom styling to the text and radio input.
+
+<ExampleCodeBlock code={Custom} />
+
+### Standalone Radio Button
+
+Use `StyledRadioButton` when you want a styled radio button on its own without using `RadioGroup`.
+You will need to handle behavior and accessibility.
+
+<ExampleCodeBlock code={StandaloneRadio} />
+
+Use `RadioGroup.Label` when you want more control styling the text and radio input but still want
+some behavior handled for you.
+
+### Error States
+
+Set the error prop of the wrapping `FormField` to `FormField.ErrorType.Alert` or
+`FormField.ErrorType.Error` to set the `RadioGroup` to the alert or error state, respectively. You
+will also need to set the `hintId` and `hintText` props on the `FormField` to meet accessibility
+standards. You must set an `aria-describedby` attribute on the `RadioGroup` element that matches the
+value of `hintId` set on the `FormField` element. These attributes ensure that the alert message is
+associated to the `RadioGroup` and read out by voiceover.
+
+#### Alert
+
+Use the alert state when a selection is valid but there is additional information.
+
+<ExampleCodeBlock code={Alert} />
+
+#### Error
+
+Use the error state when the selection is no longer valid.
+
+<ExampleCodeBlock code={Error} />
+
+### React Hook Form
+
+Using a form library like [React Hook Form](https://www.react-hook-form.com/) is a common use case.
+Reference this [CodeSandbox](https://codesandbox.io/s/radio-preview-with-react-hook-form-stn5vr) on
+how to use `RadioGroup` with React Hook Form.
+
+## Component API
+
+<SymbolDoc name="RadioGroup" fileName="/preview-react/" />

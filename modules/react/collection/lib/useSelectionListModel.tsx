@@ -71,6 +71,7 @@ export const useSelectionListModel = createModelHook({
     selection: singleSelectionManager,
   },
   requiredConfig: useCursorListModel.requiredConfig,
+  contextOverride: useCursorListModel.Context,
 })(config => {
   const cursor = useCursorListModel(config);
   const [selectedIds, setSelectedIds] = React.useState(config.initialSelectedIds);

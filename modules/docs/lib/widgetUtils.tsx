@@ -173,7 +173,7 @@ export const SymbolDialog = ({value}: SymbolDialogProps) => {
                   {breadcrumbsList.map((item, index) => {
                     return (
                       <>
-                        {item === breadcrumbsList[breadcrumbsList.length - 1] ? (
+                        {index === breadcrumbsList.length - 1 ? (
                           <Breadcrumbs.CurrentItem key={index}>{item}</Breadcrumbs.CurrentItem>
                         ) : (
                           <Breadcrumbs.Item key={index}>
@@ -402,7 +402,7 @@ export const SymbolDoc = ({
   const symbolDocContents = (
     <StyledSymbolDoc {...elemProps}>
       <HeadingLevelContext.Provider value={headingStart}>
-        {!hideHeading && <Heading>{name}</Heading>}
+        {!hideHeading && <Heading id={`${name.toLowerCase()}-api`}>{name}</Heading>}
         {!hideDescription && doc && (
           <MdxJSToJSX>{descriptionOverride || doc.description}</MdxJSToJSX>
         )}

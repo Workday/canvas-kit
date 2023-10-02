@@ -32,7 +32,6 @@ const fileNameToCategoryMap: Record<string, string[]> = {
     'utils/flexItem',
     'utils/position',
     'utils/space',
-    'utils/stack',
   ],
   Color: ['utils/color', 'utils/background'],
   Border: ['utils/border'],
@@ -69,9 +68,18 @@ registerWidget<EnhancedComponentValue>('enhancedComponent', ({value, doc, meta})
     <>
       {value.styleComponent ? (
         <>
-          <Heading headingOffset={1}>Layout Component</Heading>
+          <Heading
+            headingOffset={1}
+            id={
+              parentComponentName
+                ? `${parentComponentName.toLowerCase()}-layout-component-api`
+                : `${value.displayName?.toLowerCase()}-layout-component-api`
+            }
+          >
+            Layout Component
+          </Heading>
           <MDX as="p">
-            <code>{value.displayName}</code> supports all props from the
+            <code>{value.displayName || parentComponentName}</code> supports all props from the
             <code>
               <ParentComponentJSDocContext.Provider value={defaultJSDoc}>
                 <SymbolDialog value={value.styleComponent} />
@@ -81,7 +89,16 @@ registerWidget<EnhancedComponentValue>('enhancedComponent', ({value, doc, meta})
           </MDX>
         </>
       ) : null}
-      <Heading headingOffset={1}>Props</Heading>
+      <Heading
+        headingOffset={1}
+        id={
+          parentComponentName
+            ? `${parentComponentName.toLowerCase()}-props-api`
+            : `${value.displayName?.toLowerCase()}-props-api`
+        }
+      >
+        Props
+      </Heading>
       {value.baseElement && (
         <ParentComponentJSDocContext.Provider value={defaultJSDoc}>
           <MDX as="p">
@@ -123,7 +140,7 @@ registerWidget<EnhancedComponentValue>('enhancedComponent', ({value, doc, meta})
         ? value.subComponents.map((c, i) => {
             return (
               <React.Fragment key={i}>
-                <Heading>
+                <Heading id={`${value.displayName?.toLowerCase()}.${c.name.toLowerCase()}-api`}>
                   {parentComponentName ? parentComponentName : value.displayName}.{c.name}
                 </Heading>
                 <ParentComponentNameContext.Provider
@@ -132,7 +149,12 @@ registerWidget<EnhancedComponentValue>('enhancedComponent', ({value, doc, meta})
                   }`}
                 >
                   <ParentComponentJSDocContext.Provider value={c}>
-                    <SymbolDoc name={c.symbol} hideHeading descriptionOverride={c.description} />
+                    <SymbolDoc
+                      name={c.symbol}
+                      fileName={c.declarations[c.declarations.length - 1].filePath}
+                      hideHeading
+                      descriptionOverride={c.description}
+                    />
                   </ParentComponentJSDocContext.Provider>
                 </ParentComponentNameContext.Provider>
               </React.Fragment>
@@ -141,7 +163,9 @@ registerWidget<EnhancedComponentValue>('enhancedComponent', ({value, doc, meta})
         : null}
       {value.componentType === 'container' && value.model ? (
         <>
-          <Heading headingOffset={-1}>Model</Heading>
+          <Heading id={`${value.displayName?.toLowerCase()}-model-api`} headingOffset={-1}>
+            Model
+          </Heading>
           <SymbolDoc name={`use${value.model}`} />
         </>
       ) : null}
