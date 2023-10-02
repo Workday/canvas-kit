@@ -34,7 +34,7 @@ function getFocusableElement(element: Element | null): Element | null {
 /**
  * Is the element outside of bounds. An element is outside of bounds if it is less than half visible.
  */
-function isElementOutsideOfBounds(element: HTMLElement, boundingRect: DOMRect) {
+function isElementOutOfBounds(element: HTMLElement, boundingRect: DOMRect) {
   const elementRect = element.getBoundingClientRect();
 
   return (
@@ -120,8 +120,8 @@ export const useReturnFocus = createElemPropsHook(usePopupModel)(model => {
       // element isn't on at least halfway rendered on the screen.
       if (
         (elementRef.current && getFocusableElement(elementRef.current)) || // did the user click on a focusable element?
-        isElementOutsideOfBounds(element, scrollParentRect) || // Is the element not visible in its scroll parent?
-        isElementOutsideOfBounds(element, viewportRect) // Is the element not visible in the viewport?
+        isElementOutOfBounds(element, scrollParentRect) || // Is the element not visible in its scroll parent?
+        isElementOutOfBounds(element, viewportRect) // Is the element not visible in the viewport?
       ) {
         // reset the focus element and bail early
         elementRef.current = null;
