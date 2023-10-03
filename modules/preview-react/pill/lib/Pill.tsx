@@ -108,8 +108,8 @@ const getRemovablePillColors = (disabled?: boolean) => {
 };
 
 const pillBaseStyles: CSSObject = {
-  [focusRingVars.separation]: '-1px',
-  [focusRingVars.width]: '1px',
+  // [focusRingVars.separation]: '-1px',
+  // [focusRingVars.width]: '1px',
   [focusRingVars.innerColor]: colors.blueberry400,
   [focusRingVars.outerColor]: colors.blueberry400,
   display: 'inline-flex',
@@ -157,8 +157,8 @@ const StyledBasePill = styled(BaseButton.as('button'))<StyledType & PillProps>(
   ({variant}) => ({
     '&:focus, &:focus-visible': {
       borderColor: variant === 'removable' ? undefined : colors.blueberry400,
-      [focusRingVars.separation]: '-1px',
-      [focusRingVars.width]: '1px',
+      [focusRingVars.separation]: variant === 'removable' ? '0px' : '-1px',
+      [focusRingVars.width]: variant === 'removable' ? '0px' : '1px',
     },
   }),
   boxStyleFn
