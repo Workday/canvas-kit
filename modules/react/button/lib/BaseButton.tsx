@@ -231,7 +231,6 @@ const baseButtonStyles = cs({
   borderColor: cssVar(buttonVars.default.border, 'transparent'),
   cursor: 'pointer',
   display: 'inline-flex',
-  gap: cssVar(system.space.x2),
   boxShadow: 'none',
   alignItems: 'center',
   justifyContent: 'center',

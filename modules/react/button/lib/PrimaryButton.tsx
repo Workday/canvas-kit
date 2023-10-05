@@ -22,6 +22,7 @@ const primaryStyles = cs({
   [buttonVars.default.border]: 'transparent',
   [buttonVars.default.borderRadius]: cssVar(system.shape.circle),
   [buttonVars.default.label]: cssVar(brand.primary.accent),
+  gap: cssVar(system.space.x2),
   '&:hover, &.hover': {
     [buttonVars.hover.background]: cssVar(brand.primary.dark),
     [buttonVars.hover.border]: 'transparent',

@@ -23,6 +23,7 @@ const tertiaryStyles = cs({
   [buttonVars.default.border]: 'transparent',
   [buttonVars.default.borderRadius]: cssVar(system.shape.medium),
   [buttonVars.default.label]: cssVar(brand.primary.base),
+  gap: cssVar(system.space.x2),
   paddingInline: space.xxs,
   minWidth: 'auto',
   textDecoration: 'underline',
@@ -36,7 +37,7 @@ const tertiaryStyles = cs({
     },
     '&.canvas-tertiary-button-icon-only': {
       '& span .wd-icon-fill': {
-        [buttonVars.hover.icon]: cssVar(base.blackPepper500),
+        [buttonVars.hover.icon]: cssVar(base.blackPepper400),
       },
     },
   },
@@ -54,7 +55,7 @@ const tertiaryStyles = cs({
     },
     '&.canvas-tertiary-button-icon-only': {
       '& span .wd-icon-fill': {
-        [buttonVars.focus.icon]: cssVar(base.blackPepper500),
+        [buttonVars.focus.icon]: cssVar(base.blackPepper400),
       },
     },
   },
@@ -67,7 +68,7 @@ const tertiaryStyles = cs({
     },
     '&.canvas-tertiary-button-icon-only': {
       '& span .wd-icon-fill': {
-        [buttonVars.active.icon]: cssVar(base.blackPepper500),
+        [buttonVars.active.icon]: cssVar(base.blackPepper400),
       },
     },
   },
@@ -76,7 +77,7 @@ const tertiaryStyles = cs({
   },
   '&.canvas-tertiary-button-icon-only': {
     '& span .wd-icon-fill': {
-      [buttonVars.default.icon]: cssVar(base.blackPepper500),
+      [buttonVars.default.icon]: cssVar(base.blackPepper400),
     },
   },
   '&:disabled, &:active:disabled, &:focus:disabled, &:hover:disabled': {
@@ -87,6 +88,14 @@ const tertiaryStyles = cs({
     '& span .wd-icon-fill': {
       [buttonVars.disabled.icon]: cssVar(brand.primary.base),
     },
+  },
+});
+
+const testClass = cs({
+  '&.canvas-tertiary-button-icon-only': {
+    padding: '0',
+    minWidth: space.xl,
+    borderRadius: borderRadius.circle,
   },
 });
 
@@ -105,9 +114,9 @@ export const tertiaryButtonModifiers = createModifiers({
       '&:hover, &.hover': {
         [buttonVars.hover.background]: cssVar(base.frenchVanilla100),
         [buttonVars.hover.border]: 'transparent',
-        [buttonVars.hover.label]: cssVar(base.blackPepper500),
+        [buttonVars.hover.label]: cssVar(base.blackPepper400),
         '& span .wd-icon-fill': {
-          [buttonVars.hover.icon]: cssVar(base.blackPepper500),
+          [buttonVars.hover.icon]: cssVar(base.blackPepper400),
         },
       },
       '&:focus-visible, &.focus': {
@@ -115,24 +124,24 @@ export const tertiaryButtonModifiers = createModifiers({
         [buttonVars.focus.border]: 'transparent',
         [buttonVars.focus.boxShadowInner]: 'currentColor',
         [buttonVars.focus.boxShadowOuter]: cssVar(base.frenchVanilla100),
-        [buttonVars.focus.label]: cssVar(base.blackPepper500),
+        [buttonVars.focus.label]: cssVar(base.blackPepper400),
         boxShadow: `inset 0px 0px 0px 2px currentColor, ${cssVar(
           buttonVars.focus.boxShadowOuter
         )} 0px 0px 0px 2px`,
         '& span .wd-icon-fill': {
-          [buttonVars.focus.icon]: cssVar(base.blackPepper500),
+          [buttonVars.focus.icon]: cssVar(base.blackPepper400),
         },
       },
       '&:active, &.active': {
         [buttonVars.active.background]: cssVar(base.soap200),
         [buttonVars.active.border]: 'transparent',
-        [buttonVars.active.label]: cssVar(base.blackPepper500),
+        [buttonVars.active.label]: cssVar(base.blackPepper400),
         '& span .wd-icon-fill': {
-          [buttonVars.active.icon]: cssVar(base.blackPepper500),
+          [buttonVars.active.icon]: cssVar(base.blackPepper400),
         },
         '&.canvas-tertiary-button-icon-only': {
           '& span .wd-icon-fill': {
-            [buttonVars.active.icon]: cssVar(base.blackPepper500),
+            [buttonVars.active.icon]: cssVar(base.blackPepper400),
           },
         },
       },
@@ -246,6 +255,7 @@ export const TertiaryButton = createComponent('button')({
             variant: variant,
             size: size,
           }),
+          testClass,
         ]}
         {...elemProps}
       >
