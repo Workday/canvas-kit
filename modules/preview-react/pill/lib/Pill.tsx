@@ -108,8 +108,6 @@ const getRemovablePillColors = (disabled?: boolean) => {
 };
 
 const pillBaseStyles: CSSObject = {
-  // [focusRingVars.separation]: '-1px',
-  // [focusRingVars.width]: '1px',
   [focusRingVars.innerColor]: colors.blueberry400,
   [focusRingVars.outerColor]: colors.blueberry400,
   display: 'inline-flex',
