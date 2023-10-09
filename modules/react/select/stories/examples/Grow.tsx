@@ -32,13 +32,11 @@ export const Grow = () => {
             <Select.Card>
               {model.state.items.length > 0 && (
                 <Select.List scrollMargin="10px">
-                  {item => {
-                    return (
-                      <Select.Item aria-disabled={item.disabled ? item.disabled : undefined}>
-                        {item.id}
-                      </Select.Item>
-                    );
-                  }}
+                  {item => (
+                    <Select.Item aria-disabled={item.disabled ? item.disabled : undefined}>
+                      {item.id}
+                    </Select.Item>
+                  )}
                 </Select.List>
               )}
             </Select.Card>

@@ -34,14 +34,12 @@ export const WithIcons = () => {
             <Select.Card maxHeight="200px">
               {model.state.items.length > 0 && (
                 <Select.List>
-                  {item => {
-                    return (
-                      <Select.Item>
-                        <Select.Item.Icon icon={item.icon} />
-                        {item.id}
-                      </Select.Item>
-                    );
-                  }}
+                  {item => (
+                    <Select.Item>
+                      <Select.Item.Icon icon={item.icon} />
+                      {item.id}
+                    </Select.Item>
+                  )}
                 </Select.List>
               )}
             </Select.Card>
