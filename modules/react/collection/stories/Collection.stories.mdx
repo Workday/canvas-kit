@@ -4,7 +4,9 @@ import {ListBox} from '@workday/canvas-kit-react/collection';
 
 import {Basic} from './examples/Basic';
 import {StringChildren} from './examples/StringChildren';
-import {DynamicItems} from './examples/DynamicItems';
+import {DynamicItemsStrings} from './examples/DynamicItemsStrings';
+import {DynamicItemsObjects} from './examples/DynamicItemsObjects';
+import {Virtualization} from './examples/Virtualization';
 import {DataLoader} from './examples/DataLoader';
 import {BasicVirtual} from './examples/BasicVirtual';
 import {IdentifiedItems} from './examples/IdentifiedItems';
@@ -13,7 +15,6 @@ import {Selection} from './examples/Selection';
 import {MultiSelection} from './examples/MultiSelection';
 import {BasicGrid} from './examples/BasicGrid';
 import {WrappingGrid} from './examples/WrappingGrid';
-import {RegisteringItems} from './examples/RegisteringItems';
 
 <Meta title="Features/Collections" />
 
@@ -37,7 +38,7 @@ yarn add @workday/canvas-kit-react
 The `ListBox` on its own isn't very useful. It registers each item with the model. The
 `ListBox.Item` only uses the `useListItemRegister` hook which handles registration of static items
 to the model. The `ListBox` uses `useListRenderItems` which handles rendering static items as well
-as [Dynamic List](#dynamic-list) example.
+as [dynamic items](#dynamic-items).
 
 <ExampleCodeBlock code={Basic} />
 
@@ -54,72 +55,42 @@ item for selection, maintaining a cursor, or anything else.
 ### Dynamic Items
 
 The `ListBox` also handles a dynamic collection of items. Instead of providing each `ListBox.Item`
-statically, provide a render function instead. The function is called with an `items` value that is
-the same was what's provided to the model. By default, providing items will enable virtualization.
-This example adds a `maxHeight` to ensure overflow. Virtualization uses absolute positioning of each
-item, which could cause problems for popup menus. If your item count is low, pass
-`shouldVirtualize={false}` to disable virtualization.
+statically, provide a render function instead. The function is called with an `item` value that is
+the same as what's provided to the model.
 
-<ExampleCodeBlock code={DynamicItems} />
+#### Registering Items
 
-### Registering Items
+Dynamic items can be passed in as an array of strings or objects via the `items` prop or the model
+config.
 
-There are two ways to register items via the `items` prop or model config.
+##### Array of Strings
 
-1. Array of Objects
-   - Use this format when your data has additional information.
-2. Array of Strings
-   - Use this format when your data is a simple list of options.
+Use strings when your data is a simple list of options. Each string value is used as the unique
+identifer.
 
-If you have an array of `strings`, the collection system will handle registering items. Each string
-value is used as the unique identifer.
+<ExampleCodeBlock code={DynamicItemsStrings} />
 
-```tsx
-<ListBox items={['Pizza', 'Chocolate', 'Cheeseburgers']}>
-  {item => {
-    return <ListBox.Item>{item}</ListBox.Item>;
-  }}
-</ListBox>
-```
+##### Array of Objects
 
-If you have an array of `objects`, the collection system needs an `id` to ensure items are
-registered and searchable. Any additional information like icons or if the item is disabled can
-exist on the object and be used in the render function.
+Use objects when your data contains additional information. Each object must have an `id` to ensure
+it's registered and searchable. Additional information such as icons or if the item is disabled can
+exist on the object and will be accessible in the render function.
+
+<ExampleCodeBlock code={DynamicItemsObjects} />
 
 > **Note: The `id` should match your text value for each item. This ensures proper selection of
 > items in components like `Select` and `Autocomplete`. If your `id` is different from your text
 > value, you'll have to add a
 > [translation layer](https://codesandbox.io/s/combobox-object-items-forked-mc7tm4). **
 
-```tsx
-<ListBox
-  items={[
-    {id: 'Atlanta (United States)', disabled: false},
-    {id: 'Amsterdam (Europe)', disabled: false},
-    {id: 'Austin (United States)', disabled: false},
-    {id: 'Beaverton (United States)', disabled: false},
-    {id: 'Belfast (Europe)', disabled: false},
-    {id: 'Berlin (Europe)', disabled: false},
-    {id: 'Boston (United States)', disabled: false},
-    {id: 'Boulder (United States)', disabled: false},
-    {id: 'Chicago (United States)', disabled: false},
-  ]}
-  width="200px"
-  maxHeight={200}
->
-  {item => (
-    <ListBox.Item
-      aria-disabled={item.disabled ? item.disabled : undefined}
-      paddingBottom="s"
-      data-id={item.id}
-    >
-      {item.id}
-    </ListBox.Item>
-  )}
-</ListBox>
-```
+#### Virtualization
 
-<ExampleCodeBlock code={RegisteringItems} />
+By default, providing items dynamically will enable virtualization. This example adds a `maxHeight`
+to ensure overflow. Virtualization uses absolute positioning of each item, which could cause
+problems for popup menus. If your item count is low, pass `shouldVirtualize={false}` to disable
+virtualization.
+
+<ExampleCodeBlock code={Virtualization} />
 
 ### DataLoader
 
