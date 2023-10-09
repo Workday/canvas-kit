@@ -12,7 +12,7 @@ import {Grow} from './examples/Grow';
 import {LabelPosition} from './examples/LabelPosition';
 import {WithIcons} from './examples/WithIcons';
 import {Required} from './examples/Required';
-import {Scrollable} from './examples/Scrollable';
+import {MenuHeight} from './examples/MenuHeight';
 import {HoistedModel} from './examples/HoistedModel';
 import {RefForwarding} from './examples/RefForwarding';
 
@@ -126,12 +126,12 @@ to the width of its container.
 
 <ExampleCodeBlock code={Grow} />
 
-### Scrollable
+### Menu Height
 
-Set `maxHeight` prop on the `Select.Card` to determine the height of the dropdown menu. This will
-allow the menu to scroll if there are enough items.
+`Select.Card` has a default maximum height of `300px` to restrict the height of the dropdown menu.
+Set its `maxHeight` prop to override this value.
 
-<ExampleCodeBlock code={Scrollable} />
+<ExampleCodeBlock code={MenuHeight} />
 
 ### Ref Forwarding
 

@@ -35,17 +35,17 @@ export const cities = [
   {id: 'Zurich (Europe)', disabled: false},
 ];
 
-export const Scrollable = () => {
+export const MenuHeight = () => {
   return (
     <Box>
-      <FormField label="Choose a City" inputId="scrollable-select">
+      <FormField label="Choose a City" inputId="menu-height-select">
         <Select
           items={cities}
           nonInteractiveIds={cities.filter(item => item.disabled === true).map(item => item.id)}
         >
-          <Select.Input id="scrollable-select" />
+          <Select.Input id="menu-height-select" />
           <Select.Popper>
-            <Select.Card>
+            <Select.Card maxHeight={600}>
               <Select.List>
                 {item => (
                   <Select.Item

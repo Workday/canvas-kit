@@ -340,9 +340,9 @@ describe('Select', () => {
   before(() => {
     h.stories.visit();
   });
-  context(`given the "Scrollable" story is rendered`, () => {
+  context(`given the "Menu Height" story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Components/Inputs/Select', 'Scrollable');
+      h.stories.load('Components/Inputs/Select', 'Menu Height');
     });
 
     context('when the select input is focused', () => {
