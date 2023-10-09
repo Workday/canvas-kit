@@ -111,12 +111,25 @@ export const tertiaryButtonModifiers = createModifiers({
       [buttonVars.default.border]: 'transparent',
       [buttonVars.default.label]: cssVar(base.frenchVanilla100),
       textDecoration: 'underline',
+      '& span .wd-icon-fill': {
+        [buttonVars.default.icon]: cssVar(base.frenchVanilla100),
+      },
+      '&.canvas-tertiary-button-icon-only': {
+        '& span .wd-icon-fill': {
+          [buttonVars.default.icon]: cssVar(base.frenchVanilla100),
+        },
+      },
       '&:hover, &.hover': {
         [buttonVars.hover.background]: cssVar(base.frenchVanilla100),
         [buttonVars.hover.border]: 'transparent',
         [buttonVars.hover.label]: cssVar(base.blackPepper400),
         '& span .wd-icon-fill': {
           [buttonVars.hover.icon]: cssVar(base.blackPepper400),
+        },
+        '&.canvas-tertiary-button-icon-only': {
+          '& span .wd-icon-fill': {
+            [buttonVars.hover.icon]: cssVar(base.blackPepper400),
+          },
         },
       },
       '&:focus-visible, &.focus': {
@@ -129,6 +142,11 @@ export const tertiaryButtonModifiers = createModifiers({
         )} 0px 0px 0px 2px`,
         '& span .wd-icon-fill': {
           [buttonVars.focus.icon]: cssVar(base.blackPepper400),
+        },
+        '&.canvas-tertiary-button-icon-only': {
+          '& span .wd-icon-fill': {
+            [buttonVars.focus.icon]: cssVar(base.blackPepper400),
+          },
         },
       },
       '&:active, &.active': {
@@ -144,20 +162,17 @@ export const tertiaryButtonModifiers = createModifiers({
           },
         },
       },
-      '& span .wd-icon-fill': {
-        [buttonVars.default.icon]: cssVar(base.frenchVanilla100),
-      },
-      '&.canvas-tertiary-button-icon-only': {
-        '& span .wd-icon-fill': {
-          [buttonVars.default.icon]: cssVar(base.frenchVanilla100),
-        },
-      },
       '&:disabled, &:active:disabled, &:focus:disabled, &:hover:disabled': {
         [buttonVars.disabled.background]: 'transparent',
         [buttonVars.disabled.border]: cssVar(base.frenchVanilla100),
         [buttonVars.disabled.label]: cssVar(base.frenchVanilla100),
         '& span .wd-icon-fill': {
           [buttonVars.disabled.icon]: cssVar(base.frenchVanilla100),
+        },
+        '&.canvas-tertiary-button-icon-only': {
+          '& span .wd-icon-fill': {
+            [buttonVars.disabled.icon]: cssVar(base.frenchVanilla100),
+          },
         },
       },
     }),

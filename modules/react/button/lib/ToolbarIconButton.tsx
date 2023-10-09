@@ -26,7 +26,6 @@ export interface ToolbarIconButtonProps
 const StyledToolbarIconButton = styled(BaseButton)<StyledType & ToolbarIconButtonProps>({
   ['& .wd-icon']: {
     display: 'inline-block',
-    verticalAlign: 'middle',
     width: 20,
     height: 20,
   },

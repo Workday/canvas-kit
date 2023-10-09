@@ -29,7 +29,6 @@ const StyledToolbarDropdownButton = styled(BaseButton)<StyledType & ToolbarDropd
   gap: space.zero,
   '& .wd-icon': {
     display: 'inline-block',
-    verticalAlign: 'middle',
     width: 20,
     height: 20,
   },
