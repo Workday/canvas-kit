@@ -1,7 +1,13 @@
 import * as React from 'react';
 
-import {buttonVars, ButtonContainerProps} from './BaseButton';
-import {createComponent, cs, createModifiers, cssVar} from '@workday/canvas-kit-react/common';
+import {buttonVars, ButtonContainerProps, focusRingVars} from './BaseButton';
+import {
+  createComponent,
+  cs,
+  createModifiers,
+  cssVar,
+  Themeable,
+} from '@workday/canvas-kit-react/common';
 import {system, brand, base} from '@workday/canvas-tokens-web';
 import {borderRadius, space, spaceNumbers} from '@workday/canvas-kit-react/tokens';
 import {Button} from './Button';
@@ -11,7 +17,7 @@ import {Button} from './Button';
  * We omit `ref` since all of our buttons use `createComponent` and already give access to `ref`.
  * Use this type to extend and customize any one off buttons that you want full control over styling.
  */
-export interface TertiaryButtonProps extends Omit<ButtonContainerProps, 'ref'> {
+export interface TertiaryButtonProps extends Themeable, Omit<ButtonContainerProps, 'ref'> {
   /**
    * Variant has an option for `inverse` which will inverse the styling
    */
@@ -23,11 +29,19 @@ const tertiaryStyles = cs({
   [buttonVars.default.border]: 'transparent',
   [buttonVars.default.borderRadius]: cssVar(system.shape.medium),
   [buttonVars.default.label]: cssVar(brand.primary.base),
-  gap: cssVar(system.space.x2),
+  [focusRingVars.width]: '0px',
   paddingInline: space.xxs,
   minWidth: 'auto',
   textDecoration: 'underline',
   border: 0,
+  '& span .wd-icon-fill': {
+    [buttonVars.default.icon]: cssVar(brand.primary.base),
+  },
+  '&.canvas-tertiary-button-icon-only': {
+    '& span .wd-icon-fill': {
+      [buttonVars.default.icon]: cssVar(base.blackPepper400),
+    },
+  },
   '&:hover, &.hover': {
     [buttonVars.hover.background]: cssVar(base.soap200),
     [buttonVars.hover.border]: 'transparent',
@@ -37,7 +51,7 @@ const tertiaryStyles = cs({
     },
     '&.canvas-tertiary-button-icon-only': {
       '& span .wd-icon-fill': {
-        [buttonVars.hover.icon]: cssVar(base.blackPepper400),
+        [buttonVars.hover.icon]: cssVar(base.blackPepper500),
       },
     },
   },
@@ -47,15 +61,12 @@ const tertiaryStyles = cs({
     [buttonVars.focus.boxShadowInner]: cssVar(brand.common.focusOutline),
     [buttonVars.focus.boxShadowOuter]: cssVar(brand.common.focusOutline),
     [buttonVars.focus.label]: cssVar(brand.primary.base),
-    boxShadow: `${cssVar(buttonVars.focus.boxShadowInner)} 0px 0px 0px 0px, ${cssVar(
-      buttonVars.focus.boxShadowOuter
-    )} 0px 0px 0px 2px`,
     '& span .wd-icon-fill': {
       [buttonVars.focus.icon]: cssVar(brand.primary.base),
     },
     '&.canvas-tertiary-button-icon-only': {
       '& span .wd-icon-fill': {
-        [buttonVars.focus.icon]: cssVar(base.blackPepper400),
+        [buttonVars.focus.icon]: cssVar(base.blackPepper500),
       },
     },
   },
@@ -68,16 +79,8 @@ const tertiaryStyles = cs({
     },
     '&.canvas-tertiary-button-icon-only': {
       '& span .wd-icon-fill': {
-        [buttonVars.active.icon]: cssVar(base.blackPepper400),
+        [buttonVars.active.icon]: cssVar(base.blackPepper500),
       },
-    },
-  },
-  '& span .wd-icon-fill': {
-    [buttonVars.default.icon]: cssVar(brand.primary.base),
-  },
-  '&.canvas-tertiary-button-icon-only': {
-    '& span .wd-icon-fill': {
-      [buttonVars.default.icon]: cssVar(base.blackPepper400),
     },
   },
   '&:disabled, &:active:disabled, &:focus:disabled, &:hover:disabled': {
@@ -88,26 +91,13 @@ const tertiaryStyles = cs({
     '& span .wd-icon-fill': {
       [buttonVars.disabled.icon]: cssVar(brand.primary.base),
     },
+    '&.canvas-tertiary-button-icon-only': {
+      '& span .wd-icon-fill': {
+        [buttonVars.disabled.icon]: cssVar(base.blackPepper400),
+      },
+    },
   },
 });
-
-const testClass = cs({
-  '&.canvas-tertiary-button-icon-only': {
-    padding: '0',
-    minWidth: space.xl,
-    borderRadius: borderRadius.circle,
-  },
-  '&.canvas-tertiary-button-icon-start': {
-    paddingInlineStart: space.xxs,
-    paddingInlineEnd: space.xs,
-  },
-  '&.canvas-tertiary-button-icon-end': {
-    paddingInlineStart: space.xs,
-    paddingInlineEnd: space.xxs,
-  },
-});
-
-console.log('testClass:', testClass);
 
 export const tertiaryButtonModifiers = createModifiers({
   iconPosition: {
@@ -132,7 +122,6 @@ export const tertiaryButtonModifiers = createModifiers({
       '&:focus-visible, &.focus': {
         [buttonVars.focus.background]: cssVar(base.frenchVanilla100),
         [buttonVars.focus.border]: 'transparent',
-        [buttonVars.focus.boxShadowInner]: 'currentColor',
         [buttonVars.focus.boxShadowOuter]: cssVar(base.frenchVanilla100),
         [buttonVars.focus.label]: cssVar(base.blackPepper400),
         boxShadow: `inset 0px 0px 0px 2px currentColor, ${cssVar(

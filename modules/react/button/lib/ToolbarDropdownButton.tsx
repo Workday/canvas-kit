@@ -11,7 +11,7 @@ import {
   cssVar,
 } from '@workday/canvas-kit-react/common';
 import {ButtonColors} from './types';
-import {BaseButton, buttonVars} from './BaseButton';
+import {BaseButton, buttonVars, focusRingVars} from './BaseButton';
 import {chevronDownSmallIcon} from '@workday/canvas-system-icons-web';
 import {ToolbarIconButtonProps} from './ToolbarIconButton';
 import {base, brand} from '@workday/canvas-tokens-web';
@@ -42,6 +42,7 @@ const StyledToolbarDropdownButton = styled(BaseButton)<StyledType & ToolbarDropd
     width: 18, // decrease the space between a custom icon and the chevron per design
   },
   '&:focus-visible, &.focus': {
+    [focusRingVars.width]: '0px',
     [buttonVars.focus.boxShadowInner]: cssVar(base.frenchVanilla100),
     [buttonVars.focus.boxShadowOuter]: cssVar(brand.common.focusOutline),
   },
