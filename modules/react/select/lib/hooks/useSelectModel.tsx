@@ -10,7 +10,9 @@ import {useComboboxModel} from '@workday/canvas-kit-react/combobox';
  * ```tsx
  * const model = useSelectModel({items: ['Mobile', 'Phone', 'E-Mail']})
  *
- * <Select model={model}>{Select child components}</Select>
+ * <Select model={model}>
+ *   ...
+ * </Select>
  * ```
  */
 export const useSelectModel = createModelHook({

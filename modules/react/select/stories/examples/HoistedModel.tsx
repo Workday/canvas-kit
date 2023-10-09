@@ -1,8 +1,8 @@
 import React from 'react';
+import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {FormField} from '@workday/canvas-kit-react/form-field';
-import {Select} from '@workday/canvas-kit-react/select';
-import {Flex} from '@workday/canvas-kit-react/layout';
-import {useSelectModel} from '../../lib/hooks';
+import {Select, useSelectModel} from '@workday/canvas-kit-react/select';
+import {BodyText} from '@workday/canvas-kit-react/text';
 
 const options = [
   {id: 'E-mail'},
@@ -25,7 +25,7 @@ export const HoistedModel = () => {
   });
 
   return (
-    <Flex flexDirection="column">
+    <>
       <Select model={model}>
         <FormField label="Contact" inputId="hoisted-select">
           <Select.Input id="hoisted-select" />
@@ -44,7 +44,14 @@ export const HoistedModel = () => {
           </Select.Popper>
         </FormField>
       </Select>
-      Selected Value: {model.state.selectedIds[0]}
-    </Flex>
+      <BodyText size="small">Selected Value: {model.state.selectedIds[0]}</BodyText>
+      <SecondaryButton
+        onClick={() => {
+          model.events.select({id: 'Phone'});
+        }}
+      >
+        Select Phone Item
+      </SecondaryButton>
+    </>
   );
 };

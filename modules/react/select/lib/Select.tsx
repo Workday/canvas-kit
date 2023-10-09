@@ -80,15 +80,9 @@ export interface SelectProps extends Themeable, ExtractProps<typeof Combobox> {}
  * <Select items={options}>
  *  <Select.Input onChange={e => handleChange(e)} id="contact-select" />
  *  <Select.Popper>
- *    <Select.Card maxHeight="200px">
+ *    <Select.Card>
  *      <Select.List>
- *        {item => {
- *          return (
- *            <Select.Item aria-disabled={item.disabled ? item.disabled : undefined}>
- *              {item.id}
- *            </Select.Item>
- *          );
- *         }}
+ *        {item => <Select.Item>{item.id}</Select.Item>}
  *      </Select.List>
  *     </Select.Card>
  *    </Select.Popper>
@@ -101,19 +95,23 @@ export const Select = createContainer()({
   subComponents: {
     /**
      * `Select.Input` renders a {@link ComboboxMenu Combobox.Input} that handles keyboard navigation and interaction defined by [WAI](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/examples/combobox-select-only/).
-     * This component can either be [controlled or un controlled](https://react.dev/learn/sharing-state-between-components#controlled-and-uncontrolled-components).
+     * This component can either be [controlled or uncontrolled](https://react.dev/learn/sharing-state-between-components#controlled-and-uncontrolled-components).
+     *
      * **Note: An `id` must be provided that matches the `inputId` attribute on the `FormField` component from Main in order for the `label` element to be associated with the `input` element.**
      *
      * ```tsx
      * <Select items={options}>
-     *   <Select.Input id="matching-formfield-inputId" onChange={(event) => handleChange(event)}>
-     *   ...
+     *   <FormField label="Contact" inputId="matching-formfield-inputId">
+     *     <Select.Input id="matching-formfield-inputId" onChange={(event) => handleChange(event)}>
+     *     ...
+     *   </FormField>
      * </Select>
      * ```
      */
     Input: SelectInput,
     /**
      * `Select.Popper` renders a {@link ComboboxPopper Combobox.Menu.Popper}. You have access to all `Popper` props.
+     *
      * ```tsx
      * <Select item={options}>
      *  <Select.Input id="matching-formfield-inputId" onChange={(event) => handleChange(event)}>
@@ -126,7 +124,9 @@ export const Select = createContainer()({
     Popper: Combobox.Menu.Popper,
     /**
      * `Select.Card` renders a {@link ComboboxCard Combobox.Card}. You have access to all `Card` props.
-     * **Note: The Card will be the width of the `Select.Input`**.
+     *
+     * **Note: The card will be the width of its corresponding `Select.Input`**.
+     *
      * ```tsx
      * <Select item={options}>
      *  <Select.Input id="matching-formfield-inputId" onChange={(event) => handleChange(event)}>
@@ -141,6 +141,7 @@ export const Select = createContainer()({
     Card: SelectCard,
     /**
      * `Select.List` renders a {@link ComboboxMenuList Combobox.Menu.List}. You have access to all `ListBox` props.
+     *
      * ```tsx
      * <Select item={options}>
      *  <Select.Input id="matching-formfield-inputId" onChange={(event) => handleChange(event)}>
@@ -157,6 +158,7 @@ export const Select = createContainer()({
     List: Combobox.Menu.List,
     /**
      * `Select.Item` renders a {@link ComboboxMenuItem Combobox.Menu.Item} with aria role of `option`. You can optionally render a `Icon`.
+     *
      * ```tsx
      * <Select item={options}>
      *  <Select.Input id="matching-formfield-inputId" onChange={(event) => handleChange(event)}>
