@@ -97,7 +97,17 @@ const testClass = cs({
     minWidth: space.xl,
     borderRadius: borderRadius.circle,
   },
+  '&.canvas-tertiary-button-icon-start': {
+    paddingInlineStart: space.xxs,
+    paddingInlineEnd: space.xs,
+  },
+  '&.canvas-tertiary-button-icon-end': {
+    paddingInlineStart: space.xs,
+    paddingInlineEnd: space.xxs,
+  },
 });
+
+console.log('testClass:', testClass);
 
 export const tertiaryButtonModifiers = createModifiers({
   iconPosition: {
@@ -233,7 +243,7 @@ export const TertiaryButton = createComponent('button')({
     {
       children,
       icon,
-      size,
+      size = 'medium',
       iconPosition = children ? undefined : 'only',
       variant,
       ...elemProps
@@ -255,7 +265,6 @@ export const TertiaryButton = createComponent('button')({
             variant: variant,
             size: size,
           }),
-          testClass,
         ]}
         {...elemProps}
       >

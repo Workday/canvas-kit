@@ -228,6 +228,7 @@ const baseButtonStyles = cs({
   color: cssVar(buttonVars.default.label, base.frenchVanilla100),
   borderWidth: '1px',
   borderStyle: 'solid',
+  gap: cssVar(system.space.x2),
   borderColor: cssVar(buttonVars.default.border, 'transparent'),
   cursor: 'pointer',
   display: 'inline-flex',

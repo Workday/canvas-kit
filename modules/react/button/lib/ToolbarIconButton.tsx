@@ -8,10 +8,12 @@ import {
   createComponent,
   styled,
   StyledType,
+  cssVar,
 } from '@workday/canvas-kit-react/common';
 import {ButtonColors} from './types';
-import {BaseButton} from './BaseButton';
+import {BaseButton, buttonVars} from './BaseButton';
 import {TertiaryButtonProps} from './TertiaryButton';
+import {base, brand} from '@workday/canvas-tokens-web';
 
 export interface ToolbarIconButtonProps
   extends Omit<TertiaryButtonProps, 'size' | 'variant'>,
@@ -27,6 +29,10 @@ const StyledToolbarIconButton = styled(BaseButton)<StyledType & ToolbarIconButto
     verticalAlign: 'middle',
     width: 20,
     height: 20,
+  },
+  '&:focus-visible, &.focus': {
+    [buttonVars.focus.boxShadowInner]: cssVar(base.frenchVanilla100),
+    [buttonVars.focus.boxShadowOuter]: cssVar(brand.common.focusOutline),
   },
 });
 

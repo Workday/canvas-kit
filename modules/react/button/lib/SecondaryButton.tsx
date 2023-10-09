@@ -22,7 +22,6 @@ const secondaryStyles = cs({
   [buttonVars.default.border]: cssVar(base.blackPepper400),
   [buttonVars.default.borderRadius]: cssVar(system.shape.circle),
   [buttonVars.default.label]: cssVar(base.blackPepper400),
-  gap: cssVar(system.space.x2),
   '& span .wd-icon-fill': {
     [buttonVars.default.icon]: cssVar(base.blackPepper400),
   },
