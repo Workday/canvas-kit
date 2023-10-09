@@ -10,5 +10,5 @@ export {
   useSetPopupWidth,
   useMoveCursorToIndex,
   useComboboxInput,
-  useListKeyboardHandler,
+  useComboboxListKeyboardHandler,
 } from './lib/hooks';

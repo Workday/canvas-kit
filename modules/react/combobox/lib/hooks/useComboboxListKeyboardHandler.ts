@@ -5,9 +5,9 @@ import {keyboardEventToCursorEvents} from '@workday/canvas-kit-react/collection'
 import {useComboboxModel} from './index';
 
 /**
- * `useListKeyboardHandler` handle calling keyboard events like ArrowUp and ArrowDown only when the menu is visible.
+ * `useComboboxListKeyboardHandler` handle calling keyboard events like ArrowUp and ArrowDown only when the menu is visible.
  */
-export const useListKeyboardHandler = createElemPropsHook(useComboboxModel)(model => {
+export const useComboboxListKeyboardHandler = createElemPropsHook(useComboboxModel)(model => {
   const isRTL = useIsRTL();
 
   return {

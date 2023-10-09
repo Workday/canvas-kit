@@ -10,7 +10,7 @@ import {
   useComboboxInputOpenWithArrowKeys,
   useMoveCursorToIndex,
   useSetPopupWidth,
-  useListKeyboardHandler,
+  useComboboxListKeyboardHandler,
 } from './index';
 
 /**
@@ -89,6 +89,6 @@ export const useComboboxInput = composeHooks(
   useMoveCursorToIndex,
   useComboboxInputOpenWithArrowKeys,
   useListActiveDescendant,
-  useListKeyboardHandler,
+  useComboboxListKeyboardHandler,
   usePopupTarget
 );
