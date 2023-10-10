@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v8.6.23](https://github.com/Workday/canvas-kit/releases/tag/v8.6.23) (2023-10-02)
+
+### Documentation
+
+- fix: Add jsdoc element in backticks for Avatar ([#2350](https://github.com/Workday/canvas-kit/pull/2350)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v8.6.22](https://github.com/Workday/canvas-kit/releases/tag/v8.6.22) (2023-09-20)
 
 ### Components
