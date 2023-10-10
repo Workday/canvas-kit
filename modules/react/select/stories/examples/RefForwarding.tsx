@@ -4,17 +4,13 @@ import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Select} from '@workday/canvas-kit-react/select';
 
 const options = [
-  {id: 'E-mail'},
-  {id: 'Phone'},
-  {id: 'Fax (disabled)', disabled: true},
-  {id: 'Mail'},
-  {id: 'Mobile Phone'},
-  {
-    id: 'The Ontologically Anthropocentric Sensory Immersive Simulation',
-    disabled: false,
-  },
+  'E-mail',
+  'Phone',
+  'Fax',
+  'Mail',
+  'Mobile Phone',
+  'The Ontologically Anthropocentric Sensory Immersive Simulation',
 ];
-const disabledItems = options.filter(item => item.disabled === true).map(item => item.id);
 
 export const RefForwarding = () => {
   const [value, setValue] = React.useState('medium');
@@ -32,18 +28,12 @@ export const RefForwarding = () => {
 
   return (
     <>
-      <Select items={options} nonInteractiveIds={disabledItems}>
+      <Select items={options}>
         <FormField label="Contact" inputId="refforwarding-select">
           <Select.Input ref={ref} onChange={e => handleChange(e)} id="refforwarding-select" />
           <Select.Popper>
             <Select.Card>
-              <Select.List>
-                {item => (
-                  <Select.Item aria-disabled={item.disabled ? item.disabled : undefined}>
-                    {item.id}
-                  </Select.Item>
-                )}
-              </Select.List>
+              <Select.List>{item => <Select.Item>{item}</Select.Item>}</Select.List>
             </Select.Card>
           </Select.Popper>
         </FormField>
