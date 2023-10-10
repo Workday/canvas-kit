@@ -34,7 +34,10 @@ function getFocusableElement(element: Element | null): Element | null {
 /**
  * Is the element outside of bounds. An element is outside of bounds if it is less than half visible.
  */
-function isElementOutOfBounds(element: HTMLElement, boundingRect: DOMRect) {
+function isElementOutOfBounds(
+  element: HTMLElement,
+  boundingRect: {top: number; bottom: number; left: number; right: number}
+) {
   const elementRect = element.getBoundingClientRect();
 
   return (
@@ -114,7 +117,7 @@ export const useReturnFocus = createElemPropsHook(usePopupModel)(model => {
       }
       const scrollParent = getScrollParent(element);
       const scrollParentRect = scrollParent.getBoundingClientRect();
-      const viewportRect = DOMRect.fromRect({width: window.innerWidth, height: window.innerHeight});
+      const viewportRect = {left: 0, top: 0, right: window.innerWidth, bottom: window.innerHeight};
 
       // Don't change focus if user focused on a different element like a `input` or the target
       // element isn't on at least halfway rendered on the screen.
