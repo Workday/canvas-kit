@@ -4,7 +4,7 @@ import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Select} from '@workday/canvas-kit-react/select';
 
 const options = [
-  {id: 'E-mail', data: {textValue: 'foo'}},
+  {id: 'E-mail'},
   {id: 'Phone'},
   {id: 'Fax (disabled)', disabled: true},
   {id: 'Mail'},
