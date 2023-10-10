@@ -1,13 +1,7 @@
 import * as React from 'react';
 
 import {buttonVars, ButtonContainerProps, focusRingVars} from './BaseButton';
-import {
-  createComponent,
-  cs,
-  createModifiers,
-  cssVar,
-  Themeable,
-} from '@workday/canvas-kit-react/common';
+import {createComponent, cs, createModifiers, cssVar} from '@workday/canvas-kit-react/common';
 import {system, brand, base} from '@workday/canvas-tokens-web';
 import {borderRadius, space, spaceNumbers} from '@workday/canvas-kit-react/tokens';
 import {Button} from './Button';
@@ -17,11 +11,12 @@ import {Button} from './Button';
  * We omit `ref` since all of our buttons use `createComponent` and already give access to `ref`.
  * Use this type to extend and customize any one off buttons that you want full control over styling.
  */
-export interface TertiaryButtonProps extends Themeable, Omit<ButtonContainerProps, 'ref'> {
+export interface TertiaryButtonProps extends Omit<ButtonContainerProps, 'ref'> {
   /**
    * Variant has an option for `inverse` which will inverse the styling
    */
   variant?: 'inverse';
+  isThemeable?: boolean;
 }
 
 const tertiaryStyles = cs({
@@ -30,73 +25,30 @@ const tertiaryStyles = cs({
   [buttonVars.default.borderRadius]: cssVar(system.shape.medium),
   [buttonVars.default.label]: cssVar(brand.primary.base),
   [focusRingVars.width]: '0px',
-  paddingInline: space.xxs,
+  paddingInline: cssVar(system.space.x2),
   minWidth: 'auto',
   textDecoration: 'underline',
   border: 0,
-  '& span .wd-icon-fill': {
-    [buttonVars.default.icon]: cssVar(brand.primary.base),
-  },
-  '&.canvas-tertiary-button-icon-only': {
-    '& span .wd-icon-fill': {
-      [buttonVars.default.icon]: cssVar(base.blackPepper400),
-    },
-  },
-  '&:hover, &.hover': {
-    [buttonVars.hover.background]: cssVar(base.soap200),
-    [buttonVars.hover.border]: 'transparent',
-    [buttonVars.hover.label]: cssVar(brand.primary.dark),
-    '& span .wd-icon-fill': {
-      [buttonVars.hover.icon]: cssVar(brand.primary.dark),
-    },
-    '&.canvas-tertiary-button-icon-only': {
-      '& span .wd-icon-fill': {
-        [buttonVars.hover.icon]: cssVar(base.blackPepper500),
-      },
-    },
-  },
-  '&:focus-visible, &.focus': {
-    [buttonVars.focus.background]: 'transparent',
-    [buttonVars.focus.border]: 'transparent',
-    [buttonVars.focus.boxShadowInner]: cssVar(brand.common.focusOutline),
-    [buttonVars.focus.boxShadowOuter]: cssVar(brand.common.focusOutline),
-    [buttonVars.focus.label]: cssVar(brand.primary.base),
-    '& span .wd-icon-fill': {
-      [buttonVars.focus.icon]: cssVar(brand.primary.base),
-    },
-    '&.canvas-tertiary-button-icon-only': {
-      '& span .wd-icon-fill': {
-        [buttonVars.focus.icon]: cssVar(base.blackPepper500),
-      },
-    },
-  },
-  '&:active, &.active': {
-    [buttonVars.active.background]: cssVar(base.soap300),
-    [buttonVars.active.border]: 'transparent',
-    [buttonVars.active.label]: cssVar(brand.primary.dark),
-    '& span .wd-icon-fill': {
-      [buttonVars.active.icon]: cssVar(brand.primary.dark),
-    },
-    '&.canvas-tertiary-button-icon-only': {
-      '& span .wd-icon-fill': {
-        [buttonVars.active.icon]: cssVar(base.blackPepper500),
-      },
-    },
-  },
-  '&:disabled, &:active:disabled, &:focus:disabled, &:hover:disabled': {
-    [buttonVars.disabled.background]: 'transparent',
-    [buttonVars.disabled.border]: cssVar(base.frenchVanilla100),
-    [buttonVars.disabled.label]: cssVar(brand.primary.base),
-    [buttonVars.disabled.opacity]: '0.4',
-    '& span .wd-icon-fill': {
-      [buttonVars.disabled.icon]: cssVar(brand.primary.base),
-    },
-    '&.canvas-tertiary-button-icon-only': {
-      '& span .wd-icon-fill': {
-        [buttonVars.disabled.icon]: cssVar(base.blackPepper400),
-      },
-    },
-  },
+  [buttonVars.default.icon]: cssVar(brand.primary.base),
+  [buttonVars.hover.background]: cssVar(base.soap200),
+  [buttonVars.hover.border]: 'transparent',
+  [buttonVars.hover.label]: cssVar(brand.primary.dark),
+  [buttonVars.hover.icon]: cssVar(brand.primary.dark),
+  [buttonVars.focus.background]: 'transparent',
+  [buttonVars.focus.border]: 'transparent',
+  [buttonVars.focus.boxShadowInner]: cssVar(brand.common.focusOutline),
+  [buttonVars.focus.boxShadowOuter]: cssVar(brand.common.focusOutline),
+  [buttonVars.focus.label]: cssVar(brand.primary.base),
+  [buttonVars.focus.icon]: cssVar(brand.primary.base),
+  [buttonVars.active.background]: cssVar(base.soap300),
+  [buttonVars.active.border]: 'transparent',
+  [buttonVars.active.label]: cssVar(brand.primary.dark),
+  [buttonVars.active.icon]: cssVar(brand.primary.dark),
+  [buttonVars.disabled.background]: 'transparent',
+  [buttonVars.disabled.border]: cssVar(base.frenchVanilla100),
+  [buttonVars.disabled.label]: cssVar(brand.primary.base),
+  [buttonVars.disabled.opacity]: '0.4',
+  [buttonVars.disabled.icon]: cssVar(brand.primary.base),
 });
 
 export const tertiaryButtonModifiers = createModifiers({
@@ -111,68 +63,53 @@ export const tertiaryButtonModifiers = createModifiers({
       [buttonVars.default.border]: 'transparent',
       [buttonVars.default.label]: cssVar(base.frenchVanilla100),
       textDecoration: 'underline',
-      '& span .wd-icon-fill': {
-        [buttonVars.default.icon]: cssVar(base.frenchVanilla100),
-      },
+      [buttonVars.default.icon]: cssVar(base.frenchVanilla100),
+
       '&.canvas-tertiary-button-icon-only': {
-        '& span .wd-icon-fill': {
-          [buttonVars.default.icon]: cssVar(base.frenchVanilla100),
-        },
+        [buttonVars.default.icon]: cssVar(base.frenchVanilla100),
       },
       '&:hover, &.hover': {
         [buttonVars.hover.background]: cssVar(base.frenchVanilla100),
         [buttonVars.hover.border]: 'transparent',
         [buttonVars.hover.label]: cssVar(base.blackPepper400),
-        '& span .wd-icon-fill': {
-          [buttonVars.hover.icon]: cssVar(base.blackPepper400),
-        },
+
+        [buttonVars.hover.icon]: cssVar(base.blackPepper400),
         '&.canvas-tertiary-button-icon-only': {
-          '& span .wd-icon-fill': {
-            [buttonVars.hover.icon]: cssVar(base.blackPepper400),
-          },
+          [buttonVars.hover.icon]: cssVar(base.blackPepper400),
         },
       },
       '&:focus-visible, &.focus': {
         [buttonVars.focus.background]: cssVar(base.frenchVanilla100),
         [buttonVars.focus.border]: 'transparent',
-        [buttonVars.focus.boxShadowOuter]: cssVar(base.frenchVanilla100),
         [buttonVars.focus.label]: cssVar(base.blackPepper400),
-        boxShadow: `inset 0px 0px 0px 2px currentColor, ${cssVar(
-          buttonVars.focus.boxShadowOuter
-        )} 0px 0px 0px 2px`,
-        '& span .wd-icon-fill': {
-          [buttonVars.focus.icon]: cssVar(base.blackPepper400),
-        },
+        [buttonVars.focus.boxShadowInner]: cssVar(base.blackPepper400),
+        [buttonVars.focus.boxShadowOuter]: cssVar(base.frenchVanilla100),
+        [focusRingVars.width]: '2px',
+        [focusRingVars.separation]: '0px',
+
+        [buttonVars.focus.icon]: cssVar(base.blackPepper400),
         '&.canvas-tertiary-button-icon-only': {
-          '& span .wd-icon-fill': {
-            [buttonVars.focus.icon]: cssVar(base.blackPepper400),
-          },
+          [buttonVars.focus.icon]: cssVar(base.blackPepper400),
         },
       },
       '&:active, &.active': {
         [buttonVars.active.background]: cssVar(base.soap200),
         [buttonVars.active.border]: 'transparent',
         [buttonVars.active.label]: cssVar(base.blackPepper400),
-        '& span .wd-icon-fill': {
-          [buttonVars.active.icon]: cssVar(base.blackPepper400),
-        },
+
+        [buttonVars.active.icon]: cssVar(base.blackPepper400),
         '&.canvas-tertiary-button-icon-only': {
-          '& span .wd-icon-fill': {
-            [buttonVars.active.icon]: cssVar(base.blackPepper400),
-          },
+          [buttonVars.active.icon]: cssVar(base.blackPepper400),
         },
       },
       '&:disabled, &:active:disabled, &:focus:disabled, &:hover:disabled': {
         [buttonVars.disabled.background]: 'transparent',
         [buttonVars.disabled.border]: cssVar(base.frenchVanilla100),
         [buttonVars.disabled.label]: cssVar(base.frenchVanilla100),
-        '& span .wd-icon-fill': {
-          [buttonVars.disabled.icon]: cssVar(base.frenchVanilla100),
-        },
+
+        [buttonVars.disabled.icon]: cssVar(base.frenchVanilla100),
         '&.canvas-tertiary-button-icon-only': {
-          '& span .wd-icon-fill': {
-            [buttonVars.disabled.icon]: cssVar(base.frenchVanilla100),
-          },
+          [buttonVars.disabled.icon]: cssVar(base.frenchVanilla100),
         },
       },
     }),
@@ -239,6 +176,15 @@ export const tertiaryButtonModifiers = createModifiers({
       },
     }),
   },
+  isThemeable: {
+    true: cs({
+      [buttonVars.default.icon]: cssVar(brand.primary.base),
+      [buttonVars.hover.icon]: cssVar(brand.primary.dark),
+      [buttonVars.focus.icon]: cssVar(brand.primary.base),
+      [buttonVars.active.icon]: cssVar(brand.primary.dark),
+      [buttonVars.disabled.icon]: cssVar(brand.primary.base),
+    }),
+  },
 });
 
 export const TertiaryButton = createComponent('button')({
@@ -250,6 +196,8 @@ export const TertiaryButton = createComponent('button')({
       size = 'medium',
       iconPosition = children ? undefined : 'only',
       variant,
+      focusRing = variant === 'inverse' ? 'inset' : 'both',
+      isThemeable,
       ...elemProps
     }: TertiaryButtonProps,
     ref,
@@ -262,12 +210,14 @@ export const TertiaryButton = createComponent('button')({
         icon={icon}
         iconPosition={iconPosition}
         size={size}
+        focusRing={focusRing}
         cs={[
           tertiaryStyles,
           tertiaryButtonModifiers({
             iconPosition: iconPosition,
             variant: variant,
             size: size,
+            isThemeable: isThemeable as any,
           }),
         ]}
         {...elemProps}

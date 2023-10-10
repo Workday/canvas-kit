@@ -1,5 +1,4 @@
 import * as React from 'react';
-import styled from '@emotion/styled';
 import isPropValid from '@emotion/is-prop-valid';
 import {
   createComponent,
@@ -7,6 +6,7 @@ import {
   StyledType,
   useConstant,
   useCs,
+  styled,
 } from '@workday/canvas-kit-react/common';
 
 // style props

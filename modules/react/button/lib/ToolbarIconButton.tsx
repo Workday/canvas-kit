@@ -13,7 +13,7 @@ import {
 import {ButtonColors} from './types';
 import {BaseButton, buttonVars, focusRingVars} from './BaseButton';
 import {TertiaryButtonProps} from './TertiaryButton';
-import {base, brand} from '@workday/canvas-tokens-web';
+import {brand} from '@workday/canvas-tokens-web';
 
 export interface ToolbarIconButtonProps
   extends Omit<TertiaryButtonProps, 'size' | 'variant'>,
@@ -31,7 +31,6 @@ const StyledToolbarIconButton = styled(BaseButton)<StyledType & ToolbarIconButto
   },
   '&:focus-visible, &.focus': {
     [focusRingVars.width]: '0px',
-    [buttonVars.focus.boxShadowInner]: cssVar(base.frenchVanilla100),
     [buttonVars.focus.boxShadowOuter]: cssVar(brand.common.focusOutline),
   },
 });

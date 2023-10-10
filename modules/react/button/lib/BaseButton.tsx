@@ -14,7 +14,7 @@ import {
 import {SystemIconProps} from '@workday/canvas-kit-react/icon';
 import {Box} from '@workday/canvas-kit-react/layout';
 import {space, spaceNumbers} from '@workday/canvas-kit-react/tokens';
-import {base, system} from '@workday/canvas-tokens-web';
+import {base, brand, system} from '@workday/canvas-tokens-web';
 import {ButtonColors, ButtonSizes, IconPositions} from './types';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 
@@ -62,6 +62,76 @@ export interface ButtonContainerProps extends Partial<SystemIconProps>, GrowthBe
  * Use this type to extend and customize any one off buttons that you want full control over styling.
  */
 export interface BaseButtonProps extends Omit<ButtonContainerProps, 'ref'> {}
+
+export const getMinWidthStyles = (children: React.ReactNode, size: ButtonSizes) => {
+  switch (size) {
+    case 'large':
+      return children ? '112px' : '48px';
+    case 'medium':
+      return children ? '96px' : space.xl;
+    case 'small':
+      return children ? space.xxxl : space.l;
+    case 'extraSmall':
+      return children ? 'auto' : space.m;
+    default:
+      return children ? '96px' : space.xl;
+  }
+};
+
+export const getPaddingStyles = (
+  children: React.ReactNode,
+  size: ButtonSizes,
+  icon: CanvasSystemIcon | undefined,
+  iconPosition: IconPositions | undefined
+) => {
+  // In order to calculate the correct padding, we need to know its children
+  // and what side the icon is on and if there's an icon provided
+  if (!children) {
+    // icon buttons do not have any padding
+    return 0;
+  }
+  // If there are children AND an icon
+  // 1. We check what side the icon is in
+  // 2. Adjust padding to visually center the icon and text
+  // If there is children (most likely just text)
+  // 1. We keep the padding the same on both side
+  switch (size) {
+    case 'large':
+      return icon
+        ? iconPosition === 'start'
+          ? `0 ${space.l} 0 ${space.m}`
+          : `0 ${space.m} 0 ${space.l}`
+        : `0 ${space.l}`;
+
+    case 'medium':
+      return icon
+        ? iconPosition === 'start'
+          ? `0 ${space.m} 0 20px`
+          : `0 20px 0 ${space.m}`
+        : `0 ${space.m}`;
+
+    case 'small':
+      return icon
+        ? iconPosition === 'start'
+          ? `0 ${space.s} 0 ${space.xs}`
+          : `0 ${space.xs} 0 ${space.s}`
+        : `0 ${space.s}`;
+
+    case 'extraSmall':
+      return icon
+        ? iconPosition === 'start'
+          ? `0 ${space.xs} 0 ${space.xxs}`
+          : `0 ${space.xxs} 0 ${space.xs}`
+        : `0 ${space.xs}`;
+
+    default:
+      return icon
+        ? iconPosition === 'start'
+          ? `0 ${space.m} 0 20px`
+          : `0 20px 0 ${space.m}`
+        : `0 ${space.m}`;
+  }
+};
 
 export const buttonVars = {
   default: createVars(
@@ -148,76 +218,6 @@ export const focusRingStyles = {
   }),
 };
 
-export const getMinWidthStyles = (children: React.ReactNode, size: ButtonSizes) => {
-  switch (size) {
-    case 'large':
-      return children ? '112px' : '48px';
-    case 'medium':
-      return children ? '96px' : space.xl;
-    case 'small':
-      return children ? space.xxxl : space.l;
-    case 'extraSmall':
-      return children ? 'auto' : space.m;
-    default:
-      return children ? '96px' : space.xl;
-  }
-};
-
-export const getPaddingStyles = (
-  children: React.ReactNode,
-  size: ButtonSizes,
-  icon: CanvasSystemIcon | undefined,
-  iconPosition: IconPositions | undefined
-) => {
-  // In order to calculate the correct padding, we need to know its children
-  // and what side the icon is on and if there's an icon provided
-  if (!children) {
-    // icon buttons do not have any padding
-    return 0;
-  }
-  // If there are children AND an icon
-  // 1. We check what side the icon is in
-  // 2. Adjust padding to visually center the icon and text
-  // If there is children (most likely just text)
-  // 1. We keep the padding the same on both side
-  switch (size) {
-    case 'large':
-      return icon
-        ? iconPosition === 'start'
-          ? `0 ${space.l} 0 ${space.m}`
-          : `0 ${space.m} 0 ${space.l}`
-        : `0 ${space.l}`;
-
-    case 'medium':
-      return icon
-        ? iconPosition === 'start'
-          ? `0 ${space.m} 0 20px`
-          : `0 20px 0 ${space.m}`
-        : `0 ${space.m}`;
-
-    case 'small':
-      return icon
-        ? iconPosition === 'start'
-          ? `0 ${space.s} 0 ${space.xs}`
-          : `0 ${space.xs} 0 ${space.s}`
-        : `0 ${space.s}`;
-
-    case 'extraSmall':
-      return icon
-        ? iconPosition === 'start'
-          ? `0 ${space.xs} 0 ${space.xxs}`
-          : `0 ${space.xxs} 0 ${space.xs}`
-        : `0 ${space.xs}`;
-
-    default:
-      return icon
-        ? iconPosition === 'start'
-          ? `0 ${space.m} 0 20px`
-          : `0 20px 0 ${space.m}`
-        : `0 ${space.m}`;
-  }
-};
-
 const baseButtonStyles = cs({
   fontFamily: '"Roboto", "Helvetica Neue", "Helvetica", Arial, sans-serif',
   fontSize: '0.875rem',
@@ -225,11 +225,11 @@ const baseButtonStyles = cs({
   letterSpacing: '0.015rem',
   fontWeight: 'bold',
   backgroundColor: cssVar(buttonVars.default.background, 'transparent'),
-  color: cssVar(buttonVars.default.label, base.frenchVanilla100),
+  color: cssVar(buttonVars.default.label, cssVar(base.blackPepper400)),
   borderWidth: '1px',
   borderStyle: 'solid',
   gap: cssVar(system.space.x2),
-  borderColor: cssVar(buttonVars.default.border, 'transparent'),
+  borderColor: cssVar(buttonVars.default.border, cssVar(base.blackPepper400)),
   cursor: 'pointer',
   display: 'inline-flex',
   boxShadow: 'none',
@@ -253,8 +253,11 @@ const baseButtonStyles = cs({
   },
   [focusRingVars.width]: '2px',
   [focusRingVars.separation]: '2px',
-  [focusRingVars.innerColor]: cssVar(buttonVars.focus.boxShadowInner),
-  [focusRingVars.outerColor]: cssVar(buttonVars.focus.boxShadowOuter),
+  [focusRingVars.innerColor]: cssVar(
+    buttonVars.focus.boxShadowInner,
+    cssVar(base.frenchVanilla100)
+  ),
+  [focusRingVars.outerColor]: cssVar(buttonVars.focus.boxShadowOuter, cssVar(brand.primary.base)),
   '&:focus-visible, &.focus': {
     backgroundColor: cssVar(buttonVars.focus.background, 'transparent'),
     borderColor: cssVar(buttonVars.focus.border, 'transparent'),
@@ -265,40 +268,71 @@ const baseButtonStyles = cs({
   },
   '& span .wd-icon-fill': {
     transitionDuration: '40ms',
-    fill: cssVar(buttonVars.default.icon),
+    fill: cssVar(buttonVars.default.icon, cssVar(base.blackPepper400)),
   },
   '&:hover, &.hover': {
-    backgroundColor: cssVar(buttonVars.hover.background),
+    backgroundColor: cssVar(buttonVars.hover.background, cssVar(base.blackPepper500)),
     borderColor: cssVar(buttonVars.hover.border, 'transparent'),
-    color: cssVar(buttonVars.hover.label),
+    color: cssVar(buttonVars.hover.label, cssVar(base.blackPepper500)),
     '& span .wd-icon-fill': {
-      fill: cssVar(buttonVars.hover.icon),
+      fill: cssVar(buttonVars.hover.icon, cssVar(base.blackPepper500)),
     },
   },
   '&:hover:active': {transitionDuration: '40ms'},
   '&:active, &.active': {
-    backgroundColor: cssVar(buttonVars.active.background),
+    backgroundColor: cssVar(buttonVars.active.background, 'transparent'),
     borderColor: cssVar(buttonVars.active.border, 'transparent'),
-    color: cssVar(buttonVars.active.label),
+    color: cssVar(buttonVars.active.label, cssVar(base.blackPepper400)),
     '& span .wd-icon-fill': {
-      fill: cssVar(buttonVars.active.icon),
+      fill: cssVar(buttonVars.active.icon, cssVar(base.blackPepper400)),
     },
   },
   '&:disabled, &:active:disabled, &:focus:disabled, &:hover:disabled': {
-    backgroundColor: cssVar(buttonVars.disabled.background),
+    backgroundColor: cssVar(buttonVars.disabled.background, 'transparent'),
     borderColor: cssVar(buttonVars.disabled.border, 'transparent'),
-    color: cssVar(buttonVars.disabled.label),
+    color: cssVar(buttonVars.disabled.label, cssVar(base.blackPepper400)),
     '& span .wd-icon-fill': {
-      fill: cssVar(buttonVars.disabled.icon),
+      fill: cssVar(buttonVars.disabled.icon, cssVar(base.blackPepper400)),
     },
   },
 });
+
+export const sizeModifiers = {
+  large: {
+    fontSize: space.s,
+    lineHeight: space.m,
+    letterSpacing: '0.01rem',
+    height: '48px',
+    paddingInline: space.l,
+    minWidth: '112px',
+    iconStart: cs({
+      paddingInlineStart: space.m,
+      paddingInlineEnd: space.l,
+    }),
+    iconEnd: cs({
+      paddingInlineStart: space.l,
+      paddingInlineEnd: space.m,
+    }),
+    iconOnly: cs({
+      padding: '0',
+      minWidth: `${spaceNumbers.xl + spaceNumbers.xxs}rem`,
+    }),
+  },
+  medium: cs({}),
+  small: cs({}),
+  extraSmall: cs({}),
+};
 
 export const buttonModifiers = createModifiers({
   focusRing: {
     inset: focusRingStyles.inset,
     outer: focusRingStyles.outer,
     both: focusRingStyles.both,
+  },
+  iconPosition: {
+    start: 'canvas-button-icon-start',
+    end: 'canvas-button-icon-end',
+    only: 'canvas-button-icon-only',
   },
   size: {
     large: cs({
@@ -411,7 +445,7 @@ export const BaseButton = createComponent('button')({
         cs={[
           baseButtonStyles,
           cs,
-          buttonModifiers({focusRing: focusRing, size: size}),
+          buttonModifiers({iconPosition: iconPosition, focusRing: focusRing, size: size}),
           buttonVars.active(colors?.active || {}),
           buttonVars.default(colors?.default || {}),
           buttonVars.disabled(colors?.disabled || {}),
