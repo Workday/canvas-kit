@@ -1,9 +1,10 @@
 import React from 'react';
 import {CSSObject} from '@emotion/react';
 
-import {BaseButton, focusRingVars} from '@workday/canvas-kit-react/button';
+import {BaseButton} from '@workday/canvas-kit-react/button';
 import {
   createContainer,
+  cssVar,
   focusRing,
   mouseFocusBehavior,
   styled,
@@ -19,6 +20,7 @@ import {PillIconButton} from './PillIconButton';
 import {PillCount} from './PillCount';
 import {PillAvatar} from './PillAvatar';
 import {PillLabel} from './PillLabel';
+import {base} from '@workday/canvas-tokens-web';
 
 export interface PillProps extends BoxProps {
   /**
@@ -108,8 +110,6 @@ const getRemovablePillColors = (disabled?: boolean) => {
 };
 
 const pillBaseStyles: CSSObject = {
-  [focusRingVars.innerColor]: colors.blueberry400,
-  [focusRingVars.outerColor]: colors.blueberry400,
   display: 'inline-flex',
   alignItems: 'center',
   borderRadius: borderRadius.m,
@@ -155,8 +155,13 @@ const StyledBasePill = styled(BaseButton.as('button'))<StyledType & PillProps>(
   ({variant}) => ({
     '&:focus, &:focus-visible': {
       borderColor: variant === 'removable' ? undefined : colors.blueberry400,
-      [focusRingVars.separation]: variant === 'removable' ? '0px' : '-1px',
-      [focusRingVars.width]: variant === 'removable' ? '0px' : '1px',
+      ...focusRing({
+        inset: 'inner',
+        width: 0,
+        separation: variant === 'removable' ? 0 : 1,
+        innerColor: cssVar(base.blueberry400),
+        outerColor: 'transparent',
+      }),
     },
   }),
   boxStyleFn
@@ -281,7 +286,6 @@ export const Pill = createContainer('button')({
     <>
       {variant === 'readOnly' && (
         <StyledNonInteractivePill
-          focusRing="inset"
           maxWidth={model.state.maxWidth}
           as={Element !== 'button' ? Element : 'span'}
           border={`1px solid ${colors.licorice200}`}
@@ -293,7 +297,6 @@ export const Pill = createContainer('button')({
       )}
       {variant === 'default' && (
         <StyledBasePill
-          focusRing="inset"
           colors={getButtonPillColors()}
           as={Element}
           {...elemProps}

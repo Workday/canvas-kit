@@ -11,9 +11,9 @@ import {
   cssVar,
 } from '@workday/canvas-kit-react/common';
 import {ButtonColors} from './types';
-import {BaseButton, buttonVars, focusRingVars} from './BaseButton';
+import {BaseButton, buttonVars} from './BaseButton';
 import {TertiaryButtonProps} from './TertiaryButton';
-import {brand} from '@workday/canvas-tokens-web';
+import {base, brand} from '@workday/canvas-tokens-web';
 
 export interface ToolbarIconButtonProps
   extends Omit<TertiaryButtonProps, 'size' | 'variant'>,
@@ -30,8 +30,12 @@ const StyledToolbarIconButton = styled(BaseButton)<StyledType & ToolbarIconButto
     height: 20,
   },
   '&:focus-visible, &.focus': {
-    [focusRingVars.width]: '0px',
-    [buttonVars.focus.boxShadowOuter]: cssVar(brand.common.focusOutline),
+    ...focusRing({
+      width: 2,
+      separation: 0,
+      innerColor: cssVar(buttonVars.focus.boxShadowInner, cssVar(base.frenchVanilla100)),
+      outerColor: cssVar(buttonVars.focus.boxShadowOuter, cssVar(brand.primary.base)),
+    }),
   },
 });
 
@@ -107,7 +111,6 @@ const getToolbarIconButtonColors = (theme: EmotionCanvasTheme, toggled?: boolean
     },
     focus: {
       icon: toggled ? themePrimary.main : colors.licorice200,
-      focusRing: focusRing({width: 2, separation: 0}, theme),
       background: toggled ? themePrimary.lightest : 'transparent',
     },
     disabled: {

@@ -10,6 +10,7 @@ import {
   createVars,
   cssVar,
   createModifiers,
+  focusRing,
 } from '@workday/canvas-kit-react/common';
 import {SystemIconProps} from '@workday/canvas-kit-react/icon';
 import {Box} from '@workday/canvas-kit-react/layout';
@@ -53,7 +54,7 @@ export interface ButtonContainerProps extends Partial<SystemIconProps>, GrowthBe
    */
   shouldMirrorIcon?: boolean;
   children?: React.ReactNode;
-  focusRing?: keyof typeof buttonModifiers.focusRing;
+  // focusRing?: keyof typeof buttonModifiers.focusRing;
 }
 
 /**
@@ -186,38 +187,6 @@ export const buttonVars = {
   ),
 };
 
-export const focusRingVars = createVars('separation', 'width', 'innerColor', 'outerColor');
-
-export const focusRingStyles = {
-  inset: cs({
-    '&:focus-visible, &.focus': {
-      boxShadow: `inset ${cssVar(focusRingVars.innerColor)} 0px 0px 0px ${cssVar(
-        focusRingVars.width
-      )}, ${cssVar(focusRingVars.outerColor)} 0px 0px 0px calc(${cssVar(
-        focusRingVars.width
-      )} + ${cssVar(focusRingVars.separation)})`,
-    },
-  }),
-  outer: cs({
-    '&:focus-visible, &.focus': {
-      boxShadow: `${cssVar(focusRingVars.innerColor)} 0px 0px 0px ${cssVar(
-        focusRingVars.width
-      )}, ${cssVar(focusRingVars.outerColor)} 0px 0px 0px calc(${cssVar(
-        focusRingVars.width
-      )} + ${cssVar(focusRingVars.separation)})`,
-    },
-  }),
-  both: cs({
-    '&:focus-visible, &.focus': {
-      boxShadow: `${cssVar(focusRingVars.innerColor)} 0px 0px 0px ${cssVar(
-        focusRingVars.width
-      )}, ${cssVar(focusRingVars.outerColor)} 0px 0px 0px calc(${cssVar(
-        focusRingVars.width
-      )} + ${cssVar(focusRingVars.separation)})`,
-    },
-  }),
-};
-
 const baseButtonStyles = cs({
   fontFamily: '"Roboto", "Helvetica Neue", "Helvetica", Arial, sans-serif',
   fontSize: '0.875rem',
@@ -251,13 +220,6 @@ const baseButtonStyles = cs({
     boxShadow: 'none',
     opacity: cssVar(buttonVars.disabled.opacity),
   },
-  [focusRingVars.width]: '2px',
-  [focusRingVars.separation]: '2px',
-  [focusRingVars.innerColor]: cssVar(
-    buttonVars.focus.boxShadowInner,
-    cssVar(base.frenchVanilla100)
-  ),
-  [focusRingVars.outerColor]: cssVar(buttonVars.focus.boxShadowOuter, cssVar(brand.primary.base)),
   '& span .wd-icon-fill': {
     transitionDuration: '40ms',
     fill: cssVar(buttonVars.default.icon, cssVar(base.blackPepper400)),
@@ -275,6 +237,12 @@ const baseButtonStyles = cs({
     '.wd-icon-background ~ .wd-icon-accent, .wd-icon-background ~ .wd-icon-accent2': {
       fill: cssVar(buttonVars.focus.icon),
     },
+    ...focusRing({
+      width: 2,
+      separation: 2,
+      innerColor: cssVar(buttonVars.focus.boxShadowInner, cssVar(base.frenchVanilla100)),
+      outerColor: cssVar(buttonVars.focus.boxShadowOuter, cssVar(brand.primary.base)),
+    }),
   },
   '&:hover, &.hover': {
     backgroundColor: cssVar(buttonVars.hover.background, cssVar(base.blackPepper500)),
@@ -313,11 +281,6 @@ const baseButtonStyles = cs({
 });
 
 export const buttonModifiers = createModifiers({
-  focusRing: {
-    inset: focusRingStyles.inset,
-    outer: focusRingStyles.outer,
-    both: focusRingStyles.both,
-  },
   size: {
     large: cs({
       fontSize: space.s,
@@ -376,7 +339,7 @@ export const buttonModifiers = createModifiers({
   },
 });
 
-function capitalize(string: string = '') {
+export function capitalize(string: string = '') {
   return string.charAt(0).toUpperCase() + string.substring(1);
 }
 
@@ -394,7 +357,6 @@ export const BaseButton = createComponent('button')({
       children,
       cs,
       size,
-      focusRing = 'both',
       fillIcon,
       iconPosition,
       icon,
@@ -415,7 +377,6 @@ export const BaseButton = createComponent('button')({
           cs,
           buttonModifiers({
             iconPosition: getIconPosition(size, iconPosition),
-            focusRing: focusRing,
             size: size,
           }),
           buttonVars.active(colors?.active || {}),

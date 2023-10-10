@@ -1,13 +1,20 @@
 import React from 'react';
 
-import {focusRing, styled, StyledType, createSubcomponent} from '@workday/canvas-kit-react/common';
+import {
+  focusRing,
+  styled,
+  StyledType,
+  createSubcomponent,
+  cssVar,
+} from '@workday/canvas-kit-react/common';
 
 import {SystemIcon, SystemIconProps} from '@workday/canvas-kit-react/icon';
 import {usePillModel} from './usePillModel';
 import {xSmallIcon} from '@workday/canvas-system-icons-web';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {colors, space} from '@workday/canvas-kit-react/tokens';
-import {BaseButton, focusRingVars} from '@workday/canvas-kit-react/button';
+import {BaseButton} from '@workday/canvas-kit-react/button';
+import {base} from '@workday/canvas-tokens-web';
 
 export interface PillIconButtonProps extends Omit<SystemIconProps, 'icon'> {
   /**
@@ -40,9 +47,6 @@ const getIconColors = () => {
     focus: {
       icon: colors.licorice500,
       border: 'transparent',
-      focusRing: focusRing({
-        innerColor: 'transparent',
-      }),
     },
     disabled: {
       icon: colors.licorice100,
@@ -52,9 +56,6 @@ const getIconColors = () => {
 };
 
 const StyledIconButton = styled(BaseButton)<StyledType & PillIconButtonProps>({
-  [focusRingVars.innerColor]: 'transparent',
-  [focusRingVars.outerColor]: colors.blueberry400,
-  [focusRingVars.width]: '0px',
   marginInlineEnd: '-7px', // visually pull in the pill to the right size
   marginInlineStart: `-2px`, // visually create space between label and the button
   overflow: 'visible',
@@ -68,6 +69,14 @@ const StyledIconButton = styled(BaseButton)<StyledType & PillIconButtonProps>({
     margin: 0,
     pointerEvents: 'all',
     cursor: 'pointer',
+  },
+  '&.focus-visibile, &.focus': {
+    ...focusRing({
+      width: 0,
+      separation: 2,
+      innerColor: 'transparent',
+      outerColor: cssVar(base.blueberry400),
+    }),
   },
 });
 

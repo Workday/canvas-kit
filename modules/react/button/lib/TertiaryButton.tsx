@@ -1,7 +1,13 @@
 import * as React from 'react';
 
-import {buttonVars, ButtonContainerProps, focusRingVars} from './BaseButton';
-import {createComponent, cs, createModifiers, cssVar} from '@workday/canvas-kit-react/common';
+import {buttonVars, ButtonContainerProps, getIconPosition} from './BaseButton';
+import {
+  createComponent,
+  cs,
+  createModifiers,
+  cssVar,
+  focusRing,
+} from '@workday/canvas-kit-react/common';
 import {system, brand, base} from '@workday/canvas-tokens-web';
 import {borderRadius, space, spaceNumbers} from '@workday/canvas-kit-react/tokens';
 import {Button} from './Button';
@@ -43,7 +49,7 @@ const tertiaryStyles = cs({
   [buttonVars.focus.boxShadowInner]: cssVar(brand.common.focusOutline),
   [buttonVars.focus.boxShadowOuter]: cssVar(brand.common.focusOutline),
   // Focus Ring Styles
-  [focusRingVars.width]: '0px',
+  // [focusRingVars.width]: '0px',
   // Active Styles
   [buttonVars.active.background]: cssVar(base.soap300),
   [buttonVars.active.border]: 'transparent',
@@ -55,13 +61,26 @@ const tertiaryStyles = cs({
   [buttonVars.disabled.label]: cssVar(brand.primary.base),
   [buttonVars.disabled.icon]: cssVar(base.blackPepper400),
   [buttonVars.disabled.opacity]: '0.4',
+
+  '&:focus-visible, &.focus': {
+    ...focusRing({
+      width: 2,
+      separation: 0,
+      innerColor: cssVar(buttonVars.focus.boxShadowInner, cssVar(base.frenchVanilla100)),
+      outerColor: cssVar(buttonVars.focus.boxShadowOuter, cssVar(brand.primary.base)),
+    }),
+  },
 });
 
 export const tertiaryButtonModifiers = createModifiers({
-  iconPosition: {
-    start: 'canvas-tertiary-button-icon-start',
-    end: 'canvas-tertiary-button-icon-end',
-    only: 'canvas-tertiary-button-icon-only',
+  isThemeable: {
+    true: cs({
+      [buttonVars.default.icon]: cssVar(brand.primary.base),
+      [buttonVars.hover.icon]: cssVar(brand.primary.dark),
+      [buttonVars.focus.icon]: cssVar(brand.primary.base),
+      [buttonVars.active.icon]: cssVar(brand.primary.dark),
+      [buttonVars.disabled.icon]: cssVar(brand.primary.base),
+    }),
   },
   variant: {
     inverse: cs({
@@ -83,8 +102,8 @@ export const tertiaryButtonModifiers = createModifiers({
       [buttonVars.focus.boxShadowOuter]: cssVar(base.frenchVanilla100),
       [buttonVars.focus.icon]: cssVar(base.blackPepper400),
       // Focus Ring Styles
-      [focusRingVars.width]: '2px',
-      [focusRingVars.separation]: '0px',
+      // [focusRingVars.width]: '2px',
+      // [focusRingVars.separation]: '0px',
       // Active Styles
       [buttonVars.active.background]: cssVar(base.soap200),
       [buttonVars.active.border]: 'transparent',
@@ -95,78 +114,38 @@ export const tertiaryButtonModifiers = createModifiers({
       [buttonVars.disabled.border]: cssVar(base.frenchVanilla100),
       [buttonVars.disabled.label]: cssVar(base.frenchVanilla100),
       [buttonVars.disabled.icon]: cssVar(base.frenchVanilla100),
-    }),
-  },
-  size: {
-    large: cs({
-      '&.canvas-tertiary-button-icon-only': {
-        borderRadius: borderRadius.circle,
-        padding: '0',
-        minWidth: `${spaceNumbers.xl + spaceNumbers.xxs}rem`,
-      },
-      '&.canvas-tertiary-button-icon-start': {
-        paddingInlineStart: space.xxs,
-        paddingInlineEnd: space.xs,
-      },
-      '&.canvas-tertiary-button-icon-end': {
-        paddingInlineStart: space.xs,
-        paddingInlineEnd: space.xxs,
-      },
-    }),
-    medium: cs({
-      '&.canvas-tertiary-button-icon-only': {
-        padding: '0',
-        minWidth: space.xl,
-        borderRadius: borderRadius.circle,
-      },
-      '&.canvas-tertiary-button-icon-start': {
-        paddingInlineStart: space.xxs,
-        paddingInlineEnd: space.xs,
-      },
-      '&.canvas-tertiary-button-icon-end': {
-        paddingInlineStart: space.xs,
-        paddingInlineEnd: space.xxs,
-      },
-    }),
-    small: cs({
-      '&.canvas-tertiary-button-icon-only': {
-        padding: '0',
-        minWidth: space.l,
-        borderRadius: borderRadius.circle,
-      },
-      '&.canvas-tertiary-button-icon-start': {
-        paddingInlineStart: space.xxs,
-        paddingInlineEnd: space.xs,
-      },
-      '&.canvas-tertiary-button-icon-end': {
-        paddingInlineStart: space.xs,
-        paddingInlineEnd: space.xxs,
-      },
-    }),
-    extraSmall: cs({
-      '&.canvas-tertiary-button-icon-only': {
-        padding: '0',
-        minWidth: space.m,
-        borderRadius: borderRadius.circle,
-      },
-      '&.canvas-tertiary-button-icon-start': {
-        paddingInlineStart: space.xxxs,
-        paddingInlineEnd: space.xxs,
-      },
-      '&.canvas-tertiary-button-icon-end': {
-        paddingInlineStart: space.xxs,
-        paddingInlineEnd: space.xxxs,
+
+      '&:focus-visible, &.focus': {
+        ...focusRing({
+          width: 2,
+          separation: 2,
+          innerColor: cssVar(buttonVars.focus.boxShadowInner, cssVar(base.frenchVanilla100)),
+          outerColor: cssVar(buttonVars.focus.boxShadowOuter, cssVar(brand.primary.base)),
+        }),
       },
     }),
   },
-  isThemeable: {
-    true: cs({
-      [buttonVars.default.icon]: cssVar(brand.primary.base),
-      [buttonVars.hover.icon]: cssVar(brand.primary.dark),
-      [buttonVars.focus.icon]: cssVar(brand.primary.base),
-      [buttonVars.active.icon]: cssVar(brand.primary.dark),
-      [buttonVars.disabled.icon]: cssVar(brand.primary.base),
+  iconPosition: {
+    largeOnly: cs({
+      borderRadius: borderRadius.circle,
+      padding: '0',
+      minWidth: `${spaceNumbers.xl + spaceNumbers.xxs}rem`,
     }),
+
+    largeStart: cs({
+      paddingInlineStart: space.xxs,
+      paddingInlineEnd: space.xs,
+    }),
+    largeEnd: cs({paddingInlineStart: space.xs, paddingInlineEnd: space.xxs}),
+    mediumOnly: cs({padding: '0', minWidth: space.xl, borderRadius: borderRadius.circle}),
+    mediumStart: cs({paddingInlineStart: space.xxs, paddingInlineEnd: space.xs}),
+    mediumEnd: cs({paddingInlineStart: space.xs, paddingInlineEnd: space.xxs}),
+    smallOnly: cs({padding: '0', minWidth: space.l, borderRadius: borderRadius.circle}),
+    smallStart: cs({paddingInlineStart: space.xxs, paddingInlineEnd: space.xs}),
+    smallEnd: cs({paddingInlineStart: space.xs, paddingInlineEnd: space.xxs}),
+    extraSmallOnly: cs({padding: '0', minWidth: space.m, borderRadius: borderRadius.circle}),
+    extraSmallStart: cs({paddingInlineStart: space.xxxs, paddingInlineEnd: space.xxs}),
+    extraSmallEnd: cs({paddingInlineStart: space.xxs, paddingInlineEnd: space.xxxs}),
   },
 });
 
@@ -180,7 +159,7 @@ export const TertiaryButton = createComponent('button')({
       size = 'medium',
       iconPosition = children ? undefined : 'only',
       variant,
-      focusRing = variant === 'inverse' ? 'inset' : 'both',
+      isThemeable,
       ...elemProps
     }: TertiaryButtonProps,
     ref,
@@ -193,13 +172,12 @@ export const TertiaryButton = createComponent('button')({
         icon={icon}
         iconPosition={iconPosition}
         size={size}
-        focusRing={focusRing}
         cs={[
           tertiaryStyles,
           tertiaryButtonModifiers({
-            iconPosition: iconPosition,
+            iconPosition: getIconPosition(size, iconPosition),
+            isThemeable: (isThemeable || iconPosition !== 'only') as any,
             variant: variant,
-            size: size,
           }),
         ]}
         {...elemProps}
