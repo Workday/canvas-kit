@@ -4,7 +4,7 @@ describe('Select', () => {
   before(() => {
     h.stories.visit();
   });
-  ['Basic'].forEach(story => {
+  ['Disabled Options'].forEach(story => {
     context(`given the "${story}" story is rendered`, () => {
       beforeEach(() => {
         h.stories.load('Components/Inputs/Select', story);
@@ -284,12 +284,12 @@ context(`given the "Disabled" story is rendered`, () => {
   });
 });
 
-context('given the "Basic" story with a disabled option', () => {
+context('given the "Disabled Options" story with a disabled option', () => {
   before(() => {
     h.stories.visit();
   });
   beforeEach(() => {
-    h.stories.load('Components/Inputs/Select', 'Basic');
+    h.stories.load('Components/Inputs/Select', 'Disabled Options');
   });
 
   context('when the menu is opened', () => {
@@ -336,7 +336,7 @@ context('given the "Basic" story with a disabled option', () => {
     });
   });
 });
-describe('Select', () => {
+describe('Select With Menu Height', () => {
   before(() => {
     h.stories.visit();
   });
