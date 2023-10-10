@@ -1904,7 +1904,7 @@
     "@emotion/weak-memoize" "^0.2.5"
     hoist-non-react-statics "^3.3.1"
 
-"@emotion/serialize@^1.0.0", "@emotion/serialize@^1.0.2":
+"@emotion/serialize@1.1.2", "@emotion/serialize@^1.0.0", "@emotion/serialize@^1.0.2":
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/@emotion/serialize/-/serialize-1.1.2.tgz#017a6e4c9b8a803bd576ff3d52a0ea6fa5a62b51"
   integrity sha512-zR6a/fkFP4EAcCMQtLOhIgpprZOwNmCldtpaISpvz348+DP4Mz8ZoKaGGCQpbzepNIUWbq4w6hNZkwDyKoS+HA==
@@ -5040,10 +5040,10 @@
   dependencies:
     "@workday/design-assets-types" "0.2.8"
 
-"@workday/canvas-tokens-web@0.1.2":
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/@workday/canvas-tokens-web/-/canvas-tokens-web-0.1.2.tgz#e2ee02229c2ad5148fa706f420c8608c849cad18"
-  integrity sha512-3MLQzgyGUwoTJ6fO5PSFj071oP95HhAHIbcSnTEybtOoKXLJ9UGGlrPKCJ25LGw2LUsvL21eFffWlVZWDCMjig==
+"@workday/canvas-tokens-web@0.1.6":
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/@workday/canvas-tokens-web/-/canvas-tokens-web-0.1.6.tgz#8275fa0a27a2e206c376010ebe5ff3c6ac2eac28"
+  integrity sha512-EEzav3739i8R/wgPEBXKYnGIRmdURNs5gKCxHX17KRzdl5lCwzEmTRrVvHExO9zS/5M1ULb38BNE/4SAWlFs2Q==
 
 "@workday/design-assets-types@0.2.8", "@workday/design-assets-types@^0.2.8":
   version "0.2.8"

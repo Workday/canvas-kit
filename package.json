@@ -175,6 +175,6 @@
   "dependencies": {
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
-    "@workday/canvas-tokens-web": "0.1.2"
+    "@workday/canvas-tokens-web": "0.1.6"
   }
 }
