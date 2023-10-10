@@ -20,35 +20,41 @@ export interface TertiaryButtonProps extends Omit<ButtonContainerProps, 'ref'> {
 }
 
 const tertiaryStyles = cs({
-  [buttonVars.default.background]: 'transparent',
-  [buttonVars.default.border]: 'transparent',
-  [buttonVars.default.borderRadius]: cssVar(system.shape.medium),
-  [buttonVars.default.label]: cssVar(brand.primary.base),
-  [focusRingVars.width]: '0px',
   paddingInline: cssVar(system.space.x2),
   minWidth: 'auto',
   textDecoration: 'underline',
   border: 0,
+  // Default Styles
+  [buttonVars.default.background]: 'transparent',
+  [buttonVars.default.border]: 'transparent',
+  [buttonVars.default.borderRadius]: cssVar(system.shape.medium),
+  [buttonVars.default.label]: cssVar(brand.primary.base),
   [buttonVars.default.icon]: cssVar(base.blackPepper400),
+  // Hover Styles
   [buttonVars.hover.background]: cssVar(base.soap200),
   [buttonVars.hover.border]: 'transparent',
   [buttonVars.hover.label]: cssVar(brand.primary.dark),
   [buttonVars.hover.icon]: cssVar(base.blackPepper500),
+  // Focus Styles
   [buttonVars.focus.background]: 'transparent',
   [buttonVars.focus.border]: 'transparent',
-  [buttonVars.focus.boxShadowInner]: cssVar(brand.common.focusOutline),
-  [buttonVars.focus.boxShadowOuter]: cssVar(brand.common.focusOutline),
   [buttonVars.focus.label]: cssVar(brand.primary.base),
   [buttonVars.focus.icon]: cssVar(base.blackPepper500),
+  [buttonVars.focus.boxShadowInner]: cssVar(brand.common.focusOutline),
+  [buttonVars.focus.boxShadowOuter]: cssVar(brand.common.focusOutline),
+  // Focus Ring Styles
+  [focusRingVars.width]: '0px',
+  // Active Styles
   [buttonVars.active.background]: cssVar(base.soap300),
   [buttonVars.active.border]: 'transparent',
   [buttonVars.active.label]: cssVar(brand.primary.dark),
   [buttonVars.active.icon]: cssVar(base.blackPepper500),
+  // Disabled Styles
   [buttonVars.disabled.background]: 'transparent',
   [buttonVars.disabled.border]: cssVar(base.frenchVanilla100),
   [buttonVars.disabled.label]: cssVar(brand.primary.base),
-  [buttonVars.disabled.opacity]: '0.4',
   [buttonVars.disabled.icon]: cssVar(base.blackPepper400),
+  [buttonVars.disabled.opacity]: '0.4',
 });
 
 export const tertiaryButtonModifiers = createModifiers({
@@ -59,27 +65,32 @@ export const tertiaryButtonModifiers = createModifiers({
   },
   variant: {
     inverse: cs({
+      // Default Styles
       [buttonVars.default.background]: 'transparent',
       [buttonVars.default.border]: 'transparent',
       [buttonVars.default.label]: cssVar(base.frenchVanilla100),
-      textDecoration: 'underline',
       [buttonVars.default.icon]: cssVar(base.frenchVanilla100),
+      // Hover Styles
       [buttonVars.hover.background]: cssVar(base.frenchVanilla100),
       [buttonVars.hover.border]: 'transparent',
       [buttonVars.hover.label]: cssVar(base.blackPepper400),
       [buttonVars.hover.icon]: cssVar(base.blackPepper400),
+      // Focus Styles
       [buttonVars.focus.background]: cssVar(base.frenchVanilla100),
       [buttonVars.focus.border]: 'transparent',
       [buttonVars.focus.label]: cssVar(base.blackPepper400),
       [buttonVars.focus.boxShadowInner]: cssVar(base.blackPepper400),
       [buttonVars.focus.boxShadowOuter]: cssVar(base.frenchVanilla100),
+      [buttonVars.focus.icon]: cssVar(base.blackPepper400),
+      // Focus Ring Styles
       [focusRingVars.width]: '2px',
       [focusRingVars.separation]: '0px',
-      [buttonVars.focus.icon]: cssVar(base.blackPepper400),
+      // Active Styles
       [buttonVars.active.background]: cssVar(base.soap200),
       [buttonVars.active.border]: 'transparent',
       [buttonVars.active.label]: cssVar(base.blackPepper400),
       [buttonVars.active.icon]: cssVar(base.blackPepper400),
+      // Disabled Styles
       [buttonVars.disabled.background]: 'transparent',
       [buttonVars.disabled.border]: cssVar(base.frenchVanilla100),
       [buttonVars.disabled.label]: cssVar(base.frenchVanilla100),
@@ -148,15 +159,15 @@ export const tertiaryButtonModifiers = createModifiers({
       },
     }),
   },
-  // isThemeable: {
-  //   true: cs({
-  //     [buttonVars.default.icon]: cssVar(brand.primary.base),
-  //     [buttonVars.hover.icon]: cssVar(brand.primary.dark),
-  //     [buttonVars.focus.icon]: cssVar(brand.primary.base),
-  //     [buttonVars.active.icon]: cssVar(brand.primary.dark),
-  //     [buttonVars.disabled.icon]: cssVar(brand.primary.base),
-  //   }),
-  // },
+  isThemeable: {
+    true: cs({
+      [buttonVars.default.icon]: cssVar(brand.primary.base),
+      [buttonVars.hover.icon]: cssVar(brand.primary.dark),
+      [buttonVars.focus.icon]: cssVar(brand.primary.base),
+      [buttonVars.active.icon]: cssVar(brand.primary.dark),
+      [buttonVars.disabled.icon]: cssVar(brand.primary.base),
+    }),
+  },
 });
 
 export const TertiaryButton = createComponent('button')({
@@ -165,6 +176,7 @@ export const TertiaryButton = createComponent('button')({
     {
       children,
       icon,
+      colors,
       size = 'medium',
       iconPosition = children ? undefined : 'only',
       variant,

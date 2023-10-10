@@ -258,6 +258,13 @@ const baseButtonStyles = cs({
     cssVar(base.frenchVanilla100)
   ),
   [focusRingVars.outerColor]: cssVar(buttonVars.focus.boxShadowOuter, cssVar(brand.primary.base)),
+  '& span .wd-icon-fill': {
+    transitionDuration: '40ms',
+    fill: cssVar(buttonVars.default.icon, cssVar(base.blackPepper400)),
+  },
+  '.wd-icon-background ~ .wd-icon-accent, .wd-icon-background ~ .wd-icon-accent2': {
+    fill: cssVar(buttonVars.default.icon),
+  },
   '&:focus-visible, &.focus': {
     backgroundColor: cssVar(buttonVars.focus.background, 'transparent'),
     borderColor: cssVar(buttonVars.focus.border, 'transparent'),
@@ -265,10 +272,9 @@ const baseButtonStyles = cs({
     '& span .wd-icon-fill': {
       fill: cssVar(buttonVars.focus.icon),
     },
-  },
-  '& span .wd-icon-fill': {
-    transitionDuration: '40ms',
-    fill: cssVar(buttonVars.default.icon, cssVar(base.blackPepper400)),
+    '.wd-icon-background ~ .wd-icon-accent, .wd-icon-background ~ .wd-icon-accent2': {
+      fill: cssVar(buttonVars.focus.icon),
+    },
   },
   '&:hover, &.hover': {
     backgroundColor: cssVar(buttonVars.hover.background, cssVar(base.blackPepper500)),
@@ -276,6 +282,9 @@ const baseButtonStyles = cs({
     color: cssVar(buttonVars.hover.label, cssVar(base.blackPepper500)),
     '& span .wd-icon-fill': {
       fill: cssVar(buttonVars.hover.icon, cssVar(base.blackPepper500)),
+    },
+    '.wd-icon-background ~ .wd-icon-accent, .wd-icon-background ~ .wd-icon-accent2': {
+      fill: cssVar(buttonVars.hover.icon),
     },
   },
   '&:hover:active': {transitionDuration: '40ms'},
@@ -286,6 +295,9 @@ const baseButtonStyles = cs({
     '& span .wd-icon-fill': {
       fill: cssVar(buttonVars.active.icon, cssVar(base.blackPepper400)),
     },
+    '.wd-icon-background ~ .wd-icon-accent, .wd-icon-background ~ .wd-icon-accent2': {
+      fill: cssVar(buttonVars.active.icon),
+    },
   },
   '&:disabled, &:active:disabled, &:focus:disabled, &:hover:disabled': {
     backgroundColor: cssVar(buttonVars.disabled.background, 'transparent'),
@@ -294,45 +306,17 @@ const baseButtonStyles = cs({
     '& span .wd-icon-fill': {
       fill: cssVar(buttonVars.disabled.icon, cssVar(base.blackPepper400)),
     },
+    '.wd-icon-background ~ .wd-icon-accent, .wd-icon-background ~ .wd-icon-accent2': {
+      fill: cssVar(buttonVars.disabled.icon),
+    },
   },
 });
-
-export const sizeModifiers = {
-  large: {
-    fontSize: space.s,
-    lineHeight: space.m,
-    letterSpacing: '0.01rem',
-    height: '48px',
-    paddingInline: space.l,
-    minWidth: '112px',
-    iconStart: cs({
-      paddingInlineStart: space.m,
-      paddingInlineEnd: space.l,
-    }),
-    iconEnd: cs({
-      paddingInlineStart: space.l,
-      paddingInlineEnd: space.m,
-    }),
-    iconOnly: cs({
-      padding: '0',
-      minWidth: `${spaceNumbers.xl + spaceNumbers.xxs}rem`,
-    }),
-  },
-  medium: cs({}),
-  small: cs({}),
-  extraSmall: cs({}),
-};
 
 export const buttonModifiers = createModifiers({
   focusRing: {
     inset: focusRingStyles.inset,
     outer: focusRingStyles.outer,
     both: focusRingStyles.both,
-  },
-  iconPosition: {
-    start: 'canvas-button-icon-start',
-    end: 'canvas-button-icon-end',
-    only: 'canvas-button-icon-only',
   },
   size: {
     large: cs({
@@ -342,18 +326,6 @@ export const buttonModifiers = createModifiers({
       height: '48px',
       paddingInline: space.l,
       minWidth: '112px',
-      '&.canvas-button-icon-only': {
-        padding: '0',
-        minWidth: `${spaceNumbers.xl + spaceNumbers.xxs}rem`,
-      },
-      '&.canvas-button-icon-start': {
-        paddingInlineStart: space.m,
-        paddingInlineEnd: space.l,
-      },
-      '&.canvas-button-icon-end': {
-        paddingInlineStart: space.l,
-        paddingInlineEnd: space.m,
-      },
     }),
     medium: cs({
       fontSize: '0.875rem',
@@ -362,18 +334,6 @@ export const buttonModifiers = createModifiers({
       minWidth: '96px',
       paddingInline: space.m,
       height: space.xl,
-      '&.canvas-button-icon-only': {
-        padding: '0',
-        minWidth: space.xl,
-      },
-      '&.canvas-button-icon-start': {
-        paddingInlineStart: `${spaceNumbers.xl / 2}rem`,
-        paddingInlineEnd: space.m,
-      },
-      '&.canvas-button-icon-end': {
-        paddingInlineStart: space.m,
-        paddingInlineEnd: `${spaceNumbers.xl / 2}rem`,
-      },
     }),
     small: cs({
       fontSize: '0.875rem',
@@ -383,18 +343,6 @@ export const buttonModifiers = createModifiers({
       minWidth: space.xxxl,
       paddingInline: space.s,
       gap: space.xxxs,
-      '&.canvas-button-icon-only': {
-        padding: '0',
-        minWidth: space.l,
-      },
-      '&.canvas-button-icon-start': {
-        paddingInlineStart: space.xs,
-        paddingInlineEnd: space.s,
-      },
-      '&.canvas-button-icon-end': {
-        paddingInlineStart: space.s,
-        paddingInlineEnd: space.xs,
-      },
     }),
     extraSmall: cs({
       fontSize: '0.75rem',
@@ -404,21 +352,40 @@ export const buttonModifiers = createModifiers({
       minWidth: 'auto',
       paddingInline: space.xs,
       gap: space.xxxs,
-      '&.canvas-button-icon-only': {
-        padding: '0',
-        minWidth: space.m,
-      },
-      '&.canvas-button-icon-start': {
-        paddingInlineStart: space.xxs,
-        paddingInlineEnd: space.xs,
-      },
-      '&.canvas-button-icon-end': {
-        paddingInlineStart: space.xs,
-        paddingInlineEnd: space.xxs,
-      },
     }),
   },
+  iconPosition: {
+    largeOnly: cs({
+      padding: '0',
+      minWidth: `${spaceNumbers.xl + spaceNumbers.xxs}rem`,
+    }),
+    largeStart: cs({
+      paddingInlineStart: space.m,
+      paddingInlineEnd: space.l,
+    }),
+    largeEnd: cs({paddingInlineStart: space.l, paddingInlineEnd: space.m}),
+    mediumOnly: cs({padding: '0', minWidth: space.xl}),
+    mediumStart: cs({paddingInlineStart: `${spaceNumbers.xl / 2}rem`, paddingInlineEnd: space.m}),
+    mediumEnd: cs({paddingInlineStart: space.m, paddingInlineEnd: `${spaceNumbers.xl / 2}rem`}),
+    smallOnly: cs({padding: '0', minWidth: space.l}),
+    smallStart: cs({paddingInlineStart: space.xs, paddingInlineEnd: space.s}),
+    smallEnd: cs({paddingInlineStart: space.s, paddingInlineEnd: space.xs}),
+    extraSmallOnly: cs({padding: '0', minWidth: space.m}),
+    extraSmallStart: cs({paddingInlineStart: space.xxs, paddingInlineEnd: space.xs}),
+    extraSmallEnd: cs({paddingInlineStart: space.xs, paddingInlineEnd: space.xxs}),
+  },
 });
+
+function capitalize(string: string = '') {
+  return string.charAt(0).toUpperCase() + string.substring(1);
+}
+
+export function getIconPosition(
+  size?: keyof typeof buttonModifiers.size,
+  iconPosition?: IconPositions
+): keyof typeof buttonModifiers.iconPosition {
+  return `${size}${capitalize(iconPosition)}` as keyof typeof buttonModifiers.iconPosition;
+}
 
 export const BaseButton = createComponent('button')({
   displayName: 'BaseButton',
@@ -428,6 +395,7 @@ export const BaseButton = createComponent('button')({
       cs,
       size,
       focusRing = 'both',
+      fillIcon,
       iconPosition,
       icon,
       colors,
@@ -445,7 +413,11 @@ export const BaseButton = createComponent('button')({
         cs={[
           baseButtonStyles,
           cs,
-          buttonModifiers({iconPosition: iconPosition, focusRing: focusRing, size: size}),
+          buttonModifiers({
+            iconPosition: getIconPosition(size, iconPosition),
+            focusRing: focusRing,
+            size: size,
+          }),
           buttonVars.active(colors?.active || {}),
           buttonVars.default(colors?.default || {}),
           buttonVars.disabled(colors?.disabled || {}),
