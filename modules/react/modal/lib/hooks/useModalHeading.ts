@@ -10,8 +10,8 @@ import {usePopupHeading, usePopupModel} from '@workday/canvas-kit-react/popup';
 
 export const useModalHeading = composeHooks(
   usePopupHeading,
-  createElemPropsHook(usePopupModel)((_, ref?: React.Ref<HTMLElement>) => {
-    const {elementRef, localRef} = useLocalRef(ref);
+  createElemPropsHook(usePopupModel)((_, ref) => {
+    const {elementRef, localRef} = useLocalRef(ref as React.Ref<HTMLElement>);
 
     useMountLayout(() => {
       if (localRef.current?.parentElement?.querySelector('button')?.textContent) {

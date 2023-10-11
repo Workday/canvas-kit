@@ -11,11 +11,7 @@ import {useSegmentedControlModel} from './useSegmentedControlModel';
 export const useSegmentedControlItem = composeHooks(
   useListItemSelect,
   createElemPropsHook(useSegmentedControlModel)(
-    (
-      model,
-      _?: React.Ref<HTMLElement>,
-      elemProps: {'data-id'?: string; children?: React.ReactNode} = {}
-    ) => {
+    (model, _, elemProps: {'data-id'?: string; children?: React.ReactNode} = {}) => {
       const name = elemProps['data-id'] || '';
       const selected = !!name && isSelected(name, model.state);
 

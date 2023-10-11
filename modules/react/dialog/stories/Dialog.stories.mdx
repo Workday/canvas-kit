@@ -1,0 +1,55 @@
+import {SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
+
+import {Dialog} from '@workday/canvas-kit-react/dialog';
+import {Basic} from './examples/Basic';
+import {Focus} from './examples/Focus';
+
+<Meta title="Components/Popups/Dialog" component={Dialog} />
+
+# Canvas Kit Dialog
+
+A Dialog component is a non-modal type of dialog that will not render the rest of the page inert
+while it is active. A Dialog should be used in situations where the task is not critical.
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-react
+```
+
+## Usage
+
+### Basic Example
+
+[Modal](/components/popups/modal/) and Dialog are very similar: most of the examples from Modal can
+be adapted to Dialog by changing `Modal` to `Dialog` and replacing `Modal.Overlay` with
+`Dialog.Popper`.
+
+Unlike Modal, Dialog does _not_ render the rest of the page inert while it is active. Dialog should
+be used in situations where the task does not require immediate attention such as in the example
+below.
+
+<ExampleCodeBlock code={Basic} />
+
+### Focus Redirect
+
+Since Modal requires immediate attention, it will trap the keyboard focus inside the Modal until an
+action is taken. Dialog manages focus differently, however, since it does not require immediate
+attention.
+
+The following example shows how Dialog manages focus in and out of the component.
+
+<ExampleCodeBlock code={Focus} />
+
+Instead of trapping focus within the Dialog, it is effectively treated as an inline element next to
+its triggering `Dialog.Target` button. Tabbing out of the Dialog will close the popup and move focus
+to the next button.
+
+Dialog also adds an `aria-owns` to a `<div>` element which is rendered as a sibling of the
+`Dialog.Target` button. The `aria-owns` references the `Dialog.Card` and allows screen readers which
+[support aria-owns](/components/popups/popup/#focus-redirect) to navigate the Dialog as if it
+weren't portalled to the bottom of the document body.
+
+## Component API
+
+<SymbolDoc name="Dialog" fileName="/react/" />

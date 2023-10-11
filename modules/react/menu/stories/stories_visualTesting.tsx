@@ -8,7 +8,7 @@ import {customColorTheme, withSnapshotsEnabled} from '../../../../utils/storyboo
 
 // unreleased path
 import {Menu} from '@workday/canvas-kit-react/menu';
-import {HStack} from '@workday/canvas-kit-react/layout';
+import {Flex} from '@workday/canvas-kit-react/layout';
 
 const fontDelay = 150; // best guess for the font delay to prevent incorrect Chromatic regressions
 
@@ -68,7 +68,7 @@ const AllStates = () => (
 export const MenuStates = withSnapshotsEnabled(() => {
   return (
     <StaticStates>
-      <HStack spacing="xs">
+      <Flex gap="xs">
         <div>
           <h3>Normal</h3>
           <AllStates />
@@ -85,7 +85,7 @@ export const MenuStates = withSnapshotsEnabled(() => {
             <AllStates />
           </CanvasProvider>
         </div>
-      </HStack>
+      </Flex>
     </StaticStates>
   );
 });

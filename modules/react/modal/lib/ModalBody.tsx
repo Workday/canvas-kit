@@ -3,7 +3,7 @@ import * as React from 'react';
 import {
   createSubcomponent,
   ExtractProps,
-  getCanvasTheme,
+  getTheme,
   styled,
   StyledType,
 } from '@workday/canvas-kit-react/common';
@@ -15,7 +15,7 @@ import {useModalModel} from './hooks';
 export interface ModalBodyProps extends ExtractProps<typeof Popup.Body, never> {}
 
 const ResponsiveModalBody = styled(Popup.Body)<ModalBodyProps & StyledType>(({theme}) => {
-  const canvasTheme = getCanvasTheme(theme);
+  const {canvas: canvasTheme} = getTheme(theme);
   return {
     [canvasTheme.breakpoints.down('s')]: {
       marginBottom: space.zero,
