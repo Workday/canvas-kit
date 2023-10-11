@@ -16,6 +16,10 @@ const TableComponent = styled('table')(type.levels.subtext.large, {
   },
 });
 
+/**
+ * @deprecated ⚠️ `Table` has been deprecated and will be removed in a future major version.
+ * Please consider using [`Table in Preview`](https://workday.github.io/canvas-kit/?path=/docs/preview-table--basic) instead.
+ */
 export class Table extends React.Component<React.TableHTMLAttributes<HTMLTableElement>> {
   public render() {
     const {children, ...elemProps} = this.props;
