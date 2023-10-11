@@ -1,7 +1,4 @@
 {
   "extends": "../../tsconfig.json",
-  "exclude": ["node_modules", "ts-tmp", "dist", "**/spec", "**/stories"],
-  "compilerOptions": {
-    "plugins": [{"transform": "../modules/styling/parser/styleParser.ts", "prefix": "css"}]
-  }
+  "exclude": ["node_modules", "ts-tmp", "dist", "**/spec", "**/stories"]
 }

@@ -19,14 +19,7 @@
     "allowSyntheticDefaultImports": true,
     "types": [],
     "incremental": true,
-    "skipLibCheck": true,
-    "plugins": [
-      {
-        "transform": "./modules/styling-transform/lib/styleTransform.ts",
-        "prefix": "css",
-        "fallbackFiles": []
-      }
-    ]
+    "skipLibCheck": true
   },
   "ts-node": {
     "transpileOnly": true,

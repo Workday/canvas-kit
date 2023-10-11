@@ -12,12 +12,6 @@ import {borderRadius, colors, space} from '@workday/canvas-kit-react/tokens';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {ButtonColors, IconPositions, ButtonSizes} from './types';
 import {BaseButton, BaseButtonProps} from './BaseButton';
-import {Box} from '@workday/canvas-kit-react/layout';
-
-export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  size: 'small' | 'medium'; // or "keyof typeof buttonModifiers.size",
-  backgroundColor: string;
-}
 
 export interface TertiaryButtonProps extends Themeable, BaseButtonProps {
   /**

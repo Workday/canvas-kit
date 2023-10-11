@@ -2,7 +2,7 @@ import {
   buttonColors,
   chartingColorOffsets,
   chartingColors,
-  colors as originalColors,
+  colors,
   commonColors,
   gradients,
   iconColors,
@@ -12,7 +12,7 @@ import {
 } from '@workday/canvas-colors-web';
 
 import {borderRadius, CanvasBorderRadius, CanvasBorderRadiusKeys, CanvasBorderRadiusValues} from './lib/radius';
-import {BrandingColor, CanvasColor, CanvasColors} from './lib/colors.types';
+import {BrandingColor, CanvasColor} from './lib/colors.types';
 import {depth, CanvasDepth, CanvasDepthValues} from './lib/depth';
 import {
   space,
@@ -31,8 +31,6 @@ import {type,
   CanvasTypeHierarchy,
 } from './lib/type';
 import {CSSProperties} from './lib/types';
-
-const colors: CanvasColors = originalColors as any
 
 export const canvas = {
   buttonColors,
