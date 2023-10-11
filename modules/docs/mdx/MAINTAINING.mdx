@@ -27,6 +27,7 @@ Kit!
   - [Canary Releases](#canary-releases)
 - [Codemods](#codemods)
   - [Add a New Codemod](#add-a-new-codemod)
+- [Deprecations](#deprecations)
 
 ## Branches
 
@@ -270,12 +271,13 @@ last release tag. So for example, a V8 canary would look something like this:
 ## Codemods
 
 We use codemods to reduce friction for consumers as they make changes and do upgrades. Codemods are
-accompany major version releases since v5, and can also be released in minor releases if users want to apply some changes sooner.
+accompany major version releases since v5, and can also be released in minor releases if users want
+to apply some changes sooner.
 
 ### Add a New Codemod
 
-Adding a new codemod is pretty straightforward, but this guide will make sure you don't miss any steps
-along the way.
+Adding a new codemod is pretty straightforward, but this guide will make sure you don't miss any
+steps along the way.
 
 First, you need to add a new command to the root CLI. For this example, we'll pretend you're adding
 a new v10 codemod.
@@ -380,3 +382,80 @@ describe('Example Codemod', () => {
 ```
 
 And that's it! You're done. Stage your changes, commit, and push up a PR.
+
+## Deprecations
+
+We add the [@deprecated](https://jsdoc.app/tags-deprecated.html) JSDoc tag to code we plan to remove
+in a future major release. This signals consumers to migrate to a more stable alternative before the
+deprecated code is removed.
+
+Add the `@deprecated` tag to the JSDoc comment directly above all exported declarations you wish to
+deprecate. Create a new JSDoc comment if one doesn't already exist.
+
+```tsx
+/**
+ * ...existing JSDoc comment, if present...
+ *
+ * @deprecated ⚠️ ${Deprecated Name} has been deprecated and will be removed in a future major release. ${Provide a migration strategy}
+ */
+export...
+```
+
+The provided migration strategy can take on any form as long as it gives the consumer a path forward
+once the deprecated code is removed.
+
+For example, we'll deprecate a component in our Main package before replacing it with an updated
+version of the component in our Preview or Labs packages. Note the inclusion of package names
+(Main/Preview/Labs) for disambiguation as well as the optional Storybook link to the updated
+component.
+
+```tsx
+/**
+ * @deprecated ⚠️ Status Indicator in Main has been deprecated and will be removed in a future major release. Please use [Status Indicator in Preview](https://workday.github.io/canvas-kit/?path=/docs/preview-status-indicator--basic) instead.
+ */
+export class StatusIndicator...
+```
+
+Here's an example of a deprecated utility function.
+
+```tsx
+/**
+ * @deprecated ⚠️ `subModelHook` has been deprecated and will be removed in a future major release. Please use `createSubModelElemPropsHook` instead.
+ */
+export const subModelHook...
+```
+
+You may share the same `@deprecation` note for multiple deprecations related to the same component.
+
+```tsx
+/**
+ * @deprecated ⚠️ Status Indicator in Main has been deprecated and will be removed in a future major release. Please use [Status Indicator in Preview](https://workday.github.io/canvas-kit/?path=/docs/preview-status-indicator--basic) instead.
+ */
+export enum StatusIndicatorType...
+
+/**
+ * @deprecated ⚠️ Status Indicator in Main has been deprecated and will be removed in a future major release. Please use [Status Indicator in Preview](https://workday.github.io/canvas-kit/?path=/docs/preview-status-indicator--basic) instead.
+ */
+export interface StatusIndicatorProps...
+
+/**
+ * @deprecated ⚠️ Status Indicator in Main has been deprecated and will be removed in a future major release. Please use [Status Indicator in Preview](https://workday.github.io/canvas-kit/?path=/docs/preview-status-indicator--basic) instead.
+ */
+export class StatusIndicator...
+```
+
+Finally, be sure to notify users of the deprecation in the corresponding
+[Upgrade Guide](https://github.com/Workday/canvas-kit/tree/master/modules/docs/mdx) MDX.
+
+```md
+## Deprecations
+
+...
+
+### ${Deprecated Name}
+
+**PR:** [#${PR number where the deprecation took place}](https://github.com/Workday/canvas-kit/pull/${PR number})
+
+We've deprecated ${Deprecated Name} ${Optional: Include package name to disambiguate (e.g., "from Labs")} ${Provide a
+migration strategy}
+```
