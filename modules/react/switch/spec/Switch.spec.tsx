@@ -5,15 +5,7 @@ import {Switch} from '../lib/Switch';
 describe('Switch', () => {
   const cb = jest.fn();
 
-  /**
-   * Today, this is hardcoded but this could possibly be
-   * configurable in the future (e.g. role='switch').
-   * In fact, 'checkbox' probably isn't the correct role
-   * according to MDN and ARIA
-   * https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/Switch_role
-   * https://www.w3.org/TR/wai-aria-1.1/#switch
-   */
-  const role = 'checkbox';
+  const role = 'switch';
 
   afterEach(() => {
     cb.mockClear();
